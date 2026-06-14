@@ -2,17 +2,6 @@ from __future__ import annotations
 from typing import (Final, Literal, Callable, TypeGuard, Iterator, cast, Protocol, TypeVar)
 from collections.abc import Iterable, Hashable
 from dataclasses import dataclass, field
-    
-#      A  B  C  D  E  F  G  H
-# 8 | 38 39 3A 3B 3C 3D 3E 3F
-# 7 | 30 31 32 33 34 35 36 37
-# 6 | 28 29 2A 2B 2C 2D 2E 2F
-# 5 | 20 21 22 23 24 25 26 27
-# 4 | 18 19 1A 1B 1C 1D 1E 1F
-# 3 | 10 11 12 13 14 15 16 17
-# 2 | 08 09 0A 0B 0C 0D 0E 0F
-# 1 | 00 01 02 03 04 05 06 07
-
 
 type Bit = Literal[0, 1]
 type Player = Bit
@@ -25,6 +14,7 @@ type Move = Bitmap
 type Square = int
 type SquareName = str
 type Score = int
+type MoveScores = list[tuple[Move, Score]]
 
 PASS: Final[Move] = 0
 MIN_SCORE: Final[Score] = -10**9
@@ -136,15 +126,13 @@ class Board:
 
 
     def utility(self, player: Player) -> Score:
-        black = self.black.bit_count()
-        white = self.white.bit_count()
-        if black > white:
-            winner = 0
-        elif white > black:
-            winner = 1
-        else:
-            return 0
-        return 1 if winner == player else -1
+        # Disc differential from `player`'s view (own discs minus opponent's).
+        # Its sign already encodes win/loss/draw, so this is a strict refinement
+        # of WDL scoring: optimal play maximises the winning margin without ever
+        # trading away the outcome, and equal-outcome moves are no longer broken
+        # arbitrarily.
+        diff = self.black.bit_count() - self.white.bit_count()
+        return diff if player == BLACK else -diff
 
 
     def actions(self) -> Moves:
@@ -157,17 +145,24 @@ class Board:
                 raise ValueError("cannot pass when legal moves exist")
             if self.is_terminal():
                 raise ValueError("cannot pass from terminal state")
+        else:
+            if move & (move - 1):
+                raise ValueError(f"move is not one-hot: {move:#x}")
+            if not move & self.actions():
+                raise ValueError(f"illegal move: {move:#x}")
+        return self._make_move_unchecked(move)
+
+    def _make_move_unchecked(self, move: Move) -> Board:
+        # Apply `move` without validating legality. `move` must be PASS or a
+        # legal one-hot move; the search guarantees this, so this skips the
+        # `actions()` recompute (a full legal-move sweep) that `make_move` pays
+        # per child.
+        if move == PASS:
             return Board(
                 black=self.black,
                 white=self.white,
-                to_move=WHITE if self.to_move == BLACK else BLACK,
+                to_move=self.to_move ^ 1,
             )
-        if move & (move - 1):
-            raise ValueError(f"move is not one-hot: {move:#x}")
-    
-        if not move & self.actions():
-            raise ValueError(f"illegal move: {move:#x}")
-            
         if self.to_move == BLACK:
             flips = self._flips_for_move(move, self.black, self.white)
             return Board(
@@ -182,7 +177,7 @@ class Board:
                 white=self.white | move | flips,
                 to_move=BLACK,
             )
-        
+
 
     ## shorthand
     def play(self, move: MoveSpec) -> Board:
@@ -341,14 +336,12 @@ class GameState(Protocol):
     to_move: Player
     def actions(self) -> Moves: ...
     def make_move(self, move: Move) -> GameState: ...
+    def _make_move_unchecked(self, move: Move) -> GameState: ...
     def is_terminal(self) -> bool: ...
     def utility(self, player: Player) -> Score: ...
 
     @property
     def cache_key(self) -> Hashable: ...
-
-State = TypeVar("State", bound=GameState)
-
 
 def iter_moves(moves: Bitmap) -> Iterator[Move]:
     while moves:
@@ -363,49 +356,8 @@ def iter_actions(state: GameState) -> Iterator[Move]:
     elif not state.is_terminal():
         yield PASS
 
-## root player centered minimax scoring
-
-# def minimax(state: State) -> Move:
-#     if state.is_terminal():
-#         raise ValueError("minimax called on terminal state")
-#     root_player = state.to_move
-#     best_move = PASS
-#     best_score = MIN_SCORE
-#     for move in iter_actions(state):
-#         score = min_value(state.make_move(move), root_player)
-#         if score > best_score:
-#             best_move = move
-#             best_score = score
-#     return best_move
-
-# def minimax_scores(state: GameState) -> list[tuple[Move, Score]]:
-#     if state.is_terminal():
-#         raise ValueError("minimax called on terminal state")
-#     root_player = state.to_move
-#     return [
-#         (move, min_value(state.make_move(move), root_player))
-#         for move in iter_actions(state)
-#     ]
-
-# def max_value(state: GameState, root_player: Player) -> Score:
-#     if state.is_terminal():
-#         return state.utility(root_player)
-#     value = MIN_SCORE
-#     for move in iter_actions(state):
-#         value = max(value, min_value(state.make_move(move), root_player))
-#     return value
-
-# def min_value(state: GameState, root_player: Player) -> Score:
-#     if state.is_terminal():
-#         return state.utility(root_player)
-#     value = MAX_SCORE
-#     for move in iter_actions(state):
-#         value = min(value, max_value(state.make_move(move), root_player))
-#     return value
 
 ## black centered minimax scoring
-# def black_score(state: GameState) -> Score:
-#     return state.utility(BLACK)
 
 type Cache = dict[Hashable, Score]
 
@@ -415,47 +367,53 @@ def minimax_value(state: GameState, cache: Cache) -> Score:
         return cache[key]
     if state.is_terminal():
         score = state.utility(BLACK)
+        cache[key] = score
         return score
-    values = [minimax_value(state.make_move(move), cache)
+    values = [minimax_value(state._make_move_unchecked(move), cache)
               for move in iter_actions(state)]
     score = max(values) if state.to_move == BLACK else min(values)
     cache[key] = score
     return score
 
-def minimax_scores(state: GameState, cache: Cache | None = None) -> list[tuple[Move, Score]]:
+def minimax_scores(state: GameState, cache: Cache | None = None) -> MoveScores:
     if state.is_terminal():
         raise ValueError("minimax_scores called on terminal state")
     cache = {} if cache is None else cache
     return [
-        (move, minimax_value(state.make_move(move), cache))
+        (move, minimax_value(state._make_move_unchecked(move), cache))
         for move in iter_actions(state)
     ]
+
+def _minimax_choice(state: GameState, scores: MoveScores) -> Move:
+    if state.to_move == BLACK:
+        return max(scores, key=lambda x: x[1])[0]
+    return min(scores, key=lambda x: x[1])[0]
+    
 
 def minimax(state: GameState, cache: Cache | None = None) -> Move:
     if state.is_terminal():
         raise ValueError("minimax called on terminal state")
     cache = {} if cache is None else cache
+    
     scored = minimax_scores(state, cache)
-    if state.to_move == BLACK:
-        return max(scored, key=lambda x: x[1])[0]
-    return min(scored, key=lambda x: x[1])[0]
+    return _minimax_choice(state, scored)
 
 def play_minimax_game(board: Board) -> Board:
     last_move: Move | None = None
     turn = 1
+    cache: Cache = {}
 
     while not board.is_terminal():
         print()
         print(f"turn {turn}: {player_name(board.to_move)} to move")
         print(format_board(board, last_move=last_move))
 
-        cache: Cache = {}
         scored = minimax_scores(board, cache)
         
         for move, score in scored:
             print(f"{move_name(move):>4} {score:+d}")
         
-        best_move = minimax(board, cache)
+        best_move = _minimax_choice(board, scored)
         print(f"best: {move_name(best_move)}")
 
         board = board.make_move(best_move)
@@ -546,5 +504,5 @@ def main():
     play_minimax_game(board)
 
 
-#if __name__ == '__main__':
-main()
+if __name__ == '__main__':
+    main()
