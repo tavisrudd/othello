@@ -258,10 +258,17 @@ n≥9 impractical). `parallel` dominates it. Making df-pn competitive needs
 *careful* DAG-aware proof-number search (Čížek–Balko–Schmid 2026); the solver is
 kept as a correct, documented experiment, not the recommended path.
 
-A nice node-vs-wall-clock lesson at n=10: `symmetry` searches ~6× fewer nodes
-than `memo` (94k vs 603k) yet is *slower* in wall-clock (the per-node `canon` of
-8 images costs more than it saves there) — until `parallel` spreads it over 24
-threads and wins outright (0.08 s). `parallel` is the default.
+**Canonicalising the *available* squares, not `blocked`.** The transposition key
+is the canonical image of `board & !blocked`, not of `blocked` itself. Available
+is a pure function of `blocked`, so this merges the **identical** equivalence
+classes (no transposition lost) — but for the deep majority of nodes nearly every
+square is blocked, so `available` has far fewer set bits and the 8-image `canon`
+does proportionally less work. It is pure speedup: n=8 node counts are unchanged
+(`memo` 1,278 → `symmetry` 626), 14×14 dropped from ~78 s to **~33 s** (2.4×, same
+53M nodes), and it *flipped* the old node-vs-wall-clock lesson — at n=10
+`symmetry` (94k nodes) used to be slower than `memo` (603k) because `canon` cost
+more than it saved; now `symmetry` is **faster** in wall-clock too (0.055 s vs
+0.188 s), and `parallel` is faster still (0.038 s). `parallel` is the default.
 
 ### Scaling the even boards (the Othello playbook)
 
@@ -282,4 +289,5 @@ threads and wins outright (0.08 s). `parallel` is the default.
 The win/loss value is exact, so the search is α-β with a hard cutoff (the first
 move handing the opponent a loss proves a win); the board's 8-fold dihedral
 symmetry canonicalises every position, merging ~8× of the states. 12×12 drops
-from ~6.3 s to ~1 s; 14×14 (53M nodes) lands in ~78 s on 24 threads.
+from ~6.3 s to ~0.6 s; 14×14 (53M nodes) lands in ~33 s on 24 threads (with the
+available-canon key above; ~78 s before it).

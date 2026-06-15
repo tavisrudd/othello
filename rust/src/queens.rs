@@ -77,6 +77,14 @@ impl Bits {
         Bits(r)
     }
     #[inline]
+    fn and_not(self, o: Bits) -> Bits {
+        let mut r = self.0;
+        for (rk, &ok) in r.iter_mut().zip(o.0.iter()) {
+            *rk &= !ok;
+        }
+        Bits(r)
+    }
+    #[inline]
     fn popcount(self) -> u32 {
         self.0.iter().map(|w| w.count_ones()).sum()
     }
@@ -229,19 +237,32 @@ impl Queens {
             .find(|&s| self.is_available(blocked, s))
     }
 
-    /// The canonical (lexicographically smallest) image of `blocked` under the
-    /// board's 8 symmetries -- the memo key, so symmetric positions share.
-    fn canon(&self, blocked: Bits) -> Bits {
-        let mut best = blocked;
+    /// The canonical (lexicographically smallest) image of `mask` under the
+    /// board's 8 symmetries.
+    fn canon(&self, mask: Bits) -> Bits {
+        let mut best = mask;
         for t in 1..8 {
             let perm = &self.sym[t];
             let mut img = Bits::ZERO;
-            blocked.each(|s| img.set(perm[s as usize]));
+            mask.each(|s| img.set(perm[s as usize]));
             if img < best {
                 best = img;
             }
         }
         best
+    }
+
+    /// The canonical transposition key for the position with this `blocked` mask.
+    ///
+    /// We canonicalise the **available** squares (`board & !blocked`), not
+    /// `blocked` itself. Available is a pure function of `blocked`, so this merges
+    /// the *identical* equivalence classes (same transpositions, same symmetry
+    /// folding) -- but for the deep majority of nodes most squares are blocked, so
+    /// `available` has far fewer set bits than `blocked` and `canon` does
+    /// proportionally less work. Pure speedup, no change to which states share.
+    #[inline]
+    fn pos_key(&self, blocked: Bits) -> Bits {
+        self.canon(self.board.and_not(blocked))
     }
 
     /// The symmetry-distinct first moves from the empty board: one representative
@@ -250,7 +271,7 @@ impl Queens {
         let mut seen = HashSet::new();
         let mut out = Vec::new();
         for &sq in &self.order {
-            if self.board.get(sq) && seen.insert(self.canon(self.place(Bits::ZERO, sq))) {
+            if self.board.get(sq) && seen.insert(self.pos_key(self.place(Bits::ZERO, sq))) {
                 out.push(sq);
             }
         }
@@ -402,7 +423,7 @@ impl Solver for Tt {
     }
     fn wins(&self, q: &Queens, blocked: Bits) -> bool {
         let key = if self.canon {
-            q.canon(blocked)
+            q.pos_key(blocked)
         } else {
             blocked
         };
@@ -509,7 +530,7 @@ impl Nimber {
     /// (loss for the player to move); any non-zero value is an N-position (win).
     /// Sequential: `mex` needs every child, so there is no cutoff.
     pub fn grundy(&self, q: &Queens, blocked: Bits) -> u8 {
-        let key = q.canon(blocked);
+        let key = q.pos_key(blocked);
         if let Some(v) = self.tt.get(key) {
             return v;
         }
@@ -533,7 +554,7 @@ impl Nimber {
         if par_levels == 0 {
             return self.grundy(q, blocked);
         }
-        let key = q.canon(blocked);
+        let key = q.pos_key(blocked);
         if let Some(v) = self.tt.get(key) {
             return v;
         }
@@ -622,7 +643,7 @@ impl Pn {
     /// proven loss for a terminal (`∞, 0`) or a unit leaf (`1, 1`).
     #[inline]
     fn child_pd(&self, q: &Queens, child: Bits) -> (u32, u32) {
-        if let Some(pd) = self.tt.get(q.canon(child)) {
+        if let Some(pd) = self.tt.get(q.pos_key(child)) {
             pd
         } else if q.no_moves(child) {
             (PN_INF, 0) // mover at child cannot move ⇒ "child wins" is disproven
@@ -634,7 +655,7 @@ impl Pn {
     /// df-pn `mid`: expand `blocked` until its `φ ≥ th_phi` or `δ ≥ th_delta`,
     /// always recursing into the child with the smallest disproof number.
     fn mid(&self, q: &Queens, blocked: Bits, th_phi: u32, th_delta: u32) {
-        let key = q.canon(blocked);
+        let key = q.pos_key(blocked);
         // Standard df-pn entry check: if the stored numbers already meet the
         // thresholds (in particular a solved node, φ=0/δ=∞ or φ=∞/δ=0), return at
         // once. Without this, a subtree solved via one path is re-expanded every
@@ -699,7 +720,7 @@ impl Solver for Pn {
         self.mid(q, blocked, PN_INF, PN_INF); // solve fully
                                               // Solved ⇒ φ = 0 (proven win) or φ = ∞ (disproven ⇒ loss).
         self.tt
-            .get(q.canon(blocked))
+            .get(q.pos_key(blocked))
             .map(|(p, _)| p == 0)
             .unwrap_or(false)
     }
