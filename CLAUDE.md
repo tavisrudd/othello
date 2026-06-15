@@ -22,9 +22,11 @@ n=16 roadmap in `notes/handoffs/`.
     ordered / strong compute identical black-centred values) + the independent grid
     move/flip reference + the exact endgame solves (6 / −40 / 4). `strong+` /
     `strong++` deliberately change the value (strength match, not equivalence).
-- A real **n=16 queens** run is the open problem — never run it to completion; size
-  with HyperLogLog (`queens count`) and extrapolate. Any verdict cross-checks
-  against Jenrich (n=16 = second-player win).
+- A real **n=16 queens** run is the open problem and takes hours-to-days — don't fire
+  one off to completion casually during a session; size it with HyperLogLog (`queens
+  count`) and extrapolate first. (Completing it is the goal — just deliberately, with
+  checkpoint/resume, not as a speculative command that burns the box for days.) Any
+  verdict cross-checks against Jenrich (n=16 = second-player win).
 
 ## Performance discipline (the Rust hot paths)
 
