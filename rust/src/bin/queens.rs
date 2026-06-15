@@ -147,10 +147,11 @@ fn parse(q: &Queens, s: &str) -> Option<u32> {
     (c < q.n && r < q.n).then(|| q.square(r, c))
 }
 
-/// Render the board: `Q` = queen, dim `·` = attacked (illegal), `.` = available.
-/// Queens are coloured like chess pieces by their square's checkerboard parity
-/// (a1 is a dark square): dark squares get the "black" queen in the same dark
-/// grey the Python board uses (256-colour 240), light squares the "white" one.
+/// Render the board: `Q` = queen, dark-red `.` = attacked (illegal), green `.` =
+/// available. Queens are coloured like chess pieces by their square's
+/// checkerboard parity (a1 is a dark square): dark squares get the "black" queen
+/// in the same dark grey the Python board uses (256-colour 240), light squares
+/// the "white" one.
 fn render(q: &Queens, queens: Bits, blocked: Bits) {
     for r in (0..q.n).rev() {
         print!("{:>2} ", r + 1);
@@ -164,9 +165,9 @@ fn render(q: &Queens, queens: Bits, blocked: Bits) {
                 };
                 print!(" {q}\x1b[0m");
             } else if blocked.get(sq) {
-                print!(" \x1b[90m·\x1b[0m");
+                print!(" \x1b[38;5;88m.\x1b[0m"); // attacked: dark red
             } else {
-                print!(" \x1b[92m.\x1b[0m");
+                print!(" \x1b[92m.\x1b[0m"); // available: green
             }
         }
         println!();
