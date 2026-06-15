@@ -551,18 +551,19 @@ pub const ENGINE_NAMES: [&str; 6] = [
     "strong++",
 ];
 
-/// `(name, one-line description, parallelism)` for `--list-engines`, in
-/// `ENGINE_NAMES` order. The default depth is not duplicated here -- it comes
-/// from each engine's `default_depth()` so there is a single source of truth.
+/// `(name, one-line description, parallelism)` for `--list-engines`, ordered as
+/// the complexity ladder (simplest first), not alphabetically like `ENGINE_NAMES`.
+/// The default depth is not duplicated here -- it comes from each engine's
+/// `default_depth()` so there is a single source of truth.
 pub const ENGINE_INFO: [(&str, &str, &str); 6] = [
-    (
-        "alphabeta",
-        "fail-soft alpha-beta with a bound-tracking transposition table",
-        "sequential",
-    ),
     (
         "minimax",
         "plain minimax with a depth-keyed cache (the ground-truth reference)",
+        "sequential",
+    ),
+    (
+        "alphabeta",
+        "fail-soft alpha-beta with a bound-tracking transposition table",
         "sequential",
     ),
     (
