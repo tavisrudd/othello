@@ -16,7 +16,7 @@ from othello import (
     parse_board, format_score,
     iter_moves, iter_actions, best_by_side,
     Minimax, AlphaBeta, AlphaBetaOrdered,
-    CythonAlphaBeta, CythonAlphaBetaOrdered,
+    CythonAlphaBeta, CythonAlphaBetaOrdered, CythonStrong,
     MIN_SCORE, MAX_SCORE,
     init_early_game,
     init_near_terminal_game_black_win,
@@ -286,7 +286,7 @@ def test_utility_is_player_relative():
 # --------------------------------------------------------------------------- #
 
 ENGINES = [Minimax, AlphaBeta, AlphaBetaOrdered,
-           CythonAlphaBeta, CythonAlphaBetaOrdered]
+           CythonAlphaBeta, CythonAlphaBetaOrdered, CythonStrong]
 
 
 @pytest.mark.parametrize("Engine", ENGINES)
@@ -472,14 +472,17 @@ def test_native_search_matches_python():
     # AlphaBeta. Skipped when the extension isn't built (then the cython engines
     # are exercised through their pure-Python fallback by the ENGINES tests).
     mod = pytest.importorskip("othello._search")
-    search = mod.search
-    tt = mod.TranspositionTable(bits=18)   # small table also exercises eviction
+    # separate tables: search stores black-centered values, search_strong negamax
+    tt_ab = mod.TranspositionTable(bits=18)    # small table also exercises eviction
+    tt_pvs = mod.TranspositionTable(bits=18)
     for b in sample_positions(25, seed=31):
         ref_engine = AlphaBeta()
         for depth in [1, 2, 3, 4, 5]:
             ref = ref_engine.value(b, depth)
             for order in (0, 1):
-                assert search(b.black, b.white, b.to_move, depth, tt, order) == ref
+                # plain alpha-beta and PVS+iterative-deepening both exact
+                assert mod.search(b.black, b.white, b.to_move, depth, tt_ab, order) == ref
+                assert mod.search_strong(b.black, b.white, b.to_move, depth, tt_pvs, order) == ref
 
 
 # --------------------------------------------------------------------------- #

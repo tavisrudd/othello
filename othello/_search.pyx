@@ -54,21 +54,26 @@ cdef class TranspositionTable:
     it stays in L2/L3 cache -- cache-local probes beat the extra recompute from
     eviction, and a bigger table is measurably slower."""
     cdef Entry* slots
+    cdef u64* hint            # position-keyed best-move bit (lossy ordering hint)
     cdef size_t mask
 
     def __cinit__(self, int bits=16):
         cdef size_t n = (<size_t>1) << bits
         self.mask = n - 1
         self.slots = <Entry*>calloc(n, sizeof(Entry))
-        if self.slots == NULL:
+        self.hint = <u64*>calloc(n, sizeof(u64))
+        if self.slots == NULL or self.hint == NULL:
             raise MemoryError()
 
     def __dealloc__(self):
         if self.slots != NULL:
             free(self.slots)
+        if self.hint != NULL:
+            free(self.hint)
 
     def clear(self):
         memset(self.slots, 0, (self.mask + 1) * sizeof(Entry))
+        memset(self.hint, 0, (self.mask + 1) * sizeof(u64))
 
 
 cdef inline size_t _index(u64 black, u64 white, int to_move, int depth, size_t mask):
@@ -282,3 +287,138 @@ cpdef int search(u64 black, u64 white, int to_move, int depth,
                  TranspositionTable tt, int order):
     """Black-centered minimax value, `depth` plies; order=1 enables ordering."""
     return _ab(black, white, to_move, depth, NEG, POS, tt, order)
+
+
+# ---------------------------------------------------------------------------- #
+# "Strong" search: negamax principal-variation search (PVS) with a best-move
+# hint table, driven by iterative deepening. Pure search-order tricks, so the
+# value is identical to plain alpha-beta -- it just prunes far more.
+# ---------------------------------------------------------------------------- #
+
+cdef inline size_t _pos_index(u64 black, u64 white, int to_move, size_t mask):
+    return _index(black, white, to_move, 0, mask)
+
+
+cdef int _pvs(u64 black, u64 white, int to_move, int depth,
+              int alpha, int beta, TranspositionTable tt, int order):
+    # Negamax: returns the value from `to_move`'s perspective.
+    cdef size_t idx = _index(black, white, to_move, depth, tt.mask)
+    cdef Entry* e = &tt.slots[idx]
+    cdef int a0 = alpha
+    cdef int value, flag, v, child, n, i, j, ckey, hb, diff
+    cdef u64 player, opp, moves, om, m, fl, nb, nw, hint, best
+    cdef u64 cb[64]
+    cdef u64 cw[64]
+    cdef u64 cm[64]
+    cdef int ck[64]
+
+    if e.used and e.black == black and e.white == white \
+            and e.to_move == to_move and e.depth == depth:
+        value = e.value; flag = e.flag
+        if flag == EXACT:
+            return value
+        elif flag == LOWER:
+            if value > alpha: alpha = value
+        else:
+            if value < beta: beta = value
+        if alpha >= beta:
+            return value
+
+    if depth <= 0:                                    # horizon heuristic (negamax)
+        hb = (CORNER_W * (__builtin_popcountll(black & CORNERS)
+                          - __builtin_popcountll(white & CORNERS))
+              + MOB_W * (__builtin_popcountll(_legal(black, white))
+                         - __builtin_popcountll(_legal(white, black)))
+              + DISC_W * (__builtin_popcountll(black) - __builtin_popcountll(white)))
+        value = hb if to_move == 0 else -hb
+        _store(e, black, white, to_move, depth, value, EXACT)
+        return value
+
+    if to_move == 0:
+        player = black; opp = white
+    else:
+        player = white; opp = black
+    moves = _legal(player, opp)
+
+    if moves == 0:
+        om = _legal(opp, player)
+        if om == 0:                                   # terminal (negamax)
+            diff = __builtin_popcountll(black) - __builtin_popcountll(white)
+            value = diff if to_move == 0 else -diff
+            _store(e, black, white, to_move, depth, value, EXACT)
+            return value
+        value = -_pvs(black, white, to_move ^ 1, depth - 1, -beta, -alpha, tt, order)  # pass
+        flag = UPPER if value <= a0 else (LOWER if value >= beta else EXACT)
+        _store(e, black, white, to_move, depth, value, flag)
+        return value
+
+    child = depth - 1
+
+    n = 0
+    while moves:
+        m = moves & (~moves + 1); moves ^= m
+        fl = _flips(m, player, opp)
+        if to_move == 0:
+            nb = black | m | fl; nw = white & ~fl
+        else:
+            nb = black & ~fl; nw = white | m | fl
+        cb[n] = nb; cw[n] = nw; cm[n] = m
+        if order and depth >= ORDER_MIN_DEPTH:
+            ck[n] = __builtin_popcountll(_legal(nw, nb) if to_move == 0 else _legal(nb, nw))
+        n += 1
+
+    if order and depth >= ORDER_MIN_DEPTH and n > 1:  # mobility ordering
+        for i in range(1, n):
+            ckey = ck[i]; nb = cb[i]; nw = cw[i]; m = cm[i]
+            j = i - 1
+            while j >= 0 and ck[j] > ckey:
+                ck[j+1] = ck[j]; cb[j+1] = cb[j]; cw[j+1] = cw[j]; cm[j+1] = cm[j]; j -= 1
+            ck[j+1] = ckey; cb[j+1] = nb; cw[j+1] = nw; cm[j+1] = m
+
+    hint = tt.hint[_pos_index(black, white, to_move, tt.mask)]
+    if hint:                                          # try the hash move first
+        for i in range(n):
+            if cm[i] == hint:
+                if i != 0:
+                    nb = cb[i]; nw = cw[i]; m = cm[i]
+                    for j in range(i, 0, -1):
+                        cb[j] = cb[j-1]; cw[j] = cw[j-1]; cm[j] = cm[j-1]
+                    cb[0] = nb; cw[0] = nw; cm[0] = m
+                break
+
+    value = NEG; best = cm[0]
+    for i in range(n):
+        if i == 0:
+            v = -_pvs(cb[i], cw[i], to_move ^ 1, child, -beta, -alpha, tt, order)
+        else:
+            v = -_pvs(cb[i], cw[i], to_move ^ 1, child, -alpha - 1, -alpha, tt, order)
+            if alpha < v and v < beta:                # scout failed high -> re-search
+                v = -_pvs(cb[i], cw[i], to_move ^ 1, child, -beta, -alpha, tt, order)
+        if v > value:
+            value = v; best = cm[i]
+        if v > alpha:
+            alpha = v
+        if alpha >= beta:
+            break
+
+    flag = UPPER if value <= a0 else (LOWER if value >= beta else EXACT)
+    e = &tt.slots[idx]
+    _store(e, black, white, to_move, depth, value, flag)
+    tt.hint[_pos_index(black, white, to_move, tt.mask)] = best
+    return value
+
+
+cpdef int search_strong(u64 black, u64 white, int to_move, int depth,
+                        TranspositionTable tt, int order):
+    """Iterative-deepening PVS; returns the black-centered value (== search).
+
+    NB: stores negamax (side-to-move) values in `tt`, whereas search() stores
+    black-centered ones -- do not share a TranspositionTable between them.
+    """
+    cdef int v = 0, d
+    if depth <= 0:
+        v = _pvs(black, white, to_move, depth, NEG, POS, tt, order)
+    else:
+        for d in range(1, depth + 1):
+            v = _pvs(black, white, to_move, d, NEG, POS, tt, order)
+    return v if to_move == 0 else -v

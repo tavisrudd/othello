@@ -5,7 +5,9 @@ from othello.game import Engine
 from othello.ai.minimax import Minimax
 from othello.ai.alphabeta import AlphaBeta
 from othello.ai.alphabeta_move_ordering import AlphaBetaOrdered
-from othello.ai.cython_alphabeta import CythonAlphaBeta, CythonAlphaBetaOrdered
+from othello.ai.cython_alphabeta import (
+    CythonAlphaBeta, CythonAlphaBetaOrdered, CythonStrong,
+)
 
 # Registry for the CLI (--engine). Maps a stable cli name to the class. The
 # cython-* engines fall back to their pure-Python equivalent when the compiled
@@ -16,9 +18,10 @@ ENGINES: dict[str, type[Engine]] = {
     "ordered": AlphaBetaOrdered,
     "cython": CythonAlphaBeta,
     "cython-ordered": CythonAlphaBetaOrdered,
+    "cython-strong": CythonStrong,
 }
 
 __all__ = [
     "Minimax", "AlphaBeta", "AlphaBetaOrdered",
-    "CythonAlphaBeta", "CythonAlphaBetaOrdered", "ENGINES",
+    "CythonAlphaBeta", "CythonAlphaBetaOrdered", "CythonStrong", "ENGINES",
 ]

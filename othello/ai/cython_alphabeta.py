@@ -38,6 +38,9 @@ class _NativeEngine(Engine):
     def value(self, state: GameState, depth: Depth = None) -> Score:
         if depth is None or not HAVE_SEARCH:
             return self.fallback.value(state, depth)
+        return self._native(state, depth)
+
+    def _native(self, state: GameState, depth: int) -> Score:
         return _search.search(state.black, state.white, state.to_move,
                               depth, self.tt, self._order)
 
@@ -61,3 +64,19 @@ class CythonAlphaBetaOrdered(_NativeEngine):
     default_depth = 8
     _order = 1
     _fallback_cls = AlphaBetaOrdered
+
+
+class CythonStrong(_NativeEngine):
+    """Everything: native bitboard search + transposition table + mobility
+    ordering, plus principal-variation search (null-window scouting), a TT
+    best-move hint table, and iterative deepening. Pure search-order tricks, so
+    values match plain alpha-beta -- it just prunes more (most on deep searches).
+    """
+    name = "cython-strong"
+    default_depth = 9
+    _order = 1
+    _fallback_cls = AlphaBetaOrdered
+
+    def _native(self, state: GameState, depth: int) -> Score:
+        return _search.search_strong(state.black, state.white, state.to_move,
+                                     depth, self.tt, self._order)
