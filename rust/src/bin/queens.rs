@@ -406,6 +406,36 @@ fn watch(
     io::stderr().flush().ok();
 }
 
+/// Show the live progress bar only for searches that run a while -- n ≥ 14 (over
+/// ~1 s) -- and when stderr is a real terminal, so fast solves and piped output
+/// (and tests) stay clean.
+fn show_bar(n: u32) -> bool {
+    n >= 14 && io::stderr().is_terminal()
+}
+
+/// Run a search (`work`) while a background watcher handles signals and, when
+/// `bar`, paints the live progress bar -- shared by `solve` and the self/play
+/// table warm-up. The watcher borrows the solver read-only on a scoped thread;
+/// `work` runs on this thread and its result is returned. SIGUSR1 dumps progress,
+/// SIGINT/SIGTERM report how far the search got and exit.
+fn run_watched<R>(solver: &dyn Solver, n: u32, bar: bool, work: impl FnOnce() -> R) -> R {
+    let start = Instant::now();
+    let mut signals = Signals::new([SIGINT, SIGTERM, SIGUSR1]).ok();
+    let done = AtomicBool::new(false);
+    thread::scope(|scope| {
+        let watcher = signals.as_mut().map(|signals| {
+            let done = &done;
+            scope.spawn(move || watch(signals, solver, n, start, bar, done))
+        });
+        let result = work();
+        done.store(true, Ordering::Relaxed);
+        if let Some(watcher) = &watcher {
+            watcher.thread().unpark(); // wake it now so the scope joins promptly
+        }
+        result
+    })
+}
+
 fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     let bits = tt_bits(q.n);
     // --distinct reports the re-expansion ratio (nodes ÷ distinct). For even
@@ -425,31 +455,16 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     };
     let t = Instant::now();
     let n = q.n;
-    // A live progress bar only when the solve may run a while and stderr is a
-    // real terminal (so piped output and tests stay clean).
-    let bar = n > 8 && io::stderr().is_terminal();
-
-    // One scoped watcher thread (so it can borrow the solver read-only) polls
-    // for signals and repaints the bar: SIGUSR1 dumps progress, SIGINT/SIGTERM
-    // report how far the search got and exit, and the live node counter the
-    // solver bumps keeps the bar meaningful even within one long root move.
-    let mut signals = Signals::new([SIGINT, SIGTERM, SIGUSR1]).ok();
-    let done = AtomicBool::new(false);
-    let (first_wins, pv) = thread::scope(|scope| {
-        let watcher = signals.as_mut().map(|signals| {
-            let solver = solver.as_ref();
-            let done = &done;
-            scope.spawn(move || watch(signals, solver, n, t, bar, done))
-        });
-        let first_wins = solver.first_player_wins(q);
-        let pv = q.principal_variation(solver.as_ref());
-        done.store(true, Ordering::Relaxed);
-        if let Some(watcher) = &watcher {
-            watcher.thread().unpark(); // wake it now so the scope joins promptly
-        }
-        (first_wins, pv)
+    // A live progress bar only for the slow boards (a search that runs > ~1 s,
+    // i.e. n ≥ 14) and when stderr is a real terminal (so piped output / tests
+    // stay clean).
+    let bar = show_bar(n);
+    let (first_wins, pv) = run_watched(solver.as_ref(), n, bar, || {
+        (
+            solver.first_player_wins(q),
+            q.principal_variation(solver.as_ref()),
+        )
     });
-
     let elapsed = t.elapsed().as_secs_f64();
     let winner = if first_wins { "first" } else { "second" };
     println!(
@@ -615,10 +630,14 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
 /// whole tree single-core -- far slower than `solve`, which warms the table the
 /// same way via `first_player_wins`. Odd boards are O(1) (no search to warm).
 fn warm_table(q: &Queens, solver: &dyn Solver) {
-    if !q.is_odd() {
-        eprintln!("(solving the {n}×{n} game…)", n = q.n);
-        solver.first_player_wins(q);
+    if q.is_odd() {
+        return; // odd: O(1) mirror line, no search to warm
     }
+    // Show the bar (and handle signals) for the slow warm-ups (n ≥ 14); the
+    // smaller even boards finish in well under a second, no indicator needed.
+    run_watched(solver, q.n, show_bar(q.n), || {
+        solver.first_player_wins(q);
+    });
 }
 
 fn self_play(q: &Queens, engine: &str) {
