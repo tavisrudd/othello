@@ -245,16 +245,75 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       bar; per-solver summary stats (TT fill, nimber value, pn φ/δ). Static
       `DISTINCT_POSITIONS` table now drives `tt_bits` (tapered headroom; `MAX_TT_BITS=28`;
       n=16 default TT 27→28, i.e. 5.4→10.7 GB). Parallelism negative (see fact #5) — reverted.
-- [ ] Chunk 2: compact lossless queen-set key (16-byte slot) + `fastrange`; measure merge-loss
-      — now scoped as the **dynamic/in-flight tier**, not the full table (it can't hold ~9B).
-      **Now measurable**: a good compact slot should hold re-expansion ≈ 1.0× at larger n on
-      the same RAM — verify with `solve --distinct` / `count`.
+- [x] Chunk 2 (slot shrink, session 4, `6c32617`): **compact 8-byte fingerprint slot** (40 B
+      → 8 B, **option B**, not the roadmap's option-A queen-set key). Packs `{used:1, val:8,
+      fp:55}` into one `u64`; stores a 55-bit fingerprint of the canonical key (independent
+      hash half) instead of the full 256-bit key → wrong-hit ≈ 2⁻⁵⁵/colliding-probe (cross-
+      checked vs Jenrich). **Keeps the available-mask key, so merges are preserved exactly**
+      (n=12 exact distinct unchanged at 1,060,823). n=14: **5.4 GB → 1.07 GB** at the same
+      `tt_bits`, same ~1.09× re-exp, same second-player verdict. `MAX_TT_BITS` 28→31 (17 GB).
+      *Why B over A:* for the dynamic tier B is smaller (8 vs 16 B) AND merge-preserving
+      (A re-keys on the queen set → loses merges → more entries). A's queen-set encoding is
+      reserved for the Chunk-4 archive's rankable key (see Chunk 4 prep).
+- [ ] Chunk 2b: `fastrange` table sizing (Lemire multiply-shift) — let the table use **all**
+      RAM, not just 2^k slots (currently `tt_bits` is a power of two; at 8 B/slot the gap
+      between 2³¹=17 GB and 2³²=34 GB is the ~21 GB sweet spot on the 26 GB box). "Free and
+      composes"; ripples into `tt_bits` (return a slot *count*, not bits) + the QueensTt ctor.
+- [ ] Chunk 4 prep: thread the **queen set**, canonicalise+rank it (option A's ≤16-col +
+      row-mask encoding), and **measure merge-loss** = (distinct canonical queen-sets) ÷
+      (distinct available-masks) on n=10/12/14. Decides archive keyspace sizing; A's exact
+      ranked key is the archive's membership/payload key (with Codex's guard).
 - [ ] Chunk 3: two-tier depth-preferred TT replacement
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
 - [ ] Final: `make test` + `make clippy` green; n=16 verdict cross-checked vs Jenrich (second)
 
 ## Handoff Notes
+
+### Session 4 — Chunk 2 slot shrink: 8-byte fingerprint slot (2026-06-15)
+
+**Session**: 2026-06-15 (queens roadmap, session 4). Committed `6c32617`;
+`make build`/`clippy`/`test` green, `fmt-check` clean on my files (a pre-existing
+`table.rs` fmt drift from the list-engines commits is unrelated — left untouched).
+**Files**: `rust/src/queens.rs` (the slot + hash + get/put + a new
+`fingerprint_slot_is_compact_and_round_trips` test), `rust/src/bin/queens.rs`
+(`MAX_TT_BITS` 28→31 + byte-figure comments), `rust/README.md` (TT writeup).
+
+**What landed — Chunk 2 as option B, not A.** Replaced `QueensTt`'s 40-byte
+`{key:[u64;4], val, used}` slot with a single `u64`: `{used:1, val:8, fp:55}`. The
+slot stores a **55-bit fingerprint** of the canonical key (from an independent
+`hash128` half), not the full 256-bit key. `get` matches on fingerprint; a wrong
+"hit" is ~2⁻⁵⁵ per colliding probe (negligible across 10¹¹ nodes; verdict cross-
+checked vs Jenrich). A fingerprint *mismatch* is still just a miss that recomputes.
+
+**Why I diverged from the roadmap's "do A first."** The roadmap defaulted to option
+A (lossless queen-set key, 16 B). After studying the code I judged **B strictly
+better for the *dynamic tier***: it's 8 B (vs A's 16 B) **and** it keeps the
+available-mask key, so all transposition merges survive — whereas A re-keys on the
+queen set and *loses* merges (more entries, the opposite of what a memory-bound
+tier wants). A's real value is downstream: its rankable queen-set encoding is the
+right **Chunk-4 archive key**, where the merge-loss number actually matters. So I
+split them: B = dynamic slot now; A = Chunk-4 prep (with merge-loss measurement).
+
+**Validation (the success criterion, met):**
+- `solve 14 --distinct`: second-player win, distinct ≈ 49.08M (HLL, ~baseline),
+  **TT 1.07 GB (was 5.4 GB) — 5× less RAM at the same `tt_bits=27`**, 1.09× re-exp.
+- `solve 12 --distinct`: second-player win, distinct **1,060,823 (exact, identical
+  to baseline)** → merges preserved byte-for-byte, no merge-loss.
+- `solver_lineage_agrees` (n≤9) + `counting_preserves_verdict` + the new size/round-
+  trip test all green. Slot is exactly 8 bytes (`size_of` asserted).
+- Wall time unchanged (~11.6s n=14) — the fingerprint compare adds nothing
+  measurable; consistent with the throughput-bound thesis (fact #5).
+
+**`MAX_TT_BITS` 28→31**: at 8 B/slot, 2³¹ = 17 GB (was 2²⁸×40 B = 10.7 GB), using
+the freed RAM on the 26 GB box. n=16 default TT now ~17 GB holding ~2.1B of ~9.2B
+distinct (≈23%, was ≈3%) — 8× more, still thrashes (Chunk 4 remains load-bearing).
+
+**Next**: Chunk 2b (`fastrange`, fills the 17→34 GB power-of-two gap) is a small
+free win; the substantive path is **Chunk 4 prep** — thread + canonicalise + rank
+the queen set, measure merge-loss, then build the BuRR archive with Codex's
+membership guard. Any TT/key change must keep `solver_lineage_agrees` (n≤9) and a
+fresh `solve 12/14 --distinct` (distinct unchanged; re-exp ≈ 1.0×).
 
 ### Session 3 — observability + re-expansion tooling, cardinality table, parallelism negative (2026-06-15)
 
