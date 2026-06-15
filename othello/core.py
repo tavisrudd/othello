@@ -80,7 +80,7 @@ def parse_move(move: MoveSpec) -> Move:
         return square_to_move(move)
     return move
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Board:
     black: Bitmap
     white: Bitmap
@@ -178,42 +178,63 @@ class Board:
 
     @staticmethod
     def _legal_moves(player: Bitmap, opponent: Bitmap) -> Moves:
-        # Dumb7fill per ray (inlined shifts). A move is an empty square reached
-        # by sliding over a non-empty run of opponent discs from one of ours.
+        # Kogge-Stone parallel-prefix occluded fill: flood `player` through the
+        # contiguous run of `opponent` discs along each of the 8 rays in 3
+        # shift-doubling steps (vs 6 linear), then the empty square just past the
+        # run is a legal move. `g & opponent` drops the seed, so a move needs the
+        # run to be >= 1 disc. Rightward rays mask file-A wrap, leftward file-H.
         empty = ~(player | opponent) & FULL
         moves = 0
 
-        x = ((player & NOT_H_FILE) << 1) & opponent                  # east
-        for _ in range(6): x |= ((x & NOT_H_FILE) << 1) & opponent
-        moves |= ((x & NOT_H_FILE) << 1) & empty
+        g = player; p = opponent                                     # north
+        g |= p & (g << 8);  p &= p << 8
+        g |= p & (g << 16); p &= p << 16
+        g |= p & (g << 32)
+        moves |= ((g & opponent) << 8) & empty
 
-        x = ((player & NOT_A_FILE) >> 1) & opponent                  # west
-        for _ in range(6): x |= ((x & NOT_A_FILE) >> 1) & opponent
-        moves |= ((x & NOT_A_FILE) >> 1) & empty
+        g = player; p = opponent                                     # south
+        g |= p & (g >> 8);  p &= p >> 8
+        g |= p & (g >> 16); p &= p >> 16
+        g |= p & (g >> 32)
+        moves |= ((g & opponent) >> 8) & empty
 
-        x = (player << 8) & opponent                                 # north
-        for _ in range(6): x |= (x << 8) & opponent
-        moves |= (x << 8) & empty
+        ep = opponent & NOT_A_FILE                                   # rightward
+        g = player; p = ep                                           # east
+        g |= p & (g << 1);  p &= p << 1
+        g |= p & (g << 2);  p &= p << 2
+        g |= p & (g << 4)
+        moves |= (((g & opponent) << 1) & NOT_A_FILE) & empty
 
-        x = (player >> 8) & opponent                                 # south
-        for _ in range(6): x |= (x >> 8) & opponent
-        moves |= (x >> 8) & empty
+        g = player; p = ep                                           # northeast
+        g |= p & (g << 9);  p &= p << 9
+        g |= p & (g << 18); p &= p << 18
+        g |= p & (g << 36)
+        moves |= (((g & opponent) << 9) & NOT_A_FILE) & empty
 
-        x = ((player & NOT_H_FILE) << 9) & opponent                  # northeast
-        for _ in range(6): x |= ((x & NOT_H_FILE) << 9) & opponent
-        moves |= ((x & NOT_H_FILE) << 9) & empty
+        g = player; p = ep                                           # southeast
+        g |= p & (g >> 7);  p &= p >> 7
+        g |= p & (g >> 14); p &= p >> 14
+        g |= p & (g >> 28)
+        moves |= (((g & opponent) >> 7) & NOT_A_FILE) & empty
 
-        x = ((player & NOT_A_FILE) << 7) & opponent                  # northwest
-        for _ in range(6): x |= ((x & NOT_A_FILE) << 7) & opponent
-        moves |= ((x & NOT_A_FILE) << 7) & empty
+        wp = opponent & NOT_H_FILE                                   # leftward
+        g = player; p = wp                                           # west
+        g |= p & (g >> 1);  p &= p >> 1
+        g |= p & (g >> 2);  p &= p >> 2
+        g |= p & (g >> 4)
+        moves |= (((g & opponent) >> 1) & NOT_H_FILE) & empty
 
-        x = ((player & NOT_H_FILE) >> 7) & opponent                  # southeast
-        for _ in range(6): x |= ((x & NOT_H_FILE) >> 7) & opponent
-        moves |= ((x & NOT_H_FILE) >> 7) & empty
+        g = player; p = wp                                           # northwest
+        g |= p & (g << 7);  p &= p << 7
+        g |= p & (g << 14); p &= p << 14
+        g |= p & (g << 28)
+        moves |= (((g & opponent) << 7) & NOT_H_FILE) & empty
 
-        x = ((player & NOT_A_FILE) >> 9) & opponent                  # southwest
-        for _ in range(6): x |= ((x & NOT_A_FILE) >> 9) & opponent
-        moves |= ((x & NOT_A_FILE) >> 9) & empty
+        g = player; p = wp                                           # southwest
+        g |= p & (g >> 9);  p &= p >> 9
+        g |= p & (g >> 18); p &= p >> 18
+        g |= p & (g >> 36)
+        moves |= (((g & opponent) >> 9) & NOT_H_FILE) & empty
 
         return moves
 
