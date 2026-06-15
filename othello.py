@@ -359,28 +359,42 @@ def iter_actions(state: GameState) -> Iterator[Move]:
 
 ## black centered minimax scoring
 
-type Cache = dict[Hashable, Score]
+type Depth = int | None          # remaining plies to search; None = to terminal
+type CacheKey = tuple[Hashable, Depth]
+type Cache = dict[CacheKey, Score]
 
-def minimax_value(state: GameState, cache: Cache) -> Score:
-    key = state.cache_key
+def _child_depth(depth: Depth) -> Depth:
+    return depth if depth is None else depth - 1
+
+def minimax_value(state: GameState, cache: Cache, depth: Depth = None) -> Score:
+    # Key by (position, remaining depth): a value produced by the heuristic
+    # cutoff at `depth` differs from one searched deeper, so depth must be part
+    # of the key or a shallow estimate could be reused as an exact value. For
+    # full searches (depth=None) the depth component is constant, so this
+    # degrades to position-only keying and transpositions still share entries.
+    key: CacheKey = (state.cache_key, depth)
     if key in cache:
         return cache[key]
     if state.is_terminal():
         score = state.utility(BLACK)
-        cache[key] = score
-        return score
-    values = [minimax_value(state._make_move_unchecked(move), cache)
-              for move in iter_actions(state)]
-    score = max(values) if state.to_move == BLACK else min(values)
+    elif depth is not None and depth <= 0:
+        score = state.utility(BLACK)   # heuristic static eval at the horizon
+    else:
+        child = _child_depth(depth)
+        values = [minimax_value(state._make_move_unchecked(move), cache, child)
+                  for move in iter_actions(state)]
+        score = max(values) if state.to_move == BLACK else min(values)
     cache[key] = score
     return score
 
-def minimax_scores(state: GameState, cache: Cache | None = None) -> MoveScores:
+def minimax_scores(state: GameState, cache: Cache | None = None,
+                   depth: Depth = None) -> MoveScores:
     if state.is_terminal():
         raise ValueError("minimax_scores called on terminal state")
     cache = {} if cache is None else cache
+    child = _child_depth(depth)
     return [
-        (move, minimax_value(state._make_move_unchecked(move), cache))
+        (move, minimax_value(state._make_move_unchecked(move), cache, child))
         for move in iter_actions(state)
     ]
 
@@ -390,15 +404,16 @@ def _minimax_choice(state: GameState, scores: MoveScores) -> Move:
     return min(scores, key=lambda x: x[1])[0]
     
 
-def minimax(state: GameState, cache: Cache | None = None) -> Move:
+def minimax(state: GameState, cache: Cache | None = None,
+            depth: Depth = None) -> Move:
     if state.is_terminal():
         raise ValueError("minimax called on terminal state")
     cache = {} if cache is None else cache
-    
-    scored = minimax_scores(state, cache)
+
+    scored = minimax_scores(state, cache, depth)
     return _minimax_choice(state, scored)
 
-def play_minimax_game(board: Board) -> Board:
+def play_minimax_game(board: Board, depth: Depth = None) -> Board:
     last_move: Move | None = None
     turn = 1
     cache: Cache = {}
@@ -408,7 +423,7 @@ def play_minimax_game(board: Board) -> Board:
         print(f"turn {turn}: {player_name(board.to_move)} to move")
         print(format_board(board, last_move=last_move))
 
-        scored = minimax_scores(board, cache)
+        scored = minimax_scores(board, cache, depth)
         
         for move, score in scored:
             print(f"{move_name(move):>4} {score:+d}")
