@@ -53,6 +53,7 @@ def best_by_side(state: GameState, scores: MoveScores) -> Move:
 class Engine(ABC):
     """An AI that scores the legal moves of a state (black-centered)."""
     name: str = "engine"
+    default_depth: Depth = 6     # used when the caller doesn't specify one
 
     @abstractmethod
     def scores(self, state: GameState, depth: Depth = None) -> MoveScores:

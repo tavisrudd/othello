@@ -12,6 +12,13 @@ from othello.ai import ENGINES
 from othello.play import play_game
 
 
+class _EngineDefault:
+    def __repr__(self) -> str:        # shown by argparse as the --depth default
+        return "engine-specific"
+
+UNSET = _EngineDefault()              # sentinel: --depth not given (None means 'full')
+
+
 def _depth(value: str) -> int | None:
     if value.lower() in ("full", "none", "exact"):
         return None
@@ -32,8 +39,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="search engine to play both sides",
     )
     parser.add_argument(
-        "--depth", type=_depth, default=6, metavar="N",
-        help="plies to search per move ('full' for exact to terminal)",
+        "--depth", type=_depth, default=UNSET, metavar="N",
+        help="plies to search per move ('full' for exact to terminal); "
+             "defaults to the engine's own default",
     )
     start = parser.add_mutually_exclusive_group()
     start.add_argument(
@@ -79,7 +87,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.list_engines:
         for name in sorted(ENGINES):
-            print(f"{name:12} {ENGINES[name]().name}")
+            cls = ENGINES[name]
+            print(f"{name:12} {cls.name:20} default depth {cls.default_depth}")
         return 0
 
     try:
@@ -89,5 +98,6 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     engine = ENGINES[args.engine]()
-    play_game(board, engine, depth=args.depth)
+    depth = engine.default_depth if args.depth is UNSET else args.depth
+    play_game(board, engine, depth=depth)
     return 0

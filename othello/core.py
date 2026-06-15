@@ -53,40 +53,19 @@ def format_move(move: Move) -> SquareName:
 
 ################################################################################
 ## Direction shifts
+#
+# Eight ray directions, each a bit shift with an edge mask to stop file wrap.
+# Inlined into _legal_moves / _flips_for_move (the search hot path) rather than
+# called as functions -- the per-shift call overhead dominated otherwise:
+#     east  (x & NOT_H_FILE) << 1      west  (x & NOT_A_FILE) >> 1
+#     north  x << 8                    south  x >> 8
+#     NE    (x & NOT_H_FILE) << 9      NW    (x & NOT_A_FILE) << 7
+#     SE    (x & NOT_H_FILE) >> 7      SW    (x & NOT_A_FILE) >> 9
+# (each result is immediately `& opponent`/`& player`/`& empty`, which re-bounds
+# it to 64 bits, so no separate FULL mask is needed.)
 
 NOT_A_FILE = 0xFEFEFEFEFEFEFEFE
 NOT_H_FILE = 0x7F7F7F7F7F7F7F7F
-
-def east(x):
-    return (x & NOT_H_FILE) << 1
-
-def west(x):
-    return (x & NOT_A_FILE) >> 1
-
-def north(x):
-    return (x << 8) & FULL
-
-def south(x):
-    return x >> 8
-
-def northeast(x):
-    return (x & NOT_H_FILE) << 9
-
-def northwest(x):
-    return (x & NOT_A_FILE) << 7
-
-def southeast(x):
-    return (x & NOT_H_FILE) >> 7
-
-def southwest(x):
-    return (x & NOT_A_FILE) >> 9
-
-DIRECTIONS = (
-    east, west,
-    north, south,
-    northeast, northwest,
-    southeast, southwest,
-)
 
 ################################################################################
 ## Moves
@@ -199,26 +178,101 @@ class Board:
 
     @staticmethod
     def _legal_moves(player: Bitmap, opponent: Bitmap) -> Moves:
+        # Dumb7fill per ray (inlined shifts). A move is an empty square reached
+        # by sliding over a non-empty run of opponent discs from one of ours.
         empty = ~(player | opponent) & FULL
         moves = 0
-        for shift in DIRECTIONS:
-            x = shift(player) & opponent
-            for _ in range(6):
-                x |= shift(x) & opponent
-            moves |= shift(x) & empty
+
+        x = ((player & NOT_H_FILE) << 1) & opponent                  # east
+        for _ in range(6): x |= ((x & NOT_H_FILE) << 1) & opponent
+        moves |= ((x & NOT_H_FILE) << 1) & empty
+
+        x = ((player & NOT_A_FILE) >> 1) & opponent                  # west
+        for _ in range(6): x |= ((x & NOT_A_FILE) >> 1) & opponent
+        moves |= ((x & NOT_A_FILE) >> 1) & empty
+
+        x = (player << 8) & opponent                                 # north
+        for _ in range(6): x |= (x << 8) & opponent
+        moves |= (x << 8) & empty
+
+        x = (player >> 8) & opponent                                 # south
+        for _ in range(6): x |= (x >> 8) & opponent
+        moves |= (x >> 8) & empty
+
+        x = ((player & NOT_H_FILE) << 9) & opponent                  # northeast
+        for _ in range(6): x |= ((x & NOT_H_FILE) << 9) & opponent
+        moves |= ((x & NOT_H_FILE) << 9) & empty
+
+        x = ((player & NOT_A_FILE) << 7) & opponent                  # northwest
+        for _ in range(6): x |= ((x & NOT_A_FILE) << 7) & opponent
+        moves |= ((x & NOT_A_FILE) << 7) & empty
+
+        x = ((player & NOT_H_FILE) >> 7) & opponent                  # southeast
+        for _ in range(6): x |= ((x & NOT_H_FILE) >> 7) & opponent
+        moves |= ((x & NOT_H_FILE) >> 7) & empty
+
+        x = ((player & NOT_A_FILE) >> 9) & opponent                  # southwest
+        for _ in range(6): x |= ((x & NOT_A_FILE) >> 9) & opponent
+        moves |= ((x & NOT_A_FILE) >> 9) & empty
+
         return moves
 
     @staticmethod
     def _flips_for_move(move: Move, player: Bitmap, opponent: Bitmap) -> Bitmap:
+        # Per ray: walk the contiguous opponent run from `move`; if it ends on
+        # one of ours, capture it. Inlined shifts; the while loop early-exits as
+        # soon as the run ends (runs are usually short, so this beats a fixed
+        # fill). Only north can shift past bit 63, so it alone needs `& FULL`.
         flips = 0
-        for shift in DIRECTIONS:
-            captured = 0
-            x = shift(move)
-            while x and (x & opponent):
-                captured |= x
-                x = shift(x)
-            if x & player:
-                flips |= captured
+
+        x = (move & NOT_H_FILE) << 1                                 # east
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x & NOT_H_FILE) << 1
+        if x & player: flips |= cap
+
+        x = (move & NOT_A_FILE) >> 1                                 # west
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x & NOT_A_FILE) >> 1
+        if x & player: flips |= cap
+
+        x = (move << 8) & FULL                                       # north
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x << 8) & FULL
+        if x & player: flips |= cap
+
+        x = move >> 8                                                # south
+        cap = 0
+        while x & opponent:
+            cap |= x; x = x >> 8
+        if x & player: flips |= cap
+
+        x = (move & NOT_H_FILE) << 9                                 # northeast
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x & NOT_H_FILE) << 9
+        if x & player: flips |= cap
+
+        x = (move & NOT_A_FILE) << 7                                 # northwest
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x & NOT_A_FILE) << 7
+        if x & player: flips |= cap
+
+        x = (move & NOT_H_FILE) >> 7                                 # southeast
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x & NOT_H_FILE) >> 7
+        if x & player: flips |= cap
+
+        x = (move & NOT_A_FILE) >> 9                                 # southwest
+        cap = 0
+        while x & opponent:
+            cap |= x; x = (x & NOT_A_FILE) >> 9
+        if x & player: flips |= cap
+
         return flips
 
 BLACK_CHARS = "BX*"

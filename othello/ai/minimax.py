@@ -17,6 +17,7 @@ type ValueCache = dict[CacheKey, Score]
 
 class Minimax(Engine):
     name = "minimax"
+    default_depth = 4            # no pruning, so keep the default shallow
 
     def __init__(self) -> None:
         self.cache: ValueCache = {}

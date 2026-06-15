@@ -17,24 +17,23 @@ from __future__ import annotations
 from typing import Final
 from collections.abc import Iterable
 
-from othello.core import Move
-from othello.game import GameState, Depth, iter_actions
+from othello.core import Move, Moves
+from othello.game import GameState, Depth, iter_moves
 from othello.ai.alphabeta import AlphaBeta
 
-ORDER_MIN_DEPTH: Final[int] = 3   # don't order with fewer plies left than this
+ORDER_MIN_DEPTH: Final[int] = 4   # don't order with fewer plies left than this
 
 
 class AlphaBetaOrdered(AlphaBeta):
     name = "alphabeta+ordering"
+    default_depth = 6            # a full self-play game at 7 is slow; 6 for now
 
-    def order_moves(self, state: GameState, depth: Depth) -> Iterable[Move]:
+    def order_moves(self, state: GameState, moves: Moves, depth: Depth) -> Iterable[Move]:
         if depth is not None and depth < ORDER_MIN_DEPTH:
-            return iter_actions(state)           # too shallow to pay for ordering
-        moves = list(iter_actions(state))
-        if len(moves) < 2:                       # single move (incl. a lone PASS)
-            return moves
+            return iter_moves(moves)             # too shallow to pay for ordering
+        move_list = list(iter_moves(moves))
+        if len(move_list) < 2:                   # single move
+            return move_list
         # Fewest opponent replies first -- restrict the opponent.
-        return sorted(
-            moves,
-            key=lambda m: state._make_move_unchecked(m).actions().bit_count(),
-        )
+        make = state._make_move_unchecked
+        return sorted(move_list, key=lambda m: make(m).actions().bit_count())

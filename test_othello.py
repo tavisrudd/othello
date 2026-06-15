@@ -513,6 +513,16 @@ def test_cli_depth_full_is_none():
     assert othello_cli().parse_args(["--depth", "full"]).depth is None
 
 
+def test_cli_depth_defaults_to_engine_when_omitted():
+    from othello.cli import UNSET
+    from othello.ai import ENGINES
+    for name, expected in [("minimax", 4), ("alphabeta", 6), ("ordered", 6)]:
+        args = othello_cli().parse_args(["--engine", name])
+        assert args.depth is UNSET                       # CLI didn't set it
+        resolved = ENGINES[name].default_depth if args.depth is UNSET else args.depth
+        assert resolved == expected
+
+
 def test_cli_start_and_board_file_are_exclusive():
     with pytest.raises(SystemExit):
         othello_cli().parse_args(["--start", "early", "--board-file", "x"])
