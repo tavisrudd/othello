@@ -18,7 +18,7 @@ use rayon::prelude::*;
 use crate::core::{Board, Move, Moves, Score, BLACK, MAX_SCORE, MIN_SCORE, PASS};
 use crate::eval::{heuristic, utility};
 use crate::game::{best_by_side, child_depth, iter_moves, Depth, Engine, MoveScores};
-use crate::search::{search_strong, search_strong_move};
+use crate::search::{search_strong, search_strong_move, solve};
 use crate::tt::TranspositionTable;
 
 // A small FxHash-style hasher: the cache keys are already well-mixed integers,
@@ -333,9 +333,8 @@ const SEQ_BITS: u32 = 17;
 const POOL_BITS: u32 = 13;
 
 pub struct Strong {
-    tt: TranspositionTable,        // value()/best_move: one sequential search
+    tt: TranspositionTable, // value()/best_move/solve: one sequential search
     pool: Vec<TranspositionTable>, // scores(): one preallocated TT per worker
-    fallback: AlphaBeta,           // ordered alpha-beta for depth=None (full solve)
     order: bool,
     threads: usize,
 }
@@ -365,7 +364,6 @@ impl Strong {
         Strong {
             tt: TranspositionTable::new(SEQ_BITS),
             pool,
-            fallback: AlphaBeta::ordered(),
             order: true,
             threads,
         }
@@ -381,9 +379,13 @@ impl Engine for Strong {
     }
     fn value(&mut self, board: &Board, depth: Depth) -> Score {
         match depth {
-            None => self
-                .fallback
-                .value_window(board, None, MIN_SCORE, MAX_SCORE),
+            None => solve(
+                board.black,
+                board.white,
+                board.to_move as i32,
+                &mut self.tt,
+                self.order,
+            ),
             Some(d) => search_strong(
                 board.black,
                 board.white,
@@ -437,12 +439,13 @@ impl Engine for Strong {
 
         let cd = match child_depth(depth) {
             None => {
-                // full solve: the native search is finite-depth -- use the fallback
+                // full solve: exact native solver, sharing the big sequential TT
+                // across children (cross-child transposition reuse beats fan-out).
                 let mut out = MoveScores::with_capacity(children.len());
                 for (m, c) in &children {
                     out.push((
                         *m,
-                        self.fallback.value_window(c, None, MIN_SCORE, MAX_SCORE),
+                        solve(c.black, c.white, c.to_move as i32, &mut self.tt, self.order),
                     ));
                 }
                 return Ok(out);
@@ -474,7 +477,6 @@ impl Engine for Strong {
         for tt in self.pool.iter_mut() {
             tt.clear();
         }
-        self.fallback.reset();
     }
 }
 

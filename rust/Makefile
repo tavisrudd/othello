@@ -59,6 +59,14 @@ bench-parallel:
 bench-simd:
 	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_simd
 
+# Flip-kernel validation + microbench (the "outflank" experiment).
+bench-flips:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_flips
+
+# Exact endgame solver (--depth full) timing by empty count.
+bench-solve:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_solve
+
 # Record a perf profile of the full depth-8 game.
 profile:
 	RUSTFLAGS="$(RFLAGS)" cargo build --profile profiling --example profile_game

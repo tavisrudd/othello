@@ -19,6 +19,9 @@ const ORDER_MIN_DEPTH: i32 = 4;
 /// Initial aspiration half-window (heuristic units). Iterative-deepening values
 /// move little between plies, so a tight window prunes hard; misses widen it.
 const ASP_DELTA: i32 = 16;
+/// Mobility-order the exact endgame solver only with at least this many empties;
+/// below it the subtree is tiny and the sort doesn't pay.
+const ENDGAME_ORDER_MIN: i32 = 8;
 
 /// Fail-soft alpha-beta, black-centred. `order` enables mobility move ordering.
 #[allow(clippy::too_many_arguments)] // mirrors the packed-bitboard Cython signature
@@ -624,4 +627,237 @@ pub fn search_strong_move(
         }
     }
     (best, if to_move == 0 { v } else { -v })
+}
+
+// --------------------------------------------------------------------------- //
+// Exact endgame solver (the `--depth full` path): negamax to terminal, no
+// horizon heuristic. The TT is keyed by the *empty count* -- which is
+// path-independent -- so transpositions share fully, and that key also keeps
+// these entries disjoint from the depth-keyed PVS entries in a shared table.
+// --------------------------------------------------------------------------- //
+
+fn solve_pvs(
+    black: u64,
+    white: u64,
+    to_move: i32,
+    mut alpha: i32,
+    mut beta: i32,
+    tt: &mut TranspositionTable,
+    order: bool,
+) -> i32 {
+    let empties = (!(black | white)).count_ones() as i32;
+    let idx = tt.index(black, white, to_move, empties);
+    let a0 = alpha;
+
+    let e = tt.get(idx);
+    if e.used != 0
+        && e.black == black
+        && e.white == white
+        && e.to_move as i32 == to_move
+        && e.depth as i32 == empties
+    {
+        let value = e.value;
+        let flag = e.flag as i32;
+        if flag == EXACT {
+            return value;
+        } else if flag == LOWER {
+            if value > alpha {
+                alpha = value;
+            }
+        } else if value < beta {
+            beta = value;
+        }
+        if alpha >= beta {
+            return value;
+        }
+    }
+
+    let (player, opp) = if to_move == 0 {
+        (black, white)
+    } else {
+        (white, black)
+    };
+    let mut moves = legal_moves(player, opp);
+
+    if moves == 0 {
+        if legal_moves(opp, player) == 0 {
+            let diff = black.count_ones() as i32 - white.count_ones() as i32; // terminal
+            let value = if to_move == 0 { diff } else { -diff };
+            tt.store(idx, black, white, to_move, empties, value, EXACT);
+            return value;
+        }
+        let value = -solve_pvs(black, white, to_move ^ 1, -beta, -alpha, tt, order); // pass
+        let flag = if value <= a0 {
+            UPPER
+        } else if value >= beta {
+            LOWER
+        } else {
+            EXACT
+        };
+        tt.store(idx, black, white, to_move, empties, value, flag);
+        return value;
+    }
+
+    let ordering = order && empties >= ENDGAME_ORDER_MIN;
+    let mut value = NEG;
+    let mut best = 0u64;
+
+    if ordering {
+        let mut cb = [0u64; 64];
+        let mut cw = [0u64; 64];
+        let mut cm = [0u64; 64];
+        let mut ck = [0i32; 64];
+        let mut n = 0usize;
+        while moves != 0 {
+            let m = moves & moves.wrapping_neg();
+            moves ^= m;
+            let fl = flips_for_move(m, player, opp);
+            let (nb, nw) = if to_move == 0 {
+                (black | m | fl, white & !fl)
+            } else {
+                (black & !fl, white | m | fl)
+            };
+            cb[n] = nb;
+            cw[n] = nw;
+            cm[n] = m;
+            ck[n] = if to_move == 0 {
+                legal_moves(nw, nb).count_ones() as i32
+            } else {
+                legal_moves(nb, nw).count_ones() as i32
+            };
+            n += 1;
+        }
+        if n > 1 {
+            for i in 1..n {
+                let (ckey, bb, ww, mm) = (ck[i], cb[i], cw[i], cm[i]);
+                let mut j = i;
+                while j > 0 && ck[j - 1] > ckey {
+                    ck[j] = ck[j - 1];
+                    cb[j] = cb[j - 1];
+                    cw[j] = cw[j - 1];
+                    cm[j] = cm[j - 1];
+                    j -= 1;
+                }
+                ck[j] = ckey;
+                cb[j] = bb;
+                cw[j] = ww;
+                cm[j] = mm;
+            }
+        }
+        let hint = tt.hint_get(tt.pos_index(black, white, to_move));
+        if hint != 0 {
+            for i in 0..n {
+                if cm[i] == hint {
+                    if i != 0 {
+                        let (nb, nw, mm) = (cb[i], cw[i], cm[i]);
+                        let mut j = i;
+                        while j > 0 {
+                            cb[j] = cb[j - 1];
+                            cw[j] = cw[j - 1];
+                            cm[j] = cm[j - 1];
+                            j -= 1;
+                        }
+                        cb[0] = nb;
+                        cw[0] = nw;
+                        cm[0] = mm;
+                    }
+                    break;
+                }
+            }
+        }
+        best = cm[0];
+        for i in 0..n {
+            let v = if i == 0 {
+                -solve_pvs(cb[i], cw[i], to_move ^ 1, -beta, -alpha, tt, order)
+            } else {
+                let scout = -solve_pvs(cb[i], cw[i], to_move ^ 1, -alpha - 1, -alpha, tt, order);
+                if alpha < scout && scout < beta {
+                    -solve_pvs(cb[i], cw[i], to_move ^ 1, -beta, -alpha, tt, order)
+                } else {
+                    scout
+                }
+            };
+            if v > value {
+                value = v;
+                best = cm[i];
+            }
+            if v > alpha {
+                alpha = v;
+            }
+            if alpha >= beta {
+                break;
+            }
+        }
+    } else {
+        let hint = tt.hint_get(tt.pos_index(black, white, to_move));
+        let hint_legal = hint != 0 && moves & hint != 0;
+        let mut remaining = if hint_legal { moves & !hint } else { moves };
+        let mut first = true;
+        loop {
+            let m = if first && hint_legal {
+                hint
+            } else if remaining != 0 {
+                let lsb = remaining & remaining.wrapping_neg();
+                remaining ^= lsb;
+                lsb
+            } else {
+                break;
+            };
+            let fl = flips_for_move(m, player, opp);
+            let (nb, nw) = if to_move == 0 {
+                (black | m | fl, white & !fl)
+            } else {
+                (black & !fl, white | m | fl)
+            };
+            let v = if first {
+                -solve_pvs(nb, nw, to_move ^ 1, -beta, -alpha, tt, order)
+            } else {
+                let scout = -solve_pvs(nb, nw, to_move ^ 1, -alpha - 1, -alpha, tt, order);
+                if alpha < scout && scout < beta {
+                    -solve_pvs(nb, nw, to_move ^ 1, -beta, -alpha, tt, order)
+                } else {
+                    scout
+                }
+            };
+            if first || v > value {
+                value = v;
+                best = m;
+            }
+            if v > alpha {
+                alpha = v;
+            }
+            first = false;
+            if alpha >= beta {
+                break;
+            }
+        }
+    }
+
+    let flag = if value <= a0 {
+        UPPER
+    } else if value >= beta {
+        LOWER
+    } else {
+        EXACT
+    };
+    let idx = tt.index(black, white, to_move, empties);
+    tt.store(idx, black, white, to_move, empties, value, flag);
+    tt.hint_set(tt.pos_index(black, white, to_move), best);
+    value
+}
+
+/// Exact black-centred value to game end -- the `--depth full` solver.
+pub fn solve(
+    black: u64,
+    white: u64,
+    to_move: i32,
+    tt: &mut TranspositionTable,
+    order: bool,
+) -> i32 {
+    let v = solve_pvs(black, white, to_move, NEG, POS, tt, order);
+    if to_move == 0 {
+        v
+    } else {
+        -v
+    }
 }
