@@ -57,7 +57,11 @@ enum Cmd {
     Solve {
         #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
         n: u32,
-        /// Lineage step to solve with (simplest → fastest).
+        /// Solver to use (`parallel`, the default, is the fastest).
+        ///
+        /// `naive`→`memo`→`symmetry`→`parallel` is a speed ladder, each step
+        /// adding one idea; `nimber` (the full Sprague-Grundy value) and `pn`
+        /// (df-pn) are heavier, special-purpose solvers, *not* faster.
         #[arg(default_value = "parallel", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
         solver: String,
     },
@@ -88,6 +92,11 @@ enum Cmd {
     SelfPlay {
         #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
         n: u32,
+        /// Engine to search even boards with (odd boards use the O(1) mirror
+        /// strategy regardless). All engines play the same optimal line; this
+        /// only changes the search — handy to watch or time the lineage steps.
+        #[arg(long, default_value = "parallel", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
+        engine: String,
     },
     /// Play against the engine as player 1 (first) or 2 (second).
     Play {
@@ -112,7 +121,7 @@ fn main() {
             exact,
             hll_p,
         } => count_mode(&Queens::new(n), parallel, exact, hll_p),
-        Cmd::SelfPlay { n } => self_play(&Queens::new(n)),
+        Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
     }
 }
@@ -324,13 +333,16 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
     println!("  elapsed: {elapsed:.3}s");
 }
 
-fn self_play(q: &Queens) {
-    let solver = make_solver("parallel", tt_bits(q.n)).unwrap();
+fn self_play(q: &Queens, engine: &str) {
+    let solver = make_solver(engine, tt_bits(q.n)).unwrap();
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
     let mut ply = 0u32;
     let mut last = None;
-    println!("Optimal self-play on the {n}×{n} board:\n", n = q.n);
+    println!(
+        "Optimal self-play on the {n}×{n} board (engine: {engine}):\n",
+        n = q.n,
+    );
     render(q, queens, blocked);
     while !q.no_moves(blocked) {
         let (sq, win) = engine_move(q, blocked, ply, last, solver.as_ref());
