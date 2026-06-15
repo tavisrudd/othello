@@ -168,12 +168,22 @@ full solve of Othello used CPU clusters, not GPUs, for exactly this reason.)
 
 ## Parallelism
 
-`Strong::scores` is root-parallel: each legal move's child is an independent
-full-window search, so values are exact and order-independent. Workers each own a
-private, preallocated, L2-sized TT (no shared state, no lock). Scaling on the
-exact-scores game: ~275 ms (1 thread) → ~112 ms (8) → ~90 ms (16); it tapers past
-8 (shared-L3 pressure, bounded by the small per-worker tables). `best_move` stays
-a single rooted search — for sub-ms searches, sibling pruning beats fan-out.
+Only the **finite-depth `scores`** path is parallel. It is root-parallel: each
+legal move's child is an independent full-window search, so values are exact and
+independent of evaluation order. Workers each own a private, preallocated,
+L2-sized TT (no shared state, no lock) and **claim children dynamically** from a
+shared atomic counter, reusing their table across the children they claim, then
+scatter results back into input order (so `best_move`'s first-among-ties tie-break
+is unchanged). Static chunking was the original scheme but left cores idle when
+the child count didn't divide the worker count — 10 children across 8 workers gave
+`ceil = 2` → only 5 chunks, 3 idle. Dynamic claiming keeps every worker busy and
+balances uneven per-child cost: it lifted the default 8-thread `scores` 1.4–1.6×
+at depth 10–12, so `t=8` now matches `t=16` (only ~10 root children to share).
+Exact-scores game: ~277 ms (1 thread) → ~108 ms (4) → ~93 ms (8); it tapers past 8
+(shared-L3 pressure and few root children to fan out). `best_move` (finite depth),
+`value`, and the exact full solve (`--depth full`, a per-child loop that *shares*
+one big TT for cross-child transposition reuse) all stay sequential — for sub-ms
+or transposition-rich searches, sibling pruning / shared-TT reuse beats fan-out.
 
 If we ever parallelize a *single* deep search, the literature points to **Lazy
 SMP + a lockless (Hyatt XOR) TT**, not YBWC — but only once a single search is

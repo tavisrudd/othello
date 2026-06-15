@@ -14,6 +14,7 @@
 
 use std::collections::HashMap;
 use std::hash::{BuildHasherDefault, Hasher};
+use std::sync::atomic::{AtomicUsize, Ordering};
 
 use rayon::prelude::*;
 
@@ -489,24 +490,44 @@ impl Engine for Strong {
             Some(cd) => cd,
         };
 
+        // Dynamic work-stealing across the preallocated per-worker TTs: each
+        // worker atomically claims the next child and reuses its own table over
+        // the children it claims. Static chunking left workers idle when the
+        // child count didn't divide the worker count (10 children, 8 workers ->
+        // ceil = 2 -> only 5 chunks, 3 cores idle); claiming by index keeps every
+        // worker busy and balances uneven per-child cost. Results are scattered
+        // back into input order so best_by_side's first-among-ties tie-break is
+        // unchanged.
         let want = children.len().min(self.threads).max(1);
         let order = self.order;
-        let chunk = children.len().div_ceil(want);
-        let partials: Vec<MoveScores> = self.pool[..want]
+        let n = children.len();
+        let next = AtomicUsize::new(0);
+        let partials: Vec<Vec<(usize, Move, Score)>> = self.pool[..want]
             .par_iter_mut()
-            .zip(children.par_chunks(chunk))
-            .map(|(tt, group)| {
-                let mut v = MoveScores::with_capacity(group.len());
-                for &(m, c) in group {
-                    v.push((
+            .map(|tt| {
+                let mut local = Vec::new();
+                loop {
+                    let i = next.fetch_add(1, Ordering::Relaxed);
+                    if i >= n {
+                        break;
+                    }
+                    let (m, c) = children[i];
+                    local.push((
+                        i,
                         m,
                         search_strong(c.black, c.white, c.to_move as i32, cd, tt, order),
                     ));
                 }
-                v
+                local
             })
             .collect();
-        Ok(partials.concat())
+        let mut out: MoveScores = vec![(PASS, 0); n];
+        for part in partials {
+            for (i, m, s) in part {
+                out[i] = (m, s);
+            }
+        }
+        Ok(out)
     }
     fn reset(&mut self) {
         self.tt.clear();
