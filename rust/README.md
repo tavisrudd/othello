@@ -275,10 +275,16 @@ more than it saved; now `symmetry` is **faster** in wall-clock too (0.055 s vs
 ### Scaling the even boards (the Othello playbook)
 
 - **A fixed-size transposition table** (`QueensTt`) instead of an unbounded map:
-  a flat, sharded, open-addressing array (full-key compare, so a collision is a
-  miss → recompute, never a wrong answer), exactly like `tt.rs`. **Memory is a
-  hard cap** (`2^bits` slots; `QUEENS_TT_BITS` to tune), not something that grows
-  with the search — 14×14 solves in a fixed 5.4 GB instead of an unbounded `HashMap`.
+  a flat, sharded, open-addressing array. Each slot is a compact **8 bytes** — a
+  used bit, the value, and a **55-bit fingerprint** of the canonical key rather
+  than the full 256-bit key (Chunk 2). The slot index already pins most of the
+  routing hash, so an *independent* fingerprint makes a wrong "hit" a ~`2⁻⁵⁵`
+  event per colliding probe — negligible across even a `10¹¹`-node search, with
+  the verdict cross-checked against the known result — while a fingerprint
+  *mismatch* is still just a miss that recomputes. **Memory is a hard cap**
+  (`2^bits` slots; `QUEENS_TT_BITS` to tune), not something that grows with the
+  search — 14×14 solves in a fixed ~1.1 GB (5× less than the old full-key slot)
+  instead of an unbounded `HashMap`.
 - **Root parallelism with a Young-Brothers-Wait guard.** The symmetry-distinct
   first moves fan out across rayon workers sharing the table. But a naïve
   `par_iter().any()` *regresses* first-player wins badly (~40× on 13×13): workers
@@ -296,8 +302,9 @@ of reach of a single-box transposition table here: the search must retain its wh
 — a HyperLogLog (lock-free, ~0.4% error) folds in every canonical key the search
 visits, with an exact hash set to validate it on the small boards. The distinct
 count climbs **94k → 1.07M → 49.3M** at n=10/12/14, *accelerating* (11× then 46× per
-two-step), which extrapolates to **billions** at n=16 — far past what a full-key
-table (40 B/slot) can hold in tens of GB. (The familiar "53M at n=14" is the *node*
+two-step), which extrapolates to **billions** at n=16 — far past what even a
+compact 8 B/slot fingerprint table can hold in tens of GB. (The familiar "53M at
+n=14" is the *node*
 count; eviction re-expansion inflates it ~8 % above the 49.3M distinct truth.) So
 n=16 needs a fundamentally denser encoding of the solved set — the open frontier.
 

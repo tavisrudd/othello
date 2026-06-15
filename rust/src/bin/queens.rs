@@ -55,12 +55,13 @@ const DISTINCT_POSITIONS: [u64; 17] = [
     9_200_000_000, // n=16 (extrapolated; exceeds any single-box table)
 ];
 
-/// Upper bound on the transposition-table size: `2^28` slots ≈ 10.7 GB. The n=16
-/// working set dwarfs any single-box table (Chunk 1), so its table is pinned here
-/// and thrashes; raise it with `QUEENS_TT_BITS` if you have the RAM.
-const MAX_TT_BITS: u32 = 28;
+/// Upper bound on the transposition-table size: `2^31` slots ≈ 17 GB at the
+/// Chunk-2 compact 8-byte slot (the dev box has 26 GB). The n=16 working set
+/// (~9.2e9) dwarfs even that, so its table is pinned here and thrashes; raise it
+/// with `QUEENS_TT_BITS` if you have the RAM.
+const MAX_TT_BITS: u32 = 31;
 
-/// Transposition-table size in bits (`2^bits` slots ≈ `2^bits × 40` bytes), sized
+/// Transposition-table size in bits (`2^bits` slots ≈ `2^bits × 8` bytes), sized
 /// from the measured working set [`DISTINCT_POSITIONS`] to keep the direct-mapped
 /// table lightly loaded (low eviction ⇒ low re-expansion ≈ 1.0×): generous
 /// headroom for small boards (RAM is cheap there), little for the large

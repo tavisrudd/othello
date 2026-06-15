@@ -963,7 +963,7 @@ impl Hll {
         }
     }
 
-    /// Fold a board key in, hashed with a mixer independent of [`QueensTt::hash`]
+    /// Fold a board key in, hashed with a mixer independent of [`QueensTt::hash128`]
     /// (so the estimate is not coupled to the table's slot mapping).
     #[inline]
     pub fn add(&self, key: Bits) {
@@ -997,8 +997,8 @@ impl Hll {
     }
 
     /// A high-avalanche 64-bit hash of the key (FNV-1a mix + splitmix64 finalizer),
-    /// deliberately distinct from [`QueensTt::hash`] so estimator accuracy does not
-    /// depend on the table's hashing.
+    /// deliberately distinct from [`QueensTt::hash128`] so estimator accuracy does
+    /// not depend on the table's hashing.
     #[inline]
     fn hash(key: Bits) -> u64 {
         let mut h = 0xcbf2_9ce4_8422_2325u64; // FNV-1a offset basis
@@ -1034,19 +1034,61 @@ pub struct QueensTt {
     counter: Option<Counter>,
 }
 
+/// A compact 8-byte transposition slot (Chunk 2): one `u64` packing a used flag
+/// (bit 0), the 8-bit value (bits 1..9 -- the win/loss bit for the search, or a
+/// small Sprague-Grundy nimber for [`Nimber`]), and a 55-bit fingerprint of the
+/// canonical key (bits 9..64).
+///
+/// We store a *fingerprint* of the key, not the full 256-bit key. The slot index
+/// already pins ~`bits` bits of the routing hash, and the fingerprint comes from
+/// an *independent* 64-bit hash half (see [`QueensTt::hash128`]), so a wrong "hit"
+/// -- a different key landing in the same slot *and* matching the fingerprint --
+/// has probability ~`2^-55` per colliding probe: negligible even across a
+/// Jenrich-scale (~`10^11`) search, and the final verdict is cross-checked against
+/// the known result. This shrinks the slot 40 B -> 8 B (5x more entries per byte
+/// of RAM) -- the Chunk-2 dynamic-tier win -- while keeping the canonical
+/// `available`-mask key, so every transposition still merges exactly as before (no
+/// lost merges, unlike re-keying on the queen set). The old strict "collision =
+/// miss, never wrong" weakens to "wrong with vanishing probability"; a fingerprint
+/// *mismatch* is still just a miss that re-searches.
 #[derive(Clone, Copy, Default)]
-struct Slot {
-    key: [u64; WORDS],
-    val: u8,
-    used: u8,
+struct Slot(u64);
+
+impl Slot {
+    /// Fingerprint width: `64 - 1 (used) - 8 (val)` bits.
+    const FP_BITS: u32 = 55;
+    const FP_SHIFT: u32 = 9;
+    const VAL_SHIFT: u32 = 1;
+
+    #[inline]
+    const fn fp_mask() -> u64 {
+        (1u64 << Self::FP_BITS) - 1
+    }
+    /// Pack `val` and the low `FP_BITS` of `fp` into an occupied slot.
+    #[inline]
+    fn pack(fp: u64, val: u8) -> Slot {
+        Slot(1 | ((val as u64) << Self::VAL_SHIFT) | ((fp & Self::fp_mask()) << Self::FP_SHIFT))
+    }
+    #[inline]
+    fn used(self) -> bool {
+        self.0 & 1 != 0
+    }
+    #[inline]
+    fn val(self) -> u8 {
+        (self.0 >> Self::VAL_SHIFT) as u8
+    }
+    #[inline]
+    fn fp(self) -> u64 {
+        self.0 >> Self::FP_SHIFT
+    }
 }
 
 /// 1024 shards: enough that rayon workers rarely collide on the same lock.
 const SHARD_BITS: u32 = 10;
 
 impl QueensTt {
-    /// A table of `2^bits` slots total (each ~40 bytes). `bits` is the memory
-    /// cap knob; clamped so there is at least one slot per shard.
+    /// A table of `2^bits` slots total (each 8 bytes; see [`Slot`]). `bits` is the
+    /// memory cap knob; clamped so there is at least one slot per shard.
     pub fn new(bits: u32) -> Self {
         let bits = bits.max(SHARD_BITS);
         let shards = 1usize << SHARD_BITS;
@@ -1096,13 +1138,7 @@ impl QueensTt {
     pub fn fill(&self) -> u64 {
         self.shards
             .iter()
-            .map(|s| {
-                s.lock()
-                    .unwrap()
-                    .iter()
-                    .filter(|slot| slot.used != 0)
-                    .count() as u64
-            })
+            .map(|s| s.lock().unwrap().iter().filter(|slot| slot.used()).count() as u64)
             .sum()
     }
 
@@ -1124,18 +1160,26 @@ impl QueensTt {
         self.nodes.fetch_add(1, Ordering::Relaxed);
     }
 
+    /// A 128-bit hash of the key as two independent `u64` halves: `route` drives
+    /// the shard (low bits) and slot index (high bits, disjoint); `fp` is the
+    /// fingerprint stored in the slot. The halves use different seeds and mixing
+    /// constants so the fingerprint actually discriminates keys that share a slot
+    /// (rather than re-deriving bits the index already pinned). `route` reproduces
+    /// the legacy hash exactly, preserving the routing distribution.
     #[inline]
-    fn hash(key: Bits) -> u64 {
-        // Mix the words; low bits pick the shard, high bits the slot (disjoint).
-        let mut h = 0u64;
+    fn hash128(key: Bits) -> (u64, u64) {
+        let mut route = 0u64;
+        let mut fp = 0x2545_F491_4F6C_DD1Du64;
         for &w in &key.0 {
-            h = (h ^ w).wrapping_mul(0x9E37_79B9_7F4A_7C15);
-            h ^= h >> 29;
+            route = (route ^ w).wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            route ^= route >> 29;
+            fp = (fp ^ w).wrapping_mul(0xFF51_AFD7_ED55_8CCD);
+            fp ^= fp >> 32;
         }
-        h
+        (route, fp)
     }
 
-    /// The stored value for `key`, if present.
+    /// The stored value for `key`, if a slot's fingerprint matches.
     #[inline]
     pub fn get(&self, key: Bits) -> Option<u8> {
         // Counting hook: every node the search enters is looked up here exactly
@@ -1145,22 +1189,22 @@ impl QueensTt {
         if let Some(c) = &self.counter {
             c.feed(key);
         }
-        let h = Self::hash(key);
-        let idx = ((h >> 32) & self.slot_mask) as usize;
-        let s = self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx];
-        (s.used != 0 && s.key == key.0).then_some(s.val)
+        let (route, fp) = Self::hash128(key);
+        let idx = ((route >> 32) & self.slot_mask) as usize;
+        let s = self.shards[(route & self.shard_mask) as usize]
+            .lock()
+            .unwrap()[idx];
+        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
 
     /// Store `val` for `key` (replace-always on collision).
     #[inline]
     pub fn put(&self, key: Bits, val: u8) {
-        let h = Self::hash(key);
-        let idx = ((h >> 32) & self.slot_mask) as usize;
-        self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx] = Slot {
-            key: key.0,
-            val,
-            used: 1,
-        };
+        let (route, fp) = Self::hash128(key);
+        let idx = ((route >> 32) & self.slot_mask) as usize;
+        self.shards[(route & self.shard_mask) as usize]
+            .lock()
+            .unwrap()[idx] = Slot::pack(fp, val);
     }
 }
 
@@ -1234,7 +1278,7 @@ impl PnTt {
 
     #[inline]
     fn get(&self, key: Bits) -> Option<(u32, u32)> {
-        let h = QueensTt::hash(key);
+        let h = QueensTt::hash128(key).0; // PnTt keeps the full key, so it needs only the routing half
         let idx = ((h >> 32) & self.slot_mask) as usize;
         let s = self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx];
         (s.used != 0 && s.key == key.0).then_some((s.phi, s.delta))
@@ -1242,7 +1286,7 @@ impl PnTt {
 
     #[inline]
     fn put(&self, key: Bits, phi: u32, delta: u32) {
-        let h = QueensTt::hash(key);
+        let h = QueensTt::hash128(key).0;
         let idx = ((h >> 32) & self.slot_mask) as usize;
         self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx] = PnSlot {
             key: key.0,
@@ -1464,5 +1508,44 @@ mod tests {
                 "symmetry {t} must canonicalise the same"
             );
         }
+    }
+
+    /// The Chunk-2 compact slot stays 8 bytes, and a stored value round-trips
+    /// through the fingerprint: `put` then `get` returns it, and a key never
+    /// inserted misses. Guards against accidental slot bloat or a broken
+    /// fingerprint (a real false hit at this tiny load is a ~`2^-55` event).
+    #[test]
+    fn fingerprint_slot_is_compact_and_round_trips() {
+        assert_eq!(
+            std::mem::size_of::<Slot>(),
+            8,
+            "compact slot must stay 8 bytes"
+        );
+        let tt = QueensTt::new(16); // 65_536 slots: a handful of keys ⇒ no eviction
+        let q = Queens::new(12);
+        // A monotonically shrinking chain of legal placements: each `blocked` has
+        // strictly fewer available squares, so the canonical keys are all distinct.
+        let mut stored = Vec::new();
+        let mut blocked = Bits::ZERO;
+        for (i, &sq) in q.order.iter().enumerate() {
+            if q.is_available(blocked, sq) {
+                blocked = q.place(blocked, sq);
+                let (key, val) = (q.pos_key(blocked), (i % 17) as u8); // nimber-sized
+                tt.put(key, val);
+                stored.push((key, val));
+            }
+        }
+        assert!(
+            stored.len() >= 4,
+            "the chain should store several positions"
+        );
+        for &(key, val) in &stored {
+            assert_eq!(tt.get(key), Some(val), "stored value must round-trip");
+        }
+        assert_eq!(
+            tt.get(q.pos_key(Bits::ZERO)),
+            None,
+            "a key never inserted must miss"
+        );
     }
 }
