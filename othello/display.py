@@ -28,6 +28,9 @@ WHITE_MARK  = f"{WHITE_DOT_FG}⬤{RESET} "
 BLACK_LEGAL = f"{BLACK_FG}◌ {RESET}"
 WHITE_LEGAL = f"{WHITE_FG}◌ {RESET}"
 
+GREEN_FG = "\033[38;5;46m"
+LEGAL_DOT = f"{GREEN_FG}•{RESET} "
+
 RED_BG = "\033[48;5;52m"
 
 BLACK_LAST_MARK = f"{RED_BG}{BLACK_DOT_FG}⬤{RESET} "
@@ -41,11 +44,12 @@ def is_renderer(x: CellRenderer) -> TypeGuard[Callable[[int], str]]:
 type BitmapLayer = tuple[Bitmap, CellRenderer]
 
 
-def black_legal(sq: int) -> str:
-    return f"{BLACK_BG}{format_square(sq):<{CELL_WIDTH}}{RESET}"
-
-def white_legal(sq: int) -> str:
-    return f"{WHITE_BG}{format_square(sq):<{CELL_WIDTH}}{RESET}"
+# Rank/file legal-move indicators — replaced by LEGAL_DOT (green dot).
+# def black_legal(sq: int) -> str:
+#     return f"{BLACK_BG}{format_square(sq):<{CELL_WIDTH}}{RESET}"
+#
+# def white_legal(sq: int) -> str:
+#     return f"{WHITE_BG}{format_square(sq):<{CELL_WIDTH}}{RESET}"
 
 
 def last_move_renderer(board: Board) -> Callable[[int], str]:
@@ -69,10 +73,7 @@ def format_board(board: Board, show_valid_moves=True, last_move: Move | None = N
         (board.white, WHITE_MARK),
     ])
     if show_valid_moves:
-        layers.append((
-            board.actions(),
-            black_legal if board.to_move == BLACK else white_legal,
-        ))
+        layers.append((board.actions(), LEGAL_DOT))
     return _format_board(*layers)
 
 
