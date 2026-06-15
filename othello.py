@@ -226,15 +226,6 @@ class Board:
         return flips
     
 
-def validate_board(board: Board) -> bool:
-    return (
-        board.black >= 0
-        and board.white >= 0
-        and (board.black & board.white) == 0
-        and (board.black | board.white) <= FULL
-    )
-
-        
 ################################################################################
 ## Printers
 
@@ -248,10 +239,13 @@ WHITE_FG = "\033[97m"      # bright white
 BLACK_BG = "\033[97;100m"
 WHITE_BG = "\033[30;107m"
 
+BLACK_DOT_FG = "\033[38;5;240m"
+WHITE_DOT_FG = "\033[38;5;255m"
+
 EMPTY_CELL = "\033[2;38;5;240m·\033[0m "
 
-BLACK_MARK  = "\033[38;5;240m⬤\033[0m "
-WHITE_MARK  = "\033[38;5;255m⬤\033[0m "
+BLACK_MARK  = f"{BLACK_DOT_FG}⬤{RESET} "
+WHITE_MARK  = f"{WHITE_DOT_FG}⬤{RESET} "
 
 BLACK_LEGAL = f"{BLACK_FG}◌ {RESET}"
 WHITE_LEGAL = f"{WHITE_FG}◌ {RESET}"
@@ -263,8 +257,8 @@ WHITE_LEGAL = f"{WHITE_FG}◌ {RESET}"
 #RED_BG = "\033[41m"
 RED_BG = "\033[48;5;52m"
 
-BLACK_LAST_MARK = f"{RED_BG}\033[38;5;240m⬤{RESET} "
-WHITE_LAST_MARK = f"{RED_BG}\033[38;5;255m⬤{RESET} "
+BLACK_LAST_MARK = f"{RED_BG}{BLACK_DOT_FG}⬤{RESET} "
+WHITE_LAST_MARK = f"{RED_BG}{WHITE_DOT_FG}⬤{RESET} "
 
 type CellRenderer = str | Callable[[int], str]
 
@@ -426,7 +420,10 @@ def play_minimax_game(board: Board, depth: Depth = None) -> Board:
         scored = minimax_scores(board, cache, depth)
         
         for move, score in scored:
-            print(f"{move_name(move):>4} {score:+d}")
+            text = format_score(score)
+            if score > 0:                       # black-favouring -> black-dot colour
+                text = f"{BLACK_DOT_FG}{text}{RESET}"
+            print(f"{move_name(move):>4} {text}")
         
         best_move = _minimax_choice(board, scored)
         print(f"best: {move_name(best_move)}")
@@ -457,6 +454,15 @@ def player_name(player: Player) -> str:
 
 def move_name(move: Move) -> str:
     return "PASS" if move == PASS else format_move(move)
+
+def format_score(score: Score) -> str:
+    # Black-centered margin, sign kept, tagged by who it favours: B:+6 = black
+    # ahead by 6, W:-4 = white ahead by 4 (black-centered -4), T:0 = tie.
+    if score > 0:
+        return f"B:{score:+d}"
+    if score < 0:
+        return f"W:{score:+d}"
+    return "T:0"
 
 def winner(board: Board) -> Player | None:
     black = board.black.bit_count()

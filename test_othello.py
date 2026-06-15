@@ -13,6 +13,7 @@ import othello as o
 from othello import (
     Board, BLACK, WHITE, PASS,
     parse_square_name, format_square, square_to_move, move_to_square, format_move,
+    format_score,
     iter_moves, iter_actions, minimax_value, minimax_scores, minimax,
     init_early_game,
     init_near_terminal_game_black_win,
@@ -124,6 +125,13 @@ def test_move_square_roundtrip():
 def test_parse_square_name_rejects_garbage(bad):
     with pytest.raises(ValueError):
         parse_square_name(bad)
+
+
+@pytest.mark.parametrize("score,text", [
+    (6, "B:+6"), (1, "B:+1"), (-4, "W:-4"), (-40, "W:-40"), (0, "T:0"),
+])
+def test_format_score_winner_prefix(score, text):
+    assert format_score(score) == text
 
 
 # --------------------------------------------------------------------------- #
