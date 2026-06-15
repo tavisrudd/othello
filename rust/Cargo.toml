@@ -12,6 +12,11 @@ path = "src/lib.rs"
 name = "othello"
 path = "src/main.rs"
 
+# The adversarial Non-Attacking Queens game (Noon & Van Brummelen, 2006).
+[[bin]]
+name = "queens"
+path = "src/bin/queens.rs"
+
 # Ultra-fast release build: whole-program inlining + single codegen unit.
 # `target-cpu=native` (see .cargo/config.toml) turns on POPCNT/BMI for the hot
 # bit primitives (count_ones, blsi, tzcnt).

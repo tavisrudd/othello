@@ -186,3 +186,25 @@ $ make pgo-release      # profile-guided build (needs llvm-tools-preview)
 ```
 
 `OTHELLO_THREADS=N` overrides the root-parallel fan-out width at runtime.
+
+## Bonus: Non-Attacking Queens (`queens`)
+
+A second binary in the crate: the adversarial **Non-Attacking Queens** game
+(Noon & Van Brummelen, 2006). Two players alternately place a queen so no two
+attack each other (no shared row, column, or diagonal); whoever cannot move
+loses (normal play). It is an *impartial* combinatorial game — a queen is
+colourless, so the legal moves depend only on the position, captured entirely by
+the **blocked mask** (occupied ∪ attacked). Placing a queen always adds the same
+attack set, so the whole game collapses to a negamax over a single `u64` with
+transpositions merged by memoising on the mask; the engine plays perfectly (win
+as fast as possible, resist as long as possible).
+
+```console
+$ cargo run --release --bin queens -- solve 8     # who wins the empty n×n board
+$ cargo run --release --bin queens -- self  6     # watch the optimal line
+$ cargo run --release --bin queens -- play  8 1   # play the engine as player 1
+```
+
+It reproduces the paper's headline: on the 8×8 board the **first player wins**
+(its optimal line lasts 7 moves — odd, so the first player makes the last
+placement). Squares are named file+rank (`d1`).
