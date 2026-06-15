@@ -326,6 +326,46 @@ fn value_matches_nocache_endgame_all_depths() {
 }
 
 #[test]
+fn exact_solve_matches_minimax_oracle_near_terminal() {
+    // Guards the specialised leaf solver (`solve_low`/`solve_1`, gated by
+    // EMPTY_SOLVE_MAX): the full solve (`value(_, None)` -> `solve`) must stay
+    // byte-for-byte exact. Compare against the independent no-cache minimax
+    // oracle on a broad spread of real near-terminal positions, bucketed by empty
+    // count so the leaf solver, its pass/terminal branches, and the
+    // solve_pvs->solve_low handoff are all exercised. The oracle has no
+    // alpha-beta, so cap the empties to keep it tractable.
+    let mut want = [0usize; 10]; // want[ec] = positions to check at empty-count ec
+    for w in want.iter_mut().take(8).skip(1) {
+        *w = 8; // ec 1..=7: cheap oracle, sample widely
+    }
+    want[8] = 5;
+    want[9] = 3;
+    let mut got = [0usize; 10];
+    let mut checks = 0;
+
+    random_positions(200, 0x5EED_C0DE, |b| {
+        if b.is_terminal() {
+            return;
+        }
+        let ec = (!(b.black | b.white)).count_ones() as usize;
+        if ec >= want.len() || got[ec] >= want[ec] {
+            return;
+        }
+        got[ec] += 1;
+        checks += 1;
+        assert_eq!(
+            Strong::new().value(b, None),
+            nocache_value(b, None),
+            "exact solve != minimax oracle at {ec} empties on {b:?}"
+        );
+    });
+
+    // Must actually reach the leaf-solver region and span the handoff at 7->8.
+    assert!(got[7] >= 4 && got[8] >= 4, "thin coverage: {got:?}");
+    assert!(checks > 30, "only {checks} near-terminal checks");
+}
+
+#[test]
 fn value_matches_nocache_midgame_finite_depths() {
     let b = init_early_game().play("D3").unwrap().play("C3").unwrap();
     for depth in [Some(0), Some(1), Some(2), Some(3), Some(4)] {

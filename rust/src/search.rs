@@ -23,6 +23,14 @@ const ASP_DELTA: i32 = 16;
 /// Mobility-order the exact endgame solver only with at least this many empties;
 /// below it the subtree is tiny and the sort doesn't pay.
 const ENDGAME_ORDER_MIN: i32 = 8;
+/// At or below this many empties the exact solver drops the TT and the hash-move
+/// hint and switches to a specialised leaf solver (`solve_low`): an explicit
+/// empty-square scan instead of Kogge-Stone move-gen, with a `solve_1` base case.
+/// Near the leaves the subtree is tiny and rarely transposes, so the one
+/// random-access TT probe per node -- the solver's only memory access -- costs
+/// more than the recompute it saves. Kept just below `ENDGAME_ORDER_MIN`: it
+/// replaces exactly the unordered, hint-only region of `solve_pvs`.
+const EMPTY_SOLVE_MAX: i32 = 7;
 
 /// Fail-soft alpha-beta, black-centred. `order` enables mobility move ordering.
 #[allow(clippy::too_many_arguments)] // mirrors the packed-bitboard Cython signature
@@ -674,6 +682,9 @@ fn solve_pvs(
     order: bool,
 ) -> i32 {
     let empties = (!(black | white)).count_ones() as i32;
+    if empties <= EMPTY_SOLVE_MAX {
+        return solve_low(black, white, to_move, alpha, beta);
+    }
     let idx = tt.index(black, white, to_move, empties);
     let a0 = alpha;
 
@@ -868,10 +879,108 @@ fn solve_pvs(
     } else {
         EXACT
     };
-    let idx = tt.index(black, white, to_move, empties);
-    tt.store(idx, black, white, to_move, empties, value, flag);
+    tt.store(idx, black, white, to_move, empties, value, flag); // idx from entry, position unchanged
     tt.hint_set(tt.pos_index(black, white, to_move), best);
     value
+}
+
+// --------------------------------------------------------------------------- //
+// Specialised leaf solver for the last few empties (see `EMPTY_SOLVE_MAX`).
+// No TT, no hash-move hint: an explicit empty-square scan (flips are computed
+// for the search anyway, so testing each empty fuses move-gen with make-move)
+// bottoming out in `solve_1`. Plain negamax alpha-beta -- value-identical to
+// `solve_pvs`; only the node shape and per-node overhead differ.
+// --------------------------------------------------------------------------- //
+
+/// Exact value with a single empty square `sq` left. The side to move plays it
+/// if it can (filling the board -> terminal); otherwise the opponent plays it
+/// (the side to move passes); if neither can flip into it, the position is
+/// already terminal with one square left unfilled. Side-to-move (negamax) value.
+#[inline]
+fn solve_1(black: u64, white: u64, to_move: i32, sq: u64) -> i32 {
+    let (player, opp) = if to_move == 0 {
+        (black, white)
+    } else {
+        (white, black)
+    };
+    let fl = flips_for_move(sq, player, opp);
+    let diff = if fl != 0 {
+        let (nb, nw) = if to_move == 0 {
+            (black | sq | fl, white & !fl)
+        } else {
+            (black & !fl, white | sq | fl)
+        };
+        nb.count_ones() as i32 - nw.count_ones() as i32
+    } else {
+        let fl2 = flips_for_move(sq, opp, player);
+        if fl2 != 0 {
+            let (nb, nw) = if to_move == 0 {
+                (black & !fl2, white | sq | fl2)
+            } else {
+                (black | sq | fl2, white & !fl2)
+            };
+            nb.count_ones() as i32 - nw.count_ones() as i32
+        } else {
+            black.count_ones() as i32 - white.count_ones() as i32
+        }
+    };
+    if to_move == 0 {
+        diff
+    } else {
+        -diff
+    }
+}
+
+/// Exact endgame value near the leaves: TT-free negamax over the explicit list of
+/// empty squares, bottoming out in `solve_1`. Value-identical to `solve_pvs`.
+fn solve_low(black: u64, white: u64, to_move: i32, mut alpha: i32, beta: i32) -> i32 {
+    let empty = !(black | white);
+    if empty.count_ones() == 1 {
+        return solve_1(black, white, to_move, empty);
+    }
+
+    let (player, opp) = if to_move == 0 {
+        (black, white)
+    } else {
+        (white, black)
+    };
+
+    let mut value = NEG;
+    let mut e = empty;
+    while e != 0 {
+        let m = e & e.wrapping_neg();
+        e ^= m;
+        let fl = flips_for_move(m, player, opp);
+        if fl == 0 {
+            continue; // empty square but no disc flipped -> not a legal move
+        }
+        let (nb, nw) = if to_move == 0 {
+            (black | m | fl, white & !fl)
+        } else {
+            (black & !fl, white | m | fl)
+        };
+        let v = -solve_low(nb, nw, to_move ^ 1, -beta, -alpha);
+        if v > value {
+            value = v;
+        }
+        if v > alpha {
+            alpha = v;
+        }
+        if alpha >= beta {
+            return value;
+        }
+    }
+
+    // Disc differentials are in [-64, 64], so `value` is still NEG iff no legal
+    // move was found -- then it is a pass, or terminal if the opponent is stuck.
+    if value != NEG {
+        return value;
+    }
+    if legal_moves(opp, player) == 0 {
+        let diff = black.count_ones() as i32 - white.count_ones() as i32;
+        return if to_move == 0 { diff } else { -diff };
+    }
+    -solve_low(black, white, to_move ^ 1, -beta, -alpha)
 }
 
 /// Exact black-centred value to game end -- the `--depth full` solver.

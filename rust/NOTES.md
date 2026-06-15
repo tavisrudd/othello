@@ -184,11 +184,32 @@ big enough (deep endgame), which the depth-8 game is not.
 terminal, no horizon heuristic, with the TT keyed by **empty count** (which is
 path-independent, so transpositions share fully and the key keeps solve entries
 disjoint from depth-keyed PVS entries in the shared table). Exact endgame values
-are unchanged (6 / −40 / 4); it replaced the slow HashMap fallback. Timings
-(`make bench-solve`): 10 empties 0.5 ms, 14 ~19 ms, 16 ~78 ms, 18 ~1.3 s — the
-expected exponential, exact to the last disc. Still on the table: an explicit
-empty-square list, parity "fastest-first" ordering, `solve_1..4`, and
-stability-based cutoffs would push the tractable depth a few empties further.
+are unchanged (6 / −40 / 4); it replaced the slow HashMap fallback. The values
+are the expected exponential, exact to the last disc.
+
+**Leaf solver (done — value-preserving).** At or below `EMPTY_SOLVE_MAX` empties
+the solver drops the TT *and* the hash-move hint and switches to `solve_low`: an
+explicit empty-square scan (flips are computed for the search anyway, so testing
+each empty fuses move-gen with make-move) bottoming out in a `solve_1` base case.
+Near the leaves the subtree is tiny and rarely transposes, so the one
+random-access TT probe per node — the solver's *only* memory access — costs more
+than the recompute it saves. The threshold sits just below `ENDGAME_ORDER_MIN`,
+so it replaces exactly the unordered, hint-only region of `solve_pvs`; a sweep
+confirmed 7 as the sweet spot (≥10 leaves the TT-less region too large and loses
+the transposition reuse that matters higher up). Value-preserving: the new
+`exact_solve_matches_minimax_oracle_near_terminal` test cross-checks the full
+solve against the no-cache minimax oracle over a spread of bucketed near-terminal
+positions (the `solve_pvs`→`solve_low` handoff included). Timings
+(`make bench-solve`, before → after):
+
+| empties | before  | after   | speedup |
+|--------:|--------:|--------:|--------:|
+| 14      | ~18 ms  | ~9 ms   | 2.1×    |
+| 16      | ~79 ms  | ~30 ms  | 2.6×    |
+| 18      | ~1.30 s | ~0.46 s | 2.8×    |
+
+Still on the table: parity "fastest-first" ordering, unrolled `solve_2..4`, and
+stability-based cutoffs would push the tractable depth further.
 
 ## Strength (done — `strong+`, changes the value)
 
@@ -252,5 +273,6 @@ still has to evaluate.
 - **Pattern / n-tuple (or NNUE) evaluation** — the largest *strength* gain;
   needs a training pipeline (millions of labeled positions), a natural fit for
   the GPU/NPU. Would slot in as the `strong+` horizon eval.
-- **Endgame solver depth** — `solve_1..4` + parity + stability cutoffs to solve
-  a few more empties in tractable time.
+- **Endgame solver depth** — the TT-free leaf solver (`solve_low`/`solve_1`) is
+  in; parity "fastest-first" ordering, unrolled `solve_2..4`, and stability
+  cutoffs would solve a few more empties in tractable time.
