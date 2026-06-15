@@ -88,6 +88,54 @@ HLL is ~KB of memory, ~1–2% error. A dense register HLL (e.g. 2^14 registers) 
 few dozen lines. Feed it the 256-bit key's hash. **No correctness risk** (it's only
 instrumentation). Can run on n=12/14 in minutes.
 
+#### Chunk 1 — RESULT (DONE, 2026-06-15)
+
+Built the `count` CLI mode: a dense HyperLogLog (p=16 default, ~0.4% std err) plus
+an optional exact hash set, fed every canonical `pos_key` the search looks up (hook
+in `QueensTt::get`, so it transparently measures any solver's working set). Validated
+HLL vs exact on n=8/10/12 (+0.3–0.4%, within budget) and that the hook never changes
+a verdict (`counting_preserves_verdict_and_tracks_exact` test).
+
+**Measured distinct positions (parallel-HLL, second-player-win boards — like-for-like
+with n=16):**
+
+| n  | distinct (HLL) | node count   | ratio vs prev | note                          |
+|----|----------------|--------------|---------------|-------------------------------|
+| 10 |        94,339  |       94,590 |        —      | exact set agreed (94,097)     |
+| 12 |     1,070,913  |    1,069,063 |       11.4×   | exact set agreed (1,060,726)  |
+| 14 |    49,346,012  |   53,190,566 |       46.1×   | p=18; node count inflated ~8% |
+
+**Key correction:** the roadmap's "n=14 ≈ 53M distinct" was the *node* count; the
+true distinct working set is **≈ 49.3M** (eviction re-expansion inflates nodes ~8%).
+
+**Growth is accelerating** (ratio 11.4× → 46.1×; the per-step log-increment grows by
+a near-constant +1.40 second difference). Extrapolations to n=16:
+- **Model A (geometric, ratio frozen at 46×):** ≈ **2.3B** — a lower bound.
+- **Model B (constant 2nd-difference of log = quadratic-in-n log; the natural fit
+  for 3 points):** 14→16 ratio ≈ 187× → **≈ 9.2B** — the central estimate.
+- Upper tail (if the 2nd difference itself grows): ~2× central, ~18B.
+
+**Memory at 9.2B (central) on the 26 GB box:**
+
+| encoding                                   | footprint | fits 26 GB? |
+|--------------------------------------------|-----------|-------------|
+| 40 B slot (current)                        | 369 GB    | ❌          |
+| 16 B compact slot (Chunk 2A)               | 148 GB    | ❌          |
+| 8 B quotient/cuckoo (Chunk 2B)             | 74 GB     | ❌          |
+| ~1.25 B/pos BuRR + ribbon filter (Chunk 4) | ~11.5 GB  | ✅          |
+| ~0.14 B/pos BuRR value-only (1.1 bits)     | ~1.3 GB   | ✅          |
+
+**DECISION GATE → PROCEED, but the only single-box route is Chunk 4.** n=16 (~2.3–18B,
+central ~9.2B distinct) fits 26 GB *only* via the compressed-archive scheme (BuRR/ribbon
+at single-digit bits/position → single-digit-to-low-tens of GB, robust even at the upper
+tail). **Chunk 2's compact slot is necessary-but-insufficient on its own** (16 B × 9.2B =
+148 GB ≫ 26 GB) — it serves the *dynamic/in-flight* tier, not the full solved set. So the
+build order shifts: Chunk 2 (compact dynamic-tier slot) + Chunk 3 (two-tier replacement)
+are stepping stones; **Chunk 4 (LSM + BuRR-archived solved positions) is the load-bearing
+piece** for n=16. The bottleneck then moves from memory to compute time — as predicted.
+(n=16 itself is never run for this measurement — running it to completion *is* the open
+problem; the whole point of HLL is to size it without solving it.)
+
 ### Chunk 2 — pick the encoding based on Chunk 1's number
 
 Two slot-shrink options (current slot is 40 B; the *position's* real entropy is
@@ -179,13 +227,42 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
 ## Progress
 
 - [x] Lever 1: `pos_key` canonicalises `available` (committed `2ad7b97`, n=14 2.4×)
-- [ ] Chunk 1: HyperLogLog distinct-position counts for n=10/12/14 + n=16 extrapolation (DECISION GATE)
+- [x] Chunk 1: HLL `count` mode; distinct = 94k/1.07M/49.3M (n=10/12/14); n=16 ≈ **9.2B**
+      central (~2.3–18B). **GATE → PROCEED; single-box route is Chunk 4 only** (Chunk 2's
+      16 B slot ≈ 148 GB ≫ 26 GB; BuRR archive ≈ 11.5 GB fits).
 - [ ] Chunk 2: compact lossless queen-set key (16-byte slot) + `fastrange`; measure merge-loss
+      — now scoped as the **dynamic/in-flight tier**, not the full table (it can't hold ~9B)
 - [ ] Chunk 3: two-tier depth-preferred TT replacement
-- [ ] Chunk 4: (if n=16 fits) LSM-tree TT with BuRR-compressed solved-position layers → attempt n=16
+- [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
+      layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
 - [ ] Final: `make test` + `make clippy` green; n=16 verdict cross-checked vs Jenrich (second)
 
 ## Handoff Notes
+
+### Chunk 1 landed — distinct-position measurement + decision gate (2026-06-15)
+
+**Session**: 2026-06-15 (queens roadmap, session 2).
+**Completed**: Chunk 1. Added the `count` CLI mode (HyperLogLog p=4..=18 + optional
+exact hash set), wired non-invasively into `QueensTt::get` so it measures any
+solver's working set; two new tests (`hll_estimates_a_known_cardinality`,
+`counting_preserves_verdict_and_tracks_exact`). `make test`/`clippy`/`release` green.
+**Files**: `rust/src/queens.rs` (Hll/Counter/CountReport + `new_counting` on
+QueensTt/Tt/Parallel + `Solver::report`), `rust/src/bin/queens.rs` (`Count` subcommand,
+`count_mode`).
+**Headline numbers** (parallel-HLL, second-player boards): n=10 = 94.3k, n=12 = 1.07M,
+n=14 = **49.3M distinct** (not 53M — that was the inflated node count). Growth
+accelerating (11.4× → 46.1×). n=16 ≈ **9.2B** central (range ~2.3–18B).
+**Decision (the gate's whole purpose)**: **PROCEED to n=16, but only Chunk 4 fits one
+box.** A 16 B compact slot × 9.2B ≈ 148 GB ≫ 26 GB, so Chunk 2 alone is insufficient;
+the BuRR/ribbon archive (~1–1.5 B/pos all-in ⇒ ~11.5 GB, robust to the upper tail) is
+the load-bearing piece. Re-scope Chunk 2 as the dynamic-tier slot feeding Chunk 4.
+**Reproduce**: `queens count <n> [--parallel] [--exact] [--hll-p P]`. Exact validates
+HLL on n≤12; `--parallel` (HLL-only) is fast enough for n=14 (~12s). Never run n=16 to
+completion — it's the open problem; extrapolate.
+**Next agent**: start Chunk 4 design (LSM + BuRR), treating Chunk 2/3 as its dynamic
+tier. Opus-grade, cross-cutting; likely multiple sub-sessions. Validate any TT/key
+change against `solver_lineage_agrees` (n≤9 verdicts) and a fresh `count 14` (distinct
+must stay ~49.3M for an exact scheme; a drop means lost transposition merges).
 
 ### Roadmap authored (2026-06-15)
 

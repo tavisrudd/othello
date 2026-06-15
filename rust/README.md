@@ -205,6 +205,7 @@ $ cargo run --release --bin queens -- solve 8            # who wins the empty bo
 $ cargo run --release --bin queens -- solve 10 symmetry  # pick a solver (A/B)
 $ cargo run --release --bin queens -- self  6            # watch an optimal line
 $ cargo run --release --bin queens -- play  8 1          # play the engine as player 1
+$ cargo run --release --bin queens -- count 14 --parallel  # distinct positions (HLL)
 ```
 
 Squares are named file+rank (`d1`). It reproduces the paper's headline — on 8×8
@@ -286,6 +287,19 @@ more than it saved; now `symmetry` is **faster** in wall-clock too (0.055 s vs
   done with no speculation — and only its siblings parallelise (the
   must-refute-everything case of a second-player win). This recovers the
   sequential node count on first-player wins *and* parallelises the hard boards.
+
+### The n=16 frontier is a memory problem
+
+n=16 is a known second-player win (Jenrich, 2014; 71B calls, no table) but is out
+of reach of a single-box transposition table here: the search must retain its whole
+*distinct* working set, and that set is large. `queens count N` measures it directly
+— a HyperLogLog (lock-free, ~0.4% error) folds in every canonical key the search
+visits, with an exact hash set to validate it on the small boards. The distinct
+count climbs **94k → 1.07M → 49.3M** at n=10/12/14, *accelerating* (11× then 46× per
+two-step), which extrapolates to **billions** at n=16 — far past what a full-key
+table (40 B/slot) can hold in tens of GB. (The familiar "53M at n=14" is the *node*
+count; eviction re-expansion inflates it ~8 % above the 49.3M distinct truth.) So
+n=16 needs a fundamentally denser encoding of the solved set — the open frontier.
 
 The win/loss value is exact, so the search is α-β with a hard cutoff (the first
 move handing the opponent a loss proves a win); the board's 8-fold dihedral

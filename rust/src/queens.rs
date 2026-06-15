@@ -34,7 +34,7 @@
 //! `WORDS` × 64 bits, so boards up to `16×16` (256 bits) fit.
 
 use std::collections::HashSet;
-use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::atomic::{AtomicU64, AtomicU8, Ordering};
 use std::sync::Mutex;
 
 use rayon::prelude::*;
@@ -361,6 +361,12 @@ pub trait Solver: Sync {
     fn cap_bytes(&self) -> u64 {
         0
     }
+
+    /// Distinct-position measurement, if this solver was built with counting
+    /// enabled (see [`Tt::new_counting`]). `None` for an ordinary solve.
+    fn report(&self) -> Option<CountReport> {
+        None
+    }
 }
 
 /// **Naive** -- plain negamax win/loss with the α-β cutoff and *no* memo. The
@@ -411,6 +417,16 @@ impl Tt {
             canon,
         }
     }
+
+    /// As [`Tt::new`], but the table also folds every position it is queried for
+    /// into a HyperLogLog (and, with `exact`, a hash set) so the search reports
+    /// the number of *distinct* positions it visited -- its true working set.
+    pub fn new_counting(bits: u32, canon: bool, hll_p: u32, exact: bool) -> Self {
+        Tt {
+            tt: QueensTt::new_counting(bits, hll_p, exact),
+            canon,
+        }
+    }
 }
 
 impl Solver for Tt {
@@ -447,6 +463,9 @@ impl Solver for Tt {
     fn cap_bytes(&self) -> u64 {
         self.tt.capacity().1
     }
+    fn report(&self) -> Option<CountReport> {
+        self.tt.report()
+    }
 }
 
 /// **Parallel** -- the production solver. Sequential search is [`Tt`] with
@@ -460,6 +479,16 @@ impl Parallel {
     pub fn new(bits: u32) -> Self {
         Parallel {
             inner: Tt::new(bits, true),
+        }
+    }
+
+    /// As [`Parallel::new`], but counting the distinct positions visited (see
+    /// [`Tt::new_counting`]). The HyperLogLog is lock-free, so it works under the
+    /// root parallelism; the `exact` hash set is not (it would serialise every
+    /// worker), so counting `exact` requires the sequential [`Tt`] solver instead.
+    pub fn new_counting(bits: u32, hll_p: u32) -> Self {
+        Parallel {
+            inner: Tt::new_counting(bits, true, hll_p, false),
         }
     }
 }
@@ -506,6 +535,9 @@ impl Solver for Parallel {
     }
     fn cap_bytes(&self) -> u64 {
         self.inner.cap_bytes()
+    }
+    fn report(&self) -> Option<CountReport> {
+        self.inner.report()
     }
 }
 
@@ -750,6 +782,110 @@ pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
 }
 
 // --------------------------------------------------------------------------- //
+// Distinct-position instrumentation (Chunk 1: measure before picking an encoding)
+// --------------------------------------------------------------------------- //
+
+/// The result of a distinct-position measurement (see [`Tt::new_counting`]).
+#[derive(Clone, Copy, Debug)]
+pub struct CountReport {
+    /// HyperLogLog estimate of the distinct positions the search visited.
+    pub estimate: f64,
+    /// Exact distinct count, if a hash set was kept (`--exact`, small boards).
+    pub exact: Option<u64>,
+    /// HyperLogLog register count (`2^p`), for reporting the estimator's error.
+    pub registers: u64,
+}
+
+/// The instrumentation a counting [`QueensTt`] folds each visited key into: a
+/// HyperLogLog (always) and an exact hash set (optional, small boards only).
+struct Counter {
+    hll: Hll,
+    exact: Option<Mutex<HashSet<Bits>>>,
+}
+
+impl Counter {
+    #[inline]
+    fn feed(&self, key: Bits) {
+        self.hll.add(key);
+        if let Some(set) = &self.exact {
+            set.lock().unwrap().insert(key);
+        }
+    }
+}
+
+/// A dense **HyperLogLog** (Flajolet, Fusy, Gandouet & Meunier, 2007) cardinality
+/// estimator over 64-bit key hashes. Lock-free under the parallel solver: each of
+/// the `2^p` registers is an [`AtomicU8`] updated with `fetch_max`. State is `2^p`
+/// bytes (p=16 ⇒ 64 KB) for a standard error of ≈ `1.04/√(2^p)` (p=16 ⇒ ~0.4%) --
+/// ample to size a transposition table. Pure instrumentation: never affects the
+/// search result.
+pub struct Hll {
+    p: u32,
+    registers: Vec<AtomicU8>,
+}
+
+impl Hll {
+    /// A HyperLogLog with `2^p` registers. `p` in `4..=18` is sensible.
+    pub fn new(p: u32) -> Self {
+        Hll {
+            p,
+            registers: (0..1u64 << p).map(|_| AtomicU8::new(0)).collect(),
+        }
+    }
+
+    /// Fold a board key in, hashed with a mixer independent of [`QueensTt::hash`]
+    /// (so the estimate is not coupled to the table's slot mapping).
+    #[inline]
+    pub fn add(&self, key: Bits) {
+        let h = Self::hash(key);
+        let idx = (h >> (64 - self.p)) as usize; // top p bits index the register
+                                                 // ρ = 1 + (leading zeros of the remaining 64-p bits); the sentinel bit at
+                                                 // position p-1 caps ρ at 64-p+1 when those bits are all zero.
+        let rho = ((h << self.p) | (1u64 << (self.p - 1))).leading_zeros() as u8 + 1;
+        self.registers[idx].fetch_max(rho, Ordering::Relaxed);
+    }
+
+    /// The estimated number of distinct keys folded in, with the standard
+    /// small-range (linear-counting) correction; the large-range correction is
+    /// unnecessary with a 64-bit hash.
+    pub fn estimate(&self) -> f64 {
+        let m = self.registers.len() as f64;
+        let alpha = 0.7213 / (1.0 + 1.079 / m); // valid for p >= 7; we use p >= 14
+        let mut sum = 0.0f64;
+        let mut zeros = 0u64;
+        for r in &self.registers {
+            let v = r.load(Ordering::Relaxed);
+            sum += 1.0 / (1u64 << v) as f64; // 2^-v
+            zeros += (v == 0) as u64;
+        }
+        let raw = alpha * m * m / sum;
+        if raw <= 2.5 * m && zeros > 0 {
+            m * (m / zeros as f64).ln() // linear counting for small cardinalities
+        } else {
+            raw
+        }
+    }
+
+    /// A high-avalanche 64-bit hash of the key (FNV-1a mix + splitmix64 finalizer),
+    /// deliberately distinct from [`QueensTt::hash`] so estimator accuracy does not
+    /// depend on the table's hashing.
+    #[inline]
+    fn hash(key: Bits) -> u64 {
+        let mut h = 0xcbf2_9ce4_8422_2325u64; // FNV-1a offset basis
+        for &w in &key.0 {
+            h ^= w;
+            h = h.wrapping_mul(0x0000_0100_0000_01b3); // FNV-1a prime
+        }
+        h ^= h >> 30;
+        h = h.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+        h ^= h >> 27;
+        h = h.wrapping_mul(0x94d0_49bb_1331_11eb);
+        h ^= h >> 31;
+        h
+    }
+}
+
+// --------------------------------------------------------------------------- //
 // Transposition table
 // --------------------------------------------------------------------------- //
 
@@ -763,6 +899,9 @@ pub struct QueensTt {
     shard_mask: u64,
     slot_mask: u64,
     nodes: AtomicU64,
+    /// Optional distinct-position instrumentation (Chunk 1). `None` for an
+    /// ordinary solve, so the production path pays only a predictable null check.
+    counter: Option<Counter>,
 }
 
 #[derive(Clone, Copy, Default)]
@@ -789,7 +928,30 @@ impl QueensTt {
             shard_mask: shards as u64 - 1,
             slot_mask: per as u64 - 1,
             nodes: AtomicU64::new(0),
+            counter: None,
         }
+    }
+
+    /// A table that also counts the distinct positions it is queried for: every
+    /// `get` folds the (canonical) key into a HyperLogLog of precision `hll_p`,
+    /// and (when `exact`) into a hash set for an exact ground truth on small
+    /// boards. Used by the `count` CLI mode to size the table's true working set.
+    pub fn new_counting(bits: u32, hll_p: u32, exact: bool) -> Self {
+        let mut tt = Self::new(bits);
+        tt.counter = Some(Counter {
+            hll: Hll::new(hll_p),
+            exact: exact.then(|| Mutex::new(HashSet::new())),
+        });
+        tt
+    }
+
+    /// The distinct-position measurement, if this table was built with counting.
+    pub fn report(&self) -> Option<CountReport> {
+        self.counter.as_ref().map(|c| CountReport {
+            estimate: c.hll.estimate(),
+            exact: c.exact.as_ref().map(|s| s.lock().unwrap().len() as u64),
+            registers: c.hll.registers.len() as u64,
+        })
     }
 
     /// Total slot capacity and its byte footprint, for reporting the cap.
@@ -823,6 +985,13 @@ impl QueensTt {
     /// The stored value for `key`, if present.
     #[inline]
     pub fn get(&self, key: Bits) -> Option<u8> {
+        // Counting hook: every node the search enters is looked up here exactly
+        // once, so folding the key in on each `get` measures the distinct set of
+        // positions visited -- the table's working set -- deduplicated by the
+        // estimator regardless of transposition revisits or eviction.
+        if let Some(c) = &self.counter {
+            c.feed(key);
+        }
         let h = Self::hash(key);
         let idx = ((h >> 32) & self.slot_mask) as usize;
         let s = self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx];
@@ -1054,6 +1223,54 @@ mod tests {
                 g != 0,
                 Naive::new().first_player_wins(&q),
                 "n={n}: nimber!=0 must agree with win/loss"
+            );
+        }
+    }
+
+    /// The HyperLogLog estimates a known cardinality within its error budget,
+    /// and folding a key in repeatedly does not inflate the estimate (dedup).
+    #[test]
+    fn hll_estimates_a_known_cardinality() {
+        let hll = Hll::new(14); // 16384 registers ⇒ ~0.8% standard error
+        let truth = 200_000u64;
+        for i in 0..truth {
+            let mut b = Bits::ZERO;
+            b.0[0] = i.wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            b.0[1] = i; // distinct i ⇒ distinct key
+            hll.add(b);
+            hll.add(b); // re-fold: must be idempotent
+        }
+        let est = hll.estimate();
+        let rel = (est - truth as f64).abs() / truth as f64;
+        assert!(
+            rel < 0.03,
+            "HLL estimate {est:.0} off by {:.2}% from {truth} (>3%)",
+            rel * 100.0
+        );
+    }
+
+    /// Enabling the counting hook must not change the search verdict, and the
+    /// HyperLogLog estimate must track the exact distinct-position count.
+    #[test]
+    fn counting_preserves_verdict_and_tracks_exact() {
+        for n in [4u32, 6, 8] {
+            let q = Queens::new(n);
+            let truth = Naive::new().first_player_wins(&q);
+            let s = Tt::new_counting(16, true, 14, true);
+            assert_eq!(
+                s.first_player_wins(&q),
+                truth,
+                "n={n}: counting must not change the verdict"
+            );
+            let rep = s.report().expect("counting enabled");
+            let exact = rep.exact.expect("exact set kept");
+            assert!(exact > 0, "n={n}: the search visited some positions");
+            let rel = (rep.estimate - exact as f64).abs() / exact as f64;
+            assert!(
+                rel < 0.10,
+                "n={n}: HLL {:.0} vs exact {exact} off by {:.1}%",
+                rep.estimate,
+                rel * 100.0
             );
         }
     }

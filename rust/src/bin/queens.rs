@@ -12,7 +12,9 @@ use std::time::Instant;
 use clap::builder::PossibleValuesParser;
 use clap::{Parser, Subcommand};
 
-use othello::queens::{make_solver, Bits, Nimber, Queens, Solver, MAX_N, SOLVER_NAMES};
+use othello::queens::{
+    make_solver, Bits, Nimber, Parallel, Queens, Solver, Tt, MAX_N, SOLVER_NAMES,
+};
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
 /// cross-check the solver against the published Sprague-Grundy sequence.
@@ -64,6 +66,23 @@ enum Cmd {
         #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
         n: u32,
     },
+    /// Count the distinct positions the win/loss search visits (its true TT
+    /// working set), via HyperLogLog. Use the counts for n=10/12/14 to
+    /// extrapolate n=16's memory needs. Even boards only (odd boards are O(1)).
+    Count {
+        #[arg(default_value_t = 12, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+        /// Use the root-parallel solver (much faster; HyperLogLog only).
+        #[arg(long)]
+        parallel: bool,
+        /// Also keep an exact hash set of distinct keys, to validate the
+        /// estimate (sequential solver only; memory grows with the count).
+        #[arg(long)]
+        exact: bool,
+        /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
+        #[arg(long = "hll-p", default_value_t = 16, value_parser = clap::value_parser!(u32).range(4..=18))]
+        hll_p: u32,
+    },
     /// Watch the engine play an optimal line for both sides.
     #[command(name = "self")]
     SelfPlay {
@@ -87,6 +106,12 @@ fn main() {
     match cmd {
         Cmd::Solve { n, solver } => solve(&Queens::new(n), &solver),
         Cmd::Nimber { n } => nimber_mode(&Queens::new(n)),
+        Cmd::Count {
+            n,
+            parallel,
+            exact,
+            hll_p,
+        } => count_mode(&Queens::new(n), parallel, exact, hll_p),
         Cmd::SelfPlay { n } => self_play(&Queens::new(n)),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
     }
@@ -234,6 +259,69 @@ fn nimber_mode(q: &Queens) {
         None => println!("(beyond OEIS A344227 — a new term)"),
     }
     println!("(searched {} nodes in {:.3}s)", solver.nodes(), elapsed);
+}
+
+/// Measure the distinct positions the win/loss search visits -- the table's true
+/// working set -- by folding every position the search looks up into a
+/// HyperLogLog (and, with `--exact`, a hash set). The counts for n=10/12/14 fit a
+/// growth curve that extrapolates n=16's memory needs (the open frontier).
+fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
+    if parallel && exact {
+        eprintln!(
+            "--exact keeps a single shared hash set, which would serialise every \
+             worker; use the sequential solver (drop --parallel) for --exact."
+        );
+        std::process::exit(2);
+    }
+    if q.is_odd() {
+        println!(
+            "n={n} is odd: the first player wins in O(1) by the centre + 180° mirror \
+             strategy, so there is no search and nothing to count. Use an even n.",
+            n = q.n,
+        );
+        return;
+    }
+    let bits = tt_bits(q.n);
+    // Concrete types (not `make_solver`) so the counting constructors are reachable.
+    let solver: Box<dyn Solver> = if parallel {
+        Box::new(Parallel::new_counting(bits, hll_p))
+    } else {
+        Box::new(Tt::new_counting(bits, true, hll_p, exact))
+    };
+    let how = if parallel { "parallel" } else { "sequential" };
+    println!(
+        "Counting distinct positions on the {n}×{n} board ({how} search, HLL p={hll_p}{})…",
+        if exact { ", exact set" } else { "" },
+        n = q.n,
+    );
+
+    let t = Instant::now();
+    let first_wins = solver.first_player_wins(q);
+    let elapsed = t.elapsed().as_secs_f64();
+    let rep = solver.report().expect("counting was enabled");
+
+    let winner = if first_wins { "first" } else { "second" };
+    println!("  winner: {winner} player");
+    println!(
+        "  nodes searched (TT misses, incl. re-expansion): {}",
+        solver.nodes()
+    );
+    let err = 1.04 / (rep.registers as f64).sqrt();
+    println!(
+        "  distinct positions (HLL, ±{:.2}% std err): {:.0}  ({:.3} M)",
+        err * 100.0,
+        rep.estimate,
+        rep.estimate / 1e6,
+    );
+    if let Some(exact) = rep.exact {
+        let rel = (rep.estimate - exact as f64) / exact as f64 * 100.0;
+        println!(
+            "  distinct positions (exact hash set):          {exact}  ({:.3} M)",
+            exact as f64 / 1e6,
+        );
+        println!("  HLL error vs exact: {rel:+.2}%");
+    }
+    println!("  elapsed: {elapsed:.3}s");
 }
 
 fn self_play(q: &Queens) {
