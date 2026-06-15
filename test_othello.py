@@ -232,6 +232,23 @@ def test_legal_moves_and_flips_match_reference():
     assert n > 1000
 
 
+def test_movegen_matches_reference_on_random_boards():
+    # Arbitrary disjoint bitboards stress every edge-wrap case -- validates
+    # whichever kernels are active (the compiled extension when built, else the
+    # pure-Python fallback) against the independent grid reference.
+    rng = random.Random(99)
+    for _ in range(1500):
+        player = rng.getrandbits(64)
+        opp = rng.getrandbits(64) & ~player & 0xFFFFFFFFFFFFFFFF
+        player &= 0xFFFFFFFFFFFFFFFF
+        legal = Board._legal_moves(player, opp)
+        assert _grid(legal) == ref_legal(player, opp)
+        for sq in range(64):
+            if (legal >> sq) & 1:
+                assert _grid(Board._flips_for_move(1 << sq, player, opp)) == \
+                    ref_flips(sq, player, opp)
+
+
 # --------------------------------------------------------------------------- #
 # Utility (disc-differential)
 # --------------------------------------------------------------------------- #

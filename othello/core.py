@@ -296,6 +296,17 @@ class Board:
 
         return flips
 
+# Swap in the compiled uint64 kernels when the extension is built (run
+# ./build_ext.sh). The pure-Python methods above stay as the reference and the
+# fallback when the extension is absent; both are bit-identical (asserted in the
+# test suite). The native versions are ~20-60x faster on these hot primitives.
+try:
+    from othello import _bitboard  # ty: ignore[unresolved-import]  # compiled ext
+    Board._legal_moves = staticmethod(_bitboard.legal_moves)        # ty: ignore[invalid-assignment]
+    Board._flips_for_move = staticmethod(_bitboard.flips_for_move)  # ty: ignore[invalid-assignment]
+except ImportError:
+    pass
+
 BLACK_CHARS = "BX*"
 WHITE_CHARS = "WO"
 EMPTY_CHARS = ".-_"
