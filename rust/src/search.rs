@@ -7,7 +7,7 @@
 //! node count. No `Board` objects: native recursion, inlined make-move.
 
 use crate::core::{flips_for_move, legal_moves};
-use crate::eval::heuristic_black;
+use crate::eval::{heuristic_black, heuristic_plus_black};
 use crate::tt::TranspositionTable;
 
 const NEG: i32 = -1_000_000_000;
@@ -253,7 +253,12 @@ fn pvs(
     }
 
     if depth <= 0 {
-        let hb = heuristic_black(black, white); // horizon heuristic (negamax)
+        // horizon heuristic (negamax); the branch is constant per search
+        let hb = if tt.plus() {
+            heuristic_plus_black(black, white)
+        } else {
+            heuristic_black(black, white)
+        };
         let value = if to_move == 0 { hb } else { -hb };
         tt.store(idx, black, white, to_move, depth, value, EXACT);
         return value;

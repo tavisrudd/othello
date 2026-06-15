@@ -38,7 +38,7 @@ impl Default for Args {
 }
 
 const USAGE: &str = "\
-usage: othello [-h] [--engine {alphabeta,minimax,ordered,strong}] [--depth N]
+usage: othello [-h] [--engine {alphabeta,minimax,ordered,strong,strong+}] [--depth N]
                [--start {black-win,either,early,white-win} | --board-file PATH]
                [--to-move {black,white}] [--list-engines]
 

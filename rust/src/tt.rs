@@ -29,6 +29,7 @@ pub struct TranspositionTable {
     slots: Vec<Entry>,
     hint: Vec<u64>, // position-keyed best-move bit (lossy ordering hint)
     mask: usize,
+    plus: bool, // use the "plus" horizon eval (the strong+ engine)
 }
 
 impl TranspositionTable {
@@ -38,7 +39,20 @@ impl TranspositionTable {
             slots: vec![Entry::default(); n],
             hint: vec![0u64; n],
             mask: n - 1,
+            plus: false,
         }
+    }
+
+    /// Select the stronger horizon evaluation (carried here so it threads through
+    /// the search for free -- the table is already a parameter everywhere). The
+    /// leaf branch on it is perfectly predictable, so `strong` is unaffected.
+    pub fn set_plus(&mut self, plus: bool) {
+        self.plus = plus;
+    }
+
+    #[inline]
+    pub(crate) fn plus(&self) -> bool {
+        self.plus
     }
 
     pub fn clear(&mut self) {

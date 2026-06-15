@@ -337,6 +337,7 @@ pub struct Strong {
     pool: Vec<TranspositionTable>, // scores(): one preallocated TT per worker
     order: bool,
     threads: usize,
+    plus: bool, // stronger horizon eval (the strong+ engine)
 }
 
 impl Default for Strong {
@@ -345,34 +346,57 @@ impl Default for Strong {
     }
 }
 
+fn env_threads() -> usize {
+    std::env::var("OTHELLO_THREADS")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(DEFAULT_THREADS)
+}
+
 impl Strong {
     pub fn new() -> Self {
-        let threads = std::env::var("OTHELLO_THREADS")
-            .ok()
-            .and_then(|s| s.parse().ok())
-            .unwrap_or(DEFAULT_THREADS);
-        Self::with_threads(threads)
+        Self::with_threads_eval(env_threads(), false)
+    }
+
+    /// The `strong+` engine: same search, a stronger horizon evaluation.
+    pub fn new_plus() -> Self {
+        Self::with_threads_eval(env_threads(), true)
     }
 
     pub fn with_threads(threads: usize) -> Self {
+        Self::with_threads_eval(threads, false)
+    }
+
+    pub fn with_threads_eval(threads: usize, plus: bool) -> Self {
         let threads = threads.clamp(1, rayon::current_num_threads().max(1));
         // Preallocate the whole arena up front so no table is grown/zeroed mid
         // search -- allocation never shows up on the hot path.
+        let mut tt = TranspositionTable::new(SEQ_BITS);
+        tt.set_plus(plus);
         let pool = (0..threads)
-            .map(|_| TranspositionTable::new(POOL_BITS))
+            .map(|_| {
+                let mut t = TranspositionTable::new(POOL_BITS);
+                t.set_plus(plus);
+                t
+            })
             .collect();
         Strong {
-            tt: TranspositionTable::new(SEQ_BITS),
+            tt,
             pool,
             order: true,
             threads,
+            plus,
         }
     }
 }
 
 impl Engine for Strong {
     fn name(&self) -> &'static str {
-        "strong"
+        if self.plus {
+            "strong+"
+        } else {
+            "strong"
+        }
     }
     fn default_depth(&self) -> Depth {
         Some(9)
@@ -485,7 +509,7 @@ impl Engine for Strong {
 // --------------------------------------------------------------------------- //
 
 /// CLI engine names, sorted (matches Python's `sorted(ENGINES)`).
-pub const ENGINE_NAMES: [&str; 4] = ["alphabeta", "minimax", "ordered", "strong"];
+pub const ENGINE_NAMES: [&str; 5] = ["alphabeta", "minimax", "ordered", "strong", "strong+"];
 
 pub fn make_engine(name: &str) -> Option<Box<dyn Engine>> {
     match name {
@@ -493,6 +517,7 @@ pub fn make_engine(name: &str) -> Option<Box<dyn Engine>> {
         "alphabeta" => Some(Box::new(AlphaBeta::plain())),
         "ordered" => Some(Box::new(AlphaBeta::ordered())),
         "strong" => Some(Box::new(Strong::new())),
+        "strong+" => Some(Box::new(Strong::new_plus())),
         _ => None,
     }
 }
