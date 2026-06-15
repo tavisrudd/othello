@@ -375,13 +375,19 @@ fn solve(q: &Queens, solver_name: &str) {
     );
     let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
     println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
-    println!(
-        "(solver {}: searched {} nodes in {:.3}s; TT cap ≈ {:.2} GB)",
+    // A dim, secondary line: search cost plus approach-specific stats (table
+    // fill, nimber value, proof numbers, …) that each solver reports.
+    let mut summary = format!(
+        "solver {}: searched {} nodes in {elapsed:.3}s",
         solver.name(),
         commas(solver.nodes()),
-        elapsed,
-        solver.cap_bytes() as f64 / 1e9,
     );
+    let stats = solver.stats();
+    if !stats.is_empty() {
+        summary.push_str(" · ");
+        summary.push_str(&stats);
+    }
+    println!("\x1b[90m({summary})\x1b[0m");
 
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();

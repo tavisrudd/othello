@@ -34,7 +34,7 @@
 //! `WORDS` × 64 bits, so boards up to `16×16` (256 bits) fit.
 
 use std::collections::HashSet;
-use std::sync::atomic::{AtomicU64, AtomicU8, Ordering};
+use std::sync::atomic::{AtomicU16, AtomicU32, AtomicU64, AtomicU8, Ordering};
 use std::sync::Mutex;
 
 use rayon::prelude::*;
@@ -373,6 +373,13 @@ pub trait Solver: Sync {
     fn root_progress(&self) -> Option<(u64, u64)> {
         None
     }
+
+    /// Extra, approach-specific stats for the solve summary -- e.g. table fill
+    /// for the memo solvers, the Sprague-Grundy value for `nimber`, the root
+    /// proof/disproof numbers for `pn`. Empty by default (e.g. tableless `naive`).
+    fn stats(&self) -> String {
+        String::new()
+    }
 }
 
 /// **Naive** -- plain negamax win/loss with the α-β cutoff and *no* memo. The
@@ -472,6 +479,9 @@ impl Solver for Tt {
     fn report(&self) -> Option<CountReport> {
         self.tt.report()
     }
+    fn stats(&self) -> String {
+        self.tt.summary()
+    }
 }
 
 /// **Parallel** -- the production solver. Sequential search is [`Tt`] with
@@ -566,6 +576,19 @@ impl Solver for Parallel {
         let total = self.root_total.load(Ordering::Relaxed);
         (total > 0).then(|| (self.root_done.load(Ordering::Relaxed).min(total), total))
     }
+    /// Root parallelism is this solver's whole point, so report the worker count
+    /// and root-move fan-out alongside the shared table's fill.
+    fn stats(&self) -> String {
+        let (done, total) = (
+            self.root_done.load(Ordering::Relaxed),
+            self.root_total.load(Ordering::Relaxed),
+        );
+        format!(
+            "{} rayon workers, {done}/{total} root moves · {}",
+            rayon::current_num_threads(),
+            self.inner.stats(),
+        )
+    }
 }
 
 /// **Nimber** -- computes the full Sprague-Grundy value (not just win/loss) by
@@ -576,12 +599,16 @@ impl Solver for Parallel {
 /// a [`Solver`] it reports `wins = (nimber != 0)`.
 pub struct Nimber {
     tt: QueensTt,
+    /// The nimber of the empty board once `wins` computes it (`u16::MAX` until
+    /// then), so the solve summary can report the actual Sprague-Grundy value.
+    root: AtomicU16,
 }
 
 impl Nimber {
     pub fn new(bits: u32) -> Self {
         Nimber {
             tt: QueensTt::new(bits),
+            root: AtomicU16::new(u16::MAX),
         }
     }
 
@@ -657,13 +684,30 @@ impl Solver for Nimber {
         "nimber"
     }
     fn wins(&self, q: &Queens, blocked: Bits) -> bool {
-        self.grundy(q, blocked) != 0
+        let g = self.grundy(q, blocked);
+        if blocked == Bits::empty() {
+            self.root.store(g as u16, Ordering::Relaxed); // capture the root nimber
+        }
+        g != 0
     }
     fn nodes(&self) -> u64 {
         self.tt.nodes()
     }
     fn cap_bytes(&self) -> u64 {
         self.tt.capacity().1
+    }
+    /// The Sprague-Grundy value is this solver's reason for being -- report it.
+    fn stats(&self) -> String {
+        let root = self.root.load(Ordering::Relaxed);
+        let nimber = if root == u16::MAX {
+            "nimber n/a".to_string()
+        } else {
+            format!("nimber *{root}")
+        };
+        format!(
+            "{nimber} (full Sprague-Grundy, no cutoff) · {}",
+            self.tt.summary()
+        )
     }
 }
 
@@ -686,6 +730,10 @@ impl Solver for Nimber {
 /// 2026) -- kept here as a documented, correct-but-not-competitive experiment.
 pub struct Pn {
     tt: PnTt,
+    /// The root's `(φ, δ)` once `wins` solves it, so the summary can report the
+    /// proof/disproof numbers (`φ=0` ⇒ proven win, `δ=0` ⇒ proven loss).
+    root_phi: AtomicU32,
+    root_delta: AtomicU32,
 }
 
 /// Proof/disproof "infinity" -- a finite sentinel so the arithmetic saturates.
@@ -695,6 +743,8 @@ impl Pn {
     pub fn new(bits: u32) -> Self {
         Pn {
             tt: PnTt::new(bits),
+            root_phi: AtomicU32::new(PN_INF),
+            root_delta: AtomicU32::new(PN_INF),
         }
     }
 
@@ -777,17 +827,37 @@ impl Solver for Pn {
     }
     fn wins(&self, q: &Queens, blocked: Bits) -> bool {
         self.mid(q, blocked, PN_INF, PN_INF); // solve fully
-                                              // Solved ⇒ φ = 0 (proven win) or φ = ∞ (disproven ⇒ loss).
-        self.tt
-            .get(q.pos_key(blocked))
-            .map(|(p, _)| p == 0)
-            .unwrap_or(false)
+        let pd = self.tt.get(q.pos_key(blocked));
+        if blocked == Bits::empty() {
+            if let Some((phi, delta)) = pd {
+                self.root_phi.store(phi, Ordering::Relaxed);
+                self.root_delta.store(delta, Ordering::Relaxed);
+            }
+        }
+        // Solved ⇒ φ = 0 (proven win) or φ = ∞ (disproven ⇒ loss).
+        pd.map(|(p, _)| p == 0).unwrap_or(false)
     }
     fn nodes(&self) -> u64 {
         self.tt.nodes()
     }
     fn cap_bytes(&self) -> u64 {
         self.tt.capacity().1
+    }
+    /// Proof and disproof numbers are df-pn's currency -- report the root's.
+    fn stats(&self) -> String {
+        let pf = |x: u32| {
+            if x == PN_INF {
+                "∞".to_string()
+            } else {
+                x.to_string()
+            }
+        };
+        format!(
+            "root proof φ={} disproof δ={} · {}",
+            pf(self.root_phi.load(Ordering::Relaxed)),
+            pf(self.root_delta.load(Ordering::Relaxed)),
+            self.tt.summary(),
+        )
     }
 }
 
@@ -987,6 +1057,29 @@ impl QueensTt {
         (slots, slots * std::mem::size_of::<Slot>() as u64)
     }
 
+    /// Occupied slots, by a one-time scan (post-solve; cheap relative to the
+    /// search). Combined with [`capacity`](Self::capacity) it gives the load
+    /// factor, and `nodes > fill` reveals how much eviction forced re-expansion.
+    pub fn fill(&self) -> u64 {
+        self.shards
+            .iter()
+            .map(|s| {
+                s.lock()
+                    .unwrap()
+                    .iter()
+                    .filter(|slot| slot.used != 0)
+                    .count() as u64
+            })
+            .sum()
+    }
+
+    /// A "TT {GB}, {load}% full" fragment for the solve summary.
+    pub fn summary(&self) -> String {
+        let (slots, bytes) = self.capacity();
+        let load = self.fill() as f64 / slots as f64 * 100.0;
+        format!("TT {:.2} GB, {load:.1}% full", bytes as f64 / 1e9)
+    }
+
     /// Nodes actually searched (TT misses) -- the work done, since hits are free.
     pub fn nodes(&self) -> u64 {
         self.nodes.load(Ordering::Relaxed)
@@ -1074,6 +1167,27 @@ impl PnTt {
     pub fn capacity(&self) -> (u64, u64) {
         let slots = (self.shard_mask + 1) * (self.slot_mask + 1);
         (slots, slots * std::mem::size_of::<PnSlot>() as u64)
+    }
+
+    /// Occupied slots, by a one-time scan -- see [`QueensTt::fill`].
+    pub fn fill(&self) -> u64 {
+        self.shards
+            .iter()
+            .map(|s| {
+                s.lock()
+                    .unwrap()
+                    .iter()
+                    .filter(|slot| slot.used != 0)
+                    .count() as u64
+            })
+            .sum()
+    }
+
+    /// A "TT {GB}, {load}% full" fragment for the solve summary.
+    pub fn summary(&self) -> String {
+        let (slots, bytes) = self.capacity();
+        let load = self.fill() as f64 / slots as f64 * 100.0;
+        format!("TT {:.2} GB, {load:.1}% full", bytes as f64 / 1e9)
     }
 
     pub fn nodes(&self) -> u64 {
