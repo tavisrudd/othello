@@ -1,6 +1,6 @@
 """Command-line entry point: `python -m othello [options]`.
 
-Uses argparse (stdlib) to keep the package dependency-free.
+Uses argparse for option parsing.
 """
 from __future__ import annotations
 import argparse
