@@ -152,7 +152,10 @@ impl Board {
     #[inline]
     pub fn make_move_unchecked(&self, mv: Move) -> Board {
         debug_assert!(self.black & self.white == 0, "black/white discs overlap");
-        debug_assert!(mv == PASS || mv.is_power_of_two(), "move is not one-hot: {mv:#x}");
+        debug_assert!(
+            mv == PASS || mv.is_power_of_two(),
+            "move is not one-hot: {mv:#x}"
+        );
         if mv == PASS {
             return Board {
                 black: self.black,
@@ -273,7 +276,9 @@ pub fn legal_moves(player: u64, opponent: u64) -> u64 {
 }
 
 /// Per ray: walk the contiguous opponent run from `mv`; if it ends on one of
-/// ours, capture it. The `while` loop early-exits as soon as a run ends.
+/// ours, capture it. The `while` loop early-exits as soon as a run ends -- and
+/// because real flip runs are short, this beats the branchless `flips_outflank`
+/// below in actual self-play (see its note). The production flip.
 #[inline]
 pub fn flips_for_move(mv: Move, player: u64, opponent: u64) -> u64 {
     let mut flips: u64 = 0;
@@ -359,6 +364,100 @@ pub fn flips_for_move(mv: Move, player: u64, opponent: u64) -> u64 {
         flips |= cap;
     }
 
+    flips
+}
+
+// --------------------------------------------------------------------------- //
+// Nearest-blocker ("outflank") flips -- a documented experiment, NOT used by the
+// search (the walk above is faster in real games; see the note on the function).
+//
+// For each of the eight rays from the move square, the flipped run is the
+// opponent discs between the move and the *nearest blocker* (a player disc or an
+// empty square): if that blocker is a player disc, capture the run. Per ray we
+// precompute the ray mask (`RAY[sq][dir]`); the nearest blocker is one BMI op
+// (`blsi` for increasing rays, an MSB isolate for decreasing ones), and the run
+// is `mask & (nearest - 1)` (or its high-side mirror) -- O(1) and branchless.
+
+const RAY_DR: [i32; 8] = [0, 0, 1, -1, 1, 1, -1, -1];
+const RAY_DC: [i32; 8] = [1, -1, 0, 0, 1, -1, 1, -1];
+const INC_DIRS: [usize; 4] = [0, 2, 4, 5]; // E, N, NE, NW  (increasing bit index)
+const DEC_DIRS: [usize; 4] = [1, 3, 6, 7]; // W, S, SE, SW  (decreasing bit index)
+
+const fn build_rays() -> [[u64; 8]; 64] {
+    let mut rays = [[0u64; 8]; 64];
+    let mut sq = 0usize;
+    while sq < 64 {
+        let r = (sq / 8) as i32;
+        let c = (sq % 8) as i32;
+        let mut d = 0usize;
+        while d < 8 {
+            let mut rr = r + RAY_DR[d];
+            let mut cc = c + RAY_DC[d];
+            let mut mask = 0u64;
+            while rr >= 0 && rr < 8 && cc >= 0 && cc < 8 {
+                mask |= 1u64 << (rr * 8 + cc);
+                rr += RAY_DR[d];
+                cc += RAY_DC[d];
+            }
+            rays[sq][d] = mask;
+            d += 1;
+        }
+        sq += 1;
+    }
+    rays
+}
+
+static RAY: [[u64; 8]; 64] = build_rays();
+
+/// Isolate the highest set bit (0 if `x == 0`), branchless.
+#[inline]
+fn highest_bit(mut x: u64) -> u64 {
+    x |= x >> 1;
+    x |= x >> 2;
+    x |= x >> 4;
+    x |= x >> 8;
+    x |= x >> 16;
+    x |= x >> 32;
+    x - (x >> 1)
+}
+
+/// Branchless nearest-blocker flips. ~5x the walk on a *random-board* microbench,
+/// but ~4% SLOWER in real self-play: flip runs are short, so the walk early-exits
+/// in 1-2 predictable steps with no table load, while this pays fixed work + a
+/// `RAY[sq]` load every call. Kept as a documented experiment (`make bench-flips`);
+/// the production flip is `flips_for_move`. Bit-identical to it (asserted in tests).
+#[inline]
+pub fn flips_outflank(mv: Move, player: u64, opponent: u64) -> u64 {
+    debug_assert!(
+        mv != 0 && mv.is_power_of_two(),
+        "move is not one-hot: {mv:#x}"
+    );
+    let sq = mv.trailing_zeros() as usize;
+    // SAFETY: sq < 64 (mv is a single bit within the board).
+    let rays = unsafe { RAY.get_unchecked(sq) };
+    let blockers = player | !(player | opponent); // player discs OR empty squares
+    let mut flips = 0u64;
+
+    let mut k = 0;
+    while k < 4 {
+        let mask = rays[INC_DIRS[k]];
+        let b = blockers & mask;
+        let nearest = b & b.wrapping_neg(); // lowest blocker, 0 if none
+        let run = mask & nearest.wrapping_sub(1); // ray cells between mv and nearest
+        let hit = 0u64.wrapping_sub(((nearest & player) != 0) as u64); // all-ones iff player
+        flips |= run & hit;
+        k += 1;
+    }
+    let mut k = 0;
+    while k < 4 {
+        let mask = rays[DEC_DIRS[k]];
+        let b = blockers & mask;
+        let nearest = highest_bit(b); // highest blocker, 0 if none
+        let run = mask & !(nearest << 1).wrapping_sub(1); // cells above nearest, below mv
+        let hit = 0u64.wrapping_sub(((nearest & player) != 0) as u64);
+        flips |= run & hit;
+        k += 1;
+    }
     flips
 }
 

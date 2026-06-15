@@ -121,6 +121,17 @@ natural unit — is well under a millisecond.
   (`make bench-simd`); reverted from the search to keep it simple.
 - **PGO was a wash.** The inner loop is already tight with predictable branches.
   The `pgo-release` target exists for completeness.
+- **Killer-move ordering *regressed* the game** (~75 → ~86 ms) while keeping
+  values correct. Hash-move + mobility ordering is already near the minimal tree;
+  depth-indexed killers from other positions displace good moves and add per-node
+  overhead — net negative, like the rejected positional-weight ordering. Reverted.
+- **"Outflank" (PEXT-style) flips were a microbench mirage.** A branchless
+  nearest-blocker flip (precomputed ray masks + `blsi`/MSB isolate) is **~5×** the
+  walk on a *random-board* microbench, but **~4 % slower in real self-play**: actual
+  flip runs are short, so the walk early-exits in 1–2 predictable steps with no
+  table load, while the outflank pays fixed work + a `RAY[sq]` load every call.
+  Reverted; kept as `flips_outflank` (`make bench-flips`) — the in-process A/B
+  game benchmark is the one to trust, not the kernel microbench.
 
 ## Build
 

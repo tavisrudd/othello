@@ -133,9 +133,11 @@ fn parse(argv: &[String]) -> Parsed {
             },
             "--to-move" => match take_value(flag, inline, &mut iter) {
                 Ok(v) if v == "black" || v == "white" => args.to_move = Some(v.to_string()),
-                Ok(v) => return Parsed::Error(format!(
+                Ok(v) => {
+                    return Parsed::Error(format!(
                     "argument --to-move: invalid choice: {v:?} (choose from \"black\", \"white\")"
-                )),
+                ))
+                }
                 Err(e) => return Parsed::Error(e),
             },
             other => return Parsed::Error(format!("unrecognized arguments: {other}")),

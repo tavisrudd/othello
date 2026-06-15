@@ -237,6 +237,26 @@ fn movegen_matches_reference_on_random_boards() {
     }
 }
 
+#[test]
+fn flips_outflank_match_walk_on_random_boards() {
+    use othello::core::{flips_for_move, flips_outflank};
+    let mut rng = Lcg(0xABCD);
+    for _ in 0..3000 {
+        let player = rng.next_u64();
+        let opp = rng.next_u64() & !player;
+        let mut empties = !(player | opp); // every possible move square
+        while empties != 0 {
+            let mv = empties & empties.wrapping_neg();
+            empties ^= mv;
+            assert_eq!(
+                flips_outflank(mv, player, opp),
+                flips_for_move(mv, player, opp),
+                "mv={mv:#x} p={player:#x} o={opp:#x}"
+            );
+        }
+    }
+}
+
 // --------------------------------------------------------------------------- //
 // Brute-force oracle + engine equivalence
 // --------------------------------------------------------------------------- //
