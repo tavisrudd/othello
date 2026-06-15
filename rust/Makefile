@@ -67,6 +67,15 @@ bench-flips:
 bench-solve:
 	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_solve
 
+# Full-game benchmark with search isolated from TTY I/O (buffered render).
+# OTHELLO_TRACE=1 adds per-move `tracing` spans.
+bench-game:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_game
+
+# strong+ vs strong strength match (colour-balanced).
+match:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example match -- 6 40
+
 # Record a perf profile of the full depth-8 game.
 profile:
 	RUSTFLAGS="$(RFLAGS)" cargo build --profile profiling --example profile_game

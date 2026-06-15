@@ -38,5 +38,5 @@ pub use fixtures::{
     init_near_terminal_game_white_win, start, START_NAMES,
 };
 pub use game::{best_by_side, child_depth, iter_moves, Depth, Engine, MoveScores};
-pub use play::play_game;
+pub use play::{play_game, record_game, render_recorded, RecordedGame};
 pub use tt::TranspositionTable;
