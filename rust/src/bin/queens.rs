@@ -4,17 +4,19 @@
 //! row, column, or diagonal); whoever cannot move loses. The engine plays
 //! perfectly (any winning move when one exists).
 //!
-//!   queens solve [n]            who wins the empty n×n board, with an optimal line
+//!   queens solve [n] [solver]   who wins the empty n×n board, with an optimal line
 //!   queens self  [n]            watch the engine play an optimal line both sides
 //!   queens play  [n] [1|2]      play against the engine as player 1 (first) or 2
 //!
-//! Default: n = 8, you are player 1. Squares are named file+rank, e.g. `d1`
-//! (file A..  left→right, rank 1..n bottom→top, chess style). Boards up to 13×13.
+//! Default: n = 8, you are player 1, solver = parallel. The `solver` arg picks a
+//! step of the lineage (naive | memo | symmetry | parallel) -- handy for A/B and
+//! for trusting the fast solver against the simple one. Squares are named
+//! file+rank, e.g. `d1` (file A.. left→right, rank 1..n bottom→top). Up to 16×16.
 
 use std::io::{self, Write};
 use std::time::Instant;
 
-use othello::queens::{Bits, Queens, QueensTt, MAX_N};
+use othello::queens::{make_solver, Bits, Queens, Solver, MAX_N, SOLVER_NAMES};
 
 /// Transposition-table size (`2^bits` slots ≈ `2^bits * 40` bytes) -- the memory
 /// cap. Scales with the board by default; `QUEENS_TT_BITS` overrides. A too-small
@@ -48,7 +50,14 @@ fn main() {
     let q = Queens::new(n);
 
     match mode.as_str() {
-        "solve" => solve(&q),
+        "solve" => {
+            let solver = args.next().unwrap_or_else(|| "parallel".into());
+            if !SOLVER_NAMES.contains(&solver.as_str()) {
+                eprintln!("unknown solver {solver:?}; use one of {SOLVER_NAMES:?}");
+                std::process::exit(2);
+            }
+            solve(&q, &solver);
+        }
         "self" => self_play(&q),
         "play" => {
             let human: u32 = args.next().and_then(|s| s.parse().ok()).unwrap_or(1);
@@ -127,7 +136,7 @@ fn engine_move(
     blocked: Bits,
     ply: u32,
     last: Option<u32>,
-    tt: &QueensTt,
+    solver: &dyn Solver,
 ) -> (u32, bool) {
     if q.is_odd() {
         if ply.is_multiple_of(2) {
@@ -141,15 +150,15 @@ fn engine_move(
             (q.first_available(blocked).unwrap(), false) // second player: lost
         }
     } else {
-        q.best_move(blocked, tt).unwrap() // even board: search
+        q.best_move(blocked, solver).unwrap() // even board: search
     }
 }
 
-fn solve(q: &Queens) {
-    let tt = QueensTt::new(tt_bits(q.n));
+fn solve(q: &Queens, solver_name: &str) {
+    let solver = make_solver(solver_name, tt_bits(q.n)).unwrap();
     let t = Instant::now();
-    let first_wins = q.first_player_wins(&tt); // root-parallel
-    let pv = q.principal_variation(&tt); // reuses the shared table
+    let first_wins = solver.first_player_wins(q);
+    let pv = q.principal_variation(solver.as_ref());
     let elapsed = t.elapsed().as_secs_f64();
     let winner = if first_wins { "first" } else { "second" };
     println!(
@@ -158,13 +167,12 @@ fn solve(q: &Queens) {
     );
     let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
     println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
-    let (slots, bytes) = tt.capacity();
     println!(
-        "(searched {} nodes in {:.3}s; TT cap {} slots ≈ {:.2} GB)",
-        tt.nodes(),
+        "(solver {}: searched {} nodes in {:.3}s; TT cap ≈ {:.2} GB)",
+        solver.name(),
+        solver.nodes(),
         elapsed,
-        slots,
-        bytes as f64 / 1e9,
+        solver.cap_bytes() as f64 / 1e9,
     );
 
     let mut queens = Bits::empty();
@@ -178,7 +186,7 @@ fn solve(q: &Queens) {
 }
 
 fn self_play(q: &Queens) {
-    let tt = QueensTt::new(tt_bits(q.n));
+    let solver = make_solver("parallel", tt_bits(q.n)).unwrap();
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
     let mut ply = 0u32;
@@ -186,7 +194,7 @@ fn self_play(q: &Queens) {
     println!("Optimal self-play on the {n}×{n} board:\n", n = q.n);
     render(q, queens, blocked);
     while !q.no_moves(blocked) {
-        let (sq, win) = engine_move(q, blocked, ply, last, &tt);
+        let (sq, win) = engine_move(q, blocked, ply, last, solver.as_ref());
         queens.set(sq);
         blocked = q.place(blocked, sq);
         println!(
@@ -209,7 +217,7 @@ fn self_play(q: &Queens) {
 }
 
 fn play(q: &Queens, human_first: bool) {
-    let tt = QueensTt::new(tt_bits(q.n));
+    let solver = make_solver("parallel", tt_bits(q.n)).unwrap();
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
     let mut ply = 0u32;
@@ -245,7 +253,7 @@ fn play(q: &Queens, human_first: bool) {
                 None => return, // quit / EOF
             }
         } else {
-            let (sq, win) = engine_move(q, blocked, ply, last, &tt);
+            let (sq, win) = engine_move(q, blocked, ply, last, solver.as_ref());
             println!("\nEngine plays {}  ({}).", name(q, sq), assess(win));
             sq
         };

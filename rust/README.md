@@ -200,9 +200,10 @@ merged by memoising on it. The board is a fixed multi-word bitset, so sizes up t
 16×16 fit (tractability runs out first).
 
 ```console
-$ cargo run --release --bin queens -- solve 8     # who wins the empty n×n board
-$ cargo run --release --bin queens -- self  6     # watch an optimal line
-$ cargo run --release --bin queens -- play  8 1   # play the engine as player 1
+$ cargo run --release --bin queens -- solve 8            # who wins the empty board
+$ cargo run --release --bin queens -- solve 10 symmetry  # pick a solver (A/B)
+$ cargo run --release --bin queens -- self  6            # watch an optimal line
+$ cargo run --release --bin queens -- play  8 1          # play the engine as player 1
 ```
 
 Squares are named file+rank (`d1`). It reproduces the paper's headline — on 8×8
@@ -225,6 +226,24 @@ free, so the first player always has the mirror response and the second player
 runs out of moves first. That makes every odd board **O(1)**: 15×15 went from a
 ~460 s search to instant. (The game being impartial under normal play, this is a
 Sprague–Grundy N-position witnessed by the pairing.) Only **even** boards search.
+
+### The solver lineage (mirrors the Othello engine ladder)
+
+Like the Othello engines, the search is a ladder — each step adds one idea, all
+compute the **same** win/loss, and the simpler ones are kept as ground truth
+(`solver_lineage_agrees` cross-checks them against the memo-less `naive`):
+
+| `solver`   | adds                                                       | n=8 nodes |
+|------------|------------------------------------------------------------|-----------|
+| `naive`    | plain win/loss + α-β cutoff, no memo (ground truth)        | 23,099    |
+| `memo`     | + fixed-size transposition table (raw-mask key)            | 1,278     |
+| `symmetry` | + dihedral (8-fold) canonical keys                         | 626       |
+| `parallel` | + rayon root parallelism (YBWC) + odd-board O(1)           | 625       |
+
+A nice node-vs-wall-clock lesson at n=10: `symmetry` searches ~6× fewer nodes
+than `memo` (94k vs 603k) yet is *slower* in wall-clock (the per-node `canon` of
+8 images costs more than it saves there) — until `parallel` spreads it over 24
+threads and wins outright (0.08 s). `parallel` is the default.
 
 ### Scaling the even boards (the Othello playbook)
 

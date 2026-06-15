@@ -4,45 +4,34 @@
 //! attack each other (no shared row, column, or diagonal). A player who cannot
 //! move loses -- equivalently, the player who places the queen that leaves every
 //! remaining square attacked wins. It is a *combinatorial* game: perfect
-//! information, no chance, normal play (last to move wins).
+//! information, no chance, normal play (last to move wins). Formally it is
+//! **Node Kayles on the n-queens graph** (deciding the winner is PSPACE-complete,
+//! Schaefer 1978), and its Sprague-Grundy value is OEIS A344227.
 //!
-//! The game is **impartial** -- a queen is colourless, so the set of legal moves
-//! depends only on the position, not on whose turn it is. The position itself is
-//! captured entirely by the **blocked mask** (squares occupied or attacked):
-//! placing a queen on square `s` always adds the same `attack(s)`, so any two
-//! move orders reaching the same blocked mask are identical for all future play.
-//! That collapses the game to a negamax over a bitset, with transpositions merged
-//! by memoising on the mask.
+//! The game is **impartial** -- a queen is colourless, so the legal moves depend
+//! only on the position, captured entirely by the **blocked mask** (squares
+//! occupied or attacked): placing a queen on `s` always adds the same `attack(s)`,
+//! so move orders reaching the same mask are identical for all future play.
 //!
-//! **Odd boards need no search at all.** The first player wins by a pairing
-//! strategy: take the centre, then answer every reply with its 180° rotation
-//! (see `first_player_wins`). So only *even* boards are searched, and the levers
-//! below make those tractable:
+//! **Odd boards need no search.** The first player wins by a pairing strategy:
+//! take the centre, then answer every reply with its 180° rotation (see
+//! `Solver::first_player_wins`). Only *even* boards are searched.
 //!
-//! * **win/loss with α-β cutoff** -- the value is just win or lose, so as soon as
-//!   one move is found that hands the opponent a *lost* position, the node is a
-//!   win and the rest of its moves are skipped (a forcing move-order finds those
-//!   fast). At most `n` non-attacking queens fit (one per row), so the tree is at
-//!   most `n` plies deep -- branching, not depth, is the cost.
-//! * **dihedral symmetry** -- the board has the square's 8 symmetries, so every
-//!   position is memoised under the lexicographically smallest of its 8 images,
-//!   merging symmetric subtrees (~8× fewer states).
+//! ## Solver lineage (mirrors the Othello engine ladder)
+//!
+//! [`Queens`] is pure geometry; the search is a ladder of [`Solver`]s, each step
+//! adding one idea, all computing the *same* win/loss so the simpler ones are
+//! kept as ground truth (cross-checked in the tests):
+//!
+//! | solver       | adds                                                        |
+//! |--------------|-------------------------------------------------------------|
+//! | [`Naive`]    | plain negamax win/loss with an α-β cutoff, no memo (truth)  |
+//! | [`Memo`]     | a fixed-size transposition table keyed on the raw mask      |
+//! | [`Symmetry`] | + dihedral (8-fold) canonical keys, merging symmetric states|
+//! | [`Parallel`] | + rayon root parallelism (Young-Brothers-Wait) + odd O(1)   |
 //!
 //! Bit `r*n + c` is the square at row `r`, column `c` (`0`-indexed). The bitset is
-//! `WORDS` × 64 bits, so boards up to `16×16` (256 bits) fit (tractability,
-//! however, runs out well before that -- see the README).
-//!
-//! Two more levers (the same ones that scaled the Othello engine) make the larger
-//! even boards reachable:
-//!
-//! * **a fixed-size transposition table** (`QueensTt`) instead of an unbounded
-//!   map -- a flat, sharded, open-addressing array, full-key compare so a
-//!   collision is a miss (recompute), never a wrong answer. Memory is a hard cap
-//!   (`2^bits` slots), not something that grows with the search; eviction only
-//!   costs recompute.
-//! * **root parallelism** -- the distinct (symmetry-reduced) first moves are
-//!   searched across rayon workers sharing the table; `any` keeps the cutoff (a
-//!   single winning first move proves the first player wins).
+//! `WORDS` × 64 bits, so boards up to `16×16` (256 bits) fit.
 
 use std::collections::HashSet;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -106,7 +95,8 @@ impl Bits {
 }
 
 /// An `n×n` Non-Attacking Queens game: board geometry, per-square attack masks,
-/// a forcing static move order, and the board's 8 symmetry permutations.
+/// a forcing static move order, and the board's 8 symmetry permutations. This is
+/// pure geometry -- the search lives in the [`Solver`] implementations.
 pub struct Queens {
     pub n: u32,
     board: Bits,
@@ -254,26 +244,6 @@ impl Queens {
         best
     }
 
-    /// Does the player to move win from `blocked` (perfect play)? Win/loss is
-    /// exact, so the first move handing the opponent a loss proves a win (cutoff).
-    /// Shares the transposition table `tt` -- safe to call from many threads.
-    pub fn wins(&self, blocked: Bits, tt: &QueensTt) -> bool {
-        let key = self.canon(blocked);
-        if let Some(w) = tt.get(key) {
-            return w;
-        }
-        tt.nodes.fetch_add(1, Ordering::Relaxed);
-        let mut result = false; // no move ⇒ lose
-        for &sq in &self.order {
-            if self.board.get(sq) && !blocked.get(sq) && !self.wins(self.place(blocked, sq), tt) {
-                result = true; // this move hands the opponent a lost position
-                break;
-            }
-        }
-        tt.put(key, result);
-        result
-    }
-
     /// The symmetry-distinct first moves from the empty board: one representative
     /// per orbit of the board's 8 symmetries. Cuts the root branching ~8×.
     pub fn distinct_first_moves(&self) -> Vec<u32> {
@@ -287,68 +257,32 @@ impl Queens {
         out
     }
 
-    /// Does the first player win the empty board?
-    ///
-    /// **Odd boards are a theorem, not a search.** The game is impartial under
-    /// normal play, so each position is an N- or P-position (Sprague-Grundy). For
-    /// an odd board the first player wins by a strategy-stealing pairing: take the
-    /// centre, then answer every reply `s` with its 180° rotation `s'`. The centre
-    /// attacks all four lines through it, so a legal `s` is off those lines --
-    /// which is exactly the condition for `s` not to attack `s'` -- and by
-    /// symmetry `s'` is free. The first player always has the mirror response, so
-    /// the second player runs out first. This collapses an O(huge) search to O(1)
-    /// (15×15 is ~7 minutes of search; here it is instant -- see `mirror_line`).
-    ///
-    /// **Even boards have no centre and need search**, with a Young-Brothers-Wait
-    /// guard: search the best-ordered first move sequentially, returning at once
-    /// if it wins (no speculation); only if it loses do the siblings fan out
-    /// across rayon workers sharing `tt`, where `any` short-circuits on the first
-    /// winning one. A naïve `par_iter().any()` over *all* first moves regresses
-    /// first-player wins badly (~40× on 13×13) by speculatively searching whole
-    /// losing subtrees the cutoff would skip; the guard keeps the cutoff while
-    /// still parallelising the must-refute-everything case of a second-player win.
-    pub fn first_player_wins(&self, tt: &QueensTt) -> bool {
-        if self.is_odd() {
-            return true; // centre + 180° mirror strategy (see above)
-        }
-        match self.distinct_first_moves().split_first() {
-            None => false,
-            Some((&first, rest)) => {
-                if !self.wins(self.place(Bits::ZERO, first), tt) {
-                    return true; // best move already wins -- no speculation
-                }
-                rest.par_iter()
-                    .any(|&sq| !self.wins(self.place(Bits::ZERO, sq), tt))
-            }
-        }
-    }
-
-    /// An optimal move and whether it wins: a winning move if one exists, else
-    /// the first available move (all of which lose). `None` if no move exists.
-    pub fn best_move(&self, blocked: Bits, tt: &QueensTt) -> Option<(u32, bool)> {
+    /// An optimal move for the side to move and whether it wins, using `solver`:
+    /// a winning move if one exists, else the first available move (all lose).
+    /// `None` if no move exists.
+    pub fn best_move(&self, blocked: Bits, solver: &dyn Solver) -> Option<(u32, bool)> {
         let mut first = None;
         for &sq in &self.order {
-            if !self.board.get(sq) || blocked.get(sq) {
+            if !self.is_available(blocked, sq) {
                 continue;
             }
             first.get_or_insert(sq);
-            if !self.wins(self.place(blocked, sq), tt) {
+            if !solver.wins(self, self.place(blocked, sq)) {
                 return Some((sq, true)); // a winning move
             }
         }
         first.map(|sq| (sq, false)) // losing: any legal move
     }
 
-    /// An optimal line from the empty board (reusing `tt`): the winner plays a
-    /// winning move each turn, the loser any legal move. Odd boards take the O(1)
-    /// `mirror_line`; even boards are search-driven.
-    pub fn principal_variation(&self, tt: &QueensTt) -> Vec<u32> {
+    /// An optimal line from the empty board. Odd boards take the O(1) centre +
+    /// mirror line; even boards are driven by `solver`'s winning moves.
+    pub fn principal_variation(&self, solver: &dyn Solver) -> Vec<u32> {
         if self.is_odd() {
             return self.mirror_line();
         }
         let mut blocked = Bits::ZERO;
         let mut line = Vec::new();
-        while let Some((sq, _)) = self.best_move(blocked, tt) {
+        while let Some((sq, _)) = self.best_move(blocked, solver) {
             line.push(sq);
             blocked = self.place(blocked, sq);
         }
@@ -357,9 +291,9 @@ impl Queens {
 
     /// The first player's winning line on an odd board, with no search: centre,
     /// then mirror each (here arbitrary) reply by the losing side. The mirror is
-    /// always legal (see `first_player_wins`), so this terminates with the second
-    /// player stuck and the first player having made the last move.
-    fn mirror_line(&self) -> Vec<u32> {
+    /// always legal (see `Solver::first_player_wins`), so this terminates with the
+    /// second player stuck and the first player having made the last move.
+    pub fn mirror_line(&self) -> Vec<u32> {
         let mut blocked = Bits::ZERO;
         let mut line = Vec::new();
         let c = self.center().expect("odd board has a centre");
@@ -377,10 +311,206 @@ impl Queens {
     }
 }
 
-/// A fixed-size, sharded, open-addressing transposition table keyed by canonical
-/// blocked mask -> win/loss. Memory is capped at `2^bits` slots (a collision is a
-/// miss, so eviction only costs recompute, never correctness). Sharded so rayon
-/// workers can share it; each get/put briefly locks one shard.
+// --------------------------------------------------------------------------- //
+// Solver lineage
+// --------------------------------------------------------------------------- //
+
+/// A win/loss solver for the Non-Attacking Queens game. Implementors compute
+/// `wins` (the value for the player to move); the rest is provided.
+pub trait Solver: Sync {
+    /// The solver's name (for the CLI / reporting).
+    fn name(&self) -> &'static str;
+
+    /// Does the player to move win from `blocked` under perfect play?
+    fn wins(&self, q: &Queens, blocked: Bits) -> bool;
+
+    /// Does the first player win the empty board? The default is a plain
+    /// `wins(empty)`; [`Parallel`] overrides it with the odd-board O(1) theorem
+    /// and root parallelism.
+    fn first_player_wins(&self, q: &Queens) -> bool {
+        self.wins(q, Bits::empty())
+    }
+
+    /// Nodes searched (TT misses), for reporting. `0` if not tracked.
+    fn nodes(&self) -> u64 {
+        0
+    }
+
+    /// Transposition-table byte footprint (the memory cap). `0` if none.
+    fn cap_bytes(&self) -> u64 {
+        0
+    }
+}
+
+/// **Naive** -- plain negamax win/loss with the α-β cutoff and *no* memo. The
+/// ground truth: slowest, but the reference every other solver is checked against.
+#[derive(Default)]
+pub struct Naive {
+    nodes: AtomicU64,
+}
+
+impl Naive {
+    pub fn new() -> Self {
+        Naive::default()
+    }
+}
+
+impl Solver for Naive {
+    fn name(&self) -> &'static str {
+        "naive"
+    }
+    fn wins(&self, q: &Queens, blocked: Bits) -> bool {
+        self.nodes.fetch_add(1, Ordering::Relaxed);
+        let mut result = false;
+        for &sq in &q.order {
+            if q.is_available(blocked, sq) && !self.wins(q, q.place(blocked, sq)) {
+                result = true;
+                break;
+            }
+        }
+        result
+    }
+    fn nodes(&self) -> u64 {
+        self.nodes.load(Ordering::Relaxed)
+    }
+}
+
+/// **Memo** (`canon=false`) / **Symmetry** (`canon=true`) -- the cutoff search
+/// backed by a fixed-size transposition table. With `canon` the key is the
+/// position's dihedral-canonical image, so all 8 symmetric states share an entry.
+pub struct Tt {
+    tt: QueensTt,
+    canon: bool,
+}
+
+impl Tt {
+    pub fn new(bits: u32, canon: bool) -> Self {
+        Tt {
+            tt: QueensTt::new(bits),
+            canon,
+        }
+    }
+}
+
+impl Solver for Tt {
+    fn name(&self) -> &'static str {
+        if self.canon {
+            "symmetry"
+        } else {
+            "memo"
+        }
+    }
+    fn wins(&self, q: &Queens, blocked: Bits) -> bool {
+        let key = if self.canon {
+            q.canon(blocked)
+        } else {
+            blocked
+        };
+        if let Some(w) = self.tt.get(key) {
+            return w != 0;
+        }
+        self.tt.bump();
+        let mut result = false;
+        for &sq in &q.order {
+            if q.is_available(blocked, sq) && !self.wins(q, q.place(blocked, sq)) {
+                result = true;
+                break;
+            }
+        }
+        self.tt.put(key, result as u8);
+        result
+    }
+    fn nodes(&self) -> u64 {
+        self.tt.nodes()
+    }
+    fn cap_bytes(&self) -> u64 {
+        self.tt.capacity().1
+    }
+}
+
+/// **Parallel** -- the production solver. Sequential search is [`Tt`] with
+/// canonical keys; `first_player_wins` adds the odd-board O(1) theorem and rayon
+/// root parallelism with a Young-Brothers-Wait guard.
+pub struct Parallel {
+    inner: Tt,
+}
+
+impl Parallel {
+    pub fn new(bits: u32) -> Self {
+        Parallel {
+            inner: Tt::new(bits, true),
+        }
+    }
+}
+
+impl Solver for Parallel {
+    fn name(&self) -> &'static str {
+        "parallel"
+    }
+    fn wins(&self, q: &Queens, blocked: Bits) -> bool {
+        self.inner.wins(q, blocked)
+    }
+    /// Odd boards are a theorem, not a search: the first player takes the centre,
+    /// then mirrors every reply by 180° rotation. The centre attacks all four
+    /// lines through it, so a legal reply `s` is off those lines -- exactly the
+    /// condition for `s` not to attack its mirror `s'` -- and by symmetry `s'` is
+    /// free, so the first player always has the pairing response and the second
+    /// player runs out first. (Impartial normal-play ⇒ Sprague-Grundy N-position.)
+    ///
+    /// Even boards search. A Young-Brothers-Wait guard searches the best-ordered
+    /// first move sequentially -- returning at once if it wins (no speculation) --
+    /// and only then fans the siblings across rayon workers sharing the table,
+    /// where `any` short-circuits on the first winning one. A naïve
+    /// `par_iter().any()` over *all* first moves regresses first-player wins
+    /// badly (~40× on 13×13) by speculatively searching whole losing subtrees the
+    /// cutoff would skip; the guard keeps the cutoff while still parallelising the
+    /// must-refute-everything case of a second-player win.
+    fn first_player_wins(&self, q: &Queens) -> bool {
+        if q.is_odd() {
+            return true; // centre + 180° mirror strategy
+        }
+        match q.distinct_first_moves().split_first() {
+            None => false,
+            Some((&first, rest)) => {
+                if !self.wins(q, q.place(Bits::ZERO, first)) {
+                    return true; // best move already wins -- no speculation
+                }
+                rest.par_iter()
+                    .any(|&sq| !self.wins(q, q.place(Bits::ZERO, sq)))
+            }
+        }
+    }
+    fn nodes(&self) -> u64 {
+        self.inner.nodes()
+    }
+    fn cap_bytes(&self) -> u64 {
+        self.inner.cap_bytes()
+    }
+}
+
+/// CLI solver names, simplest → most sophisticated.
+pub const SOLVER_NAMES: [&str; 4] = ["naive", "memo", "symmetry", "parallel"];
+
+/// Build a solver by name with a `2^bits`-slot table (ignored by `naive`).
+pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
+    match name {
+        "naive" => Some(Box::new(Naive::new())),
+        "memo" => Some(Box::new(Tt::new(bits, false))),
+        "symmetry" => Some(Box::new(Tt::new(bits, true))),
+        "parallel" => Some(Box::new(Parallel::new(bits))),
+        _ => None,
+    }
+}
+
+// --------------------------------------------------------------------------- //
+// Transposition table
+// --------------------------------------------------------------------------- //
+
+/// A fixed-size, sharded, open-addressing transposition table keyed by a board
+/// mask -> a `u8` value (win/loss as 0/1, or a Sprague-Grundy nimber). Memory is
+/// capped at `2^bits` slots (a collision is a miss, so eviction only costs
+/// recompute, never correctness). Sharded so rayon workers can share it; each
+/// get/put briefly locks one shard.
 pub struct QueensTt {
     shards: Vec<Mutex<Box<[Slot]>>>,
     shard_mask: u64,
@@ -388,19 +518,11 @@ pub struct QueensTt {
     nodes: AtomicU64,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Default)]
 struct Slot {
     key: [u64; WORDS],
-    flag: u8, // 0 = empty, 1 = loss, 2 = win
-}
-
-impl Default for Slot {
-    fn default() -> Self {
-        Slot {
-            key: [0; WORDS],
-            flag: 0,
-        }
-    }
+    val: u8,
+    used: u8,
 }
 
 /// 1024 shards: enough that rayon workers rarely collide on the same lock.
@@ -434,6 +556,12 @@ impl QueensTt {
         self.nodes.load(Ordering::Relaxed)
     }
 
+    /// Count one searched node (a TT miss about to be expanded).
+    #[inline]
+    pub fn bump(&self) {
+        self.nodes.fetch_add(1, Ordering::Relaxed);
+    }
+
     #[inline]
     fn hash(key: Bits) -> u64 {
         // Mix the words; low bits pick the shard, high bits the slot (disjoint).
@@ -445,21 +573,24 @@ impl QueensTt {
         h
     }
 
+    /// The stored value for `key`, if present.
     #[inline]
-    fn get(&self, key: Bits) -> Option<bool> {
+    pub fn get(&self, key: Bits) -> Option<u8> {
         let h = Self::hash(key);
         let idx = ((h >> 32) & self.slot_mask) as usize;
         let s = self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx];
-        (s.flag != 0 && s.key == key.0).then_some(s.flag == 2)
+        (s.used != 0 && s.key == key.0).then_some(s.val)
     }
 
+    /// Store `val` for `key` (replace-always on collision).
     #[inline]
-    fn put(&self, key: Bits, win: bool) {
+    pub fn put(&self, key: Bits, val: u8) {
         let h = Self::hash(key);
         let idx = ((h >> 32) & self.slot_mask) as usize;
         self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx] = Slot {
             key: key.0,
-            flag: if win { 2 } else { 1 },
+            val,
+            used: 1,
         };
     }
 }
@@ -467,7 +598,6 @@ impl QueensTt {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::collections::HashMap;
 
     /// On tiny boards the first move already attacks the whole board, so the
     /// first player wins in a single ply.
@@ -475,10 +605,10 @@ mod tests {
     fn small_boards_first_player_wins_in_one() {
         for n in 1..=3 {
             let q = Queens::new(n);
-            let tt = QueensTt::new(14);
-            assert!(q.wins(Bits::ZERO, &tt), "n={n}: first player should win");
+            let s = Parallel::new(14);
+            assert!(s.first_player_wins(&q), "n={n}: first player should win");
             assert_eq!(
-                q.principal_variation(&tt).len(),
+                q.principal_variation(&s).len(),
                 1,
                 "n={n}: one placement clears it"
             );
@@ -498,17 +628,41 @@ mod tests {
         assert!(!a.get(q.square(1, 0)), "a knight's move away is safe");
     }
 
+    /// The whole solver lineage computes the same win/loss: the memo, symmetry,
+    /// and parallel solvers all agree with the memo-less ground-truth `Naive` on
+    /// every board small enough to brute-force.
+    #[test]
+    fn solver_lineage_agrees() {
+        for n in 1..=9 {
+            let q = Queens::new(n);
+            let truth = Naive::new().first_player_wins(&q);
+            assert_eq!(
+                Tt::new(16, false).first_player_wins(&q),
+                truth,
+                "memo n={n}"
+            );
+            assert_eq!(
+                Tt::new(16, true).first_player_wins(&q),
+                truth,
+                "symmetry n={n}"
+            );
+            assert_eq!(
+                Parallel::new(16).first_player_wins(&q),
+                truth,
+                "parallel n={n}"
+            );
+        }
+    }
+
     /// Odd boards are first-player wins by the centre + 180°-mirror strategy --
     /// proven O(1), and the produced line is legal, complete, and odd-length.
     #[test]
     fn odd_boards_win_by_the_mirror_strategy() {
         for n in (1..=15).step_by(2) {
             let q = Queens::new(n);
-            assert!(
-                q.first_player_wins(&QueensTt::new(14)),
-                "n={n}: odd ⇒ first wins"
-            );
-            let pv = q.principal_variation(&QueensTt::new(14)); // mirror_line
+            let s = Parallel::new(14);
+            assert!(s.first_player_wins(&q), "n={n}: odd ⇒ first wins");
+            let pv = q.principal_variation(&s); // mirror_line
             assert_eq!(pv.len() % 2, 1, "n={n}: first player makes the last move");
             let mut blocked = Bits::ZERO;
             for &sq in &pv {
@@ -521,10 +675,10 @@ mod tests {
             }
             assert!(q.no_moves(blocked), "n={n}: board fully blocked at the end");
         }
-        // The O(1) verdict agrees with the full search on the small odd boards.
+        // The O(1) verdict agrees with full search on the small odd boards.
         for n in [1u32, 3, 5, 7, 9] {
             assert!(
-                Queens::new(n).wins(Bits::ZERO, &QueensTt::new(16)),
+                Naive::new().first_player_wins(&Queens::new(n)),
                 "n={n}: search agrees"
             );
         }
@@ -536,9 +690,9 @@ mod tests {
     fn pv_is_consistent_with_the_winner() {
         for n in 1..=8 {
             let q = Queens::new(n);
-            let tt = QueensTt::new(16);
-            let first_wins = q.wins(Bits::ZERO, &tt);
-            let pv = q.principal_variation(&tt);
+            let s = Tt::new(16, true);
+            let first_wins = s.first_player_wins(&q);
+            let pv = q.principal_variation(&s);
             assert_eq!(
                 first_wins,
                 pv.len() % 2 == 1,
@@ -550,38 +704,6 @@ mod tests {
                 blocked = q.place(blocked, sq);
             }
             assert!(q.no_moves(blocked), "n={n}: board fully blocked at the end");
-        }
-    }
-
-    /// A plain solver that memoises on the raw mask (no symmetry) -- the
-    /// ground truth the symmetry reduction must agree with.
-    fn wins_nosym(q: &Queens, blocked: Bits, memo: &mut HashMap<Bits, bool>) -> bool {
-        if let Some(&w) = memo.get(&blocked) {
-            return w;
-        }
-        let mut result = false;
-        for sq in 0..q.n * q.n {
-            if q.is_available(blocked, sq) && !wins_nosym(q, q.place(blocked, sq), memo) {
-                result = true;
-                break;
-            }
-        }
-        memo.insert(blocked, result);
-        result
-    }
-
-    /// Symmetry canonicalisation and root parallelism must not change the
-    /// verdict: both agree with the raw-mask solver on every board small enough
-    /// to brute-force.
-    #[test]
-    fn symmetry_and_parallel_preserve_the_verdict() {
-        for n in 1..=9 {
-            let q = Queens::new(n);
-            let seq = q.wins(Bits::empty(), &QueensTt::new(18));
-            let par = q.first_player_wins(&QueensTt::new(18));
-            let raw = wins_nosym(&q, Bits::empty(), &mut HashMap::new());
-            assert_eq!(seq, raw, "n={n}: symmetry reduction changed the result");
-            assert_eq!(par, raw, "n={n}: root parallelism changed the result");
         }
     }
 
