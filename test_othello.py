@@ -24,6 +24,7 @@ from othello import (
     init_near_terminal_game_either_can_win,
     winner,
 )
+from othello.ai.evaluation import utility, heuristic
 
 ENDGAME_FIXTURES = [
     init_near_terminal_game_black_win,
@@ -86,11 +87,14 @@ def random_positions(games: int, seed: int):
 
 
 def nocache_value(state, depth):
-    """Plain minimax, no cache and no pruning -- the ground truth oracle."""
-    if state.is_terminal():
-        return state.utility(BLACK)
+    """Plain minimax, no cache and no pruning -- the ground truth oracle.
+
+    Mirrors the engines' leaf order: horizon (heuristic) is checked before
+    terminal (exact utility)."""
     if depth is not None and depth <= 0:
-        return state.utility(BLACK)
+        return heuristic(state, BLACK)
+    if state.is_terminal():
+        return utility(state, BLACK)
     child = depth if depth is None else depth - 1
     vals = [nocache_value(state._make_move_unchecked(m), child)
             for m in iter_actions(state)]
@@ -258,7 +262,7 @@ def test_utility_sign_and_magnitude_at_terminal():
     for b in random_positions(games=120, seed=5):
         if not b.is_terminal():
             continue
-        u = b.utility(BLACK)
+        u = utility(b, BLACK)
         w = winner(b)
         assert (u > 0) == (w == BLACK)
         assert (u < 0) == (w == WHITE)
@@ -274,7 +278,7 @@ def test_utility_is_player_relative():
     engine = AlphaBeta()
     while not term.is_terminal():
         term = term.make_move(engine.best_move(term))
-    assert term.utility(BLACK) == -term.utility(WHITE)
+    assert utility(term, BLACK) == -utility(term, WHITE)
 
 
 # --------------------------------------------------------------------------- #
@@ -420,8 +424,10 @@ def test_alpha_beta_explores_fewer_nodes_than_plain_minimax(monkeypatch):
     def brute(s, d):
         nonlocal brute_nodes
         brute_nodes += 1
-        if s.is_terminal() or (d is not None and d <= 0):
-            return s.utility(BLACK)
+        if d is not None and d <= 0:
+            return heuristic(s, BLACK)
+        if s.is_terminal():
+            return utility(s, BLACK)
         cd = d if d is None else d - 1
         vals = [brute(s._make_move_unchecked(m), cd) for m in iter_actions(s)]
         return max(vals) if s.to_move == BLACK else min(vals)

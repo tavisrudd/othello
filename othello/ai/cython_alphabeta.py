@@ -37,7 +37,7 @@ class _NativeEngine(Engine):
     def value(self, state: GameState, depth: Depth = None) -> Score:
         if depth is None or not HAVE_SEARCH:
             return self.fallback.value(state, depth)
-        return _search.search(state.black, state.white, state.to_move,  # ty: ignore[unresolved-attribute]
+        return _search.search(state.black, state.white, state.to_move,
                               depth, self.cache, self._order)
 
     def scores(self, state: GameState, depth: Depth = None) -> MoveScores:

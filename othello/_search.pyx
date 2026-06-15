@@ -25,6 +25,12 @@ cdef int NEG = -1000000000
 cdef int POS = 1000000000
 cdef int ORDER_MIN_DEPTH = 4
 
+# Horizon heuristic weights (must match othello.ai.evaluation.heuristic).
+cdef u64 CORNERS = 0x8100000000000081
+cdef int CORNER_W = 25
+cdef int MOB_W = 5
+cdef int DISC_W = 1
+
 
 cdef u64 _legal(u64 player, u64 opponent):
     cdef u64 empty = ~(player | opponent)
@@ -135,8 +141,12 @@ cdef int _ab(u64 black, u64 white, int to_move, int depth,
         if alpha >= beta:
             return value
 
-    if depth <= 0:
-        value = __builtin_popcountll(black) - __builtin_popcountll(white)
+    if depth <= 0:                                    # horizon heuristic
+        value = (CORNER_W * (__builtin_popcountll(black & CORNERS)
+                             - __builtin_popcountll(white & CORNERS))
+                 + MOB_W * (__builtin_popcountll(_legal(black, white))
+                            - __builtin_popcountll(_legal(white, black)))
+                 + DISC_W * (__builtin_popcountll(black) - __builtin_popcountll(white)))
         tt[key] = (value, EXACT)
         return value
 

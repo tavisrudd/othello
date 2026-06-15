@@ -107,15 +107,6 @@ class Board:
         white_moves = self._legal_moves(self.white, self.black)
         return black_moves == 0 and white_moves == 0
 
-    def utility(self, player: Player) -> Score:
-        # Disc differential from `player`'s view (own discs minus opponent's).
-        # Its sign already encodes win/loss/draw, so this is a strict refinement
-        # of WDL scoring: optimal play maximises the winning margin without ever
-        # trading away the outcome, and equal-outcome moves are no longer broken
-        # arbitrarily.
-        diff = self.black.bit_count() - self.white.bit_count()
-        return diff if player == BLACK else -diff
-
     def actions(self) -> Moves:
         player, opponent = self._player_opponent()
         return self._legal_moves(player, opponent)

@@ -11,6 +11,7 @@ from othello.core import BLACK, Score
 from othello.game import (
     GameState, Engine, Depth, MoveScores, CacheKey, iter_actions, child_depth,
 )
+from othello.ai.evaluation import utility, heuristic
 
 type ValueCache = dict[CacheKey, Score]
 
@@ -30,8 +31,10 @@ class Minimax(Engine):
         cached = self.cache.get(key)
         if cached is not None:
             return cached
-        if state.is_terminal() or (depth is not None and depth <= 0):
-            score = state.utility(BLACK)     # exact at terminal; heuristic at horizon
+        if depth is not None and depth <= 0:
+            score = heuristic(state, BLACK)      # positional estimate at the horizon
+        elif state.is_terminal():
+            score = utility(state, BLACK)        # exact terminal score
         else:
             child = child_depth(depth)
             values = [self.value(state._make_move_unchecked(m), child)

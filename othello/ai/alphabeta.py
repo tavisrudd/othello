@@ -16,6 +16,7 @@ from othello.game import (
     GameState, Engine, Depth, MoveScores, CacheKey,
     iter_moves, iter_actions, child_depth,
 )
+from othello.ai.evaluation import utility, heuristic
 
 type Bound = Literal["exact", "lower", "upper"]
 EXACT: Final[Bound] = "exact"
@@ -64,7 +65,7 @@ class AlphaBeta(Engine):
                 return value
 
         if depth is not None and depth <= 0:
-            value = state.utility(BLACK)         # heuristic at the horizon
+            value = heuristic(state, BLACK)      # positional estimate at the horizon
             cache[key] = (value, EXACT)
             return value
 
@@ -73,7 +74,7 @@ class AlphaBeta(Engine):
         moves = state.actions()
         if not moves:
             if state.is_terminal():
-                value = state.utility(BLACK)     # exact terminal score
+                value = utility(state, BLACK)    # exact terminal score
                 cache[key] = (value, EXACT)
                 return value
             candidates: Iterable[Move] = (PASS,)  # forced pass: one child
