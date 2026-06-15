@@ -46,8 +46,12 @@ win/loss (cross-checked by `solver_lineage_agrees` vs the memo-less `naive`):
 | `nimber`   | full Sprague-Grundy value via `mex`, **no cutoff**, root-parallel | 8,862   |
 | `pn`       | df-pn proof-number search — **instructive negative** (see below) | 5,411    |
 
-`QueensTt` = sharded (1024) fixed-size open-addressing table; slot = `{key:[u64;4]
-(256b), val:u8, used:u8}` → **40 bytes** padded. `PnTt` similar with `(phi,delta)`.
+`QueensTt` = fixed-size open-addressing table; slot is a compact **8-byte** `u64`
+(`{used:1, val:8, fp:55}`, Chunk 2 / session 4) — the old 40-byte full-key slot is gone.
+It is now **lockless and unsharded** (Session 5, L1, `9b30cb2`): one flat
+`Box<[AtomicU64]>` with relaxed load/store + `MADV_HUGEPAGE` + per-child slot prefetch,
+no mutex. `PnTt` is still sharded (1024) `Mutex<Box<[PnSlot]>>` with `(phi,delta)` — it's
+a tiny-board experiment, not under memory pressure.
 
 ## Key facts / decisions already settled (do NOT re-derive)
 
@@ -201,7 +205,7 @@ decomposition = game doesn't decompose; full-nimber n≥14 = mex blowup.)
 |------|-------|
 | Geometry, `pos_key`/`canon`, `mirror_line`, `best_move`, `principal_variation` | `rust/src/queens.rs` (`impl Queens`) |
 | `Solver` trait + `Naive`/`Tt`/`Parallel`/`Nimber`/`Pn` | `rust/src/queens.rs` (after `// Solver lineage`) |
-| `QueensTt` (40-byte slot; shard/slot masks; `hash`/`get`/`put`) | `rust/src/queens.rs` (`pub struct QueensTt`) — **this is what Chunks 2–4 reshape** |
+| `QueensTt` (8-byte fingerprint slot; shard/slot masks; `hash`/`get`/`put`) | `rust/src/queens.rs` (`pub struct QueensTt`) — **this is what Chunks 2–4 reshape** |
 | `PnTt` (proof/disproof table) | `rust/src/queens.rs` (`pub struct PnTt`) |
 | Lineage cross-check test | `rust/src/queens.rs` `mod tests::solver_lineage_agrees` |
 | OEIS nimber test + CLI table | `nimbers_match_oeis_a344227`; `A344227` const in `bin/queens.rs` |
@@ -263,12 +267,145 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       row-mask encoding), and **measure merge-loss** = (distinct canonical queen-sets) ÷
       (distinct available-masks) on n=10/12/14. Decides archive keyspace sizing; A's exact
       ranked key is the archive's membership/payload key (with Codex's guard).
+- [x] **Lead L1 (session 5, `9b30cb2`): lockless TT + prefetch + huge pages.** Swapped
+      `Vec<Mutex<Box<[Slot]>>>` for one flat `Box<[AtomicU64]>` + relaxed load/store (fp
+      self-validates → no lock, no Hyatt XOR-key); `wins()`→`wins_keyed()` software-prefetches
+      each child slot before recursing; arena is `MADV_HUGEPAGE`-backed (THP is `[madvise]` on
+      the box). Verdicts + distinct unchanged (n=12 exact still 1,060,823). **Did NOT lift the
+      ceiling to a multiple** — interleaved A/B (n=14 parallel, thermal-controlled): ~3–5 %
+      wall, prefetch ~2 % of that (isolated with a temp toggle, 4/4 rounds, both arms paid the
+      `var_os`; toggle reverted). Modest but real, consistent with the DRAM-bound thesis (fact
+      #5). *Prefetch caveat:* the hide window is just a call + a 2nd `hash128` (~20 cyc vs
+      ~250 cyc DRAM), so its small win likely comes from issuing the non-blocking probe early;
+      threading the `(route,fp)` from `prefetch` into `get` would remove the 2nd `hash128`
+      (deferred micro-opt). Remaining per-node levers: **cache-line bucketing** (#4),
+      **AVX-512 canon** (#5) — see lever backlog below.
+- [ ] **Lead L2 (session 5): window the TT by ply.** Transpositions are **strictly intra-ply**
+      (each move places one queen → transposing positions share a queen count), so the TT
+      partitions cleanly by ply and never needs cross-ply co-residency. Licenses a ply-layered
+      + **external-memory delayed-duplicate-detection** solve (Korf 2008; Zhou–Hansen) — the
+      ~9.2B distinct positions fit on disk at a few B each — and reframes Chunk 4 as
+      freeze-each-solved-ply-into-BuRR. A more robust n=16 route than an all-in-RAM table.
 - [ ] Chunk 3: two-tier depth-preferred TT replacement
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
 - [ ] Final: `make test` + `make clippy` green; n=16 verdict cross-checked vs Jenrich (second)
 
+## Lever backlog (sessions 4–5 reviews, prioritised)
+
+Consolidated from two "other-agent" perf reviews. Grouped A (per-node cost) / B (node
+count) / C (TT memory / windowing). ⭐ = ROI·(1/effort). Items already tracked above
+are cross-referenced, not repeated.
+
+| # | lever | cluster | status / where |
+|---|-------|---------|----------------|
+| 1 | Lockless unsharded `AtomicU64` TT | A | **done** — L1, `9b30cb2` |
+| 2 | Software-prefetch child slot | A | **done** — L1 (measured ~2%) |
+| 3 | Huge pages (`MADV_HUGEPAGE`) | A | **done** — L1 |
+| 6 | **History / killer move ordering** ⭐ | B | **next cheap node-cut.** Score squares by β-cutoff frequency, try those first atop the static most-blocking order; 2–5× α-β node cut in impartial games for ~0 per-node cost. Independent of everything else. |
+| 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
+| 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
+| 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
+| 7 | Graph-automorphism canon (nauty/bliss) | B | research-grade — canonicalise the residual *available-graph*, not the static D4; merges more transpositions (likely how Max Fan got n=13). Pricier per node (µs), but cuts node count AND working set. |
+| 8 | Decomposition + small-component nimber DB | B/C | residual graphs *fragment* in the endgame (where the no-cutoff `mex` blowup doesn't apply); value = XOR of small-component nimbers. Prunes subtrees AND stores tiny components instead of full positions. Softens key-fact "doesn't decompose" (true for the *full* board, not deep leaves). |
+| 9 | Free-involution → instant P-verdict | B | **novel.** Generalise the odd-n centre+180° pairing: at any node, if the residual available-graph admits a fixed-point-free edge-respecting involution, it's a second-player win — return P, no search. P-certificates can sit deep, not just at the root. |
+| 4 | Cache-line bucketing (8 slots/64 B line) | A | probe a line before evicting; one miss serves 8 candidates + a better replacement policy. Composes on the flat lockless arena. |
+| 5 | AVX-512 canon | A | vectorise the 8-fold D4 fold of the 256-bit board; znver5 has AVX-512. Minor. |
+| 15 | Cuckoo filter, 1-bit payload | C | we're already lossy (2⁻⁵⁵ fp); a cuckoo filter at ~95% load packs more entries/byte than open-addressing — a cheap intermediate before the full BuRR build. |
+| 10 | df-pn done right (DAG/GHI-aware) | B | in roadmap (Kishimoto–Müller GHI-safe df-pn; Čížek–Balko–Schmid 2026). High effort; only if A/B don't reach n=16. |
+| — | `fastrange` table sizing | A/C | Chunk 2b (Progress) — fill the 17→34 GB power-of-two gap. |
+| — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
+
 ## Handoff Notes
+
+### Session 5 (impl) — L1 landed: lockless TT + prefetch + huge pages (2026-06-15)
+
+**Session**: 2026-06-15 (queens, session 5 impl). Committed `9b30cb2`; `make
+test`/`clippy` green, `fmt-check` clean on my files (pre-existing `table.rs` drift
+left untouched). Implements lead **L1** from the lit-search note below. Files:
+`rust/src/queens.rs`, `rust/Cargo.toml`/`.lock` (added `libc` for `madvise`),
+`rust/README.md`.
+
+**What landed (all three of the per-node-cost cluster #1–#3):**
+- **#1 Lockless, unsharded TT.** `QueensTt` is now one flat `Box<[AtomicU64]>` with
+  `Relaxed` load/store — the `Vec<Mutex<Box<[Slot]>>>` and the 1024-shard routing are
+  gone. Safe because the slot is exactly one `u64` (a load can't tear), a position's
+  value is deterministic (same key ⇒ same stored val even under a concurrent write),
+  and a foreign key is rejected by the 55-bit fp — so no lock and no Hyatt XOR-key.
+- **#2 Software prefetch.** `wins()` now defers to `wins_keyed(q, blocked, key)`; the
+  parent computes each child's canonical key, `_mm_prefetch`es its slot, then recurses,
+  so the child's entry `get` is warm.
+- **#3 Huge pages.** `zeroed_huge_atomics()` allocs via `vec![0u64; n]` (lazy
+  `alloc_zeroed`, so a 17 GB table doesn't commit until probed) then `MADV_HUGEPAGE`s
+  it and reinterprets as `AtomicU64` (one small, documented `unsafe`).
+
+**Measurement (honest):** interleaved A/B vs the `6c32617` mutex build (n=14 parallel,
+thermal-controlled, in a throwaway worktree): lockless **~3–5 % wall**, winning 4/5
+rounds, gap growing under thermal load. Prefetch isolated with a temp `QUEENS_NO_PREFETCH`
+toggle (reverted before commit): **~2 %**, 4/4 rounds — *both arms paid the per-node
+`var_os`, so it cancels in the delta* (it did inflate absolute times, ~17 s vs ~12 s).
+Not the hoped-for ceiling multiple — reinforces fact #5 (DRAM-bound). **Reviewer caveats
+(addressed):** (a) prefetch's hide window is tiny (a call + a 2nd `hash128`), so credit
+it only the measured ~2 %; the 2nd `hash128` per node could be removed by threading
+`(route,fp)` from `prefetch` into `get` (deferred). (b) The `var_os`-per-node was the
+*measurement toggle only*; committed code calls `prefetch` unconditionally.
+
+**Next**: per-node cluster has cache-line bucketing (#4) + AVX-512 canon (#5) left, but
+the bigger levers are the **node-count** ones (history/killer ordering #6) and the
+**structural** n=16 route (L2 ply-windowing / external-memory DDD #11 → Chunk 4 BuRR).
+See the prioritised **Lever backlog** above Handoff Notes.
+
+### Session 5 — perf lit search, published-baseline comparison, two new leads (2026-06-15)
+
+**Session**: 2026-06-15 (queens, session 5 — **lit search + docs only, no code**). Updated
+`rust/README.md` (perf-vs-literature + future-directions), this handoff, and the
+`[[queens-game-cgt-references]]` memory.
+
+**Verified the published baseline from Jenrich's actual QPGAME3 run-listing**
+(arXiv:1312.5135, Turbo/Free Pascal, 1 GHz Pentium III). Exact sum-of-calls:
+
+| n  | Jenrich calls   | our nodes  | distinct    | node-eff |
+|----|-----------------|------------|-------------|----------|
+|  8 |           2,266 |        629 |         625 |    3.6×  |
+| 10 |         653,007 |     94,870 |      94,205 |    6.9×  |
+| 12 |      11,334,613 |  1,069,880 |   1,060,823 |   10.6×  |
+| 14 |   1,161,385,667 | 53,300,665 |  49,141,396 |   21.8×  |
+| 16 |  71,461,975,237 | (unsolved) |  ~9.2B est  |     —    |
+
+He uses **partial symmetry** (full on the first move + half-turn rotation when player 2
+re-establishes it) but **no TT** — this corrects the old "no TT/symmetry" note in the
+References block above. n=14 = 18m51s; n=16 = 22h56m **with a hand-built opening book**
+for player 2's first two replies. Our node-efficiency vs his calls **grows with n** (the
+TT + per-node dihedral canon advantage compounds). Verdicts match exactly; OEIS A344227
+nimbers (≤ n=13) match too.
+
+**Other implementations of this exact game** (none faster per-node for win/loss): **Max
+Fan's general-graph Node-Kayles solver** (Rust, github.com/InnovativeInventor/node-kayles)
+supplied OEIS terms 11–13 — i.e. it computed the **full nimber at n=13**, which our
+`nimber` mode cannot (no-cutoff stall). Worth studying its canonical-subgraph memo for the
+open full-nimber-n≥14 direction. Bardoe (Python torus) + the OEIS Haskell snippet are
+educational. The n-queens *counting* records (Q27 / n=27) are a different (#P) problem,
+not a baseline — they share only the bitmask move-gen.
+
+**Two leads worth not losing (added to Progress as L1/L2):**
+1. **Lockless TT** — slot is already a single `u64`; drop the per-shard `Mutex` for
+   `Box<[AtomicU64]>` (fp self-validates → no lock/XOR-trick). High ROI, low effort; pair
+   with software-prefetch + huge pages. Targets the DRAM-latency bottleneck (fact #5).
+2. **Window by ply** — transpositions are strictly intra-ply, so a ply-layered +
+   external-memory DDD solve (Korf; Zhou–Hansen) bounds the resident set and reframes
+   Chunk 4 as freeze-solved-ply-into-BuRR. The structural route through the n=16 wall.
+
+**Lower-priority lit ideas**: history/killer move ordering (cheap α-β node cut on top of the
+static most-blocking order); graph-automorphism canon via nauty/bliss (more merges, pricier
+per node — likely how Max Fan reached n=13); dynamic decomposition + small-component nimber
+DB (prunes AND compresses where `mex` is cheap — the full board is biconnected but residual
+graphs *fragment* in the endgame, which softens fact #3/key-fact "doesn't decompose");
+free-involution detection for instant deep P-verdicts (generalises the odd-n pairing);
+AVX-512 canon (minor per-node).
+
+**Validation unchanged**: any TT/key change keeps `solver_lineage_agrees` (n≤9) + a fresh
+`solve 12/14 --distinct` (distinct unchanged, re-exp ≈ 1.0×). The lockless swap is
+behaviour-preserving (same slots, just no lock) — verify node count + verdict identical.
 
 ### Session 4 — Chunk 2 slot shrink: 8-byte fingerprint slot (2026-06-15)
 
