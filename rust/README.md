@@ -239,6 +239,14 @@ compute the **same** win/loss, and the simpler ones are kept as ground truth
 | `memo`     | + fixed-size transposition table (raw-mask key)            | 1,278     |
 | `symmetry` | + dihedral (8-fold) canonical keys                         | 626       |
 | `parallel` | + rayon root parallelism (YBWC) + odd-board O(1)           | 625       |
+| `nimber`   | the full Sprague-Grundy value (`mex`, **no cutoff**)       | 9,040     |
+
+The `nimber` solver computes the exact game value, not just win/loss
+(`queens nimber N`), and is cross-checked against **OEIS A344227** (the nimber
+sequence for this game). Because `mex` needs every child there is no cutoff, so
+it is far heavier — n=12 is ~265× the win/loss node count (283M vs 1.07M); it is
+root-parallel (over the dihedral-distinct first moves, two levels deep) but the
+blowup is algorithmic, so exact nimbers past n≈13 are out of reach this way.
 
 A nice node-vs-wall-clock lesson at n=10: `symmetry` searches ~6× fewer nodes
 than `memo` (94k vs 603k) yet is *slower* in wall-clock (the per-node `canon` of

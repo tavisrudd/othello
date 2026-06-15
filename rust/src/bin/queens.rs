@@ -4,9 +4,10 @@
 //! row, column, or diagonal); whoever cannot move loses. The engine plays
 //! perfectly (any winning move when one exists).
 //!
-//!   queens solve [n] [solver]   who wins the empty n×n board, with an optimal line
-//!   queens self  [n]            watch the engine play an optimal line both sides
-//!   queens play  [n] [1|2]      play against the engine as player 1 (first) or 2
+//!   queens solve  [n] [solver]  who wins the empty n×n board, with an optimal line
+//!   queens nimber [n]           the Sprague-Grundy value (nimber) of the board
+//!   queens self   [n]           watch the engine play an optimal line both sides
+//!   queens play   [n] [1|2]     play against the engine as player 1 (first) or 2
 //!
 //! Default: n = 8, you are player 1, solver = parallel. The `solver` arg picks a
 //! step of the lineage (naive | memo | symmetry | parallel) -- handy for A/B and
@@ -16,7 +17,11 @@
 use std::io::{self, Write};
 use std::time::Instant;
 
-use othello::queens::{make_solver, Bits, Queens, Solver, MAX_N, SOLVER_NAMES};
+use othello::queens::{make_solver, Bits, Nimber, Queens, Solver, MAX_N, SOLVER_NAMES};
+
+/// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
+/// cross-check the solver against the published Sprague-Grundy sequence.
+const A344227: [u8; 14] = [0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1];
 
 /// Transposition-table size (`2^bits` slots ≈ `2^bits * 40` bytes) -- the memory
 /// cap. Scales with the board by default; `QUEENS_TT_BITS` overrides. A too-small
@@ -58,13 +63,14 @@ fn main() {
             }
             solve(&q, &solver);
         }
+        "nimber" => nimber_mode(&q),
         "self" => self_play(&q),
         "play" => {
             let human: u32 = args.next().and_then(|s| s.parse().ok()).unwrap_or(1);
             play(&q, human == 1);
         }
         other => {
-            eprintln!("unknown mode {other:?}; use: solve | self | play");
+            eprintln!("unknown mode {other:?}; use: solve | nimber | self | play");
             std::process::exit(2);
         }
     }
@@ -183,6 +189,35 @@ fn solve(q: &Queens, solver_name: &str) {
     }
     println!();
     render(q, queens, blocked);
+}
+
+fn nimber_mode(q: &Queens) {
+    // The nimber must be *searched* even on odd boards (the pairing proves it is
+    // non-zero but not its value), and there is no α-β cutoff, so size the table
+    // by board size irrespective of parity. `QUEENS_TT_BITS` still overrides.
+    let bits = std::env::var("QUEENS_TT_BITS")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(match q.n {
+            0..=11 => 24,
+            12 => 26,
+            _ => 27,
+        });
+    let solver = Nimber::new(bits);
+    let t = Instant::now();
+    let g = solver.nimber(q);
+    let elapsed = t.elapsed().as_secs_f64();
+    let winner = if g == 0 { "second" } else { "first" };
+    println!(
+        "On the {n}×{n} board the Sprague-Grundy value is *{g}  ⇒  {winner} player wins.",
+        n = q.n,
+    );
+    match A344227.get(q.n as usize) {
+        Some(&exp) if exp == g => println!("(matches OEIS A344227: *{exp})"),
+        Some(&exp) => println!("(MISMATCH vs OEIS A344227: expected *{exp})"),
+        None => println!("(beyond OEIS A344227 — a new term)"),
+    }
+    println!("(searched {} nodes in {:.3}s)", solver.nodes(), elapsed);
 }
 
 fn self_play(q: &Queens) {
