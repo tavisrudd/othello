@@ -275,16 +275,18 @@ more than it saved; now `symmetry` is **faster** in wall-clock too (0.055 s vs
 ### Scaling the even boards (the Othello playbook)
 
 - **A fixed-size transposition table** (`QueensTt`) instead of an unbounded map:
-  a flat, sharded, open-addressing array. Each slot is a compact **8 bytes** — a
-  used bit, the value, and a **55-bit fingerprint** of the canonical key rather
-  than the full 256-bit key (Chunk 2). The slot index already pins most of the
-  routing hash, so an *independent* fingerprint makes a wrong "hit" a ~`2⁻⁵⁵`
-  event per colliding probe — negligible across even a `10¹¹`-node search, with
-  the verdict cross-checked against the known result — while a fingerprint
-  *mismatch* is still just a miss that recomputes. **Memory is a hard cap**
-  (`2^bits` slots; `QUEENS_TT_BITS` to tune), not something that grows with the
-  search — 14×14 solves in a fixed ~1.1 GB (5× less than the old full-key slot)
-  instead of an unbounded `HashMap`.
+  a flat, **lockless** open-addressing array — one `Box<[AtomicU64]>` with relaxed
+  load/store, no mutex and no sharding (a 64-bit slot can't tear). Each slot is a
+  compact **8 bytes** — a used bit, the value, and a **55-bit fingerprint** of the
+  canonical key rather than the full 256-bit key (Chunk 2). The slot index already
+  pins most of the routing hash, so an *independent* fingerprint makes a wrong
+  "hit" a ~`2⁻⁵⁵` event per colliding probe — negligible across even a `10¹¹`-node
+  search, with the verdict cross-checked against the known result — while a
+  fingerprint *mismatch* is still just a miss that recomputes. The arena is backed
+  by **transparent huge pages** (`MADV_HUGEPAGE`) to cut TLB misses on the random
+  probes. **Memory is a hard cap** (`2^bits` slots; `QUEENS_TT_BITS` to tune), not
+  something that grows with the search — 14×14 solves in a fixed ~1.1 GB (5× less
+  than the old full-key slot) instead of an unbounded `HashMap`.
 - **Root parallelism with a Young-Brothers-Wait guard.** The symmetry-distinct
   first moves fan out across rayon workers sharing the table. But a naïve
   `par_iter().any()` *regresses* first-player wins badly (~40× on 13×13): workers
@@ -313,3 +315,66 @@ move handing the opponent a loss proves a win); the board's 8-fold dihedral
 symmetry canonicalises every position, merging ~8× of the states. 12×12 drops
 from ~6.3 s to ~0.6 s; 14×14 (53M nodes) lands in ~33 s on 24 threads (with the
 available-canon key above; ~78 s before it).
+
+### How it compares to the published baselines
+
+The game has been solved before, but only one prior program reports search counts:
+**Thomas Jenrich's QPGAME3** (2014, Turbo/Free Pascal on a 1 GHz Pentium III). It uses
+*partial* symmetry — the full group on the first move, half-turn rotation when player 2
+re-establishes it — but **no transposition table**. Its verdicts match ours on every
+board; the per-node dihedral canon **plus** the TT make `parallel` far more node-
+efficient, and the advantage *grows* with `n`:
+
+| n  | Jenrich "sum of calls" | `parallel` nodes | distinct positions | node-efficiency |
+|----|------------------------|------------------|--------------------|-----------------|
+|  8 |                  2,266 |              629 |                625 |            3.6× |
+| 10 |                653,007 |           94,870 |             94,205 |            6.9× |
+| 12 |             11,334,613 |        1,069,880 |          1,060,823 |           10.6× |
+| 14 |          1,161,385,667 |       53,300,665 |         49,141,396 |           21.8× |
+| 16 |         71,461,975,237 |        *unsolved* |  ~9.2B (HLL est.) |             —   |
+
+Jenrich's n=14 took ~19 min on his hardware vs ~11 s here on 24 threads, but the honest,
+hardware-independent figure is the **~22× fewer search calls**. His n=16 leaned on a
+hand-built opening book for player 2's first two replies and still ran ~23 h — so he
+*reached* a board our table can't yet hold (above), while we hold the efficiency crown
+on n ≤ 14.
+
+Other solvers of this exact game: **Max Fan's general-graph Node-Kayles calculator**
+(Rust) computed the full nimbers OEIS A344227 lists through n=13 — deeper than our
+`nimber` mode, which stalls there — and **Matthew Bardoe's** Python implementation covers
+the torus variant. None reports win/loss faster than `parallel`. This is a *different
+problem* from the famous **n-queens counting** records (e.g. the Q27 project's n=27):
+those enumerate placements (a #P task) rather than solve a two-player game (PSPACE-
+complete here), so the node counts are not comparable — only the bitmask move generation
+is shared.
+
+### Future directions (a performance literature search)
+
+The search is **TT/DRAM-latency-bound** (above), so the cheapest wins target per-node
+memory traffic rather than the algorithm:
+
+- **Lockless, unsharded TT + prefetch + huge pages — done (Session 5).** Each slot is a
+  single `u64`, so the whole `Vec<Mutex<Box<[Slot]>>>` became one flat
+  `Box<[AtomicU64]>` with relaxed load/store — no lock, no sharding, and (because a
+  64-bit slot can't tear) no Hyatt XOR-key trick; the 55-bit fingerprint already turns a
+  foreign entry into a miss. The search software-**prefetches** each child's slot before
+  recursing (the Stockfish trick), and the arena is `MADV_HUGEPAGE`-backed. Together a
+  modest, real win (~3–5 % wall on 14×14 parallel, growing under thermal load; prefetch
+  alone ~2 %), and the prerequisite contiguous arena the bucketing lever below wants.
+- **Cache-line bucketing** — several slots per 64-byte line, probed together.
+- **Better move ordering** (history / killer heuristics) on top of the static
+  most-blocking-first order, to shrink the α-β tree.
+- **Graph-canonical hashing** of the residual *available*-graph (nauty / bliss) instead
+  of the static board D4 — it captures the extra automorphisms deep lines acquire (likely
+  how Max Fan reached the n=13 nimber), merging more transpositions.
+- **Dynamic decomposition.** The full board is biconnected, but residual graphs fragment
+  in the endgame; a connected-components check plus a nim-sum over a cached small-component
+  nimber table prunes — and compresses — exactly where `mex` is cheap.
+
+For the **n=16 memory wall**, the structural lever is that **transpositions are strictly
+intra-ply**: every move places one queen, so two positions that transpose share a queen
+count. That partitions the table by ply and licenses *windowing* it — a ply-layered,
+**external-memory delayed-duplicate-detection** solve (Korf; Zhou–Hansen) streams all but
+a band of plies to disk (the billions of distinct positions fit there at a few bytes
+each), and each fully-solved ply freezes into a **BuRR / ribbon** value-only archive
+(~1.1 bits/position) so resident memory collapses as the search matures.

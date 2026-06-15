@@ -237,6 +237,7 @@ name = "othello"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "libc",
  "rayon",
  "signal-hook",
  "terminal_size",

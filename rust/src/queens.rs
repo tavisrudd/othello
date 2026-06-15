@@ -440,6 +440,42 @@ impl Tt {
             canon,
         }
     }
+
+    /// The cutoff search with `blocked`'s canonical key already in hand. The caller
+    /// prefetched the matching slot before recursing, so this entry `get` -- the
+    /// first thing every node does -- is typically warm (Session 5, lead L2).
+    fn wins_keyed(&self, q: &Queens, blocked: Bits, key: Bits) -> bool {
+        if let Some(w) = self.tt.get(key) {
+            return w != 0;
+        }
+        self.tt.bump();
+        let mut result = false;
+        for &sq in &q.order {
+            if !q.is_available(blocked, sq) {
+                continue;
+            }
+            let child = q.place(blocked, sq);
+            // Terminal-child fast path: the opponent then cannot move, so we win at
+            // once -- skip the recursive probe. Every terminal canonicalises to the
+            // same `ZERO` key (`pos_key` folds `available`; empty ⇒ `Bits::ZERO`), so
+            // the elided probes would all hammer one hot atomic slot. (Raw-key `memo`
+            // keys each terminal by its own `blocked`, so for it `--distinct` drops
+            // every terminal, not one key.)
+            if q.no_moves(child) {
+                result = true;
+                break;
+            }
+            let ckey = if self.canon { q.pos_key(child) } else { child };
+            // Prefetch the child's slot now; its recursion will probe it first thing.
+            self.tt.prefetch(ckey);
+            if !self.wins_keyed(q, child, ckey) {
+                result = true;
+                break;
+            }
+        }
+        self.tt.put(key, result as u8);
+        result
+    }
 }
 
 impl Solver for Tt {
@@ -456,30 +492,7 @@ impl Solver for Tt {
         } else {
             blocked
         };
-        if let Some(w) = self.tt.get(key) {
-            return w != 0;
-        }
-        self.tt.bump();
-        let mut result = false;
-        for &sq in &q.order {
-            if !q.is_available(blocked, sq) {
-                continue;
-            }
-            let child = q.place(blocked, sq);
-            // Terminal-child fast path: if this move leaves the opponent with no
-            // reply, the opponent loses and we win at once -- skip the recursive
-            // `wins(child)`. For the canonical solvers (`symmetry`/`parallel`) every
-            // terminal shares one key (`pos_key` folds `available`, empty ⇒
-            // `Bits::ZERO`), so the elided lookups would otherwise all funnel through
-            // one hot TT shard. (Raw-key `memo` keys terminals by their own `blocked`
-            // mask instead, so for it `--distinct` drops every terminal, not one key.)
-            if q.no_moves(child) || !self.wins(q, child) {
-                result = true;
-                break;
-            }
-        }
-        self.tt.put(key, result as u8);
-        result
+        self.wins_keyed(q, blocked, key)
     }
     fn nodes(&self) -> u64 {
         self.tt.nodes()
@@ -1019,15 +1032,25 @@ impl Hll {
 // Transposition table
 // --------------------------------------------------------------------------- //
 
-/// A fixed-size, sharded, open-addressing transposition table keyed by a board
+/// A fixed-size, **lockless** open-addressing transposition table keyed by a board
 /// mask -> a `u8` value (win/loss as 0/1, or a Sprague-Grundy nimber). Memory is
-/// capped at `2^bits` slots (a collision is a miss, so eviction only costs
-/// recompute, never correctness). Sharded so rayon workers can share it; each
-/// get/put briefly locks one shard.
+/// capped at `2^bits` slots; a fingerprint mismatch is a miss, so eviction only
+/// costs recompute (and a foreign same-slot+same-fingerprint hit is a ~`2^-55`
+/// wrong, cross-checked vs the known verdict).
+///
+/// Each slot is a single [`Slot`] = one `u64`, so the table is a flat
+/// `Box<[AtomicU64]>` shared lock-free across rayon workers: `get`/`put` are a
+/// `Relaxed` `load`/`store`. No mutex, no sharding (Session 5, lead L1). This is
+/// safe by construction -- an `AtomicU64` `load` cannot tear, and the value stored
+/// for a key is deterministic (a position's win/loss or nimber is fixed), so even
+/// a concurrent write for the *same* key stores the *same* value; a write for a
+/// *different* key is rejected by the fingerprint. That removes a lock/unlock and
+/// the mutex cache-line bounce from every node, attacking the DRAM-latency wall
+/// and the mutex contention in the ~18x parallel ceiling. (Hyatt's XOR-key trick
+/// is unnecessary: the 55-bit fingerprint already self-validates identity.)
 pub struct QueensTt {
-    shards: Vec<Mutex<Box<[Slot]>>>,
-    shard_mask: u64,
-    slot_mask: u64,
+    slots: Box<[AtomicU64]>,
+    index_mask: u64,
     nodes: AtomicU64,
     /// Optional distinct-position instrumentation (Chunk 1). `None` for an
     /// ordinary solve, so the production path pays only a predictable null check.
@@ -1083,22 +1106,46 @@ impl Slot {
     }
 }
 
-/// 1024 shards: enough that rayon workers rarely collide on the same lock.
+/// 1024 shards for [`PnTt`] (still mutex-sharded; `pn` is a tiny-board experiment,
+/// not under memory pressure). [`QueensTt`] is lockless and unsharded.
 const SHARD_BITS: u32 = 10;
 
+/// Allocate `size` zeroed [`AtomicU64`] slots backed by transparent huge pages
+/// (Session 5, lead L3). The table is probed at random, so a multi-GB table on
+/// 4 KB pages thrashes the TLB on every node; `MADV_HUGEPAGE` cuts that hard. We
+/// allocate via `vec![0u64; _]` -- the allocator's `alloc_zeroed`, so the OS hands
+/// back lazily-zeroed pages (a 17 GB table does not commit until probed) -- then
+/// reinterpret the buffer as `AtomicU64`.
+fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
+    let mut v: Vec<u64> = vec![0u64; size];
+    #[cfg(target_os = "linux")]
+    unsafe {
+        // SAFETY: `madvise` over the live allocation; `MADV_HUGEPAGE` is advisory
+        // and only changes page backing, never contents. A failure (e.g. THP off)
+        // is a harmless no-op, so the result is ignored.
+        libc::madvise(
+            v.as_mut_ptr().cast::<libc::c_void>(),
+            std::mem::size_of_val(v.as_slice()),
+            libc::MADV_HUGEPAGE,
+        );
+    }
+    let (ptr, len, cap) = (v.as_mut_ptr(), v.len(), v.capacity());
+    std::mem::forget(v);
+    // SAFETY: `AtomicU64` has the same size, alignment, and representation as `u64`
+    // (std guarantee), and we take sole ownership of the same `(ptr, len, cap)`
+    // allocation exactly once; `len == cap`, so `into_boxed_slice` cannot realloc.
+    unsafe { Vec::from_raw_parts(ptr.cast::<AtomicU64>(), len, cap) }.into_boxed_slice()
+}
+
 impl QueensTt {
-    /// A table of `2^bits` slots total (each 8 bytes; see [`Slot`]). `bits` is the
-    /// memory cap knob; clamped so there is at least one slot per shard.
+    /// A lockless table of `2^bits` slots (each 8 bytes; see [`Slot`]). `bits` is
+    /// the memory cap knob.
     pub fn new(bits: u32) -> Self {
-        let bits = bits.max(SHARD_BITS);
-        let shards = 1usize << SHARD_BITS;
-        let per = 1usize << (bits - SHARD_BITS);
+        let bits = bits.max(1);
+        let size = 1usize << bits;
         QueensTt {
-            shards: (0..shards)
-                .map(|_| Mutex::new(vec![Slot::default(); per].into_boxed_slice()))
-                .collect(),
-            shard_mask: shards as u64 - 1,
-            slot_mask: per as u64 - 1,
+            slots: zeroed_huge_atomics(size),
+            index_mask: size as u64 - 1,
             nodes: AtomicU64::new(0),
             counter: None,
         }
@@ -1128,18 +1175,18 @@ impl QueensTt {
 
     /// Total slot capacity and its byte footprint, for reporting the cap.
     pub fn capacity(&self) -> (u64, u64) {
-        let slots = (self.shard_mask + 1) * (self.slot_mask + 1);
-        (slots, slots * std::mem::size_of::<Slot>() as u64)
+        let slots = self.slots.len() as u64;
+        (slots, slots * std::mem::size_of::<AtomicU64>() as u64)
     }
 
     /// Occupied slots, by a one-time scan (post-solve; cheap relative to the
     /// search). Combined with [`capacity`](Self::capacity) it gives the load
     /// factor, and `nodes > fill` reveals how much eviction forced re-expansion.
     pub fn fill(&self) -> u64 {
-        self.shards
+        self.slots
             .iter()
-            .map(|s| s.lock().unwrap().iter().filter(|slot| slot.used()).count() as u64)
-            .sum()
+            .filter(|s| Slot(s.load(Ordering::Relaxed)).used())
+            .count() as u64
     }
 
     /// A "TT {GB}, {load}% full" fragment for the solve summary.
@@ -1190,10 +1237,8 @@ impl QueensTt {
             c.feed(key);
         }
         let (route, fp) = Self::hash128(key);
-        let idx = ((route >> 32) & self.slot_mask) as usize;
-        let s = self.shards[(route & self.shard_mask) as usize]
-            .lock()
-            .unwrap()[idx];
+        let raw = self.slots[(route & self.index_mask) as usize].load(Ordering::Relaxed);
+        let s = Slot(raw);
         (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
 
@@ -1201,10 +1246,25 @@ impl QueensTt {
     #[inline]
     pub fn put(&self, key: Bits, val: u8) {
         let (route, fp) = Self::hash128(key);
-        let idx = ((route >> 32) & self.slot_mask) as usize;
-        self.shards[(route & self.shard_mask) as usize]
-            .lock()
-            .unwrap()[idx] = Slot::pack(fp, val);
+        self.slots[(route & self.index_mask) as usize]
+            .store(Slot::pack(fp, val).0, Ordering::Relaxed);
+    }
+
+    /// Prefetch the slot `key` will land in, so the demand `get` that follows finds
+    /// it warm -- overlapping the random-probe DRAM round-trip with the work in
+    /// between (Session 5, lead L2). x86_64 only; a no-op elsewhere.
+    #[inline]
+    pub fn prefetch(&self, key: Bits) {
+        let idx = (Self::hash128(key).0 & self.index_mask) as usize;
+        let ptr = self.slots[idx].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: `_mm_prefetch` only warms the cache for a valid pointer into
+            // our live allocation; it has no architectural effect and cannot fault.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
     }
 }
 
