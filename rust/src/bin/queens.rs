@@ -507,6 +507,26 @@ fn run_watched<R>(solver: &dyn Solver, n: u32, bar: bool, work: impl FnOnce() ->
     })
 }
 
+/// The re-expansion (TT-thrash) note for a `--distinct` report. Re-expansion is
+/// `nodes ÷ distinct` -- expansions per distinct position: `1.0×` means the table
+/// held the whole working set, higher means eviction forced recompute. `recomputed`
+/// is the share of expansions that were redundant, `(nodes − distinct) ⁄ nodes`,
+/// which is only defined when `nodes > distinct`. It can fail to be when `distinct`
+/// is a *known reference* count the run is compared against (the exact `n ≤ 12`
+/// figures) or merely HyperLogLog estimator noise -- in which case there is simply
+/// no thrash, so we say so rather than print a contradictory sub-`1.0×` ratio or a
+/// nonsensical negative percentage.
+fn reexp_note(nodes: f64, distinct: f64) -> String {
+    if nodes <= distinct {
+        return "no re-expansion (≈1.0×)".to_string();
+    }
+    format!(
+        "{:.2}× re-expansion, {:.1}% recomputed",
+        nodes / distinct,
+        (1.0 - distinct / nodes) * 100.0,
+    )
+}
+
 fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     let bits = tt_bits(q.n);
     // --distinct reports the re-expansion ratio (nodes ÷ distinct). For even
@@ -558,28 +578,28 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     }
     println!("\x1b[90m({summary})\x1b[0m");
     // With --distinct: how much of the search was re-expansion (TT thrash)?
-    // Distinct comes from the live HyperLogLog (n ≥ 14) or, for the boards the
-    // table knows exactly (even n ≤ 12), the exact count -- no fuzzy estimate.
+    // Distinct is measured live (HyperLogLog) for n ≥ 14; for even n ≤ 12 we instead
+    // compare this run's node count against the *known* exact distinct count (the
+    // table), so the figure is labelled as the reference it is, not a fresh measure.
     if distinct && q.n.is_multiple_of(2) {
         let nodes = solver.nodes() as f64;
         let (distinct, label) = match solver.report() {
             Some(rep) => (
                 rep.estimate,
                 format!(
-                    "≈ {} (HLL ±{:.1}%)",
+                    "≈{} (HLL ±{:.1}%)",
                     commas(rep.estimate as u64),
                     1.04 / (rep.registers as f64).sqrt() * 100.0
                 ),
             ),
             None => {
                 let exact = DISTINCT_POSITIONS[q.n as usize] as f64;
-                (exact, format!("{} (exact)", commas(exact as u64)))
+                (exact, format!("{} (known exact)", commas(exact as u64)))
             }
         };
         println!(
-            "\x1b[90m(distinct {label} positions · {:.2}× re-expansion, {:.1}% recomputed)\x1b[0m",
-            nodes / distinct,
-            (1.0 - distinct / nodes) * 100.0,
+            "\x1b[90m(distinct {label} · {})\x1b[0m",
+            reexp_note(nodes, distinct),
         );
     }
 
@@ -687,11 +707,7 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
     // Re-expansion = total expansions ÷ distinct: 1.0 means the table held the
     // whole working set; higher means eviction forced recompute (TT thrash).
     let distinct = rep.exact.map(|e| e as f64).unwrap_or(rep.estimate);
-    println!(
-        "  re-expansion: {:.2}× ({:.1}% recomputed)",
-        nodes as f64 / distinct,
-        (1.0 - distinct / nodes as f64) * 100.0,
-    );
+    println!("  {}", reexp_note(nodes as f64, distinct));
     println!("  elapsed: {elapsed:.3}s");
 }
 

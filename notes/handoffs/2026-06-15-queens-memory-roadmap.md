@@ -302,7 +302,9 @@ are cross-referenced, not repeated.
 | 1 | Lockless unsharded `AtomicU64` TT | A | **done** — L1, `9b30cb2` |
 | 2 | Software-prefetch child slot | A | **done** — L1 (measured ~2%) |
 | 3 | Huge pages (`MADV_HUGEPAGE`) | A | **done** — L1 |
-| 6 | **History / killer move ordering** ⭐ | B | **next cheap node-cut.** Score squares by β-cutoff frequency, try those first atop the static most-blocking order; 2–5× α-β node cut in impartial games for ~0 per-node cost. Independent of everything else. |
+| 6 | **History / killer move ordering** ⭐ | B | **next cheap node-cut.** Score squares by β-cutoff frequency, try those first atop the static most-blocking order; 2–5× α-β node cut in impartial games for ~0 per-node cost. Independent of everything else. **Prefer a GLOBAL signal (history/killer) over a context-local one:** session-6 measured *context-local* effective-degree ordering as a negative (below) — it reverses under the parallel default (+9–12 % working set) because local cutoffs don't transpose across workers. A global score keeps cutoffs concentrated on transposing squares → reuse-friendly. |
+| 6b | ~~Dynamic effective-degree ordering~~ | B | **NEGATIVE (session 6).** Re-rank by `popcount(attack & available)` per node: shrinks the *sequential* working set but the gain **decays super-linearly** (1.80×→1.33×→1.025× at n=10/12/14 → ~0 at n=16) and **reverses under parallel** (n=14 +9–12 %). Mechanism + table in the session-6 handoff note. Reverted. |
+| 16 | ABDADA in-evaluation deferral | A/C | **lock-free-enabled.** Mark a slot "being evaluated" (spare bit; `val` uses 1 of 8); a 2nd worker reaching it *defers* (other moves first, return later) not duplicates. *Defers*, so unlike deep-YBWC (fact #5) it preserves the α-β cutoff. Targets the ~1.6 % parallel NODE re-expansion only — **compute/DRAM, not the distinct working set**; low priority, DRAM-bound search. |
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
 | 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
@@ -317,6 +319,71 @@ are cross-referenced, not repeated.
 | — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
 
 ## Handoff Notes
+
+### Session 6 — move-ordering negative + `--distinct` presentation fix (2026-06-15)
+
+**Session**: 2026-06-15 (queens, session 6). `make test`/`clippy` green
+(`solver_lineage_agrees` ok; `solve 12 --distinct` → second, distinct 1,060,823;
+`solve 14 --distinct` → second, ≈49M, 1.08× re-exp). Files: `rust/src/bin/queens.rs`
+(presentation fix — committed); `rust/src/queens.rs` net-unchanged (the dynamic-order
+experiment below was added behind a toggle to measure, then reverted).
+
+**Landed — `--distinct` wording made robust.** The re-expansion line could print a
+contradictory sub-`1.0×` ratio and a nonsensical *negative* "% recomputed" whenever
+`nodes < distinct`. That happens two ways: (a) for even n≤12 the reported "distinct"
+is the **known reference constant** `DISTINCT_POSITIONS[n]` (now labelled `(known
+exact)`, not `(exact)`, so it reads as the reference it is), and a run that expands
+fewer nodes than the reference would go sub-1.0; (b) HLL estimator noise at n≥14 can
+push the estimate just above `nodes`. New shared `reexp_note(nodes, distinct)` helper
+(used by both `solve` and `count`) clamps this: when `nodes ≤ distinct` it prints
+`no re-expansion (≈1.0×)` instead of a negative percentage.
+
+**Instructive NEGATIVE — dynamic "effective-degree" move ordering (lever #6 variant).**
+Hypothesis (codex-review lever, `…-codex-review.md` Finding "minimal graph"): the
+static order ranks squares by *context-free* attack degree, a poor proxy deep in the
+tree where most of a high-degree square's lines are already blocked. Re-rank each
+node's available squares by **effective** degree — `popcount(attack[sq] & available)`,
+how many *currently*-available squares the move removes — to surface real cutoff moves
+earlier and shrink the distinct working set (the n=16 wall). **Measured (clean
+`count … --exact` / `--parallel`, distinct = true working set):**
+
+| n  | seq static | seq dynamic | seq shrink | par static | par dynamic | par result   |
+|----|-----------:|------------:|:----------:|-----------:|------------:|:-------------|
+| 10 |     94,094 |      52,168 |   1.80×    |       —    |        —    | —            |
+| 12 |  1,060,817 |     799,258 |   1.33×    |     1.067M |      0.970M | 1.10× better |
+| 14 |    49.13M  |     47.91M  |   1.025×   |     49.0M  |      53.5M  | **0.92× WORSE** |
+
+Two killers: **(1) the sequential shrink decays super-linearly** (bonus 0.80 → 0.33 →
+0.025) → **break-even at n=16 even sequentially** — effective-degree → static-degree
+as boards grow (few squares blocked early in a big search, so the orders only diverge
+deep where few nodes live). **(2) under the parallel default it REVERSES** (+9–12 %
+bigger working set, robust to <0.2 % across 3 interleaved rounds: 53.51/53.52/53.51M
+vs static 49.02/49.07/49.09M). Mechanism: static order concentrates cutoff ("proof")
+moves on a few *globally-good* squares whose resulting positions **transpose heavily**
+across the concurrently-searched root subtrees (near-perfect cross-worker TT reuse,
++0 % parallel overhead); effective-degree picks a *context-local* proof move per node,
+those positions **don't transpose** across siblings → cross-worker reuse collapses.
+Even a perfect parallel fix caps at the sequential benefit (~0 at n=16), so not worth
+shipping. Reverted; hot path (`wins_keyed`) kept branch-free per Tiger discipline. The
+mechanism is the useful takeaway: **the right ordering lever is a *global* signal
+(history/killer #6), which keeps cutoffs concentrated on transposing squares — reuse-
+friendly where effective-degree is reuse-hostile.**
+
+**Parallel-over-serial inflation (answering "can we adjust the parallelism?").** With
+**static order the lockless solver already has ~0 % distinct inflation** over serial
+(serial 49.13M vs parallel ≈49.05M, within HLL noise) — the relaxed-atomic puts are
+visible to all workers immediately (no shard-lock staleness), so cross-worker reuse is
+as timely as possible; the lockless swap already bought the inflation-reduction. What
+remains is **~1.6 % NODE re-expansion** (53.2M par vs 52.4M seq nodes; distinct
+unchanged) — two workers occasionally expand the same position before the other's put
+lands. The lock-free-*enabled* lever to shave that is **ABDADA-style in-evaluation
+deferral** (Weill 1996): mark a slot "being evaluated" (a spare bit — `val` only needs
+1 of its 8), and a second worker reaching it **defers** (searches other moves first,
+returns later) rather than duplicating the subtree. Unlike the documented deep-YBWC
+negative (fact #5, which *speculates* extra children and defeats the α-β cutoff),
+ABDADA *defers* and so preserves the cutoff. But it reduces **compute/DRAM (~1–2 %),
+not the distinct working set** (the memory wall is untouched) — record as a low-
+priority lead, behind the structural levers. New backlog row #16.
 
 ### Session 5 (impl) — L1 landed: lockless TT + prefetch + huge pages (2026-06-15)
 
