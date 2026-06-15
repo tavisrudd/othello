@@ -15,6 +15,7 @@ from othello import (
     parse_square_name, format_square, square_to_move, move_to_square, format_move,
     format_score,
     iter_moves, iter_actions, minimax_value, minimax_scores, minimax,
+    MIN_SCORE, MAX_SCORE,
     init_early_game,
     init_near_terminal_game_black_win,
     init_near_terminal_game_white_win,
@@ -83,7 +84,7 @@ def random_positions(games: int, seed: int):
 
 
 def nocache_value(state, depth):
-    """Reference minimax independent of the cache, for cross-checking."""
+    """Plain minimax, no cache and no pruning -- the ground truth oracle."""
     if state.is_terminal():
         return state.utility(BLACK)
     if depth is not None and depth <= 0:
@@ -92,6 +93,19 @@ def nocache_value(state, depth):
     vals = [nocache_value(state._make_move_unchecked(m), child)
             for m in iter_actions(state)]
     return max(vals) if state.to_move == BLACK else min(vals)
+
+
+def sample_positions(n: int, seed: int):
+    """A spread of distinct non-terminal positions from random self-play."""
+    out, seen = [], set()
+    for i, b in enumerate(random_positions(games=50, seed=seed)):
+        if b.is_terminal() or b.cache_key in seen or i % 3:
+            continue
+        seen.add(b.cache_key)
+        out.append(b)
+        if len(out) >= n:
+            break
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -304,6 +318,83 @@ def test_minimax_on_terminal_raises():
         minimax(b)
     with pytest.raises(ValueError):
         minimax_scores(b)
+
+
+# --------------------------------------------------------------------------- #
+# Alpha-beta pruning + bound-tracking transposition table
+# --------------------------------------------------------------------------- #
+
+def test_alpha_beta_equals_brute_force():
+    # Full-window alpha-beta must reproduce plain minimax exactly, on a spread
+    # of midgame positions at several depths.
+    for b in sample_positions(30, seed=11):
+        for depth in [1, 2, 3, 4]:
+            assert minimax_value(b, {}, depth) == nocache_value(b, depth)
+
+
+def test_in_window_result_is_exact():
+    # Any value strictly inside the search window is the exact minimax value.
+    for b in sample_positions(20, seed=12):
+        for depth in [2, 3]:
+            v = nocache_value(b, depth)
+            assert minimax_value(b, {}, depth, v - 1, v + 1) == v
+            assert minimax_value(b, {}, depth, MIN_SCORE, MAX_SCORE) == v
+
+
+def test_out_of_window_returns_valid_bound():
+    # Window above the value -> fail-low -> upper bound (v <= r <= alpha).
+    # Window below the value -> fail-high -> lower bound (beta <= r <= v).
+    for b in sample_positions(20, seed=13):
+        for depth in [2, 3]:
+            v = nocache_value(b, depth)
+            r_low = minimax_value(b, {}, depth, v + 1, v + 5)
+            assert v <= r_low <= v + 1
+            r_high = minimax_value(b, {}, depth, v - 5, v - 1)
+            assert v - 1 <= r_high <= v
+
+
+def test_bound_entries_do_not_corrupt_exact_queries():
+    # The crux of TT + alpha-beta soundness: cache entries left behind by
+    # narrow-window searches (which store LOWER/UPPER bounds) must never make a
+    # later exact query return a wrong value.
+    for b in sample_positions(20, seed=14):
+        for depth in [2, 3]:
+            v = nocache_value(b, depth)
+            cache: o.Cache = {}
+            for a, bb in [(-5, 5), (0, 1), (-50, -40), (v, v + 1), (v - 1, v)]:
+                minimax_value(b, cache, depth, a, bb)
+            assert minimax_value(b, cache, depth) == v
+            # per-move scores on the polluted cache stay exact too
+            for move, score in minimax_scores(b, cache, depth):
+                assert score == nocache_value(b._make_move_unchecked(move),
+                                              depth - 1)
+
+
+def test_alpha_beta_explores_fewer_nodes_than_plain_minimax(monkeypatch):
+    b = init_early_game() + "D3" + "C5"
+    depth = 4
+
+    brute_nodes = 0
+    def brute(s, d):
+        nonlocal brute_nodes
+        brute_nodes += 1
+        if s.is_terminal() or (d is not None and d <= 0):
+            return s.utility(BLACK)
+        cd = d if d is None else d - 1
+        vals = [brute(s._make_move_unchecked(m), cd) for m in iter_actions(s)]
+        return max(vals) if s.to_move == BLACK else min(vals)
+    expected = brute(b, depth)
+
+    ab_nodes = 0
+    real = o.minimax_value
+    def counting(*a, **k):
+        nonlocal ab_nodes
+        ab_nodes += 1
+        return real(*a, **k)
+    monkeypatch.setattr(o, "minimax_value", counting)   # recursion hits the counter
+    got = o.minimax_value(b, {}, depth)
+    assert got == expected
+    assert ab_nodes < brute_nodes             # pruning + TT visit strictly fewer
 
 
 # --------------------------------------------------------------------------- #

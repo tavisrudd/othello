@@ -354,32 +354,73 @@ def iter_actions(state: GameState) -> Iterator[Move]:
 ## black centered minimax scoring
 
 type Depth = int | None          # remaining plies to search; None = to terminal
+
+# Transposition-table bound: under alpha-beta a node's value may be pruned to a
+# bound rather than the exact value, so each entry records which it is.
+type Bound = Literal["exact", "lower", "upper"]
+EXACT: Final[Bound] = "exact"
+LOWER: Final[Bound] = "lower"     # true value >= stored (search failed high)
+UPPER: Final[Bound] = "upper"     # true value <= stored (search failed low)
+
 type CacheKey = tuple[Hashable, Depth]
-type Cache = dict[CacheKey, Score]
+type CacheEntry = tuple[Score, Bound]
+type Cache = dict[CacheKey, CacheEntry]
 
 def _child_depth(depth: Depth) -> Depth:
     return depth if depth is None else depth - 1
 
-def minimax_value(state: GameState, cache: Cache, depth: Depth = None) -> Score:
-    # Key by (position, remaining depth): a value produced by the heuristic
-    # cutoff at `depth` differs from one searched deeper, so depth must be part
-    # of the key or a shallow estimate could be reused as an exact value. For
-    # full searches (depth=None) the depth component is constant, so this
-    # degrades to position-only keying and transpositions still share entries.
+def minimax_value(state: GameState, cache: Cache, depth: Depth = None,
+                  alpha: Score = MIN_SCORE, beta: Score = MAX_SCORE) -> Score:
+    # Black-centered alpha-beta with a depth-keyed transposition table.
+    # [alpha, beta] is the maximiser/minimiser window. Pruning makes a node's
+    # value a *bound*, so each cached entry carries a flag: EXACT, LOWER (true
+    # value >= stored) or UPPER (true value <= stored). The key already pins the
+    # remaining depth (a heuristic-cutoff value at one horizon must never be
+    # reused as a deeper/exact one), so an entry is reused only at that horizon;
+    # for full searches (depth=None) the component is constant and transpositions
+    # still share entries.
     key: CacheKey = (state.cache_key, depth)
-    if key in cache:
-        return cache[key]
-    if state.is_terminal():
-        score = state.utility(BLACK)
-    elif depth is not None and depth <= 0:
-        score = state.utility(BLACK)   # heuristic static eval at the horizon
-    else:
-        child = _child_depth(depth)
-        values = [minimax_value(state._make_move_unchecked(move), cache, child)
-                  for move in iter_actions(state)]
-        score = max(values) if state.to_move == BLACK else min(values)
-    cache[key] = score
-    return score
+    alpha_orig, beta_orig = alpha, beta
+
+    entry = cache.get(key)
+    if entry is not None:
+        value, flag = entry
+        if flag == EXACT:
+            return value
+        if flag == LOWER:
+            alpha = max(alpha, value)        # true value >= stored
+        else:                                # UPPER: true value <= stored
+            beta = min(beta, value)
+        if alpha >= beta:
+            return value
+
+    if state.is_terminal() or (depth is not None and depth <= 0):
+        value = state.utility(BLACK)         # exact at terminal; heuristic at horizon
+        cache[key] = (value, EXACT)
+        return value
+
+    child = _child_depth(depth)
+    if state.to_move == BLACK:               # maximiser
+        value = MIN_SCORE
+        for move in iter_actions(state):
+            value = max(value, minimax_value(
+                state._make_move_unchecked(move), cache, child, alpha, beta))
+            alpha = max(alpha, value)
+            if alpha >= beta:                # beta cutoff (fail-high)
+                break
+        flag = UPPER if value <= alpha_orig else LOWER if value >= beta else EXACT
+    else:                                    # minimiser (WHITE)
+        value = MAX_SCORE
+        for move in iter_actions(state):
+            value = min(value, minimax_value(
+                state._make_move_unchecked(move), cache, child, alpha, beta))
+            beta = min(beta, value)
+            if alpha >= beta:                # alpha cutoff (fail-low)
+                break
+        flag = LOWER if value >= beta_orig else UPPER if value <= alpha else EXACT
+
+    cache[key] = (value, flag)
+    return value
 
 def minimax_scores(state: GameState, cache: Cache | None = None,
                    depth: Depth = None) -> MoveScores:
@@ -522,7 +563,8 @@ def main():
     #board = init_near_terminal_game_black_win()
     board = init_near_terminal_game_either_can_win()
     board += 'F8'
-    play_minimax_game(board)
+    board = init_early_game()
+    play_minimax_game(board, 6)
 
 
 if __name__ == '__main__':
