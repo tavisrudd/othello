@@ -551,6 +551,42 @@ pub const ENGINE_NAMES: [&str; 6] = [
     "strong++",
 ];
 
+/// `(name, one-line description, parallelism)` for `--list-engines`, in
+/// `ENGINE_NAMES` order. The default depth is not duplicated here -- it comes
+/// from each engine's `default_depth()` so there is a single source of truth.
+pub const ENGINE_INFO: [(&str, &str, &str); 6] = [
+    (
+        "alphabeta",
+        "fail-soft alpha-beta with a bound-tracking transposition table",
+        "sequential",
+    ),
+    (
+        "minimax",
+        "plain minimax with a depth-keyed cache (the ground-truth reference)",
+        "sequential",
+    ),
+    (
+        "ordered",
+        "alpha-beta with mobility move ordering",
+        "sequential",
+    ),
+    (
+        "strong",
+        "iterative-deepening PVS: aspiration windows, hash-move ordering, cache-sized TT",
+        "root-parallel scores",
+    ),
+    (
+        "strong+",
+        "strong with a stronger horizon eval (X/C-square + frontier penalties)",
+        "root-parallel scores",
+    ),
+    (
+        "strong++",
+        "strong+ with calibrated Multi-ProbCut forward pruning",
+        "root-parallel scores",
+    ),
+];
+
 pub fn make_engine(name: &str) -> Option<Box<dyn Engine>> {
     match name {
         "minimax" => Some(Box::new(Minimax::new())),

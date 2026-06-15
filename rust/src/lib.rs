@@ -25,6 +25,7 @@ pub mod play;
 pub mod queens;
 pub mod search;
 pub mod simd;
+pub mod table;
 pub mod tt;
 
 pub use core::{

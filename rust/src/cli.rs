@@ -6,7 +6,7 @@ use clap::builder::PossibleValuesParser;
 use clap::Parser;
 
 use crate::core::{parse_board, Board, Player, BLACK, WHITE};
-use crate::engines::{make_engine, ENGINE_NAMES};
+use crate::engines::{make_engine, ENGINE_INFO, ENGINE_NAMES};
 use crate::fixtures::start;
 use crate::game::Depth;
 use crate::play::play_game;
@@ -98,14 +98,29 @@ pub fn run() -> i32 {
     let cli = Cli::parse();
 
     if cli.list_engines {
-        for name in ENGINE_NAMES {
-            let engine = make_engine(name).unwrap();
-            let depth = match engine.default_depth() {
-                Some(d) => d.to_string(),
-                None => "full".to_string(),
-            };
-            println!("{name:12} {:20} default depth {depth}", engine.name());
-        }
+        let rows: Vec<Vec<String>> = ENGINE_INFO
+            .iter()
+            .map(|(name, desc, parallelism)| {
+                let depth = match make_engine(name).unwrap().default_depth() {
+                    Some(d) => d.to_string(),
+                    None => "full".to_string(),
+                };
+                vec![
+                    name.to_string(),
+                    desc.to_string(),
+                    parallelism.to_string(),
+                    depth,
+                ]
+            })
+            .collect();
+        print!(
+            "{}",
+            crate::table::render(
+                &["name", "description", "parallelism", "default depth"],
+                &rows,
+                1, // wrap the description column
+            )
+        );
         return 0;
     }
 

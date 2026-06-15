@@ -93,6 +93,9 @@ fn tt_bits(n: u32) -> u32 {
     about = "Adversarial Non-Attacking Queens game (Noon & Van Brummelen, 2006)."
 )]
 struct Cli {
+    /// List available solvers (name, description, parallelism) and exit.
+    #[arg(long)]
+    list_engines: bool,
     #[command(subcommand)]
     cmd: Option<Cmd>,
 }
@@ -160,7 +163,12 @@ enum Cmd {
 }
 
 fn main() {
-    let cmd = Cli::parse().cmd.unwrap_or(Cmd::Solve {
+    let cli = Cli::parse();
+    if cli.list_engines {
+        list_engines();
+        return;
+    }
+    let cmd = cli.cmd.unwrap_or(Cmd::Solve {
         n: 8,
         solver: "parallel".into(),
         distinct: false,
@@ -181,6 +189,64 @@ fn main() {
         Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
     }
+}
+
+/// `--list-engines`: a width-aware table of the solver ladder. Every solver
+/// computes the exact value to the end of the game, so "default depth" is always
+/// "full"; what differs is the technique and the parallelism. Order matches
+/// `SOLVER_NAMES`.
+fn list_engines() {
+    const INFO: [(&str, &str, &str); 6] = [
+        (
+            "naive",
+            "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
+            "sequential",
+        ),
+        (
+            "memo",
+            "+ a fixed-size transposition table keyed on the raw board mask",
+            "sequential",
+        ),
+        (
+            "symmetry",
+            "+ dihedral (8-fold) canonical keys, merging symmetric states",
+            "sequential",
+        ),
+        (
+            "parallel",
+            "+ rayon root parallelism (Young-Brothers-Wait) and the odd-n O(1) theorem",
+            "root-parallel (YBW)",
+        ),
+        (
+            "nimber",
+            "full Sprague-Grundy value (nimber) via mex over children, no cutoff",
+            "root-parallel",
+        ),
+        (
+            "pn",
+            "depth-first proof-number search (Nagai df-pn)",
+            "sequential",
+        ),
+    ];
+    let rows: Vec<Vec<String>> = INFO
+        .iter()
+        .map(|(name, desc, parallelism)| {
+            vec![
+                name.to_string(),
+                desc.to_string(),
+                parallelism.to_string(),
+                "full".to_string(),
+            ]
+        })
+        .collect();
+    print!(
+        "{}",
+        othello::table::render(
+            &["name", "description", "parallelism", "default depth"],
+            &rows,
+            1, // wrap the description column
+        )
+    );
 }
 
 /// Square name like `d1`: file letter (column) + rank number (row, 1-based).
