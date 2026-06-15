@@ -2,20 +2,15 @@
 //!
 //! Two players alternately place a queen so no two attack each other (no shared
 //! row, column, or diagonal); whoever cannot move loses. The engine plays
-//! perfectly (any winning move when one exists).
-//!
-//!   queens solve  [n] [solver]  who wins the empty n×n board, with an optimal line
-//!   queens nimber [n]           the Sprague-Grundy value (nimber) of the board
-//!   queens self   [n]           watch the engine play an optimal line both sides
-//!   queens play   [n] [1|2]     play against the engine as player 1 (first) or 2
-//!
-//! Default: n = 8, you are player 1, solver = parallel. The `solver` arg picks a
-//! step of the lineage (naive | memo | symmetry | parallel) -- handy for A/B and
-//! for trusting the fast solver against the simple one. Squares are named
-//! file+rank, e.g. `d1` (file A.. left→right, rank 1..n bottom→top). Up to 16×16.
+//! perfectly (any winning move when one exists). See `--help` (and `<cmd>
+//! --help`) for the modes; squares are named file+rank, e.g. `d1` (file A..
+//! left→right, rank 1..n bottom→top). Boards up to 16×16.
 
 use std::io::{self, Write};
 use std::time::Instant;
+
+use clap::builder::PossibleValuesParser;
+use clap::{Parser, Subcommand};
 
 use othello::queens::{make_solver, Bits, Nimber, Queens, Solver, MAX_N, SOLVER_NAMES};
 
@@ -44,35 +39,56 @@ fn tt_bits(n: u32) -> u32 {
     }
 }
 
-fn main() {
-    let mut args = std::env::args().skip(1);
-    let mode = args.next().unwrap_or_else(|| "solve".into());
-    let n: u32 = args.next().and_then(|s| s.parse().ok()).unwrap_or(8);
-    if !(1..=MAX_N).contains(&n) {
-        eprintln!("board side must be 1..={MAX_N} (an n×n board must fit in the bitset)");
-        std::process::exit(2);
-    }
-    let q = Queens::new(n);
+#[derive(Parser)]
+#[command(
+    name = "queens",
+    about = "Adversarial Non-Attacking Queens game (Noon & Van Brummelen, 2006)."
+)]
+struct Cli {
+    #[command(subcommand)]
+    cmd: Option<Cmd>,
+}
 
-    match mode.as_str() {
-        "solve" => {
-            let solver = args.next().unwrap_or_else(|| "parallel".into());
-            if !SOLVER_NAMES.contains(&solver.as_str()) {
-                eprintln!("unknown solver {solver:?}; use one of {SOLVER_NAMES:?}");
-                std::process::exit(2);
-            }
-            solve(&q, &solver);
-        }
-        "nimber" => nimber_mode(&q),
-        "self" => self_play(&q),
-        "play" => {
-            let human: u32 = args.next().and_then(|s| s.parse().ok()).unwrap_or(1);
-            play(&q, human == 1);
-        }
-        other => {
-            eprintln!("unknown mode {other:?}; use: solve | nimber | self | play");
-            std::process::exit(2);
-        }
+#[derive(Subcommand)]
+enum Cmd {
+    /// Who wins the empty n×n board, with an optimal line.
+    Solve {
+        #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+        /// Lineage step to solve with (simplest → fastest).
+        #[arg(default_value = "parallel", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
+        solver: String,
+    },
+    /// The Sprague-Grundy value (nimber) of the board.
+    Nimber {
+        #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+    },
+    /// Watch the engine play an optimal line for both sides.
+    #[command(name = "self")]
+    SelfPlay {
+        #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+    },
+    /// Play against the engine as player 1 (first) or 2 (second).
+    Play {
+        #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+        #[arg(default_value_t = 1, value_parser = clap::value_parser!(u32).range(1..=2))]
+        player: u32,
+    },
+}
+
+fn main() {
+    let cmd = Cli::parse().cmd.unwrap_or(Cmd::Solve {
+        n: 8,
+        solver: "parallel".into(),
+    });
+    match cmd {
+        Cmd::Solve { n, solver } => solve(&Queens::new(n), &solver),
+        Cmd::Nimber { n } => nimber_mode(&Queens::new(n)),
+        Cmd::SelfPlay { n } => self_play(&Queens::new(n)),
+        Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
     }
 }
 

@@ -30,7 +30,8 @@ rust/
     display.rs   ANSI board / score rendering
     fixtures.rs  starting positions
     play.rs      self-play driver
-    cli.rs       argument parser (mirrors the Python argparse CLI)
+    cli.rs       clap CLI for the self-play driver (the `othello` binary)
+    bin/queens.rs  clap CLI for the Non-Attacking Queens solver (`queens` binary)
     simd.rs      AVX2 / AVX-512 experiments (see "What didn't help")
   examples/      bench, bench_parallel, bench_simd, profile_game
   Makefile       fmt / clippy / test / release / bench / profile / pgo-release
