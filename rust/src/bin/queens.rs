@@ -31,22 +31,26 @@ const A344227: [u8; 14] = [0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1];
 /// extrapolated for n=16 (Chunk 1: growth accelerates ~11×→46× per step,
 /// central estimate ~9.2e9). Re-measure any entry with `queens count <n> --exact`
 /// (or `--parallel` for the big ones). These size the table -- see `tt_bits`.
+///
+/// Measured on the canonical solver *with* the terminal-child fast path: terminals
+/// canonicalise to one shared key (`Bits::ZERO`) that the fast path never looks up,
+/// so each count omits exactly that one position (visible on the tiny boards).
 const DISTINCT_POSITIONS: [u64; 17] = [
     0,             // n=0
     0,             // n=1  (trivial)
-    2,             // n=2
+    1,             // n=2
     0,             // n=3  (odd → O(1))
-    5,             // n=4
+    4,             // n=4
     0,             // n=5  (odd)
-    28,            // n=6
+    27,            // n=6
     0,             // n=7  (odd)
-    626,           // n=8
+    625,           // n=8
     0,             // n=9  (odd)
-    94_097,        // n=10
+    94_205,        // n=10
     0,             // n=11 (odd)
-    1_060_726,     // n=12
+    1_060_823,     // n=12
     0,             // n=13 (odd)
-    49_346_012,    // n=14 (HyperLogLog, ±0.2%)
+    49_419_639,    // n=14 (HyperLogLog p=18, ±0.2%)
     0,             // n=15 (odd)
     9_200_000_000, // n=16 (extrapolated; exceeds any single-box table)
 ];

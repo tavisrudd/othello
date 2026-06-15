@@ -462,7 +462,18 @@ impl Solver for Tt {
         self.tt.bump();
         let mut result = false;
         for &sq in &q.order {
-            if q.is_available(blocked, sq) && !self.wins(q, q.place(blocked, sq)) {
+            if !q.is_available(blocked, sq) {
+                continue;
+            }
+            let child = q.place(blocked, sq);
+            // Terminal-child fast path: if this move leaves the opponent with no
+            // reply, the opponent loses and we win at once -- skip the recursive
+            // `wins(child)`. For the canonical solvers (`symmetry`/`parallel`) every
+            // terminal shares one key (`pos_key` folds `available`, empty ⇒
+            // `Bits::ZERO`), so the elided lookups would otherwise all funnel through
+            // one hot TT shard. (Raw-key `memo` keys terminals by their own `blocked`
+            // mask instead, so for it `--distinct` drops every terminal, not one key.)
+            if q.no_moves(child) || !self.wins(q, child) {
                 result = true;
                 break;
             }
@@ -748,17 +759,14 @@ impl Pn {
         }
     }
 
-    /// The `(φ, δ)` of a child position: the table entry if present, else a
-    /// proven loss for a terminal (`∞, 0`) or a unit leaf (`1, 1`).
+    /// The `(φ, δ)` for a *non-terminal* child given its precomputed canonical
+    /// `key`: the table entry if present, else a unit leaf `(1, 1)`. Terminal
+    /// children never reach here -- `mid` proves the node and returns the moment it
+    /// collects one (a terminal child means the opponent cannot move), so this need
+    /// not test `no_moves` or canonicalise a key for them.
     #[inline]
-    fn child_pd(&self, q: &Queens, child: Bits) -> (u32, u32) {
-        if let Some(pd) = self.tt.get(q.pos_key(child)) {
-            pd
-        } else if q.no_moves(child) {
-            (PN_INF, 0) // mover at child cannot move ⇒ "child wins" is disproven
-        } else {
-            (1, 1) // unexpanded leaf
-        }
+    fn child_pd(&self, key: Bits) -> (u32, u32) {
+        self.tt.get(key).unwrap_or((1, 1))
     }
 
     /// df-pn `mid`: expand `blocked` until its `φ ≥ th_phi` or `δ ≥ th_delta`,
@@ -775,14 +783,27 @@ impl Pn {
             }
         }
         self.tt.bump();
-        let kids: Vec<Bits> = q
-            .order
-            .iter()
-            .filter(|&&sq| q.is_available(blocked, sq))
-            .map(|&sq| q.place(blocked, sq))
-            .collect();
+        // Collect each non-terminal child with its canonical key *once*. The df-pn
+        // loop below revisits this list every time the thresholds tighten, and a
+        // child's key is a fixed function of the child, so caching it avoids
+        // re-running `canon` (an 8-fold symmetry fold) on every pass. A *terminal*
+        // child is decisive on sight -- the opponent then cannot move, so this node
+        // is proven (φ=0, δ=∞); return before keying that child or any later one
+        // (and before the loop), which also keeps terminals out of `kids` entirely.
+        let mut kids: Vec<(Bits, Bits)> =
+            Vec::with_capacity(q.board.and_not(blocked).popcount() as usize);
+        for &sq in &q.order {
+            if q.is_available(blocked, sq) {
+                let child = q.place(blocked, sq);
+                if q.no_moves(child) {
+                    self.tt.put(key, 0, PN_INF); // terminal child ⇒ this node is won
+                    return;
+                }
+                kids.push((child, q.pos_key(child)));
+            }
+        }
         if kids.is_empty() {
-            self.tt.put(key, PN_INF, 0); // terminal: mover loses
+            self.tt.put(key, PN_INF, 0); // terminal node: mover here cannot move ⇒ loses
             return;
         }
         loop {
@@ -790,8 +811,16 @@ impl Pn {
             let mut phi_n = PN_INF;
             let mut delta_n = 0u32;
             let (mut best, mut best_phi, mut delta1, mut delta2) = (0usize, 1u32, PN_INF, PN_INF);
-            for (i, &c) in kids.iter().enumerate() {
-                let (cphi, cdelta) = self.child_pd(q, c);
+            let mut proven = false;
+            for (i, &(_, ckey)) in kids.iter().enumerate() {
+                let (cphi, cdelta) = self.child_pd(ckey);
+                if cdelta == 0 {
+                    // A non-terminal child the table already proves losing (its mover
+                    // loses ⇒ δ(c)=0, φ(c)=∞) proves this node outright: φ(n)=min δ=0,
+                    // δ(n)=Σ φ saturates to ∞. No need to scan the remaining children.
+                    proven = true;
+                    break;
+                }
                 delta_n = delta_n.saturating_add(cphi);
                 if cdelta < phi_n {
                     phi_n = cdelta;
@@ -805,6 +834,10 @@ impl Pn {
                     delta2 = cdelta;
                 }
             }
+            if proven {
+                self.tt.put(key, 0, PN_INF);
+                return;
+            }
             if phi_n >= th_phi || delta_n >= th_delta {
                 self.tt.put(key, phi_n, delta_n);
                 return;
@@ -816,7 +849,7 @@ impl Pn {
                 (th_delta - delta_n).saturating_add(best_phi)
             };
             let th_delta_c = th_phi.min(delta2.saturating_add(1));
-            self.mid(q, kids[best], th_phi_c, th_delta_c);
+            self.mid(q, kids[best].0, th_phi_c, th_delta_c);
         }
     }
 }
