@@ -66,6 +66,16 @@ win/loss (cross-checked by `solver_lineage_agrees` vs the memo-less `naive`):
    the game doesn't decompose, so they're research-grade. Don't chase them by mex.
 4. **GPU does not help** the search (sequential DAG, random-access TT, branchy) —
    same conclusion as the Othello `NOTES.md`. Bottleneck is algorithmic + memory.
+5. **Deeper parallelism is a NEW documented negative (session 3).** The search is
+   **TT-DRAM-latency-bound**, not parallelism-bound: n=14 is ~11–12 s / ~53.3M nodes
+   / ~49.3M distinct (1.08× re-exp) at the default TT, ~18× parallel ≈ the hardware
+   ceiling on this 12-core/24-thread box. Two "parallelise sooner" rewrites both
+   failed and were reverted: fanning *all* root moves at once is wall-clock-equal to
+   the committed sequential-lead YBWC guard (same node count); recursive YBWC
+   *inside* subtrees **defeats the α-β cutoff** (searches children the cutoff would
+   skip → **~97M nodes / ~18 s vs ~53M / ~12 s**). **Keep the sequential-lead guard**
+   (the lead move warms the shared TT for the parallel siblings). Don't re-attempt —
+   the lever is memory/per-node cost (Chunk 2), not more cores.
 
 ## The plan: measure first, then pick the encoding, then attempt n=16
 
@@ -230,14 +240,72 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
 - [x] Chunk 1: HLL `count` mode; distinct = 94k/1.07M/49.3M (n=10/12/14); n=16 ≈ **9.2B**
       central (~2.3–18B). **GATE → PROCEED; single-box route is Chunk 4 only** (Chunk 2's
       16 B slot ≈ 148 GB ≫ 26 GB; BuRR archive ≈ 11.5 GB fits).
+- [x] Tooling (session 3): `solve --distinct` re-expansion report (nodes ÷ distinct; exact
+      for n≤12, HLL for n≥14); SIGUSR1/SIGINT/SIGTERM handlers + live width-aware progress
+      bar; per-solver summary stats (TT fill, nimber value, pn φ/δ). Static
+      `DISTINCT_POSITIONS` table now drives `tt_bits` (tapered headroom; `MAX_TT_BITS=28`;
+      n=16 default TT 27→28, i.e. 5.4→10.7 GB). Parallelism negative (see fact #5) — reverted.
 - [ ] Chunk 2: compact lossless queen-set key (16-byte slot) + `fastrange`; measure merge-loss
-      — now scoped as the **dynamic/in-flight tier**, not the full table (it can't hold ~9B)
+      — now scoped as the **dynamic/in-flight tier**, not the full table (it can't hold ~9B).
+      **Now measurable**: a good compact slot should hold re-expansion ≈ 1.0× at larger n on
+      the same RAM — verify with `solve --distinct` / `count`.
 - [ ] Chunk 3: two-tier depth-preferred TT replacement
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
 - [ ] Final: `make test` + `make clippy` green; n=16 verdict cross-checked vs Jenrich (second)
 
 ## Handoff Notes
+
+### Session 3 — observability + re-expansion tooling, cardinality table, parallelism negative (2026-06-15)
+
+**Session**: 2026-06-15 (queens roadmap, session 3). All committed (`b603e15` …
+`3565f1c`); `make test`/`clippy`/`fmt` green. Only `rust/src/bin/queens.rs`
+(+ `Cargo.toml` for `signal-hook`, `terminal_size`) changed for the CLI/tooling;
+`rust/src/queens.rs` gained `Solver::stats()`/`root_progress()` + `QueensTt/PnTt::
+fill()/summary()` + Nimber/Pn root caches (the parallelism experiments there were
+reverted).
+
+**Built (all on the `solve`/`count` CLI — no change to the search itself):**
+- **Observability**: SIGUSR1 → live progress dump to stderr; SIGINT/SIGTERM →
+  "how far it got" report then exit 130/143; live progress bar for n>8 on a TTY
+  (spinner + determinate root-move bar + nodes/elapsed/rate), **width-aware**
+  (truncates to terminal cols, never wraps). Adaptive rate (M/s→K/s→/s),
+  comma-grouped node counts.
+- **Per-solver summary** (dim grey line): TT fill %, `nimber` value, `pn` root
+  φ/δ, `parallel` worker count + root-move fan-out.
+- **Re-expansion metric** (the thrash gauge = nodes ÷ distinct): `solve --distinct`
+  reports it — **exact** distinct for even n≤12 (from the table), HLL for n≥14,
+  and live in the bar; `count` mode gained the same ratio line.
+- **Static `DISTINCT_POSITIONS[0..=16]`** (exact ≤12, HLL n=14, extrapolated n=16)
+  drives `tt_bits` (tapered: small boards ~1.0× re-exp cheaply, big boards lean on
+  `MAX_TT_BITS=28`). Right-sizes small boards (n=12: 2.7 GB → 1.3 GB at ~1.0×) and
+  bumps n=16 default 27→28 (5.4→10.7 GB).
+- CLI polish: `solve --help` wording; `--engine` on `self`; chess-coloured queens
+  (grey 240 / white 255 by square parity); dark-red `.` for attacked cells.
+- **`self`/`play` perf fix**: they drive the engine via `Queens::best_move` (a
+  sequential loop over `Solver::wins`, which for `Parallel` is the *sequential*
+  `Tt::wins`), so they got no root parallelism and `self 14` re-searched the whole
+  tree single-core (≫ `solve 14`). Fix: `warm_table()` runs one parallel
+  `first_player_wins` before the move loop (as `solve` does implicitly), so
+  per-move `best_move` hits the warm table. `self 14`: single-core slog → 11.9 s.
+
+**Discoveries:**
+- **The search is TT-DRAM-latency-bound, not parallelism-bound** (see fact #5).
+  ~18× parallel ≈ hardware ceiling; the lever is per-node/memory cost (Chunk 2).
+- **Deeper parallelism defeats the α-β cutoff** (fact #5) — reverted, documented in
+  `Parallel::first_player_wins`. Don't re-attempt.
+- **n=16 thrash confirmed live** (user run): 2B nodes / 485 s at ~4M nodes/s
+  (parallel — cores engaged), into a 134M-slot TT (~15× over) → pure re-expansion,
+  climbing toward Jenrich's 71B, killed. Exactly the Chunk 1 memory wall.
+
+**Next steps**: roadmap unchanged (Chunk 2 → 3 → 4), but now **instrumented** —
+`solve --distinct` measures re-expansion directly, so Chunk 2's compact slot can be
+validated (target: re-exp ≈ 1.0× at larger n on the same RAM) and any n=16 attempt
+monitored live (SIGUSR1 / the bar) and killed cleanly. **Validation**: any TT/key
+change must keep `solver_lineage_agrees` (n≤9) and a fresh `solve 14 --distinct`
+near ~49.3M distinct / ~1.0× re-exp (a re-expansion jump = lost merges or an
+under-sized TT). For an n=16 run, raise `QUEENS_TT_BITS` toward the box's RAM (≈29
+= 21.5 GB) to cut thrash — it still won't converge without Chunk 4.
 
 ### Chunk 1 landed — distinct-position measurement + decision gate (2026-06-15)
 
