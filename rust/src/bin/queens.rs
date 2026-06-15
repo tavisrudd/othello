@@ -24,9 +24,44 @@ use othello::queens::{
 /// cross-check the solver against the published Sprague-Grundy sequence.
 const A344227: [u8; 14] = [0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1];
 
-/// Transposition-table size (`2^bits` slots ≈ `2^bits * 40` bytes) -- the memory
-/// cap. Scales with the board by default; `QUEENS_TT_BITS` overrides. A too-small
-/// table never errs (a miss just recomputes), it only slows down.
+/// Estimated **distinct positions the win/loss search visits** -- its
+/// transposition-table working set -- for the empty n×n board, indexed by n.
+/// Even boards are searched; odd boards are O(1) (centre + 180° mirror, no
+/// search) so 0. Exact (hash set) for n ≤ 12, HyperLogLog for n=14, and
+/// extrapolated for n=16 (Chunk 1: growth accelerates ~11×→46× per step,
+/// central estimate ~9.2e9). Re-measure any entry with `queens count <n> --exact`
+/// (or `--parallel` for the big ones). These size the table -- see `tt_bits`.
+const DISTINCT_POSITIONS: [u64; 17] = [
+    0,             // n=0
+    0,             // n=1  (trivial)
+    2,             // n=2
+    0,             // n=3  (odd → O(1))
+    5,             // n=4
+    0,             // n=5  (odd)
+    28,            // n=6
+    0,             // n=7  (odd)
+    626,           // n=8
+    0,             // n=9  (odd)
+    94_097,        // n=10
+    0,             // n=11 (odd)
+    1_060_726,     // n=12
+    0,             // n=13 (odd)
+    49_346_012,    // n=14 (HyperLogLog, ±0.2%)
+    0,             // n=15 (odd)
+    9_200_000_000, // n=16 (extrapolated; exceeds any single-box table)
+];
+
+/// Upper bound on the transposition-table size: `2^28` slots ≈ 10.7 GB. The n=16
+/// working set dwarfs any single-box table (Chunk 1), so its table is pinned here
+/// and thrashes; raise it with `QUEENS_TT_BITS` if you have the RAM.
+const MAX_TT_BITS: u32 = 28;
+
+/// Transposition-table size in bits (`2^bits` slots ≈ `2^bits × 40` bytes), sized
+/// from the measured working set [`DISTINCT_POSITIONS`]: roughly 2–4 slots per
+/// distinct position so the direct-mapped table stays lightly loaded (low
+/// eviction ⇒ low re-expansion), clamped to `[14, MAX_TT_BITS]`. `QUEENS_TT_BITS`
+/// overrides. A too-small table never errs (a miss just recomputes), it only
+/// thrashes -- watch that with `solve --distinct`.
 fn tt_bits(n: u32) -> u32 {
     if let Some(b) = std::env::var("QUEENS_TT_BITS")
         .ok()
@@ -34,15 +69,11 @@ fn tt_bits(n: u32) -> u32 {
     {
         return b;
     }
-    if n.is_multiple_of(2) {
-        match n {
-            0..=10 => 22, // ≤ 4M slots (~160 MB)
-            12 => 26,     // ~67M slots (~2.7 GB)
-            _ => 27,      // ~134M slots (~5.4 GB)
-        }
-    } else {
-        10 // odd boards are solved O(1) (centre+mirror) -- no search, tiny table
+    let card = DISTINCT_POSITIONS.get(n as usize).copied().unwrap_or(0);
+    if card == 0 {
+        return 14; // odd boards (O(1)) and tiny boards need only a minimal table
     }
+    (card.next_power_of_two().trailing_zeros() + 1).clamp(14, MAX_TT_BITS)
 }
 
 #[derive(Parser)]
@@ -68,6 +99,12 @@ enum Cmd {
         /// (df-pn) are heavier, special-purpose solvers, *not* faster.
         #[arg(default_value = "parallel", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
         solver: String,
+        /// Also estimate the *distinct* positions (HyperLogLog) so the report
+        /// shows how much the search re-expands -- the transposition table's
+        /// thrash: nodes ÷ distinct. Adds a little per-node overhead (memo /
+        /// symmetry / parallel only).
+        #[arg(long)]
+        distinct: bool,
     },
     /// The Sprague-Grundy value (nimber) of the board.
     Nimber {
@@ -115,9 +152,14 @@ fn main() {
     let cmd = Cli::parse().cmd.unwrap_or(Cmd::Solve {
         n: 8,
         solver: "parallel".into(),
+        distinct: false,
     });
     match cmd {
-        Cmd::Solve { n, solver } => solve(&Queens::new(n), &solver),
+        Cmd::Solve {
+            n,
+            solver,
+            distinct,
+        } => solve(&Queens::new(n), &solver, distinct),
         Cmd::Nimber { n } => nimber_mode(&Queens::new(n)),
         Cmd::Count {
             n,
@@ -265,23 +307,36 @@ fn status_report(label: &str, n: u32, solver: &dyn Solver, start: Instant) -> St
     )
 }
 
+/// The terminal width (stderr), or 80 columns if stderr is not a terminal.
+fn term_cols() -> usize {
+    terminal_size::terminal_size_of(io::stderr()).map_or(80, |(w, _)| w.0 as usize)
+}
+
 /// The live, in-place progress line (stderr): a spinner, a determinate bar over
 /// the resolved root moves when the solver exposes them (a second-player win
 /// must refute them all, so it fills to 100%), and live node/elapsed/rate.
 fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
     let secs = start.elapsed().as_secs_f64();
-    let nodes = solver.nodes();
-    let rate = fmt_rate(nodes, secs);
-    let nodes = commas(nodes);
+    let node_count = solver.nodes();
+    let rate = fmt_rate(node_count, secs);
+    let nodes = commas(node_count);
     let spin = SPINNER[((secs * 8.0) as usize) % SPINNER.len()];
+    // With --distinct, show the live re-expansion ratio (nodes ÷ distinct) -- the
+    // table's thrash climbing in real time as it saturates.
+    let reexp = match solver.report() {
+        Some(rep) if rep.estimate >= 1.0 => {
+            format!(" · {:.1}× re-exp", node_count as f64 / rep.estimate)
+        }
+        _ => String::new(),
+    };
     match solver.root_progress() {
         Some((done, total)) => {
             const W: u64 = 24;
             let filled = (done * W / total) as usize;
             let bar: String = "█".repeat(filled) + &"░".repeat(W as usize - filled);
-            format!("{spin} {n}×{n} [{bar}] {done}/{total} root moves · {nodes} nodes · {secs:.0}s · {rate}")
+            format!("{spin} {n}×{n} [{bar}] {done}/{total} roots · {nodes} nodes{reexp} · {secs:.0}s · {rate}")
         }
-        None => format!("{spin} {n}×{n} · {nodes} nodes · {secs:.0}s · {rate}"),
+        None => format!("{spin} {n}×{n} · {nodes} nodes{reexp} · {secs:.0}s · {rate}"),
     }
 }
 
@@ -326,7 +381,13 @@ fn watch(
             break;
         }
         if bar {
-            eprint!("\r{}", progress_bar(n, solver, start));
+            // Truncate to the terminal width so the line never wraps (a wrapped
+            // line defeats the `\r` overwrite and leaves garbage); the glyphs are
+            // all one column wide, so chars == columns. Clear to end-of-line after,
+            // since this line may be shorter than the last.
+            let cols = term_cols().saturating_sub(1);
+            let line: String = progress_bar(n, solver, start).chars().take(cols).collect();
+            eprint!("\r{line}\x1b[K");
             io::stderr().flush().ok();
         }
         // Park rather than sleep so the solve can wake us the instant it finishes
@@ -338,8 +399,21 @@ fn watch(
     io::stderr().flush().ok();
 }
 
-fn solve(q: &Queens, solver_name: &str) {
-    let solver = make_solver(solver_name, tt_bits(q.n)).unwrap();
+fn solve(q: &Queens, solver_name: &str, distinct: bool) {
+    let bits = tt_bits(q.n);
+    // With --distinct, build a HyperLogLog-counting variant so the report can
+    // show the re-expansion ratio (nodes ÷ distinct). Only the table-backed
+    // win/loss solvers carry the counter; for the others --distinct is a no-op.
+    let solver: Box<dyn Solver> = match (distinct, solver_name) {
+        (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
+        (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
+        (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
+        (true, other) => {
+            eprintln!("--distinct supports memo/symmetry/parallel only; ignoring for {other}.");
+            make_solver(other, bits).unwrap()
+        }
+        (false, name) => make_solver(name, bits).unwrap(),
+    };
     let t = Instant::now();
     let n = q.n;
     // A live progress bar only when the solve may run a while and stderr is a
@@ -388,6 +462,18 @@ fn solve(q: &Queens, solver_name: &str) {
         summary.push_str(&stats);
     }
     println!("\x1b[90m({summary})\x1b[0m");
+    // With --distinct: how much of the search was re-expansion (TT thrash)?
+    if let Some(rep) = solver.report() {
+        let nodes = solver.nodes() as f64;
+        let err = 1.04 / (rep.registers as f64).sqrt();
+        let ratio = nodes / rep.estimate;
+        println!(
+            "\x1b[90m(distinct ≈ {} positions (HLL ±{:.1}%) · {ratio:.2}× re-expansion, {:.1}% recomputed)\x1b[0m",
+            commas(rep.estimate as u64),
+            err * 100.0,
+            (1.0 - rep.estimate / nodes) * 100.0,
+        );
+    }
 
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
@@ -468,26 +554,36 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
     let rep = solver.report().expect("counting was enabled");
 
     let winner = if first_wins { "first" } else { "second" };
+    let nodes = solver.nodes();
     println!("  winner: {winner} player");
     println!(
         "  nodes searched (TT misses, incl. re-expansion): {}",
-        solver.nodes()
+        commas(nodes)
     );
     let err = 1.04 / (rep.registers as f64).sqrt();
     println!(
-        "  distinct positions (HLL, ±{:.2}% std err): {:.0}  ({:.3} M)",
+        "  distinct positions (HLL, ±{:.2}% std err): {}  ({:.3} M)",
         err * 100.0,
-        rep.estimate,
+        commas(rep.estimate as u64),
         rep.estimate / 1e6,
     );
     if let Some(exact) = rep.exact {
         let rel = (rep.estimate - exact as f64) / exact as f64 * 100.0;
         println!(
-            "  distinct positions (exact hash set):          {exact}  ({:.3} M)",
+            "  distinct positions (exact hash set):          {}  ({:.3} M)",
+            commas(exact),
             exact as f64 / 1e6,
         );
         println!("  HLL error vs exact: {rel:+.2}%");
     }
+    // Re-expansion = total expansions ÷ distinct: 1.0 means the table held the
+    // whole working set; higher means eviction forced recompute (TT thrash).
+    let distinct = rep.exact.map(|e| e as f64).unwrap_or(rep.estimate);
+    println!(
+        "  re-expansion: {:.2}× ({:.1}% recomputed)",
+        nodes as f64 / distinct,
+        (1.0 - distinct / nodes as f64) * 100.0,
+    );
     println!("  elapsed: {elapsed:.3}s");
 }
 
