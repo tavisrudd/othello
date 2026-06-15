@@ -57,11 +57,12 @@ const DISTINCT_POSITIONS: [u64; 17] = [
 const MAX_TT_BITS: u32 = 28;
 
 /// Transposition-table size in bits (`2^bits` slots ≈ `2^bits × 40` bytes), sized
-/// from the measured working set [`DISTINCT_POSITIONS`]: roughly 2–4 slots per
-/// distinct position so the direct-mapped table stays lightly loaded (low
-/// eviction ⇒ low re-expansion), clamped to `[14, MAX_TT_BITS]`. `QUEENS_TT_BITS`
-/// overrides. A too-small table never errs (a miss just recomputes), it only
-/// thrashes -- watch that with `solve --distinct`.
+/// from the measured working set [`DISTINCT_POSITIONS`] to keep the direct-mapped
+/// table lightly loaded (low eviction ⇒ low re-expansion ≈ 1.0×): generous
+/// headroom for small boards (RAM is cheap there), little for the large
+/// RAM-bound ones, clamped to `[14, MAX_TT_BITS]`. `QUEENS_TT_BITS` overrides. A
+/// too-small table never errs (a miss just recomputes), it only thrashes -- watch
+/// that with `solve --distinct`.
 fn tt_bits(n: u32) -> u32 {
     if let Some(b) = std::env::var("QUEENS_TT_BITS")
         .ok()
@@ -73,7 +74,13 @@ fn tt_bits(n: u32) -> u32 {
     if card == 0 {
         return 14; // odd boards (O(1)) and tiny boards need only a minimal table
     }
-    (card.next_power_of_two().trailing_zeros() + 1).clamp(14, MAX_TT_BITS)
+    // Headroom (extra power-of-two factors over the working set). Small boards get
+    // plenty -- a low load factor means ~no eviction, so re-expansion ≈ 1.0× --
+    // since RAM is cheap there; large boards (n ≥ 14) get little and lean on
+    // MAX_TT_BITS, where some eviction is the price of fitting (watch it with
+    // `solve --distinct`).
+    let headroom = if card <= 4_000_000 { 4 } else { 1 };
+    (card.next_power_of_two().trailing_zeros() + headroom).clamp(14, MAX_TT_BITS)
 }
 
 #[derive(Parser)]
@@ -401,15 +408,17 @@ fn watch(
 
 fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     let bits = tt_bits(q.n);
-    // With --distinct, build a HyperLogLog-counting variant so the report can
-    // show the re-expansion ratio (nodes ÷ distinct). Only the table-backed
-    // win/loss solvers carry the counter; for the others --distinct is a no-op.
-    let solver: Box<dyn Solver> = match (distinct, solver_name) {
+    // --distinct reports the re-expansion ratio (nodes ÷ distinct). For even
+    // boards n ≤ 12 the distinct count is already known *exactly* (the table), so
+    // we report that and skip the live counter; only n ≥ 14 needs a HyperLogLog
+    // estimate (and only the table-backed solvers carry one).
+    let live_count = distinct && q.n.is_multiple_of(2) && q.n > 12;
+    let solver: Box<dyn Solver> = match (live_count, solver_name) {
         (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
         (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
         (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
         (true, other) => {
-            eprintln!("--distinct supports memo/symmetry/parallel only; ignoring for {other}.");
+            eprintln!("--distinct estimates need memo/symmetry/parallel; ignoring for {other}.");
             make_solver(other, bits).unwrap()
         }
         (false, name) => make_solver(name, bits).unwrap(),
@@ -463,15 +472,28 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     }
     println!("\x1b[90m({summary})\x1b[0m");
     // With --distinct: how much of the search was re-expansion (TT thrash)?
-    if let Some(rep) = solver.report() {
+    // Distinct comes from the live HyperLogLog (n ≥ 14) or, for the boards the
+    // table knows exactly (even n ≤ 12), the exact count -- no fuzzy estimate.
+    if distinct && q.n.is_multiple_of(2) {
         let nodes = solver.nodes() as f64;
-        let err = 1.04 / (rep.registers as f64).sqrt();
-        let ratio = nodes / rep.estimate;
+        let (distinct, label) = match solver.report() {
+            Some(rep) => (
+                rep.estimate,
+                format!(
+                    "≈ {} (HLL ±{:.1}%)",
+                    commas(rep.estimate as u64),
+                    1.04 / (rep.registers as f64).sqrt() * 100.0
+                ),
+            ),
+            None => {
+                let exact = DISTINCT_POSITIONS[q.n as usize] as f64;
+                (exact, format!("{} (exact)", commas(exact as u64)))
+            }
+        };
         println!(
-            "\x1b[90m(distinct ≈ {} positions (HLL ±{:.1}%) · {ratio:.2}× re-expansion, {:.1}% recomputed)\x1b[0m",
-            commas(rep.estimate as u64),
-            err * 100.0,
-            (1.0 - rep.estimate / nodes) * 100.0,
+            "\x1b[90m(distinct {label} positions · {:.2}× re-expansion, {:.1}% recomputed)\x1b[0m",
+            nodes / distinct,
+            (1.0 - distinct / nodes) * 100.0,
         );
     }
 
