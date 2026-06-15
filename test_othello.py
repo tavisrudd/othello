@@ -13,8 +13,9 @@ import othello as o
 from othello import (
     Board, BLACK, WHITE, PASS,
     parse_square_name, format_square, square_to_move, move_to_square, format_move,
-    format_score,
-    iter_moves, iter_actions, minimax_value, minimax_scores, minimax,
+    parse_board, format_score,
+    iter_moves, iter_actions, best_by_side,
+    Minimax, AlphaBeta, AlphaBetaOrdered,
     MIN_SCORE, MAX_SCORE,
     init_early_game,
     init_near_terminal_game_black_win,
@@ -252,72 +253,94 @@ def test_utility_is_player_relative():
     # after fully searching, the value is black-centered; raw terminal counts:
     term = b
     # walk a deterministic full game to a terminal via minimax to compare signs
+    engine = AlphaBeta()
     while not term.is_terminal():
-        term = term.make_move(minimax(term))
+        term = term.make_move(engine.best_move(term))
     assert term.utility(BLACK) == -term.utility(WHITE)
 
 
 # --------------------------------------------------------------------------- #
-# Minimax + depth-aware cache
+# Engines: minimax + depth-aware cache
 # --------------------------------------------------------------------------- #
 
+ENGINES = [Minimax, AlphaBeta, AlphaBetaOrdered]
+
+
+@pytest.mark.parametrize("Engine", ENGINES)
 @pytest.mark.parametrize("init,expected", [
     (init_near_terminal_game_black_win, 6),
     (init_near_terminal_game_white_win, -40),
     (init_near_terminal_game_either_can_win, 4),
 ])
-def test_full_search_values(init, expected):
-    assert minimax_value(init(), {}, None) == expected
+def test_full_search_values(Engine, init, expected):
+    assert Engine().value(init(), None) == expected
 
 
-def test_minimax_value_matches_nocache_endgame_all_depths():
+@pytest.mark.parametrize("Engine", ENGINES)
+def test_value_matches_nocache_endgame_all_depths(Engine):
     for init in ENDGAME_FIXTURES:
         b = init()
         for depth in [None, 0, 1, 2, 3, 4, 6]:
-            assert minimax_value(b, {}, depth) == nocache_value(b, depth)
+            assert Engine().value(b, depth) == nocache_value(b, depth)
 
 
-def test_minimax_value_matches_nocache_midgame_finite_depths():
+@pytest.mark.parametrize("Engine", ENGINES)
+def test_value_matches_nocache_midgame_finite_depths(Engine):
     b = init_early_game() + "D3" + "C3"          # full search here is infeasible
     for depth in [0, 1, 2, 3, 4]:
-        assert minimax_value(b, {}, depth) == nocache_value(b, depth)
+        assert Engine().value(b, depth) == nocache_value(b, depth)
 
 
-def test_shared_cache_is_depth_isolated():
-    # One cache reused across different depths must never return a value
-    # computed for a different horizon.
+@pytest.mark.parametrize("Engine", ENGINES)
+def test_engine_cache_is_depth_isolated(Engine):
+    # One engine (one shared cache) reused across different depths must never
+    # return a value computed for a different horizon.
     b = init_early_game() + "D3"
-    shared: o.Cache = {}
+    engine = Engine()
     for depth in [2, 4, 1, 3, 2, 4]:
-        assert minimax_value(b, shared, depth) == nocache_value(b, depth)
+        assert engine.value(b, depth) == nocache_value(b, depth)
 
 
-def test_depth_none_is_default():
+@pytest.mark.parametrize("Engine", ENGINES)
+def test_depth_none_is_default(Engine):
     b = init_near_terminal_game_either_can_win() + "F8"
-    assert minimax_value(b, {}, None) == minimax_value(b, {})
+    assert Engine().value(b, None) == Engine().value(b)
 
 
-def test_minimax_chooses_extreme_for_side_to_move():
+@pytest.mark.parametrize("Engine", ENGINES)
+def test_best_move_is_extreme_for_side_to_move(Engine):
     for init in ENDGAME_FIXTURES:
         b = init()
-        cache: o.Cache = {}
-        scored = minimax_scores(b, cache)
-        best = minimax(b, cache)
-        best_score = dict(scored)[best]
+        engine = Engine()
+        scored = engine.scores(b)
+        best_score = dict(scored)[engine.best_move(b)]
         if b.to_move == BLACK:
             assert best_score == max(s for _, s in scored)
         else:
             assert best_score == min(s for _, s in scored)
+        assert engine.best_move(b) == best_by_side(b, scored)
 
 
-def test_minimax_on_terminal_raises():
+@pytest.mark.parametrize("Engine", ENGINES)
+def test_engine_on_terminal_raises(Engine):
     b = init_near_terminal_game_white_win()
+    engine = Engine()
     while not b.is_terminal():
-        b = b.make_move(minimax(b))
+        b = b.make_move(engine.best_move(b))
     with pytest.raises(ValueError):
-        minimax(b)
+        engine.best_move(b)
     with pytest.raises(ValueError):
-        minimax_scores(b)
+        engine.scores(b)
+
+
+def test_engines_agree_on_values():
+    # All engines must compute identical values everywhere (pruning and move
+    # ordering change only how many nodes are visited, never the value).
+    for b in sample_positions(20, seed=21):
+        for depth in [1, 2, 3, 4]:
+            ref = Minimax().value(b, depth)
+            assert AlphaBeta().value(b, depth) == ref
+            assert AlphaBetaOrdered().value(b, depth) == ref
 
 
 # --------------------------------------------------------------------------- #
@@ -329,7 +352,7 @@ def test_alpha_beta_equals_brute_force():
     # of midgame positions at several depths.
     for b in sample_positions(30, seed=11):
         for depth in [1, 2, 3, 4]:
-            assert minimax_value(b, {}, depth) == nocache_value(b, depth)
+            assert AlphaBeta().value(b, depth) == nocache_value(b, depth)
 
 
 def test_in_window_result_is_exact():
@@ -337,8 +360,8 @@ def test_in_window_result_is_exact():
     for b in sample_positions(20, seed=12):
         for depth in [2, 3]:
             v = nocache_value(b, depth)
-            assert minimax_value(b, {}, depth, v - 1, v + 1) == v
-            assert minimax_value(b, {}, depth, MIN_SCORE, MAX_SCORE) == v
+            assert AlphaBeta().value(b, depth, v - 1, v + 1) == v
+            assert AlphaBeta().value(b, depth, MIN_SCORE, MAX_SCORE) == v
 
 
 def test_out_of_window_returns_valid_bound():
@@ -347,25 +370,25 @@ def test_out_of_window_returns_valid_bound():
     for b in sample_positions(20, seed=13):
         for depth in [2, 3]:
             v = nocache_value(b, depth)
-            r_low = minimax_value(b, {}, depth, v + 1, v + 5)
+            r_low = AlphaBeta().value(b, depth, v + 1, v + 5)
             assert v <= r_low <= v + 1
-            r_high = minimax_value(b, {}, depth, v - 5, v - 1)
+            r_high = AlphaBeta().value(b, depth, v - 5, v - 1)
             assert v - 1 <= r_high <= v
 
 
 def test_bound_entries_do_not_corrupt_exact_queries():
     # The crux of TT + alpha-beta soundness: cache entries left behind by
     # narrow-window searches (which store LOWER/UPPER bounds) must never make a
-    # later exact query return a wrong value.
+    # later exact query return a wrong value. One engine == one shared cache.
     for b in sample_positions(20, seed=14):
         for depth in [2, 3]:
             v = nocache_value(b, depth)
-            cache: o.Cache = {}
+            engine = AlphaBeta()
             for a, bb in [(-5, 5), (0, 1), (-50, -40), (v, v + 1), (v - 1, v)]:
-                minimax_value(b, cache, depth, a, bb)
-            assert minimax_value(b, cache, depth) == v
+                engine.value(b, depth, a, bb)
+            assert engine.value(b, depth) == v
             # per-move scores on the polluted cache stay exact too
-            for move, score in minimax_scores(b, cache, depth):
+            for move, score in engine.scores(b, depth):
                 assert score == nocache_value(b._make_move_unchecked(move),
                                               depth - 1)
 
@@ -385,16 +408,38 @@ def test_alpha_beta_explores_fewer_nodes_than_plain_minimax(monkeypatch):
         return max(vals) if s.to_move == BLACK else min(vals)
     expected = brute(b, depth)
 
+    engine = AlphaBeta()
     ab_nodes = 0
-    real = o.minimax_value
+    real = engine.value
     def counting(*a, **k):
         nonlocal ab_nodes
         ab_nodes += 1
         return real(*a, **k)
-    monkeypatch.setattr(o, "minimax_value", counting)   # recursion hits the counter
-    got = o.minimax_value(b, {}, depth)
+    monkeypatch.setattr(engine, "value", counting)   # recursion hits the counter
+    got = engine.value(b, depth)
     assert got == expected
     assert ab_nodes < brute_nodes             # pruning + TT visit strictly fewer
+
+
+def _count_value_nodes(engine, board, depth, monkeypatch):
+    nodes = 0
+    real = engine.value
+    def counting(*a, **k):
+        nonlocal nodes
+        nodes += 1
+        return real(*a, **k)
+    monkeypatch.setattr(engine, "value", counting)
+    value = engine.value(board, depth)
+    return value, nodes
+
+
+def test_move_ordering_explores_fewer_nodes(monkeypatch):
+    b = init_early_game() + "D3" + "C5" + "F6"
+    depth = 6
+    plain_v, plain_n = _count_value_nodes(AlphaBeta(), b, depth, monkeypatch)
+    ord_v, ord_n = _count_value_nodes(AlphaBetaOrdered(), b, depth, monkeypatch)
+    assert plain_v == ord_v                   # ordering never changes the value
+    assert ord_n < plain_n                    # but reaches it with fewer nodes
 
 
 # --------------------------------------------------------------------------- #
@@ -409,3 +454,96 @@ def test_import_has_no_side_effects():
     )
     assert out.returncode == 0
     assert out.stdout == ""
+
+
+# --------------------------------------------------------------------------- #
+# Board text parsing
+# --------------------------------------------------------------------------- #
+
+OPENING_GRID = "\n".join([
+    "........",
+    "........",
+    "........",
+    "...BW...",
+    "...WB...",
+    "........",
+    "........",
+    "........",
+])
+
+
+def test_parse_board_round_trips_opening():
+    assert parse_board(OPENING_GRID) == init_early_game()
+
+
+def test_parse_board_to_move_default_and_directive():
+    empty = "\n".join(["." * 8] * 8)
+    assert parse_board(empty).to_move == BLACK
+    assert parse_board(empty, to_move=WHITE).to_move == WHITE
+    assert parse_board(empty + "\nto_move: white").to_move == WHITE
+
+
+def test_parse_board_ignores_comments_and_spaces():
+    spaced = "# a comment\n" + "\n".join(["B X . . . . . W"] + ["." * 8] * 7)
+    b = parse_board(spaced)
+    assert b.black & square_to_move("A8") and b.white & square_to_move("H8")
+
+
+@pytest.mark.parametrize("bad", [
+    "\n".join(["." * 8] * 7),                       # 7 rows
+    "\n".join(["." * 7] * 8),                       # 7 columns
+    "\n".join(["Z" + "." * 7] + ["." * 8] * 7),     # unknown cell
+])
+def test_parse_board_rejects_malformed(bad):
+    with pytest.raises(ValueError):
+        parse_board(bad)
+
+
+# --------------------------------------------------------------------------- #
+# CLI
+# --------------------------------------------------------------------------- #
+
+def test_cli_parses_core_options():
+    args = othello_cli().parse_args(
+        ["--engine", "minimax", "--depth", "4", "--start", "either"])
+    assert (args.engine, args.depth, args.start) == ("minimax", 4, "either")
+
+
+def test_cli_depth_full_is_none():
+    assert othello_cli().parse_args(["--depth", "full"]).depth is None
+
+
+def test_cli_start_and_board_file_are_exclusive():
+    with pytest.raises(SystemExit):
+        othello_cli().parse_args(["--start", "early", "--board-file", "x"])
+
+
+def test_cli_list_engines(capsys):
+    from othello.cli import main
+    assert main(["--list-engines"]) == 0
+    out = capsys.readouterr().out
+    assert "minimax" in out and "ordered" in out
+
+
+def test_cli_bad_board_file_exits_2():
+    from othello.cli import main
+    assert main(["--board-file", "/no/such/path/xyz"]) == 2
+
+
+def test_cli_runs_a_game(capsys):
+    from othello.cli import main
+    assert main(["--start", "either", "--depth", "2"]) == 0   # near-terminal: fast
+    assert "winner:" in capsys.readouterr().out
+
+
+def test_cli_to_move_overrides_board_file(tmp_path):
+    from othello.cli import build_parser, _load_board
+    p = tmp_path / "board.txt"
+    p.write_text(OPENING_GRID + "\nto_move: black\n")
+    args = build_parser().parse_args(["--board-file", str(p), "--to-move", "white"])
+    assert _load_board(args).to_move == WHITE
+
+
+def othello_cli():
+    from othello.cli import build_parser
+    return build_parser()
