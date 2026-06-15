@@ -443,7 +443,7 @@ impl Tt {
 
     /// The cutoff search with `blocked`'s canonical key already in hand. The caller
     /// prefetched the matching slot before recursing, so this entry `get` -- the
-    /// first thing every node does -- is typically warm (Session 5, lead L2).
+    /// first thing every node does -- is typically warm (Session 5, L1 cluster).
     fn wins_keyed(&self, q: &Queens, blocked: Bits, key: Bits) -> bool {
         if let Some(w) = self.tt.get(key) {
             return w != 0;
@@ -1111,7 +1111,7 @@ impl Slot {
 const SHARD_BITS: u32 = 10;
 
 /// Allocate `size` zeroed [`AtomicU64`] slots backed by transparent huge pages
-/// (Session 5, lead L3). The table is probed at random, so a multi-GB table on
+/// (Session 5, L1 cluster). The table is probed at random, so a multi-GB table on
 /// 4 KB pages thrashes the TLB on every node; `MADV_HUGEPAGE` cuts that hard. We
 /// allocate via `vec![0u64; _]` -- the allocator's `alloc_zeroed`, so the OS hands
 /// back lazily-zeroed pages (a 17 GB table does not commit until probed) -- then
@@ -1252,7 +1252,7 @@ impl QueensTt {
 
     /// Prefetch the slot `key` will land in, so the demand `get` that follows finds
     /// it warm -- overlapping the random-probe DRAM round-trip with the work in
-    /// between (Session 5, lead L2). x86_64 only; a no-op elsewhere.
+    /// between (Session 5, L1 cluster). x86_64 only; a no-op elsewhere.
     #[inline]
     pub fn prefetch(&self, key: Bits) {
         let idx = (Self::hash128(key).0 & self.index_mask) as usize;
