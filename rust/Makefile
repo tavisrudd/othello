@@ -44,6 +44,13 @@ release:
 bench: release
 	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench
 
+# Same, pinned to the fast Zen 5 CCX (cores 0-3 @ 5.16 GHz) for reproducible
+# numbers -- the scheduler usually picks a perf core, but a stray Zen5c (3.29
+# GHz) placement costs ~1.5x. taskset removes that variance.
+bench-pinned: release
+	RUSTFLAGS="$(RFLAGS)" cargo build --release --example bench
+	taskset -c 0-3 target/release/examples/bench
+
 # Parallel scaling of the exact-scores path (1..16 workers).
 bench-parallel:
 	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_parallel

@@ -327,7 +327,7 @@ const DEFAULT_THREADS: usize = 8;
 
 /// Sequential table size (`value`/`best_move`): 2^16 ~= 1.5 MB, stays in one
 /// core's L2/L3.
-const SEQ_BITS: u32 = 16;
+const SEQ_BITS: u32 = 17;
 /// Per-worker parallel table size. Smaller so 8 of them coexist in shared L3
 /// without churn (8 * 2^13 entries ~= 1.5 MB total, vs 12 MB at 2^16).
 const POOL_BITS: u32 = 13;
