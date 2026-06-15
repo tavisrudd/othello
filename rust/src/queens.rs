@@ -367,6 +367,12 @@ pub trait Solver: Sync {
     fn report(&self) -> Option<CountReport> {
         None
     }
+
+    /// Root-move progress as `(resolved, total)` for a live indicator, or `None`
+    /// if the solver does not track it. Only meaningful mid-`first_player_wins`.
+    fn root_progress(&self) -> Option<(u64, u64)> {
+        None
+    }
 }
 
 /// **Naive** -- plain negamax win/loss with the α-β cutoff and *no* memo. The
@@ -473,12 +479,19 @@ impl Solver for Tt {
 /// root parallelism with a Young-Brothers-Wait guard.
 pub struct Parallel {
     inner: Tt,
+    /// Root moves resolved / to resolve (for a progress indicator). A
+    /// second-player win must refute *every* distinct first move, so `done`
+    /// climbs to `total`; a first-player win short-circuits earlier.
+    root_done: AtomicU64,
+    root_total: AtomicU64,
 }
 
 impl Parallel {
     pub fn new(bits: u32) -> Self {
         Parallel {
             inner: Tt::new(bits, true),
+            root_done: AtomicU64::new(0),
+            root_total: AtomicU64::new(0),
         }
     }
 
@@ -489,6 +502,8 @@ impl Parallel {
     pub fn new_counting(bits: u32, hll_p: u32) -> Self {
         Parallel {
             inner: Tt::new_counting(bits, true, hll_p, false),
+            root_done: AtomicU64::new(0),
+            root_total: AtomicU64::new(0),
         }
     }
 }
@@ -519,14 +534,22 @@ impl Solver for Parallel {
         if q.is_odd() {
             return true; // centre + 180° mirror strategy
         }
-        match q.distinct_first_moves().split_first() {
+        let moves = q.distinct_first_moves();
+        self.root_total.store(moves.len() as u64, Ordering::Relaxed);
+        self.root_done.store(0, Ordering::Relaxed);
+        match moves.split_first() {
             None => false,
             Some((&first, rest)) => {
-                if !self.wins(q, q.place(Bits::ZERO, first)) {
+                let wins = !self.wins(q, q.place(Bits::ZERO, first));
+                self.root_done.fetch_add(1, Ordering::Relaxed);
+                if wins {
                     return true; // best move already wins -- no speculation
                 }
-                rest.par_iter()
-                    .any(|&sq| !self.wins(q, q.place(Bits::ZERO, sq)))
+                rest.par_iter().any(|&sq| {
+                    let wins = !self.wins(q, q.place(Bits::ZERO, sq));
+                    self.root_done.fetch_add(1, Ordering::Relaxed);
+                    wins
+                })
             }
         }
     }
@@ -538,6 +561,10 @@ impl Solver for Parallel {
     }
     fn report(&self) -> Option<CountReport> {
         self.inner.report()
+    }
+    fn root_progress(&self) -> Option<(u64, u64)> {
+        let total = self.root_total.load(Ordering::Relaxed);
+        (total > 0).then(|| (self.root_done.load(Ordering::Relaxed).min(total), total))
     }
 }
 

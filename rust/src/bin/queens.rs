@@ -6,11 +6,15 @@
 //! --help`) for the modes; squares are named file+rank, e.g. `d1` (file A..
 //! left→right, rank 1..n bottom→top). Boards up to 16×16.
 
-use std::io::{self, Write};
-use std::time::Instant;
+use std::io::{self, IsTerminal, Write};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::thread;
+use std::time::{Duration, Instant};
 
 use clap::builder::PossibleValuesParser;
 use clap::{Parser, Subcommand};
+use signal_hook::consts::{SIGINT, SIGTERM, SIGUSR1};
+use signal_hook::iterator::Signals;
 
 use othello::queens::{
     make_solver, Bits, Nimber, Parallel, Queens, Solver, Tt, MAX_N, SOLVER_NAMES,
@@ -144,13 +148,21 @@ fn parse(q: &Queens, s: &str) -> Option<u32> {
 }
 
 /// Render the board: `Q` = queen, dim `·` = attacked (illegal), `.` = available.
+/// Queens are coloured like chess pieces by their square's checkerboard parity
+/// (a1 is a dark square): dark squares get the "black" queen in the same dark
+/// grey the Python board uses (256-colour 240), light squares the "white" one.
 fn render(q: &Queens, queens: Bits, blocked: Bits) {
     for r in (0..q.n).rev() {
         print!("{:>2} ", r + 1);
         for c in 0..q.n {
             let sq = q.square(r, c);
             if queens.get(sq) {
-                print!(" \x1b[1;93mQ\x1b[0m");
+                let q = if (r + c).is_multiple_of(2) {
+                    "\x1b[38;5;240mQ" // dark square ⇒ black queen (Python's grey)
+                } else {
+                    "\x1b[38;5;255mQ" // light square ⇒ white queen
+                };
+                print!(" {q}\x1b[0m");
             } else if blocked.get(sq) {
                 print!(" \x1b[90m·\x1b[0m");
             } else {
@@ -210,11 +222,127 @@ fn engine_move(
     }
 }
 
+/// Braille spinner frames for the live progress line.
+const SPINNER: [&str; 10] = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+
+/// A one-line on-demand report for a running solve (SIGUSR1) or its termination
+/// (SIGINT/SIGTERM), printed to stderr.
+fn status_report(label: &str, n: u32, solver: &dyn Solver, start: Instant) -> String {
+    let secs = start.elapsed().as_secs_f64();
+    let nodes = solver.nodes();
+    let rate = if secs > 0.0 {
+        nodes as f64 / secs / 1e6
+    } else {
+        0.0
+    };
+    format!("[queens {n}×{n}] {label}: {nodes} nodes searched in {secs:.1}s ({rate:.2}M nodes/s)")
+}
+
+/// The live, in-place progress line (stderr): a spinner, a determinate bar over
+/// the resolved root moves when the solver exposes them (a second-player win
+/// must refute them all, so it fills to 100%), and live node/elapsed/rate.
+fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
+    let secs = start.elapsed().as_secs_f64();
+    let nodes = solver.nodes();
+    let rate = if secs > 0.0 {
+        nodes as f64 / secs / 1e6
+    } else {
+        0.0
+    };
+    let spin = SPINNER[((secs * 8.0) as usize) % SPINNER.len()];
+    match solver.root_progress() {
+        Some((done, total)) => {
+            const W: u64 = 24;
+            let filled = (done * W / total) as usize;
+            let bar: String = "█".repeat(filled) + &"░".repeat(W as usize - filled);
+            format!("{spin} {n}×{n} [{bar}] {done}/{total} root moves · {nodes} nodes · {secs:.0}s · {rate:.1}M/s")
+        }
+        None => format!("{spin} {n}×{n} · {nodes} nodes · {secs:.0}s · {rate:.1}M/s"),
+    }
+}
+
+/// Background watcher for a running solve: each tick it drains arrived signals
+/// (SIGUSR1 → progress dump; SIGINT/SIGTERM → "how far we got" report, then
+/// exit) and, when `bar`, repaints the in-place progress line. Polling keeps it
+/// the sole stderr writer with no work in async-signal context. Stops when the
+/// solve sets `done`.
+fn watch(
+    signals: &mut Signals,
+    solver: &dyn Solver,
+    n: u32,
+    start: Instant,
+    bar: bool,
+    done: &AtomicBool,
+) {
+    let clear = || {
+        if bar {
+            eprint!("\r\x1b[K"); // carriage return + clear-to-end-of-line
+        }
+    };
+    loop {
+        for sig in signals.pending() {
+            clear();
+            match sig {
+                SIGINT | SIGTERM => {
+                    let what = if sig == SIGINT {
+                        "interrupted (SIGINT)"
+                    } else {
+                        "terminated (SIGTERM)"
+                    };
+                    eprintln!("{}", status_report(what, n, solver, start));
+                    std::process::exit(128 + sig); // 130 (SIGINT) / 143 (SIGTERM)
+                }
+                _ => eprintln!(
+                    "{}",
+                    status_report("in progress (SIGUSR1)", n, solver, start)
+                ),
+            }
+        }
+        if done.load(Ordering::Relaxed) {
+            break;
+        }
+        if bar {
+            eprint!("\r{}", progress_bar(n, solver, start));
+            io::stderr().flush().ok();
+        }
+        // Park rather than sleep so the solve can wake us the instant it finishes
+        // (no fixed tick of latency on fast solves); the timeout keeps the bar and
+        // signal polling live for long ones.
+        thread::park_timeout(Duration::from_millis(100));
+    }
+    clear();
+    io::stderr().flush().ok();
+}
+
 fn solve(q: &Queens, solver_name: &str) {
     let solver = make_solver(solver_name, tt_bits(q.n)).unwrap();
     let t = Instant::now();
-    let first_wins = solver.first_player_wins(q);
-    let pv = q.principal_variation(solver.as_ref());
+    let n = q.n;
+    // A live progress bar only when the solve may run a while and stderr is a
+    // real terminal (so piped output and tests stay clean).
+    let bar = n > 8 && io::stderr().is_terminal();
+
+    // One scoped watcher thread (so it can borrow the solver read-only) polls
+    // for signals and repaints the bar: SIGUSR1 dumps progress, SIGINT/SIGTERM
+    // report how far the search got and exit, and the live node counter the
+    // solver bumps keeps the bar meaningful even within one long root move.
+    let mut signals = Signals::new([SIGINT, SIGTERM, SIGUSR1]).ok();
+    let done = AtomicBool::new(false);
+    let (first_wins, pv) = thread::scope(|scope| {
+        let watcher = signals.as_mut().map(|signals| {
+            let solver = solver.as_ref();
+            let done = &done;
+            scope.spawn(move || watch(signals, solver, n, t, bar, done))
+        });
+        let first_wins = solver.first_player_wins(q);
+        let pv = q.principal_variation(solver.as_ref());
+        done.store(true, Ordering::Relaxed);
+        if let Some(watcher) = &watcher {
+            watcher.thread().unpark(); // wake it now so the scope joins promptly
+        }
+        (first_wins, pv)
+    });
+
     let elapsed = t.elapsed().as_secs_f64();
     let winner = if first_wins { "first" } else { "second" };
     println!(
