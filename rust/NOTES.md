@@ -178,13 +178,34 @@ If we ever parallelize a *single* deep search, the literature points to **Lazy
 SMP + a lockless (Hyatt XOR) TT**, not YBWC — but only once a single search is
 big enough (deep endgame), which the depth-8 game is not.
 
+## Endgame solver (done — value-preserving)
+
+`--depth full` now uses a native exact solver (`solve_pvs`): negamax PVS to
+terminal, no horizon heuristic, with the TT keyed by **empty count** (which is
+path-independent, so transpositions share fully and the key keeps solve entries
+disjoint from depth-keyed PVS entries in the shared table). Exact endgame values
+are unchanged (6 / −40 / 4); it replaced the slow HashMap fallback. Timings
+(`make bench-solve`): 10 empties 0.5 ms, 14 ~19 ms, 16 ~78 ms, 18 ~1.3 s — the
+expected exponential, exact to the last disc. Still on the table: an explicit
+empty-square list, parity "fastest-first" ordering, `solve_1..4`, and
+stability-based cutoffs would push the tractable depth a few empties further.
+
+## Strength (done — `strong+`, changes the value)
+
+`strong+` keeps the search but swaps the horizon eval for a stronger one: the
+classic X-/C-square penalty (sitting next to an *empty* corner hands it away)
+plus a frontier-disc penalty, on top of corners/mobility/discs. It rides on the
+TT (already threaded everywhere) so the leaf branch is predictable and `strong`
+is byte-for-byte unchanged. Validated by a colour-balanced self-play match
+(`make match`): **77.5 % vs `strong`** (46–13–1 at depth 6). The exact endgame
+solve is eval-independent, so `strong+` == `strong` on `--depth full`.
+
 ## Future directions
 
-- **Endgame solver** (value-preserving, large for `--depth full`): an explicit
-  empty-square list, parity-aware "fastest-first" ordering, `solve_1..4` for the
-  last empties, and stability-based cutoffs (edge-stability LUT). Speeds exact
-  solves, not depth-8 games.
-- **Strength** (changes the value → ship as a separate `strong+` engine so the
-  equivalence tests keep passing): **Multi-ProbCut** (the dominant Othello search
-  win — forward pruning via a shallow-search regression) and **pattern / n-tuple
-  evaluation** (the largest strength gain; trainable on the GPU/NPU).
+- **Multi-ProbCut** — the dominant Othello *search* win (forward pruning via a
+  shallow-search regression); needs per-phase/-depth calibration coefficients.
+- **Pattern / n-tuple (or NNUE) evaluation** — the largest *strength* gain;
+  needs a training pipeline (millions of labeled positions), a natural fit for
+  the GPU/NPU. Would slot in as the `strong+` horizon eval.
+- **Endgame solver depth** — `solve_1..4` + parity + stability cutoffs to solve
+  a few more empties in tractable time.

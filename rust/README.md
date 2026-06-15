@@ -43,12 +43,16 @@ rust/
 | `minimax`   | plain minimax + depth-keyed cache (ground truth)                   |
 | `alphabeta` | fail-soft alpha-beta + bound-tracking transposition table         |
 | `ordered`   | + mobility move ordering                                           |
-| `strong`    | native PVS + iterative deepening + hash-move ordering (≈ cython-strong) |
+| `strong`    | native PVS + iterative deepening + hash-move ordering + aspiration; native exact endgame solver for `--depth full` (≈ cython-strong) |
+| `strong+`   | `strong` with a stronger horizon eval (X/C-square + frontier penalties) — **changes the value** (stronger play) |
 
-All four compute **identical** black-centred values — pruning, ordering, and
-parallelism change only the node count, never the value. This is asserted in the
-test suite (cross-engine agreement, plus an independent grid-arithmetic reference
-for move-gen/flips, and the exact endgame-solve values 6 / −40 / 4).
+The first four compute **identical** black-centred values — pruning, ordering,
+and parallelism change only the node count, never the value. This is asserted in
+the test suite (cross-engine agreement, an independent grid-arithmetic reference
+for move-gen/flips, and the exact endgame-solve values 6 / −40 / 4). `strong+`
+deliberately changes the value: it scores **77.5 %** against `strong` over 60
+colour-balanced games (`make match`), while its eval-independent exact endgame
+solve still matches `strong`.
 
 ## Parallelism (rayon)
 

@@ -5,10 +5,12 @@
 //! - `AlphaBeta` -- fail-soft alpha-beta + bound-tracking TT (`order=false`),
 //!   or mobility move ordering (`order=true`, the `ordered` engine).
 //! - `Strong`   -- the native PVS + iterative-deepening + open-addressing TT
-//!   engine (the Rust equivalent of `cython-strong`); falls back to the ordered
-//!   alpha-beta for `depth=None` (full endgame solve).
+//!   engine (the Rust equivalent of `cython-strong`); uses the native exact
+//!   endgame solver for `depth=None`.
+//! - `Strong::new_plus` (`strong+`) -- same search, a stronger horizon eval.
 //!
-//! All four compute identical values; pruning/ordering only change node counts.
+//! The first four compute identical values (pruning/ordering change only node
+//! counts); `strong+` changes the value (stronger play), so it is separate.
 
 use std::collections::HashMap;
 use std::hash::{BuildHasherDefault, Hasher};
