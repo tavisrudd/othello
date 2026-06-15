@@ -1,0 +1,30 @@
+[package]
+name = "othello"
+version = "0.1.0"
+edition = "2021"
+description = "Pure-Rust 8x8 Othello engine: bitboards, black-centred search, PVS strong engine"
+
+[lib]
+name = "othello"
+path = "src/lib.rs"
+
+[[bin]]
+name = "othello"
+path = "src/main.rs"
+
+# Ultra-fast release build: whole-program inlining + single codegen unit.
+# `target-cpu=native` (see .cargo/config.toml) turns on POPCNT/BMI for the hot
+# bit primitives (count_ones, blsi, tzcnt).
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+
+# Same codegen as release but with debug symbols, for `perf`.
+[profile.profiling]
+inherits = "release"
+debug = true
+
+[dependencies]
+rayon = "1.12.0"

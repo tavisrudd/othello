@@ -1,0 +1,137 @@
+# Othello — pure Rust
+
+A parallel pure-Rust implementation of the Python `othello` package: the same
+8×8 bitboard rules, black-centred search, and engine ladder, plus a root-parallel
+exact-scores path (rayon) and a documented optimisation journey.
+
+```console
+$ make release                       # znver5 + mold (host-tuned)
+$ ./target/release/othello --engine strong --depth 9
+$ make bench                         # depth-8 search / best_move / full game
+$ make test                          # equivalence + reference tests
+```
+
+It is a faithful sibling of the Python engine — identical rules, identical
+black-centred values — and the `strong` engine is the Rust equivalent of
+`cython-strong`: principal-variation search (PVS) + iterative deepening + an
+open-addressing transposition table with hash-move ordering.
+
+## Layout
+
+```
+rust/
+  src/
+    core.rs      Board, Kogge-Stone move-gen + flips, coordinates, parsing, winner
+    eval.rs      utility (terminal) + heuristic (horizon)  — shared by every engine
+    game.rs      Engine trait, move iteration, black-centred move choice
+    tt.rs        open-addressing transposition table (flat arena)
+    search.rs    native PVS / alpha-beta over packed bitboards (the `strong` core)
+    engines.rs   Minimax, AlphaBeta(+ordering), Strong (+ rayon scores), registry
+    display.rs   ANSI board / score rendering
+    fixtures.rs  starting positions
+    play.rs      self-play driver
+    cli.rs       argument parser (mirrors the Python argparse CLI)
+    simd.rs      AVX2 / AVX-512 experiments (see "What didn't help")
+  examples/      bench, bench_parallel, bench_simd, profile_game
+  Makefile       fmt / clippy / test / release / bench / profile / pgo-release
+```
+
+## Engines
+
+| `--engine`  | what it adds                                                        |
+|-------------|--------------------------------------------------------------------|
+| `minimax`   | plain minimax + depth-keyed cache (ground truth)                   |
+| `alphabeta` | fail-soft alpha-beta + bound-tracking transposition table         |
+| `ordered`   | + mobility move ordering                                           |
+| `strong`    | native PVS + iterative deepening + hash-move ordering (≈ cython-strong) |
+
+All four compute **identical** black-centred values — pruning, ordering, and
+parallelism change only the node count, never the value. This is asserted in the
+test suite (cross-engine agreement, plus an independent grid-arithmetic reference
+for move-gen/flips, and the exact endgame-solve values 6 / −40 / 4).
+
+## Parallelism (rayon)
+
+`Strong::scores` is **root-parallel**: every legal move's child is an independent
+full-window search (`NEG..POS`), so the per-move values are exact and
+order-independent. They fan out across up to `--threads`/`OTHELLO_THREADS` workers
+(default 8), each owning a *private* preallocated transposition table — there is
+no shared mutable state and no lock. The exact-scores path scales roughly:
+
+| threads | full self-play game (exact scores) |
+|--------:|-----------------------------------:|
+| 1       | ~275 ms                            |
+| 8       | ~112 ms                            |
+| 16      | ~90 ms (3.1×)                       |
+
+Scaling tapers past 8 workers (shared-L3 pressure, bounded by keeping each
+worker's table small — `2^13` entries). `best_move`, by contrast, stays a
+**single rooted PVS search**: sibling pruning + one cache-resident table beats
+fan-out for these sub-millisecond per-move searches, and the LSB-order root with
+strict `>` keeps the exact same move (and tie-break) as `best_by_side` over the
+exact scores.
+
+## Performance
+
+Headline figures on the dev box (AMD Ryzen AI 9 HX 370, Zen 5; `make bench`,
+single machine — relative steps are the point):
+
+| metric                                    | time     |
+|-------------------------------------------|----------|
+| single depth-8 search (`search_strong`)   | ~0.27 ms |
+| depth-8 `best_move` from the opening      | ~0.5 ms  |
+| full depth-8 self-play game (62 plies)    | ~76 ms   |
+
+The full **game** is 62 separate depth-8 analyses; a single depth-8 *move* — the
+natural unit — is well under a millisecond.
+
+### What worked
+
+| step                          | effect                | idea                                                   |
+|-------------------------------|-----------------------|--------------------------------------------------------|
+| native bitboards + PVS        | baseline              | u64 wraps natively; no FFI boundary in the inner loop  |
+| single rooted `best_move`     | game 488 → ~120 ms    | sibling pruning instead of N full-window child searches |
+| lazy flips at shallow nodes   | game ~185 → ~120 ms   | compute flips only for moves actually searched (same order → same nodes) |
+| open-addressing arena TT      | —                     | flat `Vec`, full-key compare (collision = miss, never wrong) |
+| `target-cpu=znver5` + mold    | game ~120 → ~100 ms   | POPCNT / BMI / AVX; **see the config footgun below**   |
+| root-parallel exact scores    | scores 333 → 90 ms    | independent full-window children, private TT per worker |
+| preallocated TT arena         | no mid-search allocs  | one allocation up front, reused warm across moves       |
+| aspiration windows (ID)       | game ~100 → ~76 ms    | narrow window around the previous iteration; widen on a miss (value-preserving; tie-break kept) |
+
+### What didn't (the instructive failures)
+
+- **The `target-cpu` was silently dropped.** The global `~/.cargo/config.toml`
+  sets `[target.x86_64-unknown-linux-gnu].rustflags` (the mold linker), which
+  *shadows* a project `[build].rustflags`. The fix is to put `target-cpu` under
+  the **same** `[target.*]` key so cargo merges the arrays. Worth ~1.2× — and
+  every earlier number had been measured on a generic baseline.
+- **Root-parallel `best_move` is slower than sequential rooted.** Depth-8
+  per-move searches are sub-millisecond; fan-out loses sibling pruning and
+  cross-child TT reuse, and the overhead dominates. Parallelism only pays on the
+  exact-scores path (which *needs* every sibling searched) and on deeper single
+  searches.
+- **SIMD across the eight ray directions is slower** (~0.96×). Broadcasting the
+  board and the per-call horizontal OR-reduce cost more than the scalar
+  Kogge-Stone fill (already ~1.4 ns).
+- **Batched SIMD *does* amortise the setup** — `legal_moves_x8` scores eight
+  boards per AVX-512 call at ~1.35× the scalar throughput (lanes = positions,
+  immediate shifts, no horizontal reduce). But wiring it into the move-ordering
+  was **neutral end-to-end**: the orderable mobility is too small a slice of the
+  total, and the hot path is leaf-dominated. Kept as a benched primitive
+  (`make bench-simd`); reverted from the search to keep it simple.
+- **PGO was a wash.** The inner loop is already tight with predictable branches.
+  The `pgo-release` target exists for completeness.
+
+## Build
+
+```console
+$ make release          # cargo build --release, znver5 on Zen 5 (else native) + mold
+$ make test             # cargo test --release
+$ make clippy           # cargo clippy --all-targets -- -D warnings
+$ make bench            # headline benchmark
+$ make bench-parallel   # parallel scaling (1..16 workers)
+$ make profile          # perf record + report of the full depth-8 game
+$ make pgo-release      # profile-guided build (needs llvm-tools-preview)
+```
+
+`OTHELLO_THREADS=N` overrides the root-parallel fan-out width at runtime.
