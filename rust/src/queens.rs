@@ -587,9 +587,133 @@ impl Solver for Nimber {
     }
 }
 
+/// **Pn** -- depth-first proof-number search (Nagai's df-pn). Instead of a fixed
+/// move order it always descends the *most-proving* line, guided by proof and
+/// disproof numbers, so it focuses effort on the narrowest path to a verdict --
+/// the published state of the art for boolean games (Allis 1994; Nagai 2002).
+/// Negamax form on the win/loss tree: a node's proof `φ = min` over children of
+/// their disproof `δ`, and `δ = Σ` of their `φ`; a terminal (mover stuck) is a
+/// proven loss (`φ = ∞, δ = 0`). The table stores `(φ, δ)` per canonical position.
+///
+/// **Instructive negative for *this* game.** Verdicts are correct, but plain
+/// df-pn hits the well-known df-pn + transposition (graph-history-interaction)
+/// pathology: the Non-Attacking Queens game is extraordinarily transposition-
+/// dense, so positions solved via one path get re-expanded under reset thresholds
+/// when reached via another, and the search explodes past tiny boards (n=8 is
+/// fine; n≥9 is impractical). The straightforward `parallel` α-β + TT + symmetry
+/// solver dominates it here. Making df-pn competitive needs *careful* DAG-aware
+/// proof-number search (Kishimoto on df-pn+transpositions; Čížek-Balko-Schmid
+/// 2026) -- kept here as a documented, correct-but-not-competitive experiment.
+pub struct Pn {
+    tt: PnTt,
+}
+
+/// Proof/disproof "infinity" -- a finite sentinel so the arithmetic saturates.
+const PN_INF: u32 = u32::MAX;
+
+impl Pn {
+    pub fn new(bits: u32) -> Self {
+        Pn {
+            tt: PnTt::new(bits),
+        }
+    }
+
+    /// The `(φ, δ)` of a child position: the table entry if present, else a
+    /// proven loss for a terminal (`∞, 0`) or a unit leaf (`1, 1`).
+    #[inline]
+    fn child_pd(&self, q: &Queens, child: Bits) -> (u32, u32) {
+        if let Some(pd) = self.tt.get(q.canon(child)) {
+            pd
+        } else if q.no_moves(child) {
+            (PN_INF, 0) // mover at child cannot move ⇒ "child wins" is disproven
+        } else {
+            (1, 1) // unexpanded leaf
+        }
+    }
+
+    /// df-pn `mid`: expand `blocked` until its `φ ≥ th_phi` or `δ ≥ th_delta`,
+    /// always recursing into the child with the smallest disproof number.
+    fn mid(&self, q: &Queens, blocked: Bits, th_phi: u32, th_delta: u32) {
+        let key = q.canon(blocked);
+        // Standard df-pn entry check: if the stored numbers already meet the
+        // thresholds (in particular a solved node, φ=0/δ=∞ or φ=∞/δ=0), return at
+        // once. Without this, a subtree solved via one path is re-expanded every
+        // time it recurs through another -- fatal on a transposition-dense game.
+        if let Some((phi, delta)) = self.tt.get(key) {
+            if phi >= th_phi || delta >= th_delta {
+                return;
+            }
+        }
+        self.tt.bump();
+        let kids: Vec<Bits> = q
+            .order
+            .iter()
+            .filter(|&&sq| q.is_available(blocked, sq))
+            .map(|&sq| q.place(blocked, sq))
+            .collect();
+        if kids.is_empty() {
+            self.tt.put(key, PN_INF, 0); // terminal: mover loses
+            return;
+        }
+        loop {
+            // φ(n) = min_c δ(c); δ(n) = Σ_c φ(c). Track the two smallest δ(c).
+            let mut phi_n = PN_INF;
+            let mut delta_n = 0u32;
+            let (mut best, mut best_phi, mut delta1, mut delta2) = (0usize, 1u32, PN_INF, PN_INF);
+            for (i, &c) in kids.iter().enumerate() {
+                let (cphi, cdelta) = self.child_pd(q, c);
+                delta_n = delta_n.saturating_add(cphi);
+                if cdelta < phi_n {
+                    phi_n = cdelta;
+                }
+                if cdelta < delta1 {
+                    delta2 = delta1;
+                    delta1 = cdelta;
+                    best = i;
+                    best_phi = cphi;
+                } else if cdelta < delta2 {
+                    delta2 = cdelta;
+                }
+            }
+            if phi_n >= th_phi || delta_n >= th_delta {
+                self.tt.put(key, phi_n, delta_n);
+                return;
+            }
+            // Thresholds for the most-proving child (Nagai df-pn).
+            let th_phi_c = if th_delta == PN_INF {
+                PN_INF
+            } else {
+                (th_delta - delta_n).saturating_add(best_phi)
+            };
+            let th_delta_c = th_phi.min(delta2.saturating_add(1));
+            self.mid(q, kids[best], th_phi_c, th_delta_c);
+        }
+    }
+}
+
+impl Solver for Pn {
+    fn name(&self) -> &'static str {
+        "pn"
+    }
+    fn wins(&self, q: &Queens, blocked: Bits) -> bool {
+        self.mid(q, blocked, PN_INF, PN_INF); // solve fully
+                                              // Solved ⇒ φ = 0 (proven win) or φ = ∞ (disproven ⇒ loss).
+        self.tt
+            .get(q.canon(blocked))
+            .map(|(p, _)| p == 0)
+            .unwrap_or(false)
+    }
+    fn nodes(&self) -> u64 {
+        self.tt.nodes()
+    }
+    fn cap_bytes(&self) -> u64 {
+        self.tt.capacity().1
+    }
+}
+
 /// CLI solver names, simplest → most sophisticated (`nimber` computes the full
-/// Sprague-Grundy value rather than just win/loss).
-pub const SOLVER_NAMES: [&str; 5] = ["naive", "memo", "symmetry", "parallel", "nimber"];
+/// Sprague-Grundy value; `pn` is df-pn proof-number search).
+pub const SOLVER_NAMES: [&str; 6] = ["naive", "memo", "symmetry", "parallel", "nimber", "pn"];
 
 /// Build a solver by name with a `2^bits`-slot table (ignored by `naive`).
 pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
@@ -599,6 +723,7 @@ pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
         "symmetry" => Some(Box::new(Tt::new(bits, true))),
         "parallel" => Some(Box::new(Parallel::new(bits))),
         "nimber" => Some(Box::new(Nimber::new(bits))),
+        "pn" => Some(Box::new(Pn::new(bits))),
         _ => None,
     }
 }
@@ -696,6 +821,74 @@ impl QueensTt {
     }
 }
 
+/// The proof-number table for [`Pn`]: a fixed-size sharded open-addressing table
+/// keyed by canonical mask -> `(proof, disproof)` numbers. Same structure and
+/// guarantees as [`QueensTt`] (collision = miss = re-expand, never wrong).
+pub struct PnTt {
+    shards: Vec<Mutex<Box<[PnSlot]>>>,
+    shard_mask: u64,
+    slot_mask: u64,
+    nodes: AtomicU64,
+}
+
+#[derive(Clone, Copy, Default)]
+struct PnSlot {
+    key: [u64; WORDS],
+    phi: u32,
+    delta: u32,
+    used: u8,
+}
+
+impl PnTt {
+    pub fn new(bits: u32) -> Self {
+        let bits = bits.max(SHARD_BITS);
+        let shards = 1usize << SHARD_BITS;
+        let per = 1usize << (bits - SHARD_BITS);
+        PnTt {
+            shards: (0..shards)
+                .map(|_| Mutex::new(vec![PnSlot::default(); per].into_boxed_slice()))
+                .collect(),
+            shard_mask: shards as u64 - 1,
+            slot_mask: per as u64 - 1,
+            nodes: AtomicU64::new(0),
+        }
+    }
+
+    pub fn capacity(&self) -> (u64, u64) {
+        let slots = (self.shard_mask + 1) * (self.slot_mask + 1);
+        (slots, slots * std::mem::size_of::<PnSlot>() as u64)
+    }
+
+    pub fn nodes(&self) -> u64 {
+        self.nodes.load(Ordering::Relaxed)
+    }
+
+    #[inline]
+    fn bump(&self) {
+        self.nodes.fetch_add(1, Ordering::Relaxed);
+    }
+
+    #[inline]
+    fn get(&self, key: Bits) -> Option<(u32, u32)> {
+        let h = QueensTt::hash(key);
+        let idx = ((h >> 32) & self.slot_mask) as usize;
+        let s = self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx];
+        (s.used != 0 && s.key == key.0).then_some((s.phi, s.delta))
+    }
+
+    #[inline]
+    fn put(&self, key: Bits, phi: u32, delta: u32) {
+        let h = QueensTt::hash(key);
+        let idx = ((h >> 32) & self.slot_mask) as usize;
+        self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx] = PnSlot {
+            key: key.0,
+            phi,
+            delta,
+            used: 1,
+        };
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -751,6 +944,21 @@ mod tests {
                 Parallel::new(16).first_player_wins(&q),
                 truth,
                 "parallel n={n}"
+            );
+            assert_eq!(
+                Nimber::new(16).first_player_wins(&q),
+                truth,
+                "nimber!=0 n={n}"
+            );
+        }
+        // df-pn is correct but hits the transposition (graph-history) pathology
+        // on this game, so it is only practical for tiny boards -- validate those.
+        for n in 1..=6 {
+            let q = Queens::new(n);
+            assert_eq!(
+                Pn::new(16).first_player_wins(&q),
+                Naive::new().first_player_wins(&q),
+                "pn n={n}"
             );
         }
     }
