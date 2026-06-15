@@ -75,6 +75,7 @@ the code/bench for a few is kept so the lesson is reproducible.
 | outflank ("PEXT") flips       | **5.5×** kernel | 75 → 79 ms  | real flip runs are short → walk early-exits; outflank pays a table load  |
 | PGO                           | —               | wash        | inner loop already tight, branches predictable                           |
 | root-parallel `best_move`     | —               | slower      | sub-ms searches: fan-out loses pruning + cross-child reuse to overhead   |
+| endgame parity ordering       | 0.4–0.6× solve  | —           | mobility ordering already near-minimal; quadrant parity disorders it     |
 
 The two with kept code (`make bench-simd`, `make bench-flips`) are the sharpest
 lesson: **a kernel microbench can show 1.35×–5.5× and still lose in the real
