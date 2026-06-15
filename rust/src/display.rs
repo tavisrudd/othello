@@ -4,10 +4,12 @@
 use crate::core::{format_move, format_square, Board, Move, Player, Score, BLACK, PASS};
 
 pub const RESET: &str = "\x1b[0m";
-pub const BLACK_DOT_FG: &str = "\x1b[38;5;240m";
+pub const BLACK_DOT_FG: &str = "\x1b[38;5;240m"; // dark grey: black pieces & the word "black"
+const WHITE_DOT_FG: &str = "\x1b[38;5;255m"; // bright white: white pieces & the word "white"
 
-const BLACK_BG: &str = "\x1b[97;100m";
-const WHITE_BG: &str = "\x1b[30;107m";
+/// Green `\u{2022}` marking a legal move (turn-independent), matching
+/// `display.py`'s `LEGAL_DOT`; replaces the old per-cell rank/file coordinates.
+const LEGAL_DOT: &str = "\x1b[38;5;46m\u{2022}\x1b[0m ";
 
 const EMPTY_CELL: &str = "\x1b[2;38;5;240m\u{00b7}\x1b[0m ";
 const BLACK_MARK: &str = "\x1b[38;5;240m\u{2b24}\x1b[0m ";
@@ -41,12 +43,7 @@ pub fn format_board(board: &Board, show_valid_moves: bool, last_move: Option<Mov
             } else if board.white & bit != 0 {
                 WHITE_MARK.to_string()
             } else if actions & bit != 0 {
-                let bg = if board.to_move == BLACK {
-                    BLACK_BG
-                } else {
-                    WHITE_BG
-                };
-                format!("{bg}{:<2}{RESET}", format_square(sq))
+                LEGAL_DOT.to_string()
             } else {
                 EMPTY_CELL.to_string()
             };
@@ -59,11 +56,13 @@ pub fn format_board(board: &Board, show_valid_moves: bool, last_move: Option<Mov
     out
 }
 
-pub fn player_name(player: Player) -> &'static str {
+/// The side's name, coloured to match its pieces (black = dark grey 240, white =
+/// 255), so "black to move" / "winner: white" read in the piece colours.
+pub fn player_name(player: Player) -> String {
     if player == BLACK {
-        "black"
+        format!("{BLACK_DOT_FG}black{RESET}")
     } else {
-        "white"
+        format!("{WHITE_DOT_FG}white{RESET}")
     }
 }
 

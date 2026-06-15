@@ -10,7 +10,7 @@
 use std::io::Write;
 use std::time::{Duration, Instant};
 
-use crate::core::{winner, Board, Move};
+use crate::core::{winner, Board, Move, BLACK, WHITE};
 use crate::display::{format_board, format_score, move_name, player_name, BLACK_DOT_FG, RESET};
 use crate::game::{best_by_side, Depth, Engine};
 
@@ -45,8 +45,8 @@ pub fn play_game(mut board: Board, engine: &mut dyn Engine, depth: Depth) -> Boa
     println!();
     println!("terminal");
     println!("{}", format_board(&board, false, last_move));
-    println!("black: {}", board.black.count_ones());
-    println!("white: {}", board.white.count_ones());
+    println!("{}: {}", player_name(BLACK), board.black.count_ones());
+    println!("{}: {}", player_name(WHITE), board.white.count_ones());
     match winner(&board) {
         None => println!("winner: draw"),
         Some(p) => println!("winner: {}", player_name(p)),
@@ -126,8 +126,8 @@ pub fn render_recorded(
     use std::fmt::Write as _;
     let _ = write!(buf, "\nterminal\n");
     let _ = writeln!(buf, "{}", format_board(&board, false, last));
-    let _ = writeln!(buf, "black: {}", board.black.count_ones());
-    let _ = writeln!(buf, "white: {}", board.white.count_ones());
+    let _ = writeln!(buf, "{}: {}", player_name(BLACK), board.black.count_ones());
+    let _ = writeln!(buf, "{}: {}", player_name(WHITE), board.white.count_ones());
     match winner(&board) {
         None => buf.push_str("winner: draw\n"),
         Some(p) => {
