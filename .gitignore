@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
-# compiled bitboard extension (build with ./build_ext.sh)
+# compiled extensions (build with ./build_ext.sh)
 *.so
 othello/_bitboard.c
+othello/_search.c

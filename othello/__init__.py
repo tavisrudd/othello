@@ -27,6 +27,7 @@ from othello.fixtures import (
 from othello.ai.minimax import Minimax
 from othello.ai.alphabeta import AlphaBeta
 from othello.ai.alphabeta_move_ordering import AlphaBetaOrdered
+from othello.ai.cython_alphabeta import CythonAlphaBeta, CythonAlphaBetaOrdered
 from othello.ai import ENGINES
 from othello.play import play_game
 from othello.cli import main
@@ -42,6 +43,7 @@ __all__ = [
     "iter_moves", "iter_actions", "best_by_side",
     "init_early_game", "init_near_terminal_game_white_win",
     "init_near_terminal_game_black_win", "init_near_terminal_game_either_can_win",
-    "STARTS", "Minimax", "AlphaBeta", "AlphaBetaOrdered", "ENGINES",
+    "STARTS", "Minimax", "AlphaBeta", "AlphaBetaOrdered",
+    "CythonAlphaBeta", "CythonAlphaBetaOrdered", "ENGINES",
     "play_game", "main",
 ]

@@ -16,6 +16,7 @@ from othello import (
     parse_board, format_score,
     iter_moves, iter_actions, best_by_side,
     Minimax, AlphaBeta, AlphaBetaOrdered,
+    CythonAlphaBeta, CythonAlphaBetaOrdered,
     MIN_SCORE, MAX_SCORE,
     init_early_game,
     init_near_terminal_game_black_win,
@@ -280,7 +281,8 @@ def test_utility_is_player_relative():
 # Engines: minimax + depth-aware cache
 # --------------------------------------------------------------------------- #
 
-ENGINES = [Minimax, AlphaBeta, AlphaBetaOrdered]
+ENGINES = [Minimax, AlphaBeta, AlphaBetaOrdered,
+           CythonAlphaBeta, CythonAlphaBetaOrdered]
 
 
 @pytest.mark.parametrize("Engine", ENGINES)
@@ -457,6 +459,19 @@ def test_move_ordering_explores_fewer_nodes(monkeypatch):
     ord_v, ord_n = _count_value_nodes(AlphaBetaOrdered(), b, depth, monkeypatch)
     assert plain_v == ord_v                   # ordering never changes the value
     assert ord_n < plain_n                    # but reaches it with fewer nodes
+
+
+def test_native_search_matches_python():
+    # Direct check of the compiled search (both order modes) against the Python
+    # AlphaBeta. Skipped when the extension isn't built (then the cython engines
+    # are exercised through their pure-Python fallback by the ENGINES tests).
+    search = pytest.importorskip("othello._search").search
+    for b in sample_positions(25, seed=31):
+        ref_engine = AlphaBeta()
+        for depth in [1, 2, 3, 4, 5]:
+            ref = ref_engine.value(b, depth)
+            for order in (0, 1):
+                assert search(b.black, b.white, b.to_move, depth, {}, order) == ref
 
 
 # --------------------------------------------------------------------------- #
