@@ -226,17 +226,43 @@ fn engine_move(
 /// Braille spinner frames for the live progress line.
 const SPINNER: [&str; 10] = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
+/// An integer with thousands separators: `1234567` → `"1,234,567"`.
+fn commas(n: u64) -> String {
+    let digits = n.to_string();
+    let mut out = String::with_capacity(digits.len() + digits.len() / 3);
+    for (i, ch) in digits.char_indices() {
+        if i > 0 && (digits.len() - i).is_multiple_of(3) {
+            out.push(',');
+        }
+        out.push(ch);
+    }
+    out
+}
+
+/// A node-search rate, scaled to the unit that keeps it legible: M/s for a fast
+/// solver, K/s for a slow one, plain /s for a crawl (e.g. `pn`, which is far too
+/// slow to register on the M/s scale — it would read a flat `0.0M/s`).
+fn fmt_rate(nodes: u64, secs: f64) -> String {
+    let rate = if secs > 0.0 { nodes as f64 / secs } else { 0.0 };
+    if rate >= 1e6 {
+        format!("{:.2}M/s", rate / 1e6)
+    } else if rate >= 1e3 {
+        format!("{:.1}K/s", rate / 1e3)
+    } else {
+        format!("{rate:.0}/s")
+    }
+}
+
 /// A one-line on-demand report for a running solve (SIGUSR1) or its termination
 /// (SIGINT/SIGTERM), printed to stderr.
 fn status_report(label: &str, n: u32, solver: &dyn Solver, start: Instant) -> String {
     let secs = start.elapsed().as_secs_f64();
     let nodes = solver.nodes();
-    let rate = if secs > 0.0 {
-        nodes as f64 / secs / 1e6
-    } else {
-        0.0
-    };
-    format!("[queens {n}×{n}] {label}: {nodes} nodes searched in {secs:.1}s ({rate:.2}M nodes/s)")
+    format!(
+        "[queens {n}×{n}] {label}: {} nodes searched in {secs:.1}s ({})",
+        commas(nodes),
+        fmt_rate(nodes, secs)
+    )
 }
 
 /// The live, in-place progress line (stderr): a spinner, a determinate bar over
@@ -245,20 +271,17 @@ fn status_report(label: &str, n: u32, solver: &dyn Solver, start: Instant) -> St
 fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
     let secs = start.elapsed().as_secs_f64();
     let nodes = solver.nodes();
-    let rate = if secs > 0.0 {
-        nodes as f64 / secs / 1e6
-    } else {
-        0.0
-    };
+    let rate = fmt_rate(nodes, secs);
+    let nodes = commas(nodes);
     let spin = SPINNER[((secs * 8.0) as usize) % SPINNER.len()];
     match solver.root_progress() {
         Some((done, total)) => {
             const W: u64 = 24;
             let filled = (done * W / total) as usize;
             let bar: String = "█".repeat(filled) + &"░".repeat(W as usize - filled);
-            format!("{spin} {n}×{n} [{bar}] {done}/{total} root moves · {nodes} nodes · {secs:.0}s · {rate:.1}M/s")
+            format!("{spin} {n}×{n} [{bar}] {done}/{total} root moves · {nodes} nodes · {secs:.0}s · {rate}")
         }
-        None => format!("{spin} {n}×{n} · {nodes} nodes · {secs:.0}s · {rate:.1}M/s"),
+        None => format!("{spin} {n}×{n} · {nodes} nodes · {secs:.0}s · {rate}"),
     }
 }
 
@@ -355,7 +378,7 @@ fn solve(q: &Queens, solver_name: &str) {
     println!(
         "(solver {}: searched {} nodes in {:.3}s; TT cap ≈ {:.2} GB)",
         solver.name(),
-        solver.nodes(),
+        commas(solver.nodes()),
         elapsed,
         solver.cap_bytes() as f64 / 1e9,
     );
