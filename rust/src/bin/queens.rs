@@ -26,10 +26,14 @@ fn tt_bits(n: u32) -> u32 {
     {
         return b;
     }
-    match n {
-        0..=11 => 22,  // ≤ 4M slots (~160 MB)
-        12 | 13 => 26, // ~67M slots (~2.7 GB)
-        _ => 27,       // ~134M slots (~5.4 GB)
+    if n.is_multiple_of(2) {
+        match n {
+            0..=10 => 22, // ≤ 4M slots (~160 MB)
+            12 => 26,     // ~67M slots (~2.7 GB)
+            _ => 27,      // ~134M slots (~5.4 GB)
+        }
+    } else {
+        10 // odd boards are solved O(1) (centre+mirror) -- no search, tiny table
     }
 }
 
@@ -114,6 +118,33 @@ fn assess(win: bool) -> &'static str {
     }
 }
 
+/// The engine's move and whether it wins, given whose ply it is (`ply` even = the
+/// first player) and the opponent's previous move `last`. Odd boards are played by
+/// the O(1) centre + 180°-mirror strategy (first player) or any legal move (the
+/// lost second player); even boards are searched. Caller guarantees a move exists.
+fn engine_move(
+    q: &Queens,
+    blocked: Bits,
+    ply: u32,
+    last: Option<u32>,
+    tt: &QueensTt,
+) -> (u32, bool) {
+    if q.is_odd() {
+        if ply.is_multiple_of(2) {
+            // First player: take the centre, then mirror the opponent. Winning.
+            let sq = match last {
+                None => q.center().unwrap(),
+                Some(prev) => q.mirror(prev),
+            };
+            (sq, true)
+        } else {
+            (q.first_available(blocked).unwrap(), false) // second player: lost
+        }
+    } else {
+        q.best_move(blocked, tt).unwrap() // even board: search
+    }
+}
+
 fn solve(q: &Queens) {
     let tt = QueensTt::new(tt_bits(q.n));
     let t = Instant::now();
@@ -151,9 +182,11 @@ fn self_play(q: &Queens) {
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
     let mut ply = 0u32;
+    let mut last = None;
     println!("Optimal self-play on the {n}×{n} board:\n", n = q.n);
     render(q, queens, blocked);
-    while let Some((sq, win)) = q.best_move(blocked, &tt) {
+    while !q.no_moves(blocked) {
+        let (sq, win) = engine_move(q, blocked, ply, last, &tt);
         queens.set(sq);
         blocked = q.place(blocked, sq);
         println!(
@@ -164,6 +197,7 @@ fn self_play(q: &Queens) {
             assess(win),
         );
         render(q, queens, blocked);
+        last = Some(sq);
         ply += 1;
     }
     println!(
@@ -179,6 +213,7 @@ fn play(q: &Queens, human_first: bool) {
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
     let mut ply = 0u32;
+    let mut last = None;
     println!(
         "Non-Attacking Queens on {n}×{n}. You are the {} player. \
          Enter moves like `d1` (or `quit`).\n",
@@ -210,12 +245,13 @@ fn play(q: &Queens, human_first: bool) {
                 None => return, // quit / EOF
             }
         } else {
-            let (sq, win) = q.best_move(blocked, &tt).unwrap();
+            let (sq, win) = engine_move(q, blocked, ply, last, &tt);
             println!("\nEngine plays {}  ({}).", name(q, sq), assess(win));
             sq
         };
         queens.set(sq);
         blocked = q.place(blocked, sq);
+        last = Some(sq);
         ply += 1;
         println!();
     }

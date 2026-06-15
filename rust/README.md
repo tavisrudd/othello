@@ -208,16 +208,25 @@ $ cargo run --release --bin queens -- play  8 1   # play the engine as player 1
 Squares are named file+rank (`d1`). It reproduces the paper's headline — on 8×8
 the **first player wins** — and extends past it:
 
-| board   | 1–9   | 10        | 11    | 12        | 13    | 14        |
-|---------|-------|-----------|-------|-----------|-------|-----------|
-| winner  | first | **second**| first | **second**| first | **second**|
+| board   | 1–9   | 10        | 11    | 12        | 13    | 14        | 15    |
+|---------|-------|-----------|-------|-----------|-------|-----------|-------|
+| winner  | first | **second**| first | **second**| first | **second**| first |
 
 **Every odd board is a first-player win**; small even boards (≤ 8) are too, then
 10/12/14 flip to the second player.
 
-### Scaling it (the Othello playbook)
+### Odd boards are a theorem, not a search
 
-The big boards need the same two levers that scaled the Othello search:
+The odd-`n` result needs **no search** — it is a classic strategy-stealing
+(pairing) argument. The first player takes the **centre**; the centre attacks all
+four lines through it, so any legal reply `s` is off those lines, which is exactly
+the condition for `s` not to attack its 180° rotation `s'`. By symmetry `s'` is
+free, so the first player always has the mirror response and the second player
+runs out of moves first. That makes every odd board **O(1)**: 15×15 went from a
+~460 s search to instant. (The game being impartial under normal play, this is a
+Sprague–Grundy N-position witnessed by the pairing.) Only **even** boards search.
+
+### Scaling the even boards (the Othello playbook)
 
 - **A fixed-size transposition table** (`QueensTt`) instead of an unbounded map:
   a flat, sharded, open-addressing array (full-key compare, so a collision is a

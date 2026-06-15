@@ -12,7 +12,12 @@
 //! placing a queen on square `s` always adds the same `attack(s)`, so any two
 //! move orders reaching the same blocked mask are identical for all future play.
 //! That collapses the game to a negamax over a bitset, with transpositions merged
-//! by memoising on the mask. Two further levers make larger boards tractable:
+//! by memoising on the mask.
+//!
+//! **Odd boards need no search at all.** The first player wins by a pairing
+//! strategy: take the centre, then answer every reply with its 180° rotation
+//! (see `first_player_wins`). So only *even* boards are searched, and the levers
+//! below make those tractable:
 //!
 //! * **win/loss with α-β cutoff** -- the value is just win or lose, so as soon as
 //!   one move is found that hands the opponent a *lost* position, the node is a
@@ -205,6 +210,35 @@ impl Queens {
         blocked.or(self.attack[sq as usize])
     }
 
+    /// Does the board have a centre square (odd side)?
+    #[inline]
+    pub fn is_odd(&self) -> bool {
+        self.n % 2 == 1
+    }
+
+    /// The centre square -- only odd boards have one.
+    #[inline]
+    pub fn center(&self) -> Option<u32> {
+        self.is_odd()
+            .then(|| self.square((self.n - 1) / 2, (self.n - 1) / 2))
+    }
+
+    /// The 180° rotation of `sq` (point reflection through the board centre).
+    #[inline]
+    pub fn mirror(&self, sq: u32) -> u32 {
+        self.sym[2][sq as usize]
+    }
+
+    /// The first available square in forcing order (for the losing side, or to
+    /// drive the symmetry line).
+    #[inline]
+    pub fn first_available(&self, blocked: Bits) -> Option<u32> {
+        self.order
+            .iter()
+            .copied()
+            .find(|&s| self.is_available(blocked, s))
+    }
+
     /// The canonical (lexicographically smallest) image of `blocked` under the
     /// board's 8 symmetries -- the memo key, so symmetric positions share.
     fn canon(&self, blocked: Bits) -> Bits {
@@ -253,20 +287,30 @@ impl Queens {
         out
     }
 
-    /// Does the first player win the empty board? Root parallelism with a
-    /// **Young-Brothers-Wait** guard: search the best-ordered first move
-    /// sequentially, and if it already wins we are done with *no* speculative
-    /// work (the common fast case for a first-player win, since the forcing
-    /// move-order tends to put the winning move first). Only if it loses do the
-    /// siblings fan out across rayon workers sharing `tt`, where `any`
-    /// short-circuits on the first one that hands the opponent a lost position.
+    /// Does the first player win the empty board?
     ///
-    /// Plain `par_iter().any()` over *all* first moves regresses badly here:
-    /// workers speculatively search whole losing subtrees that the sequential
-    /// cutoff would have skipped (e.g. 13×13 explodes ~40×). The guard keeps the
-    /// cutoff while still parallelising the must-search-everything case (a
-    /// second-player win, where every first move has to be refuted anyway).
+    /// **Odd boards are a theorem, not a search.** The game is impartial under
+    /// normal play, so each position is an N- or P-position (Sprague-Grundy). For
+    /// an odd board the first player wins by a strategy-stealing pairing: take the
+    /// centre, then answer every reply `s` with its 180° rotation `s'`. The centre
+    /// attacks all four lines through it, so a legal `s` is off those lines --
+    /// which is exactly the condition for `s` not to attack `s'` -- and by
+    /// symmetry `s'` is free. The first player always has the mirror response, so
+    /// the second player runs out first. This collapses an O(huge) search to O(1)
+    /// (15×15 is ~7 minutes of search; here it is instant -- see `mirror_line`).
+    ///
+    /// **Even boards have no centre and need search**, with a Young-Brothers-Wait
+    /// guard: search the best-ordered first move sequentially, returning at once
+    /// if it wins (no speculation); only if it loses do the siblings fan out
+    /// across rayon workers sharing `tt`, where `any` short-circuits on the first
+    /// winning one. A naïve `par_iter().any()` over *all* first moves regresses
+    /// first-player wins badly (~40× on 13×13) by speculatively searching whole
+    /// losing subtrees the cutoff would skip; the guard keeps the cutoff while
+    /// still parallelising the must-refute-everything case of a second-player win.
     pub fn first_player_wins(&self, tt: &QueensTt) -> bool {
+        if self.is_odd() {
+            return true; // centre + 180° mirror strategy (see above)
+        }
         match self.distinct_first_moves().split_first() {
             None => false,
             Some((&first, rest)) => {
@@ -296,13 +340,38 @@ impl Queens {
     }
 
     /// An optimal line from the empty board (reusing `tt`): the winner plays a
-    /// winning move each turn, the loser any legal move. Returns the squares.
+    /// winning move each turn, the loser any legal move. Odd boards take the O(1)
+    /// `mirror_line`; even boards are search-driven.
     pub fn principal_variation(&self, tt: &QueensTt) -> Vec<u32> {
+        if self.is_odd() {
+            return self.mirror_line();
+        }
         let mut blocked = Bits::ZERO;
         let mut line = Vec::new();
         while let Some((sq, _)) = self.best_move(blocked, tt) {
             line.push(sq);
             blocked = self.place(blocked, sq);
+        }
+        line
+    }
+
+    /// The first player's winning line on an odd board, with no search: centre,
+    /// then mirror each (here arbitrary) reply by the losing side. The mirror is
+    /// always legal (see `first_player_wins`), so this terminates with the second
+    /// player stuck and the first player having made the last move.
+    fn mirror_line(&self) -> Vec<u32> {
+        let mut blocked = Bits::ZERO;
+        let mut line = Vec::new();
+        let c = self.center().expect("odd board has a centre");
+        line.push(c);
+        blocked = self.place(blocked, c);
+        while let Some(s) = self.first_available(blocked) {
+            line.push(s); // losing side: any legal reply
+            blocked = self.place(blocked, s);
+            let m = self.mirror(s); // first player's pairing response
+            debug_assert!(self.is_available(blocked, m), "mirror must stay legal");
+            line.push(m);
+            blocked = self.place(blocked, m);
         }
         line
     }
@@ -427,6 +496,38 @@ mod tests {
         assert!(a.get(q.square(0, 0)), "main diagonal");
         assert!(a.get(q.square(6, 0)), "anti-diagonal");
         assert!(!a.get(q.square(1, 0)), "a knight's move away is safe");
+    }
+
+    /// Odd boards are first-player wins by the centre + 180°-mirror strategy --
+    /// proven O(1), and the produced line is legal, complete, and odd-length.
+    #[test]
+    fn odd_boards_win_by_the_mirror_strategy() {
+        for n in (1..=15).step_by(2) {
+            let q = Queens::new(n);
+            assert!(
+                q.first_player_wins(&QueensTt::new(14)),
+                "n={n}: odd ⇒ first wins"
+            );
+            let pv = q.principal_variation(&QueensTt::new(14)); // mirror_line
+            assert_eq!(pv.len() % 2, 1, "n={n}: first player makes the last move");
+            let mut blocked = Bits::ZERO;
+            for &sq in &pv {
+                // is_available also guarantees no square is placed twice.
+                assert!(
+                    q.is_available(blocked, sq),
+                    "n={n}: mirror move must be legal"
+                );
+                blocked = q.place(blocked, sq);
+            }
+            assert!(q.no_moves(blocked), "n={n}: board fully blocked at the end");
+        }
+        // The O(1) verdict agrees with the full search on the small odd boards.
+        for n in [1u32, 3, 5, 7, 9] {
+            assert!(
+                Queens::new(n).wins(Bits::ZERO, &QueensTt::new(16)),
+                "n={n}: search agrees"
+            );
+        }
     }
 
     /// The PV is a legal, complete optimal line, and the winner is whoever makes
