@@ -27,18 +27,19 @@ class _NativeEngine(Engine):
     _fallback_cls: type[AlphaBeta] = AlphaBeta   # AlphaBetaOrdered is a subclass
 
     def __init__(self) -> None:
-        self.cache: dict = {}                 # native TT: (b,w,to_move,depth)->(value,flag)
         self.fallback = self._fallback_cls()
+        self.tt = _search.TranspositionTable() if HAVE_SEARCH else None
 
     def reset(self) -> None:
-        self.cache.clear()
         self.fallback.reset()
+        if self.tt is not None:
+            self.tt.clear()
 
     def value(self, state: GameState, depth: Depth = None) -> Score:
         if depth is None or not HAVE_SEARCH:
             return self.fallback.value(state, depth)
         return _search.search(state.black, state.white, state.to_move,
-                              depth, self.cache, self._order)
+                              depth, self.tt, self._order)
 
     def scores(self, state: GameState, depth: Depth = None) -> MoveScores:
         if state.is_terminal():

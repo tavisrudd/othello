@@ -3,12 +3,18 @@
 
 Same algorithm and values as the Python engines (othello.ai.alphabeta /
 alphabeta_move_ordering): bound-tracking TT, fail-soft, optional mobility move
-ordering. The whole inner loop runs in C -- no Board objects, native recursion,
-inlined make-move / legal-moves / flips. The TT is a Python dict keyed by
-(black, white, to_move, depth) with (value, flag) entries (flag 0=exact 1=lower
-2=upper). `order=1` enables mobility ordering (fewest opponent replies first)
-for nodes with >= ORDER_MIN_DEPTH plies left. Finite depth only.
+ordering, positional horizon heuristic (matching othello.ai.evaluation). The
+whole inner loop runs in C -- no Board objects, native recursion, inlined
+make-move / legal-moves / flips.
+
+The transposition table (TT) is a native open-addressing hash table: a flat C
+array indexed by a hash of (black, white, to_move, depth). Each slot stores the
+full key, so a hash collision just misses and recomputes -- never returns a
+wrong entry -- and eviction only costs speed, so values are identical to an
+unbounded dict TT (and to the Python engines). Finite depth only.
 """
+from libc.stdlib cimport calloc, free
+from libc.string cimport memset
 
 cdef extern from *:
     int __builtin_popcountll(unsigned long long x)
@@ -30,6 +36,48 @@ cdef u64 CORNERS = 0x8100000000000081
 cdef int CORNER_W = 25
 cdef int MOB_W = 5
 cdef int DISC_W = 1
+
+
+cdef struct Entry:
+    u64 black
+    u64 white
+    int value
+    signed char to_move
+    signed char depth
+    signed char flag
+    signed char used
+
+
+cdef class TranspositionTable:
+    """Open-addressing transposition table; 2**bits slots * 24B each, always
+    replace on collision. The default (2**16 ~= 1.5MB) is deliberately small so
+    it stays in L2/L3 cache -- cache-local probes beat the extra recompute from
+    eviction, and a bigger table is measurably slower."""
+    cdef Entry* slots
+    cdef size_t mask
+
+    def __cinit__(self, int bits=16):
+        cdef size_t n = (<size_t>1) << bits
+        self.mask = n - 1
+        self.slots = <Entry*>calloc(n, sizeof(Entry))
+        if self.slots == NULL:
+            raise MemoryError()
+
+    def __dealloc__(self):
+        if self.slots != NULL:
+            free(self.slots)
+
+    def clear(self):
+        memset(self.slots, 0, (self.mask + 1) * sizeof(Entry))
+
+
+cdef inline size_t _index(u64 black, u64 white, int to_move, int depth, size_t mask):
+    cdef u64 h = black ^ (white * <u64>0x9E3779B97F4A7C15)
+    h ^= (<u64>to_move << 1) ^ (<u64>depth << 3)
+    h ^= h >> 33
+    h = h * <u64>0xFF51AFD7ED558CCD
+    h ^= h >> 33
+    return <size_t>h & mask
 
 
 cdef u64 _legal(u64 player, u64 opponent):
@@ -119,9 +167,16 @@ cdef u64 _flips(u64 move, u64 player, u64 opponent):
     return flips
 
 
+cdef inline void _store(Entry* e, u64 black, u64 white, int to_move, int depth,
+                        int value, int flag):
+    e.black = black; e.white = white; e.to_move = to_move
+    e.depth = depth; e.value = value; e.flag = flag; e.used = 1
+
+
 cdef int _ab(u64 black, u64 white, int to_move, int depth,
-             int alpha, int beta, dict tt, int order):
-    cdef tuple key = (black, white, to_move, depth)
+             int alpha, int beta, TranspositionTable tt, int order):
+    cdef size_t idx = _index(black, white, to_move, depth, tt.mask)
+    cdef Entry* e = &tt.slots[idx]
     cdef int a0 = alpha, b0 = beta
     cdef int value, flag, v, child, n, i, j, ckey
     cdef u64 player, opp, moves, om, m, fl, nb, nw
@@ -129,9 +184,9 @@ cdef int _ab(u64 black, u64 white, int to_move, int depth,
     cdef u64 cw[64]
     cdef int ck[64]
 
-    cdef object entry = tt.get(key)
-    if entry is not None:
-        value = entry[0]; flag = entry[1]
+    if e.used and e.black == black and e.white == white \
+            and e.to_move == to_move and e.depth == depth:
+        value = e.value; flag = e.flag
         if flag == EXACT:
             return value
         elif flag == LOWER:
@@ -147,7 +202,7 @@ cdef int _ab(u64 black, u64 white, int to_move, int depth,
                  + MOB_W * (__builtin_popcountll(_legal(black, white))
                             - __builtin_popcountll(_legal(white, black)))
                  + DISC_W * (__builtin_popcountll(black) - __builtin_popcountll(white)))
-        tt[key] = (value, EXACT)
+        _store(e, black, white, to_move, depth, value, EXACT)
         return value
 
     if to_move == 0:
@@ -160,19 +215,18 @@ cdef int _ab(u64 black, u64 white, int to_move, int depth,
         om = _legal(opp, player)
         if om == 0:                                   # terminal
             value = __builtin_popcountll(black) - __builtin_popcountll(white)
-            tt[key] = (value, EXACT)
+            _store(e, black, white, to_move, depth, value, EXACT)
             return value
         value = _ab(black, white, to_move ^ 1, depth - 1, alpha, beta, tt, order)  # pass
         if to_move == 0:
             flag = UPPER if value <= a0 else (LOWER if value >= beta else EXACT)
         else:
             flag = LOWER if value >= b0 else (UPPER if value <= alpha else EXACT)
-        tt[key] = (value, flag)
+        _store(e, black, white, to_move, depth, value, flag)
         return value
 
     child = depth - 1
 
-    # Build child boards once; sort by opponent mobility when ordering pays off.
     n = 0
     while moves:
         m = moves & (~moves + 1); moves ^= m
@@ -183,7 +237,6 @@ cdef int _ab(u64 black, u64 white, int to_move, int depth,
             nb = black & ~fl; nw = white | m | fl
         cb[n] = nb; cw[n] = nw
         if order and depth >= ORDER_MIN_DEPTH:
-            # fewest opponent (child side-to-move) replies first
             ck[n] = __builtin_popcountll(_legal(nw, nb) if to_move == 0 else _legal(nb, nw))
         n += 1
 
@@ -218,10 +271,14 @@ cdef int _ab(u64 black, u64 white, int to_move, int depth,
                         break
         flag = LOWER if value >= b0 else (UPPER if value <= alpha else EXACT)
 
-    tt[key] = (value, flag)
+    # `e` still points at this position's slot (the array never moves), though a
+    # child may have evicted its contents; overwrite with our result.
+    e = &tt.slots[idx]
+    _store(e, black, white, to_move, depth, value, flag)
     return value
 
 
-cpdef int search(u64 black, u64 white, int to_move, int depth, dict tt, int order):
+cpdef int search(u64 black, u64 white, int to_move, int depth,
+                 TranspositionTable tt, int order):
     """Black-centered minimax value, `depth` plies; order=1 enables ordering."""
     return _ab(black, white, to_move, depth, NEG, POS, tt, order)

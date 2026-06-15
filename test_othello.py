@@ -471,13 +471,15 @@ def test_native_search_matches_python():
     # Direct check of the compiled search (both order modes) against the Python
     # AlphaBeta. Skipped when the extension isn't built (then the cython engines
     # are exercised through their pure-Python fallback by the ENGINES tests).
-    search = pytest.importorskip("othello._search").search
+    mod = pytest.importorskip("othello._search")
+    search = mod.search
+    tt = mod.TranspositionTable(bits=18)   # small table also exercises eviction
     for b in sample_positions(25, seed=31):
         ref_engine = AlphaBeta()
         for depth in [1, 2, 3, 4, 5]:
             ref = ref_engine.value(b, depth)
             for order in (0, 1):
-                assert search(b.black, b.white, b.to_move, depth, {}, order) == ref
+                assert search(b.black, b.white, b.to_move, depth, tt, order) == ref
 
 
 # --------------------------------------------------------------------------- #
