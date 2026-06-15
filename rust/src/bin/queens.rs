@@ -2,26 +2,43 @@
 //!
 //! Two players alternately place a queen so no two attack each other (no shared
 //! row, column, or diagonal); whoever cannot move loses. The engine plays
-//! perfectly (win as fast as possible, resist as long as possible).
+//! perfectly (any winning move when one exists).
 //!
-//!   queens solve [n]            who wins the empty n×n board, with the optimal line
-//!   queens self  [n]            watch the engine play the optimal line both sides
+//!   queens solve [n]            who wins the empty n×n board, with an optimal line
+//!   queens self  [n]            watch the engine play an optimal line both sides
 //!   queens play  [n] [1|2]      play against the engine as player 1 (first) or 2
 //!
 //! Default: n = 8, you are player 1. Squares are named file+rank, e.g. `d1`
-//! (file A..H left→right, rank 1..n bottom→top, chess style).
+//! (file A..  left→right, rank 1..n bottom→top, chess style). Boards up to 13×13.
 
-use std::collections::HashMap;
 use std::io::{self, Write};
+use std::time::Instant;
 
-use othello::queens::{Outcome, Queens};
+use othello::queens::{Bits, Queens, QueensTt, MAX_N};
+
+/// Transposition-table size (`2^bits` slots ≈ `2^bits * 40` bytes) -- the memory
+/// cap. Scales with the board by default; `QUEENS_TT_BITS` overrides. A too-small
+/// table never errs (a miss just recomputes), it only slows down.
+fn tt_bits(n: u32) -> u32 {
+    if let Some(b) = std::env::var("QUEENS_TT_BITS")
+        .ok()
+        .and_then(|s| s.parse().ok())
+    {
+        return b;
+    }
+    match n {
+        0..=11 => 22,  // ≤ 4M slots (~160 MB)
+        12 | 13 => 26, // ~67M slots (~2.7 GB)
+        _ => 27,       // ~134M slots (~5.4 GB)
+    }
+}
 
 fn main() {
     let mut args = std::env::args().skip(1);
     let mode = args.next().unwrap_or_else(|| "solve".into());
     let n: u32 = args.next().and_then(|s| s.parse().ok()).unwrap_or(8);
-    if !(1..=8).contains(&n) {
-        eprintln!("board side must be 1..=8 (an n×n board must fit in 64 bits)");
+    if !(1..=MAX_N).contains(&n) {
+        eprintln!("board side must be 1..={MAX_N} (an n×n board must fit in the bitset)");
         std::process::exit(2);
     }
     let q = Queens::new(n);
@@ -42,38 +59,30 @@ fn main() {
 
 /// Square name like `d1`: file letter (column) + rank number (row, 1-based).
 fn name(q: &Queens, sq: u32) -> String {
-    let c = sq % q.n;
-    let r = sq / q.n;
-    format!("{}{}", (b'A' + c as u8) as char, r + 1)
+    format!("{}{}", (b'A' + (sq % q.n) as u8) as char, sq / q.n + 1)
 }
 
-/// Parse a square name (`d1`, case-insensitive) into a square index, validated
-/// against the board size.
+/// Parse a square name (`d1`, case-insensitive), validated against the board.
 fn parse(q: &Queens, s: &str) -> Option<u32> {
-    let s = s.trim();
-    let mut ch = s.chars();
+    let mut ch = s.trim().chars();
     let file = ch.next()?.to_ascii_uppercase();
     let rank: u32 = ch.as_str().parse().ok()?;
     if !file.is_ascii_alphabetic() || rank < 1 {
         return None;
     }
-    let c = (file as u8 - b'A') as u32;
-    let r = rank - 1;
-    if c >= q.n || r >= q.n {
-        return None;
-    }
-    Some(q.square(r, c))
+    let (c, r) = ((file as u8 - b'A') as u32, rank - 1);
+    (c < q.n && r < q.n).then(|| q.square(r, c))
 }
 
 /// Render the board: `Q` = queen, dim `·` = attacked (illegal), `.` = available.
-fn render(q: &Queens, queens: u64, blocked: u64) {
+fn render(q: &Queens, queens: Bits, blocked: Bits) {
     for r in (0..q.n).rev() {
         print!("{:>2} ", r + 1);
         for c in 0..q.n {
-            let bit = 1u64 << q.square(r, c);
-            if queens & bit != 0 {
+            let sq = q.square(r, c);
+            if queens.get(sq) {
                 print!(" \x1b[1;93mQ\x1b[0m");
-            } else if blocked & bit != 0 {
+            } else if blocked.get(sq) {
                 print!(" \x1b[90m·\x1b[0m");
             } else {
                 print!(" \x1b[92m.\x1b[0m");
@@ -97,27 +106,40 @@ fn who(p: u32) -> &'static str {
     }
 }
 
+fn assess(win: bool) -> &'static str {
+    if win {
+        "winning"
+    } else {
+        "losing"
+    }
+}
+
 fn solve(q: &Queens) {
-    let mut memo = HashMap::new();
-    let root = q.solve(0, &mut memo);
-    let pv = q.principal_variation();
-    let winner = if root.win { "first" } else { "second" };
+    let tt = QueensTt::new(tt_bits(q.n));
+    let t = Instant::now();
+    let first_wins = q.first_player_wins(&tt); // root-parallel
+    let pv = q.principal_variation(&tt); // reuses the shared table
+    let elapsed = t.elapsed().as_secs_f64();
+    let winner = if first_wins { "first" } else { "second" };
     println!(
-        "On the {n}×{n} board the {winner} player wins with perfect play \
-         (game lasts {} move{}).",
-        root.plies,
-        if root.plies == 1 { "" } else { "s" },
+        "On the {n}×{n} board the {winner} player wins with perfect play.",
         n = q.n,
     );
     let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
-    println!("Principal variation: {}", names.join("  "));
-    println!("(explored {} distinct positions)", memo.len());
+    println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
+    let (slots, bytes) = tt.capacity();
+    println!(
+        "(searched {} nodes in {:.3}s; TT cap {} slots ≈ {:.2} GB)",
+        tt.nodes(),
+        elapsed,
+        slots,
+        bytes as f64 / 1e9,
+    );
 
-    // Final board of the optimal line.
-    let mut queens = 0u64;
-    let mut blocked = 0u64;
+    let mut queens = Bits::empty();
+    let mut blocked = Bits::empty();
     for &sq in &pv {
-        queens |= 1u64 << sq;
+        queens.set(sq);
         blocked = q.place(blocked, sq);
     }
     println!();
@@ -125,21 +147,21 @@ fn solve(q: &Queens) {
 }
 
 fn self_play(q: &Queens) {
-    let mut memo = HashMap::new();
-    let mut queens = 0u64;
-    let mut blocked = 0u64;
+    let tt = QueensTt::new(tt_bits(q.n));
+    let mut queens = Bits::empty();
+    let mut blocked = Bits::empty();
     let mut ply = 0u32;
     println!("Optimal self-play on the {n}×{n} board:\n", n = q.n);
     render(q, queens, blocked);
-    while let Some((sq, o)) = q.best_move(blocked, &mut memo) {
-        queens |= 1u64 << sq;
+    while let Some((sq, win)) = q.best_move(blocked, &tt) {
+        queens.set(sq);
         blocked = q.place(blocked, sq);
         println!(
             "\nmove {}: {} player plays {}  ({})",
             ply + 1,
             who(ply),
             name(q, sq),
-            assess(o),
+            assess(win),
         );
         render(q, queens, blocked);
         ply += 1;
@@ -153,9 +175,9 @@ fn self_play(q: &Queens) {
 }
 
 fn play(q: &Queens, human_first: bool) {
-    let mut memo = HashMap::new();
-    let mut queens = 0u64;
-    let mut blocked = 0u64;
+    let tt = QueensTt::new(tt_bits(q.n));
+    let mut queens = Bits::empty();
+    let mut blocked = Bits::empty();
     let mut ply = 0u32;
     println!(
         "Non-Attacking Queens on {n}×{n}. You are the {} player. \
@@ -166,7 +188,7 @@ fn play(q: &Queens, human_first: bool) {
 
     loop {
         render(q, queens, blocked);
-        if q.available(blocked) == 0 {
+        if q.no_moves(blocked) {
             // The player to move at `ply` cannot move and loses.
             let loser_is_human = ply.is_multiple_of(2) == human_first;
             println!(
@@ -188,11 +210,11 @@ fn play(q: &Queens, human_first: bool) {
                 None => return, // quit / EOF
             }
         } else {
-            let (sq, o) = q.best_move(blocked, &mut memo).unwrap();
-            println!("\nEngine plays {}  ({}).", name(q, sq), assess(o));
+            let (sq, win) = q.best_move(blocked, &tt).unwrap();
+            println!("\nEngine plays {}  ({}).", name(q, sq), assess(win));
             sq
         };
-        queens |= 1u64 << sq;
+        queens.set(sq);
         blocked = q.place(blocked, sq);
         ply += 1;
         println!();
@@ -200,7 +222,7 @@ fn play(q: &Queens, human_first: bool) {
 }
 
 /// Prompt the human for a legal move; `None` on quit/EOF.
-fn read_move(q: &Queens, blocked: u64) -> Option<u32> {
+fn read_move(q: &Queens, blocked: Bits) -> Option<u32> {
     loop {
         print!("\nyour move> ");
         io::stdout().flush().ok();
@@ -213,18 +235,9 @@ fn read_move(q: &Queens, blocked: u64) -> Option<u32> {
             return None;
         }
         match parse(q, s) {
-            Some(sq) if q.available(blocked) & (1u64 << sq) != 0 => return Some(sq),
+            Some(sq) if q.is_available(blocked, sq) => return Some(sq),
             Some(_) => println!("That square is occupied or attacked. Try again."),
             None => println!("Bad square. Use file+rank like `d1`."),
         }
-    }
-}
-
-/// Engine self-assessment of the move it just chose, from its own perspective.
-fn assess(o: Outcome) -> String {
-    if o.win {
-        format!("winning; mate in {}", o.plies)
-    } else {
-        format!("losing; holds out {} more", o.plies)
     }
 }

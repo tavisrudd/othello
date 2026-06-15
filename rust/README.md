@@ -195,16 +195,45 @@ attack each other (no shared row, column, or diagonal); whoever cannot move
 loses (normal play). It is an *impartial* combinatorial game — a queen is
 colourless, so the legal moves depend only on the position, captured entirely by
 the **blocked mask** (occupied ∪ attacked). Placing a queen always adds the same
-attack set, so the whole game collapses to a negamax over a single `u64` with
-transpositions merged by memoising on the mask; the engine plays perfectly (win
-as fast as possible, resist as long as possible).
+attack set, so the whole game is a negamax over that mask, with transpositions
+merged by memoising on it. The board is a fixed multi-word bitset, so sizes up to
+16×16 fit (tractability runs out first).
 
 ```console
 $ cargo run --release --bin queens -- solve 8     # who wins the empty n×n board
-$ cargo run --release --bin queens -- self  6     # watch the optimal line
+$ cargo run --release --bin queens -- self  6     # watch an optimal line
 $ cargo run --release --bin queens -- play  8 1   # play the engine as player 1
 ```
 
-It reproduces the paper's headline: on the 8×8 board the **first player wins**
-(its optimal line lasts 7 moves — odd, so the first player makes the last
-placement). Squares are named file+rank (`d1`).
+Squares are named file+rank (`d1`). It reproduces the paper's headline — on 8×8
+the **first player wins** — and extends past it:
+
+| board   | 1–9   | 10        | 11    | 12        | 13    | 14        |
+|---------|-------|-----------|-------|-----------|-------|-----------|
+| winner  | first | **second**| first | **second**| first | **second**|
+
+**Every odd board is a first-player win**; small even boards (≤ 8) are too, then
+10/12/14 flip to the second player.
+
+### Scaling it (the Othello playbook)
+
+The big boards need the same two levers that scaled the Othello search:
+
+- **A fixed-size transposition table** (`QueensTt`) instead of an unbounded map:
+  a flat, sharded, open-addressing array (full-key compare, so a collision is a
+  miss → recompute, never a wrong answer), exactly like `tt.rs`. **Memory is a
+  hard cap** (`2^bits` slots; `QUEENS_TT_BITS` to tune), not something that grows
+  with the search — 14×14 solves in a fixed 5.4 GB instead of an unbounded `HashMap`.
+- **Root parallelism with a Young-Brothers-Wait guard.** The symmetry-distinct
+  first moves fan out across rayon workers sharing the table. But a naïve
+  `par_iter().any()` *regresses* first-player wins badly (~40× on 13×13): workers
+  speculatively search whole losing subtrees the sequential cutoff would skip. So
+  the best-ordered move is searched **sequentially first** — if it wins, we are
+  done with no speculation — and only its siblings parallelise (the
+  must-refute-everything case of a second-player win). This recovers the
+  sequential node count on first-player wins *and* parallelises the hard boards.
+
+The win/loss value is exact, so the search is α-β with a hard cutoff (the first
+move handing the opponent a loss proves a win); the board's 8-fold dihedral
+symmetry canonicalises every position, merging ~8× of the states. 12×12 drops
+from ~6.3 s to ~1 s; 14×14 (53M nodes) lands in ~78 s on 24 threads.
