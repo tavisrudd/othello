@@ -609,6 +609,18 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
     println!("  elapsed: {elapsed:.3}s");
 }
 
+/// Warm the shared table with one parallel root solve so the per-move `best_move`
+/// calls in self-play / play hit it. `best_move` goes through the *sequential*
+/// `Solver::wins`, so without this the first even-board move would re-search the
+/// whole tree single-core -- far slower than `solve`, which warms the table the
+/// same way via `first_player_wins`. Odd boards are O(1) (no search to warm).
+fn warm_table(q: &Queens, solver: &dyn Solver) {
+    if !q.is_odd() {
+        eprintln!("(solving the {n}×{n} game…)", n = q.n);
+        solver.first_player_wins(q);
+    }
+}
+
 fn self_play(q: &Queens, engine: &str) {
     let solver = make_solver(engine, tt_bits(q.n)).unwrap();
     let mut queens = Bits::empty();
@@ -620,6 +632,7 @@ fn self_play(q: &Queens, engine: &str) {
         n = q.n,
     );
     render(q, queens, blocked);
+    warm_table(q, solver.as_ref());
     while !q.no_moves(blocked) {
         let (sq, win) = engine_move(q, blocked, ply, last, solver.as_ref());
         queens.set(sq);
@@ -655,6 +668,7 @@ fn play(q: &Queens, human_first: bool) {
         if human_first { "first" } else { "second" },
         n = q.n,
     );
+    warm_table(q, solver.as_ref());
 
     loop {
         render(q, queens, blocked);
