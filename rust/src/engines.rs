@@ -340,6 +340,7 @@ pub struct Strong {
     order: bool,
     threads: usize,
     plus: bool, // stronger horizon eval (the strong+ engine)
+    mpc: bool,  // Multi-ProbCut forward pruning (the strong++ engine)
 }
 
 impl Default for Strong {
@@ -357,28 +358,36 @@ fn env_threads() -> usize {
 
 impl Strong {
     pub fn new() -> Self {
-        Self::with_threads_eval(env_threads(), false)
+        Self::with_threads_eval(env_threads(), false, false)
     }
 
     /// The `strong+` engine: same search, a stronger horizon evaluation.
     pub fn new_plus() -> Self {
-        Self::with_threads_eval(env_threads(), true)
+        Self::with_threads_eval(env_threads(), true, false)
+    }
+
+    /// The `strong++` engine: the stronger eval plus Multi-ProbCut forward
+    /// pruning (calibrated for that eval) -- deeper search per unit time.
+    pub fn new_mpc() -> Self {
+        Self::with_threads_eval(env_threads(), true, true)
     }
 
     pub fn with_threads(threads: usize) -> Self {
-        Self::with_threads_eval(threads, false)
+        Self::with_threads_eval(threads, false, false)
     }
 
-    pub fn with_threads_eval(threads: usize, plus: bool) -> Self {
+    pub fn with_threads_eval(threads: usize, plus: bool, mpc: bool) -> Self {
         let threads = threads.clamp(1, rayon::current_num_threads().max(1));
         // Preallocate the whole arena up front so no table is grown/zeroed mid
         // search -- allocation never shows up on the hot path.
         let mut tt = TranspositionTable::new(SEQ_BITS);
         tt.set_plus(plus);
+        tt.set_mpc(mpc);
         let pool = (0..threads)
             .map(|_| {
                 let mut t = TranspositionTable::new(POOL_BITS);
                 t.set_plus(plus);
+                t.set_mpc(mpc);
                 t
             })
             .collect();
@@ -388,16 +397,17 @@ impl Strong {
             order: true,
             threads,
             plus,
+            mpc,
         }
     }
 }
 
 impl Engine for Strong {
     fn name(&self) -> &'static str {
-        if self.plus {
-            "strong+"
-        } else {
-            "strong"
+        match (self.plus, self.mpc) {
+            (_, true) => "strong++",
+            (true, false) => "strong+",
+            (false, false) => "strong",
         }
     }
     fn default_depth(&self) -> Depth {
@@ -511,7 +521,14 @@ impl Engine for Strong {
 // --------------------------------------------------------------------------- //
 
 /// CLI engine names, sorted (matches Python's `sorted(ENGINES)`).
-pub const ENGINE_NAMES: [&str; 5] = ["alphabeta", "minimax", "ordered", "strong", "strong+"];
+pub const ENGINE_NAMES: [&str; 6] = [
+    "alphabeta",
+    "minimax",
+    "ordered",
+    "strong",
+    "strong+",
+    "strong++",
+];
 
 pub fn make_engine(name: &str) -> Option<Box<dyn Engine>> {
     match name {
@@ -520,6 +537,7 @@ pub fn make_engine(name: &str) -> Option<Box<dyn Engine>> {
         "ordered" => Some(Box::new(AlphaBeta::ordered())),
         "strong" => Some(Box::new(Strong::new())),
         "strong+" => Some(Box::new(Strong::new_plus())),
+        "strong++" => Some(Box::new(Strong::new_mpc())),
         _ => None,
     }
 }

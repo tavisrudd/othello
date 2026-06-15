@@ -20,6 +20,7 @@ pub mod engines;
 pub mod eval;
 pub mod fixtures;
 pub mod game;
+pub mod mpc;
 pub mod play;
 pub mod search;
 pub mod simd;

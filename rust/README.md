@@ -45,14 +45,18 @@ rust/
 | `ordered`   | + mobility move ordering                                           |
 | `strong`    | native PVS + iterative deepening + hash-move ordering + aspiration; native exact endgame solver for `--depth full` (≈ cython-strong) |
 | `strong+`   | `strong` with a stronger horizon eval (X/C-square + frontier penalties) — **changes the value** (stronger play) |
+| `strong++`  | `strong+` plus **Multi-ProbCut** forward pruning (calibrated) — strength-neutral *per depth*, ~1.3–2.7× faster, so it searches deeper in the same time |
 
 The first four compute **identical** black-centred values — pruning, ordering,
 and parallelism change only the node count, never the value. This is asserted in
 the test suite (cross-engine agreement, an independent grid-arithmetic reference
 for move-gen/flips, and the exact endgame-solve values 6 / −40 / 4). `strong+`
-deliberately changes the value: it scores **77.5 %** against `strong` over 60
-colour-balanced games (`make match`), while its eval-independent exact endgame
-solve still matches `strong`.
+and `strong++` deliberately change the value: `strong+` scores **77.5 %** against
+`strong` over 60 colour-balanced games (`make match-plus`); `strong++` adds forward
+pruning that is strength-neutral at equal depth (**48 %** vs `strong+` @ depth 8,
+*n*=200) but ~1.3–2.7× faster, so at one ply deeper it scores **66 %**
+(strong++ @ 9 vs strong+ @ 8). Both keep the eval-independent exact endgame solve
+identical to `strong` (Multi-ProbCut only touches the finite-depth `pvs`).
 
 ## Parallelism (rayon)
 
@@ -74,6 +78,38 @@ worker's table small — `2^13` entries). `best_move`, by contrast, stays a
 fan-out for these sub-millisecond per-move searches, and the LSB-order root with
 strict `>` keeps the exact same move (and tie-break) as `best_by_side` over the
 exact scores.
+
+## Multi-ProbCut (`strong++`)
+
+The dominant Othello *search* win (Buro/Logistello). At an interior node, before
+the full-width search, a cheap shallow search predicts the deep value via a
+calibrated linear model `v_deep ≈ a·v_shallow + b` with residual std `σ`. If a
+shallow null-window search proves the value clears the `(α, β)` window by `t·σ`
+(`t = 1.5`), the deep search is pruned. It is **forward** pruning — not
+value-preserving — so it pairs with a strength match, not the equivalence tests.
+
+Coefficients come from `examples/calibrate_mpc.rs`: it plays ε-random
+`strong+`-guided games, takes the exact (MPC-off) PVS value at every shallow and
+deep depth, and regresses `v_deep` on `v_shallow` per `(depth-pair, disc-count)`.
+Everything is in **side-to-move (negamax) units**, which are colour-swap
+invariant, so both sides pool into one fit. The table (`src/mpc.rs`) is
+re-generatable and reviewable. `σ` is the key signal: ~4 in the open game (a
+shallow search predicts the deep one tightly) rising to ~35 near the endgame
+(shallow searches mispredict tactical swings), so MPC **self-disables** exactly
+where it would blunder. Probes use a shallow depth below `MPC_MIN_DEPTH`, so they
+never re-trigger MPC (no nesting), and the exact endgame solver never calls
+`pvs`, so `--depth full` stays exact.
+
+| measurement (`make match` / `make bench`, depth 8–9) | result |
+|------------------------------------------------------|--------|
+| iso-depth strength: `strong++` vs `strong+` @ 8      | **48.0 %** (95–103–2, *n*=200) — strength-neutral |
+| equal-depth speed @ 8                                | 178 → **133 ms** (1.34×) |
+| equal-depth speed @ 9                                | 972 → **357 ms** (2.7×) — the win grows with depth |
+| one ply deeper: `strong++` @ 9 vs `strong+` @ 8      | **66.0 %** (128–64–8, *n*=200) |
+
+The speedup compounds with depth (more levels above `MPC_MIN_DEPTH` to prune), so
+the deeper you search the more MPC buys — and the extra depth it funds is what
+turns "same strength, less time" into "more strength, same ballpark of time."
 
 ## Performance
 

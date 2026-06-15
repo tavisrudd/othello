@@ -30,6 +30,7 @@ pub struct TranspositionTable {
     hint: Vec<u64>, // position-keyed best-move bit (lossy ordering hint)
     mask: usize,
     plus: bool, // use the "plus" horizon eval (the strong+ engine)
+    mpc: bool,  // enable Multi-ProbCut forward pruning (the strong++ engine)
 }
 
 impl TranspositionTable {
@@ -40,6 +41,7 @@ impl TranspositionTable {
             hint: vec![0u64; n],
             mask: n - 1,
             plus: false,
+            mpc: false,
         }
     }
 
@@ -50,9 +52,21 @@ impl TranspositionTable {
         self.plus = plus;
     }
 
+    /// Enable Multi-ProbCut forward pruning (the `strong++` engine). Carried here
+    /// for the same reason as `plus`: the search threads the table everywhere, so
+    /// the per-node gate costs one predictable branch when off.
+    pub fn set_mpc(&mut self, mpc: bool) {
+        self.mpc = mpc;
+    }
+
     #[inline]
     pub(crate) fn plus(&self) -> bool {
         self.plus
+    }
+
+    #[inline]
+    pub(crate) fn mpc_on(&self) -> bool {
+        self.mpc
     }
 
     pub fn clear(&mut self) {

@@ -8,6 +8,7 @@
 
 use crate::core::{flips_for_move, legal_moves};
 use crate::eval::{heuristic_black, heuristic_plus_black};
+use crate::mpc;
 use crate::tt::TranspositionTable;
 
 const NEG: i32 = -1_000_000_000;
@@ -300,6 +301,28 @@ fn pvs(
     }
 
     let child = depth - 1;
+
+    // Multi-ProbCut (the strong++ engine; off otherwise). Before the full search,
+    // try to forward-prune: a shallow null-window search whose result is
+    // calibrated to predict this node's deep value can prove the value lies
+    // outside (alpha, beta) by a confidence margin. The probe depth is below
+    // MPC_MIN_DEPTH, so it is pure PVS -- MPC never nests. NOT value-preserving.
+    if tt.mpc_on() {
+        let discs = (black | white).count_ones();
+        if let Some(p) = mpc::probe(tt.plus(), depth, discs, alpha, beta) {
+            if let Some(hi) = p.hi {
+                if pvs(black, white, to_move, p.shallow, hi - 1, hi, tt, order) >= hi {
+                    return beta; // fail-high cut
+                }
+            }
+            if let Some(lo) = p.lo {
+                if pvs(black, white, to_move, p.shallow, lo, lo + 1, tt, order) <= lo {
+                    return alpha; // fail-low cut
+                }
+            }
+        }
+    }
+
     let ordering = order && depth >= ORDER_MIN_DEPTH;
     let mut value = NEG;
     let mut best = 0u64;

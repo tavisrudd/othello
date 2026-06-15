@@ -197,13 +197,58 @@ classic X-/C-square penalty (sitting next to an *empty* corner hands it away)
 plus a frontier-disc penalty, on top of corners/mobility/discs. It rides on the
 TT (already threaded everywhere) so the leaf branch is predictable and `strong`
 is byte-for-byte unchanged. Validated by a colour-balanced self-play match
-(`make match`): **77.5 % vs `strong`** (46–13–1 at depth 6). The exact endgame
+(`make match-plus`): **77.5 % vs `strong`** (46–13–1 at depth 6). The exact endgame
 solve is eval-independent, so `strong+` == `strong` on `--depth full`.
+
+## Multi-ProbCut (done — `strong++`, the search win)
+
+The dominant Othello *search* win (Buro/Logistello): forward-prune a deep node
+when a cheap shallow search predicts its value lies outside `(α, β)`. The model
+is a calibrated linear fit `v_deep ≈ a·v_shallow + b` with residual std `σ`; cut
+when a shallow null-window search clears the window by `t·σ` (`t = 1.5`, Buro's
+classic ~93 % one-sided point). This is the first **non-value-preserving** search
+change in the crate — it pairs with a strength match, not the equivalence tests.
+
+**Calibration** (`examples/calibrate_mpc.rs` / `make calibrate-mpc`): play
+ε-random `strong+`-guided games for phase diversity, take the *exact* (MPC-off)
+PVS value at every shallow and deep depth, regress `v_deep` on `v_shallow` per
+`(depth-pair, disc-count)`, pooling each disc over a ±4 sliding window. All in
+**side-to-move (negamax) units** — the eval is colour-swap symmetric, so the
+relation is perspective-invariant and both sides pool into one fit (intercept
+`b ≈ 0`, as expected). The per-phase `σ` is the whole story:
+
+| disc count | ~`σ` (d8→s4) | regime                                            |
+|-----------:|-------------:|---------------------------------------------------|
+| 8 (open)   | ~4           | shallow predicts deep tightly — cut aggressively  |
+| 24–48 (mid)| ~8–12        | looser — cut with a wider margin                  |
+| 56 (late)  | ~33          | shallow mispredicts tactics — MPC self-disables   |
+
+A flat per-depth fit would over-cut the opening and blunder in the endgame; the
+per-disc table self-regulates. Two structural guards keep it clean: every probe
+depth is below `MPC_MIN_DEPTH` (so a probe is pure PVS — **MPC never nests**, and
+the runtime probe matches the MPC-off calibration), and `solve` never calls
+`pvs` (so `--depth full` stays **exact**). The cut math skips the full root
+window (`±1e9`), confining MPC to the narrow scout windows where it pays.
+
+**Results** (Zen 5 dev box; `make match` / `make bench`):
+
+| comparison                                  | result                                        |
+|---------------------------------------------|-----------------------------------------------|
+| iso-depth `strong++` vs `strong+` @ 8       | 48.0 % (95–103–2, *n*=200), 0.83× time        |
+| full depth-8 game speed                     | `strong+` 178 ms → `strong++` 133 ms (1.34×)  |
+| full depth-9 game speed                     | `strong+` 972 ms → `strong++` 357 ms (2.7×)   |
+| one ply deeper: `strong++` @ 9 vs `+` @ 8   | 66.0 % (128–64–8, *n*=200), 1.66× time        |
+
+The iso-depth match is the proof that the *forward pruning itself costs no
+measurable strength* (48 % ≈ parity) while running faster. The speedup compounds
+with depth — more levels above `MPC_MIN_DEPTH` to prune — so it grows 1.34×→2.7×
+from depth 8 to 9. That funded depth is the point: the same eval, one ply deeper,
+is +16 % win rate. This is also where the otherwise-idle znver5 ISA finally
+matters: a learned eval (next) would put VNNI + gather to work on the leaves MPC
+still has to evaluate.
 
 ## Future directions
 
-- **Multi-ProbCut** — the dominant Othello *search* win (forward pruning via a
-  shallow-search regression); needs per-phase/-depth calibration coefficients.
 - **Pattern / n-tuple (or NNUE) evaluation** — the largest *strength* gain;
   needs a training pipeline (millions of labeled positions), a natural fit for
   the GPU/NPU. Would slot in as the `strong+` horizon eval.

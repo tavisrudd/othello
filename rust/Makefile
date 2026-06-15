@@ -17,7 +17,7 @@ PROFDATA := $(PROFRAW)/merged.profdata
 LLVM_PROFDATA ?= $(shell ls $$(rustc --print sysroot)/lib/rustlib/*/bin/llvm-profdata 2>/dev/null | head -1)
 
 .PHONY: all fmt fmt-check clippy build test release bench bench-parallel bench-simd \
-        profile pgo-release clean
+        match match-deeper match-plus calibrate-mpc profile pgo-release clean
 
 all: release
 
@@ -72,9 +72,21 @@ bench-solve:
 bench-game:
 	RUSTFLAGS="$(RFLAGS)" cargo run --release --example bench_game
 
-# strong+ vs strong strength match (colour-balanced).
+# strong++ vs strong+ strength match (colour-balanced, iso-depth: shows
+# Multi-ProbCut is strength-neutral per depth). `match-deeper` gives strong++ the
+# extra ply its speed buys; `match-plus` is the eval upgrade (strong+ vs strong).
 match:
-	RUSTFLAGS="$(RFLAGS)" cargo run --release --example match -- 6 40
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example match -- 8 40 strong++ strong+
+
+match-deeper:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example match -- 9 40 strong++ strong+ 8
+
+match-plus:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example match -- 6 40 strong+ strong
+
+# Regenerate the Multi-ProbCut coefficient table (paste stdout into src/mpc.rs).
+calibrate-mpc:
+	RUSTFLAGS="$(RFLAGS)" cargo run --release --example calibrate_mpc -- 3000 1
 
 # Record a perf profile of the full depth-8 game.
 profile:

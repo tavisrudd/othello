@@ -414,6 +414,29 @@ fn strong_plus_exact_solve_matches_strong() {
 }
 
 #[test]
+fn strong_mpc_exact_solve_matches_strong() {
+    // strong++ adds Multi-ProbCut forward pruning, which only touches the
+    // finite-depth `pvs`. The exact endgame solver (`solve`) never calls `pvs`,
+    // so depth=None must remain exact -- byte-for-byte the same endgame values.
+    use othello::engines::make_engine;
+    let cases = [
+        (init_near_terminal_game_black_win as fn() -> Board, 6),
+        (init_near_terminal_game_white_win as fn() -> Board, -40),
+        (init_near_terminal_game_either_can_win as fn() -> Board, 4),
+    ];
+    for (init, expected) in cases {
+        let b = init();
+        assert_eq!(make_engine("strong++").unwrap().value(&b, None), expected);
+        // and it must produce a legal move at finite depth (MPC on)
+        let mv = make_engine("strong++")
+            .unwrap()
+            .best_move(&b, Some(8))
+            .unwrap();
+        assert!(b.actions() & mv != 0 || mv == othello::PASS);
+    }
+}
+
+#[test]
 fn engine_on_terminal_errors() {
     let mut driver = Strong::new();
     let mut b = init_near_terminal_game_white_win();
