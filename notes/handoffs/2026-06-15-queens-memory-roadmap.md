@@ -414,7 +414,8 @@ are cross-referenced, not repeated.
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
 | 7 | **Graph-isomorphism canon** ⭐⭐ | B/C | **MEASURED + VALIDATED (session 6) — a WIN, the lever to pursue.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` with a true IR canonical form (`iso_key_canon`, 0 mixed = provably safe): **2.63 / 3.17 / 3.42 / 3.40×** at n=8/10/12/14, win/loss-consistent (a usable safe key). Rises then **plateaus ~3.4×** → n=16 ≈ 3.4×, ~9.2B → ~2.7B distinct ≈ ~21 GB raw (borderline RAM, multiplies Chunk 4 down ~3.4×). The cheap IR invariant agrees exactly with the canon at every n. (The earlier "[1.30×,3.39×]" bracket was a TT-eviction artifact in the value lookup, fixed by recording values at `put`.) **Live-key spike DONE** (`QUEENS_KEY=fast`): cuts nodes 3.4×, but ~µs/node ⇒ wall LOSS at n ≤ 14 (D4 is branchless); TMA frontend/branch-bound. **Use it as the Chunk-4 freeze-time key (option 2), not the live key** — see session-6 note + row #17 (branchless, queued). |
 | 8 | Decomposition + small-component nimber DB | B/C | residual graphs *fragment* in the endgame (where the no-cutoff `mex` blowup doesn't apply); value = XOR of small-component nimbers. Prunes subtrees AND stores tiny components instead of full positions. Softens key-fact "doesn't decompose" (true for the *full* board, not deep leaves). |
-| 9 | Free-involution → instant P-verdict | B | **novel.** Generalise the odd-n centre+180° pairing: at any node, if the residual available-graph admits a fixed-point-free edge-respecting involution, it's a second-player win — return P, no search. P-certificates can sit deep, not just at the root. **Concrete starting form (from Jenrich's `rotsym`, session 7):** if the available mask is **180°-symmetric** (`available == rot180(available)`, using `sym[2]`) **AND** no available square is on the two centre diagonals (`r=c` or `r+c=n-1`, a precomputed `diag_mask`), the mover **loses** → return P, no search. Sound: the responder mirrors every move; the off-diagonal condition guarantees a move never removes its own 180° image, so the symmetry (and the condition) is preserved all the way down. Jenrich's noted mirror-failures (*"for instance (1,2) and (6,7)"*) are exactly the on-diagonal squares — empirical confirmation of the side condition. Targets the expensive **prove-a-loss (even/AND) nodes** (the no-cutoff levels par_wins fans wide), where mirror-spine symmetry clusters. **MEASURE FIRST when we get to #9:** add a cheap fire-rate probe (a `count`-style pass, like `--comps`) counting the fraction of *visited* nodes that are 180°-symmetric-and-diagonal-free — overall and among prove-a-loss nodes — **before** wiring the certificate in. Most deep nodes are asymmetric, so a per-node symmetry check is net overhead if it rarely fires; only build the certificate if the fraction is meaningful, else record the negative (cost = one counter). The dumped n=16 TT (dump/load task) is the ideal corpus for this probe. |
+| 9 | ~~Free-involution → instant P-verdict~~ | B | **NEGATIVE (session 8) — fires too rarely; not built, probe kept.** Built `count --psym` + `Queens::is_free_involution_loss` (180°-symmetric AND off both centre diagonals; D4-invariant so exact on the canonical key; sound — 0 false fires on win positions at every n). **Fire-rate over the exact working set: n=10 0.07%, n=12 0.018%, n=14 0.003% of loss positions — falling ~4× per n step** (n=16 ≈ 0.0008%). Deep positions are almost never 180°-symmetric (symmetry survives only on the thin mirror-spine), so a per-node check would be ~pure overhead on the DRAM-bound hot path. Documented negative (cost = the `--psym` probe, kept as cold tooling + a unit test). Commit `4a97551`. Original hypothesis below. ⤵ |
+| 9-orig | (original #9 writeup) | B | **novel.** Generalise the odd-n centre+180° pairing: at any node, if the residual available-graph admits a fixed-point-free edge-respecting involution, it's a second-player win — return P, no search. P-certificates can sit deep, not just at the root. **Concrete starting form (from Jenrich's `rotsym`, session 7):** if the available mask is **180°-symmetric** (`available == rot180(available)`, using `sym[2]`) **AND** no available square is on the two centre diagonals (`r=c` or `r+c=n-1`, a precomputed `diag_mask`), the mover **loses** → return P, no search. Sound: the responder mirrors every move; the off-diagonal condition guarantees a move never removes its own 180° image, so the symmetry (and the condition) is preserved all the way down. Jenrich's noted mirror-failures (*"for instance (1,2) and (6,7)"*) are exactly the on-diagonal squares — empirical confirmation of the side condition. Targets the expensive **prove-a-loss (even/AND) nodes** (the no-cutoff levels par_wins fans wide), where mirror-spine symmetry clusters. **MEASURE FIRST when we get to #9:** add a cheap fire-rate probe (a `count`-style pass, like `--comps`) counting the fraction of *visited* nodes that are 180°-symmetric-and-diagonal-free — overall and among prove-a-loss nodes — **before** wiring the certificate in. Most deep nodes are asymmetric, so a per-node symmetry check is net overhead if it rarely fires; only build the certificate if the fraction is meaningful, else record the negative (cost = one counter). The dumped n=16 TT (dump/load task) is the ideal corpus for this probe. |
 | 4 | Cache-line bucketing (8 slots/64 B line) | A | probe a line before evicting; one miss serves 8 candidates + a better replacement policy. Composes on the flat lockless arena. |
 | 5 | AVX-512 canon | A | vectorise the 8-fold D4 fold of the 256-bit board; znver5 has AVX-512. Minor. |
 | 15 | Cuckoo filter, 1-bit payload | C | we're already lossy (2⁻⁵⁵ fp); a cuckoo filter at ~95% load packs more entries/byte than open-addressing — a cheap intermediate before the full BuRR build. |
@@ -425,6 +426,53 @@ are cross-referenced, not repeated.
 | — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
 
 ## Handoff Notes
+
+### Session 8 (2026-06-15) — #21 + dump/load + #20 landed; #9 & live-fast-key NEGATIVE; n=16 < 30 min push
+
+**Mode:** intent-based (`mi`), autonomous overnight ("keep working all night"). Goal set by
+user: **get n=16 under 30 min** (from session 7's 56 min), use the new checkpoint dumps as
+warm fixtures, gate any n<16 regression, branch anything unsavable.
+
+**Landed (committed, all gates green — `make test`/`clippy`; `solve 12 --distinct` second
+1,060,823 1.01×; `solve 14` second 53.2M):**
+- **#21 PV no-grind** (`986ce4b`): parity-aware `principal_variation(root_wins)` — loss ply =
+  first legal move no search, win ply = cutoff search; CLI prints verdict before the PV. Kills
+  the post-solve single-core root re-search.
+- **TT dump/load** (`a57c8c0`): Approach-A raw image, validated header, zstd, atomic write +
+  `.prev`. CLI `--checkpoint[=PATH]/--no-checkpoint/--checkpoint-every/--resume`, default-on
+  n=16. SIGUSR2 dump-now + SIGINT/SIGTERM save-before-exit + periodic + final. e2e: resume =
+  same verdict in 2,232 nodes/0.002 s vs cold 53M/11.9 s. **This is the n=16 fixture primitive.**
+- **#20 size-based parallel split** (`54b3ccd`): even/prove-a-loss nodes keep splitting while
+  available > threshold so idle cores steal stragglers; parity-gated (no speculation, node
+  count identical). **n≥15 gated** (default min-avail 96); n=14 regressed ~3% so it's off below
+  (per the "gate if regresses below n=16" rule). `QUEENS_PAR_MIN_AVAIL` overrides.
+- **#9 free-involution P-certificate — NEGATIVE** (`4a97551`): fire-rate 0.07/0.018/0.003% of
+  loss positions at n=10/12/14, falling ~4×/step → ~0 at n=16. Not built; `count --psym` +
+  predicate kept as tooling. (Backlog #9 row.)
+
+**Measured NEGATIVE — `QUEENS_KEY=fast` live at n=16 (the handoff's flagged experiment).**
+Cold 90s/20s probes, full 24 cores, `--no-checkpoint`: **D4 4.94 M/s vs fast 1.14 M/s = fast
+is 4.33× slower per node**, against only 3.4× fewer nodes ⇒ fast ~1.27× slower cold. D4's n=16
+thrash was only 1.4× (session 7), not enough to flip it. **Confirms the handoff decision: fast
+stays the freeze-time/Chunk-4 key, not the live key.** (Plus fast carries a 64-bit-graph-hash
+collision risk at ~2.1B keys.)
+
+**TT RAM ceiling.** Box has 26 GB, ~19 GB available (rust-analyzer/tmux/etc. hold the rest).
+The n=16 default TT is 2³¹ = 17 GB (fits); the next power (2³² = 34 GB) doesn't, and
+`QUEENS_TT_SLOTS` to ~22 GB risks swap. So re-exp stays ~1.4× — **memory is still the wall**,
+and the single-box route to a smaller working set is Chunk 4 (BuRR archive), not a bigger table.
+
+**The <30 min reality.** The cheap levers are now exhausted/measured: #20 (tail, ~10-15%),
+bigger TT (RAM-capped), fast key (~tie), #9 (dead), move-ordering (dead, session 6),
+decomposition (~1.2 comps/pos, session 7). **None gets 56→<30 min alone**; the working set
+(~7.2B distinct) exceeds the 17 GB TT, so n=16 stays re-expansion-bound. **The load-bearing
+lever for <30 min remains Chunk 4 (LSM + BuRR-archived solved plies)** — fit the working set
+→ kill re-exp → compute-bound. That's a multi-session build (next).
+
+**Definitive full n=16 run (in flight at handoff write time):** D4 + #20 + 17 GB TT +
+`--distinct` + final-only checkpoint → a complete warm n=16 fixture at
+`rust/queens-tt-n16-final.zst`. Validates #20's tail benefit vs session-7's 3371 s/56 min and
+cross-checks the second-player verdict. **[RESULT PENDING — fill in when it completes.]**
 
 ### Session 7 (live) — first multi-core n=16 production run + parallelism-tail finding (2026-06-15)
 
