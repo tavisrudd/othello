@@ -140,10 +140,11 @@ enum Cmd {
         /// estimate (sequential solver only; memory grows with the count).
         #[arg(long)]
         exact: bool,
-        /// Measure the graph-isomorphism merge potential: how many fewer distinct
-        /// positions remain if the key canonicalises the *available-graph* up to
-        /// isomorphism (1-WL invariant) instead of just the 8 board symmetries, plus
-        /// whether that merge is win/loss-consistent. Implies `--exact`; sequential.
+        /// Measure the graph-isomorphism merge: how many fewer distinct positions
+        /// remain if the key canonicalises the *available-graph* up to isomorphism
+        /// (1-WL, 1-WL+individualisation, and a true IR canonical form) instead of
+        /// just the 8 board symmetries, and whether each merge is win/loss-consistent
+        /// (a safe TT key). Implies `--exact`; sequential.
         #[arg(long)]
         iso: bool,
         /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
@@ -724,73 +725,66 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, hll_p: u32) {
 }
 
 /// `count --iso`: measure how much the distinct working set would shrink if the TT
-/// key canonicalised the **available-graph up to isomorphism** (1-WL invariant)
-/// rather than only the 8 board symmetries -- the lever-#7 question. Also checks
-/// whether that coarser merge is **win/loss-consistent** (no 1-WL class mixing a win
-/// with a loss); a mix means the WL invariant is unsafe as a key on its own and a
-/// true graph canonical form (nauty/bliss) would be required.
+/// key canonicalised the **available-graph up to isomorphism** rather than only the 8
+/// board symmetries -- the lever-#7 question. Reports three keys of rising strength
+/// (1-WL, 1-WL + individualisation, a true IR canonical form) and, for each, whether
+/// the merge is **win/loss-consistent** (no class mixing a win with a loss) -- the
+/// test of whether it is usable as a safe TT key. Values come from the exact key→value
+/// map recorded at `put`, never the lossy TT (whose evictions would fake mixes).
 fn iso_report(q: &Queens, solver: &dyn Solver) {
     let Some(ws) = solver.working_set() else {
         eprintln!("  (iso: no exact working set captured — needs the sequential exact solver)");
         return;
     };
-    // Group the D4-canonical working set by available-graph 1-WL invariant.
-    let mut by_iso: HashMap<u64, (u64, u8, bool)> = HashMap::new(); // iso → (count, first val, mixed?)
-    for &(key, val) in &ws {
-        let e = by_iso.entry(q.iso_key(key)).or_insert((0, val, false));
-        e.0 += 1;
-        e.2 |= e.1 != val; // a win and a loss in the same 1-WL class
-    }
     let d4 = ws.len() as f64;
-    let iso = by_iso.len() as f64;
-    let mixed = by_iso.values().filter(|&&(_, _, m)| m).count();
-    let largest = by_iso.values().map(|&(c, ..)| c).max().unwrap_or(0);
-    // The unsafe mass: D4-keys trapped in value-mixed WL classes. The rest live in
-    // value-consistent classes -- safe to merge (a win/loss TT only needs same-key ⇒
-    // same-value). A true graph canon splits every mixed class (mixed ⇒ non-isomorphic
-    // ⇒ separable), so the *safe* working set is at most this conservative figure:
-    // value-consistent classes kept merged + every key in a mixed class un-merged.
-    let consistent = by_iso.values().filter(|&&(_, _, m)| !m).count() as u64;
-    let unsafe_keys: u64 = by_iso
-        .values()
-        .filter(|&&(_, _, m)| m)
-        .map(|&(c, ..)| c)
-        .sum();
-    // A true graph canon (complete iso) splits every mixed class into value-consistent
-    // iso-subclasses, so the achievable SAFE working set lies between two bounds:
-    //   floor (this is the most a canon can shrink): each mixed class collapses to its
-    //     2 values  → consistent + 2·mixed_classes;
-    //   ceiling (the least): a mixed class is all distinct iso-classes, no merge there
-    //     → consistent + unsafe_keys.
-    // The truth depends on how WL-conflated (vs genuinely non-isomorphic) the mixed
-    // classes are -- only a real canonical form resolves it.
-    let safe_floor = consistent + 2 * (mixed as u64);
-    let safe_ceiling = consistent + unsafe_keys;
     println!(
-        "  graph-iso merge: {} D4-distinct → {} WL-distinct  ({:.2}× fewer, {:.1}% merged away)",
+        "  graph-iso merge over {} D4-distinct positions (safe = win/loss-consistent):",
         commas(d4 as u64),
-        commas(iso as u64),
-        d4 / iso,
-        (1.0 - iso / d4) * 100.0,
     );
-    println!("  largest 1-WL class: {} D4-keys", commas(largest));
+    // Two invariants of increasing strength: plain 1-WL, then 1-WL + per-vertex
+    // individualisation (much stronger on these WL-hard graphs). A *consistent*
+    // invariant (no class mixing a win with a loss) is usable as a safe TT key,
+    // delivering its merge directly; a mixed one only brackets the safe merge.
+    iso_bracket("1-WL          ", &ws, d4, |k| q.iso_key(k));
+    iso_bracket("1-WL + indiv. ", &ws, d4, |k| q.iso_key_ir(k));
+    iso_bracket("IR canon      ", &ws, d4, |k| q.iso_key_canon(k));
+}
+
+/// Group the D4-canonical working set by `keyfn` and print the achievable safe merge.
+/// A win/loss TT key only needs same-key ⇒ same-value, so a value-consistent class is
+/// safe to merge; a mixed class (two values under one key) means the invariant is too
+/// coarse there. When mixed classes remain, the safe merge a true canon could reach is
+/// bracketed: floor un-merges each mixed class to its 2 values, ceiling un-merges it
+/// wholesale (depends how WL-conflated vs genuinely non-isomorphic the class is).
+fn iso_bracket(label: &str, ws: &[(Bits, u8)], d4: f64, keyfn: impl Fn(Bits) -> u64) {
+    let mut by: HashMap<u64, (u64, u8, bool)> = HashMap::new(); // key → (count, first val, mixed?)
+    for &(k, val) in ws {
+        let e = by.entry(keyfn(k)).or_insert((0, val, false));
+        e.0 += 1;
+        e.2 |= e.1 != val;
+    }
+    let distinct = by.len() as f64;
+    let mixed = by.values().filter(|&&(_, _, m)| m).count() as u64;
+    let consistent = by.values().filter(|&&(_, _, m)| !m).count() as u64;
+    let unsafe_keys: u64 = by.values().filter(|&&(_, _, m)| m).map(|&(c, ..)| c).sum();
     if mixed == 0 {
-        println!("  win/loss-consistent: yes — no 1-WL class mixes a win with a loss (1-WL is a safe key here)");
-    } else {
         println!(
-            "  win/loss-consistent: NO — {} 1-WL classes ({} D4-keys, {:.1}%) mix win+loss \
-             (1-WL over-merges; these graphs are WL-hard)",
-            commas(mixed as u64),
-            commas(unsafe_keys),
-            unsafe_keys as f64 / d4 * 100.0,
+            "    {label}: {} distinct → SAFE key, {:.2}× merge (win/loss-consistent, usable as-is)",
+            commas(distinct as u64),
+            d4 / distinct,
         );
+    } else {
+        let safe_floor = consistent + 2 * mixed; // mixed class → its 2 values
+        let safe_ceiling = consistent + unsafe_keys; // mixed class → all un-merged
         println!(
-            "  achievable SAFE merge with a TRUE canon: between {:.2}× ({} distinct) and {:.2}× \
-             ({} distinct) — 1-WL alone can't size it; needs nauty/bliss or IR",
+            "    {label}: {} distinct ({:.2}× raw) — {} mixed classes, {:.1}% keys unsafe; \
+             safe merge ∈ [{:.2}×, {:.2}×]",
+            commas(distinct as u64),
+            d4 / distinct,
+            commas(mixed),
+            unsafe_keys as f64 / d4 * 100.0,
             d4 / safe_ceiling as f64,
-            commas(safe_ceiling),
             d4 / safe_floor as f64,
-            commas(safe_floor),
         );
     }
 }

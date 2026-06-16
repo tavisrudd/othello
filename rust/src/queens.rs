@@ -33,7 +33,7 @@
 //! Bit `r*n + c` is the square at row `r`, column `c` (`0`-indexed). The bitset is
 //! `WORDS` × 64 bits, so boards up to `16×16` (256 bits) fit.
 
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicU16, AtomicU32, AtomicU64, AtomicU8, Ordering};
 use std::sync::Mutex;
 
@@ -138,6 +138,109 @@ fn mix64(mut x: u64) -> u64 {
     x ^= x >> 27;
     x = x.wrapping_mul(0x94D0_49BB_1331_11EB);
     x ^ (x >> 31)
+}
+
+/// Refine `colour` (indexed by square, seeded by the caller) by 1-WL colour
+/// refinement until the partition stabilises (≤ |V| rounds): each vertex's next
+/// colour mixes its own with the commutative fold of its neighbours' (so neighbour
+/// order cannot matter). Returns the stable colouring. Cold measurement path.
+fn wl_refine(verts: &[u32], nbrs: &[Bits], mut colour: Vec<u64>) -> Vec<u64> {
+    let distinct = |c: &[u64]| {
+        let mut v: Vec<u64> = verts.iter().map(|&s| c[s as usize]).collect();
+        v.sort_unstable();
+        v.dedup();
+        v.len()
+    };
+    let mut prev = 0usize;
+    for _ in 0..verts.len() {
+        let mut next = colour.clone();
+        for (&s, nb) in verts.iter().zip(nbrs) {
+            let mut h = colour[s as usize].wrapping_mul(0x100_0000_01B3);
+            nb.each(|t| h = h.wrapping_add(mix64(colour[t as usize])));
+            next[s as usize] = mix64(h);
+        }
+        colour = next;
+        let classes = distinct(&colour);
+        if classes == prev {
+            break; // partition stable -- further rounds cannot refine
+        }
+        prev = classes;
+    }
+    colour
+}
+
+/// Hash the sorted multiset of vertex colours into one order-independent value.
+fn hash_colours(verts: &[u32], colour: &[u64]) -> u64 {
+    let mut c: Vec<u64> = verts.iter().map(|&s| colour[s as usize]).collect();
+    c.sort_unstable();
+    c.iter().fold(0x2545_F491_4F6C_DD1D, |h, &x| {
+        mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+    })
+}
+
+/// Individualisation-refinement canonical certificate (see [`Queens::iso_key_canon`]).
+/// `nbr_sq` is the square-indexed neighbour lookup; `coloring` is the current vertex
+/// colouring (by square); `depth` gives each individualisation level a distinct tag so
+/// nested individualisations cannot collide. Returns the canonical adjacency rows, or
+/// `None` if the shared `budget` is exhausted.
+fn canon_cert(
+    verts: &[u32],
+    nbrs: &[Bits],
+    nbr_sq: &[Bits],
+    coloring: Vec<u64>,
+    budget: &mut i64,
+    depth: u32,
+) -> Option<Vec<Bits>> {
+    *budget -= 1;
+    if *budget < 0 {
+        return None;
+    }
+    let coloring = wl_refine(verts, nbrs, coloring);
+    // The target cell: the non-singleton colour class with the smallest colour value
+    // (a canonical choice -- the same relative class in isomorphic graphs).
+    let mut groups: HashMap<u64, Vec<u32>> = HashMap::new();
+    for &s in verts {
+        groups.entry(coloring[s as usize]).or_default().push(s);
+    }
+    let target = groups
+        .iter()
+        .filter(|(_, vs)| vs.len() > 1)
+        .min_by_key(|(&c, _)| c)
+        .map(|(_, vs)| vs.clone());
+    match target {
+        None => {
+            // Discrete colouring ⇒ canonical vertex order ⇒ adjacency certificate.
+            let mut order = verts.to_vec();
+            order.sort_unstable_by_key(|&s| coloring[s as usize]);
+            let cert: Vec<Bits> = order
+                .iter()
+                .map(|&vi| {
+                    let mut row = Bits::ZERO;
+                    for (j, &vj) in order.iter().enumerate() {
+                        if nbr_sq[vi as usize].get(vj) {
+                            row.set(j as u32);
+                        }
+                    }
+                    row
+                })
+                .collect();
+            Some(cert)
+        }
+        Some(cell) => {
+            // Branch: individualise each cell vertex apart, recurse, keep the min cert.
+            let tag = 0xF1F2_F3F4_0000_0000u64 ^ depth as u64;
+            let mut best: Option<Vec<Bits>> = None;
+            for &w in &cell {
+                let mut c2 = coloring.clone();
+                c2[w as usize] = tag;
+                let cert = canon_cert(verts, nbrs, nbr_sq, c2, budget, depth + 1)?;
+                if best.as_ref().is_none_or(|b| cert < *b) {
+                    best = Some(cert);
+                }
+            }
+            best
+        }
+    }
 }
 
 /// The 8 symmetries of the square applied to `(row, col)` on an `n×n` board.
@@ -304,53 +407,104 @@ impl Queens {
     /// squares = k isolated vertices wherever they sit).
     ///
     /// It is an *invariant*, not a canonical form: non-isomorphic graphs can collide
-    /// (rare 1-WL failures), so it slightly under-counts iso classes. Measurement
-    /// tool only (`count --iso`) -- not a TT key unless shown value-consistent.
+    /// (1-WL failures -- and these queen available-graphs are WL-hard), so it
+    /// over-counts merges. Measurement tool only (`count --iso`), not a TT key. See
+    /// [`Queens::iso_key_ir`] for the stronger individualisation-refinement variant.
     pub fn iso_key(&self, mask: Bits) -> u64 {
-        let mut verts: Vec<u32> = Vec::new();
-        mask.each(|s| verts.push(s));
+        let (verts, nbrs, base) = self.avail_graph(mask);
         if verts.is_empty() {
             return 0;
         }
-        // Colour each vertex; start from its available-graph degree, then refine by
-        // the sorted multiset of neighbour colours until the partition stabilises
-        // (≤ |V| rounds). Colours are 64-bit hashes (collision ≈ 0), so no re-ranking.
+        hash_colours(&verts, &wl_refine(&verts, &nbrs, base))
+    }
+
+    /// A **stronger** available-graph invariant: 1-WL augmented by *individualisation*
+    /// (the core of nauty/bliss). 1-WL alone is too weak on these regular/symmetric
+    /// graphs, so when its colouring is non-discrete we individualise each vertex in
+    /// turn (tag it apart, re-refine to stability) and combine the resulting per-vertex
+    /// colour signatures into one order-independent invariant. Breaking the regularity
+    /// 1-WL chokes on, this distinguishes far more non-isomorphic graphs -- so its
+    /// distinct count is a much tighter (still conservative) estimate of the true
+    /// graph-isomorphism class count. Still an invariant, not a full canonical form;
+    /// O(|V|) refinements per non-discrete graph (cold measurement path only).
+    pub fn iso_key_ir(&self, mask: Bits) -> u64 {
+        let (verts, nbrs, base) = self.avail_graph(mask);
+        if verts.is_empty() {
+            return 0;
+        }
+        let stable = wl_refine(&verts, &nbrs, base.clone());
+        // Already discrete ⇒ 1-WL pins every vertex, individualisation adds nothing.
+        let distinct = {
+            let mut c: Vec<u64> = verts.iter().map(|&s| stable[s as usize]).collect();
+            c.sort_unstable();
+            c.dedup();
+            c.len()
+        };
+        if distinct == verts.len() {
+            return hash_colours(&verts, &stable);
+        }
+        // Individualise each vertex with the same distinguished tag, refine, and fold
+        // the per-vertex signatures (sorted ⇒ vertex order cannot matter).
+        let mut sigs: Vec<u64> = verts
+            .iter()
+            .map(|&v| {
+                let mut init = base.clone();
+                init[v as usize] = 0xD15C_0DED_1111_2222; // tag distinct from any degree
+                hash_colours(&verts, &wl_refine(&verts, &nbrs, init))
+            })
+            .collect();
+        sigs.sort_unstable();
+        sigs.iter().fold(0xABCD_1234_5678_9ABC, |h, &c| {
+            mix64(h ^ c).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// A **true canonical form** of the available-graph (individualisation-refinement,
+    /// nauty-style): refine; if the colouring is discrete, read off the adjacency in
+    /// the colour-induced vertex order as a certificate; else branch on each vertex of
+    /// the first non-singleton (smallest-colour) cell, individualising it apart, and
+    /// take the lexicographically **minimum** certificate over the branches. Two graphs
+    /// get the same certificate **iff** isomorphic — so distinct `iso_key_canon`s over
+    /// the working set is the *exact* graph-isomorphism class count (the safe merge),
+    /// and a correct canon can never make a win/loss-mixed class.
+    ///
+    /// Symmetric graphs branch widely, so a node budget caps the search; a capped graph
+    /// falls back to the (sound, weaker) [`iso_key_ir`] invariant — which may over-merge
+    /// and so surface as a mixed class, flagging that this graph wasn't fully canonised.
+    pub fn iso_key_canon(&self, mask: Bits) -> u64 {
+        let (verts, nbrs, base) = self.avail_graph(mask);
+        if verts.is_empty() {
+            return 0;
+        }
+        // Square-indexed neighbour lookup, for adjacency tests when serialising.
+        let mut nbr_sq = vec![Bits::ZERO; (self.n * self.n) as usize];
+        for (&s, &nb) in verts.iter().zip(&nbrs) {
+            nbr_sq[s as usize] = nb;
+        }
+        let mut budget: i64 = 200_000;
+        match canon_cert(&verts, &nbrs, &nbr_sq, base, &mut budget, 0) {
+            Some(cert) => cert.iter().flat_map(|r| r.0).fold(0x0CA7_F00D_u64, |h, x| {
+                mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+            }),
+            None => self.iso_key_ir(mask), // budget exhausted: fall back to the invariant
+        }
+    }
+
+    /// The available-graph of `mask`: its vertices (set squares), each vertex's
+    /// neighbour mask (attacking available squares), and the degree-seeded initial
+    /// 1-WL colours indexed by square. Shared by [`iso_key`] and [`iso_key_ir`].
+    fn avail_graph(&self, mask: Bits) -> (Vec<u32>, Vec<Bits>, Vec<u64>) {
+        let mut verts: Vec<u32> = Vec::new();
+        mask.each(|s| verts.push(s));
         let nbrs: Vec<Bits> = verts
             .iter()
             .map(|&s| self.attack[s as usize].and(mask).and_not(single(s)))
             .collect();
-        let mut colour = vec![0u64; (self.n * self.n) as usize];
+        let mut base = vec![0u64; (self.n * self.n) as usize];
         for (&s, nb) in verts.iter().zip(&nbrs) {
-            colour[s as usize] = nb.popcount() as u64 | 0x9E37_79B9_0000_0000;
+            base[s as usize] = nb.popcount() as u64 | 0x9E37_79B9_0000_0000;
         }
-        let mut prev_classes = 0usize;
-        for _ in 0..verts.len() {
-            let mut next = colour.clone();
-            for (&s, nb) in verts.iter().zip(&nbrs) {
-                let mut h = colour[s as usize].wrapping_mul(0x100_0000_01B3);
-                nb.each(|t| {
-                    // commutative fold so the neighbour order cannot matter
-                    h = h.wrapping_add(mix64(colour[t as usize]));
-                });
-                next[s as usize] = mix64(h);
-            }
-            colour = next;
-            let classes = {
-                let mut c: Vec<u64> = verts.iter().map(|&s| colour[s as usize]).collect();
-                c.sort_unstable();
-                c.dedup();
-                c.len()
-            };
-            if classes == prev_classes {
-                break; // partition stable -- further rounds cannot refine
-            }
-            prev_classes = classes;
-        }
-        let mut finals: Vec<u64> = verts.iter().map(|&s| colour[s as usize]).collect();
-        finals.sort_unstable();
-        finals.iter().fold(0x2545_F491_4F6C_DD1D, |h, &c| {
-            mix64(h ^ c).wrapping_mul(0x9E37_79B9_7F4A_7C15)
-        })
+        (verts, nbrs, base)
     }
 
     /// The symmetry-distinct first moves from the empty board: one representative
@@ -1040,18 +1194,27 @@ pub struct CountReport {
 }
 
 /// The instrumentation a counting [`QueensTt`] folds each visited key into: a
-/// HyperLogLog (always) and an exact hash set (optional, small boards only).
+/// HyperLogLog of every looked-up key (the distinct estimate) and, optionally, an
+/// exact key→value map (small boards only). The map is populated at `put` -- where
+/// the win/loss value is known and exact -- not by peeking the lossy fingerprint TT,
+/// whose index collisions would return stale values and pollute the `--iso`
+/// win/loss-consistency check.
 struct Counter {
     hll: Hll,
-    exact: Option<Mutex<HashSet<Bits>>>,
+    exact: Option<Mutex<HashMap<Bits, u8>>>,
 }
 
 impl Counter {
+    /// Fold a looked-up key into the HyperLogLog (distinct working-set estimate).
     #[inline]
     fn feed(&self, key: Bits) {
         self.hll.add(key);
-        if let Some(set) = &self.exact {
-            set.lock().unwrap().insert(key);
+    }
+    /// Record a solved key's exact value (called from `put`).
+    #[inline]
+    fn record(&self, key: Bits, val: u8) {
+        if let Some(map) = &self.exact {
+            map.lock().unwrap().insert(key, val);
         }
     }
 }
@@ -1259,7 +1422,7 @@ impl QueensTt {
         let mut tt = Self::new(bits);
         tt.counter = Some(Counter {
             hll: Hll::new(hll_p),
-            exact: exact.then(|| Mutex::new(HashSet::new())),
+            exact: exact.then(|| Mutex::new(HashMap::new())),
         });
         tt
     }
@@ -1274,24 +1437,11 @@ impl QueensTt {
     }
 
     /// The exact working set as (canonical key, win/loss value) pairs, if an exact
-    /// hash set was kept (`count --exact`). Cold post-search analysis only (the
-    /// `--iso` graph-isomorphism merge measurement); `peek` reads each key's value
-    /// without folding it back into the distinct-counter.
+    /// map was kept (`count --exact`). Values are the exact ones recorded at `put`,
+    /// not peeked from the lossy TT. Cold post-search analysis only (`--iso`).
     pub fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
-        let set = self.counter.as_ref()?.exact.as_ref()?.lock().unwrap();
-        Some(
-            set.iter()
-                .map(|&k| (k, self.peek(k).unwrap_or(0)))
-                .collect(),
-        )
-    }
-
-    /// The stored value for `key` without the distinct-counter side effect of `get`.
-    #[inline]
-    fn peek(&self, key: Bits) -> Option<u8> {
-        let (route, fp) = Self::hash128(key);
-        let s = Slot(self.slots[(route & self.index_mask) as usize].load(Ordering::Relaxed));
-        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
+        let map = self.counter.as_ref()?.exact.as_ref()?.lock().unwrap();
+        Some(map.iter().map(|(&k, &v)| (k, v)).collect())
     }
 
     /// Total slot capacity and its byte footprint, for reporting the cap.
@@ -1369,6 +1519,11 @@ impl QueensTt {
         let (route, fp) = Self::hash128(key);
         self.slots[(route & self.index_mask) as usize]
             .store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        // Record the exact value for the post-search `--iso` analysis (cold; only
+        // when an exact map is kept). Here the value is known and eviction-proof.
+        if let Some(c) = &self.counter {
+            c.record(key, val);
+        }
     }
 
     /// Prefetch the slot `key` will land in, so the demand `get` that follows finds
