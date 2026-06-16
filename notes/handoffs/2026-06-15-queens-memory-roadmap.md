@@ -353,6 +353,44 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       so for n=16 it re-searches evicted PV positions **single-core** (slow) — and the verdict
       print is gated behind it. Fix queued (backlog #21): print the verdict before the PV +
       drive the PV through the parallel solver (or depth-limit it). The verdict is unaffected.
+- [x] **#21 PV no-grind (session 8, `986ce4b`) — DONE.** `principal_variation` now takes
+      `root_wins` and threads the value down the optimal line (strictly alternates
+      loss→win→loss…): a **loss** ply takes the first legal move with **no search**, only a
+      **win** ply searches (`best_move` cutoff over the warm TT). For a 2nd-player win the root
+      is a loss, so the old 36-subtree single-core root re-search collapses to one
+      `first_available`. CLI prints the verdict **before** the PV (no longer gated behind the
+      grind). PV byte-identical by construction (loss ply = `first_available` = old loss
+      `best_move`). Gates green. `best_move` unchanged (interactive play/self).
+- [x] **TT dump/load — checkpoint + warm resume (session 8, `a57c8c0`) — DONE (proposal Phase 1).**
+      Approach A raw image, validated 64-B header (magic + format/hash/canon/arch ids + n +
+      **len** [slot count, since routing = `fastrange(route,len)`] + epoch); tag mismatch =
+      hard error. `QueensTt::dump_image`/`load_image` (generic Write/Read, lib has no zstd dep;
+      zstd wrapping in the bin), `attach_counter`, `Tt`/`Parallel::from_tt`, `Solver::tt()`.
+      CLI (opt-in): `solve --checkpoint[=PATH] / --no-checkpoint / --checkpoint-every <dur> /
+      --resume`. **Checkpoint defaults ON for n=16, OFF below.** zstd-compressed, atomic write
+      (`.tmp`→rename, keep `.prev`); periodic (5m) + final + SIGUSR2 dump-now + SIGINT/SIGTERM
+      save-before-exit, all in the watcher thread. Live dump is good-enough-live (each slot one
+      atomic u64). **Validated e2e:** solve 14 --checkpoint then --resume = same verdict/line in
+      **2,232 nodes / 0.002 s vs cold 53M / 11.9 s**; n=16 default-on writes `./queens-tt-n16.zst`;
+      SIGINT interrupt-dumps; wrong-n resume is a hard error. Round-trip unit test +
+      gates green. **This is the n=16 benchmark-fixture + checkpoint/resume primitive.**
+      Deltas / B2 (Phase 2) deferred.
+- [x] **#20 size-based parallel split (session 8, `54b3ccd`) — DONE, n≥15 gated.** A node below
+      `par_depth` keeps splitting while available-square count > threshold (subtree-size proxy)
+      so an idle core can steal a deep straggler — kills the tail core-drain. Parity-gated
+      (even/prove-a-loss only) ⇒ zero speculation, node count identical (n=12 1,060,823; n=14
+      53.2M). **Gated auto-on only for n≥15** (default min-avail 96); below it the size split
+      is off (forcing it on n=14 regressed ~3%, no tail to fix there). Threshold resolved once
+      per solve, threaded through the recursion (no per-node env/atomic). `QUEENS_PAR_MIN_AVAIL`
+      overrides (huge = pure fixed-`par_depth` A/B baseline). **n=16 tail benefit pending the
+      full-run measurement** (next).
+- [ ] **NIGHT GOAL (session 8): get n=16 under 30 min total** (from session 7's 56 min), using
+      the checkpoint fixtures to A/B levers. Plan: (a) test `QUEENS_KEY=fast` **live at n=16**
+      (the unrun high-value experiment — 3.4× fewer nodes + fits RAM where D4 thrashes; handoff
+      kept it freeze-time-only based on n≤14, but n=16 is the regime where it might win live);
+      (b) measure #9 free-involution P-certificate fire-rate (cheap counter first); (c) #20 tail
+      validation; (d) definitive full n=16 run with the best config. Gate any n<16 regression;
+      branch anything that can't be saved on main.
 - [ ] Final: `make test` + `make clippy` green (still required for any new code).
 
 ## Lever backlog (sessions 4–5 reviews, prioritised)

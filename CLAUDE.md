@@ -10,9 +10,14 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
-**Next, in order:**
-1. [#21 PV no-grind](notes/handoffs/2026-06-15-queens-memory-roadmap.md) (backlog #21) — print the verdict before the PV + parity-aware `principal_variation`; kills the single-core post-solve PV grind.
-2. [TT dump/load](notes/proposal-2026-06-15-queens-tt-dump-reload.md) — raw-image MVP; 5-min checkpoint + compress + final save; deltas later. Gives checkpoint/resume + a reproducible n=16 benchmark fixture. Queue pointer: [tt-dump-load](notes/handoffs/2026-06-15-tt-dump-load.md).
+**DONE (session 8, 2026-06-15):** #21 PV no-grind (`986ce4b`), TT dump/load checkpoint+resume
+(`a57c8c0`, opt-in CLI, default-on n=16), #20 size-based parallel split (`54b3ccd`, n≥15 gated).
+
+**Now — NIGHT GOAL: get n=16 under 30 min** (from session 7's 56 min). Use the new checkpoint
+dumps as warm n=16 benchmark fixtures to A/B levers from the Lever backlog. Top candidate:
+test `QUEENS_KEY=fast` **live at n=16** (3.4× fewer nodes + fits RAM where D4 thrashes —
+never tested in the n=16 regime). Then #9 fire-rate, #20 tail validation, definitive full
+run. **Gate any n<16 regression; branch anything unsavable.** Details in the roadmap Progress.
 
 **Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main.
 
