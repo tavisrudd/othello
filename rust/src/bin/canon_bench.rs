@@ -421,6 +421,9 @@ fn d4_images(mask: [u64; 4]) -> [[u64; 4]; 8] {
 /// significant limb (matches `Bits` Ord). Branchless-ish scalar arg-min.
 #[inline(always)]
 fn lex_min8(imgs: &[[u64; 4]; 8]) -> [u64; 4] {
+    // Serial early-out fold. Beats both a depth-3 tree reduction (+4 cyc — 7 full 32-byte
+    // selects vs this fold's rare-update copies) and the AVX gather min (A1). The lex-min
+    // resists optimisation here: cheap word-0-decided compares + rare updates predict well.
     let mut best = imgs[0];
     for cand in &imgs[1..] {
         // Lexicographic compare on [u64;4], index 0 most significant.
