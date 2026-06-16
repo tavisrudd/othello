@@ -1236,6 +1236,29 @@ fn par_depth() -> u32 {
         .max(1)
 }
 
+/// `QUEENS_PAR_MIN_AVAIL` override (resolved once at construction). `None` ⇒ auto by
+/// board size (see [`min_avail_for`]). The size split keeps a *big* deep prove-a-loss
+/// node fanning so an idle core can steal a straggler -- the #20 tail fix; available
+/// count is a cheap proxy for subtree size (it shrinks with depth).
+fn par_min_avail_override() -> Option<u32> {
+    std::env::var("QUEENS_PAR_MIN_AVAIL")
+        .ok()
+        .and_then(|s| s.parse().ok())
+}
+
+/// The size-split threshold for board `n`: a node below [`par_depth`] keeps splitting
+/// while its available count stays above this, else it goes sequential. The auto
+/// default is **on only for n ≥ 15** (`96`) and **off below** (`u32::MAX`): the fixed
+/// `par_depth` schedule is already well-tuned on the short small-board searches (where
+/// extra splitting is pure overhead -- it regresses n=14 ~3%), and only the n=16 tail
+/// -- few roots left, all parallelism intra-root, sequential stragglers draining cores
+/// -- needs the deeper split. Rayon pays the split cost only on an actual steal, so at
+/// n=16 it is ~free while saturated and pays off precisely at the tail. `over` (the env
+/// override) wins when set; set it huge (≥ n²) to force the pure fixed-`par_depth` form.
+fn min_avail_for(over: Option<u32>, n: u32) -> u32 {
+    over.unwrap_or(if n >= 15 { 96 } else { u32::MAX })
+}
+
 impl Tt {
     pub fn new(bits: u32, canon: bool) -> Self {
         Tt {
@@ -1372,9 +1395,17 @@ impl Solver for Tt {
 /// root parallelism with a Young-Brothers-Wait guard.
 pub struct Parallel {
     inner: Tt,
-    /// Plies from the root searched in parallel (see [`par_depth`]); below this the
-    /// recursion is the sequential cutoff search.
+    /// Plies from the root searched in parallel (see [`par_depth`]); below this a
+    /// node may *still* split if it is large (see `par_min_avail`), else it drops to
+    /// the sequential cutoff search.
     par_depth: u32,
+    /// `QUEENS_PAR_MIN_AVAIL` override (`None` = auto by board size); the size-based
+    /// split that divides the deep stragglers so idle cores can steal them (#20). See
+    /// [`min_avail_for`].
+    par_min_avail: Option<u32>,
+    /// The effective size-split threshold for the current solve (set at
+    /// `first_player_wins` from the board size), captured for the stats line.
+    eff_min_avail: AtomicU32,
     /// Root moves resolved / to resolve (for a progress indicator). A
     /// second-player win must refute *every* distinct first move, so `done`
     /// climbs to `total`; a first-player win short-circuits earlier.
@@ -1387,6 +1418,8 @@ impl Parallel {
         Parallel {
             inner: Tt::new(bits, true),
             par_depth: par_depth(),
+            par_min_avail: par_min_avail_override(),
+            eff_min_avail: AtomicU32::new(u32::MAX),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
         }
@@ -1400,6 +1433,8 @@ impl Parallel {
         Parallel {
             inner: Tt::new_counting(bits, true, hll_p, false),
             par_depth: par_depth(),
+            par_min_avail: par_min_avail_override(),
+            eff_min_avail: AtomicU32::new(u32::MAX),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
         }
@@ -1412,6 +1447,8 @@ impl Parallel {
         Parallel {
             inner: Tt::from_tt(tt, true),
             par_depth: par_depth(),
+            par_min_avail: par_min_avail_override(),
+            eff_min_avail: AtomicU32::new(u32::MAX),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
         }
@@ -1427,11 +1464,15 @@ impl Parallel {
     /// so their cutoff survives (elder child first, which well-ordered usually cuts at
     /// once). This keeps the dominant root-0 subtree off a single core at n=16 while
     /// confining speculation to mis-ordered OR nodes.
-    fn par_wins(&self, q: &Queens, blocked: Bits, key: Bits, depth: u32) -> bool {
+    fn par_wins(&self, q: &Queens, blocked: Bits, key: Bits, depth: u32, min_avail: u32) -> bool {
         if let Some(w) = self.inner.tt.get(key) {
             return w != 0;
         }
-        if depth >= self.par_depth {
+        // Drop to the sequential cutoff search once we are both below the `par_depth`
+        // floor *and* the subtree is small (available count ≤ `min_avail`). Big deep
+        // nodes keep splitting so an idle core can steal a straggler -- the #20 tail
+        // fix -- with rayon paying the split cost only on an actual steal.
+        if depth >= self.par_depth && q.board.and_not(blocked).popcount() <= min_avail {
             return self.inner.wins_keyed(q, blocked, key);
         }
         self.inner.tt.bump();
@@ -1459,7 +1500,7 @@ impl Parallel {
             // wins (a mis-parity node), but for a true prove-a-loss node all are searched.
             kids.par_iter().any(|&child| {
                 let ckey = self.inner.node_key(q, child);
-                !self.par_wins(q, child, ckey, depth + 1)
+                !self.par_wins(q, child, ckey, depth + 1, min_avail)
             })
         } else {
             // Odd / prove-a-win: keep the α-β cutoff -- sequential, recursing into the
@@ -1467,7 +1508,7 @@ impl Parallel {
             let mut w = false;
             for &child in kids {
                 let ckey = self.inner.node_key(q, child);
-                if !self.par_wins(q, child, ckey, depth + 1) {
+                if !self.par_wins(q, child, ckey, depth + 1, min_avail) {
                     w = true;
                     break;
                 }
@@ -1505,6 +1546,10 @@ impl Solver for Parallel {
         if q.is_odd() {
             return true; // centre + 180° mirror strategy
         }
+        // Resolve the size-split threshold once for this solve (auto by board size,
+        // env-overridable) -- never per node -- and thread it through the recursion.
+        let min_avail = min_avail_for(self.par_min_avail, q.n);
+        self.eff_min_avail.store(min_avail, Ordering::Relaxed);
         let moves = q.distinct_first_moves();
         self.root_total.store(moves.len() as u64, Ordering::Relaxed);
         self.root_done.store(0, Ordering::Relaxed);
@@ -1516,14 +1561,14 @@ impl Solver for Parallel {
                 // -- the n=16 fix -- while still warming the shared TT before the younger
                 // brothers fan out.
                 let fc = q.place(Bits::ZERO, first);
-                let wins = !self.par_wins(q, fc, self.inner.node_key(q, fc), 1);
+                let wins = !self.par_wins(q, fc, self.inner.node_key(q, fc), 1, min_avail);
                 self.root_done.fetch_add(1, Ordering::Relaxed);
                 if wins {
                     return true; // best move already wins -- no speculation
                 }
                 rest.par_iter().any(|&sq| {
                     let c = q.place(Bits::ZERO, sq);
-                    let wins = !self.par_wins(q, c, self.inner.node_key(q, c), 1);
+                    let wins = !self.par_wins(q, c, self.inner.node_key(q, c), 1, min_avail);
                     self.root_done.fetch_add(1, Ordering::Relaxed);
                     wins
                 })
@@ -1553,8 +1598,14 @@ impl Solver for Parallel {
             self.root_done.load(Ordering::Relaxed),
             self.root_total.load(Ordering::Relaxed),
         );
+        let ma = self.eff_min_avail.load(Ordering::Relaxed);
+        let ma = if ma == u32::MAX {
+            "off".to_string()
+        } else {
+            ma.to_string()
+        };
         format!(
-            "{} rayon workers, {done}/{total} root moves, par-depth {} · {}",
+            "{} rayon workers, {done}/{total} root moves, par-depth {}/min-avail {ma} · {}",
             rayon::current_num_threads(),
             self.par_depth,
             self.inner.stats(),
@@ -2179,7 +2230,10 @@ impl TtHeader {
         check(u32_at(12), TT_HASH_ID, "hash_id")?;
         check(u32_at(16), TT_CANON_ID, "canon_id")?;
         if b[41] != TT_ARCH_X86_64_LE {
-            return Err(bad(format!("arch mismatch: image {}, expected x86_64-LE", b[41])));
+            return Err(bad(format!(
+                "arch mismatch: image {}, expected x86_64-LE",
+                b[41]
+            )));
         }
         Ok(TtHeader {
             epoch: u32_at(20),
@@ -2388,7 +2442,10 @@ impl QueensTt {
         if header.n != expected_n {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidData,
-                format!("image is for n={}, but this run is n={expected_n}", header.n),
+                format!(
+                    "image is for n={}, but this run is n={expected_n}",
+                    header.n
+                ),
             ));
         }
         let size = header.len as usize;
