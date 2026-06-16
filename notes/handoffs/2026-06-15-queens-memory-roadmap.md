@@ -374,7 +374,15 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       **2,232 nodes / 0.002 s vs cold 53M / 11.9 s**; n=16 default-on writes `./queens-tt-n16.zst`;
       SIGINT interrupt-dumps; wrong-n resume is a hard error. Round-trip unit test +
       gates green. **This is the n=16 benchmark-fixture + checkpoint/resume primitive.**
-      Deltas / B2 (Phase 2) deferred.
+      Deltas / B2 (Phase 2) deferred. **Real-scale n=16 check (2026-06-16):** the completed
+      run's final checkpoint = `rust/queens-tt-n16-final.zst` (16 GB compressed); resuming it
+      **loads correctly** (header validated, 17.18 GB table rebuilt, 97.1% full) but the
+      post-load search **swaps and crawls** — the full 17 GB table committed at once vs only
+      ~17.8 GB available drove **8.5 GB into swap** (the original solve fit because it filled
+      *gradually* with ~19 GB free). **Finding: full-n16 resume is RAM-bound on this 26 GB box**
+      (needs the table to fit physical RAM with headroom; partial-fill resumes are fine). The
+      dump/load *mechanism* is sound (load correct + n=14 warm resume instant); this is an
+      environmental RAM limit, not a bug. (16 GB fixture left on disk — delete if disk matters.)
 - [x] **#20 size-based parallel split (session 8, `54b3ccd`) — DONE, n≥15 gated.** A node below
       `par_depth` keeps splitting while available-square count > threshold (subtree-size proxy)
       so an idle core can steal a deep straggler — kills the tail core-drain. Parity-gated
@@ -414,7 +422,8 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       collide at n=16. Pure fast (all-graph) is unaffected; selective needs a wider tag (e.g.
       tag in an unused high word, or never mix — use the graph key for *all* nodes but compute
       it cheaply only for small available) before it's sound at n=16.
-- [ ] Final: `make test` + `make clippy` green (still required for any new code).
+- [x] Final (session 8): `make test` + `make clippy` green; n=16 verdict re-confirmed SECOND
+      (twice); dump/load load validated at 16 GB scale.
 
 ## Lever backlog (sessions 4–5 reviews, prioritised)
 
