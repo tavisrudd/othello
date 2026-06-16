@@ -52,7 +52,7 @@ pub use bits::Bits;
 pub use count::{CountReport, Hll};
 pub use geom::Queens;
 pub use solver::{
-    make_solver, BranchingStats, Naive, Nimber, Parallel, Pn, Solver, Tt, SOLVER_NAMES,
+    make_solver, BranchingStats, Incremental, Naive, Nimber, Parallel, Pn, Solver, Tt, SOLVER_NAMES,
 };
 pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
 
@@ -122,6 +122,11 @@ mod tests {
                 Parallel::new(16).first_player_wins(&q),
                 truth,
                 "parallel n={n}"
+            );
+            assert_eq!(
+                Incremental::new(16).first_player_wins(&q),
+                truth,
+                "incremental n={n}"
             );
             assert_eq!(
                 Nimber::new(16).first_player_wins(&q),

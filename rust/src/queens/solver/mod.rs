@@ -3,12 +3,14 @@
 
 use crate::queens::*;
 
+mod incremental;
 mod memo;
 mod naive;
 mod nimber;
 mod parallel;
 mod pn;
 
+pub use incremental::Incremental;
 pub use memo::{BranchingStats, Tt};
 pub use naive::Naive;
 pub use nimber::Nimber;
@@ -171,7 +173,15 @@ fn min_avail_for(over: Option<u32>, n: u32) -> u32 {
 
 /// CLI solver names, simplest → most sophisticated (`nimber` computes the full
 /// Sprague-Grundy value; `pn` is df-pn proof-number search).
-pub const SOLVER_NAMES: [&str; 6] = ["naive", "memo", "symmetry", "parallel", "nimber", "pn"];
+pub const SOLVER_NAMES: [&str; 7] = [
+    "naive",
+    "memo",
+    "symmetry",
+    "parallel",
+    "incremental",
+    "nimber",
+    "pn",
+];
 
 /// Build a solver by name with a `2^bits`-slot table (ignored by `naive`).
 pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
@@ -180,6 +190,7 @@ pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
         "memo" => Some(Box::new(Tt::new(bits, false))),
         "symmetry" => Some(Box::new(Tt::new(bits, true))),
         "parallel" => Some(Box::new(Parallel::new(bits))),
+        "incremental" => Some(Box::new(Incremental::new(bits))),
         "nimber" => Some(Box::new(Nimber::new(bits))),
         "pn" => Some(Box::new(Pn::new(bits))),
         _ => None,

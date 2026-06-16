@@ -21,8 +21,8 @@ use signal_hook::iterator::Signals;
 
 use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
-    for_each_image_entry, make_solver, Bits, Nimber, Parallel, Queens, QueensTt, Solver, Tt, MAX_N,
-    SOLVER_NAMES,
+    for_each_image_entry, make_solver, Bits, Incremental, Nimber, Parallel, Queens, QueensTt,
+    Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -1041,6 +1041,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
             );
             match solver_name {
                 "parallel" => Box::new(Parallel::from_tt(tt)),
+                "incremental" => Box::new(Incremental::from_tt(tt)),
                 "symmetry" => Box::new(Tt::from_tt(tt, true)),
                 "memo" => Box::new(Tt::from_tt(tt, false)),
                 other => {
@@ -1053,6 +1054,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
         }
         None => match (live_count, solver_name) {
             (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
+            (true, "incremental") => Box::new(Incremental::new_counting(bits, 16)),
             (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
             (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
             (true, other) => {
