@@ -341,7 +341,19 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       Kept off main on the branch in case the inverse/two-tier variants are worth a look.
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
-- [ ] Final: `make test` + `make clippy` green; n=16 verdict cross-checked vs Jenrich (second)
+- [x] **n=16 SOLVED (session 7, 2026-06-15) — SECOND PLAYER WINS, cross-checks Jenrich.**
+      First multi-core run after the parity-YBWC fix: **36/36 distinct first moves refuted**
+      (search ran to completion without short-circuiting ⇒ no winning first move ⇒ second
+      player wins), **10,017,867,872 nodes · ~7.2B distinct (= 10B ÷ 1.4× re-exp) · 1.4×
+      re-exp · 3371 s ≈ 56 min · 2.97 M/s · full 24 cores.** Validates the whole stack:
+      the ~7.2B distinct lands inside the Chunk-1 HLL estimate (9.2B central, 2.3–18B), the
+      1.4× re-exp shows the TT held the working set (memory levers), and 56 min vs Jenrich's
+      23 h is the parallelism unlock. **Rough edge found:** after `first_player_wins` returns,
+      `solve()` computes `principal_variation` via the *sequential* `best_move`/`Tt::wins`,
+      so for n=16 it re-searches evicted PV positions **single-core** (slow) — and the verdict
+      print is gated behind it. Fix queued (backlog #21): print the verdict before the PV +
+      drive the PV through the parallel solver (or depth-limit it). The verdict is unaffected.
+- [ ] Final: `make test` + `make clippy` green (still required for any new code).
 
 ## Lever backlog (sessions 4–5 reviews, prioritised)
 
