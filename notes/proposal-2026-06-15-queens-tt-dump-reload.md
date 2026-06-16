@@ -2,7 +2,37 @@
 
 ## Status
 
-Draft
+Draft — **queued for next session (decision recorded 2026-06-15, session 2026-06-15--10).**
+
+### Session-7 decision (2026-06-15)
+
+Build **Approach A (raw flat image) = Phase 1** as the MVP next session — `QueensTt::dump`
+/ `load` (validated header + raw slot bytes), `solve … --resume <path>`, and a **SIGUSR2 →
+dump-now** handler. Keep B2 (full-key sparse export) and the distributed extension as the
+later phases per the Recommendation below; A is the simple, high-value first slice. Raw
+read/write, **not** mmap (deferred — THP/TLB regression).
+
+**Add a first-class payoff this proposal under-weights: a reproducible n=16 *benchmark
+fixture*.** Session 7 made n=16 run multi-core for the first time (parity-YBWC fix, commit
+`2f51aa5`; first live run ≈9.7B nodes, 1.4× re-exp, full 24 cores, ~tens of min vs Jenrich
+23 h). All session, A/B measurement was forced onto n=14 (the *wrong* board — too short; the
+parallel fan-out is a brief burst, not the n=16 regime) or onto cold partial-n=16 runs
+(slow, noisy, contended). A **dumped mid-search n=16 state** (via SIGUSR2 on a live run) is a
+deep, TT-oversubscribed fixture: load it, run a fixed time, compare nodes/s on the frontier
+under code A vs B from the *identical* start state — no 36-min cold start. This is the clean
+way to measure backlog **#20** (size-based parallel split — the single-core-tail fix) and all
+future per-node / memory levers. So Phase 1 (Approach A, raw image) directly serves the
+benchmark-fixture use; B2's mergeability isn't needed for it.
+
+**Resume is automatic via TT warmth** (sharpening the CRDT framing below for the resume
+case): load the table, re-run `first_player_wins`; already-solved root subtrees hit the
+cached value instantly and fast-forward, unsolved ones continue — *the TT is the progress*,
+no explicit move-list tracking. A mid-search snapshot is always a valid partial memo (each
+slot is one atomic `u64`, never torn), so a SIGUSR2 dump under concurrent writes resumes
+correctly (this resolves Open Q1 in favour of "good-enough-live").
+
+(The handoffs-queue entry `notes/handoffs/2026-06-15-tt-dump-load.md` is a thin pointer to
+this proposal — this doc is the canonical design.)
 
 ## Problem
 
