@@ -70,16 +70,21 @@ a tiny-board experiment, not under memory pressure.
    the game doesn't decompose, so they're research-grade. Don't chase them by mex.
 4. **GPU does not help** the search (sequential DAG, random-access TT, branchy) —
    same conclusion as the Othello `NOTES.md`. Bottleneck is algorithmic + memory.
-5. **Deeper parallelism is a NEW documented negative (session 3).** The search is
-   **TT-DRAM-latency-bound**, not parallelism-bound: n=14 is ~11–12 s / ~53.3M nodes
-   / ~49.3M distinct (1.08× re-exp) at the default TT, ~18× parallel ≈ the hardware
-   ceiling on this 12-core/24-thread box. Two "parallelise sooner" rewrites both
-   failed and were reverted: fanning *all* root moves at once is wall-clock-equal to
-   the committed sequential-lead YBWC guard (same node count); recursive YBWC
-   *inside* subtrees **defeats the α-β cutoff** (searches children the cutoff would
-   skip → **~97M nodes / ~18 s vs ~53M / ~12 s**). **Keep the sequential-lead guard**
-   (the lead move warms the shared TT for the parallel siblings). Don't re-attempt —
-   the lever is memory/per-node cost (Chunk 2), not more cores.
+5. **Deeper parallelism: naive YBWC is a negative, but PARITY-AWARE recursion is a
+   clean WIN (corrected session 7).** *Naive* recursive YBWC (parallelise every
+   level, elder child first) defeats the α-β cutoff — it searches children the cutoff
+   would skip (~97M vs ~53M nodes) — and was rightly reverted in session 3. **The
+   refinement that works:** the tree alternates *prove-a-loss* nodes (every child must
+   be searched ⇒ **no cutoff to lose**) with *prove-a-win* nodes (one winner suffices
+   ⇒ cutoff). For a second-player win the root and the **even** plies below it are
+   prove-a-loss: fan **all** their children across rayon — same nodes as sequential,
+   **zero speculation** — and keep the **odd** (prove-a-win) plies sequential so the
+   cutoff survives. This is `Parallel::par_wins` (session 7, `2f51aa5`): n=14 53.3M
+   nodes (= baseline), **8.2 s vs 9.8 s, 22.5 cores vs 13.5**; **n=16 24 cores vs the
+   old single-core lead** (which at n=16 *never finished* — root-0's subtree is the
+   whole runtime). So the old "keep the sequential-lead guard / don't re-attempt" is
+   superseded for the elder brother. The search is still DRAM-bound *per useful node*,
+   but it is no longer leaving cores idle. `QUEENS_PAR_DEPTH` (default 3) tunes it.
 
 ## The plan: measure first, then pick the encoding, then attempt n=16
 
@@ -318,7 +323,22 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       components are **only ~32% of all components** at n=12 (k=1 = 15%, mass at k=5–8 ≈10% each), NOT
       "overwhelmingly tiny" — so #18 removes WL on the cheapest third; the k=5–16 bulk (the real
       per-node cost) is untouched → that's #17's target, with more headroom than #18 had.
-- [ ] Chunk 3: two-tier depth-preferred TT replacement
+- [x] **Root parallelism fix (session 7, `2f51aa5`) — n=16 was running SINGLE-CORE.**
+      The Parallel solver searched root move 0 (the dominant "elder brother") fully
+      sequentially as a TT-warming lead before fanning the rest; at n=16 that subtree is
+      the whole feasible runtime, so the search sat on **1 core for hours** (Phase 2 never
+      started). Fix = `Parallel::par_wins`: bounded recursive parallel search (top
+      `QUEENS_PAR_DEPTH` plies, default 3) that fans **all** children at the *even*
+      prove-a-loss levels (no α-β cutoff there ⇒ free, zero speculation) and keeps the
+      *odd* prove-a-win levels sequential (cutoff preserved). **n=16: 1.4 → 24 busy cores;
+      n=14: 53.3M nodes (= baseline, no speculation), 8.2 s vs 9.8 s, 22.5 cores vs 13.5.**
+      Verdict + distinct unchanged. Supersedes fact #5's "keep the sequential lead." See
+      `[[queens-parallel-parity-ybwc]]`.
+- [~] Chunk 3: two-tier depth-preferred TT replacement — **tried, NEGATIVE, parked on
+      branch `chunk3-depth-preferred-tt`.** Depth-preferred (keep high-avail/shallow) was
+      **3× worse** re-exp at a forced-small n=14 TT (1.34×→4.3×): it evicts the deep,
+      heavily-reused transpositions; replace-always (recency ≈ keep-deep in a DFS) wins.
+      Kept off main on the branch in case the inverse/two-tier variants are worth a look.
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
 - [ ] Final: `make test` + `make clippy` green; n=16 verdict cross-checked vs Jenrich (second)
