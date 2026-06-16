@@ -204,6 +204,61 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
 
 ## Handoff Notes
 
+### Session 2026-06-16--5 (`b5cae7a1-29dd-4197-8e91-adeb7199498e`) — n=16 SOLVED with incremental; checkpoint/resume + UX overhaul; bottleneck reframed
+**Headline: `incremental` solved n=16 (user's run) — SECOND, ~34 min search (2025 s), ~1.2× over D4
+parallel, *with* the old dumps contending.** Then a long UX pass on checkpoint/resume + output, driven
+by the user's live n=16 runs.
+
+**Landed (commits):**
+- `30aa892` split `queens.rs` → `src/queens/` tree (pure move); `1b8bdcd` `incremental` solver (n=14
+  ~1.5× — Step 3 from the *prior* session, listed in Progress).
+- `983c953` checkpoint + solve-output UX: opt-in checkpointing (no n=16 default), periodic opt-in,
+  **S**/SIGUSR2 on-demand, **zstd 3→1**, live search bar keeps ticking during the dump, double-Ctrl-C
+  `_exit`s mid-dump, verdict→stats→PV reorder, PV bar resets (`Phase::OptimalLine`), **XmYs** times.
+- `fc17d22` PGO profiles `solve 14 incremental`.
+- `7752712` **incremental is the DEFAULT solver**; resume pre-seeds root progress + restores the node
+  count (header field, back-compat) + load progress bar.
+- `919e448` S/SIGUSR2 enabled on `--resume` too (not just `--checkpoint`); `same_file` guard never
+  clobbers the resumed image.
+- `9830acb`/`6ee66af`/`ea003b6` handoff updates.
+
+**Measurements:** n=16 incremental 2025 s / 10.96B nodes / ≈8.0B distinct / **1.37× re-exp** / second.
+Dump is **CPU-bound** (lone zstd thread starved by 24 workers: ~55 MB/s contended → ~235 MB/s once the
+search ends — final dump 16 GB in 73 s). Resume from an 87.3%-full snapshot still took ~19 min.
+
+**The reframe (the load-bearing finding):** the incremental kernel moved n=16 **off the per-node-compute
+wall onto the TT-CAPACITY wall.** 2³¹ slots hold only ~27% of the ~8B working set ⇒ the 1.37× re-exp is
+~4B redundant expansions, and resume only saves ~44% (snapshot = ~23% of the set). **#1 lever is now
+capacity, not a faster node.** Per-node levers (ILP/vectorise/prefetch-thread) = diminishing returns.
+
+**Gates:** `make test` (23 lib incl. lineage + 23 equivalence) + `clippy` green throughout; checkpoint
+round-trip (resume = warm), SIGINT save (exit 130), opt-in, resume-snapshot guard all verified.
+
+**NEXT SESSION (user-approved scope — defer to next session):**
+1. **Iso-keyed live n=16 — the cheap capacity test (do FIRST, it's quick + decisive).** Hypothesis:
+   the iso key's 3.4× merge → ~2.4B distinct **fits** 2³¹ slots at LF≈1 ⇒ **eviction-free ⇒ re-exp
+   ~1.0×** (kills the 1.37× with no archive build). **Caveat from the roadmap: `QUEENS_KEY=fast` live
+   at n=16 was already a NEGATIVE** — the per-node graph-keying cost (~µs vs the D4 ns) overwhelmed the
+   merge. So this is likely a net loss *as-is*; the incremental kernel does **not** help (it computes
+   the *D4* canon, not the iso key). Worth a **partial-n16 throughput probe** anyway (grab a fixture via
+   SIGUSR2, run a few minutes with `QUEENS_KEY=canon`/`fast`, compare nodes·rate) to *measure* whether
+   fitting-the-set beats the keying cost at the n=16 capacity regime — and to test **selective keying**
+   (`QUEENS_KEY_MAX=k`, iso key only for small/cheap-to-key available graphs) **after** fixing the n=16
+   sentinel-bit-255 collision (graph_bits tag — see roadmap caveat). If it loses, record the negative
+   and go to (2). Low build, high information.
+2. **Chunk-4 live cascade — the real capacity lever (the roadmap's load-bearing piece).** Live search
+   keeps the fast incremental D4 key + a small live TT; freeze *solved* positions into the eviction-free
+   BuRR archive (iso-merged at FREEZE time, so no live per-node iso cost) + cascade queries archive →
+   **no re-expansion (re-exp ~1.0×) AND resume becomes a query, not a re-search.** Core landed
+   (`burr.rs` + `freeze`/`verify`, validated on real n=14 + iso-keyed n=14). Open: thread positions to
+   freeze time (Chunk-4-prep), a frozen-tier query path, freeze cadence (per-root-pass / per-ply via
+   L2 windowing). **Scope as a `t-proposal` before building** (architecture gate — the roadmap's
+   session-10 recommendation: lean staged iso-cascade). This is the path to fit n=16 eviction-free on
+   one box.
+3. **(Queued, lower priority) tail core-drain** (~7/24 cores at the end — see Progress) and the
+   **resume rate/re-exp display** (cumulative node count inflates the live M/s; make rate + re-exp
+   session-relative while keeping the node total cumulative).
+
 ### Step 3 — `Incremental` solver + module split (2026-06-16, session 2026-06-16--4)
 **WIN — the incremental kernel works in the real search: n=14 ~1.5× wall, identical work.**
 Commits `30aa892` (split) then `1b8bdcd` (solver).
