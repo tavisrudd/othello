@@ -129,16 +129,17 @@ PGO_SECS  ?= 30
 pgo-check:
 	@test -n "$(LLVM_PROFDATA)" || { echo "llvm-profdata not found: rustup component add llvm-tools-preview"; exit 1; }
 
-# PGO the queens solver, profiled on a time-boxed n=14 search (parallel default).
+# PGO the queens solver, profiled on a time-boxed n=14 search with the `incremental`
+# solver -- the DFS-resident incremental-canon hot path we want PGO to optimise for.
 pgo-queens: pgo-check
 	rm -rf $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-generate=$(PROFRAW)" \
 	    cargo build --release --bin queens --target-dir $(PGO_INSTR)
-	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 >/dev/null 2>&1 || true
+	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 incremental >/dev/null 2>&1 || true
 	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
 	    cargo build --release --bin queens --target-dir $(PGO_OUT)
-	@echo "PGO queens at $(PGO_OUT)/release/queens (profiled: solve 14, $(PGO_SECS)s)"
+	@echo "PGO queens at $(PGO_OUT)/release/queens (profiled: solve 14 incremental, $(PGO_SECS)s)"
 
 # PGO the othello engine, profiled on a full depth-8 game.
 pgo-othello: pgo-check
@@ -157,12 +158,12 @@ pgo-release: pgo-check
 	rm -rf $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-generate=$(PROFRAW)" \
 	    cargo build --release --bin queens --example profile_game --target-dir $(PGO_INSTR)
-	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 >/dev/null 2>&1 || true
+	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 incremental >/dev/null 2>&1 || true
 	$(PGO_INSTR)/release/examples/profile_game 80 8 >/dev/null
 	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
 	    cargo build --release --target-dir $(PGO_OUT)
-	@echo "PGO build at $(PGO_OUT)/release/ (profiled: queens solve 14 [$(PGO_SECS)s] + othello profile_game)"
+	@echo "PGO build at $(PGO_OUT)/release/ (profiled: queens solve 14 incremental [$(PGO_SECS)s] + othello profile_game)"
 
 clean:
 	cargo clean
