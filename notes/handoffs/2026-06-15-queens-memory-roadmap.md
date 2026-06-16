@@ -369,10 +369,42 @@ are cross-referenced, not repeated.
 | 5 | AVX-512 canon | A | vectorise the 8-fold D4 fold of the 256-bit board; znver5 has AVX-512. Minor. |
 | 15 | Cuckoo filter, 1-bit payload | C | we're already lossy (2⁻⁵⁵ fp); a cuckoo filter at ~95% load packs more entries/byte than open-addressing — a cheap intermediate before the full BuRR build. |
 | 10 | df-pn done right (DAG/GHI-aware) | B | in roadmap (Kishimoto–Müller GHI-safe df-pn; Čížek–Balko–Schmid 2026). High effort; only if A/B don't reach n=16. |
+| 20 | **Size-based parallel split (kill the single-core tails)** ⏭ | A | **QUEUED — observed live on the n=16 run (session 7).** `par_wins` parallelises a fixed top `par_depth` plies, so every subtree at depth ≥ `par_depth` is an *atomic single-core task*; uneven ⇒ stragglers ⇒ cores drain to a few then to 1 at the tail of each parallel region, **worst near the end** (few root moves left ⇒ all parallelism is intra-root, and its sequential tails are all that remain). Harmless (load imbalance, no speculation, verdict-safe), but leaves cycles idle. Quick lever: raise `QUEENS_PAR_DEPTH` (6+). Real fix: **split by subtree size, not fixed depth** — parallelise an even (prove-a-loss) node while its available-square count is above a threshold (big ⇒ keep splitting; small ⇒ go sequential), so the big stragglers get divided directly. Still parity-gated (even-only) ⇒ no speculation. |
 | — | `fastrange` table sizing | A/C | Chunk 2b (Progress) — fill the 17→34 GB power-of-two gap. |
 | — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
 
 ## Handoff Notes
+
+### Session 7 (live) — first multi-core n=16 production run + parallelism-tail finding (2026-06-15)
+
+**The n=16 solve is running multi-core for the first time** (after the `2f51aa5`
+parity-YBWC fix). Command: `time target/release/queens solve 16 parallel --distinct`.
+Live snapshot at 34/36 roots: **7,421,942,597 nodes · 1.4× re-exp · 2186 s · 3.39 M/s**,
+full 24 cores while in a parallel region. Healthy and on the ~9.2B-distinct estimate
+(nodes are *billions*, not tera — `3.39M/s × elapsed` can't reach trillions, and 1.4×
+re-exp means the working set is fitting the TT, not thrashing). re-exp climbed
+1.1→1.2→1.4× as the cumulative distinct set filled the TT, then plateaued. ETA was
+~tens of minutes vs Jenrich's 23 h. **Verdict must cross-check SECOND player.**
+
+**Finding — periodic single-core dips, worsening toward the end (load-imbalance tails,
+not a bug).** `par_wins` parallelises a *fixed* top `par_depth` plies (default 3); below
+that the recursion is sequential, so **every subtree rooted at depth ≥ par_depth is an
+atomic single-core task**. The even-level fan-out produces *uneven* such tasks — most
+finish fast, a few big ones straggle — so at the tail of each parallel region the cores
+drain to a few, then to 1 on the single biggest straggler, until the next region/root
+opens up and refills. It is **worst near the end**: at 34/36 only two root subtrees
+remain, so *all* parallelism is intra-root and there is nothing to mask their sequential
+tails. Brief, harmless (pure load imbalance — no speculation, cutoff fully preserved,
+verdict-safe), but it leaves cycles idle.
+
+**Fixes** (backlog #20): quick knob — `QUEENS_PAR_DEPTH=6+` pushes the sequential
+boundary deeper so stragglers split into more, smaller tasks (safe: parity ⇒ no
+speculation; costs only task/alloc overhead, negligible at n=16). Real fix — **split by
+subtree size, not fixed depth**: parallelise an even (prove-a-loss) node while its
+available-square count exceeds a threshold (big ⇒ keep splitting, small ⇒ sequential),
+which divides the big stragglers directly and largely removes the single-core dips.
+Still parity-gated (even-only), so still zero speculation. Consider bumping the default
+`par_depth` (3 → ~5-6) for the n≥15 boards that want it.
 
 ### Session 7 — graph-key cost crusade (#18/#17/#17b/#19) + `count --comps` + PGO + Chunk 2b fastrange (2026-06-15)
 
