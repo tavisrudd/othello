@@ -11,6 +11,7 @@ use std::fs::File;
 use std::io::{self, BufReader, BufWriter, IsTerminal, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Arc, OnceLock};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -125,18 +126,17 @@ enum Cmd {
         /// symmetry / parallel only).
         #[arg(long)]
         distinct: bool,
-        /// Write a compressed, resumable TT checkpoint to PATH periodically (see
-        /// --checkpoint-every), on a SIGUSR2, and on exit. With no PATH it uses
-        /// ./queens-tt-n<N>.zst. **Defaults ON for n=16, OFF below**; resume with
-        /// --resume. Table-backed solvers only (parallel / symmetry / memo).
+        /// Enable a compressed, resumable TT checkpoint at PATH: press **S** (or send
+        /// SIGUSR2) to snapshot on demand, plus a save on exit. With no PATH it uses
+        /// ./queens-tt-n<N>.zst. **Opt-in** (off by default at every n); resume with
+        /// --resume. Table-backed solvers only (parallel / incremental / symmetry / memo).
         #[arg(long, value_name = "PATH", num_args = 0..=1, default_missing_value = "")]
         checkpoint: Option<PathBuf>,
-        /// Force checkpointing off (overrides the n=16 default).
-        #[arg(long, conflicts_with = "checkpoint")]
-        no_checkpoint: bool,
-        /// Checkpoint cadence, e.g. `5m`, `300s`, `2h` (no suffix = seconds).
-        #[arg(long, value_name = "DUR", default_value = "5m", value_parser = parse_duration)]
-        checkpoint_every: Duration,
+        /// Add an automatic checkpoint cadence on top of the on-demand S/SIGUSR2 saves,
+        /// e.g. `30m`, `2h` (no suffix = seconds). Omitted ⇒ no periodic dump (manual
+        /// only) -- the dump is costly at n=16, so a cadence is opt-in.
+        #[arg(long, value_name = "DUR", value_parser = parse_duration)]
+        checkpoint_every: Option<Duration>,
         /// Resume from a checkpoint image: reload the TT and continue warm. The
         /// table is sized by the image, so QUEENS_TT_BITS/SLOTS are ignored.
         #[arg(long, value_name = "PATH")]
@@ -268,8 +268,7 @@ fn main() {
         solver: "parallel".into(),
         distinct: false,
         checkpoint: None,
-        no_checkpoint: false,
-        checkpoint_every: Duration::from_secs(300),
+        checkpoint_every: None,
         resume: None,
     });
     match cmd {
@@ -278,7 +277,6 @@ fn main() {
             solver,
             distinct,
             checkpoint,
-            no_checkpoint,
             checkpoint_every,
             resume,
         } => solve(
@@ -287,7 +285,6 @@ fn main() {
             distinct,
             CpOpts {
                 checkpoint,
-                no_checkpoint,
                 every: checkpoint_every,
                 resume,
             },
@@ -518,14 +515,31 @@ fn fmt_rate(nodes: u64, secs: f64) -> String {
     }
 }
 
+/// Format an elapsed duration as `XmYs` (or `XhYmZs`, or `S.SSs` under a minute) --
+/// readable for the multi-minute n=16 solve and its dumps, where raw seconds (`2025s`)
+/// are hard to parse. Sub-minute keeps two decimals so the short n≤14 benches stay precise.
+fn fmt_elapsed(secs: f64) -> String {
+    if secs < 60.0 {
+        return format!("{secs:.2}s");
+    }
+    let s = secs as u64;
+    let (h, m, sec) = (s / 3600, (s % 3600) / 60, s % 60);
+    if h > 0 {
+        format!("{h}h{m:02}m{sec:02}s")
+    } else {
+        format!("{m}m{sec:02}s")
+    }
+}
+
 /// A one-line on-demand report for a running solve (SIGUSR1) or its termination
 /// (SIGINT/SIGTERM), printed to stderr.
 fn status_report(label: &str, n: u32, solver: &dyn Solver, start: Instant) -> String {
     let secs = start.elapsed().as_secs_f64();
     let nodes = solver.nodes();
     format!(
-        "[queens {n}×{n}] {label}: {} nodes searched in {secs:.1}s ({})",
+        "[queens {n}×{n}] {label}: {} nodes searched in {} ({})",
         commas(nodes),
+        fmt_elapsed(secs),
         fmt_rate(nodes, secs)
     )
 }
@@ -538,12 +552,32 @@ fn term_cols() -> usize {
 /// The live, in-place progress line (stderr): a spinner, a determinate bar over
 /// the resolved root moves when the solver exposes them (a second-player win
 /// must refute them all, so it fills to 100%), and live node/elapsed/rate.
-fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
+/// Which phase of `solve` a progress bar is tracking. The **optimal-line** (PV) step
+/// runs after the search prints its verdict + stats, so its bar is reset to count only
+/// the nodes *that step* walks (`node_base` = the solver's node total when it began),
+/// not the billions from the whole search.
+#[derive(Clone, Copy)]
+enum Phase {
+    Search,
+    OptimalLine { node_base: u64 },
+}
+
+fn progress_bar(n: u32, solver: &dyn Solver, start: Instant, phase: Phase) -> String {
     let secs = start.elapsed().as_secs_f64();
-    let node_count = solver.nodes();
+    let node_base = match phase {
+        Phase::Search => 0,
+        Phase::OptimalLine { node_base } => node_base,
+    };
+    let node_count = solver.nodes().saturating_sub(node_base);
     let rate = fmt_rate(node_count, secs);
     let nodes = commas(node_count);
+    let elapsed = fmt_elapsed(secs);
     let spin = SPINNER[((secs * 8.0) as usize) % SPINNER.len()];
+    // The optimal-line step walks one line, not the root fan-out, so it shows just its
+    // own node tally -- no roots bar, no re-expansion ratio (those describe the search).
+    if let Phase::OptimalLine { .. } = phase {
+        return format!("{spin} {n}×{n} optimal line · {nodes} nodes · {elapsed} · {rate}");
+    }
     // With --distinct, show the live re-expansion ratio (nodes ÷ distinct) -- the
     // table's thrash climbing in real time as it saturates.
     let reexp = match solver.report() {
@@ -557,9 +591,9 @@ fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
             const W: u64 = 24;
             let filled = (done * W / total) as usize;
             let bar: String = "█".repeat(filled) + &"░".repeat(W as usize - filled);
-            format!("{spin} {n}×{n} [{bar}] {done}/{total} roots · {nodes} nodes{reexp} · {secs:.0}s · {rate}")
+            format!("{spin} {n}×{n} [{bar}] {done}/{total} roots · {nodes} nodes{reexp} · {elapsed} · {rate}")
         }
-        None => format!("{spin} {n}×{n} · {nodes} nodes{reexp} · {secs:.0}s · {rate}"),
+        None => format!("{spin} {n}×{n} · {nodes} nodes{reexp} · {elapsed} · {rate}"),
     }
 }
 
@@ -569,6 +603,9 @@ fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
 /// when `cp` is due, and, when `bar`, repaints the in-place progress line. Polling
 /// keeps it the sole stderr writer with no work in async-signal context. Stops when
 /// the solve sets `done`.
+// Distinct, hard-to-bundle concerns (signal source, solver, bar geometry, checkpoint,
+// terminal state, done flag); a context struct would only relocate the same fields.
+#[allow(clippy::too_many_arguments)]
 fn watch(
     signals: &mut Signals,
     solver: &dyn Solver,
@@ -576,6 +613,8 @@ fn watch(
     start: Instant,
     bar: bool,
     cp: Option<&Checkpoint>,
+    kb_orig: Option<libc::termios>,
+    phase: Phase,
     done: &AtomicBool,
 ) {
     let clear = || {
@@ -589,21 +628,36 @@ fn watch(
             clear();
             match sig {
                 SIGINT | SIGTERM => {
-                    // Save before exiting so a Ctrl-C / preemption keeps the work.
-                    if let Some(cp) = cp {
-                        do_checkpoint(solver, cp, "interrupt");
-                    }
                     let what = if sig == SIGINT {
                         "interrupted (SIGINT)"
                     } else {
                         "terminated (SIGTERM)"
                     };
+                    // Save before exiting so a Ctrl-C / preemption keeps the work --
+                    // but the n=16 dump is multi-GB and slow, so say what's happening
+                    // and how to skip it, then arm the double-interrupt fast path: with
+                    // the flag set, a *second* SIGINT/SIGTERM trips
+                    // `register_conditional_shutdown` and `_exit`s immediately (mid-dump).
+                    if let Some(cp) = cp {
+                        eprintln!(
+                            "\x1b[33m{what} — saving a resumable checkpoint to {} before exit; \
+                             press Ctrl-C again to skip it and exit now.\x1b[0m",
+                            cp.path.display(),
+                        );
+                        let flag = checkpointing_flag();
+                        flag.store(true, Ordering::SeqCst);
+                        do_checkpoint(solver, cp, "interrupt", n, start, bar);
+                        flag.store(false, Ordering::SeqCst);
+                    }
                     eprintln!("{}", status_report(what, n, solver, start));
+                    if let Some(orig) = &kb_orig {
+                        restore_terminal(orig); // leave the terminal usable on exit
+                    }
                     std::process::exit(128 + sig); // 130 (SIGINT) / 143 (SIGTERM)
                 }
                 SIGUSR2 => {
                     if let Some(cp) = cp {
-                        do_checkpoint(solver, cp, "sigusr2");
+                        do_checkpoint(solver, cp, "sigusr2", n, start, bar);
                         last_cp = Instant::now();
                     }
                 }
@@ -613,16 +667,29 @@ fn watch(
                 ),
             }
         }
+        // On-demand snapshot: 'S'/'s' from the terminal triggers a checkpoint, like
+        // SIGUSR2 -- caught in cbreak mode without an Enter. `kb_orig` is `Some` only
+        // when stdin is a tty AND checkpointing is on, so this is inert otherwise.
+        if kb_orig.is_some() && poll_key_s() {
+            if let Some(cp) = cp {
+                clear();
+                do_checkpoint(solver, cp, "keypress", n, start, bar);
+                last_cp = Instant::now();
+            }
+        }
         if done.load(Ordering::Relaxed) {
             break;
         }
-        // Periodic checkpoint: dump when the cadence is due. Blocks the bar briefly
-        // while it streams; sound under live writers (each slot is one atomic u64).
+        // Periodic checkpoint (opt-in via --checkpoint-every; `None` ⇒ on-demand only).
+        // The search keeps running (the dump is lock-free relaxed loads), and
+        // `do_checkpoint` keeps the live search bar ticking with the checkpoint progress
+        // folded in, so the bar never goes dark while the image streams.
         if let Some(cp) = cp {
-            if last_cp.elapsed() >= cp.every {
-                clear();
-                do_checkpoint(solver, cp, "periodic");
-                last_cp = Instant::now();
+            if let Some(every) = cp.every {
+                if last_cp.elapsed() >= every {
+                    do_checkpoint(solver, cp, "periodic", n, start, bar);
+                    last_cp = Instant::now();
+                }
             }
         }
         if bar {
@@ -631,7 +698,10 @@ fn watch(
             // all one column wide, so chars == columns. Clear to end-of-line after,
             // since this line may be shorter than the last.
             let cols = term_cols().saturating_sub(1);
-            let line: String = progress_bar(n, solver, start).chars().take(cols).collect();
+            let line: String = progress_bar(n, solver, start, phase)
+                .chars()
+                .take(cols)
+                .collect();
             eprint!("\r{line}\x1b[K");
             io::stderr().flush().ok();
         }
@@ -651,6 +721,81 @@ fn show_bar(n: u32) -> bool {
     n >= 14 && io::stderr().is_terminal()
 }
 
+/// Put stdin in **cbreak** mode -- non-canonical, no echo, but ISIG kept so Ctrl-C
+/// still raises SIGINT -- and non-blocking, so the watcher can catch a single `S`
+/// keypress without an Enter. Returns the original termios to restore on exit, or
+/// `None` if stdin is not a tty or the call fails (then the `S` trigger is simply
+/// inactive -- SIGUSR2 still works). Caveat: the rare double-Ctrl-C `_exit`
+/// (`register_conditional_shutdown`) cannot restore this; a `reset` fixes the echo.
+fn enter_cbreak() -> Option<libc::termios> {
+    if !io::stdin().is_terminal() {
+        return None;
+    }
+    let fd = libc::STDIN_FILENO;
+    // SAFETY: `tcgetattr`/`tcsetattr`/`fcntl` on the stdin fd with a zeroed-then-filled
+    // `termios`; all async-signal-safe POSIX calls that only touch terminal/fd flags,
+    // never memory we own. Any failure is surfaced as `None` (feature off).
+    unsafe {
+        let mut orig: libc::termios = std::mem::zeroed();
+        if libc::tcgetattr(fd, &mut orig) != 0 {
+            return None;
+        }
+        let mut raw = orig;
+        raw.c_lflag &= !((libc::ICANON | libc::ECHO) as libc::tcflag_t); // keep ISIG
+        if libc::tcsetattr(fd, libc::TCSANOW, &raw) != 0 {
+            return None;
+        }
+        let flags = libc::fcntl(fd, libc::F_GETFL);
+        if flags != -1 {
+            libc::fcntl(fd, libc::F_SETFL, flags | libc::O_NONBLOCK);
+        }
+        Some(orig)
+    }
+}
+
+/// Undo [`enter_cbreak`]: restore the saved termios and clear stdin's non-blocking
+/// flag. Safe to call once on each exit path.
+fn restore_terminal(orig: &libc::termios) {
+    let fd = libc::STDIN_FILENO;
+    // SAFETY: restores the saved termios + clears O_NONBLOCK on stdin; same
+    // async-signal-safe POSIX calls as `enter_cbreak`, touching no memory we own.
+    unsafe {
+        libc::tcsetattr(fd, libc::TCSANOW, orig);
+        let flags = libc::fcntl(fd, libc::F_GETFL);
+        if flags != -1 {
+            libc::fcntl(fd, libc::F_SETFL, flags & !libc::O_NONBLOCK);
+        }
+    }
+}
+
+/// Drain pending stdin bytes (non-blocking) and report whether any is `S`/`s`. ONLY
+/// call when [`enter_cbreak`] succeeded -- it set stdin non-blocking, so this never
+/// blocks; on a blocking fd a `read` with no input would hang the watcher.
+fn poll_key_s() -> bool {
+    let mut buf = [0u8; 64];
+    let mut hit = false;
+    loop {
+        // SAFETY: non-blocking `read` into a stack buffer of `buf.len()` bytes; returns
+        // <= 0 (EAGAIN) when nothing is pending, since stdin was set `O_NONBLOCK`.
+        let nbytes = unsafe {
+            libc::read(
+                libc::STDIN_FILENO,
+                buf.as_mut_ptr() as *mut libc::c_void,
+                buf.len(),
+            )
+        };
+        if nbytes <= 0 {
+            break;
+        }
+        let nbytes = nbytes as usize;
+        hit |= buf[..nbytes].iter().any(|&b| b == b'S' || b == b's');
+        if nbytes < buf.len() {
+            break;
+        }
+    }
+    hit
+}
+
 /// Run a search (`work`) while a background watcher handles signals and, when
 /// `bar`, paints the live progress bar -- shared by `solve` and the self/play
 /// table warm-up. The watcher borrows the solver read-only on a scoped thread;
@@ -661,15 +806,26 @@ fn run_watched<R>(
     n: u32,
     bar: bool,
     cp: Option<&Checkpoint>,
+    phase: Phase,
     work: impl FnOnce() -> R,
 ) -> R {
     let start = Instant::now();
+    // Arm the double-interrupt fast path up front, before the search starts, so a
+    // second Ctrl-C during the exit checkpoint exits immediately (the registration
+    // must already be in place when that second signal lands).
+    if cp.is_some() {
+        checkpointing_flag();
+    }
+    // With checkpointing on, put the terminal in cbreak so a single `S` keypress
+    // snapshots on demand (no Enter). `termios` is `Copy`, so the watcher gets a copy
+    // to restore on its SIGINT exit path; we restore the original after a normal solve.
+    let kb_orig = if cp.is_some() { enter_cbreak() } else { None };
     let mut signals = Signals::new([SIGINT, SIGTERM, SIGUSR1, SIGUSR2]).ok();
     let done = AtomicBool::new(false);
-    thread::scope(|scope| {
+    let result = thread::scope(|scope| {
         let watcher = signals.as_mut().map(|signals| {
             let done = &done;
-            scope.spawn(move || watch(signals, solver, n, start, bar, cp, done))
+            scope.spawn(move || watch(signals, solver, n, start, bar, cp, kb_orig, phase, done))
         });
         let result = work();
         done.store(true, Ordering::Relaxed);
@@ -677,7 +833,11 @@ fn run_watched<R>(
             watcher.thread().unpark(); // wake it now so the scope joins promptly
         }
         result
-    })
+    });
+    if let Some(orig) = &kb_orig {
+        restore_terminal(orig); // normal-completion restore (the SIGINT path self-restores)
+    }
+    result
 }
 
 /// The re-expansion (TT-thrash) note for a `--distinct` report. Re-expansion is
@@ -704,17 +864,16 @@ fn reexp_note(nodes: f64, distinct: f64) -> String {
 /// readable. See the `Cmd::Solve` flags for semantics.
 struct CpOpts {
     checkpoint: Option<PathBuf>,
-    no_checkpoint: bool,
-    every: Duration,
+    every: Option<Duration>,
     resume: Option<PathBuf>,
 }
 
-/// A resolved, active checkpoint: where to write the image, how often, and which
-/// board it is (for the header). Built by [`CpOpts::resolve`] only when checkpointing
-/// is actually on.
+/// A resolved, active checkpoint: where to write the image, the optional automatic
+/// cadence (`None` ⇒ on-demand only), and which board it is (for the header). Built by
+/// [`CpOpts::resolve`] only when checkpointing is actually on.
 struct Checkpoint {
     path: PathBuf,
-    every: Duration,
+    every: Option<Duration>,
     n: u32,
 }
 
@@ -725,15 +884,12 @@ impl CpOpts {
     }
 
     /// Resolve whether checkpointing is on for this run and where it writes.
-    /// Opt-in via `--checkpoint`, **defaulting ON for n=16** and off below;
-    /// `--no-checkpoint` forces it off. `None` ⇒ no checkpointing.
+    /// **Opt-in**: on only when `--checkpoint` was given (no n=16 default). `None` ⇒ no
+    /// checkpointing. The automatic cadence ([`Checkpoint::every`]) is separately opt-in
+    /// via `--checkpoint-every`; without it, saves are on-demand (S / SIGUSR2) + on exit.
     fn resolve(&self, n: u32) -> Option<Checkpoint> {
-        if self.no_checkpoint || !(self.checkpoint.is_some() || n == 16) {
-            return None;
-        }
-        let path = self
-            .checkpoint
-            .clone()
+        let checkpoint = self.checkpoint.as_ref()?;
+        let path = Some(checkpoint.clone())
             .filter(|p| !p.as_os_str().is_empty())
             .unwrap_or_else(|| Self::default_path(n));
         Some(Checkpoint {
@@ -782,11 +938,26 @@ fn sibling(path: &Path, suffix: &str) -> PathBuf {
 /// Write `tt` as a compressed image to `path` atomically: encode to `path.tmp`,
 /// rotate any existing image to `path.prev`, then rename into place -- so a crash
 /// mid-write never corrupts the last good checkpoint. Returns the compressed size.
-fn write_checkpoint(tt: &QueensTt, n: u32, path: &Path) -> io::Result<u64> {
+/// zstd level for the checkpoint stream. The dump is **CPU-bound**, not IO-bound: a
+/// single zstd thread competes with the ~24 rayon search workers, so it crawls under
+/// load (~50 MB/s) and only hits NVMe speed (~160 MB/s) when cores free up. Level 1 is
+/// the fastest standard level -- far less CPU per byte than the old level 3 -- trading
+/// a modestly larger image for a much shorter, less contended dump.
+const CHECKPOINT_ZSTD_LEVEL: i32 = 1;
+
+fn write_checkpoint(
+    tt: &QueensTt,
+    n: u32,
+    path: &Path,
+    on_block: impl FnMut(u64, u64),
+) -> io::Result<u64> {
     let tmp = sibling(path, ".tmp");
     {
-        let mut enc = zstd::Encoder::new(BufWriter::new(File::create(&tmp)?), 3)?;
-        tt.dump_image(&mut enc, n as u8)?;
+        let mut enc =
+            zstd::Encoder::new(BufWriter::new(File::create(&tmp)?), CHECKPOINT_ZSTD_LEVEL)?;
+        // `on_block(slots_written, total)` per block -- the caller paints progress; the
+        // search keeps running (the dump is lock-free relaxed loads on the table).
+        tt.dump_image_with(&mut enc, n as u8, on_block)?;
         enc.finish()?.flush()?;
     }
     if path.exists() {
@@ -794,6 +965,42 @@ fn write_checkpoint(tt: &QueensTt, n: u32, path: &Path) -> io::Result<u64> {
     }
     std::fs::rename(&tmp, path)?;
     Ok(std::fs::metadata(path)?.len())
+}
+
+/// The checkpoint-progress tail appended to the live search bar while a dump streams.
+/// Progress is raw slots/bytes processed (the on-disk compressed size is smaller and
+/// unknown until the stream finishes), so the search bar keeps ticking alongside the
+/// save rather than going dark for the length of a multi-GB dump.
+fn dump_suffix(reason: &str, done: u64, total: u64, dump_start: Instant) -> String {
+    let frac = if total > 0 {
+        done as f64 / total as f64
+    } else {
+        1.0
+    };
+    let raw_gb = done as f64 * 8.0 / 1e9;
+    let total_gb = total as f64 * 8.0 / 1e9;
+    let secs = dump_start.elapsed().as_secs_f64();
+    // Plain ASCII (one column per char) so the width-budgeted truncation in the painter
+    // is exact -- a wide emoji would overrun the line and defeat the `\r` overwrite.
+    format!(
+        " · save[{reason}] {:.0}% {raw_gb:.1}/{total_gb:.1} GB {}",
+        frac * 100.0,
+        fmt_elapsed(secs),
+    )
+}
+
+/// A flag set only while the *interrupt* checkpoint dump is in flight. A second
+/// SIGINT/SIGTERM during that window trips `register_conditional_shutdown` and the
+/// process `_exit`s immediately (async-signal-safe), skipping the rest of the dump --
+/// so a stuck or slow exit-save is never a trap. Registered once, lazily.
+fn checkpointing_flag() -> &'static Arc<AtomicBool> {
+    static FLAG: OnceLock<Arc<AtomicBool>> = OnceLock::new();
+    FLAG.get_or_init(|| {
+        let flag = Arc::new(AtomicBool::new(false));
+        let _ = signal_hook::flag::register_conditional_shutdown(SIGINT, 130, Arc::clone(&flag));
+        let _ = signal_hook::flag::register_conditional_shutdown(SIGTERM, 143, Arc::clone(&flag));
+        flag
+    })
 }
 
 /// Reload a compressed image into a fresh table (header-validated; hard error on a
@@ -996,18 +1203,56 @@ fn splitmix(mut z: u64) -> u64 {
 /// Dump the solver's table to its checkpoint path, reporting the outcome on a dim
 /// line. A no-op (but warns) if the solver has no table. `reason` tags why
 /// (periodic / sigusr2 / interrupt / final).
-fn do_checkpoint(solver: &dyn Solver, cp: &Checkpoint, reason: &str) {
+///
+/// While the (multi-GB at n=16) image streams, the **live search bar keeps ticking**
+/// with the checkpoint progress folded into the same line: the search runs on the
+/// main + rayon threads throughout (the dump is lock-free relaxed loads), and the
+/// dump's per-block callback repaints `search_bar + save_suffix` here on the watcher
+/// thread. `search_start`/`bar` describe the search bar to keep alive (`bar == false`
+/// for piped/non-terminal output, where nothing is painted).
+fn do_checkpoint(
+    solver: &dyn Solver,
+    cp: &Checkpoint,
+    reason: &str,
+    n: u32,
+    search_start: Instant,
+    bar: bool,
+) {
     let Some(tt) = solver.tt() else {
         eprintln!("\x1b[90m(checkpoint [{reason}] skipped: solver has no table)\x1b[0m");
         return;
     };
     let t = Instant::now();
-    match write_checkpoint(tt, cp.n, &cp.path) {
+    let mut last = Instant::now();
+    let mut painted = false;
+    let res = write_checkpoint(tt, cp.n, &cp.path, |done, total| {
+        if !bar || (painted && last.elapsed() < Duration::from_millis(100) && done != total) {
+            return;
+        }
+        painted = true;
+        last = Instant::now();
+        // Budget the width for the save suffix first, then fill the rest with the live
+        // search bar -- so the checkpoint progress is never the part that gets truncated.
+        let suffix = dump_suffix(reason, done, total, t);
+        let cols = term_cols().saturating_sub(1);
+        let keep = cols.saturating_sub(suffix.chars().count());
+        let search: String = progress_bar(n, solver, search_start, Phase::Search)
+            .chars()
+            .take(keep)
+            .collect();
+        eprint!("\r{search}{suffix}\x1b[K");
+        io::stderr().flush().ok();
+    });
+    if painted {
+        eprint!("\r\x1b[K"); // clear the bar line; the summary prints next
+        io::stderr().flush().ok();
+    }
+    match res {
         Ok(bytes) => eprintln!(
-            "\x1b[90m(checkpoint [{reason}]: {} → {:.2} GB in {:.1}s)\x1b[0m",
+            "\x1b[90m(checkpoint [{reason}]: {} → {:.2} GB in {})\x1b[0m",
             cp.path.display(),
             bytes as f64 / 1e9,
-            t.elapsed().as_secs_f64(),
+            fmt_elapsed(t.elapsed().as_secs_f64()),
         ),
         Err(e) => eprintln!("\x1b[90m(checkpoint [{reason}] FAILED: {e})\x1b[0m"),
     }
@@ -1077,10 +1322,13 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
         checkpoint = None;
     }
     if let Some(cp) = &checkpoint {
+        let cadence = match cp.every {
+            Some(d) => format!("auto every {}", fmt_dur(d)),
+            None => "on demand".to_string(),
+        };
         eprintln!(
-            "\x1b[90m(checkpointing to {} every {} — SIGUSR2 to dump now)\x1b[0m",
+            "\x1b[90m(checkpoint → {} ({cadence}); press S or send SIGUSR2 to snapshot now)\x1b[0m",
             cp.path.display(),
-            fmt_dur(cp.every),
         );
     }
     let t = Instant::now();
@@ -1092,36 +1340,35 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
     // Solve, then PRINT THE VERDICT IMMEDIATELY -- the optimal line below is a
     // separate, cheaper step (parity-aware PV) and must not gate the result; the
     // verdict is settled the moment `first_player_wins` returns (backlog #21).
-    let first_wins = run_watched(solver.as_ref(), n, bar, checkpoint.as_ref(), || {
-        solver.first_player_wins(q)
-    });
+    let first_wins = run_watched(
+        solver.as_ref(),
+        n,
+        bar,
+        checkpoint.as_ref(),
+        Phase::Search,
+        || solver.first_player_wins(q),
+    );
     // Capture the search time *before* any post-solve work (final checkpoint, PV) so
     // the reported elapsed is the search, not the multi-minute image dump (#21 spirit).
     let elapsed = t.elapsed().as_secs_f64();
     // The search is done -- the table is at its most complete, so take the final
     // checkpoint now (before the cheap PV), so a resume starts from the full result.
     if let Some(cp) = &checkpoint {
-        do_checkpoint(solver.as_ref(), cp, "final");
+        do_checkpoint(solver.as_ref(), cp, "final", n, t, bar);
     }
     let winner = if first_wins { "first" } else { "second" };
     println!(
         "On the {n}×{n} board the {winner} player wins with perfect play.",
         n = q.n,
     );
-    // The optimal line. `principal_variation` is value-aware: a loss ply takes the
-    // first legal move with no search, only win plies search (warm TT + α-β cutoff),
-    // so this no longer re-searches every root subtree single-core.
-    let pv = run_watched(solver.as_ref(), n, bar, None, || {
-        q.principal_variation(solver.as_ref(), first_wins)
-    });
-    let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
-    println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
-    // A dim, secondary line: search cost plus approach-specific stats (table
-    // fill, nimber value, proof numbers, …) that each solver reports.
+    // The search results go out NOW, right under the verdict -- a dim line with the
+    // search cost plus approach-specific stats (table fill, nimber value, …). The
+    // optimal line below is a separate, cheaper step with its own (reset) bar.
     let mut summary = format!(
-        "solver {}: searched {} nodes in {elapsed:.3}s",
+        "solver {}: searched {} nodes in {}",
         solver.name(),
         commas(solver.nodes()),
+        fmt_elapsed(elapsed),
     );
     let stats = solver.stats();
     if !stats.is_empty() {
@@ -1154,6 +1401,26 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
             reexp_note(nodes, distinct),
         );
     }
+    // Now the optimal line. `principal_variation` is value-aware: a loss ply takes the
+    // first legal move with no search, only win plies search (warm TT + α-β cutoff), so
+    // it no longer re-searches every root subtree single-core. Its progress bar is reset
+    // (`Phase::OptimalLine`) to count only the nodes *this* step walks, not the search's.
+    let pv_base = solver.nodes();
+    if bar {
+        eprintln!(
+            "\x1b[90mtracing the optimal line (PV) — the bar below counts only its own nodes…\x1b[0m"
+        );
+    }
+    let pv = run_watched(
+        solver.as_ref(),
+        n,
+        bar,
+        None,
+        Phase::OptimalLine { node_base: pv_base },
+        || q.principal_variation(solver.as_ref(), first_wins),
+    );
+    let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
+    println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
 
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
@@ -1660,7 +1927,7 @@ fn warm_table(q: &Queens, solver: &dyn Solver) {
     }
     // Show the bar (and handle signals) for the slow warm-ups (n ≥ 14); the
     // smaller even boards finish in well under a second, no indicator needed.
-    run_watched(solver, q.n, show_bar(q.n), None, || {
+    run_watched(solver, q.n, show_bar(q.n), None, Phase::Search, || {
         solver.first_player_wins(q);
     });
 }

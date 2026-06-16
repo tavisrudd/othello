@@ -380,6 +380,21 @@ impl QueensTt {
     /// `put`s). `n` tags the board the image belongs to. The empty slots are zero,
     /// so the stream compresses well -- wrap `w` in a zstd encoder at the call site.
     pub fn dump_image<W: Write>(&self, w: &mut W, n: u8) -> io::Result<()> {
+        self.dump_image_with(w, n, |_, _| {})
+    }
+
+    /// As [`dump_image`](Self::dump_image), but invoking `progress(slots_written,
+    /// total_slots)` after each block -- so a CLI can paint a checkpoint progress bar.
+    /// The slot count is the natural progress metric: the compressed byte size on disk
+    /// is smaller and not known until the stream finishes. The callback runs on the
+    /// dumping thread between block writes, so it must be cheap (and throttle its own
+    /// output).
+    pub fn dump_image_with<W: Write, F: FnMut(u64, u64)>(
+        &self,
+        w: &mut W,
+        n: u8,
+        mut progress: F,
+    ) -> io::Result<()> {
         let header = TtHeader {
             n,
             len: self.len,
@@ -388,12 +403,15 @@ impl QueensTt {
         };
         w.write_all(&header.to_bytes())?;
         let mut buf = Vec::with_capacity(TT_IO_BLOCK * 8);
+        let mut written = 0u64;
         for chunk in self.slots.chunks(TT_IO_BLOCK) {
             buf.clear();
             for slot in chunk {
                 buf.extend_from_slice(&slot.load(Ordering::Relaxed).to_le_bytes());
             }
             w.write_all(&buf)?;
+            written += chunk.len() as u64;
+            progress(written, self.len);
         }
         Ok(())
     }
