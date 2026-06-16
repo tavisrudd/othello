@@ -294,6 +294,13 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       + **external-memory delayed-duplicate-detection** solve (Korf 2008; Zhou–Hansen) — the
       ~9.2B distinct positions fit on disk at a few B each — and reframes Chunk 4 as
       freeze-each-solved-ply-into-BuRR. A more robust n=16 route than an all-in-RAM table.
+- [x] **Lever #7 graph-isomorphism canon (session 6) — VALIDATED WIN.** `count --iso` +
+      `iso_key`/`iso_key_ir`/`iso_key_canon`/`iso_key_fast`. Safe merge **2.63/3.17/3.42/3.40×**
+      (n=8/10/12/14, plateaus ~3.4×) → n=16 ~3.4× (~9.2B→~2.7B, ~21 GB). Live-key spike
+      (`QUEENS_KEY=fast`, commits `594ab4e`/`0d7c145`/`29937b2`): 3.4× fewer nodes but wall
+      LOSS at n ≤ 14 (TMA frontend/branch-bound; D4 branchless). **Deploy as the Chunk-4
+      freeze-time key (option 2)**, not the live key. Next: branchless refine (#17), pseudo-
+      memoize recurring components (#18).
 - [ ] Chunk 3: two-tier depth-preferred TT replacement
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
@@ -313,10 +320,12 @@ are cross-referenced, not repeated.
 | 6 | ~~History / killer move ordering~~ | B | **NEGATIVE (session 6) — move ordering is a dead end here.** The static most-blocking order is *near-optimal* (this is a blocking game). History (global β-cutoff tally) is **~2× WORSE** (n=14 working set 49.1M→113.0M, +130 %; robust to weight); effective-degree (context-local, #6b) decays to ~0 by n=16 and reverses under parallel. Killer-per-ply untested but a poor bet (Othello "depth-indexed killers mis-order" + this blow-up). **Spend effort on structural levers (#7/#8/#11/Chunk 4), not ordering.** Tables + mechanism in the session-6 note. |
 | 6b | ~~Dynamic effective-degree ordering~~ | B | **NEGATIVE (session 6).** Re-rank by `popcount(attack & available)` per node: shrinks the *sequential* working set but the gain **decays super-linearly** (1.80×→1.33×→1.025× at n=10/12/14 → ~0 at n=16) and **reverses under parallel** (n=14 +9–12 %). Mechanism + table in the session-6 handoff note. Reverted. |
 | 16 | ABDADA in-evaluation deferral | A/C | **lock-free-enabled.** Mark a slot "being evaluated" (spare bit; `val` uses 1 of 8); a 2nd worker reaching it *defers* (other moves first, return later) not duplicates. *Defers*, so unlike deep-YBWC (fact #5) it preserves the α-β cutoff. Targets the ~1.6 % parallel NODE re-expansion only — **compute/DRAM, not the distinct working set**; low priority, DRAM-bound search. |
+| 17 | **Branchless / SIMD graph-key refine** ⏭ | A | **QUEUED next session.** The graph key (`iso_key_fast`) is TMA frontend/branch-bound after prealloc+CSR (session-6 note): mispredicts in the data-dependent neighbour walk. Pad neighbour lists to a fixed stride (kill the variable-trip exit mispredict); vectorise the colour fold with AVX-512 (znver5). Only worth it if a live n=16 graph-key run needs the wall back — already cheap enough for the freeze-time archive. |
+| 18 | **Pseudo-memoize tiny components (no table)** ⏭ | A | **QUEUED next session — the cheapest "memo".** Deep, the available-graph fragments into overwhelmingly *tiny* components (isolated vertex k=1, edge k=2, P3/triangle k=3, the six k=4 shapes), and `comp_canon` recomputes their canon millions of times. Don't build a hash-keyed memo (key-hash + probe + collision risk all defeat the point) — **special-case k ≤ 4 to a direct constant** keyed by a 1-2-instruction discriminator (k, edge-count, degree multiset), skipping refinement entirely. Isolated-vertex (the dominant case) becomes a single constant. Zero table, zero key hashing, zero collision risk; consistent because every tiny component takes the same branch. Bigger k (5,6) is a diminishing-returns lookup. Compose with #17. |
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
 | 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
-| 7 | **Graph-isomorphism canon** ⭐⭐ | B/C | **MEASURED + VALIDATED (session 6) — a WIN, the lever to pursue.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` with a true IR canonical form (`iso_key_canon`, 0 mixed = provably safe): **2.63 / 3.17 / 3.42 / 3.40×** at n=8/10/12/14, win/loss-consistent (a usable safe key). Rises then **plateaus ~3.4×** → n=16 ≈ 3.4×, ~9.2B → ~2.7B distinct ≈ ~21 GB raw (borderline RAM, multiplies Chunk 4 down ~3.4×). The cheap IR invariant agrees exactly with the canon at every n. (The earlier "[1.30×,3.39×]" bracket was a TT-eviction artifact in the value lookup, fixed by recording values at `put`.) **Next: integration spike** — make it the TT key, bench per-node µs cost vs the ~3.4× node-count cut. |
+| 7 | **Graph-isomorphism canon** ⭐⭐ | B/C | **MEASURED + VALIDATED (session 6) — a WIN, the lever to pursue.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` with a true IR canonical form (`iso_key_canon`, 0 mixed = provably safe): **2.63 / 3.17 / 3.42 / 3.40×** at n=8/10/12/14, win/loss-consistent (a usable safe key). Rises then **plateaus ~3.4×** → n=16 ≈ 3.4×, ~9.2B → ~2.7B distinct ≈ ~21 GB raw (borderline RAM, multiplies Chunk 4 down ~3.4×). The cheap IR invariant agrees exactly with the canon at every n. (The earlier "[1.30×,3.39×]" bracket was a TT-eviction artifact in the value lookup, fixed by recording values at `put`.) **Live-key spike DONE** (`QUEENS_KEY=fast`): cuts nodes 3.4×, but ~µs/node ⇒ wall LOSS at n ≤ 14 (D4 is branchless); TMA frontend/branch-bound. **Use it as the Chunk-4 freeze-time key (option 2), not the live key** — see session-6 note + row #17 (branchless, queued). |
 | 8 | Decomposition + small-component nimber DB | B/C | residual graphs *fragment* in the endgame (where the no-cutoff `mex` blowup doesn't apply); value = XOR of small-component nimbers. Prunes subtrees AND stores tiny components instead of full positions. Softens key-fact "doesn't decompose" (true for the *full* board, not deep leaves). |
 | 9 | Free-involution → instant P-verdict | B | **novel.** Generalise the odd-n centre+180° pairing: at any node, if the residual available-graph admits a fixed-point-free edge-respecting involution, it's a second-player win — return P, no search. P-certificates can sit deep, not just at the root. |
 | 4 | Cache-line bucketing (8 slots/64 B line) | A | probe a line before evicting; one miss serves 8 candidates + a better replacement policy. Composes on the flat lockless arena. |
@@ -442,14 +451,52 @@ map; the mixing collapsed (n=12: 511,802 → ~8,500 keys, 48 % → 0.8 %, and **
 IR keys). Even plain 1-WL is then ~99 % consistent. Lesson: never source the value-
 consistency ground truth from the lossy TT.
 
-**Next step (integration spike):** make `iso_key_canon` (or the IR invariant, with the
-canon as a guard) the TT key in place of `pos_key`'s D4 `canon`, then **bench per-node
-cost vs node-count win** — the canon is ~µs/node vs the current ~ns D4 canon, but it cuts
-distinct ~3.4×, so fewer TT probes (the DRAM-bound cost). Net wall-time is the open
-question; the working-set win is banked. Validate against `solver_lineage_agrees` + a
-fresh `solve 12/14` (verdict unchanged; distinct drops ~3.4×). If wall-time holds, n=16
-may fit in RAM; if the per-node cost dominates, graph-canon still multiplies down the
-Chunk-4 archive ~3.4×.
+**Live-key integration spike DONE (session 6) + TMA-driven cost reduction.** Wired the
+graph key as the live TT key behind `QUEENS_KEY=ir|canon|comp|fast` (and `QUEENS_KEY_MAX=k`
+for selective keying); default stays D4. Graph keys are namespaced into the 256-bit slot
+by a sentinel bit (255, unused for n ≤ 15) so selective mode can mix them with D4 masks.
+Verdicts preserved (graph-iso merges only same-value positions); node count drops by the
+merge factor (n=14 parallel: 53.2M → 14.8M, 3.6×).
+
+*Result: a wall LOSS at n ≤ 14, by design — the working-set win, not a wall win.* n=12
+symmetry, D4 0.62s baseline:
+
+| key | nodes | wall | note |
+|-----|------:|-----:|------|
+| D4 | 1.07M | 0.62s | branchless 8-fold fold |
+| canon | 310k | 5.03s | whole-graph IR canon |
+| **fast** | 310k | **2.82s** | component-decomp + prealloc + CSR |
+
+Cost reduction (each measured): component decomposition alone = wash (per-call alloc
+dominated); **prealloc thread-local `IsoScratch`** (zero heap, written-before-read, no
+per-call zeroing) 5.03 → 3.43s; **CSR neighbour lists** (build once, counted-loop refine
+instead of per-round bit-scan) 3.43 → 2.82s — **1.8× total**, same 3.4× merge. Selectivity
+(`QUEENS_KEY_MAX`) saved ~nothing: all the merge *and* all the node-visits live in
+deep/small graphs, so size-thresholding the large shallow graphs is a no-op (swept 20→144
+at n=12, node count flat).
+
+**TMA (perf `-M frontend_bound,backend_bound,bad_speculation,retiring` + `perf record`):**
+after prealloc the key is **frontend/branch-bound — ~45 % frontend, ~8.5 % branch-mispredict,
+~15-19 % retiring**; D-cache (1.4M) and dTLB (1M) misses negligible, so **not** memory-bound
+(refuted the alloc hypothesis once prealloc'd). Branch-misses concentrate in `node_key`
+(51 %, the `comp.each`/CSR-build bit-scans) and `wl_refine_in` (42 %, the variable-trip
+neighbour loop + early-break); **sorts only 3 %**. The residual is *intrinsic* data-dependent
+graph traversal — even counted loops mispredict on exit when degree varies. D4's branchless
+fold is hard to beat live; break-even needs ~4.5× more, not reachable by micro-opt.
+
+**Conclusion — this is fine where it matters.** At ~9 µs/node, parallelized, the graph key
+adds ~tens of minutes to an n=16 run that is already hours, and n=16 is *memory*-bound where
+the 3.4× working-set cut is the point; for the **Chunk-4 archive (option 2)** it is computed
+offline at freeze-time where 9 µs/position is trivially cheap. So: do **not** make it the
+live key for n ≤ 14; **do** use it as the freeze-time archive key (option 2) and as the live
+key only for an n=16 attempt where RAM-fit beats wall-time.
+
+**QUEUED for next session — branchless/SIMD refinement.** The TMA floor is branch
+mispredicts in the data-dependent graph walk. Next attack: pad each vertex's neighbour list
+to a fixed stride (kill the variable-trip exit mispredict) and vectorise the colour fold
+with AVX-512 (znver5 has it); plus memoize recurring tiny components (isolated vertex / edge
+/ path-3 dominate deep) keyed by a 1-WL hash. High effort, uncertain — only worth it if a
+live n=16 graph-key run needs the wall back. Backlog row #17.
 
 **Parallel-over-serial inflation (answering "can we adjust the parallelism?").** With
 **static order the lockless solver already has ~0 % distinct inflation** over serial
