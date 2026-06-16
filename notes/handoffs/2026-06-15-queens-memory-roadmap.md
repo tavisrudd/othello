@@ -353,9 +353,10 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       (`fp_bits=0`), which is sound only with **known membership** ⇒ pair Chunk 4 with **L2
       ply-windowing** (transpositions are strictly intra-ply → a frozen ply is queried only by
       in-set keys). The real single-box win is therefore **no eviction** (static, holds 100% of the
-      frozen set → ~1.0× re-exp) + the graph-iso freeze key (3.4× smaller resident). **Next:** freeze
-      from an `iso_key` run (apply the 3.4× merge), then wire the live cascade vs ply-window
-      integration (the open design choice — discuss scope).
+      frozen set → ~1.0× re-exp) + the graph-iso freeze key (3.4× smaller resident). **iso freeze validated end-to-end on n=14 (session 10): canon-keyed dump freezes
+      clean + exact, 3.37× merge propagates into a 3× smaller archive.** **Next:** a *real* iso-keyed
+      n=16 archive (needs an iso-keyed n=16 solve — ask-first gate), then wire the live cascade vs
+      ply-window integration (the open design choice — discuss scope).
 - [x] **n=16 SOLVED (session 7, 2026-06-15) — SECOND PLAYER WINS, cross-checks Jenrich.**
       First multi-core run after the parity-YBWC fix: **36/36 distinct first moves refuted**
       (search ran to completion without short-circuiting ⇒ no winning first move ⇒ second
@@ -416,9 +417,10 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       exposes enough parallelism and the session-7 single-core "tails" cost negligible wall (they
       were "brief, harmless" — correct). The earlier "+35% win" was **environmental** (session-7's
       2.97 M/s was a contended/thermal-throttled run; both clean runs now hit ~4.0 M/s, same node
-      count + re-exp + verdict). **#20 = a wash; recommend default-off or revert (user's call —
-      ask-first on revert).** Mechanism + `QUEENS_PAR_MIN_AVAIL` knob kept for future par_depth
-      experiments; correct + gated (n<15 untouched) so harmless as-is.
+      count + re-exp + verdict). **#20 = a wash at n=16 as-tuned. DECISION (session 10, user):
+      KEEP it — come back and tune later** (sweep `QUEENS_PAR_MIN_AVAIL` / `QUEENS_PAR_DEPTH`).
+      Mechanism + `QUEENS_PAR_MIN_AVAIL` knob stays; correct + gated (n<15 untouched) so harmless
+      as-is, and the knob is the substrate for the future sweep.
 - [ ] **NIGHT GOAL (session 8): get n=16 under 30 min total** (from session 7's 56 min), using
       the checkpoint fixtures to A/B levers. Plan: (a) test `QUEENS_KEY=fast` **live at n=16**
       (the unrun high-value experiment — 3.4× fewer nodes + fits RAM where D4 thrashes; handoff
@@ -477,6 +479,61 @@ are cross-referenced, not repeated.
 | — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
 
 ## Handoff Notes
+
+### Session 10 (2026-06-16) — iso-keyed freeze validated end-to-end (Chunk-4 next-step #1)
+
+**WIN — the graph-iso freeze key works end-to-end; the 3.4× merge survives into the BuRR
+archive.** Session 9 proved freeze/verify exact on *D4* dumps (n=14 + full n=16); the
+unvalidated link was whether an **iso-keyed** (`QUEENS_KEY=canon`) dump freezes correctly and
+actually carries the 3.4× merge into the archive. Validated on n=14 (fast, trips no n=16 gate),
+clean same-session A/B:
+
+| run         | distinct (HLL) | frozen keys (dump-occupied) | archive  | bits/key | verify                |
+|-------------|---------------:|----------------------------:|---------:|---------:|-----------------------|
+| D4          |         49.23M |                  41,567,590 | 0.260 GB |    50.00 | exact (0/0), FP 0/20M |
+| iso (canon) |         14.59M |                  13,867,971 | 0.087 GB |    50.00 | exact (0/0), FP 0/20M |
+
+Both verdicts SECOND (gate ✓; D4 re-exp 1.08×, iso 1.02×). **Merge: 3.37× on true distinct
+(matches session-6's 3.40×), 3.00× on frozen keys** — the dump-occupied ratio is lower because
+the D4 dump evicted ~16% of its 49.23M distinct down to 41.57M occupied (LF≈1.0, the 1.08×
+re-exp), while the iso set fit at LF 0.10 with ~no eviction. **The iso archive is 3× smaller and
+round-trips exact.**
+
+**Why this matters for n=16 (the reframing the n=14 run sharpens).** Session-9's n=16 D4 archive
+froze 2.085B keys — but that was only the *resident* ~28% of the 7.52B D4 distinct (the live TT
+evicted the rest → 1.36× re-exp); the D4 archive is a **partial snapshot**. An **iso-keyed** n=16
+solve has only ~2.2–2.7B *total* distinct (7.52B ÷ 3.37), which **fits** the 2³¹-slot TT at
+LF≈1.0 → the iso archive would hold the **complete** solved set eviction-free, not a fragment. So
+the iso freeze key is exactly what turns the archive from a 28% snapshot into the whole solved set
+on one box.
+
+**Mechanism note (why exactness was guaranteed, so the merge is the real finding).**
+`archive_key_of(slot_index, fp)` is derived from the *slot identity*, independent of `KeyMode`, so
+round-trip exactness holds for any key mode by construction. The validation confirms (a) the
+pipeline runs clean on a canon dump (no header/key-mode hiccup) and (b) the merge propagates
+(3.37× fewer keys). At n=14 the iso sentinel bit 255 is unused (196 squares); **at n=16 a
+*pure*-canon freeze is still sound** — bit 255 only collides under *selective* graph+D4 mixing
+(backlog caveat), not all-canon.
+
+**Density.** Both 50.00 bits/key = (fp_bits 44 + val 1) × ~1.11 (load-0.90 overhead) — the
+slot-sized, membership-carrying regime. The ~1.1-bit value-only regime still needs L2
+ply-windowing (known membership). At fp_bits=24/load 0.97 (session-9's n16 settings) the iso n=16
+archive projects to ~2.2–2.7B × 25.8/8 ≈ **7–8.7 GB carrying the WHOLE set**, vs session-9's
+6.72 GB carrying only 28%.
+
+**Next (still the open architecture gate — needs user sign-off):**
+1. **Real iso-keyed n=16 archive** = `QUEENS_KEY=canon solve 16 --checkpoint` (an iso-keyed n=16
+   solve, the ask-first "real n=16 run" gate; ~54 min projected = session-8 per-node cost × 3.4×
+   fewer nodes), then freeze. This is the artifact that holds the complete n=16 solved set in
+   ~7–9 GB eviction-free. The existing 15 GB D4 dump can't be re-keyed — the merge happens during
+   search.
+2. **Decide the live integration:** (a) cascade tier (slot-sized, eviction-free) vs (b) L2
+   ply-windowed value-only (~1.1 bit). (b) is the lever; more build.
+
+No code change — freeze/verify are session-9 tooling, this was a validation run. Temp n=14 dumps +
+archives (`/home/tavis/q-{d4,iso}-n14.{zst,burr}`) deleted after recording (regenerable in ~40s:
+`[QUEENS_KEY=canon] queens solve 14 parallel --distinct --checkpoint=<p>` then `queens freeze 14
+<p> <out> --verify`).
 
 ### Session 9 (2026-06-16) — Chunk 4 BuRR archive: core landed + validated on real data
 
