@@ -18,6 +18,32 @@ n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **`go`** (or `@notes/handoffs/<name>.md go`) at session start = read that handoff and resume from its Progress / next steps.
 
+## Intent-based mode (opt-in)
+
+Default is collaborative: discuss approach, surface options, await approval. Activate
+intent-based mode two ways:
+- **Per-handoff (persists across sessions):** add `Mode: intent-based` under the
+  `**Date**:` line of the handoff. Scopes to that work stream only.
+- **Per-session (ad-hoc):** the single-word prompt `mi` — intent-based for the rest of
+  the current session, without writing to any handoff.
+
+When active, take low-stakes reversible calls without asking; state the action in one
+line, then proceed unless interrupted (e.g. "Committing X. Reason: Y." / "Reading X to
+confirm Y."). **Decide and proceed when ALL hold:** reversible; already permitted by an
+existing CLAUDE.md rule or the handoff's plan; recommendation lopsided ≥80/20 with the
+decision inputs visible in the conversation; no load-bearing downstream (the next step
+doesn't change shape by which option is picked).
+
+**Still ask, even with the flag on:** architecture / design choices that lock in future
+work; **any revert, git-state change, or `git push`** (the global git rules stay
+ask-first regardless of mode); new scope or a pivot off the handoff's lever sequence; a
+real n=16 run (hours-to-days — size with HLL first); anything that would change a
+CLAUDE.md rule or a validation gate.
+
+## Short Commands
+- `yc` = your call
+- `mi` = intent-based mode for this session (see §Intent-based mode)
+
 ## Build / test / validate
 
 - Build/test through the **Makefile in `rust/`**: `make release` / `make test` /
