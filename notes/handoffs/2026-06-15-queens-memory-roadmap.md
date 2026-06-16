@@ -392,12 +392,16 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       Deltas / B2 (Phase 2) deferred. **Real-scale n=16 check (2026-06-16):** the completed
       run's final checkpoint = `rust/queens-tt-n16-final.zst` (16 GB compressed); resuming it
       **loads correctly** (header validated, 17.18 GB table rebuilt, 97.1% full) but the
-      post-load search **swaps and crawls** — the full 17 GB table committed at once vs only
-      ~17.8 GB available drove **8.5 GB into swap** (the original solve fit because it filled
-      *gradually* with ~19 GB free). **Finding: full-n16 resume is RAM-bound on this 26 GB box**
-      (needs the table to fit physical RAM with headroom; partial-fill resumes are fine). The
-      dump/load *mechanism* is sound (load correct + n=14 warm resume instant); this is an
-      environmental RAM limit, not a bug. (16 GB fixture left on disk — delete if disk matters.)
+      post-load search **spills into zram and crawls** — the full 17 GB table committed at once vs
+      only ~17.8 GB physical-RAM available drove **~8.5 GB into zram** (this box's "swap" is
+      `/dev/zram0`, zstd-compressed RAM, **not disk**; ~8.5 GB compresses to ~2.4 GB). The crawl is
+      **not** disk I/O — it's the random TT probe pattern paying a **per-access decompress** on
+      every zram-resident slot (the original solve fit because it filled *gradually* with ~19 GB
+      free, staying in physical RAM). **Finding: full-n16 resume needs the 17 GB table in physical
+      RAM** — zram absorbs the bytes but a randomly-probed table defeats it (decompress-per-probe);
+      partial-fill resumes are fine. The dump/load *mechanism* is sound (load correct + n=14 warm
+      resume instant); this is an environmental RAM/zram limit, not a bug. (16 GB fixture left on
+      disk — delete if disk matters.) See `[[box-uses-zram-not-disk-swap]]`.
 - [x] **#20 size-based parallel split (session 8, `54b3ccd`) — DONE, n≥15 gated.** A node below
       `par_depth` keeps splitting while available-square count > threshold (subtree-size proxy)
       so an idle core can steal a deep straggler — kills the tail core-drain. Parity-gated
@@ -587,10 +591,13 @@ thrash was only 1.4× (session 7), not enough to flip it. **Confirms the handoff
 stays the freeze-time/Chunk-4 key, not the live key.** (Plus fast carries a 64-bit-graph-hash
 collision risk at ~2.1B keys.)
 
-**TT RAM ceiling.** Box has 26 GB, ~19 GB available (rust-analyzer/tmux/etc. hold the rest).
-The n=16 default TT is 2³¹ = 17 GB (fits); the next power (2³² = 34 GB) doesn't, and
-`QUEENS_TT_SLOTS` to ~22 GB risks swap. So re-exp stays ~1.4× — **memory is still the wall**,
-and the single-box route to a smaller working set is Chunk 4 (BuRR archive), not a bigger table.
+**TT RAM ceiling.** Box has 26 GB physical, ~19 GB available (rust-analyzer/tmux/etc. hold the
+rest). The n=16 default TT is 2³¹ = 17 GB (fits physical RAM); the next power (2³² = 34 GB) doesn't,
+and `QUEENS_TT_SLOTS` to ~22 GB pushes the table past physical RAM into zram (`/dev/zram0`,
+compressed RAM, **not disk**) — where the random TT probe pattern pays a per-access decompress and
+crawls, so it's no real gain. So re-exp stays ~1.4× — **physical RAM is still the wall** (zram can't
+help a randomly-probed table), and the single-box route to a smaller working set is Chunk 4 (BuRR
+archive, which fits physical RAM), not a bigger table. See `[[box-uses-zram-not-disk-swap]]`.
 
 **Selective graph key (`QUEENS_KEY_MAX=k`) — NEGATIVE for live n=16 (wash).** n=14 sweep
 (nodes / per-node-cost vs D4 53.06M/6.43s): k=6 37.95M/1.69×, k=8 22.94M/2.73×, k=10
