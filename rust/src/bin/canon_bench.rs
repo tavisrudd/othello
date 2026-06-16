@@ -433,7 +433,9 @@ fn lex_min8(imgs: &[[u64; 4]; 8]) -> [u64; 4] {
 
 #[inline(always)]
 fn lex_lt(a: [u64; 4], b: [u64; 4]) -> bool {
-    // Compare as a 256-bit big-endian-by-limb number: word 0 first.
+    // Compare as a 256-bit big-endian-by-limb number: word 0 first. The early-return form
+    // BEATS a branchless variant here — most image pairs differ in word 0, so it exits
+    // after one compare; doing all 4 word-compares unconditionally measured ~+8 cyc/canon.
     if a[0] != b[0] {
         return a[0] < b[0];
     }
