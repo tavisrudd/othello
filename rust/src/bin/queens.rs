@@ -170,6 +170,13 @@ enum Cmd {
         /// `tiny_comp_key` shortcut (#18) targets. Implies `--exact`; sequential.
         #[arg(long)]
         comps: bool,
+        /// Measure the **#9 free-involution P-certificate fire-rate**: the fraction of
+        /// distinct loss positions that are 180°-symmetric and off both centre
+        /// diagonals (so the mover provably loses with no search). Decides whether
+        /// wiring the certificate into the search is worth its per-node cost. Implies
+        /// `--exact`; sequential.
+        #[arg(long)]
+        psym: bool,
         /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
         #[arg(long = "hll-p", default_value_t = 16, value_parser = clap::value_parser!(u32).range(4..=18))]
         hll_p: u32,
@@ -236,13 +243,15 @@ fn main() {
             exact,
             iso,
             comps,
+            psym,
             hll_p,
         } => count_mode(
             &Queens::new(n),
-            parallel && !iso && !comps,
-            exact || iso || comps,
+            parallel && !iso && !comps && !psym,
+            exact || iso || comps || psym,
             iso,
             comps,
+            psym,
             hll_p,
         ),
         Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
@@ -767,7 +776,9 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
                 "symmetry" => Box::new(Tt::from_tt(tt, true)),
                 "memo" => Box::new(Tt::from_tt(tt, false)),
                 other => {
-                    eprintln!("resume needs a table-backed solver (parallel/symmetry/memo); got {other}.");
+                    eprintln!(
+                        "resume needs a table-backed solver (parallel/symmetry/memo); got {other}."
+                    );
                     std::process::exit(1);
                 }
             }
@@ -777,7 +788,9 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
             (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
             (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
             (true, other) => {
-                eprintln!("--distinct estimates need memo/symmetry/parallel; ignoring for {other}.");
+                eprintln!(
+                    "--distinct estimates need memo/symmetry/parallel; ignoring for {other}."
+                );
                 make_solver(other, bits).unwrap()
             }
             (false, name) => make_solver(name, bits).unwrap(),
@@ -913,7 +926,15 @@ fn nimber_mode(q: &Queens) {
 /// working set -- by folding every position the search looks up into a
 /// HyperLogLog (and, with `--exact`, a hash set). The counts for n=10/12/14 fit a
 /// growth curve that extrapolates n=16's memory needs (the open frontier).
-fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, comps: bool, hll_p: u32) {
+fn count_mode(
+    q: &Queens,
+    parallel: bool,
+    exact: bool,
+    iso: bool,
+    comps: bool,
+    psym: bool,
+    hll_p: u32,
+) {
     if parallel && exact {
         eprintln!(
             "--exact keeps a single shared hash set, which would serialise every \
@@ -983,6 +1004,57 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, comps: bool, h
     if comps {
         comps_report(q, solver.as_ref());
     }
+    if psym {
+        psym_report(q, solver.as_ref());
+    }
+}
+
+/// `count --psym`: the **#9 free-involution P-certificate fire-rate**. Over the exact
+/// working set, count the loss positions that the certificate
+/// ([`Queens::is_free_involution_loss`]) proves with no search -- the fraction of
+/// prove-a-loss work it could prune -- plus a soundness check that it never fires on a
+/// win position. The certificate is checked on the canonical key (it is D4-invariant).
+fn psym_report(q: &Queens, solver: &dyn Solver) {
+    let Some(ws) = solver.working_set() else {
+        eprintln!("  (psym: no exact working set captured — needs the sequential exact solver)");
+        return;
+    };
+    let (mut loss, mut win, mut fire_loss, mut fire_win) = (0u64, 0u64, 0u64, 0u64);
+    for &(key, val) in &ws {
+        let fires = q.is_free_involution_loss(key);
+        if val == 0 {
+            loss += 1;
+            fire_loss += fires as u64;
+        } else {
+            win += 1;
+            fire_win += fires as u64;
+        }
+    }
+    let total = (loss + win).max(1);
+    println!(
+        "  #9 free-involution P-certificate over {} D4-distinct positions:",
+        commas(loss + win),
+    );
+    println!(
+        "    loss positions:               {:>15}  ({:5.1}% of all)",
+        commas(loss),
+        loss as f64 / total as f64 * 100.0,
+    );
+    println!(
+        "    fires (prunable loss):        {:>15}  ({:5.1}% of loss, {:5.1}% of all)",
+        commas(fire_loss),
+        fire_loss as f64 / loss.max(1) as f64 * 100.0,
+        fire_loss as f64 / total as f64 * 100.0,
+    );
+    println!(
+        "    fires on a WIN (must be 0):   {:>15}  {}",
+        commas(fire_win),
+        if fire_win == 0 {
+            "✓ sound"
+        } else {
+            "✗ UNSOUND — certificate fired on a win position!"
+        },
+    );
 }
 
 /// `count --comps`: the connected-component-size distribution of the available-graphs

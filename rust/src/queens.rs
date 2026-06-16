@@ -603,6 +603,34 @@ impl Queens {
         self.sym[2][sq as usize]
     }
 
+    /// **#9 free-involution loss certificate.** True if `available` (a canonical
+    /// available-mask, as stored in the TT) proves the mover *loses* with no search:
+    /// it is **180°-symmetric** (`available == rot180(available)`) **and** no set
+    /// square lies on a centre diagonal (`r == c` or `r + c == n-1`). Then the
+    /// responder mirrors every move by 180° rotation: a square attacks its own 180°
+    /// image *only* when it is on a centre diagonal (shares the row/col only through
+    /// the centre, which exists for odd n alone; shares a diagonal exactly on
+    /// `r==c`/`r+c==n-1`), so off-diagonal the mirror stays available and the pairing
+    /// strategy carries to the end ⇒ second player (responder) wins. Both conditions
+    /// are invariant under the 8 board symmetries (rot180 is central in D4; the
+    /// symmetries permute the two centre diagonals among themselves), so the test is
+    /// exact on the *canonical* key. (Measurement: `count --psym`; lever #9.)
+    pub fn is_free_involution_loss(&self, available: Bits) -> bool {
+        // 180°-symmetric under sym[2].
+        let mut rot = Bits::ZERO;
+        available.each(|s| rot.set(self.sym[2][s as usize]));
+        if rot != available {
+            return false;
+        }
+        // No set square on either centre diagonal.
+        let mut on_diag = false;
+        available.each(|s| {
+            let (r, c) = (s / self.n, s % self.n);
+            on_diag |= r == c || r + c == self.n - 1;
+        });
+        !on_diag
+    }
+
     /// The first available square in forcing order (for the losing side, or to
     /// drive the symmetry line).
     #[inline]
@@ -2738,6 +2766,44 @@ mod tests {
         reject(
             QueensTt::load_image(&mut [0u8; TT_HEADER_LEN].as_slice(), q.n as u8),
             "bad magic",
+        );
+    }
+
+    /// The #9 free-involution loss certificate fires exactly on 180°-symmetric,
+    /// off-centre-diagonal masks, and (cross-checked at scale by `count --psym`,
+    /// which finds zero false fires) only on genuine losses.
+    #[test]
+    fn free_involution_certificate_conditions() {
+        let q = Queens::new(4);
+        let m = |squares: &[(u32, u32)]| {
+            let mut b = Bits::ZERO;
+            for &(r, c) in squares {
+                b.set(q.square(r, c));
+            }
+            b
+        };
+        // 180°-symmetric (each square's rot180 partner present) and off both centre
+        // diagonals (r≠c and r+c≠3) ⇒ fires.
+        assert!(
+            q.is_free_involution_loss(m(&[(0, 1), (3, 2)])),
+            "symmetric + off-diagonal must fire"
+        );
+        // Symmetric but on the main diagonal (0,0)↔(3,3) ⇒ a square attacks its own
+        // image, mirror strategy breaks ⇒ must NOT fire.
+        assert!(
+            !q.is_free_involution_loss(m(&[(0, 0), (3, 3)])),
+            "on-diagonal must not fire"
+        );
+        // Not 180°-symmetric ⇒ must not fire.
+        assert!(
+            !q.is_free_involution_loss(m(&[(0, 1)])),
+            "asymmetric must not fire"
+        );
+        // The empty board is symmetric but every diagonal square is present ⇒ off by
+        // the diagonal condition (the certificate must not call the start a loss).
+        assert!(
+            !q.is_free_involution_loss(q.board),
+            "full board must not fire"
         );
     }
 
