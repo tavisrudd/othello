@@ -4,6 +4,20 @@ Two crates share the repo: the Python `othello` package (root) and the Rust port
 Queens solver (`rust/`). Active work is in `rust/`; the live umbrella is the Queens
 n=16 roadmap in `notes/handoffs/`.
 
+## Current WIP
+**DO NOT add details/history here. Pointers only** (details live in the handoff/proposal).
+
+**Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
+n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
+
+**Next, in order:**
+1. [#21 PV no-grind](notes/handoffs/2026-06-15-queens-memory-roadmap.md) (backlog #21) — print the verdict before the PV + parity-aware `principal_variation`; kills the single-core post-solve PV grind.
+2. [TT dump/load](notes/proposal-2026-06-15-queens-tt-dump-reload.md) — raw-image MVP; 5-min checkpoint + compress + final save; deltas later. Gives checkpoint/resume + a reproducible n=16 benchmark fixture. Queue pointer: [tt-dump-load](notes/handoffs/2026-06-15-tt-dump-load.md).
+
+**Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main.
+
+**`go`** (or `@notes/handoffs/<name>.md go`) at session start = read that handoff and resume from its Progress / next steps.
+
 ## Build / test / validate
 
 - Build/test through the **Makefile in `rust/`**: `make release` / `make test` /
