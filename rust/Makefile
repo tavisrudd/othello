@@ -17,7 +17,7 @@ PROFDATA := $(PROFRAW)/merged.profdata
 LLVM_PROFDATA ?= $(shell ls $$(rustc --print sysroot)/lib/rustlib/*/bin/llvm-profdata 2>/dev/null | head -1)
 
 .PHONY: all fmt fmt-check clippy build test release bench bench-parallel bench-simd \
-        match match-deeper match-plus calibrate-mpc profile \
+        match match-deeper match-plus calibrate-mpc profile install-hooks \
         pgo-check pgo-queens pgo-othello pgo-release clean
 
 all: release
@@ -27,6 +27,12 @@ fmt:
 
 fmt-check:
 	cargo fmt --check
+
+# Install the repo pre-commit hook (auto-fmt staged Rust + clippy gate). Run once
+# per clone; the hook lives at <repo>/.githooks/pre-commit (version-controlled).
+install-hooks:
+	git -C .. config core.hooksPath .githooks
+	@echo "pre-commit hook installed (core.hooksPath -> .githooks)"
 
 clippy:
 	cargo clippy --all-targets -- -D warnings

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Auto-format staged Rust files and gate on clippy so the rust/ crate stays
+# fmt-clean and clippy-green without a manual `make fmt`. Mirrors the
+# ~/src/sessions setup (.githooks + `make install-hooks`), but AUTO-APPLIES
+# rustfmt instead of rejecting an unformatted commit.
+#
+# Scope: fires only when a commit touches rust/*.rs (doc/Python-only commits skip
+# it, fast path). Formats each STAGED .rs file individually -- not the whole crate
+# -- so a parallel session's unstaged edits are never reformatted out from under
+# it. Caveat: re-staging a formatted file stages it in full, so a *partial* commit
+# of a file that also has unstaged hunks will pull those hunks in. This repo
+# commits whole files, so that is a non-issue here.
+set -euo pipefail
+
+root=$(git rev-parse --show-toplevel)
+staged=$(git diff --cached --name-only --diff-filter=ACMR -- rust/ | grep '\.rs$' || true)
+[ -z "$staged" ] && exit 0
+
+# Auto-apply: rustfmt each staged file in place (edition matches Cargo.toml), then
+# re-stage it so the commit carries the formatted version.
+while IFS= read -r f; do
+    rustfmt --edition 2021 "$root/$f"
+    git -C "$root" add -- "$f"
+done <<< "$staged"
+
+# Gate: clippy must be clean (warnings are errors, per `make clippy`).
+if ! clippy_out=$(make -C "$root/rust" clippy 2>&1); then
+    echo "pre-commit: clippy failed:" >&2
+    printf '%s\n' "$clippy_out" | tail -40 >&2
+    echo "pre-commit: fix the warnings (see 'make -C rust clippy') and retry." >&2
+    exit 1
+fi
