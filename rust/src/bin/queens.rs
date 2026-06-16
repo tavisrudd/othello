@@ -893,15 +893,44 @@ impl CpOpts {
     /// checkpointing. The automatic cadence ([`Checkpoint::every`]) is separately opt-in
     /// via `--checkpoint-every`; without it, saves are on-demand (S / SIGUSR2) + on exit.
     fn resolve(&self, n: u32) -> Option<Checkpoint> {
-        let checkpoint = self.checkpoint.as_ref()?;
-        let path = Some(checkpoint.clone())
+        // Enable snapshotting when --checkpoint is given OR when we --resume even without
+        // it (so a resumed long run can still snapshot on demand with S / SIGUSR2).
+        if self.checkpoint.is_none() && self.resume.is_none() {
+            return None;
+        }
+        let mut path = self
+            .checkpoint
+            .clone()
             .filter(|p| !p.as_os_str().is_empty())
             .unwrap_or_else(|| Self::default_path(n));
+        // Never clobber the image we resumed from: if the snapshot path resolves to it,
+        // redirect to a distinct sibling (`<path>.snapshot`) and say so.
+        if let Some(resume) = &self.resume {
+            if same_file(&path, resume) {
+                let redirected = PathBuf::from(format!("{}.snapshot", path.display()));
+                eprintln!(
+                    "\x1b[90m(snapshot path {} is the resumed image; writing to {} instead)\x1b[0m",
+                    path.display(),
+                    redirected.display(),
+                );
+                path = redirected;
+            }
+        }
         Some(Checkpoint {
             path,
             every: self.every,
             n,
         })
+    }
+}
+
+/// Whether two paths name the same file. Canonicalises both (the resume image exists;
+/// a not-yet-created snapshot path canonicalises to `None`), falling back to a lexical
+/// compare so a non-existent target is only "same" if it is literally the same path.
+fn same_file(a: &Path, b: &Path) -> bool {
+    match (std::fs::canonicalize(a).ok(), std::fs::canonicalize(b).ok()) {
+        (Some(x), Some(y)) => x == y,
+        _ => a == b,
     }
 }
 
