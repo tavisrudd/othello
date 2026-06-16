@@ -316,7 +316,7 @@ are cross-referenced, not repeated.
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
 | 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
-| 7 | **Graph-isomorphism canon** ⭐⭐ | B/C | **MEASURED + VALIDATED (session 6) — a WIN, the lever to pursue.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` with a true IR canonical form (`iso_key_canon`, 0 mixed = provably safe): merge **grows with n** — **2.63 / 3.17 / 3.42×** at n=8/10/12, win/loss-consistent (a usable safe key). Extrapolates ~3.7× at n=16 → ~9.2B → ~2.5B distinct ≈ ~20 GB, **possibly RAM-fittable**. The cheap IR invariant agrees exactly with the canon here. (The earlier "[1.30×,3.39×]" bracket was a TT-eviction artifact in the value lookup, fixed by recording values at `put`.) **Next: integration spike** — make it the TT key, bench per-node µs cost vs the ~3.4× node-count cut. |
+| 7 | **Graph-isomorphism canon** ⭐⭐ | B/C | **MEASURED + VALIDATED (session 6) — a WIN, the lever to pursue.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` with a true IR canonical form (`iso_key_canon`, 0 mixed = provably safe): **2.63 / 3.17 / 3.42 / 3.40×** at n=8/10/12/14, win/loss-consistent (a usable safe key). Rises then **plateaus ~3.4×** → n=16 ≈ 3.4×, ~9.2B → ~2.7B distinct ≈ ~21 GB raw (borderline RAM, multiplies Chunk 4 down ~3.4×). The cheap IR invariant agrees exactly with the canon at every n. (The earlier "[1.30×,3.39×]" bracket was a TT-eviction artifact in the value lookup, fixed by recording values at `put`.) **Next: integration spike** — make it the TT key, bench per-node µs cost vs the ~3.4× node-count cut. |
 | 8 | Decomposition + small-component nimber DB | B/C | residual graphs *fragment* in the endgame (where the no-cutoff `mex` blowup doesn't apply); value = XOR of small-component nimbers. Prunes subtrees AND stores tiny components instead of full positions. Softens key-fact "doesn't decompose" (true for the *full* board, not deep leaves). |
 | 9 | Free-involution → instant P-verdict | B | **novel.** Generalise the odd-n centre+180° pairing: at any node, if the residual available-graph admits a fixed-point-free edge-respecting involution, it's a second-player win — return P, no search. P-certificates can sit deep, not just at the root. |
 | 4 | Cache-line bucketing (8 slots/64 B line) | A | probe a line before evicting; one miss serves 8 candidates + a better replacement policy. Composes on the flat lockless arena. |
@@ -421,13 +421,17 @@ key, impossible). Validated result:
 |  8 |         625 | **2.63×** |
 | 10 |      94,094 | **3.17×** |
 | 12 |   1,060,817 | **3.42×** |
+| 14 |  49,671,327 | **3.40×** |
 
-The merge is **large, win/loss-consistent (a usable safe key), and *grows* with n** —
-the opposite of move ordering's decay. The complete canon and the cheap IR invariant
-**agree exactly** (n=12: both 309,860 distinct, 0 mixed), so the IR invariant suffices on
-this family (canon stays the provably-safe fallback). Extrapolating 2.63→3.17→3.42×: n=16
-≈ **3.7×**, i.e. ~9.2B → ~2.5B distinct ≈ **~20 GB at the 8-byte slot — potentially RAM-
-fittable on the 26 GB box, which would sidestep the Chunk-4 archive entirely.**
+The merge is **large, win/loss-consistent (a usable safe key)**, and the complete canon
+and the cheap IR invariant **agree exactly at every n** (n=14: both 14,630,229 distinct,
+0 mixed) — so the IR invariant suffices on this family (canon is the provably-safe
+fallback). The factor **rises then plateaus at ~3.4×** (2.63→3.17→3.42→3.40), so take n=16
+≈ **3.4×**, not higher: ~9.2B → **~2.7B distinct ≈ ~21–22 GB raw at the 8-byte slot**. That
+is borderline for the 26 GB box — it does *not* leave load-factor headroom for low
+re-expansion, so it likely doesn't make n=16 a clean in-RAM solve on its own, but it
+**multiplies the Chunk-4 archive down ~3.4×** and brings RAM-fit within reach (pair with
+`fastrange` Chunk 2b + some eviction tolerance). Still the strongest working-set lever found.
 
 *Correction of the first cut:* an earlier pass reported a wide bracket "[1.30×, 3.39×]"
 and "1-WL too weak, ~half the keys win/loss-mixed". That mixing was a **measurement bug**,
