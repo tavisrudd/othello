@@ -237,6 +237,14 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
 - After each chunk: update Progress, add a Handoff Note (with session ID), keep
   `make test`/`clippy` green, commit (simple message, no co-author).
 - Any key/TT change MUST preserve `solver_lineage_agrees` (n≤9 verdicts).
+- **Ask before any revert.** Never undo work (revert an experiment, drop a change,
+  back out a file) without asking the user first — they may want to read it, keep the
+  tooling, or decide differently. Surface the measurement and the recommendation, then
+  wait for the go-ahead.
+- **Report results as simple win / loss summaries.** Lead with the verdict — did the
+  lever win or lose, and by how much — in one or two lines, before any mechanism or
+  detail. (e.g. "history ordering: LOSS, +130% working set at n=14"; "graph-iso:
+  WIN-but-unsized, 3.4× at n=12 capped to [1.3×, 3.4×] safe").
 
 ## Progress
 
