@@ -12,7 +12,7 @@ n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Next, decide with the user (not autonomous):**
 1. **Chunk 4 (BuRR archive)** — the load-bearing single-box lever: a static ribbon-retrieval layer that holds the solved set with no eviction (kills the 1.36× re-exp) and applies the 3.4× freeze-time graph-iso merge. Core landed (`rust/src/burr.rs` + `queens freeze`/`verify`); the live cascade vs ply-window integration is the open design choice → discuss scope. More/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), and a cheaper-than-graph-iso merge are the other rungs of the <30 min lever stack (roadmap).
-3. **dump/load Phase 2 (B2 full-key export)** — the Chunk-4 freeze primitive + distributed delta. Note: full-n16 *resume* is RAM-bound on this box (swaps); partial-fill resumes are fine.
+3. **dump/load Phase 2 (B2 full-key export)** — the Chunk-4 freeze primitive + distributed delta. Note: full-n16 *resume* loads the 17 GB TT past physical RAM into zram (this box's "swap" is `/dev/zram0`, compressed RAM, NOT disk), and random TT access pays a per-access decompress → crawls; partial-fill resumes are fine. (The 6.7 GB BuRR archive fits physical RAM, so its query path doesn't.)
 2. **#20 tuning** — it's a measured wash so far (`54b3ccd`). Mechanism + `QUEENS_PAR_MIN_AVAIL` knob harmless if kept (gated n≥15). Worth doing a sweep
 
 **Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main. Might be able to improve and fix.

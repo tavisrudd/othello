@@ -531,20 +531,28 @@ the <30 min single-box route; the cascade-without-windowing is correct but ~slot
 2. **Decide the live integration (architecture — discuss scope):** (a) LSM cascade tier (pay the
    fingerprint, ~slot-sized but eviction-free), vs (b) **L2 ply-windowed** solve that freezes each
    solved ply value-only (~1.1 bits, the real density win). (b) is more build but is the lever.
-3. n=16 sharded freeze validated this session (see below) — the bounded-RAM build path works.
+3. n=16 sharded freeze validated this session (see below) — the bounded-RAM build path works,
+   build **and** verify exact at full scale.
 
-**n=16 sharded freeze — the bounded-RAM build path WORKS (real 16 GB dump).** Froze the
-complete session-8 `queens-tt-n16-final.zst` (2³¹-slot table, **2,085,263,124 solved positions**)
-into a **6.72 GB archive at 25.79 bits/key** (fp_bits=24, load 0.97, 16 shards, ~10.5 min). **This
-is the memory win Chunk 4 promised: the entire n=16 solved set in 6.7 GB, eviction-free** — vs the
-17 GB live TT that held only ~28% of it (LF 3.5, evicting → the 1.36× re-exp). At D4 keys; the
-3.4× iso freeze key would take it to ~2 GB. At TT-grade safety (fp_bits=55) it's ~50 bits/key ≈
-13 GB — still under the 17 GB live TT *and* eviction-free. **Build caveat:** accumulating the
-6.7 GB archive in RAM **plus** per-shard GE scratch overflowed the 26 GB box at shards=16 (~9.4 GB
-swap, slowing the build). Fix for a clean full freeze: **stream each shard to disk as it's built**
-(don't hold the whole archive in RAM) and/or use more shards (smaller scratch). The verify phase
-(re-stream + 2.085B `get`s) is RAM-bound the same way — partial-fill or the streaming-write build
-is the robust path, consistent with session-8's full-n16-resume RAM finding.
+**n=16 sharded freeze + verify — EXACT at full scale (real 16 GB dump).** Froze the complete
+session-8 `queens-tt-n16-final.zst` (2³¹-slot table, **2,085,263,124 solved positions**) into a
+**6.72 GB archive at 25.79 bits/key** (fp_bits=24, load 0.97, 16 shards, ~10.5 min), then verified:
+**all 2.085B keys round-trip EXACT (0 wrong, 0 missing); FP rate 2.0e-7 (4/20M probes, ≈ 3 layers ×
+2⁻²⁴), ~12 min.** Exact at this scale means the 64-bit archive-key holds 2B keys without a damaging
+birthday collision (expected ~0.12; saw 0). **This is the memory win Chunk 4 promised: the entire
+n=16 solved set in 6.7 GB, eviction-free** — vs the 17 GB live TT that held only ~28% of it (LF 3.5,
+evicting → the 1.36× re-exp). At D4 keys; the 3.4× iso freeze key would take it to ~2 GB. At
+TT-grade safety (fp_bits=55) it's ~50 bits/key ≈ 13 GB — still under the 17 GB live TT *and*
+eviction-free. **Build note (zram, NOT disk swap — this box's "swap" is `/dev/zram0`, zstd,
+compressing ~3.4×):** accumulating the 6.7 GB archive in RAM **plus** per-shard GE scratch exceeded
+26 GB physical at shards=16, so ~8 GB of data spilled into zram (≈2.4 GB compressed). That's a
+**compression-CPU** cost, not disk I/O — the build/verify ran fine (~10/12 min), never thrashed a
+disk. zram gives this box effective headroom past 26 GB physical for compressible working sets.
+Still, the clean full-freeze path is to **stream each shard to disk as it's built** (don't hold the
+whole archive resident) and/or use more shards (smaller GE scratch), keeping the build inside
+physical RAM. NB: random-access into a zram-resident structure (e.g. the session-8 n16 *resume*'s
+17 GB TT) pays a per-access decompress, which is why that resume crawled — the BuRR archive (6.7 GB)
+fits physical RAM, so its query path doesn't.
 
 ### Session 8 (2026-06-15) — #21 + dump/load + #20 landed; #9 & live-fast-key NEGATIVE; n=16 < 30 min push
 
