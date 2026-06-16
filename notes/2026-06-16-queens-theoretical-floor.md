@@ -202,6 +202,18 @@ The canon term is the whole game. Two designs:
 draft's b̄ ≈ 3 undercounted ~1.3×. The per-edge canon dominates, so the win-node cutoff savings and
 re-exp roughly offset within the band.)
 
+> **MEASURED (canon_bench Step 1, 2026-06-16) — supersedes the per-canon *estimate* above.** The
+> isolated kernel benchmark (`rust/src/bin/canon_bench.rs`, `perf stat -e cycles`) gives, on this
+> box: best **recompute** (A2: SWAR transpose + GFNI byte h-flips) = **94 cyc/canon**; the
+> **incremental** kernel (A3: carry the 8 orientations live, per-move and-not + scalar early-out
+> lex-min — what Step 3 builds) = **62 cyc/canon**, a perfect D4-invariant. So per-canon is **~62**,
+> not the ~49 estimated ⇒ **per-node ≈ b̄≈4 × 62 ≈ ~248 cyc ⇒ n=16 floor ≈ ~60 s central (~42× over
+> today's 2502 s).** The ~47 s / ~23 s ends would need a *vectorised lex-min without the lane-gather*
+> (keep the 8 images in `__m256i`, pairwise `vpcmpuq` tree) — the cheap knobs are **exhausted**
+> (branchless lex-compare +8 cyc, tree-reduction +4 cyc, AVX-gather min, GFNI full-transpose all
+> measured NEGATIVE — the lex-min resists optimisation). The incremental's **1.5× edge over recompute
+> is the real Step-3 lever**; details in the [inner-loop-rewrite handoff](handoffs/2026-06-16-queens-inner-loop-rewrite.md).
+
 ---
 
 ## 4. Verdict

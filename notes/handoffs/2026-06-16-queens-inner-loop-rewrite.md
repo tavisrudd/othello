@@ -126,11 +126,12 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
   change.
 
 ## Progress
-- [x] Step 1: canon kernel benchmark (`src/bin/canon_bench.rs`). **A0 (SWAR optimal-structure) =
-      111 cyc/canon, perfect D4-invariant, 5.3–5.7× over baseline (632)**; GFNI (A1) a measured
-      NEGATIVE (186 cyc — repack overhead). **GATE: PROCEED** (structural thesis confirmed) — but
-      recalibrated (recompute kernel ⇒ ~100 s node floor; the ~45 s central needs the incremental +
-      ILP + 256-bit vectorization the rewrite is designed around). See Step 1 Handoff Note.
+- [x] **Step 1 DONE — kernel characterized, incremental validated** (`src/bin/canon_bench.rs`).
+      Best recompute **A2 = 94 cyc/canon** (SWAR transpose + GFNI byte h-flips); **incremental
+      A3 = 62 cyc/canon** (DFS-faithful harness) — **the Step-3 kernel cost, 1.5× under recompute,
+      a perfect D4-invariant.** Full perf table + the knob negatives in the session-3b note. Floor
+      recalibrated: 62 × b̄≈4 ≈ **~60 s central** n=16, **~42×** over today's 42 min. **GATE: PROCEED
+      to Step 3.**
 - [x] Step 2: b̄ + proof-DAG-gap instrumentation (`count --branching`, `queens.rs`/`bin`).
       **b̄ ≈ 3.35 (n=12) → 3.92 (n=14) → ~4–4.5 (n=16)** — the floor's b̄≈3 was slightly low (×~1.3),
       no 5–8 tail. **mean win-node cutoff 2.57 → 2.82** (43% first-move) — real ordering waste, so
@@ -212,3 +213,61 @@ crate-wide `cargo fmt` noise on 3 production files (whitespace only) — **not**
 commit stages only the 2 new files); left unstaged for the user to keep-or-restore.
 **Next**: Step 3 — the DFS-resident incremental rewrite, behind the lineage + distinct gates, A/B'd
 on n=14 and tracked against `canon_bench` cyc/canon.
+
+### Step 1 COMPLETE — kernel fully characterized; incremental = 62 cyc (2026-06-16, session 2026-06-16--3)
+**Session:** 2026-06-16--3 (`d7f7d3d6-4aac-45ce-b684-6984e5ed6275`). Collaborative kernel push (Codex
+on the recompute kernel, this session on the incremental model + harness + knobs). **A3 incremental
+validated as the Step-3 kernel.**
+
+**Final perf cyc/canon** (build-subtracted, `taskset -c 0-3 perf stat -e cycles`, cap 120k × 4000):
+
+| kernel | cyc/canon | what it is |
+|--------|-----------|------------|
+| baseline | 574 | today's `Queens::canon` scalar per-bit scatter |
+| A1 | 179 | GFNI 16×16 transpose + AVX lane-gather min — worst kernel |
+| A0 | 125 | pure SWAR recompute |
+| A2 | 94 | hybrid recompute: SWAR transpose + GFNI byte h-flips (best recompute) |
+| **A3** | **62** | **incremental: carry 8 orientations, per-move and-not + scalar early-out min (the Step-3 cost)** |
+
+**Settled design** (what Step 3 builds): incremental orientations — carry the 8 dihedral images of
+`available` live down the DFS stack, per move `orient[t] &= !perm_t(attack[sq])` (8 and-not from a
+64 KB per-orientation `att` table), key = **scalar early-out `lex_min8`** + hash. No per-node image
+recompute. A3 is **1.5× under** the best recompute (A2 94) and a perfect D4-invariant (child-canon
+matches direct canon exactly).
+
+**Documented negatives (do NOT re-try):**
+- **GFNI full 16×16 transpose** — the `[u64;4]`↔8×8-block scalar repack dominates (A1 179 > A0 125).
+  GFNI is only a win for *in-byte* h-flips (A2 keeps SWAR transpose).
+- **AVX lane-gather min** (`lex_min8_avx`, `_mm512_set` of 8 scattered images) — the gather costs more
+  than the scalar branchy min; it's why A1 is slowest.
+- **Branchless `lex_lt`** — +8 cyc/canon (A0 125→134): the early-return wins (most image pairs differ
+  in word 0 → exit after one compare; the branchless form does all 4 unconditionally).
+- **Tree-reduction `lex_min8`** — +4 cyc (A2 94→108): 7 full 32-byte selects beat the serial fold's
+  rare-update copies; ILP doesn't pay. *The lex-min resists optimisation here.*
+- **att layout `[s*8+t]` contiguous** — neutral (noise).
+- Inline notes left on `lex_lt`/`lex_min8` so these aren't re-attempted.
+
+**Harness lesson (load-bearing):** the FIRST A3 reloaded the 8 orientations from a 4 MB array per
+iteration (an L2 stream the DFS never pays — it inherits them register/L1-resident) → A3 looked ≈
+recompute (~85 cyc). Cycling a **small L1-resident** orientation set across the full move stream (the
+recompute already excluded) revealed the true incremental cost = **62 cyc**. The harness *was* the
+finding; `canon_bench` modes: `perf:a0|a1|a2|a3`, divide by the printed `canons`.
+
+**Floor recalibration (measured, replaces the §3 estimate):** per-canon ≈ 62 (not the ~49 estimate)
+⇒ per-node ≈ b̄≈4 × 62 ≈ **~248 cyc/node** ⇒ n=16 floor ≈ **~60 s central** (~3.0×10¹⁰ cyc/s),
+**~42×** over today's 2502 s. The ~50 cyc/canon / ~45 s aggressive end needs a structural min change
+(vectorised lex-min *without* the lane-gather — keep the 8 images in `__m256i`, pairwise `vpcmpuq`
+tree); a real AVX-512 lift, deferred — the cheap knobs are exhausted.
+
+**Commits (this kernel push):** `a8dec96` (A2 + A3 + first findings), `7dc2e1e` (DFS-faithful harness
+— the 62 vs 95 flip), `1321657` (branchless-min + att-layout negatives), `0bfc6a7` (tree-min negative).
+Gates green throughout (`make clippy`; A0/A1/A2 perfect-invariant, A3 child-canon exact). Pre-commit
+hook installed this session (`.githooks/pre-commit`, `make install-hooks`): auto-fmt staged Rust +
+clippy gate.
+
+**NEXT SESSION = Step 3 (integration):** wire the incremental kernel into the real search — carry the
+8 orientations through the DFS recursion (not recompute per node), key each child via the 62-cyc
+A3 path. Behind `solver_lineage_agrees` + exact n=12/n=14 distinct-count gates; A/B on n=14 against
+the current `Parallel` solver; track wall-clock + cyc/node vs the ~60 s floor. The `att` table + the
+incremental update are prototyped in `canon_bench.rs` (a3_key / build_att) — port them into a new
+`Solver` impl, keep `Tt`/`Parallel` as the ground-truth cross-check.
