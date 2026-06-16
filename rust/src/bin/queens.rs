@@ -572,18 +572,22 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     // i.e. n ≥ 14) and when stderr is a real terminal (so piped output / tests
     // stay clean).
     let bar = show_bar(n);
-    let (first_wins, pv) = run_watched(solver.as_ref(), n, bar, || {
-        (
-            solver.first_player_wins(q),
-            q.principal_variation(solver.as_ref()),
-        )
-    });
+    // Solve, then PRINT THE VERDICT IMMEDIATELY -- the optimal line below is a
+    // separate, cheaper step (parity-aware PV) and must not gate the result; the
+    // verdict is settled the moment `first_player_wins` returns (backlog #21).
+    let first_wins = run_watched(solver.as_ref(), n, bar, || solver.first_player_wins(q));
     let elapsed = t.elapsed().as_secs_f64();
     let winner = if first_wins { "first" } else { "second" };
     println!(
         "On the {n}×{n} board the {winner} player wins with perfect play.",
         n = q.n,
     );
+    // The optimal line. `principal_variation` is value-aware: a loss ply takes the
+    // first legal move with no search, only win plies search (warm TT + α-β cutoff),
+    // so this no longer re-searches every root subtree single-core.
+    let pv = run_watched(solver.as_ref(), n, bar, || {
+        q.principal_variation(solver.as_ref(), first_wins)
+    });
     let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
     println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
     // A dim, secondary line: search cost plus approach-specific stats (table

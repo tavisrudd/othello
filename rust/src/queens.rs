@@ -996,17 +996,51 @@ impl Queens {
         first.map(|sq| (sq, false)) // losing: any legal move
     }
 
-    /// An optimal line from the empty board. Odd boards take the O(1) centre +
-    /// mirror line; even boards are driven by `solver`'s winning moves.
-    pub fn principal_variation(&self, solver: &dyn Solver) -> Vec<u32> {
+    /// An optimal line from the empty board, given the known root verdict
+    /// `root_wins` (does the first player win?). Odd boards take the O(1) centre +
+    /// mirror line and ignore `root_wins`.
+    ///
+    /// For even boards the optimal line's value **strictly alternates** down the
+    /// plies: a *loss* node (player to move loses) has *every* child winning, so any
+    /// move is optimal and the child is a win; a *win* node has a move to a *losing*
+    /// child, and that child is a loss for the next mover. So we thread the value
+    /// from `root_wins` and **never search a loss ply** -- we take the first legal
+    /// move with no search -- while a win ply searches (`best_move`'s α-β cutoff over
+    /// the warm TT) for a move to a losing child. This avoids re-confirming the
+    /// verdict by re-searching every root subtree single-core (the post-solve PV
+    /// grind, backlog #21): for a second-player win the root is a loss, so the whole
+    /// 36-subtree root re-search is replaced by one `first_available`.
+    pub fn principal_variation(&self, solver: &dyn Solver, root_wins: bool) -> Vec<u32> {
         if self.is_odd() {
             return self.mirror_line();
         }
         let mut blocked = Bits::ZERO;
         let mut line = Vec::new();
-        while let Some((sq, _)) = self.best_move(blocked, solver) {
-            line.push(sq);
-            blocked = self.place(blocked, sq);
+        let mut node_wins = root_wins; // value for the player to move at this ply
+        loop {
+            let next = if node_wins {
+                // Win node: a move to a losing child exists. `best_move` returns it
+                // first, stopping at the first child the cutoff proves a loss.
+                match self.best_move(blocked, solver) {
+                    Some((sq, won)) => {
+                        debug_assert!(won, "win-node PV ply must have a winning move");
+                        Some(sq)
+                    }
+                    None => None,
+                }
+            } else {
+                // Loss node: every move loses, so the first legal one is optimal --
+                // no search. (Exactly the square a loss `best_move` would return.)
+                self.first_available(blocked)
+            };
+            match next {
+                Some(sq) => {
+                    line.push(sq);
+                    blocked = self.place(blocked, sq);
+                    node_wins = !node_wins; // value strictly alternates down the line
+                }
+                None => break,
+            }
         }
         line
     }
@@ -2293,7 +2327,7 @@ mod tests {
             let s = Parallel::new(14);
             assert!(s.first_player_wins(&q), "n={n}: first player should win");
             assert_eq!(
-                q.principal_variation(&s).len(),
+                q.principal_variation(&s, true).len(),
                 1,
                 "n={n}: one placement clears it"
             );
@@ -2362,7 +2396,7 @@ mod tests {
             let q = Queens::new(n);
             let s = Parallel::new(14);
             assert!(s.first_player_wins(&q), "n={n}: odd ⇒ first wins");
-            let pv = q.principal_variation(&s); // mirror_line
+            let pv = q.principal_variation(&s, true); // mirror_line (root_wins ignored when odd)
             assert_eq!(pv.len() % 2, 1, "n={n}: first player makes the last move");
             let mut blocked = Bits::ZERO;
             for &sq in &pv {
@@ -2392,7 +2426,7 @@ mod tests {
             let q = Queens::new(n);
             let s = Tt::new(16, true);
             let first_wins = s.first_player_wins(&q);
-            let pv = q.principal_variation(&s);
+            let pv = q.principal_variation(&s, first_wins);
             assert_eq!(
                 first_wins,
                 pv.len() % 2 == 1,
