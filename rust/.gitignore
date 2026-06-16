@@ -1,1 +1,6 @@
 /target
+
+# Queens TT checkpoint images (dump/load) — large, generated; never commit.
+*.zst
+*.zst.tmp
+*.zst.prev
