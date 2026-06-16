@@ -390,7 +390,22 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       kept it freeze-time-only based on n≤14, but n=16 is the regime where it might win live);
       (b) measure #9 free-involution P-certificate fire-rate (cheap counter first); (c) #20 tail
       validation; (d) definitive full n=16 run with the best config. Gate any n<16 regression;
-      branch anything that can't be saved on main.
+      branch anything that can't be saved on main. **(a) done — fast NEGATIVE; (b) done — #9
+      NEGATIVE; (c)+(d) the full run is in flight.**
+- [ ] **TOP POST-RUN EXPERIMENT — selective graph key (`QUEENS_KEY=fast QUEENS_KEY_MAX=k`).**
+      Full fast key lost (4.33× slower/node vs 3.4× fewer nodes). But the *small*-available
+      graphs are cheap to key (k≤4 is the #18 degree-seq constant; small CSR+WL otherwise) and
+      that's where the deep-endgame iso-merges concentrate. So selective keying (graph key only
+      when available ≤ k, D4 above) may capture **most of the 3.4× merge at a fraction of fast's
+      per-node cost** → a possible net n=16 node-count win. `QUEENS_KEY_MAX` already exists
+      (resolved once). Sweep k∈{6,8,10,12} on n=14 (node count vs wall) then partial n=16; if a
+      k wins n=16, gate it (n≥15) and re-run the full n=16. Bench off the **partial** n=16
+      fixture (grab one via SIGUSR2 mid-run), not a cold start. **CAVEAT (must fix first for
+      n=16):** `graph_bits` tags graph keys with sentinel bit 255, but n=16 has 256 squares
+      (indices 0..255) so bit 255 is a *real* square — selective mixing of graph+D4 keys would
+      collide at n=16. Pure fast (all-graph) is unaffected; selective needs a wider tag (e.g.
+      tag in an unused high word, or never mix — use the graph key for *all* nodes but compute
+      it cheaply only for small available) before it's sound at n=16.
 - [ ] Final: `make test` + `make clippy` green (still required for any new code).
 
 ## Lever backlog (sessions 4–5 reviews, prioritised)
