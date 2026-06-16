@@ -6,6 +6,7 @@
 //! --help`) for the modes; squares are named file+rank, e.g. `d1` (file A..
 //! left→right, rank 1..n bottom→top). Boards up to 16×16.
 
+use std::collections::HashMap;
 use std::io::{self, IsTerminal, Write};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
@@ -139,6 +140,12 @@ enum Cmd {
         /// estimate (sequential solver only; memory grows with the count).
         #[arg(long)]
         exact: bool,
+        /// Measure the graph-isomorphism merge potential: how many fewer distinct
+        /// positions remain if the key canonicalises the *available-graph* up to
+        /// isomorphism (1-WL invariant) instead of just the 8 board symmetries, plus
+        /// whether that merge is win/loss-consistent. Implies `--exact`; sequential.
+        #[arg(long)]
+        iso: bool,
         /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
         #[arg(long = "hll-p", default_value_t = 16, value_parser = clap::value_parser!(u32).range(4..=18))]
         hll_p: u32,
@@ -185,8 +192,9 @@ fn main() {
             n,
             parallel,
             exact,
+            iso,
             hll_p,
-        } => count_mode(&Queens::new(n), parallel, exact, hll_p),
+        } => count_mode(&Queens::new(n), parallel && !iso, exact || iso, iso, hll_p),
         Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
     }
@@ -646,7 +654,7 @@ fn nimber_mode(q: &Queens) {
 /// working set -- by folding every position the search looks up into a
 /// HyperLogLog (and, with `--exact`, a hash set). The counts for n=10/12/14 fit a
 /// growth curve that extrapolates n=16's memory needs (the open frontier).
-fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
+fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, hll_p: u32) {
     if parallel && exact {
         eprintln!(
             "--exact keeps a single shared hash set, which would serialise every \
@@ -709,6 +717,82 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, hll_p: u32) {
     let distinct = rep.exact.map(|e| e as f64).unwrap_or(rep.estimate);
     println!("  {}", reexp_note(nodes as f64, distinct));
     println!("  elapsed: {elapsed:.3}s");
+
+    if iso {
+        iso_report(q, solver.as_ref());
+    }
+}
+
+/// `count --iso`: measure how much the distinct working set would shrink if the TT
+/// key canonicalised the **available-graph up to isomorphism** (1-WL invariant)
+/// rather than only the 8 board symmetries -- the lever-#7 question. Also checks
+/// whether that coarser merge is **win/loss-consistent** (no 1-WL class mixing a win
+/// with a loss); a mix means the WL invariant is unsafe as a key on its own and a
+/// true graph canonical form (nauty/bliss) would be required.
+fn iso_report(q: &Queens, solver: &dyn Solver) {
+    let Some(ws) = solver.working_set() else {
+        eprintln!("  (iso: no exact working set captured — needs the sequential exact solver)");
+        return;
+    };
+    // Group the D4-canonical working set by available-graph 1-WL invariant.
+    let mut by_iso: HashMap<u64, (u64, u8, bool)> = HashMap::new(); // iso → (count, first val, mixed?)
+    for &(key, val) in &ws {
+        let e = by_iso.entry(q.iso_key(key)).or_insert((0, val, false));
+        e.0 += 1;
+        e.2 |= e.1 != val; // a win and a loss in the same 1-WL class
+    }
+    let d4 = ws.len() as f64;
+    let iso = by_iso.len() as f64;
+    let mixed = by_iso.values().filter(|&&(_, _, m)| m).count();
+    let largest = by_iso.values().map(|&(c, ..)| c).max().unwrap_or(0);
+    // The unsafe mass: D4-keys trapped in value-mixed WL classes. The rest live in
+    // value-consistent classes -- safe to merge (a win/loss TT only needs same-key ⇒
+    // same-value). A true graph canon splits every mixed class (mixed ⇒ non-isomorphic
+    // ⇒ separable), so the *safe* working set is at most this conservative figure:
+    // value-consistent classes kept merged + every key in a mixed class un-merged.
+    let consistent = by_iso.values().filter(|&&(_, _, m)| !m).count() as u64;
+    let unsafe_keys: u64 = by_iso
+        .values()
+        .filter(|&&(_, _, m)| m)
+        .map(|&(c, ..)| c)
+        .sum();
+    // A true graph canon (complete iso) splits every mixed class into value-consistent
+    // iso-subclasses, so the achievable SAFE working set lies between two bounds:
+    //   floor (this is the most a canon can shrink): each mixed class collapses to its
+    //     2 values  → consistent + 2·mixed_classes;
+    //   ceiling (the least): a mixed class is all distinct iso-classes, no merge there
+    //     → consistent + unsafe_keys.
+    // The truth depends on how WL-conflated (vs genuinely non-isomorphic) the mixed
+    // classes are -- only a real canonical form resolves it.
+    let safe_floor = consistent + 2 * (mixed as u64);
+    let safe_ceiling = consistent + unsafe_keys;
+    println!(
+        "  graph-iso merge: {} D4-distinct → {} WL-distinct  ({:.2}× fewer, {:.1}% merged away)",
+        commas(d4 as u64),
+        commas(iso as u64),
+        d4 / iso,
+        (1.0 - iso / d4) * 100.0,
+    );
+    println!("  largest 1-WL class: {} D4-keys", commas(largest));
+    if mixed == 0 {
+        println!("  win/loss-consistent: yes — no 1-WL class mixes a win with a loss (1-WL is a safe key here)");
+    } else {
+        println!(
+            "  win/loss-consistent: NO — {} 1-WL classes ({} D4-keys, {:.1}%) mix win+loss \
+             (1-WL over-merges; these graphs are WL-hard)",
+            commas(mixed as u64),
+            commas(unsafe_keys),
+            unsafe_keys as f64 / d4 * 100.0,
+        );
+        println!(
+            "  achievable SAFE merge with a TRUE canon: between {:.2}× ({} distinct) and {:.2}× \
+             ({} distinct) — 1-WL alone can't size it; needs nauty/bliss or IR",
+            d4 / safe_ceiling as f64,
+            commas(safe_ceiling),
+            d4 / safe_floor as f64,
+            commas(safe_floor),
+        );
+    }
 }
 
 /// Warm the shared table with one parallel root solve so the per-move `best_move`

@@ -333,7 +333,7 @@ efficient, and the advantage *grows* with `n`:
 | 14 |          1,161,385,667 |       53,300,665 |         49,141,396 |           21.8× |
 | 16 |         71,461,975,237 |        *unsolved* |  ~9.2B (HLL est.) |             —   |
 
-Jenrich's n=14 took ~19 min on his hardware vs ~11 s here on 24 threads, but the honest,
+Jenrich's n=14 took ~19 min on his hardware vs ~11 s here on 24 threads, but the
 hardware-independent figure is the **~22× fewer search calls**. His n=16 leaned on a
 hand-built opening book for player 2's first two replies and still ran ~23 h — so he
 *reached* a board our table can't yet hold (above), while we hold the efficiency crown

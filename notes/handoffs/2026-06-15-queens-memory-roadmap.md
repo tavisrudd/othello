@@ -308,7 +308,7 @@ are cross-referenced, not repeated.
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
 | 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
-| 7 | Graph-automorphism canon (nauty/bliss) | B | research-grade — canonicalise the residual *available-graph*, not the static D4; merges more transpositions (likely how Max Fan got n=13). Pricier per node (µs), but cuts node count AND working set. |
+| 7 | **Graph-automorphism canon (nauty/bliss)** ⭐ | B/C | **MEASURED (session 6) — the most promising lever, but unsized.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` (1-WL proxy): merge **grows with n** (2.64→3.18→3.43× at n=8/10/12) — opposite of move ordering's decay. But 1-WL is value-*inconsistent* here (WL-hard graphs, ~half the keys in win/loss-mixed classes), so it can't be the key and can't size it: safe merge bracketed **[1.30×, 3.39×]** at n=12. **Next: a TRUE canon (nauty/bliss/IR)** to pin the bracket + measure per-node µs cost; the `--iso` harness is built to take it. A *multiplier* on Chunk 4, not a standalone n=16 fit. |
 | 8 | Decomposition + small-component nimber DB | B/C | residual graphs *fragment* in the endgame (where the no-cutoff `mex` blowup doesn't apply); value = XOR of small-component nimbers. Prunes subtrees AND stores tiny components instead of full positions. Softens key-fact "doesn't decompose" (true for the *full* board, not deep leaves). |
 | 9 | Free-involution → instant P-verdict | B | **novel.** Generalise the odd-n centre+180° pairing: at any node, if the residual available-graph admits a fixed-point-free edge-respecting involution, it's a second-player win — return P, no search. P-certificates can sit deep, not just at the root. |
 | 4 | Cache-line bucketing (8 slots/64 B line) | A | probe a line before evicting; one miss serves 8 candidates + a better replacement policy. Composes on the flat lockless arena. |
@@ -396,6 +396,38 @@ decomposition (#8), ply-windowing + external DDD (L2/#11), and the BuRR archive
 Othello "depth-indexed killers mis-order" result + this history blow-up make it a poor
 bet; the backlog row is marked accordingly.
 
+**Pivot → structural lever #7 (graph-automorphism canon): MEASURED, promising but
+unsized.** The game from a position is Node Kayles on its *available-graph* (vertices =
+available squares, edges = attacking pairs), so any two positions with **isomorphic**
+available-graphs have identical values and subtrees — `canon` only merges the 8 board
+symmetries, which is a strict subset of graph iso (esp. deep, where small residual
+graphs coincide up to iso without being board-symmetric). New `count --iso` tool: for
+each working-set key, compute a 1-WL (colour-refinement) invariant of its available-
+graph (`Queens::iso_key`), count distinct WL-classes vs distinct D4-keys, and check
+**win/loss-consistency** (does any WL-class mix a win and a loss). Measured:
+
+| n  | D4-distinct | 1-WL-distinct | WL merge | value-mixed keys | safe merge (true canon) |
+|----|------------:|--------------:|:--------:|:----------------:|:------------------------|
+|  8 |         625 |           237 |  2.64×   |        —         | —                       |
+| 10 |      94,094 |        29,614 |  3.18×   |  40,591 (43 %)   | [1.35× … ~3.1×]         |
+| 12 |   1,060,817 |       309,362 |  3.43×   | 511,802 (48 %)   | **[1.30× … 3.39×]**     |
+
+**Good news:** the merge potential is **large and *grows* with n** (2.64→3.18→3.43×) —
+the opposite of move ordering's decay, exactly the n=16-relevant shape. **Caveat:** 1-WL
+is **not** value-consistent — these available-graphs are *WL-hard* (high regularity), so
+1-WL over-merges, trapping ~half the keys in win/loss-mixed classes. So 1-WL can't be
+the key, and it can't even *size* the lever: the achievable SAFE merge (with a true
+canon, which splits mixed classes by structure) is only bracketed **[1.30×, 3.39×]** at
+n=12 — wide, because 1-WL can't tell how WL-conflated vs genuinely-non-isomorphic the
+mixed classes are. **Decisive next step:** a **true graph canonical form** (nauty/bliss
+crate — use the ecosystem; or hand-rolled individualisation-refinement) to (a) pin the
+safe merge inside that bracket and (b) measure per-node cost (~µs vs the current ~ns D4
+`canon`). The `count --iso` harness (working-set capture + value-consistency accounting)
+is built to drop a real canon straight in. **ROI gate:** graph-canon is a *multiplier*
+on the Chunk-4 archive (1.3–3.4× fewer stored positions), **not** a standalone n=16 fit,
+bought at a steep per-node cost — only worth building if the true merge lands high in the
+bracket *and* the canon is cheap enough. Tooling committed; the spike is the next call.
+
 **Parallel-over-serial inflation (answering "can we adjust the parallelism?").** With
 **static order the lockless solver already has ~0 % distinct inflation** over serial
 (serial 49.13M vs parallel ≈49.05M, within HLL noise) — the relaxed-atomic puts are
@@ -433,7 +465,7 @@ left untouched). Implements lead **L1** from the lit-search note below. Files:
   `alloc_zeroed`, so a 17 GB table doesn't commit until probed) then `MADV_HUGEPAGE`s
   it and reinterprets as `AtomicU64` (one small, documented `unsafe`).
 
-**Measurement (honest):** interleaved A/B vs the `6c32617` mutex build (n=14 parallel,
+**Measurement:** interleaved A/B vs the `6c32617` mutex build (n=14 parallel,
 thermal-controlled, in a throwaway worktree): lockless **~3–5 % wall**, winning 4/5
 rounds, gap growing under thermal load. Prefetch isolated with a temp `QUEENS_NO_PREFETCH`
 toggle (reverted before commit): **~2 %**, 4/4 rounds — *both arms paid the per-node

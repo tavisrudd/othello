@@ -85,6 +85,14 @@ impl Bits {
         Bits(r)
     }
     #[inline]
+    fn and(self, o: Bits) -> Bits {
+        let mut r = self.0;
+        for (rk, &ok) in r.iter_mut().zip(o.0.iter()) {
+            *rk &= ok;
+        }
+        Bits(r)
+    }
+    #[inline]
     fn popcount(self) -> u32 {
         self.0.iter().map(|w| w.count_ones()).sum()
     }
@@ -111,6 +119,25 @@ pub struct Queens {
     attack: Vec<Bits>,  // attack[s] = s plus its row/col/diagonals (self-blocking)
     order: Vec<u32>,    // squares by descending attack degree (forcing moves first)
     sym: Vec<Vec<u32>>, // sym[t][s] = image of square s under symmetry t (t=0 identity)
+}
+
+/// A bitset with exactly bit `i` set.
+#[inline]
+fn single(i: u32) -> Bits {
+    let mut b = Bits::ZERO;
+    b.set(i);
+    b
+}
+
+/// A 64-bit avalanche mix (the SplitMix64 finaliser) for the WL colour hashes in
+/// [`Queens::iso_key`]. Cold path (measurement only).
+#[inline]
+fn mix64(mut x: u64) -> u64 {
+    x ^= x >> 30;
+    x = x.wrapping_mul(0xBF58_476D_1CE4_E5B9);
+    x ^= x >> 27;
+    x = x.wrapping_mul(0x94D0_49BB_1331_11EB);
+    x ^ (x >> 31)
 }
 
 /// The 8 symmetries of the square applied to `(row, col)` on an `n×n` board.
@@ -265,6 +292,67 @@ impl Queens {
         self.canon(self.board.and_not(blocked))
     }
 
+    /// A Weisfeiler–Leman (1-WL / colour-refinement) **invariant** of the
+    /// *available-graph* of `mask`: vertices are the available squares, edges are
+    /// attacking pairs (the game from here is Node Kayles on this graph, so any two
+    /// positions with isomorphic available-graphs have identical game values and
+    /// subtrees). Isomorphic graphs share this value, so counting distinct `iso_key`s
+    /// over the working set MEASURES how many positions would merge under graph-
+    /// isomorphism canonicalisation -- beyond the 8 board symmetries [`canon`] folds
+    /// (the queen graph's automorphisms include D4 but small residual graphs often
+    /// coincide up to iso without being board-symmetric, e.g. k mutually-non-attacking
+    /// squares = k isolated vertices wherever they sit).
+    ///
+    /// It is an *invariant*, not a canonical form: non-isomorphic graphs can collide
+    /// (rare 1-WL failures), so it slightly under-counts iso classes. Measurement
+    /// tool only (`count --iso`) -- not a TT key unless shown value-consistent.
+    pub fn iso_key(&self, mask: Bits) -> u64 {
+        let mut verts: Vec<u32> = Vec::new();
+        mask.each(|s| verts.push(s));
+        if verts.is_empty() {
+            return 0;
+        }
+        // Colour each vertex; start from its available-graph degree, then refine by
+        // the sorted multiset of neighbour colours until the partition stabilises
+        // (≤ |V| rounds). Colours are 64-bit hashes (collision ≈ 0), so no re-ranking.
+        let nbrs: Vec<Bits> = verts
+            .iter()
+            .map(|&s| self.attack[s as usize].and(mask).and_not(single(s)))
+            .collect();
+        let mut colour = vec![0u64; (self.n * self.n) as usize];
+        for (&s, nb) in verts.iter().zip(&nbrs) {
+            colour[s as usize] = nb.popcount() as u64 | 0x9E37_79B9_0000_0000;
+        }
+        let mut prev_classes = 0usize;
+        for _ in 0..verts.len() {
+            let mut next = colour.clone();
+            for (&s, nb) in verts.iter().zip(&nbrs) {
+                let mut h = colour[s as usize].wrapping_mul(0x100_0000_01B3);
+                nb.each(|t| {
+                    // commutative fold so the neighbour order cannot matter
+                    h = h.wrapping_add(mix64(colour[t as usize]));
+                });
+                next[s as usize] = mix64(h);
+            }
+            colour = next;
+            let classes = {
+                let mut c: Vec<u64> = verts.iter().map(|&s| colour[s as usize]).collect();
+                c.sort_unstable();
+                c.dedup();
+                c.len()
+            };
+            if classes == prev_classes {
+                break; // partition stable -- further rounds cannot refine
+            }
+            prev_classes = classes;
+        }
+        let mut finals: Vec<u64> = verts.iter().map(|&s| colour[s as usize]).collect();
+        finals.sort_unstable();
+        finals.iter().fold(0x2545_F491_4F6C_DD1D, |h, &c| {
+            mix64(h ^ c).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
     /// The symmetry-distinct first moves from the empty board: one representative
     /// per orbit of the board's 8 symmetries. Cuts the root branching ~8×.
     pub fn distinct_first_moves(&self) -> Vec<u32> {
@@ -365,6 +453,12 @@ pub trait Solver: Sync {
     /// Distinct-position measurement, if this solver was built with counting
     /// enabled (see [`Tt::new_counting`]). `None` for an ordinary solve.
     fn report(&self) -> Option<CountReport> {
+        None
+    }
+
+    /// The exact working set (canonical key, win/loss value), for cold post-search
+    /// analysis (`count --iso`). `None` unless an exact distinct set was kept.
+    fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
         None
     }
 
@@ -503,6 +597,9 @@ impl Solver for Tt {
     fn report(&self) -> Option<CountReport> {
         self.tt.report()
     }
+    fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
+        self.tt.working_set()
+    }
     fn stats(&self) -> String {
         self.tt.summary()
     }
@@ -595,6 +692,9 @@ impl Solver for Parallel {
     }
     fn report(&self) -> Option<CountReport> {
         self.inner.report()
+    }
+    fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
+        self.inner.working_set()
     }
     fn root_progress(&self) -> Option<(u64, u64)> {
         let total = self.root_total.load(Ordering::Relaxed);
@@ -1171,6 +1271,27 @@ impl QueensTt {
             exact: c.exact.as_ref().map(|s| s.lock().unwrap().len() as u64),
             registers: c.hll.registers.len() as u64,
         })
+    }
+
+    /// The exact working set as (canonical key, win/loss value) pairs, if an exact
+    /// hash set was kept (`count --exact`). Cold post-search analysis only (the
+    /// `--iso` graph-isomorphism merge measurement); `peek` reads each key's value
+    /// without folding it back into the distinct-counter.
+    pub fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
+        let set = self.counter.as_ref()?.exact.as_ref()?.lock().unwrap();
+        Some(
+            set.iter()
+                .map(|&k| (k, self.peek(k).unwrap_or(0)))
+                .collect(),
+        )
+    }
+
+    /// The stored value for `key` without the distinct-counter side effect of `get`.
+    #[inline]
+    fn peek(&self, key: Bits) -> Option<u8> {
+        let (route, fp) = Self::hash128(key);
+        let s = Slot(self.slots[(route & self.index_mask) as usize].load(Ordering::Relaxed));
+        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
 
     /// Total slot capacity and its byte footprint, for reporting the cap.
