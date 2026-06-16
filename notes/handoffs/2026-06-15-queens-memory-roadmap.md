@@ -451,14 +451,17 @@ the fixed stride wastes adds on DUMMY slots, eating into the branch+hoist win.
   `vpmullq` via explicit intrinsics is unlikely to beat the cost model; not pursued. This is
   ~the SIMD ceiling for splitmix-style mixing on znver5. Bonus: the compact layout also
   simplified `classes_in`/`hash_colours_in` (no `verts` indirection).
-- **#19 — amortize `comp_canon` setup (per-thread component cache).** The graph key is
-  recomputed *every node* (before the TT probe), and `comp_canon` is a pure function of the
-  component's square-set. A small direct-mapped per-thread cache `component Bits → canon u64`
-  (fingerprint-guarded like the TT) would skip the whole setup+WL on a recurring component —
-  **potentially the bigger lever** (skips, not just speeds up) **if exact-square components
-  recur often**. Size it first: measure distinct component square-sets vs total instances
-  (extend `count --comps`); build only if recurrence is high. Note it amortizes *exact*-square
-  repeats, not iso-repeats (those already merge at the position key).
+- **#19 — DONE (per-thread component-canon cache), WIN +29% at n=16 — the session's
+  biggest lever.** The graph key is recomputed *every node* (before the TT probe), and
+  `comp_canon` is a pure function of `(component square-set, board geometry)`. A direct-mapped
+  per-thread cache `comp → canon` (2^20 slots × 16 B = 16 MB/thread, fingerprint-guarded like
+  the TT, `n` folded into the fingerprint so entries never cross `n`) skips the entire bit-scan
+  + CSR build + WL on a recurring component. Value-preserving (n=12 symmetry fast = 310,356
+  exactly, tests green). **+29% n=16** partial throughput (taskset, swapped: 68.4→88.2 K/s),
+  **+15% n=12** — *grows toward the target*. Confirms the instinct: **skipping work beats
+  speeding it up.** Caches only `k ≥ 5` (tiny is already a degree-seq constant). It amortizes
+  *exact*-square repeats; iso-repeats already merge at the position key. **Lesson: when
+  per-node micro-opts plateau (#17/#17b at 2-3%), step back to amortization — it was 10×.**
 
 **NOT done / next.** The graph-key per-node levers are now #17b (SIMD-batch `mix64`) and
 #19 (component-canon cache) above — both bounded / to-be-sized, and only worth it for a

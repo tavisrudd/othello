@@ -242,6 +242,51 @@ thread_local! {
         std::cell::RefCell::new(IsoScratch::new());
 }
 
+/// Log2 of the per-thread component-canon cache size (#19). 2^20 slots * 16 B = 16 MB
+/// per worker -- the same flat fingerprint-slot shape as the main TT.
+const COMP_CACHE_BITS: u32 = 20;
+
+/// Per-thread direct-mapped cache amortising [`Queens::comp_canon`] setup+WL (#19).
+/// `comp_canon` is a pure function of `(component square-set, board geometry)`, and the
+/// same component recurs across many nodes (the graph key is recomputed every node,
+/// before the TT probe), so caching its canon skips the whole bit-scan + CSR build + WL
+/// when a component repeats. Fingerprint-guarded like the TT: a slot collision with a
+/// different component is a fingerprint mismatch (recompute), a same-fingerprint hit on a
+/// different component is ~2^-64 (negligible; the search is already probabilistic at the
+/// 55-bit TT slot and cross-checked vs Jenrich). The fingerprint folds in the board side
+/// `n`, so entries never carry across different-`n` solves in one process.
+struct CompCache {
+    fp: Box<[u64]>,  // per-slot fingerprint (0 = empty)
+    val: Box<[u64]>, // per-slot cached canon
+}
+
+impl CompCache {
+    fn new() -> Self {
+        let n = 1usize << COMP_CACHE_BITS;
+        CompCache {
+            fp: vec![0u64; n].into_boxed_slice(),
+            val: vec![0u64; n].into_boxed_slice(),
+        }
+    }
+    /// Slot index and (nonzero) fingerprint for component `comp` on an `n`-board.
+    #[inline]
+    fn probe(comp: Bits, n: u32) -> (usize, u64) {
+        let w = comp.0;
+        let mut h = 0x9E37_79B9_7F4A_7C15u64 ^ n as u64;
+        h = mix64(h ^ w[0]);
+        h = mix64(h ^ w[1]);
+        h = mix64(h ^ w[2]);
+        h = mix64(h ^ w[3]);
+        let slot = (mix64(h) >> (64 - COMP_CACHE_BITS)) as usize;
+        (slot, h | 1) // fingerprint forced nonzero so 0 stays the empty marker
+    }
+}
+
+thread_local! {
+    static COMP_CACHE: std::cell::RefCell<CompCache> =
+        std::cell::RefCell::new(CompCache::new());
+}
+
 /// 1-WL refine `col` (square-indexed) to stability over the `k` component vertices.
 /// `nbr_pad` is the fixed-stride neighbour table: row `i` holds vertex `i`'s neighbour
 /// squares in `nbr_pad[i*stride .. i*stride+deg]`, the rest padded with [`DUMMY_VERT`].
@@ -768,7 +813,24 @@ impl Queens {
         if k <= TINY_MAX {
             return tiny_comp_key(&self.attack, comp, k, &s.verts);
         }
-        self.comp_canon_full(comp, k, s)
+        // #19: amortise the full canon (a pure function of `comp`) across recurring
+        // components via the per-thread cache. Probe; on a fingerprint hit return it,
+        // else compute and store. The borrow is dropped around `comp_canon_full` so the
+        // (recursive-free) compute never holds the cache lock.
+        let (slot, fp) = CompCache::probe(comp, self.n);
+        if let Some(v) = COMP_CACHE.with(|c| {
+            let c = c.borrow();
+            (c.fp[slot] == fp).then(|| c.val[slot])
+        }) {
+            return v;
+        }
+        let v = self.comp_canon_full(comp, k, s);
+        COMP_CACHE.with(|c| {
+            let mut c = c.borrow_mut();
+            c.fp[slot] = fp;
+            c.val[slot] = v;
+        });
+        v
     }
 
     /// The full Weisfeiler-Leman canon of a component whose vertices are already in
