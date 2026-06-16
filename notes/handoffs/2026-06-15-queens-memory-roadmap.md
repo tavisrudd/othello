@@ -267,10 +267,15 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       *Why B over A:* for the dynamic tier B is smaller (8 vs 16 B) AND merge-preserving
       (A re-keys on the queen set → loses merges → more entries). A's queen-set encoding is
       reserved for the Chunk-4 archive's rankable key (see Chunk 4 prep).
-- [ ] Chunk 2b: `fastrange` table sizing (Lemire multiply-shift) — let the table use **all**
-      RAM, not just 2^k slots (currently `tt_bits` is a power of two; at 8 B/slot the gap
-      between 2³¹=17 GB and 2³²=34 GB is the ~21 GB sweet spot on the 26 GB box). "Free and
-      composes"; ripples into `tt_bits` (return a slot *count*, not bits) + the QueensTt ctor.
+- [x] Chunk 2b: `fastrange` table sizing (session 7) — `QueensTt` now indexes by Lemire
+      multiply-shift (`index()`) instead of `& mask`, so the table can be **any** slot count,
+      not just 2^k. `QUEENS_TT_SLOTS=<count>` (resolved once in the ctor, never per node) fills
+      RAM exactly — e.g. the 17→34 GB power-of-two gap at n=16. *Lower-ripple than the roadmap's
+      "tt_bits returns a count" plan:* kept every `new(bits)` signature (zero call-site/test
+      churn), the override just supersedes `1<<bits`. Gates hold (distinct 1,060,823; solve 14
+      second, 1.08× re-exp; all tests). **Pulls its weight:** n=14 forced-small TT, the 50M
+      intermediate size = 1.21× re-exp @ 0.40 GB, between 2²⁵ (1.35× @ 0.27 GB) and 2²⁶ (1.16× @
+      0.54 GB) — hits the sweet spot the power-of-two grid skips.
 - [ ] Chunk 4 prep: thread the **queen set**, canonicalise+rank it (option A's ≤16-col +
       row-mask encoding), and **measure merge-loss** = (distinct canonical queen-sets) ÷
       (distinct available-masks) on n=10/12/14. Decides archive keyspace sizing; A's exact

@@ -1849,7 +1849,8 @@ impl Hll {
 /// is unnecessary: the 55-bit fingerprint already self-validates identity.)
 pub struct QueensTt {
     slots: Box<[AtomicU64]>,
-    index_mask: u64,
+    /// Slot count (any value, not just a power of two -- see [`QueensTt::index`]).
+    len: u64,
     nodes: AtomicU64,
     /// Optional distinct-position instrumentation (Chunk 1). `None` for an
     /// ordinary solve, so the production path pays only a predictable null check.
@@ -1936,18 +1937,41 @@ fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
     unsafe { Vec::from_raw_parts(ptr.cast::<AtomicU64>(), len, cap) }.into_boxed_slice()
 }
 
+/// Resolve the `QUEENS_TT_SLOTS` exact-slot-count override once (at table
+/// construction, never per node). `Some(n)` clamps to at least 2 slots; `None` keeps
+/// the `2^bits` default. Lets a run fill all RAM via `fastrange` sizing (Chunk 2b).
+fn tt_slots_override() -> Option<usize> {
+    std::env::var("QUEENS_TT_SLOTS")
+        .ok()
+        .and_then(|s| s.parse::<usize>().ok())
+        .map(|n| n.max(2))
+}
+
 impl QueensTt {
-    /// A lockless table of `2^bits` slots (each 8 bytes; see [`Slot`]). `bits` is
-    /// the memory cap knob.
+    /// A lockless table of `2^bits` slots (each 8 bytes; see [`Slot`]). `bits` is the
+    /// memory cap knob. `QUEENS_TT_SLOTS` overrides with an exact slot **count** (any
+    /// value, not just a power of two) -- resolved once here, never per node -- so a run
+    /// can fill *all* available RAM rather than the next power of two below it (Chunk 2b;
+    /// at 8 B/slot the 2^31 = 17 GB → 2^32 = 34 GB gap straddles a 26 GB box's sweet
+    /// spot). Indexing is Lemire `fastrange` ([`QueensTt::index`]), which maps a hash to
+    /// `[0, len)` for any `len`.
     pub fn new(bits: u32) -> Self {
-        let bits = bits.max(1);
-        let size = 1usize << bits;
+        let size = tt_slots_override().unwrap_or_else(|| 1usize << bits.max(1));
         QueensTt {
             slots: zeroed_huge_atomics(size),
-            index_mask: size as u64 - 1,
+            len: size as u64,
             nodes: AtomicU64::new(0),
             counter: None,
         }
+    }
+
+    /// Lemire's `fastrange`: map a 64-bit hash uniformly into `[0, len)` with a single
+    /// widening multiply + shift -- the power-of-two-free replacement for `hash & mask`,
+    /// so the table can be sized to any slot count (Chunk 2b). The extra multiply is
+    /// negligible against the random-probe DRAM latency the search is bound by.
+    #[inline]
+    fn index(&self, route: u64) -> usize {
+        ((route as u128).wrapping_mul(self.len as u128) >> 64) as usize
     }
 
     /// A table that also counts the distinct positions it is queried for: every
@@ -2044,7 +2068,7 @@ impl QueensTt {
             c.feed(key);
         }
         let (route, fp) = Self::hash128(key);
-        let raw = self.slots[(route & self.index_mask) as usize].load(Ordering::Relaxed);
+        let raw = self.slots[self.index(route)].load(Ordering::Relaxed);
         let s = Slot(raw);
         (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
@@ -2053,8 +2077,7 @@ impl QueensTt {
     #[inline]
     pub fn put(&self, key: Bits, val: u8) {
         let (route, fp) = Self::hash128(key);
-        self.slots[(route & self.index_mask) as usize]
-            .store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
         // Record the exact value for the post-search `--iso` analysis (cold; only
         // when an exact map is kept). Here the value is known and eviction-proof.
         if let Some(c) = &self.counter {
@@ -2067,7 +2090,7 @@ impl QueensTt {
     /// between (Session 5, L1 cluster). x86_64 only; a no-op elsewhere.
     #[inline]
     pub fn prefetch(&self, key: Bits) {
-        let idx = (Self::hash128(key).0 & self.index_mask) as usize;
+        let idx = self.index(Self::hash128(key).0);
         let ptr = self.slots[idx].as_ptr();
         #[cfg(target_arch = "x86_64")]
         unsafe {
