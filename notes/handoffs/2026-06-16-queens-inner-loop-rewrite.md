@@ -184,6 +184,23 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
 - [ ] **n=16 with `incremental` (ask-first — the real n=16 run gate).** The payoff target: re-run the
       full n=16 with `solve 16 incremental --checkpoint` once a couple more per-node levers land;
       project from partial throughput first. Checkpoint/resume wired (`from_tt`), default-on for n=16.
+- [ ] **⚡ BOTTLENECK REFRAME (post-n16, 2026-06-16): the incremental kernel moved n=16 off the
+      per-node-compute wall onto the TT-CAPACITY wall.** The 2³¹-slot TT (17 GB) holds only ~27% of
+      the ~8B distinct working set, so the live run pays **1.37× re-expansion** (≈4B redundant
+      expansions = pure capacity thrash) and a resume from a near-final snapshot only saves ~44%
+      (the snapshot holds ~23% of the set; the rest is re-expanded). So the **#1 remaining n=16 lever
+      is capacity, not a faster node**: the **iso key** (3.4× merge → ~2.4B distinct **fits** 2³¹ at
+      LF≈1 → eviction-free, kills the 1.37×) and the **BuRR archive** (Chunk 4 — full set eviction-free
+      in ~7–9 GB, makes resume a *query* not a re-search). Per-node levers (ILP/vectorise above) are now
+      diminishing returns vs this. This **connects the two frontiers**: frontier-1 (this handoff) bought
+      the node speedup; the remaining n=16 wall is frontier-2 (the memory roadmap's archive/iso).
+- [ ] **QUEUED observation (2026-06-16, user) — tail core-drain at n=16.** htop mid-resume: load ~25
+      but only **~7 of 24 threads running** near the end of the search — cores drain at the tail (few
+      root subtrees left, all parallelism intra-root, deep stragglers run single-core). #20
+      (size-based split, `QUEENS_PAR_MIN_AVAIL`) was a measured *wash* at n=16 as-tuned (min-avail 96),
+      so it did **not** fully fix this. Investigate later: lower the min-avail threshold / raise
+      `QUEENS_PAR_DEPTH`, or a work-stealing-friendlier split so the last big subtrees subdivide.
+      Wall-clock only (no wasted work), but real idle cycles at the tail.
 
 ## Handoff Notes
 
