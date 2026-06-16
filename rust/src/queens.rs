@@ -43,6 +43,9 @@ use rayon::prelude::*;
 const WORDS: usize = 4;
 /// Largest board side the bitset can hold (`n*n <= WORDS*64`).
 pub const MAX_N: u32 = 16;
+/// Largest vertex count of an available-graph (one per square) -- sizes the
+/// preallocated graph-key scratch buffers.
+const MAXV: usize = (MAX_N * MAX_N) as usize;
 
 /// A fixed-width board bitset (`WORDS*64` bits). `Ord`/`Hash` are the derived
 /// lexicographic order on the words -- a total order, all we need to pick a
@@ -95,6 +98,15 @@ impl Bits {
     #[inline]
     fn popcount(self) -> u32 {
         self.0.iter().map(|w| w.count_ones()).sum()
+    }
+    /// The lowest set bit index, or `None` if empty.
+    #[inline]
+    fn lowest(self) -> Option<u32> {
+        self.0
+            .iter()
+            .enumerate()
+            .find(|(_, &w)| w != 0)
+            .map(|(k, &w)| k as u32 * 64 + w.trailing_zeros())
     }
     /// Call `f` with each set bit index (ascending).
     #[inline]
@@ -176,6 +188,136 @@ fn hash_colours(verts: &[u32], colour: &[u64]) -> u64 {
     c.iter().fold(0x2545_F491_4F6C_DD1D, |h, &x| {
         mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
     })
+}
+
+/// Per-thread preallocated scratch for the allocation-free graph key
+/// ([`Queens::iso_key_fast`]). Reused across every node on a rayon worker; every cell
+/// is written before it is read (only the `[..k]` prefixes are touched), so it needs no
+/// per-call zeroing -- **zero heap allocation in the hot loop**. Boxed so the ~16 KB of
+/// buffers live on the heap once per thread, not on every call's stack.
+struct IsoScratch {
+    col: [u64; MAXV],           // current colour per square
+    nxt: [u64; MAXV],           // next-round colour per square
+    base: [u64; MAXV],          // degree-seeded colour (restored before each individualise)
+    sort: [u64; MAXV],          // scratch for class-count / colour-multiset sorts
+    sigs: [u64; MAXV],          // per-vertex individualisation signatures
+    comp_keys: [u64; MAXV],     // per-component canonical keys
+    verts: [u8; MAXV],          // component vertices (square indices)
+    order: [u8; MAXV],          // canonical vertex order for the certificate
+    nbr_off: [u32; MAXV + 1],   // CSR offsets into nbr_idx, by compact vertex index
+    nbr_idx: [u8; MAXV * MAXV], // CSR neighbour *square* lists (counted loop, no bit-scan)
+}
+
+impl IsoScratch {
+    fn new() -> Box<Self> {
+        Box::new(IsoScratch {
+            col: [0; MAXV],
+            nxt: [0; MAXV],
+            base: [0; MAXV],
+            sort: [0; MAXV],
+            sigs: [0; MAXV],
+            comp_keys: [0; MAXV],
+            verts: [0; MAXV],
+            order: [0; MAXV],
+            nbr_off: [0; MAXV + 1],
+            nbr_idx: [0; MAXV * MAXV],
+        })
+    }
+}
+
+thread_local! {
+    static ISO_SCRATCH: std::cell::RefCell<Box<IsoScratch>> =
+        std::cell::RefCell::new(IsoScratch::new());
+}
+
+/// 1-WL refine `col` (square-indexed) to stability over the `k` component vertices,
+/// using preallocated `nxt`/`sort` -- no allocation.
+fn wl_refine_in(
+    k: usize,
+    verts: &[u8],
+    nbr_off: &[u32],
+    nbr_idx: &[u8],
+    col: &mut [u64],
+    nxt: &mut [u64],
+    sort: &mut [u64],
+) {
+    let mut prev = 0usize;
+    for _ in 0..k {
+        for i in 0..k {
+            let v = verts[i] as usize;
+            let mut h = col[v].wrapping_mul(0x100_0000_01B3);
+            // Counted loop over the precomputed neighbour squares -- no data-dependent
+            // bit-scan, so the branch predictor stays warm (TMA: was frontend-bound).
+            for &t in &nbr_idx[nbr_off[i] as usize..nbr_off[i + 1] as usize] {
+                h = h.wrapping_add(mix64(col[t as usize]));
+            }
+            nxt[v] = mix64(h);
+        }
+        for &v in &verts[..k] {
+            col[v as usize] = nxt[v as usize];
+        }
+        let c = classes_in(k, verts, col, sort);
+        if c == prev {
+            break;
+        }
+        prev = c;
+    }
+}
+
+/// The number of distinct colours among the `k` vertices (uses preallocated `sort`).
+fn classes_in(k: usize, verts: &[u8], col: &[u64], sort: &mut [u64]) -> usize {
+    for i in 0..k {
+        sort[i] = col[verts[i] as usize];
+    }
+    let s = &mut sort[..k];
+    s.sort_unstable();
+    let mut c = 0usize;
+    let mut last = 0u64;
+    for (i, &x) in s.iter().enumerate() {
+        if i == 0 || x != last {
+            c += 1;
+            last = x;
+        }
+    }
+    c
+}
+
+/// Hash the sorted colour multiset of the `k` vertices (uses preallocated `sort`).
+fn hash_colours_in(k: usize, verts: &[u8], col: &[u64], sort: &mut [u64]) -> u64 {
+    for i in 0..k {
+        sort[i] = col[verts[i] as usize];
+    }
+    let s = &mut sort[..k];
+    s.sort_unstable();
+    s.iter().fold(0x2545_F491_4F6C_DD1D, |h, &x| {
+        mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+    })
+}
+
+/// Hash the adjacency of a discrete-coloured component in canonical (colour) order --
+/// a complete certificate. Uses preallocated `order`.
+fn cert_hash_in(
+    attack: &[Bits],
+    comp: Bits,
+    k: usize,
+    verts: &[u8],
+    col: &[u64],
+    order: &mut [u8],
+) -> u64 {
+    order[..k].copy_from_slice(&verts[..k]);
+    order[..k].sort_unstable_by_key(|&v| col[v as usize]);
+    let mut h = 0x0CA7_F00D_u64;
+    for ii in 0..k {
+        let vi = order[ii];
+        let nbr = attack[vi as usize].and(comp);
+        for (jj, &vj) in order[..k].iter().enumerate() {
+            if vi != vj && nbr.get(vj as u32) {
+                h = mix64(h ^ (jj as u64 + 1)).wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            }
+        }
+        h = mix64(h ^ 0xFFFF); // row separator
+    }
+    h
 }
 
 /// Individualisation-refinement canonical certificate (see [`Queens::iso_key_canon`]).
@@ -490,6 +632,144 @@ impl Queens {
         }
     }
 
+    /// An **allocation-free** graph-isomorphism key (the production-candidate live key):
+    /// component-decompose `mask` and canonicalise each component using only the
+    /// per-thread preallocated [`IsoScratch`] buffers -- no `Vec`/`HashMap`, no heap
+    /// allocation, no per-call zeroing (every buffer cell is written before it is read).
+    /// Same merge as [`iso_key_canon`] (validated equal on n ≤ 14), far cheaper.
+    pub fn iso_key_fast(&self, mask: Bits) -> u64 {
+        ISO_SCRATCH.with(|s| {
+            let mut g = s.borrow_mut();
+            self.iso_key_fast_in(mask, &mut g)
+        })
+    }
+
+    fn iso_key_fast_in(&self, mask: Bits, s: &mut IsoScratch) -> u64 {
+        let mut remaining = mask;
+        let mut nc = 0usize;
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            let ck = self.comp_canon(comp, s);
+            s.comp_keys[nc] = ck;
+            nc += 1;
+        }
+        if nc == 0 {
+            return 0;
+        }
+        let keys = &mut s.comp_keys[..nc];
+        keys.sort_unstable();
+        keys.iter().fold(0x515E_AF00_D515_E5A1, |h, &k| {
+            mix64(h ^ k).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// Canonical key of one connected component, scratch-only. 1-WL refine; if discrete,
+    /// hash the adjacency certificate in canonical order (a complete canon); else fall
+    /// back to the validated-equivalent individualisation invariant. Components are small
+    /// (the graph fragments deep), so the fallback stays cheap.
+    fn comp_canon(&self, comp: Bits, s: &mut IsoScratch) -> u64 {
+        let mut k = 0usize;
+        comp.each(|v| {
+            s.verts[k] = v as u8;
+            k += 1;
+        });
+        // Build the CSR neighbour lists once (one bit-scan per vertex, not per round),
+        // and seed colours by degree. The hot refine then iterates a counted slice.
+        let mut off = 0u32;
+        for i in 0..k {
+            s.nbr_off[i] = off;
+            let nbr = self.attack[s.verts[i] as usize].and(comp);
+            nbr.each(|t| {
+                if t != s.verts[i] as u32 {
+                    s.nbr_idx[off as usize] = t as u8;
+                    off += 1;
+                }
+            });
+            let v = s.verts[i] as usize;
+            s.base[v] = ((off - s.nbr_off[i]) as u64) | 0x9E37_79B9_0000_0000;
+            s.col[v] = s.base[v];
+        }
+        s.nbr_off[k] = off;
+        wl_refine_in(
+            k,
+            &s.verts,
+            &s.nbr_off,
+            &s.nbr_idx,
+            &mut s.col,
+            &mut s.nxt,
+            &mut s.sort,
+        );
+        if classes_in(k, &s.verts, &s.col, &mut s.sort) == k {
+            return cert_hash_in(&self.attack, comp, k, &s.verts, &s.col, &mut s.order);
+        }
+        // Non-discrete: individualise each vertex, refine, combine the signatures.
+        for i in 0..k {
+            for j in 0..k {
+                let w = s.verts[j] as usize;
+                s.col[w] = s.base[w];
+            }
+            s.col[s.verts[i] as usize] = 0xD15C_0DED_1111_2222;
+            wl_refine_in(
+                k,
+                &s.verts,
+                &s.nbr_off,
+                &s.nbr_idx,
+                &mut s.col,
+                &mut s.nxt,
+                &mut s.sort,
+            );
+            s.sigs[i] = hash_colours_in(k, &s.verts, &s.col, &mut s.sort);
+        }
+        let sigs = &mut s.sigs[..k];
+        sigs.sort_unstable();
+        sigs.iter().fold(0xABCD_1234_5678_9ABC, |h, &x| {
+            mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// The connected component of the available-graph containing `start` (flood-fill
+    /// over attacking edges within `mask`).
+    fn component(&self, start: u32, mask: Bits) -> Bits {
+        let mut comp = single(start);
+        let mut frontier = comp;
+        loop {
+            let mut next = Bits::ZERO;
+            frontier.each(|v| next = next.or(self.attack[v as usize]));
+            next = next.and(mask).and_not(comp);
+            if next == Bits::ZERO {
+                break;
+            }
+            comp = comp.or(next);
+            frontier = next;
+        }
+        comp
+    }
+
+    /// A **cheaper** graph-isomorphism key: split the available-graph into connected
+    /// components and canonicalise each independently, then combine the sorted multiset
+    /// of component keys. Sound and complete (two graphs are isomorphic iff their
+    /// components match up to iso), and far cheaper on the deep, *fragmented* graphs
+    /// that dominate the search -- a whole-graph [`iso_key_canon`] over k isolated
+    /// vertices blows its individualisation budget, whereas here each tiny component
+    /// canonises instantly. Gives the **same merge** as `iso_key_canon`, faster.
+    pub fn iso_key_components(&self, mask: Bits) -> u64 {
+        let mut remaining = mask;
+        let mut keys: Vec<u64> = Vec::new();
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            keys.push(self.iso_key_canon(comp));
+        }
+        if keys.is_empty() {
+            return 0;
+        }
+        keys.sort_unstable();
+        keys.iter().fold(0x515E_AF00_D515_E5A1, |h, &k| {
+            mix64(h ^ k).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
     /// The available-graph of `mask`: its vertices (set squares), each vertex's
     /// neighbour mask (attacking available squares), and the degree-seeded initial
     /// 1-WL colours indexed by square. Shared by [`iso_key`] and [`iso_key_ir`].
@@ -669,6 +949,56 @@ impl Solver for Naive {
 pub struct Tt {
     tt: QueensTt,
     canon: bool,
+    key: KeyMode,
+    max_avail: u32,
+}
+
+/// Which canonical key the search uses per node. `D4` is the production key
+/// (`pos_key`, the dihedral-canonical `available` mask). `GraphIr`/`GraphCanon` are
+/// the **graph-isomorphism** keys (session-6 lever #7) -- they merge ~3.4× more
+/// positions (every isomorphic available-graph), but cost ~µs/node vs `pos_key`'s
+/// ~ns, so this is a measurement/spike toggle (`QUEENS_KEY=ir|canon`), not yet the
+/// default. Only meaningful for the canonical solvers (`canon == true`).
+#[derive(Clone, Copy, PartialEq)]
+enum KeyMode {
+    D4,
+    GraphIr,
+    GraphCanon,
+    GraphComp,
+    GraphFast,
+}
+
+/// Resolve the key mode once at construction (never per node -- an env read in the
+/// hot loop serialises the rayon workers). `QUEENS_KEY=ir|canon|comp` opts into a
+/// graph-isomorphism key; anything else keeps the production D4 key.
+fn key_mode() -> KeyMode {
+    match std::env::var("QUEENS_KEY").as_deref() {
+        Ok("ir") => KeyMode::GraphIr,
+        Ok("canon") => KeyMode::GraphCanon,
+        Ok("comp") => KeyMode::GraphComp,
+        Ok("fast") => KeyMode::GraphFast,
+        _ => KeyMode::D4,
+    }
+}
+
+/// Pack a 64-bit graph-isomorphism key into the table's 256-bit key slot, tagged with
+/// a sentinel bit (255) that no real `available` mask sets for n ≤ 15 -- so graph keys
+/// and D4 masks occupy disjoint key spaces and never collide when **selective** keying
+/// mixes them. (n=16 uses all 256 bits; a wider namespace would be needed there.)
+#[inline]
+fn graph_bits(h: u64) -> Bits {
+    Bits([h, 0, 0, 1u64 << 63])
+}
+
+/// Resolve the selective-keying threshold once: with `QUEENS_KEY_MAX=k`, only positions
+/// whose available-graph has ≤ k vertices use the (costly) graph key; larger graphs fall
+/// back to the cheap D4 key. Safe because transpositions are strictly intra-ply, and the
+/// choice is a pure function of the position (its available popcount). Default: no limit.
+fn key_max_avail() -> u32 {
+    std::env::var("QUEENS_KEY_MAX")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(u32::MAX)
 }
 
 impl Tt {
@@ -676,6 +1006,8 @@ impl Tt {
         Tt {
             tt: QueensTt::new(bits),
             canon,
+            key: key_mode(),
+            max_avail: key_max_avail(),
         }
     }
 
@@ -686,6 +1018,35 @@ impl Tt {
         Tt {
             tt: QueensTt::new_counting(bits, hll_p, exact),
             canon,
+            key: key_mode(),
+            max_avail: key_max_avail(),
+        }
+    }
+
+    /// The transposition key for the position with this `blocked` mask, per the
+    /// configured [`KeyMode`]. The graph keys canonicalise the *available-graph* up
+    /// to isomorphism (merging far more than the 8 board symmetries).
+    #[inline]
+    fn node_key(&self, q: &Queens, blocked: Bits) -> Bits {
+        if !self.canon {
+            return blocked; // memo: raw mask
+        }
+        if self.key == KeyMode::D4 {
+            return q.pos_key(blocked);
+        }
+        // Selective keying: only graph-key positions whose available-graph is small
+        // enough to be cheap (and where the iso-merge is densest); larger graphs keep
+        // the cheap D4 key. Strictly intra-ply transpositions ⇒ no merges are lost.
+        let available = q.board.and_not(blocked);
+        if available.popcount() > self.max_avail {
+            return q.pos_key(blocked);
+        }
+        match self.key {
+            KeyMode::GraphIr => graph_bits(q.iso_key_ir(available)),
+            KeyMode::GraphCanon => graph_bits(q.iso_key_canon(available)),
+            KeyMode::GraphComp => graph_bits(q.iso_key_components(available)),
+            KeyMode::GraphFast => graph_bits(q.iso_key_fast(available)),
+            KeyMode::D4 => unreachable!(),
         }
     }
 
@@ -713,7 +1074,7 @@ impl Tt {
                 result = true;
                 break;
             }
-            let ckey = if self.canon { q.pos_key(child) } else { child };
+            let ckey = self.node_key(q, child);
             // Prefetch the child's slot now; its recursion will probe it first thing.
             self.tt.prefetch(ckey);
             if !self.wins_keyed(q, child, ckey) {
@@ -735,11 +1096,7 @@ impl Solver for Tt {
         }
     }
     fn wins(&self, q: &Queens, blocked: Bits) -> bool {
-        let key = if self.canon {
-            q.pos_key(blocked)
-        } else {
-            blocked
-        };
+        let key = self.node_key(q, blocked);
         self.wins_keyed(q, blocked, key)
     }
     fn nodes(&self) -> u64 {
