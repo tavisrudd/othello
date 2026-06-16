@@ -382,10 +382,16 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       53.2M). **Gated auto-on only for n≥15** (default min-avail 96); below it the size split
       is off (forcing it on n=14 regressed ~3%, no tail to fix there). Threshold resolved once
       per solve, threaded through the recursion (no per-node env/atomic). `QUEENS_PAR_MIN_AVAIL`
-      overrides (huge = pure fixed-`par_depth` A/B baseline). **n=16 VALIDATED (2026-06-16):
-      56 → 42.6 min, throughput 2.97 → 4.00 M/s (+35%), same node count + verdict — a sustained
-      core-utilization win, not just a tail fix.** (Single run; a `QUEENS_PAR_MIN_AVAIL=999`
-      baseline would confirm attribution.)
+      overrides (huge = pure fixed-`par_depth` A/B baseline). **n=16 A/B (2026-06-16) — WASH,
+      instructive negative.** Back-to-back full runs: min-avail 96 (ON) = 2557 s/4.00 M/s vs
+      min-avail 999 (OFF, pure par_depth) = **2502 s/4.02 M/s** — identical within noise (OFF even
+      2% faster). The size-split makes **no measurable difference at n=16**: `par_depth=3` already
+      exposes enough parallelism and the session-7 single-core "tails" cost negligible wall (they
+      were "brief, harmless" — correct). The earlier "+35% win" was **environmental** (session-7's
+      2.97 M/s was a contended/thermal-throttled run; both clean runs now hit ~4.0 M/s, same node
+      count + re-exp + verdict). **#20 = a wash; recommend default-off or revert (user's call —
+      ask-first on revert).** Mechanism + `QUEENS_PAR_MIN_AVAIL` knob kept for future par_depth
+      experiments; correct + gated (n<15 untouched) so harmless as-is.
 - [ ] **NIGHT GOAL (session 8): get n=16 under 30 min total** (from session 7's 56 min), using
       the checkpoint fixtures to A/B levers. Plan: (a) test `QUEENS_KEY=fast` **live at n=16**
       (the unrun high-value experiment — 3.4× fewer nodes + fits RAM where D4 thrashes; handoff
@@ -498,7 +504,8 @@ re-exp × ~250 ns/node ÷ 24 cores.** Each factor is near its floor on this box:
   which caps at the 1.36× headroom: **42.6 / 1.36 ≈ 31 min floor**, minus BuRR cascade overhead
   ⇒ realistically ~33–36 min. So **even Chunk 4 likely does not reach <30 min on this box.**
 - **~250 ns/node** = DRAM-latency floor (prefetch already in; search is DRAM/L1i-bound).
-- **24 cores** = now kept busy by #20.
+- **24 cores** = already saturated by `par_depth=3` alone (the parity-YBWC fix, session 7);
+  #20's extra size-split is a wash here (A/B above).
 
 **Conclusion: <30 min is not reachable with the available algorithmic levers on this 26 GB
 box.** 42.6 min is ~near the practical floor for D4-on-this-hardware. The honest paths to
@@ -508,17 +515,23 @@ re-exp ~1.1 → ~35 min; still short), or (b) **a fundamentally cheaper merge** 
 CRDT primitive; see the proposal's C1 delta-gossip). Chunk 4 remains the best single-box lever
 (→ ~33–36 min) and the next build, but it is *not* a <30 min guarantee — set expectations.
 
-**Definitive full n=16 run — DONE (2026-06-16 00:16). #20 is a BIG WIN: 56 → 42.6 min.**
-D4 + #20 (min-avail 96) + 17 GB TT + `--distinct`. **SECOND PLAYER WINS** (Jenrich ✓), PV 12
-moves (`H8 K6 J9 I14 F7 G3 L10 P2 D11 C5 B12 M16`). **10,237,335,784 nodes in 2557 s = 42.6 min
-· 4.00 M/s · ~7.52B distinct · 1.36× re-exp · TT 17.18 GB/97.1% full · 36/36 roots.** vs session
-7 (10.0B nodes, 3371 s/56 min, 2.97 M/s): **same node count, +35% throughput, −24% wall.** The
-only search-affecting change since session 7 is #20, so the size-split is a **sustained
-core-utilization win** (it kills the *periodic* single-core dips session 7 saw throughout, not
-just the end tail). *Caveat:* single run, not interleaved A/B — attribution is by single-change
-inference; a confirming `QUEENS_PAR_MIN_AVAIL=999` (size-split off) run would nail it. Final
-checkpoint wrote `rust/queens-tt-n16-final.zst` (16.02 GB, the *complete* solved table — an
-opening-book/correctness fixture; a *partial* dump is needed for throughput A/B).
+**Definitive full n=16 runs — DONE (2026-06-16). n=16 = ~42 min on this box; #20 is a WASH.**
+**SECOND PLAYER WINS** (Jenrich ✓), PV 12 moves (`H8 K6 J9 I14 F7 G3 L10 P2 D11 C5 B12 M16`).
+Two back-to-back full runs (D4 + 17 GB TT + `--distinct`), the **interleaved A/B for #20**:
+
+| run | min-avail | nodes | wall | rate | distinct | re-exp |
+|-----|-----------|-------|------|------|----------|--------|
+| #20 ON  | 96  | 10.24B | 2557 s = 42.6 min | 4.00 M/s | 7.52B | 1.36× |
+| #20 OFF | 999 | 10.06B | 2502 s = 41.7 min | 4.02 M/s | 7.37B | 1.37× |
+
+**Identical within noise (OFF 2% faster) ⇒ #20 makes no difference at n=16.** And **the
+56 → 42 min vs session 7 is ENVIRONMENTAL, not #20**: session-7's 2.97 M/s run was
+contended/throttled; both clean runs now hit ~4.0 M/s at the *same* node count + re-exp. So
+**this session produced no algorithmic n=16 speedup** — the verdict + ~42 min floor stand, and
+#20 is an instructive negative (the parallel tails session 7 worried about cost ~nothing).
+**Lesson re-learned: interleaved A/B before claiming a win** (the discipline caught my premature
+"+35% #20" attribution). First run's final checkpoint wrote `rust/queens-tt-n16-final.zst`
+(16.02 GB, the *complete* solved table — opening-book/correctness fixture).
 
 ### Session 7 (live) — first multi-core n=16 production run + parallelism-tail finding (2026-06-15)
 
