@@ -17,7 +17,8 @@ PROFDATA := $(PROFRAW)/merged.profdata
 LLVM_PROFDATA ?= $(shell ls $$(rustc --print sysroot)/lib/rustlib/*/bin/llvm-profdata 2>/dev/null | head -1)
 
 .PHONY: all fmt fmt-check clippy build test release bench bench-parallel bench-simd \
-        match match-deeper match-plus calibrate-mpc profile pgo-release clean
+        match match-deeper match-plus calibrate-mpc profile \
+        pgo-check pgo-queens pgo-othello pgo-release clean
 
 all: release
 
@@ -96,18 +97,67 @@ profile:
 	perf report -i /tmp/othello.perf --stdio --percent-limit 2 --no-children | \
 	    grep -E '\[\.\]' | head
 
-# Profile-guided optimisation: instrument, run the game to collect profiles,
-# merge, rebuild with the profile. Needs llvm-profdata (llvm-tools-preview).
-pgo-release:
+# Profile-guided optimisation: build instrumented, run a representative workload
+# to collect profiles, merge, then rebuild with the profile applied. Needs
+# llvm-profdata (rustup component add llvm-tools-preview).
+#
+# Isolated target dirs so PGO never fights the plain `make release` cache and the
+# two passes don't clobber each other:
+#   target/pgo-instrumented/release/   -- the -Cprofile-generate binaries
+#   target/pgo-release/release/        -- the final -Cprofile-use binaries (use these)
+# `make release` keeps target/release/ to itself.
+#
+# Queens profiles the n=14 search (deepest board that reaches the n=16 regime
+# quickly) but SIGINT-terminates it after PGO_SECS: the instrumented binary is far
+# slower (per-edge counter overhead), so a full n=14 solve would take minutes,
+# while a time-boxed partial run already exercises every hot function at
+# representative branch frequencies (PGO weights frequencies, not wall-clock). The
+# queens SIGINT handler exits via `std::process::exit`, which runs the LLVM profile
+# atexit writer, so the .profraw flushes cleanly on the interrupt (verified); the
+# `|| true` swallows timeout's expected non-zero exit. Othello profiles a full
+# depth-8 game. `pgo-release` merges both workloads into one profile.
+PGO_INSTR := target/pgo-instrumented
+PGO_OUT   := target/pgo-release
+PGO_SECS  ?= 30
+
+pgo-check:
 	@test -n "$(LLVM_PROFDATA)" || { echo "llvm-profdata not found: rustup component add llvm-tools-preview"; exit 1; }
+
+# PGO the queens solver, profiled on a time-boxed n=14 search (parallel default).
+pgo-queens: pgo-check
 	rm -rf $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-generate=$(PROFRAW)" \
-	    cargo build --release --example profile_game
-	./target/release/examples/profile_game 80 8 >/dev/null
+	    cargo build --release --bin queens --target-dir $(PGO_INSTR)
+	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 >/dev/null 2>&1 || true
 	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
-	    cargo build --release
-	@echo "PGO build at target/release/ (run: make bench)"
+	    cargo build --release --bin queens --target-dir $(PGO_OUT)
+	@echo "PGO queens at $(PGO_OUT)/release/queens (profiled: solve 14, $(PGO_SECS)s)"
+
+# PGO the othello engine, profiled on a full depth-8 game.
+pgo-othello: pgo-check
+	rm -rf $(PROFRAW)
+	RUSTFLAGS="$(RFLAGS) -Cprofile-generate=$(PROFRAW)" \
+	    cargo build --release --example profile_game --target-dir $(PGO_INSTR)
+	$(PGO_INSTR)/release/examples/profile_game 80 8 >/dev/null
+	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
+	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
+	    cargo build --release --target-dir $(PGO_OUT)
+	@echo "PGO othello at $(PGO_OUT)/release/ (profiled: profile_game 80 8)"
+
+# PGO both binaries from one merged profile: instrument once, run the time-boxed
+# n=14 queens solve AND a depth-8 othello game, merge their .profraw, rebuild both.
+pgo-release: pgo-check
+	rm -rf $(PROFRAW)
+	RUSTFLAGS="$(RFLAGS) -Cprofile-generate=$(PROFRAW)" \
+	    cargo build --release --bin queens --example profile_game --target-dir $(PGO_INSTR)
+	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 >/dev/null 2>&1 || true
+	$(PGO_INSTR)/release/examples/profile_game 80 8 >/dev/null
+	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
+	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
+	    cargo build --release --target-dir $(PGO_OUT)
+	@echo "PGO build at $(PGO_OUT)/release/ (profiled: queens solve 14 [$(PGO_SECS)s] + othello profile_game)"
 
 clean:
 	cargo clean
+	rm -rf $(PROFRAW)

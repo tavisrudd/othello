@@ -301,13 +301,14 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       LOSS at n ≤ 14 (TMA frontend/branch-bound; D4 branchless). **Deploy as the Chunk-4
       freeze-time key (option 2)**, not the live key. Next: branchless refine (#17), pseudo-
       memoize recurring components (#18).
-- [x] **#18 tiny-component shortcut (session 7, this commit) — WIN, modest (~4-5%, grows with n).**
+- [x] **#18 tiny-component shortcut (session 7, `5bd9564`) — WIN: +6% throughput at n=16.**
       `comp_canon` now maps every `k ≤ 4` component straight to a constant from its sorted degree
       sequence (a *complete* iso invariant for connected graphs on ≤4 vertices — proven by the new
       `tiny_component_key_matches_full_canon` test, same partition as the full WL+IR canon), skipping
-      CSR build + WL + cert hashing. Merge preserved exactly (fast-key node count unchanged: n=12
-      ≈311k, n=14 ≈14.8M), verdict unchanged. Wall: n=14 parallel 28.6→27.3s, n=12 sequential
-      2.85→2.73s (~4-5%, **0% at n=12-parallel** where DRAM hides it). **New `count --comps` tool
+      CSR build + WL + cert hashing. Merge preserved exactly (fast-key node count unchanged: n=14
+      ≈14.8M, n=12 ≈311k), verdict unchanged. **n=16 partial-run throughput +6.2%** (taskset-pinned,
+      concurrent, swapped); n=14 parallel ~4-5%; n=12-parallel ~0% (too small to measure). **New
+      `count --comps` tool
       (monomorphised `iso_key_fast_in::<const HIST>`, zero production cost) CORRECTS the prior:** tiny
       components are **only ~32% of all components** at n=12 (k=1 = 15%, mass at k=5–8 ≈10% each), NOT
       "overwhelmingly tiny" — so #18 removes WL on the cheapest third; the k=5–16 bulk (the real
@@ -367,19 +368,24 @@ size ≤4 on a real n=6 board, that the shortcut induces **exactly the same part
 the full WL+IR canon (a bijection both ways), so the graph-key merge — and the distinct
 working set — are provably unchanged.
 
-*Measured (interleaved A/B vs a clean-HEAD worktree binary, `QUEENS_KEY=fast`):*
+*Measured `QUEENS_KEY=fast`, A/B vs a clean-HEAD worktree binary. **n=16 is the target,
+so it is the headline; n=14 is the real comparison; n=12 is correctness-only.***
 
-| board / solver        | old (HEAD) | new (#18) | delta   |
-|-----------------------|-----------:|----------:|---------|
-| n=14 parallel         | ~28.6–30.0s| ~27.3–28.9s| ~4-5%  |
-| n=12 symmetry (seq)   | ~2.85s     | ~2.73s    | ~4-5%   |
-| n=12 parallel         | ~0.61s     | ~0.60s    | ~0% (DRAM-hidden) |
+| board / metric                   | old (HEAD) | new (#18) | delta |
+|----------------------------------|-----------:|----------:|------:|
+| **n=16 throughput** (taskset, concurrent, swapped) | ~61.6 K/s | ~65.4 K/s | **+6.2%** |
+| n=16 throughput (seq round-robin, 24 thr) | ~90.8 K/s | ~96.6 K/s | +6.4% |
+| n=14 parallel wall               | ~28.6–30.0s| ~27.3–28.9s| ~4-5% |
+| n=12 symmetry (seq) wall         | ~2.85s     | ~2.73s    | ~4-5% |
+| n=12 parallel wall               | ~0.61s     | ~0.60s    | ~0% (too small; DRAM/overhead hides it) |
 
-Merge preserved (fast node count unchanged: n=12 ≈311k, n=14 ≈14.8M), verdict unchanged
-(second). The win **grows with n** (deeper boards fragment more) and is largest where the
-per-node cost is exposed (sequential) — so for n=16 ≥5%. Cheap, correct, never negative;
-keep. Value is in the **Chunk-4 freeze-time key** (option 2) and a live n=16 graph-key
-run — at n ≤ 14 parallel it doesn't move the (DRAM-bound) wall.
+Merge preserved (fast node count unchanged: n=14 ≈14.8M, n=12 ≈311k), verdict unchanged
+(second). The n=16 partial-run throughput (+6%) is the number that matters — it is largest
+at the target board, slightly above n=14. Cheap, correct, never negative; keep. Value is in
+the **Chunk-4 freeze-time key** (option 2) and a live n=16 graph-key run. *Method note (per
+user this session):* anchor perf on n=14 / partial-n=16, not n=12; pair runs with `taskset`
+to disjoint **equivalent** cores (Zen5c groups `4-7,16-19` vs `8-11,20-23`), swapped, run
+concurrently — see `[[queens-bench-anchor-n14-n16]]`.
 
 **Prior CORRECTED — tiny components are NOT "overwhelmingly" dominant.** Channelling
 Fermi: the napkin (handoff #18 row: "deep, the graph fragments into overwhelmingly tiny
@@ -409,6 +415,17 @@ canonical rule in `CLAUDE.md` ("Hot-path toggles are resolved once *outside* the
 and the `[[env-vars-resolved-at-startup]]` memory — the rule is bigger than env reads: any
 run-constant toggle, monomorphise on a const bool or thread the value, never a per-node
 `if`.
+
+**Also landed — PGO build targets** (`rust/Makefile`): `make pgo-queens` /
+`pgo-othello` / `pgo-release` (profile-generate → run workload → `llvm-profdata merge`
+→ profile-use). Queens profiles a **time-boxed n=14 solve** (`timeout -s INT $(PGO_SECS)`,
+default 30s) — the instrumented binary is ~3× slower so a full n=14 would take minutes, and
+a partial run exercises the same hot functions at representative branch frequencies; the
+SIGINT handler exits via `std::process::exit` so the LLVM `.profraw` flushes cleanly
+(verified). Builds are isolated into `target/pgo-instrumented/` and `target/pgo-release/`
+so PGO never clobbers the plain `make release` (`target/release/`). The PGO'd queens lands
+at `target/pgo-release/release/queens` (~1.02 MB vs 1.09 MB plain — PGO trims cold code;
+verdict unchanged). (Useful for an eventual n=16 run; orthogonal to the search levers.)
 
 **NOT done / next.** #17 (branchless/SIMD WL refine) is the natural follow-on — the
 histogram shows it attacks the dominant k=5–16 cost, so more headroom than #18, but still
