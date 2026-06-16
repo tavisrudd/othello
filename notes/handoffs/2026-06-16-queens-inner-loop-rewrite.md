@@ -86,24 +86,23 @@ the old path stays as ground truth until the new one passes all gates.
 
 ## Codebase Reference
 
+**`queens.rs` was split into `src/queens/` this session** (commit `30aa892`). Paths below are
+module files, not line numbers (those drift). `mod.rs` keeps the `othello::queens::*` API.
+
 | What | Where |
 |------|-------|
-| `Bits` (`[u64;4]`, 256-bit, the board/available rep) | `queens.rs:65` |
-| `place` (queen placement: `blocked.or(attack[sq])`) | `queens.rs:583` |
-| `attack` table (`Vec<Bits>`, precomputed per square) | `queens.rs:520-537` |
-| **`canon` (D4 8-fold; the bit-by-bit re-fold to replace)** | `queens.rs:646` |
-| `pos_key` (canon of `available`) | `queens.rs:668` |
-| `sym[t][s]` precomputed permutation table | `queens.rs:492-506` |
-| **`wins_keyed` (sequential cutoff search; child loop + canon call site)** | `queens.rs:1355-1386` |
-| `node_key` (D4 vs graph-iso selector + `QUEENS_KEY_MAX`) | `queens.rs:1329` |
-| **`par_wins` (parity-YBWC; even=fan-all, odd=cutoff)** | `queens.rs:1495` |
-| `Solver` trait (impl a new solver here) | `queens.rs:1105-1159` |
-| `make_solver` factory (register the new solver) | `queens.rs:1944` |
-| **`iso_key_fast_in::<const HIST>` (monomorphisation template)** | `queens.rs:803` |
-| `tally_components` / `comps_report` (instrumentation example) | `queens.rs:790` / `bin:1473` |
-| `QueensTt::get`/`put`/`prefetch`/`bump` (TT + counters) | `queens.rs:2391`/`2407`/`2421`/`2366` |
-| `Counter` (HLL + exact-set hooks) | `queens.rs:1977` |
-| `Cmd` enum + `count_mode` + main dispatch | `bin/queens.rs:110` / `1188` / `253` |
+| **`Incremental` (the A3 solver — Step 3, the thing to extend next)** | `src/queens/solver/incremental.rs` |
+| `Bits` (`[u64;4]`, 256-bit, the board/available rep) | `src/queens/bits.rs` |
+| `Queens` geom: `place`, `attack`, `sym`, `canon`, `pos_key`, `distinct_first_moves` | `src/queens/geom.rs` |
+| graph-iso keys (`iso_key*`, WL/IR, `iso_key_fast_in::<const HIST>`, `tally_components`) | `src/queens/graph.rs` |
+| `Solver` trait + `make_solver` + key knobs (`par_depth`, `min_avail_for`, `KeyMode`) | `src/queens/solver/mod.rs` |
+| `Tt` (`wins_keyed`/`node_key`, memo/symmetry + `count --branching`) | `src/queens/solver/memo.rs` |
+| `Parallel` (parity-YBWC `par_wins`; **left untouched** — the A/B baseline) | `src/queens/solver/parallel.rs` |
+| `Naive` / `Nimber` / `Pn` | `src/queens/solver/{naive,nimber,pn}.rs` |
+| `QueensTt::get`/`put`/`prefetch`/`bump`/`summary` (TT + counters) | `src/queens/tt.rs` |
+| `Counter` / `Hll` / `CountReport` (HLL + exact-set hooks) | `src/queens/count.rs` |
+| `Cmd` enum + `count_mode` + main dispatch + `--distinct`/`--resume` solver wiring | `src/bin/queens.rs` |
+| Step-1 kernel bench (A0–A3, the cyc/canon regression harness) | `src/bin/canon_bench.rs` |
 
 ## Build/Test Commands
 Per CLAUDE.md / `rust/Makefile`: `make release` / `make test` / `make clippy` (znver5+mold
@@ -137,10 +136,76 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
       no 5–8 tail. **mean win-node cutoff 2.57 → 2.82** (43% first-move) — real ordering waste, so
       the proof-DAG gap is non-trivial but the known ordering levers already failed (df-pn stays a
       research bet, not a sure win). Gates green. See Handoff Note.
-- [ ] Step 3: full DFS-resident rewrite behind the gates (only after Step 1).
-- [ ] Final: `make test` + `make clippy` green; n=14 interleaved A/B vs the old path; gates hold.
+- [x] **Step 3 DONE — `Incremental` solver, n=14 ~1.5× wall, same nodes** (session 2026-06-16--4,
+      commit `1b8bdcd`). New `incremental` solver (`src/queens/solver/incremental.rs`) carries the 8
+      dihedral orientations of `available` live down the DFS; per move `orient[t] &= !att[sq][t]`
+      (`att[sq][t] = perm_t(attack[sq])`, 64 KB), key = `lex_min8(orient)` — **byte-identical to
+      `pos_key`**, so node count / distinct / re-exp / verdict are identical to `parallel`; only the
+      per-node canon cost changes (~574 → ~62 cyc). Same parity-YBWC structure as `Parallel`
+      (left untouched, per user), D4-only. **Interleaved n=14 A/B (6 rounds, thermal-controlled):
+      incremental ~6.4 s vs parallel ~9.9 s median = ~1.5× wall**, identical ~53.2M nodes. Gates:
+      lineage agrees (n≤9); `solve 12 incremental --distinct` second/**1,060,823 exact**/1.01×;
+      `solve 14` second/~49.2M/1.08×. `make test` + `clippy` green.
+- [x] **Module split (same session, commit `30aa892`) — user-requested prerequisite.** The
+      3184-line `queens.rs` → `src/queens/` tree: `bits`, `geom`, `graph`, `count`, `tt`,
+      `solver/{mod,naive,memo,parallel,incremental,nimber,pn}`. Pure move (cross-module items →
+      `pub(crate)`; `Parallel` verbatim); `mod.rs` preserves the `othello::queens::*` API. Gates
+      byte-identical pre/post.
+- [ ] **Next levers (Step 3 follow-ons, the ~60 s floor still ~28× below):** the n=14 ~1.5× is the
+      first cut — the canon was a big per-node fraction but TT/DRAM latency + movegen remain. The
+      kernel notes' deferred levers: (1) **ILP** — overlap the 8 independent `and-not`s / break the
+      lex-min serial chain; (2) **vectorise** `[Bits;8]` orientations into `__m256i`/`zmm` (lex-min
+      via pairwise `vpcmpuq` tree, *not* the A1 lane-gather); (3) thread the prefetched `(route,fp)`
+      from `prefetch` into `get` (saves the 2nd `hash128`). Bench each against `canon_bench` cyc/canon
+      + interleaved n=14, then a **partial n=16** throughput check (grab a fixture via SIGUSR2).
+- [ ] **n=16 with `incremental` (ask-first — the real n=16 run gate).** The payoff target: re-run the
+      full n=16 with `solve 16 incremental --checkpoint` once a couple more per-node levers land;
+      project from partial throughput first. Checkpoint/resume wired (`from_tt`), default-on for n=16.
 
 ## Handoff Notes
+
+### Step 3 — `Incremental` solver + module split (2026-06-16, session 2026-06-16--4)
+**WIN — the incremental kernel works in the real search: n=14 ~1.5× wall, identical work.**
+Commits `30aa892` (split) then `1b8bdcd` (solver).
+
+**Two pieces, both user-directed:**
+1. **Module split first** (user: "queens.rs too large / split into sub-modules", "leave the existing
+   parallel solver as it is"). The 3184-line `queens.rs` → `src/queens/` tree (see Codebase
+   Reference). Pure byte-exact move: cross-module items bumped to `pub(crate)` (the compiler
+   enumerated each — `Bits.0`/methods/`ZERO`, `Queens` fields, `Tt`/`QueensTt` internals, `Slot`,
+   `IsoScratch`, knobs); tests stayed in `mod.rs` (import graph/tt internals by path). `Parallel`
+   moved verbatim. Gates byte-identical pre/post split.
+2. **`Incremental` solver** (`solver/incremental.rs`, the A3 port). Carries `[Bits;8]` orientations
+   down the DFS; per move `child[t] = parent[t] & !att[sq][t]` where `att[sq][t]=perm_t(attack[sq])`
+   (built once per solve, 64 KB, threaded — never per-node `OnceLock::get`); key = serial early-out
+   `lex_min8`. `orient[0]` *is* `available` (identity image), so availability/terminal tests read it
+   directly — no separate `blocked`. Same parity-YBWC fan as `par_wins` (even=fan-all, odd=cutoff),
+   D4-only. Registered in `make_solver`/`SOLVER_NAMES`/bin (`--distinct` + resume) + lineage test.
+
+**Why it's exact (so the win is purely per-node cost):** `lex_min8(orient) == canon(available) ==
+pos_key(blocked)` by construction (perm distributes over `&`/`!`; the 8 orientations are the exact 8
+images `canon` minimises over). So the TT key per node is byte-identical to `parallel` ⇒ same node
+count, same distinct, same re-exp, same verdict. Confirmed: `solve 12 incremental --distinct` =
+**1,060,823 exact** (= parallel), `solve 14` ≈49.2M/1.08×, both SECOND.
+
+**Measured (interleaved, thermal-controlled, 6 rounds n=14, non-distinct):**
+
+| round | parallel | incremental |
+|-------|---------:|------------:|
+| 1     |  7.785 s |    5.402 s  |
+| 3     |  9.873 s |    6.230 s  |
+| 6     | 10.101 s |    6.534 s  |
+
+Median ≈ **9.9 s vs 6.4 s = ~1.5× wall**, ~53.2M nodes both (matched). Both arms drift up together
+with throttle; incremental stays ~1.5× ahead every round.
+
+**Read.** Step-3 thesis confirmed at n=14: per-node canon was a large wall fraction, and the 62-cyc
+incremental kernel cuts it. But ~1.5× is the *first* cut, not the floor's ~42× — TT/DRAM latency,
+movegen, and recursion overhead remain (the floor assumed all per-node cost collapses to the canon).
+The cheap structural levers (ILP over the 8 and-nots, vectorised lex-min into `__m256i`/`zmm`,
+threading `(route,fp)` from `prefetch`→`get`) are the next cuts before a partial-n16 throughput check
+and the ask-first full n=16 run. **`canon_bench` cyc/canon + interleaved n=14 are the regression
+gates for each.**
 
 ### Kickoff (2026-06-16, session 2026-06-16--3)
 **Completed**: work stream created; codebase hot-path mapped (Explore agent — see Codebase
