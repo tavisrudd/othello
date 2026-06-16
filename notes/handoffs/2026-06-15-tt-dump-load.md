@@ -16,4 +16,12 @@ proposal records what to build next session:
 - Validation: dump n=12 → load → instant re-solve (verdict second, ~0 new nodes); dump mid-n=14
   → load → resume completes to the correct verdict, total nodes = full cold solve.
 
+**Order for next session: do backlog #21 (PV no-grind) FIRST, then this dump/load.**
+
+**Checkpoint scope (user, 2026-06-15):** periodic checkpoint **every ~5 min** + **final save
+on exit** + SIGUSR2 manual; **compress** dumps (zstd — mostly-zero image compresses well);
+**deltas later** (B2 full-key export since an epoch watermark — avoids re-writing the full
+image each checkpoint; the grow-only-CRDT property makes it sound). All folded into the
+proposal's Session-7 decision section.
+
 See the proposal for the full design, header format, phases, and the B2 / distributed roadmap.

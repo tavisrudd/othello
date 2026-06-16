@@ -31,6 +31,27 @@ no explicit move-list tracking. A mid-search snapshot is always a valid partial 
 slot is one atomic `u64`, never torn), so a SIGUSR2 dump under concurrent writes resumes
 correctly (this resolves Open Q1 in favour of "good-enough-live").
 
+**Checkpoint cadence + compression (user requirements, 2026-06-15) — fold into Phase 1/3:**
+- **Periodic checkpoint every ~5 min** during a run (decides Open Q2 → time-based; default
+  `--every 5m`, overridable), **plus a final save on normal exit**, **plus** the manual
+  SIGUSR2 snapshot. A background timer (or a check at root-job boundaries) triggers the dump;
+  good-enough-live consistency is fine (per above). Rotate/overwrite so disk stays bounded
+  (keep latest + maybe one prior), since a full image is the TT size each time.
+- **Compress the dumps** (decided): the raw image is mostly-zero early ⇒ highly compressible;
+  stream through **zstd** (add the crate — ecosystem-deps rule). Early checkpoints become tiny;
+  late ones shrink modestly. `load` decompresses on the way in. (Approach A already noted this.)
+- **Deltas later (if possible — it is):** to avoid re-writing the whole image every 5 min,
+  a checkpoint can be the **B2 full-key export of positions proven *since the last
+  checkpoint*** (an epoch watermark). This is exactly the proposal's delta mechanism (Phase 2
+  B2 + the `epoch` header field + the grow-only-CRDT property): deltas union-merge on load,
+  order-independent. So: MVP = full compressed image every 5 min + final; **optimization =
+  delta checkpoints (B2-since-epoch)** once Phase 2 lands. Keep the `epoch` header field from
+  day one so deltas need no format change (already in the Recommendation).
+
+**Build order for next session: do backlog #21 (PV no-grind) FIRST, then this dump/load.**
+#21 is small and unblocks clean n=16 finishes; dump/load is the larger build that produces
+the benchmark fixture + checkpoint/resume.
+
 (The handoffs-queue entry `notes/handoffs/2026-06-15-tt-dump-load.md` is a thin pointer to
 this proposal — this doc is the canonical design.)
 
