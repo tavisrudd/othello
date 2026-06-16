@@ -66,8 +66,11 @@ fn render_to(headers: &[&str], rows: &[Vec<String>], wrap_col: usize, cols: usiz
     }
 
     // The wrap column gets the leftover horizontal space (never below a floor).
-    let fixed: usize =
-        (0..ncol).filter(|&i| i != wrap_col).map(|i| width[i]).sum::<usize>() + GAP * (ncol - 1);
+    let fixed: usize = (0..ncol)
+        .filter(|&i| i != wrap_col)
+        .map(|i| width[i])
+        .sum::<usize>()
+        + GAP * (ncol - 1);
     let natural = rows
         .iter()
         .map(|r| r[wrap_col].chars().count())
@@ -118,7 +121,12 @@ mod tests {
             "root-parallel scores".to_string(),
             "9".to_string(),
         ]];
-        let out = render_to(&["name", "description", "parallelism", "depth"], &rows, 1, 60);
+        let out = render_to(
+            &["name", "description", "parallelism", "depth"],
+            &rows,
+            1,
+            60,
+        );
         // No rendered line exceeds the requested width.
         for line in out.lines() {
             assert!(line.chars().count() <= 60, "line too wide: {line:?}");
@@ -134,8 +142,18 @@ mod tests {
     #[test]
     fn fixed_columns_align_and_no_wrap_when_wide() {
         let rows = vec![
-            vec!["a".to_string(), "short".to_string(), "seq".to_string(), "4".to_string()],
-            vec!["bb".to_string(), "also short".to_string(), "seq".to_string(), "6".to_string()],
+            vec![
+                "a".to_string(),
+                "short".to_string(),
+                "seq".to_string(),
+                "4".to_string(),
+            ],
+            vec![
+                "bb".to_string(),
+                "also short".to_string(),
+                "seq".to_string(),
+                "6".to_string(),
+            ],
         ];
         let out = render_to(&["name", "desc", "par", "depth"], &rows, 1, 120);
         // Wide terminal => one line per row (header + rule + 2 rows = 4 lines).
