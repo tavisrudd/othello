@@ -445,6 +445,13 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       it cheaply only for small available) before it's sound at n=16.
 - [x] Final (session 8): `make test` + `make clippy` green; n=16 verdict re-confirmed SECOND
       (twice); dump/load load validated at 16 GB scale.
+- [x] **Session 10 (2026-06-16): iso-keyed BuRR freeze validated e2e (n=14, 3.37× merge propagates,
+      exact); staged-cascade measured via new `count --roots`.** (A) no dominant root (biggest ~9-10%
+      of union, plateauing → fits the n=16 TT — overturns the session-7 "root-0 dominates"); (B)
+      cross-root reuse ~2× rising. **Verdict: naive "clear-TT-each-root" staging is WORSE than the
+      shared TT (loses the 2× reuse); the staging that helps IS the iso cascade** (fits ~22 GB only
+      with the iso freeze key + small per-root live TT → ~31 min). #20 KEPT (user; tune later). See
+      Session-10 note.
 
 ## Lever backlog (sessions 4–5 reviews, prioritised)
 
@@ -534,6 +541,62 @@ No code change — freeze/verify are session-9 tooling, this was a validation ru
 archives (`/home/tavis/q-{d4,iso}-n14.{zst,burr}`) deleted after recording (regenerable in ~40s:
 `[QUEENS_KEY=canon] queens solve 14 parallel --distinct --checkpoint=<p>` then `queens freeze 14
 <p> <out> --verify`).
+
+**Part 2 — staged-cascade feasibility measurement (new `count --roots` tool).** User asked: run the
+search root-by-root and do a "TT optimization pass after each root pass" (freeze each root's solved
+set into the eviction-free archive, clear the live TT) to attack the 1.36× re-exp. Measure-first
+before building. New **`count --roots`** (additive, bin-only cold tool — does NOT touch the hot
+path or keys): searches each symmetry-distinct first move with a *cold* exact-counting TT (bounded
+6-way concurrency, per-root TT capped 2²⁶; eviction can't corrupt counts — the exact set dedups
+regardless of TT size) and reports (A) per-root distinct sizes and (B) the cross-root multiplicity.
+Gates green (`make test`/`clippy`/`fmt`; `solve 12 --distinct` second/1,060,823/1.01×). 28-at-once
+OOM'd (21 GB, full exact maps); the 6-way-bounded run peaks 4.9 GB / 39 s at n=14.
+
+| n  | roots | biggest root (% of union) | reuse Σ/union | root-private | shared (≥2) |
+|----|-------|---------------------------|---------------|--------------|-------------|
+| 10 |    15 |                     24.4% |         1.68× |        65.7% |       34.3% |
+| 12 |    21 |                     10.9% |         1.90× |        57.1% |       42.9% |
+| 14 |    28 |                      9.6% |         1.95× |        58.8% |       41.2% |
+
+**(A) GREEN — no dominant root.** Biggest-root share falls 24%→11%→10% and plateaus ~9-10% as the
+root count grows (15→28); at n=16 (36 roots) ≈ 6-9% of 7.52B ≈ **0.5-0.7B distinct → fits the
+2³¹-slot TT with margin (LF ~0.3)**. **This overturns the session-7 "root-0 dominates" worry** —
+that was a *sequential-ordering* artifact (root 0 searched first as the elder-brother lead while
+the others waited), NOT subtree size. Each root's working set fits a single-box TT, so staging
+genuinely removes per-root thrash, and the live tier can be *small* under staging.
+
+**(B) — cross-root reuse is ~2× and rising (1.68→1.90→1.95, plateauing ~2.0).** ~58% of positions
+are root-private (one root), ~42% shared across ≥2 roots; only 0.02% are reached by *all* roots
+(the deep universal trunk is tiny). This is the load-bearing number, and it decides the verdict.
+
+**VERDICT — the simple staging backfires; the staging that helps IS the iso cascade (converges with
+session 9).** Costing the options at n=16 (union 7.52B):
+- **Current (shared concurrent TT):** union × 1.36 re-exp = **10.2B** expansions; TT holds 28%, evicts.
+- **Staged, clear TT each root, NO archive:** loses cross-root reuse → Σ per-root ≈ 2.0 × 7.52B =
+  **~15B → WORSE than current.** The shared TT's cross-root memoization (even eviction-degraded to
+  1.36×) beats clearing. ❌ **Instructive negative.**
+- **Staged + archive holding the full union:** computes union once = **7.52B, re-exp ~1.0 → ~31
+  min** — but the D4 archive = 7.52B × ~7 B/key (membership-fp, slot-sized) = **52 GB → busts 26 GB
+  → zram per-probe decompress crawl.** ❌ on this box.
+- **Staged + iso-keyed archive (re-key at freeze) + shrunk live TT:** archive 7.52B/3.4 ≈ 2.2B ×
+  7 B/key ≈ **15 GB** + a per-root-sized live TT (~6-8 GB, since each root fits) ≈ **~22 GB, FITS**,
+  re-exp ~1.0 → **~31 min.** ✓ — needs (i) the position threaded to freeze time (can't iso-re-key a
+  fingerprint-only dump — the Chunk-4-prep item), (ii) a cascade query path carrying a membership
+  fp, (iii) iso re-key at freeze (cheap, offline).
+
+So **staging is a valid route to ~31 min, but only with the density lever (iso freeze key) — it IS
+the (a)-cascade, not a free win**, and the naive clear-TT form is a negative. The new unlock from
+(A): no dominant root ⇒ the live tier can be small ⇒ RAM frees up for the iso archive ⇒ the ~22 GB
+fit works. (A RAM-fitting partial — a **victim cache**: 17 GB live + ~5 GB dense BuRR tier of
+evicted-solved, probed before recompute — recovers only part of 1.36× → ~1.2-1.25× → ~39 min, and
+adds per-miss probe latency; marginal.)
+
+**Recommendation (still an architecture gate — user's call):** the staged iso-cascade (a) and
+ply-windowing (b) both need the same two builds (thread positions to freeze; a frozen-tier query
+path). (a) is *less* build (keeps DFS + α-β cutoff; freeze cadence = root pass) and (A) de-risks it
+(each root fits). (b) gets value-only ~1.1 bit but **loses the α-β cutoff** (retrograde solves all
+positions per ply — the no-cutoff blowup). **Lean (a) staged iso-cascade; scope as a proposal
+before building.** Tool committed for reuse / re-measuring at other n.
 
 ### Session 9 (2026-06-16) — Chunk 4 BuRR archive: core landed + validated on real data
 

@@ -179,6 +179,14 @@ enum Cmd {
         /// `--exact`; sequential.
         #[arg(long)]
         psym: bool,
+        /// Measure the **per-root working set + cross-root transposition rate**: search
+        /// each symmetry-distinct first move with a cold exact-counting TT and report
+        /// (A) per-root distinct sizes — does the biggest root fit a single-box TT? —
+        /// and (B) how many roots touch each position (Σ-per-root ÷ union = the
+        /// cross-root reuse a staged freeze-after-each-root cascade must preserve).
+        /// Sizes the Chunk-4 staged-cascade lever. Even n only; does its own searches.
+        #[arg(long)]
+        roots: bool,
         /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
         #[arg(long = "hll-p", default_value_t = 16, value_parser = clap::value_parser!(u32).range(4..=18))]
         hll_p: u32,
@@ -285,16 +293,24 @@ fn main() {
             iso,
             comps,
             psym,
+            roots,
             hll_p,
-        } => count_mode(
-            &Queens::new(n),
-            parallel && !iso && !comps && !psym,
-            exact || iso || comps || psym,
-            iso,
-            comps,
-            psym,
-            hll_p,
-        ),
+        } => {
+            let q = Queens::new(n);
+            if roots {
+                roots_report(&q, hll_p);
+            } else {
+                count_mode(
+                    &q,
+                    parallel && !iso && !comps && !psym,
+                    exact || iso || comps || psym,
+                    iso,
+                    comps,
+                    psym,
+                    hll_p,
+                );
+            }
+        }
         Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
         Cmd::Freeze {
@@ -823,7 +839,10 @@ fn freeze(n: u32, image: &Path, out: &Path, fp_bits: u32, load: f64, shards: u32
             }
         });
         if let Err(e) = res {
-            eprintln!("\x1b[31mfreeze: reading {} failed: {e}\x1b[0m", image.display());
+            eprintln!(
+                "\x1b[31mfreeze: reading {} failed: {e}\x1b[0m",
+                image.display()
+            );
             std::process::exit(1);
         }
         total_seen = seen;
@@ -834,7 +853,10 @@ fn freeze(n: u32, image: &Path, out: &Path, fp_bits: u32, load: f64, shards: u32
                 pairs.len()
             );
         } else {
-            eprintln!("\x1b[90m  {} solved positions read; building...\x1b[0m", pairs.len());
+            eprintln!(
+                "\x1b[90m  {} solved positions read; building...\x1b[0m",
+                pairs.len()
+            );
         }
         subs.push(Archive::build(&pairs, ARCHIVE_VAL_BITS, fp_bits, load));
     }
@@ -842,7 +864,10 @@ fn freeze(n: u32, image: &Path, out: &Path, fp_bits: u32, load: f64, shards: u32
     let bytes = match write_archive(&arch, out) {
         Ok(b) => b,
         Err(e) => {
-            eprintln!("\x1b[31mfreeze: writing {} failed: {e}\x1b[0m", out.display());
+            eprintln!(
+                "\x1b[31mfreeze: writing {} failed: {e}\x1b[0m",
+                out.display()
+            );
             std::process::exit(1);
         }
     };
@@ -884,7 +909,10 @@ fn verify_archive(n: u32, image: &Path, archive_path: &Path) {
     {
         Ok(a) => a,
         Err(e) => {
-            eprintln!("\x1b[31mverify: reading {} failed: {e}\x1b[0m", archive_path.display());
+            eprintln!(
+                "\x1b[31mverify: reading {} failed: {e}\x1b[0m",
+                archive_path.display()
+            );
             std::process::exit(1);
         }
     };
@@ -908,7 +936,10 @@ fn run_verify(n: u32, image: &Path, arch: &ShardedArchive) {
         }
     });
     if let Err(e) = res {
-        eprintln!("\x1b[31mverify: reading {} failed: {e}\x1b[0m", image.display());
+        eprintln!(
+            "\x1b[31mverify: reading {} failed: {e}\x1b[0m",
+            image.display()
+        );
         std::process::exit(1);
     }
     // False-positive probe: synthetic archive-keys disjoint from the real set
@@ -1235,6 +1266,153 @@ fn count_mode(
     if psym {
         psym_report(q, solver.as_ref());
     }
+}
+
+/// `count --roots`: per-root working-set sizes (A) and cross-root transposition rate
+/// (B) -- the two numbers that decide whether a *staged* cascade (search root-by-root,
+/// freeze each root's solved set into the eviction-free BuRR archive, clear the live
+/// TT) beats the single shared-TT solve. Each symmetry-distinct first move is searched
+/// with a **cold** exact-counting TT (no cross-root cache), so its working set is the
+/// full set that root would touch in isolation:
+///   (A) the largest cold per-root set is root-0's live-TT requirement under staging
+///       (the archive is empty when the first root runs) -- if it overflows a single
+///       box's TT, staging cannot stop *its* thrash.
+///   (B) Sigma(per-root) / |union| is the cross-root reuse factor: the work a staged
+///       solve would re-do per root *without* the archive = exactly what the archive
+///       must hold to pay for its query cost. ~1.0 => roots barely overlap (staging
+///       cheap, archive optional); >>1.0 => heavy overlap (archive essential).
+/// Eviction does not corrupt the counts -- the exact set dedups regardless of TT size.
+fn roots_report(q: &Queens, hll_p: u32) {
+    use rayon::prelude::*;
+    use std::collections::HashMap;
+    use std::hash::{Hash, Hasher};
+
+    if q.is_odd() {
+        println!(
+            "n={n} is odd: first player wins in O(1) (centre + 180° mirror), no search. \
+             Use an even n.",
+            n = q.n,
+        );
+        return;
+    }
+    let firsts = q.distinct_first_moves();
+    // Cap the per-root TT at 2^26 (512 MB) -- ample for one root in isolation, and the
+    // exact set dedups regardless of TT size, so a smaller table only trades a little
+    // eviction-recompute for a far smaller resident footprint per concurrent search.
+    let bits = tt_bits(q.n).min(26);
+    let nroots = firsts.len();
+    // Bound concurrency: each in-flight cold search holds a full exact map (32 B/key),
+    // so 28-at-once OOMs the box. A small pool keeps peak RSS to ~`THREADS` maps.
+    const THREADS: usize = 6;
+    println!(
+        "Per-root working set on {n}×{n}: {nroots} symmetry-distinct first moves, \
+         cold exact search each (TT 2^{bits}, {THREADS} concurrent)…",
+        n = q.n,
+    );
+    let t = Instant::now();
+
+    // Hash each canonical key to u64 to bound merge memory (collision-negligible:
+    // ~tens of M keys in 2^64). The per-root exact map (32 B/key) is dropped as soon as
+    // its keys are folded to the 8 B/key vec.
+    let fold = |k: &Bits| -> u64 {
+        let mut h = std::collections::hash_map::DefaultHasher::new();
+        k.hash(&mut h);
+        h.finish()
+    };
+    let pool = rayon::ThreadPoolBuilder::new()
+        .num_threads(THREADS)
+        .build()
+        .expect("rayon pool");
+    let sets: Vec<(u32, Vec<u64>)> = pool.install(|| {
+        firsts
+            .par_iter()
+            .map(|&sq| {
+                let solver = Tt::new_counting(bits, true, hll_p, true);
+                let _ = solver.wins(q, q.place(Bits::empty(), sq));
+                let ws = solver.working_set().expect("exact set enabled");
+                (sq, ws.iter().map(|(k, _)| fold(k)).collect())
+            })
+            .collect()
+    });
+
+    // (A) per-root sizes, largest first.
+    let mut per_root: Vec<(u32, usize)> = sets.iter().map(|(s, v)| (*s, v.len())).collect();
+    per_root.sort_by(|a, b| b.1.cmp(&a.1));
+    let sum_sizes: usize = per_root.iter().map(|(_, n)| n).sum();
+
+    // (B) multiplicity: how many roots touch each distinct position.
+    let mut mult: HashMap<u64, u32> = HashMap::with_capacity(sum_sizes / 2 + 1);
+    for (_, keys) in &sets {
+        for &k in keys {
+            *mult.entry(k).or_insert(0) += 1;
+        }
+    }
+    let union = mult.len().max(1);
+    let mut hist = vec![0u64; nroots + 1];
+    for &c in mult.values() {
+        hist[c as usize] += 1;
+    }
+
+    let pct = |x: u64| x as f64 / union as f64 * 100.0;
+    println!("\n(A) per-root distinct working set (cold, in isolation):");
+    for (sq, n) in per_root.iter().take(8) {
+        println!(
+            "    sq {:>3} (col {:>2}, row {:>2}):{:>14}  ({:.3} M, {:.1}% of union)",
+            sq,
+            sq % q.n,
+            sq / q.n,
+            commas(*n as u64),
+            *n as f64 / 1e6,
+            pct(*n as u64),
+        );
+    }
+    if nroots > 8 {
+        println!("    … {} smaller roots", nroots - 8);
+    }
+    let max = per_root.first().map(|x| x.1).unwrap_or(0);
+    let min = per_root.last().map(|x| x.1).unwrap_or(0);
+    println!(
+        "    biggest root {} ({:.3} M) = {:.1}% of union · smallest {} ({:.3} M)",
+        commas(max as u64),
+        max as f64 / 1e6,
+        pct(max as u64),
+        commas(min as u64),
+        min as f64 / 1e6,
+    );
+
+    println!("\n(B) cross-root transposition:");
+    println!(
+        "    union (total distinct):        {:>14}  ({:.3} M)",
+        commas(union as u64),
+        union as f64 / 1e6,
+    );
+    println!(
+        "    Σ per-root (cold, no sharing): {:>14}  ({:.3} M)",
+        commas(sum_sizes as u64),
+        sum_sizes as f64 / 1e6,
+    );
+    println!(
+        "    reuse factor Σ/union:          {:>10.2}×",
+        sum_sizes as f64 / union as f64
+    );
+    println!(
+        "    touched by exactly 1 root:     {:>14}  ({:.1}% — root-private)",
+        commas(hist[1]),
+        pct(hist[1]),
+    );
+    let shared = union as u64 - hist[1];
+    println!(
+        "    touched by ≥2 roots (shared):  {:>14}  ({:.1}%)",
+        commas(shared),
+        pct(shared),
+    );
+    println!(
+        "    touched by all {} roots:        {:>14}  ({:.2}%)",
+        nroots,
+        commas(hist[nroots]),
+        pct(hist[nroots]),
+    );
+    println!("\n  elapsed: {:.1}s", t.elapsed().as_secs_f64());
 }
 
 /// `count --psym`: the **#9 free-involution P-certificate fire-rate**. Over the exact
