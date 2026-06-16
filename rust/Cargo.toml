@@ -17,6 +17,12 @@ path = "src/main.rs"
 name = "queens"
 path = "src/bin/queens.rs"
 
+# Step-1 Fermi-check: per-canonicalisation cost of the inner-loop-rewrite kernel
+# (baseline scalar scatter vs SWAR word-level vs GFNI). Standalone, additive.
+[[bin]]
+name = "canon_bench"
+path = "src/bin/canon_bench.rs"
+
 # Ultra-fast release build: whole-program inlining + single codegen unit.
 # `target-cpu=native` (see .cargo/config.toml) turns on POPCNT/BMI for the hot
 # bit primitives (count_ones, blsi, tzcnt).

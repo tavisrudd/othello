@@ -126,8 +126,11 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
   change.
 
 ## Progress
-- [ ] Step 1: isolated canon/movegen kernel benchmark; measure cyc/node (both attack-mask
-      strategies); **decision gate** — proceed to Step 3 iff ~20–140 cyc/node.
+- [x] Step 1: canon kernel benchmark (`src/bin/canon_bench.rs`). **A0 (SWAR optimal-structure) =
+      111 cyc/canon, perfect D4-invariant, 5.3–5.7× over baseline (632)**; GFNI (A1) a measured
+      NEGATIVE (186 cyc — repack overhead). **GATE: PROCEED** (structural thesis confirmed) — but
+      recalibrated (recompute kernel ⇒ ~100 s node floor; the ~45 s central needs the incremental +
+      ILP + 256-bit vectorization the rewrite is designed around). See Step 1 Handoff Note.
 - [x] Step 2: b̄ + proof-DAG-gap instrumentation (`count --branching`, `queens.rs`/`bin`).
       **b̄ ≈ 3.35 (n=12) → 3.92 (n=14) → ~4–4.5 (n=16)** — the floor's b̄≈3 was slightly low (×~1.3),
       no 5–8 tail. **mean win-node cutoff 2.57 → 2.82** (43% first-move) — real ordering waste, so
@@ -172,4 +175,40 @@ Two delegated Sonnet agents died on transient API 500s (one did nothing, one lef
 root dispatch, `with_branching`, `branching_stats`); `bin/queens.rs` (`--branching` flag,
 `count_mode` param, `branching_report`). **Gates**: `solve 12 --distinct` 1,060,823/1.00×; `solve
 14` ≈49.3M/1.08×; `make test` 23 ok incl. `solver_lineage_agrees`; `make clippy` clean.
-**Next**: Step 1 kernel bench (implement now the build is free) — validate ~20–140 cyc/node, then Step 3.
+
+### Step 1 — canon kernel Fermi check DONE (2026-06-16, session 2026-06-16--3)
+**GATE: PROCEED (calibrated).** Built `src/bin/canon_bench.rs` (Opus sub-agent; reproduced in main
+context). Corpus = TT-deduped n=16 DFS of real raw `available` masks (deep-heavy, mean popcount ~9).
+
+| impl                                         | cyc/canon | ns/canon | speedup | note                         |
+|----------------------------------------------|-----------|----------|---------|------------------------------|
+| baseline (today's `Queens::canon`, scatter)  | 632       | 122      | 1.00×   | the per-bit scatter = the fat|
+| **A0** (SWAR word transforms + lex-min-of-8) | **111**   | 23       | 5.3–5.7×| **the kernel**; IPC 1.19     |
+| A1 (GFNI transpose + AVX-512 min)            | 186       | 37       | 3.3×    | **NEGATIVE** — repack dominates |
+
+**Correctness (decisive):** A0 is a perfect D4-invariant — partition count = `canon` (2M=2M), and
+orbit-stress (500k masks × 8 raw D4 orientations → exactly 500k classes, `merges-match=true`).
+Reproduced on a fresh invocation.
+
+**Reads:**
+- **Structural thesis CONFIRMED.** Removing the scalar scatter → branchless, **popcount-independent**,
+  5.3× immediately, correct. The ~250× fat is real and attackable.
+- **GFNI is OUT (measured negative).** The scalar `[u64;4]`↔8×8-block repack per call dominates
+  (348 inst, 186 cyc). Do not chase GFNI; the lever is ILP + AVX2/512 256-bit ALU.
+- **Recalibration.** A0 (the *recompute* variant) = 111 cyc/canon, ~2.3× the floor's ~49 central
+  per-canon assumption ⇒ if the rewrite stalls there, node floor ≈ **~100 s (~25× over today)**,
+  not ~45 s. A0 is **dependency-chain-bound, not op-count-bound** (IPC 1.19, 133 inst ≈ the floor's
+  op estimate). The ~45 s central needs the three Step-3 levers below — plausible, not yet proven.
+- **Step 3 levers (in priority order):** (1) **incremental — hold the 8 orientations live down the
+  DFS stack, update per-move** (A0 re-folds all 8 per call = the design doc's Variant A; Variant B
+  avoids it); (2) **ILP — overlap the 8 independent images / break the serial delta-swap transpose
+  chain** (IPC 1.19 → ~3+); (3) **vectorize `[u64;4]` → one `__m256i`**. `canon_bench.rs` is the
+  Step-3 regression harness — re-run cyc/canon as each lands.
+
+**Files**: `src/bin/canon_bench.rs` (new), `Cargo.toml` (`[[bin]]`). Run: `./target/release/canon_bench
+4000000 6 bench` (gate + wall); `taskset -c 0-3 perf stat -e cycles ./target/release/canon_bench
+2000000 64 perf:a0` (÷128M). Gates green (`make test`/`clippy`). NB: the sub-agent again left
+crate-wide `cargo fmt` noise on 3 production files (whitespace only) — **not** committed (bench
+commit stages only the 2 new files); left unstaged for the user to keep-or-restore.
+**Next**: Step 3 — the DFS-resident incremental rewrite, behind the lineage + distinct gates, A/B'd
+on n=14 and tracked against `canon_bench` cyc/canon.
