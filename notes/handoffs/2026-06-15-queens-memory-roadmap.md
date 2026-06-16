@@ -463,13 +463,30 @@ the fixed stride wastes adds on DUMMY slots, eating into the branch+hoist win.
   *exact*-square repeats; iso-repeats already merge at the position key. **Lesson: when
   per-node micro-opts plateau (#17/#17b at 2-3%), step back to amortization — it was 10×.**
 
-**NOT done / next.** The graph-key per-node levers are now #17b (SIMD-batch `mix64`) and
-#19 (component-canon cache) above — both bounded / to-be-sized, and only worth it for a
-live n=16 graph-key run (freeze-time is already cheap). k=5,6 are deliberately *not* given
-the #18-style degree shortcut: the degree sequence stops being a complete invariant past
-k=4 (a cheap-but-complete k=5/6 discriminator is more work for diminishing returns). The
-load-bearing n=16 path remains structural — Chunk 4 (BuRR archive) / L2 (ply-windowing +
-external DDD) / Chunk 3 (two-tier replacement) / Chunk 2b (`fastrange`).
+**#19 cache sizing + live-gap (follow-on probes).** Cache tuned to **2^22 slots
+(64 MB/thread)**: at n=16, 2^20 is capacity-bound (2^22 = +3.7%), 2^23 ties 2^22; 64 MB ×
+24 ≈ 1.5 GB fits under the n=16 TT budget. **Live-key gap (does the merge now pay live?):
+NO** — n=14 full wall, D4 ~11 s (53.2M nodes) vs fast+#19 ~21 s (14.8M nodes): D4 per-node
+is still ~7× cheaper, so the 3.6× merge loses by ~2× *when both fit RAM*. The graph key's
+value remains the **memory** reduction at n=16 (where D4 thrashes and fast fits) — not a
+live wall win. So keep it the freeze-time / n=16-memory key; #19 just makes computing it
+~30% cheaper.
+
+**Decomposition (#8) reality-check — smaller than it looks.** The `count --comps`
+histogram already shows **only ~1.2 components/position at n=12** (~80% of positions are a
+single connected component), so the disjunctive-sum XOR shortcut would prune only the ~20%
+fragmented positions — a modest node-count win, not a multiplier — *and* it needs component
+*nimbers* (mex, no cutoff). The component-*reuse* benefit (which IS large) is already
+captured by #19 at the key-computation level. So #8 is lower-priority than it first
+appeared; fragmentation may rise toward n=16 but is unmeasured. The big remaining lever
+stays **structural memory** — Chunk 4 (BuRR archive) / L2 (ply-windowing + external DDD) /
+Chunk 3 (two-tier replacement) / Chunk 2b (`fastrange`).
+
+**NOT done / next.** The graph-key per-node line is now well-optimized (#18 +6%, #17 +3.5%,
+#17b +2%, #19 +29%+3.7% ≈ +45% compounded over the session's start). k=5,6 are deliberately
+*not* given the #18-style degree shortcut (degree sequence stops being complete past k=4).
+The load-bearing n=16 path remains structural — Chunk 4 (BuRR archive) / L2 (ply-windowing
++ external DDD) / Chunk 3 (two-tier replacement) / Chunk 2b (`fastrange`).
 
 ### Session 6 — move-ordering negative + `--distinct` presentation fix (2026-06-15)
 

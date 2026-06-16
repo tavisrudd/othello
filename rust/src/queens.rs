@@ -242,9 +242,11 @@ thread_local! {
         std::cell::RefCell::new(IsoScratch::new());
 }
 
-/// Log2 of the per-thread component-canon cache size (#19). 2^20 slots * 16 B = 16 MB
-/// per worker -- the same flat fingerprint-slot shape as the main TT.
-const COMP_CACHE_BITS: u32 = 20;
+/// Log2 of the per-thread component-canon cache size (#19). 2^22 slots * 16 B = 64 MB
+/// per worker -- the same flat fingerprint-slot shape as the main TT. Tuned at n=16: 2^20
+/// is capacity-bound (2^22 is +3.7%), 2^23 ties 2^22; 64 MB/thread (~1.5 GB across 24
+/// workers) fits comfortably under the n=16 TT budget.
+const COMP_CACHE_BITS: u32 = 22;
 
 /// Per-thread direct-mapped cache amortising [`Queens::comp_canon`] setup+WL (#19).
 /// `comp_canon` is a pure function of `(component square-set, board geometry)`, and the
