@@ -206,16 +206,17 @@ fn hash_colours(verts: &[u32], colour: &[u64]) -> u64 {
 /// per-call zeroing -- **zero heap allocation in the hot loop**. Boxed so the buffers
 /// live on the heap once per thread, not on every call's stack.
 struct IsoScratch {
-    col: [u64; MAXV],            // current colour per square
-    nxt: [u64; MAXV],            // next-round colour per square
-    base: [u64; MAXV],           // degree-seeded colour (restored before each individualise)
+    col: [u64; MAXV],            // current colour per *local* vertex (lcol[0..k])
+    nxt: [u64; MAXV],            // next-round colour per local vertex
+    base: [u64; MAXV],           // degree-seeded local colour (restored before each individualise)
     sort: [u64; MAXV],           // scratch for class-count / colour-multiset sorts
     sigs: [u64; MAXV],           // per-vertex individualisation signatures
     comp_keys: [u64; MAXV],      // per-component canonical keys
-    mcol: [u64; MAXV + 1],       // mix64(col) per square, hoisted once/round; [MAXV]=0 dummy
-    verts: [u8; MAXV],           // component vertices (square indices)
-    order: [u8; MAXV],           // canonical vertex order for the certificate
-    nbr_pad: [u16; MAXV * MAXV], // fixed-stride neighbour *squares*, DUMMY_VERT-padded (#17)
+    mc: [u64; MAXV + 1],         // mix64(lcol) per local vertex, hoisted once/round; [MAXV]=0 dummy
+    verts: [u8; MAXV],           // local vertex -> square index
+    loc: [u16; MAXV],            // square index -> local vertex (inverse of verts)
+    order: [u8; MAXV],           // canonical *local* vertex order for the certificate
+    nbr_pad: [u16; MAXV * MAXV], // fixed-stride neighbour *local* indices, DUMMY_VERT-padded (#17)
 }
 
 impl IsoScratch {
@@ -227,8 +228,9 @@ impl IsoScratch {
             sort: [0; MAXV],
             sigs: [0; MAXV],
             comp_keys: [0; MAXV],
-            mcol: [0; MAXV + 1],
+            mc: [0; MAXV + 1],
             verts: [0; MAXV],
+            loc: [0; MAXV],
             order: [0; MAXV],
             nbr_pad: [0; MAXV * MAXV],
         })
@@ -251,41 +253,38 @@ thread_local! {
 /// - **fixed-trip inner loop** (`0..stride` every vertex) -- the loop-exit branch is
 ///   perfectly predicted, where the per-vertex variable trip mispredicted on exit.
 ///
-/// `mcol[DUMMY_VERT]` is held at 0, so padding slots add nothing: the accumulated `h`
-/// is bit-identical to summing `mix64(col[t])` over the real neighbours only.
-// Args are disjoint `IsoScratch` fields, split out so the borrow checker sees them as
-// non-overlapping (a single `&mut IsoScratch` could not be reborrowed per field here).
-#[allow(clippy::too_many_arguments)]
+/// `mc[DUMMY_VERT]` is held at 0, so padding slots add nothing: the accumulated `h`
+/// is bit-identical to summing `mix64(lcol[t])` over the real neighbours only.
+///
+/// Colours are **compact local** (`lcol[0..k]`, vertex `i`'s colour), so the per-round
+/// `mc[i] = mix64(lcol[i])` map is a contiguous load→mix→store with no gather/scatter --
+/// LLVM auto-vectorises it to AVX-512 `vpmullq`/`vpsrlq`/`vpxorq` (8× u64) on znver5
+/// (#17b). The fold's only gather (`mc[neighbour-local]`) hits a small `k`-element array.
 fn wl_refine_in(
     k: usize,
     stride: usize,
-    verts: &[u8],
     nbr_pad: &[u16],
-    col: &mut [u64],
-    nxt: &mut [u64],
-    mcol: &mut [u64],
+    lcol: &mut [u64],
+    nlcol: &mut [u64],
+    mc: &mut [u64],
     sort: &mut [u64],
 ) {
     let mut prev = 0usize;
-    mcol[DUMMY_VERT] = 0; // padding contributes nothing; never overwritten below
+    mc[DUMMY_VERT] = 0; // padding contributes nothing; never overwritten below
     for _ in 0..k {
-        for &vi in &verts[..k] {
-            let v = vi as usize;
-            mcol[v] = mix64(col[v]);
+        for i in 0..k {
+            mc[i] = mix64(lcol[i]); // contiguous map -> AVX-512 vectorised
         }
-        for (i, &vi) in verts[..k].iter().enumerate() {
-            let v = vi as usize;
-            let mut h = col[v].wrapping_mul(0x100_0000_01B3);
+        for i in 0..k {
+            let mut h = lcol[i].wrapping_mul(0x100_0000_01B3);
             let base = i * stride;
             for s in 0..stride {
-                h = h.wrapping_add(mcol[nbr_pad[base + s] as usize]);
+                h = h.wrapping_add(mc[nbr_pad[base + s] as usize]);
             }
-            nxt[v] = mix64(h);
+            nlcol[i] = mix64(h);
         }
-        for &v in &verts[..k] {
-            col[v as usize] = nxt[v as usize];
-        }
-        let c = classes_in(k, verts, col, sort);
+        lcol[..k].copy_from_slice(&nlcol[..k]);
+        let c = classes_in(k, lcol, sort);
         if c == prev {
             break;
         }
@@ -293,11 +292,9 @@ fn wl_refine_in(
     }
 }
 
-/// The number of distinct colours among the `k` vertices (uses preallocated `sort`).
-fn classes_in(k: usize, verts: &[u8], col: &[u64], sort: &mut [u64]) -> usize {
-    for i in 0..k {
-        sort[i] = col[verts[i] as usize];
-    }
+/// The number of distinct colours among the `k` (local) vertices (uses `sort`).
+fn classes_in(k: usize, lcol: &[u64], sort: &mut [u64]) -> usize {
+    sort[..k].copy_from_slice(&lcol[..k]);
     let s = &mut sort[..k];
     s.sort_unstable();
     let mut c = 0usize;
@@ -311,11 +308,9 @@ fn classes_in(k: usize, verts: &[u8], col: &[u64], sort: &mut [u64]) -> usize {
     c
 }
 
-/// Hash the sorted colour multiset of the `k` vertices (uses preallocated `sort`).
-fn hash_colours_in(k: usize, verts: &[u8], col: &[u64], sort: &mut [u64]) -> u64 {
-    for i in 0..k {
-        sort[i] = col[verts[i] as usize];
-    }
+/// Hash the sorted colour multiset of the `k` (local) vertices (uses `sort`).
+fn hash_colours_in(k: usize, lcol: &[u64], sort: &mut [u64]) -> u64 {
+    sort[..k].copy_from_slice(&lcol[..k]);
     let s = &mut sort[..k];
     s.sort_unstable();
     s.iter().fold(0x2545_F491_4F6C_DD1D, |h, &x| {
@@ -324,22 +319,26 @@ fn hash_colours_in(k: usize, verts: &[u8], col: &[u64], sort: &mut [u64]) -> u64
 }
 
 /// Hash the adjacency of a discrete-coloured component in canonical (colour) order --
-/// a complete certificate. Uses preallocated `order`.
+/// a complete certificate. `order` holds *local* indices sorted by colour; `verts` maps
+/// each back to its square for the adjacency test. Uses preallocated `order`.
 fn cert_hash_in(
     attack: &[Bits],
     comp: Bits,
     k: usize,
     verts: &[u8],
-    col: &[u64],
+    lcol: &[u64],
     order: &mut [u8],
 ) -> u64 {
-    order[..k].copy_from_slice(&verts[..k]);
-    order[..k].sort_unstable_by_key(|&v| col[v as usize]);
+    for (i, o) in order[..k].iter_mut().enumerate() {
+        *o = i as u8; // local indices 0..k (discrete colouring ⇒ k <= MAXV)
+    }
+    order[..k].sort_unstable_by_key(|&li| lcol[li as usize]);
     let mut h = 0x0CA7_F00D_u64;
     for ii in 0..k {
-        let vi = order[ii];
+        let vi = verts[order[ii] as usize]; // square
         let nbr = attack[vi as usize].and(comp);
-        for (jj, &vj) in order[..k].iter().enumerate() {
+        for jj in 0..k {
+            let vj = verts[order[jj] as usize]; // square
             if vi != vj && nbr.get(vj as u32) {
                 h = mix64(h ^ (jj as u64 + 1)).wrapping_mul(0x9E37_79B9_7F4A_7C15);
             }
@@ -787,55 +786,55 @@ impl Queens {
                 stride = deg;
             }
         }
+        // Invert verts so neighbour squares map to compact local indices 0..k.
+        for i in 0..k {
+            s.loc[s.verts[i] as usize] = i as u16;
+        }
         // Build the fixed-stride neighbour table once (one bit-scan per vertex, not per
-        // round): real neighbour squares then DUMMY_VERT padding. Seed colours by degree.
+        // round): real neighbours as *local* indices, then DUMMY_VERT padding. Seed the
+        // compact colour `lcol[i] = base[i]` by degree.
         for i in 0..k {
             let v = s.verts[i] as usize;
             let base = i * stride;
             let mut p = base;
             self.attack[v].and(comp).each(|t| {
                 if t != v as u32 {
-                    s.nbr_pad[p] = t as u16;
+                    s.nbr_pad[p] = s.loc[t as usize];
                     p += 1;
                 }
             });
             for q in p..base + stride {
                 s.nbr_pad[q] = DUMMY_VERT as u16;
             }
-            s.base[v] = ((p - base) as u64) | 0x9E37_79B9_0000_0000;
-            s.col[v] = s.base[v];
+            s.base[i] = ((p - base) as u64) | 0x9E37_79B9_0000_0000;
+            s.col[i] = s.base[i];
         }
         wl_refine_in(
             k,
             stride,
-            &s.verts,
             &s.nbr_pad,
             &mut s.col,
             &mut s.nxt,
-            &mut s.mcol,
+            &mut s.mc,
             &mut s.sort,
         );
-        if classes_in(k, &s.verts, &s.col, &mut s.sort) == k {
+        if classes_in(k, &s.col, &mut s.sort) == k {
             return cert_hash_in(&self.attack, comp, k, &s.verts, &s.col, &mut s.order);
         }
         // Non-discrete: individualise each vertex, refine, combine the signatures.
         for i in 0..k {
-            for j in 0..k {
-                let w = s.verts[j] as usize;
-                s.col[w] = s.base[w];
-            }
-            s.col[s.verts[i] as usize] = 0xD15C_0DED_1111_2222;
+            s.col[..k].copy_from_slice(&s.base[..k]);
+            s.col[i] = 0xD15C_0DED_1111_2222;
             wl_refine_in(
                 k,
                 stride,
-                &s.verts,
                 &s.nbr_pad,
                 &mut s.col,
                 &mut s.nxt,
-                &mut s.mcol,
+                &mut s.mc,
                 &mut s.sort,
             );
-            s.sigs[i] = hash_colours_in(k, &s.verts, &s.col, &mut s.sort);
+            s.sigs[i] = hash_colours_in(k, &s.col, &mut s.sort);
         }
         let sigs = &mut s.sigs[..k];
         sigs.sort_unstable();
