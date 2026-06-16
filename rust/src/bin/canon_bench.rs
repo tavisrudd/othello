@@ -852,7 +852,9 @@ fn time_a3(att: &[[u64; 4]], orients: &[[[u64; 4]; 8]], moves: &[u32], reps: usi
     let t = Instant::now();
     let mut acc: u64 = 0;
     for _ in 0..reps {
-        for (o0, &m) in orients.iter().zip(moves) {
+        // Cycle the small (L1-resident) orientation set across the full move stream: the
+        // orientations stay cache-hot (inherited), only the move + its att load varies.
+        for (o0, &m) in orients.iter().cycle().zip(moves) {
             let o0 = black_box(o0);
             acc = acc.wrapping_add(unsafe { a1::a3_key(o0, att, m as usize) });
         }
@@ -917,12 +919,19 @@ fn main() {
     // working set of (orientations, first-move) pairs. Built in EVERY mode (and anchored
     // with black_box) so the perf:build cycle subtraction stays consistent across impls.
     let att = build_att(&g);
-    let cap_a3 = corpus.len().min(1 << 14);
-    let mut a3_orients: Vec<[[u64; 4]; 8]> = Vec::with_capacity(cap_a3);
-    let mut a3_moves: Vec<u32> = Vec::with_capacity(cap_a3);
-    for &available in &corpus[..cap_a3] {
+    // A3 models the DFS: the parent's 8 orientations are INHERITED (register/L1-resident,
+    // not recomputed and not streamed from memory); only the move's per-orientation attack
+    // is loaded (from the 64 KB att table). So keep a SMALL L1-resident set of representative
+    // orientations (cycled in the timed loop) plus the full move stream. The recompute of
+    // the 8 images is excluded — orientations are precomputed here, once, outside timing.
+    const A3_ORIENTS: usize = 256; // 64 KB working set: cache-hot, stands in for inheritance
+    let mut a3_orients: Vec<[[u64; 4]; 8]> = Vec::new();
+    let mut a3_moves: Vec<u32> = Vec::new();
+    for &available in &corpus {
         if let Some(m) = first_sq(available) {
-            a3_orients.push(orient0_of(&g, available));
+            if a3_orients.len() < A3_ORIENTS {
+                a3_orients.push(orient0_of(&g, available));
+            }
             a3_moves.push(m);
         }
     }
@@ -986,7 +995,7 @@ fn main() {
                 return;
             }
             let (_, acc) = time_a3(&att, &a3_orients, &a3_moves, reps);
-            eprintln!("a3 acc={acc} canons={}", a3_orients.len() * reps);
+            eprintln!("a3 acc={acc} canons={}", a3_moves.len() * reps);
             return;
         }
         _ => {}
@@ -1109,8 +1118,8 @@ fn main() {
         println!("{:<10} {:>12.3} {:>9.2}x", "A2", per(ns), base_ns / per(ns));
     }
     if let Some(ns) = ns_a3 {
-        // A3 times its own cache-resident working set, so its divisor differs.
-        let a3_n = (a3_orients.len() * reps) as f64;
+        // A3 times the full move stream (orientations cycled), so its divisor differs.
+        let a3_n = (a3_moves.len() * reps) as f64;
         let a3_per = ns as f64 / a3_n;
         println!(
             "{:<10} {:>12.3} {:>9.2}x  (incremental model — NOT recompute)",
