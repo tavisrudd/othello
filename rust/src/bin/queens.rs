@@ -187,6 +187,13 @@ enum Cmd {
         /// Sizes the Chunk-4 staged-cascade lever. Even n only; does its own searches.
         #[arg(long)]
         roots: bool,
+        /// Measure **b̄ (canons per distinct node)** and the **win-node cutoff
+        /// distribution**: total `node_key` (canon) calls ÷ distinct positions = the
+        /// per-node canonicalisation multiplier the theoretical floor turns on, plus how
+        /// many moves are tried before the α-β cutoff fires at win nodes (mean ≈ 1 ⇒
+        /// move ordering near-optimal ⇒ searched set ≈ minimal proof DAG). Sequential.
+        #[arg(long)]
+        branching: bool,
         /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
         #[arg(long = "hll-p", default_value_t = 16, value_parser = clap::value_parser!(u32).range(4..=18))]
         hll_p: u32,
@@ -294,6 +301,7 @@ fn main() {
             comps,
             psym,
             roots,
+            branching,
             hll_p,
         } => {
             let q = Queens::new(n);
@@ -302,11 +310,14 @@ fn main() {
             } else {
                 count_mode(
                     &q,
-                    parallel && !iso && !comps && !psym,
+                    // branching needs the sequential const-generic path, like the other
+                    // exact sub-reports.
+                    parallel && !iso && !comps && !psym && !branching,
                     exact || iso || comps || psym,
                     iso,
                     comps,
                     psym,
+                    branching,
                     hll_p,
                 );
             }
@@ -1185,6 +1196,9 @@ fn nimber_mode(q: &Queens) {
 /// working set -- by folding every position the search looks up into a
 /// HyperLogLog (and, with `--exact`, a hash set). The counts for n=10/12/14 fit a
 /// growth curve that extrapolates n=16's memory needs (the open frontier).
+// Cold CLI dispatch: one bool per measurement sub-mode is clearer here than a flags
+// struct that exists only to thread straight through to the sub-reports.
+#[allow(clippy::too_many_arguments)]
 fn count_mode(
     q: &Queens,
     parallel: bool,
@@ -1192,6 +1206,7 @@ fn count_mode(
     iso: bool,
     comps: bool,
     psym: bool,
+    branching: bool,
     hll_p: u32,
 ) {
     if parallel && exact {
@@ -1214,7 +1229,8 @@ fn count_mode(
     let solver: Box<dyn Solver> = if parallel {
         Box::new(Parallel::new_counting(bits, hll_p))
     } else {
-        Box::new(Tt::new_counting(bits, true, hll_p, exact))
+        let tt = Tt::new_counting(bits, true, hll_p, exact);
+        Box::new(if branching { tt.with_branching() } else { tt })
     };
     let how = if parallel { "parallel" } else { "sequential" };
     println!(
@@ -1265,6 +1281,63 @@ fn count_mode(
     }
     if psym {
         psym_report(q, solver.as_ref());
+    }
+    if branching {
+        branching_report(solver.as_ref(), distinct);
+    }
+}
+
+/// `count --branching`: the per-node canonicalisation multiplier and the move-ordering
+/// quality, the two inputs the theoretical floor turns on.
+///   - **b̄ = edges (node_key/canon calls) ÷ distinct positions** — every floor estimate
+///     is `distinct × b̄ × cost(canon)`, so b̄ is the linear multiplier (and is unmeasured
+///     until now).
+///   - **win-node cutoff distribution** — at a node that finds a winning move, how many
+///     moves were tried first. Mean ≈ 1 ⇒ the static most-blocking order is near-perfect
+///     ⇒ the searched set is close to the minimal proof DAG (little for a smarter proof
+///     search to recover); a long tail ⇒ ordering waste a DAG-aware df-pn could prune.
+fn branching_report(solver: &dyn Solver, distinct: f64) {
+    let Some(bs) = solver.branching_stats() else {
+        eprintln!("  (branching: stats not captured — needs the sequential --branching solver)");
+        return;
+    };
+    let expanded = solver.nodes().max(1);
+    let win = bs.win_nodes.max(1);
+    println!("  branching / cutoff (sequential):");
+    println!("    expanded nodes (TT misses):           {}", commas(expanded));
+    println!("    edges keyed (node_key / canon calls): {}", commas(bs.edges));
+    println!(
+        "    b̄ = canons ÷ distinct:                {:.3}",
+        bs.edges as f64 / distinct
+    );
+    println!(
+        "    b̄ = canons ÷ expanded node:           {:.3}",
+        bs.edges as f64 / expanded as f64
+    );
+    println!(
+        "    win nodes: {}    prove-a-loss nodes: {}",
+        commas(bs.win_nodes),
+        commas(bs.loss_nodes)
+    );
+    println!(
+        "    mean moves tried before cutoff @ win nodes: {:.3}",
+        bs.win_tried_sum as f64 / win as f64
+    );
+    println!("    win-node cutoff distribution (1 = first available move won):");
+    for (k, &c) in bs.win_cut.iter().enumerate() {
+        if c == 0 {
+            continue;
+        }
+        let label = if k == 7 {
+            "8+".to_string()
+        } else {
+            (k + 1).to_string()
+        };
+        println!(
+            "      cut@{label:>3}: {:>14}  ({:.2}%)",
+            commas(c),
+            c as f64 / win as f64 * 100.0
+        );
     }
 }
 
