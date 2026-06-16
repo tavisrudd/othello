@@ -167,6 +167,13 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
       solver/timing + distinct print **right under the verdict** (before the PV step), the **PV bar
       resets** to its own nodes (`Phase::OptimalLine`), times as **XmYs**. `make pgo-queens`/`pgo-release`
       now profile `solve 14 incremental`. Gates green; checkpoint round-trip + SIGINT save verified.
+- [x] **`incremental` is now the DEFAULT solver + resume reflects snapshot progress (commit `7752712`).**
+      `queens solve N` (and `self`/`play`/no-subcommand) default to `incremental`. **Resume UX:**
+      `first_player_wins` pre-probes each first-move key in the warm TT → counts decided roots toward
+      `N/36` at once (was climbing 0→14 over ~2 min on a mid-search resume) **and skips re-searching
+      them**; the **node count is recorded in the TT image header** (reserved bytes, back-compat) and
+      **restored on load** so a resume's node total = whole search; **load progress bar** too. Cold
+      runs unchanged (no warm hits). Verified: resume restores ~53.2M nodes + 28/28 roots instantly.
 - [ ] **Next levers (Step 3 follow-ons, the ~60 s floor still ~28× below):** the n=14 ~1.5× is the
       first cut — the canon was a big per-node fraction but TT/DRAM latency + movegen remain. The
       kernel notes' deferred levers: (1) **ILP** — overlap the 8 independent `and-not`s / break the
