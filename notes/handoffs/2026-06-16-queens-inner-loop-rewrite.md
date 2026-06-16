@@ -22,7 +22,11 @@ This is **frontier 1 of a 3-frontier program** (decided 2026-06-16, user):
 1. **n=16 → its floor** (this handoff) — inner-loop rewrite.
 2. **n=18** — external-memory ply-windowed DDD + BuRR-on-disk (~3×10¹² nodes, ~130–450 GB on the
    1.3 TB zpool; needs *this* rewrite as a prerequisite). See floor-doc §8.
-3. **n=14 nimber** — later; component decomposition + small-component nimber DB (#8).
+3. **n=14 nimber** — later; component decomposition + small-component nimber DB (#8). Floor +
+   feasibility in [the nimber floor doc](../2026-06-16-queens-nimber-floor.md): plain mex is
+   *bigger* than solved n=16 (~2×10¹⁰), but Sprague-Grundy decomposition collapses the work base
+   from positions to ~distinct connected components (~100–1000×) → feasible. Soft input = the
+   distinct-component count (the b̄-analog), unmeasured.
 
 ## Key Architecture Decisions
 
