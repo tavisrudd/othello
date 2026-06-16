@@ -332,7 +332,7 @@ are cross-referenced, not repeated.
 | 6 | ~~History / killer move ordering~~ | B | **NEGATIVE (session 6) — move ordering is a dead end here.** The static most-blocking order is *near-optimal* (this is a blocking game). History (global β-cutoff tally) is **~2× WORSE** (n=14 working set 49.1M→113.0M, +130 %; robust to weight); effective-degree (context-local, #6b) decays to ~0 by n=16 and reverses under parallel. Killer-per-ply untested but a poor bet (Othello "depth-indexed killers mis-order" + this blow-up). **Spend effort on structural levers (#7/#8/#11/Chunk 4), not ordering.** Tables + mechanism in the session-6 note. |
 | 6b | ~~Dynamic effective-degree ordering~~ | B | **NEGATIVE (session 6).** Re-rank by `popcount(attack & available)` per node: shrinks the *sequential* working set but the gain **decays super-linearly** (1.80×→1.33×→1.025× at n=10/12/14 → ~0 at n=16) and **reverses under parallel** (n=14 +9–12 %). Mechanism + table in the session-6 handoff note. Reverted. |
 | 16 | ABDADA in-evaluation deferral | A/C | **lock-free-enabled.** Mark a slot "being evaluated" (spare bit; `val` uses 1 of 8); a 2nd worker reaching it *defers* (other moves first, return later) not duplicates. *Defers*, so unlike deep-YBWC (fact #5) it preserves the α-β cutoff. Targets the ~1.6 % parallel NODE re-expansion only — **compute/DRAM, not the distinct working set**; low priority, DRAM-bound search. |
-| 17 | **Branchless / SIMD graph-key refine** ⏭ | A | **QUEUED — now sharper-targeted (session 7).** The `count --comps` histogram shows the per-node graph-key cost lives in the **k=5–16 bulk** (~⅔ of components; tiny `k≤4` is only ~32%, already handled by #18), so #17 attacks the *dominant* cost, not the tail — more headroom than #18 had. Still TMA frontend/branch-bound (mispredicts in the data-dependent neighbour walk); pad neighbour lists to a fixed stride (kill the variable-trip exit mispredict), vectorise the colour fold with AVX-512 (znver5). Bounded by the TMA bad-speculation share (~8.5% of cycles). Only worth it if a live n=16 graph-key run needs the wall back — already cheap enough for the freeze-time archive. |
+| 17 | ~~Branchless graph-key refine~~ | A | **DONE (session 7) — WIN, +3.5% at n=16 (value-preserving).** Padded each WL neighbour row to a fixed `stride` (max degree) with a DUMMY filler → fixed-trip inner loop (kills the per-vertex exit mispredict), and **hoisted `mix64` out of the per-edge loop** into `mcol` (computed once/vertex/round = `k` calls, not once/edge = `2|E|`); the DUMMY's mixed colour is held at 0, so colours come out **byte-identical** (n=12 symmetry fast = 310,356 exactly, all tests pass). +3.5% n=16 partial throughput (taskset, swapped), +3.2% n=14 wall, ~1-2% n=12 (smaller/sparser comps). Modest — the padding wastes adds on skewed-degree comps, offsetting some of the branch+hoist win. **Further bang queued:** SIMD-batch `mix64` (frontend-bound; #17b) and/or **amortize comp_canon setup via a per-thread component-canon cache** (#19) — see session-7 note. |
 | 18 | ~~Pseudo-memoize tiny components (no table)~~ | A | **DONE (session 7) — WIN, modest (~4-5%, grows with n).** `comp_canon` maps `k ≤ 4` components straight to a constant from the sorted degree sequence (complete iso invariant for connected graphs on ≤4 vertices; `tiny_component_key_matches_full_canon` proves same partition as the full canon), skipping CSR+WL+cert. Merge + verdict preserved. **`count --comps` corrected the prior:** tiny components are only ~32% of all (not "overwhelmingly tiny"), so the win is bounded — the k=5–16 bulk (#17) is the real cost. The tooling is monomorphised on `const HIST` (zero production cost; demonstrates the hot-path-toggle rule). k=5,6 stay un-shortcut: degree sequence is *not* complete past k=4. |
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
 | 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
@@ -427,11 +427,37 @@ so PGO never clobbers the plain `make release` (`target/release/`). The PGO'd qu
 at `target/pgo-release/release/queens` (~1.02 MB vs 1.09 MB plain — PGO trims cold code;
 verdict unchanged). (Useful for an eventual n=16 run; orthogonal to the search levers.)
 
-**NOT done / next.** #17 (branchless/SIMD WL refine) is the natural follow-on — the
-histogram shows it attacks the dominant k=5–16 cost, so more headroom than #18, but still
-bounded by the TMA bad-speculation share (~8.5% of cycles) and only worth it if a live
-n=16 graph-key run needs the wall back (freeze-time is already cheap). k=5,6 are
-deliberately *not* shortcut: the degree sequence stops being a complete invariant past
+**WIN (modest) — #17 branchless WL refine.** Padded each WL neighbour row to a fixed
+`stride` (the component's max degree) with a `DUMMY_VERT` filler so the inner fold loop is
+**fixed-trip** (the per-vertex variable trip was the TMA's exit-mispredict source), and
+**hoisted `mix64` out of the per-edge loop** into a per-round `mcol` table — computed once
+per vertex (`k` calls/round) instead of once per incident edge (`2|E|` calls). The DUMMY's
+mixed colour is pinned at 0, so padding slots add nothing and the colours are **byte-
+identical** to before — proven: n=12 symmetry fast = **310,356 exactly** (matches pre-#17),
+all tests green, D4 gate intact. *Measured (value-preserving ⇒ node counts identical, pure
+per-node-cost A/B):* **+3.5% n=16** partial throughput (taskset-pinned, swapped: 65.6→67.9
+K/s), **+3.2% n=14** wall (28.0→27.1s), ~1-2% n=12. Modest — for skewed-degree components
+the fixed stride wastes adds on DUMMY slots, eating into the branch+hoist win.
+
+**Two ways to get more bang (user prompt, queued):**
+- **#17b — SIMD-batch `mix64`.** Post-#17 the key is frontend-bound (instruction stream);
+  `mix64` is the bulk ALU and vectorises 8-wide (znver5 AVX-512: `vpmullq`/`vpsrlq`/`vpxorq`).
+  Switch WL to a **compact local colour layout** (`lcol[0..k]`) so the per-round
+  `mcol[i]=mix64(lcol[i])` map is contiguous and auto-vectorises (no gather/scatter); the
+  fold keeps a small-array gather. Value-preserving. Bounded by the frontend share, so a few %.
+- **#19 — amortize `comp_canon` setup (per-thread component cache).** The graph key is
+  recomputed *every node* (before the TT probe), and `comp_canon` is a pure function of the
+  component's square-set. A small direct-mapped per-thread cache `component Bits → canon u64`
+  (fingerprint-guarded like the TT) would skip the whole setup+WL on a recurring component —
+  **potentially the bigger lever** (skips, not just speeds up) **if exact-square components
+  recur often**. Size it first: measure distinct component square-sets vs total instances
+  (extend `count --comps`); build only if recurrence is high. Note it amortizes *exact*-square
+  repeats, not iso-repeats (those already merge at the position key).
+
+**NOT done / next.** The graph-key per-node levers are now #17b (SIMD-batch `mix64`) and
+#19 (component-canon cache) above — both bounded / to-be-sized, and only worth it for a
+live n=16 graph-key run (freeze-time is already cheap). k=5,6 are deliberately *not* given
+the #18-style degree shortcut: the degree sequence stops being a complete invariant past
 k=4 (a cheap-but-complete k=5/6 discriminator is more work for diminishing returns). The
 load-bearing n=16 path remains structural — Chunk 4 (BuRR archive) / L2 (ply-windowing +
 external DDD) / Chunk 3 (two-tier replacement) / Chunk 2b (`fastrange`).

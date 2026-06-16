@@ -50,6 +50,12 @@ const MAXV: usize = (MAX_N * MAX_N) as usize;
 /// lookup instead of WL refinement (#18). For connected graphs on at most four
 /// vertices the sorted degree sequence is a complete isomorphism invariant.
 const TINY_MAX: usize = 4;
+/// Sentinel "vertex" the padded WL neighbour lists fill unused slots with (#17).
+/// It indexes a reserved scratch cell whose mixed colour is held at 0, so a padding
+/// slot contributes nothing to the colour fold -- the fixed-stride loop stays
+/// value-identical to the variable-trip one. One past the real square range
+/// (squares are `0..MAXV`), so it never collides with a real vertex.
+const DUMMY_VERT: usize = MAXV;
 
 /// A fixed-width board bitset (`WORDS*64` bits). `Ord`/`Hash` are the derived
 /// lexicographic order on the words -- a total order, all we need to pick a
@@ -196,20 +202,20 @@ fn hash_colours(verts: &[u32], colour: &[u64]) -> u64 {
 
 /// Per-thread preallocated scratch for the allocation-free graph key
 /// ([`Queens::iso_key_fast`]). Reused across every node on a rayon worker; every cell
-/// is written before it is read (only the `[..k]` prefixes are touched), so it needs no
-/// per-call zeroing -- **zero heap allocation in the hot loop**. Boxed so the ~16 KB of
-/// buffers live on the heap once per thread, not on every call's stack.
+/// is written before it is read (only the touched prefixes are read), so it needs no
+/// per-call zeroing -- **zero heap allocation in the hot loop**. Boxed so the buffers
+/// live on the heap once per thread, not on every call's stack.
 struct IsoScratch {
-    col: [u64; MAXV],           // current colour per square
-    nxt: [u64; MAXV],           // next-round colour per square
-    base: [u64; MAXV],          // degree-seeded colour (restored before each individualise)
-    sort: [u64; MAXV],          // scratch for class-count / colour-multiset sorts
-    sigs: [u64; MAXV],          // per-vertex individualisation signatures
-    comp_keys: [u64; MAXV],     // per-component canonical keys
-    verts: [u8; MAXV],          // component vertices (square indices)
-    order: [u8; MAXV],          // canonical vertex order for the certificate
-    nbr_off: [u32; MAXV + 1],   // CSR offsets into nbr_idx, by compact vertex index
-    nbr_idx: [u8; MAXV * MAXV], // CSR neighbour *square* lists (counted loop, no bit-scan)
+    col: [u64; MAXV],            // current colour per square
+    nxt: [u64; MAXV],            // next-round colour per square
+    base: [u64; MAXV],           // degree-seeded colour (restored before each individualise)
+    sort: [u64; MAXV],           // scratch for class-count / colour-multiset sorts
+    sigs: [u64; MAXV],           // per-vertex individualisation signatures
+    comp_keys: [u64; MAXV],      // per-component canonical keys
+    mcol: [u64; MAXV + 1],       // mix64(col) per square, hoisted once/round; [MAXV]=0 dummy
+    verts: [u8; MAXV],           // component vertices (square indices)
+    order: [u8; MAXV],           // canonical vertex order for the certificate
+    nbr_pad: [u16; MAXV * MAXV], // fixed-stride neighbour *squares*, DUMMY_VERT-padded (#17)
 }
 
 impl IsoScratch {
@@ -221,10 +227,10 @@ impl IsoScratch {
             sort: [0; MAXV],
             sigs: [0; MAXV],
             comp_keys: [0; MAXV],
+            mcol: [0; MAXV + 1],
             verts: [0; MAXV],
             order: [0; MAXV],
-            nbr_off: [0; MAXV + 1],
-            nbr_idx: [0; MAXV * MAXV],
+            nbr_pad: [0; MAXV * MAXV],
         })
     }
 }
@@ -234,26 +240,45 @@ thread_local! {
         std::cell::RefCell::new(IsoScratch::new());
 }
 
-/// 1-WL refine `col` (square-indexed) to stability over the `k` component vertices,
-/// using preallocated `nxt`/`sort` -- no allocation.
+/// 1-WL refine `col` (square-indexed) to stability over the `k` component vertices.
+/// `nbr_pad` is the fixed-stride neighbour table: row `i` holds vertex `i`'s neighbour
+/// squares in `nbr_pad[i*stride .. i*stride+deg]`, the rest padded with [`DUMMY_VERT`].
+/// All preallocated; no allocation (#17).
+///
+/// Two TMA-driven shapes vs the old variable-trip CSR walk, both value-identical:
+/// - **`mix64` hoisted out of the per-edge loop** into `mcol` -- computed once per
+///   vertex per round (`k` calls) instead of once per incident edge (`2|E|` calls).
+/// - **fixed-trip inner loop** (`0..stride` every vertex) -- the loop-exit branch is
+///   perfectly predicted, where the per-vertex variable trip mispredicted on exit.
+///
+/// `mcol[DUMMY_VERT]` is held at 0, so padding slots add nothing: the accumulated `h`
+/// is bit-identical to summing `mix64(col[t])` over the real neighbours only.
+// Args are disjoint `IsoScratch` fields, split out so the borrow checker sees them as
+// non-overlapping (a single `&mut IsoScratch` could not be reborrowed per field here).
+#[allow(clippy::too_many_arguments)]
 fn wl_refine_in(
     k: usize,
+    stride: usize,
     verts: &[u8],
-    nbr_off: &[u32],
-    nbr_idx: &[u8],
+    nbr_pad: &[u16],
     col: &mut [u64],
     nxt: &mut [u64],
+    mcol: &mut [u64],
     sort: &mut [u64],
 ) {
     let mut prev = 0usize;
+    mcol[DUMMY_VERT] = 0; // padding contributes nothing; never overwritten below
     for _ in 0..k {
-        for i in 0..k {
-            let v = verts[i] as usize;
+        for &vi in &verts[..k] {
+            let v = vi as usize;
+            mcol[v] = mix64(col[v]);
+        }
+        for (i, &vi) in verts[..k].iter().enumerate() {
+            let v = vi as usize;
             let mut h = col[v].wrapping_mul(0x100_0000_01B3);
-            // Counted loop over the precomputed neighbour squares -- no data-dependent
-            // bit-scan, so the branch predictor stays warm (TMA: was frontend-bound).
-            for &t in &nbr_idx[nbr_off[i] as usize..nbr_off[i + 1] as usize] {
-                h = h.wrapping_add(mix64(col[t as usize]));
+            let base = i * stride;
+            for s in 0..stride {
+                h = h.wrapping_add(mcol[nbr_pad[base + s] as usize]);
             }
             nxt[v] = mix64(h);
         }
@@ -753,30 +778,41 @@ impl Queens {
     /// the [`tiny_comp_key`] shortcut). Kept as a named entry so the test corpus can
     /// cross-check the shortcut against it on small components too.
     fn comp_canon_full(&self, comp: Bits, k: usize, s: &mut IsoScratch) -> u64 {
-        // Build the CSR neighbour lists once (one bit-scan per vertex, not per round),
-        // and seed colours by degree. The hot refine then iterates a counted slice.
-        let mut off = 0u32;
+        // Stride = the component's max degree (one branchless popcount per vertex, no
+        // bit-scan), so every padded neighbour row is the same fixed length.
+        let mut stride = 0usize;
         for i in 0..k {
-            s.nbr_off[i] = off;
-            let nbr = self.attack[s.verts[i] as usize].and(comp);
-            nbr.each(|t| {
-                if t != s.verts[i] as u32 {
-                    s.nbr_idx[off as usize] = t as u8;
-                    off += 1;
+            let deg = self.attack[s.verts[i] as usize].and(comp).popcount() as usize - 1;
+            if deg > stride {
+                stride = deg;
+            }
+        }
+        // Build the fixed-stride neighbour table once (one bit-scan per vertex, not per
+        // round): real neighbour squares then DUMMY_VERT padding. Seed colours by degree.
+        for i in 0..k {
+            let v = s.verts[i] as usize;
+            let base = i * stride;
+            let mut p = base;
+            self.attack[v].and(comp).each(|t| {
+                if t != v as u32 {
+                    s.nbr_pad[p] = t as u16;
+                    p += 1;
                 }
             });
-            let v = s.verts[i] as usize;
-            s.base[v] = ((off - s.nbr_off[i]) as u64) | 0x9E37_79B9_0000_0000;
+            for q in p..base + stride {
+                s.nbr_pad[q] = DUMMY_VERT as u16;
+            }
+            s.base[v] = ((p - base) as u64) | 0x9E37_79B9_0000_0000;
             s.col[v] = s.base[v];
         }
-        s.nbr_off[k] = off;
         wl_refine_in(
             k,
+            stride,
             &s.verts,
-            &s.nbr_off,
-            &s.nbr_idx,
+            &s.nbr_pad,
             &mut s.col,
             &mut s.nxt,
+            &mut s.mcol,
             &mut s.sort,
         );
         if classes_in(k, &s.verts, &s.col, &mut s.sort) == k {
@@ -791,11 +827,12 @@ impl Queens {
             s.col[s.verts[i] as usize] = 0xD15C_0DED_1111_2222;
             wl_refine_in(
                 k,
+                stride,
                 &s.verts,
-                &s.nbr_off,
-                &s.nbr_idx,
+                &s.nbr_pad,
                 &mut s.col,
                 &mut s.nxt,
+                &mut s.mcol,
                 &mut s.sort,
             );
             s.sigs[i] = hash_colours_in(k, &s.verts, &s.col, &mut s.sort);
