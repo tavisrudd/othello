@@ -550,9 +550,12 @@ compressing ~3.4×):** accumulating the 6.7 GB archive in RAM **plus** per-shard
 disk. zram gives this box effective headroom past 26 GB physical for compressible working sets.
 Still, the clean full-freeze path is to **stream each shard to disk as it's built** (don't hold the
 whole archive resident) and/or use more shards (smaller GE scratch), keeping the build inside
-physical RAM. NB: random-access into a zram-resident structure (e.g. the session-8 n16 *resume*'s
-17 GB TT) pays a per-access decompress, which is why that resume crawled — the BuRR archive (6.7 GB)
-fits physical RAM, so its query path doesn't.
+physical RAM. **Also: `/tmp` here is tmpfs (RAM-backed, 14 GB)** — writing the 6.7 GB archive to
+`/tmp` while also holding it resident ~doubled its RAM footprint and is what tipped the build into
+zram; **freeze to `/home` (the zpool, on disk), not `/tmp`.** (The validated archive now lives at
+`/home/tavis/queens-n16.burr`.) NB: random-access into a zram-resident structure (e.g. the
+session-8 n16 *resume*'s 17 GB TT) pays a per-access decompress, which is why that resume crawled —
+the BuRR archive (6.7 GB) fits physical RAM, so its query path doesn't.
 
 ### Session 8 (2026-06-15) — #21 + dump/load + #20 landed; #9 & live-fast-key NEGATIVE; n=16 < 30 min push
 
