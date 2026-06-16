@@ -53,6 +53,20 @@ held up across sessions:
   rayon workers — the exact contention a lockless TT removes. Canonical readers:
   `tt_bits` (reads `QUEENS_TT_BITS` once per command) and `Strong::new` /
   `env_threads` (reads `OTHELLO_THREADS` once in the constructor), both threaded.
+- **Hot-path toggles are resolved once *outside* the loop, never tested per-iteration
+  — and this is how we do it, every time.** The rule is bigger than env reads: any
+  flag that is constant for a run (a measurement/instrumentation switch, a key-mode,
+  a debug counter) must not become a per-node `if`. A per-iteration branch on a
+  run-constant bloats the hot loop's I-cache and feeds the branch predictor / frontend
+  — and the search is already frontend / L1i-bound where the graph key lives (session-6
+  TMA), so the dead branch *worsens the actual bottleneck*. **Preferred form:
+  monomorphise on a `const` generic resolved at the call site** (e.g.
+  `iso_key_fast_in::<const HIST: bool>` — production instantiates `HIST = false` and the
+  tally is never emitted; `count --comps` instantiates `HIST = true`). The single
+  runtime decision happens once, at the top, selecting between the two monomorphised
+  instantiations (`if collect { run::<true>() } else { run::<false>() }`). When a const
+  generic can't reach the site (e.g. through a `dyn` trait object), thread the resolved
+  value as a plain field/param instead — but still resolve it once, never in the loop.
 
 ## Tiger-style hot-struct discipline
 

@@ -46,6 +46,10 @@ pub const MAX_N: u32 = 16;
 /// Largest vertex count of an available-graph (one per square) -- sizes the
 /// preallocated graph-key scratch buffers.
 const MAXV: usize = (MAX_N * MAX_N) as usize;
+/// Largest connected component the graph key resolves by direct degree-sequence
+/// lookup instead of WL refinement (#18). For connected graphs on at most four
+/// vertices the sorted degree sequence is a complete isomorphism invariant.
+const TINY_MAX: usize = 4;
 
 /// A fixed-width board bitset (`WORDS*64` bits). `Ord`/`Hash` are the derived
 /// lexicographic order on the words -- a total order, all we need to pick a
@@ -318,6 +322,34 @@ fn cert_hash_in(
         h = mix64(h ^ 0xFFFF); // row separator
     }
     h
+}
+
+/// Direct canonical key of a *tiny* connected component (`k <= TINY_MAX`), bypassing
+/// CSR construction + WL refinement + certificate hashing (#18). For a connected graph
+/// on at most four vertices the **sorted degree sequence is a complete isomorphism
+/// invariant** -- the 1 / 1 / 2 / 6 connected graphs on 1..=4 vertices each carry a
+/// distinct sorted degree sequence -- so we map straight from `(k, sorted degrees)` to a
+/// constant. Deep in the search the available-graph fragments into overwhelmingly such
+/// components (the isolated vertex and the edge dominate), and `comp_canon` was
+/// recomputing their canon millions of times. The key shares the 64-bit space of the
+/// full certificate hash; a collision with a `k >= 5` key is a ~2^-64 event (the search
+/// already keys through a 55-bit slot fingerprint and is cross-checked vs Jenrich).
+#[inline]
+fn tiny_comp_key(attack: &[Bits], comp: Bits, k: usize, verts: &[u8]) -> u64 {
+    let mut deg = [0u8; TINY_MAX];
+    for i in 0..k {
+        // attack[v] includes v itself, so the self-bit is one of the set bits.
+        deg[i] = (attack[verts[i] as usize].and(comp).popcount() - 1) as u8;
+    }
+    deg[..k].sort_unstable();
+    // Pack (k, sorted degree sequence) -- each degree is < k <= 4, so fits a byte --
+    // into one integer and avalanche it. Distinct sorted degree sequence (and distinct
+    // k) ⇒ distinct packed value ⇒ distinct key; the invariant is complete here.
+    let mut packed = k as u64;
+    for &d in &deg[..k] {
+        packed = (packed << 8) | d as u64;
+    }
+    mix64(packed ^ 0x7111_C0DE_7111_C0DE)
 }
 
 /// Individualisation-refinement canonical certificate (see [`Queens::iso_key_canon`]).
@@ -640,16 +672,49 @@ impl Queens {
     pub fn iso_key_fast(&self, mask: Bits) -> u64 {
         ISO_SCRATCH.with(|s| {
             let mut g = s.borrow_mut();
-            self.iso_key_fast_in(mask, &mut g)
+            // Production: the `HIST = false` instantiation emits *no* component-size
+            // tally at all -- not a per-component branch but a compile-time-eliminated
+            // path -- so the hot loop's I-cache footprint is unchanged. The gate is a
+            // const generic resolved at the call site, the way the project keeps
+            // measurement toggles out of latency-bound loops (see the env-var rule in
+            // CLAUDE.md). The measurement entry instantiates `HIST = true` instead.
+            self.iso_key_fast_in::<false>(mask, &mut g, &mut [])
         })
     }
 
-    fn iso_key_fast_in(&self, mask: Bits, s: &mut IsoScratch) -> u64 {
+    /// Measurement entry for `count --comps`: run the *same* graph-key decomposition the
+    /// live key runs, but with the connected-component-size tally monomorphised in
+    /// (`HIST = true`). Each available-graph's component sizes are accumulated into
+    /// `hist` (bucket `i` = components with `i` vertices; the final bucket catches the
+    /// tail). Cold analysis only -- never reached from the search.
+    pub fn tally_components(&self, mask: Bits, hist: &mut [u64]) {
+        ISO_SCRATCH.with(|s| {
+            let mut g = s.borrow_mut();
+            self.iso_key_fast_in::<true>(mask, &mut g, hist);
+        });
+    }
+
+    /// `HIST` selects, at monomorphisation time, whether to tally component sizes into
+    /// `hist` -- `false` for the search's live key (the tally vanishes), `true` for the
+    /// `count --comps` measurement. Keeping it a const generic (rather than a runtime
+    /// flag) is the project rule for hot-path toggles: the disabled branch never enters
+    /// the instruction stream, so it cannot pollute L1i or the frontend the graph key is
+    /// already bound by.
+    fn iso_key_fast_in<const HIST: bool>(
+        &self,
+        mask: Bits,
+        s: &mut IsoScratch,
+        hist: &mut [u64],
+    ) -> u64 {
         let mut remaining = mask;
         let mut nc = 0usize;
         while let Some(start) = remaining.lowest() {
             let comp = self.component(start, mask);
             remaining = remaining.and_not(comp);
+            if HIST {
+                let k = comp.popcount() as usize;
+                hist[k.min(hist.len() - 1)] += 1;
+            }
             let ck = self.comp_canon(comp, s);
             s.comp_keys[nc] = ck;
             nc += 1;
@@ -674,6 +739,20 @@ impl Queens {
             s.verts[k] = v as u8;
             k += 1;
         });
+        // Tiny components -- the deep majority -- resolve by sorted degree sequence
+        // alone (a complete invariant for k <= 4), skipping all WL work (#18).
+        if k <= TINY_MAX {
+            return tiny_comp_key(&self.attack, comp, k, &s.verts);
+        }
+        self.comp_canon_full(comp, k, s)
+    }
+
+    /// The full Weisfeiler-Leman canon of a component whose vertices are already in
+    /// `s.verts[..k]` -- 1-WL refine, then the adjacency certificate if discrete, else
+    /// the individualisation invariant. Used for `k > TINY_MAX` (tiny components take
+    /// the [`tiny_comp_key`] shortcut). Kept as a named entry so the test corpus can
+    /// cross-check the shortcut against it on small components too.
+    fn comp_canon_full(&self, comp: Bits, k: usize, s: &mut IsoScratch) -> u64 {
         // Build the CSR neighbour lists once (one bit-scan per vertex, not per round),
         // and seed colours by degree. The hot refine then iterates a counted slice.
         let mut off = 0u32;
@@ -2240,5 +2319,86 @@ mod tests {
             None,
             "a key never inserted must miss"
         );
+    }
+
+    /// The tiny-component shortcut (#18) must induce exactly the same isomorphism
+    /// partition as the full WL+IR canon on every small connected component drawn from
+    /// a real queen graph: isomorphic components share a key under both keys, and the
+    /// two never disagree about whether two components are isomorphic. This is what
+    /// keeps the graph-key merge -- and so the distinct working set -- unchanged.
+    #[test]
+    fn tiny_component_key_matches_full_canon() {
+        let q = Queens::new(6);
+        let sq: Vec<u32> = (0..q.n * q.n).collect();
+
+        // Enumerate every connected induced subgraph of size 1..=TINY_MAX.
+        let mut comps: Vec<(Bits, usize)> = Vec::new();
+        for &a in &sq {
+            comps.push((single(a), 1));
+        }
+        for i in 0..sq.len() {
+            for j in i + 1..sq.len() {
+                let c = single(sq[i]).or(single(sq[j]));
+                if q.component(sq[i], c).popcount() == 2 {
+                    comps.push((c, 2));
+                }
+            }
+        }
+        for i in 0..sq.len() {
+            for j in i + 1..sq.len() {
+                for l in j + 1..sq.len() {
+                    let c = single(sq[i]).or(single(sq[j])).or(single(sq[l]));
+                    if q.component(sq[i], c).popcount() == 3 {
+                        comps.push((c, 3));
+                    }
+                }
+            }
+        }
+        for i in 0..sq.len() {
+            for j in i + 1..sq.len() {
+                for l in j + 1..sq.len() {
+                    for m in l + 1..sq.len() {
+                        let c = single(sq[i])
+                            .or(single(sq[j]))
+                            .or(single(sq[l]))
+                            .or(single(sq[m]));
+                        if q.component(sq[i], c).popcount() == 4 {
+                            comps.push((c, 4));
+                        }
+                    }
+                }
+            }
+        }
+
+        // For the two keys to define the same partition, tiny->full and full->tiny must
+        // both be single-valued (a bijection between the value sets actually seen).
+        let mut scratch = *IsoScratch::new();
+        let mut tiny_to_full: HashMap<u64, u64> = HashMap::new();
+        let mut full_to_tiny: HashMap<u64, u64> = HashMap::new();
+        let mut counts = [0usize; TINY_MAX + 1];
+        for (comp, k) in comps {
+            let mut kk = 0usize;
+            comp.each(|v| {
+                scratch.verts[kk] = v as u8;
+                kk += 1;
+            });
+            assert_eq!(kk, k);
+            let tiny = tiny_comp_key(&q.attack, comp, k, &scratch.verts);
+            let full = q.comp_canon_full(comp, k, &mut scratch);
+            if let Some(&f) = tiny_to_full.get(&tiny) {
+                assert_eq!(f, full, "tiny key collides two full classes (over-merge)");
+            } else {
+                tiny_to_full.insert(tiny, full);
+            }
+            if let Some(&t) = full_to_tiny.get(&full) {
+                assert_eq!(t, tiny, "full key splits into two tiny keys (over-split)");
+            } else {
+                full_to_tiny.insert(full, tiny);
+            }
+            counts[k] += 1;
+        }
+        for (k, &c) in counts.iter().enumerate().skip(1) {
+            assert!(c > 0, "corpus saw no size-{k} components");
+        }
     }
 }

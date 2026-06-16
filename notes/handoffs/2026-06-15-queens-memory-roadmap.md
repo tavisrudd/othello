@@ -301,6 +301,17 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       LOSS at n ≤ 14 (TMA frontend/branch-bound; D4 branchless). **Deploy as the Chunk-4
       freeze-time key (option 2)**, not the live key. Next: branchless refine (#17), pseudo-
       memoize recurring components (#18).
+- [x] **#18 tiny-component shortcut (session 7, this commit) — WIN, modest (~4-5%, grows with n).**
+      `comp_canon` now maps every `k ≤ 4` component straight to a constant from its sorted degree
+      sequence (a *complete* iso invariant for connected graphs on ≤4 vertices — proven by the new
+      `tiny_component_key_matches_full_canon` test, same partition as the full WL+IR canon), skipping
+      CSR build + WL + cert hashing. Merge preserved exactly (fast-key node count unchanged: n=12
+      ≈311k, n=14 ≈14.8M), verdict unchanged. Wall: n=14 parallel 28.6→27.3s, n=12 sequential
+      2.85→2.73s (~4-5%, **0% at n=12-parallel** where DRAM hides it). **New `count --comps` tool
+      (monomorphised `iso_key_fast_in::<const HIST>`, zero production cost) CORRECTS the prior:** tiny
+      components are **only ~32% of all components** at n=12 (k=1 = 15%, mass at k=5–8 ≈10% each), NOT
+      "overwhelmingly tiny" — so #18 removes WL on the cheapest third; the k=5–16 bulk (the real
+      per-node cost) is untouched → that's #17's target, with more headroom than #18 had.
 - [ ] Chunk 3: two-tier depth-preferred TT replacement
 - [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
       layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
@@ -320,8 +331,8 @@ are cross-referenced, not repeated.
 | 6 | ~~History / killer move ordering~~ | B | **NEGATIVE (session 6) — move ordering is a dead end here.** The static most-blocking order is *near-optimal* (this is a blocking game). History (global β-cutoff tally) is **~2× WORSE** (n=14 working set 49.1M→113.0M, +130 %; robust to weight); effective-degree (context-local, #6b) decays to ~0 by n=16 and reverses under parallel. Killer-per-ply untested but a poor bet (Othello "depth-indexed killers mis-order" + this blow-up). **Spend effort on structural levers (#7/#8/#11/Chunk 4), not ordering.** Tables + mechanism in the session-6 note. |
 | 6b | ~~Dynamic effective-degree ordering~~ | B | **NEGATIVE (session 6).** Re-rank by `popcount(attack & available)` per node: shrinks the *sequential* working set but the gain **decays super-linearly** (1.80×→1.33×→1.025× at n=10/12/14 → ~0 at n=16) and **reverses under parallel** (n=14 +9–12 %). Mechanism + table in the session-6 handoff note. Reverted. |
 | 16 | ABDADA in-evaluation deferral | A/C | **lock-free-enabled.** Mark a slot "being evaluated" (spare bit; `val` uses 1 of 8); a 2nd worker reaching it *defers* (other moves first, return later) not duplicates. *Defers*, so unlike deep-YBWC (fact #5) it preserves the α-β cutoff. Targets the ~1.6 % parallel NODE re-expansion only — **compute/DRAM, not the distinct working set**; low priority, DRAM-bound search. |
-| 17 | **Branchless / SIMD graph-key refine** ⏭ | A | **QUEUED next session.** The graph key (`iso_key_fast`) is TMA frontend/branch-bound after prealloc+CSR (session-6 note): mispredicts in the data-dependent neighbour walk. Pad neighbour lists to a fixed stride (kill the variable-trip exit mispredict); vectorise the colour fold with AVX-512 (znver5). Only worth it if a live n=16 graph-key run needs the wall back — already cheap enough for the freeze-time archive. |
-| 18 | **Pseudo-memoize tiny components (no table)** ⏭ | A | **QUEUED next session — the cheapest "memo".** Deep, the available-graph fragments into overwhelmingly *tiny* components (isolated vertex k=1, edge k=2, P3/triangle k=3, the six k=4 shapes), and `comp_canon` recomputes their canon millions of times. Don't build a hash-keyed memo (key-hash + probe + collision risk all defeat the point) — **special-case k ≤ 4 to a direct constant** keyed by a 1-2-instruction discriminator (k, edge-count, degree multiset), skipping refinement entirely. Isolated-vertex (the dominant case) becomes a single constant. Zero table, zero key hashing, zero collision risk; consistent because every tiny component takes the same branch. Bigger k (5,6) is a diminishing-returns lookup. Compose with #17. |
+| 17 | **Branchless / SIMD graph-key refine** ⏭ | A | **QUEUED — now sharper-targeted (session 7).** The `count --comps` histogram shows the per-node graph-key cost lives in the **k=5–16 bulk** (~⅔ of components; tiny `k≤4` is only ~32%, already handled by #18), so #17 attacks the *dominant* cost, not the tail — more headroom than #18 had. Still TMA frontend/branch-bound (mispredicts in the data-dependent neighbour walk); pad neighbour lists to a fixed stride (kill the variable-trip exit mispredict), vectorise the colour fold with AVX-512 (znver5). Bounded by the TMA bad-speculation share (~8.5% of cycles). Only worth it if a live n=16 graph-key run needs the wall back — already cheap enough for the freeze-time archive. |
+| 18 | ~~Pseudo-memoize tiny components (no table)~~ | A | **DONE (session 7) — WIN, modest (~4-5%, grows with n).** `comp_canon` maps `k ≤ 4` components straight to a constant from the sorted degree sequence (complete iso invariant for connected graphs on ≤4 vertices; `tiny_component_key_matches_full_canon` proves same partition as the full canon), skipping CSR+WL+cert. Merge + verdict preserved. **`count --comps` corrected the prior:** tiny components are only ~32% of all (not "overwhelmingly tiny"), so the win is bounded — the k=5–16 bulk (#17) is the real cost. The tooling is monomorphised on `const HIST` (zero production cost; demonstrates the hot-path-toggle rule). k=5,6 stay un-shortcut: degree sequence is *not* complete past k=4. |
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
 | 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
@@ -336,6 +347,77 @@ are cross-referenced, not repeated.
 | — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
 
 ## Handoff Notes
+
+### Session 7 — #18 tiny-component shortcut + `count --comps` (2026-06-15)
+
+**Session**: 2026-06-15 (queens, session 7). `make test`/`clippy`/`fmt` green
+(`tiny_component_key_matches_full_canon` + `solver_lineage_agrees` ok; D4 gate:
+`solve 12 --distinct` → second, distinct 1,060,823, 1.01× re-exp; `solve 14 --distinct`
+→ second, 1.09× re-exp). Files: `rust/src/queens.rs` (tiny-component shortcut + the
+monomorphised `iso_key_fast_in::<const HIST>` + the new test), `rust/src/bin/queens.rs`
+(`count --comps`), `CLAUDE.md` (hot-path-toggle rule), auto-memory.
+
+**WIN (modest) — #18 tiny-component shortcut.** `comp_canon` now maps every connected
+component of `k ≤ 4` vertices straight to a constant derived from its **sorted degree
+sequence** — a *complete* isomorphism invariant for connected graphs on ≤4 vertices (the
+1/1/2/6 such graphs each carry a distinct degree sequence) — skipping CSR construction,
+WL refinement, and certificate hashing entirely. The new test
+`tiny_component_key_matches_full_canon` proves, over every connected induced subgraph of
+size ≤4 on a real n=6 board, that the shortcut induces **exactly the same partition** as
+the full WL+IR canon (a bijection both ways), so the graph-key merge — and the distinct
+working set — are provably unchanged.
+
+*Measured (interleaved A/B vs a clean-HEAD worktree binary, `QUEENS_KEY=fast`):*
+
+| board / solver        | old (HEAD) | new (#18) | delta   |
+|-----------------------|-----------:|----------:|---------|
+| n=14 parallel         | ~28.6–30.0s| ~27.3–28.9s| ~4-5%  |
+| n=12 symmetry (seq)   | ~2.85s     | ~2.73s    | ~4-5%   |
+| n=12 parallel         | ~0.61s     | ~0.60s    | ~0% (DRAM-hidden) |
+
+Merge preserved (fast node count unchanged: n=12 ≈311k, n=14 ≈14.8M), verdict unchanged
+(second). The win **grows with n** (deeper boards fragment more) and is largest where the
+per-node cost is exposed (sequential) — so for n=16 ≥5%. Cheap, correct, never negative;
+keep. Value is in the **Chunk-4 freeze-time key** (option 2) and a live n=16 graph-key
+run — at n ≤ 14 parallel it doesn't move the (DRAM-bound) wall.
+
+**Prior CORRECTED — tiny components are NOT "overwhelmingly" dominant.** Channelling
+Fermi: the napkin (handoff #18 row: "deep, the graph fragments into overwhelmingly tiny
+components") predicted a big win; the bench said ~4-5%. New `count --comps` tool resolves
+the gap by measuring the available-graph component-size distribution over the working set.
+At n=12 (over 1.06M D4-distinct positions, 1.28M components):
+
+| k (vertices) | share | cumulative |
+|--------------|------:|-----------:|
+| 1            | 15.1% | 15.1%      |
+| ≤4 (#18)     |   —   | **32.2%**  |
+| 5–8 (peak)   | ~10% ea| 71.2%     |
+| ≤16          |   —   | 95.8%      |
+
+So `k≤4` is ~⅓ by *count* and even less by *cost* (WL cost grows with k) — #18 removes
+the cheapest third; the **k=5–16 bulk is the real per-node cost** (that's #17's target,
+now sharper). The "overwhelmingly tiny" framing was wrong; the mass is at k=5–8.
+
+**Tooling follows the hot-path-toggle rule (per user guidance this session).** The
+component-size tally is gated by a **`const` generic** (`iso_key_fast_in::<const HIST:
+bool>`), not a runtime flag: production calls `::<false>` so the tally is *never emitted*
+(no L1i / frontend pollution — and the graph key is frontend/L1i-bound, the exact
+bottleneck a dead per-node branch would worsen); `count --comps` calls `::<true>` via
+`tally_components`, driving the *same* decomposition the live key uses. The single runtime
+decision is the `--comps` CLI flag, resolved once at the top. This is now codified as a
+canonical rule in `CLAUDE.md` ("Hot-path toggles are resolved once *outside* the loop")
+and the `[[env-vars-resolved-at-startup]]` memory — the rule is bigger than env reads: any
+run-constant toggle, monomorphise on a const bool or thread the value, never a per-node
+`if`.
+
+**NOT done / next.** #17 (branchless/SIMD WL refine) is the natural follow-on — the
+histogram shows it attacks the dominant k=5–16 cost, so more headroom than #18, but still
+bounded by the TMA bad-speculation share (~8.5% of cycles) and only worth it if a live
+n=16 graph-key run needs the wall back (freeze-time is already cheap). k=5,6 are
+deliberately *not* shortcut: the degree sequence stops being a complete invariant past
+k=4 (a cheap-but-complete k=5/6 discriminator is more work for diminishing returns). The
+load-bearing n=16 path remains structural — Chunk 4 (BuRR archive) / L2 (ply-windowing +
+external DDD) / Chunk 3 (two-tier replacement) / Chunk 2b (`fastrange`).
 
 ### Session 6 — move-ordering negative + `--distinct` presentation fix (2026-06-15)
 

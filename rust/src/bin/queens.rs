@@ -147,6 +147,11 @@ enum Cmd {
         /// (a safe TT key). Implies `--exact`; sequential.
         #[arg(long)]
         iso: bool,
+        /// Tally the available-graph's connected-component-size distribution over the
+        /// working set -- how much the graph fragments into the tiny components the
+        /// `tiny_comp_key` shortcut (#18) targets. Implies `--exact`; sequential.
+        #[arg(long)]
+        comps: bool,
         /// HyperLogLog precision: `2^p` registers (more ⇒ tighter estimate).
         #[arg(long = "hll-p", default_value_t = 16, value_parser = clap::value_parser!(u32).range(4..=18))]
         hll_p: u32,
@@ -194,8 +199,16 @@ fn main() {
             parallel,
             exact,
             iso,
+            comps,
             hll_p,
-        } => count_mode(&Queens::new(n), parallel && !iso, exact || iso, iso, hll_p),
+        } => count_mode(
+            &Queens::new(n),
+            parallel && !iso && !comps,
+            exact || iso || comps,
+            iso,
+            comps,
+            hll_p,
+        ),
         Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
     }
@@ -655,7 +668,7 @@ fn nimber_mode(q: &Queens) {
 /// working set -- by folding every position the search looks up into a
 /// HyperLogLog (and, with `--exact`, a hash set). The counts for n=10/12/14 fit a
 /// growth curve that extrapolates n=16's memory needs (the open frontier).
-fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, hll_p: u32) {
+fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, comps: bool, hll_p: u32) {
     if parallel && exact {
         eprintln!(
             "--exact keeps a single shared hash set, which would serialise every \
@@ -721,6 +734,49 @@ fn count_mode(q: &Queens, parallel: bool, exact: bool, iso: bool, hll_p: u32) {
 
     if iso {
         iso_report(q, solver.as_ref());
+    }
+    if comps {
+        comps_report(q, solver.as_ref());
+    }
+}
+
+/// `count --comps`: the connected-component-size distribution of the available-graphs
+/// over the working set -- the empirical case for the `tiny_comp_key` shortcut (#18).
+/// Deep in the search the graph fragments into overwhelmingly tiny components (isolated
+/// vertex, edge), which the shortcut keys by sorted degree sequence alone; this reports
+/// how dominant that regime is. Drives the *same* decomposition the live key uses, via
+/// the `HIST = true` monomorphisation of the graph key (the production `HIST = false`
+/// emits no tally), so the sizes measured are exactly the ones the key sees.
+fn comps_report(q: &Queens, solver: &dyn Solver) {
+    let Some(ws) = solver.working_set() else {
+        eprintln!("  (comps: no exact working set captured — needs the sequential exact solver)");
+        return;
+    };
+    let mut hist = vec![0u64; (q.n * q.n) as usize + 1];
+    for &(mask, _) in &ws {
+        q.tally_components(mask, &mut hist);
+    }
+    let total: u64 = hist.iter().sum();
+    if total == 0 {
+        return;
+    }
+    println!(
+        "  available-graph component sizes over {} D4-distinct positions ({} components):",
+        commas(ws.len() as u64),
+        commas(total),
+    );
+    let mut cum = 0u64;
+    for (k, &c) in hist.iter().enumerate() {
+        if c == 0 {
+            continue;
+        }
+        cum += c;
+        println!(
+            "    k={k:>3}: {:>15}  ({:6.2}%, cum {:6.2}%)",
+            commas(c),
+            c as f64 / total as f64 * 100.0,
+            cum as f64 / total as f64 * 100.0,
+        );
     }
 }
 
