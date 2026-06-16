@@ -7,18 +7,20 @@
 //! left→right, rank 1..n bottom→top). Boards up to 16×16.
 
 use std::collections::HashMap;
-use std::io::{self, IsTerminal, Write};
+use std::fs::File;
+use std::io::{self, BufReader, BufWriter, IsTerminal, Write};
+use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
 use std::time::{Duration, Instant};
 
 use clap::builder::PossibleValuesParser;
 use clap::{Parser, Subcommand};
-use signal_hook::consts::{SIGINT, SIGTERM, SIGUSR1};
+use signal_hook::consts::{SIGINT, SIGTERM, SIGUSR1, SIGUSR2};
 use signal_hook::iterator::Signals;
 
 use othello::queens::{
-    make_solver, Bits, Nimber, Parallel, Queens, Solver, Tt, MAX_N, SOLVER_NAMES,
+    make_solver, Bits, Nimber, Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -121,6 +123,22 @@ enum Cmd {
         /// symmetry / parallel only).
         #[arg(long)]
         distinct: bool,
+        /// Write a compressed, resumable TT checkpoint to PATH periodically (see
+        /// --checkpoint-every), on a SIGUSR2, and on exit. With no PATH it uses
+        /// ./queens-tt-n<N>.zst. **Defaults ON for n=16, OFF below**; resume with
+        /// --resume. Table-backed solvers only (parallel / symmetry / memo).
+        #[arg(long, value_name = "PATH", num_args = 0..=1, default_missing_value = "")]
+        checkpoint: Option<PathBuf>,
+        /// Force checkpointing off (overrides the n=16 default).
+        #[arg(long, conflicts_with = "checkpoint")]
+        no_checkpoint: bool,
+        /// Checkpoint cadence, e.g. `5m`, `300s`, `2h` (no suffix = seconds).
+        #[arg(long, value_name = "DUR", default_value = "5m", value_parser = parse_duration)]
+        checkpoint_every: Duration,
+        /// Resume from a checkpoint image: reload the TT and continue warm. The
+        /// table is sized by the image, so QUEENS_TT_BITS/SLOTS are ignored.
+        #[arg(long, value_name = "PATH")]
+        resume: Option<PathBuf>,
     },
     /// The Sprague-Grundy value (nimber) of the board.
     Nimber {
@@ -186,13 +204,31 @@ fn main() {
         n: 8,
         solver: "parallel".into(),
         distinct: false,
+        checkpoint: None,
+        no_checkpoint: false,
+        checkpoint_every: Duration::from_secs(300),
+        resume: None,
     });
     match cmd {
         Cmd::Solve {
             n,
             solver,
             distinct,
-        } => solve(&Queens::new(n), &solver, distinct),
+            checkpoint,
+            no_checkpoint,
+            checkpoint_every,
+            resume,
+        } => solve(
+            &Queens::new(n),
+            &solver,
+            distinct,
+            CpOpts {
+                checkpoint,
+                no_checkpoint,
+                every: checkpoint_every,
+                resume,
+            },
+        ),
         Cmd::Nimber { n } => nimber_mode(&Queens::new(n)),
         Cmd::Count {
             n,
@@ -441,16 +477,18 @@ fn progress_bar(n: u32, solver: &dyn Solver, start: Instant) -> String {
 }
 
 /// Background watcher for a running solve: each tick it drains arrived signals
-/// (SIGUSR1 → progress dump; SIGINT/SIGTERM → "how far we got" report, then
-/// exit) and, when `bar`, repaints the in-place progress line. Polling keeps it
-/// the sole stderr writer with no work in async-signal context. Stops when the
-/// solve sets `done`.
+/// (SIGUSR1 → progress dump; SIGUSR2 → checkpoint now; SIGINT/SIGTERM → checkpoint
+/// (if enabled), report "how far we got", then exit), fires the periodic checkpoint
+/// when `cp` is due, and, when `bar`, repaints the in-place progress line. Polling
+/// keeps it the sole stderr writer with no work in async-signal context. Stops when
+/// the solve sets `done`.
 fn watch(
     signals: &mut Signals,
     solver: &dyn Solver,
     n: u32,
     start: Instant,
     bar: bool,
+    cp: Option<&Checkpoint>,
     done: &AtomicBool,
 ) {
     let clear = || {
@@ -458,11 +496,16 @@ fn watch(
             eprint!("\r\x1b[K"); // carriage return + clear-to-end-of-line
         }
     };
+    let mut last_cp = Instant::now();
     loop {
         for sig in signals.pending() {
             clear();
             match sig {
                 SIGINT | SIGTERM => {
+                    // Save before exiting so a Ctrl-C / preemption keeps the work.
+                    if let Some(cp) = cp {
+                        do_checkpoint(solver, cp, "interrupt");
+                    }
                     let what = if sig == SIGINT {
                         "interrupted (SIGINT)"
                     } else {
@@ -470,6 +513,12 @@ fn watch(
                     };
                     eprintln!("{}", status_report(what, n, solver, start));
                     std::process::exit(128 + sig); // 130 (SIGINT) / 143 (SIGTERM)
+                }
+                SIGUSR2 => {
+                    if let Some(cp) = cp {
+                        do_checkpoint(solver, cp, "sigusr2");
+                        last_cp = Instant::now();
+                    }
                 }
                 _ => eprintln!(
                     "{}",
@@ -479,6 +528,15 @@ fn watch(
         }
         if done.load(Ordering::Relaxed) {
             break;
+        }
+        // Periodic checkpoint: dump when the cadence is due. Blocks the bar briefly
+        // while it streams; sound under live writers (each slot is one atomic u64).
+        if let Some(cp) = cp {
+            if last_cp.elapsed() >= cp.every {
+                clear();
+                do_checkpoint(solver, cp, "periodic");
+                last_cp = Instant::now();
+            }
         }
         if bar {
             // Truncate to the terminal width so the line never wraps (a wrapped
@@ -511,14 +569,20 @@ fn show_bar(n: u32) -> bool {
 /// table warm-up. The watcher borrows the solver read-only on a scoped thread;
 /// `work` runs on this thread and its result is returned. SIGUSR1 dumps progress,
 /// SIGINT/SIGTERM report how far the search got and exit.
-fn run_watched<R>(solver: &dyn Solver, n: u32, bar: bool, work: impl FnOnce() -> R) -> R {
+fn run_watched<R>(
+    solver: &dyn Solver,
+    n: u32,
+    bar: bool,
+    cp: Option<&Checkpoint>,
+    work: impl FnOnce() -> R,
+) -> R {
     let start = Instant::now();
-    let mut signals = Signals::new([SIGINT, SIGTERM, SIGUSR1]).ok();
+    let mut signals = Signals::new([SIGINT, SIGTERM, SIGUSR1, SIGUSR2]).ok();
     let done = AtomicBool::new(false);
     thread::scope(|scope| {
         let watcher = signals.as_mut().map(|signals| {
             let done = &done;
-            scope.spawn(move || watch(signals, solver, n, start, bar, done))
+            scope.spawn(move || watch(signals, solver, n, start, bar, cp, done))
         });
         let result = work();
         done.store(true, Ordering::Relaxed);
@@ -549,23 +613,193 @@ fn reexp_note(nodes: f64, distinct: f64) -> String {
     )
 }
 
-fn solve(q: &Queens, solver_name: &str, distinct: bool) {
+/// Checkpoint-related CLI options for `solve`, bundled so the signature stays
+/// readable. See the `Cmd::Solve` flags for semantics.
+struct CpOpts {
+    checkpoint: Option<PathBuf>,
+    no_checkpoint: bool,
+    every: Duration,
+    resume: Option<PathBuf>,
+}
+
+/// A resolved, active checkpoint: where to write the image, how often, and which
+/// board it is (for the header). Built by [`CpOpts::resolve`] only when checkpointing
+/// is actually on.
+struct Checkpoint {
+    path: PathBuf,
+    every: Duration,
+    n: u32,
+}
+
+impl CpOpts {
+    /// The default checkpoint path for board `n` (current dir).
+    fn default_path(n: u32) -> PathBuf {
+        PathBuf::from(format!("queens-tt-n{n}.zst"))
+    }
+
+    /// Resolve whether checkpointing is on for this run and where it writes.
+    /// Opt-in via `--checkpoint`, **defaulting ON for n=16** and off below;
+    /// `--no-checkpoint` forces it off. `None` ⇒ no checkpointing.
+    fn resolve(&self, n: u32) -> Option<Checkpoint> {
+        if self.no_checkpoint || !(self.checkpoint.is_some() || n == 16) {
+            return None;
+        }
+        let path = self
+            .checkpoint
+            .clone()
+            .filter(|p| !p.as_os_str().is_empty())
+            .unwrap_or_else(|| Self::default_path(n));
+        Some(Checkpoint {
+            path,
+            every: self.every,
+            n,
+        })
+    }
+}
+
+/// Parse a checkpoint cadence: `<n>[s|m|h]` (no suffix = seconds).
+fn parse_duration(s: &str) -> Result<Duration, String> {
+    let s = s.trim();
+    let split = s.find(|c: char| !c.is_ascii_digit()).unwrap_or(s.len());
+    let (num, unit) = s.split_at(split);
+    let v: u64 = num
+        .parse()
+        .map_err(|_| format!("invalid duration '{s}' (want e.g. 5m, 300s, 2h)"))?;
+    let secs = match unit {
+        "" | "s" => v,
+        "m" => v * 60,
+        "h" => v * 3600,
+        other => return Err(format!("unknown duration unit '{other}' (use s/m/h)")),
+    };
+    Ok(Duration::from_secs(secs))
+}
+
+/// Render a cadence compactly for the status line (`300s` → `5m`).
+fn fmt_dur(d: Duration) -> String {
+    let s = d.as_secs();
+    if s > 0 && s.is_multiple_of(3600) {
+        format!("{}h", s / 3600)
+    } else if s > 0 && s.is_multiple_of(60) {
+        format!("{}m", s / 60)
+    } else {
+        format!("{s}s")
+    }
+}
+
+/// A sibling path with `suffix` appended to the full filename (`foo.zst` →
+/// `foo.zst.tmp`), for the atomic-write temp + the kept-prior rotation.
+fn sibling(path: &Path, suffix: &str) -> PathBuf {
+    PathBuf::from(format!("{}{suffix}", path.display()))
+}
+
+/// Write `tt` as a compressed image to `path` atomically: encode to `path.tmp`,
+/// rotate any existing image to `path.prev`, then rename into place -- so a crash
+/// mid-write never corrupts the last good checkpoint. Returns the compressed size.
+fn write_checkpoint(tt: &QueensTt, n: u32, path: &Path) -> io::Result<u64> {
+    let tmp = sibling(path, ".tmp");
+    {
+        let mut enc = zstd::Encoder::new(BufWriter::new(File::create(&tmp)?), 3)?;
+        tt.dump_image(&mut enc, n as u8)?;
+        enc.finish()?.flush()?;
+    }
+    if path.exists() {
+        let _ = std::fs::rename(path, sibling(path, ".prev"));
+    }
+    std::fs::rename(&tmp, path)?;
+    Ok(std::fs::metadata(path)?.len())
+}
+
+/// Reload a compressed image into a fresh table (header-validated; hard error on a
+/// stale/foreign/ wrong-`n` dump).
+fn read_checkpoint(path: &Path, n: u32) -> io::Result<QueensTt> {
+    let mut dec = zstd::Decoder::new(BufReader::new(File::open(path)?))?;
+    QueensTt::load_image(&mut dec, n as u8)
+}
+
+/// Dump the solver's table to its checkpoint path, reporting the outcome on a dim
+/// line. A no-op (but warns) if the solver has no table. `reason` tags why
+/// (periodic / sigusr2 / interrupt / final).
+fn do_checkpoint(solver: &dyn Solver, cp: &Checkpoint, reason: &str) {
+    let Some(tt) = solver.tt() else {
+        eprintln!("\x1b[90m(checkpoint [{reason}] skipped: solver has no table)\x1b[0m");
+        return;
+    };
+    let t = Instant::now();
+    match write_checkpoint(tt, cp.n, &cp.path) {
+        Ok(bytes) => eprintln!(
+            "\x1b[90m(checkpoint [{reason}]: {} → {:.2} GB in {:.1}s)\x1b[0m",
+            cp.path.display(),
+            bytes as f64 / 1e9,
+            t.elapsed().as_secs_f64(),
+        ),
+        Err(e) => eprintln!("\x1b[90m(checkpoint [{reason}] FAILED: {e})\x1b[0m"),
+    }
+}
+
+fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
     let bits = tt_bits(q.n);
     // --distinct reports the re-expansion ratio (nodes ÷ distinct). For even
     // boards n ≤ 12 the distinct count is already known *exactly* (the table), so
     // we report that and skip the live counter; only n ≥ 14 needs a HyperLogLog
     // estimate (and only the table-backed solvers carry one).
     let live_count = distinct && q.n.is_multiple_of(2) && q.n > 12;
-    let solver: Box<dyn Solver> = match (live_count, solver_name) {
-        (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
-        (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
-        (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
-        (true, other) => {
-            eprintln!("--distinct estimates need memo/symmetry/parallel; ignoring for {other}.");
-            make_solver(other, bits).unwrap()
+    // --resume reloads a checkpoint image into the table and wraps the matching
+    // table-backed solver around it (warm start); otherwise build a fresh solver.
+    let solver: Box<dyn Solver> = match &cp_opts.resume {
+        Some(path) => {
+            let mut tt = match read_checkpoint(path, q.n) {
+                Ok(tt) => tt,
+                Err(e) => {
+                    eprintln!("resume: cannot load {}: {e}", path.display());
+                    std::process::exit(1);
+                }
+            };
+            if live_count {
+                tt.attach_counter(16, false);
+            }
+            eprintln!(
+                "\x1b[90m(resumed TT from {} — {})\x1b[0m",
+                path.display(),
+                tt.summary(),
+            );
+            match solver_name {
+                "parallel" => Box::new(Parallel::from_tt(tt)),
+                "symmetry" => Box::new(Tt::from_tt(tt, true)),
+                "memo" => Box::new(Tt::from_tt(tt, false)),
+                other => {
+                    eprintln!("resume needs a table-backed solver (parallel/symmetry/memo); got {other}.");
+                    std::process::exit(1);
+                }
+            }
         }
-        (false, name) => make_solver(name, bits).unwrap(),
+        None => match (live_count, solver_name) {
+            (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
+            (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
+            (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
+            (true, other) => {
+                eprintln!("--distinct estimates need memo/symmetry/parallel; ignoring for {other}.");
+                make_solver(other, bits).unwrap()
+            }
+            (false, name) => make_solver(name, bits).unwrap(),
+        },
     };
+    // Resolve checkpointing (opt-in; defaults on for n=16). Only the table-backed
+    // solvers can dump -- warn and disable if checkpointing was asked for otherwise.
+    let mut checkpoint = cp_opts.resolve(q.n);
+    if checkpoint.is_some() && solver.tt().is_none() {
+        eprintln!(
+            "checkpoint: {} has no transposition table; checkpointing disabled.",
+            solver.name(),
+        );
+        checkpoint = None;
+    }
+    if let Some(cp) = &checkpoint {
+        eprintln!(
+            "\x1b[90m(checkpointing to {} every {} — SIGUSR2 to dump now)\x1b[0m",
+            cp.path.display(),
+            fmt_dur(cp.every),
+        );
+    }
     let t = Instant::now();
     let n = q.n;
     // A live progress bar only for the slow boards (a search that runs > ~1 s,
@@ -575,7 +809,14 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     // Solve, then PRINT THE VERDICT IMMEDIATELY -- the optimal line below is a
     // separate, cheaper step (parity-aware PV) and must not gate the result; the
     // verdict is settled the moment `first_player_wins` returns (backlog #21).
-    let first_wins = run_watched(solver.as_ref(), n, bar, || solver.first_player_wins(q));
+    let first_wins = run_watched(solver.as_ref(), n, bar, checkpoint.as_ref(), || {
+        solver.first_player_wins(q)
+    });
+    // The search is done -- the table is at its most complete, so take the final
+    // checkpoint now (before the cheap PV), so a resume starts from the full result.
+    if let Some(cp) = &checkpoint {
+        do_checkpoint(solver.as_ref(), cp, "final");
+    }
     let elapsed = t.elapsed().as_secs_f64();
     let winner = if first_wins { "first" } else { "second" };
     println!(
@@ -585,7 +826,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool) {
     // The optimal line. `principal_variation` is value-aware: a loss ply takes the
     // first legal move with no search, only win plies search (warm TT + α-β cutoff),
     // so this no longer re-searches every root subtree single-core.
-    let pv = run_watched(solver.as_ref(), n, bar, || {
+    let pv = run_watched(solver.as_ref(), n, bar, None, || {
         q.principal_variation(solver.as_ref(), first_wins)
     });
     let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
@@ -860,7 +1101,7 @@ fn warm_table(q: &Queens, solver: &dyn Solver) {
     }
     // Show the bar (and handle signals) for the slow warm-ups (n ≥ 14); the
     // smaller even boards finish in well under a second, no indicator needed.
-    run_watched(solver, q.n, show_bar(q.n), || {
+    run_watched(solver, q.n, show_bar(q.n), None, || {
         solver.first_player_wins(q);
     });
 }

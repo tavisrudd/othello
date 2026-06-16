@@ -34,6 +34,7 @@
 //! `WORDS` × 64 bits, so boards up to `16×16` (256 bits) fit.
 
 use std::collections::{HashMap, HashSet};
+use std::io::{self, Read, Write};
 use std::sync::atomic::{AtomicU16, AtomicU32, AtomicU64, AtomicU8, Ordering};
 use std::sync::Mutex;
 
@@ -1121,6 +1122,12 @@ pub trait Solver: Sync {
     fn stats(&self) -> String {
         String::new()
     }
+
+    /// The transposition table, if this solver has one -- so a checkpoint can dump
+    /// it mid-search (`QueensTt::dump_image`). `None` for tableless solvers (`naive`).
+    fn tt(&self) -> Option<&QueensTt> {
+        None
+    }
 }
 
 /// **Naive** -- plain negamax win/loss with the α-β cutoff and *no* memo. The
@@ -1239,6 +1246,19 @@ impl Tt {
         }
     }
 
+    /// Wrap an already-built table (e.g. a reloaded checkpoint image) so a search
+    /// resumes warm. The key mode / selective-keying threshold are resolved from the
+    /// environment as in [`Tt::new`]; the caller must use the *same* `QUEENS_KEY` the
+    /// dump was produced under, or stored keys won't match.
+    pub fn from_tt(tt: QueensTt, canon: bool) -> Self {
+        Tt {
+            tt,
+            canon,
+            key: key_mode(),
+            max_avail: key_max_avail(),
+        }
+    }
+
     /// As [`Tt::new`], but the table also folds every position it is queried for
     /// into a HyperLogLog (and, with `exact`, a hash set) so the search reports
     /// the number of *distinct* positions it visited -- its true working set.
@@ -1342,6 +1362,9 @@ impl Solver for Tt {
     fn stats(&self) -> String {
         self.tt.summary()
     }
+    fn tt(&self) -> Option<&QueensTt> {
+        Some(&self.tt)
+    }
 }
 
 /// **Parallel** -- the production solver. Sequential search is [`Tt`] with
@@ -1376,6 +1399,18 @@ impl Parallel {
     pub fn new_counting(bits: u32, hll_p: u32) -> Self {
         Parallel {
             inner: Tt::new_counting(bits, true, hll_p, false),
+            par_depth: par_depth(),
+            root_done: AtomicU64::new(0),
+            root_total: AtomicU64::new(0),
+        }
+    }
+
+    /// Wrap a reloaded checkpoint table for a warm resume (see [`Tt::from_tt`]).
+    /// Re-running `first_player_wins` fast-forwards already-solved root subtrees
+    /// (instant TT hits) and continues the unsolved ones -- the TT *is* the progress.
+    pub fn from_tt(tt: QueensTt) -> Self {
+        Parallel {
+            inner: Tt::from_tt(tt, true),
             par_depth: par_depth(),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
@@ -1524,6 +1559,9 @@ impl Solver for Parallel {
             self.par_depth,
             self.inner.stats(),
         )
+    }
+    fn tt(&self) -> Option<&QueensTt> {
+        Some(&self.inner.tt)
     }
 }
 
@@ -2069,6 +2107,93 @@ fn tt_slots_override() -> Option<usize> {
         .map(|n| n.max(2))
 }
 
+// --------------------------------------------------------------------------- //
+// Dumpable / reloadable image (checkpoint + resume; proposal 2026-06-15)
+// --------------------------------------------------------------------------- //
+
+/// Magic for a [`QueensTt`] image file. Bumped only if the wire layout changes.
+const TT_MAGIC: [u8; 8] = *b"QNSTT\0\0\0";
+/// `Slot` layout version (`{used:1, val:8, fp:55}` + `fastrange` routing). Bump on
+/// any change to `Slot` packing or the `index` function.
+const TT_FORMAT_VERSION: u32 = 1;
+/// [`QueensTt::hash128`] seeds/constants version. Bump if either hash half changes
+/// (a stale fingerprint would silently mis-route).
+const TT_HASH_ID: u32 = 1;
+/// `canon`/`pos_key` version. Bump if the canonical key changes (every stored key
+/// would then refer to a different position).
+const TT_CANON_ID: u32 = 1;
+/// Arch/endianness tag: raw little-endian `u64` slots. `1` = x86_64-LE.
+const TT_ARCH_X86_64_LE: u8 = 1;
+/// Fixed header size in bytes (the rest is the raw slot image).
+const TT_HEADER_LEN: usize = 64;
+
+/// The on-disk header of a dumped [`QueensTt`]. The fixed fields tag the *exact*
+/// slot layout, hash, canonicalisation, and arch a reload depends on -- a mismatch
+/// is a hard error (`io::ErrorKind::InvalidData`), never a silently-voided hit.
+///
+/// `len` is the slot **count**, not `bits`: routing is `fastrange(route, len)`
+/// (see [`QueensTt::index`]), so a table of a different size re-routes every entry
+/// and the stored fingerprint -- an independent hash half, not the key -- cannot be
+/// recomputed. **An image only reloads into a table of the same `len`.** `epoch` is
+/// reserved for delta checkpoints (proposal Phase 2); `fill` is reporting only.
+pub struct TtHeader {
+    pub n: u8,
+    pub len: u64,
+    pub fill: u64,
+    pub epoch: u32,
+}
+
+impl TtHeader {
+    fn to_bytes(&self) -> [u8; TT_HEADER_LEN] {
+        let mut b = [0u8; TT_HEADER_LEN];
+        b[0..8].copy_from_slice(&TT_MAGIC);
+        b[8..12].copy_from_slice(&TT_FORMAT_VERSION.to_le_bytes());
+        b[12..16].copy_from_slice(&TT_HASH_ID.to_le_bytes());
+        b[16..20].copy_from_slice(&TT_CANON_ID.to_le_bytes());
+        b[20..24].copy_from_slice(&self.epoch.to_le_bytes());
+        b[24..32].copy_from_slice(&self.len.to_le_bytes());
+        b[32..40].copy_from_slice(&self.fill.to_le_bytes());
+        b[40] = self.n;
+        b[41] = TT_ARCH_X86_64_LE;
+        // b[42..64] reserved (zero)
+        b
+    }
+
+    /// Validate and parse a header, hard-erroring on any tag mismatch so a stale or
+    /// foreign dump is rejected rather than quietly producing wrong hits.
+    fn parse(b: &[u8]) -> io::Result<TtHeader> {
+        let bad = |m: String| io::Error::new(io::ErrorKind::InvalidData, m);
+        if b.len() < TT_HEADER_LEN {
+            return Err(bad("truncated TT header".into()));
+        }
+        if b[0..8] != TT_MAGIC {
+            return Err(bad("not a queens TT image (bad magic)".into()));
+        }
+        let u32_at = |o: usize| u32::from_le_bytes(b[o..o + 4].try_into().unwrap());
+        let check = |got: u32, want: u32, what: &str| {
+            (got == want)
+                .then_some(())
+                .ok_or_else(|| bad(format!("{what} mismatch: image {got}, this build {want}")))
+        };
+        check(u32_at(8), TT_FORMAT_VERSION, "format_version")?;
+        check(u32_at(12), TT_HASH_ID, "hash_id")?;
+        check(u32_at(16), TT_CANON_ID, "canon_id")?;
+        if b[41] != TT_ARCH_X86_64_LE {
+            return Err(bad(format!("arch mismatch: image {}, expected x86_64-LE", b[41])));
+        }
+        Ok(TtHeader {
+            epoch: u32_at(20),
+            len: u64::from_le_bytes(b[24..32].try_into().unwrap()),
+            fill: u64::from_le_bytes(b[32..40].try_into().unwrap()),
+            n: b[40],
+        })
+    }
+}
+
+/// Slots transferred per read/write block (`BLOCK * 8` bytes ≈ 512 KB) -- amortises
+/// per-call overhead over the streamed image without a large buffer.
+const TT_IO_BLOCK: usize = 1 << 16;
+
 impl QueensTt {
     /// A lockless table of `2^bits` slots (each 8 bytes; see [`Slot`]). `bits` is the
     /// memory cap knob. `QUEENS_TT_SLOTS` overrides with an exact slot **count** (any
@@ -2222,6 +2347,80 @@ impl QueensTt {
         }
         #[cfg(not(target_arch = "x86_64"))]
         let _ = ptr;
+    }
+
+    /// Stream this table as a raw image (`header || little-endian slot u64s`) to
+    /// `w` (proposal Approach A). Each slot is read with a single relaxed atomic
+    /// load, so a *live* dump under concurrent writers is a valid partial memo --
+    /// each `u64` is never torn and every stored value is a final verdict, so the
+    /// snapshot is sound to reload (good-enough-live; it only misses in-flight
+    /// `put`s). `n` tags the board the image belongs to. The empty slots are zero,
+    /// so the stream compresses well -- wrap `w` in a zstd encoder at the call site.
+    pub fn dump_image<W: Write>(&self, w: &mut W, n: u8) -> io::Result<()> {
+        let header = TtHeader {
+            n,
+            len: self.len,
+            fill: 0, // reporting-only; a full pre-scan every checkpoint isn't worth it
+            epoch: 0,
+        };
+        w.write_all(&header.to_bytes())?;
+        let mut buf = Vec::with_capacity(TT_IO_BLOCK * 8);
+        for chunk in self.slots.chunks(TT_IO_BLOCK) {
+            buf.clear();
+            for slot in chunk {
+                buf.extend_from_slice(&slot.load(Ordering::Relaxed).to_le_bytes());
+            }
+            w.write_all(&buf)?;
+        }
+        Ok(())
+    }
+
+    /// Reload a raw image written by [`dump_image`](Self::dump_image) into a fresh
+    /// table, hard-erroring if the header's format/hash/canon/arch tags or `n` don't
+    /// match this build (a mismatch would silently void every hit). The table is
+    /// sized to the image's `len` -- routing is `fastrange(route, len)`, so it cannot
+    /// be re-keyed into a different size. `counter` is `None`; attach one with
+    /// [`attach_counter`](Self::attach_counter) for a `--distinct` resume.
+    pub fn load_image<R: Read>(r: &mut R, expected_n: u8) -> io::Result<QueensTt> {
+        let mut hbuf = [0u8; TT_HEADER_LEN];
+        r.read_exact(&mut hbuf)?;
+        let header = TtHeader::parse(&hbuf)?;
+        if header.n != expected_n {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("image is for n={}, but this run is n={expected_n}", header.n),
+            ));
+        }
+        let size = header.len as usize;
+        let slots = zeroed_huge_atomics(size);
+        let mut buf = vec![0u8; TT_IO_BLOCK * 8];
+        let mut i = 0usize;
+        while i < size {
+            let take = TT_IO_BLOCK.min(size - i);
+            let bytes = &mut buf[..take * 8];
+            r.read_exact(bytes)?;
+            for (j, slot) in slots[i..i + take].iter().enumerate() {
+                let word = u64::from_le_bytes(bytes[j * 8..j * 8 + 8].try_into().unwrap());
+                slot.store(word, Ordering::Relaxed);
+            }
+            i += take;
+        }
+        Ok(QueensTt {
+            slots,
+            len: header.len,
+            nodes: AtomicU64::new(0),
+            counter: None,
+        })
+    }
+
+    /// Attach distinct-position instrumentation to an already-built table (e.g. a
+    /// reloaded image), so a `--resume` run can still report its working set. See
+    /// [`new_counting`](Self::new_counting).
+    pub fn attach_counter(&mut self, hll_p: u32, exact: bool) {
+        self.counter = Some(Counter {
+            hll: Hll::new(hll_p),
+            exact: exact.then(|| Mutex::new(HashMap::new())),
+        });
     }
 }
 
@@ -2439,6 +2638,50 @@ mod tests {
             }
             assert!(q.no_moves(blocked), "n={n}: board fully blocked at the end");
         }
+    }
+
+    /// A dumped TT image reloads into the same verdict and resumes *warm*: the
+    /// fresh solver re-confirms the result almost entirely from cached hits, and a
+    /// header for the wrong board is a hard error, not a silent mis-load.
+    #[test]
+    fn tt_image_round_trips_and_warms() {
+        let q = Queens::new(10);
+        // Cold solve, populating the table.
+        let cold = Tt::new(16, true);
+        let v1 = cold.first_player_wins(&q);
+        let cold_nodes = cold.nodes();
+        assert!(cold_nodes > 1000, "n=10 searches a real number of nodes");
+
+        // Dump the warm table to an in-memory image and reload it.
+        let mut img = Vec::new();
+        cold.tt().unwrap().dump_image(&mut img, q.n as u8).unwrap();
+        let reloaded = QueensTt::load_image(&mut img.as_slice(), q.n as u8).unwrap();
+
+        // A fresh solver around the reloaded table re-confirms the verdict from the
+        // root cache hit -- the warm-resume property (the TT *is* the progress).
+        let warm = Tt::from_tt(reloaded, true);
+        let v2 = warm.first_player_wins(&q);
+        assert_eq!(v1, v2, "reloaded table yields the same verdict");
+        assert!(
+            warm.nodes() < cold_nodes / 100,
+            "warm resume re-searches almost nothing: {} vs cold {cold_nodes}",
+            warm.nodes(),
+        );
+
+        // The image is rejected for a different board, not silently mis-keyed.
+        let reject = |r: io::Result<QueensTt>, what: &str| match r {
+            Err(e) => assert_eq!(e.kind(), io::ErrorKind::InvalidData, "{what}"),
+            Ok(_) => panic!("{what}: must be rejected"),
+        };
+        reject(
+            QueensTt::load_image(&mut img.as_slice(), q.n as u8 + 2),
+            "wrong-n image",
+        );
+        // ...and rubbish bytes fail the magic check.
+        reject(
+            QueensTt::load_image(&mut [0u8; TT_HEADER_LEN].as_slice(), q.n as u8),
+            "bad magic",
+        );
     }
 
     /// The Sprague-Grundy nimbers match OEIS A344227, and `nimber != 0` agrees
