@@ -354,14 +354,25 @@ are cross-referenced, not repeated.
 
 ## Handoff Notes
 
-### Session 7 — #18 tiny-component shortcut + `count --comps` (2026-06-15)
+### Session 7 — graph-key cost crusade (#18/#17/#17b/#19) + `count --comps` + PGO + Chunk 2b fastrange (2026-06-15)
 
 **Session**: 2026-06-15 (queens, session 7). `make test`/`clippy`/`fmt` green
 (`tiny_component_key_matches_full_canon` + `solver_lineage_agrees` ok; D4 gate:
 `solve 12 --distinct` → second, distinct 1,060,823, 1.01× re-exp; `solve 14 --distinct`
-→ second, 1.09× re-exp). Files: `rust/src/queens.rs` (tiny-component shortcut + the
-monomorphised `iso_key_fast_in::<const HIST>` + the new test), `rust/src/bin/queens.rs`
-(`count --comps`), `CLAUDE.md` (hot-path-toggle rule), auto-memory.
+→ second, 1.08× re-exp). Commits `5bd9564`…`44f7e74`.
+
+**Headline — graph-key per-node cost cut ≈ +45% compounded** (n=16 partial throughput,
+taskset-pinned A/B): #18 tiny-component shortcut +6%, #17 branchless WL +3.5%, #17b
+compact-local + AVX-512 +2%, **#19 component-canon cache +29% (the lever)** + cache→2^22
++3.7%. **Also landed:** `count --comps` (monomorphised `iso_key_fast_in::<const HIST>`
+tooling), PGO make targets (`pgo-queens`/`pgo-othello`/`pgo-release`, isolated target dirs,
+n=14 SIGINT-early-term profile), **Chunk 2b `fastrange`** (TT any slot count via
+`QUEENS_TT_SLOTS`), the hot-path-toggle rule in `CLAUDE.md`, and 3 memories
+(`[[queens-bench-anchor-n14-n16]]`, `[[keep-pushing-amortize-over-microopt]]`, updated
+`[[env-vars-resolved-at-startup]]`). Findings: graph key still ~2× slower *live* than D4 at
+n=14 (stays the memory/freeze-time key); decomposition (#8) bounded by ~1.2 comps/position
+at n=12; `vpmullq` not worth forcing. Files: `rust/src/queens.rs`, `rust/src/bin/queens.rs`,
+`rust/Makefile`, `CLAUDE.md`, auto-memory. Details per lever below.
 
 **WIN (modest) — #18 tiny-component shortcut.** `comp_canon` now maps every connected
 component of `k ≤ 4` vertices straight to a constant derived from its **sorted degree
