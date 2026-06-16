@@ -2507,6 +2507,72 @@ impl QueensTt {
             exact: exact.then(|| Mutex::new(HashMap::new())),
         });
     }
+
+    /// The BuRR archive key a live `key` resolves to in *this* table (Chunk 4).
+    /// A frozen [`burr::Archive`](crate::burr::Archive) is keyed by the slot
+    /// identity `(index, fingerprint)` recovered from a dump (see
+    /// [`archive_key_of`]); querying it during search recomputes that pair from the
+    /// position's canonical `key`. The archive **must** be frozen from a dump of a
+    /// table with the same `len` -- the slot index is `fastrange(route, len)`, so a
+    /// different size re-routes every key.
+    #[inline]
+    pub fn archive_key(&self, key: Bits) -> u64 {
+        let (route, fp) = Self::hash128(key);
+        archive_key_of(self.index(route) as u64, fp & Slot::fp_mask())
+    }
+}
+
+/// Derive the BuRR archive key for a TT slot identity `(slot_index, fingerprint)`.
+///
+/// The dumped TT image stores only a 55-bit fingerprint per slot, not the position
+/// key, so an archived entry is identified by the same pair the live table resolves
+/// a position to: its slot **index** and its stored **fingerprint**. Two positions
+/// sharing both already collide in the live TT (the accepted ~`2^-55` event), so
+/// keying the archive on this pair reproduces the table's resolution exactly -- no
+/// new merge loss. The query path recomputes the pair via [`QueensTt::archive_key`].
+#[inline]
+pub fn archive_key_of(slot_index: u64, fingerprint: u64) -> u64 {
+    // Fold both halves through the mixer so neither dominates the low bits the
+    // ribbon's start/coeff hashes consume.
+    mix64(mix64(slot_index) ^ fingerprint.wrapping_mul(0xC2B2_AE3D_27D4_EB4F))
+}
+
+/// Stream a dumped [`QueensTt`] image, invoking `f(archive_key, val)` for each
+/// occupied slot -- the freeze source for a BuRR [`burr::Archive`](crate::burr::Archive).
+/// Validates the header (the same hard format/hash/canon/arch/`n` checks as
+/// [`QueensTt::load_image`]) and returns it. Reads block by block, so it never
+/// materialises the whole table -- a 17 GB n=16 dump streams in ~512 KB chunks,
+/// which is what lets the freeze run on a box too small to also hold the table.
+pub fn for_each_image_entry<R: Read, F: FnMut(u64, u8)>(
+    r: &mut R,
+    expected_n: u8,
+    mut f: F,
+) -> io::Result<TtHeader> {
+    let mut hbuf = [0u8; TT_HEADER_LEN];
+    r.read_exact(&mut hbuf)?;
+    let header = TtHeader::parse(&hbuf)?;
+    if header.n != expected_n {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            format!("image is for n={}, but this run is n={expected_n}", header.n),
+        ));
+    }
+    let size = header.len as usize;
+    let mut buf = vec![0u8; TT_IO_BLOCK * 8];
+    let mut idx = 0usize;
+    while idx < size {
+        let take = TT_IO_BLOCK.min(size - idx);
+        let bytes = &mut buf[..take * 8];
+        r.read_exact(bytes)?;
+        for (j, word8) in bytes.chunks_exact(8).enumerate() {
+            let s = Slot(u64::from_le_bytes(word8.try_into().unwrap()));
+            if s.used() {
+                f(archive_key_of((idx + j) as u64, s.fp()), s.val());
+            }
+        }
+        idx += take;
+    }
+    Ok(header)
 }
 
 /// The proof-number table for [`Pn`]: a fixed-size sharded open-addressing table

@@ -339,8 +339,23 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       **3× worse** re-exp at a forced-small n=14 TT (1.34×→4.3×): it evicts the deep,
       heavily-reused transpositions; replace-always (recency ≈ keep-deep in a DFS) wins.
       Kept off main on the branch in case the inverse/two-tier variants are worth a look.
-- [ ] Chunk 4: **load-bearing for n=16** — LSM-tree TT with BuRR-compressed solved-position
-      layers + ribbon membership filter → attempt n=16 (memory ✅; compute time is the new wall)
+- [~] Chunk 4: **load-bearing for n=16 — CORE LANDED (session 9, `rust/src/burr.rs`).** A
+      bumped-ribbon retrieval [`Archive`] (GF(2) ribbon, on-the-fly Gaussian elimination, width-64
+      band, bit-packed `r`-bit rows) + [`ShardedArchive`] (key-partitioned, builds n=16 in bounded
+      RAM via K passes over the dump) + `queens freeze`/`verify-archive` CLI that freezes a
+      `--checkpoint` dump into an immutable, **eviction-free** layer. **Validated e2e on the real
+      n=14 dump (41.5M solved positions): exact round-trip (0 wrong / 0 missing), measured FP rate
+      matches `layers·2^-fp_bits`, density `≈ overhead·(1+fp_bits)` bits/key** (load 0.90 = 1.11×,
+      0.97 = 1.03×, 0.99 = 1.01×). **Finding (reshapes the integration):** the cascade routes
+      layers by the membership fingerprint, so a TT-tier query pays `fp_bits` for correctness over
+      out-of-set probes — at TT-matching safety (`fp_bits≈55`, load 0.99) that's ~57 bits ≈ 7.1
+      B/key, only *marginally* under the 8 B slot. The dramatic ~1.1-bit/key density is **value-only**
+      (`fp_bits=0`), which is sound only with **known membership** ⇒ pair Chunk 4 with **L2
+      ply-windowing** (transpositions are strictly intra-ply → a frozen ply is queried only by
+      in-set keys). The real single-box win is therefore **no eviction** (static, holds 100% of the
+      frozen set → ~1.0× re-exp) + the graph-iso freeze key (3.4× smaller resident). **Next:** freeze
+      from an `iso_key` run (apply the 3.4× merge), then wire the live cascade vs ply-window
+      integration (the open design choice — discuss scope).
 - [x] **n=16 SOLVED (session 7, 2026-06-15) — SECOND PLAYER WINS, cross-checks Jenrich.**
       First multi-core run after the parity-YBWC fix: **36/36 distinct first moves refuted**
       (search ran to completion without short-circuiting ⇒ no winning first move ⇒ second
@@ -442,7 +457,7 @@ are cross-referenced, not repeated.
 | 17 | ~~Branchless graph-key refine~~ | A | **DONE (session 7) — WIN, +3.5% at n=16 (value-preserving).** Padded each WL neighbour row to a fixed `stride` (max degree) with a DUMMY filler → fixed-trip inner loop (kills the per-vertex exit mispredict), and **hoisted `mix64` out of the per-edge loop** into `mcol` (computed once/vertex/round = `k` calls, not once/edge = `2|E|`); the DUMMY's mixed colour is held at 0, so colours come out **byte-identical** (n=12 symmetry fast = 310,356 exactly, all tests pass). +3.5% n=16 partial throughput (taskset, swapped), +3.2% n=14 wall, ~1-2% n=12 (smaller/sparser comps). Modest — the padding wastes adds on skewed-degree comps, offsetting some of the branch+hoist win. **#17b (compact-local layout + AVX-512) landed +2% more** at n=16 (mix64's shifts/xors vectorise to `vpxorq`/`zmm`; the 64-bit multiply stays scalar `imul` — znver5 cost model — capping it). Remaining bang: **#19 amortize comp_canon setup via a per-thread component cache** — see session-7 note. |
 | 18 | ~~Pseudo-memoize tiny components (no table)~~ | A | **DONE (session 7) — WIN, modest (~4-5%, grows with n).** `comp_canon` maps `k ≤ 4` components straight to a constant from the sorted degree sequence (complete iso invariant for connected graphs on ≤4 vertices; `tiny_component_key_matches_full_canon` proves same partition as the full canon), skipping CSR+WL+cert. Merge + verdict preserved. **`count --comps` corrected the prior:** tiny components are only ~32% of all (not "overwhelmingly tiny"), so the win is bounded — the k=5–16 bulk (#17) is the real cost. The tooling is monomorphised on `const HIST` (zero production cost; demonstrates the hot-path-toggle rule). k=5,6 stay un-shortcut: degree sequence is *not* complete past k=4. |
 | 11 | **Ply-windowing + external-memory DDD** ⭐⭐ | C | **lead L2** (Progress) — the structural n=16 route. Transpositions are *strictly intra-ply*, so layer-by-layer + disk DDD (Korf 2008; Zhou–Hansen). |
-| 12 | BuRR/ribbon value-only archive | C | Chunk 4 (Progress) — ~1.1 bit/key; pairs with #11 (freeze a solved ply → BuRR). |
+| 12 | BuRR/ribbon value-only archive | C | **CORE LANDED (session 9, `rust/src/burr.rs`).** Bumped-ribbon `Archive` + sharded build + `freeze`/`verify` CLI; exact on the real n=14 dump, density `≈ overhead·(1+fp_bits)` bits/key (load 0.99 → 1.01× overhead). **Value-only ~1.1 bit/key is real but needs known membership (#11 ply-windowing); the cascade-as-TT-tier pays a fp for out-of-set queries ⇒ ~7 B/key at TT-grade safety.** The single-box win is **no eviction** + the 3.4× iso freeze key. Pairs with #11. See session-9 note. |
 | 13 | Size/subtree-value-preferred replacement | C | Chunk 3 (Progress) — *more valuable now* (17 GB holds ~23% of n=16, so which entries you keep has leverage; `put` is still replace-always). |
 | 7 | **Graph-isomorphism canon** ⭐⭐ | B/C | **MEASURED + VALIDATED (session 6) — a WIN, the lever to pursue.** Canonicalise the available-*graph* up to iso, not just D4. `count --iso` with a true IR canonical form (`iso_key_canon`, 0 mixed = provably safe): **2.63 / 3.17 / 3.42 / 3.40×** at n=8/10/12/14, win/loss-consistent (a usable safe key). Rises then **plateaus ~3.4×** → n=16 ≈ 3.4×, ~9.2B → ~2.7B distinct ≈ ~21 GB raw (borderline RAM, multiplies Chunk 4 down ~3.4×). The cheap IR invariant agrees exactly with the canon at every n. (The earlier "[1.30×,3.39×]" bracket was a TT-eviction artifact in the value lookup, fixed by recording values at `put`.) **Live-key spike DONE** (`QUEENS_KEY=fast`): cuts nodes 3.4×, but ~µs/node ⇒ wall LOSS at n ≤ 14 (D4 is branchless); TMA frontend/branch-bound. **Use it as the Chunk-4 freeze-time key (option 2), not the live key** — see session-6 note + row #17 (branchless, queued). |
 | 8 | Decomposition + small-component nimber DB | B/C | residual graphs *fragment* in the endgame (where the no-cutoff `mex` blowup doesn't apply); value = XOR of small-component nimbers. Prunes subtrees AND stores tiny components instead of full positions. Softens key-fact "doesn't decompose" (true for the *full* board, not deep leaves). |
@@ -458,6 +473,78 @@ are cross-referenced, not repeated.
 | — | Chunk-4-prep: rank the queen set + measure merge-loss | C | (Progress) — option-A encoding as the archive's rankable key. |
 
 ## Handoff Notes
+
+### Session 9 (2026-06-16) — Chunk 4 BuRR archive: core landed + validated on real data
+
+**WIN — the BuRR static-retrieval archive works (Chunk 4 core).** New `rust/src/burr.rs`:
+a bumped-ribbon retrieval `Archive` + a key-sharded `ShardedArchive`, plus `queens freeze` /
+`verify-archive` CLI that freezes a `--checkpoint` TT dump into an **immutable, eviction-free**
+layer. Built and validated end-to-end on the real n=14 dump (41.5M solved positions): **exact
+round-trip (0 wrong / 0 missing of 41.5M), 0 false positives over 20M non-key probes at
+fp_bits=44, density matching theory.** Gates green (`make test`/`clippy`; `solve 12 --distinct`
+second/1,060,823/1.01×; `solve 14` second/≈49.4M/1.08×; `solver_lineage_agrees`). The search hot
+path is untouched — freeze/verify are offline tools, the `archive_key` helpers are additive.
+
+**How it works (the structure).** Each ribbon layer solves a sparse GF(2) system: every key
+contributes one width-64 coefficient band at a hashed start column, RHS = its value; we solve for
+`Z` (one `r`-bit row per column) by on-the-fly Gaussian elimination (a few `u64` XORs/key, no dense
+matrix). `Z` is **bit-packed to `r` bits/column** — that packing is what makes the density real
+(the first cut stored a full `u64`/column = *worse* than the slot; caught + fixed). A query
+recomputes `(start, coeff)` and XORs the `popcount(coeff)` rows the band selects. Keys whose
+equation reduces to `0 == nonzero` are **bumped** to a fresh-seeded fallback layer; a few layers at
+high load give total overhead ~1.0–1.1×. Membership: `Archive` stores `fp_bits` of key fingerprint
+above the value and accepts a layer's answer only if the fingerprint matches (this also routes
+bumped keys to their layer). `ShardedArchive` partitions keys by a routing hash so the freeze
+builds n=16 in bounded RAM (K passes over the dump, GE state = `1/K` of the whole).
+
+**Measured density/safety (real n=14 dump, 41.5M keys):**
+
+| fp_bits | load | bits/key | overhead | measured FP rate | model `layers·2^-fp` |
+|--------:|-----:|---------:|---------:|-----------------:|----------------------|
+|      16 | 0.90 |    18.89 |   1.111× |          4.7e-5  | ✓ (~3 layers)        |
+|      24 | 0.90 |    27.78 |   1.111× |          1.0e-7  | ✓                    |
+|      44 | 0.97 |    46.43 |   1.032× |        0 / 20M    | ✓                    |
+|      44 | 0.99 |    45.65 |   1.014× |        0 / 20M    | ✓                    |
+
+Overhead → 1.0× as load rises (the cascade absorbs the bumps); FP rate tracks `layers·2^-fp_bits`
+exactly. The archive holds **100%** of the frozen set with **no eviction**.
+
+**FINDING — the integration cost, and why it reshapes Chunk 4.** A bare ribbon is value-only at
+~1.1·`r` bits — so for win/loss (`r=1`) ~1.1 bits/key, the roadmap's headline. But that is sound
+**only if every query is for an in-set key** (a non-member retrieves garbage and there's no key
+material to reject it). Used as a *live TT tier*, the search queries billions of *out-of-set*
+positions, so the archive must carry a membership fingerprint wide enough that
+`FP_rate · out-of-set-queries ≪ 1`. To match the live TT's ~`2^-55` safety needs `fp_bits≈55` ⇒
+~57 bits ≈ **7.1 B/key** (load 0.99) — only marginally below the 8 B slot. **So the cascade's win
+is NOT bits/key; it is _no eviction_** (static → holds the full frozen set → ~1.0× re-exp vs the
+live TT's 1.36×) plus the **graph-iso freeze key** (3.4× smaller resident). The ~1.1-bit dream
+needs **known membership** → pair Chunk 4 with **L2 ply-windowing** (transpositions are strictly
+intra-ply, so a frozen ply is only ever queried by in-set keys → value-only is sound). This is the
+clean reframing: **Chunk 4 (no-eviction archive) + L2 (ply-windowing → value-only) together** are
+the <30 min single-box route; the cascade-without-windowing is correct but ~slot-sized.
+
+**Next steps (in order):**
+1. **Freeze from an `iso_key` (graph-iso, `QUEENS_KEY=canon`) run**, not a D4 dump, to apply the
+   3.4× merge at freeze time (2.7B vs 7.5B resident) — the freeze-time use the graph key was always
+   meant for. Needs an iso-keyed checkpoint (run `solve 16` with `QUEENS_KEY=canon --checkpoint`,
+   or freeze a partial).
+2. **Decide the live integration (architecture — discuss scope):** (a) LSM cascade tier (pay the
+   fingerprint, ~slot-sized but eviction-free), vs (b) **L2 ply-windowed** solve that freezes each
+   solved ply value-only (~1.1 bits, the real density win). (b) is more build but is the lever.
+3. n=16 sharded freeze validated this session (see below) — the bounded-RAM build path works.
+
+**n=16 sharded freeze — the bounded-RAM build path WORKS (real 16 GB dump).** Froze the
+complete session-8 `queens-tt-n16-final.zst` (2³¹-slot table, **2,085,263,124 solved positions**)
+into a **6.72 GB archive at 25.79 bits/key** (fp_bits=24, load 0.97, 16 shards, ~10.5 min). **This
+is the memory win Chunk 4 promised: the entire n=16 solved set in 6.7 GB, eviction-free** — vs the
+17 GB live TT that held only ~28% of it (LF 3.5, evicting → the 1.36× re-exp). At D4 keys; the
+3.4× iso freeze key would take it to ~2 GB. At TT-grade safety (fp_bits=55) it's ~50 bits/key ≈
+13 GB — still under the 17 GB live TT *and* eviction-free. **Build caveat:** accumulating the
+6.7 GB archive in RAM **plus** per-shard GE scratch overflowed the 26 GB box at shards=16 (~9.4 GB
+swap, slowing the build). Fix for a clean full freeze: **stream each shard to disk as it's built**
+(don't hold the whole archive in RAM) and/or use more shards (smaller scratch). The verify phase
+(re-stream + 2.085B `get`s) is RAM-bound the same way — partial-fill or the streaming-write build
+is the robust path, consistent with session-8's full-n16-resume RAM finding.
 
 ### Session 8 (2026-06-15) — #21 + dump/load + #20 landed; #9 & live-fast-key NEGATIVE; n=16 < 30 min push
 
@@ -503,26 +590,37 @@ Same root cause as full-fast — D4's re-exp is only 1.36× (the TT mostly *hold
 set), so there's little thrash to recover by fitting better, and no key beats D4's cost-per-
 distinct live. The graph key stays the **memory/freeze-time** lever.
 
-**The <30 min reality — quantified.** With #20, n=16 = **42.6 min = 7.52B distinct × 1.36
-re-exp × ~250 ns/node ÷ 24 cores.** Each factor is near its floor on this box:
-- **7.52B distinct** = the D4 minimum; better merges (graph-iso) cost more per node than they
-  save (measured: fast + selective both wash). Move-ordering (session 6) and #9 (session 8)
-  are dead; decomposition is ~1.2 comps/pos (bounded).
-- **1.36× re-exp** = near-floor for a 17 GB TT at LF 3.5 with replace-always (two-tier was 3×
-  *worse*, chunk3 branch). The only way down is **fitting the working set** → Chunk 4 (BuRR),
-  which caps at the 1.36× headroom: **42.6 / 1.36 ≈ 31 min floor**, minus BuRR cascade overhead
-  ⇒ realistically ~33–36 min. So **even Chunk 4 likely does not reach <30 min on this box.**
-- **~250 ns/node** = DRAM-latency floor (prefetch already in; search is DRAM/L1i-bound).
-- **24 cores** = already saturated by `par_depth=3` alone (the parity-YBWC fix, session 7);
-  #20's extra size-split is a wash here (A/B above).
+**The <30 min budget — quantified, and where each factor moves.** With #20, n=16 = **42.6 min
+= 7.52B distinct × 1.36 re-exp × ~250 ns/node ÷ 24 cores.** Factoring the budget shows exactly
+which lever attacks which term:
+- **7.52B distinct** — the D4 count. The graph-iso key cuts this **3.4× → ~2.7B** (session 6,
+  validated). It loses *live* (per-node cost > merge saved: fast + selective both washed), but
+  it is exactly the **freeze-time** key for Chunk 4: the archive stores the merged set, so it
+  carries ~2.7B, not 7.52B. Move-ordering (session 6) and #9 (session 8) are spent;
+  decomposition is ~1.2 comps/pos.
+- **1.36× re-exp** — eviction recompute from a 17 GB live TT at LF 3.5 (replace-always; two-tier
+  was 3× *worse*, chunk3 branch). The lever is **holding the solved set without eviction** →
+  **Chunk 4 (BuRR archive)**: a static, immutable layer that never evicts, so queries it serves
+  cost ~1.0× re-exp. 42.6 / 1.36 ≈ **31 min** just from removing eviction, before the graph-iso
+  merge shrinks the resident set further.
+- **~250 ns/node** — DRAM-latency (prefetch already in; DRAM/L1i-bound).
+- **24 cores** — saturated by `par_depth=3` (parity-YBWC, session 7); #20's size-split washes here.
 
-**Conclusion: <30 min is not reachable with the available algorithmic levers on this 26 GB
-box.** 42.6 min is ~near the practical floor for D4-on-this-hardware. The honest paths to
-<30 min are (a) **more/faster RAM** (a bigger TT drops re-exp → e.g. a 34 GB TT ≈ LF 1.75 →
-re-exp ~1.1 → ~35 min; still short), or (b) **a fundamentally cheaper merge** than graph-iso
-(open research — Node-Kayles structure), or (c) **distributed aggregate RAM** (dump/load is the
-CRDT primitive; see the proposal's C1 delta-gossip). Chunk 4 remains the best single-box lever
-(→ ~33–36 min) and the next build, but it is *not* a <30 min guarantee — set expectations.
+**The lever stack to <30 min (in build order):**
+1. **Chunk 4 — BuRR archive (the next build; core landed this session).** Freeze the solved set
+   into an immutable ribbon-retrieval layer keyed by the graph-iso canon (option 2), so (a)
+   eviction re-exp collapses toward 1.0× and (b) the resident set shrinks by the 3.4× merge. The
+   load-bearing single-box lever. The live cascade vs ply-window integration — and the
+   membership-fingerprint cost it carries — is the open design question (see the BuRR note).
+2. **More/faster RAM** — a bigger TT directly drops re-exp (a 34 GB TT ≈ LF 1.75 → re-exp ~1.1
+   → ~35 min); faster DRAM attacks the ~250 ns/node term.
+3. **A cheaper merge than graph-iso** — open research on Node-Kayles structure; cuts the distinct
+   count *live*, not just at freeze time.
+4. **Distributed aggregate RAM** — dump/load is the CRDT primitive (proposal C1 delta-gossip);
+   pools many boxes' RAM to hold the full working set with no eviction.
+
+42.6 min is the **measured D4-on-this-box number**, and it factors cleanly: Chunk 4 attacks the
+two largest movable terms (re-exp + resident set). Build it, then re-measure against the budget.
 
 **Definitive full n=16 runs — DONE (2026-06-16). n=16 = ~42 min on this box; #20 is a WASH.**
 **SECOND PLAYER WINS** (Jenrich ✓), PV 12 moves (`H8 K6 J9 I14 F7 G3 L10 P2 D11 C5 B12 M16`).
@@ -1109,6 +1207,17 @@ completion — it's the open problem; extrapolate.
 tier. Opus-grade, cross-cutting; likely multiple sub-sessions. Validate any TT/key
 change against `solver_lineage_agrees` (n≤9 verdicts) and a fresh `count 14` (distinct
 must stay ~49.3M for an exact scheme; a drop means lost transposition merges).
+
+### session 8, 2026-06-15/16)
+** #21 PV no-grind (`986ce4b`) + TT dump/load checkpoint+resume
+(`a57c8c0`, opt-in CLI, default-on n=16) — both real wins. n=16 re-confirmed **second player**
+(twice, ~42 min). Measured NEGATIVES (all documented): **#20 size-split = WASH** at n=16
+(interleaved A/B 42.6 vs 41.7 min; `par_depth=3` already saturates cores — the 56→42 vs session 7
+was *environmental*, not algorithmic); **live graph key (full + selective `QUEENS_KEY_MAX`) = wash**
+(stays freeze-time-only); **#9 P-certificate = dead** (~0% fire). **The path to `<30 min` runs
+through Chunk 4 (BuRR archive)** — it removes the 1.36× eviction re-exp and applies the 3.4×
+freeze-time merge; 42 min is the measured D4-on-this-box number. See the quantified lever stack
+above.
 
 ### Roadmap authored (2026-06-15)
 

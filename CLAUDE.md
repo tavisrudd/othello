@@ -10,21 +10,12 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
-**DONE (session 8, 2026-06-15/16):** #21 PV no-grind (`986ce4b`) + TT dump/load checkpoint+resume
-(`a57c8c0`, opt-in CLI, default-on n=16) — both real wins. n=16 re-confirmed **second player**
-(twice, ~42 min). Measured NEGATIVES (all documented): **#20 size-split = WASH** at n=16
-(interleaved A/B 42.6 vs 41.7 min; `par_depth=3` already saturates cores — the 56→42 vs session 7
-was *environmental*, not algorithmic); **live graph key (full + selective `QUEENS_KEY_MAX`) = wash**
-(stays freeze-time-only); **#9 P-certificate = dead** (~0% fire). **`<30 min` is not reachable on
-this 26 GB box** — 42 min ≈ the practical floor (re-exp 1.36×, DRAM-bound); see the roadmap's
-quantified ceiling.
-
 **Next, decide with the user (not autonomous):**
-1. **#20 fate** — it's a measured wash; default-off or revert (`54b3ccd`). Mechanism + `QUEENS_PAR_MIN_AVAIL` knob harmless if kept (gated n≥15).
-2. **Chunk 4 (BuRR archive)** — the only single-box lever left, but caps at ~33–36 min (still not <30) and is a multi-session architecture build → discuss scope first. True <30 min needs more/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), or a cheaper-than-graph-iso merge.
+1. **Chunk 4 (BuRR archive)** — the load-bearing single-box lever: a static ribbon-retrieval layer that holds the solved set with no eviction (kills the 1.36× re-exp) and applies the 3.4× freeze-time graph-iso merge. Core landed (`rust/src/burr.rs` + `queens freeze`/`verify`); the live cascade vs ply-window integration is the open design choice → discuss scope. More/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), and a cheaper-than-graph-iso merge are the other rungs of the <30 min lever stack (roadmap).
 3. **dump/load Phase 2 (B2 full-key export)** — the Chunk-4 freeze primitive + distributed delta. Note: full-n16 *resume* is RAM-bound on this box (swaps); partial-fill resumes are fine.
+2. **#20 tuning** — it's a measured wash so far (`54b3ccd`). Mechanism + `QUEENS_PAR_MIN_AVAIL` knob harmless if kept (gated n≥15). Worth doing a sweep
 
-**Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main.
+**Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main. Might be able to improve and fix.
 
 **`go`** (or `@notes/handoffs/<name>.md go`) at session start = read that handoff and resume from its Progress / next steps.
 

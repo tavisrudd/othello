@@ -19,8 +19,10 @@ use clap::{Parser, Subcommand};
 use signal_hook::consts::{SIGINT, SIGTERM, SIGUSR1, SIGUSR2};
 use signal_hook::iterator::Signals;
 
+use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
-    make_solver, Bits, Nimber, Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
+    for_each_image_entry, make_solver, Bits, Nimber, Parallel, Queens, QueensTt, Solver, Tt, MAX_N,
+    SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -199,6 +201,45 @@ enum Cmd {
         #[arg(default_value_t = 1, value_parser = clap::value_parser!(u32).range(1..=2))]
         player: u32,
     },
+    /// Freeze a dumped TT image into an immutable **BuRR archive** (Chunk 4): a
+    /// ribbon-retrieval layer storing each solved position's win/loss plus a
+    /// membership fingerprint at ~`1.1*(1+fp_bits)` bits/key, with no eviction.
+    /// Reads the `.zst` checkpoint `solve --checkpoint` writes.
+    Freeze {
+        /// Board the dump belongs to (its header is validated against this).
+        #[arg(value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+        /// Path to the dumped TT image (`.zst`).
+        image: PathBuf,
+        /// Output archive path.
+        out: PathBuf,
+        /// Membership fingerprint width (bits). A query that mismatches is a miss;
+        /// a wrong accept is ~`layers*2^-fp_bits` per out-of-set probe -- size it
+        /// against the expected non-member query count (the live-integration cost).
+        #[arg(long, default_value_t = 44)]
+        fp_bits: u32,
+        /// Per-layer ribbon load factor (higher = denser + more bump layers).
+        #[arg(long, default_value_t = 0.90)]
+        load: f64,
+        /// Build in this many key-partitioned shards via that many passes over the
+        /// dump -- bounds build RAM to ~`1/shards` of the whole (needed for n=16).
+        #[arg(long, default_value_t = 1, value_parser = clap::value_parser!(u32).range(1..=4096))]
+        shards: u32,
+        /// After building, re-stream the dump and confirm every frozen key
+        /// round-trips, then measure the false-positive rate on synthetic non-keys.
+        #[arg(long)]
+        verify: bool,
+    },
+    /// Verify a BuRR archive against its source dump: every frozen key round-trips
+    /// to its stored win/loss, and report the measured false-positive rate.
+    VerifyArchive {
+        #[arg(value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
+        n: u32,
+        /// The source TT image the archive was frozen from.
+        image: PathBuf,
+        /// The archive built by `freeze`.
+        archive: PathBuf,
+    },
 }
 
 fn main() {
@@ -256,6 +297,16 @@ fn main() {
         ),
         Cmd::SelfPlay { n, engine } => self_play(&Queens::new(n), &engine),
         Cmd::Play { n, player } => play(&Queens::new(n), player == 1),
+        Cmd::Freeze {
+            n,
+            image,
+            out,
+            fp_bits,
+            load,
+            shards,
+            verify,
+        } => freeze(n, &image, &out, fp_bits, load, shards, verify),
+        Cmd::VerifyArchive { n, image, archive } => verify_archive(n, &image, &archive),
     }
 }
 
@@ -723,6 +774,181 @@ fn write_checkpoint(tt: &QueensTt, n: u32, path: &Path) -> io::Result<u64> {
 fn read_checkpoint(path: &Path, n: u32) -> io::Result<QueensTt> {
     let mut dec = zstd::Decoder::new(BufReader::new(File::open(path)?))?;
     QueensTt::load_image(&mut dec, n as u8)
+}
+
+// --------------------------------------------------------------------------- //
+// Chunk 4: freeze a dumped TT into an immutable BuRR archive, and verify it.
+// --------------------------------------------------------------------------- //
+
+/// Stream a (zstd) TT image, invoking `f(archive_key, val)` per solved position.
+/// Each call decompresses the dump once -- the freeze re-reads it per shard to keep
+/// build RAM bounded.
+fn stream_image<F: FnMut(u64, u8)>(image: &Path, n: u32, f: F) -> io::Result<()> {
+    let mut dec = zstd::Decoder::new(BufReader::new(File::open(image)?))?;
+    for_each_image_entry(&mut dec, n as u8, f)?;
+    Ok(())
+}
+
+/// Win/loss is stored 0/1, so the archive carries a 1-bit value. A nimber dump
+/// would need more; the freeze rejects it loudly rather than silently truncating.
+const ARCHIVE_VAL_BITS: u32 = 1;
+
+/// `freeze`: build an immutable BuRR archive of a dump's solved positions. For
+/// `shards == 1` the entries are collected in one pass and built directly; for
+/// `shards > 1` the dump is streamed once per shard so the in-flight GE state stays
+/// ~`1/shards` of the whole (the n=16 path). The archive is written uncompressed --
+/// ribbon layers are high-entropy, so zstd barely helps (unlike the mostly-zero TT).
+fn freeze(n: u32, image: &Path, out: &Path, fp_bits: u32, load: f64, shards: u32, verify: bool) {
+    let shards = shards as usize;
+    let t = Instant::now();
+    eprintln!(
+        "\x1b[90mfreezing n={n}: {} → {} (val_bits={ARCHIVE_VAL_BITS}, fp_bits={fp_bits}, load={load}, shards={shards})\x1b[0m",
+        image.display(),
+        out.display(),
+    );
+    let mut subs: Vec<Archive> = Vec::with_capacity(shards);
+    let mut total_seen = 0u64;
+    for s in 0..shards {
+        let mut pairs: Vec<(u64, u64)> = Vec::new();
+        let mut seen = 0u64;
+        let res = stream_image(image, n, |key, val| {
+            seen += 1;
+            if val as u32 > ARCHIVE_VAL_BITS {
+                // can't happen for win/loss; guards a mistakenly-frozen nimber dump
+                eprintln!("\x1b[31mfreeze: value {val} > {ARCHIVE_VAL_BITS}-bit (nimber dump?); aborting\x1b[0m");
+                std::process::exit(1);
+            }
+            if shards == 1 || ShardedArchive::shard_of(shards, key) == s {
+                pairs.push((key, val as u64));
+            }
+        });
+        if let Err(e) = res {
+            eprintln!("\x1b[31mfreeze: reading {} failed: {e}\x1b[0m", image.display());
+            std::process::exit(1);
+        }
+        total_seen = seen;
+        if shards > 1 {
+            eprintln!(
+                "\x1b[90m  shard {}/{shards}: {} keys, building...\x1b[0m",
+                s + 1,
+                pairs.len()
+            );
+        } else {
+            eprintln!("\x1b[90m  {} solved positions read; building...\x1b[0m", pairs.len());
+        }
+        subs.push(Archive::build(&pairs, ARCHIVE_VAL_BITS, fp_bits, load));
+    }
+    let arch = ShardedArchive::from_shards(subs);
+    let bytes = match write_archive(&arch, out) {
+        Ok(b) => b,
+        Err(e) => {
+            eprintln!("\x1b[31mfreeze: writing {} failed: {e}\x1b[0m", out.display());
+            std::process::exit(1);
+        }
+    };
+    let keys = arch.n_keys();
+    println!(
+        "froze {keys} solved positions ({total_seen} slots) → {:.3} GB archive, \
+         {:.2} bits/key, {} shard(s), in {:.1}s",
+        bytes as f64 / 1e9,
+        arch.bits_per_key(),
+        arch.n_shards(),
+        t.elapsed().as_secs_f64(),
+    );
+    println!(
+        "  in-RAM archive {:.3} GB ({:.2} bits/key resident) vs dump table at 8 B/slot",
+        arch.bits() as f64 / 8.0 / 1e9,
+        arch.bits_per_key(),
+    );
+    if verify {
+        run_verify(n, image, &arch);
+    }
+}
+
+/// Write a sharded archive to `path` (uncompressed; atomic via `.tmp` + rename).
+fn write_archive(arch: &ShardedArchive, path: &Path) -> io::Result<u64> {
+    let tmp = sibling(path, ".tmp");
+    {
+        let mut w = BufWriter::new(File::create(&tmp)?);
+        arch.write_to(&mut w)?;
+        w.flush()?;
+    }
+    std::fs::rename(&tmp, path)?;
+    Ok(std::fs::metadata(path)?.len())
+}
+
+/// `verify-archive`: load an archive and check it against its source dump.
+fn verify_archive(n: u32, image: &Path, archive_path: &Path) {
+    let arch = match File::open(archive_path)
+        .and_then(|f| ShardedArchive::read_from(&mut BufReader::new(f)))
+    {
+        Ok(a) => a,
+        Err(e) => {
+            eprintln!("\x1b[31mverify: reading {} failed: {e}\x1b[0m", archive_path.display());
+            std::process::exit(1);
+        }
+    };
+    run_verify(n, image, &arch);
+}
+
+/// Re-stream the source dump and confirm every frozen key retrieves its stored
+/// win/loss, then measure the false-positive rate on synthetic non-keys. Exits
+/// nonzero on any mismatch -- this is the archive's correctness gate.
+fn run_verify(n: u32, image: &Path, arch: &ShardedArchive) {
+    let t = Instant::now();
+    let mut checked = 0u64;
+    let mut wrong = 0u64;
+    let mut missing = 0u64;
+    let res = stream_image(image, n, |key, val| {
+        checked += 1;
+        match arch.get(key) {
+            Some(got) if got == val as u64 => {}
+            Some(_) => wrong += 1,
+            None => missing += 1,
+        }
+    });
+    if let Err(e) = res {
+        eprintln!("\x1b[31mverify: reading {} failed: {e}\x1b[0m", image.display());
+        std::process::exit(1);
+    }
+    // False-positive probe: synthetic archive-keys disjoint from the real set
+    // (random 64-bit values; the ~billions of real keys are negligible in 2^64).
+    let probes = 20_000_000u64;
+    let mut fp = 0u64;
+    for i in 0..probes {
+        let k = splitmix(i ^ 0x1234_5678_9ABC_DEF0);
+        if arch.get(k).is_some() {
+            fp += 1;
+        }
+    }
+    let fp_rate = fp as f64 / probes as f64;
+    println!(
+        "verify: {checked} keys checked — {wrong} wrong, {missing} missing ({})",
+        if wrong == 0 && missing == 0 {
+            "\x1b[32mexact\x1b[0m"
+        } else {
+            "\x1b[31mFAILED\x1b[0m"
+        }
+    );
+    println!(
+        "  false-positive rate {fp_rate:.3e} ({fp}/{probes} non-keys accepted), \
+         {:.2} bits/key, {} shard(s), {:.1}s",
+        arch.bits_per_key(),
+        arch.n_shards(),
+        t.elapsed().as_secs_f64(),
+    );
+    if wrong != 0 || missing != 0 {
+        std::process::exit(1);
+    }
+}
+
+/// SplitMix64 step for the FP probe set (local; the lib mixer is private).
+#[inline]
+fn splitmix(mut z: u64) -> u64 {
+    z = z.wrapping_add(0x9E37_79B9_7F4A_7C15);
+    z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9);
+    z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EB);
+    z ^ (z >> 31)
 }
 
 /// Dump the solver's table to its checkpoint path, reporting the outcome on a dim

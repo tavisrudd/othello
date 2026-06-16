@@ -13,6 +13,7 @@
 //! assert!(best != 0);
 //! ```
 
+pub mod burr;
 pub mod cli;
 pub mod core;
 pub mod display;
