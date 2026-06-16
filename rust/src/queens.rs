@@ -1180,6 +1180,21 @@ fn key_max_avail() -> u32 {
         .unwrap_or(u32::MAX)
 }
 
+/// Plies from the root that [`Parallel`] fans across rayon (resolved once at startup,
+/// never per node). `QUEENS_PAR_DEPTH` overrides; default `3`. Below this depth the
+/// search recurses sequentially (full α-β cutoff). Higher exposes more parallelism --
+/// keeping the dominant root-0 ("elder brother") subtree off a single core at n=16,
+/// where that subtree is the entire feasible runtime -- at the cost of some speculation
+/// at the OR (prove-a-win) levels; the AND (prove-a-loss) levels, the bulk of a
+/// second-player win, parallelise with no speculation.
+fn par_depth() -> u32 {
+    std::env::var("QUEENS_PAR_DEPTH")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(3)
+        .max(1)
+}
+
 impl Tt {
     pub fn new(bits: u32, canon: bool) -> Self {
         Tt {
@@ -1300,6 +1315,9 @@ impl Solver for Tt {
 /// root parallelism with a Young-Brothers-Wait guard.
 pub struct Parallel {
     inner: Tt,
+    /// Plies from the root searched in parallel (see [`par_depth`]); below this the
+    /// recursion is the sequential cutoff search.
+    par_depth: u32,
     /// Root moves resolved / to resolve (for a progress indicator). A
     /// second-player win must refute *every* distinct first move, so `done`
     /// climbs to `total`; a first-player win short-circuits earlier.
@@ -1311,6 +1329,7 @@ impl Parallel {
     pub fn new(bits: u32) -> Self {
         Parallel {
             inner: Tt::new(bits, true),
+            par_depth: par_depth(),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
         }
@@ -1323,9 +1342,71 @@ impl Parallel {
     pub fn new_counting(bits: u32, hll_p: u32) -> Self {
         Parallel {
             inner: Tt::new_counting(bits, true, hll_p, false),
+            par_depth: par_depth(),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
         }
+    }
+
+    /// Recursive parallel cutoff search of `blocked` (canonical key in hand). For the
+    /// top [`par_depth`](Self::par_depth) plies it fans children across rayon; below
+    /// that it drops to the sequential [`Tt::wins_keyed`]. Parity is the trick: for a
+    /// second-player win the tree alternates "prove-a-loss" nodes (every child must be
+    /// searched -- no α-β cutoff to lose) with "prove-a-win" nodes (one winner suffices
+    /// -- cutoff). The root (refute every first move) is prove-a-loss, so the EVEN plies
+    /// below it are too: fan those for free; keep the ODD (prove-a-win) plies sequential
+    /// so their cutoff survives (elder child first, which well-ordered usually cuts at
+    /// once). This keeps the dominant root-0 subtree off a single core at n=16 while
+    /// confining speculation to mis-ordered OR nodes.
+    fn par_wins(&self, q: &Queens, blocked: Bits, key: Bits, depth: u32) -> bool {
+        if let Some(w) = self.inner.tt.get(key) {
+            return w != 0;
+        }
+        if depth >= self.par_depth {
+            return self.inner.wins_keyed(q, blocked, key);
+        }
+        self.inner.tt.bump();
+        // Gather children; a terminal child means the opponent cannot move, so this
+        // node wins at once (the [`Tt::wins_keyed`] terminal fast path).
+        let mut children: [Bits; MAXV] = [Bits::ZERO; MAXV];
+        let mut nc = 0usize;
+        for &sq in &q.order {
+            if !q.is_available(blocked, sq) {
+                continue;
+            }
+            let child = q.place(blocked, sq);
+            if q.no_moves(child) {
+                self.inner.tt.put(key, 1);
+                return true;
+            }
+            children[nc] = child;
+            nc += 1;
+        }
+        let kids = &children[..nc];
+        let won = if depth.is_multiple_of(2) {
+            // Even / prove-a-loss: no α-β cutoff to lose, so fan *all* children at once
+            // (no elder-first lead -- that would grind one huge child single-core, the
+            // n=16 failure mode). `any` still short-circuits if some child unexpectedly
+            // wins (a mis-parity node), but for a true prove-a-loss node all are searched.
+            kids.par_iter().any(|&child| {
+                let ckey = self.inner.node_key(q, child);
+                !self.par_wins(q, child, ckey, depth + 1)
+            })
+        } else {
+            // Odd / prove-a-win: keep the α-β cutoff -- sequential, recursing into the
+            // parallel even children below.
+            let mut w = false;
+            for &child in kids {
+                let ckey = self.inner.node_key(q, child);
+                if !self.par_wins(q, child, ckey, depth + 1) {
+                    w = true;
+                    break;
+                }
+            }
+            w
+        };
+        self.inner.tt.put(key, won as u8);
+        won
     }
 }
 
@@ -1361,13 +1442,19 @@ impl Solver for Parallel {
         match moves.split_first() {
             None => false,
             Some((&first, rest)) => {
-                let wins = !self.wins(q, q.place(Bits::ZERO, first));
+                // Elder brother (root move 0): search its subtree *in parallel* (not on a
+                // single core), so the dominant first move uses all workers from the start
+                // -- the n=16 fix -- while still warming the shared TT before the younger
+                // brothers fan out.
+                let fc = q.place(Bits::ZERO, first);
+                let wins = !self.par_wins(q, fc, self.inner.node_key(q, fc), 1);
                 self.root_done.fetch_add(1, Ordering::Relaxed);
                 if wins {
                     return true; // best move already wins -- no speculation
                 }
                 rest.par_iter().any(|&sq| {
-                    let wins = !self.wins(q, q.place(Bits::ZERO, sq));
+                    let c = q.place(Bits::ZERO, sq);
+                    let wins = !self.par_wins(q, c, self.inner.node_key(q, c), 1);
                     self.root_done.fetch_add(1, Ordering::Relaxed);
                     wins
                 })
@@ -1398,8 +1485,9 @@ impl Solver for Parallel {
             self.root_total.load(Ordering::Relaxed),
         );
         format!(
-            "{} rayon workers, {done}/{total} root moves · {}",
+            "{} rayon workers, {done}/{total} root moves, par-depth {} · {}",
             rayon::current_num_threads(),
+            self.par_depth,
             self.inner.stats(),
         )
     }
