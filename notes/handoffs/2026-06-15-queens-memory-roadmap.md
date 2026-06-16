@@ -382,8 +382,10 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       53.2M). **Gated auto-on only for n≥15** (default min-avail 96); below it the size split
       is off (forcing it on n=14 regressed ~3%, no tail to fix there). Threshold resolved once
       per solve, threaded through the recursion (no per-node env/atomic). `QUEENS_PAR_MIN_AVAIL`
-      overrides (huge = pure fixed-`par_depth` A/B baseline). **n=16 tail benefit pending the
-      full-run measurement** (next).
+      overrides (huge = pure fixed-`par_depth` A/B baseline). **n=16 VALIDATED (2026-06-16):
+      56 → 42.6 min, throughput 2.97 → 4.00 M/s (+35%), same node count + verdict — a sustained
+      core-utilization win, not just a tail fix.** (Single run; a `QUEENS_PAR_MIN_AVAIL=999`
+      baseline would confirm attribution.)
 - [ ] **NIGHT GOAL (session 8): get n=16 under 30 min total** (from session 7's 56 min), using
       the checkpoint fixtures to A/B levers. Plan: (a) test `QUEENS_KEY=fast` **live at n=16**
       (the unrun high-value experiment — 3.4× fewer nodes + fits RAM where D4 thrashes; handoff
@@ -484,10 +486,17 @@ decomposition (~1.2 comps/pos, session 7). **None gets 56→<30 min alone**; the
 lever for <30 min remains Chunk 4 (LSM + BuRR-archived solved plies)** — fit the working set
 → kill re-exp → compute-bound. That's a multi-session build (next).
 
-**Definitive full n=16 run (in flight at handoff write time):** D4 + #20 + 17 GB TT +
-`--distinct` + final-only checkpoint → a complete warm n=16 fixture at
-`rust/queens-tt-n16-final.zst`. Validates #20's tail benefit vs session-7's 3371 s/56 min and
-cross-checks the second-player verdict. **[RESULT PENDING — fill in when it completes.]**
+**Definitive full n=16 run — DONE (2026-06-16 00:16). #20 is a BIG WIN: 56 → 42.6 min.**
+D4 + #20 (min-avail 96) + 17 GB TT + `--distinct`. **SECOND PLAYER WINS** (Jenrich ✓), PV 12
+moves (`H8 K6 J9 I14 F7 G3 L10 P2 D11 C5 B12 M16`). **10,237,335,784 nodes in 2557 s = 42.6 min
+· 4.00 M/s · ~7.52B distinct · 1.36× re-exp · TT 17.18 GB/97.1% full · 36/36 roots.** vs session
+7 (10.0B nodes, 3371 s/56 min, 2.97 M/s): **same node count, +35% throughput, −24% wall.** The
+only search-affecting change since session 7 is #20, so the size-split is a **sustained
+core-utilization win** (it kills the *periodic* single-core dips session 7 saw throughout, not
+just the end tail). *Caveat:* single run, not interleaved A/B — attribution is by single-change
+inference; a confirming `QUEENS_PAR_MIN_AVAIL=999` (size-split off) run would nail it. Final
+checkpoint wrote `rust/queens-tt-n16-final.zst` (16.02 GB, the *complete* solved table — an
+opening-book/correctness fixture; a *partial* dump is needed for throughput A/B).
 
 ### Session 7 (live) — first multi-core n=16 production run + parallelism-tail finding (2026-06-15)
 
