@@ -1,6 +1,6 @@
 //! Step-1 Fermi-check benchmark for the Non-Attacking Queens inner-loop rewrite.
 //!
-//! Measures **cycles per canonicalisation** for three implementations over a
+//! Measures **cycles per canonicalisation** for several implementations over a
 //! realistic deep-heavy corpus of `available` masks (n=16 layout):
 //!
 //! * **baseline** — today's `Queens::canon`: a scalar per-set-bit scatter through
@@ -10,6 +10,8 @@
 //!   then a multiword lexicographic min-of-8. Tests whether the *structure* is the win.
 //! * **A1** — GFNI (`GF2P8AFFINEQB`) 8×8 block transposes/reflections + an AVX-512
 //!   masked multiword min-of-8. The stretch goal.
+//! * **A2** — hybrid: SWAR transpose plus GFNI only for in-byte h-flips. This uses
+//!   GFNI where the guide says it is naturally strong, without A1's block repack.
 //!
 //! This bin is **additive only**: it replicates the production geometry (`board`,
 //! `attack`, `sym`, `canon`) locally and does NOT touch `queens.rs` or the search.
@@ -665,6 +667,53 @@ mod a1 {
     pub unsafe fn a1_canon(mask: Bits) -> Bits {
         Bits(lex_min8_avx(&d4_images_gfni(mask.0)))
     }
+
+    /// Hybrid: keep the SWAR transpose, but use GFNI for the two h-flips that are
+    /// not already derivable by a cheap vertical flip.
+    #[target_feature(enable = "avx512f,avx512bw,avx512vl,avx512dq,gfni")]
+    #[inline]
+    pub unsafe fn d4_images_hybrid(mask: [u64; 4]) -> [[u64; 4]; 8] {
+        let id = mask;
+        let h = hflip_gfni(mask);
+        let v = super::vflip(mask);
+        let r180 = super::vflip(h);
+        let t = super::transpose(mask);
+        let r90 = hflip_gfni(t);
+        let r270 = super::vflip(t);
+        let anti = super::vflip(r90);
+        [id, h, v, r180, t, r90, r270, anti]
+    }
+
+    #[target_feature(enable = "avx512f,avx512bw,avx512vl,avx512dq,gfni")]
+    #[inline]
+    pub unsafe fn a2_key(mask: Bits) -> u64 {
+        let imgs = d4_images_hybrid(mask.0);
+        let m = super::lex_min8(&imgs);
+        super::hash4(m)
+    }
+
+    #[target_feature(enable = "avx512f,avx512bw,avx512vl,avx512dq,gfni")]
+    #[inline]
+    pub unsafe fn a2_canon(mask: Bits) -> Bits {
+        Bits(super::lex_min8(&d4_images_hybrid(mask.0)))
+    }
+
+    /// A3 incremental kernel: carry the 8 orientations live, apply ONE move by and-not-ing
+    /// each with that move's per-orientation attack mask (`att[t*NN + m]`), then AVX
+    /// lex-min + hash. No per-node image recompute — the per-edge cost the floor predicts
+    /// is the real lever *below* the recompute kernels (A0–A2). Uses the branchless AVX
+    /// min, the shared floor of every variant.
+    #[target_feature(enable = "avx512f,avx512bw,avx512vl,avx512dq,gfni")]
+    #[inline]
+    pub unsafe fn a3_key(o0: &[[u64; 4]; 8], att: &[[u64; 4]], m: usize) -> u64 {
+        let mut o = [[0u64; 4]; 8];
+        for t in 0..8 {
+            o[t] = super::andnot4(o0[t], att[t * super::NN + m]);
+        }
+        // Scalar lex-min, not lex_min8_avx: the AVX min's 8-lane gather is a measured
+        // LOSS here (A1 is the slowest recompute kernel for exactly this reason).
+        super::hash4(super::lex_min8(&o))
+    }
 }
 
 // ============================================================================
@@ -727,6 +776,91 @@ fn merge_stress_gate(
     (dk == dc && dp == dc, dk, dc, aug.len())
 }
 
+// ============================================================================
+// A3 — incremental-orientation model (the path the floor predicts past the recompute
+// kernels). The integrated search never recomputes the 8 images: it carries them live
+// and, per move, and-nots each with the move's per-orientation attack mask. The per-edge
+// cost collapses to 8×and-not + lex-min + hash. A3 measures exactly that, isolated, so we
+// know the incremental floor BEFORE the Step-3 rewrite commits to it.
+// ============================================================================
+
+const NN: usize = (N * N) as usize;
+
+/// Per-orientation attack table: `att[t*NN + s]` = perm_t(attack[s]) — the move's attack
+/// mask in orientation t's frame. 8*256*32 B = 64 KB (L1/L2-resident). Built offline.
+fn build_att(g: &Geom) -> Vec<[u64; 4]> {
+    let mut att = vec![[0u64; 4]; 8 * NN];
+    for t in 0..8 {
+        for (s, &atk) in g.attack.iter().enumerate() {
+            att[t * NN + s] = raw_image(g, atk, t).0;
+        }
+    }
+    att
+}
+
+/// The 8 live orientations of `available`: `orient[t]` = perm_t(available).
+fn orient0_of(g: &Geom, available: Bits) -> [[u64; 4]; 8] {
+    std::array::from_fn(|t| raw_image(g, available, t).0)
+}
+
+/// The representative DFS move from `available`: its lowest-index available square.
+fn first_sq(available: Bits) -> Option<u32> {
+    for (k, &w) in available.0.iter().enumerate() {
+        if w != 0 {
+            return Some(k as u32 * 64 + w.trailing_zeros());
+        }
+    }
+    None
+}
+
+/// A3 incremental canon (scalar min, for the gate): the 8 live orientations of `available`
+/// and-not the first move's per-orientation attack, lex-min. Equals canon(available &
+/// !attack[m]) — the canon of the CHILD position the incremental search keys per edge.
+fn a3_canon(g: &Geom, att: &[[u64; 4]], available: Bits) -> Option<Bits> {
+    let m = first_sq(available)? as usize;
+    let o0 = orient0_of(g, available);
+    let o: [[u64; 4]; 8] = std::array::from_fn(|t| andnot4(o0[t], att[t * NN + m]));
+    Some(Bits(lex_min8(&o)))
+}
+
+/// A3 gate: the incremental child-canon must equal the direct canon of the child for
+/// every corpus position (the incremental per-edge update is exact ⇒ a perfect invariant
+/// by the same argument as A0–A2: perm_t distributes over `&`/`!`).
+fn a3_gate(corpus: &[Bits], g: &Geom, att: &[[u64; 4]]) -> (bool, usize, usize) {
+    let mut matched = 0usize;
+    let mut total = 0usize;
+    for &available in corpus {
+        let Some(m) = first_sq(available) else {
+            continue;
+        };
+        total += 1;
+        let child = available.and_not(g.attack[m as usize]);
+        if a3_canon(g, att, available) == Some(g.canon(child)) {
+            matched += 1;
+        }
+    }
+    (matched == total, matched, total)
+}
+
+/// Time A3 over a cache-resident working set of (orientations, move) pairs, so the loop
+/// measures the incremental COMPUTE (8×and-not + AVX lex-min + hash + the L1/L2 att
+/// loads), not the bandwidth of streaming orientations — faithful to the DFS, where the
+/// parent's orientations are register/L1-resident. canons = pairs * reps. (Upper bound:
+/// the real search keeps `o0` in registers; here it is reloaded, so the integrated cost
+/// is ≤ this.)
+fn time_a3(att: &[[u64; 4]], orients: &[[[u64; 4]; 8]], moves: &[u32], reps: usize) -> (u128, u64) {
+    let t = Instant::now();
+    let mut acc: u64 = 0;
+    for _ in 0..reps {
+        for (o0, &m) in orients.iter().zip(moves) {
+            let o0 = black_box(o0);
+            acc = acc.wrapping_add(unsafe { a1::a3_key(o0, att, m as usize) });
+        }
+    }
+    black_box(acc);
+    (t.elapsed().as_nanos(), acc)
+}
+
 /// Time a key function over the corpus, `reps` passes, black_box the accumulator.
 /// Returns (ns_total, accumulator).
 fn time_keys(corpus: &[Bits], reps: usize, keyfn: impl Fn(Bits) -> u64) -> (u128, u64) {
@@ -747,7 +881,8 @@ fn main() {
     //   cap  = max corpus masks (default 4_000_000)
     //   reps = timing passes over corpus (default 8)
     //   mode = "verify" (gate + 1 pass each, fast) | "bench" (default, timed loop)
-    //          | "perf:baseline" | "perf:a0" | "perf:a1" (single impl, for perf stat)
+    //          | "perf:baseline" | "perf:a0" | "perf:a1" | "perf:a2" | "perf:a3"
+    //            (single impl, for perf stat; a3 = incremental model)
     let cap: usize = args
         .get(1)
         .and_then(|s| s.parse().ok())
@@ -777,6 +912,21 @@ fn main() {
         }
     }
     eprintln!();
+
+    // A3 incremental-model data: the per-orientation attack table + a cache-resident
+    // working set of (orientations, first-move) pairs. Built in EVERY mode (and anchored
+    // with black_box) so the perf:build cycle subtraction stays consistent across impls.
+    let att = build_att(&g);
+    let cap_a3 = corpus.len().min(1 << 14);
+    let mut a3_orients: Vec<[[u64; 4]; 8]> = Vec::with_capacity(cap_a3);
+    let mut a3_moves: Vec<u32> = Vec::with_capacity(cap_a3);
+    for &available in &corpus[..cap_a3] {
+        if let Some(m) = first_sq(available) {
+            a3_orients.push(orient0_of(&g, available));
+            a3_moves.push(m);
+        }
+    }
+    black_box((&att, &a3_orients, &a3_moves));
 
     // --- perf-stat single-impl modes: just run the timed loop, nothing else. ---
     let a1_ok = is_x86_feature_detected!("gfni")
@@ -821,6 +971,24 @@ fn main() {
             eprintln!("a1 acc={acc} canons={}", corpus.len() * reps);
             return;
         }
+        "perf:a2" => {
+            if !a1_ok {
+                eprintln!("a2 unavailable (missing CPU features)");
+                return;
+            }
+            let (_, acc) = time_keys(&corpus, reps, |m| unsafe { a1::a2_key(m) });
+            eprintln!("a2 acc={acc} canons={}", corpus.len() * reps);
+            return;
+        }
+        "perf:a3" => {
+            if !a1_ok || a3_orients.is_empty() {
+                eprintln!("a3 unavailable (missing CPU features or empty working set)");
+                return;
+            }
+            let (_, acc) = time_a3(&att, &a3_orients, &a3_moves, reps);
+            eprintln!("a3 acc={acc} canons={}", a3_orients.len() * reps);
+            return;
+        }
         _ => {}
     }
 
@@ -831,15 +999,31 @@ fn main() {
         "A0:  distinct kernel keys = {:>10}   distinct canon = {:>10}   perfect = {}",
         a0_keys, canon_classes, a0_perfect
     );
-    let a1_perfect = if a1_ok {
+    let (a1_perfect, a2_perfect) = if a1_ok {
         let (p, a1_keys, cc) = invariant_gate(&corpus, &g, |m| unsafe { a1::a1_canon(m) });
         println!(
             "A1:  distinct kernel keys = {:>10}   distinct canon = {:>10}   perfect = {}",
             a1_keys, cc, p
         );
-        p
+        let (a2_p, a2_keys, a2_cc) = invariant_gate(&corpus, &g, |m| unsafe { a1::a2_canon(m) });
+        println!(
+            "A2:  distinct kernel keys = {:>10}   distinct canon = {:>10}   perfect = {}",
+            a2_keys, a2_cc, a2_p
+        );
+        (p, a2_p)
     } else {
         println!("A1:  skipped (CPU features missing)");
+        println!("A2:  skipped (CPU features missing)");
+        (false, false)
+    };
+    // A3 is the incremental child-canon: gate it by exact agreement with the direct canon
+    // of the child position (not a partition count — it canonicalises the NEXT position).
+    let a3_perfect = if a1_ok && !a3_orients.is_empty() {
+        let (p, matched, total) = a3_gate(&corpus, &g, &att);
+        println!("A3:  incremental child-canon matched {matched} / {total}   exact = {p}");
+        p
+    } else {
+        println!("A3:  skipped (CPU features missing)");
         false
     };
 
@@ -858,10 +1042,24 @@ fn main() {
             "A1:  augmented set = {:>10}   distinct keys = {:>9}   distinct canon = {:>9}   merges-match = {}",
             aug_len, a1_dk, a1_dc, a1_ms
         );
+        let (a2_ms, a2_dk, a2_dc, _) =
+            merge_stress_gate(&corpus, &g, |m| unsafe { a1::a2_canon(m) });
+        println!(
+            "A2:  augmented set = {:>10}   distinct keys = {:>9}   distinct canon = {:>9}   merges-match = {}",
+            aug_len, a2_dk, a2_dc, a2_ms
+        );
     }
 
     if !a0_perfect {
         println!("\nA0 is NOT a perfect invariant — timing is meaningless. Fix the kernel.");
+        return;
+    }
+    if a1_ok && !a2_perfect {
+        println!("\nA2 is NOT a perfect invariant — timing is meaningless. Fix the kernel.");
+        return;
+    }
+    if a1_ok && !a3_orients.is_empty() && !a3_perfect {
+        println!("\nA3 incremental update is NOT exact — its model is wrong; timing meaningless.");
         return;
     }
     if mode == "verify" {
@@ -883,6 +1081,16 @@ fn main() {
     } else {
         None
     };
+    let ns_a2 = if a2_perfect {
+        Some(time_keys(&corpus, reps, |m| unsafe { a1::a2_key(m) }).0)
+    } else {
+        None
+    };
+    let ns_a3 = if a1_ok && !a3_orients.is_empty() {
+        Some(time_a3(&att, &a3_orients, &a3_moves, reps).0)
+    } else {
+        None
+    };
 
     let per = |ns: u128| ns as f64 / n_canon;
     println!("{:<10} {:>12} {:>10}", "impl", "ns/canon", "speedup");
@@ -897,9 +1105,24 @@ fn main() {
     if let Some(ns) = ns_a1 {
         println!("{:<10} {:>12.3} {:>9.2}x", "A1", per(ns), base_ns / per(ns));
     }
+    if let Some(ns) = ns_a2 {
+        println!("{:<10} {:>12.3} {:>9.2}x", "A2", per(ns), base_ns / per(ns));
+    }
+    if let Some(ns) = ns_a3 {
+        // A3 times its own cache-resident working set, so its divisor differs.
+        let a3_n = (a3_orients.len() * reps) as f64;
+        let a3_per = ns as f64 / a3_n;
+        println!(
+            "{:<10} {:>12.3} {:>9.2}x  (incremental model — NOT recompute)",
+            "A3",
+            a3_per,
+            base_ns / a3_per
+        );
+    }
     println!(
         "\n(ns/canon is a cross-check. For cyc/canon run under `perf stat -e cycles`\n \
-         with mode perf:baseline | perf:a0 | perf:a1, then divide cycles by {}.)",
+         with mode perf:baseline | perf:a0 | perf:a1 | perf:a2, then divide cycles by {}.\n \
+         A3 uses mode perf:a3 — divide by (min(corpus,2^14) * reps), which it prints.)",
         corpus.len() * reps
     );
 }
