@@ -1458,7 +1458,9 @@ impl Tt {
         if COUNT {
             if result {
                 self.tally.win_nodes.fetch_add(1, Ordering::Relaxed);
-                self.tally.win_tried_sum.fetch_add(tried as u64, Ordering::Relaxed);
+                self.tally
+                    .win_tried_sum
+                    .fetch_add(tried as u64, Ordering::Relaxed);
                 self.tally.win_cut[(tried as usize - 1).min(7)].fetch_add(1, Ordering::Relaxed);
             } else {
                 self.tally.loss_nodes.fetch_add(1, Ordering::Relaxed);
@@ -2652,7 +2654,10 @@ pub fn for_each_image_entry<R: Read, F: FnMut(u64, u8)>(
     if header.n != expected_n {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
-            format!("image is for n={}, but this run is n={expected_n}", header.n),
+            format!(
+                "image is for n={}, but this run is n={expected_n}",
+                header.n
+            ),
         ));
     }
     let size = header.len as usize;

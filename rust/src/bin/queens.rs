@@ -1304,8 +1304,14 @@ fn branching_report(solver: &dyn Solver, distinct: f64) {
     let expanded = solver.nodes().max(1);
     let win = bs.win_nodes.max(1);
     println!("  branching / cutoff (sequential):");
-    println!("    expanded nodes (TT misses):           {}", commas(expanded));
-    println!("    edges keyed (node_key / canon calls): {}", commas(bs.edges));
+    println!(
+        "    expanded nodes (TT misses):           {}",
+        commas(expanded)
+    );
+    println!(
+        "    edges keyed (node_key / canon calls): {}",
+        commas(bs.edges)
+    );
     println!(
         "    b̄ = canons ÷ distinct:                {:.3}",
         bs.edges as f64 / distinct

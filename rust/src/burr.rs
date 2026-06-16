@@ -148,16 +148,14 @@ impl Ribbon {
     fn build(seed: u64, m: u64, r: u32, pairs: &[(u64, u64)]) -> (Ribbon, Vec<(u64, u64)>) {
         debug_assert!(r <= 64);
         let cols = m as usize + W; // pivots in [0,m); +W absorbs band overflow
-        // On-the-fly Gaussian elimination state: per column, the stored row's
-        // coefficient (bit 0 = this column = the pivot) and its r-bit rhs.
+                                   // On-the-fly Gaussian elimination state: per column, the stored row's
+                                   // coefficient (bit 0 = this column = the pivot) and its r-bit rhs.
         let mut coeff = vec![0u64; cols];
         let mut rhs = vec![0u64; cols];
         let vmask = if r == 64 { u64::MAX } else { (1u64 << r) - 1 };
         let mut bumped = Vec::new();
         for &(key, val) in pairs {
-            if let Insert::Bumped =
-                Self::insert(seed, m, &mut coeff, &mut rhs, key, val & vmask)
-            {
+            if let Insert::Bumped = Self::insert(seed, m, &mut coeff, &mut rhs, key, val & vmask) {
                 bumped.push((key, val));
             }
         }
@@ -203,14 +201,7 @@ impl Ribbon {
     /// the band is always `<= W` wide and anchored at the current pivot, and a
     /// pivot at `>= m` (the overflow region) is treated as a bump.
     #[inline]
-    fn insert(
-        seed: u64,
-        m: u64,
-        coeff: &mut [u64],
-        rhs: &mut [u64],
-        key: u64,
-        val: u64,
-    ) -> Insert {
+    fn insert(seed: u64, m: u64, coeff: &mut [u64], rhs: &mut [u64], key: u64, val: u64) -> Insert {
         let (start, c0) = band(seed, key, m);
         let mut i = start;
         let mut co = c0; // bit 0 == column i
@@ -591,7 +582,9 @@ mod tests {
     /// Deterministic pseudo-random keys (no `rand` dep; `Math.random` is banned in
     /// the harness and we want reproducible tests anyway).
     fn keys(n: usize, salt: u64) -> Vec<u64> {
-        (0..n as u64).map(|i| mix64(i.wrapping_add(salt) ^ 0xABCD)).collect()
+        (0..n as u64)
+            .map(|i| mix64(i.wrapping_add(salt) ^ 0xABCD))
+            .collect()
     }
 
     /// Every built-in key retrieves its exact value, across value widths and sizes.
@@ -600,7 +593,13 @@ mod tests {
     /// collides -- `~layers * 2^-32`, astronomically unlikely for these inputs).
     #[test]
     fn ribbon_round_trips_all_values() {
-        for (n, vb) in [(1usize, 1u32), (10, 1), (1000, 1), (10_000, 8), (50_000, 16)] {
+        for (n, vb) in [
+            (1usize, 1u32),
+            (10, 1),
+            (1000, 1),
+            (10_000, 8),
+            (50_000, 16),
+        ] {
             let vmask = (1u64 << vb) - 1;
             let pairs: Vec<(u64, u64)> = keys(n, vb as u64)
                 .into_iter()
