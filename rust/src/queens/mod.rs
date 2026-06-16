@@ -221,10 +221,17 @@ mod tests {
         let warm = Tt::from_tt(reloaded, true);
         let v2 = warm.first_player_wins(&q);
         assert_eq!(v1, v2, "reloaded table yields the same verdict");
+        // The reloaded counter carries the snapshot's node total (so a resume's progress
+        // reflects the whole search), and the warm re-confirm adds almost nothing on top.
         assert!(
-            warm.nodes() < cold_nodes / 100,
-            "warm resume re-searches almost nothing: {} vs cold {cold_nodes}",
+            warm.nodes() >= cold_nodes,
+            "resume restores the snapshot node count: {} ≥ {cold_nodes}",
             warm.nodes(),
+        );
+        let new_nodes = warm.nodes() - cold_nodes;
+        assert!(
+            new_nodes < cold_nodes / 100,
+            "warm resume re-searches almost nothing: {new_nodes} new vs cold {cold_nodes}",
         );
 
         // The image is rejected for a different board, not silently mis-keyed.

@@ -118,7 +118,7 @@ enum Cmd {
         /// `naive`→`memo`→`symmetry`→`parallel` is a speed ladder, each step
         /// adding one idea; `nimber` (the full Sprague-Grundy value) and `pn`
         /// (df-pn) are heavier, special-purpose solvers, *not* faster.
-        #[arg(default_value = "parallel", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
+        #[arg(default_value = "incremental", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
         solver: String,
         /// Also estimate the *distinct* positions (HyperLogLog) so the report
         /// shows how much the search re-expands -- the transposition table's
@@ -206,7 +206,7 @@ enum Cmd {
         /// Engine to search even boards with (odd boards use the O(1) mirror
         /// strategy regardless). All engines play the same optimal line; this
         /// only changes the search — handy to watch or time the lineage steps.
-        #[arg(long, default_value = "parallel", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
+        #[arg(long, default_value = "incremental", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
         engine: String,
     },
     /// Play against the engine as player 1 (first) or 2 (second).
@@ -265,7 +265,7 @@ fn main() {
     }
     let cmd = cli.cmd.unwrap_or(Cmd::Solve {
         n: 8,
-        solver: "parallel".into(),
+        solver: "incremental".into(),
         distinct: false,
         checkpoint: None,
         checkpoint_every: None,
@@ -339,7 +339,7 @@ fn main() {
 /// "full"; what differs is the technique and the parallelism. Order matches
 /// `SOLVER_NAMES`.
 fn list_engines() {
-    const INFO: [(&str, &str, &str); 6] = [
+    const INFO: [(&str, &str, &str); 7] = [
         (
             "naive",
             "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
@@ -358,6 +358,11 @@ fn list_engines() {
         (
             "parallel",
             "+ rayon root parallelism (Young-Brothers-Wait) and the odd-n O(1) theorem",
+            "root-parallel (YBW)",
+        ),
+        (
+            "incremental",
+            "+ DFS-resident incremental canon (8 orientations carried, updated per move) — the default",
             "root-parallel (YBW)",
         ),
         (
@@ -1007,7 +1012,44 @@ fn checkpointing_flag() -> &'static Arc<AtomicBool> {
 /// stale/foreign/ wrong-`n` dump).
 fn read_checkpoint(path: &Path, n: u32) -> io::Result<QueensTt> {
     let mut dec = zstd::Decoder::new(BufReader::new(File::open(path)?))?;
-    QueensTt::load_image(&mut dec, n as u8)
+    // Paint a load progress bar (the n=16 image is multi-GB to decompress + commit) when
+    // stderr is a terminal; throttle to ~100 ms. The search hasn't started yet, so this is
+    // the sole stderr writer and the `\r` overwrite is safe.
+    let show = io::stderr().is_terminal();
+    let start = Instant::now();
+    let mut last = Instant::now();
+    let mut painted = false;
+    let tt = QueensTt::load_image_with(&mut dec, n as u8, |done, total| {
+        if !show || (painted && last.elapsed() < Duration::from_millis(100) && done != total) {
+            return;
+        }
+        painted = true;
+        last = Instant::now();
+        let frac = if total > 0 {
+            done as f64 / total as f64
+        } else {
+            1.0
+        };
+        const W: usize = 24;
+        let filled = (frac * W as f64) as usize;
+        let bar: String = "█".repeat(filled) + &"░".repeat(W - filled);
+        let line = format!(
+            "loading checkpoint [{bar}] {:.0}% · {:.1}/{:.1} GB · {}",
+            frac * 100.0,
+            done as f64 * 8.0 / 1e9,
+            total as f64 * 8.0 / 1e9,
+            fmt_elapsed(start.elapsed().as_secs_f64()),
+        );
+        let cols = term_cols().saturating_sub(1);
+        let line: String = line.chars().take(cols).collect();
+        eprint!("\r{line}\x1b[K");
+        io::stderr().flush().ok();
+    })?;
+    if painted {
+        eprint!("\r\x1b[K"); // clear the bar; the caller prints the resumed-TT line next
+        io::stderr().flush().ok();
+    }
+    Ok(tt)
 }
 
 // --------------------------------------------------------------------------- //
@@ -1968,7 +2010,7 @@ fn self_play(q: &Queens, engine: &str) {
 }
 
 fn play(q: &Queens, human_first: bool) {
-    let solver = make_solver("parallel", tt_bits(q.n)).unwrap();
+    let solver = make_solver("incremental", tt_bits(q.n)).unwrap();
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
     let mut ply = 0u32;

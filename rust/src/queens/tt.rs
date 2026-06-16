@@ -161,6 +161,11 @@ pub struct TtHeader {
     pub len: u64,
     pub fill: u64,
     pub epoch: u32,
+    /// Search nodes (TT misses) accumulated when the image was dumped, so a `--resume`
+    /// restores the node counter and the progress reflects the *total* work, not just
+    /// the post-resume continuation. Stored in the previously-reserved header bytes, so
+    /// older images (which have zeroes there) simply resume from 0 -- backward-compatible.
+    pub nodes: u64,
 }
 
 impl TtHeader {
@@ -175,7 +180,8 @@ impl TtHeader {
         b[32..40].copy_from_slice(&self.fill.to_le_bytes());
         b[40] = self.n;
         b[41] = TT_ARCH_X86_64_LE;
-        // b[42..64] reserved (zero)
+        b[42..50].copy_from_slice(&self.nodes.to_le_bytes());
+        // b[50..64] reserved (zero)
         b
     }
 
@@ -209,6 +215,7 @@ impl TtHeader {
             len: u64::from_le_bytes(b[24..32].try_into().unwrap()),
             fill: u64::from_le_bytes(b[32..40].try_into().unwrap()),
             n: b[40],
+            nodes: u64::from_le_bytes(b[42..50].try_into().unwrap()),
         })
     }
 }
@@ -400,6 +407,7 @@ impl QueensTt {
             len: self.len,
             fill: 0, // reporting-only; a full pre-scan every checkpoint isn't worth it
             epoch: 0,
+            nodes: self.nodes.load(Ordering::Relaxed), // restored on --resume
         };
         w.write_all(&header.to_bytes())?;
         let mut buf = Vec::with_capacity(TT_IO_BLOCK * 8);
@@ -423,6 +431,19 @@ impl QueensTt {
     /// be re-keyed into a different size. `counter` is `None`; attach one with
     /// [`attach_counter`](Self::attach_counter) for a `--distinct` resume.
     pub fn load_image<R: Read>(r: &mut R, expected_n: u8) -> io::Result<QueensTt> {
+        Self::load_image_with(r, expected_n, |_, _| {})
+    }
+
+    /// As [`load_image`](Self::load_image), but invoking `progress(slots_read,
+    /// total_slots)` after each block so a CLI can paint a load progress bar -- the
+    /// n=16 image is multi-GB and the decompress + zeroed-huge alloc commit takes a
+    /// while. The node counter is restored from the header (so a resume's progress
+    /// reflects the snapshot's prior work, not a fresh 0).
+    pub fn load_image_with<R: Read, F: FnMut(u64, u64)>(
+        r: &mut R,
+        expected_n: u8,
+        mut progress: F,
+    ) -> io::Result<QueensTt> {
         let mut hbuf = [0u8; TT_HEADER_LEN];
         r.read_exact(&mut hbuf)?;
         let header = TtHeader::parse(&hbuf)?;
@@ -448,11 +469,12 @@ impl QueensTt {
                 slot.store(word, Ordering::Relaxed);
             }
             i += take;
+            progress(i as u64, size as u64);
         }
         Ok(QueensTt {
             slots,
             len: header.len,
-            nodes: AtomicU64::new(0),
+            nodes: AtomicU64::new(header.nodes),
             counter: None,
         })
     }

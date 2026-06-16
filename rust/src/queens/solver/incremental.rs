@@ -267,24 +267,42 @@ impl Solver for Incremental {
         self.root_done.store(0, Ordering::Relaxed);
         // Root available = the full board; its 8 orientations seed the recursion.
         let root = orient_of(q, q.board);
-        let resolve = |sq: u32| {
+        // Pre-resolve roots already decided in a warm (resumed) TT: a hit on a first
+        // move's child key means that move's value is already known. Count those toward
+        // the progress (so a resume shows the snapshot's roots at once, not 0/N, and we
+        // skip re-searching solved roots), and a decided root where the second player
+        // *loses* means the first player wins outright. A cold run hits none, so the
+        // pending list is every move in order and the behaviour is unchanged.
+        let mut pending: Vec<([Bits; 8], Bits)> = Vec::with_capacity(moves.len());
+        for &sq in &moves {
             let a = &att[sq as usize];
             let co = Self::child_orient(&root, a, q.board.and_not(a[0]));
             let ckey = lex_min8(&co);
-            let wins = !self.par_wins_inc(q, att, &co, ckey, 1, min_avail);
+            match self.tt.get(ckey) {
+                Some(0) => {
+                    self.root_done.fetch_add(1, Ordering::Relaxed);
+                    return true; // second player loses from this move ⇒ first player wins
+                }
+                Some(_) => {
+                    self.root_done.fetch_add(1, Ordering::Relaxed); // refuted; count it done
+                }
+                None => pending.push((co, ckey)),
+            }
+        }
+        if pending.is_empty() {
+            return false; // every first move refuted ⇒ second player wins
+        }
+        let resolve = |co: &[Bits; 8], ckey: Bits| {
+            let wins = !self.par_wins_inc(q, att, co, ckey, 1, min_avail);
             self.root_done.fetch_add(1, Ordering::Relaxed);
             wins
         };
-        match moves.split_first() {
-            None => false,
-            Some((&first, rest)) => {
-                // Elder brother in parallel (not single-core), then fan the siblings.
-                if resolve(first) {
-                    return true; // best move already wins -- no speculation
-                }
-                rest.par_iter().any(|&sq| resolve(sq))
-            }
+        let (first, rest) = pending.split_first().unwrap();
+        // Elder brother in parallel (not single-core), then fan the siblings.
+        if resolve(&first.0, first.1) {
+            return true; // best move already wins -- no speculation
         }
+        rest.par_iter().any(|(co, ckey)| resolve(co, *ckey))
     }
     fn nodes(&self) -> u64 {
         self.tt.nodes()
