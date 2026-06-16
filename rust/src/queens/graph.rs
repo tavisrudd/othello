@@ -1,0 +1,681 @@
+//! Graph-isomorphism (WL / individualisation-refinement) keys over the
+//! available-graph -- the freeze-time merge lever (#7). Measurement/spike keys.
+
+use super::*;
+use std::collections::HashMap;
+
+/// Largest connected component the graph key resolves by direct degree-sequence
+/// lookup instead of WL refinement (#18). For connected graphs on at most four
+/// vertices the sorted degree sequence is a complete isomorphism invariant.
+pub(crate) const TINY_MAX: usize = 4;
+/// Sentinel "vertex" the padded WL neighbour lists fill unused slots with (#17).
+/// It indexes a reserved scratch cell whose mixed colour is held at 0, so a padding
+/// slot contributes nothing to the colour fold -- the fixed-stride loop stays
+/// value-identical to the variable-trip one. One past the real square range
+/// (squares are `0..MAXV`), so it never collides with a real vertex.
+const DUMMY_VERT: usize = MAXV;
+
+/// A 64-bit avalanche mix (the SplitMix64 finaliser) for the WL colour hashes in
+/// [`Queens::iso_key`]. Cold path (measurement only).
+#[inline]
+pub(crate) fn mix64(mut x: u64) -> u64 {
+    x ^= x >> 30;
+    x = x.wrapping_mul(0xBF58_476D_1CE4_E5B9);
+    x ^= x >> 27;
+    x = x.wrapping_mul(0x94D0_49BB_1331_11EB);
+    x ^ (x >> 31)
+}
+
+/// Refine `colour` (indexed by square, seeded by the caller) by 1-WL colour
+/// refinement until the partition stabilises (≤ |V| rounds): each vertex's next
+/// colour mixes its own with the commutative fold of its neighbours' (so neighbour
+/// order cannot matter). Returns the stable colouring. Cold measurement path.
+fn wl_refine(verts: &[u32], nbrs: &[Bits], mut colour: Vec<u64>) -> Vec<u64> {
+    let distinct = |c: &[u64]| {
+        let mut v: Vec<u64> = verts.iter().map(|&s| c[s as usize]).collect();
+        v.sort_unstable();
+        v.dedup();
+        v.len()
+    };
+    let mut prev = 0usize;
+    for _ in 0..verts.len() {
+        let mut next = colour.clone();
+        for (&s, nb) in verts.iter().zip(nbrs) {
+            let mut h = colour[s as usize].wrapping_mul(0x100_0000_01B3);
+            nb.each(|t| h = h.wrapping_add(mix64(colour[t as usize])));
+            next[s as usize] = mix64(h);
+        }
+        colour = next;
+        let classes = distinct(&colour);
+        if classes == prev {
+            break; // partition stable -- further rounds cannot refine
+        }
+        prev = classes;
+    }
+    colour
+}
+
+/// Hash the sorted multiset of vertex colours into one order-independent value.
+fn hash_colours(verts: &[u32], colour: &[u64]) -> u64 {
+    let mut c: Vec<u64> = verts.iter().map(|&s| colour[s as usize]).collect();
+    c.sort_unstable();
+    c.iter().fold(0x2545_F491_4F6C_DD1D, |h, &x| {
+        mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+    })
+}
+
+/// Per-thread preallocated scratch for the allocation-free graph key
+/// ([`Queens::iso_key_fast`]). Reused across every node on a rayon worker; every cell
+/// is written before it is read (only the touched prefixes are read), so it needs no
+/// per-call zeroing -- **zero heap allocation in the hot loop**. Boxed so the buffers
+/// live on the heap once per thread, not on every call's stack.
+pub(crate) struct IsoScratch {
+    col: [u64; MAXV],             // current colour per *local* vertex (lcol[0..k])
+    nxt: [u64; MAXV],             // next-round colour per local vertex
+    base: [u64; MAXV],            // degree-seeded local colour (restored before each individualise)
+    sort: [u64; MAXV],            // scratch for class-count / colour-multiset sorts
+    sigs: [u64; MAXV],            // per-vertex individualisation signatures
+    comp_keys: [u64; MAXV],       // per-component canonical keys
+    mc: [u64; MAXV + 1], // mix64(lcol) per local vertex, hoisted once/round; [MAXV]=0 dummy
+    pub(crate) verts: [u8; MAXV], // local vertex -> square index
+    loc: [u16; MAXV],    // square index -> local vertex (inverse of verts)
+    order: [u8; MAXV],   // canonical *local* vertex order for the certificate
+    nbr_pad: [u16; MAXV * MAXV], // fixed-stride neighbour *local* indices, DUMMY_VERT-padded (#17)
+}
+
+impl IsoScratch {
+    pub(crate) fn new() -> Box<Self> {
+        Box::new(IsoScratch {
+            col: [0; MAXV],
+            nxt: [0; MAXV],
+            base: [0; MAXV],
+            sort: [0; MAXV],
+            sigs: [0; MAXV],
+            comp_keys: [0; MAXV],
+            mc: [0; MAXV + 1],
+            verts: [0; MAXV],
+            loc: [0; MAXV],
+            order: [0; MAXV],
+            nbr_pad: [0; MAXV * MAXV],
+        })
+    }
+}
+
+thread_local! {
+    static ISO_SCRATCH: std::cell::RefCell<Box<IsoScratch>> =
+        std::cell::RefCell::new(IsoScratch::new());
+}
+
+/// Log2 of the per-thread component-canon cache size (#19). 2^22 slots * 16 B = 64 MB
+/// per worker -- the same flat fingerprint-slot shape as the main TT. Tuned at n=16: 2^20
+/// is capacity-bound (2^22 is +3.7%), 2^23 ties 2^22; 64 MB/thread (~1.5 GB across 24
+/// workers) fits comfortably under the n=16 TT budget.
+const COMP_CACHE_BITS: u32 = 22;
+
+/// Per-thread direct-mapped cache amortising [`Queens::comp_canon`] setup+WL (#19).
+/// `comp_canon` is a pure function of `(component square-set, board geometry)`, and the
+/// same component recurs across many nodes (the graph key is recomputed every node,
+/// before the TT probe), so caching its canon skips the whole bit-scan + CSR build + WL
+/// when a component repeats. Fingerprint-guarded like the TT: a slot collision with a
+/// different component is a fingerprint mismatch (recompute), a same-fingerprint hit on a
+/// different component is ~2^-64 (negligible; the search is already probabilistic at the
+/// 55-bit TT slot and cross-checked vs Jenrich). The fingerprint folds in the board side
+/// `n`, so entries never carry across different-`n` solves in one process.
+struct CompCache {
+    fp: Box<[u64]>,  // per-slot fingerprint (0 = empty)
+    val: Box<[u64]>, // per-slot cached canon
+}
+
+impl CompCache {
+    fn new() -> Self {
+        let n = 1usize << COMP_CACHE_BITS;
+        CompCache {
+            fp: vec![0u64; n].into_boxed_slice(),
+            val: vec![0u64; n].into_boxed_slice(),
+        }
+    }
+    /// Slot index and (nonzero) fingerprint for component `comp` on an `n`-board.
+    #[inline]
+    fn probe(comp: Bits, n: u32) -> (usize, u64) {
+        let w = comp.0;
+        let mut h = 0x9E37_79B9_7F4A_7C15u64 ^ n as u64;
+        h = mix64(h ^ w[0]);
+        h = mix64(h ^ w[1]);
+        h = mix64(h ^ w[2]);
+        h = mix64(h ^ w[3]);
+        let slot = (mix64(h) >> (64 - COMP_CACHE_BITS)) as usize;
+        (slot, h | 1) // fingerprint forced nonzero so 0 stays the empty marker
+    }
+}
+
+thread_local! {
+    static COMP_CACHE: std::cell::RefCell<CompCache> =
+        std::cell::RefCell::new(CompCache::new());
+}
+
+/// 1-WL refine `col` (square-indexed) to stability over the `k` component vertices.
+/// `nbr_pad` is the fixed-stride neighbour table: row `i` holds vertex `i`'s neighbour
+/// squares in `nbr_pad[i*stride .. i*stride+deg]`, the rest padded with [`DUMMY_VERT`].
+/// All preallocated; no allocation (#17).
+///
+/// Two TMA-driven shapes vs the old variable-trip CSR walk, both value-identical:
+/// - **`mix64` hoisted out of the per-edge loop** into `mcol` -- computed once per
+///   vertex per round (`k` calls) instead of once per incident edge (`2|E|` calls).
+/// - **fixed-trip inner loop** (`0..stride` every vertex) -- the loop-exit branch is
+///   perfectly predicted, where the per-vertex variable trip mispredicted on exit.
+///
+/// `mc[DUMMY_VERT]` is held at 0, so padding slots add nothing: the accumulated `h`
+/// is bit-identical to summing `mix64(lcol[t])` over the real neighbours only.
+///
+/// Colours are **compact local** (`lcol[0..k]`, vertex `i`'s colour), so the per-round
+/// `mc[i] = mix64(lcol[i])` map is a contiguous load→mix→store with no gather/scatter --
+/// LLVM auto-vectorises it to AVX-512 `vpmullq`/`vpsrlq`/`vpxorq` (8× u64) on znver5
+/// (#17b). The fold's only gather (`mc[neighbour-local]`) hits a small `k`-element array.
+fn wl_refine_in(
+    k: usize,
+    stride: usize,
+    nbr_pad: &[u16],
+    lcol: &mut [u64],
+    nlcol: &mut [u64],
+    mc: &mut [u64],
+    sort: &mut [u64],
+) {
+    let mut prev = 0usize;
+    mc[DUMMY_VERT] = 0; // padding contributes nothing; never overwritten below
+    for _ in 0..k {
+        for i in 0..k {
+            mc[i] = mix64(lcol[i]); // contiguous map -> AVX-512 vectorised
+        }
+        for i in 0..k {
+            let mut h = lcol[i].wrapping_mul(0x100_0000_01B3);
+            let base = i * stride;
+            for s in 0..stride {
+                h = h.wrapping_add(mc[nbr_pad[base + s] as usize]);
+            }
+            nlcol[i] = mix64(h);
+        }
+        lcol[..k].copy_from_slice(&nlcol[..k]);
+        let c = classes_in(k, lcol, sort);
+        if c == prev {
+            break;
+        }
+        prev = c;
+    }
+}
+
+/// The number of distinct colours among the `k` (local) vertices (uses `sort`).
+fn classes_in(k: usize, lcol: &[u64], sort: &mut [u64]) -> usize {
+    sort[..k].copy_from_slice(&lcol[..k]);
+    let s = &mut sort[..k];
+    s.sort_unstable();
+    let mut c = 0usize;
+    let mut last = 0u64;
+    for (i, &x) in s.iter().enumerate() {
+        if i == 0 || x != last {
+            c += 1;
+            last = x;
+        }
+    }
+    c
+}
+
+/// Hash the sorted colour multiset of the `k` (local) vertices (uses `sort`).
+fn hash_colours_in(k: usize, lcol: &[u64], sort: &mut [u64]) -> u64 {
+    sort[..k].copy_from_slice(&lcol[..k]);
+    let s = &mut sort[..k];
+    s.sort_unstable();
+    s.iter().fold(0x2545_F491_4F6C_DD1D, |h, &x| {
+        mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+    })
+}
+
+/// Hash the adjacency of a discrete-coloured component in canonical (colour) order --
+/// a complete certificate. `order` holds *local* indices sorted by colour; `verts` maps
+/// each back to its square for the adjacency test. Uses preallocated `order`.
+fn cert_hash_in(
+    attack: &[Bits],
+    comp: Bits,
+    k: usize,
+    verts: &[u8],
+    lcol: &[u64],
+    order: &mut [u8],
+) -> u64 {
+    for (i, o) in order[..k].iter_mut().enumerate() {
+        *o = i as u8; // local indices 0..k (discrete colouring ⇒ k <= MAXV)
+    }
+    order[..k].sort_unstable_by_key(|&li| lcol[li as usize]);
+    let mut h = 0x0CA7_F00D_u64;
+    for ii in 0..k {
+        let vi = verts[order[ii] as usize]; // square
+        let nbr = attack[vi as usize].and(comp);
+        for jj in 0..k {
+            let vj = verts[order[jj] as usize]; // square
+            if vi != vj && nbr.get(vj as u32) {
+                h = mix64(h ^ (jj as u64 + 1)).wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            }
+        }
+        h = mix64(h ^ 0xFFFF); // row separator
+    }
+    h
+}
+
+/// Direct canonical key of a *tiny* connected component (`k <= TINY_MAX`), bypassing
+/// CSR construction + WL refinement + certificate hashing (#18). For a connected graph
+/// on at most four vertices the **sorted degree sequence is a complete isomorphism
+/// invariant** -- the 1 / 1 / 2 / 6 connected graphs on 1..=4 vertices each carry a
+/// distinct sorted degree sequence -- so we map straight from `(k, sorted degrees)` to a
+/// constant. Deep in the search the available-graph fragments into overwhelmingly such
+/// components (the isolated vertex and the edge dominate), and `comp_canon` was
+/// recomputing their canon millions of times. The key shares the 64-bit space of the
+/// full certificate hash; a collision with a `k >= 5` key is a ~2^-64 event (the search
+/// already keys through a 55-bit slot fingerprint and is cross-checked vs Jenrich).
+#[inline]
+pub(crate) fn tiny_comp_key(attack: &[Bits], comp: Bits, k: usize, verts: &[u8]) -> u64 {
+    let mut deg = [0u8; TINY_MAX];
+    for i in 0..k {
+        // attack[v] includes v itself, so the self-bit is one of the set bits.
+        deg[i] = (attack[verts[i] as usize].and(comp).popcount() - 1) as u8;
+    }
+    deg[..k].sort_unstable();
+    // Pack (k, sorted degree sequence) -- each degree is < k <= 4, so fits a byte --
+    // into one integer and avalanche it. Distinct sorted degree sequence (and distinct
+    // k) ⇒ distinct packed value ⇒ distinct key; the invariant is complete here.
+    let mut packed = k as u64;
+    for &d in &deg[..k] {
+        packed = (packed << 8) | d as u64;
+    }
+    mix64(packed ^ 0x7111_C0DE_7111_C0DE)
+}
+
+/// Individualisation-refinement canonical certificate (see [`Queens::iso_key_canon`]).
+/// `nbr_sq` is the square-indexed neighbour lookup; `coloring` is the current vertex
+/// colouring (by square); `depth` gives each individualisation level a distinct tag so
+/// nested individualisations cannot collide. Returns the canonical adjacency rows, or
+/// `None` if the shared `budget` is exhausted.
+fn canon_cert(
+    verts: &[u32],
+    nbrs: &[Bits],
+    nbr_sq: &[Bits],
+    coloring: Vec<u64>,
+    budget: &mut i64,
+    depth: u32,
+) -> Option<Vec<Bits>> {
+    *budget -= 1;
+    if *budget < 0 {
+        return None;
+    }
+    let coloring = wl_refine(verts, nbrs, coloring);
+    // The target cell: the non-singleton colour class with the smallest colour value
+    // (a canonical choice -- the same relative class in isomorphic graphs).
+    let mut groups: HashMap<u64, Vec<u32>> = HashMap::new();
+    for &s in verts {
+        groups.entry(coloring[s as usize]).or_default().push(s);
+    }
+    let target = groups
+        .iter()
+        .filter(|(_, vs)| vs.len() > 1)
+        .min_by_key(|(&c, _)| c)
+        .map(|(_, vs)| vs.clone());
+    match target {
+        None => {
+            // Discrete colouring ⇒ canonical vertex order ⇒ adjacency certificate.
+            let mut order = verts.to_vec();
+            order.sort_unstable_by_key(|&s| coloring[s as usize]);
+            let cert: Vec<Bits> = order
+                .iter()
+                .map(|&vi| {
+                    let mut row = Bits::ZERO;
+                    for (j, &vj) in order.iter().enumerate() {
+                        if nbr_sq[vi as usize].get(vj) {
+                            row.set(j as u32);
+                        }
+                    }
+                    row
+                })
+                .collect();
+            Some(cert)
+        }
+        Some(cell) => {
+            // Branch: individualise each cell vertex apart, recurse, keep the min cert.
+            let tag = 0xF1F2_F3F4_0000_0000u64 ^ depth as u64;
+            let mut best: Option<Vec<Bits>> = None;
+            for &w in &cell {
+                let mut c2 = coloring.clone();
+                c2[w as usize] = tag;
+                let cert = canon_cert(verts, nbrs, nbr_sq, c2, budget, depth + 1)?;
+                if best.as_ref().is_none_or(|b| cert < *b) {
+                    best = Some(cert);
+                }
+            }
+            best
+        }
+    }
+}
+
+impl Queens {
+    /// A Weisfeiler–Leman (1-WL / colour-refinement) **invariant** of the
+    /// *available-graph* of `mask`: vertices are the available squares, edges are
+    /// attacking pairs (the game from here is Node Kayles on this graph, so any two
+    /// positions with isomorphic available-graphs have identical game values and
+    /// subtrees). Isomorphic graphs share this value, so counting distinct `iso_key`s
+    /// over the working set MEASURES how many positions would merge under graph-
+    /// isomorphism canonicalisation -- beyond the 8 board symmetries [`canon`] folds
+    /// (the queen graph's automorphisms include D4 but small residual graphs often
+    /// coincide up to iso without being board-symmetric, e.g. k mutually-non-attacking
+    /// squares = k isolated vertices wherever they sit).
+    ///
+    /// It is an *invariant*, not a canonical form: non-isomorphic graphs can collide
+    /// (1-WL failures -- and these queen available-graphs are WL-hard), so it
+    /// over-counts merges. Measurement tool only (`count --iso`), not a TT key. See
+    /// [`Queens::iso_key_ir`] for the stronger individualisation-refinement variant.
+    pub fn iso_key(&self, mask: Bits) -> u64 {
+        let (verts, nbrs, base) = self.avail_graph(mask);
+        if verts.is_empty() {
+            return 0;
+        }
+        hash_colours(&verts, &wl_refine(&verts, &nbrs, base))
+    }
+
+    /// A **stronger** available-graph invariant: 1-WL augmented by *individualisation*
+    /// (the core of nauty/bliss). 1-WL alone is too weak on these regular/symmetric
+    /// graphs, so when its colouring is non-discrete we individualise each vertex in
+    /// turn (tag it apart, re-refine to stability) and combine the resulting per-vertex
+    /// colour signatures into one order-independent invariant. Breaking the regularity
+    /// 1-WL chokes on, this distinguishes far more non-isomorphic graphs -- so its
+    /// distinct count is a much tighter (still conservative) estimate of the true
+    /// graph-isomorphism class count. Still an invariant, not a full canonical form;
+    /// O(|V|) refinements per non-discrete graph (cold measurement path only).
+    pub fn iso_key_ir(&self, mask: Bits) -> u64 {
+        let (verts, nbrs, base) = self.avail_graph(mask);
+        if verts.is_empty() {
+            return 0;
+        }
+        let stable = wl_refine(&verts, &nbrs, base.clone());
+        // Already discrete ⇒ 1-WL pins every vertex, individualisation adds nothing.
+        let distinct = {
+            let mut c: Vec<u64> = verts.iter().map(|&s| stable[s as usize]).collect();
+            c.sort_unstable();
+            c.dedup();
+            c.len()
+        };
+        if distinct == verts.len() {
+            return hash_colours(&verts, &stable);
+        }
+        // Individualise each vertex with the same distinguished tag, refine, and fold
+        // the per-vertex signatures (sorted ⇒ vertex order cannot matter).
+        let mut sigs: Vec<u64> = verts
+            .iter()
+            .map(|&v| {
+                let mut init = base.clone();
+                init[v as usize] = 0xD15C_0DED_1111_2222; // tag distinct from any degree
+                hash_colours(&verts, &wl_refine(&verts, &nbrs, init))
+            })
+            .collect();
+        sigs.sort_unstable();
+        sigs.iter().fold(0xABCD_1234_5678_9ABC, |h, &c| {
+            mix64(h ^ c).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// A **true canonical form** of the available-graph (individualisation-refinement,
+    /// nauty-style): refine; if the colouring is discrete, read off the adjacency in
+    /// the colour-induced vertex order as a certificate; else branch on each vertex of
+    /// the first non-singleton (smallest-colour) cell, individualising it apart, and
+    /// take the lexicographically **minimum** certificate over the branches. Two graphs
+    /// get the same certificate **iff** isomorphic — so distinct `iso_key_canon`s over
+    /// the working set is the *exact* graph-isomorphism class count (the safe merge),
+    /// and a correct canon can never make a win/loss-mixed class.
+    ///
+    /// Symmetric graphs branch widely, so a node budget caps the search; a capped graph
+    /// falls back to the (sound, weaker) [`iso_key_ir`] invariant — which may over-merge
+    /// and so surface as a mixed class, flagging that this graph wasn't fully canonised.
+    pub fn iso_key_canon(&self, mask: Bits) -> u64 {
+        let (verts, nbrs, base) = self.avail_graph(mask);
+        if verts.is_empty() {
+            return 0;
+        }
+        // Square-indexed neighbour lookup, for adjacency tests when serialising.
+        let mut nbr_sq = vec![Bits::ZERO; (self.n * self.n) as usize];
+        for (&s, &nb) in verts.iter().zip(&nbrs) {
+            nbr_sq[s as usize] = nb;
+        }
+        let mut budget: i64 = 200_000;
+        match canon_cert(&verts, &nbrs, &nbr_sq, base, &mut budget, 0) {
+            Some(cert) => cert.iter().flat_map(|r| r.0).fold(0x0CA7_F00D_u64, |h, x| {
+                mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+            }),
+            None => self.iso_key_ir(mask), // budget exhausted: fall back to the invariant
+        }
+    }
+
+    /// An **allocation-free** graph-isomorphism key (the production-candidate live key):
+    /// component-decompose `mask` and canonicalise each component using only the
+    /// per-thread preallocated [`IsoScratch`] buffers -- no `Vec`/`HashMap`, no heap
+    /// allocation, no per-call zeroing (every buffer cell is written before it is read).
+    /// Same merge as [`iso_key_canon`] (validated equal on n ≤ 14), far cheaper.
+    pub fn iso_key_fast(&self, mask: Bits) -> u64 {
+        ISO_SCRATCH.with(|s| {
+            let mut g = s.borrow_mut();
+            // Production: the `HIST = false` instantiation emits *no* component-size
+            // tally at all -- not a per-component branch but a compile-time-eliminated
+            // path -- so the hot loop's I-cache footprint is unchanged. The gate is a
+            // const generic resolved at the call site, the way the project keeps
+            // measurement toggles out of latency-bound loops (see the env-var rule in
+            // CLAUDE.md). The measurement entry instantiates `HIST = true` instead.
+            self.iso_key_fast_in::<false>(mask, &mut g, &mut [])
+        })
+    }
+
+    /// Measurement entry for `count --comps`: run the *same* graph-key decomposition the
+    /// live key runs, but with the connected-component-size tally monomorphised in
+    /// (`HIST = true`). Each available-graph's component sizes are accumulated into
+    /// `hist` (bucket `i` = components with `i` vertices; the final bucket catches the
+    /// tail). Cold analysis only -- never reached from the search.
+    pub fn tally_components(&self, mask: Bits, hist: &mut [u64]) {
+        ISO_SCRATCH.with(|s| {
+            let mut g = s.borrow_mut();
+            self.iso_key_fast_in::<true>(mask, &mut g, hist);
+        });
+    }
+
+    /// `HIST` selects, at monomorphisation time, whether to tally component sizes into
+    /// `hist` -- `false` for the search's live key (the tally vanishes), `true` for the
+    /// `count --comps` measurement. Keeping it a const generic (rather than a runtime
+    /// flag) is the project rule for hot-path toggles: the disabled branch never enters
+    /// the instruction stream, so it cannot pollute L1i or the frontend the graph key is
+    /// already bound by.
+    fn iso_key_fast_in<const HIST: bool>(
+        &self,
+        mask: Bits,
+        s: &mut IsoScratch,
+        hist: &mut [u64],
+    ) -> u64 {
+        let mut remaining = mask;
+        let mut nc = 0usize;
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            if HIST {
+                let k = comp.popcount() as usize;
+                hist[k.min(hist.len() - 1)] += 1;
+            }
+            let ck = self.comp_canon(comp, s);
+            s.comp_keys[nc] = ck;
+            nc += 1;
+        }
+        if nc == 0 {
+            return 0;
+        }
+        let keys = &mut s.comp_keys[..nc];
+        keys.sort_unstable();
+        keys.iter().fold(0x515E_AF00_D515_E5A1, |h, &k| {
+            mix64(h ^ k).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// Canonical key of one connected component, scratch-only. 1-WL refine; if discrete,
+    /// hash the adjacency certificate in canonical order (a complete canon); else fall
+    /// back to the validated-equivalent individualisation invariant. Components are small
+    /// (the graph fragments deep), so the fallback stays cheap.
+    pub(crate) fn comp_canon(&self, comp: Bits, s: &mut IsoScratch) -> u64 {
+        let mut k = 0usize;
+        comp.each(|v| {
+            s.verts[k] = v as u8;
+            k += 1;
+        });
+        // Tiny components -- the deep majority -- resolve by sorted degree sequence
+        // alone (a complete invariant for k <= 4), skipping all WL work (#18).
+        if k <= TINY_MAX {
+            return tiny_comp_key(&self.attack, comp, k, &s.verts);
+        }
+        // #19: amortise the full canon (a pure function of `comp`) across recurring
+        // components via the per-thread cache. Probe; on a fingerprint hit return it,
+        // else compute and store. The borrow is dropped around `comp_canon_full` so the
+        // (recursive-free) compute never holds the cache lock.
+        let (slot, fp) = CompCache::probe(comp, self.n);
+        if let Some(v) = COMP_CACHE.with(|c| {
+            let c = c.borrow();
+            (c.fp[slot] == fp).then(|| c.val[slot])
+        }) {
+            return v;
+        }
+        let v = self.comp_canon_full(comp, k, s);
+        COMP_CACHE.with(|c| {
+            let mut c = c.borrow_mut();
+            c.fp[slot] = fp;
+            c.val[slot] = v;
+        });
+        v
+    }
+
+    /// The full Weisfeiler-Leman canon of a component whose vertices are already in
+    /// `s.verts[..k]` -- 1-WL refine, then the adjacency certificate if discrete, else
+    /// the individualisation invariant. Used for `k > TINY_MAX` (tiny components take
+    /// the [`tiny_comp_key`] shortcut). Kept as a named entry so the test corpus can
+    /// cross-check the shortcut against it on small components too.
+    pub(crate) fn comp_canon_full(&self, comp: Bits, k: usize, s: &mut IsoScratch) -> u64 {
+        // Stride = the component's max degree (one branchless popcount per vertex, no
+        // bit-scan), so every padded neighbour row is the same fixed length.
+        let mut stride = 0usize;
+        for i in 0..k {
+            let deg = self.attack[s.verts[i] as usize].and(comp).popcount() as usize - 1;
+            if deg > stride {
+                stride = deg;
+            }
+        }
+        // Invert verts so neighbour squares map to compact local indices 0..k.
+        for i in 0..k {
+            s.loc[s.verts[i] as usize] = i as u16;
+        }
+        // Build the fixed-stride neighbour table once (one bit-scan per vertex, not per
+        // round): real neighbours as *local* indices, then DUMMY_VERT padding. Seed the
+        // compact colour `lcol[i] = base[i]` by degree.
+        for i in 0..k {
+            let v = s.verts[i] as usize;
+            let base = i * stride;
+            let mut p = base;
+            self.attack[v].and(comp).each(|t| {
+                if t != v as u32 {
+                    s.nbr_pad[p] = s.loc[t as usize];
+                    p += 1;
+                }
+            });
+            for q in p..base + stride {
+                s.nbr_pad[q] = DUMMY_VERT as u16;
+            }
+            s.base[i] = ((p - base) as u64) | 0x9E37_79B9_0000_0000;
+            s.col[i] = s.base[i];
+        }
+        wl_refine_in(
+            k,
+            stride,
+            &s.nbr_pad,
+            &mut s.col,
+            &mut s.nxt,
+            &mut s.mc,
+            &mut s.sort,
+        );
+        if classes_in(k, &s.col, &mut s.sort) == k {
+            return cert_hash_in(&self.attack, comp, k, &s.verts, &s.col, &mut s.order);
+        }
+        // Non-discrete: individualise each vertex, refine, combine the signatures.
+        for i in 0..k {
+            s.col[..k].copy_from_slice(&s.base[..k]);
+            s.col[i] = 0xD15C_0DED_1111_2222;
+            wl_refine_in(
+                k,
+                stride,
+                &s.nbr_pad,
+                &mut s.col,
+                &mut s.nxt,
+                &mut s.mc,
+                &mut s.sort,
+            );
+            s.sigs[i] = hash_colours_in(k, &s.col, &mut s.sort);
+        }
+        let sigs = &mut s.sigs[..k];
+        sigs.sort_unstable();
+        sigs.iter().fold(0xABCD_1234_5678_9ABC, |h, &x| {
+            mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// The connected component of the available-graph containing `start` (flood-fill
+    /// over attacking edges within `mask`).
+    pub(crate) fn component(&self, start: u32, mask: Bits) -> Bits {
+        let mut comp = single(start);
+        let mut frontier = comp;
+        loop {
+            let mut next = Bits::ZERO;
+            frontier.each(|v| next = next.or(self.attack[v as usize]));
+            next = next.and(mask).and_not(comp);
+            if next == Bits::ZERO {
+                break;
+            }
+            comp = comp.or(next);
+            frontier = next;
+        }
+        comp
+    }
+
+    /// A **cheaper** graph-isomorphism key: split the available-graph into connected
+    /// components and canonicalise each independently, then combine the sorted multiset
+    /// of component keys. Sound and complete (two graphs are isomorphic iff their
+    /// components match up to iso), and far cheaper on the deep, *fragmented* graphs
+    /// that dominate the search -- a whole-graph [`iso_key_canon`] over k isolated
+    /// vertices blows its individualisation budget, whereas here each tiny component
+    /// canonises instantly. Gives the **same merge** as `iso_key_canon`, faster.
+    pub fn iso_key_components(&self, mask: Bits) -> u64 {
+        let mut remaining = mask;
+        let mut keys: Vec<u64> = Vec::new();
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            keys.push(self.iso_key_canon(comp));
+        }
+        if keys.is_empty() {
+            return 0;
+        }
+        keys.sort_unstable();
+        keys.iter().fold(0x515E_AF00_D515_E5A1, |h, &k| {
+            mix64(h ^ k).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+        })
+    }
+
+    /// The available-graph of `mask`: its vertices (set squares), each vertex's
+    /// neighbour mask (attacking available squares), and the degree-seeded initial
+    /// 1-WL colours indexed by square. Shared by [`iso_key`] and [`iso_key_ir`].
+    fn avail_graph(&self, mask: Bits) -> (Vec<u32>, Vec<Bits>, Vec<u64>) {
+        let mut verts: Vec<u32> = Vec::new();
+        mask.each(|s| verts.push(s));
+        let nbrs: Vec<Bits> = verts
+            .iter()
+            .map(|&s| self.attack[s as usize].and(mask).and_not(single(s)))
+            .collect();
+        let mut base = vec![0u64; (self.n * self.n) as usize];
+        for (&s, nb) in verts.iter().zip(&nbrs) {
+            base[s as usize] = nb.popcount() as u64 | 0x9E37_79B9_0000_0000;
+        }
+        (verts, nbrs, base)
+    }
+}

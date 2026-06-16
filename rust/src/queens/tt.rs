@@ -1,0 +1,609 @@
+//! The lockless transposition table, its checkpoint image format, the BuRR
+//! freeze stream, and the df-pn proof-number table.
+
+use super::*;
+use std::collections::HashMap;
+use std::io::{self, Read, Write};
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::Mutex;
+
+// --------------------------------------------------------------------------- //
+// Transposition table
+// --------------------------------------------------------------------------- //
+
+/// A fixed-size, **lockless** open-addressing transposition table keyed by a board
+/// mask -> a `u8` value (win/loss as 0/1, or a Sprague-Grundy nimber). Memory is
+/// capped at `2^bits` slots; a fingerprint mismatch is a miss, so eviction only
+/// costs recompute (and a foreign same-slot+same-fingerprint hit is a ~`2^-55`
+/// wrong, cross-checked vs the known verdict).
+///
+/// Each slot is a single [`Slot`] = one `u64`, so the table is a flat
+/// `Box<[AtomicU64]>` shared lock-free across rayon workers: `get`/`put` are a
+/// `Relaxed` `load`/`store`. No mutex, no sharding (Session 5, lead L1). This is
+/// safe by construction -- an `AtomicU64` `load` cannot tear, and the value stored
+/// for a key is deterministic (a position's win/loss or nimber is fixed), so even
+/// a concurrent write for the *same* key stores the *same* value; a write for a
+/// *different* key is rejected by the fingerprint. That removes a lock/unlock and
+/// the mutex cache-line bounce from every node, attacking the DRAM-latency wall
+/// and the mutex contention in the ~18x parallel ceiling. (Hyatt's XOR-key trick
+/// is unnecessary: the 55-bit fingerprint already self-validates identity.)
+pub struct QueensTt {
+    slots: Box<[AtomicU64]>,
+    /// Slot count (any value, not just a power of two -- see [`QueensTt::index`]).
+    len: u64,
+    nodes: AtomicU64,
+    /// Optional distinct-position instrumentation (Chunk 1). `None` for an
+    /// ordinary solve, so the production path pays only a predictable null check.
+    counter: Option<Counter>,
+}
+
+/// A compact 8-byte transposition slot (Chunk 2): one `u64` packing a used flag
+/// (bit 0), the 8-bit value (bits 1..9 -- the win/loss bit for the search, or a
+/// small Sprague-Grundy nimber for [`Nimber`]), and a 55-bit fingerprint of the
+/// canonical key (bits 9..64).
+///
+/// We store a *fingerprint* of the key, not the full 256-bit key. The slot index
+/// already pins ~`bits` bits of the routing hash, and the fingerprint comes from
+/// an *independent* 64-bit hash half (see [`QueensTt::hash128`]), so a wrong "hit"
+/// -- a different key landing in the same slot *and* matching the fingerprint --
+/// has probability ~`2^-55` per colliding probe: negligible even across a
+/// Jenrich-scale (~`10^11`) search, and the final verdict is cross-checked against
+/// the known result. This shrinks the slot 40 B -> 8 B (5x more entries per byte
+/// of RAM) -- the Chunk-2 dynamic-tier win -- while keeping the canonical
+/// `available`-mask key, so every transposition still merges exactly as before (no
+/// lost merges, unlike re-keying on the queen set). The old strict "collision =
+/// miss, never wrong" weakens to "wrong with vanishing probability"; a fingerprint
+/// *mismatch* is still just a miss that re-searches.
+#[derive(Clone, Copy, Default)]
+pub(crate) struct Slot(pub(crate) u64);
+
+impl Slot {
+    /// Fingerprint width: `64 - 1 (used) - 8 (val)` bits.
+    pub(crate) const FP_BITS: u32 = 55;
+    const FP_SHIFT: u32 = 9;
+    const VAL_SHIFT: u32 = 1;
+
+    #[inline]
+    pub(crate) const fn fp_mask() -> u64 {
+        (1u64 << Self::FP_BITS) - 1
+    }
+    /// Pack `val` and the low `FP_BITS` of `fp` into an occupied slot.
+    #[inline]
+    pub(crate) fn pack(fp: u64, val: u8) -> Slot {
+        Slot(1 | ((val as u64) << Self::VAL_SHIFT) | ((fp & Self::fp_mask()) << Self::FP_SHIFT))
+    }
+    #[inline]
+    pub(crate) fn used(self) -> bool {
+        self.0 & 1 != 0
+    }
+    #[inline]
+    pub(crate) fn val(self) -> u8 {
+        (self.0 >> Self::VAL_SHIFT) as u8
+    }
+    #[inline]
+    pub(crate) fn fp(self) -> u64 {
+        self.0 >> Self::FP_SHIFT
+    }
+}
+
+/// 1024 shards for [`PnTt`] (still mutex-sharded; `pn` is a tiny-board experiment,
+/// not under memory pressure). [`QueensTt`] is lockless and unsharded.
+const SHARD_BITS: u32 = 10;
+
+/// Allocate `size` zeroed [`AtomicU64`] slots backed by transparent huge pages
+/// (Session 5, L1 cluster). The table is probed at random, so a multi-GB table on
+/// 4 KB pages thrashes the TLB on every node; `MADV_HUGEPAGE` cuts that hard. We
+/// allocate via `vec![0u64; _]` -- the allocator's `alloc_zeroed`, so the OS hands
+/// back lazily-zeroed pages (a 17 GB table does not commit until probed) -- then
+/// reinterpret the buffer as `AtomicU64`.
+fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
+    let mut v: Vec<u64> = vec![0u64; size];
+    #[cfg(target_os = "linux")]
+    unsafe {
+        // SAFETY: `madvise` over the live allocation; `MADV_HUGEPAGE` is advisory
+        // and only changes page backing, never contents. A failure (e.g. THP off)
+        // is a harmless no-op, so the result is ignored.
+        libc::madvise(
+            v.as_mut_ptr().cast::<libc::c_void>(),
+            std::mem::size_of_val(v.as_slice()),
+            libc::MADV_HUGEPAGE,
+        );
+    }
+    let (ptr, len, cap) = (v.as_mut_ptr(), v.len(), v.capacity());
+    std::mem::forget(v);
+    // SAFETY: `AtomicU64` has the same size, alignment, and representation as `u64`
+    // (std guarantee), and we take sole ownership of the same `(ptr, len, cap)`
+    // allocation exactly once; `len == cap`, so `into_boxed_slice` cannot realloc.
+    unsafe { Vec::from_raw_parts(ptr.cast::<AtomicU64>(), len, cap) }.into_boxed_slice()
+}
+
+/// Resolve the `QUEENS_TT_SLOTS` exact-slot-count override once (at table
+/// construction, never per node). `Some(n)` clamps to at least 2 slots; `None` keeps
+/// the `2^bits` default. Lets a run fill all RAM via `fastrange` sizing (Chunk 2b).
+fn tt_slots_override() -> Option<usize> {
+    std::env::var("QUEENS_TT_SLOTS")
+        .ok()
+        .and_then(|s| s.parse::<usize>().ok())
+        .map(|n| n.max(2))
+}
+
+// --------------------------------------------------------------------------- //
+// Dumpable / reloadable image (checkpoint + resume; proposal 2026-06-15)
+// --------------------------------------------------------------------------- //
+
+/// Magic for a [`QueensTt`] image file. Bumped only if the wire layout changes.
+const TT_MAGIC: [u8; 8] = *b"QNSTT\0\0\0";
+/// `Slot` layout version (`{used:1, val:8, fp:55}` + `fastrange` routing). Bump on
+/// any change to `Slot` packing or the `index` function.
+const TT_FORMAT_VERSION: u32 = 1;
+/// [`QueensTt::hash128`] seeds/constants version. Bump if either hash half changes
+/// (a stale fingerprint would silently mis-route).
+const TT_HASH_ID: u32 = 1;
+/// `canon`/`pos_key` version. Bump if the canonical key changes (every stored key
+/// would then refer to a different position).
+const TT_CANON_ID: u32 = 1;
+/// Arch/endianness tag: raw little-endian `u64` slots. `1` = x86_64-LE.
+const TT_ARCH_X86_64_LE: u8 = 1;
+/// Fixed header size in bytes (the rest is the raw slot image).
+pub(crate) const TT_HEADER_LEN: usize = 64;
+
+/// The on-disk header of a dumped [`QueensTt`]. The fixed fields tag the *exact*
+/// slot layout, hash, canonicalisation, and arch a reload depends on -- a mismatch
+/// is a hard error (`io::ErrorKind::InvalidData`), never a silently-voided hit.
+///
+/// `len` is the slot **count**, not `bits`: routing is `fastrange(route, len)`
+/// (see [`QueensTt::index`]), so a table of a different size re-routes every entry
+/// and the stored fingerprint -- an independent hash half, not the key -- cannot be
+/// recomputed. **An image only reloads into a table of the same `len`.** `epoch` is
+/// reserved for delta checkpoints (proposal Phase 2); `fill` is reporting only.
+pub struct TtHeader {
+    pub n: u8,
+    pub len: u64,
+    pub fill: u64,
+    pub epoch: u32,
+}
+
+impl TtHeader {
+    fn to_bytes(&self) -> [u8; TT_HEADER_LEN] {
+        let mut b = [0u8; TT_HEADER_LEN];
+        b[0..8].copy_from_slice(&TT_MAGIC);
+        b[8..12].copy_from_slice(&TT_FORMAT_VERSION.to_le_bytes());
+        b[12..16].copy_from_slice(&TT_HASH_ID.to_le_bytes());
+        b[16..20].copy_from_slice(&TT_CANON_ID.to_le_bytes());
+        b[20..24].copy_from_slice(&self.epoch.to_le_bytes());
+        b[24..32].copy_from_slice(&self.len.to_le_bytes());
+        b[32..40].copy_from_slice(&self.fill.to_le_bytes());
+        b[40] = self.n;
+        b[41] = TT_ARCH_X86_64_LE;
+        // b[42..64] reserved (zero)
+        b
+    }
+
+    /// Validate and parse a header, hard-erroring on any tag mismatch so a stale or
+    /// foreign dump is rejected rather than quietly producing wrong hits.
+    fn parse(b: &[u8]) -> io::Result<TtHeader> {
+        let bad = |m: String| io::Error::new(io::ErrorKind::InvalidData, m);
+        if b.len() < TT_HEADER_LEN {
+            return Err(bad("truncated TT header".into()));
+        }
+        if b[0..8] != TT_MAGIC {
+            return Err(bad("not a queens TT image (bad magic)".into()));
+        }
+        let u32_at = |o: usize| u32::from_le_bytes(b[o..o + 4].try_into().unwrap());
+        let check = |got: u32, want: u32, what: &str| {
+            (got == want)
+                .then_some(())
+                .ok_or_else(|| bad(format!("{what} mismatch: image {got}, this build {want}")))
+        };
+        check(u32_at(8), TT_FORMAT_VERSION, "format_version")?;
+        check(u32_at(12), TT_HASH_ID, "hash_id")?;
+        check(u32_at(16), TT_CANON_ID, "canon_id")?;
+        if b[41] != TT_ARCH_X86_64_LE {
+            return Err(bad(format!(
+                "arch mismatch: image {}, expected x86_64-LE",
+                b[41]
+            )));
+        }
+        Ok(TtHeader {
+            epoch: u32_at(20),
+            len: u64::from_le_bytes(b[24..32].try_into().unwrap()),
+            fill: u64::from_le_bytes(b[32..40].try_into().unwrap()),
+            n: b[40],
+        })
+    }
+}
+
+/// Slots transferred per read/write block (`BLOCK * 8` bytes ≈ 512 KB) -- amortises
+/// per-call overhead over the streamed image without a large buffer.
+const TT_IO_BLOCK: usize = 1 << 16;
+
+impl QueensTt {
+    /// A lockless table of `2^bits` slots (each 8 bytes; see [`Slot`]). `bits` is the
+    /// memory cap knob. `QUEENS_TT_SLOTS` overrides with an exact slot **count** (any
+    /// value, not just a power of two) -- resolved once here, never per node -- so a run
+    /// can fill *all* available RAM rather than the next power of two below it (Chunk 2b;
+    /// at 8 B/slot the 2^31 = 17 GB → 2^32 = 34 GB gap straddles a 26 GB box's sweet
+    /// spot). Indexing is Lemire `fastrange` ([`QueensTt::index`]), which maps a hash to
+    /// `[0, len)` for any `len`.
+    pub fn new(bits: u32) -> Self {
+        let size = tt_slots_override().unwrap_or_else(|| 1usize << bits.max(1));
+        QueensTt {
+            slots: zeroed_huge_atomics(size),
+            len: size as u64,
+            nodes: AtomicU64::new(0),
+            counter: None,
+        }
+    }
+
+    /// Lemire's `fastrange`: map a 64-bit hash uniformly into `[0, len)` with a single
+    /// widening multiply + shift -- the power-of-two-free replacement for `hash & mask`,
+    /// so the table can be sized to any slot count (Chunk 2b). The extra multiply is
+    /// negligible against the random-probe DRAM latency the search is bound by.
+    #[inline]
+    fn index(&self, route: u64) -> usize {
+        ((route as u128).wrapping_mul(self.len as u128) >> 64) as usize
+    }
+
+    /// A table that also counts the distinct positions it is queried for: every
+    /// `get` folds the (canonical) key into a HyperLogLog of precision `hll_p`,
+    /// and (when `exact`) into a hash set for an exact ground truth on small
+    /// boards. Used by the `count` CLI mode to size the table's true working set.
+    pub fn new_counting(bits: u32, hll_p: u32, exact: bool) -> Self {
+        let mut tt = Self::new(bits);
+        tt.counter = Some(Counter {
+            hll: Hll::new(hll_p),
+            exact: exact.then(|| Mutex::new(HashMap::new())),
+        });
+        tt
+    }
+
+    /// The distinct-position measurement, if this table was built with counting.
+    pub fn report(&self) -> Option<CountReport> {
+        self.counter.as_ref().map(|c| CountReport {
+            estimate: c.hll.estimate(),
+            exact: c.exact.as_ref().map(|s| s.lock().unwrap().len() as u64),
+            registers: c.hll.registers.len() as u64,
+        })
+    }
+
+    /// The exact working set as (canonical key, win/loss value) pairs, if an exact
+    /// map was kept (`count --exact`). Values are the exact ones recorded at `put`,
+    /// not peeked from the lossy TT. Cold post-search analysis only (`--iso`).
+    pub fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
+        let map = self.counter.as_ref()?.exact.as_ref()?.lock().unwrap();
+        Some(map.iter().map(|(&k, &v)| (k, v)).collect())
+    }
+
+    /// Total slot capacity and its byte footprint, for reporting the cap.
+    pub fn capacity(&self) -> (u64, u64) {
+        let slots = self.slots.len() as u64;
+        (slots, slots * std::mem::size_of::<AtomicU64>() as u64)
+    }
+
+    /// Occupied slots, by a one-time scan (post-solve; cheap relative to the
+    /// search). Combined with [`capacity`](Self::capacity) it gives the load
+    /// factor, and `nodes > fill` reveals how much eviction forced re-expansion.
+    pub fn fill(&self) -> u64 {
+        self.slots
+            .iter()
+            .filter(|s| Slot(s.load(Ordering::Relaxed)).used())
+            .count() as u64
+    }
+
+    /// A "TT {GB}, {load}% full" fragment for the solve summary.
+    pub fn summary(&self) -> String {
+        let (slots, bytes) = self.capacity();
+        let load = self.fill() as f64 / slots as f64 * 100.0;
+        format!("TT {:.2} GB, {load:.1}% full", bytes as f64 / 1e9)
+    }
+
+    /// Nodes actually searched (TT misses) -- the work done, since hits are free.
+    pub fn nodes(&self) -> u64 {
+        self.nodes.load(Ordering::Relaxed)
+    }
+
+    /// Count one searched node (a TT miss about to be expanded).
+    #[inline]
+    pub fn bump(&self) {
+        self.nodes.fetch_add(1, Ordering::Relaxed);
+    }
+
+    /// A 128-bit hash of the key as two independent `u64` halves: `route` drives
+    /// the shard (low bits) and slot index (high bits, disjoint); `fp` is the
+    /// fingerprint stored in the slot. The halves use different seeds and mixing
+    /// constants so the fingerprint actually discriminates keys that share a slot
+    /// (rather than re-deriving bits the index already pinned). `route` reproduces
+    /// the legacy hash exactly, preserving the routing distribution.
+    #[inline]
+    fn hash128(key: Bits) -> (u64, u64) {
+        let mut route = 0u64;
+        let mut fp = 0x2545_F491_4F6C_DD1Du64;
+        for &w in &key.0 {
+            route = (route ^ w).wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            route ^= route >> 29;
+            fp = (fp ^ w).wrapping_mul(0xFF51_AFD7_ED55_8CCD);
+            fp ^= fp >> 32;
+        }
+        (route, fp)
+    }
+
+    /// The stored value for `key`, if a slot's fingerprint matches.
+    #[inline]
+    pub fn get(&self, key: Bits) -> Option<u8> {
+        // Counting hook: every node the search enters is looked up here exactly
+        // once, so folding the key in on each `get` measures the distinct set of
+        // positions visited -- the table's working set -- deduplicated by the
+        // estimator regardless of transposition revisits or eviction.
+        if let Some(c) = &self.counter {
+            c.feed(key);
+        }
+        let (route, fp) = Self::hash128(key);
+        let raw = self.slots[self.index(route)].load(Ordering::Relaxed);
+        let s = Slot(raw);
+        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
+    }
+
+    /// Store `val` for `key` (replace-always on collision).
+    #[inline]
+    pub fn put(&self, key: Bits, val: u8) {
+        let (route, fp) = Self::hash128(key);
+        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        // Record the exact value for the post-search `--iso` analysis (cold; only
+        // when an exact map is kept). Here the value is known and eviction-proof.
+        if let Some(c) = &self.counter {
+            c.record(key, val);
+        }
+    }
+
+    /// Prefetch the slot `key` will land in, so the demand `get` that follows finds
+    /// it warm -- overlapping the random-probe DRAM round-trip with the work in
+    /// between (Session 5, L1 cluster). x86_64 only; a no-op elsewhere.
+    #[inline]
+    pub fn prefetch(&self, key: Bits) {
+        let idx = self.index(Self::hash128(key).0);
+        let ptr = self.slots[idx].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: `_mm_prefetch` only warms the cache for a valid pointer into
+            // our live allocation; it has no architectural effect and cannot fault.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
+    }
+
+    /// Stream this table as a raw image (`header || little-endian slot u64s`) to
+    /// `w` (proposal Approach A). Each slot is read with a single relaxed atomic
+    /// load, so a *live* dump under concurrent writers is a valid partial memo --
+    /// each `u64` is never torn and every stored value is a final verdict, so the
+    /// snapshot is sound to reload (good-enough-live; it only misses in-flight
+    /// `put`s). `n` tags the board the image belongs to. The empty slots are zero,
+    /// so the stream compresses well -- wrap `w` in a zstd encoder at the call site.
+    pub fn dump_image<W: Write>(&self, w: &mut W, n: u8) -> io::Result<()> {
+        let header = TtHeader {
+            n,
+            len: self.len,
+            fill: 0, // reporting-only; a full pre-scan every checkpoint isn't worth it
+            epoch: 0,
+        };
+        w.write_all(&header.to_bytes())?;
+        let mut buf = Vec::with_capacity(TT_IO_BLOCK * 8);
+        for chunk in self.slots.chunks(TT_IO_BLOCK) {
+            buf.clear();
+            for slot in chunk {
+                buf.extend_from_slice(&slot.load(Ordering::Relaxed).to_le_bytes());
+            }
+            w.write_all(&buf)?;
+        }
+        Ok(())
+    }
+
+    /// Reload a raw image written by [`dump_image`](Self::dump_image) into a fresh
+    /// table, hard-erroring if the header's format/hash/canon/arch tags or `n` don't
+    /// match this build (a mismatch would silently void every hit). The table is
+    /// sized to the image's `len` -- routing is `fastrange(route, len)`, so it cannot
+    /// be re-keyed into a different size. `counter` is `None`; attach one with
+    /// [`attach_counter`](Self::attach_counter) for a `--distinct` resume.
+    pub fn load_image<R: Read>(r: &mut R, expected_n: u8) -> io::Result<QueensTt> {
+        let mut hbuf = [0u8; TT_HEADER_LEN];
+        r.read_exact(&mut hbuf)?;
+        let header = TtHeader::parse(&hbuf)?;
+        if header.n != expected_n {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!(
+                    "image is for n={}, but this run is n={expected_n}",
+                    header.n
+                ),
+            ));
+        }
+        let size = header.len as usize;
+        let slots = zeroed_huge_atomics(size);
+        let mut buf = vec![0u8; TT_IO_BLOCK * 8];
+        let mut i = 0usize;
+        while i < size {
+            let take = TT_IO_BLOCK.min(size - i);
+            let bytes = &mut buf[..take * 8];
+            r.read_exact(bytes)?;
+            for (j, slot) in slots[i..i + take].iter().enumerate() {
+                let word = u64::from_le_bytes(bytes[j * 8..j * 8 + 8].try_into().unwrap());
+                slot.store(word, Ordering::Relaxed);
+            }
+            i += take;
+        }
+        Ok(QueensTt {
+            slots,
+            len: header.len,
+            nodes: AtomicU64::new(0),
+            counter: None,
+        })
+    }
+
+    /// Attach distinct-position instrumentation to an already-built table (e.g. a
+    /// reloaded image), so a `--resume` run can still report its working set. See
+    /// [`new_counting`](Self::new_counting).
+    pub fn attach_counter(&mut self, hll_p: u32, exact: bool) {
+        self.counter = Some(Counter {
+            hll: Hll::new(hll_p),
+            exact: exact.then(|| Mutex::new(HashMap::new())),
+        });
+    }
+
+    /// The BuRR archive key a live `key` resolves to in *this* table (Chunk 4).
+    /// A frozen [`burr::Archive`](crate::burr::Archive) is keyed by the slot
+    /// identity `(index, fingerprint)` recovered from a dump (see
+    /// [`archive_key_of`]); querying it during search recomputes that pair from the
+    /// position's canonical `key`. The archive **must** be frozen from a dump of a
+    /// table with the same `len` -- the slot index is `fastrange(route, len)`, so a
+    /// different size re-routes every key.
+    #[inline]
+    pub fn archive_key(&self, key: Bits) -> u64 {
+        let (route, fp) = Self::hash128(key);
+        archive_key_of(self.index(route) as u64, fp & Slot::fp_mask())
+    }
+}
+
+/// Derive the BuRR archive key for a TT slot identity `(slot_index, fingerprint)`.
+///
+/// The dumped TT image stores only a 55-bit fingerprint per slot, not the position
+/// key, so an archived entry is identified by the same pair the live table resolves
+/// a position to: its slot **index** and its stored **fingerprint**. Two positions
+/// sharing both already collide in the live TT (the accepted ~`2^-55` event), so
+/// keying the archive on this pair reproduces the table's resolution exactly -- no
+/// new merge loss. The query path recomputes the pair via [`QueensTt::archive_key`].
+#[inline]
+pub fn archive_key_of(slot_index: u64, fingerprint: u64) -> u64 {
+    // Fold both halves through the mixer so neither dominates the low bits the
+    // ribbon's start/coeff hashes consume.
+    mix64(mix64(slot_index) ^ fingerprint.wrapping_mul(0xC2B2_AE3D_27D4_EB4F))
+}
+
+/// Stream a dumped [`QueensTt`] image, invoking `f(archive_key, val)` for each
+/// occupied slot -- the freeze source for a BuRR [`burr::Archive`](crate::burr::Archive).
+/// Validates the header (the same hard format/hash/canon/arch/`n` checks as
+/// [`QueensTt::load_image`]) and returns it. Reads block by block, so it never
+/// materialises the whole table -- a 17 GB n=16 dump streams in ~512 KB chunks,
+/// which is what lets the freeze run on a box too small to also hold the table.
+pub fn for_each_image_entry<R: Read, F: FnMut(u64, u8)>(
+    r: &mut R,
+    expected_n: u8,
+    mut f: F,
+) -> io::Result<TtHeader> {
+    let mut hbuf = [0u8; TT_HEADER_LEN];
+    r.read_exact(&mut hbuf)?;
+    let header = TtHeader::parse(&hbuf)?;
+    if header.n != expected_n {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            format!(
+                "image is for n={}, but this run is n={expected_n}",
+                header.n
+            ),
+        ));
+    }
+    let size = header.len as usize;
+    let mut buf = vec![0u8; TT_IO_BLOCK * 8];
+    let mut idx = 0usize;
+    while idx < size {
+        let take = TT_IO_BLOCK.min(size - idx);
+        let bytes = &mut buf[..take * 8];
+        r.read_exact(bytes)?;
+        for (j, word8) in bytes.chunks_exact(8).enumerate() {
+            let s = Slot(u64::from_le_bytes(word8.try_into().unwrap()));
+            if s.used() {
+                f(archive_key_of((idx + j) as u64, s.fp()), s.val());
+            }
+        }
+        idx += take;
+    }
+    Ok(header)
+}
+
+/// The proof-number table for [`Pn`]: a fixed-size sharded open-addressing table
+/// keyed by canonical mask -> `(proof, disproof)` numbers. Same structure and
+/// guarantees as [`QueensTt`] (collision = miss = re-expand, never wrong).
+pub struct PnTt {
+    shards: Vec<Mutex<Box<[PnSlot]>>>,
+    shard_mask: u64,
+    slot_mask: u64,
+    nodes: AtomicU64,
+}
+
+#[derive(Clone, Copy, Default)]
+struct PnSlot {
+    key: [u64; WORDS],
+    phi: u32,
+    delta: u32,
+    used: u8,
+}
+
+impl PnTt {
+    pub fn new(bits: u32) -> Self {
+        let bits = bits.max(SHARD_BITS);
+        let shards = 1usize << SHARD_BITS;
+        let per = 1usize << (bits - SHARD_BITS);
+        PnTt {
+            shards: (0..shards)
+                .map(|_| Mutex::new(vec![PnSlot::default(); per].into_boxed_slice()))
+                .collect(),
+            shard_mask: shards as u64 - 1,
+            slot_mask: per as u64 - 1,
+            nodes: AtomicU64::new(0),
+        }
+    }
+
+    pub fn capacity(&self) -> (u64, u64) {
+        let slots = (self.shard_mask + 1) * (self.slot_mask + 1);
+        (slots, slots * std::mem::size_of::<PnSlot>() as u64)
+    }
+
+    /// Occupied slots, by a one-time scan -- see [`QueensTt::fill`].
+    pub fn fill(&self) -> u64 {
+        self.shards
+            .iter()
+            .map(|s| {
+                s.lock()
+                    .unwrap()
+                    .iter()
+                    .filter(|slot| slot.used != 0)
+                    .count() as u64
+            })
+            .sum()
+    }
+
+    /// A "TT {GB}, {load}% full" fragment for the solve summary.
+    pub fn summary(&self) -> String {
+        let (slots, bytes) = self.capacity();
+        let load = self.fill() as f64 / slots as f64 * 100.0;
+        format!("TT {:.2} GB, {load:.1}% full", bytes as f64 / 1e9)
+    }
+
+    pub fn nodes(&self) -> u64 {
+        self.nodes.load(Ordering::Relaxed)
+    }
+
+    #[inline]
+    pub(crate) fn bump(&self) {
+        self.nodes.fetch_add(1, Ordering::Relaxed);
+    }
+
+    #[inline]
+    pub(crate) fn get(&self, key: Bits) -> Option<(u32, u32)> {
+        let h = QueensTt::hash128(key).0; // PnTt keeps the full key, so it needs only the routing half
+        let idx = ((h >> 32) & self.slot_mask) as usize;
+        let s = self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx];
+        (s.used != 0 && s.key == key.0).then_some((s.phi, s.delta))
+    }
+
+    #[inline]
+    pub(crate) fn put(&self, key: Bits, phi: u32, delta: u32) {
+        let h = QueensTt::hash128(key).0;
+        let idx = ((h >> 32) & self.slot_mask) as usize;
+        self.shards[(h & self.shard_mask) as usize].lock().unwrap()[idx] = PnSlot {
+            key: key.0,
+            phi,
+            delta,
+            used: 1,
+        };
+    }
+}
