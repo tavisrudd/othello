@@ -146,11 +146,27 @@ parallel`. Wrap noisy builds in `~/.claude/bin/run-quiet "make …"`.
       incremental ~6.4 s vs parallel ~9.9 s median = ~1.5× wall**, identical ~53.2M nodes. Gates:
       lineage agrees (n≤9); `solve 12 incremental --distinct` second/**1,060,823 exact**/1.01×;
       `solve 14` second/~49.2M/1.08×. `make test` + `clippy` green.
+- [x] **n=16 SOLVED with `incremental` (2026-06-16, user's full run) — SECOND, ~34 min search,
+      ~1.2× over D4 parallel.** `QUEENS_…`/`solve 16 incremental --distinct`: **2025 s search**
+      (≈33m45s), 10.96B nodes, ≈8.0B distinct, 1.37× re-exp, 36/36 roots refuted ⇒ second player
+      (cross-checks Jenrich). vs the D4 `parallel` ~2502 s (session-8) — and **this was *with* the old
+      5-min zstd-3 periodic dumps contending** (the dump is CPU-starved by the 24 workers: ~55 MB/s
+      contended vs ~235 MB/s once the search ends), so uncontended it's faster still. The 62-cyc
+      incremental kernel is the lever: Step 3 validated at the real target, not just n=14.
 - [x] **Module split (same session, commit `30aa892`) — user-requested prerequisite.** The
       3184-line `queens.rs` → `src/queens/` tree: `bits`, `geom`, `graph`, `count`, `tt`,
       `solver/{mod,naive,memo,parallel,incremental,nimber,pn}`. Pure move (cross-module items →
       `pub(crate)`; `Parallel` verbatim); `mod.rs` preserves the `othello::queens::*` API. Gates
       byte-identical pre/post.
+- [x] **Checkpoint + solve-output UX overhaul (commits `983c953`, `fc17d22`).** The n=16 dump is
+      **CPU-bound** (lone zstd thread starved by the 24 search workers), not IO-bound (NVMe). So:
+      checkpointing is now **opt-in** (`--checkpoint`; no n=16 default), **periodic is opt-in too**
+      (`--checkpoint-every`; else on-demand), press **S** / SIGUSR2 to snapshot on demand, **zstd
+      3→1**, the **live search bar keeps ticking** with dump progress folded in (dump = lock-free
+      relaxed loads), Ctrl-C announces the save + a 2nd Ctrl-C `_exit`s mid-dump. Solve output:
+      solver/timing + distinct print **right under the verdict** (before the PV step), the **PV bar
+      resets** to its own nodes (`Phase::OptimalLine`), times as **XmYs**. `make pgo-queens`/`pgo-release`
+      now profile `solve 14 incremental`. Gates green; checkpoint round-trip + SIGINT save verified.
 - [ ] **Next levers (Step 3 follow-ons, the ~60 s floor still ~28× below):** the n=14 ~1.5× is the
       first cut — the canon was a big per-node fraction but TT/DRAM latency + movegen remain. The
       kernel notes' deferred levers: (1) **ILP** — overlap the 8 independent `and-not`s / break the
