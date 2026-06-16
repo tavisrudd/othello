@@ -479,12 +479,34 @@ The n=16 default TT is 2³¹ = 17 GB (fits); the next power (2³² = 34 GB) does
 `QUEENS_TT_SLOTS` to ~22 GB risks swap. So re-exp stays ~1.4× — **memory is still the wall**,
 and the single-box route to a smaller working set is Chunk 4 (BuRR archive), not a bigger table.
 
-**The <30 min reality.** The cheap levers are now exhausted/measured: #20 (tail, ~10-15%),
-bigger TT (RAM-capped), fast key (~tie), #9 (dead), move-ordering (dead, session 6),
-decomposition (~1.2 comps/pos, session 7). **None gets 56→<30 min alone**; the working set
-(~7.2B distinct) exceeds the 17 GB TT, so n=16 stays re-expansion-bound. **The load-bearing
-lever for <30 min remains Chunk 4 (LSM + BuRR-archived solved plies)** — fit the working set
-→ kill re-exp → compute-bound. That's a multi-session build (next).
+**Selective graph key (`QUEENS_KEY_MAX=k`) — NEGATIVE for live n=16 (wash).** n=14 sweep
+(nodes / per-node-cost vs D4 53.06M/6.43s): k=6 37.95M/1.69×, k=8 22.94M/2.73×, k=10
+15.59M/4.29×. Real merge (k=10 = 3.4× fewer nodes, much cheaper per-node than full-fast's ~7×
+because only the small endgame graphs are graph-keyed) **but the per-node cost still cancels
+it**: projecting to n=16 (distinct×reexp×per-node), every k lands ~42–47 min = D4's 42.6.
+Same root cause as full-fast — D4's re-exp is only 1.36× (the TT mostly *holds* the working
+set), so there's little thrash to recover by fitting better, and no key beats D4's cost-per-
+distinct live. The graph key stays the **memory/freeze-time** lever.
+
+**The <30 min reality — quantified.** With #20, n=16 = **42.6 min = 7.52B distinct × 1.36
+re-exp × ~250 ns/node ÷ 24 cores.** Each factor is near its floor on this box:
+- **7.52B distinct** = the D4 minimum; better merges (graph-iso) cost more per node than they
+  save (measured: fast + selective both wash). Move-ordering (session 6) and #9 (session 8)
+  are dead; decomposition is ~1.2 comps/pos (bounded).
+- **1.36× re-exp** = near-floor for a 17 GB TT at LF 3.5 with replace-always (two-tier was 3×
+  *worse*, chunk3 branch). The only way down is **fitting the working set** → Chunk 4 (BuRR),
+  which caps at the 1.36× headroom: **42.6 / 1.36 ≈ 31 min floor**, minus BuRR cascade overhead
+  ⇒ realistically ~33–36 min. So **even Chunk 4 likely does not reach <30 min on this box.**
+- **~250 ns/node** = DRAM-latency floor (prefetch already in; search is DRAM/L1i-bound).
+- **24 cores** = now kept busy by #20.
+
+**Conclusion: <30 min is not reachable with the available algorithmic levers on this 26 GB
+box.** 42.6 min is ~near the practical floor for D4-on-this-hardware. The honest paths to
+<30 min are (a) **more/faster RAM** (a bigger TT drops re-exp → e.g. a 34 GB TT ≈ LF 1.75 →
+re-exp ~1.1 → ~35 min; still short), or (b) **a fundamentally cheaper merge** than graph-iso
+(open research — Node-Kayles structure), or (c) **distributed aggregate RAM** (dump/load is the
+CRDT primitive; see the proposal's C1 delta-gossip). Chunk 4 remains the best single-box lever
+(→ ~33–36 min) and the next build, but it is *not* a <30 min guarantee — set expectations.
 
 **Definitive full n=16 run — DONE (2026-06-16 00:16). #20 is a BIG WIN: 56 → 42.6 min.**
 D4 + #20 (min-avail 96) + 17 GB TT + `--distinct`. **SECOND PLAYER WINS** (Jenrich ✓), PV 12
