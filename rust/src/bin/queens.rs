@@ -825,12 +825,14 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
     let first_wins = run_watched(solver.as_ref(), n, bar, checkpoint.as_ref(), || {
         solver.first_player_wins(q)
     });
+    // Capture the search time *before* any post-solve work (final checkpoint, PV) so
+    // the reported elapsed is the search, not the multi-minute image dump (#21 spirit).
+    let elapsed = t.elapsed().as_secs_f64();
     // The search is done -- the table is at its most complete, so take the final
     // checkpoint now (before the cheap PV), so a resume starts from the full result.
     if let Some(cp) = &checkpoint {
         do_checkpoint(solver.as_ref(), cp, "final");
     }
-    let elapsed = t.elapsed().as_secs_f64();
     let winner = if first_wins { "first" } else { "second" };
     println!(
         "On the {n}×{n} board the {winner} player wins with perfect play.",
