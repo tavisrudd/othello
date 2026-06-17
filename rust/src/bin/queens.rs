@@ -22,8 +22,8 @@ use signal_hook::iterator::Signals;
 
 use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
-    for_each_image_entry, make_solver, Bits, Burr, Fused, Incremental, IsoBurr, Nimber, Parallel,
-    Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
+    for_each_image_entry, make_solver, Bits, Burr, Fused, Incremental, IsoBurr, IsoFlat, Nimber,
+    Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -339,7 +339,7 @@ fn main() {
 /// "full"; what differs is the technique and the parallelism. Order matches
 /// `SOLVER_NAMES`.
 fn list_engines() {
-    const INFO: [(&str, &str, &str); 10] = [
+    const INFO: [(&str, &str, &str); 11] = [
         (
             "naive",
             "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
@@ -378,6 +378,11 @@ fn list_engines() {
         (
             "fused",
             "iso-burr's merge + eviction-free store with a single key per node (no D4/iso double probe) — incremental's nodes/sec",
+            "root-parallel (YBW)",
+        ),
+        (
+            "iso-flat",
+            "single pure-iso key over a flat lockless TT (no segment walk) — sustained throughput, eviction-free by fitting the merged set",
             "root-parallel (YBW)",
         ),
         (
@@ -1414,6 +1419,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
             (true, "burr") => Box::new(Burr::new_counting(bits, 16)),
             (true, "iso-burr") => Box::new(IsoBurr::new_counting(bits, 16)),
             (true, "fused") => Box::new(Fused::new_counting(bits, 16)),
+            (true, "iso-flat") => Box::new(IsoFlat::new_counting(bits, 16)),
             (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
             (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
             (true, other) => {

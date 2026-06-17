@@ -6,6 +6,7 @@ use crate::queens::*;
 mod burr;
 mod fused;
 mod incremental;
+mod iso_flat;
 mod memo;
 mod naive;
 mod nimber;
@@ -15,6 +16,7 @@ mod pn;
 pub use burr::{Burr, IsoBurr};
 pub use fused::Fused;
 pub use incremental::Incremental;
+pub use iso_flat::IsoFlat;
 pub use memo::{BranchingStats, Tt};
 pub use naive::Naive;
 pub use nimber::Nimber;
@@ -202,7 +204,7 @@ fn min_avail_for(over: Option<u32>, n: u32) -> u32 {
 
 /// CLI solver names, simplest → most sophisticated (`nimber` computes the full
 /// Sprague-Grundy value; `pn` is df-pn proof-number search).
-pub const SOLVER_NAMES: [&str; 10] = [
+pub const SOLVER_NAMES: [&str; 11] = [
     "naive",
     "memo",
     "symmetry",
@@ -211,6 +213,7 @@ pub const SOLVER_NAMES: [&str; 10] = [
     "burr",
     "iso-burr",
     "fused",
+    "iso-flat",
     "nimber",
     "pn",
 ];
@@ -226,6 +229,7 @@ pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
         "burr" => Some(Box::new(Burr::new(bits))),
         "iso-burr" => Some(Box::new(IsoBurr::new(bits))),
         "fused" => Some(Box::new(Fused::new(bits))),
+        "iso-flat" => Some(Box::new(IsoFlat::new(bits))),
         "nimber" => Some(Box::new(Nimber::new(bits))),
         "pn" => Some(Box::new(Pn::new(bits))),
         _ => None,

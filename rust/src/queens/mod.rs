@@ -53,8 +53,8 @@ pub use bits::Bits;
 pub use count::{CountReport, Hll};
 pub use geom::Queens;
 pub use solver::{
-    make_solver, BranchingStats, Burr, Fused, Incremental, IsoBurr, Naive, Nimber, Parallel, Pn,
-    Solver, Tt, SOLVER_NAMES,
+    make_solver, BranchingStats, Burr, Fused, Incremental, IsoBurr, IsoFlat, Naive, Nimber,
+    Parallel, Pn, Solver, Tt, SOLVER_NAMES,
 };
 pub use store::BurrStore;
 pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
@@ -138,6 +138,11 @@ mod tests {
                 "iso-burr n={n}"
             );
             assert_eq!(Fused::new(16).first_player_wins(&q), truth, "fused n={n}");
+            assert_eq!(
+                IsoFlat::new(16).first_player_wins(&q),
+                truth,
+                "iso-flat n={n}"
+            );
             assert_eq!(
                 Nimber::new(16).first_player_wins(&q),
                 truth,
