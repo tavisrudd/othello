@@ -8,6 +8,25 @@ faster-than-incremental + >7.5 M/s n=16, then ratchet 8–9 → 12 M/s, profilin
 (the `incremental` kernel this reuses). Code: `rust/src/queens/store.rs` (the store),
 `rust/src/queens/solver/burr.rs` (the solver), `rust/src/burr.rs` (the BuRR archive).
 
+## Handoff Note — session `2026-06-17--2`: **n=14 "regression" RESOLVED — it was the BOX, not the code**
+
+The reported n=14 slowdown (burr 3.9→7.3 s) was **not** the `fused`-add codegen drift the session-1
+note below hypothesized. Root cause: **cross-CCX coherence × physical memory placement** on the
+heterogeneous HX 370 (4 Zen5 + 8 Zen5c, two CCXs / separate L3s). A morning `zpool scrub` + reboot
+reshuffled the memtable into unfavorable physical memory, so the shared write-heavy state (`Shared`'s
+`fill`/`nodes` atomics + the TT) bounces over the Infinity Fabric when threads span both CCXs.
+**Identical-code binaries (18 build-id bytes apart) swing ±3× purely by execution context** — ZFS
+vs tmpfs, all-cores vs Zen5-pin. Matrix (n=14 burr cyc/node): tmpfs/Zen5 2.8k, ZFS/Zen5 3.9k,
+tmpfs/all 4.6k, **ZFS/all 12k**. Full trail:
+[n14-throughput-regression-memstall](2026-06-17-n14-throughput-regression-memstall.md).
+
+**Landed:** `madvise(MADV_HUGEPAGE)` alignment fix in `tt.rs` (commit `b3bc58f` — the TT had *never*
+been THP-backed; misaligned ptr → silent EINVAL; gates green). Diagnosis note + frozen lineage
+binaries + A/B scripts + dmesg/perf/strace evidence (`rust/bin/gen/`, commits up to `e184c41`).
+**Reverted:** the `get_cold` out-line (non-result — its "2.6×" was the placement confound).
+**Dropped:** the session-1 "isolation refactor / generational independence" plan — its premise was
+codegen-drift-from-`fused`, now disproven (`fused` did not regress burr).
+
 ## Handoff Note — session `2026-06-17--1` (`c90de881-4087-4226-957c-50062a2b74c1`): **`fused` solver + bloom-skip; the sub-20min push** (commit `a058057`)
 
 **Goal this session:** a solver that breaks the n=16 **20-minute** barrier (iso-burr is 29m23s).
@@ -22,36 +41,36 @@ faster-than-incremental + >7.5 M/s n=16, then ratchet 8–9 → 12 M/s, profilin
 > tee'd log (or `tmux capture-pane -t queens:<name> -p`). The queens binary catches SIGTERM, so to
 > stop a run use `pkill -9 -f "queens solve"` (plain `timeout` won't kill it; use `timeout -s KILL`).
 
-> **★★ NEXT SESSION — START HERE, IN THIS ORDER (user-queued).** This session **regressed
-> burr/iso-burr at n=14** (user confirmed "now slower than last night") by editing the *shared* store
-> + adding `fused` to the binary. No config constants changed (verified `git diff 1c6f390 HEAD`); the
-> shared edits are `store.rs` `get/prefetch` (the `seg_count==0` skip + the `seg_count.load(Acquire)`
-> moved earlier) and `Bloom::locate/prefetch` (fastrange + single `mix64`), plus `fused.rs` added.
-> n=14 never freezes (seg_count stays 0 → bloom inert there), so the regression is **NOT the bloom
-> math** — it's the reordered Acquire-load on the hot path and/or **codegen drift from adding `fused`
-> to the binary** (the search is frontend/L1i-bound, so a new solver shifts inlining/layout of the
-> shared hot path). User directive: **"each solver generation should be independent, like historical
-> checkpoints."**
+> **★★ NEXT SESSION — START HERE (user-queued).** The n=14 "regression" is **RESOLVED — it was the
+> box, not the code** (cross-CCX coherence × physical placement; see the session-`2026-06-17--2` note
+> above + [memstall handoff](2026-06-17-n14-throughput-regression-memstall.md)). The old isolation /
+> codegen-drift plan is **moot**. Do these in order:
 >
-> **1. Isolation refactor FIRST.** Make solver generations independent:
->    - Give `fused` its **own copy** of the hot-path modules (the `BurrStore` it needs + the A3 kernel
->      helpers it uses from `incremental`) in its own namespace — do NOT share `store.rs`/`burr.rs`
->      with burr/iso-burr. (Tiger says no-dup, but the user explicitly prioritizes generational
->      independence over DRY here — agreed for a perf-A/B project.)
->    - **Restore `store.rs` + `burr.rs` to `1c6f390`-identical** so burr/iso-burr are byte-for-byte
->      last-night (the bloom-skip + fastrange are genuinely good — re-apply them only in fused's
->      private copy). `git diff 1c6f390 HEAD -- rust/src/queens/store.rs rust/src/burr.rs` is the
->      exact revert set.
->    - Build each generation as a **frozen named binary** (`bin/gen/queens-<commit>-<solver>`) so A/B
->      is always against the exact historical executable, immune to `main` codegen drift. Going
->      forward: a new generation copies the hot path; never edit an older generation's modules.
+> **★ BENCH HYGIENE — apply to EVERY run/A/B below.** Trust queens numbers ONLY from **tmpfs**
+> (`cp target/release/queens /tmp/q && /tmp/q solve …`) or **Zen5-pin** (`taskset -c
+> 0,1,2,3,12,13,14,15`). Bare ZFS `target/` + all-cores is **±3× noise** (cross-CCX × placement) and
+> silently swamped a whole session's A/Bs. Keep CPU governor `performance` (reverts to powersave on
+> reboot). Runs still go in the tmux `queens` session per the run convention above.
 >
-> **2. THEN pin the cause.** Build `1c6f390` in a throwaway `git worktree` (ask before git ops), run
-> an interleaved n=14 A/B (burr & iso-burr, old binary vs new) to confirm whether the regression is
-> the store edit or pure codegen. If it's codegen, source-isolation alone won't fully restore
-> burr/iso-burr *in the same binary* → the frozen per-generation binaries (step 1) are the real fix.
+> **1. Run the real n=16 from tmpfs, all cores.** `cp target/release/queens /tmp/q && /tmp/q solve 16
+> iso-burr --distinct …` (checkpoint/resume; size with HLL first per CLAUDE.md). tmpfs+all-cores is
+> the best wall (3.6 s on n=14) and sidesteps the placement penalty for free.
 >
-> Only after 1+2 → resume the `count --comps` gate + the component table (the <20-min lever) below.
+> **2. The genuine burr win (grounded in the cross-CCX diagnosis).** Kill the per-node cross-CCX
+> coherence: make the per-node `nodes`/`fill` counters **thread-local** (sum at end) instead of one
+> shared atomic bounced across 24 threads / 2 CCXs; and split `Shared`'s hot read-mostly atomics
+> (`active`/`seg_count`/`freezing`) from the hot write atomics (`fill`/`nodes`) onto separate cache
+> lines (Tiger rule 6 — currently violated). Goal: all-cores fast regardless of placement + shave the
+> n=16 wall. **Validate from tmpfs or Zen5-pin** so placement noise can't fool the A/B.
+>
+> **3. RE-MEASURE this session's A/B "negatives" under corrected conditions** (tmpfs or Zen5-pin) —
+> every A/B in `2026-06-17--2` ran on the confounded ZFS+all-cores box (±3×), so they're unreliable:
+> the burr **lineage "code creep"** (8edc10a ~9.7k → 64d86db ~12.5k cyc/node), the **`get_cold`**
+> non-result, and the **incremental / iso-burr** comparisons. Determine whether ANY real per-node
+> code delta survives once the cross-CCX × placement confound is removed. Frozen lineage binaries are
+> in `rust/bin/gen/`.
+>
+> Only after 1–3 → resume the `count --comps` gate + the component table (the <20-min lever) below.
 
 **The lede:** built **`fused`** — `incremental`'s A3 kernel + BuRR store + **ONE key per node**
 (tiny-table iso for `avail<=iso_max`, else incremental D4), vs iso-burr's d4-then-iso **double
