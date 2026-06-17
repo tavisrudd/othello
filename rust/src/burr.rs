@@ -56,7 +56,7 @@ fn mix64(mut x: u64) -> u64 {
 /// Lemire `fastrange`: map a 64-bit hash uniformly into `[0, n)` with one widening
 /// multiply -- a power-of-two-free `hash % n`.
 #[inline]
-fn fastrange(h: u64, n: u64) -> u64 {
+pub(crate) fn fastrange(h: u64, n: u64) -> u64 {
     ((h as u128).wrapping_mul(n as u128) >> 64) as u64
 }
 

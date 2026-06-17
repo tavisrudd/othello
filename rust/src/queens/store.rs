@@ -76,7 +76,7 @@
 //!   the cap; too small and it saturates and every miss walks all segments.
 
 use super::*;
-use crate::burr::{Archive, ShardedArchive};
+use crate::burr::{fastrange, Archive, ShardedArchive};
 use rayon::prelude::*;
 use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicU64, AtomicU8, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -116,13 +116,19 @@ impl Bloom {
 
     #[inline]
     fn locate(&self, ak: u64) -> (usize, [u32; BLOOM_K as usize]) {
-        let h1 = mix64(ak);
-        let mut x = mix64(ak ^ 0x9E37_79B9_7F4A_7C15);
-        let base = (h1 % self.blocks) as usize * 8;
+        // One `mix64`, no division: `fastrange` maps the hash uniformly to a block with
+        // a multiply-high (~3 cyc) instead of `% self.blocks` (~20-40 cyc integer div),
+        // and the 8 in-block bit positions are derived from the *same* hash via a
+        // multiply-seeded rotate/xor chain (Kirsch-Mitzenmacher double hashing -- a full
+        // second `mix64` is unnecessary for a prefilter and preserves the FP rate). This
+        // is the per-check hot path of every node's miss *and* the per-segment-Bloom walk.
+        let h = mix64(ak);
+        let base = fastrange(h, self.blocks) as usize * 8;
+        let mut x = h.wrapping_mul(0x2545_F491_4F6C_DD1D);
         let mut bits = [0u32; BLOOM_K as usize];
         for b in bits.iter_mut() {
             *b = (x & 511) as u32;
-            x = x.rotate_right(9) ^ h1;
+            x = x.rotate_right(9) ^ h;
         }
         (base, bits)
     }
@@ -147,7 +153,7 @@ impl Bloom {
     /// one line), so the demand check overlaps its DRAM round-trip with search work.
     #[inline]
     fn prefetch(&self, ak: u64) {
-        let base = (mix64(ak) % self.blocks) as usize * 8;
+        let base = fastrange(mix64(ak), self.blocks) as usize * 8;
         let ptr = self.words[base].as_ptr();
         #[cfg(target_arch = "x86_64")]
         unsafe {
