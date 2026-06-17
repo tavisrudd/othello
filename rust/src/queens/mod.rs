@@ -53,8 +53,8 @@ pub use bits::Bits;
 pub use count::{CountReport, Hll};
 pub use geom::Queens;
 pub use solver::{
-    make_solver, BranchingStats, Burr, Incremental, Naive, Nimber, Parallel, Pn, Solver, Tt,
-    SOLVER_NAMES,
+    make_solver, BranchingStats, Burr, Incremental, IsoBurr, Naive, Nimber, Parallel, Pn, Solver,
+    Tt, SOLVER_NAMES,
 };
 pub use store::BurrStore;
 pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
@@ -132,6 +132,11 @@ mod tests {
                 "incremental n={n}"
             );
             assert_eq!(Burr::new(16).first_player_wins(&q), truth, "burr n={n}");
+            assert_eq!(
+                IsoBurr::new(16).first_player_wins(&q),
+                truth,
+                "iso-burr n={n}"
+            );
             assert_eq!(
                 Nimber::new(16).first_player_wins(&q),
                 truth,
@@ -516,6 +521,34 @@ mod tests {
         }
         for (k, &c) in counts.iter().enumerate().skip(1) {
             assert!(c > 0, "corpus saw no size-{k} components");
+        }
+    }
+
+    #[test]
+    fn tiny_iso_table_matches_fast_partition() {
+        let q = Queens::new(12);
+        let masks: Vec<Bits> = q
+            .iso_corpus(20_000)
+            .into_iter()
+            .filter(|m| m.popcount() <= 7)
+            .collect();
+        assert!(!masks.is_empty(), "corpus has no tiny available graphs");
+
+        let mut tiny_to_fast: HashMap<u64, u64> = HashMap::new();
+        let mut fast_to_tiny: HashMap<u64, u64> = HashMap::new();
+        for m in masks {
+            let tiny = q.iso_key_tiny_table(m);
+            let fast = q.iso_key_fast(m);
+            if let Some(&f) = tiny_to_fast.get(&tiny) {
+                assert_eq!(f, fast, "tiny table over-merged two fast iso classes");
+            } else {
+                tiny_to_fast.insert(tiny, fast);
+            }
+            if let Some(&t) = fast_to_tiny.get(&fast) {
+                assert_eq!(t, tiny, "tiny table split one fast iso class");
+            } else {
+                fast_to_tiny.insert(fast, tiny);
+            }
         }
     }
 }

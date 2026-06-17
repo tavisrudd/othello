@@ -3,6 +3,7 @@
 
 use super::*;
 use std::collections::{HashMap, HashSet};
+use std::sync::OnceLock;
 
 /// Largest connected component the graph key resolves by direct degree-sequence
 /// lookup instead of WL refinement (#18). For connected graphs on at most four
@@ -159,6 +160,41 @@ thread_local! {
         std::cell::RefCell::new(CompCache::new());
 }
 
+const SMALL_CANON_MAX: usize = 7;
+const SMALL_CANON_OFF: [usize; SMALL_CANON_MAX + 2] = [
+    0,       // k=0, 2^0
+    1,       // k=1, 2^0
+    2,       // k=2, 2^1
+    4,       // k=3, 2^3
+    12,      // k=4, 2^6
+    76,      // k=5, 2^10
+    1100,    // k=6, 2^15
+    33868,   // k=7, 2^21
+    2131020, // total
+];
+
+const SMALL_CANON_TAG: u64 = 0x71E7_1E55_7107_0007;
+
+static SMALL_CANON: OnceLock<Box<[u64]>> = OnceLock::new();
+
+fn small_canon_table() -> &'static [u64] {
+    SMALL_CANON
+        .get_or_init(|| {
+            let mut table = vec![0u64; SMALL_CANON_OFF[SMALL_CANON_MAX + 1]].into_boxed_slice();
+            for k in 1..=SMALL_CANON_MAX {
+                let codes = 1usize << ((k * (k - 1)) / 2);
+                for code in 0..codes {
+                    let adj = adj_from_edge_code(k, code as u32);
+                    let canon = small_canon_code(k, &adj);
+                    let packed = ((k as u64) << 32) | canon as u64;
+                    table[SMALL_CANON_OFF[k] + code] = packed ^ SMALL_CANON_TAG;
+                }
+            }
+            table
+        })
+        .as_ref()
+}
+
 /// 1-WL refine `col` (square-indexed) to stability over the `k` component vertices.
 /// `nbr_pad` is the fixed-stride neighbour table: row `i` holds vertex `i`'s neighbour
 /// squares in `nbr_pad[i*stride .. i*stride+deg]`, the rest padded with [`DUMMY_VERT`].
@@ -263,6 +299,277 @@ fn cert_hash_in(
         h = mix64(h ^ 0xFFFF); // row separator
     }
     h
+}
+
+/// Can vertices `a` and `b` be swapped while fixing every other vertex in the
+/// component? This cheap automorphism case covers true twins (including cliques) and
+/// false twins: `a` and `b` have identical adjacency to every third vertex, so a
+/// transposition of the pair preserves the component.
+#[inline]
+fn twin_vertices(attack: &[Bits], comp: Bits, a: u8, b: u8) -> bool {
+    let a = a as usize;
+    let b = b as usize;
+    let mut an = attack[a].and(comp);
+    let mut bn = attack[b].and(comp);
+    an.0[a / 64] &= !(1u64 << (a % 64));
+    an.0[b / 64] &= !(1u64 << (b % 64));
+    bn.0[a / 64] &= !(1u64 << (a % 64));
+    bn.0[b / 64] &= !(1u64 << (b % 64));
+    for w in 0..WORDS {
+        if an.0[w] != bn.0[w] {
+            return false;
+        }
+    }
+    true
+}
+
+/// Exact canonical key for a connected 5-vertex component. Among the 21 connected
+/// unlabeled graphs on five vertices, `(sorted degree sequence, triangle count)` is a
+/// complete invariant; this skips WL for the common k=5 bucket without a permutation
+/// search.
+fn canon5_key(attack: &[Bits], verts: &[u8]) -> u64 {
+    let mut deg = [0u8; 5];
+    let mut edge = [[false; 5]; 5];
+    for i in 0..5 {
+        let vi = verts[i] as usize;
+        for (j, &vj) in verts.iter().take(5).enumerate() {
+            if i != j && attack[vi].get(vj as u32) {
+                edge[i][j] = true;
+                deg[i] += 1;
+            }
+        }
+    }
+    deg.sort_unstable();
+    let mut triangles = 0u64;
+    for a in 0..3 {
+        for b in a + 1..4 {
+            for c in b + 1..5 {
+                triangles += (edge[a][b] && edge[a][c] && edge[b][c]) as u64;
+            }
+        }
+    }
+    let mut packed = triangles;
+    for &d in &deg {
+        packed = (packed << 4) | d as u64;
+    }
+    mix64(packed ^ 0xC005_CAFE_5555_0005)
+}
+
+/// Exact canonical key for a connected 6-vertex component. Exhaustive enumeration of
+/// all 112 connected unlabeled graphs on six vertices shows this tuple multiset is
+/// complete: for each vertex, `(degree, incident triangle count, sum of neighbour
+/// degrees)`, sorted across vertices.
+fn canon6_key(attack: &[Bits], verts: &[u8]) -> u64 {
+    let mut adj = [0u8; 6];
+    let mut deg = [0u8; 6];
+    for i in 0..6 {
+        let vi = verts[i] as usize;
+        for (j, &vj) in verts.iter().take(6).enumerate() {
+            if i != j && attack[vi].get(vj as u32) {
+                adj[i] |= 1u8 << j;
+                deg[i] += 1;
+            }
+        }
+    }
+    let mut tri = [0u8; 6];
+    for a in 0..4 {
+        for b in a + 1..5 {
+            for c in b + 1..6 {
+                if (adj[a] & (1u8 << b)) != 0
+                    && (adj[a] & (1u8 << c)) != 0
+                    && (adj[b] & (1u8 << c)) != 0
+                {
+                    tri[a] += 1;
+                    tri[b] += 1;
+                    tri[c] += 1;
+                }
+            }
+        }
+    }
+    let mut inv = [0u16; 6];
+    for i in 0..6 {
+        let mut nbr_deg = 0u8;
+        for (j, &dj) in deg.iter().enumerate() {
+            if (adj[i] & (1u8 << j)) != 0 {
+                nbr_deg += dj;
+            }
+        }
+        inv[i] = ((deg[i] as u16) << 9) | ((tri[i] as u16) << 5) | nbr_deg as u16;
+    }
+    inv.sort_unstable();
+    let mut packed = 0u64;
+    for &x in &inv {
+        packed = (packed << 12) ^ x as u64;
+        packed = mix64(packed);
+    }
+    mix64(packed ^ 0xC006_CAFE_6666_0006)
+}
+
+fn edge_code(k: usize, adj: &[u8]) -> u32 {
+    let mut code = 0u32;
+    let mut bit = 0u32;
+    for (i, &row) in adj[..k].iter().enumerate() {
+        for j in i + 1..k {
+            if (row & (1u8 << j)) != 0 {
+                code |= 1u32 << bit;
+            }
+            bit += 1;
+        }
+    }
+    code
+}
+
+fn adj_from_edge_code(k: usize, code: u32) -> [u8; SMALL_CANON_MAX] {
+    let mut adj = [0u8; SMALL_CANON_MAX];
+    let mut bit = 0u32;
+    for i in 0..k {
+        for j in i + 1..k {
+            if (code & (1u32 << bit)) != 0 {
+                adj[i] |= 1u8 << j;
+                adj[j] |= 1u8 << i;
+            }
+            bit += 1;
+        }
+    }
+    adj
+}
+
+fn small_vertex_sigs(k: usize, adj: &[u8]) -> [u32; SMALL_CANON_MAX] {
+    let mut deg = [0u8; SMALL_CANON_MAX];
+    for i in 0..k {
+        deg[i] = adj[i].count_ones() as u8;
+    }
+    let mut tri = [0u8; SMALL_CANON_MAX];
+    for a in 0..k {
+        for b in a + 1..k {
+            for c in b + 1..k {
+                if (adj[a] & (1u8 << b)) != 0
+                    && (adj[a] & (1u8 << c)) != 0
+                    && (adj[b] & (1u8 << c)) != 0
+                {
+                    tri[a] += 1;
+                    tri[b] += 1;
+                    tri[c] += 1;
+                }
+            }
+        }
+    }
+    let mut sig = [0u32; SMALL_CANON_MAX];
+    for i in 0..k {
+        let mut nbr_deg = 0u8;
+        let mut nbr_deg_multiset = [0u8; SMALL_CANON_MAX];
+        for j in 0..k {
+            if (adj[i] & (1u8 << j)) != 0 {
+                nbr_deg += deg[j];
+                nbr_deg_multiset[j] = deg[j];
+            }
+        }
+        nbr_deg_multiset[..k].sort_unstable();
+        let mut packed = 0u32;
+        for &d in &nbr_deg_multiset[..k] {
+            packed = (packed << 3) | d as u32;
+        }
+        sig[i] =
+            ((deg[i] as u32) << 28) | ((tri[i] as u32) << 24) | ((nbr_deg as u32) << 18) | packed;
+    }
+    sig
+}
+
+fn permuted_code(k: usize, adj: &[u8], perm: &[u8; SMALL_CANON_MAX]) -> u32 {
+    let mut code = 0u32;
+    let mut bit = 0u32;
+    for i in 0..k {
+        let pi = perm[i] as usize;
+        for &pj_raw in &perm[i + 1..k] {
+            let pj = pj_raw as usize;
+            if (adj[pi] & (1u8 << pj)) != 0 {
+                code |= 1u32 << bit;
+            }
+            bit += 1;
+        }
+    }
+    code
+}
+
+fn small_canon_code_rec(
+    k: usize,
+    adj: &[u8],
+    candidates: &[u8; SMALL_CANON_MAX],
+    classes: &[(usize, usize)],
+    class_idx: usize,
+    out: &mut [u8; SMALL_CANON_MAX],
+    best: &mut u32,
+) {
+    if class_idx == classes.len() {
+        *best = (*best).min(permuted_code(k, adj, out));
+        return;
+    }
+    let (lo, hi) = classes[class_idx];
+    // Recursive permutation-enumeration helper: the state it threads (graph, class
+    // partition, output buffer, running best) is intrinsic, not worth a wrapper struct.
+    #[allow(clippy::too_many_arguments)]
+    fn fill_class(
+        k: usize,
+        adj: &[u8],
+        candidates: &[u8; SMALL_CANON_MAX],
+        classes: &[(usize, usize)],
+        class_idx: usize,
+        pos: usize,
+        hi: usize,
+        used: u8,
+        out: &mut [u8; SMALL_CANON_MAX],
+        best: &mut u32,
+    ) {
+        if pos == hi {
+            small_canon_code_rec(k, adj, candidates, classes, class_idx + 1, out, best);
+            return;
+        }
+        for v in classes[class_idx].0..hi {
+            let cand = candidates[v];
+            let bit = 1u8 << cand;
+            if (used & bit) == 0 {
+                out[pos] = cand;
+                fill_class(
+                    k,
+                    adj,
+                    candidates,
+                    classes,
+                    class_idx,
+                    pos + 1,
+                    hi,
+                    used | bit,
+                    out,
+                    best,
+                );
+            }
+        }
+    }
+    fill_class(k, adj, candidates, classes, class_idx, lo, hi, 0, out, best);
+}
+
+fn small_canon_code(k: usize, adj: &[u8]) -> u32 {
+    let sig = small_vertex_sigs(k, adj);
+    let mut order = [0u8; SMALL_CANON_MAX];
+    for (i, o) in order[..k].iter_mut().enumerate() {
+        *o = i as u8;
+    }
+    order[..k].sort_unstable_by_key(|&v| sig[v as usize]);
+    let mut classes = [(0usize, 0usize); SMALL_CANON_MAX];
+    let mut nc = 0usize;
+    let mut lo = 0usize;
+    while lo < k {
+        let mut hi = lo + 1;
+        while hi < k && sig[order[hi] as usize] == sig[order[lo] as usize] {
+            hi += 1;
+        }
+        classes[nc] = (lo, hi);
+        nc += 1;
+        lo = hi;
+    }
+    let mut out = [0u8; SMALL_CANON_MAX];
+    let mut best = u32::MAX;
+    small_canon_code_rec(k, adj, &order, &classes[..nc], 0, &mut out, &mut best);
+    best
 }
 
 /// Direct canonical key of a *tiny* connected component (`k <= TINY_MAX`), bypassing
@@ -489,6 +796,36 @@ impl Queens {
         })
     }
 
+    /// Exact whole-graph canonical key for tiny available graphs (`popcount <= 7`),
+    /// backed by an eagerly precomputed table indexed by the labelled adjacency code.
+    /// `iso-burr` uses this instead of component decomposition/WL for its default
+    /// selective `iso<=7` path.
+    pub(crate) fn iso_key_tiny_table(&self, mask: Bits) -> u64 {
+        let k = mask.popcount() as usize;
+        debug_assert!(k <= SMALL_CANON_MAX);
+        if k == 0 {
+            return 0;
+        }
+        let mut verts = [0u8; SMALL_CANON_MAX];
+        let mut n = 0usize;
+        mask.each(|v| {
+            verts[n] = v as u8;
+            n += 1;
+        });
+        let mut adj = [0u8; SMALL_CANON_MAX];
+        for i in 0..k {
+            let vi = verts[i] as usize;
+            for (j, &vj) in verts.iter().take(k).enumerate() {
+                if i != j && self.attack[vi].get(vj as u32) {
+                    adj[i] |= 1u8 << j;
+                }
+            }
+        }
+        let code = edge_code(k, &adj);
+        let idx = SMALL_CANON_OFF[k] + code as usize;
+        small_canon_table()[idx]
+    }
+
     /// Measurement entry for `count --comps`: run the *same* graph-key decomposition the
     /// live key runs, but with the connected-component-size tally monomorphised in
     /// (`HIST = true`). Each available-graph's component sizes are accumulated into
@@ -499,6 +836,21 @@ impl Queens {
             let mut g = s.borrow_mut();
             self.iso_key_fast_in::<true, true>(mask, &mut g, hist);
         });
+    }
+
+    /// Cold analysis helper for selective graph-key experiments: largest connected
+    /// component of the available-graph. This is intentionally separate from the hot
+    /// key path; a production max-component gate should fuse this decomposition with
+    /// component canon so selected positions do not decompose twice.
+    pub fn iso_max_component_size(&self, mask: Bits) -> u32 {
+        let mut remaining = mask;
+        let mut max_k = 0u32;
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            max_k = max_k.max(comp.popcount());
+        }
+        max_k
     }
 
     /// `HIST` selects, at monomorphisation time, whether to tally component sizes into
@@ -585,11 +937,22 @@ impl Queens {
         // Stride = the component's max degree (one branchless popcount per vertex, no
         // bit-scan), so every padded neighbour row is the same fixed length.
         let mut stride = 0usize;
+        let mut clique = true;
         for i in 0..k {
             let deg = self.attack[s.verts[i] as usize].and(comp).popcount() as usize - 1;
+            clique &= deg == k - 1;
             if deg > stride {
                 stride = deg;
             }
+        }
+        if clique {
+            return mix64((k as u64) ^ 0xC11C_EC11_CEC1_1C1E);
+        }
+        if k == 5 {
+            return canon5_key(&self.attack, &s.verts);
+        }
+        if k == 6 {
+            return canon6_key(&self.attack, &s.verts);
         }
         // Invert verts so neighbour squares map to compact local indices 0..k.
         for i in 0..k {
@@ -649,8 +1012,37 @@ impl Queens {
                 ns += 1;
             }
         }
+        // Collapse the cheap automorphism orbits inside each stable colour class:
+        // if two local vertices are twins, individualising either one gives the same
+        // signature. Compute the representative once and duplicate its signature so
+        // the final multiset hash stays exactly equivalent to the old all-vertices
+        // fold, just with fewer WL reruns.
+        let mut group = [0u8; MAXV];
+        let mut reps = [0u8; MAXV];
+        let mut nr = 0usize;
+        for (idx, &ord) in s.order[..ns].iter().enumerate() {
+            let i = ord as usize;
+            let mut g = nr;
+            for (r, &rep) in reps[..nr].iter().enumerate() {
+                let j = rep as usize;
+                if s.col[i] == s.col[j] && twin_vertices(&self.attack, comp, s.verts[i], s.verts[j])
+                {
+                    g = r;
+                    break;
+                }
+            }
+            if g == nr {
+                reps[nr] = i as u8;
+                nr += 1;
+            }
+            group[idx] = g as u8;
+        }
         for idx in 0..ns {
-            let i = s.order[idx] as usize;
+            let g = group[idx] as usize;
+            if reps[g] != s.order[idx] {
+                continue;
+            }
+            let i = reps[g] as usize;
             s.col[..k].copy_from_slice(&s.base[..k]);
             s.col[i] = 0xD15C_0DED_1111_2222;
             wl_refine_in(
@@ -662,7 +1054,12 @@ impl Queens {
                 &mut s.mc,
                 &mut s.sort,
             );
-            s.sigs[idx] = hash_colours_in(k, &s.col, &mut s.sort);
+            let sig = hash_colours_in(k, &s.col, &mut s.sort);
+            for (j, &gg) in group[..ns].iter().enumerate() {
+                if gg as usize == g {
+                    s.sigs[j] = sig;
+                }
+            }
         }
         let sigs = &mut s.sigs[..ns];
         sigs.sort_unstable();

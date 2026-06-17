@@ -22,8 +22,8 @@ use signal_hook::iterator::Signals;
 
 use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
-    for_each_image_entry, make_solver, Bits, Burr, Incremental, Nimber, Parallel, Queens, QueensTt,
-    Solver, Tt, MAX_N, SOLVER_NAMES,
+    for_each_image_entry, make_solver, Bits, Burr, Incremental, IsoBurr, Nimber, Parallel, Queens,
+    QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -339,7 +339,7 @@ fn main() {
 /// "full"; what differs is the technique and the parallelism. Order matches
 /// `SOLVER_NAMES`.
 fn list_engines() {
-    const INFO: [(&str, &str, &str); 8] = [
+    const INFO: [(&str, &str, &str); 9] = [
         (
             "naive",
             "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
@@ -368,6 +368,11 @@ fn list_engines() {
         (
             "burr",
             "incremental kernel over a log-structured BuRR store (eviction-free ribbon archive) replacing the flat evicting TT",
+            "root-parallel (YBW)",
+        ),
+        (
+            "iso-burr",
+            "burr plus selective graph-isomorphism keys for deep fragmented positions (default iso<=7)",
             "root-parallel (YBW)",
         ),
         (
@@ -1396,6 +1401,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
             (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
             (true, "incremental") => Box::new(Incremental::new_counting(bits, 16)),
             (true, "burr") => Box::new(Burr::new_counting(bits, 16)),
+            (true, "iso-burr") => Box::new(IsoBurr::new_counting(bits, 16)),
             (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
             (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
             (true, other) => {

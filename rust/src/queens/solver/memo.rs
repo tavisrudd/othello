@@ -117,7 +117,7 @@ impl Tt {
         // the cheap D4 key. Strictly intra-ply transpositions ⇒ no merges are lost.
         let available = q.board.and_not(blocked);
         if available.popcount() > self.max_avail {
-            return q.pos_key(blocked);
+            return d4_bits(q.pos_key(blocked));
         }
         match self.key {
             KeyMode::GraphIr => graph_bits(q.iso_key_ir(available)),

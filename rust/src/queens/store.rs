@@ -6,7 +6,30 @@
 //! expansions are pure capacity re-search (the bottleneck reframe). This store
 //! replaces it with a **log-structured** layout: a mutable memtable (one
 //! [`QueensTt`]) absorbs `put`s; when it fills past a threshold it is **frozen** into
-//! the immutable BuRR `segment` (~`1.1*(1+fp_bits)` bits/key, *no eviction*).
+//! an immutable BuRR `segment` (~`1.1*(1+fp_bits)` bits/key, *no eviction*).
+//!
+//! # Append-only segments (no recompaction)
+//!
+//! Each freeze builds **one new segment from only the just-frozen buffer** and
+//! *appends* it to the segment table. Prior segments are never read, copied, or
+//! rebuilt -- so a freeze is **linear** in the buffer (not the whole frozen set), and
+//! resident memory is the live segments themselves (~`6 b/key`, no duplicate), not the
+//! `2x` peak an earlier "rebuild one compacted segment from a retained pair set"
+//! design paid (that retained pairs at 16 b/key *and* re-materialised the entire
+//! archive every freeze -- quadratic CPU and an OOM at n=16). A query walks the
+//! published segments after the Bloom admits it (a key lives in exactly one segment).
+//!
+//! # Bounded memory (pre-allocated, never OOMs)
+//!
+//! Full n=16 retention does not fit this box's RAM, so the store is **capped**: a
+//! freeze that would push resident segment bytes past `cap_limit` (or fill the
+//! pre-allocated segment table) latches `frozen_full` and *stops freezing*. The active
+//! memtable then behaves as an ordinary evicting TT -- re-expansion climbs gracefully
+//! past `1.0x` instead of the process growing without bound. Every large allocation
+//! (the two memtables, the Bloom, the segment-pointer table) is made **once at
+//! construction**; the only per-freeze allocations are the new segment and a transient
+//! per-buffer build scratch, both bounded by the buffer size and freed promptly off the
+//! search's hot path.
 //!
 //! # The levers that make it fast (each a measured cost center)
 //!
@@ -17,11 +40,13 @@
 //!    during the build, so the hot set is never wiped. A `get` is one relaxed load +
 //!    an index, not a hazard-pointer dance.
 //! 2. **A Bloom prefilter** over all frozen keys. Every expanded node starts with a
-//!    `get` that misses; the Bloom rejects a genuine miss in one cache-line read.
-//! 3. **A single compacted segment (K = 1).** A transposition hit into a frozen key is
-//!    one sharded probe regardless of run length: the freeze retains `(archive_key,
-//!    value)` pairs (partitioned by shard) and rebuilds the one [`ShardedArchive`] on a
-//!    **dedicated build pool** (off the search's rayon workers).
+//!    `get` that misses; the Bloom rejects a genuine miss in one cache-line read, so
+//!    the segment walk runs only on a hit (or a Bloom false positive).
+//! 3. **A pre-allocated segment table.** Segment `i < seg_count` is a published,
+//!    immortal [`ShardedArchive`] read lock-free via a raw pointer (the Arc behind it
+//!    is held for the whole run in `seg_hold`, so the deref is always valid). The
+//!    freeze builds each shard on a **dedicated build pool** (off the search's rayon
+//!    workers).
 //!
 //! # Why this is correct regardless of the freeze race
 //!
@@ -30,23 +55,30 @@
 //! ([`QueensTt::archive_key`]). The store only ever answers **the right value or
 //! `None`**: a tier miss re-expands (sound, deterministic verdict); the only
 //! wrong-value source is a [`burr::Archive`] false positive, bounded by `fp_bits`. So
-//! even a racy freeze costs at most re-expansion -- never a wrong answer.
+//! even a racy freeze costs at most re-expansion -- never a wrong answer. (A key that
+//! races into two segments is stored with the same value in both, so the walk is still
+//! correct.)
 //!
 //! # Knobs (resolved once at construction)
 //!
 //! - `QUEENS_BURR_MEM_BITS` -- each memtable's size `2^bits` (default: the CLI `bits`).
 //! - `QUEENS_BURR_FREEZE_AT` -- freeze when this many slots are filled (default 75%).
+//! - `QUEENS_BURR_CAP_GB` -- resident segment-bytes ceiling (default 12 GB). Past it
+//!   the store stops freezing and the memtable evicts. Size it to leave room for the
+//!   two memtables + Bloom + a few GB of transient freeze scratch within physical RAM.
 //! - `QUEENS_BURR_FP` -- archive fingerprint bits (default 44; FP rate `~2^-fp`).
 //! - `QUEENS_BURR_LOAD` -- per-layer ribbon load factor (default 0.90).
 //! - `QUEENS_BURR_SHARDS` -- segment shards = build parallelism (default 32).
 //! - `QUEENS_BURR_BUILD_THREADS` -- dedicated build-pool threads (default 8). Reserve
 //!   cores for it with `RAYON_NUM_THREADS = cores - build_threads` (freeze off-core).
-//! - `QUEENS_BURR_BLOOM_GB` -- prefilter size (default 1.0 GB; `0` disables).
+//! - `QUEENS_BURR_BLOOM_GB` -- prefilter size (default `0.2 * cap` ≈ 10 bits/key at the
+//!   default fp; `0` disables). Sized so a genuine miss is rejected in one line even at
+//!   the cap; too small and it saturates and every miss walks all segments.
 
 use super::*;
 use crate::burr::{Archive, ShardedArchive};
 use rayon::prelude::*;
-use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicU64, AtomicU8, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicU64, AtomicU8, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 
 /// Archive value width: win/loss is one bit (matches the CLI `freeze`'s
@@ -55,6 +87,12 @@ const VAL_BITS: u32 = 1;
 
 /// Bits set per key in the [`Bloom`] prefilter (cache-line-blocked double hashing).
 const BLOOM_K: u32 = 8;
+
+/// Pre-allocated capacity of the segment-pointer table. The byte `cap_limit` is the
+/// real bound (≈ 20-30 segments at the default cap and an n=16 freeze size); this is a
+/// generous backstop so the table never reallocates and a freeze that would exceed it
+/// simply latches `frozen_full` like the byte cap.
+const MAX_SEGMENTS: usize = 8192;
 
 /// A cache-line-**blocked** Bloom filter over the frozen `archive_key`s: the prefilter
 /// that keeps a genuine miss O(1). Absent ⇒ skip the segment; no false negatives, so a
@@ -121,6 +159,17 @@ impl Bloom {
     }
 }
 
+/// One frozen segment: an immutable BuRR archive plus a membership Bloom over exactly
+/// its keys. The append-only walk consults `bloom` before probing `archive`, so a
+/// frozen-tier hit touches ~one segment's ribbon instead of every segment's (the walk
+/// cost that grows with segment count). The Bloom has **no false negatives**, so skipping
+/// a segment it rejects can never miss a real hit -- a Bloom false positive only costs one
+/// wasted (`None`-returning) probe, never a wrong answer.
+struct Segment {
+    archive: ShardedArchive,
+    bloom: Bloom,
+}
+
 /// State shared between the search threads and the background freeze thread.
 struct Shared {
     /// The two memtables. Writes go to `bufs[active]`; the other is empty (between
@@ -129,25 +178,36 @@ struct Shared {
     bufs: [QueensTt; 2],
     /// Index (0/1) of the buffer writes currently target.
     active: AtomicU8,
-    /// The single compacted segment (rebuilt each freeze ⇒ a hit is one sharded probe),
-    /// read on the hot path via a raw pointer (a relaxed load, not the `ArcSwap`
-    /// hazard-pointer dance that profiled at ~14%). `null` until the first freeze.
-    seg_ptr: AtomicPtr<ShardedArchive>,
-    /// Keeps the last two published segments alive so a hot-path `&*seg_ptr` is valid:
-    /// reads take ~µs, republishes are seconds apart, so a reader can never deref a
-    /// dropped segment. The freezer pushes the new one and drops all but the last two.
-    seg_live: Mutex<Vec<Arc<ShardedArchive>>>,
-    /// All frozen `(archive_key, value)` pairs, partitioned by shard so the segment can
-    /// be rebuilt in parallel with no gather copy. Touched only by the (serialized)
-    /// freezer, never the hot path.
-    pairs: Vec<Mutex<Vec<(u64, u64)>>>,
+    /// Pre-allocated segment-pointer table (raw pointers into the Arcs held in
+    /// `seg_hold`). Append-only: index `i < seg_count` is a published, immortal segment,
+    /// read lock-free on the hot path (load `seg_count`, walk). The freeze stores the
+    /// pointer (Release) before bumping `seg_count` (Release); a reader loads `seg_count`
+    /// (Acquire) then derefs -- so it never sees an unpublished slot.
+    segs: Box<[AtomicPtr<Segment>]>,
+    seg_count: AtomicUsize,
+    /// Owns the segment Arcs for the whole run (never dropped ⇒ hot-path raw derefs stay
+    /// valid). `with_capacity(MAX_SEGMENTS)`, so a freeze's `push` never reallocates.
+    seg_hold: Mutex<Vec<Arc<Segment>>>,
+    /// Bits per key in each per-segment membership Bloom (resolved once). Wider = lower
+    /// false-positive rate (fewer wasted probes) at more memory.
+    seg_bloom_bits: u64,
     /// Prefilter over all frozen keys. `None` disables it.
     bloom: Option<Bloom>,
     freeze_at: u64,
     fp_bits: u32,
     load: f64,
     shards: usize,
-    /// A dedicated pool the segment rebuild runs on, so it does not contend the search's
+    /// Hard ceiling on resident segment bytes. A freeze that would cross it (or fill the
+    /// segment table) latches `frozen_full` and stops -- the memtable then evicts and
+    /// re-expansion climbs, instead of the store growing past RAM (the OOM before this).
+    cap_limit: u64,
+    max_segments: usize,
+    /// Latched once the frozen tier is capped: no more flips/freezes; the active memtable
+    /// becomes an evicting cache.
+    frozen_full: AtomicBool,
+    /// Resident bytes across all published segments (the cap is checked against this).
+    frozen_bytes: AtomicU64,
+    /// A dedicated pool the segment build runs on, so it does not contend the search's
     /// global rayon pool. Reserve cores with `RAYON_NUM_THREADS = cores - build_threads`.
     build_pool: rayon::ThreadPool,
     /// Approximate occupied count in the active buffer since the last freeze.
@@ -214,12 +274,35 @@ fn build_threads_env() -> usize {
         .max(1)
 }
 
-fn bloom_bytes_env() -> usize {
-    let gb = std::env::var("QUEENS_BURR_BLOOM_GB")
+fn cap_bytes_env() -> u64 {
+    let gb = std::env::var("QUEENS_BURR_CAP_GB")
         .ok()
         .and_then(|s| s.parse::<f64>().ok())
-        .unwrap_or(1.0);
-    (gb * 1e9) as usize
+        .unwrap_or(12.0);
+    (gb * 1e9) as u64
+}
+
+/// Bits per key in each per-segment membership Bloom (default 8 ≈ 1 byte/key, a few %
+/// false-positive rate -- fine for routing the walk to the right segment).
+fn seg_bloom_bits_env() -> u64 {
+    std::env::var("QUEENS_BURR_SEG_BLOOM_BITS")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(8u64)
+        .max(1)
+}
+
+/// Default the prefilter to ~`0.2 * cap` bytes (≈ 10 bits per frozen key at the default
+/// fp width and ribbon density), so a genuine miss is still rejected in one cache-line
+/// read at the cap. `QUEENS_BURR_BLOOM_GB` overrides; `0` disables.
+fn bloom_bytes_env(cap: u64) -> usize {
+    match std::env::var("QUEENS_BURR_BLOOM_GB")
+        .ok()
+        .and_then(|s| s.parse::<f64>().ok())
+    {
+        Some(gb) => (gb * 1e9) as usize,
+        None => (cap as f64 * 0.2) as usize,
+    }
 }
 
 impl BurrStore {
@@ -227,21 +310,30 @@ impl BurrStore {
         let mb = mem_bits_for(bits);
         let mem_slots = QueensTt::new(mb).capacity().0;
         let shards = shards_env();
+        let cap = cap_bytes_env();
         BurrStore {
             inner: Arc::new(Shared {
                 bufs: [QueensTt::new(mb), QueensTt::new(mb)],
                 active: AtomicU8::new(0),
-                seg_ptr: AtomicPtr::new(std::ptr::null_mut()),
-                seg_live: Mutex::new(Vec::new()),
-                pairs: (0..shards).map(|_| Mutex::new(Vec::new())).collect(),
+                segs: (0..MAX_SEGMENTS)
+                    .map(|_| AtomicPtr::new(std::ptr::null_mut()))
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice(),
+                seg_count: AtomicUsize::new(0),
+                seg_hold: Mutex::new(Vec::with_capacity(MAX_SEGMENTS)),
+                seg_bloom_bits: seg_bloom_bits_env(),
                 bloom: {
-                    let b = bloom_bytes_env();
+                    let b = bloom_bytes_env(cap);
                     (b > 0).then(|| Bloom::new(b))
                 },
                 freeze_at: freeze_at.unwrap_or_else(|| freeze_at_for(mem_slots)),
                 fp_bits: fp_bits_env(),
                 load: load_env(),
                 shards,
+                cap_limit: cap,
+                max_segments: MAX_SEGMENTS,
+                frozen_full: AtomicBool::new(false),
+                frozen_bytes: AtomicU64::new(0),
                 build_pool: rayon::ThreadPoolBuilder::new()
                     .num_threads(build_threads_env())
                     .thread_name(|i| format!("burr-build-{i}"))
@@ -279,8 +371,8 @@ impl BurrStore {
     }
 
     /// The stored value for `key`: active memtable, then (only during a freeze) the
-    /// buffer being frozen, then -- only if the prefilter admits it -- the compacted
-    /// segment. Feeds the distinct counter once per query.
+    /// buffer being frozen, then -- only if the prefilter admits it -- the published
+    /// segments (walked; a key lives in exactly one). Feeds the distinct counter once.
     #[inline]
     pub fn get(&self, key: Bits) -> Option<u8> {
         let s = &self.inner;
@@ -306,14 +398,21 @@ impl BurrStore {
                 return None;
             }
         }
-        let p = s.seg_ptr.load(Ordering::Acquire);
-        if !p.is_null() {
-            // SAFETY: `p` points into an `Arc<ShardedArchive>` kept in `seg_live` (the
-            // last two published segments). A get's load→deref takes ~µs while segments
-            // are republished seconds apart, so the Arc behind `p` cannot drop mid-deref.
+        // Walk the published segments. The shared Bloom already rejected genuine misses,
+        // so this runs on a real hit or a shared-Bloom false positive. Each segment's own
+        // Bloom skips it unless it (maybe) holds the key, so a hit probes ~one ribbon
+        // rather than every segment's -- the append-only walk stays ~O(1) in segment count.
+        let count = s.seg_count.load(Ordering::Acquire);
+        for slot in &s.segs[..count] {
+            let p = slot.load(Ordering::Acquire);
+            // SAFETY: slot `i < seg_count` was published (Release) only after its segment
+            // Arc was pushed into `seg_hold`, which holds it for the whole run -- so the
+            // pointee is never dropped and this deref is valid.
             let seg = unsafe { &*p };
-            if let Some(v) = seg.get(ak) {
-                return Some(v as u8);
+            if seg.bloom.maybe_contains(ak) {
+                if let Some(v) = seg.archive.get(ak) {
+                    return Some(v as u8);
+                }
             }
         }
         None
@@ -328,8 +427,7 @@ impl BurrStore {
         let (route, fp) = QueensTt::hash128(key);
         let i = s.active.load(Ordering::Relaxed) as usize;
         s.bufs[i].put_hashed(route, fp, val);
-        s.fill.fetch_add(1, Ordering::Relaxed);
-        if s.fill.load(Ordering::Relaxed) >= s.freeze_at {
+        if s.fill.fetch_add(1, Ordering::Relaxed) + 1 >= s.freeze_at {
             self.maybe_freeze();
         }
     }
@@ -354,10 +452,26 @@ impl BurrStore {
     #[cold]
     fn maybe_freeze(&self) {
         let s = &self.inner;
+        if s.frozen_full.load(Ordering::Relaxed) {
+            // Frozen tier capped: stop growing. Reset fill so we only re-enter once per
+            // `freeze_at` puts; the active memtable now evicts (re-exp climbs gracefully).
+            s.fill.store(0, Ordering::Relaxed);
+            return;
+        }
         if s.freezing.swap(true, Ordering::Acquire) {
             return; // a freeze is already in flight
         }
         if s.fill.load(Ordering::Relaxed) < s.freeze_at {
+            s.freezing.store(false, Ordering::Release);
+            return;
+        }
+        // Crossing the byte cap (or the segment table) latches `frozen_full`: no flip,
+        // no freeze -- the store stops growing here.
+        if s.frozen_bytes.load(Ordering::Relaxed) >= s.cap_limit
+            || s.seg_count.load(Ordering::Relaxed) >= s.max_segments
+        {
+            s.frozen_full.store(true, Ordering::Relaxed);
+            s.fill.store(0, Ordering::Relaxed);
             s.freezing.store(false, Ordering::Release);
             return;
         }
@@ -391,12 +505,7 @@ impl BurrStore {
     pub fn cap_bytes(&self) -> u64 {
         let s = &self.inner;
         let mem = s.bufs[0].capacity().1 + s.bufs[1].capacity().1;
-        let seg = s
-            .seg_live
-            .lock()
-            .unwrap()
-            .last()
-            .map_or(0, |a| a.bits() / 8);
+        let seg = s.frozen_bytes.load(Ordering::Relaxed);
         let bloom = s.bloom.as_ref().map_or(0, |b| b.words.len() as u64 * 8);
         mem + seg + bloom
     }
@@ -405,26 +514,32 @@ impl BurrStore {
         let s = &self.inner;
         let (mem_slots, mem_bytes) = s.bufs[0].capacity();
         let frozen = s.frozen_keys.load(Ordering::Relaxed);
-        let seg_bits = s.seg_live.lock().unwrap().last().map_or(0, |a| a.bits());
+        let seg_bytes = s.frozen_bytes.load(Ordering::Relaxed);
         let bpk = if frozen > 0 {
-            seg_bits as f64 / frozen as f64
+            seg_bytes as f64 * 8.0 / frozen as f64
         } else {
             0.0
         };
         let building = s.building.load(Ordering::Relaxed);
         format!(
-            "burr LSM: 2x mem {:.2} GB ({} slots, fill {}), segment {} keys / {:.2} GB ({:.1} b/key), {} freezes{}, fp {}",
+            "burr LSM: 2x mem {:.2} GB ({} slots, fill {}), {} segments / {} keys / {:.2} GB ({:.1} b/key), {} freezes{}{}, fp {}",
             mem_bytes as f64 / 1e9,
             mem_slots,
             s.fill.load(Ordering::Relaxed),
+            s.seg_count.load(Ordering::Relaxed),
             frozen,
-            seg_bits as f64 / 8.0 / 1e9,
+            seg_bytes as f64 / 1e9,
             bpk,
             s.freezes.load(Ordering::Relaxed),
             if building > 0 {
-                format!(" (rebuilding {building})")
+                format!(" (building {building})")
             } else {
                 String::new()
+            },
+            if s.frozen_full.load(Ordering::Relaxed) {
+                " (cap reached, memtable evicting)"
+            } else {
+                ""
             },
             s.fp_bits,
         )
@@ -432,58 +547,62 @@ impl BurrStore {
 }
 
 impl Shared {
-    /// Background: fold the frozen-out buffer `old` into the compacted segment, then
-    /// clear it for reuse. Runs on its own thread; the search keeps going on the fresh
-    /// active buffer, and `bufs[old]` stays queryable (the `freezing` gate) until its
-    /// keys are in the published segment -- so the hot set is never wiped.
+    /// Background: build a **new** segment from the frozen-out buffer `old`, append it to
+    /// the segment table, then clear the buffer for reuse. Runs on its own thread; the
+    /// search keeps going on the fresh active buffer, and `bufs[old]` stays queryable (the
+    /// `freezing` gate) until its keys are in the published segment -- so the hot set is
+    /// never wiped. Prior segments are untouched (append-only -- no recompaction).
     fn freeze_buffer(&self, old: usize) {
-        // Phase 1 (single pass, no locks/atomics): partition the buffer's entries by shard.
-        // Presize each bucket to the expected per-shard fill so the scan never reallocs.
-        let cap = self.freeze_at as usize / self.shards + 64;
-        let mut buckets: Vec<Vec<(u64, u64)>> =
-            (0..self.shards).map(|_| Vec::with_capacity(cap)).collect();
+        // Partition this buffer's entries by shard (transient -- freed at the end of the
+        // freeze). The hot search path never touches these; they are freezer-local.
+        let per_shard = self.freeze_at as usize / self.shards + 64;
+        let mut shard_pairs: Vec<Vec<(u64, u64)>> = (0..self.shards)
+            .map(|_| Vec::with_capacity(per_shard))
+            .collect();
+        // Per-segment membership Bloom, sized to the freeze threshold (lazily committed,
+        // so a partial buffer only touches `added` worth of lines). Built here from the
+        // same archive-key scan that feeds the shared prefilter.
+        let seg_bloom = Bloom::new((self.freeze_at * self.seg_bloom_bits / 8).max(64) as usize);
+        let mut added = 0u64;
         self.bufs[old].for_each_entry(|ak, val| {
-            buckets[ShardedArchive::shard_of(self.shards, ak)].push((ak, val as u64));
+            if let Some(bloom) = &self.bloom {
+                bloom.insert(ak);
+            }
+            seg_bloom.insert(ak);
+            shard_pairs[ShardedArchive::shard_of(self.shards, ak)].push((ak, val as u64));
+            added += 1;
         });
-        let added: u64 = buckets.iter().map(|b| b.len() as u64).sum();
         if added > 0 {
             self.building.store(added, Ordering::Relaxed);
-            // Phase 2 (parallel, dedicated pool): per shard set the prefilter bits, fold
-            // the new keys into the retained set, and rebuild that shard's archive.
+            // Build each shard's archive on the dedicated pool. `into_par_iter` consumes
+            // the per-shard vecs so each one frees as soon as its archive is built,
+            // keeping the transient build scratch bounded to the in-flight shards.
             let subs: Vec<Archive> = self.build_pool.install(|| {
-                (0..self.shards)
+                shard_pairs
                     .into_par_iter()
-                    .map(|sh| {
-                        if let Some(bloom) = &self.bloom {
-                            for &(ak, _) in &buckets[sh] {
-                                bloom.insert(ak);
-                            }
-                        }
-                        let mut g = self.pairs[sh].lock().unwrap();
-                        g.extend_from_slice(&buckets[sh]);
-                        Archive::build(&g, VAL_BITS, self.fp_bits, self.load)
-                    })
+                    .map(|g| Archive::build(&g, VAL_BITS, self.fp_bits, self.load))
                     .collect()
             });
-            let total: u64 = self
-                .pairs
-                .iter()
-                .map(|m| m.lock().unwrap().len() as u64)
-                .sum();
-            // Publish the new segment via the raw pointer; keep it (and the prior one)
-            // alive for the grace window, drop anything older.
-            let arch = Arc::new(ShardedArchive::from_shards(subs));
-            let raw = Arc::as_ptr(&arch) as *mut ShardedArchive;
+            let archive = ShardedArchive::from_shards(subs);
+            // Cap accounts for the segment ribbon *and* its membership Bloom.
+            let bytes = archive.bits() / 8 + seg_bloom.words.len() as u64 * 8;
+            let seg = Arc::new(Segment {
+                archive,
+                bloom: seg_bloom,
+            });
+            let raw = Arc::as_ptr(&seg) as *mut Segment;
+            // Publish: hold the Arc alive for the whole run, store the pointer, then bump
+            // the count (so a reader that sees the new count also sees the pointer).
             {
-                let mut live = self.seg_live.lock().unwrap();
-                live.push(arch);
-                self.seg_ptr.store(raw, Ordering::Release);
-                while live.len() > 2 {
-                    live.remove(0);
-                }
+                let mut hold = self.seg_hold.lock().unwrap();
+                let idx = self.seg_count.load(Ordering::Relaxed);
+                hold.push(seg); // with_capacity(MAX_SEGMENTS) ⇒ never reallocates
+                self.segs[idx].store(raw, Ordering::Release);
+                self.seg_count.store(idx + 1, Ordering::Release);
             }
+            self.frozen_bytes.fetch_add(bytes, Ordering::Relaxed);
+            self.frozen_keys.fetch_add(added, Ordering::Relaxed);
             self.freezes.fetch_add(1, Ordering::Relaxed);
-            self.frozen_keys.store(total, Ordering::Relaxed);
             self.building.store(0, Ordering::Relaxed);
         }
         // The segment now answers for these keys; clear the buffer for reuse and let the

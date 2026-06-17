@@ -11,7 +11,7 @@ mod nimber;
 mod parallel;
 mod pn;
 
-pub use burr::Burr;
+pub use burr::{Burr, IsoBurr};
 pub use incremental::Incremental;
 pub use memo::{BranchingStats, Tt};
 pub use naive::Naive;
@@ -115,13 +115,28 @@ fn key_mode() -> KeyMode {
     }
 }
 
-/// Pack a 64-bit graph-isomorphism key into the table's 256-bit key slot, tagged with
-/// a sentinel bit (255) that no real `available` mask sets for n ≤ 15 -- so graph keys
-/// and D4 masks occupy disjoint key spaces and never collide when **selective** keying
-/// mixes them. (n=16 uses all 256 bits; a wider namespace would be needed there.)
+/// Pack a 64-bit graph-isomorphism key into a tagged table-key namespace. Selective
+/// keying can mix graph and D4 keys even on n=16, where no spare board bit exists, so
+/// the D4 fallback is also hashed into a disjoint tag by [`d4_bits`].
 #[inline]
 fn graph_bits(h: u64) -> Bits {
-    Bits([h, 0, 0, 1u64 << 63])
+    Bits([h, mix64(h ^ 0x9E37_79B9_7F4A_7C15), 0x150_600D_600D_600D, 0])
+}
+
+/// Tagged D4 fallback key for selective graph/D4 modes. Plain D4 mode still stores the
+/// exact 256-bit canonical mask; this fast 192-bit reduction is used only when a
+/// graph-key mode falls back to D4 and therefore needs a namespace disjoint from
+/// [`graph_bits`] on full 16x16 boards. The table/store hashes the resulting `Bits`
+/// again; this layer only separates namespaces and keeps enough D4 entropy cheaply.
+#[inline]
+fn d4_bits(k: Bits) -> Bits {
+    let w = k.0;
+    Bits([
+        w[0],
+        w[1],
+        w[2] ^ w[3].rotate_left(32) ^ 0xD4D4_D4D4_D4D4_D4D4,
+        0xD400_D4D4_D4D4_D4D4,
+    ])
 }
 
 /// Resolve the selective-keying threshold once: with `QUEENS_KEY_MAX=k`, only positions
@@ -133,6 +148,16 @@ fn key_max_avail() -> u32 {
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(u32::MAX)
+}
+
+/// Tuned default for `iso-burr`: the n=16 blend table keeps ~73% of the full iso
+/// merge while keying ~46% of positions at this threshold. `QUEENS_KEY_MAX` remains
+/// the experiment override for 6/8/9 sweeps.
+fn iso_burr_key_max_avail() -> u32 {
+    std::env::var("QUEENS_KEY_MAX")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(7)
 }
 
 /// Plies from the root that [`Parallel`] fans across rayon (resolved once at startup,
@@ -175,13 +200,14 @@ fn min_avail_for(over: Option<u32>, n: u32) -> u32 {
 
 /// CLI solver names, simplest → most sophisticated (`nimber` computes the full
 /// Sprague-Grundy value; `pn` is df-pn proof-number search).
-pub const SOLVER_NAMES: [&str; 8] = [
+pub const SOLVER_NAMES: [&str; 9] = [
     "naive",
     "memo",
     "symmetry",
     "parallel",
     "incremental",
     "burr",
+    "iso-burr",
     "nimber",
     "pn",
 ];
@@ -195,6 +221,7 @@ pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
         "parallel" => Some(Box::new(Parallel::new(bits))),
         "incremental" => Some(Box::new(Incremental::new(bits))),
         "burr" => Some(Box::new(Burr::new(bits))),
+        "iso-burr" => Some(Box::new(IsoBurr::new(bits))),
         "nimber" => Some(Box::new(Nimber::new(bits))),
         "pn" => Some(Box::new(Pn::new(bits))),
         _ => None,

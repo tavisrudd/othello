@@ -84,8 +84,27 @@ fn distinct_pairs(xs: impl Iterator<Item = (u64, u64)>) -> usize {
     v.len()
 }
 
+/// Distinct composite key count for selective D4/iso blending. The corpus is already
+/// D4-distinct, so unkeyed positions get their corpus index tagged as a unique D4
+/// class; graph-keyed positions get their iso key tagged into a separate namespace.
+fn selective_classes(iso_keys: &[u64], selected: impl Iterator<Item = bool>) -> (usize, usize) {
+    let mut keyed = 0usize;
+    let mut keys: Vec<(u8, u64)> = Vec::with_capacity(iso_keys.len());
+    for (i, use_iso) in selected.enumerate() {
+        if use_iso {
+            keyed += 1;
+            keys.push((1, iso_keys[i]));
+        } else {
+            keys.push((0, i as u64));
+        }
+    }
+    keys.sort_unstable();
+    keys.dedup();
+    (keyed, keys.len())
+}
+
 /// Time `keyfn` over the corpus, `reps` passes, black_box the accumulator and input.
-fn time_keys(corpus: &[Bits], reps: usize, keyfn: impl Fn(Bits) -> u64) -> (u128, u64) {
+fn time_keys(corpus: &[Bits], reps: usize, mut keyfn: impl FnMut(Bits) -> u64) -> (u128, u64) {
     let t = Instant::now();
     let mut acc: u64 = 0;
     for _ in 0..reps {
@@ -105,6 +124,8 @@ fn main() {
     //   reps = timing passes over corpus (default 8)
     //   mode = "bench" (default, full table) | "verify" (gate only)
     //          | "perf:fast" | "perf:ir" | "perf:canon" | "perf:components"
+    //          | "blend"
+    //          | "perf:select_pop:K" | "perf:select_maxcomp:K"
     //          | "perf:empty" (loop+black_box overhead, subtract from each impl)
     //          | "perf:build" (corpus build only — the cycle floor to subtract)
     let n: u32 = args.get(1).and_then(|s| s.parse().ok()).unwrap_or(16);
@@ -211,8 +232,97 @@ fn main() {
         return;
     }
 
+    // --- selective D4/iso blend analysis: retain a cheap D4-unique class for positions
+    // that fail the gate, and fold graph-isomorphic positions only where selected.
+    // This answers "how much of the iso merge do we keep if we only pay iso on the
+    // cheap/deep part of the tree?" Cost for chosen gates should be measured with the
+    // perf:select_* modes below.
+    if mode == "blend" {
+        eprintln!("precomputing iso keys + component maxima for blend table ...");
+        let iso_keys: Vec<u64> = corpus.iter().map(|&m| q.iso_key_fast(m)).collect();
+        let max_comp: Vec<u32> = corpus
+            .iter()
+            .map(|&m| q.iso_max_component_size(m))
+            .collect();
+        let pop: Vec<u32> = corpus.iter().map(|m| m.popcount()).collect();
+        let full_iso = distinct_count(iso_keys.iter().copied());
+        println!("\n=== SELECTIVE D4/ISO BLEND (merge retained over D4-distinct corpus) ===");
+        println!(
+            "full iso: {} D4 classes / {} iso classes = {:.3}x",
+            corpus.len(),
+            full_iso,
+            corpus.len() as f64 / full_iso.max(1) as f64
+        );
+        let pop_thresholds = [4u32, 5, 6, 7, 8, 9, 10, 12, 14, 16, 20, 24, 32];
+        println!("\nby available popcount gate (cheap today):");
+        println!(
+            "{:>6} {:>9} {:>9} {:>10} {:>10}",
+            "K", "keyed%", "classes", "merge", "retain%"
+        );
+        let full_saved = corpus.len().saturating_sub(full_iso).max(1);
+        for &k in &pop_thresholds {
+            let (keyed, classes) = selective_classes(&iso_keys, pop.iter().map(|&p| p <= k));
+            let saved = corpus.len().saturating_sub(classes);
+            println!(
+                "{:>6} {:>8.1}% {:>9} {:>9.3}x {:>9.1}%",
+                k,
+                100.0 * keyed as f64 / corpus.len().max(1) as f64,
+                classes,
+                corpus.len() as f64 / classes.max(1) as f64,
+                100.0 * saved as f64 / full_saved as f64
+            );
+        }
+        let max_thresholds = [4u32, 5, 6, 7, 8, 9, 10, 12, 14, 16, 20, 24, 32];
+        println!("\nby max component size gate (predictive, but needs decomposition):");
+        println!(
+            "{:>6} {:>9} {:>9} {:>10} {:>10}",
+            "K", "keyed%", "classes", "merge", "retain%"
+        );
+        for &k in &max_thresholds {
+            let (keyed, classes) = selective_classes(&iso_keys, max_comp.iter().map(|&m| m <= k));
+            let saved = corpus.len().saturating_sub(classes);
+            println!(
+                "{:>6} {:>8.1}% {:>9} {:>9.3}x {:>9.1}%",
+                k,
+                100.0 * keyed as f64 / corpus.len().max(1) as f64,
+                classes,
+                corpus.len() as f64 / classes.max(1) as f64,
+                100.0 * saved as f64 / full_saved as f64
+            );
+        }
+        return;
+    }
+
     // --- perf-stat single-impl modes: just run the timed loop, nothing else. ---
     let keys = corpus.len() * reps;
+    if let Some(k) = mode.strip_prefix("perf:select_pop:") {
+        let k: u32 = k.parse().expect("perf:select_pop:K requires integer K");
+        let mut selected = 0u64;
+        let (_, acc) = time_keys(&corpus, reps, |m| {
+            if m.popcount() <= k {
+                selected += 1;
+                q.iso_key_fast_nocache(m)
+            } else {
+                m.popcount() as u64
+            }
+        });
+        eprintln!("select_pop:{k} acc={acc} selected={selected} keys={keys}");
+        return;
+    }
+    if let Some(k) = mode.strip_prefix("perf:select_maxcomp:") {
+        let k: u32 = k.parse().expect("perf:select_maxcomp:K requires integer K");
+        let mut selected = 0u64;
+        let (_, acc) = time_keys(&corpus, reps, |m| {
+            if q.iso_max_component_size(m) <= k {
+                selected += 1;
+                q.iso_key_fast_nocache(m)
+            } else {
+                m.popcount() as u64
+            }
+        });
+        eprintln!("select_maxcomp:{k} acc={acc} selected={selected} keys={keys}");
+        return;
+    }
     match mode {
         "perf:build" => {
             // Build only (black_box so it isn't elided): subtract from each impl.
