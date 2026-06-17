@@ -4,6 +4,42 @@
 [burr-live](2026-06-16-burr-live-implementation.md). Persisted here (not `/tmp`) because a
 reboot is pending. Frozen binaries + A/B scripts live in `rust/bin/gen/`.
 
+## ✅ RESOLVED — root cause: ZFS ARC memory pressure (morning scrub)
+
+**The "regression" was the ZFS ARC starving the search of memory — not code, not the box's
+clocks, not hardware.** A `zpool scrub` this morning (no errors — pool healthy) read the whole
+pool into the **ARC, which ballooned to ~14.8 GB (target 15.2)**, leaving ~4 GB free on the
+26 GB box. ARC doesn't shrink after a scrub, so the pressure persisted.
+
+**Mechanism (perf-localized):** running the binary from the ZFS `target/` dir under that ARC
+costs **2.68× the cycles for identical instructions** (135.7 G both) — LLC pollution
+(cache-misses 1.5×, L1-dcache 1.66×) **plus** higher per-access DRAM latency (ARC contends the
+memory controller). iTLB/dTLB are **equal** → not TLB, not code, not build-layout, not governor
+(minor), not memory/fabric clock (all maxed under load), not memtable-THP.
+
+**Proof:** the *same binary* run from **tmpfs (`/tmp`, RAM)** = ~4,500 cyc/node / 3.4 s; from
+**ZFS** = ~12,000 / 7.3 s; **strict 6/6 path-correlated** alternation. `differing bytes: 18`
+(build-id only) between the "fast" and "slow" binaries — identical code. ARC measured 14.83 GB.
+
+**This supersedes** the "marginal HW / microcode / memory-clock / build-layout" hypotheses
+below — those were all red herrings off a single confound (binary on ZFS under ARC pressure).
+It also explains **last night's n=16-freeze OOM storm** (ARC hogging the RAM the freeze needed).
+
+**Fixes:**
+1. **Run queens from tmpfs (`/tmp`)** — 2.6× faster, free; do this for benchmarks *and* the real
+   n=16 run.
+2. **Cap the ARC** so it stops starving the search and the freeze:
+   `options zfs zfs_arc_max=6442450944` (NixOS `boot.extraModprobeConfig`); live test:
+   `echo $((6*1024**3)) | sudo tee /sys/module/zfs/parameters/zfs_arc_max; echo 3 | sudo tee /proc/sys/vm/drop_caches`.
+3. Keep the CPU governor at `performance` (reverts to `powersave` on reboot — secondary effect).
+
+**Banked wins, independent of the box:** the `madvise(MADV_HUGEPAGE)` alignment fix (commit
+`b3bc58f` — THP was never engaging) stays. The `get_cold` out-line was a non-result (its "2.6×
+regression" was this same ARC/tmpfs confound, not the change) — reverted.
+
+---
+*Investigation trail below (hypotheses raised and ruled out, in order — superseded by the above).*
+
 ## Symptom
 
 `solve 14 --distinct` regressed vs last night (22:43, run in **kitty directly**):
