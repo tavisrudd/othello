@@ -87,6 +87,30 @@ Napkin: drive the WL key from ~4200 cyc toward ~700 cyc (6×) and iso-flat's per
 falls from 5.8× to ~1× → 3.6× fewer nodes becomes a **~3× wall WIN** + eviction-free + sustained.
 Even the cache win (2.1×) alone moves 5.8× → ~3.3× (still a loss, but halves the gap).
 
+## The trilemma (the key strategic finding from this session's measurements)
+
+The flat-table route hits a real squeeze. Three properties are wanted; you get **two**:
+
+1. **Full merge → fits flat eviction-free** — needs iso on *all* graphs, incl. large ones
+   → **WL on 73% of components** (the ~4200-cyc key). iso-flat is here: fits (1.01× re-exp),
+   pays the WL wall.
+2. **Cheap per-node** — needs *selective* keying (tiny-table k≤4 only, D4 above, like
+   `fused`) → but that merges only ~73% of the merge → ~3.5B at n16 → **doesn't fit flat**
+   (28 GB > budget) → evicts → loses the sustained/no-eviction property.
+3. **Sustained (flat, no segment walk)** — what iso-flat and the flat D4 solvers have.
+
+The LSM (`iso-burr`) escapes 1↔2 by being eviction-free *regardless of fit* (segments hold
+everything) — full merge **and** cheap selective key — but pays property 3 (the segment-walk
+decay). **No free lunch:** the merge that lets you fit costs WL; the cheap key doesn't fit;
+the structure that fits cheaply (LSM) decays.
+
+**The one lever that breaks the trilemma is a cheap full-merge key** — i.e. driving the WL
+iso key down so pure-iso-flat gets all three. That is Phase 2, and the easy knobs are spent
+(#17/#18/#19, canon5/6, twin-collapse all landed); the remaining lever is **incremental
+colour-carry** (deep, do it with the user). Until then, the honest ranking at n=16 is an open
+question between iso-flat (fits+sustained, WL-taxed) and iso-burr (full-merge+cheap-key, decays)
+— resolved only by a partial-n16 wall+re-exp A/B.
+
 ## n=16 caveat (why n=14 isn't the whole story)
 
 n=14 *favors incremental*: 49M D4-distinct fits the flat table with no eviction, so incremental
