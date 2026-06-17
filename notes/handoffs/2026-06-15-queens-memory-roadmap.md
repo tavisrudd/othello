@@ -452,6 +452,18 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       shared TT (loses the 2× reuse); the staging that helps IS the iso cascade** (fits ~22 GB only
       with the iso freeze key + small per-root live TT → ~31 min). #20 KEPT (user; tune later). See
       Session-10 note.
+- [~] **`iso-flat` solver (session 2026-06-17, `241000f`) — BUILT + VALIDATED, but net LOSS @ n=14;
+      gated on the WL key.** New solver = single **pure**-iso key over a flat lockless `QueensTt` (no
+      LSM → O(1) probe, no segment-walk decay); eviction-free by **fitting** the 3.4×-merged set, not
+      freezing. n=14: SECOND, 14.83M nodes (3.60× merge), **1.01× re-exp (fits-flat confirmed)** — but
+      **~1.63× slower wall** (1.66 vs 9.65 M/s): the WL graph key is ~68× the D4 key (`iso_key_bench`
+      fast_nc ≈1236 ns ≈4200 cyc vs 62 cyc; 73% of comps need WL). **Determinant = drive the WL iso key
+      down** (`comp_canon_full`/incremental colour-carry/component cache; `iso_key_bench` = gate). n=16
+      may flip (incremental evicts there, iso-flat fits). Full write-up:
+      `notes/handoffs/2026-06-17-iso-flat-solver.md`. Existing solvers untouched.
+- [x] **Root ordering (session 2026-06-17, `0924e52`) — documented NEGATIVE.** `count --roots` proxies
+      + offline capped-replay: proxy↔shared-volume Spearman flat (|ρ|≤0.54), frag-first worse, oracle
+      only ~3.7% @ the n=16 cap regime (< 3–5% bar). Don't reorder.
 
 ## Lever backlog (sessions 4–5 reviews, prioritised)
 

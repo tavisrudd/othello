@@ -10,6 +10,13 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
+**Active thread:** [iso-flat solver](notes/handoffs/2026-06-17-iso-flat-solver.md) — new solver
+(single pure-iso key over a flat lockless TT: sustained no-decay throughput, eviction-free by
+*fitting* the merged set). Built + validated (full 3.6× merge, 1.01× re-exp at n=14), but a **net
+~1.6× wall LOSS at n=14** — the WL graph-key (~68× the D4 key) is the entire wall. **The determinant
+is Phase 2: drive the WL iso key down** (`iso_key_bench` is the gate). The iso-flat handoff holds the
+verdict + lever stack.
+
 **Next, decide with the user (not autonomous):**
 1. **Chunk 4 (BuRR archive)** — the load-bearing single-box lever: a static ribbon-retrieval layer that holds the solved set with no eviction (kills the 1.36× re-exp) and applies the 3.4× freeze-time graph-iso merge. Core landed (`rust/src/burr.rs` + `queens freeze`/`verify`); the live cascade vs ply-window integration is the open design choice → discuss scope. More/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), and a cheaper-than-graph-iso merge are the other rungs of the <30 min lever stack (roadmap).
 3. **dump/load Phase 2 (B2 full-key export)** — the Chunk-4 freeze primitive + distributed delta. Note: full-n16 *resume* loads the 17 GB TT past physical RAM into zram (this box's "swap" is `/dev/zram0`, compressed RAM, NOT disk), and random TT access pays a per-access decompress → crawls; partial-fill resumes are fine. (The 6.7 GB BuRR archive fits physical RAM, so its query path doesn't.)
