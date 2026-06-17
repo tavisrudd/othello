@@ -100,14 +100,27 @@ pub(crate) fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
     let mut v: Vec<u64> = vec![0u64; size];
     #[cfg(target_os = "linux")]
     unsafe {
-        // SAFETY: `madvise` over the live allocation; `MADV_HUGEPAGE` is advisory
-        // and only changes page backing, never contents. A failure (e.g. THP off)
-        // is a harmless no-op, so the result is ignored.
-        libc::madvise(
-            v.as_mut_ptr().cast::<libc::c_void>(),
-            std::mem::size_of_val(v.as_slice()),
-            libc::MADV_HUGEPAGE,
-        );
+        // SAFETY: `madvise(MADV_HUGEPAGE)` is advisory -- it only changes page backing,
+        // never contents. The start address MUST be page-aligned or madvise returns
+        // EINVAL, and `Vec<u64>` is only 8-byte aligned (glibc returns a pointer 16
+        // bytes past its mmap chunk header, e.g. `0x..010`), so we advise the
+        // page-aligned interior. The kernel then huge-backs the 2 MB-aligned VAs inside
+        // it; the sub-page unaligned prefix stays small-paged (negligible on a multi-GB
+        // table). Before this fix the call silently EINVAL'd on *every* table, so the
+        // random-access probe ran entirely on 4 KB pages -- the dTLB thrash this was
+        // meant to cut. The result is still ignored: a genuine no-op (THP off) is fine.
+        let base = v.as_mut_ptr() as usize;
+        let bytes = std::mem::size_of_val(v.as_slice());
+        let page = libc::sysconf(libc::_SC_PAGESIZE).max(1) as usize;
+        let aligned = base.next_multiple_of(page);
+        let off = aligned - base;
+        if bytes > off {
+            libc::madvise(
+                aligned as *mut libc::c_void,
+                bytes - off,
+                libc::MADV_HUGEPAGE,
+            );
+        }
     }
     let (ptr, len, cap) = (v.as_mut_ptr(), v.len(), v.capacity());
     std::mem::forget(v);
