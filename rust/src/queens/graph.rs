@@ -853,6 +853,31 @@ impl Queens {
         max_k
     }
 
+    /// Cold, read-only `count --roots` instrumentation: the per-root structural proxies
+    /// for one symmetry-distinct first move `sq`, returned as
+    /// `(centrality, avail_pop, frag, ncomp)`:
+    ///   - `centrality` = attack degree of the first move (its forcing weight),
+    ///   - `avail_pop`  = popcount of the residual available mask after placing `sq`,
+    ///   - `frag`       = largest connected component of that available-graph,
+    ///   - `ncomp`      = number of connected components of that available-graph.
+    ///
+    /// Lives beside [`Self::iso_max_component_size`] (same cold decomposition) so the bin
+    /// crate need not reach the hot-path-private board/attack fields or `Bits` ops.
+    pub fn root_proxies(&self, sq: u32) -> (u32, u32, u32, u32) {
+        let available = self.board.and_not(self.place(Bits::empty(), sq));
+        let centrality = self.attack[sq as usize].popcount();
+        let avail_pop = available.popcount();
+        let frag = self.iso_max_component_size(available);
+        let mut remaining = available;
+        let mut ncomp = 0u32;
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, available);
+            remaining = remaining.and_not(comp);
+            ncomp += 1;
+        }
+        (centrality, avail_pop, frag, ncomp)
+    }
+
     /// `HIST` selects, at monomorphisation time, whether to tally component sizes into
     /// `hist` -- `false` for the search's live key (the tally vanishes), `true` for the
     /// `count --comps` measurement. Keeping it a const generic (rather than a runtime

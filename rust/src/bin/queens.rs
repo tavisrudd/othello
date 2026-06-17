@@ -1802,17 +1802,24 @@ fn roots_report(q: &Queens, hll_p: u32) {
     per_root.sort_by(|a, b| b.1.cmp(&a.1));
     let sum_sizes: usize = per_root.iter().map(|(_, n)| n).sum();
 
-    // (B) multiplicity: how many roots touch each distinct position.
-    let mut mult: HashMap<u64, u32> = HashMap::with_capacity(sum_sizes / 2 + 1);
-    for (_, keys) in &sets {
+    // (B) multiplicity: how many roots touch each distinct position. We hold the
+    // per-key *root-membership bitmask* (1<<r per touching root r; nroots ≤ 36 ≤ 64) as
+    // the single source of truth — multiplicity is its `count_ones()`. One map serves
+    // both the (A)/(B) output below and the offline capped-replay model further down,
+    // keeping peak RAM to one HashMap at n=14 (several GB).
+    debug_assert!(nroots <= 64, "root-membership bitmask assumes nroots ≤ 64");
+    let mut members: HashMap<u64, u64> = HashMap::with_capacity(sum_sizes / 2 + 1);
+    for (r, (_, keys)) in sets.iter().enumerate() {
+        let bit = 1u64 << r;
         for &k in keys {
-            *mult.entry(k).or_insert(0) += 1;
+            *members.entry(k).or_insert(0) |= bit;
         }
     }
-    let union = mult.len().max(1);
+    let mult = |k: u64| -> u32 { members[&k].count_ones() };
+    let union = members.len().max(1);
     let mut hist = vec![0u64; nroots + 1];
-    for &c in mult.values() {
-        hist[c as usize] += 1;
+    for &m in members.values() {
+        hist[m.count_ones() as usize] += 1;
     }
 
     let pct = |x: u64| x as f64 / union as f64 * 100.0;
@@ -1874,6 +1881,260 @@ fn roots_report(q: &Queens, hll_p: u32) {
         commas(hist[nroots]),
         pct(hist[nroots]),
     );
+    // ── (C) per-root proxies, shared-volume, and proxy→sharing Spearman ──────────────
+    // Cold, read-only instrumentation: does any cheap per-root proxy (centrality of the
+    // first move, residual available popcount, max-component size / fragmentation, or
+    // component count) predict how much cross-root reuse a root participates in? If a
+    // proxy ranks roots the same way `shared_volume` does (|ρ| ≳ 0.7) a reorder by that
+    // proxy could front-load the shared keys; if every ρ is flat, root ordering cannot
+    // move the capped-replay number and the model below will show it.
+    struct RootRow {
+        sq: u32,
+        size: usize,
+        centrality: u32,
+        avail_pop: u32,
+        frag: u32,
+        ncomp: u32,
+        shared_volume: u64,
+    }
+    let rows: Vec<RootRow> = (0..nroots)
+        .map(|r| {
+            let sq = sets[r].0;
+            let (centrality, avail_pop, frag, ncomp) = q.root_proxies(sq);
+            let shared_volume: u64 = sets[r].1.iter().map(|&k| (mult(k) - 1) as u64).sum();
+            RootRow {
+                sq,
+                size: sets[r].1.len(),
+                centrality,
+                avail_pop,
+                frag,
+                ncomp,
+                shared_volume,
+            }
+        })
+        .collect();
+
+    // Average-rank Spearman: rank both series (ties → average rank), Pearson on ranks.
+    fn avg_ranks(xs: &[f64]) -> Vec<f64> {
+        let n = xs.len();
+        let mut idx: Vec<usize> = (0..n).collect();
+        idx.sort_by(|&a, &b| xs[a].partial_cmp(&xs[b]).unwrap());
+        let mut ranks = vec![0.0f64; n];
+        let mut i = 0;
+        while i < n {
+            let mut j = i + 1;
+            while j < n && xs[idx[j]] == xs[idx[i]] {
+                j += 1;
+            }
+            // ranks i..j are tied → average of (i+1)..=j (1-based)
+            let avg = ((i + 1 + j) as f64) / 2.0; // mean of i+1..=j
+            for &g in &idx[i..j] {
+                ranks[g] = avg;
+            }
+            i = j;
+        }
+        ranks
+    }
+    fn pearson(a: &[f64], b: &[f64]) -> f64 {
+        let n = a.len() as f64;
+        if n < 2.0 {
+            return 0.0;
+        }
+        let (ma, mb) = (a.iter().sum::<f64>() / n, b.iter().sum::<f64>() / n);
+        let (mut sab, mut saa, mut sbb) = (0.0, 0.0, 0.0);
+        for i in 0..a.len() {
+            let (da, db) = (a[i] - ma, b[i] - mb);
+            sab += da * db;
+            saa += da * da;
+            sbb += db * db;
+        }
+        let denom = (saa * sbb).sqrt();
+        if denom == 0.0 {
+            0.0
+        } else {
+            sab / denom
+        }
+    }
+    let spearman =
+        |proxy: &[f64], target: &[f64]| -> f64 { pearson(&avg_ranks(proxy), &avg_ranks(target)) };
+    let sv_f: Vec<f64> = rows.iter().map(|x| x.shared_volume as f64).collect();
+    let centr_f: Vec<f64> = rows.iter().map(|x| x.centrality as f64).collect();
+    let avail_f: Vec<f64> = rows.iter().map(|x| x.avail_pop as f64).collect();
+    let frag_f: Vec<f64> = rows.iter().map(|x| x.frag as f64).collect();
+    let ncomp_f: Vec<f64> = rows.iter().map(|x| x.ncomp as f64).collect();
+    let rho_centr = spearman(&centr_f, &sv_f);
+    let rho_avail = spearman(&avail_f, &sv_f);
+    let rho_frag = spearman(&frag_f, &sv_f);
+    let rho_ncomp = spearman(&ncomp_f, &sv_f);
+
+    println!("\n(C) per-root proxies vs cross-root shared-volume (sorted by shared_volume ↓):");
+    println!(
+        "    {:>3} {:>3} {:>3} {:>14} {:>10} {:>9} {:>5} {:>5} {:>16}",
+        "sq", "col", "row", "size", "centr", "avail", "frag", "ncmp", "shared_vol",
+    );
+    let mut by_sv: Vec<&RootRow> = rows.iter().collect();
+    by_sv.sort_by(|a, b| b.shared_volume.cmp(&a.shared_volume));
+    for row in &by_sv {
+        println!(
+            "    {:>3} {:>3} {:>3} {:>14} {:>10} {:>9} {:>5} {:>5} {:>16}",
+            row.sq,
+            row.sq % q.n,
+            row.sq / q.n,
+            commas(row.size as u64),
+            row.centrality,
+            row.avail_pop,
+            row.frag,
+            row.ncomp,
+            commas(row.shared_volume),
+        );
+    }
+    println!("\n    Spearman ρ (proxy → shared_volume) across {nroots} roots:");
+    let label_rho = |name: &str, rho: f64| {
+        let verdict = if rho.abs() >= 0.7 {
+            "predicts sharing (reorder could help)"
+        } else {
+            "flat (ordering can't help via this proxy)"
+        };
+        println!("      {name:<24} ρ = {rho:+.3}   {verdict}");
+    };
+    label_rho("centrality", rho_centr);
+    label_rho("avail_pop", rho_avail);
+    label_rho("frag (max-comp)", rho_frag);
+    label_rho("ncomp", rho_ncomp);
+
+    // ── (D) offline capped-replay Δ: does a root reorder beat the current order? ──────
+    // Models the eviction-free "frozen tier" of capacity CAP (a key count). For a root
+    // ORDER, each key is first reached at the min rank over its touching roots; sort keys
+    // by that first-seen rank; the first CAP keys are frozen (never re-expanded), the rest
+    // are live (assume eviction → every revisit misses). re_exp(order,CAP) = Σ over
+    // non-frozen keys of (mult-1). A suffix-sum of (mult-1) along the first-seen order
+    // makes a CAP sweep O(1) per CAP after one sort.
+    //
+    // Three orders compared:
+    //   (a) current  — identity (firsts in current, most-central-first search order)
+    //   (b) frag-1st — roots sorted by frag (max-component size) descending
+    //   (oracle)     — roots sorted by shared_volume descending (best achievable reorder;
+    //                  upper bound on any proxy's benefit)
+    let union_u = union as u64;
+    let sum_sizes_u = sum_sizes as u64;
+
+    // pos[r] = rank of root r within an order given as a list of root indices.
+    let pos_from_order = |order: &[usize]| -> Vec<u32> {
+        let mut pos = vec![0u32; nroots];
+        for (rank, &r) in order.iter().enumerate() {
+            pos[r] = rank as u32;
+        }
+        pos
+    };
+    // For an order, return (suffix[CAP] for CAP in 0..=union, in *first-seen* order).
+    // suffix[c] = Σ over keys ranked ≥ c (0-based, in first-seen order) of (mult-1)
+    //           = re_exp when the first c keys are frozen.
+    let suffix_for_order = |order: &[usize]| -> Vec<u64> {
+        let pos = pos_from_order(order);
+        // (first_seen_rank, mult-1) per key.
+        let mut keyed: Vec<(u32, u64)> = members
+            .iter()
+            .map(|(_, &m)| {
+                let mut first = u32::MAX;
+                let mut mm = m;
+                while mm != 0 {
+                    let r = mm.trailing_zeros() as usize;
+                    first = first.min(pos[r]);
+                    mm &= mm - 1;
+                }
+                (first, (m.count_ones() - 1) as u64)
+            })
+            .collect();
+        keyed.sort_by_key(|x| x.0);
+        // suffix-sum from the tail: suffix[c] = Σ_{i ≥ c} reexp_i.
+        let mut suffix = vec![0u64; keyed.len() + 1];
+        for i in (0..keyed.len()).rev() {
+            suffix[i] = suffix[i + 1] + keyed[i].1;
+        }
+        suffix
+    };
+
+    let order_current: Vec<usize> = (0..nroots).collect();
+    let mut order_frag: Vec<usize> = (0..nroots).collect();
+    order_frag.sort_by(|&a, &b| rows[b].frag.cmp(&rows[a].frag));
+    let mut order_oracle: Vec<usize> = (0..nroots).collect();
+    order_oracle.sort_by(|&a, &b| rows[b].shared_volume.cmp(&rows[a].shared_volume));
+
+    let suf_a = suffix_for_order(&order_current);
+    let suf_b = suffix_for_order(&order_frag);
+    let suf_o = suffix_for_order(&order_oracle);
+    // re_exp(order, CAP) = suffix[min(CAP, union)].
+    let re_exp = |suf: &[u64], cap: usize| -> u64 { suf[cap.min(union)] };
+
+    // Sanity invariants.
+    let inv_full = re_exp(&suf_a, union); // expect 0
+    let inv_zero = re_exp(&suf_a, 0); // expect sum_sizes - union
+    println!("\n(D) offline capped-replay Δ (frozen-tier cap, eviction-free below CAP):");
+    println!("    sanity invariants (current order):");
+    println!(
+        "      CAP=union  re_exp = {:>14}  (expect 0)                {}",
+        commas(inv_full),
+        if inv_full == 0 { "✓" } else { "✗ MISMATCH" },
+    );
+    println!(
+        "      CAP=0      re_exp = {:>14}  (expect Σ−union = {})  {}",
+        commas(inv_zero),
+        commas(sum_sizes_u - union_u),
+        if inv_zero == sum_sizes_u - union_u {
+            "✓"
+        } else {
+            "✗ MISMATCH"
+        },
+    );
+
+    let caps = [0.30, 0.40, 0.48, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00];
+    let ratio = |re: u64| -> f64 { (union_u + re) as f64 / union_u as f64 };
+    println!(
+        "\n    union = {} keys · total_exp(order) = union + re_exp(order) · CAP = frac·union",
+        commas(union_u),
+    );
+    println!(
+        "    {:>5} {:>14} {:>14} {:>14} | {:>8} {:>8}",
+        "frac", "re_exp(a)", "re_exp(b)", "re_exp(oracle)", "Δ(a−b)", "Δ(a−orc)",
+    );
+    println!(
+        "    {:>5} {:>14} {:>14} {:>14} | {:>8} {:>8}",
+        "", "[ratio]", "[ratio]", "[ratio]", "%totexp", "%totexp",
+    );
+    for &frac in &caps {
+        let cap = (frac * union_u as f64).round() as usize;
+        let (ra, rb, ro) = (
+            re_exp(&suf_a, cap),
+            re_exp(&suf_b, cap),
+            re_exp(&suf_o, cap),
+        );
+        let total_a = (union_u + ra).max(1) as f64;
+        let d_ab = (ra as f64 - rb as f64) / total_a * 100.0;
+        let d_ao = (ra as f64 - ro as f64) / total_a * 100.0;
+        let mark = if (frac - 0.48).abs() < 1e-9 {
+            " ← n=16 cap"
+        } else {
+            ""
+        };
+        println!(
+            "    {:>5.2} {:>14} {:>14} {:>14} | {:>+7.2}% {:>+7.2}%{}",
+            frac,
+            commas(ra),
+            commas(rb),
+            commas(ro),
+            d_ab,
+            d_ao,
+            mark,
+        );
+        println!(
+            "    {:>5} {:>13.3}× {:>13.3}× {:>13.3}× |",
+            "",
+            ratio(ra),
+            ratio(rb),
+            ratio(ro),
+        );
+    }
+
     println!("\n  elapsed: {:.1}s", t.elapsed().as_secs_f64());
 }
 
