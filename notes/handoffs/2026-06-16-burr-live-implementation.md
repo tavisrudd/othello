@@ -8,6 +8,118 @@ faster-than-incremental + >7.5 M/s n=16, then ratchet 8–9 → 12 M/s, profilin
 (the `incremental` kernel this reuses). Code: `rust/src/queens/store.rs` (the store),
 `rust/src/queens/solver/burr.rs` (the solver), `rust/src/burr.rs` (the BuRR archive).
 
+## Handoff Note — session `2026-06-17--1` (`c90de881-4087-4226-957c-50062a2b74c1`): **`fused` solver + bloom-skip; the sub-20min push** (commit `a058057`)
+
+**Goal this session:** a solver that breaks the n=16 **20-minute** barrier (iso-burr is 29m23s).
+**Mode:** intent-based (`mi`), user authorized arch calls.
+
+**The lede:** built **`fused`** — `incremental`'s A3 kernel + BuRR store + **ONE key per node**
+(tiny-table iso for `avail<=iso_max`, else incremental D4), vs iso-burr's d4-then-iso **double
+probe**. Committed, all gates green, n=16 verdict **correct** (second player, matches Jenrich).
+
+**BUT fused is ~30% SLOWER than iso-burr at n=16 (the headline negative).** Full run at iso-burr's
+exact config (`MEM_BITS=26 CAP=14 KEY_MAX=6`): **38m26s / 8.79B nodes** vs iso-burr **29m23s /
+4.32B**. fused does **2.0× the nodes** — re-exp ~2.0× vs iso-burr's 1.15×. The pre-cap A/B (fused
+4.04/4.38 vs iso-burr 3.51/3.35 M/s) was real but **misleading**: it never reached the eviction
+regime. **Root cause (my design error): iso-burr's double-keying is not just an iso-recompute
+cache — it is 2-way EVICTION REDUNDANCY.** A small (deep, heavily-reused) position has two entries
+in the evicting memtable (d4 + iso) and survives eviction if *either* slot survives; fused's single
+key has one chance → higher post-cap eviction → ~2× re-exp on exactly the recurring-endgame
+positions that matter most. So **fused's single-key trades post-cap resilience for pre-cap probe
+speed, and at n=16-cap-bound that trade is net-NEGATIVE.** fused wins only when the cap does NOT
+bind (n=14, or n=16 post-merge / with enough RAM). **Disposition: keep iso-burr as the cap-bound
+n=16 default; fused is the no-cap-regime solver. The binding constraint is the CAP (storage) — the
+real <20-min lever is removing it (merge → fewer keys → fits RAM → no eviction → fused wins).**
+
+**What landed (commit `a058057`):**
+- **`fused` solver** (`rust/src/queens/solver/fused.rs`, wired in `solver/mod.rs`, `queens/mod.rs`,
+  `bin/queens.rs`; in `SOLVER_NAMES`, `make_solver`, `--list-engines`, `--distinct`). Single
+  `node_key()` threaded through the recursion like `burr`. Added to `solver_lineage_agrees`.
+- **Bloom-skip when `seg_count==0`** (`store.rs` `get`/`prefetch`) — every *pre-freeze* node was
+  paying a cold multi-GB shared-Bloom probe for nothing. Fused freeze-free **+18% at T=12**. Helps
+  burr/iso-burr too. Sound (seg_count monotonic; racing freeze only re-expands).
+
+**Load-bearing findings (measured this session):**
+1. **The "half the store" win is a n=12 artifact.** At n=12 fused fill = 489,927 vs iso-burr
+   1,039,505 (½). At **n=16 it's ≈ equal** (~1.83B keys both) — because with `KEY_MAX=6` the vast
+   majority of n=16 nodes are *large* (avail>6), keyed d4 in **both** solvers; only the avail≤6 tail
+   double-keys. So fused's edge at n=16 is **nodes/sec + fewer segments, NOT capacity.**
+2. **STORAGE / re-exp is the binding constraint at n=16.** The ~3.8B-key set doesn't fit RAM at
+   ~60 bits/key → store caps at 14GB (holds ~48%) → re-exp dominates wall-clock. *Neither* fused
+   nor iso-burr fits it eviction-free in 26GB at fp=44. To fit (re-exp→1.0) needs **~34 bits/key**.
+3. **`MEM_BITS=27` is a TRAP** — two full runs at `MEM_BITS=27/28` blew re-exp to ~2.0× (vs
+   iso-burr's 1.15× at `MEM_BITS=26`) and ran ~40min+. Cause not fully isolated (bigger memtable
+   *should* help, not hurt — likely a cap-timing or RSS/zram interaction); **use `MEM_BITS=26`**.
+   The matched-config A/B proves fused *itself* is fine; the blowup was config, not the solver.
+4. **Amdahl / core usage** (T=24 thread-scaling, freeze-free): fused scales to ~3.1× over T=1
+   (~15–19 cores busy); incremental ~4.4× (~19.6 busy) — the BuRR path uses cores worse. BUT
+   **finer work-stealing backfires**: lowering `min_avail` 96→24 raises cores-busy (18.8→22.4) and
+   *lowers* throughput (5.76→4.64 M/s) — extra cores burn split/steal overhead. Default
+   `par_depth=3/min_avail=96` is throughput-optimal. **The idle cores are genuine serial fraction
+   (the move-0 subtree's parity-limited internal parallelism) — don't force them; give them aux
+   work (see Lever B below).**
+
+**The <20-min lever stack (decided with user; next session):**
+
+- **★ Lever A — edge-code small-component table (the dual-purpose lever).** Make the per-component
+  iso canon an **O(1) array lookup** by extending the eager `small_canon_table` (edge_code→canon,
+  currently `SMALL_CANON_MAX=7` in `graph.rs`) to **k≤8** (2^28 codes; **bit-pack to value width →
+  1 bit win/loss = 33MB, or 4-bit nimber = 134MB** — the "2GB" fear was a u64 strawman). `edge_code`
+  is a *complete* index (full labelled graph, no merge hazard); the wall is the universe
+  2^(k choose 2), not the values. This replaces WL for k=5–8 components (the ~6800-cyc cost that put
+  iso ~2.2× underwater — iso-key handoff lever #1) → cheap **full-iso** merge live → ~2.2B keys →
+  **fits RAM at fp=36 → re-exp→1.0** → fused's per-node speed wins outright (likely <20, maybe well
+  under). *Dual-purpose: cheaper key (speed) AND fewer keys (fits RAM, kills re-exp).* For k≥9 the
+  dense universe is infeasible (2^36) → store only *realized* queen-component structures sparsely
+  via MPH / BuRR-value-only on a cheap-complete key for the realized subset.
+- **Lever B — background bottom-up nimber DB (uses the idle cores; the Amdahl reframe).** Same
+  edge-code table but holding **nimbers**, built bottom-up (retrograde by component size) on the
+  structurally-idle cores. Hot loop resolves a fragmented position by decompose→lookup→**XOR**→win
+  iff ≠0, *no recursion*. Merges by **value** (below the iso floor — two non-isomorphic components
+  with equal nimber collapse; roadmap #8, floor-doc §1). Bottom-up build is **embarrassingly
+  parallel** → directly attacks the parity-limited top-down Amdahl ceiling.
+- **GATE both on `count --comps`** (already exists): what fraction of deep nodes decompose into
+  components ≤8? If most carry one big component, the table rarely hits (the roadmap's "#8
+  decomposition dead" is the *full* graph; deep fragmentation is the open, measurable question —
+  handoff hint: "70.6% of components are k≥5"). The COMP_CACHE's low hit rate (+3.7%) is NOT a
+  blocker — it keys on *square-set*; `edge_code`/structure keying is the fix it itself called "the
+  prize."
+
+**Storage / Elias-Fano analysis (user asked):** for the *archive*, EF/encoding ≈ **1.1–1.2×** over
+BuRR-with-fp (you still pay ~fp bits for absence-detection when membership is unknown) — marginal,
+**not the lever**. fp tuning 44→36 ≈ 1.2× (safety-floored at fp≥36 for ~4.3B probes; n=16's Jenrich
+cross-check catches a flip, n=18 can't). The order-of-magnitude levers are **more merge** (~1.7×,
+fits the set — Lever A) and **drop the fingerprint via known membership** (ply-windowed DDD →
+fp→0 → ~1.1 bits/key, **~50×** — roadmap/SoA §Q1.3, the n=18 path). **EF's genuine home is the n=18
+external-memory DDD per-ply sorted key streams** (monotone sets + successor queries).
+
+**Banked also (commit `2d783f1`):** bloom per-check cost cut — `locate()` now does **one
+`mix64` + Lemire fastrange** (multiply-high) instead of 2×`mix64` + an integer division
+(`h % blocks`, the dominant ~20-40 cyc per-check cost), with the 8 in-block positions from a
+multiply-seeded rotate/xor chain (Kirsch-Mitzenmacher, FP-preserving). Helps every miss-path
+bloom *and* the O(seg_count) per-segment-bloom hit-walk. Gates green; n=16 sanity burst no FP
+regression. `fastrange` is now `pub(crate)` in `burr.rs`.
+
+**Lever #3 (segment directory) is REVERSED — do NOT build it.** A collision-light `hash(ak)→seg_id`
+directory needs ~7 GB (vs the ~2.6 GB of per-seg blooms it replaces) → net +4.8 GB; but RAM is the
+binding constraint (cap → re-exp). A RAM-neutral directory (load ~1.4) → catastrophic missed-hit
+re-exp; a usable one shrinks the cap → *more* re-exp. So it trades away the binding resource. The
+RAM-free hit-walk speedup is the per-seg-bloom *prefetch* (lever #2), but that's a per-node
+sideshow vs re-exp.
+
+**Next steps (re-exp is the binding constraint; attack it, not per-node speed):**
+1. **Cheap/free:** A/B `QUEENS_BURR_FP=36` (ribbon ~60→~50 b/key → ~1.2× more keys fit → ~1.2× lower
+   re-exp; safe under the n=16 Jenrich cross-check).
+2. **★ The real <20-min lever — Lever A (component table):** `count --comps` fragmentation gate
+   first (what fraction of deep nodes decompose into components ≤8?); if it passes, extend
+   `small_canon_table` to k≤8 (bit-packed: 1-bit win/loss = 33 MB, 4-bit nimber = 134 MB), switch to
+   component-decompose keying for **full-iso merge** → ~2.2B keys → fits RAM at fp=36 → **no cap →
+   re-exp 1.0** → then fused's single-key (no redundancy needed when nothing evicts) wins outright.
+3. **Lever B (background nimber DB)** once A lands — value-merge below iso, on the idle cores.
+4. **Disposition:** iso-burr stays the cap-bound n=16 default (its double-key eviction redundancy);
+   fused is the no-cap-regime solver. **Do NOT** fire `MEM_BITS≥27` runs. **Runs go in tmux session
+   `queens`** (new window per run; keep window 1 `bash` live) so they're monitorable.
+
 ## Handoff Note — session `2026-06-16--9`: **n=16 SOLVED, freeze OOM fixed** (commit `64d86db`)
 
 **The lede:** iso-burr now **solves n=16 — second player wins** (matches Jenrich), in
