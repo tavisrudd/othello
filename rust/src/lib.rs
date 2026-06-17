@@ -13,6 +13,7 @@
 //! assert!(best != 0);
 //! ```
 
+pub mod affinity;
 pub mod burr;
 pub mod cli;
 pub mod core;

@@ -421,6 +421,9 @@ impl BurrStore {
                 build_pool: rayon::ThreadPoolBuilder::new()
                     .num_threads(build_threads_env())
                     .thread_name(|i| format!("burr-build-{i}"))
+                    // Confine segment building to the efficiency cores so a freeze never
+                    // steals a performance core from the search (no-op unless engaged).
+                    .start_handler(|_| crate::affinity::pin_aux("burr-build"))
                     .build()
                     .expect("build pool"),
                 fill: AtomicU64::new(0),
@@ -642,7 +645,10 @@ impl BurrStore {
         s.active.store((old ^ 1) as u8, Ordering::Release);
         s.fill.store(0, Ordering::Relaxed);
         let inner = Arc::clone(&self.inner);
-        std::thread::spawn(move || inner.freeze_buffer(old));
+        std::thread::spawn(move || {
+            crate::affinity::pin_aux("burr-freeze"); // orchestrator off the perf cores too
+            inner.freeze_buffer(old)
+        });
     }
 
     // -- Solver-facing reporting --

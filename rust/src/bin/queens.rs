@@ -640,6 +640,9 @@ fn watch(
     phase: Phase,
     done: &AtomicBool,
 ) {
+    // Housekeeping thread: keep it off the performance cores so it never preempts a search
+    // worker on a high-clock core (no-op unless affinity is engaged).
+    othello::affinity::pin_aux("watcher");
     let clear = || {
         if bar {
             eprint!("\r\x1b[K"); // carriage return + clear-to-end-of-line
@@ -1364,6 +1367,9 @@ fn do_checkpoint(
 }
 
 fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
+    // Resolve + apply CPU affinity for this board before building the pool/store or
+    // searching (gated to n >= 16 under `auto`; see `othello::affinity`).
+    othello::affinity::configure(q.n);
     let bits = tt_bits(q.n);
     // --distinct reports the re-expansion ratio (nodes ÷ distinct). For even
     // boards n ≤ 12 the distinct count is already known *exactly* (the table), so
