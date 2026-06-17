@@ -1,2 +1,4 @@
 queens-2d783f1  2026-06-17T10:36:22-07:00  sha256:9cfc9f5700b36ada  (current HEAD 9758ad5; code==2d783f1; znver5+mold; solvers: all incl fused+iso-burr)
 queens-1c6f390  2026-06-17T11:21:33-07:00  sha256:3e66e98cf65c480c  (LAST-NIGHT code: no fused, no madvise fix; A/B baseline)
+queens-05debb5  burr pre-append-only-rewrite (orig single-segment); 22:43-era code (was 13.6 M/s, now 6.7 — box 2x)
+queens-8edc10a  first burr commit; fastest lineage (9670 cyc/node) — no bloom-prefetch yet

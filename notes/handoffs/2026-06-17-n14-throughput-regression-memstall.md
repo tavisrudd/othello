@@ -185,6 +185,41 @@ platform).** Early AMD AI 300 / Strix Point BIOSes have known fabric/memory powe
 bugs; a newer BIOS is the most likely real fix. Until resolved, **benchmarks run on a ~1.5×
 memory-degraded box** — the code/queens work is unaffected; size numbers accordingly.
 
+## Clocks at MAX under load + burr lineage A/B (the dual conclusion)
+
+**amdgpu_top under full 24-thread burr load:** `GFX_MCLK 2800 MHz` (max), `FCLK 1960 MHz`
+(max), `UCLK 2800`, cores 3282–3705 MHz, 63 °C. → **memory/fabric clocks are NOT throttled.**
+Everything hardware-measurable is at spec.
+
+**burr lineage A/B** (`rust/bin/gen/ab_burr_lineage.sh`, n=14, perf cyc/node):
+
+| commit   | change                | cyc/node | M/s |
+|----------|-----------------------|----------|-----|
+| 8edc10a  | first burr            | 9,670    | 7.6 |
+| 05debb5  | + bloom-line prefetch | 11,590   | 6.7 |
+| 64d86db  | append-only rewrite   | 12,450   | 6.4 |
+| HEAD+fix | + bloom-skip + madvise| 11,690   | 6.8 |
+
+**Two real, separable effects:**
+1. **Box regression — dominant (~2×).** `05debb5` is the *exact code* of the 22:43 run that did
+   13.6 M/s; it now does **6.7 M/s** on the same box. Same binary, 2× slower → environmental,
+   conclusive. Even the fastest historical burr (`8edc10a`, 7.6 M/s) is ~½ of 13.6.
+2. **Code creep — secondary (~20–30% cyc/node).** `8edc10a`→`64d86db` rose 9,670→12,450. The
+   `05debb5` jump is the **bloom-line prefetch firing every node pre-freeze** (n=14 = 0 segments
+   → wasted multi-GB-bloom prefetch/node). HEAD's bloom-skip recovers ~6%. **Standalone burr
+   optimization:** fully bypass bloom/segment machinery while `seg_count==0` (the "+18%
+   freeze-free" win), independent of the box.
+
+**FINAL: a real ~2× memory-stall box regression, all hardware at spec (DDR5-5600 dual-channel,
+MCLK/FCLK maxed, cores/temps normal), persists across reboot, code-exonerated for the bulk** —
+plus a minor recoverable code creep. With the hardware all at spec + the kitty/1password
+segfaults + `CPU_OUT_OF_SPEC` taint, the box regression points at **marginal/degrading hardware
+or the microcode `0x...32→0x...37` change.** Next tests (user-driven):
+- **memtest86** (the crashes + OUT_OF_SPEC warrant it).
+- **Microcode:** boot once with `dis_ucode_ldr` (runs BIOS ucode `0x...32`); if fast → the new
+  microcode is the regression.
+- **BIOS update** (0.18 → latest; early Strix Point BIOS, likely fixes).
+
 ## Artifacts (persisted, survive reboot)
 
 - `rust/bin/gen/queens-1c6f390`  — last-night code (no fused, no madvise fix).
