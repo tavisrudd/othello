@@ -392,6 +392,16 @@ impl BurrStore {
                 return Some(v);
             }
         }
+        // No frozen segments yet ⇒ the two buffer probes were exhaustive; skip the
+        // archive-key derive *and* the (multi-GB, random-access) shared Bloom entirely.
+        // Before the first freeze every expanded node is a miss, so this removes one cold
+        // DRAM access from every node of the whole pre-freeze phase. Sound: `seg_count` is
+        // monotonic (append-only), and a racing freeze publishing after this load only
+        // costs a re-expansion (the store's miss-re-expands invariant), never a wrong value.
+        let count = s.seg_count.load(Ordering::Acquire);
+        if count == 0 {
+            return None;
+        }
         let ak = s.bufs[i].archive_key_hashed(route, fp);
         if let Some(bloom) = &s.bloom {
             if !bloom.maybe_contains(ak) {
@@ -402,7 +412,6 @@ impl BurrStore {
         // so this runs on a real hit or a shared-Bloom false positive. Each segment's own
         // Bloom skips it unless it (maybe) holds the key, so a hit probes ~one ribbon
         // rather than every segment's -- the append-only walk stays ~O(1) in segment count.
-        let count = s.seg_count.load(Ordering::Acquire);
         for slot in &s.segs[..count] {
             let p = slot.load(Ordering::Acquire);
             // SAFETY: slot `i < seg_count` was published (Release) only after its segment
@@ -443,9 +452,13 @@ impl BurrStore {
         let (route, fp) = QueensTt::hash128(key);
         let i = s.active.load(Ordering::Relaxed) as usize;
         s.bufs[i].prefetch_hashed(route);
-        // Also warm the prefilter line the upcoming `get` miss will read.
-        if let Some(bloom) = &s.bloom {
-            bloom.prefetch(s.bufs[i].archive_key_hashed(route, fp));
+        // Also warm the prefilter line the upcoming `get` miss will read -- but only once
+        // there are segments to walk (matches `get`'s seg_count==0 short-circuit; no point
+        // warming the Bloom for a phase that never reads it).
+        if s.seg_count.load(Ordering::Acquire) > 0 {
+            if let Some(bloom) = &s.bloom {
+                bloom.prefetch(s.bufs[i].archive_key_hashed(route, fp));
+            }
         }
     }
 
