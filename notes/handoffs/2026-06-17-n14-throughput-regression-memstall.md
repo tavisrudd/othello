@@ -4,38 +4,43 @@
 [burr-live](2026-06-16-burr-live-implementation.md). Persisted here (not `/tmp`) because a
 reboot is pending. Frozen binaries + A/B scripts live in `rust/bin/gen/`.
 
-## ✅ RESOLVED — root cause: ZFS ARC memory pressure (morning scrub)
+## ✅ RESOLVED — cross-CCX coherence on shared write-heavy state, gated by physical placement
 
-**The "regression" was the ZFS ARC starving the search of memory — not code, not the box's
-clocks, not hardware.** A `zpool scrub` this morning (no errors — pool healthy) read the whole
-pool into the **ARC, which ballooned to ~14.8 GB (target 15.2)**, leaving ~4 GB free on the
-26 GB box. ARC doesn't shrink after a scrub, so the pressure persisted.
+**The matrix that nails it** (n=14 burr, cyc/node — freq-independent):
 
-**Mechanism (perf-localized):** running the binary from the ZFS `target/` dir under that ARC
-costs **2.68× the cycles for identical instructions** (135.7 G both) — LLC pollution
-(cache-misses 1.5×, L1-dcache 1.66×) **plus** higher per-access DRAM latency (ARC contends the
-memory controller). iTLB/dTLB are **equal** → not TLB, not code, not build-layout, not governor
-(minor), not memory/fabric clock (all maxed under load), not memtable-THP.
+| binary \ cores | Zen5 CCX only (0,1,2,3,12,13,14,15) | all 12 cores |
+|----------------|-------------------------------------|--------------|
+| tmpfs          | **2,796**                           | 4,564 (3.6 s — best wall) |
+| ZFS            | 3,915                               | **11,960 (7.3 s)** |
 
-**Proof:** the *same binary* run from **tmpfs (`/tmp`, RAM)** = ~4,500 cyc/node / 3.4 s; from
-**ZFS** = ~12,000 / 7.3 s; **strict 6/6 path-correlated** alternation. `differing bytes: 18`
-(build-id only) between the "fast" and "slow" binaries — identical code. ARC measured 14.83 GB.
-
-**This supersedes** the "marginal HW / microcode / memory-clock / build-layout" hypotheses
-below — those were all red herrings off a single confound (binary on ZFS under ARC pressure).
-It also explains **last night's n=16-freeze OOM storm** (ARC hogging the RAM the freeze needed).
+**Root cause:** the HX 370 is heterogeneous — **4 Zen5 + 8 Zen5c cores on two CCXs with separate
+L3s**. The search hammers shared write-heavy state every node — the global `fill`/`nodes` atomics
+in `Shared` (incremented per put/bump by all 24 threads) and the shared TT lines. Confined to
+**one CCX** that coherence stays in-L3 → fast (2,800–3,900). Spread across **both CCXs** it
+bounces over the **Infinity Fabric**, and the cost is **gated by the physical placement** of that
+shared state: +63% for tmpfs-placed data, **+3× for ZFS-placed data**. So the "regression" was
+*all-cores × ZFS-placement* — not code, governor, clock, ARC, THP, TLB, faults, or ASLR (all
+ruled out by measurement). "ZFS fast last night" = the memtable landed in favorable physical
+memory pre-reboot; the reboot/scrub reshuffled it into an unfavorable spot.
 
 **Fixes:**
-1. **Run queens from tmpfs (`/tmp`)** — 2.6× faster, free; do this for benchmarks *and* the real
-   n=16 run.
-2. **Cap the ARC** so it stops starving the search and the freeze:
-   `options zfs zfs_arc_max=6442450944` (NixOS `boot.extraModprobeConfig`); live test:
-   `echo $((6*1024**3)) | sudo tee /sys/module/zfs/parameters/zfs_arc_max; echo 3 | sudo tee /proc/sys/vm/drop_caches`.
-3. Keep the CPU governor at `performance` (reverts to `powersave` on reboot — secondary effect).
+1. **Run the real n=16 + all benchmarks from tmpfs (`/tmp`), all cores** — 3.6 s, the best wall
+   (all cores *and* good placement). `cp target/release/queens /tmp/q && /tmp/q solve …`.
+2. **Real code lever (the genuine "burr win"):** kill the per-node cross-CCX coherence —
+   make the per-node `nodes`/`fill` counters **thread-local** (sum at the end) instead of one
+   shared atomic bounced across 24 threads/2 CCXs, and **separate `Shared`'s hot read-mostly
+   atomics (`active`/`seg_count`/`freezing`) from the hot write atomics (`fill`/`nodes`)** onto
+   their own cache lines (Tiger rule 6 — currently violated). This should make all-cores fast
+   regardless of placement *and* speed up the n=16 run. **Validate from tmpfs or `taskset -c
+   0,1,2,3,12,13,14,15`** so the placement noise doesn't swamp the delta.
+3. Keep governor `performance`.
 
-**Banked wins, independent of the box:** the `madvise(MADV_HUGEPAGE)` alignment fix (commit
-`b3bc58f` — THP was never engaging) stays. The `get_cold` out-line was a non-result (its "2.6×
-regression" was this same ARC/tmpfs confound, not the change) — reverted.
+**Banked:** `madvise` alignment fix (`b3bc58f`). `get_cold` reverted (its "2.6×" was this
+placement confound, not the change). **Benchmark hygiene going forward: pin to the Zen5 CCX or
+run from tmpfs — bare ZFS+all-cores numbers are unreliable (±3×).**
+
+**Earlier wrong calls in this doc:** "ARC memory pressure", "marginal HW / microcode /
+memory-clock / build-layout" — all refuted; left below as the investigation trail.
 
 ---
 *Investigation trail below (hypotheses raised and ruled out, in order — superseded by the above).*
