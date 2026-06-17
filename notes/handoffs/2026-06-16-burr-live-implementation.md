@@ -8,6 +8,70 @@ faster-than-incremental + >7.5 M/s n=16, then ratchet 8–9 → 12 M/s, profilin
 (the `incremental` kernel this reuses). Code: `rust/src/queens/store.rs` (the store),
 `rust/src/queens/solver/burr.rs` (the solver), `rust/src/burr.rs` (the BuRR archive).
 
+## Handoff Note — session `2026-06-16--9`: **n=16 SOLVED, freeze OOM fixed** (commit `64d86db`)
+
+**The lede:** iso-burr now **solves n=16 — second player wins** (matches Jenrich), in
+**29m23s** (4.32 B nodes, ~2.5 M/s steady), with **no OOM**. The freeze OOM that killed
+the 3rd root is gone.
+
+**Root cause (the OOM):** the store rebuilt **one compacted segment from a retained
+per-shard pair set on every freeze** — holding 16 b/key forever *and* re-materialising the
+whole archive each freeze (quadratic CPU, >2× peak). At n=16 on this 26 GB box it blew up.
+This was the handoff's own "Other next steps → Tiered compaction" item; it is now done.
+
+**Fix (3 changes, all in `store.rs`):**
+1. **Append-only segments (no recompaction).** Each freeze builds **one** segment from just
+   the frozen buffer and appends it to a **pre-allocated** `AtomicPtr<Segment>` table (Arcs
+   held for the whole run in a `with_capacity(MAX_SEGMENTS=8192)` Vec → hot-path raw deref
+   always valid). Prior segments never read/copied/rebuilt → freeze is **linear**, resident =
+   live segments (~6 b/key, no duplicate). Removed `pairs` retention + the `seg_live`
+   grace-ring + the single `seg_ptr`.
+2. **Hard byte cap** (`QUEENS_BURR_CAP_GB`, default 12). A freeze that would cross it (or fill
+   the table) latches `frozen_full` and **stops** — the active memtable then evicts (re-exp
+   climbs gracefully) instead of growing past RAM. Every large alloc is made once at
+   construction.
+3. **Per-segment membership Blooms** (`QUEENS_BURR_SEG_BLOOM_BITS`, default 8). The walk checks
+   a segment's own Bloom before probing its ribbon, so a frozen hit touches ~one segment
+   instead of all K. A Bloom has no false negatives ⇒ never misses a real hit (worst case: one
+   wasted probe). **~1.45–1.7× faster** than the no-bloom walk at n=16 (2.4–2.6 vs 1.66 M/s
+   instantaneous at 22 segments); flattened the throughput-vs-segment-count decline.
+
+**n=16 numbers** (`QUEENS_KEY_MAX=6 QUEENS_BURR_MEM_BITS=26 QUEENS_BURR_CAP_GB=14`, iso-burr
+`--distinct`):
+
+| metric            | value                                                        |
+|-------------------|--------------------------------------------------------------|
+| verdict           | second player wins (PV legal, 12 moves) — matches Jenrich     |
+| nodes / time      | 4,323,721,735 in 29m23s (~2.5 M/s; faster than incremental)   |
+| distinct          | ≈3.78 B (iso-merge ~2.1× under D4's ~7.9 B)                   |
+| re-expansion      | 1.15× (12.7% recomputed) — well under the flat-TT's 1.36×     |
+| store at end      | 52 segments / 1.83 B keys / 14.03 GB frozen (61.5 b/key)      |
+| memory            | RSS plateaued 17.5 GB, VmSwap 0 — cap held, no zram swapping  |
+
+**Validation (all pass):** `solver_lineage_agrees`, `burr_lsm_survives_frequent_freezes`,
+n=12 exact 1,060,823 (burr + iso-burr), n=14 second-player win (both), forced-freeze +
+cap-latch hold the verdict; clippy/fmt clean.
+
+**Review finding (handled, not actionable):** the `d4_bits`/`graph_bits` namespaces are
+disjoint by construction (word[3]=0 for graph keys vs `0xD400…` for D4); the 256→192
+`d4_bits` fold adds collisions only at ~2⁻⁶⁴, far below the accepted `fp_bits=44` archive
+false-positive floor — so the earlier "n=16 sentinel-bit-255 collision" worry is moot.
+
+**Next steps:**
+1. **Memory margin.** `CAP=14` + the *separate* shared Bloom (`0.2·cap` ≈ 2.8 GB) peaked at
+   RSS 17.5 GB / ~2 GB headroom — tight on 26 GB with zram already engaged. The in-code
+   default `CAP=12` is safer; size `CAP_GB + BLOOM_GB + 2·memtable` against free RAM, and
+   consider folding the shared-Bloom bytes into the cap accounting so one knob bounds total.
+2. **Lower re-exp** = a bigger cap (more RAM / distributed / external segments) holds more of
+   the 3.78 B set; at 14 GB it held ~48% → 1.15×. The append-only segments are the dump/load
+   + distributed-aggregate primitive.
+3. **Throughput:** the per-seg-bloom walk is still O(K) bloom-line reads per hit (52 segments
+   at n=16). Prefetch the seg-bloom lines or bound segment count if it matters. iso-key
+   instruction cost (`iso_key_bench`, the other handoff) is the orthogonal lever.
+4. **Checkpoint/resume** still unwired for burr — the immutable segments already serialize
+   (`write_to`/`read_from`), so dumping segments + the memtable would make a multi-hour / n=18
+   run resumable.
+
 ## What landed (commits `8edc10a`, `05debb5`)
 
 A new **`burr` solver** = `incremental`'s A3 node kernel (8 dihedral orientations, `lex_min8`
@@ -168,6 +232,10 @@ is a documented negative for n≤16; pivot to tiered compaction below.
 ## Knobs (all resolved once at construction)
 
 `QUEENS_BURR_MEM_BITS` (each memtable 2^bits, default = CLI bits), `_FREEZE_AT` (default 75% of a
-memtable), `_FP` (default 44), `_LOAD` (0.90), `_SHARDS` (32), `_BUILD_THREADS` (8), `_BLOOM_GB`
-(1.0; 0 disables). Bench: `QUEENS_BENCH_SECS=N` prints throughput + stats every N s to stderr even
-when the bar is off (redirected runs).
+memtable), `_FP` (default 44), `_LOAD` (0.90), `_SHARDS` (32), `_BUILD_THREADS` (8). **New in
+`64d86db`:** `_CAP_GB` (resident segment-bytes ceiling, default 12 — past it the store stops
+freezing and the memtable evicts), `_SEG_BLOOM_BITS` (per-segment membership Bloom, default 8 ≈
+1 byte/key). `_BLOOM_GB` (shared prefilter) now **defaults to `0.2·cap`** (≈10 bits/key at the
+default fp; was a flat 1.0) so it doesn't saturate at the cap; `0` disables. Bench:
+`QUEENS_BENCH_SECS=N` prints throughput + stats every N s to stderr even when the bar is off
+(redirected runs).
