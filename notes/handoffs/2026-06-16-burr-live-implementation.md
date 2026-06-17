@@ -18,7 +18,7 @@ reshuffled the memtable into unfavorable physical memory, so the shared write-he
 **Identical-code binaries (18 build-id bytes apart) swing ±3× purely by execution context** — ZFS
 vs tmpfs, all-cores vs Zen5-pin. Matrix (n=14 burr cyc/node): tmpfs/Zen5 2.8k, ZFS/Zen5 3.9k,
 tmpfs/all 4.6k, **ZFS/all 12k**. Full trail:
-[n14-throughput-regression-memstall](2026-06-17-n14-throughput-regression-memstall.md).
+[n14-throughput-regression-memstall](done/2026-06-17-n14-throughput-regression-memstall.md).
 
 **Landed:** `madvise(MADV_HUGEPAGE)` alignment fix in `tt.rs` (commit `b3bc58f` — the TT had *never*
 been THP-backed; misaligned ptr → silent EINVAL; gates green). Diagnosis note + frozen lineage
@@ -43,7 +43,7 @@ codegen-drift-from-`fused`, now disproven (`fused` did not regress burr).
 
 > **★★ NEXT SESSION — START HERE (user-queued).** The n=14 "regression" is **RESOLVED — it was the
 > box, not the code** (cross-CCX coherence × physical placement; see the session-`2026-06-17--2` note
-> above + [memstall handoff](2026-06-17-n14-throughput-regression-memstall.md)). The old isolation /
+> above + [memstall handoff](done/2026-06-17-n14-throughput-regression-memstall.md)). The old isolation /
 > codegen-drift plan is **moot**. Do these in order:
 >
 > **★ BENCH HYGIENE — apply to EVERY run/A/B below.** Trust queens numbers ONLY from **tmpfs**
