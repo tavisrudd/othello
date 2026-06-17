@@ -4,3 +4,6 @@
 *.zst
 *.zst.tmp
 *.zst.prev
+
+# Frozen per-generation queens binaries (large, generated; rebuild from the tagged commit).
+/bin/gen/queens-*

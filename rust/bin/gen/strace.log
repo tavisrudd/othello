@@ -1,0 +1,4 @@
+280775 madvise(0x7d6c2f26d010, 1073741824, MADV_HUGEPAGE) = -1 EINVAL (Invalid argument)
+280775 madvise(0x7d6c2f26d010, 1073741824, MADV_HUGEPAGE) = -1 EINVAL (Invalid argument)
+280775 madvise(0x7d6bef26c010, 1073741824, MADV_HUGEPAGE) = -1 EINVAL (Invalid argument)
+280775 madvise(0x7d6b6019a010, 2400000000, MADV_HUGEPAGE) = -1 EINVAL (Invalid argument)
