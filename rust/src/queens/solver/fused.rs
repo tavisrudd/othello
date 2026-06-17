@@ -176,7 +176,9 @@ impl Solver for Fused {
         let att = self.att(q);
         let orient = orient_of(q, q.board.and_not(blocked));
         let key = self.node_key(q, &orient);
-        self.wins_inc(q, att, &orient, key)
+        let won = self.wins_inc(q, att, &orient, key);
+        self.store.drain_local(); // sequential path: only this thread accumulated
+        won
     }
     fn first_player_wins(&self, q: &Queens) -> bool {
         if q.is_odd() {
@@ -202,10 +204,10 @@ impl Solver for Fused {
             wins
         };
         let (first, rest) = pending.split_first().unwrap();
-        if resolve(&first.0, first.1) {
-            return true;
-        }
-        rest.par_iter().any(|(co, ckey)| resolve(co, *ckey))
+        let won =
+            resolve(&first.0, first.1) || rest.par_iter().any(|(co, ckey)| resolve(co, *ckey));
+        self.store.drain_all(); // fold every worker's tail tally into the shared totals
+        won
     }
     fn nodes(&self) -> u64 {
         self.store.nodes()

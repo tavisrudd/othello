@@ -62,16 +62,53 @@ impl Hll {
         }
     }
 
+    /// The register index and ρ contribution of a key. ρ = 1 + (leading zeros of the
+    /// remaining 64-p bits); the sentinel bit at position p-1 caps ρ at 64-p+1 when
+    /// those bits are all zero. Shared by the atomic [`add`](Self::add) and the
+    /// thread-local [`add_local`](Self::add_local).
+    #[inline]
+    fn idx_rho(&self, key: Bits) -> (usize, u8) {
+        let h = Self::hash(key);
+        let idx = (h >> (64 - self.p)) as usize; // top p bits index the register
+        let rho = ((h << self.p) | (1u64 << (self.p - 1))).leading_zeros() as u8 + 1;
+        (idx, rho)
+    }
+
     /// Fold a board key in, hashed with a mixer independent of [`QueensTt::hash128`]
     /// (so the estimate is not coupled to the table's slot mapping).
     #[inline]
     pub fn add(&self, key: Bits) {
-        let h = Self::hash(key);
-        let idx = (h >> (64 - self.p)) as usize; // top p bits index the register
-                                                 // ρ = 1 + (leading zeros of the remaining 64-p bits); the sentinel bit at
-                                                 // position p-1 caps ρ at 64-p+1 when those bits are all zero.
-        let rho = ((h << self.p) | (1u64 << (self.p - 1))).leading_zeros() as u8 + 1;
+        let (idx, rho) = self.idx_rho(key);
         self.registers[idx].fetch_max(rho, Ordering::Relaxed);
+    }
+
+    /// Number of registers (`2^p`) -- the width a thread-local register slice must match.
+    #[inline]
+    pub(crate) fn register_count(&self) -> usize {
+        self.registers.len()
+    }
+
+    /// Fold a key into a **thread-local** register slice (`2^p` bytes): a plain byte
+    /// max, no atomics, no cross-core coherence -- the hot-loop form. The slice is
+    /// merged into the shared registers off the hot path by [`merge_from`](Self::merge_from).
+    #[inline]
+    pub(crate) fn add_local(&self, key: Bits, local: &mut [u8]) {
+        let (idx, rho) = self.idx_rho(key);
+        if rho > local[idx] {
+            local[idx] = rho;
+        }
+    }
+
+    /// Merge a thread-local register slice into the shared registers (register-wise
+    /// max). Called ~once a second + at drain, so the `fetch_max` traffic is off the
+    /// hot loop entirely. Idempotent (re-merging the same slice changes nothing), so
+    /// the caller need not reset its slice between merges -- only at solve end.
+    pub(crate) fn merge_from(&self, local: &[u8]) {
+        for (shared, &v) in self.registers.iter().zip(local) {
+            if v != 0 {
+                shared.fetch_max(v, Ordering::Relaxed);
+            }
+        }
     }
 
     /// The estimated number of distinct keys folded in, with the standard

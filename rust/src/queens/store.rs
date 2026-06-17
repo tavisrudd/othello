@@ -78,8 +78,45 @@
 use super::*;
 use crate::burr::{fastrange, Archive, ShardedArchive};
 use rayon::prelude::*;
+use std::cell::RefCell;
 use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicU64, AtomicU8, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
+
+/// Upper bound on the per-worker flush threshold (`Shared::flush_nodes`): the search
+/// pushes its thread-local tallies into the shared atomics + HLL at most once per this
+/// many nodes per worker. At the production node rate (~10^5-10^6 nodes/s/worker) this
+/// lands the shared-state update on the order of once a second -- the cadence the live
+/// progress bar and freeze trigger need, without a per-node clock read. The actual
+/// threshold is the smaller of this and a memtable-headroom bound (see [`BurrStore::build`]).
+const FLUSH_NODES_MAX: u64 = 1 << 18;
+
+/// Conservative ceiling on the worker count used to split the memtable headroom into a
+/// safe per-worker flush threshold. Real pools here are ≤ 24; 64 keeps the aggregate
+/// unflushed inserts under the headroom for any pool up to that size, so the memtable
+/// cannot overrun before the workers flush -- regardless of how many actually run.
+const FLUSH_WORKER_CEIL: u64 = 64;
+
+/// Per-worker, **non-atomic** accumulators for the hot-loop counters and the distinct
+/// estimator. Each rayon worker owns one (thread-local), so the per-node path only ever
+/// increments plain integers / takes a byte max here -- no atomics, no shared writes, no
+/// cross-core coherence. Flushed into the shared atomics + HLL once every
+/// `Shared::flush_nodes` nodes (≈ once a second) and drained at search end.
+struct Acc {
+    /// Visited-node count since the last flush.
+    nodes: u64,
+    /// Insert count since the last flush (drives the freeze trigger when flushed).
+    fill: u64,
+    /// Thread-local HLL registers (`2^p` bytes), or empty when this store isn't counting.
+    /// Lazily sized to the shared estimator's width on first feed and merged by max, so
+    /// it is reset only at drain (so a later solve in the same process starts clean).
+    hll: Vec<u8>,
+}
+
+thread_local! {
+    static ACC: RefCell<Acc> = const {
+        RefCell::new(Acc { nodes: 0, fill: 0, hll: Vec::new() })
+    };
+}
 
 /// Archive value width: win/loss is one bit (matches the CLI `freeze`'s
 /// `ARCHIVE_VAL_BITS`). A nimber store would widen this.
@@ -194,12 +231,22 @@ struct Shared {
     /// Owns the segment Arcs for the whole run (never dropped ⇒ hot-path raw derefs stay
     /// valid). `with_capacity(MAX_SEGMENTS)`, so a freeze's `push` never reallocates.
     seg_hold: Mutex<Vec<Arc<Segment>>>,
+    /// Pre-allocated shard-partition scratch for [`Shared::freeze_buffer`], reused (cleared,
+    /// never re-allocated) across freezes so a freeze does no ~`freeze_at`-sized allocation
+    /// (was a fresh ~`freeze_at`×16 B `Vec`-of-`Vec`s every freeze -- the big per-freeze RSS
+    /// wobble). Freezes are serialized by `freezing`, so the buffer is uncontended; the
+    /// `Mutex` only satisfies shared-ref interior mutability.
+    freeze_scratch: Mutex<Vec<Vec<(u64, u64)>>>,
     /// Bits per key in each per-segment membership Bloom (resolved once). Wider = lower
     /// false-positive rate (fewer wasted probes) at more memory.
     seg_bloom_bits: u64,
     /// Prefilter over all frozen keys. `None` disables it.
     bloom: Option<Bloom>,
     freeze_at: u64,
+    /// Per-worker flush threshold: a worker pushes its thread-local tallies into the
+    /// shared atomics + HLL once it has accumulated this many nodes (see [`Acc`]).
+    /// Resolved once so it is never recomputed per node.
+    flush_nodes: u64,
     fp_bits: u32,
     load: f64,
     shards: usize,
@@ -233,11 +280,21 @@ pub struct BurrStore {
     inner: Arc<Shared>,
 }
 
+/// Default ceiling on the memtable size (per buffer = `2^bits` slots × 8 B, **×2
+/// buffers**). The memtable is a *working window* that gets frozen into segments, NOT
+/// the full transposition table -- so it must not inherit `tt_bits(n)`, which sizes a
+/// *flat* TT to the whole distinct-position count. At n=16 `tt_bits` clamps to
+/// `MAX_TT_BITS` (31) ⇒ 16 GiB/buffer ⇒ **32 GiB resident after the first freeze**
+/// (`QueensTt::clear` memsets, it does not decommit) ⇒ OOM on a 26 GB box. 26
+/// (= 512 MiB/buffer, 1 GiB for both) is the measured-good value (the 29m23s n=16
+/// run); raise it with `QUEENS_BURR_MEM_BITS` on a larger-RAM box.
+const BURR_MEM_BITS_DEFAULT_CAP: u32 = 26;
+
 fn mem_bits_for(bits: u32) -> u32 {
     std::env::var("QUEENS_BURR_MEM_BITS")
         .ok()
         .and_then(|s| s.parse().ok())
-        .unwrap_or(bits)
+        .unwrap_or(bits.min(BURR_MEM_BITS_DEFAULT_CAP))
         .max(1)
 }
 
@@ -317,6 +374,19 @@ impl BurrStore {
         let mem_slots = QueensTt::new(mb).capacity().0;
         let shards = shards_env();
         let cap = cap_bytes_env();
+        let freeze_at = freeze_at.unwrap_or_else(|| freeze_at_for(mem_slots));
+        // Flush each worker before the aggregate unflushed inserts could overrun the
+        // memtable: bound the per-worker threshold by the headroom (mem_slots - freeze_at)
+        // split across the worker ceiling, then cap at FLUSH_NODES_MAX (≈ once a second).
+        // The headroom bound auto-shrinks for the tiny forced-freeze test tables, so they
+        // still freeze on schedule rather than overfilling before the first flush.
+        let headroom = mem_slots.saturating_sub(freeze_at).max(1);
+        // Also never let a worker accumulate more than ~`freeze_at` nodes before a flush,
+        // so the freeze trigger still fires on schedule when `freeze_at` is tiny (the
+        // forced-freeze test path). Production (`freeze_at` ~5*10^7) is unaffected.
+        let flush_nodes = (headroom / FLUSH_WORKER_CEIL)
+            .clamp(1, FLUSH_NODES_MAX)
+            .min(freeze_at.max(1));
         BurrStore {
             inner: Arc::new(Shared {
                 bufs: [QueensTt::new(mb), QueensTt::new(mb)],
@@ -327,12 +397,20 @@ impl BurrStore {
                     .into_boxed_slice(),
                 seg_count: AtomicUsize::new(0),
                 seg_hold: Mutex::new(Vec::with_capacity(MAX_SEGMENTS)),
+                // Reserve the per-freeze shard scratch up front (one Vec per shard, each
+                // sized to a shard's worth of a full buffer) so no freeze ever allocates it.
+                freeze_scratch: Mutex::new(
+                    (0..shards)
+                        .map(|_| Vec::with_capacity(freeze_at as usize / shards + 64))
+                        .collect(),
+                ),
                 seg_bloom_bits: seg_bloom_bits_env(),
                 bloom: {
                     let b = bloom_bytes_env(cap);
                     (b > 0).then(|| Bloom::new(b))
                 },
-                freeze_at: freeze_at.unwrap_or_else(|| freeze_at_for(mem_slots)),
+                freeze_at,
+                flush_nodes,
                 fp_bits: fp_bits_env(),
                 load: load_env(),
                 shards,
@@ -383,7 +461,16 @@ impl BurrStore {
     pub fn get(&self, key: Bits) -> Option<u8> {
         let s = &self.inner;
         if let Some(c) = &s.counter {
-            c.feed(key);
+            // Fold the key into this worker's *local* HLL registers (a plain byte max,
+            // no atomics) -- merged into the shared estimator off the hot loop (flush /
+            // drain). Lazily sized to the estimator width on first feed.
+            ACC.with(|cell| {
+                let mut a = cell.borrow_mut();
+                if a.hll.len() != c.hll.register_count() {
+                    a.hll = vec![0u8; c.hll.register_count()];
+                }
+                c.hll.add_local(key, &mut a.hll);
+            });
         }
         // One `hash128` for the whole query: the active probe, the other-buffer probe,
         // and the archive key all reuse it (was hashed twice per miss).
@@ -442,14 +529,70 @@ impl BurrStore {
         let (route, fp) = QueensTt::hash128(key);
         let i = s.active.load(Ordering::Relaxed) as usize;
         s.bufs[i].put_hashed(route, fp, val);
-        if s.fill.fetch_add(1, Ordering::Relaxed) + 1 >= s.freeze_at {
-            self.maybe_freeze();
+        // Count the insert in this worker's local tally; the freeze trigger fires when
+        // it is flushed into the shared `fill` (see `flush_acc`) -- no per-insert atomic.
+        ACC.with(|cell| cell.borrow_mut().fill += 1);
+    }
+
+    /// Count a visited node in this worker's local tally and, once it has accumulated
+    /// `flush_nodes` of them (≈ once a second), push the tally into the shared atomics +
+    /// HLL. The per-node path touches only thread-local memory -- no atomics, no sharing.
+    #[inline]
+    pub fn bump(&self) {
+        let s = &self.inner;
+        ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            a.nodes += 1;
+            if a.nodes >= s.flush_nodes {
+                self.flush_acc(&mut a);
+            }
+        });
+    }
+
+    /// Push a worker's local tally into the shared atomics + HLL and reset it. The
+    /// `fill` add is the sole freeze trigger now. Called once per `flush_nodes` nodes and
+    /// at drain -- off the per-node path. (Caller holds the thread-local borrow.)
+    fn flush_acc(&self, a: &mut Acc) {
+        let s = &self.inner;
+        if a.nodes > 0 {
+            s.nodes.fetch_add(a.nodes, Ordering::Relaxed);
+            a.nodes = 0;
+        }
+        if a.fill > 0 {
+            let added = a.fill;
+            a.fill = 0;
+            if s.fill.fetch_add(added, Ordering::Relaxed) + added >= s.freeze_at {
+                self.maybe_freeze();
+            }
+        }
+        if !a.hll.is_empty() {
+            if let Some(c) = &s.counter {
+                c.hll.merge_from(&a.hll);
+            }
         }
     }
 
-    #[inline]
-    pub fn bump(&self) {
-        self.inner.nodes.fetch_add(1, Ordering::Relaxed);
+    /// Flush every rayon worker's accumulators into the shared state and clear their
+    /// local estimators. Run once after a parallel search so `nodes()` / the distinct
+    /// report are exact (the hot loop flushes only ≈ once a second) and a later solve in
+    /// the same process starts from clean per-worker HLLs.
+    pub fn drain_all(&self) {
+        // `broadcast` runs on the pool workers; the main thread (which ran the sequential
+        // prologue) is not one of them, so drain it separately.
+        rayon::broadcast(|_| ACC.with(|cell| self.drain_acc(&mut cell.borrow_mut())));
+        ACC.with(|cell| self.drain_acc(&mut cell.borrow_mut()));
+    }
+
+    /// Drain only the calling thread's accumulator (the sequential `wins` path).
+    pub fn drain_local(&self) {
+        ACC.with(|cell| self.drain_acc(&mut cell.borrow_mut()));
+    }
+
+    fn drain_acc(&self, a: &mut Acc) {
+        self.flush_acc(a);
+        // The local registers are kept by max between flushes; clear them so a later
+        // solve in this process does not inherit this solve's distinct keys.
+        a.hll.iter_mut().for_each(|b| *b = 0);
     }
 
     #[inline]
@@ -572,12 +715,13 @@ impl Shared {
     /// `freezing` gate) until its keys are in the published segment -- so the hot set is
     /// never wiped. Prior segments are untouched (append-only -- no recompaction).
     fn freeze_buffer(&self, old: usize) {
-        // Partition this buffer's entries by shard (transient -- freed at the end of the
-        // freeze). The hot search path never touches these; they are freezer-local.
-        let per_shard = self.freeze_at as usize / self.shards + 64;
-        let mut shard_pairs: Vec<Vec<(u64, u64)>> = (0..self.shards)
-            .map(|_| Vec::with_capacity(per_shard))
-            .collect();
+        // Partition this buffer's entries by shard, into the pre-allocated scratch reused
+        // across freezes (cleared, never re-allocated). Freezes are serialized by
+        // `freezing`, so this lock is uncontended; the hot search path never touches it.
+        let mut shard_pairs = self.freeze_scratch.lock().unwrap();
+        for v in shard_pairs.iter_mut() {
+            v.clear(); // retains capacity ⇒ this freeze allocates nothing here
+        }
         // Per-segment membership Bloom, sized to the freeze threshold (lazily committed,
         // so a partial buffer only touches `added` worth of lines). Built here from the
         // same archive-key scan that feeds the shared prefilter.
@@ -593,13 +737,16 @@ impl Shared {
         });
         if added > 0 {
             self.building.store(added, Ordering::Relaxed);
-            // Build each shard's archive on the dedicated pool. `into_par_iter` consumes
-            // the per-shard vecs so each one frees as soon as its archive is built,
-            // keeping the transient build scratch bounded to the in-flight shards.
+            // Build each shard's archive on the dedicated pool from a *borrow* of the reused
+            // scratch (so the buffers survive for the next freeze instead of being consumed
+            // and re-allocated). Peak build scratch is the full partition -- now resident
+            // across the run rather than re-allocated each freeze. `&[Vec<_>]` is `Send`, so
+            // the guard itself never enters the closure.
+            let shards_ref: &[Vec<(u64, u64)>] = shard_pairs.as_slice();
             let subs: Vec<Archive> = self.build_pool.install(|| {
-                shard_pairs
-                    .into_par_iter()
-                    .map(|g| Archive::build(&g, VAL_BITS, self.fp_bits, self.load))
+                shards_ref
+                    .par_iter()
+                    .map(|g| Archive::build(g, VAL_BITS, self.fp_bits, self.load))
                     .collect()
             });
             let archive = ShardedArchive::from_shards(subs);
