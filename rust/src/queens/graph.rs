@@ -2,7 +2,7 @@
 //! available-graph -- the freeze-time merge lever (#7). Measurement/spike keys.
 
 use super::*;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 /// Largest connected component the graph key resolves by direct degree-sequence
 /// lookup instead of WL refinement (#18). For connected graphs on at most four
@@ -69,6 +69,12 @@ fn hash_colours(verts: &[u32], colour: &[u64]) -> u64 {
 /// is written before it is read (only the touched prefixes are read), so it needs no
 /// per-call zeroing -- **zero heap allocation in the hot loop**. Boxed so the buffers
 /// live on the heap once per thread, not on every call's stack.
+///
+/// `#[repr(C, align(64))]`: hot-struct discipline (CLAUDE.md). The `[u64; MAXV]` colour
+/// arrays are 2048 B (a multiple of 64), so a 64-aligned struct start makes every one of
+/// them cache-line-aligned -- the contiguous `col`/`nxt`/`mc` colour map (which LLVM
+/// auto-vectorises to AVX-512) then loads/stores on line boundaries, no split loads.
+#[repr(C, align(64))]
 pub(crate) struct IsoScratch {
     col: [u64; MAXV],             // current colour per *local* vertex (lcol[0..k])
     nxt: [u64; MAXV],             // next-round colour per local vertex
@@ -462,7 +468,24 @@ impl Queens {
             // const generic resolved at the call site, the way the project keeps
             // measurement toggles out of latency-bound loops (see the env-var rule in
             // CLAUDE.md). The measurement entry instantiates `HIST = true` instead.
-            self.iso_key_fast_in::<false>(mask, &mut g, &mut [])
+            // `CACHE = true` keeps the per-thread component-canon cache (#19).
+            self.iso_key_fast_in::<false, true>(mask, &mut g, &mut [])
+        })
+    }
+
+    /// Measurement variant of [`iso_key_fast`] with the per-thread component-canon
+    /// cache (#19) **bypassed**: every component above the [`tiny_comp_key`] shortcut
+    /// recomputes its WL canon. In the live n=16 search the component working set
+    /// dwarfs the 64 MB cache (its hit rate is low -- doubling the cache moves the n=16
+    /// rate only ~3.7%), so this no-cache cost is the **live-representative** per-key
+    /// cost and the right gate for the iso-key optimisation: a cache-warmed bench loop
+    /// would hit on every repeat and hide every `comp_canon_full` change. Returns the
+    /// same value as `iso_key_fast` -- only the cache lookup/store is skipped.
+    /// `CACHE = false` is a compile-time-eliminated path, no per-component branch.
+    pub fn iso_key_fast_nocache(&self, mask: Bits) -> u64 {
+        ISO_SCRATCH.with(|s| {
+            let mut g = s.borrow_mut();
+            self.iso_key_fast_in::<false, false>(mask, &mut g, &mut [])
         })
     }
 
@@ -474,7 +497,7 @@ impl Queens {
     pub fn tally_components(&self, mask: Bits, hist: &mut [u64]) {
         ISO_SCRATCH.with(|s| {
             let mut g = s.borrow_mut();
-            self.iso_key_fast_in::<true>(mask, &mut g, hist);
+            self.iso_key_fast_in::<true, true>(mask, &mut g, hist);
         });
     }
 
@@ -484,7 +507,7 @@ impl Queens {
     /// flag) is the project rule for hot-path toggles: the disabled branch never enters
     /// the instruction stream, so it cannot pollute L1i or the frontend the graph key is
     /// already bound by.
-    fn iso_key_fast_in<const HIST: bool>(
+    fn iso_key_fast_in<const HIST: bool, const CACHE: bool>(
         &self,
         mask: Bits,
         s: &mut IsoScratch,
@@ -499,7 +522,7 @@ impl Queens {
                 let k = comp.popcount() as usize;
                 hist[k.min(hist.len() - 1)] += 1;
             }
-            let ck = self.comp_canon(comp, s);
+            let ck = self.comp_canon::<CACHE>(comp, s);
             s.comp_keys[nc] = ck;
             nc += 1;
         }
@@ -517,7 +540,7 @@ impl Queens {
     /// hash the adjacency certificate in canonical order (a complete canon); else fall
     /// back to the validated-equivalent individualisation invariant. Components are small
     /// (the graph fragments deep), so the fallback stays cheap.
-    pub(crate) fn comp_canon(&self, comp: Bits, s: &mut IsoScratch) -> u64 {
+    pub(crate) fn comp_canon<const CACHE: bool>(&self, comp: Bits, s: &mut IsoScratch) -> u64 {
         let mut k = 0usize;
         comp.each(|v| {
             s.verts[k] = v as u8;
@@ -527,6 +550,11 @@ impl Queens {
         // alone (a complete invariant for k <= 4), skipping all WL work (#18).
         if k <= TINY_MAX {
             return tiny_comp_key(&self.attack, comp, k, &s.verts);
+        }
+        // Measurement (`CACHE = false`): bypass the cache, always recompute -- the
+        // live-representative cost (see `iso_key_fast_nocache`). Compile-time path.
+        if !CACHE {
+            return self.comp_canon_full(comp, k, s);
         }
         // #19: amortise the full canon (a pure function of `comp`) across recurring
         // components via the per-thread cache. Probe; on a fingerprint hit return it,
@@ -598,8 +626,31 @@ impl Queens {
         if classes_in(k, &s.col, &mut s.sort) == k {
             return cert_hash_in(&self.attack, comp, k, &s.verts, &s.col, &mut s.order);
         }
-        // Non-discrete: individualise each vertex, refine, combine the signatures.
+        // Non-discrete: individualise only the vertices in *non-singleton* 1-WL classes
+        // and combine the signatures. A vertex already alone in its colour class is
+        // pinned by 1-WL -- individualising it re-runs WL to a colouring fully determined
+        // by the stable partition, so its signature adds nothing the stable colouring
+        // does not already fix. Isomorphisms preserve 1-WL colours (hence singleton-ness),
+        // so the multiset of non-singleton signatures is still an iso-invariant -- the
+        // same merge, far fewer WL re-runs (k -> the count of WL-indistinguishable
+        // vertices, the only ones that matter).
+        //
+        // Fold in the base stable-colouring hash once so dropping the singleton sigs
+        // cannot weaken the invariant: those sigs are a deterministic function of the
+        // stable colouring, which this hash captures in full.
+        let base_hash = hash_colours_in(k, &s.col, &mut s.sort);
+        // Snapshot the non-singleton locals from the stable colouring into `s.order`
+        // (free here -- `cert_hash_in`/`order` is the discrete path, already returned).
+        let mut ns = 0usize;
         for i in 0..k {
+            let ci = s.col[i];
+            if (0..k).any(|j| j != i && s.col[j] == ci) {
+                s.order[ns] = i as u8;
+                ns += 1;
+            }
+        }
+        for idx in 0..ns {
+            let i = s.order[idx] as usize;
             s.col[..k].copy_from_slice(&s.base[..k]);
             s.col[i] = 0xD15C_0DED_1111_2222;
             wl_refine_in(
@@ -611,13 +662,14 @@ impl Queens {
                 &mut s.mc,
                 &mut s.sort,
             );
-            s.sigs[i] = hash_colours_in(k, &s.col, &mut s.sort);
+            s.sigs[idx] = hash_colours_in(k, &s.col, &mut s.sort);
         }
-        let sigs = &mut s.sigs[..k];
+        let sigs = &mut s.sigs[..ns];
         sigs.sort_unstable();
-        sigs.iter().fold(0xABCD_1234_5678_9ABC, |h, &x| {
-            mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
-        })
+        sigs.iter()
+            .fold(mix64(0xABCD_1234_5678_9ABC ^ base_hash), |h, &x| {
+                mix64(h ^ x).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+            })
     }
 
     /// The connected component of the available-graph containing `start` (flood-fill
@@ -677,5 +729,51 @@ impl Queens {
             base[s as usize] = nb.popcount() as u64 | 0x9E37_79B9_0000_0000;
         }
         (verts, nbrs, base)
+    }
+
+    /// A realistic deep corpus of *raw available* masks for the iso-key benchmark
+    /// (`src/bin/iso_key_bench.rs`): a DFS over the real move geometry that dedups on
+    /// the D4 canonical key (exactly the live search's TT key) and records each
+    /// newly-seen position's raw `available = board & !blocked` mask once, capped at
+    /// `cap` distinct positions. Because dedup is by `canon`, the returned masks have
+    /// pairwise-distinct D4 keys, so `cap` (or fewer at exhaustion) D4 classes are
+    /// present; recording the *raw* (pre-canon) mask -- one orbit member per class --
+    /// gives the iso key the realistic mix of orientations it is called on per node in
+    /// a live D4 search. Cold measurement path (allocates a dedup set); never reached
+    /// from the search.
+    pub fn iso_corpus(&self, cap: usize) -> Vec<Bits> {
+        fn dfs(
+            q: &Queens,
+            blocked: Bits,
+            seen: &mut HashSet<Bits>,
+            out: &mut Vec<Bits>,
+            cap: usize,
+        ) {
+            if out.len() >= cap {
+                return;
+            }
+            let available = q.board.and_not(blocked);
+            if !seen.insert(q.canon(available)) {
+                return; // transposition -- the live TT would prune here
+            }
+            out.push(available);
+            for &sq in &q.order {
+                if out.len() >= cap {
+                    return;
+                }
+                if !q.is_available(blocked, sq) {
+                    continue;
+                }
+                let child = q.place(blocked, sq);
+                if q.no_moves(child) {
+                    continue; // terminal: nothing below to key
+                }
+                dfs(q, child, seen, out, cap);
+            }
+        }
+        let mut seen = HashSet::with_capacity(cap * 2);
+        let mut out = Vec::with_capacity(cap);
+        dfs(self, Bits::ZERO, &mut seen, &mut out, cap);
+        out
     }
 }

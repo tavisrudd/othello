@@ -23,6 +23,12 @@ path = "src/bin/queens.rs"
 name = "canon_bench"
 path = "src/bin/canon_bench.rs"
 
+# Instruction-level cyc/key regression bench for the graph-isomorphism (iso) keys
+# (the burr-iso capacity lever): drive iso_key_fast down with this as the gate.
+[[bin]]
+name = "iso_key_bench"
+path = "src/bin/iso_key_bench.rs"
+
 # Ultra-fast release build: whole-program inlining + single codegen unit.
 # `target-cpu=native` (see .cargo/config.toml) turns on POPCNT/BMI for the hot
 # bit primitives (count_ones, blsi, tzcnt).

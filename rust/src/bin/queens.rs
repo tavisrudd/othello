@@ -339,7 +339,7 @@ fn main() {
 /// "full"; what differs is the technique and the parallelism. Order matches
 /// `SOLVER_NAMES`.
 fn list_engines() {
-    const INFO: [(&str, &str, &str); 7] = [
+    const INFO: [(&str, &str, &str); 8] = [
         (
             "naive",
             "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
@@ -366,6 +366,11 @@ fn list_engines() {
             "root-parallel (YBW)",
         ),
         (
+            "burr",
+            "incremental kernel over a log-structured BuRR store (eviction-free ribbon archive) replacing the flat evicting TT",
+            "root-parallel (YBW)",
+        ),
+        (
             "nimber",
             "full Sprague-Grundy value (nimber) via mex over children, no cutoff",
             "root-parallel",
@@ -376,6 +381,9 @@ fn list_engines() {
             "sequential",
         ),
     ];
+    // Every solver in SOLVER_NAMES must have a row here -- a new solver that forgets
+    // to describe itself fails to compile rather than silently vanishing from the list.
+    const _: () = assert!(INFO.len() == SOLVER_NAMES.len());
     let rows: Vec<Vec<String>> = INFO
         .iter()
         .map(|(name, desc, parallelism)| {

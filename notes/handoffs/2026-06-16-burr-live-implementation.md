@@ -80,6 +80,14 @@ free). This is the next frontier, not more throughput micro-opts.
 
 ## Iso-merge (Approach B) investigation — START HERE next session
 
+> **Update (session 2026-06-16--7):** lever 0 (instruction-level iso key) was executed and
+> reframed — see [iso-key-optimization handoff](2026-06-16-iso-key-optimization.md). TL;DR:
+> the merge IS realized live (3.44×), but iso is ~2.2× *slower* than production at n=16 (the
+> key is WL graph-canon, ~100× the D4 key, not "19% to close"). Banked a correct 1.25× cut +
+> `iso_key_bench`; target-cell IR is a documented negative. Remaining levers
+> (automorphism-pruning / precompute / selective keying) are multi-session — **decide
+> direction with the user first.** The text below is the original (pre-execution) framing.
+
 User picked the **iso-merge pivot** (option 2): make the segment hold iso-classes (3.4× fewer keys
 → fits RAM at fp=44 → re-exp → ~1.0×; the real wall-clock win over incremental). Before building,
 I ran the Fermi probe. **Findings (decisive, resolve the open question first):**

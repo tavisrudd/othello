@@ -50,8 +50,9 @@ impl Bits {
         }
         Bits(r)
     }
+    /// The number of set bits (board squares).
     #[inline]
-    pub(crate) fn popcount(self) -> u32 {
+    pub fn popcount(self) -> u32 {
         self.0.iter().map(|w| w.count_ones()).sum()
     }
     /// The lowest set bit index, or `None` if empty.
