@@ -22,6 +22,37 @@ faster-than-incremental + >7.5 M/s n=16, then ratchet 8–9 → 12 M/s, profilin
 > tee'd log (or `tmux capture-pane -t queens:<name> -p`). The queens binary catches SIGTERM, so to
 > stop a run use `pkill -9 -f "queens solve"` (plain `timeout` won't kill it; use `timeout -s KILL`).
 
+> **★★ NEXT SESSION — START HERE, IN THIS ORDER (user-queued).** This session **regressed
+> burr/iso-burr at n=14** (user confirmed "now slower than last night") by editing the *shared* store
+> + adding `fused` to the binary. No config constants changed (verified `git diff 1c6f390 HEAD`); the
+> shared edits are `store.rs` `get/prefetch` (the `seg_count==0` skip + the `seg_count.load(Acquire)`
+> moved earlier) and `Bloom::locate/prefetch` (fastrange + single `mix64`), plus `fused.rs` added.
+> n=14 never freezes (seg_count stays 0 → bloom inert there), so the regression is **NOT the bloom
+> math** — it's the reordered Acquire-load on the hot path and/or **codegen drift from adding `fused`
+> to the binary** (the search is frontend/L1i-bound, so a new solver shifts inlining/layout of the
+> shared hot path). User directive: **"each solver generation should be independent, like historical
+> checkpoints."**
+>
+> **1. Isolation refactor FIRST.** Make solver generations independent:
+>    - Give `fused` its **own copy** of the hot-path modules (the `BurrStore` it needs + the A3 kernel
+>      helpers it uses from `incremental`) in its own namespace — do NOT share `store.rs`/`burr.rs`
+>      with burr/iso-burr. (Tiger says no-dup, but the user explicitly prioritizes generational
+>      independence over DRY here — agreed for a perf-A/B project.)
+>    - **Restore `store.rs` + `burr.rs` to `1c6f390`-identical** so burr/iso-burr are byte-for-byte
+>      last-night (the bloom-skip + fastrange are genuinely good — re-apply them only in fused's
+>      private copy). `git diff 1c6f390 HEAD -- rust/src/queens/store.rs rust/src/burr.rs` is the
+>      exact revert set.
+>    - Build each generation as a **frozen named binary** (`bin/gen/queens-<commit>-<solver>`) so A/B
+>      is always against the exact historical executable, immune to `main` codegen drift. Going
+>      forward: a new generation copies the hot path; never edit an older generation's modules.
+>
+> **2. THEN pin the cause.** Build `1c6f390` in a throwaway `git worktree` (ask before git ops), run
+> an interleaved n=14 A/B (burr & iso-burr, old binary vs new) to confirm whether the regression is
+> the store edit or pure codegen. If it's codegen, source-isolation alone won't fully restore
+> burr/iso-burr *in the same binary* → the frozen per-generation binaries (step 1) are the real fix.
+>
+> Only after 1+2 → resume the `count --comps` gate + the component table (the <20-min lever) below.
+
 **The lede:** built **`fused`** — `incremental`'s A3 kernel + BuRR store + **ONE key per node**
 (tiny-table iso for `avail<=iso_max`, else incremental D4), vs iso-burr's d4-then-iso **double
 probe**. Committed, all gates green, n=16 verdict **correct** (second player, matches Jenrich).
