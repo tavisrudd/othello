@@ -122,6 +122,22 @@ After reboot, `bash rust/bin/gen/ab_final.sh`:
    - HEAD ~7s but 1c6f390 ~3.9s ⇒ it's the **code** (fused-add); investigate codegen.
    - both ~7s ⇒ reboot didn't fix it → deeper (hardware/config).
 
+## dmesg (pre-reboot, `rust/bin/gen/dmesg-pre-reboot-2026-06-17.log`)
+
+- **Box: GEEKOM A9 Max mini-PC, BIOS 0.18 (06/2025)** — very early firmware; SoC/memory
+  power-management quirks plausible. On AC (desktop mini-PC).
+- **`Tainted: [S]=CPU_OUT_OF_SPEC`** — kernel flags the CPU out-of-spec (likely persistent
+  boot-time: too-new HX 370 on kernel 7.0.9, or a BIOS memory config). The taint-setting line
+  has scrolled out of the (wrapped) ring buffer, so the source is unconfirmed.
+- **4-day uptime** (booted Sat Jun 13) — the "fast 22:43" was NOT a post-boot clean slate.
+- **Repeated OOM storms** over the uptime (Jun 14 *and* Jun 16), all queens n=16-freeze,
+  ~18–19 GB anon-rss, global OOM. OOM Mem-Info confirms `anon_thp:0kB` (THP off — the madvise
+  bug) and ~6 GB zram (`zspages`), zero high-order free blocks under pressure.
+- **No MCE / EDAC / SMU / clock / GPU-reset / thermal event** in the buffer (clock changes
+  aren't logged by AMD, so absence isn't dispositive). Boot-time DDR/UCLK speed scrolled out.
+- **`node_exporter` (Prometheus) is running** → historical freq/throughput metrics may exist to
+  pin *when* the slowdown began (post-reboot follow-up if the A/B is inconclusive).
+
 ## Artifacts (persisted, survive reboot)
 
 - `rust/bin/gen/queens-1c6f390`  — last-night code (no fused, no madvise fix).
