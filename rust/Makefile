@@ -124,7 +124,7 @@ profile:
 # depth-8 game. `pgo-release` merges both workloads into one profile.
 PGO_INSTR := target/pgo-instrumented
 PGO_OUT   := target/pgo-release
-PGO_SECS  ?= 30
+PGO_SECS  ?= 12
 
 pgo-check:
 	@test -n "$(LLVM_PROFDATA)" || { echo "llvm-profdata not found: rustup component add llvm-tools-preview"; exit 1; }
@@ -138,6 +138,7 @@ pgo-queens: pgo-check
 	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 incremental >/dev/null 2>&1 || true
 	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 burr >/dev/null 2>&1 || true
 	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 iso-burr >/dev/null 2>&1 || true
+	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 fused >/dev/null 2>&1 || true
 	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
 	    cargo build --release --bin queens --target-dir $(PGO_OUT)
