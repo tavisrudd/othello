@@ -138,6 +138,53 @@ After reboot, `bash rust/bin/gen/ab_final.sh`:
 - **`node_exporter` (Prometheus) is running** → historical freq/throughput metrics may exist to
   pin *when* the slowdown began (post-reboot follow-up if the A/B is inconclusive).
 
+## REBOOT RESULT — did NOT fix it (persistent, not reset-able)
+
+Post-reboot (uptime 10 min, cool, defragmented) `ab_final.sh`: both binaries still
+~12,000 cyc/node (1c6f390 ~12,450, HEAD+fix ~11,600 — the madvise fix buys ~7% via partial
+THP). So it's **not** a transient SoC wedge → persistent (NVRAM/BIOS/firmware level).
+
+Fresh-boot kernel log (`journalctl -k -b`):
+- `amdgpu: RAM width 128bits DDR5` + **two `spd5118` DDR5 SPD sensors** → full dual-channel,
+  two SODIMMs present. **Not a dropped channel** — the 2× is memory *latency* (UCLK), not bandwidth.
+- **Microcode updated this boot `0x0b204032 → 0x0b204037`** (secondary suspect; doesn't fit the
+  within-boot fast→slow on Jun 16).
+- `.kitty-wrapped` segfault at boot (`ip 0`, null-pointer execute) + prior 1password segfaults +
+  `CPU_OUT_OF_SPEC` taint → pattern consistent with **marginal/out-of-spec memory**.
+
+**Leading theory: BIOS/SMU down-trained memory to a safe/slow speed after instability, sticky in
+NVRAM.** Uniquely fits: changed mid-uptime (adaptive fallback after OOM-storm stress/crashes),
+survives reboot (NVRAM), clean ~2× latency hit (rated/EXPO → JEDEC base), correlates with the
+segfaults. **Decisive check:** `sudo dmidecode -t memory | grep -iE 'Speed|Configured'` —
+Configured < rated ⇒ confirmed; fix in BIOS (re-enable rated/EXPO speed + verify stability).
+
+## Post-reboot deep dive — memory at spec, regression is box-wide (latency)
+
+- **`dmidecode -t memory`:** two 16 GB single-rank modules (P/N WPBS56D508SWB-16G), **Speed
+  5600 MT/s == Configured 5600 MT/s**, dual-channel. No fallback → **memory-speed theory
+  refuted.** (Standard JEDEC DDR5-5600 SODIMMs, no EXPO.)
+- **DIMM temps cool** (51/48 °C), CPU 57 °C → DRAM thermal ruled out.
+- **`incremental` A/B (canonical memory-latency solver):** ~9 M/s / ~8,400 cyc/node now vs
+  documented ~14 M/s cold (~5,800 cyc/node) → **~1.5× regression on the production solver too**
+  → box-wide, not burr-specific. HEAD+fix ≈ 1c6f390 (madvise fix ~3% via partial THP) → code
+  exonerated here too. Script: `rust/bin/gen/ab_inc.sh`.
+- `ryzen_smu` not loaded ([O] taint is zfs) → can't read live FCLK/UCLK without setting it up.
+
+**Conclusion: a real, box-wide ~1.5–1.85× memory-*latency* regression (IPC ~0.49→0.23),
+DDR at full spec, persists across reboot, code-exonerated.** Remaining root-cause candidates,
+both hardware/firmware:
+1. **Infinity Fabric / memory-controller latency (FCLK)** running low — the latency-critical
+   clock dmidecode can't show; not reset by reboot or amdgpu force. Confirm via `ryzen_smu` +
+   `ryzen_monitor` (NixOS: `boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ]`,
+   rebuild, `modprobe ryzen_smu`, `nix run nixpkgs#ryzen-monitor-ng`).
+2. **Marginal / degrading hardware** — consistent with the kitty/1password segfaults +
+   `CPU_OUT_OF_SPEC` taint. Run **memtest86**.
+
+**Highest-leverage fix: update the BIOS (currently 0.18, 06/2025 — very early for this
+platform).** Early AMD AI 300 / Strix Point BIOSes have known fabric/memory power-management
+bugs; a newer BIOS is the most likely real fix. Until resolved, **benchmarks run on a ~1.5×
+memory-degraded box** — the code/queens work is unaffected; size numbers accordingly.
+
 ## Artifacts (persisted, survive reboot)
 
 - `rust/bin/gen/queens-1c6f390`  — last-night code (no fused, no madvise fix).
