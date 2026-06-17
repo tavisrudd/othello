@@ -120,6 +120,17 @@ than n=14 — but the 5.8× per-node penalty is large to overcome with only ~1.3
 A partial-n16 throughput probe (SIGUSR2 fixture) would size this; **don't fire a full n=16 run**
 (ask-first) until the WL key is driven down.
 
+**Partial-n16 probe (measured, 2026-06-17, ~62 s, all cores, tmpfs):** iso-flat n=16 runs at
+**~1.0 M/s** (cumulative; instantaneous bounced 0.47–1.53, **not decaying** — confirms the
+no-segment-walk sustained design), TT 2.9% full, **re-exp ~1.0× (eviction-free)**. **Memory holds:**
+the 17.18 GB table sat in physical RAM with only ~690 MB zram spill on the 26 GB box (23/26 used) —
+the "fits flat" thesis holds at n16, but **tight** (a box with more RAM, or a smaller iso set, is
+comfortable; near-full it could pressure zram late). ~1.0 M/s is **~4× slower than incremental's
+early rate** (the WL tax, slightly worse than n14's 1.6× because n16's near-root graphs are bigger).
+**The eviction-free advantage only materializes deep into the run** (once incremental fills+evicts,
+≫1 hr), which the probe doesn't reach — so the n16 verdict still needs the full A/B (ask-first), and
+it's gated on the WL key either way.
+
 ## Other lever (user-named "better sustained all-core"): flat-TT contention fix
 
 Task: mirror the burr-store thread-local-counter fix (`49bba47`) into `tt.rs` (per-node
