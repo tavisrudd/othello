@@ -78,21 +78,61 @@ fp=44 → re-exp → ~1.0×.** That requires the iso key at freeze (batch, fine)
 (the measured-negative cost — but paid only on the cold-tail miss, and the freeze can iso-merge for
 free). This is the next frontier, not more throughput micro-opts.
 
-## Next steps (priority order)
+## Iso-merge (Approach B) investigation — START HERE next session
 
-1. **Cool-box clean measurement** — re-run the interleaved A/B and a longer burr bench on a cool
-   box to pin the real sustained rate (the session's late numbers are ~2× throttled). The hash-dedup
-   + bloom-prefetch (commit `05debb5`) are unmeasured-clean.
-2. **Tiered compaction** — the single-segment rebuild is O(total) per freeze, so rebuilds grow and
-   dip the rate (the 270M-key rebuild dropped instantaneous to ~5). Bound it: keep a few L0 segments
-   + occasional base merge (K small, amortized build). Retain pairs are already partitioned by shard.
-   The pairs grow unbounded in RAM → for the full run, spill to the zpool (the n=18 external-memory
-   primitive too).
-3. **Iso-merge at freeze (Approach B)** — the real n=16 capacity lever (above). Freeze-time iso key,
-   live iso key only on a memtable miss. This is where burr beats incremental on wall-clock.
-4. **Validate the win at scale** — a longer (or full, ask-first) n=16 run comparing burr vs
-   incremental on *wall-clock + re-exp*, not M/s. Burr's checkpoint/resume isn't wired yet
-   (`tt()` returns None) — needed before a multi-hour run.
+User picked the **iso-merge pivot** (option 2): make the segment hold iso-classes (3.4× fewer keys
+→ fits RAM at fp=44 → re-exp → ~1.0×; the real wall-clock win over incremental). Before building,
+I ran the Fermi probe. **Findings (decisive, resolve the open question first):**
+
+- **The 3.4× merge is REAL** — authoritative `queens count 12 --iso`: 1,060,729 D4-distinct →
+  **309,830 iso-classes = 3.42×**, *win/loss-consistent (SAFE key)* for both `iso_key_ir` (1-WL +
+  individualisation) and `iso_key_canon` (IR canon). 1-WL alone has 0.8% unsafe (mixed) classes —
+  **use `iso_key_ir`/`iso_key_canon`, not bare `iso_key`/`iso_key_fast`**, or a wrong merge flips a
+  verdict. `count 14 --iso` times out (sequential + 49M exact set) — use n=12 for the factor, or
+  give it minutes.
+- **But live iso is net-SLOWER**: interleaved n=14 `solve parallel --distinct`, D4 vs `QUEENS_KEY=fast`
+  vs `=canon`: D4 6.5/9.4s, fast 7.7/10.0s (~19% slower), canon 8.7/10.4s (~34% slower). So the
+  per-node graph-key cost ≈ cancels the 3.4× merge — the roadmap's "wash/negative", now reproduced.
+  *(Caveat: that probe's `--distinct` HLL is fed the D4 key, so it does NOT show the merged node
+  count — capture `solver.nodes()` to see the real expansion reduction; wall-clock is the honest
+  signal and it's negative.)*
+
+**The crux for burr-iso:** the win needs iso-keying to reduce *expansions*; that means iso-key on
+every memtable **miss**, and misses ≈ 74% of nodes (most are first-visits), so "iso only on a miss"
+≈ "iso per node" — the measured-negative regime. Burr's D4 memtable gives **no intra-epoch merge**
+either (isomorphic positions in one epoch stay separate until frozen). So plain burr-iso is likely
+net-negative, same as flat-TT-iso.
+
+**The two unmeasured levers that could flip it — the next session's decision tree:**
+1. **Selective keying** (`QUEENS_KEY_MAX=k`): iso-key only *small* available-graphs (deep nodes —
+   cheap to key, high transposition value); big shallow graphs stay D4. Captures most of the merge
+   at a fraction of the cost. **Fix the n=16 sentinel-bit-255 collision first** (`graph_bits`,
+   `solver/mod.rs` — n=16 uses all 256 bits so the graph-key/D4 namespaces overlap). Untested.
+2. **Merge growth at n=16**: 3.42× at n=12 may be larger at n=16 (richer graphs), tipping the
+   balance. Can't cheaply measure (`count --iso 16` is infeasible) — extrapolate from n=12/14, or a
+   partial-n16 fixture.
+
+**Cheapest decisive next probe (do FIRST):** rerun the n=14 D4-vs-iso A/B capturing **`nodes`**
+(not just distinct) for the real expansion-reduction factor, and sweep `QUEENS_KEY_MAX` (with the
+sentinel fix) to find where selective iso turns net-positive. If a config beats D4 wall-clock at
+n=14 → build burr-iso (iso `iso_key_ir` segment + D4 memtable + position retention for freeze-time
+keying — note the memtable stores only fingerprints, so the freeze needs a per-epoch position log,
+~32 B/entry, transient; the retained compaction pairs stay 8 B iso-archive-keys). If nothing beats
+D4 → **iso-merge is a documented negative for n≤16**; pivot to tiered compaction below.
+
+## Other next steps
+
+1. **Cool-box clean measurement** — the session's late numbers are ~2× thermally throttled. Re-run
+   the interleaved A/B + a longer burr bench cold to pin the real sustained rate; the hash-dedup +
+   bloom-prefetch (commit `05debb5`) are unmeasured-clean.
+2. **Tiered compaction** (the sustained-throughput lever if iso is dead) — the single-segment
+   rebuild is O(total) per freeze, so rebuilds grow and dip the rate (the 270M-key rebuild dropped
+   instantaneous to ~5). Bound it: a few L0 segments + occasional base merge (K small, amortized).
+   Retain pairs already partition by shard; for the full run, spill them to the zpool (also the
+   n=18 external-memory primitive).
+3. **Validate at scale** — a longer (ask-first) n=16 run comparing burr vs incremental on
+   *wall-clock + re-exp*, not M/s. Burr's checkpoint/resume isn't wired (`tt()` returns None) —
+   needed before a multi-hour run.
 
 ## Knobs (all resolved once at construction)
 
