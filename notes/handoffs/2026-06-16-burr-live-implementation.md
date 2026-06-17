@@ -103,22 +103,45 @@ every memtable **miss**, and misses ≈ 74% of nodes (most are first-visits), so
 either (isomorphic positions in one epoch stay separate until frozen). So plain burr-iso is likely
 net-negative, same as flat-TT-iso.
 
-**The two unmeasured levers that could flip it — the next session's decision tree:**
+**The levers that could flip it — the next session's decision tree:**
+
+0. **★ Micro-optimise the iso key down to the instruction level (the headline lever — do this
+   hardest).** The whole deficit is ~19% (n=14) — i.e. the iso key only has to get a little cheaper
+   for the 3.42× merge to win outright. This is exactly the win the D4-canon rewrite already banked
+   (574 → 62 cyc via `canon_bench` + ILP/SWAR/branchless work — see the
+   [inner-loop handoff](2026-06-16-queens-inner-loop-rewrite.md)). Apply the same discipline to the
+   graph key:
+   - **Build an `iso_key_bench`** (mirror `src/bin/canon_bench.rs`): a stream of realistic deep
+     `available` masks → cyc/key for `iso_key_fast`/`iso_key_ir`, the instruction-level regression
+     harness. Gate every change on it.
+   - **Profile + attack the hot path** (`src/queens/graph.rs`: `iso_key_fast_in::<HIST>`, the graph
+     build from the available mask, the 1-WL colour-refinement rounds, the individualisation, the
+     final canonical hash). Likely cost centres: per-vertex adjacency build (popcount/bit-scan over
+     the queen-attack graph), the WL multiset hashing each round, the sort/canonicalise. Push to the
+     instruction level — branchless refinement, SWAR/AVX over the colour vectors, fewer WL rounds if
+     they don't change the partition, incremental colour carry down the DFS (the D4-canon trick:
+     placing a queen removes one vertex — can the colouring be updated, not recomputed?), a
+     `tiny_comp_key` fast path for the many small components (#18), monomorphise the `HIST` toggle.
+   - Target: iso key within ~1.3× of the D4 incremental key's ~62 cyc. At that point 3.42× merge ÷
+     ~1.3× cost ≈ **~2.6× net** — a decisive win, and it makes burr-iso fit RAM (re-exp → ~1.0×).
+   - **`etc.`**: also instruction-level the burr miss-path around it (the iso-archive-key derive, the
+     iso-Bloom probe) so the per-miss iso cost is minimal end-to-end.
 1. **Selective keying** (`QUEENS_KEY_MAX=k`): iso-key only *small* available-graphs (deep nodes —
    cheap to key, high transposition value); big shallow graphs stay D4. Captures most of the merge
-   at a fraction of the cost. **Fix the n=16 sentinel-bit-255 collision first** (`graph_bits`,
-   `solver/mod.rs` — n=16 uses all 256 bits so the graph-key/D4 namespaces overlap). Untested.
+   at a fraction of the cost; composes with (0). **Fix the n=16 sentinel-bit-255 collision first**
+   (`graph_bits`, `solver/mod.rs` — n=16 uses all 256 bits so the graph-key/D4 namespaces overlap).
 2. **Merge growth at n=16**: 3.42× at n=12 may be larger at n=16 (richer graphs), tipping the
    balance. Can't cheaply measure (`count --iso 16` is infeasible) — extrapolate from n=12/14, or a
    partial-n16 fixture.
 
-**Cheapest decisive next probe (do FIRST):** rerun the n=14 D4-vs-iso A/B capturing **`nodes`**
-(not just distinct) for the real expansion-reduction factor, and sweep `QUEENS_KEY_MAX` (with the
-sentinel fix) to find where selective iso turns net-positive. If a config beats D4 wall-clock at
-n=14 → build burr-iso (iso `iso_key_ir` segment + D4 memtable + position retention for freeze-time
-keying — note the memtable stores only fingerprints, so the freeze needs a per-epoch position log,
-~32 B/entry, transient; the retained compaction pairs stay 8 B iso-archive-keys). If nothing beats
-D4 → **iso-merge is a documented negative for n≤16**; pivot to tiered compaction below.
+**Cheapest decisive next probe (do FIRST, before the build):** rerun the n=14 D4-vs-iso A/B
+capturing **`nodes`** (not just distinct) for the real expansion-reduction factor; build
+`iso_key_bench` and drive the iso key down at the instruction level (0); sweep `QUEENS_KEY_MAX`
+(with the sentinel fix) (1). If a config beats D4 wall-clock at n=14 → build burr-iso (iso
+`iso_key_ir` segment + D4 memtable + position retention for freeze-time keying — the memtable stores
+only fingerprints, so the freeze needs a per-epoch position log, ~32 B/entry, transient; the
+retained compaction pairs stay 8 B iso-archive-keys). If nothing beats D4 even after (0) → iso-merge
+is a documented negative for n≤16; pivot to tiered compaction below.
 
 ## Other next steps
 
