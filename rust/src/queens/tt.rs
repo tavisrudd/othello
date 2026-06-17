@@ -322,7 +322,7 @@ impl QueensTt {
     /// (rather than re-deriving bits the index already pinned). `route` reproduces
     /// the legacy hash exactly, preserving the routing distribution.
     #[inline]
-    fn hash128(key: Bits) -> (u64, u64) {
+    pub(crate) fn hash128(key: Bits) -> (u64, u64) {
         let mut route = 0u64;
         let mut fp = 0x2545_F491_4F6C_DD1Du64;
         for &w in &key.0 {
@@ -332,6 +332,37 @@ impl QueensTt {
             fp ^= fp >> 32;
         }
         (route, fp)
+    }
+
+    /// As [`get`](Self::get)/[`put`](Self::put)/[`prefetch`](Self::prefetch)/
+    /// [`archive_key`](Self::archive_key) but taking a pre-computed `(route, fp)` hash,
+    /// so a caller that needs several of these for one key (the [`BurrStore`] tiers +
+    /// the archive key) pays [`hash128`](Self::hash128) **once** instead of per call.
+    /// These skip the distinct-counter hook (the `BurrStore` counts at its own level).
+    #[inline]
+    pub(crate) fn get_hashed(&self, route: u64, fp: u64) -> Option<u8> {
+        let s = Slot(self.slots[self.index(route)].load(Ordering::Relaxed));
+        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
+    }
+    #[inline]
+    pub(crate) fn put_hashed(&self, route: u64, fp: u64, val: u8) {
+        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+    }
+    #[inline]
+    pub(crate) fn archive_key_hashed(&self, route: u64, fp: u64) -> u64 {
+        archive_key_of(self.index(route) as u64, fp & Slot::fp_mask())
+    }
+    #[inline]
+    pub(crate) fn prefetch_hashed(&self, route: u64) {
+        let ptr = self.slots[self.index(route)].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: as [`prefetch`](Self::prefetch) -- warms a valid in-allocation
+            // pointer, no architectural effect, cannot fault.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
     }
 
     /// The stored value for `key`, if a slot's fingerprint matches.

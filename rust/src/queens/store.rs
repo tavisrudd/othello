@@ -104,6 +104,21 @@ impl Bloom {
             self.words[base + (b >> 6) as usize].load(Ordering::Relaxed) & (1u64 << (b & 63)) != 0
         })
     }
+
+    /// Warm the cache line `maybe_contains(ak)` will read (the whole 512-bit block is
+    /// one line), so the demand check overlaps its DRAM round-trip with search work.
+    #[inline]
+    fn prefetch(&self, ak: u64) {
+        let base = (mix64(ak) % self.blocks) as usize * 8;
+        let ptr = self.words[base].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: warms a valid in-allocation pointer; no architectural effect.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
+    }
 }
 
 /// State shared between the search threads and the background freeze thread.
@@ -272,17 +287,20 @@ impl BurrStore {
         if let Some(c) = &s.counter {
             c.feed(key);
         }
+        // One `hash128` for the whole query: the active probe, the other-buffer probe,
+        // and the archive key all reuse it (was hashed twice per miss).
+        let (route, fp) = QueensTt::hash128(key);
         let i = s.active.load(Ordering::Relaxed) as usize;
-        if let Some(v) = s.bufs[i].get(key) {
+        if let Some(v) = s.bufs[i].get_hashed(route, fp) {
             return Some(v);
         }
         // The other buffer holds queryable data only while a freeze is in flight.
         if s.freezing.load(Ordering::Acquire) {
-            if let Some(v) = s.bufs[i ^ 1].get(key) {
+            if let Some(v) = s.bufs[i ^ 1].get_hashed(route, fp) {
                 return Some(v);
             }
         }
-        let ak = s.bufs[i].archive_key(key);
+        let ak = s.bufs[i].archive_key_hashed(route, fp);
         if let Some(bloom) = &s.bloom {
             if !bloom.maybe_contains(ak) {
                 return None;
@@ -307,8 +325,9 @@ impl BurrStore {
         if let Some(c) = &s.counter {
             c.record(key, val);
         }
+        let (route, fp) = QueensTt::hash128(key);
         let i = s.active.load(Ordering::Relaxed) as usize;
-        s.bufs[i].put(key, val);
+        s.bufs[i].put_hashed(route, fp, val);
         s.fill.fetch_add(1, Ordering::Relaxed);
         if s.fill.load(Ordering::Relaxed) >= s.freeze_at {
             self.maybe_freeze();
@@ -323,7 +342,13 @@ impl BurrStore {
     #[inline]
     pub fn prefetch(&self, key: Bits) {
         let s = &self.inner;
-        s.bufs[s.active.load(Ordering::Relaxed) as usize].prefetch(key);
+        let (route, fp) = QueensTt::hash128(key);
+        let i = s.active.load(Ordering::Relaxed) as usize;
+        s.bufs[i].prefetch_hashed(route);
+        // Also warm the prefilter line the upcoming `get` miss will read.
+        if let Some(bloom) = &s.bloom {
+            bloom.prefetch(s.bufs[i].archive_key_hashed(route, fp));
+        }
     }
 
     #[cold]
