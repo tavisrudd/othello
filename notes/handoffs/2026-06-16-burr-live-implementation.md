@@ -13,6 +13,15 @@ faster-than-incremental + >7.5 M/s n=16, then ratchet 8–9 → 12 M/s, profilin
 **Goal this session:** a solver that breaks the n=16 **20-minute** barrier (iso-burr is 29m23s).
 **Mode:** intent-based (`mi`), user authorized arch calls.
 
+> **⚠ RUN CONVENTION (user instruction — persists across all future sessions).** Launch every
+> queens run/bench **in the tmux session `queens` as a NEW window** (window name your choice) so the
+> user can watch it live — **never** in a detached background sub-shell. **Keep the session's first
+> window (`bash`, window 1) always alive — never close or kill it.** Create the session if absent:
+> `tmux new-session -d -s queens` (this makes window 1). Launch a run with
+> `tmux new-window -t queens -n <name> "<cmd> 2>&1 | tee /tmp/<name>.log"` and read progress from the
+> tee'd log (or `tmux capture-pane -t queens:<name> -p`). The queens binary catches SIGTERM, so to
+> stop a run use `pkill -9 -f "queens solve"` (plain `timeout` won't kill it; use `timeout -s KILL`).
+
 **The lede:** built **`fused`** — `incremental`'s A3 kernel + BuRR store + **ONE key per node**
 (tiny-table iso for `avail<=iso_max`, else incremental D4), vs iso-burr's d4-then-iso **double
 probe**. Committed, all gates green, n=16 verdict **correct** (second player, matches Jenrich).
