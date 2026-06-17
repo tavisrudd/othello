@@ -96,7 +96,7 @@ const SHARD_BITS: u32 = 10;
 /// allocate via `vec![0u64; _]` -- the allocator's `alloc_zeroed`, so the OS hands
 /// back lazily-zeroed pages (a 17 GB table does not commit until probed) -- then
 /// reinterpret the buffer as `AtomicU64`.
-fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
+pub(crate) fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
     let mut v: Vec<u64> = vec![0u64; size];
     #[cfg(target_os = "linux")]
     unsafe {
@@ -487,6 +487,34 @@ impl QueensTt {
             hll: Hll::new(hll_p),
             exact: exact.then(|| Mutex::new(HashMap::new())),
         });
+    }
+
+    /// Stream this *live* table's occupied entries as `(archive_key, val)` pairs --
+    /// the in-memory freeze source for a [`BurrStore`](crate::queens::BurrStore)
+    /// segment (the live twin of [`for_each_image_entry`], which streams a dump).
+    /// Each slot is one relaxed atomic load; a concurrent writer may be missed or
+    /// included, which only costs a later re-expansion (never a wrong value), so no
+    /// lock is taken. The archive key matches [`archive_key`](Self::archive_key), so a
+    /// live query resolves to the same entry this freeze stored.
+    #[inline]
+    pub fn for_each_entry<F: FnMut(u64, u8)>(&self, mut f: F) {
+        for (idx, slot) in self.slots.iter().enumerate() {
+            let s = Slot(slot.load(Ordering::Relaxed));
+            if s.used() {
+                f(archive_key_of(idx as u64, s.fp()), s.val());
+            }
+        }
+    }
+
+    /// Zero every slot (relaxed stores), returning the table to empty so it can be
+    /// reused as a fresh memtable after a freeze. The node counter and any distinct
+    /// counter are left untouched -- they are cumulative search state, not per-memtable.
+    /// A concurrent `put` racing the clear is simply lost (re-expanded later) -- sound,
+    /// never wrong.
+    pub fn clear(&self) {
+        for slot in self.slots.iter() {
+            slot.store(0, Ordering::Relaxed);
+        }
     }
 
     /// The BuRR archive key a live `key` resolves to in *this* table (Chunk 4).

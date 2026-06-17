@@ -46,14 +46,17 @@ mod count;
 mod geom;
 mod graph;
 mod solver;
+mod store;
 mod tt;
 
 pub use bits::Bits;
 pub use count::{CountReport, Hll};
 pub use geom::Queens;
 pub use solver::{
-    make_solver, BranchingStats, Incremental, Naive, Nimber, Parallel, Pn, Solver, Tt, SOLVER_NAMES,
+    make_solver, BranchingStats, Burr, Incremental, Naive, Nimber, Parallel, Pn, Solver, Tt,
+    SOLVER_NAMES,
 };
+pub use store::BurrStore;
 pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
 
 // Internal cross-module items (not part of the crate-facing API): shared by the
@@ -128,6 +131,7 @@ mod tests {
                 truth,
                 "incremental n={n}"
             );
+            assert_eq!(Burr::new(16).first_player_wins(&q), truth, "burr n={n}");
             assert_eq!(
                 Nimber::new(16).first_player_wins(&q),
                 truth,
@@ -142,6 +146,27 @@ mod tests {
                 Pn::new(16).first_player_wins(&q),
                 Naive::new().first_player_wins(&q),
                 "pn n={n}"
+            );
+        }
+    }
+
+    /// The `burr` LSM store stays correct under *frequent* freezes: a tiny freeze
+    /// threshold forces the memtable to freeze into BuRR segments and clear many
+    /// times over a single search, so the verdict only survives if the cascade
+    /// (memtable → segments) and the archive-key round-trip are sound -- including
+    /// the false-positive guard (a wrong accept would flip a verdict). The even
+    /// boards 8/10/12 push enough nodes through the store to trigger many freezes.
+    #[test]
+    fn burr_lsm_survives_frequent_freezes() {
+        for n in [8u32, 10, 12] {
+            let q = Queens::new(n);
+            let truth = Naive::new().first_player_wins(&q);
+            // Small threshold ⇒ many freeze→segment→clear cycles over the search.
+            let burr = Burr::with_freeze_at(20, 50_000);
+            assert_eq!(
+                burr.first_player_wins(&q),
+                truth,
+                "burr (forced freezes) n={n}"
             );
         }
     }

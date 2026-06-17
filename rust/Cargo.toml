@@ -38,6 +38,7 @@ inherits = "release"
 debug = true
 
 [dependencies]
+arc-swap = "1"
 clap = { version = "4.5", features = ["derive"] }
 libc = "0.2"
 rayon = "1.12.0"

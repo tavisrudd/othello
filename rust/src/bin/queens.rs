@@ -22,7 +22,7 @@ use signal_hook::iterator::Signals;
 
 use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
-    for_each_image_entry, make_solver, Bits, Incremental, Nimber, Parallel, Queens, QueensTt,
+    for_each_image_entry, make_solver, Bits, Burr, Incremental, Nimber, Parallel, Queens, QueensTt,
     Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
@@ -628,6 +628,15 @@ fn watch(
         }
     };
     let mut last_cp = Instant::now();
+    // Bench mode: emit a throughput line to stderr every `QUEENS_BENCH_SECS` even when
+    // the live bar is off (a redirected short-n=16 A/B run) -- nodes/elapsed/rate plus
+    // the solver's own stats (segments, re-expansion). Resolved once; unset ⇒ silent.
+    let bench_period = std::env::var("QUEENS_BENCH_SECS")
+        .ok()
+        .and_then(|s| s.parse::<u64>().ok())
+        .filter(|&s| s > 0)
+        .map(Duration::from_secs);
+    let mut last_bench = Instant::now();
     loop {
         for sig in signals.pending() {
             clear();
@@ -709,6 +718,13 @@ fn watch(
                 .collect();
             eprint!("\r{line}\x1b[K");
             io::stderr().flush().ok();
+        }
+        if let Some(period) = bench_period {
+            if last_bench.elapsed() >= period {
+                let stats = solver.stats();
+                eprintln!("{} · {stats}", status_report("bench", n, solver, start));
+                last_bench = Instant::now();
+            }
         }
         // Park rather than sleep so the solve can wake us the instant it finishes
         // (no fixed tick of latency on fast solves); the timeout keeps the bar and
@@ -1371,6 +1387,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
         None => match (live_count, solver_name) {
             (true, "parallel") => Box::new(Parallel::new_counting(bits, 16)),
             (true, "incremental") => Box::new(Incremental::new_counting(bits, 16)),
+            (true, "burr") => Box::new(Burr::new_counting(bits, 16)),
             (true, "symmetry") => Box::new(Tt::new_counting(bits, true, 16, false)),
             (true, "memo") => Box::new(Tt::new_counting(bits, false, 16, false)),
             (true, other) => {

@@ -25,7 +25,7 @@ use std::sync::OnceLock;
 /// The one-time recompute at a search *entry* (never per node -- the recursion
 /// carries these incrementally). Uses the same scatter as [`Queens::canon`].
 #[inline]
-fn orient_of(q: &Queens, available: Bits) -> [Bits; 8] {
+pub(crate) fn orient_of(q: &Queens, available: Bits) -> [Bits; 8] {
     std::array::from_fn(|t| {
         let perm = &q.sym[t];
         let mut img = Bits::ZERO;
@@ -40,7 +40,7 @@ fn orient_of(q: &Queens, available: Bits) -> [Bits; 8] {
 /// -- the A3-validated form (beats branchless `lex_lt` and tree reductions; most
 /// image pairs differ in word 0, so the compare exits after one limb).
 #[inline]
-fn lex_min8(o: &[Bits; 8]) -> Bits {
+pub(crate) fn lex_min8(o: &[Bits; 8]) -> Bits {
     let mut best = o[0];
     for &cand in &o[1..] {
         if cand < best {
@@ -53,7 +53,7 @@ fn lex_min8(o: &[Bits; 8]) -> Bits {
 /// The per-square, per-orientation attack table: `att[sq][t] = perm_t(attack[sq])`,
 /// the move's attack mask in orientation `t`'s frame (8 * n^2 `Bits`; 64 KB at
 /// n=16, L1/L2-resident). Built once per solve from the board geometry.
-fn build_att(q: &Queens) -> Box<[[Bits; 8]]> {
+pub(crate) fn build_att(q: &Queens) -> Box<[[Bits; 8]]> {
     let nn = (q.n * q.n) as usize;
     (0..nn)
         .map(|sq| {
@@ -65,6 +65,22 @@ fn build_att(q: &Queens) -> Box<[[Bits; 8]]> {
             })
         })
         .collect()
+}
+
+/// The child's 8 orientations after placing the move whose per-orientation attack
+/// masks are `a`: `child[t] = parent[t] & !a[t] = perm_t(available & !attack[sq])`
+/// (perm distributes over `&`/`!`, so the incremental update is exact). `child0`
+/// (the identity image, already computed for the terminal test) is reused. Shared
+/// with the `burr` solver, which reuses the exact A3 key path.
+#[inline]
+pub(crate) fn child_orient(parent: &[Bits; 8], a: &[Bits; 8], child0: Bits) -> [Bits; 8] {
+    std::array::from_fn(|t| {
+        if t == 0 {
+            child0
+        } else {
+            parent[t].and_not(a[t])
+        }
+    })
 }
 
 /// **Incremental** -- the A3 DFS-resident solver. See the module docs.
@@ -131,21 +147,6 @@ impl Incremental {
         self.att.get_or_init(|| build_att(q))
     }
 
-    /// The child's 8 orientations after placing the move whose per-orientation attack
-    /// masks are `a`: `child[t] = parent[t] & !a[t] = perm_t(available & !attack[sq])`
-    /// (perm distributes over `&`/`!`, so the incremental update is exact). `child0`
-    /// (the identity image, already computed for the terminal test) is reused.
-    #[inline]
-    fn child_orient(parent: &[Bits; 8], a: &[Bits; 8], child0: Bits) -> [Bits; 8] {
-        std::array::from_fn(|t| {
-            if t == 0 {
-                child0
-            } else {
-                parent[t].and_not(a[t])
-            }
-        })
-    }
-
     /// Sequential cutoff search with the node's 8 orientations and canonical key in
     /// hand. Mirrors [`Tt::wins_keyed`] exactly, but keys each child by the
     /// incremental `lex_min8` (8 `and-not`s) instead of recomputing `pos_key`.
@@ -169,7 +170,7 @@ impl Incremental {
                 result = true;
                 break;
             }
-            let child = Self::child_orient(orient, a, child0);
+            let child = child_orient(orient, a, child0);
             let ckey = lex_min8(&child);
             self.tt.prefetch(ckey);
             if !self.wins_inc(q, att, &child, ckey) {
@@ -223,7 +224,7 @@ impl Incremental {
         let recurse = |&sq: &u32| {
             let a = &att[sq as usize];
             let child0 = avail.and_not(a[0]);
-            let child = Self::child_orient(orient, a, child0);
+            let child = child_orient(orient, a, child0);
             let ckey = lex_min8(&child);
             !self.par_wins_inc(q, att, &child, ckey, depth + 1, min_avail)
         };
@@ -276,7 +277,7 @@ impl Solver for Incremental {
         let mut pending: Vec<([Bits; 8], Bits)> = Vec::with_capacity(moves.len());
         for &sq in &moves {
             let a = &att[sq as usize];
-            let co = Self::child_orient(&root, a, q.board.and_not(a[0]));
+            let co = child_orient(&root, a, q.board.and_not(a[0]));
             let ckey = lex_min8(&co);
             match self.tt.get(ckey) {
                 Some(0) => {
