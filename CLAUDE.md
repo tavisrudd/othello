@@ -20,6 +20,14 @@ Pure-iso (full-merge, fits-but-WL-bound) was a net loss; selective is the win. *
 set (~5.5B) exceeds the 17 GB flat table → evicts late-run; size `QUEENS_TT_SLOTS` or sweep KEY_MAX to
 keep it eviction-free, then a full (ask-first) n=16 run.
 
+**Per-node energy cuts (session 2026-06-17--5, `21ce0a6`+`97ef7bd`): n=14 −24.7% wall, node set
+identical.** iso-only `wins_tiny` tail + hash-carry (`get_h`/`put_h`) + direct triangular
+`iso_key_tiny_table` (the big one) + incremental move-list (kills the scan-all-n²). **All benches sit
+at the ~90°C 24-core throttle** → throughput is power-limited, rank levers by *energy/work* not
+parallelism; bench via `ryzenadj`/Zen5-pin ([[queens-benches-thermal-wall]]). Elder-root parallelism +
+the Lever-B nimber-oracle were both documented negatives (oracle parked behind `QUEENS_NIMBER_ORACLE`,
+off; redundant with the iso key until a K≥8 complete key — Lever-A — makes the merge non-redundant).
+
 **Next, decide with the user (not autonomous):**
 1. **Chunk 4 (BuRR archive)** — the load-bearing single-box lever: a static ribbon-retrieval layer that holds the solved set with no eviction (kills the 1.36× re-exp) and applies the 3.4× freeze-time graph-iso merge. Core landed (`rust/src/burr.rs` + `queens freeze`/`verify`); the live cascade vs ply-window integration is the open design choice → discuss scope. More/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), and a cheaper-than-graph-iso merge are the other rungs of the <30 min lever stack (roadmap).
 3. **dump/load Phase 2 (B2 full-key export)** — the Chunk-4 freeze primitive + distributed delta. Note: full-n16 *resume* loads the 17 GB TT past physical RAM into zram (this box's "swap" is `/dev/zram0`, compressed RAM, NOT disk), and random TT access pays a per-access decompress → crawls; partial-fill resumes are fine. (The 6.7 GB BuRR archive fits physical RAM, so its query path doesn't.)

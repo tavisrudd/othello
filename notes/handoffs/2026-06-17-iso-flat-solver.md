@@ -8,6 +8,69 @@ on all cores**, plus **iso-burr's fewer-nodes merge** — pushing toward the
 
 ---
 
+## ✅ Session 2026-06-17--5 (`21ce0a6`, `97ef7bd`) — per-node energy cuts: **n=14 −24.7% wall**, node set identical
+
+User goal shifted to **pushing iso-flat further**. Path: started on "better parallelism on the
+elder root" → measured it into the ground → pivoted to per-node work-reduction, which is the
+**right lever at this box's thermal wall** (see the new finding below). Five of Codex's six
+inner-loop suggestions landed; node set byte-identical throughout (n=12 distinct 1,060,823 exact,
+n=14 single-thread 29,695,141 unchanged; `solver_lineage_agrees`/OEIS/integration + clippy `-D`/fmt
+green).
+
+| lever | what | 24-core wall (n=14) | 1-thread instr |
+|-------|------|---------------------|----------------|
+| #1 iso-only `wins_tiny` tail | available-popcount is monotone-decreasing ⇒ once in the iso band the subtree is; drop the dead 8-orientation `child_orient`/`lex_min8` there | — | — |
+| #4 hash-carry | hash each TT key **once** at creation; thread `(route, fp)` through `wins_inc`/`wins_tiny`, reuse for prefetch+get+put (was ≤3× `hash128`/key). New `QueensTt::get_h/put_h/prefetch_h` | #1+#4: **−2.1%** | −2.0% |
+| **#5 tighter `iso_key_tiny_table`** | build the triangular edge code directly (one attack test per `i<j`), no full `k×k` adj + separate `edge_code` rescan (~3× work). **The surprise** — it's per *child-key* across the whole deep region, not a small band | **−20.5%** | −14.7% |
+| #2 incremental move-list | replace the scan-all-`n²` `for sq in q.order { if !avail.get }` with a per-node list filtered from the parent's (in `q.order`) — `wins_tiny` was scanning 196 to find ≤7. `MaybeUninit` buf to skip the `n²` zero-init | **−24.7%** | **−36.3%** |
+| #3 popcount-carry | folded into #1 | — | — |
+| #6 const-specialize ≤7 path | **skipped** — Fermi'd to ~0 (predicted-true branch, not a hot function like #5) | — | — |
+
+**Cumulative: 2.57s → 1.93s (−24.7% wall), 149.06B → 95.00B instr (−36.3%).** Wall gains were
+*super-linear* vs instructions where the cut was large (#5), because less energy/node → less
+throttle. **The deterministic instruction count predicted wall direction reliably — the right
+metric on a throttled box** (single-shot `perf` cycles were noisy/misleading; the interleaved
+24-core wall A/B is the bottom line).
+
+### Elder-root investigation (the entry point — a documented dead end, kept for the record)
+- **n=14 elder is ~hard-serial**: 47% of wall for 6% of nodes, scales only 1.87× over 1→24 threads
+  (the prove-a-win/cutoff levels are sequential by design). Whole search tops out at **8.17× on 24
+  cores**. **Fan-all-roots is a wash** (identical wall + node count) — you can't fan a cutoff node
+  without speculation, so ordering doesn't add exploitable parallelism.
+- **n=16 elder is NOT idle**: the size-split (`min-avail=96`) fills it → ~12 M/s, **23.8/24 cores
+  busy**. So the slack is the ~10× *busy-but-unproductive* ceiling, not idle cores.
+- **Lever B (background nimber DB) prototype built + tested → documented NEGATIVE at n=14.** G1
+  (`count --comps` now reports the per-node largest-component dist; max-comp is monotone ⇒ the
+  fraction ≈ the prunable set): ≤7 = 42% of *D4-distinct*. But iso-flat's selective iso key
+  **already merges that region**, so the oracle's incremental gain is only +5% work / −1.8% nodes
+  → net loss. Parked behind `QUEENS_NIMBER_ORACLE` (off) for a K≥8 complete-key (Lever-A) follow-up,
+  where the merge would no longer be redundant.
+
+### Contention/false-sharing audit (user asked)
+Hot path is clean: no Mutex; only per-node shared write is the TT slot store (node counter is
+thread-local since `49bba47`); no per-node `env::var`. TT false-sharing (8 slots/64B) is small
+(huge table vs store rate → capacity- not conflict-bound, roadmap #4 ~0–5%). True-sharing on the
+shallow popular slots (cross-CCX Infinity-Fabric bounce) is the inherent one. The **99.x% (not
+100%)** the user saw = work-starvation in the serial prove-a-win sections (Amdahl tail) + thermal
+throttle, **not** contention (which shows as 100%-busy-low-IPC).
+
+### ⚠️ THERMAL WALL — recontextualizes every bench (new, see [[queens-benches-thermal-wall]])
+**All queens benches run at the ~90°C 24-core throttle** (idle 57°C — the A9 Max mini-PC cooler
+can't sustain all-core; heat-soaks in <1 s). So a chunk of the "8.17× ceiling" is *clock derate*
+(single-thread ~4.9 GHz boost vs all-core ~3.7 GHz, ≈0.74×), not pure Amdahl: 24× ideal → ~17–18×
+before any algorithm, leaving ~2.1× algorithmic. **No SW fan control on this box** (no pwm hwmon /
+platform_profile / vendor tool — EC firmware runs the fan; the amdgpu kernel params are GPU-stability
+workarounds that also spend shared-SoC budget). **To bench cleanly: `ryzenadj` (cap TDP +
+`--tctl-temp 85`, no amdgpu changes) or Zen5 8-logical pin.** Throughput is power-limited ⇒ rank
+levers by **energy/work**, not parallelism — exactly why this session's per-node cuts paid.
+
+**Next (decide with user):** (1) **Lever-A edge-code k≤8 table** — a cheaper *complete* iso key
+(33–134 MB, n-independent) that both speeds the key AND makes the oracle's merge non-redundant
+(the real path to fold Lever B back in); (2) an n=16 throughput probe to confirm the −25% translates
+(OOM/thermal-fraught — do after ryzenadj); (3) strip-or-keep the parked oracle.
+
+---
+
 ## ✅ RESOLVED (session 2026-06-17--4, `9331f9b`) — iso-flat recovers throughput to >12 M/s
 
 User directive escalated to: *"remove any contention, measure hot loop costs, TMA, optimize…
