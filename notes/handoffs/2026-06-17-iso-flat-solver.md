@@ -508,3 +508,15 @@ off DRAM — only the roadmap's BuRR/ply-windowing reach it, and BuRR's cascade 
 so even that is a completion-time lever, not a rate lever. The `nodes/s` metric and completion-time
 diverge above ~36 M/s; the displayed rate only crosses 50 via redundant/collision work that slows the
 solve.
+
+## Rigorous interleaved A/B (the methodology gate): the win is genuine on completion time too
+
+8 alternating rounds, `main` (f36080d, no ≤7 table) vs `queens-iso-local-memo` (the ≤7-off-DRAM
+labelled-table win), n=14 parallel wall:
+
+    base mean 0.886s   win mean 0.792s   -> win 10.6% faster completion (tight: base .84-.91, win .78-.81)
+
+So the session win is genuine on BOTH axes: **+15% raw M/s AND +10.6% faster n=14 completion** — the
+hash-collision 63.5 M/s was the only "higher number" that regressed completion; this one is real.
+Final genuine n=16 rate **36.25 M/s**; the 50 target is unreachable as a genuine rate (>7 DRAM wall,
+every per-node lever measured). Recommend merging `queens-iso-local-memo`.
