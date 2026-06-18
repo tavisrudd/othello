@@ -453,7 +453,10 @@ solve <n> <solver>`; nimber: `queens nimber <n>`. `QUEENS_TT_BITS` overrides TT 
       with the iso freeze key + small per-root live TT → ~31 min). #20 KEPT (user; tune later). See
       Session-10 note.
 - [x] **`iso-flat` solver — THROUGHPUT RESOLVED (session 2026-06-17, `9331f9b`): >12 M/s.** n=14 **14.1
-      M/s** default (KEY_MAX=5 → 16.9), n=16 **~17 M/s warm** — vs incremental ~9.7 (n14). The path:
+      M/s** default (KEY_MAX=5 → 16.9); **n=16 SOLVED in 9m11s** (SECOND, 8.66B nodes, 1.27× re-exp,
+      15.7 M/s) — **~3.7× faster wall than the prior best** (incremental ~34 min; D4 session-7 56 min).
+      n=16 is now a ~9-min bench, not an hours-to-days run. NB at KEY_MAX=6 the merge is ~nil (6.84B vs
+      D4 7.2B) — the win is the cheap key × the contention fix × the flat store, not node-merge. The path:
       pure-iso (full WL on every big component) was a net loss (TMA: comp_canon+wl_refine = 75% of
       cycles, 8.4% branch-miss); the win = **`fused`'s kernel (carried 8 orientations + one *selective*
       iso/D4 key, no live WL) over the flat `QueensTt`** + the **thread-local node/HLL counter** fix in

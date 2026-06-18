@@ -11,7 +11,8 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Active thread:** [iso-flat solver](notes/handoffs/2026-06-17-iso-flat-solver.md) — new solver,
-**throughput RESOLVED (`9331f9b`): >12 M/s** (n=14 14.1, n=16 ~17 warm). `fused`'s kernel (carried
+**throughput RESOLVED (`9331f9b`): n=16 SOLVED in 9m11s** (SECOND, 1.27× re-exp, 15.7 M/s — ~3.7×
+faster than the prior ~34-min best; n=16 is now a ~9-min bench). n=14 14.1 M/s. `fused`'s kernel (carried
 orientations + a single **selective** iso/D4 key, no live WL) over a **flat lockless TT** + a
 **thread-local node/HLL counter** fix (removed the per-node cross-CCX `fetch_add` — a measured 2×;
 also helps `incremental`/`parallel`). `QUEENS_KEY_MAX` dials the speed↔merge↔fit trilemma (default 6).

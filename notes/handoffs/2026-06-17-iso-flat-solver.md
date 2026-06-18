@@ -35,9 +35,19 @@ levers, both measurement-driven:
 |-------|--------|-----|------|
 | n=14  | incremental (D4)      | 9.7  | baseline |
 | n=14  | **iso-flat KEY_MAX=6** | **14.1** | default; KEY_MAX=5 → 16.9 |
-| n=16  | **iso-flat KEY_MAX=6** | **~17 (warm)** | rises 10→17 as the elder-brother warmup ends; TT 51% full @ 1.7B nodes, re-exp still ~1.0× |
+| n=16  | **iso-flat KEY_MAX=6** | **15.7 (full run)** | **SOLVED: SECOND, 8.66B nodes, 1.27× re-exp, 9m11s** — ~3.7× faster wall than the prior best (incremental ~34 min) and ~4× the D4 session-7 run (56 min) |
 
 Gates green (solve 12/14 --distinct = 1,060,823 / ~49.1M, re-exp 1.01–1.08×; `make test`/clippy/fmt).
+
+**Key finding from the n=16 distinct count: at KEY_MAX=6 the selective merge is ~nil** — 6.84B distinct
+vs D4's ~7.2B (≈5% merge). The win is NOT the node merge; it is the **cheap key (tiny-table ≤6 / D4
+above, no live WL) × the thread-local-counter contention fix × the flat sustained store.** The 3.4× iso
+merge lives in the *bigger* graphs (k≥7), which only a *high* KEY_MAX keys — and that pays WL (slow).
+So the trilemma sharpens: cheap-key (low KEY_MAX) → ~no merge → 6.8B set → evicts (1.27×) but fast
+(15.7 M/s); merge (high KEY_MAX) → smaller set → fits eviction-free → but WL-bound. **Eviction-free n=16
+(re-exp→1.0) needs the merge, i.e. a higher KEY_MAX (slower/node) + a TT sized to the merged set — the
+open sweep.** As-is, 1.27× re-exp at 15.7 M/s is the fastest n=16 to date; chasing eviction-free trades
+throughput.
 
 **The trilemma is now a tunable knob, not a wall** (`QUEENS_KEY_MAX`): low → fast (this win),
 high → pure-iso full-merge (fits-but-WL-bound). **Open at n=16:** the selective set (~5.5B at
