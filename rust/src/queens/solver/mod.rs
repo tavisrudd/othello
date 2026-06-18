@@ -95,6 +95,12 @@ pub trait Solver: Sync {
     fn tt(&self) -> Option<&QueensTt> {
         None
     }
+
+    /// Per-available-popcount flat-TT put histogram, indexed by popcount, when the solver
+    /// was run with `QUEENS_PC_HIST=1` (segmented-TT band sizing). `None` otherwise.
+    fn pc_hist(&self) -> Option<Vec<u64>> {
+        None
+    }
 }
 
 /// Which canonical key the search uses per node. `D4` is the production key

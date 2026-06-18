@@ -167,10 +167,36 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
 
 - [x] iso-window + collapse = n=16 2m44s, new default (committed, ff'd to main)
 - [x] Opus review (no ff-blockers), doc fixes
-- [ ] Segmented TT: (1) popcount-distribution histogram
+- [x] Segmented TT: (1a) per-pc put histogram instrumentation (`QUEENS_PC_HIST=1`), gated, validated on n=14
+- [ ] Segmented TT: (1b) read off **n=16** distribution (needs box hygiene: ARC→2 GB + drop_caches; ~3 min)
 - [ ] Segmented TT: (2) `QUEENS_TT_SEGMENT` index variant, flat TT kept for A/B
 - [ ] Segmented TT: (3) A/B warm-M/s + completion
 - [ ] Deferred nits folded in
+
+## Segmented-TT band sizing — (1) the put histogram
+
+`QUEENS_PC_HIST=1` on the production iso-window path tallies every flat-TT put by
+available-popcount into a gated per-pc histogram (`const HIST` monomorphisation in
+`wins_inc`, selected once per subtree handoff in `par_wins_inc` — production `HIST=false`
+pays nothing; the bump is compiled out). Printed post-solve as a pc / count / %% / cum-%%
+table. All puts land at **pc ≥ 9** (pc≤8 is the W8 / ≤7 tables), so the histogram **is** the
+flat-TT working set, which is exactly what the segmented bands index.
+
+**n=14 distribution** (`QUEENS_PC_HIST=1 queens solve 14 iso-window`, 22.9 M puts of 27.6 M
+nodes — the ~4.7 M gap is ≤8-band expansions counted in `nodes` but not flat puts):
+
+| pc band   | share of puts | cum   |
+|-----------|---------------|-------|
+| 9–12      | ~61%          | 61%   |
+| 9–16      | ~82%          | 82%   |
+| 9–22      | ~96%          | 96%   |
+| ≥ 50      | < 0.03%       | —     |
+
+Sharp hump: peak at pc=9 (21.6%), monotone decay to pc≈16, a faint secondary bump at
+pc 18–21 (~3% each) and a tiny one at pc 38–43, then negligible tail. **Implication for
+band sizing:** weight bands heavily toward pc 9–22; the high-pc tail needs only token
+bands. n=14 is the *shape* proxy; (1b) reads the real n=16 weights (range extends higher,
+shape expected similar). Re-run any time: `QUEENS_PC_HIST=1 queens solve <n> iso-window`.
 
 ## Handoff Notes
 

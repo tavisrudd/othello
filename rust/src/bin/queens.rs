@@ -1505,6 +1505,11 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
         summary.push_str(&stats);
     }
     println!("\x1b[90m({summary})\x1b[0m");
+    // QUEENS_PC_HIST=1: the per-available-popcount flat-TT put distribution, for sizing
+    // the segmented-TT bands (band_size[pc] ∝ puts[pc]). Printed once, post-solve.
+    if let Some(hist) = solver.pc_hist() {
+        print_pc_hist(&hist);
+    }
     // With --distinct: how much of the search was re-expansion (TT thrash)?
     // Distinct is measured live (HyperLogLog) for n ≥ 14; for even n ≤ 12 we instead
     // compare this run's node count against the *known* exact distinct count (the
@@ -2200,6 +2205,38 @@ fn psym_report(q: &Queens, solver: &dyn Solver) {
             "✗ UNSOUND — certificate fired on a win position!"
         },
     );
+}
+
+/// `QUEENS_PC_HIST=1`: the flat-TT put distribution by available-popcount, the input for
+/// sizing the segmented-TT bands. Each band `pc` should get `band_size[pc] ∝ puts[pc]` so
+/// every band carries a comparable load factor; the cumulative column gives the running
+/// `band_base[pc]` weight. In production iso-window every put is at `pc ≥ 9` (pc ≤ 8 lives
+/// in the W8 / ≤7 tables), so lower rows are empty.
+fn print_pc_hist(hist: &[u64]) {
+    let total: u64 = hist.iter().sum();
+    if total == 0 {
+        println!("  (pc-hist: no flat-TT puts recorded)");
+        return;
+    }
+    let lo = hist.iter().position(|&c| c != 0).unwrap_or(0);
+    let hi = hist.iter().rposition(|&c| c != 0).unwrap_or(0);
+    println!(
+        "  flat-TT puts by available-popcount over {} puts (segmented-TT band weights):",
+        commas(total),
+    );
+    let mut cum = 0u64;
+    for (pc, &c) in hist.iter().enumerate().take(hi + 1).skip(lo) {
+        if c == 0 {
+            continue;
+        }
+        cum += c;
+        println!(
+            "    pc={pc:>3}: {:>15}  ({:6.2}%, cum {:6.2}%)",
+            commas(c),
+            c as f64 / total as f64 * 100.0,
+            cum as f64 / total as f64 * 100.0,
+        );
+    }
 }
 
 /// `count --comps`: the connected-component-size distribution of the available-graphs

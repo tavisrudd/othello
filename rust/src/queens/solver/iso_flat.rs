@@ -50,6 +50,19 @@ thread_local! {
     }) };
 }
 
+/// Histogram slot count: one per available-popcount, `0..=256` (the n=16 board has
+/// `16*16 = 256` squares). Indexed by `avail.popcount()`.
+const MAXPC: usize = 257;
+
+thread_local! {
+    /// Per-worker, **non-atomic** per-popcount flat-TT put tally for the
+    /// `QUEENS_PC_HIST` segmented-TT sizing measurement. Each `wins_inc` expansion
+    /// (one flat-TT put, always `pc >= 9` in production iso-window) bumps a plain
+    /// integer here; merged into the shared [`IsoFlat::pc_hist`] at drain. Empty cost
+    /// on the production (`HIST = false`) path — the bump is monomorphised away.
+    static PC_HIST_ACC: RefCell<[u64; MAXPC]> = const { RefCell::new([0u64; MAXPC]) };
+}
+
 /// Compact representation of an in-band (`popcount ≤ 7`) available graph: once a node
 /// drops into the iso band the whole subtree below it is a pure ≤7-vertex graph game
 /// (Node Kayles), so it is built **once** at band entry and the search carries it down
@@ -190,6 +203,13 @@ pub struct IsoFlat {
     // whole all-small region below its frontier (G1: ~42% of distinct nodes at ≤7, n=14).
     nimber_oracle: bool,
     counting: bool,
+    /// `QUEENS_PC_HIST=1`: tally flat-TT puts by available-popcount into [`pc_hist`](Self::pc_hist)
+    /// for segmented-TT band sizing (resolved once here, never per node — the hot loop is
+    /// monomorphised on a `const HIST` selected from this at the per-subtree handoff).
+    hist: bool,
+    /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
+    /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
+    pc_hist: Box<[AtomicU64]>,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -238,6 +258,8 @@ impl IsoFlat {
             root_total: AtomicU64::new(0),
             nimber_oracle: std::env::var("QUEENS_NIMBER_ORACLE").as_deref() == Ok("1"),
             counting,
+            hist: std::env::var("QUEENS_PC_HIST").as_deref() == Ok("1"),
+            pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -521,6 +543,35 @@ impl IsoFlat {
         self.drain_oracle_local();
     }
 
+    /// Tally one flat-TT put at available-popcount `pc` into this worker's thread-local
+    /// histogram (`QUEENS_PC_HIST` measurement only — reached solely from the `HIST = true`
+    /// monomorphisation of [`wins_inc`](Self::wins_inc), so the production path has no bump).
+    #[inline]
+    fn hist_bump(&self, pc: u32) {
+        PC_HIST_ACC.with(|cell| cell.borrow_mut()[pc as usize] += 1);
+    }
+
+    /// Merge this worker's thread-local put histogram into the shared [`pc_hist`](Self::pc_hist)
+    /// and clear it (so a later solve in this process starts fresh).
+    fn drain_hist_local(&self) {
+        PC_HIST_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            for (i, v) in a.iter_mut().enumerate() {
+                if *v != 0 {
+                    self.pc_hist[i].fetch_add(*v, Ordering::Relaxed);
+                    *v = 0;
+                }
+            }
+        });
+    }
+
+    /// Merge every rayon worker's put histogram into the shared total (the parallel twin of
+    /// [`drain_hist_local`](Self::drain_hist_local)).
+    fn drain_hist_all(&self) {
+        rayon::broadcast(|_| self.drain_hist_local());
+        self.drain_hist_local();
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
@@ -532,6 +583,7 @@ impl IsoFlat {
         const COUNT: bool,
         const PROVE_LOSS: bool,
         const WINDOW: bool,
+        const HIST: bool,
     >(
         &self,
         q: &Queens,
@@ -555,6 +607,12 @@ impl IsoFlat {
             }
         }
         self.tt.bump_local(nodes);
+        // Segmented-TT sizing measurement: every node reaching here does exactly one flat-TT
+        // put below, so tallying its popcount is the per-pc put histogram (gated to the
+        // `HIST` monomorphisation — production never executes this).
+        if HIST {
+            self.hist_bump(avail.popcount());
+        }
         let mut result = false;
         if PROVE_LOSS {
             let mut buf = [MaybeUninit::<u8>::uninit(); MAXV];
@@ -587,7 +645,7 @@ impl IsoFlat {
                     let ckey = d4_bits(lex_min8(&child));
                     let (cr, cf) = QueensTt::hash128(ckey);
                     self.tt.prefetch_h(cr);
-                    !self.wins_inc::<ORACLE, COUNT, false, WINDOW>(
+                    !self.wins_inc::<ORACLE, COUNT, false, WINDOW, HIST>(
                         q, att, &child, ckey, cr, cf, moves, nodes,
                     )
                 };
@@ -628,7 +686,7 @@ impl IsoFlat {
                 let ckey = d4_bits(lex_min8(&child));
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.tt.prefetch_h(cr);
-                !self.wins_inc::<ORACLE, COUNT, true, WINDOW>(
+                !self.wins_inc::<ORACLE, COUNT, true, WINDOW, HIST>(
                     q, att, &child, ckey, cr, cf, pmoves, nodes,
                 )
             };
@@ -958,28 +1016,26 @@ impl IsoFlat {
             // Hand the sequential subtree the full move order as its parent list; `wins_inc`
             // filters it to `avail` once, then the list shrinks incrementally below.
             let mut nodes = 0;
-            let won = if depth.is_multiple_of(2) {
-                self.wins_inc::<ORACLE, COUNT, true, WINDOW>(
-                    q,
-                    att,
-                    orient,
-                    key,
-                    route,
-                    fp,
-                    self.order8(q),
-                    &mut nodes,
-                )
-            } else {
-                self.wins_inc::<ORACLE, COUNT, false, WINDOW>(
-                    q,
-                    att,
-                    orient,
-                    key,
-                    route,
-                    fp,
-                    self.order8(q),
-                    &mut nodes,
-                )
+            // The per-pc put histogram (`QUEENS_PC_HIST`) only applies on the production-window
+            // path; pick its `HIST` monomorphisation **here, once per subtree handoff** (never
+            // per node), so the deep `wins_inc` recursion is fully monomorphised. The
+            // `WINDOW && !ORACLE && !COUNT` guard is const, so `HIST = true` is only instantiated
+            // for the production-window combo (no instantiation blow-up elsewhere).
+            let hist = WINDOW && !ORACLE && !COUNT && self.hist;
+            let order8 = self.order8(q);
+            let won = match (depth.is_multiple_of(2), hist) {
+                (true, false) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, false>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                (false, false) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, false>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                (true, true) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, true>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                (false, true) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, true>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
             };
             self.tt.flush_local_nodes(&mut nodes);
             return won;
@@ -1030,7 +1086,7 @@ impl Solver for IsoFlat {
         // dead under oracle/counting — so those arms fix it to `false`; the production arm
         // resolves it once here from `dense8` (the single runtime decision, not per node).
         let won = match (self.nimber_oracle, self.counting) {
-            (true, true) => self.wins_inc::<true, true, false, false>(
+            (true, true) => self.wins_inc::<true, true, false, false, false>(
                 q,
                 att,
                 &orient,
@@ -1040,7 +1096,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (true, false) => self.wins_inc::<true, false, false, false>(
+            (true, false) => self.wins_inc::<true, false, false, false, false>(
                 q,
                 att,
                 &orient,
@@ -1050,7 +1106,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (false, true) => self.wins_inc::<false, true, false, false>(
+            (false, true) => self.wins_inc::<false, true, false, false, false>(
                 q,
                 att,
                 &orient,
@@ -1060,17 +1116,18 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (false, false) if self.dense8.is_some() => self.wins_inc::<false, false, false, true>(
-                q,
-                att,
-                &orient,
-                key,
-                route,
-                fp,
-                self.order8(q),
-                &mut nodes,
-            ),
-            (false, false) => self.wins_inc::<false, false, false, false>(
+            (false, false) if self.dense8.is_some() => self
+                .wins_inc::<false, false, false, true, false>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
+            (false, false) => self.wins_inc::<false, false, false, false, false>(
                 q,
                 att,
                 &orient,
@@ -1084,6 +1141,7 @@ impl Solver for IsoFlat {
         self.tt.flush_local_nodes(&mut nodes);
         self.tt.drain_local(); // sequential path: only this thread accumulated
         self.drain_oracle_local();
+        self.drain_hist_local();
         won
     }
     fn first_player_wins(&self, q: &Queens) -> bool {
@@ -1130,6 +1188,7 @@ impl Solver for IsoFlat {
             resolve(&first.0, first.1) || rest.par_iter().any(|(co, ckey)| resolve(co, *ckey));
         self.tt.drain_all(); // fold every worker's tail tally into the shared totals
         self.drain_oracle_all();
+        self.drain_hist_all();
         won
     }
     fn nodes(&self) -> u64 {
@@ -1143,6 +1202,14 @@ impl Solver for IsoFlat {
     }
     fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
         self.tt.working_set()
+    }
+    fn pc_hist(&self) -> Option<Vec<u64>> {
+        self.hist.then(|| {
+            self.pc_hist
+                .iter()
+                .map(|a| a.load(Ordering::Relaxed))
+                .collect()
+        })
     }
     fn root_progress(&self) -> Option<(u64, u64)> {
         let total = self.root_total.load(Ordering::Relaxed);
