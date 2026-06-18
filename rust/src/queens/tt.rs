@@ -58,7 +58,28 @@ pub struct QueensTt {
     /// Optional distinct-position instrumentation (Chunk 1). `None` for an
     /// ordinary solve, so the production path pays only a predictable null check.
     counter: Option<Counter>,
+    /// `QUEENS_TT_SEGMENT=1`: route by available-popcount into a per-pc band of the same
+    /// flat table (`index_seg`), so the DFS working set is TLB-local without shrinking the
+    /// table. Resolved once at construction; the flat [`index`](Self::index) path is left
+    /// byte-identical as the A/B control (the solver monomorphises on it, never branches
+    /// per node). `false` ⇒ `band_*` are empty and unused.
+    segment: bool,
+    /// Exclusive prefix-sum start of each popcount band (`band_base[pc]`), indexed by
+    /// available-popcount `0..=256`. Empty unless [`segment`](Self::segment).
+    band_base: Box<[u64]>,
+    /// Slot count of each popcount band (`band_size[pc] ≥ 1`); `Σ band_size == len`.
+    /// Sized so each band carries a comparable load factor (∝ the put distribution).
+    band_size: Box<[u64]>,
 }
+
+/// Band count for the segmented TT: one per available-popcount, `0..=256` (the n=16 board
+/// has `16*16 = 256` squares). Mirrors `MAXPC` in the solver's histogram.
+const TT_MAXPC: usize = 257;
+
+/// Floor slots per band, so every band is non-empty (Lemire `fastrange` needs a non-zero
+/// modulus) and an unweighted popcount can't divide-by-zero. Negligible against a multi-GB
+/// table (`64 * 257 ≈ 16 K` slots reserved).
+const TT_MIN_BAND: u64 = 64;
 
 /// A compact 8-byte transposition slot (Chunk 2): one `u64` packing a used flag
 /// (bit 0), the 8-bit value (bits 1..9 -- the win/loss bit for the search, or a
@@ -194,6 +215,89 @@ fn tt_slots_override() -> Option<usize> {
         .map(|n| n.max(2))
 }
 
+/// Embedded first-cut band weights: the **n=14** flat-TT put distribution by
+/// available-popcount (`QUEENS_PC_HIST=1 queens solve 14 iso-window`), stored from `pc = 9`
+/// (the first non-empty popcount). The fallback when `QUEENS_TT_BANDS` is not given — good
+/// for n ≤ 14 validation; the n=16 A/B feeds real n=16 weights via the file (the shape is
+/// similar but the range extends higher). See the iso-window handoff.
+const N14_PUTS_FROM9: [u64; 57] = [
+    4_953_830, 3_618_177, 2_931_227, 2_478_592, 1_938_913, 1_333_717, 863_474, 645_630, 628_131,
+    682_025, 685_056, 589_228, 429_732, 264_266, 145_087, 84_190, 69_043, 75_378, 83_798, 83_381,
+    71_300, 52_281, 32_133, 16_558, 7_474, 3_329, 2_048, 2_611, 4_589, 7_279, 11_239, 15_500,
+    18_631, 19_159, 16_191, 11_884, 7_347, 3_924, 1_722, 628, 182, 103, 90, 129, 232, 367, 571,
+    623, 806, 702, 626, 430, 293, 121, 44, 19, 8,
+];
+
+/// Resolve the segmented-TT band table for a `len`-slot table: `QUEENS_TT_SEGMENT=1` enables
+/// it (else `(false, empty, empty)`). Band weights come from `QUEENS_TT_BANDS=<path>` (one
+/// per-popcount count per line, the format [`QUEENS_PC_HIST`] writes via `QUEENS_PC_HIST_OUT`)
+/// if set and readable, else the embedded n=14 distribution. Resolved once at construction.
+fn resolve_segment_bands(len: u64) -> (bool, Box<[u64]>, Box<[u64]>) {
+    if std::env::var("QUEENS_TT_SEGMENT").as_deref() != Ok("1") {
+        return (false, Box::new([]), Box::new([]));
+    }
+    let counts = load_band_counts().unwrap_or_else(default_band_counts);
+    let (base, size) = build_bands(&counts, len);
+    (true, base, size)
+}
+
+/// The embedded n=14 weights as a full per-popcount count array.
+fn default_band_counts() -> [u64; TT_MAXPC] {
+    let mut c = [0u64; TT_MAXPC];
+    for (i, &v) in N14_PUTS_FROM9.iter().enumerate() {
+        c[9 + i] = v;
+    }
+    c
+}
+
+/// Parse `QUEENS_TT_BANDS=<path>`: one non-negative integer per line, count for `pc = line
+/// index` (`0..TT_MAXPC`); missing trailing lines are zero. Returns `None` if unset or
+/// unreadable (caller falls back to the embedded table).
+fn load_band_counts() -> Option<[u64; TT_MAXPC]> {
+    let path = std::env::var("QUEENS_TT_BANDS").ok()?;
+    let text = std::fs::read_to_string(&path)
+        .map_err(|e| eprintln!("QUEENS_TT_BANDS: cannot read {path}: {e}; using embedded n=14"))
+        .ok()?;
+    let mut c = [0u64; TT_MAXPC];
+    for (pc, line) in text.lines().take(TT_MAXPC).enumerate() {
+        c[pc] = line.trim().parse().unwrap_or(0);
+    }
+    Some(c)
+}
+
+/// Partition `len` slots into per-popcount bands with size ∝ `counts[pc]` (each ≥
+/// [`TT_MIN_BAND`], so a band is never empty), returning `(band_base, band_size)` with
+/// `Σ band_size == len`. The rounding/floor remainder goes to the heaviest band.
+fn build_bands(counts: &[u64; TT_MAXPC], len: u64) -> (Box<[u64]>, Box<[u64]>) {
+    let total: u128 = counts.iter().map(|&c| c as u128).sum();
+    let reserved = TT_MIN_BAND * TT_MAXPC as u64;
+    // Distribute the slots above the per-band floor proportionally to the weights.
+    let free = len.saturating_sub(reserved);
+    let mut size = vec![0u64; TT_MAXPC];
+    for (pc, s) in size.iter_mut().enumerate() {
+        let share = if total > 0 {
+            (counts[pc] as u128 * free as u128 / total) as u64
+        } else {
+            free / TT_MAXPC as u64 // no weights: uniform
+        };
+        *s = TT_MIN_BAND + share;
+    }
+    // Floor division leaves a remainder (`len - Σ size ≥ 0`); give it to the heaviest band
+    // so `Σ size == len` exactly and the band that needs slots most gets the surplus.
+    let assigned: u64 = size.iter().sum();
+    let heaviest = (0..TT_MAXPC).max_by_key(|&pc| counts[pc]).unwrap_or(0);
+    size[heaviest] += len - assigned;
+    // Exclusive prefix sum for the band starts.
+    let mut base = vec![0u64; TT_MAXPC];
+    let mut acc = 0u64;
+    for pc in 0..TT_MAXPC {
+        base[pc] = acc;
+        acc += size[pc];
+    }
+    debug_assert_eq!(acc, len);
+    (base.into_boxed_slice(), size.into_boxed_slice())
+}
+
 // --------------------------------------------------------------------------- //
 // Dumpable / reloadable image (checkpoint + resume; proposal 2026-06-15)
 // --------------------------------------------------------------------------- //
@@ -301,12 +405,65 @@ impl QueensTt {
     /// `[0, len)` for any `len`.
     pub fn new(bits: u32) -> Self {
         let size = tt_slots_override().unwrap_or_else(|| 1usize << bits.max(1));
+        let (segment, band_base, band_size) = resolve_segment_bands(size as u64);
         QueensTt {
             slots: zeroed_huge_atomics(size),
             len: size as u64,
             nodes: AtomicU64::new(0),
             counter: None,
+            segment,
+            band_base,
+            band_size,
         }
+    }
+
+    /// Whether this table routes by per-popcount band ([`index_seg`](Self::index_seg))
+    /// rather than the flat [`index`](Self::index). Resolved once at construction.
+    #[inline]
+    pub fn is_segmented(&self) -> bool {
+        self.segment
+    }
+
+    /// Segmented slot index: route the key into its popcount band, then `fastrange` within
+    /// that band. A pure function of `(route, pc)` and `pc` is a pure function of the key, so
+    /// the same key always lands in the same slot (transposition-safe — no lost merges, unlike
+    /// worker-sharding). The whole DFS working set at a given depth shares a band, so its
+    /// random probes stay within a small, TLB-resident slice of the table.
+    #[inline]
+    fn index_seg(&self, route: u64, pc: u32) -> usize {
+        // SAFETY-of-bounds: `band_base`/`band_size` have `TT_MAXPC` entries and `pc` is an
+        // available-popcount ≤ 256; clamp defensively so a stray pc can never index OOB.
+        let pc = (pc as usize).min(TT_MAXPC - 1);
+        let base = self.band_base[pc];
+        let size = self.band_size[pc];
+        let off = ((route as u128).wrapping_mul(size as u128) >> 64) as u64;
+        (base + off) as usize
+    }
+
+    /// [`get_hashed`](Self::get_hashed) routed by popcount band ([`index_seg`](Self::index_seg)).
+    /// The counter hook is skipped: segmented runs are production (`!COUNT`).
+    #[inline]
+    pub(crate) fn get_seg_hashed(&self, route: u64, fp: u64, pc: u32) -> Option<u8> {
+        let s = Slot(self.slots[self.index_seg(route, pc)].load(Ordering::Relaxed));
+        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
+    }
+    /// [`put_hashed`](Self::put_hashed) routed by popcount band.
+    #[inline]
+    pub(crate) fn put_seg_hashed(&self, route: u64, fp: u64, pc: u32, val: u8) {
+        self.slots[self.index_seg(route, pc)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+    }
+    /// [`prefetch_hashed`](Self::prefetch_hashed) routed by popcount band.
+    #[inline]
+    pub(crate) fn prefetch_seg_hashed(&self, route: u64, pc: u32) {
+        let ptr = self.slots[self.index_seg(route, pc)].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: as [`prefetch_hashed`](Self::prefetch_hashed) -- warms a valid
+            // in-allocation pointer, no architectural effect, cannot fault.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
     }
 
     /// Lemire's `fastrange`: map a 64-bit hash uniformly into `[0, len)` with a single
@@ -698,6 +855,10 @@ impl QueensTt {
             len: header.len,
             nodes: AtomicU64::new(header.nodes),
             counter: None,
+            // Resume does not support segmentation (the image is a flat-keyed snapshot).
+            segment: false,
+            band_base: Box::new([]),
+            band_size: Box::new([]),
         })
     }
 

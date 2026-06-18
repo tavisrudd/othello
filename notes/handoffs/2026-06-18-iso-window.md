@@ -168,19 +168,19 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
 - [x] iso-window + collapse = n=16 2m44s, new default (committed, ff'd to main)
 - [x] Opus review (no ff-blockers), doc fixes
 - [x] Segmented TT: (1a) per-pc put histogram instrumentation (`QUEENS_PC_HIST=1`), gated, validated on n=14
-- [ ] Segmented TT: (1b) read off **n=16** distribution (needs box hygiene: ARC→2 GB + drop_caches; ~3 min)
-- [ ] Segmented TT: (2) `QUEENS_TT_SEGMENT` index variant, flat TT kept for A/B
-- [ ] Segmented TT: (3) A/B warm-M/s + completion
+- [x] Segmented TT: (2) `QUEENS_TT_SEGMENT` index variant + band-file mechanism, flat TT kept for A/B (validated n=12/14: correct verdict, zero node penalty)
+- [ ] Segmented TT: (1b)+(3) one clean-box n=16 pass: flat-time → flat-hist (write bands) → seg A/B
 - [ ] Deferred nits folded in
 
 ## Segmented-TT band sizing — (1) the put histogram
 
 `QUEENS_PC_HIST=1` on the production iso-window path tallies every flat-TT put by
-available-popcount into a gated per-pc histogram (`const HIST` monomorphisation in
-`wins_inc`, selected once per subtree handoff in `par_wins_inc` — production `HIST=false`
+available-popcount into a gated per-pc histogram (`const MODE = M_HIST` monomorphisation in
+`wins_inc`, selected once per subtree handoff in `par_wins_inc` — production `M_NORMAL`
 pays nothing; the bump is compiled out). Printed post-solve as a pc / count / %% / cum-%%
-table. All puts land at **pc ≥ 9** (pc≤8 is the W8 / ≤7 tables), so the histogram **is** the
-flat-TT working set, which is exactly what the segmented bands index.
+table; `QUEENS_PC_HIST_OUT=<path>` also dumps the raw per-pc counts (one per line, pc = line
+index) as the band-weight file the seg run consumes. All puts land at **pc ≥ 9** (pc≤8 is the
+W8 / ≤7 tables), so the histogram **is** the flat-TT working set the segmented bands index.
 
 **n=14 distribution** (`QUEENS_PC_HIST=1 queens solve 14 iso-window`, 22.9 M puts of 27.6 M
 nodes — the ~4.7 M gap is ≤8-band expansions counted in `nodes` but not flat puts):
@@ -197,6 +197,29 @@ pc 18–21 (~3% each) and a tiny one at pc 38–43, then negligible tail. **Impl
 band sizing:** weight bands heavily toward pc 9–22; the high-pc tail needs only token
 bands. n=14 is the *shape* proxy; (1b) reads the real n=16 weights (range extends higher,
 shape expected similar). Re-run any time: `QUEENS_PC_HIST=1 queens solve <n> iso-window`.
+
+## Segmented-TT band index — (2) `QUEENS_TT_SEGMENT`
+
+`index_seg(route, pc) = band_base[pc] + fastrange(route, band_size[pc])` (`tt.rs`): route a
+key into a per-popcount band of the **same** flat table, so the DFS working set at a given
+depth shares a small, TLB-resident slice — no shrink, no eviction change. **Transposition-safe
+by construction:** `pc` is a pure function of the key (its available popcount), so the same
+key always lands in the same band → same slot → every merge preserved (not the CCX-sharding
+negative, which sharded by *worker*). Bands sized ∝ the put distribution so each carries a
+comparable load factor; weights from `QUEENS_TT_BANDS=<path>` (the `QUEENS_PC_HIST_OUT` file)
+or the embedded n=14 fallback. `Σ band_size == len`; every band ≥ 64 slots (floor).
+
+- **Flat is the byte-identical A/B control.** `wins_inc` monomorphises on `const MODE`:
+  `M_NORMAL`/`M_HIST` use the flat `index`; only `M_SEG` calls `index_seg`. The hot path is
+  resolved once at the `par_wins_inc` subtree handoff — no per-node branch, no atomics, no env,
+  no alloc, no syscall added (all band/flag/file work is at construction).
+- **Validated n=12/14:** correct verdict (second), and with the run's own weights **zero
+  node-count penalty** (n=14 seg 27.589 M vs flat 27.596 M). n=14 is validation-only; **n=16 is
+  the perf metric** (expect n=14 to be a wash or slight regression — fine).
+- **The one-pass n=16 A/B** (no rebuild): `QUEENS_PC_HIST=1 QUEENS_PC_HIST_OUT=/tmp/bands16.txt
+  solve 16` to capture weights, then `QUEENS_TT_SEGMENT=1 QUEENS_TT_BANDS=/tmp/bands16.txt
+  solve 16` vs a clean flat `solve 16` for warm-M/s + wall. (Skip the hist run's overhead in the
+  flat control timing — time a separate clean flat run.)
 
 ## Handoff Notes
 

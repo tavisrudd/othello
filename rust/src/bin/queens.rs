@@ -2237,6 +2237,16 @@ fn print_pc_hist(hist: &[u64]) {
             cum as f64 / total as f64 * 100.0,
         );
     }
+    // QUEENS_PC_HIST_OUT=<path>: dump the raw per-pc counts (one per line, pc = line index),
+    // the band-weight file a follow-up `QUEENS_TT_SEGMENT=1 QUEENS_TT_BANDS=<path>` run reads.
+    // Lets a single clean-box pass measure n=16 weights then A/B the segmented TT, no rebuild.
+    if let Ok(path) = std::env::var("QUEENS_PC_HIST_OUT") {
+        let body: String = hist.iter().map(|c| format!("{c}\n")).collect();
+        match std::fs::write(&path, body) {
+            Ok(()) => println!("  (pc-hist → {path})"),
+            Err(e) => eprintln!("  (pc-hist: cannot write {path}: {e})"),
+        }
+    }
 }
 
 /// `count --comps`: the connected-component-size distribution of the available-graphs

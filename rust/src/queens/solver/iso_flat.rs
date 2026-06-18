@@ -54,6 +54,14 @@ thread_local! {
 /// `16*16 = 256` squares). Indexed by `avail.popcount()`.
 const MAXPC: usize = 257;
 
+/// Production-window measurement mode for [`wins_inc`](IsoFlat::wins_inc), a `const MODE`
+/// monomorphisation (resolved once per subtree handoff, never per node). The two measurement
+/// modes are mutually exclusive and both only apply to the `!ORACLE && !COUNT && WINDOW`
+/// combo, so folding them into one `u8` keeps the generic count down vs two bools.
+const M_NORMAL: u8 = 0; // plain solve / flat TT (the A/B control — byte-identical hot path)
+const M_HIST: u8 = 1; // tally flat-TT puts by popcount (`QUEENS_PC_HIST=1`)
+const M_SEG: u8 = 2; // route by per-popcount band (`QUEENS_TT_SEGMENT=1`)
+
 thread_local! {
     /// Per-worker, **non-atomic** per-popcount flat-TT put tally for the
     /// `QUEENS_PC_HIST` segmented-TT sizing measurement. Each `wins_inc` expansion
@@ -205,8 +213,12 @@ pub struct IsoFlat {
     counting: bool,
     /// `QUEENS_PC_HIST=1`: tally flat-TT puts by available-popcount into [`pc_hist`](Self::pc_hist)
     /// for segmented-TT band sizing (resolved once here, never per node — the hot loop is
-    /// monomorphised on a `const HIST` selected from this at the per-subtree handoff).
+    /// monomorphised on `const MODE = M_HIST`, selected from this at the per-subtree handoff).
     hist: bool,
+    /// `QUEENS_TT_SEGMENT=1` (mirrors [`QueensTt::is_segmented`]): route flat-TT probes by
+    /// per-popcount band. Resolved once; selects `const MODE = M_SEG` at the subtree handoff,
+    /// so the deep hot path is fully monomorphised (the flat control stays byte-identical).
+    segment: bool,
     /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
     /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
     pc_hist: Box<[AtomicU64]>,
@@ -241,6 +253,7 @@ impl IsoFlat {
 
     fn from_tt_with_window(tt: QueensTt, window: bool) -> Self {
         let counting = tt.is_counting();
+        let segment = tt.is_segmented();
         IsoFlat {
             name: if window { "iso-window" } else { "iso-flat" },
             tt,
@@ -259,6 +272,9 @@ impl IsoFlat {
             nimber_oracle: std::env::var("QUEENS_NIMBER_ORACLE").as_deref() == Ok("1"),
             counting,
             hist: std::env::var("QUEENS_PC_HIST").as_deref() == Ok("1"),
+            // Mirror the table's segmentation (it resolved `QUEENS_TT_SEGMENT` at startup), so
+            // the subtree-handoff dispatch can pick `MODE = M_SEG` once and monomorphise.
+            segment,
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
@@ -365,6 +381,77 @@ impl IsoFlat {
             self.tt.put_h(key, route, fp, val);
         } else {
             self.tt.put_hashed(route, fp, val);
+        }
+    }
+
+    /// [`wins_inc`](Self::wins_inc) flat-TT lookup, dispatched on the `const MODE`: `M_SEG`
+    /// routes by per-popcount band ([`QueensTt::get_seg_hashed`], `pc` = the node's available
+    /// popcount); `M_HIST`/`M_NORMAL` use the flat probe (identical to the control). The branch
+    /// is on a `const`, so each instantiation compiles to exactly one path — no per-node test.
+    #[inline]
+    fn mtt_get<const COUNT: bool, const MODE: u8>(
+        &self,
+        key: Bits,
+        route: u64,
+        fp: u64,
+        pc: u32,
+    ) -> Option<u8> {
+        if MODE == M_SEG {
+            self.tt.get_seg_hashed(route, fp, pc)
+        } else {
+            self.tt_get_h::<COUNT>(key, route, fp)
+        }
+    }
+
+    /// [`wins_inc`](Self::wins_inc) flat-TT store, MODE-dispatched (twin of [`mtt_get`](Self::mtt_get)).
+    #[inline]
+    fn mtt_put<const COUNT: bool, const MODE: u8>(
+        &self,
+        key: Bits,
+        route: u64,
+        fp: u64,
+        pc: u32,
+        val: u8,
+    ) {
+        if MODE == M_SEG {
+            self.tt.put_seg_hashed(route, fp, pc, val);
+        } else {
+            self.tt_put_h::<COUNT>(key, route, fp, val);
+        }
+    }
+
+    /// Prefetch the slot a child key will land in, MODE-dispatched: `M_SEG` prefetches its
+    /// band slot (`pc` = the child's popcount); otherwise the flat slot.
+    #[inline]
+    fn mtt_prefetch<const MODE: u8>(&self, route: u64, pc: u32) {
+        if MODE == M_SEG {
+            self.tt.prefetch_seg_hashed(route, pc);
+        } else {
+            self.tt.prefetch_h(route);
+        }
+    }
+
+    /// [`par_wins_inc`](Self::par_wins_inc) split-node lookup. Only the *few* shallow split
+    /// nodes reach this (never the deep hot path), so the segmentation choice is a cheap
+    /// resolved-once runtime branch on `self.segment` rather than another `const` to thread.
+    #[inline]
+    fn par_tt_get<const COUNT: bool>(&self, key: Bits, pc: u32) -> Option<u8> {
+        if self.segment {
+            let (route, fp) = QueensTt::hash128(key);
+            self.tt.get_seg_hashed(route, fp, pc)
+        } else {
+            self.tt_get_key::<COUNT>(key)
+        }
+    }
+
+    /// [`par_wins_inc`](Self::par_wins_inc) split-node store (twin of [`par_tt_get`](Self::par_tt_get)).
+    #[inline]
+    fn par_tt_put<const COUNT: bool>(&self, key: Bits, pc: u32, val: u8) {
+        if self.segment {
+            let (route, fp) = QueensTt::hash128(key);
+            self.tt.put_seg_hashed(route, fp, pc, val);
+        } else {
+            self.tt_put_key::<COUNT>(key, val);
         }
     }
 
@@ -583,7 +670,7 @@ impl IsoFlat {
         const COUNT: bool,
         const PROVE_LOSS: bool,
         const WINDOW: bool,
-        const HIST: bool,
+        const MODE: u8,
     >(
         &self,
         q: &Queens,
@@ -595,10 +682,18 @@ impl IsoFlat {
         pmoves: &[u8],
         nodes: &mut u64,
     ) -> bool {
-        if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
+        let avail = orient[0];
+        // The node's own available-popcount, needed *before* the probe in `M_SEG` (it picks
+        // the band) and for the `M_HIST` tally. `M_NORMAL` never reads it (popcount compiled
+        // out). Same value drives the entry-get, the exit-put, and the histogram bump.
+        let node_pc = if MODE == M_NORMAL {
+            0
+        } else {
+            avail.popcount()
+        };
+        if let Some(w) = self.mtt_get::<COUNT, MODE>(key, route, fp, node_pc) {
             return w != 0;
         }
-        let avail = orient[0];
         if ORACLE && avail.popcount() <= self.nimber_pc {
             if let Some(nim) = self.try_oracle_nimber(q, avail) {
                 let w = nim != 0;
@@ -609,9 +704,9 @@ impl IsoFlat {
         self.tt.bump_local(nodes);
         // Segmented-TT sizing measurement: every node reaching here does exactly one flat-TT
         // put below, so tallying its popcount is the per-pc put histogram (gated to the
-        // `HIST` monomorphisation — production never executes this).
-        if HIST {
-            self.hist_bump(avail.popcount());
+        // `M_HIST` monomorphisation — production never executes this).
+        if MODE == M_HIST {
+            self.hist_bump(node_pc);
         }
         let mut result = false;
         if PROVE_LOSS {
@@ -644,8 +739,8 @@ impl IsoFlat {
                     let child = child_orient(orient, a, child0);
                     let ckey = d4_bits(lex_min8(&child));
                     let (cr, cf) = QueensTt::hash128(ckey);
-                    self.tt.prefetch_h(cr);
-                    !self.wins_inc::<ORACLE, COUNT, false, WINDOW, HIST>(
+                    self.mtt_prefetch::<MODE>(cr, pc);
+                    !self.wins_inc::<ORACLE, COUNT, false, WINDOW, MODE>(
                         q, att, &child, ckey, cr, cf, moves, nodes,
                     )
                 };
@@ -654,7 +749,7 @@ impl IsoFlat {
                     break;
                 }
             }
-            self.tt_put_h::<COUNT>(key, route, fp, result as u8);
+            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
             return result;
         }
         for &sq in pmoves {
@@ -685,8 +780,8 @@ impl IsoFlat {
                 let child = child_orient(orient, a, child0);
                 let ckey = d4_bits(lex_min8(&child));
                 let (cr, cf) = QueensTt::hash128(ckey);
-                self.tt.prefetch_h(cr);
-                !self.wins_inc::<ORACLE, COUNT, true, WINDOW, HIST>(
+                self.mtt_prefetch::<MODE>(cr, pc);
+                !self.wins_inc::<ORACLE, COUNT, true, WINDOW, MODE>(
                     q, att, &child, ckey, cr, cf, pmoves, nodes,
                 )
             };
@@ -695,7 +790,7 @@ impl IsoFlat {
                 break;
             }
         }
-        self.tt_put_h::<COUNT>(key, route, fp, result as u8);
+        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
         result
     }
 
@@ -1007,33 +1102,56 @@ impl IsoFlat {
         depth: u32,
         min_avail: u32,
     ) -> bool {
-        if let Some(w) = self.tt_get_key::<COUNT>(key) {
+        let avail = orient[0];
+        // Split nodes are few and shallow (never the deep hot path), so segmentation here is a
+        // resolved-once `self.segment` runtime branch in `par_tt_get`/`par_tt_put` rather than
+        // another `const` threaded through the recursion. `pc` is this node's popcount (only
+        // read in the segmented branch — computed always here, but this is not the hot path).
+        let pc = avail.popcount();
+        if let Some(w) = self.par_tt_get::<COUNT>(key, pc) {
             return w != 0;
         }
-        let avail = orient[0];
         if depth >= self.par_depth && avail.popcount() <= min_avail {
             let (route, fp) = QueensTt::hash128(key);
             // Hand the sequential subtree the full move order as its parent list; `wins_inc`
             // filters it to `avail` once, then the list shrinks incrementally below.
             let mut nodes = 0;
-            // The per-pc put histogram (`QUEENS_PC_HIST`) only applies on the production-window
-            // path; pick its `HIST` monomorphisation **here, once per subtree handoff** (never
-            // per node), so the deep `wins_inc` recursion is fully monomorphised. The
-            // `WINDOW && !ORACLE && !COUNT` guard is const, so `HIST = true` is only instantiated
-            // for the production-window combo (no instantiation blow-up elsewhere).
-            let hist = WINDOW && !ORACLE && !COUNT && self.hist;
+            // The production-window measurement modes (`QUEENS_PC_HIST` / `QUEENS_TT_SEGMENT`)
+            // pick their `MODE` monomorphisation **here, once per subtree handoff** (never per
+            // node), so the deep `wins_inc` recursion is fully monomorphised. The `WINDOW &&
+            // !ORACLE && !COUNT` guard is const, so `M_HIST`/`M_SEG` are only instantiated for
+            // the production-window combo (the guard const-folds to `M_NORMAL` elsewhere, and
+            // DCE drops the dead arms — no instantiation blow-up).
+            let mode = if WINDOW && !ORACLE && !COUNT {
+                if self.segment {
+                    M_SEG
+                } else if self.hist {
+                    M_HIST
+                } else {
+                    M_NORMAL
+                }
+            } else {
+                M_NORMAL
+            };
             let order8 = self.order8(q);
-            let won = match (depth.is_multiple_of(2), hist) {
-                (true, false) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, false>(
+            let even = depth.is_multiple_of(2);
+            let won = match (even, mode) {
+                (true, M_SEG) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, M_SEG>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                (false, false) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, false>(
+                (false, M_SEG) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, M_SEG>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                (true, true) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, true>(
+                (true, M_HIST) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, M_HIST>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                (false, true) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, true>(
+                (false, M_HIST) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, M_HIST>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                (true, _) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, M_NORMAL>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                (false, _) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, M_NORMAL>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
             };
@@ -1048,7 +1166,7 @@ impl IsoFlat {
                 continue;
             }
             if avail.and_not(att08(att, sq)) == Bits::ZERO {
-                self.tt_put_key::<COUNT>(key, 1);
+                self.par_tt_put::<COUNT>(key, pc, 1);
                 return true;
             }
             moves[nc] = sq;
@@ -1067,7 +1185,7 @@ impl IsoFlat {
         } else {
             kids.iter().any(recurse)
         };
-        self.tt_put_key::<COUNT>(key, won as u8);
+        self.par_tt_put::<COUNT>(key, pc, won as u8);
         won
     }
 }
@@ -1086,7 +1204,7 @@ impl Solver for IsoFlat {
         // dead under oracle/counting — so those arms fix it to `false`; the production arm
         // resolves it once here from `dense8` (the single runtime decision, not per node).
         let won = match (self.nimber_oracle, self.counting) {
-            (true, true) => self.wins_inc::<true, true, false, false, false>(
+            (true, true) => self.wins_inc::<true, true, false, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1096,7 +1214,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (true, false) => self.wins_inc::<true, false, false, false, false>(
+            (true, false) => self.wins_inc::<true, false, false, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1106,7 +1224,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (false, true) => self.wins_inc::<false, true, false, false, false>(
+            (false, true) => self.wins_inc::<false, true, false, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1117,7 +1235,7 @@ impl Solver for IsoFlat {
                 &mut nodes,
             ),
             (false, false) if self.dense8.is_some() => self
-                .wins_inc::<false, false, false, true, false>(
+                .wins_inc::<false, false, false, true, M_NORMAL>(
                     q,
                     att,
                     &orient,
@@ -1127,7 +1245,7 @@ impl Solver for IsoFlat {
                     self.order8(q),
                     &mut nodes,
                 ),
-            (false, false) => self.wins_inc::<false, false, false, false, false>(
+            (false, false) => self.wins_inc::<false, false, false, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
