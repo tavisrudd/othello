@@ -244,7 +244,8 @@
   <a href="#latency">10 · The memory-latency wall</a>
   <a href="#micro">11 · Micro-optimizations</a>
   <a href="#numbers">12 · The numbers</a>
-  <a href="#floor">13 · The floor, and what is next</a>
+  <a href="#method">13 · How the speed was actually won</a>
+  <a href="#floor">14 · The floor, and what is next</a>
 </nav>
 
 <!-- ===================================================================== -->
@@ -872,8 +873,180 @@ fn pack(fp, val) -> Slot {
 </section>
 
 <!-- ===================================================================== -->
+<section id="method">
+<h2><span class="num">13</span>How the speed was actually won: methodology and war-stories</h2>
+<span class="sec-toggle" data-target="method">flip this section</span>
+
+<div class="layman">
+<p>Everything so far has been the <em>ideas</em>. But the ideas were rarely the hard part. The hard part was <strong>measuring</strong> — on a small machine that turned out to be so touchy that, more than once, it faked a hard limit that simply wasn't there. A timing would look like a brick wall; clean up the machine, and the wall was gone.</p>
+<p>What worked was a blend: a feel for where the time was probably going, knowledge of how the processor actually behaves, the right ideas from the research literature, and — above all — a refusal to trust a number until it had been re-checked under controlled conditions. This section tells that story: the toolkit, the instructive failures, and the working loop that produced the result.</p>
+</div>
+<div class="engineer">
+<p>The preceding sections are the levers. This one is the method that decided which levers were real. The recurring failure mode was never "we couldn't find a lever" — it was "we measured under a confound and believed the number." On a search that is memory-latency-bound <em>and</em> runs on a machine that swings ±2–3× with thermal state, page placement, cache pressure, and build flags, measurement hygiene mattered more than any single trick. The discipline below — pick the metric that doesn't move with the noise, isolate one variable, verify the fix flips the result — is what separated the ~10% wins that stuck from the dozens that were measurement artifacts.</p>
+</div>
+
+<h3>The measurement toolkit</h3>
+<div class="layman">
+<p>A handful of instruments did almost all the work. Together they answer three questions in order: <em>what kind</em> of stall dominates, <em>where</em> it lives, and <em>whether a proposed fix actually helped.</em></p>
+<ul>
+<li><strong>Hardware-counter sampling.</strong> The processor keeps internal tallies — instructions run, cycles burned, branches guessed wrong, memory-directory misses. Reading these is the first move on any speed question, because some of them don't drift run to run the way the stopwatch does.</li>
+<li><strong>"Top-down" diagnosis.</strong> A single readout that splits wasted time into buckets: was the processor starved for instructions to run, mis-guessing branches, or just waiting on memory? It tells you which <em>class</em> of fix can possibly pay before you build anything.</li>
+<li><strong>Interleaved A/B runs.</strong> To compare two versions fairly on a machine that heats up and slows down within seconds, you alternate them turn by turn rather than running all of one then all of the other — otherwise the heat, not the code, decides the winner.</li>
+<li><strong>Statistical sizing.</strong> Before committing to a multi-hour run, a clever estimator counts roughly how many genuinely-different boards a search would face — without actually solving it — so you know in advance whether it will fit in memory.</li>
+<li><strong>Knowing which number to trust.</strong> The most repeated lesson. The headline stopwatch time is the <em>noisiest</em> signal here, because the count of boards visited wanders run to run. The trustworthy signals are ratios that don't depend on that count: work-per-step and wrong-guess rate. A change that moves those moved something real.</li>
+</ul>
+</div>
+<div class="engineer">
+<p>Each instrument, what it reads, and when it was reached for:</p>
+<ul>
+<li><strong><code>perf stat</code> hardware counters</strong> — cycles, instructions (→ CPI/IPC), branch-misses, dTLB/iTLB-load-misses, L1d/L1i-load-misses, LLC misses. The first instrument on every question. Its decisive property: <strong>CPI and branch-miss-rate are node-count-independent</strong>, so one run resolves a per-node change that wall-clock can't — and the n=16 node count itself swings ±~18% run to run from parallel-cutoff timing, dwarfing most effects in wall time.</li>
+<li><strong>Top-down microarchitecture analysis (TMA)</strong> — attributes wasted pipeline slots to frontend-bound (instruction delivery: I-cache, iTLB, decode), backend-bound (execution: memory or ports), bad-speculation (mispredicts), or retiring (useful work). It decides the <em>category</em> of fix that can pay. The category shifted as the representation changed: the same program read as compute-bound (75% of cycles in the graph-key canonicalization at one stage), then DRAM-latency-bound (backend-by-memory ~34%, the hot annotation a <code>test</code> right after the TT slot load), then branch-mispredict-bound (branch-misses ≈ 24% of cycles, IPC ≈ 0.79) at successive stages.</li>
+<li><strong>dTLB / L1i / branch-miss budgets</strong> — used to <em>bound</em> a candidate before building it. In one round the counters said branch-misses cost ~22–24% of all cycles while dTLB misses cost ~7–8% even at a generous page-walk estimate, so the TLB lever was capped at single digits and the branch lever had ~3× the headroom. That is a back-of-envelope sizing call made straight from counters.</li>
+<li><strong>Interleaved (round-robin) A/B</strong> — the bottom-line keep/kill gate. Alternate the two binaries A/B/A/B, never all-A-then-all-B: the box thermally throttles ~1 s into a ~12 s n=14 solve, so a block design fabricates deltas. And at n=16, compare <strong>throughput (M/s), not wall</strong> — the node count is the noisy variable; throughput normalizes it.</li>
+<li><strong>HyperLogLog distinct counting</strong> — a cardinality estimator (~0.4% std err) fed every canonical key during a search, to size the problem before committing a multi-hour run. It put n=16 at ~7.2 B distinct under the cheap key (~2.1 B under graph-merge), which said a naive 8-byte-per-entry table can't fit but a ~1.1-bit/key compressed archive can — sizing the entire memory strategy without solving anything.</li>
+<li><strong>Which metric to trust</strong> — the throughline. Wall-clock is contaminated by throttle plus ±18% node noise; "nodes per second" is a trap (a colliding hash hit a higher rate but solved <em>slower</em> by manufacturing cheap nodes); the trustworthy per-node signals are CPI and branch-miss-rate. One run of each resolves a change the stopwatch can't.</li>
+</ul>
+</div>
+
+<div class="keyidea">
+<span class="tag">The one rule</span>
+<div class="layman"><p>Watch the ratios that ignore how many boards a run happened to visit — work-per-step and wrong-guess rate — not the raw clock. On this machine the clock lies; the ratios don't.</p></div>
+<div class="engineer"><p>On a throttled, latency-bound, parallel search, trust CPI and branch-miss-rate over wall-clock. They are per-instruction ratios independent of the ±18% node-count noise, so a single run resolves a per-node change the stopwatch can't — and they tie a measured effect to a mechanism (e.g. −9.4% CPI mechanistically consistent with −34% branch-misses).</p></div>
+</div>
+
+<h3>War-stories</h3>
+<div class="layman"><p>Six episodes, each the same arc: a symptom, the obvious explanation that was wrong, the real cause, the fix, and the lesson that got written down so it wouldn't be re-learned.</p></div>
+<div class="engineer"><p>Each card: symptom → the obvious-but-wrong reading → the real cause → the fix → the lesson. Chosen as the most instructive of the lot.</p></div>
+
+<div class="card">
+<h4 style="margin-top:0">① The phantom speed limit that was really a clogged machine</h4>
+<div class="layman">
+<p><strong>Symptom.</strong> A long, careful optimization pass ended with a firm conclusion: about 36 million positions per second was the ceiling, 50 million was impossible on this hardware, and a 16×16 solve near 3m41s was the wall.</p>
+<p><strong>The obvious reading.</strong> The reasoning inside that pass was sound on its own terms — the time really was going to random memory waits, and squeezing the math harder genuinely wouldn't raise the rate. So the wall looked real.</p>
+<p><strong>The real cause.</strong> Three measurement faults stacked up. The machine's memory was already clogged — compressed-RAM swap full of stale pages, a disk cache eating ~13 GB, and around 11 GB of leftover profiling files sitting in RAM-backed scratch space — so the big table never fit and every "solve" ran crippled. A promising dense lookup table had been dismissed on one of these crippled runs. And nobody had forced the memory system onto large pages, so only about 73% of the table got the fast treatment.</p>
+<p><strong>The fix.</strong> Clean the machine until the table fit, add the dense lookup table, and force every page large. The same solver finished in <strong class="win">2m44s</strong> — comfortably under the goal that had just been declared unreachable.</p>
+<p><strong>The lesson.</strong> Don't trust a "floor" until you've ruled out your own measurement. The estimated best-possible time for this approach is actually under a minute, so 2m44s isn't close to any real limit.</p>
+</div>
+<div class="engineer">
+<p><strong>Symptom.</strong> A "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s wall" was recorded after an extensive, genuinely competent pass (affinity sweeps, TMA, MLP windowing, a small resident band table) that did bank a real +15% raw M/s and +10.6% n=14 completion — then concluded the wall was hard.</p>
+<p><strong>The obvious reading.</strong> Self-consistent on its terms: TMA said backend-by-memory ~34%, the high-popcount region is an unbounded random-DRAM probe stream, and node-reduction cuts completion but not the rate (M/s = nodes ÷ wall). It even proved the metric-trap directly — a 1 MB fingerprinted hash hit 63.5 M/s but solved <em>slower</em> (9.30 s vs 8.82 s).</p>
+<p><strong>The real cause: three stacked confounds.</strong> (1) A degraded box — zram swap full of cold pages from prior OOM storms, ZFS ARC eating ~13 GB, ~11 GB of stale <code>perf.data</code> pinned in tmpfs (= RAM) — so the 17 GB table was capped to 12–13 GB and never reached the eviction-free regime. (2) The complete dense W8 table was dismissed as a wash, but on the capped box and through a slow code path. (3) Huge pages were never forced — <code>MADV_HUGEPAGE</code> is advisory, and the fragmented box only promoted ~57–73% of the multi-GB table to 2 MB pages.</p>
+<p><strong>The fix.</strong> Clean the box (swap off, ARC capped, tmpfs cleared → ~24 GB free → the 17 GB table fit); rebuild the W8 hook as a one-pass lookup; add <code>MADV_COLLAPSE</code> + prefault for 100%-verified 2 MB coverage. Result: 3m41s → <strong class="win">2m44s</strong>. W8 alone won ~28% fewer nodes; collapse added a clean ~5% TLB win at near-identical node count.</p>
+<p><strong>The lesson, now a standing rule.</strong> Treat any "floor" as a measurement artifact or an untried lever until proven otherwise — reason through the wall, not up to it. The instruction-counted compute floor for this strategy is ~45–60 s, an order of magnitude under the claimed wall, which is exactly why the claim should have been suspect.</p>
+</div>
+</div>
+
+<div class="card">
+<h4 style="margin-top:0">② The counter that cost 2× by bouncing between chiplets</h4>
+<div class="layman">
+<p><strong>Symptom.</strong> Two versions ran the identical core computation, yet one was twice as slow.</p>
+<p><strong>The obvious reading.</strong> "The machine regressed" — easy to blame the environment when the code looks the same.</p>
+<p><strong>The real cause.</strong> The slow version bumped a single <em>shared</em> "positions searched" counter on every position. This processor is built from two separate clusters of cores with their own local caches; a shared tally forces that one number to ricochet back and forth between the clusters across the chip's internal fabric, and every core ends up waiting on it.</p>
+<p><strong>The fix.</strong> Give each core its own private counter and have it report in only about once a second. That alone roughly <strong>doubled</strong> throughput. The same logic became a blanket rule: nothing shared, no settings lookups, and no memory allocation anywhere in the innermost loop.</p>
+<p><strong>The lesson.</strong> A "free" bookkeeping line on the hot path isn't free when many cores have to agree on it.</p>
+</div>
+<div class="engineer">
+<p><strong>Symptom.</strong> Even given the identical kernel of a faster sibling, one solver ran <strong>2× slower</strong> at n=14 — purely from the store path.</p>
+<p><strong>The obvious reading.</strong> "The box regressed" — the kernels matched, so the code looked exonerated.</p>
+<p><strong>The real cause.</strong> The HX 370 is two CCXs with separate L3s. A single shared atomic incremented every node by all 24 workers bounces over the Infinity Fabric; the per-node <code>fetch_add</code> on the node counter and the per-get HyperLogLog feed were both shared atomics on the hot path.</p>
+<p><strong>The fix.</strong> Move per-node accounting to a thread-local accumulator, flushed to atomics ~1×/s and drained once after the parallel search. That ~2×'d the solver and lifted every sibling that shared the path. It generalized to a rule: no atomics, no env-var reads, no syscalls (allocation included) in the inner loop — an env-var lock alone serializes every worker, the exact contention a lockless table removes.</p>
+<p><strong>The lesson.</strong> On a multi-CCX part, a per-node shared write is a cross-fabric coherence stall, not a cheap increment.</p>
+</div>
+</div>
+
+<div class="card">
+<h4 style="margin-top:0">③ The gigabytes of ghost files poisoning every run</h4>
+<div class="layman">
+<p><strong>Symptom.</strong> The big table kept failing to fit or spilling, dragging every 16×16 timing down — the proximate cause behind story ①.</p>
+<p><strong>The obvious reading.</strong> A quick glance at free memory looked fine, so memory didn't seem to be the problem.</p>
+<p><strong>The real cause.</strong> Several invisible tenants were each eating RAM at once: cold pages stuck in compressed-RAM swap, a disk cache sitting at roughly half of memory, and — the surprise — about 11 GB of leftover profiling dumps in a scratch directory that is itself backed by RAM on this machine. A casual look at free memory never showed them.</p>
+<p><strong>The fix.</strong> A pre-flight checklist before any big run: swap off, disk cache capped low, caches dropped and memory compacted, scratch space cleared, and large pages forced. With that, ~24 GB came free and the table fit.</p>
+<p><strong>The lesson.</strong> A degraded machine silently fakes a wall; clean it <em>before</em> believing any number.</p>
+</div>
+<div class="engineer">
+<p><strong>Symptom.</strong> The 17 GB TT OOM'd or spilled, capping every n=16 run — the proximate cause of story ①.</p>
+<p><strong>The obvious reading.</strong> A casual <code>free -h</code> glance looked adequate, so memory wasn't the suspect.</p>
+<p><strong>The real cause.</strong> With swap off and ARC capped, <code>MemAvailable</code> was still only ~12.9 GB; ~11 GB was pinned in tmpfs. <code>du</code> on <code>/tmp</code> found ~11 GB of stale <code>*.perf.data</code> from prior profiling — and <code>/tmp</code> is tmpfs (RAM) here, so disposable captures were pinning a third of memory, invisible to <code>free -h</code> and alongside zram cold pages and a ~50%-RAM ARC.</p>
+<p><strong>The fix.</strong> A pre-flight gate: swap/zram off; ARC capped low (~2 GB); <code>drop_caches</code> + <code>compact_memory</code>; clear <code>/tmp</code>; force 2 MB pages via <code>MADV_COLLAPSE</code>. With ≥~20 GB free the table fits eviction-free. (A subtlety: this box's "swap" is zstd-compressed RAM, not disk, so a spill is a per-access decompress cost, not disk I/O.)</p>
+<p><strong>The lesson.</strong> Box hygiene is a measurement precondition, not an afterthought; a starved box fakes a wall.</p>
+</div>
+</div>
+
+<div class="card">
+<h4 style="margin-top:0">④ The profiler pointing at the wrong place entirely</h4>
+<div class="layman">
+<p><strong>Symptom.</strong> Hunting the source of mis-guessed branches, the profiler lit up one spot hard — 76% of the samples in a single helper — and it looked like the answer.</p>
+<p><strong>The obvious reading.</strong> Rewrite that helper; it's clearly the hotspot.</p>
+<p><strong>The real cause.</strong> Following the call chain, that helper turned out to be part of a one-time table the program builds <em>at startup</em>. The profiling run had been done on a short 14×14 solve — so short that the startup work dwarfed the actual search. The profiler had faithfully measured the setup, not the game.</p>
+<p><strong>The fix.</strong> Re-profile the real, long 16×16 run, where startup is a rounding error. The clean picture showed the mis-guesses spread thinly across the search, with one genuinely fixable spot — which became story ⑤.</p>
+<p><strong>The lesson.</strong> Profile the workload you actually care about, at full size; a short run measures your setup.</p>
+</div>
+<div class="engineer">
+<p><strong>Symptom.</strong> Chasing the n=16 branch-miss source, a <code>perf record -e branch-misses</code> on a cheap n=14 run gave a sharp hotspot: 76% of branch-miss samples in a closure shim the compiler hadn't inlined.</p>
+<p><strong>The obvious reading.</strong> De-closure the hot iteration — the shim is the answer.</p>
+<p><strong>The real cause.</strong> Annotating with <code>--call-graph dwarf</code>, the caller chain placed the symbol inside a one-time <code>OnceLock</code> table build (a sort) — not the search. n=14 is so short that the startup build dominates the sample.</p>
+<p><strong>The fix.</strong> Re-profile the n=16 search with the record capped ~100 s post-startup. Clean profile: branch-misses diffuse across the kernel (inherent game-tree branching), with one concretely reducible branch standing out — the move-availability check (story ⑤).</p>
+<p><strong>The lesson.</strong> Localize on the production scale: at n=14 a <code>perf record</code> is swamped by the one-time table build that amortizes to nothing at n=16.</p>
+</div>
+</div>
+
+<div class="card">
+<h4 style="margin-top:0">⑤ Deleting a coin-flip branch for a 10% win</h4>
+<div class="layman">
+<p><strong>Symptom.</strong> The counters showed the processor stalling badly — doing well under one useful instruction per cycle.</p>
+<p><strong>The obvious reading.</strong> "Everything's memory-bound, so there's nothing left to do but wait." Mostly true — but not entirely.</p>
+<p><strong>The real cause.</strong> At every position the solver walks its parent's move list and keeps the moves still legal. "Still legal?" is close to a coin-flip deep in the tree, and a coin-flip is the worst thing to ask a processor to predict: it guesses, misses about half the time, and pays to unwind the wrong guess. A budget estimate from the counters said these wrong guesses were eating far more time than the memory-directory misses everyone was focused on.</p>
+<p><strong>The fix.</strong> Remove the question. Write each candidate move down unconditionally and nudge the running count by a 0-or-1 — no "if." Same output, no gamble. Wrong guesses fell about <strong>34%</strong>, work-per-step about <strong>9%</strong>, for roughly a <strong>10% speedup</strong> — beating the much fancier table-layout idea it was competing with.</p>
+<p><strong>The lesson.</strong> Even when "everything is memory-bound," a coin-flip branch can be worth removing — <em>if</em> the budget says wrong-guesses are large and a controlled test shows the cost wasn't already hidden behind the memory wait.</p>
+</div>
+<div class="engineer">
+<p><strong>Symptom.</strong> n=16 IPC ≈ 0.79 — the pipeline stalling hard.</p>
+<p><strong>The obvious reading.</strong> Latency-bound, so bad-spec recovery is presumably hidden behind the TT-probe DRAM stalls and removing it buys nothing.</p>
+<p><strong>The real cause.</strong> A <code>perf stat</code> budget on a flat-vs-seg n=16 A/B (both ~8.5 T instructions): 143 B branch-misses at ~15–18 cyc ≈ 22–24% of all cycles, vs dTLB misses ~7–8% even at a generous ~75 cyc/page-walk. The one reducible branch (localized after fixing story ④) was the per-square <code>if avail_has8(...)</code> in the move filter — a ~50/50 coin-flip at every node. The hypothesis that the misses were latency-hidden was tested directly by the A/B, not assumed.</p>
+<p><strong>The fix.</strong> Branchless filter: write the square unconditionally, <code>nc += avail as usize</code>; byte-identical node set. Measured (normalized by node-count-independent CPI): branch-misses 143.5 B → 95.2 B (−33.7%), CPI 1.267 → 1.148 (−9.4%), IPC 0.79 → 0.87, wall ~205 s → 183 s (−11%). The −9.4% CPI is the trustworthy signal and is mechanistically consistent with −48 B misses × ~16 cyc. This single micro-opt (~10%) beat the whole segmented-TT lever (+5%).</p>
+<p><strong>The lesson.</strong> On a latency-bound search the trustworthy per-node metric is CPI / branch-miss-rate, not wall; and a per-node coin-flip is worth removing if the budget says bad-spec is large and the A/B shows it isn't latency-hidden.</p>
+</div>
+</div>
+
+<div class="card">
+<h4 style="margin-top:0">⑥ Writing down what didn't work</h4>
+<div class="layman">
+<p><strong>Symptom.</strong> Plenty of plausible ideas that, when measured, made things worse or did nothing — and the temptation to quietly forget them and possibly try them again later.</p>
+<p><strong>The obvious reading.</strong> A failed idea is wasted effort; move on.</p>
+<p><strong>The real cause / the better view.</strong> A measured negative is a result. Several ideas looked clearly good on paper and were genuinely worth trying — a different proof-search algorithm, deeper parallelism, splitting the table across the two core clusters, comparing on raw throughput, an endgame shortcut — yet each lost in a controlled test, sometimes for subtle reasons (splitting the table across clusters does save a real ~13% on coherence, but loses more than that by re-searching positions the two halves no longer share).</p>
+<p><strong>The fix.</strong> Record each negative with its measurement and its reason, kept on a side branch rather than deleted. The next person reads the ledger and doesn't re-walk the dead end.</p>
+<p><strong>The lesson.</strong> "All cores at 100% in the monitor" is not the same as useful parallelism; and the cheapest speedup of all is not repeating a failure someone already paid for.</p>
+</div>
+<div class="engineer">
+<p><strong>Symptom.</strong> A drawer of plausible levers that measured flat or negative, and the risk of someone re-trying them later.</p>
+<p><strong>The obvious reading.</strong> Discard the failures and move on.</p>
+<p><strong>The real cause / better view.</strong> A measured negative is a result worth keeping. The ledger: df-pn (proof-number search) hits the proof-number + transposition (graph-history-interaction) pathology on this transposition-dense game and explodes past n=8; MLP windowing of prove-loss probes lifted single-thread IPC 1.18 → 1.40 but added +19% instructions (cycles flat) and <em>regressed</em> at 24 threads — the memory controllers' MLP is already saturated by cross-thread parallelism; CCX-partitioning the TT removes a real ~13% coherence penalty but loses ~42% cross-CCX transposition sharing (a metric-inflation trap); a nimber oracle paid a per-node decompose ~98% of the time for a ~1.7% hit rate; depth-preferred TT replacement measured 3× worse; the "nodes/s" trap (a colliding hash showed 63.5 M/s but solved slower).</p>
+<p><strong>The fix.</strong> Each negative recorded with its measurement and mechanism, on a side branch, not deleted — so no later pass re-walks df-pn, MLP, or CCX-partitioning.</p>
+<p><strong>The lesson.</strong> "All cores at 100% in htop ≠ useful parallelism" (judge by wall + CPU-seconds); and a documented negative is a banked result.</p>
+</div>
+</div>
+
+<h3>How the collaboration worked</h3>
+<div class="layman">
+<p>None of this came from one source. It came from a loop between a person and an automated assistant, run many times over.</p>
+<p>The person set the direction and held the line — picking which lever to chase next, and flatly refusing to accept "we've hit the wall" as an answer (which, every time, turned out to be the right instinct). The assistant supplied the microarchitecture diagnosis and the candidate fixes: reading the processor's counters, proposing the branchless rewrite, the private counters, the large-page trick. And the research literature supplied proven building blocks — the game theory that guarantees the merging is sound, the estimator that sizes the problem, the compact data structures that fit billions of entries in a few gigabytes — so the wheel never had to be reinvented.</p>
+<p>The thing that made it compound: every hard-won rule got written down. So the next pass didn't start from scratch — it started ahead, already knowing which walls were fake and which dead ends were dead.</p>
+</div>
+<div class="engineer">
+<p>The result came from a specific mix, iterated in a human + automated-assistant loop:</p>
+<ul>
+<li><strong>Human-guided intuition set the frame and refused the wall.</strong> Which lever to chase, when to clean the box, and the standing refusal to call any limit final — each rule the scar of a specific incident ("compare M/s not wall," "no atomics or env-vars in the inner loop," "focus on n=16, n=14 is validation only," "keep failed levers on branches"). The pivotal redirections — pinning to one core complex to crack the cross-CCX regression, cleaning memory in parallel during the floor overturn — came from that side of the loop.</li>
+<li><strong>Machine knowledge did the diagnosis and the fixes.</strong> TMA category reads, the branch-vs-dTLB budget call, catching the contaminated profile, the thread-local counter for cross-CCX coherence, compile-time monomorphisation to keep dead branches out of the frontend-bound loop, the branchless filter, <code>MADV_COLLAPSE</code> for full huge-page promotion — applied to whatever the tools surfaced.</li>
+<li><strong>Literature anchored correctness and direction.</strong> Correctness: the game is Node Kayles (PSPACE-completeness), verdicts cross-checked against OEIS A344227 and an independent 2014 n=16 computation. Direction: HyperLogLog to size the set, BuRR static retrieval for the ~1.1-bit/key archive, Lemire's <code>fastrange</code> for the index, external-memory delayed-duplicate detection for the bandwidth-bound dedup, Weisfeiler–Leman for the graph key.</li>
+<li><strong>Every rule was written down.</strong> The validation gates and the recorded negatives are the shared memory that let each pass start ahead of the last — including the explicit dead-end ledger, so no one re-walked df-pn, MLP, or CCX-partitioning.</li>
+</ul>
+<p>The throughline: the bottleneck was almost never where the first measurement said it was, and the first measurement was almost always taken under a confound. Progress came from distrusting the headline number, isolating one variable, verifying the flip, and refusing to call any wall final.</p>
+</div>
+</section>
+
+<!-- ===================================================================== -->
 <section id="floor">
-<h2><span class="num">13</span>The floor, transpositions, and what is next</h2>
+<h2><span class="num">14</span>The floor, transpositions, and what is next</h2>
 <span class="sec-toggle" data-target="floor">flip this section</span>
 
 <div class="layman">
