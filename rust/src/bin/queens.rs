@@ -2207,17 +2207,25 @@ fn comps_report(q: &Queens, solver: &dyn Solver) {
         return;
     };
     let mut hist = vec![0u64; (q.n * q.n) as usize + 1];
+    // G1 (Lever B gate): per-NODE largest-component histogram. A fragmented position
+    // resolves with NO recursion iff *all* its components fit the nimber table, i.e. its
+    // largest component ≤ K -- so this, not the per-component dist, is what decides how
+    // often the decompose→lookup→XOR shortcut can fire.
+    let mut maxhist = vec![0u64; (q.n * q.n) as usize + 1];
     for &(mask, _) in &ws {
         q.tally_components(mask, &mut hist);
+        maxhist[q.iso_max_component_size(mask) as usize] += 1;
     }
     let total: u64 = hist.iter().sum();
     if total == 0 {
         return;
     }
+    let nodes = ws.len() as u64;
     println!(
-        "  available-graph component sizes over {} D4-distinct positions ({} components):",
-        commas(ws.len() as u64),
+        "  available-graph component sizes over {} D4-distinct positions ({} components, {:.2} comps/node):",
+        commas(nodes),
         commas(total),
+        total as f64 / nodes as f64,
     );
     let mut cum = 0u64;
     for (k, &c) in hist.iter().enumerate() {
@@ -2230,6 +2238,30 @@ fn comps_report(q: &Queens, solver: &dyn Solver) {
             commas(c),
             c as f64 / total as f64 * 100.0,
             cum as f64 / total as f64 * 100.0,
+        );
+    }
+    // Per-node largest-component cumulative: fraction of distinct positions whose whole
+    // available-graph is resolvable by an edge-code nimber table of max size K.
+    println!(
+        "  per-node largest-component (the Lever-B fully-decomposable gate), {} distinct positions:",
+        commas(nodes),
+    );
+    let mut cum = 0u64;
+    for (k, &c) in maxhist.iter().enumerate() {
+        if c == 0 {
+            continue;
+        }
+        cum += c;
+        let tag = if matches!(k, 4 | 6 | 8 | 10 | 12 | 16) {
+            "  <- table-max K"
+        } else {
+            ""
+        };
+        println!(
+            "    maxk={k:>3}: {:>15}  ({:6.2}%, cum {:6.2}% ≤K){tag}",
+            commas(c),
+            c as f64 / nodes as f64 * 100.0,
+            cum as f64 / nodes as f64 * 100.0,
         );
     }
 }

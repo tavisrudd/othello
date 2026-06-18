@@ -483,6 +483,49 @@ impl QueensTt {
         }
     }
 
+    /// [`get`](Self::get) with the `(route, fp)` of `key` precomputed by the caller
+    /// (hash-carry): the hot search hashes each key **once** when it is created and reuses
+    /// the halves for the prefetch, this lookup, and the eventual [`put_h`](Self::put_h),
+    /// instead of re-deriving them via `hash128` at every touch. `key` is still threaded so
+    /// the counting build can fold it into the HLL (a predicted-away null check otherwise).
+    #[inline]
+    pub fn get_h(&self, key: Bits, route: u64, fp: u64) -> Option<u8> {
+        if let Some(c) = &self.counter {
+            ACC.with(|cell| {
+                let mut a = cell.borrow_mut();
+                if a.hll.len() != c.hll.register_count() {
+                    a.hll = vec![0u8; c.hll.register_count()];
+                }
+                c.hll.add_local(key, &mut a.hll);
+            });
+        }
+        let s = Slot(self.slots[self.index(route)].load(Ordering::Relaxed));
+        (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
+    }
+
+    /// [`put`](Self::put) with the `(route, fp)` of `key` precomputed (hash-carry twin of
+    /// [`get_h`](Self::get_h)).
+    #[inline]
+    pub fn put_h(&self, key: Bits, route: u64, fp: u64, val: u8) {
+        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        if let Some(c) = &self.counter {
+            c.record(key, val);
+        }
+    }
+
+    /// [`prefetch`](Self::prefetch) with the route half precomputed (hash-carry).
+    #[inline]
+    pub fn prefetch_h(&self, route: u64) {
+        let ptr = self.slots[self.index(route)].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: as in `prefetch` -- warms a valid pointer into the live allocation.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
+    }
+
     /// Prefetch the slot `key` will land in, so the demand `get` that follows finds
     /// it warm -- overlapping the random-probe DRAM round-trip with the work in
     /// between (Session 5, L1 cluster). x86_64 only; a no-op elsewhere.

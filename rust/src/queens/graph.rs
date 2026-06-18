@@ -424,20 +424,6 @@ fn canon6_key(attack: &[Bits], verts: &[u8]) -> u64 {
     mix64(packed ^ 0xC006_CAFE_6666_0006)
 }
 
-fn edge_code(k: usize, adj: &[u8]) -> u32 {
-    let mut code = 0u32;
-    let mut bit = 0u32;
-    for (i, &row) in adj[..k].iter().enumerate() {
-        for j in i + 1..k {
-            if (row & (1u8 << j)) != 0 {
-                code |= 1u32 << bit;
-            }
-            bit += 1;
-        }
-    }
-    code
-}
-
 fn adj_from_edge_code(k: usize, code: u32) -> [u8; SMALL_CANON_MAX] {
     let mut adj = [0u8; SMALL_CANON_MAX];
     let mut bit = 0u32;
@@ -831,16 +817,22 @@ impl Queens {
             verts[n] = v as u8;
             n += 1;
         });
-        let mut adj = [0u8; SMALL_CANON_MAX];
+        // Build the triangular edge code directly: one attack test per `i<j` pair, packed
+        // low-to-high in `(i,j)` lexicographic order (the index convention `adj_from_edge_code`
+        // inverts). Queen attacks are mutual, so the `i<j` direction is the whole edge — this is
+        // bit-identical to building the full adjacency then re-scanning the upper triangle, at
+        // half the attack tests and no adj-array writes.
+        let mut code = 0u32;
+        let mut bit = 0u32;
         for i in 0..k {
             let vi = verts[i] as usize;
-            for (j, &vj) in verts.iter().take(k).enumerate() {
-                if i != j && self.attack[vi].get(vj as u32) {
-                    adj[i] |= 1u8 << j;
+            for &vj in verts.iter().take(k).skip(i + 1) {
+                if self.attack[vi].get(vj as u32) {
+                    code |= 1u32 << bit;
                 }
+                bit += 1;
             }
         }
-        let code = edge_code(k, &adj);
         let idx = SMALL_CANON_OFF[k] + code as usize;
         small_canon_table()[idx]
     }

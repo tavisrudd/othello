@@ -28,6 +28,29 @@ use rayon::prelude::*;
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
 use std::sync::OnceLock;
 
+/// Resolve a `u32` env knob once at construction (never per node). Used for the
+/// leaf-oracle prototype thresholds.
+fn env_u32(name: &str, default: u32) -> u32 {
+    std::env::var(name)
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(default)
+}
+
+/// Tag a complete component iso key into a namespace disjoint from the position keys
+/// ([`graph_bits`]/[`d4_bits`]) so the flat TT can memoise per-component **nimbers**
+/// (stored in the `val` byte, `< 16`) alongside the win/loss position entries without
+/// aliasing (collisions only at the table's ~2⁻⁵⁵ fingerprint rate, like any TT entry).
+#[inline]
+fn comp_nimber_bits(h: u64) -> Bits {
+    Bits([
+        h,
+        mix64(h ^ 0x4E49_4D42_4552_0001),
+        0x4E49_4D42_4552_4E49,
+        0x4E49_4D42_0000_0000,
+    ])
+}
+
 /// **IsoFlat** -- the A3 DFS-resident kernel + flat lockless TT + single selective iso/D4 key.
 pub struct IsoFlat {
     tt: QueensTt,
@@ -38,6 +61,14 @@ pub struct IsoFlat {
     eff_min_avail: AtomicU32,
     root_done: AtomicU64,
     root_total: AtomicU64,
+    // Lever-B leaf-oracle prototype (QUEENS_NIMBER_ORACLE=1): when a node's available
+    // graph fully decomposes into connected components each ≤ `nimber_k`, resolve it by
+    // decompose → per-component nimber (memoised) → XOR → win iff ≠0, with NO recursion.
+    // Because max-component is monotone non-increasing down the tree, this prunes the
+    // whole all-small region below its frontier (G1: ~42% of distinct nodes at ≤7, n=14).
+    nimber_oracle: bool,
+    nimber_k: u32,
+    nimber_pc: u32,
 }
 
 impl IsoFlat {
@@ -62,6 +93,9 @@ impl IsoFlat {
             eff_min_avail: AtomicU32::new(u32::MAX),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
+            nimber_oracle: std::env::var("QUEENS_NIMBER_ORACLE").as_deref() == Ok("1"),
+            nimber_k: env_u32("QUEENS_NIMBER_K", 7),
+            nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
         }
     }
 
@@ -88,13 +122,102 @@ impl IsoFlat {
         }
     }
 
+    /// The iso-band key from `avail` alone (no orientations), given its already-computed
+    /// popcount `pc ≤ iso_max_avail`: the cheap tiny-table iso key for `pc ≤ 7`, the WL fast
+    /// key above. The [`wins_tiny`](Self::wins_tiny) tail never needs the 8 D4 orientations,
+    /// so this skips `node_key`'s `lex_min8`/`child_orient` machinery entirely.
+    #[inline]
+    fn iso_node_key(&self, q: &Queens, avail: Bits, pc: u32) -> Bits {
+        let h = if pc <= 7 {
+            q.iso_key_tiny_table(avail)
+        } else {
+            q.iso_key_fast(avail)
+        };
+        graph_bits(h)
+    }
+
+    /// Lever-B leaf oracle: if `avail` decomposes into connected components each
+    /// `≤ nimber_k`, return its exact win/loss via the Sprague-Grundy nimber (XOR of the
+    /// per-component nimbers, `win ⇔ ≠0`) with no recursion; else `None` (a big component
+    /// remains → fall through to the normal search). Sound: impartial normal-play, the
+    /// components are independent games (a queen in one component only removes squares of
+    /// that component), so the position nimber is their nim-sum.
+    #[inline]
+    fn try_oracle_nimber(&self, q: &Queens, avail: Bits) -> Option<u8> {
+        let mut x = 0u8;
+        let mut rem = avail;
+        while let Some(start) = rem.lowest() {
+            let comp = q.component(start, avail);
+            if comp.popcount() > self.nimber_k {
+                return None;
+            }
+            rem = rem.and_not(comp);
+            x ^= self.comp_nimber(q, comp);
+        }
+        Some(x)
+    }
+
+    /// Nimber of a single **connected** component (`≤ nimber_k ≤ 7` ⇒ `iso_key_tiny_table`
+    /// is the cheap *complete* iso key), memoised in the flat TT under a disjoint
+    /// nimber-tagged namespace. Recurses through the component's children (each strictly
+    /// smaller ⇒ stays in-band) via the nim-sum of *their* components.
+    fn comp_nimber(&self, q: &Queens, comp: Bits) -> u8 {
+        let key = comp_nimber_bits(q.iso_key_tiny_table(comp));
+        if let Some(v) = self.tt.get(key) {
+            return v;
+        }
+        let mut seen = 0u64; // bitset of child nimbers (all < n ≤ 16 < 64)
+        let mut rem = comp;
+        while let Some(sq) = rem.lowest() {
+            rem = rem.and_not(single(sq));
+            // place a queen on sq: remove sq + every square it attacks (q.attack[sq]
+            // includes sq), leaving a (possibly disconnected) smaller sub-position.
+            let child = comp.and_not(q.attack[sq as usize]);
+            seen |= 1u64 << self.position_nimber(q, child);
+        }
+        let mex = (!seen).trailing_zeros() as u8;
+        self.tt.put(key, mex);
+        mex
+    }
+
+    /// Nimber of a possibly-disconnected in-band sub-position = nim-sum of its components'
+    /// nimbers. Only ever called on children of an in-band component (so every component
+    /// is `≤ nimber_k`; no size re-check needed).
+    fn position_nimber(&self, q: &Queens, mask: Bits) -> u8 {
+        let mut x = 0u8;
+        let mut rem = mask;
+        while let Some(start) = rem.lowest() {
+            let comp = q.component(start, mask);
+            rem = rem.and_not(comp);
+            x ^= self.comp_nimber(q, comp);
+        }
+        x
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
-    fn wins_inc(&self, q: &Queens, att: &[[Bits; 8]], orient: &[Bits; 8], key: Bits) -> bool {
-        if let Some(w) = self.tt.get(key) {
+    /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
+    /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
+    fn wins_inc(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        orient: &[Bits; 8],
+        key: Bits,
+        route: u64,
+        fp: u64,
+    ) -> bool {
+        if let Some(w) = self.tt.get_h(key, route, fp) {
             return w != 0;
         }
-        self.tt.bump();
         let avail = orient[0];
+        if self.nimber_oracle && avail.popcount() <= self.nimber_pc {
+            if let Some(nim) = self.try_oracle_nimber(q, avail) {
+                let w = nim != 0;
+                self.tt.put_h(key, route, fp, w as u8);
+                return w;
+            }
+        }
+        self.tt.bump();
         let mut result = false;
         for &sq in &q.order {
             if !avail.get(sq) {
@@ -106,15 +229,76 @@ impl IsoFlat {
                 result = true;
                 break;
             }
-            let child = child_orient(orient, a, child0);
-            let ckey = self.node_key(q, &child);
-            self.tt.prefetch(ckey);
-            if !self.wins_inc(q, att, &child, ckey) {
+            // available-popcount is monotone non-increasing down the tree, so once a child
+            // enters the iso band it stays there: route it to the orientation-free `wins_tiny`
+            // (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count region.
+            let pc = child0.popcount();
+            let lost = if pc <= self.iso_max_avail {
+                let ckey = self.iso_node_key(q, child0, pc);
+                let (cr, cf) = QueensTt::hash128(ckey);
+                self.tt.prefetch_h(cr);
+                !self.wins_tiny(q, att, child0, ckey, cr, cf)
+            } else {
+                let child = child_orient(orient, a, child0);
+                let ckey = d4_bits(lex_min8(&child));
+                let (cr, cf) = QueensTt::hash128(ckey);
+                self.tt.prefetch_h(cr);
+                !self.wins_inc(q, att, &child, ckey, cr, cf)
+            };
+            if lost {
                 result = true;
                 break;
             }
         }
-        self.tt.put(key, result as u8);
+        self.tt.put_h(key, route, fp, result as u8);
+        result
+    }
+
+    /// Orientation-free tail of [`wins_inc`](Self::wins_inc) for the iso band
+    /// (`avail.popcount() ≤ iso_max_avail`). Available-popcount only shrinks down the tree,
+    /// so every descendant is in-band too: carry just the `avail` mask (one `and_not` per
+    /// move via `att[sq][0]`, no `child_orient`/`lex_min8`) and key by the iso key. Same
+    /// keys, same search order, same TT as `wins_inc` ⇒ byte-identical node set; it only
+    /// drops the dead 8-orientation bookkeeping in the highest-node-count region.
+    fn wins_tiny(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        avail: Bits,
+        key: Bits,
+        route: u64,
+        fp: u64,
+    ) -> bool {
+        if let Some(w) = self.tt.get_h(key, route, fp) {
+            return w != 0;
+        }
+        if self.nimber_oracle && avail.popcount() <= self.nimber_pc {
+            if let Some(nim) = self.try_oracle_nimber(q, avail) {
+                let w = nim != 0;
+                self.tt.put_h(key, route, fp, w as u8);
+                return w;
+            }
+        }
+        self.tt.bump();
+        let mut result = false;
+        for &sq in &q.order {
+            if !avail.get(sq) {
+                continue;
+            }
+            let child0 = avail.and_not(att[sq as usize][0]);
+            if child0 == Bits::ZERO {
+                result = true;
+                break;
+            }
+            let ckey = self.iso_node_key(q, child0, child0.popcount());
+            let (cr, cf) = QueensTt::hash128(ckey);
+            self.tt.prefetch_h(cr);
+            if !self.wins_tiny(q, att, child0, ckey, cr, cf) {
+                result = true;
+                break;
+            }
+        }
+        self.tt.put_h(key, route, fp, result as u8);
         result
     }
 
@@ -136,7 +320,8 @@ impl IsoFlat {
         }
         let avail = orient[0];
         if depth >= self.par_depth && avail.popcount() <= min_avail {
-            return self.wins_inc(q, att, orient, key);
+            let (route, fp) = QueensTt::hash128(key);
+            return self.wins_inc(q, att, orient, key, route, fp);
         }
         self.tt.bump();
         let mut moves: [u32; MAXV] = [0; MAXV];
@@ -178,7 +363,8 @@ impl Solver for IsoFlat {
         let att = self.att(q);
         let orient = orient_of(q, q.board.and_not(blocked));
         let key = self.node_key(q, &orient);
-        let won = self.wins_inc(q, att, &orient, key);
+        let (route, fp) = QueensTt::hash128(key);
+        let won = self.wins_inc(q, att, &orient, key, route, fp);
         self.tt.drain_local(); // sequential path: only this thread accumulated
         won
     }
