@@ -170,15 +170,17 @@ fn iso_burr_key_max_avail() -> u32 {
         .unwrap_or(7)
 }
 
-/// `iso-flat`'s default iso threshold: 6, one below `iso-burr`/`fused`. Keying popcount-7
-/// graphs by D4 instead of iso trades a little merge for staying clear of the WL path, which
-/// puts the flat-table throughput comfortably above the cheap-D4 `incremental` (n=14 ~14 vs
-/// ~10 M/s, 24-core). `QUEENS_KEY_MAX` overrides for the full speed/merge/fit sweep.
+/// `iso-flat`'s default iso threshold: **7** — the top of the no-WL regime (`iso_key_tiny_table`
+/// is exact for popcount ≤7; 8 falls into the costly WL canon). 7 merges more than 6 (smaller
+/// resident set → less eviction at n=16) at no WL cost, so it's the wall-optimal corner: n=16
+/// **8m20s / 1.15× re-exp** vs KEY_MAX=6's 9m11s / 1.27× (with `QUEENS_TT_SLOTS≈2.4e9`), and
+/// wall-neutral at n=14. `QUEENS_KEY_MAX` overrides for the full speed/merge/fit sweep (≥8 is
+/// WL — slower/node but a smaller, near-eviction-free set).
 fn iso_flat_key_max_avail() -> u32 {
     std::env::var("QUEENS_KEY_MAX")
         .ok()
         .and_then(|s| s.parse().ok())
-        .unwrap_or(6)
+        .unwrap_or(7)
 }
 
 /// Plies from the root that [`Parallel`] fans across rayon (resolved once at startup,

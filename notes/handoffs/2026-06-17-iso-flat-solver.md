@@ -35,7 +35,8 @@ levers, both measurement-driven:
 |-------|--------|-----|------|
 | n=14  | incremental (D4)      | 9.7  | baseline |
 | n=14  | **iso-flat KEY_MAX=6** | **14.1** | default; KEY_MAX=5 → 16.9 |
-| n=16  | **iso-flat KEY_MAX=6** | **15.7 (full run)** | **SOLVED: SECOND, 8.66B nodes, 1.27× re-exp, 9m11s** — ~3.7× faster wall than the prior best (incremental ~34 min) and ~4× the D4 session-7 run (56 min) |
+| n=16  | iso-flat KEY_MAX=6 | 15.7 | SECOND, 8.66B nodes, 1.27× re-exp, 9m11s (default TT 17 GB) |
+| n=16  | **iso-flat KEY_MAX=7** ⭐ | **13.2** | **SECOND, 6.58B nodes, 1.15× re-exp, 8m20s** (`QUEENS_TT_SLOTS=2.4e9`, 19.2 GB) — the wall-optimal corner; **now the default** |
 
 Gates green (solve 12/14 --distinct = 1,060,823 / ~49.1M, re-exp 1.01–1.08×; `make test`/clippy/fmt).
 
