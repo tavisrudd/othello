@@ -31,6 +31,10 @@ use std::mem::MaybeUninit;
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
 use std::sync::OnceLock;
 
+/// Slot count for the complete ≤7 [`tiny_tt`](IsoFlat::tiny_tt): 2^16 (256 KB at 4 B/slot),
+/// >>50× the ~1300 non-isomorphic ≤7 graphs, so the table never evicts and stays L2-resident.
+const TINY_TT_SLOTS: usize = 1 << 16;
+
 const ORACLE_FLUSH: u64 = 1 << 14;
 
 #[derive(Default)]
@@ -157,6 +161,15 @@ pub struct IsoFlat {
     /// once; lets the iso-band entry relabel a child's vertices into q.order with a tiny
     /// insertion sort instead of rescanning the parent's (long) move list.
     order_rank: OnceLock<Box<[u8]>>,
+    /// Complete, eviction-free win/loss table for the ≤7 iso band, keyed by the canonical
+    /// tiny key (the parent already computed it). The whole iso band is at most ~1300
+    /// non-isomorphic graphs, so this 2^16-slot (256 KB) table holds *all* of them with no
+    /// collisions — permanently L2-resident, every band-entry probe a cache hit after
+    /// warmup instead of a scattered probe into the multi-GB flat TT's DRAM. The bulk of
+    /// the search (the transposition-rich iso band, 78% of gets are hits here) leaves the
+    /// DRAM path entirely. Shared lock-free: a position's value is fixed, so a racing
+    /// same-slot write stores the same `u32`. Slot = `{used:1, val:1, fp:30}`.
+    tiny_tt: Box<[AtomicU32]>,
     tiny_canon: &'static [u64],
     par_depth: u32,
     par_min_avail: Option<u32>,
@@ -199,6 +212,7 @@ impl IsoFlat {
             att: OnceLock::new(),
             order8: OnceLock::new(),
             order_rank: OnceLock::new(),
+            tiny_tt: (0..TINY_TT_SLOTS).map(|_| AtomicU32::new(0)).collect(),
             tiny_canon: small_canon_table(),
             par_depth: par_depth(),
             par_min_avail: par_min_avail_override(),
@@ -678,8 +692,15 @@ impl IsoFlat {
         fp: u64,
         nodes: &mut u64,
     ) -> bool {
-        if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
-            return w != 0;
+        if COUNT {
+            // `--distinct`: keep the band in the flat TT so the HLL counts every position.
+            if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
+                return w != 0;
+            }
+        } else if let Some(w) = self.tiny_get(key.0[0]) {
+            // Production: the band-entry win/loss lives in the complete L2 ≤7 table, keyed
+            // by the canonical tiny key (`key.0[0]` = the tiny key `h`; see `graph_bits`).
+            return w;
         }
         let rank = self.order_rank(q);
         let mut verts = [0u8; MAXV_TINY];
@@ -724,8 +745,27 @@ impl IsoFlat {
         // than shared through DRAM.
         let mut memo = [-1i8; 128];
         let won = self.solve_local(&g, alive, &mut memo, nodes);
-        self.tt_put_h::<COUNT>(key, route, fp, won as u8);
+        self.tiny_put(key.0[0], won);
         won
+    }
+
+    /// Probe the complete ≤7 [`tiny_tt`](Self::tiny_tt) by the canonical tiny key `h`. One
+    /// L2 load + a 14-bit fingerprint check (a mismatch is a miss — recompute, never wrong).
+    #[inline]
+    fn tiny_get(&self, h: u64) -> Option<bool> {
+        let m = mix64(h);
+        let s = self.tiny_tt[(m as usize) & (TINY_TT_SLOTS - 1)].load(Ordering::Relaxed);
+        let fp = ((m >> 16) & 0x3FFF_FFFF) as u32;
+        ((s & 1) != 0 && (s >> 2) == fp).then_some((s >> 1) & 1 != 0)
+    }
+
+    /// Store `won` for the canonical tiny key `h` in the ≤7 [`tiny_tt`](Self::tiny_tt).
+    #[inline]
+    fn tiny_put(&self, h: u64, won: bool) {
+        let m = mix64(h);
+        let fp = ((m >> 16) & 0x3FFF_FFFF) as u32;
+        let s = 1 | ((won as u32) << 1) | (fp << 2);
+        self.tiny_tt[(m as usize) & (TINY_TT_SLOTS - 1)].store(s, Ordering::Relaxed);
     }
 
     /// Solve an in-band node against a **local** `memo` (indexed by the alive bitmask over
