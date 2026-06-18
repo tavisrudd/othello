@@ -471,3 +471,23 @@ into the 2 MB table (the k=7 sub-region is 2 MB → L3 at n=16; k≤6 is 33 KB �
 an L2 hash (with a fingerprint; collision = cheap recompute) is the next lever; eliminating
 `band_entry` would reach ~47 M/s, then the >7 D4 region (73%, the DRAM wall) is the remaining
 barrier (roadmap: BuRR / ply-windowing). Note the labelled-key re-exp trade before merging to main.
+
+## ≤7 keying — exhaustively measured (n=14 single-thread, completion = ground truth)
+
+| ≤7 key strategy            | n=14 nodes | n=14 wall | n=16 M/s | verdict |
+|----------------------------|-----------:|----------:|---------:|---------|
+| canonical (16 MB table)    | 29.7 M     | 9.71 s    | 33.5     | canon DRAM probe |
+| **raw labelled edge code** | **34.4 M** | **8.82 s**| **36.25**| **GENUINE OPTIMUM** |
+| degree-sorted near-canon   | 29.8 M     | 15.99 s   | 13.16    | merges well but adjacency+sort compute >> canon DRAM |
+| L2 hash (1 MB, fp)         | 54.8 M     | 9.30 s    | 63.5 (!) | metric trap — collisions inflate nodes/s, slow completion |
+
+Conclusion: **raw labelled is the optimum** — cheapest per node wins; merge level is secondary
+because the merge loss is cheap L1 recompute. The canon table's DRAM probe, the degree-sort's
+canonicalisation compute, and the hash's collision recompute all cost *more* than they save.
+The ≤7 region is fully optimised at **36.25 M/s (+15% over 31.4 baseline)**.
+
+**Hard finding — `nodes/s` ≠ `solve faster`.** Beyond the ≤7-off-DRAM win, raw M/s only rises
+by manufacturing cheap nodes (hash collisions: 63.5 M/s but 9.30 s > 8.82 s; or less merge), which
+SLOWS completion. The >7 D4 region (73% of the search) is an unbounded DRAM wall; node-reduction
+(oracle) cuts completion but not the rate. So **genuine raw M/s tops out at ~36** here — 50 genuine
+needs a smaller/faster >7 representation (BuRR archive / ply-windowing; roadmap-scale).
