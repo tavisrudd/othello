@@ -22,18 +22,14 @@
 //! smaller than D4, trading some merge for the cheap key. The full-merge (pure-iso, fits-but-
 //! WL-bound) end is reachable by raising `iso_max_avail`, but is not the throughput default.
 
-use super::graph::{small_canon_table, tiny_key_from_adj};
+use super::graph::{small_canon_table, tiny_key_from_adj, TINY_TABLE_SLOTS};
 use super::incremental::{build_att, child_orient, lex_min8, orient_of};
 use super::*;
 use rayon::prelude::*;
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
-use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicU32, AtomicU64, AtomicU8, Ordering};
 use std::sync::OnceLock;
-
-/// Slot count for the complete ≤7 [`tiny_tt`](IsoFlat::tiny_tt): 2^16 (256 KB at 4 B/slot),
-/// >>50× the ~1300 non-isomorphic ≤7 graphs, so the table never evicts and stays L2-resident.
-const TINY_TT_SLOTS: usize = 1 << 16;
 
 const ORACLE_FLUSH: u64 = 1 << 14;
 
@@ -161,15 +157,17 @@ pub struct IsoFlat {
     /// once; lets the iso-band entry relabel a child's vertices into q.order with a tiny
     /// insertion sort instead of rescanning the parent's (long) move list.
     order_rank: OnceLock<Box<[u8]>>,
-    /// Complete, eviction-free win/loss table for the ≤7 iso band, keyed by the canonical
-    /// tiny key (the parent already computed it). The whole iso band is at most ~1300
-    /// non-isomorphic graphs, so this 2^16-slot (256 KB) table holds *all* of them with no
-    /// collisions — permanently L2-resident, every band-entry probe a cache hit after
-    /// warmup instead of a scattered probe into the multi-GB flat TT's DRAM. The bulk of
-    /// the search (the transposition-rich iso band, 78% of gets are hits here) leaves the
-    /// DRAM path entirely. Shared lock-free: a position's value is fixed, so a racing
-    /// same-slot write stores the same `u32`. Slot = `{used:1, val:1, fp:30}`.
-    tiny_tt: Box<[AtomicU32]>,
+    /// Complete, eviction-free ≤7 win/loss table, keyed by the **labelled** dense index
+    /// [`Queens::tiny_table_index`] (`OFF[k] + edge_code`) — `0` = unknown, `1` = loss,
+    /// `2` = win. One byte per labelled code (~2 MB), so a band entry is a single direct
+    /// indexed load (no canon-table lookup, no fingerprint, no flat-TT DRAM probe). Keying
+    /// by the labelled (not canonical) code skips the 16 MB canon table — the win/loss is
+    /// iso-invariant, so every labelling stores the same value; the slight merge loss is
+    /// recomputed cheaply in the L1 [`solve_local`](Self::solve_local) memo. Shared
+    /// lock-free: a position's value is fixed, so a racing same-slot write stores the same
+    /// byte. Hot codes cluster; the cold tail stays paged-out, so the resident footprint is
+    /// the reached ≤7 graphs, not the full 2 MB.
+    tiny_tt: Box<[AtomicU8]>,
     tiny_canon: &'static [u64],
     par_depth: u32,
     par_min_avail: Option<u32>,
@@ -212,7 +210,7 @@ impl IsoFlat {
             att: OnceLock::new(),
             order8: OnceLock::new(),
             order_rank: OnceLock::new(),
-            tiny_tt: (0..TINY_TT_SLOTS).map(|_| AtomicU32::new(0)).collect(),
+            tiny_tt: (0..TINY_TABLE_SLOTS).map(|_| AtomicU8::new(0)).collect(),
             tiny_canon: small_canon_table(),
             par_depth: par_depth(),
             par_min_avail: par_min_avail_override(),
@@ -520,17 +518,15 @@ impl IsoFlat {
                 // game (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count
                 // region. Children inherit this node's `moves` as their parent list.
                 let pc = child0.popcount();
-                let lost = if pc <= self.iso_max_avail {
+                let lost = if !ORACLE && pc <= 7 {
+                    !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
+                } else if pc <= self.iso_max_avail {
                     let ckey = self.iso_node_key(q, child0, pc);
                     let (cr, cf) = QueensTt::hash128(ckey);
                     self.tt.prefetch_h(cr);
-                    if !ORACLE && pc <= 7 {
-                        !self.enter_graph::<COUNT>(q, att, child0, ckey, cr, cf, nodes)
-                    } else {
-                        !self.wins_tiny::<ORACLE, COUNT, false>(
-                            q, att, child0, ckey, cr, cf, moves, nodes,
-                        )
-                    }
+                    !self.wins_tiny::<ORACLE, COUNT, false>(
+                        q, att, child0, ckey, cr, cf, moves, nodes,
+                    )
                 } else {
                     let child = child_orient(orient, a, child0);
                     let ckey = d4_bits(lex_min8(&child));
@@ -563,17 +559,13 @@ impl IsoFlat {
             // (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count region.
             // Children inherit this node's `moves` as their parent list (a `q.order` subseq).
             let pc = child0.popcount();
-            let lost = if pc <= self.iso_max_avail {
+            let lost = if !ORACLE && pc <= 7 {
+                !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
+            } else if pc <= self.iso_max_avail {
                 let ckey = self.iso_node_key(q, child0, pc);
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.tt.prefetch_h(cr);
-                if !ORACLE && pc <= 7 {
-                    !self.enter_graph::<COUNT>(q, att, child0, ckey, cr, cf, nodes)
-                } else {
-                    !self.wins_tiny::<ORACLE, COUNT, true>(
-                        q, att, child0, ckey, cr, cf, pmoves, nodes,
-                    )
-                }
+                !self.wins_tiny::<ORACLE, COUNT, true>(q, att, child0, ckey, cr, cf, pmoves, nodes)
             } else {
                 let child = child_orient(orient, a, child0);
                 let ckey = d4_bits(lex_min8(&child));
@@ -673,6 +665,28 @@ impl IsoFlat {
         (key, route, fp)
     }
 
+    /// Resolve a ≤7 band child `child0` (popcount `pc`): production (`!COUNT`) keys it by the
+    /// canon-free labelled index — **no `iso_node_key`, no 16 MB canon-table probe**; the
+    /// `--distinct` (`COUNT`) build keeps the canonical flat-TT key so the HLL still sees it.
+    #[inline]
+    fn band_entry<const COUNT: bool>(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        child0: Bits,
+        pc: u32,
+        nodes: &mut u64,
+    ) -> bool {
+        if COUNT {
+            let ckey = self.iso_node_key(q, child0, pc);
+            let (cr, cf) = QueensTt::hash128(ckey);
+            self.tt.prefetch_h(cr);
+            self.enter_graph::<true>(q, att, child0, pc, ckey, cr, cf, nodes)
+        } else {
+            self.enter_graph::<false>(q, att, child0, pc, Bits::ZERO, 0, 0, nodes)
+        }
+    }
+
     /// Band entry: a node `child0` has just dropped to `popcount ≤ 7`. Build its
     /// [`TinyGraph`] once — the only place the board is read in the whole iso tail — then
     /// hand the subtree to the orientation-free graph game. Vertices are relabelled
@@ -687,19 +701,25 @@ impl IsoFlat {
         q: &Queens,
         att: &[[Bits; 8]],
         child0: Bits,
+        pc: u32,
         key: Bits,
         route: u64,
         fp: u64,
         nodes: &mut u64,
     ) -> bool {
+        // Production: the band-entry win/loss lives in the complete ≤7 table keyed by the
+        // *labelled* dense index — one direct byte load, no canon-table lookup, no DRAM.
+        let tidx = if COUNT {
+            0
+        } else {
+            q.tiny_table_index(child0, pc)
+        };
         if COUNT {
             // `--distinct`: keep the band in the flat TT so the HLL counts every position.
             if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
                 return w != 0;
             }
-        } else if let Some(w) = self.tiny_get(key.0[0]) {
-            // Production: the band-entry win/loss lives in the complete L2 ≤7 table, keyed
-            // by the canonical tiny key (`key.0[0]` = the tiny key `h`; see `graph_bits`).
+        } else if let Some(w) = self.tiny_get(tidx) {
             return w;
         }
         let rank = self.order_rank(q);
@@ -739,33 +759,31 @@ impl IsoFlat {
         }
         // Production: solve the whole ≤7 subtree in a thread-private 128-byte stack memo
         // (indexed by the alive bitmask) — pure L1, no flat-TT probe, no DRAM, no
-        // cross-CCX coherence. Only the shared band-entry position itself stays in the
-        // flat TT, which shrinks it (fewer ≤7 entries ⇒ less eviction at n=16). Descendant
-        // transpositions across *different* entries are recomputed (cheap in L1) rather
-        // than shared through DRAM.
+        // cross-CCX coherence — then store the band-entry value in the complete ≤7 table.
+        // Descendant transpositions across *different* entries are recomputed (cheap, L1)
+        // rather than shared through DRAM.
         let mut memo = [-1i8; 128];
         let won = self.solve_local(&g, alive, &mut memo, nodes);
-        self.tiny_put(key.0[0], won);
+        self.tiny_put(tidx, won);
         won
     }
 
-    /// Probe the complete ≤7 [`tiny_tt`](Self::tiny_tt) by the canonical tiny key `h`. One
-    /// L2 load + a 14-bit fingerprint check (a mismatch is a miss — recompute, never wrong).
+    /// Probe the complete ≤7 [`tiny_tt`](Self::tiny_tt) at the labelled dense `idx`
+    /// ([`Queens::tiny_table_index`]) — one direct indexed byte load (no canon, no fp).
     #[inline]
-    fn tiny_get(&self, h: u64) -> Option<bool> {
-        let m = mix64(h);
-        let s = self.tiny_tt[(m as usize) & (TINY_TT_SLOTS - 1)].load(Ordering::Relaxed);
-        let fp = ((m >> 16) & 0x3FFF_FFFF) as u32;
-        ((s & 1) != 0 && (s >> 2) == fp).then_some((s >> 1) & 1 != 0)
+    fn tiny_get(&self, idx: usize) -> Option<bool> {
+        // SAFETY: `idx` comes from `tiny_table_index`, which returns `< TINY_TABLE_SLOTS`.
+        match unsafe { self.tiny_tt.get_unchecked(idx) }.load(Ordering::Relaxed) {
+            0 => None,
+            v => Some(v == 2),
+        }
     }
 
-    /// Store `won` for the canonical tiny key `h` in the ≤7 [`tiny_tt`](Self::tiny_tt).
+    /// Store `won` at the labelled dense `idx` in the ≤7 [`tiny_tt`](Self::tiny_tt).
     #[inline]
-    fn tiny_put(&self, h: u64, won: bool) {
-        let m = mix64(h);
-        let fp = ((m >> 16) & 0x3FFF_FFFF) as u32;
-        let s = 1 | ((won as u32) << 1) | (fp << 2);
-        self.tiny_tt[(m as usize) & (TINY_TT_SLOTS - 1)].store(s, Ordering::Relaxed);
+    fn tiny_put(&self, idx: usize, won: bool) {
+        // SAFETY: as `tiny_get` — `idx < TINY_TABLE_SLOTS == tiny_tt.len()`.
+        unsafe { self.tiny_tt.get_unchecked(idx) }.store(1 + won as u8, Ordering::Relaxed);
     }
 
     /// Solve an in-band node against a **local** `memo` (indexed by the alive bitmask over

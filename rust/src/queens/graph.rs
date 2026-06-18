@@ -234,6 +234,11 @@ const SMALL_CANON_OFF: [usize; SMALL_CANON_MAX + 2] = [
 
 const SMALL_CANON_TAG: u64 = 0x71E7_1E55_7107_0007;
 
+/// Slot count for a complete ≤7 win/loss table keyed by [`Queens::tiny_table_index`]
+/// (one slot per labelled edge code across `k ≤ 7`). ~2.1 M slots; at one byte/slot a
+/// flat, eviction-free 2 MB table — no fingerprint, no canon lookup on the query path.
+pub(crate) const TINY_TABLE_SLOTS: usize = SMALL_CANON_OFF[SMALL_CANON_MAX + 1];
+
 static SMALL_CANON: OnceLock<Box<[u64]>> = OnceLock::new();
 
 pub(crate) fn small_canon_table() -> &'static [u64] {
@@ -996,6 +1001,39 @@ impl Queens {
         // SAFETY: `code` is a triangular edge code for exactly `k <= SMALL_CANON_MAX`
         // vertices, so `idx` is within this table's `[SMALL_CANON_OFF[k], OFF[k+1])`.
         unsafe { *table.get_unchecked(idx) }
+    }
+
+    /// The **labelled** dense slot `SMALL_CANON_OFF[k] + edge_code` of a ≤7 graph, computed
+    /// like [`Self::iso_key_tiny_table_pc`] but **without the canon-table lookup** (and
+    /// without canonicalising the `k==3` code). A ≤7 position's Node-Kayles win/loss is
+    /// isomorphism-invariant, so a win/loss table keyed by this raw index is still correct
+    /// — it just stores the value under every labelling instead of merging to the canonical
+    /// form. That trades a little merge (cheap to recompute in an L1 memo) for skipping the
+    /// 16 MB canon table, whose scattered L3/DRAM probe is ~22% of the n=16 search. The
+    /// result is `< `[`TINY_TABLE_SLOTS`].
+    #[inline]
+    pub(crate) fn tiny_table_index(&self, mask: Bits, pc: u32) -> usize {
+        let k = pc as usize;
+        debug_assert!((1..=SMALL_CANON_MAX).contains(&k));
+        if k == 1 {
+            return SMALL_CANON_OFF[1];
+        }
+        let mut verts = [0u8; SMALL_CANON_MAX];
+        let mut n = 0usize;
+        mask.each(|v| {
+            verts[n] = v as u8;
+            n += 1;
+        });
+        let code = match k {
+            2 => tiny_edge_code::<2>(&self.attack, &verts),
+            3 => tiny_edge_code::<3>(&self.attack, &verts),
+            4 => tiny_edge_code::<4>(&self.attack, &verts),
+            5 => tiny_edge_code::<5>(&self.attack, &verts),
+            6 => tiny_edge_code::<6>(&self.attack, &verts),
+            7 => tiny_edge_code::<7>(&self.attack, &verts),
+            _ => unreachable!(),
+        };
+        SMALL_CANON_OFF[k] + code as usize
     }
 
     /// Exact whole-graph canonical key for an 8-vertex available graph. This is the
