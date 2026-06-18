@@ -417,6 +417,23 @@ fn pos_key(&self, blocked) -> Bits {
 </svg>
 <figcaption><strong>The 8 orientations of the square (D₄).</strong> An asymmetric little shape is shown under all 8 transforms — 4 rotations and their 4 mirror images. The game treats all 8 as one position; the solver stores only the lexicographically-smallest (highlighted).</figcaption>
 </figure>
+
+<h3>Roots: how symmetry shrinks the very first move</h3>
+<div class="layman">
+<p>The same idea pays off before the search even begins. A naive program would treat all 256 squares of a 16×16 board as 256 different opening moves. But rotate or flip the board and it's the same game — so the eight mirror-images of any opening are really one opening. Fold the board by its symmetries and only a small wedge of genuinely-different first moves is left. Those are the <strong>roots</strong> the solver actually starts from.</p>
+</div>
+<div class="engineer">
+<p>D₄ acts on the opening square too. Canonicalising a first move to its orbit representative (the lexicographically-minimal of its 8 images) collapses ~8 openings into one, so the solver only launches a search from each distinct orbit. The number of roots is the number of D₄ orbits of board squares — about <code>⌈n²/8⌉</code>, lifted slightly because squares on a symmetry axis (the diagonal or the mid-lines) have smaller orbits (size 4, or 1 at the centre), not the full 8.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 490" width="760" height="490" role="img" aria-label="Folding a 16x16 board by its 8 symmetries leaves one triangular wedge of distinct opening moves">
+  <g id="rootsFigure"></g>
+</svg>
+<figcaption><strong>Roots: symmetry vs the naive search.</strong>
+<span class="layman">Every square (left) looks like a separate opening to a naive search. But the eight rotations/reflections of a square are one move, so the genuinely-different openings are exactly the squares in one triangular eighth of the board (right, highlighted) — the "roots." A generic square has 8 twins; squares on the diagonal or a mid-line have only 4, which is why the count comes out a little above n²/8.</span>
+<span class="engineer">Left: the naive search treats all n² squares as distinct openings. Right: the D₄ fundamental domain — one 1/8 wedge bounded by a side-bisector and a diagonal — holds exactly one representative per orbit. Roots = number of D₄ orbits of squares ≈ ⌈n²/8⌉ + the axis/diagonal fixed-orbit correction. Result: ≈7× fewer openings, approaching the group's full 8×.</span></figcaption>
+</figure>
 </section>
 
 <!-- ===================================================================== -->
@@ -540,6 +557,23 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <div class="layman"><p>At one point the project looked stuck: roughly 36 million positions per second, with 16×16 hovering near 3m41s, and that number got written down as "the wall." It was <strong>wrong</strong>. The benchmark had run on a machine whose memory was already clogged — a full compressed-RAM swap, a disk cache eating 13 GB — so the big table didn't fit and every timing was garbage. Cleaning the machine, adding the dense lookup table, and forcing the memory system onto large pages took 16×16 to <strong>2m44s</strong>. The takeaway became a standing rule: don't trust a "floor" until you've ruled out your own measurement.</p></div>
 <div class="engineer"><p>A "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s wall" was recorded — and was entirely an artifact. It came off a memory-degraded box (zram swap full, ZFS ARC eating ~13 GB, so the 17 GB TT OOM'd and runs were capped); it dismissed the W8 dense table on a single confounded capped run, and never tried forcing huge pages. On a clean box (swap off, ARC capped to 2 GB, <code>/tmp</code> tmpfs cleared) plus the W8 table plus <code>MADV_COLLAPSE</code>, the same solver finishes in 2m44s. The standing rule: <strong>treat any "floor" as a measurement artifact or an untried lever until proven otherwise — reason through the wall, not up to it.</strong></p></div>
 </div>
+
+<h3>Searching under a root — and where whole branches get pruned</h3>
+<div class="layman">
+<p>From each root the solver opens out a game tree. It looks vast — but it almost never walks the whole thing. Four different mechanisms cut branches off before they're ever explored: it stops a branch the instant the outcome is decided, it reuses any position it has already solved (even a rotated or same-shaped one), and it reads the smallest endgames straight out of a table. The picture below shows all four at once.</p>
+</div>
+<div class="engineer">
+<p>Under each root the kernel runs negamax over the impartial game with a first-losing-child cutoff at OR nodes; a transposition table keyed by the D₄/iso-canonical available-set; and eviction-free complete tables for popcount ≤ 8 that terminate expansion. The four prunings below are why the realised tree is a tiny fraction of the formal one.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 470" width="760" height="470" role="img" aria-label="A game tree under one root showing the four ways subtrees are pruned: win/loss cutoff, transposition merge, isomorphism merge, and complete-table leaves">
+  <g id="pruneFigure"></g>
+</svg>
+<figcaption><strong>Searching under a root, and where branches get pruned.</strong>
+<span class="layman">The four cuts: <b style="color:#ff7b9c">①</b> once one move is shown to be a <em>loss</em> for the opponent, this position is a win and the remaining sibling branches are skipped (greyed). <b style="color:#4cc2ff">②</b> two move-orders reaching the same board are solved once — the second is a table hit. <b style="color:#ffb454">③</b> two different-looking positions that are mirror-images or have the same conflict-shape collapse to one cached entry. <b style="color:#7ee787">④</b> a position with ≤8 free squares is read from a pre-solved table instead of being expanded. The greyed/dashed parts are never searched.</span>
+<span class="engineer">① <b style="color:#ff7b9c">Win/loss cutoff</b> (the α-β analogue): a node is a WIN as soon as one child returns LOSS, so siblings 3…k are pruned. The "prove-a-loss" nodes (all children must be checked, no cutoff) are exactly the ones parallelised. ② <b style="color:#4cc2ff">Transposition merge</b>: distinct paths to the same blocked mask — second is a table hit, not a re-search. ③ <b style="color:#ffb454">D₄/iso merge</b>: positions with the same canonical available-set (mirror or isomorphic attack-graph) share one entry. ④ <b style="color:#7ee787">Complete-table leaves</b>: popcount ≤ 8 resolves in one labelled-edge-code lookup, terminating expansion — its subtree is never walked.</span></figcaption>
+</figure>
 </section>
 
 <!-- ===================================================================== -->
@@ -1096,6 +1130,214 @@ var COL = {
   arrow(root,356,192,468,192,COL.accent2);
   arrow(root,576,192,660,138,COL.accent2);
   add(root,'text',{x:712,y:178,'text-anchor':'middle',class:'lbl-sm'},'solved once, not twice');
+})();
+
+/* ============================ roots figure (§4) ================== */
+(function(){
+  var root = document.getElementById('rootsFigure');
+  if (!root) return;
+  var N = 16, s = 18, pad = 0;
+  var bw = N * s;
+
+  // canonical D4 orbit representative of a square (r,c): lex-min of its 8 images
+  // by the (r*N+c) order. The fundamental domain = squares that are their own min.
+  function images(r, c){
+    var m = N - 1;
+    return [[r,c],[c,m-r],[m-r,m-c],[m-c,r],[r,m-c],[m-r,c],[c,r],[m-c,m-r]];
+  }
+  function isRep(r, c){
+    var min = r*N + c;
+    var im = images(r, c);
+    for (var i=0;i<8;i++){ var k = im[i][0]*N + im[i][1]; if (k < min) return false; }
+    return true;
+  }
+  function orbitSize(r, c){
+    var im = images(r, c), seen = {};
+    for (var i=0;i<8;i++) seen[im[i][0]*N+im[i][1]] = 1;
+    return Object.keys(seen).length;
+  }
+
+  // ---- left board: naive — every square a distinct opening ----
+  var gL = add(root, 'g', { transform: 'translate(20,40)' });
+  add(gL, 'text', { x: bw/2, y: -14, 'text-anchor': 'middle', class: 'ttl' }, 'Naive: 256 openings');
+  for (var r=0;r<N;r++) for (var c=0;c<N;c++){
+    add(gL, 'rect', { x:c*s, y:r*s, width:s-1.2, height:s-1.2, rx:1.5,
+      fill:'rgba(76,194,255,0.16)', stroke:COL.cellbd, 'stroke-width':0.5 });
+  }
+  add(gL, 'text', { x: bw/2, y: bw+20, 'text-anchor':'middle', class:'lbl-sm' }, 'n² = 256 squares, all treated as different');
+
+  // ---- right board: folded — fundamental domain highlighted ----
+  var gR = add(root, 'g', { transform: 'translate(' + (20 + bw + 60) + ',40)' });
+  add(gR, 'text', { x: bw/2, y: -14, 'text-anchor': 'middle', class: 'ttl' }, 'Folded by D₄: 36 roots');
+  var roots = 0;
+  for (var r=0;r<N;r++) for (var c=0;c<N;c++){
+    var rep = isRep(r, c);
+    var fill, op = 1;
+    if (rep){
+      var os = orbitSize(r, c);
+      // axis/diagonal squares sit in smaller orbits — tint them differently
+      fill = (os < 8) ? COL.accent2 : COL.accent3;
+      roots++;
+    } else {
+      fill = '#141a22';
+    }
+    add(gR, 'rect', { x:c*s, y:r*s, width:s-1.2, height:s-1.2, rx:1.5,
+      fill:fill, stroke:COL.cellbd, 'stroke-width':0.5,
+      'fill-opacity': rep ? 0.9 : 1 });
+  }
+  // draw the two wedge boundaries: the main diagonal and the vertical mid-line
+  add(gR, 'line', { x1:0, y1:0, x2:bw, y2:bw, stroke:COL.accent, 'stroke-width':1.4, 'stroke-dasharray':'4 3', opacity:0.8 });
+  add(gR, 'line', { x1:bw/2, y1:0, x2:bw/2, y2:bw, stroke:COL.accent, 'stroke-width':1.4, 'stroke-dasharray':'4 3', opacity:0.8 });
+  add(gR, 'text', { x: bw/2, y: bw+20, 'text-anchor':'middle', class:'lbl-sm' }, 'one 1/8 wedge = ' + roots + ' distinct opening moves');
+  // legend
+  var leg = add(gR, 'g', { transform: 'translate(0,' + (bw+32) + ')' });
+  add(leg, 'rect', { x:0, y:0, width:11, height:11, rx:2, fill:COL.accent3, 'fill-opacity':0.9 });
+  add(leg, 'text', { x:16, y:9, class:'lbl-sm' }, 'generic root (orbit 8)');
+  add(leg, 'rect', { x:170, y:0, width:11, height:11, rx:2, fill:COL.accent2, 'fill-opacity':0.9 });
+  add(leg, 'text', { x:186, y:9, class:'lbl-sm' }, 'axis/diagonal root (orbit ≤4)');
+
+  // ---- comparison bars (naive vs roots) for n=12/14/16 ----
+  var gB = add(root, 'g', { transform: 'translate(20,' + (40 + bw + 70) + ')' });
+  var rows = [
+    { n:12, sq:144, rt:21 },
+    { n:14, sq:196, rt:28 },
+    { n:16, sq:256, rt:36 }
+  ];
+  add(gB, 'text', { x:0, y:-8, class:'ttl' }, 'All squares vs distinct roots (≈7× fewer)');
+  var maxSq = 256, barX = 92, barW = 470, rowH = 26;
+  rows.forEach(function(d, i){
+    var y = i*rowH;
+    add(gB, 'text', { x:0, y:y+12, class:'lbl' }, 'n=' + d.n);
+    // naive bar
+    add(gB, 'rect', { x:barX, y:y, width:(d.sq/maxSq)*barW, height:9, rx:2, fill:COL.accent, opacity:0.55 });
+    add(gB, 'text', { x:barX+(d.sq/maxSq)*barW+6, y:y+8, class:'lbl-sm', fill:COL.dim }, d.sq + ' squares');
+    // roots bar
+    add(gB, 'rect', { x:barX, y:y+11, width:(d.rt/maxSq)*barW, height:9, rx:2, fill:COL.accent3 });
+    add(gB, 'text', { x:barX+(d.rt/maxSq)*barW+6, y:y+19, class:'lbl-sm', fill:COL.accent3 }, d.rt + ' roots');
+  });
+})();
+
+/* ============================ prune figure (§7) ================== */
+(function(){
+  var root = document.getElementById('pruneFigure');
+  if (!root) return;
+
+  var defs = add(root, 'defs', {});
+  var m = add(defs, 'marker', { id:'ahp', markerWidth:8, markerHeight:8, refX:6, refY:3, orient:'auto' });
+  add(m, 'path', { d:'M0,0 L6,3 L0,6 Z', fill:COL.faint });
+  var md = add(defs, 'marker', { id:'ahd', markerWidth:8, markerHeight:8, refX:6, refY:3, orient:'auto' });
+  add(md, 'path', { d:'M0,0 L6,3 L0,6 Z', fill:COL.accent });
+
+  function node(x, y, fill, stroke, label, sub){
+    add(root, 'circle', { cx:x, cy:y, r:15, fill: fill||COL.cellbg, stroke: stroke||COL.cellbd, 'stroke-width':1.6 });
+    if (label) add(root, 'text', { x:x, y:y+4, 'text-anchor':'middle', fill:COL.fg, 'font-size':11, 'font-weight':700 }, label);
+    if (sub)   add(root, 'text', { x:x, y:y+30, 'text-anchor':'middle', class:'lbl-sm' }, sub);
+  }
+  function ghostNode(x, y){
+    add(root, 'circle', { cx:x, cy:y, r:15, fill:'transparent', stroke:COL.faint, 'stroke-width':1.2, 'stroke-dasharray':'3 3', opacity:0.55 });
+    add(root, 'text', { x:x, y:y+4, 'text-anchor':'middle', fill:COL.faint, 'font-size':11, opacity:0.7 }, '?');
+  }
+  function edge(x1,y1,x2,y2,col,dash){
+    // shorten to node radius
+    var dx=x2-x1, dy=y2-y1, L=Math.sqrt(dx*dx+dy*dy), ux=dx/L, uy=dy/L, r=15;
+    add(root, 'line', { x1:x1+ux*r, y1:y1+uy*r, x2:x2-ux*r, y2:y2-uy*r,
+      stroke: col||COL.faint, 'stroke-width': col===COL.faint||!col?1.4:1.8,
+      'stroke-dasharray': dash||'', opacity: dash?0.7:1 });
+  }
+  function ghostEdge(x1,y1,x2,y2){
+    var dx=x2-x1, dy=y2-y1, L=Math.sqrt(dx*dx+dy*dy), ux=dx/L, uy=dy/L, r=15;
+    add(root, 'line', { x1:x1+ux*r, y1:y1+uy*r, x2:x2-ux*r, y2:y2-uy*r,
+      stroke:COL.faint, 'stroke-width':1.2, 'stroke-dasharray':'3 3', opacity:0.45 });
+  }
+  function tag(x, y, n, col){
+    add(root, 'circle', { cx:x, cy:y, r:10, fill:col, opacity:0.95 });
+    add(root, 'text', { x:x, y:y+4, 'text-anchor':'middle', fill:'#06151f', 'font-size':12, 'font-weight':800 }, n);
+  }
+  function callout(x, y, col, text){
+    add(root, 'text', { x:x, y:y, fill:col, 'font-size':11.5, 'font-weight':700 }, text);
+  }
+
+  // --- root at top ---
+  var ROOTX = 240, ROOTY = 36;
+  node(ROOTX, ROOTY, 'rgba(255,180,84,0.20)', COL.accent2, 'R');
+  add(root, 'text', { x:ROOTX, y:ROOTY-22, 'text-anchor':'middle', class:'lbl-sm', fill:COL.accent2 }, 'root opening');
+
+  // --- level 1: an OR node where 2nd child returns LOSS → cutoff (mechanism ①) ---
+  var L1Y = 130;
+  var c1 = [120, 200, 290, 370];   // four candidate children x
+  // edges root->children: first two live, rest pruned
+  edge(ROOTX, ROOTY, c1[0], L1Y, COL.faint);
+  edge(ROOTX, ROOTY, c1[1], L1Y, COL.accent4);
+  edge(ROOTX, ROOTY, c1[2], L1Y, COL.faint, '4 4');
+  edge(ROOTX, ROOTY, c1[3], L1Y, COL.faint, '4 4');
+  node(c1[0], L1Y, COL.cellbg, COL.cellbd, 'W');
+  node(c1[1], L1Y, 'rgba(255,123,156,0.22)', COL.accent4, 'L');
+  // pruned siblings: greyed
+  node(c1[2], L1Y, '#141a22', COL.faint, '');
+  node(c1[3], L1Y, '#141a22', COL.faint, '');
+  add(root,'text',{x:c1[2],y:L1Y+4,'text-anchor':'middle',fill:COL.faint,'font-size':10},'skip');
+  add(root,'text',{x:c1[3],y:L1Y+4,'text-anchor':'middle',fill:COL.faint,'font-size':10},'skip');
+  tag(c1[1]-20, L1Y-18, '1', COL.accent4);
+  callout(86, 168, COL.accent4, '① one child = LOSS ⇒ root is a WIN, siblings pruned');
+
+  // --- under W (c1[0]): transposition merge (②) two paths to one node ---
+  var L2Y = 270;
+  var t1 = c1[0]-46, t2 = c1[0]+46, merged = c1[0];
+  node(t1, L2Y, COL.cellbg, COL.accent, '');
+  node(t2, L2Y, COL.cellbg, COL.accent, '');
+  edge(c1[0], L1Y, t1, L2Y, COL.accent);
+  edge(c1[0], L1Y, t2, L2Y, COL.accent);
+  var mY = L2Y+78;
+  node(merged, mY, 'rgba(76,194,255,0.14)', COL.accent, 'P');
+  edge(t1, L2Y, merged, mY, COL.accent);
+  // the SECOND arrival is a dashed back-edge "table hit"
+  add(root, 'line', { x1:t2-8, y1:L2Y+13, x2:merged+8, y2:mY-12,
+    stroke:COL.accent, 'stroke-width':1.6, 'stroke-dasharray':'5 4', 'marker-end':'url(#ahd)', opacity:0.9 });
+  tag(t1-2, L2Y-18, '2', COL.accent);
+  callout(40, L2Y+118, COL.accent, '② same board, two move-orders → "already solved: table hit"');
+
+  // --- under L (c1[1]): complete-table leaves (④) ≤8 free → one lookup ---
+  var lf = [c1[1]-38, c1[1]+38];
+  lf.forEach(function(lx, i){
+    edge(c1[1], L1Y, lx, L2Y, COL.faint);
+    add(root, 'rect', { x:lx-26, y:L2Y-12, width:52, height:26, rx:6,
+      fill:'rgba(126,231,135,0.12)', stroke:COL.accent3, 'stroke-width':1.4 });
+    add(root, 'text', { x:lx, y:L2Y+5, 'text-anchor':'middle', fill:COL.accent3, 'font-size':10.5, 'font-weight':700 }, '≤8 free');
+    // elided subtree below the leaf
+    ghostEdge(lx, L2Y+13, lx-18, L2Y+58);
+    ghostEdge(lx, L2Y+13, lx+18, L2Y+58);
+    ghostNode(lx-18, L2Y+58);
+    ghostNode(lx+18, L2Y+58);
+  });
+  tag(c1[1]+58, L2Y-18, '4', COL.accent3);
+  callout(c1[1]+18, mY+34, COL.accent3, '④ ≤8 free squares → one table lookup, subtree never expanded');
+
+  // --- right column: symmetry / iso merge (③) two different positions → one canonical ---
+  var sxA = 560, sxB = 660, sY = L1Y+18, canX = 610, canY = L2Y+6;
+  // two visually-different position glyphs (mini 3x3 patterns)
+  function miniPos(cx, cy, pattern, col){
+    var n=3, ss=12, ox=cx-(n*ss)/2, oy=cy-(n*ss)/2;
+    for (var r=0;r<n;r++) for (var c=0;c<n;c++){
+      var on = pattern.some(function(p){return p[0]===r&&p[1]===c;});
+      add(root,'rect',{x:ox+c*ss,y:oy+r*ss,width:ss-1.5,height:ss-1.5,rx:1.5,
+        fill: on ? col : '#141a22', stroke:COL.cellbd,'stroke-width':0.5});
+    }
+  }
+  miniPos(sxA, sY, [[0,0],[0,1],[1,2],[2,2]], COL.accent2);
+  miniPos(sxB, sY, [[0,2],[1,2],[2,0],[2,1]], COL.accent2);
+  add(root,'text',{x:sxA,y:sY-22,'text-anchor':'middle',class:'lbl-sm'},'position');
+  add(root,'text',{x:sxB,y:sY-22,'text-anchor':'middle',class:'lbl-sm'},'mirror / iso');
+  node(canX, canY, 'rgba(255,180,84,0.14)', COL.accent2, 'C');
+  edge(sxA, sY+18, canX, canY, COL.accent2, '5 4');
+  edge(sxB, sY+18, canX, canY, COL.accent2, '5 4');
+  add(root,'text',{x:canX,y:canY+30,'text-anchor':'middle',class:'lbl-sm',fill:COL.accent2},'one canonical entry');
+  tag(canX+22, canY-6, '3', COL.accent2);
+  callout(500, canY+58, COL.accent2, '③ mirror / same-shape → merged');
+
+  // legend strip along the bottom
+  var ly = 452;
+  add(root, 'line', { x1:20, y1:ly-16, x2:430, y2:ly-16, stroke:COL.faint, 'stroke-width':1.2, 'stroke-dasharray':'3 3', opacity:0.5 });
+  add(root, 'text', { x:436, y:ly-12, class:'lbl-sm' }, 'dashed / greyed = never searched');
 })();
 
 /* ============================ growth chart (§2) ================== */
