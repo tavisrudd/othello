@@ -491,3 +491,20 @@ by manufacturing cheap nodes (hash collisions: 63.5 M/s but 9.30 s > 8.82 s; or 
 SLOWS completion. The >7 D4 region (73% of the search) is an unbounded DRAM wall; node-reduction
 (oracle) cuts completion but not the rate. So **genuine raw M/s tops out at ~36** here — 50 genuine
 needs a smaller/faster >7 representation (BuRR archive / ply-windowing; roadmap-scale).
+
+## Nimber oracle with L1/L2 component nimbers — measured NEGATIVE (last genuine lever, closed)
+
+Reworked `comp_nimber` to resolve a decomposable >7 node via the ≤7 graph's Grundy value in an
+**L1/L2 `tiny_nim` table + local mex DP** (no flat-TT/DRAM recursion), and counted the genuine cheap
+resolutions as nodes. Still a clear loss: **n=16 23.5 M/s (vs 35.75 off), n=14 13.0s (vs 8.82s)** —
+slower on rate AND completion. Root cause is in the stats: the oracle's **hit rate is only ~1.7%**
+(most popcount-8..28 graphs keep one component >7, so the decomposition fails), so the per-node
+`q.component` decompose is paid ~98% of the time for nothing and dwarfs the pruning. L1/L2 nimbers
+fixed the *resolution* cost but not the dominant *decompose* cost. Reverted.
+
+**Every per-node lever is now empirically measured.** The genuine raw-M/s ceiling on this box is
+**36.25 M/s (+15%)** (`queens-iso-local-memo` `1e09d50`). Genuine 50 needs the unbounded >7 region
+off DRAM — only the roadmap's BuRR/ply-windowing reach it, and BuRR's cascade query *lowers* raw M/s,
+so even that is a completion-time lever, not a rate lever. The `nodes/s` metric and completion-time
+diverge above ~36 M/s; the displayed rate only crosses 50 via redundant/collision work that slows the
+solve.
