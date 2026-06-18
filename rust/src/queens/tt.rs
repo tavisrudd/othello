@@ -2,10 +2,33 @@
 //! freeze stream, and the df-pn proof-number table.
 
 use super::*;
+use std::cell::RefCell;
 use std::collections::HashMap;
 use std::io::{self, Read, Write};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Mutex;
+
+/// Flush a worker's thread-local tally into the shared atomics ≈ once a second (at the
+/// ~M-node/s rates here). Per-node the search touches only thread-local memory -- no
+/// cross-CCX atomic on the shared `nodes` counter, which on this 2-CCX box bounces over the
+/// Infinity Fabric and measured a ~2× throughput drag every node (mirror of the BurrStore
+/// fix, `store.rs`). The shared counters are exact again after a [`QueensTt::drain_all`].
+const FLUSH_NODES: u64 = 1 << 18;
+
+/// Per-worker, **non-atomic** accumulators for the hot-loop node counter and the distinct
+/// estimator. Each rayon worker owns one (thread-local), incremented with plain integer ops
+/// per node; flushed to the shared atomic + HLL once every [`FLUSH_NODES`] nodes and drained
+/// at search end.
+struct Acc {
+    nodes: u64,
+    /// Thread-local HLL registers (`2^p` bytes), lazily sized to the shared estimator on
+    /// first feed and merged by max at flush; empty when this table isn't counting.
+    hll: Vec<u8>,
+}
+
+thread_local! {
+    static ACC: RefCell<Acc> = const { RefCell::new(Acc { nodes: 0, hll: Vec::new() }) };
+}
 
 // --------------------------------------------------------------------------- //
 // Transposition table
@@ -322,10 +345,56 @@ impl QueensTt {
         self.nodes.load(Ordering::Relaxed)
     }
 
-    /// Count one searched node (a TT miss about to be expanded).
+    /// Count one searched node (a TT miss about to be expanded) in this worker's local
+    /// tally; once it has accumulated [`FLUSH_NODES`] of them (≈ once a second) push the
+    /// tally into the shared atomic. The per-node path touches only thread-local memory --
+    /// no shared atomic, no cross-CCX coherence.
     #[inline]
     pub fn bump(&self) {
-        self.nodes.fetch_add(1, Ordering::Relaxed);
+        ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            a.nodes += 1;
+            if a.nodes >= FLUSH_NODES {
+                self.flush_acc(&mut a);
+            }
+        });
+    }
+
+    /// Push a worker's local tally into the shared atomic + HLL and reset it. Called once
+    /// per [`FLUSH_NODES`] nodes and at drain -- off the per-node path. (Caller holds the
+    /// thread-local borrow.)
+    fn flush_acc(&self, a: &mut Acc) {
+        if a.nodes > 0 {
+            self.nodes.fetch_add(a.nodes, Ordering::Relaxed);
+            a.nodes = 0;
+        }
+        if !a.hll.is_empty() {
+            if let Some(c) = &self.counter {
+                c.hll.merge_from(&a.hll);
+            }
+        }
+    }
+
+    /// Flush every rayon worker's accumulator into the shared state and clear their local
+    /// estimators, so [`nodes`](Self::nodes) and the distinct report are exact after a
+    /// parallel search (the hot loop flushes only ≈ once a second). Run after a parallel
+    /// `first_player_wins`. A checkpoint mid-search captures a ~1-s-stale node count unless
+    /// drained first -- fine for progress.
+    pub fn drain_all(&self) {
+        rayon::broadcast(|_| ACC.with(|cell| self.drain_acc(&mut cell.borrow_mut())));
+        ACC.with(|cell| self.drain_acc(&mut cell.borrow_mut()));
+    }
+
+    /// Drain only the calling thread's accumulator (the sequential `wins` path).
+    pub fn drain_local(&self) {
+        ACC.with(|cell| self.drain_acc(&mut cell.borrow_mut()));
+    }
+
+    fn drain_acc(&self, a: &mut Acc) {
+        self.flush_acc(a);
+        // Local registers are kept by max between flushes; clear so a later solve in this
+        // process does not inherit this solve's distinct keys.
+        a.hll.iter_mut().for_each(|b| *b = 0);
     }
 
     /// A 128-bit hash of the key as two independent `u64` halves: `route` drives
@@ -386,7 +455,15 @@ impl QueensTt {
         // positions visited -- the table's working set -- deduplicated by the
         // estimator regardless of transposition revisits or eviction.
         if let Some(c) = &self.counter {
-            c.feed(key);
+            // Fold the key into this worker's *local* HLL registers (a plain byte max, no
+            // atomic) -- merged into the shared estimator off the hot loop at flush/drain.
+            ACC.with(|cell| {
+                let mut a = cell.borrow_mut();
+                if a.hll.len() != c.hll.register_count() {
+                    a.hll = vec![0u8; c.hll.register_count()];
+                }
+                c.hll.add_local(key, &mut a.hll);
+            });
         }
         let (route, fp) = Self::hash128(key);
         let raw = self.slots[self.index(route)].load(Ordering::Relaxed);

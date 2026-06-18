@@ -1468,8 +1468,9 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
         Phase::Search,
         || solver.first_player_wins(q),
     );
-    // Capture the search time *before* any post-solve work (final checkpoint, PV) so
-    // the reported elapsed is the search, not the multi-minute image dump (#21 spirit).
+    solver.drain(); // fold every worker's thread-local node/HLL tail into the shared totals
+                    // Capture the search time *before* any post-solve work (final checkpoint, PV) so
+                    // the reported elapsed is the search, not the multi-minute image dump (#21 spirit).
     let elapsed = t.elapsed().as_secs_f64();
     // The search is done -- the table is at its most complete, so take the final
     // checkpoint now (before the cheap PV), so a resume starts from the full result.
@@ -1631,6 +1632,7 @@ fn count_mode(
     let t = Instant::now();
     let first_wins = solver.first_player_wins(q);
     let elapsed = t.elapsed().as_secs_f64();
+    solver.drain(); // exact node/distinct totals before reporting
     let rep = solver.report().expect("counting was enabled");
 
     let winner = if first_wins { "first" } else { "second" };

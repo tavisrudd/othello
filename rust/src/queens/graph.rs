@@ -106,16 +106,6 @@ impl IsoScratch {
             nbr_pad: [0; MAXV * MAXV],
         })
     }
-
-    /// Fold component keys into the combined graph-iso key without disturbing the caller's
-    /// (component-aligned) array: copy into the `comp_keys` scratch, sort there, fold. Lets
-    /// [`Queens::iso_decompose`]/[`Queens::iso_carry`] keep `CompSet.keys` parallel to
-    /// `CompSet.masks` while still producing the order-independent multiset hash.
-    #[inline]
-    pub(crate) fn fold_keys_from(&mut self, keys: &[u64]) -> u64 {
-        self.comp_keys[..keys.len()].copy_from_slice(keys);
-        fold_comp_keys(&mut self.comp_keys[..keys.len()])
-    }
 }
 
 thread_local! {
@@ -187,28 +177,6 @@ pub(crate) fn fold_comp_keys(keys: &mut [u64]) -> u64 {
     keys.iter().fold(0x515E_AF00_D515_E5A1, |h, &k| {
         mix64(h ^ k).wrapping_mul(0x9E37_79B9_7F4A_7C15)
     })
-}
-
-/// A node's connected-component decomposition of `available`, carried down the DFS so a
-/// child reuses the parent's components and re-canons only the few a move disturbs (the
-/// graph-key analog of the D4 kernel's incremental 8-orientation carry). `masks[i]` is a
-/// component's vertex set and `keys[i]` its canon key (kept parallel -- NOT sorted, so a
-/// child can match a surviving component to its cached key). Game depth is ≤ n (at most n
-/// non-attacking queens), so the per-thread arena of these is tiny.
-pub(crate) struct CompSet {
-    pub(crate) masks: [Bits; MAXV],
-    pub(crate) keys: [u64; MAXV],
-    pub(crate) len: usize,
-}
-
-impl CompSet {
-    pub(crate) fn new() -> Box<Self> {
-        Box::new(CompSet {
-            masks: [Bits::ZERO; MAXV],
-            keys: [0; MAXV],
-            len: 0,
-        })
-    }
 }
 
 const SMALL_CANON_MAX: usize = 7;
@@ -1154,63 +1122,6 @@ impl Queens {
             frontier = next;
         }
         comp
-    }
-
-    /// Fresh full decomposition of `mask` into connected components, canon-keying each into
-    /// `out` (masks ∥ keys), and return the combined graph-iso key. The from-scratch entry
-    /// for a sequential subtree; deeper nodes [`iso_carry`](Self::iso_carry) from this. The
-    /// returned key is byte-identical to [`iso_key_fast`](Self::iso_key_fast) on the same
-    /// mask (same components, same `comp_canon`, same [`fold_comp_keys`]).
-    pub(crate) fn iso_decompose(&self, mask: Bits, out: &mut CompSet) -> u64 {
-        ISO_SCRATCH.with(|cell| {
-            let s = &mut **cell.borrow_mut();
-            let mut remaining = mask;
-            let mut n = 0usize;
-            while let Some(start) = remaining.lowest() {
-                let comp = self.component(start, mask);
-                remaining = remaining.and_not(comp);
-                out.masks[n] = comp;
-                out.keys[n] = self.comp_canon::<true>(comp, s);
-                n += 1;
-            }
-            out.len = n;
-            s.fold_keys_from(&out.keys[..n])
-        })
-    }
-
-    /// Build the child decomposition from the `parent`'s after a move removes the vertices
-    /// in `removed` (`child_available = parent_available \ removed`): components untouched by
-    /// `removed` are **carried** (mask + cached key, no recompute); the touched ones lose
-    /// `removed`, and that surviving region is re-decomposed + re-keyed. The result is the
-    /// exact component partition of the child's available-graph, so the combined key equals
-    /// a from-scratch [`iso_decompose`](Self::iso_decompose) -- only the disturbed components
-    /// pay `comp_canon`, which is the whole point (the deep majority of moves touch one).
-    pub(crate) fn iso_carry(&self, parent: &CompSet, removed: Bits, out: &mut CompSet) -> u64 {
-        let mut n = 0usize;
-        let mut dirty = Bits::ZERO;
-        for i in 0..parent.len {
-            let ci = parent.masks[i];
-            if ci.and(removed) == Bits::ZERO {
-                out.masks[n] = ci;
-                out.keys[n] = parent.keys[i];
-                n += 1;
-            } else {
-                dirty = dirty.or(ci);
-            }
-        }
-        ISO_SCRATCH.with(|cell| {
-            let s = &mut **cell.borrow_mut();
-            let mut remaining = dirty.and_not(removed);
-            while let Some(start) = remaining.lowest() {
-                let comp = self.component(start, remaining);
-                remaining = remaining.and_not(comp);
-                out.masks[n] = comp;
-                out.keys[n] = self.comp_canon::<true>(comp, s);
-                n += 1;
-            }
-            out.len = n;
-            s.fold_keys_from(&out.keys[..n])
-        })
     }
 
     /// A **cheaper** graph-isomorphism key: split the available-graph into connected

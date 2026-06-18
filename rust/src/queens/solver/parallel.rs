@@ -190,6 +190,9 @@ impl Solver for Parallel {
             }
         }
     }
+    fn drain(&self) {
+        self.inner.tt.drain_all();
+    }
     fn nodes(&self) -> u64 {
         self.inner.nodes()
     }

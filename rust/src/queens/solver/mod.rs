@@ -48,6 +48,12 @@ pub trait Solver: Sync {
         0
     }
 
+    /// Flush every worker's thread-local node/HLL tally into the shared totals, so
+    /// [`nodes`](Self::nodes) and [`report`](Self::report) are exact. The CLI calls this once
+    /// after the search (the hot loop only flushes ≈ once a second to avoid a per-node atomic
+    /// on this cross-CCX box). Default no-op for solvers that don't accumulate locally.
+    fn drain(&self) {}
+
     /// Per-node branching / cutoff tally, if built with [`Tt::with_branching`]
     /// (`count --branching`). `None` for an ordinary solve.
     fn branching_stats(&self) -> Option<BranchingStats> {
@@ -162,6 +168,17 @@ fn iso_burr_key_max_avail() -> u32 {
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(7)
+}
+
+/// `iso-flat`'s default iso threshold: 6, one below `iso-burr`/`fused`. Keying popcount-7
+/// graphs by D4 instead of iso trades a little merge for staying clear of the WL path, which
+/// puts the flat-table throughput comfortably above the cheap-D4 `incremental` (n=14 ~14 vs
+/// ~10 M/s, 24-core). `QUEENS_KEY_MAX` overrides for the full speed/merge/fit sweep.
+fn iso_flat_key_max_avail() -> u32 {
+    std::env::var("QUEENS_KEY_MAX")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(6)
 }
 
 /// Plies from the root that [`Parallel`] fans across rayon (resolved once at startup,

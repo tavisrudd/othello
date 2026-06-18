@@ -210,6 +210,9 @@ impl Solver for Tt {
             self.wins_keyed_in::<false>(q, blocked, key)
         }
     }
+    fn drain(&self) {
+        self.tt.drain_all();
+    }
     fn nodes(&self) -> u64 {
         self.tt.nodes()
     }

@@ -28,11 +28,6 @@ pub(crate) struct Counter {
 }
 
 impl Counter {
-    /// Fold a looked-up key into the HyperLogLog (distinct working-set estimate).
-    #[inline]
-    pub(crate) fn feed(&self, key: Bits) {
-        self.hll.add(key);
-    }
     /// Record a solved key's exact value (called from `put`).
     #[inline]
     pub(crate) fn record(&self, key: Bits, val: u8) {

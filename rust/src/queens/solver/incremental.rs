@@ -305,6 +305,9 @@ impl Solver for Incremental {
         }
         rest.par_iter().any(|(co, ckey)| resolve(co, *ckey))
     }
+    fn drain(&self) {
+        self.tt.drain_all();
+    }
     fn nodes(&self) -> u64 {
         self.tt.nodes()
     }
