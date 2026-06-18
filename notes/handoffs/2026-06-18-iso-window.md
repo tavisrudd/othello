@@ -1,0 +1,188 @@
+# iso-window — dense W8 table + huge-page TT, pushing n=16 toward the floor
+
+**Date**: 2026-06-18
+**Session**: 2026-06-18--3 (`138f26c4-12cc-40fd-a333-4d208da94279`)
+**Mode**: intent-based (`mi`)
+**References**:
+- Closed predecessor: [iso-flat solver](done/2026-06-17-iso-flat-solver.md) — the kernel iso-window builds on.
+- Design/direction (Codex, session `codex:019edb21`): folded into the "Codex's windowed-dataflow design" section below (his standalone note has been deleted).
+- [Theoretical floor](../2026-06-16-queens-theoretical-floor.md) — compute floor ~45–60s; we're at 2m44s (~3× over).
+- Umbrella roadmap: [n=16 memory roadmap](2026-06-15-queens-memory-roadmap.md).
+
+## Context
+
+`iso-window` = `iso-flat`'s DFS-resident kernel + a **complete dense W8 table**: at `popcount == 8`
+the available 8-vertex Node-Kayles subgame's win/loss is isomorphism-invariant, so it's resolved by
+a single raw 28-bit labelled-edge-code lookup instead of probing the 13–17 GB flat TT — and its whole
+≤7 subtree is **never re-expanded**. Over a **huge-page-collapsed** flat TT this **solves n=16 in
+2m44s (SECOND player), under the 3-minute goal**, vs iso-flat's 3m33s. It is now the default solver.
+
+**The reversal that mattered.** The predecessor handoff concluded "~36 M/s floor, sub-50 unreachable,
+n=16 ~3m41s is the wall." **All wrong** — measured on a memory-degraded box (zram swap full, ZFS ARC
+eating ~13 GB → 17 GB TT OOM'd → capped runs), it dismissed W8 on one confounded capped run, and never
+tried forcing huge pages. Clean box + W8 + `MADV_COLLAPSE` → 2m44s. New CLAUDE.md rule: **never claim
+"the floor" — that's the user's call; reason through/around walls.**
+
+## Key architecture decisions
+
+- **W8 is a *complete, eviction-free* table** (`src/queens/dense.rs`, W0..W8, 32 MiB bitset). Complete
+  ⇒ always a hit, no fingerprint, no eviction, TLB-friendly (16 huge pages). The win over iso-flat is
+  *less repeated work*: iso-flat evicts pc==8 entries from the 17 GB TT and re-expands their ≤7
+  subtrees repeatedly (the ~28% node gap: 5.1 B vs 7.1 B). W8 was a *net loss* on the capped/degraded
+  box — the lesson is that its payoff only shows with the real 17 GB table and a cheap lookup.
+- **`const WINDOW: bool` monomorphisation** of `wins_inc`/`par_wins_inc`: plain iso-flat has **zero**
+  dead pc==8 branch (hot-path rule); iso-window's pc==8 → one-pass `w8_get` (build the 28-bit code
+  straight from the 8 attack rows — no `adj[]`→`projected_code` double-build, which is what made
+  Codex's `dense_window_get` a wash). The negative W9 per-entry cache was dropped from the live path.
+- **`MADV_COLLAPSE` default-on for ≥4 GB tables** (`tt.rs::zeroed_huge_atomics`): plain THP only reaches
+  ~73% 2M on a randomly-faulted 17 GB table; prefault (`MADV_POPULATE_WRITE`) + collapse → 100% 2M.
+  `QUEENS_TT_COLLAPSE` overrides (`0`=off, else=on).
+
+## What landed (branch `queens-iso-local-memo`, ff'd to `main`)
+
+- `1f53937` backup of Codex's experiment · `2457646` the win/new default · `e9f65ec` Opus-review doc fixes.
+
+## Measured results (clean box, full 17 GB TT; single runs, node counts vary ±~5%)
+
+| run | wall | nodes |
+|--------------------------|--------|--------|
+| **iso-window + collapse**| **2m44s** | 5.12 B |
+| iso-window               | 2m53s  | 5.20 B |
+| iso-flat                 | 3m29s  | 6.12 B |
+| iso-flat + collapse      | 3m44s  | 7.16 B |
+
+- **TT-size sweep (8/12/17 GB, all 100% 2M):** *warm* M/s rises as the table shrinks — 8 GB **42.7**,
+  12 GB 40.4, 17 GB 37.7 — so TLB-residency is a real **~13% per-node** win, but a smaller table loses
+  it back to eviction → wall ~flat. **Capacity is not the binding constraint; per-probe latency is.**
+- collapse on iso-window: ~5% wall (2m53→2m44) with near-identical node counts ⇒ a *clean* TLB win,
+  not node-count noise.
+
+## Codex's windowed-dataflow design (`codex:019edb21`) — folded from his now-deleted note
+
+Codex built the W8 scaffold and a design note (`rust/notes/2026-06-18-queens-windowed-dataflow.md`,
+since deleted — its content lives here). The full design and his measurements:
+
+**Diagnosis.** iso-flat's late n=16 wall is the flat TT: throughput starts strong, then falls as the
+17 GB table fills and evicts (`wins_inc` + `band_entry` hot). A bigger TT isn't viable (zram). The
+instructive negative: a dense `k=8` local DP solved *per parent entry* cut TT fill but was slower —
+not the kernel, but **redoing the same dense windows too many times**.
+
+**Target dataflow shape:** `pump frontier → group/window → dense local solve → merge boundary values
+→ repeat`. Keep the flat TT as the coarse global table for *large* positions; once a subtree crosses a
+small-window boundary, stop issuing a random global probe per descendant and move into an
+**implicit-keyed dense representation** — value keyed by *row position* in a dense table, not a 55-bit
+fingerprint in a random slot. (Matches the SoA/cold-sidecar note: splitting the live random slot is
+bad, but implicit keying is good *when membership is known by construction*.)
+
+**Layer 1 — complete labelled W8 (built, in `dense.rs`).** All labelled 8-vertex Node-Kayles graphs:
+`8*7/2 = 28` edges → `2^28` rows, a 32 MiB value bitset, one indexed bit lookup, no fingerprint/open-
+addressing. Built bottom-up by vertex count: `W0[0]=loss; Wk[code] = ∃ move i s.t. W_child[project(code,
+alive_after_i)] == loss`. Runtime: extract the 8 live vertices, build the 28-bit code, return `W8[code]`.
+Microbench (`dense_window_bench`): **W7** (2.1 M graphs) ~0.02s; **W8** (268 M graphs, 32 MiB) ~2.0s —
+practical as a startup pre-pass. **W9 is not** — `2^36` rows = 8 GiB as one labelled bitset.
+
+**Layer 2 — frontier-specific `k=9..12` (the open work).** Full labelled tables stop being sane past
+k=8, so use frontier chunks: during DFS, pump positions at a chosen boundary ply/popcount into chunk
+queues; bucket by a cheap local graph signature (edge-code / canonical bucket); build a dense local row
+space only for reachable states in that chunk; solve with linear passes over compact arrays; **publish
+only boundary values** back to the shared TT / parent queue. Tolerates recompute *inside* a chunk but
+prevents the expensive kind — the same boundary graph rediscovered independently by many parents.
+Sketch layout: `WindowChunk { keys: Box<[u64]>, closed: Box<[u16]>, value: Box<[u64]>, index }`; hot
+pass linear in dependency order `value[row] = any child row is loss`.
+
+**SIMD direction:** start scalar + contiguous; vectorize only *after* the row space is dense (build
+child masks for several rows at once; gather child bytes and OR inverted loss lanes; 64 row-states per
+word for bitset values). Do **not** start with SIMD in the recursive DFS.
+
+**Negatives Codex measured — TREAT AS SUGGESTIVE, NOT SETTLED.** ⚠️ Every one of these was on a
+**non-znver5 build** (Codex used `cargo build --release`, not `make release`) **and** the
+**degraded/capped box** — the exact two confounders that produced the bogus "floor." One of them, the
+W8-at-pc==8 "wash," **already flipped to the session's win** once it was rebuilt znver5 with a cheap
+`w8_get` on a clean box. So re-verify any of these on a clean znver5 box before trusting them:
+- per-entry dense DP per parent → "recompute too high";
+- W8-only at pc==8 via the slow `dense_window_get` → "wash" (FLIPPED to the win this session);
+- per-entry pc==9 eval over W8 → "wrong granularity";
+- W9 direct-mapped cache → 128 MiB ~52% hit (3/36 roots), 512 MiB ~66% hit at 1m02s (2/36, ~16 M/s).
+
+**The throughline that probably survives** (a design insight, less sensitive to the build): `k=9..12`
+wants to be grouped/windowed and solved once per chunk, not recomputed per parent. Our segmented-TT
+step above is the lighter, DFS-preserving cousin; full grouped-frontier DDD is the heavier follow-on.
+
+## NEXT (active) — segmented TT variant: capture the ~13% TLB win *without* shrinking
+
+The user's chosen direction. New variant, **keep the flat TT as the A/B control**. Make the DFS
+working set spatially/TLB-local in the full 17 GB table (no eviction cost):
+
+1. **Measure the popcount distribution** of iso-window's flat-TT working set (pc≥9) — load-bearing:
+   bad band sizing over-evicts → regression. Add a gated per-pc put histogram; read off one n=16 run.
+2. **`index(route, pc) = band_base[pc] + fastrange(route, band_size[pc])`** behind `QUEENS_TT_SEGMENT`,
+   bands sized from (1). **Pure function of the key ⇒ transposition-safe** (same key → same band → same
+   slot — this is NOT the CCX-sharding negative, which sharded by *worker* and lost cross-worker
+   merges; key-derived segmentation loses nothing but load balance). Thread `pc` through
+   `tt_get_h`/`tt_put_h`/`prefetch_h` → `index`. Flat mode ignores `pc` (control stays identical).
+3. **A/B** iso-window segmented vs flat: warm M/s (does it approach the 8 GB run's ~42 M/s?) + completion.
+4. Refinements if it pays: cache-line set-associative buckets with a band-aware line index; prefetch
+   the band arena on entry. Sibling/child co-location (Codex's "key by parent") is harder — defer.
+
+## Then (bigger levers, multi-session)
+
+- **Grouped-frontier `k=9..12` DDD** (Codex's pump/group/merge): solve each unique boundary graph once,
+  dedup by sort (streaming/bandwidth-bound, not latency-bound). The floor note's L2 lever; breaks
+  DFS-residence (composability caveat). The real path below ~2m44s, and the n=18 enabler.
+- **BuRR archive** (roadmap Chunk-4): eviction-free static value-only ~1.1 bit/key — sound *because*
+  windowing makes membership known by construction (ties to the segmented/windowed work above).
+- **1 GB hugepages** for the TT (zero TT TLB miss) — needs boot-time reservation (root), not runtime.
+
+## Codebase reference
+
+| What | Where |
+|------|------|
+| iso-window solver / W8 hook / `w8_get` / `WINDOW` dispatch | `src/queens/solver/iso_flat.rs` |
+| dense W0..W8 tables (`DenseW8`, `get`, build) | `src/queens/dense.rs` |
+| flat TT, `index(route)`, `zeroed_huge_atomics` + collapse | `src/queens/tt.rs` |
+| W8 microbench | `src/bin/dense_window_bench.rs` |
+| CLI default solver = `iso-window` | `src/bin/queens.rs` (Solve args) |
+| component/popcount analysis scaffold | `comps_report` in `src/bin/queens.rs` (~2202) |
+
+## Deferred review nits (fold into the segmented-TT pass)
+
+- `w8_get` uses a per-pc==8-node `Option::expect` — thread `&DenseW8` in, or `unwrap_unchecked` + SAFETY.
+- `dense::MAX_DENSE_K = 9` is vestigial (W9 removed) — could be 8.
+- `dense_window_bench.rs` duplicates the `dense.rs` DP (independent cross-check; maintenance fork).
+
+## ⚠️ Box hygiene (REQUIRED for the 17 GB regime — why the prior "floor" was bogus)
+
+Before any real n=16 run, get ≥~20 GB free so the 17 GB TT fits without spilling: **swap/zram off**,
+**ZFS ARC capped low** (`zfs_arc_max`≈2 GB), **drop caches + compact** (`echo 3 >…/drop_caches;
+echo 1 >…/compact_memory`), and **clear `/tmp`** (it's tmpfs = RAM; stale `*.perf.data` ate 11 GB).
+Bench only from this clean state; otherwise the TT OOMs/spills and every number is degraded.
+
+## Build / test / validate
+
+Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (exact **1,060,823**) +
+`solve 14 iso-flat --distinct` (second, re-exp ≈1.0×). **Name `iso-flat` explicitly** for `--distinct`
+(default is now iso-window, which has no distinct counter). TT/key changes must hold both.
+
+## Progress
+
+- [x] iso-window + collapse = n=16 2m44s, new default (committed, ff'd to main)
+- [x] Opus review (no ff-blockers), doc fixes
+- [ ] Segmented TT: (1) popcount-distribution histogram
+- [ ] Segmented TT: (2) `QUEENS_TT_SEGMENT` index variant, flat TT kept for A/B
+- [ ] Segmented TT: (3) A/B warm-M/s + completion
+- [ ] Deferred nits folded in
+
+## Handoff Notes
+
+### iso-window stand-up (2026-06-18)
+
+**Session**: 2026-06-18--3 (`138f26c4-12cc-40fd-a333-4d208da94279`)
+**Completed**: iso-window + huge-page collapse as the new n=16 default (2m44s, under goal); clean-box
+A/B + TT-size sweep; Opus review; closed the iso-flat handoff; this new handoff.
+**Files modified**: `src/queens/solver/iso_flat.rs`, `src/queens/dense.rs`, `src/queens/tt.rs`,
+`src/bin/queens.rs`, `src/bin/dense_window_bench.rs` (clippy), `Makefile` (PGO set), `CLAUDE.md`,
+`src/queens/store.rs` (comment).
+**Instructions for next agent**: start the segmented TT at step (1) above. Verify the box is clean
+(§ box hygiene) before any n=16 timing — that single factor is what made the prior session's "floor"
+conclusion wrong. Keep the flat TT path byte-identical as the A/B control. Don't re-run Codex's
+measured negatives (§ what Codex did).

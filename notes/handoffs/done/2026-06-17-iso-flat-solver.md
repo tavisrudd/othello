@@ -1,10 +1,86 @@
 # iso-flat solver — sustained-throughput graph-iso over a flat TT
 
+> **STATUS: CLOSED 2026-06-18.** iso-flat is the production *kernel*; the active thread moved to
+> **[iso-window](../2026-06-18-iso-window.md)** (iso-flat + a complete dense W8 table + huge-page
+> collapse), which is the new default and solves n=16 in **2m44s**. The "36 M/s floor / 3m41s wall"
+> conclusion in the dated sections below was **wrong** (degraded box; dismissed W8; untried huge
+> pages) — see the 🚀 2026-06-18--3 section and the iso-window handoff. Kept for the record.
+
 **Date**: 2026-06-17
 **Mode**: intent-based (user away; authorized arch decisions on the new solver)
 **Goal (user)**: a new solver with **burr-memtable out-of-gate throughput, *sustained*
 on all cores**, plus **iso-burr's fewer-nodes merge** — pushing toward the
 [theoretical floor](../2026-06-16-queens-theoretical-floor.md). Leave existing solvers as-is.
+
+---
+
+## 🚀 Session 2026-06-18--3 (`138f26c4`) — iso-window + huge-page collapse: n=16 in **2m44s** (NEW DEFAULT). The "36 M/s floor" was WRONG.
+
+**Read this first — it overturns the "floor/50-unreachable" conclusion in the sections below.**
+Those were measured on a **memory-degraded box** (zram swap full, ARC eating ~13 GB, only ~14 GB
+free → the 17 GB TT OOM'd, forcing capped runs) and they **dismissed the W8 dense table on one
+confounded capped run** and **never tried forcing huge pages**. On a clean box (swap off, ARC
+capped to 2 GB, `/tmp` perf files cleared → ~23 GB free) with the levers actually built, n=16 went
+**3m33s → 2m44s, under the 3-minute goal.** New CLAUDE.md rule (committed): never claim "the floor"
+— that's the user's call; keep pushing from first principles.
+
+### What landed (branch `queens-iso-local-memo`, **ff-ready/ff'd to `main`**)
+- `1f53937` — backup of Codex's dense-window experiment (iso-window W8 scaffold + the negative W9 cache).
+- `2457646` — **iso-window + collapse = n=16 2m44s, the new default solver.**
+- `e9f65ec` — Opus-review doc fixes.
+
+### The win, measured (clean box, full 17 GB TT, single runs; node counts vary ±~5% run-to-run)
+| run | wall | nodes |
+|--------------------------|--------|--------|
+| **iso-window + collapse**| **2m44s** | 5.12 B |
+| iso-window               | 2m53s  | 5.20 B |
+| iso-flat                 | 3m29s  | 6.12 B |
+| iso-flat + collapse      | 3m44s  | 7.16 B |
+
+**Why iso-window wins (~28% fewer nodes):** W8 is a *complete, eviction-free* labelled Node-Kayles
+table (`src/queens/dense.rs`, W0..W8, 32 MiB). A pc==8 position's value is iso-invariant, so it's one
+labelled-edge-code lookup and **its whole ≤7 subtree is never re-expanded**. iso-flat evicts pc==8
+entries from the 17 GB TT and re-expands them repeatedly — *that* repeated work is the gap. (This is
+why W8 was a *net loss* on the capped/degraded box: there the per-node W8 cost wasn't offset, and
+Codex's `dense_window_get` rebuilt the edge code the slow way. Lever-1's one-pass `w8_get` + clean
+box flipped it.)
+
+**Two levers, they stack:**
+1. **W8 (iso-window):** the big one, ~45–60s. `wins_inc`/`par_wins_inc` monomorphised on `const
+   WINDOW: bool` (plain iso-flat has *zero* dead pc==8 branch); pc==8 → direct one-pass `w8_get`.
+2. **`MADV_COLLAPSE` (tt.rs `zeroed_huge_atomics`):** plain THP only reaches ~73% 2M on a randomly-
+   faulted 17 GB table; prefault (`MADV_POPULATE_WRITE`) + `MADV_COLLAPSE` → **100% 2M**, verified.
+   ~5% wall on iso-window with *near-identical node counts* (clean per-node TLB win). Default-ON for
+   ≥4 GB tables; `QUEENS_TT_COLLAPSE` overrides.
+
+### Negatives / closed this session
+- **TT-size sweep (8/12/17 GB, all 100% 2M):** smaller table → higher *warm* M/s (8 GB **42.7**, 12 GB
+  40.4, 17 GB 37.7 — TLB-residency is real, ~13%) but loses it back to eviction → wall ~flat. So
+  shrinking doesn't win; **capacity is not the binding constraint, per-probe latency is.**
+- **1 GB hugepages:** would zero the TT TLB miss but need boot-time reservation (root) — not runtime.
+
+### NEXT (the user's chosen direction): segmented TT variant — capture the ~13% TLB win *without shrinking*
+New variant, **keep the flat TT as the A/B control** (user's instruction). Make the DFS working set
+spatially/TLB-local in the full 17 GB table:
+1. **Measure the popcount distribution** of iso-window's flat-TT working set (pc≥9) — load-bearing for
+   band sizing (bad sizing over-evicts → regression). Add a gated per-pc put histogram; one n=16 run.
+2. **`index(route, pc) = band_base[pc] + fastrange(route, band_size[pc])`** behind `QUEENS_TT_SEGMENT`,
+   bands sized from (1). **Pure function of the key → transposition-safe** (same key → same band → same
+   slot; this is NOT the CCX-sharding negative, which sharded by *worker* and lost merges). Cost is
+   load imbalance only. Thread `pc` through `tt_get_h`/`tt_put_h`/`prefetch_h`.
+3. **A/B** iso-window segmented vs flat: warm M/s (does it approach the 8 GB run's 42 M/s?) + completion.
+Design discussion (with the user) is in [`rust/notes/2026-06-18-queens-windowed-dataflow.md`].
+
+### Deferred review nits (fold into the segmented-TT pass)
+- `w8_get` uses a per-pc==8-node `Option::expect` — thread `&DenseW8` in or `unwrap_unchecked` + SAFETY.
+- `dense::MAX_DENSE_K = 9` is vestigial (W9 path removed) — could be 8.
+- `dense_window_bench.rs` duplicates the `dense.rs` DP (independent cross-check; maintenance fork).
+
+### ⚠️ Box hygiene (REQUIRED for the 17 GB regime — the whole reason the prior "floor" was bogus)
+Before any real n=16 run: **swap off** (`swapoff -a`/zram off), **ARC capped low**
+(`zfs_arc_max`≈2 GB), **drop caches + compact** (`echo 3 >drop_caches; echo 1 >compact_memory`), and
+**clear `/tmp` perf files** (it's tmpfs = RAM; stale `*.perf.data` ate 11 GB). Need ≥~20 GB free so the
+17 GB TT fits without spilling. Bench from this clean state only.
 
 ---
 

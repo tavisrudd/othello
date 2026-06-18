@@ -10,30 +10,23 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
-**Active thread:** [iso-flat solver](notes/handoffs/2026-06-17-iso-flat-solver.md) — new solver,
-**throughput RESOLVED (`9331f9b`): n=16 SOLVED in 9m11s** (SECOND, 1.27× re-exp, 15.7 M/s — ~3.7×
-faster than the prior ~34-min best; n=16 is now a ~9-min bench). n=14 14.1 M/s. `fused`'s kernel (carried
-orientations + a single **selective** iso/D4 key, no live WL) over a **flat lockless TT** + a
-**thread-local node/HLL counter** fix (removed the per-node cross-CCX `fetch_add` — a measured 2×;
-also helps `incremental`/`parallel`). `QUEENS_KEY_MAX` dials the speed↔merge↔fit trilemma (default 6).
-Pure-iso (full-merge, fits-but-WL-bound) was a net loss; selective is the win. **Open:** n=16 selective
-set (~5.5B) exceeds the 17 GB flat table → evicts late-run; size `QUEENS_TT_SLOTS` or sweep KEY_MAX to
-keep it eviction-free, then a full (ask-first) n=16 run.
+**Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — the default solver, n=16
+**SOLVED (second) in 2m44s** (under the 3-min goal). iso-flat's kernel + a complete dense **W8** table
+(pc==8 tails resolved by one labelled-edge-code lookup, never re-expanded) over a **huge-page-collapsed**
+flat TT (`MADV_COLLAPSE`, default-on ≥4 GB). The earlier "~36 M/s floor / 3m41s wall" was **wrong** —
+measured on a memory-degraded box; clean box + W8 + huge pages broke it. (iso-flat handoff now
+[closed/archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
 
-**Per-node energy cuts (session 2026-06-17--5, `21ce0a6`+`97ef7bd`): n=14 −24.7% wall, node set
-identical → n=16 now SECOND in 4m11s** (5.56B nodes, 1.17× re-exp, 22.15 M/s, default *safe* 17 GB
-TT — 1.68× faster than the prior 7m02s best). iso-only `wins_tiny` tail + hash-carry
-(`get_h`/`put_h`) + direct triangular `iso_key_tiny_table` (the big one) + incremental move-list
-(kills the scan-all-n²). **All benches sit
-at the ~90°C 24-core throttle** → throughput is power-limited, rank levers by *energy/work* not
-parallelism; bench via `ryzenadj`/Zen5-pin ([[queens-benches-thermal-wall]]). Elder-root parallelism +
-the Lever-B nimber-oracle were both documented negatives (oracle parked behind `QUEENS_NIMBER_ORACLE`,
-off; redundant with the iso key until a K≥8 complete key — Lever-A — makes the merge non-redundant).
+**Current focus:** a **segmented TT variant** — `index(route, pc) = band_base[pc] + fastrange(route,
+band_size[pc])`, keyed by popcount (pure function of the key ⇒ transposition-safe), to capture the
+measured ~13% TLB-residency warm-M/s win *without* shrinking the table (smaller tables win it back on
+eviction; capacity is not the binding constraint, per-probe latency is). **Keep the flat TT as the A/B
+control.** Plan + Codex's windowed-dataflow design are in the iso-window handoff.
 
-**Next, decide with the user (not autonomous):**
-1. **Chunk 4 (BuRR archive)** — the load-bearing single-box lever: a static ribbon-retrieval layer that holds the solved set with no eviction (kills the 1.36× re-exp) and applies the 3.4× freeze-time graph-iso merge. Core landed (`rust/src/burr.rs` + `queens freeze`/`verify`); the live cascade vs ply-window integration is the open design choice → discuss scope. More/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), and a cheaper-than-graph-iso merge are the other rungs of the <30 min lever stack (roadmap).
-3. **dump/load Phase 2 (B2 full-key export)** — the Chunk-4 freeze primitive + distributed delta. Note: full-n16 *resume* loads the 17 GB TT past physical RAM into zram (this box's "swap" is `/dev/zram0`, compressed RAM, NOT disk), and random TT access pays a per-access decompress → crawls; partial-fill resumes are fine. (The 6.7 GB BuRR archive fits physical RAM, so its query path doesn't.)
-2. **#20 tuning** — it's a measured wash so far (`54b3ccd`). Mechanism + `QUEENS_PAR_MIN_AVAIL` knob harmless if kept (gated n≥15). Worth doing a sweep
+**Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` DDD (Codex's
+pump→group→dense-solve→merge — the floor note's streaming-dedup lever, breaks DFS-residence); **BuRR
+archive** (Chunk-4, eviction-free value-only ~1.1 bit/key — sound under windowing); **1 GB hugepages**
+for the TT (zero TT TLB miss, needs boot-time reservation).
 
 **Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main. Might be able to improve and fix.
 
@@ -121,6 +114,14 @@ held up across sessions:
   its weight; if it's a wash or negative, revert it or record it as an instructive
   negative (the handoffs already hold several: deeper parallelism, df-pn,
   naive-prefetch-windowing).
+- **Box hygiene before any n=16 bench — a degraded box silently fakes a "wall."** The 17 GB TT needs
+  ≥~20 GB free or it OOMs/spills (into zram = compressed RAM, NOT disk) and every number is garbage.
+  Before benching: **swap/zram off**, **ZFS ARC capped low** (`zfs_arc_max`≈2 GB — default ~50% RAM
+  eats the table), **drop caches + compact** (`echo 3 >.../drop_caches; echo 1 >.../compact_memory`),
+  and **clear `/tmp`** (it's tmpfs = RAM here; stale `*.perf.data` ate 11 GB last session). The bogus
+  "36 M/s floor / 3m41s wall" came entirely from benching a memory-starved box; clean, it's 2m44s.
+  Also force full 2 MB pages on the TT (`QUEENS_TT_COLLAPSE`, default-on ≥4 GB) — plain THP only
+  promotes ~73% of a randomly-faulted multi-GB table.
 - **Channel Fermi.** Napkin the predicted leverage before implementing. If the bench
   disagrees with the napkin by an order of magnitude, the *model* is wrong — re-read
   the trace at a wider angle, don't keep shaving the thing you assumed was the cost.
