@@ -69,8 +69,10 @@ CLAUDE.md rule or a validation gate.
 - **A change is not done until its validation gate passes:**
   - **Queens:** `solver_lineage_agrees` (every solver matches the memo-less `naive`
     verdict on n≤9) **and** a fresh `queens solve 12 iso-flat --distinct` (second-player
-    win, exact distinct **1,060,823**) + `solve 14 iso-flat --distinct` (second, ≈49.3M,
-    re-exp ≈ 1.0×). **Name `iso-flat` explicitly** — the default solver is now `iso-window`,
+    win, exact distinct **1,060,823**) + `solve 14 iso-flat --distinct` (second,
+    iso-flat distinct **≈29.2M**, re-exp ≈ 1.0×). (The ≈49.3M elsewhere is the *D4*
+    distinct; iso-flat's selective-iso key merges isomorphic graphs below it — its own
+    distinct is ≈29.2M, the figure this gate checks.) **Name `iso-flat` explicitly** — the default solver is now `iso-window`,
     which has no `--distinct` counter (its W8 table collapses pc==8 subtrees so its node
     count isn't comparable to the distinct set). A distinct-count change = lost
     transposition merges; a re-exp jump = under-sized table. TT/key changes must hold both.
