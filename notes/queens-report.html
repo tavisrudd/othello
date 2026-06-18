@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Non-Attacking Queens Game — a solver story</title>
+<script>
+  // MathJax config must precede the library load.
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root {
+    --bg: #0f1419;
+    --bg-elev: #1a212b;
+    --bg-card: #18202a;
+    --fg: #e6edf3;
+    --fg-dim: #9fb0c0;
+    --fg-faint: #6b7d8f;
+    --accent: #4cc2ff;
+    --accent2: #ffb454;
+    --accent3: #7ee787;
+    --accent4: #ff7b9c;
+    --border: #2a3542;
+    --layman: #7ee787;
+    --engineer: #4cc2ff;
+    --code-bg: #0b0f14;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.65;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 22px 120px; }
+
+  /* ---- sticky top bar / toggle ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(15,20,25,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 22px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .topbar .brand { font-weight: 700; font-size: 15px; letter-spacing: .3px; color: var(--fg); }
+  .topbar .brand .accent { color: var(--accent); }
+  .spacer { flex: 1; }
+  .toggle-group { display: flex; align-items: center; gap: 10px; }
+  .toggle-label { font-size: 13px; color: var(--fg-dim); }
+  .switch {
+    position: relative; display: inline-flex; align-items: center;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px; cursor: pointer; user-select: none;
+  }
+  .switch button {
+    border: none; background: transparent; color: var(--fg-dim);
+    font: inherit; font-size: 13px; font-weight: 600;
+    padding: 5px 14px; border-radius: 999px; cursor: pointer; transition: all .15s;
+    white-space: nowrap;
+  }
+  body.view-layman   .switch button[data-v="layman"]   { background: var(--layman);   color: #0a0f0a; }
+  body.view-engineer .switch button[data-v="engineer"] { background: var(--engineer); color: #06151f; }
+
+  /* ---- dual-view machinery ---- */
+  .layman, .engineer { display: none; }
+  body.view-layman   .layman   { display: block; }
+  body.view-engineer .engineer { display: block; }
+  /* inline spans */
+  span.layman, span.engineer { display: none; }
+  body.view-layman   span.layman   { display: inline; }
+  body.view-engineer span.engineer { display: inline; }
+
+  /* per-section toggle */
+  .sec-toggle {
+    float: right; font-size: 12px; color: var(--fg-faint);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 2px 9px; cursor: pointer; background: var(--bg-elev);
+    margin-top: 6px;
+  }
+  .sec-toggle:hover { color: var(--fg); border-color: var(--accent); }
+
+  /* ---- hero ---- */
+  header.hero { padding: 64px 0 30px; }
+  header.hero h1 { font-size: 40px; line-height: 1.12; margin: 0 0 14px; letter-spacing: -0.5px; }
+  header.hero h1 .sub { display:block; font-size: 20px; color: var(--accent); font-weight: 500; margin-top: 8px; letter-spacing: 0;}
+  header.hero p.lede { font-size: 19px; color: var(--fg-dim); max-width: 720px; }
+  .badges { margin: 22px 0 8px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    font-size: 13px; font-family: var(--mono);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 11px; color: var(--fg-dim); background: var(--bg-card);
+  }
+  .badge b { color: var(--accent2); }
+  .badge.win b { color: var(--accent3); }
+
+  /* ---- view-mode banner ---- */
+  .modebanner {
+    border-radius: 10px; padding: 12px 16px; margin: 26px 0;
+    font-size: 14.5px; border: 1px solid var(--border);
+  }
+  body.view-layman   .modebanner.layman   { background: rgba(126,231,135,0.08); border-color: rgba(126,231,135,0.35); }
+  body.view-engineer .modebanner.engineer { background: rgba(76,194,255,0.08);  border-color: rgba(76,194,255,0.35); }
+  .modebanner b { color: var(--fg); }
+
+  h2 { font-size: 28px; margin: 54px 0 6px; letter-spacing: -0.3px; padding-top: 10px; }
+  h2 .num { color: var(--fg-faint); font-family: var(--mono); font-size: 19px; margin-right: 10px; font-weight: 400; }
+  h3 { font-size: 21px; margin: 32px 0 4px; color: var(--fg); }
+  h4 { font-size: 16px; margin: 22px 0 4px; color: var(--accent2); text-transform: uppercase; letter-spacing: .6px; }
+  section { border-top: 1px solid var(--border); }
+  section:first-of-type { border-top: none; }
+  p { margin: 12px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  strong { color: #fff; }
+  em { color: var(--fg); }
+
+  code { font-family: var(--mono); font-size: 0.86em; background: var(--code-bg);
+    padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border); color: #d3e3f0; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.5; }
+  pre code { background: none; border: none; padding: 0; }
+
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px; margin: 20px 0;
+  }
+  .keyidea {
+    border-left: 4px solid var(--accent2); background: rgba(255,180,84,0.06);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 22px 0;
+  }
+  .keyidea .tag { font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: var(--accent2); font-weight: 700; }
+
+  /* 3b1b-style intuition box */
+  .intuition {
+    border-left: 4px solid var(--accent4); background: rgba(255,123,156,0.06);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 22px 0;
+  }
+  .intuition .tag { font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: var(--accent4); font-weight: 700; }
+
+  details.formal {
+    margin: 16px 0; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-elev); overflow: hidden;
+  }
+  details.formal > summary {
+    cursor: pointer; padding: 12px 16px; font-weight: 600; font-size: 14.5px;
+    color: var(--accent); list-style: none; user-select: none;
+  }
+  details.formal > summary::before { content: "▸ "; color: var(--fg-faint); }
+  details.formal[open] > summary::before { content: "▾ "; }
+  details.formal > summary:hover { background: rgba(76,194,255,0.06); }
+  details.formal .body { padding: 4px 18px 16px; border-top: 1px solid var(--border); font-size: 15px; color: var(--fg-dim); }
+  details.formal .body p:first-child { margin-top: 12px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--accent); font-weight: 600; border-bottom: 2px solid var(--border); }
+  td.num, th.num { text-align: right; font-family: var(--mono); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .win { color: var(--accent3); }
+  .loss { color: var(--accent4); }
+
+  figure { margin: 28px 0; }
+  figure svg { display: block; max-width: 100%; height: auto; margin: 0 auto;
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 12px; }
+  figcaption { font-size: 13.5px; color: var(--fg-dim); text-align: center; margin-top: 10px; padding: 0 10px; }
+
+  .toc { columns: 2; column-gap: 30px; font-size: 14.5px; margin: 24px 0; }
+  .toc a { display: block; padding: 4px 0; color: var(--fg-dim); }
+  .toc a:hover { color: var(--accent); }
+  @media (max-width: 640px) {
+    .toc { columns: 1; }
+    header.hero h1 { font-size: 30px; }
+    body { font-size: 16px; }
+    .topbar .brand { display: none; }
+  }
+  .axis { stroke: #3a4654; stroke-width: 1; }
+  .grid { stroke: #232c38; stroke-width: 1; }
+  .lbl  { fill: var(--fg-dim); font: 11px var(--sans); }
+  .lbl-sm { fill: var(--fg-faint); font: 10px var(--mono); }
+  .ttl  { fill: var(--fg); font: 13px var(--sans); font-weight: 600; }
+  .footer { margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--fg-faint); font-size: 13.5px; }
+  kbd { font-family: var(--mono); font-size: .85em; background: var(--bg-elev); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; }
+</style>
+</head>
+<body class="view-layman">
+
+<div class="topbar">
+  <span class="brand">Non-Attacking <span class="accent">Queens</span></span>
+  <span class="spacer"></span>
+  <div class="toggle-group">
+    <span class="toggle-label">Reading level:</span>
+    <div class="switch" id="globalSwitch" role="group" aria-label="Reading level">
+      <button data-v="layman">Plain English</button>
+      <button data-v="engineer">Engineer</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <h1>The Non-Attacking Queens Game
+    <span class="sub">how a 256-bit board, a fingerprint, and a dense lookup table solved a 16×16 game in 2 minutes 44 seconds</span>
+  </h1>
+  <p class="lede">This is not the famous "place 8 queens so none attack" puzzle. It is the <em>two-player game</em> built on top of it — and figuring out who wins on a 16×16 board is genuinely hard. This report explains the game and the engineering that cracked it, at two levels of detail you can flip between.</p>
+  <div class="badges">
+    <span class="badge win">verdict: <b>n=16 → second player wins</b></span>
+    <span class="badge">best wall time: <b>2m 44s</b></span>
+    <span class="badge">positions explored: <b>~5.1 billion</b></span>
+    <span class="badge">cross-checked vs <b>Jenrich (2014)</b></span>
+  </div>
+</header>
+
+<div class="modebanner layman">
+  <b>You are reading the Plain-English view.</b> No math, no jargon — intuition and analogies. Flip the switch at the top right to <b>Engineer</b> for the real algorithms, data structures, and performance reasoning. The hardest ideas also have an expandable <em>"The formal version"</em> box you can open in either mode.
+</div>
+<div class="modebanner engineer">
+  <b>You are reading the Engineer view.</b> Precise algorithms, data layout, complexity, and the measured performance story. Flip to <b>Plain English</b> for the intuition-first version of any section. Genuinely advanced math gets an inline visual explanation plus an expandable <em>"The formal version"</em> derivation.
+</div>
+
+<nav class="toc">
+  <a href="#game">1 · What the game is</a>
+  <a href="#hard">2 · Why it is hard</a>
+  <a href="#impartial">3 · Impartial games &amp; who wins</a>
+  <a href="#symmetry">4 · Symmetry: visiting fewer positions</a>
+  <a href="#graph">5 · The available set as a graph</a>
+  <a href="#grundy">6 · Sprague–Grundy &amp; nim</a>
+  <a href="#lineage">7 · The solver lineage</a>
+  <a href="#axes">8 · Three axes of optimization</a>
+  <a href="#represent">9 · Representing positions cheaply</a>
+  <a href="#latency">10 · The memory-latency wall</a>
+  <a href="#numbers">11 · The numbers</a>
+  <a href="#floor">12 · The floor, and what is next</a>
+</nav>
+
+<!-- ===================================================================== -->
+<section id="game">
+<h2><span class="num">1</span>What the game actually is</h2>
+<span class="sec-toggle" data-target="game">flip this section</span>
+
+<div class="layman">
+<p>Picture a chessboard. A <strong>queen</strong> attacks every square in her row, her column, and both diagonals — long lines that shoot across the whole board.</p>
+<p>Two players take turns. On your turn you place one queen on any empty square that <em>is not attacked by any queen already on the board</em>. So every queen you add is safe from all the others, and it also "poisons" a lot of squares for the future. The board steadily fills up with attacked squares.</p>
+<p>Eventually someone faces a board where every empty square is under attack — they <strong>cannot move, and they lose</strong>. That is the whole game.</p>
+<p>The question we answer is not "what is a good move." It is the absolute question: <strong>with both players playing perfectly, does the player who goes first win, or the player who goes second?</strong> For a 16×16 board the answer is: <span class="win">the second player wins</span>. Proving that took exploring billions of possible games.</p>
+<div class="keyidea">
+  <span class="tag">The one picture to keep</span>
+  <p>The board is divided into <strong>"available" squares</strong> (empty and safe — your legal moves) and everything else. Each move you make can only <em>shrink</em> the available set, never grow it. The game is a slow collapse, and whoever makes the last legal placement wins.</p>
+</div>
+</div>
+
+<div class="engineer">
+<p>This is the adversarial game studied by Noon &amp; Van Brummelen (2006), <em>not</em> the n-queens placement puzzle. Two players alternately place mutually-non-attacking queens on an <code>n×n</code> board; under <strong>normal play</strong> the player who cannot move loses. A queen on square <code>s</code> blocks its entire row, column, and both diagonals.</p>
+<p>The position is captured completely by a single <strong>blocked mask</strong> = (occupied ∪ attacked). Because a queen is colourless and placing one on <code>s</code> always adds the same fixed <code>attack(s)</code>, any two move-orders reaching the same blocked mask are identical for all future play. The set of legal moves is the <strong>available set</strong>:</p>
+<p style="text-align:center">\( \text{available} = \text{board} \;\wedge\; \neg\,\text{blocked} \)</p>
+<p>and <code>|available|</code> (its popcount) is <strong>monotone non-increasing</strong> down the search tree — a fact the solver exploits heavily (see §9–10). The board is a 256-bit mask: <code>Bits([u64; 4])</code>, bit <code>r·n + c</code> for square <code>(r,c)</code>, so up to 16×16 fits in four words. Attack masks are precomputed once per square (<code>attack[s]</code>, self-blocking).</p>
+<pre><code>// geom.rs — a square attacks its row, col, and both diagonals (and itself)
+if rr == r || cc == c
+   || (rr as i32 - cc as i32) == (r as i32 - c as i32)   // ╲ diagonal
+   || (rr + cc) == (r + c)                                // ╱ diagonal
+{ mask.set(rr * n + cc); }</code></pre>
+<p>Move order is static and forcing: squares are sorted by descending attack-degree (<code>order</code>), so the most board-closing moves are tried first and α-β cutoffs fire early. For this blocking game that static order is near-optimal — dynamic move ordering was measured as a net loss.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 330" width="760" height="330" role="img" aria-label="An 8x8 board showing a queen's attack lines and the resulting available squares">
+  <!-- left board: attack lines -->
+  <g transform="translate(30,30)">
+    <text class="ttl" x="0" y="-10">A queen attacks four lines</text>
+    <!-- grid -->
+    <g>
+      <!-- cells -->
+      <g id="b1cells"></g>
+    </g>
+  </g>
+  <!-- right board: available -->
+  <g transform="translate(420,30)">
+    <text class="ttl" x="0" y="-10">Available = empty &amp; not attacked = your legal moves</text>
+    <g id="b2cells"></g>
+  </g>
+</svg>
+<figcaption>Left: a single queen (♛ at d4) attacks its row, column, and both diagonals — the highlighted lines. Right: after she is placed, the green squares are the only legal next moves (empty and unattacked). Each turn the green set can only shrink.</figcaption>
+</figure>
+</section>
+
+<!-- ===================================================================== -->
+<section id="hard">
+<h2><span class="num">2</span>Why it is hard</h2>
+<span class="sec-toggle" data-target="hard">flip this section</span>
+
+<div class="layman">
+<p>You might think a computer could just try every game. The trouble is the sheer number of distinct ways a game can unfold. Each early move spawns dozens of follow-ups, each of those spawns dozens more, and the tree of possibilities explodes.</p>
+<p>There is a saving grace: many different move-orders end up at the <em>exact same board</em>. If you remember boards you have already solved, you avoid redoing them. But on a 16×16 board, the number of genuinely different boards you must remember is in the <strong>billions</strong> — far more than fits comfortably in a computer's memory. So the real fight is not "thinking faster," it is "remembering billions of boards without running out of room."</p>
+<div class="card">
+<p style="margin:0"><strong>How fast the distinct boards grow.</strong> Going up two board sizes at a time, the count of genuinely-different boards multiplies by an ever-larger factor:</p>
+</div>
+</div>
+
+<div class="engineer">
+<p>Deciding the winner of generalized Node Kayles is <strong>PSPACE-complete</strong> (Schaefer 1978), which anchors <em>why</em> extracting one bit ("second player wins") costs billions of operations — though it says nothing about this specific queen-graph family's asymptotics. The practical wall is the size of the transposition set.</p>
+<p>The branching factor stays moderate (edge-weighted <code>b̄ ≈ 3.35 → 3.92 → ~4</code> at n=12/14/16, measured by <code>count --branching</code>), but the number of <strong>distinct canonical positions</strong> grows super-exponentially. Measured with a HyperLogLog estimator fed every canonical key during a real search:</p>
+<table>
+  <thead><tr><th>n</th><th class="num">distinct positions (D4 key)</th><th class="num">ratio vs n−2</th><th>note</th></tr></thead>
+  <tbody>
+    <tr><td>10</td><td class="num">94,339</td><td class="num">—</td><td>exact set agreed (94,097)</td></tr>
+    <tr><td>12</td><td class="num">1,070,913</td><td class="num">11.4×</td><td>exact distinct = <strong>1,060,823</strong></td></tr>
+    <tr><td>14</td><td class="num">49,346,012</td><td class="num">46.1×</td><td>node count inflated ~8% by re-expansion</td></tr>
+    <tr><td>16</td><td class="num">~7,200,000,000</td><td class="num">145.9×</td><td>HLL-confirmed on the real solve</td></tr>
+    <tr><td>18</td><td class="num">~3,000,000,000,000</td><td class="num">~450×</td><td>extrapolated (deceleration band 360–590×)</td></tr>
+  </tbody>
+</table>
+<p>At 8 bytes per stored entry, 7.2 billion D4-distinct positions is ~58 GB — well past a 26 GB box. A naive full table thrashes: it evicts entries, re-expands their subtrees, and drifts toward Jenrich's 71-billion-node no-transposition cost. <strong>n=16 is fundamentally a memory-pressure problem,</strong> and almost every lever in this report is aimed at fitting the working set or hiding the cost of probing it.</p>
+</div>
+
+<figure id="growthFig">
+<svg viewBox="0 0 760 360" width="760" height="360" role="img" aria-label="Distinct-position growth by board size, log scale">
+  <g id="growthChart"></g>
+</svg>
+<figcaption><strong>Distinct positions vs board size</strong> (log scale). Each step of +2 in <code>n</code> multiplies the count by a growing factor — super-exponential. The 16×16 working set is ~7.2 billion genuinely-different boards; 18×18 would be ~3 trillion. Numbers measured by HyperLogLog on real solves (n≤16) and extrapolated (n=18).</figcaption>
+</figure>
+</section>
+
+<!-- ===================================================================== -->
+<section id="impartial">
+<h2><span class="num">3</span>Impartial games and who wins</h2>
+<span class="sec-toggle" data-target="impartial">flip this section</span>
+
+<div class="layman">
+<p>This game has a special, very clean property: <strong>it does not matter who placed which queen.</strong> A queen is just a queen. Both players have exactly the same moves available from any given board. Games like this (think Nim, or this game) are called <em>impartial</em>, and they are completely understood by mathematicians.</p>
+<p>For an impartial game where the last player to move wins, every board is one of two types:</p>
+<ul>
+<li><strong>A losing board</strong> for whoever has to move (a "P-position" — Previous player wins). Whatever you do, you hand your opponent a winning board.</li>
+<li><strong>A winning board</strong> (an "N-position" — Next player wins): at least one of your moves hands the opponent a losing board.</li>
+</ul>
+<p>So a board is <em>winning</em> exactly when you can move to a <em>losing</em> board. That single rule, applied recursively all the way down, decides everything. The empty 16×16 board turns out to be a <em>losing</em> board for the first player — which is the same as saying the second player wins.</p>
+<div class="keyidea">
+<span class="tag">A free shortcut for odd boards</span>
+<p>On any <em>odd-sized</em> board (5×5, 7×7, …) the first player wins instantly with no computer search at all: play the exact center, then simply mirror every move your opponent makes through the center. Your mirror move is always legal, so you always have a reply, so your opponent runs out first. Only <em>even</em> boards (like 16×16) require the heavy search.</p>
+</div>
+</div>
+
+<div class="engineer">
+<p>The game is <strong>impartial</strong> (moves depend only on the position, not the player) and <strong>normal-play</strong> (last to move wins). The recursive win/loss relation is the negamax characterization:</p>
+<p style="text-align:center">\( \text{wins}(P) \;=\; \exists\, \text{move } m:\; \neg\,\text{wins}(P \text{ after } m) \)</p>
+<p>A position with no moves is a loss for the player to move. Everything else folds from there. The empty 16×16 board evaluates to a loss for the mover ⇒ <strong>second player wins</strong>, matching Jenrich (arXiv:1312.5135) and OEIS A344227 (our verdicts agree through n=13; the win/loss verdict holds through 16).</p>
+<h4>The odd-n O(1) theorem</h4>
+<p>Odd boards are decided without search by a pairing strategy: the first player takes the center, then answers each reply with its 180° rotation. The mirror move is always legal because a square attacks its own 180° image only on a center line, so off-center the pairing survives to the end. The solver short-circuits this:</p>
+<pre><code>fn first_player_wins(&self, q) -> bool {
+    if q.is_odd() { return true; }   // centre + 180° mirror, no search
+    /* … the real search for even n … */
+}</code></pre>
+<details class="formal">
+<summary>The formal version — P-positions, N-positions, and why the recursion is sound</summary>
+<div class="body">
+<p>For an impartial normal-play game, define the set of <strong>P-positions</strong> (previous-player-wins, i.e. the mover loses) as the unique set \(\mathcal P\) satisfying: (i) every terminal position is in \(\mathcal P\); (ii) from every position in \(\mathcal P\), every move leads outside \(\mathcal P\); (iii) from every position not in \(\mathcal P\), some move leads into \(\mathcal P\). Existence and uniqueness follow by induction on the (finite, acyclic-by-monotone-popcount) game DAG.</p>
+<p>The win/loss bit is exactly \( \mathbb 1[P \notin \mathcal P] \). Because the available popcount strictly decreases on every move, the game graph is a DAG with bounded depth \(\le n^2\), so the recursion terminates and memoization is well-defined. Soundness of transposition merging follows from the impartial, history-free structure: the value of a node depends only on its blocked mask, never on the path taken to reach it — so there is no graph-history-interaction (GHI) hazard, and identical masks may share a stored value.</p>
+</div>
+</details>
+</div>
+</section>
+
+<!-- ===================================================================== -->
+<section id="symmetry">
+<h2><span class="num">4</span>Symmetry — the first big way to visit fewer positions</h2>
+<span class="sec-toggle" data-target="symmetry">flip this section</span>
+
+<div class="layman">
+<p>A square board looks the same after you rotate it a quarter turn, or flip it like a pancake. There are <strong>eight</strong> such views of any board (4 rotations × the mirror image of each). All eight are, for the purposes of this game, the <em>same position</em> — if you can win from one, you can win from all of them.</p>
+<p>So before the computer stores a board, it asks: "of my eight views of this board, which one looks the 'smallest' by a fixed rule?" It always stores that one. Now eight boards that are rotations/reflections of each other collapse into a single remembered entry — up to <strong>8× less to remember and re-solve.</strong></p>
+</div>
+
+<div class="engineer">
+<p>The dihedral group <strong>D₄</strong> — the symmetry group of the square — has 8 elements: identity, three rotations (90/180/270°), and four reflections (two axis flips, two diagonal flips). It acts on board squares as a permutation. Two boards in the same D₄ <em>orbit</em> are the same game, so we store only the <strong>canonical representative</strong>: the lexicographically-smallest image under all 8 transforms.</p>
+<pre><code>fn canon(&self, mask) -> Bits {            // geom.rs
+    let mut best = mask;
+    for t in 1..8 {                        // the 7 non-identity symmetries
+        let img = permute(mask, &self.sym[t]);
+        if img &lt; best { best = img; }       // lexicographic min over the orbit
+    }
+    best
+}
+fn pos_key(&self, blocked) -> Bits {
+    self.canon(self.board.and_not(blocked)) // canonicalise AVAILABLE, not blocked
+}</code></pre>
+<p>A subtle but load-bearing choice: we canonicalise the <strong>available</strong> mask, not the blocked mask. Both merge the identical equivalence classes (available is a pure function of blocked), but available has far fewer set bits deep in the tree, so <code>canon</code> folds proportionally fewer bits. That single change took n=14 from 79.6 s → 33.0 s (2.4×) with byte-identical node counts.</p>
+<div class="intuition">
+<span class="tag">3Blue1Brown-style intuition · group actions &amp; orbits</span>
+<p>Think of the 8 symmetries as a little machine that "shuffles" a board into one of (up to) 8 look-alikes. Run any board through all 8 settings and you get its <em>orbit</em> — its family of identical-twins. Picking the canonical representative is like alphabetizing the family and always filing under the first name: no matter which twin you start from, you file under the same name, so the whole family lands in one folder. That is why it is well-defined and why it merges the family into one stored entry.</p>
+</div>
+<details class="formal">
+<summary>The formal version — D₄ orbits and Burnside counting</summary>
+<div class="body">
+<p>\(D_4 = \langle r, s \mid r^4 = s^2 = 1,\; srs = r^{-1}\rangle\), order 8. It acts on the set of board states; the orbit of a state \(x\) is \(\mathcal O(x) = \{g\cdot x : g \in D_4\}\), and by orbit–stabilizer \(|\mathcal O(x)| = |D_4| / |\mathrm{Stab}(x)| \in \{1,2,4,8\}\) (most positions have trivial stabilizer ⇒ orbit size 8). The number of distinct positions <em>up to symmetry</em> is the orbit count, given by Burnside's lemma:</p>
+<p style="text-align:center">\( \displaystyle \#\text{orbits} \;=\; \frac{1}{|D_4|}\sum_{g \in D_4} |\mathrm{Fix}(g)| \)</p>
+<p>where \(\mathrm{Fix}(g)\) is the set of positions invariant under \(g\). Most positions are fixed only by the identity, so the average is close to \(\tfrac18\) of the raw count — hence the ~8× reduction. The canonical-representative trick computes the same quotient constructively: \(\mathrm{key}(x) = \min_{g}\, g\cdot x\) under the lexicographic order on the bitset, which is constant on orbits by construction.</p>
+</div>
+</details>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 220" width="760" height="220" role="img" aria-label="The eight D4 orientations of a small board">
+  <g id="d4Figure"></g>
+</svg>
+<figcaption><strong>The 8 orientations of the square (D₄).</strong> An asymmetric little shape is shown under all 8 transforms — 4 rotations and their 4 mirror images. The game treats all 8 as one position; the solver stores only the lexicographically-smallest (highlighted).</figcaption>
+</figure>
+</section>
+
+<!-- ===================================================================== -->
+<section id="graph">
+<h2><span class="num">5</span>The available set as a graph — merging far more</h2>
+<span class="sec-toggle" data-target="graph">flip this section</span>
+
+<div class="layman">
+<p>Symmetry merges boards that are rotations of each other. But there is a deeper kind of sameness. Forget the board entirely and look only at the <em>structure</em> of the legal moves: which available squares "conflict" with which other available squares (because one attacks the other).</p>
+<p>Draw a dot for each available square, and a line connecting two dots whenever those two squares attack each other. You get a <strong>network</strong> (a graph). Here is the magic: two boards that look totally different — different sizes of attacked regions, different positions — can produce the <em>same network shape</em>. And if the networks have the same shape, <strong>the games are identical.</strong> Same winner, every time.</p>
+<p>This merges far more positions than symmetry alone — roughly <strong>3.4× more</strong> on top of the 8× from symmetry. The catch: checking whether two networks have the same shape is expensive. So the solver uses a clever compromise — it does the cheap exact check for <em>small</em> networks (where it is fast and merges the most), and falls back to plain symmetry for large ones.</p>
+</div>
+
+<div class="engineer">
+<p>The available squares form the <strong>available-graph</strong>: one vertex per available square, an edge between two vertices whenever the squares mutually attack. Since the game is impartial Node Kayles on exactly this graph, <strong>positions with isomorphic available-graphs have identical game values</strong> — a strictly coarser (more merging) equivalence than D₄. Measured safe merge: 2.63 / 3.17 / 3.42 / 3.40× at n=8/10/12/14, plateauing at ~3.4× ⇒ n=16's ~7.2B D₄-distinct collapses to ~2.1B graph-distinct.</p>
+<p>Graph canonicalization is the cost. A full Weisfeiler–Leman (color-refinement) canonical key costs ~100× the D₄ key (~4200 cycles vs ~62), making a <em>pure</em> graph-keyed search a live loss despite 3.4× fewer nodes. The resolution is a <strong>selective key</strong> in disjoint tagged namespaces:</p>
+<pre><code>fn node_key(&self, q, orient) -> Bits {        // iso_flat.rs
+    let pc = avail.popcount();
+    if pc &lt;= self.iso_max_avail {              // small graph: exact iso, cheap
+        let h = if pc &lt;= 7 { iso_key_tiny_table(avail) }  // complete ≤7 lookup
+                else        { iso_key_fast(avail) };       // WL canon
+        graph_bits(h)                          // tagged graph namespace
+    } else {
+        d4_bits(lex_min8(orient))              // large graph: cheap D4, disjoint tag
+    }
+}</code></pre>
+<p>For ≤7-vertex graphs the value is resolved by a <strong>complete tiny table</strong> keyed by the raw labelled edge code (a 28-bit upper-triangular bitstring) — no canonicalization at all, just one direct byte load, because the Node-Kayles value is relabelling-invariant. The default threshold is 7 (the top of the no-WL regime). The two namespaces (<code>graph_bits</code> / <code>d4_bits</code>) never collide even on a full 16×16 board where no spare board bit exists.</p>
+<div class="intuition">
+<span class="tag">3Blue1Brown-style intuition · graph isomorphism &amp; color refinement</span>
+<p>Two graphs are "the same shape" if you can rename the dots of one to turn it into the other. Checking that directly is brutal — you would try every renaming. <strong>Color refinement</strong> sneaks up on it: paint every dot by how many neighbours it has. Then re-paint every dot by the <em>multiset of its neighbours' colors</em>. Repeat. Dots that are structurally different drift to different colors; dots that play the same role keep matching colors. After a few rounds the coloring stabilizes, and the sorted list of final colors is a <em>fingerprint of the shape</em> — cheap to compare, and it almost always tells isomorphic graphs apart. That is Weisfeiler–Leman, and it is what <code>iso_key_fast</code> runs for the bigger graphs.</p>
+</div>
+<details class="formal">
+<summary>The formal version — 1-WL color refinement</summary>
+<div class="body">
+<p>Seed each vertex with its degree: \(c_0(v) = \deg(v)\). Iterate</p>
+<p style="text-align:center">\( c_{i+1}(v) \;=\; \mathrm{hash}\!\Big(c_i(v),\; \{\!\{\, c_i(u) : u \in N(v) \,\}\!\}\Big) \)</p>
+<p>where \(\{\!\{\cdot\}\!\}\) is a multiset (so neighbour order is irrelevant — the implementation folds neighbour colors with a commutative sum-of-mixes). The partition refines monotonically and stabilizes in \(\le |V|\) rounds. The canonical key is the hash of the sorted multiset of stable colors. 1-WL is a sound (never merges non-isomorphic graphs that it distinguishes) but incomplete invariant — it fails on certain regular graphs — so for full safety the solver pairs it with individualization-refinement; for connected graphs on ≤4 vertices the sorted degree sequence is already a <em>complete</em> invariant, used as the <code>TINY_MAX</code> shortcut. The implementation pads neighbour lists to a fixed stride with a dummy vertex (mixed-color 0) so the inner loop is branchless and byte-identical to the variable-trip version.</p>
+</div>
+</details>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 290" width="760" height="290" role="img" aria-label="Two different boards producing the same available-graph">
+  <g id="graphFigure"></g>
+</svg>
+<figcaption><strong>The available set as a graph.</strong> Two different-looking positions (left, center) produce the same available-graph structure (right) — same vertices-and-edges shape. Because the game is Node Kayles on that graph, both positions have the <em>same winner</em>, and the solver merges them into one stored entry.</figcaption>
+</figure>
+</section>
+
+<!-- ===================================================================== -->
+<section id="grundy">
+<h2><span class="num">6</span>Sprague–Grundy: splitting a game into independent pieces</h2>
+<span class="sec-toggle" data-target="grundy">flip this section</span>
+
+<div class="layman">
+<p>Late in a game, the remaining available squares often split into separate clumps that cannot interfere with each other — a move in one clump never touches another clump. When that happens, you are really playing <em>several tiny independent games at once.</em></p>
+<p>Mathematics gives a beautiful way to combine independent games. Each game gets a number (its "nimber") that summarizes everything about it. To combine several games, you don't add their numbers — you combine them with a bitwise operation (XOR, the "nim-sum"). And there is one golden rule: <strong>the combined game is a loss for the mover exactly when the combined number is zero.</strong> This is the Sprague–Grundy theorem, and it is one of the jewels of game theory.</p>
+<p>For this particular game it helps only at the very end (the queen board mostly stays in one connected piece because diagonals reach across everything), but where it applies, a clump of a few squares can be resolved instantly from a tiny lookup table instead of being searched.</p>
+</div>
+
+<div class="engineer">
+<p>When the available-graph splits into disconnected components, the position is a <strong>disjunctive sum</strong> of independent impartial games. By the Sprague–Grundy theorem each component has a nimber (Grundy value), and the position's nimber is their <strong>XOR (nim-sum)</strong>; the position is a loss for the mover iff the nimber is 0.</p>
+<p style="text-align:center">\( \mathcal G(P) \;=\; \bigoplus_{c \in \text{components}} \mathcal G(c), \qquad \text{mover loses} \iff \mathcal G(P) = 0 \)</p>
+<p>Each component's nimber is the <strong>mex</strong> (minimum excludant) of its children's nimbers:</p>
+<p style="text-align:center">\( \mathcal G(c) \;=\; \operatorname{mex}\{\, \mathcal G(c') : c' \text{ a child of } c \,\} \)</p>
+<pre><code>// nimber.rs — full Sprague-Grundy, no α-β cutoff (mex needs every child)
+let mut seen = 0u64;                       // bitset of child nimbers (&lt; n ≤ 16)
+for &amp;sq in &amp;q.order {
+    if q.is_available(blocked, sq) {
+        seen |= 1u64 &lt;&lt; self.grundy(q, q.place(blocked, sq));
+    }
+}
+let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code></pre>
+<p>Two practical caveats specific to this game: (1) computing full nimbers has <strong>no α-β cutoff</strong> (mex needs the entire child set), so it costs ~265× the win/loss node count and is feasible only to ~n=12. (2) The queen graph is <strong>biconnected with long-range diagonals, so it does not decompose</strong> at the full-board level — Grundy decomposition is a near-dead-end on the trunk and pays off only in the fragmented endgame. The <code>iso-window</code> solver does exploit it at the leaves: a complete dense table of <em>all labelled 8-vertex Node-Kayles games</em> (and a ≤7 table) resolves every small subgame by one lookup (§7–8).</p>
+<div class="intuition">
+<span class="tag">3Blue1Brown-style intuition · mex and XOR</span>
+<p><strong>mex</strong> ("minimum excludant") is just: look at the set of values your moves can reach, and name the smallest non-negative integer that's <em>missing</em>. That missing value <em>is</em> this position's nimber — it measures "how much maneuvering room you have." A nimber of 0 means every move hands the opponent a non-zero (winning-for-them) position — you're stuck.</p>
+<p><strong>Why XOR?</strong> Imagine each game as a stack of coins in binary. Playing optimally across several games is exactly the classic game of Nim, and the winning condition for Nim is "make the XOR of the pile sizes zero." Nimbers turn <em>any</em> impartial game into an equivalent Nim pile, so combining games is combining Nim piles — and Nim adds with XOR. A zero nim-sum is a balanced, lost-for-the-mover position; any non-zero sum, you can always rebalance it to zero and win.</p>
+</div>
+<details class="formal">
+<summary>The formal version — the Sprague–Grundy theorem</summary>
+<div class="body">
+<p><strong>Theorem (Sprague 1935, Grundy 1939).</strong> Every impartial game under normal play is equivalent to a single Nim heap of size equal to its Grundy value \(\mathcal G\), where \(\mathcal G(P) = \operatorname{mex}\{\mathcal G(P') : P \to P'\}\) and \(\operatorname{mex}(S) = \min(\mathbb Z_{\ge 0}\setminus S)\). For a disjunctive sum \(P = P_1 + \cdots + P_k\) (a move is a move in exactly one component), \(\mathcal G(P) = \mathcal G(P_1) \oplus \cdots \oplus \mathcal G(P_k)\), where \(\oplus\) is bitwise XOR. The position is a P-position (mover loses) iff \(\mathcal G(P) = 0\). The proof of the XOR rule is the Nim strategy argument: from \(\mathcal G(P)\neq 0\) there is a move zeroing the nim-sum (clear the leading bit), and from \(\mathcal G(P)=0\) every move makes it non-zero — exactly the P/N alternation. Verified against OEIS A344227 through n=12.</p>
+</div>
+</details>
+</div>
+</section>
+
+<!-- ===================================================================== -->
+<section id="lineage">
+<h2><span class="num">7</span>The solver lineage — getting progressively smarter</h2>
+<span class="sec-toggle" data-target="lineage">flip this section</span>
+
+<div class="layman">
+<p>The solver wasn't built in one shot. It grew through a dozen generations, each adding one idea and each kept around so it can double-check the next. Every generation computes the <em>same</em> winner — the smart ones just reach it faster, by remembering more, merging more, and wasting fewer trips to memory.</p>
+</div>
+<div class="engineer">
+<p>The <code>Solver</code> trait names a ladder of implementations (<code>SOLVER_NAMES</code>), simplest to most sophisticated. Every solver must agree with the memo-less <code>naive</code> ground truth on small boards (the <code>solver_lineage_agrees</code> gate) and reproduce the exact distinct count (1,060,823 at n=12). Each step is one idea layered on the last.</p>
+</div>
+
+<table>
+<thead><tr><th>generation</th><th>what it adds</th></tr></thead>
+<tbody>
+<tr><td><code>naive</code></td><td>Pure win/loss negamax with an α-β cutoff, no memory. The ground-truth oracle every other solver is checked against.</td></tr>
+<tr><td><code>memo</code></td><td>A fixed-size transposition table — remember boards you've already solved so you never re-solve them.</td></tr>
+<tr><td><code>symmetry</code></td><td>The D₄ canonical key (§4): collapse each board's 8 rotations/reflections into one stored entry — up to 8×.</td></tr>
+<tr><td><code>parallel</code></td><td>Rayon parallelism, <strong>parity-aware</strong>: "prove-a-loss" plies (where every child must be searched) fan across cores with <em>zero speculation</em>; "prove-a-win" plies stay sequential so the α-β cutoff survives. The default for years; took n=16 from 1 busy core to 24.</td></tr>
+<tr><td><code>incremental</code></td><td>Carry the 8 orientations <em>down</em> the search and update them per move instead of re-folding the canonical key from scratch at every node.</td></tr>
+<tr><td><code>burr</code></td><td>A BuRR static-retrieval archive: freeze solved positions into an eviction-free compressed layer (~1.1 bit/key in the value-only regime).</td></tr>
+<tr><td><code>iso-burr</code></td><td>The selective graph-iso key (§5) over the BuRR store — merges ~3.4× more. Solved n=16 in <strong>29m 23s</strong>, eviction-free.</td></tr>
+<tr><td><code>fused</code></td><td>Freezes solved subgames into immutable BuRR segments mid-search.</td></tr>
+<tr><td><code>iso-flat</code></td><td>The selective iso key over a <strong>flat lockless</strong> table instead of a log-structured cascade — so throughput never decays (a miss is one O(1) probe forever, not a walk down growing segments). The production kernel.</td></tr>
+<tr><td><code>iso-window</code> ⭐</td><td>iso-flat + a <strong>complete dense W8 table</strong>: at available-popcount 8, the subgame's value is isomorphism-invariant, resolved by ONE 28-bit labelled-edge-code lookup, and its whole ≤7 subtree is <em>never re-expanded</em>. Over a huge-page-collapsed table this solves <strong class="win">n=16 in 2m 44s</strong>. The current default.</td></tr>
+<tr><td><code>nimber</code></td><td>Full Sprague–Grundy values via mex (§6) — exact game value, no cutoff, feasible to ~n=12.</td></tr>
+<tr><td><code>pn</code></td><td>df-pn proof-number search — an instructive <em>negative</em>: correct, but hits the df-pn + transposition (graph-history-interaction) pathology on this transposition-dense game and explodes past n=8.</td></tr>
+</tbody>
+</table>
+
+<div class="card">
+<h4 style="margin-top:0">The reversal that mattered</h4>
+<div class="layman"><p>An earlier session declared the solver had hit "the floor" — about 36 million positions per second, with n=16 stuck near 3m41s as "the wall." That conclusion was <strong>wrong</strong>. It had been measured on a computer whose memory was already clogged (a full compressed-RAM swap, a disk cache eating 13 GB), so the big table didn't fit and every number was garbage. Cleaning the machine, adding the dense lookup table, and forcing the memory system to use large pages took n=16 to <strong>2m44s</strong> the very next session. The lesson, now a project rule: never declare a "floor" — it's almost always an artifact of how you measured.</p></div>
+<div class="engineer"><p>A prior session concluded "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s is the wall." All wrong: measured on a memory-degraded box (zram swap full, ZFS ARC eating ~13 GB → the 17 GB TT OOM'd → capped runs), it dismissed the W8 dense table on one confounded capped run, and never tried forcing huge pages. Clean box (swap off, ARC capped to 2 GB, <code>/tmp</code> tmpfs cleared) + W8 + <code>MADV_COLLAPSE</code> → 2m44s. Project rule, committed: <strong>never claim "the floor" — reason through or around the wall; a floor conclusion is almost always a measurement artifact or an untried lever.</strong></p></div>
+</div>
+</section>
+
+<!-- ===================================================================== -->
+<section id="axes">
+<h2><span class="num">8</span>Three orthogonal axes of optimization</h2>
+<span class="sec-toggle" data-target="axes">flip this section</span>
+
+<div class="layman">
+<p>All the speed comes from three independent kinds of improvement. They multiply together, and it helps to keep them straight:</p>
+<ol>
+<li><strong>Visit fewer positions.</strong> Remember what you've solved; merge look-alikes (symmetry, graph shape); resolve tiny endgames from a lookup table instead of searching them.</li>
+<li><strong>Store each position more cheaply.</strong> Don't store the whole board; store a tiny "fingerprint" of it. Pack everything into 8 bytes. Carry a compact form down the search so you rarely touch the full board.</li>
+<li><strong>Reach each stored position faster.</strong> This is the surprising one: the bottleneck is not <em>thinking</em>, it's <em>waiting for memory</em>. Each lookup is a random jump into a multi-gigabyte table, and the computer stalls waiting for it. Most of the cleverest tricks are about hiding or shortening that wait.</li>
+</ol>
+</div>
+<div class="engineer">
+<p>Three independent levers, each covered in its own section below. Per-node micro-optimizations wash out (~0–5%); the load-bearing levers are <strong>node-count</strong> and <strong>memory/representation/latency</strong>.</p>
+<ol>
+<li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, component/nimber decomposition, the complete W8 table (never re-expand pc==8), the complete ≤7 tiny table. (§3–7.)</li>
+<li><strong>Represent nodes cheaper</strong> — 256-bit board as <code>[u64;4]</code>; the 8-byte TT slot with a 55-bit fingerprint; the in-band <code>TinyGraph</code> carried down so deep nodes never touch the 256-bit board. (§9.)</li>
+<li><strong>Search them faster</strong> — the search is DRAM-latency-bound; lockless atomic TT, hash-carry, software prefetch, thread-local counters, huge pages, CPU affinity, const-generic monomorphisation, and the segmented TT. (§10.)</li>
+</ol>
+</div>
+
+<h3>The W8 table — the lever that broke the wall</h3>
+<div class="layman">
+<p>The single biggest recent win combines axes 1 and 3. Whenever the game shrinks to exactly <strong>8 available squares</strong>, its outcome depends only on the <em>shape</em> of those 8 squares' conflicts — and there are few enough shapes that the solver can pre-compute the answer to <em>every single one</em> at startup, into a 32-megabyte table. So instead of searching that whole sub-game (and re-searching it thousands of times because it kept getting forgotten), the solver does one instant lookup and never expands it again. That alone cut the work by about 28%.</p>
+</div>
+<div class="engineer">
+<p>At <code>popcount == 8</code> the available 8-vertex Node-Kayles subgame's value is isomorphism-invariant, so it is resolved by a single raw 28-bit labelled-edge-code lookup into a complete, eviction-free 32 MiB bitset (<code>dense.rs</code>, tables W0..W8 built bottom-up by vertex count). The win over plain iso-flat is <em>less repeated work</em>: iso-flat evicts pc==8 entries from the 13–17 GB flat table and re-expands their ≤7 subtrees repeatedly. W8 is complete ⇒ always a hit, no fingerprint, no eviction, TLB-friendly (16 huge pages). Measured ~28% fewer nodes (5.1 B vs 7.1 B).</p>
+<pre><code>// dense.rs — build all labelled Node-Kayles tables up to 8 vertices, bottom-up
+for k in 1..=8 { tables.push(build_table(k, &amp;tables)); }
+// a row is the 28-bit upper-triangular edge code; value is relabelling-invariant
+// Wk[code] = ∃ move i such that W_child[project(code, alive_after_i)] == loss
+
+// iso_flat.rs — at the pc==8 node, build the code directly from the 8 attack rows
+let lost = if WINDOW &amp;&amp; pc == 8 { !self.w8_get(att, child0) }   // ONE indexed bit load
+           else if pc &lt;= 7      { !self.band_entry(...) }        // complete ≤7 table
+           else                  { /* recurse */ };</code></pre>
+<p>The <code>WINDOW</code> flag is a <code>const bool</code> monomorphisation — plain iso-flat compiles to <em>zero</em> dead pc==8 branch, and iso-window builds the edge code in one pass straight from the 8 attack rows (no intermediate adjacency arrays). The ≤7 region is solved in a thread-private 128-byte L1 stack memo and stored in a complete labelled ~2 MB table — entirely off the DRAM path.</p>
+</div>
+</section>
+
+<!-- ===================================================================== -->
+<section id="represent">
+<h2><span class="num">9</span>Representing positions cheaply</h2>
+<span class="sec-toggle" data-target="represent">flip this section</span>
+
+<div class="layman">
+<p>A 16×16 board is 256 squares — too much to store billions of times over. Two tricks shrink it dramatically.</p>
+<p><strong>Store a fingerprint, not the board.</strong> Instead of writing down the full board, the solver records a short 55-bit "fingerprint" of it — like a hash of a document. If two boards land in the same memory slot and have the same fingerprint, they're treated as equal. Could two genuinely different boards accidentally share a fingerprint? Yes — but the odds are about 1 in 36 quadrillion per lookup, vanishingly small even across billions of lookups, and the final answer is cross-checked against the known result anyway. This shrinks each remembered entry to just <strong>8 bytes</strong> — five times more entries per gigabyte than storing the board.</p>
+<p><strong>Carry a tiny form down the search.</strong> Once the game is down to a handful of squares, the solver stops touching the big 256-bit board at all and carries a tiny compact description instead — turning big board operations into single-byte operations.</p>
+</div>
+<div class="engineer">
+<p>The board is <code>Bits([u64;4])</code> — 256 bits, four words. The transposition table stores not the key but an <strong>8-byte slot</strong>: one <code>u64</code> packing <code>{used:1, val:8, fp:55}</code>.</p>
+<pre><code>// tt.rs — the entire slot is one u64
+fn pack(fp, val) -> Slot {
+    Slot(1 | ((val as u64) &lt;&lt; 1) | ((fp &amp; FP_MASK) &lt;&lt; 9))
+}   //  bit0 = used, bits1..9 = value, bits9..64 = 55-bit fingerprint</code></pre>
+<p>The slot index already pins ~31 bits of the routing hash; the 55-bit fingerprint comes from an <em>independent</em> 64-bit hash half, so a wrong "hit" (a different key in the same slot whose fingerprint also matches) has probability ~2⁻⁵⁵ per colliding probe. This is the Chunk-2 win: 40 B → 8 B (5× the entries per byte) while keeping the available-mask key, so every transposition still merges exactly. A fingerprint <em>mismatch</em> is just a miss that re-searches; the only weakening is "wrong with vanishing probability," and the verdict is cross-checked against Jenrich.</p>
+<p>The <code>TinyGraph</code> (<code>[u8;8]×2</code>, one cache line) is built once when a node drops to popcount ≤7 and carried down so the deep tail does single-byte <code>alive &amp; !closed[i]</code> operations instead of 256-bit board ops. Hot structs follow Tiger-style discipline: plain data, contiguous storage, explicit <code>#[repr]</code>, compile-time <code>size_of</code> asserts so a field-add can't silently re-pad.</p>
+<div class="intuition">
+<span class="tag">3Blue1Brown-style intuition · why a 55-bit fingerprint is safe</span>
+<p>It feels reckless to throw away the board and keep a hash. The intuition is the birthday paradox <em>in reverse</em>: a collision needs two keys to land in the <em>same slot</em> AND share all 55 fingerprint bits. The slot already separates keys by their routing bits, so within one slot you're asking 55 coin-flips to all match by chance — \(2^{-55}\), about one in 36 quadrillion. Even a Jenrich-scale 10¹¹ probes expects far less than one wrong hit, and one wrong hit would have to flip the final bit to matter — which the independent cross-check against the known verdict would catch.</p>
+</div>
+<details class="formal">
+<summary>The formal version — fingerprint collision probability</summary>
+<div class="body">
+<p>A wrong hit requires a foreign key \(k'\neq k\) to (i) route to the same slot and (ii) match the stored 55-bit fingerprint. Conditioned on a colliding probe (a slot already occupied by a different key), the fingerprint — an independent hash half — matches with probability \(p = 2^{-55}\). Over \(N\) such colliding probes the expected number of wrong hits is \(N\cdot 2^{-55}\); for \(N \sim 10^{11}\) (Jenrich scale) that is \(\approx 2.8\times10^{-6}\). Even unconditionally, the probability of <em>any</em> wrong hit is bounded by \(1 - (1-2^{-55})^{N} \approx N\cdot 2^{-55} \ll 1\). The error is one-sided in the sense that a fingerprint <em>mismatch</em> is always a correct miss; only a spurious match can mislead, and the global verdict is independently cross-checked against Jenrich's n=16 = second-player result.</p>
+</div>
+</details>
+</div>
+</section>
+
+<!-- ===================================================================== -->
+<section id="latency">
+<h2><span class="num">10</span>The real bottleneck: memory latency, not compute</h2>
+<span class="sec-toggle" data-target="latency">flip this section</span>
+
+<div class="layman">
+<p>Here is the counter-intuitive heart of the whole project. The computer is not bottlenecked on <em>arithmetic</em>. It's bottlenecked on <em>waiting</em>. Each position lookup is a random jump into a 17-gigabyte table, and a random memory jump is slow — the processor sits idle for the equivalent of hundreds of arithmetic operations while the data crawls back from RAM.</p>
+<p>So the cleverest performance tricks are all about that wait:</p>
+<ul>
+<li><strong>One shared table, no locks.</strong> Many cores share one table with no "do not disturb" locks — safe because the same board always computes the same answer, so even if two cores write the same slot they write the same thing.</li>
+<li><strong>Look ahead.</strong> Before the solver needs a slot, it tells the processor "fetch this soon" (a prefetch), so the slow trip from RAM overlaps with other work instead of stalling.</li>
+<li><strong>Big memory pages.</strong> The processor keeps a small directory of where memory lives. A huge random-access table blows out that directory constantly. Forcing the memory into giant 2-megabyte pages shrinks the directory's job and cuts the stalls.</li>
+<li><strong>Count locally.</strong> Bumping a shared "positions searched" counter on every node would force the cores to constantly synchronize — so each core counts privately and reports in about once a second.</li>
+</ul>
+</div>
+<div class="engineer">
+<p>The search is <strong>DRAM-latency-bound</strong>, not compute- or parallelism-bound (TMA on the warm n=16 search: backend-bound-by-memory ~34%, frontend-by-latency ~24%; the hot annotation is <code>test $1,%al</code> right after the TT slot load — pure random-probe latency). The clean run touches ~0.2% of memory bandwidth, so it is nowhere near the bandwidth wall; it is paying ~120 ns random-access latency per probe. The levers attack that latency:</p>
+
+<h4>Lockless atomic transposition table</h4>
+<p>One flat <code>Box&lt;[AtomicU64]&gt;</code>, relaxed load/store, no mutex, no sharding. Safe by construction: a position's value is deterministic, so a concurrent write for the <em>same</em> key stores the <em>same</em> value, and a write for a <em>different</em> key is rejected by the fingerprint. This removes a lock/unlock and a mutex cache-line bounce from every node. (Hyatt's XOR-key trick is unnecessary — the 55-bit fingerprint self-validates identity.)</p>
+
+<h4>Lemire fastrange indexing</h4>
+<p>Map a 64-bit hash uniformly into <code>[0, len)</code> with one widening multiply + shift — no power-of-two table required, so the table can be sized to fill all available RAM:</p>
+<p style="text-align:center">\( \texttt{index}(h) \;=\; \big\lfloor (h \cdot \texttt{len}) / 2^{64} \big\rfloor \;=\; \texttt{(((h as u128) * (len as u128)) >> 64)} \)</p>
+<pre><code>fn index(&amp;self, route: u64) -> usize {
+    ((route as u128).wrapping_mul(self.len as u128) >> 64) as usize
+}</code></pre>
+
+<h4>Hash-carry + software prefetch</h4>
+<p>Each key is hashed <strong>once</strong> at creation (<code>hash128</code> → two independent halves <code>(route, fp)</code>); the halves are reused for the prefetch, the get, and the put. The solver issues <code>_mm_prefetch</code> on a child's slot before recursing, so the random-probe DRAM round-trip overlaps with the work in between.</p>
+
+<h4>Huge pages</h4>
+<p>A multi-GB table probed at random thrashes the dTLB on every node. <code>MADV_HUGEPAGE</code> alone only reaches ~73% 2 MB coverage on a randomly-faulted 17 GB table; <code>MADV_POPULATE_WRITE</code> + <code>MADV_COLLAPSE</code> forces 100% 2 MB — a clean ~5% wall win with near-identical node counts (so a genuine per-node TLB win, not noise). Default-on for ≥4 GB tables.</p>
+
+<h4>Thread-local counters + const-generic monomorphisation</h4>
+<p>The per-node node/HLL counter is thread-local, flushed ~once a second — a shared <code>fetch_add</code> per node bounced across the two CCXs over Infinity Fabric and measured a ~2× drag. And every run-constant toggle (measurement mode, window flag, key mode) is resolved <em>once</em> via a <code>const</code> generic at the call site, never a per-node branch — the search is frontend/L1i-bound, so a dead per-iteration branch would worsen the actual bottleneck.</p>
+
+<div class="intuition">
+<span class="tag">3Blue1Brown-style intuition · the TLB / huge-page story</span>
+<p>Think of RAM as a vast warehouse and the processor as a clerk with a small index card listing where the last few hundred shelves are. Normally that index covers tiny 4 KB shelves. When the clerk is fetching random items from a 17 GB warehouse, the shelf he wants is almost never on his card — so every fetch is two trips: one to look up the location, one to grab the item. <strong>Huge pages</strong> make each shelf 500× bigger (2 MB), so one index card now covers 500× more warehouse and the location is usually already on the card. Same items, far fewer double-trips.</p>
+</div>
+</div>
+
+<h3 id="seg">The segmented TT — the current frontier</h3>
+<div class="layman">
+<p>The newest idea: positions at the same stage of the game (same number of available squares) tend to be looked up close together in time. So instead of scattering them randomly across the whole 17 GB table, route each position into a <em>band</em> of the table reserved for its stage. Now the lookups happening right now all hit a small, nearby slice of the table that the processor can keep "warm" — without making the table any smaller. Crucially this is still perfectly correct, because a position's stage is fixed by the position itself.</p>
+<div class="card"><p style="margin:0">The band sizes are not guesses — they're set from the <em>real measured distribution</em> of where lookups land. The chart below shows that distribution from an actual n=16 run.</p></div>
+</div>
+<div class="engineer">
+<p>A TT-size sweep showed warm throughput rises as the table shrinks (8 GB → 42.7 M/s, 17 GB → 37.7 M/s — a real ~13% TLB-residency win) but a smaller table loses it back to eviction. So: capture the residency win <em>without</em> shrinking. The segmented index routes each key into a per-available-popcount band of the <em>same</em> flat table:</p>
+<p style="text-align:center">\( \texttt{index\_seg}(\text{route}, \text{pc}) \;=\; \texttt{band\_base}[\text{pc}] \;+\; \texttt{fastrange}(\text{route},\, \texttt{band\_size}[\text{pc}]) \)</p>
+<p><strong>Transposition-safe by construction:</strong> <code>pc</code> (available popcount) is a pure function of the key, so the same key always lands in the same band → same slot → every merge preserved. This is <em>not</em> the CCX-sharding negative (which sharded by <em>worker</em> and lost cross-worker merges); key-derived segmentation loses only load balance. The DFS working set at a given depth shares a small TLB-resident slice. Bands are sized proportional to the measured put distribution (below), and the flat index is kept byte-identical as the A/B control (the solver monomorphises on the mode; no per-node branch).</p>
+</div>
+
+<figure id="bandsFig">
+<svg viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="n=16 flat-TT put distribution by available popcount">
+  <g id="bandsChart"></g>
+</svg>
+<figcaption><strong>Where the lookups actually land (real n=16 run).</strong> Distribution of all 4.72 billion transposition-table writes by available-square count. A sharp hump peaks at <strong>pc=9 (19.3%)</strong>; ~96% of writes fall in pc 9–22; a faint secondary bump near pc 35–37; negligible tail beyond pc≈53. These exact per-popcount counts size the segmented-TT bands. <span class="lbl-sm">Source: <code>/tmp/bands16.txt</code>, written by <code>QUEENS_PC_HIST=1</code>.</span></figcaption>
+</figure>
+</section>
+
+<!-- ===================================================================== -->
+<section id="numbers">
+<h2><span class="num">11</span>The numbers</h2>
+<span class="sec-toggle" data-target="numbers">flip this section</span>
+
+<div class="layman">
+<p>Here is the headline result: how the time to solve the 16×16 board fell across solver generations. From nearly half an hour down to under three minutes — and the theoretical best-possible time for this approach is estimated at under a minute, so there's still room.</p>
+</div>
+<div class="engineer">
+<p>n=16 wall-clock across generations, on this box (Ryzen AI 9 HX 370, 12 cores, ~26 GB). All verdicts: <span class="win">second player wins</span>. Note that raw M/s and wall time diverge — higher node rate does not mean faster completion if it walks more nodes.</p>
+</div>
+
+<figure id="wallFig">
+<svg viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="n=16 wall-clock time across solver generations">
+  <g id="wallChart"></g>
+</svg>
+<figcaption><strong>n=16 wall-clock across solver generations</strong> (log time axis). From the first multi-core D₄ solve (~56 min) and the eviction-free iso-burr (29m23s) down to iso-window + huge pages (<strong>2m44s</strong>). The dashed marker is the estimated <em>compute</em> floor (~45–60s) for this strategy class — not a proven bound, just a target.</figcaption>
+</figure>
+
+<table>
+<thead><tr><th>milestone</th><th class="num">n=16 wall</th><th>what changed</th></tr></thead>
+<tbody>
+<tr><td>D₄ parallel (first finish)</td><td class="num">~56 min</td><td>parity-aware root parallelism: 1 → 24 busy cores</td></tr>
+<tr><td>D₄ parallel (clean box)</td><td class="num">~42 min</td><td>same solver, uncontended machine</td></tr>
+<tr><td><code>iso-burr</code></td><td class="num">29m 23s</td><td>selective graph-iso key, eviction-free BuRR, re-exp 1.15×</td></tr>
+<tr><td><code>iso-flat</code> (early)</td><td class="num">9m 11s</td><td>flat lockless TT + contention fix (~3.7× over incremental's 34 min)</td></tr>
+<tr><td><code>iso-flat</code> KEY_MAX=7</td><td class="num">8m 20s</td><td>≤7 merge band, sized table, 1.15× re-exp</td></tr>
+<tr><td><code>iso-flat</code> tuned</td><td class="num">7m 02s</td><td>practical sweet spot (TT ~20.8 GB)</td></tr>
+<tr><td><code>iso-flat</code> + per-node energy cuts</td><td class="num">4m 11s</td><td>hash-carry, tighter tiny key, incremental move list (−24.7% n=14)</td></tr>
+<tr><td><code>iso-flat</code> (clean)</td><td class="num">3m 29s</td><td>full kernel, clean box</td></tr>
+<tr><td><code>iso-window</code></td><td class="num">2m 53s</td><td>+ complete dense W8 table (never re-expand pc==8)</td></tr>
+<tr><td><strong><code>iso-window</code> + collapse</strong> ⭐</td><td class="num win">2m 44s</td><td>+ huge-page collapse (100% 2 MB pages); 5.12 B nodes</td></tr>
+<tr><td><em>estimated compute floor</em></td><td class="num">~45–60s</td><td>strategy target (not a proven lower bound)</td></tr>
+</tbody>
+</table>
+
+<div class="card">
+<h4 style="margin-top:0">Validation gates (how we know the answer is right)</h4>
+<div class="layman"><p>Every change must pass two checks before it counts. First, the smart solver must agree with the dumb-but-certain solver on all small boards. Second, it must reproduce the <em>exact</em> count of genuinely-different boards at 12×12 — exactly <strong>1,060,823</strong>. If a change lost some merges, that count would change; if the table were too small, re-expansion would jump. The 16×16 verdict itself is cross-checked against an independent 2014 computation (Jenrich), which also found the second player wins.</p></div>
+<div class="engineer"><p>A change is not done until its gate passes: <code>solver_lineage_agrees</code> (every solver matches the memo-less <code>naive</code> verdict on n≤9) <strong>and</strong> a fresh <code>solve 12 iso-flat --distinct</code> (second-player win, exact distinct <strong>1,060,823</strong>) + <code>solve 14 iso-flat --distinct</code> (second, ≈49.3 M, re-exp ≈ 1.0×). A distinct-count change = lost transposition merges; a re-exp jump = under-sized table. The n=16 verdict cross-checks against Jenrich (arXiv:1312.5135) and OEIS A344227.</p></div>
+</div>
+</section>
+
+<!-- ===================================================================== -->
+<section id="floor">
+<h2><span class="num">12</span>The floor, transpositions, and what is next</h2>
+<span class="sec-toggle" data-target="floor">flip this section</span>
+
+<div class="layman">
+<p><strong>Transpositions are the whole game.</strong> Below is a tiny illustration of why remembering positions matters so much: two completely different sequences of moves can arrive at the <em>exact same board</em>. Without memory, the solver would explore that board (and everything beneath it) twice. With billions of positions and many paths into each, this duplication is the difference between minutes and years.</p>
+</div>
+<div class="engineer">
+<p>The search graph is a <strong>DAG, not a tree</strong>: many move-orders converge on the same blocked mask (transpositions are strictly intra-ply — each move places one queen, so transposing positions share a queen count). The transposition table turns the exponential tree into the polynomial-in-distinct-positions DAG. The figure shows the smallest non-trivial case.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 270" width="760" height="270" role="img" aria-label="Two move sequences reaching the same position (a transposition)">
+  <g id="transFigure"></g>
+</svg>
+<figcaption><strong>A transposition.</strong> Two different move orders (blue path, orange path) reach the identical board. The transposition table recognizes the merge and solves the shared subtree once — converting an exponential tree into a DAG over distinct positions.</figcaption>
+</figure>
+
+<div class="layman">
+<h3>What's left to push</h3>
+<ul>
+<li><strong>The segmented table</strong> (§10) — bin lookups by game stage to keep the active slice "warm" and capture the measured ~13% latency win, without shrinking the table.</li>
+<li><strong>Solving each small endgame once</strong> instead of rediscovering it from many parents.</li>
+<li><strong>18×18</strong> — about 3 trillion positions, which would need a compressed on-disk archive (~130 GB) and is borderline-feasible on one machine over hours-to-days. The catch: there's no independent answer to check against, so verification becomes as serious as the search.</li>
+</ul>
+<p>And the deepest open question: is there a clever <em>theorem</em> for even-sized boards (like the instant mirror-strategy for odd boards) that would make the search unnecessary entirely? None is known. Finding one would beat every silicon trick at once.</p>
+</div>
+<div class="engineer">
+<h3>Open levers</h3>
+<ul>
+<li><strong>Segmented TT</strong> (active, §10): A/B the popcount-banded index vs the flat control at n=16 — does warm M/s approach the 8 GB run's ~42 M/s without the eviction cost.</li>
+<li><strong>Grouped-frontier k=9..12 DDD</strong>: pump frontier → group/window → dense local solve → merge boundary values; solve each unique boundary graph once (streaming/bandwidth-bound dedup), breaking DFS-residence. The path below 2m44s and the n=18 enabler.</li>
+<li><strong>BuRR value-only archive</strong> (~1.1 bit/key) — sound under ply-windowing (membership known by construction); the n=18 disk-fit enabler (~130 GB iso-keyed).</li>
+<li><strong>1 GB hugepages</strong> for the TT (zero TT TLB miss; needs boot-time reservation).</li>
+</ul>
+<p>The theoretical-floor analysis concludes the binding constraint at the optimum is <strong>canonicalization-per-edge</strong> (≈62 cyc/canon × b̄≈4 ≈ 248 cyc/node ⇒ ~60 s central), not memory — engineer memory into streaming DDD and it falls to a few seconds. The truly outsized lever is above the floor: an even-n parity/pairing theorem (analogous to the odd-n O(1) result) would collapse the whole derivation to O(1). None is known; PSPACE-completeness of <em>generalized</em> Node Kayles does not forbid one for this specific family.</p>
+</div>
+</section>
+
+<div class="footer">
+<p>Generated from the source and notes of the <code>othello/rust</code> Queens solver. All performance and combinatorial numbers are measured (n≤16) or extrapolated (n=18) as noted; nothing here was invented. Math rendered with MathJax. Diagrams and charts are inline SVG drawn from the real data (<code>/tmp/bands16.txt</code>, the handoff measurements, the HyperLogLog distinct counts).</p>
+<p>Primary references: Noon &amp; Van Brummelen, <em>The Non-Attacking Queens Game</em> (2006); Jenrich, arXiv:1312.5135 (2014); OEIS <a href="https://oeis.org/A344227">A344227</a>; Schaefer (1978, PSPACE-completeness of Node Kayles); Dillinger et&nbsp;al. (BuRR, 2022); Lemire (fastrange); Korf (external-memory DDD, 2008).</p>
+<p style="color:var(--fg-faint)">Tip: your reading-level choice is remembered in this browser. Use the switch up top, or the per-section "flip this section" links.</p>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+/* ============================ view toggle =========================== */
+(function () {
+  var KEY = 'queens-report-view';
+  var body = document.body;
+  function setView(v, persist) {
+    body.classList.remove('view-layman', 'view-engineer');
+    body.classList.add('view-' + v);
+    if (persist !== false) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  }
+  var saved = 'layman';
+  try { saved = localStorage.getItem(KEY) || 'layman'; } catch (e) {}
+  setView(saved, false);
+
+  document.getElementById('globalSwitch').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    setView(b.dataset.v);
+  });
+
+  // Per-section toggle: temporarily override just that section by wrapping its
+  // visibility in a local class. Simpler approach: flip the GLOBAL view but scroll
+  // to keep the section in place, since the dual blocks are global classes.
+  // To make per-section independent, we toggle a data attr and CSS handles it.
+  document.querySelectorAll('.sec-toggle').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var sec = el.closest('section');
+      var cur = sec.getAttribute('data-view') ||
+                (body.classList.contains('view-engineer') ? 'engineer' : 'layman');
+      var nxt = cur === 'layman' ? 'engineer' : 'layman';
+      sec.setAttribute('data-view', nxt);
+      applySectionOverrides();
+    });
+  });
+  function applySectionOverrides() {
+    document.querySelectorAll('section[data-view]').forEach(function (sec) {
+      var v = sec.getAttribute('data-view');
+      sec.querySelectorAll(':scope > .layman, :scope > .engineer').forEach(function (blk) {
+        var isL = blk.classList.contains('layman');
+        blk.style.display = ((v === 'layman') === isL) ? 'block' : 'none';
+      });
+      // inline spans within the section
+      sec.querySelectorAll('span.layman, span.engineer').forEach(function (sp) {
+        var isL = sp.classList.contains('layman');
+        sp.style.display = ((v === 'layman') === isL) ? 'inline' : 'none';
+      });
+    });
+  }
+  // Re-apply section overrides whenever the global view changes (overrides win).
+  var mo = new MutationObserver(applySectionOverrides);
+  mo.observe(body, { attributes: true, attributeFilter: ['class'] });
+})();
+
+/* ============================ SVG helpers ========================== */
+function el(tag, attrs, text) {
+  var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  return e;
+}
+function add(parent, tag, attrs, text) { var e = el(tag, attrs, text); parent.appendChild(e); return e; }
+
+var COL = {
+  bg: '#0f1419', fg: '#e6edf3', dim: '#9fb0c0', faint: '#6b7d8f',
+  accent: '#4cc2ff', accent2: '#ffb454', accent3: '#7ee787', accent4: '#ff7b9c',
+  grid: '#232c38', axis: '#3a4654', cellbg: '#1a212b', cellbd: '#2a3542'
+};
+
+/* ============================ board figure (§1) ==================== */
+(function () {
+  var N = 8, S = 38;
+  function drawBoard(g, opts) {
+    // opts: queen [r,c], attacked set fn, availableMode bool
+    var qr = opts.q[0], qc = opts.q[1];
+    function attacked(r, c) {
+      return r === qr || c === qc || (r - c) === (qr - qc) || (r + c) === (qr + qc);
+    }
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      var x = c * S, y = r * S, fill = COL.cellbg;
+      var isQ = (r === qr && c === qc);
+      var att = attacked(r, c);
+      if (opts.mode === 'attack') {
+        if (att && !isQ) fill = 'rgba(255,123,156,0.22)';
+      } else { // available
+        if (isQ) fill = 'rgba(255,180,84,0.25)';
+        else if (att) fill = '#141a22';
+        else fill = 'rgba(126,231,135,0.30)';
+      }
+      add(g, 'rect', { x: x, y: y, width: S - 1.5, height: S - 1.5, rx: 3, fill: fill, stroke: COL.cellbd, 'stroke-width': 1 });
+      if (opts.mode === 'available' && !isQ && !att)
+        add(g, 'circle', { cx: x + S/2 - 0.75, cy: y + S/2 - 0.75, r: 3.4, fill: COL.accent3, opacity: 0.9 });
+    }
+    // queen glyph
+    add(g, 'text', { x: qc * S + S/2 - 0.75, y: qr * S + S/2 + 7, 'text-anchor': 'middle', fill: COL.accent2, 'font-size': 24, 'font-weight': 700 }, '♛');
+  }
+  drawBoard(document.getElementById('b1cells'), { q: [3, 3], mode: 'attack' });
+  drawBoard(document.getElementById('b2cells'), { q: [3, 3], mode: 'available' });
+})();
+
+/* ============================ D4 figure (§4) ====================== */
+(function () {
+  var root = document.getElementById('d4Figure');
+  var n = 4, s = 14, pad = 14, bw = n * s;
+  // an asymmetric "L + dot" shape (set of cells), as (r,c)
+  var shape = [[0,0],[1,0],[2,0],[2,1],[0,2]];
+  function sym(t, r, c) {
+    var m1 = n-1-r, m2 = n-1-c;
+    switch(t){
+      case 0: return [r,c]; case 1: return [c,m1]; case 2: return [m1,m2];
+      case 3: return [m2,r]; case 4: return [r,m2]; case 5: return [m1,c];
+      case 6: return [c,r]; default: return [m2,m1];
+    }
+  }
+  function key(cells){ // lexicographic-ish: sorted r*n+c list joined
+    return cells.map(function(p){return p[0]*n+p[1];}).sort(function(a,b){return a-b;}).join(',');
+  }
+  // find canonical (min) image
+  var imgs = [];
+  for (var t=0;t<8;t++){ imgs.push(shape.map(function(p){return sym(t,p[0],p[1]);})); }
+  var canonIdx = 0, canonKey = key(imgs[0]);
+  for (var t=1;t<8;t++){ var k=key(imgs[t]); if (k<canonKey){canonKey=k;canonIdx=t;} }
+  var names = ['identity','rot 90°','rot 180°','rot 270°','flip H','flip V','transpose','anti-transp'];
+  var x0 = 14;
+  for (var t=0;t<8;t++){
+    var gx = x0 + t * ((bw)+18);
+    var g = add(root, 'g', { transform: 'translate(' + gx + ',24)' });
+    var isCanon = (t === canonIdx);
+    add(g, 'rect', { x:-5, y:-5, width: bw+10, height: bw+34, rx:8,
+      fill: isCanon ? 'rgba(126,231,135,0.08)' : 'transparent',
+      stroke: isCanon ? COL.accent3 : 'transparent', 'stroke-width': 1.5 });
+    for (var r=0;r<n;r++) for (var c=0;c<n;c++){
+      add(g,'rect',{x:c*s,y:r*s,width:s-1.5,height:s-1.5,rx:2,fill:COL.cellbg,stroke:COL.cellbd,'stroke-width':0.7});
+    }
+    imgs[t].forEach(function(p){
+      add(g,'rect',{x:p[1]*s,y:p[0]*s,width:s-1.5,height:s-1.5,rx:2,
+        fill: isCanon ? COL.accent3 : COL.accent, opacity: isCanon?0.95:0.8});
+    });
+    add(g,'text',{x:bw/2, y: bw+16,'text-anchor':'middle', class:'lbl-sm'}, names[t]);
+    if (isCanon) add(g,'text',{x:bw/2,y:bw+28,'text-anchor':'middle',fill:COL.accent3,'font-size':9,'font-weight':700},'← canonical');
+  }
+})();
+
+/* ============================ graph figure (§5) =================== */
+(function(){
+  var root = document.getElementById('graphFigure');
+  // two tiny boards (4x4) -> same abstract "path of 4 vertices" graph
+  function miniBoard(g, cells, avail){
+    var n=4, s=20;
+    for(var r=0;r<n;r++)for(var c=0;c<n;c++){
+      var blocked = cells.some(function(p){return p[0]===r&&p[1]===c;});
+      add(g,'rect',{x:c*s,y:r*s,width:s-1.5,height:s-1.5,rx:2,
+        fill: blocked?'#141a22':'rgba(76,194,255,0.10)', stroke:COL.cellbd,'stroke-width':0.7});
+    }
+    avail.forEach(function(p){
+      add(g,'circle',{cx:p[1]*s+s/2-0.75,cy:p[0]*s+s/2-0.75,r:4,fill:COL.accent3});
+    });
+  }
+  var g1 = add(root,'g',{transform:'translate(20,40)'});
+  add(root,'text',{x:60,y:30,'text-anchor':'middle',class:'lbl'},'position A');
+  miniBoard(g1, [[0,1],[1,3],[3,0],[2,2]], [[0,0],[1,1],[2,3],[3,3]]);
+
+  var g2 = add(root,'g',{transform:'translate(220,40)'});
+  add(root,'text',{x:60,y:30,'text-anchor':'middle',class:'lbl'},'position B (different board)');
+  miniBoard(g2, [[0,3],[1,0],[2,2],[3,1]], [[0,0],[1,2],[2,3],[3,3]]);
+
+  // abstract graph: 4 vertices in a path (same structure for both)
+  var gg = add(root,'g',{transform:'translate(470,40)'});
+  add(root,'text',{x:560,y:30,'text-anchor':'middle',class:'lbl'},'same available-graph → same winner');
+  var verts = [[40,30],[110,30],[150,90],[60,110]];
+  var edges = [[0,1],[1,2],[2,3],[3,0]];
+  edges.forEach(function(e){
+    add(gg,'line',{x1:verts[e[0]][0],y1:verts[e[0]][1],x2:verts[e[1]][0],y2:verts[e[1]][1],stroke:COL.faint,'stroke-width':2});
+  });
+  verts.forEach(function(v){
+    add(gg,'circle',{cx:v[0],cy:v[1],r:9,fill:COL.accent3,stroke:'#0b0f14','stroke-width':2});
+  });
+})();
+
+/* ============================ transposition figure (§12) ========= */
+(function(){
+  var root = document.getElementById('transFigure');
+  function tile(g, x, y, label, col){
+    add(g,'rect',{x:x,y:y,width:104,height:54,rx:9,fill:COL.cellbg,stroke:col||COL.cellbd,'stroke-width':1.5});
+    add(g,'text',{x:x+52,y:y+32,'text-anchor':'middle',fill:COL.dim,'font-size':12},label);
+  }
+  function arrow(g,x1,y1,x2,y2,col){
+    add(g,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2,'marker-end':'url(#ah)'});
+  }
+  var defs = add(root,'defs',{});
+  var m = add(defs,'marker',{id:'ah',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  add(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:COL.faint});
+
+  tile(root, 40, 100, 'empty board', COL.fg);
+  // top path (blue): play a then b
+  tile(root, 250, 30, 'play a', COL.accent);
+  tile(root, 470, 30, 'play b', COL.accent);
+  // bottom path (orange): play b then a
+  tile(root, 250, 170, 'play b', COL.accent2);
+  tile(root, 470, 170, 'play a', COL.accent2);
+  // merged
+  tile(root, 660, 100, 'same\nposition', COL.accent3);
+  add(root,'rect',{x:660,y:100,width:104,height:54,rx:9,fill:'rgba(126,231,135,0.08)',stroke:COL.accent3,'stroke-width':1.5});
+  add(root,'text',{x:712,y:122,'text-anchor':'middle',fill:COL.accent3,'font-size':12,'font-weight':600},'same');
+  add(root,'text',{x:712,y:138,'text-anchor':'middle',fill:COL.accent3,'font-size':12,'font-weight':600},'position!');
+
+  arrow(root,146,116,248,52,COL.accent);
+  arrow(root,356,52,468,52,COL.accent);
+  arrow(root,576,52,660,116,COL.accent);
+  arrow(root,146,134,248,192,COL.accent2);
+  arrow(root,356,192,468,192,COL.accent2);
+  arrow(root,576,192,660,138,COL.accent2);
+  add(root,'text',{x:712,y:178,'text-anchor':'middle',class:'lbl-sm'},'solved once, not twice');
+})();
+
+/* ============================ growth chart (§2) ================== */
+(function(){
+  var g = document.getElementById('growthChart');
+  var W=760,H=360, m={l:78,r:30,t:30,b:60};
+  var data = [
+    {n:10, v:94339, lab:'94 K'},
+    {n:12, v:1070913, lab:'1.07 M'},
+    {n:14, v:49346012, lab:'49.3 M'},
+    {n:16, v:7200000000, lab:'7.2 B'},
+    {n:18, v:3000000000000, lab:'~3 T (est.)'}
+  ];
+  var x0=m.l, x1=W-m.r, y0=H-m.b, y1=m.t;
+  var minL=Math.log10(1e4), maxL=Math.log10(5e12);
+  function X(n){ return x0 + (n-10)/(18-10)*(x1-x0); }
+  function Y(v){ return y0 + (Math.log10(v)-minL)/(maxL-minL)*(y1-y0); }
+  // gridlines (powers of 10)
+  for(var p=4;p<=12;p++){
+    var y=Y(Math.pow(10,p));
+    add(g,'line',{x1:x0,y1:y,x2:x1,y2:y,class:'grid'});
+    add(g,'text',{x:x0-8,y:y+4,'text-anchor':'end',class:'lbl-sm'},'10^'+p);
+  }
+  add(g,'line',{x1:x0,y1:y0,x2:x1,y2:y0,class:'axis'});
+  add(g,'line',{x1:x0,y1:y0,x2:x0,y2:y1,class:'axis'});
+  // x labels
+  data.forEach(function(d){
+    add(g,'text',{x:X(d.n),y:y0+20,'text-anchor':'middle',class:'lbl'},'n='+d.n);
+  });
+  add(g,'text',{x:(x0+x1)/2,y:H-12,'text-anchor':'middle',class:'lbl'},'board size n  (×2 each step)');
+  add(g,'text',{x:18,y:(y0+y1)/2,'text-anchor':'middle',class:'lbl',transform:'rotate(-90 18 '+((y0+y1)/2)+')'},'distinct positions (log scale)');
+  // line
+  var pts = data.map(function(d){return X(d.n)+','+Y(d.v);}).join(' ');
+  add(g,'polyline',{points:pts,fill:'none',stroke:COL.accent,'stroke-width':2.5});
+  // est segment dashed
+  add(g,'line',{x1:X(16),y1:Y(7.2e9),x2:X(18),y2:Y(3e12),stroke:COL.accent,'stroke-width':2.5,'stroke-dasharray':'6 5',opacity:0.7});
+  data.forEach(function(d){
+    var est = d.n===18;
+    add(g,'circle',{cx:X(d.n),cy:Y(d.v),r:5.5,fill: est?COL.bg:COL.accent, stroke:COL.accent,'stroke-width':2,
+       'fill-opacity': est?0.15:1});
+    add(g,'text',{x:X(d.n),y:Y(d.v)-12,'text-anchor':'middle',fill: est?COL.dim:COL.accent2,'font-size':12,'font-weight':700},d.lab);
+  });
+})();
+
+/* ============================ bands chart (§10) ================== */
+(function(){
+  var g = document.getElementById('bandsChart');
+  // real n=16 per-pc puts (pc 9..52 dominate); from /tmp/bands16.txt
+  var puts = {9:908270769,10:787311186,11:639100071,12:490955470,13:349010067,14:256316776,
+    15:217326866,16:207340190,17:194875364,18:164986034,19:122529478,20:81732028,21:53361707,
+    22:39294500,23:34753368,24:33267590,25:30436085,26:24977751,27:18013530,28:11418690,
+    29:6539064,30:3710354,31:2598033,32:2639652,33:3329052,34:4246408,35:5022119,36:5319554,
+    37:5005596,38:4166297,39:3062596,40:1997627,41:1169655,42:639872,43:363804,44:259881,
+    45:258530,46:308132,47:365511,48:408912,49:419778,50:393181,51:335838,52:260580};
+  var total = 4719166458;
+  var pcs = []; for(var pc=9;pc<=52;pc++) pcs.push(pc);
+  var W=760,H=400, m={l:60,r:24,t:26,b:56};
+  var x0=m.l,x1=W-m.r,y0=H-m.b,y1=m.t;
+  var maxV = puts[9];
+  var bw = (x1-x0)/pcs.length;
+  function pct(v){return 100*v/total;}
+  var maxPct = pct(maxV);
+  function Y(v){ return y0 - (pct(v)/maxPct)*(y0-y1); }
+  // y grid (percent)
+  [0,5,10,15,20].forEach(function(p){
+    var y = y0 - (p/maxPct)*(y0-y1);
+    add(g,'line',{x1:x0,y1:y,x2:x1,y2:y,class:'grid'});
+    add(g,'text',{x:x0-8,y:y+4,'text-anchor':'end',class:'lbl-sm'},p+'%');
+  });
+  add(g,'line',{x1:x0,y1:y0,x2:x1,y2:y0,class:'axis'});
+  // bars
+  pcs.forEach(function(pc,i){
+    var v = puts[pc]||0;
+    var x = x0 + i*bw;
+    var y = Y(v);
+    var col = (pc===9) ? COL.accent2 : (pc>=35&&pc<=38 ? COL.accent4 : COL.accent);
+    add(g,'rect',{x:x+1,y:y,width:bw-2,height:y0-y,rx:1.5,fill:col,opacity: pc===9?1:0.78});
+    if(pc%2===1||pc===10||pc===52)
+      add(g,'text',{x:x+bw/2,y:y0+13,'text-anchor':'middle',class:'lbl-sm'},pc);
+  });
+  add(g,'text',{x:(x0+x1)/2,y:H-10,'text-anchor':'middle',class:'lbl'},'available-square count (popcount) at the lookup');
+  add(g,'text',{x:18,y:(y0+y1)/2,'text-anchor':'middle',class:'lbl',transform:'rotate(-90 18 '+((y0+y1)/2)+')'},'share of all 4.72 B TT writes');
+  // peak annotation
+  add(g,'text',{x:x0+0.5*bw,y:Y(maxV)-8,'text-anchor':'start',fill:COL.accent2,'font-size':12,'font-weight':700},'peak pc=9 → 19.3%');
+  // secondary bump note
+  var ix=35-9; add(g,'text',{x:x0+(ix+1.5)*bw,y:Y(puts[35])-8,'text-anchor':'middle',fill:COL.accent4,'font-size':10},'secondary bump');
+  // cum note
+  add(g,'text',{x:x1-6,y:y1+6,'text-anchor':'end',class:'lbl-sm'},'pc 9–22 = 95.6% of all writes');
+})();
+
+/* ============================ wall chart (§11) =================== */
+(function(){
+  var g = document.getElementById('wallChart');
+  // (label, seconds)
+  var data = [
+    {l:'D4 parallel\n(first)', s:3360, est:false},
+    {l:'iso-burr', s:1763, est:false},
+    {l:'iso-flat\n(early)', s:551, est:false},
+    {l:'iso-flat\nKEY_MAX7', s:500, est:false},
+    {l:'iso-flat\ntuned', s:422, est:false},
+    {l:'iso-flat\n+energy', s:251, est:false},
+    {l:'iso-flat\n(clean)', s:209, est:false},
+    {l:'iso-window', s:173, est:false},
+    {l:'iso-window\n+collapse', s:164, est:false, best:true},
+    {l:'compute\nfloor (est)', s:52, est:true}
+  ];
+  var W=760,H=400, m={l:66,r:24,t:24,b:78};
+  var x0=m.l,x1=W-m.r,y0=H-m.b,y1=m.t;
+  var minL=Math.log10(40), maxL=Math.log10(4000);
+  function Y(s){ return y0 - (Math.log10(s)-minL)/(maxL-minL)*(y0-y1); }
+  // y gridlines: 1m,3m,10m,30m,1h-ish
+  var ticks=[[60,'1 min'],[180,'3 min'],[600,'10 min'],[1800,'30 min'],[3600,'60 min'],[120,'2 min']];
+  ticks.forEach(function(t){
+    var y=Y(t[0]);
+    add(g,'line',{x1:x0,y1:y,x2:x1,y2:y,class:'grid'});
+    add(g,'text',{x:x0-8,y:y+4,'text-anchor':'end',class:'lbl-sm'},t[1]);
+  });
+  add(g,'line',{x1:x0,y1:y0,x2:x1,y2:y0,class:'axis'});
+  var bw=(x1-x0)/data.length;
+  function fmt(s){ if(s>=60){var mm=Math.floor(s/60),ss=s%60; return mm+'m'+(ss<10?'0':'')+ss+'s';} return s+'s'; }
+  data.forEach(function(d,i){
+    var x=x0+i*bw, y=Y(d.s);
+    var col = d.best?COL.accent3 : d.est?COL.faint : COL.accent;
+    add(g,'rect',{x:x+5,y:y,width:bw-10,height:y0-y,rx:3,fill:col,opacity:d.est?0.4:0.85});
+    add(g,'text',{x:x+bw/2,y:y-7,'text-anchor':'middle',fill:d.best?COL.accent3:(d.est?COL.dim:COL.accent2),'font-size':11,'font-weight':700},fmt(d.s));
+    // multiline label
+    var parts=d.l.split('\n');
+    parts.forEach(function(p,j){
+      add(g,'text',{x:x+bw/2,y:y0+15+j*11,'text-anchor':'middle',class:'lbl-sm'},p);
+    });
+  });
+  add(g,'text',{x:18,y:(y0+y1)/2,'text-anchor':'middle',class:'lbl',transform:'rotate(-90 18 '+((y0+y1)/2)+')'},'n=16 wall-clock (log)');
+})();
+</script>
+</body>
+</html>
