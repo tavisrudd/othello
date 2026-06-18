@@ -662,6 +662,57 @@ fn tiny_edge_code<const K: usize>(attack: &[Bits], verts: &[u8; SMALL_CANON_MAX]
     code
 }
 
+/// The tiny-table iso key for an induced subgraph carried as a **local adjacency** +
+/// `alive` bitmask, instead of a 256-bit board mask. `adj[i]` is the neighbour bitmask
+/// (over local vertex labels `0..k0`, self bit clear) of vertex `i`; `alive` selects the
+/// vertices still present. The result is **byte-identical** to
+/// [`Queens::iso_key_tiny_table_pc`] on the corresponding board mask: the tiny-canon
+/// table is relabelling-invariant (it maps every labelled edge code of a graph to one
+/// canonical key), so the local q.order labelling here and the board-order extraction
+/// there land on the same value. This is the iso tail's hot key: no board scan, no
+/// 256-bit attack-row load, no vertex re-extraction — only `alive`-bit byte ops. `table`
+/// is the prebuilt [`small_canon_table`].
+#[inline]
+pub(crate) fn tiny_key_from_adj(adj: &[u8; SMALL_WORK_MAX], alive: u8, table: &[u64]) -> u64 {
+    let k = alive.count_ones() as usize;
+    debug_assert!((1..=SMALL_CANON_MAX).contains(&k));
+    if k == 1 {
+        return (1u64 << 32) ^ SMALL_CANON_TAG;
+    }
+    // Collect the alive vertex labels (ascending = q.order), then pack the triangular
+    // edge code in that order — the same `i<j` low-to-high convention `tiny_edge_code`
+    // and `adj_from_edge_code` use, so the table index matches.
+    let mut av = [0u8; SMALL_CANON_MAX];
+    let mut n = 0usize;
+    let mut a = alive;
+    while a != 0 {
+        av[n] = a.trailing_zeros() as u8;
+        n += 1;
+        a &= a - 1;
+    }
+    let mut code = 0u32;
+    let mut bit = 0u32;
+    for x in 0..k {
+        let ax = adj[av[x] as usize];
+        for &vy in av.iter().take(k).skip(x + 1) {
+            code |= (((ax >> vy) & 1) as u32) << bit;
+            bit += 1;
+        }
+    }
+    if k == 2 {
+        return ((2u64 << 32) | code as u64) ^ SMALL_CANON_TAG;
+    }
+    if k == 3 {
+        let canon = (1u64 << code.count_ones()) - 1;
+        return ((3u64 << 32) | canon) ^ SMALL_CANON_TAG;
+    }
+    let idx = SMALL_CANON_OFF[k] + code as usize;
+    debug_assert!(idx < table.len());
+    // SAFETY: `code` is a triangular edge code for exactly `k <= SMALL_CANON_MAX`
+    // vertices, so `idx` is within this table's `[SMALL_CANON_OFF[k], OFF[k+1])`.
+    unsafe { *table.get_unchecked(idx) }
+}
+
 /// Direct canonical key of a *tiny* connected component (`k <= TINY_MAX`), bypassing
 /// CSR construction + WL refinement + certificate hashing (#18). For a connected graph
 /// on at most four vertices the **sorted degree sequence is a complete isomorphism

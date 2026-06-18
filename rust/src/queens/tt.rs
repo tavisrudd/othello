@@ -300,6 +300,12 @@ impl QueensTt {
         tt
     }
 
+    /// Whether this table is carrying distinct-position instrumentation.
+    #[inline]
+    pub(crate) fn is_counting(&self) -> bool {
+        self.counter.is_some()
+    }
+
     /// The distinct-position measurement, if this table was built with counting.
     pub fn report(&self) -> Option<CountReport> {
         self.counter.as_ref().map(|c| CountReport {
