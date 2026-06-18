@@ -25,8 +25,34 @@
 use super::incremental::{build_att, child_orient, lex_min8, orient_of};
 use super::*;
 use rayon::prelude::*;
+use std::mem::MaybeUninit;
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
 use std::sync::OnceLock;
+
+/// Filter `pmoves` (the parent node's available squares, already in `q.order`) down to the
+/// squares still set in `avail`, written compactly into `buf` and returned as a slice. This
+/// replaces the per-node scan over all `n²` squares with a scan over the parent's
+/// (monotonically shrinking) move list. It preserves the `q.order` subsequence, so the move
+/// order — and therefore the searched node set — is byte-identical. `buf` is left uninit (no
+/// `n²`-wide zero-init, which would cost more than the scan it removes).
+#[inline]
+fn filter_moves<'a>(
+    buf: &'a mut [MaybeUninit<u32>; MAXV],
+    pmoves: &[u32],
+    avail: Bits,
+) -> &'a [u32] {
+    let mut nc = 0usize;
+    for &sq in pmoves {
+        if avail.get(sq) {
+            buf[nc].write(sq);
+            nc += 1;
+        }
+    }
+    // SAFETY: the loop initialised exactly `buf[..nc]` via `write`; `MaybeUninit<u32>` is
+    // layout-identical to `u32` and `u32` has no invalid bit patterns, so reading that
+    // prefix back as `&[u32]` (bounded by the returned `'a` borrow of `buf`) is sound.
+    unsafe { std::slice::from_raw_parts(buf.as_ptr() as *const u32, nc) }
+}
 
 /// Resolve a `u32` env knob once at construction (never per node). Used for the
 /// leaf-oracle prototype thresholds.
@@ -197,6 +223,9 @@ impl IsoFlat {
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
+    // Flat args (key + carried hash + move list) are deliberate on this hot recursive path —
+    // bundling them into a context struct would add a per-node pointer-chase.
+    #[allow(clippy::too_many_arguments)]
     fn wins_inc(
         &self,
         q: &Queens,
@@ -205,6 +234,7 @@ impl IsoFlat {
         key: Bits,
         route: u64,
         fp: u64,
+        pmoves: &[u32],
     ) -> bool {
         if let Some(w) = self.tt.get_h(key, route, fp) {
             return w != 0;
@@ -218,11 +248,10 @@ impl IsoFlat {
             }
         }
         self.tt.bump();
+        let mut buf = [MaybeUninit::<u32>::uninit(); MAXV];
+        let moves = filter_moves(&mut buf, pmoves, avail);
         let mut result = false;
-        for &sq in &q.order {
-            if !avail.get(sq) {
-                continue;
-            }
+        for &sq in moves {
             let a = &att[sq as usize];
             let child0 = avail.and_not(a[0]);
             if child0 == Bits::ZERO {
@@ -232,18 +261,19 @@ impl IsoFlat {
             // available-popcount is monotone non-increasing down the tree, so once a child
             // enters the iso band it stays there: route it to the orientation-free `wins_tiny`
             // (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count region.
+            // Children inherit this node's `moves` as their parent list (a `q.order` subseq).
             let pc = child0.popcount();
             let lost = if pc <= self.iso_max_avail {
                 let ckey = self.iso_node_key(q, child0, pc);
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.tt.prefetch_h(cr);
-                !self.wins_tiny(q, att, child0, ckey, cr, cf)
+                !self.wins_tiny(q, att, child0, ckey, cr, cf, moves)
             } else {
                 let child = child_orient(orient, a, child0);
                 let ckey = d4_bits(lex_min8(&child));
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.tt.prefetch_h(cr);
-                !self.wins_inc(q, att, &child, ckey, cr, cf)
+                !self.wins_inc(q, att, &child, ckey, cr, cf, moves)
             };
             if lost {
                 result = true;
@@ -260,6 +290,7 @@ impl IsoFlat {
     /// move via `att[sq][0]`, no `child_orient`/`lex_min8`) and key by the iso key. Same
     /// keys, same search order, same TT as `wins_inc` ⇒ byte-identical node set; it only
     /// drops the dead 8-orientation bookkeeping in the highest-node-count region.
+    #[allow(clippy::too_many_arguments)]
     fn wins_tiny(
         &self,
         q: &Queens,
@@ -268,6 +299,7 @@ impl IsoFlat {
         key: Bits,
         route: u64,
         fp: u64,
+        pmoves: &[u32],
     ) -> bool {
         if let Some(w) = self.tt.get_h(key, route, fp) {
             return w != 0;
@@ -280,11 +312,10 @@ impl IsoFlat {
             }
         }
         self.tt.bump();
+        let mut buf = [MaybeUninit::<u32>::uninit(); MAXV];
+        let moves = filter_moves(&mut buf, pmoves, avail);
         let mut result = false;
-        for &sq in &q.order {
-            if !avail.get(sq) {
-                continue;
-            }
+        for &sq in moves {
             let child0 = avail.and_not(att[sq as usize][0]);
             if child0 == Bits::ZERO {
                 result = true;
@@ -293,7 +324,7 @@ impl IsoFlat {
             let ckey = self.iso_node_key(q, child0, child0.popcount());
             let (cr, cf) = QueensTt::hash128(ckey);
             self.tt.prefetch_h(cr);
-            if !self.wins_tiny(q, att, child0, ckey, cr, cf) {
+            if !self.wins_tiny(q, att, child0, ckey, cr, cf, moves) {
                 result = true;
                 break;
             }
@@ -321,7 +352,9 @@ impl IsoFlat {
         let avail = orient[0];
         if depth >= self.par_depth && avail.popcount() <= min_avail {
             let (route, fp) = QueensTt::hash128(key);
-            return self.wins_inc(q, att, orient, key, route, fp);
+            // Hand the sequential subtree the full move order as its parent list; `wins_inc`
+            // filters it to `avail` once, then the list shrinks incrementally below.
+            return self.wins_inc(q, att, orient, key, route, fp, &q.order);
         }
         self.tt.bump();
         let mut moves: [u32; MAXV] = [0; MAXV];
@@ -364,7 +397,7 @@ impl Solver for IsoFlat {
         let orient = orient_of(q, q.board.and_not(blocked));
         let key = self.node_key(q, &orient);
         let (route, fp) = QueensTt::hash128(key);
-        let won = self.wins_inc(q, att, &orient, key, route, fp);
+        let won = self.wins_inc(q, att, &orient, key, route, fp, &q.order);
         self.tt.drain_local(); // sequential path: only this thread accumulated
         won
     }
