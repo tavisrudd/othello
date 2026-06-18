@@ -133,12 +133,15 @@ fn att08(att: &[[Bits; 8]], sq: u8) -> Bits {
 fn filter_moves<'a>(buf: &'a mut [MaybeUninit<u8>; MAXV], pmoves: &[u8], avail: Bits) -> &'a [u8] {
     let mut nc = 0usize;
     for &sq in pmoves {
-        if avail_has8(avail, sq) {
-            // SAFETY: `pmoves` is a `q.order` subsequence and therefore has at most MAXV
-            // entries; `nc` only counts entries accepted from that slice.
-            unsafe { buf.get_unchecked_mut(nc).write(sq) };
-            nc += 1;
-        }
+        // Branchless compaction: write `sq` unconditionally, then advance the count only if
+        // it survives the filter — an unavailable `sq` is simply overwritten next iteration.
+        // `avail_has8` is ~50/50 down the tree, so the old `if`-guarded write was a coin-flip
+        // branch the predictor missed every other node; this trades it for one always-taken
+        // L1 store (much cheaper than the misprediction). Output is byte-identical.
+        // SAFETY: `pmoves` is a `q.order` subsequence (≤ MAXV entries) and `nc` never exceeds
+        // the count of survivors so far, so `buf[nc]` is always in bounds.
+        unsafe { buf.get_unchecked_mut(nc).write(sq) };
+        nc += avail_has8(avail, sq) as usize;
     }
     // SAFETY: the loop initialised exactly `buf[..nc]` via `write`; `MaybeUninit<u8>` is
     // layout-identical to `u8` and `u8` has no invalid bit patterns, so reading that
@@ -752,10 +755,14 @@ impl IsoFlat {
             self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
             return result;
         }
-        for &sq in pmoves {
-            if !avail_has8(avail, sq) {
-                continue;
-            }
+        // Compact the available moves once (branchless), then iterate with no per-square
+        // availability branch — same as the prove-loss arm. Children inherit `moves` (the
+        // availability-filtered `q.order` subsequence): a child re-filters by *its* avail,
+        // and child-avail ⊆ avail, so filtering `moves` vs `pmoves` yields the identical
+        // child move list ⇒ byte-identical node set, and the child scans a shorter list.
+        let mut buf = [MaybeUninit::<u8>::uninit(); MAXV];
+        let moves = filter_moves(&mut buf, pmoves, avail);
+        for &sq in moves {
             let a = att_for8(att, sq);
             let child0 = avail.and_not(a[0]);
             if child0 == Bits::ZERO {
@@ -775,14 +782,14 @@ impl IsoFlat {
                 let ckey = self.iso_node_key(q, child0, pc);
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.tt.prefetch_h(cr);
-                !self.wins_tiny::<ORACLE, COUNT, true>(q, att, child0, ckey, cr, cf, pmoves, nodes)
+                !self.wins_tiny::<ORACLE, COUNT, true>(q, att, child0, ckey, cr, cf, moves, nodes)
             } else {
                 let child = child_orient(orient, a, child0);
                 let ckey = d4_bits(lex_min8(&child));
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.mtt_prefetch::<MODE>(cr, pc);
                 !self.wins_inc::<ORACLE, COUNT, true, WINDOW, MODE>(
-                    q, att, &child, ckey, cr, cf, pmoves, nodes,
+                    q, att, &child, ckey, cr, cf, moves, nodes,
                 )
             };
             if lost {

@@ -169,8 +169,55 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
 - [x] Opus review (no ff-blockers), doc fixes
 - [x] Segmented TT: (1a) per-pc put histogram instrumentation (`QUEENS_PC_HIST=1`), gated, validated on n=14
 - [x] Segmented TT: (2) `QUEENS_TT_SEGMENT` index variant + band-file mechanism, flat TT kept for A/B (validated n=12/14: correct verdict, zero node penalty)
-- [ ] Segmented TT: (1b)+(3) one clean-box n=16 pass: flat-time → flat-hist (write bands) → seg A/B
+- [x] Segmented TT: (1b)+(3) n=16 pass — distribution captured (`/tmp/bands16.txt`), A/B = **+5% throughput** (see below)
+- [x] Profile-guided micro-opt **round 1: branchless move-availability filter** — **−34% branch-misses, −9.4% CPI (~−10% cycles)**, gate-safe (see below). Bigger than the seg lever.
+- [ ] Profile-guided micro-opt round 2+: `enter_graph` vertex-sort network (band_entry ~35% of search branch-misses), etc.
+- [ ] Segmented TT: (4) set-associative band buckets + arena-prefetch — smaller headroom (dTLB only ~2–8% of cycles)
 - [ ] Deferred nits folded in
+
+## Profile-guided micro-opt — round 1: branchless move filter (~10% cycles)
+
+**Profiling method that worked (record for next time):** n=16 perf stat shows IPC ≈ 0.79 and
+**branch-misses ≈ 24% of cycles** — the dominant stall, far above dTLB (~2–8%). To localise,
+**must profile n=16, not n=14** — at n=14 a `perf record` is swamped by the one-time
+`small_canon_table` build (the `OnceLock` smallsort), which is amortised to nothing at n=16. The
+n=16 *search* branch-misses are diffuse across `wins_inc`/`band_entry`/`w8_get` (inherent game-
+tree branching) — **but** the move-availability check `avail_has8` (in `filter_moves` and the
+prove-win loop) is a ~50/50 coin-flip branch hit at every node, a large mispredict source.
+
+**Fix:** branchless `filter_moves` (write `sq` unconditionally, `nc += avail as usize`), and
+route the prove-win loop through `filter_moves` too (children inherit the filtered `moves` — a
+shorter `q.order` subseq, byte-identical node set since child-avail ⊆ avail). Both gate-safe.
+
+**Measured (n=16 flat, single runs, CPI is node-count-independent so robust):** branch-misses
+143.5 B → 95.2 B (**−34%**), CPI 1.267 → 1.148 (**−9.4%**), cycles 10.81 T → 9.60 T, wall
+205 s → 183 s. The branch-misses were **not** latency-hidden — removing them sped the search.
+Gate held: n=12 exact 1,060,823 / 1.25×, n=14 1.02×, lineage agrees.
+
+**Method for future micro-opt rounds:** compare **CPI and branch-miss-rate (per instruction)**
+from n=16 perf stat — node-count-independent, so one run each resolves a real change that
+wall-clock can't (±18% node noise). Localise with `perf record` on **n=16** (not n=14).
+
+## Segmented-TT A/B — (3) n=16 result: +5% throughput (confirmed-positive, modest)
+
+Clean-box n=16, iso-window, 3 interleaved rounds each (flat = no env; seg =
+`QUEENS_TT_SEGMENT=1 QUEENS_TT_BANDS=/tmp/bands16.txt`, weights from the n=16 hist run):
+
+| metric            | FLAT (mean of 3)     | SEG (mean of 3)      | Δ        |
+|-------------------|----------------------|----------------------|----------|
+| throughput (M/s)  | 29.6 (28.2/31.3/29.3)| **31.1** (30.5/31.9/30.8) | **+5.0%** |
+| wall              | 3m11s                | 3m04s                | −3.7%    |
+| nodes             | 5.61 B               | 5.70 B               | +1.6%    |
+
+**Methodology finding (load-bearing for all future n=16 A/B): compare M/s, not wall.** The
+n=16 **node count is the noisy variable** — parallel `par_iter().any()` cutoff timing swings it
+±~18% (flat alone: 5.01–5.92 B), which dwarfs the effect in wall-clock. Throughput normalises
+it and is what segmentation targets (per-node latency). SEG's node count was *higher* than
+FLAT's yet it was faster ⇒ the win is per-node latency, not fewer nodes (and confirms again
+that segmentation loses no merges). The +5% is directionally consistent (all 3 seg ≥ 30.4
+M/s; 2 of 3 flat < 30) but **not airtight at n=3** (one flat run hit 31.3). ~5% of the ~13%
+warm-window ceiling captured — gap is cold-start dilution (whole-run M/s) + band-lookup cost;
+(4) chases the rest.
 
 ## Segmented-TT band sizing — (1) the put histogram
 
