@@ -298,3 +298,30 @@ A/B + TT-size sweep; Opus review; closed the iso-flat handoff; this new handoff.
 (§ box hygiene) before any n=16 timing — that single factor is what made the prior session's "floor"
 conclusion wrong. Keep the flat TT path byte-identical as the A/B control. Don't re-run Codex's
 measured negatives (§ what Codex did).
+
+### Segmented A/B landed + a profiling micro-opt round (2026-06-18)
+
+**Session**: 2026-06-18--4 (`820b0263-4ae0-4080-a0ce-f7c7be3ffd8b`) — `mi`
+**Completed**:
+- Segmented TT end-to-end: (1) gated per-pc put histogram (`QUEENS_PC_HIST`/`QUEENS_PC_HIST_OUT`),
+  (2) `QUEENS_TT_SEGMENT` band index + band-file loader (`QUEENS_TT_BANDS`), (3) n=16 A/B = **+5%**
+  throughput. Flat kept byte-identical as control. Gate held.
+- Profiling round: n=16 perf stat showed branch-misses ~24% of cycles (not dTLB). **Branchless
+  move-availability filter** → −34% branch-misses, −9.4% CPI, **+12.5%**. Combined seg+branchless
+  **≈ +16% throughput** (29.6 → 34.3 M/s). Round-2 micro-opts = diminishing (inherent/tuned branches).
+- Fixed stale CLAUDE.md n=14 gate text (iso-flat distinct ≈29.2M, was the D4 49.3M).
+- Built an HTML report (`notes/queens-report.html`, dual-view, diagrams incl. root-symmetry +
+  search-tree-pruning, 14-micro-opt section, methodology/war-stories) + `notes/perf-methodology-warstories.md`.
+**Files modified**: `src/queens/tt.rs`, `src/queens/solver/iso_flat.rs`, `src/queens/solver/mod.rs`,
+`src/bin/queens.rs`, `CLAUDE.md`, this handoff, `notes/queens-report.html`, `notes/perf-methodology-warstories.md`.
+Commits: `43c490e` (histogram) · `c029e3d` (segment) · `59e0f56` (branchless) · `0bb9711` (ship A/B) + doc commits.
+**NEXT SESSION — back to the MACRO segmented story, not micro-opts** (user's steer). The lever order:
+1. **Segmented step (4): set-associative band buckets + arena prefetch** — cache-line-aligned buckets
+   with a band-aware line index; prefetch the band arena on subtree entry. Pushes past the +5% (dTLB
+   is only ~2–8% of cycles, so bound the upside first — Channel Fermi).
+2. **Grouped-frontier `k=9..12` DDD** (Codex's pump→group→dense-solve→merge) — the real path below
+   ~2m44s and the n=18 enabler; breaks DFS-residence (composability caveat).
+3. **BuRR archive** (Chunk-4, eviction-free value-only) and **1 GB hugepages** (boot-time reservation).
+Profiling method banked: compare **CPI / branch-miss-rate** (node-count-independent) on **n=16**; the
+wall hides wins under ±18% parallel node-count noise. `bands16.txt` weights regenerate via
+`QUEENS_PC_HIST=1 QUEENS_PC_HIST_OUT=<f> solve 16 iso-window`.
