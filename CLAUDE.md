@@ -21,8 +21,10 @@ set (~5.5B) exceeds the 17 GB flat table → evicts late-run; size `QUEENS_TT_SL
 keep it eviction-free, then a full (ask-first) n=16 run.
 
 **Per-node energy cuts (session 2026-06-17--5, `21ce0a6`+`97ef7bd`): n=14 −24.7% wall, node set
-identical.** iso-only `wins_tiny` tail + hash-carry (`get_h`/`put_h`) + direct triangular
-`iso_key_tiny_table` (the big one) + incremental move-list (kills the scan-all-n²). **All benches sit
+identical → n=16 now SECOND in 4m11s** (5.56B nodes, 1.17× re-exp, 22.15 M/s, default *safe* 17 GB
+TT — 1.68× faster than the prior 7m02s best). iso-only `wins_tiny` tail + hash-carry
+(`get_h`/`put_h`) + direct triangular `iso_key_tiny_table` (the big one) + incremental move-list
+(kills the scan-all-n²). **All benches sit
 at the ~90°C 24-core throttle** → throughput is power-limited, rank levers by *energy/work* not
 parallelism; bench via `ryzenadj`/Zen5-pin ([[queens-benches-thermal-wall]]). Elder-root parallelism +
 the Lever-B nimber-oracle were both documented negatives (oracle parked behind `QUEENS_NIMBER_ORACLE`,

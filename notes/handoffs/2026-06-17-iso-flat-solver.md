@@ -32,6 +32,14 @@ throttle. **The deterministic instruction count predicted wall direction reliabl
 metric on a throttled box** (single-shot `perf` cycles were noisy/misleading; the interleaved
 24-core wall A/B is the bottom line).
 
+**✅ VALIDATED AT n=16 (user run, default 17 GB TT, `--distinct`): SECOND in 4m11s** — 5.56B nodes,
+**1.17× re-exp, 22.15 M/s avg** (early 25 M/s, eased as the TT filled to 89.2%). **1.68× faster wall
+/ 1.76× throughput than the prior 7m02s / 12.6 M/s best — and on the *smaller, safe* default table**
+(the prior best needed TT 2.6e9 ≈ 20.8 GB, near the zram cliff). The n=16 win exceeds n=14's
+(1.68× vs 1.33×) because the deep `wins_tiny` region #5/#2 target is a larger fraction at n=16, plus
+thermal amplification. **n=16 is now a ~4-min bench.** Verdict cross-checks Jenrich; node-set-
+preserving, so the verdict is safe.
+
 ### Elder-root investigation (the entry point — a documented dead end, kept for the record)
 - **n=14 elder is ~hard-serial**: 47% of wall for 6% of nodes, scales only 1.87× over 1→24 threads
   (the prove-a-win/cutoff levels are sequential by design). Whole search tops out at **8.17× on 24
