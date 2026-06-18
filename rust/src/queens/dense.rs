@@ -111,24 +111,6 @@ impl DenseW8 {
         bit_get(&self.tables[k], code)
     }
 
-    #[inline]
-    pub(crate) fn eval(&self, k: usize, adj: &[u16; MAX_DENSE_K], closed: &[u16]) -> bool {
-        debug_assert!(k <= MAX_DENSE_K);
-        if k <= W8_K {
-            let (_, code) = projected_code(adj, (1u16 << k) - 1);
-            return self.get(k, code);
-        }
-        let full = (1u16 << k) - 1;
-        for &remove in closed.iter().take(k) {
-            let child = full & !remove;
-            let (ck, ccode) = projected_code(adj, child);
-            if !self.get(ck, ccode) {
-                return true;
-            }
-        }
-        false
-    }
-
     pub(crate) fn bytes(&self) -> u64 {
         self.tables
             .iter()

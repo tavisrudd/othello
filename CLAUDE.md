@@ -95,6 +95,17 @@ The search is **TT / DRAM-latency-bound**, not compute- or parallelism-bound (qu
 fact #5 in the roadmap; same conclusion for Othello in `rust/NOTES.md`). What has
 held up across sessions:
 
+- **NEVER claim we've reached "the floor" / a hard limit / that something is
+  "unreachable" — that judgment is the user's alone.** Always keep pushing and
+  reasoning from first principles; when you hit a wall, reason *through* it or find a
+  way *around* it — don't declare it terminal. A "floor" conclusion is almost always an
+  artifact of the measurement conditions or an untried lever, not a real bound. (Case in
+  point: a prior session declared "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s is the
+  wall." All wrong — it was measured on a memory-degraded box, dismissed the W8 dense
+  table on one confounded run, and never tried forcing huge pages. Cleaning the box +
+  W8 + `MADV_COLLAPSE` took n=16 to **2m44s** the next session, and the *compute* floor
+  is ~45–60s — so even that isn't close.) Present evidence and open levers; let the user
+  decide what's a limit.
 - **Per-node micro-opts wash out.** Slot-shrink, terminal fast paths, and the
   lockless atomic TT each measured ~0–5% at n=14 — real but small. The load-bearing
   levers are **memory / representation** (compact fingerprint slot, BuRR archive,

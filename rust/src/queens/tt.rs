@@ -138,11 +138,42 @@ pub(crate) fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
         let aligned = base.next_multiple_of(page);
         let off = aligned - base;
         if bytes > off {
-            libc::madvise(
-                aligned as *mut libc::c_void,
-                bytes - off,
-                libc::MADV_HUGEPAGE,
-            );
+            let len = bytes - off;
+            let ptr = aligned as *mut libc::c_void;
+            libc::madvise(ptr, len, libc::MADV_HUGEPAGE);
+            // `MADV_HUGEPAGE` is only a hint: the kernel forms a 2 MB page lazily, and only
+            // when a fully-aligned 2 MB region faults in contiguously. A multi-GB table is
+            // first-touched at *random* slots, so on this box only ~70% of it ever reaches
+            // THP -- the 4 KB remnant is ~half the dTLB misses on the hot probe (measured:
+            // 17 GB RSS, 12 GB AnonHugePages). `MADV_COLLAPSE` (Linux 6.1+) forces a
+            // synchronous collapse of the whole range into 2 MB pages now, allocating/
+            // compacting as needed. Best-effort and env-gated: it commits the range up
+            // front (a full n=16 solve touches almost all of it anyway) and an older kernel
+            // just returns EINVAL (ignored, as MADV_HUGEPAGE's result already is).
+            //
+            // Default-ON for large tables (the n>=16 regime where the dTLB thrash dominates
+            // — measured ~5% wall on iso-window with near-identical node counts, so a genuine
+            // per-node TLB win, not noise). Small tables skip it: TLB isn't their bottleneck
+            // and the up-front commit would defeat their lazy allocation. `QUEENS_TT_COLLAPSE`
+            // overrides either way (`0` forces off, anything else forces on).
+            let collapse = match std::env::var("QUEENS_TT_COLLAPSE").ok().as_deref() {
+                Some("0") => false,
+                Some(_) => true,
+                None => len >= (1usize << 32), // ~4 GB+ table (n>=16); n<=14 is ~1 GB
+            };
+            if collapse {
+                // ABI-stable advice values not yet in the `libc` crate on this toolchain
+                // (include/uapi/asm-generic/mman-common.h).
+                const MADV_POPULATE_WRITE: libc::c_int = 23; // Linux 5.14+
+                const MADV_COLLAPSE: libc::c_int = 25; // Linux 6.1+
+                                                       // MADV_COLLAPSE only merges *populated* pages, and the table is lazily
+                                                       // zeroed (unpopulated) here, so prefault the whole range first. This
+                                                       // commits the table up front (a full n=16 solve touches ~all of it anyway)
+                                                       // and lets COLLAPSE promote the randomly-faulted 4 KB remnant — the ~27%
+                                                       // that THP leaves small-paged — into 2 MB pages, cutting dTLB pressure.
+                libc::madvise(ptr, len, MADV_POPULATE_WRITE);
+                libc::madvise(ptr, len, MADV_COLLAPSE);
+            }
         }
     }
     let (ptr, len, cap) = (v.as_mut_ptr(), v.len(), v.capacity());

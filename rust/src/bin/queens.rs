@@ -113,12 +113,15 @@ enum Cmd {
     Solve {
         #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
         n: u32,
-        /// Solver to use (`parallel`, the default, is the fastest).
+        /// Solver to use (`iso-window`, the default, is the fastest — n=16 in ~2m44s
+        /// on this box: iso-flat's kernel + a complete dense W8 table that resolves
+        /// 8-vertex tails without re-expansion, over a huge-page-collapsed flat TT).
         ///
-        /// `naive`→`memo`→`symmetry`→`parallel` is a speed ladder, each step
-        /// adding one idea; `nimber` (the full Sprague-Grundy value) and `pn`
-        /// (df-pn) are heavier, special-purpose solvers, *not* faster.
-        #[arg(default_value = "incremental", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
+        /// `naive`→`memo`→`symmetry`→`parallel` is a speed ladder, each step adding
+        /// one idea; `nimber` (the full Sprague-Grundy value) and `pn` (df-pn) are
+        /// heavier, special-purpose solvers, *not* faster. (`iso-window` ignores
+        /// `--distinct` — use `iso-flat` for distinct-count estimation.)
+        #[arg(default_value = "iso-window", value_parser = PossibleValuesParser::new(SOLVER_NAMES))]
         solver: String,
         /// Also estimate the *distinct* positions (HyperLogLog) so the report
         /// shows how much the search re-expands -- the transposition table's
