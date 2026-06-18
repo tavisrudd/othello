@@ -171,9 +171,25 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
 - [x] Segmented TT: (2) `QUEENS_TT_SEGMENT` index variant + band-file mechanism, flat TT kept for A/B (validated n=12/14: correct verdict, zero node penalty)
 - [x] Segmented TT: (1b)+(3) n=16 pass — distribution captured (`/tmp/bands16.txt`), A/B = **+5% throughput** (see below)
 - [x] Profile-guided micro-opt **round 1: branchless move-availability filter** — **−34% branch-misses, −9.4% CPI (~−10% cycles)**, gate-safe (see below). Bigger than the seg lever.
-- [ ] Profile-guided micro-opt round 2+: `enter_graph` vertex-sort network (band_entry ~35% of search branch-misses), etc.
+- [x] **Combined ship A/B (n=16, micro-opt binary, interleaved):** seg+branchless **34.3 M/s** vs flat+branchless 33.3 vs original-flat 29.6 ⇒ **micro-opt +12.5%, seg +3% on top, combined ~+16% throughput.**
+- [ ] Profile-guided micro-opt round 2: largely diminishing — post-round-1 the remaining branch-misses are inherent (`solve_local` cutoff is data-dependent) or already-tuned (`lex_min8`). `enter_graph` sort network is the one reducible item left but it's a small fraction of `band_entry` (which `solve_local` dominates). Revisit only if chasing the last few %.
 - [ ] Segmented TT: (4) set-associative band buckets + arena-prefetch — smaller headroom (dTLB only ~2–8% of cycles)
 - [ ] Deferred nits folded in
+
+## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
+
+Interleaved n=16 runs on the round-1 (branchless-filter) binary, weights from `/tmp/bands16.txt`:
+
+| config            | nodes              | wall          | M/s  |
+|-------------------|--------------------|---------------|------|
+| flat + branchless | 5.56 B / 5.37 B    | 2m44s / 2m44s | 33.3 |
+| seg  + branchless | 5.49 B / 5.48 B    | 2m37s / 2m43s | 34.3 |
+
+vs this session's original-flat baseline 29.6 M/s ⇒ **branchless +12.5%, segment +3% on top, combined
+~+16% throughput.** The wall (~2m40–2m44s) matches the old "2m44s" headline, but at **+9–12% more
+nodes in the same time** — the parallel node-count noise (±~18%) hides the gain in wall-clock; **M/s
+is the only trustworthy n=16 A/B metric.** Branchless is the load-bearing lever; segment compresses to ~3%
+when stacked (its dTLB win partly overlaps the branchless cycle savings).
 
 ## Profile-guided micro-opt — round 1: branchless move filter (~10% cycles)
 
