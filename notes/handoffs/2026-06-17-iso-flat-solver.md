@@ -443,3 +443,31 @@ focused win this session is the ≤7-off-DRAM branch (`110f392`) — recommend m
 re-cast as **n=16 completion time** (not raw M/s), the oracle-with-L1-nimbers + ≤7 precompute become
 attractive (node reduction) and should be revisited — `for_each_tiny_graph` precompute scaffolding
 was prototyped and reverted (cheap to rebuild).
+
+## Handoff Note — session 2026-06-17--6 cont. (canon-free ≤7 key → n=16 +15%)
+
+After the L2 ≤7 table (33.5 M/s), a re-profile showed `iso_key_tiny_table_pc` **still 22.6%**
+— the 16 MB canon-table lookup (L3/DRAM at n=16) the parent does for every band-entry key.
+Killed it (branch `queens-iso-local-memo`, `6774614`): key the complete ≤7 win/loss table by
+the **labelled** dense index `OFF[k]+edge_code` (`Queens::tiny_table_index`) — no canon lookup,
+no fingerprint, one direct byte load into a ~2 MB table. The Node-Kayles value is iso-invariant
+so it's correct under any labelling; the slight ≤7 merge loss is recomputed cheaply in the L1
+`solve_local` memo.
+
+**Result: n=16 36.25 M/s (was 31.4 baseline = +15%; 33.5 with the canonical table).** Single-thread
+n=14 **8.86s** (was 9.71 = ~9% faster) despite +16% nodes — the canon-table savings dominate.
+Lineage agrees (n≤9), verdict second-player ✓, n=12 `--distinct` distinct **exactly 1,060,823**
+(no canonical merge loss — the HLL still folds canonically). **Trade:** the labelled key visits
+more ≤7 positions (n=12 re-exp 1.25×, n=14 1.02×) — a deliberate speed/merge trade (the trilemma),
+not a bug; the ≤7 set lives in the complete 2 MB table (no eviction), so it costs only cheap L1
+recompute, and net completion is faster (n=14 8.86<9.71).
+
+**Cumulative this session: 31.4 → 36.25 M/s (+15%)**, all on `queens-iso-local-memo`
+(`f36080d` compact base → `aff9362` local memo → `110f392` L2 canonical table → `6774614`
+canon-free labelled key). MLP parked on `queens-mlp-prove-loss`.
+
+**Next target (re-profiled `6774614`):** `band_entry` is now 23.6% — the labelled-index `tiny_get`
+into the 2 MB table (the k=7 sub-region is 2 MB → L3 at n=16; k≤6 is 33 KB → L1). Shrinking it to
+an L2 hash (with a fingerprint; collision = cheap recompute) is the next lever; eliminating
+`band_entry` would reach ~47 M/s, then the >7 D4 region (73%, the DRAM wall) is the remaining
+barrier (roadmap: BuRR / ply-windowing). Note the labelled-key re-exp trade before merging to main.
