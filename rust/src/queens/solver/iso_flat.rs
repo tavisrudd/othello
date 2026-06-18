@@ -711,8 +711,46 @@ impl IsoFlat {
             g.adj[i] = c & !(1u8 << i);
         }
         let alive = ((1u16 << k0) - 1) as u8;
+        if COUNT {
+            // `--distinct`: keep descendants in the flat TT so the HLL counts them.
+            self.tt.bump_local(nodes);
+            return self.expand_graph::<COUNT>(&g, alive, key, route, fp, nodes);
+        }
+        // Production: solve the whole ≤7 subtree in a thread-private 128-byte stack memo
+        // (indexed by the alive bitmask) — pure L1, no flat-TT probe, no DRAM, no
+        // cross-CCX coherence. Only the shared band-entry position itself stays in the
+        // flat TT, which shrinks it (fewer ≤7 entries ⇒ less eviction at n=16). Descendant
+        // transpositions across *different* entries are recomputed (cheap in L1) rather
+        // than shared through DRAM.
+        let mut memo = [-1i8; 128];
+        let won = self.solve_local(&g, alive, &mut memo, nodes);
+        self.tt_put_h::<COUNT>(key, route, fp, won as u8);
+        won
+    }
+
+    /// Solve an in-band node against a **local** `memo` (indexed by the alive bitmask over
+    /// the entry [`TinyGraph`]). Pure L1/register work: playing vertex `i` leaves
+    /// `alive & !closed[i]`; an empty child wins outright, otherwise recurse and cut on the
+    /// first child that loses. No board op, no key, no TT — the iso band off the memory path.
+    fn solve_local(&self, g: &TinyGraph, alive: u8, memo: &mut [i8; 128], nodes: &mut u64) -> bool {
+        let m = memo[alive as usize];
+        if m >= 0 {
+            return m != 0;
+        }
         self.tt.bump_local(nodes);
-        self.expand_graph::<COUNT>(&g, alive, key, route, fp, nodes)
+        let mut result = false;
+        let mut rem = alive;
+        while rem != 0 {
+            let i = rem.trailing_zeros() as usize;
+            rem &= rem - 1;
+            let child = alive & !g.closed[i];
+            if child == 0 || !self.solve_local(g, child, memo, nodes) {
+                result = true;
+                break;
+            }
+        }
+        memo[alive as usize] = result as i8;
+        result
     }
 
     /// In-band recursion: probe the flat TT, else expand. The descendant twin of
