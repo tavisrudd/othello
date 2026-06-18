@@ -159,14 +159,14 @@ pub struct IsoFlat {
     order_rank: OnceLock<Box<[u8]>>,
     /// Complete, eviction-free ≤7 win/loss table, keyed by the **labelled** dense index
     /// [`Queens::tiny_table_index`] (`OFF[k] + edge_code`) — `0` = unknown, `1` = loss,
-    /// `2` = win. One byte per labelled code (~2 MB), so a band entry is a single direct
-    /// indexed load (no canon-table lookup, no fingerprint, no flat-TT DRAM probe). Keying
-    /// by the labelled (not canonical) code skips the 16 MB canon table — the win/loss is
-    /// iso-invariant, so every labelling stores the same value; the slight merge loss is
-    /// recomputed cheaply in the L1 [`solve_local`](Self::solve_local) memo. Shared
-    /// lock-free: a position's value is fixed, so a racing same-slot write stores the same
-    /// byte. Hot codes cluster; the cold tail stays paged-out, so the resident footprint is
-    /// the reached ≤7 graphs, not the full 2 MB.
+    /// `2` = win. One byte per labelled code (~2 MB direct, no fingerprint, no collision), so
+    /// a band entry is a single direct indexed load with no canon-table lookup and no flat-TT
+    /// DRAM probe. Keying by the labelled (not canonical) code skips the 16 MB canon table —
+    /// the win/loss is iso-invariant, so every labelling stores the same value; the slight
+    /// merge loss is recomputed cheaply in the L1 [`solve_local`](Self::solve_local) memo.
+    /// (A smaller L2 *hash* table was tried — it collides above ~512 K reached codes, and the
+    /// collision recomputes inflate the node count and *slow* completion, so the collision-
+    /// free direct table wins.) Shared lock-free: a position's value is fixed.
     tiny_tt: Box<[AtomicU8]>,
     tiny_canon: &'static [u64],
     par_depth: u32,
