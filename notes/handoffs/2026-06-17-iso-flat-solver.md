@@ -36,7 +36,8 @@ levers, both measurement-driven:
 | n=14  | incremental (D4)      | 9.7  | baseline |
 | n=14  | **iso-flat KEY_MAX=6** | **14.1** | default; KEY_MAX=5 → 16.9 |
 | n=16  | iso-flat KEY_MAX=6 | 15.7 | SECOND, 8.66B nodes, 1.27× re-exp, 9m11s (default TT 17 GB) |
-| n=16  | **iso-flat KEY_MAX=7** ⭐ | **13.2** | **SECOND, 6.58B nodes, 1.15× re-exp, 8m20s** (`QUEENS_TT_SLOTS=2.4e9`, 19.2 GB) — the wall-optimal corner; **now the default** |
+| n=16  | iso-flat KEY_MAX=7 | 13.2 | SECOND, 6.58B nodes, 1.15× re-exp, 8m20s (`QUEENS_TT_SLOTS=2.4e9`, 19.2 GB) — KEY_MAX=7 is the default |
+| n=16  | **iso-flat KEY_MAX=7, TT 2.6e9** ⭐ | **12.6** | **SECOND, 5.32B nodes, 7m02s** (20.8 GB, 83% full) — current best; the spare-RAM TT bump cut eviction further |
 | n=16  | incremental (D4) | 18.3 | SECOND, 10.12B nodes, 1.31× re-exp, 9m14s (same KEY_MAX ignored, TT 2.4e9) — **contention-fixed; ~34 min → 9m14s (~3.7×)** |
 
 **n=16 head-to-head (both contention-fixed, TT 2.4 B/19.2 GB): iso-flat 8m20s vs incremental 9m14s
@@ -46,6 +47,12 @@ vs 1.31 re-exp from the smaller set fitting the table). So the popcount-7 merge 
 edging contention-fixed D4. **Two-part win:** the contention fix is the big shared ~3.7× (lifts
 incremental too); iso-flat KEY_MAX=7 then adds ~10% on top. The 3.4× full merge (KEY_MAX≥8, WL) is
 still the untested high-end — gated on a cheaper WL key (the inner-loop lever).
+
+**Known issue — n=16 `--distinct` HLL is under-resolved (p=16).** Two KEY_MAX=7 runs reported 5.71B
+(TT 2.4e9) vs 4.65B (TT 2.6e9) distinct for the *same key* — distinct is key-invariant, so an 18%
+swing is far beyond p=16's nominal 0.4% std-err; the default `new_counting(bits, 16)` is too coarse
+at billions (Chunk-1 n=14 work used p=18). The **verdict and wall are unaffected**; only the distinct
+and the re-exp derived from it are noisy at n=16. Fix: bump `hll_p` for large n (e.g. p=20 for n≥16).
 
 Gates green (solve 12/14 --distinct = 1,060,823 / ~49.1M, re-exp 1.01–1.08×; `make test`/clippy/fmt).
 
