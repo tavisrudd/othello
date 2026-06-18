@@ -389,3 +389,57 @@ one atomic). Self-contained; see `2026-06-17-flat-tt-contention-fix.md`. Not yet
 Spearman vs cross-root shared-volume is flat (|ρ|≤0.54); fragmentation-first is *worse* than the
 current order; even the oracle reorder is only ~3.7% better at the n=16 cap regime (< the 3–5%
 bar). **Do not reorder roots.** Matches the floor doc (no universal trunk; 58% root-private).
+
+## Handoff Note — session 2026-06-17--6 (memory-throughput / "pack the iso band off DRAM")
+
+**Goal:** raise sustained n=16 raw node rate (31 M/s) toward 50 M/s. **Result: 31→33.2 M/s
+(+6%)** via taking the ≤7 iso band off the DRAM TT; the rest is blocked by a hardware ceiling
+(below). Extensive A/B + TMA/perf; several documented negatives; everything on branches.
+
+**Branch map (all off `main` @ the compact-graph base `f36080d`):**
+- `main` `f36080d` — **compact local-graph iso tail** (TinyGraph: at popcount≤7 the subtree is a
+  pure ≤7-vertex Node-Kayles game, carried as closed-neighbour adjacency; per-node 256-bit board
+  ops → alive-bitmask byte ops). Byte-identical (n=14 single-thread 29,695,141), **perf-neutral**
+  (the eliminated `iso_key` compute overlapped the TT-probe stall) + Codex's TT-counting split.
+- `queens-iso-local-memo` `110f392` — **THE WIN (+6%)**. (1) ≤7 descendants solved in a per-entry
+  128-byte L1 stack memo (off DRAM); (2) ≤7 **band entries** (the bulk; 78% of all gets are iso-band
+  hits, measured) served from a **complete 256 KB L2 table** keyed by the canonical tiny key the
+  parent already computed — the whole band is ~1300 graphs, so it never evicts. n=16 33.2 M/s,
+  parallel n=14 ~0.87s. Lineage ✓, n=12 `--distinct` 1,060,823 ✓. (+2.5% nodes = lost cross-entry
+  descendant dedup, cheap L1.) **Recommend merging to main.**
+- `queens-mlp-prove-loss` `6fb4f61` — **PARKED NEGATIVE**: memory-level-parallel prove-loss windows
+  (prefetch a window of children, probe back-to-back to overlap DRAM). Single-thread IPC 1.18→1.40
+  (overlap is real) but +19% instructions ⇒ cycles flat; **24-thread REGRESSES** (n=16 26.8 vs 31.4)
+  — the two memory controllers' MLP is already saturated by cross-thread parallelism, so per-thread
+  MLP just queues. (Same root cause as the old `naive-prefetch-windowing` negative.)
+
+**Profiling that pinned the ceiling (perf, n=16, warmed, 24 threads):**
+- TMA L2: **backend_bound_by_memory 34%**, frontend_bound_by_latency 24%, smt_contention 17%,
+  bad_spec 8%, retiring **7.5%**, backend_by_cpu 2%. Annotate: ~37% on `test $1,%al` after the TT
+  slot load = pure flat-TT DRAM-probe latency. The search is **memory-latency / memory-subsystem
+  bound**, NOT compute/port bound (contra the old iso-flat module doc's "~1% TT, compute-bound").
+- **Affinity sweep:** 24 cores across **both** L3s = 30.8 M/s; single-CCX (8 fast / 16 slow, 1 L3
+  each) = 14–16 M/s. Throughput tracks core count = **outstanding-probe count**: latency-bound,
+  MLP scales with cores, and at 24 it's at the 2-controller ceiling. (Box is single-NUMA, unified
+  LPDDR5x; cross-CCX is L3 coherence, not separate controllers — TT partitioning by CCX won't help.)
+- **Probe stats (n=14 single-thread):** 4.58 gets/node, **78% hits**, so the productive move is
+  taking gets off DRAM (done for ≤7), not overlapping them (MLP, failed).
+
+**The wall (why 50 M/s is blocked):** raw M/s = nodes ÷ wall, so it only rises by making each node's
+TT access faster (off DRAM). The ≤7 band is **bounded** (~1300 graphs → a complete L2 table, always
+hits) — packed, +6%. The **>7 (D4-keyed) region is unbounded** (billions of distinct positions at
+n=16, long reuse distances) → can't fit a complete table and a hot cache fails on reuse distance
+(the memo negative). The remaining ≤7 cost is the **17 MB canon table** (L3/DRAM at n=16) for the
+entry key — that's why the ≤7 win is only +6%, not ~2×. **Node-reduction levers do NOT help the raw
+M/s metric** (fewer nodes ÷ proportionally lower wall): the nimber **oracle** (`QUEENS_NIMBER_ORACLE=1`)
+prunes ~33% of nodes (decomposable subtrees) but is 33% *slower* (DRAM `comp_nimber` + per-node
+decompose overhead); even with L1 component nimbers it raises *completion*, not throughput. Same for
+a ≤7 precompute (collapses the band to lookups → fewer "nodes" → lower M/s).
+
+**Decision needed (not autonomous):** to exceed ~33 M/s on the raw metric needs a **smaller/faster
+>7 representation** — the roadmap's load-bearing levers: **BuRR archive** (compact static retrieval,
+no eviction, partly landed) and **ply-windowing** (bound the resident set). Both are large. The
+focused win this session is the ≤7-off-DRAM branch (`110f392`) — recommend merging. If the goal is
+re-cast as **n=16 completion time** (not raw M/s), the oracle-with-L1-nimbers + ≤7 precompute become
+attractive (node reduction) and should be revisited — `for_each_tiny_graph` precompute scaffolding
+was prototyped and reverted (cheap to rebuild).
