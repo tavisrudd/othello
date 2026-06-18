@@ -242,8 +242,9 @@
   <a href="#axes">8 · Three axes of optimization</a>
   <a href="#represent">9 · Representing positions cheaply</a>
   <a href="#latency">10 · The memory-latency wall</a>
-  <a href="#numbers">11 · The numbers</a>
-  <a href="#floor">12 · The floor, and what is next</a>
+  <a href="#micro">11 · Micro-optimizations</a>
+  <a href="#numbers">12 · The numbers</a>
+  <a href="#floor">13 · The floor, and what is next</a>
 </nav>
 
 <!-- ===================================================================== -->
@@ -395,7 +396,7 @@ if rr == r || cc == c
 fn pos_key(&self, blocked) -> Bits {
     self.canon(self.board.and_not(blocked)) // canonicalise AVAILABLE, not blocked
 }</code></pre>
-<p>A subtle but load-bearing choice: we canonicalise the <strong>available</strong> mask, not the blocked mask. Both merge the identical equivalence classes (available is a pure function of blocked), but available has far fewer set bits deep in the tree, so <code>canon</code> folds proportionally fewer bits. That single change took n=14 from 79.6 s → 33.0 s (2.4×) with byte-identical node counts.</p>
+<p>One choice here matters more than it looks: the solver canonicalises the <strong>available</strong> mask, not the blocked mask. Both merge the same equivalence classes (available is a pure function of blocked), but available has far fewer set bits deep in the tree, so <code>canon</code> shuffles proportionally fewer bits per call. Switching to it cut n=14 from 79.6 s to 33.0 s — a 2.4× speedup with byte-identical node counts, purely from a cheaper key.</p>
 <div class="intuition">
 <span class="tag">3Blue1Brown-style intuition · group actions &amp; orbits</span>
 <p>Think of the 8 symmetries as a little machine that "shuffles" a board into one of (up to) 8 look-alikes. Run any board through all 8 settings and you get its <em>orbit</em> — its family of identical-twins. Picking the canonical representative is like alphabetizing the family and always filing under the first name: no matter which twin you start from, you file under the same name, so the whole family lands in one folder. That is why it is well-defined and why it merges the family into one stored entry.</p>
@@ -425,8 +426,8 @@ fn pos_key(&self, blocked) -> Bits {
 
 <div class="layman">
 <p>Symmetry merges boards that are rotations of each other. But there is a deeper kind of sameness. Forget the board entirely and look only at the <em>structure</em> of the legal moves: which available squares "conflict" with which other available squares (because one attacks the other).</p>
-<p>Draw a dot for each available square, and a line connecting two dots whenever those two squares attack each other. You get a <strong>network</strong> (a graph). Here is the magic: two boards that look totally different — different sizes of attacked regions, different positions — can produce the <em>same network shape</em>. And if the networks have the same shape, <strong>the games are identical.</strong> Same winner, every time.</p>
-<p>This merges far more positions than symmetry alone — roughly <strong>3.4× more</strong> on top of the 8× from symmetry. The catch: checking whether two networks have the same shape is expensive. So the solver uses a clever compromise — it does the cheap exact check for <em>small</em> networks (where it is fast and merges the most), and falls back to plain symmetry for large ones.</p>
+<p>Draw a dot for each available square, and a line between two dots whenever those squares attack each other. You get a <strong>network</strong> (a graph). The payoff: two boards that look nothing alike — different attacked regions, different positions, even different rotations — can produce the <em>same network shape</em>. When the networks match, the games are identical, with the same winner every time.</p>
+<p>This merges far more positions than symmetry alone — roughly <strong>3.4× more</strong>, on top of the 8× from symmetry. The catch is that checking whether two networks have the same shape is expensive. The solver splits the difference: it runs the exact check on <em>small</em> networks, where it is cheap and merges the most, and falls back to plain symmetry on large ones.</p>
 </div>
 
 <div class="engineer">
@@ -510,7 +511,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <span class="sec-toggle" data-target="lineage">flip this section</span>
 
 <div class="layman">
-<p>The solver wasn't built in one shot. It grew through a dozen generations, each adding one idea and each kept around so it can double-check the next. Every generation computes the <em>same</em> winner — the smart ones just reach it faster, by remembering more, merging more, and wasting fewer trips to memory.</p>
+<p>Symmetry, graph shape, and game theory are the ideas. Turning them into a program that finishes was a separate climb. The solver grew one generation at a time, each adding a single idea on top of the last — and every old generation is kept around, because the slow, simple ones can double-check the fast, clever ones. They all compute the same winner. The later ones just get there faster, by remembering more, merging more, and wasting fewer trips to memory. That last phrase turns out to be the whole story, and the next section pulls the generations apart into the three things that actually made them quicker.</p>
 </div>
 <div class="engineer">
 <p>The <code>Solver</code> trait names a ladder of implementations (<code>SOLVER_NAMES</code>), simplest to most sophisticated. Every solver must agree with the memo-less <code>naive</code> ground truth on small boards (the <code>solver_lineage_agrees</code> gate) and reproduce the exact distinct count (1,060,823 at n=12). Each step is one idea layered on the last.</p>
@@ -536,8 +537,8 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 
 <div class="card">
 <h4 style="margin-top:0">The reversal that mattered</h4>
-<div class="layman"><p>An earlier session declared the solver had hit "the floor" — about 36 million positions per second, with n=16 stuck near 3m41s as "the wall." That conclusion was <strong>wrong</strong>. It had been measured on a computer whose memory was already clogged (a full compressed-RAM swap, a disk cache eating 13 GB), so the big table didn't fit and every number was garbage. Cleaning the machine, adding the dense lookup table, and forcing the memory system to use large pages took n=16 to <strong>2m44s</strong> the very next session. The lesson, now a project rule: never declare a "floor" — it's almost always an artifact of how you measured.</p></div>
-<div class="engineer"><p>A prior session concluded "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s is the wall." All wrong: measured on a memory-degraded box (zram swap full, ZFS ARC eating ~13 GB → the 17 GB TT OOM'd → capped runs), it dismissed the W8 dense table on one confounded capped run, and never tried forcing huge pages. Clean box (swap off, ARC capped to 2 GB, <code>/tmp</code> tmpfs cleared) + W8 + <code>MADV_COLLAPSE</code> → 2m44s. Project rule, committed: <strong>never claim "the floor" — reason through or around the wall; a floor conclusion is almost always a measurement artifact or an untried lever.</strong></p></div>
+<div class="layman"><p>At one point the project looked stuck: roughly 36 million positions per second, with 16×16 hovering near 3m41s, and that number got written down as "the wall." It was <strong>wrong</strong>. The benchmark had run on a machine whose memory was already clogged — a full compressed-RAM swap, a disk cache eating 13 GB — so the big table didn't fit and every timing was garbage. Cleaning the machine, adding the dense lookup table, and forcing the memory system onto large pages took 16×16 to <strong>2m44s</strong>. The takeaway became a standing rule: don't trust a "floor" until you've ruled out your own measurement.</p></div>
+<div class="engineer"><p>A "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s wall" was recorded — and was entirely an artifact. It came off a memory-degraded box (zram swap full, ZFS ARC eating ~13 GB, so the 17 GB TT OOM'd and runs were capped); it dismissed the W8 dense table on a single confounded capped run, and never tried forcing huge pages. On a clean box (swap off, ARC capped to 2 GB, <code>/tmp</code> tmpfs cleared) plus the W8 table plus <code>MADV_COLLAPSE</code>, the same solver finishes in 2m44s. The standing rule: <strong>treat any "floor" as a measurement artifact or an untried lever until proven otherwise — reason through the wall, not up to it.</strong></p></div>
 </div>
 </section>
 
@@ -555,7 +556,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 </ol>
 </div>
 <div class="engineer">
-<p>Three independent levers, each covered in its own section below. Per-node micro-optimizations wash out (~0–5%); the load-bearing levers are <strong>node-count</strong> and <strong>memory/representation/latency</strong>.</p>
+<p>Three independent levers, each covered in its own section below. Most per-node micro-optimizations wash out (~0–5%); the levers that move the wall are <strong>node-count</strong> and <strong>memory/representation/latency</strong>. (A handful of micro-opts <em>do</em> pull their weight — §11 collects them.)</p>
 <ol>
 <li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, component/nimber decomposition, the complete W8 table (never re-expand pc==8), the complete ≤7 tiny table. (§3–7.)</li>
 <li><strong>Represent nodes cheaper</strong> — 256-bit board as <code>[u64;4]</code>; the 8-byte TT slot with a 55-bit fingerprint; the in-band <code>TinyGraph</code> carried down so deep nodes never touch the 256-bit board. (§9.)</li>
@@ -658,7 +659,7 @@ fn pack(fp, val) -> Slot {
 
 <h3 id="seg">The segmented TT — the current frontier</h3>
 <div class="layman">
-<p>The newest idea: positions at the same stage of the game (same number of available squares) tend to be looked up close together in time. So instead of scattering them randomly across the whole 17 GB table, route each position into a <em>band</em> of the table reserved for its stage. Now the lookups happening right now all hit a small, nearby slice of the table that the processor can keep "warm" — without making the table any smaller. Crucially this is still perfectly correct, because a position's stage is fixed by the position itself.</p>
+<p>The newest idea: positions at the same stage of the game (same number of available squares) tend to be looked up close together in time. So instead of scattering them randomly across the whole 17 GB table, route each position into a <em>band</em> of the table reserved for its stage. The lookups happening at any moment then hit a small, nearby slice of the table that the processor can keep "warm," without making the table any smaller. This stays exactly correct, because a position's stage is fixed by the position itself — the same board always routes to the same band.</p>
 <div class="card"><p style="margin:0">The band sizes are not guesses — they're set from the <em>real measured distribution</em> of where lookups land. The chart below shows that distribution from an actual n=16 run.</p></div>
 </div>
 <div class="engineer">
@@ -671,17 +672,135 @@ fn pack(fp, val) -> Slot {
 <svg viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="n=16 flat-TT put distribution by available popcount">
   <g id="bandsChart"></g>
 </svg>
-<figcaption><strong>Where the lookups actually land (real n=16 run).</strong> Distribution of all 4.72 billion transposition-table writes by available-square count. A sharp hump peaks at <strong>pc=9 (19.3%)</strong>; ~96% of writes fall in pc 9–22; a faint secondary bump near pc 35–37; negligible tail beyond pc≈53. These exact per-popcount counts size the segmented-TT bands. <span class="lbl-sm">Source: <code>/tmp/bands16.txt</code>, written by <code>QUEENS_PC_HIST=1</code>.</span></figcaption>
+<figcaption><strong>Where the lookups actually land (real n=16 run).</strong> Distribution of all 4.72 billion transposition-table writes by available-square count. A sharp hump peaks at <strong>pc=9 (19.3%)</strong>; ~96% of writes fall in pc 9–22; a faint secondary bump near pc 35–37; negligible tail beyond pc≈53. These exact per-popcount counts size the segmented-TT bands. <span class="lbl-sm">Measured by tallying every table write by its available-square count during a full 16×16 solve.</span></figcaption>
 </figure>
 </section>
 
 <!-- ===================================================================== -->
+<section id="micro">
+<h2><span class="num">11</span>Micro-optimizations: the small, sharp wins</h2>
+<span class="sec-toggle" data-target="micro">flip this section</span>
+
+<div class="layman">
+<p>The big levers in this report — symmetry, graph shape, the lookup tables — are about doing <em>less work</em>. This section is about the opposite: the same work, done faster per step. In a search that mostly sits waiting for memory, most such tweaks change nothing you can measure. The job is finding the few that do. The trick is to ignore the stopwatch (the number of positions visited drifts run to run, so wall-clock is noisy) and instead watch two cleaner signals: how many machine instructions the processor needs per useful step, and how often it guesses a branch wrong and has to back up. A change that moves those moved something real. Here are the ones that did.</p>
+</div>
+<div class="engineer">
+<p>The search is memory-latency-bound, so a per-node arithmetic saving usually disappears into DRAM-stall noise. The optimizations below are the ones that survived a careful A/B. Two caveats on measuring them: (1) the node count varies run to run (eviction/scheduling), so wall-clock is the <em>noisiest</em> possible metric — the reliable signals are <strong>cycles-per-instruction</strong> and <strong>branch-miss rate</strong>, which are per-instruction ratios independent of how many nodes a run happens to walk; (2) benches are interleaved A/B (alternate the two binaries round by round), because this box thermally throttles ~1 s into a ~12 s n=14 solve, so all-A-then-all-B fabricates deltas. A change is kept only if it pulls its weight on those terms; the rest are reverted or recorded as negatives.</p>
+</div>
+
+<div class="keyidea">
+<span class="tag">The standout · branchless move filter</span>
+<div class="layman"><p>At every position the solver walks its parent's move list and keeps the moves that are still legal. "Still legal?" is a near coin-flip deep in the tree, and a coin-flip is the worst thing you can ask a processor to predict — it guesses, misses about half the time, and stalls unwinding the wrong guess. The fix removes the question. Each candidate move is written down <em>unconditionally</em>, and the running count is nudged forward by a 0-or-1 — no "if." Same output, no gamble. Branch mispredictions fell about <strong>34%</strong>, instructions-per-step about <strong>9%</strong>, for roughly a <strong>10% speedup</strong>.</p></div>
+<div class="engineer"><p>Compacting the parent's move list to those still set in the child's <code>avail</code> was an <code>if avail_has(sq) { buf[nc] = sq; nc += 1; }</code> — a ~50/50 data-dependent branch the predictor misses every other node. Rewritten branchless: write the square unconditionally, then <code>nc += avail_has8(avail, sq) as usize</code> — an unavailable square is simply overwritten next iteration. The output slice is byte-identical (so the searched node set is unchanged), trading the misprediction for one always-taken L1 store. Measured ~34% fewer branch-misses, ~9% lower CPI, ~10% faster — the largest single per-node win in the kernel.</p></div>
+</div>
+
+<div class="layman">
+<p>The rest, in brief — each a small, verified gain (or a structural choice that pays off many times over):</p>
+</div>
+<div class="engineer">
+<p>The remaining wins, with the mechanism and (where isolated) the measured effect:</p>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0;">
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">8-byte fingerprint slot</h4>
+<div class="layman"><p>Don't store the board — store a 55-bit fingerprint of it, the way a hash stands in for a document. A wrong match needs a different board to land in the same slot <em>and</em> match all 55 bits: about one chance in 36 quadrillion, and the final answer is cross-checked anyway. Each entry shrinks to 8 bytes.</p></div>
+<div class="engineer"><p>Each TT slot is one <code>u64</code> packing <code>{used:1, val:8, fp:55}</code>. The slot index already pins the routing bits; the 55-bit fingerprint comes from an <em>independent</em> hash half, so a foreign same-slot hit matches with probability ≈2⁻⁵⁵. Slot 40 B → 8 B = <strong>5× more entries per byte</strong>, with the available-mask key intact so every transposition still merges.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Hash-carry</h4>
+<div class="layman"><p>A position gets hashed once, when it's created, and that hash is reused for everything done to it: the look-ahead fetch, the lookup, and the later store. The old code re-hashed the same board three times.</p></div>
+<div class="engineer"><p><code>hash128(key)</code> yields two independent halves <code>(route, fp)</code> once per child at creation; the halves are threaded to the prefetch, the <code>get_h</code>, and the <code>put_h</code> instead of re-deriving them at each touch. Folds three hashes of a 256-bit key into one on the hot recursive path.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Software prefetch</h4>
+<div class="layman"><p>Before the solver actually needs a table slot, it tells the processor "go fetch this now." The slow trip out to RAM then happens in the background, overlapping with other work, instead of freezing the processor when the data is finally needed.</p></div>
+<div class="engineer"><p>Each child's slot is <code>_mm_prefetch</code>'d (hint T0) right after its key is hashed, before the recursive call. Because the search is random-probe-latency-bound (~120 ns/probe), issuing the prefetch ahead of the demand <code>get</code> overlaps the DRAM round-trip with the intervening work — memory-level parallelism on otherwise serial stalls.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Lockless atomic table</h4>
+<div class="layman"><p>Every core shares one table with no locks at all. It's safe because a board's answer never changes: if two cores compute and store the same board, they store the same value, and a different board is caught by its fingerprint. No lock means no waiting in line.</p></div>
+<div class="engineer"><p>One flat <code>Box&lt;[AtomicU64]&gt;</code>, relaxed load/store, no mutex, no sharding. Sound by construction: a position's value is deterministic, so a concurrent same-key write stores the same bits, and a different key is rejected by the fingerprint. Removes a lock/unlock and a mutex cache-line bounce from every node. (No Hyatt XOR-key needed — the fingerprint self-validates identity.)</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Thread-local counters</h4>
+<div class="layman"><p>Bumping a shared "positions searched" tally on every step would force the cores to keep handing one number back and forth. Instead each core counts on its own and reports in roughly once a second.</p></div>
+<div class="engineer"><p>The per-node node/HLL counter increments a thread-local integer, flushed to the shared atomic only every ~2¹⁸ nodes (≈1 s). A shared <code>fetch_add</code> per node bounces the cache line across the two core complexes over Infinity Fabric — measured a ~<strong>2× throughput drag</strong>. The shared totals are made exact again by a drain at search end.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Huge pages</h4>
+<div class="layman"><p>The processor keeps a tiny directory of where recently-used memory lives. A random-access table many gigabytes wide blows that directory out constantly. Forcing the table onto 2-megabyte pages makes each directory entry cover 500× more memory, so the lookups stop double-tripping.</p></div>
+<div class="engineer"><p>A random-probed multi-GB table thrashes the dTLB. <code>MADV_HUGEPAGE</code> alone only reaches ~73% 2 MB coverage on a randomly-faulted 17 GB table; <code>MADV_POPULATE_WRITE</code> + <code>MADV_COLLAPSE</code> forces 100% — a clean ~<strong>5% wall win</strong> with near-identical node counts (a genuine per-node TLB win). Default-on for tables ≥4 GB.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Compile-time flag folding</h4>
+<div class="layman"><p>Some switches are fixed for an entire run — which key scheme, whether a measurement counter is on. Rather than re-checking them at every step, they're baked into the code as constants when it's compiled, so the inner loop never even sees the question.</p></div>
+<div class="engineer"><p>Run-constant toggles (measurement mode, window flag, key mode) are resolved once into <code>const</code> generics at the subtree-handoff site, so the hot loop has no per-node branch on them — dead arms are compiled away. The single runtime decision picks the monomorphised instantiation once. This matters because the kernel is frontend/L1i-bound: a dead per-iteration branch would feed the predictor garbage and worsen the actual bottleneck.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Multiply-shift indexing</h4>
+<div class="layman"><p>Turning a hash into a table slot would normally use a remainder (division), which is slow and forces the table to be a power-of-two size. One widening multiply plus a shift does the same job and frees the table to be any size — so it can be sized to fill all the RAM available.</p></div>
+<div class="engineer"><p>Lemire's <code>fastrange</code>: <code>(((h as u128) * (len as u128)) &gt;&gt; 64)</code> maps a 64-bit hash uniformly into <code>[0, len)</code> with one widening multiply and a shift — no modulo, no power-of-two constraint. The table can be sized to any slot count, straddling the 17 GB→34 GB power-of-two gap on a 26 GB box. The extra multiply is free against the random-probe latency.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Carried orientations</h4>
+<div class="layman"><p>The canonical "smallest view" of a board needs all 8 rotations and flips. Recomputing them from scratch at every step is expensive. Instead the solver keeps all 8 views and updates them as it descends — one quick bit-clear per move per view.</p></div>
+<div class="engineer"><p>The 8 dihedral images of <code>available</code> are carried down the DFS and updated incrementally: placing a queen is one <code>and_not</code> against the move's attack mask in each orientation's frame (<code>child[t] = parent[t] &amp; !a[t]</code>). The key is the lex-min of the 8. Measured ~<strong>62 cycles/canon</strong> vs ~574 for the from-scratch scatter — a ~9× cheaper key.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Eviction-proof small tables</h4>
+<div class="layman"><p>Any position down to 8-or-fewer free squares is decided by a single lookup into a small table computed once at startup. Those answers can never be forgotten, so those whole sub-games are never searched twice — no matter how many different paths reach them.</p></div>
+<div class="engineer"><p>The ≤7 region lives in a complete labelled table (one direct byte load, no fingerprint), and the W8 solver adds a complete 32 MiB table for all 8-vertex Node-Kayles games. Both are eviction-free, so a small subgame is always a hit — never re-expanded out of the evicting flat TT. The W8 table alone cut node count ~<strong>28%</strong> (5.1 B vs 7.1 B).</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">In-band compact graph</h4>
+<div class="layman"><p>Once a position shrinks to a handful of squares, the solver stops touching the big 256-bit board entirely. It carries a tiny one-cache-line description and solves the whole little region inside a scratch memo that stays in the fastest cache — never reaching back out to main memory.</p></div>
+<div class="engineer"><p>At popcount ≤7 a one-cache-line <code>TinyGraph</code> (<code>[u8;8]×2</code>) is built once; descendants operate on a <code>u8</code> alive-mask (<code>alive &amp; !closed[i]</code>) instead of four-word board ops. The whole subtree is solved in a thread-private 128-byte stack memo indexed by the alive mask — pure L1, no flat-TT probe, no DRAM, no cross-core coherence.</p></div>
+</div>
+
+<div class="card" style="margin:0">
+<h4 style="margin-top:0">Serial early-out compare</h4>
+<div class="layman"><p>Finding the "smallest" of the 8 board views means comparing them. The solver compares word by word and stops at the first word that differs — which is almost always the very first one, so most comparisons end immediately. A fancier branch-free version was actually slower.</p></div>
+<div class="engineer"><p><code>lex_min8</code> folds the 8 images with a plain <code>if cand &lt; best</code>; the <code>Bits</code> comparison is lexicographic over four <code>u64</code> limbs and bails on the first differing limb. Most image pairs differ in word 0, so the compare exits after one limb — and this beat both a branchless <code>lex_lt</code> and a tree reduction in measurement.</p></div>
+</div>
+
+<div class="card" style="margin:0; grid-column:1 / -1;">
+<h4 style="margin-top:0">Uninitialized scratch buffers</h4>
+<div class="layman"><p>The move list is compacted into a small stack buffer. Zeroing a full board-width array first would cost more than the work it's helping — so the buffer is left uninitialized and only the entries actually written are ever read back.</p></div>
+<div class="engineer"><p>The move-compaction target is a <code>[MaybeUninit&lt;u8&gt;; MAXV]</code> on the stack — no n²-wide zero-init (which would cost more than the scan it serves). The filter writes exactly the surviving prefix and returns that as <code>&amp;[u8]</code>; <code>MaybeUninit&lt;u8&gt;</code> is layout-identical to <code>u8</code>, so reading back only the written prefix is sound.</p></div>
+</div>
+
+</div>
+
+<details class="formal">
+<summary>The formal version — the 2⁻⁵⁵ fingerprint bound and the multiply-shift map</summary>
+<div class="body">
+<p><strong>Fingerprint collisions.</strong> A wrong hit requires a foreign key \(k'\neq k\) to (i) route to the same slot and (ii) match the stored 55-bit fingerprint. Conditioned on a colliding probe, the fingerprint — an independent hash half — matches with probability \(p = 2^{-55}\). Over \(N\) colliding probes the expected wrong hits are \(N\cdot 2^{-55}\); at \(N\sim10^{11}\) (Jenrich scale) that is \(\approx 2.8\times10^{-6}\). A fingerprint <em>mismatch</em> is always a correct miss, so only a spurious match can mislead — and the global verdict is cross-checked against the known result.</p>
+<p><strong>Multiply-shift (Lemire).</strong> To map a uniform 64-bit hash \(h\) into \([0, \ell)\) without a modulo, take</p>
+<p style="text-align:center">\( \texttt{index}(h) \;=\; \Big\lfloor \dfrac{h \cdot \ell}{2^{64}} \Big\rfloor \;=\; \texttt{((h as u128) * (len as u128)) >> 64}. \)</p>
+<p>Reading \(h\) as a fraction \(h/2^{64}\in[0,1)\), this is \(\lfloor \ell\cdot(h/2^{64})\rfloor\) — the slot you'd get by scaling a uniform \([0,1)\) value into \([0,\ell)\). It is near-uniform for any \(\ell\) (the only deviation is the \(2^{-64}\)-scale rounding), so the table is freed from the power-of-two-size constraint that <code>h &amp; (len-1)</code> imposes, at the cost of one full-width multiply instead of an <code>and</code>.</p>
+</div>
+</details>
+</section>
+
+<!-- ===================================================================== -->
 <section id="numbers">
-<h2><span class="num">11</span>The numbers</h2>
+<h2><span class="num">12</span>The numbers</h2>
 <span class="sec-toggle" data-target="numbers">flip this section</span>
 
 <div class="layman">
-<p>Here is the headline result: how the time to solve the 16×16 board fell across solver generations. From nearly half an hour down to under three minutes — and the theoretical best-possible time for this approach is estimated at under a minute, so there's still room.</p>
+<p>Stack all those ideas together and here is what falls out: the time to solve the 16×16 board, generation by generation. From nearly half an hour down to under three minutes. The estimated best-possible time for this approach is under a minute, so there is still daylight ahead.</p>
 </div>
 <div class="engineer">
 <p>n=16 wall-clock across generations, on this box (Ryzen AI 9 HX 370, 12 cores, ~26 GB). All verdicts: <span class="win">second player wins</span>. Note that raw M/s and wall time diverge — higher node rate does not mean faster completion if it walks more nodes.</p>
@@ -720,7 +839,7 @@ fn pack(fp, val) -> Slot {
 
 <!-- ===================================================================== -->
 <section id="floor">
-<h2><span class="num">12</span>The floor, transpositions, and what is next</h2>
+<h2><span class="num">13</span>The floor, transpositions, and what is next</h2>
 <span class="sec-toggle" data-target="floor">flip this section</span>
 
 <div class="layman">
@@ -759,7 +878,7 @@ fn pack(fp, val) -> Slot {
 </section>
 
 <div class="footer">
-<p>Generated from the source and notes of the <code>othello/rust</code> Queens solver. All performance and combinatorial numbers are measured (n≤16) or extrapolated (n=18) as noted; nothing here was invented. Math rendered with MathJax. Diagrams and charts are inline SVG drawn from the real data (<code>/tmp/bands16.txt</code>, the handoff measurements, the HyperLogLog distinct counts).</p>
+<p>Generated from the source of the Non-Attacking Queens solver. All performance and combinatorial numbers are measured (n≤16) or extrapolated (n=18) as noted; nothing here was invented. Math rendered with MathJax. Diagrams and charts are inline SVG drawn from the real measurements — the recorded transposition-table write distribution, the HyperLogLog distinct counts, and the per-generation wall-clock timings.</p>
 <p>Primary references: Noon &amp; Van Brummelen, <em>The Non-Attacking Queens Game</em> (2006); Jenrich, arXiv:1312.5135 (2014); OEIS <a href="https://oeis.org/A344227">A344227</a>; Schaefer (1978, PSPACE-completeness of Node Kayles); Dillinger et&nbsp;al. (BuRR, 2022); Lemire (fastrange); Korf (external-memory DDD, 2008).</p>
 <p style="color:var(--fg-faint)">Tip: your reading-level choice is remembered in this browser. Use the switch up top, or the per-section "flip this section" links.</p>
 </div>
@@ -943,7 +1062,7 @@ var COL = {
   });
 })();
 
-/* ============================ transposition figure (§12) ========= */
+/* ============================ transposition figure (§13) ========= */
 (function(){
   var root = document.getElementById('transFigure');
   function tile(g, x, y, label, col){
@@ -1067,7 +1186,7 @@ var COL = {
   add(g,'text',{x:x1-6,y:y1+6,'text-anchor':'end',class:'lbl-sm'},'pc 9–22 = 95.6% of all writes');
 })();
 
-/* ============================ wall chart (§11) =================== */
+/* ============================ wall chart (§12) =================== */
 (function(){
   var g = document.getElementById('wallChart');
   // (label, seconds)
