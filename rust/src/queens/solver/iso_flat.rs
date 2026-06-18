@@ -31,8 +31,19 @@
 //! search structure here is independent of it.
 
 use super::*;
+use crate::queens::graph::CompSet;
 use rayon::prelude::*;
+use std::cell::RefCell;
 use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+
+thread_local! {
+    /// Per-thread, depth-indexed arena of component decompositions for the incremental
+    /// carry (graph-key analog of the D4 kernel's 8-orientation carry). A sequential
+    /// subtree runs single-threaded with proper stack nesting, so depth `d` owns slot `d`
+    /// with no aliasing across rayon workers (each has its own). Game depth ≤ n, so this is
+    /// a handful of slots; grown on demand.
+    static CARRY: RefCell<Vec<Box<CompSet>>> = const { RefCell::new(Vec::new()) };
+}
 
 /// **IsoFlat** -- single pure-iso key over the flat lockless [`QueensTt`].
 pub struct IsoFlat {
@@ -82,28 +93,67 @@ impl IsoFlat {
         graph_bits(h)
     }
 
-    /// Sequential cutoff search of `avail` (its iso key in hand). The twin of
-    /// [`Fused::wins_inc`](super::Fused), but carrying only the `available` mask
-    /// (`avail.and_not(attack[sq])` is the child's available) -- no orientation array.
-    fn wins_inc(&self, q: &Queens, avail: Bits, key: Bits) -> bool {
+    /// Sequential cutoff search entry: borrows the per-thread carry arena, fresh-decomposes
+    /// `avail` into level 0, then runs the carrying recursion. `key` is the node's iso key
+    /// (already in hand from the caller; `iso_decompose` rebuilds the byte-identical value
+    /// as a side effect of filling level 0's decomposition).
+    fn wins_seq(&self, q: &Queens, avail: Bits, key: Bits) -> bool {
+        CARRY.with(|cell| {
+            let mut arena = cell.borrow_mut();
+            Self::ensure_level(&mut arena, 0);
+            q.iso_decompose(avail, &mut arena[0]);
+            self.wins_carry(q, avail, &mut arena, 0, key)
+        })
+    }
+
+    /// Grow the carry arena so slot `level` exists (cheap; game depth ≤ n).
+    #[inline]
+    fn ensure_level(arena: &mut Vec<Box<CompSet>>, level: usize) {
+        while arena.len() <= level {
+            arena.push(CompSet::new());
+        }
+    }
+
+    /// Carrying sequential cutoff search. `arena[level]` holds `avail`'s component
+    /// decomposition; each child reuses it via [`Queens::iso_carry`], re-canon-ing only the
+    /// components its move disturbs. The combined key is byte-identical to a from-scratch
+    /// `node_key`, so the merge (and verdict) is unchanged.
+    fn wins_carry(
+        &self,
+        q: &Queens,
+        avail: Bits,
+        arena: &mut Vec<Box<CompSet>>,
+        level: usize,
+        key: Bits,
+    ) -> bool {
         if let Some(w) = self.tt.get(key) {
             return w != 0;
         }
         self.tt.bump();
+        Self::ensure_level(arena, level + 1);
         let mut result = false;
         for &sq in &q.order {
             if !avail.get(sq) {
                 continue;
             }
-            let child = avail.and_not(q.attack[sq as usize]);
+            let att = q.attack[sq as usize];
+            let child = avail.and_not(att);
             if child == Bits::ZERO {
                 // The opponent has no reply → this move wins immediately.
                 result = true;
                 break;
             }
-            let ckey = self.node_key(q, child);
+            let removed = avail.and(att);
+            // Build the child's decomposition from this node's (carry the untouched
+            // components, re-canon only the disturbed region). The split scopes the
+            // parent/child borrows so `arena` is free to thread into the recursion.
+            let ck = {
+                let (head, tail) = arena.split_at_mut(level + 1);
+                q.iso_carry(&head[level], removed, &mut tail[0])
+            };
+            let ckey = graph_bits(ck);
             self.tt.prefetch(ckey);
-            if !self.wins_inc(q, child, ckey) {
+            if !self.wins_carry(q, child, arena, level + 1, ckey) {
                 result = true;
                 break;
             }
@@ -122,7 +172,7 @@ impl IsoFlat {
             return w != 0;
         }
         if depth >= self.par_depth && avail.popcount() <= min_avail {
-            return self.wins_inc(q, avail, key);
+            return self.wins_seq(q, avail, key);
         }
         self.tt.bump();
         let mut moves: [u32; MAXV] = [0; MAXV];
@@ -161,7 +211,7 @@ impl Solver for IsoFlat {
     fn wins(&self, q: &Queens, blocked: Bits) -> bool {
         let avail = q.board.and_not(blocked);
         let key = self.node_key(q, avail);
-        self.wins_inc(q, avail, key)
+        self.wins_seq(q, avail, key)
     }
     fn first_player_wins(&self, q: &Queens) -> bool {
         if q.is_odd() {

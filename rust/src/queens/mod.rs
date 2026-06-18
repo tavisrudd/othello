@@ -69,7 +69,7 @@ pub(crate) use tt::PnTt;
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::queens::graph::{tiny_comp_key, IsoScratch, TINY_MAX};
+    use crate::queens::graph::{tiny_comp_key, CompSet, IsoScratch, TINY_MAX};
     use crate::queens::tt::{Slot, TT_HEADER_LEN};
     use std::collections::HashMap;
     use std::io;
@@ -528,6 +528,56 @@ mod tests {
         for (k, &c) in counts.iter().enumerate().skip(1) {
             assert!(c > 0, "corpus saw no size-{k} components");
         }
+    }
+
+    /// The incremental component carry ([`Queens::iso_carry`]) and the from-scratch
+    /// decompose ([`Queens::iso_decompose`]) must both produce the **byte-identical** key
+    /// of [`Queens::iso_key_fast`]: a child built by reusing the parent's untouched
+    /// components and re-decomposing only the disturbed region is the same partition, so
+    /// the TT merges identically (a divergence would silently split or merge transpositions
+    /// at large n where no exact gate runs). A DFS over the n=8 game tree exercises real
+    /// parent→child carries at every depth.
+    #[test]
+    fn iso_carry_matches_from_scratch() {
+        fn dfs(q: &Queens, avail: Bits, parent: &CompSet, depth: u32, checked: &mut u64) {
+            if depth == 0 || *checked > 300_000 {
+                return;
+            }
+            for sq in 0..q.n * q.n {
+                if !avail.get(sq) {
+                    continue;
+                }
+                let child_avail = avail.and_not(q.attack[sq as usize]);
+                if child_avail == Bits::ZERO {
+                    continue;
+                }
+                let removed = avail.and(q.attack[sq as usize]);
+                let mut child = CompSet::new();
+                let kc = q.iso_carry(parent, removed, &mut child);
+                assert_eq!(kc, q.iso_key_fast(child_avail), "carry != iso_key_fast");
+                let mut fresh = CompSet::new();
+                assert_eq!(
+                    q.iso_decompose(child_avail, &mut fresh),
+                    kc,
+                    "decompose != carry"
+                );
+                *checked += 1;
+                dfs(q, child_avail, &child, depth - 1, checked);
+            }
+        }
+        let q = Queens::new(8);
+        let mut root = CompSet::new();
+        assert_eq!(
+            q.iso_decompose(q.board, &mut root),
+            q.iso_key_fast(q.board),
+            "iso_decompose != iso_key_fast at root"
+        );
+        let mut checked = 0u64;
+        dfs(&q, q.board, &root, q.n, &mut checked);
+        assert!(
+            checked > 1000,
+            "carry test exercised too few positions: {checked}"
+        );
     }
 
     #[test]
