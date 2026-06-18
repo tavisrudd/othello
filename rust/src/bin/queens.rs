@@ -339,7 +339,7 @@ fn main() {
 /// "full"; what differs is the technique and the parallelism. Order matches
 /// `SOLVER_NAMES`.
 fn list_engines() {
-    const INFO: [(&str, &str, &str); 11] = [
+    const INFO: [(&str, &str, &str); 12] = [
         (
             "naive",
             "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
@@ -383,6 +383,11 @@ fn list_engines() {
         (
             "iso-flat",
             "single pure-iso key over a flat lockless TT (no segment walk) — sustained throughput, eviction-free by fitting the merged set",
+            "root-parallel (YBW)",
+        ),
+        (
+            "iso-window",
+            "iso-flat plus a dense labelled W8 table: 8-vertex tails are implicit-keyed by edge-code instead of searched through the flat TT",
             "root-parallel (YBW)",
         ),
         (

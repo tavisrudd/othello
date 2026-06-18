@@ -43,6 +43,7 @@ const MAXV: usize = (MAX_N * MAX_N) as usize;
 
 mod bits;
 mod count;
+mod dense;
 mod geom;
 mod graph;
 mod solver;
@@ -63,6 +64,7 @@ pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
 // sibling modules and the tests via `use super::*` / `use crate::queens::*`.
 pub(crate) use bits::single;
 pub(crate) use count::Counter;
+pub(crate) use dense::DenseW8;
 pub(crate) use graph::mix64;
 pub(crate) use tt::PnTt;
 
@@ -157,6 +159,19 @@ mod tests {
                 Pn::new(16).first_player_wins(&q),
                 Naive::new().first_player_wins(&q),
                 "pn n={n}"
+            );
+        }
+    }
+
+    #[test]
+    fn iso_window_agrees_on_small_even_boards() {
+        for n in [8u32, 10] {
+            let q = Queens::new(n);
+            let truth = Naive::new().first_player_wins(&q);
+            assert_eq!(
+                IsoFlat::new_window(16).first_player_wins(&q),
+                truth,
+                "iso-window n={n}"
             );
         }
     }

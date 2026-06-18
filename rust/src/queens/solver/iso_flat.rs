@@ -32,6 +32,10 @@ use std::sync::atomic::{AtomicU32, AtomicU64, AtomicU8, Ordering};
 use std::sync::OnceLock;
 
 const ORACLE_FLUSH: u64 = 1 << 14;
+const W9_CODE_BITS: u32 = 36;
+const W9_CODE_MASK: u64 = (1u64 << W9_CODE_BITS) - 1;
+const W9_USED: u64 = 1u64 << 63;
+const W9_VALUE: u64 = 1u64 << 62;
 
 #[derive(Default)]
 struct OracleAcc {
@@ -68,6 +72,45 @@ thread_local! {
 struct TinyGraph {
     adj: [u8; MAXV_TINY],
     closed: [u8; MAXV_TINY],
+}
+
+struct W9Cache {
+    slots: Box<[AtomicU64]>,
+    mask: usize,
+}
+
+impl W9Cache {
+    fn new(bits: u32) -> Self {
+        let bits = bits.clamp(10, 30);
+        let size = 1usize << bits;
+        W9Cache {
+            slots: (0..size).map(|_| AtomicU64::new(0)).collect(),
+            mask: size - 1,
+        }
+    }
+
+    #[inline]
+    fn index(&self, code: u64) -> usize {
+        mix64(code ^ 0x5739_0009_CACE_0001) as usize & self.mask
+    }
+
+    #[inline]
+    fn get(&self, code: u64) -> Option<bool> {
+        debug_assert!(code <= W9_CODE_MASK);
+        let raw = self.slots[self.index(code)].load(Ordering::Relaxed);
+        (raw & W9_USED != 0 && raw & W9_CODE_MASK == code).then_some(raw & W9_VALUE != 0)
+    }
+
+    #[inline]
+    fn put(&self, code: u64, value: bool) {
+        debug_assert!(code <= W9_CODE_MASK);
+        let raw = W9_USED | (u64::from(value) << 62) | code;
+        self.slots[self.index(code)].store(raw, Ordering::Relaxed);
+    }
+
+    fn bytes(&self) -> u64 {
+        (self.slots.len() * std::mem::size_of::<AtomicU64>()) as u64
+    }
 }
 
 /// Local-vertex capacity for [`TinyGraph`] — the tiny-canon band tops out at 7, padded
@@ -150,6 +193,7 @@ fn comp_nimber_bits(h: u64) -> Bits {
 
 /// **IsoFlat** -- the A3 DFS-resident kernel + flat lockless TT + single selective iso/D4 key.
 pub struct IsoFlat {
+    name: &'static str,
     tt: QueensTt,
     att: OnceLock<Box<[[Bits; 8]]>>,
     order8: OnceLock<Box<[u8]>>,
@@ -168,6 +212,8 @@ pub struct IsoFlat {
     /// collision recomputes inflate the node count and *slow* completion, so the collision-
     /// free direct table wins.) Shared lock-free: a position's value is fixed.
     tiny_tt: Box<[AtomicU8]>,
+    dense8: Option<DenseW8>,
+    w9_cache: Option<W9Cache>,
     tiny_canon: &'static [u64],
     par_depth: u32,
     par_min_avail: Option<u32>,
@@ -189,11 +235,17 @@ pub struct IsoFlat {
     oracle_hits: AtomicU64,
     oracle_comp_hits: AtomicU64,
     oracle_comp_misses: AtomicU64,
+    w9_hits: AtomicU64,
+    w9_misses: AtomicU64,
 }
 
 impl IsoFlat {
     pub fn new(bits: u32) -> Self {
         Self::from_tt(QueensTt::new(bits))
+    }
+
+    pub fn new_window(bits: u32) -> Self {
+        Self::from_tt_with_window(QueensTt::new(bits), true)
     }
 
     /// As [`IsoFlat::new`], but counting the distinct (tagged iso/D4) keys visited
@@ -204,13 +256,24 @@ impl IsoFlat {
     }
 
     fn from_tt(tt: QueensTt) -> Self {
+        Self::from_tt_with_window(tt, false)
+    }
+
+    fn from_tt_with_window(tt: QueensTt, window: bool) -> Self {
         let counting = tt.is_counting();
         IsoFlat {
+            name: if window { "iso-window" } else { "iso-flat" },
             tt,
             att: OnceLock::new(),
             order8: OnceLock::new(),
             order_rank: OnceLock::new(),
             tiny_tt: (0..TINY_TABLE_SLOTS).map(|_| AtomicU8::new(0)).collect(),
+            dense8: window.then(DenseW8::build),
+            w9_cache: window
+                .then(|| std::env::var("QUEENS_W9_CACHE_BITS").ok())
+                .flatten()
+                .and_then(|s| s.parse::<u32>().ok())
+                .map(W9Cache::new),
             tiny_canon: small_canon_table(),
             par_depth: par_depth(),
             par_min_avail: par_min_avail_override(),
@@ -227,7 +290,56 @@ impl IsoFlat {
             oracle_hits: AtomicU64::new(0),
             oracle_comp_hits: AtomicU64::new(0),
             oracle_comp_misses: AtomicU64::new(0),
+            w9_hits: AtomicU64::new(0),
+            w9_misses: AtomicU64::new(0),
         }
+    }
+
+    #[inline]
+    fn dense_window_get(&self, att: &[[Bits; 8]], avail: Bits, pc: u32) -> Option<bool> {
+        let dense8 = self.dense8.as_ref()?;
+        debug_assert!((8..=9).contains(&pc));
+        let k = pc as usize;
+        let mut verts = [0u8; 9];
+        let mut n = 0usize;
+        avail.each(|v| {
+            debug_assert!(n < k);
+            verts[n] = v as u8;
+            n += 1;
+        });
+        debug_assert_eq!(n, k);
+        let mut adj = [0u16; 9];
+        let mut closed = [0u16; 9];
+        for i in 0..k {
+            let row = att08(att, verts[i]);
+            let mut c = 0u16;
+            for (j, &vj) in verts.iter().enumerate().take(k) {
+                c |= (row.get(vj as u32) as u16) << j;
+            }
+            closed[i] = c;
+            adj[i] = c & !(1u16 << i);
+        }
+        if k == 9 {
+            let mut code = 0u64;
+            let mut bit = 0u32;
+            for (i, &ai) in adj.iter().enumerate().take(9) {
+                for j in (i + 1)..9 {
+                    code |= (((ai >> j) & 1) as u64) << bit;
+                    bit += 1;
+                }
+            }
+            if let Some(cache) = &self.w9_cache {
+                if let Some(w) = cache.get(code) {
+                    self.w9_hits.fetch_add(1, Ordering::Relaxed);
+                    return Some(w);
+                }
+                let w = dense8.eval(k, &adj, &closed);
+                cache.put(code, w);
+                self.w9_misses.fetch_add(1, Ordering::Relaxed);
+                return Some(w);
+            }
+        }
+        Some(dense8.eval(k, &adj, &closed))
     }
 
     #[inline]
@@ -518,7 +630,21 @@ impl IsoFlat {
                 // game (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count
                 // region. Children inherit this node's `moves` as their parent list.
                 let pc = child0.popcount();
-                let lost = if !ORACLE && pc <= 7 {
+                let lost = if !ORACLE && !COUNT && (pc == 8 || (pc == 9 && self.w9_cache.is_some()))
+                {
+                    self.dense_window_get(att, child0, pc).map_or_else(
+                        || {
+                            let child = child_orient(orient, a, child0);
+                            let ckey = d4_bits(lex_min8(&child));
+                            let (cr, cf) = QueensTt::hash128(ckey);
+                            self.tt.prefetch_h(cr);
+                            !self.wins_inc::<ORACLE, COUNT, false>(
+                                q, att, &child, ckey, cr, cf, moves, nodes,
+                            )
+                        },
+                        |w| !w,
+                    )
+                } else if !ORACLE && pc <= 7 {
                     !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
                 } else if pc <= self.iso_max_avail {
                     let ckey = self.iso_node_key(q, child0, pc);
@@ -559,7 +685,20 @@ impl IsoFlat {
             // (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count region.
             // Children inherit this node's `moves` as their parent list (a `q.order` subseq).
             let pc = child0.popcount();
-            let lost = if !ORACLE && pc <= 7 {
+            let lost = if !ORACLE && !COUNT && (pc == 8 || (pc == 9 && self.w9_cache.is_some())) {
+                self.dense_window_get(att, child0, pc).map_or_else(
+                    || {
+                        let child = child_orient(orient, a, child0);
+                        let ckey = d4_bits(lex_min8(&child));
+                        let (cr, cf) = QueensTt::hash128(ckey);
+                        self.tt.prefetch_h(cr);
+                        !self.wins_inc::<ORACLE, COUNT, true>(
+                            q, att, &child, ckey, cr, cf, pmoves, nodes,
+                        )
+                    },
+                    |w| !w,
+                )
+            } else if !ORACLE && pc <= 7 {
                 !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
             } else if pc <= self.iso_max_avail {
                 let ckey = self.iso_node_key(q, child0, pc);
@@ -959,7 +1098,7 @@ impl IsoFlat {
 
 impl Solver for IsoFlat {
     fn name(&self) -> &'static str {
-        "iso-flat"
+        self.name
     }
     fn wins(&self, q: &Queens, blocked: Bits) -> bool {
         let att = self.att(q);
@@ -1094,8 +1233,31 @@ impl Solver for IsoFlat {
         } else {
             String::new()
         };
+        let dense = self
+            .dense8
+            .as_ref()
+            .map(|d| format!(", W8 {:.0} MB", d.bytes() as f64 / (1 << 20) as f64))
+            .unwrap_or_default();
+        let w9 = self
+            .w9_cache
+            .as_ref()
+            .map(|c| {
+                let hits = self.w9_hits.load(Ordering::Relaxed);
+                let misses = self.w9_misses.load(Ordering::Relaxed);
+                let total = hits + misses;
+                let hit_pct = if total == 0 {
+                    0.0
+                } else {
+                    100.0 * hits as f64 / total as f64
+                };
+                format!(
+                    ", W9-cache {:.0} MB {hits}/{total} ({hit_pct:.1}%)",
+                    c.bytes() as f64 / (1 << 20) as f64
+                )
+            })
+            .unwrap_or_default();
         format!(
-            "{} rayon workers, {done}/{total} root moves, par-depth {}/min-avail {ma}, iso<= {} · {}",
+            "{} rayon workers, {done}/{total} root moves, par-depth {}/min-avail {ma}, iso<= {}{dense}{w9} · {}",
             rayon::current_num_threads(),
             self.par_depth,
             self.iso_max_avail,
