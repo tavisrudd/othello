@@ -75,10 +75,14 @@ CLAUDE.md rule or a validation gate.
   `~/.claude/bin/run-quiet "make …"`.
 - **A change is not done until its validation gate passes:**
   - **Queens:** `solver_lineage_agrees` (every solver matches the memo-less `naive`
-    verdict on n≤9) **and** a fresh `queens solve 12 --distinct` (second-player win,
-    exact distinct **1,060,823**, re-exp ≈ 1.0×) + `solve 14 --distinct` (second,
-    ≈49.3M, re-exp ≈ 1.0×). A distinct-count change = lost transposition merges; a
-    re-exp jump = under-sized table. TT/key changes must hold both.
+    verdict on n≤9) **and** a fresh `queens solve 12 iso-flat --distinct` (second-player
+    win, exact distinct **1,060,823**) + `solve 14 iso-flat --distinct` (second, ≈49.3M,
+    re-exp ≈ 1.0×). **Name `iso-flat` explicitly** — the default solver is now `iso-window`,
+    which has no `--distinct` counter (its W8 table collapses pc==8 subtrees so its node
+    count isn't comparable to the distinct set). A distinct-count change = lost
+    transposition merges; a re-exp jump = under-sized table. TT/key changes must hold both.
+    (n=12's re-exp is ~1.25× on the current branch — the deliberate labelled-≤7-key trade,
+    not a regression; the invariant is the *exact* distinct count and n=14's ≈1.0×.)
   - **Othello:** the cross-engine value-equivalence tests (minimax / alphabeta /
     ordered / strong compute identical black-centred values) + the independent grid
     move/flip reference + the exact endgame solves (6 / −40 / 4). `strong+` /

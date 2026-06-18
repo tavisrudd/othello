@@ -144,7 +144,9 @@ impl Bloom {
         let blocks = (bytes / 64).max(1) as u64;
         // Hugepage-backed, presized once: the prefilter is read on every node miss and is
         // multi-GB, so 4 KB pages would thrash the TLB. `zeroed_huge_atomics` advises
-        // `MADV_HUGEPAGE` and commits lazily (the words zero-fill on first touch).
+        // `MADV_HUGEPAGE`; note it now *eager-commits* and `MADV_COLLAPSE`s allocations
+        // ≥ 4 GB up front (default-on, `QUEENS_TT_COLLAPSE` overrides), so a Bloom that
+        // large is committed at construction rather than lazily on first touch.
         Bloom {
             words: crate::queens::tt::zeroed_huge_atomics((blocks * 8) as usize),
             blocks,
