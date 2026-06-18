@@ -520,3 +520,18 @@ So the session win is genuine on BOTH axes: **+15% raw M/s AND +10.6% faster n=1
 hash-collision 63.5 M/s was the only "higher number" that regressed completion; this one is real.
 Final genuine n=16 rate **36.25 M/s**; the 50 target is unreachable as a genuine rate (>7 DRAM wall,
 every per-node lever measured). Recommend merging `queens-iso-local-memo`.
+
+## Cross-CCX coherence — quantified, and why partitioning doesn't win (closing the user's suggestion)
+
+Per-CCX vs both, n=16, win binary: Zen5-only (8c) 16.25 + Zen5c-only (16c) 23.97 = **40.22 sum** vs
+**both-CCX 35.03** (one shared TT). So the shared TT pays a **~13% cross-CCX coherence penalty**
+(lines written by one CCX, read by the other, evicted from the 12 MB-per-CCX L3 and re-fetched
+cross-fabric). Real — but **not capturable genuinely**: removing it means partitioning the work per
+CCX with *separate* TTs, which drops cross-CCX transposition sharing (~42% cross-root, floor doc) and
+re-searches it — >13% extra work, so net slower completion (metric-inflation, like the hash trap). A
+read-only BuRR freeze would dodge the coherence (shared, never re-written) but its multi-line cascade
+query costs more than the 13% it saves (the documented `fused` decay). So even this lever lands on the
+same wall.
+
+**Every lever — including both of the user's specific suggestions (MLP/outstanding-probes and CCX
+partitioning) — is now measured.** Genuine n=16 rate ~35–36 M/s; 50 is unreachable as a genuine rate.
