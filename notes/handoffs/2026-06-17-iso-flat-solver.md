@@ -8,6 +8,95 @@ on all cores**, plus **iso-burr's fewer-nodes merge** — pushing toward the
 
 ---
 
+## ✅ Session 2026-06-18--6 (this commit) — serial prove-a-win hot-loop cuts, oracle reviewed
+
+User asked to review recent commits, test the parked oracle, profile short n=16 runs with perf
+counters, monomorphize the oracle toggle, fix review findings, then keep squeezing the serial
+prove-a-win path. Done.
+
+### Correctness / review fixes
+- **Oracle toggle monomorphized**: `wins_inc`, `wins_tiny`, and `par_wins_inc` now take
+  `const ORACLE: bool`; the env toggle dispatches once at the solver boundary, not per node.
+- **Oracle `K=8` footgun fixed**: `QUEENS_NIMBER_K` clamps to 7 until there is a real complete
+  k≥8 component key, avoiding the old `iso_key_tiny_table` panic path.
+- **Oracle component TT probes no longer pollute `--distinct`**: component nimbers use
+  `QueensTt::get_hashed/put_hashed` under a disjoint nimber namespace instead of the counting
+  `get/put`.
+- **Oracle stats added**: thread-local attempt/hit/component-cache counters, flushed to atomics and
+  printed only when `QUEENS_NIMBER_ORACLE=1`.
+
+### Oracle result (short-run negative)
+- `QUEENS_NIMBER_ORACLE=1 target/release/queens solve 14 iso-flat --distinct`: SECOND,
+  29,271,586 nodes in 2.22s, distinct ≈29,111,313, oracle `501739/29458732 (1.7%)`,
+  comp-cache `1100052/1228`.
+- Short n=16 perf stat with oracle enabled: ~323.7M nodes / 20.01s = **16.18 M/s**, vs default
+  ~402.4M / 20.08s = **20.04 M/s** in the adjacent run. Oracle remains **parked/off**.
+
+### k=8 direct-canon experiment (negative, parked behind `QUEENS_TINY8=1`)
+- Added an opt-in exact whole-graph 8-vertex key (`iso_key8_direct`) and a per-thread direct-mapped
+  labelled edge-code cache to test whether a dense k=8 table could pay.
+- Short n=16 runs:
+  - default `KEY_MAX=7`: ~19.7-20.0 M/s.
+  - `QUEENS_KEY_MAX=8` existing WL path: ~7.39 M/s.
+  - `QUEENS_KEY_MAX=8 QUEENS_TINY8=1` direct no cache: ~3.55 M/s.
+  - same with k8 cache: ~4.72 M/s.
+- Conclusion: do **not** build the k=8 direct path in this shape; labelled k=8 repetition is not
+  enough to amortise exact canon. The hook remains opt-in measurement code.
+
+### Serial prove-a-win profiling and landed micro-wins
+Perf record on short n=16 showed the serial path dominated by:
+`wins_inc` ~53%, `iso_key_tiny_table` ~25%, `QueensTt::get_h` ~14-15%, plus
+`core::array::try_from_fn` from `child_orient`.
+
+Landed changes:
+- **`child_orient` hand-written 8-lane update**: removed the generic array-constructor samples.
+- **Hot move filtering uses narrow unchecked helpers** (`avail_has`, `att_for`, `att0`) with debug
+  assertions and safety comments. This removed the old `sq < 256` and `nc < MAXV` panic checks from
+  the annotated `filter_moves` loop; LLVM now unrolls the scan.
+- **Tiny edge-code builder const-specialized for k=2..7** and uses direct word tests. The hot path
+  no longer pays iterator state and repeated checked attack-row indexing for the labelled edges.
+- **Tiny-canon table hoisted into `IsoFlat`**: hot iso-flat key calls use
+  `iso_key_tiny_table_pc(mask, pc, table)`, avoiding the per-node `OnceLock` check and a duplicate
+  popcount.
+- **Tiny k≤3 direct keys**: k=1 constant; k=2 labelled edge code is canonical; k=3 canonical code is
+  determined by edge count.
+- **Stack-local node accounting for sequential iso-flat recursion**: `QueensTt::bump_local` /
+  `flush_local_nodes` avoid per-node TLS/`RefCell` `tt.bump()` in the inner recursion while keeping
+  the existing flush cadence for progress.
+- **Prove-loss mode monomorphized**: `wins_inc<const ORACLE, const PROVE_LOSS>` and
+  `wins_tiny<const ORACLE, const PROVE_LOSS>`. Prove-loss nodes keep eager compaction because they
+  search all children; prove-win nodes lazily scan `pmoves` and skip full compaction when an early
+  child cuts off. The proof-mode branch is compile-time at the sequential recursion boundary.
+
+Short n=16 perf-counter checkpoints (phase-sensitive, use instructions/node more than wall):
+- Original default reference in this investigation: ~402.4M nodes / 20.08s, 1.099T instructions
+  ⇒ ~2.7k instr/node.
+- After bounds-check/tiny-key/child-orient cleanup: best short runs in the 436-501M nodes / 20s band,
+  ~1.8k instr/node.
+- After local node accounting + monomorphized prove mode: 453.8M nodes / 18.86s = **24.07 M/s**,
+  788.6B instructions ⇒ **~1.74k instr/node**; repeat 500.0M / 18.96s = **26.37 M/s**,
+  864.6B instructions ⇒ **~1.73k instr/node**.
+
+Validation green:
+- `cargo test solver_lineage_agrees -- --nocapture`
+- `QUEENS_NIMBER_ORACLE=1 QUEENS_NIMBER_K=8 cargo test solver_lineage_agrees -- --nocapture`
+- `make clippy`
+- `make test`
+
+### Next levers
+1. **Reprofile after this commit** on a non-lossy perf capture and annotate `wins_inc` /
+   `iso_key_tiny_table_pc`; current remaining top symbols are still those two plus TT random loads.
+2. **Measure lazy prove-win compaction on a full n=14/n=16 A/B**. It is instruction-positive in
+   short n=16, but it passes longer parent move lists into the following prove-loss node; keep it
+   only if full-run node count and wall stay favorable.
+3. **Consider a local-counter API for counting/HLL mode separately** only if `--distinct` profiling
+   matters. Production now avoids the TLS node counter in iso-flat sequential recursion, but counting
+   `get_h` still has the HLL hook by design.
+4. **Oracle remains off** until a non-redundant complete-key regime exists; current ≤7 oracle hits
+   too little and overlaps the selective iso merge.
+
+---
+
 ## ✅ Session 2026-06-17--5 (`21ce0a6`, `97ef7bd`) — per-node energy cuts: **n=14 −24.7% wall**, node set identical
 
 User goal shifted to **pushing iso-flat further**. Path: started on "better parallelism on the

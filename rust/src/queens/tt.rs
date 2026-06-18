@@ -360,6 +360,27 @@ impl QueensTt {
         });
     }
 
+    /// Count one searched node through a caller-owned local accumulator. This is for hot
+    /// sequential recursion that can carry a `u64` down the stack and avoid the per-node
+    /// thread-local `RefCell` access in [`Self::bump`]. It preserves progress reporting by
+    /// flushing to the shared counter at the same cadence.
+    #[inline]
+    pub(crate) fn bump_local(&self, nodes: &mut u64) {
+        *nodes += 1;
+        if *nodes >= FLUSH_NODES {
+            self.flush_local_nodes(nodes);
+        }
+    }
+
+    /// Flush a caller-owned local node accumulator into the shared counter.
+    #[inline]
+    pub(crate) fn flush_local_nodes(&self, nodes: &mut u64) {
+        if *nodes != 0 {
+            self.nodes.fetch_add(*nodes, Ordering::Relaxed);
+            *nodes = 0;
+        }
+    }
+
     /// Push a worker's local tally into the shared atomic + HLL and reset it. Called once
     /// per [`FLUSH_NODES`] nodes and at drain -- off the per-node path. (Caller holds the
     /// thread-local borrow.)

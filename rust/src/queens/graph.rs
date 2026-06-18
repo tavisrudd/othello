@@ -160,6 +160,45 @@ thread_local! {
         std::cell::RefCell::new(CompCache::new());
 }
 
+/// Experimental k=8 direct-canon cache. The direct exact canon is too expensive to
+/// run per key; this tests whether repeated labelled 8-vertex edge codes are common
+/// enough to make an eventual packed dense table worth building. Thread-local to keep
+/// the probe lock-free and off the shared-coherence path.
+const K8_CACHE_BITS: u32 = 18;
+
+struct K8CanonCache {
+    fp: Box<[u32]>,
+    val: Box<[u64]>,
+}
+
+impl K8CanonCache {
+    fn new() -> Self {
+        let n = 1usize << K8_CACHE_BITS;
+        K8CanonCache {
+            fp: vec![0u32; n].into_boxed_slice(),
+            val: vec![0u64; n].into_boxed_slice(),
+        }
+    }
+
+    #[inline]
+    fn get_or_insert(&mut self, code: u32) -> u64 {
+        let slot = (mix64(code as u64) >> (64 - K8_CACHE_BITS)) as usize;
+        let fp = code.wrapping_add(1);
+        if self.fp[slot] == fp {
+            return self.val[slot];
+        }
+        let v = small_key_from_code(8, code);
+        self.fp[slot] = fp;
+        self.val[slot] = v;
+        v
+    }
+}
+
+thread_local! {
+    static K8_CANON_CACHE: std::cell::RefCell<K8CanonCache> =
+        std::cell::RefCell::new(K8CanonCache::new());
+}
+
 /// Combine a node's per-component canon keys into the single graph-iso key: the
 /// **sorted multiset** hash. Sorting makes it order-independent (a multiset), so two
 /// available-graphs with the same component classes hash identically regardless of how
@@ -180,6 +219,7 @@ pub(crate) fn fold_comp_keys(keys: &mut [u64]) -> u64 {
 }
 
 const SMALL_CANON_MAX: usize = 7;
+const SMALL_WORK_MAX: usize = 8;
 const SMALL_CANON_OFF: [usize; SMALL_CANON_MAX + 2] = [
     0,       // k=0, 2^0
     1,       // k=1, 2^0
@@ -196,17 +236,14 @@ const SMALL_CANON_TAG: u64 = 0x71E7_1E55_7107_0007;
 
 static SMALL_CANON: OnceLock<Box<[u64]>> = OnceLock::new();
 
-fn small_canon_table() -> &'static [u64] {
+pub(crate) fn small_canon_table() -> &'static [u64] {
     SMALL_CANON
         .get_or_init(|| {
             let mut table = vec![0u64; SMALL_CANON_OFF[SMALL_CANON_MAX + 1]].into_boxed_slice();
             for k in 1..=SMALL_CANON_MAX {
                 let codes = 1usize << ((k * (k - 1)) / 2);
                 for code in 0..codes {
-                    let adj = adj_from_edge_code(k, code as u32);
-                    let canon = small_canon_code(k, &adj);
-                    let packed = ((k as u64) << 32) | canon as u64;
-                    table[SMALL_CANON_OFF[k] + code] = packed ^ SMALL_CANON_TAG;
+                    table[SMALL_CANON_OFF[k] + code] = small_key_from_code(k, code as u32);
                 }
             }
             table
@@ -424,8 +461,8 @@ fn canon6_key(attack: &[Bits], verts: &[u8]) -> u64 {
     mix64(packed ^ 0xC006_CAFE_6666_0006)
 }
 
-fn adj_from_edge_code(k: usize, code: u32) -> [u8; SMALL_CANON_MAX] {
-    let mut adj = [0u8; SMALL_CANON_MAX];
+fn adj_from_edge_code(k: usize, code: u32) -> [u8; SMALL_WORK_MAX] {
+    let mut adj = [0u8; SMALL_WORK_MAX];
     let mut bit = 0u32;
     for i in 0..k {
         for j in i + 1..k {
@@ -439,12 +476,12 @@ fn adj_from_edge_code(k: usize, code: u32) -> [u8; SMALL_CANON_MAX] {
     adj
 }
 
-fn small_vertex_sigs(k: usize, adj: &[u8]) -> [u32; SMALL_CANON_MAX] {
-    let mut deg = [0u8; SMALL_CANON_MAX];
+fn small_vertex_sigs(k: usize, adj: &[u8]) -> [u32; SMALL_WORK_MAX] {
+    let mut deg = [0u8; SMALL_WORK_MAX];
     for i in 0..k {
         deg[i] = adj[i].count_ones() as u8;
     }
-    let mut tri = [0u8; SMALL_CANON_MAX];
+    let mut tri = [0u8; SMALL_WORK_MAX];
     for a in 0..k {
         for b in a + 1..k {
             for c in b + 1..k {
@@ -459,10 +496,10 @@ fn small_vertex_sigs(k: usize, adj: &[u8]) -> [u32; SMALL_CANON_MAX] {
             }
         }
     }
-    let mut sig = [0u32; SMALL_CANON_MAX];
+    let mut sig = [0u32; SMALL_WORK_MAX];
     for i in 0..k {
         let mut nbr_deg = 0u8;
-        let mut nbr_deg_multiset = [0u8; SMALL_CANON_MAX];
+        let mut nbr_deg_multiset = [0u8; SMALL_WORK_MAX];
         for j in 0..k {
             if (adj[i] & (1u8 << j)) != 0 {
                 nbr_deg += deg[j];
@@ -480,7 +517,7 @@ fn small_vertex_sigs(k: usize, adj: &[u8]) -> [u32; SMALL_CANON_MAX] {
     sig
 }
 
-fn permuted_code(k: usize, adj: &[u8], perm: &[u8; SMALL_CANON_MAX]) -> u32 {
+fn permuted_code(k: usize, adj: &[u8], perm: &[u8; SMALL_WORK_MAX]) -> u32 {
     let mut code = 0u32;
     let mut bit = 0u32;
     for i in 0..k {
@@ -499,10 +536,10 @@ fn permuted_code(k: usize, adj: &[u8], perm: &[u8; SMALL_CANON_MAX]) -> u32 {
 fn small_canon_code_rec(
     k: usize,
     adj: &[u8],
-    candidates: &[u8; SMALL_CANON_MAX],
+    candidates: &[u8; SMALL_WORK_MAX],
     classes: &[(usize, usize)],
     class_idx: usize,
-    out: &mut [u8; SMALL_CANON_MAX],
+    out: &mut [u8; SMALL_WORK_MAX],
     best: &mut u32,
 ) {
     if class_idx == classes.len() {
@@ -516,13 +553,13 @@ fn small_canon_code_rec(
     fn fill_class(
         k: usize,
         adj: &[u8],
-        candidates: &[u8; SMALL_CANON_MAX],
+        candidates: &[u8; SMALL_WORK_MAX],
         classes: &[(usize, usize)],
         class_idx: usize,
         pos: usize,
         hi: usize,
         used: u8,
-        out: &mut [u8; SMALL_CANON_MAX],
+        out: &mut [u8; SMALL_WORK_MAX],
         best: &mut u32,
     ) {
         if pos == hi {
@@ -554,12 +591,12 @@ fn small_canon_code_rec(
 
 fn small_canon_code(k: usize, adj: &[u8]) -> u32 {
     let sig = small_vertex_sigs(k, adj);
-    let mut order = [0u8; SMALL_CANON_MAX];
+    let mut order = [0u8; SMALL_WORK_MAX];
     for (i, o) in order[..k].iter_mut().enumerate() {
         *o = i as u8;
     }
     order[..k].sort_unstable_by_key(|&v| sig[v as usize]);
-    let mut classes = [(0usize, 0usize); SMALL_CANON_MAX];
+    let mut classes = [(0usize, 0usize); SMALL_WORK_MAX];
     let mut nc = 0usize;
     let mut lo = 0usize;
     while lo < k {
@@ -571,10 +608,58 @@ fn small_canon_code(k: usize, adj: &[u8]) -> u32 {
         nc += 1;
         lo = hi;
     }
-    let mut out = [0u8; SMALL_CANON_MAX];
+    let mut out = [0u8; SMALL_WORK_MAX];
     let mut best = u32::MAX;
     small_canon_code_rec(k, adj, &order, &classes[..nc], 0, &mut out, &mut best);
     best
+}
+
+#[inline]
+fn small_key_from_code(k: usize, code: u32) -> u64 {
+    let canon = if code == 0 {
+        0
+    } else {
+        let all = if k >= 2 {
+            (1u32 << ((k * (k - 1)) / 2)) - 1
+        } else {
+            0
+        };
+        if code == all {
+            all
+        } else {
+            small_canon_code(k, &adj_from_edge_code(k, code))
+        }
+    };
+    (((k as u64) << 32) | canon as u64) ^ SMALL_CANON_TAG
+}
+
+#[inline(always)]
+fn edge_bit(row: Bits, v: u8) -> bool {
+    let v = v as usize;
+    (row.0[v >> 6] & (1u64 << (v & 63))) != 0
+}
+
+#[inline(always)]
+fn tiny_edge_code<const K: usize>(attack: &[Bits], verts: &[u8; SMALL_CANON_MAX]) -> u32 {
+    let mut code = 0u32;
+    let mut bit = 0u32;
+    let mut i = 0usize;
+    while i < K {
+        debug_assert!((verts[i] as usize) < attack.len());
+        // SAFETY: vertices are extracted from a board mask, and `attack` has one row per
+        // board square.
+        let row = unsafe { *attack.get_unchecked(verts[i] as usize) };
+        let mut j = i + 1;
+        while j < K {
+            if edge_bit(row, verts[j]) {
+                code |= 1u32 << bit;
+            }
+            bit += 1;
+            j += 1;
+        }
+        i += 1;
+    }
+    code
 }
 
 /// Direct canonical key of a *tiny* connected component (`k <= TINY_MAX`), bypassing
@@ -806,10 +891,27 @@ impl Queens {
     /// `iso-burr` uses this instead of component decomposition/WL for its default
     /// selective `iso<=7` path.
     pub(crate) fn iso_key_tiny_table(&self, mask: Bits) -> u64 {
-        let k = mask.popcount() as usize;
+        self.iso_key_tiny_table_in(mask, small_canon_table())
+    }
+
+    /// Hot-path variant of [`Self::iso_key_tiny_table`] for callers that already carry the
+    /// prebuilt tiny-canon table, avoiding the per-node [`OnceLock`] check.
+    #[inline]
+    pub(crate) fn iso_key_tiny_table_in(&self, mask: Bits, table: &[u64]) -> u64 {
+        self.iso_key_tiny_table_pc(mask, mask.popcount(), table)
+    }
+
+    /// Hot-path variant of [`Self::iso_key_tiny_table_in`] for callers that already computed
+    /// `mask.popcount()` while deciding whether the tiny key applies.
+    #[inline]
+    pub(crate) fn iso_key_tiny_table_pc(&self, mask: Bits, pc: u32, table: &[u64]) -> u64 {
+        let k = pc as usize;
         debug_assert!(k <= SMALL_CANON_MAX);
         if k == 0 {
             return 0;
+        }
+        if k == 1 {
+            return (1u64 << 32) ^ SMALL_CANON_TAG;
         }
         let mut verts = [0u8; SMALL_CANON_MAX];
         let mut n = 0usize;
@@ -822,19 +924,56 @@ impl Queens {
         // inverts). Queen attacks are mutual, so the `i<j` direction is the whole edge — this is
         // bit-identical to building the full adjacency then re-scanning the upper triangle, at
         // half the attack tests and no adj-array writes.
+        let code = match k {
+            2 => tiny_edge_code::<2>(&self.attack, &verts),
+            3 => tiny_edge_code::<3>(&self.attack, &verts),
+            4 => tiny_edge_code::<4>(&self.attack, &verts),
+            5 => tiny_edge_code::<5>(&self.attack, &verts),
+            6 => tiny_edge_code::<6>(&self.attack, &verts),
+            7 => tiny_edge_code::<7>(&self.attack, &verts),
+            _ => unreachable!(),
+        };
+        if k == 2 {
+            return ((2u64 << 32) | code as u64) ^ SMALL_CANON_TAG;
+        }
+        if k == 3 {
+            let canon = (1u64 << code.count_ones()) - 1;
+            return ((3u64 << 32) | canon) ^ SMALL_CANON_TAG;
+        }
+        let idx = SMALL_CANON_OFF[k] + code as usize;
+        debug_assert!(idx < table.len());
+        // SAFETY: `code` is a triangular edge code for exactly `k <= SMALL_CANON_MAX`
+        // vertices, so `idx` is within this table's `[SMALL_CANON_OFF[k], OFF[k+1])`.
+        unsafe { *table.get_unchecked(idx) }
+    }
+
+    /// Exact whole-graph canonical key for an 8-vertex available graph. This is the
+    /// measurement/prototype twin of [`Self::iso_key_tiny_table`]: same edge-code canon,
+    /// but computed on demand so we can test the k=8 payoff without allocating a large
+    /// dense table or paying its startup build.
+    pub(crate) fn iso_key8_direct(&self, mask: Bits) -> u64 {
+        debug_assert_eq!(mask.popcount(), 8);
+        let mut verts = [0u8; SMALL_WORK_MAX];
+        let mut n = 0usize;
+        mask.each(|v| {
+            verts[n] = v as u8;
+            n += 1;
+        });
         let mut code = 0u32;
         let mut bit = 0u32;
-        for i in 0..k {
+        for i in 0..8 {
             let vi = verts[i] as usize;
-            for &vj in verts.iter().take(k).skip(i + 1) {
-                if self.attack[vi].get(vj as u32) {
+            debug_assert!(vi < self.attack.len());
+            // SAFETY: `verts` was extracted from `mask`, which only contains board squares.
+            let row = unsafe { *self.attack.get_unchecked(vi) };
+            for &vj in verts.iter().skip(i + 1) {
+                if edge_bit(row, vj) {
                     code |= 1u32 << bit;
                 }
                 bit += 1;
             }
         }
-        let idx = SMALL_CANON_OFF[k] + code as usize;
-        small_canon_table()[idx]
+        K8_CANON_CACHE.with(|c| c.borrow_mut().get_or_insert(code))
     }
 
     /// Measurement entry for `count --comps`: run the *same* graph-key decomposition the

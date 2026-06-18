@@ -74,13 +74,16 @@ pub(crate) fn build_att(q: &Queens) -> Box<[[Bits; 8]]> {
 /// with the `burr` solver, which reuses the exact A3 key path.
 #[inline]
 pub(crate) fn child_orient(parent: &[Bits; 8], a: &[Bits; 8], child0: Bits) -> [Bits; 8] {
-    std::array::from_fn(|t| {
-        if t == 0 {
-            child0
-        } else {
-            parent[t].and_not(a[t])
-        }
-    })
+    [
+        child0,
+        parent[1].and_not(a[1]),
+        parent[2].and_not(a[2]),
+        parent[3].and_not(a[3]),
+        parent[4].and_not(a[4]),
+        parent[5].and_not(a[5]),
+        parent[6].and_not(a[6]),
+        parent[7].and_not(a[7]),
+    ]
 }
 
 /// **Incremental** -- the A3 DFS-resident solver. See the module docs.
