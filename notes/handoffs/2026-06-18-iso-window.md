@@ -173,7 +173,11 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
 - [x] Profile-guided micro-opt **round 1: branchless move-availability filter** — **−34% branch-misses, −9.4% CPI (~−10% cycles)**, gate-safe (see below). Bigger than the seg lever.
 - [x] **Combined ship A/B (n=16, micro-opt binary, interleaved):** seg+branchless **34.3 M/s** vs flat+branchless 33.3 vs original-flat 29.6 ⇒ **micro-opt +12.5%, seg +3% on top, combined ~+16% throughput.**
 - [ ] Profile-guided micro-opt round 2: largely diminishing — post-round-1 the remaining branch-misses are inherent (`solve_local` cutoff is data-dependent) or already-tuned (`lex_min8`). `enter_graph` sort network is the one reducible item left but it's a small fraction of `band_entry` (which `solve_local` dominates). Revisit only if chasing the last few %.
-- [ ] Segmented TT: (4) set-associative band buckets + arena-prefetch — smaller headroom (dTLB only ~2–8% of cycles)
+- [~] Segmented TT: (4) set-associative band buckets — **investigated, parked on branch
+  `queens-tt-assoc-buckets` (76c2b7e), NOT on main.** Break-even with seg at n=16 (not a win
+  yet); the node win (−~7%) cancels a memory/CPI residual (+~7% cycles/node). Full arc + revive
+  plan in the "Set-associative band buckets" handoff note below. Revive for the *oversubscribed*
+  regime (small-TT / n=18), gate on load factor.
 - [ ] Deferred nits folded in
 
 ## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
@@ -325,3 +329,50 @@ Commits: `43c490e` (histogram) · `c029e3d` (segment) · `59e0f56` (branchless) 
 Profiling method banked: compare **CPI / branch-miss-rate** (node-count-independent) on **n=16**; the
 wall hides wins under ±18% parallel node-count noise. `bands16.txt` weights regenerate via
 `QUEENS_PC_HIST=1 QUEENS_PC_HIST_OUT=<f> solve 16 iso-window`.
+
+### Set-associative band buckets (lever 4) — parked on branch, break-even at n=16 (2026-06-18)
+
+**Session**: 2026-06-18--5 — `mi`. **Branch: `queens-tt-assoc-buckets` (76c2b7e), NOT merged to main.**
+Do **not** revert (user's call); revive in the oversubscribed regime.
+
+**What it is.** `QUEENS_TT_ASSOC=1` (requires `QUEENS_TT_SEGMENT=1`): each band probe maps to an 8-way
+**cache-line bucket** (`M_SEG_ASSOC`) instead of one slot, so a collision only evicts when all 8 ways
+are full — fewer conflict misses → fewer re-expansions. Flat/seg paths stay byte-identical (`const MODE`).
+
+**The arc (every step measured/profiled — a clean "fix one bottleneck, expose the next" story):**
+- **Rough scalar:** n=16 **29.8 M/s** vs seg **34.5** (−14%). But **−8% nodes** — the conflict-eviction
+  reduction works; assoc does *less* work, just pays too much per node.
+- **Pressure sweep** (n=14, TT size 18→26 bits): node win is the textbook associativity curve —
+  −2.9%/−4.7%/−6.3%/**−7.3%**/−2.6%, peaking at **moderate-high load** (seg fill ~74–99%). **n=16/17 GB
+  (fill 88–91%) sits in the sweet spot.** Gate knob = **load factor**.
+- **Profile (rough):** the slowdown is **100% instruction count** — instr/node **1886 vs seg 1620**
+  (+16%), branch/node +28%, but **CPI flat** (1.078 vs 1.097) and dTLB/brmiss flat. Frontend-bound →
+  SIMD-able.
+- **AVX-512 SIMD scan** (`get_assoc_avx512`/`probe_assoc_avx512`: one `__m512i` load + `cmpeq`/`test`
+  masks): **31.1 M/s**. Residual = the put's *blocking* vector load (seg's put is a blind store).
+- **Amortised get+put** (`probe_assoc` returns hit **and** the put-target slot in one scan; `store_slot`
+  is a bare store): **33.0 M/s**. Reprofile: instr/node **1641 ≈ seg 1614** and branch/node *below* seg —
+  the instruction overhead is **gone**. But CPI rose to **1.160 vs seg 1.099** (+5.6%), driven by **+25%
+  L1-misses** (the wider 100%-full bucket working set + 512-bit line loads). **The bottleneck shifted
+  from frontend to memory.**
+
+**Net at n=16/17 GB: a wash.** cycles/node assoc 1903 vs seg 1774 (+7.3%) ≈ cancels the −7% node win.
+A/B mean 33.0 vs seg 35.4 — lands slightly behind within the ±18% node-count noise. **Not a win yet,
+not a loss.** The −14% rough gap is closed to break-even.
+
+**Why park, not ship:** at n=16/17 GB eviction isn't binding (re-exp ~1.0–1.15×), so the node win is
+small and the memory residual eats it. assoc's home turf is the **oversubscribed** regime — small TT or
+**n=18** — where re-exp is high, the node win is large (−7%+), and seg's eviction is worst.
+
+**Revive plan (for n=18 / small-TT):** (a) gate assoc on **load factor** (auto-on above ~50–70% fill,
+off below — keeps seg the n=16 default); (b) attack the memory residual — try **4-way** (half-line,
+256-bit load, smaller working set) vs 8-way, and check whether the amortised blind-put's *stale
+get-time slot* under 24-thread churn is eroding retention (the node win was −7% in the reprofile run but
+−2% in the A/B mean — measure cleanly). Gate as ever: `solve 12 iso-flat --distinct` = 1,060,823,
+`iso_window_agrees` with `QUEENS_TT_SEGMENT=1 QUEENS_TT_ASSOC=1` under znver5.
+
+**Method banked:** "nothing new ever works" — the rough first cut was −14%; profiling (instr/node + CPI,
+node-count-independent on n=16) localised it to instructions, SIMD+amortisation removed them, and the
+residual is now memory. Each cheapening was measured, not assumed. Code: `tt.rs` (`probe_assoc`/
+`store_slot`/`*_avx512`/`bucket_base`, `TT_ASSOC_WAYS=8`), `iso_flat.rs` (`M_SEG_ASSOC`, the `wins_inc`
+amortised get/put, `par_tt_*` assoc arms).

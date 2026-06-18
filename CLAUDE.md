@@ -28,6 +28,11 @@ pump→group→dense-solve→merge — the floor note's streaming-dedup lever, b
 archive** (Chunk-4, eviction-free value-only ~1.1 bit/key — sound under windowing); **1 GB hugepages**
 for the TT (zero TT TLB miss, needs boot-time reservation).
 
+**Parked (WIP, off main):** branch `queens-tt-assoc-buckets` — set-associative cache-line band buckets
+(`QUEENS_TT_ASSOC`, SIMD + amortised get/put). Break-even with seg at n=16 (instruction cost fixed,
+residual is memory/CPI; −7% nodes cancels +7% cycles/node). Revive for the *oversubscribed* regime
+(small-TT / n=18); gate on load factor. Details in the iso-window handoff. **Do not revert.**
+
 **Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main. Might be able to improve and fix.
 
 **`go`** (or `@notes/handoffs/<name>.md go`) at session start = read that handoff and resume from its Progress / next steps.
