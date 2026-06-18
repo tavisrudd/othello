@@ -8,6 +8,46 @@ on all cores**, plus **iso-burr's fewer-nodes merge** — pushing toward the
 
 ---
 
+## ✅ RESOLVED (session 2026-06-17--4, `9331f9b`) — iso-flat recovers throughput to >12 M/s
+
+User directive escalated to: *"remove any contention, measure hot loop costs, TMA, optimize…
+till it is faster than 12 M/s."* **Done — n=14 14.1 M/s (default), n=16 ~17 M/s warm.** Two
+levers, both measurement-driven:
+
+1. **TMA exposed the real bottleneck.** `perf` on pure-iso iso-flat: IPC 1.14 (NOT memory-bound —
+   TT probe is ~1% of cycles), **~39 K instructions/node**, **8.4% branch-miss (~⅓ of cycles)**;
+   hot functions `comp_canon` 53% + `wl_refine_in` 22% = **75% in the WL graph-key.** Pure-iso pays
+   WL on every big connected component. The component-carry I tried first was a **wash** (it reuses
+   the cheap tiny components; the big component is always-dirty → always re-WL'd) — removed.
+2. **Selective keying (the throughput answer).** Measured `fused`'s selective key (cheap tiny iso
+   ≤k / cheap D4 above, avoiding WL) already hit 11–17 M/s. So iso-flat was reworked to **fused's
+   kernel — carry the 8 orientations (`child_orient`) + one selective key — over the flat
+   `QueensTt`.** Default threshold `QUEENS_KEY_MAX=6`.
+3. **The contention fix was the load-bearing 2×.** Even matching fused's kernel, iso-flat was 2×
+   slower than fused *purely from the store*: `QueensTt::bump`'s per-node `nodes.fetch_add` (+ the
+   per-`get` HLL feed) bounced across the 2 CCXs. Moved to a **thread-local `Acc`** flushed ~1/s +
+   drained via a new `Solver::drain()` the CLI calls post-search (mirror of the BurrStore fix
+   `49bba47`). That ~2×'d iso-flat → **14.1 M/s** and **benefits `incremental`/`parallel`/`memo`** too.
+
+**Measured (24-core, tmpfs):**
+
+| board | solver | M/s | note |
+|-------|--------|-----|------|
+| n=14  | incremental (D4)      | 9.7  | baseline |
+| n=14  | **iso-flat KEY_MAX=6** | **14.1** | default; KEY_MAX=5 → 16.9 |
+| n=16  | **iso-flat KEY_MAX=6** | **~17 (warm)** | rises 10→17 as the elder-brother warmup ends; TT 51% full @ 1.7B nodes, re-exp still ~1.0× |
+
+Gates green (solve 12/14 --distinct = 1,060,823 / ~49.1M, re-exp 1.01–1.08×; `make test`/clippy/fmt).
+
+**The trilemma is now a tunable knob, not a wall** (`QUEENS_KEY_MAX`): low → fast (this win),
+high → pure-iso full-merge (fits-but-WL-bound). **Open at n=16:** the selective set (~5.5B at
+KEY_MAX=6) exceeds the 17 GB flat table → it *will* evict late-run (re-exp climbs, though the flat
+probe keeps the *rate* ~17). Next: size the TT with `QUEENS_TT_SLOTS` to fit, or sweep KEY_MAX, to
+keep n=16 eviction-free; then a full (ask-first) n=16 run. Everything below this line is the
+earlier pure-iso exploration (superseded but kept for the record).
+
+---
+
 ## What landed (commit `241000f`)
 
 **`iso-flat`** = single **pure** graph-iso key per node over a **flat lockless `QueensTt`**

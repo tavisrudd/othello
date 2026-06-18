@@ -10,12 +10,14 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
-**Active thread:** [iso-flat solver](notes/handoffs/2026-06-17-iso-flat-solver.md) — new solver
-(single pure-iso key over a flat lockless TT: sustained no-decay throughput, eviction-free by
-*fitting* the merged set). Built + validated (full 3.6× merge, 1.01× re-exp at n=14), but a **net
-~1.6× wall LOSS at n=14** — the WL graph-key (~68× the D4 key) is the entire wall. **The determinant
-is Phase 2: drive the WL iso key down** (`iso_key_bench` is the gate). The iso-flat handoff holds the
-verdict + lever stack.
+**Active thread:** [iso-flat solver](notes/handoffs/2026-06-17-iso-flat-solver.md) — new solver,
+**throughput RESOLVED (`9331f9b`): >12 M/s** (n=14 14.1, n=16 ~17 warm). `fused`'s kernel (carried
+orientations + a single **selective** iso/D4 key, no live WL) over a **flat lockless TT** + a
+**thread-local node/HLL counter** fix (removed the per-node cross-CCX `fetch_add` — a measured 2×;
+also helps `incremental`/`parallel`). `QUEENS_KEY_MAX` dials the speed↔merge↔fit trilemma (default 6).
+Pure-iso (full-merge, fits-but-WL-bound) was a net loss; selective is the win. **Open:** n=16 selective
+set (~5.5B) exceeds the 17 GB flat table → evicts late-run; size `QUEENS_TT_SLOTS` or sweep KEY_MAX to
+keep it eviction-free, then a full (ask-first) n=16 run.
 
 **Next, decide with the user (not autonomous):**
 1. **Chunk 4 (BuRR archive)** — the load-bearing single-box lever: a static ribbon-retrieval layer that holds the solved set with no eviction (kills the 1.36× re-exp) and applies the 3.4× freeze-time graph-iso merge. Core landed (`rust/src/burr.rs` + `queens freeze`/`verify`); the live cascade vs ply-window integration is the open design choice → discuss scope. More/faster RAM, distributed aggregate RAM (dump/load is the CRDT primitive), and a cheaper-than-graph-iso merge are the other rungs of the <30 min lever stack (roadmap).
