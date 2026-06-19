@@ -1003,3 +1003,121 @@ boundary-entry merge for pc 9–12 (the complete `tiny_tt` stops at 7; W8 handle
 **Status: confident GO on the build** (the K≤7 precedent removes the conceptual risk). It's a hot-path,
 multi-file change with gate risk → **the architecture-build green-light is the user's call** (per the
 ask-before-architecture rule); the plan above is execution-ready for next session.
+
+### Dense-block prototype BUILT + measured — node inflation is severe (2026-06-19--1)
+
+Built the gated `QUEENS_BLOCK_K` prototype (default 8 = off; clamp ≤12). `solve_block_wide` (= `solve_local`
+widened u8→u16, `[i8;4096]` L1 memo) + `block_entry` (D4 boundary key → flat-TT-probe-once → local solve) +
+the `(9..=block_k)` dispatch arm in `wins_inc`. Mask sizing per the user's steer: **u16 (free, covers K≤16);
+no high/low chunk** (buys nothing for a connected graph — decomposition is dead/single-component). Bug found
++ fixed: iso-flat (no W8) leaked pc==8 into the block at the default → arm scoped to `9..=block_k`.
+
+**Correctness: value-preserving** — verdict SECOND at every K (n=14); `solve 12 iso-flat --distinct` =
+1,060,823 exact, block-off re-exp back to 1.25× (off truly off).
+
+**n=14 iso-window node inflation (the cross-boundary-merge loss, measured):**
+
+| config     | nodes    | ×off  | wall   |
+|------------|----------|-------|--------|
+| block OFF  | 27.65 M  | 1.0×  | 0.64 s |
+| K=9        | 84.3 M   | 3.0×  | 0.70 s |
+| K=10       | 140.4 M  | 5.1×  | 0.76 s |
+| K=11       | 201.6 M  | 7.3×  | 0.81 s |
+| K=12       | 265.3 M  | 9.6×  | 0.85 s |
+
+**The descendant re-expansion is huge and grows fast (3×→9.6× for K=9→12)** — exactly the lost
+cross-boundary transposition merging (pre-check #1's weak amortization, now quantified). **W8 escapes this
+only because it's a COMPLETE table (zero recompute); the block at K≥9 has no complete table → recomputes per
+boundary → explodes.** Wall at n=14 went *UP* (+33% at K=12) — a net loss. **BUT n=14's ~1 GB TT is
+cache-resident — there is no DRAM probe to save, so n=14 only sees the inflation cost, not the benefit. The
+lever is a memory lever; per the handoff rule it must be judged at n=16** (17 GB DRAM-bound TT). n=16 A/B
+(block-off vs K=12, topdown: does the block drain the 35 % backend-by-memory, and win or lose on pace?):
+
+**n=16 K=12 — the block WORKS mechanically but is a clean WASH.** It drains the memory bucket exactly as
+designed: **`backend_bound_by_memory` 35.5 % → 21.0 %**, DRAM fills 5.06 B → 3.56 B. But it's paid for in
+node inflation — node rate **40.6 → 374 M/s** (9.2×, cheap L1 block nodes). The thermal-independent metric
+is **cycles/node**:
+
+| config | cycles/node | inflation | product (= rel. total cycles) |
+|--------|-------------|-----------|-------------------------------|
+| off    | 1353        | 1.0×      | 1.00                          |
+| K=12   | 147 (9.2× cheaper) | 9.2× | **1.00 — exact wash**     |
+
+**The 9.2× per-node speedup (probe→L1) is exactly cancelled by the 9.2× re-expansion** (lost cross-boundary
+merging). The work just moves buckets: memory 35→21 %, but frontend 32→38 % and i-cache MPKI 12→31. So K=12
+sits *at* the break-even (inflation 9.2 × 147 ≈ 1353). Smaller K has lower inflation (n=14: K9=3.0×, K10=5.1×,
+K11=7.3×, all < 9.2×) — **a smaller K may net-win.** Sweet-spot sweep (n=16 K=9/10/11 cyc/node × inflation):
+thick block is **~break-even at every K** — products (cyc/node × n14-inflation / 1353): K9 **0.93**, K10
+0.95, K11 1.05, K12 1.04. A marginal ~5-7 % at K9-10, wash above. Not compelling — the inflation eats it.
+
+### THE VARIANT THAT WORKS — W8-base dense block kills the re-expansion (2026-06-19--1)
+
+User push: "do a variant that avoids the re-expansion" + "slice & sequence to avoid concurrent re-expansion."
+**Key realisation: the re-expansion is the lost merging of everything the block solves locally — so shrink
+the local span. The ≤8 bulk already has complete, shared, cache-resident tables (dense W0..W8). Bottom the
+block at them.** `solve_block_wide` now resolves any descendant with `pc ≤ 8` by one `dense8.get(k, code)`
+lookup (the complete table for that k — `dense_block_code` builds the labelled edge code from the block's
+abstract adjacency) instead of recomputing it. The block recurses **only the thin pc 9..K shell**; the ≤8
+subtree (the node-count bulk) is complete-table-merged across all boundaries → **zero recompute**.
+Always-on when `dense8` is `Some` (iso-window); iso-flat falls back to full recursion.
+
+**n=14 result — the inflation is ELIMINATED:**
+
+| K   | thick-block nodes | **W8-base nodes** | W8-base ×off |
+|-----|-------------------|-------------------|--------------|
+| off | 27.5 M            | 27.5 M            | 1.00×        |
+| 9   | 84.3 M (3.0×)     | **27.65 M**       | **1.005×**   |
+| 10  | 140.4 M (5.1×)    | **27.55 M**       | **1.001×**   |
+| 11  | 201.6 M (7.3×)    | **27.74 M**       | **1.008×**   |
+| 12  | 265.3 M (9.6×)    | **28.14 M**       | **1.022×**   |
+
+Verdict SECOND at every K ✓ (value-preserving). The thin pc 9–12 shell has negligible cross-boundary
+recompute once the ≤8 bulk is table-merged. **n=14 wall is still +28 % (cache-resident TT — no DRAM probe to
+save, only block overhead shows); n=16 is the decisive test** (running): same node count now, but the pc 9–12
+nodes stop probing the 17 GB flat TT (drains the 35 % backend-by-memory) — should be a real win, not a wash.
+
+**On "slice & sequence" (the bigger lever, if W8-base alone underwhelms):** the residual pc 9–12 shell
+recompute (small) can be deduped by a **bottom-up layered sweep** — slice by popcount (W8 base, then 9→12),
+dedup the reachable distinct subgraphs per layer, solve each once in dependency order; this also turns the
+region's memory access from random probes (latency-bound) into a sequential stream (bandwidth-bound), and
+partitions each layer across workers to kill concurrent cross-worker re-expansion. That's the
+grouped-frontier DDD reframed for **win/loss + W8-base** (the nimber version died; win/loss is one cheap
+bit). The 9.6×-thick / ~1.0×-W8-base gap shows the within-search reuse is real and now mostly captured by
+W8-base alone — so measure W8-base first; only build the layered sweep if the residual shell is still
+material at n=16.
+
+**n=16 W8-base verdict — correct, inflation-free, but a measured NET-LOSS (the real reason is coverage):**
+all SECOND, gate clean (`solver_lineage_agrees` + `iso_window_agrees` pass with `QUEENS_BLOCK_K=12`). Three
+full runs (node counts 4.64–6.16 B = ±18 % parallel noise, so compare **cyc/node**, node-independent):
+
+| config           | cyc/node      | instr/node   | backend_bound |
+|------------------|---------------|--------------|---------------|
+| off              | 1794          | 1553         | 38.7 %        |
+| K=10 (W8-base)   | 2101 (+17 %)  | 2159 (+39 %) | 33.2 %        |
+| K=12 (W8-base)   | 2120 (+18 %)  | 2577 (+66 %) | 29.7 %        |
+
+**Two findings, both negative for dense-blocks:**
+1. **Compute > memory saving.** The block converts ~64 cyc/node of memory stall into ~330 cyc/node of
+   executed instructions (+39–66 % instr/node, dominated by `dense_block_code` rebuilding the ≤8 edge code
+   per descendant). CPI improves (1.155→0.823) but instruction count rises more → net +17–18 % cyc/node.
+   Incremental edge-code maintenance could roughly halve the build cost but the napkin still leaves it
+   net-negative (the saving is only ~64 cyc/node).
+2. **Coverage is the real killer — the 35 % memory cost is in the pc≥13 UPPER tree, not pc 9–12.** Blocking
+   *all* of pc 9–12 dropped backend-by-memory only 38.7→29.7 % (~9 pts). The bulk of the random-probe cost is
+   the huge-fan-out pc≥13 nodes probing the 17 GB TT — and dense-blocks **cannot reach them** (no complete
+   table past W8; the subtrees are the whole search). So even a zero-overhead block caps at ~9 pts upside.
+   (The "K=10 2m37s < off 2m47s" wall was a lucky low-node draw — cyc/node says +17 %.)
+
+**Verdict: dense-blocks (DFS form, thick OR W8-base) does not net-win at n=16.** The W8-base insight is real
+and valuable (it cleanly killed the 9.6× re-expansion — keep `dense_block_code`/`solve_block_wide` as the
+kernel for any future layered sweep), but the lever's *coverage* is bounded to ~9 pts and its compute
+overhead eats even that. **The layered slice-and-sequence has the same pc 9–12 coverage ceiling** unless it
+sweeps the *whole* tree (= full grouped-frontier DDD over pc≥13 too → loses the upper tree's α-β pruning, the
+parked-negative risk). **The memory lever's real target (pc≥13 random probes) wants a different attack** —
+the segmented-TT/assoc/BuRR family (latency/locality of the probe itself), or 1 GB hugepages (TLB), not
+local-block recompute.
+
+**Prototype status:** behind `QUEENS_BLOCK_K` (default 8 = off; `dense8`-gated). Gate-clean and correct, but
+adds a small per-node range-check to the hot path when compiled in and is a measured-negative → **do not
+merge to main as-is** (park on a branch like the other prototypes, or drop). `dense_block_code` +
+`solve_block_wide` + the W8-base ≤8 lookup are the reusable kernel if the layered sweep is ever built.
