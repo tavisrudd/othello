@@ -185,8 +185,12 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
   (abf38ee). Gated-B dropped (no cheap reuse proxy). Revival = dense nimber-≤8 table. See note below.
 - [x] **Dense nimber-≤8 pre-check measured** (`count --comps` extended): leaf-resolver framing is
   **dead** (~0.4–0.8% incremental over W8 — maxc≤8 ⇒ pc≤8 already); coverage lives at maxc 9–12
-  (dense-infeasible). **Salvage**: dense ≤8 *Grundy* table as the cap-12 oracle's base case to collapse
-  the 6.6× cutoff-free recursion — untested, needs user steer. See note below.
+  (dense-infeasible).
+- [x] **Salvage de-risked → also DEAD** (component-nimber size histogram, branch `queens-nimber-derisk`
+  `b6c6b01`): cap-12 wall tracks the MISS count (99.8% sizes 9–12); a ≤8 table removes 0.2% of it. cap-8
+  (fully ≤8-table-able) is already 1.59× and adds 0.8% over W8. **Cost-zeroing via dense nimber tables is
+  finished** — Sprague-Grundy nimbers are cutoff-free and the value-bearing components are 9–12. Fork
+  collapses to per-unit-cost reduction (n=16) / n=18 enablers. See note below.
 - [ ] Deferred nits folded in
 
 ## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
@@ -474,3 +478,50 @@ fused decomposition pass (pc + maxc + ncomp).
 oracle and re-measure the 6.6× — the only live "zero the cost" path; or (b) drop cost-zeroing and go
 "target well" (oversubscribed / n=18 regime, gate on a per-position fragmentation signal); or (c) capacity
 levers (BuRR / 1 GB hugepages, weighted low — n=16 is not capacity-bound).
+
+### The salvage was DE-RISKED and is also DEAD — cost-zeroing via dense nimber tables is finished (2026-06-18--6 cont.)
+
+Rather than build the dense ≤8 Grundy table blind, I ran the cheap de-risk the salvage called for: a
+per-component-size histogram of `comp_nimber` **invocations** (TT-probes) and **MISS-computations**
+(cutoff-free expansions) under the ported cap-12 oracle (branch `queens-nimber-derisk`, `b6c6b01`, off
+main — adds `COMP_NIMBER_MAX=12` + WL key for 8..12 + the histogram; `QUEENS_NIMBER_ORACLE=1
+QUEENS_NIMBER_K=<k>`). **n=14 iso-flat, single runs, all second-player:**
+
+| cap  | wall  | vs base | invocations | MISS-computations | ≤8 inv share | ≤8 miss share |
+|------|-------|---------|-------------|-------------------|--------------|---------------|
+| base | 1.80s | 1.00×   | —           | 0                 | —            | —             |
+| 7    | 1.98s | 1.10×   | 1.10 M      | 1,217             | 100%         | 100%          |
+| 8    | 2.86s | 1.59×   | 7.77 M      | 13,492            | 100%         | 100%          |
+| 10   | 3.97s | 2.21×   | 32.8 M      | 1,244,246         | 74.1%        | 1.1%          |
+| 12   | 5.62s | 3.12×   | 103.7 M     | 5,963,747         | 84.0%        | 0.2%          |
+
+(The Phase-1 "6.6×" was vs a different/iso-window baseline; vs iso-flat here it's 3.12× — same verdict,
+net-negative, monotone in cap.)
+
+**Why the dense ≤8 Grundy base case can't save it — the wall tracks the MISS count, which is 99.8%
+sizes 9–12 at cap-12, and a ≤8 table touches none of those.** The ≤8 components are a *tiny bounded set*
+(cap-8 = only 13 K distinct misses — there are ~11 K connected 8-graphs total), computed once and then
+re-looked-up (the 84% ≤8 *invocation* share is re-hits, the cheap part). The value-bearing caps (≥10) are
+dominated by **millions of distinct 9–12 components**, each needing its own cutoff-free mex expansion — the
+expensive part — and those nimbers can't be tabulated cheaply (too many distinct; computing them *is* the
+cost). A dense ≤8 table removes 0.2% of cap-12's misses and only cheapens the inner ≤8 *probes* of each
+9–12 expansion; even a generous probe-latency model leaves cap-12 net-negative (~2×). And cap-8 — the one
+cap a ≤8 table fully serves — adds only **0.8%** coverage over iso-window's W8 (the earlier pre-check), so
+even a break-even cap-8 is worthless.
+
+**Fundamental reason (the throughline):** decomposition needs **nimbers** (for the XOR composition of
+independent games), and nimbers are **cutoff-free** (no α-β — the whole point of a P-position is you must
+refute every move). The value-bearing components are 9–12, and their nimbers are exactly what can't be
+cheaply precomputed. Decomposition trades cheap α-β win/loss for expensive nimbers precisely where it would
+help. **No dense table fixes this** — it's Sprague-Grundy, not an implementation gap. Cost-zeroing via
+component decomposition is **measured-dead from three angles: coverage (0.8%), miss-count (99.8% at 9–12),
+and wall (monotone net-negative).**
+
+**So the fork collapses to (b)/(c).** Cost-zeroing (a) is closed. n=16 is per-unit-cost-bound, and the
+remaining real levers are:
+- **Per-unit-cost reduction** in the *main* search — the micro-opt / segmented / set-assoc family that
+  already delivered +16% this session. This is where the next n=16 win lives (revisit lever 4 set-assoc,
+  PGO, frontend/L1i shaves). Decomposition is not it.
+- **n=18 enablers** (decompose, BuRR, 1 GB hugepages) — but note the de-risk shows component-nimber's
+  *cost* scales with the distinct-component count, which grows with n too; it is unlikely to flip even at
+  n=18. Weight set-assoc (real −7% node win, memory-residual-bound) above it for the oversubscribed regime.
