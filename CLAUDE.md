@@ -10,18 +10,29 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
-**Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — the default solver, n=16
-**SOLVED (second) in 2m44s** (under the 3-min goal). iso-flat's kernel + a complete dense **W8** table
-(pc==8 tails resolved by one labelled-edge-code lookup, never re-expanded) over a **huge-page-collapsed**
-flat TT (`MADV_COLLAPSE`, default-on ≥4 GB). The earlier "~36 M/s floor / 3m41s wall" was **wrong** —
-measured on a memory-degraded box; clean box + W8 + huge pages broke it. (iso-flat handoff now
-[closed/archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
+**Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — n=16 **SOLVED (second)**.
+The lineage's fastest is now **`iso-dense`** (a new solver): iso-window's kernel + an exact **W9** layer
+that resolves every pc==9 node from the complete W0..W8 tables (one BMI2-`pext` child sweep — no flat-TT
+probe, no subtree expansion; **−18.2% nodes deterministic** at n=14). **`iso-window`** (dense **W8** tail
+table over a **huge-page-collapsed** flat TT, `MADV_COLLAPSE`) stays the default + A/B control and is
+**byte-identical to before iso-dense**. The earlier "~36 M/s floor / 3m41s wall" was **wrong** — measured
+on a memory-degraded box. (iso-flat handoff [archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
 
-**Current focus:** a **segmented TT variant** — `index(route, pc) = band_base[pc] + fastrange(route,
-band_size[pc])`, keyed by popcount (pure function of the key ⇒ transposition-safe), to capture the
-measured ~13% TLB-residency warm-M/s win *without* shrinking the table (smaller tables win it back on
-eviction; capacity is not the binding constraint, per-probe latency is). **Keep the flat TT as the A/B
-control.** Plan + Codex's windowed-dataflow design are in the iso-window handoff.
+**n=16 leaderboard** (best clean-box wall; M/s is the trustworthy A/B metric, wall is ±18% node-noisy):
+
+| solver       | n=16 wall  | nodes   | mechanism                                                       |
+|--------------|------------|---------|-----------------------------------------------------------------|
+| **iso-dense**| **2m12s**  | 4.03 B  | W9: pc==9 resolved from W0..W8 via `pext`, no probe/re-expansion |
+| iso-window   | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT           |
+| iso-flat     | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                |
+
+**Current focus:** the **W_K hierarchy** — `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])`, each layer an evaluator over
+the complete one below (W8 table → W9 → W10 → …). iso-dense ships W9; next is generalising `getk` to
+**W10/W11** and sweeping the *economic* crossover (per-node eval cost vs saved probes — sub-factorial,
+since each move removes a closed neighborhood so most children land in W8 directly). Also open: the
+**parallelism deficit** the per-root timing diagnostic (`QUEENS_ROOT_TIMING`) surfaced — one dominant root
+is ~95% of the wall and ~50% of the wall runs with ≤2 roots active; not schedulable (the giant roots *are*
+the critical path), so the lever is cheaper per-root work (W_K), not the tail. Details in the iso-window handoff.
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup
@@ -128,6 +139,15 @@ held up across sessions:
   its weight; if it's a wash or negative, revert it or record it as an instructive
   negative (the handoffs already hold several: deeper parallelism, df-pn,
   naive-prefetch-windowing).
+- **In tmux panes, run bare on the real TTY + read back with `capture-pane` — never
+  `>`/`>>`, and prefer this over `tee`.** Every queens run/bench goes in the `queens` tmux
+  session (one window per run, keep window 1 live). `tmux send-keys` the **bare** command
+  (no pipe, no redirect) so stdout is the pane's TTY and the **live progress bar / per-core
+  telemetry renders** for the user to follow. Read results with `tmux capture-pane -t
+  queens:<win> -p` (the final summary stays on screen). A pipe (`| tee`) makes stdout a
+  non-TTY and **suppresses the live bar** — only fall back to `tee` if you need the raw
+  scrollback and don't care about the bar; never silently redirect (`> log 2>&1`), which
+  hides the run entirely.
 - **Box hygiene before any n=16 bench — a degraded box silently fakes a "wall."** The 17 GB TT needs
   ≥~20 GB free or it OOMs/spills (into zram = compressed RAM, NOT disk) and every number is garbage.
   Before benching: **swap/zram off**, **ZFS ARC capped low** (`zfs_arc_max`≈2 GB — default ~50% RAM

@@ -213,13 +213,13 @@
 
 <header class="hero">
   <h1>The Non-Attacking Queens Game
-    <span class="sub">how a 256-bit board, a fingerprint, and a dense lookup table solved a 16×16 game in 2 minutes 44 seconds</span>
+    <span class="sub">how a 256-bit board, a fingerprint, and a dense lookup table solved a 16×16 game in 2 minutes 12 seconds</span>
   </h1>
   <p class="lede">This is not the famous "place 8 queens so none attack" puzzle. It is the <em>two-player game</em> built on top of it — and figuring out who wins on a 16×16 board is genuinely hard. This report explains the game and the engineering that cracked it, at two levels of detail you can flip between.</p>
   <div class="badges">
     <span class="badge win">verdict: <b>n=16 → second player wins</b></span>
-    <span class="badge">best wall time: <b>2m 44s</b></span>
-    <span class="badge">positions explored: <b>~5.1 billion</b></span>
+    <span class="badge">best wall time: <b>2m 12s</b></span>
+    <span class="badge">positions explored: <b>~4 billion</b></span>
     <span class="badge">cross-checked vs <b>Jenrich (2014)</b></span>
   </div>
 </header>
@@ -547,7 +547,8 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <tr><td><code>iso-burr</code></td><td>The selective graph-iso key (§5) over the BuRR store — merges ~3.4× more. Solved n=16 in <strong>29m 23s</strong>, eviction-free.</td></tr>
 <tr><td><code>fused</code></td><td>Freezes solved subgames into immutable BuRR segments mid-search.</td></tr>
 <tr><td><code>iso-flat</code></td><td>The selective iso key over a <strong>flat lockless</strong> table instead of a log-structured cascade — so throughput never decays (a miss is one O(1) probe forever, not a walk down growing segments). The production kernel.</td></tr>
-<tr><td><code>iso-window</code> ⭐</td><td>iso-flat + a <strong>complete dense W8 table</strong>: at available-popcount 8, the subgame's value is isomorphism-invariant, resolved by ONE 28-bit labelled-edge-code lookup, and its whole ≤7 subtree is <em>never re-expanded</em>. Over a huge-page-collapsed table this solves <strong class="win">n=16 in 2m 44s</strong>. The current default.</td></tr>
+<tr><td><code>iso-window</code></td><td>iso-flat + a <strong>complete dense W8 table</strong>: at available-popcount 8, the subgame's value is isomorphism-invariant, resolved by ONE 28-bit labelled-edge-code lookup, and its whole ≤7 subtree is <em>never re-expanded</em>. Over a huge-page-collapsed table this solves <strong class="win">n=16 in 2m 44s</strong>. The dense-off control.</td></tr>
+<tr><td><code>iso-dense</code> ⭐</td><td>iso-window + an <strong>exact pc==9 resolver that needs no W9 table</strong>: at available-popcount 9 it builds the 36-bit edge code and projects each child arithmetically (one BMI2 <code>pext</code>) straight into the <em>already-complete</em> W0..W8 tables — one cache-resident OR-sweep, zero DRAM probe, zero subtree expansion. Erases the single largest slice of the memory cost (pc==9). <strong class="win">n=16 in 2m 12s</strong>. The current default.</td></tr>
 <tr><td><code>nimber</code></td><td>Full Sprague–Grundy values via mex (§6) — exact game value, no cutoff, feasible to ~n=12.</td></tr>
 <tr><td><code>pn</code></td><td>df-pn proof-number search — an instructive <em>negative</em>: correct, but hits the df-pn + transposition (graph-history-interaction) pathology on this transposition-dense game and explodes past n=8.</td></tr>
 </tbody>
@@ -593,7 +594,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <div class="engineer">
 <p>Three independent levers, each covered in its own section below. Most per-node micro-optimizations wash out (~0–5%); the levers that move the wall are <strong>node-count</strong> and <strong>memory/representation/latency</strong>. (A handful of micro-opts <em>do</em> pull their weight — §11 collects them.)</p>
 <ol>
-<li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, component/nimber decomposition, the complete W8 table (never re-expand pc==8), the complete ≤7 tiny table. (§3–7.)</li>
+<li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, component/nimber decomposition, the complete W8 table (never re-expand pc==8), the table-free pc==9 resolver (iso-dense), the complete ≤7 tiny table. (§3–7.)</li>
 <li><strong>Represent nodes cheaper</strong> — 256-bit board as <code>[u64;4]</code>; the 8-byte TT slot with a 55-bit fingerprint; the in-band <code>TinyGraph</code> carried down so deep nodes never touch the 256-bit board. (§9.)</li>
 <li><strong>Search them faster</strong> — the search is DRAM-latency-bound; lockless atomic TT, hash-carry, software prefetch, thread-local counters, huge pages, CPU affinity, const-generic monomorphisation, and the segmented TT. (§10.)</li>
 </ol>
@@ -616,6 +617,54 @@ let lost = if WINDOW &amp;&amp; pc == 8 { !self.w8_get(att, child0) }   // ONE i
            else                  { /* recurse */ };</code></pre>
 <p>The <code>WINDOW</code> flag is a <code>const bool</code> monomorphisation — plain iso-flat compiles to <em>zero</em> dead pc==8 branch, and iso-window builds the edge code in one pass straight from the 8 attack rows (no intermediate adjacency arrays). The ≤7 region is solved in a thread-private 128-byte L1 stack memo and stored in a complete labelled ~2 MB table — entirely off the DRAM path.</p>
 </div>
+
+<h3 id="w9">One popcount deeper — the W9 resolver (iso-dense)</h3>
+<div class="layman">
+<p>The W8 table answers any 8-square endgame instantly. The obvious next step — a table for every <em>9</em>-square endgame — is a trap: there are so many shapes that the table would weigh about <strong>8 gigabytes</strong>, and just building it would take longer than the whole 16×16 solve. <code>iso-dense</code> gets the same answer <em>without that table.</em></p>
+<p>When the game shrinks to exactly 9 available squares, every legal move places a queen, which removes that square <em>and</em> all the squares it conflicts with — leaving a smaller endgame of <strong>8 or fewer squares</strong>. And those are exactly the ones the W8 table already knows by heart. So instead of searching the 9-square game, <code>iso-dense</code> just plays out each of its (at most nine) moves on paper, reads the resulting smaller endgame straight from the W8 table, and combines the answers: the 9-square position is a win the instant any one of its moves hands the opponent a losing endgame. Nine quick table reads, all from fast cache, and the entire sub-game — and everything beneath it — is decided without a single trip to the big 17-gigabyte table.</p>
+<p>Why bother going one square deeper? Because measurements pinpointed the 9-square stage as the single most expensive layer of the whole search — it alone accounted for the largest share of the slow memory lookups. Erasing it took 16×16 from 2m44s to <strong class="win">2m12s</strong>, the new record.</p>
+<div class="keyidea">
+<span class="tag">The trick · compute the table entry, don't store it</span>
+<p>A complete 9-square table is too big to build or hold. But every move from a 9-square position lands in the 8-square table that already exists. So <code>iso-dense</code> <em>derives</em> each 9-square answer on the spot from the 8-square table — paying a tiny bit of arithmetic to avoid an 8 GB table and a scattered trip to main memory. The same trick reaches 10, 11, … squares deep; it only stops paying off when the on-the-spot arithmetic finally costs more than the memory trip it saves.</p>
+</div>
+</div>
+<div class="engineer">
+<p><code>iso-dense</code> extends the complete-dense idea one popcount deeper. A complete labelled W9 would be <code>2^(9·8/2) = 2³⁶</code> rows ≈ <strong>8 GiB</strong> as a bitset, and building it streams at ~20 MiB/s ⇒ a ~6-minute pre-pass, longer than the whole solve — so it is never materialized. Instead, at <code>popcount == 9</code> the value is computed on demand from the <em>already-complete</em> W0..W8 tables (32 MiB, cache- and TLB-resident), exploiting that one ply of Node-Kayles from a 9-vertex graph always lands in a ≤8-vertex graph:</p>
+<pre><code>// dense.rs — DenseW8::get9: exact value of one labelled 9-vertex graph,
+//            with NO W9 allocation, canon, hash, or join.
+let mut adj = [0u16; 9];
+for (i, row) in adj.iter_mut().enumerate() {
+    // BMI2: gather vertex i's 8 incident-edge bits out of the 36-bit code
+    let packed = _pext_u64(code, W9_MASKS.0[i]) as u16;       // incident mask
+    *row = /* re-seat around the self-bit */;
+}
+let full = (1u16 &lt;&lt; 9) - 1;
+for i in 0..9 {
+    let child = full &amp; !((1 &lt;&lt; i) | adj[i]);                  // remove i AND its nbrs
+    let child_code = _pext_u64(code, W9_MASKS.1[child]) as usize; // induced edge mask
+    if !self.get(child.count_ones() as usize, child_code) {   // a child is a LOSS
+        return true;                                          // ⇒ this node WINS
+    }
+}
+false                                                          // no losing child ⇒ LOSS</code></pre>
+<p>The kernel reads the 36-bit upper-triangular edge code, extracts each vertex's adjacency row with one <code>_pext_u64</code> against a precomputed <strong>incident-edge mask</strong> (<code>W9_MASKS.0[i]</code>), then for each of the ≤9 legal moves forms the child alive-mask <code>full &amp; !(bit_i | adj_i)</code> and projects the child's edge code with a second <code>_pext_u64</code> against the child's <strong>induced-edge mask</strong> (<code>W9_MASKS.1[child]</code>). Because <code>pext</code> preserves the upper-triangle order of the surviving edges, the projected code <em>directly</em> indexes <code>W[popcount(child)]</code> — a complete table, so the lookup never misses. The node is a win iff any child reads back a loss; one short-circuiting OR-sweep, ~nine cache-resident bit reads, <strong>zero allocation, zero canonicalization, zero flat-TT traffic.</strong> A <code>direct_w9_matches_scalar_recurrence</code> test proves <code>get9</code> matches the scalar negamax recurrence across thousands of codes.</p>
+<p>In <code>iso_flat.rs</code>, <code>w9_get</code> builds the 36-bit code from the 9 live squares' attack rows (the only board-geometry work) and calls <code>get9</code>. The dispatch is <code>if W9 &amp;&amp; pc == 9</code> where <code>W9</code> is a <strong>compile-time <code>const</code> generic</strong> — <code>iso-dense</code> (constructed by <code>new_dense</code>, <code>W9</code> on) is the only instantiation that compiles the branch in; <code>iso-flat</code>/<code>iso-window</code> compile it away entirely and run byte-identically to before. The single runtime decision (which solver) is resolved once at the root, never per node — the discipline that keeps dead branches out of the frontend/L1i-bound hot loop.</p>
+<div class="keyidea">
+<span class="tag">Why this is a memory lever, and why it lands where the cost lives</span>
+<p>A stratified TT-latency profiler (<code>rdtsc</code>-timing every flat-TT get/put and binning the cycles by popcount on a real n=16 run) found that <strong>pc 9–12 carries ~64% of the random-probe cost</strong>, with <strong>pc==9 the single largest slice — ≈22% (≈2.4 B probes)</strong>, at the deepest, most-visited nodes. <code>iso-dense</code> erases that slice outright: every pc==9 node and its whole subtree resolve inline from cache-resident tables instead of touching the 17 GB table in DRAM. <strong>Measured: −18.2% nodes deterministically</strong> (single-thread n=14), ~−20% at n=16, and the wall record of <strong class="win">2m 12s</strong> vs iso-window's ~2m33–2m44s.</p>
+</div>
+<p><strong>Why this is not a generic "dense block."</strong> A naïve fixed-size local solver over pc 9..K loses cross-boundary transposition merging — its subtree boundary entries no longer share with the rest of the search, so it re-expands (a measured net loss at n=16). <code>iso-dense</code> has <em>zero</em> re-expansion below pc==9 because its recursion bottoms out in the <em>complete, shared, eviction-free</em> W0..W8 tables — the same tables every other pc≤8 node uses. It is the W8 leaf-resolver pattern, lifted one ply, not a private cache.</p>
+<p><strong>It generalizes.</strong> <code>getK</code> resolves pc==K as a nested one-ply expansion over the W(K-1) layer. Per-node cost grows <em>sub-factorially</em>, not as K!: each move removes a vertex <em>and all its neighbours</em>, so most children collapse straight to W8 rather than fanning out — which is exactly why a 9-vertex value costs only ~nine W8 reads. That makes W10 / W11 the natural next sweeps, each lifted the same way, until the on-the-fly projection cost finally crosses the DRAM-probe saving it buys.</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 760 360" width="760" height="360" role="img" aria-label="A 9-vertex available graph, its 36-bit edge code, one move projected to an 8-vertex child, and the W8 table lookup">
+  <g id="w9Figure"></g>
+</svg>
+<figcaption><strong>The W9 resolver on one move (iso-dense).</strong>
+<span class="layman">A 9-square endgame is a little 9-dot conflict graph (left). Playing a queen on dot ⓪ removes it <em>and</em> every dot it conflicts with, leaving a smaller endgame of 8-or-fewer dots (centre) — which the W8 table already knows the answer to (right). The solver repeats this for each of the (at most) nine moves and wins the instant any one of them leaves the opponent a losing endgame. No 9-dot table is ever built.</span>
+<span class="engineer">The 9-vertex graph is its 36-bit upper-triangular edge code. Move ⓪ removes vertex 0 and its neighbours; the surviving vertices' induced edges are gathered with one <code>_pext_u64(code, induced_mask)</code> — order-preserving, so the result <em>directly</em> indexes <code>W[popcount]</code>. Win iff some child reads back LOSS. ~9 cache-resident bit reads per node, no W9 table (it would be 2³⁶ rows ≈ 8 GiB), no flat-TT probe, no subtree expansion.</span></figcaption>
+</figure>
 </section>
 
 <!-- ===================================================================== -->
@@ -845,7 +894,7 @@ fn pack(fp, val) -> Slot {
 <svg viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="n=16 wall-clock time across solver generations">
   <g id="wallChart"></g>
 </svg>
-<figcaption><strong>n=16 wall-clock across solver generations</strong> (log time axis). From the first multi-core D₄ solve (~56 min) and the eviction-free iso-burr (29m23s) down to iso-window + huge pages (<strong>2m44s</strong>). The dashed marker is the estimated <em>compute</em> floor (~45–60s) for this strategy class — not a proven bound, just a target.</figcaption>
+<figcaption><strong>n=16 wall-clock across solver generations</strong> (log time axis). From the first multi-core D₄ solve (~56 min) and the eviction-free iso-burr (29m23s) down to iso-window + huge pages (2m44s) and the table-free pc==9 resolver of iso-dense (<strong>2m12s</strong>). The dashed marker is the estimated <em>compute</em> floor (~45–60s) for this strategy class — not a proven bound, just a target.</figcaption>
 </figure>
 
 <table>
@@ -860,7 +909,8 @@ fn pack(fp, val) -> Slot {
 <tr><td><code>iso-flat</code> + per-node energy cuts</td><td class="num">4m 11s</td><td>hash-carry, tighter tiny key, incremental move list (−24.7% n=14)</td></tr>
 <tr><td><code>iso-flat</code> (clean)</td><td class="num">3m 29s</td><td>full kernel, clean box</td></tr>
 <tr><td><code>iso-window</code></td><td class="num">2m 53s</td><td>+ complete dense W8 table (never re-expand pc==8)</td></tr>
-<tr><td><strong><code>iso-window</code> + collapse</strong> ⭐</td><td class="num win">2m 44s</td><td>+ huge-page collapse (100% 2 MB pages); 5.12 B nodes</td></tr>
+<tr><td><code>iso-window</code> + collapse</td><td class="num">2m 44s</td><td>+ huge-page collapse (100% 2 MB pages); 5.12 B nodes</td></tr>
+<tr><td><strong><code>iso-dense</code></strong> ⭐</td><td class="num win">2m 12s</td><td>+ table-free pc==9 resolver (erases the largest probe slice); ~−20% nodes</td></tr>
 <tr><td><em>estimated compute floor</em></td><td class="num">~45–60s</td><td>strategy target (not a proven lower bound)</td></tr>
 </tbody>
 </table>
@@ -1076,7 +1126,8 @@ fn pack(fp, val) -> Slot {
 <h3>Open levers</h3>
 <ul>
 <li><strong>Segmented TT</strong> (active, §10): A/B the popcount-banded index vs the flat control at n=16 — does warm M/s approach the 8 GB run's ~42 M/s without the eviction cost.</li>
-<li><strong>Grouped-frontier k=9..12 DDD</strong>: pump frontier → group/window → dense local solve → merge boundary values; solve each unique boundary graph once (streaming/bandwidth-bound dedup), breaking DFS-residence. The path below 2m44s and the n=18 enabler.</li>
+<li><strong>Deeper dense resolvers (W10 / W11)</strong>: lift the table-free <code>getK</code> sweep that iso-dense uses at pc==9 one or two popcounts further — each pc==K node resolved by a nested one-ply expansion over the W(K-1) layer, no W10/W11 table materialized. Per-node cost grows sub-factorially (a move removes a vertex and its neighbours, so most children land straight in W8), so it keeps paying until the projection cost crosses the DRAM-probe saving — directly attacking the rest of the profiler-confirmed pc 9–12 region (~64% of probe cost).</li>
+<li><strong>Grouped-frontier k=9..12 DDD</strong>: pump frontier → group/window → dense local solve → merge boundary values; solve each unique boundary graph once (streaming/bandwidth-bound dedup), breaking DFS-residence. The path below iso-dense's 2m12s and the n=18 enabler.</li>
 <li><strong>BuRR value-only archive</strong> (~1.1 bit/key) — sound under ply-windowing (membership known by construction); the n=18 disk-fit enabler (~130 GB iso-keyed).</li>
 <li><strong>1 GB hugepages</strong> for the TT (zero TT TLB miss; needs boot-time reservation).</li>
 </ul>
@@ -1267,6 +1318,80 @@ var COL = {
   verts.forEach(function(v){
     add(gg,'circle',{cx:v[0],cy:v[1],r:9,fill:COL.accent3,stroke:'#0b0f14','stroke-width':2});
   });
+})();
+
+/* ============================ W9 resolver figure (§8) ============ */
+(function(){
+  var root = document.getElementById('w9Figure');
+  if (!root) return;
+
+  // arrowhead
+  var defs = add(root,'defs',{});
+  var m = add(defs,'marker',{id:'ahw',markerWidth:9,markerHeight:9,refX:6,refY:3,orient:'auto'});
+  add(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:COL.accent2});
+
+  // A 9-vertex graph laid out on a circle; vertex 0 at top.
+  // Edges chosen so move ⓪ (remove 0 and its neighbours) leaves an 8-vertex child.
+  var cx0 = 120, cy0 = 150, R = 92;
+  var pos = [];
+  for (var i=0;i<9;i++){
+    var a = -Math.PI/2 + i*2*Math.PI/9;
+    pos.push([cx0 + R*Math.cos(a), cy0 + R*Math.sin(a)]);
+  }
+  // edges (i<j). vertex 0 is adjacent to 1 and 8 (its neighbours).
+  var edges = [[0,1],[0,8],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[2,6],[3,7]];
+  var adj0 = {1:1,8:1};   // neighbours of vertex 0
+  function drawGraph(g, ox, oy, removed, title){
+    add(g,'text',{x:cx0,y:14,'text-anchor':'middle',class:'ttl'},title);
+    edges.forEach(function(e){
+      var dead = removed[e[0]]||removed[e[1]];
+      add(g,'line',{x1:pos[e[0]][0],y1:pos[e[0]][1],x2:pos[e[1]][0],y2:pos[e[1]][1],
+        stroke: dead?COL.faint:COL.dim, 'stroke-width': dead?1:2,
+        'stroke-dasharray': dead?'3 3':'', opacity: dead?0.4:0.95});
+    });
+    for (var i=0;i<9;i++){
+      var gone = !!removed[i];
+      var fill = gone ? '#141a22' : (i===0 ? COL.accent2 : COL.accent3);
+      add(g,'circle',{cx:pos[i][0],cy:pos[i][1],r:11,
+        fill: gone?'transparent':fill, stroke: gone?COL.faint:'#0b0f14',
+        'stroke-width': gone?1.2:2, 'stroke-dasharray': gone?'3 3':'', opacity: gone?0.5:1});
+      add(g,'text',{x:pos[i][0],y:pos[i][1]+4,'text-anchor':'middle',
+        fill: gone?COL.faint:'#06151f','font-size':11,'font-weight':800}, String(i));
+    }
+  }
+
+  // left: full 9-vertex graph
+  var gL = add(root,'g',{transform:'translate(0,18)'});
+  drawGraph(gL, 0, 0, {}, '9 vertices → 36-bit code');
+  add(gL,'text',{x:cx0,y:cy0+R+34,'text-anchor':'middle',class:'lbl-sm',fill:COL.accent2},'play ⓪: remove 0 and its neighbours {1, 8}');
+
+  // arrow between panels
+  add(root,'line',{x1:248,y1:168,x2:300,y2:168,stroke:COL.accent2,'stroke-width':2,'marker-end':'url(#ahw)'});
+  add(root,'text',{x:274,y:158,'text-anchor':'middle',class:'lbl-sm',fill:COL.accent2},'pext');
+
+  // right: the induced child after move ⓪ — vertices 0, 1, 8 are removed
+  // (vertex 0 plus its two neighbours), the rest survive.
+  var removed0 = {0:1,1:1,8:1};
+  var gR = add(root,'g',{transform:'translate(300,18)'});
+  drawGraph(gR, 0, 0, removed0, 'induced child (≤8 vertices)');
+  add(gR,'text',{x:cx0,y:cy0+R+34,'text-anchor':'middle',class:'lbl-sm'},'survivors\' induced edges, order preserved');
+
+  // far right: the W8 table lookup box
+  var bx = 600, by = 96, bw = 150, bh = 116;
+  add(root,'rect',{x:bx,y:by,width:bw,height:bh,rx:10,
+    fill:'rgba(126,231,135,0.08)',stroke:COL.accent3,'stroke-width':1.5});
+  add(root,'text',{x:bx+bw/2,y:by+24,'text-anchor':'middle',fill:COL.accent3,'font-size':13,'font-weight':700},'W8 table');
+  add(root,'text',{x:bx+bw/2,y:by+42,'text-anchor':'middle',class:'lbl-sm'},'complete · 32 MiB');
+  add(root,'text',{x:bx+bw/2,y:by+58,'text-anchor':'middle',class:'lbl-sm'},'cache-resident');
+  // index → bit
+  add(root,'rect',{x:bx+14,y:by+70,width:bw-28,height:24,rx:5,fill:COL.code_bg||'#0b0f14',stroke:COL.cellbd,'stroke-width':1});
+  add(root,'text',{x:bx+bw/2,y:by+86,'text-anchor':'middle',fill:COL.dim,'font-size':11,'font-family':'monospace'},'W[pc][code] → W / L');
+  // arrow from child to table
+  add(root,'line',{x1:548,y1:168,x2:bx-6,y2:168,stroke:COL.accent2,'stroke-width':2,'marker-end':'url(#ahw)'});
+  add(root,'text',{x:(548+bx)/2,y:158,'text-anchor':'middle',class:'lbl-sm',fill:COL.accent2},'index');
+  // OR-sweep note under the table
+  add(root,'text',{x:bx+bw/2,y:by+bh+26,'text-anchor':'middle',class:'lbl-sm',fill:COL.accent3},'repeat for ≤9 moves;');
+  add(root,'text',{x:bx+bw/2,y:by+bh+40,'text-anchor':'middle',class:'lbl-sm',fill:COL.accent3},'WIN iff any child = LOSS');
 })();
 
 /* ============================ transposition figure (§13) ========= */
@@ -1614,7 +1739,8 @@ var COL = {
     {l:'iso-flat\n+energy', s:251, est:false},
     {l:'iso-flat\n(clean)', s:209, est:false},
     {l:'iso-window', s:173, est:false},
-    {l:'iso-window\n+collapse', s:164, est:false, best:true},
+    {l:'iso-window\n+collapse', s:164, est:false},
+    {l:'iso-dense', s:132, est:false, best:true},
     {l:'compute\nfloor (est)', s:52, est:true}
   ];
   var W=760,H=400, m={l:66,r:24,t:24,b:78};

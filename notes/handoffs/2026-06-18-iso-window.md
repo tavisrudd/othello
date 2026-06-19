@@ -15,11 +15,14 @@
 the available 8-vertex Node-Kayles subgame's win/loss is isomorphism-invariant, so it's resolved by
 a single raw 28-bit labelled-edge-code lookup instead of probing the 13–17 GB flat TT — and its whole
 ≤7 subtree is **never re-expanded**. Over a **huge-page-collapsed** flat TT this **solves n=16 in
-2m44s (SECOND player), under the 3-minute goal**, vs iso-flat's 3m33s. It is now the default solver.
-**Current record: 2m15s** (user run 2026-06-19, `target/release/queens solve 16 iso-window`, 5.03 B nodes
-≈ 37 M/s, flat TT 17.18 GB @ 87.8 % full, 1:1 affinity pin). Note the wall is node-count-noisy (±~18 %);
-5.03 B is the low end of the range so part of the 2m15s is a low-node draw — **M/s remains the trustworthy
-A/B metric, not wall.**
+2m44s (SECOND player), under the 3-minute goal**, vs iso-flat's 3m33s. It is the default solver + A/B control.
+
+**SUPERSEDED as the record by `iso-dense`** (new lineage solver, 2026-06-19--3): iso-window's kernel + an
+exact **W9** layer resolving every pc==9 node from the complete W0..W8 tables (one BMI2-`pext` child sweep,
+no flat-TT probe, no subtree expansion). **n=16 record 2m12s / 4.03 B nodes (SECOND); −18.2% nodes
+deterministic at n=14.** See the 2026-06-19--3 session note at the bottom. iso-window stays the default +
+control and is byte-identical to before. **Prior iso-window record: 2m15s** (user run 2026-06-19, 5.03 B
+≈ 37 M/s). Wall is node-count-noisy (±~18 %); **M/s remains the trustworthy A/B metric, not wall.**
 
 **The reversal that mattered.** The predecessor handoff concluded "~36 M/s floor, sub-50 unreachable,
 n=16 ~3m41s is the wall." **All wrong** — measured on a memory-degraded box (zram swap full, ZFS ARC
@@ -1236,3 +1239,135 @@ prefault — startup ~7 s→~2 s**). **Branch (off main, preserve):** `queens-de
 **Tooling banked this session:** `QUEENS_PROF=1` (per-pc TT latency), `QUEENS_TELEM=1` (per-core sparkline),
 the instant+EMA bar, the parallel prefault. The telemetry is now the fastest way to *see* a perf problem —
 use it first. Saved binaries/scripts in /tmp from this session (perf_*.sh, queens_champion/collapse/block).
+
+### Join-free complete W9 construction benchmark (2026-06-19, Codex)
+
+Extended `src/bin/ddd_bandwidth_bench.rs` with `BENCH_ONLY=w9_direct`: enumerate representative sequential
+runs from the complete 36-bit labelled 9-graph universe, compute each child W0..W8 address arithmetically,
+query the production `DenseW8`, and pack the W9 result. This is the exact direct-address recurrence with no
+hash, sort, or radix join; it samples rather than materialising the 8 GiB output and extrapolates all `2^36`
+rows. `W9_SAMPLES` controls sample size.
+
+Measured znver5 build on the busy box:
+
+| threads | sample | throughput | full W9 estimate |
+|---:|---:|---:|---:|
+| 1 | 67.1 M | 19.5 Mgraph/s | 3516 s |
+| 24 | 67.1 M | 171.6 Mgraph/s | 400 s |
+| 24 | 268.4 M | 198.2 Mgraph/s | 347 s |
+
+W8 construction was 1.78--1.83 s / 32.3 MiB. The full W9 output stream is only ~20--24 MiB/s at the
+measured compute rate, so omitting its sequential writes from the sampled benchmark is immaterial to the
+estimate. **Verdict:** complete W9 is mechanically buildable without DDD, but its ~5.8--6.7 minute build is
+longer than the current n=16 solve. It is viable only as a persisted/reused 8 GiB artifact. The remaining
+decision is solver-level: trade 8 GiB of the flat TT for W9, then measure whether eliminating pc==9 work and
+pressure repays the smaller TT. The benchmark does not answer that A/B.
+
+### W9 alternative: outcome-pure invariant oracle (2026-06-19, Codex)
+
+Do not compute a canonical graph ID. Enumerate the 274,668 unlabelled 9-vertex graphs once (`nauty geng
+9`), solve each from W8, and group them by a cheap fixed-k signature (start with the sorted per-vertex
+degree/triangle/neighbour-degree tuple already used by `small_vertex_sigs`). Store a two-bit outcome mask
+per signature: win-only, loss-only, or mixed. At runtime return only from a pure bucket; mixed or unknown
+buckets use the current exact path. Thus an incomplete invariant is exact by construction, with no unsafe
+merge, labelled W9 table, radix join, or full canonicalisation.
+
+This exploits the prior result that bare 1-WL produced only ~0.8% unsafe/mixed classes at n=12 without
+paying the full ~6500-cycle graph-canon cost. Do not infer live coverage from class count: gate on (1)
+exhaustive k=9 outcome purity, (2) live pc==9 weighted coverage, and (3) fixed-u16 signature lookup cost
+against a ~150-cycle TT get. Refine only mixed buckets; possible fallbacks are an exact decision DAG,
+canonicalising only mixed cases into a ~34 KiB unlabelled W9 value atlas, or specialized W9-from-W8
+evaluation using precomputed induced-edge masks plus BMI2 `pext`.
+
+---
+
+## SESSION 2026-06-19--3 — `iso-dense` solver SHIPPED (W9, n=16 record 2m12s) + taper dead + root-timing
+
+**Session**: `5ecc4a20-f213-42c9-a432-86860ae04109` — `mi`. Resumed from `go`; a parallel Codex thread had
+a W9 prototype in the working tree. Landed the **`iso-dense`** solver, killed the parallelism taper as a
+measured wash, and added a per-root timing diagnostic that reframed the parallelism deficit.
+
+### `iso-dense` — the new lineage solver (the win)
+
+`iso-dense` = `iso-window`'s kernel + an exact **W9** resolver: every pc==9 node is computed directly from
+the complete W0..W8 tables instead of probing the 17 GB flat TT and expanding its subtree. The kernel
+(`dense.rs::get9`, Codex's): build the 36-bit labelled upper-triangular edge code of the 9-vertex available
+graph, then for each of the ≤9 moves project the induced child subgraph's code with BMI2 `_pext_u64` and
+look the child up in W[popcount] (≤8, complete); win iff any child is a loss. No allocation, no TT traffic,
+**zero re-expansion below pc==9** (unlike a generic dense block — the W0..W8 base is *complete*, so nothing
+is recomputed). `w9_get` builds the code (mirrors `w8_get`); the pc==9 hook is `if W9 && pc == 9` — a
+**compile-time `const W9` generic**, read once per root at the dispatch, never a runtime flag in the deep
+loop or a TT probe (user's explicit requirement).
+
+**The W_K hierarchy (the framework, ChatGPT/user-confirmed):** `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` — each
+layer is an *evaluator* over the complete one below (W8 table → W9 → W10 → …). Choosing K is purely
+economic (eval cost vs saved probes), not combinatorial. Cost grows **sub-factorially**: a move removes a
+closed neighborhood `N[v]`, so a child drops `1+deg(v)` vertices — most children of a pc-10/11 node land in
+**W8 directly**, not W9. So W10 (and likely W11) is attractive. **NEXT: generalise `getk` to W10/W11 and
+sweep the crossover.** (`iso-dense` is already K-parameterized-ready; this is the next focused pass.)
+
+**Why W9 is the right target (the profiler, last session):** pc 9–12 = ~64% of the n=16 random-probe cost,
+pc==9 the single largest slice (~22% / 2.4 B probes). iso-dense erases that slice.
+
+**Measured:**
+- **Deterministic (single-thread n=14):** iso-window 27,539,495 nodes → iso-dense **22,527,149 (−18.2%)**,
+  bit-identical run-to-run (proves the refactor adds no non-determinism; the n=16 multi-thread variation is
+  parallel work-stealing speculation, not a regression).
+- **n=16 (multi-thread, interleaved A/B):** iso-dense 4.03–4.65 B / **2m12s record**–2m33s vs iso-window
+  5.33–5.94 B / 2m33–2m55s. iso-dense wins clearly on nodes (~−20%) and wall. iso-dense is consistently
+  **less TT-full** than iso-window (W9 positions are never stored) — fullness tracks node count.
+- **iso-dense ≈ Codex's earlier `QUEENS_W9_DIRECT` numbers** (~30 M/s, 4.2–4.4 B); same kernel/dispatch.
+
+**Base preserved (user requirement):** `iso-flat`/`iso-window` are **byte-identical to before** — the W9/
+dense layer is *exclusive to iso-dense* (`new_dense` sets `w9_direct=true`; the base sets `false`; the old
+`QUEENS_W9_DIRECT` env gate is **removed** so iso-window is a clean control). Gate held: n=12 iso-flat
+distinct **1,060,823 / 1.24×** exact, n=14 ≈29.2M / 1.02×, single-thread deterministic.
+
+**Validation / review:** Opus review — correct, all invariants hold, no blockers. Added `iso-dense` (and
+`iso-window`) to the `solver_lineage_agrees` n≤9 gate + the even-board agreement test (the W9 path is
+exercised at n=8/9/10). `direct_w9_matches_scalar_recurrence` (Codex's, 10k codes) green. Fixed fmt + a
+`get9` clippy `needless_range_loop` allow + bench clippy (`make clippy` green) + a forbidden-word reword.
+
+### Taper (parallelism tail) — measured WASH, dropped
+
+The queued #1 lever (parallelism tail). Built a conditional `min_avail` taper (lower the split threshold as
+the root pool drains, env-gated, window-confined). **Measured wash-to-negative at n=16:** it does fill cores
+(user/real 16.4→18.3×, M/s +6%) but the trailing roots *are the big ones*, so fanning them re-expands
+(+15% nodes), and the inflation overwhelms the throughput gain → wall ~flat-to-+8%, with a cascade risk near
+the full TT. The static-`min_avail` env sweep first showed the extreme (uniform `min_avail=24` = **+51%
+nodes**, 2.5× wall — TT-share-loss via concurrent re-expansion). **Verdict: the `min_avail` knob can't fill
+the tail without proportional re-expansion.** Removed from main; **preserved in `/tmp/session_full.patch`**
+(and a `queens-par-taper` branch). The base `par_wins_inc` is restored to its threaded `min_avail` param.
+
+### Per-root timing diagnostic (`QUEENS_ROOT_TIMING`) — kept, and it reframed the deficit
+
+Records each root's wall `[start,end]` interval (µs since solve start) + prints the schedule. Gated and
+cold (empty allocs when off → base unchanged). **Finding (n=16, W9):** **ONE dominant root = 95% of the
+wall** (idx 29, 136.8 s of 143.4 s); the concurrency profile shows **~50% of the wall runs with ≤2 roots
+active** (the two giant roots), only ~12% truly single-threaded. So the "single-threaded tail" framing was
+too narrow — the deficit is a **2-root plateau**, and it is **not schedulable** (the giants *are* the
+critical path; size-ordering can't shorten them). **The lever is cheaper per-root work (the W_K hierarchy),
+not the tail.** This is *why* the taper was a wash and W9 is the right direction.
+
+**Metric extensions still TODO** (user wants): per-root node-count (handoff attribution), concurrency
+profile baked into the summary (currently computed ad-hoc), 2nd-player verdict flag (free; all roots are
+P2-wins at n=16 — a consistency check), and **ply depth** (the user asked; do it the `QUEENS_PROF`-style
+gated `MODE`-mono way so the champion hot path stays clean). The winning-subtree-per-root (P2's reply) was
+deferred.
+
+### Docs / housekeeping
+- `CLAUDE.md`: added an n=16 **leaderboard** (iso-dense 2m12s / iso-window 2m15s / iso-flat 3m29s), updated
+  the active-thread record, refreshed Current focus to the W_K hierarchy + the parallelism-deficit finding.
+- `notes/queens-report.html`: added the `iso-dense` solver (hero, lineage table, a full §8 W9 subsection +
+  SVG worked-example diagram, §12 numbers, §14 next-levers).
+- Removed the stale `/tmp/othello-rust-base` git worktree (clean, 250 M; commit 760be20 preserved in repo).
+- Benches kept: `w9_purity_bench` (W9 scalar-vs-pext A/B + cross-check) and `ddd_bandwidth_bench`
+  (DDD random-vs-stream verdict — Codex's measured-negative for n=16 in-RAM, alive for n=18 out-of-core).
+
+### NEXT
+1. **W10/W11** — generalise `getk` (per-k induced-edge masks, `≤55-bit` codes for k≤11; nested one-ply over
+   W(K-1)), validate each against the scalar recurrence, sweep the economic crossover at n=16.
+2. **Root-timing metric extensions** (node-count, concurrency, verdict, ply-depth — gated).
+3. **Parallelism deficit** — the 2-root plateau is the real ~50%-of-wall idle; W_K shrinks per-root work,
+   but a re-expansion-free way to parallelize the giant roots (ABDADA-style in-flight markers, or YBWC-
+   recursive warm-then-fan) is the open structural question. Decide with the user.
