@@ -39,6 +39,12 @@ pub(crate) fn orient_of(q: &Queens, available: Bits) -> [Bits; 8] {
 /// images, same `Bits` order), so the TT merges identically. Serial early-out fold
 /// -- the A3-validated form (beats branchless `lex_lt` and tree reductions; most
 /// image pairs differ in word 0, so the compare exits after one limb).
+// NOTE (2026-06-18, session --6): an AVX-512 gather + reduce-min-cascade lex_min8 was
+// built and A/B'd on n=16 — MEASURED LOSS (CPI 1.110→1.275, M/s 41.0→37.4, −9%) despite
+// −12% instructions: the strided gathers are CPI-expensive on znver5, and even a
+// gather-free SoA variant can't beat the scalar because the scalar early-exits on word 0
+// (most orientations differ there) while any branchless all-4-limb reduction processes
+// all limbs unconditionally. Kept scalar. Don't re-attempt the cascade form.
 #[inline]
 pub(crate) fn lex_min8(o: &[Bits; 8]) -> Bits {
     let mut best = o[0];
