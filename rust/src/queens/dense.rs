@@ -3,6 +3,35 @@ use std::sync::OnceLock;
 
 const MAX_DENSE_K: usize = 9;
 const W8_K: usize = 8;
+const W9_K: usize = 9;
+
+const fn w9_masks() -> ([u64; W9_K], [u64; 1 << W9_K]) {
+    let mut incident = [0u64; W9_K];
+    let mut induced = [0u64; 1 << W9_K];
+    let mut bit = 0usize;
+    let mut i = 0usize;
+    while i < W9_K {
+        let mut j = i + 1;
+        while j < W9_K {
+            let edge = 1u64 << bit;
+            incident[i] |= edge;
+            incident[j] |= edge;
+            let mut alive = 0usize;
+            while alive < (1 << W9_K) {
+                if (alive & (1 << i)) != 0 && (alive & (1 << j)) != 0 {
+                    induced[alive] |= edge;
+                }
+                alive += 1;
+            }
+            bit += 1;
+            j += 1;
+        }
+        i += 1;
+    }
+    (incident, induced)
+}
+
+const W9_MASKS: ([u64; W9_K], [u64; 1 << W9_K]) = w9_masks();
 
 #[inline]
 fn slots(k: usize) -> usize {
@@ -111,6 +140,38 @@ impl DenseW8 {
         bit_get(&self.tables[k], code)
     }
 
+    /// Exact value of one labelled 9-vertex graph, computed directly from the
+    /// complete W0..W8 tables. `code` is the 36-bit upper-triangular edge code.
+    /// BMI2 extracts adjacency rows and every induced child code arithmetically;
+    /// there is no W9 allocation, canonicalisation, hash lookup, or join.
+    #[inline]
+    pub(crate) fn get9(&self, code: u64) -> bool {
+        use std::arch::x86_64::_pext_u64;
+
+        debug_assert!(code < (1u64 << 36));
+        let mut adj = [0u16; W9_K];
+        for (i, row) in adj.iter_mut().enumerate() {
+            // SAFETY: production is built with target-cpu=znver5, which includes BMI2.
+            let packed = unsafe { _pext_u64(code, W9_MASKS.0[i]) } as u16;
+            let below = (1u16 << i) - 1;
+            *row = (packed & below) | ((packed & !below) << 1);
+        }
+        let full = (1u16 << W9_K) - 1;
+        // `i` is both the removed-vertex bit (`1 << i`) and the `adj[i]` index, so the range
+        // loop is the natural form here (not a needless one).
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..W9_K {
+            let child = full & !((1u16 << i) | adj[i]);
+            // SAFETY: same BMI2 build invariant as above. Extracted edges retain
+            // upper-triangle order, so the result directly indexes W[popcount].
+            let child_code = unsafe { _pext_u64(code, W9_MASKS.1[child as usize]) } as usize;
+            if !self.get(child.count_ones() as usize, child_code) {
+                return true;
+            }
+        }
+        false
+    }
+
     pub(crate) fn bytes(&self) -> u64 {
         self.tables
             .iter()
@@ -143,5 +204,14 @@ mod tests {
         assert_eq!(tables[2].iter().map(|w| w.count_ones()).sum::<u32>(), 1);
         assert_eq!(tables[3].iter().map(|w| w.count_ones()).sum::<u32>(), 5);
         assert_eq!(tables[4].iter().map(|w| w.count_ones()).sum::<u32>(), 41);
+    }
+
+    #[test]
+    fn direct_w9_matches_scalar_recurrence() {
+        let w8 = DenseW8::build();
+        for x in 0..10_000u64 {
+            let code = x.wrapping_mul(0x9E37_79B9) & ((1u64 << 36) - 1);
+            assert_eq!(w8.get9(code), graph_wins(9, code as usize, w8.tables));
+        }
     }
 }

@@ -241,7 +241,7 @@ fn min_avail_for(over: Option<u32>, n: u32) -> u32 {
 
 /// CLI solver names, simplest → most sophisticated (`nimber` computes the full
 /// Sprague-Grundy value; `pn` is df-pn proof-number search).
-pub const SOLVER_NAMES: [&str; 12] = [
+pub const SOLVER_NAMES: [&str; 13] = [
     "naive",
     "memo",
     "symmetry",
@@ -252,6 +252,7 @@ pub const SOLVER_NAMES: [&str; 12] = [
     "fused",
     "iso-flat",
     "iso-window",
+    "iso-dense",
     "nimber",
     "pn",
 ];
@@ -269,6 +270,7 @@ pub fn make_solver(name: &str, bits: u32) -> Option<Box<dyn Solver>> {
         "fused" => Some(Box::new(Fused::new(bits))),
         "iso-flat" => Some(Box::new(IsoFlat::new(bits))),
         "iso-window" => Some(Box::new(IsoFlat::new_window(bits))),
+        "iso-dense" => Some(Box::new(IsoFlat::new_dense(bits))),
         "nimber" => Some(Box::new(Nimber::new(bits))),
         "pn" => Some(Box::new(Pn::new(bits))),
         _ => None,

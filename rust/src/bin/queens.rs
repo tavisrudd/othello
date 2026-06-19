@@ -342,7 +342,7 @@ fn main() {
 /// "full"; what differs is the technique and the parallelism. Order matches
 /// `SOLVER_NAMES`.
 fn list_engines() {
-    const INFO: [(&str, &str, &str); 12] = [
+    const INFO: [(&str, &str, &str); 13] = [
         (
             "naive",
             "plain negamax win/loss with an α-β cutoff, no memo (ground truth)",
@@ -391,6 +391,11 @@ fn list_engines() {
         (
             "iso-window",
             "iso-flat plus a dense labelled W8 table: 8-vertex tails are implicit-keyed by edge-code instead of searched through the flat TT",
+            "root-parallel (YBW)",
+        ),
+        (
+            "iso-dense",
+            "iso-window plus a dense low-popcount layer: pc==9 tails are resolved directly from W0..W8 (BMI2-projected child sweep, no flat-TT probe or subtree expansion)",
             "root-parallel (YBW)",
         ),
         (

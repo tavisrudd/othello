@@ -146,6 +146,18 @@ mod tests {
                 "iso-flat n={n}"
             );
             assert_eq!(
+                IsoFlat::new_window(16).first_player_wins(&q),
+                truth,
+                "iso-window n={n}"
+            );
+            // iso-dense's W9 pc==9 resolver is exercised on n=8/9 (the available graph
+            // descends through 9 vertices), so the lineage loop is its parity gate too.
+            assert_eq!(
+                IsoFlat::new_dense(16).first_player_wins(&q),
+                truth,
+                "iso-dense n={n}"
+            );
+            assert_eq!(
                 Nimber::new(16).first_player_wins(&q),
                 truth,
                 "nimber!=0 n={n}"
@@ -172,6 +184,11 @@ mod tests {
                 IsoFlat::new_window(16).first_player_wins(&q),
                 truth,
                 "iso-window n={n}"
+            );
+            assert_eq!(
+                IsoFlat::new_dense(16).first_player_wins(&q),
+                truth,
+                "iso-dense n={n}"
             );
         }
     }
