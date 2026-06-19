@@ -691,6 +691,12 @@ loop (and/or splitting `wins_inc` so the hot inner body is small) is the lever, 
 
 ## QUEUED NEXT WORK (prioritised; this work stream)
 
+> **⇒ REPRIORITISED 2026-06-19--1 — see the live "NEXT-SESSION QUEUE" in the session-end note at the
+> very bottom of this file.** The dense-blocks family below is **measured-dead** (net-loss at n=16); the
+> new top lever is the **parallelism tail** (the live per-core telemetry caught the n=16 endgame running
+> single-threaded), then **MLP-batched gets at pc 9–12** (the profiler proved the memory cost lives there,
+> not the pc≥13 upper tree). The items below remain accurate history; start from the bottom queue.
+
 0. **[DONE 2026-06-19--1] Disambiguate the deep-node cost.** Zen5 topdown (`perf stat -M
    PipelineL1,PipelineL2`, n=16 steady-state, `-D 30000` skips warm-up) + return/icache/dram raw counters.
    **Verdict: co-dominant (a) memory ≈35% AND (b) frontend/i-cache ≈35%; (c) recursion/RAS measured-DEAD**
@@ -1162,3 +1168,71 @@ histogram) cheaply attributes get/put latency by pc — and it overturned a conf
 `rdpmc` DRAM-fill/LLC-miss counters per pc for exact attribution (the `rdtsc`-get undercounts — it caught
 13–15 % of cycles as get-latency vs the 38.7 % topdown backend-by-memory, the rest being put-RFO + stalls
 that surface past the get instruction).**
+
+---
+
+## SESSION-END WRAP + NEXT-SESSION QUEUE (2026-06-19--1)
+
+**Session**: `7f5286e0-b949-4298-b801-0e8a1f95807a` (2026-06-19--1) — `mi`. A long session: deep-cost
+disambiguation → a shipped micro-opt → dense-blocks measured-dead → a stratified profiler that overturned a
+wrong conclusion → live throughput telemetry that turned into a perf-finding tool → a startup fix.
+
+**Commits (main, in order):** `ae8bfae` (#0 verdict) · `837e614` (**PROVE_LOSS collapse — i-cache MPKI
+−74 %, SHIPPED**) · `8ec372c` (dense-block pre-check microbench + scoping) · `4f4b065` (dense-block (a-i)
+de-risk) · `7cb00b5` (dense-block measured-dead verdict) · `bbe58cd` (profiler refutes pc≥13) · `ac5eb76`
+(**live telemetry + QUEENS_PROF profiler + dense-block prototype, wip**) · `4a1c461` (**parallel TT
+prefault — startup ~7 s→~2 s**). **Branch (off main, preserve):** `queens-dense-block-prototype` (ac5eb76)
+= the dense-block prototype.
+
+**What landed:**
+1. **Measurement #0** — deep-node cost = co-dominant (a) memory + (b) frontend; (c) recursion/RAS DEAD.
+2. **SMT A/B** — (b) is intrinsic body-footprint + SMT-thrash.
+3. **PROVE_LOSS collapse SHIPPED** — vestigial const generic doubled the hot body; removed → **MPKI −74 %**,
+   CPI −0.8 %, value-preserving. The session's one solver win.
+4. **Dense-blocks measured-DEAD at n=16** — thick = inflation wash; W8-base killed the inflation (9.6×→1.0×)
+   but lost on compute overhead; **net +17 % cyc/node**. Prototype gated `QUEENS_BLOCK_K` (off by default),
+   on `main` HEAD + branch. **Pending: revert from main** (see queue).
+5. **`QUEENS_PROF` stratified profiler** — `rdtsc`-times TT get/put by pc. **REFUTED my pc≥13 claim: the
+   memory cost is pc 9–12 (63.5 %), the deep region** — dense-blocks targeted the right region but lost on
+   compute, *not* coverage.
+6. **Live throughput telemetry** — instantaneous (1 s) + 5 s/15 s/cumm loadavg-style EMAs on the bar;
+   per-core sparkline (`QUEENS_TELEM=1`, per-worker attribution at the node flush); prep spinner over the
+   silent build. **This telemetry became a perf-finding tool** (see findings).
+7. **Parallel TT prefault** — `MADV_POPULATE_WRITE` + `MADV_COLLAPSE` split 2 MB-aligned across rayon
+   workers; the silent ~7 s n=16 startup → ~2 s.
+
+**Findings the telemetry surfaced (n=16):**
+- **Parallelism tail (THE lever, ~16 % wall):** at 35/36 roots the per-core sparkline shows **1 core █ /
+  ~23 idle ▂▁** — the last root runs ~single-threaded for ~20–30 s. Instantaneous rate craters 40→12 M/s
+  while cumm stays 33.6 (the cumulative average hid it entirely — this is *why* the instantaneous view was
+  asked for). YBW elder-brother lead (handoff [[queens-parallel-parity-ybwc]]).
+- **Gradual mid-run decay:** TT-fill (eviction→DRAM as it saturates ~90 %) + thermal throttle. Inherent;
+  separable with the profiler's cyc/node (thermal-independent).
+
+### NEXT-SESSION QUEUE (prioritised)
+
+1. **Parallelism tail — the no-cutoff fan-out (BIG, ~16 % n=16 wall).** When the root pool drains, the
+   surviving root's first child is searched sequentially (YBW, to set a cutoff bound) while ~23 cores idle.
+   Fix per the parallel-parity note: **parallelise the no-cutoff (even / prove-loss) levels** — all children
+   must be evaluated there, so fan them all out with zero speculation; make the split dynamic on
+   remaining-roots / idle-workers (lower `min_avail` / raise `par_depth` as roots drain). Verify with the
+   per-core sparkline (`QUEENS_TELEM=1`) — the tail cores should fill. Gate: `solve 12 iso-flat --distinct`
+   = 1,060,823 + lineage; A/B n=16 **wall** (this is a wall lever, node-count unchanged).
+2. **MLP-batched gets at pc 9–12 (the profiler-confirmed memory lever).** Memory cost = pc 9–12 (63.5 %),
+   gets only ~half-hidden by the current one-ahead prefetch; the deep `wins_inc` path issues them serially
+   (unlike `expand_graph`, which already batches at ≤7). Batch the deep children's TT gets to overlap the
+   ~165 cyc exposed latency. Gate as ever; A/B n=16 cyc/node + M/s.
+3. **Revert the dense-block prototype from `main`** (your `yc`). It's gated-off (`QUEENS_BLOCK_K` default 8)
+   but adds a per-node range-check + is measured-negative. Preserved on branch `queens-dense-block-prototype`.
+   `block_entry`/`solve_block_wide`/`dense_block_code` are the reusable kernel if the layered sweep is ever
+   built. (Deferred this session at the user's "queue all this" steer.)
+4. **Telemetry follow-ons** (all small): per-**root** breakdown (vs per-core — thread a root index, the
+   par_iter structure supports it); a **terminal** historical line chart (user is in a TTY — *not* SVG yet);
+   **W8-build node accounting** in the prep line ("account for nodes during table builds"); prep-spinner
+   **phase attribution** (W8 vs alloc vs prefault); profiler **v2** (depth/ply bins + self-cycles).
+5. **Gradual-decay diagnosis** — split TT-fill vs thermal via the profiler's cyc/node over the run (cyc/node
+   rising = TT-fill; flat-but-slower = thermal). Then weigh capacity levers (BuRR, 1 GB hugepages).
+
+**Tooling banked this session:** `QUEENS_PROF=1` (per-pc TT latency), `QUEENS_TELEM=1` (per-core sparkline),
+the instant+EMA bar, the parallel prefault. The telemetry is now the fastest way to *see* a perf problem —
+use it first. Saved binaries/scripts in /tmp from this session (perf_*.sh, queens_champion/collapse/block).
