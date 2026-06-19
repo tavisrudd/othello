@@ -101,6 +101,18 @@ pub trait Solver: Sync {
     fn pc_hist(&self) -> Option<Vec<u64>> {
         None
     }
+
+    /// Stratified TT-latency profile (`QUEENS_PROF=1`): a flat `4 * 257` vector laid out
+    /// `[metric * 257 + pc]` with metric ∈ {get-cyc, get-n, put-cyc, nodes}. `None` otherwise.
+    fn prof_data(&self) -> Option<Vec<u64>> {
+        None
+    }
+
+    /// Per-rayon-worker cumulative node tallies for the live per-core throughput display. `None`
+    /// for solvers without a shared TT (the watcher then shows only the aggregate rate).
+    fn per_worker_nodes(&self) -> Option<Vec<u64>> {
+        None
+    }
 }
 
 /// Which canonical key the search uses per node. `D4` is the production key

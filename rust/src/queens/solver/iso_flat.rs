@@ -61,6 +61,26 @@ const MAXPC: usize = 257;
 const M_NORMAL: u8 = 0; // plain solve / flat TT (the A/B control — byte-identical hot path)
 const M_HIST: u8 = 1; // tally flat-TT puts by popcount (`QUEENS_PC_HIST=1`)
 const M_SEG: u8 = 2; // route by per-popcount band (`QUEENS_TT_SEGMENT=1`)
+const M_PROF: u8 = 3; // stratified profiler: rdtsc-time the TT get/put per pc (`QUEENS_PROF=1`)
+
+/// `rdtsc` time-stamp counter read (`constant_tsc`/`nonstop_tsc` on this box, so it tracks
+/// wall cycles). Used only on the `M_PROF` measurement path to stratify TT get/put latency
+/// by popcount; never on the production hot path.
+#[inline(always)]
+fn rdtsc() -> u64 {
+    // SAFETY: `_rdtsc` is unconditionally available on x86_64 and has no preconditions.
+    unsafe { core::arch::x86_64::_rdtsc() }
+}
+
+/// Per-worker, non-atomic stratified profile accumulator for `QUEENS_PROF` — TT get/put cycle
+/// totals and counts by available-popcount. Merged into [`IsoFlat::prof`] at drain (the
+/// parallel twin of [`PC_HIST_ACC`]). Zero cost off the `M_PROF` monomorphisation.
+struct ProfAcc {
+    get_cyc: [u64; MAXPC],
+    get_n: [u64; MAXPC],
+    put_cyc: [u64; MAXPC],
+    nodes: [u64; MAXPC],
+}
 
 thread_local! {
     /// Per-worker, **non-atomic** per-popcount flat-TT put tally for the
@@ -69,6 +89,19 @@ thread_local! {
     /// integer here; merged into the shared [`IsoFlat::pc_hist`] at drain. Empty cost
     /// on the production (`HIST = false`) path — the bump is monomorphised away.
     static PC_HIST_ACC: RefCell<[u64; MAXPC]> = const { RefCell::new([0u64; MAXPC]) };
+}
+
+thread_local! {
+    /// Per-worker stratified TT-latency profile (`QUEENS_PROF`); merged into the shared
+    /// [`IsoFlat::prof`] at drain. Empty cost off the `M_PROF` path.
+    static PROF_ACC: RefCell<ProfAcc> = const {
+        RefCell::new(ProfAcc {
+            get_cyc: [0; MAXPC],
+            get_n: [0; MAXPC],
+            put_cyc: [0; MAXPC],
+            nodes: [0; MAXPC],
+        })
+    };
 }
 
 /// Compact representation of an in-band (`popcount ≤ 7`) available graph: once a node
@@ -121,6 +154,32 @@ fn att_for8(att: &[[Bits; 8]], sq: u8) -> &[Bits; 8] {
 #[inline(always)]
 fn att08(att: &[[Bits; 8]], sq: u8) -> Bits {
     att_for8(att, sq)[0]
+}
+
+/// The `k`-vertex (`k ≤ 8`) labelled upper-triangular edge code of the `alive` sub-graph of a
+/// dense block, in the exact bit order [`dense::DenseW8`] is built with (pairs `(x,y)`, `x<y`,
+/// ascending). `closed[v]` carries `v`'s neighbours (self-blocking), and `verts[x] ≠ verts[y]`,
+/// so `(closed[verts[x]] >> verts[y]) & 1` is the edge bit. Lets the block resolve any ≤8
+/// descendant by one complete-table lookup instead of recomputing it.
+#[inline]
+fn dense_block_code(closed: &[u16; 13], alive: u16, k: usize) -> usize {
+    let mut verts = [0usize; 8];
+    let mut n = 0usize;
+    let mut rem = alive;
+    while rem != 0 {
+        verts[n] = rem.trailing_zeros() as usize;
+        rem &= rem - 1;
+        n += 1;
+    }
+    let mut code = 0usize;
+    let mut bit = 0usize;
+    for x in 0..k {
+        for &vy in verts.iter().take(k).skip(x + 1) {
+            code |= (((closed[verts[x]] >> vy) & 1) as usize) << bit;
+            bit += 1;
+        }
+    }
+    code
 }
 
 /// Filter `pmoves` (the parent node's available squares, already in `q.order`) down to the
@@ -204,6 +263,12 @@ pub struct IsoFlat {
     par_depth: u32,
     par_min_avail: Option<u32>,
     iso_max_avail: u32,
+    /// `QUEENS_BLOCK_K` (default 8 = off): dense-block boundary. When `> 8`, a node dropping to
+    /// `8 < pc ≤ block_k` is solved as one **local block** — the flat-TT boundary entry is merged
+    /// once by its D4 key, then the whole subtree below is solved in a thread-private L1 memo over
+    /// the `u16` alive mask (no per-descendant flat-TT probe), exactly as the pc≤7 band already
+    /// does. Measurement prototype for the dense-blocks lever; resolved once here, never per node.
+    block_k: u32,
     eff_min_avail: AtomicU32,
     root_done: AtomicU64,
     root_total: AtomicU64,
@@ -225,6 +290,13 @@ pub struct IsoFlat {
     /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
     /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
     pc_hist: Box<[AtomicU64]>,
+    /// `QUEENS_PROF=1`: stratified TT-latency profiler. Selects `const MODE = M_PROF` at the
+    /// subtree handoff; `wins_inc` then `rdtsc`-times each flat-TT get/put and bins the cycles
+    /// by popcount. Production (`M_NORMAL`) compiles all of it away.
+    prof: bool,
+    /// Shared profile accumulator (`4 * MAXPC` [`AtomicU64`]: get-cyc / get-n / put-cyc / nodes,
+    /// laid out `metric * MAXPC + pc`), merged from each worker's [`PROF_ACC`] at drain.
+    prof_data: Box<[AtomicU64]>,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -269,6 +341,8 @@ impl IsoFlat {
             par_depth: par_depth(),
             par_min_avail: par_min_avail_override(),
             iso_max_avail: iso_flat_key_max_avail(),
+            // Default 8 = off (pc≤7 band + W8 unchanged); clamp ≤12 for the [i8;4096] L1 memo.
+            block_k: env_u32("QUEENS_BLOCK_K", 8).clamp(8, 12),
             eff_min_avail: AtomicU32::new(u32::MAX),
             root_done: AtomicU64::new(0),
             root_total: AtomicU64::new(0),
@@ -279,6 +353,8 @@ impl IsoFlat {
             // the subtree-handoff dispatch can pick `MODE = M_SEG` once and monomorphise.
             segment,
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
+            prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -662,6 +738,35 @@ impl IsoFlat {
         self.drain_hist_local();
     }
 
+    /// Merge this worker's thread-local profile ([`PROF_ACC`]) into the shared [`prof`](Self::prof_data)
+    /// totals and clear it. Layout: `prof_data[metric * MAXPC + pc]`, metric ∈ {get-cyc, get-n,
+    /// put-cyc, nodes}.
+    fn drain_prof_local(&self) {
+        PROF_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            for pc in 0..MAXPC {
+                if a.get_n[pc] == 0 && a.nodes[pc] == 0 {
+                    continue;
+                }
+                self.prof_data[pc].fetch_add(a.get_cyc[pc], Ordering::Relaxed);
+                self.prof_data[MAXPC + pc].fetch_add(a.get_n[pc], Ordering::Relaxed);
+                self.prof_data[2 * MAXPC + pc].fetch_add(a.put_cyc[pc], Ordering::Relaxed);
+                self.prof_data[3 * MAXPC + pc].fetch_add(a.nodes[pc], Ordering::Relaxed);
+                a.get_cyc[pc] = 0;
+                a.get_n[pc] = 0;
+                a.put_cyc[pc] = 0;
+                a.nodes[pc] = 0;
+            }
+        });
+    }
+
+    /// Merge every rayon worker's profile into the shared total (parallel twin of
+    /// [`drain_prof_local`](Self::drain_prof_local)).
+    fn drain_prof_all(&self) {
+        rayon::broadcast(|_| self.drain_prof_local());
+        self.drain_prof_local();
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
@@ -693,7 +798,22 @@ impl IsoFlat {
         } else {
             avail.popcount()
         };
-        if let Some(w) = self.mtt_get::<COUNT, MODE>(key, route, fp, node_pc) {
+        let got = if MODE == M_PROF {
+            // rdtsc-time the flat-TT get and bin the cycles by this node's popcount — the get
+            // *is* the random DRAM probe, so its latency by pc is the memory cost distribution.
+            let t = rdtsc();
+            let g = self.mtt_get::<COUNT, MODE>(key, route, fp, node_pc);
+            let dt = rdtsc().wrapping_sub(t);
+            PROF_ACC.with(|c| {
+                let mut a = c.borrow_mut();
+                a.get_cyc[node_pc as usize] += dt;
+                a.get_n[node_pc as usize] += 1;
+            });
+            g
+        } else {
+            self.mtt_get::<COUNT, MODE>(key, route, fp, node_pc)
+        };
+        if let Some(w) = got {
             return w != 0;
         }
         if ORACLE && avail.popcount() <= self.nimber_pc {
@@ -734,6 +854,16 @@ impl IsoFlat {
                 !self.w8_get(att, child0)
             } else if !ORACLE && pc <= 7 {
                 !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
+            } else if !ORACLE && !COUNT && (9..=self.block_k).contains(&pc) {
+                // Dense-block boundary (QUEENS_BLOCK_K > 8): pc in 9..=block_k. Same D4 key as the
+                // non-block arm below (boundary-entry merging identical), then a local L1 subtree
+                // solve — no per-descendant flat-TT probe. pc==8 stays W8 (iso-window) / D4
+                // (iso-flat); default block_k == 8 ⇒ the range is empty ⇒ never taken.
+                let child = child_orient(orient, a, child0);
+                let ckey = d4_bits(lex_min8(&child));
+                let (cr, cf) = QueensTt::hash128(ckey);
+                self.tt.prefetch_h(cr);
+                !self.block_entry(q, att, child0, ckey, cr, cf, nodes)
             } else if pc <= self.iso_max_avail {
                 let ckey = self.iso_node_key(q, child0, pc);
                 let (cr, cf) = QueensTt::hash128(ckey);
@@ -753,7 +883,18 @@ impl IsoFlat {
                 break;
             }
         }
-        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
+        if MODE == M_PROF {
+            let t = rdtsc();
+            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
+            let dt = rdtsc().wrapping_sub(t);
+            PROF_ACC.with(|c| {
+                let mut a = c.borrow_mut();
+                a.put_cyc[node_pc as usize] += dt;
+                a.nodes[node_pc as usize] += 1;
+            });
+        } else {
+            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
+        }
         result
     }
 
@@ -986,6 +1127,105 @@ impl IsoFlat {
         result
     }
 
+    /// Widened [`solve_local`] for a dense block at `8 < pc ≤ block_k`: the win/loss DP over the
+    /// `u16` alive mask of a ≤12-vertex graph in a thread-private memo (no flat-TT probe below the
+    /// boundary). Same recurrence as `solve_local`, just `u16`. Every visited state bumps the node
+    /// counter so the block's descendant recompute is visible in the re-expansion measurement.
+    ///
+    /// **W8-base** (when `dense8` is `Some` — iso-window): any descendant with `popcount ≤ 8` is
+    /// resolved by a single lookup into the *complete, shared* dense W0..W8 tables instead of being
+    /// recomputed locally. Since the ≤8 subtree is the bulk of the nodes and the dense tables merge
+    /// it across all boundaries (zero recompute), this collapses the block's re-expansion to just the
+    /// thin pc 9..block_k shell — the variant that avoids the cross-boundary re-expansion.
+    fn solve_block_wide(
+        &self,
+        closed: &[u16; 13],
+        alive: u16,
+        memo: &mut [i8],
+        nodes: &mut u64,
+    ) -> bool {
+        let m = memo[alive as usize];
+        if m >= 0 {
+            return m != 0;
+        }
+        // W8-base: ≤8 vertices ⇒ one complete-table lookup (shared, no recompute, not a search node).
+        let k = alive.count_ones() as usize;
+        if k <= 8 {
+            if let Some(d8) = &self.dense8 {
+                let won = d8.get(k, dense_block_code(closed, alive, k));
+                memo[alive as usize] = won as i8;
+                return won;
+            }
+        }
+        self.tt.bump_local(nodes);
+        let mut result = false;
+        let mut rem = alive;
+        while rem != 0 {
+            let i = rem.trailing_zeros() as usize;
+            rem &= rem - 1;
+            let child = alive & !closed[i];
+            if child == 0 || !self.solve_block_wide(closed, child, memo, nodes) {
+                result = true;
+                break;
+            }
+        }
+        memo[alive as usize] = result as i8;
+        result
+    }
+
+    /// Dense-block boundary entry (`QUEENS_BLOCK_K > 8`, measurement prototype). A node has just
+    /// dropped to `8 < pc ≤ block_k`. Merge the boundary value once via the flat TT under the
+    /// **same D4 `key`** the non-block path would use (so boundary-entry merging is identical and
+    /// the re-expansion delta is *purely* the descendant recompute), then on a miss solve the whole
+    /// subtree in a thread-private `[i8;4096]` L1 memo over the ≤12-vertex graph from `child0` —
+    /// no further flat-TT probe below the boundary, exactly as the pc≤7 band's `solve_local` does.
+    #[allow(clippy::too_many_arguments)]
+    fn block_entry(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        child0: Bits,
+        key: Bits,
+        route: u64,
+        fp: u64,
+        nodes: &mut u64,
+    ) -> bool {
+        if let Some(w) = self.tt_get_h::<false>(key, route, fp) {
+            return w != 0;
+        }
+        // Extract the ≤12 live vertices in q.order rank order (matches the band/non-block move
+        // order, so the node set is identical modulo the local-vs-global memo merge).
+        let rank = self.order_rank(q);
+        let mut verts = [0u8; 13];
+        let mut k0 = 0usize;
+        child0.each(|v| {
+            let v = v as u8;
+            let r = rank[v as usize];
+            let mut j = k0;
+            while j > 0 && rank[verts[j - 1] as usize] > r {
+                verts[j] = verts[j - 1];
+                j -= 1;
+            }
+            verts[j] = v;
+            k0 += 1;
+        });
+        // closed[i] = live vertices in attack[verts[i]] (self-blocking), over u16 — as enter_graph.
+        let mut closed = [0u16; 13];
+        for i in 0..k0 {
+            let row = att08(att, verts[i]);
+            let mut c = 0u16;
+            for (j, &vj) in verts.iter().enumerate().take(k0) {
+                c |= (row.get(vj as u32) as u16) << j;
+            }
+            closed[i] = c;
+        }
+        let alive = ((1u32 << k0) - 1) as u16;
+        let mut memo = [-1i8; 4096];
+        let won = self.solve_block_wide(&closed, alive, &mut memo, nodes);
+        self.tt_put_h::<false>(key, route, fp, won as u8);
+        won
+    }
+
     /// In-band recursion: probe the flat TT, else expand. The descendant twin of
     /// [`enter_graph`](Self::enter_graph) — same graph `g`, only `alive` shrinks.
     #[inline]
@@ -1086,7 +1326,9 @@ impl IsoFlat {
             // the production-window combo (the guard const-folds to `M_NORMAL` elsewhere, and
             // DCE drops the dead arms — no instantiation blow-up).
             let mode = if WINDOW && !ORACLE && !COUNT {
-                if self.segment {
+                if self.prof {
+                    M_PROF
+                } else if self.segment {
                     M_SEG
                 } else if self.hist {
                     M_HIST
@@ -1102,6 +1344,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_HIST => self.wins_inc::<ORACLE, COUNT, WINDOW, M_HIST>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, M_PROF>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 _ => self.wins_inc::<ORACLE, COUNT, WINDOW, M_NORMAL>(
@@ -1213,6 +1458,7 @@ impl Solver for IsoFlat {
         self.tt.drain_local(); // sequential path: only this thread accumulated
         self.drain_oracle_local();
         self.drain_hist_local();
+        self.drain_prof_local();
         won
     }
     fn first_player_wins(&self, q: &Queens) -> bool {
@@ -1260,6 +1506,7 @@ impl Solver for IsoFlat {
         self.tt.drain_all(); // fold every worker's tail tally into the shared totals
         self.drain_oracle_all();
         self.drain_hist_all();
+        self.drain_prof_all();
         won
     }
     fn nodes(&self) -> u64 {
@@ -1281,6 +1528,17 @@ impl Solver for IsoFlat {
                 .map(|a| a.load(Ordering::Relaxed))
                 .collect()
         })
+    }
+    fn prof_data(&self) -> Option<Vec<u64>> {
+        self.prof.then(|| {
+            self.prof_data
+                .iter()
+                .map(|a| a.load(Ordering::Relaxed))
+                .collect()
+        })
+    }
+    fn per_worker_nodes(&self) -> Option<Vec<u64>> {
+        Some(self.tt.per_worker_nodes())
     }
     fn root_progress(&self) -> Option<(u64, u64)> {
         let total = self.root_total.load(Ordering::Relaxed);

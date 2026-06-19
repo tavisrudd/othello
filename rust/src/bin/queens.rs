@@ -541,13 +541,161 @@ fn commas(n: u64) -> String {
 /// solver, K/s for a slow one, plain /s for a crawl (e.g. `pn`, which is far too
 /// slow to register on the M/s scale — it would read a flat `0.0M/s`).
 fn fmt_rate(nodes: u64, secs: f64) -> String {
-    let rate = if secs > 0.0 { nodes as f64 / secs } else { 0.0 };
+    fmt_rate_f(if secs > 0.0 { nodes as f64 / secs } else { 0.0 })
+}
+
+/// As [`fmt_rate`] but from a rate already in nodes/sec (the live instantaneous / EMA rates).
+fn fmt_rate_f(rate: f64) -> String {
     if rate >= 1e6 {
         format!("{:.2}M/s", rate / 1e6)
     } else if rate >= 1e3 {
         format!("{:.1}K/s", rate / 1e3)
     } else {
         format!("{rate:.0}/s")
+    }
+}
+
+/// Loadavg-style smoothing windows (seconds) for the live throughput EMAs. Short relative to the
+/// loadavg 1/5/15-minute constants because an n=16 solve is minutes, not hours — and a window near
+/// the whole run length never converges, so the third figure is the **cumulative** average instead.
+const RATE_TAUS: [f64; 2] = [5.0, 15.0];
+
+/// Live node-throughput tracker for the progress line: a **1-second instantaneous** rate (delta
+/// over a ~1 s ring), two **loadavg-style exponential moving averages** (`RATE_TAUS` = 5 s / 15 s),
+/// and the **cumulative** whole-run average. Fed `(now, total_nodes)` each watcher tick; the EMAs
+/// decay by `1 − e^(−Δt/τ)` so they are correct regardless of tick jitter. Aggregate (whole-search)
+/// — the per-root/core split is layered on top.
+struct RateTracker {
+    ring: std::collections::VecDeque<(Instant, u64)>,
+    start: (Instant, u64),
+    inst: f64,
+    ema: [f64; 2],
+    cumm: f64,
+    primed: bool,
+    last_t: Instant,
+}
+
+impl RateTracker {
+    fn new(now: Instant, nodes: u64) -> Self {
+        let mut ring = std::collections::VecDeque::with_capacity(16);
+        ring.push_back((now, nodes));
+        RateTracker {
+            ring,
+            start: (now, nodes),
+            inst: 0.0,
+            ema: [0.0; 2],
+            cumm: 0.0,
+            primed: false,
+            last_t: now,
+        }
+    }
+
+    fn update(&mut self, now: Instant, nodes: u64) {
+        self.ring.push_back((now, nodes));
+        while self.ring.len() > 1
+            && now
+                .duration_since(self.ring.front().unwrap().0)
+                .as_secs_f64()
+                > 1.0
+        {
+            self.ring.pop_front();
+        }
+        let (t0, n0) = *self.ring.front().unwrap();
+        let win = now.duration_since(t0).as_secs_f64();
+        if win > 0.05 {
+            self.inst = nodes.saturating_sub(n0) as f64 / win;
+        }
+        let elapsed = now.duration_since(self.start.0).as_secs_f64();
+        if elapsed > 0.0 {
+            self.cumm = nodes.saturating_sub(self.start.1) as f64 / elapsed;
+        }
+        let dt = now.duration_since(self.last_t).as_secs_f64();
+        self.last_t = now;
+        if !self.primed {
+            self.ema = [self.inst; 2];
+            self.primed = true;
+        } else {
+            for (e, tau) in self.ema.iter_mut().zip(RATE_TAUS) {
+                let alpha = 1.0 - (-dt / tau).exp();
+                *e += alpha * (self.inst - *e);
+            }
+        }
+    }
+
+    /// `43.1M/s now · 41.2/39.0/38.5 M/s (5s/15s/cumm)` — instantaneous, the two EMAs, then the
+    /// cumulative whole-run average, all in M/s (loadavg convention: bare numbers, unit shown once).
+    fn fmt(&self) -> String {
+        format!(
+            "{} now · {:.1}/{:.1}/{:.1} M/s (5s/15s/cumm)",
+            fmt_rate_f(self.inst),
+            self.ema[0] / 1e6,
+            self.ema[1] / 1e6,
+            self.cumm / 1e6,
+        )
+    }
+}
+
+/// Eighth-block glyphs for the per-core throughput sparkline (low → high).
+const SPARK: [char; 8] = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
+
+/// Live per-core (per-rayon-worker) throughput for the optional `QUEENS_TELEM` breakdown: samples
+/// the solver's per-worker node tallies, computes each worker's instantaneous rate over a ~0.5 s
+/// window, and renders a sparkline (one glyph per active core, scaled to the busiest) — so load
+/// balance / idle cores / per-core throttling are visible at a glance without a 24-row table.
+struct PerCoreRates {
+    prev: Vec<u64>,
+    prev_t: Instant,
+    rates: Vec<f64>,
+}
+
+impl PerCoreRates {
+    fn new(now: Instant, counts: Vec<u64>) -> Self {
+        let rates = vec![0.0; counts.len()];
+        PerCoreRates {
+            prev: counts,
+            prev_t: now,
+            rates,
+        }
+    }
+
+    fn update(&mut self, now: Instant, counts: &[u64]) {
+        let dt = now.duration_since(self.prev_t).as_secs_f64();
+        if dt < 0.4 || counts.len() != self.prev.len() {
+            return;
+        }
+        for (i, &c) in counts.iter().enumerate() {
+            self.rates[i] = c.saturating_sub(self.prev[i]) as f64 / dt;
+        }
+        self.prev.copy_from_slice(counts);
+        self.prev_t = now;
+    }
+
+    /// `cores ▆▇█▅▆▇█▄… (2.1M max · 24 active)` — one glyph per ever-active worker.
+    fn fmt(&self) -> String {
+        // Active = workers that have done any work (cumulative > 0); skip the 256-slot padding.
+        let active: Vec<f64> = self
+            .rates
+            .iter()
+            .zip(&self.prev)
+            .filter(|(_, &tot)| tot > 0)
+            .map(|(&r, _)| r)
+            .collect();
+        if active.is_empty() {
+            return String::new();
+        }
+        let max = active.iter().cloned().fold(0.0_f64, f64::max).max(1.0);
+        let spark: String = active
+            .iter()
+            .map(|&r| {
+                let lvl = ((r / max) * (SPARK.len() - 1) as f64).round() as usize;
+                SPARK[lvl.min(SPARK.len() - 1)]
+            })
+            .collect();
+        format!(
+            "cores {spark} ({} max · {} active)",
+            fmt_rate_f(max),
+            active.len(),
+        )
     }
 }
 
@@ -598,14 +746,25 @@ enum Phase {
     OptimalLine { node_base: u64 },
 }
 
-fn progress_bar(n: u32, solver: &dyn Solver, start: Instant, phase: Phase) -> String {
+fn progress_bar(
+    n: u32,
+    solver: &dyn Solver,
+    start: Instant,
+    phase: Phase,
+    rates: Option<&RateTracker>,
+) -> String {
     let secs = start.elapsed().as_secs_f64();
     let node_base = match phase {
         Phase::Search => 0,
         Phase::OptimalLine { node_base } => node_base,
     };
     let node_count = solver.nodes().saturating_sub(node_base);
-    let rate = fmt_rate(node_count, secs);
+    // Search phase: live instantaneous + loadavg-style EMAs (the RateTracker). Elsewhere (the
+    // brief optimal-line walk, one-shot final reports) fall back to the cumulative average.
+    let rate = match (rates, phase) {
+        (Some(rt), Phase::Search) => rt.fmt(),
+        _ => fmt_rate(node_count, secs),
+    };
     let nodes = commas(node_count);
     let elapsed = fmt_elapsed(secs);
     let spin = SPINNER[((secs * 8.0) as usize) % SPINNER.len()];
@@ -662,6 +821,16 @@ fn watch(
         }
     };
     let mut last_cp = Instant::now();
+    // Live throughput: instantaneous (1 s) + loadavg-style EMAs, fed `solver.nodes()` each tick.
+    let mut rates = RateTracker::new(Instant::now(), solver.nodes());
+    // QUEENS_TELEM=1: an optional per-core throughput sparkline appended to the bar.
+    let mut percore = (std::env::var("QUEENS_TELEM").as_deref() == Ok("1"))
+        .then(|| {
+            solver
+                .per_worker_nodes()
+                .map(|c| PerCoreRates::new(Instant::now(), c))
+        })
+        .flatten();
     // Bench mode: emit a throughput line to stderr every `QUEENS_BENCH_SECS` even when
     // the live bar is off (a redirected short-n=16 A/B run) -- nodes/elapsed/rate plus
     // the solver's own stats (segments, re-expansion). Resolved once; unset ⇒ silent.
@@ -740,16 +909,25 @@ fn watch(
                 }
             }
         }
+        rates.update(Instant::now(), solver.nodes());
+        if let (Some(pc), Some(counts)) = (percore.as_mut(), solver.per_worker_nodes()) {
+            pc.update(Instant::now(), &counts);
+        }
         if bar {
             // Truncate to the terminal width so the line never wraps (a wrapped
             // line defeats the `\r` overwrite and leaves garbage); the glyphs are
             // all one column wide, so chars == columns. Clear to end-of-line after,
             // since this line may be shorter than the last.
             let cols = term_cols().saturating_sub(1);
-            let line: String = progress_bar(n, solver, start, phase)
-                .chars()
-                .take(cols)
-                .collect();
+            let mut full = progress_bar(n, solver, start, phase, Some(&rates));
+            if let (Some(pc), Phase::Search) = (percore.as_ref(), phase) {
+                let s = pc.fmt();
+                if !s.is_empty() {
+                    full.push_str(" · ");
+                    full.push_str(&s);
+                }
+            }
+            let line: String = full.chars().take(cols).collect();
             eprint!("\r{line}\x1b[K");
             io::stderr().flush().ok();
         }
@@ -1357,7 +1535,7 @@ fn do_checkpoint(
         let suffix = dump_suffix(reason, done, total, t);
         let cols = term_cols().saturating_sub(1);
         let keep = cols.saturating_sub(suffix.chars().count());
-        let search: String = progress_bar(n, solver, search_start, Phase::Search)
+        let search: String = progress_bar(n, solver, search_start, Phase::Search, None)
             .chars()
             .take(keep)
             .collect();
@@ -1389,6 +1567,29 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
     // we report that and skip the live counter; only n ≥ 14 needs a HyperLogLog
     // estimate (and only the table-backed solvers carry one).
     let live_count = distinct && q.n.is_multiple_of(2) && q.n > 12;
+    // Building the solver (the dense W8 table + a multi-GB TT alloc/prefault) takes several
+    // silent seconds at n=16. Spin a prep line during it so the run isn't dead-quiet before the
+    // search bar appears -- stopped + cleared the instant the solver is ready.
+    let prep_done = std::sync::Arc::new(AtomicBool::new(false));
+    let prep_handle = show_bar(q.n).then(|| {
+        let done = prep_done.clone();
+        let n = q.n;
+        let gb = (1u64 << bits) as f64 * 8.0 / 1e9;
+        thread::spawn(move || {
+            othello::affinity::pin_aux("prep");
+            let t = Instant::now();
+            while !done.load(Ordering::Relaxed) {
+                let secs = t.elapsed().as_secs_f64();
+                let spin = SPINNER[((secs * 8.0) as usize) % SPINNER.len()];
+                eprint!(
+                    "\r{spin} preparing {n}×{n} · dense W8 table + {gb:.0} GB TT (alloc + prefault) · {}\x1b[K",
+                    fmt_elapsed(secs),
+                );
+                io::stderr().flush().ok();
+                thread::park_timeout(Duration::from_millis(100));
+            }
+        })
+    });
     // --resume reloads a checkpoint image into the table and wraps the matching
     // table-backed solver around it (warm start); otherwise build a fresh solver.
     let solver: Box<dyn Solver> = match &cp_opts.resume {
@@ -1439,6 +1640,14 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
             (false, name) => make_solver(name, bits).unwrap(),
         },
     };
+    // Solver ready: stop the prep spinner and clear its line so the search bar starts clean.
+    prep_done.store(true, Ordering::Relaxed);
+    if let Some(h) = prep_handle {
+        h.thread().unpark();
+        h.join().ok();
+        eprint!("\r\x1b[K");
+        io::stderr().flush().ok();
+    }
     // Resolve checkpointing (opt-in; defaults on for n=16). Only the table-backed
     // solvers can dump -- warn and disable if checkpointing was asked for otherwise.
     let mut checkpoint = cp_opts.resolve(q.n);
@@ -1509,6 +1718,10 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
     // the segmented-TT bands (band_size[pc] ∝ puts[pc]). Printed once, post-solve.
     if let Some(hist) = solver.pc_hist() {
         print_pc_hist(&hist);
+    }
+    // QUEENS_PROF=1: the per-popcount TT get/put latency profile — where the memory cost lives.
+    if let Some(prof) = solver.prof_data() {
+        print_prof(&prof);
     }
     // With --distinct: how much of the search was re-expansion (TT thrash)?
     // Distinct is measured live (HyperLogLog) for n ≥ 14; for even n ≤ 12 we instead
@@ -2246,6 +2459,68 @@ fn print_pc_hist(hist: &[u64]) {
             Ok(()) => println!("  (pc-hist → {path})"),
             Err(e) => eprintln!("  (pc-hist: cannot write {path}: {e})"),
         }
+    }
+}
+
+/// `QUEENS_PROF=1`: the per-available-popcount TT get/put latency profile. The flat-TT `get`
+/// is the random DRAM probe, so its cycle total stratified by popcount **is** the memory-cost
+/// distribution — it shows directly whether the 35 % backend-by-memory lives in the pc≥13
+/// upper tree or the pc 9–12 region. Printed high-pc first (the upper tree on top), with a
+/// band summary. Layout matches [`IsoFlat::prof_data`]: `prof[metric * 257 + pc]`.
+fn print_prof(prof: &[u64]) {
+    const MAXPC: usize = 257;
+    let (get_cyc, get_n) = (&prof[0..MAXPC], &prof[MAXPC..2 * MAXPC]);
+    let (put_cyc, nodes) = (&prof[2 * MAXPC..3 * MAXPC], &prof[3 * MAXPC..4 * MAXPC]);
+    let tot_get: u64 = get_cyc.iter().sum();
+    let tot_put: u64 = put_cyc.iter().sum();
+    let tot_getn: u64 = get_n.iter().sum();
+    if tot_getn == 0 || tot_get == 0 {
+        println!("  (prof: no TT gets recorded)");
+        return;
+    }
+    println!(
+        "  TT-latency profile by available-popcount (QUEENS_PROF): {} gets / {} Mcyc get, {} Mcyc put",
+        commas(tot_getn),
+        commas(tot_get / 1_000_000),
+        commas(tot_put / 1_000_000),
+    );
+    println!(
+        "    {:>4} {:>15} {:>15} {:>9} {:>8} {:>9} {:>7} {:>7}",
+        "pc", "nodes", "gets", "get-Mc", "cyc/get", "put-Mc", "get%", "cum%",
+    );
+    let hi = get_n.iter().rposition(|&c| c != 0).unwrap_or(0);
+    let lo = get_n.iter().position(|&c| c != 0).unwrap_or(0);
+    let mut cum = 0u64;
+    for pc in (lo..=hi).rev() {
+        if get_n[pc] == 0 {
+            continue;
+        }
+        cum += get_cyc[pc];
+        println!(
+            "    {:>4} {:>15} {:>15} {:>9} {:>8} {:>9} {:>6.2}% {:>6.2}%",
+            pc,
+            commas(nodes[pc]),
+            commas(get_n[pc]),
+            commas(get_cyc[pc] / 1_000_000),
+            get_cyc[pc].checked_div(get_n[pc]).unwrap_or(0),
+            commas(put_cyc[pc] / 1_000_000),
+            get_cyc[pc] as f64 / tot_get as f64 * 100.0,
+            cum as f64 / tot_get as f64 * 100.0,
+        );
+    }
+    println!("    get-cyc by band (the memory-cost distribution):");
+    for (lbl, a, b) in [
+        ("9–12", 9usize, 12usize),
+        ("13–20", 13, 20),
+        ("21–40", 21, 40),
+        ("41+", 41, 256),
+    ] {
+        let g: u64 = (a..=b.min(MAXPC - 1)).map(|p| get_cyc[p]).sum();
+        println!(
+            "      pc {:>6}: {:>6.2}% of get-cyc",
+            lbl,
+            g as f64 / tot_get as f64 * 100.0,
+        );
     }
 }
 

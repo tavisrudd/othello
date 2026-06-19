@@ -55,6 +55,10 @@ pub struct QueensTt {
     /// Slot count (any value, not just a power of two -- see [`QueensTt::index`]).
     len: u64,
     nodes: AtomicU64,
+    /// Per-rayon-worker node tally for live throughput telemetry (`QUEENS_TELEM`). Attributed
+    /// at the ~1/[`FLUSH_NODES`] flush via `rayon::current_thread_index()`, so it costs nothing
+    /// on the per-node path. 256 slots covers any core count; the watcher reads deltas.
+    per_worker: Box<[AtomicU64]>,
     /// Optional distinct-position instrumentation (Chunk 1). `None` for an
     /// ordinary solve, so the production path pays only a predictable null check.
     counter: Option<Counter>,
@@ -410,6 +414,7 @@ impl QueensTt {
             slots: zeroed_huge_atomics(size),
             len: size as u64,
             nodes: AtomicU64::new(0),
+            per_worker: (0..256).map(|_| AtomicU64::new(0)).collect(),
             counter: None,
             segment,
             band_base,
@@ -566,13 +571,25 @@ impl QueensTt {
         }
     }
 
-    /// Flush a caller-owned local node accumulator into the shared counter.
+    /// Flush a caller-owned local node accumulator into the shared counter, attributing the batch
+    /// to the flushing rayon worker for live per-core telemetry (off the per-node path).
     #[inline]
     pub(crate) fn flush_local_nodes(&self, nodes: &mut u64) {
         if *nodes != 0 {
             self.nodes.fetch_add(*nodes, Ordering::Relaxed);
+            let w = rayon::current_thread_index().unwrap_or(0).min(255);
+            self.per_worker[w].fetch_add(*nodes, Ordering::Relaxed);
             *nodes = 0;
         }
+    }
+
+    /// Snapshot the per-rayon-worker node tallies (for the live per-core throughput display). The
+    /// watcher samples these each tick and reports per-worker deltas; index = worker, 0-padded.
+    pub fn per_worker_nodes(&self) -> Vec<u64> {
+        self.per_worker
+            .iter()
+            .map(|a| a.load(Ordering::Relaxed))
+            .collect()
     }
 
     /// Push a worker's local tally into the shared atomic + HLL and reset it. Called once
@@ -854,6 +871,7 @@ impl QueensTt {
             slots,
             len: header.len,
             nodes: AtomicU64::new(header.nodes),
+            per_worker: (0..256).map(|_| AtomicU64::new(0)).collect(),
             counter: None,
             // Resume does not support segmentation (the image is a flat-keyed snapshot).
             segment: false,
