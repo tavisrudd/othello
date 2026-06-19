@@ -525,3 +525,126 @@ remaining real levers are:
 - **n=18 enablers** (decompose, BuRR, 1 GB hugepages) — but note the de-risk shows component-nimber's
   *cost* scales with the distinct-component count, which grows with n too; it is unlikely to flip even at
   n=18. Weight set-assoc (real −7% node win, memory-residual-bound) above it for the oversubscribed regime.
+
+---
+
+## Session 2026-06-18--6 → 2026-06-19: per-node micro-opt sweep + the throughput thesis
+
+**Session**: `c46f7fdd-d044-4bd9-a7cf-7bdd31a3037f` — `mi`. Continues after the component-nimber
+de-risk (above). User steer: "micro-opt the hell out of it" + 7 parallel research sub-agents +
+the throughput observation below. **Commits (main)**: `5816c14` (branchless tiny_edge_code — the
+one win) · `30a9d58` (filter_bench microbench + measured-negative note). Earlier in the same
+session: `39f184f`/`6a299e3` (nimber cost-zeroing dead, documented above).
+
+### PART A — THE DATA (facts; measured, low interpretation)
+
+**Profiling (n=16 iso-window, the champion; full 16 GB TT; perf on this znver5 box):**
+- `perf stat` (90s partial): IPC **0.90 / CPI 1.13**, **frontend-idle 27% of cycles**, branch-miss
+  **10.1% of branches** (~15% of cycles), **L1d-load-miss 1.0%**, 40.9 M/s. (Note: LLC-miss /
+  memory-bound topdown were NOT measured — the DRAM/probe cost is uncharacterised.)
+- `perf record` cycles by symbol: `wins_inc` ~50%, `band_entry` ~20%, `w8_get` ~6%.
+- `perf record` branch-misses by symbol: `band_entry` ~50%, `wins_inc` ~20%, `w8_get` ~7%.
+- `perf annotate band_entry`: `tiny_edge_code` `code |= edge_bit(...)` **31%**, vert-extraction
+  (`verts[n]=v`/`while w`/`n+=1`) **~32%**, `tiny_get` atomic_load **8%**, attack-row load 7.7%.
+  `solve_local` is **<2%** of cycles (did not make the ≥2% symbol list).
+- `perf annotate wins_inc`: move-availability (`avail_has8`/`filter_moves`: `sq>>6` 23.8%,
+  `nc+=avail_has8` 20.1%, loop 3.8%) **~52%**; **`child0==Bits::ZERO` raw_eq 20.5%**; `lex_min8`
+  (`for cand in o[1..]` 15.5% + `if cand<best` 7.3%) **~23%**.
+- **Structural fact:** `iso_flat_key_max_avail()` defaults to **7**, so the WL `comp_canon`/`wl_refine`
+  graph key is **dead in production**. The live per-node path is: `lex_min8` D4 key for pc≥9
+  (`wins_inc`), `band_entry`→`enter_graph`→`solve_local` for pc≤7, `w8_get` for pc==8.
+
+**Micro-opt scorecard — every change A/B'd interleaved on n=16 iso-window** (CPI/branch-miss are
+node-count-independent; M/s is the throughput; value-preserving changes also compare M/s directly):
+
+| change | CPI | branch-miss% | M/s | other | verdict |
+|--------|-----|--------------|-----|-------|---------|
+| branchless `tiny_edge_code` | 1.129→1.101 (−2.5%) | ~flat | ~flat | value-preserving | **SHIPPED** `5816c14` |
+| SIMD-gather `lex_min8` | 1.110→1.275 (+15%) | — | 41.0→37.4 (−9%) | instr −12% | reverted |
+| `pc==0` reorder (drop `child0==ZERO` raw_eq) | 1.107→1.116 (+0.8%) | flat | 41.3→41.0 | — | reverted (wash) |
+| drop `tiny_tt` (always `solve_local`) | — | — | n14 wall +22% | re-exp 1.25→6.73× | reverted (loss) |
+| BITALG move-filter (`vpshufbitqmb`+`vpcompressb`, thr 16) | 1.106→1.167 (+5.5%) | 10.19→9.87 (−3%) | 41.9→42.2 (+0.7%) | — | reverted (wash) |
+| pext edge-code (`tiny_table_index`) | 1.108→1.072 (−3%) | 10.15→8.66 (−15%) | 42.05→33.94 (**−19%**) | instr +~20% | reverted (loss) |
+
+- `tiny_tt` drop measured on n=14 iso-flat wall (5 rounds: base 1.73–1.78s, drop 2.10–2.19s) +
+  the `--distinct` re-exp gate (iso-flat is required for `--distinct`; iso-window has no distinct counter).
+- **Microbench `filter_bench.rs`** (committed): scalar vs BITALG move-filter break-even ≈ **14 moves**
+  (BITALG 0.48× @len4, 0.97× @12, 1.23× @16, 2.2× @32, 4.5× @256). Flat ~3.6 ns / 64-move chunk.
+
+**The throughput observation (user's run):**
+- `/tmp/queens_drop solve 16 iso-window` (USE_TINY_TT=false drop binary): **22.6 B nodes / 53.29 s =
+  424 M/s** (interrupted). Baseline (`/tmp/queens_tec_base`, tiny_tt ON) ≈ **42 M/s** (3.36 B / 90 s).
+- Drop binaries identified by the n=12 `--distinct` re-exp: drop 6.72×, baseline 1.25×.
+- So in ~equal wall the drop does ~10× the nodes at ~10× the rate, but its nodes are cheap L1
+  `solve_local` re-solves (no TT probe, no memoisation), and it completes **slower** (the +22% wall).
+
+**Saved binaries (this box, /tmp):** `queens_tec_base` (baseline = main `5816c14`-era), `queens_drop`
+(tiny_tt OFF), `queens_bitalg`, `queens_pext`, `queens_simd` (lex_min8), `queens_pczero`. Reproduce any
+A/B directly without rebuilding.
+
+**Research (7 sub-agent proposals, `notes/proposal-2026-06-18-*.md`):** simd-dense-dataflow (Idea A
+MLP-prefetch, Idea B dense-blocks pc≤12), op-fusion + op-fusion-deep (pext/GFNI edge builds, child_orient
+vpandnq, filter_moves vpcompressb, hash128 dead-words, band-entry double-decomposition fusion),
+recompute-vs-store (the tiny_tt drop — measured-dead here), representation-shrink (expand_graph kids-array
+dead `Bits`, hash128 dead-words), parallelism-chokepoints (Amdahl ceiling ~9 s / ~5.5%; env-only
+PAR_MIN_AVAIL/AFFINITY sweeps untried on iso-window), hardware-fastpaths (BITALG move-filter — measured
+wash here). Untried-but-proposed: hash128 drop-constant-words, child_orient vpandnq, env parallelism sweeps,
+dense-blocks (Idea B), BuRR archive.
+
+### PART B — MY INTERPRETATIONS (⚠️ caveated — I was wrong once this session; treat as hypotheses, not facts)
+
+**⚠️ Caveat up front: I made a real interpretation error this session.** When the user reported a 352 M/s
+throughput, I claimed it was the *baseline* "starting fast and decaying as the TT fills" — a TT-fill memory
+wall with ~8× headroom. **That was wrong.** The number was always the **drop binary** (cheap, non-selective
+≤7 re-solves). The baseline never bursts to 352/424; the arithmetic disproves it (baseline 3.36 B/90 s).
+I over-fit a narrative to one polluted number. The interpretations below are my best current reading, but
+weight them accordingly and measure before building.
+
+1. **Compute micro-opts are exhausted, for two distinct reasons by region** (confidence: medium-high — six
+   measured negatives/washes back it, but see caveat #3):
+   - **`wins_inc` deep (pc≥9, ~50% cycles)** is dominated by a cost *invariant to per-node compute shaves*
+     — every compute opt there washed (lex_min8, BITALG-filter, pc==0). That cost is *either* the random
+     TT probe (LLC→DRAM) *or* frontend/i-cache (the key/dispatch). **I have NOT disambiguated which** — see #3.
+   - **`band_entry` (pc≤7, ~20%)** operates on **tiny data** (k≤4 components, short move lists), where any
+     fixed-overhead wide instruction (BITALG, pext) loses to the minimal scalar loop — measured: pext −19%
+     (instr +20% from 4-word overhead × tiny comps), BITALG break-even ~14 but most lists are shorter.
+
+2. **The 424 M/s is the ≤7 L1-compute rate, NOT the whole-search floor** (confidence: high). The deep pc≥9
+   nodes carry irreducible compute (D4 key, dispatch, hash) even with zero DRAM, so cache-resident they'd
+   run at their frontend-bound rate — faster than 42 but well short of 424. The realistic whole-search floor
+   is the floor-note's **~45–60 s** (we're at 2m44s ≈ 3× over). The 424 *does* show cheap-L1 nodes are ~10×
+   faster than the baseline blend — real evidence that touching the 16 GB TT is a large per-deep-node cost.
+
+3. **UNRESOLVED: is the deep region DRAM-bound or frontend-bound?** (confidence: low — this is the load-bearing
+   open question). `perf stat` leaned **frontend** (27% fetch-idle, L1d-miss 1%, and the TT probe is
+   prefetched so DRAM latency may already be largely hidden). The 424-vs-42 gap is *partly a node-mix artifact*
+   (drop = cheap-heavy mix), not a clean probe-cost number. **The one clean measurement that would settle it:
+   LLC-load-miss + memory-bound topdown on the deep region specifically.** Do this before betting on a
+   memory lever. (My earlier "DRAM is the 3× gap" was an over-claim.)
+
+4. **The user's thesis — "don't hit DRAM TT in the inner loop; pack it small + cache-resident" — is sound
+   in direction** (my read), **but a naive shrink fails**: the working set is ~5 B distinct positions; a
+   tens-of-MB cache holds ~millions of slots → eviction explosion (the TT-size sweep already measured the
+   wall going *flat* on shrink — TLB win cancelled by re-expansion). So it needs a **denser representation**,
+   not a smaller array. Two forms realise it: (a) **dense-blocks** — solve pc≤12 subtrees in L1 like
+   `solve_local` does ≤7, *with* memoisation, removing the DRAM probe for the bulk of the deep region while
+   keeping selectivity (the drop got throughput by *dropping* selectivity; this keeps it); (b) **BuRR archive**
+   (~1.1 bit/key, eviction-free) packs the resident set ~50× toward cache-residency. Both are roadmap items.
+
+5. **Recommended next step (my view):** measure #3 first (one perf run, deep-region LLC/memory-bound) to
+   confirm and size the DRAM prize, *then* scope **dense-blocks (Idea B)** as the principled lever — it
+   attacks both the probe and the per-node compute, so it is robust to whichever #3 turns out to be.
+   `hash128` drop-constant-words is the one remaining compute opt not in the small-data trap (critical-path,
+   not memory-mix), but ~5% and partly latency-hidden — low priority. Parallelism env-sweeps are ~5.5%
+   ceiling, zero-risk, untried on iso-window.
+
+### Method banked this session
+- **High perf-attribution ≠ removable cost.** `child0==ZERO` raw_eq showed 20.5% of `wins_inc` but the
+  pc==0 reorder was a wash — the 20.5% was the load-to-use *stall* on `child0`, not the compare. A heavier
+  first-consumer (popcount) eats the same stall. Verify with an A/B; don't infer removable cost from a hot line.
+- **Wide instructions lose on small data.** BITALG (short move lists) and pext (k≤4 comps) both lost their
+  fixed setup to minimal scalar loops. The queens hot regions are small-data — SIMD/pext only pay on the
+  rare long-list / large-component tail.
+- **Identify which binary produced a number before interpreting it.** The 352/424 confusion came from not
+  checking that `target/release/queens` was the drop build at the time. Tag binaries (re-exp is a free
+  fingerprint: drop 6.7×, baseline 1.25×).
