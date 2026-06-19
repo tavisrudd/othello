@@ -695,3 +695,42 @@ loop (and/or splitting `wins_inc` so the hot inner body is small) is the lever, 
 **Saved binaries for any A/B (this box, /tmp):** `queens_tec_base` (baseline), `queens_drop` (tiny_tt OFF,
 424 M/s), `queens_bitalg`, `queens_pext`, `queens_simd`, `queens_pczero`. `filter_bench` (committed) is the
 move-filter microbench harness; clone its shape for the dense-block / unroll microbenches.
+
+### Prune-stall + TT-put batching → they converge on one structural lever (design note, 2026-06-19)
+
+Two user questions — "structurally reduce the stall a prune costs" and "batch TT puts" — have the same root
+answer: **the recursive DFS is a serial random-access-latency chain (get → stall → decide → recurse → put),
+exposing one memory op at a time; an explicit-stack / frontier form lets us keep N independent ops in
+flight (MLP), hiding the latency the recursion serialises.** Detail:
+
+- **What a prune actually costs.** A TT-hit or α-β cutoff means "don't expand" — but you still paid (i) the
+  **get latency** to *discover* the hit (you stall on the get before the hit/miss branch), and (ii) on
+  return, the **stack unwind** (N call-frame pops + return-stack-predictor pressure). Pruning removes the
+  *expansion*, not the latency — so a prune-heavy (selective) search is dominated by get-latency + unwind.
+- **Lever 1 — explicit-stack unroll removes the unwind** (queue #1): a prune just pops the work-stack; no
+  N-frame call/return unwind, no big-`wins_inc`-body re-fetch per level. Directly addresses cost (ii).
+- **Lever 2 — the unroll *enables* batched-prefetch MLP** (the synergy): a *recursive* DFS can only
+  prefetch one-ahead; an explicit work-stack lets you **push a batch of children, prefetch all their TT
+  slots, then pop+process in cutoff order** — N gets in flight, their latency overlapped. Addresses cost
+  (i). The clean place is the **AND / prove-loss levels** (all children needed → no cutoff to lose → the
+  full batch is always consumed → zero wasted prefetch).
+- **TT puts (the second question).** Puts are Relaxed *posted* stores (store-buffer-absorbed) **except** a
+  deep node's put lands long after its get — the line is usually **evicted**, so the put pays a
+  **Read-For-Ownership** (write-allocate fetches the line from DRAM before writing). So deep puts *do* hit
+  DRAM. Batching random-slot puts does **not** avoid RFO (different lines), and non-temporal stores hurt
+  (TT entries are re-read by transpositions). BUT in the iterative/frontier form, collecting a batch of
+  puts and issuing them together **pipelines the RFO reads (MLP on the writes too)**, the same way batched
+  gets pipeline — so put-batching is real *only as part of* the iterative restructure, not standalone. And
+  **gets matter more than puts** (gets are on the critical path; puts are posted) — batch gets first.
+- **Unifying structural change:** an explicit-stack DFS (or bounded frontier) that batches the independent
+  memory ops at the AND levels → MLP hides the random-access latency the recursive form exposes serially.
+  The unroll (queue #1) and the batched get/put MLP are the *same* restructure; do them together.
+
+**⚠️ Gate this on measurement #0.** If the deep-node cost is **key-compute/i-cache** (frontend) rather than
+**memory latency**, MLP-batching memory buys little — the lever would instead be shrinking the per-node body
+/ dense-blocks. The disambiguating perf run decides whether "batch the memory ops" or "shrink the compute"
+is the right structural move. Don't build the batched-MLP iterative form until #0 confirms latency, not
+compute, is the prune stall.
+
+**Refined queue #1:** *unroll the recursion to an explicit work-stack, designed from the start to batch
+child TT gets (and, at AND levels, puts) for MLP* — the unroll and the batching are one change, gated on #0.
