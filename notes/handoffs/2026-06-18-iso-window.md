@@ -517,6 +517,14 @@ help. **No dense table fixes this** — it's Sprague-Grundy, not an implementati
 component decomposition is **measured-dead from three angles: coverage (0.8%), miss-count (99.8% at 9–12),
 and wall (monotone net-negative).**
 
+**Scope of this verdict (what it does NOT kill):** only the component-**nimber/oracle** (cost-zeroing,
+resolve-without-recursion) lever is dead. The separate component-**merge-key** (capacity: key positions by
+their component-multiset to merge more transpositions → fit RAM → re-exp 1.0) is a *different* lever and was
+NOT measured here — though note iso-window's `iso_key_fast` ALREADY folds per-component canon keys, so much
+of that merge is likely already captured. Treat the older burr-state note's "component table = the <20min
+lever" as the capacity merge-key in the RAM-bound burr regime — untested-and-partly-superseded-by-iso-window,
+not confirmed.
+
 **So the fork collapses to (b)/(c).** Cost-zeroing (a) is closed. n=16 is per-unit-cost-bound, and the
 remaining real levers are:
 - **Per-unit-cost reduction** in the *main* search — the micro-opt / segmented / set-assoc family that
