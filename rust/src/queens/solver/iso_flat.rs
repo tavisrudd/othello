@@ -465,12 +465,17 @@ impl IsoFlat {
     /// `dense8` is always `Some`.
     #[inline]
     fn w8_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
-        let dense8 = self.dense8.as_ref().expect("WINDOW ⇒ dense8 is Some");
+        // SAFETY: the WINDOW const generic at the (only) call site guarantees `dense8` is
+        // `Some` (set by `from_tt_with_window(.., true)`). Drops a None-branch + panic target
+        // from the hot body — the i-cache shave of the banked PROVE_LOSS win.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 8);
         let mut verts = [0u8; 8];
         let mut n = 0usize;
         avail.each(|v| {
-            verts[n] = v as u8;
+            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
+            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
             n += 1;
         });
         debug_assert_eq!(n, 8);
@@ -491,12 +496,15 @@ impl IsoFlat {
     /// for every child and performs no TT access or W9 allocation.
     #[inline]
     fn w9_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
-        let dense8 = self.dense8.as_ref().expect("W9 ⇒ dense8 is Some");
+        // SAFETY: the DK≥9 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 9);
         let mut verts = [0u8; 9];
         let mut n = 0usize;
         avail.each(|v| {
-            verts[n] = v as u8;
+            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
+            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
             n += 1;
         });
         debug_assert_eq!(n, 9);
@@ -517,12 +525,15 @@ impl IsoFlat {
     /// then [`DenseW8::get10`] sweeps every child (nested one ply into W9, else a W≤8 lookup).
     #[inline]
     fn w10_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
-        let dense8 = self.dense8.as_ref().expect("W10 ⇒ dense8 is Some");
+        // SAFETY: the DK≥10 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 10);
         let mut verts = [0u8; 10];
         let mut n = 0usize;
         avail.each(|v| {
-            verts[n] = v as u8;
+            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
+            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
             n += 1;
         });
         debug_assert_eq!(n, 10);
@@ -543,12 +554,15 @@ impl IsoFlat {
     /// one ply into W10/W9 (else a W≤8 lookup) per child.
     #[inline]
     fn w11_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
-        let dense8 = self.dense8.as_ref().expect("W11 ⇒ dense8 is Some");
+        // SAFETY: the DK≥11 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 11);
         let mut verts = [0u8; 11];
         let mut n = 0usize;
         avail.each(|v| {
-            verts[n] = v as u8;
+            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
+            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
             n += 1;
         });
         debug_assert_eq!(n, 11);
