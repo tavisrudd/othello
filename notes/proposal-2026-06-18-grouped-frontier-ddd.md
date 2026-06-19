@@ -240,11 +240,48 @@ where it wins** (the user's stated precondition), so gated-B is dropped — not 
 measurement. (Revisit only if a non-per-root gate — e.g. per-boundary-popcount or a learned local
 signature — is found; the obvious structural proxies are flat.)
 
+## Phase 1a results (measured 2026-06-18) — the node lever is huge but **wall-bound by nimber cost**
+
+Branch `queens-component-nimber` (abf38ee). Raised the Lever-B oracle cap 7→12 (WL `iso_key_fast`
+for components 8..12; oracle-path only, off by default). Oracle verdict vs `naive` on small boards
+passes at cap=12. **n=14 (iso-flat oracle path):**
+
+| config | nodes | wall |
+|---|---|---|
+| plain (no oracle) | 34.5 M | **0.71 s** |
+| oracle cap-7 | 29.3 M | 1.00 s |
+| oracle cap-9 | 18.0 M | 2.36 s |
+| oracle cap-12 | **9.0 M (−74%)** | **4.66 s (6.6× worse)** |
+
+The dedup is **real and large** (−74% nodes, matching Phase-0 coverage) — but wall goes **6.6× the
+wrong way**, and *even cap-7 is net-negative*. **Cost killer: the cutoff-free nimber recursion**
+(`comp_nimber` computes a full mex over every move — no α-β cutoff — and recurses), which explodes
+past cap-7. The Phase-0 coverage napkin was right about *how many* nodes resolve and silent about the
+*per-resolution price*; Channel-Fermi fires. This joins the **banked negative** that the graph-iso
+win/loss key is ~2.2× slower at n=16 — i.e. **pc=9..12 dedup is consistently per-unit-cost-bound, not
+coverage-bound**.
+
+**Around-the-wall path (recorded, NOT built — multi-session):** the same trick W8 used for win/loss —
+a **dense nimber table for components ≤8** (W8 but storing the 4-bit Grundy value, ~128 MiB over
+2^28 labelled 8-graphs, built as a pre-pass). Then multi-component resolution = *decompose → dense
+lookup per component → XOR*, with **no recursion** — the cost killer is gone. Caveats to measure
+first: (1) its *incremental* value over iso-window is only the multi-component, all-components-≤8,
+whole-pc>8 fraction (iso-window already dedups single-component ≤8 via W8/tiny + the iso key); (2) it
+adds a per-node decompose tax to *all* nodes, including the majority that fall through to the DFS.
+
 ## Recommendation
 
-**Approach A (dense eviction-free component-nimber table), sub-variant A1 first.** Phase 0 confirms it:
-+27 pts no-recursion coverage at n=14, scaling up with n. Gated-B dropped on the measured proxy
-flatness above.
+**Updated by Phase 1 measurement: the full-nimber-recursion form of Approach A is wall-bound — park
+it.** The lever's coverage (Phase 0, +27 pts) is real but its per-resolution nimber cost exceeds the
+saved expansion at n=14 reuse, and the cost structure (explodes past cap-7, cap-7 already negative)
+is a strong negative consistent with the banked graph-iso-key result. **The live revival is the
+dense-nimber-≤8 table** (above) — a W8-discipline reformulation that removes the recursion — but it's
+a multi-session build whose incremental value over iso-window must be measured first. Park
+`queens-component-nimber` (abf38ee, off main); do not revert. Gated-B remains dropped.
+
+_(Original recommendation, pre-Phase-1: **Approach A, sub-variant A1 first** — superseded by the
+measurement above. The component decomposition is sound and the coverage is there; only the nimber
+cost structure defeats the naive form.)_
 
 Justification:
 1. **Lowest risk, highest reuse.** It fires as an oracle *inside the unchanged DFS* (like `w8_get`),
