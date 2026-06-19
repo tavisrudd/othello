@@ -1121,3 +1121,44 @@ local-block recompute.
 adds a small per-node range-check to the hot path when compiled in and is a measured-negative → **do not
 merge to main as-is** (park on a branch like the other prototypes, or drop). `dense_block_code` +
 `solve_block_wide` + the W8-base ≤8 lookup are the reusable kernel if the layered sweep is ever built.
+
+### Stratified TT-latency profiler (`QUEENS_PROF`) — and it REFUTED the pc≥13 claim (2026-06-19--1)
+
+User: "instrument the code for perf stats stratified by pc, depth, ply." Built a gated `M_PROF`
+monomorphisation (sibling of `M_HIST`/`M_SEG`, zero production cost) that `rdtsc`-times every flat-TT
+**get** and **put** in `wins_inc` and bins the cycles by available-popcount. `QUEENS_PROF=1` → per-pc
+table {nodes, gets, get-Mcyc, cyc/get, put-Mcyc, get%, cum%} + a band summary, printed post-solve. The
+get *is* the random DRAM probe, so **get-cyc by pc is the memory-cost distribution.** Code: `M_PROF`,
+`PROF_ACC`/`prof_data`/`drain_prof_*`, the get/put `rdtsc` wraps, `print_prof` in `queens.rs`.
+
+**n=16 result (5.5 B nodes, 9.9 B gets, 1.59 T get-cyc / 0.15 T put-cyc):**
+
+| pc band | get-cyc share | | pc | cyc/get | gets |
+|---------|---------------|-|----|---------|------|
+| **9–12**  | **63.53 %** | | 9  | 150 | 2.37 B |
+| 13–20   | 31.00 %       | | 12 | 164 | 0.97 B |
+| 21–40   | 5.36 %        | | 16 | 166 | 0.38 B |
+| 41+     | 0.11 %        | | 24 | 175 | 0.055 B |
+
+**THE MEMORY COST IS AT pc 9–12 (deepest), NOT the pc≥13 upper tree — my earlier inference was WRONG.**
+cyc/get is ~uniform (~150–200, partially prefetch-hidden), so the cost tracks the **get count**, which peaks
+at the deepest, most-visited nodes (pc=9 alone = 2.37 B gets / 22 % of all get-cyc). pc 9–20 = 94.5 % of the
+probe latency.
+
+**Corrections this forces to the dense-block verdict above:**
+- The dense-block "coverage ceiling ~9 pts / memory is pc≥13" reasoning is **wrong**. Dense-blocks targets
+  the *right* region (pc 9–12 = 63.5 % of memory). It lost on **compute overhead + re-added memory** (the
+  `dense_block_code` rebuild, the dense8 ≤8 lookups, the boundary-entry probes), **not** coverage. The 9-pt
+  backend drop was the block *shifting* memory (boundary probes + W8 spill), not a coverage limit.
+- **The clean memory lever is MLP-batched gets at pc 9–12.** The gets are only ~half-hidden (~165 cyc
+  exposed) by the current *one-ahead* prefetch, and the deep `wins_inc` path — unlike `expand_graph`, which
+  already batches — issues them serially. Batching the pc 9–12 children's gets (overlap the exposed latency)
+  is the prune-stall-note lever, now confirmed against the region that actually holds the cost. This is the
+  highest-value next memory lever (revives QUEUED #1b with a measured target).
+
+**Method banked:** an `rdtsc`-stratified profiler (gated const-`MODE`, thread-local, drained like the pc
+histogram) cheaply attributes get/put latency by pc — and it overturned a confident wrong inference. **v2
+(next): thread `depth` → per-depth/ply bins + node self-cycles (compute-vs-memory split per bin); v3:
+`rdpmc` DRAM-fill/LLC-miss counters per pc for exact attribution (the `rdtsc`-get undercounts — it caught
+13–15 % of cycles as get-latency vs the 38.7 % topdown backend-by-memory, the rest being put-RFO + stalls
+that surface past the get instruction).**
