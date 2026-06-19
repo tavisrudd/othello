@@ -199,13 +199,18 @@ Plus:
 
 - **Use ecosystem crates properly** (clap for CLIs, rayon, `libc` for `madvise`) — no
   "no-dep / faithful-port" rationalisation for avoiding a dependency.
-- Canonical rules live here (git-tracked); the per-project auto-memory holds short
-  triggers/pointers only, never the canonical rule.
+- Canonical rules live here (git-tracked). **Record ALL project work in the git-tracked
+  handoffs (`notes/handoffs/`), NEVER in the per-project auto-memory** — handoffs are
+  visible to the user; auto-memory is not. The auto-memory is reserved for cross-project
+  standing preferences only; do not stash session findings, data, interpretations,
+  decisions, or queues there (they get hidden + duplicate the handoff).
 
 ## Handoffs
 
-`notes/handoffs/YYYY-MM-DD-<slug>.md`, one file per work stream. End each session
-with the handoff's Progress updated + a dated Handoff Note (session id, commits, what
-landed, measurements, next steps). Ship doc updates in the same commit as (or
-back-to-back with) the code they describe — don't leave docs uncommitted across a
-session boundary.
+`notes/handoffs/YYYY-MM-DD-<slug>.md`, one file per work stream — the **single source of
+truth** for all project work (findings, measurements, interpretations, decisions, next-step
+queues). They are git-tracked and visible; the invisible auto-memory is NOT a place for any
+of this. End each session with the handoff's Progress updated + a dated Handoff Note
+(session id, commits, what landed, measurements, next steps). Ship doc updates in the same
+commit as (or back-to-back with) the code they describe — don't leave docs uncommitted
+across a session boundary.
