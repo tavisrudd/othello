@@ -23,8 +23,12 @@ measured ~13% TLB-residency warm-M/s win *without* shrinking the table (smaller 
 eviction; capacity is not the binding constraint, per-probe latency is). **Keep the flat TT as the A/B
 control.** Plan + Codex's windowed-dataflow design are in the iso-window handoff.
 
-**Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` DDD (Codex's
-pump→group→dense-solve→merge — the floor note's streaming-dedup lever, breaks DFS-residence); **BuRR
+**Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped**, see
+[proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Phase-0 measured: dedup **connected
+components, not whole graphs** — recommend a dense eviction-free **component-nimber table** (raise the
+Lever-B oracle cap 7→12; +27 pts no-recursion coverage at n=14, scales up with n) fired inside the DFS
+(keeps α-β cutoffs). Codex's frontier-chunk DDD was **dropped**: no cheap proxy targets cross-root
+reuse (max ρ=0.54 < 0.7). Next = **Phase 1** (raise cap + eviction-free arena). Also: **BuRR
 archive** (Chunk-4, eviction-free value-only ~1.1 bit/key — sound under windowing); **1 GB hugepages**
 for the TT (zero TT TLB miss, needs boot-time reservation).
 
