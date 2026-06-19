@@ -648,3 +648,50 @@ weight them accordingly and measure before building.
 - **Identify which binary produced a number before interpreting it.** The 352/424 confusion came from not
   checking that `target/release/queens` was the drop build at the time. Tag binaries (re-exp is a free
   fingerprint: drop 6.7×, baseline 1.25×).
+
+### Added interpretation (user, 2026-06-19): recursion / stack-unwind cost — a THIRD hypothesis
+
+The deep-node cost has **three** candidate explanations, not two. Why the baseline's deep pc≥9 nodes are
+~10× slower than the drop's cheap ≤7 nodes could be:
+- **(a) TT DRAM probe** — random access into the 16 GB table (but prefetched; L1d-miss only 1%, so maybe
+  largely hidden — uncharacterised at LLC/DRAM level).
+- **(b) key-compute / i-cache** — `child_orient`+`lex_min8`+dispatch+hash per node (frontend-bound, 27%).
+- **(c) recursion / stack machinery (user's hypothesis)** — the recursive DFS pays a call + prologue/
+  epilogue + frame spill + **return-address-stack-predictor** cost per level, and `wins_inc` is a *large*
+  function (the full pc==8/≤7/iso/else ladder + both PROVE_LOSS and non-prove arms), so each deep call
+  re-fetches a big body → i-cache/frontend pressure that *scales with selectivity* (a selective search
+  recurses deep; the drop's cheap re-solve recurses shallow over the tiny `solve_local` body). This would
+  *also* present as the measured frontend-idle 27% — (b) and (c) are entangled in that number.
+
+**Caveat (mine): (b) and (c) are not yet separated, and (a) is unmeasured.** All three are consistent with
+"compute micro-opts wash" and with "424 cheap-L1 ≫ 42 deep." The disambiguating measurement is the first
+queued item. **Implication if (c) dominates:** unrolling the recursion into an explicit-stack iterative
+loop (and/or splitting `wins_inc` so the hot inner body is small) is the lever, independent of the TT.
+
+## QUEUED NEXT WORK (prioritised; this work stream)
+
+0. **Disambiguate the deep-node cost (do FIRST — it routes everything below).** One `perf stat` on the
+   deep region with LLC-load-miss + the topdown frontend breakdown (i-cache miss vs branch-resteer vs
+   decode) + a memory-bound estimate. Settles (a) DRAM vs (b) key-compute vs (c) recursion-stack. Cheap,
+   no build. Until this is known, treat the lever choice below as hypothesis-gated.
+1. **Unroll the recursion → explicit-stack iterative DFS** (user's lever; attacks (c)). Convert
+   `wins_inc`/`wins_tiny`/`solve_local` recursion to an explicit work-stack loop; consider splitting the
+   big `wins_inc` so the per-node hot body is small (cold arms `#[inline(never)]`). Expected to help the
+   frontend-idle 27% if (c)/(b) dominate. Gate: value-preserving (same node set/verdict) — hold
+   `solve 12 iso-flat --distinct` = 1,060,823 + lineage; A/B n=16 CPI + M/s. Risk: explicit stack can be
+   slower if the compiler was already TCO-ing / inlining well — measure.
+2. **Dense-blocks (Idea B, pc≤12 win/loss in L1, memoised)** — converts deep nodes to cheap L1 block-solves
+   *with* selectivity (the drop got throughput by dropping selectivity; this keeps it). Attacks (a)+(b)+(c)
+   at once for the pc≤12 region. The principled path to the cheap-node rate. Multi-session; scope it.
+   See `notes/proposal-2026-06-18-simd-dense-dataflow.md` Idea B (gate on the distinct-reachable-boundary
+   footprint pre-check first).
+3. **BuRR archive (~1.1 bit/key, eviction-free)** — packs the resident set ~50× toward cache-residency
+   (the user's "pack small + cache" thesis, the form that survives the eviction tension). Roadmap Chunk-4.
+4. **hash128 drop-constant-words** — the one compute opt not in the small-data trap (critical-path, not
+   memory-mix). ~5%, partly latency-hidden; needs `TT_HASH_ID` bump + re-exp re-validation. Low priority.
+5. **Parallelism env-sweeps** (`QUEENS_PAR_MIN_AVAIL`, `QUEENS_AFFINITY=off`) — ~5.5% Amdahl ceiling,
+   zero-risk, env-only; the old "#20 wash" was on the D4 solver, never re-validated on iso-window. Quick.
+
+**Saved binaries for any A/B (this box, /tmp):** `queens_tec_base` (baseline), `queens_drop` (tiny_tt OFF,
+424 M/s), `queens_bitalg`, `queens_pext`, `queens_simd`, `queens_pczero`. `filter_bench` (committed) is the
+move-filter microbench harness; clone its shape for the dense-block / unroll microbenches.
