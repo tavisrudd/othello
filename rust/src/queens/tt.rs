@@ -196,8 +196,28 @@ pub(crate) fn zeroed_huge_atomics(size: usize) -> Box<[AtomicU64]> {
                                                        // commits the table up front (a full n=16 solve touches ~all of it anyway)
                                                        // and lets COLLAPSE promote the randomly-faulted 4 KB remnant — the ~27%
                                                        // that THP leaves small-paged — into 2 MB pages, cutting dTLB pressure.
-                libc::madvise(ptr, len, MADV_POPULATE_WRITE);
-                libc::madvise(ptr, len, MADV_COLLAPSE);
+                                                       //
+                                                       // Both calls fault/compact the *whole* 17 GB range synchronously — single-threaded,
+                                                       // this is the multi-second silent startup gap. Split the range into 2 MB-aligned
+                                                       // chunks (one per rayon worker) and fault+collapse them in parallel; the work is
+                                                       // memory-bandwidth-bound, so it scales until the controllers saturate (≫1 core).
+                let nthreads = rayon::current_num_threads().max(1);
+                let huge = 2 * 1024 * 1024usize;
+                let chunk = (len / nthreads).next_multiple_of(huge).max(huge);
+                let base = ptr as usize;
+                rayon::broadcast(|ctx| {
+                    let start = ctx.index() * chunk;
+                    if start >= len {
+                        return;
+                    }
+                    let clen = chunk.min(len - start);
+                    // SAFETY: each worker advises a disjoint, in-bounds sub-range of the same
+                    // mapping; `madvise` only faults/compacts pages (no user-data write), so
+                    // concurrent advice on disjoint ranges cannot race.
+                    let cptr = (base + start) as *mut libc::c_void;
+                    libc::madvise(cptr, clen, MADV_POPULATE_WRITE);
+                    libc::madvise(cptr, clen, MADV_COLLAPSE);
+                });
             }
         }
     }
