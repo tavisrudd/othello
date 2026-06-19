@@ -668,13 +668,12 @@ impl IsoFlat {
     // Flat args (key + carried hash + move list) are deliberate on this hot recursive path —
     // bundling them into a context struct would add a per-node pointer-chase.
     #[allow(clippy::too_many_arguments)]
-    fn wins_inc<
-        const ORACLE: bool,
-        const COUNT: bool,
-        const PROVE_LOSS: bool,
-        const WINDOW: bool,
-        const MODE: u8,
-    >(
+    // NB: the former `PROVE_LOSS` const generic was removed — it selected between two
+    // behaviourally identical arms (pure OR-search, break on first child-loss; it was
+    // vestigial YBWC even/odd-parity bookkeeping that does not affect the sequential node
+    // set). Carrying it monomorphised the deep hot recursion into *two* full copies of this
+    // body, doubling its L1i footprint in the measured frontend-bound region. One body now.
+    fn wins_inc<const ORACLE: bool, const COUNT: bool, const WINDOW: bool, const MODE: u8>(
         &self,
         q: &Queens,
         att: &[[Bits; 8]],
@@ -712,51 +711,8 @@ impl IsoFlat {
             self.hist_bump(node_pc);
         }
         let mut result = false;
-        if PROVE_LOSS {
-            let mut buf = [MaybeUninit::<u8>::uninit(); MAXV];
-            let moves = filter_moves(&mut buf, pmoves, avail);
-            for &sq in moves {
-                let a = att_for8(att, sq);
-                let child0 = avail.and_not(a[0]);
-                if child0 == Bits::ZERO {
-                    result = true;
-                    break;
-                }
-                // available-popcount is monotone non-increasing down the tree, so once a child
-                // enters the iso band it stays there: route it to the orientation-free graph
-                // game (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count
-                // region. Children inherit this node's `moves` as their parent list.
-                let pc = child0.popcount();
-                let lost = if WINDOW && !ORACLE && !COUNT && pc == 8 {
-                    !self.w8_get(att, child0)
-                } else if !ORACLE && pc <= 7 {
-                    !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
-                } else if pc <= self.iso_max_avail {
-                    let ckey = self.iso_node_key(q, child0, pc);
-                    let (cr, cf) = QueensTt::hash128(ckey);
-                    self.tt.prefetch_h(cr);
-                    !self.wins_tiny::<ORACLE, COUNT, false>(
-                        q, att, child0, ckey, cr, cf, moves, nodes,
-                    )
-                } else {
-                    let child = child_orient(orient, a, child0);
-                    let ckey = d4_bits(lex_min8(&child));
-                    let (cr, cf) = QueensTt::hash128(ckey);
-                    self.mtt_prefetch::<MODE>(cr, pc);
-                    !self.wins_inc::<ORACLE, COUNT, false, WINDOW, MODE>(
-                        q, att, &child, ckey, cr, cf, moves, nodes,
-                    )
-                };
-                if lost {
-                    result = true;
-                    break;
-                }
-            }
-            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
-            return result;
-        }
         // Compact the available moves once (branchless), then iterate with no per-square
-        // availability branch — same as the prove-loss arm. Children inherit `moves` (the
+        // availability branch. Children inherit `moves` (the
         // availability-filtered `q.order` subsequence): a child re-filters by *its* avail,
         // and child-avail ⊆ avail, so filtering `moves` vs `pmoves` yields the identical
         // child move list ⇒ byte-identical node set, and the child scans a shorter list.
@@ -788,7 +744,7 @@ impl IsoFlat {
                 let ckey = d4_bits(lex_min8(&child));
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.mtt_prefetch::<MODE>(cr, pc);
-                !self.wins_inc::<ORACLE, COUNT, true, WINDOW, MODE>(
+                !self.wins_inc::<ORACLE, COUNT, WINDOW, MODE>(
                     q, att, &child, ckey, cr, cf, moves, nodes,
                 )
             };
@@ -1141,24 +1097,14 @@ impl IsoFlat {
                 M_NORMAL
             };
             let order8 = self.order8(q);
-            let even = depth.is_multiple_of(2);
-            let won = match (even, mode) {
-                (true, M_SEG) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, M_SEG>(
+            let won = match mode {
+                M_SEG => self.wins_inc::<ORACLE, COUNT, WINDOW, M_SEG>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                (false, M_SEG) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, M_SEG>(
+                M_HIST => self.wins_inc::<ORACLE, COUNT, WINDOW, M_HIST>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                (true, M_HIST) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, M_HIST>(
-                    q, att, orient, key, route, fp, order8, &mut nodes,
-                ),
-                (false, M_HIST) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, M_HIST>(
-                    q, att, orient, key, route, fp, order8, &mut nodes,
-                ),
-                (true, _) => self.wins_inc::<ORACLE, COUNT, true, WINDOW, M_NORMAL>(
-                    q, att, orient, key, route, fp, order8, &mut nodes,
-                ),
-                (false, _) => self.wins_inc::<ORACLE, COUNT, false, WINDOW, M_NORMAL>(
+                _ => self.wins_inc::<ORACLE, COUNT, WINDOW, M_NORMAL>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
             };
@@ -1211,7 +1157,7 @@ impl Solver for IsoFlat {
         // dead under oracle/counting — so those arms fix it to `false`; the production arm
         // resolves it once here from `dense8` (the single runtime decision, not per node).
         let won = match (self.nimber_oracle, self.counting) {
-            (true, true) => self.wins_inc::<true, true, false, false, M_NORMAL>(
+            (true, true) => self.wins_inc::<true, true, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1221,7 +1167,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (true, false) => self.wins_inc::<true, false, false, false, M_NORMAL>(
+            (true, false) => self.wins_inc::<true, false, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1231,7 +1177,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (false, true) => self.wins_inc::<false, true, false, false, M_NORMAL>(
+            (false, true) => self.wins_inc::<false, true, false, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1242,7 +1188,7 @@ impl Solver for IsoFlat {
                 &mut nodes,
             ),
             (false, false) if self.dense8.is_some() => self
-                .wins_inc::<false, false, false, true, M_NORMAL>(
+                .wins_inc::<false, false, true, M_NORMAL>(
                     q,
                     att,
                     &orient,
@@ -1252,7 +1198,7 @@ impl Solver for IsoFlat {
                     self.order8(q),
                     &mut nodes,
                 ),
-            (false, false) => self.wins_inc::<false, false, false, false, M_NORMAL>(
+            (false, false) => self.wins_inc::<false, false, false, M_NORMAL>(
                 q,
                 att,
                 &orient,

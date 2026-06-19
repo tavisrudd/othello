@@ -198,6 +198,12 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
 - [x] **Measurement #0 (deep-node cost disambiguation) DONE** (2026-06-19--1): Zen5 topdown verdict =
   **co-dominant (a) memory ≈35% + (b) frontend/i-cache ≈35%; (c) recursion/RAS measured-DEAD** (return-
   mispredict 0.003%). Reroutes the queue — see the dated note + rewritten QUEUED NEXT WORK #0/#1/#1b.
+- [x] **SMT A/B DONE** (2026-06-19--1): the 44.8 i-cache MPKI is BOTH — ~16 intrinsic body-footprint + ~28
+  SMT-L1i-thrash; SMT a weak deal (+46% 2nd-thread) but keep it (aggregate wins wall). Body-shrink justified.
+- [x] **(b) lever #1 — PROVE_LOSS collapse SHIPPED** (2026-06-19--1): vestigial const generic that doubled
+  the hot body → removed → **i-cache MPKI −74% (44.7→11.8)**, CPI −0.8%, value-preserving, gate-clean.
+  Modest throughput (frontend-latency was SMT-hidden) but free + de-risks the SMT question. See the result
+  table in the measurement-#0 note.
 - [ ] Deferred nits folded in
 
 ## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
@@ -691,16 +697,18 @@ loop (and/or splitting `wins_inc` so the hot inner body is small) is the lever, 
    (return-mispredict 0.003%). Full table in the dated note below. **This reroutes the queue:** the unroll's
    (c) justification is gone; the two real levers are *hide-the-DRAM* (a) and *shrink-the-i-cache-footprint*
    (b). Both are present in ~equal measure, so a single-barrel lever caps at ~half the deep-region stall.
-1. **[REROUTED — (c) is dead] Split the hot `wins_inc` body to shrink the i-cache footprint** (attacks (b),
-   the **26.4% frontend-latency / 44.8 i-cache MPKI** — newly the cheapest justified lever). The unroll's
-   original (c)/RAS rationale is measured-dead (0.003% return-mispredict — the compiler/RAS already handle
-   the deep recursion perfectly), so do NOT build the explicit-stack unroll *for the unwind reason*. Instead:
-   mark the cold dispatch arms `#[inline(never)]` (the oracle/COUNT/M_HIST paths, the prove-loss vs non-prove
-   duplication), shrink the monomorphised hot inner loop, and check whether the 24-thread **SMT** pinning is
-   thrashing the shared-per-physical-core L1i (10.2% smt_contention + the high MPKI — A/B 12 physical cores
-   vs 24 logical). Cheap, value-preserving (no node-set change). Gate: `solve 12 iso-flat --distinct` =
-   1,060,823 + lineage; A/B n=16 CPI + M/s + the i-cache-MPKI counter. **The explicit-stack unroll survives
-   only as the MLP-batching vehicle for (a)** (next item), not as a (c) fix.
+1. **[PARTLY DONE — PROVE_LOSS collapse SHIPPED (i-cache MPKI −74%); remaining (b) is smaller now]**
+   Shrink the `wins_inc` i-cache footprint (attacks (b)). The unroll's (c)/RAS rationale stays dead. **DONE
+   this session:** collapsed the vestigial `PROVE_LOSS` const generic → one hot body instead of two →
+   **i-cache MPKI 44.7→11.8 (−74%)**, CPI −0.8%, frontend −1.4 pts, value-preserving (committed). It also
+   largely fixed the SMT-L1i-thrash (SMT-on now 11.8 MPKI < the old SMT-off 16). **Still open (smaller):** the
+   residual ~12 MPKI / ~26% frontend-latency is now mostly *not* duplication — it's the inlined helper chain
+   (`child_orient`/`lex_min8`/`hash128`) + the 4-way dispatch ladder + the rest of the call graph
+   (`band_entry`→`enter_graph`→`solve_local`, `w8_get`). Next body-shrink candidates: `#[inline(never)]` on
+   `lex_min8`/`child_orient` (one shared out-of-line copy vs inlined-per-site — measure, call overhead may
+   cancel), or splitting `band_entry`'s tail cold. **Diminishing** — frontend-latency is only partly
+   removable (much was SMT-hidden), so expect ≤1-2% each. The explicit-stack unroll survives only as the
+   MLP vehicle for (a) (next item), not a (c) fix.
 1b. **Hide the 35% DRAM (a) via MLP-batched TT gets** — the explicit-stack/frontier restructure from the
    prune-stall note, but now justified by **measured 35% backend-by-memory + ~1.9 DRAM fills/node**, NOT by
    (c). Batch independent child gets at the AND/prove-loss levels, prefetch the batch, overlap the DRAM
@@ -814,6 +822,64 @@ events). Raw outputs: `/tmp/perf_run1.out` (topdown), `/tmp/perf_run2.out` (raw)
 deep TT probe** (kills a) and runs the **tiny `solve_local` body** (kills b) → ~10× faster. Removing exactly
 the two measured costs gives the observed ~10× — independent confirmation the deep-node cost is (a)+(b), not
 (c) and not some uncharacterised fourth thing.
+
+**SMT A/B sub-measurement (settles: is the 44.8 MPKI body-footprint or SMT-L1i-thrash?).** Same mechanism
+(`QUEENS_AFFINITY=off` + `taskset` + `RAYON_NUM_THREADS`), only SMT sharing differs. A = 24 threads on 24
+logicals (0-23); B = 12 threads on 12 physical cores (0-11, no sibling). `/tmp/perf_smt{A,B}.out`,
+`/tmp/perf_smt.sh`. (A reproduces production: frontend 35.4 %, mem 33.8 %, smt 10.3 %, MPKI 44.3 — matches
+run1, validating the mechanism.)
+
+| metric                     | A: SMT on (24t) | B: SMT off (12t) | read                                   |
+|----------------------------|-----------------|------------------|----------------------------------------|
+| i-cache MPKI               | 44.3            | **16.0** (−64 %) | ~28 MPKI is SMT-thrash, ~16 intrinsic  |
+| frontend_bound_by_latency  | 26.9 %          | 23.0 %           | net stall barely drops (sibling hid it)|
+| backend_bound_by_memory    | 33.8 %          | 36.1 %           | (a) is SMT-independent                 |
+| smt_contention             | 10.3 %          | 0.0 %            | sanity: B truly has no sibling         |
+| CPI                        | 1.17            | 0.94            | single-thread-per-core is much cleaner |
+| M/s aggregate / per-thread | 40.9 / 1.70     | 28.0 / **2.33**  | SMT 2nd thread adds only +46 % agg     |
+
+**Verdict:** (b) frontend is **BOTH** — an intrinsic ~16 MPKI body-footprint (the `wins_inc` body overflows
+L1i even single-threaded) AND ~28 MPKI of SMT-sibling L1i-thrash on top (the sibling hides much of it, so net
+frontend stall only worsens ~4 pts). **So body-shrink is doubly justified** — it cuts the intrinsic 16 MPKI
+*and* shrinks the thrash footprint → better SMT scaling (recovering some of the poor +46 % 2nd-thread
+return). **Keep SMT on** (40.9 > 28.0 aggregate wins wall-clock), but it's a weak deal on this frontend-bound
+kernel. (a) memory is unchanged by SMT (~35 % both) — the memory lever is orthogonal.
+
+**Concrete (b) lever identified (the production-instantiation footprint bloat):** `wins_inc`'s `PROVE_LOSS`
+const flips every recursion level (line 746 → `false`, 791 → `true`), so **two near-identical full copies of
+the ~90-line move-loop + 4-way dispatch body are hot simultaneously** (2× L1i). The two arms (715-756 vs
+758-801) are behaviourally identical — pure OR-search, break on first child-loss; `PROVE_LOSS` is vestigial
+YBWC even/odd-parity bookkeeping that doesn't affect the sequential node set. **Collapsing it halves the
+hot-recursion footprint.** Value-preserving (gate: `solve 12 iso-flat --distinct` = 1,060,823 + lineage);
+A/B the MPKI + frontend-latency + M/s.
+
+**RESULT — SHIPPED (2026-06-19--1).** Collapsed `PROVE_LOSS` out of `wins_inc` (one body, not two);
+`wins_tiny` (dead in production) left untouched. Gate clean: n=12 exact 1,060,823 / 1.25×, n=14 ≈29.15M /
+1.02×, `solver_lineage_agrees` + `iso_window_agrees_on_small_even_boards` ok. A/B = champion
+(`/tmp/queens_champion`, pre-change main `9c8a833`) vs collapse, n=16 production config, 2 interleaved
+rounds, `perf stat -D 30000`:
+
+| metric (node-count-independent) | champion | collapse | Δ                         |
+|---------------------------------|----------|----------|---------------------------|
+| **i-cache MPKI**                | 44.7     | **11.8** | **−74 %**                 |
+| CPI                             | 1.168    | 1.159    | −0.8 % (thermal-indep ↑)  |
+| frontend_bound                  | 36.0 %   | 34.6 %   | −1.4 pts                  |
+| frontend_bound_by_latency       | 27.5 %   | 26.2 %   | −1.3 pts                  |
+| backend_bound_by_memory         | 33.1 %   | 33.7 %   | ~flat (a is orthogonal)   |
+
+**The PROVE_LOSS duplication WAS the dominant L1i pressure** — one body cut i-cache MPKI −74 % (collapse's
+SMT-*on* 11.8 < champion's SMT-*off* 16.0, so it also largely fixes the SMT-thrash: both siblings' smaller
+bodies now co-reside in the shared L1i). **But frontend-latency only dropped ~1.3 pts** — those misses were
+largely SMT-hidden/overlapped, so net frontend stall (hence throughput) barely moved. M/s was **thermally
+confounded** (cycles declined monotonically 4.72→4.23 e12 across the 4 sequential runs = box heating;
+collapse always ran 2nd/hotter in each pair, yet round-1 collapse still +2.7 %); the trustworthy read is the
+thermal-independent **CPI −0.8 % = a small real throughput-per-cycle win, no regression**. Shipped as a
+value-preserving cleanup: a free ~1 % + a massive MPKI reduction that **de-risks the SMT question** — the
+remaining frontend cost is now ~12 MPKI / 26 % latency, mostly *not* the duplication. **Method note:** −74 %
+MPKI but only ~1 % throughput is textbook "high perf-attribution ≠ proportional removable cost" — the SMT
+sibling hid most of the i-cache stall, so removing the misses freed less wall than the miss-count drop
+implied. Node-count-independent CPI/MPKI (not the thermally-confounded M/s) carried the verdict, as the
+perf-methodology prescribes.
 
 **Verdict & routing.** ~70 % of pipeline slots are lost to two **co-equal, separable** costs (memory ~35 %,
 frontend ~35 %); only ~10 % retires. A single-barrel lever caps at ~half. The queue is rerouted (above):
