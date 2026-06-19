@@ -16,6 +16,10 @@ the available 8-vertex Node-Kayles subgame's win/loss is isomorphism-invariant, 
 a single raw 28-bit labelled-edge-code lookup instead of probing the 13–17 GB flat TT — and its whole
 ≤7 subtree is **never re-expanded**. Over a **huge-page-collapsed** flat TT this **solves n=16 in
 2m44s (SECOND player), under the 3-minute goal**, vs iso-flat's 3m33s. It is now the default solver.
+**Current record: 2m15s** (user run 2026-06-19, `target/release/queens solve 16 iso-window`, 5.03 B nodes
+≈ 37 M/s, flat TT 17.18 GB @ 87.8 % full, 1:1 affinity pin). Note the wall is node-count-noisy (±~18 %);
+5.03 B is the low end of the range so part of the 2m15s is a low-node draw — **M/s remains the trustworthy
+A/B metric, not wall.**
 
 **The reversal that mattered.** The predecessor handoff concluded "~36 M/s floor, sub-50 unreachable,
 n=16 ~3m41s is the wall." **All wrong** — measured on a memory-degraded box (zram swap full, ZFS ARC
@@ -191,6 +195,9 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
   (fully ≤8-table-able) is already 1.59× and adds 0.8% over W8. **Cost-zeroing via dense nimber tables is
   finished** — Sprague-Grundy nimbers are cutoff-free and the value-bearing components are 9–12. Fork
   collapses to per-unit-cost reduction (n=16) / n=18 enablers. See note below.
+- [x] **Measurement #0 (deep-node cost disambiguation) DONE** (2026-06-19--1): Zen5 topdown verdict =
+  **co-dominant (a) memory ≈35% + (b) frontend/i-cache ≈35%; (c) recursion/RAS measured-DEAD** (return-
+  mispredict 0.003%). Reroutes the queue — see the dated note + rewritten QUEUED NEXT WORK #0/#1/#1b.
 - [ ] Deferred nits folded in
 
 ## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
@@ -678,19 +685,33 @@ loop (and/or splitting `wins_inc` so the hot inner body is small) is the lever, 
 
 ## QUEUED NEXT WORK (prioritised; this work stream)
 
-0. **Disambiguate the deep-node cost (do FIRST — it routes everything below).** One `perf stat` on the
-   deep region with LLC-load-miss + the topdown frontend breakdown (i-cache miss vs branch-resteer vs
-   decode) + a memory-bound estimate. Settles (a) DRAM vs (b) key-compute vs (c) recursion-stack. Cheap,
-   no build. Until this is known, treat the lever choice below as hypothesis-gated.
-1. **Unroll the recursion → explicit-stack iterative DFS** (user's lever; attacks (c)). Convert
-   `wins_inc`/`wins_tiny`/`solve_local` recursion to an explicit work-stack loop; consider splitting the
-   big `wins_inc` so the per-node hot body is small (cold arms `#[inline(never)]`). Expected to help the
-   frontend-idle 27% if (c)/(b) dominate. Gate: value-preserving (same node set/verdict) — hold
-   `solve 12 iso-flat --distinct` = 1,060,823 + lineage; A/B n=16 CPI + M/s. Risk: explicit stack can be
-   slower if the compiler was already TCO-ing / inlining well — measure.
+0. **[DONE 2026-06-19--1] Disambiguate the deep-node cost.** Zen5 topdown (`perf stat -M
+   PipelineL1,PipelineL2`, n=16 steady-state, `-D 30000` skips warm-up) + return/icache/dram raw counters.
+   **Verdict: co-dominant (a) memory ≈35% AND (b) frontend/i-cache ≈35%; (c) recursion/RAS measured-DEAD**
+   (return-mispredict 0.003%). Full table in the dated note below. **This reroutes the queue:** the unroll's
+   (c) justification is gone; the two real levers are *hide-the-DRAM* (a) and *shrink-the-i-cache-footprint*
+   (b). Both are present in ~equal measure, so a single-barrel lever caps at ~half the deep-region stall.
+1. **[REROUTED — (c) is dead] Split the hot `wins_inc` body to shrink the i-cache footprint** (attacks (b),
+   the **26.4% frontend-latency / 44.8 i-cache MPKI** — newly the cheapest justified lever). The unroll's
+   original (c)/RAS rationale is measured-dead (0.003% return-mispredict — the compiler/RAS already handle
+   the deep recursion perfectly), so do NOT build the explicit-stack unroll *for the unwind reason*. Instead:
+   mark the cold dispatch arms `#[inline(never)]` (the oracle/COUNT/M_HIST paths, the prove-loss vs non-prove
+   duplication), shrink the monomorphised hot inner loop, and check whether the 24-thread **SMT** pinning is
+   thrashing the shared-per-physical-core L1i (10.2% smt_contention + the high MPKI — A/B 12 physical cores
+   vs 24 logical). Cheap, value-preserving (no node-set change). Gate: `solve 12 iso-flat --distinct` =
+   1,060,823 + lineage; A/B n=16 CPI + M/s + the i-cache-MPKI counter. **The explicit-stack unroll survives
+   only as the MLP-batching vehicle for (a)** (next item), not as a (c) fix.
+1b. **Hide the 35% DRAM (a) via MLP-batched TT gets** — the explicit-stack/frontier restructure from the
+   prune-stall note, but now justified by **measured 35% backend-by-memory + ~1.9 DRAM fills/node**, NOT by
+   (c). Batch independent child gets at the AND/prove-loss levels, prefetch the batch, overlap the DRAM
+   latency the serial recursion exposes one-at-a-time. Bigger/riskier than #1; the compiler-prefetch is
+   clearly under-hiding (memory is the single largest bucket). Or subsume into dense-blocks (#2), which
+   removes the probe entirely for pc≤12.
 2. **Dense-blocks (Idea B, pc≤12 win/loss in L1, memoised)** — converts deep nodes to cheap L1 block-solves
-   *with* selectivity (the drop got throughput by dropping selectivity; this keeps it). Attacks (a)+(b)+(c)
-   at once for the pc≤12 region. The principled path to the cheap-node rate. Multi-session; scope it.
+   *with* selectivity (the drop got throughput by dropping selectivity; this keeps it). **Attacks both
+   measured costs at once** — removes the DRAM probe (a, 35%) AND collapses the deep node to the tiny
+   `solve_local`-class body (b, the i-cache footprint) for the pc≤12 region. The principled both-barrels
+   lever now that #0 confirms (a)+(b) co-dominate. Multi-session; scope it.
    See `notes/proposal-2026-06-18-simd-dense-dataflow.md` Idea B (gate on the distinct-reachable-boundary
    footprint pre-check first).
 3. **BuRR archive (~1.1 bit/key, eviction-free)** — packs the resident set ~50× toward cache-residency
@@ -742,3 +763,63 @@ compute, is the prune stall.
 
 **Refined queue #1:** *unroll the recursion to an explicit work-stack, designed from the start to batch
 child TT gets (and, at AND levels, puts) for MLP* — the unroll and the batching are one change, gated on #0.
+
+### Measurement #0 DONE — deep-node cost is co-dominant (a)memory + (b)frontend; (c)recursion DEAD (2026-06-19--1)
+
+**Session**: `7f5286e0-b949-4298-b801-0e8a1f95807a` (2026-06-19--1) — `mi`. The gating disambiguation the
+whole queue waited on. **Method:** AMD Zen5 topdown via `perf stat -M PipelineL1,PipelineL2` + a second run
+of return/icache/dram raw counters, both `-D 30000` (skip the 30 s warm-up to isolate the *deep/steady*
+region — the `small_canon_table` OnceLock build that swamps n≤14 is fully amortised by then), on the
+production champion `target/release/queens solve 16 iso-window` (clean box, full 17 GB flat TT, 1:1 affinity
+pin = production config incl. SMT). ~70 s measured window each, ~50% multiplex (fine for steady high-rate
+events). Raw outputs: `/tmp/perf_run1.out` (topdown), `/tmp/perf_run2.out` (raw). Reproduce via
+`/tmp/perf_deep.sh`.
+
+**Topdown (n=16 deep steady-state, CPI 1.167 / IPC 0.857 — only 9.6 % of slots retire):**
+
+| L1 bucket        | % slots | L2 sub-bucket                  | % slots | hypothesis      |
+|------------------|---------|--------------------------------|---------|-----------------|
+| backend_bound    | 37.9    | **backend_bound_by_memory**    | **35.2**| **(a) DRAM**    |
+|                  |         | backend_bound_by_cpu           | 2.7     | —               |
+| frontend_bound   | 34.9    | **frontend_bound_by_latency**  | **26.4**| **(b) i-cache** |
+|                  |         | frontend_bound_by_bandwidth    | 8.6     | (b) decode      |
+| smt_contention   | 10.2    | smt_contention                 | 10.2    | SMT-sibling     |
+| retiring         | 9.6     | retiring_from_fastpath         | 9.5     | useful work     |
+| bad_speculation  | 7.4     | bad_spec_from_mispredicts      | 7.3     | data-dep branch |
+|                  |         | bad_spec_from_pipeline_restarts| 0.1     | —               |
+
+**Raw counters (the discriminators):**
+- **(c) recursion/RAS = DEAD.** `ex_ret_near_ret_mispred` = **620,830 of 20.08 B returns = 0.003 %**. The
+  return-address-stack predictor is essentially perfect despite the deep DFS — there is **no unwind /
+  return-mispredict cost to remove.** The user's (c) hypothesis and the unroll's original RAS justification
+  are measured-dead. (Recursion depth never blows the RAS in a way that costs; the compiler/HW already
+  handle it.)
+- **(a) DRAM is real and the single largest bucket.** `ls_any_fills_from_sys.dram_io_all` = 5.39 B of 29.69 B
+  total L1d fills = **18 % from DRAM ≈ 1.9 DRAM fills per node**. Cross-checks the 35.2 % backend-by-memory
+  (~190 ns DRAM in a ~600 ns/core node ≈ 32 %). The compiler-issued prefetch is clearly **under-hiding** the
+  TT probe — the earlier "L1d-miss only 1 %, maybe largely hidden" was wrong: a 1 % miss *rate* over billions
+  of accesses is billions of exposed DRAM trips, and they land as the top topdown bucket.
+- **(b) frontend is i-cache-latency-driven.** i-cache misses **191.98 B → 44.8 MPKI** (very high); the
+  frontend-latency bucket (26.4 %) is 3× the decode-bandwidth bucket (8.6 %), so the frontend stalls are
+  **fetch bubbles, not decode width** — the large monomorphised `wins_inc` body (+ dispatch ladder, + the
+  prove-loss/non-prove duplication) blows L1i. op-cache miss 24.6 B (lower — when code is in the op-cache it
+  serves; the i-cache behind it thrashes). **Open question:** how much of the 44.8 MPKI is the 24-thread SMT
+  pinning (two siblings sharing one L1i per physical core — also the 10.2 % smt_contention) vs the raw body
+  footprint. Cheap follow-up: A/B 12 physical-core pin vs 24 logical.
+- **bad_speculation (7.4 %) is data-dependent branches, not returns.** `ex_ret_brn_misp` = 50.4 B / 448.6 B =
+  **11.2 % branch-mispredict** — the game-tree cutoff/`lost`-break / `child0==ZERO` branches (irreducible
+  branching of a selective search), confirmed distinct from the (dead) return mispredicts.
+
+**Cross-check against the 424 M/s drop binary:** the drop (tiny_tt OFF, all ≤7 re-solved in L1) issues **no
+deep TT probe** (kills a) and runs the **tiny `solve_local` body** (kills b) → ~10× faster. Removing exactly
+the two measured costs gives the observed ~10× — independent confirmation the deep-node cost is (a)+(b), not
+(c) and not some uncharacterised fourth thing.
+
+**Verdict & routing.** ~70 % of pipeline slots are lost to two **co-equal, separable** costs (memory ~35 %,
+frontend ~35 %); only ~10 % retires. A single-barrel lever caps at ~half. The queue is rerouted (above):
+- **Cheapest justified next move = shrink the i-cache footprint** (queue #1, reframed): split/`inline(never)`
+  the `wins_inc` cold arms, test the SMT-L1i-thrash theory. Value-preserving, attacks the 26.4 % directly.
+- **The structural lever = hide the DRAM via MLP-batched gets** (queue #1b) and/or **dense-blocks** (#2,
+  which removes *both* costs for pc≤12). The unroll survives **only** as the MLP vehicle for (a) — its (c)
+  rationale is retired.
+- **Do NOT** build the explicit-stack unroll to fix recursion-unwind — there is nothing there to fix.
