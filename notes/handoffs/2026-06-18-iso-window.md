@@ -964,3 +964,42 @@ global-TT ~1.0×) before committing the multi-session build.
 - (a-iii) Accept the residual (b) micro-opts (≤1-2 % each) and bank the session's wins.
 My read: dense-blocks' kernel is proven cheap, so (a-i) — the re-expansion measurement — is the highest-value
 next step IF we pursue (a); it's the one unknown between here and a confident go/no-go.
+
+### (a-i) pursued — the DECISIVE de-risk: production ALREADY runs the dense-block model at K≤7 (2026-06-19--1)
+
+Chasing the cross-boundary-merge crux led straight to the answer in the existing code. **Production's pc≤7
+path (`enter_graph`→`solve_local`, `iso_flat.rs:935`) IS the dense-block model already:** at a pc≤7
+boundary it solves the *whole subtree* in a thread-private `[i8;128]` L1 memo, **"descendant transpositions
+across different entries are recomputed (cheap, L1) rather than shared through DRAM"** (verbatim code
+comment) — the boundary *entry* value is merged via the complete `tiny_tt` (labelled-index table, W8-style),
+the descendants are recomputed locally. **And re-exp is still 1.02× at n=14** (measured this session's gate).
+So the dense-blocks thesis — *recompute-in-L1 beats probe-DRAM even with descendant re-expansion* — is **not a
+hypothesis; it's the shipping champion's design at K≤7.** This is the strongest possible de-risk: dense-blocks
+is the same model with the boundary moved 7→12.
+
+**What the win actually is, precisely:** today every pc 9–12 node probes the flat TT (DRAM). Dense-blocks
+probes the flat TT **once at the pc≤K boundary entry** (keyed by the iso key — boundary-entry merging
+preserved, NO merge lost there), then solves the entire subtree below in L1 with **zero further probes**.
+It replaces ~N DRAM probes (one per pc≤K node) with 1 probe + N L1 ops. The *only* re-expansion is the
+sub-boundary descendant recompute — exactly what K≤7 already accepts at 1.02×.
+
+**The one remaining unknown:** does that descendant re-expansion grow too fast as the boundary moves 7→12
+(bigger subtrees: ~20–60 reachable states/block at K=12 vs ≤128 total at K=7; and more boundaries)? The
+`dense_block_bench` says each block is cheap (~10 ns/state); the question is the *total inflation* across all
+boundaries. **This needs the boundary-K prototype to measure** — and that prototype IS the dense-blocks build:
+`TinyGraph`/`solve_local`/`enter_graph` are `u8`/`MAXV_TINY=8`-bound, so K≤12 needs `u16` masks + a flat-TT
+boundary-entry merge for pc 9–12 (the complete `tiny_tt` stops at 7; W8 handles pc==8).
+
+**Build plan (the dense-blocks prototype, gated `QUEENS_BLOCK_K`, default 7 = current = zero prod impact):**
+1. Widen `TinyGraph` to `[u16; 13]`, `solve_local`'s memo to `[i8; 1<<K]` (4 KB stack at K=12, thread-private).
+2. New dispatch arm `8 < pc ≤ BLOCK_K`: probe flat TT once (iso key); on miss, `solve_local`-widened over the
+   `u16` graph; store boundary value to flat TT. (pc≤7 stays `tiny_tt`, pc==8 stays W8.)
+3. **Measure incrementally** K=9→10→11→12: n=14 node-count inflation (the re-expansion answer) + n=16 M/s A/B
+   + CPI/MPKI/backend-by-memory (does the 35 % shrink?). Gate each K: `solve 12 iso-flat --distinct`
+   1,060,823 + lineage (the boundary changes *how* a subtree solves, not *which* positions are distinct —
+   validate via the distinct gate like W8 was).
+4. Raise K only while M/s improves; stop when re-expansion overtakes the probe saving.
+
+**Status: confident GO on the build** (the K≤7 precedent removes the conceptual risk). It's a hot-path,
+multi-file change with gate risk → **the architecture-build green-light is the user's call** (per the
+ask-before-architecture rule); the plan above is execution-ready for next session.
