@@ -2319,6 +2319,74 @@ fn comps_report(q: &Queens, solver: &dyn Solver) {
             cum as f64 / nodes as f64 * 100.0,
         );
     }
+    comps_dense_nimber_coverage(q, &ws);
+}
+
+/// Incremental value of a **dense nimber-≤K table** (W8-style: per-component Grundy
+/// value by labelled edge-code, no recursion) *over iso-window*. iso-window already
+/// resolves every `pc ≤ 8` position with a single W8 lookup, so the table's NEW
+/// coverage is exactly the **multi-component, `pc > 8`, all-components-≤K** region:
+/// `decompose → per-component nimber → XOR → win ⇔ ≠0`, still no recursion. Those are
+/// the positions iso-window currently *recurses through*; the dense table converts each
+/// to a leaf (pruning its whole subtree, since max-component is monotone non-increasing
+/// down the tree). Reported as a fraction of all distinct positions and of the `pc > 8`
+/// subset (= the set iso-window must recurse on). This is a distinct-position proxy for
+/// the node-count win; the true subtree-pruning win is measured separately (Phase 1).
+fn comps_dense_nimber_coverage(q: &Queens, ws: &[(Bits, u8)]) {
+    let nodes = ws.len() as u64;
+    // pc≤8 is already an iso-window leaf (W8 / tiny); pc>8 is the set it recurses on.
+    let mut pc_le8 = 0u64;
+    let mut pc_gt8 = 0u64;
+    // Within pc>8: largest-component buckets a dense ≤K table would turn into leaves.
+    let ks = [8u32, 10, 12];
+    let mut new_le = [0u64; 3];
+    // Component-count distribution of the NEW (pc>8 && maxc≤8) region, for colour.
+    let mut ncomp_hist = vec![0u64; (q.n * q.n) as usize + 1];
+    for &(mask, _) in ws {
+        let (pc, maxc, ncomp) = q.component_profile(mask);
+        if pc <= 8 {
+            pc_le8 += 1;
+            continue;
+        }
+        pc_gt8 += 1;
+        for (i, &k) in ks.iter().enumerate() {
+            if maxc <= k {
+                new_le[i] += 1;
+            }
+        }
+        if maxc <= 8 {
+            let idx = (ncomp as usize).min(ncomp_hist.len() - 1);
+            ncomp_hist[idx] += 1;
+        }
+    }
+    println!(
+        "  dense nimber-≤K coverage NEW over iso-window (W8 already does all pc≤8):\n\
+         \x20   pc≤8 (iso-window leaf):        {:>15}  ({:6.2}% of distinct)\n\
+         \x20   pc>8 (iso-window recurses):    {:>15}  ({:6.2}% of distinct)",
+        commas(pc_le8),
+        pc_le8 as f64 / nodes as f64 * 100.0,
+        commas(pc_gt8),
+        pc_gt8 as f64 / nodes as f64 * 100.0,
+    );
+    for (i, &k) in ks.iter().enumerate() {
+        println!(
+            "    nimber-≤{k:<2} new leaves (pc>8, maxc≤{k:<2}): {:>15}  ({:6.2}% of distinct, {:6.2}% of pc>8)",
+            commas(new_le[i]),
+            new_le[i] as f64 / nodes as f64 * 100.0,
+            if pc_gt8 > 0 { new_le[i] as f64 / pc_gt8 as f64 * 100.0 } else { 0.0 },
+        );
+    }
+    println!("    component count of the new pc>8/maxc≤8 region:");
+    for (nc, &c) in ncomp_hist.iter().enumerate() {
+        if c == 0 {
+            continue;
+        }
+        println!(
+            "      ncomp={nc:>2}: {:>15}  ({:6.2}% of new ≤8)",
+            commas(c),
+            c as f64 / new_le[0].max(1) as f64 * 100.0,
+        );
+    }
 }
 
 /// `count --iso`: measure how much the distinct working set would shrink if the TT

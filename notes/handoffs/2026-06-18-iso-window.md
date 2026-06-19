@@ -183,6 +183,10 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
   components** (Sprague-Grundy XOR), not whole graphs. Phase-1: cap 7→12 = **−74% nodes** but
   **6.6× wall** (cutoff-free nimber recursion). Parked on branch `queens-component-nimber`
   (abf38ee). Gated-B dropped (no cheap reuse proxy). Revival = dense nimber-≤8 table. See note below.
+- [x] **Dense nimber-≤8 pre-check measured** (`count --comps` extended): leaf-resolver framing is
+  **dead** (~0.4–0.8% incremental over W8 — maxc≤8 ⇒ pc≤8 already); coverage lives at maxc 9–12
+  (dense-infeasible). **Salvage**: dense ≤8 *Grundy* table as the cap-12 oracle's base case to collapse
+  the 6.6× cutoff-free recursion — untested, needs user steer. See note below.
 - [ ] Deferred nits folded in
 
 ## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
@@ -422,3 +426,51 @@ key (banked −2.2×). **n=16/17 GB is per-unit-cost-bound, not coverage- or cap
 Method banked: Channel-Fermi caught Phase-0's coverage-looks-great / Phase-1 cost-kills-it gap — always
 napkin the *per-unit cost*, not just the count. `count --comps`/`--roots` size these levers with **no
 solver change** — use them before building.
+
+### Dense nimber-≤8 pre-check MEASURED — the leaf-resolver framing is dead, but a salvage (2026-06-18--6)
+
+**Session**: 2026-06-18--6 (`c46f7fdd-d044-4bd9-a7cf-7bdd31a3037f`) — `mi`. Ran the cheap pre-check the
+"zero the cost" path called for: extended `count --comps` to tally the **incremental** coverage a dense
+nimber-≤K table buys *over iso-window* (new pub `Queens::component_profile` + `comps_dense_nimber_coverage`
+in `comps_report`). iso-window's W8 already leaf-resolves **every pc≤8** position, so the table's only NEW
+contribution is the **multi-component, pc>8, all-comps-≤K** region.
+
+| metric (share of the pc>8 region iso-window *recurses* on) | n=12  | n=14  |
+|------------------------------------------------------------|-------|-------|
+| nimber-**≤8** new leaves (pc>8 ∧ maxc≤8)                    | 0.47% | 0.81% |
+| nimber-≤10 new leaves (pc>8 ∧ maxc≤10)                     | 44.8% | 37.5% |
+| nimber-≤12 new leaves (pc>8 ∧ maxc≤12)                     | 62.5% | 61.0% |
+
+(Absolute: n=14 = 49.76 M D4-distinct; pc>8 = 45.5%; the new ≤8 region = 0.37% of distinct, **98%
+2-component**. Both runs second-player, gate-clean.)
+
+**Verdict — the dense nimber-≤8 table as a *main-search leaf-resolver* is dead (~0.4–0.8%).** Reason: a
+position with maxc≤8 almost always has total pc≤8 too (it's one small component, or a couple of tiny ones),
+which W8 *already* resolves in one lookup. The genuinely-new case (pc>8 with **all** components ≤8 ⇒
+multi-component) is vanishingly rare — the queen graph fragments *late*, so while pc>8 the available graph
+is still dominated by **one big component**. The recursing region is single-big-component, not
+many-tiny-component.
+
+**Where the coverage actually is: maxc 9–12 (37–61% of the recursing region) — and a dense *labelled*
+table can't reach it** (≤10 = 2⁴⁵ codes ≈ 4 TB; ≤12 = 2⁶⁶). So "dense nimber table" and "the coverage
+that matters" are disjoint. This kills option-1 *as written*.
+
+**The salvage (the one way the dense ≤8 Grundy table earns its keep) — combine the two parked levers.**
+Use the dense ≤8 Grundy table NOT in the main search but as the **base case of the cap-12 component-nimber
+oracle** (branch `queens-component-nimber`). Phase-1's 6.6× wall is the *cutoff-free mex recursion* (no
+α-β: every child must be evaluated). That recursion is exponential and bottoms out in ≤8 components; a
+dense ≤8 Grundy table (128 MiB, W8-style one-time build) makes every ≤8 node in it a single lookup,
+collapsing the bulk of the recursion's nodes. Channel-Fermi: if "≤8 free" cuts the cap-12 nimber recursion
+from 6.6× toward ~1×, the −74%-node lever flips net-positive and becomes the sub-2m44s path. **Untested —
+needs the build+measure; multi-session; decide with user.** The existing oracle bottoms at the ≤7 *tiny*
+table (iso-keyed, memoised) — already cheap for ≤7 — so the increment to test is specifically the dense
+**≤8 Grundy** base case (Grundy-valued, not W8's win/loss) shortcutting the 8–12 layer.
+
+**Instrumentation landed** (cold-only, gate-clean, lineage + n=12 distinct 1,060,823/1.24× hold): rerun any
+n via `queens count <n> --comps` → new "dense nimber-≤K coverage" block. `component_profile` is a single
+fused decomposition pass (pc + maxc + ncomp).
+
+**NEXT — user's steer needed (genuine fork):** (a) build the dense ≤8 **Grundy** base case for the cap-12
+oracle and re-measure the 6.6× — the only live "zero the cost" path; or (b) drop cost-zeroing and go
+"target well" (oversubscribed / n=18 regime, gate on a per-position fragmentation signal); or (c) capacity
+levers (BuRR / 1 GB hugepages, weighted low — n=16 is not capacity-bound).

@@ -1092,6 +1092,25 @@ impl Queens {
         max_k
     }
 
+    /// Cold analysis: one decomposition pass over `mask` returning `(pc, max_comp,
+    /// ncomp)` -- popcount, largest connected component size, and number of connected
+    /// components of the available-graph. Fuses what [`Self::iso_max_component_size`]
+    /// and a separate component-count loop would each do, so `count --comps`'s
+    /// dense-nimber-table incremental-coverage tally decomposes the mask only once.
+    pub fn component_profile(&self, mask: Bits) -> (u32, u32, u32) {
+        let pc = mask.popcount();
+        let mut remaining = mask;
+        let mut max_k = 0u32;
+        let mut ncomp = 0u32;
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            max_k = max_k.max(comp.popcount());
+            ncomp += 1;
+        }
+        (pc, max_k, ncomp)
+    }
+
     /// Cold, read-only `count --roots` instrumentation: the per-root structural proxies
     /// for one symmetry-distinct first move `sq`, returned as
     /// `(centrality, avail_pop, frag, ncomp)`:
