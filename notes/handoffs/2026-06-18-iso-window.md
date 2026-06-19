@@ -178,6 +178,11 @@ Per CLAUDE.md. Gate: `solver_lineage_agrees` + `solve 12 iso-flat --distinct` (e
   yet); the node win (−~7%) cancels a memory/CPI residual (+~7% cycles/node). Full arc + revive
   plan in the "Set-associative band buckets" handoff note below. Revive for the *oversubscribed*
   regime (small-TT / n=18), gate on load factor.
+- [~] Grouped-frontier `k=9..12` (lever 2) — **scoped + Phase-0/1 measured**, see
+  [proposal](../proposal-2026-06-18-grouped-frontier-ddd.md). Reframe: dedup **connected
+  components** (Sprague-Grundy XOR), not whole graphs. Phase-1: cap 7→12 = **−74% nodes** but
+  **6.6× wall** (cutoff-free nimber recursion). Parked on branch `queens-component-nimber`
+  (abf38ee). Gated-B dropped (no cheap reuse proxy). Revival = dense nimber-≤8 table. See note below.
 - [ ] Deferred nits folded in
 
 ## Combined ship A/B — seg + branchless on n=16 (~+16% throughput)
@@ -376,3 +381,44 @@ node-count-independent on n=16) localised it to instructions, SIMD+amortisation 
 residual is now memory. Each cheapening was measured, not assumed. Code: `tt.rs` (`probe_assoc`/
 `store_slot`/`*_avx512`/`bucket_base`, `TT_ASSOC_WAYS=8`), `iso_flat.rs` (`M_SEG_ASSOC`, the `wins_inc`
 amortised get/put, `par_tt_*` assoc arms).
+
+### Grouped-frontier scoped + component-nimber measured-negative (2026-06-18--5)
+
+**Session**: 2026-06-18--5 (`6ce66d48-a531-4220-b0b1-270ac723c3eb`) — `mi`.
+**Commits (main)**: `c40fd04` (assoc doc) · `fe29fdc` (DDD proposal + Phase 0) · `1a34ad6` (Phase 1
+measured). **Branches (off main, do NOT revert)**: `queens-tt-assoc-buckets` (76c2b7e),
+`queens-component-nimber` (abf38ee).
+
+**Completed this session:**
+- Lever 4 (set-assoc buckets): full SIMD+amortise arc → break-even with seg at n=16; parked (note above).
+- Lever 2 (grouped-frontier): scoped ([proposal](../proposal-2026-06-18-grouped-frontier-ddd.md)) +
+  Phase 0 (coverage) + Phase 1 (cost). **Verdict: node lever is huge (−74% at cap-12) but
+  wall-bound** by the cutoff-free nimber recursion (6.6× at n=14; cap-7 already net-negative).
+  Gated-B dropped (Spearman of every cheap per-root reuse proxy ≤0.54 < 0.7).
+
+**The triangulated throughline (3 independent angles now agree):** at n=16/17 GB the wall is
+**per-node cost**, and every node-count lever has a big node win that the per-unit cost eats —
+set-assoc (−7% nodes, +7% cycles/node), component-nimber (−74% nodes, +6.6× wall), graph-iso win/loss
+key (banked −2.2×). **n=16/17 GB is per-unit-cost-bound, not coverage- or capacity-bound.**
+
+**NEXT SESSION — the two ways out (user's steer: "target these well, or zero the cost"):**
+1. **Zero the cost** (preferred — removes the wall instead of dodging it):
+   - **Dense nimber-≤8 table** = W8 but storing the 4-bit Grundy value (~128 MiB over 2^28 labelled
+     8-graphs, pre-pass). Turns multi-component resolution into *decompose → dense lookup → XOR*, **no
+     recursion** → kills the lever-2 cost killer. **First measure** its *incremental* value over
+     iso-window (only the multi-component, all-comps-≤8, whole-pc>8 fraction is new — single-component
+     ≤8 is already done by W8/tiny). Cheap pre-check: extend `count --comps` to tally *that* fraction.
+   - For lever 4: a cheaper bucket (4-way / 256-bit) to shrink the memory residual that ate the win.
+2. **Target well** (gate to where the win survives the cost):
+   - Both levers win in the **oversubscribed** regime (small-TT / n=18: high re-exp, big node win,
+     worst eviction). Gate **on load factor** (assoc) / **on a per-position fragmentation signal**
+     (component oracle). Caveat from this session: cheap *per-root* proxies are flat (ρ≤0.54) — a
+     useful gate must be **per-position** (largest-component size, fill level), not per-root.
+   - The clean experiment: re-A/B both levers at a deliberately small TT / extrapolate to n=18, where
+     the node win is largest and the per-unit cost is repaid.
+3. Else: the roadmap's capacity levers (**BuRR archive**, **1 GB hugepages**) — but note this session
+   showed n=16 is *not* capacity-bound, so weight these below the cost-zeroing work.
+
+Method banked: Channel-Fermi caught Phase-0's coverage-looks-great / Phase-1 cost-kills-it gap — always
+napkin the *per-unit cost*, not just the count. `count --comps`/`--roots` size these levers with **no
+solver change** — use them before building.
