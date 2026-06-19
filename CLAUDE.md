@@ -11,28 +11,34 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — n=16 **SOLVED (second)**.
-The lineage's fastest is now **`iso-dense`** (a new solver): iso-window's kernel + an exact **W9** layer
-that resolves every pc==9 node from the complete W0..W8 tables (one BMI2-`pext` child sweep — no flat-TT
-probe, no subtree expansion; **−18.2% nodes deterministic** at n=14). **`iso-window`** (dense **W8** tail
-table over a **huge-page-collapsed** flat TT, `MADV_COLLAPSE`) stays the default + A/B control and is
-**byte-identical to before iso-dense**. The earlier "~36 M/s floor / 3m41s wall" was **wrong** — measured
-on a memory-degraded box. (iso-flat handoff [archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
+The lineage's fastest is **`iso-dense`** (a new solver): iso-window's kernel + the **W_K hierarchy** to
+ceiling **K=11** — every pc==k node (`9 ≤ k ≤ 11`) is resolved directly from the complete W0..W8 tables by
+a BMI2-`pext` child sweep recursing one ply per layer (`getK`), no flat-TT probe and no subtree expansion.
+**Deterministic n=14 nodes:** W8 27.5M → W9 22.5M → W10 18.8M → W11 **15.7M (−42.9%)**, ~−16% per layer.
+The dense ceiling defaults to 11 (the measured crossover winner); `QUEENS_DENSE_K` (9..=11) re-sweeps.
+**`iso-window`** (dense **W8** tail table over a **huge-page-collapsed** flat TT, `MADV_COLLAPSE`) stays the
+default + A/B control, **byte-identical to before iso-dense**. The earlier "~36 M/s floor / 3m41s wall"
+was **wrong** — memory-degraded box. (iso-flat handoff [archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
 
-**n=16 leaderboard** (best clean-box wall; M/s is the trustworthy A/B metric, wall is ±18% node-noisy):
+**n=16 leaderboard** (best clean-box wall; node count is ±18% node-noisy — for the W_K layers the
+node-count cut is the metric, deterministic at n=14, and the wall follows):
 
-| solver       | n=16 wall  | nodes   | mechanism                                                       |
-|--------------|------------|---------|-----------------------------------------------------------------|
-| **iso-dense**| **2m12s**  | 4.03 B  | W9: pc==9 resolved from W0..W8 via `pext`, no probe/re-expansion |
-| iso-window   | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT           |
-| iso-flat     | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                |
+| solver              | n=16 wall  | nodes   | mechanism                                                            |
+|---------------------|------------|---------|----------------------------------------------------------------------|
+| **iso-dense (W11)** | **1m44s**  | 2.5 B   | W_K to K=11: every pc 9–11 resolved from W0..W8 via `pext`, no probe  |
+| iso-dense (W9)      | 2m12s      | 4.0 B   | W9 only: pc==9 from W0..W8                                            |
+| iso-window          | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT                |
+| iso-flat            | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                     |
 
-**Current focus:** the **W_K hierarchy** — `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])`, each layer an evaluator over
-the complete one below (W8 table → W9 → W10 → …). iso-dense ships W9; next is generalising `getk` to
-**W10/W11** and sweeping the *economic* crossover (per-node eval cost vs saved probes — sub-factorial,
-since each move removes a closed neighborhood so most children land in W8 directly). Also open: the
-**parallelism deficit** the per-root timing diagnostic (`QUEENS_ROOT_TIMING`) surfaced — one dominant root
-is ~95% of the wall and ~50% of the wall runs with ≤2 roots active; not schedulable (the giant roots *are*
-the critical path), so the lever is cheaper per-root work (W_K), not the tail. Details in the iso-window handoff.
+**Current focus:** **recover the getK throughput.** Raising K cut nodes hard but dropped M/s (n=16 29.4→27.8
+→24.3 for K=9/10/11) because `getK` is real per-node compute — the wall still won (less total work), and
+micro-opting the `getK` kernel + `wK_get` code-builders (which historically washed out on the TT-latency-
+bound path) now has a genuine target. Then **K=12** (needs a >64-bit code — `K*(K-1)/2 = 66` bits; returns
+diminishing but still positive at 11). Lower-priority now: the **memory levers** (MLP-batched gets, BuRR,
+1 GB hugepages) — W11 erased the pc 9–11 probes that were ~64% of the profiler's probe cost, so the
+remaining cost shifts to pc≥12. The **parallelism deficit** (one root ~95% of wall, ≤2 roots active ~50% of
+wall) is shrunk-not-fixed by W_K (cheaper per-root work); the re-expansion-free way to split the giant roots
+stays the open structural question. Details in the iso-window handoff.
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup

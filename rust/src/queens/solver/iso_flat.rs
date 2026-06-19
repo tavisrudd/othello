@@ -313,10 +313,14 @@ pub struct IsoFlat {
     /// scattered probe into the 13–17 GB flat TT (and, on a miss, expanding the whole pc==8
     /// subtree). `None` for plain `iso-flat`.
     dense8: Option<DenseW8>,
-    /// Exact pc==9 evaluator, **on only for the `iso-dense` solver** (set by `new_dense`;
-    /// `iso-flat`/`iso-window` leave it `false`). Read once at the root to pick the `const W9`
-    /// search instantiation — never a run-constant branch in the deep loop or a TT probe.
-    w9_direct: bool,
+    /// Dense low-popcount **ceiling K** for the `iso-dense` solver: every pc==k node with
+    /// `9 ≤ k ≤ dense_k` is resolved directly from the complete W0..W8 tables by the W_K
+    /// evaluator (`W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])`, one BMI2-projected child sweep, no flat-TT
+    /// probe and no subtree expansion), exactly as W8 already does pc==8. `8` = off (the
+    /// `iso-flat`/`iso-window` control). Set by `new_dense` (default 9, `QUEENS_DENSE_K`
+    /// override, clamped 9..=11). Read **once at the root** to pick the `const DK` search
+    /// instantiation — never a run-constant branch in the deep loop or a TT probe.
+    dense_k: u32,
     tiny_canon: &'static [u64],
     par_depth: u32,
     par_min_avail: Option<u32>,
@@ -383,12 +387,18 @@ impl IsoFlat {
     /// **on** by construction — every pc==9 node is resolved directly from the complete W0..W8
     /// tables (one BMI2-projected child sweep, no flat-TT probe and no subtree expansion),
     /// exactly as W8 already does pc==8. This is the next step in the iso-flat → iso-window →
-    /// iso-dense lineage; `iso-window` stays the dense-off control. (`getK` generalises to
-    /// pc≤K; the ceiling will move 9→10→11 once the kernel is generalised.)
+    /// iso-dense lineage; `iso-window` stays the dense-off control. The dense ceiling K
+    /// defaults to **11** — the measured economic optimum of the W_K crossover (per-node eval
+    /// cost vs saved probes): at n=16 each layer 9→10→11 cuts ~16% more nodes and lowers the
+    /// wall (deterministic n=14 nodes 22.5M→18.8M→15.7M; n=16 wall ~2m26s→2m00s→1m54s). 11 is
+    /// also the structural ceiling (the labelled code is `K*(K-1)/2 = 55` bits; K=12 overflows
+    /// `u64`). `QUEENS_DENSE_K` (9..=11) overrides for re-sweeping; `getK` resolves `9 ≤ pc ≤ K`.
     pub fn new_dense(bits: u32) -> Self {
         let mut s = Self::from_tt_with_window(QueensTt::new(bits), true);
         s.name = "iso-dense";
-        s.w9_direct = true; // dense layer on by construction, not the iso-window env gate
+        // Dense layer on by construction (not the iso-window env gate). The ceiling is read
+        // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
+        s.dense_k = env_u32("QUEENS_DENSE_K", 11).clamp(9, 11);
         s
     }
 
@@ -415,8 +425,8 @@ impl IsoFlat {
             tiny_tt: (0..TINY_TABLE_SLOTS).map(|_| AtomicU8::new(0)).collect(),
             dense8: window.then(DenseW8::build),
             // The dense low-popcount layer is exclusive to `iso-dense` (set by `new_dense`);
-            // `iso-flat`/`iso-window` keep it off so they run identically to before.
-            w9_direct: false,
+            // `iso-flat`/`iso-window` keep the ceiling at 8 so they run identically to before.
+            dense_k: 8,
             tiny_canon: small_canon_table(),
             par_depth: par_depth(),
             par_min_avail: par_min_avail_override(),
@@ -500,6 +510,58 @@ impl IsoFlat {
             }
         }
         dense8.get9(code)
+    }
+
+    /// Resolve a 10-vertex graph directly from W0..W8 (the W10 layer). Twin of
+    /// [`w9_get`](Self::w9_get): build the 45-bit labelled edge code from the 10 attack rows,
+    /// then [`DenseW8::get10`] sweeps every child (nested one ply into W9, else a W≤8 lookup).
+    #[inline]
+    fn w10_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        let dense8 = self.dense8.as_ref().expect("W10 ⇒ dense8 is Some");
+        debug_assert_eq!(avail.popcount(), 10);
+        let mut verts = [0u8; 10];
+        let mut n = 0usize;
+        avail.each(|v| {
+            verts[n] = v as u8;
+            n += 1;
+        });
+        debug_assert_eq!(n, 10);
+        let mut code = 0u64;
+        let mut bit = 0u32;
+        for i in 0..10 {
+            let row = att08(att, verts[i]);
+            for &vj in verts.iter().take(10).skip(i + 1) {
+                code |= (row.get(vj as u32) as u64) << bit;
+                bit += 1;
+            }
+        }
+        dense8.get10(code)
+    }
+
+    /// Resolve an 11-vertex graph directly from W0..W8 (the W11 layer). Twin of
+    /// [`w9_get`](Self::w9_get) over the 55-bit labelled edge code; [`DenseW8::get11`] nests
+    /// one ply into W10/W9 (else a W≤8 lookup) per child.
+    #[inline]
+    fn w11_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        let dense8 = self.dense8.as_ref().expect("W11 ⇒ dense8 is Some");
+        debug_assert_eq!(avail.popcount(), 11);
+        let mut verts = [0u8; 11];
+        let mut n = 0usize;
+        avail.each(|v| {
+            verts[n] = v as u8;
+            n += 1;
+        });
+        debug_assert_eq!(n, 11);
+        let mut code = 0u64;
+        let mut bit = 0u32;
+        for i in 0..11 {
+            let row = att08(att, verts[i]);
+            for &vj in verts.iter().take(11).skip(i + 1) {
+                code |= (row.get(vj as u32) as u64) << bit;
+                bit += 1;
+            }
+        }
+        dense8.get11(code)
     }
 
     #[inline]
@@ -889,7 +951,7 @@ impl IsoFlat {
         const ORACLE: bool,
         const COUNT: bool,
         const WINDOW: bool,
-        const W9: bool,
+        const DK: u32,
         const MODE: u8,
     >(
         &self,
@@ -963,7 +1025,15 @@ impl IsoFlat {
             // (no `child_orient`, no `lex_min8`) — the deepest, highest-node-count region.
             // Children inherit this node's `moves` as their parent list (a `q.order` subseq).
             let pc = child0.popcount();
-            let lost = if W9 && pc == 9 {
+            // Dense W_K ceiling: every `9 ≤ pc ≤ DK` child is resolved directly from W0..W8
+            // (no flat-TT probe, no subtree expansion). `DK` is `const`, so each arm const-folds
+            // away for the instantiations below it — `DK == 8` (iso-flat/iso-window) compiles all
+            // three out, identical to before.
+            let lost = if DK >= 11 && pc == 11 {
+                !self.w11_get(att, child0)
+            } else if DK >= 10 && pc == 10 {
+                !self.w10_get(att, child0)
+            } else if DK >= 9 && pc == 9 {
                 !self.w9_get(att, child0)
             } else if WINDOW && !ORACLE && !COUNT && pc == 8 {
                 !self.w8_get(att, child0)
@@ -989,7 +1059,7 @@ impl IsoFlat {
                 let ckey = d4_bits(lex_min8(&child));
                 let (cr, cf) = QueensTt::hash128(ckey);
                 self.mtt_prefetch::<MODE>(cr, pc);
-                !self.wins_inc::<ORACLE, COUNT, WINDOW, W9, MODE>(
+                !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
                     q, att, &child, ckey, cr, cf, moves, nodes,
                 )
             };
@@ -1411,7 +1481,7 @@ impl IsoFlat {
     /// (prove-a-loss) plies fan all children across rayon (no α-β cutoff to lose ⇒ zero
     /// speculation); odd (prove-a-win) plies stay sequential. Below `par_depth` a node still
     /// splits while large (`> min_avail`, the #20 tail fix), else drops to [`wins_inc`].
-    fn par_wins_inc<const ORACLE: bool, const COUNT: bool, const WINDOW: bool, const W9: bool>(
+    fn par_wins_inc<const ORACLE: bool, const COUNT: bool, const WINDOW: bool, const DK: u32>(
         &self,
         q: &Queens,
         att: &[[Bits; 8]],
@@ -1455,16 +1525,16 @@ impl IsoFlat {
             };
             let order8 = self.order8(q);
             let won = match mode {
-                M_SEG => self.wins_inc::<ORACLE, COUNT, WINDOW, W9, M_SEG>(
+                M_SEG => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SEG>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                M_HIST => self.wins_inc::<ORACLE, COUNT, WINDOW, W9, M_HIST>(
+                M_HIST => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_HIST>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, W9, M_PROF>(
+                M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_PROF>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                _ => self.wins_inc::<ORACLE, COUNT, WINDOW, W9, M_NORMAL>(
+                _ => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_NORMAL>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
             };
@@ -1491,7 +1561,7 @@ impl IsoFlat {
             let child0 = avail.and_not(a[0]);
             let child = child_orient(orient, a, child0);
             let ckey = self.node_key(q, &child);
-            !self.par_wins_inc::<ORACLE, COUNT, WINDOW, W9>(
+            !self.par_wins_inc::<ORACLE, COUNT, WINDOW, DK>(
                 q,
                 att,
                 &child,
@@ -1520,11 +1590,11 @@ impl Solver for IsoFlat {
         let key = self.node_key(q, &orient);
         let (route, fp) = QueensTt::hash128(key);
         let mut nodes = 0;
-        // WINDOW only matters on the production (`!ORACLE && !COUNT`) path — the W8 branch is
-        // dead under oracle/counting — so those arms fix it to `false`; the production arm
-        // resolves it once here from `dense8` (the single runtime decision, not per node).
+        // WINDOW only matters on the production (`!ORACLE && !COUNT`) path, and the dense
+        // ceiling `DK` is resolved once here from `dense_k` (the single runtime decision per
+        // solve, never per node). The oracle/counting arms fix `WINDOW=false, DK=8`.
         let won = match (self.nimber_oracle, self.counting) {
-            (true, true) => self.wins_inc::<true, true, false, false, M_NORMAL>(
+            (true, true) => self.wins_inc::<true, true, false, 8, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1534,7 +1604,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (true, false) => self.wins_inc::<true, false, false, false, M_NORMAL>(
+            (true, false) => self.wins_inc::<true, false, false, 8, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1544,7 +1614,7 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (false, true) => self.wins_inc::<false, true, false, false, M_NORMAL>(
+            (false, true) => self.wins_inc::<false, true, false, 8, M_NORMAL>(
                 q,
                 att,
                 &orient,
@@ -1554,8 +1624,8 @@ impl Solver for IsoFlat {
                 self.order8(q),
                 &mut nodes,
             ),
-            (false, false) if self.w9_direct => self
-                .wins_inc::<false, false, true, true, M_NORMAL>(
+            (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 11) => self.wins_inc::<false, false, true, 11, M_NORMAL>(
                     q,
                     att,
                     &orient,
@@ -1565,8 +1635,7 @@ impl Solver for IsoFlat {
                     self.order8(q),
                     &mut nodes,
                 ),
-            (false, false) if self.dense8.is_some() => self
-                .wins_inc::<false, false, true, false, M_NORMAL>(
+                (true, 10) => self.wins_inc::<false, false, true, 10, M_NORMAL>(
                     q,
                     att,
                     &orient,
@@ -1576,16 +1645,39 @@ impl Solver for IsoFlat {
                     self.order8(q),
                     &mut nodes,
                 ),
-            (false, false) => self.wins_inc::<false, false, false, false, M_NORMAL>(
-                q,
-                att,
-                &orient,
-                key,
-                route,
-                fp,
-                self.order8(q),
-                &mut nodes,
-            ),
+                (true, 9) => self.wins_inc::<false, false, true, 9, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
+                // iso-window: W8 dense table but no W9+ ceiling.
+                (true, _) => self.wins_inc::<false, false, true, 8, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
+                // iso-flat: no dense layer at all.
+                (false, _) => self.wins_inc::<false, false, false, 8, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
+            },
         };
         self.tt.flush_local_nodes(&mut nodes);
         self.tt.drain_local(); // sequential path: only this thread accumulated
@@ -1630,22 +1722,34 @@ impl Solver for IsoFlat {
             if timing {
                 starts[idx].store(t0.elapsed().as_micros() as u64, Ordering::Relaxed);
             }
-            // `w9_direct` (and any future dense-K flag) is read **once here**, per root, to select
-            // the `const W9` monomorphisation — never in the deep `wins_inc` loop or a TT probe.
+            // The dense ceiling `dense_k` (and the WINDOW flag) is read **once here**, per root,
+            // to select the `const DK` monomorphisation — never in the deep `wins_inc` loop or a
+            // TT probe. The oracle/counting arms fix `WINDOW=false, DK=8`.
             let wins =
                 match (self.nimber_oracle, self.counting) {
-                    (true, true) => !self
-                        .par_wins_inc::<true, true, false, false>(q, att, co, ckey, 1, min_avail),
-                    (true, false) => !self
-                        .par_wins_inc::<true, false, false, false>(q, att, co, ckey, 1, min_avail),
-                    (false, true) => !self
-                        .par_wins_inc::<false, true, false, false>(q, att, co, ckey, 1, min_avail),
-                    (false, false) if self.w9_direct => !self
-                        .par_wins_inc::<false, false, true, true>(q, att, co, ckey, 1, min_avail),
-                    (false, false) if self.dense8.is_some() => !self
-                        .par_wins_inc::<false, false, true, false>(q, att, co, ckey, 1, min_avail),
-                    (false, false) => !self
-                        .par_wins_inc::<false, false, false, false>(q, att, co, ckey, 1, min_avail),
+                    (true, true) => {
+                        !self.par_wins_inc::<true, true, false, 8>(q, att, co, ckey, 1, min_avail)
+                    }
+                    (true, false) => {
+                        !self.par_wins_inc::<true, false, false, 8>(q, att, co, ckey, 1, min_avail)
+                    }
+                    (false, true) => {
+                        !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
+                    }
+                    (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                        (true, 11) => !self
+                            .par_wins_inc::<false, false, true, 11>(q, att, co, ckey, 1, min_avail),
+                        (true, 10) => !self
+                            .par_wins_inc::<false, false, true, 10>(q, att, co, ckey, 1, min_avail),
+                        (true, 9) => !self
+                            .par_wins_inc::<false, false, true, 9>(q, att, co, ckey, 1, min_avail),
+                        // iso-window: W8 dense table, no W9+ ceiling.
+                        (true, _) => !self
+                            .par_wins_inc::<false, false, true, 8>(q, att, co, ckey, 1, min_avail),
+                        // iso-flat: no dense layer.
+                        (false, _) => !self
+                            .par_wins_inc::<false, false, false, 8>(q, att, co, ckey, 1, min_avail),
+                    },
                 };
             self.root_done.fetch_add(1, Ordering::Relaxed);
             if timing {

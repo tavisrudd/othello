@@ -1371,3 +1371,104 @@ deferred.
 3. **Parallelism deficit** — the 2-root plateau is the real ~50%-of-wall idle; W_K shrinks per-root work,
    but a re-expansion-free way to parallelize the giant roots (ABDADA-style in-flight markers, or YBWC-
    recursive warm-then-fan) is the open structural question. Decide with the user.
+
+---
+
+## SESSION 2026-06-19--4 — W10/W11 SHIPPED (K=11 default, n=16 record 1m44s) + crossover swept
+
+**Session**: `1ba3518a-0ac0-4845-b031-9302e42d2248` — `mi`. Resumed from `go`; executed NEXT #1 (W10/W11)
+end-to-end: generalised the `getK` kernel, threaded a `const DK` dense ceiling, validated, swept the
+economic crossover at n=16, and **promoted K=11 to the iso-dense default** (the measured winner).
+
+### What landed — the W_K hierarchy generalised to K=11
+
+`iso-dense` now resolves every pc==k node with `9 ≤ k ≤ DK` directly from the complete W0..W8 tables, where
+`DK` is the dense ceiling (was hard-wired to 9). The kernel (`dense.rs`):
+- **`wk_masks(k)`** — one const builder for the per-vertex incident + per-alive-subset induced `pext` masks
+  of the k-vertex upper-triangular edge layout, sized to `MAX_DENSE_K = 11` (`MAX_INDUCED = 2^11`). Replaces
+  the K=9-only `w9_masks`; `W9_MASKS`/`W10_MASKS`/`W11_MASKS` are `wk_masks(9/10/11)`.
+- **`extract_adj::<K>`** — shared `const`-K adjacency-row recovery (the loop unrolls); used by all three.
+- **`get10`/`get11`** — twins of `get9`. A move drops `1+deg(v)` vertices, so a child of a k-node has
+  `≤ k-1` vertices: it lands in `W{≤8}` (one table lookup) **or**, when isolated/near-isolated, recurses one
+  ply into `get9`/`get10`. The recursion bottoms out in the complete tables (≤2 nested levels for K=11), no
+  allocation, no TT traffic, **no re-expansion** below pc==K (the W0..W8 base is complete, so nothing
+  recomputes — this is the key difference from the measured-dead dense-block lever). Code is `K*(K-1)/2` bits:
+  W9 36, W10 45, W11 **55** (fits `u64`). **K=12 = 66 bits ⇒ needs a wider code; 11 is the `u64` ceiling.**
+- **Validation:** `direct_w10/w11_matches_scalar_recurrence` — `getK` vs a new recursive scalar reference
+  `wins_rec(k, …)` over 20 K random codes each. Green.
+
+Solver (`iso_flat.rs`): `const W9: bool` → **`const DK: u32`** through `wins_inc`/`par_wins_inc`; field
+`w9_direct: bool` → **`dense_k: u32`** (8 = off). The child-dispatch hook gained `DK >= 11 && pc == 11` /
+`DK >= 10 && pc == 10` arms above the existing W9/W8 arms — all `const`, so each instantiation DCEs the arms
+above its ceiling (DK=8 ⇒ iso-flat/iso-window **byte-identical to before**). `new_dense` reads
+`QUEENS_DENSE_K` **once** (default **11**, clamp 9..=11) → threaded as `dense_k` → resolved to `const DK` at
+the root dispatch (`wins()` + `first_player_wins` matches on `(dense8.is_some(), dense_k)`). Never a runtime
+flag in the deep loop. `w10_get`/`w11_get` build the 45/55-bit code from the board attack rows (twins of
+`w9_get`).
+
+### Measured — the crossover (K=11 wins)
+
+**Deterministic single-thread n=14** (no parallel noise — the clean metric; all second-player):
+
+| ceiling | nodes       | Δ vs W8 | Δ vs prev | single-thread wall |
+|---------|-------------|---------|-----------|--------------------|
+| W8 (iso-window) | 27,539,495 | —       | —         | 6.69s |
+| W9      | 22,527,149  | −18.2%  | −18.2%    | 5.85s |
+| W10     | 18,825,047  | −31.6%  | −16.4%    | 5.29s |
+| W11     | 15,724,135  | −42.9%  | −16.5%    | 4.92s |
+
+Each layer cuts ~16% more nodes and lowers the single-thread wall — so `getK`'s per-node cost is repaid even
+at n=14 (no TT pressure). W9's 22,527,149 reproduces the shipped iso-dense figure exactly (byte-identical at
+DK=9).
+
+**n=16 A/B** (this box, 17 GB TT, clean: 21 GB avail / swap off / ARC 1.2 GB; node count ±18% noisy so this
+brackets means, the deterministic n=14 above is the proof of direction):
+
+| ceiling | nodes (r1/r2)   | wall (r1/r2)   | mean wall | M/s  |
+|---------|-----------------|----------------|-----------|------|
+| W9      | 4.53 / 4.15 B   | 2m34s / 2m18s  | ~2m26s    | 29.4 |
+| W10     | 3.33 B          | 2m00s          | 2m00s     | 27.8 |
+| **W11** | 2.53 / 2.79 B   | **1m44s** / 2m05s | **~1m54s** | 24.3 |
+
+W11's *worst* (2m05s) beats W9's *best* (2m18s) — non-overlapping brackets — and the best-of **1m44s** is a
+new lineage record (prior iso-dense W9 record 2m12s). **M/s drops as K rises** (more per-node compute) — so
+for this lever the metric is **node count / wall, not M/s**; the throughput drop is the cost being traded for
+the larger work reduction.
+
+**Gate:** `make test` green (lineage + even-board agreement now exercises iso-dense at DK=11);
+`get10/get11` vs scalar recurrence green; iso-flat n=12 `--distinct` **1,060,823 / 1.25×** (control intact);
+fmt + clippy (`-D warnings`) clean. iso-flat/iso-window byte-identical by construction (DK=8 ⇒ dense arms DCE).
+
+### What this unlocks / obviates (user asked)
+
+- **Unlocks:** a storage-free replacement for any complete W9+ table (a labelled W10 is ~4 TB; `getK` is
+  exact at zero storage / zero build) — **obviates Codex's persisted 8 GiB W9 artifact** (`ddd_bandwidth_bench
+  w9_direct`, ~6-min build) and his nauty-`geng` outcome-pure W9 signature oracle. A K-parameterized knob with
+  K=12 a bounded next step (widen the code past `u64`). An **n=18 enabler** (the −39% node cut compounds with
+  n). Pulls n=16 from ~3× the ~45–60s compute floor toward ~2×.
+- **Obviates / demotes:** the **dense-block prototype** (`QUEENS_BLOCK_K`, measured-dead) is superseded —
+  `getK` is what it tried to be, without the re-expansion that killed it. W11 erases pc 9–11 flat-TT probes
+  (the profiler's ~64% of probe cost), so the **MLP-batched-gets lever (queued #2) and capacity levers (BuRR,
+  1 GB hugepages) lose most of their target** — remaining probe cost is now pc≥12. The **parallelism deficit**
+  is shrunk (cheaper per-root work — exactly the lever the root-timing diagnostic named) but not structurally
+  fixed.
+
+### IN FLIGHT (background sub-agent) + NEXT
+
+- **Throughput-recovery review (LAUNCHED, background `general-purpose` agent):** review the `getK` kernel +
+  `wK_get` code-builders for micro-opts to recover the M/s the per-node compute cost (the user's steer:
+  "recover the throughput"). Output → `notes/proposal-2026-06-19-getk-throughput.md` + a summary. Prime
+  suspects: the scalar bit-by-bit `wK_get` code-builders (vectorize the attack-row→code build?), `extract_adj`
+  + per-child `pext` sharing, the `get11` per-child `match cpc` + `count_ones`, the hot-path `dense8.expect()`
+  (deferred nit). Must dedup against the PART-A scorecard negatives (SIMD `lex_min8`, `pext` edge-code −19%,
+  BITALG wash). **Read its proposal, implement the top candidate, A/B on n=16 cyc/node.**
+- **Then K=12** — widen the labelled code past `u64` (66 bits; `u128` or two words), measure whether the
+  (diminishing: −22% then −13% wall per layer) crossover still pays.
+- Root-timing metric extensions (unchanged from --3); parallelism deficit (the open structural question).
+
+### Codebase delta
+| What | Where |
+|------|------|
+| `wk_masks`/`extract_adj`/`get10`/`get11`/`wins_rec` + W10/W11 tests | `src/queens/dense.rs` |
+| `const DK` ceiling, `dense_k` field, `w10_get`/`w11_get`, dispatch | `src/queens/solver/iso_flat.rs` |
+| `QUEENS_DENSE_K` (default 11, clamp 9..=11) | `IsoFlat::new_dense` |
