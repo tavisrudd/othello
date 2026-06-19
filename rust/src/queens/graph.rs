@@ -656,9 +656,11 @@ fn tiny_edge_code<const K: usize>(attack: &[Bits], verts: &[u8; SMALL_CANON_MAX]
         let row = unsafe { *attack.get_unchecked(verts[i] as usize) };
         let mut j = i + 1;
         while j < K {
-            if edge_bit(row, verts[j]) {
-                code |= 1u32 << bit;
-            }
+            // Branchless: OR in the edge bit unconditionally (0 or 1). The `if`-guarded
+            // form is a data-dependent branch per edge — and `tiny_edge_code` is on the
+            // always-run path of `band_entry`, the measured #1 branch-miss site. Same code
+            // value (matches `w8_get`'s branchless edge-code build).
+            code |= (edge_bit(row, verts[j]) as u32) << bit;
             bit += 1;
             j += 1;
         }
@@ -1056,9 +1058,7 @@ impl Queens {
             // SAFETY: `verts` was extracted from `mask`, which only contains board squares.
             let row = unsafe { *self.attack.get_unchecked(vi) };
             for &vj in verts.iter().skip(i + 1) {
-                if edge_bit(row, vj) {
-                    code |= 1u32 << bit;
-                }
+                code |= (edge_bit(row, vj) as u32) << bit; // branchless (see tiny_edge_code)
                 bit += 1;
             }
         }
