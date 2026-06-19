@@ -919,3 +919,48 @@ PipelineL1,PipelineL2` (L2 maps frontend_by_latency / backend_by_memory / bad_sp
 hypotheses); `ex_ret_near_ret_mispred` is the clean RAS/recursion discriminator; `-D 30000` skips warm-up to
 isolate the deep region; CPI/MPKI are node-count- AND thermal-independent (M/s is confounded by both — the
 4-run sequential A/B showed monotonic clock decline, so trust CPI/MPKI).
+
+### Lever (a) scoping — dense-blocks pre-check #2 PASSES, but the cross-boundary-merge crux is the real gate (2026-06-19--1)
+
+User picked lever (a) (memory ~35%). Scoped the **dense-blocks (Idea B)** form before any solver build, per
+the proposal's prescribed pre-checks. Microbench committed: `src/bin/dense_block_bench.rs` (reachable-only
+win/loss DP = `solve_local` widened u8→u16 to K≤12, over random connected graphs at 3 densities; gate-free,
+no solver change). `taskset -c 0 ./target/release/dense_block_bench`.
+
+**Pre-check #1 (memo amortization) — WEAK**, from prior data: the distinct reachable boundary-graph count at
+9–12 is ~millions (session-`--6` de-risk: 5.96 M distinct cap-12 components at n=14, growing with n) → tens
+of MB → not cache-resident.
+
+**Pre-check #2 (kernel cost) — PASSES (corrects an earlier scalar napkin):**
+
+| K  | reach/2^K   | ns/block   | **ns/reach** |
+|----|-------------|------------|--------------|
+| 9  | 2–4.5 %     | 90–217     | ~8.5–9.3     |
+| 12 | 0.5–1.5 %   | 303–807    | ~13–16       |
+
+- **ns/reach ≈ 10–13 ns** (L1, flat across K & density) vs the **~100 ns DRAM probe** it replaces → **~8–10×
+  cheaper per node.** The full-2^K-sweep fear was wrong: **reachability pruning keeps a K=12 boundary to
+  ~20–60 reachable states** (not 4096), so a whole block-solve is only ~3–8 probe-equivalents. (Memo-clear of
+  the 2^K array is ~10–15 % of ns/block — version-stamping removes it, so the real kernel is even cheaper.)
+- So **mechanically dense-blocks is viable** — the kernel is cheap and the reachable set is tiny.
+
+**THE REAL CRUX (surfaced by the bench, NOT measured by it):** solving each pc≤12 boundary independently
+**loses the cross-boundary transposition merging** the global 17 GB TT provides today (which is *why* re-exp
+is ~1.0×). The proposal's fix — a cross-boundary memo keyed by edge-code — is exactly the millions-distinct
+table = tens of MB = **back to DRAM probes** (just a smaller table). So dense-blocks trades "probe a shared
+DRAM table" for "solve fresh in L1 but re-expand inter-boundary transpositions." Net win =
+(L1-vs-probe saving per node) − (extra nodes from lost inter-boundary merging). **W8 escapes this only
+because K=8 fits a COMPLETE 2²⁸ table (all merges captured, one build); K≥12 cannot (2⁶⁶).** This is the same
+capacity-vs-cost tension the roadmap keeps hitting at pc 9–12. **Unmeasured and the actual make-or-break** —
+needs a re-expansion measurement (prototype the per-boundary fresh-solve, measure node-count inflation vs the
+global-TT ~1.0×) before committing the multi-session build.
+
+**Decision point for the user (genuine fork):**
+- (a-i) **Measure the cross-boundary re-expansion** for a per-boundary fresh-solve (the real dense-blocks
+  gate) — a focused prototype/instrumentation, before the full build.
+- (a-ii) **Pivot to MLP-batched gets** — attacks the 35 % directly (hide the ~1.9 DRAM fills/node, no
+  coverage/amortization dependence), but breaks DFS-residence and only eventual-loss nodes are cleanly
+  batchable; bigger restructure, upside maybe ~15 %.
+- (a-iii) Accept the residual (b) micro-opts (≤1-2 % each) and bank the session's wins.
+My read: dense-blocks' kernel is proven cheap, so (a-i) — the re-expansion measurement — is the highest-value
+next step IF we pursue (a); it's the one unknown between here and a confident go/no-go.
