@@ -889,3 +889,33 @@ frontend ~35 %); only ~10 % retires. A single-barrel lever caps at ~half. The qu
   which removes *both* costs for pc≤12). The unroll survives **only** as the MLP vehicle for (a) — its (c)
   rationale is retired.
 - **Do NOT** build the explicit-stack unroll to fix recursion-unwind — there is nothing there to fix.
+
+### Session wrap (2026-06-19--1) — #0 disambiguated, SMT measured, PROVE_LOSS collapse shipped
+
+**Session**: `7f5286e0-b949-4298-b801-0e8a1f95807a` — `mi`. Resumed from `go`. **Commits (main):**
+`ae8bfae` (measurement #0 verdict) · `837e614` (PROVE_LOSS collapse + A/B + handoff). Record headline
+updated to **2m15s** (user run).
+
+**Landed:** (1) Measurement #0 — the gating disambiguation: deep-node cost = **co-dominant (a) memory ~35%
++ (b) frontend/i-cache ~35%; (c) recursion/RAS DEAD** (0.003% return-mispredict). (2) SMT A/B — (b) is
+intrinsic body-footprint (~16 MPKI single-thread) + ~28 MPKI SMT-thrash; SMT a weak deal but kept. (3)
+**Shipped the PROVE_LOSS collapse** — i-cache **MPKI −74%** (44.7→11.8), CPI −0.8%, value-preserving,
+gate-clean. Modest throughput (frontend was SMT-hidden) but free + de-risks SMT.
+
+**NEXT (decide with user — the two real levers, both bigger than the residual (b) micro-opts):**
+1. **(a) memory ~35%** — the single largest bucket, the real fish: **MLP-batched TT gets** (explicit-stack
+   frontier at AND levels, overlap the ~1.9 DRAM fills/node) and/or **dense-blocks (pc≤12)** which removes
+   *both* costs for that region. Architecture-level + multi-session → **ask before building.** Gate any
+   design on the floor-note footprint pre-check.
+2. **residual (b) ~12 MPKI / 26% latency** — now mostly NOT duplication (it's the inlined helper chain +
+   dispatch ladder + the rest of the call graph). `#[inline(never)] lex_min8/child_orient` is the next cheap
+   test but **diminishing** (≤1-2%, call overhead may cancel; much of the stall is SMT-hidden).
+3. Capacity levers (BuRR / 1 GB hugepages) — weighted low (n=16 is per-unit-cost-bound, not capacity-bound).
+
+**Saved binaries (this box, /tmp):** `queens_champion` (pre-collapse main `9c8a833`), `queens_collapse`
+(= new main `837e614`). Perf scripts: `/tmp/perf_deep.sh` (#0 topdown), `/tmp/perf_smt.sh` (SMT A/B),
+`/tmp/perf_ab.sh` (champion-vs-collapse). **Method banked:** AMD Zen5 topdown = `perf stat -M
+PipelineL1,PipelineL2` (L2 maps frontend_by_latency / backend_by_memory / bad_spec_from_mispredicts onto the
+hypotheses); `ex_ret_near_ret_mispred` is the clean RAS/recursion discriminator; `-D 30000` skips warm-up to
+isolate the deep region; CPI/MPKI are node-count- AND thermal-independent (M/s is confounded by both — the
+4-run sequential A/B showed monotonic clock decline, so trust CPI/MPKI).
