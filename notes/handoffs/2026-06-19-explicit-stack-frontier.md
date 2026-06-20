@@ -106,12 +106,130 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       (`773ba8d`); n=16 A/B = wash-at-default / LOSS-paired-with-finer-split (structural negative,
       see session --7 note).** The deferral can't crack the giant-root tail (the re-expansion is in
       *large* pc 13-21 nodes; a deferrer can't profitably wait for one).
-- [ ] **Frontier work-stealing (shareable/splittable arena) — NOW THE LEAD.** The ABDADA marker infra
-      *is* the substrate (it flags which nodes are in-flight = stealable); the fix for ABDADA's
-      fallback-re-expansion is to **steal the deferred subtree from its in-flight owner** instead of
-      re-expanding it. Heavy (thread-local arena → shareable). See session --7 note.
+- [x] **Frontier work-stealing on `wins_inc_iter` — BUILT + exhaustively tuned, measured a structural
+      NEGATIVE** (`fb6b972`, `be4dc57`, `ce46f41`). rayon-scope publish of even-frame children to idle
+      cores (ABDADA markers coordinate; deferral resolves to a stealer's hit). Best tuned config
+      (`QUEENS_STEAL_DELAY=50` / `WIDTH=2` / `MIN_PC=35` / `MAX=24`) is **+8.7% nodes / +13.3% wall** in a
+      4-round interleaved n=16 A/B (default 17 GB TT). 5th parallelization approach to fail; the tail is
+      transposition-saturated. Gated off (zero prod cost). See the 2026-06-19--7/8 note.
+- [ ] **PIVOT (next session): characterize the tail, then attack the WORK (not the schedule)** — DDD /
+      getK, not parallelization. ChatGPT idea backlog below.
 
 ## Handoff Notes
+
+### Frontier work-stealing BUILT + tuned + measured NEGATIVE — parallelization route CLOSED (2026-06-19--7/8)
+
+**Session**: `37195ab0-cc8d-4c5a-89fa-3f07ff95997a` — `mi`; user steered the whole tuning arc live.
+**Commits (main)**: `773ba8d` (ABDADA, gated) · `7e3be6b` (ABDADA negative docs) · `fb6b972` (work-stealing
+core, gated) · `be4dc57` (60s tail-gate + harness monitor) · `ce46f41` (steal tuning knobs + split
+diagnostics + `--to-file` JSON + serde).
+
+**What was built (all gated off; control byte-identical; `steal_agrees` test green; n=16 verdict SECOND):**
+- **ABDADA in-flight markers** (`QUEENS_ABDADA`): `Slot::IN_FLIGHT=0xFF` sentinel + tri-state `Probe3`
+  `get_inflight_hashed` + `mark_inflight_hashed` in `tt.rs`; `wins_inc_iter` gained `const ABDADA` + a
+  two-pass deferral (`IncFrame.pass` PASS0/PASS0_DEF/PASS1).
+- **Frontier work-stealing** (`QUEENS_STEAL`, implies ABDADA): `wins_inc_iter` gained `'scope`/`&rayon::Scope`
+  + `const STEAL`; at an even-depth (prove-loss) frame, idle-gated, it publishes children as scope tasks
+  (`scope.spawn`) so an idle worker searches them and writes the verdict to the shared TT; the busy worker
+  defers them (ABDADA) and PASS1 resolves them as hits, not re-expansions. Handoff wrapped in
+  `rayon::in_place_scope` (joins all stealers before returning). Gating knobs: `QUEENS_STEAL_DELAY` (50s
+  watchdog arms a flag, sampled every `STEAL_CHECK_EVERY=4096` nodes via a local counter — no per-node
+  atomic; the early all-roots phase pays ~nothing), `QUEENS_STEAL_WIDTH` (per-frame publish cap, def 2),
+  `QUEENS_STEAL_MIN_PC` (only split a child whose avail-pc ≥ this, def 18→use 35), `QUEENS_STEAL_MAX`
+  (concurrent in-flight cap, def n_threads).
+- **Tooling kept:** split diagnostics (`steal_published` + per-pc histogram + `steal_fallback`), printed
+  post-solve; `StealReport` (serde) + `Solver::steal_report()`; **`solve --to-file PATH`** writes the run
+  as JSON (verdict/nodes/wall/TT + steal) while the TTY keeps the human text; `queens-ab.sh` now tees the
+  solver summary to the pane + writes a `$STATE` monitor file + has a memory-guard so default-17 GB A/Bs
+  don't OOM back-to-back.
+
+**The measurement arc (each step the user steered; the trustworthy metric is the INTERLEAVED A/B):**
+1. ABDADA at default split: **wash → small loss** (+0.76% cyc/node robust over 4 rounds; node trim flat —
+   the early "−6%" was a cold-cache outlier). Nothing to defer: baseline re-exp ≈ 1.0.
+2. ABDADA + finer-split (`MIN_AVAIL=48`): **LOSS** — does not remove B1's pc 13-21 re-expansion (the
+   re-expansion is in *large* nodes; a deferrer can't profitably wait for one — its other work finishes
+   ~when the owner does ⇒ PASS1 expands it anyway).
+3. Ungated work-stealing: **2.4× slower / +55% nodes** — over-published in the early parallel phase
+   (`deep_busy` reads idle before workers hand off).
+4. 60s tail-gate + width-21: **+25% wall / +15% nodes** — gate fixed the catastrophe but a 21-wide publish
+   burst per frame re-expands.
+5. Split diagnostic (min_pc 18): **12.3M subtrees split, mean avail-pc 19.6, 9.7% fallback** — far too
+   many tiny splits; the tail is overwhelmingly pc 18-21 nodes.
+6. min_pc sweep (single runs, noisy): 18→12.3M, 25→541K, 35→313K, **50→1.9K, 65→1.8K** splits. **A cliff at
+   pc 50** — only ~1,900 frames with pc≥50 exist after 50s (the roots have already descended past the big
+   shallow frames). So "split high + early" is *not reachable* at the time idle cores appear.
+7. **Definitive 4-round interleaved A/B, steal@min_pc=35 vs control, default 17 GB TT:**
+   | round | control nodes/wall | steal nodes/wall |
+   |-------|--------------------|------------------|
+   | 1 | 2.09B / 119s | 2.34B / 132s |
+   | 2 | 2.01B / 106s | 2.22B / 129s |
+   | 3 | 1.95B / 103s | 2.19B / 120s |
+   | 4 | 2.10B / 115s | 2.11B / 121s |
+   | **mean** | **2.04B / 111s** | **2.22B / 125s** |
+   **+8.7% nodes (re-expansion), +13.3% wall — a loss in every round.** The single-run "1.91B/99s" at
+   min_pc=35 was a low-node fluke; interleaving cancels the ±18% common-mode node-count noise.
+
+**VERDICT — the DFS-parallelization route to the giant-root tail is CLOSED, with evidence.** Five
+independent approaches (B1 finer-split, ABDADA, ungated steal, width-21 steal, tuned steal) all add
+re-expansion, because the tail is **transposition-saturated**: the work that would fill the ~51%-idle cores
+is shared transpositions, so any scheme that does it concurrently re-does it (the in-flight markers can't
+win every race; the few clean-disjoint big subtrees, pc≥50, are gone by 50s). We've now *built* both levers
+session --5 named (ABDADA + frontier work-stealing) and measured both negative — so this is settled, not
+assumed. **Not a "floor"** — the lever is *not parallelization*. The work itself must shrink (getK/W_K
+node-count, per-node cost) or **de-duplicate** (grouped-frontier DDD — the only "parallelism-adjacent"
+lever that doesn't re-expand, *because* it dedups). All steal/ABDADA code stays gated-off on main (zero
+prod cost, substrate + instructive negative; do NOT revert).
+
+### NEXT SESSION — characterize the tail FIRST, then attack the work (ChatGPT idea backlog)
+
+The user wants next session to **characterize what the 2 dominant roots are doing late** before picking a
+lever (we kept tuning a scheduler before fully understanding the work — measure-first). ChatGPT's ideas,
+grouped; the **tail-characterization** cluster is the priority:
+
+**A. Characterize the tail work (do these first — cheap, decisive, mostly cold tooling):**
+- **Measure span, not just work** — reconstruct the actual critical path (the longest cumulative-cost
+  dependent chain) of the giant root; optimize the top-N nodes *on that path*, not global averages. (Our
+  steal failures are consistent with a span/critical-path limit, never directly measured.)
+- **TT-hit profile by popcount AND graph shape** — the dominant cost center late may be a small set of
+  graph families, not a pc layer. Extend the `QUEENS_PROF` per-pc latency profile with a graph-signature
+  bucket.
+- **Cross-root transposition reuse, explicitly** — count TT entries first inserted by root A and later
+  consumed by root B (and vice-versa); `count --roots` (session-10) measured ~2× union reuse but not the
+  directional A→B flow. Asymmetry would inform warmup ordering.
+- **Reuse heat-map over iso classes / "state ROI"** — for each solved state, `(future hits avoided × avg
+  probe cost) / solve cost`; find which canonical graph families dominate future lookups → the optimization
+  target. Build a centrality predictor for high-reuse "hub" states.
+- **Early graph-shape overlap of the two roots** — log the first N canonical fingerprints each dominant
+  root visits; measure overlap *rank*, not just count.
+- **Memory-traffic re-attribution after W12** — re-run the latency study; the dominant DRAM source may have
+  shifted from pc layers to specific graph structures (the `--3`/`--5` hit-cost study predates this).
+
+**B. Attack the work (the levers the characterization should point at):**
+- **Grouped-frontier DDD** (the standing big lever, [proposal](../proposal-2026-06-18-grouped-frontier-ddd.md)):
+  materialize the pc 13-21 frontier, bucket by graph signature, solve each unique boundary graph **once**
+  (dedup by sort, bandwidth-bound). The one approach that fills cores *without* re-expansion because it
+  de-duplicates instead of re-doing — directly counters the saturation we kept hitting. "Information
+  propagation on a DAG: solve the most-reusable states earliest."
+- **getK-C1 throughput / W_K node-count** (the queued throughput leads) — cheaper/fewer nodes on the path
+  the tail grinds; the `notes/proposal-2026-06-19-getk-throughput.md` lead.
+- **Synthetic frontier above W12** — not W13 as a dense layer, but a specialized exact evaluator for the
+  *specific graph families* frequent enough late to justify it (ties to the TT-hit-by-graph-shape profile).
+- **Warmup as a first-class phase** — optimize "useful TT entries generated/sec" not proof progress; A→B vs
+  B→A seeding (asymmetric overlap); plot marginal runtime gain per warmup second to find saturation. Smarter
+  than the current time-based warm-restart (targets high-*centrality* states, not just elapsed time).
+
+**C. Parked / lower-value (measured-dead or speculative):**
+- Speculative sibling expansion for dominant roots *with cancellation* (widen the OR-spine) — fact #5 says
+  speculation defeats the cutoff; cancellation is the only new ingredient, but rayon has no clean cancel.
+  Low EV; only if A says the spine truly is the critical path AND nothing else works.
+- Per-position scheduling for the 2 dominant roots (dedicated workers / lower split thresh) — a scheduler
+  lever; deprioritize until the work is characterized (we just learned scheduler-tuning is the wrong axis).
+
+**Method banked this session:** the n=16 node count is ±18% common-mode noise — **single runs lie**
+(min_pc=35 read 1.91B/99s solo but 2.22B/125s interleaved). Only the *interleaved* A/B (or node-independent
+cyc/node) is trustworthy. And: **characterize the work before tuning the scheduler** — we built and tuned a
+whole work-stealing harness before the split diagnostic revealed the tail is millions of pc-18-21 nodes that
+fundamentally re-expand when parallelized.
 
 ### ABDADA in-flight markers BUILT + measured — structural NEGATIVE; work-stealing is the lever (2026-06-20--7)
 

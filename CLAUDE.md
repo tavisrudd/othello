@@ -11,14 +11,20 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) — the
-recursion→loop `wins_inc_iter` (gated `QUEENS_ITER`, throughput-neutral) is the **materialized frontier** for
-the parallelism-deficit levers. **ABDADA in-flight markers are now BUILT on it** (gated `QUEENS_ABDADA`, off by
-default, control byte-identical, `773ba8d`) and **measured a structural NEGATIVE** (n=16: wash-to-small-loss at
-default split — +0.76% cyc/node, nothing to defer since baseline re-exp ~1.0; clear LOSS paired with
-finer-split — deferral can't crack the *large* pc 13-21 tail nodes, the owner never finishes one during the
-deferrer's window). **Next = frontier work-stealing** (the handoff's other lever): the ABDADA marker infra is
-its substrate — convert "defer-or-re-expand" into "steal a sub-frontier from the in-flight owner" (split the
-same work, no duplicate). Heavy (thread-local arena → shareable); architectural, decide scope with the user.
+recursion→loop `wins_inc_iter` (gated `QUEENS_ITER`, throughput-neutral) materialized the search frontier, and
+on it we BUILT **both** parallelism-deficit levers session --5 named — **ABDADA in-flight markers**
+(`QUEENS_ABDADA`, `773ba8d`) and **frontier work-stealing** (`QUEENS_STEAL`, rayon-scope publish of even-frame
+children to idle cores, `fb6b972`/`be4dc57`/`ce46f41`) — both gated off / control byte-identical / n=16 verdict
+SECOND. **Both measured a structural NEGATIVE.** Tuned work-stealing (`STEAL_DELAY=50`/`WIDTH=2`/`MIN_PC=35`/
+`MAX=24`) is **+8.7% nodes, +13.3% wall** in a 4-round interleaved n=16 A/B. **The DFS-parallelization route to
+the giant-root tail is CLOSED with evidence** — 5 approaches (B1 finer-split, ABDADA, ungated/width-21/tuned
+steal) all add re-expansion because the tail is **transposition-saturated** (the work that would fill the idle
+cores is shared transpositions; the clean-disjoint big subtrees, pc≥50, are gone by 50s). NOT a floor — the
+lever is **not parallelization**. **NEXT = characterize the tail work** (span/critical-path, TT-hits by graph
+shape, cross-root A→B reuse, state-ROI heat-map — ChatGPT backlog in the handoff) **then attack the WORK:
+grouped-frontier DDD** (dedup the frontier — the one parallelism-adjacent lever that doesn't re-expand) **or
+getK/W_K node-count**. Kept tooling: split diagnostics, `solve --to-file` JSON, harness monitor/mem-guard.
+Method banked: n=16 single runs LIE (±18% common-mode noise) — only interleaved A/B is trustworthy.
 
 **Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — n=16 **SOLVED (second)**.
 The lineage's fastest is **`iso-dense`** (a new solver): iso-window's kernel + the **W_K hierarchy** to
