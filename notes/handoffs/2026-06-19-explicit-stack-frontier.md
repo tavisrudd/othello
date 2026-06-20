@@ -112,10 +112,167 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       (`QUEENS_STEAL_DELAY=50` / `WIDTH=2` / `MIN_PC=35` / `MAX=24`) is **+8.7% nodes / +13.3% wall** in a
       4-round interleaved n=16 A/B (default 17 GB TT). 5th parallelization approach to fail; the tail is
       transposition-saturated. Gated off (zero prod cost). See the 2026-06-19--7/8 note.
-- [ ] **PIVOT (next session): characterize the tail, then attack the WORK (not the schedule)** — DDD /
-      getK, not parallelization. ChatGPT idea backlog below.
+- [~] **PIVOT (in progress, 2026-06-20--9): characterize the tail, then attack the WORK (not the schedule)** —
+      DDD / getK / **MLP**, not parallelization. Macro re-anchor done (see the 2026-06-20--9 note): under W12
+      the tail is **ONE giant root = 94% of wall**; TMA is co-dominant **memory 30% + frontend 31%**; the
+      DRAM-probe bucket has a **not-yet-tried** lever (MLP-batched probes on `wins_inc_iter`). Lever choice =
+      user steer.
 
 ## Handoff Notes
+
+### Tail re-anchored post-W12: ONE giant root = 94% of wall; cost = memory 30% + frontend 31% (2026-06-20--9)
+
+**Session**: 2026-06-20 (`mi`, resumed from `go`). Measure-first per the pivot — re-anchored the tail on the
+**current default solver (iso-dense W12)** before picking a lever (the prior tail studies predate W12). Two
+zero-code measurements (`QUEENS_ROOT_TIMING`, `perf stat -M PipelineL1,PipelineL2`), clean box (20 GB free,
+swap/zram off, ARC 2 GB), full 17 GB TT, n=16.
+
+**(1) Macro reframe — `QUEENS_ROOT_TIMING=1 solve 16 iso-dense`:** wall **97.9s**, SECOND, **2.003 B nodes**
+(confirms the ~1m39s record). Root schedule:
+- **tail root idx 29 (sq 1): ran 91.7s, ended 97.9s — SOLO for last 17.5s (18% of wall).**
+- **longest 3 root durations [91.7s, 74.2s, 52.3s] — longest = 94% of total wall.**
+
+So under W12 the prior **"2 dominant roots / 51% util"** sharpens to **ONE giant root = 94% of the wall**, with
+a 17.5s single-root SOLO tail (core util ~14/24 late). W12 cut nodes −60% but did **not** change this macro
+shape. **The scheduling prize is small + closed:** the 17.5s SOLO tail at ~14 cores ≈ 7–8% of wall if perfectly
+re-parallelised — and the work-stealing A/B already proved capturing it is net-negative. **⇒ the wall lever is
+the giant root's WORK, not its schedule** (confirms the pivot from a fresh angle).
+
+**(2) Cost re-attribution post-W12 — `perf stat -M PipelineL1,PipelineL2` (perf inflated wall to 113.7s; %slots
+are rate-valid):** retiring **13.6%** · bad-spec 6.7% · **backend 32.8%** (memory **29.8%** / cpu 3.0%) ·
+**frontend 31.4%** (latency **22.9%** / bandwidth 8.5%) · **SMT-contention 15.3%**. **Co-dominant memory +
+frontend** — consistent with pre-W12 measurement #0 (~35%/~35%); W12's win was the −60% node cut, not a
+per-node rebalance. The memory bucket is **latency-bound** (iso-window TT-size sweep was wall-flat — not
+capacity) and the handoff notes it is **only half-hidden by one-ahead prefetch**.
+
+**Lever implication (the menu, all "attack the work"):**
+- **A. MLP-batched probes on the explicit-stack frontier (`wins_inc_iter`) — NOT YET TRIED; recommended to
+  scope first.** Attacks the **largest single bucket (30% backend-by-memory = exposed pc≥13 DRAM-probe
+  latency)** by holding K frames probed-not-expanded ⇒ K TT gets in flight ⇒ overlap the ~120 ns latency that
+  prefetch only half-hides. This is unlock-list **#4** — the explicit stack was built **for** exactly this,
+  and it is **immune to the transposition-saturation** that killed ABDADA/work-stealing (it is *single-worker
+  latency-hiding*, not parallelization). Napkin ceiling ~10–15% wall (the exposed half of the 30%).
+- **B. getK throughput recovery** (compiler-vectorize the K=10/11 code-build) — cuts the frontend (31%) getK
+  compute. Ready/scoped (the getK-throughput proposal, `rust/notes/proposal-2026-06-19-getk-throughput.md`);
+  smaller (~3–10% M/s), lower risk, codegen-shaping.
+- **C. Grouped-frontier DDD** — dedups the pc 13–21 frontier ⇒ fewer distinct pc≥13 probes **and** fewer getK
+  invocations (hits **both** buckets). The standing big lever; heavy/multi-session; the win/loss (not nimber)
+  variant is the one that doesn't re-expand.
+
+**Doc nit found:** `iso_flat.rs:379-380` `dense_k` doc says "default 9, clamped 9..=11" — stale; the code is
+`env_u32("QUEENS_DENSE_K", 12).clamp(9, 13)` (default **12**, clamp 9..=13). Fix in a doc pass.
+
+**NEXT = user steer on the lever (A MLP / B getK / C DDD).** A is the highest-ceiling not-yet-tried lever and
+reuses built substrate; B is the safe ready bet; C is the big bet. (Tooling left on screen: tmux `queens`
+windows `char-rt`, `char-prof`.)
+
+### Per-pc probe economics (`QUEENS_PROF`) — probe-skip REFUTED; MLP/prefetch-warming is the lever (2026-06-20--9)
+
+User asked three design angles (streaming/dense, idle-core prep, "any TT check not worth doing"). Ran
+`QUEENS_PROF=1 solve 16 iso-dense` (per-pc TT get/put cycle profile) to ground all three. n=16, 2.007 B nodes,
+3.11 B gets / 557,949 Mcyc get / 56,196 Mcyc put.
+
+| pc band | gets | cyc/get | hit-rate (gets−nodes)/gets | share of probe cost |
+|---------|------|---------|----------------------------|---------------------|
+| 13      | 600 M | 176 | 39% | 19.0% |
+| 14      | 431 M | 176 | 38% | 13.6% |
+| 15–17   | 1.03 B | 176–177 | 36–38% | 32.7% |
+| 18–21   | 687 M | ~180 | 34–35% | 22% (cum **87%**) |
+| ≥40 (near-root) | ~tens of K | **50–60** (warm/cache-resident) | — | 0.4% |
+
+**Findings:**
+1. **Probe-skip ("TT check not worth doing") is REFUTED — the probes pay ~22×.** A pc==13 probe costs 176 cyc;
+   its 38% hit-rate saves a ~13-`getK`-call re-expansion ≈ ~10,000 cyc (getK is real `u128` dense compute) ⇒
+   expected saving 0.39×10,000 ≈ 3,900 cyc per probe vs 176 cyc. Skipping = a 22× loss. **Independently
+   confirmed:** skip-and-resolve-densely *is* W13, which is measured net-negative. No band is skippable (low-pc
+   memoizes expensive getK; high-pc saves huge subtrees and is warm/cheap). The put side (10% of probe cyc,
+   relaxed-store writes) enables the 38% hits — also worth it.
+2. **The flat 176 cyc/get at pc 13–21 IS the 30% backend-memory bucket** — cold DRAM latency that one-ahead
+   prefetch is **not** hiding (the warm near-root probes run at 50–60 cyc = the achievable floor). Cross-check:
+   ~8% of total cycles sit in these stalled get-windows; ×4-wide ≈ the TMA's 29.8%-of-slots backend-memory.
+3. **⇒ The three angles converge: can't-skip → must-hide → MLP / idle-core prefetch-warming is THE lever** for
+   the biggest bucket. Prize = drag pc 13–21 from 176 → ~60 cyc (warm floor) ⇒ upper end of the ~10–15% napkin.
+   pc 13–21 = 87% of probe cost, so the batch target is well-defined.
+
+**Decision:** build **A (MLP)**. Step 0 (discipline, before the 52%-of-cycles hot loop) = a **standalone
+microbench** of probe throughput vs batch depth (1/2/4/8/16) over the real 17 GB TT with random keys — measures
+the latency-overlap ceiling for both single-core MLP and the multi-core prefetch-prep pipeline, zero solver
+risk. Then A1 (batched even-frame probe in `wins_inc_iter`, gated, byte-identical off). The idle-core
+dense-chunk-streaming pipeline is the multi-core lift of A1 (DDD with offloaded prep) — gated on A1's measured
+ceiling.
+
+### MLP microbench — ~1.85× latency-overlap headroom; latency-hiding GREEN-LIT (2026-06-20--9)
+
+Step-0 microbench landed (`tt.rs::mlp_bench::mlp_probe_depth_sweep`, `#[cfg(test)]` + `#[ignore]`, not a gate;
+run with `cargo test --release --lib mlp_probe_depth_sweep -- --ignored --nocapture`). Single-thread random
+probes into the real huge-page flat TT (8 GiB, prefaulted), software-pipelined `prefetch_hashed`-ahead by
+`depth`, then `get_hashed`:
+
+| depth (probes in flight) | ns/probe | M/s | vs depth-0 |
+|--------------------------|----------|-----|-----------|
+| 0 (≈today's one-ahead)   | 16.6 | 60.4 | — |
+| 4                        | 12.8 | 78.0 | +29% |
+| 8                        | 10.9 | 91.6 | +52% |
+| 16                       | 9.3  | 107.3 | +78% |
+| 32                       | 9.0  | 111.1 | +84% (plateau) |
+
+**Verdict: the memory system is NOT saturated by one-ahead — ~1.85× single-thread probe-throughput headroom,
+plateauing at ~8–16 in flight.** Latency-hiding (MLP / idle-core prefetch-warming) is a live lever, not dead.
+Caveats for the in-solver translation: (a) single-thread @ boost clock here (16.6 ns ≈ 50–83 cyc) vs the
+solver's 176 cyc/get (24-thread contention + all-core clock + rdtsc) — real per-probe latency is
+contention-inflated, so overlap matters *more*; (b) the microbench is pure-memory (no compute between probes);
+the real loop is co-dominant frontend, so realized gain < 1.85×; (c) **the overlap headroom is largest in the
+tail** — the SOLO phase runs ~14 cores, leaving spare memory bandwidth exactly where the lever is needed.
+
+**Characterization COMPLETE + self-consistent:** can't-skip (PROF 22× ROI) → must-hide (microbench 1.85×) →
+no-free-locality-beyond-pc (canonicalization destroyed it; seg TT already banks the pc axis at +5%) →
+manufacture locality by sorting (DDD), ideally on idle cores.
+
+### A1 Fermi'd BELOW BAR; sorted-stream microbench = ~5.7× ceiling ⇒ A'' (sorted frontier) is the lever (2026-06-20--9)
+
+**User: "A1 go" → "yc".** Building A1, Fermi hit a structural wall, so I measured the alternative instead of
+sinking the per-node build.
+
+**Why per-node A1 is below the bar (Fermi):** the microbench's 1.85× needs ~16 *independent* probes
+back-to-back. One prove-loss node has only a handful of recurse children (~3–12), and two DFS facts cap it
+further: (a) a recurse-child MISS descends its whole subtree before the next sibling is touched (can't keep
+siblings in flight); (b) the TT *mutates during descent*, so you can't probe a sibling batch, cache results,
+and reuse them (stale → re-expansion) — you must re-probe at use-time. The one clean per-node win that survives
+is **probe-before-expand** (probe all children; a known TT-loss child wins the prove-loss node → skip the
+miss-siblings' expansion = a free node cut, gate-safe on iso-dense) — but the *overlap* part is bounded to the
+hit fraction at one small node (~few %), and realizing it needs cache + miss-batch state across the
+suspend/resume in the 52%-of-cycles hot loop: **high risk, ~few-% reward — below the per-node-micro-opt bar.**
+
+**The 1.85× (and more) is a FRONTIER-WAVE number — measured the sorted ceiling** (`tt.rs::mlp_bench`, extended
+with a sort-by-slot pass; same 8 GiB huge-page TT, single thread):
+
+| depth (in flight) | random M/s | **sorted M/s** | sorted/random |
+|-------------------|-----------|----------------|---------------|
+| 0 (≈today)        | 52.4      | 88.5           | 1.7× |
+| 8                 | 83.1      | 153.1          | 1.8× |
+| 16                | 92.0      | 208.5          | 2.3× |
+| 32                | 99.9      | **301.3**      | **3.0×** |
+
+**Sorting the probes by target slot before streaming them = up to 3× over random *at the same depth*, ~5.7×
+over today's effective regime (random depth-0/1 ≈ 52–58 → sorted depth-32 = 301 M/s) — and it COMPOUNDS with
+depth** (sequential access saturates bandwidth; random plateaus latency-bound at ~7 GB/s). Sorted ~50-slot
+spacing at this density mostly hits the same open DRAM row → row-buffer hits. (Sort cost excluded — in A'' the
+idle cores pay it off the critical path.)
+
+**DECISION (data-backed): skip per-node A1; the lever is A'' = the sorted-frontier wave** — materialize a
+pc-band frontier slice, **sort by slot, stream the wave** (probe back-to-back, deep pipeline → 3–5.7× probe
+throughput) **+ dedup** (sorted ⇒ adjacent duplicates removed ⇒ fewer probes). This is grouped-frontier DDD
+(win/loss variant), with the sort offloaded to idle cores = the user's idle-core-prep / dense-chunk-streaming
+vision; **BuRR re-enters here** as the value-only ~1.1-bit/key dense backing for *frozen* (solved) plies
+(sound under windowing's known membership → cache-resident, sequentially streamable). Ceilings now measured:
+per-node MLP ~1.8×, **sorted frontier ~4–5.7×, ~3× better and node-count-adjacent.** Caveats for translation:
+single-thread @ boost here; under 24-thread contention bandwidth is shared (but the ~14-core tail has spare);
+realized < ceiling after sort + frontier-management + DFS-residence loss. **A'' is the multi-session build —
+scope with the user** (the [grouped-frontier DDD proposal](../proposal-2026-06-18-grouped-frontier-ddd.md)
+already covers Phase 0/1; the win/loss + sorted-stream + idle-core-sort framing is the new synthesis).
+
+**Committable now:** doc fix (`iso_flat.rs` dense_k default 12 / clamp 9..=13) + the random+sorted microbench
+(`tt.rs::mlp_bench`, `#[cfg(test)]`/`#[ignore]`); production binary byte-identical.
 
 ### Frontier work-stealing BUILT + tuned + measured NEGATIVE — parallelization route CLOSED (2026-06-19--7/8)
 

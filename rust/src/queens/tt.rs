@@ -1141,3 +1141,92 @@ impl PnTt {
         };
     }
 }
+
+/// Standalone MLP latency-overlap microbench (step-0 for the batched-probe / idle-core
+/// prefetch-prep lever): random-probe throughput into the real huge-page flat TT as a function
+/// of the software-pipeline depth (probes kept in flight). It is the ceiling measurement for the
+/// 176-cyc pc 13–21 DRAM probe — if throughput rises with depth, batching/prefetch-warming the
+/// scattered probes recovers the exposed latency; if flat, one-ahead already saturates and MLP is
+/// dead. `#[ignore]`d (timing, not a gate). Run:
+///   RUSTFLAGS="-C target-cpu=znver5 -C link-arg=-fuse-ld=mold" \
+///     cargo test --release --lib mlp_probe_depth_sweep -- --ignored --nocapture
+/// Env: `MLP_BITS` (table size, default 30 = 8 GiB), `MLP_N` (probes, default 20M).
+#[cfg(test)]
+mod mlp_bench {
+    use super::*;
+    use std::time::Instant;
+
+    #[inline]
+    fn xs(s: &mut u64) -> u64 {
+        let mut x = *s;
+        x ^= x << 13;
+        x ^= x >> 7;
+        x ^= x << 17;
+        *s = x;
+        x
+    }
+
+    #[test]
+    #[ignore = "timing microbench; run explicitly with --ignored --nocapture"]
+    fn mlp_probe_depth_sweep() {
+        let env = |k: &str, d: u64| {
+            std::env::var(k)
+                .ok()
+                .and_then(|s| s.parse().ok())
+                .unwrap_or(d)
+        };
+        let bits = env("MLP_BITS", 30) as u32;
+        let nprobe = env("MLP_N", 20_000_000) as usize;
+        let tt = QueensTt::new(bits);
+        // Prefault every page (sequential store) so the random probes below hit distinct DRAM
+        // lines, not the shared zero page — otherwise an unfaulted slot would be a fake L1 hit.
+        for slot in tt.slots.iter() {
+            slot.store(1, Ordering::Relaxed);
+        }
+        // Random probe routes/fps (mostly miss; a miss costs the same DRAM load as a hit, so the
+        // hit rate is irrelevant to the latency this isolates).
+        let mut s = 0x9E37_79B9_7F4A_7C15u64;
+        let mut routes = vec![0u64; nprobe];
+        let mut fps = vec![0u64; nprobe];
+        for i in 0..nprobe {
+            routes[i] = xs(&mut s);
+            fps[i] = xs(&mut s);
+        }
+        println!(
+            "[mlp] bits={bits} ({} slots, {:.1} GiB) nprobe={nprobe}",
+            tt.len,
+            (tt.len as f64 * 8.0) / (1u64 << 30) as f64,
+        );
+        // depth = probes kept in flight (prefetch issued `depth` iterations before its get).
+        let sweep = |label: &str, routes: &[u64], fps: &[u64]| {
+            for &depth in &[0usize, 1, 2, 4, 8, 16, 32] {
+                let t = Instant::now();
+                let mut acc = 0u64;
+                for i in 0..nprobe + depth {
+                    if i < nprobe {
+                        tt.prefetch_hashed(routes[i]);
+                    }
+                    if i >= depth {
+                        let j = i - depth;
+                        acc += tt.get_hashed(routes[j], fps[j]).map_or(0, u64::from);
+                    }
+                }
+                let el = t.elapsed();
+                let ns = el.as_nanos() as f64 / nprobe as f64;
+                let mps = nprobe as f64 / el.as_secs_f64() / 1e6;
+                println!("[mlp] {label:<6} depth={depth:>2}  {ns:6.1} ns/probe  {mps:7.1} M/s  (acc={acc})");
+            }
+        };
+        sweep("random", &routes, &fps);
+        // Sort the same probes by *target slot* (`fastrange(route, len)`) → sequential access, the
+        // DDD/streaming "dense aligned chunk" model. The random sweep above is still latency-bound at
+        // depth-16 (~7 GB/s ≪ peak); this measures the bandwidth headroom sorting unlocks — the A''/DDD
+        // ceiling. (Sort cost is excluded; in A'' the idle cores pay it off the critical path.)
+        let len = tt.len as u128;
+        let mut order: Vec<u32> = (0..nprobe as u32).collect();
+        order.sort_by_key(|&i| ((routes[i as usize] as u128 * len) >> 64) as u64);
+        let routes_s: Vec<u64> = order.iter().map(|&i| routes[i as usize]).collect();
+        let fps_s: Vec<u64> = order.iter().map(|&i| fps[i as usize]).collect();
+        sweep("sorted", &routes_s, &fps_s);
+    }
+}

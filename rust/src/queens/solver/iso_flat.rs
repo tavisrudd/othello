@@ -376,8 +376,9 @@ pub struct IsoFlat {
     /// `9 ≤ k ≤ dense_k` is resolved directly from the complete W0..W8 tables by the W_K
     /// evaluator (`W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])`, one BMI2-projected child sweep, no flat-TT
     /// probe and no subtree expansion), exactly as W8 already does pc==8. `8` = off (the
-    /// `iso-flat`/`iso-window` control). Set by `new_dense` (default 9, `QUEENS_DENSE_K`
-    /// override, clamped 9..=11). Read **once at the root** to pick the `const DK` search
+    /// `iso-flat`/`iso-window` control). Set by `new_dense` (default 12, `QUEENS_DENSE_K`
+    /// override, clamped 9..=13; K=13 is a validated opt-in, net-negative at n=16). Read
+    /// **once at the root** to pick the `const DK` search
     /// instantiation — never a run-constant branch in the deep loop or a TT probe.
     dense_k: u32,
     tiny_canon: &'static [u64],
@@ -543,8 +544,9 @@ impl IsoFlat {
     /// cost vs saved probes): each layer 9→10→11→12 keeps cutting ~16–18% more nodes and
     /// lowers the wall (deterministic n=14 nodes 22.5M→18.8M→15.7M→12.9M; n=16 mean wall
     /// ~2m26s→2m00s→1m53s→1m41s). W9..W11 keep the labelled code in a `u64`; W12's 66-bit code
-    /// runs on the `u128` two-word `pext` path. `QUEENS_DENSE_K` (9..=12) overrides for
-    /// re-sweeping; `getK` resolves every `9 ≤ pc ≤ K` directly from the complete W0..W8 tables.
+    /// runs on the `u128` two-word `pext` path. `QUEENS_DENSE_K` (9..=13) overrides for
+    /// re-sweeping (K=13 is a validated opt-in, net-negative at n=16; may flip at n=18);
+    /// `getK` resolves every `9 ≤ pc ≤ K` directly from the complete W0..W8 tables.
     pub fn new_dense(bits: u32) -> Self {
         let mut s = Self::from_tt_with_window(QueensTt::new(bits), true);
         s.name = "iso-dense";
