@@ -2600,6 +2600,57 @@ fn comps_report(q: &Queens, solver: &dyn Solver) {
         );
     }
     comps_dense_nimber_coverage(q, &ws);
+    comps_struct_report(q, &ws);
+}
+
+/// Node-Kayles structural-reduction incidence over the working set, per available-popcount —
+/// the gate for the literature's twin/module shortcut (research-2026-06-19-w12-w13-litsearch).
+/// For each `pc` in the W_K band (9..=13) reports the fraction of distinct positions with a
+/// **universal vertex** (a move ⇒ instant win, resolvable in O(K) without the K-move `pext`
+/// sweep) and with a **twin pair** (equivalent moves the sweep could dedup). If these are
+/// common at pc==12/13, a reduction pre-pass beats the `u128` evaluator; if rare, the W_K
+/// kernel is already near-minimal. Distinct-position incidence (a search-weight proxy).
+fn comps_struct_report(q: &Queens, ws: &[(Bits, u8)]) {
+    let lo = 9u32;
+    let hi = 13u32;
+    let span = (hi - lo + 1) as usize;
+    let mut total = vec![0u64; span];
+    let mut universal = vec![0u64; span];
+    let mut twin = vec![0u64; span];
+    let mut either = vec![0u64; span];
+    for &(mask, _) in ws {
+        let pc = mask.popcount();
+        if pc < lo || pc > hi {
+            continue;
+        }
+        let b = (pc - lo) as usize;
+        let (u, t) = q.struct_profile(mask);
+        total[b] += 1;
+        universal[b] += u as u64;
+        twin[b] += t as u64;
+        either[b] += (u || t) as u64;
+    }
+    if total.iter().sum::<u64>() == 0 {
+        return;
+    }
+    println!("  Node-Kayles reduction incidence (gate for the twin/module shortcut), by pc:");
+    println!("    pc  | distinct        | universal-vertex | twin-pair        | either");
+    for b in 0..span {
+        if total[b] == 0 {
+            continue;
+        }
+        let n = total[b] as f64;
+        println!(
+            "    {:>3} | {:>15} | {:>7} ({:5.1}%) | {:>7} ({:5.1}%) | {:5.1}%",
+            lo as usize + b,
+            commas(total[b]),
+            commas(universal[b]),
+            universal[b] as f64 / n * 100.0,
+            commas(twin[b]),
+            twin[b] as f64 / n * 100.0,
+            either[b] as f64 / n * 100.0,
+        );
+    }
 }
 
 /// Incremental value of a **dense nimber-≤K table** (W8-style: per-component Grundy

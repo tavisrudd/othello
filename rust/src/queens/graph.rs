@@ -1136,6 +1136,54 @@ impl Queens {
         (centrality, avail_pop, frag, ncomp)
     }
 
+    /// Cold `count --comps` structural-incidence probe for the **Node-Kayles reductions** the
+    /// literature offers as a cheaper-than-`pext` shortcut for the W_K layer. For the
+    /// available-graph on `mask` returns `(has_universal, has_twin)`:
+    ///   - **universal vertex** — a vertex adjacent to all `K-1` others; a move on it deletes
+    ///     `N[v] =` everything, so the mover wins immediately (the position is an N-position).
+    ///     Detectable in O(K), it would short-circuit the whole K-move child sweep.
+    ///   - **twin pair** — two vertices `u,v` whose neighbourhoods agree outside `{u,v}` (true
+    ///     or false twins); they are equivalent moves, so the sweep can branch on one and skip
+    ///     the other (and a chain of twins is an independent/clique module that collapses `K`).
+    ///
+    /// Measures how often these fire on the queen subgraphs at pc==K, the gate for whether a
+    /// reduction pre-pass would pay. O(K²) `Bits` ops; only called from `count --comps`.
+    pub fn struct_profile(&self, mask: Bits) -> (bool, bool) {
+        let k = mask.popcount() as usize;
+        let mut verts = [0u32; 16];
+        let mut nbhd = [Bits::ZERO; 16];
+        if k == 0 || k > verts.len() {
+            return (false, false);
+        }
+        let mut n = 0usize;
+        mask.each(|v| {
+            verts[n] = v;
+            // open neighbourhood within the available set (attack excludes self)
+            nbhd[n] = self.attack[v as usize].and(mask);
+            n += 1;
+        });
+        let mut has_universal = false;
+        for &nb in nbhd.iter().take(n) {
+            if nb.popcount() as usize == k - 1 {
+                has_universal = true;
+                break;
+            }
+        }
+        let mut has_twin = false;
+        'outer: for i in 0..n {
+            for j in (i + 1)..n {
+                // u,v are twins iff N(u) and N(v) differ only (possibly) in each other's bit.
+                let diff = nbhd[i].and_not(nbhd[j]).or(nbhd[j].and_not(nbhd[i]));
+                let extra = diff.popcount() - diff.get(verts[i]) as u32 - diff.get(verts[j]) as u32;
+                if extra == 0 {
+                    has_twin = true;
+                    break 'outer;
+                }
+            }
+        }
+        (has_universal, has_twin)
+    }
+
     /// `HIST` selects, at monomorphisation time, whether to tally component sizes into
     /// `hist` -- `false` for the search's live key (the tally vanishes), `true` for the
     /// `count --comps` measurement. Keeping it a const generic (rather than a runtime

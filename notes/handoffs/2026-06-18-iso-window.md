@@ -1619,8 +1619,26 @@ one representative per twin class. Removes duplicate children **and can shrink K
 node in a W≤8 table, skipping the W_K layer entirely**. Detection is O(K²) `u16`-mask equality — *cheaper
 than a single two-word `pext`*. Also: join/universal-vertex/component pre-tests (cheap O(K) connectivity →
 short-circuit the K-move sweep); closed-form nimbers for paths/cycles (narrow). Dead-end confirmed:
-canonical labelling (nauty) is far slower than pext (matches our iso-key measurements). **GATE before
-building: the payoff hinges on the *unmeasured* incidence of twins / size-2 modules / universal vertices in
-queen subgraphs at K=12/13** (queen graphs are dense/geometric — large modules likely rare, but size-2
-twins / universal vertices plausibly common). A one-shot `count`-style incidence histogram decides it. This
-is the most promising "cheaper algorithm" lead and the natural next experiment.
+canonical labelling (nauty) is far slower than pext (matches our iso-key measurements).
+
+**GATE MEASURED → the structural-reduction lead is DEAD for the W_K layer (2026-06-19).** Added
+`Queens::struct_profile` + `comps_struct_report` (`count --comps` extension, cold/diagnostic): per-pc
+incidence of a **universal vertex** (→ instant-win O(K) shortcut) and a **twin pair** (→ dedup equivalent
+moves). Measured n=12 / n=14:
+
+| pc  | universal (n12/n14) | twin pair (n12/n14) |
+|-----|---------------------|---------------------|
+| 9   | 3.1% / 3.0%         | 15.0% / 18.0%       |
+| 11  | 0.4% / 0.3%         | 6.3% / 9.0%         |
+| 12  | **0.1% / 0.1%**     | **4.1% / 5.9%**     |
+| 13  | **0.0% / 0.0%**     | **2.3% / 3.8%**     |
+
+At pc==12/13 — where W_K runs — **universal vertices are ~absent and twins occur in only ~4–6% of nodes**,
+and the incidence **decreases with pc** (worst exactly where W_K is most expensive). The O(K²) twin detection
+would run on **all** pc==K nodes and costs *more* than the K-`pext` sweep it might save (K² `u16`/`Bits`-ops
+vs ~K `pext` + lookups), to help only the ~4%. **Net-negative — measured-dead.** (Twins are non-trivial at
+pc=9 — 18% at n=14, rising with n — but get9 is the cheapest u64 sweep, so detection still costs more than it
+saves.) Queen graphs are too dense/geometric for the Node-Kayles reductions to pay. **The `u128` W_K kernel
+is near its floor** (this + the B1 wash + the GFNI/SIMD small-data negatives all agree). Diagnostic kept
+(`count --comps` now prints the incidence table). The join/component-decomposition angle is the older
+component-nimber lever — already measured-dead.
