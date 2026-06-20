@@ -102,10 +102,80 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
 - [x] Opus micro-opt of `wins_inc_iter` — **closed +4.3% → parity** (register-hoist + `get_unchecked`)
 - [x] Canonical A/B harness committed (`f124bc5`, `rust/scripts/queens-ab.sh`) + CLAUDE.md lessons
 - [x] Micro-opt committed (`8fb23dd`) — n=16 A/B parity (off 2994.8 / on 2994.0), gate green
-- [ ] ABDADA in-flight markers on `wins_inc_iter` (measure re-exp first)
-- [ ] Frontier work-stealing (shareable/splittable arena)
+- [x] **ABDADA in-flight markers on `wins_inc_iter` — BUILT, gated off, correctness-validated
+      (`773ba8d`); n=16 A/B = wash-at-default / LOSS-paired-with-finer-split (structural negative,
+      see session --7 note).** The deferral can't crack the giant-root tail (the re-expansion is in
+      *large* pc 13-21 nodes; a deferrer can't profitably wait for one).
+- [ ] **Frontier work-stealing (shareable/splittable arena) — NOW THE LEAD.** The ABDADA marker infra
+      *is* the substrate (it flags which nodes are in-flight = stealable); the fix for ABDADA's
+      fallback-re-expansion is to **steal the deferred subtree from its in-flight owner** instead of
+      re-expanding it. Heavy (thread-local arena → shareable). See session --7 note.
 
 ## Handoff Notes
+
+### ABDADA in-flight markers BUILT + measured — structural NEGATIVE; work-stealing is the lever (2026-06-20--7)
+
+**Session**: 2026-06-20 (`mi`). Resumed from `go`; the user steered "no gating on fermi. push forward and
+expect initial small regressions. push past them." So I built the real ABDADA in-flight-deferral on
+`wins_inc_iter` (skipped the side-set probe) and measured it at n=16. **Commit `773ba8d`** (gated off).
+
+**What was built (gated `QUEENS_ABDADA=1`, off by default, control byte-identical):**
+- `tt.rs`: `Slot::IN_FLIGHT` sentinel (`val=0xFF`), tri-state `Probe3` `get_inflight_hashed`,
+  `mark_inflight_hashed` (relaxed-store claim). Markers only hide latency; every fallback degrades to a
+  plain re-expansion and only the completing put records a (deterministic) value ⇒ verdict is
+  timing-independent. **Limitation:** don't checkpoint-resume an ABDADA run — a mid-flight dump would
+  capture a `0xFF` marker that the plain `get_h` reads as a win (markers are `!COUNT`-only and the
+  distinct-counter path is disabled under ABDADA for the same reason).
+- `iso_flat.rs`: `const ABDADA` monomorphisation of `wins_inc_iter` (resolved once per subtree handoff,
+  never per node — hot-path-toggle rule); `IncFrame.pass` two-pass deferral state (PASS0 skip in-flight
+  children → keep working others → PASS1 revisit: now-finished are hits, stragglers expanded by us).
+- Correctness: new `abdada_agrees_on_small_even_boards` test (n=8/10/12 verdict == naive **under the real
+  parallel solver**, where deferral actually fires — a single worker never re-probes its own on-stack
+  markers, since available-popcount strictly shrinks down a DFS path). **All n=16 A/B runs returned SECOND**
+  (correct verdict at full scale). Gate green: n=12 iso-flat `--distinct` 1,060,823/1.25× (control) and the
+  `QUEENS_ITER` non-abdada path matches; n=14 second/1.02×; clippy/fmt clean.
+
+**MEASURED — the core bet fails (structural, not a tuning regression).**
+
+| config (n=16, iso-dense, 12 GB TT) | cyc/node | nodes | wall | verdict |
+|------------------------------------|----------|-------|------|---------|
+| default split, CTRL (4-round mean) | 2956.9   | 2.05 B | ~105 s | small-loss baseline |
+| default split, **ABDADA** (4-round mean) | **2979.3 (+0.76%)** | 2.07 B (+0.8%) | ~107 s | **wash → +1.5% (LOSS)** |
+| finer split `MIN_AVAIL=48`, FINE (B1) | ~3361 (+14%) | ~2.75 B (+34%) | 133–143 s | LOSS (re-exp, as session --5) |
+| finer split, **FINE+ABDADA** | ~3412 | 2.83–3.17 B | 143–163 s | **LOSS — ABDADA does NOT remove B1's re-exp** |
+
+- **Default split: ABDADA is a wash-to-small-loss.** cyc/node +0.76% is *robust* (every one of 4 rounds
+  AB > CTRL — it's the marker-store + tri-state-probe cost); the node count is flat (+0.8%, noise). The
+  one early run that showed "−12% / −6% nodes" was a **cold-cache outlier** (a CTRL `off_1` at 114.6 s vs
+  the cluster's ~104 s); 4 clean rounds erased it. **There is essentially nothing to defer at default
+  split** — baseline re-exp is already ~1.0 (warm-restart + the split-node `par_tt` memo prevent the
+  concurrent duplicates), so the marker overhead buys nothing.
+- **Finer split + ABDADA: a clear LOSS.** Finer split (B1, `MIN_AVAIL=48`) reproduces session --5: +34%
+  nodes, +14% cyc/node, ~135–163 s wall. **ABDADA does not remove that re-expansion** (FINE+AB node count
+  ties or *exceeds* FINE; the worst run of all was FINE+AB at 162.8 s / 3.17 B).
+
+**WHY (the structural reason — confirms session --5 from a new angle, by building the actual mechanism):**
+the giant-root-tail re-expansion is in **large pc 13-21 nodes (the bulk of the work, not a thin frontier)**.
+ABDADA's deferral only saves a re-expansion if the in-flight node's *owner finishes it during the
+deferrer's other-work window*. For a large balanced subtree, the deferrer's "other children" are *also*
+large and finish ~when the owner does — so PASS1 still finds the node in-flight and **expands it itself
+(the fallback) = the re-expansion is NOT avoided**. Deferral is a latency-hider; the deficit is a
+bulk-work transposition race. Wrong tool. (It *would* help if the duplicates were small/quick — but those
+aren't where the re-expansion mass is.)
+
+**THE LEVER THIS POINTS TO — frontier work-stealing (the handoff's other named lever).** The fix for
+ABDADA's fallback is exactly: instead of *re-expanding* the in-flight node independently, **steal a
+sub-frontier from its in-flight owner** — split the SAME work across the two workers (no duplicate at all).
+The ABDADA marker infra is the **substrate**: it already flags which nodes are in-flight ⇒ stealable, and
+which owner to steal from. That converts "defer-or-re-expand" (the dead end) into "defer-or-help" (the
+real parallelization of the OR-spine tail). **Heavy:** needs the per-worker `INC_STACK` arena to become
+shareable/splittable (today thread-local) — a per-worker work-stealing deque or a shared frontier pool.
+This is the architectural multi-session build; **decide scope with the user.**
+
+**Status of the ABDADA code:** keep it gated-off on main (zero production cost — the `ABDADA=false`
+instantiation is byte-identical, validated) as the **work-stealing substrate** + the documented negative.
+Do NOT ship `QUEENS_ABDADA` as a default (it's a measured loss). Do NOT revert (substrate + instructive
+negative; and the global revert-ask rule applies).
 
 ### Explicit-stack shape built + micro-opted to parity (2026-06-19--6)
 

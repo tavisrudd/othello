@@ -11,9 +11,14 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) — the
-recursion→loop `wins_inc_iter` (gated `QUEENS_ITER`, off by default, throughput-neutral after micro-opt) is
-built as the **materialized frontier** for the parallelism-deficit levers; **next = ABDADA in-flight markers
-/ frontier work-stealing** on it (attack the 51%-util giant-root tail, ~half the n=16 wall).
+recursion→loop `wins_inc_iter` (gated `QUEENS_ITER`, throughput-neutral) is the **materialized frontier** for
+the parallelism-deficit levers. **ABDADA in-flight markers are now BUILT on it** (gated `QUEENS_ABDADA`, off by
+default, control byte-identical, `773ba8d`) and **measured a structural NEGATIVE** (n=16: wash-to-small-loss at
+default split — +0.76% cyc/node, nothing to defer since baseline re-exp ~1.0; clear LOSS paired with
+finer-split — deferral can't crack the *large* pc 13-21 tail nodes, the owner never finishes one during the
+deferrer's window). **Next = frontier work-stealing** (the handoff's other lever): the ABDADA marker infra is
+its substrate — convert "defer-or-re-expand" into "steal a sub-frontier from the in-flight owner" (split the
+same work, no duplicate). Heavy (thread-local arena → shareable); architectural, decide scope with the user.
 
 **Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — n=16 **SOLVED (second)**.
 The lineage's fastest is **`iso-dense`** (a new solver): iso-window's kernel + the **W_K hierarchy** to
