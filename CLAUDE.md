@@ -10,6 +10,11 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
+**Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) — the
+recursion→loop `wins_inc_iter` (gated `QUEENS_ITER`, off by default, throughput-neutral after micro-opt) is
+built as the **materialized frontier** for the parallelism-deficit levers; **next = ABDADA in-flight markers
+/ frontier work-stealing** on it (attack the 51%-util giant-root tail, ~half the n=16 wall).
+
 **Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — n=16 **SOLVED (second)**.
 The lineage's fastest is **`iso-dense`** (a new solver): iso-window's kernel + the **W_K hierarchy** to
 ceiling **K=12** — every pc==k node (`9 ≤ k ≤ 12`) is resolved directly from the complete W0..W8 tables by
