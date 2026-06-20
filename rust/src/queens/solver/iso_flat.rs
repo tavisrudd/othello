@@ -399,7 +399,7 @@ impl IsoFlat {
         s.name = "iso-dense";
         // Dense layer on by construction (not the iso-window env gate). The ceiling is read
         // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
-        s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 12);
+        s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 13);
         s
     }
 
@@ -605,6 +605,34 @@ impl IsoFlat {
             }
         }
         dense8.get12(code)
+    }
+
+    /// Resolve a 13-vertex graph directly from W0..W8 (the W13 layer). Twin of
+    /// [`w12_get`](Self::w12_get) over the 78-bit labelled edge code (`u128`); [`DenseW8::get13`]
+    /// nests one ply into W12 (66-bit child) / W11..W9 / a W≤8 lookup per child.
+    #[inline]
+    fn w13_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        // SAFETY: the DK≥13 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
+        debug_assert_eq!(avail.popcount(), 13);
+        let mut verts = [0u8; 13];
+        let mut n = 0usize;
+        avail.each(|v| {
+            // SAFETY: dispatched only at pc==13 ⇒ exactly 13 squares ⇒ n < 13.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
+            n += 1;
+        });
+        debug_assert_eq!(n, 13);
+        let mut code = 0u128;
+        let mut bit = 0u32;
+        for i in 0..13 {
+            let row = att08(att, verts[i]);
+            for &vj in verts.iter().take(13).skip(i + 1) {
+                code |= (row.get(vj as u32) as u128) << bit;
+                bit += 1;
+            }
+        }
+        dense8.get13(code)
     }
 
     #[inline]
@@ -1072,7 +1100,9 @@ impl IsoFlat {
             // (no flat-TT probe, no subtree expansion). `DK` is `const`, so each arm const-folds
             // away for the instantiations below it — `DK == 8` (iso-flat/iso-window) compiles all
             // three out, identical to before.
-            let lost = if DK >= 12 && pc == 12 {
+            let lost = if DK >= 13 && pc == 13 {
+                !self.w13_get(att, child0)
+            } else if DK >= 12 && pc == 12 {
                 !self.w12_get(att, child0)
             } else if DK >= 11 && pc == 11 {
                 !self.w11_get(att, child0)
@@ -1670,6 +1700,16 @@ impl Solver for IsoFlat {
                 &mut nodes,
             ),
             (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 13) => self.wins_inc::<false, false, true, 13, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
                 (true, 12) => self.wins_inc::<false, false, true, 12, M_NORMAL>(
                     q,
                     att,
@@ -1792,6 +1832,8 @@ impl Solver for IsoFlat {
                         !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
                     }
                     (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                        (true, 13) => !self
+                            .par_wins_inc::<false, false, true, 13>(q, att, co, ckey, 1, min_avail),
                         (true, 12) => !self
                             .par_wins_inc::<false, false, true, 12>(q, att, co, ckey, 1, min_avail),
                         (true, 11) => !self

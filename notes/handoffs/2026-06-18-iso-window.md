@@ -1519,3 +1519,42 @@ and the open parallelism-deficit question.
 | `w12_masks`/`pext128`/`extract_adj128`/`get12` + u128 `wins_rec` + W12 test | `src/queens/dense.rs` |
 | `w12_get`, `DK>=12` dispatch + root `(true,12)` arms, default K=12 | `src/queens/solver/iso_flat.rs` |
 | getK i-cache shave (`unwrap_unchecked`/`get_unchecked_mut`) + throughput proposal | `iso_flat.rs`, `notes/proposal-2026-06-19-getk-throughput.md` |
+
+### W13 SHIPPED as opt-in — and it LOCATED the economic crossover: K=12 is the optimum (same session)
+
+Pushed the ladder one more layer to find where the crossover actually is. K=13's code is `13·12/2 = 78`
+bits (fits `u128`), but a **12-vertex child** of a 13-vertex node has a 66-bit code (> `u64`), so the
+projection needed a `u128`-returning `pext128_wide` (the low half can hold 64 selected bits, so the high
+half shifts within the `u128`; `get13`'s pc==12 children call `get12` with the wide code, smaller children
+narrow to `u64`). `get13` validated against the scalar reference (`projected_code`/`wins_rec` widened to
+`u128`; `direct_w13_matches_scalar_recurrence`, 30 K codes). `MAX_DENSE_K`→13.
+
+**Measured — K=13 is net-negative at n=16 (the crossover):**
+
+| ceiling | n=14 det. nodes | Δ/layer | s-t wall | n=16 nodes (mean) | n=16 wall (mean) |
+|---------|-----------------|---------|----------|-------------------|-------------------|
+| W12     | 12,896,443      | −18.0%  | 4.49s    | 2.02 B            | **~1m41s**        |
+| W13     | 10,339,019      | −19.8%  | 4.32s    | 1.71 B (−15%)     | ~1m46s (**+4%**)  |
+
+W13 still cuts nodes (−15–20%), but at n=16 the `u128`-wide `get13` per-node cost now **exceeds** the saved
+work: wall is break-even-to-slightly-negative (DK=13 runs 1m43s/1m49s vs DK=12 1m39s/1m44s). The per-layer
+wall gain ran **−22% → −13% → −10% → +4%** (W9→W13) — a textbook diminishing-returns crossover, and the n=14
+single-thread wall gain shrank in lockstep (−9% at W12, only −3.8% at W13). **K=12 is the measured economic
+optimum.**
+
+**W13 kept as a validated opt-in, NOT the default** (`QUEENS_DENSE_K=13`, clamp 9..=13; default stays 12).
+Zero cost to the K=12 default — the `DK` const generic gives W12 and W13 *separate* monomorphisations, so the
+default hot path never contains the W13 arm. Reasons to keep rather than revert: (1) it's the experiment that
+*located* the crossover (the deliverable of "sweep the economic crossover"); (2) the −15% node cut may flip
+net-positive at **n=18**, where a much deeper tree amortises the per-node cost and pc==13 nodes are more
+numerous — W13 is the ready lever to test that; (3) the `pext128_wide`/u128-child machinery is the reusable
+base for any higher layer. Gate green (lineage + even-board at DK=12 + W13 kernel test; iso-flat distinct
+1,060,823/1.25×).
+
+**Crossover summary (n=16, this box):** W9 2m12s → W10 2m00s → W11 1m44s → **W12 1m39s (optimum)** → W13 1m46s.
+
+### Codebase delta (W13)
+| What | Where |
+|------|------|
+| `wk_masks128`/`pext128_wide`/`get13` + u128 `projected_code` + W13 test | `src/queens/dense.rs` |
+| `w13_get`, `DK>=13` dispatch + root `(true,13)` arms, clamp 9..=13 (default still 12) | `src/queens/solver/iso_flat.rs` |

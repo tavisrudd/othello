@@ -32,15 +32,18 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 | iso-window          | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT                |
 | iso-flat            | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                     |
 
-**Current focus:** the W_K crossover is swept to **K=12** (the default; −53% nodes / ~1m41s mean vs W8).
-**K=13** is the next layer (78-bit code — still fits `u128`, but a 12-vertex *child* code is 66 bits so the
-`pext128` projection must return `u128`; more impl). The throughput question is open: M/s drops as K rises
-(`getK` is real per-node compute; the wall wins on the larger work cut), and the perf trace shows the
-compiler **auto-vectorizes the code-build for K≤9 but falls to scalar for K≥10** — the recovery lever is
-compiler-driven vectorization, NOT hand SIMD (the −19% scorecard negative). See
-[getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md). Lower-priority: the **memory
-levers** (MLP gets, BuRR, 1 GB hugepages) — W12 erased the pc 9–12 probes (~the profiler's whole probe
-cost); remaining cost is pc≥13. **Parallelism deficit** (one root ~95% of wall) is shrunk-not-fixed by W_K.
+**Current focus:** the W_K **economic crossover is found — K=12 is the optimum** (the default; −53% nodes /
+~1m41s mean vs W8). The sweep ran one layer past it: **K=13 is net-negative at n=16** — it still cuts nodes
+(−15% vs W12) but the `u128`-wide `get13` per-node cost now exceeds the saved work (wall ~1m46s, +4%). The
+per-layer wall gains were −22% → −13% → −10% → **+4%**. W13 stays a validated **opt-in** (`QUEENS_DENSE_K=13`,
+zero cost to the K=12 default — separate monomorphisation); its −15% node cut may flip positive at **n=18**
+(deeper tree amortises the per-node cost). The throughput question is open: M/s drops as K rises (`getK` is
+real per-node compute), and the perf trace shows the compiler **auto-vectorizes the code-build for K≤9 but
+falls to scalar for K≥10** — the recovery lever is compiler-driven vectorization, NOT hand SIMD (the −19%
+scorecard negative). See [getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md).
+Lower-priority: the **memory levers** (MLP gets, BuRR, 1 GB hugepages) — W12 erased the pc 9–12 probes (~the
+profiler's whole probe cost); remaining cost is pc≥13. **Parallelism deficit** (one root ~95% of wall) is
+shrunk-not-fixed by W_K.
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup
