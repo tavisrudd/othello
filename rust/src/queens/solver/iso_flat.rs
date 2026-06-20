@@ -1288,15 +1288,34 @@ impl IsoFlat {
             'search: loop {
                 // Drive the current (top) node's child loop. Leaf children resolve inline; a memo
                 // miss on a recurse child pushes a frame and `continue 'search`es to work the top.
+                //
+                // Hoist the top frame's hot fields into locals for the whole child loop: the
+                // ~320 B `IncFrame` (the `orient: [Bits;8]` alone is 256 B) lives in the arena, so
+                // re-reading `arena.frames[top]` per child forced the compiler to spill/reload
+                // `avail` (= `orient[0]`) and the `mi`/`nmoves`/`moves_start` scalars on every
+                // iteration — the `vpandn` operand and the store-forwarded `child0` roundtrip were
+                // the perf hot spots. We hold them in registers and only sync back when we suspend
+                // (push a child, `continue 'search`) or when the node completes (the cascade reads
+                // the frame for its key/route/fp/start, which are unchanged). The full `orient` is
+                // copied out once per node-entry (read by `child_orient` in the rare pc≥8 arms).
+                // SAFETY (all `get_unchecked` in this loop): `top` indexes the live top frame
+                // (`frames` is non-empty here — the root was pushed, and a node is only driven
+                // while its frame is on the stack); `moves_start + mi < moves.len()` by
+                // construction (the slice `moves[moves_start..moves_start+nmoves]` was appended for
+                // this frame and `mi < nmoves` is checked before each read).
+                let top = arena.frames.len() - 1;
+                let cur = unsafe { *arena.frames.get_unchecked(top) };
+                let orient = cur.orient;
+                let avail = orient[0];
+                let moves_start = cur.moves_start as usize;
+                let nmoves = cur.nmoves;
+                let mut mi = cur.mi;
                 let node_won = 'node: loop {
-                    let top = arena.frames.len() - 1;
-                    let mi = arena.frames[top].mi;
-                    if mi >= arena.frames[top].nmoves {
+                    if mi >= nmoves {
                         break 'node false; // every child won → node LOSES
                     }
-                    let sq = arena.moves[(arena.frames[top].moves_start + mi) as usize];
-                    arena.frames[top].mi = mi + 1; // advance before resolving/descending
-                    let avail = arena.frames[top].orient[0];
+                    let sq = unsafe { *arena.moves.get_unchecked(moves_start + mi as usize) };
+                    mi += 1; // advance before resolving/descending
                     let a = att_for8(att, sq);
                     let child0 = avail.and_not(a[0]);
                     if child0 == Bits::ZERO {
@@ -1318,7 +1337,7 @@ impl IsoFlat {
                     } else if pc <= 7 {
                         !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
                     } else if !COUNT && (9..=self.block_k).contains(&pc) {
-                        let child = child_orient(&arena.frames[top].orient, a, child0);
+                        let child = child_orient(&orient, a, child0);
                         let ckey = d4_bits(lex_min8(&child));
                         let (cr, cf) = QueensTt::hash128(ckey);
                         self.tt.prefetch_h(cr);
@@ -1326,7 +1345,7 @@ impl IsoFlat {
                     } else {
                         // Recurse arm: build the child key, probe its slot inline. Hit ⇒ resolve
                         // with no frame; miss ⇒ push the child (one expanded node) and descend.
-                        let child = child_orient(&arena.frames[top].orient, a, child0);
+                        let child = child_orient(&orient, a, child0);
                         let ckey = d4_bits(lex_min8(&child));
                         let (cr, cf) = QueensTt::hash128(ckey);
                         self.tt.prefetch_h(cr);
@@ -1334,14 +1353,22 @@ impl IsoFlat {
                             Some(w) => w == 0, // a losing child (value 0) wins this node
                             None => {
                                 self.tt.bump_local(nodes);
-                                // Child's `pmoves` = this node's move slice; filter into a scratch
-                                // (so the immutable borrow of `arena.moves` ends) then append it.
-                                let pstart = arena.frames[top].moves_start as usize;
-                                let pn = arena.frames[top].nmoves as usize;
+                                // Suspend: sync `mi` back to the frame, then push the child. The
+                                // parent's `moves` slice is its `pmoves`; filter into a scratch (so
+                                // the borrow of `arena.moves` ends) then append it.
+                                // SAFETY: `top` is still the live top frame (no push/pop since the
+                                // hoist above).
+                                unsafe { arena.frames.get_unchecked_mut(top).mi = mi };
                                 let mut scratch = [MaybeUninit::<u8>::uninit(); MAXV];
                                 let filt = filter_moves(
                                     &mut scratch,
-                                    &arena.moves[pstart..pstart + pn],
+                                    // SAFETY: `moves_start..moves_start+nmoves` is this frame's
+                                    // appended slice, in bounds of `moves`.
+                                    unsafe {
+                                        arena.moves.get_unchecked(
+                                            moves_start..moves_start + nmoves as usize,
+                                        )
+                                    },
                                     child[0],
                                 );
                                 let cstart = arena.moves.len() as u32;
@@ -1369,11 +1396,14 @@ impl IsoFlat {
                 // makes the parent WIN (keep unwinding), a WIN resumes the parent's own child loop.
                 let mut won = node_won;
                 loop {
+                    // SAFETY: `frames` is non-empty — we only enter the cascade after driving a
+                    // node whose frame is on the stack, and we re-check emptiness after each pop.
                     let top = arena.frames.len() - 1;
-                    let fkey = arena.frames[top].key;
-                    let froute = arena.frames[top].route;
-                    let ffp = arena.frames[top].fp;
-                    let fstart = arena.frames[top].moves_start as usize;
+                    let f = unsafe { arena.frames.get_unchecked(top) };
+                    let fkey = f.key;
+                    let froute = f.route;
+                    let ffp = f.fp;
+                    let fstart = f.moves_start as usize;
                     self.tt_put_h::<COUNT>(fkey, froute, ffp, won as u8);
                     arena.moves.truncate(fstart);
                     arena.frames.pop();
