@@ -1355,8 +1355,22 @@ impl IsoFlat {
         // and verdict-preserving (the cut is only ever an *earlier* return of the same verdict); it
         // changes only which children expand ⇒ gate-safe on iso-dense (no `--distinct`). If no cut,
         // fall through to the normal descent unchanged (it re-resolves every child, these included).
+        // A'' Phase-1 — "proper Approach A": a FUSED ETC + sorted-batch descent. The earlier
+        // M_WAVE ran a separate pre-pass (rebuild every recurse child's key, sort, probe) and then
+        // fell through to the unchanged descent — which *re-derived* `child0` and *rebuilt the same
+        // key* and *re-probed* every recurse child a second time at recursion entry. On a no-cut node
+        // that double-key-build + double-cold-probe taxed all nodes (the measured +27% cyc/node). This
+        // fused body computes each recurse child's key ONCE: the gather stores the full descriptor
+        // (`ckey`/`cr`/`cf`) in a stack SoA; the ETC probes the sorted batch (cut on a proven-loss /
+        // empty child); and on no cut the descent below **reuses** the stored descriptors instead of
+        // rebuilding them. Verdict-preserving (the ETC cut is only ever an earlier return of the same
+        // OR-node verdict). DCEs to nothing on every other `MODE` (control byte-identical).
         if MODE == M_WAVE {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
+            // SoA descriptor store, recurse children in move order (consumed in order by the descent).
+            // `wk` keeps the full child key so the `COUNT=true` HLL path is exact (production
+            // `COUNT=false` ignores it — `tt_get_h`/`tt_put_h` use only route/fp).
+            let mut wk = [Bits::ZERO; WAVE_CAP];
             let mut wr = [0u64; WAVE_CAP];
             let mut wf = [0u64; WAVE_CAP];
             let mut nw = 0usize;
@@ -1371,26 +1385,100 @@ impl IsoFlat {
                     let child = child_orient(orient, a, child0);
                     let ckey = d4_bits(lex_min8(&child));
                     let (cr, cf) = QueensTt::hash128(ckey);
+                    wk[nw] = ckey;
                     wr[nw] = cr;
                     wf[nw] = cf;
                     nw += 1;
                 }
             }
-            // Sort the batch by slot (= ascending route hash) so the probes stream sequentially.
-            let mut ord = [0u8; WAVE_CAP];
-            for (i, o) in ord.iter_mut().enumerate().take(nw) {
-                *o = i as u8;
-            }
-            ord[..nw].sort_unstable_by_key(|&i| wr[i as usize]);
-            for &i in &ord[..nw] {
-                self.tt.prefetch_h(wr[i as usize]); // every prefetch in flight before any get
-            }
-            for &i in &ord[..nw] {
-                if self.tt_get_h::<COUNT>(Bits::ZERO, wr[i as usize], wf[i as usize]) == Some(0) {
-                    self.tt_put_h::<COUNT>(key, route, fp, 1); // a losing child ⇒ node wins
-                    return true;
+            // ETC pays only with ≥2 recurse children (a single recurse child the descent would probe
+            // at entry anyway — no sibling expansions to skip). Skip the prefetch/probe batch when
+            // nw<2 but STILL reuse the one stored descriptor in the descent (kills the rebuild).
+            // Probe in GATHER order (no sort): with the fused descent the ETC is now the *only* batch
+            // probe, the batch is a handful (≤ a few recurse children), and the sort cost on the
+            // critical path was Fermi'd below its small-batch payoff — prefetch-all-then-probe gives
+            // the MLP overlap without it. The descent below re-prefetches each miss as it expands.
+            if nw >= 2 {
+                for &r in wr.iter().take(nw) {
+                    self.tt.prefetch_h(r); // every prefetch in flight before any get
+                }
+                for j in 0..nw {
+                    if self.tt_get_h::<COUNT>(wk[j], wr[j], wf[j]) == Some(0) {
+                        self.tt_put_h::<COUNT>(key, route, fp, 1); // a losing child ⇒ node wins
+                        return true;
+                    }
                 }
             }
+            // Fused descent: reuse the stored recurse-child descriptors (no key rebuild). Cheap
+            // children (dense/band/block/iso) resolve via their own arms exactly as the control
+            // descent. `wi` walks the descriptor store in move order alongside the recurse predicate.
+            let mut wi = 0usize;
+            for &sq in moves {
+                let a = att_for8(att, sq);
+                let child0 = avail.and_not(a[0]);
+                if child0 == Bits::ZERO {
+                    result = true;
+                    break;
+                }
+                let pc = child0.popcount();
+                let lost = if DK >= 13 && pc == 13 {
+                    !self.w13_get(att, child0)
+                } else if DK >= 12 && pc == 12 {
+                    !self.w12_get(att, child0)
+                } else if DK >= 11 && pc == 11 {
+                    !self.w11_get(att, child0)
+                } else if DK >= 10 && pc == 10 {
+                    !self.w10_get(att, child0)
+                } else if DK >= 9 && pc == 9 {
+                    !self.w9_get(att, child0)
+                } else if WINDOW && !ORACLE && !COUNT && pc == 8 {
+                    !self.w8_get(att, child0)
+                } else if !ORACLE && pc <= 7 {
+                    !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
+                } else if !ORACLE && !COUNT && (9..=self.block_k).contains(&pc) {
+                    let child = child_orient(orient, a, child0);
+                    let ckey = d4_bits(lex_min8(&child));
+                    let (cr, cf) = QueensTt::hash128(ckey);
+                    self.tt.prefetch_h(cr);
+                    !self.block_entry(q, att, child0, ckey, cr, cf, nodes)
+                } else if pc <= self.iso_max_avail {
+                    let ckey = self.iso_node_key(q, child0, pc);
+                    let (cr, cf) = QueensTt::hash128(ckey);
+                    self.tt.prefetch_h(cr);
+                    !self.wins_tiny::<ORACLE, COUNT, true>(
+                        q, att, child0, ckey, cr, cf, moves, nodes,
+                    )
+                } else {
+                    // Recurse child: reuse the descriptor built in the gather (no `lex_min8`/
+                    // `d4_bits`/`hash128` rebuild). `child_orient` is cheap (7 `and_not`) and the
+                    // `[Bits; 8]` is too large to cache per child without a stack blowup, so it is
+                    // the only thing recomputed. The recursion's own entry-probe re-reads the slot
+                    // (now warm: just probed/prefetched) — that catches any sibling fill mid-node, so
+                    // no extra re-expansion vs control. Beyond `WAVE_CAP` recurse children the gather
+                    // stopped storing, so rebuild the descriptor (rare: deep-tail fan-out ≤ a handful).
+                    let child = child_orient(orient, a, child0);
+                    let (ckey, cr, cf) = if wi < nw {
+                        let d = (wk[wi], wr[wi], wf[wi]);
+                        wi += 1;
+                        d
+                    } else {
+                        let ckey = d4_bits(lex_min8(&child));
+                        let (cr, cf) = QueensTt::hash128(ckey);
+                        (ckey, cr, cf)
+                    };
+                    self.tt.prefetch_h(cr);
+                    !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
+                        q, att, &child, ckey, cr, cf, moves, nodes,
+                    )
+                };
+                if lost {
+                    result = true;
+                    break;
+                }
+            }
+            // The fused loop already ran the descent; skip the shared descent + put below.
+            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
+            return result;
         }
         for &sq in moves {
             let a = att_for8(att, sq);

@@ -133,8 +133,66 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       nodes −17.4% (robust −13…−20%) but cycles +4.9% / wall +9.2% / cyc/node +27%.** The cut is real and large;
       the gather/key-rebuild/double-cold-probe on the hot path costs more than it saves. **⇒ realize the cut OFF
       the critical path (Approach B idle-core prep), not per-node.** See the 2026-06-20--10 Phase-1 note.
+- [x] **A'' Phase-1b — FUSED M_WAVE (Opus micro-opt sub-agent): the cut is now a total-cycle WIN at n=16
+      (2026-06-20--10).** Fused the ETC pre-pass with the descent — each recurse child's key built ONCE (gather
+      stores the descriptor; the descent reuses it, no `lex_min8`/`d4_bits`/`hash128` rebuild) and the sort
+      dropped (Fermi-below-bar at ~3–12-child batches). Killed the double key-build (perf: the unfused version
+      was +69% L1-dcache-miss). **n=16 A/B (6 interleaved rounds): nodes −16%, total cycles −4.1% (ON wins 5/6),
+      wall negative** — flips the unfused +4.9% cyc/+9.2% wall to a win. Gates green + parent-re-verified
+      (control byte-identical; lineage/verdicts/clippy/fmt). TT-sweep verdict-correct + graceful to a 2 GB TT.
+      Gated off; now a **defaults-on candidate**. See the 2026-06-20--10 Phase-1b note.
 
 ## Handoff Notes
+
+### A'' Phase-1b — FUSED M_WAVE flips the cut to a total-cycle WIN (Opus micro-opt) (2026-06-20--10)
+
+**Session**: 2026-06-20 (`mi`). User: "opus sub-agent to profile + micro-optimize the hell out of it." An Opus
+sub-agent profiled and rebuilt the M_WAVE body; the parent independently re-validated every gate + reviewed the
+working-tree diff. (Mid-run **collision**: the parent launched its own confirming n=16 A/B + a broad
+`pkill -f "queens solve"` while the agent's bench was live — killed the agent's solve. Both stopped, agent
+re-ran clean, box recovered. **Lesson re-banked: one driver on the `queens` box at a time; never
+`pkill -f "queens solve"` while a sub-agent may be benching.**)
+
+**Profile (the +27% cyc/node diagnosed):** the unfused M_WAVE ran a *separate* ETC pre-pass and then **fell
+through to the unchanged descent**, so every no-cut node processed each recurse child **twice** — child0
+recompute + full key rebuild (`child_orient`→`lex_min8`→`d4_bits`→`hash128`) AND a double cold TT probe. `perf
+stat` n=14 signature: cycles ~flat but **L1-dcache-load-misses +69%** (211M→357M) — the duplicate key-build
+memory traffic taxing all ~1.73 B nodes to save the 366 M cut. (`perf record` was one inlined blob; diagnosed
+from code structure + the cache-miss delta.)
+
+**Fix (`src/queens/solver/iso_flat.rs`, M_WAVE body only; control DCEs to byte-identical):** "proper Approach A"
+— a **fused** ETC+descent. One gather builds each recurse child's descriptor (`ckey`/`cr`/`cf`) into a
+`WAVE_CAP`-bounded stack SoA (no alloc); the ETC probes that batch (cut on proven-loss/empty); on no cut the
+**descent reuses the stored descriptors** (only the cheap `child_orient` recomputed; the recursion's own warm
+entry-probe kept for freshness ⇒ no extra re-expansion). **Sort dropped** (doesn't pay at the ~3–12-child tail
+batch widths; the fused ETC is now the only batch probe). Isolated n=14: fuse +4.9%→+0.8% total cyc; drop-sort
+→ break-even.
+
+**MEASURED — total-cycle WIN at n=16** (iso-dense, 12 GB TT; **total cycles** is the right metric for a
+node-count lever — cyc/node rises +22% *by design* and is misleading):
+
+| A/B (3-round mean) | nodes off→on | total cycles off→on | wall off→on |
+|--------------------|--------------|---------------------|-------------|
+| #1 | 2086.3M → 1745.5M (−16.3%) | 6093.3G → **5833.8G (−4.3%)** | 106.8s → 105.0s (−1.7%) |
+| #2 | 2046.7M → 1718.8M (−16.0%) | 5994.2G → **5762.0G (−3.9%)** | 106.3s → 102.4s (−3.7%) |
+| **6-round** | **−16.1%** | **≈ −4.1%** (ON wins 5/6, 1 tie) | **≈ −2.7%** |
+
+vs unfused Phase-1a +4.9% cyc / +9.2% wall — a ~9-pt cycle swing. **TT-size sweep** (WAVE on, single runs):
+verdict SECOND + graceful (no cliff) from 12 GB (67% fill) to **2 GB (99.9% fill)** — the cut is robust under
+heavy eviction.
+
+**Gates (parent-re-verified on the final tree):** `make test` (control) pass; `QUEENS_WAVE=1` lineage n≤9 ==
+naive pass; verdicts n=8 first / 10,12,14,16 second; n=14 cut 12.96M→11.76M (−9.2%); clippy `-D warnings` + fmt
+clean; control byte-identical (whole body behind `if MODE == M_WAVE`). Code-review notes: gather/descent
+`wi`-lockstep is sound (same `pc > recurse_min` predicate, rebuild past `WAVE_CAP`); every early return is a
+proven win (gate-safe); `wk` is a dead store on the production `!COUNT` path (harmless nit).
+
+**Status:** M_WAVE stays **gated off** (handoff convention) but is now a **measured net win ⇒ defaults-on
+candidate** (user call). Residual slack = the warm entry re-probe of ETC-miss children (~60 cyc); removing it
+needs an entry-probe/body split of `wins_inc` (risks byte-identity + doubles hot L1i — agent judged not worth
+it). **NEXT:** decide promote-to-default vs keep-opt-in; the fused per-node ETC is now a clean substrate for
+**Approach B** (idle-core prep moves the gather/probe off the critical path — where the remaining ~16% cut
+should beat the −4% the critical-path version captures).
 
 ### A'' Phase-1 (Approach A / ETC) — real −17.4% node cut, but critical-path overhead = wall LOSS ⇒ go to B (2026-06-20--10)
 
