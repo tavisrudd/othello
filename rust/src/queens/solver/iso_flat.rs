@@ -105,6 +105,37 @@ thread_local! {
     };
 }
 
+/// One suspended ancestor on the explicit upper-tree search stack of
+/// [`wins_inc_iter`](IsoFlat::wins_inc_iter). Plain `Copy` POD so the thread-local arena reuses
+/// storage with no per-node allocation. `orient[0]` is the node's available mask (kept whole so
+/// the recurse arm can derive child orientations); `moves[moves_start..moves_start+nmoves]` in the
+/// shared arena is its filtered child list (exactly what the recursion passes children as
+/// `pmoves`), resumed at index `mi`. No `result` field is needed: a winning child just resumes the
+/// parent's loop, a losing child wins the parent outright (handled by the unwind cascade).
+#[derive(Clone, Copy)]
+struct IncFrame {
+    orient: [Bits; 8],
+    key: Bits,
+    route: u64,
+    fp: u64,
+    moves_start: u32,
+    nmoves: u32,
+    mi: u32,
+}
+
+/// Per-worker reusable arena for [`wins_inc_iter`](IsoFlat::wins_inc_iter): the frame stack plus a
+/// shared move buffer (each frame owns the slice `moves[moves_start..]`, reclaimed by `truncate` on
+/// pop). Cleared, not freed, at each subtree handoff — zero per-node allocation.
+struct IncArena {
+    frames: Vec<IncFrame>,
+    moves: Vec<u8>,
+}
+
+thread_local! {
+    static INC_STACK: RefCell<IncArena> =
+        const { RefCell::new(IncArena { frames: Vec::new(), moves: Vec::new() }) };
+}
+
 /// Compact representation of an in-band (`popcount ≤ 7`) available graph: once a node
 /// drops into the iso band the whole subtree below it is a pure ≤7-vertex graph game
 /// (Node Kayles), so it is built **once** at band entry and the search carries it down
@@ -384,6 +415,18 @@ pub struct IsoFlat {
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
+    /// `QUEENS_UNROLL=1`: route the production ≤7 band solve through the recursion-unwound
+    /// iterative [`solve_local_iter`](Self::solve_local_iter) instead of the recursive
+    /// [`solve_local`](Self::solve_local). Resolved once here; a single branch per band entry
+    /// (never in the inner ≤7 loop). Off = byte-identical control.
+    unroll: bool,
+    /// `QUEENS_ITER=1`: route the production deep upper-tree solve through the fully
+    /// recursion-unwound [`wins_inc_iter`](Self::wins_inc_iter) (an explicit frame stack)
+    /// instead of the recursive [`wins_inc`](Self::wins_inc). Every miss *pushes* a frame
+    /// instead of recursing; node completion is a `pop`; the unwind cascades in a loop — no
+    /// call frames in the deep upper tree at all. Resolved once at the subtree handoff (a
+    /// per-handoff branch, never per node). Off = byte-identical control (`wins_inc` untouched).
+    iter_inc: bool,
     oracle_attempts: AtomicU64,
     oracle_hits: AtomicU64,
     oracle_comp_hits: AtomicU64,
@@ -478,6 +521,8 @@ impl IsoFlat {
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
+            unroll: std::env::var("QUEENS_UNROLL").as_deref() == Ok("1"),
+            iter_inc: std::env::var("QUEENS_ITER").as_deref() == Ok("1"),
             oracle_attempts: AtomicU64::new(0),
             oracle_hits: AtomicU64::new(0),
             oracle_comp_hits: AtomicU64::new(0),
@@ -1193,6 +1238,158 @@ impl IsoFlat {
         result
     }
 
+    /// Recursion-unwound twin of [`wins_inc`](Self::wins_inc)'s `M_NORMAL`, non-oracle path
+    /// (`QUEENS_ITER=1`). The deep upper-tree OR-search is a strictly-shrinking DFS (each ply drops
+    /// ≥1 vertex), so the call stack is replaced by an explicit [`IncFrame`] stack in a reused
+    /// thread-local arena. The recurse arm probes each child **inline**: a TT hit resolves with no
+    /// frame; a miss *pushes* a frame (one expanded node) and descends. Node completion is a `pop`,
+    /// and the verdict cascades up in a loop — a losing child wins its parent (keep unwinding), a
+    /// winning child resumes it. Node set, per-expanded-node `bump_local` count, and TT puts are
+    /// byte-identical to `wins_inc`. Restricted to `!ORACLE` (the dispatch DCEs it otherwise), so
+    /// the oracle/`wins_tiny` arms are absent.
+    #[allow(clippy::too_many_arguments)]
+    fn wins_inc_iter<const COUNT: bool, const WINDOW: bool, const DK: u32>(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        orient: &[Bits; 8],
+        key: Bits,
+        route: u64,
+        fp: u64,
+        pmoves: &[u8],
+        nodes: &mut u64,
+    ) -> bool {
+        // Entry probe — the only top-of-node probe; deeper nodes are probed inline at the recurse
+        // arm. A hit resolves the whole subtree handoff with no expansion, exactly as `wins_inc`.
+        if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
+            return w != 0;
+        }
+        INC_STACK.with(|cell| {
+            let arena = &mut *cell.borrow_mut();
+            arena.frames.clear();
+            arena.moves.clear();
+            // Push the root frame: filter its move list once into the shared move arena.
+            {
+                let mut scratch = [MaybeUninit::<u8>::uninit(); MAXV];
+                let filt = filter_moves(&mut scratch, pmoves, orient[0]);
+                let nmoves = filt.len() as u32;
+                arena.moves.extend_from_slice(filt);
+                arena.frames.push(IncFrame {
+                    orient: *orient,
+                    key,
+                    route,
+                    fp,
+                    moves_start: 0,
+                    nmoves,
+                    mi: 0,
+                });
+            }
+            self.tt.bump_local(nodes); // root expanded (one node, as in `wins_inc` after a miss)
+            'search: loop {
+                // Drive the current (top) node's child loop. Leaf children resolve inline; a memo
+                // miss on a recurse child pushes a frame and `continue 'search`es to work the top.
+                let node_won = 'node: loop {
+                    let top = arena.frames.len() - 1;
+                    let mi = arena.frames[top].mi;
+                    if mi >= arena.frames[top].nmoves {
+                        break 'node false; // every child won → node LOSES
+                    }
+                    let sq = arena.moves[(arena.frames[top].moves_start + mi) as usize];
+                    arena.frames[top].mi = mi + 1; // advance before resolving/descending
+                    let avail = arena.frames[top].orient[0];
+                    let a = att_for8(att, sq);
+                    let child0 = avail.and_not(a[0]);
+                    if child0 == Bits::ZERO {
+                        break 'node true; // empty child wins outright
+                    }
+                    let pc = child0.popcount();
+                    let lost = if DK >= 13 && pc == 13 {
+                        !self.w13_get(att, child0)
+                    } else if DK >= 12 && pc == 12 {
+                        !self.w12_get(att, child0)
+                    } else if DK >= 11 && pc == 11 {
+                        !self.w11_get(att, child0)
+                    } else if DK >= 10 && pc == 10 {
+                        !self.w10_get(att, child0)
+                    } else if DK >= 9 && pc == 9 {
+                        !self.w9_get(att, child0)
+                    } else if WINDOW && !COUNT && pc == 8 {
+                        !self.w8_get(att, child0)
+                    } else if pc <= 7 {
+                        !self.band_entry::<COUNT>(q, att, child0, pc, nodes)
+                    } else if !COUNT && (9..=self.block_k).contains(&pc) {
+                        let child = child_orient(&arena.frames[top].orient, a, child0);
+                        let ckey = d4_bits(lex_min8(&child));
+                        let (cr, cf) = QueensTt::hash128(ckey);
+                        self.tt.prefetch_h(cr);
+                        !self.block_entry(q, att, child0, ckey, cr, cf, nodes)
+                    } else {
+                        // Recurse arm: build the child key, probe its slot inline. Hit ⇒ resolve
+                        // with no frame; miss ⇒ push the child (one expanded node) and descend.
+                        let child = child_orient(&arena.frames[top].orient, a, child0);
+                        let ckey = d4_bits(lex_min8(&child));
+                        let (cr, cf) = QueensTt::hash128(ckey);
+                        self.tt.prefetch_h(cr);
+                        match self.tt_get_h::<COUNT>(ckey, cr, cf) {
+                            Some(w) => w == 0, // a losing child (value 0) wins this node
+                            None => {
+                                self.tt.bump_local(nodes);
+                                // Child's `pmoves` = this node's move slice; filter into a scratch
+                                // (so the immutable borrow of `arena.moves` ends) then append it.
+                                let pstart = arena.frames[top].moves_start as usize;
+                                let pn = arena.frames[top].nmoves as usize;
+                                let mut scratch = [MaybeUninit::<u8>::uninit(); MAXV];
+                                let filt = filter_moves(
+                                    &mut scratch,
+                                    &arena.moves[pstart..pstart + pn],
+                                    child[0],
+                                );
+                                let cstart = arena.moves.len() as u32;
+                                let cn = filt.len() as u32;
+                                arena.moves.extend_from_slice(filt);
+                                arena.frames.push(IncFrame {
+                                    orient: child,
+                                    key: ckey,
+                                    route: cr,
+                                    fp: cf,
+                                    moves_start: cstart,
+                                    nmoves: cn,
+                                    mi: 0,
+                                });
+                                continue 'search;
+                            }
+                        }
+                    };
+                    if lost {
+                        break 'node true; // a losing child wins this node
+                    }
+                    // else: child won → keep trying this node's remaining children
+                };
+                // The top node resolved as `node_won`. Put it, pop it, cascade the verdict: a LOSS
+                // makes the parent WIN (keep unwinding), a WIN resumes the parent's own child loop.
+                let mut won = node_won;
+                loop {
+                    let top = arena.frames.len() - 1;
+                    let fkey = arena.frames[top].key;
+                    let froute = arena.frames[top].route;
+                    let ffp = arena.frames[top].fp;
+                    let fstart = arena.frames[top].moves_start as usize;
+                    self.tt_put_h::<COUNT>(fkey, froute, ffp, won as u8);
+                    arena.moves.truncate(fstart);
+                    arena.frames.pop();
+                    if arena.frames.is_empty() {
+                        return won; // root resolved
+                    }
+                    if !won {
+                        won = true; // child LOST → parent WINS; record + pop the parent too
+                        continue;
+                    }
+                    continue 'search; // child WON → parent resumes its own child loop
+                }
+            }
+        })
+    }
+
     /// Orientation-free tail of [`wins_inc`](Self::wins_inc) for the iso band
     /// (`avail.popcount() ≤ iso_max_avail`). Available-popcount only shrinks down the tree,
     /// so every descendant is in-band too: carry just the `avail` mask (one `and_not` per
@@ -1374,7 +1571,11 @@ impl IsoFlat {
         // Descendant transpositions across *different* entries are recomputed (cheap, L1)
         // rather than shared through DRAM.
         let mut memo = [-1i8; 128];
-        let won = self.solve_local(&g, alive, &mut memo, nodes);
+        let won = if self.unroll {
+            self.solve_local_iter(&g, alive, &mut memo, nodes)
+        } else {
+            self.solve_local(&g, alive, &mut memo, nodes)
+        };
         self.tiny_put(tidx, won);
         won
     }
@@ -1420,6 +1621,99 @@ impl IsoFlat {
         }
         memo[alive as usize] = result as i8;
         result
+    }
+
+    /// Recursion-unwound twin of [`solve_local`] (`QUEENS_UNROLL=1`). The ≤7 OR-search is a
+    /// strictly-shrinking DFS (each ply drops ≥1 vertex, so `alive` decreases and depth ≤ 7), so
+    /// the call stack is replaced by an explicit `[(alive, rem)]` array. The point of the unwind:
+    /// a **memo hit on a child is resolved inline — it never enters a frame**, whereas the
+    /// recursive form pays a full `solve_local` call (prologue/epilogue) just to read `memo[child]`
+    /// and return. Node completion is a `pop` (a loop iteration), not a function return. The memo
+    /// writes and the per-expanded-node `bump_local` count are byte-identical to [`solve_local`].
+    fn solve_local_iter(
+        &self,
+        g: &TinyGraph,
+        root: u8,
+        memo: &mut [i8; 128],
+        nodes: &mut u64,
+    ) -> bool {
+        // Root memo hit: resolve without expanding (matches `solve_local`'s entry check — no bump).
+        // SAFETY: `root ≤ 0x7F` (≤7 vertices) ⇒ `root < 128 == memo.len()`; holds for every `child`
+        // below too, since `child = alive & !closed[i] ⊆ alive ⊆ root`.
+        let rm = *unsafe { memo.get_unchecked(root as usize) };
+        if rm >= 0 {
+            return rm != 0;
+        }
+        // `alive` strictly shrinks down every path ⇒ depth ≤ popcount(root) ≤ 7; an 8-deep stack
+        // never overflows. The parent stack holds only *suspended* nodes (those waiting on a
+        // memo-miss child); the node currently being worked lives in the `alive`/`rem` registers,
+        // never re-loaded from `frames` mid-descent. `rem` = this node's vertices not yet tried.
+        let mut frames: [(u8, u8); 8] = [(0, 0); 8];
+        let closed = &g.closed;
+        self.tt.bump_local(nodes);
+        // Current node in registers; the explicit stack `frames[0..sp]` holds its suspended ancestors.
+        let mut alive = root;
+        let mut rem = root;
+        let mut sp = 0usize;
+        // The verdict of the node that wins this function (the root). The inner loop falls out of the
+        // `'node` labelled block whenever a node resolves, carrying its verdict in `node_won`, then a
+        // pop loop hands it to the parent — no per-iteration state-machine flag re-checked on entry.
+        'search: loop {
+            // Drive this node's child loop to completion in registers. Memo-hit children are resolved
+            // inline (a WIN advances the loop, a LOSS wins the node); a memo MISS suspends and descends.
+            let node_won = 'node: loop {
+                if rem == 0 {
+                    break 'node false; // every child won → node LOSES
+                }
+                let i = rem.trailing_zeros() as usize;
+                rem &= rem - 1; // advance before descending/resolving
+                                // SAFETY: `i < 8` — `rem ⊆ alive ⊆ root`, `root` has ≤7 vertices over indices 0..7.
+                let child = alive & !*unsafe { closed.get_unchecked(i) };
+                if child == 0 {
+                    break 'node true; // empty child wins outright
+                }
+                // SAFETY: `child < 128` (see entry note).
+                let cm = *unsafe { memo.get_unchecked(child as usize) };
+                if cm > 0 {
+                    continue 'node; // memo HIT, child WON → keep trying this node's children
+                }
+                if cm == 0 {
+                    break 'node true; // memo HIT, child LOST → node WINS
+                }
+                // memo MISS — suspend this node, descend into `child` (one expanded node).
+                // SAFETY: `sp < 7` — depth ≤ popcount(root)−1 ≤ 6 suspended ancestors fit `frames[8]`.
+                *unsafe { frames.get_unchecked_mut(sp) } = (alive, rem);
+                sp += 1;
+                self.tt.bump_local(nodes);
+                alive = child;
+                rem = child;
+                continue 'search;
+            };
+            // The node resolved. Record it, then unwind: a child LOSS makes the parent WIN (which is
+            // itself a LOSS-from-above only at the function boundary — for the OR parent it's a winning
+            // child, so the parent resumes); a child WIN makes the parent resume its own loop. We pop
+            // while the just-resolved verdict forces the parent's verdict immediately.
+            let mut won = node_won;
+            loop {
+                // SAFETY: `alive < 128` (see entry note).
+                *unsafe { memo.get_unchecked_mut(alive as usize) } = won as i8;
+                if sp == 0 {
+                    return won; // root resolved
+                }
+                sp -= 1;
+                // SAFETY: `sp < 8` after the decrement.
+                let (p_alive, p_rem) = *unsafe { frames.get_unchecked(sp) };
+                alive = p_alive;
+                rem = p_rem;
+                if !won {
+                    // child LOST → parent WINS; keep unwinding (the grandparent saw a winning child).
+                    won = true;
+                    continue;
+                }
+                // child WON → parent resumes trying its remaining children.
+                continue 'search;
+            }
+        }
     }
 
     /// Widened [`solve_local`] for a dense block at `8 < pc ≤ block_k`: the win/loss DP over the
@@ -1652,6 +1946,12 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_PROF>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                // The iterative experiment (`QUEENS_ITER`) only diverges on the plain `M_NORMAL`,
+                // non-oracle path; the choice is resolved here, once per subtree handoff (never
+                // per node). `!ORACLE` is const, so the arm DCEs for the oracle instantiations.
+                _ if !ORACLE && self.iter_inc => self.wins_inc_iter::<COUNT, WINDOW, DK>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 _ => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_NORMAL>(
