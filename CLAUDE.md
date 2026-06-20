@@ -165,6 +165,27 @@ held up across sessions:
   non-TTY and **suppresses the live bar** — only fall back to `tee` if you need the raw
   scrollback and don't care about the bar; never silently redirect (`> log 2>&1`), which
   hides the run entirely.
+- **Use the committed A/B harness — don't re-derive it in `/tmp` (we've done that dozens of
+  times).** `rust/scripts/queens-ab.sh <n> <TOGGLE_ENV> <binary> [rounds] [tt_slots]` runs the
+  canonical interleaved A/B (toggles one env flag 0/1 on a binary). Launch it **once** in the
+  `queens` pane (`tmux send-keys -t queens:<win> "scripts/queens-ab.sh 16 QUEENS_ITER
+  ./target/release/queens" Enter`) and poll completion with `tmux capture-pane … | grep -q
+  QUEENS_AB_DONE`. The script's header documents every lesson baked in; the load-bearing ones:
+  - **Never blind `tmux send-keys C-c`** into the pane to "reset" it — that SIGINTs a running
+    solve (the recurring "what's doing SIGINT?" footgun). Ensure the pane is **idle** (at a
+    prompt) before launching; don't drive runs by per-run `send-keys` into a busy pane (the keys
+    interleave into the running process).
+  - **Emit a clear `BEGIN <tag>` / `END <tag>` marker around every run** so the scrollback is
+    attributable — otherwise interleaved runs are unreadable.
+  - **Completion marker must only appear as run OUTPUT, never as a typed command** (`QUEENS_AB_DONE`
+    is echoed *after* the loop) — else a `capture-pane | grep` poll false-matches the launch
+    command line and "finishes" instantly.
+  - **n=16 is memory-tight (17 GB TT, ~4 GB headroom): back-to-back 17 GB runs OOM-kill the 2nd**
+    (huge-page reclaim lags process exit → `Killed`/SIGKILL). The harness defaults to a **~12 GB TT**
+    (`QUEENS_TT_SLOTS=1500000000`) which is memory-safe and a valid comparison (a per-node toggle's
+    cyc/node delta is TT-size-independent). Use the 17 GB default only with cache-drops between runs.
+  - **Metric = cyc/node = perf cycles ÷ solver nodes** (node-count-independent); solver summary is
+    on **stdout** (capture to a file), the live bar on **stderr** (leave on the pane).
 - **Box hygiene before any n=16 bench — a degraded box silently fakes a "wall."** The 17 GB TT needs
   ≥~20 GB free or it OOMs/spills (into zram = compressed RAM, NOT disk) and every number is garbage.
   Before benching: **swap/zram off**, **ZFS ARC capped low** (`zfs_arc_max`≈2 GB — default ~50% RAM
