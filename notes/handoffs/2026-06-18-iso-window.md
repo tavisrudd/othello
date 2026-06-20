@@ -1558,3 +1558,69 @@ base for any higher layer. Gate green (lineage + even-board at DK=12 + W13 kerne
 |------|------|
 | `wk_masks128`/`pext128_wide`/`get13` + u128 `projected_code` + W13 test | `src/queens/dense.rs` |
 | `w13_get`, `DK>=13` dispatch + root `(true,13)` arms, clamp 9..=13 (default still 12) | `src/queens/solver/iso_flat.rs` |
+
+### getK kernel opt — build W12/W13 code as `[u64;2]`, not per-bit u128 (committed 9b02bf8)
+
+Profile of the DK=12 default (n=16): `w12_get` was **11.3%** of cycles (>2× the u64 builders) because the
+per-bit `u128` code accumulation made the compiler emit wasteful widening (`vpmovzxdq` = 11.4% of the
+function). Built the 66/78-bit code as a `[u64;2]` (low/high words) with pure `u64` ops, assembling the
+`u128` once (`bit>>6` const-folds the word index in the unrolled loop). **`w12_get` 11.26% → 8.00% (−29% of
+its cycles), `vpmovzxdq` gone.** Value-preserving (n=14 nodes 12,896,443 unchanged); can't regress.
+
+### TT can shrink now (W12 made it a *capacity* lever) — but the win is RAM, not wall (user's idea)
+
+Because W12 resolves every pc≤12 node **without a TT put**, the flat TT now stores only pc≥13 positions —
+the working set fell from the pc≥9 set (~5 B) to ~1.2 B distinct (TT fullness 60% at 17 GB vs iso-window's
+~69%). So a smaller TT holds it. **n=16 DK=12 TT-size sweep** (`QUEENS_TT_SLOTS=<n>`):
+
+| TT     | slots  | nodes        | fullness | cyc/node | verdict                          |
+|--------|--------|--------------|----------|----------|----------------------------------|
+| 17 GB  | 2.15 B | 1.97–2.10 B  | ~60%     | **3472** | default                          |
+| 12 GB  | 1.50 B | 2.02–2.11 B  | ~73%     | **3426** | working set fits, **−1.3% cyc/node**, **−5 GB** |
+| 10 GB  | 1.25 B | **2.27 B (+13%)** | ~82% | —        | **past the knee** — eviction → re-expansion |
+
+**The robust signal is node count: flat 17 GB→12 GB (no re-expansion penalty), jumps +13% at 10 GB (the
+knee).** The per-node TLB win is **real but small (−1.3% cyc/node, node-independent)** — the old TT-size
+sweep's "~13%" was a *warm-window* figure; whole-run dilutes it (cold start + tail + pc≥13 probes are now a
+smaller share of work). **Wall is within the ±18% node noise** (an early 12 GB run drew 1m33s — a low-node
+fluke, not the effect; cyc/node is the truth). So the shrink's value is **capacity, not speed**:
+- **−5 GB RAM** at n=16, and the reframe — **W_K is now a capacity lever**, partially obviating the queued
+  BuRR-archive / out-of-core n=18 work (the thing they were for — TT footprint — W12 already cut).
+- **1 GB hugepages** become practical (12 pages vs 17) and *compound* with the shrink for the rest of the TLB win.
+- **Box-hygiene fragility eases** (12 GB needs ~15 GB free, not ~20 — the source of the old "degraded box →
+  bogus floor"); n=16 now runs on a smaller box; faster prefault.
+- **Reinforces K=12 as the crossover optimum** (does NOT flip W13): a faster TT cheapens the pc==13 probes
+  that W13 *removes*, shrinking W13's benefit — so the smaller TT favors W12, the layer with more probes.
+
+**Default unchanged (still 2^bits / 17 GB at n=16).** Capturing the shrink as the iso-dense default needs a
+non-power-of-2 slot count (the win is between 2^30=8.6 GB, which over-evicts, and 2^31=17 GB) scaled per n —
+the working-set fraction is only measured at n=16. Use `QUEENS_TT_SLOTS=1500000000` for n=16 iso-dense
+meanwhile. **Follow-up:** measure the pc≥13 distinct fraction per n, then default iso-dense to ~0.7× the
+power-of-2 slot count.
+
+### Two research subs on cheaper W12/W13 kernels — one wash, one live lead (2026-06-19)
+
+**(bit/ISA sub → `notes/proposal-2026-06-19-w12-w13-bitlevel.md`).** Top rec B1: `pext128` recomputes
+`popcount(mask_lo)` per call, but the mask is a constant table entry, so precompute the shift into a
+companion `u8` table. **Implemented + measured (n=16 DK=12): WASH — reverted.** cyc/node 3472→3483 (+0.3%,
+noise), instr/node 3597→3592 (−0.14%, flat). The ~36 popcnts/node removed were offset ~1:1 by the new
+shift-table *loads* — and the shift table is a *separate* array from the mask, so each child does two
+cache-line loads instead of one load + a 1-cycle popcnt (the sub's "co-accessed, near-free" premise was
+wrong). The sub correctly flagged GFNI/VPCLMULQDQ/`vpternlog` as the small-data −19% negative (skip). B4
+(skip the code→adj round-trip) was already-demoted as a wash. **Verdict: the `u128` kernel is near its
+floor for op-shaving — the irreducible work (K `pext` projections + child sweep) is the evaluator's actual
+job.** B7 (outline the rare nested getK) untried — a possible i-cache shave but ≤1–2%.
+
+**(lit-search sub → `notes/research-2026-06-19-w12-w13-litsearch.md`) — the LIVE lead.** The kernel is
+exactly **Node Kayles**, which unlocks structural-reduction theory. Strongest exact lever:
+**nimber-preserving twin/module reductions** (Yoshiwatari et al. arXiv:2003.11775 Lemmas 12–13; twin-equiv
+arXiv:2211.05307 Lemma 2): collapse clique-modules to one vertex, trim independent-modules to two, branch on
+one representative per twin class. Removes duplicate children **and can shrink K below 9 → land the whole
+node in a W≤8 table, skipping the W_K layer entirely**. Detection is O(K²) `u16`-mask equality — *cheaper
+than a single two-word `pext`*. Also: join/universal-vertex/component pre-tests (cheap O(K) connectivity →
+short-circuit the K-move sweep); closed-form nimbers for paths/cycles (narrow). Dead-end confirmed:
+canonical labelling (nauty) is far slower than pext (matches our iso-key measurements). **GATE before
+building: the payoff hinges on the *unmeasured* incidence of twins / size-2 modules / universal vertices in
+queen subgraphs at K=12/13** (queen graphs are dense/geometric — large modules likely rare, but size-2
+twins / universal vertices plausibly common). A one-shot `count`-style incidence histogram decides it. This
+is the most promising "cheaper algorithm" lead and the natural next experiment.
