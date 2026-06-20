@@ -1229,4 +1229,118 @@ mod mlp_bench {
         let fps_s: Vec<u64> = order.iter().map(|&i| fps[i as usize]).collect();
         sweep("sorted", &routes_s, &fps_s);
     }
+
+    /// Phase-0 of the [sorted-frontier-wave proposal](../../notes/proposal-2026-06-20-sorted-frontier-wave.md):
+    /// does the single-thread ~5.7× sorted-stream ceiling (random depth-0 → sorted depth-32 from
+    /// [`mlp_probe_depth_sweep`]) **survive multi-thread bandwidth contention**? Approach B (idle-core
+    /// producer/consumer pipeline) needs a few hot consumer cores to stream sorted chunks at the
+    /// single-thread ceiling while other cores prep — so the open question is whether aggregate sorted
+    /// throughput keeps scaling past 1 thread, or saturates the memory channels.
+    ///
+    /// Strong-scaling test: a **fixed** `MLP_N` probe set is partitioned across `nt` threads (each
+    /// thread owns a contiguous, independently-sorted slice — matching A'' where each producer sorts
+    /// its own frontier piece), all streaming the shared huge-page TT concurrently. Aggregate
+    /// `M/s = total probes / wall`, so the curve over `nt` reads directly: rising ⇒ bandwidth headroom
+    /// (the lever survives); flat ⇒ saturated (the multi-core lift is bounded). Reports `sorted/random`
+    /// per thread count = the realizable multiplier under that contention.
+    ///   RUSTFLAGS="-C target-cpu=znver5 -C link-arg=-fuse-ld=mold" \
+    ///     cargo test --release --lib mlp_probe_threads_sweep -- --ignored --nocapture
+    /// Env: `MLP_BITS` (table, default 30 = 8 GiB), `MLP_N` (total probes, default 20M),
+    /// `MLP_THREADS` (csv, default "1,2,4,8"), `MLP_DEPTHS` (csv, default "1,16,32").
+    #[test]
+    #[ignore = "timing microbench; run explicitly with --ignored --nocapture"]
+    fn mlp_probe_threads_sweep() {
+        let env = |k: &str, d: u64| {
+            std::env::var(k)
+                .ok()
+                .and_then(|s| s.parse().ok())
+                .unwrap_or(d)
+        };
+        let csv = |k: &str, d: &str| -> Vec<usize> {
+            std::env::var(k)
+                .unwrap_or_else(|_| d.to_string())
+                .split(',')
+                .filter_map(|s| s.trim().parse().ok())
+                .collect()
+        };
+        let bits = env("MLP_BITS", 30) as u32;
+        let nprobe = env("MLP_N", 20_000_000) as usize;
+        let thread_counts = csv("MLP_THREADS", "1,2,4,8");
+        let depths = csv("MLP_DEPTHS", "1,16,32");
+
+        let tt = QueensTt::new(bits);
+        // Prefault every page so random probes hit distinct DRAM lines, not the shared zero page.
+        for slot in tt.slots.iter() {
+            slot.store(1, Ordering::Relaxed);
+        }
+        let mut s = 0x9E37_79B9_7F4A_7C15u64;
+        let mut routes = vec![0u64; nprobe];
+        let mut fps = vec![0u64; nprobe];
+        for i in 0..nprobe {
+            routes[i] = xs(&mut s);
+            fps[i] = xs(&mut s);
+        }
+        let len = tt.len as u128;
+        println!(
+            "[mlp-t] bits={bits} ({:.1} GiB) nprobe={nprobe} threads={thread_counts:?} depths={depths:?}",
+            (tt.len as f64 * 8.0) / (1u64 << 30) as f64,
+        );
+
+        // Run `nt` threads (one per pre-built slice), each streaming its slice at `depth`; return
+        // aggregate M/s over all threads. Sort cost is excluded (pre-built), as in A'' (idle-core prep).
+        let run = |routes_t: &[Vec<u64>], fps_t: &[Vec<u64>], depth: usize| -> f64 {
+            let total: usize = routes_t.iter().map(Vec::len).sum();
+            let t = Instant::now();
+            std::thread::scope(|scope| {
+                for (rt, ft) in routes_t.iter().zip(fps_t.iter()) {
+                    let tt = &tt;
+                    scope.spawn(move || {
+                        let n = rt.len();
+                        let mut acc = 0u64;
+                        for i in 0..n + depth {
+                            if i < n {
+                                tt.prefetch_hashed(rt[i]);
+                            }
+                            if i >= depth {
+                                let j = i - depth;
+                                acc += tt.get_hashed(rt[j], ft[j]).map_or(0, u64::from);
+                            }
+                        }
+                        std::hint::black_box(acc);
+                    });
+                }
+            });
+            total as f64 / t.elapsed().as_secs_f64() / 1e6
+        };
+
+        for &nt in &thread_counts {
+            let chunk = nprobe / nt;
+            // Partition the probe set into `nt` contiguous slices; `sorted` ⇒ sort each slice by slot.
+            let mk = |sorted: bool| -> (Vec<Vec<u64>>, Vec<Vec<u64>>) {
+                let mut rts = Vec::with_capacity(nt);
+                let mut fts = Vec::with_capacity(nt);
+                for t in 0..nt {
+                    let lo = t * chunk;
+                    let hi = if t + 1 == nt { nprobe } else { lo + chunk };
+                    let mut idx: Vec<usize> = (lo..hi).collect();
+                    if sorted {
+                        idx.sort_by_key(|&i| ((routes[i] as u128 * len) >> 64) as u64);
+                    }
+                    rts.push(idx.iter().map(|&i| routes[i]).collect());
+                    fts.push(idx.iter().map(|&i| fps[i]).collect());
+                }
+                (rts, fts)
+            };
+            let (r_rand, f_rand) = mk(false);
+            let (r_sort, f_sort) = mk(true);
+            for &depth in &depths {
+                let rnd = run(&r_rand, &f_rand, depth);
+                let srt = run(&r_sort, &f_sort, depth);
+                println!(
+                    "[mlp-t] threads={nt:>2} depth={depth:>2}  random {rnd:7.1} M/s  sorted {srt:7.1} M/s  sorted/random {:.2}x",
+                    srt / rnd,
+                );
+            }
+        }
+    }
 }

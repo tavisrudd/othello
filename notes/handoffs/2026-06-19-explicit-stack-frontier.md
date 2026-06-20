@@ -117,8 +117,51 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       the tail is **ONE giant root = 94% of wall**; TMA is co-dominant **memory 30% + frontend 31%**; the
       DRAM-probe bucket has a **not-yet-tried** lever (MLP-batched probes on `wins_inc_iter`). Lever choice =
       user steer.
+- [x] **A'' Phase-0a — threaded sorted-stream microbench (`tt.rs::mlp_bench::mlp_probe_threads_sweep`),
+      GREEN (2026-06-20--10).** The single-thread 5.7× sorted-stream ceiling **survives contention**: sorted
+      aggregate scales 1→4 cores (275→764 M/s), the over-today multiplier holds ~5× through 4 cores, and the
+      memory subsystem **saturates at ~780 M/s with ~4–8 streaming cores** (the new measured probe-throughput
+      cap). Leverage is highest with FEW consumer cores (5× @4, eroding to ~2.8× @8 oversubscribed) — exactly
+      Approach B's shape. ~4 sorted-consumer cores out-probe the whole current ~14-core random tail. Gated
+      `#[ignore]` test, no production change; clippy/fmt green. See the 2026-06-20--10 note.
 
 ## Handoff Notes
+
+### A'' Phase-0a — sorted-stream survives contention (GREEN); ~780 M/s cap; few-consumer design (2026-06-20--10)
+
+**Session**: 2026-06-20 (`mi`, resumed from `go`). Built the threaded half of the
+[sorted-frontier-wave proposal](../proposal-2026-06-20-sorted-frontier-wave.md)'s Phase 0:
+`tt.rs::mlp_bench::mlp_probe_threads_sweep` (`#[cfg(test)]`/`#[ignore]`, not a gate). Strong-scaling test —
+a fixed 20M-probe set is partitioned across `nt` threads, each owning an independently-sorted slice (matching
+A'' where each producer sorts its own frontier piece), all streaming the shared 8 GiB huge-page TT; aggregate
+`M/s = total probes ÷ wall`. Run: `MLP_THREADS`/`MLP_DEPTHS`/`MLP_BITS`/`MLP_N` env. (Baseline this session:
+iso-dense defaults = 1,926,031,300 nodes / 1m33s.)
+
+| threads | random d1 | random d32 | sorted d16 | sorted d32 | sorted/random (d32) |
+|---------|-----------|------------|------------|------------|---------------------|
+| 1       | 48.6      | 80.0       | 191.2      | 274.7      | 3.43× |
+| 2       | 89.0      | 155.5      | 330.2      | 442.6      | 2.85× |
+| 4       | 152.8     | 225.4      | 573.2      | **763.8**  | 3.39× |
+| 8       | 266.1     | 397.9      | **786.2**  | 756.4      | 1.90× |
+
+**VERDICT — GREEN, with a measured ceiling + a design constraint:**
+1. **The sorted win survives contention.** Sorted aggregate scales cleanly 1→4 cores (275→764 M/s); the
+   headline "over today's regime" multiplier (sorted-deep vs random-d1) holds **5.65× @1, ~5.0× @2–4**. The
+   single-thread 5.7× was not a single-core artifact.
+2. **Memory saturates at ~780 M/s with ~4–8 streaming cores** (sorted d32 plateaus 764→756 over 4→8; sorted
+   d16 reaches 786 @8). New measured **hard cap on probe throughput, any scheme.**
+3. **Leverage is highest with FEW consumer cores** — 5× @4, eroding to ~2.8× @8. Not sorted degrading: sorted
+   is bandwidth-capped while random keeps adding latency-chains with cores. ⇒ **don't oversubscribe consumers.**
+
+**Why it green-lights Approach B specifically:** ~4 sorted-consumer cores hit ~764 M/s, which **exceeds** what
+the current ~14-core random tail produces (8-core random d16 = 381 → ~14-core ≈ 550–600 extrapolated). So a
+handful of sorted-consumer cores out-probe the whole tail, freeing the rest for non-redundant prep (the thing
+work-stealing couldn't do because it re-searched). **Prize bound:** pc 13–21 ≈ 2.75 B probes ÷ 780 M/s ≈ 3.5 s
+if fully streamable → ~10–15% of the 93 s wall at realistic realization (matches the napkin).
+
+**NEXT = A'' Phase-0b: size the giant root's pc-band frontier width** (extend `count`/`comps_report` —
+distinct keys per pc-band slice) to confirm a window exists where sort-cost < sorted-stream saving, then
+Phase-1 Approach A (`QUEENS_SORTED_WAVE`, in-DFS sorted-wave probe on `wins_inc_iter`, gated/byte-identical).
 
 ### Tail re-anchored post-W12: ONE giant root = 94% of wall; cost = memory 30% + frontend 31% (2026-06-20--9)
 
