@@ -192,7 +192,10 @@ candidate** (user call). Residual slack = the warm entry re-probe of ETC-miss ch
 needs an entry-probe/body split of `wins_inc` (risks byte-identity + doubles hot L1i — agent judged not worth
 it). **NEXT:** decide promote-to-default vs keep-opt-in; the fused per-node ETC is now a clean substrate for
 **Approach B** (idle-core prep moves the gather/probe off the critical path — where the remaining ~16% cut
-should beat the −4% the critical-path version captures).
+should beat the −4% the critical-path version captures). **Also queued for triage:**
+[Node-Kayles lit-search lever backlog](../handoffs/2026-06-20-node-kayles-lit-levers.md) — modular/twin
+reduction (top bet, attacks the same pc 13–18 region), TDS scheduling, K-set DP, setrograde/generalized-TT,
+per-root PN subsolver; gate on the cheap module-prevalence probe.
 
 ### A'' Phase-1 (Approach A / ETC) — real −17.4% node cut, but critical-path overhead = wall LOSS ⇒ go to B (2026-06-20--10)
 

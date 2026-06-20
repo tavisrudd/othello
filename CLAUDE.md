@@ -77,7 +77,12 @@ table for components ≤8** (W8 but Grundy-valued, no recursion); measure its in
 iso-window first. Codex's frontier-chunk DDD **dropped** (no cheap proxy targets cross-root reuse, max
 ρ=0.54 < 0.7). Also: **BuRR
 archive** (Chunk-4, eviction-free value-only ~1.1 bit/key — sound under windowing); **1 GB hugepages**
-for the TT (zero TT TLB miss, needs boot-time reservation).
+for the TT (zero TT TLB miss, needs boot-time reservation). **Lit-search lever backlog (triage next
+session):** [Node-Kayles levers](notes/handoffs/2026-06-20-node-kayles-lit-levers.md) — top bet is
+**modular/twin reduction** (exact, nimber-preserving graph-shape kernel; shrinks pc 13–18 shapes into
+the paying W12 frontier — distinct from iso-dense's *merge* and from the parked nimber-*recursion*); plus
+TDS scheduling (the one parallelism angle the work-stealing negative doesn't refute), K-set DP, setrograde/
+generalized-TT, per-root PN subsolver. Gate = the cheap module-prevalence probe first.
 
 **Parked (WIP, off main):** branch `queens-tt-assoc-buckets` — set-associative cache-line band buckets
 (`QUEENS_TT_ASSOC`, SIMD + amortised get/put). Break-even with seg at n=16 (instruction cost fixed,
