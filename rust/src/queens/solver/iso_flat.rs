@@ -595,15 +595,20 @@ impl IsoFlat {
             n += 1;
         });
         debug_assert_eq!(n, 12);
-        let mut code = 0u128;
+        // Build the 66-bit code as two `u64` words (low 0..63, high 64..65) with pure `u64`
+        // ops, assembling the `u128` once — the per-bit `u128` accumulation made the compiler
+        // emit wasteful widening (`vpmovzxdq`) in this hot builder. `bit` is compile-time
+        // constant at each unrolled step, so `bit >> 6` const-folds to the word index.
+        let mut words = [0u64; 2];
         let mut bit = 0u32;
         for i in 0..12 {
             let row = att08(att, verts[i]);
             for &vj in verts.iter().take(12).skip(i + 1) {
-                code |= (row.get(vj as u32) as u128) << bit;
+                words[(bit >> 6) as usize] |= (row.get(vj as u32) as u64) << (bit & 63);
                 bit += 1;
             }
         }
+        let code = (words[0] as u128) | ((words[1] as u128) << 64);
         dense8.get12(code)
     }
 
@@ -623,15 +628,17 @@ impl IsoFlat {
             n += 1;
         });
         debug_assert_eq!(n, 13);
-        let mut code = 0u128;
+        // Two `u64` words (low 0..63, high 64..77), assembled once — see `w12_get`.
+        let mut words = [0u64; 2];
         let mut bit = 0u32;
         for i in 0..13 {
             let row = att08(att, verts[i]);
             for &vj in verts.iter().take(13).skip(i + 1) {
-                code |= (row.get(vj as u32) as u128) << bit;
+                words[(bit >> 6) as usize] |= (row.get(vj as u32) as u64) << (bit & 63);
                 bit += 1;
             }
         }
+        let code = (words[0] as u128) | ((words[1] as u128) << 64);
         dense8.get13(code)
     }
 
