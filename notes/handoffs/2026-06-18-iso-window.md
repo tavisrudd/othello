@@ -1642,3 +1642,61 @@ saves.) Queen graphs are too dense/geometric for the Node-Kayles reductions to p
 is near its floor** (this + the B1 wash + the GFNI/SIMD small-data negatives all agree). Diagnostic kept
 (`count --comps` now prints the incidence table). The join/component-decomposition angle is the older
 component-nimber lever — already measured-dead.
+
+---
+
+## SESSION-END WRAP (2026-06-19--4)
+
+**Session**: `1ba3518a-0ac0-4845-b031-9302e42d2248` — `mi`. Resumed from `go`; a long session that took the
+W_K hierarchy from K=9 (the prior session's iso-dense) up the ladder to **K=12 (the economic optimum)**,
+located the crossover at K=13, optimized the u128 kernel, found the TT-shrink capacity lever, and closed two
+cheaper-kernel research leads (one wash, one dead). **n=16: 2m44s (pre-lineage) → ~1m39s** (iso-dense W12 default).
+
+**Commits (main, in order):**
+- `7f7bbf9` W_K to **K=11** (generalised `getK`/`const DK` over W0..W8) — n=16 1m44s
+- `d7998cf` getK i-cache shave (`unwrap_unchecked`/`get_unchecked_mut`) + throughput review proposal
+- `84800a2` **W12** (u128 two-word `pext`) — iso-dense **default K=12**, n=16 ~1m39s
+- `fc3865f` **W13** opt-in — **located the crossover at K=12** (W13 net-negative: −15% nodes but +4% wall)
+- `9b02bf8` kernel: build W12/W13 code as `[u64;2]` not per-bit u128 — `w12_get` 11.3%→8.0% cyc
+- `d9acb24` TT-shrink finding + 2 kernel-research proposals (B1 wash documented)
+- `55bb3a4` `count --comps` structural-reduction incidence — Node-Kayles twin/module lead measured-dead
+
+**What landed + key measurements:**
+- **W10/W11/W12 shipped, default K=12.** Deterministic n=14 nodes: W8 27.5M → W9 22.5M → W10 18.8M →
+  W11 15.7M → **W12 12.9M (−53%)**, ~−16–18%/layer (not diminishing in *nodes*). n=16 mean wall by ceiling:
+  ~2m26s (W9) → 2m00s (W10) → ~1m53s (W11) → **~1m41s (W12)**.
+- **Crossover at K=12.** W13 (opt-in, `QUEENS_DENSE_K=13`) still cuts nodes (n=16 −15%) but its u128-wide
+  `get13` compute makes it net-negative (wall +4%); per-layer wall gain ran −22%/−13%/−10%/**+4%**.
+- **Kernel near its floor** — measured: `[u64;2]` build (**win**), B1 precompute-shift (**wash, reverted**),
+  GFNI/SIMD (**dead**, small-data), Node-Kayles twin/module reductions (**dead**, ~4–6% incidence at pc 12/13).
+- **TT-shrink (user's idea): capacity, not speed.** W12 stores only pc≥13 → working set ~1.2 B → fits a 12 GB
+  TT with no re-expansion (−1.3% cyc/node, **−5 GB RAM**); 10 GB is past the knee (+13% nodes). Reframe:
+  **W_K is now a capacity lever**, partially obviating the BuRR/out-of-core n=18 work; enables 1 GB hugepages
+  + relaxes box hygiene. Default left at 17 GB (the win needs a non-power-of-2 slot count, calibrated per n).
+
+**Gate held throughout:** `solver_lineage_agrees` + even-board agreement (now exercises DK=12) + every
+`direct_w{9..13}_matches_scalar_recurrence` (the u128 bit-exactness gate) + iso-flat n=12 distinct
+**1,060,823 / 1.25×**. iso-flat/iso-window byte-identical (the u64 K≤9 hot path untouched).
+
+**Files modified:** `src/queens/dense.rs`, `src/queens/solver/iso_flat.rs`, `src/queens/graph.rs`,
+`src/bin/queens.rs`, `CLAUDE.md`, this handoff. New docs: `notes/proposal-2026-06-19-getk-throughput.md`,
+`notes/proposal-2026-06-19-w12-w13-bitlevel.md`, `notes/research-2026-06-19-w12-w13-litsearch.md`.
+
+**NEXT-SESSION QUEUE (prioritised):**
+1. **Parallelism deficit — the biggest remaining lever (~50% of n=16 wall).** One root ~95% of the wall;
+   ~50% of the wall runs with ≤2 roots active. W_K shrank per-root work but the 2-root plateau is structural
+   and untouched. A re-expansion-free split of the giant roots (ABDADA-style in-flight markers, or recursive
+   YBWC warm-then-fan) is the open question — where the next real wall win is. The kernel/W_K side has converged.
+2. **TT-shrink default wiring** — measure the pc≥13 distinct fraction per n, then default iso-dense to ~0.7×
+   the power-of-2 slot count (captures −5 GB automatically; n=18 enabler). `QUEENS_TT_SLOTS=1500000000` for
+   n=16 meanwhile.
+3. **Per-root hit-rate profiler** (deferred this session) — thread `root` through `par_wins_inc`, gated
+   per-root {gets, hits, nodes} accumulation. Value dropped once the TT-shrink reinforced K=12 (less to
+   "target"), but it's the tool for the parallelism-deficit diagnosis (#1) too.
+4. **W13/W14** — W13 may flip positive at **n=18** (deeper tree amortises the u128 cost; node cut −15% intact).
+   W14 = 91-bit code (still u128) but a 13-vertex child is 78 bits — more `pext128_wide` plumbing.
+
+**Method banked:** the cheap `count`-style incidence gate (struct_profile) killed the Node-Kayles lead before
+any build — *measure the incidence before implementing a conditional shortcut*. And: node-independent
+cyc/node (perf stat) is the only trustworthy n=16 A/B for per-node opts (the 12 GB "1m33s" and the W11 walls
+were lucky low-node draws; cyc/node caught both).
