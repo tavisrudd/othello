@@ -53,6 +53,7 @@ mod tt;
 pub use bits::Bits;
 pub use count::{CountReport, Hll};
 pub use geom::Queens;
+pub use graph::ModuleStats;
 pub use solver::{
     make_solver, BranchingStats, Burr, Fused, Incremental, IsoBurr, IsoFlat, Naive, Nimber,
     Parallel, Pn, Solver, StealReport, Tt, SOLVER_NAMES,

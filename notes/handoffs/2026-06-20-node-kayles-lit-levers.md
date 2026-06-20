@@ -8,6 +8,42 @@ lever stack, so a future session can triage and pick the next big bet without re
 
 ---
 
+## ★ PROBE #1 RESULT — item A (modular/twin reduction) is a measured NEGATIVE (2026-06-20--11)
+
+**Built + ran the decisive cheap probe** (`Queens::module_profile` in `graph.rs` + `module_report` in
+`bin/queens.rs`, wired into `count --comps`; cold, monomorphised, zero production cost). For every distinct
+working-set position it partitions the available-graph into **twin classes** (clique = closed-twin / true-twin
+class; independent = open-twin / false-twin class), applies the nimber-preserving kernel (clique ≥3→1 rep,
+indep ≥3→2 reps), and reports per-pc the fraction whose **`reduced_pc ≤ 12`** (lands in the paying W12 frontier).
+
+**VERDICT: item A is dead in the tail.** Across **pc 13–20** (n=12 *and* n=14 working sets): **`reduces%` =
+0.0% and `->≤12%` = 0.0%** — the modular kernel shrinks essentially **nothing**. Size-≥3 modules (the kind that
+contract) are absent; even size-2 twin pairs (`has-mod%`) fall from ~15% (pc 9) to **2.3% (pc 13, n=12) / 3.8%
+(pc 13, n=14)** to ~0% by pc 18. The queen subgraphs in the searched tail are **too sparse/irregular** to carry
+the modules the kernel needs. The corrected `has-mod%` matches the validated `struct_profile` twin-pair% to the
+decimal (cross-check), and the true-universal-vertex rate is ~0.2% at pc 9 / 0% by pc 11 — the universal-move
+shortcut is dead too.
+
+**Bug found + fixed mid-probe (rigor):** `attack[v]` **includes self** (`geom.rs`), so the first cut computed
+`open[]` = *closed* neighbourhood and silently dropped every **independent** module (~11% undercount vs the
+validated twin%). Fixed by stripping self (`and_not(single(v))`); re-ran — **`reduces%` stayed 0%** even with
+independent modules correctly counted, so the verdict is robust, not an artifact of the bug.
+
+**Implications for the rest of the backlog:**
+- **A — dead** (this probe). Do not build the reduce-then-W12 evaluator.
+- **B (full modular decomposition), D/E (partition-search / setrograde keyed on module patterns)** — **weakened**:
+  if twin modules are this rare, general non-trivial modules / shared module-skeleton patterns are unlikely to be
+  prevalent enough to key generalized-TT entries on. Not *directly* tested (the probe is twin-based), but the gate
+  argues against the whole **structural-reduction cluster**.
+- **Surviving levers all shrink/dedup the WORK without needing module structure:** the active **A'' sorted-frontier
+  wave** (dedup by *exact* sorted signature — `QUEENS_WAVE`/M_WAVE already a measured win, 1m32s record), **getK
+  throughput**, **MLP-batched probes**, and **grouped-frontier DDD by exact graph key**. These are orthogonal to
+  this negative — point the next lever there, not at structural reduction.
+
+The probe code stays in (cold `count --comps` path, gate-green: clippy `-D warnings` + fmt clean) as the documented
+measurement. **Triage outcome: the lit-search "structural reduction" thesis does not survive contact with the
+data; the work-shrink/dedup levers (A'' thread) are the bet.**
+
 ## Context
 
 n=16 is SOLVED (second player). The fastest solver is **iso-dense (W12)**: ~90s wall, ~2.0 B nodes;

@@ -2638,6 +2638,7 @@ fn comps_report(q: &Queens, solver: &dyn Solver) {
     }
     comps_dense_nimber_coverage(q, &ws);
     comps_struct_report(q, &ws);
+    module_report(q, &ws);
 }
 
 /// Node-Kayles structural-reduction incidence over the working set, per available-popcount —
@@ -2686,6 +2687,71 @@ fn comps_struct_report(q: &Queens, ws: &[(Bits, u8)]) {
             commas(twin[b]),
             twin[b] as f64 / n * 100.0,
             either[b] as f64 / n * 100.0,
+        );
+    }
+}
+
+/// Probe #1 — Node-Kayles **modular-kernel** prevalence over the working set, per available-
+/// popcount (gate for item A, the reduce-then-W12 evaluator). For each `pc` in 9..=20 reports
+/// the fraction of distinct positions that carry a twin/clique/independent module and — the
+/// decisive number — the fraction whose **`reduced_pc ≤ 12`** (i.e. the modular kernel shrinks
+/// the shape into the *paying* W12 frontier, turning a flat-TT recurse into a dense lookup).
+/// `reduces%` is any shrink; `->≤12%` is the actionable target; `mean-rpc` is the mean reduced
+/// popcount; `mx-clq`/`mx-ind` the mean largest clique/independent module. If `->≤12%` is high
+/// in the pc 13–16 band, item A is the next big lever; if it is near zero, the W_K kernel is
+/// already near-minimal and the lever is elsewhere. Distinct-position incidence (search-weight
+/// proxy, like [`comps_struct_report`]).
+fn module_report(q: &Queens, ws: &[(Bits, u8)]) {
+    let lo = 9u32;
+    let hi = 20u32;
+    let span = (hi - lo + 1) as usize;
+    let mut total = vec![0u64; span];
+    let mut universal = vec![0u64; span];
+    let mut has_mod = vec![0u64; span]; // any clique or independent module of size ≥ 2
+    let mut reduces = vec![0u64; span]; // reduced_pc < pc
+    let mut to12 = vec![0u64; span]; // reduced_pc ≤ 12 (lands in the W12 frontier)
+    let mut sum_reduced = vec![0u64; span];
+    let mut sum_maxclq = vec![0u64; span];
+    let mut sum_maxind = vec![0u64; span];
+    for &(mask, _) in ws {
+        let pc = mask.popcount();
+        if pc < lo || pc > hi {
+            continue;
+        }
+        let b = (pc - lo) as usize;
+        let s = q.module_profile(mask);
+        total[b] += 1;
+        universal[b] += s.has_universal as u64;
+        has_mod[b] += (s.n_clique_modules > 0 || s.n_indep_modules > 0) as u64;
+        reduces[b] += (s.reduced_pc < pc) as u64;
+        to12[b] += (s.reduced_pc <= 12) as u64;
+        sum_reduced[b] += s.reduced_pc as u64;
+        sum_maxclq[b] += s.max_clique_module as u64;
+        sum_maxind[b] += s.max_indep_module as u64;
+    }
+    if total.iter().sum::<u64>() == 0 {
+        return;
+    }
+    println!("  Node-Kayles modular kernel (probe #1 — reduce-then-W12 gate), by pc:");
+    println!(
+        "    pc  | distinct        | univ%  | has-mod | reduces | ->≤12  | mean-rpc | mx-clq | mx-ind"
+    );
+    for b in 0..span {
+        if total[b] == 0 {
+            continue;
+        }
+        let n = total[b] as f64;
+        println!(
+            "    {:>3} | {:>15} | {:5.1} | {:6.1}% | {:6.1}% | {:5.1}% | {:8.2} | {:6.2} | {:6.2}",
+            lo as usize + b,
+            commas(total[b]),
+            universal[b] as f64 / n * 100.0,
+            has_mod[b] as f64 / n * 100.0,
+            reduces[b] as f64 / n * 100.0,
+            to12[b] as f64 / n * 100.0,
+            sum_reduced[b] as f64 / n,
+            sum_maxclq[b] as f64 / n,
+            sum_maxind[b] as f64 / n,
         );
     }
 }

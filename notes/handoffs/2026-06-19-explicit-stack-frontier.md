@@ -141,8 +141,57 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       wall negative** — flips the unfused +4.9% cyc/+9.2% wall to a win. Gates green + parent-re-verified
       (control byte-identical; lineage/verdicts/clippy/fmt). TT-sweep verdict-correct + graceful to a 2 GB TT.
       Gated off; now a **defaults-on candidate**. See the 2026-06-20--10 Phase-1b note.
+- [x] **Clean-box n=16 record (user, 2026-06-20): `QUEENS_WAVE=1 solve 16 iso-dense` = 1m32s / 1,700,139,134
+      nodes** (default ~17 GB TT, perf-pinned 24-core) — beats the W12 default (1m39s / 2.0 B); new top of the
+      CLAUDE.md leaderboard. **PGO build** (`target/pgo-release/release/queens`, same flags) matched at **1m32s
+      / 1,684,858,741 nodes** — node delta within ±18% noise, single pair (NOT an interleaved A/B), so PGO shows
+      no measurable wall move here. M_WAVE stays gated-off / opt-in.
+- [x] **Core-affinity A/B — user idea "expensive roots on the fast cores" (2026-06-20):** n=16 iso-dense,
+      WAVE on, 12 GB TT, 2 interleaved rounds; **24-core perf-first vs `taskset -c 0-3,12-15` (8 fast only)**.
+      Whole-search-on-8-fast = **−17% nodes / +69% wall** (the 16 Zen5c eff cores add ~20% re-expansion but
+      pay for themselves in parallelism). **Giant-root runtime is a WASH** (8-fast mean 92.2s vs 24-mixed
+      90.5s; 26% run-to-run noise — B8 81.6s/102.8s). Hypothesis (fast cores speed the expensive root)
+      **not supported by the proxy** — the giant root is memory-latency/transposition-bound, not clock-bound.
+      A clean two-pool test (giant-on-fast + cheap-on-all) needs a real build; the proxy shows no signal worth
+      it. **Park the pinning lever; the data points back to attacking the WORK** (probe #1 → item A). See note.
 
 ## Handoff Notes
+
+### Core-affinity A/B — fast-cores-for-expensive-roots is a wash on the proxy (2026-06-20--11)
+
+**Session**: 2026-06-20 (`mi`). User reported the WAVE clean-box record (1m32s / 1.70 B; PGO 1.685 B same wall)
+and asked: pin 2 rayon workers to the fastest cores + run the expensive root(s) only there; prioritise the next
+longest roots onto the next fast cores. `affinity.rs` already pins the search pool 1:1 **perf-first** (worker
+0→fastest), and per-task core confinement is **not a rayon primitive** (global work-stealing; would need a
+pool partition / dedicated pinned thread). The cheap proxy that needs no code — `affinity.rs` honours an
+inherited `taskset` mask — was an A/B of **24-core (default) vs 8-fast-only** at n=16.
+
+| run | config | total wall | nodes | giant-root own runtime |
+|-----|--------|-----------|-------|------------------------|
+| A24 r1 | 24 mixed (perf-first) | 98.8s | 1,785,901,317 | 93.2s (idx 2 / sq 103) |
+| B8 r1  | 8 fast (`taskset 0-3,12-15`) | 166.4s | 1,492,484,367 | **81.6s** (idx 29 / sq 1) |
+| A24 r2 | 24 mixed | 94.8s | 1,760,903,105 | 87.8s (idx 29 / sq 1) |
+| B8 r2  | 8 fast | 164.1s | 1,462,294,058 | **102.8s** (idx 29 / sq 1) |
+
+**Findings:**
+1. **Whole-search-on-8-fast: −17% nodes, +69% wall.** Fewer workers ⇒ ~20% less transposition re-expansion
+   (1.46–1.49 B vs 1.76–1.79 B nodes) — a fresh quantification of the closed-parallelization tax — but the
+   lost parallelism dominates wall. The 16 eff cores earn their keep.
+2. **Giant-root runtime is a WASH.** 8-fast mean **92.2s** vs 24-mixed **90.5s**, inside the 26% run-to-run
+   spread (B8 r1 81.6s was a low-noise outlier; r2's 102.8s cancels it). B8 also runs the giant in a *colder*
+   TT (slower early phase ⇒ less warm) — a handicap — and still only ties. **No clear clock/slow-core penalty
+   on the giant root** ⇒ it's memory-latency + transposition-bound (consistent with the post-W12 tail study),
+   not clock-bound. The fast-core-for-the-root premise isn't supported.
+3. **Which root is "giant" is not fixed** — r1's straggler was idx 2 (sq 103), the others idx 29 (sq 1). So a
+   hardcoded "pin root 29" wouldn't reliably target the actual straggler; you'd need warm-restart's slow-root
+   signal to pick it at runtime.
+
+**Verdict: park the pinning lever.** The clean two-pool design (expensive roots on the 8 perf cores, cheap
+roots on all 24) is the only faithful build of the idea, but the proxy shows the giant root isn't clock-bound,
+so the expected payoff is ~0 and not worth the architectural build over probe #1 / item A. **Method re-banked:
+single n=16 runs lie** — B8 r1's 81.6s would have "confirmed" the hypothesis solo; the 2nd round killed it.
+Method note: the proxy can't separate per-root pinning from whole-search confinement (rayon limitation) — a
+true negative needs the two-pool build, so this is "no-signal-on-proxy," not a hard refutation.
 
 ### A'' Phase-1b — FUSED M_WAVE flips the cut to a total-cycle WIN (Opus micro-opt) (2026-06-20--10)
 

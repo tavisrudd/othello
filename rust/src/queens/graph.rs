@@ -813,6 +813,29 @@ fn canon_cert(
     }
 }
 
+/// Output of [`Queens::module_profile`] — the Node-Kayles **modular-kernel** gate (probe #1 in
+/// the lit-levers backlog). All fields are over the available-graph at one search node.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct ModuleStats {
+    /// `popcount(mask)` — the node's piece count (available-square count).
+    pub pc: u32,
+    /// A vertex adjacent to all `pc-1` others (a move ⇒ instant win; O(K) short-circuit).
+    pub has_universal: bool,
+    /// Count of **clique modules** (closed-twin classes, size ≥ 2: pairwise-adjacent vertices
+    /// sharing one closed neighbourhood).
+    pub n_clique_modules: u32,
+    /// Count of **independent modules** (open-twin classes, size ≥ 2: pairwise-non-adjacent
+    /// vertices sharing one open neighbourhood).
+    pub n_indep_modules: u32,
+    /// Largest clique-module size (0 if none ≥ 2).
+    pub max_clique_module: u32,
+    /// Largest independent-module size (0 if none ≥ 2).
+    pub max_indep_module: u32,
+    /// `pc` after one nimber-preserving kernel pass (clique ≥ 3 → 1 rep; independent ≥ 3 → 2
+    /// reps). If this drops to ≤ 12 the shape resolves in the paying W12 frontier — the gate.
+    pub reduced_pc: u32,
+}
+
 impl Queens {
     /// A Weisfeiler–Leman (1-WL / colour-refinement) **invariant** of the
     /// *available-graph* of `mask`: vertices are the available squares, edges are
@@ -1182,6 +1205,111 @@ impl Queens {
             }
         }
         (has_universal, has_twin)
+    }
+
+    /// Probe #1 — the Node-Kayles **modular-reduction** gate (item A in the lit-levers backlog).
+    /// Cold, O(K²) `Bits` ops; only called from the `count --comps` report (zero production cost).
+    ///
+    /// Partitions the available-graph on `mask` into **twin classes** and applies the
+    /// Grundy-preserving modular kernel (Kobayashi, Node Kayles by modular-width):
+    ///   - a **clique module** is a *closed*-twin class — vertices with identical closed
+    ///     neighbourhood `N[v]` (hence pairwise adjacent). Kernel: size ≥ 3 → keep 1 rep.
+    ///   - an **independent module** is an *open*-twin class — identical open neighbourhood
+    ///     `N(v)` (hence pairwise non-adjacent). Kernel: size ≥ 3 → keep 2 reps.
+    ///
+    /// Equality of the (closed/open) neighbourhood is a genuine equivalence, so one rep-scan
+    /// per partition is exact. Returns [`ModuleStats`] including `reduced_pc` after one pass —
+    /// **if that drops to ≤ 12 the shape resolves in the paying W12 frontier** instead of a
+    /// flat-TT recurse, which is exactly what a reduce-then-W12 evaluator (item A) would exploit.
+    /// One pass only (no fixpoint) — a deliberate lower bound on the kernel for the prevalence gate.
+    pub fn module_profile(&self, mask: Bits) -> ModuleStats {
+        let k = mask.popcount();
+        let mut out = ModuleStats {
+            pc: k,
+            reduced_pc: k,
+            ..ModuleStats::default()
+        };
+        const CAP: usize = 24;
+        let kk = k as usize;
+        if kk == 0 || kk > CAP {
+            return out; // pc > 24 won't occur in the probed bands; report unreduced.
+        }
+        let mut verts = [0u32; CAP];
+        let mut open = [Bits::ZERO; CAP]; // N(v) ∩ mask
+        let mut closed = [Bits::ZERO; CAP]; // N[v] ∩ mask = N(v) ∪ {v}
+        let mut n = 0usize;
+        mask.each(|v| {
+            // `attack[v]` includes self, so `attack[v] ∩ mask` is the *closed* neighbourhood N[v];
+            // strip v for the true open neighbourhood N(v). Open-vs-closed equality is exactly what
+            // separates independent modules (false twins) from clique modules (true twins) —
+            // conflating them silently drops every independent module.
+            let nclosed = self.attack[v as usize].and(mask);
+            verts[n] = v;
+            closed[n] = nclosed;
+            open[n] = nclosed.and_not(single(v));
+            n += 1;
+        });
+        // Universal vertex: open-degree k-1 (adjacent to every other) ⇒ an N-position.
+        for &nb in open.iter().take(n) {
+            if nb.popcount() == k - 1 {
+                out.has_universal = true;
+                break;
+            }
+        }
+        // Clique modules: group by equal closed neighbourhood; contract ≥3 → 1 rep.
+        let mut removed = Bits::ZERO; // vertices contracted away (so the indep pass won't re-count)
+        let mut seen = [false; CAP];
+        for i in 0..n {
+            if seen[i] {
+                continue;
+            }
+            let mut members = [0usize; CAP];
+            members[0] = i;
+            let mut m = 1usize;
+            for j in (i + 1)..n {
+                if !seen[j] && closed[j] == closed[i] {
+                    seen[j] = true;
+                    members[m] = j;
+                    m += 1;
+                }
+            }
+            seen[i] = true;
+            let sz = m as u32;
+            if sz >= 2 {
+                out.n_clique_modules += 1;
+                out.max_clique_module = out.max_clique_module.max(sz);
+            }
+            if sz >= 3 {
+                out.reduced_pc -= sz - 1;
+                for &mi in members.iter().take(m).skip(1) {
+                    removed.set(verts[mi]);
+                }
+            }
+        }
+        // Independent modules: group by equal open neighbourhood among not-yet-removed
+        // vertices; contract ≥3 → 2 reps.
+        let mut seen = [false; CAP];
+        for i in 0..n {
+            if seen[i] || removed.get(verts[i]) {
+                continue;
+            }
+            let mut sz = 1u32;
+            for j in (i + 1)..n {
+                if !seen[j] && !removed.get(verts[j]) && open[j] == open[i] {
+                    seen[j] = true;
+                    sz += 1;
+                }
+            }
+            seen[i] = true;
+            if sz >= 2 {
+                out.n_indep_modules += 1;
+                out.max_indep_module = out.max_indep_module.max(sz);
+            }
+            if sz >= 3 {
+                out.reduced_pc -= sz - 2;
+            }
+        }
+        out
     }
 
     /// `HIST` selects, at monomorphisation time, whether to tally component sizes into
