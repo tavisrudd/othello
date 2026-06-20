@@ -12,33 +12,35 @@ n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Active thread:** [iso-window](notes/handoffs/2026-06-18-iso-window.md) — n=16 **SOLVED (second)**.
 The lineage's fastest is **`iso-dense`** (a new solver): iso-window's kernel + the **W_K hierarchy** to
-ceiling **K=11** — every pc==k node (`9 ≤ k ≤ 11`) is resolved directly from the complete W0..W8 tables by
+ceiling **K=12** — every pc==k node (`9 ≤ k ≤ 12`) is resolved directly from the complete W0..W8 tables by
 a BMI2-`pext` child sweep recursing one ply per layer (`getK`), no flat-TT probe and no subtree expansion.
-**Deterministic n=14 nodes:** W8 27.5M → W9 22.5M → W10 18.8M → W11 **15.7M (−42.9%)**, ~−16% per layer.
-The dense ceiling defaults to 11 (the measured crossover winner); `QUEENS_DENSE_K` (9..=11) re-sweeps.
-**`iso-window`** (dense **W8** tail table over a **huge-page-collapsed** flat TT, `MADV_COLLAPSE`) stays the
-default + A/B control, **byte-identical to before iso-dense**. The earlier "~36 M/s floor / 3m41s wall"
-was **wrong** — memory-degraded box. (iso-flat handoff [archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
+**Deterministic n=14 nodes:** W8 27.5M → W9 22.5M → W10 18.8M → W11 15.7M → W12 **12.9M (−53%)**, ~−16–18%
+per layer (not diminishing in node terms). The dense ceiling defaults to 12 (the measured crossover winner);
+`QUEENS_DENSE_K` (9..=12) re-sweeps. W9..W11 keep the labelled code in a `u64`; W12's 66-bit code runs on a
+`u128` two-word `pext` path. **`iso-window`** (dense **W8** tail table over a **huge-page-collapsed** flat
+TT, `MADV_COLLAPSE`) stays the default + A/B control, **byte-identical to before iso-dense**. The earlier
+"~36 M/s floor / 3m41s wall" was **wrong** — memory-degraded box. (iso-flat handoff [archived](notes/handoffs/done/2026-06-17-iso-flat-solver.md).)
 
 **n=16 leaderboard** (best clean-box wall; node count is ±18% node-noisy — for the W_K layers the
 node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense (W11)** | **1m44s**  | 2.5 B   | W_K to K=11: every pc 9–11 resolved from W0..W8 via `pext`, no probe  |
+| **iso-dense (W12)** | **1m39s**  | 2.0 B   | W_K to K=12: every pc 9–12 resolved from W0..W8 via `pext` (u128 W12) |
+| iso-dense (W11)     | 1m44s      | 2.5 B   | W_K to K=11 (u64 codes)                                               |
 | iso-dense (W9)      | 2m12s      | 4.0 B   | W9 only: pc==9 from W0..W8                                            |
 | iso-window          | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT                |
 | iso-flat            | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                     |
 
-**Current focus:** **recover the getK throughput.** Raising K cut nodes hard but dropped M/s (n=16 29.4→27.8
-→24.3 for K=9/10/11) because `getK` is real per-node compute — the wall still won (less total work), and
-micro-opting the `getK` kernel + `wK_get` code-builders (which historically washed out on the TT-latency-
-bound path) now has a genuine target. Then **K=12** (needs a >64-bit code — `K*(K-1)/2 = 66` bits; returns
-diminishing but still positive at 11). Lower-priority now: the **memory levers** (MLP-batched gets, BuRR,
-1 GB hugepages) — W11 erased the pc 9–11 probes that were ~64% of the profiler's probe cost, so the
-remaining cost shifts to pc≥12. The **parallelism deficit** (one root ~95% of wall, ≤2 roots active ~50% of
-wall) is shrunk-not-fixed by W_K (cheaper per-root work); the re-expansion-free way to split the giant roots
-stays the open structural question. Details in the iso-window handoff.
+**Current focus:** the W_K crossover is swept to **K=12** (the default; −53% nodes / ~1m41s mean vs W8).
+**K=13** is the next layer (78-bit code — still fits `u128`, but a 12-vertex *child* code is 66 bits so the
+`pext128` projection must return `u128`; more impl). The throughput question is open: M/s drops as K rises
+(`getK` is real per-node compute; the wall wins on the larger work cut), and the perf trace shows the
+compiler **auto-vectorizes the code-build for K≤9 but falls to scalar for K≥10** — the recovery lever is
+compiler-driven vectorization, NOT hand SIMD (the −19% scorecard negative). See
+[getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md). Lower-priority: the **memory
+levers** (MLP gets, BuRR, 1 GB hugepages) — W12 erased the pc 9–12 probes (~the profiler's whole probe
+cost); remaining cost is pc≥13. **Parallelism deficit** (one root ~95% of wall) is shrunk-not-fixed by W_K.
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup

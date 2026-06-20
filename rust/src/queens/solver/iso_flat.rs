@@ -388,17 +388,18 @@ impl IsoFlat {
     /// tables (one BMI2-projected child sweep, no flat-TT probe and no subtree expansion),
     /// exactly as W8 already does pc==8. This is the next step in the iso-flat → iso-window →
     /// iso-dense lineage; `iso-window` stays the dense-off control. The dense ceiling K
-    /// defaults to **11** — the measured economic optimum of the W_K crossover (per-node eval
-    /// cost vs saved probes): at n=16 each layer 9→10→11 cuts ~16% more nodes and lowers the
-    /// wall (deterministic n=14 nodes 22.5M→18.8M→15.7M; n=16 wall ~2m26s→2m00s→1m54s). 11 is
-    /// also the structural ceiling (the labelled code is `K*(K-1)/2 = 55` bits; K=12 overflows
-    /// `u64`). `QUEENS_DENSE_K` (9..=11) overrides for re-sweeping; `getK` resolves `9 ≤ pc ≤ K`.
+    /// defaults to **12** — the measured economic optimum of the W_K crossover (per-node eval
+    /// cost vs saved probes): each layer 9→10→11→12 keeps cutting ~16–18% more nodes and
+    /// lowers the wall (deterministic n=14 nodes 22.5M→18.8M→15.7M→12.9M; n=16 mean wall
+    /// ~2m26s→2m00s→1m53s→1m41s). W9..W11 keep the labelled code in a `u64`; W12's 66-bit code
+    /// runs on the `u128` two-word `pext` path. `QUEENS_DENSE_K` (9..=12) overrides for
+    /// re-sweeping; `getK` resolves every `9 ≤ pc ≤ K` directly from the complete W0..W8 tables.
     pub fn new_dense(bits: u32) -> Self {
         let mut s = Self::from_tt_with_window(QueensTt::new(bits), true);
         s.name = "iso-dense";
         // Dense layer on by construction (not the iso-window env gate). The ceiling is read
         // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
-        s.dense_k = env_u32("QUEENS_DENSE_K", 11).clamp(9, 11);
+        s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 12);
         s
     }
 
@@ -576,6 +577,34 @@ impl IsoFlat {
             }
         }
         dense8.get11(code)
+    }
+
+    /// Resolve a 12-vertex graph directly from W0..W8 (the W12 layer, the first past the
+    /// `u64` code ceiling). Twin of [`w9_get`](Self::w9_get) but the 66-bit labelled code is
+    /// a `u128`; [`DenseW8::get12`] nests one ply into W11/W10/W9 (else a W≤8 lookup) per child.
+    #[inline]
+    fn w12_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        // SAFETY: the DK≥12 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
+        debug_assert_eq!(avail.popcount(), 12);
+        let mut verts = [0u8; 12];
+        let mut n = 0usize;
+        avail.each(|v| {
+            // SAFETY: dispatched only at pc==12 ⇒ exactly 12 squares ⇒ n < 12.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
+            n += 1;
+        });
+        debug_assert_eq!(n, 12);
+        let mut code = 0u128;
+        let mut bit = 0u32;
+        for i in 0..12 {
+            let row = att08(att, verts[i]);
+            for &vj in verts.iter().take(12).skip(i + 1) {
+                code |= (row.get(vj as u32) as u128) << bit;
+                bit += 1;
+            }
+        }
+        dense8.get12(code)
     }
 
     #[inline]
@@ -1043,7 +1072,9 @@ impl IsoFlat {
             // (no flat-TT probe, no subtree expansion). `DK` is `const`, so each arm const-folds
             // away for the instantiations below it — `DK == 8` (iso-flat/iso-window) compiles all
             // three out, identical to before.
-            let lost = if DK >= 11 && pc == 11 {
+            let lost = if DK >= 12 && pc == 12 {
+                !self.w12_get(att, child0)
+            } else if DK >= 11 && pc == 11 {
                 !self.w11_get(att, child0)
             } else if DK >= 10 && pc == 10 {
                 !self.w10_get(att, child0)
@@ -1639,6 +1670,16 @@ impl Solver for IsoFlat {
                 &mut nodes,
             ),
             (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 12) => self.wins_inc::<false, false, true, 12, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
                 (true, 11) => self.wins_inc::<false, false, true, 11, M_NORMAL>(
                     q,
                     att,
@@ -1751,6 +1792,8 @@ impl Solver for IsoFlat {
                         !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
                     }
                     (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                        (true, 12) => !self
+                            .par_wins_inc::<false, false, true, 12>(q, att, co, ckey, 1, min_avail),
                         (true, 11) => !self
                             .par_wins_inc::<false, false, true, 11>(q, att, co, ckey, 1, min_avail),
                         (true, 10) => !self

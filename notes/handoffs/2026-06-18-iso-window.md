@@ -1472,3 +1472,50 @@ fmt + clippy (`-D warnings`) clean. iso-flat/iso-window byte-identical by constr
 | `wk_masks`/`extract_adj`/`get10`/`get11`/`wins_rec` + W10/W11 tests | `src/queens/dense.rs` |
 | `const DK` ceiling, `dense_k` field, `w10_get`/`w11_get`, dispatch | `src/queens/solver/iso_flat.rs` |
 | `QUEENS_DENSE_K` (default 11, clamp 9..=11) | `IsoFlat::new_dense` |
+
+### W12 SHIPPED (u128 code path, default K=12, n=16 record 1m39s) — same session, after the throughput review
+
+User steered to **K=12** (the bigger *amortization* lever — extend the table-resolved reach a layer) over
+the marginal throughput-recovery micro-opts. K=12's labelled code is `12·11/2 = 66` bits ⇒ overflows `u64`,
+so W12 runs on a **`u128` two-word `pext`** path while W9..W11 stay on `u64` (byte-identical, the hot K≤9
+path untouched).
+
+**Kernel (`dense.rs`):** `w12_masks` (u128 incident + 4096-entry u128 induced), `pext128` (two-word BMI2
+`pext`: `pext(lo,mask_lo) | (pext(hi,mask_hi) << popcnt(mask_lo))`; result ≤55 bits ⇒ fits `u64`, `lo_bits
+< 64` always), `extract_adj128`, `get12` (children have ≤11 vertices ⇒ child code ≤55 bits/`u64` ⇒ nested
+get11/get10/get9 or W≤8 lookup). Scalar reference `adj_from_code`/`wins_rec` widened to `u128`;
+`direct_w12_matches_scalar_recurrence` (30 K random 66-bit codes) green. `MAX_DENSE_K`→12.
+
+**Solver (`iso_flat.rs`):** `w12_get` (build the 66-bit `u128` code), `DK >= 12 && pc == 12` dispatch arm,
+root-dispatch `(true, 12)` arms, clamp 9..=**12**, **default now 12**.
+
+**Measured (the crossover keeps paying):**
+
+| ceiling | n=14 det. nodes | Δ/layer | s-t wall | n=16 nodes (mean) | n=16 wall (mean/best) | TT full |
+|---------|-----------------|---------|----------|-------------------|------------------------|---------|
+| W11     | 15,724,135      | −16.5%  | 4.92s    | 2.65 B            | ~1m53s / 1m44s         | ~69%    |
+| **W12** | **12,896,443**  | −18.0%  | 4.49s    | **2.02 B (−24%)** | **~1m41s / 1m39s (−10%)** | ~60% |
+
+Both metrics agree W12 wins: deterministic n=14 −18% nodes + single-thread wall −9% (noise-free), n=16 mean
+−24% nodes / −10% wall (rounds: W12 1m39s/1m44s vs W11 1m44s/1m49s/2m05s — non-overlapping). W12 stores fewer
+nodes (pc==12 never written ⇒ TT ~60% vs ~69% full). Gate: lineage + even-board (now at DK=12, exercises the
+W12 path on n=8/9/10) + W12 kernel test green; iso-flat n=12 distinct **1,060,823 / 1.25×** (control intact).
+
+**Throughput note (from the perf review before K=12):** the `wK_get` code-build is ~27% of cycles and the
+compiler **auto-vectorizes it for K≤9 but falls to scalar `bt`-per-bit for K≥10** — so M/s drops as K rises
+(get12's u128 build is scalar + two-word pext). The wall still wins on the node cut. Recovery lever =
+compiler-driven vectorization of the K≥10 build, NOT hand SIMD (the −19% scorecard negative). See
+[proposal](../proposal-2026-06-19-getk-throughput.md). Also landed: the getK i-cache shave (`unwrap_unchecked`
++ `get_unchecked_mut`, value-preserving).
+
+**NEXT:** **K=13** is the next layer — 78-bit code (still ≤128), but a 12-vertex *child* code is 66 bits, so
+`pext128` must return `u128` (and get13→get12 takes the u128 child); 2^13 induced table. Decide whether the
+diminishing wall gain (W11→W12 was −10%) still pays before building. Then the throughput vectorization lever
+and the open parallelism-deficit question.
+
+### Codebase delta (W12)
+| What | Where |
+|------|------|
+| `w12_masks`/`pext128`/`extract_adj128`/`get12` + u128 `wins_rec` + W12 test | `src/queens/dense.rs` |
+| `w12_get`, `DK>=12` dispatch + root `(true,12)` arms, default K=12 | `src/queens/solver/iso_flat.rs` |
+| getK i-cache shave (`unwrap_unchecked`/`get_unchecked_mut`) + throughput proposal | `iso_flat.rs`, `notes/proposal-2026-06-19-getk-throughput.md` |
