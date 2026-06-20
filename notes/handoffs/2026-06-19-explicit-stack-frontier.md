@@ -271,8 +271,16 @@ realized < ceiling after sort + frontier-management + DFS-residence loss. **A'' 
 scope with the user** (the [grouped-frontier DDD proposal](../proposal-2026-06-18-grouped-frontier-ddd.md)
 already covers Phase 0/1; the win/loss + sorted-stream + idle-core-sort framing is the new synthesis).
 
-**Committable now:** doc fix (`iso_flat.rs` dense_k default 12 / clamp 9..=13) + the random+sorted microbench
-(`tt.rs::mlp_bench`, `#[cfg(test)]`/`#[ignore]`); production binary byte-identical.
+**Committed (`eabb0e6`):** doc fix (`iso_flat.rs` dense_k default 12 / clamp 9..=13) + the random+sorted
+microbench (`tt.rs::mlp_bench`, `#[cfg(test)]`/`#[ignore]`); production binary byte-identical.
+
+**A'' SCOPED:** [sorted-frontier-wave proposal](../proposal-2026-06-20-sorted-frontier-wave.md) — 3 approaches
+(A: in-DFS sorted wave, single-core prep / B: idle-core producer-consumer pipeline = the user's vision / C:
+ply-windowed retrograde DDD, the n=18 endgame + BuRR-frozen plies). **Recommendation: build toward B,
+Phase-1-validate with A** (cheapest in-solver proof the sorted-stream win realizes before the pipeline build).
+Phase 0 = size the pc-band frontier width + a 2–4-thread sorted-stream microbench (does 5.7× survive
+contention?). Distinct from the parked component-nimber DDD (that dedup'd by cutoff-free nimber → 6.6× wall;
+this dedups by **sort**, keeps α-β).
 
 ### Frontier work-stealing BUILT + tuned + measured NEGATIVE — parallelization route CLOSED (2026-06-19--7/8)
 
