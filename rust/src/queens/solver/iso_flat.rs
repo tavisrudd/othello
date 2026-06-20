@@ -64,6 +64,14 @@ const M_NORMAL: u8 = 0; // plain solve / flat TT (the A/B control — byte-ident
 const M_HIST: u8 = 1; // tally flat-TT puts by popcount (`QUEENS_PC_HIST=1`)
 const M_SEG: u8 = 2; // route by per-popcount band (`QUEENS_TT_SEGMENT=1`)
 const M_PROF: u8 = 3; // stratified profiler: rdtsc-time the TT get/put per pc (`QUEENS_PROF=1`)
+const M_WAVE: u8 = 4; // ETC + sorted-batch child probe (`QUEENS_WAVE=1`); A'' Phase-1 experiment
+
+/// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
+/// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
+/// recurse children, so 32 covers them; a wider near-root node simply ETC-probes its first 32 and
+/// the rest fall through to the normal descent (correctness-neutral — the cut is only ever an
+/// *early* return). Stack-bounded (`[u64; 32]×2` per frame) so the recursive `wins_inc` is safe.
+const WAVE_CAP: usize = 32;
 
 /// `rdtsc` time-stamp counter read (`constant_tsc`/`nonstop_tsc` on this box, so it tracks
 /// wall cycles). Used only on the `M_PROF` measurement path to stratify TT get/put latency
@@ -441,6 +449,13 @@ pub struct IsoFlat {
     /// Shared profile accumulator (`4 * MAXPC` [`AtomicU64`]: get-cyc / get-n / put-cyc / nodes,
     /// laid out `metric * MAXPC + pc`), merged from each worker's [`PROF_ACC`] at drain.
     prof_data: Box<[AtomicU64]>,
+    /// `QUEENS_WAVE=1` (A'' Phase-1): selects `const MODE = M_WAVE` at the subtree handoff, adding
+    /// an **ETC (enhanced transposition cutoff) + sorted-batch** pre-pass to every `wins_inc` node —
+    /// probe all recurse-arm children's TT (sorted by slot, all prefetches up front) *before*
+    /// expanding any; a known-loss/empty child wins the OR node outright (cut). Verdict-preserving;
+    /// changes only which children expand (gate-safe on iso-dense, no `--distinct`). Off = byte-
+    /// identical `M_NORMAL`.
+    wave: bool,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -665,6 +680,7 @@ impl IsoFlat {
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            wave: std::env::var("QUEENS_WAVE").as_deref() == Ok("1"),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1327,6 +1343,55 @@ impl IsoFlat {
         // child move list ⇒ byte-identical node set, and the child scans a shorter list.
         let mut buf = [MaybeUninit::<u8>::uninit(); MAXV];
         let moves = filter_moves(&mut buf, pmoves, avail);
+        // A'' Phase-1 — ETC (enhanced transposition cutoff) + sorted-batch wave (`M_WAVE` only;
+        // DCEs to nothing on every other `MODE`, so the control path is byte-identical). Every node
+        // here is an OR node (a *losing* child = a winning move ⇒ this node wins). Before the
+        // descent, gather this node's recurse-arm children — the ones the `else` arm below would
+        // flat-TT-probe and possibly *expand* (`pc > recurse_min`) — sort them by target slot
+        // (monotone in the route hash, so sorting by `cr` = slot order), issue **all** prefetches
+        // up front, then probe the batch (full MLP overlap, the sorted wave). A known-LOSS child —
+        // or an empty child (the mover-to-be has no reply) — wins this node outright: put + cut,
+        // skipping every child expansion the move-ordered descent would have done first. Read-only
+        // and verdict-preserving (the cut is only ever an *earlier* return of the same verdict); it
+        // changes only which children expand ⇒ gate-safe on iso-dense (no `--distinct`). If no cut,
+        // fall through to the normal descent unchanged (it re-resolves every child, these included).
+        if MODE == M_WAVE {
+            let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
+            let mut wr = [0u64; WAVE_CAP];
+            let mut wf = [0u64; WAVE_CAP];
+            let mut nw = 0usize;
+            for &sq in moves {
+                let a = att_for8(att, sq);
+                let child0 = avail.and_not(a[0]);
+                if child0 == Bits::ZERO {
+                    self.tt_put_h::<COUNT>(key, route, fp, 1); // empty child ⇒ node wins
+                    return true;
+                }
+                if child0.popcount() > recurse_min && nw < WAVE_CAP {
+                    let child = child_orient(orient, a, child0);
+                    let ckey = d4_bits(lex_min8(&child));
+                    let (cr, cf) = QueensTt::hash128(ckey);
+                    wr[nw] = cr;
+                    wf[nw] = cf;
+                    nw += 1;
+                }
+            }
+            // Sort the batch by slot (= ascending route hash) so the probes stream sequentially.
+            let mut ord = [0u8; WAVE_CAP];
+            for (i, o) in ord.iter_mut().enumerate().take(nw) {
+                *o = i as u8;
+            }
+            ord[..nw].sort_unstable_by_key(|&i| wr[i as usize]);
+            for &i in &ord[..nw] {
+                self.tt.prefetch_h(wr[i as usize]); // every prefetch in flight before any get
+            }
+            for &i in &ord[..nw] {
+                if self.tt_get_h::<COUNT>(Bits::ZERO, wr[i as usize], wf[i as usize]) == Some(0) {
+                    self.tt_put_h::<COUNT>(key, route, fp, 1); // a losing child ⇒ node wins
+                    return true;
+                }
+            }
+        }
         for &sq in moves {
             let a = att_for8(att, sq);
             let child0 = avail.and_not(a[0]);
@@ -2268,6 +2333,8 @@ impl IsoFlat {
                     M_SEG
                 } else if self.hist {
                     M_HIST
+                } else if self.wave {
+                    M_WAVE
                 } else {
                     M_NORMAL
                 }
@@ -2283,6 +2350,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_PROF>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_WAVE>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 // The explicit-stack experiments (`QUEENS_ITER` plain loop, `QUEENS_ABDADA` deferral,

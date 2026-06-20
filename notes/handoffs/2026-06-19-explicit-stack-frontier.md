@@ -124,8 +124,72 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       cap). Leverage is highest with FEW consumer cores (5× @4, eroding to ~2.8× @8 oversubscribed) — exactly
       Approach B's shape. ~4 sorted-consumer cores out-probe the whole current ~14-core random tail. Gated
       `#[ignore]` test, no production change; clippy/fmt green. See the 2026-06-20--10 note.
+- [x] **A'' Phase-1 — Approach A (ETC + sorted-batch, `QUEENS_WAVE`/`M_WAVE` in `wins_inc`), BUILT +
+      measured: real −17.4% node cut, but per-node critical-path overhead makes it a WALL LOSS (2026-06-20--10).**
+      Enhanced transposition cutoff: each OR node ETC-probes its recurse-arm children (sorted by slot, all
+      prefetches up front = MLP batch) *before* expanding any; a TT-proven-loss / empty child wins the node →
+      cut, skipping the miss-siblings' expansion. Gated off, control byte-identical, verdict-correct (lineage
+      n≤9==naive under `QUEENS_WAVE=1`; n=8/10/12 verdicts; clippy/fmt). **n=16 A/B (12 GB TT, 3 interleaved):
+      nodes −17.4% (robust −13…−20%) but cycles +4.9% / wall +9.2% / cyc/node +27%.** The cut is real and large;
+      the gather/key-rebuild/double-cold-probe on the hot path costs more than it saves. **⇒ realize the cut OFF
+      the critical path (Approach B idle-core prep), not per-node.** See the 2026-06-20--10 Phase-1 note.
 
 ## Handoff Notes
+
+### A'' Phase-1 (Approach A / ETC) — real −17.4% node cut, but critical-path overhead = wall LOSS ⇒ go to B (2026-06-20--10)
+
+**Session**: 2026-06-20 (`mi`, resumed from `go`). User: (a)/(b) fork → "yc". Built Phase-1 = the proposal's
+**Approach A** in its minimum-viable form: an **ETC (enhanced transposition cutoff) + sorted-batch** pre-pass,
+gated `QUEENS_WAVE=1` → `const MODE = M_WAVE` in `wins_inc` (resolved once per subtree handoff; off = byte-
+identical `M_NORMAL`). Every node here is an OR node (a *losing* child = a winning move ⇒ node wins); the
+pre-pass gathers the node's recurse-arm children (`pc > DK.max(block_k).max(iso_max_avail)` — the ones the
+`else` arm would flat-TT-probe and expand), **sorts them by target slot** (monotone in the route hash), issues
+**all prefetches up front then probes the batch** (full MLP overlap = the per-node sorted wave), and on a
+TT-proven-loss / empty child **cuts** (puts win, returns) — skipping every miss-sibling expansion the move-
+ordered descent would have done first. Read-only + verdict-preserving (the cut is only ever an *earlier* return
+of the same verdict); changes only which children expand ⇒ gate-safe on iso-dense (no `--distinct`). `WAVE_CAP=32`
+bounds the per-node batch (deep-tail fan-out is a handful; stack-safe in the recursive `wins_inc`). Segmentation
+is default-off, so the A/B is apples-to-apples on the flat path.
+
+**Correctness (gates green):** `make test` (control); lineage n≤9 == `naive` under `QUEENS_WAVE=1` (exercises
+`iso-dense`/`iso-window`, both WINDOW=true → M_WAVE); n=8 first / n=10,12 second under wave; clippy `-D warnings`
++ fmt clean. (M_WAVE *changes* node count by design, so it is **not** gated on the exact `--distinct` — verdict
+is the invariant.)
+
+**MEASURED — the ETC cut is real and large, but Approach A is a WALL LOSS on the critical path:**
+
+| metric (n=16, iso-dense, 12 GB TT) | control (off) | M_WAVE (on) | Δ |
+|------------------------------------|---------------|-------------|-----|
+| nodes (3-round mean)               | 2,099.9 M     | 1,733.6 M   | **−17.4%** (rounds −19.9/−13.0/−19.3) |
+| total cycles (perf)                | 6,176.5 G     | 6,480.5 G   | **+4.9%** (rounds +0.9/+10.3/+3.8) |
+| wall                               | 120.1 s       | 131.1 s     | **+9.2%** (rounds +8.5/+14.7/+4.6) |
+| cyc/node                           | 2,941         | 3,738       | **+27.1%** |
+
+(n=14 warm proxy: −9.5% nodes / +13% wall — same shape, smaller cut, confirming the cut isn't purely eviction-
+driven.) The −17.4% node cut is **robust and bigger at n=16 than n=14** (more transpositions/eviction ⇒ more
+TT-loss children to cut ahead of). But the pre-pass adds **+27% cyc/node** — the gather loop recomputes `child0`
+for every move + rebuilds keys (`child_orient`/`lex_min8`/`hash128`) for every recurse child, and on a no-cut
+node those children are then **re-probed (cold) by the normal recursion** = a double cold probe. The cut saves
+366 M nodes; the overhead taxes all 1.73 B ⇒ net +4.9% cycles / +9.2% wall.
+
+**VERDICT — Approach A (per-node ETC, prep on the critical path) is a measured wall LOSS, BUT it proves the
+removable-work thesis: −17.4% of n=16 nodes are ETC-cuttable** (TT-proven-loss children reachable before
+expanding the miss-siblings). The cut value is real; the **critical-path overhead is what kills A** — exactly
+the proposal's prediction ("A's weakness: sort + gather on the critical path eats the win"). **⇒ the cut must be
+realized OFF the critical path = Approach B** (idle-core producer/consumer: idle tail cores gather/sort/dedup/
+build-keys, the hot consumer streams the sorted batch + cuts — the +27% cyc/node prep moves to the spare cores
+Phase-0a showed have bandwidth). This is the GO signal for B: the dedup/cut is proven worth ~17% of nodes.
+(A "proper A" — custom gather-once child loop that stores child descriptors so the expansion reuses them, killing
+the double-work — would shrink the overhead, but that build is ≈ the B substrate anyway; go straight to B.)
+
+**Status of M_WAVE:** keep gated-off on main (control byte-identical, validated) as the **ETC substrate +
+documented measurement** (the −17.4%-cuttable finding), same disposition as gated ABDADA/STEAL. Do NOT default
+it on (measured loss). Do NOT revert.
+
+**NEXT = Approach B scope decision with the user** (multi-session): idle-core gather/sort/dedup producers feeding
+a streaming consumer that probes the sorted batch + cuts. Phase-0a sized the consumer (~4 cores → ~780 M/s,
+out-probes the tail); Phase-1 proved the cut (~17% nodes). The remaining design = the producer/consumer SPSC +
+frontier ownership + boundary-publish race (proposal Approach B / open questions).
 
 ### A'' Phase-0a — sorted-stream survives contention (GREEN); ~780 M/s cap; few-consumer design (2026-06-20--10)
 
