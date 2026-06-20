@@ -486,11 +486,39 @@ pub struct IsoFlat {
     /// Worker count of the `rayon` pool, read once (`rayon::current_num_threads`). The
     /// work-stealing publish gate compares [`deep_busy`](Self::deep_busy) against it.
     n_threads: usize,
+    /// `QUEENS_STEAL_WIDTH` (default 2): max children a single frame publishes. The idle-core gate
+    /// alone bursts up to ~`n_threads` wide at one frame and each stealer recurses the same ⇒ an
+    /// exponential publish fan-out that re-does shared transpositions (the measured +15% nodes). A
+    /// small per-frame cap spreads the helpers *deep* instead (deeper subtrees are more disjoint ⇒
+    /// less re-expansion) while still saturating idle cores across plies.
+    steal_width: u32,
+    /// `QUEENS_STEAL_MIN_PC` (default 18): only publish a child whose available-popcount is at least
+    /// this — i.e. a *substantial* subtree worth the spawn/scope/defer overhead. A small subtree is
+    /// cheaper to expand locally than to ship to another core (the overhead dominates and stealing
+    /// nets a loss). "Split the known-expensive nodes, not the tiny ones."
+    steal_min_pc: u32,
     /// Number of workers currently inside a deep `wins_inc_iter` solve (incremented on entry,
     /// decremented on exit). `n_threads - deep_busy` is the idle-core proxy that gates publishing
     /// (publish only when cores are idle, so a stealer is there to take the work promptly — else
     /// over-publishing would queue work the busy worker re-expands as the PASS1 fallback).
     deep_busy: AtomicUsize,
+    /// `QUEENS_STEAL_MAX` (default = `n_threads`): hard cap on **concurrent in-flight splits**. The
+    /// idle-core proxy alone lets fast small splits churn (the measured 12M total spawns); an explicit
+    /// concurrency cap means at most this many stolen subtrees are alive at once — paired with a high
+    /// `min_pc` (big, long-running splits) it throttles the total spawn count to ~`steal_max`, replaced
+    /// as each finishes, instead of an unbounded fan-out.
+    steal_max: u32,
+    /// Currently in-flight stolen subtrees (incremented at publish, decremented when the stealer's
+    /// `wins_inc_iter` returns). Gated against [`steal_max`](Self::steal_max).
+    active_splits: AtomicU64,
+    /// Work-stealing diagnostics (cold; only touched on the rare gated publish / PASS1-fallback path).
+    /// `steal_published` = subtrees split off to idle cores; `steal_pc_hist[pc]` = their available-
+    /// popcount distribution (what we're splitting); `steal_fallback` = published-then-still-in-flight
+    /// children the busy worker had to expand itself in PASS1 (a steal that failed to land ⇒ a
+    /// re-expansion). Printed post-solve when stealing fired.
+    steal_published: AtomicU64,
+    steal_fallback: AtomicU64,
+    steal_pc_hist: Box<[AtomicU64]>,
     oracle_attempts: AtomicU64,
     oracle_hits: AtomicU64,
     oracle_comp_hits: AtomicU64,
@@ -530,6 +558,40 @@ impl IsoFlat {
         // whole solve finishes inside the warm window). iso-flat/iso-window keep it off (control intact).
         s.warm_restart = !matches!(std::env::var("QUEENS_WARM_RESTART").as_deref(), Ok("0"));
         s
+    }
+
+    /// Snapshot the work-stealing counters into a [`StealReport`] (cold; post-solve). Shared by the
+    /// TTY diagnostic line and the `--to-file` JSON so both carry identical data.
+    fn build_steal_report(&self) -> StealReport {
+        let published = self.steal_published.load(Ordering::Relaxed);
+        let fallback = self.steal_fallback.load(Ordering::Relaxed);
+        let pc_hist: Vec<(u32, u64)> = self
+            .steal_pc_hist
+            .iter()
+            .enumerate()
+            .map(|(pc, c)| (pc as u32, c.load(Ordering::Relaxed)))
+            .filter(|&(_, c)| c > 0)
+            .collect();
+        let pc_lo = pc_hist.first().map(|&(pc, _)| pc).unwrap_or(0);
+        let pc_hi = pc_hist.last().map(|&(pc, _)| pc).unwrap_or(0);
+        let sum_pc: u64 = pc_hist.iter().map(|&(pc, c)| pc as u64 * c).sum();
+        let pc_mean = if published > 0 {
+            sum_pc as f64 / published as f64
+        } else {
+            0.0
+        };
+        StealReport {
+            published,
+            fallback,
+            pc_lo,
+            pc_hi,
+            pc_mean,
+            pc_hist,
+            width: self.steal_width,
+            min_pc: self.steal_min_pc,
+            max: self.steal_max,
+            delay: self.steal_delay,
+        }
     }
 
     /// Force the ABDADA in-flight-deferral path on (the `const ABDADA == true` `wins_inc_iter`
@@ -608,10 +670,20 @@ impl IsoFlat {
             iter_inc: std::env::var("QUEENS_ITER").as_deref() == Ok("1"),
             abdada: std::env::var("QUEENS_ABDADA").as_deref() == Ok("1"),
             steal: std::env::var("QUEENS_STEAL").as_deref() == Ok("1"),
-            steal_delay: env_u32("QUEENS_STEAL_DELAY", 60) as u64,
+            steal_delay: env_u32("QUEENS_STEAL_DELAY", 50) as u64,
             steal_armed: Arc::new(AtomicBool::new(false)),
+            steal_width: env_u32("QUEENS_STEAL_WIDTH", 2).max(1),
+            steal_min_pc: env_u32("QUEENS_STEAL_MIN_PC", 18),
             n_threads: rayon::current_num_threads().max(1),
+            steal_max: env_u32(
+                "QUEENS_STEAL_MAX",
+                rayon::current_num_threads().max(1) as u32,
+            ),
+            active_splits: AtomicU64::new(0),
             deep_busy: AtomicUsize::new(0),
+            steal_published: AtomicU64::new(0),
+            steal_fallback: AtomicU64::new(0),
+            steal_pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             oracle_attempts: AtomicU64::new(0),
             oracle_hits: AtomicU64::new(0),
             oracle_comp_hits: AtomicU64::new(0),
@@ -1509,8 +1581,15 @@ impl IsoFlat {
                                     pass = PASS0_DEF;
                                     continue 'node;
                                 }
-                                // PASS1 in-flight: stop waiting — expand it ourselves.
-                                Probe3::InFlight => None,
+                                // PASS1 in-flight: stop waiting — expand it ourselves. If stealing,
+                                // this is a published child a stealer hasn't landed yet ⇒ a fallback
+                                // re-expansion (the steal that didn't pay off); tally it.
+                                Probe3::InFlight => {
+                                    if STEAL {
+                                        self.steal_fallback.fetch_add(1, Ordering::Relaxed);
+                                    }
+                                    None
+                                }
                                 Probe3::Miss => {
                                     // Work-stealing: at an even (prove-loss) frame, while idle cores
                                     // exist, *publish* this child as a `rayon` scope task instead of
@@ -1521,6 +1600,10 @@ impl IsoFlat {
                                         && armed
                                         && frame_even
                                         && pass != PASS1
+                                        && pc >= self.steal_min_pc
+                                        && published < self.steal_width
+                                        && (self.active_splits.load(Ordering::Relaxed) as u32)
+                                            < self.steal_max
                                         && (published as usize)
                                             < self.n_threads.saturating_sub(
                                                 self.deep_busy.load(Ordering::Relaxed),
@@ -1528,6 +1611,7 @@ impl IsoFlat {
                                     {
                                         self.tt.mark_inflight_hashed(cr, cf);
                                         let cdepth = cur.depth + 1;
+                                        self.active_splits.fetch_add(1, Ordering::Relaxed);
                                         scope.spawn(move |s| {
                                             let mut n = 0u64;
                                             let pm = self.order8(q);
@@ -1538,8 +1622,12 @@ impl IsoFlat {
                                                     &mut n,
                                                 );
                                             self.tt.flush_local_nodes(&mut n);
+                                            self.active_splits.fetch_sub(1, Ordering::Relaxed);
                                         });
                                         published += 1;
+                                        self.steal_published.fetch_add(1, Ordering::Relaxed);
+                                        self.steal_pc_hist[pc as usize]
+                                            .fetch_add(1, Ordering::Relaxed);
                                         pass = PASS0_DEF;
                                         continue 'node;
                                     }
@@ -2591,6 +2679,40 @@ impl Solver for IsoFlat {
         self.drain_oracle_all();
         self.drain_hist_all();
         self.drain_prof_all();
+        if self.steal {
+            // Work-stealing diagnostics (TTY text; the same data is in the `--to-file` JSON via
+            // `steal_report`): how many subtrees were split off, their available-popcount
+            // distribution, and how many publishes fell back to a PASS1 re-expansion.
+            let r = self.build_steal_report();
+            let pct = |x: u64| {
+                if r.published > 0 {
+                    100.0 * x as f64 / r.published as f64
+                } else {
+                    0.0
+                }
+            };
+            eprintln!(
+                "(work-stealing: split off {} subtrees · avail-pc {}..{} mean {:.1} · {} fallback \
+                 re-expansions [{:.1}% of splits] · width {} min-pc {} max {} delay {}s)",
+                r.published,
+                r.pc_lo,
+                r.pc_hi,
+                r.pc_mean,
+                r.fallback,
+                pct(r.fallback),
+                r.width,
+                r.min_pc,
+                r.max,
+                r.delay,
+            );
+            let dist: String = r
+                .pc_hist
+                .iter()
+                .map(|&(pc, c)| format!("{pc}:{c}"))
+                .collect::<Vec<_>>()
+                .join(" ");
+            eprintln!("(work-stealing split-pc histogram: {dist})");
+        }
         won
     }
     fn nodes(&self) -> u64 {
@@ -2601,6 +2723,9 @@ impl Solver for IsoFlat {
     }
     fn report(&self) -> Option<CountReport> {
         self.tt.report()
+    }
+    fn steal_report(&self) -> Option<StealReport> {
+        self.steal.then(|| self.build_steal_report())
     }
     fn working_set(&self) -> Option<Vec<(Bits, u8)>> {
         self.tt.working_set()

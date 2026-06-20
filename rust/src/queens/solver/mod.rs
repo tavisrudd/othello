@@ -27,6 +27,27 @@ pub use pn::Pn;
 // Solver lineage
 // --------------------------------------------------------------------------- //
 
+/// Work-stealing diagnostics for the `--to-file` JSON results (and the post-solve TTY line):
+/// what the dominant-root tail split off late in the solve and how the gate was configured.
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct StealReport {
+    /// Subtrees split off to idle cores.
+    pub published: u64,
+    /// Published-but-not-landed children the busy worker re-expanded itself (PASS1 fallback).
+    pub fallback: u64,
+    /// Available-popcount range and mean of the split subtrees (what we split).
+    pub pc_lo: u32,
+    pub pc_hi: u32,
+    pub pc_mean: f64,
+    /// Full available-popcount histogram of the split subtrees: `(pc, count)`, ascending.
+    pub pc_hist: Vec<(u32, u64)>,
+    /// Gate config in force (`QUEENS_STEAL_*`).
+    pub width: u32,
+    pub min_pc: u32,
+    pub max: u32,
+    pub delay: u64,
+}
+
 /// A win/loss solver for the Non-Attacking Queens game. Implementors compute
 /// `wins` (the value for the player to move); the rest is provided.
 pub trait Solver: Sync {
@@ -68,6 +89,13 @@ pub trait Solver: Sync {
     /// Distinct-position measurement, if this solver was built with counting
     /// enabled (see [`Tt::new_counting`]). `None` for an ordinary solve.
     fn report(&self) -> Option<CountReport> {
+        None
+    }
+
+    /// Work-stealing diagnostics (how many subtrees were split off the dominant-root tail, their
+    /// available-popcount distribution, the fallback re-expansion count, and the gate config).
+    /// `None` unless this solver ran with stealing on. Powers the `--to-file` JSON results.
+    fn steal_report(&self) -> Option<StealReport> {
         None
     }
 

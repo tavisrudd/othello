@@ -55,6 +55,12 @@ for r in $(seq 1 "$ROUNDS"); do
     tag=${lab}_${r}
     echo; echo ">>>>>>>>>>>> BEGIN $tag ($TOG=$v) <<<<<<<<<<<<"
     echo "BEGIN $tag $TOG=$v $(date +%s)" >> "$STATE"
+    # Default-TT (TT=0, 17 GB) runs commit the whole table upfront, and huge-page reclaim lags the
+    # prior process's exit — so back-to-back runs OOM-kill the 2nd. Gate on free memory (≥18 GB)
+    # before launching so each run starts from a reclaimed box. (The 12 GB default needs no wait.)
+    if [ "$TT" = 0 ]; then
+      while [ "$(free -g | awk '/^Mem:/{print $7}')" -lt 18 ]; do sleep 3; done
+    fi
     # stdout (the solver SUMMARY line) is `tee`d so it lands in the file AND on the pane TTY; the live
     # progress bar is on stderr (untouched ⇒ still renders live). perf stat → its own file.
     env $tt "$TOG=$v" perf stat -o "$OUT/$tag.perf" -e cycles,instructions \

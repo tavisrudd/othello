@@ -144,6 +144,11 @@ enum Cmd {
         /// table is sized by the image, so QUEENS_TT_BITS/SLOTS are ignored.
         #[arg(long, value_name = "PATH")]
         resume: Option<PathBuf>,
+        /// Also write the run's results as JSON to PATH (the TTY keeps the human-readable
+        /// summary). Reliable for programmatic reading + watching live: verdict, nodes, wall,
+        /// TT size/fill, and the work-stealing diagnostics. Written once, post-solve.
+        #[arg(long, value_name = "PATH")]
+        to_file: Option<PathBuf>,
     },
     /// The Sprague-Grundy value (nimber) of the board.
     Nimber {
@@ -273,6 +278,7 @@ fn main() {
         checkpoint: None,
         checkpoint_every: None,
         resume: None,
+        to_file: None,
     });
     match cmd {
         Cmd::Solve {
@@ -282,6 +288,7 @@ fn main() {
             checkpoint,
             checkpoint_every,
             resume,
+            to_file,
         } => solve(
             &Queens::new(n),
             &solver,
@@ -291,6 +298,7 @@ fn main() {
                 every: checkpoint_every,
                 resume,
             },
+            to_file,
         ),
         Cmd::Nimber { n } => nimber_mode(&Queens::new(n)),
         Cmd::Count {
@@ -1562,7 +1570,7 @@ fn do_checkpoint(
     }
 }
 
-fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
+fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file: Option<PathBuf>) {
     // Resolve + apply CPU affinity for this board before building the pool/store or
     // searching (gated to n >= 16 under `auto`; see `othello::affinity`).
     othello::affinity::configure(q.n);
@@ -1719,6 +1727,35 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts) {
         summary.push_str(&stats);
     }
     println!("\x1b[90m({summary})\x1b[0m");
+    // --to-file: write the same results as JSON (the TTY keeps the human-readable text above).
+    if let Some(path) = &to_file {
+        #[derive(serde::Serialize)]
+        struct SolveResult<'a> {
+            n: u32,
+            solver: &'a str,
+            winner: &'a str,
+            nodes: u64,
+            wall_secs: f64,
+            stats: &'a str,
+            steal: Option<othello::queens::StealReport>,
+        }
+        let result = SolveResult {
+            n: q.n,
+            solver: solver.name(),
+            winner,
+            nodes: solver.nodes(),
+            wall_secs: elapsed,
+            stats: &stats,
+            steal: solver.steal_report(),
+        };
+        match serde_json::to_string_pretty(&result)
+            .map_err(|e| e.to_string())
+            .and_then(|j| std::fs::write(path, j + "\n").map_err(|e| e.to_string()))
+        {
+            Ok(()) => eprintln!("\x1b[90m(results JSON → {})\x1b[0m", path.display()),
+            Err(e) => eprintln!("\x1b[31m--to-file write failed: {e}\x1b[0m"),
+        }
+    }
     // QUEENS_PC_HIST=1: the per-available-popcount flat-TT put distribution, for sizing
     // the segmented-TT bands (band_size[pc] ∝ puts[pc]). Printed once, post-solve.
     if let Some(hist) = solver.pc_hist() {
