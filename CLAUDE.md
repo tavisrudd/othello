@@ -42,8 +42,14 @@ real per-node compute), and the perf trace shows the compiler **auto-vectorizes 
 falls to scalar for K≥10** — the recovery lever is compiler-driven vectorization, NOT hand SIMD (the −19%
 scorecard negative). See [getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md).
 Lower-priority: the **memory levers** (MLP gets, BuRR, 1 GB hugepages) — W12 erased the pc 9–12 probes (~the
-profiler's whole probe cost); remaining cost is pc≥13. **Parallelism deficit** (one root ~95% of wall) is
-shrunk-not-fixed by W_K.
+profiler's whole probe cost); remaining cost is pc≥13. **Parallelism deficit — measured-CLOSED for DFS-local
+approaches** (2026-06-19--5): the giant-root tail (51% core util, ~96% of wall) is **transposition-bound + OR-spine
+width-limited** — B1 finer-split (−37% wall), adaptive-tail (−12%), warm-restart (wash) all fail; re-expansion sits
+at pc 13–21. Only **ABDADA in-flight markers** or **grouped-frontier DDD** (both heavy/multi-session) can crack it.
+**warm-restart is now the iso-dense default** (`QUEENS_WARM_RESTART`, 2s warm + staggered restart; ~2% node trim,
+wall-neutral; `=0` disables; iso-flat/iso-window unaffected). **Next throughput lead = getK-C1** (fuse code-build↔
+`extract_adj`; a TT *hit* is already free to discover — the cost is key-build + DRAM latency, and W_K already banked
+the pc 9–12 probe-elimination; "recursion unrolling" is measured-dead as a RAS fix, survives only as risky MLP).
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup

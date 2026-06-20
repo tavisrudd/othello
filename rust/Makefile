@@ -141,6 +141,7 @@ pgo-queens: pgo-check
 #	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 iso-burr >/dev/null 2>&1 || true
 	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 iso-flat >/dev/null 2>&1 || true
 	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 iso-window >/dev/null 2>&1 || true
+	timeout -s INT $(PGO_SECS) $(PGO_INSTR)/release/queens solve 14 iso-dense >/dev/null 2>&1 || true
 	"$(LLVM_PROFDATA)" merge -o $(PROFDATA) $(PROFRAW)
 	RUSTFLAGS="$(RFLAGS) -Cprofile-use=$(PROFDATA) -Cllvm-args=-pgo-warn-missing-function" \
 	    cargo build --release --bin queens --target-dir $(PGO_OUT)

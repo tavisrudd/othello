@@ -1700,3 +1700,80 @@ cheaper-kernel research leads (one wash, one dead). **n=16: 2m44s (pre-lineage) 
 any build — *measure the incidence before implementing a conditional shortcut*. And: node-independent
 cyc/node (perf stat) is the only trustworthy n=16 A/B for per-node opts (the 12 GB "1m33s" and the W11 walls
 were lucky low-node draws; cyc/node caught both).
+
+---
+
+## SESSION 2026-06-19--5 — parallelism-deficit lever CLOSED (DFS-local); warm-restart default; hit-cost mapped
+
+**Session**: `ad57dfb8-acdf-41f0-b9b3-4282b6d185aa` — `mi`. Resumed from `go`; took NEXT-QUEUE **#1 (parallelism
+deficit)** end-to-end: measured it, tried four fills (all wash-or-loss), diagnosed *why*, landed one wall-neutral
+default. Then mapped the **hit-cost** frontier via a read-only research sub-agent.
+
+### The parallelism deficit — measured, then CLOSED for DFS-local approaches
+
+**Bounding measurement** (n=16 iso-dense W12; a `/proc/stat` per-core sampler aligned to `QUEENS_ROOT_TIMING`):
+- Overall core util **71%** (17.1/24). Early all-roots phase **92%**; **giant-root tail (last ~54s) only 51%**
+  (12.3/24). Idle pool ~501 core-s → naive ceiling ~21s (~20%).
+- Root-timing confirms the **2-root plateau on W12**: idx 18 = 101.4s = **96% of the 106s wall**, idx 29 = 87.7s;
+  from ~71s only 2–3 roots active, no solo tail. **Bigger than the pre-W_K proposal's ~5.5%** — W_K shrank the
+  cheap-root fan phase, so the giant tail dominates a larger share (the node win made the deficit *relatively* worse).
+
+**Four fills tried — all wash-or-loss:**
+
+| approach | n=16 | verdict |
+|----------|------|---------|
+| B1 finer split (min_avail 96→48) | 145s / 2.84B (**+41% nodes**) | **LOSS −37% wall** |
+| adaptive-tail (coarse→fine in tail) | 119s / 2.47B (+20%) | **LOSS −12%** (reverted) |
+| warm-restart (2/5/10/20s) + stagger | 98s = baseline | **WASH** → kept as default (below) |
+| reorder / start-later | — | can't help (critical path) |
+
+**Root cause (measured 3 ways): the tail idle is transposition-bound + width-limited.** (a) pc-distribution of
+B1's +41% re-expansion concentrates at **pc 13–21 (84%)**, the near-kernel layer — and that's the *bulk* of work,
+not a thin warmable frontier. (b) All re-expansion is concurrent-by-definition (worker B re-does P only if it
+starts before A writes), so finer splitting → shared pc 13–21 races. (c) The giant root's depth-1 is a sequential
+**OR-spine** (prove-a-win, cutoff-preserving) — warming/scheduling can't widen it. **Every DFS-local fill either
+re-expands or can't widen the spine.** The only levers that could crack it — **ABDADA in-flight markers** (defer
+instead of re-expand; hits the exact measured re-expansion set) and **grouped-frontier DDD** (batch-dedup the
+pc 13–21 frontier) — are both heavy/multi-session. Thermal caveat is *favorable* in the tail (already half-idle).
+
+### Warm-restart SHIPPED as the iso-dense default (user's call — node trim, wall-neutral)
+
+`QUEENS_WARM_RESTART` two-phase solve: phase 1 fans all roots for `warm_secs`(=2) warming the shared TT, then a
+watchdog flips a flag and every split node **cooperatively winds down** (returns a sentinel, writes nothing —
+`panic="abort"` rules out unwinding; in-flight sequential handoffs still finish, warming with *correct* values, so
+warmed entries stay sound). Phase 2 re-runs over the warm TT with slow (phase-1-unfinished) roots **staggered**
+(≤4 beats × 500ms) so they warm each other instead of racing. Default-**on for iso-dense only** (`new_dense`;
+`QUEENS_WARM_RESTART=0` disables; gated **n≥15** — a no-op below; iso-flat/iso-window byte-identical control).
+**A/B (7 rounds): ~2% mean node reduction, 5/7 rounds favor it, wall dead-neutral (103s=103s interleaved).** Small
+& noisy but directionally real; kept for the node trim + as infrastructure toward ABDADA. `par_root` extracted
+(clean refactor shared by both phases). adaptive-tail reverted. **Gate GREEN:** `make test` + n=12 iso-flat
+`--distinct` **1,060,823/1.25×** + n=14 ≈29.16M/1.02× + clippy.
+
+### Hit-cost frontier mapped (research sub-agent, read-only)
+
+- **A hit is already free to *discover*** — the fingerprint compare + early-return are negligible (retiring ~9.6%).
+  A hit pays the same **key-build + hash128 + DRAM latency** (~165 cyc exposed/get; backend-by-memory 35%) as a
+  miss; it only saves the subtree expansion.
+- **The big "cheaper hit" win is already banked by W_K** — W9–W12 eliminated the flat-TT probe entirely for pc 9–12,
+  the region holding **63.5% of all probe latency**. Residual flat-TT hits are **pc≥13 only**. (Also *why*
+  warm-restart was a wash: no pc 9–12 hit to warm, and baseline re-exp ~1.0 at pc≥13.)
+- **"Recursion unrolling" is MEASURED-DEAD as a RAS/unwind fix** (return-mispredict 0.003%, `iso-window.md:809`).
+  It survives ONLY as the vehicle for **MLP-batched gets** (explicit work-stack → N prefetches in flight) — but
+  generic MLP-windowing was **measured-negative at 24 threads** (memory controllers saturated; `warstories.md:508`).
+  *New wrinkle:* post-W_K it'd run on the much-smaller pc≥13 set → might dodge saturation. Untested.
+
+### NEXT-SESSION QUEUE (re-prioritised)
+1. **getK C1 throughput shave** — fuse the code-build↔`extract_adj` round-trip + register-hoist the scalar gather
+   (`notes/proposal-2026-06-19-getk-throughput.md`; ~4–8% M/s, scalar = inverse of the killed pext-negative, low
+   risk). The SAFE compounding win, on the dense lookups that *replaced* the probes. **Top lead.**
+2. **pc≥13 Fermi** (how many pc≥13 gets, how serial) — decides whether the recursion-unroll/MLP swing dodges the
+   prior 24-thread saturation negative *before* committing to the explicit-stack rewrite. Cheap, gates a big change.
+3. **Tail parallelism = parked** "needs ABDADA or grouped-frontier DDD" (DFS-local approaches exhausted/measured).
+4. TT-shrink default wiring (#2 from --4, unchanged); W13/W14 at n=18.
+
+**Files:** `src/queens/solver/iso_flat.rs` (warm-restart default + `par_root`), `Makefile` (PGO trains iso-dense),
+this handoff, `CLAUDE.md`.
+**Method banked:** a `/proc/stat` per-core sampler aligned to `QUEENS_ROOT_TIMING` is the tail-occupancy tool;
+**interleaved A/B is the only trustworthy n=16 metric** — the warm "106→98→94" *single-run* trend was pure noise,
+interleaved showed wall-neutral (baseline alone spans 91–103s). And: *measure the fill's re-expansion before
+crediting a utilisation gain* — B1/adaptive filled cores at 88%/79% but lost on +41%/+20% re-expanded work.

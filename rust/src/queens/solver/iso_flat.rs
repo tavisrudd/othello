@@ -28,9 +28,9 @@ use super::*;
 use rayon::prelude::*;
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
-use std::sync::atomic::{AtomicU32, AtomicU64, AtomicU8, Ordering};
-use std::sync::OnceLock;
-use std::time::Instant;
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicU8, Ordering};
+use std::sync::{Arc, OnceLock};
+use std::time::{Duration, Instant};
 
 const ORACLE_FLUSH: u64 = 1 << 14;
 
@@ -324,6 +324,22 @@ pub struct IsoFlat {
     tiny_canon: &'static [u64],
     par_depth: u32,
     par_min_avail: Option<u32>,
+    /// `QUEENS_WARM_RESTART=1`: a two-phase solve. **Phase 1** runs the full root fan for
+    /// `warm_secs` to warm the shared TT, then aborts (via a deadline-triggered unwind that skips
+    /// every in-flight node's `par_tt_put`, so only *completed*, correct subtrees persist — never a
+    /// wrong value). **Phase 2** re-runs the real search over the now-warm TT: the roots that
+    /// finished in phase 1 are instant TT hits, and the slow (unfinished) roots restart **staggered**
+    /// (`warm_stagger_ms` apart) so one warms the shared region before the next hits it, instead of
+    /// racing. Phase 2 is otherwise the byte-identical search — no per-node contention added. Off ⇒
+    /// no phase 1 and the single split-path bool check short-circuits (the default stays unchanged).
+    warm_restart: bool,
+    warm_secs: u64,
+    warm_stagger_ms: u64,
+    /// True only while phase 1 is running (gates the deadline check in `par_wins_inc`).
+    warm_phase: AtomicBool,
+    /// Set by the phase-1 watchdog thread at the `warm_secs` deadline; a split node that sees it set
+    /// (while `warm_phase`) panics to unwind the warm pass. `Arc` so the watchdog can hold a clone.
+    warm_deadline: Arc<AtomicBool>,
     /// `QUEENS_ROOT_TIMING=1`: record each root's wall [start, end] interval (µs since the
     /// solve began) and print the schedule post-solve. Diagnoses whether the single-threaded
     /// tail is **one dominant root** (one long interval running solo at the end → deep
@@ -400,6 +416,12 @@ impl IsoFlat {
         // Dense layer on by construction (not the iso-window env gate). The ceiling is read
         // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
         s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 13);
+        // Warm-restart on by default for iso-dense: a `warm_secs`(=2) parallel warm pass then a
+        // restart over the warm TT (slow roots staggered). Wall-neutral but trims the node count a
+        // touch by pre-resolving shared pc≥13 entries before the low-util tail. `QUEENS_WARM_RESTART=0`
+        // disables, `=1` forces; it self-gates to n≥15 in `first_player_wins` (a no-op below, where the
+        // whole solve finishes inside the warm window). iso-flat/iso-window keep it off (control intact).
+        s.warm_restart = !matches!(std::env::var("QUEENS_WARM_RESTART").as_deref(), Ok("0"));
         s
     }
 
@@ -431,6 +453,12 @@ impl IsoFlat {
             tiny_canon: small_canon_table(),
             par_depth: par_depth(),
             par_min_avail: par_min_avail_override(),
+            // Off here (iso-flat/iso-window control); `new_dense` turns it on for iso-dense.
+            warm_restart: std::env::var("QUEENS_WARM_RESTART").as_deref() == Ok("1"),
+            warm_secs: env_u32("QUEENS_WARM_SECS", 2) as u64,
+            warm_stagger_ms: env_u32("QUEENS_WARM_STAGGER_MS", 500) as u64,
+            warm_phase: AtomicBool::new(false),
+            warm_deadline: Arc::new(AtomicBool::new(false)),
             root_timing: std::env::var("QUEENS_ROOT_TIMING").as_deref() == Ok("1"),
             iso_max_avail: iso_flat_key_max_avail(),
             // Default 8 = off (pc≤7 band + W8 unchanged); clamp ≤12 for the [i8;4096] L1 memo.
@@ -1573,6 +1601,16 @@ impl IsoFlat {
         min_avail: u32,
     ) -> bool {
         let avail = orient[0];
+        // Warm-restart phase-1 cooperative deadline (`QUEENS_WARM_RESTART`). `panic = "abort"` rules
+        // out unwinding, so instead of aborting we *cooperatively* wind down: once the watchdog sets
+        // the flag, every split node returns a sentinel and writes nothing (the `warming` puts below
+        // are guarded). In-flight sequential `wins_inc` handoffs still finish — warming the TT with
+        // their correct values — but no new parallel work is issued and no incomplete value is ever
+        // written, so the warmed entries stay sound. `warming` is false by default (one bool load).
+        let warming = self.warm_restart && self.warm_phase.load(Ordering::Relaxed);
+        if warming && self.warm_deadline.load(Ordering::Relaxed) {
+            return false; // sentinel; phase-1's result is discarded
+        }
         // Split nodes are few and shallow (never the deep hot path), so segmentation here is a
         // resolved-once `self.segment` runtime branch in `par_tt_get`/`par_tt_put` rather than
         // another `const` threaded through the recursion. `pc` is this node's popcount (only
@@ -1657,8 +1695,64 @@ impl IsoFlat {
         } else {
             kids.iter().any(recurse)
         };
-        self.par_tt_put::<COUNT>(key, pc, won as u8);
+        // Skip the write if the phase-1 deadline fired while computing the children — a child may
+        // have returned the `false` sentinel, poisoning `won`. The completed subtrees below already
+        // wrote their own correct entries; this incomplete parent simply isn't memoised. (`warming`
+        // is false on every production path ⇒ the guard short-circuits and the put always runs.)
+        if !(warming && self.warm_deadline.load(Ordering::Relaxed)) {
+            self.par_tt_put::<COUNT>(key, pc, won as u8);
+        }
         won
+    }
+
+    /// Resolve one root move: pick the `const DK` / oracle / counting monomorphisation **once**
+    /// (per root, never per node) and return whether the *first player* wins via this move (the
+    /// `!par_wins_inc` of the responder's win). Shared by the real fan and the warm-restart pass.
+    #[inline]
+    fn par_root(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        co: &[Bits; 8],
+        ckey: Bits,
+        min_avail: u32,
+    ) -> bool {
+        match (self.nimber_oracle, self.counting) {
+            (true, true) => {
+                !self.par_wins_inc::<true, true, false, 8>(q, att, co, ckey, 1, min_avail)
+            }
+            (true, false) => {
+                !self.par_wins_inc::<true, false, false, 8>(q, att, co, ckey, 1, min_avail)
+            }
+            (false, true) => {
+                !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
+            }
+            (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 13) => {
+                    !self.par_wins_inc::<false, false, true, 13>(q, att, co, ckey, 1, min_avail)
+                }
+                (true, 12) => {
+                    !self.par_wins_inc::<false, false, true, 12>(q, att, co, ckey, 1, min_avail)
+                }
+                (true, 11) => {
+                    !self.par_wins_inc::<false, false, true, 11>(q, att, co, ckey, 1, min_avail)
+                }
+                (true, 10) => {
+                    !self.par_wins_inc::<false, false, true, 10>(q, att, co, ckey, 1, min_avail)
+                }
+                (true, 9) => {
+                    !self.par_wins_inc::<false, false, true, 9>(q, att, co, ckey, 1, min_avail)
+                }
+                // iso-window: W8 dense table, no W9+ ceiling.
+                (true, _) => {
+                    !self.par_wins_inc::<false, false, true, 8>(q, att, co, ckey, 1, min_avail)
+                }
+                // iso-flat: no dense layer.
+                (false, _) => {
+                    !self.par_wins_inc::<false, false, false, 8>(q, att, co, ckey, 1, min_avail)
+                }
+            },
+        }
     }
 }
 
@@ -1820,43 +1914,69 @@ impl Solver for IsoFlat {
             (Vec::new(), Vec::new())
         };
         let t0 = Instant::now();
+        // Warm-restart self-gates to n≥15 — below that the whole solve finishes inside the 2s warm
+        // window, so phase 1 fully resolves it and phase 2 is instant TT hits (a no-op that would
+        // only spawn a needless watchdog, e.g. in the test suite). Even n=16/18 is where it earns.
+        let do_warm = self.warm_restart && q.n >= 15;
+        // Per-root completion flags for the warm-restart pass: phase 1 marks the roots it finished
+        // (their values are now in the TT), so phase 2 staggers only the unfinished (slow) ones.
+        let warm_done: Vec<AtomicBool> = if do_warm {
+            (0..pending.len()).map(|_| AtomicBool::new(false)).collect()
+        } else {
+            Vec::new()
+        };
+
+        // ── PHASE 1 — warm the shared TT ─────────────────────────────────────────────────────────
+        // Run the full fan for `warm_secs`; a watchdog then flips `warm_deadline` and every split node
+        // *cooperatively* winds down — returning a sentinel and writing nothing (`panic = "abort"` rules
+        // out unwinding). In-flight sequential handoffs still finish, warming the TT with their correct
+        // values; only completed subtrees are memoised, so the warmed entries stay sound. Result discarded.
+        if do_warm {
+            self.warm_phase.store(true, Ordering::Relaxed);
+            self.warm_deadline.store(false, Ordering::Relaxed);
+            let flag = self.warm_deadline.clone();
+            let secs = self.warm_secs;
+            std::thread::spawn(move || {
+                std::thread::sleep(Duration::from_secs(secs));
+                flag.store(true, Ordering::Relaxed);
+            });
+            pending.par_iter().enumerate().for_each(|(i, (co, ckey))| {
+                let _ = self.par_root(q, att, co, *ckey, min_avail);
+                // A root that returned before the deadline genuinely finished (its value is in the
+                // TT); one that returned after only wound down via the sentinel — leave it "slow" so
+                // phase 2 restarts it (a real-but-late finisher just replays as fast TT hits).
+                if !self.warm_deadline.load(Ordering::Relaxed) {
+                    warm_done[i].store(true, Ordering::Relaxed);
+                }
+            });
+            self.warm_phase.store(false, Ordering::Relaxed);
+            self.root_done.store(0, Ordering::Relaxed);
+        }
+
+        // ── PHASE 2 — the real run over the (now-warm) TT ────────────────────────────────────────
         let resolve = |idx: usize, co: &[Bits; 8], ckey: Bits| {
+            // Stagger the slow (phase-1-unfinished) roots so each warms the shared region before the
+            // next hits it, instead of racing. Fast roots (finished in phase 1) are instant TT hits
+            // and never sleep. `rank` = how many earlier slow roots precede this one.
+            if do_warm && self.warm_stagger_ms > 0 && !warm_done[idx].load(Ordering::Relaxed) {
+                // Rank among the slow (phase-1-unfinished) roots, **capped** so the cumulative beat
+                // stays "a bit" (≤ 4 beats) — without the cap, a short warm leaves ~all roots slow
+                // and `rank × stagger` would idle the box for tens of seconds. Beat = `stagger_ms`.
+                let rank = warm_done[..idx]
+                    .iter()
+                    .filter(|d| !d.load(Ordering::Relaxed))
+                    .count()
+                    .min(4) as u64;
+                if rank > 0 {
+                    std::thread::sleep(Duration::from_millis(self.warm_stagger_ms * rank));
+                }
+            }
             if timing {
                 starts[idx].store(t0.elapsed().as_micros() as u64, Ordering::Relaxed);
             }
-            // The dense ceiling `dense_k` (and the WINDOW flag) is read **once here**, per root,
-            // to select the `const DK` monomorphisation — never in the deep `wins_inc` loop or a
-            // TT probe. The oracle/counting arms fix `WINDOW=false, DK=8`.
-            let wins =
-                match (self.nimber_oracle, self.counting) {
-                    (true, true) => {
-                        !self.par_wins_inc::<true, true, false, 8>(q, att, co, ckey, 1, min_avail)
-                    }
-                    (true, false) => {
-                        !self.par_wins_inc::<true, false, false, 8>(q, att, co, ckey, 1, min_avail)
-                    }
-                    (false, true) => {
-                        !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
-                    }
-                    (false, false) => match (self.dense8.is_some(), self.dense_k) {
-                        (true, 13) => !self
-                            .par_wins_inc::<false, false, true, 13>(q, att, co, ckey, 1, min_avail),
-                        (true, 12) => !self
-                            .par_wins_inc::<false, false, true, 12>(q, att, co, ckey, 1, min_avail),
-                        (true, 11) => !self
-                            .par_wins_inc::<false, false, true, 11>(q, att, co, ckey, 1, min_avail),
-                        (true, 10) => !self
-                            .par_wins_inc::<false, false, true, 10>(q, att, co, ckey, 1, min_avail),
-                        (true, 9) => !self
-                            .par_wins_inc::<false, false, true, 9>(q, att, co, ckey, 1, min_avail),
-                        // iso-window: W8 dense table, no W9+ ceiling.
-                        (true, _) => !self
-                            .par_wins_inc::<false, false, true, 8>(q, att, co, ckey, 1, min_avail),
-                        // iso-flat: no dense layer.
-                        (false, _) => !self
-                            .par_wins_inc::<false, false, false, 8>(q, att, co, ckey, 1, min_avail),
-                    },
-                };
+            // The dense ceiling `dense_k` (and the WINDOW flag) is read **once here**, per root, to
+            // select the `const DK` monomorphisation — never in the deep `wins_inc` loop or a probe.
+            let wins = self.par_root(q, att, co, ckey, min_avail);
             self.root_done.fetch_add(1, Ordering::Relaxed);
             if timing {
                 ends[idx].store(t0.elapsed().as_micros() as u64, Ordering::Relaxed);
