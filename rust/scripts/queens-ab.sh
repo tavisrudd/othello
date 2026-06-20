@@ -9,9 +9,13 @@
 #     into a busy pane interleaves garbage into the running solve.
 #   * NEVER blind `tmux send-keys C-c` into the pane to "reset" it — that SIGINTs a running solve.
 #     Make sure the pane is idle (at a prompt) before launching instead.
-#   * The solver's live bar is on STDERR (stays on the pane TTY = watchable); the summary line is
-#     on STDOUT (redirected to a file here so node counts are parseable). Never `| tee` (makes
-#     stdout a non-TTY and the solver still prints the bar to stderr, but tee buffering hides it).
+#   * The solver's live bar is on STDERR (stays on the pane TTY = watchable). The summary line is on
+#     STDOUT, `tee`d via `1> >(tee file)` so it lands in a file (node counts parseable) AND on the
+#     pane (so the verdict/nodes are visible live). Teeing STDOUT is safe — the bar is on STDERR and
+#     untouched. (Do NOT `2>&1 | tee`: routing the bar through a pipe makes it a non-TTY and hides it.)
+#   * A monitor file `$STATE` (default /tmp/queens-ab.state, override with STATE=…) gets one appended
+#     line per transition (START/BEGIN/END-with-summary/QUEENS_AB_DONE), so a watcher can
+#     `inotifywait -m -e modify "$STATE"` / `tail -F "$STATE"` instead of scraping the pane.
 #   * Completion marker `QUEENS_AB_DONE` only ever appears as script OUTPUT, never as a typed
 #     command, so an external `tmux capture-pane -t queens:<win> -p -S - | grep -q QUEENS_AB_DONE`
 #     poll can't false-match the command line that launched the run.
@@ -39,15 +43,28 @@ TT=${5:-1500000000}   # ~12 GB; 0 = solver default (17 GB, needs cache-drops bet
 SOLVER=${6:-iso-dense}
 OUT=$(mktemp -d /tmp/queens-ab.XXXXXX)
 tt=""; [ "$TT" != 0 ] && tt="QUEENS_TT_SLOTS=$TT"
-echo "######## queens A/B  n=$N  $TOG=0(off)/1(on)  bin=$BIN  solver=$SOLVER  rounds=$ROUNDS  TT=$TT  out=$OUT ########"
+# Monitor file (override with STATE=…): one line appended at every state transition so a watcher can
+# `inotifywait -m -e modify "$STATE"` (or `tail -F`) instead of scraping the pane. The pane still shows
+# the BEGIN/END markers, the live bar (stderr), AND the solver summary line — nothing is swallowed.
+STATE=${STATE:-/tmp/queens-ab.state}
+echo "START n=$N $TOG out=$OUT $(date +%s)" > "$STATE"
+echo "######## queens A/B  n=$N  $TOG=0(off)/1(on)  bin=$BIN  solver=$SOLVER  rounds=$ROUNDS  TT=$TT  out=$OUT  state=$STATE ########"
 for r in $(seq 1 "$ROUNDS"); do
   for v in 0 1; do
     lab=off; [ "$v" = 1 ] && lab=on
     tag=${lab}_${r}
     echo; echo ">>>>>>>>>>>> BEGIN $tag ($TOG=$v) <<<<<<<<<<<<"
+    echo "BEGIN $tag $TOG=$v $(date +%s)" >> "$STATE"
+    # stdout (the solver SUMMARY line) is `tee`d so it lands in the file AND on the pane TTY; the live
+    # progress bar is on stderr (untouched ⇒ still renders live). perf stat → its own file.
     env $tt "$TOG=$v" perf stat -o "$OUT/$tag.perf" -e cycles,instructions \
-      "$BIN" solve "$N" "$SOLVER" 1>"$OUT/$tag.out"
+      "$BIN" solve "$N" "$SOLVER" 1> >(tee "$OUT/$tag.out")
     echo "============ END $tag ============"
+    # Append this run's summary + wall to the monitor file (one transition the watcher can fire on).
+    { printf 'END %s ' "$tag"
+      grep -hoE "(first|second) player wins|searched [0-9,]+ nodes in [0-9.]+s" "$OUT/$tag.out" | paste -sd' '
+      grep -hE "seconds time elapsed" "$OUT/$tag.perf" | tr -s ' '
+    } >> "$STATE"
   done
 done
 echo; echo "===== RESULTS  n=$N  $TOG  (cyc/node = perf cycles / solver nodes; node-count-independent) ====="
@@ -61,3 +78,4 @@ for r in $(seq 1 "$ROUNDS"); do
   done
 done
 echo "QUEENS_AB_DONE  ($OUT)"
+echo "QUEENS_AB_DONE $OUT $(date +%s)" >> "$STATE"

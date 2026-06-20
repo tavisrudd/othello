@@ -145,6 +145,12 @@ const PASS0: u8 = 0;
 const PASS0_DEF: u8 = 1;
 const PASS1: u8 = 2;
 
+/// Work-stealing: how many expanded nodes between samples of the (atomic) `steal_armed` flag in the
+/// hot loop. Large enough that the per-node cost is a single local increment + compare (the atomic
+/// load is amortised ~1/this), small enough that a long tail handoff arms within a few thousand nodes
+/// of the delay expiring.
+const STEAL_CHECK_EVERY: u32 = 4096;
+
 /// Per-worker reusable arena for [`wins_inc_iter`](IsoFlat::wins_inc_iter): the frame stack plus a
 /// shared move buffer (each frame owns the slice `moves[moves_start..]`, reclaimed by `truncate` on
 /// pop). Cleared, not freed, at each subtree handoff — zero per-node allocation.
@@ -466,6 +472,17 @@ pub struct IsoFlat {
     /// fallback re-expansion that made plain ABDADA a wash. Targets the 51%-util giant-root tail.
     /// Resolved once at the handoff into a `const STEAL` monomorphisation; off = byte-identical.
     steal: bool,
+    /// `QUEENS_STEAL_DELAY` seconds (default 60): work-stealing stays **off** until this much wall has
+    /// elapsed, then a watchdog flips [`steal_armed`](Self::steal_armed). The early all-roots phase is
+    /// already ~fully parallel, so publishing there only adds re-expansion + scheduling overhead (the
+    /// measured 2.4× loss). By the delay the cheap roots have finished, so only the ~2 dominant roots
+    /// (the 51%-util tail) are still running ⇒ stealing targets exactly them.
+    steal_delay: u64,
+    /// Set true by the steal watchdog after [`steal_delay`](Self::steal_delay) seconds. The hot loop
+    /// samples it only every `STEAL_CHECK_EVERY` nodes (a cheap local counter, never a per-node atomic
+    /// load), so an early-phase handoff that finishes quickly never even reads it. `Arc` so the
+    /// watchdog thread holds a clone.
+    steal_armed: Arc<AtomicBool>,
     /// Worker count of the `rayon` pool, read once (`rayon::current_num_threads`). The
     /// work-stealing publish gate compares [`deep_busy`](Self::deep_busy) against it.
     n_threads: usize,
@@ -530,6 +547,7 @@ impl IsoFlat {
     #[cfg(test)]
     pub(crate) fn with_steal(mut self) -> Self {
         self.steal = true;
+        self.steal_delay = 0; // arm immediately so the small-board test actually publishes + steals
         self
     }
 
@@ -590,6 +608,8 @@ impl IsoFlat {
             iter_inc: std::env::var("QUEENS_ITER").as_deref() == Ok("1"),
             abdada: std::env::var("QUEENS_ABDADA").as_deref() == Ok("1"),
             steal: std::env::var("QUEENS_STEAL").as_deref() == Ok("1"),
+            steal_delay: env_u32("QUEENS_STEAL_DELAY", 60) as u64,
+            steal_armed: Arc::new(AtomicBool::new(false)),
             n_threads: rayon::current_num_threads().max(1),
             deep_busy: AtomicUsize::new(0),
             oracle_attempts: AtomicU64::new(0),
@@ -1384,7 +1404,20 @@ impl IsoFlat {
                 self.tt.mark_inflight_hashed(route, fp);
             }
             self.tt.bump_local(nodes); // root expanded (one node, as in `wins_inc` after a miss)
+                                       // Work-stealing regime check, windowed: sample the (atomic) `steal_armed` flag into a
+                                       // local only every `STEAL_CHECK_EVERY` nodes, so the hot loop never pays a per-node atomic
+                                       // load. A short early-phase handoff finishes before the first sample ⇒ `armed` stays false
+                                       // ⇒ no publish, no overhead. STEAL-const-gated, so the counter DCEs when stealing is off.
+            let mut armed = false;
+            let mut since_check: u32 = 0;
             'search: loop {
+                if STEAL {
+                    since_check += 1;
+                    if since_check >= STEAL_CHECK_EVERY {
+                        since_check = 0;
+                        armed = self.steal_armed.load(Ordering::Relaxed);
+                    }
+                }
                 // Drive the current (top) node's child loop. Leaf children resolve inline; a memo
                 // miss on a recurse child pushes a frame and `continue 'search`es to work the top.
                 //
@@ -1485,6 +1518,7 @@ impl IsoFlat {
                                     // writes the verdict to the shared TT. Mark it in-flight and defer
                                     // (PASS1 then resolves it as the stealer's hit, not a re-expansion).
                                     if STEAL
+                                        && armed
                                         && frame_even
                                         && pass != PASS1
                                         && (published as usize)
@@ -2456,6 +2490,24 @@ impl Solver for IsoFlat {
             (Vec::new(), Vec::new())
         };
         let t0 = Instant::now();
+        // Work-stealing watchdog: arm the publish gate only after `steal_delay` seconds, so the early
+        // fully-parallel all-roots phase runs untouched and stealing fires only on the dominant-root
+        // tail. Reset first (the solver may be reused). Spawned only when stealing is on (else the
+        // flag stays false forever and the gate const-folds to a no-op alongside `const STEAL`).
+        self.steal_armed.store(false, Ordering::Relaxed);
+        if self.steal {
+            if self.steal_delay == 0 {
+                // Arm immediately (no watchdog race): the always-on regime, for tests / A/B isolation.
+                self.steal_armed.store(true, Ordering::Relaxed);
+            } else {
+                let flag = self.steal_armed.clone();
+                let secs = self.steal_delay;
+                std::thread::spawn(move || {
+                    std::thread::sleep(Duration::from_secs(secs));
+                    flag.store(true, Ordering::Relaxed);
+                });
+            }
+        }
         // Warm-restart self-gates to n≥15 — below that the whole solve finishes inside the 2s warm
         // window, so phase 1 fully resolves it and phase 2 is instant TT hits (a no-op that would
         // only spawn a needless watchdog, e.g. in the test suite). Even n=16/18 is where it earns.
