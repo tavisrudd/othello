@@ -217,6 +217,30 @@ mod tests {
         }
     }
 
+    /// Frontier work-stealing preserves the verdict. Publishing a frame's children as rayon scope
+    /// tasks (and resolving them back through the shared TT via the in-flight markers) is heavily
+    /// timing-dependent — which children are stolen vs expanded locally varies every run — but the
+    /// verdict is invariant by construction (a stolen subtree writes the same deterministic value,
+    /// and an un-stolen one falls back to local expansion). n=12 drives enough parallel depth to
+    /// actually publish + steal.
+    #[test]
+    fn steal_agrees_on_small_even_boards() {
+        for n in [8u32, 10, 12] {
+            let q = Queens::new(n);
+            let truth = Naive::new().first_player_wins(&q);
+            assert_eq!(
+                IsoFlat::new_window(18).with_steal().first_player_wins(&q),
+                truth,
+                "iso-window+steal n={n}"
+            );
+            assert_eq!(
+                IsoFlat::new_dense(18).with_steal().first_player_wins(&q),
+                truth,
+                "iso-dense+steal n={n}"
+            );
+        }
+    }
+
     /// The `burr` LSM store stays correct under *frequent* freezes: a tiny freeze
     /// threshold forces the memtable to freeze into BuRR segments and clear many
     /// times over a single search, so the verdict only survives if the cascade

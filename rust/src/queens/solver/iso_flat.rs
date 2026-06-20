@@ -29,7 +29,7 @@ use crate::queens::tt::Probe3;
 use rayon::prelude::*;
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
-use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicU8, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicU8, AtomicUsize, Ordering};
 use std::sync::{Arc, OnceLock};
 use std::time::{Duration, Instant};
 
@@ -130,6 +130,14 @@ struct IncFrame {
     /// still in-flight are expanded by this worker (the progress guarantee). Always [`PASS0`] for
     /// the non-ABDADA (`const ABDADA == false`) instantiation — dead state the compiler elides.
     pass: u8,
+    /// Search depth of this node (handoff depth + stack height). **Even depth ⇒ a prove-loss node**
+    /// (every child must be searched ⇒ publishing its children for work-stealing is zero-speculation,
+    /// exactly as `par_wins_inc` fans its even plies). Also gives a stolen child its own root depth.
+    /// Dead unless `const STEAL`.
+    depth: u32,
+    /// Work-stealing: how many of this frame's children have been published as `rayon` scope tasks
+    /// (capped at the idle-core count). Dead unless `const STEAL`.
+    published: u32,
 }
 
 /// [`IncFrame::pass`] states for the ABDADA two-pass deferral (see that field).
@@ -448,6 +456,24 @@ pub struct IsoFlat {
     /// concurrently. Implies the iterative path. Resolved once at the subtree handoff into a
     /// `const ABDADA` monomorphisation (never a per-node branch); off = byte-identical control.
     abdada: bool,
+    /// `QUEENS_STEAL=1`: **frontier work-stealing** on the explicit-stack deep solve (implies the
+    /// ABDADA machinery). At an *even-depth* (prove-loss, zero-speculation — every child is
+    /// searched anyway) frame, when idle cores exist ([`deep_busy`](Self::deep_busy) `< n_threads`),
+    /// the worker *publishes* its pending children as `rayon` scope tasks (marking each in-flight so
+    /// it then defers them via ABDADA) instead of expanding them itself. An idle worker steals each
+    /// published child, searches it, and writes the verdict to the shared TT — so the busy giant-root
+    /// worker's deferral now resolves to a *hit* (a separate core did the work) rather than the
+    /// fallback re-expansion that made plain ABDADA a wash. Targets the 51%-util giant-root tail.
+    /// Resolved once at the handoff into a `const STEAL` monomorphisation; off = byte-identical.
+    steal: bool,
+    /// Worker count of the `rayon` pool, read once (`rayon::current_num_threads`). The
+    /// work-stealing publish gate compares [`deep_busy`](Self::deep_busy) against it.
+    n_threads: usize,
+    /// Number of workers currently inside a deep `wins_inc_iter` solve (incremented on entry,
+    /// decremented on exit). `n_threads - deep_busy` is the idle-core proxy that gates publishing
+    /// (publish only when cores are idle, so a stealer is there to take the work promptly — else
+    /// over-publishing would queue work the busy worker re-expands as the PASS1 fallback).
+    deep_busy: AtomicUsize,
     oracle_attempts: AtomicU64,
     oracle_hits: AtomicU64,
     oracle_comp_hits: AtomicU64,
@@ -495,6 +521,15 @@ impl IsoFlat {
     #[cfg(test)]
     pub(crate) fn with_abdada(mut self) -> Self {
         self.abdada = true;
+        self
+    }
+
+    /// Force frontier work-stealing on (the `const STEAL == true` monomorphisation, which also
+    /// engages the ABDADA markers), independent of `QUEENS_STEAL`. The agreement test uses it to
+    /// exercise stealing under the real parallel solver without mutating process env.
+    #[cfg(test)]
+    pub(crate) fn with_steal(mut self) -> Self {
+        self.steal = true;
         self
     }
 
@@ -554,6 +589,9 @@ impl IsoFlat {
             unroll: std::env::var("QUEENS_UNROLL").as_deref() == Ok("1"),
             iter_inc: std::env::var("QUEENS_ITER").as_deref() == Ok("1"),
             abdada: std::env::var("QUEENS_ABDADA").as_deref() == Ok("1"),
+            steal: std::env::var("QUEENS_STEAL").as_deref() == Ok("1"),
+            n_threads: rayon::current_num_threads().max(1),
+            deep_busy: AtomicUsize::new(0),
             oracle_attempts: AtomicU64::new(0),
             oracle_hits: AtomicU64::new(0),
             oracle_comp_hits: AtomicU64::new(0),
@@ -1279,15 +1317,24 @@ impl IsoFlat {
     /// byte-identical to `wins_inc`. Restricted to `!ORACLE` (the dispatch DCEs it otherwise), so
     /// the oracle/`wins_tiny` arms are absent.
     #[allow(clippy::too_many_arguments)]
-    fn wins_inc_iter<const COUNT: bool, const WINDOW: bool, const DK: u32, const ABDADA: bool>(
-        &self,
-        q: &Queens,
-        att: &[[Bits; 8]],
+    fn wins_inc_iter<
+        's,
+        const COUNT: bool,
+        const WINDOW: bool,
+        const DK: u32,
+        const ABDADA: bool,
+        const STEAL: bool,
+    >(
+        &'s self,
+        scope: &rayon::Scope<'s>,
+        q: &'s Queens,
+        att: &'s [[Bits; 8]],
         orient: &[Bits; 8],
         key: Bits,
         route: u64,
         fp: u64,
         pmoves: &[u8],
+        depth: u32,
         nodes: &mut u64,
     ) -> bool {
         // Entry probe — the only top-of-node probe; deeper nodes are probed inline at the recurse
@@ -1302,7 +1349,13 @@ impl IsoFlat {
         } else if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
             return w != 0;
         }
-        INC_STACK.with(|cell| {
+        // Count this worker as busy in a deep solve so the work-stealing publish gate
+        // (`deep_busy < n_threads`) can read the idle-core count. STEAL-only — a per-handoff atomic,
+        // never per node.
+        if STEAL {
+            self.deep_busy.fetch_add(1, Ordering::Relaxed);
+        }
+        let won = INC_STACK.with(|cell| {
             let arena = &mut *cell.borrow_mut();
             arena.frames.clear();
             arena.moves.clear();
@@ -1321,6 +1374,8 @@ impl IsoFlat {
                     nmoves,
                     mi: 0,
                     pass: PASS0,
+                    depth,
+                    published: 0,
                 });
             }
             if ABDADA && !COUNT {
@@ -1356,6 +1411,10 @@ impl IsoFlat {
                 let mut mi = cur.mi;
                 // ABDADA deferral state, restored with the frame (dead `PASS0` when ABDADA is off).
                 let mut pass = cur.pass;
+                // Work-stealing: even depth ⇒ prove-loss ⇒ children publishable (zero speculation);
+                // `published` is how many this frame has already handed to idle cores. Dead unless STEAL.
+                let frame_even = cur.depth % 2 == 0;
+                let mut published = cur.published;
                 let node_won = 'node: loop {
                     if mi >= nmoves {
                         // Pass-0 scan exhausted. With deferrals outstanding, re-scan in PASS1 — the
@@ -1417,8 +1476,41 @@ impl IsoFlat {
                                     pass = PASS0_DEF;
                                     continue 'node;
                                 }
-                                // PASS1 in-flight (stop waiting — expand it ourselves) or a miss.
-                                Probe3::InFlight | Probe3::Miss => None,
+                                // PASS1 in-flight: stop waiting — expand it ourselves.
+                                Probe3::InFlight => None,
+                                Probe3::Miss => {
+                                    // Work-stealing: at an even (prove-loss) frame, while idle cores
+                                    // exist, *publish* this child as a `rayon` scope task instead of
+                                    // expanding it here — an idle worker steals it, searches it, and
+                                    // writes the verdict to the shared TT. Mark it in-flight and defer
+                                    // (PASS1 then resolves it as the stealer's hit, not a re-expansion).
+                                    if STEAL
+                                        && frame_even
+                                        && pass != PASS1
+                                        && (published as usize)
+                                            < self.n_threads.saturating_sub(
+                                                self.deep_busy.load(Ordering::Relaxed),
+                                            )
+                                    {
+                                        self.tt.mark_inflight_hashed(cr, cf);
+                                        let cdepth = cur.depth + 1;
+                                        scope.spawn(move |s| {
+                                            let mut n = 0u64;
+                                            let pm = self.order8(q);
+                                            // Verdict lands in the shared TT via the completing put.
+                                            let _ = self
+                                                .wins_inc_iter::<COUNT, WINDOW, DK, ABDADA, STEAL>(
+                                                    s, q, att, &child, ckey, cr, cf, pm, cdepth,
+                                                    &mut n,
+                                                );
+                                            self.tt.flush_local_nodes(&mut n);
+                                        });
+                                        published += 1;
+                                        pass = PASS0_DEF;
+                                        continue 'node;
+                                    }
+                                    None
+                                }
                             }
                         } else {
                             // a losing child (value 0) wins this node; `None` ⇒ expand it.
@@ -1441,6 +1533,7 @@ impl IsoFlat {
                                     let f = arena.frames.get_unchecked_mut(top);
                                     f.mi = mi;
                                     f.pass = pass;
+                                    f.published = published;
                                 }
                                 let mut scratch = [MaybeUninit::<u8>::uninit(); MAXV];
                                 let filt = filter_moves(
@@ -1466,6 +1559,8 @@ impl IsoFlat {
                                     nmoves: cn,
                                     mi: 0,
                                     pass: PASS0,
+                                    depth: cur.depth + 1,
+                                    published: 0,
                                 });
                                 continue 'search;
                             }
@@ -1501,7 +1596,11 @@ impl IsoFlat {
                     continue 'search; // child WON → parent resumes its own child loop
                 }
             }
-        })
+        });
+        if STEAL {
+            self.deep_busy.fetch_sub(1, Ordering::Relaxed);
+        }
+        won
     }
 
     /// Orientation-free tail of [`wins_inc`](Self::wins_inc) for the iso band
@@ -2062,17 +2161,41 @@ impl IsoFlat {
                 M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_PROF>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                // The iterative experiment (`QUEENS_ITER`) and ABDADA (`QUEENS_ABDADA`, deferral
-                // on the explicit stack) only diverge on the plain `M_NORMAL`, non-oracle path;
+                // The explicit-stack experiments (`QUEENS_ITER` plain loop, `QUEENS_ABDADA` deferral,
+                // `QUEENS_STEAL` work-stealing) only diverge on the plain `M_NORMAL`, non-oracle path;
                 // the choice is resolved here, once per subtree handoff (never per node), into a
-                // distinct `const ABDADA` monomorphisation. `!ORACLE` is const, so the arms DCE
-                // for the oracle instantiations.
-                _ if !ORACLE && self.abdada => self.wins_inc_iter::<COUNT, WINDOW, DK, true>(
-                    q, att, orient, key, route, fp, order8, &mut nodes,
-                ),
-                _ if !ORACLE && self.iter_inc => self.wins_inc_iter::<COUNT, WINDOW, DK, false>(
-                    q, att, orient, key, route, fp, order8, &mut nodes,
-                ),
+                // distinct `const (ABDADA, STEAL)` monomorphisation. STEAL implies the ABDADA markers.
+                // The handoff is wrapped in a `rayon` scope so STEAL can spawn stolen children onto
+                // idle workers (the scope joins them before the handoff returns ⇒ all verdicts in the
+                // TT). `!ORACLE` is const, so the arms DCE for the oracle instantiations; STEAL=false
+                // runs no spawns ⇒ the scope wrapper is a node-identical inline of the loop.
+                _ if !ORACLE && self.steal => {
+                    let mut w = false;
+                    rayon::in_place_scope(|s| {
+                        w = self.wins_inc_iter::<COUNT, WINDOW, DK, true, true>(
+                            s, q, att, orient, key, route, fp, order8, depth, &mut nodes,
+                        );
+                    });
+                    w
+                }
+                _ if !ORACLE && self.abdada => {
+                    let mut w = false;
+                    rayon::in_place_scope(|s| {
+                        w = self.wins_inc_iter::<COUNT, WINDOW, DK, true, false>(
+                            s, q, att, orient, key, route, fp, order8, depth, &mut nodes,
+                        );
+                    });
+                    w
+                }
+                _ if !ORACLE && self.iter_inc => {
+                    let mut w = false;
+                    rayon::in_place_scope(|s| {
+                        w = self.wins_inc_iter::<COUNT, WINDOW, DK, false, false>(
+                            s, q, att, orient, key, route, fp, order8, depth, &mut nodes,
+                        );
+                    });
+                    w
+                }
                 _ => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_NORMAL>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
