@@ -274,3 +274,32 @@ for the `verts` write (SAFETY: dispatched only at pc==K ⇒ Some / n<K). Gate-gr
    `get9` is hot directly. Skip both.
 4. **Incremental code maintenance is BLOCKED** — removing a vertex relabels the compact 0..K labeling wholesale,
    so the code can't be carried down the tree; it must be rebuilt at each pc==K (the inherent O(K²) cost).
+
+---
+
+## 5. Reshape experiment — uniform-gather code-build is a MEASURED NEGATIVE (2026-06-20--11)
+
+Tried recommendation #1 the compiler-friendly way (no hand-SIMD): replace the triangular
+`for j in i+1..K { code |= row.get(verts[j]) << bit }` build of `w10_get`/`w11_get` with a **uniform
+fixed-trip rectangular gather** — build each vertex's full K-bit adjacency row (`for j in 0..K` against the
+`verts.iter().enumerate()`, the iterator shape the compiler already vectorizes at K≤9), store in `rows[K]`,
+then pack the 45/55-bit triangular labelled code in a cheap scalar second pass. Result-identical by
+construction (byte-identical code bits); gates green (clippy/fmt/test; n=12 nodes 728,970 and **n=14 nodes
+12,896,443 byte-identical** baseline vs reshaped, single-core deterministic).
+
+**Measured (n=14 iso-dense, single-core, deterministic ⇒ `instructions:u` is an exact count, not noisy):**
+
+| binary | instructions | cycles | instr/node | cyc/node |
+|--------|--------------|--------|-----------|----------|
+| baseline (scalar triangular) | 468.92 G | 152.43 G | 36,361 | 11,820 |
+| reshaped (uniform gather) | 471.42 G | 153.02 G | 36,555 | 11,866 |
+| **Δ** | **+0.53%** | +0.39% | **+194** | +46 |
+
+**Verdict: REVERTED (off main, empty diff).** Instruction count went *up* deterministically — the rectangular
+gather does ~2× the bit-tests (K² vs K²/2) and the compiler did **not** vectorize the K=10/11 reshape into a
+net win, so the extra work is pure overhead. This is precisely the proposal's own prediction ("more ops to
+vectorize … expect it to lose") and the banked small-data/multi-word-scatter lesson (C4 pext = −19%). **The
+K=10/11 build-vectorization lever does not pay via loop-reshape; the compiler's refusal to gather 10/11 lanes
+is not worked around by a uniform-shape rewrite.** Bank as an instructive negative; the getK code-build's ~3%
+ceiling stays unrealized and would need a fundamentally different attack (not identified). **Stop chasing it —
+the work-shrink/dedup levers (A'' sorted-frontier) are the higher-EV bet.**
