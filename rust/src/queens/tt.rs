@@ -132,6 +132,22 @@ impl Slot {
     pub(crate) fn fp(self) -> u64 {
         self.0 >> Self::FP_SHIFT
     }
+    /// ABDADA in-flight sentinel stored in `val`: a worker writes this when it *begins*
+    /// expanding a node (the slot is otherwise empty until the completing put), so a second
+    /// worker that probes the same key learns the subtree is already being computed and can
+    /// defer it instead of re-expanding. Real verdicts only ever occupy `val ∈ {0, 1}`, so
+    /// `0xFF` is an unambiguous marker. The completing put overwrites it with the real value.
+    pub(crate) const IN_FLIGHT: u8 = 0xFF;
+}
+
+/// Tri-state TT probe for the ABDADA in-flight protocol ([`QueensTt::get_inflight_hashed`]):
+/// a fingerprint-matching slot is either a resolved verdict ([`Probe3::Hit`]) or a marker left
+/// by a worker mid-expansion ([`Probe3::InFlight`]); anything else is a [`Probe3::Miss`].
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub(crate) enum Probe3 {
+    Hit(u8),
+    InFlight,
+    Miss,
 }
 
 /// 1024 shards for [`PnTt`] (still mutex-sharded; `pn` is a tiny-board experiment,
@@ -685,6 +701,35 @@ impl QueensTt {
     #[inline]
     pub(crate) fn archive_key_hashed(&self, route: u64, fp: u64) -> u64 {
         archive_key_of(self.index(route) as u64, fp & Slot::fp_mask())
+    }
+    /// Tri-state probe for the ABDADA protocol: distinguishes a resolved verdict from an
+    /// in-flight marker (a worker currently expanding this key) so the caller can defer rather
+    /// than re-expand. A fingerprint *mismatch* (a hash-colliding other key) reads as a `Miss`,
+    /// exactly as [`get_hashed`](Self::get_hashed) would — only a true key-match yields `Hit`/
+    /// `InFlight`. One relaxed load, same as the plain get.
+    #[inline]
+    pub(crate) fn get_inflight_hashed(&self, route: u64, fp: u64) -> Probe3 {
+        let s = Slot(self.slots[self.index(route)].load(Ordering::Relaxed));
+        if s.used() && s.fp() == (fp & Slot::fp_mask()) {
+            if s.val() == Slot::IN_FLIGHT {
+                Probe3::InFlight
+            } else {
+                Probe3::Hit(s.val())
+            }
+        } else {
+            Probe3::Miss
+        }
+    }
+    /// Claim a key as in-flight: store the [`Slot::IN_FLIGHT`] marker. A blind relaxed store
+    /// (replace-always, as every put) — two workers racing to claim the same empty slot both
+    /// expand once (the marker only *defers* concurrent probers, never blocks), and the
+    /// completing [`put_hashed`](Self::put_hashed) overwrites the marker with the real verdict.
+    /// Worst case the marker is evicted or lost to a race ⇒ a deferral is missed and the node is
+    /// re-expanded (baseline behaviour); never a wrong verdict, since only the final put records
+    /// a value and that value is deterministic.
+    #[inline]
+    pub(crate) fn mark_inflight_hashed(&self, route: u64, fp: u64) {
+        self.slots[self.index(route)].store(Slot::pack(fp, Slot::IN_FLIGHT).0, Ordering::Relaxed);
     }
     #[inline]
     pub(crate) fn prefetch_hashed(&self, route: u64) {

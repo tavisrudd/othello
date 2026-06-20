@@ -193,6 +193,30 @@ mod tests {
         }
     }
 
+    /// ABDADA in-flight deferral preserves the verdict. The marker write + tri-state probe +
+    /// two-pass deferral are timing-dependent (which children get deferred varies per run), but
+    /// the verdict must be invariant — every fallback degrades to a plain re-expansion and only
+    /// the completing put records a (deterministic) value. n=12 runs through the real parallel
+    /// solver, so concurrent transposition collisions actually fire the deferral path (a single
+    /// worker never re-probes its own on-stack markers, since available-popcount strictly shrinks).
+    #[test]
+    fn abdada_agrees_on_small_even_boards() {
+        for n in [8u32, 10, 12] {
+            let q = Queens::new(n);
+            let truth = Naive::new().first_player_wins(&q);
+            assert_eq!(
+                IsoFlat::new_window(18).with_abdada().first_player_wins(&q),
+                truth,
+                "iso-window+abdada n={n}"
+            );
+            assert_eq!(
+                IsoFlat::new_dense(18).with_abdada().first_player_wins(&q),
+                truth,
+                "iso-dense+abdada n={n}"
+            );
+        }
+    }
+
     /// The `burr` LSM store stays correct under *frequent* freezes: a tiny freeze
     /// threshold forces the memtable to freeze into BuRR segments and clear many
     /// times over a single search, so the verdict only survives if the cascade

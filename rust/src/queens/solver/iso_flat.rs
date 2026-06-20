@@ -25,6 +25,7 @@
 use super::graph::{small_canon_table, tiny_key_from_adj, TINY_TABLE_SLOTS};
 use super::incremental::{build_att, child_orient, lex_min8, orient_of};
 use super::*;
+use crate::queens::tt::Probe3;
 use rayon::prelude::*;
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
@@ -121,7 +122,20 @@ struct IncFrame {
     moves_start: u32,
     nmoves: u32,
     mi: u32,
+    /// ABDADA two-pass deferral state (one of [`PASS0`]/[`PASS0_DEF`]/[`PASS1`]). In pass 0 an
+    /// in-flight child is *skipped* (left in place, flips the frame to [`PASS0_DEF`]) so this
+    /// worker keeps useful work going while the child's owner finishes it. When the move list is
+    /// exhausted with deferrals outstanding ([`PASS0_DEF`]) the frame flips to [`PASS1`] and
+    /// re-scans from the start: children whose owners finished are now cheap TT hits, and any
+    /// still in-flight are expanded by this worker (the progress guarantee). Always [`PASS0`] for
+    /// the non-ABDADA (`const ABDADA == false`) instantiation — dead state the compiler elides.
+    pass: u8,
 }
+
+/// [`IncFrame::pass`] states for the ABDADA two-pass deferral (see that field).
+const PASS0: u8 = 0;
+const PASS0_DEF: u8 = 1;
+const PASS1: u8 = 2;
 
 /// Per-worker reusable arena for [`wins_inc_iter`](IsoFlat::wins_inc_iter): the frame stack plus a
 /// shared move buffer (each frame owns the slice `moves[moves_start..]`, reclaimed by `truncate` on
@@ -427,6 +441,13 @@ pub struct IsoFlat {
     /// call frames in the deep upper tree at all. Resolved once at the subtree handoff (a
     /// per-handoff branch, never per node). Off = byte-identical control (`wins_inc` untouched).
     iter_inc: bool,
+    /// `QUEENS_ABDADA=1`: run the deep upper-tree solve through the explicit-stack
+    /// [`wins_inc_iter`](Self::wins_inc_iter) with **ABDADA in-flight markers** — a worker that
+    /// probes a child another worker is currently expanding *defers* it (tries siblings first,
+    /// revisits once before falling back to expanding it itself) instead of re-expanding it
+    /// concurrently. Implies the iterative path. Resolved once at the subtree handoff into a
+    /// `const ABDADA` monomorphisation (never a per-node branch); off = byte-identical control.
+    abdada: bool,
     oracle_attempts: AtomicU64,
     oracle_hits: AtomicU64,
     oracle_comp_hits: AtomicU64,
@@ -466,6 +487,15 @@ impl IsoFlat {
         // whole solve finishes inside the warm window). iso-flat/iso-window keep it off (control intact).
         s.warm_restart = !matches!(std::env::var("QUEENS_WARM_RESTART").as_deref(), Ok("0"));
         s
+    }
+
+    /// Force the ABDADA in-flight-deferral path on (the `const ABDADA == true` `wins_inc_iter`
+    /// monomorphisation), independent of the `QUEENS_ABDADA` env gate. Used by the agreement
+    /// test to exercise deferral under the real parallel solver without mutating process env.
+    #[cfg(test)]
+    pub(crate) fn with_abdada(mut self) -> Self {
+        self.abdada = true;
+        self
     }
 
     /// As [`IsoFlat::new`], but counting the distinct (tagged iso/D4) keys visited
@@ -523,6 +553,7 @@ impl IsoFlat {
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
             unroll: std::env::var("QUEENS_UNROLL").as_deref() == Ok("1"),
             iter_inc: std::env::var("QUEENS_ITER").as_deref() == Ok("1"),
+            abdada: std::env::var("QUEENS_ABDADA").as_deref() == Ok("1"),
             oracle_attempts: AtomicU64::new(0),
             oracle_hits: AtomicU64::new(0),
             oracle_comp_hits: AtomicU64::new(0),
@@ -1248,7 +1279,7 @@ impl IsoFlat {
     /// byte-identical to `wins_inc`. Restricted to `!ORACLE` (the dispatch DCEs it otherwise), so
     /// the oracle/`wins_tiny` arms are absent.
     #[allow(clippy::too_many_arguments)]
-    fn wins_inc_iter<const COUNT: bool, const WINDOW: bool, const DK: u32>(
+    fn wins_inc_iter<const COUNT: bool, const WINDOW: bool, const DK: u32, const ABDADA: bool>(
         &self,
         q: &Queens,
         att: &[[Bits; 8]],
@@ -1261,7 +1292,14 @@ impl IsoFlat {
     ) -> bool {
         // Entry probe — the only top-of-node probe; deeper nodes are probed inline at the recurse
         // arm. A hit resolves the whole subtree handoff with no expansion, exactly as `wins_inc`.
-        if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
+        // Under ABDADA the slot may carry another worker's in-flight marker (`0xFF`), which
+        // `tt_get_h` would misread as a win — so probe tri-state and treat a marker (we own this
+        // handoff) like a miss: fall through and expand.
+        if ABDADA && !COUNT {
+            if let Probe3::Hit(w) = self.tt.get_inflight_hashed(route, fp) {
+                return w != 0;
+            }
+        } else if let Some(w) = self.tt_get_h::<COUNT>(key, route, fp) {
             return w != 0;
         }
         INC_STACK.with(|cell| {
@@ -1282,7 +1320,13 @@ impl IsoFlat {
                     moves_start: 0,
                     nmoves,
                     mi: 0,
+                    pass: PASS0,
                 });
+            }
+            if ABDADA && !COUNT {
+                // Claim this subtree root so other workers probing it defer instead of
+                // re-expanding; the completing put (below) overwrites the marker with the verdict.
+                self.tt.mark_inflight_hashed(route, fp);
             }
             self.tt.bump_local(nodes); // root expanded (one node, as in `wins_inc` after a miss)
             'search: loop {
@@ -1310,8 +1354,19 @@ impl IsoFlat {
                 let moves_start = cur.moves_start as usize;
                 let nmoves = cur.nmoves;
                 let mut mi = cur.mi;
+                // ABDADA deferral state, restored with the frame (dead `PASS0` when ABDADA is off).
+                let mut pass = cur.pass;
                 let node_won = 'node: loop {
                     if mi >= nmoves {
+                        // Pass-0 scan exhausted. With deferrals outstanding, re-scan in PASS1 — the
+                        // deferred in-flight children are now resolved hits (their owners finished
+                        // while we worked our other children), or we expand any stragglers
+                        // ourselves (the progress guarantee). Otherwise every child won ⇒ node LOSES.
+                        if ABDADA && pass == PASS0_DEF {
+                            pass = PASS1;
+                            mi = 0;
+                            continue 'node;
+                        }
                         break 'node false; // every child won → node LOSES
                     }
                     let sq = unsafe { *arena.moves.get_unchecked(moves_start + mi as usize) };
@@ -1343,22 +1398,50 @@ impl IsoFlat {
                         self.tt.prefetch_h(cr);
                         !self.block_entry(q, att, child0, ckey, cr, cf, nodes)
                     } else {
-                        // Recurse arm: build the child key, probe its slot inline. Hit ⇒ resolve
-                        // with no frame; miss ⇒ push the child (one expanded node) and descend.
+                        // Recurse arm: build the child key, probe its slot inline. A hit resolves
+                        // with no frame; a miss pushes a frame (one expanded node) and descends.
+                        // Under ABDADA the probe is tri-state: an in-flight child (another worker
+                        // is expanding it) is *deferred* in pass 0 — skipped now, revisited in PASS1
+                        // — so this worker stays on its other children instead of racing into a
+                        // duplicate (re-)expansion. The deferred child keeps its slot in the move
+                        // list (`mi` already advanced past it), so the PASS1 re-scan re-reaches it.
                         let child = child_orient(&orient, a, child0);
                         let ckey = d4_bits(lex_min8(&child));
                         let (cr, cf) = QueensTt::hash128(ckey);
                         self.tt.prefetch_h(cr);
-                        match self.tt_get_h::<COUNT>(ckey, cr, cf) {
-                            Some(w) => w == 0, // a losing child (value 0) wins this node
+                        let hit = if ABDADA && !COUNT {
+                            match self.tt.get_inflight_hashed(cr, cf) {
+                                Probe3::Hit(w) => Some(w == 0),
+                                // Pass 0 / PASS0_DEF: defer it and keep working other children.
+                                Probe3::InFlight if pass != PASS1 => {
+                                    pass = PASS0_DEF;
+                                    continue 'node;
+                                }
+                                // PASS1 in-flight (stop waiting — expand it ourselves) or a miss.
+                                Probe3::InFlight | Probe3::Miss => None,
+                            }
+                        } else {
+                            // a losing child (value 0) wins this node; `None` ⇒ expand it.
+                            self.tt_get_h::<COUNT>(ckey, cr, cf).map(|w| w == 0)
+                        };
+                        match hit {
+                            Some(lost) => lost,
                             None => {
+                                if ABDADA && !COUNT {
+                                    // Claim before descending so concurrent probers defer this child.
+                                    self.tt.mark_inflight_hashed(cr, cf);
+                                }
                                 self.tt.bump_local(nodes);
-                                // Suspend: sync `mi` back to the frame, then push the child. The
-                                // parent's `moves` slice is its `pmoves`; filter into a scratch (so
-                                // the borrow of `arena.moves` ends) then append it.
+                                // Suspend: sync `mi`/`pass` back to the frame, then push the child.
+                                // The parent's `moves` slice is its `pmoves`; filter into a scratch
+                                // (so the borrow of `arena.moves` ends) then append it.
                                 // SAFETY: `top` is still the live top frame (no push/pop since the
                                 // hoist above).
-                                unsafe { arena.frames.get_unchecked_mut(top).mi = mi };
+                                unsafe {
+                                    let f = arena.frames.get_unchecked_mut(top);
+                                    f.mi = mi;
+                                    f.pass = pass;
+                                }
                                 let mut scratch = [MaybeUninit::<u8>::uninit(); MAXV];
                                 let filt = filter_moves(
                                     &mut scratch,
@@ -1382,6 +1465,7 @@ impl IsoFlat {
                                     moves_start: cstart,
                                     nmoves: cn,
                                     mi: 0,
+                                    pass: PASS0,
                                 });
                                 continue 'search;
                             }
@@ -1978,10 +2062,15 @@ impl IsoFlat {
                 M_PROF => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_PROF>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
-                // The iterative experiment (`QUEENS_ITER`) only diverges on the plain `M_NORMAL`,
-                // non-oracle path; the choice is resolved here, once per subtree handoff (never
-                // per node). `!ORACLE` is const, so the arm DCEs for the oracle instantiations.
-                _ if !ORACLE && self.iter_inc => self.wins_inc_iter::<COUNT, WINDOW, DK>(
+                // The iterative experiment (`QUEENS_ITER`) and ABDADA (`QUEENS_ABDADA`, deferral
+                // on the explicit stack) only diverge on the plain `M_NORMAL`, non-oracle path;
+                // the choice is resolved here, once per subtree handoff (never per node), into a
+                // distinct `const ABDADA` monomorphisation. `!ORACLE` is const, so the arms DCE
+                // for the oracle instantiations.
+                _ if !ORACLE && self.abdada => self.wins_inc_iter::<COUNT, WINDOW, DK, true>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                _ if !ORACLE && self.iter_inc => self.wins_inc_iter::<COUNT, WINDOW, DK, false>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 _ => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_NORMAL>(
