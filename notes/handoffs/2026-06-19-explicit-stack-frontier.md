@@ -121,10 +121,17 @@
 >    (you don't know which child cuts until you evaluate it). Cheap first experiment: **deeper/speculative prefetch in the
 >    descent** (prefetch the next 2–3 degree-sorted children's slots, not just the recurse child) — contained, just extra
 >    `_mm_prefetch`; A/B it. Heavier: an SMT-sibling helper running the path ahead (the spare-budget synthesis).
-> 3. **NEW finding/lever — the flat-TT barely earns its keep at pc≥17:** 400M probes catch only ~0.2% transpositions.
->    Its value is holding re-exp ≈ 1.0× via those rare hits. **Measure the saved-subtree-VALUE of the 0.2% hits** (a
->    `count`-style tap on the hit's pc + a proxy for the skipped subtree size) — if small, a cheaper-probe / probe-skip
->    lever opens at pc≥17 (the probe is mostly a wasted cold load); if large, the probe earns it and prefetch is the play.
+> 3. **The flat-TT probe at pc≥17 EARNS ITS KEEP (probe-skip experiment, MEASURED-NEGATIVE, discarded).** Skipping the
+>    `wins_inc` entry probe+put when ≤2 roots remain = **+19.3% nodes / +21.9% total cyc / +26.0% wall** (3-round n=16
+>    A/B, all agreed). Despite 99.8% miss, the 0.2% hits are HIGH-VALUE: each caught transposition skips a subtree, and
+>    skipping the *put* **cascades** (re-expanded subtrees aren't memoized for siblings). **pc structure of the cascade:**
+>    a pc-17 node's children are pc≤16 getK *leaves* (no `wins_inc` recursion) ⇒ skipping pc-17 probes causes NO cascade,
+>    but the probe (~80 cyc exposed) is a tiny slice of the node's ~17-getK-eval cost ⇒ pc-17-only skip is a predicted
+>    WASH. Skipping HIGHER pc (near root) cascades worse AND those bands have MORE hits (0.4% @pc27-29 vs 0.1% @pc17). So
+>    no probe-skip band wins. **Hard constraint (user): the end-of-solve PV scan walks the TT for the optimal line ⇒ the
+>    TT must stay intact ⇒ put-skipping is ruled out regardless of cycles.** ⇒ **The pc≥17 probe is MANDATORY + COLD +
+>    high-latency ⇒ the only memory win is PREFETCHING it** (latency-hide), confirming lever #2. No "skip/cheaper-probe"
+>    escape; the saved-subtree-value tap is moot (the probe-skip A/B answered it directly: the value is large).
 > | MLP-batched probes / sorted-wave | quantified (1.85× vs 5.7×), order-tax-bound | only if ordering tax paid anyway |
 > | assoc-TT | wash at K=16 (Erlang-B a≪1) | revive n=18/small-TT |
 
