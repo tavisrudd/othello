@@ -4,22 +4,26 @@ use std::sync::OnceLock;
 /// Largest dense layer the `getK` evaluators reach. The complete tables stop at
 /// [`W8_K`]; `W9..=W{MAX_DENSE_K}` are evaluators over the layer below (see [`DenseW8::get9`]).
 /// W9..W11 keep their labelled code (`K*(K-1)/2` ≤ 55 bits) in a `u64`; W12 (66-bit), W13
-/// (78-bit) and W14 (91-bit) run on a `u128` two-word `pext` path. W13/W14 children can be
-/// 12/13-vertex (66/78-bit) codes, so their projection uses the `u128`-returning
-/// [`pext128_wide`]. K=14 is the `u128` ceiling for the labelled code (91 ≤ 128); K=15 = 105
-/// bits still fits, but a 14-vertex child code (91 bits) would need a `pext128`-wide adjacency
-/// extract too — out of scope for now.
-const MAX_DENSE_K: usize = 14;
+/// (78-bit), W14 (91-bit), W15 (105-bit) and W16 (120-bit) run on a `u128` two-word `pext`
+/// path. W13..W16 children can be 12..15-vertex (66..105-bit) codes, so their projection uses
+/// the `u128`-returning [`pext128_wide`]. K=16 is the `u128` ceiling for the labelled code
+/// (16·15/2 = 120 ≤ 128); K=17 = 136 bits would need a wider code. The adjacency rows stay
+/// `≤15` bits (`u64`), so [`pext128`] still recovers them at every K.
+const MAX_DENSE_K: usize = 16;
 const W8_K: usize = 8;
 const W12_K: usize = 12;
 const W13_K: usize = 13;
 const W14_K: usize = 14;
+const W15_K: usize = 15;
+const W16_K: usize = 16;
 /// `u64`-path induced table size: every W9..W11 child is a `≤11`-bit alive mask.
 const MAX_INDUCED: usize = 1 << 11;
 /// `u128`-path induced table sizes (W12's alive mask is 12-bit, W13's is 13-bit).
 const W12_INDUCED: usize = 1 << W12_K;
 const W13_INDUCED: usize = 1 << W13_K;
 const W14_INDUCED: usize = 1 << W14_K;
+const W15_INDUCED: usize = 1 << W15_K;
+const W16_INDUCED: usize = 1 << W16_K;
 
 /// Per-vertex incident masks and per-alive-subset induced masks for the `k`-vertex
 /// upper-triangular edge layout. `incident[i]` selects the code bits of every edge
@@ -61,12 +65,18 @@ const W11_MASKS: ([u64; MAX_DENSE_K], [u64; MAX_INDUCED]) = wk_masks(11);
 
 /// [`wk_masks`] for the `u128` layers (`k` ≥ 12, code > 64 bits): the incident/induced masks
 /// are `u128` and the induced table is `2^k = INDUCED` entries. `incident` is sized to
-/// `MAX_DENSE_K` so W12 and W13 share the [`extract_adj128`] signature. Structurally identical
-/// to `wk_masks` otherwise.
+/// `MAX_DENSE_K` so all the W≥12 layers share the [`extract_adj128`] signature.
+///
+/// The induced table is built **incrementally** over subsets in increasing order:
+/// `induced[alive] = induced[alive \ {h}] | edges(h, alive \ {h})` where `h` is `alive`'s top
+/// vertex — O(2^k · popcount) instead of the naïve O(2^k · k²/2) edge×subset scan. That keeps the
+/// const-eval under the `long_running_const_eval` limit up to k=16 (the `u128` ceiling), where the
+/// naïve form (7.9 M steps) trips it. Result is identical (`direct_wK_matches_scalar_recurrence`).
 const fn wk_masks128<const INDUCED: usize>(k: usize) -> ([u128; MAX_DENSE_K], [u128; INDUCED]) {
     let mut incident = [0u128; MAX_DENSE_K];
-    let mut induced = [0u128; INDUCED];
-    let mut bit = 0usize;
+    // `ebit[i][j]` (i<j) = the code-bit position of edge (i,j) in the upper-triangular layout.
+    let mut ebit = [[0u8; MAX_DENSE_K]; MAX_DENSE_K];
+    let mut bit = 0u32;
     let mut i = 0usize;
     while i < k {
         let mut j = i + 1;
@@ -74,17 +84,26 @@ const fn wk_masks128<const INDUCED: usize>(k: usize) -> ([u128; MAX_DENSE_K], [u
             let edge = 1u128 << bit;
             incident[i] |= edge;
             incident[j] |= edge;
-            let mut alive = 0usize;
-            while alive < (1usize << k) {
-                if (alive & (1 << i)) != 0 && (alive & (1 << j)) != 0 {
-                    induced[alive] |= edge;
-                }
-                alive += 1;
-            }
+            ebit[i][j] = bit as u8;
             bit += 1;
             j += 1;
         }
         i += 1;
+    }
+    let mut induced = [0u128; INDUCED];
+    let mut alive = 1usize;
+    while alive < (1usize << k) {
+        let h = (usize::BITS - 1 - alive.leading_zeros()) as usize; // top set vertex
+        let without_h = alive & !(1usize << h);
+        let mut acc = induced[without_h];
+        let mut rest = without_h;
+        while rest != 0 {
+            let v = rest.trailing_zeros() as usize; // v < h, an edge (v,h)
+            rest &= rest - 1;
+            acc |= 1u128 << (ebit[v][h] as u32);
+        }
+        induced[alive] = acc;
+        alive += 1;
     }
     (incident, induced)
 }
@@ -92,6 +111,8 @@ const fn wk_masks128<const INDUCED: usize>(k: usize) -> ([u128; MAX_DENSE_K], [u
 const W12_MASKS: ([u128; MAX_DENSE_K], [u128; W12_INDUCED]) = wk_masks128::<W12_INDUCED>(W12_K);
 const W13_MASKS: ([u128; MAX_DENSE_K], [u128; W13_INDUCED]) = wk_masks128::<W13_INDUCED>(W13_K);
 const W14_MASKS: ([u128; MAX_DENSE_K], [u128; W14_INDUCED]) = wk_masks128::<W14_INDUCED>(W14_K);
+const W15_MASKS: ([u128; MAX_DENSE_K], [u128; W15_INDUCED]) = wk_masks128::<W15_INDUCED>(W15_K);
+const W16_MASKS: ([u128; MAX_DENSE_K], [u128; W16_INDUCED]) = wk_masks128::<W16_INDUCED>(W16_K);
 
 /// Two-word BMI2 `pext` over a `≤128`-bit `code`/`mask`. The low and high 64-bit halves
 /// are extracted independently, then the high half's bits are shifted above the low half's
@@ -233,7 +254,7 @@ fn wins_rec(k: usize, code: u128, tables: &[Box<[u64]>]) -> bool {
         return bit_get(&tables[k], code as usize);
     }
     let adj = adj_from_code(k, code);
-    let full = (1u16 << k) - 1;
+    let full = ((1u32 << k) - 1) as u16; // u16 form; (1u16 << 16) would overflow at k=16
     for i in 0..k {
         let child = full & !((1u16 << i) | adj[i]);
         let (ck, ccode) = projected_code(&adj, child);
@@ -470,6 +491,76 @@ impl DenseW8 {
         false
     }
 
+    /// Exact value of one labelled 15-vertex graph — the W15 layer (105-bit `code` in a `u128`).
+    /// A child has `≤14` vertices: a 14-vertex child (91-bit) → nested [`get14`], a 13-vertex →
+    /// [`get13`], a 12-vertex → [`get12`] (all `>64` bits, via [`pext128_wide`]); smaller children
+    /// have a `≤55`-bit code (`u64`). Bounded-depth recursion into the complete tables.
+    #[inline]
+    pub(crate) fn get15(&self, code: u128) -> bool {
+        debug_assert!(code < (1u128 << 105));
+        let adj = extract_adj128::<15>(code, &W15_MASKS.0);
+        let full = (1u16 << 15) - 1;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..15 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = child.count_ones() as usize;
+            let child_code = pext128_wide(code, W15_MASKS.1[child as usize]);
+            let lost = match cpc {
+                14 => !self.get14(child_code),
+                13 => !self.get13(child_code),
+                12 => !self.get12(child_code),
+                _ => {
+                    let cc = child_code as u64;
+                    match cpc {
+                        11 => !self.get11(cc),
+                        10 => !self.get10(cc),
+                        9 => !self.get9(cc),
+                        _ => !self.get(cpc, cc as usize),
+                    }
+                }
+            };
+            if lost {
+                return true;
+            }
+        }
+        false
+    }
+
+    /// Exact value of one labelled 16-vertex graph — the W16 layer (120-bit `code`, the `u128`
+    /// ceiling). A child has `≤15` vertices: 15/14/13/12-vertex children (105..66-bit) nest into
+    /// [`get15`]/[`get14`]/[`get13`]/[`get12`] via [`pext128_wide`]; smaller children fit `u64`.
+    #[inline]
+    pub(crate) fn get16(&self, code: u128) -> bool {
+        debug_assert!(code < (1u128 << 120));
+        let adj = extract_adj128::<16>(code, &W16_MASKS.0);
+        let full = u16::MAX; // all 16 vertices (1u16 << 16 would overflow)
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..16 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = child.count_ones() as usize;
+            let child_code = pext128_wide(code, W16_MASKS.1[child as usize]);
+            let lost = match cpc {
+                15 => !self.get15(child_code),
+                14 => !self.get14(child_code),
+                13 => !self.get13(child_code),
+                12 => !self.get12(child_code),
+                _ => {
+                    let cc = child_code as u64;
+                    match cpc {
+                        11 => !self.get11(cc),
+                        10 => !self.get10(cc),
+                        9 => !self.get9(cc),
+                        _ => !self.get(cpc, cc as usize),
+                    }
+                }
+            };
+            if lost {
+                return true;
+            }
+        }
+        false
+    }
+
     pub(crate) fn bytes(&self) -> u64 {
         self.tables
             .iter()
@@ -581,6 +672,36 @@ mod tests {
                 w8.get14(code),
                 wins_rec(14, code, w8.tables),
                 "W14 mismatch at code {code:#x}"
+            );
+        }
+    }
+
+    #[test]
+    fn direct_w15_matches_scalar_recurrence() {
+        let w8 = DenseW8::build();
+        for x in 0..30_000u64 {
+            let lo = x.wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            let hi = x.wrapping_mul(0xC2B2_AE3D_27D4_EB4F);
+            let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 105) - 1);
+            assert_eq!(
+                w8.get15(code),
+                wins_rec(15, code, w8.tables),
+                "W15 mismatch at code {code:#x}"
+            );
+        }
+    }
+
+    #[test]
+    fn direct_w16_matches_scalar_recurrence() {
+        let w8 = DenseW8::build();
+        for x in 0..30_000u64 {
+            let lo = x.wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            let hi = x.wrapping_mul(0xC2B2_AE3D_27D4_EB4F);
+            let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 120) - 1);
+            assert_eq!(
+                w8.get16(code),
+                wins_rec(16, code, w8.tables),
+                "W16 mismatch at code {code:#x}"
             );
         }
     }

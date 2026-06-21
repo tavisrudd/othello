@@ -723,7 +723,7 @@ impl IsoFlat {
         s.name = "iso-dense";
         // Dense layer on by construction (not the iso-window env gate). The ceiling is read
         // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
-        s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 14);
+        s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 16);
         // Warm-restart on by default for iso-dense: a `warm_secs`(=2) parallel warm pass then a
         // restart over the warm TT (slow roots staggered). Wall-neutral but trims the node count a
         // touch by pre-resolving shared pc≥13 entries before the low-util tail. `QUEENS_WARM_RESTART=0`
@@ -1155,6 +1155,86 @@ impl IsoFlat {
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
         dense8.get14(code)
+    }
+
+    /// Resolve a 15-vertex graph directly from W0..W8 (the W15 layer). Twin of
+    /// [`w14_get`](Self::w14_get) over the 105-bit labelled edge code (`u128`); [`DenseW8::get15`]
+    /// nests one ply into W14..W12 (`>64`-bit children) / W11..W9 / a W≤8 lookup.
+    #[inline]
+    fn w15_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        // SAFETY: the DK≥15 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
+        debug_assert_eq!(avail.popcount(), 15);
+        let mut verts = [0u8; 15];
+        let mut n = 0usize;
+        avail.each(|v| {
+            // SAFETY: dispatched only at pc==15 ⇒ exactly 15 squares ⇒ n < 15.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
+            n += 1;
+        });
+        debug_assert_eq!(n, 15);
+        // pext code-build (see `w12_get`): 15 rows of one 4-word pext, packed into the 105-bit
+        // code (two `u64` words, low 0..63, high 64..104, straddle split per row). Byte-identical.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
+        let mut words = [0u64; 2];
+        let mut off = 0u32;
+        for i in 0..15u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 15 - 1 - i;
+            let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
+            let lo = off & 63;
+            words[(off >> 6) as usize] |= contrib << lo;
+            if lo + width > 64 {
+                words[((off >> 6) + 1) as usize] |= contrib >> (64 - lo);
+            }
+            off += width;
+        }
+        let code = (words[0] as u128) | ((words[1] as u128) << 64);
+        dense8.get15(code)
+    }
+
+    /// Resolve a 16-vertex graph directly from W0..W8 (the W16 layer, the `u128` code ceiling).
+    /// Twin of [`w15_get`](Self::w15_get) over the 120-bit labelled edge code (`u128`);
+    /// [`DenseW8::get16`] nests one ply into W15..W12 / W11..W9 / a W≤8 lookup.
+    #[inline]
+    fn w16_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        // SAFETY: the DK≥16 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
+        debug_assert_eq!(avail.popcount(), 16);
+        let mut verts = [0u8; 16];
+        let mut n = 0usize;
+        avail.each(|v| {
+            // SAFETY: dispatched only at pc==16 ⇒ exactly 16 squares ⇒ n < 16.
+            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
+            n += 1;
+        });
+        debug_assert_eq!(n, 16);
+        // pext code-build (see `w12_get`): 16 rows of one 4-word pext, packed into the 120-bit
+        // code (two `u64` words, low 0..63, high 64..119, straddle split per row). Byte-identical.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
+        let mut words = [0u64; 2];
+        let mut off = 0u32;
+        for i in 0..16u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 16 - 1 - i;
+            let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
+            let lo = off & 63;
+            words[(off >> 6) as usize] |= contrib << lo;
+            if lo + width > 64 {
+                words[((off >> 6) + 1) as usize] |= contrib >> (64 - lo);
+            }
+            off += width;
+        }
+        let code = (words[0] as u128) | ((words[1] as u128) << 64);
+        dense8.get16(code)
     }
 
     #[inline]
@@ -2007,6 +2087,10 @@ impl IsoFlat {
                     !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
                         q, att, &child, ckey, cr, cf, moves, nodes,
                     )
+                } else if DK >= 16 && pc == 16 {
+                    !self.w16_get(att, child0)
+                } else if DK >= 15 && pc == 15 {
+                    !self.w15_get(att, child0)
                 } else if DK >= 14 && pc == 14 {
                     !self.w14_get(att, child0)
                 } else if DK >= 13 && pc == 13 {
@@ -2089,7 +2173,11 @@ impl IsoFlat {
             // (no flat-TT probe, no subtree expansion). `DK` is `const`, so each arm const-folds
             // away for the instantiations below it — `DK == 8` (iso-flat/iso-window) compiles all
             // three out, identical to before.
-            let lost = if DK >= 14 && pc == 14 {
+            let lost = if DK >= 16 && pc == 16 {
+                !self.w16_get(att, child0)
+            } else if DK >= 15 && pc == 15 {
+                !self.w15_get(att, child0)
+            } else if DK >= 14 && pc == 14 {
                 !self.w14_get(att, child0)
             } else if DK >= 13 && pc == 13 {
                 !self.w13_get(att, child0)
@@ -2291,7 +2379,11 @@ impl IsoFlat {
                         break 'node true; // empty child wins outright
                     }
                     let pc = child0.popcount();
-                    let lost = if DK >= 14 && pc == 14 {
+                    let lost = if DK >= 16 && pc == 16 {
+                        !self.w16_get(att, child0)
+                    } else if DK >= 15 && pc == 15 {
+                        !self.w15_get(att, child0)
+                    } else if DK >= 14 && pc == 14 {
                         !self.w14_get(att, child0)
                     } else if DK >= 13 && pc == 13 {
                         !self.w13_get(att, child0)
@@ -3192,6 +3284,12 @@ impl IsoFlat {
                 !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
             }
             (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 16) => {
+                    !self.par_wins_inc::<false, false, true, 16>(q, att, co, ckey, 1, min_avail)
+                }
+                (true, 15) => {
+                    !self.par_wins_inc::<false, false, true, 15>(q, att, co, ckey, 1, min_avail)
+                }
                 (true, 14) => {
                     !self.par_wins_inc::<false, false, true, 14>(q, att, co, ckey, 1, min_avail)
                 }
@@ -3268,6 +3366,26 @@ impl Solver for IsoFlat {
                 &mut nodes,
             ),
             (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 16) => self.wins_inc::<false, false, true, 16, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
+                (true, 15) => self.wins_inc::<false, false, true, 15, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
                 (true, 14) => self.wins_inc::<false, false, true, 14, M_NORMAL>(
                     q,
                     att,
