@@ -11,6 +11,55 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ NEXT SESSION (as of --14 — 52→33.9s DONE, 30s is CLOSE. BE RELENTLESS.)
+
+> **MISSION (unchanged, user drill-sergeant):** drive n=16 to **30s**. We're at **33.9s clean** (was ~52s) —
+> ~12% to go. Do NOT declare a floor. Reason *through* walls.
+
+**Where we stand (clean 17 GB, `main` @ the `--14` commits):** n=16 **33.9s / 396 M nodes / SECOND** (TT only
+**16.5% full** — the W_K layers collapsed the working set to ~2.8 GB; a small TT may now suffice, big change from
+the 17 GB-tight regime). **−35% vs the prior ~52s K=12 M_ORD_W default.** Two stacked --14 wins, both committed,
+gate-green:
+- **pext-per-row getK code-build** (`adj_row_pext` in iso_flat.rs): replace the scalar K(K-1)/2 `Bits::get`
+  bit-tests with one 4-word BMI2 `pext` per vertex → the labelled adjacency row, packed into the code (straddle-
+  split for K≥12). **−3.8% cyc/node n=16.** Byte-identical. The proposal §5 negative only ever measured a
+  *scalar rectangular reshape* — pext at K=12+ scale was never tried, and the Fermi flips there (znver5 pext is
+  3-cyc/1-per-cyc). **This obsoletes the whole "compiler-vectorize-K≤9 / getK-throughput-is-stuck" framing.**
+- **W13/14/15/16 dense layers + default K=12→16** (the u128 labelled-code ceiling, 16·15/2 = 120 bits). With
+  cheap pext builders, **raising K pays the whole way up**: each layer keeps cutting ~14–22% nodes (n=14 det
+  K=12 7.9M → K=16 4.0M = −50%, NOT diminishing — K=15→16 was −22%). The cut is **inherent / TT-independent**
+  (16 GB nodes == 12 GB nodes), so it holds at production TT. n=16: 12 GB 3-round A/B K=16 −26.4% wall; 16 GB
+  single-run 49.5→34.4s; clean 17 GB 33.9s. cyc/node +66% at K=16 (the getK evaluator sweep) but −57% nodes wins.
+  `wk_masks128` rebuilt incremental (O(2^k·popcount)) to keep const-eval under the deny-limit at k=16.
+
+**⇒ NEXT LEVERS for 30s (priority order; the K-extension is the big one):**
+1. **★ EXTEND W_K PAST K=16 — the 30s bet.** Go to 256-bit (4×u64) labelled codes: K(K-1)/2 ≤ 256 ⇒ **K≤23**.
+   The deep tail is **pc 13–21**, so K≈18–20 resolves nearly the *whole* tail directly (no probe, no expansion),
+   and the node cut has NOT diminished through 16. Mechanics: extend `adj_row_pext` packing + the getK evaluator
+   (`extract_adj`, child projection) from two `u64` words to four. **Blocker:** the `2^K` induced-mask table —
+   K=17 = 4 MB, K=18 = 8 MB, K=20 = 32 MB (× the 256-bit/u128 stride). Past K=16 it can't be `const`
+   (const-eval time + binary size); **compute it at runtime in a `OnceLock`** (cheap: incremental, ~ms), or drop
+   the table and project each child code from `adj` directly (O(cpc²) scalar). Cap K where the getK evaluator
+   sweep cost (grows ~O(K) + nested) stops beating the saved probes — measure the n=16 wall sweep K=16..20.
+2. **getK evaluator cost (~35% of cycles now; the get9/get10 *leaves* of the nested sweep dominate, NOT the high
+   layers).** The nested recursion peels isolated vertices one ply at a time (the sparse pc 14–16 tail is full of
+   them). Hard (a win/loss table can't decompose isolated verts — that needs nimbers, the parked 6.6× branch).
+   Cheaper-per-call angles: C1b pass the pext-built `adj[]` into getK to skip its `extract_adj` (top call only);
+   ILP the per-child pexts. Perf-record the K=16 binary first (the profile is in `/tmp/k16.data`).
+3. **Memory stall / MLP** (was the --13 lead) — K-raising already shrank it (fewer pc≤K probes; TT 16.5% full).
+   Re-profile before investing; the `wins_inc` entry probe is ~24% but partly the recurse spine now.
+4. **Smaller TT** — the working set collapsed to ~2.8 GB (16.5% of 17 GB). A 4–8 GB TT may match the wall with
+   better TLB/cache and far less memory (also unblocks safe interleaved A/B at production-equivalent fill). Quick
+   A/B: `abenv.sh 16 <bin> QUEENS_TT_SLOTS 2147483648 500000000`.
+
+**Measured WASH this session (reverted, do not redo as-is):** degree-sort restructure (closure-free `popcount` +
+fused per-word `(avail&!att).count_ones()`) — the `sort_moves_by_degree` 14.7% + `call_mut` 6.7% in the profile
+looked removable, but the degree compute is **inherent arithmetic** (4 AND + 4 popcount/move); n=16 A/B = −0.1%
+cyc/node. The only untried angle is **hand-SIMD across moves** (VPOPCNTQ, 2 moves/zmm) — risky (small-data
+scorecard), and the compiler may already vectorize it; annotate `sort_moves_by_degree` body first.
+
+---
+
 ## ⇒ NEXT SESSION (as of --13 — THE 50→40→30s GRIND. BE RELENTLESS.)
 
 > **MISSION (user, drill-sergeant — channel this energy every turn):** drive n=16 to **30s**. **Do NOT give
@@ -221,6 +270,11 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
 
 ## Progress
 
+- [x] **--14: ★★ pext getK code-build + W_K K=12→16 default = −35% wall (52→33.9s clean).** See the top "⇒ NEXT
+      SESSION (--14)" block. Commits: `adbfb10` (pext w10-13, −3.8% cyc/node), `41dcf70` (W14 opt-in), `2dd5ef2`
+      (W15/W16 + incremental `wk_masks128`), `16d8842` (default K=16). Gate-green throughout (byte-identical K=12,
+      direct_w9..16, lineage, iso-flat distinct). Degree-sort restructure = WASH, reverted. NEXT = extend W_K to
+      256-bit codes (K≤23, ≈resolves the pc13-21 tail), getK-evaluator cost, smaller TT.
 - [x] `solve_local_iter` (`QUEENS_UNROLL`) — wash at n=16, gated, committed (`3f10919`)
 - [x] `wins_inc` peel-the-get (`QUEENS_PEEL`) — wash, then superseded/removed in favour of the full stack
 - [x] `wins_inc_iter` full explicit stack (`QUEENS_ITER`) — +4.3% raw, gated off, committed (`3f10919`)
@@ -347,6 +401,45 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       gate to re-validate under the new default (lineage + verdicts; A/B already confirms the −38% win).
 
 ## Handoff Notes
+
+### Session --14 (2026-06-21, `mi`, autonomous overnight): ★★ pext getK + W_K K=16 default = −35% (52→33.9s)
+
+**Session** UUID `da03db1c-3787-4c88-8cf9-a0449477ad26`. Resumed `go mi`. The biggest single-session win of the
+thread. Four commits, all gate-green (byte-identical K=12 default 7,885,007; direct_w9..16; lineage; iso-flat
+n=12 distinct 1,060,823 / n=14 1.02× re-exp; clippy/fmt).
+
+**The chain of reasoning (banked — this is the method that worked):**
+1. Read the --13 profile target map: getK builders ~20.7% + evaluators ~8.7% = ~29%, the largest compute bucket;
+   the proposal said the K≥10 scalar code-build "needs a fundamentally different attack (not identified)" and that
+   pext was the −19% C4 negative.
+2. **Re-read what was actually MEASURED:** proposal §5 only ran a *scalar rectangular reshape* (2× the bit-tests);
+   the C4 pext verdict was reasoned from **k≤4 tiny data**. At K=12 (66-bit code) the Fermi flips: ~12 pext-rows
+   (≈120 ops) vs 66 scalar `Bits::get` (≈330 ops), and znver5 pext is 3-cyc/1-per-cyc. **Never actually tried.**
+3. Built `adj_row_pext` (one 4-word `pext` compacts an attack row against `avail` into the K-bit labelled
+   adjacency row), rewrote w10-w13 to pack it into the code. Byte-identical. **n=16 4-round A/B: −3.8% cyc/node.**
+   (`adbfb10`.)
+4. **Key insight — the levers COMPOUND:** the K=13 cyc/node penalty (the expensive scalar w13_get) shrank +10%→
+   +6.6% on the pext build. So raising K, which had been "net-negative past 12," might now pay. Implemented W14
+   (`41dcf70`), then W15/W16 (`2dd5ef2`, the u128 ceiling at 120 bits; incremental `wk_masks128` to clear the
+   const-eval deny-lint; fixed a `1u16<<16` overflow in the *test reference* `wins_rec`, get16 was correct).
+5. **Swept K=12..16 at n=16.** Node cut HOLDS per layer (n=14 det −50% at K=16, K=15→16 was −22%, not diminishing)
+   and — critically — is **inherent / TT-independent**: the 16 GB node counts == the 12 GB ones (the W_K layer
+   avoids subtree *expansion*, not just eviction). So 12 GB doesn't overstate. 12 GB 3-round A/B: K=14 −19.6%,
+   K=15 −22.0%, K=16 −26.4% wall. 16 GB single-run: 49.5→34.4s. **Defaulted K=16** (`16d8842`); clean 17 GB
+   **33.9s / 396 M / SECOND** (−35% vs the prior K=12 default; TT 16.5% full — the working set collapsed).
+
+**cyc/node grows +66% at K=16** (the getK evaluator sweep — the get9/get10 *leaves* of the nested recursion, the
+sparse pc 14-16 tail peels isolated vertices one ply at a time) but the −57% node cut dominates. **That evaluator
+cost is the next per-node lever; the bigger node-cut lever is extending W_K past 16 (256-bit codes).** See the top
+"⇒ NEXT SESSION (--14)" block.
+
+**Method re-banked:** (a) *re-read what was measured vs reasoned* — the getK-throughput proposal "closed" pext
+from k≤4 data + a scalar reshape; the actual pext at K=12 scale was a clean win and unlocked the whole K-raising
+cascade. A "measured-negative" can be a mis-scoped measurement. (b) *Levers compound* — pext alone was −3.8%, but
+it flipped K-raising from net-negative to −35%. (c) The node-cut TT-independence (16 GB == 12 GB nodes) let the
+12 GB A/B harness decide a production default safely (no risky 17 GB interleaving). (d) Degree-sort restructure
+(closure-free popcount + fused degree) = **WASH** (−0.1% cyc/node) — the compute is inherent arithmetic, the
+profile's `call_mut`/sort attribution was inherent work; reverted to keep the baseline pure.
 
 ### Session --13 (2026-06-20, `mi`, autonomous overnight): the 50→40→30s grind — M_ORD_W default + a cyc/node stack
 

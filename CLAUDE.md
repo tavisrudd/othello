@@ -11,12 +11,22 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
-**LATEST (--13): THE 50→40→30s GRIND (user mission: BE RELENTLESS, optimize every level incl. asm).** M_ORD_W
-is now the DEFAULT; banked a stack of cyc/node wins — **inlined insertion sort** (the dynamic-order sort was
-**~30% of total cycles** via std driftsort machinery; −10.9% wall), sort-fuse, inline-each, prefetch-reorder =
-**−12.5% cyc/node** (57.58→~52s clean / ~49s best). NEXT = K=13 default (flipped +net under M_ORD_W), K=14/15,
-**MLP on the explicit-stack frontier** (the 15.6% TT-probe stall = the big lever for 30s), getK asm-tweaks. See
-the handoff's "⇒ NEXT SESSION (--13)" block. **--12 (historical): ★ DYNAMIC MOVE ORDERING = −30% wall** (gated
+**LATEST (--14): ★★ pext getK code-build + W_K ceiling K=12→16 = −35% wall (52→33.9s clean, knocking on 30s).**
+The user's 30s grind paid off big. Two stacked levers: (1) **pext-per-row getK code-build** (`adj_row_pext`,
+replace the scalar K(K-1)/2 `Bits::get` bit-tests with one 4-word BMI2 `pext` per vertex — −3.8% cyc/node;
+the §5 reshape negative only measured a *scalar* rebuild, never pext at K=12 scale where the Fermi flips); (2)
+**that made raising the dense ceiling pay the whole way up** — W13/14/15/16 added (the u128 code ceiling, K=16 =
+120 bits), default `QUEENS_DENSE_K` 12→**16**. The node cut is **inherent/TT-independent** (16 GB nodes == 12 GB
+nodes, so it holds at production TT; 17 GB TT now only **16.5% full** — the working set collapsed): n=14 det K=12
+7.9M→K=16 4.0M = −50%; n=16 16 GB single-run 49.5→34.4s; **clean 17 GB 33.9s / 396 M nodes / SECOND, −35% vs the
+prior K=12 default**. cyc/node grows +66% at K=16 (the getK evaluator sweep) but the −57% node cut dominates.
+Incremental `wk_masks128` (O(2^k·popcount) not O(2^k·k²)) keeps const-eval under the limit. NEXT for 30s:
+**extend W_K past K=16 to 256-bit (4-word) codes** (K≤23 fits; the tail is pc 13-21 so K≈18-20 ≈ resolves it
+all — node cut didn't diminish through 16; blocker = the 2^K induced table needs runtime init past K=16), the
+**getK evaluator cost** (now ~35%, leaves get9/10), then the **memory stall / MLP**. Degree-sort restructure
+(closure-free popcount + fused) = **measured WASH, reverted** (the compute is inherent arithmetic). See the
+handoff's "⇒ NEXT SESSION (--14)" block. **--13 (historical): inlined insertion sort + sort-fuse/inline-each/
+prefetch-reorder = −12.5% cyc/node** (57.58→~52s). **--12: ★ DYNAMIC MOVE ORDERING = −30% wall** (gated
 `M_ORD`/`QUEENS_ORD`) — the biggest single
 lever since W12, and the constructive payoff of closing Approach B. The closure proved **move ordering is worth
 ~2× node reduction** (any frontier reorder forfeiting it costs +94%); so we improved the ordering itself: replace
@@ -89,7 +99,8 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense + M_ORD_W** | **~52s** clean / ~49s best | 0.94 B | **★ #1 DEFAULT**: dynamic ordering + ETC + (--13) inlined insertion sort / sort-fuse / inline-each / prefetch-reorder = **−12.5% cyc/node**; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
+| **iso-dense (W16) + M_ORD_W** | **~34s** clean (33.9s) | 0.40 B | **★ #1 DEFAULT (--14)**: pext-per-row getK code-build + W_K ceiling raised K=12→**16** (the u128 code limit) = **−35% vs the K=12 M_ORD_W default**; node cut is inherent/TT-independent, TT only 16.5% full; `QUEENS_DENSE_K` 9..=16 |
+| iso-dense (W12) + M_ORD_W | ~52s / ~49s best | 0.94 B | the prior default (`QUEENS_DENSE_K=12`): dynamic ordering + ETC + (--13) inlined insertion sort / sort-fuse / inline-each / prefetch-reorder; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
 | iso-dense + M_ORD   | 1m02s      | 1.14 B  | dynamic move ordering alone (`QUEENS_ORD=1`) — −33% vs M_WAVE; no ETC |
 | iso-dense (W12) M_WAVE | 1m32s   | 1.70 B  | the prior default (now `QUEENS_ORD=0`): W12 + fused M_WAVE ETC cutoff  |
 | iso-dense, WAVE off | 1m39s      | 2.0 B   | W12 only (the A/B control): pc 9–12 from W0..W8 via `pext` (u128 W12) |
@@ -98,15 +109,18 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 | iso-window          | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT                |
 | iso-flat            | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                     |
 
-**Current focus:** the W_K **economic crossover is found — K=12 is the optimum** (the default; −53% nodes /
-~1m41s mean vs W8). The sweep ran one layer past it: **K=13 is net-negative at n=16** — it still cuts nodes
-(−15% vs W12) but the `u128`-wide `get13` per-node cost now exceeds the saved work (wall ~1m46s, +4%). The
-per-layer wall gains were −22% → −13% → −10% → **+4%**. W13 stays a validated **opt-in** (`QUEENS_DENSE_K=13`,
-zero cost to the K=12 default — separate monomorphisation); its −15% node cut may flip positive at **n=18**
-(deeper tree amortises the per-node cost). The throughput question is open: M/s drops as K rises (`getK` is
-real per-node compute), and the perf trace shows the compiler **auto-vectorizes the code-build for K≤9 but
-falls to scalar for K≥10** — the recovery lever is compiler-driven vectorization, NOT hand SIMD (the −19%
-scorecard negative). See [getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md).
+**Current focus (--14, SUPERSEDES the old "K=12 optimum"):** the W_K crossover **moved to the u128 ceiling K=16**
+once the **pext-per-row code-build** made the deep getK builders cheap. Raising K now pays the whole way up
+(n=14 det node cut K=12 7.9M → K=16 4.0M = −50%, barely diminishing — K=15→16 was −22%); **K=16 is the new
+default**, clean 17 GB **33.9s / −35% vs K=12**. The old "K=13 net-negative / compiler-vectorize-K≤9 / hand-SIMD-
+is-the-−19%-negative" framing is **obsolete** — pext *is* the win the proposal said it couldn't find (it had
+only measured a scalar reshape, never pext at K=12+ scale). **NEXT lever for 30s = extend W_K past K=16** to
+256-bit (4×u64) labelled codes (K(K-1)/2 ≤ 256 ⇒ K≤23; the deep tail is pc 13–21, so K≈18–20 ≈ resolves it
+whole, and the node cut hasn't diminished). Blocker: the `2^K` induced-mask table needs **runtime init** past
+K=16 (K=18 = 8 MB, K=20 = 32 MB) — const-eval + binary-size cap it at 16. Then the **getK evaluator** (now ~35%
+of cycles, the get9/get10 leaves of the nested sweep) and the **memory stall / MLP**. Degree-sort restructure =
+WASH (reverted). See [getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md) (its §4/§5 negative
+is now obsolete — pext flipped it).
 Lower-priority: the **memory levers** (MLP gets, BuRR, 1 GB hugepages) — W12 erased the pc 9–12 probes (~the
 profiler's whole probe cost); remaining cost is pc≥13. **Parallelism deficit — measured-CLOSED for DFS-local
 approaches** (2026-06-19--5): the giant-root tail (51% core util, ~96% of wall) is **transposition-bound + OR-spine
