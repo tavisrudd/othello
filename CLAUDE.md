@@ -83,9 +83,9 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense + M_ORD_W** | **~57s** (59s meas) | 0.92 B | **★ NEW #1, SUB-60**: dynamic ordering + ETC (`QUEENS_ORD=2`, gated) — −38% vs M_WAVE |
-| iso-dense + M_ORD   | 1m02s      | 1.14 B  | dynamic move ordering alone (`QUEENS_ORD=1`, gated) — −33% vs M_WAVE; no ETC |
-| iso-dense (W12)     | 1m32s      | 1.70 B  | default now: W12 + fused M_WAVE ETC cutoff; `QUEENS_WAVE=0` off       |
+| **iso-dense + M_ORD_W** | **~57s** (59s meas) | 0.92 B | **★ #1, SUB-60, DEFAULT now**: dynamic ordering + ETC — −38% vs M_WAVE; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
+| iso-dense + M_ORD   | 1m02s      | 1.14 B  | dynamic move ordering alone (`QUEENS_ORD=1`) — −33% vs M_WAVE; no ETC |
+| iso-dense (W12) M_WAVE | 1m32s   | 1.70 B  | the prior default (now `QUEENS_ORD=0`): W12 + fused M_WAVE ETC cutoff  |
 | iso-dense, WAVE off | 1m39s      | 2.0 B   | W12 only (the A/B control): pc 9–12 from W0..W8 via `pext` (u128 W12) |
 | iso-dense (W11)     | 1m44s      | 2.5 B   | W_K to K=11 (u64 codes)                                               |
 | iso-dense (W9)      | 2m12s      | 4.0 B   | W9 only: pc==9 from W0..W8                                            |

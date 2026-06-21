@@ -701,6 +701,19 @@ impl IsoFlat {
         // exact `--distinct` gate. `QUEENS_WAVE=0` disables, `=1` forces. iso-flat/iso-window keep it off
         // (the byte-identical A/B control stays intact).
         s.wave = !matches!(std::env::var("QUEENS_WAVE").as_deref(), Ok("0"));
+        // Dynamic move ordering + ETC (`M_ORD_W`) is the iso-dense DEFAULT — the SUB-60 record
+        // (−38% vs the M_WAVE default): re-sort each node's moves by current available-block degree
+        // (`child0.popcount()` ascending = most-forcing first; instant-win sorts first ⇒ earliest
+        // cutoff), with the M_WAVE ETC cut on top. The dispatch checks `ord` before `wave`, so this
+        // wins; `wave` stays on as the `QUEENS_ORD=0` fallback. Mirrors `wave`/`warm_restart`:
+        //   (unset) → M_ORD_W ;  QUEENS_ORD=0 → M_WAVE ;  =1 → M_ORD (ordering, no ETC) ;  =2 → M_ORD_W.
+        // `QUEENS_ORD_ETC=1` still forces ETC on (the A/B harness toggle: ord fixed, ETC 0/1).
+        // Verdict-preserving (changes the node count *by design* — an earlier cutoff of the same
+        // value — so it is **not** part of the exact `--distinct` gate). iso-flat/iso-window keep it
+        // off (their `from_tt_with_window` defaults are unchanged ⇒ control + `--distinct` intact).
+        s.ord = !matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("0"));
+        s.ord_etc = !matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("0") | Ok("1"))
+            || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1");
         s
     }
 
