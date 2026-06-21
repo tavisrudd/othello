@@ -225,14 +225,35 @@ fn iso_strip<const K: usize>(iso: u16) -> Option<(usize, u16)> {
 }
 
 #[inline]
-fn slots(k: usize) -> usize {
-    1usize << (k * (k - 1) / 2)
+const fn slots(k: usize) -> usize {
+    // `k < 2` ⇒ a single-slot table (the empty / single-vertex graph); guard the `k - 1`
+    // so const-eval of [`table_offsets`] doesn't underflow at `k == 0`.
+    let edges = if k < 2 { 0 } else { k * (k - 1) / 2 };
+    1usize << edges
 }
 
 #[inline]
-fn words(k: usize) -> usize {
+const fn words(k: usize) -> usize {
     slots(k).div_ceil(64)
 }
+
+/// Word offset of each `W{k}` table inside the flat arena (cumulative [`words`]); the final
+/// entry `TABLE_OFF[W8_K + 1]` is the arena's total word count. The complete `W0..=W8` tables
+/// are concatenated into ONE contiguous `&'static [u64]` so a leaf lookup is a single load —
+/// `arena[TABLE_OFF[k] + code/64]` — instead of the `&[Box<[u64]>]` double indirection
+/// (load the box fat-pointer, then the word) plus its bounds-check `len` load. Every `getK`
+/// evaluator bottoms out in [`DenseW8::get`], so this shortens the critical chain of the whole
+/// dense bucket (~36 % of search cycles).
+const fn table_offsets() -> [usize; W8_K + 2] {
+    let mut o = [0usize; W8_K + 2];
+    let mut k = 0;
+    while k <= W8_K {
+        o[k + 1] = o[k] + words(k);
+        k += 1;
+    }
+    o
+}
+const TABLE_OFF: [usize; W8_K + 2] = table_offsets();
 
 #[inline]
 fn bit_get(bits: &[u64], idx: usize) -> bool {
@@ -368,21 +389,37 @@ fn build_table(k: usize, tables: &[Box<[u64]>]) -> Box<[u64]> {
 /// The value is invariant under relabelling, so callers may use any deterministic
 /// labelling of the 8 live board squares and still get the correct result.
 pub(crate) struct DenseW8 {
-    tables: &'static [Box<[u64]>],
+    /// The complete `W0..=W8` win/loss bitsets concatenated into one contiguous allocation,
+    /// indexed via [`TABLE_OFF`]. One flat `&'static [u64]` (not `&[Box<[u64]>]`) so the hot
+    /// leaf [`get`](Self::get) is a single load with no pointer-chase or bounds check.
+    arena: &'static [u64],
 }
 
 impl DenseW8 {
     pub(crate) fn build() -> Self {
-        static TABLES: OnceLock<Vec<Box<[u64]>>> = OnceLock::new();
-        let tables = TABLES.get_or_init(build_tables);
-        DenseW8 { tables }
+        static ARENA: OnceLock<Box<[u64]>> = OnceLock::new();
+        let arena: &'static [u64] = ARENA.get_or_init(|| {
+            let tables = build_tables();
+            let mut flat = vec![0u64; TABLE_OFF[W8_K + 1]].into_boxed_slice();
+            for k in 0..=W8_K {
+                let off = TABLE_OFF[k];
+                flat[off..off + tables[k].len()].copy_from_slice(&tables[k]);
+            }
+            flat
+        });
+        DenseW8 { arena }
     }
 
     #[inline]
     pub(crate) fn get(&self, k: usize, code: usize) -> bool {
         debug_assert!(k <= W8_K);
         debug_assert!(code < slots(k));
-        bit_get(&self.tables[k], code)
+        // SAFETY: every caller passes a child `code` of a `k`-vertex subgraph (`code < slots(k)`),
+        // so `TABLE_OFF[k] + code/64 < TABLE_OFF[k + 1] <= arena.len()`. The flat arena removes the
+        // `Box<[u64]>` fat-pointer load + bounds-check `len` load that `&[Box<[u64]>]` indexing
+        // emitted on this hot leaf (the bottom of every getK sweep).
+        let w = TABLE_OFF[k] + (code >> 6);
+        (unsafe { *self.arena.get_unchecked(w) } >> (code & 63)) & 1 != 0
     }
 
     /// Dispatch to the right `getK` for a runtime `k` — used by the isolated-vertex pair-strip's
@@ -690,10 +727,7 @@ impl DenseW8 {
     }
 
     pub(crate) fn bytes(&self) -> u64 {
-        self.tables
-            .iter()
-            .map(|t| t.len() * std::mem::size_of::<u64>())
-            .sum::<usize>() as u64
+        std::mem::size_of_val(self.arena) as u64
     }
 }
 
@@ -709,6 +743,14 @@ fn build_tables() -> Vec<Box<[u64]>> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Cached `W0..=W8` tables in the `Box<[u64]>` form the scalar reference [`wins_rec`] reads.
+    /// Built independently of the production flat [`DenseW8`] arena (preserves the cross-check),
+    /// cached so the 2^28-code W8 build runs once across all `direct_w*` tests.
+    fn ref_tables() -> &'static [Box<[u64]>] {
+        static T: OnceLock<Vec<Box<[u64]>>> = OnceLock::new();
+        T.get_or_init(build_tables)
+    }
 
     #[test]
     fn dense_w8_known_small_prefix() {
@@ -757,31 +799,31 @@ mod tests {
             let c16 = sparse & ((1u128 << 120) - 1);
             assert_eq!(
                 w8.get16(c16),
-                wins_rec(16, c16, w8.tables),
+                wins_rec(16, c16, ref_tables()),
                 "get16 sparse {c16:#x}"
             );
             let c14 = sparse & ((1u128 << 91) - 1);
             assert_eq!(
                 w8.get14(c14),
-                wins_rec(14, c14, w8.tables),
+                wins_rec(14, c14, ref_tables()),
                 "get14 sparse {c14:#x}"
             );
             let c12 = sparse & ((1u128 << 66) - 1);
             assert_eq!(
                 w8.get12(c12),
-                wins_rec(12, c12, w8.tables),
+                wins_rec(12, c12, ref_tables()),
                 "get12 sparse {c12:#x}"
             );
             let c11 = (sparse as u64) & ((1u64 << 55) - 1);
             assert_eq!(
                 w8.get11(c11),
-                wins_rec(11, c11 as u128, w8.tables),
+                wins_rec(11, c11 as u128, ref_tables()),
                 "get11 sparse {c11:#x}"
             );
             let c9 = (sparse as u64) & ((1u64 << 36) - 1);
             assert_eq!(
                 w8.get9(c9),
-                wins_rec(9, c9 as u128, w8.tables),
+                wins_rec(9, c9 as u128, ref_tables()),
                 "get9 sparse {c9:#x}"
             );
         }
@@ -792,7 +834,7 @@ mod tests {
         let w8 = DenseW8::build();
         for x in 0..10_000u64 {
             let code = x.wrapping_mul(0x9E37_79B9) & ((1u64 << 36) - 1);
-            assert_eq!(w8.get9(code), wins_rec(9, code as u128, w8.tables));
+            assert_eq!(w8.get9(code), wins_rec(9, code as u128, ref_tables()));
         }
     }
 
@@ -803,7 +845,7 @@ mod tests {
             let code = x.wrapping_mul(0x9E37_79B9_7F4A_7C15) & ((1u64 << 45) - 1);
             assert_eq!(
                 w8.get10(code),
-                wins_rec(10, code as u128, w8.tables),
+                wins_rec(10, code as u128, ref_tables()),
                 "W10 mismatch at code {code:#x}"
             );
         }
@@ -816,7 +858,7 @@ mod tests {
             let code = x.wrapping_mul(0x9E37_79B9_7F4A_7C15) & ((1u64 << 55) - 1);
             assert_eq!(
                 w8.get11(code),
-                wins_rec(11, code as u128, w8.tables),
+                wins_rec(11, code as u128, ref_tables()),
                 "W11 mismatch at code {code:#x}"
             );
         }
@@ -832,7 +874,7 @@ mod tests {
             let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 66) - 1);
             assert_eq!(
                 w8.get12(code),
-                wins_rec(12, code, w8.tables),
+                wins_rec(12, code, ref_tables()),
                 "W12 mismatch at code {code:#x}"
             );
         }
@@ -847,7 +889,7 @@ mod tests {
             let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 78) - 1);
             assert_eq!(
                 w8.get13(code),
-                wins_rec(13, code, w8.tables),
+                wins_rec(13, code, ref_tables()),
                 "W13 mismatch at code {code:#x}"
             );
         }
@@ -862,7 +904,7 @@ mod tests {
             let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 91) - 1);
             assert_eq!(
                 w8.get14(code),
-                wins_rec(14, code, w8.tables),
+                wins_rec(14, code, ref_tables()),
                 "W14 mismatch at code {code:#x}"
             );
         }
@@ -877,7 +919,7 @@ mod tests {
             let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 105) - 1);
             assert_eq!(
                 w8.get15(code),
-                wins_rec(15, code, w8.tables),
+                wins_rec(15, code, ref_tables()),
                 "W15 mismatch at code {code:#x}"
             );
         }
@@ -892,7 +934,7 @@ mod tests {
             let code = ((lo as u128) | ((hi as u128) << 64)) & ((1u128 << 120) - 1);
             assert_eq!(
                 w8.get16(code),
-                wins_rec(16, code, w8.tables),
+                wins_rec(16, code, ref_tables()),
                 "W16 mismatch at code {code:#x}"
             );
         }
