@@ -11,30 +11,96 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
-## ⇒ NEXT SESSION (as of --12; the thread has long since pivoted past the title)
+## ⇒ NEXT SESSION (as of --13 — THE 50→40→30s GRIND. BE RELENTLESS.)
 
-**State:** the **breakthrough is dynamic move ordering** — re-sort each node's moves by *current*
-available-block degree (`child0.popcount()` ascending), gated `M_ORD`/`QUEENS_ORD=1`; +ETC =
-`M_ORD_W`/`QUEENS_ORD=2`. **Leaderboard #1 = M_ORD_W: ~57s / 0.92 B nodes (SUB-60, −38% vs the old M_WAVE
-record).** All gated off; `M_WAVE` is still the shipped default. This came out of **closing Approach B**
-(sorted-frontier wave + dedup, both halves measured-negative) — whose +94% move-ordering-tax finding *pointed
-at* improving the ordering. Method banked: **n=14/single runs lie; only the interleaved n=16 A/B is trustworthy**
-(2b-0 read +13% at n=14 but +94% at n=16; dynamic ordering held −31%→−34%).
+> **MISSION (user, drill-sergeant — channel this energy every turn):** drive n=16 to **30s**. **Do NOT give
+> up. Do NOT wimp out. Do NOT get stuck. Do NOT declare a floor or a "hard limit" — that judgment is the
+> user's alone (CLAUDE.md).** The user is asleep and wants to *wake up to progress, not excuses.* When you hit
+> a wall, reason *through* it or *around* it. **Optimize at EVERY level — do NOT skip micro-opts; go all the
+> way down to `perf annotate` ASM-instruction tweaks.** Big structural levers AND 1% shaves; they stack. Hobby
+> project, no users — **work on a branch / spin a new solver variant if you're worried about main.** Keep
+> going until 30s or you've genuinely exhausted every lever — then find another. Goalposts escalate: 50→40→30.
 
-**Do, in priority order:**
-1. **PROMOTE M_ORD_W → the iso-dense default** (the −38% win; user-gated — a default + validation-gate change).
-   Set `ord`+`ord_etc` default-on in `new_dense` (mirror `wave`/`warm_restart`, env `QUEENS_ORD=0` to disable);
-   re-run the gate under the new default (`solver_lineage_agrees` + n=12/14 verdicts; iso-flat `--distinct`
-   unaffected). The A/B already confirms the speedup. Update the leaderboard "default" tag + the validation-gate
-   wording in the project CLAUDE.md.
-2. **Kill the triple-`child0` redundancy** (the real remaining per-node overhead — the ETC's +14.6% cyc/node and
-   the sort's +8.5% are mostly this). `sort_moves_by_degree`, the M_WAVE gather, and the descent each recompute
-   `child0 = avail.and_not(att[sq][0])` (+ `att_for8`) per move — 3×. Compute once (in the sort), reuse in
-   gather+descent. Watch the stack: caching `child0` (`Bits`=32 B) for all `MAXV` moves is ~8 KB/frame on the
-   deep recursion — store only what's needed (e.g. popcount + a compact child0 for the sorted prefix), or fuse
-   sort+gather into one pass. Payoff is a few-% cyc/node ⇒ more sub-60 margin / toward the ~45–60 s compute floor.
-3. **#5 warmup re-sweep** (cheap, no code) — re-tune `QUEENS_WARM_RESTART`/`WARM_SECS`/stagger now that earlier
-   cutoffs change when useful TT entries land; the old optimum predates dynamic ordering.
+**Where we stand (clean 17 GB, current `main` @ `8f00881`):** n=16 **cyc/node is the metric now** (TT-size- and
+node-noise-independent; wall is ±parallel-node-noisy). Search wall **~52s clean / ~49s best round** (was
+57.58s), **0.94 B nodes**. **Cumulative cyc/node −12.5% vs the M_ORD_W baseline this session.** Close to 50s;
+the grind to 40→30 continues.
+
+**THE METHOD THAT'S WORKING — keep doing exactly this:** perf-record the *real* n=16 run (`perf record -F 999
+-o x.data -- ./target/release/queens solve 16 iso-dense --to-file x.json`) → **`perf report --sort=symbol`
+(aggregate across all 24 workers, NOT the per-thread default)** → biggest bucket → **`perf annotate -s <fn>`
+to the hot instructions** → kill it → A/B. Harnesses (committed): two-binary `scripts/ab2.sh <n> <binA> <binB>
+[rounds]`, env-value `scripts/abenv.sh <n> <bin> <ENV> <vA> <vB> [rounds]` — both 12 GB TT, cyc/node from
+`perf stat -o`, --to-file JSON, fresh tmux window (`queens:absort`), poll the JSON file (NOT the pane —
+completion markers false-match the command echo). Save each winning binary aside (`/tmp/queens-*`) as the next
+A/B baseline. **n=14 single-thread = build-polluted (26s serial dense build) — useless for cyc/node; use it
+only for the deterministic byte-identical node-count gate (7,886,898).**
+
+**BANKED THIS SESSION (committed, gate-green, n=14 byte-identical 7,886,898):**
+- `fde7baf` **M_ORD_W → iso-dense DEFAULT** (the −38% SUB-60 win is now production; `QUEENS_ORD=0`→M_WAVE,
+  `=1`→M_ORD). Leaderboard "default" tag updated in project CLAUDE.md.
+- `4ff7bd9` **inlined stable insertion sort** for the degree order → killed std driftsort machinery
+  (`insertion_sort_shift_left`+`quicksort`+`sort8_stable`+`drift`+`memmove`+ the FnMut comparator `call_mut`),
+  which the profile showed was **~30% of total search cycles** — the single biggest find. **−10.9% wall /
+  −8.5% cyc/node.** (Stable insertion sort ⇒ byte-identical node count; small move lists at the deep tail.)
+- `8f00881` four stacked cyc/node wins: **inline-each** (`Bits::each` was outlined → `call_mut`, −1.4%),
+  **sort-fuse** (`sort_moves_by_degree` now emits the sorted `degree[]`; the M_ORD_W gather + fused descent
+  read it instead of recomputing `child0.popcount()`, and the gather skips the `and_not` for cheap children;
+  const-folds per MODE), **prefetch-reorder** (issue `prefetch_h` for the recurse child BEFORE `child_orient`
+  — the slot route is already in the gather SoA, buys ~30 cyc latency-hiding distance) [sort-fuse+prefetch =
+  **−3.1% cyc/node** together], **startup-overlap** (build dense ‖ TT alloc — **MEASURED WASH**: both
+  memory-bandwidth-bound, TT-zeroing competes with the W8 build; harmless, the commit msg overstated it).
+
+**THE PROFILE (post-insertion-sort, n=16, aggregated — YOUR TARGET MAP):**
+- `wins_inc` **57.6%** = recursion + the inlined sort-compute (~13%) + the ETC gather + the descent + a
+  **15.6%-on-ONE-instruction `test $0x1,%al` TT-probe-result STALL** (the DRAM/memory floor; the entry probe).
+- **getK builders (w8..w12_get) 20.7% + evaluators (get9..12) 8.7% = ~29%** — the scalar K²/2 `row.get(vj)`
+  bit-test code-build. Compiler vectorizes K≤9, falls to scalar K≥10. **Hand-SIMD AND uniform-reshape both
+  measured-DEAD** ([getk-throughput proposal](../proposal-2026-06-19-getk-throughput.md) §4/§5). OPEN: a
+  *fundamentally different* code-build, attacked at the asm level (user explicitly wants this).
+- `band_entry` 4.9%, `child_orient` 2.5% (the 7 `and_not`s — verify it vectorizes to AVX-512 `zmm`).
+
+**NEXT LEVERS — STACK THEM ALL (priority order; channel-Fermi each before coding):**
+1. **K=13 default decision (do FIRST — nearly free).** Under M_ORD_W, K=13 **FLIPPED to a net win** (was +4%
+   under M_WAVE): n=16 12 GB A/B = −14.8% nodes / +11.5% cyc/node / **−2.9% wall** (n=14 deterministic −13.9%
+   nodes). **BUT TT-size-sensitive** (12 GB has more eviction → bigger node cut; 17 GB memoizes more → smaller
+   cut). **A/B K=12 vs K=13 at ~15–17 GB before defaulting** (`abenv.sh 16 <bin> QUEENS_DENSE_K 12 13 3`,
+   tt≈1850000000). If it holds → default (clamp `12`→`13` in `new_dense`).
+2. **K=14/K=15 (implement, mechanical).** Follow `get13`/`w13_get`/`W13_MASKS` exactly (K≤16 fits `u128`:
+   K(K−1)/2 ≤ 120 bits). If K=13 holds, K=14 likely continues (~−13% nodes/layer, diminishing but stackable).
+   Add the `direct_w14_matches_scalar_recurrence` test + the `DK==14` dispatch/instantiation arms.
+3. **★ MLP on the explicit-stack frontier (`wins_inc_iter`, gated `QUEENS_ITER` — already built,
+   throughput-neutral infra). THE BIG ONE for 30s.** The 15.6% TT-probe stall is the memory floor; a DFS
+   can't hide it. The materialized frontier can: hold K frames *probed-not-expanded* → K DRAM gets in flight →
+   overlap the ~165 cyc latency. Handoff's named "not-yet-tried" lever, est −10%+. Heavy but the user wants 30s
+   — this is the path *through* the memory wall, not around it.
+4. **getK code-build at the ASM level (29%!).** `perf annotate w12_get`/`w11_get`/`w10_get` instruction by
+   instruction — the `bt`/`row.get(vj)` per-pair scatter, the verts-scatter. Reshapes are dead, but the user
+   wants asm-level tweaks; find a *different* attack (e.g. is the `dense8.get12` child sweep's per-child
+   `pext128` + table load reducible? the `extract_adj128`?).
+5. **Warmup re-sweep (free, env).** `QUEENS_WARM_SECS`(2)/`WARM_STAGGER_MS`(500)/`WARM_RESTART` — the optimum
+   predates dynamic ordering; `abenv.sh 16 <bin> QUEENS_WARM_SECS 2 3 3`, etc.
+6. **Micro-opts the user explicitly wants (don't skip ANY level):** M_ORD plain-descent sort-fuse (only
+   M_ORD_W got fused — M_ORD's plain descent at the `for &sq in moves` ~line 1936 still recomputes), the
+   `band_entry` tiny-code build, `child_orient` AVX-512, the M_WAVE_C/gated arms. Each ~1% — they stack.
+7. **Better dynamic ordering (node-count, speculative — A/B hard, history/effective-degree are documented-NEG).**
+8. **★ ETC-economics diagnostics (ChatGPT, --13) — measure WHERE to TARGET the ETC/ordering work.** The ETC
+   gather (eager key-build + batch probe of *all* recurse children) is a big chunk of `wins_inc`'s 57.6%. Add a
+   gated `count`-style instrumentation pass (monomorphised `const HIST`, zero prod cost — the established
+   pattern) to map where the cut value concentrates, then aim the optimization (lazy probe / band-specific
+   probe / better ordering) at that region:
+   - **first-losing-child RANK, before vs after ordering** (THE key one): histogram the descent position of the
+     first child-loss (the cutoff). Tells you where to target — e.g. if cuts cluster at rank 1 post-ordering,
+     a *top-k* / lazy ETC concentrated on the front captures them cheaper; if spread, the full batch earns its
+     keep. (#4 top-k was measured-dead under M_WAVE — RE-MEASURE under M_ORD_W, the rank distribution shifted.)
+   - **ETC cutoffs by popcount band** (which pc the ETC saves work at → target the probe there), **by root** /
+     **by producer root** (concentrated in the giant root or spread → where to focus), **by warmup-generated
+     entries** (does the 2s warm pass create the entries the ETC later cuts on? — ties to the warmup re-sweep).
+   - **ETC failed-probe cost** (probes that found neither loss nor empty): count them + their key-build cycles
+     by band — shows where the probe budget goes, so you can target the gather cost reduction at the right pc.
+
+**Negative this session (note the untried angle):** startup-overlap = WASH (both memory-bw-bound; untried:
+overlap the build with the *search warm phase* instead, or skip MADV_COLLAPSE and let THP do it lazily).
 
 **Measured-negative AS BUILT (gated off; NOT closed forever — record the exact build tried + the untried angle
 that could flip it; several of our best wins were net-negative until tuned, e.g. unfused M_WAVE +4.9% → fused
@@ -281,6 +347,34 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       gate to re-validate under the new default (lineage + verdicts; A/B already confirms the −38% win).
 
 ## Handoff Notes
+
+### Session --13 (2026-06-20, `mi`, autonomous overnight): the 50→40→30s grind — M_ORD_W default + a cyc/node stack
+
+**Session** UUID `1bc5298d-9422-4881-8735-23487241f43e`. User mission (relentless, escalating 50→40→30s; optimize
+every level incl. asm; branch/variant freely; *wake up to progress not excuses*). Resumed `go mi`. Three commits,
+all gate-green (n=14 byte-identical 7,886,898; n=12 SECOND; clippy/fmt/test).
+
+**Landed:** `fde7baf` M_ORD_W→iso-dense DEFAULT (the prior-session −38% SUB-60 win is now production; leaderboard
++ CLAUDE.md updated). `4ff7bd9` **inlined stable insertion sort** — the headline find: perf-record + aggregate
+`perf report --sort=symbol` showed the dynamic-order sort family (`sort_moves_by_degree` + std driftsort
+`insertion_sort_shift_left`/`quicksort`/`sort8_stable`/`drift`/`memmove` + the FnMut comparator `call_mut`) was
+**~30% of total search cycles**; replacing std `sort_by` with an inlined closure-free stable insertion sort
+(small move lists at the deep tail) = **−10.9% wall / −8.5% cyc/node**, byte-identical order. `8f00881` four more:
+inline-each (−1.4%), sort-fuse + prefetch-reorder (−3.1% together), startup-overlap (WASH — memory-bw-bound).
+
+**Measured (clean 17 GB, current main):** n=16 search **~52s clean / ~49s best round** (was 57.58s), 0.94 B nodes,
+SECOND. **Cumulative cyc/node −12.5%** vs the M_ORD_W baseline. (cyc/node is the trustworthy metric — wall is
+±parallel-node-noisy; n=14 single-thread is build-polluted, gate-only.) **K=13 found to FLIP to net-positive
+under M_ORD_W** (12 GB A/B −14.8% nodes/−2.9% wall; was +4% under M_WAVE) — TT-size-sensitive, A/B at 17 GB before
+defaulting.
+
+**Tooling added (committed):** `scripts/ab2.sh` (two-BINARY interleaved A/B, for code-vs-code), `scripts/abenv.sh`
+(env-VALUE A/B, e.g. `QUEENS_DENSE_K 12 13`). Both: 12 GB TT, cyc/node from `perf stat -o`, --to-file JSON.
+
+**NEXT:** see the rewritten **⇒ NEXT SESSION (--13)** block at the top — K=13 default decision, K=14/15, **MLP on
+the explicit-stack frontier** (the 15.6% TT-probe stall = the big 30s lever), getK asm-tweaks, the **ChatGPT
+ETC-economics diagnostics** (first-losing-child rank before/after ordering — decides whether to trim the ETC
+gather), warmup re-sweep, the M_ORD plain-descent sort-fuse. **BE RELENTLESS.**
 
 ### Session --12 (2026-06-20, `mi`): Approach B Phase 2a — offload sizing built + measured GO
 

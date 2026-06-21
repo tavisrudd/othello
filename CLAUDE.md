@@ -11,7 +11,13 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
-**LATEST (--12): ★ DYNAMIC MOVE ORDERING = −30% wall at n=16** (gated `M_ORD`/`QUEENS_ORD`) — the biggest single
+**LATEST (--13): THE 50→40→30s GRIND (user mission: BE RELENTLESS, optimize every level incl. asm).** M_ORD_W
+is now the DEFAULT; banked a stack of cyc/node wins — **inlined insertion sort** (the dynamic-order sort was
+**~30% of total cycles** via std driftsort machinery; −10.9% wall), sort-fuse, inline-each, prefetch-reorder =
+**−12.5% cyc/node** (57.58→~52s clean / ~49s best). NEXT = K=13 default (flipped +net under M_ORD_W), K=14/15,
+**MLP on the explicit-stack frontier** (the 15.6% TT-probe stall = the big lever for 30s), getK asm-tweaks. See
+the handoff's "⇒ NEXT SESSION (--13)" block. **--12 (historical): ★ DYNAMIC MOVE ORDERING = −30% wall** (gated
+`M_ORD`/`QUEENS_ORD`) — the biggest single
 lever since W12, and the constructive payoff of closing Approach B. The closure proved **move ordering is worth
 ~2× node reduction** (any frontier reorder forfeiting it costs +94%); so we improved the ordering itself: replace
 the **static** `q.order` (descending *empty-board* attack degree) with **dynamic** ordering — re-sort each node's
@@ -83,7 +89,7 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense + M_ORD_W** | **~57s** (59s meas) | 0.92 B | **★ #1, SUB-60, DEFAULT now**: dynamic ordering + ETC — −38% vs M_WAVE; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
+| **iso-dense + M_ORD_W** | **~52s** clean / ~49s best | 0.94 B | **★ #1 DEFAULT**: dynamic ordering + ETC + (--13) inlined insertion sort / sort-fuse / inline-each / prefetch-reorder = **−12.5% cyc/node**; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
 | iso-dense + M_ORD   | 1m02s      | 1.14 B  | dynamic move ordering alone (`QUEENS_ORD=1`) — −33% vs M_WAVE; no ETC |
 | iso-dense (W12) M_WAVE | 1m32s   | 1.70 B  | the prior default (now `QUEENS_ORD=0`): W12 + fused M_WAVE ETC cutoff  |
 | iso-dense, WAVE off | 1m39s      | 2.0 B   | W12 only (the A/B control): pc 9–12 from W0..W8 via `pext` (u128 W12) |
