@@ -66,6 +66,7 @@ const M_SEG: u8 = 2; // route by per-popcount band (`QUEENS_TT_SEGMENT=1`)
 const M_PROF: u8 = 3; // stratified profiler: rdtsc-time the TT get/put per pc (`QUEENS_PROF=1`)
 const M_WAVE: u8 = 4; // ETC + sorted-batch child probe (`QUEENS_WAVE=1`); A'' Phase-1 experiment
 const M_SIZE: u8 = 5; // A'' Phase-2a offload sizing: tap the recurse-arm probe stream (`QUEENS_SIZE=1`)
+const M_SIZE_WAVE: u8 = 6; // as M_SIZE but ON TOP of the M_WAVE ETC cut — sizes the post-cut residual (`QUEENS_SIZE=2`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -496,6 +497,10 @@ pub struct IsoFlat {
     /// sample into [`size_sample`](Self::size_sample) (post-sort row-buffer locality). Off = byte-
     /// identical `M_NORMAL`; the tap DCEs to nothing on every other `MODE`.
     size: bool,
+    /// `QUEENS_SIZE=2`: run the sizing tap ON TOP of the M_WAVE ETC cut (`M_SIZE_WAVE`), so the
+    /// measured stream is the post-cut **residual** Approach B offloads on top of the default — vs
+    /// `QUEENS_SIZE=1` (`M_SIZE`), the WAVE-off pre-cut upper bound. Implies `size`.
+    size_wave: bool,
     /// Shared per-popcount recurse-arm probe count (frontier width), merged from each worker's
     /// [`SIZE_ACC`] at drain. Only populated when `size`.
     size_w: Box<[AtomicU64]>,
@@ -737,7 +742,8 @@ impl IsoFlat {
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
             wave: std::env::var("QUEENS_WAVE").as_deref() == Ok("1"),
-            size: std::env::var("QUEENS_SIZE").as_deref() == Ok("1"),
+            size: matches!(std::env::var("QUEENS_SIZE").as_deref(), Ok("1") | Ok("2")),
+            size_wave: std::env::var("QUEENS_SIZE").as_deref() == Ok("2"),
             size_w: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             size_hll: Hll::new(SIZE_HLL_P),
             size_sample: Mutex::new(Vec::new()),
@@ -1380,7 +1386,14 @@ impl IsoFlat {
         }
         let distinct = self.size_hll.estimate();
         let dedup = 1.0 - (distinct / total as f64).min(1.0);
-        eprintln!("(A'' Phase-2a offload sizing — recurse-arm probe stream)");
+        eprintln!(
+            "(A'' Phase-2a offload sizing — recurse-arm probe stream, {})",
+            if self.size_wave {
+                "WAVE-on = post-ETC-cut residual (what B offloads on top of the default)"
+            } else {
+                "WAVE-off = pre-cut upper bound on offloadable work"
+            },
+        );
         eprintln!(
             "  per-pc frontier width (flat-TT probes the consumer streams), by available-pc:"
         );
@@ -1483,13 +1496,16 @@ impl IsoFlat {
         } else {
             avail.popcount()
         };
-        // A'' Phase-2a offload sizing (`M_SIZE` only; DCEs to nothing on every other `MODE`, so the
-        // control path is byte-identical). Every `wins_inc` entry performs exactly one flat-TT get
-        // below, so tapping here records the full recurse-arm probe stream the idle-core producer
+        // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
+        // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
+        // flat-TT get below, so tapping here records the recurse-arm probe stream the idle-core producer
         // (Approach B) would sort/dedup: per-pc width (frontier size by band), the probed canonical
         // key folded into a global HLL (distinct ⇒ the dedup ceiling), and a bounded route sample for
-        // the post-sort row-buffer-locality check. Cold, non-atomic per-worker accumulation.
-        if MODE == M_SIZE {
+        // the post-sort row-buffer-locality check. Cold, non-atomic per-worker accumulation. `M_SIZE`
+        // measures the WAVE-off stream (pre-ETC-cut upper bound); `M_SIZE_WAVE` also runs the M_WAVE
+        // ETC cut below, so it taps the post-cut **residual** stream B actually offloads on top of the
+        // default. (The ETC batch probes are not tapped — conservative: those add volume, not less.)
+        if MODE == M_SIZE || MODE == M_SIZE_WAVE {
             SIZE_ACC.with(|c| {
                 let mut a = c.borrow_mut();
                 a.w[node_pc as usize] += 1;
@@ -1561,7 +1577,8 @@ impl IsoFlat {
         // empty child); and on no cut the descent below **reuses** the stored descriptors instead of
         // rebuilding them. Verdict-preserving (the ETC cut is only ever an earlier return of the same
         // OR-node verdict). DCEs to nothing on every other `MODE` (control byte-identical).
-        if MODE == M_WAVE {
+        // `M_SIZE_WAVE` runs this same body (so its tapped stream is the post-cut residual B offloads).
+        if MODE == M_WAVE || MODE == M_SIZE_WAVE {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
             // SoA descriptor store, recurse children in move order (consumed in order by the descent).
             // `wk` keeps the full child key so the `COUNT=true` HLL path is exact (production
@@ -2612,10 +2629,15 @@ impl IsoFlat {
             // DCE drops the dead arms — no instantiation blow-up).
             let mode = if WINDOW && !ORACLE && !COUNT {
                 // `size` is an explicit cold measurement (like `prof`); it wins over the production
-                // `wave` default so `QUEENS_SIZE=1` alone measures the WAVE-off probe stream — the
-                // full frontier before the ETC cut, the upper bound on what Approach B can offload.
+                // `wave` default. `QUEENS_SIZE=1` (`M_SIZE`) measures the WAVE-off probe stream — the
+                // full frontier before the ETC cut, the upper bound on what Approach B can offload;
+                // `QUEENS_SIZE=2` (`M_SIZE_WAVE`) taps on top of the ETC cut = the post-cut residual.
                 if self.size {
-                    M_SIZE
+                    if self.size_wave {
+                        M_SIZE_WAVE
+                    } else {
+                        M_SIZE
+                    }
                 } else if self.prof {
                     M_PROF
                 } else if self.segment {
@@ -2633,6 +2655,9 @@ impl IsoFlat {
             let order8 = self.order8(q);
             let won = match mode {
                 M_SIZE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SEG => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SEG>(

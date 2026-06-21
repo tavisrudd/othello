@@ -215,12 +215,31 @@ The same-line/same-row figures are a **floor**: the 4 M sample spreads slots 375
 sorts a much larger frontier chunk → packs denser → trends to fully sequential. **⇒ a θ exists where off-core
 sort+dedup pays ⇒ GO to Phase 2b.**
 
+**WAVE-on residual (the post-ETC-cut stream B actually offloads) — measured, still GO.** Added `M_SIZE_WAVE`
+(mode 6, `QUEENS_SIZE=2`): the same tap, but it runs the M_WAVE ETC body so the tapped stream is the post-cut
+residual on top of the default (vs `=1`/`M_SIZE` = the pre-cut upper bound). Production still byte-identical
+(the M_WAVE guard `MODE == M_WAVE || MODE == M_SIZE_WAVE` folds to the unchanged `== M_WAVE` for production;
+control n=14 = 11,747,330). (The ETC batch probes are NOT tapped — conservative: those are *added* volume.)
+
+| residual stream (post-ETC-cut) | n=14 (1-thread, 1.07 GB TT) | n=16 (24-thread, 17 GB TT @ 54.8% fill) |
+|---|---|---|
+| total probes (vs the WAVE-off run) | 10.11 M (−21%) | **2,342 M** (−22% vs 2,997 M) |
+| pc 13–21 share | — | 87.5% |
+| **dedup ceiling** | 23.2% | **27.1%** |
+| same-DRAM-row after sort | 100% | **62.4%** (floor) |
+| same-cache-line after sort | 33.6% | 18.8% (floor) |
+
+The ETC cut shrinks the offloadable stream **−22%** and trims the dedup ceiling, but the residual is **still wide
+(2.34 B probes) + 27% dedup-able + sorts to 62% row-buffer hits** ⇒ B's prize survives on top of the default.
+**Caveat (load-confounded):** the WAVE-off run was 12 GB/70.9% fill, the WAVE-on 17 GB/54.8% — the sparser TT
+*alone* lowers dedup + locality, so the raw 38%→27% / 73%→62% deltas overstate the pure cut effect. The **clean**
+wave effect is the n=14 same-TT pair: dedup **31.7%→23.2% (−8.5 pts)**, locality ≈ unchanged. (To load-match at
+n=16, re-run WAVE-off at 17 GB — deferred; the GO is clear from the residual magnitude.)
+
 **NEXT = Phase 2b** (the gated `QUEENS_WAVE_B` SPSC producer/consumer pipeline on `wins_inc_iter`; start ONE
-producer + ONE consumer). **First 2b sub-step: re-run `QUEENS_SIZE` with WAVE *on*** (`QUEENS_SIZE` currently
-wins over `wave` and measures the pre-cut stream) to size the **residual** post-ETC-cut stream B actually
-offloads — the 38%/73% are the WAVE-off upper bound; B sits on top of M_WAVE's −16% cut, so the cut children are
-already gone. (Quick: make `M_SIZE` run the M_WAVE body + tap, or add a `QUEENS_SIZE` ⇒ keep `wave` variant.)
-Full 2b/2c scope + kill criteria in the proposal's "Approach B — DETAILED SCOPE".
+producer + ONE consumer; reuse the M_WAVE gather + `mlp_bench` sorted-stream loop). Multi-session architectural
+build — decide scope with the user. Full 2b/2c plan + kill criteria in the proposal's "Approach B — DETAILED
+SCOPE". Tooling banked: `QUEENS_SIZE=1` (pre-cut) / `QUEENS_SIZE=2` (post-cut residual), both gated/off in prod.
 
 **Method note:** the global-tap reframe is the "fail-cheap" move — it answered the gate at low build cost / zero
 solver risk (like probe #1), without the heavier per-subtree-HLL instrumentation. If 2a had failed (narrow /

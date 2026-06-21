@@ -210,10 +210,11 @@ with strictly complementary work — the structural property the work-stealing n
   — cheaper, safe (one tap line, no control-flow change), and decisive for the gate's two failure modes
   (frontier-too-narrow / dedup-too-low). The per-θ subtree breakdown (to pick θ for 2b) folds into 2b's
   design, informed by Phase-0a (≈4-consumer regime) + the work-stealing split-diag (pc-band subtree sizes).
-  **Result (n=16, WAVE-off upper-bound stream): 3.0 B probes · pc 13–21 = 88% · dedup ceiling 38.1% · 73%
-  same-DRAM-row after sort.** Gate **PASS** — wide + dedup-able + sorts to row-buffer locality. *(Open
-  refinement for 2b: re-measure the WAVE-**on** residual stream — B sits on top of the ETC cut, so the −16%
-  cut children are already gone; the 38%/73% are the pre-cut upper bound.)*
+  **Result (n=16): WAVE-off upper bound = 3.0 B probes · pc 13–21 = 88% · dedup 38.1% · 73% same-DRAM-row;
+  WAVE-on residual (`QUEENS_SIZE=2`/`M_SIZE_WAVE`, what B offloads on top of the default) = 2.34 B probes ·
+  dedup 27.1% · 62% same-row.** Gate **PASS** — even after the ETC cut the residual is wide + 27%-dedup-able +
+  sorts to row-buffer locality. (Clean wave effect = the n=14 same-TT pair, dedup 31.7%→23.2%; the n=16 raw
+  deltas are load-confounded, 12 GB vs 17 GB.)
 - **2b — build the pipeline (gated `QUEENS_WAVE_B`, byte-identical off).** Producer (gather/radix-sort/dedup/
   pack) + bounded SPSC + streaming consumer (prefetch-ahead/probe/cut/expand) on `wins_inc_iter`. Reuse the
   M_WAVE gather + the `mlp_bench` sorted-stream loop. Start with ONE producer + ONE consumer (prove the SPSC
@@ -290,13 +291,17 @@ overlaps the existing grouped-frontier proposal's territory.
 - **Phase 1 (Approach A = `M_WAVE`) — ✅ DONE + PROMOTED TO DEFAULT (2026-06-20--10/11).** Fused in-DFS ETC;
   −16% nodes / −2.7% wall; iso-dense default (`QUEENS_WAVE=0` disables). Captured −4% of the −16% (prep on
   the critical path) — the gap is Phase 2's prize.
-- **Phase 2a (offload sizing) — ✅ DONE (2026-06-20--12) — GO.** Gated cold `M_SIZE` (`QUEENS_SIZE`) probe-
-  stream tap. n=16: 3.0 B probes / pc 13–21 = 88% / dedup ceiling 38.1% / 73% same-DRAM-row after sort. Gate
-  PASS (see Status + the 2a sub-step). Production byte-identical; banked tooling, gated off.
-- **Phase 2b (build the pipeline) — NEXT.** The gated `QUEENS_WAVE_B` producer (gather/radix-sort/dedup/pack)
-  + bounded SPSC + streaming consumer (prefetch-ahead/probe/cut/expand) on `wins_inc_iter`, reusing the
-  M_WAVE gather + the `mlp_bench` sorted-stream loop. Start ONE producer + ONE consumer. **First sub-step:
-  re-run `QUEENS_SIZE` with WAVE on to size the residual (post-ETC-cut) stream B actually offloads.**
+- **Phase 2a (offload sizing) — ✅ DONE (2026-06-20--12) — GO.** Gated cold `M_SIZE` (`QUEENS_SIZE=1`,
+  pre-cut upper bound) + `M_SIZE_WAVE` (`QUEENS_SIZE=2`, post-cut residual B actually offloads) probe-stream
+  tap. n=16 pre-cut: 3.0 B probes / pc 13–21 = 88% / dedup 38.1% / 73% same-row. n=16 **post-cut residual:
+  2.34 B probes / dedup 27.1% / 62% same-row** — the ETC cut shrinks the offloadable stream −22% and trims
+  dedup, but the residual is still wide + 27%-dedup-able + sorts to row-buffer locality ⇒ **B's prize
+  survives on top of the default.** (Clean wave effect = the n=14 same-TT pair, dedup 31.7%→23.2%; the n=16
+  38%→27% / 73%→62% deltas are load-confounded, 12 GB vs 17 GB.) Gate PASS. Production byte-identical; banked.
+- **Phase 2b (build the pipeline) — NEXT (multi-session — decide scope with the user).** The gated
+  `QUEENS_WAVE_B` producer (gather/radix-sort/dedup/pack) + bounded SPSC + streaming consumer (prefetch-ahead/
+  probe/cut/expand) on `wins_inc_iter`, reusing the M_WAVE gather + the `mlp_bench` sorted-stream loop. Start
+  ONE producer + ONE consumer.
 - **Phase 2c (A/B + scale).** Interleaved n=16 A/B vs the M_WAVE default; metric cyc/node + wall + nodes.
   Gate as Phase 1, plus race-freedom of boundary publication; kill criteria in the detailed scope.
 - **Phase 3 (Approach C / n=18):** separate track; fold into the grouped-frontier proposal with BuRR-frozen
