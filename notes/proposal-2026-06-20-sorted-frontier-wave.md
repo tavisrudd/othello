@@ -2,7 +2,18 @@
 
 ## Status
 
-Draft — scoping artifact. Synthesis of session **2026-06-20--9**'s measurements
+**Phase 0 + Phase 1 (Approach A) are DONE; Approach B is scoped below (2026-06-20--11).**
+- **Phase 0a (microbench) — GREEN.** `tt.rs::mlp_bench::mlp_probe_threads_sweep`: the sorted-stream win
+  survives contention; memory saturates at **~780 M/s with ~4–8 streaming cores**; leverage is highest with
+  **few** consumers (5× @4 cores, eroding to ~2.8× @8). **~4 sorted-consumer cores out-probe the whole
+  current ~14-core random tail** — the design constraint for B (few hot consumers, many idle producers).
+- **Phase 1 (Approach A = `M_WAVE`/`QUEENS_WAVE`) — LANDED + PROMOTED TO DEFAULT.** The fused in-DFS ETC +
+  batch-probe is a measured net win at n=16 (**−16% nodes / −4% total cycles / −2.7% wall**) and is now the
+  **iso-dense default** (`8400134`; `QUEENS_WAVE=0` disables). **But A captured only −4% wall of its −16%
+  node cut** — the gather/probe prep costs **+22% cyc/node on the critical path**, eating most of the cut.
+  **That gap (−4% → toward −16%) is exactly Approach B's prize.**
+
+Synthesis of sessions **2026-06-20--9/10/11**'s measurements
 ([handoff](handoffs/2026-06-19-explicit-stack-frontier.md)). Builds on, does not duplicate, the
 [grouped-frontier DDD proposal](proposal-2026-06-18-grouped-frontier-ddd.md) (component-nimber framing,
 Phase-1 wall-bound) and the `ddd_bandwidth_bench` bandwidth primitives.
@@ -109,6 +120,95 @@ the tail leaves (the ~14-core SOLO phase has spare memory channels).
 within a ply (checkpoint/resume changes); the producer/consumer boundary adds latency; correctness care
 (boundary-value publication must be race-free — but the TT already tolerates this via deterministic puts).
 
+### Approach B — DETAILED SCOPE (2026-06-20--11, grounded in the landed M_WAVE)
+
+**What A already does (the substrate B inherits).** `M_WAVE` in `wins_inc` (`iso_flat.rs`, behind
+`if MODE == M_WAVE`) at each OR node: (1) **gather** — for each move, `child0 = avail & ~attack[sq]`; for
+recurse-arm children (`pc > recurse_min`) build the descriptor `(ckey = d4_bits(lex_min8(child)), cr, cf =
+hash128)` into a `WAVE_CAP` stack SoA; (2) **ETC probe** — prefetch all `cr`, then `tt_get_h` each; a child
+proven-LOSS (or an empty child) wins the OR node → **cut**; (3) **fused descent** — on no cut, expand,
+reusing the stored descriptors. Steps (1)+(2) are the **+22% cyc/node** that runs on the hot core and eats
+the −16% node cut down to −4% wall. **B's job: move (1)+(2) to idle cores.**
+
+**The prize, quantified.** The −16% node cut is *already proven* (it's the ETC cut, preserved by B). A pays
++22% cyc/node for it on the hot path ⇒ −4% wall. If B off-loads (1)+(2) so the consumer's per-node cost falls
+back toward the WAVE-off baseline, the −16% node cut translates toward **−16% wall** — a **~−12% incremental**
+gain (n=16 ~1m32s → ~1m20s). **Plus** two stacking wins A leaves on the table: **(a)** the misses the consumer
+must still expand-probe become a **sorted, prefetch-warmed stream** (Phase-0a's 5.7× / ~780 M/s vs today's
+176-cyc cold random gets — directly draining the **30% backend-memory** bucket), and **(b)** **dedup** removes
+duplicate probes across the frontier (the giant root is transposition-saturated — adjacent equal keys after
+sort collapse). Ceiling is therefore *above* −16%; realistic target **−10…−18% wall** after SPSC/management
+overhead. Compute floor is ~45–60s, so the headroom is real.
+
+**The sound batching boundary — producers PROBE, never EXPAND (this is what makes B ≠ work-stealing).**
+The expensive, speculative work is **expansion** (re-searching a subtree). Work-stealing failed because idle
+cores *expanded* shared transpositions → re-search. B's producers only do **read-only** work — gather
+descriptors, sort by `cr`, dedup adjacent keys, prefetch-warm, and (optionally) probe. None of that re-searches
+anything; it *manufactures locality* and *removes duplicate probes* the consumer would otherwise do cold.
+Expansion stays on the consumer under the normal α-β cutoff. So the producers fill the ~10 idle tail cores
+with strictly complementary work — the structural property the work-stealing negative lacked.
+
+**The three wins B captures (vs A's one):**
+1. **ETC node cut (−16%)** — inherited from A, preserved (the consumer still cuts on a producer-found LOSS).
+2. **Prep off the critical path** — the +22% cyc/node gather/probe runs on idle producers ⇒ the node cut is
+   no longer self-eaten.
+3. **Sorted-stream + dedup on the residual probes** — the misses the consumer expands are streamed sorted +
+   warm (5.7× regime) and deduped — a *new* win A never had (A probes in gather order, no sort, no dedup).
+
+### Concurrency design (the real build)
+
+- **Substrate:** `wins_inc_iter` (`QUEENS_ITER`, throughput-parity, gated) — the explicit `IncFrame` stack
+  materializes the frontier as data a producer can read ahead of the consumer. (A used recursive `wins_inc`;
+  B needs the iterative stack so producers can see pending frames.)
+- **Offload unit = a large prove-loss subtree.** Hand a producer the root of a subtree the consumer is about
+  to search exhaustively (a node being *proven LOSS* searches **all** children — no cutoff to waste). Gate on
+  `avail-pc ≥ θ` and subtree-size estimate so the SPSC latency amortizes (Phase-0a: few-consumer regime; the
+  split-diagnostic from the work-stealing arc already measured pc-band subtree sizes — reuse it to pick θ).
+- **Producer (idle core):** walk the offloaded subtree's pc-band frontier → gather `(ckey, cr, cf)` (the
+  M_WAVE gather, lifted out) → **radix-sort by `cr`** (`ddd_bandwidth_bench` grounded the radix primitive) →
+  **dedup adjacent** → pack into 1 MB-L2 cache-line-aligned SoA chunks (`route[]`/`fp[]`/`ckey[]`).
+- **Consumer (hot core):** pull a chunk from the SPSC ring → prefetch-ahead depth 16–32 → probe back-to-back
+  (the ~780 M/s sorted regime) → cut on a found LOSS → expand the misses (re-probe at use for freshness —
+  cheap: the slot is sorted/warm) → publish boundary values to the shared TT → feed the next pc-band frontier
+  back to the producers.
+- **SPSC ring per producer→consumer link**, bounded (back-pressure when the consumer lags). Frontier owned by
+  producers; TT shared lock-free exactly as today (deterministic puts ⇒ boundary publication is race-tolerant).
+- **Core split:** few hot consumers + many idle producers, per Phase-0a (don't oversubscribe consumers). The
+  ~14-core SOLO tail has ~10 cores of spare memory bandwidth — that's the producer pool.
+
+### Open questions → proposed resolutions
+
+- **Freshness vs dedup** (TT mutates mid-wave; a producer's dedup'd miss may become a hit): **re-probe at
+  consume** — Phase-0a showed sorted/warm probes are cheap, and the producer's value was the sort+dedup+warm,
+  not the probe verdict. Accept the rare stale re-expansion (measure it; the M_WAVE descent already re-probes
+  at entry for this exact reason, with no measured re-expansion bump).
+- **Offload threshold θ:** size it from the existing split-diagnostic (pc-band subtree sizes in the tail) +
+  a Phase-2a measurement of prove-loss subtree frontier widths. Need a window where (SPSC + sort) < the
+  sorted-stream saving on that subtree's probes.
+- **Boundary-value publication race:** the TT's deterministic-put discipline already tolerates concurrent
+  writers (proven by the ABDADA/steal builds). Verify under the producer/consumer pattern; no new mechanism.
+- **DFS-residence break:** producers work one prove-loss subtree's plies at a time (not whole global plies —
+  that's Approach C). Checkpoint/resume changes are scoped to the offloaded subtree, not the whole search.
+
+### Phase 2 plan (sub-steps, each gated + revertible)
+
+- **2a — size the offload (no solver change, cold).** Extend the root-timing / split-diagnostic to measure,
+  in the giant-root tail: how many prove-loss subtrees of `avail-pc ≥ θ` exist, their frontier widths per
+  pc-band, and the duplicate fraction after sort (the dedup prize). **Gate:** a θ exists where sort+SPSC <
+  sorted-stream saving (else B can't pay — fail cheap, like the work-stealing split-diagnostic did).
+- **2b — build the pipeline (gated `QUEENS_WAVE_B`, byte-identical off).** Producer (gather/radix-sort/dedup/
+  pack) + bounded SPSC + streaming consumer (prefetch-ahead/probe/cut/expand) on `wins_inc_iter`. Reuse the
+  M_WAVE gather + the `mlp_bench` sorted-stream loop. Start with ONE producer + ONE consumer (prove the SPSC
+  + sorted-stream realizes in-solver), then scale producers.
+- **2c — A/B + scale.** Interleaved n=16 A/B: `QUEENS_WAVE_B` vs the M_WAVE default vs WAVE-off baseline;
+  metric **cyc/node + wall + node count** (the dedup shifts nodes). Sweep producer count (Phase-0a says ~4
+  consumers saturate; producers fill the rest). **Gate:** `solver_lineage_agrees` (n≤9) + n=16 **SECOND** +
+  race-free boundary publication; pull-its-weight (beat the M_WAVE −4%) or revert + record-negative.
+
+**Kill criteria (fail fast):** 2a shows no amortizing θ (frontiers too narrow / dedup fraction too low); OR
+2b's single-producer pipeline doesn't beat M_WAVE in-solver (SPSC + freshness re-expansion > the off-load
+gain). Either ⇒ bank as a negative and the giant-root WORK lever is closed for the sorted-stream family.
+
 ## Approach C — full ply-windowed retrograde DDD (break DFS, n=18 endgame)
 
 ### Architecture
@@ -167,15 +267,14 @@ overlaps the existing grouped-frontier proposal's territory.
 
 ### Implementation phases
 
-- **Phase 0 (size it, no solver change):** extend `count`/`comps_report` to measure the giant root's pc-band
-  frontier width (how many distinct keys per pc-band slice) + a 2–4-thread sorted-stream microbench (does the
-  5.7× survive contention?). Gate: numbers support a window where sort < saving.
-- **Phase 1 (Approach A, gated):** in-DFS sorted-wave probe on `wins_inc_iter` (`QUEENS_SORTED_WAVE`),
-  byte-identical off. A/B on n=16 iso-dense: cyc/node + wall. Gate: `solver_lineage_agrees` (n≤9) + n=16
-  SECOND; pull-its-weight or revert/record-negative.
-- **Phase 2 (Approach B, if Phase 1 pays):** producer/consumer pipeline — idle-core sort/dedup/pack + SPSC +
-  streaming consumer. A/B vs Phase 1 and vs the iso-dense baseline. Gate as Phase 1, plus race-freedom of
-  boundary publication.
+- **Phase 0a (microbench) — ✅ DONE (2026-06-20--10).** Threaded sorted-stream microbench; GREEN, ~780 M/s
+  cap, few-consumer regime. (Phase-0b "size the pc-band frontier width" folds into Phase 2a below.)
+- **Phase 1 (Approach A = `M_WAVE`) — ✅ DONE + PROMOTED TO DEFAULT (2026-06-20--10/11).** Fused in-DFS ETC;
+  −16% nodes / −2.7% wall; iso-dense default (`QUEENS_WAVE=0` disables). Captured −4% of the −16% (prep on
+  the critical path) — the gap is Phase 2's prize.
+- **Phase 2 (Approach B) — NEXT, scoped above** ("Approach B — DETAILED SCOPE"). Sub-steps **2a** (size the
+  offload, cold), **2b** (build the gated `QUEENS_WAVE_B` producer/consumer pipeline), **2c** (A/B + scale).
+  Gate as Phase 1, plus race-freedom of boundary publication; kill criteria in the detailed scope.
 - **Phase 3 (Approach C / n=18):** separate track; fold into the grouped-frontier proposal with BuRR-frozen
   plies.
 

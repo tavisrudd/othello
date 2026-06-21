@@ -154,6 +154,13 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       **not supported by the proxy** — the giant root is memory-latency/transposition-bound, not clock-bound.
       A clean two-pool test (giant-on-fast + cheap-on-all) needs a real build; the proxy shows no signal worth
       it. **Park the pinning lever; the data points back to attacking the WORK** (probe #1 → item A). See note.
+- [x] **M_WAVE promoted to iso-dense default (`8400134`) + Approach B SCOPED (2026-06-20--11).** Probe #1 killed
+      item A (modular reduction — see [node-kayles handoff](2026-06-20-node-kayles-lit-levers.md)); getK
+      code-build vectorization measured-negative (reverted, see `proposal-2026-06-19-getk-throughput.md` §5).
+      **NEXT lever = Approach B** (idle-core producer/consumer pipeline — move M_WAVE's +22% cyc/node gather/
+      probe off the critical path; prize = closing the −4%→−16% wall gap). Full scope in
+      [sorted-frontier-wave proposal](../proposal-2026-06-20-sorted-frontier-wave.md) "Approach B — DETAILED
+      SCOPE": Phase 2a (size the offload, cold) → 2b (gated `QUEENS_WAVE_B` SPSC pipeline) → 2c (A/B + scale).
 
 ## Handoff Notes
 
