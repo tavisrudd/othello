@@ -10,7 +10,16 @@ n=16 roadmap in `notes/handoffs/`.
 **Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
-**Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) — the
+**Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
+**LATEST (--11): `M_WAVE` (fused ETC + batch-probe cutoff) is now the iso-dense DEFAULT** (`QUEENS_WAVE=0`
+disables) = the **1m32s / 1.70 B record**. It captured only −4% of its −16% node cut (gather/probe prep on the
+critical path = +22% cyc/node); closing that gap is **Approach B** — the idle-core sorted-frontier
+producer/consumer pipeline, **SCOPED** ([proposal](notes/proposal-2026-06-20-sorted-frontier-wave.md) "Approach
+B — DETAILED SCOPE"); **NEXT = Phase 2a** (cold sizing of the prove-loss offload, zero solver risk, like probe
+#1). Also --11: **probe #1 killed item A** (modular reduction — tail too sparse for size-≥3 modules;
+[node-kayles](notes/handoffs/2026-06-20-node-kayles-lit-levers.md)), **getK code-build vectorization
+measured-negative** (reverted; `proposal-2026-06-19-getk-throughput.md` §5), **core-pinning = wash** (giant
+root is memory/transposition-bound, not clock-bound). Earlier on this thread: the
 recursion→loop `wins_inc_iter` (gated `QUEENS_ITER`, throughput-neutral) materialized the search frontier, and
 on it we BUILT **both** parallelism-deficit levers session --5 named — **ABDADA in-flight markers**
 (`QUEENS_ABDADA`, `773ba8d`) and **frontier work-stealing** (`QUEENS_STEAL`, rayon-scope publish of even-frame
@@ -63,10 +72,11 @@ profiler's whole probe cost); remaining cost is pc≥13. **Parallelism deficit �
 approaches** (2026-06-19--5): the giant-root tail (51% core util, ~96% of wall) is **transposition-bound + OR-spine
 width-limited** — B1 finer-split (−37% wall), adaptive-tail (−12%), warm-restart (wash) all fail; re-expansion sits
 at pc 13–21. Only **ABDADA in-flight markers** or **grouped-frontier DDD** (both heavy/multi-session) can crack it.
-**warm-restart is now the iso-dense default** (`QUEENS_WARM_RESTART`, 2s warm + staggered restart; ~2% node trim,
-wall-neutral; `=0` disables; iso-flat/iso-window unaffected). **Next throughput lead = getK-C1** (fuse code-build↔
-`extract_adj`; a TT *hit* is already free to discover — the cost is key-build + DRAM latency, and W_K already banked
-the pc 9–12 probe-elimination; "recursion unrolling" is measured-dead as a RAS fix, survives only as risky MLP).
+**warm-restart + M_WAVE are now the iso-dense defaults** (`QUEENS_WARM_RESTART` 2s warm + staggered restart, ~2%
+node trim; `QUEENS_WAVE` fused ETC, −16% nodes / the 1m32s record; both `=0`-disable, iso-flat/iso-window
+unaffected). **Next throughput lead = Approach B** (idle-core sorted-frontier pipeline, [scoped](notes/proposal-2026-06-20-sorted-frontier-wave.md);
+NEXT = Phase 2a cold sizing). **getK code-build vectorization = measured-DEAD** (--11: uniform-gather reshape
++0.53% instr, reverted; the compiler won't gather 10/11 lanes and a uniform rewrite doesn't fix it).
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup

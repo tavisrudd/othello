@@ -164,6 +164,36 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
 
 ## Handoff Notes
 
+### Session --11 (2026-06-20, `mi`): M_WAVE→default, probe #1 kills item A, getK-reshape negative, Approach B scoped
+
+**Session** UUID `0d7ac74a-e00a-4578-a28c-85816b2f287a` (harness env num `2026-06-20--3`; `--11` in this thread's
+continuous counter, prior was `--10`). Resumed from `go triage`; `mi` mid-session. Five commits, all gated/validated.
+
+**Landed:**
+- `12c5762` **probe #1 module-prevalence → item A (modular reduction) MEASURED-DEAD.** `module_profile`
+  (`graph.rs`) + `module_report` (`count --comps`): pc 13–20 `reduces%`/`->≤12%` = **0%** (n=12 + n=14 49.8M-set);
+  tail too sparse for size-≥3 modules. Cross-validated `struct_profile` twin% to the decimal; **bug found+fixed**
+  (`attack` includes self ⇒ first cut dropped independent modules; re-ran, verdict unchanged). Detail:
+  [node-kayles handoff](2026-06-20-node-kayles-lit-levers.md).
+- `2d7f6b2` **getK code-build vectorization reshape → MEASURED-NEGATIVE, reverted.** Uniform K×K gather + triangular
+  pack (result-identical; n=14 nodes 12,896,443 byte-identical) → +0.53% instr / +0.39% cyc deterministic (the
+  compiler won't gather 10/11 lanes; uniform rewrite = 2× work, no vectorization). `proposal-2026-06-19-getk-throughput.md` §5.
+- `8400134` **M_WAVE promoted to iso-dense DEFAULT** (the 1m32s record). `new_dense` sets `wave` default-on
+  (mirrors `warm_restart`); `QUEENS_WAVE=0` disables; iso-flat/iso-window stay off (control + `--distinct` gate
+  intact). Verified: iso-dense n=14 = 11,747,330 / SECOND; disable→12,896,443; iso-window 27,539,495; iso-flat
+  n=12 `--distinct` 1,060,823 / 1.25×; clippy+test green.
+- `ecb1328` **Approach B SCOPED** ([sorted-frontier-wave proposal](../proposal-2026-06-20-sorted-frontier-wave.md)).
+- (the probe-#1 commit also banked the **WAVE clean-box record** 1m32s/1.70B + PGO, and the **core-affinity A/B**.)
+
+**NEXT SESSION = Approach B Phase 2a** — cold sizing of the prove-loss offload (how many prove-loss subtrees of
+avail-pc ≥ θ in the giant-root tail, their pc-band frontier widths, the dedup fraction after sort; **gate:** a θ
+exists where sort+SPSC < the sorted-stream saving — fail cheap if not, like the work-stealing split-diagnostic).
+Then 2b (gated `QUEENS_WAVE_B` SPSC producer/consumer pipeline) → 2c (A/B + scale). Substrate = the M_WAVE gather
+(lifted off-core) + `wins_inc_iter`. Full scope + kill criteria in the proposal's "Approach B — DETAILED SCOPE".
+
+**Method re-banked:** single n=16 runs lie (B8's 81.6s outlier "confirmed" the pinning hypothesis solo; round 2
+killed it). Cheap probe-first kills expensive builds (item A + getK-reshape closed for ~0 build cost this session).
+
 ### Core-affinity A/B — fast-cores-for-expensive-roots is a wash on the proxy (2026-06-20--11)
 
 **Session**: 2026-06-20 (`mi`). User reported the WAVE clean-box record (1m32s / 1.70 B; PGO 1.685 B same wall)
