@@ -227,6 +227,46 @@ fn l0_put(route: u64, fp: u64, val: u8) {
     L0_CACHE.with(|c| c.borrow_mut()[idx] = e);
 }
 
+// ---- Raw-pointer L0 sidecar (QUEENS_SIDECAR) — the handoff's untried M_L0 angle -------------
+// Same direct-mapped 1 MB (L2-resident) cache, but accessed via a **raw pointer fetched once per
+// node** (no per-probe `.with`/`RefCell` borrow — the overhead the M_L0 build measured at +6%
+// cyc/node). The node's entry-get + its puts reuse the one pointer. Exact 55-bit fp tag ⇒ a hit is
+// the correct fixed value ⇒ node-count-neutral. Tests whether the M_L0 negative was the access
+// overhead or whether the repeats are genuinely TT-warm (a sidecar hit then saving no DRAM).
+thread_local! {
+    static RAW_L0: std::cell::UnsafeCell<Vec<u64>> = const { std::cell::UnsafeCell::new(Vec::new()) };
+}
+
+/// Fetch this worker's raw L0 base pointer (one TLS lookup per node), lazily sizing on first use.
+#[inline]
+fn raw_l0_ptr() -> *mut u64 {
+    RAW_L0.with(|c| {
+        // SAFETY: single-threaded per-worker access; the Vec lives for the thread and is never
+        // resized after the first node, so the pointer stays valid for the node's duration.
+        let v = unsafe { &mut *c.get() };
+        if v.len() != L0_SIZE {
+            *v = vec![0u64; L0_SIZE];
+        }
+        v.as_mut_ptr()
+    })
+}
+
+/// Raw L0 lookup on a pre-fetched base pointer (no TLS, no borrow). `Some(val)` on a tag hit.
+/// # Safety: `base` is a valid `L0_SIZE`-element buffer from [`raw_l0_ptr`].
+#[inline]
+unsafe fn raw_l0_get(base: *mut u64, route: u64, fp: u64) -> Option<u8> {
+    let e = *base.add((route as usize) & (L0_SIZE - 1));
+    (e & 1 != 0 && (e >> 2) == (fp & L0_FP_MASK)).then_some(((e >> 1) & 1) as u8)
+}
+
+/// Raw L0 store on a pre-fetched base pointer (no TLS, no borrow).
+/// # Safety: `base` is a valid `L0_SIZE`-element buffer from [`raw_l0_ptr`].
+#[inline]
+unsafe fn raw_l0_put(base: *mut u64, route: u64, fp: u64, val: u8) {
+    *base.add((route as usize) & (L0_SIZE - 1)) =
+        1 | ((val as u64 & 1) << 1) | ((fp & L0_FP_MASK) << 2);
+}
+
 /// One suspended ancestor on the explicit upper-tree search stack of
 /// [`wins_inc_iter`](IsoFlat::wins_inc_iter). Plain `Copy` POD so the thread-local arena reuses
 /// storage with no per-node allocation. `orient[0]` is the node's available mask (kept whole so
@@ -602,6 +642,11 @@ pub struct IsoFlat {
     /// route each band probe into a cache-line set-associative bucket (8-way). Orthogonal to the
     /// search-strategy `MODE`; resolved once at construction, read by the TT-helper layout branch.
     assoc: bool,
+    /// `QUEENS_SIDECAR=1`: the raw-pointer once-per-node L0 sidecar (the handoff's untried M_L0
+    /// angle). The node's entry probe checks a per-worker 1 MB direct-mapped exact cache (raw ptr
+    /// fetched once, no per-probe `.with`) before the TT; populated on the node's put. Off ⇒ the
+    /// base-pointer fetch and the branch short-circuit.
+    sidecar: bool,
     /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
     /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
     pc_hist: Box<[AtomicU64]>,
@@ -900,6 +945,7 @@ impl IsoFlat {
         let counting = tt.is_counting();
         let segment = tt.is_segmented();
         let assoc = tt.is_assoc();
+        let sidecar = std::env::var("QUEENS_SIDECAR").as_deref() == Ok("1");
         IsoFlat {
             name: if window { "iso-window" } else { "iso-flat" },
             tt,
@@ -934,6 +980,7 @@ impl IsoFlat {
             // the subtree-handoff dispatch can pick `MODE = M_SEG` once and monomorphise.
             segment,
             assoc,
+            sidecar,
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
@@ -2063,7 +2110,25 @@ impl IsoFlat {
                 }
             });
         }
-        let got = if MODE == M_PROF {
+        // Raw-pointer L0 sidecar base, fetched once for this node (entry probe + the put below).
+        let sc_base = if self.sidecar {
+            raw_l0_ptr()
+        } else {
+            std::ptr::null_mut()
+        };
+        let got = if self.sidecar {
+            // SAFETY: `sc_base` is a valid `L0_SIZE` buffer from `raw_l0_ptr` whenever `self.sidecar`.
+            match unsafe { raw_l0_get(sc_base, route, fp) } {
+                Some(v) => Some(v), // sidecar hit — no TT DRAM probe
+                None => {
+                    let g = self.mtt_get::<COUNT, MODE>(key, route, fp, node_pc);
+                    if let Some(v) = g {
+                        unsafe { raw_l0_put(sc_base, route, fp, v) };
+                    }
+                    g
+                }
+            }
+        } else if MODE == M_PROF {
             // rdtsc-time the flat-TT get and bin the cycles by this node's popcount — the get
             // *is* the random DRAM probe, so its latency by pc is the memory cost distribution.
             let t = rdtsc();
@@ -2348,6 +2413,9 @@ impl IsoFlat {
                 }
             }
             // The fused loop already ran the descent; skip the shared descent + put below.
+            if self.sidecar {
+                unsafe { raw_l0_put(sc_base, route, fp, result as u8) };
+            }
             self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
             return result;
         }
@@ -2418,6 +2486,9 @@ impl IsoFlat {
         }
         if MODE == M_PROF {
             let t = rdtsc();
+            if self.sidecar {
+                unsafe { raw_l0_put(sc_base, route, fp, result as u8) };
+            }
             self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
             let dt = rdtsc().wrapping_sub(t);
             PROF_ACC.with(|c| {
@@ -2426,6 +2497,9 @@ impl IsoFlat {
                 a.nodes[node_pc as usize] += 1;
             });
         } else {
+            if self.sidecar {
+                unsafe { raw_l0_put(sc_base, route, fp, result as u8) };
+            }
             self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
         }
         result

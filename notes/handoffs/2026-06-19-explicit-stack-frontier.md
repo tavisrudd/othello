@@ -11,6 +11,61 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ NEXT SESSION (as of --16 — 30s e2e is MET (~27–28s); sidecar is the sub-25s stretch.)
+
+> **--16 OUTCOME (2026-06-21).** Full detail: [proposal-2026-06-21-compact-assoc-tt](../proposal-2026-06-21-compact-assoc-tt.md).
+> **Context correction:** the **30s process-wall is already met** (production e2e ~27–28s; earlier "30s" was the
+> *search* wall under a slow tap). So the sidecar/DRAM-cut work is a **sub-25s stretch**, not the 30s lever.
+>
+> **LANDED — commit `97779e3` on branch `queens-compact-assoc-tt`** (off main; **cherry-pick the ETC-reuse hunks
+> to main next session** — the branch also carries gated-off experimental code):
+> - **★ ETC win-child re-probe elimination, now DEFAULT (no toggle).** Thread the M_ORD_W ETC `Some(1)` into the
+>   fused descent (a known-win child is not recursed + entry-probed again). **6-round n=16 A/B @ 12 GB = WASH
+>   (−1.4% wall, in noise)** — the win-child re-probe was already *warm*, not DRAM. Kept (user call): logically
+>   correct, node-count ≤ baseline, cut grows at smaller TT / n=18. Gate-green (verdict + lineage + iso-flat distinct).
+>
+> **CLOSED / measured-negative (gated off, instructive):**
+> - **Set-associative TT** (the chosen --16 lever): **wash-to-marginal at K=16.** The W_K K=16 collapse made the
+>   393M working set FIT in ≤4 GB ⇒ no oversubscription for associativity to relieve; cyc/node is FLAT across TT
+>   size (4→12 GB) ⇒ shrinking the table gives no residency win, only the assoc scan cost. `QUEENS_TT_ASSOC`
+>   (seg + a band-free flat-assoc). The 4-byte-slot fp-floor problem is moot — the lever itself doesn't pay here.
+> - **Sidecar-as-probe-cache** (`QUEENS_SIDECAR`, raw-pointer once-per-node L0 — the handoff's untried M_L0 angle):
+>   **NEGATIVE — n=16 A/B = +9% cyc/node / +13% wall** (cyc/node ON ~5810 vs OFF ~5320, noise-independent).
+>   Reuse ceiling is only **26.9%**; recency hit saturates **~17%** (mostly long-range), L2-resident ~15%, slow
+>   roots NOT more cacheable, temporally flat. The `.with` overhead was NOT M_L0's killer — even raw-pointer is
+>   negative (per-node probe overhead + put write-traffic + the repeats are TT-warm so a hit saves no DRAM).
+>   **NOT declared closed — the +9% may be removable, not inherent. NEXT SESSION: micro-profile + optimize this
+>   code DOWN TO THE ASM LEVEL** (perf-annotate `QUEENS_SIDECAR=1`): localize the +9% across (a) the per-node
+>   `raw_l0_ptr` `.with` TLS lookup, (b) the `raw_l0_get` load+compare, (c) the per-put `raw_l0_put` write-traffic
+>   (the chat's "avoid write traffic" — a read-only/pre-seeded cache removes it), (d) the restructured `got` branch.
+>   If the overhead is mostly (a)+(c), the read-only/ETC-only redesign (below) could flip it.
+>
+> **⇒ THE ONE UNTRIED SIDECAR SHAPE (next session, from the chat critique) — if pursued, do exactly this:**
+> **ETC-child-probes-only, READ-ONLY / pre-seeded** from the prior best run's trace, **small (128–512 KiB/worker)**,
+> targeted at the **two monster roots**, keys **ranked by VALUE** (`ETC_cutoffs_caused × est_subtree_cost_avoided`,
+> not frequency), **per-purpose chunks** (root_A/root_B/shared_bridge/ETC_cutoff/warmup), with **explicit harm
+> tracking** (cycles_added_on_miss, cutoffs_from_sidecar, wall_saved). The naive "probe every lookup, write every
+> put" is the M_L0/QUEENS_SIDECAR failure mode (proved twice). Estimate: mild 25–26s, strong 22–24s. Sub-20s
+> likely needs graph-family/module reduction or a new proof-shape — NOT a cache.
+>
+> **⇒ FRESH LEVER (user, --16) — BATCH PUTS (untried, write-side, no move-ordering tax):** the read sorted-wave
+> was killed by the consumer-access move-ordering tax (+94% nodes); **puts have no such tax** (writes don't change
+> search order), so batching/sorting puts for DRAM row-buffer locality is a distinct, cleaner idea. Key analysis:
+> a node's exit put writes its OWN slot, which the entry probe already warmed — so for *shallow* nodes the put is
+> already a warm write (no win). The opportunity is *deep* nodes where the entry-warmed line evicted during the
+> subtree expansion ⇒ the put is a cold **write-allocate** (a hidden ~165-cyc DRAM read). Batch+prefetch those, or
+> non-temporal stores to skip write-allocate. **Constraint:** deferring puts hurts transposition VISIBILITY (a
+> concurrent probe misses the not-yet-flushed key ⇒ re-expansion ⇒ more nodes) — same failure as the sorted wave;
+> so either flush tiny, make the put-buffer probe-visible (= the sidecar, closed), or only prefetch (don't defer).
+> Worth a measured try. Measure first: are deep-node puts cold (write-allocate DRAM) or warm? (extend M_PROF to
+> time puts by pc, like it times gets).
+>
+> **Parked research (position-space, since the TT hash destroys structure):** predict **EXACT keys** (not hashed
+> slots) to prefetch deeper future probes (the parked MLP-batched-probes lever — DFS state generates the future
+> subtree); dim-reduction/PCA + reuse-admission predictor (capped at 26.9% for caching; the prefetch use is
+> uncapped but gated by look-ahead key-compute cost). Worktree `/home/tavis/src/othello-assoc` (queens-tt-assoc-buckets)
+> left from this session — remove with `git worktree remove`.
+
 ## ⇒ NEXT SESSION (as of --15 — GOAL CHANGED to 30s **END-TO-END** incl prep. BE RELENTLESS.)
 
 > **NEW GOAL (user, --15):** n=16 in **30s END-TO-END** — *including the TT alloc + dense W8 prebuild*

@@ -182,10 +182,48 @@ descent then recurses each non-cut child and **entry-probes it again**. Win-chil
 twice. Threading the ETC value into the descent (skip the recurse+re-probe for an already-known `Some(1)`)
 is a node-neutral DRAM cut. (`None` children must still re-probe — a sibling may have solved them between.)
 
-### Build plan (next)
+## Session outcome (--16, 2026-06-21)
 
-1. **(quick) ETC win-child re-probe elimination** — thread `Some(1)` results to the descent. Node-neutral.
-2. **Minimal exact per-worker L2 sidecar** — ~1 MB, 46-bit-tag slots (exact ⇒ node-neutral), probed before the
-   TT in the ETC batch; populate on TT-hit/put. Measure the wall (the real test of the ~15% → wall translation).
-3. **If signal, push the hit rate**: dim-reduction/learned code for denser cache (more keys/byte → L2 holds more)
-   and/or a reuse predictor (beat recency's 17% toward the 26.9% ceiling).
+**Context correction (user/chat):** the **30s process-wall target is already met** — production e2e is ~27–28s
+(this session's earlier "30s" measured the *search* wall under a slow instrumentation tap). So the sidecar is a
+**sub-25s stretch lever**, not the 30s lever.
+
+**LANDED (commit `97779e3`, branch `queens-compact-assoc-tt`, off main — cherry-pick to main next session):**
+- **A — ETC win-child re-probe elimination, now DEFAULT (no toggle).** Thread the M_ORD_W ETC `Some(1)` into the
+  fused descent. **6-round n=16 A/B at 12 GB = WASH (−1.4% wall, in noise; the first 4-round run's "−10%" was a
+  noisy B outlier).** The win-child re-probe was already *warm* (not DRAM). Kept anyway (user call): logically
+  correct, node-count ≤ baseline, and the eviction-driven cut grows at smaller TT / n=18. Verdict + lineage +
+  iso-flat distinct all green; n=14 byte-identical at no-eviction.
+
+**MEASURED-NEGATIVE / WASH (parked, gated off):**
+- **Assoc TT** (8-way buckets, seg + flat-assoc): wash-to-marginal — the W_K K=16 collapse removed the
+  oversubscription it targets (working set fits 4 GB; cyc/node flat across TT size — shrinking gives no residency
+  win). `QUEENS_TT_ASSOC`.
+- **Sidecar viability** (table above): reuse ceiling **26.9%**, recency saturates ~17% (long-range), L2 ~15%,
+  slow roots not special, temporally flat. The sidecar == the already-negative M_L0.
+
+**IN-FLIGHT (this session's B test):** raw-pointer once-per-node L0 (`QUEENS_SIDECAR`) — the handoff's named
+untried angle (no per-probe `.with`). Entry-probe placement (same as M_L0) to isolate the access-cost variable.
+n=16 A/B running. **If still negative → the repeats are genuinely TT-warm → sidecar-as-cache closed regardless of
+placement. If positive → access cost was the issue → pursue the chat's ETC-only refinement.**
+
+## NEXT-SESSION sidecar design (from the chat critique — the *right* shape if B shows any signal)
+
+The naive "probe every TT lookup, write every put" is the M_L0 failure mode (miss overhead on all probes). The
+refined design:
+- **ETC-child probes only**, on the **two monster roots** — not in front of every lookup (miss overhead must be tiny).
+- **Read-only / pre-seeded** from the previous best run's trace (avoid write traffic + coherence churn).
+- **Small: 128–512 KiB/worker** (real L2 budget after stack + dense evaluator + code), direct-mapped or 2-way.
+- **Separate chunks by purpose** (root_A_hot / root_B_hot / shared_bridge / ETC_cutoff_hot / warmup_hot) — a single
+  global sidecar dilutes the hit rate.
+- **Rank keys by VALUE not frequency**: `value = ETC_cutoffs_caused × est_subtree_cost_avoided` (frequency
+  over-selects cheap shallow hits).
+- **Track harm explicitly**: hits, misses, cycles_added_on_miss, cutoffs_from_sidecar, wall_saved on the critical roots.
+- **First experiment:** ETC-only exact sidecar for the 2 monster roots, seeded from the prior trace's
+  highest-value ETC cutoff keys. Cleanest signal, least miss overhead. Estimate: mild win 25–26s, strong 22–24s.
+
+Other parked research threads (position-space, since the TT hash destroys structure): **predict EXACT keys** (not
+TT-hashed slots) to prefetch deeper future probes (the DFS state deterministically generates the future subtree —
+the parked MLP-batched-probes lever); **dim-reduction (PCA) / learned code** on exact keys for a denser predictable
+layout + a reuse-admission predictor. All capped by the 26.9% reuse ceiling for the *caching* use; the *prefetch*
+use (latency-hiding for all probes) is uncapped but gated by look-ahead key-compute cost.
