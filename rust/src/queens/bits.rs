@@ -65,7 +65,11 @@ impl Bits {
             .map(|(k, &w)| k as u32 * 64 + w.trailing_zeros())
     }
     /// Call `f` with each set bit index (ascending).
-    #[inline]
+    // `inline(always)`: the hot callers (`wK_get`/`tiny_table_index` vert-scatter, on the getK +
+    // band majority of nodes) pass tiny closures, but left to the compiler's discretion `each` was
+    // outlined into a shared `FnMut::call_mut` body (~4.8% of n=16 search cycles in the profile);
+    // forcing inline cut cyc/node ~1.4% (n=16 A/B).
+    #[inline(always)]
     pub(crate) fn each<F: FnMut(u32)>(self, mut f: F) {
         for (k, &w) in self.0.iter().enumerate() {
             let mut w = w;

@@ -683,7 +683,19 @@ impl IsoFlat {
     /// re-sweeping (K=13 is a validated opt-in, net-negative at n=16; may flip at n=18);
     /// `getK` resolves every `9 ≤ pc ≤ K` directly from the complete W0..W8 tables.
     pub fn new_dense(bits: u32) -> Self {
-        let mut s = Self::from_tt_with_window(QueensTt::new(bits), true);
+        // Overlap the CPU-bound dense-table build with the kernel-bound TT alloc + huge-page
+        // collapse (different resources): warm the `DenseW8`/`small_canon` OnceLocks on a background
+        // thread while `QueensTt::new` faults + `MADV_COLLAPSE`s the multi-GB table, so the build
+        // calls inside `from_tt_with_window` below hit the warmed caches instantly. Saves ~2s of
+        // pre-search startup at n=16 (the build is ~3.4s, the alloc ~2s; serial they sum to ~5.4s,
+        // overlapped ~3.4s). Zero hot-path / correctness risk — both inits are idempotent OnceLocks.
+        let warm = std::thread::spawn(|| {
+            DenseW8::build();
+            small_canon_table();
+        });
+        let tt = QueensTt::new(bits);
+        warm.join().unwrap();
+        let mut s = Self::from_tt_with_window(tt, true);
         s.name = "iso-dense";
         // Dense layer on by construction (not the iso-window env gate). The ceiling is read
         // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
@@ -1606,11 +1618,17 @@ impl IsoFlat {
     /// the *live* `avail`, so it sharpens deep in the tree where the board has filled. Stable sort ⇒
     /// equal-degree ties keep their `q.order` (the static order is the tiebreak). Verdict-preserving
     /// (reorder never changes the OR/AND value); the node-count delta vs static is the ordering gain.
-    fn sort_moves_by_degree(&self, dst: &mut [u8], avail: Bits, att: &[[Bits; 8]]) {
+    fn sort_moves_by_degree(
+        &self,
+        dst: &mut [u8],
+        deg: &mut [u16],
+        avail: Bits,
+        att: &[[Bits; 8]],
+    ) {
         let n = dst.len();
-        // Degree key per move (current available-block popcount), computed once into a parallel
-        // array so the sort needs no comparator closure. pc ≤ 256 fits u16.
-        let mut deg = [0u16; MAXV];
+        // Degree key per move (current available-block popcount), computed once into the caller's
+        // parallel array so the sort needs no comparator closure AND the descent/gather can reuse
+        // the sorted degree (skipping their own popcount recompute — the sort-fuse). pc ≤ 256 fits u16.
         for k in 0..n {
             let child0 = avail.and_not(att_for8(att, dst[k])[0]);
             deg[k] = child0.popcount() as u16;
@@ -1739,6 +1757,11 @@ impl IsoFlat {
         // recurse children follow sorted by slot. Verdict-preserving (order never changes the value);
         // the node-count delta vs the move-order baseline is the move-ordering tax the wave pays.
         let mut sorted = [0u8; MAXV];
+        // `degbuf[i]` = the available-block degree (child0 popcount) of the i-th *sorted* move, filled
+        // by `sort_moves_by_degree` and reused by the M_ORD_W gather + descent below (the sort-fuse:
+        // they read the degree instead of recomputing `child0.popcount()`). Only touched on the
+        // M_ORD/M_ORD_W sort path; DCEs on every other MODE.
+        let mut degbuf = [0u16; MAXV];
         let moves: &[u8] = if MODE == M_WAVE_B {
             let n = moves.len();
             sorted[..n].copy_from_slice(moves);
@@ -1749,11 +1772,12 @@ impl IsoFlat {
             // `M_ORD_W` then runs the M_WAVE ETC body over the degree-sorted moves (ETC + ordering).
             let n = moves.len();
             sorted[..n].copy_from_slice(moves);
-            self.sort_moves_by_degree(&mut sorted[..n], avail, att);
+            self.sort_moves_by_degree(&mut sorted[..n], &mut degbuf[..n], avail, att);
             &sorted[..n]
         } else {
             moves
         };
+        let degs = &degbuf;
         // A'' Phase-1 — ETC (enhanced transposition cutoff) + sorted-batch wave (`M_WAVE` only;
         // DCEs to nothing on every other `MODE`, so the control path is byte-identical). Every node
         // here is an OR node (a *losing* child = a winning move ⇒ this node wins). Before the
@@ -1794,22 +1818,40 @@ impl IsoFlat {
             let mut wr = [0u64; WAVE_CAP];
             let mut wf = [0u64; WAVE_CAP];
             let mut nw = 0usize;
-            for &sq in moves {
+            for (i, &sq) in moves.iter().enumerate() {
                 let a = att_for8(att, sq);
-                let child0 = avail.and_not(a[0]);
-                if child0 == Bits::ZERO {
-                    self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
-                    return true;
+                // Sort-fuse (M_ORD_W): the degree was already computed by `sort_moves_by_degree`, so
+                // read it instead of recomputing `child0.popcount()`, and skip `child0` (an `and_not`)
+                // entirely for the cheap children the gather doesn't store. Other fused modes (M_WAVE/
+                // M_L0/M_WAVE_C/M_SIZE_WAVE) have no `degs`, so they recompute — const-folds per MODE.
+                let child0;
+                if MODE == M_ORD_W {
+                    let pc = degs[i] as u32;
+                    if pc == 0 {
+                        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
+                        return true;
+                    }
+                    if !(pc > recurse_min && nw < WAVE_CAP) {
+                        continue;
+                    }
+                    child0 = avail.and_not(a[0]);
+                } else {
+                    child0 = avail.and_not(a[0]);
+                    if child0 == Bits::ZERO {
+                        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
+                        return true;
+                    }
+                    if !(child0.popcount() > recurse_min && nw < WAVE_CAP) {
+                        continue;
+                    }
                 }
-                if child0.popcount() > recurse_min && nw < WAVE_CAP {
-                    let child = child_orient(orient, a, child0);
-                    let ckey = d4_bits(lex_min8(&child));
-                    let (cr, cf) = QueensTt::hash128(ckey);
-                    wk[nw] = ckey;
-                    wr[nw] = cr;
-                    wf[nw] = cf;
-                    nw += 1;
-                }
+                let child = child_orient(orient, a, child0);
+                let ckey = d4_bits(lex_min8(&child));
+                let (cr, cf) = QueensTt::hash128(ckey);
+                wk[nw] = ckey;
+                wr[nw] = cr;
+                wf[nw] = cf;
+                nw += 1;
             }
             // ETC pays only with ≥2 recurse children (a single recurse child the descent would probe
             // at entry anyway — no sibling expansions to skip). Skip the prefetch/probe batch when
@@ -1833,14 +1875,19 @@ impl IsoFlat {
             // children (dense/band/block/iso) resolve via their own arms exactly as the control
             // descent. `wi` walks the descriptor store in move order alongside the recurse predicate.
             let mut wi = 0usize;
-            for &sq in moves {
+            for (i, &sq) in moves.iter().enumerate() {
                 let a = att_for8(att, sq);
                 let child0 = avail.and_not(a[0]);
-                if child0 == Bits::ZERO {
+                // Sort-fuse (M_ORD_W): reuse the sorted degree instead of recomputing the popcount.
+                let pc = if MODE == M_ORD_W {
+                    degs[i] as u32
+                } else {
+                    child0.popcount()
+                };
+                if pc == 0 {
                     result = true;
                     break;
                 }
-                let pc = child0.popcount();
                 let lost = if MODE == M_WAVE_C && pc > recurse_min {
                     // Cascade-reorder micro-opt (`M_WAVE_C` only; DCEs for every other MODE ⇒ M_WAVE
                     // byte-identical). A deep-tail recurse child (pc > recurse_min) is the 88%-majority
@@ -1897,17 +1944,22 @@ impl IsoFlat {
                     // (now warm: just probed/prefetched) — that catches any sibling fill mid-node, so
                     // no extra re-expansion vs control. Beyond `WAVE_CAP` recurse children the gather
                     // stopped storing, so rebuild the descriptor (rare: deep-tail fan-out ≤ a handful).
-                    let child = child_orient(orient, a, child0);
-                    let (ckey, cr, cf) = if wi < nw {
-                        let d = (wk[wi], wr[wi], wf[wi]);
+                    // When the descriptor is already in the gather's SoA (the common case), `cr` is
+                    // known *before* `child_orient`, so issue the slot prefetch first — it buys
+                    // `child_orient`'s ~30 cyc of extra prefetch-to-use distance against the ~165 cyc
+                    // DRAM latency of the child's entry probe (the largest single stall in the profile).
+                    let (child, ckey, cr, cf) = if wi < nw {
+                        let (ck, cr, cf) = (wk[wi], wr[wi], wf[wi]);
                         wi += 1;
-                        d
+                        self.tt.prefetch_h(cr);
+                        (child_orient(orient, a, child0), ck, cr, cf)
                     } else {
+                        let child = child_orient(orient, a, child0);
                         let ckey = d4_bits(lex_min8(&child));
                         let (cr, cf) = QueensTt::hash128(ckey);
-                        (ckey, cr, cf)
+                        self.tt.prefetch_h(cr);
+                        (child, ckey, cr, cf)
                     };
-                    self.tt.prefetch_h(cr);
                     !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
                         q, att, &child, ckey, cr, cf, moves, nodes,
                     )
