@@ -30,7 +30,7 @@ use rayon::prelude::*;
 use std::cell::RefCell;
 use std::mem::MaybeUninit;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicU8, AtomicUsize, Ordering};
-use std::sync::{Arc, OnceLock};
+use std::sync::{Arc, Mutex, OnceLock};
 use std::time::{Duration, Instant};
 
 const ORACLE_FLUSH: u64 = 1 << 14;
@@ -65,6 +65,7 @@ const M_HIST: u8 = 1; // tally flat-TT puts by popcount (`QUEENS_PC_HIST=1`)
 const M_SEG: u8 = 2; // route by per-popcount band (`QUEENS_TT_SEGMENT=1`)
 const M_PROF: u8 = 3; // stratified profiler: rdtsc-time the TT get/put per pc (`QUEENS_PROF=1`)
 const M_WAVE: u8 = 4; // ETC + sorted-batch child probe (`QUEENS_WAVE=1`); A'' Phase-1 experiment
+const M_SIZE: u8 = 5; // A'' Phase-2a offload sizing: tap the recurse-arm probe stream (`QUEENS_SIZE=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -110,6 +111,38 @@ thread_local! {
             get_n: [0; MAXPC],
             put_cyc: [0; MAXPC],
             nodes: [0; MAXPC],
+        })
+    };
+}
+
+/// HyperLogLog register width (`2^p`) for the `M_SIZE` global-distinct (dedup-ceiling) estimate.
+/// p=16 ⇒ 64 KB shared / 64 KB per-worker thread-local, ≈0.4% std err — ample to size the
+/// duplicate fraction of a billions-probe stream.
+const SIZE_HLL_P: u32 = 16;
+const SIZE_HLL_M: usize = 1 << SIZE_HLL_P;
+/// Per-worker cap on the slot-sorted-locality sample (routes). Bounds the memory the cold sort
+/// touches; the giant-root tail is one worker, so its sample is a contiguous probe-stream prefix.
+const SIZE_SAMPLE_CAP: usize = 4_000_000;
+
+/// Per-worker, non-atomic accumulator for the `QUEENS_SIZE` (A'' Phase-2a) offload-sizing probe:
+/// the recurse-arm probe-stream width per available-popcount, a HyperLogLog of the probed
+/// canonical keys (the global distinct ⇒ dedup ceiling), and a bounded route sample for the
+/// post-sort row-buffer-locality check. Merged into the shared [`IsoFlat`] state at drain (the
+/// parallel twin of [`PROF_ACC`]). Zero cost off the `M_SIZE` monomorphisation.
+struct SizeAcc {
+    w: [u64; MAXPC],       // per-pc probe count (frontier width)
+    hll: [u8; SIZE_HLL_M], // thread-local HLL register slice over probed keys (merged by max)
+    sample: Vec<u64>,      // contiguous route sample for the slot-sorted locality check
+}
+
+thread_local! {
+    /// Per-worker `M_SIZE` accumulator; merged into the shared [`IsoFlat::size_*`] state at drain.
+    /// Empty cost off the `M_SIZE` path (this thread-local is only touched on that monomorphisation).
+    static SIZE_ACC: RefCell<SizeAcc> = const {
+        RefCell::new(SizeAcc {
+            w: [0; MAXPC],
+            hll: [0; SIZE_HLL_M],
+            sample: Vec::new(),
         })
     };
 }
@@ -456,6 +489,22 @@ pub struct IsoFlat {
     /// changes only which children expand (gate-safe on iso-dense, no `--distinct`). Off = byte-
     /// identical `M_NORMAL`.
     wave: bool,
+    /// `QUEENS_SIZE=1` (A'' Phase-2a): selects `const MODE = M_SIZE` at the subtree handoff and taps
+    /// the recurse-arm probe stream — every `wins_inc` entry is one flat-TT get — to size the idle-core
+    /// offload (Approach B). Cold measurement only: per-pc width into [`size_w`](Self::size_w), the
+    /// probed keys into [`size_hll`](Self::size_hll) (global distinct ⇒ the dedup ceiling), and a route
+    /// sample into [`size_sample`](Self::size_sample) (post-sort row-buffer locality). Off = byte-
+    /// identical `M_NORMAL`; the tap DCEs to nothing on every other `MODE`.
+    size: bool,
+    /// Shared per-popcount recurse-arm probe count (frontier width), merged from each worker's
+    /// [`SIZE_ACC`] at drain. Only populated when `size`.
+    size_w: Box<[AtomicU64]>,
+    /// Shared HyperLogLog over the probed canonical keys (the global distinct ⇒ dedup ceiling),
+    /// merged register-wise from each worker's thread-local slice at drain. Only used when `size`.
+    size_hll: Hll,
+    /// Cold slot-sorted-locality sample (routes), drained from each worker's [`SIZE_ACC`]. Only
+    /// populated when `size`; touched off the hot path (drain + post-solve report).
+    size_sample: Mutex<Vec<u64>>,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -688,6 +737,10 @@ impl IsoFlat {
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
             wave: std::env::var("QUEENS_WAVE").as_deref() == Ok("1"),
+            size: std::env::var("QUEENS_SIZE").as_deref() == Ok("1"),
+            size_w: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            size_hll: Hll::new(SIZE_HLL_P),
+            size_sample: Mutex::new(Vec::new()),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1273,6 +1326,126 @@ impl IsoFlat {
         self.drain_prof_local();
     }
 
+    /// Merge this worker's `M_SIZE` accumulator ([`SIZE_ACC`]) into the shared sizing state and
+    /// clear it: per-pc width into [`size_w`](Self::size_w), the HLL register slice into
+    /// [`size_hll`](Self::size_hll) (register-wise max), and the route sample into
+    /// [`size_sample`](Self::size_sample). Cold — called once per worker at drain.
+    fn drain_size_local(&self) {
+        SIZE_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            for pc in 0..MAXPC {
+                if a.w[pc] != 0 {
+                    self.size_w[pc].fetch_add(a.w[pc], Ordering::Relaxed);
+                    a.w[pc] = 0;
+                }
+            }
+            self.size_hll.merge_from(&a.hll);
+            a.hll.iter_mut().for_each(|r| *r = 0);
+            if !a.sample.is_empty() {
+                let mut s = self.size_sample.lock().unwrap();
+                // Cap the shared sample so the cold sort stays bounded even across workers.
+                let room = SIZE_SAMPLE_CAP.saturating_sub(s.len());
+                let take = room.min(a.sample.len());
+                s.extend_from_slice(&a.sample[..take]);
+                a.sample.clear();
+            }
+        });
+    }
+
+    /// Merge every rayon worker's `M_SIZE` accumulator into the shared sizing state (parallel
+    /// twin of [`drain_size_local`](Self::drain_size_local)).
+    fn drain_size_all(&self) {
+        rayon::broadcast(|_| self.drain_size_local());
+        self.drain_size_local();
+    }
+
+    /// Print the A'' Phase-2a offload-sizing report (`QUEENS_SIZE=1`; cold, post-solve). Sizes the
+    /// idle-core producer/consumer offload (Approach B) from the recurse-arm probe stream:
+    /// (1) per-pc **frontier width** (how many flat-TT probes the consumer issues per band);
+    /// (2) the **dedup ceiling** — `1 − distinct/probes` over the whole stream (HLL), the max
+    /// duplicate fraction a producer's sort+dedup could remove; (3) the **slot-sorted locality** of
+    /// a probe sample — after sorting by TT slot, the fraction of consecutive probes landing in the
+    /// same cache line / DRAM-row window (the realized-sorted-stream proxy that the `mlp_bench` 5.7×
+    /// assumes). All three feed the gate "a θ exists where sort+SPSC < the sorted-stream saving."
+    fn print_size_report(&self) {
+        let w: Vec<u64> = self
+            .size_w
+            .iter()
+            .map(|a| a.load(Ordering::Relaxed))
+            .collect();
+        let total: u64 = w.iter().sum();
+        if total == 0 {
+            eprintln!("(size: no recurse-arm probes captured)");
+            return;
+        }
+        let distinct = self.size_hll.estimate();
+        let dedup = 1.0 - (distinct / total as f64).min(1.0);
+        eprintln!("(A'' Phase-2a offload sizing — recurse-arm probe stream)");
+        eprintln!(
+            "  per-pc frontier width (flat-TT probes the consumer streams), by available-pc:"
+        );
+        let mut cum = 0u64;
+        for (pc, &c) in w.iter().enumerate() {
+            if c == 0 {
+                continue;
+            }
+            cum += c;
+            eprintln!(
+                "    pc={pc:>3}: {c:>15}  ({:6.2}%, cum {:6.2}%)",
+                c as f64 / total as f64 * 100.0,
+                cum as f64 / total as f64 * 100.0,
+            );
+        }
+        eprintln!(
+            "  total probes {total} · distinct (HLL p={SIZE_HLL_P}) {} · dedup ceiling {:.1}% (duplicate probes a sort could collapse)",
+            distinct as u64,
+            dedup * 100.0,
+        );
+        // Slot-sorted locality: sort the route sample by TT slot, then measure how many consecutive
+        // probes land in the same cache line / DRAM-row window — the row-buffer-hit rate the sorted
+        // stream realizes (`mlp_bench`'s 3–5.7× regime) vs the random scatter today (~0% same-row).
+        // NOTE this is a *floor*: the sample is capped at `SIZE_SAMPLE_CAP`, so the sorted slots are
+        // spread `nslots/sample` apart; a real producer sorts a far larger chunk of the frontier, so
+        // its slots pack denser and its same-line/same-row rates only rise toward fully sequential.
+        let mut sample = self.size_sample.lock().unwrap();
+        if sample.len() < 2 {
+            return;
+        }
+        let nslots = self.tt.capacity().0 as u128;
+        let slot = |r: u64| -> u64 { ((r as u128).wrapping_mul(nslots) >> 64) as u64 };
+        let mut slots: Vec<u64> = sample.iter().map(|&r| slot(r)).collect();
+        sample.clear();
+        slots.sort_unstable();
+        let n = slots.len();
+        let mut same_line = 0u64; // consecutive within 8 slots (a 64-byte cache line)
+        let mut same_row = 0u64; // consecutive within 512 slots (~a 4 KB DRAM-row window)
+        let mut distinct_slots = 1u64;
+        for i in 1..n {
+            let d = slots[i] - slots[i - 1];
+            if d != 0 {
+                distinct_slots += 1;
+            }
+            if d < 8 {
+                same_line += 1;
+            }
+            if d < 512 {
+                same_row += 1;
+            }
+        }
+        let pairs = (n - 1) as f64;
+        eprintln!(
+            "  slot-sorted sample: {n} probes → {distinct_slots} distinct slots ({:.1}% slot-dedup) · sample spread {:.0} slots/probe over {} TT slots",
+            (1.0 - distinct_slots as f64 / n as f64) * 100.0,
+            nslots as f64 / n as f64,
+            nslots,
+        );
+        eprintln!(
+            "  after sort (sample floor): {:.1}% consecutive same-cache-line (<8 slots) · {:.1}% same-row (<512) — vs ~0% for the random scatter today",
+            same_line as f64 / pairs * 100.0,
+            same_row as f64 / pairs * 100.0,
+        );
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
@@ -1310,6 +1483,22 @@ impl IsoFlat {
         } else {
             avail.popcount()
         };
+        // A'' Phase-2a offload sizing (`M_SIZE` only; DCEs to nothing on every other `MODE`, so the
+        // control path is byte-identical). Every `wins_inc` entry performs exactly one flat-TT get
+        // below, so tapping here records the full recurse-arm probe stream the idle-core producer
+        // (Approach B) would sort/dedup: per-pc width (frontier size by band), the probed canonical
+        // key folded into a global HLL (distinct ⇒ the dedup ceiling), and a bounded route sample for
+        // the post-sort row-buffer-locality check. Cold, non-atomic per-worker accumulation.
+        if MODE == M_SIZE {
+            SIZE_ACC.with(|c| {
+                let mut a = c.borrow_mut();
+                a.w[node_pc as usize] += 1;
+                self.size_hll.add_local(key, &mut a.hll);
+                if a.sample.len() < SIZE_SAMPLE_CAP {
+                    a.sample.push(route);
+                }
+            });
+        }
         let got = if MODE == M_PROF {
             // rdtsc-time the flat-TT get and bin the cycles by this node's popcount — the get
             // *is* the random DRAM probe, so its latency by pc is the memory cost distribution.
@@ -2422,7 +2611,12 @@ impl IsoFlat {
             // the production-window combo (the guard const-folds to `M_NORMAL` elsewhere, and
             // DCE drops the dead arms — no instantiation blow-up).
             let mode = if WINDOW && !ORACLE && !COUNT {
-                if self.prof {
+                // `size` is an explicit cold measurement (like `prof`); it wins over the production
+                // `wave` default so `QUEENS_SIZE=1` alone measures the WAVE-off probe stream — the
+                // full frontier before the ETC cut, the upper bound on what Approach B can offload.
+                if self.size {
+                    M_SIZE
+                } else if self.prof {
                     M_PROF
                 } else if self.segment {
                     M_SEG
@@ -2438,6 +2632,9 @@ impl IsoFlat {
             };
             let order8 = self.order8(q);
             let won = match mode {
+                M_SIZE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
                 M_SEG => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SEG>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
@@ -2846,6 +3043,10 @@ impl Solver for IsoFlat {
         self.drain_oracle_all();
         self.drain_hist_all();
         self.drain_prof_all();
+        if self.size {
+            self.drain_size_all();
+            self.print_size_report();
+        }
         if self.steal {
             // Work-stealing diagnostics (TTY text; the same data is in the `--to-file` JSON via
             // `steal_report`): how many subtrees were split off, their available-popcount

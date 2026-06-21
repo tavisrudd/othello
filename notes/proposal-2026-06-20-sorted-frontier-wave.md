@@ -2,7 +2,18 @@
 
 ## Status
 
-**Phase 0 + Phase 1 (Approach A) are DONE; Approach B is scoped below (2026-06-20--11).**
+**Phase 0, Phase 1 (Approach A), and Phase 2a (offload sizing) are DONE; Phase 2a is GO ⇒ build 2b (2026-06-20--12).**
+- **Phase 2a (offload sizing, `QUEENS_SIZE`/`M_SIZE`) — DONE, verdict GO.** A gated cold tap of the
+  recurse-arm probe stream (per-pc width + HLL global-distinct + slot-sorted-locality sample; production
+  byte-identical, control DCEs the tap). **n=16, 12 GB TT @ 70.9% load (WAVE-off stream, the upper bound on
+  offloadable work): 3.0 B recurse-arm probes, pc 13–21 = 88.4% (cross-validates the 87% PROF figure),
+  dedup ceiling 38.1%** (over a third of probes hit an already-probed key ⇒ removable by sort+dedup),
+  **and after a slot-sort 73.0% of consecutive probes land in the same DRAM-row window / 28.5% the same
+  cache line** (vs ~0% for today's random scatter — and this is a *floor*: the 4 M sample spreads slots
+  375 apart; a real producer sorts a far larger chunk → packs denser → trends to fully sequential). n=14
+  proxy agrees (dedup 31.7%, 100% same-row). **All three gate conditions pass — wide frontier, large dedup,
+  strong manufactured locality ⇒ a θ exists where the off-core sort+dedup pays.** (Detail in the
+  [handoff](handoffs/2026-06-19-explicit-stack-frontier.md) session --12 note.)
 - **Phase 0a (microbench) — GREEN.** `tt.rs::mlp_bench::mlp_probe_threads_sweep`: the sorted-stream win
   survives contention; memory saturates at **~780 M/s with ~4–8 streaming cores**; leverage is highest with
   **few** consumers (5× @4 cores, eroding to ~2.8× @8). **~4 sorted-consumer cores out-probe the whole
@@ -192,10 +203,17 @@ with strictly complementary work — the structural property the work-stealing n
 
 ### Phase 2 plan (sub-steps, each gated + revertible)
 
-- **2a — size the offload (no solver change, cold).** Extend the root-timing / split-diagnostic to measure,
-  in the giant-root tail: how many prove-loss subtrees of `avail-pc ≥ θ` exist, their frontier widths per
-  pc-band, and the duplicate fraction after sort (the dedup prize). **Gate:** a θ exists where sort+SPSC <
-  sorted-stream saving (else B can't pay — fail cheap, like the work-stealing split-diagnostic did).
+- **2a — size the offload (no solver change, cold). ✅ DONE (2026-06-20--12) — GO.** Built as a gated cold
+  `M_SIZE` monomorphisation (`QUEENS_SIZE=1`, production byte-identical — the tap DCEs on every other MODE):
+  it taps every `wins_inc` entry-probe and reports per-pc frontier width, a global HLL distinct (dedup
+  ceiling), and a slot-sorted-locality sample. **Reframed from per-θ-subtree to a global probe-stream tap**
+  — cheaper, safe (one tap line, no control-flow change), and decisive for the gate's two failure modes
+  (frontier-too-narrow / dedup-too-low). The per-θ subtree breakdown (to pick θ for 2b) folds into 2b's
+  design, informed by Phase-0a (≈4-consumer regime) + the work-stealing split-diag (pc-band subtree sizes).
+  **Result (n=16, WAVE-off upper-bound stream): 3.0 B probes · pc 13–21 = 88% · dedup ceiling 38.1% · 73%
+  same-DRAM-row after sort.** Gate **PASS** — wide + dedup-able + sorts to row-buffer locality. *(Open
+  refinement for 2b: re-measure the WAVE-**on** residual stream — B sits on top of the ETC cut, so the −16%
+  cut children are already gone; the 38%/73% are the pre-cut upper bound.)*
 - **2b — build the pipeline (gated `QUEENS_WAVE_B`, byte-identical off).** Producer (gather/radix-sort/dedup/
   pack) + bounded SPSC + streaming consumer (prefetch-ahead/probe/cut/expand) on `wins_inc_iter`. Reuse the
   M_WAVE gather + the `mlp_bench` sorted-stream loop. Start with ONE producer + ONE consumer (prove the SPSC
@@ -272,8 +290,14 @@ overlaps the existing grouped-frontier proposal's territory.
 - **Phase 1 (Approach A = `M_WAVE`) — ✅ DONE + PROMOTED TO DEFAULT (2026-06-20--10/11).** Fused in-DFS ETC;
   −16% nodes / −2.7% wall; iso-dense default (`QUEENS_WAVE=0` disables). Captured −4% of the −16% (prep on
   the critical path) — the gap is Phase 2's prize.
-- **Phase 2 (Approach B) — NEXT, scoped above** ("Approach B — DETAILED SCOPE"). Sub-steps **2a** (size the
-  offload, cold), **2b** (build the gated `QUEENS_WAVE_B` producer/consumer pipeline), **2c** (A/B + scale).
+- **Phase 2a (offload sizing) — ✅ DONE (2026-06-20--12) — GO.** Gated cold `M_SIZE` (`QUEENS_SIZE`) probe-
+  stream tap. n=16: 3.0 B probes / pc 13–21 = 88% / dedup ceiling 38.1% / 73% same-DRAM-row after sort. Gate
+  PASS (see Status + the 2a sub-step). Production byte-identical; banked tooling, gated off.
+- **Phase 2b (build the pipeline) — NEXT.** The gated `QUEENS_WAVE_B` producer (gather/radix-sort/dedup/pack)
+  + bounded SPSC + streaming consumer (prefetch-ahead/probe/cut/expand) on `wins_inc_iter`, reusing the
+  M_WAVE gather + the `mlp_bench` sorted-stream loop. Start ONE producer + ONE consumer. **First sub-step:
+  re-run `QUEENS_SIZE` with WAVE on to size the residual (post-ETC-cut) stream B actually offloads.**
+- **Phase 2c (A/B + scale).** Interleaved n=16 A/B vs the M_WAVE default; metric cyc/node + wall + nodes.
   Gate as Phase 1, plus race-freedom of boundary publication; kill criteria in the detailed scope.
 - **Phase 3 (Approach C / n=18):** separate track; fold into the grouped-frontier proposal with BuRR-frozen
   plies.

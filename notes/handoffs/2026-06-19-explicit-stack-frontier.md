@@ -161,8 +161,70 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       probe off the critical path; prize = closing the −4%→−16% wall gap). Full scope in
       [sorted-frontier-wave proposal](../proposal-2026-06-20-sorted-frontier-wave.md) "Approach B — DETAILED
       SCOPE": Phase 2a (size the offload, cold) → 2b (gated `QUEENS_WAVE_B` SPSC pipeline) → 2c (A/B + scale).
+- [x] **Approach B Phase 2a (offload sizing) — BUILT (gated cold `M_SIZE`/`QUEENS_SIZE`) + measured GO
+      (2026-06-20--12).** Production byte-identical (tap DCEs on every other MODE; gates green). n=16 WAVE-off
+      probe stream: **3.0 B recurse-arm probes, pc 13–21 = 88%, dedup ceiling 38.1%, 73% same-DRAM-row after
+      slot-sort** (vs ~0% random). All three gate conditions pass ⇒ **build 2b** (the SPSC producer/consumer
+      pipeline). See the session --12 note + the [proposal](../proposal-2026-06-20-sorted-frontier-wave.md)
+      Status/Phase-2 (DONE/GO).
 
 ## Handoff Notes
+
+### Session --12 (2026-06-20, `mi`): Approach B Phase 2a — offload sizing built + measured GO
+
+**Session** UUID `a3343459-98b6-4c8c-8e57-0c6dc4be46b8` (harness env num `2026-06-20--4`; `--12` in this thread's
+counter). Resumed from `go mi`. Built **Phase 2a** of the [sorted-frontier-wave proposal](../proposal-2026-06-20-sorted-frontier-wave.md)
+— the cold sizing of the Approach-B idle-core offload — and measured it **GO**.
+
+**Design reframe (banked):** the proposal's 2a spec was per-θ prove-loss-subtree (frontier widths + dedup by θ).
+The flat `count --comps` working set can't carry subtree structure, and a per-subtree on-stack collector that
+also tracks `was_loss` needs the hot `wins_inc` return-control restructured (byte-identity risk). **Reframed to a
+global probe-stream tap** — decisive for the gate's two failure modes (frontier-too-narrow / dedup-too-low),
+cheaper, and SAFE (one tap line in an `if MODE == M_SIZE` branch that DCEs ⇒ production byte-identical, no
+control-flow change). The per-θ breakdown (to pick θ in 2b) is informed by Phase-0a (≈4-consumer regime) + the
+work-stealing split-diag (pc-band subtree sizes) — folded into 2b.
+
+**Built (`M_SIZE` = mode 5, `QUEENS_SIZE=1`; wins over the `wave` default in the mode chain so it measures the
+WAVE-off stream):** at every `wins_inc` entry (= one flat-TT recurse-arm probe) tap `(node_pc, key, route)` into a
+per-worker `SizeAcc` — per-pc width counter, `key`→HLL (global distinct, the dedup ceiling), and a capped route
+sample. Cold drain (`drain_size_all`, rayon-broadcast, mirrors `drain_prof`) + a post-solve report
+(`print_size_report`): per-pc frontier-width table, total/distinct/dedup, and slot-sorted-locality (sort the
+sample by TT slot, count consecutive same-cache-line / same-DRAM-row). All in `iso_flat.rs`.
+
+**Gates (green):** `make test` (34/34 lib incl. `solver_lineage_agrees`); iso-flat n=12 `--distinct` =
+1,060,823 / 1.25×; iso-dense n=14 single-thread = **11,747,330** byte-identical with/without the code (control
+unaffected — `M_SIZE` only instantiates under `QUEENS_SIZE`); `QUEENS_SIZE=1` verdict SECOND at n=14 and n=16;
+`make clippy` (-D warnings) + fmt clean.
+
+**MEASURED — GATE PASS (GO):**
+
+| metric (recurse-arm probe stream, WAVE-off = upper bound on offloadable work) | n=14 (1-thread, 1.07 GB TT) | n=16 (24-thread, 12 GB TT @ 70.9% fill) |
+|---|---|---|
+| total recurse-arm probes | 12.83 M | **2,997 M** |
+| pc 13–21 share | 88.5% | **88.4%** (cross-validates the 87% PROF figure) |
+| distinct (HLL p=16) | 8.77 M | 1,854 M |
+| **dedup ceiling** (1 − distinct/probes) | 31.7% | **38.1%** |
+| after slot-sort: same-DRAM-row (<512) | 100% | **73.0%** (sample floor) |
+| after slot-sort: same-cache-line (<8) | 38.2% | 28.5% (sample floor) |
+
+The three gate conditions all pass: **(F1) frontier wide** (3.0 B probes, pc 13–21 = 88%, per-band in the
+hundreds of M); **(F2) dedup material** (38.1% of probes hit an already-probed key — removable by sort+dedup,
+and *rises* n=14→n=16 with transposition saturation); **(locality) manufactured** (a slot-sort turns the random
+scatter into 73% same-DRAM-row hits — the `mlp_bench` 3–5.7× row-buffer regime, on the *real* probe stream).
+The same-line/same-row figures are a **floor**: the 4 M sample spreads slots 375 apart (n=16); a real producer
+sorts a much larger frontier chunk → packs denser → trends to fully sequential. **⇒ a θ exists where off-core
+sort+dedup pays ⇒ GO to Phase 2b.**
+
+**NEXT = Phase 2b** (the gated `QUEENS_WAVE_B` SPSC producer/consumer pipeline on `wins_inc_iter`; start ONE
+producer + ONE consumer). **First 2b sub-step: re-run `QUEENS_SIZE` with WAVE *on*** (`QUEENS_SIZE` currently
+wins over `wave` and measures the pre-cut stream) to size the **residual** post-ETC-cut stream B actually
+offloads — the 38%/73% are the WAVE-off upper bound; B sits on top of M_WAVE's −16% cut, so the cut children are
+already gone. (Quick: make `M_SIZE` run the M_WAVE body + tap, or add a `QUEENS_SIZE` ⇒ keep `wave` variant.)
+Full 2b/2c scope + kill criteria in the proposal's "Approach B — DETAILED SCOPE".
+
+**Method note:** the global-tap reframe is the "fail-cheap" move — it answered the gate at low build cost / zero
+solver risk (like probe #1), without the heavier per-subtree-HLL instrumentation. If 2a had failed (narrow /
+low-dedup), that would have closed the sorted-stream family cheaply.
 
 ### Session --11 (2026-06-20, `mi`): M_WAVE→default, probe #1 kills item A, getK-reshape negative, Approach B scoped
 
