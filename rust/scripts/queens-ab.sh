@@ -10,9 +10,14 @@
 #   * NEVER blind `tmux send-keys C-c` into the pane to "reset" it — that SIGINTs a running solve.
 #     Make sure the pane is idle (at a prompt) before launching instead.
 #   * The solver's live bar is on STDERR (stays on the pane TTY = watchable). The summary line is on
-#     STDOUT, `tee`d via `1> >(tee file)` so it lands in a file (node counts parseable) AND on the
-#     pane (so the verdict/nodes are visible live). Teeing STDOUT is safe — the bar is on STDERR and
-#     untouched. (Do NOT `2>&1 | tee`: routing the bar through a pipe makes it a non-TTY and hides it.)
+#     STDOUT, `tee`d via `1> >(tee file)` so it stays visible live; results, though, are parsed from the
+#     per-run `--to-file` JSON (`{nodes, wall_secs, winner}`) — robust to any human-format change, no
+#     pane scraping. Teeing STDOUT is safe — the bar is on STDERR and untouched. (Do NOT `2>&1 | tee`:
+#     routing the bar through a pipe makes it a non-TTY and hides it.)
+#   * RESULTS prints the per-run table AND the aggregate off/on means + Δ (nodes / cyc/node / total cyc /
+#     wall) — so the A/B verdict is read straight off the harness, not recomputed by hand each time.
+#   * Run each A/B in a FRESH dedicated tmux window (NOT a user's interactive pane); poll the JSON files
+#     or `$STATE`, never the pane text.
 #   * A monitor file `$STATE` (default /tmp/queens-ab.state, override with STATE=…) gets one appended
 #     line per transition (START/BEGIN/END-with-summary/QUEENS_AB_DONE), so a watcher can
 #     `inotifywait -m -e modify "$STATE"` / `tail -F "$STATE"` instead of scraping the pane.
@@ -62,26 +67,55 @@ for r in $(seq 1 "$ROUNDS"); do
       while [ "$(free -g | awk '/^Mem:/{print $7}')" -lt 18 ]; do sleep 3; done
     fi
     # stdout (the solver SUMMARY line) is `tee`d so it lands in the file AND on the pane TTY; the live
-    # progress bar is on stderr (untouched ⇒ still renders live). perf stat → its own file.
+    # progress bar is on stderr (untouched ⇒ still renders live). perf stat → its own file. `--to-file`
+    # also writes a clean JSON (`{nodes, wall_secs, winner, ...}`) so the results are parsed from JSON,
+    # not scraped from the pane/text (decouples from the human-readable format).
     env $tt "$TOG=$v" perf stat -o "$OUT/$tag.perf" -e cycles,instructions \
-      "$BIN" solve "$N" "$SOLVER" 1> >(tee "$OUT/$tag.out")
+      "$BIN" solve "$N" "$SOLVER" --to-file "$OUT/$tag.json" 1> >(tee "$OUT/$tag.out")
     echo "============ END $tag ============"
-    # Append this run's summary + wall to the monitor file (one transition the watcher can fire on).
+    # Append this run's summary + wall to the monitor file (one transition the watcher can fire on),
+    # pulled from the JSON (winner / nodes / wall_secs).
     { printf 'END %s ' "$tag"
-      grep -hoE "(first|second) player wins|searched [0-9,]+ nodes in [0-9.]+s" "$OUT/$tag.out" | paste -sd' '
-      grep -hE "seconds time elapsed" "$OUT/$tag.perf" | tr -s ' '
+      python3 -c "import json,sys;d=json.load(open('$OUT/$tag.json'));print(f\"{d['winner']} player wins · {d['nodes']:,} nodes · {d['wall_secs']:.2f}s\")" 2>/dev/null \
+        || echo "(json parse failed)"
     } >> "$STATE"
   done
 done
-echo; echo "===== RESULTS  n=$N  $TOG  (cyc/node = perf cycles / solver nodes; node-count-independent) ====="
-for r in $(seq 1 "$ROUNDS"); do
-  for lab in off on; do
-    tag=${lab}_${r}
-    n=$(grep -oE "searched [0-9,]+ nodes" "$OUT/$tag.out" | grep -oE "[0-9,]+" | tr -d ,)
-    c=$(grep -E " cycles" "$OUT/$tag.perf" | grep -oE "^[ ]*[0-9,]+" | tr -d ', ')
-    awk -v n="$n" -v c="$c" -v t="$tag" \
-      'BEGIN{if(n>0&&c>0)printf "%-8s cyc/node=%8.1f  nodes=%d\n",t,c/n,n; else printf "%-8s FAIL n=[%s] c=[%s]\n",t,n,c}'
-  done
-done
+echo; echo "===== RESULTS  n=$N  $TOG  (cyc/node = perf cycles / JSON nodes; node-count-independent) ====="
+# Per-run table + accumulate off/on means for the aggregate delta (the node/cyc/wall ratios, computed
+# here so we stop doing it by hand). cyc from perf, nodes+wall from the JSON.
+python3 - "$OUT" "$ROUNDS" <<'PY'
+import json, re, sys, glob, os
+out, rounds = sys.argv[1], int(sys.argv[2])
+def cyc(p):
+    try:
+        t = open(p).read()
+        m = re.search(r'^\s*([\d,]+)\s+cycles', t, re.M)
+        return int(m.group(1).replace(',', '')) if m else 0
+    except OSError:
+        return 0
+agg = {'off': [], 'on': []}
+for r in range(1, rounds + 1):
+    for lab in ('off', 'on'):
+        tag = f'{lab}_{r}'
+        jp = os.path.join(out, f'{tag}.json')
+        try:
+            d = json.load(open(jp))
+        except OSError:
+            print(f'{tag:8} FAIL (no json)'); continue
+        n, w = d['nodes'], d['wall_secs']
+        c = cyc(os.path.join(out, f'{tag}.perf'))
+        cpn = c / n if n else 0
+        agg[lab].append((n, cpn, c, w))
+        print(f'{tag:8} cyc/node={cpn:8.1f}  nodes={n:>13,}  wall={w:6.1f}s')
+def mean(xs): return sum(xs) / len(xs) if xs else 0
+if agg['off'] and agg['on']:
+    on_, oc, ot, ow = (mean([x[i] for x in agg['off']]) for i in range(4))
+    nn, nc, nt, nw = (mean([x[i] for x in agg['on']]) for i in range(4))
+    print(f'\n  MEAN off: cyc/node={oc:.0f}  nodes={on_/1e9:.3f}B  totalGcyc={oc*on_/1e9:.0f}  wall={ow:.1f}s')
+    print(f'  MEAN on : cyc/node={nc:.0f}  nodes={nn/1e9:.3f}B  totalGcyc={nc*nn/1e9:.0f}  wall={nw:.1f}s')
+    pct = lambda a, b: f'{b/a-1:+.1%}' if a else 'n/a'
+    print(f'  Δ on vs off: nodes {pct(on_,nn)} | cyc/node {pct(oc,nc)} | total cyc {pct(oc*on_,nc*nn)} | wall {pct(ow,nw)}')
+PY
 echo "QUEENS_AB_DONE  ($OUT)"
 echo "QUEENS_AB_DONE $OUT $(date +%s)" >> "$STATE"
