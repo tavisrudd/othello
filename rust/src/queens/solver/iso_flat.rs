@@ -74,6 +74,7 @@ const M_ORD: u8 = 10; // dynamic move ordering: descend by current available-blo
 const M_ORD_W: u8 = 11; // dynamic move ordering + the M_WAVE ETC cut on top (`QUEENS_ORD=2`)
 const M_DECPROBE: u8 = 12; // M_ORD_W + tap the connected-component decomposability of every pc 9..16 getK node (`QUEENS_DECPROBE=1`)
 const M_RANK: u8 = 13; // M_ORD_W + tap the first-losing-child cutoff rank (ETC vs descent rank vs no-cut) per pc (`QUEENS_RANK=1`)
+const M_COLD: u8 = 14; // M_ORD_W + tap the entry-probe hit/miss (cold-compute) fraction per pc, per-worker (`QUEENS_COLD=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -223,6 +224,26 @@ struct RankAcc {
 /// Descent-rank histogram bucket count for [`RankAcc`]; the last bucket is "rank ≥ this−1".
 const RANK_BUCKETS: usize = 24;
 
+/// `M_COLD` (`QUEENS_COLD=1`) per-pc-band entry-probe hit/miss tally (indexed by `node_pc`). A node's
+/// entry get into the flat TT either HITs (a transposition/re-probe — warm work) or MISSes (the node
+/// expands — cold compute). The miss% per pc is the cold-compute fraction the memory-side prefetch/
+/// pre-warm levers target; a substantially-warm tail (low miss%) ⇒ nothing to pre-warm. Kept PER
+/// WORKER (non-atomic) and drained as a [`ColdWorker`] so the report can isolate the giant-root tail
+/// (the top-probe worker) from the aggregate. Zero cost off the `M_COLD` monomorphisation.
+struct ColdAcc {
+    hits: [u64; MAXPC],
+    misses: [u64; MAXPC],
+}
+
+/// Per-worker `M_COLD` result drained for the report: this worker's per-pc entry-probe hit/miss
+/// arrays plus its total probe count (the top-probe worker is the giant-root tail). The arrays are
+/// boxed so a `ColdWorker` is cheap to move into the shared `Vec` (drained off the hot path).
+struct ColdWorker {
+    probes: u64,
+    hits: Box<[u64; MAXPC]>,
+    misses: Box<[u64; MAXPC]>,
+}
+
 thread_local! {
     /// Per-worker `M_DECPROBE` accumulator; merged into the shared [`IsoFlat::dec_*`] at drain.
     /// Empty cost off the `M_DECPROBE` path.
@@ -244,6 +265,14 @@ thread_local! {
             etc_cut: [0; MAXPC],
             no_cut: [0; MAXPC],
             rank_dist: [[0; RANK_BUCKETS]; MAXPC],
+        })
+    };
+    /// Per-worker `M_COLD` accumulator; drained into the shared per-worker [`IsoFlat::cold_workers`]
+    /// list at drain. Empty cost off the `M_COLD` path.
+    static COLD_ACC: RefCell<ColdAcc> = const {
+        RefCell::new(ColdAcc {
+            hits: [0; MAXPC],
+            misses: [0; MAXPC],
         })
     };
 }
@@ -869,6 +898,14 @@ pub struct IsoFlat {
     rank_etc: Box<[AtomicU64]>,
     rank_nocut: Box<[AtomicU64]>,
     rank_dist: Box<[AtomicU64]>, // laid out [pc * RANK_BUCKETS + r]
+    /// `QUEENS_COLD=1`: selects `const MODE = M_COLD` (= M_ORD_W + a cold tap on the entry-probe
+    /// hit/miss per pc — gates the memory-side prefetch/pre-warm lever family). Per-worker hit/miss
+    /// arrays merged from each worker's [`COLD_ACC`] at drain; report printed post-solve, isolating
+    /// the giant-root tail (top-probe worker) from the aggregate. Off = byte-identical M_ORD_W.
+    cold: bool,
+    /// Per-worker drained `M_COLD` results (one [`ColdWorker`] per worker that probed). Sorted by
+    /// probe count in the report so worker rank 0 = the giant-root tail. Only populated when `cold`.
+    cold_workers: Mutex<Vec<ColdWorker>>,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -1168,6 +1205,8 @@ impl IsoFlat {
             rank_dist: (0..MAXPC * RANK_BUCKETS)
                 .map(|_| AtomicU64::new(0))
                 .collect(),
+            cold: std::env::var("QUEENS_COLD").as_deref() == Ok("1"),
+            cold_workers: Mutex::new(Vec::new()),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -2008,6 +2047,32 @@ impl IsoFlat {
         self.drain_rank_local();
     }
 
+    /// Merge this worker's `M_COLD` accumulator ([`COLD_ACC`]) into the shared per-worker list
+    /// ([`cold_workers`](Self::cold_workers)) — kept per-worker (not folded into one aggregate) so
+    /// the report can rank workers by probe count and print the giant-root tail's miss% separately.
+    /// Cold — called once per worker at drain.
+    fn drain_cold_local(&self) {
+        COLD_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            let probes: u64 = a.hits.iter().chain(a.misses.iter()).sum();
+            if probes == 0 {
+                return;
+            }
+            self.cold_workers.lock().unwrap().push(ColdWorker {
+                probes,
+                hits: Box::new(a.hits),
+                misses: Box::new(a.misses),
+            });
+            a.hits = [0; MAXPC];
+            a.misses = [0; MAXPC];
+        });
+    }
+
+    fn drain_cold_all(&self) {
+        rayon::broadcast(|_| self.drain_cold_local());
+        self.drain_cold_local();
+    }
+
     /// Print the `M_DECPROBE` (`QUEENS_DECPROBE=1`) per-pc connected-component decomposability report.
     /// Gates the nimber-decomposition node-count lever: a getK node whose conflict graph splits into
     /// components ≤8 (or ≤k−1) could be resolved (or shrunk a layer) by a Sprague-Grundy XOR of the
@@ -2110,6 +2175,104 @@ impl IsoFlat {
                 100.0 * cut_le1 as f64 / gtot,
             );
         }
+    }
+
+    /// Print the `M_COLD` (`QUEENS_COLD=1`) per-pc entry-probe hit/miss (cold-compute) report. Gates
+    /// the memory-side prefetch/pre-warm lever family: a node's entry get either HITs the flat TT (a
+    /// transposition served warm — nothing to pre-warm) or MISSes (the node expands = cold compute).
+    /// The miss% is the cold fraction the prefetch lever could target. The giant-root tail (the slowest
+    /// worker = the most entry probes = ~the whole wall) is isolated from the aggregate, because its
+    /// miss% — not the fast-roots-diluted global mix — decides the lever. Verdict: the node-weighted
+    /// miss% over the deep recurse-spine bands (pc≥17) vs the ~25–30% kill threshold (below ⇒ the tail
+    /// is transposition-saturated/warm ⇒ the memory family is DEAD; above ⇒ there is cold work to warm).
+    fn print_cold_report(&self) {
+        // Print a per-pc hit/miss table for one (hits, misses) pair; returns (deep-band misses,
+        // deep-band probes) over pc≥17 for the verdict. `DEEP_LO` = the recurse-spine floor.
+        const DEEP_LO: usize = 17;
+        let print_table = |label: &str, hits: &[u64; MAXPC], misses: &[u64; MAXPC]| -> (u64, u64) {
+            let total: u64 = hits.iter().chain(misses.iter()).sum();
+            println!("  {label} — {} entry probes", commas(total));
+            println!(
+                "    {:>3} {:>15} {:>8} {:>9}",
+                "pc", "probes", "hit%", "miss%(cold)"
+            );
+            let (mut deep_m, mut deep_p) = (0u64, 0u64);
+            for pc in 0..MAXPC {
+                let h = hits[pc];
+                let m = misses[pc];
+                let p = h + m;
+                if p == 0 {
+                    continue;
+                }
+                if pc >= DEEP_LO {
+                    deep_m += m;
+                    deep_p += p;
+                }
+                println!(
+                    "    {pc:>3} {:>15} {:>7.1}% {:>8.1}%",
+                    commas(p),
+                    100.0 * h as f64 / p as f64,
+                    100.0 * m as f64 / p as f64,
+                );
+            }
+            (deep_m, deep_p)
+        };
+
+        let mut workers = self.cold_workers.lock().unwrap();
+        if workers.is_empty() {
+            println!("\n  entry-probe cold fraction (QUEENS_COLD): no probes captured");
+            return;
+        }
+        // Rank workers by probe count desc — rank 0 = the slowest worker = the giant-root tail.
+        workers.sort_unstable_by(|a, b| b.probes.cmp(&a.probes));
+
+        // Aggregate across every worker.
+        let mut agg_h = [0u64; MAXPC];
+        let mut agg_m = [0u64; MAXPC];
+        for w in workers.iter() {
+            for pc in 0..MAXPC {
+                agg_h[pc] += w.hits[pc];
+                agg_m[pc] += w.misses[pc];
+            }
+        }
+
+        println!(
+            "\n  entry-probe cold fraction (QUEENS_COLD) — {} workers, top-probe worker = giant-root tail",
+            workers.len()
+        );
+
+        // The giant-root tail: rank 0 (the slowest worker). Its miss% is the number that gates the lever.
+        let tail = &workers[0];
+        let (tail_dm, tail_dp) = print_table(
+            "TAIL worker (rank 0, by probes) ← giant-root tail",
+            &tail.hits,
+            &tail.misses,
+        );
+
+        // The aggregate (all workers) — diluted by the fast roots, kept for reference.
+        let (agg_dm, agg_dp) = print_table("AGGREGATE (all workers)", &agg_h, &agg_m);
+
+        // Verdict: node-weighted deep-band (pc≥DEEP_LO, the recurse spine) miss% vs the kill threshold.
+        let tail_pct = if tail_dp > 0 {
+            100.0 * tail_dm as f64 / tail_dp as f64
+        } else {
+            0.0
+        };
+        let agg_pct = if agg_dp > 0 {
+            100.0 * agg_dm as f64 / agg_dp as f64
+        } else {
+            0.0
+        };
+        let verdict = if tail_pct < 25.0 {
+            "< 25% ⇒ tail is transposition-saturated/WARM — memory prefetch/pre-warm family DEAD"
+        } else if tail_pct < 30.0 {
+            "25–30% ⇒ borderline — marginal cold work to pre-warm"
+        } else {
+            "≥ 30% ⇒ tail is substantially COLD — memory prefetch/pre-warm family is LIVE"
+        };
+        println!(
+            "  VERDICT (deep bands pc≥{DEEP_LO}, the recurse spine): tail miss% = {tail_pct:.1}% (aggregate {agg_pct:.1}%) — {verdict}"
+        );
     }
 
     /// Print the A'' Phase-2a offload-sizing report (`QUEENS_SIZE=1`; cold, post-solve). Sizes the
@@ -2405,12 +2568,12 @@ impl IsoFlat {
         } else {
             avail.popcount()
         };
-        // `M_DECPROBE`/`M_RANK` are measurement twins of `M_ORD_W`: they take the exact same dynamic-
-        // ordering + fused-ETC path (so the observed cutoff rank / getK population is the production
-        // one), adding only a cold tally. These two predicates fold the three-way OR away (`MODE` is a
-        // const generic ⇒ each is a compile-time constant, DCE'd per monomorphisation; a nested `const`
-        // can't capture the outer generic, so a `let` carries it — same codegen).
-        let ord_w: bool = MODE == M_ORD_W || MODE == M_DECPROBE || MODE == M_RANK;
+        // `M_DECPROBE`/`M_RANK`/`M_COLD` are measurement twins of `M_ORD_W`: they take the exact same
+        // dynamic-ordering + fused-ETC path (so the observed cutoff rank / getK population / entry-probe
+        // hit-rate is the production one), adding only a cold tally. These predicates fold the OR away
+        // (`MODE` is a const generic ⇒ each is a compile-time constant, DCE'd per monomorphisation; a
+        // nested `const` can't capture the outer generic, so a `let` carries it — same codegen).
+        let ord_w: bool = MODE == M_ORD_W || MODE == M_DECPROBE || MODE == M_RANK || MODE == M_COLD;
         let ord_sort: bool = MODE == M_ORD || ord_w;
         // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
         // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
@@ -2484,6 +2647,21 @@ impl IsoFlat {
         } else {
             self.mtt_get::<COUNT, MODE>(key, route, fp, node_pc)
         };
+        // M_COLD (`QUEENS_COLD=1` only; DCEs to nothing on every other `MODE` ⇒ M_ORD_W byte-identical).
+        // Tally this node's entry probe: a HIT (`got.is_some()`) = a transposition/re-probe served warm
+        // from the flat TT; a MISS (`got.is_none()`) = the node falls through and EXPANDS = cold compute.
+        // The miss% per pc is the cold-compute fraction the prefetch/pre-warm levers target. Binned by
+        // `node_pc`; per-worker (non-atomic) so the report can isolate the giant-root tail.
+        if MODE == M_COLD {
+            COLD_ACC.with(|c| {
+                let mut a = c.borrow_mut();
+                if got.is_some() {
+                    a.hits[node_pc as usize] += 1;
+                } else {
+                    a.misses[node_pc as usize] += 1;
+                }
+            });
+        }
         if let Some(w) = got {
             return w != 0;
         }
@@ -3765,6 +3943,9 @@ impl IsoFlat {
                 } else if self.rank {
                     // Cold first-losing-child rank tap on the production M_ORD_W path.
                     M_RANK
+                } else if self.cold {
+                    // Cold entry-probe hit/miss tap on the production M_ORD_W path.
+                    M_COLD
                 } else if self.size {
                     if self.size_wave {
                         M_SIZE_WAVE
@@ -3818,6 +3999,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_RANK => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_COLD => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_COLD>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(
@@ -4284,6 +4468,10 @@ impl Solver for IsoFlat {
         if self.rank {
             self.drain_rank_all();
             self.print_rank_report();
+        }
+        if self.cold {
+            self.drain_cold_all();
+            self.print_cold_report();
         }
         if self.steal {
             // Work-stealing diagnostics (TTY text; the same data is in the `--to-file` JSON via
