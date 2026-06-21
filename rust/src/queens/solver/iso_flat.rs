@@ -72,6 +72,8 @@ const M_L0: u8 = 8; // A'' Phase-2b dedup: M_WAVE + a per-worker L0 probe cache 
 const M_WAVE_C: u8 = 9; // M_WAVE + cascade-reorder (recurse arm first in the pc-cascade) (`QUEENS_WAVE_C=1`)
 const M_ORD: u8 = 10; // dynamic move ordering: descend by current available-block degree, not static q.order (`QUEENS_ORD=1`)
 const M_ORD_W: u8 = 11; // dynamic move ordering + the M_WAVE ETC cut on top (`QUEENS_ORD=2`)
+const M_DECPROBE: u8 = 12; // M_ORD_W + tap the connected-component decomposability of every pc 9..16 getK node (`QUEENS_DECPROBE=1`)
+const M_RANK: u8 = 13; // M_ORD_W + tap the first-losing-child cutoff rank (ETC vs descent rank vs no-cut) per pc (`QUEENS_RANK=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -187,6 +189,61 @@ thread_local! {
             rc_per_pc_hits: [0; MAXPC],
             rc_win_h: [0; RC_WINDOWS],
             rc_win_p: [0; RC_WINDOWS],
+        })
+    };
+}
+
+/// `M_DECPROBE` (`QUEENS_DECPROBE=1`) per-pc-band connected-component decomposability tally over the
+/// pc 9..16 getK nodes (indexed by `node_pc`). Merged into the shared [`IsoFlat::dec_*`] state at drain
+/// (the parallel twin of [`PROF_ACC`]). Zero cost off the `M_DECPROBE` monomorphisation.
+struct DecAcc {
+    nodes: [u64; MAXPC],      // getK nodes seen per pc
+    ncomp_sum: [u64; MAXPC],  // Σ #components (for the mean)
+    ge2: [u64; MAXPC],        // #nodes with ≥2 components
+    all_le8: [u64; MAXPC],    // #nodes whose every component is ≤8 (table-resolvable)
+    all_le_km1: [u64; MAXPC], // #nodes whose every component is ≤(k-1) (drops one getK layer)
+    // max-component-size distribution per pc, bucketed: msz_dist[pc][s] = #nodes with max-comp-size==s.
+    // s ranges 0..=16 (a pc==16 node's max comp is ≤16); index 0 unused.
+    msz_dist: [[u64; 17]; MAXPC],
+}
+
+/// `M_RANK` (`QUEENS_RANK=1`) per-pc-band first-losing-child cutoff-rank tally (indexed by `node_pc`).
+/// Counts where the OR-node's first proven-loss child landed: the ETC pre-pass ("rank -1"), the
+/// descent at 0-based rank `r` (`rank_dist`, last bucket absorbs the tail), or no cut at all (a LOSS
+/// node, full scan). Merged into the shared [`IsoFlat::rank_*`] at drain. Zero cost off `M_RANK`.
+struct RankAcc {
+    nodes: [u64; MAXPC],   // expanded OR-nodes seen per pc (the descent-loop ones)
+    etc_cut: [u64; MAXPC], // cut by the ETC pre-pass (before the descent)
+    no_cut: [u64; MAXPC],  // reached the end with no cut (a LOSS node)
+    // descent rank distribution: rank_dist[pc][r] = #nodes whose first descent cutoff was at rank r;
+    // r in 0..RANK_BUCKETS, the last bucket absorbs rank ≥ RANK_BUCKETS-1.
+    rank_dist: [[u64; RANK_BUCKETS]; MAXPC],
+}
+
+/// Descent-rank histogram bucket count for [`RankAcc`]; the last bucket is "rank ≥ this−1".
+const RANK_BUCKETS: usize = 24;
+
+thread_local! {
+    /// Per-worker `M_DECPROBE` accumulator; merged into the shared [`IsoFlat::dec_*`] at drain.
+    /// Empty cost off the `M_DECPROBE` path.
+    static DEC_ACC: RefCell<DecAcc> = const {
+        RefCell::new(DecAcc {
+            nodes: [0; MAXPC],
+            ncomp_sum: [0; MAXPC],
+            ge2: [0; MAXPC],
+            all_le8: [0; MAXPC],
+            all_le_km1: [0; MAXPC],
+            msz_dist: [[0; 17]; MAXPC],
+        })
+    };
+    /// Per-worker `M_RANK` accumulator; merged into the shared [`IsoFlat::rank_*`] at drain.
+    /// Empty cost off the `M_RANK` path.
+    static RANK_ACC: RefCell<RankAcc> = const {
+        RefCell::new(RankAcc {
+            nodes: [0; MAXPC],
+            etc_cut: [0; MAXPC],
+            no_cut: [0; MAXPC],
+            rank_dist: [[0; RANK_BUCKETS]; MAXPC],
         })
     };
 }
@@ -420,6 +477,80 @@ fn adj_row_pext(row: Bits, a: &[u64; 4], cpre: [u32; 3]) -> u64 {
             | (_pext_u64(r[2], a[2]) << cpre[1])
             | (_pext_u64(r[3], a[3]) << cpre[2])
     }
+}
+
+/// `M_DECPROBE` (`QUEENS_DECPROBE=1`) connected-component decomposition of one pc==`k` getK node's
+/// conflict graph, built straight from `avail` (the `k` live squares) + `att` — the exact labelled
+/// adjacency the `wK_get` code-build forms (`adj_row_pext` per vertex, kept per-row instead of packed
+/// into a code). Returns `(ncomp, max_size, all_le8, all_le_km1)`:
+/// - `ncomp`     = number of connected components (isolated squares are size-1 components),
+/// - `max_size`  = largest component's vertex count,
+/// - `all_le8`   = every component is ≤8 vertices (⇒ table-resolvable, zero getK recursion),
+/// - `all_le_km1`= every component is ≤`k-1` (⇒ drops at least one getK layer).
+///
+/// Components via bitmask BFS over the ≤16 `u16` adjacency rows: lowest unvisited vertex seeds a
+/// frontier `|= adj[v]` to fixpoint = one component; repeat. Cold measurement only (DCEs for every
+/// other MODE).
+#[inline]
+fn decompose_node(avail: Bits, att: &[[Bits; 8]], k: usize) -> (u32, u32, bool, bool) {
+    let mut verts = [0u8; 16];
+    verts_of(avail, &mut verts[..k]);
+    let a = &avail.0;
+    let c0 = a[0].count_ones();
+    let c1 = c0 + a[1].count_ones();
+    let c2 = c1 + a[2].count_ones();
+    let cpre = [c0, c1, c2];
+    // Labelled adjacency rows: bit j of adj[i] set iff live square i attacks live square j.
+    let mut adj = [0u16; 16];
+    for i in 0..k {
+        let packed = adj_row_pext(att08(att, verts[i]), a, cpre) as u16;
+        // Clear the self-bit (a square doesn't conflict with itself) — `adj_row_pext` includes it.
+        adj[i] = packed & !(1u16 << i);
+    }
+    let full: u16 = if k >= 16 { u16::MAX } else { (1u16 << k) - 1 };
+    let mut unvisited = full;
+    let mut ncomp = 0u32;
+    let mut max_size = 0u32;
+    let mut all_le8 = true;
+    let mut all_le_km1 = true;
+    while unvisited != 0 {
+        let seed = unvisited.trailing_zeros();
+        let mut comp = 1u16 << seed;
+        loop {
+            let mut next = comp;
+            let mut r = comp;
+            while r != 0 {
+                let v = r.trailing_zeros() as usize;
+                r &= r - 1;
+                next |= adj[v];
+            }
+            next &= full;
+            if next == comp {
+                break;
+            }
+            comp = next;
+        }
+        unvisited &= !comp;
+        let sz = comp.count_ones();
+        ncomp += 1;
+        max_size = max_size.max(sz);
+        all_le8 &= sz <= 8;
+        all_le_km1 &= (sz as usize) < k; // every component ≤ k-1 ⇒ drops at least one getK layer
+    }
+    (ncomp, max_size, all_le8, all_le_km1)
+}
+
+/// Thousands-separated decimal (cold report formatting only; the `bin` has its own twin).
+fn commas(n: u64) -> String {
+    let digits = n.to_string();
+    let mut out = String::with_capacity(digits.len() + digits.len() / 3);
+    for (i, ch) in digits.char_indices() {
+        if i > 0 && (digits.len() - i).is_multiple_of(3) {
+            out.push(',');
+        }
+        out.push(ch);
+    }
+    out
 }
 
 /// The `k`-vertex (`k ≤ 8`) labelled upper-triangular edge code of the `alive` sub-graph of a
@@ -716,6 +847,28 @@ pub struct IsoFlat {
     /// `QUEENS_ORD=2`: dynamic ordering **plus** the M_WAVE ETC cut (`M_ORD_W`) — does ETC still pay on
     /// top of the better ordering? Implies `ord`.
     ord_etc: bool,
+    /// `QUEENS_DECPROBE=1`: selects `const MODE = M_DECPROBE` (= M_ORD_W + a cold tap on every pc 9..16
+    /// getK node's connected-component decomposition — gates the nimber-decomposition lever). Per-pc
+    /// component stats merged from each worker's [`DEC_ACC`] at drain; report printed post-solve. Off =
+    /// byte-identical M_ORD_W (the tap DCEs).
+    decprobe: bool,
+    /// Shared `M_DECPROBE` accumulator (6 metric arrays + the max-comp-size dist), `AtomicU64`-backed
+    /// so workers fold their [`DEC_ACC`] in lock-free. Only populated when `decprobe`.
+    dec_nodes: Box<[AtomicU64]>,
+    dec_ncomp_sum: Box<[AtomicU64]>,
+    dec_ge2: Box<[AtomicU64]>,
+    dec_all_le8: Box<[AtomicU64]>,
+    dec_all_le_km1: Box<[AtomicU64]>,
+    dec_msz: Box<[AtomicU64]>, // laid out [pc * 17 + size]
+    /// `QUEENS_RANK=1`: selects `const MODE = M_RANK` (= M_ORD_W + a cold tap on the first-losing-child
+    /// cutoff rank — gates the move-ordering lever). Per-pc ETC/descent-rank/no-cut stats merged from
+    /// each worker's [`RANK_ACC`] at drain; report printed post-solve. Off = byte-identical M_ORD_W.
+    rank: bool,
+    /// Shared `M_RANK` accumulator, `AtomicU64`-backed. Only populated when `rank`.
+    rank_nodes: Box<[AtomicU64]>,
+    rank_etc: Box<[AtomicU64]>,
+    rank_nocut: Box<[AtomicU64]>,
+    rank_dist: Box<[AtomicU64]>, // laid out [pc * RANK_BUCKETS + r]
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -1001,6 +1154,20 @@ impl IsoFlat {
             // `QUEENS_ORD=1` fixed ⇒ a clean M_ORD vs M_ORD_W interleaved comparison).
             ord_etc: std::env::var("QUEENS_ORD").as_deref() == Ok("2")
                 || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1"),
+            decprobe: std::env::var("QUEENS_DECPROBE").as_deref() == Ok("1"),
+            dec_nodes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            dec_ncomp_sum: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            dec_ge2: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            dec_all_le8: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            dec_all_le_km1: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            dec_msz: (0..MAXPC * 17).map(|_| AtomicU64::new(0)).collect(),
+            rank: std::env::var("QUEENS_RANK").as_deref() == Ok("1"),
+            rank_nodes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            rank_etc: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            rank_nocut: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            rank_dist: (0..MAXPC * RANK_BUCKETS)
+                .map(|_| AtomicU64::new(0))
+                .collect(),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1778,6 +1945,173 @@ impl IsoFlat {
         self.drain_size_local();
     }
 
+    /// Merge this worker's `M_DECPROBE` accumulator ([`DEC_ACC`]) into the shared `dec_*` totals.
+    fn drain_dec_local(&self) {
+        DEC_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            for pc in 0..MAXPC {
+                if a.nodes[pc] == 0 {
+                    continue;
+                }
+                self.dec_nodes[pc].fetch_add(a.nodes[pc], Ordering::Relaxed);
+                self.dec_ncomp_sum[pc].fetch_add(a.ncomp_sum[pc], Ordering::Relaxed);
+                self.dec_ge2[pc].fetch_add(a.ge2[pc], Ordering::Relaxed);
+                self.dec_all_le8[pc].fetch_add(a.all_le8[pc], Ordering::Relaxed);
+                self.dec_all_le_km1[pc].fetch_add(a.all_le_km1[pc], Ordering::Relaxed);
+                for s in 0..17 {
+                    if a.msz_dist[pc][s] != 0 {
+                        self.dec_msz[pc * 17 + s].fetch_add(a.msz_dist[pc][s], Ordering::Relaxed);
+                        a.msz_dist[pc][s] = 0;
+                    }
+                }
+                a.nodes[pc] = 0;
+                a.ncomp_sum[pc] = 0;
+                a.ge2[pc] = 0;
+                a.all_le8[pc] = 0;
+                a.all_le_km1[pc] = 0;
+            }
+        });
+    }
+
+    fn drain_dec_all(&self) {
+        rayon::broadcast(|_| self.drain_dec_local());
+        self.drain_dec_local();
+    }
+
+    /// Merge this worker's `M_RANK` accumulator ([`RANK_ACC`]) into the shared `rank_*` totals.
+    fn drain_rank_local(&self) {
+        RANK_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            for pc in 0..MAXPC {
+                if a.nodes[pc] == 0 {
+                    continue;
+                }
+                self.rank_nodes[pc].fetch_add(a.nodes[pc], Ordering::Relaxed);
+                self.rank_etc[pc].fetch_add(a.etc_cut[pc], Ordering::Relaxed);
+                self.rank_nocut[pc].fetch_add(a.no_cut[pc], Ordering::Relaxed);
+                for r in 0..RANK_BUCKETS {
+                    if a.rank_dist[pc][r] != 0 {
+                        self.rank_dist[pc * RANK_BUCKETS + r]
+                            .fetch_add(a.rank_dist[pc][r], Ordering::Relaxed);
+                        a.rank_dist[pc][r] = 0;
+                    }
+                }
+                a.nodes[pc] = 0;
+                a.etc_cut[pc] = 0;
+                a.no_cut[pc] = 0;
+            }
+        });
+    }
+
+    fn drain_rank_all(&self) {
+        rayon::broadcast(|_| self.drain_rank_local());
+        self.drain_rank_local();
+    }
+
+    /// Print the `M_DECPROBE` (`QUEENS_DECPROBE=1`) per-pc connected-component decomposability report.
+    /// Gates the nimber-decomposition node-count lever: a getK node whose conflict graph splits into
+    /// components ≤8 (or ≤k−1) could be resolved (or shrunk a layer) by a Sprague-Grundy XOR of the
+    /// component values instead of the whole-graph getK sweep.
+    fn print_dec_report(&self) {
+        let ld = |b: &[AtomicU64], i: usize| b[i].load(Ordering::Relaxed);
+        let total: u64 = (9..=16).map(|pc| ld(&self.dec_nodes, pc)).sum();
+        println!(
+            "\n  getK connected-component decomposition (QUEENS_DECPROBE) — {} getK nodes, pc 9..16",
+            commas(total)
+        );
+        println!(
+            "    {:>3} {:>15} {:>7} {:>9} {:>11} {:>13}   max-comp-size dist (size:%)",
+            "pc", "nodes", "mean#c", "≥2 comp%", "all≤8 %", "all≤(k-1)%"
+        );
+        for pc in 9..=16usize {
+            let n = ld(&self.dec_nodes, pc);
+            if n == 0 {
+                continue;
+            }
+            let nf = n as f64;
+            let mean_c = ld(&self.dec_ncomp_sum, pc) as f64 / nf;
+            let ge2 = 100.0 * ld(&self.dec_ge2, pc) as f64 / nf;
+            let le8 = 100.0 * ld(&self.dec_all_le8, pc) as f64 / nf;
+            let lekm1 = 100.0 * ld(&self.dec_all_le_km1, pc) as f64 / nf;
+            // Top max-component-size buckets (largest first), only the meaningful ones.
+            let mut dist: Vec<(usize, u64)> = (1..=16)
+                .map(|s| (s, ld(&self.dec_msz, pc * 17 + s)))
+                .filter(|&(_, c)| c != 0)
+                .collect();
+            dist.sort_by(|a, b| b.1.cmp(&a.1));
+            let dist_s: String = dist
+                .iter()
+                .take(5)
+                .map(|&(s, c)| format!("{s}:{:.0}%", 100.0 * c as f64 / nf))
+                .collect::<Vec<_>>()
+                .join(" ");
+            println!(
+                "    {pc:>3} {:>15} {mean_c:>7.3} {ge2:>8.1}% {le8:>10.2}% {lekm1:>12.2}%   {dist_s}",
+                commas(n)
+            );
+        }
+    }
+
+    /// Print the `M_RANK` (`QUEENS_RANK=1`) per-pc first-losing-child cutoff-rank report. Gates the
+    /// move-ordering lever: if nearly every cutoff lands at ETC / rank 0 / rank 1, the ordering is
+    /// near-exhausted; a fat rank≥2 tail means a better order would still cut earlier.
+    fn print_rank_report(&self) {
+        let ld = |b: &[AtomicU64], i: usize| b[i].load(Ordering::Relaxed);
+        let total: u64 = (9..=40).map(|pc| ld(&self.rank_nodes, pc)).sum();
+        println!(
+            "\n  first-losing-child cutoff rank (QUEENS_RANK) — {} expanded OR-nodes",
+            commas(total)
+        );
+        println!(
+            "    {:>3} {:>15} {:>7} {:>7} {:>7} {:>8} {:>8}   (% of node's outcomes)",
+            "pc", "nodes", "ETC%", "r0%", "r1%", "r≥2%", "nocut%"
+        );
+        // Aggregate the high-pc (recurse-spine) bands and the getK bands; print every populated pc.
+        let mut grand = [0u64; 5]; // etc, r0, r1, rge2, nocut
+        for pc in 0..MAXPC {
+            let n = ld(&self.rank_nodes, pc);
+            if n == 0 {
+                continue;
+            }
+            let nf = n as f64;
+            let etc = ld(&self.rank_etc, pc);
+            let nocut = ld(&self.rank_nocut, pc);
+            let r0 = ld(&self.rank_dist, pc * RANK_BUCKETS);
+            let r1 = ld(&self.rank_dist, pc * RANK_BUCKETS + 1);
+            let rge2: u64 = (2..RANK_BUCKETS)
+                .map(|r| ld(&self.rank_dist, pc * RANK_BUCKETS + r))
+                .sum();
+            grand[0] += etc;
+            grand[1] += r0;
+            grand[2] += r1;
+            grand[3] += rge2;
+            grand[4] += nocut;
+            println!(
+                "    {pc:>3} {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}%",
+                commas(n),
+                100.0 * etc as f64 / nf,
+                100.0 * r0 as f64 / nf,
+                100.0 * r1 as f64 / nf,
+                100.0 * rge2 as f64 / nf,
+                100.0 * nocut as f64 / nf,
+            );
+        }
+        let gtot: f64 = grand.iter().sum::<u64>() as f64;
+        if gtot > 0.0 {
+            let cut_le1 = grand[0] + grand[1] + grand[2]; // ETC + r0 + r1
+            println!(
+                "    ALL {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}%   ETC+r0+r1 = {:.1}% of all",
+                commas(grand.iter().sum::<u64>()),
+                100.0 * grand[0] as f64 / gtot,
+                100.0 * grand[1] as f64 / gtot,
+                100.0 * grand[2] as f64 / gtot,
+                100.0 * grand[3] as f64 / gtot,
+                100.0 * grand[4] as f64 / gtot,
+                100.0 * cut_le1 as f64 / gtot,
+            );
+        }
+    }
+
     /// Print the A'' Phase-2a offload-sizing report (`QUEENS_SIZE=1`; cold, post-solve). Sizes the
     /// idle-core producer/consumer offload (Approach B) from the recurse-arm probe stream:
     /// (1) per-pc **frontier width** (how many flat-TT probes the consumer issues per band);
@@ -2071,6 +2405,13 @@ impl IsoFlat {
         } else {
             avail.popcount()
         };
+        // `M_DECPROBE`/`M_RANK` are measurement twins of `M_ORD_W`: they take the exact same dynamic-
+        // ordering + fused-ETC path (so the observed cutoff rank / getK population is the production
+        // one), adding only a cold tally. These two predicates fold the three-way OR away (`MODE` is a
+        // const generic ⇒ each is a compile-time constant, DCE'd per monomorphisation; a nested `const`
+        // can't capture the outer generic, so a `let` carries it — same codegen).
+        let ord_w: bool = MODE == M_ORD_W || MODE == M_DECPROBE || MODE == M_RANK;
+        let ord_sort: bool = MODE == M_ORD || ord_w;
         // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
         // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
         // flat-TT get below, so tapping here records the recurse-arm probe stream the idle-core producer
@@ -2185,7 +2526,7 @@ impl IsoFlat {
             sorted[..n].copy_from_slice(moves);
             self.sort_moves_by_slot::<DK>(&mut sorted[..n], avail, att, orient);
             &sorted[..n]
-        } else if MODE == M_ORD || MODE == M_ORD_W {
+        } else if ord_sort {
             // Dynamic move ordering: re-sort by current available-block degree (most-forcing first).
             // `M_ORD_W` then runs the M_WAVE ETC body over the degree-sorted moves (ETC + ordering).
             let n = moves.len();
@@ -2222,13 +2563,13 @@ impl IsoFlat {
         // `M_L0` runs it with the L0 probe cache layered into `mtt_get`/`mtt_put` (production identical);
         // `M_WAVE_C` runs it with the recurse arm hoisted to the front of the fused-descent cascade;
         // `M_ORD_W` runs it over degree-sorted moves (dynamic ordering + ETC).
-        if MODE == M_WAVE
-            || MODE == M_SIZE_WAVE
-            || MODE == M_L0
-            || MODE == M_WAVE_C
-            || MODE == M_ORD_W
-        {
+        if MODE == M_WAVE || MODE == M_SIZE_WAVE || MODE == M_L0 || MODE == M_WAVE_C || ord_w {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
+            // M_RANK: count this expanded OR-node once at block entry; the resolution site (an ETC
+            // pre-descent cut, a descent-rank cut, or the no-cut loop end) records exactly one outcome.
+            if MODE == M_RANK {
+                RANK_ACC.with(|c| c.borrow_mut().nodes[node_pc as usize] += 1);
+            }
             // SoA descriptor store, recurse children in move order (consumed in order by the descent).
             // `wk` keeps the full child key so the `COUNT=true` HLL path is exact (production
             // `COUNT=false` ignores it — `tt_get_h`/`tt_put_h` use only route/fp).
@@ -2248,9 +2589,13 @@ impl IsoFlat {
                 // entirely for the cheap children the gather doesn't store. Other fused modes (M_WAVE/
                 // M_L0/M_WAVE_C/M_SIZE_WAVE) have no `degs`, so they recompute — const-folds per MODE.
                 let child0;
-                if MODE == M_ORD_W {
+                if ord_w {
                     let pc = degs[i] as u32;
                     if pc == 0 {
+                        // M_RANK: an empty child found during the gather is a pre-descent (ETC-side) cut.
+                        if MODE == M_RANK {
+                            RANK_ACC.with(|c| c.borrow_mut().etc_cut[node_pc as usize] += 1);
+                        }
                         self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
                         return true;
                     }
@@ -2290,6 +2635,10 @@ impl IsoFlat {
                 for j in 0..nw {
                     let v = self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0);
                     if v == Some(0) {
+                        // M_RANK: a proven-loss child found by the ETC pre-pass = a pre-descent cut.
+                        if MODE == M_RANK {
+                            RANK_ACC.with(|c| c.borrow_mut().etc_cut[node_pc as usize] += 1);
+                        }
                         self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // a losing child ⇒ node wins
                         return true;
                     }
@@ -2303,16 +2652,39 @@ impl IsoFlat {
             // children (dense/band/block/iso) resolve via their own arms exactly as the control
             // descent. `wi` walks the descriptor store in move order alongside the recurse predicate.
             let mut wi = 0usize;
+            // M_RANK: reaching the descent means no ETC pre-pass cut fired (those `return true` above).
+            // The descent rank is the move-order index `i` of the first `lost==true` child (`if lost`).
             for (i, &sq) in moves.iter().enumerate() {
                 let a = att_for8(att, sq);
                 let child0 = avail.and_not(a[0]);
                 // Sort-fuse (M_ORD_W): reuse the sorted degree instead of recomputing the popcount.
-                let pc = if MODE == M_ORD_W {
+                let pc = if ord_w {
                     degs[i] as u32
                 } else {
                     child0.popcount()
                 };
+                // M_DECPROBE: tap every pc 9..16 getK node's connected-component decomposition. `child0`
+                // IS the pc==pc getK node the arm below resolves; build its conflict graph + components.
+                if MODE == M_DECPROBE && (9..=16).contains(&pc) {
+                    let (ncomp, msz, all_le8, all_le_km1) =
+                        decompose_node(child0, att, pc as usize);
+                    DEC_ACC.with(|c| {
+                        let mut a = c.borrow_mut();
+                        let b = pc as usize;
+                        a.nodes[b] += 1;
+                        a.ncomp_sum[b] += ncomp as u64;
+                        a.ge2[b] += (ncomp >= 2) as u64;
+                        a.all_le8[b] += all_le8 as u64;
+                        a.all_le_km1[b] += all_le_km1 as u64;
+                        a.msz_dist[b][(msz as usize).min(16)] += 1;
+                    });
+                }
                 if pc == 0 {
+                    // M_RANK: an empty child reached in the descent is the first cut at this rank `i`.
+                    if MODE == M_RANK {
+                        let r = i.min(RANK_BUCKETS - 1);
+                        RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
+                    }
                     result = true;
                     break;
                 }
@@ -2408,9 +2780,19 @@ impl IsoFlat {
                     )
                 };
                 if lost {
+                    // M_RANK: first proven-loss child in move order ⇒ this OR-node wins. `i` is its
+                    // 0-based descent rank. The last bucket absorbs the rank ≥ RANK_BUCKETS-1 tail.
+                    if MODE == M_RANK {
+                        let r = i.min(RANK_BUCKETS - 1);
+                        RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
+                    }
                     result = true;
                     break;
                 }
+            }
+            // M_RANK: the descent completed with no cut ⇒ a LOSS node (full scan, no winning move).
+            if MODE == M_RANK && !result {
+                RANK_ACC.with(|c| c.borrow_mut().no_cut[node_pc as usize] += 1);
             }
             // The fused loop already ran the descent; skip the shared descent + put below.
             if self.sidecar {
@@ -3376,7 +3758,14 @@ impl IsoFlat {
                 // `wave` default. `QUEENS_SIZE=1` (`M_SIZE`) measures the WAVE-off probe stream — the
                 // full frontier before the ETC cut, the upper bound on what Approach B can offload;
                 // `QUEENS_SIZE=2` (`M_SIZE_WAVE`) taps on top of the ETC cut = the post-cut residual.
-                if self.size {
+                if self.decprobe {
+                    // Cold getK-decomposition tap on the production M_ORD_W path (explicit measurement,
+                    // wins over the `wave`/`ord` defaults like `size`/`prof` do).
+                    M_DECPROBE
+                } else if self.rank {
+                    // Cold first-losing-child rank tap on the production M_ORD_W path.
+                    M_RANK
+                } else if self.size {
                     if self.size_wave {
                         M_SIZE_WAVE
                     } else {
@@ -3423,6 +3812,12 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_ORD_W => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_ORD_W>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_DECPROBE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_DECPROBE>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_RANK => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(
@@ -3881,6 +4276,14 @@ impl Solver for IsoFlat {
         if self.size {
             self.drain_size_all();
             self.print_size_report();
+        }
+        if self.decprobe {
+            self.drain_dec_all();
+            self.print_dec_report();
+        }
+        if self.rank {
+            self.drain_rank_all();
+            self.print_rank_report();
         }
         if self.steal {
             // Work-stealing diagnostics (TTY text; the same data is in the `--to-file` JSON via
