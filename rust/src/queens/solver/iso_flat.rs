@@ -70,6 +70,7 @@ const M_SIZE_WAVE: u8 = 6; // as M_SIZE but ON TOP of the M_WAVE ETC cut — siz
 const M_WAVE_B: u8 = 7; // A'' Phase-2b-0 de-risk: descend children in TT-slot order, not move order (`QUEENS_WAVE_B=1`)
 const M_L0: u8 = 8; // A'' Phase-2b dedup: M_WAVE + a per-worker L0 probe cache (`QUEENS_L0=1`)
 const M_WAVE_C: u8 = 9; // M_WAVE + cascade-reorder (recurse arm first in the pc-cascade) (`QUEENS_WAVE_C=1`)
+const M_ORD: u8 = 10; // dynamic move ordering: descend by current available-block degree, not static q.order (`QUEENS_ORD=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -565,6 +566,11 @@ pub struct IsoFlat {
     /// Behaviour- and node-count-identical to M_WAVE (only branch order shifts) — a frontend micro-opt;
     /// off = byte-identical M_WAVE (the front arm DCEs).
     wave_c: bool,
+    /// `QUEENS_ORD=1`: selects `const MODE = M_ORD` — dynamic move ordering by current available-block
+    /// degree (`child0.popcount()` ascending) instead of the static `q.order`. Verdict-preserving; the
+    /// node-count delta vs static is the ordering gain (the move-ordering lever the +94% slot-order tax
+    /// indicted). Off = byte-identical (the per-node re-sort DCEs).
+    ord: bool,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -805,6 +811,7 @@ impl IsoFlat {
             wave_b: std::env::var("QUEENS_WAVE_B").as_deref() == Ok("1"),
             l0: std::env::var("QUEENS_L0").as_deref() == Ok("1"),
             wave_c: std::env::var("QUEENS_WAVE_C").as_deref() == Ok("1"),
+            ord: std::env::var("QUEENS_ORD").as_deref() == Ok("1"),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1569,6 +1576,27 @@ impl IsoFlat {
         }
     }
 
+    /// Dynamic move ordering (`M_ORD`): reorder `dst` (a copy of a node's filtered moves) by the
+    /// **current available-block degree** — `child0.popcount()` ascending, i.e. the move that removes
+    /// the most currently-available squares first (the most "forcing" move; a `child0 == 0` move is an
+    /// instant win ⇒ sorts first ⇒ earliest α-β cutoff). The production `q.order` is a *static* proxy
+    /// (descending **empty-board** attack degree, fixed at build); this recomputes the degree against
+    /// the *live* `avail`, so it sharpens deep in the tree where the board has filled. Stable sort ⇒
+    /// equal-degree ties keep their `q.order` (the static order is the tiebreak). Verdict-preserving
+    /// (reorder never changes the OR/AND value); the node-count delta vs static is the ordering gain.
+    fn sort_moves_by_degree(&self, dst: &mut [u8], avail: Bits, att: &[[Bits; 8]]) {
+        let mut keyed = [(0u32, 0u8); MAXV];
+        for (k, &sq) in dst.iter().enumerate() {
+            let child0 = avail.and_not(att_for8(att, sq)[0]);
+            keyed[k] = (child0.popcount(), sq);
+        }
+        let n = dst.len();
+        keyed[..n].sort_by(|a, b| a.0.cmp(&b.0));
+        for (i, &(_, sq)) in keyed[..n].iter().enumerate() {
+            dst[i] = sq;
+        }
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
@@ -1676,6 +1704,12 @@ impl IsoFlat {
             let n = moves.len();
             sorted[..n].copy_from_slice(moves);
             self.sort_moves_by_slot::<DK>(&mut sorted[..n], avail, att, orient);
+            &sorted[..n]
+        } else if MODE == M_ORD {
+            // Dynamic move ordering: re-sort by current available-block degree (most-forcing first).
+            let n = moves.len();
+            sorted[..n].copy_from_slice(moves);
+            self.sort_moves_by_degree(&mut sorted[..n], avail, att);
             &sorted[..n]
         } else {
             moves
@@ -2798,6 +2832,8 @@ impl IsoFlat {
                     M_L0
                 } else if self.wave_c {
                     M_WAVE_C
+                } else if self.ord {
+                    M_ORD
                 } else if self.wave {
                     M_WAVE
                 } else {
@@ -2815,6 +2851,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_WAVE_C => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_WAVE_C>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_ORD => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_ORD>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(

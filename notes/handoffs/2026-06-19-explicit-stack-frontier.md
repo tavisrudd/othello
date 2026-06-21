@@ -190,6 +190,19 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       I-cache in a frontend/L1i-bound loop. The per-node micro-opt route is exhausted (consistent with "micro-opts
       wash out"); the frontend bottleneck wants *less* hot-loop code (getK throughput), not branch reshuffling.
       `M_WAVE_C` gated-off (instructive negative).
+- [x] **★ DYNAMIC MOVE ORDERING (gated `M_ORD`/`QUEENS_ORD`) — MEASURED BIG WIN: −30% wall at n=16
+      (2026-06-20--12).** The constructive payoff of the +94% finding (move ordering worth ~2×): replace the
+      **static** `q.order` (descending *empty-board* attack degree, fixed at build) with **dynamic** ordering —
+      at each node re-sort available moves by *current* available-block degree (`child0.popcount()` ascending =
+      most-forcing first; a `child0==0` instant-win sorts first ⇒ earliest cutoff). Verdict-preserving (matches
+      the validated default n=4..10 + n=12/14/16 SECOND); production byte-identical off (the re-sort DCEs).
+      **n=14 deterministic: 8,856,727 nodes vs 12,896,443 static (−31.3%), −24.6% vs the M_WAVE default.**
+      **n=16 interleaved A/B (3-round, 12 GB TT) vs M_WAVE default: −34.3% nodes, +8.5% cyc/node (the cheap
+      degree-sort), −28.7% total cycles, −30.2% WALL (98.1s→68.5s).** **Clean-box 17 GB single run: 1m02s /
+      1,136,583,273 nodes** (vs the M_WAVE record 1m32s/1.70 B = **−33% wall**; new leaderboard #1, knocking on
+      the ~45–60s compute floor). Biggest single lever since W12. The sort is far cheaper than the M_WAVE_B
+      slot-sort (just `child0.popcount()`, no key-build). NEXT: combine with ETC (`M_ORD`+ETC) + promote-to-
+      default decision — M_ORD alone already beats M_WAVE by −25% nodes.
 
 ## Handoff Notes
 

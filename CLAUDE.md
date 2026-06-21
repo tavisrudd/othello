@@ -11,8 +11,16 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
-**LATEST (--12): Approach B (sorted-frontier wave + dedup) is CLOSED with evidence — both halves measured
-NEGATIVE; `M_WAVE` stays the default.** 2a sized the offload GO-on-paper (gated cold `M_SIZE`/`QUEENS_SIZE` probe
+**LATEST (--12): ★ DYNAMIC MOVE ORDERING = −30% wall at n=16** (gated `M_ORD`/`QUEENS_ORD`) — the biggest single
+lever since W12, and the constructive payoff of closing Approach B. The closure proved **move ordering is worth
+~2× node reduction** (any frontier reorder forfeiting it costs +94%); so we improved the ordering itself: replace
+the **static** `q.order` (descending *empty-board* attack degree) with **dynamic** ordering — re-sort each node's
+moves by *current* available-block degree (`child0.popcount()` ascending = most-forcing first; instant-win
+`child0==0` sorts first ⇒ earliest cutoff). **n=16 A/B vs the M_WAVE default: −34% nodes, +8.5% cyc/node (cheap
+degree-sort), −28.7% total cyc, −30.2% wall (98.1s→68.5s @ 12 GB TT)**; n=14 deterministic −31.3%. Verdict-
+preserving (matches the validated default n=4..16); production byte-identical off. **NEXT: combine with ETC +
+promote-to-default decision** (it alone already beats M_WAVE by −25% nodes). This came out of closing **Approach B
+(sorted-frontier wave + dedup) — both halves measured NEGATIVE; `M_WAVE` was the default before this.** 2a sized the offload GO-on-paper (gated cold `M_SIZE`/`QUEENS_SIZE` probe
 tap, production byte-identical: n=16 3.0 B probes · pc 13–21 = 88% · dedup ceiling 38.1% pre-cut / 27.1%
 post-cut · 62–73% same-DRAM-row after sort). **But the cheap 2b de-risk killed it:** the sorted wave needs
 **slot-order consumer access = +94% nodes at n=16** (`M_WAVE_B`/`QUEENS_WAVE_B`; the n=14 proxy lied at +13.3% —
@@ -68,7 +76,8 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense (W12)** | **1m32s**  | 1.70 B  | **default** now: W12 + fused M_WAVE ETC cutoff; `QUEENS_WAVE=0` off   |
+| **iso-dense + M_ORD** | **1m02s**| 1.14 B  | **★ NEW**: dynamic move ordering (`QUEENS_ORD=1`, gated) — −33% vs M_WAVE; no ETC |
+| iso-dense (W12)     | 1m32s      | 1.70 B  | default now: W12 + fused M_WAVE ETC cutoff; `QUEENS_WAVE=0` off       |
 | iso-dense, WAVE off | 1m39s      | 2.0 B   | W12 only (the A/B control): pc 9–12 from W0..W8 via `pext` (u128 W12) |
 | iso-dense (W11)     | 1m44s      | 2.5 B   | W_K to K=11 (u64 codes)                                               |
 | iso-dense (W9)      | 2m12s      | 4.0 B   | W9 only: pc==9 from W0..W8                                            |
