@@ -139,6 +139,38 @@ struct SizeAcc {
     w: [u64; MAXPC],       // per-pc probe count (frontier width)
     hll: [u8; SIZE_HLL_M], // thread-local HLL register slice over probed keys (merged by max)
     sample: Vec<u64>,      // contiguous route sample for the slot-sorted locality check
+    // Recency-cache simulation (sidecar viability): a per-worker direct-mapped cache of `2^RC_BITS`
+    // u32 tags over the entry-probe stream. A "hit" = the same key recurred within the worker's
+    // recency window ⇒ a cache-resident sidecar of this size would serve it without a DRAM probe.
+    // Bounds the realistic DRAM-cut (≤ the 26.5% global dedup ceiling). Lazily sized on first feed.
+    rc: Vec<u32>,
+    rc_hits: u64,
+    rc_probes: u64,
+    rc_per_pc_hits: [u64; MAXPC], // hits attributed to the probed key's band, to find where it pays
+    // Temporal bands: hit/probe counts in fixed `RC_WINDOW`-probe windows of this worker's stream,
+    // so the report shows whether reuse rises in the late tail (steady-state) vs cold-start.
+    rc_win_h: [u64; RC_WINDOWS],
+    rc_win_p: [u64; RC_WINDOWS],
+}
+
+/// Temporal-band window size (probes) and count for the recency sim. 4M-probe windows × 24 covers
+/// the slowest worker's ~58M-probe stream; the last window absorbs the overflow.
+const RC_WINDOW: u64 = 4_000_000;
+const RC_WINDOWS: usize = 24;
+
+/// Per-worker recency-sim result drained for the report (probes, hits, and the temporal-window
+/// curves). The top-probe entries are the 2 slow roots / giant-root tail.
+struct RcWorker {
+    probes: u64,
+    hits: u64,
+    win_h: [u64; RC_WINDOWS],
+    win_p: [u64; RC_WINDOWS],
+}
+
+/// Recency-cache size for the sidecar-viability sim: `2^RC_BITS` u32 tags per worker
+/// (default 22 = 4M entries = 16 MB ≈ L3-resident). `QUEENS_RC_BITS` overrides.
+fn rc_bits() -> u32 {
+    env_u32("QUEENS_RC_BITS", 22).clamp(10, 27)
 }
 
 thread_local! {
@@ -149,6 +181,12 @@ thread_local! {
             w: [0; MAXPC],
             hll: [0; SIZE_HLL_M],
             sample: Vec::new(),
+            rc: Vec::new(),
+            rc_hits: 0,
+            rc_probes: 0,
+            rc_per_pc_hits: [0; MAXPC],
+            rc_win_h: [0; RC_WINDOWS],
+            rc_win_p: [0; RC_WINDOWS],
         })
     };
 }
@@ -560,6 +598,10 @@ pub struct IsoFlat {
     /// per-popcount band. Resolved once; selects `const MODE = M_SEG` at the subtree handoff,
     /// so the deep hot path is fully monomorphised (the flat control stays byte-identical).
     segment: bool,
+    /// `QUEENS_TT_ASSOC=1` (mirrors [`QueensTt::is_assoc`], implies [`segment`](Self::segment)):
+    /// route each band probe into a cache-line set-associative bucket (8-way). Orthogonal to the
+    /// search-strategy `MODE`; resolved once at construction, read by the TT-helper layout branch.
+    assoc: bool,
     /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
     /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
     pc_hist: Box<[AtomicU64]>,
@@ -597,6 +639,13 @@ pub struct IsoFlat {
     /// Cold slot-sorted-locality sample (routes), drained from each worker's [`SIZE_ACC`]. Only
     /// populated when `size`; touched off the hot path (drain + post-solve report).
     size_sample: Mutex<Vec<u64>>,
+    /// Recency-cache sidecar-viability sim: cache size `2^size_rc_bits` (`QUEENS_RC_BITS`), resolved
+    /// once. Per-worker `(probes, hits)` collected at drain (the top-probe workers are the 2 slow
+    /// roots — the giant-root tail that dominates the wall, where the reuse must be measured).
+    size_rc_bits: u32,
+    size_rc: Mutex<Vec<RcWorker>>,
+    /// Aggregate recency-hit count per available-popcount band (where a sidecar would pay).
+    size_rc_pc: Box<[AtomicU64]>,
     /// `QUEENS_WAVE_B=1` (A'' Phase-2b-0 de-risk): selects `const MODE = M_WAVE_B` at the subtree
     /// handoff — descend each node's children in **TT-slot order** (the single-thread sorted-frontier
     /// wave) instead of move order. Verdict-preserving (reorder never changes the OR/AND value); the
@@ -850,6 +899,7 @@ impl IsoFlat {
     fn from_tt_with_window(tt: QueensTt, window: bool) -> Self {
         let counting = tt.is_counting();
         let segment = tt.is_segmented();
+        let assoc = tt.is_assoc();
         IsoFlat {
             name: if window { "iso-window" } else { "iso-flat" },
             tt,
@@ -883,6 +933,7 @@ impl IsoFlat {
             // Mirror the table's segmentation (it resolved `QUEENS_TT_SEGMENT` at startup), so
             // the subtree-handoff dispatch can pick `MODE = M_SEG` once and monomorphise.
             segment,
+            assoc,
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
@@ -892,6 +943,9 @@ impl IsoFlat {
             size_w: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             size_hll: Hll::new(SIZE_HLL_P),
             size_sample: Mutex::new(Vec::new()),
+            size_rc_bits: rc_bits(),
+            size_rc: Mutex::new(Vec::new()),
+            size_rc_pc: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             wave_b: std::env::var("QUEENS_WAVE_B").as_deref() == Ok("1"),
             l0: std::env::var("QUEENS_L0").as_deref() == Ok("1"),
             wave_c: std::env::var("QUEENS_WAVE_C").as_deref() == Ok("1"),
@@ -1289,6 +1343,15 @@ impl IsoFlat {
         fp: u64,
         pc: u32,
     ) -> Option<u8> {
+        // TT-layout axis (resolved-once runtime fields), orthogonal to the search-strategy `MODE`:
+        // the winning M_ORD_W deep loop otherwise always takes the flat `else` branch, so these
+        // expose seg/assoc to it. `assoc` ⇒ 8-way cache-line bucket; `segment` ⇒ 1-way band.
+        if self.assoc {
+            return self.tt.get_assoc_hashed(route, fp, pc);
+        }
+        if self.segment {
+            return self.tt.get_seg_hashed(route, fp, pc);
+        }
         if MODE == M_SEG {
             self.tt.get_seg_hashed(route, fp, pc)
         } else if MODE == M_L0 {
@@ -1318,6 +1381,12 @@ impl IsoFlat {
         pc: u32,
         val: u8,
     ) {
+        if self.assoc {
+            return self.tt.put_assoc_hashed(route, fp, pc, val);
+        }
+        if self.segment {
+            return self.tt.put_seg_hashed(route, fp, pc, val);
+        }
         if MODE == M_SEG {
             self.tt.put_seg_hashed(route, fp, pc, val);
         } else if MODE == M_L0 {
@@ -1332,6 +1401,12 @@ impl IsoFlat {
     /// band slot (`pc` = the child's popcount); otherwise the flat slot.
     #[inline]
     fn mtt_prefetch<const MODE: u8>(&self, route: u64, pc: u32) {
+        if self.assoc {
+            return self.tt.prefetch_assoc_hashed(route, pc);
+        }
+        if self.segment {
+            return self.tt.prefetch_seg_hashed(route, pc);
+        }
         if MODE == M_SEG {
             self.tt.prefetch_seg_hashed(route, pc);
         } else {
@@ -1344,7 +1419,10 @@ impl IsoFlat {
     /// resolved-once runtime branch on `self.segment` rather than another `const` to thread.
     #[inline]
     fn par_tt_get<const COUNT: bool>(&self, key: Bits, pc: u32) -> Option<u8> {
-        if self.segment {
+        if self.assoc {
+            let (route, fp) = QueensTt::hash128(key);
+            self.tt.get_assoc_hashed(route, fp, pc)
+        } else if self.segment {
             let (route, fp) = QueensTt::hash128(key);
             self.tt.get_seg_hashed(route, fp, pc)
         } else {
@@ -1355,7 +1433,10 @@ impl IsoFlat {
     /// [`par_wins_inc`](Self::par_wins_inc) split-node store (twin of [`par_tt_get`](Self::par_tt_get)).
     #[inline]
     fn par_tt_put<const COUNT: bool>(&self, key: Bits, pc: u32, val: u8) {
-        if self.segment {
+        if self.assoc {
+            let (route, fp) = QueensTt::hash128(key);
+            self.tt.put_assoc_hashed(route, fp, pc, val);
+        } else if self.segment {
             let (route, fp) = QueensTt::hash128(key);
             self.tt.put_seg_hashed(route, fp, pc, val);
         } else {
@@ -1619,6 +1700,27 @@ impl IsoFlat {
                 s.extend_from_slice(&a.sample[..take]);
                 a.sample.clear();
             }
+            // Recency-cache: record this worker's (probes, hits) so the report can show the
+            // top-probe workers (the 2 slow roots / giant-root tail) separately from the global mix.
+            if a.rc_probes != 0 {
+                self.size_rc.lock().unwrap().push(RcWorker {
+                    probes: a.rc_probes,
+                    hits: a.rc_hits,
+                    win_h: a.rc_win_h,
+                    win_p: a.rc_win_p,
+                });
+                for pc in 0..MAXPC {
+                    if a.rc_per_pc_hits[pc] != 0 {
+                        self.size_rc_pc[pc].fetch_add(a.rc_per_pc_hits[pc], Ordering::Relaxed);
+                        a.rc_per_pc_hits[pc] = 0;
+                    }
+                }
+                a.rc_probes = 0;
+                a.rc_hits = 0;
+                a.rc = Vec::new();
+                a.rc_win_h = [0; RC_WINDOWS];
+                a.rc_win_p = [0; RC_WINDOWS];
+            }
         });
     }
 
@@ -1678,6 +1780,78 @@ impl IsoFlat {
             distinct as u64,
             dedup * 100.0,
         );
+        // Recency-cache sidecar viability: a per-worker direct-mapped 2^bits cache served what
+        // fraction of probes from cache (no DRAM)? The top-probe workers ARE the 2 slow roots
+        // (the giant-root tail = ~94% of wall), so their hit rate is the number that decides a
+        // sidecar — the global mix is diluted by the fast roots. ≤ the global dedup ceiling.
+        {
+            let mut rc = self.size_rc.lock().unwrap();
+            if !rc.is_empty() {
+                rc.sort_unstable_by(|a, b| b.probes.cmp(&a.probes)); // probes desc — slowest roots first
+                let bits = self.size_rc_bits;
+                let entries = 1u64 << bits;
+                let bytes = entries * 4;
+                eprintln!(
+                    "  recency-cache sidecar sim: 2^{bits} = {entries} u32 tags/worker = {:.1} MB/worker (direct-mapped, per-worker):",
+                    bytes as f64 / 1e6,
+                );
+                let (mut tp, mut th) = (0u64, 0u64);
+                for (i, rw) in rc.iter().enumerate() {
+                    tp += rw.probes;
+                    th += rw.hits;
+                    if i < 4 {
+                        eprintln!(
+                            "    worker rank {i} (by probes): {:>13} probes · {:.1}% hit (DRAM-cut if sidecar'd){}",
+                            rw.probes,
+                            rw.hits as f64 / rw.probes as f64 * 100.0,
+                            if i == 0 { "  ← slowest root / giant-root tail" } else { "" },
+                        );
+                    }
+                }
+                // Temporal bands of the slowest root (rank 0): hit rate per RC_WINDOW-probe window
+                // — does reuse climb past cold-start into a higher steady state in the late tail?
+                if let Some(top) = rc.first() {
+                    let curve: String = (0..RC_WINDOWS)
+                        .filter(|&wi| top.win_p[wi] != 0)
+                        .map(|wi| {
+                            format!("{:.0}", top.win_h[wi] as f64 / top.win_p[wi] as f64 * 100.0)
+                        })
+                        .collect::<Vec<_>>()
+                        .join(" ");
+                    eprintln!(
+                        "    slowest-root hit% by {}M-probe window: {curve}",
+                        RC_WINDOW / 1_000_000
+                    );
+                }
+                eprintln!(
+                    "    ALL workers: {tp} probes · {:.1}% recency-hit (the realistic per-worker DRAM-cut at this cache size)",
+                    th as f64 / tp as f64 * 100.0,
+                );
+                // Where the recency hits land by band (a sidecar would target these).
+                let pch: Vec<u64> = self
+                    .size_rc_pc
+                    .iter()
+                    .map(|a| a.load(Ordering::Relaxed))
+                    .collect();
+                let tot_h: u64 = pch.iter().sum();
+                if tot_h != 0 {
+                    let mut top: Vec<(usize, u64)> = pch
+                        .iter()
+                        .enumerate()
+                        .filter(|(_, &c)| c != 0)
+                        .map(|(pc, &c)| (pc, c))
+                        .collect();
+                    top.sort_unstable_by(|a, b| b.1.cmp(&a.1));
+                    let bands: String = top
+                        .iter()
+                        .take(8)
+                        .map(|(pc, c)| format!("pc{pc}:{:.0}%", *c as f64 / tot_h as f64 * 100.0))
+                        .collect::<Vec<_>>()
+                        .join(" ");
+                    eprintln!("    recency hits by band (top): {bands}");
+                }
+            }
+        }
         // Slot-sorted locality: sort the route sample by TT slot, then measure how many consecutive
         // probes land in the same cache line / DRAM-row window — the row-buffer-hit rate the sorted
         // stream realizes (`mlp_bench`'s 3–5.7× regime) vs the random scatter today (~0% same-row).
@@ -1866,6 +2040,26 @@ impl IsoFlat {
                 self.size_hll.add_local(key, &mut a.hll);
                 if a.sample.len() < SIZE_SAMPLE_CAP {
                     a.sample.push(route);
+                }
+                // Recency-cache sidecar-viability sim: a direct-mapped 2^RC_BITS cache of u32 tags.
+                // A hit = this key recurred within the worker's recency window ⇒ a cache-resident
+                // sidecar of this size serves it without a DRAM probe. Tag from the high route bits
+                // (the index uses the low bits, so the tag is ~independent); tag 0 means "empty".
+                let bits = self.size_rc_bits as usize;
+                if a.rc.is_empty() {
+                    a.rc = vec![0u32; 1usize << bits];
+                }
+                let idx = (route as usize) & ((1usize << bits) - 1);
+                let tag = ((route >> 32) as u32) | 1; // never 0 (0 = empty slot)
+                let win = ((a.rc_probes / RC_WINDOW) as usize).min(RC_WINDOWS - 1);
+                a.rc_probes += 1;
+                a.rc_win_p[win] += 1;
+                if a.rc[idx] == tag {
+                    a.rc_hits += 1;
+                    a.rc_per_pc_hits[node_pc as usize] += 1;
+                    a.rc_win_h[win] += 1;
+                } else {
+                    a.rc[idx] = tag;
                 }
             });
         }

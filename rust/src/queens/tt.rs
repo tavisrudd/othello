@@ -74,6 +74,15 @@ pub struct QueensTt {
     /// Slot count of each popcount band (`band_size[pc] ≥ 1`); `Σ band_size == len`.
     /// Sized so each band carries a comparable load factor (∝ the put distribution).
     band_size: Box<[u64]>,
+    /// `QUEENS_TT_ASSOC=1` (only with [`segment`](Self::segment)): make each band probe a
+    /// cache-line **bucket** of [`TT_ASSOC_WAYS`] slots ([`index_seg`](Self::index_seg)'s
+    /// single-slot route becomes [`bucket_base`](Self::bucket_base)). The whole bucket rides
+    /// in one 64-byte line the probe already fetches, so scanning all ways is free, but a
+    /// collision now evicts only when *all* ways are full — far fewer conflict misses (→
+    /// fewer re-expansions) than the direct-mapped slot. Resolved once at construction; the
+    /// flat/seg paths stay byte-identical (the solver monomorphises `M_SEG_ASSOC`, never
+    /// branches per node). `false` ⇒ the single-slot [`index_seg`](Self::index_seg) is used.
+    assoc: bool,
 }
 
 /// Band count for the segmented TT: one per available-popcount, `0..=256` (the n=16 board
@@ -84,6 +93,11 @@ const TT_MAXPC: usize = 257;
 /// modulus) and an unweighted popcount can't divide-by-zero. Negligible against a multi-GB
 /// table (`64 * 257 ≈ 16 K` slots reserved).
 const TT_MIN_BAND: u64 = 64;
+
+/// Set-associativity for the segmented-TT `QUEENS_TT_ASSOC` bucket: 8 × `u64` slots = one
+/// 64-byte cache line, so a bucket probe is a single line fetch and the whole bucket is
+/// scanned for free. Bounds `TT_MIN_BAND` from below (a band must hold ≥ one bucket).
+const TT_ASSOC_WAYS: usize = 8;
 
 /// A compact 8-byte transposition slot (Chunk 2): one `u64` packing a used flag
 /// (bit 0), the 8-bit value (bits 1..9 -- the win/loss bit for the search, or a
@@ -281,6 +295,19 @@ fn resolve_segment_bands(len: u64) -> (bool, Box<[u64]>, Box<[u64]>) {
     (true, base, size)
 }
 
+/// Resolve `QUEENS_TT_ASSOC=1` once at construction. Set-associative band buckets only make
+/// sense over a segmented table (they refine `index_seg`'s single slot into a cache-line
+/// bucket), so the flag is honoured only when `segment` is on; set without `QUEENS_TT_SEGMENT`
+/// it is a no-op (warned, so a mis-set A/B isn't silently the flat control).
+fn resolve_assoc(_segment: bool) -> bool {
+    // `QUEENS_TT_ASSOC=1` works two ways: with `QUEENS_TT_SEGMENT=1` it buckets *within* each
+    // popcount band (seg-assoc); without it, it buckets the *flat* table (flat-assoc) — the
+    // band-free variant that compares directly to the production flat direct-mapped TT (the
+    // K=16 getK ceiling voids the pc≤16 bands, so the embedded band weights mis-size). The
+    // `bucket_base` flat path keys off the empty band tables.
+    std::env::var("QUEENS_TT_ASSOC").as_deref() == Ok("1")
+}
+
 /// The embedded n=14 weights as a full per-popcount count array.
 fn default_band_counts() -> [u64; TT_MAXPC] {
     let mut c = [0u64; TT_MAXPC];
@@ -455,6 +482,7 @@ impl QueensTt {
             segment,
             band_base,
             band_size,
+            assoc: resolve_assoc(segment),
         }
     }
 
@@ -463,6 +491,14 @@ impl QueensTt {
     #[inline]
     pub fn is_segmented(&self) -> bool {
         self.segment
+    }
+
+    /// Whether the segmented table uses set-associative cache-line buckets
+    /// ([`bucket_base`](Self::bucket_base)) rather than a single slot per band route. Implies
+    /// [`is_segmented`](Self::is_segmented). Resolved once at construction.
+    #[inline]
+    pub fn is_assoc(&self) -> bool {
+        self.assoc
     }
 
     /// Segmented slot index: route the key into its popcount band, then `fastrange` within
@@ -497,6 +533,266 @@ impl QueensTt {
     #[inline]
     pub(crate) fn prefetch_seg_hashed(&self, route: u64, pc: u32) {
         let ptr = self.slots[self.index_seg(route, pc)].as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: as [`prefetch_hashed`](Self::prefetch_hashed) -- warms a valid
+            // in-allocation pointer, no architectural effect, cannot fault.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T0 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
+    }
+
+    /// First slot of the set-associative bucket a key routes to within its popcount band
+    /// (`QUEENS_TT_ASSOC`). Pick one of the band's `band_size/WAYS` buckets by `fastrange`,
+    /// then align to a [`TT_ASSOC_WAYS`]-slot boundary so the whole bucket sits in one 64-byte
+    /// cache line (the production table is mmap'd and thus page-aligned, so slot `% WAYS == 0`
+    /// is a 64-byte-aligned address). Pure function of `(route, pc)` — like
+    /// [`index_seg`](Self::index_seg), transposition-safe. The down-align can pull the base ≤
+    /// `WAYS-1` slots into the previous band at a boundary; harmless — still in-allocation and
+    /// fingerprint-checked, never wrong, at most a few extra slots shared across two bands.
+    #[inline]
+    fn bucket_base(&self, route: u64, pc: u32) -> usize {
+        // Flat-assoc (no segmentation): bucket the whole table; `pc` is ignored. This is the
+        // band-free path that compares apples-to-apples with the production flat direct-mapped
+        // table (the segmented bands mis-size at K=16 — getK voids the pc≤16 bands). Seg-assoc
+        // keeps the per-band bucketing.
+        let (base, size) = if self.band_base.is_empty() {
+            (0u64, self.len)
+        } else {
+            let pc = (pc as usize).min(TT_MAXPC - 1);
+            (self.band_base[pc], self.band_size[pc])
+        };
+        // size ≥ TT_MIN_BAND (64) ≥ WAYS (seg) or = len ≫ WAYS (flat), so n_buckets ≥ 1.
+        let n_buckets = size / TT_ASSOC_WAYS as u64;
+        let bucket = ((route as u128).wrapping_mul(n_buckets as u128) >> 64) as u64;
+        let slot0 = (base + bucket * TT_ASSOC_WAYS as u64) & !(TT_ASSOC_WAYS as u64 - 1);
+        slot0 as usize
+    }
+
+    /// [`get_seg_hashed`](Self::get_seg_hashed), but scan the key's [`TT_ASSOC_WAYS`]-way
+    /// cache-line bucket for a fingerprint match. The whole bucket is one cache line the probe
+    /// already fetches, so the scan is L1-resident after the first load. On znver5 the scan is
+    /// one AVX-512 load + mask-compare ([`get_assoc_avx512`](Self::get_assoc_avx512)); the
+    /// profile showed the scalar 8-way loop's cost is pure instruction/branch count (+16%
+    /// instr/node, CPI unchanged), so vectorising it is the whole win.
+    #[inline]
+    pub(crate) fn get_assoc_hashed(&self, route: u64, fp: u64, pc: u32) -> Option<u8> {
+        let b = self.bucket_base(route, pc);
+        let want = fp & Slot::fp_mask();
+        #[cfg(all(target_arch = "x86_64", target_feature = "avx512f"))]
+        // SAFETY: `bucket_base` guarantees `b + TT_ASSOC_WAYS <= len`, so the 64-byte
+        // (8×u64) bucket load starting at slot `b` stays in-allocation.
+        unsafe {
+            self.get_assoc_avx512(b, want)
+        }
+        #[cfg(not(all(target_arch = "x86_64", target_feature = "avx512f")))]
+        {
+            for i in 0..TT_ASSOC_WAYS {
+                // SAFETY: `bucket_base` guarantees `b + i < len` for `i < TT_ASSOC_WAYS`.
+                let s = Slot(unsafe { self.slots.get_unchecked(b + i) }.load(Ordering::Relaxed));
+                if s.used() && s.fp() == want {
+                    return Some(s.val());
+                }
+            }
+            None
+        }
+    }
+
+    /// [`put_seg_hashed`](Self::put_seg_hashed), into the key's [`TT_ASSOC_WAYS`]-way bucket:
+    /// refresh an existing entry for this key, else fill the first empty way, else evict a
+    /// route-selected way. Only the all-ways-full case evicts (vs the direct-mapped slot's
+    /// evict-on-every-collision) — that is the conflict-miss reduction. Lockless like the rest:
+    /// a racing writer for a *different* key can only clobber a way (a lost memo entry =
+    /// recompute, never a wrong value, since values are fingerprint-checked on read). The
+    /// bucket load is free here: the store must bring the line in (write-allocate) regardless.
+    #[inline]
+    pub(crate) fn put_assoc_hashed(&self, route: u64, fp: u64, pc: u32, val: u8) {
+        let b = self.bucket_base(route, pc);
+        let want = fp & Slot::fp_mask();
+        let packed = Slot::pack(fp, val).0;
+        #[cfg(all(target_arch = "x86_64", target_feature = "avx512f"))]
+        // SAFETY: as `get_assoc_hashed` — `bucket_base` guarantees `b + TT_ASSOC_WAYS <= len`.
+        unsafe {
+            self.put_assoc_avx512(b, want, route, packed);
+        }
+        #[cfg(not(all(target_arch = "x86_64", target_feature = "avx512f")))]
+        {
+            let mut empty: usize = TT_ASSOC_WAYS; // sentinel: no empty way seen
+            for i in 0..TT_ASSOC_WAYS {
+                // SAFETY: `bucket_base` guarantees `b + i < len` for `i < TT_ASSOC_WAYS`.
+                let s = Slot(unsafe { self.slots.get_unchecked(b + i) }.load(Ordering::Relaxed));
+                if s.used() {
+                    if s.fp() == want {
+                        unsafe { self.slots.get_unchecked(b + i) }.store(packed, Ordering::Relaxed);
+                        return;
+                    }
+                } else if empty == TT_ASSOC_WAYS {
+                    empty = i;
+                }
+            }
+            let way = if empty != TT_ASSOC_WAYS {
+                empty
+            } else {
+                (route as usize >> 3) & (TT_ASSOC_WAYS - 1)
+            };
+            // SAFETY: `way < TT_ASSOC_WAYS`, so `b + way < len`.
+            unsafe { self.slots.get_unchecked(b + way) }.store(packed, Ordering::Relaxed);
+        }
+    }
+
+    /// AVX-512 body of [`get_assoc_hashed`](Self::get_assoc_hashed): load the 8-slot bucket as
+    /// one `__m512i`, mask the lanes whose stored fingerprint (`slot >> 9`) equals `want` and
+    /// whose used bit (bit 0) is set, and return the first such lane's value. The common case
+    /// for a *searched* node is a miss (that is why it is being expanded): then it is just a
+    /// load + two mask ops + a branch — no value extraction.
+    ///
+    /// # Safety
+    /// `b + TT_ASSOC_WAYS <= self.slots.len()`. The vector load is not per-lane atomic, but the
+    /// table tolerates torn reads by construction (lockless, fingerprint-validated): a garbled
+    /// lane fails the `cmpeq` → a miss → recompute, never a wrong value.
+    #[cfg(all(target_arch = "x86_64", target_feature = "avx512f"))]
+    #[inline]
+    unsafe fn get_assoc_avx512(&self, b: usize, want: u64) -> Option<u8> {
+        use std::arch::x86_64::*;
+        let v = _mm512_loadu_si512(self.slots.as_ptr().add(b) as *const __m512i);
+        let fps = _mm512_srli_epi64::<{ Slot::FP_SHIFT }>(v);
+        let fp_match = _mm512_cmpeq_epi64_mask(fps, _mm512_set1_epi64(want as i64));
+        let used = _mm512_test_epi64_mask(v, _mm512_set1_epi64(1));
+        let hit = fp_match & used;
+        if hit == 0 {
+            return None;
+        }
+        // Extract the matching lane's value from the snapshot `v` (race-free, unlike a scalar
+        // re-read whose slot another thread could have overwritten with a different key).
+        let mut lanes = [0u64; TT_ASSOC_WAYS];
+        _mm512_storeu_si512(lanes.as_mut_ptr() as *mut __m512i, v);
+        Some(Slot(lanes[hit.trailing_zeros() as usize]).val())
+    }
+
+    /// AVX-512 body of [`put_assoc_hashed`](Self::put_assoc_hashed): load the bucket, pick the
+    /// way (refresh a used lane with matching fp, else first empty lane, else a route-selected
+    /// lane to evict), and store. One vector load + two mask ops + a scalar store.
+    ///
+    /// # Safety
+    /// As [`get_assoc_avx512`](Self::get_assoc_avx512): `b + TT_ASSOC_WAYS <= self.slots.len()`.
+    #[cfg(all(target_arch = "x86_64", target_feature = "avx512f"))]
+    #[inline]
+    unsafe fn put_assoc_avx512(&self, b: usize, want: u64, route: u64, packed: u64) {
+        use std::arch::x86_64::*;
+        let v = _mm512_loadu_si512(self.slots.as_ptr().add(b) as *const __m512i);
+        let fps = _mm512_srli_epi64::<{ Slot::FP_SHIFT }>(v);
+        let used = _mm512_test_epi64_mask(v, _mm512_set1_epi64(1));
+        // Only a *used* lane with matching fp is a refresh (an unused lane reads fp 0, which
+        // would spuriously match `want == 0`); masking with `used` matches the scalar path.
+        let fp_match = _mm512_cmpeq_epi64_mask(fps, _mm512_set1_epi64(want as i64)) & used;
+        let way = if fp_match != 0 {
+            fp_match.trailing_zeros()
+        } else {
+            let empty = !used; // __mmask8: lanes with the used bit clear
+            if empty != 0 {
+                empty.trailing_zeros()
+            } else {
+                // Bucket full: evict a route-selected way (low route bits — disjoint from the
+                // high bits `fastrange` used to pick the bucket — so evictions spread).
+                (route >> 3) as u32 & (TT_ASSOC_WAYS as u32 - 1)
+            }
+        };
+        // SAFETY: `way < TT_ASSOC_WAYS`, so `b + way < len`.
+        self.slots
+            .get_unchecked(b + way as usize)
+            .store(packed, Ordering::Relaxed);
+    }
+
+    /// Amortised assoc probe: one bucket scan returns **both** the lookup result **and** the
+    /// slot a subsequent miss should store into. A node's `get` (entry) and `put` (exit) hit
+    /// the same bucket, so the single `used`/`fp_match` scan that answers the lookup also yields
+    /// the put-target way (refresh / first-empty / route-evict) for free — the caller threads
+    /// the returned slot to [`store_slot`](Self::store_slot) at exit, turning the put into a
+    /// bare store (no second scan). Halves the per-node bucket traffic to seg's 1 load + 1
+    /// store. On a hit the second tuple field is unused (the caller returns before storing).
+    // Parked substrate for a future amortised assoc-TT revival; not on a live path yet.
+    #[allow(dead_code)]
+    #[inline]
+    pub(crate) fn probe_assoc(&self, route: u64, fp: u64, pc: u32) -> (Option<u8>, usize) {
+        let b = self.bucket_base(route, pc);
+        let want = fp & Slot::fp_mask();
+        #[cfg(all(target_arch = "x86_64", target_feature = "avx512f"))]
+        // SAFETY: `bucket_base` guarantees `b + TT_ASSOC_WAYS <= len`.
+        unsafe {
+            self.probe_assoc_avx512(b, want, route)
+        }
+        #[cfg(not(all(target_arch = "x86_64", target_feature = "avx512f")))]
+        {
+            let mut empty: usize = TT_ASSOC_WAYS;
+            for i in 0..TT_ASSOC_WAYS {
+                // SAFETY: `bucket_base` guarantees `b + i < len` for `i < TT_ASSOC_WAYS`.
+                let s = Slot(unsafe { self.slots.get_unchecked(b + i) }.load(Ordering::Relaxed));
+                if s.used() {
+                    if s.fp() == want {
+                        return (Some(s.val()), b + i);
+                    }
+                } else if empty == TT_ASSOC_WAYS {
+                    empty = i;
+                }
+            }
+            let way = if empty != TT_ASSOC_WAYS {
+                empty
+            } else {
+                (route as usize >> 3) & (TT_ASSOC_WAYS - 1)
+            };
+            (None, b + way)
+        }
+    }
+
+    /// Blind store to a slot chosen earlier by [`probe_assoc`](Self::probe_assoc) — the
+    /// amortised put: no scan, no index recompute, just the write (write-allocate brings the
+    /// line the probe already located).
+    #[allow(dead_code)]
+    #[inline]
+    pub(crate) fn store_slot(&self, slot: usize, fp: u64, val: u8) {
+        // SAFETY: `slot` comes from `probe_assoc` = `bucket_base(..) + way`, with
+        // `way < TT_ASSOC_WAYS` and `bucket_base + TT_ASSOC_WAYS <= len`, so `slot < len`.
+        unsafe { self.slots.get_unchecked(slot) }.store(Slot::pack(fp, val).0, Ordering::Relaxed);
+    }
+
+    /// AVX-512 body of [`probe_assoc`](Self::probe_assoc): one `__m512i` load, then derive the
+    /// hit value and the put-target slot from the same `used`/`fp_match` masks.
+    ///
+    /// # Safety
+    /// As [`get_assoc_avx512`](Self::get_assoc_avx512): `b + TT_ASSOC_WAYS <= self.slots.len()`.
+    #[allow(dead_code)]
+    #[cfg(all(target_arch = "x86_64", target_feature = "avx512f"))]
+    #[inline]
+    unsafe fn probe_assoc_avx512(&self, b: usize, want: u64, route: u64) -> (Option<u8>, usize) {
+        use std::arch::x86_64::*;
+        let v = _mm512_loadu_si512(self.slots.as_ptr().add(b) as *const __m512i);
+        let fps = _mm512_srli_epi64::<{ Slot::FP_SHIFT }>(v);
+        let used = _mm512_test_epi64_mask(v, _mm512_set1_epi64(1));
+        let fp_match = _mm512_cmpeq_epi64_mask(fps, _mm512_set1_epi64(want as i64)) & used;
+        if fp_match != 0 {
+            // Hit: extract the matching lane's value from the snapshot (race-free). The slot is
+            // unused by the caller (it returns before the put), so report the matching way.
+            let idx = fp_match.trailing_zeros() as usize;
+            let mut lanes = [0u64; TT_ASSOC_WAYS];
+            _mm512_storeu_si512(lanes.as_mut_ptr() as *mut __m512i, v);
+            return (Some(Slot(lanes[idx]).val()), b + idx);
+        }
+        // Miss: put target = first empty way, else a route-selected way to evict.
+        let empty = !used;
+        let way = if empty != 0 {
+            empty.trailing_zeros()
+        } else {
+            (route >> 3) as u32 & (TT_ASSOC_WAYS as u32 - 1)
+        };
+        (None, b + way as usize)
+    }
+
+    /// [`prefetch_seg_hashed`](Self::prefetch_seg_hashed) for the assoc bucket: warm the
+    /// bucket's first slot — its cache line covers all [`TT_ASSOC_WAYS`] ways.
+    #[inline]
+    pub(crate) fn prefetch_assoc_hashed(&self, route: u64, pc: u32) {
+        let ptr = self.slots[self.bucket_base(route, pc)].as_ptr();
         #[cfg(target_arch = "x86_64")]
         unsafe {
             // SAFETY: as [`prefetch_hashed`](Self::prefetch_hashed) -- warms a valid
@@ -942,6 +1238,7 @@ impl QueensTt {
             segment: false,
             band_base: Box::new([]),
             band_size: Box::new([]),
+            assoc: false,
         })
     }
 
