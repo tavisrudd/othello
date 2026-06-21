@@ -11,6 +11,40 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ NEXT SESSION (as of --12; the thread has long since pivoted past the title)
+
+**State:** the **breakthrough is dynamic move ordering** — re-sort each node's moves by *current*
+available-block degree (`child0.popcount()` ascending), gated `M_ORD`/`QUEENS_ORD=1`; +ETC =
+`M_ORD_W`/`QUEENS_ORD=2`. **Leaderboard #1 = M_ORD_W: ~57s / 0.92 B nodes (SUB-60, −38% vs the old M_WAVE
+record).** All gated off; `M_WAVE` is still the shipped default. This came out of **closing Approach B**
+(sorted-frontier wave + dedup, both halves measured-negative) — whose +94% move-ordering-tax finding *pointed
+at* improving the ordering. Method banked: **n=14/single runs lie; only the interleaved n=16 A/B is trustworthy**
+(2b-0 read +13% at n=14 but +94% at n=16; dynamic ordering held −31%→−34%).
+
+**Do, in priority order:**
+1. **PROMOTE M_ORD_W → the iso-dense default** (the −38% win; user-gated — a default + validation-gate change).
+   Set `ord`+`ord_etc` default-on in `new_dense` (mirror `wave`/`warm_restart`, env `QUEENS_ORD=0` to disable);
+   re-run the gate under the new default (`solver_lineage_agrees` + n=12/14 verdicts; iso-flat `--distinct`
+   unaffected). The A/B already confirms the speedup. Update the leaderboard "default" tag + the validation-gate
+   wording in the project CLAUDE.md.
+2. **Kill the triple-`child0` redundancy** (the real remaining per-node overhead — the ETC's +14.6% cyc/node and
+   the sort's +8.5% are mostly this). `sort_moves_by_degree`, the M_WAVE gather, and the descent each recompute
+   `child0 = avail.and_not(att[sq][0])` (+ `att_for8`) per move — 3×. Compute once (in the sort), reuse in
+   gather+descent. Watch the stack: caching `child0` (`Bits`=32 B) for all `MAXV` moves is ~8 KB/frame on the
+   deep recursion — store only what's needed (e.g. popcount + a compact child0 for the sorted prefix), or fuse
+   sort+gather into one pass. Payoff is a few-% cyc/node ⇒ more sub-60 margin / toward the ~45–60 s compute floor.
+3. **#5 warmup re-sweep** (cheap, no code) — re-tune `QUEENS_WARM_RESTART`/`WARM_SECS`/stagger now that earlier
+   cutoffs change when useful TT entries land; the old optimum predates dynamic ordering.
+
+**Do NOT re-try (measured dead/weak this session, gated-off as instructive negatives):** Approach B entirely
+(sorted-frontier wave `M_WAVE_B` +94%, L0 dedup `M_L0` +6%); **grouped-frontier DDD** (closed by the same +94% —
+any frontier reorder forfeits move ordering); the cascade-reorder (`M_WAVE_C` +2.1%, frontend-bound loop punishes
+added code); ETC top-k probe budget (#4, cuts distributed); ChatGPT #1/#3/#7 (weak — see the --12 note). **The
+giant-root tail's WORK is not cuttable by frontier-reorder/dedup; levers must preserve move order.**
+
+**Tooling:** `scripts/queens-ab.sh` now parses `--to-file` JSON + auto-prints the off/on Δ (nodes/cyc/node/total
+cyc/wall). Runs go in a **fresh dedicated tmux window** (never the user's panes); poll JSON/`$STATE`, not the pane.
+
 ## Context
 
 The deep search was a recursion. This session converted it to an **explicit-stack loop** ("unwind the
@@ -55,6 +89,10 @@ A recursive DFS hides the search frontier in the opaque native call stack. The e
    completion / n=18 needs checkpointing); per-frame pending-move reordering cuts nodes.
 
 ## NEXT SESSION — build ABDADA / frontier work-stealing on `wins_inc_iter`
+
+> **SUPERSEDED (historical, from --6).** ABDADA + work-stealing were built and measured-negative (--7/8);
+> the whole parallelization + frontier-reorder/dedup route is **closed** (see the top "⇒ NEXT SESSION" block).
+> Kept for the record only.
 
 The target is the giant-root tail (51% util, ~half the n=16 wall). Two levers, both on the explicit stack:
 
