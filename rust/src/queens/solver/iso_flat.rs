@@ -1775,31 +1775,40 @@ impl IsoFlat {
         att: &[[Bits; 8]],
     ) {
         let n = dst.len();
-        // Degree key per move (current available-block popcount), computed once into the caller's
-        // parallel array so the sort needs no comparator closure AND the descent/gather can reuse
-        // the sorted degree (skipping their own popcount recompute — the sort-fuse). pc ≤ 256 fits u16.
+        // Degree key per move (current available-block popcount) in move order. A child drops the
+        // placed square plus its attacked squares, so `0 ≤ degree < n` — the key fits the counting
+        // sort's `[0, n)` index range. pc ≤ 256 fits u16.
+        let mut draw = [0u16; MAXV];
         for k in 0..n {
-            let child0 = avail.and_not(att_for8(att, dst[k])[0]);
-            deg[k] = child0.popcount() as u16;
+            draw[k] = avail.and_not(att_for8(att, dst[k])[0]).popcount() as u16;
         }
-        // Inlined STABLE insertion sort by ascending degree, moving the move + its key in lockstep.
-        // Stable (shift only on strict `>`) ⇒ equal-degree ties keep their q.order, so the node
-        // count is byte-identical to the std stable sort this replaces. The deep recurse nodes (the
-        // 94%-majority) have short move lists (≤ ~21), so insertion sort beats the generic driftsort
-        // it replaces — no scratch alloc / merge passes / comparator-closure dispatch, which summed
-        // to ~16% of total n=16 search cycles in the profile (insertion_sort_shift_left + quicksort
-        // + call_mut + sort8_stable + drift + memmove).
-        for i in 1..n {
-            let dk = deg[i];
-            let sq = dst[i];
-            let mut j = i;
-            while j > 0 && deg[j - 1] > dk {
-                deg[j] = deg[j - 1];
-                dst[j] = dst[j - 1];
-                j -= 1;
-            }
-            deg[j] = dk;
-            dst[j] = sq;
+        // STABLE counting sort by ascending degree. The insertion sort this replaces had a
+        // data-dependent `while deg[j-1] > dk` comparison that was the **#1 branch-mispredict site**
+        // in the n=16 profile (27.9% of all branch-misses; the search is ~16% of cycles lost to
+        // mispredicts). Counting sort has no data-dependent comparison branch — only fixed-trip loops
+        // over `[0, n)` — so it trades the mispredict storm for a few predictable passes. Stable
+        // (moves scattered in original order at `count[d]++`) ⇒ equal-degree ties keep their q.order,
+        // so the searched node set is byte-identical. The descent/gather reuse the sorted `deg`.
+        let mut count = [0u16; MAXV];
+        for &d in &draw[..n] {
+            count[d as usize] += 1;
+        }
+        // Prefix-sum the per-degree counts into start positions (degrees live in `[0, n)`).
+        let mut acc = 0u16;
+        for c in count[..n].iter_mut() {
+            let cur = *c;
+            *c = acc;
+            acc += cur;
+        }
+        // Stable scatter: read moves in original order, place each at its degree's running slot.
+        let mut src = [0u8; MAXV];
+        src[..n].copy_from_slice(&dst[..n]);
+        for k in 0..n {
+            let d = draw[k] as usize;
+            let p = count[d] as usize;
+            count[d] += 1;
+            dst[p] = src[k];
+            deg[p] = draw[k];
         }
     }
 
