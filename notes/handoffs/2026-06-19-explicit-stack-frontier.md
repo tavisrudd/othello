@@ -11,6 +11,92 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ NEXT SESSION (as of --15 — GOAL CHANGED to 30s **END-TO-END** incl prep. BE RELENTLESS.)
+
+> **NEW GOAL (user, --15):** n=16 in **30s END-TO-END** — *including the TT alloc + dense W8 prebuild*
+> (the old 33.9s counted search only; the real process wall was ~39s). No cheating (no opening book /
+> pre-solved roots). Autonomous, branch freely, don't wimp out.
+
+**Branch `queens-30s-e2e`** (off `main`, NOT merged — decide merge with the user). Two committed wins
+(gate-green: lineage + direct_w9..16 + graph_wins8 + iso-flat n=12 distinct 1,060,823 + n=14 iso-dense
+byte-identical 3,955,635 + clippy):
+- **`2b7687e` pext k=8 dense-table build → prep 3.3s→1.3s (−2.0s).** The real prep cost is the k=8 table
+  build (2^28 codes via scalar `graph_wins`), NOT the TT alloc (~0.2s at 8.6 GB; alloc already overlaps the
+  build via the spawned thread in `new_dense`). New `graph_wins8` uses `extract_adj` + pext induced-mask
+  projection (the runtime `get9..` machinery) + new `W8_MASKS`. Bit-identical (`graph_wins8_matches_scalar`).
+- **`dec6f28` branchless counting sort for dynamic move ordering → −9.9% cyc/node / −12.5% wall** (4-round
+  n=16 A/B, 36.56→31.98s). `sort_moves_by_degree` was the **#1 branch-mispredict site (27.9% of all n=16
+  branch-misses;** the search is frontend-bound 30%, IPC 1.23, ~16% of cycles lost to mispredicts). Replaced
+  the insertion sort's data-dependent `while deg[j-1]>dk` with a stable counting sort (count/prefix/stable
+  scatter — no comparison branch). Byte-identical node set.
+- **`9b371ff` warm-restart OFF by default → −3.2% wall** (4-round n=16 A/B, 31.06→30.76s). The
+  `warm_secs=2` warm pass + staggered restart trims nodes a touch but its ramp now costs more wall than
+  it saves — the counting sort sped the kernel, so the fixed warm-phase overhead got relatively bigger
+  ("levers compound"; it was wall-neutral in the M_WAVE era). Roots hit all cores immediately.
+  `QUEENS_WARM_RESTART=1` re-enables.
+- **WASH (kept only for its timing print):** `verts_of` closure-free vert extraction — the `call_mut` 6.85%
+  was inherent loop body, +0.9% cyc/node (noise). The commit also adds the **e2e timing breakdown** that
+  `solve` now prints: `(end-to-end: prep X + search Y + PV Z = T)`. PV (optimal line) is ~0.01s (warm TT).
+- **WASH — isolated-vertex pair-strip** (`iso_strip`/`get_dyn` in dense.rs, the "two-for-one deal"): a
+  zero-degree vertex is a `K1` clique (nimber 1), so removing an even number is win/loss-preserving
+  (g(G⊔2·isolated)=g(G)). Built across get9..16 + a sparse `iso_strip_matches_scalar` gate; byte-identical
+  (n=14 3,955,635). **4-round A/B (warm off both): −0.3% wall / −1.0% total cyc = WASH** (even the
+  overhead-fused variant). **Why:** getK peels isolated verts *one ply at a time*, so each level usually
+  has ≤1 isolated vert — the pair-strip rarely has 2 to cancel, and the *odd* (1-isolated) case needs the
+  core's nimber (= the parked branch). So the boolean-getK isolated lever is fundamentally weak; the
+  general two-for-one (any equal-nimber components cancel; nimber-1 = cliques K1/K2/K3) needs nimbers.
+  **⇒ weakens the nimber-decomposition lever's premise too.**
+
+**SCOREBOARD (branch, clean) — after W8-pext + counting sort + warm-off:** search mean **~30.8s** (12 GB
+A/B B-mean 30.76s; good rounds ~29s), prep ~1.4s, PV ~0 ⇒ **end-to-end ~32s mean, good rounds ~30.4s**
+(knocking on 30s; was ~39s at session start). TT-size for e2e: working set ~2.8 GB, so bits 30 (8.6 GB, 30%
+full, prep ~1.6s) ≈ optimal; bits 29 (4.3 GB) saves prep but loses more to eviction; bits 31 (17 GB) costs
+prep for no search gain. **NOTE: single n=16 runs are ±18% noisy — trust only interleaved A/B (the cyc/node
+metric is unreliable for byte-identical changes when the parallel node count diverges; use wall + total cyc).**
+
+**COST MAP (counting-sort binary, cycles):** `wins_inc` 27% — **dominated by the TT-probe DRAM stall** (66%
+skid on the post-load `mov`; the ~165 cyc entry probe, only ~30 cyc hidden by one-ahead prefetch) + a 256-bit
+stack spill (33% of wins_inc). getK evaluators (get9..16) **~35%** (the deep nested sweep). wK_get builders
+~17%. sort 7.8%. **Branch-misses:** wins_inc 24%, wK_get builders ~38% (`verts_of`'s `while x!=0` per-word
+loop-exits), getK ~25%.
+
+**⇒ ATTACK-VECTOR MENU (--15) — by the *pattern* of this session's wins:**
+- **(worked) #1 work-reduction** (W8 pext). Remaining: C1b pass the pext-built `adj` into getK to skip its
+  top `extract_adj` (small); ILP the per-child pexts.
+- **(worked) #2 branch-mispredict elimination** (counting sort, −9.9%). Remaining: the **descent cascade**
+  (`if pc==16 else if 15…`, a data-dependent multi-way branch) → a jump-table/computed dispatch; the
+  `verts_of` `while x!=0` loops (the #1 remaining mispredict source, ~38% — but bit-iteration is hard to
+  de-branch).
+- **(worked) #3 re-test gated levers after a win** (warm-restart-off, −3.2% — the balance flipped). **DO MORE:**
+  re-A/B K-ceiling (16 vs 15), the M_ORD_W ETC (`QUEENS_ORD_ETC` 1 vs 0), warm timings — the counting-sort +
+  warm-off shifted the cost balance, so other tuned-for-the-old-balance defaults may have flipped. **HIGH-EV,
+  LOW-EFFORT — start here.**
+- **(parked) memory:** TT set-associative buckets (`queens-tt-assoc-buckets`, fewer DRAM line-fetches/probe);
+  BuRR compress. Re-test in this regime.
+- **(parked, the real node-count lever) nimber decomposition:** handles the common 1-isolated case
+  (`g(core ⊔ {v}) = g(core) XOR 1`) the boolean pair-strip can't; heavy (cutoff-free nimber recursion = 6.6×).
+
+**⇒ THE WALL + NEXT LEVERS (--15):**
+1. **The probe stall is NOT cheaply hideable — MLP-batched probes is likely CLOSED too.** Batching the entry
+   probes needs a breadth/frontier visit order, which forfeits depth-first move ordering — and the +94%
+   sorted-wave finding proved ordering is worth ~2×. Same root cause that killed Approach B. (Not 100% proven
+   for MLP specifically, but the analysis is strong; don't sink a session into it without a cheap proxy first.)
+2. **getK node-count via NIMBER DECOMPOSITION (the real lever; the parked `queens-component-nimber` revival).**
+   The getK leaves (35%) "peel isolated vertices one ply at a time" — isolated verts are size-1 components
+   (*1). A **Grundy-valued component table** (≤8 verts: W8-shaped but nimber, ~2^28×4 bits) + connected-
+   component decomposition inside getK would collapse decomposable pc≤16 graphs (XOR component nimbers, G is a
+   LOSS iff total==0) instead of the deep boolean recursion. Heavy (nimber table build cost — mex not OR — +
+   component detection), but it attacks the biggest compute bucket AND is move-order-preserving. **FIRST: measure
+   the decomposability of the pc 13–16 tail** (what fraction of getK graphs have ≥2 components / an isolated
+   vertex) with a gated `count`-style tap — if most are decomposable, this is the win.
+3. **Small stackable wins (each ~1%, may wash like verts_of):** `verts_of` fixed-count loop (outer `for 0..K`,
+   inner `while x==0` word-advance — fewer loop-exit mispredicts); degree-compute SIMD (VPOPCNTQ 2 moves/zmm —
+   *check auto-vec first*); C1b pass the pext-built `adj[]` into getK to skip its top-level `extract_adj`.
+4. **PGO** (build-process, `make pgo-queens` → `target/pgo-release/release/queens`) — A/B measured this session
+   (result in the --15 note). Use for record runs.
+
+---
+
 ## ⇒ NEXT SESSION (as of --14 — 52→33.9s DONE, 30s is CLOSE. BE RELENTLESS.)
 
 > **MISSION (unchanged, user drill-sergeant):** drive n=16 to **30s**. We're at **33.9s clean** (was ~52s) —
@@ -280,6 +366,15 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
 
 ## Progress
 
+- [x] **--15 (branch `queens-30s-e2e`, NOT merged): goal → 30s END-TO-END (incl prep). Search ~−16% + prep
+      −2s.** See the top "⇒ NEXT SESSION (--15)" block. Commits on the branch: `953e7e3` (verts_of wash +
+      e2e timing print), `2b7687e` (pext k=8 build, prep 3.3→1.3s), `dec6f28` (branchless counting sort,
+      −9.9% cyc/node / −12.5% wall — the headline), `9b371ff` (warm-restart OFF default, −3.2% wall),
+      `d0b8844` (isolated-vertex pair-strip — MEASURED-NEGATIVE, gated `const ISO_STRIP=false`/DCE). All
+      gate-green (lineage + direct_w9..16 + graph_wins8 + iso_strip sparse + n=14 iso-dense 3,955,635 +
+      n=12 distinct 1,060,823 + clippy). PGO = NEGATIVE now (+2.6% cyc/node, mis-profiled vs the new path).
+      Clean e2e (warm box) ~33.7s; A/B-extrapolated good rounds ~30.4s. **DECIDE: merge branch to main.**
+      NEXT = re-sweep defaults (K-ceiling/ETC), descent-cascade jump table, then the parked nimber lever.
 - [x] **--14: ★★ pext getK code-build + W_K K=12→16 default = −35% wall (52→33.9s clean).** See the top "⇒ NEXT
       SESSION (--14)" block. Commits: `adbfb10` (pext w10-13, −3.8% cyc/node), `41dcf70` (W14 opt-in), `2dd5ef2`
       (W15/W16 + incremental `wk_masks128`), `16d8842` (default K=16). Gate-green throughout (byte-identical K=12,
