@@ -209,9 +209,17 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       **−18.4% nodes, +14.6% cyc/node (the ETC gather/probe), −6.5% total cyc.** **Clean-box 17 GB: ~57s (59.2s
       measured) / 919 M nodes — SUB-60, new leaderboard #1, −38% vs the M_WAVE record.** Verdict-correct
       (n=4..10 match default). The ETC's +14.6% cyc/node is now the limiter (it eats −18% nodes down to −6.5%) —
-      ChatGPT's refinement menu targets it (top-k ETC budget, pc-band, slow-root-only, sidecar-at-ETC-probes).
-      NEXT: top-k ETC probe budget (probe only the top-k *dynamically-ordered* children — the cut-trigger is
-      usually the most-forcing child, so few probes keep most cuts) + promote-to-default decision.
+      ChatGPT's refinement menu targets it. **Probed #4 (top-k ETC probe budget) — MEASURED-DEAD:** n=14 ETC-k
+      sweep (M_ORD_W) shows the cuts are **distributed**, not top-concentrated (k=2 → 8.79M = +11.5% vs full
+      7.89M; k=8 → +5.8%; k=16 → +1.9%) — you need k≈full to keep the cut. And the +14.6% overhead is the
+      **gather** (key-build for all recurse children, reused by the descent) + a **triple `child0` recompute**
+      (sort + gather + descent each compute `child0` per move), NOT the probes — so capping probes can't shed it
+      (reverted, clean). Re-eval of the rest: #1 slow-root-only / #3 polarity (all nodes are OR here) / #7
+      sidecar (overhead is gather not probes) all look weak; #5 warmup-sweep is cheap+orthogonal. **The real ETC
+      overhead lever = kill the triple-`child0` redundancy** (compute `child0`/its popcount once in the sort,
+      reuse in gather+descent). **NEXT (bigger): promote-to-default decision** — M_ORD_W (`QUEENS_ORD=2`) as the
+      new iso-dense default (set `ord`+`ord_etc` default-on in `new_dense`, like `wave`/`warm_restart`); needs the
+      gate to re-validate under the new default (lineage + verdicts; A/B already confirms the −38% win).
 
 ## Handoff Notes
 
