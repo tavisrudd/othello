@@ -16,6 +16,14 @@
 > **NEW GOAL (user, --15):** n=16 in **30s END-TO-END** — *including the TT alloc + dense W8 prebuild*
 > (the old 33.9s counted search only; the real process wall was ~39s). No cheating (no opening book /
 > pre-solved roots). Autonomous, branch freely, don't wimp out.
+>
+> **⇒ NEXT SESSION CHOSEN (--16, user picked "b"):** build the **4-byte-slot SET-ASSOCIATIVE TT** — the one
+> representation that cuts per-probe DRAM (a cache-line bucket of compact slots, SIMD-probe all of them; at the
+> current ~30% load one line-fetch resolves the probe). Combine with the parked `queens-tt-assoc-buckets` branch.
+> **Design constraint:** the fingerprint-correctness floor is **~46 bits for 393M keys** (a naïve 4-byte slot
+> leaves only ~30 fp bits → ~0.03 wrong-hits/run = unsafe), so it needs a *shared/wider-fp* bucket scheme (one
+> wider fp per bucket, or fp split across the line). The --15 wins (counting sort, warm-off, pext build) are
+> **MERGED TO MAIN** (`c7a9409`).
 
 **Branch `queens-30s-e2e`** (off `main`, NOT merged — decide merge with the user). Two committed wins
 (gate-green: lineage + direct_w9..16 + graph_wins8 + iso-flat n=12 distinct 1,060,823 + n=14 iso-dense
