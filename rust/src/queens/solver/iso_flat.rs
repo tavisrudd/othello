@@ -299,6 +299,27 @@ fn att08(att: &[[Bits; 8]], sq: u8) -> Bits {
     att_for8(att, sq)[0]
 }
 
+/// Scatter the set-square indices of `avail` (ascending) into `verts[..pc]`. A closure-free
+/// twin of `avail.each(|v| ...)`: a plain `#[inline(always)]` fn with no `FnMut` reliably
+/// inlines into the giant `wins_inc`, where the closure form was being *outlined* to a shared
+/// `FnMut::call_mut` (~6.9% of n=16 search cycles — the closure is invoked once per live square,
+/// per `wK_get` entry on the pc 9..16 dense majority). Output is bit-identical to `each`.
+#[inline(always)]
+fn verts_of(avail: Bits, verts: &mut [u8]) {
+    let mut n = 0usize;
+    for (w, &word) in avail.0.iter().enumerate() {
+        let mut x = word;
+        while x != 0 {
+            // SAFETY: `verts.len() == popcount(avail)` at every call site (a pc==K node), so
+            // exactly `K` writes occur and `n < verts.len()` throughout.
+            unsafe { *verts.get_unchecked_mut(n) = (w as u32 * 64 + x.trailing_zeros()) as u8 };
+            n += 1;
+            x &= x - 1;
+        }
+    }
+    debug_assert_eq!(n, verts.len());
+}
+
 /// Compact a board-square attack `row` against the `K` live squares of an `avail` set (whose
 /// per-word values are `a`) into a `K`-bit labelled adjacency row, with one 4-word BMI2 `pext`.
 /// Bit `j` of the result = "`row` hits the `j`-th live square of `avail`" — exactly the labelled
@@ -921,14 +942,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 8);
         let mut verts = [0u8; 8];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
-            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 8);
+        verts_of(avail, &mut verts);
         let mut code = 0usize;
         let mut bit = 0u32;
         for i in 0..8 {
@@ -950,14 +964,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 9);
         let mut verts = [0u8; 9];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
-            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 9);
+        verts_of(avail, &mut verts);
         let mut code = 0u64;
         let mut bit = 0u32;
         for i in 0..9 {
@@ -979,14 +986,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 10);
         let mut verts = [0u8; 10];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
-            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 10);
+        verts_of(avail, &mut verts);
         // pext code-build: each vert's K-bit adjacency row in one 4-word pext (`adj_row_pext`),
         // packed into the 45-bit upper-triangular labelled code. `off`/`width` const-fold per the
         // unrolled `i` (same const-fold the scalar build relied on for `bit>>6`); K≤11 ⇒ off<55 ⇒
@@ -1016,14 +1016,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 11);
         let mut verts = [0u8; 11];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: wK_get is dispatched only at pc==K, so `avail` yields exactly K squares
-            // ⇒ n < K. Drops a per-square bounds-check panic block from every wK_get hot body.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 11);
+        verts_of(avail, &mut verts);
         // pext code-build (see `w10_get`): 11 rows of one 4-word pext into the 55-bit code (K≤11 ⇒
         // off<55 ⇒ single `u64`, no word straddle). Byte-identical code bits to the scalar build.
         let a = &avail.0;
@@ -1051,13 +1044,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 12);
         let mut verts = [0u8; 12];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: dispatched only at pc==12 ⇒ exactly 12 squares ⇒ n < 12.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 12);
+        verts_of(avail, &mut verts);
         // pext code-build (see `w10_get`): 12 rows of one 4-word pext, packed into the 66-bit code
         // as two `u64` words (low 0..63, high 64..65). Each row's `width`-bit contribution can
         // straddle the 64-bit word boundary, so split it when `lo + width > 64`. `off`/`width`/`lo`
@@ -1094,13 +1081,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 13);
         let mut verts = [0u8; 13];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: dispatched only at pc==13 ⇒ exactly 13 squares ⇒ n < 13.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 13);
+        verts_of(avail, &mut verts);
         // pext code-build (see `w12_get`): 13 rows of one 4-word pext, packed into the 78-bit code
         // (two `u64` words, low 0..63, high 64..77, straddle split per row). Byte-identical bits.
         let a = &avail.0;
@@ -1134,13 +1115,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 14);
         let mut verts = [0u8; 14];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: dispatched only at pc==14 ⇒ exactly 14 squares ⇒ n < 14.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 14);
+        verts_of(avail, &mut verts);
         // pext code-build (see `w12_get`): 14 rows of one 4-word pext, packed into the 91-bit code
         // (two `u64` words, low 0..63, high 64..90, straddle split per row). Byte-identical bits.
         let a = &avail.0;
@@ -1174,13 +1149,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 15);
         let mut verts = [0u8; 15];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: dispatched only at pc==15 ⇒ exactly 15 squares ⇒ n < 15.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 15);
+        verts_of(avail, &mut verts);
         // pext code-build (see `w12_get`): 15 rows of one 4-word pext, packed into the 105-bit
         // code (two `u64` words, low 0..63, high 64..104, straddle split per row). Byte-identical.
         let a = &avail.0;
@@ -1214,13 +1183,7 @@ impl IsoFlat {
         let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
         debug_assert_eq!(avail.popcount(), 16);
         let mut verts = [0u8; 16];
-        let mut n = 0usize;
-        avail.each(|v| {
-            // SAFETY: dispatched only at pc==16 ⇒ exactly 16 squares ⇒ n < 16.
-            unsafe { *verts.get_unchecked_mut(n) = v as u8 };
-            n += 1;
-        });
-        debug_assert_eq!(n, 16);
+        verts_of(avail, &mut verts);
         // pext code-build (see `w12_get`): 16 rows of one 4-word pext, packed into the 120-bit
         // code (two `u64` words, low 0..63, high 64..119, straddle split per row). Byte-identical.
         let a = &avail.0;

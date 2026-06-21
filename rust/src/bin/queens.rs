@@ -1603,6 +1603,9 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
             }
         })
     });
+    // Prep timer: TT alloc/prefault + dense W8 build. Counted toward the end-to-end wall
+    // (the 30s goal is measured from process start, including this prep).
+    let prep_t = Instant::now();
     // --resume reloads a checkpoint image into the table and wraps the matching
     // table-backed solver around it (warm start); otherwise build a fresh solver.
     let solver: Box<dyn Solver> = match &cp_opts.resume {
@@ -1661,6 +1664,11 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
         eprint!("\r\x1b[K");
         io::stderr().flush().ok();
     }
+    let prep_secs = prep_t.elapsed().as_secs_f64();
+    eprintln!(
+        "\x1b[90m(prep: TT alloc + dense W8 build in {})\x1b[0m",
+        fmt_elapsed(prep_secs),
+    );
     // Resolve checkpointing (opt-in; defaults on for n=16). Only the table-backed
     // solvers can dump -- warn and disable if checkpointing was asked for otherwise.
     let mut checkpoint = cp_opts.resolve(q.n);
@@ -1800,6 +1808,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
             "\x1b[90mtracing the optimal line (PV) — the bar below counts only its own nodes…\x1b[0m"
         );
     }
+    let pv_t = Instant::now();
     let pv = run_watched(
         solver.as_ref(),
         n,
@@ -1808,8 +1817,16 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
         Phase::OptimalLine { node_base: pv_base },
         || q.principal_variation(solver.as_ref(), first_wins),
     );
+    let pv_secs = pv_t.elapsed().as_secs_f64();
     let names: Vec<String> = pv.iter().map(|&s| name(q, s)).collect();
     println!("An optimal line ({} moves): {}", pv.len(), names.join("  "));
+    eprintln!(
+        "\x1b[90m(end-to-end: prep {} + search {} + PV {} = {})\x1b[0m",
+        fmt_elapsed(prep_secs),
+        fmt_elapsed(elapsed),
+        fmt_elapsed(pv_secs),
+        fmt_elapsed(prep_secs + elapsed + pv_secs),
+    );
 
     let mut queens = Bits::empty();
     let mut blocked = Bits::empty();
