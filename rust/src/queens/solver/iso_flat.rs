@@ -68,6 +68,7 @@ const M_WAVE: u8 = 4; // ETC + sorted-batch child probe (`QUEENS_WAVE=1`); A'' P
 const M_SIZE: u8 = 5; // A'' Phase-2a offload sizing: tap the recurse-arm probe stream (`QUEENS_SIZE=1`)
 const M_SIZE_WAVE: u8 = 6; // as M_SIZE but ON TOP of the M_WAVE ETC cut — sizes the post-cut residual (`QUEENS_SIZE=2`)
 const M_WAVE_B: u8 = 7; // A'' Phase-2b-0 de-risk: descend children in TT-slot order, not move order (`QUEENS_WAVE_B=1`)
+const M_L0: u8 = 8; // A'' Phase-2b dedup: M_WAVE + a per-worker L0 probe cache (`QUEENS_L0=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -147,6 +148,42 @@ thread_local! {
             sample: Vec::new(),
         })
     };
+}
+
+/// A'' Phase-2b dedup (`M_L0`): per-worker **L0 probe cache** — a small direct-mapped cache of solved
+/// `(route, fp) → val` in front of the multi-GB flat TT. The order-INDEPENDENT half of the sorted-wave
+/// prize (no move-ordering tax): a recurring key (a transposition, or the `M_WAVE` ETC-then-descent
+/// re-probe) is served from this ~1 MB L2/L3-resident table (~10 cyc) instead of a cold flat-TT DRAM
+/// probe (~176 cyc). Sound because a queens position's win/loss is **immutable** (key-determined), so a
+/// cached entry is never stale; the 55-bit `fp` tag matches the TT's own collision tolerance (no new
+/// false hits). Indexed by the LOW bits of `route` (the TT's `fastrange` uses the HIGH bits ⇒ the two
+/// indexings are decorrelated). Touched only on the `M_L0` monomorphisation (gated `QUEENS_L0=1`).
+const L0_BITS: u32 = 17;
+const L0_SIZE: usize = 1 << L0_BITS;
+const L0_FP_MASK: u64 = (1u64 << 55) - 1; // mirrors `Slot::fp_mask()` (fp = bits [9..64))
+
+thread_local! {
+    /// Entry encoding (one `u64`): `0` = empty; else `1 | (val << 1) | ((fp & L0_FP_MASK) << 2)`
+    /// (bit 0 = used, bit 1 = val, bits [2..57) = fp tag). Zero-cost off the `M_L0` path.
+    static L0_CACHE: RefCell<[u64; L0_SIZE]> = const { RefCell::new([0u64; L0_SIZE]) };
+}
+
+/// L0 probe-cache lookup (see [`L0_CACHE`]). `Some(val)` on a tag-matched hit, else `None`.
+#[inline]
+fn l0_get(route: u64, fp: u64) -> Option<u8> {
+    let idx = (route as usize) & (L0_SIZE - 1);
+    L0_CACHE.with(|c| {
+        let e = c.borrow()[idx];
+        (e & 1 != 0 && (e >> 2) == (fp & L0_FP_MASK)).then_some(((e >> 1) & 1) as u8)
+    })
+}
+
+/// Insert a solved `(route, fp) → val` into the L0 probe cache (direct-mapped, evict-on-collision).
+#[inline]
+fn l0_put(route: u64, fp: u64, val: u8) {
+    let idx = (route as usize) & (L0_SIZE - 1);
+    let e = 1 | ((val as u64 & 1) << 1) | ((fp & L0_FP_MASK) << 2);
+    L0_CACHE.with(|c| c.borrow_mut()[idx] = e);
 }
 
 /// One suspended ancestor on the explicit upper-tree search stack of
@@ -517,6 +554,11 @@ pub struct IsoFlat {
     /// node-count delta vs the WAVE-off move-order baseline is the move-ordering tax the sorted wave
     /// pays for its row-buffer locality (the 2b gate). Off = byte-identical (the sort DCEs).
     wave_b: bool,
+    /// `QUEENS_L0=1` (A'' Phase-2b dedup): selects `const MODE = M_L0` = M_WAVE + the per-worker L0
+    /// probe cache ([`L0_CACHE`]) layered into `mtt_get`/`mtt_put`. The order-independent dedup (no
+    /// move-ordering tax): recurring keys served from L2/L3 instead of a cold flat-TT DRAM probe. Off =
+    /// byte-identical M_WAVE (`mtt_get`/`mtt_put` are the identity for every non-`M_L0`/`M_SEG` mode).
+    l0: bool,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -755,6 +797,7 @@ impl IsoFlat {
             size_hll: Hll::new(SIZE_HLL_P),
             size_sample: Mutex::new(Vec::new()),
             wave_b: std::env::var("QUEENS_WAVE_B").as_deref() == Ok("1"),
+            l0: std::env::var("QUEENS_L0").as_deref() == Ok("1"),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1050,6 +1093,18 @@ impl IsoFlat {
     ) -> Option<u8> {
         if MODE == M_SEG {
             self.tt.get_seg_hashed(route, fp, pc)
+        } else if MODE == M_L0 {
+            // L0 dedup: serve a recurring key from the per-worker L0 cache; on a miss fall to the flat
+            // TT and populate L0 with the solved value. DCEs to the plain `tt_get_h` for every other MODE.
+            if let Some(v) = l0_get(route, fp) {
+                Some(v)
+            } else {
+                let g = self.tt_get_h::<COUNT>(key, route, fp);
+                if let Some(v) = g {
+                    l0_put(route, fp, v);
+                }
+                g
+            }
         } else {
             self.tt_get_h::<COUNT>(key, route, fp)
         }
@@ -1067,6 +1122,9 @@ impl IsoFlat {
     ) {
         if MODE == M_SEG {
             self.tt.put_seg_hashed(route, fp, pc, val);
+        } else if MODE == M_L0 {
+            self.tt_put_h::<COUNT>(key, route, fp, val);
+            l0_put(route, fp, val); // keep L0 hot with every just-solved value
         } else {
             self.tt_put_h::<COUNT>(key, route, fp, val);
         }
@@ -1637,8 +1695,9 @@ impl IsoFlat {
         // empty child); and on no cut the descent below **reuses** the stored descriptors instead of
         // rebuilding them. Verdict-preserving (the ETC cut is only ever an earlier return of the same
         // OR-node verdict). DCEs to nothing on every other `MODE` (control byte-identical).
-        // `M_SIZE_WAVE` runs this same body (so its tapped stream is the post-cut residual B offloads).
-        if MODE == M_WAVE || MODE == M_SIZE_WAVE {
+        // `M_SIZE_WAVE` runs this same body (so its tapped stream is the post-cut residual B offloads);
+        // `M_L0` runs it with the L0 probe cache layered into `mtt_get`/`mtt_put` (production identical).
+        if MODE == M_WAVE || MODE == M_SIZE_WAVE || MODE == M_L0 {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
             // SoA descriptor store, recurse children in move order (consumed in order by the descent).
             // `wk` keeps the full child key so the `COUNT=true` HLL path is exact (production
@@ -1651,7 +1710,7 @@ impl IsoFlat {
                 let a = att_for8(att, sq);
                 let child0 = avail.and_not(a[0]);
                 if child0 == Bits::ZERO {
-                    self.tt_put_h::<COUNT>(key, route, fp, 1); // empty child ⇒ node wins
+                    self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
                     return true;
                 }
                 if child0.popcount() > recurse_min && nw < WAVE_CAP {
@@ -1676,8 +1735,8 @@ impl IsoFlat {
                     self.tt.prefetch_h(r); // every prefetch in flight before any get
                 }
                 for j in 0..nw {
-                    if self.tt_get_h::<COUNT>(wk[j], wr[j], wf[j]) == Some(0) {
-                        self.tt_put_h::<COUNT>(key, route, fp, 1); // a losing child ⇒ node wins
+                    if self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0) == Some(0) {
+                        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // a losing child ⇒ node wins
                         return true;
                     }
                 }
@@ -2706,6 +2765,8 @@ impl IsoFlat {
                     M_HIST
                 } else if self.wave_b {
                     M_WAVE_B
+                } else if self.l0 {
+                    M_L0
                 } else if self.wave {
                     M_WAVE
                 } else {
@@ -2717,6 +2778,9 @@ impl IsoFlat {
             let order8 = self.order8(q);
             let won = match mode {
                 M_SIZE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_L0 => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_L0>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(

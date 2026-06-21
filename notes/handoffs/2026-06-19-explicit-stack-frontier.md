@@ -167,13 +167,21 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       slot-sort** (vs ~0% random). All three gate conditions pass ⇒ **build 2b** (the SPSC producer/consumer
       pipeline). See the session --12 note + the [proposal](../proposal-2026-06-20-sorted-frontier-wave.md)
       Status/Phase-2 (DONE/GO).
-- [x] **Phase 2b-0 de-risk (gated `M_WAVE_B`/`QUEENS_WAVE_B`) — slot-order descent costs +13.3% nodes
-      (2026-06-20--12).** The single-thread slot-order descent (the move-ordering tax half of the sorted wave;
-      benefit half already measured) = n=14 deterministic **14,612,123 nodes vs 12,896,443 move-order baseline
-      = +13.3%**, verdict SECOND, control byte-identical. **The sorted-LOCALITY half is taxed +13.3%
-      (≈cancels its throughput gain on napkin); the DEDUP half is the order-independent clean win.** ⇒
-      **decide 2b direction with the user** (dedup-first vs full sorted-wave pipeline) — do NOT auto-build the
-      SPSC. See the 2b-0 note.
+- [x] **Phase 2b-0 de-risk (gated `M_WAVE_B`/`QUEENS_WAVE_B`) — slot-order tax = +94% nodes at n=16 ⇒ sorted
+      wave CLOSED (2026-06-20--12).** The slot-order descent (the move-ordering-tax half of the sorted wave) =
+      n=14 deterministic +13.3% but **n=16 interleaved A/B (3-round) = 4.069 B vs 2.097 B = +94% nodes** (the
+      n=14 proxy lied 7×). Move ordering is worth ~2× node reduction at scale; no throughput gain survives +94%
+      ⇒ **the in-DFS sorted wave AND the SPSC pipeline (option b) are dead.** Verdict SECOND, control byte-
+      identical. **Only the order-independent DEDUP (option a) survives** — built + being measured as the L0
+      probe cache (next item). `M_WAVE_B` gated-off.
+- [x] **Phase 2b dedup — L0 probe cache (gated `M_L0`/`QUEENS_L0`) — MEASURED-NEGATIVE ⇒ Approach B CLOSED
+      (2026-06-20--12).** n=16 A/B: **+6.0% cyc/node, −0.7% nodes (noise), +5.2% total cyc** — the TT already
+      serves recent repeats warm, so the per-probe L0 access is pure overhead (warm-hit ~0); the tax-free
+      eviction node-cut is ~0.7%. The 27% dedup only materializes inside a sorted/batched frontier (= the +94%
+      tax). **Both halves of Approach B negative ⇒ the sorted-frontier-wave + dedup family is CLOSED**; the +94%
+      finding also closes grouped-frontier DDD (any frontier reorder forfeits move ordering). Production byte-
+      identical; `M_L0` gated-off (instructive negative). Surviving levers preserve move order (getK/W_K,
+      decomposition, the cascade-reorder frontend micro-opt). See the 2b-dedup note.
 
 ## Handoff Notes
 
@@ -263,28 +271,52 @@ sort; recurse children follow by slot). Verdict-preserving; production byte-iden
 n=14 = 11,747,330). This isolates the **move-ordering tax** of slot access (the benefit half — 62% row-hits /
 mlp_bench 5.7× — is already measured; a DFS reorder doesn't realize it, only its cost).
 
-| n=14 single-thread, deterministic | nodes | Δ |
+| slot-order tax | nodes (vs move-order) | Δ |
 |---|---|---|
-| WAVE-off move-order baseline (`QUEENS_WAVE=0`) | 12,896,443 | — |
-| **slot-order (`QUEENS_WAVE_B=1`)** | **14,612,123** | **+13.3%** (verdict SECOND ✓) |
+| **n=14 single-thread, deterministic** | 14,612,123 vs 12,896,443 | **+13.3%** |
+| **n=16 interleaved A/B (3-round, 12 GB TT)** | 4.069 B vs 2.097 B | **+94%** (rounds +86/+93/+103%) |
 
-**Finding (flips the 2b recommendation):** the sorted-**locality** half costs **+13.3% nodes** — significant
-(work-stealing died at +8.7%). Napkin: that tax × faster-warm-probes (probe ≈ 30% of cyc, 176→~60 sorted) ≈
-**−6% cyc** — i.e. the locality gain barely beats its own move-ordering tax. The **dedup** half (−27% duplicate
-probes, *order-independent*, **no** tax) napkins to ≈ **−8% cyc** on its own. **⇒ the clean prize is dedup, not
-the sorted wave.** But dedup and the sort are coupled (free duplicate-collapse needs a sorted/batched frontier),
-so a tax-free dedup needs its own mechanism (probe-memo / batched move-order dedup). **DECISION POINT for the
-user:** (a) **dedup-first** — pursue the order-independent −27% without the slot-order tax (safer, ≈−8% napkin);
-(b) **full sorted-wave pipeline** — build the SPSC anyway, betting the realized sorted-stream throughput (not
-captured by the DFS-reorder proxy) beats the +13.3% tax; or (c) **bank sorted-locality as marginal** and close
-the wave family, keeping M_WAVE. Recommend (a). n=16 tax confirmation (interleaved A/B) deferred — the n=14
-deterministic +13.3% is the clean signal. `M_WAVE_B` stays gated-off (substrate + the measured tax).
+**Finding — the sorted-LOCALITY half is CLOSED (the n=14 proxy lied 7×).** The n=14 deterministic +13.3% looked
+survivable; the trustworthy **n=16 interleaved A/B is +94% nodes** — slot-order ≈ random w.r.t. the move-ordering
+heuristic, and move ordering is worth ~2× node reduction at scale (far more than the napkin assumed; work-stealing
+died at a mere +8.7%). **No sorted-stream throughput gain survives +94% nodes** ⇒ **the in-DFS sorted wave is dead,
+and so is the producer/consumer SPSC pipeline that depends on sorted consumer access (option b).** Banked method,
+re-vindicated: **n=14 / single runs lie — only the interleaved n=16 A/B is trustworthy** (here it flipped a "−6%
+marginal" verdict into a hard kill). `M_WAVE_B` stays gated-off (substrate + the measured tax).
+
+**The DEDUP half (option a, the L0 probe cache `M_L0`/`QUEENS_L0`) — also MEASURED-NEGATIVE.** n=16 interleaved
+A/B (3-round, 12 GB TT), `QUEENS_L0` toggle (off=M_WAVE / on=M_L0):
+
+| | M_WAVE (off) | M_L0 (on) | Δ |
+|---|---|---|---|
+| cyc/node | 3336 | 3535 | **+6.0%** |
+| nodes | 1.721 B | 1.708 B | −0.7% (noise) |
+| total cyc | 5740 G | 6039 G | **+5.2% (loss)** |
+
+cyc/node went **up**: the per-probe L0 access (TLS `.with` + `RefCell` borrow + the 1 MB-cache write on every
+put) is paid on all ~1.7 B nodes, but the warm-hit benefit is ~0 — **the flat TT already serves recent repeats
+warm from CPU cache**, so the L0 adds pure overhead and almost never beats the TT. The eviction-resistance
+node-cut is negligible (−0.7%, the only tax-free prize). **⇒ the tax-free dedup prize is ~0%, not 27% — the 27%
+only materializes inside a sorted/batched frontier, which costs the +94% move-ordering tax.** So **BOTH halves of
+Approach B are measured-negative ⇒ Approach B (sorted-frontier wave + dedup) is CLOSED.** `M_L0` stays gated-off
+(instructive negative, like ABDADA/STEAL/M_WAVE_B). (A faster raw-pointer L0 would trim the +6% but can't beat
+the M_WAVE default — the node-cut prize is ~0.7%, below any realistic per-probe overhead.)
+
+**Broader implication (banked):** the +94% move-ordering finding **also closes the grouped-frontier DDD family**
+— any lever that materializes/sorts/dedups the giant-root frontier (DDD, retrograde wave, sorted wave) forfeits
+move ordering ≈ +94% nodes (or, cutoff-free via nimbers, the parked DDD's 6.6× wall). **The giant-root tail's
+WORK is not cuttable by frontier-reordering/dedup.** The surviving levers all **preserve move order**: node-count
+cuts (getK/W_K deeper, better move *ordering*, decomposition that keeps α-β) or per-node frontend cost
+(e.g. the **cascade-reorder** micro-opt — hoist the recurse arm to the front of the pc-cascade, byte-identical
+node count, ~8→1 branches on the 88%-majority deep-tail child; not part of the dead dedup family).
 
 **Method note:** the global-tap reframe is the "fail-cheap" move — it answered the gate at low build cost / zero
 solver risk (like probe #1), without the heavier per-subtree-HLL instrumentation. If 2a had failed (narrow /
-low-dedup), that would have closed the sorted-stream family cheaply. And 2b-0 (the +13.3% tax) is the same move
-applied to the pipeline: a one-flag gated reorder + an n=14 run caught the move-ordering tax **before** the heavy
-SPSC build — exactly the "characterize before you build the scheduler" lesson.
+low-dedup), that would have closed the sorted-stream family cheaply. And 2b-0 (the +94% n=16 tax) is the same
+move applied to the pipeline: a one-flag gated reorder + an interleaved n=16 A/B killed the sorted wave **before**
+the heavy SPSC build — exactly the "characterize before you build the scheduler" lesson. (Sharpened: the n=14
+proxy said +13.3% "marginal"; only the n=16 interleaved A/B revealed the +94% kill — never trust the small-n /
+single-run number for a node-count lever.)
 
 ### Session --11 (2026-06-20, `mi`): M_WAVE→default, probe #1 kills item A, getK-reshape negative, Approach B scoped
 

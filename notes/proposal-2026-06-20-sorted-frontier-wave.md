@@ -2,7 +2,18 @@
 
 ## Status
 
-**Phase 0, Phase 1 (Approach A), and Phase 2a (offload sizing) are DONE; Phase 2a is GO ⇒ build 2b (2026-06-20--12).**
+**CLOSED with evidence (2026-06-20--12): Approach B (sorted-frontier wave + dedup) is measured-NEGATIVE both
+halves; Approach A (`M_WAVE`) remains the shipped default.** 2a sized the offload as a GO on paper (wide / 27–38%
+dedup / 62–73% sorted locality), but 2b's cheap de-risk killed it: **slot-order (the sorted wave) = +94% nodes at
+n=16** (move ordering is worth ~2× node reduction — no throughput gain survives it; the SPSC pipeline depended on
+sorted consumer access ⇒ dead), and the order-independent **L0 probe-cache dedup = +6% cyc/node / +5% total cyc**
+(the TT already serves repeats warm ⇒ the tax-free dedup prize is ~0%, the 27% needs the +94%-tax sort). The +94%
+finding **also closes grouped-frontier DDD** (any frontier reorder forfeits move ordering). The giant-root tail's
+WORK is not cuttable by frontier-reorder/dedup; surviving levers preserve move order (getK/W_K, decomposition,
+per-node frontend micro-opts). Phases 0/1/2a retain value (the M_WAVE default, the gated `QUEENS_SIZE`/`WAVE_B`/
+`L0` measurement substrate, the banked negatives). Historical GO scoping kept below for the record.
+
+**Phase 0, Phase 1 (Approach A), and Phase 2a (offload sizing) are DONE; 2a was GO-on-paper but 2b measured B closed (2026-06-20--12).**
 - **Phase 2a (offload sizing, `QUEENS_SIZE`/`M_SIZE`) — DONE, verdict GO.** A gated cold tap of the
   recurse-arm probe stream (per-pc width + HLL global-distinct + slot-sorted-locality sample; production
   byte-identical, control DCEs the tap). **n=16, 12 GB TT @ 70.9% load (WAVE-off stream, the upper bound on
@@ -216,22 +227,29 @@ with strictly complementary work — the structural property the work-stealing n
   sorts to row-buffer locality. (Clean wave effect = the n=14 same-TT pair, dedup 31.7%→23.2%; the n=16 raw
   deltas are load-confounded, 12 GB vs 17 GB.)
 - **2b-0 — slot-order descent (gated `M_WAVE_B`/`QUEENS_WAVE_B`) — ✅ DONE (2026-06-20--12): the move-ordering
-  tax is +13.3%.** Reorder each node's children into TT-slot order before the standard descent (the cheapest
-  in-solver isolation of the move-ordering tax; the benefit half — 62% row-hits / mlp_bench 5.7× — is already
-  measured and a DFS-reorder doesn't realize it). n=14 deterministic: **14,612,123 nodes vs 12,896,443
-  move-order = +13.3%**, verdict SECOND, production byte-identical. **Napkin: the +13.3% tax × faster-warm
-  probes ≈ −6% cyc — i.e. the sorted-LOCALITY half barely beats its own tax; the order-independent DEDUP half
-  ≈ −8% cyc with no tax.** ⇒ the clean prize is **dedup, not the wave**. Decision point for the user (recorded
-  in the handoff 2b-0 note): (a) dedup-first [recommended], (b) build the SPSC anyway, (c) bank sorted-locality
-  as marginal + keep M_WAVE. `M_WAVE_B` stays gated-off (substrate + the measured tax).
-- **2b-1 — producer/consumer split (gated, after 2b-0 is net-positive).** Move the gather/sort/dedup/pack to
-  idle-core producers + a bounded SPSC ring; the hot consumer streams chunks. Reuse the M_WAVE gather + the
-  `mlp_bench` sorted-stream loop. Start ONE producer + ONE consumer, then scale (Phase-0a: ~4 consumers
-  saturate; producers fill the rest).
-- **2c — A/B + scale.** Interleaved n=16 A/B: `QUEENS_WAVE_B` vs the M_WAVE default vs WAVE-off baseline;
-  metric **cyc/node + wall + node count** (the dedup shifts nodes). **Gate:** `solver_lineage_agrees` (n≤9) +
-  n=16 **SECOND** + race-free boundary publication; pull-its-weight (beat the M_WAVE default) or revert +
-  record-negative.
+  tax is +94% at n=16 ⇒ the sorted wave is CLOSED.** Reorder each node's children into TT-slot order before the
+  standard descent (the cheapest in-solver isolation of the move-ordering tax). n=14 deterministic was a
+  survivable-looking +13.3%, but the **trustworthy n=16 interleaved A/B (3-round) = 4.069 B vs 2.097 B nodes =
+  +94%** (the n=14 proxy lied 7×). Move ordering is worth ~2× node reduction at scale; **no sorted-stream
+  throughput gain survives +94% nodes ⇒ the in-DFS sorted wave AND the producer/consumer SPSC pipeline (which
+  needs sorted *consumer* access) are dead.** Verdict SECOND, production byte-identical. `M_WAVE_B` gated-off.
+  **Only the order-independent DEDUP half survives** → the L0 probe cache (2b-dedup below).
+- **2b-dedup — L0 probe cache (gated `M_L0`/`QUEENS_L0`) — BUILT, measuring (2026-06-20--12).** The
+  order-independent dedup that needs no reordering (no slot-order tax): a per-worker direct-mapped cache of
+  solved `(route,fp)→val` in front of the flat TT (layered into `mtt_get`/`mtt_put` ⇒ identity for M_WAVE,
+  production byte-identical). Serves recurring keys (transpositions + the M_WAVE ETC-then-descent re-probe)
+  from L2/L3 AND survives TT eviction (L0 ⊆ TT). **n=16 A/B (`QUEENS_L0` toggle) — MEASURED-NEGATIVE: +6.0%
+  cyc/node, −0.7% nodes (noise), +5.2% total cyc.** The TT already serves recent repeats warm from CPU cache,
+  so the per-probe L0 access is pure overhead (warm-hit ~0); the eviction node-cut is ~0.7% (the only tax-free
+  prize). **⇒ the tax-free dedup prize is ~0%; the 27% only materializes inside a sorted/batched frontier =
+  the +94% tax. Both halves of Approach B are negative ⇒ Approach B is CLOSED** (the lever moves off the
+  giant-root probe stream). `M_L0` gated-off (instructive negative).
+- **2b-1 — producer/consumer SPSC split — ✗ CLOSED (not built).** It depends on sorted *consumer* access, which
+  2b-0 measured at **+94% nodes** at n=16. Dead; not worth the SPSC build. (Kept here as the documented reason
+  the heavy pipeline was never sunk — the de-risk did its job.)
+- **2c — A/B + scale** — moot for the sorted wave (closed at 2b-0). The remaining A/B is the **L0 dedup**
+  (2b-dedup): `QUEENS_L0` toggle, metric cyc/node + nodes; gate `solver_lineage_agrees` (n≤9) + n=16 SECOND;
+  pull-its-weight (beat the M_WAVE default) or revert + record-negative.
 
 ### Phase 2b — the order-vs-cutoff tension (the load-bearing design point, resolved 2026-06-20--12)
 

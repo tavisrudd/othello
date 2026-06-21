@@ -11,14 +11,21 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
-**LATEST (--12): Approach B Phase 2a (offload sizing) BUILT + measured GO** — the gated cold `M_SIZE`/
-`QUEENS_SIZE` probe-stream tap (production byte-identical; per-pc width + HLL dedup ceiling + slot-sorted
-locality). n=16 WAVE-off stream: **3.0 B recurse-arm probes · pc 13–21 = 88% · dedup ceiling 38.1% · 73%
-same-DRAM-row after a slot-sort** (vs ~0% random) — all three gate conditions pass ⇒ **NEXT = Phase 2b**
-(build the gated `QUEENS_WAVE_B` SPSC producer/consumer pipeline; first sub-step = re-run `QUEENS_SIZE` with
-WAVE *on* to size the post-cut residual stream B actually offloads). Approach B = the idle-core sorted-frontier
-pipeline that closes M_WAVE's −4%→−16% wall gap ([proposal](notes/proposal-2026-06-20-sorted-frontier-wave.md)
-"Approach B — DETAILED SCOPE" + Phase 2). **--11: `M_WAVE`** (fused ETC + batch-probe cutoff) is the iso-dense
+**LATEST (--12): Approach B (sorted-frontier wave + dedup) is CLOSED with evidence — both halves measured
+NEGATIVE; `M_WAVE` stays the default.** 2a sized the offload GO-on-paper (gated cold `M_SIZE`/`QUEENS_SIZE` probe
+tap, production byte-identical: n=16 3.0 B probes · pc 13–21 = 88% · dedup ceiling 38.1% pre-cut / 27.1%
+post-cut · 62–73% same-DRAM-row after sort). **But the cheap 2b de-risk killed it:** the sorted wave needs
+**slot-order consumer access = +94% nodes at n=16** (`M_WAVE_B`/`QUEENS_WAVE_B`; the n=14 proxy lied at +13.3% —
+move ordering is worth ~2× node reduction, no throughput gain survives it ⇒ the SPSC pipeline is dead), and the
+order-independent **L0 probe-cache dedup = +6% cyc/node / +5% total cyc** (`M_L0`/`QUEENS_L0`; the TT already
+serves repeats warm ⇒ tax-free dedup prize ~0%, the 27% needs the +94%-tax sort). **Banked: the +94% finding also
+closes grouped-frontier DDD** (any frontier reorder/dedup forfeits move ordering). The giant-root tail's WORK is
+**not cuttable by frontier-reorder/dedup**; surviving levers **preserve move order** — getK/W_K node-count,
+decomposition that keeps α-β, or per-node frontend micro-opts (e.g. the **cascade-reorder**: hoist the recurse arm
+to the front of the pc-cascade, byte-identical node count, ~8→1 branches on the 88%-majority deep-tail child).
+All gated off (`M_SIZE`/`M_SIZE_WAVE`/`M_WAVE_B`/`M_L0` = substrate + instructive negatives). Method re-vindicated:
+**n=14/single runs lie — only the interleaved n=16 A/B is trustworthy** (it flipped 2b-0 from "−6% marginal" to a
++94% kill). [proposal](notes/proposal-2026-06-20-sorted-frontier-wave.md) Status = CLOSED. **--11: `M_WAVE`** (fused ETC + batch-probe cutoff) is the iso-dense
 DEFAULT (`QUEENS_WAVE=0` disables) = the **1m32s / 1.70 B record**; it captured only −4% of its −16% node cut
 (gather/probe prep on the critical path = +22% cyc/node) — that gap is Approach B's prize. Also --11: **probe #1
 killed item A** (modular reduction — tail too sparse for size-≥3 modules;
@@ -83,7 +90,7 @@ at pc 13–21. Only **ABDADA in-flight markers** or **grouped-frontier DDD** (bo
 **warm-restart + M_WAVE are now the iso-dense defaults** (`QUEENS_WARM_RESTART` 2s warm + staggered restart, ~2%
 node trim; `QUEENS_WAVE` fused ETC, −16% nodes / the 1m32s record; both `=0`-disable, iso-flat/iso-window
 unaffected). **Next throughput lead = Approach B** (idle-core sorted-frontier pipeline, [scoped](notes/proposal-2026-06-20-sorted-frontier-wave.md);
-Phase 2a sizing **measured GO** --12 — 38.1% dedup ceiling / 73% same-row after sort; **NEXT = Phase 2b** build). **getK code-build vectorization = measured-DEAD** (--11: uniform-gather reshape
+Phase 2a sizing GO-on-paper but **2b de-risk CLOSED Approach B** --12 — sorted-wave +94% nodes / L0 dedup +6% cyc/node, both negative; lever moves off the giant-root probe stream). **getK code-build vectorization = measured-DEAD** (--11: uniform-gather reshape
 +0.53% instr, reverted; the compiler won't gather 10/11 lanes and a uniform rewrite doesn't fix it).
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
