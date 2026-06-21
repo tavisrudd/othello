@@ -1976,6 +1976,11 @@ impl IsoFlat {
             let mut wk = [Bits::ZERO; WAVE_CAP];
             let mut wr = [0u64; WAVE_CAP];
             let mut wf = [0u64; WAVE_CAP];
+            // ETC probe result per recurse child (QUEENS_ETC_REUSE): 1 = the ETC proved this child a
+            // win (⇒ the move fails; the descent skips recursing + re-probing it), 2 = miss/unknown
+            // (must recurse — a sibling may have solved it since). 0 (loss) cuts in the ETC loop, so
+            // it never reaches the descent. Stays 2 when the ETC didn't run (nw<2) ⇒ recurse, no opt.
+            let mut wv = [2u8; WAVE_CAP];
             let mut nw = 0usize;
             for (i, &sq) in moves.iter().enumerate() {
                 let a = att_for8(att, sq);
@@ -2024,9 +2029,14 @@ impl IsoFlat {
                     self.tt.prefetch_h(r); // every prefetch in flight before any get
                 }
                 for j in 0..nw {
-                    if self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0) == Some(0) {
+                    let v = self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0);
+                    if v == Some(0) {
                         self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // a losing child ⇒ node wins
                         return true;
+                    }
+                    // Remember a proven-win child so the descent can skip recursing + re-probing it.
+                    if v == Some(1) {
+                        wv[j] = 1;
                     }
                 }
             }
@@ -2101,6 +2111,15 @@ impl IsoFlat {
                     !self.wins_tiny::<ORACLE, COUNT, true>(
                         q, att, child0, ckey, cr, cf, moves, nodes,
                     )
+                } else if wi < nw && wv[wi] == 1 {
+                    // The ETC pre-pass already proved this recurse child a WIN (`Some(1)` ⇒ opponent
+                    // wins ⇒ this move fails ⇒ `lost = false`). Skip the recurse + entry re-probe
+                    // entirely — it would re-read the same fixed value (or, if the slot was evicted
+                    // since the ETC, re-EXPAND the child). Node-count ≤ baseline (never expands a child
+                    // the baseline wouldn't) and correct (a position's win/loss is fixed). The cut grows
+                    // with eviction pressure (smaller TT / n=18), so it is always-on. Advance `wi`.
+                    wi += 1;
+                    false
                 } else {
                     // Recurse child: reuse the descriptor built in the gather (no `lex_min8`/
                     // `d4_bits`/`hash128` rebuild). `child_orient` is cheap (7 `and_not`) and the
