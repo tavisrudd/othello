@@ -236,10 +236,19 @@ The ETC cut shrinks the offloadable stream **−22%** and trims the dedup ceilin
 wave effect is the n=14 same-TT pair: dedup **31.7%→23.2% (−8.5 pts)**, locality ≈ unchanged. (To load-match at
 n=16, re-run WAVE-off at 17 GB — deferred; the GO is clear from the residual magnitude.)
 
-**NEXT = Phase 2b** (the gated `QUEENS_WAVE_B` SPSC producer/consumer pipeline on `wins_inc_iter`; start ONE
-producer + ONE consumer; reuse the M_WAVE gather + `mlp_bench` sorted-stream loop). Multi-session architectural
-build — decide scope with the user. Full 2b/2c plan + kill criteria in the proposal's "Approach B — DETAILED
-SCOPE". Tooling banked: `QUEENS_SIZE=1` (pre-cut) / `QUEENS_SIZE=2` (post-cut residual), both gated/off in prod.
+**NEXT = Phase 2b** — but the Fermi on the mechanic surfaced the **load-bearing design point** (now resolved +
+documented in the [proposal](../proposal-2026-06-20-sorted-frontier-wave.md) "Phase 2b — the order-vs-cutoff
+tension"): the sorted-stream 5.7× **requires the consumer to access probes in slot order**, which conflicts with
+α-β's DFS move-order. The two 2a sub-prizes split along this axis — **dedup (27%) is order-independent** (safe,
+realizable in any order) but **sorted-locality (62%) entangles with cutoffs**: slot-order at an OR node loses
+**move ordering** (not cutoffs — it still cuts on the first found loss ⇒ *bounded* re-expansion, NOT the
+cutoff-free 6.6× wall the parked component-nimber DDD hit). **⇒ de-risk-first build order: 2b-0 = a
+single-thread sorted-frontier wave that measures the move-ordering node-count cost** (the benefit half — 62%
+locality / mlp_bench 5.7× — is already measured) **BEFORE any SPSC threading.** Kill 2b-0 if move-ordering
+re-expansion > locality+dedup gain (retreat to a dedup-only variant); if net-positive, 2b-1's producer/consumer
+SPSC is mechanical. This is the "characterize before you build the scheduler" lesson applied up front — do NOT
+sink the pipeline before 2b-0. Multi-session; **decide with the user** (the architecture locks in future work).
+Tooling banked: `QUEENS_SIZE=1` (pre-cut) / `QUEENS_SIZE=2` (post-cut residual), both gated/off in prod.
 
 **Method note:** the global-tap reframe is the "fail-cheap" move — it answered the gate at low build cost / zero
 solver risk (like probe #1), without the heavier per-subtree-HLL instrumentation. If 2a had failed (narrow /

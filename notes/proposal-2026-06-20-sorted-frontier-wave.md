@@ -215,18 +215,46 @@ with strictly complementary work — the structural property the work-stealing n
   dedup 27.1% · 62% same-row.** Gate **PASS** — even after the ETC cut the residual is wide + 27%-dedup-able +
   sorts to row-buffer locality. (Clean wave effect = the n=14 same-TT pair, dedup 31.7%→23.2%; the n=16 raw
   deltas are load-confounded, 12 GB vs 17 GB.)
-- **2b — build the pipeline (gated `QUEENS_WAVE_B`, byte-identical off).** Producer (gather/radix-sort/dedup/
-  pack) + bounded SPSC + streaming consumer (prefetch-ahead/probe/cut/expand) on `wins_inc_iter`. Reuse the
-  M_WAVE gather + the `mlp_bench` sorted-stream loop. Start with ONE producer + ONE consumer (prove the SPSC
-  + sorted-stream realizes in-solver), then scale producers.
+- **2b-0 — single-thread sorted-frontier wave (gated `QUEENS_WAVE_B`, byte-identical off) — THE DE-RISK GATE,
+  build FIRST.** Before any threading, prove the *mechanic* in one thread: in an offloaded prove-loss subtree,
+  materialize a pc-band frontier slice (via `wins_inc_iter`'s explicit stack), **sort by slot**, **dedup
+  adjacent**, then resolve the wave (probe sorted → hits resolve, misses expand → next band). This isolates
+  the **order-vs-cutoff tension** (below): measure node-count Δ vs DFS (the move-ordering loss), realized
+  locality (reuse the 2a slot-sort metric), and net cyc/node. **Kill if the move-ordering re-expansion >
+  the locality+dedup gain** (toward the parked-DDD wall) — fail cheap, no SPSC sunk. This is the riskiest
+  assumption; everything else (SPSC, idle producers) is mechanical once it's net-positive.
+- **2b-1 — producer/consumer split (gated, after 2b-0 is net-positive).** Move the gather/sort/dedup/pack to
+  idle-core producers + a bounded SPSC ring; the hot consumer streams chunks. Reuse the M_WAVE gather + the
+  `mlp_bench` sorted-stream loop. Start ONE producer + ONE consumer, then scale (Phase-0a: ~4 consumers
+  saturate; producers fill the rest).
 - **2c — A/B + scale.** Interleaved n=16 A/B: `QUEENS_WAVE_B` vs the M_WAVE default vs WAVE-off baseline;
-  metric **cyc/node + wall + node count** (the dedup shifts nodes). Sweep producer count (Phase-0a says ~4
-  consumers saturate; producers fill the rest). **Gate:** `solver_lineage_agrees` (n≤9) + n=16 **SECOND** +
-  race-free boundary publication; pull-its-weight (beat the M_WAVE −4%) or revert + record-negative.
+  metric **cyc/node + wall + node count** (the dedup shifts nodes). **Gate:** `solver_lineage_agrees` (n≤9) +
+  n=16 **SECOND** + race-free boundary publication; pull-its-weight (beat the M_WAVE default) or revert +
+  record-negative.
 
-**Kill criteria (fail fast):** 2a shows no amortizing θ (frontiers too narrow / dedup fraction too low); OR
-2b's single-producer pipeline doesn't beat M_WAVE in-solver (SPSC + freshness re-expansion > the off-load
-gain). Either ⇒ bank as a negative and the giant-root WORK lever is closed for the sorted-stream family.
+### Phase 2b — the order-vs-cutoff tension (the load-bearing design point, resolved 2026-06-20--12)
+
+The sorted-stream 5.7× **requires the consumer to access probes in slot order** (the wave); α-β wants **DFS
+move-order**. They conflict. The two sub-prizes 2a measured separate cleanly along this axis:
+- **Dedup (27% residual) is order-INDEPENDENT** — collapsing duplicate probes helps in any order. Cleanly
+  realizable; the safe half of the prize.
+- **Sorted-locality (62% row-hits) entangles with cutoffs.** At a prove-loss (AND) node every child is
+  searched — **no cutoff to lose**, so the AND-ply children sort for free. At its prove-win (OR) descendants,
+  taking children in **slot order instead of move order loses *move ordering*** (the node still returns the
+  same verdict and still **cuts on the first found loss** — it is *not* cutoff-free) ⇒ the cost is **bounded
+  extra expansion** (the move-ordering value), **NOT** the cutoff-free nimber recursion that 6.6×'d the parked
+  [component-nimber DDD](proposal-2026-06-18-grouped-frontier-ddd.md). Whether the locality+dedup gain beats
+  that move-ordering loss is the **empirical** question 2b-0 answers in one thread before any pipeline.
+
+Design implication: **batch the wave at the prove-loss (AND) plies** (free to sort) and keep OR-descendant
+expansion under the consumer's normal cutoff; the more the wave leans on AND-ply width, the smaller the
+move-ordering tax. (This is also why B ≠ the parked DDD: DDD went cutoff-free globally; B keeps the boolean
+cutoff and only reorders within it.)
+
+**Kill criteria (fail fast):** 2a showed an amortizing θ (PASS). **2b-0** is the next gate — if a single-thread
+sorted-frontier wave's move-ordering re-expansion exceeds its locality+dedup gain, the sorted-**locality** half
+is closed and B retreats to a **dedup-only** variant (order-independent, no wave) — or the whole sorted-stream
+family is banked negative. If 2b-0 is net-positive, 2b-1's SPSC is mechanical; its own gate is beat-the-default.
 
 ## Approach C — full ply-windowed retrograde DDD (break DFS, n=18 endgame)
 
