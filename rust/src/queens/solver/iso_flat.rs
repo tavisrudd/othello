@@ -753,12 +753,13 @@ impl IsoFlat {
         // wall drops monotonically K=12→16 (16 GB single-run: 49.5s→34.4s = −30.6%). `QUEENS_DENSE_K`
         // (9..=16) overrides — lower it to trade per-node getK cost back for more recurse expansion.
         s.dense_k = env_u32("QUEENS_DENSE_K", 16).clamp(9, 16);
-        // Warm-restart on by default for iso-dense: a `warm_secs`(=2) parallel warm pass then a
-        // restart over the warm TT (slow roots staggered). Wall-neutral but trims the node count a
-        // touch by pre-resolving shared pc≥13 entries before the low-util tail. `QUEENS_WARM_RESTART=0`
-        // disables, `=1` forces; it self-gates to n≥15 in `first_player_wins` (a no-op below, where the
-        // whole solve finishes inside the warm window). iso-flat/iso-window keep it off (control intact).
-        s.warm_restart = !matches!(std::env::var("QUEENS_WARM_RESTART").as_deref(), Ok("0"));
+        // Warm-restart OFF by default for iso-dense (--15): the warm_secs(=2) parallel warm pass +
+        // staggered restart trims the node count a touch but its ramp costs more wall than it saves
+        // now that the counting sort sped the kernel — a 4-round n=16 A/B (12 GB) measured restart-ON
+        // at +3.2% wall / −1.5% nodes vs OFF (roots hitting all cores immediately wins). The balance
+        // flipped vs the M_WAVE era where it was wall-neutral ("levers compound"). `QUEENS_WARM_RESTART=1`
+        // re-enables. iso-flat/iso-window keep it off (control intact).
+        s.warm_restart = matches!(std::env::var("QUEENS_WARM_RESTART").as_deref(), Ok("1"));
         // M_WAVE (fused ETC + sorted-batch recurse-child cutoff, Phase-1b) on by default for iso-dense:
         // a measured net win at n=16 (−16% nodes / −4% total cycles / −2.7% wall, 6-round interleaved A/B;
         // gates green, TT-sweep graceful to a 2 GB TT, verdict SECOND). It changes the node count *by
