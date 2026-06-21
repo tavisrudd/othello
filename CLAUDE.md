@@ -114,13 +114,16 @@ once the **pext-per-row code-build** made the deep getK builders cheap. Raising 
 (n=14 det node cut K=12 7.9M → K=16 4.0M = −50%, barely diminishing — K=15→16 was −22%); **K=16 is the new
 default**, clean 17 GB **33.9s / −35% vs K=12**. The old "K=13 net-negative / compiler-vectorize-K≤9 / hand-SIMD-
 is-the-−19%-negative" framing is **obsolete** — pext *is* the win the proposal said it couldn't find (it had
-only measured a scalar reshape, never pext at K=12+ scale). **NEXT lever for 30s = extend W_K past K=16** to
-256-bit (4×u64) labelled codes (K(K-1)/2 ≤ 256 ⇒ K≤23; the deep tail is pc 13–21, so K≈18–20 ≈ resolves it
-whole, and the node cut hasn't diminished). Blocker: the `2^K` induced-mask table needs **runtime init** past
-K=16 (K=18 = 8 MB, K=20 = 32 MB) — const-eval + binary-size cap it at 16. Then the **getK evaluator** (now ~35%
-of cycles, the get9/get10 leaves of the nested sweep) and the **memory stall / MLP**. Degree-sort restructure =
-WASH (reverted). See [getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md) (its §4/§5 negative
-is now obsolete — pext flipped it).
+only measured a scalar reshape, never pext at K=12+ scale). **The W_K node-cut lever is now EXHAUSTED at K=16**:
+**K=17 (a clean table-free adj-based `get17`, built+tested+reverted this session) is MEASURED-NEGATIVE** — n=16
+−19.4% nodes but +30.7% cyc/node / +5.7% wall. pc==17's subtree is *shallow* (one ply to the getK leaves) and
+the tail is transposition-saturated, so a TT-**memoized** recurse node beats `get17`'s memo-less recompute (the
+opposite of pc≤16, where getK saves a deep subtree). **NEXT for 30s:** (1) a **memoized get17** (probe → on miss
+get17 + put, skipping the ~21% degree-sort the recurse node pays) — uncertain, the untried angle; (2) the **getK
+evaluator** (~35% of cycles, the get9/get10 leaves of the nested sweep); (3) the **memory stall / MLP**. Smaller
+TT = +9.5% wall (eviction > TLB win); degree-sort restructure = WASH; both reverted. See the handoff
+"⇒ NEXT SESSION (--14)" block + the [getK-throughput proposal](notes/proposal-2026-06-19-getk-throughput.md)
+(its §4/§5 pext negative is obsolete — pext flipped it).
 Lower-priority: the **memory levers** (MLP gets, BuRR, 1 GB hugepages) — W12 erased the pc 9–12 probes (~the
 profiler's whole probe cost); remaining cost is pc≥13. **Parallelism deficit — measured-CLOSED for DFS-local
 approaches** (2026-06-19--5): the giant-root tail (51% core util, ~96% of wall) is **transposition-bound + OR-spine

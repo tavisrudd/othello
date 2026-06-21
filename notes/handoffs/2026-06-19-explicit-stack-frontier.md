@@ -32,15 +32,25 @@ gate-green:
   single-run 49.5→34.4s; clean 17 GB 33.9s. cyc/node +66% at K=16 (the getK evaluator sweep) but −57% nodes wins.
   `wk_masks128` rebuilt incremental (O(2^k·popcount)) to keep const-eval under the deny-limit at k=16.
 
-**⇒ NEXT LEVERS for 30s (priority order; the K-extension is the big one):**
-1. **★ EXTEND W_K PAST K=16 — the 30s bet.** Go to 256-bit (4×u64) labelled codes: K(K-1)/2 ≤ 256 ⇒ **K≤23**.
-   The deep tail is **pc 13–21**, so K≈18–20 resolves nearly the *whole* tail directly (no probe, no expansion),
-   and the node cut has NOT diminished through 16. Mechanics: extend `adj_row_pext` packing + the getK evaluator
-   (`extract_adj`, child projection) from two `u64` words to four. **Blocker:** the `2^K` induced-mask table —
-   K=17 = 4 MB, K=18 = 8 MB, K=20 = 32 MB (× the 256-bit/u128 stride). Past K=16 it can't be `const`
-   (const-eval time + binary size); **compute it at runtime in a `OnceLock`** (cheap: incremental, ~ms), or drop
-   the table and project each child code from `adj` directly (O(cpc²) scalar). Cap K where the getK evaluator
-   sweep cost (grows ~O(K) + nested) stops beating the saved probes — measure the n=16 wall sweep K=16..20.
+**⇒ NEXT LEVERS for 30s (priority order):**
+1. **W_K crossover ENDS at K=16 — K=17-as-built is MEASURED-NEGATIVE (the W_K node-cut lever is exhausted).**
+   Built+tested+reverted this session: a **table-free, adj-based `get17`** (the 136-bit K=17 code exceeds `u128`,
+   so it works from `adj[17]` directly — `adj_row_pext` builds the 17-bit rows, children are all ≤16 verts ⇒
+   existing `u128` getK, child code repacked from `adj` via `pack_from_adj17`; no 256-bit code, no `2^17` induced
+   table needed — much simpler than the "256-bit codes" plan I'd first sketched). Validated (lineage n≤9 vs naive
+   under `QUEENS_DENSE_K=17`; n=12/14 SECOND; n=14 nodes 3.955M→**2.714M = −31.4%**). **But n=16 4-round A/B
+   (12 GB): nodes −19.4%, cyc/node +30.7%, WALL +5.7% — a LOSS.** Why: pc==17's subtree is *shallow* (one ply to
+   the getK leaves), and the pc 17+ tail is transposition-saturated, so a flat-TT-**memoized** recurse node (probe
+   → hit on the many transpositions) beats `get17`'s **memo-less** full recompute of every pc==17 occurrence. This
+   is the OPPOSITE of pc≤16 (where getK saves a deep *subtree*, worth more than the probe). The lever is exhausted
+   for the memo-less getK. **Reverted** (main carries only winning layers); the adj-based design is recorded here.
+   - **Untried angle (could flip it, the real 30s bet):** a **MEMOIZED get17** — keep the pc==17 entry TT probe
+     (transpositions hit cheaply) but on a miss resolve via `get17_from_adj` + put, **skipping the degree-sort**
+     the K=16 recurse node pays (the sort is ~21% of cycles; for pc==17 it only orders 17 getK children for an
+     earlier cutoff). I.e. a cheaper *expand* for the layer just above the ceiling, not a probe-free getK. Net is
+     uncertain (the sort also earns cutoffs); build `get17_from_adj` again (it's ~40 lines, fully specified above)
+     + a pc==17 arm that probes-then-get17-on-miss, and A/B vs K=16. K=18+ generalizes (project each child's adj
+     via `pext`, recurse to `getK-1_from_adj` for the cpc==K-1 isolated child) but inherits the same memo problem.
 2. **getK evaluator cost (~35% of cycles now; the get9/get10 *leaves* of the nested sweep dominate, NOT the high
    layers).** The nested recursion peels isolated vertices one ply at a time (the sparse pc 14–16 tail is full of
    them). Hard (a win/loss table can't decompose isolated verts — that needs nimbers, the parked 6.6× branch).
@@ -273,8 +283,11 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
 - [x] **--14: ★★ pext getK code-build + W_K K=12→16 default = −35% wall (52→33.9s clean).** See the top "⇒ NEXT
       SESSION (--14)" block. Commits: `adbfb10` (pext w10-13, −3.8% cyc/node), `41dcf70` (W14 opt-in), `2dd5ef2`
       (W15/W16 + incremental `wk_masks128`), `16d8842` (default K=16). Gate-green throughout (byte-identical K=12,
-      direct_w9..16, lineage, iso-flat distinct). Degree-sort restructure = WASH, reverted. NEXT = extend W_K to
-      256-bit codes (K≤23, ≈resolves the pc13-21 tail), getK-evaluator cost, smaller TT.
+      direct_w9..16, lineage, iso-flat distinct). Degree-sort restructure = WASH, reverted. **K=17 (adj-based,
+      table-free `get17`) BUILT+TESTED+REVERTED = MEASURED-NEGATIVE** (n=16 −19.4% nodes but +30.7% cyc/node /
+      +5.7% wall — the W_K crossover ENDS at K=16; pc==17's shallow subtree ⇒ TT-memoized recurse beats memo-less
+      getK recompute; untried = a *memoized* get17 that skips the degree-sort). Smaller TT (4 GB) = +9.5% wall
+      (eviction outweighs the −2.5% TLB win); 17 GB stays. NEXT = memoized-get17, getK-evaluator cost, memory/MLP.
 - [x] `solve_local_iter` (`QUEENS_UNROLL`) — wash at n=16, gated, committed (`3f10919`)
 - [x] `wins_inc` peel-the-get (`QUEENS_PEEL`) — wash, then superseded/removed in favour of the full stack
 - [x] `wins_inc_iter` full explicit stack (`QUEENS_ITER`) — +4.3% raw, gated off, committed (`3f10919`)
