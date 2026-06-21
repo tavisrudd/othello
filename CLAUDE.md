@@ -11,7 +11,22 @@ n=16 roadmap in `notes/handoffs/`.
 n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
-**LATEST (--14): ★★ pext getK code-build + W_K ceiling K=12→16 = −35% wall (52→33.9s clean, knocking on 30s).**
+**LATEST (--15): goal → 30s END-TO-END (incl prep). Search −16% + prep −2s; best clean round ~33s, A/B good
+rounds ~30.4s.** Landed on main: **(1) pext k=8 dense-table build** — prep was the k=8 table build (2^28 scalar
+codes), NOT the TT alloc (~0.2s); `graph_wins8` uses the runtime `get9..` pext machinery ⇒ **prep 3.3→1.3s**.
+**(2) ★ branchless counting sort** for dynamic move ordering — `sort_moves_by_degree` was the #1 branch-mispredict
+site (27.9% of misses; search is frontend-bound 30% / IPC 1.23); count/prefix/stable-scatter (no comparison
+branch) = **−9.9% cyc/node / −12.5% wall** (byte-identical node set). **(3) warm-restart OFF default** = −3.2%
+wall (the counting sort sped the kernel ⇒ the warm-phase ramp stopped paying — re-test gated levers after each
+win). Re-sweeps confirm **K=16 and ETC still optimal** (only warm-restart flipped). **Measured-NEGATIVE:**
+isolated-vertex pair-strip (the "two-for-one" — `const ISO_STRIP=false` substrate; getK peels isolated verts
+one ply at a time so ≥2 rarely coexist; the 1-isolated case needs nimbers), verts_of (wash), PGO (+2.6% now —
+counting-sort layout broke it). **The wall:** entry-probe DRAM (MLP-capped by move ordering) + getK 35%
+(boolean-decomposition-capped — the pair-strip proved it). RSS measurement: the TT touches its full ~8 GB in ~6s
+(random page-spread), so the small *data* (393M keys ≈ 3 GB) doesn't shrink the footprint. **NEXT SESSION (user-
+chosen): 4-byte-slot SET-ASSOCIATIVE TT** (the parked `queens-tt-assoc-buckets` direction + a shared-fp compact
+slot — the one repr that cuts per-probe DRAM; fp-correctness floor ~46 bits is the design constraint). Then the
+parked nimber-decomposition node-count lever. **--14 (historical): ★★ pext getK code-build + W_K ceiling K=12→16 = −35% wall (52→33.9s clean, knocking on 30s).**
 The user's 30s grind paid off big. Two stacked levers: (1) **pext-per-row getK code-build** (`adj_row_pext`,
 replace the scalar K(K-1)/2 `Bits::get` bit-tests with one 4-word BMI2 `pext` per vertex — −3.8% cyc/node;
 the §5 reshape negative only measured a *scalar* rebuild, never pext at K=12 scale where the Fermi flips); (2)
@@ -99,7 +114,8 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense (W16) + M_ORD_W** | **~34s** clean (33.9s) | 0.40 B | **★ #1 DEFAULT (--14)**: pext-per-row getK code-build + W_K ceiling raised K=12→**16** (the u128 code limit) = **−35% vs the K=12 M_ORD_W default**; node cut is inherent/TT-independent, TT only 16.5% full; `QUEENS_DENSE_K` 9..=16 |
+| **iso-dense (W16) M_ORD_W + counting-sort + warm-off** | **~30s** search (A/B good rounds; ~33s e2e incl prep) | 0.39 B | **★ #1 DEFAULT (--15)**: on top of W16/M_ORD_W, a **branchless counting sort** for dynamic ordering (−9.9% cyc/node, kills the #1 branch-mispredict site) + **warm-restart off** (−3.2%) + **pext k=8 build** (prep 3.3→1.3s). Goal is now **30s END-TO-END** (prep+search). |
+| iso-dense (W16) + M_ORD_W (--14) | **~34s** clean (33.9s) | 0.40 B | pext-per-row getK code-build + W_K ceiling raised K=12→**16** (the u128 code limit) = **−35% vs the K=12 M_ORD_W default**; node cut is inherent/TT-independent, TT only 16.5% full; `QUEENS_DENSE_K` 9..=16 |
 | iso-dense (W12) + M_ORD_W | ~52s / ~49s best | 0.94 B | the prior default (`QUEENS_DENSE_K=12`): dynamic ordering + ETC + (--13) inlined insertion sort / sort-fuse / inline-each / prefetch-reorder; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
 | iso-dense + M_ORD   | 1m02s      | 1.14 B  | dynamic move ordering alone (`QUEENS_ORD=1`) — −33% vs M_WAVE; no ETC |
 | iso-dense (W12) M_WAVE | 1m32s   | 1.70 B  | the prior default (now `QUEENS_ORD=0`): W12 + fused M_WAVE ETC cutoff  |
