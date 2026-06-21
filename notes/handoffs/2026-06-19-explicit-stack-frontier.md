@@ -76,6 +76,36 @@
 >
 > **Branch state:** keepers (Opt1 + ETC-reuse) are on **main**; branch `queens-compact-assoc-tt` carries them too + the
 > dead assoc-TT/sidecar experiments (gated off) + the leaderboard/handoff doc updates. New work can fork fresh off main.
+>
+> **★ MEMORY-SIDE REFRAMED BY QUEUING THEORY ([queuing-theory proposal](../proposal-2026-06-21-queuing-theory.md)) —
+> the contention "killer" is DEFUSED.** Pivotal number: the **solo tail runs the memory controller at ρ ≈ 8%**
+> (λ_solo ≈ 60 M probes/s vs the measured **μ ≈ 780 M/s** ceiling) — ~12× spare capacity, an order of magnitude below the
+> knee. The tail is **latency-bound, NOT bandwidth-bound**, so the lever is never "more bandwidth" — it's "use the idle
+> server to pre-warm the tail's OWN future misses." The M/G/1 non-preemptive priority conservation law gives **B_free ≈
+> 500–650 M/s** of speculative traffic before the tail's wait degrades. **⇒ the real memory lever is PREFETCH-ONLY
+> future-key warming** (the parked "predict exact keys" lever — no recompute / no write-traffic / no eviction; strictly
+> dominates the speculative-SOLVE pre-warm, which both the pre-warm sub and queuing sub independently concluded). The box
+> is an **AMD Ryzen AI 9 HX 370** with **full RDT: cat_l3 + mba + cdp_l3 + cqm_mbm** (verified) ⇒ the speculative pool can
+> be **L3-isolated (CAT) + bandwidth-capped (MBA ~60%) via `resctrl`** (the right layer for the user's "low-niceness"
+> instinct — niceness is CPU-time, the contention is L3+MC). Other queuing results: **MLP-batched probes ceiling only
+> 1.85× vs sorted-wave 5.7× at the SAME ~2× ordering tax** ⇒ if you ever pay the tax, pay it for the sorted wave, never
+> plain MLP; **work-span: tail speedup ≤ 1.06×** ⇒ cleanly closes the 5 dead parallelization approaches (span ≈ total
+> work); **Erlang-B: assoc-TT only pays at offered-load a≳1** (small-TT/n=18). **Two unknowns gate the memory lever, one
+> cheap tap each:** (1) `M_COLD`/`QUEENS_COLD` = the solo tail's **TT cold-probe (miss) % by pc** — kill the whole memory
+> family if <~25–30% (the transposition-saturation that killed parallelization may mean the tail is already-warm); (2)
+> `ρ_solo` confirm via `perf stat -a -e amd_df/cas_count.*/` over the solo-tail window (QUEENS_ROOT_TIMING prints its
+> start). **Build `M_COLD` next** (same `M_RANK`/`M_DECPROBE` pattern); it decides pre-warm + exact-key-prefetch in one run.
+>
+> **⇒ FULL LEVER MAP (end of --17, 6 design proposals + 3 n=16 taps):**
+> | lever | verdict | gate/next |
+> |---|---|---|
+> | getK micro-opt (ALU/SIMD), batch-puts | **DEAD** (Opt1 was the win; rest OoO-hidden/load-bound; store-stall 0.08%) | — |
+> | nimber / module / component decomposition | **DEAD (n=16 evidence)** | closed |
+> | move ordering (banded-countermove) | **LIVE — building (worktree `killer-ord`, n=16 node A/B in flight)** | keep iff nodes ↓; +94% danger |
+> | exact-key prefetch (memory, prefetch-only, MBA/CAT) | **most promising memory lever** (ρ=8% gives budget) | gated by `M_COLD` cold% + lookahead-distance |
+> | speculative-SOLVE pre-warm | dominated by prefetch | same `M_COLD` gate |
+> | MLP-batched probes / sorted-wave | quantified (1.85× vs 5.7×), order-tax-bound | only if ordering tax paid anyway |
+> | assoc-TT | wash at K=16 (Erlang-B a≪1) | revive n=18/small-TT |
 
 ## ⇒ NEXT SESSION (as of --16 — 30s e2e is MET (~27–28s); sidecar is the sub-25s stretch.)
 
