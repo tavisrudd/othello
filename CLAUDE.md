@@ -273,6 +273,11 @@ held up across sessions:
   non-TTY and **suppresses the live bar** — only fall back to `tee` if you need the raw
   scrollback and don't care about the bar; never silently redirect (`> log 2>&1`), which
   hides the run entirely.
+- **Ignore the `could not find repository … panicked at … git/libgit.rs` line in the pane
+  scrollback** — that's the user's interactive shell *prompt* failing to render its git
+  segment between commands, not a build/run error. It never affects a running solve/bench (no
+  prompt renders mid-command). Don't try to "fix" it, don't treat it as a failed run, and
+  don't `C-c` the pane over it; read past it to the actual command output.
 - **Use the committed A/B harness — don't re-derive it in `/tmp` (we've done that dozens of
   times).** `rust/scripts/queens-ab.sh <n> <TOGGLE_ENV> <binary> [rounds] [tt_slots]` runs the
   canonical interleaved A/B (toggles one env flag 0/1 on a binary). Launch it **once** in the
