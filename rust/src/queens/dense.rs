@@ -59,6 +59,10 @@ const fn wk_masks(k: usize) -> ([u64; MAX_DENSE_K], [u64; MAX_INDUCED]) {
     (incident, induced)
 }
 
+// The W8 incident/induced masks let the *table build* recover adjacency + project children with
+// `pext` (the runtime `get9..` machinery), instead of the scalar `adj_from_code`/`projected_code`
+// per code — the k=8 build is 2^28 codes and dominates startup prep.
+const W8_MASKS: ([u64; MAX_DENSE_K], [u64; MAX_INDUCED]) = wk_masks(8);
 const W9_MASKS: ([u64; MAX_DENSE_K], [u64; MAX_INDUCED]) = wk_masks(9);
 const W10_MASKS: ([u64; MAX_DENSE_K], [u64; MAX_INDUCED]) = wk_masks(10);
 const W11_MASKS: ([u64; MAX_DENSE_K], [u64; MAX_INDUCED]) = wk_masks(11);
@@ -245,6 +249,31 @@ fn graph_wins(k: usize, code: usize, tables: &[Box<[u64]>]) -> bool {
     false
 }
 
+/// `pext` twin of `graph_wins` specialised to `k == 8` — the dominant build cost (2^28 codes,
+/// ~all of startup prep). Recovers adjacency via [`extract_adj`] and projects each child code with
+/// one BMI2 `pext` (the same machinery the runtime [`DenseW8::get9`] uses), replacing the scalar
+/// `adj_from_code` (28-bit decode) + `projected_code` (per-child nested scan) — ~2× the codes/s.
+/// Result is bit-identical to `graph_wins(8, code, _)` (asserted in `graph_wins8_matches_scalar`).
+#[inline]
+fn graph_wins8(code: u64, tables: &[Box<[u64]>]) -> bool {
+    use std::arch::x86_64::_pext_u64;
+    let adj = extract_adj::<8>(code, &W8_MASKS.0);
+    let full = (1u16 << 8) - 1;
+    // `i` is both the removed-vertex bit (`1 << i`) and the `adj[i]` index, so the range loop
+    // is the natural form (mirrors `get9`).
+    #[allow(clippy::needless_range_loop)]
+    for i in 0..8 {
+        let child = full & !((1u16 << i) | adj[i]);
+        // SAFETY: target-cpu=znver5 ⇒ BMI2. `induced[child]` (child < 256) selects the
+        // sub-graph's edge bits in upper-triangular order, so `pext` yields its canonical code.
+        let child_code = unsafe { _pext_u64(code, W8_MASKS.1[child as usize]) } as usize;
+        if !bit_get(&tables[child.count_ones() as usize], child_code) {
+            return true;
+        }
+    }
+    false
+}
+
 /// Recursive scalar reference for any `k` (the slow ground truth `getK` is validated
 /// against). Bottoms out in the complete `W{≤8}` tables and recurses one ply per layer
 /// above, exactly mirroring `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` — no `pext`, no mask tables.
@@ -273,7 +302,14 @@ fn build_table(k: usize, tables: &[Box<[u64]>]) -> Box<[u64]> {
             let base = word << 6;
             let limit = slots(k).saturating_sub(base).min(64);
             for b in 0..limit {
-                if graph_wins(k, base + b, tables) {
+                // `k` is loop-invariant so the branch hoists; k==8 (the 2^28-code dominant table)
+                // takes the fast `pext` path, the tiny k≤7 tables keep the scalar reference.
+                let win = if k == 8 {
+                    graph_wins8((base + b) as u64, tables)
+                } else {
+                    graph_wins(k, base + b, tables)
+                };
+                if win {
                     out |= 1u64 << b;
                 }
             }
@@ -593,6 +629,25 @@ mod tests {
         assert_eq!(tables[2].iter().map(|w| w.count_ones()).sum::<u32>(), 1);
         assert_eq!(tables[3].iter().map(|w| w.count_ones()).sum::<u32>(), 5);
         assert_eq!(tables[4].iter().map(|w| w.count_ones()).sum::<u32>(), 41);
+    }
+
+    #[test]
+    fn graph_wins8_matches_scalar() {
+        // The `pext` k=8 build path must be bit-identical to the scalar reference. Build the
+        // tiny k≤7 tables (both paths read them), then compare over a spread of 28-bit codes.
+        let mut tables: Vec<Box<[u64]>> = Vec::new();
+        tables.push(vec![0u64].into_boxed_slice());
+        for k in 1..=7 {
+            tables.push(build_table(k, &tables));
+        }
+        for x in 0..50_000u64 {
+            let code = x.wrapping_mul(0x9E37_79B9_7F4A_7C15) & ((1u64 << 28) - 1);
+            assert_eq!(
+                graph_wins8(code, &tables),
+                graph_wins(8, code as usize, &tables),
+                "graph_wins8 mismatch at code {code:#x}"
+            );
+        }
     }
 
     #[test]
