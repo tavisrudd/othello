@@ -40,14 +40,14 @@ TT, `MADV_COLLAPSE`) stays the default + A/B control, **byte-identical to before
 **n=16 leaderboard** (best clean-box wall; node count is ±18% node-noisy — for the W_K layers the
 node-count cut is the metric, deterministic at n=14, and the wall follows):
 
-| solver                   | n=16 wall  | nodes   | mechanism                                                            |
-|--------------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense (W12)+WAVE** | **1m32s**  | 1.70 B  | W12 + fused M_WAVE ETC cutoff (`QUEENS_WAVE=1`, opt-in); −15% nodes   |
-| iso-dense (W12)          | 1m39s      | 2.0 B   | W_K to K=12: every pc 9–12 resolved from W0..W8 via `pext` (u128 W12) |
-| iso-dense (W11)          | 1m44s      | 2.5 B   | W_K to K=11 (u64 codes)                                               |
-| iso-dense (W9)           | 2m12s      | 4.0 B   | W9 only: pc==9 from W0..W8                                            |
-| iso-window               | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT                |
-| iso-flat                 | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                     |
+| solver              | n=16 wall  | nodes   | mechanism                                                            |
+|---------------------|------------|---------|----------------------------------------------------------------------|
+| **iso-dense (W12)** | **1m32s**  | 1.70 B  | **default** now: W12 + fused M_WAVE ETC cutoff; `QUEENS_WAVE=0` off   |
+| iso-dense, WAVE off | 1m39s      | 2.0 B   | W12 only (the A/B control): pc 9–12 from W0..W8 via `pext` (u128 W12) |
+| iso-dense (W11)     | 1m44s      | 2.5 B   | W_K to K=11 (u64 codes)                                               |
+| iso-dense (W9)      | 2m12s      | 4.0 B   | W9 only: pc==9 from W0..W8                                            |
+| iso-window          | 2m15s      | ~5.1 B  | dense W8 tail table over a huge-page-collapsed flat TT                |
+| iso-flat            | 3m29s      | 6.1 B   | single selective-iso key over a flat lockless TT                     |
 
 **Current focus:** the W_K **economic crossover is found — K=12 is the optimum** (the default; −53% nodes /
 ~1m41s mean vs W8). The sweep ran one layer past it: **K=13 is net-negative at n=16** — it still cuts nodes

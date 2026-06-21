@@ -574,6 +574,13 @@ impl IsoFlat {
         // disables, `=1` forces; it self-gates to n≥15 in `first_player_wins` (a no-op below, where the
         // whole solve finishes inside the warm window). iso-flat/iso-window keep it off (control intact).
         s.warm_restart = !matches!(std::env::var("QUEENS_WARM_RESTART").as_deref(), Ok("0"));
+        // M_WAVE (fused ETC + sorted-batch recurse-child cutoff, Phase-1b) on by default for iso-dense:
+        // a measured net win at n=16 (−16% nodes / −4% total cycles / −2.7% wall, 6-round interleaved A/B;
+        // gates green, TT-sweep graceful to a 2 GB TT, verdict SECOND). It changes the node count *by
+        // design* (verdict-preserving, an earlier cutoff of the same value), so it is **not** part of the
+        // exact `--distinct` gate. `QUEENS_WAVE=0` disables, `=1` forces. iso-flat/iso-window keep it off
+        // (the byte-identical A/B control stays intact).
+        s.wave = !matches!(std::env::var("QUEENS_WAVE").as_deref(), Ok("0"));
         s
     }
 

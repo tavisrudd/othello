@@ -236,8 +236,12 @@ clean; control byte-identical (whole body behind `if MODE == M_WAVE`). Code-revi
 `wi`-lockstep is sound (same `pc > recurse_min` predicate, rebuild past `WAVE_CAP`); every early return is a
 proven win (gate-safe); `wk` is a dead store on the production `!COUNT` path (harmless nit).
 
-**Status:** M_WAVE stays **gated off** (handoff convention) but is now a **measured net win ⇒ defaults-on
-candidate** (user call). Residual slack = the warm entry re-probe of ETC-miss children (~60 cyc); removing it
+**Status (UPDATED 2026-06-20--11): M_WAVE is now the iso-dense DEFAULT.** Promoted in `new_dense` (mirrors
+`warm_restart`: `s.wave = !matches!(env "QUEENS_WAVE", Ok("0"))` — default-on, `QUEENS_WAVE=0` disables);
+iso-flat/iso-window keep it **off** so the byte-identical A/B control + the `--distinct` gate are intact.
+Verified: iso-dense n=14 = 11,747,330 (−8.9% vs WAVE-off 12,896,443), verdict SECOND; `QUEENS_WAVE=0` restores
+12,896,443; iso-window unchanged (27,539,495); iso-flat n=12 `--distinct` = 1,060,823 / 1.25×; clippy/test green.
+The 1m32s record is now the production default. (Previously: measured net win, defaults-on candidate.) Residual slack = the warm entry re-probe of ETC-miss children (~60 cyc); removing it
 needs an entry-probe/body split of `wins_inc` (risks byte-identity + doubles hot L1i — agent judged not worth
 it). **NEXT:** decide promote-to-default vs keep-opt-in; the fused per-node ETC is now a clean substrate for
 **Approach B** (idle-core prep moves the gather/probe off the critical path — where the remaining ~16% cut
