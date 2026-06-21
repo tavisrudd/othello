@@ -103,8 +103,28 @@
 > | nimber / module / component decomposition | **DEAD (n=16 evidence)** | closed |
 > | move ordering — banded-countermove/killer | **MEASURED-NEGATIVE (n=16 A/B), discarded** | always-promote +13.3% nodes (conflation); degree-gated −0.7% nodes but +3.6% wall (overhead) |
 > | move ordering — tail-only 1-ply lookahead | untried (the residual ordering angle) | headroom real but NOT recency-capturable ⇒ needs actual lookahead, costly |
-> | exact-key prefetch (memory, prefetch-only, MBA/CAT) | **most promising memory lever** (ρ=8% gives budget) | gated by `M_COLD` cold% + lookahead-distance |
-> | speculative-SOLVE pre-warm | dominated by prefetch | same `M_COLD` gate |
+> | **prefetch — latency-hide the cold probes** | **★ the live memory lever** (M_COLD-confirmed: 400M cold loads to hide; ρ=8% budget) | gated by prefetch-DISTANCE / path-prediction |
+> | speculative-SOLVE pre-warm | **reframed → effectively DEAD** | positions ~unique ⇒ "warm" = solve-ahead = parallelization (span-limited) |
+>
+> **★★ PIVOTAL M_COLD RESULT (n=16, committed `a9e9d0e`) — overturns the "transposition-saturated tail" premise.**
+> The giant-root tail's pc≥17 entry probes are **99.6–100% MISS (cold)** — only **~0.2% hit**. Positions are
+> **~unique** (re-exp ≈ 1.0× / distinct ≈ node count); the tail cold-computes, it does NOT re-probe warm. Consequences:
+> 1. **The kill-criterion "tail warm ⇒ nothing to pre-warm" INVERTS:** the tail isn't warm — but that means **pre-warm
+>    (speculative SOLVE) is dead for a *new* reason** — there's nothing to warm *from* (each position computed once), so
+>    "warming X ahead" = computing X's subtree on a helper = **parallelization**, which alpha-β cutoff-serialization caps
+>    (move ordering makes siblings serial ⇒ span≈work ⇒ ≤1.06×; the work-span verdict holds, just not via redundancy).
+> 2. **The LIVE lever is PREFETCH, not pre-warm:** a cold MISS still pays the **DRAM load latency** (load the empty slot
+>    to confirm miss). Prefetching the slot ahead makes that load warm (~40 vs ~165 cyc) **even on a miss** — pure
+>    latency-hiding. The search is memory-latency-bound and ~half the ~165-cyc probe is still exposed past today's
+>    one-ahead `prefetch_h` ⇒ hiding the rest is a large potential (rough napkin: exposed-probe ≈ a third of the tail).
+>    **The gate is prefetch DISTANCE**: going 2–3 probes ahead needs predicting the search PATH, which is cutoff-dependent
+>    (you don't know which child cuts until you evaluate it). Cheap first experiment: **deeper/speculative prefetch in the
+>    descent** (prefetch the next 2–3 degree-sorted children's slots, not just the recurse child) — contained, just extra
+>    `_mm_prefetch`; A/B it. Heavier: an SMT-sibling helper running the path ahead (the spare-budget synthesis).
+> 3. **NEW finding/lever — the flat-TT barely earns its keep at pc≥17:** 400M probes catch only ~0.2% transpositions.
+>    Its value is holding re-exp ≈ 1.0× via those rare hits. **Measure the saved-subtree-VALUE of the 0.2% hits** (a
+>    `count`-style tap on the hit's pc + a proxy for the skipped subtree size) — if small, a cheaper-probe / probe-skip
+>    lever opens at pc≥17 (the probe is mostly a wasted cold load); if large, the probe earns it and prefetch is the play.
 > | MLP-batched probes / sorted-wave | quantified (1.85× vs 5.7×), order-tax-bound | only if ordering tax paid anyway |
 > | assoc-TT | wash at K=16 (Erlang-B a≪1) | revive n=18/small-TT |
 
