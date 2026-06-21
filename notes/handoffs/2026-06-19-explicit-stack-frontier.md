@@ -11,7 +11,36 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
-## ⇒ NEXT SESSION (as of --17 — getK micro-opt EXHAUSTED beyond the flat-arena win; node-count is the only deep-root lever left.)
+## ⇒ NEXT SESSION = PREFETCH (user-chosen, --17 end) — hide the mandatory-but-cold pc≥17 probe latency.
+
+> **★ START HERE NEXT SESSION (user, --17 end): the PREFETCH lever.** Everything else on the deep root is killed with
+> n=16 evidence (getK micro-opt → Opt1 was the only win; node-count → decomposition DEAD + killer-ordering DEAD;
+> probe-skip → regresses +26% [the probe earns its keep]). The M_COLD + queuing results converge on ONE live path:
+> the pc≥17 entry probe is **mandatory** (catches 0.2% high-value transpositions; the PV scan needs the TT intact) +
+> **99.8% COLD** + **high-latency**, and the solo tail runs the memory controller at **ρ≈8%** (12× spare bandwidth) —
+> so the win is **latency-hiding the necessary probe**, not skipping/warming it.
+> - **CHEAP FIRST EXPERIMENT (do this first):** **deeper/speculative descent prefetch** — today the descent prefetches
+>   only the one recurse child; issue `_mm_prefetch` for the next 2–3 degree-sorted children's TT slots too (some
+>   wasted on cut-before-probed, but prefetches are nearly free). Contained, byte-identical node set, low-risk A/B
+>   (metric = wall + total cyc). This is the lowest-risk shot at the exposed-probe latency (~half is still exposed past
+>   today's one-ahead `prefetch_h`).
+> - **HEAVIER (the real prize):** an **SMT-sibling helper thread** running the search PATH a few plies ahead to predict
+>   + prefetch future probe slots — taps the spare-budget synthesis: ρ=8% bandwidth + the active core's ~70% DRAM-stall
+>   *execution shadow* (the SMT sibling runs in it) + warm L1/L2 (same physical core). **`SCHED_IDLE`/nice IS the right
+>   throttle here** (unlike cross-core, which needs MBA/CAT) — the sibling yields the shared core when the main worker
+>   can use it. The gate is **prefetch DISTANCE / path-prediction** (the path is cutoff-dependent — you don't know which
+>   child cuts until you evaluate it); start with a short, speculative (branch-fanned) lookahead.
+> - Context: [queuing-theory](../proposal-2026-06-21-queuing-theory.md) (ρ=8%, B_free 500–650 M/s, prefetch-only beats
+>   speculative-solve), [speculative-tt-prewarm](../proposal-2026-06-21-speculative-tt-prewarm.md) (exact-key prefetch
+>   strictly dominates pre-warm), the M_COLD/M_RANK taps (committed, gated). **PV-scan constraint: the TT must stay intact.**
+>
+> **PARKED — 1 GB hugepage TT (the cheaper-probe / TLB lever):** would remove the ~82% TT TLB-miss page-walk (17 GB in
+> 2 MB pages = ~8700 pages ≫ ~1500 L2-TLB coverage) for a clean **byte-identical** ~2.5–7% tail win. **Runtime reservation
+> is IMPOSSIBLE here** — `echo 14 > .../hugepages-1048576kB/nr_hugepages` → **0** (the buddy allocator's max block is
+> ~4 MB; 1 GB-contiguous physical can't be assembled at runtime even post-`compact_memory`; `pdpe1gb` IS supported).
+> Needs a **boot reservation** (`default_hugepagesz=1G hugepagesz=1G hugepages=14` cmdline + reboot). Build path: a gated
+> `QUEENS_TT_1G` doing `mmap(MAP_HUGETLB|MAP_HUGE_1GB=30<<26)` (kernel-zeroed, leak/munmap-wrapper not `Box`) with a 2 MB
+> `MADV_COLLAPSE` fallback on `MAP_FAILED`. Decide the reboot with the user; modest win, clean experiment.
 
 > **Session --17 (2026-06-21).** Targeted the getK **35%** evaluator bucket + the deep single-root tail (~94% of n=16 wall).
 >
