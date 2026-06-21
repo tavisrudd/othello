@@ -203,6 +203,15 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       the ~45–60s compute floor). Biggest single lever since W12. The sort is far cheaper than the M_WAVE_B
       slot-sort (just `child0.popcount()`, no key-build). NEXT: combine with ETC (`M_ORD`+ETC) + promote-to-
       default decision — M_ORD alone already beats M_WAVE by −25% nodes.
+- [x] **★ ETC ON TOP of dynamic ordering (gated `M_ORD_W`/`QUEENS_ORD=2`) — SUB-60: the combine pays
+      (2026-06-20--12).** ETC still cuts on top of the better ordering. n=14 deterministic: 7,886,898 vs M_ORD
+      8,856,727 = **−11% more nodes**. n=16 A/B M_ORD vs M_ORD_W (`QUEENS_ORD=1` fixed, toggle `QUEENS_ORD_ETC`):
+      **−18.4% nodes, +14.6% cyc/node (the ETC gather/probe), −6.5% total cyc.** **Clean-box 17 GB: ~57s (59.2s
+      measured) / 919 M nodes — SUB-60, new leaderboard #1, −38% vs the M_WAVE record.** Verdict-correct
+      (n=4..10 match default). The ETC's +14.6% cyc/node is now the limiter (it eats −18% nodes down to −6.5%) —
+      ChatGPT's refinement menu targets it (top-k ETC budget, pc-band, slow-root-only, sidecar-at-ETC-probes).
+      NEXT: top-k ETC probe budget (probe only the top-k *dynamically-ordered* children — the cut-trigger is
+      usually the most-forcing child, so few probes keep most cuts) + promote-to-default decision.
 
 ## Handoff Notes
 

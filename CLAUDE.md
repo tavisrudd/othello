@@ -18,9 +18,13 @@ the **static** `q.order` (descending *empty-board* attack degree) with **dynamic
 moves by *current* available-block degree (`child0.popcount()` ascending = most-forcing first; instant-win
 `child0==0` sorts first ⇒ earliest cutoff). **n=16 A/B vs the M_WAVE default: −34% nodes, +8.5% cyc/node (cheap
 degree-sort), −28.7% total cyc, −30.2% wall (98.1s→68.5s @ 12 GB TT)**; n=14 deterministic −31.3%. Verdict-
-preserving (matches the validated default n=4..16); production byte-identical off. **NEXT: combine with ETC +
-promote-to-default decision** (it alone already beats M_WAVE by −25% nodes). This came out of closing **Approach B
-(sorted-frontier wave + dedup) — both halves measured NEGATIVE; `M_WAVE` was the default before this.** 2a sized the offload GO-on-paper (gated cold `M_SIZE`/`QUEENS_SIZE` probe
+preserving (matches the validated default n=4..16); production byte-identical off. **ETC stacks on top
+(`M_ORD_W`/`QUEENS_ORD=2`): −18% more nodes / −6.5% total cyc ⇒ clean-box ~57s (SUB-60!) / 0.92 B nodes — new
+leaderboard #1, −38% vs the M_WAVE record.** The ETC's +14.6% cyc/node is now the limiter; **NEXT = ChatGPT's
+ETC-refinement menu** (top-k probe budget on the dynamically-ordered children [first pick], pc-band, slow-root-
+only, sidecar-at-ETC-probes) + a **promote-to-default decision** (`QUEENS_ORD=2` is the candidate). This came out
+of closing **Approach B (sorted-frontier wave + dedup) — both halves measured NEGATIVE; `M_WAVE` was the default
+before this.** A/B + clean runs go in **fresh tmux windows (NOT the user's panes 2/3)** + `solve --to-file` JSON. 2a sized the offload GO-on-paper (gated cold `M_SIZE`/`QUEENS_SIZE` probe
 tap, production byte-identical: n=16 3.0 B probes · pc 13–21 = 88% · dedup ceiling 38.1% pre-cut / 27.1%
 post-cut · 62–73% same-DRAM-row after sort). **But the cheap 2b de-risk killed it:** the sorted wave needs
 **slot-order consumer access = +94% nodes at n=16** (`M_WAVE_B`/`QUEENS_WAVE_B`; the n=14 proxy lied at +13.3% —
@@ -76,7 +80,8 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense + M_ORD** | **1m02s**| 1.14 B  | **★ NEW**: dynamic move ordering (`QUEENS_ORD=1`, gated) — −33% vs M_WAVE; no ETC |
+| **iso-dense + M_ORD_W** | **~57s** (59s meas) | 0.92 B | **★ NEW #1, SUB-60**: dynamic ordering + ETC (`QUEENS_ORD=2`, gated) — −38% vs M_WAVE |
+| iso-dense + M_ORD   | 1m02s      | 1.14 B  | dynamic move ordering alone (`QUEENS_ORD=1`, gated) — −33% vs M_WAVE; no ETC |
 | iso-dense (W12)     | 1m32s      | 1.70 B  | default now: W12 + fused M_WAVE ETC cutoff; `QUEENS_WAVE=0` off       |
 | iso-dense, WAVE off | 1m39s      | 2.0 B   | W12 only (the A/B control): pc 9–12 from W0..W8 via `pext` (u128 W12) |
 | iso-dense (W11)     | 1m44s      | 2.5 B   | W_K to K=11 (u64 codes)                                               |

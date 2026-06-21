@@ -71,6 +71,7 @@ const M_WAVE_B: u8 = 7; // A'' Phase-2b-0 de-risk: descend children in TT-slot o
 const M_L0: u8 = 8; // A'' Phase-2b dedup: M_WAVE + a per-worker L0 probe cache (`QUEENS_L0=1`)
 const M_WAVE_C: u8 = 9; // M_WAVE + cascade-reorder (recurse arm first in the pc-cascade) (`QUEENS_WAVE_C=1`)
 const M_ORD: u8 = 10; // dynamic move ordering: descend by current available-block degree, not static q.order (`QUEENS_ORD=1`)
+const M_ORD_W: u8 = 11; // dynamic move ordering + the M_WAVE ETC cut on top (`QUEENS_ORD=2`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -569,8 +570,12 @@ pub struct IsoFlat {
     /// `QUEENS_ORD=1`: selects `const MODE = M_ORD` — dynamic move ordering by current available-block
     /// degree (`child0.popcount()` ascending) instead of the static `q.order`. Verdict-preserving; the
     /// node-count delta vs static is the ordering gain (the move-ordering lever the +94% slot-order tax
-    /// indicted). Off = byte-identical (the per-node re-sort DCEs).
+    /// indicted). Off = byte-identical (the per-node re-sort DCEs). `QUEENS_ORD=2` also runs the M_WAVE
+    /// ETC cut on top (`ord_etc` ⇒ `M_ORD_W`).
     ord: bool,
+    /// `QUEENS_ORD=2`: dynamic ordering **plus** the M_WAVE ETC cut (`M_ORD_W`) — does ETC still pay on
+    /// top of the better ordering? Implies `ord`.
+    ord_etc: bool,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -811,7 +816,11 @@ impl IsoFlat {
             wave_b: std::env::var("QUEENS_WAVE_B").as_deref() == Ok("1"),
             l0: std::env::var("QUEENS_L0").as_deref() == Ok("1"),
             wave_c: std::env::var("QUEENS_WAVE_C").as_deref() == Ok("1"),
-            ord: std::env::var("QUEENS_ORD").as_deref() == Ok("1"),
+            ord: matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("1") | Ok("2")),
+            // `QUEENS_ORD=2` OR `QUEENS_ORD_ETC=1` (the latter lets the A/B harness toggle ETC with
+            // `QUEENS_ORD=1` fixed ⇒ a clean M_ORD vs M_ORD_W interleaved comparison).
+            ord_etc: std::env::var("QUEENS_ORD").as_deref() == Ok("2")
+                || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1"),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1705,8 +1714,9 @@ impl IsoFlat {
             sorted[..n].copy_from_slice(moves);
             self.sort_moves_by_slot::<DK>(&mut sorted[..n], avail, att, orient);
             &sorted[..n]
-        } else if MODE == M_ORD {
+        } else if MODE == M_ORD || MODE == M_ORD_W {
             // Dynamic move ordering: re-sort by current available-block degree (most-forcing first).
+            // `M_ORD_W` then runs the M_WAVE ETC body over the degree-sorted moves (ETC + ordering).
             let n = moves.len();
             sorted[..n].copy_from_slice(moves);
             self.sort_moves_by_degree(&mut sorted[..n], avail, att);
@@ -1738,8 +1748,14 @@ impl IsoFlat {
         // OR-node verdict). DCEs to nothing on every other `MODE` (control byte-identical).
         // `M_SIZE_WAVE` runs this same body (so its tapped stream is the post-cut residual B offloads);
         // `M_L0` runs it with the L0 probe cache layered into `mtt_get`/`mtt_put` (production identical);
-        // `M_WAVE_C` runs it with the recurse arm hoisted to the front of the fused-descent cascade.
-        if MODE == M_WAVE || MODE == M_SIZE_WAVE || MODE == M_L0 || MODE == M_WAVE_C {
+        // `M_WAVE_C` runs it with the recurse arm hoisted to the front of the fused-descent cascade;
+        // `M_ORD_W` runs it over degree-sorted moves (dynamic ordering + ETC).
+        if MODE == M_WAVE
+            || MODE == M_SIZE_WAVE
+            || MODE == M_L0
+            || MODE == M_WAVE_C
+            || MODE == M_ORD_W
+        {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
             // SoA descriptor store, recurse children in move order (consumed in order by the descent).
             // `wk` keeps the full child key so the `COUNT=true` HLL path is exact (production
@@ -2833,7 +2849,11 @@ impl IsoFlat {
                 } else if self.wave_c {
                     M_WAVE_C
                 } else if self.ord {
-                    M_ORD
+                    if self.ord_etc {
+                        M_ORD_W
+                    } else {
+                        M_ORD
+                    }
                 } else if self.wave {
                     M_WAVE
                 } else {
@@ -2854,6 +2874,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_ORD => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_ORD>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_ORD_W => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_ORD_W>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(
