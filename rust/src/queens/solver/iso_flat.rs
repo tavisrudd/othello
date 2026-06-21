@@ -483,8 +483,9 @@ pub struct IsoFlat {
     /// `9 ≤ k ≤ dense_k` is resolved directly from the complete W0..W8 tables by the W_K
     /// evaluator (`W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])`, one BMI2-projected child sweep, no flat-TT
     /// probe and no subtree expansion), exactly as W8 already does pc==8. `8` = off (the
-    /// `iso-flat`/`iso-window` control). Set by `new_dense` (default 12, `QUEENS_DENSE_K`
-    /// override, clamped 9..=13; K=13 is a validated opt-in, net-negative at n=16). Read
+    /// `iso-flat`/`iso-window` control). Set by `new_dense` (default 16 — the u128 code ceiling;
+    /// `QUEENS_DENSE_K` override, clamped 9..=16; raising K pays the whole way up with the pext
+    /// code-build, −30.6% n=16 wall K=12→16). Read
     /// **once at the root** to pick the `const DK` search
     /// instantiation — never a run-constant branch in the deep loop or a TT probe.
     dense_k: u32,
@@ -699,12 +700,14 @@ impl IsoFlat {
     /// tables (one BMI2-projected child sweep, no flat-TT probe and no subtree expansion),
     /// exactly as W8 already does pc==8. This is the next step in the iso-flat → iso-window →
     /// iso-dense lineage; `iso-window` stays the dense-off control. The dense ceiling K
-    /// defaults to **12** — the measured economic optimum of the W_K crossover (per-node eval
-    /// cost vs saved probes): each layer 9→10→11→12 keeps cutting ~16–18% more nodes and
-    /// lowers the wall (deterministic n=14 nodes 22.5M→18.8M→15.7M→12.9M; n=16 mean wall
-    /// ~2m26s→2m00s→1m53s→1m41s). W9..W11 keep the labelled code in a `u64`; W12's 66-bit code
-    /// runs on the `u128` two-word `pext` path. `QUEENS_DENSE_K` (9..=13) overrides for
-    /// re-sweeping (K=13 is a validated opt-in, net-negative at n=16; may flip at n=18);
+    /// defaults to **16** — the `u128` labelled-code ceiling (16·15/2 = 120 bits). Once the
+    /// pext-per-row code-build made the deep getK builders cheap, the W_K crossover moved all the
+    /// way to the ceiling: each layer keeps cutting ~14–22% more nodes and the n=16 wall drops
+    /// monotonically (deterministic n=14 nodes K=12 7.9M → K=16 4.0M = −50%; 16 GB single-run wall
+    /// K=12 49.5s → K=14 42.1s → K=15 39.1s → K=16 34.4s = −30.6%). The node cut is **inherent**
+    /// (TT-independent: 16 GB nodes ≈ 12 GB nodes), so it holds at production TT. W9..W11 keep the
+    /// labelled code in a `u64`; W12..W16 (66..120-bit) run on the `u128` two-word `pext` path.
+    /// `QUEENS_DENSE_K` (9..=16) overrides (lower it to trade getK cost for recurse expansion);
     /// `getK` resolves every `9 ≤ pc ≤ K` directly from the complete W0..W8 tables.
     pub fn new_dense(bits: u32) -> Self {
         // Overlap the CPU-bound dense-table build with the kernel-bound TT alloc + huge-page
@@ -723,7 +726,12 @@ impl IsoFlat {
         s.name = "iso-dense";
         // Dense layer on by construction (not the iso-window env gate). The ceiling is read
         // once here, threaded as `dense_k`, and resolved to a `const DK` at the root dispatch.
-        s.dense_k = env_u32("QUEENS_DENSE_K", 12).clamp(9, 16);
+        // Default K=16 (the u128 labelled-code ceiling, 16·15/2 = 120 bits): with the pext-per-row
+        // code-build the deep getK layers are cheap enough that raising the ceiling pays the whole
+        // way up — n=16 node count is TT-independent (the cut is inherent, not eviction-driven) and
+        // wall drops monotonically K=12→16 (16 GB single-run: 49.5s→34.4s = −30.6%). `QUEENS_DENSE_K`
+        // (9..=16) overrides — lower it to trade per-node getK cost back for more recurse expansion.
+        s.dense_k = env_u32("QUEENS_DENSE_K", 16).clamp(9, 16);
         // Warm-restart on by default for iso-dense: a `warm_secs`(=2) parallel warm pass then a
         // restart over the warm TT (slow roots staggered). Wall-neutral but trims the node count a
         // touch by pre-resolving shared pc≥13 entries before the low-util tail. `QUEENS_WARM_RESTART=0`
