@@ -299,6 +299,30 @@ fn att08(att: &[[Bits; 8]], sq: u8) -> Bits {
     att_for8(att, sq)[0]
 }
 
+/// Compact a board-square attack `row` against the `K` live squares of an `avail` set (whose
+/// per-word values are `a`) into a `K`-bit labelled adjacency row, with one 4-word BMI2 `pext`.
+/// Bit `j` of the result = "`row` hits the `j`-th live square of `avail`" — exactly the labelled
+/// adjacency the `wK_get` code-build needs. `cpre = [c0,c1,c2]` are `avail`'s cumulative word
+/// popcounts (`c0 = popcount(a[0])`, `c1 = c0+popcount(a[1])`, `c2 = c1+popcount(a[2])`), constant
+/// across all `K` rows so the caller hoists them once. This replaces the `K·(K-1)/2` scalar
+/// `Bits::get` bit-tests of the code-build — which the compiler auto-vectorizes at K≤9 but falls to
+/// scalar `bt`-per-bit for K≥10 (the profile's largest compute bucket) — with `K` rows of 4 fast
+/// pexts (znver5 `pext` = 3-cyc latency / 1-per-cyc), ~½ the ops on the pc 10..13 builders. The
+/// live squares scatter across ≤4 of the board's 64-bit words, so each row needs all 4 words
+/// extracted and stitched at `avail`'s word boundaries (the prefix popcounts).
+#[inline(always)]
+fn adj_row_pext(row: Bits, a: &[u64; 4], cpre: [u32; 3]) -> u64 {
+    use std::arch::x86_64::_pext_u64;
+    // SAFETY: production is built with target-cpu=znver5, which includes BMI2.
+    unsafe {
+        let r = row.0;
+        _pext_u64(r[0], a[0])
+            | (_pext_u64(r[1], a[1]) << cpre[0])
+            | (_pext_u64(r[2], a[2]) << cpre[1])
+            | (_pext_u64(r[3], a[3]) << cpre[2])
+    }
+}
+
 /// The `k`-vertex (`k ≤ 8`) labelled upper-triangular edge code of the `alive` sub-graph of a
 /// dense block, in the exact bit order [`dense::DenseW8`] is built with (pairs `(x,y)`, `x<y`,
 /// ascending). `closed[v]` carries `v`'s neighbours (self-blocking), and `verts[x] ≠ verts[y]`,
@@ -955,14 +979,22 @@ impl IsoFlat {
             n += 1;
         });
         debug_assert_eq!(n, 10);
+        // pext code-build: each vert's K-bit adjacency row in one 4-word pext (`adj_row_pext`),
+        // packed into the 45-bit upper-triangular labelled code. `off`/`width` const-fold per the
+        // unrolled `i` (same const-fold the scalar build relied on for `bit>>6`); K≤11 ⇒ off<55 ⇒
+        // no 64-bit word straddle ⇒ a single `u64`. Byte-identical code bits to the scalar build.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
         let mut code = 0u64;
-        let mut bit = 0u32;
-        for i in 0..10 {
-            let row = att08(att, verts[i]);
-            for &vj in verts.iter().take(10).skip(i + 1) {
-                code |= (row.get(vj as u32) as u64) << bit;
-                bit += 1;
-            }
+        let mut off = 0u32;
+        for i in 0..10u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 10 - 1 - i;
+            code |= ((packed >> (i + 1)) & ((1u64 << width) - 1)) << off;
+            off += width;
         }
         dense8.get10(code)
     }
@@ -984,14 +1016,20 @@ impl IsoFlat {
             n += 1;
         });
         debug_assert_eq!(n, 11);
+        // pext code-build (see `w10_get`): 11 rows of one 4-word pext into the 55-bit code (K≤11 ⇒
+        // off<55 ⇒ single `u64`, no word straddle). Byte-identical code bits to the scalar build.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
         let mut code = 0u64;
-        let mut bit = 0u32;
-        for i in 0..11 {
-            let row = att08(att, verts[i]);
-            for &vj in verts.iter().take(11).skip(i + 1) {
-                code |= (row.get(vj as u32) as u64) << bit;
-                bit += 1;
-            }
+        let mut off = 0u32;
+        for i in 0..11u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 11 - 1 - i;
+            code |= ((packed >> (i + 1)) & ((1u64 << width) - 1)) << off;
+            off += width;
         }
         dense8.get11(code)
     }
@@ -1012,18 +1050,28 @@ impl IsoFlat {
             n += 1;
         });
         debug_assert_eq!(n, 12);
-        // Build the 66-bit code as two `u64` words (low 0..63, high 64..65) with pure `u64`
-        // ops, assembling the `u128` once — the per-bit `u128` accumulation made the compiler
-        // emit wasteful widening (`vpmovzxdq`) in this hot builder. `bit` is compile-time
-        // constant at each unrolled step, so `bit >> 6` const-folds to the word index.
+        // pext code-build (see `w10_get`): 12 rows of one 4-word pext, packed into the 66-bit code
+        // as two `u64` words (low 0..63, high 64..65). Each row's `width`-bit contribution can
+        // straddle the 64-bit word boundary, so split it when `lo + width > 64`. `off`/`width`/`lo`
+        // and the straddle predicate const-fold per the unrolled `i`, so the spill branch DCEs on
+        // the rows that don't cross. Byte-identical code bits to the scalar build.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
-        let mut bit = 0u32;
-        for i in 0..12 {
-            let row = att08(att, verts[i]);
-            for &vj in verts.iter().take(12).skip(i + 1) {
-                words[(bit >> 6) as usize] |= (row.get(vj as u32) as u64) << (bit & 63);
-                bit += 1;
+        let mut off = 0u32;
+        for i in 0..12u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 12 - 1 - i;
+            let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
+            let lo = off & 63;
+            words[(off >> 6) as usize] |= contrib << lo;
+            if lo + width > 64 {
+                words[((off >> 6) + 1) as usize] |= contrib >> (64 - lo);
             }
+            off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
         dense8.get12(code)
@@ -1045,15 +1093,25 @@ impl IsoFlat {
             n += 1;
         });
         debug_assert_eq!(n, 13);
-        // Two `u64` words (low 0..63, high 64..77), assembled once — see `w12_get`.
+        // pext code-build (see `w12_get`): 13 rows of one 4-word pext, packed into the 78-bit code
+        // (two `u64` words, low 0..63, high 64..77, straddle split per row). Byte-identical bits.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
-        let mut bit = 0u32;
-        for i in 0..13 {
-            let row = att08(att, verts[i]);
-            for &vj in verts.iter().take(13).skip(i + 1) {
-                words[(bit >> 6) as usize] |= (row.get(vj as u32) as u64) << (bit & 63);
-                bit += 1;
+        let mut off = 0u32;
+        for i in 0..13u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 13 - 1 - i;
+            let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
+            let lo = off & 63;
+            words[(off >> 6) as usize] |= contrib << lo;
+            if lo + width > 64 {
+                words[((off >> 6) + 1) as usize] |= contrib >> (64 - lo);
             }
+            off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
         dense8.get13(code)
