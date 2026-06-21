@@ -287,7 +287,11 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       table-free `get17`) BUILT+TESTED+REVERTED = MEASURED-NEGATIVE** (n=16 −19.4% nodes but +30.7% cyc/node /
       +5.7% wall — the W_K crossover ENDS at K=16; pc==17's shallow subtree ⇒ TT-memoized recurse beats memo-less
       getK recompute; untried = a *memoized* get17 that skips the degree-sort). Smaller TT (4 GB) = +9.5% wall
-      (eviction outweighs the −2.5% TLB win); 17 GB stays. NEXT = memoized-get17, getK-evaluator cost, memory/MLP.
+      (eviction outweighs the −2.5% TLB win); 17 GB stays. **PGO now PAYS on the K=16 path: `make pgo-queens` →
+      `target/pgo-release/release/queens` = −1.3% cyc/node / −2.4% total cyc (4-round n=16 A/B)** — small but real
+      (was "no move" at M_WAVE; the new getK-branch-heavy path lays out better). Build-process only (no source
+      change); use the PGO binary for record runs (33.9s → ~33.4s). NEXT = memoized-get17, getK-evaluator cost,
+      memory/MLP.
 - [x] `solve_local_iter` (`QUEENS_UNROLL`) — wash at n=16, gated, committed (`3f10919`)
 - [x] `wins_inc` peel-the-get (`QUEENS_PEEL`) — wash, then superseded/removed in favour of the full stack
 - [x] `wins_inc_iter` full explicit stack (`QUEENS_ITER`) — +4.3% raw, gated off, committed (`3f10919`)
