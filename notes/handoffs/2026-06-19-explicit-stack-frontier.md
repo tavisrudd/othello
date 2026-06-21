@@ -36,11 +36,32 @@ at* improving the ordering. Method banked: **n=14/single runs lie; only the inte
 3. **#5 warmup re-sweep** (cheap, no code) — re-tune `QUEENS_WARM_RESTART`/`WARM_SECS`/stagger now that earlier
    cutoffs change when useful TT entries land; the old optimum predates dynamic ordering.
 
-**Do NOT re-try (measured dead/weak this session, gated-off as instructive negatives):** Approach B entirely
-(sorted-frontier wave `M_WAVE_B` +94%, L0 dedup `M_L0` +6%); **grouped-frontier DDD** (closed by the same +94% —
-any frontier reorder forfeits move ordering); the cascade-reorder (`M_WAVE_C` +2.1%, frontend-bound loop punishes
-added code); ETC top-k probe budget (#4, cuts distributed); ChatGPT #1/#3/#7 (weak — see the --12 note). **The
-giant-root tail's WORK is not cuttable by frontier-reorder/dedup; levers must preserve move order.**
+**Measured-negative AS BUILT (gated off; NOT closed forever — record the exact build tried + the untried angle
+that could flip it; several of our best wins were net-negative until tuned, e.g. unfused M_WAVE +4.9% → fused
+−4%, the bogus "36 M/s floor", and *this session's −38% ordering win came straight out of the Approach-B
+negatives).* Don't blindly rebuild the same thing — attack the named untried angle:**
+- **Sorted-frontier wave (`M_WAVE_B`, +94% nodes).** The tax is slot-order *consumer access* forfeiting move
+  ordering — fundamental (ordering ≈ 2×). *Untried angle:* none obvious for the access-order half; treat the
+  sorted-*locality* prize as the hard-dead one. (The dedup half is separate, below.)
+- **L0 probe-cache dedup (`M_L0`, +6% cyc/node).** Net-negative as a per-worker RefCell+`.with` direct-mapped
+  cache — but the killer was the **per-probe TLS/borrow overhead**, not the idea (node-cut was ~0, hit-rate low
+  vs the already-warm TT). *Untried:* a raw-pointer / `UnsafeCell` L0 (no `.with`/borrow), different size/index,
+  or targeting it ONLY to the ETC's speculative child probes (ChatGPT #7). Upside is bounded (node-cut ~0.7%),
+  but it was never tuned.
+- **Grouped-frontier DDD.** Closed *only* for the variant that reorders consumer access (= the +94% tax) or
+  goes cutoff-free (the parked nimber 6.6×). *Untried:* a **move-order-preserving** dedup (dedup within
+  move-order batches, no reorder) — never built.
+- **Cascade-reorder (`M_WAVE_C`, +2.1% cyc/node).** Net-negative because the **duplicated recurse body** bloated
+  the frontend-bound loop. *Untried:* the no-duplication form via `unreachable_unchecked` in the cheap-arm
+  fallback (shrinks the loop back) — could flip to neutral/positive.
+- **ETC top-k probe budget (#4, distributed cuts).** Probe-count cap can't shed the overhead because the
+  overhead is the **gather** (key-build + the triple-`child0` recompute), not the probes. *Untried (the real
+  lever):* the triple-`child0` redundancy kill (item 2 above) attacks the actual cost.
+- **ChatGPT #1 (slow-root-only) / #3 (polarity, N/A — all OR nodes) — weak by analysis, not measured.**
+
+The standing rule is the *shape*, not a closed door: **the giant-root tail's work resists frontier-reorder/dedup
+because move ordering is worth ~2×; levers that preserve move order win** (dynamic ordering proved it). A
+reorder/dedup lever can still pay IF it doesn't disturb the consumer's move order — that's the open crack.
 
 **Tooling:** `scripts/queens-ab.sh` now parses `--to-file` JSON + auto-prints the off/on Δ (nodes/cyc/node/total
 cyc/wall). Runs go in a **fresh dedicated tmux window** (never the user's panes); poll JSON/`$STATE`, not the pane.

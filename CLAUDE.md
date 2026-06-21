@@ -29,17 +29,20 @@ tap, production byte-identical: n=16 3.0 B probes · pc 13–21 = 88% · dedup c
 post-cut · 62–73% same-DRAM-row after sort). **But the cheap 2b de-risk killed it:** the sorted wave needs
 **slot-order consumer access = +94% nodes at n=16** (`M_WAVE_B`/`QUEENS_WAVE_B`; the n=14 proxy lied at +13.3% —
 move ordering is worth ~2× node reduction, no throughput gain survives it ⇒ the SPSC pipeline is dead), and the
-order-independent **L0 probe-cache dedup = +6% cyc/node / +5% total cyc** (`M_L0`/`QUEENS_L0`; the TT already
-serves repeats warm ⇒ tax-free dedup prize ~0%, the 27% needs the +94%-tax sort). **Banked: the +94% finding also
-closes grouped-frontier DDD** (any frontier reorder/dedup forfeits move ordering). The giant-root tail's WORK is
-**not cuttable by frontier-reorder/dedup**; surviving levers **preserve move order** — getK/W_K node-count or
-decomposition that keeps α-β. The **per-node micro-opt route is also exhausted**: the cascade-reorder
-(`M_WAVE_C`, byte-identical node count, recurse arm hoisted ahead of ~8 cheap-arm tests) measured **+2.1%
-cyc/node** — the branches were already predicted-cheap and the duplicated recurse body bloated the frontend/L1i-
-bound hot loop (added code hurts more than removed cheap branches help). All gated off
-(`M_SIZE`/`M_SIZE_WAVE`/`M_WAVE_B`/`M_L0`/`M_WAVE_C` = substrate + instructive negatives). Method re-vindicated:
-**n=14/single runs lie — only the interleaved n=16 A/B is trustworthy** (it flipped 2b-0 from "−6% marginal" to a
-+94% kill). [proposal](notes/proposal-2026-06-20-sorted-frontier-wave.md) Status = CLOSED. **--11: `M_WAVE`** (fused ETC + batch-probe cutoff) is the iso-dense
+order-independent **L0 probe-cache dedup = +6% cyc/node / +5% total cyc** (`M_L0`/`QUEENS_L0`; net-negative AS
+BUILT — per-probe TLS/borrow overhead + the TT already serves repeats warm; untried: a raw-pointer L0, or target
+it to the ETC probes only). **These are measured-negative AS BUILT, NOT closed forever** (several of our best wins
+were net-negative until tuned — unfused M_WAVE +4.9% → fused −4%, the bogus "36 M/s floor", and *this −38%
+ordering win came out of these very negatives*). The *shape* that holds: the giant-root tail resists
+frontier-reorder/dedup because **move ordering is worth ~2×**, so the +94% closes grouped-frontier DDD *only* for
+variants that disturb consumer move-order; a **move-order-preserving** dedup is the open crack. Surviving levers
+**preserve move order** — dynamic ordering (the win), getK/W_K node-count, decomposition that keeps α-β. The
+cascade-reorder (`M_WAVE_C`) measured **+2.1% cyc/node** AS BUILT (duplicated recurse body bloated the L1i-bound
+loop; the no-dup `unreachable_unchecked` form is untried). All gated off
+(`M_SIZE`/`M_SIZE_WAVE`/`M_WAVE_B`/`M_L0`/`M_WAVE_C` = substrate + the untried-angle notes in the handoff). Method
+re-vindicated: **n=14/single runs lie — only the interleaved n=16 A/B is trustworthy** (it flipped 2b-0 from "−6%
+marginal" to a +94% kill). [proposal](notes/proposal-2026-06-20-sorted-frontier-wave.md): Approach B
+net-negative as built. **--11: `M_WAVE`** (fused ETC + batch-probe cutoff) is the iso-dense
 DEFAULT (`QUEENS_WAVE=0` disables) = the **1m32s / 1.70 B record**; it captured only −4% of its −16% node cut
 (gather/probe prep on the critical path = +22% cyc/node) — that gap is Approach B's prize. Also --11: **probe #1
 killed item A** (modular reduction — tail too sparse for size-≥3 modules;
@@ -106,7 +109,7 @@ at pc 13–21. Only **ABDADA in-flight markers** or **grouped-frontier DDD** (bo
 **warm-restart + M_WAVE are now the iso-dense defaults** (`QUEENS_WARM_RESTART` 2s warm + staggered restart, ~2%
 node trim; `QUEENS_WAVE` fused ETC, −16% nodes / the 1m32s record; both `=0`-disable, iso-flat/iso-window
 unaffected). **Next throughput lead = Approach B** (idle-core sorted-frontier pipeline, [scoped](notes/proposal-2026-06-20-sorted-frontier-wave.md);
-Phase 2a sizing GO-on-paper but **2b de-risk CLOSED Approach B** --12 — sorted-wave +94% nodes / L0 dedup +6% cyc/node, both negative; lever moves off the giant-root probe stream). **getK code-build vectorization = measured-DEAD** (--11: uniform-gather reshape
+Phase 2a sizing GO-on-paper but **2b de-risk found Approach B net-negative as built** --12 — sorted-wave +94% nodes / L0 dedup +6% cyc/node; the lever moved to move-ordering, but the dedup/move-order-preserving angles are untried, not closed). **getK code-build vectorization = measured-DEAD** (--11: uniform-gather reshape
 +0.53% instr, reverted; the compiler won't gather 10/11 lanes and a uniform rewrite doesn't fix it).
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +

@@ -2,8 +2,10 @@
 
 ## Status
 
-**CLOSED with evidence (2026-06-20--12): Approach B (sorted-frontier wave + dedup) is measured-NEGATIVE both
-halves; Approach A (`M_WAVE`) remains the shipped default.** 2a sized the offload as a GO on paper (wide / 27–38%
+**NET-NEGATIVE AS BUILT (2026-06-20--12) — not closed forever: Approach B (sorted-frontier wave + dedup) measured
+negative both halves AS BUILT; the untried angles below could still flip it (several of our best wins were
+net-negative until tuned — and this session's −38% move-ordering win came directly out of these negatives).
+Approach A (`M_WAVE`) is the shipped default; the new lever is dynamic move ordering (handoff).** 2a sized the offload as a GO on paper (wide / 27–38%
 dedup / 62–73% sorted locality), but 2b's cheap de-risk killed it: **slot-order (the sorted wave) = +94% nodes at
 n=16** (move ordering is worth ~2× node reduction — no throughput gain survives it; the SPSC pipeline depended on
 sorted consumer access ⇒ dead), and the order-independent **L0 probe-cache dedup = +6% cyc/node / +5% total cyc**
