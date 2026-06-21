@@ -182,6 +182,14 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       finding also closes grouped-frontier DDD (any frontier reorder forfeits move ordering). Production byte-
       identical; `M_L0` gated-off (instructive negative). Surviving levers preserve move order (getK/W_K,
       decomposition, the cascade-reorder frontend micro-opt). See the 2b-dedup note.
+- [x] **Cascade-reorder micro-opt (gated `M_WAVE_C`/`QUEENS_WAVE_C`) — MEASURED-NEGATIVE +2.1% cyc/node
+      (2026-06-20--12).** Hoist the recurse arm to the front of the fused-descent pc-cascade (deep-tail recurse
+      child skips ~8 cheap-arm `pc==k` tests). **Node-count byte-identical** (single-thread 11,747,330 = M_WAVE;
+      verdicts n=8/10/12 correct) — a pure branch reorder. n=16 A/B: **+2.1% cyc/node** (LOSS). The ~8 branches
+      were already predicted-not-taken (cheap), and the **duplicated recurse body bloated the hot loop** ⇒ worse
+      I-cache in a frontend/L1i-bound loop. The per-node micro-opt route is exhausted (consistent with "micro-opts
+      wash out"); the frontend bottleneck wants *less* hot-loop code (getK throughput), not branch reshuffling.
+      `M_WAVE_C` gated-off (instructive negative).
 
 ## Handoff Notes
 

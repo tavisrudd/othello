@@ -69,6 +69,7 @@ const M_SIZE: u8 = 5; // A'' Phase-2a offload sizing: tap the recurse-arm probe 
 const M_SIZE_WAVE: u8 = 6; // as M_SIZE but ON TOP of the M_WAVE ETC cut — sizes the post-cut residual (`QUEENS_SIZE=2`)
 const M_WAVE_B: u8 = 7; // A'' Phase-2b-0 de-risk: descend children in TT-slot order, not move order (`QUEENS_WAVE_B=1`)
 const M_L0: u8 = 8; // A'' Phase-2b dedup: M_WAVE + a per-worker L0 probe cache (`QUEENS_L0=1`)
+const M_WAVE_C: u8 = 9; // M_WAVE + cascade-reorder (recurse arm first in the pc-cascade) (`QUEENS_WAVE_C=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -559,6 +560,11 @@ pub struct IsoFlat {
     /// move-ordering tax): recurring keys served from L2/L3 instead of a cold flat-TT DRAM probe. Off =
     /// byte-identical M_WAVE (`mtt_get`/`mtt_put` are the identity for every non-`M_L0`/`M_SEG` mode).
     l0: bool,
+    /// `QUEENS_WAVE_C=1`: selects `const MODE = M_WAVE_C` = M_WAVE with the recurse arm hoisted to the
+    /// front of the fused-descent pc-cascade (a deep-tail recurse child skips the ~8 cheap-arm tests).
+    /// Behaviour- and node-count-identical to M_WAVE (only branch order shifts) — a frontend micro-opt;
+    /// off = byte-identical M_WAVE (the front arm DCEs).
+    wave_c: bool,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -798,6 +804,7 @@ impl IsoFlat {
             size_sample: Mutex::new(Vec::new()),
             wave_b: std::env::var("QUEENS_WAVE_B").as_deref() == Ok("1"),
             l0: std::env::var("QUEENS_L0").as_deref() == Ok("1"),
+            wave_c: std::env::var("QUEENS_WAVE_C").as_deref() == Ok("1"),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1696,8 +1703,9 @@ impl IsoFlat {
         // rebuilding them. Verdict-preserving (the ETC cut is only ever an earlier return of the same
         // OR-node verdict). DCEs to nothing on every other `MODE` (control byte-identical).
         // `M_SIZE_WAVE` runs this same body (so its tapped stream is the post-cut residual B offloads);
-        // `M_L0` runs it with the L0 probe cache layered into `mtt_get`/`mtt_put` (production identical).
-        if MODE == M_WAVE || MODE == M_SIZE_WAVE || MODE == M_L0 {
+        // `M_L0` runs it with the L0 probe cache layered into `mtt_get`/`mtt_put` (production identical);
+        // `M_WAVE_C` runs it with the recurse arm hoisted to the front of the fused-descent cascade.
+        if MODE == M_WAVE || MODE == M_SIZE_WAVE || MODE == M_L0 || MODE == M_WAVE_C {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
             // SoA descriptor store, recurse children in move order (consumed in order by the descent).
             // `wk` keeps the full child key so the `COUNT=true` HLL path is exact (production
@@ -1753,7 +1761,28 @@ impl IsoFlat {
                     break;
                 }
                 let pc = child0.popcount();
-                let lost = if DK >= 13 && pc == 13 {
+                let lost = if MODE == M_WAVE_C && pc > recurse_min {
+                    // Cascade-reorder micro-opt (`M_WAVE_C` only; DCEs for every other MODE ⇒ M_WAVE
+                    // byte-identical). A deep-tail recurse child (pc > recurse_min) is the 88%-majority
+                    // case; hoisting it to the front skips the ~8 failed `pc==k`/range comparisons of
+                    // the cheap-arm cascade below (frontend/L1i pressure on the bottleneck). The body
+                    // is identical to the `else` recurse arm — and `recurse_min` IS the cheap/recurse
+                    // boundary, so this is behaviour- and node-count-identical, only branch order shifts.
+                    let child = child_orient(orient, a, child0);
+                    let (ckey, cr, cf) = if wi < nw {
+                        let d = (wk[wi], wr[wi], wf[wi]);
+                        wi += 1;
+                        d
+                    } else {
+                        let ckey = d4_bits(lex_min8(&child));
+                        let (cr, cf) = QueensTt::hash128(ckey);
+                        (ckey, cr, cf)
+                    };
+                    self.tt.prefetch_h(cr);
+                    !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
+                        q, att, &child, ckey, cr, cf, moves, nodes,
+                    )
+                } else if DK >= 13 && pc == 13 {
                     !self.w13_get(att, child0)
                 } else if DK >= 12 && pc == 12 {
                     !self.w12_get(att, child0)
@@ -2767,6 +2796,8 @@ impl IsoFlat {
                     M_WAVE_B
                 } else if self.l0 {
                     M_L0
+                } else if self.wave_c {
+                    M_WAVE_C
                 } else if self.wave {
                     M_WAVE
                 } else {
@@ -2781,6 +2812,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_L0 => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_L0>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_WAVE_C => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_WAVE_C>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(

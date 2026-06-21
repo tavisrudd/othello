@@ -20,10 +20,12 @@ move ordering is worth ~2× node reduction, no throughput gain survives it ⇒ t
 order-independent **L0 probe-cache dedup = +6% cyc/node / +5% total cyc** (`M_L0`/`QUEENS_L0`; the TT already
 serves repeats warm ⇒ tax-free dedup prize ~0%, the 27% needs the +94%-tax sort). **Banked: the +94% finding also
 closes grouped-frontier DDD** (any frontier reorder/dedup forfeits move ordering). The giant-root tail's WORK is
-**not cuttable by frontier-reorder/dedup**; surviving levers **preserve move order** — getK/W_K node-count,
-decomposition that keeps α-β, or per-node frontend micro-opts (e.g. the **cascade-reorder**: hoist the recurse arm
-to the front of the pc-cascade, byte-identical node count, ~8→1 branches on the 88%-majority deep-tail child).
-All gated off (`M_SIZE`/`M_SIZE_WAVE`/`M_WAVE_B`/`M_L0` = substrate + instructive negatives). Method re-vindicated:
+**not cuttable by frontier-reorder/dedup**; surviving levers **preserve move order** — getK/W_K node-count or
+decomposition that keeps α-β. The **per-node micro-opt route is also exhausted**: the cascade-reorder
+(`M_WAVE_C`, byte-identical node count, recurse arm hoisted ahead of ~8 cheap-arm tests) measured **+2.1%
+cyc/node** — the branches were already predicted-cheap and the duplicated recurse body bloated the frontend/L1i-
+bound hot loop (added code hurts more than removed cheap branches help). All gated off
+(`M_SIZE`/`M_SIZE_WAVE`/`M_WAVE_B`/`M_L0`/`M_WAVE_C` = substrate + instructive negatives). Method re-vindicated:
 **n=14/single runs lie — only the interleaved n=16 A/B is trustworthy** (it flipped 2b-0 from "−6% marginal" to a
 +94% kill). [proposal](notes/proposal-2026-06-20-sorted-frontier-wave.md) Status = CLOSED. **--11: `M_WAVE`** (fused ETC + batch-probe cutoff) is the iso-dense
 DEFAULT (`QUEENS_WAVE=0` disables) = the **1m32s / 1.70 B record**; it captured only −4% of its −16% node cut
