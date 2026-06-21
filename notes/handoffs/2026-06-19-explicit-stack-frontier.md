@@ -11,6 +11,59 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ NEXT SESSION (as of --17 — getK micro-opt EXHAUSTED beyond the flat-arena win; node-count is the only deep-root lever left.)
+
+> **Session --17 (2026-06-21).** Targeted the getK **35%** evaluator bucket + the deep single-root tail (~94% of n=16 wall).
+>
+> **LANDED ON MAIN (cherry-picked/forward-ported off branch `queens-compact-assoc-tt`):**
+> - **`df827fc` ★ flat W0..W8 dense arena (Opt1) = −2.0% cyc/node** (5-round n=16 A/B, every B round below every A).
+>   `DenseW8` held the complete tables as `&[Box<[u64]>]` (the `Vec<Box<T>>` pointer-chase the tiger rules forbid);
+>   the get9 annotate showed its hottest load (8.6%) was the **bounds-check `len` load on `tables[cpc]`** ahead of a
+>   separate box-ptr load, before the data word — two serial loads per leaf. Concatenated into one `&'static [u64]`
+>   (`TABLE_OFF` cumulative offsets, `get_unchecked` leaf). Byte-identical (dense `direct_w9..16`/`graph_wins8` bit-match).
+> - **`f285535` ETC win-child re-probe elimination** (forward-port of just the 3 ETC-reuse hunks from `97779e3`; the
+>   gated assoc-TT / sidecar-sim experimental code stays OFF main). Gate green on main (dense, lineage, n=14 SECOND,
+>   n=12 distinct 1,060,823).
+>
+> **MEASURED-NEGATIVE / instructive (the getK micro-opt space is the lesson):**
+> - **batch-puts (write side) DEAD.** perf-stat n=16: `store_queue_rsrc_stall` = **0.084% of cycles** (puts are plain
+>   `Relaxed` stores → retire async to the store buffer; not store-bound, not bandwidth-bound). No stall to recover.
+> - **Opt2 — AVX-512 child-mask/popcount pre-pass (`vpopcntw`) MEASURED-NEGATIVE +2.4% cyc/node, REVERTED.** The getK
+>   evaluators are **load-latency-bound, and OoO already hides the per-child ALU** by speculating past the early-return
+>   branch — so SIMD-batching just adds a 64-byte stack spill + eager 16-lane waste on early cutoffs. **Opt1 won ONLY
+>   because it removed a SERIAL LOAD the OoO engine couldn't hide; ALU batching has nothing to remove.** By the same
+>   logic **C1b (skip `extract_adj`'s redundant K-pexts) would wash** — it's a no-branch prologue that overlaps the
+>   early loop iterations (child[0] needs only adj[0]).
+> - **Deep-tail micro-opt round EXHAUSTED.** Tail-filtered profile == aggregate (same node mix). Every hot path is
+>   load-latency-bound or already AVX-512: getK (ALU OoO-hidden), `sort_moves_by_degree` (vectorized degree compute
+>   `vpandnq zmm` + branchless counting sort), `child_orient` (zmm `vmovups`/`vandnps`), builders (`att08` clean L2
+>   loads), `wins_inc` (the hash128→DRAM entry-probe = the memory floor + 256-bit reloads of parent state **live across
+>   the recurse call** = inherent spill). **No removable serial load remains** → cyc/node is near its floor for this rep.
+>
+> **⇒ THE LEVER IS NODE-COUNT (only thing left for the deep tail). Three design subs ran (proposals written):**
+> - **[targeted-nimber-decomp](../proposal-2026-06-21-targeted-nimber-decomp.md)** (connected-component Grundy): design =
+>   dense u8 Grundy table for components ≤8 (one lookup, no recursion; k=8 ≈ 256 MiB/~1s all-core build) + **idle-core
+>   prep** during the parallel phase + **tail-only gating** (new `M_ORD_W_DECOMP` MODE, selected when ≤2 roots remain).
+>   **Verdict: conditional, premise in serious doubt** — the pc 13–16 tail graphs may be overwhelmingly ONE connected
+>   component (the `iso_strip` wash + `module_profile` sparsity both point this way).
+> - **[module-nimber-decomp](../proposal-2026-06-21-module-nimber-decomp.md)** (modular/twin): **DEAD** — Node-Kayles is
+>   vertex-deletion, a move on a module vertex deletes `N[v]` reaching OUTSIDE the module via shared external neighbours,
+>   so there is **no clean `g(G)=f(g(quotient),g(module))` factorization** (game-invariance fails); the only exact
+>   identities (odd-K1 XOR1, twin-pair dedup) are already measured wash/negative. Plus queen-geometry sparsity.
+> - **[deep-root-ordering](../proposal-2026-06-21-deep-root-ordering.md)** (move-ordering enhancements) — RUNNING at handoff.
+>
+> **★ BOTH decomposition subs CONVERGED on the same cheap de-risk → DO THIS FIRST NEXT SESSION:** a gated monomorphised
+> `count`-style tap (the `M_SIZE`/`M_PROF` pattern) measuring, over the **pc 9–16 getK leaf population in the giant-root
+> tail** (NOT the flat-TT recurse population the prior `module_profile` used — wrong, denser population), the fraction
+> whose connected components are **all ≤8** (table-resolvable, no recursion) and the `->≤(k-1)` fraction. **Kill-criterion:
+> nimber lever is alive only if that fraction ≥ ~5%; otherwise both decomposition levers close.** Component split = bitmask
+> BFS over the ≤16 `u16` `adj` rows `extract_adj` already produces (pre-filter by the free `iso` mask). The ordering sub
+> will likely prescribe a sibling **first-losing-child-rank tap** (is cutoff already at rank 0–1 → ordering near-optimal,
+> or spread → headroom). Build both taps in one instrumentation pass; they gate the two surviving big levers.
+>
+> **Branch state:** keepers (Opt1 + ETC-reuse) are on **main**; branch `queens-compact-assoc-tt` carries them too + the
+> dead assoc-TT/sidecar experiments (gated off) + the leaderboard/handoff doc updates. New work can fork fresh off main.
+
 ## ⇒ NEXT SESSION (as of --16 — 30s e2e is MET (~27–28s); sidecar is the sub-25s stretch.)
 
 > **--16 OUTCOME (2026-06-21).** Full detail: [proposal-2026-06-21-compact-assoc-tt](../proposal-2026-06-21-compact-assoc-tt.md).
