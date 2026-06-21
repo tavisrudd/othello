@@ -1607,15 +1607,32 @@ impl IsoFlat {
     /// equal-degree ties keep their `q.order` (the static order is the tiebreak). Verdict-preserving
     /// (reorder never changes the OR/AND value); the node-count delta vs static is the ordering gain.
     fn sort_moves_by_degree(&self, dst: &mut [u8], avail: Bits, att: &[[Bits; 8]]) {
-        let mut keyed = [(0u32, 0u8); MAXV];
-        for (k, &sq) in dst.iter().enumerate() {
-            let child0 = avail.and_not(att_for8(att, sq)[0]);
-            keyed[k] = (child0.popcount(), sq);
-        }
         let n = dst.len();
-        keyed[..n].sort_by(|a, b| a.0.cmp(&b.0));
-        for (i, &(_, sq)) in keyed[..n].iter().enumerate() {
-            dst[i] = sq;
+        // Degree key per move (current available-block popcount), computed once into a parallel
+        // array so the sort needs no comparator closure. pc ≤ 256 fits u16.
+        let mut deg = [0u16; MAXV];
+        for k in 0..n {
+            let child0 = avail.and_not(att_for8(att, dst[k])[0]);
+            deg[k] = child0.popcount() as u16;
+        }
+        // Inlined STABLE insertion sort by ascending degree, moving the move + its key in lockstep.
+        // Stable (shift only on strict `>`) ⇒ equal-degree ties keep their q.order, so the node
+        // count is byte-identical to the std stable sort this replaces. The deep recurse nodes (the
+        // 94%-majority) have short move lists (≤ ~21), so insertion sort beats the generic driftsort
+        // it replaces — no scratch alloc / merge passes / comparator-closure dispatch, which summed
+        // to ~16% of total n=16 search cycles in the profile (insertion_sort_shift_left + quicksort
+        // + call_mut + sort8_stable + drift + memmove).
+        for i in 1..n {
+            let dk = deg[i];
+            let sq = dst[i];
+            let mut j = i;
+            while j > 0 && deg[j - 1] > dk {
+                deg[j] = deg[j - 1];
+                dst[j] = dst[j - 1];
+                j -= 1;
+            }
+            deg[j] = dk;
+            dst[j] = sq;
         }
     }
 
