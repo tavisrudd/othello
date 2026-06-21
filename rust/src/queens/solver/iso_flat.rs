@@ -67,6 +67,7 @@ const M_PROF: u8 = 3; // stratified profiler: rdtsc-time the TT get/put per pc (
 const M_WAVE: u8 = 4; // ETC + sorted-batch child probe (`QUEENS_WAVE=1`); A'' Phase-1 experiment
 const M_SIZE: u8 = 5; // A'' Phase-2a offload sizing: tap the recurse-arm probe stream (`QUEENS_SIZE=1`)
 const M_SIZE_WAVE: u8 = 6; // as M_SIZE but ON TOP of the M_WAVE ETC cut — sizes the post-cut residual (`QUEENS_SIZE=2`)
+const M_WAVE_B: u8 = 7; // A'' Phase-2b-0 de-risk: descend children in TT-slot order, not move order (`QUEENS_WAVE_B=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -510,6 +511,12 @@ pub struct IsoFlat {
     /// Cold slot-sorted-locality sample (routes), drained from each worker's [`SIZE_ACC`]. Only
     /// populated when `size`; touched off the hot path (drain + post-solve report).
     size_sample: Mutex<Vec<u64>>,
+    /// `QUEENS_WAVE_B=1` (A'' Phase-2b-0 de-risk): selects `const MODE = M_WAVE_B` at the subtree
+    /// handoff — descend each node's children in **TT-slot order** (the single-thread sorted-frontier
+    /// wave) instead of move order. Verdict-preserving (reorder never changes the OR/AND value); the
+    /// node-count delta vs the WAVE-off move-order baseline is the move-ordering tax the sorted wave
+    /// pays for its row-buffer locality (the 2b gate). Off = byte-identical (the sort DCEs).
+    wave_b: bool,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -747,6 +754,7 @@ impl IsoFlat {
             size_w: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             size_hll: Hll::new(SIZE_HLL_P),
             size_sample: Mutex::new(Vec::new()),
+            wave_b: std::env::var("QUEENS_WAVE_B").as_deref() == Ok("1"),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -1459,6 +1467,43 @@ impl IsoFlat {
         );
     }
 
+    /// A'' Phase-2b-0 (`M_WAVE_B`): reorder `dst` (a copy of a node's filtered moves) so the descent
+    /// visits children in **TT-slot order** — the single-thread sorted-frontier wave. Empty / cheap
+    /// (`pc ≤ recurse_min`, resolved by dense/band/iso arms with no flat-TT probe) children key to 0 so
+    /// the **stable** sort keeps them first in move order (preserving the cheap-cut ordering); recurse
+    /// children (`pc > recurse_min`, the flat-TT probes) key to `1 + slot` and follow in slot order.
+    /// Verdict-preserving (reorder never changes the OR/AND value). Cold measurement path — the per-move
+    /// key build (`child_orient`/`lex_min8`/`d4_bits`/`hash128`) is the M_WAVE gather cost, irrelevant to
+    /// the node-count delta this isolates.
+    fn sort_moves_by_slot<const DK: u32>(
+        &self,
+        dst: &mut [u8],
+        avail: Bits,
+        att: &[[Bits; 8]],
+        orient: &[Bits; 8],
+    ) {
+        let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
+        let nslots = self.tt.capacity().0 as u128;
+        let mut keyed = [(0u64, 0u8); MAXV];
+        for (k, &sq) in dst.iter().enumerate() {
+            let a = att_for8(att, sq);
+            let child0 = avail.and_not(a[0]);
+            let key = if child0 == Bits::ZERO || child0.popcount() <= recurse_min {
+                0
+            } else {
+                let ckey = d4_bits(lex_min8(&child_orient(orient, a, child0)));
+                let (cr, _) = QueensTt::hash128(ckey);
+                1 + (((cr as u128).wrapping_mul(nslots) >> 64) as u64)
+            };
+            keyed[k] = (key, sq);
+        }
+        let n = dst.len();
+        keyed[..n].sort_by(|a, b| a.0.cmp(&b.0)); // stable ⇒ equal-key (cheap) children keep move order
+        for (slot, &(_, sq)) in keyed[..n].iter().enumerate() {
+            dst[slot] = sq;
+        }
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
@@ -1555,6 +1600,21 @@ impl IsoFlat {
         // child move list ⇒ byte-identical node set, and the child scans a shorter list.
         let mut buf = [MaybeUninit::<u8>::uninit(); MAXV];
         let moves = filter_moves(&mut buf, pmoves, avail);
+        // A'' Phase-2b-0 de-risk (`M_WAVE_B` only; DCEs to nothing on every other `MODE`). Descend the
+        // children in **TT-slot order** instead of move order — the single-thread sorted-frontier wave.
+        // `sorted` is a reordered copy of `moves`; the standard descent below runs over it. Empty/cheap
+        // (no flat-TT probe) children keep their move order first (preserving the cheap-cut ordering),
+        // recurse children follow sorted by slot. Verdict-preserving (order never changes the value);
+        // the node-count delta vs the move-order baseline is the move-ordering tax the wave pays.
+        let mut sorted = [0u8; MAXV];
+        let moves: &[u8] = if MODE == M_WAVE_B {
+            let n = moves.len();
+            sorted[..n].copy_from_slice(moves);
+            self.sort_moves_by_slot::<DK>(&mut sorted[..n], avail, att, orient);
+            &sorted[..n]
+        } else {
+            moves
+        };
         // A'' Phase-1 — ETC (enhanced transposition cutoff) + sorted-batch wave (`M_WAVE` only;
         // DCEs to nothing on every other `MODE`, so the control path is byte-identical). Every node
         // here is an OR node (a *losing* child = a winning move ⇒ this node wins). Before the
@@ -2644,6 +2704,8 @@ impl IsoFlat {
                     M_SEG
                 } else if self.hist {
                     M_HIST
+                } else if self.wave_b {
+                    M_WAVE_B
                 } else if self.wave {
                     M_WAVE
                 } else {
@@ -2658,6 +2720,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_WAVE_B => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_WAVE_B>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SEG => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SEG>(

@@ -215,14 +215,15 @@ with strictly complementary work — the structural property the work-stealing n
   dedup 27.1% · 62% same-row.** Gate **PASS** — even after the ETC cut the residual is wide + 27%-dedup-able +
   sorts to row-buffer locality. (Clean wave effect = the n=14 same-TT pair, dedup 31.7%→23.2%; the n=16 raw
   deltas are load-confounded, 12 GB vs 17 GB.)
-- **2b-0 — single-thread sorted-frontier wave (gated `QUEENS_WAVE_B`, byte-identical off) — THE DE-RISK GATE,
-  build FIRST.** Before any threading, prove the *mechanic* in one thread: in an offloaded prove-loss subtree,
-  materialize a pc-band frontier slice (via `wins_inc_iter`'s explicit stack), **sort by slot**, **dedup
-  adjacent**, then resolve the wave (probe sorted → hits resolve, misses expand → next band). This isolates
-  the **order-vs-cutoff tension** (below): measure node-count Δ vs DFS (the move-ordering loss), realized
-  locality (reuse the 2a slot-sort metric), and net cyc/node. **Kill if the move-ordering re-expansion >
-  the locality+dedup gain** (toward the parked-DDD wall) — fail cheap, no SPSC sunk. This is the riskiest
-  assumption; everything else (SPSC, idle producers) is mechanical once it's net-positive.
+- **2b-0 — slot-order descent (gated `M_WAVE_B`/`QUEENS_WAVE_B`) — ✅ DONE (2026-06-20--12): the move-ordering
+  tax is +13.3%.** Reorder each node's children into TT-slot order before the standard descent (the cheapest
+  in-solver isolation of the move-ordering tax; the benefit half — 62% row-hits / mlp_bench 5.7× — is already
+  measured and a DFS-reorder doesn't realize it). n=14 deterministic: **14,612,123 nodes vs 12,896,443
+  move-order = +13.3%**, verdict SECOND, production byte-identical. **Napkin: the +13.3% tax × faster-warm
+  probes ≈ −6% cyc — i.e. the sorted-LOCALITY half barely beats its own tax; the order-independent DEDUP half
+  ≈ −8% cyc with no tax.** ⇒ the clean prize is **dedup, not the wave**. Decision point for the user (recorded
+  in the handoff 2b-0 note): (a) dedup-first [recommended], (b) build the SPSC anyway, (c) bank sorted-locality
+  as marginal + keep M_WAVE. `M_WAVE_B` stays gated-off (substrate + the measured tax).
 - **2b-1 — producer/consumer split (gated, after 2b-0 is net-positive).** Move the gather/sort/dedup/pack to
   idle-core producers + a bounded SPSC ring; the hot consumer streams chunks. Reuse the M_WAVE gather + the
   `mlp_bench` sorted-stream loop. Start ONE producer + ONE consumer, then scale (Phase-0a: ~4 consumers

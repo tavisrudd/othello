@@ -167,6 +167,13 @@ Fast proxy = single-thread n=14 interleaved (deterministic). **Never `tmux send-
       slot-sort** (vs ~0% random). All three gate conditions pass ⇒ **build 2b** (the SPSC producer/consumer
       pipeline). See the session --12 note + the [proposal](../proposal-2026-06-20-sorted-frontier-wave.md)
       Status/Phase-2 (DONE/GO).
+- [x] **Phase 2b-0 de-risk (gated `M_WAVE_B`/`QUEENS_WAVE_B`) — slot-order descent costs +13.3% nodes
+      (2026-06-20--12).** The single-thread slot-order descent (the move-ordering tax half of the sorted wave;
+      benefit half already measured) = n=14 deterministic **14,612,123 nodes vs 12,896,443 move-order baseline
+      = +13.3%**, verdict SECOND, control byte-identical. **The sorted-LOCALITY half is taxed +13.3%
+      (≈cancels its throughput gain on napkin); the DEDUP half is the order-independent clean win.** ⇒
+      **decide 2b direction with the user** (dedup-first vs full sorted-wave pipeline) — do NOT auto-build the
+      SPSC. See the 2b-0 note.
 
 ## Handoff Notes
 
@@ -250,9 +257,34 @@ SPSC is mechanical. This is the "characterize before you build the scheduler" le
 sink the pipeline before 2b-0. Multi-session; **decide with the user** (the architecture locks in future work).
 Tooling banked: `QUEENS_SIZE=1` (pre-cut) / `QUEENS_SIZE=2` (post-cut residual), both gated/off in prod.
 
+**2b-0 BUILT + measured (gated `M_WAVE_B`/`QUEENS_WAVE_B`):** a slot-order descent — reorder each node's
+children into TT-slot order before the standard descent (empty/cheap children keep move order first via a stable
+sort; recurse children follow by slot). Verdict-preserving; production byte-identical (the sort DCEs; control
+n=14 = 11,747,330). This isolates the **move-ordering tax** of slot access (the benefit half — 62% row-hits /
+mlp_bench 5.7× — is already measured; a DFS reorder doesn't realize it, only its cost).
+
+| n=14 single-thread, deterministic | nodes | Δ |
+|---|---|---|
+| WAVE-off move-order baseline (`QUEENS_WAVE=0`) | 12,896,443 | — |
+| **slot-order (`QUEENS_WAVE_B=1`)** | **14,612,123** | **+13.3%** (verdict SECOND ✓) |
+
+**Finding (flips the 2b recommendation):** the sorted-**locality** half costs **+13.3% nodes** — significant
+(work-stealing died at +8.7%). Napkin: that tax × faster-warm-probes (probe ≈ 30% of cyc, 176→~60 sorted) ≈
+**−6% cyc** — i.e. the locality gain barely beats its own move-ordering tax. The **dedup** half (−27% duplicate
+probes, *order-independent*, **no** tax) napkins to ≈ **−8% cyc** on its own. **⇒ the clean prize is dedup, not
+the sorted wave.** But dedup and the sort are coupled (free duplicate-collapse needs a sorted/batched frontier),
+so a tax-free dedup needs its own mechanism (probe-memo / batched move-order dedup). **DECISION POINT for the
+user:** (a) **dedup-first** — pursue the order-independent −27% without the slot-order tax (safer, ≈−8% napkin);
+(b) **full sorted-wave pipeline** — build the SPSC anyway, betting the realized sorted-stream throughput (not
+captured by the DFS-reorder proxy) beats the +13.3% tax; or (c) **bank sorted-locality as marginal** and close
+the wave family, keeping M_WAVE. Recommend (a). n=16 tax confirmation (interleaved A/B) deferred — the n=14
+deterministic +13.3% is the clean signal. `M_WAVE_B` stays gated-off (substrate + the measured tax).
+
 **Method note:** the global-tap reframe is the "fail-cheap" move — it answered the gate at low build cost / zero
 solver risk (like probe #1), without the heavier per-subtree-HLL instrumentation. If 2a had failed (narrow /
-low-dedup), that would have closed the sorted-stream family cheaply.
+low-dedup), that would have closed the sorted-stream family cheaply. And 2b-0 (the +13.3% tax) is the same move
+applied to the pipeline: a one-flag gated reorder + an n=14 run caught the move-ordering tax **before** the heavy
+SPSC build — exactly the "characterize before you build the scheduler" lesson.
 
 ### Session --11 (2026-06-20, `mi`): M_WAVE→default, probe #1 kills item A, getK-reshape negative, Approach B scoped
 
