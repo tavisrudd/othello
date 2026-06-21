@@ -101,7 +101,8 @@
 > |---|---|---|
 > | getK micro-opt (ALU/SIMD), batch-puts | **DEAD** (Opt1 was the win; rest OoO-hidden/load-bound; store-stall 0.08%) | — |
 > | nimber / module / component decomposition | **DEAD (n=16 evidence)** | closed |
-> | move ordering (banded-countermove) | **LIVE — building (worktree `killer-ord`, n=16 node A/B in flight)** | keep iff nodes ↓; +94% danger |
+> | move ordering — banded-countermove/killer | **MEASURED-NEGATIVE (n=16 A/B), discarded** | always-promote +13.3% nodes (conflation); degree-gated −0.7% nodes but +3.6% wall (overhead) |
+> | move ordering — tail-only 1-ply lookahead | untried (the residual ordering angle) | headroom real but NOT recency-capturable ⇒ needs actual lookahead, costly |
 > | exact-key prefetch (memory, prefetch-only, MBA/CAT) | **most promising memory lever** (ρ=8% gives budget) | gated by `M_COLD` cold% + lookahead-distance |
 > | speculative-SOLVE pre-warm | dominated by prefetch | same `M_COLD` gate |
 > | MLP-batched probes / sorted-wave | quantified (1.85× vs 5.7×), order-tax-bound | only if ordering tax paid anyway |
