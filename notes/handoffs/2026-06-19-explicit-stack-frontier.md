@@ -52,14 +52,27 @@
 >   identities (odd-K1 XOR1, twin-pair dedup) are already measured wash/negative. Plus queen-geometry sparsity.
 > - **[deep-root-ordering](../proposal-2026-06-21-deep-root-ordering.md)** (move-ordering enhancements) — RUNNING at handoff.
 >
-> **★ BOTH decomposition subs CONVERGED on the same cheap de-risk → DO THIS FIRST NEXT SESSION:** a gated monomorphised
-> `count`-style tap (the `M_SIZE`/`M_PROF` pattern) measuring, over the **pc 9–16 getK leaf population in the giant-root
-> tail** (NOT the flat-TT recurse population the prior `module_profile` used — wrong, denser population), the fraction
-> whose connected components are **all ≤8** (table-resolvable, no recursion) and the `->≤(k-1)` fraction. **Kill-criterion:
-> nimber lever is alive only if that fraction ≥ ~5%; otherwise both decomposition levers close.** Component split = bitmask
-> BFS over the ≤16 `u16` `adj` rows `extract_adj` already produces (pre-filter by the free `iso` mask). The ordering sub
-> will likely prescribe a sibling **first-losing-child-rank tap** (is cutoff already at rank 0–1 → ordering near-optimal,
-> or spread → headroom). Build both taps in one instrumentation pass; they gate the two surviving big levers.
+> **★ BOTH TAPS BUILT + MEASURED AT n=16 (committed gated/byte-identical: `M_DECPROBE`/`QUEENS_DECPROBE`,
+> `M_RANK`/`QUEENS_RANK`). The verdicts redirect the whole next phase:**
+> - **NIMBER DECOMPOSITION = DEAD (n=16 confirmed).** The pc 9–16 getK conflict graphs are overwhelmingly ONE connected
+>   component: mean #components 1.12 @pc9 → **1.003 @pc16**; **`%all-components-≤8` = 0.00% across pc 13–16** (~690M of
+>   the 1.5B getK nodes — all the deep weight); even `%all-≤(k−1)` is ≤1.7% @pc13 → 0.29% @pc16. The only decomposability
+>   (pc9: 11.8%) is the cheapest band where getK already bottoms out. Sprague-Grundy XOR has nothing to bite on. Both
+>   decomposition subs predicted it; n=16 *strengthens* the kill (more decomposable at low pc than n=14, still 0% deep).
+>   **⇒ the targeted-nimber + module-nimber + grouped-frontier-DDD decomposition cluster is CLOSED with n=16 evidence.**
+> - **★ MOVE ORDERING = LIVE (has real HEADROOM) — THIS IS THE NEXT LEVER.** The descent OR-nodes are all pc≥17 (the
+>   recurse spine; getK resolves ≤16). Deep node-weight bands **pc 17–22 (255M nodes): ETC ~0% · rank0 26% · rank1 19% ·
+>   rank≥2 ~50% · no-cut ~5%** (`ETC+r0+r1 ≈ 45%`). **Half the deep nodes scan PAST rank 1 before the first cutoff**, and
+>   ETC contributes ≈0% there (deep nodes have too few recurse children for the ≥2-child ETC batch) — so the cut is
+>   essentially all move-order-driven and a better ordering that pulls the rank≥2 winners forward cuts measurably more
+>   nodes (handoff: "move ordering worth ~2×"). **⇒ NEXT: build a deep-tail ordering enhancement and interleaved-A/B it.**
+>   Candidates ([deep-root-ordering proposal](../proposal-2026-06-21-deep-root-ordering.md), priority): banded per-worker
+>   **countermove** (avoids the prior global-history +130% cross-ply conflation), tail-only **1-ply reply-degree lookahead**
+>   (gated when ≤2 roots remain via the existing `deep_busy`), secondary tiebreak keys (likely wash). **DEAD forms (don't
+>   rebuild): global per-square history (+130% n=14), effective-degree (decays to ~0 / reverses +9–12% parallel — though
+>   the current `M_ORD` IS effective-degree and won because the W_K substrate moved the lever; "levers compound").**
+>   Use the committed `M_RANK` tap to A/B the rank-shift of any candidate. **Mandatory: an interleaved n=16 A/B that cuts
+>   NODES (not just wall) — the +94%/+130% danger zone; n=14/single runs lie.**
 >
 > **Branch state:** keepers (Opt1 + ETC-reuse) are on **main**; branch `queens-compact-assoc-tt` carries them too + the
 > dead assoc-TT/sidecar experiments (gated off) + the leaderboard/handoff doc updates. New work can fork fresh off main.
