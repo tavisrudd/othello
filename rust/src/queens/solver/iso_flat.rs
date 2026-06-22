@@ -3019,9 +3019,17 @@ impl IsoFlat {
             // reached gets the full overlap; later siblings are evicted by the first's subtree and
             // re-prefetched in the descent (free if still warm). Pure cache hint ⇒ byte-identical node
             // set. `pf_deep` off ⇒ this runs only inside the `nw >= 2` ETC batch exactly as before.
-            if self.pf_deep || nw >= 2 {
+            if nw >= 2 {
                 for &r in wr.iter().take(nw) {
-                    self.tt.prefetch_h(r); // every prefetch in flight before any get
+                    self.tt.prefetch_h(r); // T0: probed immediately by the ETC loop below
+                }
+            } else if self.pf_deep {
+                // Long-distance gather-time prefetch (nw < 2): the lone recurse child sorts LAST in
+                // the descent, after the cheap-getK children stream the W8 arena — an L1 (T0) line
+                // would be evicted before the recurse arm, so warm it to L2 (T1), which survives the
+                // few-hundred-line cheap scan. Turns its ~165-cyc cold DRAM probe into an ~L2 hit.
+                for &r in wr.iter().take(nw) {
+                    self.tt.prefetch_h_t1(r);
                 }
             }
             // ETC pays only with ≥2 recurse children (a single recurse child the descent would probe

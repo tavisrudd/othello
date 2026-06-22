@@ -1135,6 +1135,23 @@ impl QueensTt {
         let _ = ptr;
     }
 
+    /// As [`prefetch_h`](Self::prefetch_h) but with an **L2** hint (`_MM_HINT_T1`) instead of L1.
+    /// Used for the long-distance gather-time prefetch of recurse children, which sort *last* in the
+    /// degree-ordered descent: the intervening cheap-getK children stream the W8 arena and would
+    /// evict an L1 (T0) line before the recurse arm is reached, but the working set fits L2, so a T1
+    /// line survives — turning the recurse child's ~165-cyc cold DRAM probe into an ~L2 hit.
+    #[inline]
+    pub fn prefetch_h_t1(&self, route: u64) {
+        let ptr = self.slot(route).as_ptr();
+        #[cfg(target_arch = "x86_64")]
+        unsafe {
+            // SAFETY: as in `prefetch`.
+            std::arch::x86_64::_mm_prefetch::<{ std::arch::x86_64::_MM_HINT_T1 }>(ptr as *const i8);
+        }
+        #[cfg(not(target_arch = "x86_64"))]
+        let _ = ptr;
+    }
+
     /// Prefetch the slot `key` will land in, so the demand `get` that follows finds
     /// it warm -- overlapping the random-probe DRAM round-trip with the work in
     /// between (Session 5, L1 cluster). x86_64 only; a no-op elsewhere.
