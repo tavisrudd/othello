@@ -11,6 +11,53 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ --18 (2026-06-21, goal: "n=16 2os" / sub-20s search) — W17 dense layer + getK degree-ordering = −13% wall.
+
+> **Branch `queens-sub20-wk`** (off `queens-sub20-wk`←`queens-compact-assoc-tt`; NOT on main yet — decide promote with user).
+> Best clean A/B (quiet box, 12 GB): **FAST = ~25s mean / 24.5s best vs ~29.8s baseline (−13% wall)**, verdict SECOND
+> every round, all gates green (lineage, n=12 distinct 1,060,823, n=14 ≈29.2M).
+>
+> **★ LANDED (gated; `QUEENS_FAST=1` = the umbrella toggle = W17 + getK-ordering):**
+> - **W17 dense layer** (`QUEENS_W17=1`; generalized to **W17..W20**, `QUEENS_WK=9..20`, `QUEENS_HIK=0/1`=K17/K20).
+>   3-word (192-bit) labelled code above the u128 K=16 ceiling; `get17..get20` + `get_dyn_wide`; 2^K induced masks
+>   built at runtime. Resolves pc==K nodes as getK leaves (no cold entry probe). Correctness: `direct_w17..20_matches_scalar`.
+> - **getK degree-ordering** (`QUEENS_GETK_ORD=1`): get12..get20 sweep children highest-degree-first (smallest child =
+>   most-forcing = earliest cutoff), branchless counting sort. **get9/10/11 stay label-order** (their W≤8-lookup children
+>   are too cheap — the sort overhead dominated: ordering get9 was ~7% of its cycles, 11.65%→4.78% reverting it).
+> - **getK child-code int right-sizing** (get13..16): `pext128` (u64) for the ≤11-vertex child majority, `pext128_wide`
+>   (u128, 128-bit shift) only for cpc≥12 (rare isolated-removal). ~−0.6% cyc/node. (User's "oversized ints" ask.)
+> - **TT unchecked slot access** (`TT::slot()` get_unchecked; fastrange `(route·len)>>64 < len` ⇒ bounds check provably
+>   dead). cyc/node-NEUTRAL (the predicted branch was free; its perf % was skid from the adjacent mulx/prefetch) — kept
+>   as a correct dead-code removal.
+>
+> **★ KEY RESULT — the WALL is capped at K=17 by WORK-CONSERVATION.** The W_K node cut is enormous and barely diminishing
+> (n=16 WK 16→20: **399.9M → 191.0M nodes, −52%**; n=14 2.71M→0.84M, −69%) but **wall is flat** — deeper getK does the
+> same combinatorial work, so cyc/node grows ~proportionally (HIK A/B K17 vs K20: nodes −35%, **cyc/node +60%, total cyc
+> +4%** ⇒ K20 SLOWER). K=17 is the wall sweet spot; W18-20 cut nodes (good for memory/TT, future cyc/node wins) not wall.
+> ETC re-confirmed at K=17 (M_ORD vs M_ORD_W A/B: ETC −13.7% nodes / +3.6% cyc/node / **−10.7% total cyc** — still pays,
+> far below the K=12-era +14.6%). FAST's win is the −20% node cut at +16% cyc/node net −13% wall.
+>
+> **MEASURED-NEGATIVE / instructive (the cyc/node floor is real — "math cheaper than mem"):**
+> - **getK memo DEAD (+13.4% cyc/node).** Thread-local exact-fp memo over get12..16 to collapse the recursion's factorial
+>   path-redundancy. α-β cutoffs already prune most of it, and the memo's random L2/L3 probe is slower than recomputing
+>   the pext/popcnt — the same reason W_K is memo-less by design. Reverted.
+> - **prefetch DEAD (wash).** pf_deep gather-time T0 prefetch +0.0%; the L2-distance (T1) twist for the nw<2 lone recurse
+>   child also −0.3% (gated, kept). The recurse children sort last; the cheap-getK arena scan evicts the line, and the
+>   descent often cuts before the recurse arm ⇒ wasted prefetch. The prefetch memory lever is dead even with cache-level tuning.
+> - **getK micro-opt EXHAUSTED (profile-confirmed).** perf annotate: get9 cost is inherent (`popcnt` for cpc, W8-arena
+>   load latency via `ret`/`mov`/`bt`, `pext`); evaluators near floor; no removable instructions. The handoff's
+>   "load-latency-bound, near floor" holds, now from a fresh angle.
+>
+> **⇒ NEXT (sub-20s still open — cyc/node is the wall; node-cutting work-conserves):** the only un-killed levers are
+> (1) the **SMT-sibling prefetch helper** (run the path ahead, prefetch the cold pc≥18 entry probes — heavy/multi-session;
+> the original PREFETCH task's real prize), (2) **carry-adjacency-down** in getK (avoid re-`extract_adj` per level —
+> uncertain, the relabel ≈ extract cost), (3) the parked **8 GiB TT default** (`MAX_TT_BITS=30`, committed on
+> `queens-compact-assoc-tt`) + **inline/survivable PV** (unlocks <8 GB; search tolerates a 2 GB TT at only +8.5% nodes,
+> PV is the blocker). **Decision for user: promote FAST to the iso-dense default** (dense_k 16→17 + ord_getk on; reversible
+> via `QUEENS_DENSE_K=16 QUEENS_GETK_ORD=0`) — it's the clean −13% win, gate-green. Also on the branch: `M_HITKEY` capture
+> tap + `scripts/hitkey_study.py`/`hitkey_compare.py` (the pc≥17 hit-structure study: hits predictable by pc, the pc 35-78
+> "shoulder" 3-12% vs cold-bulk 0.1%; recurrence shallow+broad; PV is cold/off the transposition path).
+
 ## ⇒ NEXT SESSION = PREFETCH (user-chosen, --17 end) — hide the mandatory-but-cold pc≥17 probe latency.
 
 > **★ START HERE NEXT SESSION (user, --17 end): the PREFETCH lever.** Everything else on the deep root is killed with
