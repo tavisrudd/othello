@@ -1089,20 +1089,17 @@ impl IsoFlat {
         // code-build the deep getK layers are cheap enough that raising the ceiling pays the whole
         // way up — n=16 node count is TT-independent (the cut is inherent, not eviction-driven) and
         // wall drops monotonically K=12→16 (16 GB single-run: 49.5s→34.4s = −30.6%). `QUEENS_DENSE_K`
-        // (9..=17) overrides — lower it to trade per-node getK cost back for more recurse expansion.
-        // K=17 (the new lever): the 136-bit code spans 3 words (above the u128 K=16 ceiling) and
-        // resolves pc==17 nodes (~21% of the n=16 node set, M_HITKEY-measured) directly as getK
-        // leaves instead of recurse-spine entry probes. pc==17 is 99.8% COLD (not transposition-
-        // saturated, contra the earlier table-free get17 read), so eliminating its cold DRAM probe
-        // is the bet. Default stays 16 until the K=17 A/B confirms; `QUEENS_DENSE_K=17` enables.
-        s.dense_k = env_u32("QUEENS_DENSE_K", 16).clamp(9, 20);
-        // Clean A/B toggles (QUEENS_DENSE_K=0/1 would both clamp to 9): QUEENS_W17=1 forces K=17;
-        // QUEENS_FAST=1 forces the full stack (K≥17 + getK-ordering, the getK-ordering half is read
-        // in DenseW8::build). QUEENS_WK pins the wide ceiling directly (9..20) and WINS over both
-        // (so a sweep can fix ordering on via QUEENS_GETK_ORD/FAST and vary the ceiling via WK).
-        if matches!(std::env::var("QUEENS_W17").as_deref(), Ok("1"))
-            || matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("1"))
-        {
+        // ★ DEFAULT K=17 (--18): the W17 dense layer (136-bit 3-word labelled code, above the u128
+        // K=16 ceiling) resolves pc==17 nodes (~21% of the n=16 node set, M_HITKEY-measured) directly
+        // as getK leaves instead of cold recurse-spine entry probes (pc==17 is 99.8% COLD). With the
+        // degree-ordered getK sweep (`DenseW8::ord_getk`, default-on) this is **−13% wall** vs the old
+        // K=16 default (4-round n=16 A/B). K=17 is the wall sweet spot — W18-20 cut nodes hugely but
+        // work-conserve (cyc/node grows ~proportionally; HIK A/B K20 = +4% total cyc). `QUEENS_DENSE_K`
+        // (9..=20) overrides the ceiling. **`QUEENS_FAST=0` reverts the whole stack to the old K=16 +
+        // no-getK-ordering default** (the A/B control). Sweep knobs: `QUEENS_WK` pins the ceiling
+        // (wins), `QUEENS_HIK`=0/1 picks K17/K20, `QUEENS_W17`=1 forces ≥17.
+        s.dense_k = env_u32("QUEENS_DENSE_K", 17).clamp(9, 20);
+        if matches!(std::env::var("QUEENS_W17").as_deref(), Ok("1")) {
             s.dense_k = s.dense_k.max(17);
         }
         if let Some(k) = std::env::var("QUEENS_WK")
@@ -1115,6 +1112,11 @@ impl IsoFlat {
         // =0 → K=17. Lets the canonical harness flip K17↔K20 on one binary.
         if let Ok(v) = std::env::var("QUEENS_HIK") {
             s.dense_k = if v == "1" { 20 } else { 17 };
+        }
+        // `QUEENS_FAST=0` reverts the ceiling to the old K=16 default (the A/B control); wins over
+        // the default and the W17/HIK forces (the getK-ordering half is reverted in `DenseW8::build`).
+        if matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0")) {
+            s.dense_k = 16;
         }
         if s.dense_k >= 17 {
             // Pre-build the wide (3-word) induced-mask tables up to the ceiling (~ms..tens-of-ms,

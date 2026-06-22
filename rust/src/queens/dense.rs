@@ -654,9 +654,12 @@ impl DenseW8 {
         });
         DenseW8 {
             arena,
-            ord_getk: matches!(std::env::var("QUEENS_GETK_ORD").as_deref(), Ok("1"))
-                || matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("1"))
-                || std::env::var("QUEENS_HIK").is_ok(),
+            // ★ Default-ON (--18, promoted): the degree-ordered getK sweep is part of the FAST default.
+            // Disabled by `QUEENS_GETK_ORD=0` or the whole-stack revert `QUEENS_FAST=0` (the A/B control).
+            // Only matters for iso-dense (dense_k≥12 reaches the ordered get12+ layers); iso-window/
+            // iso-flat never call get12+ so they are byte-identical regardless.
+            ord_getk: !matches!(std::env::var("QUEENS_GETK_ORD").as_deref(), Ok("0"))
+                && !matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0")),
         }
     }
 
