@@ -217,6 +217,10 @@ struct RankAcc {
     nodes: [u64; MAXPC],   // expanded OR-nodes seen per pc (the descent-loop ones)
     etc_cut: [u64; MAXPC], // cut by the ETC pre-pass (before the descent)
     no_cut: [u64; MAXPC],  // reached the end with no cut (a LOSS node)
+    // Sum of degrees (= `moves.len()`, the available-move count) over the no-cut LOSS nodes — a LOSS
+    // node examines *every* child, so this is the children-examined total they contribute to `E`
+    // (the `degree*nocut` term). Per pc; only the no-cut nodes bump it.
+    no_cut_deg: [u64; MAXPC],
     // descent rank distribution: rank_dist[pc][r] = #nodes whose first descent cutoff was at rank r;
     // r in 0..RANK_BUCKETS, the last bucket absorbs rank ≥ RANK_BUCKETS-1.
     rank_dist: [[u64; RANK_BUCKETS]; MAXPC],
@@ -291,6 +295,7 @@ thread_local! {
             nodes: [0; MAXPC],
             etc_cut: [0; MAXPC],
             no_cut: [0; MAXPC],
+            no_cut_deg: [0; MAXPC],
             rank_dist: [[0; RANK_BUCKETS]; MAXPC],
         })
     };
@@ -942,7 +947,8 @@ pub struct IsoFlat {
     rank_nodes: Box<[AtomicU64]>,
     rank_etc: Box<[AtomicU64]>,
     rank_nocut: Box<[AtomicU64]>,
-    rank_dist: Box<[AtomicU64]>, // laid out [pc * RANK_BUCKETS + r]
+    rank_nocut_deg: Box<[AtomicU64]>, // Σ degree over no-cut LOSS nodes per pc (the E `degree*nocut` term)
+    rank_dist: Box<[AtomicU64]>,      // laid out [pc * RANK_BUCKETS + r]
     /// `QUEENS_COLD=1`: selects `const MODE = M_COLD` (= M_ORD_W + a cold tap on the entry-probe
     /// hit/miss per pc — gates the memory-side prefetch/pre-warm lever family). Per-worker hit/miss
     /// arrays merged from each worker's [`COLD_ACC`] at drain; report printed post-solve, isolating
@@ -1291,6 +1297,7 @@ impl IsoFlat {
             rank_nodes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_etc: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_nocut: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            rank_nocut_deg: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_dist: (0..MAXPC * RANK_BUCKETS)
                 .map(|_| AtomicU64::new(0))
                 .collect(),
@@ -2156,6 +2163,7 @@ impl IsoFlat {
                 self.rank_nodes[pc].fetch_add(a.nodes[pc], Ordering::Relaxed);
                 self.rank_etc[pc].fetch_add(a.etc_cut[pc], Ordering::Relaxed);
                 self.rank_nocut[pc].fetch_add(a.no_cut[pc], Ordering::Relaxed);
+                self.rank_nocut_deg[pc].fetch_add(a.no_cut_deg[pc], Ordering::Relaxed);
                 for r in 0..RANK_BUCKETS {
                     if a.rank_dist[pc][r] != 0 {
                         self.rank_dist[pc * RANK_BUCKETS + r]
@@ -2166,6 +2174,7 @@ impl IsoFlat {
                 a.nodes[pc] = 0;
                 a.etc_cut[pc] = 0;
                 a.no_cut[pc] = 0;
+                a.no_cut_deg[pc] = 0;
             }
         });
     }
@@ -2304,17 +2313,49 @@ impl IsoFlat {
     /// near-exhausted; a fat rank≥2 tail means a better order would still cut earlier.
     fn print_rank_report(&self) {
         let ld = |b: &[AtomicU64], i: usize| b[i].load(Ordering::Relaxed);
-        let total: u64 = (9..=40).map(|pc| ld(&self.rank_nodes, pc)).sum();
+        let total: u64 = (0..MAXPC).map(|pc| ld(&self.rank_nodes, pc)).sum();
         println!(
             "\n  first-losing-child cutoff rank (QUEENS_RANK) — {} expanded OR-nodes",
             commas(total)
         );
+        // E = mean children examined / node (the actual ordering cost). `loss` = the *avoidable* part:
+        // E − E_perfect, where a perfect order cuts every winning node at its first child (rank 0) and a
+        // LOSS (nocut) node still full-scans. The unavoidable ETC/nocut terms cancel, so loss collapses
+        // to the mean 0-based cutoff rank (0·r0 + 1·r1 + 2·r2 + Σ_{r≥3} r·n_r). loss/node averages over
+        // every node; loss/cut over just the descent-cut nodes (extra children before the losing one);
+        // loss_mass = nodes·loss/node = the band's total avoidable child-exams — the prioritization metric.
         println!(
-            "    {:>3} {:>15} {:>7} {:>7} {:>7} {:>8} {:>8}   (% of node's outcomes)",
-            "pc", "nodes", "ETC%", "r0%", "r1%", "r≥2%", "nocut%"
+            "    {:>3} {:>15} {:>7} {:>7} {:>7} {:>7} {:>8} {:>8} {:>9} {:>10} {:>9} {:>16}",
+            "pc",
+            "nodes",
+            "ETC%",
+            "r0%",
+            "r1%",
+            "r2%",
+            "r≥3%",
+            "nocut%",
+            "E/node",
+            "loss/node",
+            "loss/cut",
+            "loss_mass",
         );
-        // Aggregate the high-pc (recurse-spine) bands and the getK bands; print every populated pc.
-        let mut grand = [0u64; 5]; // etc, r0, r1, rge2, nocut
+        // Grand accumulators. The outcome counts (etc/r0/r1/r2/rge3/nocut) partition the nodes —
+        // each expanded OR-node lands in exactly one. `e_total`/`examined_ge3`/`nocut_deg` feed E:
+        //   E = 0·ETC + 1·r0 + 2·r1 + 3·r2 + avg(r≥3)·r≥3 + avg(degree)·nocut   (children examined)
+        // A descent cut at 0-based rank r means children 0..=r were examined ⇒ r+1 children; a LOSS
+        // (no-cut) node examines its full degree; an ETC pre-pass cut examines none in the descent.
+        let mut g_nodes = 0u64;
+        let mut g_etc = 0u64;
+        let mut g_r0 = 0u64;
+        let mut g_r1 = 0u64;
+        let mut g_r2 = 0u64;
+        let mut g_rge3 = 0u64;
+        let mut g_nocut = 0u64;
+        let mut g_nocut_deg = 0u64; // Σ degree over no-cut nodes (the degree·nocut term)
+        let mut g_examined_ge3 = 0u64; // Σ (r+1)·count over r≥3 (children examined by r≥3 nodes)
+        let mut g_e_total = 0u64; // grand total children examined (the E numerator)
+        let mut g_descent_cuts = 0u64; // nodes cut during the descent (r0+r1+r2+…) — the orderable population
+        let mut g_loss = 0u64; // Σ 0-based cutoff rank = total avoidable child-exams (the loss mass)
         for pc in 0..MAXPC {
             let n = ld(&self.rank_nodes, pc);
             if n == 0 {
@@ -2323,38 +2364,122 @@ impl IsoFlat {
             let nf = n as f64;
             let etc = ld(&self.rank_etc, pc);
             let nocut = ld(&self.rank_nocut, pc);
+            let nocut_deg = ld(&self.rank_nocut_deg, pc);
             let r0 = ld(&self.rank_dist, pc * RANK_BUCKETS);
             let r1 = ld(&self.rank_dist, pc * RANK_BUCKETS + 1);
-            let rge2: u64 = (2..RANK_BUCKETS)
+            let r2 = ld(&self.rank_dist, pc * RANK_BUCKETS + 2);
+            let rge3: u64 = (3..RANK_BUCKETS)
                 .map(|r| ld(&self.rank_dist, pc * RANK_BUCKETS + r))
                 .sum();
-            grand[0] += etc;
-            grand[1] += r0;
-            grand[2] += r1;
-            grand[3] += rge2;
-            grand[4] += nocut;
+            // Children examined in the descent: Σ (r+1)·count[r] over every rank bucket. (The last
+            // bucket caps at RANK_BUCKETS-1, so a rank ≥ that tail slightly under-counts — negligible.)
+            let descent_examined: u64 = (0..RANK_BUCKETS)
+                .map(|r| (r as u64 + 1) * ld(&self.rank_dist, pc * RANK_BUCKETS + r))
+                .sum();
+            let examined_ge3: u64 = (3..RANK_BUCKETS)
+                .map(|r| (r as u64 + 1) * ld(&self.rank_dist, pc * RANK_BUCKETS + r))
+                .sum();
+            let e_total = descent_examined + nocut_deg; // ETC contributes 0
+                                                        // Descent cuts = the winning nodes a perfect order could shortcut to rank 0; the avoidable
+                                                        // loss is every child examined past that first one = descent_examined − descent_cuts = Σ r·n_r.
+            let descent_cuts = r0 + r1 + r2 + rge3;
+            let loss = descent_examined - descent_cuts;
+            g_nodes += n;
+            g_etc += etc;
+            g_r0 += r0;
+            g_r1 += r1;
+            g_r2 += r2;
+            g_rge3 += rge3;
+            g_nocut += nocut;
+            g_nocut_deg += nocut_deg;
+            g_examined_ge3 += examined_ge3;
+            g_e_total += e_total;
+            g_descent_cuts += descent_cuts;
+            g_loss += loss;
+            let loss_per_cut = if descent_cuts > 0 {
+                loss as f64 / descent_cuts as f64
+            } else {
+                0.0
+            };
             println!(
-                "    {pc:>3} {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}%",
+                "    {pc:>3} {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}% {:>9.2} {:>10.3} {:>9.2} {:>16}",
                 commas(n),
                 100.0 * etc as f64 / nf,
                 100.0 * r0 as f64 / nf,
                 100.0 * r1 as f64 / nf,
-                100.0 * rge2 as f64 / nf,
+                100.0 * r2 as f64 / nf,
+                100.0 * rge3 as f64 / nf,
                 100.0 * nocut as f64 / nf,
+                e_total as f64 / nf,
+                loss as f64 / nf,
+                loss_per_cut,
+                commas(loss),
             );
         }
-        let gtot: f64 = grand.iter().sum::<u64>() as f64;
-        if gtot > 0.0 {
-            let cut_le1 = grand[0] + grand[1] + grand[2]; // ETC + r0 + r1
+        if g_nodes > 0 {
+            let gtot = g_nodes as f64;
+            let cut_le1 = g_etc + g_r0 + g_r1; // ETC + r0 + r1
+            let g_loss_per_cut = if g_descent_cuts > 0 {
+                g_loss as f64 / g_descent_cuts as f64
+            } else {
+                0.0
+            };
             println!(
-                "    ALL {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}%   ETC+r0+r1 = {:.1}% of all",
-                commas(grand.iter().sum::<u64>()),
-                100.0 * grand[0] as f64 / gtot,
-                100.0 * grand[1] as f64 / gtot,
-                100.0 * grand[2] as f64 / gtot,
-                100.0 * grand[3] as f64 / gtot,
-                100.0 * grand[4] as f64 / gtot,
-                100.0 * cut_le1 as f64 / gtot,
+                "    ALL {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}% {:>9.2} {:>10.3} {:>9.2} {:>16}",
+                commas(g_nodes),
+                100.0 * g_etc as f64 / gtot,
+                100.0 * g_r0 as f64 / gtot,
+                100.0 * g_r1 as f64 / gtot,
+                100.0 * g_r2 as f64 / gtot,
+                100.0 * g_rge3 as f64 / gtot,
+                100.0 * g_nocut as f64 / gtot,
+                g_e_total as f64 / gtot,
+                g_loss as f64 / gtot,
+                g_loss_per_cut,
+                commas(g_loss),
+            );
+            println!(
+                "    ETC+r0+r1 = {:.1}% of all",
+                100.0 * cut_le1 as f64 / gtot
+            );
+            // E breakdown: the children-examined budget the move ordering directly controls. Lower
+            // E/node ⇒ the first losing child is found sooner. avg(r≥3) and avg(degree) are the mean
+            // children examined by the r≥3 and no-cut buckets respectively.
+            let avg_ge3 = if g_rge3 > 0 {
+                g_examined_ge3 as f64 / g_rge3 as f64
+            } else {
+                0.0
+            };
+            let avg_deg = if g_nocut > 0 {
+                g_nocut_deg as f64 / g_nocut as f64
+            } else {
+                0.0
+            };
+            println!(
+                "    E = mean children examined / expanded OR-node = {:.3}  (lower = better ordering)",
+                g_e_total as f64 / gtot,
+            );
+            println!(
+                "      = [ 0·ETC + 1·r0 + 2·r1 + 3·r2 + {:.2}·(r≥3) + {:.2}·nocut ] / nodes  ⇒  {} children / {} nodes",
+                avg_ge3,
+                avg_deg,
+                commas(g_e_total),
+                commas(g_nodes),
+            );
+            // The avoidable-ordering ceiling: even a perfect first-losing-child oracle cannot remove more
+            // than this many child examinations (the nocut full-scans + the ETC/rank-0 cuts are fixed).
+            let pct = if g_e_total > 0 {
+                100.0 * g_loss as f64 / g_e_total as f64
+            } else {
+                0.0
+            };
+            println!(
+                "    ordering_loss = {} avoidable child-exams = {:.1}% of all {}  ⇒  max ordering win (loss/node {:.3}, loss/cut {:.2})",
+                commas(g_loss),
+                pct,
+                commas(g_e_total),
+                g_loss as f64 / gtot,
+                g_loss_per_cut,
             );
         }
     }
@@ -3223,8 +3348,14 @@ impl IsoFlat {
                 }
             }
             // M_RANK: the descent completed with no cut ⇒ a LOSS node (full scan, no winning move).
+            // A LOSS node examines *every* child, so it contributes its full degree (`moves.len()`,
+            // the available-move count) to `E`'s `degree*nocut` term.
             if MODE == M_RANK && !result {
-                RANK_ACC.with(|c| c.borrow_mut().no_cut[node_pc as usize] += 1);
+                RANK_ACC.with(|c| {
+                    let mut a = c.borrow_mut();
+                    a.no_cut[node_pc as usize] += 1;
+                    a.no_cut_deg[node_pc as usize] += moves.len() as u64;
+                });
             }
             // The fused loop already ran the descent; skip the shared descent + put below.
             if self.sidecar {
