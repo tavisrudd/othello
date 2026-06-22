@@ -69,60 +69,54 @@
 >   chain is exact end-to-end. (Curiosity: at pc 19, random scored +5 % over current — within the
 >   200-node sampling noise, but a hint that degree order has slack to beat.)
 >
-> **★ PROOF-OUT (n=16, 4400 nodes, cap 400/pc) — the CHEAP move-ordering lever is a WASH.** Every
-> cheap game-theoretic feature was scored against the live degree order:
+> **★ FEATURE TRIALS — cheap scalar features don't DISCRIMINATE the losing child** (n=16, cap 400–6000/pc):
 > | candidate (vs live degree order) | captured % of avoidable loss |
 > |---|---|
 > | oracle (ceiling) | 100.0 |
-> | `deg+asym` (180°-symmetry as the **tie-break**) | **+0.4** (noise: +3.6 % pc28, −3.1 % pc25) |
-> | `deg+iso` (isolated-vertex count tie-break) | −0.1 |
-> | `iso-cnt` (isolated count primary) | −1.5 |
-> | `symm` (symmetry primary), `even-pc`/`odd-pc` (parity primary) | −4.4 / −19.6 / −23.0 |
+> | `deg+asym` (180°-symmetry tie-break) | +0.4 (noise) |
+> | `deg+iso` (isolated-count tie-break) / `iso-cnt` (primary) | −0.1 / −1.5 |
+> | `symm` / `even-pc` / `odd-pc` (primary keys) | −4.4 / −19.6 / −23.0 |
 > | random / deg-desc (controls) | −45 / −107 |
 >
-> Parity and symmetry as PRIMARY keys actively hurt (they disrupt the strong degree signal); as a
-> tie-break (replacing the static q.order tie-break) the best is **+0.4 %, indistinguishable from
-> noise**; isolated-vertex count (the cleanest Grundy-parity proxy) adds nothing. **The dynamic degree
-> ordering is already at the cheap-feature ceiling.** WHY (principled, not just empirical): the loss is
-> NOT in degree *ties* (the tie-break barely moved it) — it's in nodes where the losing child has a
-> *higher* degree than the forcing decoys, so the signal that's left is the child's win/loss value
-> itself, and **predicting the first-losing-child cheaply ≈ predicting win/loss cheaply = the search**.
-> The cheap 1-ply correlate (an instant cutoff) is already deployed as ETC. So the 52.9 % avoidable
-> loss is REAL but not cheaply addressable.
+> pc18-only zoom (cap 6000): the best feature `symm` decays **+2.1 %(400) → +1.2 %(2000) → +0.5 %(6000)**,
+> *below* the `random` control's +0.7 % noise floor. So parity / 180°-symmetry / isolated-count carry
+> ~zero signal for *which* child is the losing one.
 >
-> **ZOOM ON pc18 (the top loss_mass band, user-directed "apply + measure only there").** A pc-gated
-> ordering could win even if it washes elsewhere, so pc18 (51 M nodes, loss_mass 135 M) was scored
-> alone at growing sample size to kill the per-band noise: `symm` decayed **+2.1 % (cap 400) → +1.2 %
-> (2000) → +0.5 % (6000)** and `even-pc` was pure noise **+2.2 % → −2.0 % → 0.0 %**. At cap 6000 the
-> `random` control itself scored **+0.7 %** — i.e. the best feature (`symm` +0.5 %) sits *below* the
-> random noise floor. **No exploitable cheap signal at pc18 either**, confirming the wash at the single
-> best band. (And even a real +0.5 % of pc18's loss_mass ≈ 0.05 % of all child-exams — far under what
-> `asym`'s ~10×-the-current-key cost could ever repay.)
+> **★★ BUT the bounded-oracle decomposition (ChatGPT's diagnostic) FLIPS the verdict — the headroom is
+> CHEAP-REGION, not fundamental.** Instead of guessing features, measure the rank an oracle achieves
+> when constrained to reorder only within a degree window (`d* = min degree among losing children`;
+> `deg±k` oracle rank = #{children with degree < d*−k}). Consistent across pc 18 AND pc 22–24:
+> | oracle | pc18 | pc22 | pc23 | pc24 |
+> |---|---|---|---|---|
+> | `same-deg` (k=0, tie-break only) | 31.4 % | 30.8 % | 31.7 % | 29.8 % |
+> | `deg±1` | 72.8 % | 71.5 % | 70.6 % | 69.7 % |
+> | `deg±2` | 91.2 % | 89.9 % | 88.8 % | 88.0 % |
+> | full | 100 % | — | — | — |
 >
-> **⇒ NEXT (the cheap lever is closed; remaining angles are gated by net-not-gross):**
-> - **Untested, expensive:** Tier-2/3 features (component/module decomposition, shallow grandchild
->   lookahead) or a learned predictor. The handoff history says decomposition orderings WASH and the
->   per-node cost bar is steep (~1 popcount/child now), so these must clear
->   `loss_mass·child_exam_cost > added_cost/child·children` — unlikely but unproven. Use `ranklab` to
->   test ANY of them offline before touching the kernel (one `candidate_order` entry, no solver run).
-> - **The lever map after this:** ordering is near its cheap ceiling, prefetch/MLP is dead, W17/TT
->   capacity/TT-hits are not the bottleneck. The open levers are back to **node-count** (getK/W_K
->   exhausted at K=16/17; the parked **nimber-decomposition** node-count lever) and the **getK
->   evaluator ALU cost** (~44 % of cycles, near floor) — i.e. cut *work*, since the *order* of the work
->   is near-optimal.
-> - (Earlier NEXT, now answered by the proof-out — kept for the method:)
-> 1. **Feature-iterate in `ranklab`** on the pc 18–28 target. Tier-0/1 (verdict-free, cheap) features
->    first: child pc, removed-neighborhood size, attacked-count / row-col-diag occupancy deltas, ETC
->    availability. Labels (value / losing-child / cutoff-rank) must NOT leak into the predictor.
-> 2. **Score net, not gross:** the offline Δloss is upside; the per-child compute cost is downside, and
->    the current order is ~one popcount/child (near-free). A candidate must clear
->    `loss_mass_recovered · child_exam_cost  >  added_feature_cost/child · children`. (This is what
->    killed the degree-sort restructure [WASH] and decomposition orderings before.) Add an op-cost
->    estimate column before promoting anything.
-> 3. **Promote a winner** into `sort_moves_by_degree` (gated A/B on n=16 per the harness) only if it
->    both captures meaningful loss_mass AND clears its own per-node cost.
-> - Stretch (only if 1–2 stall): a dedicated stratified `M_RANKLAB` capture (per-pc caps, smaller
->   dump) instead of reusing the 1/64-sampled QHK dump; for now the QHK dump is plenty.
+> So **~31 % of the avoidable loss is recoverable by a pure equal-degree tie-break, ~71 % within ±1
+> degree level, ~89 % within ±2** — only ~10 % needs a ≥3-level degree override. The loss IS mostly in
+> the degree ties / near-ties (this **corrects the earlier "not in ties" guess**). The blocker is NOT
+> that the headroom is fundamental — it is that **no cheap scalar feature discriminates the losing child
+> within the degree band.** The 31 % same-deg ceiling over pc 18–28 ≈ 0.31·953 M ≈ **295 M child-exams ≈
+> 16 % of all 1.8 B** — a real multi-second prize IF a within-band discriminator is found.
+>
+> **⇒ VERDICT: POTENTIAL WIN, precisely localized — NOT a wash.** The sub-problem is now well-posed:
+> *among children of (near-)equal degree, which is the losing one?* Cheap scalars (parity/symm/iso)
+> fail; the next discriminators to test offline in `ranklab` (deg primary, feature as the tie-break;
+> score against the 31 % same-deg ceiling):
+> - **one-ply lookahead** — the child's own min/mean child-degree (the most-forcing reply the opponent
+>   has), or "the child has an instant-win reply." Closest to the game value; moderately expensive.
+> - **structural** — child component count / max-component size / does-it-decompose (reuse
+>   `decompose_node`); isolated-vertex *parity* as a tie-break (not primary).
+> - **net-not-gross governs PROMOTION** (not the offline hunt): a winner must clear
+>   `loss_mass·child_exam_cost > added_cost/child·children` before touching `sort_moves_by_degree`. A
+>   tie-break fires only on equal-degree groups, so its amortized cost is below a primary-key change.
+>   Gate the production A/B on n=16 via the harness.
+> - The "cut work, not order" pivot is **DEMOTED**: ordering has a real cheap-region 31–71 % prize if a
+>   discriminator exists; the lever only closes if the discriminator hunt fails.
+> - Tooling note: `ranklab` candidate set is now degree/oracle/random/deg-desc + `same-deg`/`deg±1`/
+>   `deg±2` bounded oracles + `symm`. The 1/64 QHK dump suffices; a stratified `M_RANKLAB` capture is a
+>   stretch only if sample noise bites.
 
 ## ⇒ --19 (2026-06-21, goal: "n=16 2os" / sub-20s search) — PREFETCH lever CONFIRMED DEAD; fresh W17 profile; bounds-check elision −1.2% cyc/node.
 

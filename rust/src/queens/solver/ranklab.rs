@@ -27,10 +27,10 @@ const CAND_NAMES: [&str; NCAND] = [
     "oracle",      // 1 losing child first ⇒ rank 0 ⇒ captures 100% (the avoidable-loss ceiling)
     "random",      // 2 deterministic shuffle ⇒ should be WORSE than current (negative)
     "deg-desc",    // 3 least-forcing first ⇒ worst-case sanity (very negative)
-    "even-pc",     // 4 even-child-pc first, then degree (parity primary — pc18-promising)
-    "symm", // 5 most-180°-symmetric child first, then degree (symmetry primary — pc18-promising)
-    "symm+even", // 6 symmetry primary, then parity, then degree
-    "even+symm", // 7 parity primary, then symmetry, then degree
+    "same-deg", // 4 bounded oracle k=0: reorder only within equal degree (tie-break-recoverable loss)
+    "deg±1",    // 5 bounded oracle k=1: a losing child may jump ≤1 degree level forward
+    "deg±2",    // 6 bounded oracle k=2
+    "symm",     // 7 most-180°-symmetric child first (best cheap feature, kept for reference)
 ];
 
 /// One scored node: its pc, whether it had a losing child (else nocut = unavoidable, excluded), and
@@ -126,10 +126,16 @@ fn score_node(q: &Queens, solver: &dyn Solver, avail: Bits) -> NodeScore {
         rank_of(&v)
     };
     ns.cand_rank[3] = rank_of(&sorted(&|i| (u32::MAX - deg[i], 0, 0))); // degree desc
-    ns.cand_rank[4] = rank_of(&sorted(&|i| (deg[i] & 1, deg[i], 0))); // even-pc first, then degree
-    ns.cand_rank[5] = rank_of(&sorted(&|i| (asym[i], deg[i], 0))); // most-symmetric first
-    ns.cand_rank[6] = rank_of(&sorted(&|i| (asym[i], deg[i] & 1, deg[i]))); // symm, then parity
-    ns.cand_rank[7] = rank_of(&sorted(&|i| (deg[i] & 1, asym[i], deg[i]))); // parity, then symm
+                                                                        // Bounded oracles: with d* = min degree among losing children, a deg±k order can place the
+                                                                        // min-degree losing child after only the children of degree < d*−k. k=0 = the best ANY equal-degree
+                                                                        // tie-break can do; growing k allows larger degree violations; k→∞ = the full oracle. This
+                                                                        // decomposes the avoidable loss into tie-break-recoverable vs degree-override-required.
+    let dstar = (0..m).filter(|&i| losing[i]).map(|i| deg[i]).min().unwrap();
+    let count_below = |thr: u32| (0..m).filter(|&i| deg[i] < thr).count() as u32;
+    ns.cand_rank[4] = count_below(dstar); // same-degree oracle (k=0)
+    ns.cand_rank[5] = count_below(dstar.saturating_sub(1)); // deg±1
+    ns.cand_rank[6] = count_below(dstar.saturating_sub(2)); // deg±2
+    ns.cand_rank[7] = rank_of(&sorted(&|i| (asym[i], deg[i], 0))); // most-symmetric first
     ns
 }
 
