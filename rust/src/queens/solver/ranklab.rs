@@ -20,17 +20,20 @@ use rayon::prelude::*;
 use std::path::Path;
 
 /// Candidate orderings scored per node (index 0 is the live baseline; keep in sync with the names).
-/// 0–3 are the sanity/control set; 4+ are the cheap game-theoretic feature trials being proven out.
-const NCAND: usize = 8;
+/// 0–2 controls, 3–4 the bounded-oracle CEILINGS (what any tie-break / ±1 reorder could reach), 5+ the
+/// one-ply reply-degree discriminators being proven out (all degree-primary tie-breaks).
+const NCAND: usize = 10;
 const CAND_NAMES: [&str; NCAND] = [
     "degree(cur)", // 0 baseline — reproduces the live order ⇒ captured 0% (pipeline check)
-    "oracle",      // 1 losing child first ⇒ rank 0 ⇒ captures 100% (the avoidable-loss ceiling)
-    "random",      // 2 deterministic shuffle ⇒ should be WORSE than current (negative)
-    "deg-desc",    // 3 least-forcing first ⇒ worst-case sanity (very negative)
-    "same-deg", // 4 bounded oracle k=0: reorder only within equal degree (tie-break-recoverable loss)
-    "deg±1",    // 5 bounded oracle k=1: a losing child may jump ≤1 degree level forward
-    "deg±2",    // 6 bounded oracle k=2
-    "symm",     // 7 most-180°-symmetric child first (best cheap feature, kept for reference)
+    "oracle",      // 1 losing child first ⇒ captures 100% (full avoidable-loss ceiling)
+    "random",      // 2 deterministic shuffle ⇒ noise floor control
+    "same-deg", // 3 bounded oracle k=0 = the tie-break CEILING (the discriminators below aim at this)
+    "deg±1",    // 4 bounded oracle k=1 = the ±1-window CEILING
+    "mingc↓", // 5 tie-break: min opponent reply degree DESC (opponent's best escape is weakest first)
+    "mingc↑", // 6 tie-break: min opponent reply degree ASC (opposite direction — sanity)
+    "sumgc↓", // 7 tie-break: total opponent reply degree DESC (whole reply menu weakest first)
+    "sumgc↑", // 8 tie-break: total opponent reply degree ASC (opposite)
+    "sumgc⇄", // 9 pc-adaptive: sumgc↓ for pc≤20, sumgc↑ for pc≥21 (the signal's sign flips at ~pc21)
 ];
 
 /// One scored node: its pc, whether it had a losing child (else nocut = unavoidable, excluded), and
@@ -51,13 +54,23 @@ fn splitmix64(state: &mut u64) -> u64 {
     z ^ (z >> 31)
 }
 
-/// 180° board rotation of a square-set (`(r,c) ↦ (n−1−r, n−1−c)`), for the symmetry feature — a child
-/// that is near-invariant under it is a mirror-strategy candidate (the opponent can copy ⇒ a likely
-/// P-position ⇒ a likely losing child worth trying first).
-fn rot180(b: Bits, n: u32) -> Bits {
-    let mut out = Bits::ZERO;
-    b.each(|s| out.set((n - 1 - s / n) * n + (n - 1 - s % n)));
-    out
+/// One-ply reply-degree stats of a child `h` (the opponent's reply menu): for each opponent move `v`
+/// in `h`, the grandchild degree `popcount(h \ attack[v])`. Returns `(min, sum, has_instant_win)`.
+/// Cheap — O(child_pc) bitmask ops, no allocation/BFS/canonicalization (the cost tier that can survive
+/// the hot loop). The hypothesis: a *losing* child (P-position for the opponent) leaves the opponent no
+/// forcing escape ⇒ high reply degrees / no instant win.
+fn reply_stats(h: Bits, attack: &[Bits]) -> (u32, u32, bool) {
+    if h == Bits::ZERO {
+        return (0, 0, true); // empty child = the move already won; nothing to reply with
+    }
+    let (mut mn, mut sum, mut iw) = (u32::MAX, 0u32, false);
+    h.each(|v| {
+        let gd = h.and_not(attack[v as usize]).popcount();
+        mn = mn.min(gd);
+        sum += gd;
+        iw |= gd == 0;
+    });
+    (mn, sum, iw)
 }
 
 /// Label every child of `avail` and score each candidate ordering by the rank of its first losing
@@ -81,14 +94,13 @@ fn score_node(q: &Queens, solver: &dyn Solver, avail: Bits) -> NodeScore {
         .map(|&sq| avail.and_not(q.attack[sq as usize]))
         .collect();
     let deg: Vec<u32> = children.iter().map(|c| c.popcount()).collect();
-    // 180° asymmetry: 0 ⇒ the child is fully rotation-symmetric (a mirror-strategy P-candidate).
-    let asym: Vec<u32> = children
+    // One-ply reply-degree stats per child (the opponent's reply menu from that child).
+    let reply: Vec<(u32, u32, bool)> = children
         .iter()
-        .map(|&c| {
-            let r = rot180(c, q.n);
-            c.and_not(r).popcount() + r.and_not(c).popcount()
-        })
+        .map(|&c| reply_stats(c, &q.attack))
         .collect();
+    let min_gc: Vec<u32> = reply.iter().map(|r| r.0).collect();
+    let sum_gc: Vec<u32> = reply.iter().map(|r| r.1).collect();
     // Exact label per move via the production kernel (verdict is order-invariant; the shared TT
     // amortises across nodes). An empty child (move fills the board) is a loss for the opponent ⇒
     // `wins` returns false ⇒ losing = true, the instant-win move.
@@ -125,17 +137,26 @@ fn score_node(q: &Queens, solver: &dyn Solver, avail: Bits) -> NodeScore {
         }
         rank_of(&v)
     };
-    ns.cand_rank[3] = rank_of(&sorted(&|i| (u32::MAX - deg[i], 0, 0))); // degree desc
-                                                                        // Bounded oracles: with d* = min degree among losing children, a deg±k order can place the
-                                                                        // min-degree losing child after only the children of degree < d*−k. k=0 = the best ANY equal-degree
-                                                                        // tie-break can do; growing k allows larger degree violations; k→∞ = the full oracle. This
-                                                                        // decomposes the avoidable loss into tie-break-recoverable vs degree-override-required.
+    // Bounded-oracle ceilings: with d* = min degree among losing children, a deg±k order can place the
+    // min-degree losing child after only the children of degree < d*−k. k=0 = the best ANY equal-degree
+    // tie-break can do; k=1 = the ±1-window ceiling. The discriminators (5+) are degree-primary
+    // tie-breaks, so they can capture at most the same-deg (k=0) ceiling.
     let dstar = (0..m).filter(|&i| losing[i]).map(|i| deg[i]).min().unwrap();
     let count_below = |thr: u32| (0..m).filter(|&i| deg[i] < thr).count() as u32;
-    ns.cand_rank[4] = count_below(dstar); // same-degree oracle (k=0)
-    ns.cand_rank[5] = count_below(dstar.saturating_sub(1)); // deg±1
-    ns.cand_rank[6] = count_below(dstar.saturating_sub(2)); // deg±2
-    ns.cand_rank[7] = rank_of(&sorted(&|i| (asym[i], deg[i], 0))); // most-symmetric first
+    ns.cand_rank[3] = count_below(dstar); // same-degree ceiling (k=0)
+    ns.cand_rank[4] = count_below(dstar.saturating_sub(1)); // deg±1 ceiling
+                                                            // One-ply reply-degree tie-breaks (degree primary, reply stat secondary, q.order final tie).
+    ns.cand_rank[5] = rank_of(&sorted(&|i| (deg[i], u32::MAX - min_gc[i], 0))); // min reply deg DESC
+    ns.cand_rank[6] = rank_of(&sorted(&|i| (deg[i], min_gc[i], 0))); // min reply deg ASC
+    ns.cand_rank[7] = rank_of(&sorted(&|i| (deg[i], u32::MAX - sum_gc[i], 0))); // sum reply deg DESC
+    ns.cand_rank[8] = rank_of(&sorted(&|i| (deg[i], sum_gc[i], 0))); // sum reply deg ASC
+                                                                     // pc-adaptive sign: the sumgc signal flips direction at ~pc21 (opponent-stuck-first helps in the
+                                                                     // shallow shoulder, opponent-mobile-first helps deeper) — use the per-band-correct direction.
+    ns.cand_rank[9] = if pc <= 20 {
+        rank_of(&sorted(&|i| (deg[i], u32::MAX - sum_gc[i], 0)))
+    } else {
+        rank_of(&sorted(&|i| (deg[i], sum_gc[i], 0)))
+    };
     ns
 }
 
@@ -309,7 +330,37 @@ pub fn run_ranklab(
     print_row("ALL".to_string(), &all);
     println!(
         "  mean_rank = mean first-losing-child rank under the live degree order (≈ the report's loss/cut).\n  \
-         degree(cur)=0% and oracle=100% validate the pipeline; random/deg-desc should be negative."
+         degree(cur)=0% and oracle=100% validate the pipeline; random = noise floor."
+    );
+    // Discriminator summary: each tie-break's capture vs the FULL oracle, vs the same-deg ceiling
+    // (the most it could reach as a tie-break), and vs the ±1 ceiling. A degree-primary tie-break that
+    // gets a real fraction of the same-deg ceiling is the signal we're hunting.
+    let ceil_sd = capt(&all, 3); // same-deg ceiling
+    let ceil_d1 = capt(&all, 4); // deg±1 ceiling
+    println!(
+        "  ceilings: same-deg(k=0) = {ceil_sd:.1}% of full loss · deg±1 = {ceil_d1:.1}% · (a tie-break tops out at same-deg)"
+    );
+    println!(
+        "    {:>12}   {:>10}   {:>14}   {:>12}",
+        "discriminator", "vs full", "vs same-deg", "vs deg±1"
+    );
+    for (c, name) in CAND_NAMES.iter().enumerate().take(NCAND).skip(5) {
+        let cc = capt(&all, c);
+        let of_sd = if ceil_sd != 0.0 {
+            100.0 * cc / ceil_sd
+        } else {
+            0.0
+        };
+        let of_d1 = if ceil_d1 != 0.0 {
+            100.0 * cc / ceil_d1
+        } else {
+            0.0
+        };
+        println!("    {name:>12}   {cc:>9.1}%   {of_sd:>13.1}%   {of_d1:>11.1}%");
+    }
+    println!(
+        "  COST: each one-ply tie-break adds an O(child_pc) reply scan per move (~a 2nd degree pass) —\n  \
+         vs the current O(1) key. Promote only if `vs full` × loss_mass beats that added per-move cost."
     );
     Ok(())
 }

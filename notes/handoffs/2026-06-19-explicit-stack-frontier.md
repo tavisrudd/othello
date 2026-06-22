@@ -114,9 +114,39 @@
 >   Gate the production A/B on n=16 via the harness.
 > - The "cut work, not order" pivot is **DEMOTED**: ordering has a real cheap-region 31–71 % prize if a
 >   discriminator exists; the lever only closes if the discriminator hunt fails.
-> - Tooling note: `ranklab` candidate set is now degree/oracle/random/deg-desc + `same-deg`/`deg±1`/
->   `deg±2` bounded oracles + `symm`. The 1/64 QHK dump suffices; a stratified `M_RANKLAB` capture is a
+> - Tooling note: `ranklab` candidate set is now degree/oracle/random + `same-deg`/`deg±1` ceilings +
+>   one-ply reply-degree tie-breaks. The 1/64 QHK dump suffices; a stratified `M_RANKLAB` capture is a
 >   stretch only if sample noise bites.
+>
+> **★★★ DISCRIMINATOR FOUND — one-ply reply-degree, with a depth-dependent SIGN FLIP.** Tested the
+> opponent's reply-degree distribution per child (cheap: for each opponent move `v` in child `h`,
+> `popcount(h \ attack[v])`; O(child_pc) bitmask ops, no BFS/alloc) as degree-primary tie-breaks. It
+> WORKS where parity/symmetry/iso failed — and the sign **flips at ~pc21**:
+> | `sumgc` tie-break (capture vs full loss) | pc18 | pc19 | pc20 | pc22 | pc23 | pc25 | pc27 |
+> |---|---|---|---|---|---|---|---|
+> | `sumgc↓` (opponent-stuck-first) | +7.2 | +2.1 | +2.0 | −6.6 | −4.8 | −4.7 | −4.7 |
+> | `sumgc↑` (opponent-mobile-first) | −6.3 | −6.9 | +0.7 | +2.7 | +7.3 | +9.1 | +9.3 |
+>
+> Opponent-**stuck**-first (high total reply degree = no forcing escape) helps in the shallow shoulder
+> (pc≤20); opponent-**mobile**-first helps deeper (pc≥22). A clean crossover at ~pc21 (parity-of-plies-
+> remaining effect). The opposite directions are symmetric-negative and both far above the `random`
+> floor (≈0–1%) ⇒ real directional signal, not noise. The aggregate washed earlier ONLY because the two
+> regimes cancel. **`min` reply degree barely moves it (±1%); `sum` (≈mean within a degree group)
+> carries the signal.** Instant-win-reply exclusion = 0 (too rare at pc18–28).
+>
+> **pc-adaptive `sumgc⇄`** (sumgc↓ for pc≤20, sumgc↑ for pc≥21) over pc18–28 (n=16, cap 1000/pc):
+> **+5.2 % of full avoidable loss = 16.8 % of the same-deg ceiling = 7.4 % of the ±1 ceiling ≈ 50 M
+> child-exams ≈ 2.8 % of all 1.8 B.** Real, modest.
+>
+> **⇒ VERDICT: REAL but MARGINAL — settle with a live n=16 A/B.** Net is now the question, not signal.
+> COST: the reply scan is O(child_pc) per recurse child ≈ a 2nd degree pass on top of the current O(1)
+> key — a real ordering-cost bump (`sort_moves_by_degree` is ~7.5 % of cycles). Capturing ~2.8 % of
+> child-exams (mix of cheap getK leaves + expensive recurse subtrees — only the avoided *recurse*
+> children save real wall) vs that cost is **in the marginal zone the offline gross capture can't
+> resolve.** NEXT = wire `sumgc⇄` into `sort_moves_by_degree` behind a gate (e.g. `QUEENS_ORD_REPLY`,
+> pc-thresholded sign), run the canonical interleaved n=16 A/B (`scripts/queens-ab.sh`), keep only if
+> wall drops. Cheaper-proxy hunt (a sub-popcount reply summary) is the fallback if the scan cost eats
+> it. This is a hot-path + real-bench step ⇒ decide with the user.
 
 ## ⇒ --19 (2026-06-21, goal: "n=16 2os" / sub-20s search) — PREFETCH lever CONFIRMED DEAD; fresh W17 profile; bounds-check elision −1.2% cyc/node.
 
