@@ -1,6 +1,12 @@
 use rayon::prelude::*;
 use std::sync::OnceLock;
 
+// getK evaluator memo (`QUEENS_GETK_MEMO`) — MEASURED-NEGATIVE, reverted. A thread-local exact-fp
+// memo over get12..get16 (to collapse the recursion's factorial path-redundancy) cost +13.4%
+// cyc/node at n=16: α-β cutoffs already prune most redundancy, and the memo's random L2/L3 probe
+// is slower than just recomputing the pext/popcnt math. "Math is cheaper than mem" on this
+// latency-bound search — the same reason the W_K hierarchy is memo-less by design.
+
 /// Largest dense layer the `getK` evaluators reach. The complete tables stop at
 /// [`W8_K`]; `W9..=W{MAX_DENSE_K}` are evaluators over the layer below (see [`DenseW8::get9`]).
 /// W9..W11 keep their labelled code (`K*(K-1)/2` ≤ 55 bits) in a `u64`; W12 (66-bit), W13
@@ -839,12 +845,13 @@ impl DenseW8 {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
-            let child_code = pext128_wide(code, W13_MASKS.1[child as usize]);
+            let mask = W13_MASKS.1[child as usize];
+            // Right-size the child code (see `get16`): only a 12-vertex child (66-bit) needs the
+            // `u128` `pext128_wide`; the ≤11-vertex majority uses the cheaper `u64` `pext128`.
             let lost = if cpc == 12 {
-                !self.get12(child_code)
+                !self.get12(pext128_wide(code, mask))
             } else {
-                // Child has ≤11 vertices ⇒ its code is ≤55 bits, so it fits `u64` losslessly.
-                let cc = child_code as u64;
+                let cc = pext128(code, mask);
                 match cpc {
                     11 => !self.get11(cc),
                     10 => !self.get10(cc),
@@ -878,19 +885,23 @@ impl DenseW8 {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
-            let child_code = pext128_wide(code, W14_MASKS.1[child as usize]);
-            let lost = match cpc {
-                13 => !self.get13(child_code),
-                12 => !self.get12(child_code),
-                _ => {
-                    // Child has ≤11 vertices ⇒ its code is ≤55 bits, so it fits `u64` losslessly.
-                    let cc = child_code as u64;
-                    match cpc {
-                        11 => !self.get11(cc),
-                        10 => !self.get10(cc),
-                        9 => !self.get9(cc),
-                        _ => !self.get(cpc, cc as usize),
-                    }
+            let mask = W14_MASKS.1[child as usize];
+            // Right-size the child code (see `get16`): `u64` `pext128` for the ≤11-vertex majority;
+            // only a 12/13-vertex child (isolated removal, >64 bits) needs the `u128` `pext128_wide`.
+            let lost = if cpc >= 12 {
+                let cc = pext128_wide(code, mask);
+                if cpc == 13 {
+                    !self.get13(cc)
+                } else {
+                    !self.get12(cc)
+                }
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => !self.get11(cc),
+                    10 => !self.get10(cc),
+                    9 => !self.get9(cc),
+                    _ => !self.get(cpc, cc as usize),
                 }
             };
             if lost {
@@ -917,19 +928,22 @@ impl DenseW8 {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
-            let child_code = pext128_wide(code, W15_MASKS.1[child as usize]);
-            let lost = match cpc {
-                14 => !self.get14(child_code),
-                13 => !self.get13(child_code),
-                12 => !self.get12(child_code),
-                _ => {
-                    let cc = child_code as u64;
-                    match cpc {
-                        11 => !self.get11(cc),
-                        10 => !self.get10(cc),
-                        9 => !self.get9(cc),
-                        _ => !self.get(cpc, cc as usize),
-                    }
+            let mask = W15_MASKS.1[child as usize];
+            // Right-size the child code (see `get16`): `u64` `pext128` for the ≤11-vertex majority.
+            let lost = if cpc >= 12 {
+                let cc = pext128_wide(code, mask);
+                match cpc {
+                    14 => !self.get14(cc),
+                    13 => !self.get13(cc),
+                    _ => !self.get12(cc),
+                }
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => !self.get11(cc),
+                    10 => !self.get10(cc),
+                    9 => !self.get9(cc),
+                    _ => !self.get(cpc, cc as usize),
                 }
             };
             if lost {
@@ -955,20 +969,25 @@ impl DenseW8 {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
-            let child_code = pext128_wide(code, W16_MASKS.1[child as usize]);
-            let lost = match cpc {
-                15 => !self.get15(child_code),
-                14 => !self.get14(child_code),
-                13 => !self.get13(child_code),
-                12 => !self.get12(child_code),
-                _ => {
-                    let cc = child_code as u64;
-                    match cpc {
-                        11 => !self.get11(cc),
-                        10 => !self.get10(cc),
-                        9 => !self.get9(cc),
-                        _ => !self.get(cpc, cc as usize),
-                    }
+            let mask = W16_MASKS.1[child as usize];
+            // Right-size the child code: most children are ≤11 vertices (≤55-bit code, `u64`) — only
+            // the rare ≥12-vertex child (isolated-vertex removal) needs the `u128` `pext128_wide`
+            // (128-bit shift). The cheap `u64` `pext128` path avoids that on the common case.
+            let lost = if cpc >= 12 {
+                let cc = pext128_wide(code, mask);
+                match cpc {
+                    15 => !self.get15(cc),
+                    14 => !self.get14(cc),
+                    13 => !self.get13(cc),
+                    _ => !self.get12(cc),
+                }
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => !self.get11(cc),
+                    10 => !self.get10(cc),
+                    9 => !self.get9(cc),
+                    _ => !self.get(cpc, cc as usize),
                 }
             };
             if lost {
