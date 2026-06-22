@@ -20,12 +20,17 @@ use rayon::prelude::*;
 use std::path::Path;
 
 /// Candidate orderings scored per node (index 0 is the live baseline; keep in sync with the names).
-const NCAND: usize = 4;
+/// 0–3 are the sanity/control set; 4+ are the cheap game-theoretic feature trials being proven out.
+const NCAND: usize = 8;
 const CAND_NAMES: [&str; NCAND] = [
-    "degree (cur)", // baseline — reproduces the live order ⇒ captured 0% (pipeline check)
-    "oracle",       // losing child first ⇒ rank 0 ⇒ captures 100% (the avoidable-loss ceiling)
-    "random",       // deterministic shuffle ⇒ should be WORSE than current (negative)
-    "deg-desc",     // least-forcing first ⇒ worst-case sanity (very negative)
+    "degree(cur)", // 0 baseline — reproduces the live order ⇒ captured 0% (pipeline check)
+    "oracle",      // 1 losing child first ⇒ rank 0 ⇒ captures 100% (the avoidable-loss ceiling)
+    "random",      // 2 deterministic shuffle ⇒ should be WORSE than current (negative)
+    "deg-desc",    // 3 least-forcing first ⇒ worst-case sanity (very negative)
+    "even-pc",     // 4 even-child-pc first, then degree (parity primary — pc18-promising)
+    "symm", // 5 most-180°-symmetric child first, then degree (symmetry primary — pc18-promising)
+    "symm+even", // 6 symmetry primary, then parity, then degree
+    "even+symm", // 7 parity primary, then symmetry, then degree
 ];
 
 /// One scored node: its pc, whether it had a losing child (else nocut = unavoidable, excluded), and
@@ -46,27 +51,13 @@ fn splitmix64(state: &mut u64) -> u64 {
     z ^ (z >> 31)
 }
 
-/// Return the move indices `0..m` in the requested candidate order. Index 1 (oracle) is handled by the
-/// caller (it needs the labels), so this only builds the verdict-free orderings.
-fn candidate_order(c: usize, m: usize, deg: &[u32], seed: u64) -> Vec<usize> {
-    let mut v: Vec<usize> = (0..m).collect();
-    match c {
-        // Live order: stable sort by ascending degree (most-forcing first). `v` starts in q.order
-        // order, and a stable sort keeps that tie-break — byte-identical to `sort_moves_by_degree`.
-        0 => v.sort_by_key(|&i| deg[i]),
-        // Least-forcing first: stable sort by descending degree.
-        3 => v.sort_by_key(|&i| std::cmp::Reverse(deg[i])),
-        // Deterministic Fisher–Yates shuffle.
-        2 => {
-            let mut s = seed;
-            for i in (1..m).rev() {
-                let j = (splitmix64(&mut s) % (i as u64 + 1)) as usize;
-                v.swap(i, j);
-            }
-        }
-        _ => {}
-    }
-    v
+/// 180° board rotation of a square-set (`(r,c) ↦ (n−1−r, n−1−c)`), for the symmetry feature — a child
+/// that is near-invariant under it is a mirror-strategy candidate (the opponent can copy ⇒ a likely
+/// P-position ⇒ a likely losing child worth trying first).
+fn rot180(b: Bits, n: u32) -> Bits {
+    let mut out = Bits::ZERO;
+    b.each(|s| out.set((n - 1 - s / n) * n + (n - 1 - s % n)));
+    out
 }
 
 /// Label every child of `avail` and score each candidate ordering by the rank of its first losing
@@ -83,21 +74,27 @@ fn score_node(q: &Queens, solver: &dyn Solver, avail: Bits) -> NodeScore {
         .filter(|&sq| avail.get(sq))
         .collect();
     let m = moves.len();
-    // Degree of each move = popcount of the child it produces (placing removes sq + its attacks).
-    // Matches `sort_moves_by_degree` exactly: build_att's identity image att[sq][0] == q.attack[sq].
-    let deg: Vec<u32> = moves
+    // Each move's child (placing removes sq + its attacks), and its degree = child popcount. The
+    // degree matches `sort_moves_by_degree` exactly (build_att's identity image att[sq][0] == attack).
+    let children: Vec<Bits> = moves
         .iter()
-        .map(|&sq| avail.and_not(q.attack[sq as usize]).popcount())
+        .map(|&sq| avail.and_not(q.attack[sq as usize]))
+        .collect();
+    let deg: Vec<u32> = children.iter().map(|c| c.popcount()).collect();
+    // 180° asymmetry: 0 ⇒ the child is fully rotation-symmetric (a mirror-strategy P-candidate).
+    let asym: Vec<u32> = children
+        .iter()
+        .map(|&c| {
+            let r = rot180(c, q.n);
+            c.and_not(r).popcount() + r.and_not(c).popcount()
+        })
         .collect();
     // Exact label per move via the production kernel (verdict is order-invariant; the shared TT
     // amortises across nodes). An empty child (move fills the board) is a loss for the opponent ⇒
     // `wins` returns false ⇒ losing = true, the instant-win move.
-    let losing: Vec<bool> = moves
+    let losing: Vec<bool> = children
         .iter()
-        .map(|&sq| {
-            let child = avail.and_not(q.attack[sq as usize]);
-            !solver.wins(q, q.board.and_not(child))
-        })
+        .map(|&child| !solver.wins(q, q.board.and_not(child)))
         .collect();
     let mut ns = NodeScore {
         pc,
@@ -107,18 +104,32 @@ fn score_node(q: &Queens, solver: &dyn Solver, avail: Bits) -> NodeScore {
     if !ns.cut {
         return ns; // nocut — contributes zero ordering loss (a mandatory full scan)
     }
-    let seed = avail.0[0] ^ avail.0[1].rotate_left(17) ^ avail.0[2].rotate_left(33) ^ avail.0[3];
-    for c in 0..NCAND {
-        if c == 1 {
-            ns.cand_rank[1] = 0; // oracle: a losing child exists ⇒ a perfect order cuts at rank 0
-            continue;
+    // Rank of the first losing child under an index order.
+    let rank_of =
+        |order: &[usize]| -> u32 { order.iter().position(|&i| losing[i]).unwrap() as u32 };
+    // Stable sort of `0..m` by a key (ties keep q.order order, matching the live tie-break).
+    let sorted = |key: &dyn Fn(usize) -> (u32, u32, u32)| -> Vec<usize> {
+        let mut v: Vec<usize> = (0..m).collect();
+        v.sort_by_key(|&i| key(i));
+        v
+    };
+    ns.cand_rank[0] = rank_of(&sorted(&|i| (deg[i], 0, 0))); // degree asc (= live order)
+    ns.cand_rank[1] = 0; // oracle: a losing child exists ⇒ a perfect order cuts at rank 0
+    ns.cand_rank[2] = {
+        let mut v: Vec<usize> = (0..m).collect();
+        let mut s =
+            avail.0[0] ^ avail.0[1].rotate_left(17) ^ avail.0[2].rotate_left(33) ^ avail.0[3];
+        for i in (1..m).rev() {
+            let j = (splitmix64(&mut s) % (i as u64 + 1)) as usize;
+            v.swap(i, j);
         }
-        let order = candidate_order(c, m, &deg, seed);
-        ns.cand_rank[c] = order
-            .iter()
-            .position(|&i| losing[i])
-            .expect("a cut node has ≥1 losing child") as u32;
-    }
+        rank_of(&v)
+    };
+    ns.cand_rank[3] = rank_of(&sorted(&|i| (u32::MAX - deg[i], 0, 0))); // degree desc
+    ns.cand_rank[4] = rank_of(&sorted(&|i| (deg[i] & 1, deg[i], 0))); // even-pc first, then degree
+    ns.cand_rank[5] = rank_of(&sorted(&|i| (asym[i], deg[i], 0))); // most-symmetric first
+    ns.cand_rank[6] = rank_of(&sorted(&|i| (asym[i], deg[i] & 1, deg[i]))); // symm, then parity
+    ns.cand_rank[7] = rank_of(&sorted(&|i| (deg[i] & 1, asym[i], deg[i]))); // parity, then symm
     ns
 }
 

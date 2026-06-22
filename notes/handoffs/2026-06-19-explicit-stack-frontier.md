@@ -69,7 +69,48 @@
 >   chain is exact end-to-end. (Curiosity: at pc 19, random scored +5 % over current — within the
 >   200-node sampling noise, but a hint that degree order has slack to beat.)
 >
-> **⇒ NEXT (move-ordering lever, the live lead):**
+> **★ PROOF-OUT (n=16, 4400 nodes, cap 400/pc) — the CHEAP move-ordering lever is a WASH.** Every
+> cheap game-theoretic feature was scored against the live degree order:
+> | candidate (vs live degree order) | captured % of avoidable loss |
+> |---|---|
+> | oracle (ceiling) | 100.0 |
+> | `deg+asym` (180°-symmetry as the **tie-break**) | **+0.4** (noise: +3.6 % pc28, −3.1 % pc25) |
+> | `deg+iso` (isolated-vertex count tie-break) | −0.1 |
+> | `iso-cnt` (isolated count primary) | −1.5 |
+> | `symm` (symmetry primary), `even-pc`/`odd-pc` (parity primary) | −4.4 / −19.6 / −23.0 |
+> | random / deg-desc (controls) | −45 / −107 |
+>
+> Parity and symmetry as PRIMARY keys actively hurt (they disrupt the strong degree signal); as a
+> tie-break (replacing the static q.order tie-break) the best is **+0.4 %, indistinguishable from
+> noise**; isolated-vertex count (the cleanest Grundy-parity proxy) adds nothing. **The dynamic degree
+> ordering is already at the cheap-feature ceiling.** WHY (principled, not just empirical): the loss is
+> NOT in degree *ties* (the tie-break barely moved it) — it's in nodes where the losing child has a
+> *higher* degree than the forcing decoys, so the signal that's left is the child's win/loss value
+> itself, and **predicting the first-losing-child cheaply ≈ predicting win/loss cheaply = the search**.
+> The cheap 1-ply correlate (an instant cutoff) is already deployed as ETC. So the 52.9 % avoidable
+> loss is REAL but not cheaply addressable.
+>
+> **ZOOM ON pc18 (the top loss_mass band, user-directed "apply + measure only there").** A pc-gated
+> ordering could win even if it washes elsewhere, so pc18 (51 M nodes, loss_mass 135 M) was scored
+> alone at growing sample size to kill the per-band noise: `symm` decayed **+2.1 % (cap 400) → +1.2 %
+> (2000) → +0.5 % (6000)** and `even-pc` was pure noise **+2.2 % → −2.0 % → 0.0 %**. At cap 6000 the
+> `random` control itself scored **+0.7 %** — i.e. the best feature (`symm` +0.5 %) sits *below* the
+> random noise floor. **No exploitable cheap signal at pc18 either**, confirming the wash at the single
+> best band. (And even a real +0.5 % of pc18's loss_mass ≈ 0.05 % of all child-exams — far under what
+> `asym`'s ~10×-the-current-key cost could ever repay.)
+>
+> **⇒ NEXT (the cheap lever is closed; remaining angles are gated by net-not-gross):**
+> - **Untested, expensive:** Tier-2/3 features (component/module decomposition, shallow grandchild
+>   lookahead) or a learned predictor. The handoff history says decomposition orderings WASH and the
+>   per-node cost bar is steep (~1 popcount/child now), so these must clear
+>   `loss_mass·child_exam_cost > added_cost/child·children` — unlikely but unproven. Use `ranklab` to
+>   test ANY of them offline before touching the kernel (one `candidate_order` entry, no solver run).
+> - **The lever map after this:** ordering is near its cheap ceiling, prefetch/MLP is dead, W17/TT
+>   capacity/TT-hits are not the bottleneck. The open levers are back to **node-count** (getK/W_K
+>   exhausted at K=16/17; the parked **nimber-decomposition** node-count lever) and the **getK
+>   evaluator ALU cost** (~44 % of cycles, near floor) — i.e. cut *work*, since the *order* of the work
+>   is near-optimal.
+> - (Earlier NEXT, now answered by the proof-out — kept for the method:)
 > 1. **Feature-iterate in `ranklab`** on the pc 18–28 target. Tier-0/1 (verdict-free, cheap) features
 >    first: child pc, removed-neighborhood size, attacked-count / row-col-diag occupancy deltas, ETC
 >    availability. Labels (value / losing-child / cutoff-rank) must NOT leak into the predictor.
