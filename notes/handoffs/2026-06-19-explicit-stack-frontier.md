@@ -11,6 +11,78 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ --20 (2026-06-22) — move-ordering is the wall: QUEENS_RANK gets E + ordering_loss; n=16 says ~81% of avoidable loss is in pc 18–28; built `ranklab` (offline move-ordering A/B).
+
+> **Mode: collaborative. Worked on main. Catalyst: a ChatGPT read of the QUEENS_RANK/QUEENS_COLD
+> reports re-framed the search as *move-ordering-limited*, not W17/TT-limited.** Two commits landed +
+> a new offline tool. No hot-path/validation-gate change (the ranklab tool reuses the existing
+> QUEENS_HITKEY dump; the report change is M_RANK-gated and DCEs to byte-identical M_ORD_W).
+>
+> **★ QUEENS_RANK report expanded (`2ff41c8`):** broke **r2** out as its own column (was folded into
+> r≥2; remainder now r≥3) and added two derived metrics, all post-solve (zero search cost):
+> - **`E/node` = mean children examined / expanded OR-node** = `0·ETC + 1·r0 + 2·r1 + 3·r2 +
+>   avg(r≥3)·r≥3 + avg(degree)·nocut`. A descent cut at 0-based rank r examines r+1 children; a LOSS
+>   (nocut) node full-scans its degree; an ETC pre-pass cut examines 0. (One new hot accumulator,
+>   `no_cut_deg` = Σ LOSS-node degree, M_RANK-gated.)
+> - **`ordering_loss` = E − E_perfect** (the *avoidable* part): a perfect order cuts every winning
+>   node at rank 0; nocut/ETC are unavoidable and **cancel**, so loss collapses to the **mean 0-based
+>   cutoff rank** `(0·r0 + 1·r1 + 2·r2 + Σ_{r≥3} r·n_r)`. Columns: `loss/node` (over all nodes),
+>   `loss/cut` (over descent-cut nodes = extra children before the loser), `loss_mass = nodes·loss/node`
+>   (the **prioritization metric**).
+>
+> **★ THE FINDING (n=16, iso-dense, 8 GB TT, 314.8 M expanded OR-nodes):**
+> | metric | value |
+> |---|---|
+> | E/node (all child-exams) | 5.72  (1.801 B children) |
+> | ordering_loss (avoidable) | **953.5 M = 52.9 % of all child-exams** |
+> | loss_mass in pc 18–28 | **≈ 776 M ≈ 81 % of all avoidable loss** |
+> | loss/node, loss/cut | 3.03, 3.41 |
+>
+> **Interpretation (this redirects the lever search):** more than half of all child examinations are
+> theoretical ordering waste, and four-fifths of that waste sits in the **pc 18–28 shoulder**. The
+> scary high-`E/node` bands (pc 57–62, 92–96: E/node 25–49) are **nocut-heavy mandatory full-scans**
+> with `loss/node` ≈ 1.5–2.3 — **~zero ordering headroom**; raw E/node conflates them, ordering_loss
+> separates them. Combined with QUEENS_COLD (pc 18–28 ≈ 100 % cold TT probes, ~84 % of all probes):
+> **the solver is move-ordering-limited, not W17- / TT-capacity- / TT-hit-limited.** The next 2–4 s
+> lever is a **better first-losing-child predictor in pc 18–28**, not bigger frontier tables. Ceiling:
+> a perfect oracle removes at most 52.9 % of child-exams.
+>
+> **★ `ranklab` — offline move-ordering A/B (`def4ff6`).** New `queens ranklab <dump>` subcommand.
+> Two-step, no live search per candidate:
+> ```
+> QUEENS_HITKEY=1 queens solve <N> iso-dense          # dump sampled deep-tail node states (reused as-is)
+> queens ranklab <dump> --cap 200 --pc-lo 18 --pc-hi 28
+> ```
+> - **Exact offline replay:** a child's win/loss value is order-invariant, so any candidate ordering's
+>   first-losing-child rank = the index of its earliest *losing* child. Score = **captured fraction of
+>   avoidable ordering_loss** = `(Σcur − Σcand)/Σcur` (a ratio of sums — sample-estimable, no absolute
+>   node counts needed).
+> - **Isolated labeling (the design constraint):** children are labeled HERE via the real iso-dense
+>   kernel (`Solver::wins`, `blocked = board \ child`) in its own TT — **never** in the live run (inline
+>   labeling would pollute the production TT and skew the sample). Parallel over a shared TT so
+>   overlapping sampled subtrees are paid once. Stride-subsampled to `--cap`/pc.
+> - **Candidates:** degree(current), oracle(loss-first), random, degree-desc. Adding a real predictor
+>   = one entry in `candidate_order` + a name; scored exactly with no solver run.
+> - **Validated n=14 & n=16:** `degree(cur)=0 %` (reproduces the live order — pipeline exact),
+>   `oracle=100 %` (the ceiling), `random` −38/−49 % and `deg-desc` −87/−112 % (sanity), and
+>   `mean_rank` 3.44 (n14) / 3.29 (n16, pc18–28 sample) **== the report's loss/cut 3.3–3.4** — the
+>   chain is exact end-to-end. (Curiosity: at pc 19, random scored +5 % over current — within the
+>   200-node sampling noise, but a hint that degree order has slack to beat.)
+>
+> **⇒ NEXT (move-ordering lever, the live lead):**
+> 1. **Feature-iterate in `ranklab`** on the pc 18–28 target. Tier-0/1 (verdict-free, cheap) features
+>    first: child pc, removed-neighborhood size, attacked-count / row-col-diag occupancy deltas, ETC
+>    availability. Labels (value / losing-child / cutoff-rank) must NOT leak into the predictor.
+> 2. **Score net, not gross:** the offline Δloss is upside; the per-child compute cost is downside, and
+>    the current order is ~one popcount/child (near-free). A candidate must clear
+>    `loss_mass_recovered · child_exam_cost  >  added_feature_cost/child · children`. (This is what
+>    killed the degree-sort restructure [WASH] and decomposition orderings before.) Add an op-cost
+>    estimate column before promoting anything.
+> 3. **Promote a winner** into `sort_moves_by_degree` (gated A/B on n=16 per the harness) only if it
+>    both captures meaningful loss_mass AND clears its own per-node cost.
+> - Stretch (only if 1–2 stall): a dedicated stratified `M_RANKLAB` capture (per-pc caps, smaller
+>   dump) instead of reusing the 1/64-sampled QHK dump; for now the QHK dump is plenty.
+
 ## ⇒ --19 (2026-06-21, goal: "n=16 2os" / sub-20s search) — PREFETCH lever CONFIRMED DEAD; fresh W17 profile; bounds-check elision −1.2% cyc/node.
 
 > **Mode: intent-based + a "be relentless, don't stop for answers" Stop-goal hook. Work on main (user
