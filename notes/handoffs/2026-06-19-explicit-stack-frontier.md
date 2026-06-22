@@ -82,20 +82,59 @@
 > (every round 2-5 has B<A; raw incl. outlier −2.2%).** So ~−0.6% honest, small but real + zero-risk.
 > ON MAIN (commit pending).
 >
-> **⇒ NEXT (the live levers, biggest-bucket first):**
-> 1. **FRONTEND (22.6%) + BRANCH (11%) = the biggest under-attacked bucket.** Two contained, byte-
->    identical candidates: **(a) jump-table the `wins_inc` descent pc-cascade** (the `if pc==17 else if
->    pc==16 …` walks ~2-5 branches + fetched comparison code per child × ~10 children/node; a `match pc`
->    → one indirect jump — the handoff's untried #2; wins_inc is 23% of mispredicts). **(b) de-branch
->    `verts_of`** (the #1 mispredict source at ~45%): const-generic `verts_of::<K>` fixed-count loop
->    unrolls away the `while x!=0` exit. *Caveat:* my napkin says (b) saves only ~1 mispredict/call
->    (matches --15's "may wash") — measure but temper expectations; (a) is the better bet.
-> 2. **NODE-COUNT / move ordering** — still the only *−2× ceiling* lever (the report's "worth ~2×";
->    at DK=17 a pc-18 node's children are ALL getK leaves, so the move order directly controls how many
->    of the **44% getK evals** happen before a cutoff). But every tried form washed (countermove,
->    killer, history, effective-degree); the untried 1-ply lookahead ADDS code/compute (bad when
->    frontend-bound). Hard. No cheap idea found this session.
-> 3. **getK / W8 = NEAR FLOOR, do not re-grind** (ALU-chain, cache-optimal, level/repr confirmed).
+> **★ BRANCH-MISPREDICT BUCKET — AUDITED + the top candidate MEASURED-DEAD. The bucket is NOT cheaply
+> addressable.** A sub-agent audited `/tmp/bm.data` at the instruction level (everything inlines into
+> one `wins_inc` symbol at -O3/LTO, so the by-symbol split is source-attribution, not separable):
+> - **`verts_of` is NOT the mispredict source (≈0)** — it's SIMD-vectorized (`vpopcntq`/`vmovdqu64`) in
+>   the inlined builders. The "builders ~45% of mispredicts" is the inlined `lex_min8` of the surrounding
+>   recurse path. **Don't const-generic `verts_of` for branch reasons.**
+> - **The descent pc-cascade is ALREADY a jump-table** (the compiler emitted `jmp *%rax`; residual `cmp`
+>   immediates carry ~0% mispredict; total indirect-dispatch miss 2.52%, BTB-predicted). **A hand `match`
+>   is pure churn — don't.**
+> - **★ #1 mispredict source = `lex_min8`'s `cand < best` `[u64;4]` compare (~34% of `wins_inc` misses;
+>   ~coin-flip, 7× per call, on every recurse child + gather). DE-BRANCH MEASURED-DEAD.** A *scalar*
+>   branchless blend (not the --6 gather form) — `lt` mask from two `u128`-half compares
+>   `(chi<bhi)|((chi==bhi)&(clo<blo))`, then `best = blend(best,cand,lt)` — A/B'd at the **default 8 GB
+>   TT**: **+2.0% cyc/node (5-round, every B above every A).** The scalar early-out (most orientations
+>   differ in word 0 ⇒ ~1-limb exit) beats the all-4-limb branchless ALU even with the mispredict
+>   isolated. Reverted; re-confirmation recorded in `incremental.rs`. **The residual mispredicts are the
+>   irreducible α-β cutoffs (`if lost` / empty-child early-`break`) — can't de-branch byte-identically.**
+> - **⇒ getK/W8 near-floor, prefetch dead, decomposition dead, parallelization closed, and now the
+>   branch-mispredict bucket is closed too. The two open directions are the QUEUED tail-probe study
+>   (below) and move-ordering (no cheap idea found).**
+>
+> **⇒ ★★ NEXT SESSION — QUEUED BY USER (the highest-value open lever): GIANT-ROOT TAIL-PROBE STUDY —
+> "what key signal says don't-bother-TT-probing?"** The giant root is ~94% of wall and its pc≥17 entry
+> probes are 99.6% COLD (M_COLD, --17). Skipping ALL probes lost (+19.3% nodes / +26% wall, --17 — the
+> 0.2% hits are high-value transpositions + the PV scan needs the TT intact). **The user's sharper ask:
+> find a cheap SIGNAL in the exact key/avail that predicts a COLD MISS, so we skip-probe ONLY the
+> provably-useless ones** (keeping the 0.2% high-value hits ⇒ no node cost, but saving the cold DRAM
+> probe latency on the rest). Concretely, build + run:
+> 1. **Isolate the giant root's solo tail with ZERO extra machinery: gate all telemetry on
+>    `elapsed > QUEENS_TAIL_SECS` (default 20s).** At 20s→end only the giant root is still running (the
+>    other 35 roots finish in the first ~6%), so the time-gate *is* the root-isolation — no TID/thread
+>    juggling. Thread the search-start `Instant` (or a shared `t0`) to the deep loop; a per-node
+>    `t0.elapsed() > 20s` check is fine on a measurement mode (it DCEs in production).
+> 2. **TT hit-rate in the window, by pc** — extend `M_COLD` (per-pc hit/miss, already per-worker) with
+>    the `elapsed>20s` gate. Confirms the cold% and *which pc bands* (if any) still hit.
+> 3. **WHERE it's exploring** — per-pc node distribution in the tail + the conflict-graph structure
+>    (reuse `decompose_node` / `struct_profile`): is the tail one giant component? degree distribution?
+> 4. **★ THE SIGNAL — extend `M_HITKEY` (captures key+avail+pc+hit) gated to the tail, dump to file, and
+>    analyze offline (`scripts/hitkey_study.py` exists)**: for the HIT keys vs the MISS keys, what
+>    feature separates them? Candidates to test (the --18 study already found **hits concentrate in a pc
+>    35-78 "shoulder" at 3-12% vs the cold bulk 0.1%** — start there): pc band, popcount parity,
+>    #components, presence of a twin/isolated vertex, a cheap hash-prefix Bloom signature, recency/depth.
+>    If a cheap predicate flags the 99.6%-cold bulk with ~0 false-negatives on the high-value hits, a
+>    **probe-skip-on-signal** lever becomes viable where probe-skip-all failed. (A Bloom/quotient
+>    pre-filter over *inserted* keys is the classic form — but it's a DRAM probe itself unless it fits
+>    cache; the win is only if the SIGNAL is structural/computed, not another memory probe.) Decide the
+>    lever from the data: structural skip-predicate, or a cache-resident negative-filter, or neither.
+>
+> **Lower-priority open: NODE-COUNT / move ordering** — still the only *−2× ceiling* lever (report's
+> "worth ~2×"; at DK=17 a pc-18 node's children are ALL getK leaves, so move order directly gates how
+> many of the **44% getK evals** run before a cutoff). Every tried form washed (countermove/killer/
+> history/effective-degree); 1-ply lookahead adds code/compute (bad when frontend-bound). No cheap idea
+> found. **getK / W8 = NEAR FLOOR, do not re-grind** (ALU-chain, cache-optimal, level/repr confirmed).
 >
 > **Method notes banked:** (i) the `| tee … ; echo MARKER` footgun bit again — a `capture-pane | grep
 > MARKER` poll false-matches the *typed command line*; poll the **output FILE** for the script's own

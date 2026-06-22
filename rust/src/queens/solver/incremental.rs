@@ -45,6 +45,14 @@ pub(crate) fn orient_of(q: &Queens, available: Bits) -> [Bits; 8] {
 // gather-free SoA variant can't beat the scalar because the scalar early-exits on word 0
 // (most orientations differ there) while any branchless all-4-limb reduction processes
 // all limbs unconditionally. Kept scalar. Don't re-attempt the cascade form.
+// RE-CONFIRMED (2026-06-21, session --19): a branch-mispredict audit found this `cand < best`
+// the #1 mispredict source post-W17 (~34% of `wins_inc`'s misses; ~coin-flip). A *scalar* branchless
+// blend — `lt` mask from two `u128`-half compares (`(chi<bhi)|((chi==bhi)&(clo<blo))`), then
+// `best = blend(best,cand,lt)`, no gather — was built + A/B'd at the **default 8 GB TT**: **+2.0%
+// cyc/node (5-round, every B round above every A)**. So the early-out wins even with the cheapest
+// branchless form and even with the mispredict isolated: the all-4-limb ALU exceeds the saved
+// mispredict. The de-branch lever for `lex_min8` is DEAD; the residual `wins_inc` mispredicts are the
+// irreducible α-β cutoffs (`if lost` / empty-child) which can't be de-branched byte-identically.
 #[inline]
 pub(crate) fn lex_min8(o: &[Bits; 8]) -> Bits {
     let mut best = o[0];
