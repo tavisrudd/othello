@@ -19,39 +19,35 @@ use crate::queens::{Bits, Queens};
 use rayon::prelude::*;
 use std::path::Path;
 
-/// Candidate orderings scored per node (index 0 is the live baseline; keep in sync with the names).
-/// 0–2 controls, 3–4 the bounded-oracle CEILINGS (what any tie-break / ±1 reorder could reach), 5+ the
-/// one-ply reply-degree discriminators being proven out (all degree-primary tie-breaks).
-const NCAND: usize = 10;
+/// Candidate orderings scored per node. The metric is RECURSE-WEIGHTED: count only the recurse
+/// children (child_pc > RECURSE_MIN) examined before the first losing child. getK leaves
+/// (child_pc ≤ RECURSE_MIN) resolve instantly and never become search nodes, so reordering them saves
+/// no wall — the live A/B confirmed pc18 reorder = nodes flat. Only avoided RECURSE expansions count.
+/// The candidates reorder ONLY the recurse suffix (getK children keep degree order), the cheap form
+/// that could survive the hot loop.
+const NCAND: usize = 6;
 const CAND_NAMES: [&str; NCAND] = [
-    "degree(cur)", // 0 baseline — reproduces the live order ⇒ captured 0% (pipeline check)
-    "oracle",      // 1 losing child first ⇒ captures 100% (full avoidable-loss ceiling)
-    "random",      // 2 deterministic shuffle ⇒ noise floor control
-    "same-deg", // 3 bounded oracle k=0 = the tie-break CEILING (the discriminators below aim at this)
-    "deg±1",    // 4 bounded oracle k=1 = the ±1-window CEILING
-    "mingc↓", // 5 tie-break: min opponent reply degree DESC (opponent's best escape is weakest first)
-    "mingc↑", // 6 tie-break: min opponent reply degree ASC (opposite direction — sanity)
-    "sumgc↓", // 7 tie-break: total opponent reply degree DESC (whole reply menu weakest first)
-    "sumgc↑", // 8 tie-break: total opponent reply degree ASC (opposite)
-    "sumgc⇄", // 9 pc-adaptive: sumgc↓ for pc≤20, sumgc↑ for pc≥21 (the signal's sign flips at ~pc21)
+    "degree(cur)", // 0 baseline (live degree order) — the recurse_rank we're trying to cut
+    "oracle",      // 1 a losing child first ⇒ recurse_rank 0 (the 100% ceiling)
+    "rec-sumgc↓",  // 2 recurse suffix by total reply degree DESC (opponent-stuck-first)
+    "rec-sumgc↑",  // 3 recurse suffix by total reply degree ASC
+    "rec-mingc↓",  // 4 recurse suffix by min reply degree DESC
+    "rec-mingc↑",  // 5 recurse suffix by min reply degree ASC
 ];
 
-/// One scored node: its pc, whether it had a losing child (else nocut = unavoidable, excluded), and
-/// the 0-based first-losing-child rank under each candidate ordering. `cand_rank[0]` is the live order.
+/// getK ceiling: a child with child_pc ≤ this resolves instantly via the dense getK evaluator (no
+/// recursion, never a search node); child_pc > this is a recurse child (a subtree expansion). Mirrors
+/// the solver default `recurse_min = max(QUEENS_DENSE_K=17, block_k=8, iso_max_avail=7) = 17`.
+const RECURSE_MIN: u32 = 17;
+
+/// One scored node. `n_recurse` = recurse children (the reorderable population). `rrank[c]` = number of
+/// recurse children examined before the first losing child under candidate `c` (the avoidable recurse
+/// expansions). `rrank[0]` is the live degree order.
 struct NodeScore {
     pc: usize,
     cut: bool,
-    cand_rank: [u32; NCAND],
-}
-
-/// Deterministic per-node PRNG (splitmix64) seeded from the node's own bits, so the "random" ordering
-/// is reproducible run-to-run without a `rand` dependency or wall-clock seed.
-fn splitmix64(state: &mut u64) -> u64 {
-    *state = state.wrapping_add(0x9E37_79B9_7F4A_7C15);
-    let mut z = *state;
-    z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9);
-    z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EB);
-    z ^ (z >> 31)
+    n_recurse: u32,
+    rrank: [u32; NCAND],
 }
 
 /// One-ply reply-degree stats of a child `h` (the opponent's reply menu): for each opponent move `v`
@@ -108,65 +104,61 @@ fn score_node(q: &Queens, solver: &dyn Solver, avail: Bits) -> NodeScore {
         .iter()
         .map(|&child| !solver.wins(q, q.board.and_not(child)))
         .collect();
+    let n_recurse = deg.iter().filter(|&&d| d > RECURSE_MIN).count() as u32;
     let mut ns = NodeScore {
         pc,
         cut: losing.iter().any(|&b| b),
-        cand_rank: [0; NCAND],
+        n_recurse,
+        rrank: [0; NCAND],
     };
     if !ns.cut {
         return ns; // nocut — contributes zero ordering loss (a mandatory full scan)
     }
-    // Rank of the first losing child under an index order.
-    let rank_of =
-        |order: &[usize]| -> u32 { order.iter().position(|&i| losing[i]).unwrap() as u32 };
-    // Stable sort of `0..m` by a key (ties keep q.order order, matching the live tie-break).
-    let sorted = |key: &dyn Fn(usize) -> (u32, u32, u32)| -> Vec<usize> {
+    // recurse_rank under an index order = recurse children (the costly subtree expansions) examined
+    // before the first losing child. getK leaves before the cut are free, so they don't count.
+    let rrank_of = |order: &[usize]| -> u32 {
+        let mut r = 0u32;
+        for &i in order {
+            if losing[i] {
+                break;
+            }
+            if deg[i] > RECURSE_MIN {
+                r += 1;
+            }
+        }
+        r
+    };
+    // Recurse-suffix-only reorder: getK children (deg ≤ MIN) keep degree order and sort first (they
+    // already do — lower degree); recurse children (deg > MIN) sort by the candidate's reply key.
+    // Stable ⇒ q.order is the final tie-break. `reckey(i)` is only consulted for recurse children.
+    let order_rec = |reckey: &dyn Fn(usize) -> u32| -> Vec<usize> {
         let mut v: Vec<usize> = (0..m).collect();
-        v.sort_by_key(|&i| key(i));
+        v.sort_by_key(|&i| {
+            if deg[i] > RECURSE_MIN {
+                (1u32, reckey(i), deg[i])
+            } else {
+                (0, deg[i], 0)
+            }
+        });
         v
     };
-    ns.cand_rank[0] = rank_of(&sorted(&|i| (deg[i], 0, 0))); // degree asc (= live order)
-    ns.cand_rank[1] = 0; // oracle: a losing child exists ⇒ a perfect order cuts at rank 0
-    ns.cand_rank[2] = {
-        let mut v: Vec<usize> = (0..m).collect();
-        let mut s =
-            avail.0[0] ^ avail.0[1].rotate_left(17) ^ avail.0[2].rotate_left(33) ^ avail.0[3];
-        for i in (1..m).rev() {
-            let j = (splitmix64(&mut s) % (i as u64 + 1)) as usize;
-            v.swap(i, j);
-        }
-        rank_of(&v)
-    };
-    // Bounded-oracle ceilings: with d* = min degree among losing children, a deg±k order can place the
-    // min-degree losing child after only the children of degree < d*−k. k=0 = the best ANY equal-degree
-    // tie-break can do; k=1 = the ±1-window ceiling. The discriminators (5+) are degree-primary
-    // tie-breaks, so they can capture at most the same-deg (k=0) ceiling.
-    let dstar = (0..m).filter(|&i| losing[i]).map(|i| deg[i]).min().unwrap();
-    let count_below = |thr: u32| (0..m).filter(|&i| deg[i] < thr).count() as u32;
-    ns.cand_rank[3] = count_below(dstar); // same-degree ceiling (k=0)
-    ns.cand_rank[4] = count_below(dstar.saturating_sub(1)); // deg±1 ceiling
-                                                            // One-ply reply-degree tie-breaks (degree primary, reply stat secondary, q.order final tie).
-    ns.cand_rank[5] = rank_of(&sorted(&|i| (deg[i], u32::MAX - min_gc[i], 0))); // min reply deg DESC
-    ns.cand_rank[6] = rank_of(&sorted(&|i| (deg[i], min_gc[i], 0))); // min reply deg ASC
-    ns.cand_rank[7] = rank_of(&sorted(&|i| (deg[i], u32::MAX - sum_gc[i], 0))); // sum reply deg DESC
-    ns.cand_rank[8] = rank_of(&sorted(&|i| (deg[i], sum_gc[i], 0))); // sum reply deg ASC
-                                                                     // pc-adaptive sign: the sumgc signal flips direction at ~pc21 (opponent-stuck-first helps in the
-                                                                     // shallow shoulder, opponent-mobile-first helps deeper) — use the per-band-correct direction.
-    ns.cand_rank[9] = if pc <= 20 {
-        rank_of(&sorted(&|i| (deg[i], u32::MAX - sum_gc[i], 0)))
-    } else {
-        rank_of(&sorted(&|i| (deg[i], sum_gc[i], 0)))
-    };
+    ns.rrank[0] = rrank_of(&order_rec(&|i| deg[i])); // recurse suffix in degree order = live baseline
+    ns.rrank[1] = 0; // oracle: a losing child first ⇒ no recurse child examined before the cut
+    ns.rrank[2] = rrank_of(&order_rec(&|i| u32::MAX - sum_gc[i])); // rec-sumgc↓
+    ns.rrank[3] = rrank_of(&order_rec(&|i| sum_gc[i])); // rec-sumgc↑
+    ns.rrank[4] = rrank_of(&order_rec(&|i| u32::MAX - min_gc[i])); // rec-mingc↓
+    ns.rrank[5] = rrank_of(&order_rec(&|i| min_gc[i])); // rec-mingc↑
     ns
 }
 
-/// Per-pc (and grand) accumulator over the scored nodes.
+/// Per-pc (and grand) accumulator over the scored nodes (recurse-weighted).
 #[derive(Default, Clone)]
 struct Agg {
-    nodes: u64,             // sampled nodes at this pc
-    nocut: u64,             // excluded (no losing child — unavoidable full scan)
-    sum_cur: u64,           // Σ current_rank over cut nodes (= the avoidable loss, baseline)
-    sum_cand: [u64; NCAND], // Σ candidate_rank over cut nodes, per ordering
+    nodes: u64,              // sampled nodes at this pc
+    nocut: u64,              // excluded (no losing child — unavoidable full scan)
+    nrec_sum: u64,           // Σ n_recurse over cut nodes (→ avg recurse children / node)
+    rec_cut: u64, // cut nodes whose baseline recurse_rank > 0 (cut needs ≥1 recurse child)
+    sum_rrank: [u64; NCAND], // Σ recurse_rank over cut nodes, per candidate (rrank[0] = baseline)
 }
 
 /// Run the offline lab over a `QUEENS_HITKEY` dump at `dump_path`. Scores the giant-shoulder band
@@ -265,60 +257,56 @@ pub fn run_ranklab(
         .map(|&avail| score_node(&q, solver, avail))
         .collect();
 
-    // Aggregate per pc and overall.
+    // Aggregate per pc and overall (recurse-weighted).
     let mut per: Vec<Agg> = vec![Agg::default(); pc_hi + 1];
     let mut all = Agg::default();
     for s in &scores {
         let a = &mut per[s.pc];
-        a.nodes += 1;
-        all.nodes += 1;
-        if !s.cut {
-            a.nocut += 1;
-            all.nocut += 1;
-            continue;
-        }
-        let cur = s.cand_rank[0] as u64;
-        a.sum_cur += cur;
-        all.sum_cur += cur;
-        for c in 0..NCAND {
-            a.sum_cand[c] += s.cand_rank[c] as u64;
-            all.sum_cand[c] += s.cand_rank[c] as u64;
+        for t in [&mut *a, &mut all] {
+            t.nodes += 1;
+            if !s.cut {
+                t.nocut += 1;
+                continue;
+            }
+            t.nrec_sum += s.n_recurse as u64;
+            if s.rrank[0] > 0 {
+                t.rec_cut += 1;
+            }
+            for c in 0..NCAND {
+                t.sum_rrank[c] += s.rrank[c] as u64;
+            }
         }
     }
 
-    // Captured fraction of avoidable loss for candidate c: (Σcur − Σcand) / Σcur. A ratio of sums, so
-    // it estimates the true captured fraction from the sample without needing absolute node counts.
+    // Recurse-weighted capture for candidate c: (Σbase_rrank − Σrrank[c]) / Σbase_rrank — the fraction
+    // of avoidable RECURSE expansions (the only wall-relevant ones) this ordering removes.
     let capt = |a: &Agg, c: usize| -> f64 {
-        if a.sum_cur == 0 {
+        if a.sum_rrank[0] == 0 {
             0.0
         } else {
-            100.0 * (a.sum_cur as f64 - a.sum_cand[c] as f64) / a.sum_cur as f64
+            100.0 * (a.sum_rrank[0] as f64 - a.sum_rrank[c] as f64) / a.sum_rrank[0] as f64
         }
     };
 
     let mut hdr = format!(
-        "    {:>3} {:>9} {:>8} {:>10}",
-        "pc", "scored", "nocut%", "mean_rank"
+        "    {:>3} {:>9} {:>7} {:>8} {:>9}",
+        "pc", "scored", "avgRec", "recCut%", "base_rr"
     );
-    for name in CAND_NAMES {
-        hdr.push_str(&format!(" {name:>13}"));
+    for name in CAND_NAMES.iter().skip(2) {
+        hdr.push_str(&format!(" {name:>12}"));
     }
-    println!("{hdr}   (per-candidate = % of avoidable loss captured vs the live order)");
+    println!("{hdr}   (candidates = % of avoidable RECURSE expansions captured vs live order)");
     let print_row = |label: String, a: &Agg| {
-        let cut = a.nodes - a.nocut;
-        let mean_rank = if cut > 0 {
-            a.sum_cur as f64 / cut as f64
-        } else {
-            0.0
-        };
+        let cut = (a.nodes - a.nocut).max(1);
         let mut row = format!(
-            "    {label:>3} {:>9} {:>7.1}% {:>10.3}",
+            "    {label:>3} {:>9} {:>7.2} {:>7.1}% {:>9.3}",
             a.nodes,
-            100.0 * a.nocut as f64 / a.nodes.max(1) as f64,
-            mean_rank,
+            a.nrec_sum as f64 / cut as f64, // avg recurse children per cut node
+            100.0 * a.rec_cut as f64 / cut as f64, // % of cuts that need a recurse child
+            a.sum_rrank[0] as f64 / cut as f64, // mean avoidable recurse exps / cut node
         );
-        for c in 0..NCAND {
-            row.push_str(&format!(" {:>12.1}%", capt(a, c)));
+        for c in 2..NCAND {
+            row.push_str(&format!(" {:>11.1}%", capt(a, c)));
         }
         println!("{row}");
     };
@@ -329,38 +317,16 @@ pub fn run_ranklab(
     }
     print_row("ALL".to_string(), &all);
     println!(
-        "  mean_rank = mean first-losing-child rank under the live degree order (≈ the report's loss/cut).\n  \
-         degree(cur)=0% and oracle=100% validate the pipeline; random = noise floor."
+        "  avgRec = recurse children (child_pc>{RECURSE_MIN}) per cut node · recCut% = cuts needing ≥1 recurse child\n  \
+         base_rr = mean recurse expansions examined before the cut (live order) = the per-node node-reduction ceiling"
     );
-    // Discriminator summary: each tie-break's capture vs the FULL oracle, vs the same-deg ceiling
-    // (the most it could reach as a tie-break), and vs the ±1 ceiling. A degree-primary tie-break that
-    // gets a real fraction of the same-deg ceiling is the signal we're hunting.
-    let ceil_sd = capt(&all, 3); // same-deg ceiling
-    let ceil_d1 = capt(&all, 4); // deg±1 ceiling
+    let cut_all = (all.nodes - all.nocut).max(1);
     println!(
-        "  ceilings: same-deg(k=0) = {ceil_sd:.1}% of full loss · deg±1 = {ceil_d1:.1}% · (a tie-break tops out at same-deg)"
-    );
-    println!(
-        "    {:>12}   {:>10}   {:>14}   {:>12}",
-        "discriminator", "vs full", "vs same-deg", "vs deg±1"
-    );
-    for (c, name) in CAND_NAMES.iter().enumerate().take(NCAND).skip(5) {
-        let cc = capt(&all, c);
-        let of_sd = if ceil_sd != 0.0 {
-            100.0 * cc / ceil_sd
-        } else {
-            0.0
-        };
-        let of_d1 = if ceil_d1 != 0.0 {
-            100.0 * cc / ceil_d1
-        } else {
-            0.0
-        };
-        println!("    {name:>12}   {cc:>9.1}%   {of_sd:>13.1}%   {of_d1:>11.1}%");
-    }
-    println!(
-        "  COST: each one-ply tie-break adds an O(child_pc) reply scan per move (~a 2nd degree pass) —\n  \
-         vs the current O(1) key. Promote only if `vs full` × loss_mass beats that added per-move cost."
+        "  TOTAL avoidable recurse expansions (sample) = {} over {} cut nodes ({:.3}/node); a recurse-suffix\n  \
+         reorder caps at 100% (oracle). If rec-sumgc capture ≈ 0 or base_rr ≈ 0, the lever is DEAD.",
+        all.sum_rrank[0],
+        cut_all,
+        all.sum_rrank[0] as f64 / cut_all as f64,
     );
     Ok(())
 }

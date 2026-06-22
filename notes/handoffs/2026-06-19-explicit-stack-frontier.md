@@ -148,6 +148,45 @@
 > wall drops. Cheaper-proxy hunt (a sub-popcount reply summary) is the fallback if the scan cost eats
 > it. This is a hot-path + real-bench step ⇒ decide with the user.
 
+> **★★★★ LIVE A/B + recurse-weighted re-measure → the move-ordering lever is DEAD, with proof.**
+> Wired `sumgc⇄` into `sort_moves_by_degree` behind `QUEENS_ORD_REPLY`, ran the canonical interleaved
+> n=16 A/B (4 rounds, 8 GB TT): **nodes +0.2% (FLAT), cyc/node +127%, wall +115%.** pc18-only + the scan
+> restricted to pc18: **nodes +0.3% (flat)**, `sort_moves_by_degree` 2.93%→6.85% of cycles (perf), wall
+> +17%. The offline −5% never materialised.
+>
+> **Root cause (verified in code by an Opus sub-agent + a recurse-weighted ranklab pass):** the offline
+> `ordering_loss` counts every "child examined" as unit cost, but a child with **child_pc ≤ 17 is a getK
+> LEAF** (`recurse_min = max(DK=17, block_k=8, iso_max=7) = 17`) — resolved instantly by the dense
+> evaluator, **never increments `nodes`, never probes the TT**. At pc18 EVERY child has child_pc ≤ 17, so
+> the "first-losing-child rank" there is getK *evaluations*, not subtree expansions — reordering them
+> saves cheap ALU, not nodes (hence flat). The signal was real but over a near-worthless cost base.
+>
+> A new **recurse-weighted ranklab metric** (count only recurse children, child_pc>17, examined before
+> the cut = the only avoidable *expansions*) settled it (n=16, cap 2000/pc, pc18–28):
+> | pc | avgRec | recCut% | base_rr (avoidable rec exps/node) | rec-sumgc↓ | rec-sumgc↑ |
+> |---|---|---|---|---|---|
+> | 18–22 | ~0 | ~0% | ~0.00 | 0% | 0% |
+> | 25 | 6.8 | 2.5% | 0.090 | −72% | +14% |
+> | 27 | 15.0 | 10.9% | 0.683 | −44% | +13% |
+> | 28 | 20.0 | 23.3% | 1.874 | −27% | +4% |
+> | ALL | 5.1 | 3.7% | 0.251 | −35.8% | +6.4% |
+>
+> Two nails: (1) the **high-loss_mass bands pc18–24 have base_rr ≈ 0** — no recurse children to reorder,
+> zero node-reduction headroom exactly where the nodes are; (2) **the signal doesn't transfer to recurse
+> children** — `rec-sumgc↓` (the winning full-loss direction) goes NEGATIVE; `rec-sumgc↑` is only +6.4%
+> overall (noise-level) on a tiny base (0.251 avoidable recurse expansions per cut node, concentrated in
+> the lowest-population deep bands). **So cheaper-proxy / try-first ideas are moot — the problem is no
+> headroom, not cost.** `QUEENS_ORD_REPLY` reverted (the dead hot-path gate removed); the `ranklab`
+> recurse-weighted scorer is kept (the artifact that killed it cheaply — one offline pass + one live A/B,
+> no production change).
+>
+> **⇒ THE MOVE-ORDERING LEVER IS RETIRED.** Dynamic degree ordering is at its useful ceiling: the
+> remaining `ordering_loss` is either getK-leaf examinations (not nodes) or recurse expansions the reply
+> signal can't order. The lever map returns to **cutting work, not reordering it**: the parked
+> nimber-decomposition node-count lever, and the getK-evaluator ALU cost (~44% of cycles, near floor).
+> (Opus sub-agent's full menu — incremental edge-count key, try-first pointer, getK-lookahead, sign-flip
+> re-key — is in the session trace; all gated by the now-disproven premise that recurse headroom exists.)
+
 ## ⇒ --19 (2026-06-21, goal: "n=16 2os" / sub-20s search) — PREFETCH lever CONFIRMED DEAD; fresh W17 profile; bounds-check elision −1.2% cyc/node.
 
 > **Mode: intent-based + a "be relentless, don't stop for answers" Stop-goal hook. Work on main (user
