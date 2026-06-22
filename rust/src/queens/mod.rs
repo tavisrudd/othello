@@ -65,7 +65,7 @@ pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
 // sibling modules and the tests via `use super::*` / `use crate::queens::*`.
 pub(crate) use bits::single;
 pub(crate) use count::Counter;
-pub(crate) use dense::DenseW8;
+pub(crate) use dense::{warm_w17, DenseW8};
 pub(crate) use graph::mix64;
 pub(crate) use tt::PnTt;
 

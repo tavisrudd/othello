@@ -118,6 +118,185 @@ const W14_MASKS: ([u128; MAX_DENSE_K], [u128; W14_INDUCED]) = wk_masks128::<W14_
 const W15_MASKS: ([u128; MAX_DENSE_K], [u128; W15_INDUCED]) = wk_masks128::<W15_INDUCED>(W15_K);
 const W16_MASKS: ([u128; MAX_DENSE_K], [u128; W16_INDUCED]) = wk_masks128::<W16_INDUCED>(W16_K);
 
+// ===== W17 layer: 17-vertex graphs (136-bit code, 3 words). =====
+// The `u128` ceiling is K=16 (120 bits); K=17 = 17·16/2 = 136 edge bits needs a 3-word code.
+// Children of a 17-vertex node have ≤16 vertices (≤120 bits, `u128`), so they feed the existing
+// `get16..get9`/`get` machinery via `get_dyn`. The 17-vertex adjacency rows are ≤16-bit (fit the
+// `pext` result `u64`), but the **alive/child subset masks are 17-bit** (the index into the induced
+// table), so the sweep uses `u32` here, not the `u16` of the ≤16 machinery. The induced mask table
+// (2^17 × 3 words = 3 MiB) is built at RUNTIME — const-eval can't afford it past K=16.
+const W17_K: usize = 17;
+const W17_INDUCED_N: usize = 1 << W17_K; // 131072 alive-subsets
+type Code192 = [u64; 3];
+
+/// 17-vertex incident masks (`const`): `W17_INCIDENT[i]` selects the 3-word-code bits of every
+/// edge touching vertex `i`, so `pext(code, W17_INCIDENT[i])` packs `adj[i]` into the low bits.
+const fn w17_incident() -> [Code192; W17_K] {
+    let mut inc = [[0u64; 3]; W17_K];
+    let mut bit = 0usize;
+    let mut i = 0;
+    while i < W17_K {
+        let mut j = i + 1;
+        while j < W17_K {
+            inc[i][bit >> 6] |= 1u64 << (bit & 63);
+            inc[j][bit >> 6] |= 1u64 << (bit & 63);
+            bit += 1;
+            j += 1;
+        }
+        i += 1;
+    }
+    inc
+}
+const W17_INCIDENT: [Code192; W17_K] = w17_incident();
+
+/// Runtime-built 17-vertex induced masks: `induced[alive]` selects the 3-word-code bits of every
+/// edge with both endpoints in `alive` (a 17-bit subset), so `pext(code, induced[alive])` yields
+/// the relabelled subgraph's canonical upper-triangular code. Built incrementally over subsets in
+/// increasing order — `induced[alive] = induced[alive\{h}] | edges(h, alive\{h})` (`h` = top set
+/// vertex) — O(2^17 · popcount), the same trick `wk_masks128` uses to stay cheap; done once
+/// (`OnceLock`) at the first `get17`, ~ms on one thread.
+fn w17_induced() -> &'static [Code192] {
+    static T: OnceLock<Box<[Code192]>> = OnceLock::new();
+    T.get_or_init(|| {
+        // `ebit[i][j]` (i<j) = the code-bit position of edge (i,j) in the upper-triangular layout.
+        let mut ebit = [[0u16; W17_K]; W17_K];
+        let mut bit = 0u16;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..W17_K {
+            for j in (i + 1)..W17_K {
+                ebit[i][j] = bit;
+                bit += 1;
+            }
+        }
+        let mut induced = vec![[0u64; 3]; W17_INDUCED_N].into_boxed_slice();
+        for alive in 1..W17_INDUCED_N {
+            let h = (usize::BITS - 1 - alive.leading_zeros()) as usize; // top set vertex
+            let without_h = alive & !(1usize << h);
+            let mut acc = induced[without_h];
+            let mut rest = without_h;
+            while rest != 0 {
+                let v = rest.trailing_zeros() as usize; // v < h, edge (v,h)
+                rest &= rest - 1;
+                let b = ebit[v][h] as usize;
+                acc[b >> 6] |= 1u64 << (b & 63);
+            }
+            induced[alive] = acc;
+        }
+        induced
+    })
+}
+
+/// Pre-build the W17 induced table (idempotent). Called once from `new_dense` when the dense
+/// ceiling reaches K≥17, so the ~ms build happens at startup, not on a hot `get17`.
+pub(crate) fn warm_w17() {
+    let _ = w17_induced();
+}
+
+/// Three-word BMI2 `pext` returning a `u64` — for a 17-vertex adjacency row (≤16 selected bits).
+#[inline]
+fn pext192_u64(code: &Code192, mask: &Code192) -> u64 {
+    use std::arch::x86_64::_pext_u64;
+    // SAFETY: production is built with target-cpu=znver5, which includes BMI2.
+    unsafe {
+        let l = _pext_u64(code[0], mask[0]);
+        let m = _pext_u64(code[1], mask[1]);
+        let h = _pext_u64(code[2], mask[2]);
+        let nl = mask[0].count_ones();
+        let nm = mask[1].count_ones();
+        l | (m << nl) | (h << (nl + nm))
+    }
+}
+
+/// Three-word BMI2 `pext` returning a `u128` — for a ≤16-vertex child code (≤120 selected bits).
+/// The selected-bit counts can reach 64 (low word) so the shifts are done in `u128`.
+#[inline]
+fn pext192_u128(code: &Code192, mask: &Code192) -> u128 {
+    use std::arch::x86_64::_pext_u64;
+    // SAFETY: as `pext192_u64`.
+    unsafe {
+        let l = _pext_u64(code[0], mask[0]) as u128;
+        let m = _pext_u64(code[1], mask[1]) as u128;
+        let h = _pext_u64(code[2], mask[2]) as u128;
+        let nl = mask[0].count_ones();
+        let nm = mask[1].count_ones();
+        l | (m << nl) | (h << (nl + nm))
+    }
+}
+
+/// Recover the 17 adjacency rows (`u32`, ≤17-bit) from a 136-bit 3-word `code`. Twin of
+/// [`extract_adj`]: `pext` packs the edges touching vertex `i` into the low bits, then the
+/// self-gap is re-inserted at bit `i` so `adj[i] & (1<<j)` is set iff edge `(i,j)` exists.
+#[inline]
+fn extract_adj17(code: &Code192) -> [u32; W17_K] {
+    let mut adj = [0u32; W17_K];
+    #[allow(clippy::needless_range_loop)]
+    for i in 0..W17_K {
+        let packed = pext192_u64(code, &W17_INCIDENT[i]) as u32;
+        let below = (1u32 << i) - 1;
+        adj[i] = (packed & below) | ((packed & !below) << 1);
+    }
+    adj
+}
+
+/// Sweep order for a degree-ordered getK (`QUEENS_GETK_ORD`): vertex indices `0..K` sorted by
+/// degree DESCENDING (highest first ⇒ smallest child ⇒ most-forcing ⇒ earliest cutoff). `deg[i]`
+/// is the precomputed degree of vertex `i` (`adj[i].count_ones()`, ≤ K-1 ≤ 16). A stable counting
+/// sort over the 0..K degree buckets — no comparison branch (the same branchless shape as the
+/// recurse path's `sort_moves_by_degree` win). Returns the order in `order[..K]`.
+#[inline]
+fn deg_order_desc<const K: usize>(deg: &[u8; 17]) -> [u8; 17] {
+    let mut cnt = [0u8; 18];
+    for &d in &deg[..K] {
+        cnt[d as usize] += 1;
+    }
+    // Descending: a degree-d vertex is placed after every higher-degree vertex.
+    let mut start = [0u8; 18];
+    let mut acc = 0u8;
+    let mut d = 17usize;
+    while d > 0 {
+        d -= 1;
+        start[d] = acc;
+        acc += cnt[d];
+    }
+    let mut order = [0u8; 17];
+    #[allow(clippy::needless_range_loop)]
+    for i in 0..K {
+        let d = deg[i] as usize;
+        order[start[d] as usize] = i as u8;
+        start[d] += 1;
+    }
+    order
+}
+
+/// Identity sweep order `[0,1,..,16]` — the label-order (`ord` off) path, so the getK sweep is a
+/// single array-driven loop (no body duplication); the extra per-child order load is negligible
+/// and cancels in the `QUEENS_GETK_ORD` A/B (both arms drive the same loop).
+const IDENTITY17: [u8; 17] = {
+    let mut a = [0u8; 17];
+    let mut i = 0;
+    while i < 17 {
+        a[i] = i as u8;
+        i += 1;
+    }
+    a
+};
+
+/// The getK sweep order for the `u16`-adjacency layers (get9..get16): degree-descending when
+/// `ord` (`QUEENS_GETK_ORD`), else identity (label order). Returns the order in `[..K]`.
+#[inline]
+fn getk_order_u16<const K: usize>(ord: bool, adj: &[u16; MAX_DENSE_K]) -> [u8; 17] {
+    if ord {
+        let mut deg = [0u8; 17];
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..K {
+            deg[i] = adj[i].count_ones() as u8;
+        }
+        deg_order_desc::<K>(&deg)
+    } else {
+        IDENTITY17
+    }
+}
+
 /// Two-word BMI2 `pext` over a `≤128`-bit `code`/`mask`. The low and high 64-bit halves
 /// are extracted independently, then the high half's bits are shifted above the low half's
 /// (`pext` preserves order, and the high-word edges hold the higher labelled-code bit
@@ -393,6 +572,13 @@ pub(crate) struct DenseW8 {
     /// indexed via [`TABLE_OFF`]. One flat `&'static [u64]` (not `&[Box<[u64]>]`) so the hot
     /// leaf [`get`](Self::get) is a single load with no pointer-chase or bounds check.
     arena: &'static [u64],
+    /// `QUEENS_GETK_ORD=1`: sweep the getK children **degree-descending** (highest-degree vertex
+    /// first ⇒ smallest child ⇒ most-forcing ⇒ earliest α-β cutoff) instead of label order. The
+    /// recurse path already degree-sorts its moves (the −30% dynamic-ordering win); the dense
+    /// evaluators historically swept unordered, so a winning child is found later and more
+    /// (expensive) sibling subtrees are evaluated first. Resolved once at build; a predictable
+    /// run-constant branch in the hot getK. Off ⇒ byte-identical label-order sweep.
+    ord_getk: bool,
 }
 
 impl DenseW8 {
@@ -407,7 +593,11 @@ impl DenseW8 {
             }
             flat
         });
-        DenseW8 { arena }
+        DenseW8 {
+            arena,
+            ord_getk: matches!(std::env::var("QUEENS_GETK_ORD").as_deref(), Ok("1"))
+                || matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("1")),
+        }
     }
 
     #[inline]
@@ -555,8 +745,9 @@ impl DenseW8 {
             return self.get_dyn(12 - nrem, pext128_wide(code, W12_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 12) - 1;
-        #[allow(clippy::needless_range_loop)]
-        for i in 0..12 {
+        let order = getk_order_u16::<12>(self.ord_getk, &adj);
+        for &iu in &order[..12] {
+            let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
             let child_code = pext128(code, W12_MASKS.1[child as usize]);
@@ -586,8 +777,9 @@ impl DenseW8 {
             return self.get_dyn(13 - nrem, pext128_wide(code, W13_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 13) - 1;
-        #[allow(clippy::needless_range_loop)]
-        for i in 0..13 {
+        let order = getk_order_u16::<13>(self.ord_getk, &adj);
+        for &iu in &order[..13] {
+            let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
             let child_code = pext128_wide(code, W13_MASKS.1[child as usize]);
@@ -624,8 +816,9 @@ impl DenseW8 {
             return self.get_dyn(14 - nrem, pext128_wide(code, W14_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 14) - 1;
-        #[allow(clippy::needless_range_loop)]
-        for i in 0..14 {
+        let order = getk_order_u16::<14>(self.ord_getk, &adj);
+        for &iu in &order[..14] {
+            let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
             let child_code = pext128_wide(code, W14_MASKS.1[child as usize]);
@@ -662,8 +855,9 @@ impl DenseW8 {
             return self.get_dyn(15 - nrem, pext128_wide(code, W15_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 15) - 1;
-        #[allow(clippy::needless_range_loop)]
-        for i in 0..15 {
+        let order = getk_order_u16::<15>(self.ord_getk, &adj);
+        for &iu in &order[..15] {
+            let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
             let child_code = pext128_wide(code, W15_MASKS.1[child as usize]);
@@ -699,8 +893,9 @@ impl DenseW8 {
             return self.get_dyn(16 - nrem, pext128_wide(code, W16_MASKS.1[keep as usize]));
         }
         let full = u16::MAX; // all 16 vertices (1u16 << 16 would overflow)
-        #[allow(clippy::needless_range_loop)]
-        for i in 0..16 {
+        let order = getk_order_u16::<16>(self.ord_getk, &adj);
+        for &iu in &order[..16] {
+            let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
             let cpc = child.count_ones() as usize;
             let child_code = pext128_wide(code, W16_MASKS.1[child as usize]);
@@ -721,6 +916,48 @@ impl DenseW8 {
             };
             if lost {
                 return true;
+            }
+        }
+        false
+    }
+
+    /// Exact value of one labelled 17-vertex graph (136-bit `code`, 3 words) — the W17 layer,
+    /// one above the `u128` ceiling. A child has ≤16 vertices (≤120-bit code, `u128`), resolved by
+    /// the existing [`get16`](Self::get16)..[`get9`](Self::get9)/[`get`](Self::get) machinery via
+    /// [`get_dyn`](Self::get_dyn). Bounded-depth recursion into the complete `W0..W8` tables — no
+    /// TT, no allocation, no re-expansion below pc==17. `iso_strip` is omitted (gated off globally).
+    #[inline]
+    pub(crate) fn get17(&self, code: &Code192) -> bool {
+        let adj = extract_adj17(code);
+        let induced = w17_induced();
+        let full = (1u32 << W17_K) - 1;
+        if self.ord_getk {
+            let mut deg = [0u8; 17];
+            #[allow(clippy::needless_range_loop)]
+            for i in 0..W17_K {
+                deg[i] = adj[i].count_ones() as u8;
+            }
+            let order = deg_order_desc::<W17_K>(&deg);
+            for &iu in &order[..W17_K] {
+                let i = iu as usize;
+                let child = full & !((1u32 << i) | adj[i]);
+                let cpc = child.count_ones() as usize;
+                // SAFETY: `child < 2^17 = W17_INDUCED_N`, so the index is in bounds.
+                let mask = unsafe { induced.get_unchecked(child as usize) };
+                if !self.get_dyn(cpc, pext192_u128(code, mask)) {
+                    return true;
+                }
+            }
+        } else {
+            #[allow(clippy::needless_range_loop)]
+            for i in 0..W17_K {
+                let child = full & !((1u32 << i) | adj[i]);
+                let cpc = child.count_ones() as usize;
+                // SAFETY: `child < 2^17 = W17_INDUCED_N`, so the index is in bounds.
+                let mask = unsafe { induced.get_unchecked(child as usize) };
+                if !self.get_dyn(cpc, pext192_u128(code, mask)) {
+                    return true;
+                }
             }
         }
         false
@@ -936,6 +1173,88 @@ mod tests {
                 w8.get16(code),
                 wins_rec(16, code, ref_tables()),
                 "W16 mismatch at code {code:#x}"
+            );
+        }
+    }
+
+    // ===== W17 scalar reference (3-word code; the u128 `wins_rec` tops out at K=16). =====
+
+    /// Decode the 17 adjacency rows (`u32`) from a 136-bit 3-word code — pure scalar, no `pext`.
+    fn adj17_from_code(code: &[u64; 3]) -> [u32; 17] {
+        let mut adj = [0u32; 17];
+        let mut bit = 0usize;
+        for i in 0..17 {
+            for j in (i + 1)..17 {
+                if (code[bit >> 6] >> (bit & 63)) & 1 != 0 {
+                    adj[i] |= 1 << j;
+                    adj[j] |= 1 << i;
+                }
+                bit += 1;
+            }
+        }
+        adj
+    }
+
+    /// Project an `alive` subset (≤16 vertices) of a 17-vertex graph to its `(k, u128 code)` —
+    /// relabel survivors `0..k` ascending and emit the upper-triangular edge code.
+    fn proj17_to_u128(adj: &[u32; 17], alive: u32) -> (usize, u128) {
+        let verts: Vec<usize> = (0..17).filter(|&v| alive & (1 << v) != 0).collect();
+        let k = verts.len();
+        let mut code = 0u128;
+        let mut bit = 0u32;
+        for a in 0..k {
+            for b in (a + 1)..k {
+                if adj[verts[a]] & (1 << verts[b]) != 0 {
+                    code |= 1u128 << bit;
+                }
+                bit += 1;
+            }
+        }
+        (k, code)
+    }
+
+    /// Scalar minimax over a 17-vertex graph's adjacency: a node WINS iff some move (place a queen
+    /// on vertex `i`, deleting `N[i]`) leaves the opponent a LOSS. The empty graph is a loss.
+    fn wins17_scalar(adj: &[u32; 17], alive: u32, tables: &[Box<[u64]>]) -> bool {
+        let mut a = alive;
+        while a != 0 {
+            let i = a.trailing_zeros() as usize;
+            a &= a - 1;
+            let child = alive & !((1u32 << i) | adj[i]);
+            let (ck, ccode) = proj17_to_u128(adj, child);
+            if !wins_rec(ck, ccode, tables) {
+                return true;
+            }
+        }
+        false
+    }
+
+    #[test]
+    fn direct_w17_matches_scalar_recurrence() {
+        let w8 = DenseW8::build();
+        let full = (1u32 << 17) - 1;
+        // A spread of edge densities: a random 136-bit code is ~50% dense; ANDing two/three
+        // independent draws thins it toward the ~0.3 queen-graph density (and deeper recursion).
+        for x in 0..40_000u64 {
+            let mut code = [0u64; 3];
+            for (w, c) in code.iter_mut().enumerate() {
+                let s = (x + 1).wrapping_mul(
+                    0x9E37_79B9_7F4A_7C15 ^ (w as u64).wrapping_mul(0x1234_5678_9ABC_DEF1),
+                );
+                let mut v = s ^ s.rotate_left(31);
+                if x % 3 == 1 {
+                    v &= s.rotate_left(17); // ~25% density
+                } else if x % 3 == 2 {
+                    v &= s.rotate_left(17) & s.rotate_left(43); // ~12% density (deep recursion)
+                }
+                *c = v;
+            }
+            code[2] &= (1u64 << (136 - 128)) - 1; // keep only the 136 used bits
+            let adj = adj17_from_code(&code);
+            assert_eq!(
+                w8.get17(&code),
+                wins17_scalar(&adj, full, ref_tables()),
+                "W17 mismatch at code {code:?}"
             );
         }
     }

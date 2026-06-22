@@ -1089,8 +1089,25 @@ impl IsoFlat {
         // code-build the deep getK layers are cheap enough that raising the ceiling pays the whole
         // way up — n=16 node count is TT-independent (the cut is inherent, not eviction-driven) and
         // wall drops monotonically K=12→16 (16 GB single-run: 49.5s→34.4s = −30.6%). `QUEENS_DENSE_K`
-        // (9..=16) overrides — lower it to trade per-node getK cost back for more recurse expansion.
-        s.dense_k = env_u32("QUEENS_DENSE_K", 16).clamp(9, 16);
+        // (9..=17) overrides — lower it to trade per-node getK cost back for more recurse expansion.
+        // K=17 (the new lever): the 136-bit code spans 3 words (above the u128 K=16 ceiling) and
+        // resolves pc==17 nodes (~21% of the n=16 node set, M_HITKEY-measured) directly as getK
+        // leaves instead of recurse-spine entry probes. pc==17 is 99.8% COLD (not transposition-
+        // saturated, contra the earlier table-free get17 read), so eliminating its cold DRAM probe
+        // is the bet. Default stays 16 until the K=17 A/B confirms; `QUEENS_DENSE_K=17` enables.
+        s.dense_k = env_u32("QUEENS_DENSE_K", 16).clamp(9, 17);
+        // Clean 0/1 A/B toggle (QUEENS_DENSE_K=0/1 would both clamp to 9): QUEENS_W17=1 forces the
+        // K=17 ceiling, =0/unset leaves the QUEENS_DENSE_K value. Lets the canonical A/B harness
+        // flip K=16↔17 on one binary.
+        if matches!(std::env::var("QUEENS_W17").as_deref(), Ok("1"))
+            || matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("1"))
+        {
+            s.dense_k = 17;
+        }
+        if s.dense_k >= 17 {
+            // Pre-build the 2^17 W17 induced-mask table (~ms, 3 MiB) at startup, off the hot path.
+            warm_w17();
+        }
         // Warm-restart OFF by default for iso-dense (--15): the warm_secs(=2) parallel warm pass +
         // staggered restart trims the node count a touch but its ramp costs more wall than it saves
         // now that the counting sort sped the kernel — a 4-round n=16 A/B (12 GB) measured restart-ON
@@ -1575,6 +1592,43 @@ impl IsoFlat {
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
         dense8.get16(code)
+    }
+
+    /// Resolve a 17-vertex graph directly from W0..W8 (the W17 layer, one above the `u128`
+    /// ceiling — the 136-bit labelled code spans **three** `u64` words). Twin of
+    /// [`w16_get`](Self::w16_get): one `adj_row_pext` per vertex packed into the 3-word code,
+    /// then [`DenseW8::get17`] sweeps every child (each ≤16 vertices ⇒ `u128`, into get16..get9).
+    /// Only reached at the `DK >= 17` instantiation (`QUEENS_DENSE_K=17`).
+    #[inline]
+    fn w17_get(&self, att: &[[Bits; 8]], avail: Bits) -> bool {
+        // SAFETY: the DK≥17 const generic at the (only) call site guarantees `dense8` is `Some`.
+        let dense8 = unsafe { self.dense8.as_ref().unwrap_unchecked() };
+        debug_assert_eq!(avail.popcount(), 17);
+        let mut verts = [0u8; 17];
+        verts_of(avail, &mut verts);
+        // pext code-build (see `w16_get`): 17 rows of one 4-word pext, packed into the 136-bit
+        // code (three `u64` words, split per row at the 64-bit word boundaries). The straddle only
+        // ever crosses the 0→1 and 1→2 boundaries (max bit 135 < 192), so `wi+1 ≤ 2` always.
+        let a = &avail.0;
+        let c0 = a[0].count_ones();
+        let c1 = c0 + a[1].count_ones();
+        let c2 = c1 + a[2].count_ones();
+        let cpre = [c0, c1, c2];
+        let mut words = [0u64; 3];
+        let mut off = 0u32;
+        for i in 0..17u32 {
+            let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let width = 17 - 1 - i;
+            let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
+            let lo = off & 63;
+            let wi = (off >> 6) as usize;
+            words[wi] |= contrib << lo;
+            if lo + width > 64 {
+                words[wi + 1] |= contrib >> (64 - lo);
+            }
+            off += width;
+        }
+        dense8.get17(&words)
     }
 
     #[inline]
@@ -3043,6 +3097,8 @@ impl IsoFlat {
                     !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
                         q, att, &child, ckey, cr, cf, moves, nodes,
                     )
+                } else if DK >= 17 && pc == 17 {
+                    !self.w17_get(att, child0)
                 } else if DK >= 16 && pc == 16 {
                     !self.w16_get(att, child0)
                 } else if DK >= 15 && pc == 15 {
@@ -3151,7 +3207,9 @@ impl IsoFlat {
             // (no flat-TT probe, no subtree expansion). `DK` is `const`, so each arm const-folds
             // away for the instantiations below it — `DK == 8` (iso-flat/iso-window) compiles all
             // three out, identical to before.
-            let lost = if DK >= 16 && pc == 16 {
+            let lost = if DK >= 17 && pc == 17 {
+                !self.w17_get(att, child0)
+            } else if DK >= 16 && pc == 16 {
                 !self.w16_get(att, child0)
             } else if DK >= 15 && pc == 15 {
                 !self.w15_get(att, child0)
@@ -3363,7 +3421,9 @@ impl IsoFlat {
                         break 'node true; // empty child wins outright
                     }
                     let pc = child0.popcount();
-                    let lost = if DK >= 16 && pc == 16 {
+                    let lost = if DK >= 17 && pc == 17 {
+                        !self.w17_get(att, child0)
+                    } else if DK >= 16 && pc == 16 {
                         !self.w16_get(att, child0)
                     } else if DK >= 15 && pc == 15 {
                         !self.w15_get(att, child0)
@@ -4293,6 +4353,9 @@ impl IsoFlat {
                 !self.par_wins_inc::<false, true, false, 8>(q, att, co, ckey, 1, min_avail)
             }
             (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 17) => {
+                    !self.par_wins_inc::<false, false, true, 17>(q, att, co, ckey, 1, min_avail)
+                }
                 (true, 16) => {
                     !self.par_wins_inc::<false, false, true, 16>(q, att, co, ckey, 1, min_avail)
                 }
@@ -4375,6 +4438,16 @@ impl Solver for IsoFlat {
                 &mut nodes,
             ),
             (false, false) => match (self.dense8.is_some(), self.dense_k) {
+                (true, 17) => self.wins_inc::<false, false, true, 17, M_NORMAL>(
+                    q,
+                    att,
+                    &orient,
+                    key,
+                    route,
+                    fp,
+                    self.order8(q),
+                    &mut nodes,
+                ),
                 (true, 16) => self.wins_inc::<false, false, true, 16, M_NORMAL>(
                     q,
                     att,
