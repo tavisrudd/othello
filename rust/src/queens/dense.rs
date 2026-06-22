@@ -701,8 +701,9 @@ impl DenseW8 {
             return self.get_dyn(9 - nrem, rcode as u128);
         }
         let full = (1u16 << 9) - 1;
-        // `i` is both the removed-vertex bit (`1 << i`) and the `adj[i]` index, so the range
-        // loop is the natural form here (not a needless one).
+        // NO degree-ordering here: get9's children are cheap W≤8 lookups, so the counting-sort +
+        // popcount overhead exceeds the cutoff savings (measured: the sort dominated get9's profile).
+        // Ordering only pays from get14 up, where children are expensive nested evaluators.
         #[allow(clippy::needless_range_loop)]
         for i in 0..9 {
             let child = full & !((1u16 << i) | adj[i]);
@@ -733,6 +734,7 @@ impl DenseW8 {
             return self.get_dyn(10 - nrem, rcode as u128);
         }
         let full = (1u16 << 10) - 1;
+        // NO degree-ordering (see get9): children are cheap, the sort overhead exceeds the savings.
         #[allow(clippy::needless_range_loop)]
         for i in 0..10 {
             let child = full & !((1u16 << i) | adj[i]);
@@ -768,6 +770,7 @@ impl DenseW8 {
             return self.get_dyn(11 - nrem, rcode as u128);
         }
         let full = (1u16 << 11) - 1;
+        // NO degree-ordering (see get9): children are cheap, the sort overhead exceeds the savings.
         #[allow(clippy::needless_range_loop)]
         for i in 0..11 {
             let child = full & !((1u16 << i) | adj[i]);
