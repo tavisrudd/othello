@@ -713,10 +713,15 @@ impl DenseW8 {
         #[allow(clippy::needless_range_loop)]
         for i in 0..9 {
             let child = full & !((1u16 << i) | adj[i]);
+            // `cpc` off the `child`→popcount critical path: a move removes `{i} ∪ N[i]`
+            // (disjoint, ⊆ full), so `cpc = 9 - 1 - deg(i)`. `popcount(adj[i])` depends only on
+            // `adj[i]`, so it issues in parallel with `child` — the W[cpc] table index is ready
+            // before `child` finishes, shortening the chain to the arena load.
+            let cpc = (8 - adj[i].count_ones()) as usize;
             // SAFETY: same BMI2 build invariant as `extract_adj`. Extracted edges retain
             // upper-triangle order, so the result directly indexes W[popcount].
             let child_code = unsafe { _pext_u64(code, W9_MASKS.1[child as usize]) } as usize;
-            if !self.get(child.count_ones() as usize, child_code) {
+            if !self.get(cpc, child_code) {
                 return true;
             }
         }
@@ -744,7 +749,9 @@ impl DenseW8 {
         #[allow(clippy::needless_range_loop)]
         for i in 0..10 {
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 10 - 1 - deg(i)` off the `child`→popcount chain (see get9): `popcount(adj[i])`
+            // issues in parallel with `child`, so the `cpc==9` branch + table dispatch resolve early.
+            let cpc = (9 - adj[i].count_ones()) as usize;
             // SAFETY: same BMI2 build invariant as `extract_adj`; the projected code is the
             // child's canonical upper-triangular code (pext preserves edge order).
             let child_code = unsafe { _pext_u64(code, W10_MASKS.1[child as usize]) };
@@ -780,7 +787,8 @@ impl DenseW8 {
         #[allow(clippy::needless_range_loop)]
         for i in 0..11 {
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 11 - 1 - deg(i)` off the `child`→popcount chain (see get9).
+            let cpc = (10 - adj[i].count_ones()) as usize;
             // SAFETY: same BMI2 build invariant as `extract_adj`.
             let child_code = unsafe { _pext_u64(code, W11_MASKS.1[child as usize]) };
             let lost = match cpc {
@@ -812,7 +820,8 @@ impl DenseW8 {
         for &iu in &order[..12] {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 12 - 1 - deg(i)` off the `child`→popcount chain (see get9).
+            let cpc = (11 - adj[i].count_ones()) as usize;
             let child_code = pext128(code, W12_MASKS.1[child as usize]);
             let lost = match cpc {
                 11 => !self.get11(child_code),
@@ -844,7 +853,8 @@ impl DenseW8 {
         for &iu in &order[..13] {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 13 - 1 - deg(i)` off the `child`→popcount chain (see get9).
+            let cpc = (12 - adj[i].count_ones()) as usize;
             let mask = W13_MASKS.1[child as usize];
             // Right-size the child code (see `get16`): only a 12-vertex child (66-bit) needs the
             // `u128` `pext128_wide`; the ≤11-vertex majority uses the cheaper `u64` `pext128`.
@@ -884,7 +894,8 @@ impl DenseW8 {
         for &iu in &order[..14] {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 14 - 1 - deg(i)` off the `child`→popcount chain (see get9).
+            let cpc = (13 - adj[i].count_ones()) as usize;
             let mask = W14_MASKS.1[child as usize];
             // Right-size the child code (see `get16`): `u64` `pext128` for the ≤11-vertex majority;
             // only a 12/13-vertex child (isolated removal, >64 bits) needs the `u128` `pext128_wide`.
@@ -927,7 +938,8 @@ impl DenseW8 {
         for &iu in &order[..15] {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 15 - 1 - deg(i)` off the `child`→popcount chain (see get9).
+            let cpc = (14 - adj[i].count_ones()) as usize;
             let mask = W15_MASKS.1[child as usize];
             // Right-size the child code (see `get16`): `u64` `pext128` for the ≤11-vertex majority.
             let lost = if cpc >= 12 {
@@ -968,7 +980,9 @@ impl DenseW8 {
         for &iu in &order[..16] {
             let i = iu as usize;
             let child = full & !((1u16 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = 16 - 1 - deg(i)` off the `child`→popcount chain (see get9). `full` is all 16
+            // bits, so `{i} ∪ N[i] ⊆ full` (disjoint) and the identity is exact.
+            let cpc = (15 - adj[i].count_ones()) as usize;
             let mask = W16_MASKS.1[child as usize];
             // Right-size the child code: most children are ≤11 vertices (≤55-bit code, `u64`) — only
             // the rare ≥12-vertex child (isolated-vertex removal) needs the `u128` `pext128_wide`
@@ -1015,7 +1029,10 @@ impl DenseW8 {
         for &iu in &order[..K] {
             let i = iu as usize;
             let child = full & !((1u32 << i) | adj[i]);
-            let cpc = child.count_ones() as usize;
+            // `cpc = K - 1 - deg(i)` off the `child`→popcount chain (see get9): a move removes
+            // `{i} ∪ N[i]` (disjoint, ⊆ full), so `popcount(adj[i])` (depends only on `adj[i]`)
+            // issues in parallel with `child`.
+            let cpc = (K - 1) - adj[i].count_ones() as usize;
             // SAFETY: `child < 2^K`, the induced table size.
             let mask = unsafe { induced.get_unchecked(child as usize) };
             let cc = pext192_u192(code, mask);
