@@ -2675,7 +2675,15 @@ impl IsoFlat {
         avail: Bits,
         att: &[[Bits; 8]],
     ) {
-        let n = dst.len();
+        // `n ≤ MAXV` (and ≤ both slice lengths) is an existing invariant — the moves are a subset of
+        // the ≤ MAXV board squares — but the optimizer can't see it, so the `.min` makes it explicit.
+        // With it, every fixed-array index below (`draw[k]`/`src[k]`, `k < n ≤ MAXV`) and the masked
+        // degree (`d & (MAXV-1)`, a no-op since `d = popcount < n ≤ MAXV`, mirroring getK's `& 0x3ff`)
+        // carry NO bounds check; the stable-scatter writes use `get_unchecked` under the counting-sort
+        // invariant. These checks (`cmp $0x100`/`cmp $0xff`/`cmp %rax,%rbx` in the annotate) were a big
+        // slice of this 7.5%-of-run function AND extra branches the frontend (22.6% stalled) must fetch.
+        debug_assert_eq!(dst.len(), deg.len());
+        let n = dst.len().min(deg.len()).min(MAXV);
         // Degree key per move (current available-block popcount) in move order. A child drops the
         // placed square plus its attacked squares, so `0 ≤ degree < n` — the key fits the counting
         // sort's `[0, n)` index range. pc ≤ 256 fits u16.
@@ -2692,7 +2700,7 @@ impl IsoFlat {
         // so the searched node set is byte-identical. The descent/gather reuse the sorted `deg`.
         let mut count = [0u16; MAXV];
         for &d in &draw[..n] {
-            count[d as usize] += 1;
+            count[(d as usize) & (MAXV - 1)] += 1;
         }
         // Prefix-sum the per-degree counts into start positions (degrees live in `[0, n)`).
         let mut acc = 0u16;
@@ -2705,11 +2713,16 @@ impl IsoFlat {
         let mut src = [0u8; MAXV];
         src[..n].copy_from_slice(&dst[..n]);
         for k in 0..n {
-            let d = draw[k] as usize;
+            let dk = draw[k];
+            let d = (dk as usize) & (MAXV - 1);
             let p = count[d] as usize;
             count[d] += 1;
-            dst[p] = src[k];
-            deg[p] = draw[k];
+            // SAFETY: stable counting sort ⇒ `p = count[d] ∈ [prefix[d], prefix[d]+cnt[d]) ⊆ [0, n)`,
+            // and `n ≤ dst.len()` and `n ≤ deg.len()`, so both scatter writes are in bounds.
+            unsafe {
+                *dst.get_unchecked_mut(p) = src[k];
+                *deg.get_unchecked_mut(p) = dk;
+            }
         }
     }
 
@@ -2979,7 +2992,9 @@ impl IsoFlat {
                 // M_L0/M_WAVE_C/M_SIZE_WAVE) have no `degs`, so they recompute — const-folds per MODE.
                 let child0;
                 if ord_w {
-                    let pc = degs[i] as u32;
+                    // `i < moves.len() ≤ MAXV`, so `& (MAXV-1)` is a no-op that elides `degs`' bounds
+                    // check (degs is `[u16; MAXV]`) — a hot per-move branch the frontend would fetch.
+                    let pc = degs[i & (MAXV - 1)] as u32;
                     if pc == 0 {
                         // M_RANK: an empty child found during the gather is a pre-descent (ETC-side) cut.
                         if MODE == M_RANK {
@@ -3068,7 +3083,7 @@ impl IsoFlat {
                 let child0 = avail.and_not(a[0]);
                 // Sort-fuse (M_ORD_W): reuse the sorted degree instead of recomputing the popcount.
                 let pc = if ord_w {
-                    degs[i] as u32
+                    degs[i & (MAXV - 1)] as u32 // mask elides the bounds check (i < moves.len() ≤ MAXV)
                 } else {
                     child0.popcount()
                 };

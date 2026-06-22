@@ -11,6 +11,98 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ --19 (2026-06-21, goal: "n=16 2os" / sub-20s search) — PREFETCH lever CONFIRMED DEAD; fresh W17 profile; bounds-check elision −1.2% cyc/node.
+
+> **Mode: intent-based + a "be relentless, don't stop for answers" Stop-goal hook. Work on main (user
+> prefers it); fresh tmux windows per run (never reuse).** Net: the --18-chosen PREFETCH lever is
+> measured DEAD (two forms), the cost map is re-profiled fresh on the W17 default, and a small clean
+> win banked (bounds-check elision). Big levers remain exhausted; the wall is now mapped as
+> **frontend(I-cache) 22.6% + branch-mispredict 11% + getK-ALU 44% (near floor) + cold-TT-probe DRAM**.
+>
+> **★ PREFETCH (the --18 user-chosen "SMT-sibling helper") = DEAD, two forms built + n=16-A/B'd, both
+> removed from main (negative; recorded here per CLAUDE.md):**
+> - **Off-core prefetch HELPER** (`QUEENS_PFHELPER`, a new `M_PFHELPER` mode): a separate thread that
+>   reconstructs each tail worker's node from a published `avail` (4 atomics/node; exact via the
+>   `child_orient(parent,att[sq],child0) == orient_of(q,child0)` identity — so the helper recomputes
+>   future recurse-spine routes with pure bounds-safe Bits math, no fault on a racy read), chases the
+>   spine `pf_depth` plies ahead, and `_mm_prefetch`-warms the cold pc≥18 probe slots. CCX/SMT-aware
+>   pinning (the box has **2 L3 domains**: CCX0/perf = cpus 0-3,12-15 [16 MB L3], CCX1/eff = 4-11,16-23;
+>   siblings `(k,k+12)`; `pf_target_cpu`+`sched_setaffinity` follow the worker's published cpu). n=16
+>   4-round A/B: **unpinned +1.7% cyc/node / +2.0% wall; pinned-continuous-chase +7.2% wall** (warming
+>   the worker's own L3 floods it with cold use-once TT lines that evict the hot getK arena). The
+>   chase-on-change refinement (prefetch each frontier once, not continuously) was built but the run
+>   that would A/B it got box-contaminated (ran `cargo check` mid-bench — DON'T) and it was superseded.
+> - **Inline gather-time T2/L3 prefetch** (`QUEENS_PFL3`): the untried angle `pf_deep` missed — it only
+>   tried T0/L1 and T1/L2 (both evicted by the 32 MB getK-arena scan); warm the recurse children to
+>   **T2/L3** (16 MB, survives the scan) at gather time. **n=16 5-round A/B = +1.0% cyc/node** (clean,
+>   every on-round above every off-round). The extra prefetch instructions cost ~1% and hide nothing.
+> - **WHY dead (the real reason, beyond --18's "wash"):** the DFS entry probe is **inherently serial**
+>   (one path-dependent probe per node; you can't issue the next until you know which child you recurse
+>   into, which is cutoff-dependent), so there is no MLP to exploit — the existing one-ahead
+>   `prefetch_h` already captures the only easy overlap. Adding prefetch just adds instruction +
+>   MSHR/LFB + L3-pollution overhead and **perturbs the parallel TT-fill timing** (the "on" runs
+>   systematically drew more nodes). The queuing-theory ρ≈8% spare *bandwidth* is real but irrelevant —
+>   the wall is *latency* and it's serial. **⇒ the whole memory-latency-hiding family (helper, pf_deep,
+>   pf_l3, MLP-probes) is CLOSED with n=16 evidence.** (Helper/pf_l3 code reverted; design recorded here.)
+>
+> **★ FRESH W17 PROFILE (the cost map was W12/W16-era; this is the current default).** perf record
+> `--sort=symbol` + `perf stat` (n=16, 12 GB TT, ~29s):
+> | bucket | cycles% | notes |
+> |---|---|---|
+> | **getK evaluators** (`DenseW8::get9..16` + `get_dyn_wide`) | **~44%** | the dominant cost (grew from 35% — W17 added layers). ALU/L1-latency-bound: the per-child chain mask-load→pext→popcount→cpc-branch→**arena `bt` load-use** (`get10` annotate: `bt %rdx,%rax` 13.7%, `cmp $0x9,%edi` cpc-branch 12%). NEAR FLOOR. |
+> | `wK_get` builders (`wN_get`) | ~24% | code-build (`adj_row_pext`) + `verts_of` |
+> | `sort_moves_by_degree` | 7.5% | the counting sort |
+> | `wins_inc` | 18% | descent cascade + cutoffs + recurse |
+> | `mtt_get` | 2.4% | the TT probe |
+>
+> - **IPC 1.40. Frontend-stalled 22.6% + branch-mispredict ~11% = ~33% of cycles lost** to the I-cache
+>   (the big getK code footprint: get9..get16+wide are ~9 hot functions ≳ 32 KB L1i) + mispredicts.
+> - **Branch-misses by symbol: `wK_get` builders ~45%** (the source is `verts_of`'s `while x!=0`
+>   bit-iteration data-dependent exit), **`wins_inc` 23%** (cascade dispatch + data-dependent cutoffs),
+>   getK ~15%.
+> - **Cache: L1-dcache miss = 2.7%, LLC miss = 12.9% (7.1 B DRAM misses/run = the cold TT probes).**
+>   The **W8 hot-set is L1/L2-resident** despite the 32 MB table (the tail's recurring subgraphs are a
+>   small set). ⇒ getK is NOT arena-DRAM-bound — it's the ALU/L1-latency chain.
+> - **★ USER Qs answered with data — W8 is the right table level + repr (don't build higher/lower):**
+>   complete labeled tables are `2^(K(K-1)/2)`: **W8 = 2^28 = 32 MB, W9 = 2^36 = 8 GB, W10 = 4 TB.**
+>   Higher (W9) = a cold 8 GB DRAM table competing with the TT (worse); lower (W7 = 256 KB, fits L2)
+>   gains nothing on the loads (already L1-resident per the 2.7% miss) and adds a ply of compute. The
+>   1-bit bitset + `bt` test is cache-optimal. The `cpc==K-1` branch (12% of get10) dispatches isolated-
+>   vertex children to a nested getK — REAL (ISO_STRIP=false; the boolean getK can't shortcut an
+>   isolated vertex — needs nimbers, dead) and not removable.
+>
+> **★ BANKED WIN — hot-path bounds-check elimination = ~−0.6% cyc/node, byte-identical (n=14
+> 2,714,701, n=12 distinct 1,060,823, lineage green).** `sort_moves_by_degree` had `cmp $0x100`/`cmp
+> $0xff`/`cmp %rax,%rbx` bounds checks in the counting-sort scatter (each also a branch the
+> 22.6%-frontend must fetch); elided via `n = len.min(MAXV)` (proves the fixed-array indexes),
+> `d & (MAXV-1)` mask (the getK `& 0x3ff` trick), and `get_unchecked` on the stable scatter (the
+> counting-sort invariant `p ∈ [0,n)`). + the descent `degs[i & (MAXV-1)]` mask (2 sites). Two
+> interleaved A/Bs: the sort-alone (with a `pf_l3` branch confound) read −1.2%; the final clean
+> baseline-vs-reverted-prefetch 5-round read **−0.55% cyc/node excluding a round-1 cold-start outlier
+> (every round 2-5 has B<A; raw incl. outlier −2.2%).** So ~−0.6% honest, small but real + zero-risk.
+> ON MAIN (commit pending).
+>
+> **⇒ NEXT (the live levers, biggest-bucket first):**
+> 1. **FRONTEND (22.6%) + BRANCH (11%) = the biggest under-attacked bucket.** Two contained, byte-
+>    identical candidates: **(a) jump-table the `wins_inc` descent pc-cascade** (the `if pc==17 else if
+>    pc==16 …` walks ~2-5 branches + fetched comparison code per child × ~10 children/node; a `match pc`
+>    → one indirect jump — the handoff's untried #2; wins_inc is 23% of mispredicts). **(b) de-branch
+>    `verts_of`** (the #1 mispredict source at ~45%): const-generic `verts_of::<K>` fixed-count loop
+>    unrolls away the `while x!=0` exit. *Caveat:* my napkin says (b) saves only ~1 mispredict/call
+>    (matches --15's "may wash") — measure but temper expectations; (a) is the better bet.
+> 2. **NODE-COUNT / move ordering** — still the only *−2× ceiling* lever (the report's "worth ~2×";
+>    at DK=17 a pc-18 node's children are ALL getK leaves, so the move order directly controls how many
+>    of the **44% getK evals** happen before a cutoff). But every tried form washed (countermove,
+>    killer, history, effective-degree); the untried 1-ply lookahead ADDS code/compute (bad when
+>    frontend-bound). Hard. No cheap idea found this session.
+> 3. **getK / W8 = NEAR FLOOR, do not re-grind** (ALU-chain, cache-optimal, level/repr confirmed).
+>
+> **Method notes banked:** (i) the `| tee … ; echo MARKER` footgun bit again — a `capture-pane | grep
+> MARKER` poll false-matches the *typed command line*; poll the **output FILE** for the script's own
+> `AGGREGATE`/`DONE` line, never the pane. (ii) `cargo check`/build DURING an A/B contaminates it
+> (build pool on the eff cores) — keep the box idle. (iii) cyc/node is the trustworthy metric for
+> byte-identical changes (wall swings ±node-noise; the parallel node count diverges run-to-run).
+
 ## ⇒ --18 (2026-06-21, goal: "n=16 2os" / sub-20s search) — W17 dense layer + getK degree-ordering = −13% wall.
 
 > **Branch `queens-sub20-wk`** (off `queens-sub20-wk`←`queens-compact-assoc-tt`; NOT on main yet — decide promote with user).
