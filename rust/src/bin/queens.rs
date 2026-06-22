@@ -61,11 +61,16 @@ const DISTINCT_POSITIONS: [u64; 17] = [
     9_200_000_000, // n=16 (extrapolated; exceeds any single-box table)
 ];
 
-/// Upper bound on the transposition-table size: `2^31` slots ≈ 17 GB at the
-/// Chunk-2 compact 8-byte slot (the dev box has 26 GB). The n=16 working set
-/// (~9.2e9) dwarfs even that, so its table is pinned here and thrashes; raise it
-/// with `QUEENS_TT_BITS` if you have the RAM.
-const MAX_TT_BITS: u32 = 31;
+/// Upper bound on the transposition-table size: `2^30` slots = **8 GiB** at the
+/// Chunk-2 compact 8-byte slot. n=16 (the only board that hits the cap) ran at 17 GB
+/// (`2^31`), but the K=16 node-count win (~0.39 B nodes) made that wasteful: a TT-size
+/// sweep showed the **search wall is flat from 4–12 GB** (the deep tail is 99.8% cold —
+/// the TT barely earns hits — so it only thrashes once fill passes ~65%, well above 8 GiB's
+/// ~36%). The one cost of shrinking was the end-of-solve **PV scan** (it re-solves entries
+/// evicted during search: 0.01s @12 GB → 0.79s @6 GB → 10s @1 GB) — addressed by the inline-PV
+/// path so the smaller table is a free ~9 GB of RAM (kills the back-to-back-OOM headroom problem).
+/// Raise with `QUEENS_TT_BITS` if you have the RAM and want the PV scan free without inline PV.
+const MAX_TT_BITS: u32 = 30;
 
 /// Transposition-table size in bits (`2^bits` slots ≈ `2^bits × 8` bytes), sized
 /// from the measured working set [`DISTINCT_POSITIONS`] to keep the direct-mapped

@@ -75,6 +75,7 @@ const M_ORD_W: u8 = 11; // dynamic move ordering + the M_WAVE ETC cut on top (`Q
 const M_DECPROBE: u8 = 12; // M_ORD_W + tap the connected-component decomposability of every pc 9..16 getK node (`QUEENS_DECPROBE=1`)
 const M_RANK: u8 = 13; // M_ORD_W + tap the first-losing-child cutoff rank (ETC vs descent rank vs no-cut) per pc (`QUEENS_RANK=1`)
 const M_COLD: u8 = 14; // M_ORD_W + tap the entry-probe hit/miss (cold-compute) fraction per pc, per-worker (`QUEENS_COLD=1`)
+const M_HITKEY: u8 = 15; // M_ORD_W + DUMP each pc≥17 entry probe's canonical key + avail bits (all hits, 1/64 misses) to a file for offline structural study of the 0.2% deep-tail hits (`QUEENS_HITKEY=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -244,6 +245,32 @@ struct ColdWorker {
     misses: Box<[u64; MAXPC]>,
 }
 
+/// `M_HITKEY` (`QUEENS_HITKEY=1`) one captured pc≥17 entry probe: the node's canonical key and its
+/// own available-set bits, plus the probe outcome. From `avail` (a board-square bitset) + the board
+/// side `n` the OFFLINE study reconstructs the exact conflict graph and every cheating-free structural
+/// feature; `key` is the canonical identity (D4-merged) so recurrences of the same node collapse and
+/// PV-overlap is an exact-key check. The point: compare the feature distribution of the rare HITs (the
+/// 0.2% deep-tail transpositions — high-value re-probes) against a miss sample to find what predicts a
+/// recurrence WITHOUT consulting the verdict / future probe stream (the prefetch/pin/order lever).
+#[derive(Clone, Copy)]
+struct HitRec {
+    key: Bits,
+    avail: Bits,
+    pc: u16,
+    hit: bool,
+}
+
+/// Per-worker `M_HITKEY` accumulator: the captured records and a miss counter for the 1/64 sampling
+/// (hits are rare ⇒ kept in full; misses are the bulk ⇒ sampled). Drained into [`IsoFlat::hitkey_recs`]
+/// and written to a file post-solve. Empty cost off the `M_HITKEY` monomorphisation.
+struct HitKeyAcc {
+    recs: Vec<HitRec>,
+    miss_seen: u64,
+}
+
+/// 1-in-N miss sampling for `M_HITKEY` (hits captured in full; misses are ~500× more numerous).
+const HITKEY_MISS_SAMPLE: u64 = 64;
+
 thread_local! {
     /// Per-worker `M_DECPROBE` accumulator; merged into the shared [`IsoFlat::dec_*`] at drain.
     /// Empty cost off the `M_DECPROBE` path.
@@ -273,6 +300,14 @@ thread_local! {
         RefCell::new(ColdAcc {
             hits: [0; MAXPC],
             misses: [0; MAXPC],
+        })
+    };
+    /// Per-worker `M_HITKEY` accumulator; drained into [`IsoFlat::hitkey_recs`] at solve end.
+    /// Empty cost off the `M_HITKEY` path.
+    static HITKEY_ACC: RefCell<HitKeyAcc> = const {
+        RefCell::new(HitKeyAcc {
+            recs: Vec::new(),
+            miss_seen: 0,
         })
     };
 }
@@ -807,6 +842,16 @@ pub struct IsoFlat {
     /// fetched once, no per-probe `.with`) before the TT; populated on the node's put. Off ⇒ the
     /// base-pointer fetch and the branch short-circuit.
     sidecar: bool,
+    /// `QUEENS_PFDEEP=1`: gather-time recurse-child prefetch (the cheap-first PREFETCH lever). The
+    /// fused descent already prefetches each recurse child ~30 cyc before recursing into it (one-ahead),
+    /// hiding only a sliver of the ~165-cyc cold DRAM entry probe. Recurse children (`pc > recurse_min`)
+    /// sort LAST in the degree-ordered move list, so when this is set we issue every recurse child's
+    /// `prefetch_h` at GATHER time — the descent then scans the cheap getK/band children (real cycles,
+    /// no TT probe) before reaching the recurse arm, overlapping that scan with the cold load. The win
+    /// is at `nw == 1` (the deep-tail majority: pc≥17 nodes have too few recurse children for the ETC
+    /// batch, which only prefetches at `nw >= 2`). Byte-identical node set (pure cache hint). Off ⇒ the
+    /// current behaviour exactly (prefetch only inside the `nw >= 2` ETC batch).
+    pf_deep: bool,
     /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
     /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
     pc_hist: Box<[AtomicU64]>,
@@ -906,6 +951,15 @@ pub struct IsoFlat {
     /// Per-worker drained `M_COLD` results (one [`ColdWorker`] per worker that probed). Sorted by
     /// probe count in the report so worker rank 0 = the giant-root tail. Only populated when `cold`.
     cold_workers: Mutex<Vec<ColdWorker>>,
+    /// `QUEENS_HITKEY=1`: selects `const MODE = M_HITKEY` (= M_ORD_W + capture each pc≥17 entry probe's
+    /// canonical key + avail bits to a file for offline study of the 0.2% deep-tail hits). Off =
+    /// byte-identical M_ORD_W (the capture DCEs).
+    hitkey: bool,
+    /// Output path for the `M_HITKEY` binary dump (`QUEENS_HITKEY_OUT`, default `/tmp/queens-hitkeys.bin`).
+    hitkey_out: String,
+    /// Shared `M_HITKEY` record collector, drained from each worker's [`HITKEY_ACC`] at solve end and
+    /// written to [`hitkey_out`](Self::hitkey_out). Only populated when `hitkey`.
+    hitkey_recs: Mutex<Vec<HitRec>>,
     nimber_k: u32,
     nimber_pc: u32,
     tiny8_direct: bool,
@@ -1171,6 +1225,9 @@ impl IsoFlat {
             segment,
             assoc,
             sidecar,
+            // Gather-time recurse-child prefetch (cheap-first PREFETCH lever). Resolved once here;
+            // gated per node at the gather (off ⇒ byte-identical to the current prefetch behaviour).
+            pf_deep: std::env::var("QUEENS_PFDEEP").as_deref() == Ok("1"),
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
@@ -1207,6 +1264,10 @@ impl IsoFlat {
                 .collect(),
             cold: std::env::var("QUEENS_COLD").as_deref() == Ok("1"),
             cold_workers: Mutex::new(Vec::new()),
+            hitkey: std::env::var("QUEENS_HITKEY").as_deref() == Ok("1"),
+            hitkey_out: std::env::var("QUEENS_HITKEY_OUT")
+                .unwrap_or_else(|_| "/tmp/queens-hitkeys.bin".to_string()),
+            hitkey_recs: Mutex::new(Vec::new()),
             nimber_k: env_u32("QUEENS_NIMBER_K", 7).min(7),
             nimber_pc: env_u32("QUEENS_NIMBER_PC", 28),
             tiny8_direct: std::env::var("QUEENS_TINY8").as_deref() == Ok("1"),
@@ -2073,6 +2134,60 @@ impl IsoFlat {
         self.drain_cold_local();
     }
 
+    /// Move this worker's captured `M_HITKEY` records into the shared [`hitkey_recs`](Self::hitkey_recs).
+    /// Cold — called once per worker at drain.
+    fn drain_hitkey_local(&self) {
+        HITKEY_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            if a.recs.is_empty() {
+                return;
+            }
+            let recs = std::mem::take(&mut a.recs);
+            a.miss_seen = 0;
+            self.hitkey_recs.lock().unwrap().extend(recs);
+        });
+    }
+
+    fn drain_hitkey_all(&self) {
+        rayon::broadcast(|_| self.drain_hitkey_local());
+        self.drain_hitkey_local();
+    }
+
+    /// Write the drained `M_HITKEY` records to [`hitkey_out`](Self::hitkey_out) as a flat little-endian
+    /// binary stream for the offline study. Header: magic `b"QHK1"`, `n` (u32), record count (u64).
+    /// Each record: `key` (4×u64) · `avail` (4×u64) · `pc` (u16) · `hit` (u8) · pad (u8) = 68 bytes.
+    /// (Avail is a board-square bitset: bit `r*n+c`; the reader rebuilds the conflict graph from it.)
+    fn write_hitkey_file(&self, n: u32) {
+        use std::io::Write;
+        let recs = self.hitkey_recs.lock().unwrap();
+        let mut buf: Vec<u8> = Vec::with_capacity(16 + recs.len() * 74);
+        buf.extend_from_slice(b"QHK1");
+        buf.extend_from_slice(&n.to_le_bytes());
+        buf.extend_from_slice(&(recs.len() as u64).to_le_bytes());
+        for r in recs.iter() {
+            for w in r.key.0 {
+                buf.extend_from_slice(&w.to_le_bytes());
+            }
+            for w in r.avail.0 {
+                buf.extend_from_slice(&w.to_le_bytes());
+            }
+            buf.extend_from_slice(&r.pc.to_le_bytes());
+            buf.push(r.hit as u8);
+            buf.push(0); // pad to even
+        }
+        let hits = recs.iter().filter(|r| r.hit).count();
+        match std::fs::File::create(&self.hitkey_out).and_then(|mut f| f.write_all(&buf)) {
+            Ok(()) => eprintln!(
+                "(M_HITKEY: wrote {} records [{} hits / {} sampled misses] to {})",
+                recs.len(),
+                hits,
+                recs.len() - hits,
+                self.hitkey_out,
+            ),
+            Err(e) => eprintln!("(M_HITKEY: failed to write {}: {e})", self.hitkey_out),
+        }
+    }
+
     /// Print the `M_DECPROBE` (`QUEENS_DECPROBE=1`) per-pc connected-component decomposability report.
     /// Gates the nimber-decomposition node-count lever: a getK node whose conflict graph splits into
     /// components ≤8 (or ≤k−1) could be resolved (or shrunk a layer) by a Sprague-Grundy XOR of the
@@ -2573,7 +2688,11 @@ impl IsoFlat {
         // hit-rate is the production one), adding only a cold tally. These predicates fold the OR away
         // (`MODE` is a const generic ⇒ each is a compile-time constant, DCE'd per monomorphisation; a
         // nested `const` can't capture the outer generic, so a `let` carries it — same codegen).
-        let ord_w: bool = MODE == M_ORD_W || MODE == M_DECPROBE || MODE == M_RANK || MODE == M_COLD;
+        let ord_w: bool = MODE == M_ORD_W
+            || MODE == M_DECPROBE
+            || MODE == M_RANK
+            || MODE == M_COLD
+            || MODE == M_HITKEY;
         let ord_sort: bool = MODE == M_ORD || ord_w;
         // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
         // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
@@ -2659,6 +2778,31 @@ impl IsoFlat {
                     a.hits[node_pc as usize] += 1;
                 } else {
                     a.misses[node_pc as usize] += 1;
+                }
+            });
+        }
+        // M_HITKEY (`QUEENS_HITKEY=1` only; DCEs to nothing on every other `MODE` ⇒ M_ORD_W
+        // byte-identical). Capture the deep-tail (pc≥17) entry probes for offline structural study:
+        // every HIT (the rare 0.2% — high-value transpositions) in full, plus a 1/64 sample of MISSes
+        // for contrast. `key` is the canonical (D4-merged) identity; `avail` is this node's own
+        // square-set, from which the offline study rebuilds the exact conflict graph + features.
+        if MODE == M_HITKEY && node_pc >= 17 {
+            HITKEY_ACC.with(|c| {
+                let mut a = c.borrow_mut();
+                let hit = got.is_some();
+                let keep = if hit {
+                    true
+                } else {
+                    a.miss_seen += 1;
+                    a.miss_seen % HITKEY_MISS_SAMPLE == 0
+                };
+                if keep {
+                    a.recs.push(HitRec {
+                        key,
+                        avail,
+                        pc: node_pc as u16,
+                        hit,
+                    });
                 }
             });
         }
@@ -2799,17 +2943,29 @@ impl IsoFlat {
                 wf[nw] = cf;
                 nw += 1;
             }
-            // ETC pays only with ≥2 recurse children (a single recurse child the descent would probe
-            // at entry anyway — no sibling expansions to skip). Skip the prefetch/probe batch when
-            // nw<2 but STILL reuse the one stored descriptor in the descent (kills the rebuild).
-            // Probe in GATHER order (no sort): with the fused descent the ETC is now the *only* batch
-            // probe, the batch is a handful (≤ a few recurse children), and the sort cost on the
-            // critical path was Fermi'd below its small-batch payoff — prefetch-all-then-probe gives
-            // the MLP overlap without it. The descent below re-prefetches each miss as it expands.
-            if nw >= 2 {
+            // Gather-time recurse-child prefetch (cheap-first PREFETCH lever, `QUEENS_PFDEEP=1`).
+            // Recurse children (pc > recurse_min) sort LAST in the degree-ordered move list, so the
+            // descent first scans the cheap getK/band children (real cycles, no TT probe) before
+            // reaching the recurse arm. Issuing every recurse child's prefetch HERE — at gather time —
+            // overlaps that scan with the ~165-cyc cold DRAM entry probe, far more prefetch-to-use
+            // distance than the descent's one-ahead `prefetch_h` (~30 cyc). The win is at `nw == 1`,
+            // the deep-tail majority (pc≥17 nodes have too few recurse children for the `nw >= 2` ETC
+            // batch below, which is the only prior gather-time prefetch). The first recurse child
+            // reached gets the full overlap; later siblings are evicted by the first's subtree and
+            // re-prefetched in the descent (free if still warm). Pure cache hint ⇒ byte-identical node
+            // set. `pf_deep` off ⇒ this runs only inside the `nw >= 2` ETC batch exactly as before.
+            if self.pf_deep || nw >= 2 {
                 for &r in wr.iter().take(nw) {
                     self.tt.prefetch_h(r); // every prefetch in flight before any get
                 }
+            }
+            // ETC pays only with ≥2 recurse children (a single recurse child the descent would probe
+            // at entry anyway — no sibling expansions to skip). Skip the probe batch when nw<2 but
+            // STILL reuse the one stored descriptor in the descent (kills the rebuild). Probe in GATHER
+            // order (no sort): with the fused descent the ETC is the *only* batch probe, the batch is a
+            // handful, and the sort cost on the critical path was Fermi'd below its small-batch payoff.
+            // The descent below re-prefetches each miss as it expands.
+            if nw >= 2 {
                 for j in 0..nw {
                     let v = self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0);
                     if v == Some(0) {
@@ -3946,6 +4102,9 @@ impl IsoFlat {
                 } else if self.cold {
                     // Cold entry-probe hit/miss tap on the production M_ORD_W path.
                     M_COLD
+                } else if self.hitkey {
+                    // Deep-tail (pc≥17) key+avail capture on the production M_ORD_W path.
+                    M_HITKEY
                 } else if self.size {
                     if self.size_wave {
                         M_SIZE_WAVE
@@ -4002,6 +4161,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_COLD => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_COLD>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_HITKEY => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_HITKEY>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(
@@ -4472,6 +4634,10 @@ impl Solver for IsoFlat {
         if self.cold {
             self.drain_cold_all();
             self.print_cold_report();
+        }
+        if self.hitkey {
+            self.drain_hitkey_all();
+            self.write_hitkey_file(q.n);
         }
         if self.steal {
             // Work-stealing diagnostics (TTY text; the same data is in the `--to-file` JSON via
