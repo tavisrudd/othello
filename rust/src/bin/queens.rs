@@ -22,8 +22,8 @@ use signal_hook::iterator::Signals;
 
 use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
-    for_each_image_entry, make_solver, Bits, Burr, Fused, Incremental, IsoBurr, IsoFlat, Nimber,
-    Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
+    for_each_image_entry, make_solver, run_ranklab, Bits, Burr, Fused, Incremental, IsoBurr,
+    IsoFlat, Nimber, Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -268,6 +268,25 @@ enum Cmd {
         /// The archive built by `freeze`.
         archive: PathBuf,
     },
+    /// Offline move-ordering lab: score candidate child orderings against the live degree
+    /// ordering over a QUEENS_HITKEY dump (no live search), reporting the fraction of avoidable
+    /// `ordering_loss` each captures. Produce the dump with
+    /// `QUEENS_HITKEY=1 queens solve <N> iso-dense`; QUEENS_TT_BITS sizes the labeling TT.
+    Ranklab {
+        /// A QUEENS_HITKEY binary dump (sampled deep-tail node states).
+        #[arg(value_name = "DUMP")]
+        dump: PathBuf,
+        /// Max sampled nodes per pc band (stride-subsampled across the dump; child labeling cost
+        /// grows with this, so start modest).
+        #[arg(long, default_value_t = 200)]
+        cap: usize,
+        /// Lowest pc to score (the giant shoulder where loss_mass concentrates).
+        #[arg(long = "pc-lo", default_value_t = 18)]
+        pc_lo: usize,
+        /// Highest pc to score.
+        #[arg(long = "pc-hi", default_value_t = 28)]
+        pc_hi: usize,
+    },
 }
 
 fn main() {
@@ -347,6 +366,17 @@ fn main() {
             verify,
         } => freeze(n, &image, &out, fp_bits, load, shards, verify),
         Cmd::VerifyArchive { n, image, archive } => verify_archive(n, &image, &archive),
+        Cmd::Ranklab {
+            dump,
+            cap,
+            pc_lo,
+            pc_hi,
+        } => {
+            if let Err(e) = run_ranklab(&dump, cap, pc_lo, pc_hi) {
+                eprintln!("ranklab: {e}");
+                std::process::exit(1);
+            }
+        }
     }
 }
 

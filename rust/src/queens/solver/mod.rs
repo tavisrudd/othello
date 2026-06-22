@@ -12,6 +12,7 @@ mod naive;
 mod nimber;
 mod parallel;
 mod pn;
+mod ranklab;
 
 pub use burr::{Burr, IsoBurr};
 pub use fused::Fused;
@@ -22,6 +23,7 @@ pub use naive::Naive;
 pub use nimber::Nimber;
 pub use parallel::Parallel;
 pub use pn::Pn;
+pub use ranklab::run_ranklab;
 
 // --------------------------------------------------------------------------- //
 // Solver lineage
