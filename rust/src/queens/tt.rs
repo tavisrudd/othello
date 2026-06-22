@@ -812,6 +812,18 @@ impl QueensTt {
         ((route as u128).wrapping_mul(self.len as u128) >> 64) as usize
     }
 
+    /// The slot a `route` hashes to, **without** the slice bounds check. `index` is Lemire
+    /// fastrange `(route·len)>>64`, which is `< len` for every `route`, so the index is always in
+    /// bounds — the `slots[index]` bounds check (a `cmp`+conditional-branch to a panic path) is
+    /// provably dead. perf put it at ~8% of `wins_inc`'s hot ETC-prefetch loop (every `prefetch_h`/
+    /// `get_hashed`/`put_hashed` paid it). Removing it cuts that branch + frees the length register.
+    #[inline(always)]
+    fn slot(&self, route: u64) -> &AtomicU64 {
+        // SAFETY: `index(route) = (route·len)>>64 < len` for all `route` (fastrange maps a u64 into
+        // `[0, len)`), so the index is always within `self.slots`.
+        unsafe { self.slots.get_unchecked(self.index(route)) }
+    }
+
     /// A table that also counts the distinct positions it is queried for: every
     /// `get` folds the (canonical) key into a HyperLogLog of precision `hll_p`,
     /// and (when `exact`) into a hash set for an exact ground truth on small
@@ -987,12 +999,13 @@ impl QueensTt {
     /// These skip the distinct-counter hook (the `BurrStore` counts at its own level).
     #[inline]
     pub(crate) fn get_hashed(&self, route: u64, fp: u64) -> Option<u8> {
-        let s = Slot(self.slots[self.index(route)].load(Ordering::Relaxed));
+        let s = Slot(self.slot(route).load(Ordering::Relaxed));
         (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
     #[inline]
     pub(crate) fn put_hashed(&self, route: u64, fp: u64, val: u8) {
-        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        self.slot(route)
+            .store(Slot::pack(fp, val).0, Ordering::Relaxed);
     }
     #[inline]
     pub(crate) fn archive_key_hashed(&self, route: u64, fp: u64) -> u64 {
@@ -1005,7 +1018,7 @@ impl QueensTt {
     /// `InFlight`. One relaxed load, same as the plain get.
     #[inline]
     pub(crate) fn get_inflight_hashed(&self, route: u64, fp: u64) -> Probe3 {
-        let s = Slot(self.slots[self.index(route)].load(Ordering::Relaxed));
+        let s = Slot(self.slot(route).load(Ordering::Relaxed));
         if s.used() && s.fp() == (fp & Slot::fp_mask()) {
             if s.val() == Slot::IN_FLIGHT {
                 Probe3::InFlight
@@ -1025,11 +1038,12 @@ impl QueensTt {
     /// a value and that value is deterministic.
     #[inline]
     pub(crate) fn mark_inflight_hashed(&self, route: u64, fp: u64) {
-        self.slots[self.index(route)].store(Slot::pack(fp, Slot::IN_FLIGHT).0, Ordering::Relaxed);
+        self.slot(route)
+            .store(Slot::pack(fp, Slot::IN_FLIGHT).0, Ordering::Relaxed);
     }
     #[inline]
     pub(crate) fn prefetch_hashed(&self, route: u64) {
-        let ptr = self.slots[self.index(route)].as_ptr();
+        let ptr = self.slot(route).as_ptr();
         #[cfg(target_arch = "x86_64")]
         unsafe {
             // SAFETY: as [`prefetch`](Self::prefetch) -- warms a valid in-allocation
@@ -1059,7 +1073,7 @@ impl QueensTt {
             });
         }
         let (route, fp) = Self::hash128(key);
-        let raw = self.slots[self.index(route)].load(Ordering::Relaxed);
+        let raw = self.slot(route).load(Ordering::Relaxed);
         let s = Slot(raw);
         (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
@@ -1068,7 +1082,8 @@ impl QueensTt {
     #[inline]
     pub fn put(&self, key: Bits, val: u8) {
         let (route, fp) = Self::hash128(key);
-        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        self.slot(route)
+            .store(Slot::pack(fp, val).0, Ordering::Relaxed);
         // Record the exact value for the post-search `--iso` analysis (cold; only
         // when an exact map is kept). Here the value is known and eviction-proof.
         if let Some(c) = &self.counter {
@@ -1092,7 +1107,7 @@ impl QueensTt {
                 c.hll.add_local(key, &mut a.hll);
             });
         }
-        let s = Slot(self.slots[self.index(route)].load(Ordering::Relaxed));
+        let s = Slot(self.slot(route).load(Ordering::Relaxed));
         (s.used() && s.fp() == (fp & Slot::fp_mask())).then(|| s.val())
     }
 
@@ -1100,7 +1115,8 @@ impl QueensTt {
     /// [`get_h`](Self::get_h)).
     #[inline]
     pub fn put_h(&self, key: Bits, route: u64, fp: u64, val: u8) {
-        self.slots[self.index(route)].store(Slot::pack(fp, val).0, Ordering::Relaxed);
+        self.slot(route)
+            .store(Slot::pack(fp, val).0, Ordering::Relaxed);
         if let Some(c) = &self.counter {
             c.record(key, val);
         }
@@ -1109,7 +1125,7 @@ impl QueensTt {
     /// [`prefetch`](Self::prefetch) with the route half precomputed (hash-carry).
     #[inline]
     pub fn prefetch_h(&self, route: u64) {
-        let ptr = self.slots[self.index(route)].as_ptr();
+        let ptr = self.slot(route).as_ptr();
         #[cfg(target_arch = "x86_64")]
         unsafe {
             // SAFETY: as in `prefetch` -- warms a valid pointer into the live allocation.
