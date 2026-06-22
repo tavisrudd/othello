@@ -29,6 +29,12 @@
 > - **TT unchecked slot access** (`TT::slot()` get_unchecked; fastrange `(route·len)>>64 < len` ⇒ bounds check provably
 >   dead). cyc/node-NEUTRAL (the predicted branch was free; its perf % was skid from the adjacent mulx/prefetch) — kept
 >   as a correct dead-code removal.
+> - **cpc off the getK critical path** (Opus sub): `cpc = (K-1) − popcount(adj[i])` instead of `popcount(child)` in
+>   get9..get20 (exact since `full` is all-K-ones, iso_strip off) ⇒ the popcount issues parallel to forming `child`, so
+>   the W[cpc] index/dispatch resolve a hop earlier. ~cyc/node-NEUTRAL (OoO already hid it) but correct + cleaner; kept.
+> - **★ PROMOTED TO DEFAULT (`818a449`).** dense_k default 16→17 + getK-ordering on by default. n=16 A/B old-vs-new:
+>   −21% nodes / +16.5% cyc/node / **−8.6%..−13% wall**, SECOND every round, gate green. `QUEENS_FAST=0` reverts the
+>   whole stack (old K16 + no-ord = the A/B control). **Still on branch `queens-sub20-wk` — MERGE TO MAIN** (user said promote).
 >
 > **★ KEY RESULT — the WALL is capped at K=17 by WORK-CONSERVATION.** The W_K node cut is enormous and barely diminishing
 > (n=16 WK 16→20: **399.9M → 191.0M nodes, −52%**; n=14 2.71M→0.84M, −69%) but **wall is flat** — deeper getK does the
@@ -48,15 +54,20 @@
 >   load latency via `ret`/`mov`/`bt`, `pext`); evaluators near floor; no removable instructions. The handoff's
 >   "load-latency-bound, near floor" holds, now from a fresh angle.
 >
-> **⇒ NEXT (sub-20s still open — cyc/node is the wall; node-cutting work-conserves):** the only un-killed levers are
-> (1) the **SMT-sibling prefetch helper** (run the path ahead, prefetch the cold pc≥18 entry probes — heavy/multi-session;
-> the original PREFETCH task's real prize), (2) **carry-adjacency-down** in getK (avoid re-`extract_adj` per level —
-> uncertain, the relabel ≈ extract cost), (3) the parked **8 GiB TT default** (`MAX_TT_BITS=30`, committed on
-> `queens-compact-assoc-tt`) + **inline/survivable PV** (unlocks <8 GB; search tolerates a 2 GB TT at only +8.5% nodes,
-> PV is the blocker). **Decision for user: promote FAST to the iso-dense default** (dense_k 16→17 + ord_getk on; reversible
-> via `QUEENS_DENSE_K=16 QUEENS_GETK_ORD=0`) — it's the clean −13% win, gate-green. Also on the branch: `M_HITKEY` capture
-> tap + `scripts/hitkey_study.py`/`hitkey_compare.py` (the pc≥17 hit-structure study: hits predictable by pc, the pc 35-78
-> "shoulder" 3-12% vs cold-bulk 0.1%; recurrence shallow+broad; PV is cold/off the transposition path).
+> **⇒ ★ NEXT SESSION (user-chosen) = the SMT-sibling PREFETCH HELPER.** sub-20s is still open and the cyc/node is the
+> wall (FAST is +16.5% cyc/node; node-cutting work-conserves; the evaluators + ints + layout are all confirmed near-floor
+> this session — getK-memo DEAD, prefetch wash, hot path clean, ints right-sized). The remaining real lever is the
+> **memory side**: a same-physical-core **SMT-sibling helper thread** that runs the search PATH a few plies ahead and
+> issues `_mm_prefetch` for the cold pc≥18 entry-probe slots (99.9% cold DRAM, ~165 cyc), taping the spare budget
+> (ρ≈8%, the active core's ~70% DRAM-stall execution shadow, warm shared L1/L2). `SCHED_IDLE`/nice is the right throttle
+> (same core). Gate: prefetch DISTANCE / path-prediction (the path is cutoff-dependent). See the queuing-theory +
+> speculative-tt-prewarm proposals. Heavy/multi-session — the original PREFETCH task's real prize.
+> **Lower-priority parked:** (a) carry-adjacency-down in getK (avoid re-`extract_adj` per level — uncertain, relabel ≈
+> extract cost); (b) the **8 GiB TT default** (`MAX_TT_BITS=30`, on `queens-compact-assoc-tt`) + **inline/survivable PV**
+> (search tolerates a 2 GB TT at +8.5% nodes; PV is the blocker, currently 5-10s at small TT); (c) cache `wide_induced`'s
+> per-call `OnceLock` pointer in `DenseW8` (negligible ~0.017%, only the K≥17 path). Also banked: `M_HITKEY` capture +
+> `scripts/hitkey_study.py`/`hitkey_compare.py` (pc≥17 hits predictable by pc — the pc 35-78 "shoulder" 3-12% vs cold-bulk
+> 0.1%; recurrence shallow+broad; PV cold/off the transposition path).
 
 ## ⇒ NEXT SESSION = PREFETCH (user-chosen, --17 end) — hide the mandatory-but-cold pc≥17 probe latency.
 
