@@ -165,6 +165,15 @@
   blockquote.brief footer { margin-top: 8px; color: var(--fg-faint); font-size: 13px; }
   .glossary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin: 18px 0; }
   .glossary-grid p { margin: 0; font-size: 14.5px; color: var(--fg-dim); }
+  details.glossary { margin: 32px 0; padding: 0; overflow: hidden; }
+  details.glossary > summary {
+    cursor: pointer; padding: 15px 20px; color: var(--accent); font-weight: 650;
+    list-style: none; user-select: none;
+  }
+  details.glossary > summary::before { content: "▸ "; color: var(--fg-faint); }
+  details.glossary[open] > summary::before { content: "▾ "; }
+  details.glossary[open] > summary { border-bottom: 1px solid var(--border); }
+  details.glossary .glossary-body { padding: 0 20px 18px; }
   .term { position: relative; color: var(--accent); border-bottom: 1px dotted var(--accent); cursor: help; font-style: normal; }
   .term::after {
     content: attr(data-tip); display: none; position: absolute; z-index: 100;
@@ -256,41 +265,42 @@
   <h1>The Non-Attacking Queens Game
     <span class="sub">how a Grade 6 math assignment became a 33.9-second exact solver</span>
   </h1>
-  <p class="lede">This is an AI-written account of an eight-day hobby project, assembled from the code, commit history, benchmark results, and the engineering notes kept along the way. The measurements and decisions belong to the project; the AI's job here is to make their story readable to someone who was not there.</p>
-  <p class="lede">The project began as homework for the programmer's 12-year-old son, a Grade 6 student and gifted young mathematician who meets informally with a math professor every few months for coaching. This assignment was the Non-Attacking Queens Game, along with: “go learn about minimax and alpha–beta pruning.” His father started helping and got thoroughly nerd-sniped.</p>
-  <p class="lede">He is a semi-retired programmer who has caught the agentic-coding bug and become interested in pushing his craft through low-level performance engineering. The game became a compact laboratory for both interests: the rules fit in a paragraph, the answer is exact, and every optimization has to survive measurement rather than taste.</p>
-  <p class="lede">Two players alternately place queens so that no queen attacks another; the player who cannot move loses. The question is whether perfect play makes the first or second player win. For 16×16, the answer is <strong class="win">the second player</strong>. Over eight days the proof fell from about 56 minutes to <strong>33.9 seconds</strong> and <strong>396 million nodes</strong>. This report explains the mathematics, the solver generations, the false starts, and the performance reasoning behind that roughly hundredfold reduction in elapsed time. The immediate target is 30 seconds.</p>
-  <p class="lede">The final leap happened overnight. With the solver near 52 seconds, the programmer gave Claude—the coding agent working in the repository—this brief:</p>
+  <p class="lede">On Sunday evening, June 14, a Grade 6 math assignment escaped its intended audience. A 12-year-old math prodigy, who meets informally with a professor every few months for coaching, had been assigned the Non-Attacking Queens Game and told to “go learn about <dfn class="term" tabindex="0" data-tip="Minimax evaluates a game by assuming both players always choose the move best for themselves.">minimax</dfn> and <dfn class="term" tabindex="0" data-tip="Alpha–beta pruning skips branches that cannot change the already-known best outcome.">alpha–beta pruning</dfn>.” His father sat down to help and got nerd-sniped.</p>
+  <p class="lede">The game is easy to state. Two players place queens on a chessboard, one at a time, without allowing any queen to attack another. The first player who has nowhere left to move loses. But one question hides an enormous search: on a 16×16 board, who wins if both players are perfect?</p>
+  <p class="lede">The father is a semi-retired programmer with two recent obsessions: agentic coding and low-level performance engineering. This was an unusually clean test of both. There were no users or deadlines, the correct result was known, and every speed claim could be measured.</p>
+  <p class="lede">His first complete version proved that <strong class="win">the second player wins</strong> in about 56 minutes, after evaluating <strong>10,017,867,872 nodes</strong> in the game tree. Eight days later, the current solver reached the same verdict after <strong>396 million nodes</strong> in <strong>33.9 seconds</strong>: a 25-fold drop in node evaluations and a 99-fold drop in wall time.</p>
+  <p class="lede">On Saturday night, with the solver near 52 seconds, the programmer gave Claude, the coding agent working in the repository, this brief:</p>
   <blockquote class="brief">
     <p>“n=16 30s do not give up. do not stop for answers from me. be creative. do not get stuck or give up. work on a branch if you are worried about messing up main or create a new solver variant. this is a hobby project with no users so don't wimp out. i don't want to wake up in the morning and find you gave up. so please: be relentless”</p>
     <footer>Overnight goal, June 20–21</footer>
   </blockquote>
-  <p class="lede">By morning, Claude had re-examined what an earlier experiment had actually ruled out, tried bit extraction at the larger scale that mattered, and extended the exact evaluator from 12 to 16 squares. The result was 33.9 seconds. That episode captures the collaboration behind the whole report: agents can explore and measure at extraordinary speed, while human ambition, persistence, and judgment determine which walls are worth pushing through.</p>
+  <p class="lede">Claude spent the night reopening an old negative result. The discarded experiment had used a processor's <dfn class="term" tabindex="0" data-tip="Bit extraction gathers selected bits from a machine word into a compact contiguous result; x86 BMI2 provides the pext instruction used here.">bit-extraction instruction</dfn> for a different task and much smaller cases. This time, the instruction made it cheaper to turn a board position into a compact graph. The solver could now decide every endgame with up to 16 available squares directly, instead of sending it through the main search. The next clean run finished in 33.9 seconds. The immediate target is 30 seconds.</p>
+  <p class="lede" style="font-size:15px;color:var(--fg-faint)">This AI-written account is based on the project's code, commits, benchmark logs, and working notes. The measurements and engineering decisions are the programmer's.</p>
 </header>
 
 <div class="modebanner layman">
   <b>You are reading the Plain-English view.</b> It introduces technical terms only where the story needs them. Flip the switch at the top right to <b>Engineer</b> for algorithms, data layout, and detailed performance evidence. Optional <em>“The formal version”</em> boxes contain the mathematics.
 </div>
 <div class="modebanner engineer">
-  <b>You are reading the Engineer view.</b> Precise algorithms, data layout, complexity, and the measured performance story. Flip to <b>Plain English</b> for the intuition-first version of any section. Genuinely advanced math gets an inline visual explanation plus an expandable <em>"The formal version"</em> derivation.
+  <b>You are reading the Engineer view.</b> It retains the algorithms, data layout, complexity, and measured performance evidence. Flip to <b>Plain English</b> for the intuition-first version of any section. Longer derivations are collapsed under <em>“The formal version.”</em>
 </div>
 
 <nav class="toc">
-  <a href="#glossary">Glossary · terms used throughout</a>
   <a href="#game">1 · What the game is</a>
   <a href="#history">History · origins and prior solves</a>
+  <a href="#glossary">Glossary · terms used throughout</a>
   <a href="#hard">2 · Why it is hard</a>
   <a href="#impartial">3 · Impartial games &amp; who wins</a>
   <a href="#symmetry">4 · Symmetry: visiting fewer positions</a>
   <a href="#graph">5 · The available set as a graph</a>
   <a href="#grundy">6 · Sprague–Grundy &amp; nim</a>
-  <a href="#lineage">7 · The solver lineage</a>
+  <a href="#lineage">7 · How the solver changed</a>
   <a href="#project-timeline">Timeline · June 14–21 sprint</a>
-  <a href="#axes">8 · Three axes of optimization</a>
+  <a href="#axes">8 · Three ways it got faster</a>
   <a href="#represent">9 · Representing positions cheaply</a>
-  <a href="#latency">10 · Memory and frontend bottlenecks</a>
-  <a href="#telemetry">Telemetry · seeing the search</a>
-  <a href="#micro">11 · Micro-optimizations</a>
+  <a href="#latency">10 · The moving bottleneck</a>
+  <a href="#telemetry">Telemetry · seeing where time went</a>
+  <a href="#micro">11 · Small changes, repeated billions of times</a>
   <a href="#numbers">12 · The numbers</a>
   <a href="#method">13 · How the speed was actually won</a>
   <a href="#floor">14 · False floors and what is next</a>
@@ -298,61 +308,32 @@
   <a class="engineer" href="#appendix-timeline">Appendix · detailed project log</a>
 </nav>
 
-<aside class="card" id="glossary">
-<h3 style="margin-top:0">Glossary</h3>
-<div class="glossary-grid">
-  <p><strong>D₄</strong> — the board's eight rotations and reflections, folded into one representative.</p>
-  <p><strong>Transposition</strong> — the same position reached through different move orders.</p>
-  <p><strong>TT</strong> — transposition table; the large shared cache of already-solved positions.</p>
-  <p><strong>pc / popcount</strong> — the number of currently available squares (graph vertices).</p>
-  <p><strong>W8</strong> — shorthand for the complete W0…W8 table family: win/loss values for every labelled graph with at most 8 vertices.</p>
-  <p><strong>W<sub>K</sub> / getK</strong> — an exact on-demand evaluator for a K-vertex graph, recursively using lower W layers.</p>
-  <p><strong>Graph-isomorphic key</strong> — one key for positions whose available-square conflict graphs have the same shape.</p>
-  <p><strong>Cutoff</strong> — stopping sibling search once one losing child proves the current position wins.</p>
-  <p><strong>MLP</strong> — memory-level parallelism: overlap several outstanding memory reads.</p>
-  <p><strong>DDD</strong> — delayed duplicate detection: collect, sort, and deduplicate a frontier in batches.</p>
-  <p><strong>BuRR</strong> — a compact static-retrieval structure used to freeze solved values at roughly 1.1 bits per key.</p>
-  <p><strong>ETC</strong> — enhanced transposition cutoff: probe children before expanding them so a cached losing child can end the parent immediately.</p>
-  <p><strong>Frontier wave</strong> — a batch of pending positions sorted by TT slot, then probed as a sequential stream.</p>
-  <p><strong>Dynamic move order</strong> — re-rank legal moves at every position by how few replies they leave, so likely cutoffs are searched first.</p>
-  <p><strong>pext</strong> — a CPU bit-extraction instruction that packs selected source bits together; used here to build compact graph rows.</p>
-  <p class="engineer"><strong>LSM cascade</strong> — a live store split into immutable segments that must be checked from newest to oldest.</p>
-  <p class="engineer"><strong>YBWC</strong> — Young Brothers Wait Concept: parallelize only after the first ordered child has been searched.</p>
-  <p class="engineer"><strong>ABDADA</strong> — parallel-search coordination that marks positions already being explored to discourage duplicate work.</p>
-  <p class="engineer"><strong>TMA</strong> — top-down microarchitecture analysis: CPU counters grouped into frontend, backend, speculation, and retiring costs.</p>
-  <p class="engineer"><strong>CCX</strong> — core complex: a cluster of CPU cores sharing an L3 cache.</p>
-  <p class="engineer"><strong>SoA</strong> — structure of arrays: store each field contiguously across a batch.</p>
-</div>
-<p style="margin-bottom:0;color:var(--fg-faint);font-size:13px">Dotted terms later in the report reveal the same definitions on hover or focus.</p>
-</aside>
-
 <!-- ===================================================================== -->
 <section id="game">
 <h2><span class="num">1</span>What the game actually is</h2>
 <button type="button" class="sec-toggle" data-target="game" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>Picture a chessboard. A <strong>queen</strong> attacks every square in her row, her column, and both diagonals — long lines that shoot across the whole board.</p>
-<p>Two players take turns. On your turn you place one queen on any empty square that <em>is not attacked by any queen already on the board</em>. So every queen you add is safe from all the others, and it also "poisons" a lot of squares for the future. The board steadily fills up with attacked squares.</p>
-<p>Eventually someone faces a board where every empty square is under attack — they <strong>cannot move, and they lose</strong>. That is the whole game.</p>
-<p>The question we answer is not "what is a good move." It is the absolute question: <strong>with both players playing perfectly, does the player who goes first win, or the player who goes second?</strong> For a 16×16 board the answer is: <span class="win">the second player wins</span>. Proving that took exploring billions of possible games.</p>
+<p>An empty chessboard offers room to roam. The first queen changes that at once, attacking every square along her row, column, and two diagonals.</p>
+<p>The players take turns placing queens on squares that remain safe. Each new queen must avoid all the others, and each one erases more possible moves. Eventually no safe square remains. The player facing that board loses.</p>
+<p>The rules produce no draws and leave no room for opinion. With perfect play, the first player can either force a win or cannot. On a 16×16 board, <span class="win">the second player wins</span>. The difficulty lies in proving it.</p>
 <div class="keyidea">
   <span class="tag">The one picture to keep</span>
-  <p>The board is divided into <strong>"available" squares</strong> (empty and safe — your legal moves) and everything else. Each move you make can only <em>shrink</em> the available set, never grow it. The game is a slow collapse, and whoever makes the last legal placement wins.</p>
+  <p>At every turn, the board splits into <strong>available squares</strong> (empty, safe, and legal) and everything else. A move can only shrink the available set. The game is a controlled collapse, and the last legal placement wins.</p>
 </div>
 </div>
 
 <div class="engineer">
-<p>This is the adversarial game studied by Noon &amp; Van Brummelen (2006), <em>not</em> the n-queens placement puzzle. Two players alternately place mutually-non-attacking queens on an <code>n×n</code> board; under <strong>normal play</strong> the player who cannot move loses. A queen on square <code>s</code> blocks its entire row, column, and both diagonals.</p>
-<p>The position is captured completely by a single <strong>blocked mask</strong> = (occupied ∪ attacked). Because a queen is colourless and placing one on <code>s</code> always adds the same fixed <code>attack(s)</code>, any two move-orders reaching the same blocked mask are identical for all future play. The set of legal moves is the <strong>available set</strong>:</p>
+<p>Noon and Van Brummelen's game is the adversarial form of n-queens. Two players alternately place mutually non-attacking queens on an <code>n×n</code> board; under <dfn class="term" tabindex="0" data-tip="Normal play means the player who makes the last legal move wins.">normal play</dfn>, the player with no legal move loses. A queen at <code>s</code> blocks its row, column, and both diagonals.</p>
+<p>A single <strong>blocked mask</strong>, occupied ∪ attacked, determines the position. Queens have no owner, and playing <code>s</code> always adds the same <code>attack[s]</code>; move history contributes nothing else. The complementary <strong>available set</strong> contains every legal move:</p>
 <p style="text-align:center">\( \text{available} = \text{board} \;\wedge\; \neg\,\text{blocked} \)</p>
-<p>and <code>|available|</code> (its popcount) is <strong>monotone non-increasing</strong> down the search tree — a fact the solver exploits heavily (see §9–10). The board is a 256-bit mask: <code>Bits([u64; 4])</code>, bit <code>r·n + c</code> for square <code>(r,c)</code>, so up to 16×16 fits in four words. Attack masks are precomputed once per square (<code>attack[s]</code>, self-blocking).</p>
+<p>Every move strictly decreases <code>|available|</code>. The 16×16 board fits in <code>Bits([u64; 4])</code>, with square <code>(r,c)</code> at bit <code>r·n+c</code>. Self-inclusive <code>attack[s]</code> masks are precomputed once.</p>
 <pre><code>// geom.rs — a square attacks its row, col, and both diagonals (and itself)
 if rr == r || cc == c
    || (rr as i32 - cc as i32) == (r as i32 - c as i32)   // ╲ diagonal
    || (rr + cc) == (r + c)                                // ╱ diagonal
 { mask.set(rr * n + cc); }</code></pre>
-<p>Move order is forcing and now <strong>dynamic</strong>. The old order ranked squares once by their attack degree on the empty board. The new path re-ranks the legal moves at every node by <code>child0.popcount()</code> ascending: the move leaving the fewest available replies goes first, with an instant win (<code>child0 == 0</code>) first of all. That cheap current-position score cut n=16 nodes ~34% and wall ~30% versus the prior ETC default.</p>
+<p>The production move order is <strong>dynamic</strong>. At each node, children are ranked by <code>child0.popcount()</code> ascending, with <code>child0 == 0</code> first. Replacing the static empty-board degree order with this current-position score cut n=16 nodes 34.3% and wall time 30.2% against the preceding ETC configuration.</p>
 </div>
 
 <figure>
@@ -382,14 +363,15 @@ if rr == r || cc == c
 <button type="button" class="sec-toggle" data-target="history" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>The familiar n-queens <em>puzzle</em> asks for one completed arrangement. This game asks a different question: if two people build such an arrangement one queen at a time, who can force the last move? A restricted strategy-game version appeared in print by 1989. Hassan Noon studied the modern game in a 2002 undergraduate thesis, then published it with Glen Van Brummelen in <em>The College Mathematics Journal</em> in 2006. Their work settled the odd boards and the small even boards through 10.</p>
-<p>Thomas Jenrich encountered the question through a later open-problem list and independently attacked it with a tiny Pascal backtracking program. During publication he learned of Noon's earlier work. His 2014 paper supplied simple strategies for n=4 and every odd n, and computational verdicts for the even boards through n=16. That 16×16 run—almost 23 hours on a 1 GHz Pentium III—remained the independent result this project uses as its full-scale correctness check.</p>
-<p>The problem sits at the intersection of several fields: recreational chessboard mathematics; <strong>combinatorial game theory</strong>, which studies perfect-information games without chance; <strong>graph games</strong>, because each available square is a vertex in Node Kayles; and <strong>exact exponential algorithms</strong>, where symmetry, memoization, proof cutoffs, and external-memory duplicate detection decide what can actually be computed.</p>
+<p>The familiar n-queens puzzle asks for a completed arrangement. The game adds an adversary: if two people build the arrangement one queen at a time, who can force the last move?</p>
+<p>The modern trail begins with Hassan Noon, who studied the game in a 2002 undergraduate thesis and later published the work with Glen Van Brummelen. They settled every odd board and the smaller even boards through 10. About a decade later, Thomas Jenrich found the problem on an open-problem list and attacked it independently with a small Pascal program. Only while preparing his paper did he learn of Noon's work.</p>
+<p>Jenrich's 2014 computation reached the 16×16 board. It took almost 23 hours on a 1 GHz Pentium III and agreed that the second player wins. That result provides an unusually valuable check on this project: two unrelated programs, written years apart and built around different algorithms, reach the same full-scale verdict.</p>
+<p>The game draws on several branches of mathematics and computer science. Combinatorial game theory supplies the language of winning and losing positions. Graph theory reveals when different-looking boards are really the same game. Exact-algorithm engineering decides whether the proof finishes in hours, minutes, or seconds.</p>
 </div>
 
 <div class="engineer">
-<p>The bibliographic trail has two branches. G. Schrage's 1989 “eight queens problem as a strategy game” mentions a restricted form. Hassan A. Noon's 2002 B.A. thesis, <em>Surreal Numbers and the N-Queens Game</em>, and Noon &amp; Van Brummelen's 2006 <a href="https://www.jstor.org/stable/27646335">College Mathematics Journal article</a> are the original sources for the present rules and results through odd n / n≤10. Jenrich's <a href="https://arxiv.org/abs/1312.5135">2014 paper and QPGAME3 source</a> state that he found the earlier work only during submission; his starting prompt came from Martin Erickson's open-problem list.</p>
-<p>Mathematically, the available-square conflict graph turns the game into <strong>Node Kayles</strong>, connecting it to impartial combinatorial game theory and Sprague–Grundy values; outcome determination for general Node Kayles is PSPACE-complete. Computationally, this instance family belongs to exact game solving / exponential search: exploit board automorphisms, merge transpositions, preserve first-losing-child cutoffs, and control the memory hierarchy. The <a href="https://oeis.org/A344227">OEIS A344227</a> record gives full nimbers through n=13, not just win/loss outcomes.</p>
+<p>G. Schrage described a restricted strategy version in 1989. The present rules trace to Hassan A. Noon's 2002 B.A. thesis, <em>Surreal Numbers and the N-Queens Game</em>, and the 2006 <a href="https://www.jstor.org/stable/27646335">paper with Glen Van Brummelen</a>. Their results cover all odd n and even boards through n=10. Jenrich began independently from Martin Erickson's open-problem list and learned of Noon's work while submitting his <a href="https://arxiv.org/abs/1312.5135">2014 paper and QPGAME3 source</a>.</p>
+<p>The available-square conflict graph identifies the game as <dfn class="term" tabindex="0" data-tip="Node Kayles is a graph game: choose a vertex, then remove it and all adjacent vertices. A queen move performs exactly that operation on the available-square conflict graph."><strong>Node Kayles</strong></dfn>. That connects the recurrence to impartial combinatorial game theory and Sprague–Grundy values; generalized Node Kayles outcome determination is <dfn class="term" tabindex="0" data-tip="PSPACE-complete problems are at least as hard as every problem solvable with polynomial memory; this is a worst-case classification, not a runtime estimate for these boards.">PSPACE-complete</dfn>. For this board family, the engineering problem is exact exponential search under heavy transposition pressure. <a href="https://oeis.org/A344227">OEIS A344227</a> records full nimbers through n=13.</p>
 </div>
 
 <table>
@@ -399,16 +381,59 @@ if rr == r || cc == c
 <tr><td>2002 / 2006</td><td>odd n and even boards through n=10</td><td>Noon thesis; Noon &amp; Van Brummelen publication. Established the modern game in the literature and used combinatorial-game analysis.</td></tr>
 <tr><td>2014</td><td>n=6,8 first-player wins; n=10,12,14,16 second-player wins</td><td>Jenrich's QPGAME3 backtracking search, plus direct pairing strategies for n=4 and all odd n.</td></tr>
 <tr><td>2021 onward</td><td>full Sprague–Grundy values through n=13</td><td>Independent Node-Kayles implementations recorded in OEIS A344227; stronger information than outcome alone.</td></tr>
-<tr><td>this work</td><td>n=16 reconfirmed; current record 33.9s</td><td>D₄-keyed flat TT above pc=16, exact W8–W16 below it, dynamic forcing order plus ETC; 396 million nodes.</td></tr>
+<tr><td>this work</td><td>n=16 reconfirmed; current record 33.9s</td><td><dfn class="term" tabindex="0" data-tip="D₄ is the square's eight rotations and reflections, folded into one canonical representative.">D₄</dfn>-keyed flat <dfn class="term" tabindex="0" data-tip="Transposition table: the large shared cache of positions the solver has already evaluated.">TT</dfn> above <dfn class="term" tabindex="0" data-tip="Popcount: the number of currently available squares, or vertices in the conflict graph.">pc</dfn>=16, exact <dfn class="term" tabindex="0" data-tip="The W8–W16 hierarchy evaluates small conflict graphs exactly without storing the impossible full upper tables.">W8–W16</dfn> below it, dynamic forcing order plus <dfn class="term" tabindex="0" data-tip="Enhanced transposition cutoff: probe children first so a cached losing child can prove the parent immediately.">ETC</dfn>; 396 million nodes.</td></tr>
 </tbody>
 </table>
 
 <div class="card">
 <h4 style="margin-top:0">What Jenrich actually computed—and how it would parallelize today</h4>
 <div class="layman"><p>Jenrich did not remember every board he had seen. He searched the same future again whenever a different move order reached it, but kept the program tiny and used symmetry plus a hand-built opening book for the second player's first two replies. The 16×16 proof made <strong>71,461,975,237 recursive calls</strong>. Its 28 independent opening cases could be handed to separate modern cores with almost no communication. Even on the original machine, perfect root scheduling would reduce the 22h55m total to roughly the longest opening case—about <strong>1h26m</strong>. A modern port would be much faster again, but quoting an exact time without compiling and benchmarking that code would be fiction.</p></div>
-<div class="engineer"><p>QPGAME3 is general backtracking with bit-pattern row/column/diagonal legality, full D₄ restriction only at the first move, conditional half-turn symmetry, move-order/“forbidden” pruning, and a hand-constructed book forcing player 2's first and second replies at n=16. It uses no heap, pointer structure, or TT; memory is a few KiB. The published run totals <strong>71.462 B calls</strong> across 28 symmetry-distinct first-move cases in 22h55m30s. Those cases are embarrassingly parallel. Their largest case is 4.471 B calls, so the hardware-independent ideal root-parallel critical path is 4.471/71.462 = 6.26% of serial, or <strong>~1h26m at the original per-call rate</strong> (16.0×, not 28×, because cases are imbalanced). On a many-core modern CPU it should scale cleanly at this coarse boundary because it has no shared TT or memory-bandwidth pressure. Further splitting inside a case is less clean: speculative siblings can destroy the first-losing-child cutoff. It would remain algorithmically expensive—71 B visits versus 1.926 B current nodes—so a measured modern port is needed before making a wall-time claim.</p></div>
+<div class="engineer"><p>QPGAME3 is a small backtracker using bit-pattern row/column/diagonal legality, D₄ restriction at the first move, conditional half-turn symmetry, move-order/“forbidden” pruning, and a hand-built book for player 2's first two replies at n=16. It has no TT or heap-resident search structure. The published n=16 run made <strong>71.462 billion calls</strong> across 28 symmetry-distinct openings in 22h55m30s.</p><p>Those openings are independent. The largest contains 4.471 billion calls, so ideal root scheduling at the original call rate has a critical path of 4.471/71.462 = 6.26%, or <strong>about 1h26m</strong>. Load imbalance limits the gain to 16× rather than 28×. A modern many-core port should scale cleanly at that boundary because it shares neither a TT nor a bandwidth-heavy store. Splitting within an opening is harder because speculative siblings can weaken first-losing-child cutoffs. The algorithm would still evaluate 71 billion calls against the current solver's 396 million nodes, so a modern wall time requires a real port and benchmark.</p></div>
 </div>
 </section>
+
+<details class="glossary card" id="glossary">
+<summary>Glossary of terms used in the report</summary>
+<div class="glossary-body">
+<div class="glossary-grid">
+  <p><strong><a href="https://en.wikipedia.org/wiki/Dihedral_group_of_order_8">D₄</a></strong> — the board's eight rotations and reflections, folded into one representative.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Minimax">Minimax</a></strong> — evaluate a game assuming both players always choose their best move.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha–beta pruning</a></strong> — skip branches that cannot change the best outcome already found.</p>
+  <p><strong><a href="https://www.chessprogramming.org/Transposition_Table">Transposition</a></strong> — the same position reached through different move orders.</p>
+  <p><strong><a href="https://www.chessprogramming.org/Transposition_Table">TT</a></strong> — transposition table; the large shared cache of already-solved positions.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Hamming_weight">pc / popcount</a></strong> — the number of currently available squares (graph vertices).</p>
+  <p><strong><a href="#w9">W8</a></strong> — shorthand for the complete W0…W8 table family: win/loss values for every labelled graph with at most 8 vertices.</p>
+  <p><strong><a href="#w9">W<sub>K</sub> / getK</a></strong> — an exact on-demand evaluator for a K-vertex graph, recursively using lower W layers.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Graph_isomorphism">Graph-isomorphic key</a></strong> — one key for positions whose available-square conflict graphs have the same shape.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Cutoff</a></strong> — stopping sibling search once one losing child proves the current position wins.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Memory-level_parallelism">MLP</a></strong> — memory-level parallelism: overlap several outstanding memory reads.</p>
+  <p><strong><a href="https://www.ijcai.org/Proceedings/03/Papers/267.pdf">DDD</a></strong> — delayed duplicate detection: collect, sort, and deduplicate a frontier in batches.</p>
+  <p><strong><a href="https://drops.dagstuhl.de/opus/volltexte/2022/16538/pdf/LIPIcs-SEA-2022-4.pdf">BuRR</a></strong> — a compact static-retrieval structure used to freeze solved values at roughly 1.1 bits per key.</p>
+  <p><strong><a href="https://www.chessprogramming.org/Enhanced_Transposition_Cutoff">ETC</a></strong> — enhanced transposition cutoff: probe children before expanding them so a cached losing child can end the parent immediately.</p>
+  <p><strong><a href="#seg">Frontier wave</a></strong> — a batch of pending positions sorted by TT slot, then probed as a sequential stream.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Move_ordering">Dynamic move order</a></strong> — re-rank legal moves at every position by how few replies they leave, so likely cutoffs are searched first.</p>
+  <p><strong><a href="https://www.felixcloutier.com/x86/pext">pext</a></strong> — a CPU bit-extraction instruction that packs selected source bits together; used here to build compact graph rows.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Node_Kayles">Node Kayles</a></strong> — the graph game equivalent of choosing a queen square and removing it plus every conflicting square.</p>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Bit_Manipulation_Instruction_Sets#BMI2_(Bit_Manipulation_Instruction_Set_2)">BMI2</a></strong> — an x86 instruction-set extension containing <code>pext</code>.</p>
+  <p><strong><a href="https://www.rust-lang.org/">Rust</a></strong> — the systems programming language used for every solver in this project.</p>
+  <p><strong><a href="#tiger-rules">Tiger-style rules</a></strong> — the project's data-oriented contract for structs and loops executed at every node.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/Log-structured_merge-tree">LSM cascade</a></strong> — a live store split into immutable segments that must be checked from newest to oldest.</p>
+  <p class="engineer"><strong><a href="https://www.chessprogramming.org/Young_Brothers_Wait_Concept">YBWC</a></strong> — Young Brothers Wait Concept: parallelize only after the first ordered child has been searched.</p>
+  <p class="engineer"><strong><a href="https://www.chessprogramming.org/ABDADA">ABDADA</a></strong> — parallel-search coordination that marks positions already being explored to discourage duplicate work.</p>
+  <p class="engineer"><strong><a href="https://www.intel.com/content/www/us/en/docs/vtune-profiler/cookbook/2024-1/top-down-microarchitecture-analysis-method.html">TMA</a></strong> — top-down microarchitecture analysis: CPU counters grouped into frontend, backend, speculation, and retiring costs.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/Zen_(microarchitecture)#Design">CCX</a></strong> — core complex: a cluster of CPU cores sharing an L3 cache.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/AoS_and_SoA">SoA</a></strong> — structure of arrays: store each field contiguously across a batch.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/HyperLogLog">HLL</a></strong> — HyperLogLog: a compact probabilistic estimator of distinct-item count.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/Weisfeiler_Leman_graph_isomorphism_test">WL</a></strong> — Weisfeiler–Leman color refinement for distinguishing and canonicalizing graphs.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/Depth-first_search">DFS</a></strong> — depth-first search.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">DAG</a></strong> — directed acyclic graph; here, the search after transpositions are merged.</p>
+  <p class="engineer"><strong><a href="https://www.chessprogramming.org/Graph_History_Interaction">GHI</a></strong> — graph-history interaction: unsoundly sharing a value that depends on the path used to reach it.</p>
+  <p class="engineer"><strong><a href="https://en.wikipedia.org/wiki/Translation_lookaside_buffer">TLB</a></strong> — translation lookaside buffer: the processor's cache of virtual-to-physical page mappings.</p>
+  <p class="engineer"><strong><a href="https://www.boost.org/doc/libs/latest/doc/html/doxygen/classboost_1_1lockfree_1_1spsc__queue.html">SPSC</a></strong> — single-producer, single-consumer queue.</p>
+</div>
+<p style="margin-bottom:0;color:var(--fg-faint);font-size:13px">Dotted terms later in the report reveal the same definitions on hover or focus.</p>
+</div>
+</details>
 
 <!-- ===================================================================== -->
 <section id="hard">
@@ -416,16 +441,17 @@ if rr == r || cc == c
 <button type="button" class="sec-toggle" data-target="hard" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>You might think a computer could just try every game. The trouble is the sheer number of distinct ways a game can unfold. Each early move spawns dozens of follow-ups, each of those spawns dozens more, and the tree of possibilities explodes.</p>
-<p>There is a saving grace: many different move-orders end up at the <em>exact same board</em>. If you remember boards you have already solved, you avoid redoing them. But on a 16×16 board, the number of genuinely different boards you must remember is in the <strong>billions</strong> — far more than fits comfortably in a computer's memory. So the real fight is not "thinking faster," it is "remembering billions of boards without running out of room."</p>
+<p>A direct program starts with 256 possible first moves. Each opens dozens of replies, which open still more. Long before the board fills, the number of possible move sequences has become uselessly large.</p>
+<p>Fortunately, many sequences lead to the same future. If one path chooses square A and then B, while another chooses B and then A, the remaining game may be identical. A solver can remember that answer once and reuse it.</p>
+<p>That still leaves roughly 7.2 billion distinct 16×16 positions. At only 8 bytes each, they would occupy about 58 gigabytes, more than twice the memory available on the machine used here. From that point on, speed and memory became the same problem.</p>
 <div class="card">
 <p style="margin:0"><strong>How fast the distinct boards grow.</strong> Going up two board sizes at a time, the count of genuinely-different boards multiplies by an ever-larger factor:</p>
 </div>
 </div>
 
 <div class="engineer">
-<p>Deciding generalized Node Kayles is <strong>PSPACE-complete</strong> (Schaefer 1978), so there is no efficient solver for arbitrary instances unless major complexity assumptions fail. That result does not explain the cost of this board family; here the measured transposition set does. Billions of distinct positions must be resolved or avoided.</p>
-<p>The branching factor stays moderate (edge-weighted <code>b̄ ≈ 3.35 → 3.92 → ~4</code> at n=12/14/16, measured by <code>count --branching</code>), but the measured number of <strong>distinct canonical positions</strong> grows much faster than a fixed multiplier per +2 board sizes. A HyperLogLog estimator fed every canonical key during a real search gives:</p>
+<p>Generalized Node Kayles is <strong>PSPACE-complete</strong> (Schaefer 1978), but that worst-case result does not size this board family. The measured transposition set does: billions of distinct positions must be resolved or avoided.</p>
+<p>The edge-weighted branching factor remains moderate, <code>b̄ ≈ 3.35, 3.92, ~4</code> at n=12, 14, and 16. Distinct canonical positions grow far faster. <dfn class="term" tabindex="0" data-tip="HyperLogLog (HLL) estimates the number of distinct keys with small fixed memory; the configured error here is about 0.4%.">HyperLogLog</dfn>, fed every canonical key during full searches, gives:</p>
 <table>
   <thead><tr><th>n</th><th class="num">distinct positions (D4 key)</th><th class="num">ratio vs n−2</th><th>note</th></tr></thead>
   <tbody>
@@ -436,7 +462,7 @@ if rr == r || cc == c
     <tr><td>18</td><td class="num">~3,000,000,000,000</td><td class="num">~450×</td><td>extrapolated (deceleration band 360–590×)</td></tr>
   </tbody>
 </table>
-<p>At 8 bytes per stored entry, 7.2 billion D4-distinct positions is ~58 GB — well past a 26 GB box. A naive full table thrashes: it evicts entries, re-expands their subtrees, and drifts toward Jenrich's 71-billion-node no-transposition cost. <strong>n=16 is fundamentally a memory-pressure problem,</strong> and almost every lever in this report is aimed at fitting the working set or hiding the cost of probing it.</p>
+<p>At 8 bytes per entry, 7.2 billion D₄-distinct positions require about 58 GB on a 26 GB machine. An undersized table evicts values and re-expands their subtrees, pushing work back toward Jenrich's 71-billion-call search. The first n=16 constraint was therefore memory capacity; after the state set fit, probe latency became the constraint.</p>
 </div>
 
 <figure id="growthFig">
@@ -453,16 +479,16 @@ if rr == r || cc == c
 <button type="button" class="sec-toggle" data-target="impartial" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>This game has a clean property: <strong>it does not matter who placed which queen.</strong> A queen is just a queen. Both players have exactly the same moves from any given board. Such games are called <em>impartial</em>, and they share a common mathematical framework.</p>
+<p>Once a position is on the board, its history disappears. Queens have no owner, and both players see the same legal moves. Mathematicians call such a game <dfn class="term" tabindex="0" data-tip="In an impartial game, both players have the same legal moves from any given position."><em>impartial</em></dfn>.</p>
 <p>For an impartial game where the last player to move wins, every board is one of two types:</p>
 <ul>
-<li><strong>A losing board</strong> for whoever has to move (a "P-position" — Previous player wins). Whatever you do, you hand your opponent a winning board.</li>
-<li><strong>A winning board</strong> (an "N-position" — Next player wins): at least one of your moves hands the opponent a losing board.</li>
+<li><strong>A losing board</strong> for whoever has to move (a <dfn class="term" tabindex="0" data-tip="P-position: the previous player wins, so the player now moving loses with perfect play.">P-position</dfn>). Whatever you do, you hand your opponent a winning board.</li>
+<li><strong>A winning board</strong> (an <dfn class="term" tabindex="0" data-tip="N-position: the next player to move can force a win.">N-position</dfn>): at least one of your moves hands the opponent a losing board.</li>
 </ul>
-<p>So a board is <em>winning</em> exactly when you can move to a <em>losing</em> board. That single rule, applied recursively all the way down, decides everything. The empty 16×16 board turns out to be a <em>losing</em> board for the first player — which is the same as saying the second player wins.</p>
+<p>This gives the solver its entire logic: a position is winning if at least one move hands the opponent a losing position. If every move hands over a win, the position is losing. Repeating that rule backward from finished boards eventually classifies the empty 16×16 board as a loss for the first player.</p>
 <div class="keyidea">
 <span class="tag">A free shortcut for odd boards</span>
-<p>On any <em>odd-sized</em> board (5×5, 7×7, …) the first player wins instantly with no computer search at all: play the exact center, then simply mirror every move your opponent makes through the center. Your mirror move is always legal, so you always have a reply, so your opponent runs out first. Only <em>even</em> boards (like 16×16) require the heavy search.</p>
+<p>Odd boards yield to a short argument. The first player takes the center, then mirrors every opposing move through that center. The mirror square is always legal, so the first player always has a reply and must make the last move. Even boards have no center square. That missing square is why 16×16 needs a computation at all.</p>
 </div>
 </div>
 
@@ -484,6 +510,7 @@ if rr == r || cc == c
 </div>
 </details>
 </div>
+
 </section>
 
 <!-- ===================================================================== -->
@@ -492,12 +519,12 @@ if rr == r || cc == c
 <button type="button" class="sec-toggle" data-target="symmetry" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>A square board looks the same after you rotate it a quarter turn, or flip it like a pancake. There are <strong>eight</strong> such views of any board (4 rotations × the mirror image of each). All eight are, for the purposes of this game, the <em>same position</em> — if you can win from one, you can win from all of them.</p>
-<p>So before the computer stores a board, it asks: "of my eight views of this board, which one looks the 'smallest' by a fixed rule?" It always stores that one. Now eight boards that are rotations/reflections of each other collapse into a single remembered entry — up to <strong>8× less to remember and re-solve.</strong></p>
+<p>The first large reduction comes from the square itself. Rotate a position by 90 degrees, or reflect it across an axis, and its outcome cannot change. These eight orientations form <dfn class="term" tabindex="0" data-tip="D₄ is the symmetry group of the square: four rotations and four reflections.">D₄</dfn>.</p>
+<p>Before storing a position, the solver generates all eight views and chooses one as the official version. Any rotated or reflected copy lands on the same entry. A generic position therefore needs one record instead of eight.</p>
 </div>
 
 <div class="engineer">
-<p>The dihedral group <strong>D₄</strong> — the symmetry group of the square — has 8 elements: identity, three rotations (90/180/270°), and four reflections (two axis flips, two diagonal flips). It acts on board squares as a permutation. Two boards in the same D₄ <em>orbit</em> are the same game, so we store only the <strong>canonical representative</strong>: the lexicographically-smallest image under all 8 transforms.</p>
+<p>The square's dihedral group <strong>D₄</strong> has eight elements: identity, three rotations, and four reflections. Acting on the available mask partitions positions into orbits with identical game values. The TT stores one <strong>canonical representative</strong> per orbit, chosen as the lexicographically smallest transformed mask.</p>
 <pre><code>fn canon(&self, mask) -> Bits {            // geom.rs
     let mut best = mask;
     for t in 1..8 {                        // the 7 non-identity symmetries
@@ -509,10 +536,10 @@ if rr == r || cc == c
 fn pos_key(&self, blocked) -> Bits {
     self.canon(self.board.and_not(blocked)) // canonicalise AVAILABLE, not blocked
 }</code></pre>
-<p>One choice here matters more than it looks: the solver canonicalises the <strong>available</strong> mask, not the blocked mask. Both merge the same equivalence classes (available is a pure function of blocked), but available has far fewer set bits deep in the tree, so <code>canon</code> shuffles proportionally fewer bits per call. Switching to it cut n=14 from 79.6 s to 33.0 s — a 2.4× speedup with byte-identical node counts, purely from a cheaper key.</p>
+<p>Canonicalizing <strong>available</strong> rather than <code>blocked</code> preserves the same equivalence classes because one is a pure function of the other. Deep in the tree, however, <code>available</code> is sparse, so each permutation moves fewer set bits. That representation change cut n=14 from 79.6s to 33.0s with an identical node set.</p>
 <div class="intuition">
 <span class="tag">Intuition · group actions and orbits</span>
-<p>Think of the 8 symmetries as a little machine that "shuffles" a board into one of (up to) 8 look-alikes. Run any board through all 8 settings and you get its <em>orbit</em> — its family of identical-twins. Picking the canonical representative is like alphabetizing the family and always filing under the first name: no matter which twin you start from, you file under the same name, so the whole family lands in one folder. That is why it is well-defined and why it merges the family into one stored entry.</p>
+<p>The eight transforms partition positions into <em>orbits</em>. Taking the minimum image assigns every member of an orbit the same deterministic key, so lookup operates on the quotient space without storing orbit metadata.</p>
 </div>
 <details class="formal">
 <summary>The formal version — D₄ orbits and Burnside counting</summary>
@@ -533,7 +560,7 @@ fn pos_key(&self, blocked) -> Bits {
 
 <h3>Roots: how symmetry shrinks the very first move</h3>
 <div class="layman">
-<p>The same idea pays off before the search even begins. A naive program would treat all 256 squares of a 16×16 board as 256 different opening moves. But rotate or flip the board and it's the same game — so the eight mirror-images of any opening are really one opening. Fold the board by its symmetries and only a small wedge of genuinely-different first moves is left. Those are the <strong>roots</strong> the solver actually starts from.</p>
+<p>The same reduction applies to the opening move. A naive solver starts 256 searches, one from each square. Folding rotations and reflections together leaves only the openings in one triangular wedge of the board. These distinct starting cases are the search <strong>roots</strong>.</p>
 </div>
 <div class="engineer">
 <p>D₄ acts on the opening square too. Canonicalising a first move to its orbit representative (the lexicographically-minimal of its 8 images) collapses ~8 openings into one, so the solver only launches a search from each distinct orbit. The number of roots is the number of D₄ orbits of board squares — about <code>⌈n²/8⌉</code>, lifted slightly because squares on a symmetry axis (the diagonal or the mid-lines) have smaller orbits (size 4, or 1 at the centre), not the full 8.</p>
@@ -555,14 +582,14 @@ fn pos_key(&self, blocked) -> Bits {
 <button type="button" class="sec-toggle" data-target="graph" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>Symmetry merges boards that are rotations of each other. But there is a deeper kind of sameness. Forget the board entirely and look only at the <em>structure</em> of the legal moves: which available squares "conflict" with which other available squares (because one attacks the other).</p>
-<p>Draw a dot for each available square, and a line between two dots whenever those squares attack each other. You get a <strong>network</strong> (a graph). The payoff: two boards that look nothing alike — different attacked regions, different positions, even different rotations — can produce the <em>same network shape</em>. When the networks match, the games are identical, with the same winner every time.</p>
-<p>This merges far more positions than symmetry alone — roughly <strong>3.4× more</strong>, on top of the 8× from symmetry. The catch is that checking whether two networks have the same shape is expensive. <code>iso-flat</code> split the difference: graph handling on small networks and plain board symmetry on large ones. Today's <code>iso-dense</code> goes further: it computes every small-network answer directly with W8–W16, so it no longer needs to name or remember those graphs at all.</p>
+<p>Board symmetry recognizes sameness that the eye can see. Graph theory finds sameness that the board conceals.</p>
+<p>Ignore the coordinates and draw one dot for every available square. Join two dots if queens on those squares would attack each other. The resulting network contains everything that matters about future play. Two boards with the same network are the same game, even if no rotation or reflection connects them.</p>
+<p>This observation merged roughly <strong>3.4 times</strong> as many positions as board symmetry alone. It also introduced a new cost: comparing graph shapes can take longer than the memory it saves. Later solvers kept the mathematical insight while removing the expensive comparison from the live search.</p>
 </div>
 
 <div class="engineer">
-<p>The available squares form the <strong>available-graph</strong>: one vertex per available square, an edge between two vertices whenever the squares mutually attack. Since the game is impartial Node Kayles on exactly this graph, <strong>positions with isomorphic available-graphs have identical game values</strong> — a strictly coarser (more merging) equivalence than D₄. Measured safe merge: 2.63 / 3.17 / 3.42 / 3.40× at n=8/10/12/14, plateauing at ~3.4× ⇒ n=16's ~7.2B D₄-distinct collapses to ~2.1B graph-distinct.</p>
-<p>Graph canonicalization is the cost. A full Weisfeiler–Leman (color-refinement) canonical key costs ~100× the D₄ key (~4200 cycles vs ~62), making a <em>pure</em> graph-keyed search a live loss despite 3.4× fewer nodes. The resolution is a <strong>selective key</strong> in disjoint tagged namespaces:</p>
+<p>The <strong>available graph</strong> has one vertex per legal square and an edge between mutually attacking squares. The game is Node Kayles on this graph, so graph isomorphism preserves value and forms a coarser equivalence than D₄. Measured graph/D₄ merge ratios are 2.63, 3.17, 3.42, and 3.40× at n=8, 10, 12, and 14. Applied to n=16, the observed plateau suggests about 2.1 billion graph-distinct states instead of 7.2 billion D₄-distinct states.</p>
+<p>Canonicalization can erase that gain. The full Weisfeiler–Leman path costs roughly 4,200 cycles per key against about 62 for carried D₄, so a pure graph-keyed search loses despite fewer states. <code>iso-flat</code> used graph keys only where their merge paid for the key, with graph and D₄ values in disjoint namespaces:</p>
 <pre><code>fn node_key(&self, q, orient) -> Bits {        // iso_flat.rs
     let pc = avail.popcount();
     if pc &lt;= self.iso_max_avail {              // small graph: exact iso, cheap
@@ -574,7 +601,7 @@ fn pos_key(&self, blocked) -> Bits {
     }
 }</code></pre>
 <p>For ≤7-vertex graphs the value is resolved by a <strong>complete tiny table</strong> keyed by the raw labelled edge code (a 28-bit upper-triangular bitstring) — no canonicalization at all, just one direct byte load, because the Node-Kayles value is relabelling-invariant. The default threshold is 7 (the top of the no-WL regime). The two namespaces (<code>graph_bits</code> / <code>d4_bits</code>) never collide even on a full 16×16 board where no spare board bit exists.</p>
-<p><strong>Lineage note:</strong> the selective-key code above explains <code>iso-flat</code> and why graph equivalence was a crucial discovery. In today's <code>iso-dense</code> K=16 hot path it is bypassed: pc≤16 is evaluated by W<sub>K</sub> with no canonical key or TT entry, while pc≥17 uses the carried D₄ representative. The champion inherits the graph-game model, not the live WL canonicalizer.</p>
+<p><strong>Lineage note:</strong> the selective-key code above explains <code>iso-flat</code> and why graph equivalence mattered. Today's K=16 <code>iso-dense</code> bypasses it: pc≤16 is evaluated by W<sub>K</sub> with no canonical key or TT entry, while pc≥17 uses the carried D₄ representative. The current solver keeps the graph-game model but not the live WL canonicalizer.</p>
 <div class="intuition">
 <span class="tag">Intuition · graph isomorphism and color refinement</span>
 <p>Two graphs are "the same shape" if you can rename the dots of one to turn it into the other. Checking that directly can require trying many renamings. <strong>Color refinement</strong> narrows the possibilities: paint every dot by its degree, then repeatedly repaint it from the multiset of its neighbours' colors. Structurally different dots often separate quickly. But refinement alone is only a filter—some non-isomorphic regular graphs remain indistinguishable. The exact tiny-graph table used by the default live path avoids that ambiguity; larger historical experiments added individualization and were checked against an exact canonicalizer.</p>
@@ -603,9 +630,9 @@ fn pos_key(&self, blocked) -> Bits {
 <button type="button" class="sec-toggle" data-target="grundy" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>Late in a game, the remaining available squares often split into separate clumps that cannot interfere with each other — a move in one clump never touches another clump. When that happens, you are really playing <em>several tiny independent games at once.</em></p>
-<p>The Sprague–Grundy theorem gives each independent game a number, or <strong>nimber</strong>, that summarizes it. Several games combine by bitwise XOR rather than ordinary addition. The combined position is a loss for the mover exactly when that XOR is zero.</p>
-<p>For this particular game it helps only at the very end (the queen board mostly stays in one connected piece because diagonals reach across everything), but where it applies, a clump of a few squares can be resolved instantly from a tiny lookup table instead of being searched.</p>
+<p>Near the end, the surviving squares sometimes break into clumps that can no longer affect one another. A move in one clump leaves every other clump untouched. The board has become several smaller games played in parallel.</p>
+<p>The <dfn class="term" tabindex="0" data-tip="Sprague–Grundy theory maps any finite impartial normal-play game to an equivalent Nim heap.">Sprague–Grundy theorem</dfn> assigns each independent game a number, called a <dfn class="term" tabindex="0" data-tip="A nimber, or Grundy value, is the equivalent Nim-heap size of an impartial game."><strong>nimber</strong></dfn>. The nimbers combine by <dfn class="term" tabindex="0" data-tip="XOR is bitwise exclusive-or; a combined nimber of zero marks a losing position.">XOR</dfn>, and a total of zero marks a loss for the player to move.</p>
+<p>Queens attack across long rows and diagonals, so the board rarely splits until late in the game. This elegant theory never became a major speedup here. That failure established a recurring rule: reducing the number of positions helps only when the shortcut costs less than the positions it removes.</p>
 </div>
 
 <div class="engineer">
@@ -638,14 +665,15 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 
 <!-- ===================================================================== -->
 <section id="lineage">
-<h2><span class="num">7</span>The solver lineage — getting progressively smarter</h2>
+<h2><span class="num">7</span><span class="layman">How the solver changed shape</span><span class="engineer">The solver lineage</span></h2>
 <button type="button" class="sec-toggle" data-target="lineage" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>Symmetry, graph shape, game theory, and move order supplied the raw ideas. Making them coexist took several reversals. The middle generations learned that <em>which positions count as the same</em> determines whether the problem fits in memory. Exact endgame evaluators then removed the hottest stored region. The final leap came from asking a simpler question at every position: which legal queen blocks the most of the board <em>now</em>? Trying that move first makes winning replies appear earlier, so far fewer siblings are searched.</p>
+<p>The solver's history is a succession of bottlenecks. The first versions repeated too much work. The next remembered so much that they ran out of memory. Compression made the search fit but made lookups slow. A flat table made lookups cheap, after which the endgames themselves became the problem.</p>
+<p>Each generation answered the question raised by the previous one. Just as important, it often threw the previous machinery away.</p>
 </div>
 <div class="engineer">
-<p>The <code>Solver</code> trait preserves a ladder of implementations (<code>SOLVER_NAMES</code>), simplest to most sophisticated. D₄ memoization exposed a capacity wall; graph-isomorphic keys reduced the set enough to fit but made each key expensive; a flat lockless TT removed archive overhead; fused ETC and dynamic ordering improved cutoffs; and cheap BMI2 row extraction moved the exact W<sub>K</sub> ceiling from 12 to 16. Every retained variant still passes the validation gates.</p>
+<p>The <code>Solver</code> implementations preserve the experimental lineage. D₄ memoization exposed the capacity wall. Graph-isomorphic keys reduced the set enough to fit but raised key cost. A flat lockless TT removed live archive overhead. Exact W layers removed the dense tail, dynamic ordering improved cutoffs, and <dfn class="term" tabindex="0" data-tip="BMI2 is an x86 instruction-set extension. Its pext instruction gathers selected bits into a compact value, which makes graph-row construction cheaper here.">BMI2</dfn> row extraction moved the profitable W<sub>K</sub> ceiling from 12 to 16. Retained variants pass the same validation gates.</p>
 </div>
 
 <div class="layman">
@@ -659,7 +687,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <tr><td><code>iso-dense</code></td><td>Extend the exact endgame recurrence through 12 squares without building giant tables. With fused ETC, this reached 1m32s and 1.70 billion nodes.</td></tr>
 <tr><td>Dynamic move order</td><td>At each position, try the move leaving the fewest replies instead of following an empty-board ranking. This alone reached 1m02s and 1.14 billion nodes.</td></tr>
 <tr><td>Dynamic order + ETC</td><td>Probe the dynamically best-ranked children before expanding them. Together they first crossed one minute, then hot-loop tuning lowered the W12 configuration to roughly 52 seconds.</td></tr>
-<tr><td>Cheaper W<sub>K</sub> + W16 ⭐</td><td>Build each graph row with BMI2 extraction instead of testing every edge bit, then extend exact evaluation from 12 through 16 squares. Result: <strong>33.9s / 396 million nodes</strong>.</td></tr>
+<tr><td>Cheaper W<sub>K</sub> + W16 ⭐</td><td>Build each graph row with <dfn class="term" tabindex="0" data-tip="BMI2 is an x86 instruction-set extension. Its pext instruction packs selected bits, replacing many scalar edge tests here.">BMI2</dfn> extraction instead of testing every edge bit, then extend exact evaluation from 12 through 16 squares. Result: <strong>33.9s / 396 million nodes</strong>.</td></tr>
 </tbody>
 </table>
 </div>
@@ -690,20 +718,20 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 </div>
 
 <div class="keyidea">
-<span class="tag">The lineage branches; it does not only accumulate</span>
-<div class="layman"><p>The current solver is not every previous idea stacked together. It dropped the compressed archive after learning that the state set could fit, stopped storing small endgames once exact recomputation became cheaper, and has now dropped the plan to sort work by memory address. That last reversal exposed the breakthrough: memory order nearly doubled the search because it destroyed a valuable move order. Improving the move order itself produced the sub-minute result.</p></div>
+<span class="tag">Each solver also discarded ideas</span>
+<div class="layman"><p>The current solver dropped the compressed archive after the state set began to fit, then stopped storing small endgames when recomputing them became cheaper. It also abandoned a plan to sort work by memory address. That version nearly doubled the search because it destroyed a useful move order. Ranking moves directly produced the sub-minute result.</p></div>
 <div class="engineer"><p><code>iso-dense</code> does <strong>not</strong> use <dfn class="term" tabindex="0" data-tip="A compact static-retrieval structure used here for immutable solved-value archives.">BuRR</dfn> or live graph-isomorphic hashing. Above pc=16 it uses the carried D₄ key and one flat TT; at pc≤16, <dfn class="term" tabindex="0" data-tip="An exact on-demand evaluator for a K-vertex graph, recursively using lower W layers.">W<sub>K</sub></dfn> evaluates directly. The champion preserves cutoff order, improves it dynamically, and now stores only the pc≥17 residue—the 17 GB TT is just 16.5% full. BuRR may still serve a frozen n=18 archive, but the +94% ordering tax means any layer-oriented design must recover equivalent cutoff economics.</p></div>
 </div>
 
 <div class="card">
 <h4 style="margin-top:0">The reversal that mattered</h4>
-<div class="layman"><p>At one point the project looked stuck: roughly 36 million positions per second, with 16×16 hovering near 3m41s, and that number got written down as "the wall." It was wrong. The machine was short of usable memory, so the large table did not fit and the timings were invalid. Cleaning the machine, adding the dense lookup table, and forcing large pages took 16×16 to <strong>2m44s</strong>. The lesson was narrower and more useful: compare any claimed floor with a first-principles bound, then verify the measurement environment.</p></div>
+<div class="layman"><p>By Thursday, the solver appeared to have settled at about 36 million positions per second. A full run should take roughly 3m41s, and the notes called that “the wall.” The number was precise, repeatable, and wrong.</p><p>The machine was carrying stale data in compressed swap and disk caches, leaving too little room for the solver's table. Many tests had measured eviction rather than the intended algorithm. After the memory was cleared, the dense endgame table restored, and the main table forced onto large pages, the same problem finished in <strong>2m44s</strong>. The episode changed the burden of proof: a measured floor had to agree with a first-principles estimate of the machine.</p></div>
 <div class="engineer"><p>A "~36 M/s floor, sub-50 unreachable, n=16 ~3m41s wall" was recorded on a memory-degraded box: zram was full, ZFS ARC held ~13 GB, the 17 GB TT was capped, W8 had been tested through a slow path, and huge-page promotion was incomplete. A clean box plus the W8 table and <code>MADV_COLLAPSE</code> reached 2m44s. The first-principles estimate was already far below 3m41s; that gap called for an audit, not acceptance of the measured wall.</p></div>
 </div>
 
 <h3>Searching under a root — and where whole branches get pruned</h3>
 <div class="layman">
-<p>From each root the solver opens out a game tree. It looks vast—but it almost never walks the whole thing. The current solver stops a branch as soon as its outcome is decided, reuses positions already solved, merges rotated or reflected boards, and computes every endgame with 16 or fewer available squares exactly without entering its normal search subtree. The picture shows those four cuts at once.</p>
+<p>Under each opening lies a game tree the solver will never explore in full. It stops as soon as one move proves a win, reuses positions reached by another route, folds mirror-image boards together, and hands every endgame with 16 or fewer available squares to a separate exact evaluator. The diagram shows where those pieces of the tree disappear.</p>
 </div>
 <div class="engineer">
 <p>Under each root, current <code>iso-dense</code> runs negamax with a first-losing-child cutoff; a flat TT keyed by the carried D₄-canonical available set above pc=16; and exact W0…W16 evaluation at pc≤16. Earlier graph-isomorphic solvers merged still more shapes, but that canonicalizer is not in the current hot path. The four current cuts below are why the realized search is a tiny fraction of the formal tree.</p>
@@ -765,19 +793,19 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 
 <!-- ===================================================================== -->
 <section id="axes">
-<h2><span class="num">8</span>Three orthogonal axes of optimization</h2>
+<h2><span class="num">8</span><span class="layman">Three ways the solver got faster</span><span class="engineer">Three orthogonal axes of optimization</span></h2>
 <button type="button" class="sec-toggle" data-target="axes" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>All the speed comes from three independent kinds of improvement. They multiply together, and it helps to keep them straight:</p>
+<p>Every successful change altered one of three quantities: how many positions the solver visits, how many bytes it spends remembering each one, or how long it waits to reach a stored answer. Gains in one category multiply gains in the others.</p>
 <ol>
 <li><strong>Visit fewer positions.</strong> Remember what you've solved; merge look-alikes (symmetry, graph shape); resolve tiny endgames from a lookup table instead of searching them.</li>
 <li><strong>Store each position more cheaply.</strong> Don't store the whole board; store a tiny "fingerprint" of it. Pack everything into 8 bytes. Carry a compact form down the search so you rarely touch the full board.</li>
-<li><strong>Reach each stored position faster.</strong> This is the surprising one: the bottleneck is not <em>thinking</em>, it's <em>waiting for memory</em>. Each lookup is a random jump into a multi-gigabyte table, and the computer stalls waiting for it. Most of the cleverest tricks are about hiding or shortening that wait.</li>
+<li><strong>Reach each stored position faster.</strong> Each lookup is a random jump into a multi-gigabyte table. For much of the project, the processor spent more time waiting for those answers than computing them.</li>
 </ol>
 </div>
 <div class="engineer">
-<p>Three independent levers, each covered in its own section below. Most per-node micro-optimizations wash out (~0–5%); the levers that move the wall are <strong>node-count</strong> and <strong>memory/representation/latency</strong>. (A handful of micro-opts <em>do</em> pull their weight — §11 collects them.)</p>
+<p>The 99× wall-time reduction decomposes into three levers. They multiply: a cheaper node matters more after ordering removes 90% of the nodes, and a better representation changes both capacity and probe latency. Most isolated hot-loop edits measured 0–5%; §11 retains the exceptions.</p>
 <ol>
 <li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, the complete W8 table, and the table-free W9–W16 evaluator hierarchy (never probe or normally expand pc≤16). (§3–8.)</li>
 <li><strong>Represent nodes cheaper</strong> — 256-bit board as <code>[u64;4]</code>; the 8-byte TT slot with a 55-bit fingerprint; the in-band <code>TinyGraph</code> carried down so deep nodes never touch the 256-bit board. (§9.)</li>
@@ -787,10 +815,12 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 
 <h3>The W8 table — the lever that broke the wall</h3>
 <div class="layman">
-<p>The single biggest recent win combines axes 1 and 3. Whenever the game shrinks to exactly <strong>8 available squares</strong>, its outcome depends only on the <em>shape</em> of those 8 squares' conflicts — and there are few enough shapes that the solver can pre-compute the answer to <em>every single one</em> at startup, into a 32-megabyte table. So instead of searching that whole sub-game (and re-searching it thousands of times because it kept getting forgotten), the solver does one instant lookup and never expands it again. That alone cut the work by about 28%.</p>
+<p>The first exact endgame table began at eight available squares. There are few enough labelled conflict graphs of that size to compute every answer at startup and pack them into 32 megabytes. Whenever the main search reaches eight squares, one lookup replaces the entire remaining subtree.</p>
+<p>The table never forgets. The earlier cache could evict a small endgame and later search it again thousands of times; W8 always returns the answer. It cut the work by about 28%.</p>
 </div>
 <div class="engineer">
-<p>At <code>popcount == 8</code> the available 8-vertex Node-Kayles subgame's value is isomorphism-invariant, so it is resolved by a single raw 28-bit labelled-edge-code lookup into a complete, eviction-free 32 MiB bitset (<code>dense.rs</code>, tables W0..W8 built bottom-up by vertex count). The win over plain iso-flat is <em>less repeated work</em>: iso-flat evicts pc==8 entries from the 13–17 GB flat table and re-expands their ≤7 subtrees repeatedly. W8 is complete ⇒ always a hit, no fingerprint, no eviction, TLB-friendly (16 huge pages). Measured ~28% fewer nodes (5.1 B vs 7.1 B).</p>
+<p>At <code>pc == 8</code>, the available graph has a 28-bit labelled edge code. That code directly indexes a complete, eviction-free 32 MiB bitset built bottom-up for W0..W8. The lookup needs no canonicalization, fingerprint, or normal TT probe.</p>
+<p>Completeness is the performance property. <code>iso-flat</code> could evict pc=8 values from its 13–17 GB TT and later re-expand their ≤7 subtrees. W8 cannot miss logically or be evicted. Replacing that repeated work cut nodes from 7.1 billion to 5.1 billion, about 28%, while occupying 16 huge pages.</p>
 <pre><code>// dense.rs — build all labelled Node-Kayles tables up to 8 vertices, bottom-up
 for k in 1..=8 { tables.push(build_table(k, &amp;tables)); }
 // a row is the 28-bit upper-triangular edge code; value is relabelling-invariant
@@ -800,21 +830,21 @@ for k in 1..=8 { tables.push(build_table(k, &amp;tables)); }
 let lost = if WINDOW &amp;&amp; pc == 8 { !self.w8_get(att, child0) }   // ONE indexed bit load
            else if pc &lt;= 7      { !self.band_entry(...) }        // complete ≤7 table
            else                  { /* recurse */ };</code></pre>
-<p>The <code>WINDOW</code> flag is a <code>const bool</code> monomorphisation — plain iso-flat compiles to <em>zero</em> dead pc==8 branch, and iso-window builds the edge code in one pass straight from the 8 attack rows (no intermediate adjacency arrays). The ≤7 region is solved in a thread-private 128-byte L1 stack memo and stored in a complete labelled ~2 MB table — entirely off the DRAM path.</p>
+<p><code>WINDOW</code> is a <code>const bool</code>, so plain <code>iso-flat</code> contains no dead pc=8 branch. <code>iso-window</code> builds the code in one pass from eight attack rows. Below it, the ≤7 recurrence uses a thread-private 128-byte L1 memo and a complete labelled table of about 2 MiB.</p>
 </div>
 
 <h3 id="w9">From W9 to W16 — compute the entry instead of storing it</h3>
 <div class="layman">
-<p>The W8 table answers any 8-square endgame instantly. The obvious next step — a table for every <em>9</em>-square endgame — is a trap: it would weigh about <strong>8 gigabytes</strong>, and W10 would be vastly larger. <code>iso-dense</code> gets the same exact answers <em>without materializing any of those tables.</em></p>
-<p>When the game shrinks to exactly 9 available squares, every legal move places a queen, which removes that square <em>and</em> all the squares it conflicts with — leaving a smaller endgame of <strong>8 or fewer squares</strong>. And those are exactly the ones the W8 table already knows by heart. So instead of searching the 9-square game, <code>iso-dense</code> just plays out each of its (at most nine) moves on paper, reads the resulting smaller endgame straight from the compact W8 bitset, and combines the answers: the 9-square position is a win the instant any one of its moves hands the opponent a losing endgame. These bounded reads replace a search subtree and avoid the large random-access table entirely.</p>
-<p>The recurrence stacks: W10 asks lower layers, then W11, W12, and eventually W16. At first W13 was slower—the solver spent too much time constructing its larger graph code—so K=12 looked like the limit. The reversal came from building each adjacency row with one processor bit-extraction instruction instead of testing every possible edge. That small per-node win made four additional exact layers economical. W16 now resolves every position through 16 available squares and cuts the full solve to <strong class="win">33.9 seconds and 396 million nodes</strong>.</p>
+<p>Nine squares seem to demand the same treatment, but a complete W9 table would consume about <strong>8 gigabytes</strong>. W10 would be incomparably larger. The solver instead computes only the entry it needs.</p>
+<p>From a nine-square position, every move leaves at most eight squares. W8 already knows all of those children. The solver tries the possible moves on the compact graph and reads each child from W8, stopping as soon as it finds a losing reply for the opponent. No W9 table and no ordinary search are needed.</p>
+<p>The same recurrence builds W10 from lower layers, then W11 and W12. For a time, W13 was slower because constructing its graph cost more than the subtree it removed. One cheaper bit-extraction operation changed that balance. W13 through W16 became profitable together, bringing the full solve to <strong class="win">33.9 seconds and 396 million nodes</strong>.</p>
 <div class="keyidea">
-<span class="tag">The trick · compute the table entry, don't store it</span>
+<span class="tag">Compute the entry, not the table</span>
 <p>A complete 9-square table is too big to hold, but one requested entry can be derived from W8; that value can serve the next layer. The hierarchy trades arithmetic for avoided memory probes and entire subtrees. Cheaper graph construction moved the economic limit from 12 to 16. K17 still removes nodes, but its shallow, highly repeated positions are cheaper to retrieve from the normal table than to recompute every time.</p>
 </div>
 </div>
 <div class="engineer">
-<p><code>iso-dense</code> extends the complete-dense idea through a recursive W<sub>K</sub> hierarchy. A complete labelled W9 would be <code>2^(9·8/2) = 2³⁶</code> rows ≈ <strong>8 GiB</strong>, so it is never materialized. At <code>popcount == 9</code> the value is computed on demand from W0..W8; W10..W16 apply the same exact recurrence over lower evaluators. W9 is the smallest and clearest instance:</p>
+<p><code>iso-dense</code> extends the recurrence without materializing higher tables. A complete labelled W9 has <code>2^(9·8/2) = 2³⁶</code> rows, or 8 GiB as a bitset. Instead, <code>get9</code> computes one requested value from W0..W8. W10 through W16 recurse over the same lower evaluators. W9 shows the kernel:</p>
 <pre><code>// dense.rs — DenseW8::get9: exact value of one labelled 9-vertex graph,
 //            with NO W9 allocation, canon, hash, or join.
 let mut adj = [0u16; 9];
@@ -832,7 +862,9 @@ for i in 0..9 {
     }
 }
 false                                                          // no losing child ⇒ LOSS</code></pre>
-<p>The kernel reads the 36-bit upper-triangular edge code, extracts each vertex's adjacency row with one <code>_pext_u64</code> against a precomputed <strong>incident-edge mask</strong> (<code>W9_MASKS.0[i]</code>), then for each of the ≤9 legal moves forms the child alive-mask <code>full &amp; !(bit_i | adj_i)</code> and projects the child's edge code with a second <code>_pext_u64</code> against the child's <strong>induced-edge mask</strong> (<code>W9_MASKS.1[child]</code>). Because <code>pext</code> preserves the upper-triangle order of the surviving edges, the projected code <em>directly</em> indexes <code>W[popcount(child)]</code> — a complete table, so the lookup never misses logically even if the hardware must fetch a cache line. The node is a win iff any child reads back a loss; one short-circuiting OR-sweep, at most nine compact-bitset reads, <strong>zero allocation, zero canonicalization, zero flat-TT traffic.</strong> A <code>direct_w9_matches_scalar_recurrence</code> test proves <code>get9</code> matches the scalar negamax recurrence across thousands of codes.</p>
+<p>The input is a 36-bit upper-triangular edge code. For vertex <code>i</code>, <code>_pext_u64(code, W9_MASKS.0[i])</code> gathers its incident edges into one adjacency row. A move produces <code>child = full &amp; !(bit_i | adj_i)</code>.</p>
+<p>A second <code>pext</code>, using <code>W9_MASKS.1[child]</code>, projects the surviving induced edges. Because extraction preserves their upper-triangle order, the result directly indexes <code>W[popcount(child)]</code>. The sweep stops on the first losing child. In the worst case it performs nine compact-bitset reads, with no allocation, canonicalization, hash, or flat-TT traffic.</p>
+<p><code>direct_w9_matches_scalar_recurrence</code> checks the kernel against scalar negamax over thousands of graph codes.</p>
 <p>In <code>iso_flat.rs</code>, <code>adj_row_pext</code> compacts each live square's attack row against the current available set with one four-word BMI2 <code>pext</code>, replacing K(K−1)/2 scalar <code>Bits::get</code> tests. The packed rows form the labelled edge code and dispatch to <code>get9</code>…<code>get16</code>. K≤11 fits in <code>u64</code>; K≤16 fits in a 120-bit <code>u128</code>. The ceiling <code>DK</code> is a compile-time const generic chosen once at the subtree handoff.</p>
 <div class="keyidea">
 <span class="tag">Why this is a memory lever, and why it lands where the cost lives</span>
@@ -858,17 +890,17 @@ false                                                          // no losing chil
 <button type="button" class="sec-toggle" data-target="represent" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>A 16×16 board is 256 squares — too much to store billions of times over. Two tricks shrink it dramatically.</p>
+<p>The solver now knew which positions it wanted to remember. It still needed to fit enough of them in memory. A full 256-square board was far too large to store billions of times, so the table kept only a compact identity tag.</p>
 <p><strong>Store a fingerprint, not the board.</strong> Instead of writing down the full board, the solver records a short 55-bit "fingerprint" of it—like a hash of a document. If two boards land in the same memory slot and have the same fingerprint, they're treated as equal. Could two genuinely different boards accidentally share a fingerprint? Yes, but the odds are about 1 in 36 quadrillion per colliding lookup, vanishingly small even across billions of probes. The independently known n=16 verdict agrees, adding confidence without proving that every internal lookup was collision-free. Each remembered entry is just <strong>8 bytes</strong>—five times more entries per gigabyte than storing the board.</p>
 <p><strong>Carry a tiny form down the search.</strong> Once the game is down to a handful of squares, the solver stops touching the big 256-bit board at all and carries a tiny compact description instead — turning big board operations into single-byte operations.</p>
 </div>
 <div class="engineer">
-<p>The board is <code>Bits([u64;4])</code> — 256 bits, four words. The transposition table stores not the key but an <strong>8-byte slot</strong>: one <code>u64</code> packing <code>{used:1, val:8, fp:55}</code>.</p>
+<p>The board occupies four <code>u64</code> words. Storing all 32 bytes in every TT entry would make capacity impossible, so each slot keeps only <code>{used:1, val:8, fp:55}</code> in one <code>u64</code>.</p>
 <pre><code>// tt.rs — the entire slot is one u64
 fn pack(fp, val) -> Slot {
     Slot(1 | ((val as u64) &lt;&lt; 1) | ((fp &amp; FP_MASK) &lt;&lt; 9))
 }   // bit 0 = used, bits 1..8 = value, bits 9..63 = 55-bit fingerprint</code></pre>
-<p>The slot index already pins ~31 bits of the routing hash; the 55-bit fingerprint comes from an <em>independent</em> 64-bit hash half, so a wrong "hit" (a different key in the same slot whose fingerprint also matches) has probability ~2⁻⁵⁵ per colliding probe. This shrinks the slot from 40 B to 8 B—five times the entries per byte—while retaining transposition lookup. A fingerprint <em>mismatch</em> is just a miss that re-searches; the only weakening is a vanishingly small false-match probability. Agreement with Jenrich is an independent verdict check, not proof that no internal false hit occurred.</p>
+<p>The slot index consumes about 31 routing bits. The fingerprint comes from an independent 64-bit hash half, so a foreign key already colliding on the slot matches with probability 2⁻⁵⁵. The 40-to-8-byte reduction provides five times as many slots per GiB. A fingerprint mismatch is a safe miss; a false match is possible but has vanishing probability. Jenrich's agreement checks the final verdict independently but does not prove that every internal probe was collision-free.</p>
 <p>The <code>TinyGraph</code> (<code>[u8;8]×2</code>, which fits within one cache line) is built once when a node drops to popcount ≤7 and carried down so the deep tail does single-byte <code>alive &amp; !closed[i]</code> operations instead of 256-bit board ops. Hot structs use plain data, contiguous storage, explicit <code>#[repr]</code>, and compile-time <code>size_of</code> assertions so a field addition cannot silently change padding.</p>
 <div class="intuition">
 <span class="tag">Intuition · why a 55-bit fingerprint is safe</span>
@@ -881,16 +913,32 @@ fn pack(fp, val) -> Slot {
 </div>
 </details>
 </div>
+
+<div class="card" id="tiger-rules">
+<h4 style="margin-top:0">Rust and the Tiger-style hot-path rules</h4>
+<div class="layman"><p>The solvers are written in <dfn class="term" tabindex="0" data-tip="Rust is a systems programming language with explicit control over memory layout and a strong compile-time safety model.">Rust</dfn>. The project calls its inner-loop contract <dfn class="term" tabindex="0" data-tip="Tiger-style is this project's shorthand for strict data-oriented rules applied to code executed at every search node.">“Tiger-style” discipline</dfn>: keep frequently used data small and contiguous, move counters and tuning metadata aside, resolve settings before the search begins, and allow no allocation, locks, shared counters, environment reads, or system calls inside the per-position loop.</p></div>
+<div class="engineer"><p>The implementation is Rust. “Tiger-style” is project shorthand for a compile-time-enforced hot-path contract:</p>
+<ul>
+<li>Hot structs contain fixed-width plain data; dynamic containers and measurement state live outside them.</li>
+<li>Storage is contiguous. Inner loops use indices and slices rather than linked objects or repeated pointer chasing.</li>
+<li>Layout is explicit with <code>#[repr(C)]</code> or <code>#[repr(transparent)]</code>; compile-time size and alignment assertions catch accidental padding.</li>
+<li>Fields are ordered by alignment and access temperature. Cold or optional fields move to sidecars.</li>
+<li>Integer widths match their range: squares and small graph values use <code>u8</code>/<code>u32</code>, widening only at true indexing boundaries.</li>
+<li>Run-constant modes are selected once, preferably through const-generic monomorphization. Production loops contain no dead instrumentation branch.</li>
+<li>No per-node allocation, locks, atomics, environment lookup, syscall, or unreviewed raw-pointer design. The few <code>unsafe</code> blocks wrap huge-page allocation and prefetch and state their invariants.</li>
+</ul>
+<p>These rules are not individually claimed as speedups. They prevent layout drift and coordination work from entering code that runs hundreds of millions of times.</p></div>
+</div>
 </section>
 
 <!-- ===================================================================== -->
 <section id="latency">
-<h2><span class="num">10</span>The bottleneck keeps moving: memory, frontend, evaluator</h2>
+<h2><span class="num">10</span><span class="layman">The bottleneck keeps moving</span><span class="engineer">The moving bottleneck: memory, frontend, evaluator</span></h2>
 <button type="button" class="sec-toggle" data-target="latency" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>Random memory was the dominant bottleneck for much of the project. Each position lookup jumped into a 17-gigabyte table, where a miss could cost hundreds of arithmetic operations. W12 removed billions of those lookups; W16 has now shrunk the stored residue so far that the table is only 16.5% full. The cost has shifted toward the exact evaluator itself, so the next round starts with a fresh profile rather than inheriting the old “memory-bound” label.</p>
-<p>So the cleverest performance tricks are all about that wait:</p>
+<p>For much of the week, each search step ended with a random jump into a 17-gigabyte table. The arithmetic was cheap; waiting for memory was not. Several optimizations therefore changed how the machine reached the table rather than how it reasoned about the game.</p>
+<p>W16 has changed the balance again. The current run stores so few large positions that the table is only 16.5% full, while exact endgame evaluation consumes more of the work. The next profile must measure this new solver instead of repeating the old claim that it is memory-bound.</p>
 <ul>
 <li><strong>One shared table, no locks.</strong> Many cores share one table with no "do not disturb" locks — safe because the same board always computes the same answer, so even if two cores write the same slot they write the same thing.</li>
 <li><strong>Look ahead.</strong> Before the solver needs a slot, it tells the processor "fetch this soon" (a prefetch), so the slow trip from RAM overlaps with other work instead of stalling.</li>
@@ -899,7 +947,7 @@ fn pack(fp, val) -> Slot {
 </ul>
 </div>
 <div class="engineer">
-<p>The solver reached this point by moving bottlenecks. Before W12 it was strongly DRAM-latency-bound: random probes into a 17 GB TT exposed roughly 120 ns each. On the later K12 workload, TMA was co-dominant <strong>backend memory (~30%) and frontend (~31%)</strong>. W16 has since collapsed the run to 396 M nodes and ~2.8 GB of live TT contents while its nested evaluator raises cycles/node 66%. The mechanisms below are the landed latency controls; current work re-profiles K16 before choosing between evaluator cost and MLP.</p>
+<p>Before W12, random probes into a 17 GB TT exposed about 120 ns of DRAM latency. On the later K12 workload, <dfn class="term" tabindex="0" data-tip="Top-down microarchitecture analysis groups CPU pipeline slots into frontend, backend, speculation, and retiring categories.">TMA</dfn> attributed roughly 30% of slots to backend memory and 31% to the frontend. W16 then cut the run to 396 million nodes and about 2.8 GB of live TT contents, while raising cycles per node 66% through nested evaluation. The old profile no longer describes the production solver; evaluator cost and <dfn class="term" tabindex="0" data-tip="Memory-level parallelism overlaps several outstanding cache misses instead of waiting for each serially.">MLP</dfn> must be remeasured on K16.</p>
 
 <h4>Lockless atomic transposition table</h4>
 <p>One flat <code>Box&lt;[AtomicU64]&gt;</code>, relaxed load/store, no mutex, no sharding. Safe by construction: a position's value is deterministic, so a concurrent write for the <em>same</em> key stores the <em>same</em> value, and a write for a <em>different</em> key is rejected by the fingerprint. This removes a lock/unlock and a mutex cache-line bounce from every node. (Hyatt's XOR-key trick is unnecessary — the 55-bit fingerprint self-validates identity.)</p>
@@ -915,10 +963,10 @@ fn pack(fp, val) -> Slot {
 <p>Each key is hashed <strong>once</strong> at creation (<code>hash128</code> → two independent halves <code>(route, fp)</code>); the halves are reused for the prefetch, the get, and the put. The solver issues <code>_mm_prefetch</code> on a child's slot before recursing, so the random-probe DRAM round-trip overlaps with the work in between.</p>
 
 <h4>Huge pages</h4>
-<p>A multi-GB table probed at random thrashes the dTLB on every node. <code>MADV_HUGEPAGE</code> alone only reaches ~73% 2 MB coverage on a randomly-faulted 17 GB table; <code>MADV_POPULATE_WRITE</code> + <code>MADV_COLLAPSE</code> forces 100% 2 MB — a clean ~5% wall win with near-identical node counts (so a genuine per-node TLB win, not noise). Default-on for ≥4 GB tables.</p>
+<p>A multi-GB table probed at random thrashes the <dfn class="term" tabindex="0" data-tip="The data TLB caches virtual-to-physical page translations; a miss can add a page-table walk before the data access.">dTLB</dfn>. <code>MADV_HUGEPAGE</code> reached only about 73% 2 MiB coverage on a randomly faulted 17 GB table. Prefaulting with <code>MADV_POPULATE_WRITE</code> and forcing <code>MADV_COLLAPSE</code> reached 100%, cutting wall time about 5% at nearly identical node count. Huge-page collapse is default for tables of at least 4 GB.</p>
 
 <h4>Thread-local counters + const-generic monomorphisation</h4>
-<p>The per-node node/HLL counter is thread-local, flushed ~once a second — a shared <code>fetch_add</code> per node bounced across the two CCXs over Infinity Fabric and measured a ~2× drag. And every run-constant toggle (measurement mode, window flag, key mode) is resolved <em>once</em> via a <code>const</code> generic at the call site, never a per-node branch — the search is frontend/L1i-bound, so a dead per-iteration branch would worsen the actual bottleneck.</p>
+<p>Node and <dfn class="term" tabindex="0" data-tip="HyperLogLog estimates distinct keys using a small probabilistic sketch.">HLL</dfn> counters accumulate per thread and flush about once a second. A shared per-node <code>fetch_add</code> bounced between the processor's two <dfn class="term" tabindex="0" data-tip="A CCX is a cluster of CPU cores sharing an L3 cache; writes shared across CCXs traverse the interconnect.">CCXs</dfn> and measured a 2× drag. Run-constant choices use <code>const</code> generics selected at the call site, leaving no per-node mode branch in the frontend-sensitive kernel.</p>
 
 <div class="intuition">
 <span class="tag">Intuition · the TLB and huge-page story</span>
@@ -928,19 +976,19 @@ fn pack(fp, val) -> Slot {
 
 <h3 id="seg">After W12: a failed locality bet, better order, then W16</h3>
 <div class="layman">
-<p>Once W12 removed the deepest endgames, almost the entire solve sat under one hard opening move. Giving that branch more workers made them rediscover the same positions; five scheduling variants broke even or lost. The remaining table reads were random, however, and a microbenchmark showed that sorted reads could run about five times faster. That made a sorted frontier look like the next architecture.</p>
-<p>The decisive test separated memory order from everything else. Making the search <em>follow</em> table-slot order added <strong>94% more nodes</strong>. An order-independent duplicate cache also lost, adding 5.2% cycles without reducing work. The table was already serving nearby repeats cheaply; the apparent deduplication prize existed only after paying the enormous cost of abandoning the solver's move order.</p>
-<p>That negative result contained the breakthrough. A winning position stops as soon as one move leaves the opponent losing, so the order of siblings can halve the work. The old solver used a fixed ranking based on the empty board. The new solver re-ranks at every node: try the queen that leaves the fewest currently available replies. It costs a small sort, but cuts about a third of the search.</p>
-<p>Dynamic ordering alone reached <strong>1m02s</strong>; ETC crossed one minute; tighter sorting brought W12 to about 52 seconds. Then the same persistence paid again: a bit-extraction technique dismissed from tiny-graph evidence was re-tested at K≥12, where it was actually cheaper. That unlocked W13 through W16 and the current <strong class="win">33.9s / 396 million-node</strong> record.</p>
+<p>After W12 removed the deepest endgames, almost the entire run lay beneath one difficult opening. Giving that branch more workers only made them rediscover the same positions. Five scheduling variants broke even or lost.</p>
+<p>The remaining table reads were random, and a small benchmark offered an enticing result: sorted reads could run about five times faster. But forcing the search to follow memory order added <strong>94% more positions</strong>. The hardware moved faster while the algorithm did nearly twice the work.</p>
+<p>That result redirected the project toward game order. A winning position stops at its first losing child, so the solver should try the most forcing move first. Ranking moves by how few replies they leave cut about a third of the search. Dynamic ordering reached <strong>1m02s</strong>; combining it with ETC crossed one minute; tighter sorting lowered the W12 solver to about 52 seconds.</p>
+<p>The final reduction came from reopening the old bit-extraction result at the scale now in use. It unlocked W13 through W16 and produced the current <strong class="win">33.9-second, 396-million-node</strong> run.</p>
 <div class="card"><p style="margin:0">The chart below is historical: its pc 9–12 peak motivated W<sub>K</sub>. W12 erased those bands. The later pc 13–21 locality study did not become the solver architecture; its failed order test led to dynamic move ordering instead.</p></div>
 </div>
 <div class="engineer">
-<p><strong>Scheduling closed first.</strong> One root lasted ~94% of wall, but its final solo tail was only ~18%. Finer splitting added 41% re-expansion; ABDADA could not profitably defer pc 13–21 nodes; tuned work stealing added 8.7% nodes / 13.3% wall. The explicit stack reached parity and remained experimental infrastructure.</p>
-<p><strong>ETC survived its first regression.</strong> The initial separate ETC pre-pass cut nodes 17.4% but cost 9.2% wall / 27% cycles per remaining node. Fusing gather with descent built each child descriptor once and carried probe results forward. That converted the mechanism into the <code>M_WAVE</code> default: about −16% nodes, −4.1% total cycles, and a 1m32s / 1.70 B clean-box record.</p>
-<p><strong>The sorted-frontier implementation is negative as built.</strong> pc 13–21 held 88% of the measured probe stream and slot sorting gave 62–73% same-DRAM-row adjacency, but slot-order descent changed the search tree: n=16 nodes rose from 2.097 B to 4.069 B (<strong>+94%</strong>). A four-way L0 probe cache preserved order but measured +5.2% total cycles with no real node cut. These specific wave/SPSC/DDD forms lose; a materially different dedup design remains open only if consumers retain cutoff-friendly move order.</p>
-<p><strong>Dynamic forcing order is the breakthrough.</strong> <code>M_ORD</code> sorts children by <code>child0.popcount()</code> ascending, with <code>child0 == 0</code> first. Against <code>M_WAVE</code> on n=16: −34.3% nodes, +8.5% cycles/node, −28.7% total cycles, and −30.2% wall (98.1s → 68.5s at 12 GB); the clean 17 GB run reached 1m02s / 1,136,583,273 nodes.</p>
-<p><strong>ETC stacks rather than becoming redundant.</strong> <code>M_ORD_W</code> removes another 18.4% of nodes. Its gather/probe work adds 14.6% cycles per retained node, but total cycles still fall 6.5%; this crossed one minute. Inlined insertion sort and fused hot-loop work then cut cycles/node another 12.5%, bringing the tuned K12 path to roughly 52 seconds. A top-k ETC budget was remeasured and lost: the cut triggers were distributed too broadly.</p>
-<p><strong>The next compounding lever was W<sub>K</sub> construction.</strong> One <code>adj_row_pext</code> per vertex replaced scalar edge tests (−3.8% cycles/node). That small direct win made K13–K16 profitable and cut wall another 35%, to 33.9s / 396 M. K17 as a memo-less evaluator lost (+5.7% wall), so the 30-second candidates are a TT-memoized K17 miss path, cheaper nested getK leaves, then a freshly re-profiled MLP lever.</p>
+<p>Root timing bounded the scheduling opportunity. One opening occupied about 94% of wall time, but only its final 18% was truly serial. Finer splitting added 41% re-expansion, <dfn class="term" tabindex="0" data-tip="ABDADA marks positions already under search so other workers can defer likely duplicate work.">ABDADA</dfn> could not profitably defer pc 13–21 nodes, and tuned work stealing added 8.7% nodes and 13.3% wall time. The explicit stack reached parity but remained experiment infrastructure.</p>
+<p>The first separate <dfn class="term" tabindex="0" data-tip="Enhanced transposition cutoff probes children before expansion so a cached losing child can end the parent immediately.">ETC</dfn> pass cut nodes 17.4% yet regressed wall time 9.2%, because cycles per retained node rose 27%. Fusing gather with descent built each child descriptor once and preserved probe results. The resulting <code>M_WAVE</code> configuration cut total cycles 4.1% and reached 1m32s / 1.70 billion nodes.</p>
+<p>After W12, pc 13–21 supplied 88% of the remaining probes. Sorting by slot produced 62–73% same-row adjacency, but following that order changed the search tree: n=16 rose from 2.097 billion to 4.069 billion nodes, a <strong>94% increase</strong>. A four-way L0 probe cache preserved order but added 5.2% total cycles without a real node cut. Those wave, <dfn class="term" tabindex="0" data-tip="SPSC means single-producer, single-consumer; the proposed pipeline used one-way queues between frontier stages.">SPSC</dfn>, and <dfn class="term" tabindex="0" data-tip="Delayed duplicate detection batches states, then sorts and deduplicates them instead of probing each state immediately.">DDD</dfn> implementations are negative as built. A different design remains open only if it preserves cutoff-friendly consumer order.</p>
+<p><code>M_ORD</code> exploited that ordering value directly. It sorts by <code>child0.popcount()</code> ascending, placing <code>child0 == 0</code> first. Against <code>M_WAVE</code>, n=16 used 34.3% fewer nodes, 8.5% more cycles per node, 28.7% fewer total cycles, and 30.2% less wall time. The clean 17 GB run reached 1m02s / 1,136,583,273 nodes.</p>
+<p>ETC still paid on the improved order. <code>M_ORD_W</code> removed another 18.4% of nodes; gather and probe work raised cycles per retained node 14.6%, while total cycles fell 6.5%. Inlined insertion sort and hot-loop fusion then reduced cycles per node another 12.5%, bringing K12 to about 52 seconds. Limiting ETC to the top-ranked children lost because cut triggers were broadly distributed.</p>
+<p>Finally, <code>adj_row_pext</code> replaced scalar edge tests with one extraction per vertex, cutting cycles per node 3.8%. That direct gain made K13 through K16 profitable and reduced wall time another 35%, to 33.9s / 396 million nodes. Memo-less K17 still lost 5.7% wall. The current 30-second candidates are TT-memoized K17 miss resolution, cheaper nested getK leaves, and a new MLP profile.</p>
 </div>
 
 <figure id="bandsFig">
@@ -953,12 +1001,12 @@ fn pack(fp, val) -> Slot {
 
 <!-- ===================================================================== -->
 <section id="telemetry">
-<h2>Telemetry: turning a black-box solve into a measured system</h2>
+<h2><span class="layman">Seeing where the time went</span><span class="engineer">Telemetry: turning a black-box solve into a measured system</span></h2>
 <button type="button" class="sec-toggle" data-target="telemetry" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>A final stopwatch time says whether a run was fast; it does not say <em>why</em>. The solver gradually acquired instruments that expose the search from several angles: how many different positions exist, which game stages dominate, which opening move owns the tail, where each core is spending time, and whether memory is slow because it is full, random, or contended.</p>
-<p>Those instruments repeatedly changed the plan. Counting distinct positions justified graph-isomorphic keys and BuRR. Timing each opening exposed the single giant root. Counting work by remaining squares identified W8, then W9–W12. A synthetic test showed sorted probes could stream five times faster—but an end-to-end order test showed the price was 94% more search. That failed locality experiment quantified the real lever: improve the game-theoretic move order. Telemetry did not merely explain the solver; it selected the next solver.</p>
+<p>A stopwatch can rank two runs. It cannot explain the difference. Over the week, the solver acquired instruments that counted distinct positions, assigned time to each game stage, tracked every opening, and separated memory stalls from instruction costs.</p>
+<p>Those measurements repeatedly changed the research question. Distinct-position counts motivated graph keys and compression. Root timing showed that one opening dominated the run. Timing by remaining-square count led to W8 and then W9–W12. The sorted-read benchmark pointed toward locality; the 94% node increase sent the project toward move order instead. The instruments did more than diagnose the solver. They determined what to build next.</p>
 </div>
 
 <div class="engineer">
@@ -992,11 +1040,11 @@ fn pack(fp, val) -> Slot {
 
 <!-- ===================================================================== -->
 <section id="micro">
-<h2><span class="num">11</span>Micro-optimizations: the small, sharp wins</h2>
+<h2><span class="num">11</span><span class="layman">Small changes, repeated billions of times</span><span class="engineer">Micro-optimizations that survived measurement</span></h2>
 <button type="button" class="sec-toggle" data-target="micro" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>The big levers in this report — symmetry, graph shape, the lookup tables — reduce the search. This section covers changes that make each remaining step cheaper. Interleaved wall time decides whether they stay; work-per-step and branch-miss rate show whether the intended mechanism moved. Most tweaks did not. These are the ones that did.</p>
+<p>Symmetry and endgame evaluation removed large parts of the search. The remaining work still happened hundreds of millions of times, which made a few instructions surprisingly expensive. Most small changes vanished into measurement noise or lost outright. The ones below survived alternating control and test runs.</p>
 </div>
 <div class="engineer">
 <p>Per-node arithmetic savings often disappear under DRAM latency. The changes below survived interleaved A/B runs, which alternate binaries to control thermal drift. Wall time is the final gate; CPI and branch-miss rate isolate per-instruction effects when node count varies with eviction and scheduling.</p>
@@ -1114,7 +1162,7 @@ fn pack(fp, val) -> Slot {
 <button type="button" class="sec-toggle" data-target="numbers" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>Stack the successful ideas together and the 16×16 solve falls from 56 minutes to <strong>33.9 seconds</strong>. Graph-isomorphic storage made the problem fit, a flat table made it fast, dynamic order made cutoffs arrive early, and cheap graph construction extended exact evaluation through W16. The last step is especially revealing: a 3.8% per-node improvement unlocked four layers whose combined effect cut wall another 35%.</p>
+<p>The first complete 16×16 run evaluated <strong>10,017,867,872 nodes</strong> in about 56 minutes. The current solver evaluates <strong>396 million</strong> in <strong>33.9 seconds</strong>. Graph-based merging made the state set fit, a flat table made lookups cheap, dynamic order found cutoffs earlier, and faster graph construction extended exact evaluation through W16. The final 3.8% per-node improvement unlocked four evaluator layers and cut wall time another 35%.</p>
 </div>
 <div class="engineer">
 <p>n=16 wall-clock across generations, on this box (Ryzen AI 9 HX 370, 12 cores, ~26 GB). All verdicts: <span class="win">second player wins</span>. Note that raw M/s and wall time diverge — higher node rate does not mean faster completion if it walks more nodes.</p>
@@ -1132,7 +1180,7 @@ fn pack(fp, val) -> Slot {
 <table>
 <thead><tr><th>milestone</th><th class="num">n=16 wall</th><th>what changed</th></tr></thead>
 <tbody>
-<tr><td>D₄ parallel (first finish)</td><td class="num">~56 min</td><td>parity-aware root parallelism: 1 → 24 hardware threads</td></tr>
+<tr><td>D₄ parallel (first finish)</td><td class="num">~56 min</td><td>10,017,867,872 nodes; parity-aware root parallelism across 24 hardware threads</td></tr>
 <tr><td>D₄ parallel (clean box)</td><td class="num">~42 min</td><td>same solver, uncontended machine</td></tr>
 <tr><td><code>iso-burr</code></td><td class="num">29m 23s</td><td>selective graph-iso key, eviction-free BuRR, re-exp 1.15×</td></tr>
 <tr><td><code>iso-flat</code> (early)</td><td class="num">9m 11s</td><td>flat lockless TT + contention fix (~3.7× over incremental's 34 min)</td></tr>
@@ -1201,20 +1249,20 @@ fn pack(fp, val) -> Slot {
 </div>
 
 <div class="keyidea">
-<span class="tag">A regression can contain the next breakthrough</span>
-<div class="layman"><p>Several eventual wins were slower—or looked settled—in their first form. ETC began 9.2% slower despite a large node cut, then crossed one minute after fusion and better ordering. The latest 33.9-second result adds another warning: a bit-extraction idea had been dismissed from tiny-graph evidence, but at 12–16 vertices the arithmetic reversed. Re-testing the actual scale unlocked four exact layers at once.</p></div>
+<span class="tag">Separate the mechanism from its first implementation</span>
+<div class="layman"><p>Several useful mechanisms were slower in their first form. ETC began 9.2% slower despite a large node cut, then crossed one minute after fusion and better ordering. Bit extraction had also been dismissed using evidence from tiny graphs. At 12–16 vertices, the arithmetic was different. Testing that scale unlocked four exact layers.</p></div>
 <div class="engineer"><p>The project distinguishes a <strong>mechanism negative</strong>, an <strong>implementation negative</strong>, and a <strong>mis-scoped measurement</strong>. ABDADA and slot-order frontiers failed their causal economics. ETC began −17.4% nodes / +9.2% wall before fusion made it a win. The earlier pext verdict was based on k≤4 reasoning plus a scalar rectangular reshape; actual K≥12 <code>adj_row_pext</code> was never measured. At the production scale it cut cycles/node 3.8% and moved the W<sub>K</sub> crossover from 12 to 16, compounding into −35% wall.</p></div>
 </div>
 
 <div class="keyidea">
 <span class="tag">Derive the floor; do not inherit it</span>
-<div class="layman"><p>The other human contribution was Elon-style first-principles thinking: estimate the work the answer fundamentally requires and what the machine can physically do, rather than treating the current program's roadblocks as natural law. If that estimate lies far below the stopwatch, the gap is an optimization budget—not evidence that the floor has been reached.</p></div>
+<div class="layman"><p>The programmer used Elon-style first-principles estimates: how much work must be done, and how quickly can the machine plausibly do it? When that estimate lies far below the stopwatch, the difference is an optimization budget. A slow current implementation is not a physical limit.</p></div>
 <div class="engineer"><p>A defensible performance floor starts with irreducible state resolutions, minimum bytes moved, required arithmetic, and attainable hardware throughput. It does not come from the current call graph or latest failed variant. Dynamic ordering crossed the old 60-second target; scale-correct pext plus W16 then reached 33.9 seconds. The working set collapsed from a tight 17 GB regime to ~2.8 GB of live contents. Each “floor” described one implementation regime, not the problem.</p></div>
 </div>
 
 <div class="card">
 <h4 style="margin-top:0">A parallel case study: interactive transcript search, from hundreds of milliseconds to &lt;100 µs</h4>
-<div class="layman"><p>Before this solver, the same human–agent team built live search over a large archive of coding-session transcripts. The metric was the delay from a keystroke to the first visible results. With caches and prediction disabled, p99—the delay that 99 of 100 searches beat—fell from hundreds of milliseconds to below <strong>100 microseconds</strong>.</p><p>That gain required many stacked changes, not one trick. In a representative round, a more selective filter rejected 2.6× more candidates but made the complete program slower. Measurement showed the filter itself was saving time; its rarely used metadata had merely disrupted the CPU-cache layout of frequently read data. Separating the two exposed the win: median latency fell 50% and p95 fell 83%.</p><p>The relevant lesson is about the division of labour. Coding agents could implement, instrument, and refine each idea, but repeatedly mistook a slow first version for a performance floor. Human persistence kept promising mechanisms alive; first-principles reasoning supplied a target below the roadblocks visible in the current implementation. At this level, the agent is a powerful engineering instrument, not yet an autonomous performance optimizer.</p></div>
+<div class="layman"><p>Before this solver, the same human–agent team built live search over a large archive of coding-session transcripts. The metric was the delay from a keystroke to the first visible results. With caches and prediction disabled, p99 (the delay that 99 of 100 searches beat) fell from hundreds of milliseconds to below <strong>100 microseconds</strong>.</p><p>That gain came from many changes. In one round, a more selective filter rejected 2.6× more candidates but made the complete program slower. The filter itself was saving time; its rarely used metadata had disrupted the CPU-cache layout of frequently read data. Moving that metadata aside cut median latency by 50% and p95 by 83%.</p><p>The working pattern was the same as in the queens solver. Agents implemented and instrumented ideas quickly, but often treated a slow first version as the limit. Human persistence kept mechanisms alive when their internal metrics were promising. First-principles estimates set a target below the roadblocks in the current code. The agent accelerated the engineering loop but did not replace that judgment.</p></div>
 <div class="engineer"><p>The comparison is methodological, not algorithmic. The cache-disabled benchmark forced a real index lookup on every keystroke and measured time to first result bytes. Reaching p99 &lt;100 µs required compact indexes, early termination, off-critical-path publication, allocation-free buffers, hot/cold data separation, and careful worker placement.</p><p>The case-sensitive prefilter improved candidate count 2.6× yet regressed end to end because cold metadata disturbed the hot layout; moving it to a sidecar produced p50 −50% and p95 −83%. Queens ETC repeated that pattern and has now paid off. The later frontier failure showed the complementary judgment: persist when the causal quantity moves, but close the branch when the end-to-end mechanism itself destroys cutoff order.</p></div>
 </div>
 
@@ -1315,7 +1363,7 @@ fn pack(fp, val) -> Slot {
 <h3>How the collaboration worked</h3>
 <div class="layman">
 <p>The coding agents accelerated implementation, instrumentation, and the mechanical search through variants. They did not reliably decide when a regression concealed a useful mechanism; several times they treated the latest bottleneck as a floor.</p>
-<p>The overnight 30-second brief shows the collaboration at its best. The human supplied the ambition, permission to branch safely, and an explicit refusal to stop at the current wall. Claude then worked without waiting for replies, re-read the evidence, built and tested alternatives, and returned with 33.9 seconds. The target and persistence shaped the search; the agent made a wide experimental search practical.</p>
+<p>The overnight brief made those roles concrete. The human set a 30-second target, gave Claude permission to branch, and told it to keep working without replies. Claude re-read the earlier measurements, built alternatives, and returned with a 33.9-second run. The target determined when to continue; the agent made a broad experimental search practical.</p>
 </div>
 <div class="engineer">
 <p>The collaboration had distinct roles:</p>
@@ -1496,8 +1544,8 @@ return LOSS</code></pre>
 
 <h3>Monday, June 15 — map the state space and build the classical solver ladder</h3>
 <p><strong>Progress.</strong> In the morning, a fixed-size TT and root parallelism landed (<code>5bd31fb</code>), followed by the centre-plus-180° mirror theorem for every odd board (<code>530eae2</code>), an explicit solver lineage (<code>1918906</code>), and an OEIS-validated Sprague–Grundy solver (<code>86275ad</code>). The D₄ parallel solver produced the project's first n=16 finish in about 56 minutes. Canonicalizing the sparse <em>available</em> mask rather than the dense blocked mask made the same D₄ operation about 2.4× cheaper.</p>
-<p><strong>Telemetry breakthrough.</strong> HyperLogLog plus exact-small-n distinct counting (<code>b603e15</code> and follow-ups) separated node visits from actual states. Re-expansion reporting and TT cardinality made the n=16 wall quantitative instead of rhetorical. A compact fingerprint slot (<code>6c32617</code>) shrank storage from roughly 40 bytes to 8 bytes per slot; an unsharded lockless TT, prefetch, huge pages, and arbitrary-size fastrange indexing filled the available RAM efficiently.</p>
-<p><strong>Structural breakthrough.</strong> <code>count --iso</code> and value-consistency tests (<code>70d19f5</code>, <code>594ab4e</code>) showed that canonicalizing the available-square conflict graph safely merged about 3.4× more states than board D₄. This made n=16 capacity plausible.</p>
+<p><strong>Telemetry.</strong> HyperLogLog plus exact-small-n distinct counting (<code>b603e15</code> and follow-ups) separated node visits from actual states. Re-expansion reporting and TT cardinality made the n=16 wall quantitative instead of rhetorical. A compact fingerprint slot (<code>6c32617</code>) shrank storage from roughly 40 bytes to 8 bytes per slot; an unsharded lockless TT, prefetch, huge pages, and arbitrary-size fastrange indexing filled the available RAM efficiently.</p>
+<p><strong>Graph equivalence.</strong> <code>count --iso</code> and value-consistency tests (<code>70d19f5</code>, <code>594ab4e</code>) showed that canonicalizing the available-square conflict graph safely merged about 3.4× more states than board D₄. This made n=16 capacity plausible.</p>
 <p><strong>False starts and roadblocks.</strong> df-pn was correct but already showed the proof-number/transposition pathology. Effective-degree and history-style move ordering did not move the wall. Depth-preferred TT replacement and naive deeper parallelism created more re-expansion. A free-involution losing-position certificate fired too rarely. Checkpoint/dump/reload improved operability but could not make an undersized flat table remember billions of states.</p>
 <p><strong>End-of-day model.</strong> The problem was no longer “make recursion faster.” It was “fit a transposition-dense DAG without making every key or lookup too expensive.”</p>
 
@@ -1518,14 +1566,14 @@ return LOSS</code></pre>
 <h3>Thursday, June 18 — make the deep tail complete and overturn a false floor</h3>
 <p><strong>Tail extraction.</strong> pc≤7 became a compact local graph game carried without the 256-bit board, first in L1 memo and then in a complete direct labelled table. The best version deliberately avoided canonicalization: direct labelled indexing was ~15% faster even though it merged less, because the complete table never misses.</p>
 <p><strong>Measured negatives.</strong> Per-node MLP windows increased instructions enough to erase latency overlap; an L2 fingerprinted hash was worse than the direct 2 MiB table; CCX partitioning saved a real coherence cost but lost more through cross-CCX re-search. These results narrowed the viable tail design to complete shared values.</p>
-<p><strong>W8 breakthrough.</strong> <code>iso-window</code> precomputed every labelled Node-Kayles value through 8 vertices and terminated the search at pc=8. On a clean box with forced 2 MiB collapse, n=16 reached 2m44s (<code>2457646</code>). This overturned a recently declared ~3m41 “floor,” which had been measured with full zram, a 13 GB ARC, stale tmpfs profiles, a capped TT, and incomplete huge-page promotion.</p>
+<p><strong>W8 result.</strong> <code>iso-window</code> precomputed every labelled Node-Kayles value through 8 vertices and terminated the search at pc=8. On a clean box with forced 2 MiB collapse, n=16 reached 2m44s (<code>2457646</code>). This overturned a recently declared ~3m41 “floor,” which had been measured with full zram, a 13 GB ARC, stale tmpfs profiles, a capped TT, and incomplete huge-page promotion.</p>
 <p><strong>Instrumentation and kernel work.</strong> Per-pc write histograms and a segmented TT were added; a branchless availability filter cut branch misses ~34% and cycles about 10%. Together segmentation and the filter gained roughly 16% throughput. Set-associative bands were only break-even.</p>
 <p><strong>Large theoretical win that lost.</strong> A component-nimber oracle cut nodes up to 74% but made wall time 6.6× worse because mex requires all children and WL/nimber recursion dominated. Dense-nimber coverage telemetry then killed the proposed salvage. The lesson became explicit: a node saved is worth only the cost of the node it replaces.</p>
 
 <h3>Friday, June 19 — locate the hot pc bands and replace them with W<sub>K</sub></h3>
 <p><strong>Fresh attribution.</strong> Top-down measurements found co-dominant memory and frontend/i-cache cost; return misprediction was effectively zero, so recursion removal itself had no prize. Collapsing a duplicated <code>PROVE_LOSS</code> monomorph cut i-cache MPKI 74%.</p>
-<p><strong>False start that revealed the answer.</strong> A generic dense-block solver was net-negative because local boundary work lost transposition sharing. The new <code>QUEENS_PROF</code> stratified timer then corrected the initial interpretation: 63.5% of random-probe cost was at pc 9–12, not the upper tree. The block failed on per-resolution compute, not lack of coverage.</p>
-<p><strong>W<sub>K</sub> breakthrough.</strong> The key insight was to compute a conceptual dense-table row without storing the table and without introducing a private boundary. W9 (<code>bcb70e6</code>) used BMI2 projection into complete W0..W8 and reached 2m12s. The generalized hierarchy reached W11 / 1m44s (<code>7f7bbf9</code>) and W12 / 1m39s (<code>84800a2</code>). W12 was the first 66-bit two-word evaluator.</p>
+<p><strong>Dense-block negative and new attribution.</strong> A generic dense-block solver was net-negative because local boundary work lost transposition sharing. The new <code>QUEENS_PROF</code> stratified timer then corrected the initial interpretation: 63.5% of random-probe cost was at pc 9–12, not the upper tree. The block failed on per-resolution compute, not lack of coverage.</p>
+<p><strong>W<sub>K</sub> result.</strong> The solver computed one conceptual dense-table row without storing the table or introducing a private boundary. W9 (<code>bcb70e6</code>) used BMI2 projection into complete W0..W8 and reached 2m12s. The generalized hierarchy reached W11 / 1m44s (<code>7f7bbf9</code>) and W12 / 1m39s (<code>84800a2</code>). W12 was the first 66-bit two-word evaluator.</p>
 <p><strong>Crossover measured, not assumed.</strong> W13 (<code>fc3865f</code>) removed another ~15% of n=16 nodes but regressed wall ~4%; K=12 became the default optimum. Building the wide code as two <code>u64</code> words cut <code>w12_get</code>'s own cycles. W12 also reduced TT occupancy because pc≤12 is never stored.</p>
 <p><strong>Parallelism branch closes.</strong> Root/utilization measurements showed the giant-root tail, but finer split/taper added re-expansion and warm restart was wall-neutral. A recursive-to-explicit-stack conversion initially cost 4.3%, then was optimized to parity; it was retained only as infrastructure for frontier experiments.</p>
 
@@ -1545,9 +1593,9 @@ return LOSS</code></pre>
 <p><strong>New record.</strong> K16 cut n=14 deterministic nodes 50% versus K12 and n=16 nodes 57%; the cut was identical across 12–16 GB tables, proving it was inherent subtree removal rather than extra eviction. The clean 17 GB run returned SECOND in <strong>33.9s / 396 M nodes</strong>, with the TT only 16.5% full.</p>
 <p><strong>New crossover.</strong> A table-free adjacency-based get17 was implemented and validated, but its n=16 A/B was −19.4% nodes, +30.7% cycles/node, +5.7% wall. pc=17 positions are shallow and transposition-heavy, so recomputation loses to memoized TT hits. The implementation was reverted; memoized get17-on-miss is the next node-count experiment.</p>
 
-<h3>The cumulative lesson</h3>
-<p>The eight-day progression was not additive feature accumulation. BuRR proved compression and was replaced; live graph hashing proved the equivalence and was bypassed; sorted frontiers failed but exposed move order; the W13 loss exposed graph-code cost; pext made that cost cheap enough to unlock W13–W16. Each mechanism changed what the next useful question could be.</p>
-<p>Real wins often arrived as first-pass regressions or over-generalized negatives. ETC began +9.2% wall before fusion and ordering made it a cornerstone. Pext had been dismissed from the wrong scale before becoming the key to 33.9 seconds. Coding agents accelerated implementation and measurement but repeatedly treated a prototype, a mis-scoped result, or the current bottleneck as the floor. Human persistence and first-principles performance intuition decided what the evidence actually ruled out. At this frontier the agents are powerful engineering tools; they do not yet reliably push performance to the endpoint without that judgment.</p>
+<h3>What changed over eight days</h3>
+<p>The solver did not simply collect features. BuRR proved that compression could fit the state set, then disappeared from the live search. Graph hashing established a useful equivalence, then W<sub>K</sub> bypassed it. Sorted frontiers lost, but their 94% node increase exposed the value of move order. W13 lost because graph construction was expensive; pext reduced that cost enough to make W13–W16 pay.</p>
+<p>ETC was 9.2% slower before fusion and ordering turned it into a win. Pext had been dismissed using evidence from the wrong scale before it helped reach 33.9 seconds. Coding agents shortened the build-and-measure cycle, but repeatedly treated prototypes and current bottlenecks as floors. Human persistence and first-principles estimates determined which negative results deserved another implementation. The agents did not reliably make that call on their own.</p>
 </section>
 
 <div class="footer">
