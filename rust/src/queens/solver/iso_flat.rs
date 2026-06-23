@@ -44,6 +44,14 @@ struct OracleAcc {
 }
 
 thread_local! {
+    /// `QUEENS_SKIP18`: set once per root (in `first_player_wins`'s `resolve`, on the worker that runs
+    /// that root) to true iff this root's first-move square is one of the configured slow deep roots.
+    /// The whole subtree of a slow root then skips pc==18 TT work; fast roots (and the control) keep it.
+    /// Per-worker + steal-off ⇒ one root per worker at a time, so the flag stays correct for the run.
+    static IN_SKIP18_ROOT: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+
+thread_local! {
     static ORACLE_ACC: RefCell<OracleAcc> = const { RefCell::new(OracleAcc {
         attempts: 0,
         hits: 0,
@@ -926,6 +934,25 @@ pub struct IsoFlat {
     /// `QUEENS_ORD=2`: dynamic ordering **plus** the M_WAVE ETC cut (`M_ORD_W`) — does ETC still pay on
     /// top of the better ordering? Implies `ord`.
     ord_etc: bool,
+    /// `QUEENS_SKIP18=1`: skip ALL transposition-table work for pc==18 nodes — don't compute the canon
+    /// key (`lex_min8`→`d4_bits`→`hash128`, the ~6%-of-cycles / #1-branch-mispredict step), don't probe,
+    /// don't put, don't ETC. **Safe & cascade-free because pc==18 is the shallowest recurse level: every
+    /// pc==18 child is pc≤17 = a getK leaf (no further recursion)**, so a re-expanded pc==18 node only
+    /// re-runs a bounded getK sweep — never an unmemoised subtree (the B2 canon-skip cascade can't happen
+    /// here). The entry-probe hit rate at pc==18 is ~0.3% (HITKEY-measured), so the skipped key+probe+put
+    /// is near-pure waste. A/B toggle (`=0` = byte-identical control). Verdict-preserving (the TT is only
+    /// a memo); node-count rises by ~the hit rate's re-expansions (bounded getK sweeps).
+    skip18: bool,
+    /// `QUEENS_SKIP18_ROOTS=<sq>,<sq>`: the first-move square indices of the slow deep roots that
+    /// [`skip18`](Self::skip18) applies to (their entire run). Empty ⇒ all roots. Set per root via
+    /// [`IN_SKIP18_ROOT`] in `first_player_wins`.
+    skip18_squares: Vec<u8>,
+    /// `QUEENS_SKIP18_PCS=18,20,22` (default `{18}`): the SET of pc bands to skip all TT work for, as a
+    /// bitmask (bit `pc`). A *set* (vs a contiguous range) keeps the in-between bands memoized, so a
+    /// re-expanded skipped node hits its non-skipped recurse children — interrupting the cascade that a
+    /// contiguous `[18..hi]` range triggers (measured +17% nodes at hi=22). `{18}` alone is cascade-free
+    /// (children all getK leaves). The sweep over sets finds the most key+probe+put saved per re-exp.
+    skip18_pcs: u64,
     /// `QUEENS_DECPROBE=1`: selects `const MODE = M_DECPROBE` (= M_ORD_W + a cold tap on every pc 9..16
     /// getK node's connected-component decomposition — gates the nimber-decomposition lever). Per-pc
     /// component stats merged from each worker's [`DEC_ACC`] at drain; report printed post-solve. Off =
@@ -1153,6 +1180,25 @@ impl IsoFlat {
         // Verdict-preserving (changes the node count *by design* — an earlier cutoff of the same
         // value — so it is **not** part of the exact `--distinct` gate). iso-flat/iso-window keep it
         // off (their `from_tt_with_window` defaults are unchanged ⇒ control + `--distinct` intact).
+        s.skip18 = std::env::var("QUEENS_SKIP18").as_deref() == Ok("1");
+        s.skip18_squares = std::env::var("QUEENS_SKIP18_ROOTS")
+            .ok()
+            .map(|v| {
+                v.split(',')
+                    .filter_map(|t| t.trim().parse::<u8>().ok())
+                    .collect()
+            })
+            .unwrap_or_default();
+        s.skip18_pcs = std::env::var("QUEENS_SKIP18_PCS")
+            .ok()
+            .map(|v| {
+                v.split(',')
+                    .filter_map(|t| t.trim().parse::<u32>().ok())
+                    .filter(|&pc| pc < 64)
+                    .fold(0u64, |m, pc| m | (1u64 << pc))
+            })
+            .filter(|&m| m != 0)
+            .unwrap_or(1u64 << 18);
         s.ord = !matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("0"));
         s.ord_etc = !matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("0") | Ok("1"))
             || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1");
@@ -1282,6 +1328,11 @@ impl IsoFlat {
             l0: std::env::var("QUEENS_L0").as_deref() == Ok("1"),
             wave_c: std::env::var("QUEENS_WAVE_C").as_deref() == Ok("1"),
             ord: matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("1") | Ok("2")),
+            // Off by default (the iso-flat/iso-window control + the A/B's `=0` arm); the iso-dense
+            // constructor overrides it from `QUEENS_SKIP18` after this base build.
+            skip18: false,
+            skip18_squares: Vec::new(),
+            skip18_pcs: 1u64 << 18,
             // `QUEENS_ORD=2` OR `QUEENS_ORD_ETC=1` (the latter lets the A/B harness toggle ETC with
             // `QUEENS_ORD=1` fixed ⇒ a clean M_ORD vs M_ORD_W interleaved comparison).
             ord_etc: std::env::var("QUEENS_ORD").as_deref() == Ok("2")
@@ -2851,6 +2902,17 @@ impl IsoFlat {
         }
     }
 
+    /// `QUEENS_SKIP18` gate: true iff `pc==18` AND this worker is inside a configured slow deep root
+    /// (its whole run). Short-circuits on the run-constant `self.skip18` so the control pays only a
+    /// single field-bool test per node; the thread-local is read only on the slow-root pc==18 path.
+    #[inline(always)]
+    fn skip18_pc18(&self, pc: u32) -> bool {
+        self.skip18
+            && pc < 64
+            && (self.skip18_pcs >> pc) & 1 == 1
+            && IN_SKIP18_ROOT.with(|f| f.get())
+    }
+
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
     /// `(route, fp)` are `key`'s precomputed hash halves (hash-carry): each child key is
     /// hashed once at creation and the halves are reused for its prefetch, lookup, and store.
@@ -2888,6 +2950,12 @@ impl IsoFlat {
         } else {
             avail.popcount()
         };
+        // QUEENS_SKIP18: this node is a pc==18 node whose TT work (key already skipped by the parent,
+        // entry probe, exit put) is dropped — pc==18's children are all getK leaves, so re-expansion is
+        // a bounded sweep, never a cascade. Gated to the **2 slow deep roots only** (≤2 roots left to
+        // finish — the giant-root tail that is ~all of wall); the early fully-parallel all-roots phase
+        // is untouched. `node_pc` is 0 on the M_NORMAL control ⇒ skip_tt is false there.
+        let skip_tt = self.skip18_pc18(node_pc);
         // `M_DECPROBE`/`M_RANK`/`M_COLD` are measurement twins of `M_ORD_W`: they take the exact same
         // dynamic-ordering + fused-ETC path (so the observed cutoff rank / getK population / entry-probe
         // hit-rate is the production one), adding only a cold tally. These predicates fold the OR away
@@ -2944,7 +3012,9 @@ impl IsoFlat {
         } else {
             std::ptr::null_mut()
         };
-        let got = if self.sidecar {
+        let got = if skip_tt {
+            None // QUEENS_SKIP18: never probe a pc==18 node (hit rate ~0.3% ⇒ near-pure waste)
+        } else if self.sidecar {
             // SAFETY: `sc_base` is a valid `L0_SIZE` buffer from `raw_l0_ptr` whenever `self.sidecar`.
             match unsafe { raw_l0_get(sc_base, route, fp) } {
                 Some(v) => Some(v), // sidecar hit — no TT DRAM probe
@@ -3125,17 +3195,29 @@ impl IsoFlat {
                         if MODE == M_RANK {
                             RANK_ACC.with(|c| c.borrow_mut().etc_cut[node_pc as usize] += 1);
                         }
-                        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
+                        if !skip_tt {
+                            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1);
+                            // empty child ⇒ node wins
+                        }
                         return true;
                     }
                     if !(pc > recurse_min && nw < WAVE_CAP) {
+                        continue;
+                    }
+                    // QUEENS_SKIP18: a pc==18 recurse child in a slow root is resolved key-free in the
+                    // descent (no canon key, no entry probe, no put) — don't gather it (so no ETC key
+                    // build / ETC probe for it either). The descent's pc==18 arm handles it directly.
+                    if self.skip18_pc18(pc) {
                         continue;
                     }
                     child0 = avail.and_not(a[0]);
                 } else {
                     child0 = avail.and_not(a[0]);
                     if child0 == Bits::ZERO {
-                        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // empty child ⇒ node wins
+                        if !skip_tt {
+                            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1);
+                            // empty child ⇒ node wins
+                        }
                         return true;
                     }
                     if !(child0.popcount() > recurse_min && nw < WAVE_CAP) {
@@ -3188,7 +3270,10 @@ impl IsoFlat {
                         if MODE == M_RANK {
                             RANK_ACC.with(|c| c.borrow_mut().etc_cut[node_pc as usize] += 1);
                         }
-                        self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1); // a losing child ⇒ node wins
+                        if !skip_tt {
+                            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, 1);
+                            // a losing child ⇒ node wins
+                        }
                         return true;
                     }
                     // Remember a proven-win child so the descent can skip recursing + re-probing it.
@@ -3299,6 +3384,22 @@ impl IsoFlat {
                     !self.wins_tiny::<ORACLE, COUNT, true>(
                         q, att, child0, ckey, cr, cf, moves, nodes,
                     )
+                } else if self.skip18_pc18(pc) {
+                    // QUEENS_SKIP18: a pc==18 child in a slow root — recurse KEY-FREE. `child_orient`
+                    // is still needed (the node expands its getK-leaf children), but no `lex_min8`/
+                    // `d4_bits`/`hash128` canon key, no entry probe, no put (the child's `wins_inc`
+                    // skips those via `skip_tt`). It was not gathered, so it does not consume `wi`.
+                    let child = child_orient(orient, a, child0);
+                    !self.wins_inc::<ORACLE, COUNT, WINDOW, DK, MODE>(
+                        q,
+                        att,
+                        &child,
+                        Bits::ZERO,
+                        0,
+                        0,
+                        moves,
+                        nodes,
+                    )
                 } else if wi < nw && wv[wi] == 1 {
                     // The ETC pre-pass already proved this recurse child a WIN (`Some(1)` ⇒ opponent
                     // wins ⇒ this move fails ⇒ `lost = false`). Skip the recurse + entry re-probe
@@ -3358,10 +3459,14 @@ impl IsoFlat {
                 });
             }
             // The fused loop already ran the descent; skip the shared descent + put below.
-            if self.sidecar {
-                unsafe { raw_l0_put(sc_base, route, fp, result as u8) };
+            // QUEENS_SKIP18: a pc==18 node in a slow root writes nothing (no put, no sidecar) — its
+            // value is recomputed (a bounded getK sweep) on the rare re-visit. Hit rate ~0.3%.
+            if !skip_tt {
+                if self.sidecar {
+                    unsafe { raw_l0_put(sc_base, route, fp, result as u8) };
+                }
+                self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
             }
-            self.mtt_put::<COUNT, MODE>(key, route, fp, node_pc, result as u8);
             return result;
         }
         for &sq in moves {
@@ -4893,6 +4998,16 @@ impl Solver for IsoFlat {
             if timing {
                 starts[idx].store(t0.elapsed().as_micros() as u64, Ordering::Relaxed);
             }
+            // QUEENS_SKIP18: arm this worker's pc==18-skip flag for the whole of this root iff it is a
+            // configured slow root (or, with no list, all roots). Set here — on the worker that runs the
+            // root — so the entire subtree sees it (steal-off ⇒ no mid-root migration). Empty list = all.
+            IN_SKIP18_ROOT.with(|f| {
+                f.set(
+                    self.skip18
+                        && (self.skip18_squares.is_empty()
+                            || self.skip18_squares.contains(&(moves[idx] as u8))),
+                )
+            });
             // The dense ceiling `dense_k` (and the WINDOW flag) is read **once here**, per root, to
             // select the `const DK` monomorphisation — never in the deep `wins_inc` loop or a probe.
             let wins = self.par_root(q, att, co, ckey, min_avail);
