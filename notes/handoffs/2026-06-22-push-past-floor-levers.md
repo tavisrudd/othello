@@ -310,13 +310,24 @@ measured); **#5 generalized structural-involution pairing** (the #6b shot — #9
 involution; a graph-structural one is unmeasured). Correctly killed: Watts-Strogatz (cost is position
 *count* not path length), random-graph game invariants, twin-width/clique-width (re-walks the C2 kill).
 
-**Queued levers (user-named, not yet built):** **fractional-band skip** — skip TT for a `cheap_hash(raw
-avail) % M == 0` fraction of a cascading band (pc 19–25), keeping the rest memoized as cascade/re-probe
-anchors (decision must be pre-key since the key is what we skip; tunes saving vs re-exp). The one skip18
-extension not yet measured. **NEXT:** decide **skip18 promote-to-default** (all-roots {18}, n-agnostic,
-−3.6% cyc — the session's clean win); try fractional-band; graph-theory #2 (leaf/simplicial reductions) /
-#5 (structural-involution pairing) if pushing structural levers further. **Closed this session:** treewidth
-DP, C1/decompose, value-bucketing, root-ordering, W8-overlap — all measured-dead/marginal with evidence.
+**★ fractional-band skip — DEAD (gated `QUEENS_SKIP18_FRAC`).** Skip a `1/M` fraction of a cascading band
+(pc19–25) by a pre-key raw-`avail` hash, keeping the rest memoised as anchors. **n=16 A/B (M=4 on pc19–25,
+on top of the {18} default): +13.0% wall / +8.5% nodes / cyc/node −0.1%** — a clear LOSS. The fractional
+*saving* is ~0 (cyc/node flat: 1/4 of pc19–25 canon-skips is negligible) while the re-exp/cascade dominates;
+the orientation-specific anchors (TT is canon-keyed; a node is kept iff a kept orientation reached it) don't
+dampen enough. So **skip18 = {18} is the complete, final lever** — every extension measured dead: {19}
+marginal (−0.5% global / +1.6% slow), sets/ranges +8–17%, fractional +13%. Only the getK-floor band (pc==18,
+children all getK leaves) skips cleanly. Code kept gated-off as documented substrate.
+
+**SESSION NET:** the one win is **skip18 = {18}, now the iso-dense DEFAULT** (~−2.5% wall / −3.6% cyc,
+n-agnostic, `QUEENS_SKIP18=0` reverts). Everything else explored is **dead/weak/marginal with committed
+evidence**: treewidth DP, C1/decompose, value-bucketing, gt#2 reductions, gt#5 pairing, root-ordering,
+W8-overlap, fractional-band. The deep tail is single-component / high-entropy / structurally rigid /
+transposition-near-unique — the breadth crack (#6a cheaper-than-iso merge) and pairing crack (#6b) are both
+closed. **What's left (un-attacked):** per-node throughput (the getK evaluator, ~35–44% of cycles — the
+dominant remaining cost), the parked heavy levers (set-associative TT, BuRR archive, 1 GB hugepages,
+nimber-decomposition node-count), and the open multi-session research (even-n pairing theorem from the proof
+DAG). **NEXT:** the getK evaluator is the standing #1 cost and the least-explored throughput lever.
 
 ### Exploration handoff (2026-06-22) — FINAL (session end)
 **Session**: 2026-06-22--6 (`a20b03dc-e462-4801-ab1b-88b683f9980b`)

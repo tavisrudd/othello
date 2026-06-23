@@ -953,6 +953,14 @@ pub struct IsoFlat {
     /// contiguous `[18..hi]` range triggers (measured +17% nodes at hi=22). `{18}` alone is cascade-free
     /// (children all getK leaves). The sweep over sets finds the most key+probe+put saved per re-exp.
     skip18_pcs: u64,
+    /// `QUEENS_SKIP18_FRAC=M` (default 1 = off) + `QUEENS_SKIP18_FRAC_PCS=<set>`: for the *cascading*
+    /// bands (pc 19–25), skip TT for only a `1/M` FRACTION of nodes (chosen by a pre-key hash of the raw
+    /// `avail`, since the canon key is exactly what we skip), keeping the other `(M-1)/M` memoised as
+    /// cascade / re-probe **anchors** — the dampened way to capture some of a cascading band's
+    /// key+probe+put saving without the full re-expansion. Orientation-specific (the TT is canon-keyed
+    /// ⇒ a canonical node is kept iff a kept orientation reached it); `M` tunes saving vs re-exp.
+    skip18_frac: u32,
+    skip18_frac_pcs: u64,
     /// `QUEENS_DECPROBE=1`: selects `const MODE = M_DECPROBE` (= M_ORD_W + a cold tap on every pc 9..16
     /// getK node's connected-component decomposition — gates the nimber-decomposition lever). Per-pc
     /// component stats merged from each worker's [`DEC_ACC`] at drain; report printed post-solve. Off =
@@ -1204,6 +1212,21 @@ impl IsoFlat {
             })
             .filter(|&m| m != 0)
             .unwrap_or(1u64 << 18);
+        // QUEENS_SKIP18_FRAC (0/1) = the A/B toggle; QUEENS_SKIP18_FRAC_M (default 4) = the 1/M fraction.
+        s.skip18_frac = if std::env::var("QUEENS_SKIP18_FRAC").as_deref() == Ok("1") {
+            env_u32("QUEENS_SKIP18_FRAC_M", 4).max(2)
+        } else {
+            1 // off
+        };
+        s.skip18_frac_pcs = std::env::var("QUEENS_SKIP18_FRAC_PCS")
+            .ok()
+            .map(|v| {
+                v.split(',')
+                    .filter_map(|t| t.trim().parse::<u32>().ok())
+                    .filter(|&pc| pc < 64)
+                    .fold(0u64, |m, pc| m | (1u64 << pc))
+            })
+            .unwrap_or(0);
         s.ord = !matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("0"));
         s.ord_etc = !matches!(std::env::var("QUEENS_ORD").as_deref(), Ok("0") | Ok("1"))
             || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1");
@@ -1338,6 +1361,8 @@ impl IsoFlat {
             skip18: false,
             skip18_squares: Vec::new(),
             skip18_pcs: 1u64 << 18,
+            skip18_frac: 1,
+            skip18_frac_pcs: 0,
             // `QUEENS_ORD=2` OR `QUEENS_ORD_ETC=1` (the latter lets the A/B harness toggle ETC with
             // `QUEENS_ORD=1` fixed ⇒ a clean M_ORD vs M_ORD_W interleaved comparison).
             ord_etc: std::env::var("QUEENS_ORD").as_deref() == Ok("2")
@@ -2911,11 +2936,24 @@ impl IsoFlat {
     /// (its whole run). Short-circuits on the run-constant `self.skip18` so the control pays only a
     /// single field-bool test per node; the thread-local is read only on the slow-root pc==18 path.
     #[inline(always)]
-    fn skip18_pc18(&self, pc: u32) -> bool {
-        self.skip18
-            && pc < 64
-            && (self.skip18_pcs >> pc) & 1 == 1
-            && IN_SKIP18_ROOT.with(|f| f.get())
+    fn skip18_pc18(&self, pc: u32, avail: Bits) -> bool {
+        if !self.skip18 || pc >= 64 || !IN_SKIP18_ROOT.with(|f| f.get()) {
+            return false;
+        }
+        if (self.skip18_pcs >> pc) & 1 == 1 {
+            return true; // full-skip band (cascade-free {18} by default)
+        }
+        if self.skip18_frac > 1 && (self.skip18_frac_pcs >> pc) & 1 == 1 {
+            // Fractional band: skip 1/frac of nodes by a pre-key hash of the raw avail; keep the rest
+            // memoised as cascade/re-probe anchors (pre-key because the canon key is what we skip).
+            let h = (avail.0[0]
+                ^ avail.0[1].rotate_left(17)
+                ^ avail.0[2].rotate_left(31)
+                ^ avail.0[3].rotate_left(47))
+            .wrapping_mul(0x9E37_79B9_7F4A_7C15);
+            return (h >> 33).is_multiple_of(self.skip18_frac as u64);
+        }
+        false
     }
 
     /// Sequential cutoff search (the [`Fused::wins_inc`](super::Fused) twin over the flat TT).
@@ -2960,7 +2998,7 @@ impl IsoFlat {
         // a bounded sweep, never a cascade. Gated to the **2 slow deep roots only** (≤2 roots left to
         // finish — the giant-root tail that is ~all of wall); the early fully-parallel all-roots phase
         // is untouched. `node_pc` is 0 on the M_NORMAL control ⇒ skip_tt is false there.
-        let skip_tt = self.skip18_pc18(node_pc);
+        let skip_tt = self.skip18_pc18(node_pc, avail);
         // `M_DECPROBE`/`M_RANK`/`M_COLD` are measurement twins of `M_ORD_W`: they take the exact same
         // dynamic-ordering + fused-ETC path (so the observed cutoff rank / getK population / entry-probe
         // hit-rate is the production one), adding only a cold tally. These predicates fold the OR away
@@ -3209,13 +3247,14 @@ impl IsoFlat {
                     if !(pc > recurse_min && nw < WAVE_CAP) {
                         continue;
                     }
-                    // QUEENS_SKIP18: a pc==18 recurse child in a slow root is resolved key-free in the
-                    // descent (no canon key, no entry probe, no put) — don't gather it (so no ETC key
-                    // build / ETC probe for it either). The descent's pc==18 arm handles it directly.
-                    if self.skip18_pc18(pc) {
+                    child0 = avail.and_not(a[0]);
+                    // QUEENS_SKIP18: a skipped recurse child (full or fractional band) in a slow root is
+                    // resolved key-free in the descent (no canon key, no entry probe, no put) — don't
+                    // gather it (so no ETC key build / ETC probe for it either). The descent's skip arm
+                    // handles it directly. (After child0 so the fractional avail-hash sees it.)
+                    if self.skip18_pc18(pc, child0) {
                         continue;
                     }
-                    child0 = avail.and_not(a[0]);
                 } else {
                     child0 = avail.and_not(a[0]);
                     if child0 == Bits::ZERO {
@@ -3389,7 +3428,7 @@ impl IsoFlat {
                     !self.wins_tiny::<ORACLE, COUNT, true>(
                         q, att, child0, ckey, cr, cf, moves, nodes,
                     )
-                } else if self.skip18_pc18(pc) {
+                } else if self.skip18_pc18(pc, child0) {
                     // QUEENS_SKIP18: a pc==18 child in a slow root — recurse KEY-FREE. `child_orient`
                     // is still needed (the node expands its getK-leaf children), but no `lex_min8`/
                     // `d4_bits`/`hash128` canon key, no entry probe, no put (the child's `wins_inc`
