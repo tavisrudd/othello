@@ -263,18 +263,19 @@
 
 <header class="hero">
   <h1>The Non-Attacking Queens Game
-    <span class="sub">how a Grade 6 math assignment became a 33.9-second exact solver</span>
+    <span class="sub">how a Grade 6 math assignment became a sub-25-second exact solver</span>
   </h1>
   <p class="lede">On Sunday evening, June 14, a Grade 6 math assignment escaped its intended audience. A 12-year-old math prodigy, who meets informally with a professor every few months for coaching, had been assigned the Non-Attacking Queens Game and told to “go learn about <dfn class="term" tabindex="0" data-tip="Minimax evaluates a game by assuming both players always choose the move best for themselves.">minimax</dfn> and <dfn class="term" tabindex="0" data-tip="Alpha–beta pruning skips branches that cannot change the already-known best outcome.">alpha–beta pruning</dfn>.” His father sat down to help and got nerd-sniped.</p>
   <p class="lede">The game is easy to state. Two players place queens on a chessboard, one at a time, without allowing any queen to attack another. The first player who has nowhere left to move loses. But one question hides an enormous search: on a 16×16 board, who wins if both players are perfect?</p>
   <p class="lede">The father is a semi-retired programmer with two recent obsessions: agentic coding and low-level performance engineering. This was an unusually clean test of both. There were no users or deadlines, the correct result was known, and every speed claim could be measured.</p>
-  <p class="lede">His first complete version proved that <strong class="win">the second player wins</strong> in about 56 minutes, after evaluating <strong>10,017,867,872 nodes</strong> in the game tree. Eight days later, the current solver reached the same verdict after <strong>396 million nodes</strong> in <strong>33.9 seconds</strong>: a 25-fold drop in node evaluations and a 99-fold drop in wall time.</p>
+  <p class="lede">His first complete version proved that <strong class="win">the second player wins</strong> in about 56 minutes, after evaluating <strong>10,017,867,872 nodes</strong> in the game tree. Nine days later, the current solver reached the same verdict after <strong>308 million nodes</strong> in about <strong>23.4 seconds</strong> of search: a 33-fold drop in node evaluations and a roughly 140-fold drop in wall time.</p>
   <p class="lede">On Saturday night, with the solver near 52 seconds, the programmer gave Claude, the coding agent working in the repository, this brief:</p>
   <blockquote class="brief">
     <p>“n=16 30s do not give up. do not stop for answers from me. be creative. do not get stuck or give up. work on a branch if you are worried about messing up main or create a new solver variant. this is a hobby project with no users so don't wimp out. i don't want to wake up in the morning and find you gave up. so please: be relentless”</p>
     <footer>Overnight goal, June 20–21</footer>
   </blockquote>
-  <p class="lede">Claude spent the night reopening an old negative result. The discarded experiment had used a processor's <dfn class="term" tabindex="0" data-tip="Bit extraction gathers selected bits from a machine word into a compact contiguous result; x86 BMI2 provides the pext instruction used here.">bit-extraction instruction</dfn> for a different task and much smaller cases. This time, the instruction made it cheaper to turn a board position into a compact graph. The solver could now decide every endgame with up to 16 available squares directly, instead of sending it through the main search. The next clean run finished in 33.9 seconds. The immediate target is 30 seconds.</p>
+  <p class="lede">Claude spent the night reopening an old negative result. The discarded experiment had used a processor's <dfn class="term" tabindex="0" data-tip="Bit extraction gathers selected bits from a machine word into a compact contiguous result; x86 BMI2 provides the pext instruction used here.">bit-extraction instruction</dfn> for a different task and much smaller cases. This time, the instruction made it cheaper to turn a board position into a compact graph. The solver could now decide every endgame with up to 16 available squares directly, instead of sending it through the main search. The next clean run finished in 33.9 seconds. The immediate target was 30 seconds.</p>
+  <p class="lede">It fell quickly. Pushing the same exact-evaluation idea one layer higher (to 17 available squares) and then skipping the bookkeeping for a single tightly-bounded endgame size brought the search to about 23.4 seconds, and the whole solve—startup included—comfortably under 30. The story below follows the project through that frontier, where a four-front search for the next speedup converged on a different conclusion than “keep optimizing”: the solver is now close to what this machine can physically do for this algorithm, and the open questions have shifted from cycles to mathematics.</p>
   <p class="lede" style="font-size:15px;color:var(--fg-faint)">This AI-written account is based on the project's code, commits, benchmark logs, and working notes. The measurements and engineering decisions are the programmer's.</p>
 </header>
 
@@ -381,7 +382,7 @@ if rr == r || cc == c
 <tr><td>2002 / 2006</td><td>odd n and even boards through n=10</td><td>Noon thesis; Noon &amp; Van Brummelen publication. Established the modern game in the literature and used combinatorial-game analysis.</td></tr>
 <tr><td>2014</td><td>n=6,8 first-player wins; n=10,12,14,16 second-player wins</td><td>Jenrich's QPGAME3 backtracking search, plus direct pairing strategies for n=4 and all odd n.</td></tr>
 <tr><td>2021 onward</td><td>full Sprague–Grundy values through n=13</td><td>Independent Node-Kayles implementations recorded in OEIS A344227; stronger information than outcome alone.</td></tr>
-<tr><td>this work</td><td>n=16 reconfirmed; current record 33.9s</td><td><dfn class="term" tabindex="0" data-tip="D₄ is the square's eight rotations and reflections, folded into one canonical representative.">D₄</dfn>-keyed flat <dfn class="term" tabindex="0" data-tip="Transposition table: the large shared cache of positions the solver has already evaluated.">TT</dfn> above <dfn class="term" tabindex="0" data-tip="Popcount: the number of currently available squares, or vertices in the conflict graph.">pc</dfn>=16, exact <dfn class="term" tabindex="0" data-tip="The W8–W16 hierarchy evaluates small conflict graphs exactly without storing the impossible full upper tables.">W8–W16</dfn> below it, dynamic forcing order plus <dfn class="term" tabindex="0" data-tip="Enhanced transposition cutoff: probe children first so a cached losing child can prove the parent immediately.">ETC</dfn>; 396 million nodes.</td></tr>
+<tr><td>this work</td><td>n=16 reconfirmed; current record ~23.4s search</td><td><dfn class="term" tabindex="0" data-tip="D₄ is the square's eight rotations and reflections, folded into one canonical representative.">D₄</dfn>-keyed flat <dfn class="term" tabindex="0" data-tip="Transposition table: the large shared cache of positions the solver has already evaluated.">TT</dfn> above <dfn class="term" tabindex="0" data-tip="Popcount: the number of currently available squares, or vertices in the conflict graph.">pc</dfn>=18, exact <dfn class="term" tabindex="0" data-tip="The W8–W17 hierarchy evaluates small conflict graphs exactly without storing the impossible full upper tables.">W8–W17</dfn> below it, a table-skip for 18-square endgames, dynamic forcing order plus <dfn class="term" tabindex="0" data-tip="Enhanced transposition cutoff: probe children first so a cached losing child can prove the parent immediately.">ETC</dfn>; 308 million nodes.</td></tr>
 </tbody>
 </table>
 
@@ -601,7 +602,7 @@ fn pos_key(&self, blocked) -> Bits {
     }
 }</code></pre>
 <p>For ≤7-vertex graphs the value is resolved by a <strong>complete tiny table</strong> keyed by the raw labelled edge code (a 28-bit upper-triangular bitstring) — no canonicalization at all, just one direct byte load, because the Node-Kayles value is relabelling-invariant. The default threshold is 7 (the top of the no-WL regime). The two namespaces (<code>graph_bits</code> / <code>d4_bits</code>) never collide even on a full 16×16 board where no spare board bit exists.</p>
-<p><strong>Lineage note:</strong> the selective-key code above explains <code>iso-flat</code> and why graph equivalence mattered. Today's K=16 <code>iso-dense</code> bypasses it: pc≤16 is evaluated by W<sub>K</sub> with no canonical key or TT entry, while pc≥17 uses the carried D₄ representative. The current solver keeps the graph-game model but not the live WL canonicalizer.</p>
+<p><strong>Lineage note:</strong> the selective-key code above explains <code>iso-flat</code> and why graph equivalence mattered. Today's K=17 <code>iso-dense</code> bypasses it: pc≤17 is evaluated by W<sub>K</sub> with no canonical key or TT entry, while pc≥18 uses the carried D₄ representative (and pc=18 itself skips even that). The current solver keeps the graph-game model but not the live WL canonicalizer.</p>
 <div class="intuition">
 <span class="tag">Intuition · graph isomorphism and color refinement</span>
 <p>Two graphs are "the same shape" if you can rename the dots of one to turn it into the other. Checking that directly can require trying many renamings. <strong>Color refinement</strong> narrows the possibilities: paint every dot by its degree, then repeatedly repaint it from the multiset of its neighbours' colors. Structurally different dots often separate quickly. But refinement alone is only a filter—some non-isomorphic regular graphs remain indistinguishable. The exact tiny-graph table used by the default live path avoids that ambiguity; larger historical experiments added individualization and were checked against an exact canonicalizer.</p>
@@ -687,7 +688,8 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <tr><td><code>iso-dense</code></td><td>Extend the exact endgame recurrence through 12 squares without building giant tables. With fused ETC, this reached 1m32s and 1.70 billion nodes.</td></tr>
 <tr><td>Dynamic move order</td><td>At each position, try the move leaving the fewest replies instead of following an empty-board ranking. This alone reached 1m02s and 1.14 billion nodes.</td></tr>
 <tr><td>Dynamic order + ETC</td><td>Probe the dynamically best-ranked children before expanding them. Together they first crossed one minute, then hot-loop tuning lowered the W12 configuration to roughly 52 seconds.</td></tr>
-<tr><td>Cheaper W<sub>K</sub> + W16 ⭐</td><td>Build each graph row with <dfn class="term" tabindex="0" data-tip="BMI2 is an x86 instruction-set extension. Its pext instruction packs selected bits, replacing many scalar edge tests here.">BMI2</dfn> extraction instead of testing every edge bit, then extend exact evaluation from 12 through 16 squares. Result: <strong>33.9s / 396 million nodes</strong>.</td></tr>
+<tr><td>Cheaper W<sub>K</sub> + W16</td><td>Build each graph row with <dfn class="term" tabindex="0" data-tip="BMI2 is an x86 instruction-set extension. Its pext instruction packs selected bits, replacing many scalar edge tests here.">BMI2</dfn> extraction instead of testing every edge bit, then extend exact evaluation from 12 through 16 squares. Result: <strong>33.9s / 396 million nodes</strong>.</td></tr>
+<tr><td>W17 + skip-18 ⭐</td><td>Push exact evaluation one layer further, to 17 squares, and then skip the remembering machinery entirely for 18-square endgames—the one size where doing so is provably safe. Result: <strong>~23.4s search / 308 million nodes</strong>, the current record.</td></tr>
 </tbody>
 </table>
 </div>
@@ -710,7 +712,8 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <tr><td><code>M_WAVE</code></td><td>Fuses enhanced transposition cutoff into descent: build each recurse-child key once, batch-probe, and stop on a cached loss. The unfused prototype was +9.2% wall; the optimized form became the 1m32s / 1.70 B default.</td></tr>
 <tr><td><code>M_ORD</code></td><td>Re-sorts legal moves by current <code>child0.popcount()</code> ascending. Versus <code>M_WAVE</code>: −34.3% nodes, +8.5% cycles/node, −30.2% wall in interleaved n=16 A/B; clean-box 1m02s / 1.136 B.</td></tr>
 <tr><td><code>M_ORD_W</code></td><td>Stacks ETC on dynamic order. It first reached 59.2s / ~919 M nodes, then insertion-sort and hot-loop tuning brought the K=12 default to roughly 52s.</td></tr>
-<tr><td><code>W16 + M_ORD_W</code> ⭐</td><td><code>adj_row_pext</code> replaces K(K−1)/2 scalar edge tests with one four-word BMI2 extraction per vertex. That makes W13–W16 economical; K=16 cuts 57% of K=12's nodes despite +66% cycles/node. Current default: <strong class="win">33.9s / 396 M nodes</strong>.</td></tr>
+<tr><td><code>W16 + M_ORD_W</code></td><td><code>adj_row_pext</code> replaces K(K−1)/2 scalar edge tests with one four-word BMI2 extraction per vertex. That makes W13–W16 economical; K=16 cuts 57% of K=12's nodes despite +66% cycles/node. The 33.9s / 396 M-node default.</td></tr>
+<tr><td><code>W17 + degree-ordered getK + skip18</code> ⭐</td><td>A 192-bit three-word labelled code lifts the exact ceiling to K=17, resolving pc=17 (~21% of nodes) as a getK leaf with no flat-TT probe; the getK child sweep is ordered most-forcing-first for the earliest cutoff. On top of that, <code>skip18</code> bypasses the entire canonical-key/probe/put for pc=18 nodes—the unique band whose children are all getK leaves, so a forgotten pc=18 node re-runs one bounded sweep rather than an unmemoized subtree. Current default: <strong class="win">~23.4s search / 307,608,950 nodes</strong>.</td></tr>
 <tr><td><code>nimber</code></td><td>Full Sprague–Grundy values via mex (§6) — exact game value, no cutoff, feasible to ~n=12.</td></tr>
 <tr><td><code>pn</code></td><td>df-pn proof-number search — an instructive <em>negative</em>: correct, but hits the df-pn + transposition (graph-history-interaction) pathology on this transposition-dense game and explodes past n=8.</td></tr>
 </tbody>
@@ -720,7 +723,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <div class="keyidea">
 <span class="tag">Each solver also discarded ideas</span>
 <div class="layman"><p>The current solver dropped the compressed archive after the state set began to fit, then stopped storing small endgames when recomputing them became cheaper. It also abandoned a plan to sort work by memory address. That version nearly doubled the search because it destroyed a useful move order. Ranking moves directly produced the sub-minute result.</p></div>
-<div class="engineer"><p><code>iso-dense</code> does <strong>not</strong> use <dfn class="term" tabindex="0" data-tip="A compact static-retrieval structure used here for immutable solved-value archives.">BuRR</dfn> or live graph-isomorphic hashing. Above pc=16 it uses the carried D₄ key and one flat TT; at pc≤16, <dfn class="term" tabindex="0" data-tip="An exact on-demand evaluator for a K-vertex graph, recursively using lower W layers.">W<sub>K</sub></dfn> evaluates directly. The champion preserves cutoff order, improves it dynamically, and now stores only the pc≥17 residue—the 17 GB TT is just 16.5% full. BuRR may still serve a frozen n=18 archive, but the +94% ordering tax means any layer-oriented design must recover equivalent cutoff economics.</p></div>
+<div class="engineer"><p><code>iso-dense</code> does <strong>not</strong> use <dfn class="term" tabindex="0" data-tip="A compact static-retrieval structure used here for immutable solved-value archives.">BuRR</dfn> or live graph-isomorphic hashing. Above pc=17 it uses the carried D₄ key and one flat TT; at pc≤17, <dfn class="term" tabindex="0" data-tip="An exact on-demand evaluator for a K-vertex graph, recursively using lower W layers.">W<sub>K</sub></dfn> evaluates directly, and pc=18 skips the TT entirely (its children are all W<sub>K</sub> leaves). The champion preserves cutoff order, improves it dynamically, and now stores only the pc≥18 residue—the table is far from full. BuRR may still serve a frozen n=18 archive, but the +94% ordering tax means any layer-oriented design must recover equivalent cutoff economics.</p></div>
 </div>
 
 <div class="card">
@@ -734,7 +737,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <p>Under each opening lies a game tree the solver will never explore in full. It stops as soon as one move proves a win, reuses positions reached by another route, folds mirror-image boards together, and hands every endgame with 16 or fewer available squares to a separate exact evaluator. The diagram shows where those pieces of the tree disappear.</p>
 </div>
 <div class="engineer">
-<p>Under each root, current <code>iso-dense</code> runs negamax with a first-losing-child cutoff; a flat TT keyed by the carried D₄-canonical available set above pc=16; and exact W0…W16 evaluation at pc≤16. Earlier graph-isomorphic solvers merged still more shapes, but that canonicalizer is not in the current hot path. The four current cuts below are why the realized search is a tiny fraction of the formal tree.</p>
+<p>Under each root, current <code>iso-dense</code> runs negamax with a first-losing-child cutoff; a flat TT keyed by the carried D₄-canonical available set above pc=17 (skipped entirely at pc=18); and exact W0…W17 evaluation at pc≤17. Earlier graph-isomorphic solvers merged still more shapes, but that canonicalizer is not in the current hot path. The four current cuts below are why the realized search is a tiny fraction of the formal tree.</p>
 </div>
 
 <figure>
@@ -742,14 +745,14 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
   <g id="pruneFigure"></g>
 </svg>
 <figcaption><strong>Searching under a root, and where branches get pruned.</strong>
-<span class="layman">The four cuts: <b style="color:#ff7b9c">①</b> once one move is shown to be a <em>loss</em> for the opponent, this position is a win and the remaining siblings are skipped. <b style="color:#4cc2ff">②</b> two move-orders reaching the same future position are solved once. <b style="color:#ffb454">③</b> mirror-image boards share one remembered entry. <b style="color:#7ee787">④</b> a position with 16 or fewer available squares is answered by the exact W hierarchy instead of entering the normal search. Greyed and dashed branches are never searched.</span>
-<span class="engineer">① <b style="color:#ff7b9c">Win/loss cutoff</b>: a node is WIN as soon as one child returns LOSS, so later siblings are pruned. ② <b style="color:#4cc2ff">Transposition reuse</b>: distinct paths to the same available set share one result. ③ <b style="color:#ffb454">D₄ merge</b>: rotated or reflected available sets share one canonical TT entry above pc=16. ④ <b style="color:#7ee787">Exact dense tail</b>: W0…W8 tables and on-demand W9…W16 evaluators terminate normal expansion at pc≤16.</span></figcaption>
+<span class="layman">The four cuts: <b style="color:#ff7b9c">①</b> once one move is shown to be a <em>loss</em> for the opponent, this position is a win and the remaining siblings are skipped. <b style="color:#4cc2ff">②</b> two move-orders reaching the same future position are solved once. <b style="color:#ffb454">③</b> mirror-image boards share one remembered entry. <b style="color:#7ee787">④</b> a position with 17 or fewer available squares is answered by the exact W hierarchy instead of entering the normal search. Greyed and dashed branches are never searched.</span>
+<span class="engineer">① <b style="color:#ff7b9c">Win/loss cutoff</b>: a node is WIN as soon as one child returns LOSS, so later siblings are pruned. ② <b style="color:#4cc2ff">Transposition reuse</b>: distinct paths to the same available set share one result. ③ <b style="color:#ffb454">D₄ merge</b>: rotated or reflected available sets share one canonical TT entry above pc=17. ④ <b style="color:#7ee787">Exact dense tail</b>: W0…W8 tables and on-demand W9…W17 evaluators terminate normal expansion at pc≤17.</span></figcaption>
 </figure>
 </section>
 
 <!-- ===================================================================== -->
 <section id="project-timeline">
-<h2>Eight days of solver evolution: June 14–21, 2026</h2>
+<h2>Nine days of solver evolution: June 14–23, 2026</h2>
 <button type="button" class="sec-toggle" data-target="project-timeline" aria-pressed="false">show Engineer view here</button>
 <p>The project began Sunday evening, June 14, when a math assignment for his son escaped its original scope and became a solver project beside the existing Othello engine. The timeline is reconstructed from commits and contemporaneous engineering notes. Failed branches remain because each pivot explains why the next day's solver changed shape.</p>
 
@@ -765,6 +768,8 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <tr><td><strong>Fri Jun 19</strong></td><td>Stage-by-stage timing points to endgames with 9–12 squares. Exact on-demand evaluators replace that whole region, progressing from 2m12s to 1m39s; extending to 13 squares is slower.</td></tr>
 <tr><td><strong>Sat Jun 20</strong></td><td>Parallel splitting closes negatively; fused ETC reaches 1m32s. A sorted-frontier design then fails because memory order nearly doubles the search. That failure reveals the value of move order: dynamic current-board ranking reaches 1m02s, and adding ETC breaks one minute at 59.2s / ~919M nodes.</td></tr>
 <tr><td><strong>Sun Jun 21</strong></td><td>Hot-loop tuning lowers W12 to about 52s. A previously dismissed BMI2 idea is tested at the scale that matters, makes graph construction cheaper, and flips four more exact layers from losses into wins. W16 reaches 33.9s / 396M nodes.</td></tr>
+<tr><td><strong>Mon Jun 22</strong></td><td>Exact evaluation reaches 17 squares, the wall sweet spot: deeper layers cut more positions but cost proportionally more to evaluate. A table-skip for 18-square endgames—the one size where forgetting is provably harmless—lands next. Together they reach about 23.4 seconds of search. A treewidth shortcut and a battery of graph-theory reductions are all measured and ruled out.</td></tr>
+<tr><td><strong>Tue Jun 23</strong></td><td>A deep look at where the time now goes finds the machine busy almost the whole run and saturating nothing in particular: the search has spare memory bandwidth a single-threaded walk simply cannot use. A four-front hunt—endgame math, a refutation shortcut, a re-audit of past lessons, and the processor's own instruction set—converges on the same conclusion. The solver is close to what this hardware can physically do for this algorithm; the remaining gains are either tiny or require new mathematics.</td></tr>
 </tbody>
 </table>
 </div>
@@ -781,13 +786,15 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <tr><td><strong>Fri Jun 19</strong></td><td><code>iso-dense</code>: W9 2m12s → W10 2m00s → W11 1m44s → W12 1m39s</td><td>The new per-pc profiler finds 64% of probe cost at pc 9–12. Exact on-demand W<sub>K</sub> evaluation removes those probes and subtrees without materializing impossible tables. W13 still cuts nodes but regresses wall ~4%, locating K=12 as the economic optimum. TT footprint falls because pc≤12 is never stored. Warm restart is wall-neutral; the explicit stack is built as frontier infrastructure and optimized to parity.</td></tr>
 <tr><td><strong>Sat Jun 20</strong></td><td><code>M_WAVE → M_ORD → M_ORD_W</code>; 1m32s → 1m02s → 59.2s</td><td>Fusing ETC converts its first wall regression into a small net win. The slot-ordered producer/frontier form then loses: descent adds 94% nodes and L0 dedup adds 5.2% cycles. That quantifies move order's value. Re-sorting each node by current remaining replies cuts 34.3% of nodes and 30.2% wall; ETC on top produces the first sub-minute run.</td></tr>
 <tr><td><strong>Sun Jun 21</strong></td><td><code>adj_row_pext → W13…W16</code>; ~52s → 33.9s / 396M</td><td>Re-reading what had actually been measured reveals that the earlier “pext negative” covered tiny/scalar shapes, not K≥12 row extraction. One BMI2 compaction per vertex cuts code-build cycles 3.8%, which lowers the layer cost enough for K=13–16 to pay. K=16 removes 57% of K=12's n=16 nodes; the 17 GB TT falls to 16.5% occupancy. Memo-less K=17 then finds the new crossover at +5.7% wall.</td></tr>
+<tr><td><strong>Mon Jun 22</strong></td><td><code>W17 + degree-ordered getK</code>; 33.9s → ~24.5s. <code>skip18</code> → 23.4s / 308M</td><td>A 192-bit three-word code lifts the exact ceiling to K=17—resolving pc=17 (~21% of nodes) as a getK leaf—and its child sweep is degree-ordered for the earliest cutoff. K=17 is the wall sweet spot: W18–20 cut nodes another ~52% but conserve work (cycles/node rise proportionally), so the wall flattens. <code>skip18</code> then bypasses the canonical-key/probe/put for pc=18 nodes (their children are all getK leaves, so re-expansion is cascade-free) for −2.5% wall. A treewidth/separator DP is killed on its constant factor (the deep tail is breadth, not depth), and the whole structural-reduction cluster—value-bucketing, leaf/simplicial/dominated reductions, structural-involution pairing—measures NO-GO against exact nimbers.</td></tr>
+<tr><td><strong>Tue Jun 23</strong></td><td>perf saturation deep-dive; near-floor; <code>w17_induced</code>→field −0.55%</td><td>Cycle-accurate per-worker telemetry shows ~94% core utilization for the whole run, with deep starvation only ~0.3s at the very end. The search saturates no single resource: IPC ~1.4, load/store queues near-empty—spare memory-level parallelism the serial DFS probe cannot fill, which mechanistically explains why every prefetch lever died. A 2nd-ply refutation oracle has a −13% full-run ceiling, but no cheap signal (degree, overlap, subtree-size, symmetry-defect) predicts the rare refutation, and parallelizing the 2nd ply re-expands. A four-front math/instruction/discipline sweep converges on near-floor: the dominant cost is an irreducible L1-resident <code>pext</code> dependency chain that no Zen5 opcode shortens. One micro-win lands (resolving the W17 induced table into a contiguous field, −0.55%).</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="keyidea">
-<span class="tag">The eight-day arc</span>
-<p><strong>Fit the state set</strong> (graph iso + BuRR) → <strong>make live lookup constant-time</strong> (iso-flat) → <strong>compute the hot tail exactly</strong> (W8–W12) → <strong>improve cutoff order</strong> (dynamic ranking + ETC) → <strong>make exact evaluation cheap enough to reach W16</strong> (BMI2 row extraction). The record improved from ~56 minutes to 33.9 seconds—about 99×—while several locally attractive mechanisms were dropped.</p>
+<span class="tag">The nine-day arc</span>
+<p><strong>Fit the state set</strong> (graph iso + BuRR) → <strong>make live lookup constant-time</strong> (iso-flat) → <strong>compute the hot tail exactly</strong> (W8–W12) → <strong>improve cutoff order</strong> (dynamic ranking + ETC) → <strong>make exact evaluation cheap enough to reach W16, then W17</strong> (BMI2 row extraction) → <strong>stop storing the one endgame size it is safe to forget</strong> (skip18). The record improved from ~56 minutes to about 23.4 seconds of search—roughly 140×—while several locally attractive mechanisms were dropped. The last two days then asked whether anything was left to optimize, and largely answered no.</p>
 </div>
 </section>
 
@@ -807,7 +814,7 @@ let mex = (!seen).trailing_zeros() as u8;  // smallest value not present</code><
 <div class="engineer">
 <p>The 99× wall-time reduction decomposes into three levers. They multiply: a cheaper node matters more after ordering removes 90% of the nodes, and a better representation changes both capacity and probe latency. Most isolated hot-loop edits measured 0–5%; §11 retains the exceptions.</p>
 <ol>
-<li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, the complete W8 table, and the table-free W9–W16 evaluator hierarchy (never probe or normally expand pc≤16). (§3–8.)</li>
+<li><strong>Visit fewer nodes</strong> — memoization, D₄ canon, graph-iso canon, the complete W8 table, and the table-free W9–W17 evaluator hierarchy (never probe or normally expand pc≤17). (§3–8.)</li>
 <li><strong>Represent nodes cheaper</strong> — 256-bit board as <code>[u64;4]</code>; the 8-byte TT slot with a 55-bit fingerprint; the in-band <code>TinyGraph</code> carried down so deep nodes never touch the 256-bit board. (§9.)</li>
 <li><strong>Search them in a better order.</strong> Dynamic current-board ranking makes cutoffs arrive earlier; fused ETC checks the most promising cached children before expansion. This ordering win now matters more than another per-node micro-optimization. (§10.)</li>
 </ol>
@@ -837,10 +844,11 @@ let lost = if WINDOW &amp;&amp; pc == 8 { !self.w8_get(att, child0) }   // ONE i
 <div class="layman">
 <p>Nine squares seem to demand the same treatment, but a complete W9 table would consume about <strong>8 gigabytes</strong>. W10 would be incomparably larger. The solver instead computes only the entry it needs.</p>
 <p>From a nine-square position, every move leaves at most eight squares. W8 already knows all of those children. The solver tries the possible moves on the compact graph and reads each child from W8, stopping as soon as it finds a losing reply for the opponent. No W9 table and no ordinary search are needed.</p>
-<p>The same recurrence builds W10 from lower layers, then W11 and W12. For a time, W13 was slower because constructing its graph cost more than the subtree it removed. One cheaper bit-extraction operation changed that balance. W13 through W16 became profitable together, bringing the full solve to <strong class="win">33.9 seconds and 396 million nodes</strong>.</p>
+<p>The same recurrence builds W10 from lower layers, then W11 and W12. For a time, W13 was slower because constructing its graph cost more than the subtree it removed. One cheaper bit-extraction operation changed that balance. W13 through W16 became profitable together, bringing the full solve to 33.9 seconds and 396 million nodes.</p>
+<p>One layer further, to seventeen squares, paid as well—provided the evaluator also tried each move in the most-forcing order first, so a winning position bails at its first losing reply. That brought the search to roughly 24.5 seconds. Seventeen turned out to be the sweet spot: deeper layers do remove more positions, but each one costs proportionally more to evaluate, so the wall stops moving. The final step was the opposite of computing more—it was remembering less. For one specific endgame size (eighteen available squares), the solver now skips the entire ritual of canonicalizing and recording the position, because that size is uniquely safe to forget: every move from it lands in a square count the W hierarchy already answers directly. That saved the last bit of bookkeeping and brought the search to <strong class="win">about 23.4 seconds and 308 million nodes</strong>.</p>
 <div class="keyidea">
 <span class="tag">Compute the entry, not the table</span>
-<p>A complete 9-square table is too big to hold, but one requested entry can be derived from W8; that value can serve the next layer. The hierarchy trades arithmetic for avoided memory probes and entire subtrees. Cheaper graph construction moved the economic limit from 12 to 16. K17 still removes nodes, but its shallow, highly repeated positions are cheaper to retrieve from the normal table than to recompute every time.</p>
+<p>A complete 9-square table is too big to hold, but one requested entry can be derived from W8; that value can serve the next layer. The hierarchy trades arithmetic for avoided memory probes and entire subtrees. Cheaper graph construction moved the economic limit from 12 to 16, and most-forcing-first evaluation carried it to 17. Beyond that the trade reverses: deeper layers conserve work rather than save it, because each removed position costs about as much to evaluate as the small subtree it stood in for.</p>
 </div>
 </div>
 <div class="engineer">
@@ -865,13 +873,13 @@ false                                                          // no losing chil
 <p>The input is a 36-bit upper-triangular edge code. For vertex <code>i</code>, <code>_pext_u64(code, W9_MASKS.0[i])</code> gathers its incident edges into one adjacency row. A move produces <code>child = full &amp; !(bit_i | adj_i)</code>.</p>
 <p>A second <code>pext</code>, using <code>W9_MASKS.1[child]</code>, projects the surviving induced edges. Because extraction preserves their upper-triangle order, the result directly indexes <code>W[popcount(child)]</code>. The sweep stops on the first losing child. In the worst case it performs nine compact-bitset reads, with no allocation, canonicalization, hash, or flat-TT traffic.</p>
 <p><code>direct_w9_matches_scalar_recurrence</code> checks the kernel against scalar negamax over thousands of graph codes.</p>
-<p>In <code>iso_flat.rs</code>, <code>adj_row_pext</code> compacts each live square's attack row against the current available set with one four-word BMI2 <code>pext</code>, replacing K(K−1)/2 scalar <code>Bits::get</code> tests. The packed rows form the labelled edge code and dispatch to <code>get9</code>…<code>get16</code>. K≤11 fits in <code>u64</code>; K≤16 fits in a 120-bit <code>u128</code>. The ceiling <code>DK</code> is a compile-time const generic chosen once at the subtree handoff.</p>
+<p>In <code>iso_flat.rs</code>, <code>adj_row_pext</code> compacts each live square's attack row against the current available set with one four-word BMI2 <code>pext</code>, replacing K(K−1)/2 scalar <code>Bits::get</code> tests. The packed rows form the labelled edge code and dispatch to <code>get9</code>…<code>get17</code>. K≤11 fits in <code>u64</code>; K≤16 fits in a 120-bit <code>u128</code>; K=17's 136-bit code runs on a three-word (192-bit) path above that ceiling. The ceiling <code>DK</code> is a compile-time const generic chosen once at the subtree handoff; the default is now 17.</p>
 <div class="keyidea">
 <span class="tag">Why this is a memory lever, and why it lands where the cost lives</span>
-<p>A stratified TT-latency profiler first found that <strong>pc 9–12 carried ~64% of random-probe cost</strong>. W12 erased that region. After dynamic ordering and cheaper code construction, W13–W16 removed still more real subtree expansion: n=16 nodes fell 57% from the K12 configuration, independent of TT size. The 17 GB TT is now only 16.5% full.</p>
+<p>A stratified TT-latency profiler first found that <strong>pc 9–12 carried ~64% of random-probe cost</strong>. W12 erased that region. After dynamic ordering and cheaper code construction, W13–W17 removed still more real subtree expansion—the cut is inherent and TT-size-independent—so the table dropped to a small fraction full. W17 now resolves pc=17 (~21% of nodes) as a getK leaf with no entry probe at all; its children are swept most-forcing-first so the evaluator itself bails at the earliest losing reply.</p>
 </div>
 <p><strong>Why this is not a generic "dense block."</strong> A naïve local solver over pc 9..K loses cross-boundary transposition merging and re-expands work (measured net-negative). <code>iso-dense</code> bottoms out in the <em>complete, shared, eviction-free</em> W0..W8 tables, so it performs an exact recurrence with no private boundary cache and no lost merge below its ceiling.</p>
-<p><strong>The crossover moved, then was measured again.</strong> With scalar graph construction, W13 was +4% wall and K=12 looked optimal. <code>adj_row_pext</code> alone cut 3.8% cycles/node and reduced the W13 penalty enough for the layers to compound. K13–K16 all won; K16 is −35% wall versus the tuned K12 default. A table-free adjacency-based K17 cut another 19.4% nodes but added 30.7% cycles/node and 5.7% wall: pc=17 is shallow and transposition-heavy, so memo-less recomputation loses to a TT hit. That implementation was reverted.</p>
+<p><strong>The crossover moved, was measured again, and then settled at 17.</strong> With scalar graph construction, W13 was +4% wall and K=12 looked optimal. <code>adj_row_pext</code> alone cut 3.8% cycles/node and reduced the W13 penalty enough for the layers to compound. K13–K16 all won; K16 was −35% wall versus the tuned K12 default. Lifting the ceiling to K=17, with its getK children degree-ordered, won another −8.6%..−13% wall. K=17 is the sweet spot: W18–W20 cut nodes a further ~52%, but the work is <em>conserved</em>—cycles/node grow in proportion—so the wall is flat. A separate, earlier experiment confirms the boundary from the other side: a table-free, <em>memo-less</em> standalone <code>get17</code> (built before the layer was integrated as a getK leaf) cut 19.4% nodes but added 30.7% cycles/node and 5.7% wall, because recomputing every shallow, transposition-heavy pc=17 occurrence in isolation loses to a TT hit. That standalone form was reverted; resolving pc=17 inside the W hierarchy, where its children are reused exact layers, is what pays.</p>
 </div>
 
 <figure>
@@ -938,7 +946,7 @@ fn pack(fp, val) -> Slot {
 
 <div class="layman">
 <p>For much of the week, each search step ended with a random jump into a 17-gigabyte table. The arithmetic was cheap; waiting for memory was not. Several optimizations therefore changed how the machine reached the table rather than how it reasoned about the game.</p>
-<p>W16 has changed the balance again. The current run stores so few large positions that the table is only 16.5% full, while exact endgame evaluation consumes more of the work. The next profile must measure this new solver instead of repeating the old claim that it is memory-bound.</p>
+<p>W16 and then W17 have changed the balance again. The current run stores so few large positions that the table is mostly empty, while exact endgame evaluation consumes more of the work. A fresh, careful profile of this new solver—not a repeat of the old "memory-bound" claim—found something unusual: the machine is busy almost the entire run yet maxes out nothing in particular. It even has spare capacity to fetch from memory that the single-threaded walk through the hard opening simply cannot use. That last fact quietly explains why every attempt to "look ahead" for the next memory read had failed: there was already idle fetch capacity, and no serial way to fill it.</p>
 <ul>
 <li><strong>One shared table, no locks.</strong> Many cores share one table with no "do not disturb" locks — safe because the same board always computes the same answer, so even if two cores write the same slot they write the same thing.</li>
 <li><strong>Look ahead.</strong> Before the solver needs a slot, it tells the processor "fetch this soon" (a prefetch), so the slow trip from RAM overlaps with other work instead of stalling.</li>
@@ -947,7 +955,7 @@ fn pack(fp, val) -> Slot {
 </ul>
 </div>
 <div class="engineer">
-<p>Before W12, random probes into a 17 GB TT exposed about 120 ns of DRAM latency. On the later K12 workload, <dfn class="term" tabindex="0" data-tip="Top-down microarchitecture analysis groups CPU pipeline slots into frontend, backend, speculation, and retiring categories.">TMA</dfn> attributed roughly 30% of slots to backend memory and 31% to the frontend. W16 then cut the run to 396 million nodes and about 2.8 GB of live TT contents, while raising cycles per node 66% through nested evaluation. The old profile no longer describes the production solver; evaluator cost and <dfn class="term" tabindex="0" data-tip="Memory-level parallelism overlaps several outstanding cache misses instead of waiting for each serially.">MLP</dfn> must be remeasured on K16.</p>
+<p>Before W12, random probes into a 17 GB TT exposed about 120 ns of DRAM latency. On the later K12 workload, <dfn class="term" tabindex="0" data-tip="Top-down microarchitecture analysis groups CPU pipeline slots into frontend, backend, speculation, and retiring categories.">TMA</dfn> attributed roughly 30% of slots to backend memory and 31% to the frontend. W16/W17 then cut the run to ~308 million nodes and a few GB of live TT contents, while raising cycles per node through nested evaluation. The K17 saturation audit (Zen5 dispatch-stall counters) found the search bound by <em>no</em> single resource: IPC ≈ 1.4 against a peak near 6, and load- and store-queue-full both ~1%—the load queue's large headroom is unused <dfn class="term" tabindex="0" data-tip="Memory-level parallelism overlaps several outstanding cache misses instead of waiting for each serially.">MLP</dfn> the serial DFS probe cannot fill. The low IPC is a <em>distributed</em> stall: frontend (i-cache, getK code) ~28% plus backend ~25%, not one wall. This is also why prefetch keeps measuring dead: the bottleneck was never a shortage of in-flight memory requests.</p>
 
 <h4>Lockless atomic transposition table</h4>
 <p>One flat <code>Box&lt;[AtomicU64]&gt;</code>, relaxed load/store, no mutex, no sharding. Safe by construction: a position's value is deterministic, so a concurrent write for the <em>same</em> key stores the <em>same</em> value, and a write for a <em>different</em> key is rejected by the fingerprint. This removes a lock/unlock and a mutex cache-line bounce from every node. (Hyatt's XOR-key trick is unnecessary — the 55-bit fingerprint self-validates identity.)</p>
@@ -979,7 +987,7 @@ fn pack(fp, val) -> Slot {
 <p>After W12 removed the deepest endgames, almost the entire run lay beneath one difficult opening. Giving that branch more workers only made them rediscover the same positions. Five scheduling variants broke even or lost.</p>
 <p>The remaining table reads were random, and a small benchmark offered an enticing result: sorted reads could run about five times faster. But forcing the search to follow memory order added <strong>94% more positions</strong>. The hardware moved faster while the algorithm did nearly twice the work.</p>
 <p>That result redirected the project toward game order. A winning position stops at its first losing child, so the solver should try the most forcing move first. Ranking moves by how few replies they leave cut about a third of the search. Dynamic ordering reached <strong>1m02s</strong>; combining it with ETC crossed one minute; tighter sorting lowered the W12 solver to about 52 seconds.</p>
-<p>The final reduction came from reopening the old bit-extraction result at the scale now in use. It unlocked W13 through W16 and produced the current <strong class="win">33.9-second, 396-million-node</strong> run.</p>
+<p>Reopening the old bit-extraction result at the scale now in use unlocked W13 through W16 and reached 33.9 seconds, then one further exact layer (W17) and a safe table-skip for 18-square endgames brought the search to the current <strong class="win">~23.4-second, 308-million-node</strong> run. Move ordering itself was then retired as a lever: dynamic degree ranking had reached its ceiling, and a battery of refinements—reply-degree, summed forcing power, countermove and killer heuristics, a global history table—all washed out or backfired in live full-scale tests. The map had turned back from <em>reordering</em> work to <em>cutting</em> it.</p>
 <div class="card"><p style="margin:0">The chart below is historical: its pc 9–12 peak motivated W<sub>K</sub>. W12 erased those bands. The later pc 13–21 locality study did not become the solver architecture; its failed order test led to dynamic move ordering instead.</p></div>
 </div>
 <div class="engineer">
@@ -988,7 +996,7 @@ fn pack(fp, val) -> Slot {
 <p>After W12, pc 13–21 supplied 88% of the remaining probes. Sorting by slot produced 62–73% same-row adjacency, but following that order changed the search tree: n=16 rose from 2.097 billion to 4.069 billion nodes, a <strong>94% increase</strong>. A four-way L0 probe cache preserved order but added 5.2% total cycles without a real node cut. Those wave, <dfn class="term" tabindex="0" data-tip="SPSC means single-producer, single-consumer; the proposed pipeline used one-way queues between frontier stages.">SPSC</dfn>, and <dfn class="term" tabindex="0" data-tip="Delayed duplicate detection batches states, then sorts and deduplicates them instead of probing each state immediately.">DDD</dfn> implementations are negative as built. A different design remains open only if it preserves cutoff-friendly consumer order.</p>
 <p><code>M_ORD</code> exploited that ordering value directly. It sorts by <code>child0.popcount()</code> ascending, placing <code>child0 == 0</code> first. Against <code>M_WAVE</code>, n=16 used 34.3% fewer nodes, 8.5% more cycles per node, 28.7% fewer total cycles, and 30.2% less wall time. The clean 17 GB run reached 1m02s / 1,136,583,273 nodes.</p>
 <p>ETC still paid on the improved order. <code>M_ORD_W</code> removed another 18.4% of nodes; gather and probe work raised cycles per retained node 14.6%, while total cycles fell 6.5%. Inlined insertion sort and hot-loop fusion then reduced cycles per node another 12.5%, bringing K12 to about 52 seconds. Limiting ETC to the top-ranked children lost because cut triggers were broadly distributed.</p>
-<p>Finally, <code>adj_row_pext</code> replaced scalar edge tests with one extraction per vertex, cutting cycles per node 3.8%. That direct gain made K13 through K16 profitable and reduced wall time another 35%, to 33.9s / 396 million nodes. Memo-less K17 still lost 5.7% wall. The current 30-second candidates are TT-memoized K17 miss resolution, cheaper nested getK leaves, and a new MLP profile.</p>
+<p>Finally, <code>adj_row_pext</code> replaced scalar edge tests with one extraction per vertex, cutting cycles per node 3.8%. That direct gain made K13 through K16 profitable and reduced wall time 35%, to 33.9s / 396 million nodes. Lifting the ceiling to K=17—resolving pc=17 as a getK leaf with degree-ordered children—won another −8.6%..−13% wall; <code>skip18</code> then removed the canonical-key/probe/put for pc=18 nodes (cascade-free, since their children are all getK leaves) for −2.5% wall, giving the present ~23.4s / 308 M-node default. K=17 is the wall sweet spot: W18–20 cut ~52% more nodes but conserve work. Move ordering was retired after its refinement menu measured dead in live A/B, and a 2nd-ply refutation lever—oracle ceiling −13% full-run—has no cheap predictor for the rare refuting reply. The remaining throughput lead is the nested getK evaluator itself, whose innermost cost is an irreducible L1-resident <code>pext</code> dependency chain.</p>
 </div>
 
 <figure id="bandsFig">
@@ -1162,7 +1170,7 @@ fn pack(fp, val) -> Slot {
 <button type="button" class="sec-toggle" data-target="numbers" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
-<p>The first complete 16×16 run evaluated <strong>10,017,867,872 nodes</strong> in about 56 minutes. The current solver evaluates <strong>396 million</strong> in <strong>33.9 seconds</strong>. Graph-based merging made the state set fit, a flat table made lookups cheap, dynamic order found cutoffs earlier, and faster graph construction extended exact evaluation through W16. The final 3.8% per-node improvement unlocked four evaluator layers and cut wall time another 35%.</p>
+<p>The first complete 16×16 run evaluated <strong>10,017,867,872 nodes</strong> in about 56 minutes. The current solver evaluates <strong>308 million</strong> in about <strong>23.4 seconds</strong> of search. Graph-based merging made the state set fit, a flat table made lookups cheap, dynamic order found cutoffs earlier, and faster graph construction extended exact evaluation through W16, then W17. A final, safe table-skip for one endgame size shaved off the last of the bookkeeping.</p>
 </div>
 <div class="engineer">
 <p>n=16 wall-clock across generations, on this box (Ryzen AI 9 HX 370, 12 cores, ~26 GB). All verdicts: <span class="win">second player wins</span>. Note that raw M/s and wall time diverge — higher node rate does not mean faster completion if it walks more nodes.</p>
@@ -1173,7 +1181,7 @@ fn pack(fp, val) -> Slot {
 <svg viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="n=16 wall-clock time across solver generations">
   <g id="wallChart"></g>
 </svg>
-<figcaption><strong>n=16 wall-clock across solver generations</strong> (log time axis). The major transitions are D₄ search → graph-isomorphic BuRR → flat live TT → W8–W12 → dynamic order + ETC → cheap row extraction + W16. The current record is <strong>33.9s / 396M nodes</strong>. One minute is now a historical milestone; 30 seconds is the immediate target, not a claimed floor.</figcaption>
+<figcaption><strong>n=16 wall-clock across solver generations</strong> (log time axis). The major transitions are D₄ search → graph-isomorphic BuRR → flat live TT → W8–W12 → dynamic order + ETC → cheap row extraction + W16 → W17 + skip18. The current record is <strong>~23.4s search / 308M nodes</strong>. One minute and even 30 seconds are now historical milestones; the live goal is sub-20-second search, not a claimed floor.</figcaption>
 </figure>
 
 <div class="engineer">
@@ -1199,8 +1207,28 @@ fn pack(fp, val) -> Slot {
 <tr><td><code>M_ORD</code> dynamic order</td><td class="num">1m 02s</td><td>current-degree child sort; 1,136,583,273 nodes</td></tr>
 <tr><td><code>M_ORD_W</code></td><td class="num">59.2s</td><td>dynamic order + ETC; first sub-minute result</td></tr>
 <tr><td><code>M_ORD_W</code>, tuned K12</td><td class="num">~52s</td><td>inlined insertion sort and fused/trimmed hot loop</td></tr>
-<tr><td><strong><code>W16 + M_ORD_W</code></strong> ⭐</td><td class="num win">33.9s</td><td>pext-built rows + exact ceiling K16; 396 M nodes; current default</td></tr>
-<tr><td><em>immediate target</em></td><td class="num">30s</td><td>memoized K17 miss path, cheaper getK leaves, then re-profiled MLP</td></tr>
+<tr><td><code>W16 + M_ORD_W</code></td><td class="num">33.9s</td><td>pext-built rows + exact ceiling K16; 396 M nodes</td></tr>
+<tr><td><code>W17 + degree-ordered getK</code></td><td class="num">~24.5s</td><td>exact ceiling K17, pc=17 as a getK leaf; the wall sweet spot</td></tr>
+<tr><td><strong><code>W17 + skip18</code></strong> ⭐</td><td class="num win">~23.4s</td><td>+ table-skip for pc=18; 307,608,950 nodes; current default (search time)</td></tr>
+<tr><td><em>live goal</em></td><td class="num">&lt;20s</td><td>cheaper getK leaves; the one untested pre-pruning idea; ~30s end-to-end is now met</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="engineer">
+<p><strong>n=16 leaderboard</strong> — best clean-box wall per solver lineage. All verdicts: <span class="win">second player wins</span>. Node counts above pc=8 are ±18% node-noisy between runs; the deterministic figure is the node-count cut at n=14, and the wall follows it.</p>
+<table>
+<thead><tr><th>solver</th><th class="num">n=16 wall</th><th class="num">nodes</th><th>mechanism</th></tr></thead>
+<tbody>
+<tr><td><strong>iso-dense W17 + skip18</strong> ⭐</td><td class="num win">~23.4s</td><td class="num">0.31 B</td><td>current default: exact ceiling K=17 (pc=17 a getK leaf, no entry probe) + degree-ordered getK children + a TT-skip for the cascade-free pc=18 band</td></tr>
+<tr><td>iso-dense W17</td><td class="num">~24.5s</td><td class="num">0.31 B</td><td>K=17 dense layer (192-bit code) resolves pc=17; the wall sweet spot (deeper layers conserve work)</td></tr>
+<tr><td>iso-dense W16 + M_ORD_W</td><td class="num">~34s</td><td class="num">0.40 B</td><td>pext-per-row getK build + ceiling K=12→16; node cut inherent and TT-independent</td></tr>
+<tr><td>iso-dense W12 + M_ORD_W</td><td class="num">~52s</td><td class="num">0.94 B</td><td>dynamic order + ETC + inlined insertion sort over the W12 ceiling</td></tr>
+<tr><td>iso-dense W12 (M_WAVE)</td><td class="num">1m32s</td><td class="num">1.70 B</td><td>W12 + fused ETC cutoff; the prior default before dynamic ordering</td></tr>
+<tr><td>iso-window</td><td class="num">2m44s</td><td class="num">~5.1 B</td><td>dense W8 tail table over a huge-page-collapsed flat TT</td></tr>
+<tr><td>iso-flat</td><td class="num">3m29s</td><td class="num">6.1 B</td><td>single selective-iso key over a flat lockless TT</td></tr>
+<tr><td>iso-burr</td><td class="num">29m23s</td><td class="num">—</td><td>selective graph-iso key over an eviction-free BuRR archive; first compressed full-state finish</td></tr>
+<tr><td>D₄ parallel (first)</td><td class="num">~56m</td><td class="num">10.0 B</td><td>parity-aware root parallelism; the project's first n=16 finish</td></tr>
 </tbody>
 </table>
 </div>
@@ -1257,7 +1285,7 @@ fn pack(fp, val) -> Slot {
 <div class="keyidea">
 <span class="tag">Derive the floor; do not inherit it</span>
 <div class="layman"><p>The programmer used Elon-style first-principles estimates: how much work must be done, and how quickly can the machine plausibly do it? When that estimate lies far below the stopwatch, the difference is an optimization budget. A slow current implementation is not a physical limit.</p></div>
-<div class="engineer"><p>A defensible performance floor starts with irreducible state resolutions, minimum bytes moved, required arithmetic, and attainable hardware throughput. It does not come from the current call graph or latest failed variant. Dynamic ordering crossed the old 60-second target; scale-correct pext plus W16 then reached 33.9 seconds. The working set collapsed from a tight 17 GB regime to ~2.8 GB of live contents. Each “floor” described one implementation regime, not the problem.</p></div>
+<div class="engineer"><p>A defensible performance floor starts with irreducible state resolutions, minimum bytes moved, required arithmetic, and attainable hardware throughput. It does not come from the current call graph or latest failed variant. Dynamic ordering crossed the old 60-second target; scale-correct pext plus W16, then W17 and skip18, reached about 23.4 seconds of search. The working set collapsed from a tight 17 GB regime to a few GB of live contents. Each earlier “floor” described one implementation regime, not the problem. The current estimate is grounded differently—in a measured saturation audit rather than a stopwatch: the search now maxes out no single CPU resource (IPC ≈ 1.4, spare load-queue depth), and its innermost cost is an L1-resident <code>pext</code> dependency chain that no algorithm or AMD Zen5 opcode is known to shorten. That is presented as evidence of proximity to a hardware-and-algorithm limit, not as a claimed wall; the open levers are micro-refactors, one untested pre-pruning idea, and new mathematics.</p></div>
 </div>
 
 <div class="card">
@@ -1398,25 +1426,24 @@ fn pack(fp, val) -> Slot {
 
 <div class="layman">
 <h3>Two horizons, not one vague “next optimization”</h3>
-<p><strong>16×16 now takes 33.9 seconds.</strong> Dynamic ordering and ETC first crossed one minute; cheaper graph construction then made exact W13–W16 evaluation profitable and removed another 57% of the K12 node set. Thirty seconds is close, but not automatic: a straightforward W17 evaluator saved nodes and still ran slower.</p>
+<p><strong>16×16 now takes about 23.4 seconds of search, and well under 30 seconds end to end.</strong> Dynamic ordering and ETC first crossed one minute; cheaper graph construction then made exact evaluation profitable through sixteen and then seventeen squares; and a safe table-skip for eighteen-square endgames removed the last of the bookkeeping. The 30-second target is met. The remaining question changed character: a careful look at the running machine found it busy almost the whole time and limited by no single thing—so the next gains are either very small refactors, one untested pruning idea for symmetric openings, or a genuinely new theorem. The deepest open question (below) is now the most valuable one.</p>
 <p><strong>18×18 remains a capacity and algorithm-shape problem.</strong> Its estimated trillions of positions cannot live in the current flat RAM table. External layers and a frozen BuRR archive may still be necessary, but the n=16 frontier experiment exposed a central danger: reordering work for sorting/dedup nearly doubled the search by destroying cutoff-friendly move order. Any n=18 design must preserve or reconstruct those economics.</p>
 <p>And the deepest open question: is there a clever <em>theorem</em> for even-sized boards (like the instant mirror-strategy for odd boards) that would make the search unnecessary entirely? None is known. Finding one would beat every silicon trick at once.</p>
 </div>
 <div class="engineer">
-<h3>Track A — push n=16 through 30 seconds</h3>
+<h3>Track A — n=16 through 30 seconds (met), and toward sub-20</h3>
 <ol>
-<li><strong>Banked default:</strong> pext-built adjacency rows + W16 + dynamic order + ETC = 33.9s / 396 M nodes / SECOND. The TT is only 16.5% full; K16's node cut is unchanged across 12–16 GB tables.</li>
-<li><strong>First 30-second bet:</strong> keep a TT probe at pc=17; on a miss, resolve with <code>get17_from_adj</code> and store the answer. The memo-less K17 lost because transposition hits were cheaper than recomputing its shallow subtree.</li>
-<li><strong>Second bet:</strong> profile and reduce nested getK evaluation, now ~35% of cycles and dominated by repeated get9/get10 leaves. Passing already-built adjacency or exposing more instruction-level parallelism may help.</li>
-<li><strong>Third bet:</strong> re-profile memory/MLP after W16. The old memory profile is stale because the working set collapsed. A smaller TT was already tested and lost 9.5% wall; do not assume occupancy alone makes it faster.</li>
+<li><strong>Banked default:</strong> pext-built adjacency rows + W17 (pc=17 as a getK leaf, degree-ordered children) + skip18 + dynamic order + ETC = ~23.4s search / 307,608,950 nodes / SECOND, comfortably under 30 s end to end. The exact ceiling settled at K=17, the wall sweet spot: W18–20 cut ~52% more nodes but conserve work, so the wall is flat past 17. skip18 is the complete band-skip lever—every neighbouring band ({19}, ranges, fractional) measured dead, because only pc=18's children are all getK leaves.</li>
+<li><strong>Saturation, not a single wall:</strong> a cycle-accurate audit found the run ~94% utilized with no resource saturated (IPC ≈ 1.4, load/store queues near-empty). The unused load-queue depth is MLP the serial DFS probe cannot fill, which mechanistically retires the prefetch family. The dominant remaining cost is the nested getK evaluator's L1-resident <code>pext</code> dependency chain.</li>
+<li><strong>What is left for sub-20:</strong> the getK evaluator (get9/get10 leaves) is the standing throughput target but is near its arithmetic floor—Zen5's full-width AVX-512 does not revive the dead getK SIMD, and <code>pext</code> has no vector equivalent. The one untested node-count idea is a residual-stabilizer orbit-dedup of the 2nd-ply move set on symmetry-axis openings (sound pre-pruning, not a memo-skip, so no re-expansion cascade). A 2nd-ply refutation oracle shows a −13% full-run ceiling, but no cheap signal (degree, overlap, subtree-size, symmetry-defect) predicts the rare refuting reply, so that prize is effectively closed without a predictor.</li>
 </ol>
-<p>K17 establishes the present memo-less W<sub>K</sub> crossover: −19.4% nodes, +30.7% cycles/node, +5.7% wall. That is a measured boundary for one implementation, not a declaration that 30 seconds is the floor.</p>
+<p>A separate, earlier <em>memo-less</em> standalone get17 measured −19.4% nodes, +30.7% cycles/node, +5.7% wall before pc=17 was integrated as a getK leaf. That is a boundary for one implementation, not a declaration that any time is the floor; the present near-floor framing rests on the measured saturation audit, presented as evidence.</p>
 
 <h3>Track B — attempting n=18</h3>
 <ol>
 <li><strong>Break DFS residence carefully:</strong> external pc/ply windows with <dfn class="term" tabindex="0" data-tip="Delayed duplicate detection: collect, sort, and deduplicate a frontier in batches.">DDD</dfn> may be required for capacity, but the n=16 slot-order test added 94% nodes. A viable design must preserve, encode, or reconstruct cutoff-friendly move order.</li>
 <li><strong>Freeze completed layers:</strong> use value-only BuRR (~1.1 bits/key) when membership is known from the generated frontier. This is where BuRR returns; it is absent from the current live <code>iso-dense</code> search.</li>
-<li><strong>Carry forward the new dense ceiling:</strong> W16 is now the n=16 default; memo-less W17 loses on transposition-heavy shallow nodes. n=18 must remeasure whether memoized K17+ miss resolution or deeper amortization changes that crossover.</li>
+<li><strong>Carry forward the new dense ceiling:</strong> W17 with skip18 is the n=16 default, and K=17 is the n=16 wall sweet spot. n=18 must remeasure that crossover at the larger scale—whether a higher ceiling, a different safe band-skip, or deeper amortization moves it—rather than assuming K=17 is optimal there.</li>
 <li><strong>Make verification a first-class deliverable:</strong> there is no independent n=18 verdict. Reproducible layer hashes/counts, redundant runs or implementations, checkpointing, and deterministic frozen artifacts matter as much as wall time.</li>
 </ol>
 <p>The estimated n=18 set is on the order of 3 trillion positions. A compressed iso-keyed archive may be on the order of 130 GB, but that is only a sizing estimate. The +94% n=16 ordering tax makes the decisive unknown concrete: can a layer-oriented computation retain enough first-losing-child cutoff behavior to avoid materializing the whole retrograde graph?</p>
@@ -1428,7 +1455,7 @@ fn pack(fp, val) -> Slot {
 <section id="appendix-iso-dense" class="engineer">
 <h2>Appendix: <code>iso-dense</code>, end to end</h2>
 
-<p>This appendix is deliberately self-contained. It describes the current K=16 default as an algorithm, then explains why each layer exists and which earlier mechanism it replaces. The short version is: search positions above 16 available squares with a flat D₄-keyed TT; evaluate pc≤16 exactly as small Node-Kayles graphs; order moves by current forcing power; ETC-probe recurse children in that order; parallelize only where the boolean cutoff makes parallel work non-speculative.</p>
+<p>This appendix is deliberately self-contained. It describes the current K=17 default as an algorithm, then explains why each layer exists and which earlier mechanism it replaces. The short version is: search positions above 17 available squares with a flat D₄-keyed TT; skip the TT entirely at exactly 18 squares (the one band that is safe to forget); evaluate pc≤17 exactly as small Node-Kayles graphs; order moves by current forcing power; ETC-probe recurse children in that order; parallelize only where the boolean cutoff makes parallel work non-speculative.</p>
 
 <h3>A. The state and recurrence</h3>
 <p>A position is represented by a 256-bit <code>available</code> mask. Placing a queen at square <code>s</code> removes <code>s</code> plus every available square attacked by it:</p>
@@ -1439,12 +1466,13 @@ fn pack(fp, val) -> Slot {
 
 <h3>B. What is carried down the search</h3>
 <p>For large positions, <code>iso-dense</code> carries all eight D₄ orientations of the available mask. A child updates those orientations incrementally instead of rotating/reflection-folding a fresh 256-bit mask. The lexicographically smallest orientation is the TT key. It also carries a filtered move list: because availability only shrinks, each child filters its parent's already-short list rather than scanning all 256 squares.</p>
-<p>This is one place where the name can mislead. The current champion does <strong>not</strong> run a graph-isomorphism canonicalizer in its live hot path. That was the key idea in <code>iso-burr</code> and <code>iso-flat</code>. With <code>DK=16</code>, every small position is intercepted by W<sub>K</sub> first; positions above the dense ceiling use the cheaper D₄ key.</p>
+<p>This is one place where the name can mislead. The current champion does <strong>not</strong> run a graph-isomorphism canonicalizer in its live hot path. That was the key idea in <code>iso-burr</code> and <code>iso-flat</code>. With <code>DK=17</code>, every position with at most seventeen available squares is intercepted by W<sub>K</sub> first; positions above the dense ceiling use the cheaper D₄ key—except the pc=18 band, which skips the key, probe, and store entirely (next).</p>
 
-<h3>C. The flat transposition table for pc ≥ 17</h3>
+<h3>C. The flat transposition table for pc ≥ 19, and the pc=18 skip</h3>
 <p>The live TT is one flat array of 8-byte atomic slots. A 128-bit hash is split into an indexing half (<code>route</code>) and an independent 55-bit fingerprint plus value. A probe is one relaxed atomic load; a put is one relaxed store. Same-key races are benign because the game value is deterministic, while a foreign key must collide in both slot and fingerprint to look like a hit.</p>
 <p>The table is prefaulted and collapsed into 2 MiB huge pages. It has no locks, per-worker shards, or BuRR segments. That last point is the decisive difference from the compressed branch:</p>
-<p>W16 has changed its economics: the 17 GB allocation is only 16.5% full, representing roughly 2.8 GB of live contents. A smaller TT nevertheless measured 9.5% slower from extra eviction, so low occupancy is not permission to shrink it without an A/B.</p>
+<p>W16, then W17, have changed its economics: the allocation is far from full, holding only a few GB of live contents. A smaller TT nevertheless measured 9.5% slower from extra eviction, so low occupancy is not permission to shrink it without an A/B.</p>
+<p><strong>The pc=18 skip (<code>skip18</code>).</strong> One band is treated specially. At pc=18 the solver builds no canonical key, runs no probe, and writes no entry; it simply recurses. This is sound because pc=18 is the <em>only</em> band every one of whose children is a getK leaf (pc≤17): if a pc=18 node is reached again through a different move order, re-expanding it costs exactly one bounded getK sweep, never an unmemoized subtree, so the omission can never cascade. The band is also ~100% cold in practice (a 0.3% entry-probe hit rate), so the put was almost pure waste. Removing the work—canonicalization is the search's single largest branch-mispredict site—cut −2.5% wall / −3.6% cycles, verdict-preserving. The band is unique: every extension ({19}, contiguous ranges, a fractional skip) measured net-negative, because any band above 18 has children that are themselves memoized and would be re-probed cold on re-expansion.</p>
 
 <table>
 <thead><tr><th>solver/storage</th><th>benefit</th><th>bottleneck exposed</th></tr></thead>
@@ -1456,6 +1484,7 @@ fn pack(fp, val) -> Slot {
 <tr><td><code>iso-dense</code> K=12</td><td>Replaces pc=9..12 TT traffic and subtree expansion with exact bounded evaluators.</td><td>Remaining pc=13..21 random probes plus graph-code/frontend work.</td></tr>
 <tr><td>Dynamic order + ETC</td><td>Tries the most forcing current move first and ETC-probes recurse children before descent.</td><td>Crossed one minute; shifted the next prize back into exact-tail compute.</td></tr>
 <tr><td><code>iso-dense</code> K=16</td><td>pext-built graph rows make W13–W16 economical; normal TT search begins only at pc=17.</td><td>33.9s / 396 M; nested getK leaves now dominate compute.</td></tr>
+<tr><td><code>iso-dense</code> K=17 + skip18</td><td>Lifts the exact ceiling to pc=17 with degree-ordered getK children; pc=18 skips the TT entirely (cascade-free).</td><td>~23.4s search / 0.31 B; the search saturates no single resource (near-floor).</td></tr>
 </tbody>
 </table>
 
@@ -1465,7 +1494,7 @@ fn pack(fp, val) -> Slot {
               W[child induced by graph - N[v]] == LOSS</code></pre>
 <p>The table is complete, not a cache: there is no fingerprint, collision, eviction, canonicalization, or miss. Graph values are invariant under relabelling, so any deterministic ordering of live squares is valid. This removed the repeated ≤8 subtree expansion that a flat TT could forget.</p>
 
-<h3>E. W9..W16: exact tables that are never materialized</h3>
+<h3>E. W9..W17: exact tables that are never materialized</h3>
 <p>A literal W9 bitset would require 2³⁶ bits—8 GiB—and W10 would require 2⁴⁵ bits. Instead, <code>getK</code> computes only the requested row of the conceptual table. For each possible move it removes the chosen vertex and its neighbors, projects the surviving induced graph, and calls the lower exact layer:</p>
 <pre><code>getK(code):
     adjacency = extract_rows(code)
@@ -1475,7 +1504,7 @@ fn pack(fp, val) -> Slot {
         if lower_layer(popcount(alive), child_code) == LOSS:
             return WIN
     return LOSS</code></pre>
-<p>BMI2 <code>pext</code> is the enabling primitive in two places. <code>adj_row_pext</code> compacts each board attack row into K labelled adjacency bits, avoiding scalar edge tests. Inside getK, an induced-edge mask projects a child code while preserving edge order. K≤11 fits in <code>u64</code>; K≤16 fits in <code>u128</code>. There is no heap allocation, graph canonicalization, hash, or TT probe below the ceiling.</p>
+<p>BMI2 <code>pext</code> is the enabling primitive in two places. <code>adj_row_pext</code> compacts each board attack row into K labelled adjacency bits, avoiding scalar edge tests. Inside getK, an induced-edge mask projects a child code while preserving edge order. K≤11 fits in <code>u64</code>; K≤16 fits in <code>u128</code>; K=17's 136-bit code runs on a three-word path. There is no heap allocation, graph canonicalization, hash, or TT probe below the ceiling. At pc=17 the getK children are additionally swept most-forcing-first, so the evaluator returns WIN at the earliest losing child rather than after a fixed pass.</p>
 
 <table>
 <thead><tr><th>layer</th><th>edge-code width</th><th>child resolution</th><th>n=16 milestone</th></tr></thead>
@@ -1488,11 +1517,13 @@ fn pack(fp, val) -> Slot {
 <tr><td>W13</td><td>78-bit <code>u128</code></td><td>lower exact layers</td><td>historically lost with scalar build; wins after row-pext</td></tr>
 <tr><td>W14</td><td>91-bit <code>u128</code></td><td>lower exact layers</td><td>net-positive in n=16 sweep</td></tr>
 <tr><td>W15</td><td>105-bit <code>u128</code></td><td>lower exact layers</td><td>net-positive in n=16 sweep</td></tr>
-<tr><td>W16</td><td>120-bit <code>u128</code></td><td>lower exact layers</td><td>33.9s / 396 M; current default</td></tr>
-<tr><td>W17, reverted</td><td>adjacency-based</td><td>children resolve through W16</td><td>−19.4% nodes, +30.7% cyc/node, +5.7% wall</td></tr>
+<tr><td>W16</td><td>120-bit <code>u128</code></td><td>lower exact layers</td><td>33.9s / 396 M</td></tr>
+<tr><td>W17</td><td>136-bit three-word</td><td>lower exact layers; children degree-ordered</td><td>~24.5s; current default ceiling, the wall sweet spot</td></tr>
+<tr><td>W18–W20 (not built)</td><td>wider codes</td><td>lower exact layers</td><td>~−52% nodes but work-conserving ⇒ flat wall</td></tr>
+<tr><td><em>standalone memo-less get17</em></td><td>adjacency-based</td><td>children resolve through W16</td><td>reverted: −19.4% nodes, +30.7% cyc/node, +5.7% wall</td></tr>
 </tbody>
 </table>
-<p>Each move removes <code>1 + degree(v)</code> vertices, so most children skip layers; the evaluator does not expand a K! tree. At K16, cycles/node are 66% higher than K12 but the 57% node cut dominates. K17 finds the current memo-less crossover for a different reason: its subtree is shallow and transposition-heavy, so recomputing every occurrence loses to the TT's cheap hits.</p>
+<p>Each move removes <code>1 + degree(v)</code> vertices, so most children skip layers; the evaluator does not expand a K! tree. At K16, cycles/node are 66% higher than K12 but the 57% node cut dominates. K=17 is the ceiling sweet spot: lifting it further (W18–W20) keeps cutting nodes but conserves total work, so the wall stops moving. The two K17 results that look contradictory are different implementations: pc=17 resolved <em>inside</em> the W hierarchy as a getK leaf (children are reused exact layers, swept most-forcing-first) wins −8.6%..−13% wall, whereas the <em>standalone, memo-less</em> get17 built earlier lost, because recomputing each shallow, transposition-heavy pc=17 occurrence in isolation costs more than a TT hit.</p>
 
 <h3>F. The hot-path dispatch</h3>
 <p>The record path first orders children, then applies the dense dispatch and ETC:</p>
@@ -1506,11 +1537,12 @@ if a cached child is LOSS: return WIN
 
 for child in children:
     if child.pc == 0:       return WIN
-    else if child.pc &lt;= DK: lost = !getK(child.pc, graph_code(child))
-    else:                   lost = !wins_inc(child)  // flat TT + DFS
+    else if child.pc &lt;= DK: lost = !getK(child.pc, graph_code(child))  // DK=17
+    else if child.pc == 18: lost = !wins_inc_skip(child)  // recurse, no key/probe/put
+    else:                   lost = !wins_inc(child)        // flat TT + DFS
     if lost: return WIN
 return LOSS</code></pre>
-<p><code>DK</code> and the order/ETC mode are const generics selected once at the root/subtree handoff. The default K16 body contains only the retained layers; K17 was built as a separate validated mode and reverted after its A/B loss. Off modes remain production-byte-identical, which makes the comparisons causal.</p>
+<p><code>DK</code>, the order/ETC mode, and the skip18 flag are const generics selected once at the root/subtree handoff; the default <code>DK</code> is 17. The pc=18 branch recurses without building a canonical key, probing, or storing—sound because every pc=18 child is a getK leaf, so a re-expansion costs one bounded sweep rather than an unmemoized subtree. The earlier standalone memo-less get17 was a separate validated mode, reverted after its A/B loss; resolving pc=17 inside the W hierarchy is what ships. Off modes remain production-byte-identical, which makes the comparisons causal.</p>
 
 <h3>G. Parallelism: where it is sound and where it stopped paying</h3>
 <p>Symmetry-distinct opening roots are distributed across Rayon workers sharing the TT. Within a root, only prove-loss levels—where every child must be refuted—fan out without speculation. Prove-win levels remain ordered and sequential so the first losing child can cut off its siblings.</p>
@@ -1520,6 +1552,7 @@ return LOSS</code></pre>
 <p>After W12, 87–88% of remaining probe cost sat at pc=13..21, and sorted probe streams measured roughly 5× faster. Fused <code>M_WAVE</code> banked the safe part—ETC batch probes without changing recursive child order—and reached 1m32s. The proposed producer/consumer frontier required slot-order descent, however. Its cheap de-risk measured +94% n=16 nodes. A move-order-preserving L0 dedup cache also lost (+5.2% total cycles). The locality was real, but its required search order destroyed almost twice as many cutoffs.</p>
 <p><code>M_ORD</code> used that measurement constructively: replace static empty-board degree with the child's current remaining-popcount, ascending. It cut wall 30.2%. <code>M_ORD_W</code> applied ETC to those ranked recurse children and crossed one minute; a top-k ETC budget was later measured negative because cut triggers were broadly distributed.</p>
 <p>The next profile put graph-code build plus getK evaluation near 29% of cycles. Earlier work had rejected a scalar reshape and reasoned against pext from tiny k≤4 data. Re-testing actual K≥12 row extraction gave a direct 3.8% cycles/node win, reduced W13's incremental cost, and made K13–K16 all profitable. The lesson is not “retry every loss”; it is to separate what was measured from what was merely generalized beyond the measured regime.</p>
+<p>Lifting the ceiling once more to K=17 (pc=17 as a degree-ordered getK leaf) won −8.6%..−13% wall, and that is where the ceiling sweet spot sits. The final lever inverted the direction: rather than evaluate more, skip18 stores <em>less</em>, removing the canonical key, probe, and put for the cascade-free pc=18 band (−2.5% wall). At that point the levers ran out. Move ordering was retired (its refinement menu—reply-degree, summed forcing power, countermove/killer, global history—measured dead in live A/B); a 2nd-ply refutation lever has a −13% oracle ceiling but no cheap predictor for the rare refuting reply; a treewidth/separator DP, value-bucketing, and a family of graph reductions all measured NO-GO against exact nimbers. A cycle-accurate saturation audit then found the search bound by no single resource—the innermost cost is an L1-resident <code>pext</code> dependency chain with no known shortening—so the project's framing turned from “the next speedup” to “present the evidence of proximity to a hardware-and-algorithm limit, and let the open mathematics decide.”</p>
 
 <h3>I. Correctness and trust boundary</h3>
 <ul>
@@ -1591,11 +1624,21 @@ return LOSS</code></pre>
 <p><strong>Read the old negative literally.</strong> The earlier getK work had measured a scalar rectangular reshape and reasoned about pext from tiny k≤4 cases. It had never measured one pext-built adjacency row per vertex at K≥12, where 12 extractions replace 66 scalar edge tests.</p>
 <p><strong>Small direct win, large compound win.</strong> <code>adj_row_pext</code> cut n=16 cycles/node 3.8%. More importantly, it reduced the incremental cost of wider getK layers. W13, formerly a wall regression, became positive; W14, W15, and W16 followed. K16's 120-bit code fits the existing <code>u128</code> representation.</p>
 <p><strong>New record.</strong> K16 cut n=14 deterministic nodes 50% versus K12 and n=16 nodes 57%; the cut was identical across 12–16 GB tables, proving it was inherent subtree removal rather than extra eviction. The clean 17 GB run returned SECOND in <strong>33.9s / 396 M nodes</strong>, with the TT only 16.5% full.</p>
-<p><strong>New crossover.</strong> A table-free adjacency-based get17 was implemented and validated, but its n=16 A/B was −19.4% nodes, +30.7% cycles/node, +5.7% wall. pc=17 positions are shallow and transposition-heavy, so recomputation loses to memoized TT hits. The implementation was reverted; memoized get17-on-miss is the next node-count experiment.</p>
+<p><strong>A crossover that looked terminal, but wasn't.</strong> A table-free, <em>standalone memo-less</em> get17 was implemented and validated, but its n=16 A/B was −19.4% nodes, +30.7% cycles/node, +5.7% wall: recomputing each shallow, transposition-heavy pc=17 occurrence in isolation lost to a memoized TT hit. That standalone form was reverted. The next session reopened it from a different angle—pc=17 resolved <em>inside</em> the W hierarchy as a getK leaf, with its children reused exact layers and swept most-forcing-first—and that form won.</p>
 
-<h3>What changed over eight days</h3>
-<p>The solver did not simply collect features. BuRR proved that compression could fit the state set, then disappeared from the live search. Graph hashing established a useful equivalence, then W<sub>K</sub> bypassed it. Sorted frontiers lost, but their 94% node increase exposed the value of move order. W13 lost because graph construction was expensive; pext reduced that cost enough to make W13–W16 pay.</p>
-<p>ETC was 9.2% slower before fusion and ordering turned it into a win. Pext had been dismissed using evidence from the wrong scale before it helped reach 33.9 seconds. Coding agents shortened the build-and-measure cycle, but repeatedly treated prototypes and current bottlenecks as floors. Human persistence and first-principles estimates determined which negative results deserved another implementation. The agents did not reliably make that call on their own.</p>
+<h3>Monday, June 22 — push the ceiling to W17, then stop storing the one safe band</h3>
+<p><strong>W17 as a getK leaf.</strong> A 192-bit three-word labelled code lifts the exact ceiling to K=17, resolving pc=17 (~21% of nodes) as a getK leaf with no flat-TT probe, and its child sweep is degree-ordered so the evaluator returns at the earliest losing reply. Against the W16 default this won −8.6%..−13% wall, bringing the search to ~24.5s. K=17 is the wall sweet spot: building W18–W20 cuts another ~52% of nodes but conserves the work (cycles/node rise in proportion), so the wall flattens. The default ceiling moved K=16→17.</p>
+<p><strong>skip18.</strong> The next gain inverted the direction—store less, not compute more. For pc=18 nodes the solver now builds no canonical key, runs no probe, and writes no entry. This is sound for exactly this band: pc=18 is the only size every one of whose children is a getK leaf (pc≤17), so a re-expanded pc=18 node re-runs one bounded getK sweep and never an unmemoized subtree. The band is ~100% cold anyway (0.3% probe-hit). Skipping the work—canonicalization being the single largest branch-mispredict site—won −2.5% wall / −3.6% cycles, verdict-preserving (n=12 distinct exact at 1,060,823). It is the complete band-skip lever: {19}, contiguous ranges, and a fractional skip all measured net-negative, because any higher band's children are themselves memoized and would be re-probed cold. New clean-box record: <strong>~23.4s search / 307,608,950 nodes / SECOND</strong>.</p>
+<p><strong>Structural levers ruled out.</strong> A treewidth/separator DP looked promising—the deep tail graphs are tree-like (min-fill width ~7–10 at the mass bands, even lower at n=16 than n=14)—but a validated Node-Kayles constant-factor probe killed it: the subtree such a DP would replace is tiny (median 80–768 positions at the mass bands) against a DP cost of \(3^{w+1}\), so not one sampled graph paid. The deep tail is expensive by breadth, not depth, and a per-instance FPT method cannot reduce breadth. The rest of the structural-reduction cluster followed: value-bucketing (1-WL already separates nearly every deep graph, so the only value-pure key is isomorphism itself), leaf/simplicial/dominated-vertex reductions (dominated-vertex deletion is unsound; the one sound novel rule fires on ≤0.4% of graphs), and structural-involution pairing (the deep graphs are structurally rigid, fixed-point-free involutions fire on 0.00%) all measured NO-GO against exact nimbers.</p>
+
+<h3>Tuesday, June 23 — measure the new solver's saturation; confirm near-floor</h3>
+<p><strong>Saturation deep-dive.</strong> A per-tick per-worker time-series sampler plus <code>perf stat -I</code> refined the “work-starvation tail” downward: the box stays ~94% utilized for the whole run (mean ~23/24 cores producing nodes), and deep starvation (&lt;2 cores) is only ~0.3s in a few events at the very end. The tail is slower per node, not idle—higher-pc getK sweeps cost more. A Zen5 dispatch-stall audit found the search saturates <em>no</em> single resource: IPC ≈ 1.4 against a peak near 6, load-queue-full ~0.5–0.7%, store-queue-full ~1%. The load queue's large headroom is unused MLP the serial DFS probe cannot fill—which mechanistically explains why every prefetch lever died. The low IPC is a distributed frontend (i-cache, getK code) + backend stall, not one wall.</p>
+<p><strong>The 2nd-ply refutation lever.</strong> The one sizeable node-count prize left: front-load the refuting reply on the wall-determining root. The oracle is real—front-loading the known refutation cut that root −72% and the full run −13%/−10%—but no cheap signal ranks a cheap refutation early. Degree pushes it later, cross-root overlap is uniform, subtree-size is similar, and a symmetry-defect heuristic turned out to be an anti-signal (the most-symmetric replies are expensive non-refutations). Parallelizing the 2nd ply re-expands (+393% nodes). One untested idea remains: a residual-stabilizer orbit-dedup of the 2nd-ply move set on symmetry-axis openings—sound pre-pruning, not a memo-skip, so no cascade.</p>
+<p><strong>Four-front sweep → near-floor, one micro-win.</strong> Read-only agents swept the getK/W17 math, the refutation/symmetry math, a re-audit of banked lessons, and the Zen5 instruction set. The convergent finding: the dominant cost is an irreducible L1-resident <code>pext</code> dependency chain that no algorithm or AMD Zen5 opcode is known to shorten—the full-width AVX-512 datapath does not revive the dead getK SIMD, and <code>pext</code> has no vector equivalent. The audit also caught a banked-lesson regression: <code>get17</code> did a per-node <code>OnceLock</code>+<code>Box</code> dereference (the same pointer-chase the W8 flat arena had fixed). Resolving the W17 induced table into a contiguous <code>&amp;'static</code> field landed −0.55% (balanced ABBA-paired A/B; a naive always-A-first A/B had read −3.4% as a thermal artifact, a banked method lesson). The standing framing: n=16 is comfortably solved in well under 30 seconds end to end; what remains is micro-refactors, the one untested pre-pruning idea, and multi-session research—a canonical-component value layer, and an even-n pairing theorem that would beat silicon outright.</p>
+
+<h3>What changed over nine days</h3>
+<p>The solver did not simply collect features. BuRR proved that compression could fit the state set, then disappeared from the live search. Graph hashing established a useful equivalence, then W<sub>K</sub> bypassed it. Sorted frontiers lost, but their 94% node increase exposed the value of move order. W13 lost because graph construction was expensive; pext reduced that cost enough to make W13–W17 pay. A standalone memo-less get17 lost outright, then won when reframed as a getK leaf inside the hierarchy. And the last gain ran opposite to all the others—skip18 made the solver store <em>less</em>, removing the bookkeeping for the one band it is provably safe to forget.</p>
+<p>ETC was 9.2% slower before fusion and ordering turned it into a win. Pext had been dismissed using evidence from the wrong scale before it helped reach 33.9 seconds, then W17 and skip18 carried the search to ~23.4 seconds. The final two days then did the harder thing: they measured the solver carefully enough to conclude that the obvious gains were gone—move ordering exhausted, structural reductions ruled out against exact nimbers, the throughput core bound by an irreducible instruction-level dependency chain—and that the open frontier had moved from cycles to mathematics. Coding agents shortened the build-and-measure cycle and, under the overnight mission, autonomously drove much of it; but they repeatedly treated prototypes and current bottlenecks as floors. Human persistence and first-principles estimates determined which negative results deserved another implementation, and when a measured limit had finally earned its evidence. The agents did not reliably make that call on their own.</p>
 </section>
 
 <div class="footer">
@@ -2094,13 +2137,13 @@ var COL = {
   tag(t1-2, L2Y-18, '2', COL.accent);
   callout(40, L2Y+118, COL.accent, '② same board, two move-orders → "already solved: table hit"');
 
-  // --- under L (c1[1]): exact dense-tail leaves (④) pc≤16 ---
+  // --- under L (c1[1]): exact dense-tail leaves (④) pc≤17 ---
   var lf = [c1[1]-38, c1[1]+38];
   lf.forEach(function(lx, i){
     edge(c1[1], L1Y, lx, L2Y, COL.faint);
     add(root, 'rect', { x:lx-26, y:L2Y-12, width:52, height:26, rx:6,
       fill:'rgba(126,231,135,0.12)', stroke:COL.accent3, 'stroke-width':1.4 });
-    add(root, 'text', { x:lx, y:L2Y+5, 'text-anchor':'middle', fill:COL.accent3, 'font-size':10.5, 'font-weight':700 }, 'pc ≤ 16');
+    add(root, 'text', { x:lx, y:L2Y+5, 'text-anchor':'middle', fill:COL.accent3, 'font-size':10.5, 'font-weight':700 }, 'pc ≤ 17');
     // elided subtree below the leaf
     ghostEdge(lx, L2Y+13, lx-18, L2Y+58);
     ghostEdge(lx, L2Y+13, lx+18, L2Y+58);
@@ -2108,7 +2151,7 @@ var COL = {
     ghostNode(lx+18, L2Y+58);
   });
   tag(c1[1]+58, L2Y-18, '4', COL.accent3);
-  callout(c1[1]+18, mY+34, COL.accent3, '④ pc ≤ 16 → exact W evaluation, normal subtree never entered');
+  callout(c1[1]+18, mY+34, COL.accent3, '④ pc ≤ 17 → exact W evaluation, normal subtree never entered');
 
   // --- right column: D4 symmetry merge (③) two board images → one canonical ---
   var sxA = 560, sxB = 660, sY = L1Y+18, canX = 610, canY = L2Y+6;
@@ -2245,15 +2288,17 @@ var COL = {
     {l:'dynamic\norder', s:62, est:false},
     {l:'order + ETC', s:59.2, est:false},
     {l:'tuned\nK12', s:52, est:false},
-    {l:'pext + W16\nrecord', s:33.9, est:false, best:true},
-    {l:'30-second\ntarget', s:30, est:true}
+    {l:'pext + W16', s:33.9, est:false},
+    {l:'W17', s:24.5, est:false},
+    {l:'W17 +\nskip18', s:23.4, est:false, best:true},
+    {l:'sub-20s\ngoal', s:18, est:true}
   ];
   var W=760,H=400, m={l:66,r:24,t:24,b:78};
   var x0=m.l,x1=W-m.r,y0=H-m.b,y1=m.t;
-  var minL=log10(25), maxL=log10(4000);
+  var minL=log10(15), maxL=log10(4000);
   function Y(s){ return y0 - (log10(s)-minL)/(maxL-minL)*(y0-y1); }
   // y gridlines: 1m,3m,10m,30m,1h-ish
-  var ticks=[[60,'1 min'],[180,'3 min'],[600,'10 min'],[1800,'30 min'],[3600,'60 min'],[120,'2 min']];
+  var ticks=[[30,'30 s'],[60,'1 min'],[180,'3 min'],[600,'10 min'],[1800,'30 min'],[3600,'60 min'],[120,'2 min']];
   ticks.forEach(function(t){
     var y=Y(t[0]);
     add(g,'line',{x1:x0,y1:y,x2:x1,y2:y,class:'grid'});
