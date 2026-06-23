@@ -61,12 +61,18 @@ exact `child0` **before** canonicalization. re-exp ≈ 1.0× ⇒ that work is pu
 put-once-never-read cold bulk.
 - **Napkin ceiling ~8–14% of cycles** (`lex_min8` is the #1 branch-mispredict source). Probe-ONLY is
   just 2.4% (= DOA); the canon+put is the real prize this raises.
-- **Oracle-sidecar upper-bound experiment RUNNING** (sub-agent, box-heavy n=16): an `M_CANONPROF` cost
-  tap on the production M_ORD_W path + inject an offline-built "never-recur" oracle and measure the wall
-  saving + the re-exp tax. Result pending.
-- **Soundness risk:** 8 exact positions canonicalize to 1 TT entry ⇒ a position recurring via a
-  *different* orientation is a false-negative → re-expansion tax. Must measure the cross-orientation
-  recurrence rate (the experiment does).
+- **★ KILLED (n=16 oracle-sidecar experiment, this session).** Ceiling (canon+probe+put) measured at
+  **~6–9% of cycles** (canon ~6.1% via a node-count-neutral cost-doubling A/B; probe+put ~1–1.5%,
+  MLP-overlapped ⇒ little removable) — *below* the ~8–14% napkin. Perfect-oracle wall upper bound ~6–9%.
+  **The killer:** the skip-all A/B (skip ALL in-band recurse children = the best any per-exact-`child0`
+  decision can do) was **+30.7% nodes / +15.1% wall — a NET LOSS.** The put IS the memo; the ~0.2% of
+  pc18–25 positions that recur (M_COLD: ~0.1–0.2% hit/node), once un-put, **re-expand their whole
+  also-unmemoized subtree** → 0.2%/node cascades to +30.7% total nodes. A real exact-`child0` predictor
+  *cannot* dodge it: recurrences arrive via *different* orientations (distinct exact `child0`s), so the
+  predictor can't separate the 0.2% recurring from the 99.8% never-recur — skip-all IS its best case,
+  and it's +15% wall worse. The cascade is unbounded; a ~6–9% upside can't cover a +30% node downside.
+  Verdict stayed SECOND (verdict-preserving). **Do not build the predictor.** Lesson: skipping the
+  memo-put for "never-recur" positions is unsafe — you can't tell which won't recur, and misses cascade.
 
 ### TIER C — newly surfaced, cheap offline go/no-go, high ceiling
 
@@ -172,7 +178,7 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 ## Progress
 - [ ] Tier-A: ETC probes-per-cut tap → pc-gate → n=16 A/B (keep only if wall drops, node-identical).
 - [ ] Tier-B1: n=16 sampled-HLL C confirm → (if GO) design idle-core eviction-recovery pre-fill.
-- [ ] Tier-B2: canon-skip oracle-sidecar upper-bound (RUNNING) → verdict.
+- [x] Tier-B2: canon-skip oracle-sidecar upper-bound → **KILL** (skip-all +30.7% nodes/+15.1% wall; the unbounded re-exp cascade dwarfs the ~6–9% ceiling; exact-child0 can't separate the 0.2% recurring).
 - [ ] Tier-C1: ★ getK distinct-`comp_canon` @ K=9–12 offline count → (if GO) build the value layer.
 - [x] Tier-C2 PREMISE TEST: treewidth min-fill on n=14 dump → **GO** (median 11, mass bands 8–10, tree-like). → confirm at n=16; then prototype the separator DP. (`scratchpad/treewidth.py`)
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
