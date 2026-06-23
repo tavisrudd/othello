@@ -11,6 +11,22 @@
 - Commits (main): `f124bc5` (canonical A/B harness + CLAUDE.md lessons), `3f10919` (the explicit-stack
   code), `8fb23dd` (micro-opt → parity).
 
+## ⇒ --21 (2026-06-22) — move-ordering RETIRED (live A/B); spun off a forward lever hunt past the n=16 floor.
+
+> The `--20` ranklab thread closed with a **live n=16 A/B retiring move-ordering** (sumgc⇄ tie-break:
+> nodes +0.2% / wall +115% — the ordering_loss is getK-leaf examinations, not nodes; recurse-weighted
+> capture ≈ noise). With the serial loop exhausted, a multi-agent exploration this session opened a
+> **forward lever backlog to push past the ~24–27s floor** using spare CPU/memory/bandwidth +
+> structural reshapes. Full menu + cheap go/no-go tests:
+> **➜ [2026-06-22-push-past-floor-levers.md](2026-06-22-push-past-floor-levers.md)**.
+> Headlines: Tier-A **ETC pc-gate** (signal-free, ~−1.5–2%, node-identical); Tier-B **cross-root
+> pre-warm** (measured GO, `C≈0.39` n=14; n=16 HLL queued) + **canon-skip** (pre-canon exact-key skip,
+> ceiling ~8–14%, oracle-sidecar experiment running); Tier-C **★ canonical getK W9–12 value layer**
+> (de-redundify the 44% getK cost — the W8 lever at K>8), **treewidth/separator DP** (exponent shot),
+> **proof-DAG AND-node scheduling**. DEAD: probe-skip, signal-in/learned-ETC, parallel-solve-ahead,
+> component decomposition (single component). Code committed `--20`: QUEENS_RANK r2/E/ordering_loss +
+> ranklab recurse-weighted (`2ff41c8`…`ba6b717`).
+
 ## ⇒ --20 (2026-06-22) — move-ordering is the wall: QUEENS_RANK gets E + ordering_loss; n=16 says ~81% of avoidable loss is in pc 18–28; built `ranklab` (offline move-ordering A/B).
 
 > **Mode: collaborative. Worked on main. Catalyst: a ChatGPT read of the QUEENS_RANK/QUEENS_COLD
