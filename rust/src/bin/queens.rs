@@ -2089,14 +2089,24 @@ fn roots_report(q: &Queens, hll_p: u32) {
     // Cap the per-root TT at 2^26 (512 MB) -- ample for one root in isolation, and the
     // exact set dedups regardless of TT size, so a smaller table only trades a little
     // eviction-recompute for a far smaller resident footprint per concurrent search.
-    let bits = tt_bits(q.n).min(26);
+    // `QUEENS_ROOTS_TT_BITS` lowers it further when the box is memory-tight at n=14/16.
+    let bits = std::env::var("QUEENS_ROOTS_TT_BITS")
+        .ok()
+        .and_then(|s| s.parse::<u32>().ok())
+        .map(|b| b.min(30))
+        .unwrap_or_else(|| tt_bits(q.n).min(26));
     let nroots = firsts.len();
     // Bound concurrency: each in-flight cold search holds a full exact map (32 B/key),
     // so 28-at-once OOMs the box. A small pool keeps peak RSS to ~`THREADS` maps.
-    const THREADS: usize = 6;
+    // `QUEENS_ROOTS_THREADS` lowers it when the box is memory-tight (n=14/16 exact maps).
+    let threads: usize = std::env::var("QUEENS_ROOTS_THREADS")
+        .ok()
+        .and_then(|s| s.parse::<usize>().ok())
+        .filter(|&t| t > 0)
+        .unwrap_or(6);
     println!(
         "Per-root working set on {n}×{n}: {nroots} symmetry-distinct first moves, \
-         cold exact search each (TT 2^{bits}, {THREADS} concurrent)…",
+         cold exact search each (TT 2^{bits}, {threads} concurrent)…",
         n = q.n,
     );
     let t = Instant::now();
@@ -2110,9 +2120,21 @@ fn roots_report(q: &Queens, hll_p: u32) {
         h.finish()
     };
     let pool = rayon::ThreadPoolBuilder::new()
-        .num_threads(THREADS)
+        .num_threads(threads)
         .build()
         .expect("rayon pool");
+    // Pack each key's available-popcount band (`k.popcount()`, 0..=256 ⇒ 9 bits) into the
+    // top of the 64-bit fold so the per-root vec stays 8 B/key (memory-tight at n=14/16).
+    // pc is a pure function of the key, so the same key always packs the same value ⇒ the
+    // multiplicity merge in `members` is unaffected (no spurious split/merge). For the
+    // default D4 key `pos_key(blocked) = canon(board & !blocked)` is a board-symmetry image
+    // of `available`, so its popcount == the live solver's `node_pc` (= available squares
+    // remaining) — the exact band the COLD report uses for the deep tail.
+    let pack = |k: &Bits| -> u64 {
+        let pc = k.popcount() as u64; // ≤ 256, fits 9 bits
+        (pc << 55) | (fold(k) >> 9)
+    };
+    let pc_of_packed = |kp: u64| -> u8 { (kp >> 55) as u8 };
     let sets: Vec<(u32, Vec<u64>)> = pool.install(|| {
         firsts
             .par_iter()
@@ -2120,7 +2142,7 @@ fn roots_report(q: &Queens, hll_p: u32) {
                 let solver = Tt::new_counting(bits, true, hll_p, true);
                 let _ = solver.wins(q, q.place(Bits::empty(), sq));
                 let ws = solver.working_set().expect("exact set enabled");
-                (sq, ws.iter().map(|(k, _)| fold(k)).collect())
+                (sq, ws.iter().map(|(k, _)| pack(k)).collect())
             })
             .collect()
     });
@@ -2209,6 +2231,87 @@ fn roots_report(q: &Queens, hll_p: u32) {
         commas(hist[nroots]),
         pct(hist[nroots]),
     );
+
+    // ── (E) DIRECTIONAL cross-root reuse for the DOMINANT root's deep tail ─────────────
+    // The pre-warm lever's gate. The n=16 wall is ~96% the single dominant root's serial
+    // deep tail; its pc≥18 entry probes are ~100% cold. A spare-CPU pre-fill can only
+    // recover positions that *another* root already solved. So measure, restricted to the
+    // dominant root's deep tail:
+    //   C = |{ dom keys with pc≥18 that some OTHER root also touched }| / |{ dom keys pc≥18 }|
+    // (the symmetric union (B) above does NOT answer this — it isn't directional and isn't
+    // tail-restricted.) GO if C ≳ 0.10 (a recoverable cross-root pool exists); KILL if
+    // C ≲ 0.03 (the deep tail is fresh root-private serial work). Per-pc-band breakdown too.
+    // The dominant root = the largest cold working set (= the one that runs the solo tail).
+    let dom = (0..nroots).max_by_key(|&r| sets[r].1.len()).unwrap_or(0);
+    let dom_bit = 1u64 << dom;
+    let dom_sq = sets[dom].0;
+    // Per-pc tallies over the dominant root's own keys: total in band, and of those how
+    // many are ALSO in some other root (membership bitmask has a bit besides `dom_bit`).
+    let maxpc = (q.n * q.n + 1) as usize;
+    let mut dom_total = vec![0u64; maxpc];
+    let mut dom_shared = vec![0u64; maxpc];
+    for &k in &sets[dom].1 {
+        let b = pc_of_packed(k) as usize;
+        dom_total[b] += 1;
+        if members[&k] & !dom_bit != 0 {
+            dom_shared[b] += 1;
+        }
+    }
+    // C at a pc floor: shared∩tail / total tail, for floors {18, 13}.
+    let c_at = |lo: usize| -> (u64, u64) {
+        let mut t = 0u64;
+        let mut s = 0u64;
+        for b in lo..maxpc {
+            t += dom_total[b];
+            s += dom_shared[b];
+        }
+        (s, t)
+    };
+    println!("\n(E) DIRECTIONAL cross-root reuse — dominant root's deep tail (the pre-warm gate):");
+    println!(
+        "    dominant root = sq {} (col {}, row {}), working set {} ({:.3} M)",
+        dom_sq,
+        dom_sq % q.n,
+        dom_sq / q.n,
+        commas(sets[dom].1.len() as u64),
+        sets[dom].1.len() as f64 / 1e6,
+    );
+    println!(
+        "    pc = available squares remaining (= live node_pc); high pc = deep tail.\n    per band:  pc  |     dom keys |  also-in-other |   share%"
+    );
+    for b in (0..maxpc).rev() {
+        if dom_total[b] == 0 {
+            continue;
+        }
+        let frac = dom_shared[b] as f64 / dom_total[b] as f64 * 100.0;
+        println!(
+            "             {:>3} | {:>12} | {:>14} | {:>7.2}%",
+            b,
+            commas(dom_total[b]),
+            commas(dom_shared[b]),
+            frac,
+        );
+    }
+    for &lo in &[18usize, 13] {
+        let (s, t) = c_at(lo);
+        let c = if t > 0 { s as f64 / t as f64 } else { 0.0 };
+        let verdict = if c >= 0.10 {
+            "GO  (≥0.10: recoverable cross-root pool)"
+        } else if c <= 0.03 {
+            "KILL (≤0.03: fresh root-private serial work)"
+        } else {
+            "AMBIGUOUS (0.03–0.10: confirm at n=16)"
+        };
+        println!(
+            "    C(pc≥{:>2}) = {:>12} / {:>12} = {:.4}   {}",
+            lo,
+            commas(s),
+            commas(t),
+            c,
+            verdict,
+        );
+    }
+
     // ── (C) per-root proxies, shared-volume, and proxy→sharing Spearman ──────────────
     // Cold, read-only instrumentation: does any cheap per-root proxy (centrality of the
     // first move, residual available popcount, max-component size / fragmentation, or
