@@ -683,6 +683,11 @@ pub(crate) struct DenseW8 {
     /// (expensive) sibling subtrees are evaluated first. Resolved once at build; a predictable
     /// run-constant branch in the hot getK. Off ⇒ byte-identical label-order sweep.
     ord_getk: bool,
+    /// Resolved-once `&'static` wide induced-mask table for the K=17 ceiling — mirrors [`arena`]:
+    /// every pc==17 getK node read it via a per-call `wide_induced(17)` — an `OnceLock`-load, a `match`,
+    /// and a `Box` deref (the `Vec<Box<…>>` pointer-chase the W8 flat-arena removed for −2.0%). Held here
+    /// so `get17` is a direct field read. (get18..20, behind `QUEENS_WK`, still call `wide_induced`.)
+    w17_induced: &'static [Code192],
 }
 
 impl DenseW8 {
@@ -718,6 +723,10 @@ impl DenseW8 {
             // iso-flat never call get12+ so they are byte-identical regardless.
             ord_getk: !matches!(std::env::var("QUEENS_GETK_ORD").as_deref(), Ok("0"))
                 && !matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0")),
+            // Resolve the K=17 wide induced table once (idempotent get_or_init) so `get17` reads a
+            // field, not a per-node `wide_induced(17)` OnceLock+Box deref. iso-window builds a 3 MB
+            // table it never uses — negligible (non-default control; iso-flat has no DenseW8 at all).
+            w17_induced: wide_induced(17),
         }
     }
 
@@ -1127,7 +1136,7 @@ impl DenseW8 {
     /// `u128` K=16 ceiling. Resolves pc==17 nodes directly as a getK leaf.
     #[inline]
     pub(crate) fn get17(&self, code: &Code192) -> bool {
-        self.get_wide::<17>(code, &W17_INCIDENT, wide_induced(17))
+        self.get_wide::<17>(code, &W17_INCIDENT, self.w17_induced)
     }
 
     /// Exact value of one labelled 18-vertex graph (153-bit, 3 words).

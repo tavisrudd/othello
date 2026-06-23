@@ -15,6 +15,18 @@ use std::sync::Mutex;
 /// fix, `store.rs`). The shared counters are exact again after a [`QueensTt::drain_all`].
 const FLUSH_NODES: u64 = 1 << 18;
 
+/// Resolve the node-flush cadence once at TT construction (`QUEENS_FLUSH_NODES`, default
+/// [`FLUSH_NODES`]). Lowering it makes the shared `nodes` / `per_worker` counters update more often —
+/// finer time-series resolution during the slow serial collapses (`QUEENS_TS_FILE`) — at the cost of
+/// more cross-CCX atomic traffic, so it is for measurement runs only.
+fn flush_nodes_env() -> u64 {
+    std::env::var("QUEENS_FLUSH_NODES")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .filter(|&n| n > 0)
+        .unwrap_or(FLUSH_NODES)
+}
+
 /// Per-worker, **non-atomic** accumulators for the hot-loop node counter and the distinct
 /// estimator. Each rayon worker owns one (thread-local), incremented with plain integer ops
 /// per node; flushed to the shared atomic + HLL once every [`FLUSH_NODES`] nodes and drained
@@ -59,6 +71,9 @@ pub struct QueensTt {
     /// at the ~1/[`FLUSH_NODES`] flush via `rayon::current_thread_index()`, so it costs nothing
     /// on the per-node path. 256 slots covers any core count; the watcher reads deltas.
     per_worker: Box<[AtomicU64]>,
+    /// Node-flush cadence (`QUEENS_FLUSH_NODES`, default [`FLUSH_NODES`]); resolved once. Lower ⇒ finer
+    /// time-series resolution during the serial collapses, more atomic traffic (measurement only).
+    flush_nodes: u64,
     /// Optional distinct-position instrumentation (Chunk 1). `None` for an
     /// ordinary solve, so the production path pays only a predictable null check.
     counter: Option<Counter>,
@@ -478,6 +493,7 @@ impl QueensTt {
             len: size as u64,
             nodes: AtomicU64::new(0),
             per_worker: (0..256).map(|_| AtomicU64::new(0)).collect(),
+            flush_nodes: flush_nodes_env(),
             counter: None,
             segment,
             band_base,
@@ -897,7 +913,7 @@ impl QueensTt {
         ACC.with(|cell| {
             let mut a = cell.borrow_mut();
             a.nodes += 1;
-            if a.nodes >= FLUSH_NODES {
+            if a.nodes >= self.flush_nodes {
                 self.flush_acc(&mut a);
             }
         });
@@ -910,7 +926,7 @@ impl QueensTt {
     #[inline]
     pub(crate) fn bump_local(&self, nodes: &mut u64) {
         *nodes += 1;
-        if *nodes >= FLUSH_NODES {
+        if *nodes >= self.flush_nodes {
             self.flush_local_nodes(nodes);
         }
     }
@@ -1266,6 +1282,7 @@ impl QueensTt {
             len: header.len,
             nodes: AtomicU64::new(header.nodes),
             per_worker: (0..256).map(|_| AtomicU64::new(0)).collect(),
+            flush_nodes: flush_nodes_env(),
             counter: None,
             // Resume does not support segmentation (the image is a flat-keyed snapshot).
             segment: false,

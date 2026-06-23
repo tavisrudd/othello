@@ -52,6 +52,28 @@ thread_local! {
 }
 
 thread_local! {
+    /// `QUEENS_SCHED`: set true on the elder-brother thread iff it is running the slow solo root
+    /// (sq 0), so its depth-1 `kids.iter().any` loop records the 2nd-ply move schedule. Every other
+    /// root (set false in its own `resolve`) and every deeper node leave it false. Per-worker; sq-0's
+    /// depth-1 loop is sequential on the one calling thread, so the flag stays correct.
+    static IN_SCHED_ROOT: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+
+/// One sq-0 2nd-ply move's in-situ schedule record (`QUEENS_SCHED`). `t_*_us` are µs since the
+/// search t0; `nodes` is the cumulative-node delta over the move's subtree (flush-coarse, exact to
+/// ~FLUSH_NODES); `child_pc` is the available count after the move (= its number of 3rd-ply child
+/// moves); `won` marks the refutation (the `.any()` cut). Cold — one per explored 2nd-ply move.
+#[derive(Clone, Copy)]
+struct SchedRec {
+    sq: u32,
+    t_enter_us: u64,
+    t_exit_us: u64,
+    nodes: u64,
+    child_pc: u32,
+    won: bool,
+}
+
+thread_local! {
     static ORACLE_ACC: RefCell<OracleAcc> = const { RefCell::new(OracleAcc {
         attempts: 0,
         hits: 0,
@@ -1084,6 +1106,22 @@ pub struct IsoFlat {
     oracle_hits: AtomicU64,
     oracle_comp_hits: AtomicU64,
     oracle_comp_misses: AtomicU64,
+    /// `QUEENS_SCHED=1`: capture the slow solo root (sq 0)'s 2nd-ply move *schedule* — per move, its
+    /// in-situ [enter,exit] wall (µs), cumulative-node delta, child-move count, and whether it refuted
+    /// (the `.any()` cut). sq-0's depth-1 loop is sequential on the elder-brother thread, so per-move
+    /// attribution is exact (no sibling overlap). Cold; off ⇒ `IN_SCHED_ROOT` stays false ⇒ dead branch.
+    sched: bool,
+    sched_t0: std::sync::Mutex<Instant>,
+    sched_recs: std::sync::Mutex<Vec<SchedRec>>,
+    /// `QUEENS_PAR_ORD=1`: extend dynamic child-degree ordering to the parallel **upper tree**
+    /// (`par_wins_inc`), which today uses the *static* `order8`. Orders each split node's children by
+    /// current child-degree ascending (most-forcing first) so an odd (prove-win) node's `.any()` cutoff
+    /// finds a refutation sooner — the 2nd-ply lever. Verdict-correct (reorder ⊥ value); changes node
+    /// count at odd nodes by design (not part of the `--distinct` gate). Resolved once.
+    par_ord: bool,
+    /// `QUEENS_SPLIT=1`: speculatively parallelize the depth-1 (2nd-ply) `.any()` — normally sequential
+    /// (odd/prove-win). The "split that root" lever; viable because 2nd-ply moves are near-independent.
+    split: bool,
 }
 
 impl IsoFlat {
@@ -1337,6 +1375,11 @@ impl IsoFlat {
             segment,
             assoc,
             sidecar,
+            sched: std::env::var("QUEENS_SCHED").as_deref() == Ok("1"),
+            sched_t0: std::sync::Mutex::new(Instant::now()),
+            sched_recs: std::sync::Mutex::new(Vec::new()),
+            par_ord: std::env::var("QUEENS_PAR_ORD").as_deref() == Ok("1"),
+            split: std::env::var("QUEENS_SPLIT").as_deref() == Ok("1"),
             // Gather-time recurse-child prefetch (cheap-first PREFETCH lever). Resolved once here;
             // gated per node at the gather (off ⇒ byte-identical to the current prefetch behaviour).
             pf_deep: std::env::var("QUEENS_PFDEEP").as_deref() == Ok("1"),
@@ -4634,6 +4677,12 @@ impl IsoFlat {
             moves[nc] = sq;
             nc += 1;
         }
+        // QUEENS_PAR_ORD: order the upper-tree children by current child-degree ascending (the deep
+        // dynamic key, here extended to par_wins_inc). Few split nodes (avail > min_avail, near-root),
+        // so the cached-key sort is cheap; verdict-correct (only cutoff rank / par_iter order changes).
+        if self.par_ord {
+            moves[..nc].sort_by_cached_key(|&sq| avail.and_not(att08(att, sq)).popcount());
+        }
         let kids = &moves[..nc];
         let recurse = |&sq: &u8| {
             let a = att_for8(att, sq);
@@ -4651,6 +4700,17 @@ impl IsoFlat {
         };
         let won = if depth.is_multiple_of(2) {
             kids.par_iter().any(recurse)
+        } else if depth == 1 && self.sched && IN_SCHED_ROOT.with(|f| f.get()) {
+            // QUEENS_SCHED: the slow solo root (sq 0)'s 2nd-ply moves run sequentially here —
+            // capture each move's [enter,exit] wall, node delta, child count, and refutation flag.
+            self.sched_loop::<ORACLE, COUNT, WINDOW, DK>(q, att, orient, kids, depth, min_avail)
+        } else if self.split && depth == 1 {
+            // QUEENS_SPLIT=1: speculatively parallelize the 2nd-ply moves (odd/prove-win, normally
+            // sequential `.any()`). Viable here because they're nearly independent (low overlap), so
+            // the redundancy that closed deep DFS-parallelism is small; rayon cancels the losers once a
+            // refutation wins. Trades speculation on non-refuting moves for finding the refutation in
+            // wall-parallel instead of after exploring them all in series. Depth-1 only (the root split).
+            kids.par_iter().any(recurse)
         } else {
             kids.iter().any(recurse)
         };
@@ -4662,6 +4722,104 @@ impl IsoFlat {
             self.par_tt_put::<COUNT>(key, pc, won as u8);
         }
         won
+    }
+
+    /// `QUEENS_SCHED` capture of the slow solo root (sq 0)'s 2nd-ply schedule. Mirrors the depth-1
+    /// `recurse` closure body exactly (so it is verdict-identical to `kids.iter().any(recurse)`), but
+    /// brackets each move with a [enter,exit] wall stamp + cumulative-node snapshot + child count, and
+    /// records whether it refuted (the short-circuit). Only sq-0's depth-1 node reaches this (gated by
+    /// `depth == 1 && IN_SCHED_ROOT`), and that loop is sequential on one thread, so attribution is exact.
+    #[cold]
+    fn sched_loop<const ORACLE: bool, const COUNT: bool, const WINDOW: bool, const DK: u32>(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        orient: &[Bits; 8],
+        kids: &[u8],
+        depth: u32,
+        min_avail: u32,
+    ) -> bool {
+        let avail = orient[0];
+        let base = *self.sched_t0.lock().unwrap();
+        // `QUEENS_SCHED_FIRST=<sq,..>`: front-load these 2nd-ply squares (stable for the rest) — the
+        // oracle/heuristic reorder experiment for sq-0's depth-1 `.any()` cutoff. Tries them first so a
+        // refuting move can cut the big non-refuting subtrees. Read once here (this loop runs once).
+        let first: Vec<u8> = std::env::var("QUEENS_SCHED_FIRST")
+            .ok()
+            .map(|v| v.split(',').filter_map(|t| t.trim().parse().ok()).collect())
+            .unwrap_or_default();
+        let mut ordered: Vec<u8> = Vec::with_capacity(kids.len());
+        for &f in &first {
+            if kids.contains(&f) {
+                ordered.push(f);
+            }
+        }
+        for &k in kids {
+            if !first.contains(&k) {
+                ordered.push(k);
+            }
+        }
+        for &sq in &ordered {
+            let n0 = self.tt.nodes();
+            let t_enter = base.elapsed().as_micros() as u64;
+            let a = att_for8(att, sq);
+            let child0 = avail.and_not(a[0]);
+            let child = child_orient(orient, a, child0);
+            let ckey = self.node_key(q, &child);
+            let won_kid = !self.par_wins_inc::<ORACLE, COUNT, WINDOW, DK>(
+                q,
+                att,
+                &child,
+                ckey,
+                depth + 1,
+                min_avail,
+            );
+            let t_exit = base.elapsed().as_micros() as u64;
+            let n1 = self.tt.nodes();
+            self.sched_recs.lock().unwrap().push(SchedRec {
+                sq: sq as u32,
+                t_enter_us: t_enter,
+                t_exit_us: t_exit,
+                nodes: n1.saturating_sub(n0),
+                child_pc: child0.popcount(),
+                won: won_kid,
+            });
+            if won_kid {
+                return true; // `.any()` short-circuit on the refutation
+            }
+        }
+        false
+    }
+
+    /// Write the captured sq-0 2nd-ply schedule as JSONL (one record per explored move, in execution
+    /// order) to `QUEENS_SCHED_FILE` (default `.perf-analysis/sched.jsonl`). Cold; post-solve.
+    fn dump_sched(&self) {
+        use std::io::Write;
+        let path = std::env::var("QUEENS_SCHED_FILE")
+            .unwrap_or_else(|_| ".perf-analysis/sched.jsonl".to_string());
+        let recs = self.sched_recs.lock().unwrap();
+        let mut out = String::new();
+        for (i, r) in recs.iter().enumerate() {
+            out.push_str(&format!(
+                "{{\"order\":{},\"sq\":{},\"t_enter_us\":{},\"t_exit_us\":{},\"dur_us\":{},\"nodes\":{},\"child_pc\":{},\"won\":{}}}\n",
+                i,
+                r.sq,
+                r.t_enter_us,
+                r.t_exit_us,
+                r.t_exit_us.saturating_sub(r.t_enter_us),
+                r.nodes,
+                r.child_pc,
+                r.won,
+            ));
+        }
+        match std::fs::File::create(&path).and_then(|mut f| f.write_all(out.as_bytes())) {
+            Ok(()) => eprintln!(
+                "\x1b[90m(sched: {} sq-0 2nd-ply records → {})\x1b[0m",
+                recs.len(),
+                path
+            ),
+            Err(e) => eprintln!("\x1b[31m(sched dump failed: {e})\x1b[0m"),
+        }
     }
 
     /// Resolve one root move: pick the `const DK` / oracle / counting monomorphisation **once**
@@ -4940,6 +5098,12 @@ impl Solver for IsoFlat {
         let min_avail = min_avail_for(self.par_min_avail, q.n);
         self.eff_min_avail.store(min_avail, Ordering::Relaxed);
         let mut moves = q.distinct_first_moves();
+        // QUEENS_ONLY_ROOT=<sq>: MEASUREMENT — solve only this one root (skip the others) so per-move
+        // counters are clean of the ~2 concurrent roots. The returned bool is that root's value, NOT the
+        // board verdict (this run is for characterization only). Read once.
+        let only_root: Option<u32> = std::env::var("QUEENS_ONLY_ROOT")
+            .ok()
+            .and_then(|s| s.trim().parse().ok());
         self.root_total.store(moves.len() as u64, Ordering::Relaxed);
         self.root_done.store(0, Ordering::Relaxed);
         let root = orient_of(q, q.board);
@@ -5012,6 +5176,11 @@ impl Solver for IsoFlat {
             (Vec::new(), Vec::new())
         };
         let t0 = Instant::now();
+        if self.sched {
+            // Rebase the schedule clock to the search start and clear any prior run's records.
+            *self.sched_t0.lock().unwrap() = Instant::now();
+            self.sched_recs.lock().unwrap().clear();
+        }
         // Work-stealing watchdog: arm the publish gate only after `steal_delay` seconds, so the early
         // fully-parallel all-roots phase runs untouched and stealing fires only on the dominant-root
         // tail. Reset first (the solver may be reused). Spawned only when stealing is on (else the
@@ -5100,6 +5269,10 @@ impl Solver for IsoFlat {
                             || self.skip18_squares.contains(&(moves[idx] as u8))),
                 )
             });
+            // QUEENS_SCHED: arm the 2nd-ply schedule capture for the slow solo root (sq 0), or for
+            // whichever single root QUEENS_ONLY_ROOT isolates (so its depth-1 schedule is captured clean).
+            IN_SCHED_ROOT
+                .with(|f| f.set(self.sched && (moves[idx] == 0 || only_root == Some(moves[idx]))));
             // The dense ceiling `dense_k` (and the WINDOW flag) is read **once here**, per root, to
             // select the `const DK` monomorphisation — never in the deep `wins_inc` loop or a probe.
             let wins = self.par_root(q, att, co, ckey, min_avail);
@@ -5109,15 +5282,25 @@ impl Solver for IsoFlat {
             }
             wins
         };
-        let (first, rest) = pending.split_first().unwrap();
-        // Root 0 is the sequential elder-brother (warms the TT); roots 1.. fan via rayon.
-        let won = resolve(0, &first.0, first.1)
-            || rest
-                .par_iter()
-                .enumerate()
-                .any(|(i, (co, ckey))| resolve(i + 1, co, *ckey));
+        let won = if let Some(only) = only_root {
+            // MEASUREMENT (QUEENS_ONLY_ROOT): run just this root so per-move counters are clean of the
+            // other concurrent roots. The result is this root's value, not the board verdict.
+            let idx = moves.iter().position(|&m| m == only).unwrap_or(0);
+            resolve(idx, &pending[idx].0, pending[idx].1)
+        } else {
+            let (first, rest) = pending.split_first().unwrap();
+            // Root 0 is the sequential elder-brother (warms the TT); roots 1.. fan via rayon.
+            resolve(0, &first.0, first.1)
+                || rest
+                    .par_iter()
+                    .enumerate()
+                    .any(|(i, (co, ckey))| resolve(i + 1, co, *ckey))
+        };
         if timing {
             print_root_timing(q.n, &moves, &starts, &ends);
+        }
+        if self.sched {
+            self.dump_sched();
         }
         self.tt.drain_all(); // fold every worker's tail tally into the shared totals
         self.drain_oracle_all();

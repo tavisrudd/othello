@@ -211,8 +211,99 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [x] Tier-C2 PREMISE TEST: treewidth min-fill → **GO**, confirmed n=14 (med 11) AND n=16 (med 10, mass bands 7–9, tree-like). (`scratchpad/treewidth.py`)
 - [x] Tier-C2 CONSTANT-FACTOR TEST → **★★ KILLED.** Subtree the DP replaces (alpha-beta + exact-availset memo, median 80–768 nodes at pc18–28) ≪ DP cost `3^(w+1)` (6.5K–43M); 0/358 graphs have subtree ≥ DP cost (max ratio 0.1). Premise true, not sufficient — tail is BREADTH not DEPTH; per-instance FPT can't pay. Tool: `rust/scripts/treewidth_dp_probe.py`. **Do not build the separator DP.**
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
+- [x] Perf telemetry + saturation deep-dive (--2 below) → solo-tail starvation is BRIEF; search saturates NOTHING (spare MLP) ⇒ near-floor confirmed from a fresh angle.
+- [x] ★ 2nd-ply refutation lever explored → ORACLE ceiling sq-0 −72% / full-run −13%, but the predictor is CLOSED (degree/overlap/size/symmetry-defect all fail; split + par-ord DEAD). One untested idea left: residual-stabilizer 2nd-ply orbit-dedup on axis-roots.
+- [x] 4-agent math/instruction/discipline sweep (--2 below) → near-floor; LANDED `w17_induced`→field −0.55% (clean balanced A/B).
 
 ## Handoff Notes
+
+### Session 2026-06-23--2 — perf telemetry + saturation deep-dive, 2nd-ply refutation lever (oracle −13% but predictor CLOSED), 4-agent math/instruction/discipline sweep, ★ LANDED w17_induced→field −0.55%
+**Session**: 2026-06-23--2 (`f41034c0-a440-47cf-a6d1-de7f231086ee`). Mode: collaborative. Catalyst: user
+asked for "one more round of perf analysis" on the solo deep root, then a cascade of lever hunts.
+
+**★ PERF TELEMETRY + SATURATION DEEP-DIVE (n=16 iso-dense, 12 GB TT; artifacts in `rust/.perf-analysis/`
+— `REPORT.html` is a self-contained roll-up, scripts in `scratchpad/`).** Built a per-tick time-series
+sampler (`QUEENS_TS_FILE`/`QUEENS_TS_MS` + tunable `QUEENS_FLUSH_NODES`) + mined `perf stat -I 2ms` and a
+timestamped `perf record`. Findings — they REFINE the "work-starvation tail" framing **downward**:
+- **The box stays ~94% utilized the whole run** (mean 23.1/24 cores producing nodes; tail 22.6). Deep
+  starvation (<2 cores) is **brief: ~0.3 s in 4 events at the very end**. An earlier perf-sample-DENSITY
+  read (which I initially reported) **over-counted idle** — its p25 threshold caught moderate dips and
+  counted rayon `Stealer::steal` spin-wait as "activity collapse." The cycle-accurate per-worker
+  node-production is the trustworthy view. **Method lesson banked: perf-record sample density ≠ useful
+  work (spinning threads sample); use per-worker node-rate for utilization.**
+- **The tail is slower per-node, not idle** (mean working-pc 11.7→12.9; higher-pc getK sweeps cost more
+  ⇒ −23% node-rate with cores busy). Inherent W17 getK cost. FFT of the rate ≈ 0.55 Hz / ~2 s cycle.
+- **★ SATURATION AUDIT (Zen5 dispatch-stall counters): the search saturates NO resource.** IPC 1.4 (peak
+  ~6 ⇒ 4× headroom, not compute-bound); **load-queue-full ~0.5–0.7%, store-queue-full ~1%** (NOT memory-
+  queue/MLP-bound — the load queue has huge headroom = unused MLP the **serial DFS probe can't fill**,
+  which *mechanistically explains why prefetch died*). Low IPC = distributed stall: frontend(I-cache,
+  getK code) ~28% + backend ~25%. The ONLY true saturation is **TT prefault pinning the store queue
+  ~22% for ~0.5 s** (one-time prep). Tail collapse bursts push backend to ~47% (serial spine on cold
+  memory + getK ALU). DRAM bandwidth ~18 GB/s « peak. (Caveats: ~80–90% counter multiplexing; W=8 slot
+  assumption.) `paranoid=2` blocks `-a` so no DF/CAS counters; used per-process `de_*` stall events.
+
+**★ 2nd-ply REFUTATION lever (the one sizeable node-count prize — explored, ceiling found, predictor
+CLOSED).** Built `QUEENS_SCHED` (captures the slow root sq 0's depth-1 `.any()` 2nd-ply schedule),
+`QUEENS_ONLY_ROOT` (isolate one root for clean per-move counters), `QUEENS_SCHED_FIRST` (front-load
+chosen 2nd-ply squares). Findings:
+- sq 0 (= board square 0, a par_iter sibling, NOT the elder brother) is a wall-determining root. Its
+  ~210 2nd-ply moves are tried in **static `order8`** (the dynamic degree-order never reaches the
+  `par_wins_inc` upper tree); the **refutation lands at rank 16** behind ~16 non-refuting moves.
+- **ORACLE (front-load the known refutation sq 90): sq-0 isolated 73.6 M→20.3 M nodes (−72%), full-run
+  313.7 M→273.5 M / 25.2→22.6 s (−13% / −10%).** The refutation is ~independent (cold 20.3 M ≈ warm
+  16.2 M); the cut non-refuting moves are mostly-private work (clean cut, only ~25% reappears cross-root).
+  (Earlier "high-overlap cold balloon" was a measurement artifact: per-move node deltas in the FULL run
+  are contaminated by the ~2 concurrent roots — only isolated runs give clean per-move counts.)
+- **BUT the predictor is CLOSED.** Refutations are rare; no cheap signal ranks one early: degree
+  (pushes it *later*, `QUEENS_PAR_ORD` full A/B = +44% nodes/+53% wall DEAD), cross-root overlap
+  (~uniform), subtree-size (similar), and **symmetry-defect** (Agent-2's best idea — front-load the move
+  that most restores rot180 symmetry, `popcount(avail^rot180)`): **TESTED, it's an ANTI-signal** — the
+  most-symmetric moves are expensive non-refutations (+68% nodes), the refutation sits mid-defect
+  (rank 118/210); the mirror argument breaks for the corner (its rot180 image is self-attacked). Multiple
+  refutations exist (sq 90, 127) but no cheap signal finds a *cheap* one early.
+- **`QUEENS_SPLIT` (parallelize the 2nd-ply `.any()`) DEAD: +393% nodes/+254% wall** — "independent
+  when warm-sequential" ≠ parallel-safe; concurrent cold runs race + re-expand. Confirms DFS-parallelism
+  stays closed at the 2nd ply too.
+- **One untested node-count idea remains: residual-stabilizer orbit-dedup of the 2nd-ply move set on
+  axis-roots** (Agent 2 #2 — when the 1st move is on a symmetry axis the residual board has an order-2
+  stabilizer ⇒ 2nd-ply moves come in symmetric pairs leading to identical subgames; orbit-reduce BEFORE
+  recursing = sound *pre*-pruning, no re-expansion cascade, unlike a memo-skip).
+
+**★ 4-AGENT MATH / INSTRUCTION / DISCIPLINE SWEEP → near-floor, with one landed micro-win.** Ran 4
+read-only research sub-agents:
+1. getK/W17 math: near-floor; only novel = fold precomputed popcount-shifts into the pext mask tables —
+   but the popcount runs *parallel* to the pext (off the critical chain) ⇒ likely wash; NOT implemented.
+2. other math (canon/refutation/symmetry): refutation predictor closed (above); cheaper canonical key
+   DEAD (de-branch measured dead; an O(1) invariant forfeits the exact-merge the distinct gate locks);
+   W8 table at its optimal level/repr; decomposition cluster dead.
+3. banked-lessons audit: **★ `wide_induced(k)` did a per-call `OnceLock`+`Box` deref on every pc≥17 node
+   — the `Vec<Box<…>>` pointer-chase the W8 flat-arena fixed (−2 %). LANDED the fix (below).** Also flagged
+   (TODO, hygiene): no `#[repr(transparent/C)]` + no `const _: () = assert!(size_of/align_of)` on the
+   per-node structs `Slot`/`Bits`/`IncFrame`/`TinyGraph` (silent-stride-regression traps); the new
+   `flush_nodes` const→field on `bump_local` should be A/B-confirmed a wash before promotion.
+4. znver5 instructions: **Zen5 full-width datapath does NOT revive the dead getK SIMD** (those died on the
+   α-β early-out + a stack spill = width-independent; `pext` has no vector equivalent; getK is
+   L1-resident/frontend-bound). GFNI D4-canon materialize + register-argmin is genuinely NOVEL + viable on
+   Zen5 but skip18 shrank its target to the pc≥19 spine ⇒ marginal (microbench to close). `VPTERNLOGQ`-
+   fused 256-bit `child_orient8` is a cheap GO **iff the compiler isn't already auto-vectorizing it** —
+   check the disassembly first. Cross-leaf getK gather / VPCLMUL hash / VPCONFLICT graph-build = NO-GO.
+
+**★ LANDED: `w17_induced` resolved into a `DenseW8 &'static` field** (`dense.rs`) — removes the per-pc≥17-
+node `wide_induced(17)` `OnceLock`-load + `match` + `Box`-deref; `get17` is now a direct field read.
+Byte-identical (gate green: n=12 iso-flat distinct **1,060,823**, n=14 second-player). **Balanced paired
+A/B (6 ABBA pairs, 12 GB TT): −0.55 % cyc/node, all 6 pairs negative, sd 0.32 %.** NOTE: the first,
+naive A/B (always-A-first) read −3.4 % — a **thermal artifact** (A consistently caught the ramp). **Method
+lesson banked: ABBA-balanced + paired-adjacent ordering is mandatory; always-first lied by ~6×.**
+
+**Instrumentation added (all gated OFF by default ⇒ production byte-identical; kept as measurement
+substrate per the project pattern):** `QUEENS_SCHED` / `QUEENS_ONLY_ROOT` / `QUEENS_SCHED_FIRST`,
+`QUEENS_PAR_ORD` (DEAD), `QUEENS_SPLIT` (DEAD), `QUEENS_TS_FILE`/`QUEENS_TS_MS`, `QUEENS_FLUSH_NODES`.
+
+**⇒ NEXT (priority): (1) residual-stabilizer 2nd-ply orbit-dedup on axis-roots — the one untested
+node-count idea; (2) check `child_orient8` disassembly → `VPTERNLOGQ` if scalar (cheap); (3) add the
+`repr`+`const _` size/align asserts (zero-risk hygiene). The −13% refutation prize needs a predictor no
+cheap signal provides — effectively closed. The throughput core (getK pext chain) is at the floor.**
+
 
 ### Session 2026-06-22--7 — Tier-C2 treewidth DP KILLED (constant-factor go/no-go)
 **Mode**: intent-based. Resumed `go treewidth`. The premise was already GO (low tw n14+n16); this
@@ -320,7 +411,8 @@ marginal (−0.5% global / +1.6% slow), sets/ranges +8–17%, fractional +13%. O
 children all getK leaves) skips cleanly. Code kept gated-off as documented substrate.
 
 **SESSION NET:** the one win is **skip18 = {18}, now the iso-dense DEFAULT** (~−2.5% wall / −3.6% cyc,
-n-agnostic, `QUEENS_SKIP18=0` reverts). Everything else explored is **dead/weak/marginal with committed
+n-agnostic, `QUEENS_SKIP18=0` reverts). **New clean-box n=16 record: 23.44s search / 307,608,950 nodes**
+(SECOND), now leaderboard #1 — beats the W17 --18 default's 24.5s. Everything else explored is **dead/weak/marginal with committed
 evidence**: treewidth DP, C1/decompose, value-bucketing, gt#2 reductions, gt#5 pairing, root-ordering,
 W8-overlap, fractional-band. The deep tail is single-component / high-entropy / structurally rigid /
 transposition-near-unique — the breadth crack (#6a cheaper-than-iso merge) and pairing crack (#6b) are both

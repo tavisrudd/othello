@@ -888,6 +888,29 @@ fn watch(
         .filter(|&s| s > 0)
         .map(Duration::from_secs);
     let mut last_bench = Instant::now();
+    // QUEENS_TS_FILE: high-resolution per-tick time-series (elapsed, cumulative nodes, per-worker nodes,
+    // roots) as JSON-lines, for offline analysis of the solo-tail starvation/oscillation. QUEENS_TS_MS
+    // = interval (default 10ms); pair with a low QUEENS_FLUSH_NODES so per-worker counts update finely.
+    let ts_ms = std::env::var("QUEENS_TS_MS")
+        .ok()
+        .and_then(|s| s.parse::<u64>().ok())
+        .filter(|&m| m > 0)
+        .unwrap_or(10);
+    // Only the SEARCH-phase watcher samples — the optimal-line (PV) phase reuses `run_watched` with a
+    // fresh `start`, and would otherwise `File::create`-truncate the file and overwrite the series.
+    let mut ts_writer = matches!(phase, Phase::Search)
+        .then(|| {
+            std::env::var("QUEENS_TS_FILE")
+                .ok()
+                .and_then(|p| std::fs::File::create(p).ok())
+                .map(std::io::BufWriter::new)
+        })
+        .flatten();
+    let tick_ms = if ts_writer.is_some() {
+        ts_ms.min(100)
+    } else {
+        100
+    };
     loop {
         for sig in signals.pending() {
             clear();
@@ -961,6 +984,21 @@ fn watch(
         if let (Some(pc), Some(counts)) = (percore.as_mut(), solver.per_worker_nodes()) {
             pc.update(Instant::now(), &counts);
         }
+        if let Some(w) = ts_writer.as_mut() {
+            use std::io::Write as _;
+            let t = start.elapsed().as_secs_f64();
+            let (rd, rt) = solver.root_progress().unwrap_or((0, 0));
+            let pw = solver.per_worker_nodes().unwrap_or_default();
+            let _ = write!(
+                w,
+                "{{\"t\":{t:.4},\"nodes\":{},\"rd\":{rd},\"rt\":{rt},\"pw\":[",
+                solver.nodes()
+            );
+            for (i, &v) in pw.iter().take(32).enumerate() {
+                let _ = write!(w, "{}{v}", if i > 0 { "," } else { "" });
+            }
+            let _ = writeln!(w, "]}}");
+        }
         if bar {
             // Truncate to the terminal width so the line never wraps (a wrapped
             // line defeats the `\r` overwrite and leaves garbage); the glyphs are
@@ -989,7 +1027,11 @@ fn watch(
         // Park rather than sleep so the solve can wake us the instant it finishes
         // (no fixed tick of latency on fast solves); the timeout keeps the bar and
         // signal polling live for long ones.
-        thread::park_timeout(Duration::from_millis(100));
+        thread::park_timeout(Duration::from_millis(tick_ms));
+    }
+    if let Some(mut w) = ts_writer {
+        use std::io::Write as _;
+        w.flush().ok();
     }
     clear();
     io::stderr().flush().ok();
