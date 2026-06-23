@@ -221,11 +221,12 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
 - [x] Perf telemetry + saturation deep-dive (--2 below) → solo-tail starvation is BRIEF; search saturates NOTHING (spare MLP) ⇒ near-floor confirmed from a fresh angle.
 - [x] ★ 2nd-ply refutation lever explored → ORACLE ceiling sq-0 −72% / full-run −13%, but the predictor is CLOSED (degree/overlap/size/symmetry-defect all fail; split + par-ord DEAD). One untested idea left: residual-stabilizer 2nd-ply orbit-dedup on axis-roots.
+- [x] **★ residual-stabilizer 2nd-ply orbit-dedup → DEAD (2026-06-23--3, code-read + re-exp evidence, no build).** The D4-canonical TT key already IS the orbit-dedup: 2nd-ply nodes are keyed by `node_key` = `lex_min8` over all 8 dihedral orientations (transpose ∈ D4), and `par_wins_inc` probes (iso_flat.rs:4599) AND puts (:4808) under that key ⇒ a transpose-mirror is a TT HIT, not a recompute. n=14 re-exp ≈ 1.02× confirms no mass mirror-recompute. Orbit-dedup would at most save the mirror's canon-key build + probe (~a few cyc) for the ~100 axis-root 2nd-ply pairs = negligible vs 307M nodes. **The last untested node-count idea is closed.**
 - [x] 4-agent math/instruction/discipline sweep (--2 below) → near-floor; LANDED `w17_induced`→field −0.55% (clean balanced A/B).
 
 ## Handoff Notes
 
-### Session 2026-06-23--3 — lever #2 NO-GO (compiler already vectorizes child_orient), ★ Tier-A ETC pc-gate KILLED (net-negative; win-child-reuse insight)
+### Session 2026-06-23--3 — child_orient8 NO-GO, ★ Tier-A ETC pc-gate KILLED (win-child-reuse insight), residual-stabilizer DEAD (last node-count idea), tiger hot-struct discipline LANDED
 **Session**: 2026-06-23--3. Mode: intent-based (`yc mi`). Resumed `go` from this handoff. Cleared two
 open levers, one cheaply and one with a definitive A/B.
 
@@ -256,11 +257,24 @@ cyc +0.7% · wall +3.6%** (off 25.6s / on 26.5s mean; SECOND every round; gates 
   byte-identical). **One untried angle:** a much larger TT (≥17 GB, less eviction ⇒ smaller +nodes) might
   net the −1.3% cyc/node out — but the box is memory-tight for back-to-back 17 GB A/Bs and the ceiling is
   small regardless.
-- **⇒ The remaining open levers are unchanged:** #1 residual-stabilizer 2nd-ply orbit-dedup (the one
-  untested node-count idea; I noted first-principles doubt — the D4-canonical TT already merges transpose
-  mirrors, so headroom exists only where a mirror's slot is evicted before its pair is reached; needs an
-  offline premise-measure before any build), the getK evaluator (standing #1 cost, repeatedly at-floor),
-  and the parked heavy levers.
+**★ residual-stabilizer 2nd-ply orbit-dedup — DEAD (code-read + re-exp evidence, no build).** Settled the
+last untested node-count idea: the D4-canonical TT key already IS the orbit-dedup (transpose ∈ D4; 2nd-ply
+nodes probed+put under `node_key`/`lex_min8` in `par_wins_inc` :4599/:4808 ⇒ transpose-mirrors are TT hits,
+not recomputes; n=14 re-exp ≈ 1.02× confirms). Orbit-dedup's only residual is saving the mirror's canon
+build+probe (~few cyc) for ~100 axis-root 2nd-ply pairs = negligible. See the Progress entry.
+
+**★ LANDED: tiger hot-struct discipline (commit `5866ac2`, byte-identical).** Enforced CLAUDE.md rules
+#4/#6/#7 on the four per-node structs the --2 audit flagged: `Bits`/`Slot` → `#[repr(transparent)]` +
+`const _` size/align assert; `IncFrame` → `#[repr(C)]` + fields reordered largest-align-descending (`pass:u8`
+to the end) so repr(C) adds no padding (stays 328 B, size-neutral) + assert; `TinyGraph` → `#[repr(C)]` +
+assert (16 B). All gates green (n12 1,060,823, n14 ≈29.2M re-exp 1.02×, make test, clippy).
+
+- **⇒ The board is now: every node-count + structural + move-ordering + prefetch/parallelism lever is
+  EXHAUSTED with evidence.** What remains is per-node throughput (the getK evaluator, the standing #1 cost
+  ~44% — repeatedly measured at-floor; a fresh skip18-era profile is the only un-redone angle) and the
+  **parked heavy levers** (set-assoc TT, BuRR archive, 1 GB hugepages [boot-reservation], nimber-
+  decomposition node-count) — all multi-session, decide-with-user. Plus the open n=18 thread (branch
+  `queens-n18`, the feasibility proposal).
 
 ### Session 2026-06-23--2 — perf telemetry + saturation deep-dive, 2nd-ply refutation lever (oracle −13% but predictor CLOSED), 4-agent math/instruction/discipline sweep, ★ LANDED w17_induced→field −0.55%
 **Session**: 2026-06-23--2 (`f41034c0-a440-47cf-a6d1-de7f231086ee`). Mode: collaborative. Catalyst: user
