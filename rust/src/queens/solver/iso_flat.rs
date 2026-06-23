@@ -1180,7 +1180,12 @@ impl IsoFlat {
         // Verdict-preserving (changes the node count *by design* — an earlier cutoff of the same
         // value — so it is **not** part of the exact `--distinct` gate). iso-flat/iso-window keep it
         // off (their `from_tt_with_window` defaults are unchanged ⇒ control + `--distinct` intact).
-        s.skip18 = std::env::var("QUEENS_SKIP18").as_deref() == Ok("1");
+        // ★ DEFAULT-ON (--7, promoted): skip all TT work for pc==18 nodes (all roots, {18}) — the band
+        // is ~100% cold and its children are all getK leaves ⇒ cascade-free; −3.6% total cyc / −2.5%
+        // wall at n=16, verdict-preserving. Off via `QUEENS_SKIP18=0` (the A/B control) or the
+        // whole-stack revert `QUEENS_FAST=0`. Empty `skip18_squares` ⇒ all roots (n-agnostic default).
+        s.skip18 = !matches!(std::env::var("QUEENS_SKIP18").as_deref(), Ok("0"))
+            && !matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0"));
         s.skip18_squares = std::env::var("QUEENS_SKIP18_ROOTS")
             .ok()
             .map(|v| {
