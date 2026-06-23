@@ -109,10 +109,33 @@ pc18–28 tail graphs are tree-like (treewidth ≤ ~10), a separator/elimination
 - **★ CONFIRMED AT n=16 (production scale) — EVEN BETTER:** median tw-bound = **10** (n=14 was 11);
   high-mass bands pc18–22 = **7–9** (pc18 med 7/max 10; pc24 med 11; pc28 med 14/max 17). The bigger
   board did NOT raise treewidth — it slightly lowered it (the available set thins out more). 2^7–2^10 =
-  128–1024 boundary states at the mass bands. Premise solid at both n=14 and n=16. NEXT: prototype the
-  impartial-game boundary-state DP (compute the full win/loss value along a min-fill elimination
-  ordering; tail-gated, ≤2 roots left). Research-grade build; the open risk is the DP's constant factor
-  + per-node decomposition cost vs the subtree it replaces — NOT the premise.
+  128–1024 boundary states at the mass bands. Premise solid at both n=14 and n=16.
+- **★★ KILLED (the constant-factor go/no-go, 2026-06-22--7) — the premise was true but not sufficient.**
+  The handoff's stated remaining risk ("the DP's constant factor vs the subtree it replaces") was
+  measured directly and **the DP loses by 2–4 orders of magnitude.** Tool: `rust/scripts/treewidth_dp_probe.py`
+  (validated Node-Kayles solver — matches Dawson's-Chess path nimbers + win/loss⇔nimber≠0 on random
+  graphs). For each sampled deep-tail graph it measures **(A)** the subtree the DP would replace = distinct
+  positions a memoized **alpha-beta + exact-availset-transposition** search visits below the graph (= the
+  search's own work; re-exp≈1.0× ⇒ ≈ the real solver's subtree), vs **(B)** the DP cost bound `3^(w+1)`
+  (any correct treewidth DP is ≤ s^(w+1)·poly). **Result (n=14 dump, 358 unique graphs): NOT ONE graph
+  has subtree ≥ 3^(w+1); max ratio = 0.1.** At the high-mass bands the **median subtree is 80–768 nodes**
+  (pc18:80, pc20:109, pc24:131, pc28:446) while `3^(w+1)` is **6.5K–43M**. The killer is an **anti-
+  correlation**: where the subtree is finally big (~100–200K nodes) the treewidth is *also* big (pc80–90,
+  tw 57–68 ⇒ DP cost ~10³¹), and where treewidth is small the subtree is already tiny.
+  **Why (first principles):** a treewidth DP wins when the naive search is exp-in-n but the graph is
+  low-width (`s^w ≪ 2^n`). Here the *reachable Node-Kayles-position count* (a few hundred) is already far
+  below BOTH `2^pc` AND `3^w` — the search isn't paying the exponential the DP would save; it pays the
+  much-smaller actual reachable-position count, because exact-availset memoization (the TT) already
+  collapses each tiny sparse tail graph. **The deep tail is expensive by BREADTH (hundreds of millions of
+  distinct positions), not DEPTH (no expensive per-position subtree).** A per-position DP cannot reduce
+  breadth (it doesn't merge across *different* root graphs) — only the cross-position transposition
+  sharing the search already exploits does. **Do not build the separator DP.** Lesson: low treewidth is
+  necessary but not sufficient; you must also confirm the per-instance subtree is *large* before a
+  per-instance FPT replacement can pay. **Redirect:** the win must shrink the *count* of distinct deep
+  positions ⇒ back to the breadth levers — Tier-2 "cheap incomplete structural canon as a 2nd-tier TT
+  key" (more merging than D4-iso) and the **C1 getK canonical value layer** (the untested standout).
+  (n=16 confirm not warranted: the kill is 4 orders at the mass bands and structural; n=16 tw is *lower*
+  than n=14 ⇒ even smaller subtrees / DP cost — it cannot flip.)
 
 **(C3) Proof-DAG-minimizing AND-node scheduling at the giant root.** Attacks the gap between the
 searched node count and the **minimal proof DAG** — a lever class never tried (move-ordering was OR-node
@@ -185,10 +208,23 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [ ] Tier-B1: n=16 sampled-HLL C confirm → (if GO) design idle-core eviction-recovery pre-fill.
 - [x] Tier-B2: canon-skip oracle-sidecar upper-bound → **KILL** (skip-all +30.7% nodes/+15.1% wall; the unbounded re-exp cascade dwarfs the ~6–9% ceiling; exact-child0 can't separate the 0.2% recurring).
 - [ ] Tier-C1: ★ getK distinct-`comp_canon` @ K=9–12 offline count → (if GO) build the value layer.
-- [x] Tier-C2 PREMISE TEST: treewidth min-fill → **GO**, confirmed n=14 (med 11) AND n=16 (med 10, mass bands 7–9, tree-like). → prototype the separator DP. (`scratchpad/treewidth.py`)
+- [x] Tier-C2 PREMISE TEST: treewidth min-fill → **GO**, confirmed n=14 (med 11) AND n=16 (med 10, mass bands 7–9, tree-like). (`scratchpad/treewidth.py`)
+- [x] Tier-C2 CONSTANT-FACTOR TEST → **★★ KILLED.** Subtree the DP replaces (alpha-beta + exact-availset memo, median 80–768 nodes at pc18–28) ≪ DP cost `3^(w+1)` (6.5K–43M); 0/358 graphs have subtree ≥ DP cost (max ratio 0.1). Premise true, not sufficient — tail is BREADTH not DEPTH; per-instance FPT can't pay. Tool: `rust/scripts/treewidth_dp_probe.py`. **Do not build the separator DP.**
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
 
 ## Handoff Notes
+
+### Session 2026-06-22--7 — Tier-C2 treewidth DP KILLED (constant-factor go/no-go)
+**Mode**: intent-based. Resumed `go treewidth`. The premise was already GO (low tw n14+n16); this
+session ran the *constant-factor* go/no-go — the handoff's own stated remaining risk. Built + validated
+a Node-Kayles solver (`rust/scripts/treewidth_dp_probe.py`; matches Dawson's-Chess path nimbers, and
+win/loss⇔nimber≠0 on 300 random graphs). Regenerated an n=14 `QUEENS_HITKEY` dump (`/tmp/qhk-n14.bin`,
+43.7K records). Measured per deep-tail graph: subtree-the-DP-replaces (alpha-beta + exact-availset memo)
+vs DP cost `3^(w+1)`. **KILL: 0/358 graphs have subtree ≥ DP cost (max ratio 0.1); median subtree
+80–768 at pc18–28 vs `3^(w+1)`=6.5K–43M.** Tail is breadth not depth ⇒ per-instance FPT can't pay (see
+the C2 menu entry for the full first-principles writeup + redirect to the breadth levers C1 / incomplete-
+canon). **Committed**: this handoff + `rust/scripts/treewidth_dp_probe.py`. **Then pivoted** (user:
+"micro opt and perf profile, mult rounds of that") → see the perf-loop handoff/notes.
 
 ### Exploration handoff (2026-06-22) — FINAL (session end)
 **Session**: 2026-06-22--6 (`a20b03dc-e462-4801-ab1b-88b683f9980b`)
