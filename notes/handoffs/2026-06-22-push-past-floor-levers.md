@@ -269,12 +269,31 @@ build+probe (~few cyc) for ~100 axis-root 2nd-ply pairs = negligible. See the Pr
 to the end) so repr(C) adds no padding (stays 328 B, size-neutral) + assert; `TinyGraph` → `#[repr(C)]` +
 assert (16 B). All gates green (n12 1,060,823, n14 ≈29.2M re-exp 1.02×, make test, clippy).
 
+**★ FRESH skip18-era getK profile (n=16, 8 GB TT; `.perf-analysis/getk16.data`/`.stat`).** Confirms getK
+at-floor, identical to --19, with skip18's only shift being `mtt_get` 2.4%→1.56% (pc==18 probes removed):
+- Buckets: getK evaluators (`DenseW8::getN`+`get_dyn*`) **~45%**, code-build (`wN_get`=`adj_row_pext`+
+  `verts_of`) **~24.5%**, `wins_inc` 17.7%, `sort_moves_by_degree` 7.2%, `mtt_get` 1.56%.
+- Machine: **IPC 1.39**, branch-misses 12.7B (~13% of cyc), **L1-dcache miss 2.63%** (W8 hot-set
+  L1-resident ⇒ getK is L1-latency not DRAM), LLC miss 11.8% (cold TT probes). Distributed-stall-limited.
+- `get10` annotate (the inherent chain, unchanged): W8-arena `bt` load-use 14.6%, cpc-dispatch `cmp $0x9`/
+  `cmp $0xa` ~25%, arena word load. `w14_get` builder = `blsr` bit-iter + `popcnt` + att loads (ALU-bound).
+- **★ ONE FRESH UNTRIED LEVER the profile surfaces — I-cache collapse via `get_dyn`.** The getK evaluators
+  are ~9 monomorphized functions (`get9`..`get16` + `get_dyn`/`get_dyn_wide`) ≳32 KB ⇒ the frontend/I-cache
+  stall (~22–28%, the biggest single stall) is partly them not co-residing in L1i. BUT `get_dyn`(k≤16, u128)
+  /`get_dyn_wide`(k≥17) is **already the unified runtime-K evaluator AND the recursion backbone** (every
+  `getN` falls back into `get_dyn` for its isolated-vertex children — dense.rs:777/815/…; and the W17 default's
+  pc==17 leaves already use `get_dyn_wide`). So routing `w9_get`..`w16_get` → `get_dyn(N)` would DROP
+  `get9`..`get16` from L1i (DCE'd), leaving only the already-resident `get_dyn`/`get_dyn_wide`. Trades
+  `getN`'s compile-time-K speed for less frontend stall; net is an n=16 A/B question (frontend-stall drop vs
+  per-call runtime-K cost). **Untried** — --19 noted the 9-function I-cache footprint but only tried prefetch/
+  de-branch/bounds-elision, never the collapse. Gate it (`QUEENS_GETK_DYN`), validate `direct_w*_matches_scalar`,
+  interleaved A/B. This is the one un-redone throughput angle. **Decide-with-user (real build + A/B).**
+
 - **⇒ The board is now: every node-count + structural + move-ordering + prefetch/parallelism lever is
-  EXHAUSTED with evidence.** What remains is per-node throughput (the getK evaluator, the standing #1 cost
-  ~44% — repeatedly measured at-floor; a fresh skip18-era profile is the only un-redone angle) and the
-  **parked heavy levers** (set-assoc TT, BuRR archive, 1 GB hugepages [boot-reservation], nimber-
-  decomposition node-count) — all multi-session, decide-with-user. Plus the open n=18 thread (branch
-  `queens-n18`, the feasibility proposal).
+  EXHAUSTED with evidence**, and getK throughput is at-floor by a fresh skip18-era profile — **except** the
+  one untried I-cache-collapse (`get_dyn`) lever above. Beyond that: the **parked heavy levers** (set-assoc
+  TT, BuRR archive, 1 GB hugepages [boot-reservation], nimber-decomposition node-count) — all multi-session,
+  decide-with-user — plus the open n=18 thread (branch `queens-n18`, the feasibility proposal).
 
 ### Session 2026-06-23--2 — perf telemetry + saturation deep-dive, 2nd-ply refutation lever (oracle −13% but predictor CLOSED), 4-agent math/instruction/discipline sweep, ★ LANDED w17_induced→field −0.55%
 **Session**: 2026-06-23--2 (`f41034c0-a440-47cf-a6d1-de7f231086ee`). Mode: collaborative. Catalyst: user
