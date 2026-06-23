@@ -161,7 +161,7 @@ floor doc says df-pn could go *below* the searched count.
 | `comp_canon` / `comp_canon_full` (the C1 table key) | `rust/src/queens/graph.rs` (~1347 / ~1388) |
 | single-component confirm | `rust/src/queens/graph.rs` (`component` ~1526) |
 | `count --comps` machinery (`decompose_node`, HIST pass) | `rust/src/queens/graph.rs`, `rust/src/bin/queens.rs` |
-| `count --roots` directional ext (the C measurement, uncommitted) | `rust/src/bin/queens.rs` (`roots_report`) |
+| `count --roots` directional ext (the C measurement, committed `20354fd`) | `rust/src/bin/queens.rs` (`roots_report`) |
 | ETC batch (no pc gate) | `rust/src/queens/solver/iso_flat.rs` (`nw >= 2`, ~3300–3335) |
 | `M_RANK` tap + report | `rust/src/queens/solver/iso_flat.rs` (~3199–3495 / report ~2404) |
 | `M_HITKEY` dump / `ranklab` scorer | `rust/src/queens/solver/iso_flat.rs` + `ranklab.rs` |
@@ -190,20 +190,26 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 
 ## Handoff Notes
 
-### Exploration handoff (2026-06-22)
+### Exploration handoff (2026-06-22) — FINAL (session end)
 **Session**: 2026-06-22--6 (`a20b03dc-e462-4801-ab1b-88b683f9980b`)
-**Completed**: Multi-agent lever hunt past the n=16 floor. Retired move-ordering with a live A/B
-(committed, see --20). Surfaced + triaged the lever menu above; measured the pre-warm GO (`C≈0.39`
-n=14); confirmed probe-skip DOA and reframed it to the canon-skip (B2, measuring) per the user's
-pre-canon idea; converged the ETC question on the signal-free pc-gate (Tier A).
-**Files created/modified**: this handoff (new); `--21` pointer in the explicit-stack-frontier handoff.
-Code this session already committed: QUEENS_RANK r2/E/ordering_loss report + ranklab (incl. recurse-
-weighted scorer) — commits `2ff41c8`, `def4ff6`, `d007f93`, `32c9e19`, `316e8c3`, `ba6b717`.
-**Uncommitted at session end (DO NOT lose; do NOT commit while the canon-skip agent is mid-edit):**
-the `count --roots` directional extension in `queens.rs` (the C measurement); gated `M_CANONPROF`/
-`M_SKIP` in `iso_flat.rs` (canon-skip agent, mid-build — may not compile yet).
-**Instructions for next agent**: Start with the cheap offline go/no-go tests, cheapest first
-(C2 treewidth on a dump needs only Python + a dump; C1 distinct-canon + A probes-per-cut are small
-`count`/`M_RANK` extensions). Fire the n=16 HLL pre-warm confirm once the box is free. Fold the
-canon-skip experiment's verdict into Tier-B2 when it lands. Keep one n=16-heavy job on the box at a
-time. The standout bet is **C1 (canonical getK layer)** — attacks the 44% with the W8 precedent.
+**Completed**: (1) Expanded the QUEENS_RANK report (r2 column + E/node + ordering_loss) and built
+`ranklab` (offline move-ordering A/B). (2) **RETIRED move-ordering** with a live n=16 A/B (the
+reply-degree signal is real but nodes +0.2% / wall +115% — the loss is getK-leaf examinations, not
+nodes; recurse-weighted ranklab confirmed). (3) Ran a multi-agent (Opus) hunt past the n=16 floor →
+the lever menu above. Verdicts this session: **C2 treewidth premise GO (confirmed n=14 AND n=16, med
+tw 10)**, **B2 canon-skip KILLED** (parked on branch), **B1 pre-warm GO** (`C≈0.39` n=14), **A ETC
+pc-gate** identified (signal-free, ~−1.5–2%, node-identical), **C1 getK canonical layer** = the untested
+standout. probe-skip / signal-ordering / signal-ETC / parallel-solve-ahead / decomposition all DEAD.
+**Files**: this handoff (new) + `--21` pointer in the explicit-stack-frontier handoff. **All code/docs
+committed; working tree clean** (main builds + `make test`/`clippy` green). Commits (main): `2ff41c8`,
+`def4ff6`, `d007f93`, `32c9e19`, `316e8c3`, `ba6b717` (QUEENS_RANK + ranklab + recurse-weighted);
+`d4d2461`, `c99127b`, `e369d2f` (this backlog + C2 n14/n16); `b71d8cd` (B2 KILL doc); `20354fd`
+(`count --roots` directional C tool). **Branch `queens-canon-skip-experiment` (`5e6ca6b`)** = the
+parked canon-skip M_CANONPROF/M_SKIP code (KILLED lever, gated/DCE off; do not merge).
+**Instructions for next session (cheap-first):** (1) **C1 getK distinct-`comp_canon` @ K=9–12 +
+multiplicity** — extend `count --comps`; the standout's go/no-go (attacks the 44%, W8 precedent). (2)
+**A ETC probes-per-cut tap** (~10-line `M_RANK` ext) → pc-gate → n=16 A/B (bankable, node-identical).
+(3) **n=16 sampled-HLL pre-warm `C` confirm** (HLL-per-root directional variant of the committed
+`count --roots`). Then **build a winner**: the treewidth/separator DP (premise proven n14+n16,
+research-grade) or the getK canonical layer (if C1 go). Box rule: one 8 GB-TT n=16 job at a time.
+`scratchpad/treewidth.py` is the C2 tool (regenerate an n=16 `QUEENS_HITKEY` dump to re-run).
