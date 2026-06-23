@@ -94,6 +94,14 @@ pc18–28 tail graphs are tree-like (treewidth ≤ ~10), a separator/elimination
 - **Go/no-go (offline, pure Python on an existing `M_HITKEY` dump, no box):** min-degree / min-fill
   treewidth *upper bound* on the sampled pc18–28 graphs. **Median ≤ ~10 → feasible; ≥ ~18 → dead.**
 - Research-grade build, but the test is cheap and decisive. Highest ceiling.
+- **★ PREMISE CONFIRMED (n=14, min-fill upper bound, `scratchpad/treewidth.py` on a HITKEY dump):**
+  median tw-bound = **11 overall**, and **8–10 at the high-mass bands pc18–22** (pc18 med 8/max 10;
+  pc24 med 11; pc28 med 15/max 17). A clique would be tw≈pc−1 (17–27) — the deep graphs are
+  **tree-like (tw ≈ pc/2–pc/2.5)**, and min-fill is an upper bound so true tw is lower. 2^8–2^11 =
+  256–2K boundary states at the mass bands ≪ a pc-20+ subtree. **The exponent-shot premise HOLDS.**
+  The lever's risk is now the DP build + its constant factor, NOT the premise. NEXT: confirm at n=16
+  (bigger board ⇒ maybe higher tw — generate an n=16 HITKEY dump once the box frees), then prototype
+  the impartial-game boundary-state DP (tail-gated, when ≤2 roots remain).
 
 **(C3) Proof-DAG-minimizing AND-node scheduling at the giant root.** Attacks the gap between the
 searched node count and the **minimal proof DAG** — a lever class never tried (move-ordering was OR-node
@@ -166,7 +174,7 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [ ] Tier-B1: n=16 sampled-HLL C confirm → (if GO) design idle-core eviction-recovery pre-fill.
 - [ ] Tier-B2: canon-skip oracle-sidecar upper-bound (RUNNING) → verdict.
 - [ ] Tier-C1: ★ getK distinct-`comp_canon` @ K=9–12 offline count → (if GO) build the value layer.
-- [ ] Tier-C2: treewidth min-fill bound on a dump → (if median ≤10) prototype the separator DP.
+- [x] Tier-C2 PREMISE TEST: treewidth min-fill on n=14 dump → **GO** (median 11, mass bands 8–10, tree-like). → confirm at n=16; then prototype the separator DP. (`scratchpad/treewidth.py`)
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
 
 ## Handoff Notes
