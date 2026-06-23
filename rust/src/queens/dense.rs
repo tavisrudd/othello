@@ -626,6 +626,51 @@ fn build_table(k: usize, tables: &[Box<[u64]>]) -> Box<[u64]> {
 /// A row is the 28-bit upper-triangular edge code for vertices labelled `0..8`.
 /// The value is invariant under relabelling, so callers may use any deterministic
 /// labelling of the 8 live board squares and still get the correct result.
+/// `QUEENS_W8_CACHE` on-disk image of the flat `W0..=W8` arena. The table is a pure function
+/// (Node-Kayles win/loss of every labelled ≤8-vertex config) so it is build-once / cache-forever.
+/// Bump the last magic byte whenever [`build_tables`] changes (stale-cache guard); the length +
+/// FNV checksum reject a truncated/corrupt file (⇒ silent rebuild). Header: magic(4) · len_u64(8) ·
+/// checksum(8) = 20 bytes, then `len` little-endian u64s.
+const W8_CACHE_MAGIC: &[u8; 4] = b"QW81";
+
+fn w8_checksum(arena: &[u64]) -> u64 {
+    arena.iter().fold(0xcbf2_9ce4_8422_2325u64, |h, &x| {
+        (h ^ x).wrapping_mul(0x0000_0100_0000_01b3)
+    })
+}
+
+/// Load the flat arena from `path`, or `None` if absent / wrong magic-version / wrong length /
+/// checksum mismatch (any of which falls back to a fresh build).
+fn load_w8_cache(path: &str, expected_len: usize) -> Option<Box<[u64]>> {
+    let data = std::fs::read(path).ok()?;
+    if data.len() != 20 + expected_len * 8 || &data[0..4] != W8_CACHE_MAGIC {
+        return None;
+    }
+    let len = u64::from_le_bytes(data[4..12].try_into().ok()?) as usize;
+    let want_ck = u64::from_le_bytes(data[12..20].try_into().ok()?);
+    if len != expected_len {
+        return None;
+    }
+    let mut arena = vec![0u64; len].into_boxed_slice();
+    for (slot, chunk) in arena.iter_mut().zip(data[20..].chunks_exact(8)) {
+        *slot = u64::from_le_bytes(chunk.try_into().unwrap());
+    }
+    (w8_checksum(&arena) == want_ck).then_some(arena)
+}
+
+/// Best-effort write of the flat arena to `path` (errors ignored — a failed write just means the
+/// next run rebuilds).
+fn save_w8_cache(path: &str, arena: &[u64]) {
+    let mut buf = Vec::with_capacity(20 + arena.len() * 8);
+    buf.extend_from_slice(W8_CACHE_MAGIC);
+    buf.extend_from_slice(&(arena.len() as u64).to_le_bytes());
+    buf.extend_from_slice(&w8_checksum(arena).to_le_bytes());
+    for &x in arena {
+        buf.extend_from_slice(&x.to_le_bytes());
+    }
+    let _ = std::fs::write(path, buf);
+}
+
 pub(crate) struct DenseW8 {
     /// The complete `W0..=W8` win/loss bitsets concatenated into one contiguous allocation,
     /// indexed via [`TABLE_OFF`]. One flat `&'static [u64]` (not `&[Box<[u64]>]`) so the hot
@@ -644,11 +689,24 @@ impl DenseW8 {
     pub(crate) fn build() -> Self {
         static ARENA: OnceLock<Box<[u64]>> = OnceLock::new();
         let arena: &'static [u64] = ARENA.get_or_init(|| {
+            let expected_len = TABLE_OFF[W8_K + 1];
+            // QUEENS_W8_CACHE=<path>: load the build-once arena from disk (~ms) instead of rebuilding
+            // it (~1.5s of the pre-search prep). Opt-in (default unset ⇒ build, unchanged); on a miss
+            // (absent / stale magic / bad checksum) it builds then writes the cache for next time.
+            let cache = std::env::var("QUEENS_W8_CACHE").ok();
+            if let Some(ref path) = cache {
+                if let Some(loaded) = load_w8_cache(path, expected_len) {
+                    return loaded;
+                }
+            }
             let tables = build_tables();
-            let mut flat = vec![0u64; TABLE_OFF[W8_K + 1]].into_boxed_slice();
+            let mut flat = vec![0u64; expected_len].into_boxed_slice();
             for k in 0..=W8_K {
                 let off = TABLE_OFF[k];
                 flat[off..off + tables[k].len()].copy_from_slice(&tables[k]);
+            }
+            if let Some(ref path) = cache {
+                save_w8_cache(path, &flat);
             }
             flat
         });
