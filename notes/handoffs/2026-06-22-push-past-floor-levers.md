@@ -224,7 +224,81 @@ vs DP cost `3^(w+1)`. **KILL: 0/358 graphs have subtree ≥ DP cost (max ratio 0
 80–768 at pc18–28 vs `3^(w+1)`=6.5K–43M.** Tail is breadth not depth ⇒ per-instance FPT can't pay (see
 the C2 menu entry for the full first-principles writeup + redirect to the breadth levers C1 / incomplete-
 canon). **Committed**: this handoff + `rust/scripts/treewidth_dp_probe.py`. **Then pivoted** (user:
-"micro opt and perf profile, mult rounds of that") → see the perf-loop handoff/notes.
+"micro opt and perf profile, mult rounds of that") → the perf-loop below.
+
+### Session 2026-06-22--7 (cont.) — C1/decompose DEAD, ★ skip18 WIN, root-ordering WEAK, graph-theory menu
+**Mode**: intent-based. After the treewidth kill, the user steered a rapid multi-lever perf loop.
+
+**C1 / decompose-leaf (the canonical component value-table) — DEAD vs the iso-dense default.** Built the
+go/no-go tooling into `count --comps` (committed `6ce9508`): `comps_canon_census` (distinct `comp_canon`
+per size + multiplicity), `pc_breadth_report` (per-pc distinct count + `R_deep`), `decompose_slice_report`
+(deep fire rate by ncomp / `n_iso` / pc). **Findings (n14):** the deep tail (pc≥18 = 81% of cost) is
+**single-component (0.0% fragmented at every band pc18–30)** ⇒ decompose-leaf has **zero fire** there;
+getK≤17 already leafs every pc≤17 node (single or multi-comp); the value-table footprint **explodes above
+k=9** (distinct `comp_canon` k10=990K→k12=2.4M at n14, mult→1.0). The only high-fire slice is **`n_iso≥1`**
+(1.2% of nodes, 100% multi-comp, 90% all-comps≤10) but it's **shallow (pc 9–12)** and maps to the parked-
+negative **ISO_STRIP** lever. My pitch ("treewidth enables the component table") was an ERROR — low
+treewidth = tree-like *connected*, NOT fragmented; the two are orthogonal. **Breadth headroom `R_deep` DOES
+grow with n** (n12→n14 ~4× at the mass bands: C=24 R_deep 5→33) — so per-position resolvers aren't
+*obviously* breadth-dead at n16, but the deep tail's single-componentness kills decomposition specifically.
+
+**★ skip18 — the WIN (committed `652697e`, gated off).** `QUEENS_SKIP18`: skip ALL TT work (canon key
+`lex_min8`→`d4_bits`→`hash128` ≈ the ~6%-cyc #1-branch-mispredict step, + probe + put) for **pc==18 nodes
+in the slow roots**. Safe & cascade-free because **pc==18 is the only band whose children are ALL getK
+leaves** (pc≤17) ⇒ a re-expanded pc==18 node re-runs one bounded getK sweep, never an unmemoised subtree.
+pc==18 is **~100% cold** (0.3% entry-probe hit, QUEENS_COLD/HITKEY). **n=16 A/B (12GB TT, 4 rounds): {18}
+on the 2 slow roots = −3.1% wall; {18} all-roots = −3.6% total cyc / −2.5% wall (n-agnostic).** Verdict-
+preserving (n12 distinct 1,060,823 exact; n14 verdicts). Knobs: `QUEENS_SKIP18_ROOTS=<sq,..>` (per-root,
+thread-local set at root entry), `QUEENS_SKIP18_PCS=<set>` (pc bitmask, default {18}). **pc==18 is UNIQUE
+— exhaustively swept:** every pc≥19 single band loses (its re-exp re-probes memoized pc==18 children = cold-
+DRAM tax; {19} slow +1.6% cyc); contiguous ranges [18..22] +17% nodes; sets {18,20,22,24} +16% nodes;
+{19..22} all wash-to-loss. The cascade compounds through any multi-band skip. **Promote-to-default is open**
+(all-roots {18} is the n-agnostic candidate; needs the user's call).
+
+**Root-ordering / scheduling — WEAK lever (committed `c107cd8`, gated off).** Telemetry
+(`QUEENS_ROOT_TIMING`): at n16 the wall (25.3s) is set by **sq 0** (idx 28), which starts LATE (9.9s) and
+runs SOLO the last 4.7s; sq 1 (idx 29) is longest-duration (19.3s) but ends at 20.6 < wall. Gated
+root-reorder (`QUEENS_REORDER=1` + `QUEENS_FIRST_ROOTS=<sq,..>` + `QUEENS_FIRST_AT=<offset>`) + a pairwise
+warmer report `(F)` in `count --roots`. **slow-first {0,1} = +9.4% wall / +4.1% nodes (LOSS): running the
+slow roots cold forfeits cross-root TT warming; {0,1}@pos5-6 = WASH (+0.4% wall).** `count --roots` n14
+(F): the warming is **DIFFUSE** — no root warms >~4% of the dominant's deep tail; the C=0.39 pool is spread
+over ~13 roots (~3% each) ⇒ **no small set of "ideal warmers"**, realizing it needs ~all roots first ≈ the
+current order. The current order is already ~optimal for warming; an early start forfeits it. Fan-position
+is also cliff-bound (the first ~#workers roots all start ~together). **Untried:** a TIME-delayed dispatch
+(start the slow root on a dedicated thread that sleeps a few s then launches — precise start-time control,
+which fan-position can't give); likely a wash too given the diffuse warming, but the one variant not run.
+
+**W8 disk cache — committed `73045d3`, MARGINAL.** `QUEENS_W8_CACHE=<path>` load-or-build-and-save of the
+W0..W8 arena (opt-in, magic+ver+len+FNV-checksum). **Only ~0.18s** (prep 1.38→1.20s n14): the pext W8 build
+is already fast; the prep floor is the **TT alloc** (eager-commit + MADV_COLLAPSE of the multi-GB table,
+~6s at n16/17GB, NOT cacheable — it's the live empty TT). Cache 34MB; gzips **4.3×** (94%-win bit skew) but
+raw loads fast enough. W8-overlap-with-search is moot (the search hits getK in ~ms ⇒ would block on W8 at once).
+
+**★ value-bucketing (graph-theory #1) — NO-GO (committed `rust/scripts/value_bucket_probe.py`).** Full
+census of all 36,676 distinct deep-tail graphs (pc18–28, exact nimber each). **No cheap value-invariant φ
+beats the 3.4× iso ceiling at ≥99.5% member-weighted win/loss purity** — the frontier never enters the GO
+quadrant: (V,E) merges 104× at 4.5% purity; degseq 1.40× at 94%; **1-WL separates all but 130 of 36,676
+graphs (merge 1.00×)** so the only value-pure φ is iso itself (no gain). The deep-tail value is **high
+structural entropy** — not captured by any O(m)–O(m²) invariant short of isomorphism. The breadth-merge
+crack (#6a) is closed for cheap structural keys. Remaining graph-theory bets: #2 leaf/simplicial reductions,
+#5 structural-involution pairing.
+
+**Graph-theory exploration (Opus sub-agent) — the menu for after.** Ranked, all with cheap offline tests
+on `/tmp/qhk-n14.bin` + the validated nimber solver: **#1 value-bucketing** (key the TT by a cheap *game-
+value* invariant φ — degree-seq / WL-hash / (V,E,#leaves,#simplicial) — merging by value not isomorphism ⇒
+no 3.4× iso ceiling; GO if a cheap φ beats 3.4× merge at ≥99.5% value-purity — the highest-EV new lever);
+**#2 leaf/simplicial/dominated-vertex reductions** (the abundant structures the dead twin/module probe never
+measured); **#5 generalized structural-involution pairing** (the #6b shot — #9 died as ONE geometric
+involution; a graph-structural one is unmeasured). Correctly killed: Watts-Strogatz (cost is position
+*count* not path length), random-graph game invariants, twin-width/clique-width (re-walks the C2 kill).
+
+**Queued levers (user-named, not yet built):** **fractional-band skip** — skip TT for a `cheap_hash(raw
+avail) % M == 0` fraction of a cascading band (pc 19–25), keeping the rest memoized as cascade/re-probe
+anchors (decision must be pre-key since the key is what we skip; tunes saving vs re-exp). The one skip18
+extension not yet measured. **NEXT:** decide **skip18 promote-to-default** (all-roots {18}, n-agnostic,
+−3.6% cyc — the session's clean win); try fractional-band; graph-theory #2 (leaf/simplicial reductions) /
+#5 (structural-involution pairing) if pushing structural levers further. **Closed this session:** treewidth
+DP, C1/decompose, value-bucketing, root-ordering, W8-overlap — all measured-dead/marginal with evidence.
 
 ### Exploration handoff (2026-06-22) — FINAL (session end)
 **Session**: 2026-06-22--6 (`a20b03dc-e462-4801-ab1b-88b683f9980b`)
