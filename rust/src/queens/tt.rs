@@ -132,7 +132,11 @@ const TT_ASSOC_WAYS: usize = 8;
 /// miss, never wrong" weakens to "wrong with vanishing probability"; a fingerprint
 /// *mismatch* is still just a miss that re-searches.
 #[derive(Clone, Copy, Default)]
+#[repr(transparent)] // hot-struct discipline (CLAUDE.md #4): explicit layout = the inner `u64`.
 pub(crate) struct Slot(pub(crate) u64);
+
+// #7: lock the one-word slot — a field-add that grew it would silently double the TT footprint.
+const _: () = assert!(std::mem::size_of::<Slot>() == 8 && std::mem::align_of::<Slot>() == 8);
 
 impl Slot {
     /// Fingerprint width: `64 - 1 (used) - 8 (val)` bits.

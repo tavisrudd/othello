@@ -435,7 +435,11 @@ unsafe fn raw_l0_put(base: *mut u64, route: u64, fp: u64, val: u8) {
 /// shared arena is its filtered child list (exactly what the recursion passes children as
 /// `pmoves`), resumed at index `mi`. No `result` field is needed: a winning child just resumes the
 /// parent's loop, a losing child wins the parent outright (handled by the unwind cascade).
+// hot-struct discipline (CLAUDE.md #4/#6): explicit layout, fields largest-align-descending (the
+// align-8 `Bits`/`u64` block, then the `u32`s, then the lone `u8` last — so `repr(C)` introduces no
+// interior padding and the frame stays the same 328 B the default repr packed it to).
 #[derive(Clone, Copy)]
+#[repr(C)]
 struct IncFrame {
     orient: [Bits; 8],
     key: Bits,
@@ -444,14 +448,6 @@ struct IncFrame {
     moves_start: u32,
     nmoves: u32,
     mi: u32,
-    /// ABDADA two-pass deferral state (one of [`PASS0`]/[`PASS0_DEF`]/[`PASS1`]). In pass 0 an
-    /// in-flight child is *skipped* (left in place, flips the frame to [`PASS0_DEF`]) so this
-    /// worker keeps useful work going while the child's owner finishes it. When the move list is
-    /// exhausted with deferrals outstanding ([`PASS0_DEF`]) the frame flips to [`PASS1`] and
-    /// re-scans from the start: children whose owners finished are now cheap TT hits, and any
-    /// still in-flight are expanded by this worker (the progress guarantee). Always [`PASS0`] for
-    /// the non-ABDADA (`const ABDADA == false`) instantiation — dead state the compiler elides.
-    pass: u8,
     /// Search depth of this node (handoff depth + stack height). **Even depth ⇒ a prove-loss node**
     /// (every child must be searched ⇒ publishing its children for work-stealing is zero-speculation,
     /// exactly as `par_wins_inc` fans its even plies). Also gives a stolen child its own root depth.
@@ -460,7 +456,21 @@ struct IncFrame {
     /// Work-stealing: how many of this frame's children have been published as `rayon` scope tasks
     /// (capped at the idle-core count). Dead unless `const STEAL`.
     published: u32,
+    /// ABDADA two-pass deferral state (one of [`PASS0`]/[`PASS0_DEF`]/[`PASS1`]). In pass 0 an
+    /// in-flight child is *skipped* (left in place, flips the frame to [`PASS0_DEF`]) so this
+    /// worker keeps useful work going while the child's owner finishes it. When the move list is
+    /// exhausted with deferrals outstanding ([`PASS0_DEF`]) the frame flips to [`PASS1`] and
+    /// re-scans from the start: children whose owners finished are now cheap TT hits, and any
+    /// still in-flight are expanded by this worker (the progress guarantee). Always [`PASS0`] for
+    /// the non-ABDADA (`const ABDADA == false`) instantiation — dead state the compiler elides.
+    /// Last field (`u8`): keeps the `repr(C)` layout padding-free.
+    pass: u8,
 }
+
+// #7: a field-add that grows the per-node arena frame fails the build instead of silently
+// widening the stride. 256 (`[Bits;8]`) + 32 (`key`) + 16 (`route`/`fp`) + 20 (5×`u32`) + 1 = 325 → 328.
+const _: () =
+    assert!(std::mem::size_of::<IncFrame>() == 328 && std::mem::align_of::<IncFrame>() == 8);
 
 /// [`IncFrame::pass`] states for the ABDADA two-pass deferral (see that field).
 const PASS0: u8 = 0;
@@ -501,10 +511,16 @@ thread_local! {
 /// Plain `[u8; 8]` data, one cache line, passed by `&` — the per-node board ops
 /// (`and_not`/`popcount`/`each` over four `u64`s) and the per-child attack-row loads of
 /// the old tail collapse to single-byte ops on `alive`.
+#[repr(C)] // hot-struct discipline (CLAUDE.md #4/#5): explicit layout, two-per-line `[u8;8]` pair.
 struct TinyGraph {
     adj: [u8; MAXV_TINY],
     closed: [u8; MAXV_TINY],
 }
+
+// #7: lock the carried in-band graph at 2×8 bytes (rule #5's {8,16,32} no-per-record-align tier).
+const _: () = assert!(
+    std::mem::size_of::<TinyGraph>() == 2 * MAXV_TINY && std::mem::align_of::<TinyGraph>() == 1
+);
 
 /// Local-vertex capacity for [`TinyGraph`] — the tiny-canon band tops out at 7, padded
 /// to 8 for a clean stride (matches `SMALL_WORK_MAX` in `graph.rs`).
