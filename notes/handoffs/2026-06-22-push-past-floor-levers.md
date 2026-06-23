@@ -105,9 +105,14 @@ pc18–28 tail graphs are tree-like (treewidth ≤ ~10), a separator/elimination
   pc24 med 11; pc28 med 15/max 17). A clique would be tw≈pc−1 (17–27) — the deep graphs are
   **tree-like (tw ≈ pc/2–pc/2.5)**, and min-fill is an upper bound so true tw is lower. 2^8–2^11 =
   256–2K boundary states at the mass bands ≪ a pc-20+ subtree. **The exponent-shot premise HOLDS.**
-  The lever's risk is now the DP build + its constant factor, NOT the premise. NEXT: confirm at n=16
-  (bigger board ⇒ maybe higher tw — generate an n=16 HITKEY dump once the box frees), then prototype
-  the impartial-game boundary-state DP (tail-gated, when ≤2 roots remain).
+  The lever's risk is now the DP build + its constant factor, NOT the premise.
+- **★ CONFIRMED AT n=16 (production scale) — EVEN BETTER:** median tw-bound = **10** (n=14 was 11);
+  high-mass bands pc18–22 = **7–9** (pc18 med 7/max 10; pc24 med 11; pc28 med 14/max 17). The bigger
+  board did NOT raise treewidth — it slightly lowered it (the available set thins out more). 2^7–2^10 =
+  128–1024 boundary states at the mass bands. Premise solid at both n=14 and n=16. NEXT: prototype the
+  impartial-game boundary-state DP (compute the full win/loss value along a min-fill elimination
+  ordering; tail-gated, ≤2 roots left). Research-grade build; the open risk is the DP's constant factor
+  + per-node decomposition cost vs the subtree it replaces — NOT the premise.
 
 **(C3) Proof-DAG-minimizing AND-node scheduling at the giant root.** Attacks the gap between the
 searched node count and the **minimal proof DAG** — a lever class never tried (move-ordering was OR-node
@@ -180,7 +185,7 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [ ] Tier-B1: n=16 sampled-HLL C confirm → (if GO) design idle-core eviction-recovery pre-fill.
 - [x] Tier-B2: canon-skip oracle-sidecar upper-bound → **KILL** (skip-all +30.7% nodes/+15.1% wall; the unbounded re-exp cascade dwarfs the ~6–9% ceiling; exact-child0 can't separate the 0.2% recurring).
 - [ ] Tier-C1: ★ getK distinct-`comp_canon` @ K=9–12 offline count → (if GO) build the value layer.
-- [x] Tier-C2 PREMISE TEST: treewidth min-fill on n=14 dump → **GO** (median 11, mass bands 8–10, tree-like). → confirm at n=16; then prototype the separator DP. (`scratchpad/treewidth.py`)
+- [x] Tier-C2 PREMISE TEST: treewidth min-fill → **GO**, confirmed n=14 (med 11) AND n=16 (med 10, mass bands 7–9, tree-like). → prototype the separator DP. (`scratchpad/treewidth.py`)
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
 
 ## Handoff Notes
