@@ -292,12 +292,11 @@ at-floor, identical to --19, with skip18's only shift being `mtt_get` 2.4%→1.5
   stall is NOT dominated by getN L1i thrash (the hot getN subset — the tail's pc 11–14 — co-resides fine; the
   stall is the builders/`wins_inc`/inherent code). **⇒ getK throughput is at-floor confirmed from this new
   angle too.** The user called the throughput side **at the floor** here.
-  - **CODE STATE (pending disposition):** the `get_flat` experiment is UNCOMMITTED in the working tree
-    (`dense.rs`: `get_flat` + `masks128`/`extract_adj_dyn`/`order_dyn` + `W9/10/11_MASKS128` + the
-    `flat_matches_dyn` test; `iso_flat.rs`: the `getk_flat` field/env + the 8 `wN_get` gate branches). The
-    lever is fundamentally dead (no revival angle that isn't a full rewrite) and the 8 gate branches sit in
-    the hottest leaf wrappers, so the recommendation is to **REVERT** it (keep the hot path pristine) rather
-    than keep it as gated substrate. Awaiting the user's call (revert is ask-first).
+  - **CODE STATE: saved on branch `queens-getk-flat` (`486bb5a`), cleaned from main** (`dense.rs`: `get_flat`
+    + `masks128`/`extract_adj_dyn`/`order_dyn` + `W9/10/11_MASKS128` + the `flat_matches_dyn` test;
+    `iso_flat.rs`: the `getk_flat` field/env + the 8 `wN_get` gate branches). Off main — do not merge; revive
+    only if a faster runtime-k form is ever found (unlikely; the compile-time-K advantage is structural). Main
+    rebuilt + gate green (n12 distinct 1,060,823) = the clean 23.44s default.
 
 - **⇒ The board is now: every node-count + structural + move-ordering + prefetch/parallelism lever is
   EXHAUSTED with evidence, AND getK throughput is at-floor from two fresh angles** (skip18-era profile +
