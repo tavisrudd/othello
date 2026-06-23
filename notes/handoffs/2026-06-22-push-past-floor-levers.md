@@ -280,8 +280,26 @@ beats the 3.4× iso ceiling at ≥99.5% member-weighted win/loss purity** — th
 quadrant: (V,E) merges 104× at 4.5% purity; degseq 1.40× at 94%; **1-WL separates all but 130 of 36,676
 graphs (merge 1.00×)** so the only value-pure φ is iso itself (no gain). The deep-tail value is **high
 structural entropy** — not captured by any O(m)–O(m²) invariant short of isomorphism. The breadth-merge
-crack (#6a) is closed for cheap structural keys. Remaining graph-theory bets: #2 leaf/simplicial reductions,
-#5 structural-involution pairing.
+crack (#6a) is closed for cheap structural keys.
+
+**★ graph-theory #2 (leaf/simplicial/dominated reductions) — NO-GO (`rust/scripts/reduction_probe.py`).**
+Validated every candidate rule against exact nimbers: **dominated-vertex deletion is UNSOUND** (54–57%
+nimber misprediction — the central hypothesis killed; deleting a vertex isn't a Node-Kayles move, it shifts
+the mex). The only sound *novel* rule is **true-twin deletion** (N[u]==N[v]) but it fires on **≤0.4%** of
+deep graphs. Leaf/simplicial structure is rare and vanishes with depth (≤13% pc18 → ~0% pc25+). Collapse
+ratio **1.000×**, 0.20% of graphs reduce. Re-confirms the modular-reduction kill via a fresh path.
+
+**★ graph-theory #5 (generalized structural-involution pairing) — NO-GO (`rust/scripts/struct_involution_probe.py`).**
+Sound P-certificate (fixed-point-free involutive automorphism with v≁τ(v) ⇒ nimber 0; cross-checked: every
+fire is nimber-0, 0 N-position false-fires). **Fires on 0.00% of deep P-positions** (only 6.67% pass even the
+necessary precondition; the global automorphism constraint kills the rest). The deep-tail queen graphs are
+**structurally rigid** (trivial automorphism groups) — same fate as the #9 geometric involution.
+
+**⇒ The whole graph-theory / structural-reduction cluster is EXHAUSTED** (value-bucketing, leaf/simplicial,
+structural-pairing all NO-GO; treewidth DP, C1/decompose, modular all dead earlier). The deep tail is
+single-component, high-entropy, structurally rigid — **no cheap structural lever survives**. The breadth
+crack (#6a, cheaper-than-iso merge) and the pairing crack (#6b) are both closed with evidence. What's left
+is per-node throughput (skip18 ✓, fractional-band, getK evaluator) and the parked heavy levers.
 
 **Graph-theory exploration (Opus sub-agent) — the menu for after.** Ranked, all with cheap offline tests
 on `/tmp/qhk-n14.bin` + the validated nimber solver: **#1 value-bucketing** (key the TT by a cheap *game-
