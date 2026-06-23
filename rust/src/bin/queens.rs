@@ -2312,6 +2312,49 @@ fn roots_report(q: &Queens, hll_p: u32) {
         );
     }
 
+    // ── (F) PAIRWISE iso-correlation — which OTHER roots warm the dominant root's deep tail ──
+    // (E) gives the dominant root's total deep-tail share (with ANY other root); this gives the
+    // *pairwise* structure: for each other root r, how many of dom's pc≥18 keys r also touches.
+    // The top warmers are the roots to run *before* dom so its cold serial tail probes warm — the
+    // warming half of optimal root ordering (the scheduling half = run the biggest root early).
+    let mut warmers = vec![0u64; nroots]; // warmers[r] = dom pc≥18 keys also in root r
+    let mut dom_deep = 0u64;
+    for &k in &sets[dom].1 {
+        if (pc_of_packed(k) as usize) < 18 {
+            continue;
+        }
+        dom_deep += 1;
+        let m = members[&k];
+        #[allow(clippy::needless_range_loop)]
+        // r is both the membership-bit shift and the warmers index
+        for r in 0..nroots {
+            if r != dom && (m >> r) & 1 == 1 {
+                warmers[r] += 1;
+            }
+        }
+    }
+    let mut warm_rank: Vec<(usize, u64)> = warmers.iter().copied().enumerate().collect();
+    warm_rank.sort_by(|a, b| b.1.cmp(&a.1));
+    println!(
+        "\n(F) PAIRWISE warmers of the dominant root's deep tail (pc≥18, {} keys) — run these first:",
+        commas(dom_deep)
+    );
+    println!("    other root      | warms dom pc≥18 keys | % of dom deep tail");
+    for &(r, w) in warm_rank.iter().take(8) {
+        if w == 0 {
+            break;
+        }
+        let sq = sets[r].0;
+        println!(
+            "    sq {:>3} (c{:>2},r{:>2}) | {:>20} | {:>7.2}%",
+            sq,
+            sq % q.n,
+            sq / q.n,
+            commas(w),
+            w as f64 / dom_deep.max(1) as f64 * 100.0,
+        );
+    }
+
     // ── (C) per-root proxies, shared-volume, and proxy→sharing Spearman ──────────────
     // Cold, read-only instrumentation: does any cheap per-root proxy (centrality of the
     // first move, residual available popcount, max-component size / fragmentation, or

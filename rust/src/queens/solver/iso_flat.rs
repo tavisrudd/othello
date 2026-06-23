@@ -4895,7 +4895,7 @@ impl Solver for IsoFlat {
         let att = self.att(q);
         let min_avail = min_avail_for(self.par_min_avail, q.n);
         self.eff_min_avail.store(min_avail, Ordering::Relaxed);
-        let moves = q.distinct_first_moves();
+        let mut moves = q.distinct_first_moves();
         self.root_total.store(moves.len() as u64, Ordering::Relaxed);
         self.root_done.store(0, Ordering::Relaxed);
         let root = orient_of(q, q.board);
@@ -4905,6 +4905,54 @@ impl Solver for IsoFlat {
             let co = child_orient(&root, a, q.board.and_not(a[0]));
             let ckey = self.node_key(q, &co);
             pending.push((co, ckey));
+        }
+        // QUEENS_FIRST_ROOTS=<sq,..>: schedule these root squares first in the parallel fan (the slow
+        // critical-path roots otherwise sit deep in `distinct_first_moves` order, so no worker picks
+        // them up until the early roots free cores — their serial tail then runs SOLO at the end
+        // [telemetry: the wall-determining root starts ~8.6s late]). Fanning them first overlaps their
+        // serial tail with the parallel bulk. Stable (non-listed roots keep order); the elder-brother
+        // `pending[0]` (the sequential TT-warm root) stays fixed; verdict-neutral (order ⊥ value). Read
+        // once per solve (cold), not per node.
+        if std::env::var("QUEENS_REORDER").as_deref() == Ok("1") {
+            let fr = std::env::var("QUEENS_FIRST_ROOTS").unwrap_or_default();
+            let prio: Vec<u32> = fr
+                .split(',')
+                .filter_map(|t| t.trim().parse().ok())
+                .collect();
+            // Insert the priority roots at fan-offset `QUEENS_FIRST_AT` (default 0), NOT at the very
+            // front: slow-first runs them COLD (no cross-root TT warming ⇒ +4% nodes / +9% wall). A
+            // small offset lets the first few fast roots warm the shared TT before the slow roots'
+            // deep tail probes it, while still starting them far earlier than their natural position
+            // (~28 ⇒ they otherwise run SOLO at the end). The non-priority roots keep their order.
+            let at = env_u32("QUEENS_FIRST_AT", 0) as usize;
+            if !prio.is_empty() && pending.len() > 2 {
+                let rank = |sq: u32| prio.iter().position(|&p| p == sq);
+                let tail: Vec<(u32, ([Bits; 8], Bits))> = moves[1..]
+                    .iter()
+                    .copied()
+                    .zip(pending[1..].iter().copied())
+                    .collect();
+                let mut prio_items: Vec<(u32, ([Bits; 8], Bits))> = tail
+                    .iter()
+                    .filter(|(sq, _)| rank(*sq).is_some())
+                    .copied()
+                    .collect();
+                prio_items.sort_by_key(|(sq, _)| rank(*sq).unwrap());
+                let rest_items: Vec<(u32, ([Bits; 8], Bits))> = tail
+                    .iter()
+                    .filter(|(sq, _)| rank(*sq).is_none())
+                    .copied()
+                    .collect();
+                let split = at.min(rest_items.len());
+                let reordered = rest_items[..split]
+                    .iter()
+                    .chain(prio_items.iter())
+                    .chain(rest_items[split..].iter());
+                for (i, (sq, pe)) in reordered.enumerate() {
+                    moves[i + 1] = *sq;
+                    pending[i + 1] = *pe;
+                }
+            }
         }
         // Per-root wall intervals (µs since t0): the `QUEENS_ROOT_TIMING=1` diagnostic. Cold and
         // allocated **only when enabled**, so a normal `iso-flat`/`iso-window`/`iso-dense` run is
