@@ -226,7 +226,7 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 
 ## Handoff Notes
 
-### Session 2026-06-23--3 — child_orient8 NO-GO, ★ Tier-A ETC pc-gate KILLED (win-child-reuse insight), residual-stabilizer DEAD (last node-count idea), tiger hot-struct discipline LANDED
+### Session 2026-06-23--3 — child_orient8 NO-GO, Tier-A ETC pc-gate KILLED, residual-stabilizer DEAD (last node-count idea), hot-struct discipline LANDED, fresh getK profile (at-floor), ★ flattened getK evaluator (`get_flat`) BUILT+A/B'd → DEAD (+21.7% cyc/node); **user called the floor**
 **Session**: 2026-06-23--3. Mode: intent-based (`yc mi`). Resumed `go` from this handoff. Cleared two
 open levers, one cheaply and one with a definitive A/B.
 
@@ -277,23 +277,35 @@ at-floor, identical to --19, with skip18's only shift being `mtt_get` 2.4%→1.5
   L1-resident ⇒ getK is L1-latency not DRAM), LLC miss 11.8% (cold TT probes). Distributed-stall-limited.
 - `get10` annotate (the inherent chain, unchanged): W8-arena `bt` load-use 14.6%, cpc-dispatch `cmp $0x9`/
   `cmp $0xa` ~25%, arena word load. `w14_get` builder = `blsr` bit-iter + `popcnt` + att loads (ALU-bound).
-- **★ ONE FRESH UNTRIED LEVER the profile surfaces — I-cache collapse via `get_dyn`.** The getK evaluators
-  are ~9 monomorphized functions (`get9`..`get16` + `get_dyn`/`get_dyn_wide`) ≳32 KB ⇒ the frontend/I-cache
-  stall (~22–28%, the biggest single stall) is partly them not co-residing in L1i. BUT `get_dyn`(k≤16, u128)
-  /`get_dyn_wide`(k≥17) is **already the unified runtime-K evaluator AND the recursion backbone** (every
-  `getN` falls back into `get_dyn` for its isolated-vertex children — dense.rs:777/815/…; and the W17 default's
-  pc==17 leaves already use `get_dyn_wide`). So routing `w9_get`..`w16_get` → `get_dyn(N)` would DROP
-  `get9`..`get16` from L1i (DCE'd), leaving only the already-resident `get_dyn`/`get_dyn_wide`. Trades
-  `getN`'s compile-time-K speed for less frontend stall; net is an n=16 A/B question (frontend-stall drop vs
-  per-call runtime-K cost). **Untried** — --19 noted the 9-function I-cache footprint but only tried prefetch/
-  de-branch/bounds-elision, never the collapse. Gate it (`QUEENS_GETK_DYN`), validate `direct_w*_matches_scalar`,
-  interleaved A/B. This is the one un-redone throughput angle. **Decide-with-user (real build + A/B).**
+- **★ I-cache collapse — BUILT, micro-opt'd, A/B'd → DEAD (+21.7% cyc/node).** The profile's one fresh angle:
+  collapse the ~9 monomorphized getK evaluators (`get9`..`get16` + `get_dyn`/`get_dyn_wide`, ≳32 KB) into ONE
+  hot loop to cut the frontend/I-cache stall (~22–28%, the biggest stall). Note first: `get_dyn`/`get_dyn_wide`
+  turned out to be **dispatchers** to the compile-time-K-monomorphized `getN`/`get_wide<K>`, not unified
+  evaluators — so there was nothing to cheaply route to. Built a TRUE flattened evaluator instead
+  (`DenseW8::get_flat`, gated `QUEENS_GETK_FLAT`): an **explicit-stack single-loop** runtime-k (9..16) sweep of
+  the W_K hierarchy (the `wins_inc_iter` trick applied to the dense tree — user's idea), recursion-free, with
+  per-k mask lookup, right-sized pext (u64 for cpc≤11), and an Opus sub-agent micro-opt pass (hoisted frame
+  borrow, dropped the `full` field, leaf pext128). Verdict-identical (`flat_matches_dyn` 320K codes; n12 distinct
+  1,060,823; n14 ≈29.1M). **n=16 4-round A/B (8 GB TT): cyc/node +21.7% (5710→6952), wall ~+15–18%, total cyc
+  ~+17% — a clear LOSS.** First-principles: runtime-k forfeits `getN`'s compile-time-K loop-unroll + const
+  cpc-dispatch (a big per-call win), and that structural cost **exceeds** the I-cache savings — i.e. the frontend
+  stall is NOT dominated by getN L1i thrash (the hot getN subset — the tail's pc 11–14 — co-resides fine; the
+  stall is the builders/`wins_inc`/inherent code). **⇒ getK throughput is at-floor confirmed from this new
+  angle too.** The user called the throughput side **at the floor** here.
+  - **CODE STATE (pending disposition):** the `get_flat` experiment is UNCOMMITTED in the working tree
+    (`dense.rs`: `get_flat` + `masks128`/`extract_adj_dyn`/`order_dyn` + `W9/10/11_MASKS128` + the
+    `flat_matches_dyn` test; `iso_flat.rs`: the `getk_flat` field/env + the 8 `wN_get` gate branches). The
+    lever is fundamentally dead (no revival angle that isn't a full rewrite) and the 8 gate branches sit in
+    the hottest leaf wrappers, so the recommendation is to **REVERT** it (keep the hot path pristine) rather
+    than keep it as gated substrate. Awaiting the user's call (revert is ask-first).
 
 - **⇒ The board is now: every node-count + structural + move-ordering + prefetch/parallelism lever is
-  EXHAUSTED with evidence**, and getK throughput is at-floor by a fresh skip18-era profile — **except** the
-  one untried I-cache-collapse (`get_dyn`) lever above. Beyond that: the **parked heavy levers** (set-assoc
-  TT, BuRR archive, 1 GB hugepages [boot-reservation], nimber-decomposition node-count) — all multi-session,
-  decide-with-user — plus the open n=18 thread (branch `queens-n18`, the feasibility proposal).
+  EXHAUSTED with evidence, AND getK throughput is at-floor from two fresh angles** (skip18-era profile +
+  the flattened-evaluator A/B, +21.7% cyc/node). **The user called it: we hit the floor on the serial
+  per-node + node-count search.** What remains is NOT incremental — the **parked heavy / multi-session
+  levers**: set-assoc TT, BuRR archive, 1 GB hugepages (boot-reservation), nimber-decomposition node-count,
+  and the open **n=18 thread** (branch `queens-n18`, the feasibility proposal). These are the only
+  un-exhausted directions, each a deliberate multi-session commitment to decide with the user.
 
 ### Session 2026-06-23--2 — perf telemetry + saturation deep-dive, 2nd-ply refutation lever (oracle −13% but predictor CLOSED), 4-agent math/instruction/discipline sweep, ★ LANDED w17_induced→field −0.55%
 **Session**: 2026-06-23--2 (`f41034c0-a440-47cf-a6d1-de7f231086ee`). Mode: collaborative. Catalyst: user
