@@ -1134,6 +1134,58 @@ impl Queens {
         (pc, max_k, ncomp)
     }
 
+    /// Cold analysis (`count --comps` slice-finder): one decomposition pass returning the
+    /// fragmentation shape `(pc, ncomp, maxc, second, n_iso)` — popcount, component count,
+    /// largest and second-largest component sizes, and the number of **isolated** available
+    /// squares (degree 0 in the available-graph — each a size-1 component). `n_iso` is the
+    /// *cheap* hot-path-computable predictor (one masked popcount per vertex, no BFS), so the
+    /// slice-finder can check whether it identifies the high-fire (all-components-≤K) slice
+    /// without a full decomposition gate.
+    pub fn frag_profile(&self, mask: Bits) -> (u32, u32, u32, u32, u32) {
+        let pc = mask.popcount();
+        let mut remaining = mask;
+        let (mut maxc, mut second, mut ncomp) = (0u32, 0u32, 0u32);
+        while let Some(start) = remaining.lowest() {
+            let comp = self.component(start, mask);
+            remaining = remaining.and_not(comp);
+            let sz = comp.popcount();
+            if sz >= maxc {
+                second = maxc;
+                maxc = sz;
+            } else if sz > second {
+                second = sz;
+            }
+            ncomp += 1;
+        }
+        let mut n_iso = 0u32;
+        mask.each(|v| {
+            if self.attack[v as usize].and(mask).popcount() == 1 {
+                n_iso += 1; // only itself in N[v]∩avail ⇒ no available attacker ⇒ isolated
+            }
+        });
+        (pc, ncomp, maxc, second, n_iso)
+    }
+
+    /// Cold analysis (`count --comps`): decompose `mask` and hand each connected
+    /// component's `(size, comp_canon)` to `f`. Uses the **measurement-exact** canon
+    /// (`comp_canon::<false>` -- the complete WL/IR certificate, cache bypassed) so the
+    /// distinct-key census is the true distinct-canonical-component count, not a cached
+    /// approximation. Drives the C1 dense-component-value-table go/no-go: how many distinct
+    /// canonical components arise per size (the table's cache footprint) and how often each
+    /// recurs (the amortisation multiplicity).
+    pub fn each_comp_canon(&self, mask: Bits, mut f: impl FnMut(u32, u64)) {
+        ISO_SCRATCH.with(|s| {
+            let mut g = s.borrow_mut();
+            let mut remaining = mask;
+            while let Some(start) = remaining.lowest() {
+                let comp = self.component(start, mask);
+                remaining = remaining.and_not(comp);
+                let key = self.comp_canon::<false>(comp, &mut g);
+                f(comp.popcount(), key);
+            }
+        });
+    }
+
     /// Cold, read-only `count --roots` instrumentation: the per-root structural proxies
     /// for one symmetry-distinct first move `sq`, returned as
     /// `(centrality, avail_pop, frag, ncomp)`:

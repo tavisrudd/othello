@@ -6,7 +6,7 @@
 //! --help`) for the modes; squares are named file+rank, e.g. `d1` (file A..
 //! left→right, rank 1..n bottom→top). Boards up to 16×16.
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, BufReader, BufWriter, IsTerminal, Write};
 use std::path::{Path, PathBuf};
@@ -2791,9 +2791,251 @@ fn comps_report(q: &Queens, solver: &dyn Solver) {
             cum as f64 / nodes as f64 * 100.0,
         );
     }
+    pc_breadth_report(q, &ws);
+    decompose_slice_report(q, &ws);
     comps_dense_nimber_coverage(q, &ws);
+    comps_canon_census(q, &ws);
     comps_struct_report(q, &ws);
     module_report(q, &ws);
+}
+
+/// Slice-finder for the decompose-leaf mechanism (decompose → per-component nimber lookup → XOR,
+/// resolving a position with NO recursion iff *all* its components fit a size-≤K table). Over the
+/// **deep recurse set** (pc≥18, where the default's getK≤17 leaf does NOT already apply), it locates
+/// the THIN, cheaply-gated slices where the fire rate (all-components-≤K) is high — so the mechanism
+/// can be switched on surgically, never globally and never across a whole pc. Breaks the fire rate
+/// down three ways: by `ncomp` (the fire prerequisite is ncomp≥2), by `n_iso` (the **cheap hot-path
+/// gate** — isolated-vertex count, computable without a BFS decomposition), and by pc. A good slice
+/// = high fire rate (the gate's decompose cost is mostly productive) AND a cheap predictor AND enough
+/// absolute coverage of the deep set to matter.
+fn decompose_slice_report(q: &Queens, ws: &[(Bits, u8)]) {
+    const DEEP: u32 = 9; // pc 9..17 = the getK band (decompose-leaf = a CHEAPER leaf than the W14-17
+                         // evaluator on fragmented nodes); pc≥18 = the recurse set (decompose = a NEW leaf)
+    let ks = [8u32, 10, 12];
+    let mut deep_total = 0u64;
+    // by ncomp
+    let nc_max = 8usize;
+    let mut nc_cnt = vec![0u64; nc_max + 1];
+    let mut nc_fire = vec![[0u64; 3]; nc_max + 1];
+    // by n_iso (cheap gate)
+    let iso_max = 8usize;
+    let mut iso_cnt = vec![0u64; iso_max + 1];
+    let mut iso_multi = vec![0u64; iso_max + 1]; // ncomp≥2
+    let mut iso_fire = vec![[0u64; 3]; iso_max + 1];
+    // by pc
+    let maxpc = (q.n * q.n) as usize;
+    let mut pc_cnt = vec![0u64; maxpc + 1];
+    let mut pc_multi = vec![0u64; maxpc + 1];
+    let mut pc_fire = vec![[0u64; 3]; maxpc + 1];
+    for &(mask, _) in ws {
+        let (pc, ncomp, maxc, _second, n_iso) = q.frag_profile(mask);
+        if pc < DEEP {
+            continue;
+        }
+        deep_total += 1;
+        let fires: [bool; 3] = [maxc <= ks[0], maxc <= ks[1], maxc <= ks[2]];
+        let nci = (ncomp as usize).min(nc_max);
+        nc_cnt[nci] += 1;
+        let isoi = (n_iso as usize).min(iso_max);
+        iso_cnt[isoi] += 1;
+        if ncomp >= 2 {
+            iso_multi[isoi] += 1;
+        }
+        let pci = (pc as usize).min(maxpc);
+        pc_cnt[pci] += 1;
+        if ncomp >= 2 {
+            pc_multi[pci] += 1;
+        }
+        for j in 0..3 {
+            if fires[j] {
+                nc_fire[nci][j] += 1;
+                iso_fire[isoi][j] += 1;
+                pc_fire[pci][j] += 1;
+            }
+        }
+    }
+    if deep_total == 0 {
+        return;
+    }
+    let pct = |a: u64, b: u64| {
+        if b > 0 {
+            a as f64 / b as f64 * 100.0
+        } else {
+            0.0
+        }
+    };
+    println!(
+        "  decompose-leaf slice-finder over the deep recurse set (pc≥{DEEP}, {} distinct; fire = all comps ≤K):",
+        commas(deep_total)
+    );
+    println!("   by ncomp:  ncomp | count          | %deep | fire≤8 | fire≤10 | fire≤12  (fire = % of this ncomp row)");
+    for c in 1..=nc_max {
+        if nc_cnt[c] == 0 {
+            continue;
+        }
+        let lbl = if c == nc_max {
+            format!("{c}+")
+        } else {
+            format!("{c} ")
+        };
+        println!(
+            "             {lbl:>4} | {:>14} | {:5.1} | {:5.1}% | {:6.1}% | {:6.1}%",
+            commas(nc_cnt[c]),
+            pct(nc_cnt[c], deep_total),
+            pct(nc_fire[c][0], nc_cnt[c]),
+            pct(nc_fire[c][1], nc_cnt[c]),
+            pct(nc_fire[c][2], nc_cnt[c]),
+        );
+    }
+    println!("   by n_iso (CHEAP gate): #iso | count          | %deep | ncomp≥2 | fire≤10 | fire≤12  (% of this n_iso row)");
+    for i in 0..=iso_max {
+        if iso_cnt[i] == 0 {
+            continue;
+        }
+        let lbl = if i == iso_max {
+            format!("{i}+")
+        } else {
+            format!("{i} ")
+        };
+        println!(
+            "             {lbl:>4} | {:>14} | {:5.1} | {:6.1}% | {:6.1}% | {:6.1}%",
+            commas(iso_cnt[i]),
+            pct(iso_cnt[i], deep_total),
+            pct(iso_multi[i], iso_cnt[i]),
+            pct(iso_fire[i][1], iso_cnt[i]),
+            pct(iso_fire[i][2], iso_cnt[i]),
+        );
+    }
+    println!("   by pc:        pc | count          | %deep | ncomp≥2 | fire≤10 | fire≤12  (% of this pc row)");
+    for pc in DEEP as usize..=maxpc {
+        if pc_cnt[pc] == 0 {
+            continue;
+        }
+        println!(
+            "             {pc:>4} | {:>14} | {:5.1} | {:6.1}% | {:6.1}% | {:6.1}%",
+            commas(pc_cnt[pc]),
+            pct(pc_cnt[pc], deep_total),
+            pct(pc_multi[pc], pc_cnt[pc]),
+            pct(pc_fire[pc][1], pc_cnt[pc]),
+            pct(pc_fire[pc][2], pc_cnt[pc]),
+        );
+    }
+}
+
+/// Mechanism-INDEPENDENT go/no-go for *any* per-position leaf-resolver plugged in at a cutover pc
+/// `C` (a separator DP, a getK extension, a value cache): the deep tail's cost is **breadth** (the
+/// number of distinct positions), and a per-position resolver only pays if the subtree it prunes
+/// holds more distinct positions than it costs. The current default already leafs pc≤`GETK` via the
+/// getK pext sweep, so a deeper resolver at cutover `C` (`C > GETK`) prunes only the **deep recurse
+/// band** pc∈[`GETK`+1, `C`-1]. It wins iff
+///     savings(C) = Σ distinct positions in (GETK, C)   >   distinct(C) × avg-resolver-cost,
+/// i.e. iff the per-resolver cost stays below `R_deep(C) = savings(C) / distinct(C)`. If `R_deep`
+/// is large there is real headroom; if `R_deep ≈ 1` the cross-position TT sharing already wins and
+/// nothing per-position can help. Distinct counts come from the exact working set (re-exp≈1.0× deep
+/// ⇒ distinct ≈ node visits). `R_all` (all pc below) is the loose upper bound (ignores that getK
+/// already resolves the shallow band for free).
+fn pc_breadth_report(q: &Queens, ws: &[(Bits, u8)]) {
+    const GETK: u32 = 17; // the W17 getK ceiling: pc≤GETK is already a leaf in the default
+    let maxpc = (q.n * q.n) as usize;
+    let mut per = vec![0u64; maxpc + 1];
+    for &(mask, _) in ws {
+        per[mask.popcount() as usize] += 1;
+    }
+    // cum_below[pc] = Σ distinct positions with popcount < pc
+    let mut cum_below = vec![0u64; maxpc + 2];
+    for pc in 1..=maxpc {
+        cum_below[pc + 1] = cum_below[pc] + per[pc];
+    }
+    let below = |pc: usize| cum_below[pc]; // Σ per[0..pc]
+    println!(
+        "  per-pc distinct-position breadth (R = headroom for a cutover leaf-resolver at pc C):"
+    );
+    println!(
+        "    pc  | distinct        | cum<pc          | R_all=cum<pc/dist | R_deep=Σ(17,C)/dist"
+    );
+    #[allow(clippy::needless_range_loop)]
+    // pc is the band number, used in below()/print, not just an index
+    for pc in (GETK as usize + 1)..=maxpc {
+        if per[pc] == 0 {
+            continue;
+        }
+        let dist = per[pc] as f64;
+        let r_all = below(pc) as f64 / dist;
+        // deep savings: distinct positions in the band (GETK, pc) = below(pc) - below(GETK+1)
+        let deep = (below(pc).saturating_sub(below(GETK as usize + 1))) as f64;
+        let r_deep = deep / dist;
+        println!(
+            "    {pc:>3} | {:>15} | {:>15} | {:>17.2} | {:>17.2}",
+            commas(per[pc]),
+            commas(below(pc)),
+            r_all,
+            r_deep,
+        );
+    }
+}
+
+/// C1 go/no-go (the dense canonical-component value-table the low-treewidth result enables):
+/// per connected-component size `k`, the **distinct** count of `comp_canon` keys (the table's
+/// cache footprint) and the **multiplicity** = total components ÷ distinct (the amortisation —
+/// how many parent contexts re-derive the same component value). The mechanism caches each
+/// canonical component's value (nimber / win-loss) in an L2/L3-resident table keyed by
+/// `comp_canon`, turning the getK recursion (and fragmented-position recursion) into a lookup.
+/// **Build if the cumulative distinct for the table's size cutoff fits cache (~100K–1M keys)
+/// AND multiplicity ≫ 10×; the dead-memo regime is tens-of-millions distinct.** Multiplicity
+/// here is a *floor* (per-distinct-position decomposition, ~1× each) — the live getK recursion
+/// re-derives each far more, so a high multiplicity here is decisive and a low one is optimistic.
+fn comps_canon_census(q: &Queens, ws: &[(Bits, u8)]) {
+    const MAXK: usize = 20; // collect distinct sets for component sizes ≤ this (table candidates)
+    let mut total = [0u64; MAXK + 1];
+    let mut distinct: Vec<HashSet<u64>> = (0..=MAXK).map(|_| HashSet::new()).collect();
+    let mut over_maxk = 0u64; // components larger than MAXK (single-component shallow nodes)
+    for &(mask, _) in ws {
+        q.each_comp_canon(mask, |k, key| {
+            let k = k as usize;
+            if k <= MAXK {
+                total[k] += 1;
+                distinct[k].insert(key);
+            } else {
+                over_maxk += 1;
+            }
+        });
+    }
+    if total.iter().sum::<u64>() == 0 && over_maxk == 0 {
+        return;
+    }
+    println!(
+        "  C1 canonical-component census (dense value-table footprint + amortisation), by size k:"
+    );
+    println!(
+        "    k   | total components | distinct comp_canon | mult (tot/dist) | cum-distinct ≤k"
+    );
+    let mut cum = 0u64;
+    for k in 1..=MAXK {
+        let t = total[k];
+        let d = distinct[k].len() as u64;
+        cum += d;
+        if t == 0 {
+            continue;
+        }
+        let tag = if matches!(k, 8 | 10 | 12 | 16) {
+            "  <- table-K cutoff"
+        } else {
+            ""
+        };
+        println!(
+            "    {k:>3} | {:>16} | {:>19} | {:>15.1} | {:>15}{tag}",
+            commas(t),
+            commas(d),
+            t as f64 / d.max(1) as f64,
+            commas(cum),
+        );
+    }
+    if over_maxk > 0 {
+        println!(
+            "    >{MAXK} | {:>16} | (not collected — large single-component shallow nodes)",
+            commas(over_maxk),
+        );
+    }
 }
 
 /// Node-Kayles structural-reduction incidence over the working set, per available-popcount —
