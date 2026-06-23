@@ -23,7 +23,9 @@ Project rule in force: **never declare a floor — present evidence, the user de
 
 ### TIER A — bankable now, low risk
 
-**ETC pc-gate (signal-free).** Two ETC sub-agents (signal-guided + "train a better ETC") converged on
+**ETC pc-gate (signal-free). ★ KILLED 2026-06-23--3 — net-negative (nodes +2.0% / wall +3.6%; the
+"node-identical" premise overlooked win-child reuse / eviction protection). See Progress + the session
+note below.** Two ETC sub-agents (signal-guided + "train a better ETC") converged on
 the same conclusion:
 - The reply-degree signal **cannot** help the ETC: the ETC cuts on TT-**residency** (is this child
   already solved-as-loss in the TT?), while the signal predicts **game-theoretic** loss. In the mass
@@ -204,7 +206,13 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
   one chunk per session, gated A/B per the harness.
 
 ## Progress
-- [ ] Tier-A: ETC probes-per-cut tap → pc-gate → n=16 A/B (keep only if wall drops, node-identical).
+- [x] Tier-A: ETC probes-per-cut tap → pc-gate → n=16 A/B → **★ KILLED (net-negative).** Tap (`M_RANK`
+  `etc_pr`/`pr/cut` columns) confirmed the shape exactly — ETC cuts ~0–5% of nodes in pc≤28 (`pr/cut`
+  300–5000 = near-pure waste; ~208M of 1.32B probes), flips to 12–35% cuts at pc≥29. But the gate A/B
+  (`QUEENS_ETC_GATE=1`, pc<29, 4-round) = **cyc/node −1.3% (probe saving real) BUT nodes +2.0% / total
+  cyc +0.7% / wall +3.6%.** The "node-identical" premise was WRONG: the cold-mass probes' value is the
+  **win-child reuse** (`wv==1` eviction-protection skip), the SAME probe as the cut-probe ⇒ ungateable.
+  Kept gated-off as substrate; one untried angle = larger TT (less eviction). `etc_probes` tap kept.
 - [ ] Tier-B1: n=16 sampled-HLL C confirm → (if GO) design idle-core eviction-recovery pre-fill.
 - [x] Tier-B2: canon-skip oracle-sidecar upper-bound → **KILL** (skip-all +30.7% nodes/+15.1% wall; the unbounded re-exp cascade dwarfs the ~6–9% ceiling; exact-child0 can't separate the 0.2% recurring).
 - [ ] Tier-C1: ★ getK distinct-`comp_canon` @ K=9–12 offline count → (if GO) build the value layer.
@@ -216,6 +224,43 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [x] 4-agent math/instruction/discipline sweep (--2 below) → near-floor; LANDED `w17_induced`→field −0.55% (clean balanced A/B).
 
 ## Handoff Notes
+
+### Session 2026-06-23--3 — lever #2 NO-GO (compiler already vectorizes child_orient), ★ Tier-A ETC pc-gate KILLED (net-negative; win-child-reuse insight)
+**Session**: 2026-06-23--3. Mode: intent-based (`yc mi`). Resumed `go` from this handoff. Cleared two
+open levers, one cheaply and one with a definitive A/B.
+
+**Lever #2 — `child_orient8` → VPTERNLOGQ = NO-GO (disassembly, no build).** The handoff's gate ("iff the
+compiler isn't already auto-vectorizing it") is met: `objdump` of the hot `wins_inc` shows `child_orient`'s
+8× `Bits` (`[u64;4]`) `and_not` is already emitted as single 256-bit `vpandn ymm`, plus `vpternlogq zmm`
+for the fused `parent & !a` forms. `and_not` is one native instruction — a hand `VPTERNLOGQ child_orient8`
+has nothing to add. (The 4 scalar `andn` in the body are the cpc/adj path, not child_orient.) Closed.
+
+**★ Tier-A ETC pc-gate — KILLED (definitive n=16 A/B).** Built the `M_RANK` `etc_probes` tap (new
+`etc_pr`/`pr/cut` columns in the rank report; gated, production byte-identical). **The tap (8 GB TT, n=16,
+`.perf-analysis/rank16.txt`) confirmed the premise's SHAPE exactly:** the `nw>=2` ETC batch cuts ~0% of
+nodes in pc 18–24, ≤5% through pc 28 (`pr/cut` 300–5000 — near-pure waste, ~208M of 1.32B total probes),
+then flips to 12–35% cuts at pc≥29 (`pr/cut` <180). Clean crossover at ~pc 28–29.
+**But the gate A/B is net-negative.** Wired `QUEENS_ETC_PC=<pc>` / `QUEENS_ETC_GATE=1` (gate the batch off
+below pc, KEEP the gather+prefetch so the descent still gets warm entry probes). 4-round interleaved
+(`QUEENS_ETC_GATE`, 8 GB TT): **cyc/node −1.3% (the per-node probe saving IS real) · nodes +2.0% · total
+cyc +0.7% · wall +3.6%** (off 25.6s / on 26.5s mean; SECOND every round; gates green — n12 distinct
+1,060,823, `make test`).
+- **Root cause (corrects the handoff's & the ETC sub-agents' "node-set-identical" premise):** the ETC's
+  value in the cold pc≤28 mass is NOT its ~0% cuts — it's the **win-child reuse** (`wv==1` skip, iso_flat.rs
+  ~3524): a recurse child the ETC proved a WIN is skipped instead of re-recursed, and on the direct-mapped
+  TT that child's slot is usually evicted before the descent reaches it ⇒ the skip avoids a full
+  re-expansion. Gating the probe off forfeits that ⇒ +2.0% nodes. The reuse-probe and the "wasted"
+  cut-probe are the SAME probe, so **no pc-gate can keep the eviction protection while dropping the waste.**
+- **Code:** `etc_probes` tap kept (M_RANK substrate — the artifact that cheaply mapped this). `etc_pc_gate`
+  field + `QUEENS_ETC_PC`/`QUEENS_ETC_GATE` kept gated-off as documented substrate (default 0 ⇒
+  byte-identical). **One untried angle:** a much larger TT (≥17 GB, less eviction ⇒ smaller +nodes) might
+  net the −1.3% cyc/node out — but the box is memory-tight for back-to-back 17 GB A/Bs and the ceiling is
+  small regardless.
+- **⇒ The remaining open levers are unchanged:** #1 residual-stabilizer 2nd-ply orbit-dedup (the one
+  untested node-count idea; I noted first-principles doubt — the D4-canonical TT already merges transpose
+  mirrors, so headroom exists only where a mirror's slot is evicted before its pair is reached; needs an
+  offline premise-measure before any build), the getK evaluator (standing #1 cost, repeatedly at-floor),
+  and the parked heavy levers.
 
 ### Session 2026-06-23--2 — perf telemetry + saturation deep-dive, 2nd-ply refutation lever (oracle −13% but predictor CLOSED), 4-agent math/instruction/discipline sweep, ★ LANDED w17_induced→field −0.55%
 **Session**: 2026-06-23--2 (`f41034c0-a440-47cf-a6d1-de7f231086ee`). Mode: collaborative. Catalyst: user

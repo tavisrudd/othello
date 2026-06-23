@@ -246,7 +246,11 @@ struct DecAcc {
 struct RankAcc {
     nodes: [u64; MAXPC],   // expanded OR-nodes seen per pc (the descent-loop ones)
     etc_cut: [u64; MAXPC], // cut by the ETC pre-pass (before the descent)
-    no_cut: [u64; MAXPC],  // reached the end with no cut (a LOSS node)
+    // Σ ETC probes issued (= Σ nw over the `nw >= 2` batch) per pc. Tier-A go/no-go: probes-per-cut
+    // = etc_probes / etc_cut. A band with many probes but ~0 cuts is wasted ETC work (cold mass) —
+    // gate the batch off below that crossover (the descent finds the same cuts later, node-identical).
+    etc_probes: [u64; MAXPC],
+    no_cut: [u64; MAXPC], // reached the end with no cut (a LOSS node)
     // Sum of degrees (= `moves.len()`, the available-move count) over the no-cut LOSS nodes — a LOSS
     // node examines *every* child, so this is the children-examined total they contribute to `E`
     // (the `degree*nocut` term). Per pc; only the no-cut nodes bump it.
@@ -324,6 +328,7 @@ thread_local! {
         RefCell::new(RankAcc {
             nodes: [0; MAXPC],
             etc_cut: [0; MAXPC],
+            etc_probes: [0; MAXPC],
             no_cut: [0; MAXPC],
             no_cut_deg: [0; MAXPC],
             rank_dist: [[0; RANK_BUCKETS]; MAXPC],
@@ -887,6 +892,27 @@ pub struct IsoFlat {
     /// batch, which only prefetches at `nw >= 2`). Byte-identical node set (pure cache hint). Off ⇒ the
     /// current behaviour exactly (prefetch only inside the `nw >= 2` ETC batch).
     pf_deep: bool,
+    /// `QUEENS_ETC_PC=<pc>`: gate the `nw >= 2` ETC probe batch OFF for nodes with `node_pc` below this
+    /// threshold (default 0 = never gated = current behaviour, byte-identical). The gather + the
+    /// gather-time prefetch are KEPT (the descent reuses the descriptors and the prefetch still warms
+    /// each recurse child's entry probe) — only the eager ETC pre-pass probe loop is skipped. Tier-A
+    /// lever: the `M_RANK` tap shows the ETC cuts ~0–5% of nodes in pc≤28 (pr/cut 300–5000 = the probe
+    /// is near-pure waste there) and only starts paying at pc≥29 (ETC% 12–35%, pr/cut <180). Gating the
+    /// cold mass off drops the redundant ETC probe while the descent still finds the same cuts lazily
+    /// (warm, via the kept prefetch).
+    ///
+    /// **MEASURED-NEGATIVE (n=16 4-round interleaved A/B, 8 GB TT, `QUEENS_ETC_GATE=1` ⇒ gate pc<29):
+    /// cyc/node −1.3% (the per-node probe saving IS real), but nodes +2.0% / total cyc +0.7% / wall
+    /// +3.6% — a net LOSS.** The "node-set-identical" premise was WRONG: the ETC's value in the cold
+    /// pc≤28 mass is NOT its ~0% cuts — it's the **win-child reuse** (`wv==1` skip below = eviction
+    /// protection: a recurse child the ETC proved a WIN is skipped instead of re-recursed, and on a
+    /// direct-mapped TT that child's slot is often evicted by the time the descent reaches it ⇒ skipping
+    /// it avoids a full re-expansion). That reuse and the "wasted" cut-probe are the SAME probe, so no
+    /// pc-gate can keep the protection while dropping the waste. Kept gated-off as substrate (default
+    /// 0 ⇒ `node_pc >= 0` always true ⇒ byte-identical). The one untried angle: at a much larger TT
+    /// (≥17 GB, less eviction ⇒ smaller +nodes) the −1.3% cyc/node might net out — but the box is
+    /// memory-tight for back-to-back 17 GB A/Bs, and the ceiling is small regardless.
+    etc_pc_gate: u32,
     /// Shared per-popcount flat-TT put histogram (one [`AtomicU64`] per popcount), merged
     /// from each worker's thread-local [`PC_HIST_ACC`] at drain. Only populated when `hist`.
     pc_hist: Box<[AtomicU64]>,
@@ -1003,6 +1029,7 @@ pub struct IsoFlat {
     /// Shared `M_RANK` accumulator, `AtomicU64`-backed. Only populated when `rank`.
     rank_nodes: Box<[AtomicU64]>,
     rank_etc: Box<[AtomicU64]>,
+    rank_etc_probes: Box<[AtomicU64]>, // Σ ETC probes issued per pc (Tier-A probes-per-cut tap)
     rank_nocut: Box<[AtomicU64]>,
     rank_nocut_deg: Box<[AtomicU64]>, // Σ degree over no-cut LOSS nodes per pc (the E `degree*nocut` term)
     rank_dist: Box<[AtomicU64]>,      // laid out [pc * RANK_BUCKETS + r]
@@ -1383,6 +1410,18 @@ impl IsoFlat {
             // Gather-time recurse-child prefetch (cheap-first PREFETCH lever). Resolved once here;
             // gated per node at the gather (off ⇒ byte-identical to the current prefetch behaviour).
             pf_deep: std::env::var("QUEENS_PFDEEP").as_deref() == Ok("1"),
+            // `QUEENS_ETC_PC=<pc>` is the explicit threshold (for sweeping); `QUEENS_ETC_GATE=1` is the
+            // harness 0/1 toggle selecting the tap-chosen default crossover (29). Off ⇒ 0 (disabled).
+            etc_pc_gate: std::env::var("QUEENS_ETC_PC")
+                .ok()
+                .and_then(|v| v.parse().ok())
+                .unwrap_or_else(|| {
+                    if std::env::var("QUEENS_ETC_GATE").as_deref() == Ok("1") {
+                        29
+                    } else {
+                        0
+                    }
+                }),
             pc_hist: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             prof: std::env::var("QUEENS_PROF").as_deref() == Ok("1"),
             prof_data: (0..4 * MAXPC).map(|_| AtomicU64::new(0)).collect(),
@@ -1420,6 +1459,7 @@ impl IsoFlat {
             rank: std::env::var("QUEENS_RANK").as_deref() == Ok("1"),
             rank_nodes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_etc: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
+            rank_etc_probes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_nocut: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_nocut_deg: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             rank_dist: (0..MAXPC * RANK_BUCKETS)
@@ -2286,6 +2326,7 @@ impl IsoFlat {
                 }
                 self.rank_nodes[pc].fetch_add(a.nodes[pc], Ordering::Relaxed);
                 self.rank_etc[pc].fetch_add(a.etc_cut[pc], Ordering::Relaxed);
+                self.rank_etc_probes[pc].fetch_add(a.etc_probes[pc], Ordering::Relaxed);
                 self.rank_nocut[pc].fetch_add(a.no_cut[pc], Ordering::Relaxed);
                 self.rank_nocut_deg[pc].fetch_add(a.no_cut_deg[pc], Ordering::Relaxed);
                 for r in 0..RANK_BUCKETS {
@@ -2297,6 +2338,7 @@ impl IsoFlat {
                 }
                 a.nodes[pc] = 0;
                 a.etc_cut[pc] = 0;
+                a.etc_probes[pc] = 0;
                 a.no_cut[pc] = 0;
                 a.no_cut_deg[pc] = 0;
             }
@@ -2449,7 +2491,7 @@ impl IsoFlat {
         // every node; loss/cut over just the descent-cut nodes (extra children before the losing one);
         // loss_mass = nodes·loss/node = the band's total avoidable child-exams — the prioritization metric.
         println!(
-            "    {:>3} {:>15} {:>7} {:>7} {:>7} {:>7} {:>8} {:>8} {:>9} {:>10} {:>9} {:>16}",
+            "    {:>3} {:>15} {:>7} {:>7} {:>7} {:>7} {:>8} {:>8} {:>9} {:>10} {:>9} {:>16} {:>15} {:>8}",
             "pc",
             "nodes",
             "ETC%",
@@ -2462,6 +2504,8 @@ impl IsoFlat {
             "loss/node",
             "loss/cut",
             "loss_mass",
+            "etc_pr",
+            "pr/cut",
         );
         // Grand accumulators. The outcome counts (etc/r0/r1/r2/rge3/nocut) partition the nodes —
         // each expanded OR-node lands in exactly one. `e_total`/`examined_ge3`/`nocut_deg` feed E:
@@ -2480,6 +2524,7 @@ impl IsoFlat {
         let mut g_e_total = 0u64; // grand total children examined (the E numerator)
         let mut g_descent_cuts = 0u64; // nodes cut during the descent (r0+r1+r2+…) — the orderable population
         let mut g_loss = 0u64; // Σ 0-based cutoff rank = total avoidable child-exams (the loss mass)
+        let mut g_etc_pr = 0u64; // Σ ETC probes issued (Tier-A)
         for pc in 0..MAXPC {
             let n = ld(&self.rank_nodes, pc);
             if n == 0 {
@@ -2487,6 +2532,7 @@ impl IsoFlat {
             }
             let nf = n as f64;
             let etc = ld(&self.rank_etc, pc);
+            let etc_pr = ld(&self.rank_etc_probes, pc);
             let nocut = ld(&self.rank_nocut, pc);
             let nocut_deg = ld(&self.rank_nocut_deg, pc);
             let r0 = ld(&self.rank_dist, pc * RANK_BUCKETS);
@@ -2520,13 +2566,21 @@ impl IsoFlat {
             g_e_total += e_total;
             g_descent_cuts += descent_cuts;
             g_loss += loss;
+            g_etc_pr += etc_pr;
             let loss_per_cut = if descent_cuts > 0 {
                 loss as f64 / descent_cuts as f64
             } else {
                 0.0
             };
+            // probes-per-cut: ETC probes issued ÷ ETC cuts. High in cold bands = wasted ETC work
+            // (the Tier-A gate candidate); near 1 = the ETC earns its probes.
+            let pr_per_cut = if etc > 0 {
+                etc_pr as f64 / etc as f64
+            } else {
+                f64::INFINITY
+            };
             println!(
-                "    {pc:>3} {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}% {:>9.2} {:>10.3} {:>9.2} {:>16}",
+                "    {pc:>3} {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}% {:>9.2} {:>10.3} {:>9.2} {:>16} {:>15} {:>8.1}",
                 commas(n),
                 100.0 * etc as f64 / nf,
                 100.0 * r0 as f64 / nf,
@@ -2538,6 +2592,8 @@ impl IsoFlat {
                 loss as f64 / nf,
                 loss_per_cut,
                 commas(loss),
+                commas(etc_pr),
+                pr_per_cut,
             );
         }
         if g_nodes > 0 {
@@ -2548,8 +2604,13 @@ impl IsoFlat {
             } else {
                 0.0
             };
+            let g_pr_per_cut = if g_etc > 0 {
+                g_etc_pr as f64 / g_etc as f64
+            } else {
+                f64::INFINITY
+            };
             println!(
-                "    ALL {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}% {:>9.2} {:>10.3} {:>9.2} {:>16}",
+                "    ALL {:>15} {:>6.1}% {:>6.1}% {:>6.1}% {:>6.1}% {:>7.1}% {:>7.1}% {:>9.2} {:>10.3} {:>9.2} {:>16} {:>15} {:>8.1}",
                 commas(g_nodes),
                 100.0 * g_etc as f64 / gtot,
                 100.0 * g_r0 as f64 / gtot,
@@ -2561,6 +2622,8 @@ impl IsoFlat {
                 g_loss as f64 / gtot,
                 g_loss_per_cut,
                 commas(g_loss),
+                commas(g_etc_pr),
+                g_pr_per_cut,
             );
             println!(
                 "    ETC+r0+r1 = {:.1}% of all",
@@ -3349,7 +3412,14 @@ impl IsoFlat {
             // order (no sort): with the fused descent the ETC is the *only* batch probe, the batch is a
             // handful, and the sort cost on the critical path was Fermi'd below its small-batch payoff.
             // The descent below re-prefetches each miss as it expands.
-            if nw >= 2 {
+            // QUEENS_ETC_PC: gate the ETC probe batch off below the pc threshold (default 0 ⇒ the
+            // `>= 0` test is always true ⇒ byte-identical). The prefetch block above is KEPT, so a
+            // gated node's descent still gets warm entry probes — just without the redundant eager probe.
+            if nw >= 2 && node_pc >= self.etc_pc_gate {
+                // M_RANK (Tier-A tap): tally the ETC probes this batch issues (one per recurse child).
+                if MODE == M_RANK {
+                    RANK_ACC.with(|c| c.borrow_mut().etc_probes[node_pc as usize] += nw as u64);
+                }
                 for j in 0..nw {
                     let v = self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0);
                     if v == Some(0) {
