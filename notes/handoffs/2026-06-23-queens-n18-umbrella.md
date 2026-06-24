@@ -158,6 +158,29 @@ Box hygiene + GPU-quiet first. Post-run verification = the cert-strategy items 1
 subposition differentials / `--after` certs / sampled recurrence check). A second-player sweep is days,
 resumable (`QUEENS_BURR_RESUME=1`); size with a short partial run / HLL before committing to the full run.
 
+**Box hygiene — ARC (decided 2026-06-24):** for the disk-DDD run, **cap `zfs_arc_max`** (`echo
+$((3*1024*1024*1024)) > /sys/module/zfs/parameters/zfs_arc_max`, ~3 GB). Unlike the old all-anonymous-TT
+benches (where the `arc-not-a-risk` rule held — zero ZFS reads ⇒ ARC stayed small), this run reads
+segments off the pool (mmap'd) + writes dumps, so ARC grows toward its ceiling (measured `c_max`≈25.9 GB,
+~all of 26 GB RAM) and competes with the run's **non-evictable** ~20 GB anonymous footprint (≤16 GB
+Blooms + 3.2 GB prefilter + 1 GB memtables) ⇒ OOM. Keep ARC small: the Blooms must stay resident, and
+mmap'd ZFS data is double-buffered (ARC + page cache) so a small ARC + the page cache serve hot segments,
+cold ones demand-page from the pool. Validate with a sizing run (watch RSS + `arcstats size`); raise if
+the Blooms stay well under 16 GB. Also `drop_caches` pre-launch; zram swap may stay as an OOM cushion
+(the run is resumable).
+
+**Queued (deferred — not started): `QUEENS_RUN_TAG` for per-run isolation.** Today the burr segments /
+`manifest.json` / `prefilter.bloom` live flat in the fixed auto dir `queens-n18/burr/` with no run prefix
+— a fresh run into a non-empty dir is *refused* (no silent clobber), but distinct runs (sizing → full,
+or repeats) collide on the one auto path and need manual dir management. The TS file already carries a
+per-run suffix (`n<N>-search-<unixsecs>.ts`); the **burr dir can't be timestamped** (a resume must find
+the *same* dir), so it needs a **stable run label**. Add `QUEENS_RUN_TAG`: when set, namespace **inside**
+the tuned datasets (so they keep their recordsize) — segments → `queens-n18/burr/<tag>/`, TS →
+`queens-n18/dumps/<tag>/n<N>-search-<stamp>.ts`, cert dumps under `dumps/<tag>/` by convention. Same tag
+on resume → finds the snapshot; different tag → isolated; unset → today's behavior. Touches
+`disk_dir_env` + `auto_dumps_dir` + `ts_file_path` (append the tag) + the `store.rs` knob docs. Small,
+reversible. (`QUEENS_BURR_DISK_DIR` / `QUEENS_TS_FILE` already allow manual per-run isolation meanwhile.)
+
 ## Handoff Note — 2026-06-24 (disk-segment DDD + snapshot/resume — Task 7 LANDED)
 
 **Task 7 (disk-DDD) + snapshot/resume built, validated, and committed on `queens-n18`.** The
