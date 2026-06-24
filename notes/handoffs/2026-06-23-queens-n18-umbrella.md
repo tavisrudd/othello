@@ -21,9 +21,11 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > (`81e63ca`, `928a478`); `scripts/check_cert.py` is the independent checker to reuse. **n≥18
 > auto-defaults landed** (disk dir + `fp=54` + `cap=16`, no env vars needed). **Prefilter-on-resume + the adversarial-review resume-hardening landed `be40fe9`** (session
 > --8); **cert strategy REVISED** — full n=18 certify-from-dump dropped (infeasible ≈ the solve itself),
-> CPython certify n≤12 only, n=18 confidence = items 1–4 after the run. **Still TODO toward
-> launch:** the Phase-B per-root TS telemetry (live `(gets,hits)`/`rif`/`WIN_PROVED…`
-> labels/live root display — spec in `notes/n18-migration-changemap.md`), then the launch.
+> CPython certify n≤12 only, n=18 confidence = items 1–4 after the run. **Phase B telemetry + the tuned ZFS
+> datasets + n≥18 auto-routing also landed** (`d600f65`, `42a1f94`): live `(gets,hits)` hit-rate /
+> `rif` / `WIN_PROVED/LOSS_PROVED/SKIPPED` labels / live in-flight root display; segments auto-route to
+> `queens-n18/burr`, TS to `queens-n18/dumps`. **All pre-flight DONE — only TODO = Task 8, the launch
+> itself (user-gated).**
 
 ## TL;DR state
 
@@ -132,11 +134,29 @@ earlier "certify n=14/16 full board + a Rust checker" idea is dropped (CPython c
 n=14; n=16 full board is 9.2 B rows, doesn't fit). C5 raw-PV-in-snapshot stays for inspection/best-line,
 but a PV alone is not a proof.
 
-**★ NEXT toward launch:** the pre-launch code/review work is DONE (prefilter-on-resume ✓, adversarial
-review ✓). Remaining = **Phase B telemetry** (B1 live hit-rate, B2 `rif`, B3 root-timing
-`WIN_PROVED`/`SKIPPED` labels, B4 `count --by-ply`, **B5 live in-flight root display**) → **Task 8:
-launch the instrumented, snapshotting n=18 run** (user-gated big gate). Post-run verification = items
-1–4 above.
+**Also landed this session (`d600f65`, `42a1f94`):**
+- **Tuned ZFS datasets + auto-routing.** The user created `zpool_grover/queens-n18/{burr,dumps}`
+  (zstd-fast; burr = 16K recordsize for the random mmap segment reads, dumps = 1M for the sequential
+  TS/cert writes). The n≥18 auto path moved `<base>/queens-n<N>-burr` → the run-tree
+  `<base>/queens-n<N>/{burr,dumps}`, so a fresh n=18 solve routes segments onto `burr/` with **no env
+  var**, and `QUEENS_TS_FILE` auto-defaults (unset, n≥18) to `dumps/n<N>-search-<unixsecs>.ts`. Cert
+  dumps go in `dumps/` by convention. Verified end-to-end (segments→burr, TS→dumps).
+- **★ Phase B launch telemetry — DONE** (`42a1f94`): **B1** live transposition hit-rate (per-worker
+  `(gets,hits)` on the store probe → TS `"gets"/"hits"`, `Δhits/Δgets` = cold-entry/re-expansion read;
+  gated `track_hits`, auto-on n≥18 / off n≤16 byte-identical / `QUEENS_BURR_HITRATE` override); **B2**
+  `rif` (roots-in-flight) in the TS; **B3** root-timing `WIN_PROVED`/`LOSS_PROVED`/`SKIPPED` labels +
+  ran/skipped count; **B5** live in-flight root set in the TTY bar (`rif 3 [I9 A1 K6]`). **B4** needed
+  no code — `count --reachable` already reports the per-ply (queen-count) distinct distribution +
+  widest ply, `--by-pc` the proof-DAG per-pc. Validated: TS carries rif/gets/hits, root labels print,
+  n≤16 TS omits gets/hits (backward-compat), gates green.
+
+**★ NEXT = Task 8, the launch (user-gated big gate).** All pre-flight work is DONE: prefilter-on-resume
+✓, adversarial review ✓, tuned datasets + auto-routing ✓, Phase B telemetry ✓. The launch command runs
+`iso-dense-burr` at n=18 bare on a tmux TTY (the `queens` session) — disk dir + TS file are now auto
+(routed to the datasets), add `QUEENS_ROOT_TIMING=1`/`QUEENS_COLD=1`/`QUEENS_TELEM=1` like the first run.
+Box hygiene + GPU-quiet first. Post-run verification = the cert-strategy items 1–4 (property tests /
+subposition differentials / `--after` certs / sampled recurrence check). A second-player sweep is days,
+resumable (`QUEENS_BURR_RESUME=1`); size with a short partial run / HLL before committing to the full run.
 
 ## Handoff Note — 2026-06-24 (disk-segment DDD + snapshot/resume — Task 7 LANDED)
 
