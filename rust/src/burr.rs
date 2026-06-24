@@ -207,14 +207,17 @@ impl Ribbon {
         let mut co = c0; // bit 0 == column i
         let mut v = val;
         loop {
+            if co == 0 {
+                // Fully reduced: consistent iff rhs also zeroed out. Checked *before* the
+                // shift below so a fully-eliminated `co` (whose `trailing_zeros()` is 64)
+                // never runs an overflowing `co >> 64` -- a debug panic (release masks the
+                // count to `>> 0`, so this was a debug-only false failure).
+                return if v == 0 { Insert::Ok } else { Insert::Bumped };
+            }
             // Align so the lowest set bit (next pivot) is at column i.
             let tz = co.trailing_zeros() as usize;
             i += tz;
             co >>= tz;
-            if co == 0 {
-                // Fully reduced: consistent iff rhs also zeroed out.
-                return if v == 0 { Insert::Ok } else { Insert::Bumped };
-            }
             if i >= m as usize {
                 return Insert::Bumped; // ran into the overflow region
             }
