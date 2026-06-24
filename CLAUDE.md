@@ -7,8 +7,13 @@ n=16 roadmap in `notes/handoffs/`.
 ## Current WIP
 **DO NOT add details/history here. Pointers only** (details live in the handoff/proposal).
 
-**Start here:** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md) — umbrella;
-n=16 is **SOLVED** (second player). Progress + Lever backlog hold what's next.
+**★ Start here (active):** [Queens n=18 umbrella](notes/handoffs/2026-06-23-queens-n18-umbrella.md) —
+n=18 is the open board. Rep migration done + validated n≤16; first n=18 run found a **verdict bug**
+(fix first), then the BuRR-backed snapshotting build + a launched, instrumented run. Code is on
+branch `queens-n18` (worktree `/home/tavis/src/othello-n18`); handoffs/plan live here on main. **`go`.**
+
+**Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
+— Progress + Lever backlog hold the n=16 lineage history.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
 **LATEST (--15): goal → 30s END-TO-END (incl prep). Search −16% + prep −2s; best clean round ~33s, A/B good
@@ -114,7 +119,8 @@ node-count cut is the metric, deterministic at n=14, and the wall follows):
 
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
-| **iso-dense W17 + degree-ordered getK (--18 DEFAULT)** | **24.5s** search (fastest single seen; mean ~26–28s, 12 GB A/B) / ~27s e2e | 0.31 B | **★ #1 DEFAULT (--18, branch `queens-sub20-wk` — merge to main)**: W17 dense layer (3-word code above the u128 K=16 ceiling) resolves pc==17 (~21% of nodes) as a getK leaf (no cold entry probe) + getK children swept degree-descending (earliest cutoff) + get13-16 child codes right-sized to u64 + cpc off the popcount critical path. **−8.6%..−13% wall vs the W16 default** (−21% nodes / +16.5% cyc/node), SECOND every A/B round. K=17 is the wall sweet spot (W18-20 cut nodes −52% but work-conserve ⇒ flat wall). `QUEENS_FAST=0` reverts to W16+no-ord. |
+| **iso-dense W17 + degree-ordered getK + skip18 {18} (--7 DEFAULT)** | **23.44s** search (new clean-box record) / 307,608,950 nodes | 0.31 B | **★ #1 DEFAULT (--7, on main)**: on top of the W17 --18 default, **skip18 = {18} all-roots** — skip ALL TT work (canon `lex_min8`→`d4_bits`→`hash128` ≈ the #1 branch-mispredict step, + probe + put) for pc==18 nodes. Safe & cascade-free: pc==18 is the only band whose children are ALL getK leaves (pc≤17) ⇒ a re-expanded pc==18 node re-runs one bounded getK sweep, never an unmemoised subtree; ~100% cold (0.3% probe hit). **−2.5% wall / −3.6% cyc vs the W17 default, n-agnostic, verdict-preserving** (n12 distinct 1,060,823 exact). pc==18 is UNIQUE — every band extension ({19}, [18..22], {18,20,22,24}, fractional) measured dead. `QUEENS_SKIP18=0` reverts. |
+| **iso-dense W17 + degree-ordered getK (--18)** | **24.5s** search (fastest single seen; mean ~26–28s, 12 GB A/B) / ~27s e2e | 0.31 B | **prior #1 DEFAULT (--18; the skip18 baseline)**: W17 dense layer (3-word code above the u128 K=16 ceiling) resolves pc==17 (~21% of nodes) as a getK leaf (no cold entry probe) + getK children swept degree-descending (earliest cutoff) + get13-16 child codes right-sized to u64 + cpc off the popcount critical path. **−8.6%..−13% wall vs the W16 default** (−21% nodes / +16.5% cyc/node), SECOND every A/B round. K=17 is the wall sweet spot (W18-20 cut nodes −52% but work-conserve ⇒ flat wall). `QUEENS_FAST=0` reverts to W16+no-ord. |
 | **iso-dense (W16) M_ORD_W + counting-sort + warm-off + ETC-reuse + flat-arena** | **~27s** search (best A/B round 27.0s / 0.37 B; mean ~29s, 12 GB A/B) | 0.37 B | **★ #1 DEFAULT (--16)**: on top of --15, **ETC win-child re-probe elimination** (thread the M_ORD_W ETC `Some(1)` into the fused descent — no re-recurse/re-probe of a known-win child; node-count ≤ baseline) + **★ flat W0..W8 dense arena** (one contiguous `&[u64]`, kills the `Vec<Box<[u64]>>` pointer-chase + bounds-check load in every getK leaf, **−2.0% cyc/node**). |
 | iso-dense (W16) + M_ORD_W (--14) | **~34s** clean (33.9s) | 0.40 B | pext-per-row getK code-build + W_K ceiling raised K=12→**16** (the u128 code limit) = **−35% vs the K=12 M_ORD_W default**; node cut is inherent/TT-independent, TT only 16.5% full; `QUEENS_DENSE_K` 9..=16 |
 | iso-dense (W12) + M_ORD_W | ~52s / ~49s best | 0.94 B | the prior default (`QUEENS_DENSE_K=12`): dynamic ordering + ETC + (--13) inlined insertion sort / sort-fuse / inline-each / prefetch-reorder; `QUEENS_ORD=0`→M_WAVE, `=1`→M_ORD |
