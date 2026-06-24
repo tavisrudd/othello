@@ -18,10 +18,11 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > (see the top Handoff Note). **The C2-retrograde-BFS plan stays dead** (the banner below is about that
 > different driver); **DFS + disk-DDD is the live path**, refuting the "needs a cluster / bigger box"
 > conclusion. C6 certify pipeline + `certify --after` remain parked on `queens-n18-certify`
-> (`81e63ca`, `928a478`); `scripts/check_cert.py` is the independent checker to reuse. **Still TODO
-> toward launch:** prefilter-on-resume + bigger `mem_bits`, the per-root TS telemetry (live
-> `(gets,hits)`/`rif`/`WIN_PROVED…` labels/live root display — spec in `notes/n18-migration-changemap.md`),
-> C5/C6 PV + certificate dump, then the launch.
+> (`81e63ca`, `928a478`); `scripts/check_cert.py` is the independent checker to reuse. **n≥18
+> auto-defaults landed** (disk dir + `fp=54` + `cap=16`, no env vars needed). **Still TODO toward
+> launch:** prefilter-on-resume, the per-root TS telemetry (live `(gets,hits)`/`rif`/`WIN_PROVED…`
+> labels/live root display — spec in `notes/n18-migration-changemap.md`), C5/C6 PV + certificate dump,
+> then the launch.
 
 ## TL;DR state
 
@@ -142,22 +143,28 @@ each segment file (read from the header), so they're recorded for sanity but nee
   run routes via per-segment Blooms = **O(segments)-per-miss** walk. Fresh runs keep it. Fix:
   serialize the prefilter periodically (stale is *correctness-safe* — a missing key only costs a
   re-expansion), or MLP-prefetch all segment-Bloom lines per miss (overlaps the DRAM latency).
-- **Per-segment Bloom RAM is the resident budget** (~1 B/key ⇒ ~15 GB for n=18's set). Independent
-  of segmentation, BUT segment **count** drives the per-miss walk + resume reload — so for n=18
-  **raise `QUEENS_BURR_MEM_BITS`** (bigger memtable ⇒ bigger `freeze_at` ⇒ fewer/larger segments;
-  ~19 segments at mem_bits=30 vs ~300 at the default). Size archive(disk) freely; watch
-  Blooms+memtables+page-cache ≤ ~24 GB usable.
+- **`mem_bits` stays 26 for n=18 — do NOT raise it** (this *corrects* an earlier note that said to
+  bump it for fewer segments). The per-segment Blooms (~1 B/key × ~10–18 B keys ≈ **15 GB**) are the
+  binding **resident** cost; the memtables compete with them for RAM, so `mem_bits=26` (1 GB for both
+  buffers) is right. `mem_bits=30` would be **16 GB of memtables alone** ⇒ OOM. The ~200–300 segments
+  this implies are fine: the shared prefilter routes fresh-run gets (walk only on hit/FP), and reload
+  is hundreds of cheap mmaps. (Segment count *would* matter on resume, where the prefilter is dropped
+  — see the prefilter-on-resume follow-up above.)
 - **C5/C6 still TODO:** raw-PV-in-snapshot + the certificate dump (cert keys on the full 384-bit
-  canonical key, `QUEENS_BURR_FP=54`); reuse `scripts/check_cert.py` from branch `queens-n18-certify`.
-  The frontier/which-roots-done **cursor** is also TODO — resume currently re-runs the search (frozen
-  subtrees are cheap hits) but doesn't skip already-proven roots.
-- **Pre-existing latent (NOT from this work):** `burr::tests::cascade_terminates_at_high_load` panics
-  in **debug** at `burr.rs:257` (`co >>= 64` when a key fully reduces) — overflow-checks fire only in
-  debug; the gate runs `--release` (wraps to `>> 0`, returns correctly) so it's green. A clean fix is
-  to check `co == 0` at the loop top; left untouched (core GE code, out of Task 7 scope).
+  canonical key, `QUEENS_BURR_FP=54` — now the n≥18 default); reuse `scripts/check_cert.py` from branch
+  `queens-n18-certify`. The frontier/which-roots-done **cursor** is also TODO — resume currently
+  re-runs the search (frozen subtrees are cheap hits) but doesn't skip already-proven roots.
 
-**★ NEXT for the launch:** (1) the prefilter-on-resume fix + bump `mem_bits` for fewer segments;
-(2) C5/C6 PV + certificate dump; (3) Task 10 adversarial review; (4) Task 8 — launch the
+**✅ n≥18 auto-defaults landed (commit `ece31ca`):** a fresh `iso-dense-burr` solve at n≥18 now
+auto-selects the disk-DDD regime with **no env vars** — auto disk dir (`<base>/queens-n18-burr`,
+`base` = `QUEENS_BURR_DISK_BASE` default `/tmp/persistent/tavis`, or the full `QUEENS_BURR_DISK_DIR`),
+**`fp=54`** (certified-safe, on disk = free RAM), **`cap=16 GB`**, `mem_bits=26`. Logged at startup +
+written to the manifest; n≤16 stays in-RAM (control). Each value still individually overridable. Also
+fixed the debug-only `co >>= 64` overflow in `Ribbon::insert` (on **both** branches: main `d8a1727`,
+worktree in the auto-defaults commit) — `cargo test` in debug works again.
+
+**★ NEXT for the launch:** (1) the prefilter-on-resume fix (so resumed runs don't pay the O(segments)
+walk); (2) C5/C6 PV + certificate dump; (3) Task 10 adversarial review; (4) Task 8 — launch the
 instrumented, snapshotting n=18 run (user-gated big gate). Then run `check_cert.py` — *a verdict we
 can't certify, we don't claim.*
 
@@ -202,26 +209,27 @@ BuRR store *under the fast iso-dense kernel*. Post-mortem on how that estimate o
   on this 26 GB box (live RSS climbed to the ~20.5 GB cap on root 0 alone) ⇒ **doesn't fit RAM ⇒
   the disk-DDD rung (Task 7) is the path**, not in-RAM.
 
-**✅ Task 7 (disk-segment DDD) + snapshot/resume DONE** (2026-06-24, commits `84a0fd8` + the resume
-commit) — see the **top Handoff Note** for the build, measurements, and remaining follow-ups. The
-in-RAM cap wall is removed: ribbons live on the 1.4 TB ZFS pool (`QUEENS_BURR_DISK_DIR`), only
-Blooms resident; segments double as a resumable snapshot (`QUEENS_BURR_RESUME=1`). Was: "persist the
-frozen immutable segments to `/tmp/persistent/tavis`, keep per-segment Blooms resident, read a
-segment from disk only on a Bloom-admit." That's exactly what landed; the freeze pipeline that
-*writes* them keeps up (Task 11). **Remaining toward launch:** prefilter-on-resume + bigger `mem_bits`
-(fewer segments) → Task 5/6 PV + cert dumps (cert keys on the full 384-bit canonical key,
-`QUEENS_BURR_FP=54`) → Task 10 three adversarial review rounds → Task 8 launch. Parked certify
-pipeline on branch `queens-n18-certify`; `scripts/check_cert.py` is the independent checker to reuse.
+**✅ Task 7 (disk-segment DDD) + snapshot/resume + n≥18 auto-defaults DONE** (2026-06-24, commits
+`84a0fd8` + `0b91f2f` + the auto-defaults commit) — see the **top Handoff Note** for the build,
+measurements, and remaining follow-ups. The in-RAM cap wall is removed: ribbons live on the 1.4 TB ZFS
+pool (`QUEENS_BURR_DISK_DIR`, **auto for n≥18**), only Blooms resident; segments double as a resumable
+snapshot (`QUEENS_BURR_RESUME=1`). Was: "persist the frozen immutable segments to
+`/tmp/persistent/tavis`, keep per-segment Blooms resident, read a segment from disk only on a
+Bloom-admit." That's exactly what landed; the freeze pipeline that *writes* them keeps up (Task 11).
+**Remaining toward launch:** prefilter-on-resume → Task 5/6 PV + cert dumps (cert keys on the full
+384-bit canonical key, `QUEENS_BURR_FP=54`) → Task 10 three adversarial review rounds → Task 8 launch.
+Parked certify pipeline on branch `queens-n18-certify`; `scripts/check_cert.py` is the independent checker.
 
 **Code state (`queens-n18` @ disk-DDD commits):** iso-dense-burr + disk-DDD + snapshot/resume built
 + validated (gates green). **Banked earlier:** `3d4d8f6` (BuRR-backed iso-dense + huge-page store +
 key telemetry), `f99d56d` (freeze parallelization); **this session:** `84a0fd8` (disk-DDD core) +
-`0b91f2f` (snapshot/resume). Launch knobs decided: `QUEENS_BURR_FP=54` (audit), `QUEENS_BURR_CAP_GB`≈16–18,
-`QUEENS_BURR_DISK_DIR=<zfs path>`, raise `QUEENS_BURR_MEM_BITS` for fewer/larger segments. **Pending
-tuning (non-blocking):** the `keys` telemetry overcounts in the evicting regime (`fill` = inserts,
-not occupancy) — report occupancy; ~~the burr footer prints the placeholder "TT 0.00 GB"~~ FIXED
-(footer now shows `store.summary()` incl. disk bytes); `pw[]` per-worker is zeros for burr (reads
-the placeholder TT).
+`0b91f2f` (snapshot/resume) + the auto-defaults commit. **Launch knobs are now AUTO for n≥18** (no env
+needed): `fp=54`, `cap=16 GB`, disk dir `<base>/queens-n18-burr` (`base`=`QUEENS_BURR_DISK_BASE`,
+default the ZFS pool), `mem_bits=26` (kept low on purpose — Blooms are the binding RAM cost). Override
+any via its `QUEENS_BURR_*` var. **Pending tuning (non-blocking):** the `keys` telemetry overcounts in
+the evicting regime (`fill` = inserts, not occupancy) — report occupancy; ~~the burr footer prints the
+placeholder "TT 0.00 GB"~~ FIXED (footer now shows `store.summary()` incl. disk bytes); `pw[]`
+per-worker is zeros for burr (reads the placeholder TT).
 
 ## Handoff Note — session 2026-06-24--5 (id f8bdada0-eac0-4a5f-a117-d9b8dc59584f)
 **Phase A (verdict bug) DONE + Phase C1 (store) DONE — two clean commits on `queens-n18`.**
