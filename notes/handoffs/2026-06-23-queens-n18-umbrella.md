@@ -24,8 +24,12 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > CPython certify n≤12 only, n=18 confidence = items 1–4 after the run. **Phase B telemetry + the tuned ZFS
 > datasets + n≥18 auto-routing also landed** (`d600f65`, `42a1f94`): live `(gets,hits)` hit-rate /
 > `rif` / `WIN_PROVED/LOSS_PROVED/SKIPPED` labels / live in-flight root display; segments auto-route to
-> `queens-n18/burr`, TS to `queens-n18/dumps`. **All pre-flight DONE — only TODO = Task 8, the launch
-> itself (user-gated).**
+> `queens-n18/burr`, TS to `queens-n18/dumps`. **LAUNCHED (session --9):** ran 1h → 5.77 B nodes, confirmed
+> **NVMe-bound** (working set ≫ RAM). Landed **A+B+C throughput fixes** (`3b36b2e` — pread ribbon reads /
+> wired store prefetch / MLP Bloom walk; major-faults 108K→0, ARC miss 88→24%) + **io_uring Step A** (`6e89f9a`
+> — the batch-read primitive). The run is still NVMe-bound with the disk **under-driven** (33K/56K IOPS); next
+> = wire io_uring into the search (Steps B/C) to fill the queue, vs the capacity path (more RAM). **Run STOPPED
+> + resumable. ★ See the session --9 note + `go`.**
 
 ## TL;DR state
 
@@ -96,6 +100,83 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    dump, then **run the independent checker** — *a verdict we can't certify, we don't claim* (Phase E).
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
+
+## Handoff Note — 2026-06-24 (session --9) — LAUNCHED; diagnosed disk-bound; A+B+C throughput fixes + io_uring Step A
+
+**The n=18 run was launched, ran ~1h, and exposed the real wall: it is NVMe-bound, not compute- or
+memory-bound.** The disk-DDD fits n=18 on disk but pays NVMe random-read latency, and the box can't cache
+the working set. Three throughput fixes landed + validated; the run was resumed, re-confirmed disk-bound,
+then stopped to build the async-I/O lever (io_uring). **Run is STOPPED + resumable** (116 segments + manifest
++ 3.2 GB prefilter on the pool; resume = `QUEENS_BURR_RESUME=1 ./target/release/queens solve 18 iso-dense-burr`).
+
+**The run (commits on `queens-n18`):**
+- Launched bare on tmux `queens:iso-dense-burr` per the procedure. Ran **1h04m → 5.77 B nodes / 4.04 B keys /
+  113 segments, never left root I9 (0/45), `full=0`**. Cumulative throughput decayed 6.9 → 1.8 M/s.
+- **Diagnosed disk-bound.** ARC was capped 3 GB (the launch plan); raising `zfs_arc_max` 3→12 GB cut ARC
+  demand-miss 88%→31% and iowait 70%→2% — which **exposed a 93%-CPU-idle parallelism deficit** in the
+  giant-root serial-spine valleys (`rif 1`), plus recurring multi-second **drop-to-0 stalls**.
+
+**Three Opus sub-agents (read-only, run untouched) — findings, all verified in code:**
+1. **Bloom math:** the **shared prefilter is undersized** — `bloom_bytes_env = 0.2 × cap` (`store.rs:536`)
+   was calibrated for the in-RAM era (cap bounded ribbons ≈ 10 bits/key); in disk mode cap bounds **Blooms**
+   (`store.rs:511`), so it's **~1.6 bits/key at the 16 GB cap → ~95% FP → the O(S) segment-Bloom walk
+   dominates** (the profiled 30% `Bloom::maybe_contains`). Compounds: FP-rate × S both grow with keys.
+2. **Segment speedups:** the **live `IsoFlat` kernel's `mtt_prefetch` was a NO-OP** for the store
+   (`iso_flat.rs:2099`; the `store.prefetch` calls were in the *unused* `Burr`/`IsoBurr`). mmap→pread is
+   resume-compatible (format is access-method-independent). The **resident-Bloom cap binds at ~11.4 B keys**
+   (50.3 MB/seg × 318 segs), *below* the 10–18 B distinct estimate → eviction would return.
+3. **Stalls:** the drop-to-0s are **mmap demand-paging / refault**, NOT freezes (only 4% coincide; the freeze
+   runs on a separate efficiency-core pool). `/proc/pressure/io full=67%`, ~77K/s major-faults ≈ 77K/s
+   workingset-refaults, `MADV_RANDOM`. Stall fraction grew 0%→42% with on-disk size.
+
+**A+B+C landed + validated + committed `3b36b2e` (segment-preserving, byte-identical search):**
+- **A — `MappedArchive::get` reads each layer's band window via `pread`** (one contiguous read/layer) instead
+  of mmap faults: kills the ~108K major-faults/s + the ZFS page-cache double-buffer; **ARC becomes the single
+  ribbon cache**. `read_packed_window` mirrors `read_packed`; `mapped_archive_matches_in_ram` stays green.
+- **B — wired the live `mtt_prefetch` into the store** (`prefetch_hashed(route, fp)` — was a no-op): warms the
+  memtable slot + prefilter line one-ahead from the child's `(route, fp)`, no key re-hash.
+- **C — MLP the per-segment Bloom walk** (`PF=12` prefetch-ahead) to overlap the O(S) resident-Bloom DRAM
+  round-trips.
+- **Gates:** lineage; n=12 iso-flat `--distinct` = **1,060,823** exact; **n=14 iso-dense-burr disk-off ==
+  disk-on == 2,823,498 nodes** (pread e2e byte-identical), second; full `make test` green.
+- **D (seg_bloom_bits 8→4) DEFERRED, not applied:** raising the cap to ~19 B keys would 6× the per-segment FP
+  (13% vs 2.1%) → 6× more FP-walk **preads**, fighting A. Resumed with **seg_bloom_bits=8**; revisit only if we
+  approach the 11.4 B-key cap. (E — `mem_bits` 26→28 to cut S 4× — parked; **can't apply on resume**, the
+  manifest locks `mem_bits=26` to the snapshot, so E needs a fresh run.)
+
+**Resume + post-fix measurement [measured]:** reloaded 113 segs + 3.2 GB prefilter cleanly. **A confirmed at the
+mechanism level: major-faults 108K/s → 0, swap 1.3 GB → 0, ARC demand-miss 88% → 24%.** BUT throughput stayed
+~0.26 M/s and **iowait 95%** — the run is now cleanly **NVMe-bound on cold ribbon reads** (working set 36 GB,
+→ ~135 GB at full distinct, ≫ 26 GB box). Decisively: the NVMe is **UNDER-DRIVEN — 33K of ~56K IOPS** — because
+the deep serial spine (parallelism deficit) issues **serial blocking preads**, keeping the device queue shallow.
+This is past re-warm (it froze 2 new segments / +70 M keys), so ~0.26 M/s is steady-state new-work, not a transient.
+
+**Strategy Q&A (user) — settled:**
+- **Bigger flat TT (iso-dense)? NO** — the divergent-thrash trap BuRR escaped (the buggy n=18 flat-TT run:
+  17 GB TT, 99.7% cold, 261 B nodes, didn't finish; eviction → unbounded re-expansion that may never converge).
+- **Routing index in front of BuRR? Secondary** — aimed at the now-minor O(S) walk (~12% on-CPU), only ~2×
+  (eliminates FP-triggered ribbon reads), RAM-blocked (~17 GB) + un-buildable from keyless ribbons.
+- **Alternative disk index (RocksDB/redb)? Real** — gives compaction-routing (no O(S) walk) + async I/O +
+  block cache out of the box, but a large rewrite, stores keys (~135 GB, fine), still disk-bound.
+- **The wall is RAM capacity.** Every structure pays NVMe latency for the cold tail. The clean fix is
+  **more RAM (~192–256 GB holds the working set in ARC → back to multi-M/s)** or the cluster; the cheap
+  software lever is **fill the under-driven NVMe via async I/O**. **User chose io_uring.**
+
+**★ io_uring async ribbon reads — Step A DONE, committed `6e89f9a`:** per-worker thread-local ring +
+`batch_pread(BandRead[])` in `burr.rs` (submit many band-window reads, wait together). `batch_pread_matches_pread`
+proves byte-identical to pread + ring reuse; skips where io_uring is unavailable. dep `io-uring = "0.7"`.
+**NOT yet wired into the search** — that's the remaining work:
+- **Step B** — batch the candidate ribbon reads inside the segment walk (`get_inner`): ~2–3 deep.
+- **Step C (the win)** — frontier/children prefetch: at a node, async-read the ordered children's ribbons
+  ahead via the ring (feed from `wins_inc_iter`'s materialized frontier), consume **in α-β/move order** so the
+  node count stays byte-identical (prefetch, not reorder). Goal: one deep-spine thread fills the 33K→56K+ queue.
+  Expected ~2× from the headroom; α-β-sensitive (speculative *reads* are fine — eviction-free — but must not
+  change expansions). Validate with the n=14 disk-off==on gate + a throughput/iowait A/B.
+
+**★ NEXT:** wire Step B then C (byte-identical gate each), measure whether the NVMe queue fills and iowait drops.
+**Open honest question for the user:** even fully integrated, io_uring is ~2× on a *fundamentally* disk-bound run
+(working set ≫ RAM) — so weigh it against the **capacity** path (a ~192–256 GB box removes the wall outright,
+likely a smaller real cost than chasing 2× and still being disk-bound). Watch script: `scratchpad/n18-watch.sh`.
 
 ## Handoff Note — 2026-06-24 (session --8) — prefilter-on-resume + resume-hardening; cert strategy revised
 
