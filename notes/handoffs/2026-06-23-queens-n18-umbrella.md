@@ -19,10 +19,11 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > different driver); **DFS + disk-DDD is the live path**, refuting the "needs a cluster / bigger box"
 > conclusion. C6 certify pipeline + `certify --after` remain parked on `queens-n18-certify`
 > (`81e63ca`, `928a478`); `scripts/check_cert.py` is the independent checker to reuse. **n≥18
-> auto-defaults landed** (disk dir + `fp=54` + `cap=16`, no env vars needed). **Still TODO toward
-> launch:** prefilter-on-resume, the per-root TS telemetry (live `(gets,hits)`/`rif`/`WIN_PROVED…`
-> labels/live root display — spec in `notes/n18-migration-changemap.md`), C5/C6 PV + certificate dump,
-> then the launch.
+> auto-defaults landed** (disk dir + `fp=54` + `cap=16`, no env vars needed). **Prefilter-on-resume + the adversarial-review resume-hardening landed `be40fe9`** (session
+> --8); **cert strategy REVISED** — full n=18 certify-from-dump dropped (infeasible ≈ the solve itself),
+> CPython certify n≤12 only, n=18 confidence = items 1–4 after the run. **Still TODO toward
+> launch:** the Phase-B per-root TS telemetry (live `(gets,hits)`/`rif`/`WIN_PROVED…`
+> labels/live root display — spec in `notes/n18-migration-changemap.md`), then the launch.
 
 ## TL;DR state
 
@@ -93,6 +94,49 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    dump, then **run the independent checker** — *a verdict we can't certify, we don't claim* (Phase E).
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
+
+## Handoff Note — 2026-06-24 (session --8) — prefilter-on-resume + resume-hardening; cert strategy revised
+
+**Landed on `queens-n18` @ `be40fe9`: prefilter-on-resume + the adversarial-review resume-hardening.**
+Gates green (n=12 distinct 1,060,823, iso-dense-burr second n=12/14, lineage, clippy/fmt); the disk
+fresh+resume round-trip is validated (verdict second, prefilter reloaded, `mem_slots` mismatch aborts).
+
+- **Prefilter-on-resume** — the shared prefilter is snapshotted to `{dir}/prefilter.bloom` on a throttle
+  (`QUEENS_BURR_PREFILTER_SECS`, default 180 s) + on a clean `drain_all`, and reloaded on resume. A
+  resumed run now rejects a miss in one cache-line read instead of the **O(segments) per-segment-Bloom
+  walk**. Staleness is correctness-safe (keys frozen since the last snapshot re-expand once, self-
+  healing). A single-writer latch keeps the throttled freeze write from racing the forced `drain_all`
+  write on the shared tmp path (a real race — caught + fixed during validation).
+- **Adversarial review of the disk-DDD + snapshot/resume foundation → VERDICT: safe to base a multi-day
+  run on, no CRITICAL wrong-value defect** (`MappedArchive::get` proven bit-for-bit identical to the
+  in-RAM path; the freeze publish protocol is a correct Release/Acquire; the "a miss only re-expands,
+  never wrong" invariant holds everywhere). Fixed its findings:
+  - **HIGH-1** — the manifest now records + enforces the resolved memtable **slot count** (`mem_slots`),
+    not just `mem_bits`. `QUEENS_TT_SLOTS` *also* drives the archive key, so a resume with a different
+    value silently discarded the whole snapshot (correct verdict, zero progress). Now aborts loudly.
+  - **MED-2** — fsync the parent dir after every segment/manifest/prefilter rename (durable rename;
+    best-effort, FS-portable, largely moot on the ZFS target).
+  - **MED-3** — unit-test the disk segment file framing end-to-end (`write_segment` →
+    `MappedArchive::open` → `Bloom::load_le` over `bloom_tail`); was zero-coverage.
+  - **LOW-4** — `MappedArchive::open` rejects a heterogeneous-shard file rather than mis-decode it.
+
+**★ Certification strategy REVISED (user) — full n=18 certify-from-dump is DROPPED** (infeasible: the
+dump *is* the α-β proof DAG ≈ the solve itself — n=12 is 1.06 M rows, not the 44.9 M reachable; n=18 is
+tens of B rows, re-deriving them is the same order of work as the solve). See the work-plan's new
+"Certification strategy — REVISED" block. CPython `check_cert.py` certify-from-dump is **n≤12 only**;
+n=18 confidence comes from (AFTER the run) **items 1–4**: (1) primitive property tests = the A2 set
+(`d4_bits` bijection / `verts_of`/`att08` squares 256–323 / `MAXV_POW2` mask — the u8-bug class), (2)
+subposition differentials vs the pure-D4 memo/`naive` oracle, (3) `--after` position certs, (4) a
+sampled probabilistic recurrence check (O(K); catches a systematic flip with high probability). The
+earlier "certify n=14/16 full board + a Rust checker" idea is dropped (CPython can't scale to 49.4 M @
+n=14; n=16 full board is 9.2 B rows, doesn't fit). C5 raw-PV-in-snapshot stays for inspection/best-line,
+but a PV alone is not a proof.
+
+**★ NEXT toward launch:** the pre-launch code/review work is DONE (prefilter-on-resume ✓, adversarial
+review ✓). Remaining = **Phase B telemetry** (B1 live hit-rate, B2 `rif`, B3 root-timing
+`WIN_PROVED`/`SKIPPED` labels, B4 `count --by-ply`, **B5 live in-flight root display**) → **Task 8:
+launch the instrumented, snapshotting n=18 run** (user-gated big gate). Post-run verification = items
+1–4 above.
 
 ## Handoff Note — 2026-06-24 (disk-segment DDD + snapshot/resume — Task 7 LANDED)
 
