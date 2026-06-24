@@ -158,6 +158,31 @@ Box hygiene + GPU-quiet first. Post-run verification = the cert-strategy items 1
 subposition differentials / `--after` certs / sampled recurrence check). A second-player sweep is days,
 resumable (`QUEENS_BURR_RESUME=1`); size with a short partial run / HLL before committing to the full run.
 
+### ★ NEXT-SESSION LAUNCH PROCEDURE (user directive 2026-06-24) — `go` = execute this
+
+**The next session DRIVES the launch in tmux `queens:iso-dense-burr`** (actual window name
+`iso-dense-burr run1`, window 4 — prefix-matches). Steps:
+
+1. **Pre-flight check (don't C-c a busy pane).** `tmux list-windows -t queens`; confirm the window is
+   **idle at a prompt**. ARC is already capped (`zfs_arc_max=3G`, `c_max`=3.0 GiB confirmed). Build if
+   stale: `make release` in `/home/tavis/src/othello-n18/rust` (HEAD `42a1f94`).
+2. **Drop caches**, then launch — **bare on the TTY** (no pipe / no redirect, so the live bar + B5
+   in-flight root display render), from the worktree:
+   ```
+   echo 3 | sudo tee /proc/sys/vm/drop_caches
+   tmux send-keys -t queens:iso-dense-burr \
+     "cd /home/tavis/src/othello-n18/rust && QUEENS_ROOT_TIMING=1 QUEENS_COLD=1 QUEENS_TELEM=1 ./target/release/queens solve 18 iso-dense-burr" Enter
+   ```
+   Fresh run — **NO `QUEENS_BURR_RESUME`** (resume only on a *restart*). Disk dir + TS auto-route to
+   `queens-n18/{burr,dumps}` (no env needed). `QUEENS_BURR_HITRATE` auto-on at n≥18.
+3. **Check on it at 2 min, 5 min, 10 min** (user directive), via `tmux capture-pane -t
+   queens:iso-dense-burr -p | tail -30` for the live bar (nodes/s, `rif`, hit-rate, root display) **plus**
+   `free -h` + `awk '/^size /{...}' /proc/spl/kstat/zfs/arcstats` + the process RSS. Each check, confirm:
+   **RSS safe** (anonymous < ~22 GB, ARC ≤ 3 GB, not spilling to zram), **progressing** (nodes climbing),
+   **segments freezing** (`keys`/`frz` climbing in the TS, the `burr/` dir filling), **rif/hit-rate sane**.
+   **Flag immediately** if RSS balloons toward OOM or ARC misbehaves (resumable, but avoid thrash).
+4. **After 10 min: updates ONLY on an explicit user prompt** (user directive — don't volunteer status).
+
 **Box hygiene — ARC (decided 2026-06-24):** for the disk-DDD run, **cap `zfs_arc_max`** (`echo
 $((3*1024*1024*1024)) > /sys/module/zfs/parameters/zfs_arc_max`, ~3 GB). Unlike the old all-anonymous-TT
 benches (where the `arc-not-a-risk` rule held — zero ZFS reads ⇒ ARC stayed small), this run reads
