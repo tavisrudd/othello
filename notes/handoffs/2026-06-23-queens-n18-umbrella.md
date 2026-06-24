@@ -119,18 +119,36 @@ BuRR store *under the fast iso-dense kernel*. Post-mortem on how that estimate o
   `QUEENS_BURR_FP` to 54**. The certificate must key on the full 384-bit canonical key (the u64
   `archive_key` has a birthday floor fp can't fix; the independent `check_cert.py` is the safety
   net). Int-widths otherwise safe — the u8 square-index class is gone.
-- **[measured]** **Freeze pipeline stalls at n=18** (Task 11, BLOCKER): the ~40M-key ribbon
-  segment build takes ~23 s and the `freezing` flag blocks further freezes ⇒ ~1 freeze / 35 s ⇒
-  the store degenerates into a single evicting 67M-slot memtable (NOT eviction-free). Ruled out
-  core-starvation (`RAYON_NUM_THREADS` reserve) and the Task-1 `MADV_COLLAPSE` (`QUEENS_TT_COLLAPSE=0`).
+- **[measured → FIXED `f99d56d`]** Freeze pipeline stalled at n=18: the ~40M-key ribbon segment
+  build took ~23 s and the `freezing` flag blocked further freezes ⇒ ~1 freeze / 35 s ⇒ the store
+  degenerated into a single evicting 67M-slot memtable. Cause: the partition phase was
+  single-threaded and did two random Bloom inserts/key (incl. into the multi-GB shared prefilter).
+  **Fix:** hoist the Bloom inserts into the parallel per-shard build (`AtomicU64` words ⇒ `fetch_or`
+  is race-safe; no false negatives ⇒ sound). **~4× throughput** — first freeze t≈28s→t≈11s, 4
+  freezes/35 s vs 1; pipeline now ~keeps pace. (Ruled out core-starvation + the Task-1 `MADV_COLLAPSE`.)
+  Residual headroom: the serial scan + smaller/more-frequent freezes if more margin is needed.
 - **[measured]** The in-RAM store retains only ~2.2–2.5 B of ~10–18 B distinct at a 16–18 GB cap
   on this 26 GB box (live RSS climbed to the ~20.5 GB cap on root 0 alone) ⇒ **doesn't fit RAM ⇒
   the disk-DDD rung (Task 7) is the path**, not in-RAM.
 
-**Next (revised gate order):** Task 11 freeze/segment-build throughput (prerequisite — disk-DDD
-also freezes) → Task 7 disk-segment DDD + snapshot → Task 5/6 PV + cert dumps (wide key, `fp=54`)
-→ Task 10 three adversarial review rounds → Task 8 launch. The parked certify pipeline is on
-branch `queens-n18-certify`; `scripts/check_cert.py` is the independent checker to reuse.
+**★ NEXT SESSION starts here — Task 7: disk-segment DDD + snapshot.** The in-RAM store can't hold
+n=18 (caps at ~2.2–2.5 B of ~10–18 B distinct), so persist the frozen immutable segments to
+`/tmp/persistent/tavis` (ZFS, 1.4 TB), keep the per-segment Blooms resident, read a segment from
+disk only on a Bloom-admit. The store is already append-only segments + Blooms (the right shape),
+and the freeze pipeline that *writes* them now keeps up (Task 11) — so this is unblocked. Same
+persistence IS the snapshot/resume (segments + cursor + PV). Then: Task 5/6 PV + cert dumps (cert
+keys on the full 384-bit canonical key, `QUEENS_BURR_FP=54`) → Task 10 three adversarial review
+rounds → Task 8 launch. Parked certify pipeline on branch `queens-n18-certify`;
+`scripts/check_cert.py` is the independent checker to reuse.
+
+**Code state (`queens-n18` @ `f99d56d`):** iso-dense-burr built + validated (gates green), store
+huge-paged, key telemetry wired + verified, freeze pipeline parallelized. **Banked this session:**
+`3d4d8f6` (BuRR-backed iso-dense + huge-page store + key telemetry), `f99d56d` (freeze
+parallelization); docs on `main` `00f5238` + this update. Launch knobs decided: `QUEENS_BURR_FP=54`
+(audit), `QUEENS_BURR_CAP_GB`≈16–18. **Pending tuning (non-blocking):** the `keys` telemetry
+overcounts in the evicting regime (`fill` = inserts, not occupancy) — report occupancy; the burr
+footer prints the placeholder "TT 0.00 GB" (surface `store.summary()`); `pw[]` per-worker is zeros
+for burr (reads the placeholder TT).
 
 ## Handoff Note — session 2026-06-24--5 (id f8bdada0-eac0-4a5f-a117-d9b8dc59584f)
 **Phase A (verdict bug) DONE + Phase C1 (store) DONE — two clean commits on `queens-n18`.**
