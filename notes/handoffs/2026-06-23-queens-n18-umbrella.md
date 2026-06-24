@@ -166,10 +166,10 @@ resumable (`QUEENS_BURR_RESUME=1`); size with a short partial run / HLL before c
 1. **Pre-flight check (don't C-c a busy pane).** `tmux list-windows -t queens`; confirm the window is
    **idle at a prompt**. ARC is already capped (`zfs_arc_max=3G`, `c_max`=3.0 GiB confirmed). Build if
    stale: `make release` in `/home/tavis/src/othello-n18/rust` (HEAD `42a1f94`).
-2. **Drop caches**, then launch — **bare on the TTY** (no pipe / no redirect, so the live bar + B5
-   in-flight root display render), from the worktree:
+2. **Launch — bare on the TTY** (no pipe / no redirect, so the live bar + B5 in-flight root display
+   render), from the worktree (pre-launch cache-drop / any privileged step is **user-handled** — no
+   `sudo` in this procedure):
    ```
-   echo 3 | sudo tee /proc/sys/vm/drop_caches
    tmux send-keys -t queens:iso-dense-burr \
      "cd /home/tavis/src/othello-n18/rust && QUEENS_ROOT_TIMING=1 QUEENS_COLD=1 QUEENS_TELEM=1 ./target/release/queens solve 18 iso-dense-burr" Enter
    ```
