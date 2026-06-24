@@ -4,6 +4,14 @@
 MEASURED-INFEASIBLE (2026-06-24, `a9de5dc`).** C1 (the store) landed and is sound; the *driver* that
 would use it does not work. Read the banner below before building anything here.
 
+> **✅ BUT a DIFFERENT path shipped (2026-06-24, `84a0fd8`+`0b91f2f`): DFS + the eviction-free BuRR
+> store + disk-segment DDD.** It keeps DFS (so α-β pruning is intact — no retrograde enumeration), and
+> instead of value-only ply-windowing it puts the membership-carrying ribbons **on disk** (the 1.4 TB
+> ZFS pool) with only the per-segment Blooms resident, so the RAM cap bounds Blooms (~1 B/key) not
+> ribbons (~6–8 B/key). Validated byte-identical to the in-RAM store + an eviction-relief win at n=14.
+> **This is the live n=18 path** — see the umbrella's top Handoff Note. Everything below about C2/value-
+> only ply-windowing is kept for the analysis, not as the plan.
+
 Companion to `notes/proposal-2026-06-23-n18-feasibility.md` and `notes/n18-migration-changemap.md`.
 
 ## ⛔ C2 IS INFEASIBLE — the retrograde ply-windowed BFS stores the full reachable set (2026-06-24)

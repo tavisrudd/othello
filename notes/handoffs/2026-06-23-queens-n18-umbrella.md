@@ -8,17 +8,20 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 **`go` / `@notes/handoffs/2026-06-23-queens-n18-umbrella.md go`** = read this, then resume from
 *Next-session priorities*.
 
-> **★ Branch state (2026-06-24, session --6) — backed up off the certified-run path.** The full
-> verified/certified empty-board n=18 run needs more RAM than this 26 GB box has (the C2 retrograde
-> driver is infeasible — see the C2-infeasibility banner below). So the C6 certify pipeline + `certify
-> --after` work (commits `81e63ca`, `928a478`) is **parked, intact, on branch `queens-n18-certify`**,
-> and **`queens-n18` (the active branch in worktree `/home/tavis/src/othello-n18`) is reset back to
-> `a9de5dc`** = migration + the **u8 verdict-bug fix** (`cddfc64`) + the **wired BuRR ply_store**
-> (`8d8bca6`/`c96dfd4`) + the **`count --by-pc/--reachable` sizing tools** (`a9de5dc`), still-DFS search.
-> **Next direction = DFS + the BuRR store + the per-root TS telemetry** (the telemetry was always a TODO,
-> never coded — spec lives in `notes/n18-migration-changemap.md`: live `(gets,hits)` hit-rate, `rif`
-> roots-in-flight, `WIN_PROVED/SKIPPED/LOSS_PROVED` labels, live root display). Nothing was lost — the
-> certify commits stay reachable via `queens-n18-certify`; the old HEAD was `928a478`.
+> **★ Branch state (2026-06-24, session --7) — disk-DDD landed, the RAM-cap wall is removed.**
+> `queens-n18` (worktree `/home/tavis/src/othello-n18`) now carries **DFS + the eviction-free BuRR
+> store + disk-segment DDD + snapshot/resume**: `3d4d8f6` (BuRR-backed iso-dense) → `f99d56d` (freeze
+> parallelization) → **`84a0fd8` (disk-DDD core)** → **`0b91f2f` (snapshot/resume)**. The in-RAM store capped
+> at ~2.2–2.5 B of n=18's ~10–18 B distinct; disk-DDD puts ribbons on the 1.4 TB ZFS pool
+> (`QUEENS_BURR_DISK_DIR`), keeps only Blooms resident, and makes the segments a resumable snapshot
+> (`QUEENS_BURR_RESUME=1`). Validated byte-identical to the in-RAM control + the eviction-relief win
+> (see the top Handoff Note). **The C2-retrograde-BFS plan stays dead** (the banner below is about that
+> different driver); **DFS + disk-DDD is the live path**, refuting the "needs a cluster / bigger box"
+> conclusion. C6 certify pipeline + `certify --after` remain parked on `queens-n18-certify`
+> (`81e63ca`, `928a478`); `scripts/check_cert.py` is the independent checker to reuse. **Still TODO
+> toward launch:** prefilter-on-resume + bigger `mem_bits`, the per-root TS telemetry (live
+> `(gets,hits)`/`rif`/`WIN_PROVED…` labels/live root display — spec in `notes/n18-migration-changemap.md`),
+> C5/C6 PV + certificate dump, then the launch.
 
 ## TL;DR state
 
@@ -90,6 +93,74 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
 
+## Handoff Note — 2026-06-24 (disk-segment DDD + snapshot/resume — Task 7 LANDED)
+
+**Task 7 (disk-DDD) + snapshot/resume built, validated, and committed on `queens-n18`.** The
+in-RAM store capped at ~2.2–2.5 B of n=18's ~10–18 B distinct; disk-DDD removes that wall — the
+cap now bounds **resident Blooms (~1 B/key)**, not ribbons (~6–8 B/key), so a 26 GB box holds a
+working set whose ribbons (~100+ GB at n=18) live on the 1.4 TB ZFS pool, demand-paged on a Bloom
+admit (the OS page cache is the hot-segment cache).
+
+Commits: **`84a0fd8`** (disk-DDD core) + **`0b91f2f`** (snapshot/resume). Knobs:
+`QUEENS_BURR_DISK_DIR=<zfs path>` (unset ⇒ in-RAM control), `QUEENS_BURR_RESUME=1`.
+
+- **`MappedArchive` (`burr.rs`)** — `mmap`s a serialized `ShardedArchive`, parses per-shard/
+  per-layer offsets once, `get()` reads ribbon words out of the map (unaligned, `MADV_RANDOM`).
+  Unit test `mapped_archive_matches_in_ram` proves it answers **bit-for-bit identically** to the
+  in-RAM `ShardedArchive` on members AND a disjoint probe set (the soundness gate).
+- **`BurrStore` disk segments (`store.rs`)** — a freeze writes `seg-NNNNN.burr` (atomic
+  tmp+rename+fsync) = `[ribbon archive][membership Bloom]`, `mmap`s it (`SegArchive::Disk`), drops
+  the in-RAM ribbon; cap counts Blooms only. `summary()` reports on-disk + resident bytes;
+  surfaced in the iso-dense-burr footer (was the placeholder "TT 0.00 GB").
+- **Snapshot/resume** — segment files double as the snapshot (immutable, atomically renamed); a
+  `manifest.json` records `mem_bits`. `QUEENS_BURR_RESUME=1` globs `seg-*.burr`, mmaps each +
+  loads its Bloom from the file tail, republishes, restores counters, advances `seg_seq`. A
+  non-empty dir without RESUME is refused; a `mem_bits` mismatch aborts loudly.
+
+**[measured] (n=14, single-thread, deterministic):**
+- **Disk == RAM, byte-identical:** disk-on vs disk-off (8 GB cap, no eviction) = **2,772,519
+  nodes both**, 43 disk segments read back on hits (a wrong disk value would re-expand ⇒ change
+  the count). Verdict **second**.
+- **The win:** at a **5 MB cap** where disk-off must evict, disk-off = **3,053,716 nodes
+  (+10.1% re-expansion)** while disk-on = **2,772,519 (1.0×)** — disk-on held the *entire* set on
+  disk (Blooms under the cap) where disk-off thrashed.
+- **Resume:** fresh run wrote 1 segment + manifest; `RESUME=1` logged `reloaded 1 segments ·
+  195200 keys`, verdict **second**, node count −16% (the reloaded segment served cached hits);
+  mismatched `mem_bits` aborted; non-empty dir without RESUME refused.
+
+**Why `mem_bits` is THE resume constraint:** `archive_key = archive_key_of(index(route), fp)`
+and `index(route)` depends on the memtable slot count `2^mem_bits` — so a resume with a different
+`mem_bits` computes keys the frozen segments can't answer (every probe misses ⇒ silent full
+re-expansion, correct verdict, zero benefit). `fp_bits`/`load`/`shards` are self-describing inside
+each segment file (read from the header), so they're recorded for sanity but need not match.
+
+**Gates green:** `make test` (release, all lib tests, 0 failed, lineage incl.); n=12 iso-flat
+`--distinct` = **1,060,823** exact; iso-dense-burr verdict **second** n=12/14; clippy + fmt clean.
+
+**Pending tuning / follow-ups (non-blocking, before the n=18 launch):**
+- **Shared prefilter on resume** — dropped on resume (can't rebuild without the keys), so a resumed
+  run routes via per-segment Blooms = **O(segments)-per-miss** walk. Fresh runs keep it. Fix:
+  serialize the prefilter periodically (stale is *correctness-safe* — a missing key only costs a
+  re-expansion), or MLP-prefetch all segment-Bloom lines per miss (overlaps the DRAM latency).
+- **Per-segment Bloom RAM is the resident budget** (~1 B/key ⇒ ~15 GB for n=18's set). Independent
+  of segmentation, BUT segment **count** drives the per-miss walk + resume reload — so for n=18
+  **raise `QUEENS_BURR_MEM_BITS`** (bigger memtable ⇒ bigger `freeze_at` ⇒ fewer/larger segments;
+  ~19 segments at mem_bits=30 vs ~300 at the default). Size archive(disk) freely; watch
+  Blooms+memtables+page-cache ≤ ~24 GB usable.
+- **C5/C6 still TODO:** raw-PV-in-snapshot + the certificate dump (cert keys on the full 384-bit
+  canonical key, `QUEENS_BURR_FP=54`); reuse `scripts/check_cert.py` from branch `queens-n18-certify`.
+  The frontier/which-roots-done **cursor** is also TODO — resume currently re-runs the search (frozen
+  subtrees are cheap hits) but doesn't skip already-proven roots.
+- **Pre-existing latent (NOT from this work):** `burr::tests::cascade_terminates_at_high_load` panics
+  in **debug** at `burr.rs:257` (`co >>= 64` when a key fully reduces) — overflow-checks fire only in
+  debug; the gate runs `--release` (wraps to `>> 0`, returns correctly) so it's green. A clean fix is
+  to check `co == 0` at the loop top; left untouched (core GE code, out of Task 7 scope).
+
+**★ NEXT for the launch:** (1) the prefilter-on-resume fix + bump `mem_bits` for fewer segments;
+(2) C5/C6 PV + certificate dump; (3) Task 10 adversarial review; (4) Task 8 — launch the
+instrumented, snapshotting n=18 run (user-gated big gate). Then run `check_cert.py` — *a verdict we
+can't certify, we don't claim.*
+
 ## Handoff Note — 2026-06-24 (BuRR-backed iso-dense build)
 
 **Refuted the prior "single-box n=18 infeasible / needs a cluster" conclusion by building +
@@ -131,24 +202,26 @@ BuRR store *under the fast iso-dense kernel*. Post-mortem on how that estimate o
   on this 26 GB box (live RSS climbed to the ~20.5 GB cap on root 0 alone) ⇒ **doesn't fit RAM ⇒
   the disk-DDD rung (Task 7) is the path**, not in-RAM.
 
-**★ NEXT SESSION starts here — Task 7: disk-segment DDD + snapshot.** The in-RAM store can't hold
-n=18 (caps at ~2.2–2.5 B of ~10–18 B distinct), so persist the frozen immutable segments to
-`/tmp/persistent/tavis` (ZFS, 1.4 TB), keep the per-segment Blooms resident, read a segment from
-disk only on a Bloom-admit. The store is already append-only segments + Blooms (the right shape),
-and the freeze pipeline that *writes* them now keeps up (Task 11) — so this is unblocked. Same
-persistence IS the snapshot/resume (segments + cursor + PV). Then: Task 5/6 PV + cert dumps (cert
-keys on the full 384-bit canonical key, `QUEENS_BURR_FP=54`) → Task 10 three adversarial review
-rounds → Task 8 launch. Parked certify pipeline on branch `queens-n18-certify`;
-`scripts/check_cert.py` is the independent checker to reuse.
+**✅ Task 7 (disk-segment DDD) + snapshot/resume DONE** (2026-06-24, commits `84a0fd8` + the resume
+commit) — see the **top Handoff Note** for the build, measurements, and remaining follow-ups. The
+in-RAM cap wall is removed: ribbons live on the 1.4 TB ZFS pool (`QUEENS_BURR_DISK_DIR`), only
+Blooms resident; segments double as a resumable snapshot (`QUEENS_BURR_RESUME=1`). Was: "persist the
+frozen immutable segments to `/tmp/persistent/tavis`, keep per-segment Blooms resident, read a
+segment from disk only on a Bloom-admit." That's exactly what landed; the freeze pipeline that
+*writes* them keeps up (Task 11). **Remaining toward launch:** prefilter-on-resume + bigger `mem_bits`
+(fewer segments) → Task 5/6 PV + cert dumps (cert keys on the full 384-bit canonical key,
+`QUEENS_BURR_FP=54`) → Task 10 three adversarial review rounds → Task 8 launch. Parked certify
+pipeline on branch `queens-n18-certify`; `scripts/check_cert.py` is the independent checker to reuse.
 
-**Code state (`queens-n18` @ `f99d56d`):** iso-dense-burr built + validated (gates green), store
-huge-paged, key telemetry wired + verified, freeze pipeline parallelized. **Banked this session:**
-`3d4d8f6` (BuRR-backed iso-dense + huge-page store + key telemetry), `f99d56d` (freeze
-parallelization); docs on `main` `00f5238` + this update. Launch knobs decided: `QUEENS_BURR_FP=54`
-(audit), `QUEENS_BURR_CAP_GB`≈16–18. **Pending tuning (non-blocking):** the `keys` telemetry
-overcounts in the evicting regime (`fill` = inserts, not occupancy) — report occupancy; the burr
-footer prints the placeholder "TT 0.00 GB" (surface `store.summary()`); `pw[]` per-worker is zeros
-for burr (reads the placeholder TT).
+**Code state (`queens-n18` @ disk-DDD commits):** iso-dense-burr + disk-DDD + snapshot/resume built
++ validated (gates green). **Banked earlier:** `3d4d8f6` (BuRR-backed iso-dense + huge-page store +
+key telemetry), `f99d56d` (freeze parallelization); **this session:** `84a0fd8` (disk-DDD core) +
+`0b91f2f` (snapshot/resume). Launch knobs decided: `QUEENS_BURR_FP=54` (audit), `QUEENS_BURR_CAP_GB`≈16–18,
+`QUEENS_BURR_DISK_DIR=<zfs path>`, raise `QUEENS_BURR_MEM_BITS` for fewer/larger segments. **Pending
+tuning (non-blocking):** the `keys` telemetry overcounts in the evicting regime (`fill` = inserts,
+not occupancy) — report occupancy; ~~the burr footer prints the placeholder "TT 0.00 GB"~~ FIXED
+(footer now shows `store.summary()` incl. disk bytes); `pw[]` per-worker is zeros for burr (reads
+the placeholder TT).
 
 ## Handoff Note — session 2026-06-24--5 (id f8bdada0-eac0-4a5f-a117-d9b8dc59584f)
 **Phase A (verdict bug) DONE + Phase C1 (store) DONE — two clean commits on `queens-n18`.**
