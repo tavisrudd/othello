@@ -90,6 +90,48 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
 
+## Handoff Note — 2026-06-24 (BuRR-backed iso-dense build)
+
+**Refuted the prior "single-box n=18 infeasible / needs a cluster" conclusion by building +
+measuring the design those sessions wrote off without running it** — DFS + an eviction-free
+BuRR store *under the fast iso-dense kernel*. Post-mortem on how that estimate ossified:
+`notes/2026-06-24-reflections.md`. Landed on `queens-n18` @ `3d4d8f6`:
+
+- **`iso-dense-burr`** — the fast iso-dense kernel (all M_ORD_W levers: getK/W_K collapse,
+  dynamic ordering + counting-sort, ETC) with its flat `QueensTt` swapped for the eviction-free
+  `BurrStore`. The store is a resolved-once runtime `Option` field on `IsoFlat`, orthogonal to
+  MODE (like `assoc`/`segment`); every TT touch-point routed to it; `skip18`/`warm_restart` off;
+  the flat-TT `iso-dense` stays the byte-identical control. **[measured]** gates green (lineage
+  n≤9, n=12 distinct **1,060,823** exact, verdict **second** on n=10/12/14).
+- **Huge-paged BuRR ribbon segments** (`huge_boxed_u64`, `MADV_COLLAPSE`, like the TT; the
+  memtable was already a huge-paged `QueensTt`).
+- **BuRR key telemetry in the TS dump** (`keys`/`segb`/`frz`/`full` per tick = the live
+  re-expansion trajectory). **[verified]** backward-compatible (omitted for flat-TT solvers).
+
+**Findings (provenance-tagged):**
+- **[measured]** Profile: getK collapse works — store probes **31%→6.6%** vs old iso-burr;
+  getK-evaluator-bound (the iso-dense profile shape), store no longer the bottleneck; IPC
+  1.0→1.2. The win is *fewer re-explored nodes* (eviction-free), at slightly lower nodes/sec —
+  not an M/s gain. Yesterday's 261 B-node flat-TT run was eviction-bound (99.7% cold = repeat
+  visits), not distinct work.
+- **[measured]** fp audit (`notes/`-worthy, in task #9 output): **`fp=44` is NOT collision-safe
+  for a *certified* run** — E[silent wrong-value] ≈ 0.02–0.17 over the run ⇒ **raise
+  `QUEENS_BURR_FP` to 54**. The certificate must key on the full 384-bit canonical key (the u64
+  `archive_key` has a birthday floor fp can't fix; the independent `check_cert.py` is the safety
+  net). Int-widths otherwise safe — the u8 square-index class is gone.
+- **[measured]** **Freeze pipeline stalls at n=18** (Task 11, BLOCKER): the ~40M-key ribbon
+  segment build takes ~23 s and the `freezing` flag blocks further freezes ⇒ ~1 freeze / 35 s ⇒
+  the store degenerates into a single evicting 67M-slot memtable (NOT eviction-free). Ruled out
+  core-starvation (`RAYON_NUM_THREADS` reserve) and the Task-1 `MADV_COLLAPSE` (`QUEENS_TT_COLLAPSE=0`).
+- **[measured]** The in-RAM store retains only ~2.2–2.5 B of ~10–18 B distinct at a 16–18 GB cap
+  on this 26 GB box (live RSS climbed to the ~20.5 GB cap on root 0 alone) ⇒ **doesn't fit RAM ⇒
+  the disk-DDD rung (Task 7) is the path**, not in-RAM.
+
+**Next (revised gate order):** Task 11 freeze/segment-build throughput (prerequisite — disk-DDD
+also freezes) → Task 7 disk-segment DDD + snapshot → Task 5/6 PV + cert dumps (wide key, `fp=54`)
+→ Task 10 three adversarial review rounds → Task 8 launch. The parked certify pipeline is on
+branch `queens-n18-certify`; `scripts/check_cert.py` is the independent checker to reuse.
+
 ## Handoff Note — session 2026-06-24--5 (id f8bdada0-eac0-4a5f-a117-d9b8dc59584f)
 **Phase A (verdict bug) DONE + Phase C1 (store) DONE — two clean commits on `queens-n18`.**
 - **`cddfc64` — fixed the verdict bug.** Root cause: `graph.rs`'s tiny/canon path stored board-square
