@@ -268,10 +268,20 @@ store-shrink still helps by lowering the box/TT size needed. **So the gating unk
   cheap). (The direct `wins_model`+skip run hit a wrinkle — `IN_SKIP18_ROOT` is thread-local and the deep search runs on
   rayon workers where it wasn't set, so the skip didn't engage; the analytic cost from the clean-DAG cost/benefit table
   stands. Propagating the flag to workers is a small deferred fix if a direct number is wanted.)
-- **★ NEXT (highest-value, per the inversion): the stronger-canon store-shrink test.** It both *tests the cost-inversion*
-  (does a costlier iso/twin-class canonical key shrink the deep distinct set ≥1.5×?) AND *tightens the total* (a smaller set
-  pushes the high-total spill case toward RAM-fit). Re-uses the parked iso-key / component-nimber code on the deep bands;
-  metric = deep-distinct-count cut. Then, only if still spilling, the reuse-locality/density instrument + the sidecar.
+- **★ STRONGER-CANON STORE-SHRINK TEST — DONE, MEASURED-NEGATIVE (commit pending).** Extended `M_MODEL`
+  (`QUEENS_MODEL_STRONG=1`) to re-key every store node under `iso_key_fast` (the production-candidate graph-iso canon =
+  exact iso-class merge) and count the distinct collapse vs the current D4 key, per band. **[measured n=18 A1C2E3G4I5]:
+  DEEP (pc≥24) shrink = 175,085 → 167,598 = 1.045×** (overall 1.041×; per-band 1.01–1.09× everywhere) — **far below the
+  1.5× gate.** So a stronger canonical key does NOT shrink the deep store, and the cost-inversion's "adopt a costlier key"
+  is net-negative for the deep bands (≈2× compute for ~4.5% fewer nodes). **Mechanism (why, and why it generalizes):**
+  graph-iso merging beyond D4 lives in *sparse* positions — isolated vertices / small scattered conflict graphs (low pc) —
+  which at n=18 are exactly the **near-frontier we SKIP**, not the **dense, connected deep bands we store**. The same logic
+  kills component-nimber decomposition as a deep-store shrinker (independent components ⇒ disconnected ⇒ sparse ⇒ low-pc,
+  also skipped). **⇒ The deep store size is IRREDUCIBLE by canonicalization/decomposition.** The only levers on it are
+  **skip-depth** (recompute), **representation** (bitmap/structural encoding), and **capacity** (RAM/zram/disk). So the path
+  is unchanged: skip the near-frontier + fit the (irreducible ~2.8–5 B) deep set on a 32–64 GB box, with the
+  reuse-locality/density instrument + sidecar as the high-total fallback. The cost-inversion remains true in spirit (trade
+  compute for I/O) but its specific node-reduction hopes are pruned by this measurement.
 - **zram as a compute-for-capacity tier (user Q).** The box's swap is `/dev/zram0` (compressed RAM ~3.4× on compressible
   data) — a tier between RAM (~100 ns) and NVMe (~50–100 µs): a page-fault + decompress ~1–3 µs, i.e. ~10–50× slower than
   RAM but ~10–50× faster than NVMe (in the spirit of the 1000:1 inversion). **But the benefit is gated by compressibility,
