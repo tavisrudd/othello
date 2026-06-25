@@ -192,6 +192,13 @@ Or the cluster (Phase D, TDS). The single-box software levers (pread ✓, prefet
 io_uring ✗) are now **exhausted + measured**. Watch script: `scratchpad/n18-watch.sh`. Run STOPPED + resumable
 (116 segments). Branch `queens-n18`: `3b36b2e` (A+B+C) → `6e89f9a` (uring A) → `c05866c` (uring B) → `7b55b6e` (uring C, neg).
 
+**★ QUEUED (user, next session) — try RocksDB instead of the custom BuRR store.** The user's read is that the
+**O(S) segment-Bloom walk is the dominating factor**; a mature LSM (RocksDB) routes a probe to one SSTable by
+key-range (no O(S) walk) + brings async I/O + a block cache. Full self-contained spec:
+[2026-06-24-rocksdb-store-evaluation.md](2026-06-24-rocksdb-store-evaluation.md). It's the "make disk-spill fast
+on a small box" **fork** — an alternative to the capacity (big-RAM box) path, which makes the whole disk-spill
+question moot. **Decide the fork with the user before investing.**
+
 ## Handoff Note — 2026-06-24 (session --8) — prefilter-on-resume + resume-hardening; cert strategy revised
 
 **Landed on `queens-n18` @ `be40fe9`: prefilter-on-resume + the adversarial-review resume-hardening.**
