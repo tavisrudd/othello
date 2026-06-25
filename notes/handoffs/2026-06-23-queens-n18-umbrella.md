@@ -31,15 +31,15 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > = wire io_uring into the search (Steps B/C) to fill the queue, vs the capacity path (more RAM). **Run STOPPED
 > + resumable.**
 >
-> **★★ LATEST (session --13): the n=18 run COMPLETED — CANDIDATE verdict = FIRST PLAYER WINS** (258 B nodes / 8h16m /
-> winning root I9 / 15-move PV; `othello-n18/rust/scratchpad/n18-FIRST-RUN-RESULT.txt`). skip[18,25] + a 17 GB flat TT
-> made the giant root I9 *converge* (the un-skipped buggy run never did). **n=18 is GENUINELY OPEN (user-confirmed)** so
-> this is the candidate answer; verification is CREDIBLE (PV legal+consistent; the n=18 high-square differential passes on
-> two kernels; kernel validated n≤16; verdict stable across the bug fix) but **not yet certified** (high-pc paths can't be
-> differential-tested). **A CONFIRMATION RUN is live (tmux `queens:confirm-dk20`, `dense_k=20` — different getK evaluators
-> W18/19/20):** if it independently finds a winning first move, claim first-player. **NEXT: read the confirmation run's
-> verdict** (watcher re-invokes on root-progress/death/8h). Earlier --12: ranking measured marginal for a certified store
-> (~1.2–2× the flat slot, not 5–13) ⇒ SKIP is the lever (now vindicated by the completed run). **★ See the session --13 note + `go`.**
+> **★★★ SOLVED (session --13): n=18 is a FIRST-PLAYER WIN.** Two solves with *different getK evaluator code*
+> (`dense_k=17` W17 → 258 B nodes / 8h16m; `dense_k=20` W18/19/20 → 114 B nodes / 7h08m) **independently agree** on
+> verdict + winning first move **I9** + the byte-identical 15-move PV (`I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5
+> L17 A14`). Verification: cross-config agreement + a CLEAN int-sizing audit (W17 & W20 getK scalar-validated) + the
+> n=18 differential (two kernels vs an independent oracle) + kernel validated n≤16 + a legal/consistent PV. n=18 was
+> genuinely OPEN (user-confirmed) ⇒ new result. The enabler: **skip[18,25] + a 17 GB flat TT on the 26 GB box** made
+> the giant root I9 converge (session --12 capacity bet; the un-skipped run thrashed). Outputs in
+> `othello-n18/rust/scratchpad/n18-*-RESULT.txt`. **NEXT: user blessing → update `CLAUDE.md` (n=18 no longer "open"),
+> archive this umbrella, consider an OEIS A344227 submission.** **★ See the session --13 CONCLUSION note + `go`.**
 
 ## TL;DR state
 
@@ -111,7 +111,52 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
 
-## Handoff Note — 2026-06-25 (session --13) — ★★ n=18 RUN COMPLETED: CANDIDATE verdict = FIRST PLAYER WINS (confirmation run launched)
+## Handoff Note — 2026-06-25 (session --13 CONCLUSION) — ★★★ n=18 SOLVED: FIRST PLAYER WINS (confirmed by two independent getK ceilings)
+
+**The confirmation run AGREES — n=18 is a first-player win.** Two solves with **different getK evaluator code
+paths** (W17 vs W18/19/20) independently reached the **same verdict, same winning first move I9, and the byte-for-byte
+same 15-move principal variation** — at **different node counts**, proving they ran genuinely different searches:
+
+| run | dense_k | getK code | verdict | root | nodes | wall | PV |
+|-----|---------|-----------|---------|------|-------|------|----|
+| first (`queens:skip-flat-n18`) | 17 | W17 (3-word) | **first player wins** | I9 | 258,322,944,571 | 8h16m45s | I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14 |
+| confirm (`queens:confirm-dk20`) | 20 | W18/19/20 | **first player wins** | I9 | 114,318,641,519 | 7h08m39s | I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14 |
+
+Outputs: `othello-n18/rust/scratchpad/n18-{FIRST-RUN,CONFIRM-dk20}-RESULT.txt`.
+
+**★ The verification stack (the realistic confidence basis — full formal cert of 100 B+ nodes is infeasible, so
+cross-validated agreement is the bar, and it's met):**
+- **Cross-config agreement:** W17 and W20 are *different* getK evaluator code (the n=18-specific machinery where a
+  bug would live); they differ in node count (258 B vs 114 B) yet agree on verdict + root + the exact PV. A
+  getK-localized bug is essentially ruled out (it would have to corrupt both to the identical wrong PV).
+- **Int-sizing audit CLEAN** (Opus, this session) — the value path has no u8-truncation-class defect; W17 **and**
+  W20 getK leaves both validated vs an independent scalar-minimax reference (`direct_w17..w20_matches_scalar`).
+- **n=18 differential** (`n18_subposition_values_match_oracle`) — `iso-dense` + `iso-flat` vs the memo/naive oracle
+  (a *different* implementation: raw-mask negamax, no getK/canon) over thousands of high-square (≥256) subpositions.
+- **Kernel validated n≤16** (matches Jenrich n=16=second, A344227 ≤ n=13); n=12 distinct = 1,060,823 exact.
+- **PV legal + terminal + value-consistent** (replayed: 15 legal non-attacking moves, 0 available at the end,
+  side-to-move loses ⇒ first player wins).
+- **n=18 was GENUINELY OPEN** (user-confirmed) — this is a new result, with no published value to contradict.
+- The only sliver not independently covered is the generic high-pc α-β *combination* logic (validated n≤16,
+  identical in both runs) — a bug there would have to evade the n≤16 lineage, the pc≤23 differential, AND flip only
+  at high pc; very narrow, and the two cross-validated runs make a verdict-flip there implausible.
+
+**⇒ VERDICT: n=18 Non-Attacking Queens (Node Kayles on the 18×18 queen graph) is a FIRST-PLAYER WIN.** The witness
+is the move **I9** (square 152), with the optimal line above. This closes the open board this umbrella was built for.
+
+**Follow-ups (optional / next session):**
+- Bless + propagate: update the n=16-SOLVED framing in `othello/CLAUDE.md` ("n=18 is the open board") to n=18-SOLVED,
+  and archive this umbrella once the user accepts the result. Consider submitting the nimber/verdict to OEIS A344227
+  (n=18 term) if it isn't already there.
+- The two LOW audit findings (fractional-skip hash words 4–5; WL-canon `u8`) — harden only if a fractional-skip or
+  WL-keyed n=18 run is ever attempted (neither is on the solved run's path).
+- Capability banked: **skip[18,25] + a 17 GB flat TT on a 26 GB box solves n=18** — the session --12 capacity bet
+  (skip the near-frontier so the giant root's deep set fits an evicting flat TT) is what made I9 converge where the
+  un-skipped run thrashed. The (b) ranked store was measured marginal (--12) and is unnecessary.
+
+---
+
+### Handoff Note — 2026-06-25 (session --13, earlier) — n=18 RUN COMPLETED: CANDIDATE verdict = FIRST PLAYER WINS (confirmation launched)
 
 **The skip[18,25] + 17 GB flat-TT run FINISHED — and it answers the open problem (pending confirmation).**
 
