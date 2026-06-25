@@ -171,19 +171,26 @@ proves byte-identical to pread + ring reuse; skips where io_uring is unavailable
   iowait 95%→78%, ARC miss 24%→18%, but throughput FLAT ~0.2 M/s and pool IOPS FLAT ~30K — it does NOT fill the
   queue:** the within-walk batch overlaps only ~2–3 candidate reads and the thread **still blocks per-walk**
   (`submit_and_wait`). Net: a wash for speed. Kept as the foundation, not a win.
-- **Step C (the real lever, NOT built)** — frontier/children prefetch: at a node, async-read the *ordered
-  children's* ribbons ahead via the ring (feed from `wins_inc_iter`'s materialized frontier), consume **in
-  α-β/move order** so the node count stays byte-identical (prefetch, not reorder). Goal: one deep-spine thread
-  fills the 33K→56K+ queue (the per-walk block is the thing Step C removes). The bigger, riskier descent
-  restructure; α-β-sensitive (speculative *reads* are fine — eviction-free — but must not change expansions).
+- **Step C — BUILT + MEASURED NEGATIVE, gated off (`7b55b6e`).** Frontier/children prefetch: an async
+  fire-and-forget io_uring ring (`PrefetchRing`) + `BurrStore::prefetch_batch`, fired at descent *gather* time
+  on the recurse children's `(route, fp)` (piggybacking the existing gather-time prefetch hook, routed to the
+  store instead of the placeholder TT) to keep many NVMe reads in flight. Byte-identical (n=14 disk-off==on).
+  **[measured n=18, re-warm] pool IOPS FLAT ~29K (no queue-fill), ARC miss 24%→13% (it does warm ARC), but
+  throughput REGRESSED ~20–40% (158K vs Step B's 200K nodes/s).** Cause: the per-child O(S) prefetch Bloom walk
+  doubles the dominant on-CPU cost, the speculative FP reads contend with the real gets on the NVMe, and the
+  serial giant-root spine gives too little prefetch-ahead distance to hide latency. Gated OFF (`QUEENS_PF_URING=1`
+  opts in) as substrate (a cheaper early-exit-walk variant is untried, not closed; useful on the cluster).
 
-**★ NEXT — a decision, not more single-box code (user-gated):** Step B **measured that single-box io_uring is
-not transformative** (the within-walk batch is a wash). Step C *might* reach the ~2× headroom, but it's real work
-for a ~2× on a run that's still days-to-weeks AND fundamentally disk-bound. The honest alternative is **capacity**:
-a ~192–256 GB box holds the n=18 working set in ARC → the disk problem vanishes → back to multi-M/s, and the flat
-TT (trustworthy: `Slot` 55-bit fp = miss-not-wrong, ~2⁻⁵⁵ false-match = BuRR fp=54 class) becomes fast *and*
-correct with no eviction. So: (a) push Step C for the single-box ~2×, or (b) move to a bigger-RAM box / cluster.
-Watch script: `scratchpad/n18-watch.sh`. Run STOPPED + resumable (116 segments).
+**★ CONCLUSION — single-box io_uring is measured-dead for this workload; the wall is capacity.** Primitive works;
+**Step B = wash, Step C = regression.** The two things defeating async I/O are exactly the workload's shape: the
+**serial giant-root spine** (can't issue enough independent reads ahead) and **working set ≫ RAM** (the cold tail
+is genuinely on the NVMe). No amount of I/O scheduling changes either. **NEXT = capacity, not single-box code:**
+a ~192–256 GB box holds the n=18 working set in ARC → the disk problem vanishes → back to the multi-M/s the run
+showed before it spilled, and the **flat TT** (trustworthy: `Slot` 55-bit fp ⇒ eviction = recompute-not-wrong,
+~2⁻⁵⁵ false-match = BuRR fp=54 class) is fast *and* correct there with no eviction — likely no BuRR needed at all.
+Or the cluster (Phase D, TDS). The single-box software levers (pread ✓, prefetch-wire ✓, MLP walk ✓, async
+io_uring ✗) are now **exhausted + measured**. Watch script: `scratchpad/n18-watch.sh`. Run STOPPED + resumable
+(116 segments). Branch `queens-n18`: `3b36b2e` (A+B+C) → `6e89f9a` (uring A) → `c05866c` (uring B) → `7b55b6e` (uring C, neg).
 
 ## Handoff Note — 2026-06-24 (session --8) — prefilter-on-resume + resume-hardening; cert strategy revised
 
