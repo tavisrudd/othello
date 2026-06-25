@@ -136,9 +136,24 @@ near-frontier skipped (only pc≥26 stored), completed I9 at ~10 M/s. The sessio
 - ✅ **skip + eviction are verdict-preserving** (memo-only; n=12/14 second with skip[18,25], re-validated).
 - ✅ **Verdict stable across the bug fix** (buggy and fixed runs both say first-player ⇒ the graph.rs u8 bug did
   not flip the top-level verdict).
-- ⚠️ **Residual risk:** the high-pc paths (pc 24–300, the bulk of I9) can't be differential-tested (the oracle
-  caps at ~pc 23). So for an open-problem verdict with a once-burned bug history, **one independent confirmation
-  is warranted before claiming.**
+- ✅ **Opus int-sizing / precision audit of the iso-dense kernel — VERDICT: no defect that could flip an n=18
+  value.** A read-only end-to-end audit of the value path for the u8-truncation bug class (the original bug):
+  `bits.rs` (6-word, no shift-width bug), `geom.rs` (parametric u32), `d4_bits` (6-word strict bijection, verified
+  invertible), `hash128` (6 words), `incremental.rs`/`lex_min8`/`child_orient`, the **code-build** (`verts_of`→u16,
+  `att08(u16)`, `adj_row_pext` all 6 words with the 5 cumulative-prefix-popcount S3 fix), `dense.rs` **wide W17–W20
+  layers** (`Code192=[u64;3]` ≥ 190 bits for K=20; all bounds/dispatch correct), the S2 `MAXV_POW2=512` masks (the
+  `&323` hazard fixed), and the tiny/band path (the `cddfc64` u16 fix confirmed present). **Crucially it re-ran
+  `direct_w17/w18/w19/w20_matches_scalar_recurrence` (PASS) — so the W20 evaluator the confirmation run is using AND
+  the W17 evaluator the completed run used are BOTH validated against an independent scalar-minimax reference**, plus
+  the n=18 differential + n=12 exact gate. Only TWO **LOW** findings, **both off the run's actual config**: (1) the
+  `skip18_pc18` *fractional*-skip hash omits words 4–5 — but we used the full-band skip (`QUEENS_SKIP18_PCS`), not
+  fractional, and it only picks which cold nodes skip *memo* (can't change a value); (2) `graph.rs` WL-canon local
+  arrays are still `u8` — but the run used the default key (iso≤7 ⇒ WL-canon never invoked). Neither touches the
+  candidate verdict. (Optional hardening if a WL-keyed or fractional-skip n=18 run is ever attempted.)
+- ⚠️ **Residual risk (now small):** the high-pc α-β *combination* logic (generic, validated n≤16) over the I9
+  subtree is the only part neither differential-tested (oracle caps ~pc 23) nor scalar-checked (that's leaf
+  evaluation). The static audit + the scalar-validated leaves + the in-flight cross-config confirmation cover the
+  rest. **One independent confirmation (running) closes it.**
 
 **★ CONFIRMATION RUN LAUNCHED (tmux `queens:confirm-dk20`):**
 ```
