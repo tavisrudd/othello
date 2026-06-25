@@ -101,6 +101,204 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
 
+## Handoff Note — 2026-06-24 (session --10) — store-layout MODEL (contiguity vs transposition): parent-contiguity wins, two-tier dead
+
+**The RocksDB fork is the live work. Before building, the user steered it to the right design and asked to MODEL the
+core tension first** (the project's measure-before-build discipline). Sequence of user steers, all confirmed by the model:
+(1) shard/bulk-fetch children, (2) "cut out the random child-by-child IO," (3) "think about key size vs block size,"
+(4) "we are going to have to pay for speed with some re-exp." The unifying realization (the "key size vs block size"
+lesson): a value is **1–2 bits** but a RocksDB point-get faults a whole **4 KB block** ⇒ ~250× read-amp on the record,
+and the disk caps at ~56K random 4 KB reads/s. **Batched `multi_get` of *random* keys does NOT help** (still N block
+reads, just pipelined, to the 56K-IOPS wall). The only structural lever is **contiguity** — lay a parent's gathered
+children out adjacent so one block/range read returns the whole batch (~250× headroom). That fights canonical
+transposition-merging (a hashed canonical key scatters siblings; a parent-relative key co-locates them but forfeits the
+cross-parent merge = the +94% "move-ordering-is-2×" trap). So: **model the re-exp cost of parent-keying, by pc band.**
+
+**Built `M_MODEL` (`QUEENS_MODEL=1`) — a gated measurement twin of M_ORD_W** (like M_RANK/M_COLD; const-MODE gated ⇒
+production byte-identical, DCE off). It taps the **real store-node proof DAG** in `iso_flat.rs` `wins_inc` gather: each
+canonical store node (pc > getK ceiling) is expanded once and emits one edge per recurse child it probes, so **edge-count
+per child = its in-degree = distinct parents that store-probe it = its re-exp factor if children were keyed by parent**.
+Also tallies `nw` (store-children-per-parent = the bulk-fetch batch). Global `Mutex<HashMap>` accumulator + per-pc report
+(`src/queens/model.rs`); single-thread small-n runs. **UNCOMMITTED** on `queens-n18` (instrument is throwaway/diagnostic;
+commit if we keep it). Gates not re-run (measurement-only, DCE off — but should `make test` before any commit).
+
+**[measured] parent-key blowup E/N (= re-exp if EVERY store node keyed by parent, zero canonical merge):**
+
+| n      | scope            | store nodes | E/N blowup | two-tier knee: RAM nodes for 90% of merges |
+|--------|------------------|-------------|------------|--------------------------------------------|
+| 12     | full board       | 77,488      | **1.445×** | 32% of N                                   |
+| 14     | full board       | 5,150,461   | **1.551×** | 39% of N                                   |
+| 16     | one root\*       | 33,929,643  | **1.664×** | 46% of N                                   |
+| **18** | continuation\*\* | 620,262     | **1.651×** | 42% of N                                   |
+
+\* `QUEENS_ONLY_ROOT=119` — a **lower bound** (a single-root run misses the cross-root transpositions the shared TT
+merges on the full board). \*\* **REAL n=18** via `wins_model` on the completable continuation `--after A1 C2 E3 G4 I5`
+(squares 0,20,40,60,80; 114 avail; mover **loses**, matches the certify-validated verdict for that line) — genuine n=18
+high-square geometry that sweeps the full near-frontier. **The blowup PLATEAUS at ~1.65× (measured at n=18), it does NOT
+explode** — the earlier "1.8–2.5×" extrapolation fear is retired. (A continuation is a slice; the full board adds some
+cross-opening-line merges ⇒ full-board n=18 is ≳1.65× but the 4-point consistency 1.45–1.66 bounds it well under the
+"~10× IO win" — the trade is robust at the target.) **Opening-stable:** a structurally different line (knight-spaced
+`--after 0,21,43,66,88`, 123 avail, mover **wins**, 1.8 M store nodes) gives **1.575×** / knee 41.5% — both n=18 openings
+land ~1.58–1.65× across *opposite* verdicts, so the blowup is a property of the near-frontier transposition density, not
+the opening.
+
+**Three conclusions (the verdict):**
+1. **Two-tier (RAM canonical TT for the hot merges + disk contiguity for the rest) is DEAD at n=18.** The merge value is
+   *distributed*, not concentrated — the knee is shallow and **worsens with n** (32→39→46% of N for 90% of merges).
+   At n=18 that's tens of GB resident on a 26 GB box. No cheap "keep the hot merges" — the rest *is* most of it.
+2. **Parent-contiguity wins, and the re-exp is cheaper than 1.5× looks.** The re-expanded nodes are the **near-frontier**
+   (pc 18–22, the IO mass) which have **nw≈0** — their children are all getK leaves ⇒ re-expanding one is a **bounded
+   getK sweep, never a deep subtree** (exactly the `skip18` property). You trade ~1.5–2× cheap RAM-served re-sweeps for a
+   ~10× cut in cold block-reads (off the 56K-IOPS wall). Lopsided win in the disk-bound regime.
+3. **The batch grain is the GATHER, not the node.** Near-frontier parents have nw≈0 (nothing to batch at *them*), but the
+   near-frontier nodes are **fetched in bulk by mid/early-game parents** (pc 24–30+, nw=6–32) — the majority of store-gets
+   come from those big-batch gathers. "Cut random child-by-child IO" = key each parent's gathered children contiguously
+   (`parent_id ++ child_idx`) and range-read them — exactly what a sorted RocksDB key gives and the random-hashed BuRR
+   key never could. (n=14 near-frontier mass pc19–21 = ~53% of nodes at indeg 1.21–1.37× = cheap to lose merges on;
+   re-exp cost concentrates in the mid-shoulder pc24–29 at indeg ~2.1×.)
+
+**★ PER-PC COST/BENEFIT (user directive) — SKIP the near-frontier, don't store it.** The big reframe: storing a band
+costs `(E-N)` NVMe reads on its reuse-hits (~100µs each at n=18) + `N` resident values; *skipping* it (no TT entry,
+recompute on every reach) costs a **bounded getK sweep** (~ns) **iff the band's children are getK leaves** (nw≈0). At
+n=18 disk-read ≫ getK-sweep (~1000×, vs ~10× when n=16 was RAM-resident), so storing a low-nw band is net-NEGATIVE.
+Baked a skip-ceiling sweep into `M_MODEL`. **[measured n=18, `--after A1 C2 E3 G4 I5`]** cumulative SKIP of `[18, pc*]`:
+
+| skip ceiling | nodes eliminated | reuse NVMe-reads elim | cascade (mean nw over skipped) |
+|--------------|------------------|------------------------|--------------------------------|
+| skip 18      | 13.9%            | 17.4%                  | 0.00 (skip18 — already a default lever) |
+| skip 18–21   | **51.0%**        | **51.4%**              | 0.04 (children still ~100% getK ⇒ FREE) |
+| skip 18–22   | 62.8%            | 58.8%                  | 0.15                            |
+| skip 18–26   | 83.1%            | 69.8%                  | 0.98 (edge: ~1 store child each) |
+| skip 18–30   | 87.3%            | 79.2%                  | 2.07 (cascades — recompute recurses) |
+
+**Verdict:** the near-frontier is the bulk of the nodes AND the entire disk-bound problem AND the cheapest to recompute
+— so **skip `[18, ~22]` for a clean ~60% working-set + disk-read cut at zero cascade** (extend toward pc 26 for ~83%/70%
+as the cascade approaches 1). This **generalizes the existing `skip18={18}` lever** to a tuned `[18, pc*]` skip band, and
+inverts the earlier "store everything, lay it out well" framing → **store almost nothing near the frontier.** The
+*stored* set then collapses to the deep bands (pc ≳23–27): far fewer nodes, high reuse + deep (expensive) recompute = the
+bands where a TT entry actually pays, AND where the gather batches are large (nw 16–32) so the **locality-preserving key**
+(below) earns its keep. The two levers compose: **skip the near-frontier, locality-key the deep remainder.**
+
+**★ SKIP [18,23] → 17 GB TT FIT PROJECTION (user directive).** The existing skip lever is already a configurable pc-band
+SET — `QUEENS_SKIP18_PCS` (`skip18_pcs: u64` bitmask, default `{18}`), per-root via `QUEENS_SKIP18_ROOTS`, + a fractional
+`QUEENS_SKIP18_FRAC` — so "skip [18,23]" is just `QUEENS_SKIP18_PCS=18,19,20,21,22,23` (no new code; the one change is
+flipping `new_dense_burr`'s `skip18=false` line, set under the old "keep pc==18 for the eviction-free store" directive,
+which this reverses). [measured n=18 continuation] projecting the survivor set (pc>pc*) onto the full-board total (≈10–18 B
+distinct; the 17 GB TT = 2.125 B 8-byte slots, ~1.5 B usable at 0.7 load):
+
+| skip ceiling | survivor %N | proj survivors @ 10/14/18 B | TT GB @100% (14 B) | fits 17 GB? |
+|--------------|-------------|------------------------------|--------------------|-------------|
+| skip [18,23] | 28.2%       | 2.82 / 3.95 / 5.08 B         | 31.6 GB (1.9×)     | no (~25–46 GB needed) |
+| skip [18,25] | 18.7%       | 1.87 / 2.62 / 3.37 B         | 21.0 GB (1.2×)     | borderline (low total) |
+| skip [18,26] | 16.9%       | 1.69 / 2.37 / 3.04 B         | 18.9 GB (1.1×)     | at low total |
+| skip [18,27] | 16.0%       | 1.60 / 2.24 / 2.88 B         | 17.9 GB (1.1×)     | at low total |
+
+**Reading:** skip [18,23] alone does **not** fit a 17 GB TT — survivors ≈ 2.8–5 B (needs ~25–46 GB) — but it **shrinks the
+resident requirement ~3–4× (from 8× over → ~2× over)**. To actually fit a 17 GB TT you skip to **~pc 26–27** (survivors
+~1.6–3 B, fits at the lower total estimates) OR keep skip [18,23] and use a **24–32 GB TT**. (Caveats: the survivor
+*fraction* is the continuation's band shape — the buggy-run probe shape put pc≥24 nearer ~21% than 28%, so survivors may
+be a touch lower; the 10–18 B total is itself an estimate. The recompute/re-exp *cost* of skipping rises with depth — the
+cascade column hits ~1 at pc 26 — so the cheap-getK-sweep regime is roughly skip ≤ 25.)
+
+**★★ THE CAPACITY REFRAME.** Session --9 concluded "capacity is the wall → needs a 192–256 GB box or a cluster." The skip
+lever **knocks that down by an order of magnitude**: skip [18,~25] holds the deep set in **~21–32 GB**, i.e. a **plain flat
+TT on a 32–64 GB box — no disk spill, no BuRR, no RocksDB at all** (the flat TT is fast AND trustworthy: 55-bit fp ⇒
+eviction = recompute-not-wrong). Only the *high-total* case (≈18 B ⇒ ~5 B survivors at skip [18,23]) still spills, and only
+then does the disk store + the locality key below come into play. So skip is the **primary** capacity lever; the disk-store
+fork is now the *fallback* for the pessimistic total. This is the strongest single result of the layout modeling.
+
+**★ LOCALITY-PRESERVING KEY — design doc DONE (Opus sub-agent):**
+[proposal-2026-06-24-locality-preserving-tt-key.md](../proposal-2026-06-24-locality-preserving-tt-key.md) (on main,
+uncommitted). It **proved a key negative that corrects the earlier hope here:** "siblings share the parent's placed-queen
+prefix ⇒ cluster" is **DEAD** — each sibling independently re-canonicalises under D4 into a possibly *different* orbit
+(~7/8 of sibling pairs flip orientation), so any placed-queen-prefix / occupancy-lex key **scatters** siblings. The
+scatter is at the symmetry-selection step, not the hash. **The locality that survives canon is NOT descent-path adjacency
+— it is band/shape adjacency** (reuse here is transposition-driven; transpositions cluster by `(popcount, coarse occupancy
+region)`, not by parent). **Resolution:** don't make canon order-preserving (impossible) or canon-relative-to-parent
+(breaks sharing) — derive a routing ordinal *from* the canonical representative: **`routing_key = pc_band(high) ++
+hilbert_d4canon(occupancy descriptor) ++ fp_low`.** `pc_band` is the **provable floor** (D4-invariant, reuse is intra-band,
+the store only holds pc≳24 anyway); `hilbert(canon-occupancy)` is measurable *upside*; `fp_low` packs blocks uniformly.
+**Sidecar:** sort by routing_key, fixed 256 KB–1 MB blocks, Syzygy-style two-level sparse index (kills the O(S) Bloom walk
+— the RocksDB-eval premise — by routing to one block by key-range), per-gather async prefetch, BuRR ribbon as the in-block
+value payload. **Metric = locality factor L** = useful entries per block-load (target ≳16–32). **§6A bit-shaving:**
+structural key = collision-free at ~½ the 54-bit fp; front-codes to ~5–11 bits/key; **dense deep slices drop keys entirely
+→ direct-indexed bitmap ~1–2 keyless bits/position — below BuRR's ~2–3 + its ~15 GB Bloom ⇒ a sorted structural store with
+per-slice tiering (dense→bitmap / medium→front-code / sparse→MPHF/BuRR) SUBSUMES BuRR** (beats it on routing, range-read,
+RAM, density; BuRR survives only as the sparse fallback). **Biggest risk:** if reuse is dominated by *long-range*
+transpositions (a position reached from two distant openings), no occupancy ordering clusters them and only the pc-band
+floor pays — **THE thing the instrument must measure first.** §6B: generalized/set-based entries (Kobayashi FPT / Partition
+Search / setrograde) = a structural-merge crack, flagged for a cheap read-only probe (prior lit-triage measured module
+*reduction* absent, but never twin-multiset *keying* at the skip/store boundary).
+
+**→ NEXT (the gate, doc §7): build the reuse-locality + density instrument, measure, THEN decide.** Extend `M_MODEL` to
+tag each node with candidate keys and report, per key/block-size: (1) bucket population, (2) **★ L = intra-block reuse-hit
+fraction** for `hash128`(L=1 control) / `pc_band+fp` / `pc_band+morton` / `pc_band+hilbert`, (3) per-gather block-span,
+(4) LRU warm-hit curve, (5) **long-range transposition fraction** (Risk #1), (6) **★ slice density** (present/domain per
+slice key — `(pc_band, k-queen prefix)` k∈{6,8,10}, 4×4 histogram, centroid — the **bitmap-tier gate**), (7) twin-multiset
+generalization factor (cheap add-on). **Decision rule:** ship `pc_band+hilbert` iff its L ≥ ~2× the `pc_band+fp` floor AND
+gather-span median ≤2; else ship the bankable pc-band floor. **Do NOT build the sidecar before the instrument confirms
+L > floor** — pc-band floor is bankable, Hilbert is the bet under test (measure-before-build, the discipline that killed C2).
+
+**★★ COST-MODEL INVERSION (doc §1.0/§1.0.1, the load-bearing strategic shift).** At n=16 a lookup ≈ compute (RAM), so the
+project banked "node-reduction levers that cost compute are net-negative" (iso graph-key ~2.2× slower despite 3.4× fewer
+nodes; component-nimber −74% nodes at 6.6× compute — both MEASURED-NEGATIVE on **wall-time**). **At n=18 the binding
+constraint is CAPACITY-to-fit, not speed**, and in the disk-spill regime a lookup costs ~1000× a getK recompute. So the
+governing rule flips to **"trade compute for I/O / for a smaller stored set, up to ~1000:1"** — which **inverts those banked
+negatives**: a costlier canonical key (stronger D4/iso/twin-class merge) or a component-nimber decomposition that *shrinks
+the deep distinct set* is now worth it, because (a) fewer distinct nodes = fewer 1000×-cost lookups, and (b) a smaller set
+is more likely to FIT (the actual open problem). The doc **reprioritizes**: re-test the **stronger-canon store-shrinkers
+FIRST** (metric = deep-distinct-count reduction on pc≳24; gate ≥1.5× cut → adopt regardless of per-node compute), because
+that changes the size of the set every later lever operates on — *then* the locality/density instrument, *then* the sidecar.
+**Caveat (the regime gate):** the inversion's strength is conditional on STILL spilling. If skip `[18,~25]` makes n=18
+RAM-fit (≈21–32 GB, see the TT-fit projection), lookups are RAM (~10×, n=16-like) and the inversion weakens — though a
+store-shrink still helps by lowering the box/TT size needed. **So the gating unknown is the n=18 deep distinct TOTAL
+(RAM-fit vs disk-spill); estimate it (HLL) before committing to the disk-store track.**
+
+**[measured 2026-06-24 — the two gating measurements (user: "yes, measure")]:**
+- **Regime (deep fraction is STABLE; the total is the swing).** Two n=18 continuations (A1C2E3G4I5 = loses, 620 K store
+  nodes; A1C2E3G4 = wins, 414 K) give the **same deep-survivor fraction ~28% at skip [18,23]** and the **same TT-fit
+  projection (~1.8× a 17 GB TT @ 14 B total)**. (Continuation *size* tracks win/loss — the mover-loses line is bigger, must
+  prove all moves — not opening depth, so absolute counts don't extrapolate; the *fraction* does.) **Verdict:** deep distinct
+  ≈ 28% × (10–18 B total) ≈ **2.8–5 B → ~36–66 GB at 0.7 LF**. So n=18-after-skip is **NOT a 17 GB-TT fit, but IS plausibly
+  RAM-resident on a 32–64 GB box** (skip [18,25] → ~19% → 1.9–3.4 B → ~24–43 GB; skip [18,26] → ~17% → fits 32 GB at the
+  low-mid total). **The capacity wall drops from "192–256 GB box / cluster" (session --9) to "32–64 GB box, flat TT, no disk"
+  — modulo the distinct TOTAL (10 vs 18 B), the one swing variable that decides RAM-fit vs the high-total spill.**
+- **Skip re-exp cost = off the store ledger.** The skipped near-frontier resolves as **getK-leaf sweeps, not bumped store
+  nodes**, so store-node expansions are UNCHANGED by skipping — the cost is getK work (≈ the skipped bands' in-degree ~1.58×,
+  cheap). (The direct `wins_model`+skip run hit a wrinkle — `IN_SKIP18_ROOT` is thread-local and the deep search runs on
+  rayon workers where it wasn't set, so the skip didn't engage; the analytic cost from the clean-DAG cost/benefit table
+  stands. Propagating the flag to workers is a small deferred fix if a direct number is wanted.)
+- **★ NEXT (highest-value, per the inversion): the stronger-canon store-shrink test.** It both *tests the cost-inversion*
+  (does a costlier iso/twin-class canonical key shrink the deep distinct set ≥1.5×?) AND *tightens the total* (a smaller set
+  pushes the high-total spill case toward RAM-fit). Re-uses the parked iso-key / component-nimber code on the deep bands;
+  metric = deep-distinct-count cut. Then, only if still spilling, the reuse-locality/density instrument + the sidecar.
+- **zram as a compute-for-capacity tier (user Q).** The box's swap is `/dev/zram0` (compressed RAM ~3.4× on compressible
+  data) — a tier between RAM (~100 ns) and NVMe (~50–100 µs): a page-fault + decompress ~1–3 µs, i.e. ~10–50× slower than
+  RAM but ~10–50× faster than NVMe (in the spirit of the 1000:1 inversion). **But the benefit is gated by compressibility,
+  which is representation-dependent:** a hash-keyed flat TT slot (~54-bit *random* fp) is **incompressible** (~1×) ⇒ zram
+  gives zero capacity, only decompress cost — it can't rescue the naive TT. The **structural/sorted/front-coded/bitmap** rep
+  IS compressible — but it's also already small enough (~0.7–7 GB for the 2.8–5 B deep set) to fit RAM *outright*, so zram is
+  largely moot if the structural rep works. zram's real niche is the **middle case** (a collision-free ~32-bit structural-slot
+  store, ~12–20 GB, moderately compressible → zram ~2× turns a near-miss into a fit), and as a **faster-than-NVMe backing for
+  the sidecar** (zram-backed compressed-RAM sidecar ≈ 100× faster spill than NVMe, within the box's ~88 GB effective). Add a
+  **compression-ratio tap** (zstd/lz4 ratio of each tier's bytes) to the density instrument. (NB: the n=16 "zram OFF before
+  benches" rule was *speed-bench hygiene* — don't let a silent spill fake a wall — a different goal from n=18 capacity.)
+
+**A cold-data correction worth banking:** the first n=18 run's `QUEENS_COLD` showed pc 18–24 at ~99.7–100% cold — but that
+was the **eviction-thrashing flat TT** (couldn't hold the set; re-reaches came back cold). Eviction-free, the in-degree
+1.4–1.8× implies the near-frontier is ~**55–63% cold-miss / 37–45% reuse-hit**, not 99.9% cold. That split matters: the
+cold-miss path is a *routing* problem (O(1) bloom reject — RocksDB/sized-prefilter), the reuse-hit path is the only thing
+contiguity/the locality key can batch — and the skip analysis above removes most of *both* for the near-frontier.
+
+**Open risk + next step.** The call rests on the blowup staying < ~2.5× at n=18 (the 3-point trend supports it, but n=16
+full-board is unmeasured — the in-RAM map OOMs; sampling/HLL-per-node would extend it). The structural model proves the
+DAG side; the remaining fidelity gap is the **actual IO** — it *assumes* near-frontier gathers are cold (handoff says
+~all cold). **NEXT (proposed): a block-cache LRU replay** of the M_MODEL get-stream under each layout (canonical-hash vs
+parent-contiguous) at a realistic RAM budget — turns "~10× fewer block reads" into a hard number and isolates the layout
+effect — *then* prototype the parent-contiguous RocksDB layout (`iso-dense-rocks`, the spec in
+[2026-06-24-rocksdb-store-evaluation.md](2026-06-24-rocksdb-store-evaluation.md)) with confidence. Decision (replay-first
+vs build-now) pending the user. `M_MODEL` reports saved in `scratchpad/model-n{12,14,16-root119}.txt`.
+
 ## Handoff Note — 2026-06-24 (session --9) — LAUNCHED; diagnosed disk-bound; A+B+C throughput fixes + io_uring Step A
 
 **The n=18 run was launched, ran ~1h, and exposed the real wall: it is NVMe-bound, not compute- or
