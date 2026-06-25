@@ -31,14 +31,15 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > = wire io_uring into the search (Steps B/C) to fill the queue, vs the capacity path (more RAM). **Run STOPPED
 > + resumable.**
 >
-> **★ LATEST (session --12): a skip[18,25] + 17 GB flat-TT n=18 run is LAUNCHED and HEALTHY (~8.5 M/s, RAM-resident,
-> tmux `queens:skip-flat-n18`).** Built the combinadic rank primitive + measured REAL bits/node: **ranking is marginal
-> for a certified run** (keyless combinadic DEAD at coarse shards = 3140 b/node; MPHF tier ~17 b/node but the certified
-> union-bound fp pulls it to ~25–45 ≈ 1.2–2× the flat slot — NOT the dreamed 5–13). **⇒ SKIP is the lever; a flat TT on
-> the skipped set is the pragmatic store.** skip[18,25] validated verdict-preserving (n≤14), stores only pc≥26. **Morning:
-> check roots-done (0/45→any = I9 converged = skip+flat-TT WORKS) + rate (~8.5 M/s steady = healthy; collapse = thrash →
-> relaunch with deeper skip [18,26/27]). NOT resumable.** Sessions --10/--11: store-layout study (skip ⇒ deep set ≈2.8–5 B;
-> density densifies but ranking's certified payoff is the §--12 erosion). **★ See the session --12 note + `go`.**
+> **★★ LATEST (session --13): the n=18 run COMPLETED — CANDIDATE verdict = FIRST PLAYER WINS** (258 B nodes / 8h16m /
+> winning root I9 / 15-move PV; `othello-n18/rust/scratchpad/n18-FIRST-RUN-RESULT.txt`). skip[18,25] + a 17 GB flat TT
+> made the giant root I9 *converge* (the un-skipped buggy run never did). **n=18 is GENUINELY OPEN (user-confirmed)** so
+> this is the candidate answer; verification is CREDIBLE (PV legal+consistent; the n=18 high-square differential passes on
+> two kernels; kernel validated n≤16; verdict stable across the bug fix) but **not yet certified** (high-pc paths can't be
+> differential-tested). **A CONFIRMATION RUN is live (tmux `queens:confirm-dk20`, `dense_k=20` — different getK evaluators
+> W18/19/20):** if it independently finds a winning first move, claim first-player. **NEXT: read the confirmation run's
+> verdict** (watcher re-invokes on root-progress/death/8h). Earlier --12: ranking measured marginal for a certified store
+> (~1.2–2× the flat slot, not 5–13) ⇒ SKIP is the lever (now vindicated by the completed run). **★ See the session --13 note + `go`.**
 
 ## TL;DR state
 
@@ -109,6 +110,55 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    dump, then **run the independent checker** — *a verdict we can't certify, we don't claim* (Phase E).
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
+
+## Handoff Note — 2026-06-25 (session --13) — ★★ n=18 RUN COMPLETED: CANDIDATE verdict = FIRST PLAYER WINS (confirmation run launched)
+
+**The skip[18,25] + 17 GB flat-TT run FINISHED — and it answers the open problem (pending confirmation).**
+
+```
+On the 18×18 board the FIRST player wins with perfect play.
+258,322,944,571 nodes · 8h16m45s · 1/45 root moves (existential: I9 is a winning first move) · TT 17 GB 100% full
+PV (15 moves): I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14
+VERDICT telemetry: deep-band (pc≥17) tail miss% = 99.8% — substantially COLD (the memory wall, as expected)
+```
+Full output saved: `othello-n18/rust/scratchpad/n18-FIRST-RUN-RESULT.txt`. **skip[18,25] is what made the giant
+root I9 converge** — the un-skipped buggy run did 261 B nodes / 8h15m and never finished I9; this run, with the
+near-frontier skipped (only pc≥26 stored), completed I9 at ~10 M/s. The session --12 capacity bet paid off.
+
+**Verification done (the result is CREDIBLE, not yet certified):**
+- ✅ **n=18 is GENUINELY OPEN** (user-confirmed) — no published verdict to conflict with; "expected second
+  player" was only an extrapolation from n=12/14/16 (3 points, not a theorem). So this *is* the candidate answer.
+- ✅ **PV is legal + terminal + value-consistent** (replayed the 15 squares 152,136,168,189,43,120,283,58,105,
+  201,230,23,89,299,234: all legal non-attacking, 0 available at the end, side-to-move loses ⇒ first player wins).
+- ✅ **n=18 differential test passes** (`n18_subposition_values_match_oracle`): 3,400 high-square (≥256)
+  subpositions, **both `iso-dense` AND `iso-flat`** vs the memo/naive oracle — the u8-truncation bug class (the
+  original bug) is caught here and it's clean. Kernel validated n≤16 (matches Jenrich n=16, A344227 ≤ n=13).
+- ✅ **skip + eviction are verdict-preserving** (memo-only; n=12/14 second with skip[18,25], re-validated).
+- ✅ **Verdict stable across the bug fix** (buggy and fixed runs both say first-player ⇒ the graph.rs u8 bug did
+  not flip the top-level verdict).
+- ⚠️ **Residual risk:** the high-pc paths (pc 24–300, the bulk of I9) can't be differential-tested (the oracle
+  caps at ~pc 23). So for an open-problem verdict with a once-burned bug history, **one independent confirmation
+  is warranted before claiming.**
+
+**★ CONFIRMATION RUN LAUNCHED (tmux `queens:confirm-dk20`):**
+```
+QUEENS_DENSE_K=20 QUEENS_SKIP18_PCS=18..25 QUEENS_TT_SLOTS=2125000000 QUEENS_ROOT_TIMING=1 QUEENS_COLD=1 \
+  ./target/release/queens solve 18 iso-dense
+```
+**`dense_k=20`** (vs the run's 17) exercises the **W18/19/20 getK evaluators — code paths the first run never
+touched** — the strongest tractable cross-check of the n=18-specific machinery, while skip[18,25] keeps it
+converging (validated n≤14 second; K=20 collapses *more* via getK — n=14 935K nodes vs K=17's 3M). Started clean
+(prep 3.57s, ~5–6 M/s warming, RSS 16 GB / 5 GB free). **If it independently lands on a winning first move, the
+first-player verdict is strong enough to claim.** Watcher repointed (`scratchpad/n18-run-watch.{sh,log}`, re-invokes
+on root-progress / death / OOM / 8h).
+
+**When the confirmation finishes (morning/next session):**
+- **Agrees (first-player, winning root found):** two independent getK ceilings agree on an open problem ⇒ claim
+  n=18 = first-player win. Then: dump a certificate of the winning root's proof DAG if feasible (the cert pipeline
+  on branch `queens-n18-certify` / `check_cert.py` — but I9's 258 B nodes likely exceed it; the cert items 1–4 +
+  the PV + cross-config agreement are the realistic confidence basis). Record the PV as the witness.
+- **Disagrees / doesn't converge:** a getK or high-pc bug is implicated — investigate (the disagreement localizes it).
+- **Non-resumable** (flat TT) for both runs.
 
 ## Handoff Note — 2026-06-24 (session --12) — combinadic built + REAL bits/node measured (ranking marginal) ⇒ LAUNCHED skip[18,25] + 17 GB flat-TT n=18 run
 
