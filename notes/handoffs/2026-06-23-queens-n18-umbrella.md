@@ -31,13 +31,14 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > = wire io_uring into the search (Steps B/C) to fill the queue, vs the capacity path (more RAM). **Run STOPPED
 > + resumable.**
 >
-> **★ LATEST (sessions --10/--11): the store-layout study is COMPLETE — n=18 is solvable on COMMODITY hardware, no
-> cluster.** --10 modeled it (skip the near-frontier `[18,~25]` ⇒ deep set ≈2.8–5 B; canon/compression irreducible;
-> ranking is the lever). --11 ran the **gating per-shard DENSITY measurement** (`209a96e`, `model_n18_density_sweep`):
-> subtree-local deep domains **densify** (global 1/42 → ~1/10 at pc(P)≈50 → ~1/1 at pc(P)≲35). **Decision: (b) sub-RAM
-> store VIABLE — ~20–30 bits/node at fine sharding ⇒ ~9–19 GB ⇒ FITS the 26 GB dev box** (vs (a)'s bankable 32–64 GB
-> flat-TT box). **NEXT = implement the per-shard rank** ([proposal-2026-06-24-deep-tt-ranking.md]) and measure the REAL
-> bits/node, OR just run (a) (skip + flat TT on a bigger box). **★ See the session --11 note + `go`.**
+> **★ LATEST (session --12): a skip[18,25] + 17 GB flat-TT n=18 run is LAUNCHED and HEALTHY (~8.5 M/s, RAM-resident,
+> tmux `queens:skip-flat-n18`).** Built the combinadic rank primitive + measured REAL bits/node: **ranking is marginal
+> for a certified run** (keyless combinadic DEAD at coarse shards = 3140 b/node; MPHF tier ~17 b/node but the certified
+> union-bound fp pulls it to ~25–45 ≈ 1.2–2× the flat slot — NOT the dreamed 5–13). **⇒ SKIP is the lever; a flat TT on
+> the skipped set is the pragmatic store.** skip[18,25] validated verdict-preserving (n≤14), stores only pc≥26. **Morning:
+> check roots-done (0/45→any = I9 converged = skip+flat-TT WORKS) + rate (~8.5 M/s steady = healthy; collapse = thrash →
+> relaunch with deeper skip [18,26/27]). NOT resumable.** Sessions --10/--11: store-layout study (skip ⇒ deep set ≈2.8–5 B;
+> density densifies but ranking's certified payoff is the §--12 erosion). **★ See the session --12 note + `go`.**
 
 ## TL;DR state
 
@@ -108,6 +109,76 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    dump, then **run the independent checker** — *a verdict we can't certify, we don't claim* (Phase E).
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
+
+## Handoff Note — 2026-06-24 (session --12) — combinadic built + REAL bits/node measured (ranking marginal) ⇒ LAUNCHED skip[18,25] + 17 GB flat-TT n=18 run
+
+**Autonomous session (user → bed: "build it and measure, then get ready for an n=18 run w skip[18,25]…
+and if throughput is still too low, just kick off a skip+TT run w the largest TT we can fit. fingers
+crossed!"). Delivered: the ranking primitive + the REAL bits/node measurement (verdict: ranking is
+marginal for a certified run) → the pragmatic path is SKIP, so a skip[18,25] + 17 GB flat-TT n=18 run is
+LAUNCHED and healthy (~8.5 M/s, RAM-resident).**
+
+### 1. Built the combinadic + measured REAL bits/node (commit `queens-n18` `db949d7`)
+- **`combinadic.rs`** — rank/unrank over k-subsets (u128 Pascal to C(324,18)), bijectivity test green
+  (`rank∘unrank=id`, surjective) = the proposal §7.2.4 gate + the reusable in-slice-rank primitive.
+- **Extended the density measurer** (`reachable_deep_from` now returns per-Δ levels; the BREAKDOWN reports
+  bits/node per store tier). **[measured, coarse pc=58 shard, deep band pc≥24]:**
+
+  | store tier | bits/node | note |
+  |------------|-----------|------|
+  | flat hash slot (today) | ~56 | fp 54 + value 2 |
+  | ideal rank→reachable | 40.9 | NOT keyless (needs MPHF/enum); 2·reachable/present |
+  | **keyless in-slice combinadic** | **3140** | **DEAD** — §3.2 superset sparsity: C(58,Δ) domain=456,837 ≫ present 291 |
+  | MPHF(3)+value(2)+per-slice-fp | ~17 | optimistic (ε=2⁻⁸ per slice) |
+
+- **★ The verdict (corrects the proposal's optimistic 5–13):** the **keyless combinadic** is dead except at
+  Δ≤1 ultra-fine slicing (where the routing index then explodes); the **MPHF tier's ~17** assumes a tiny
+  per-slice fp, but a *certified* run's union bound over ~10¹¹ absent probes forces the fp back toward ~40
+  bits ⇒ the realistic certified store is **~25–45 bits/node ≈ 1.2–2× the flat slot, NOT the dreamed 5–13.**
+  **⇒ Ranking is marginal/uncertain for certified n=18; the load-bearing lever is SKIP (cut the working
+  set), and a flat TT on the skipped set is the pragmatic store.** This is exactly the user's instinct.
+
+### 2. Validated skip[18,25] is verdict-preserving (the launch gate)
+skip is **memo-only** (skip a pc band's TT entry/probe/put; the value is still computed) ⇒ verdict-preserving
+by construction; confirmed: **n=12 second + iso-flat distinct 1,060,823 exact; n=14 second**, and skip
+engages (n=14 iso-dense TT fill **1.2%→0.6%**, nodes +8.7% recompute). `iso-dense` has `skip18` default-on
+for **all roots** (empty `skip18_squares`), so `QUEENS_SKIP18_PCS=18..25` engages for the one-giant-root
+n=18 solve. (gates run on the znver5 `make release` binary.)
+
+### 3. ★ LAUNCHED: n=18 skip[18,25] + 17 GB flat-TT run (tmux `queens:skip-flat-n18`)
+Command (bare on the TTY, from `/home/tavis/src/othello-n18/rust`):
+```
+QUEENS_SKIP18_PCS=18,19,20,21,22,23,24,25 QUEENS_TT_SLOTS=2125000000 \
+QUEENS_ROOT_TIMING=1 QUEENS_COLD=1 ./target/release/queens solve 18 iso-dense
+```
+- **`QUEENS_TT_SLOTS=2125000000` = 17 GB** (the prep banner says "9 GB" — **cosmetic bug**, `gb` is computed
+  from the default `bits` not the slot override; RSS confirms **16.7 GB** actual). 17 GB = the proven-safe
+  size on this 26 GB box; chose safety over max coverage for an unattended run (OOM = worst outcome).
+- **[status @ ~5 min] 2.55 B nodes · 8.5 M/s (5s/15s) / 9.4 M/s cumm · rif 1 [I9] · 0/45 roots · RSS ~16 GB,
+  6–7 GB free, zram flat 1.2 GB (NOT spilling).** Throughput is **~8.5 M/s, RAM-resident** — far above
+  session --9's disk-BuRR (0.2 M/s) and the buggy flat run (1.8–6.9 M/s). skip[18,25] stores only pc≥26
+  (~1.87–3.37 B) so the 17 GB TT (~1.5 B usable) covers far more than the buggy run's 12% ⇒ should thrash
+  far less. **The open question only time answers: does the giant root I9 CONVERGE (0/45 → 1/45) or grind
+  all night** (the buggy run never left I9 — but that was eviction at 12% coverage + the verdict bug).
+
+### ★ MORNING BRIEFING / next steps
+1. **Check the run:** `tmux capture-pane -t queens:skip-flat-n18 -p | tail -5` (widen first:
+   `tmux resize-window -t queens:skip-flat-n18 -x 200`). Watch **roots-done** (0/45 → any progress = I9
+   converged = skip+flat-TT WORKS at n=18, the headline) and the **rate** (steady ~8.5 M/s = healthy; a
+   collapse = thrash). `free -g` for memory (stable ~16 GB RSS = fine). The `QUEENS_COLD` cold-band report
+   prints at root completion (the thrash/reuse signal). It is **NOT resumable** (flat TT) — if killed, relaunch.
+2. **If I9 converged / progressing:** skip+flat-TT is the n=18 path on commodity RAM. Consider a bigger TT
+   (a 32–64 GB box → no eviction → faster) or skip deeper ([18,26]/[18,27]) to fit the dev box with zero
+   eviction (survivors ~1.6–3 B; see the --10 TT-fit table).
+3. **If I9 thrashing (rate collapsed / 0/45 after hours / RSS pinned + nodes ballooning):** stop
+   (`tmux send-keys -t queens:skip-flat-n18 C-c`) and relaunch with a **deeper skip** (`QUEENS_SKIP18_PCS=18..26`
+   or `..27`) so the survivor set fits the 17 GB TT without eviction (the eviction-free regime), or move to a
+   bigger-RAM box.
+4. **The (b) ranked store is NOT worth building** for a certified run per §1 (ranking ≈ 1.2–2× the slot,
+   uncertain); skip + a flat TT on enough RAM is the pragmatic n=18 solver. The combinadic primitive is
+   banked for if that conclusion is ever revisited.
+
+Commits: `queens-n18` `db949d7` (combinadic + measurement); docs on `main` (this note).
 
 ## Handoff Note — 2026-06-24 (session --11) — the GATING per-shard DENSITY measurement: (b) sub-RAM store VIABLE at fine sharding
 
