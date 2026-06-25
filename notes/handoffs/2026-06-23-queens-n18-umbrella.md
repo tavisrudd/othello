@@ -349,6 +349,55 @@ deep = near-terminal = few completions; the prefix prunes infeasible directions.
 cross-shard) + a combinadic rank/unrank bijectivity check on n≤12. This is the harder instrument (threads the k-prefix
 through the search); the access-local subtree key is the one to model (shape-key is dead). **(a) fallback stays bankable:
 skip + flat TT on a 32–64 GB box. The bet now: subtree-shard + per-shard rank → ~2–8 GB → the 26 GB dev box.**
+
+**★ SUBTREE-PREFIX SHARD INSTRUMENT — BUILT + first signal (leaning-negative, CONFOUNDED).** `M_MODEL`
+(`QUEENS_MODEL_SHARD=1`, `QUEENS_SHARD_K`) threads the `wins_inc` ancestor path (a Drop-guarded thread-local stack) and
+shards deep positions by their k-th ancestor. **[measured n=18 continuation, k=3]:** 75,902 deep positions · **duplication
+1.31×** · 15,541 shards · **mean 6 deep positions/shard** (deep nodes spread thin, do NOT cluster densely) · **within-shard
+xz 58.8 ≈ the global 58** (subtree-sorting does not densify) · +13.9 bits shard-id ⇒ total *worse* than global. **Leaning
+NEGATIVE for the (b) per-shard-density bet** — but three CONFOUNDS make it inconclusive, and fixing them is the next-session
+job: (1) **`par_wins_inc` levels are off the path** — the parallel split eats the shallow queens, so the `wins_inc`-only
+path is shallow (k=8 captured only 231 edges); push in `par_wins_inc` too for the full prefix. (2) **shards are tiny** (~6
+positions) so xz can't show within-shard density (and its window spans shards anyway — it's measuring global, not
+within-shard). (3) **the true density (present/DOMAIN) is still unmeasured** — needs the *reachable* count per subtree-shard
+(`reachable_profile` restricted to the prefix), the actual ⅛-crossover test. **⇒ NEXT SESSION:** fix the `par_wins_inc`
+path, run a k-sweep on a BIGGER subtree (fewer opening moves ⇒ shards large enough to compress), and measure present/reachable
+per shard — the clean density signal. If shards stay sparse (~1/42, like the global), the (b) sub-RAM bet is dead and **(a)
+the 32–64 GB box is the answer** (still an order of magnitude under session --9). If subtree-local domains are dense, (b)
+lives. The instrument is in place; only the clean run remains.
+
+## Handoff Note — 2026-06-24 (session --10, end) — store-layout modeling COMPLETE; the architecture is converged, one density measurement remains
+
+**A long modeling session that took the n=18 store from "needs a cluster / 256 GB box" (session --9) to a concrete,
+mostly-settled design.** No production code changed — all work is the `M_MODEL` instrument family (gated, byte-identical
+off) + four design docs + the handoff. The arc, in order, each step measured:
+
+1. **Layout model** (`M_MODEL`): in-degree/nw/cost-benefit/TT-fit. ⇒ **skip the near-frontier** (storing a cheap-recompute
+   band is net-negative at n=18's ~1000× disk:recompute ratio) — `QUEENS_SKIP18_PCS=18..23` cuts ~60% of the resident set;
+   deep survivors (pc≥24) ≈ 2.8–5 B ⇒ **32–64 GB box, flat TT, no disk** (the bankable answer (a)).
+2. **Stronger-canon shrink:** iso_key_fast merges the deep set only **1.045×** — node count irreducible by canon.
+3. **Compressibility sweep:** {raw mask, sqlist, delta} × {orderings} all ≥ raw-mask+xz **~58 bits/node** — bits/node
+   irreducible by general compression.
+4. **Cross-root duplication: 1.11×** (n=14) — the user's duplication-tolerant subtree-shard bet is cheap (≤1.6× at any k).
+5. **Ranking scoping** (proposal): the fp-free GLOBAL rank is **theorem-impossible** (no closed-form rank; a TT probes
+   misses); but per-shard slicing+ranking → **~5–13 bits/node → ~2–8 GB** (fits a 32–64 GB box, maybe the dev box) — the (b) bet.
+6. **Subtree-prefix shard instrument** (this session's last build): first signal leans negative but is confounded (above).
+
+**THE CONVERGED ARCHITECTURE** (both the user's paged-shard idea and the ranking path are the same density lever): **skip
+near-frontier → shard deep by access-locality (DFS subtree) → duplicate across shards (cheap, 1.1–1.6×) → page in/out →
+rank within each shard for density.** Resolves the canonical-vs-locality deadlock (duplicate instead of share) AND session
+--9's random-read thrash (page local subtrees). Maps onto Korf SDD / Syzygy slicing.
+
+**Commits (`queens-n18`):** `511dd60` (M_MODEL) · `ddeb961` (strong-shrink) · `b9a0dae` (density) · `d3152d1` (key sweep +
+cross-root dup) · + the subtree-prefix shard instrument (this note's commit). **Docs (`main`):** `88d7cb7` · `bf78f8b` ·
+`2841194` · `34a25dd` + this note. Design docs: `proposal-2026-06-24-locality-preserving-tt-key.md`,
+`proposal-2026-06-24-deep-tt-ranking.md`.
+
+**★ NEXT SESSION = the ONE remaining measurement (then it's implementation, not research):** clean per-shard DENSITY —
+(1) push the path in `par_wins_inc` too (full prefix), (2) k-sweep {6,8,10,12} on a big subtree (large shards), (3) measure
+**present/reachable** per shard (`reachable_profile` restricted to the prefix) = the ⅛-crossover test. **Dense ⇒ (b) the
+~2–8 GB sub-RAM store (dev box); sparse ⇒ (a) the 32–64 GB box** — either way n=18 is solvable on commodity hardware, the
+session's headline. Then: implement the chosen path (skip + flat-TT-on-a-bigger-box is the fastest route to a real n=18 run).
 - **zram as a compute-for-capacity tier (user Q).** The box's swap is `/dev/zram0` (compressed RAM ~3.4× on compressible
   data) — a tier between RAM (~100 ns) and NVMe (~50–100 µs): a page-fault + decompress ~1–3 µs, i.e. ~10–50× slower than
   RAM but ~10–50× faster than NVMe (in the spirit of the 1000:1 inversion). **But the benefit is gated by compressibility,
