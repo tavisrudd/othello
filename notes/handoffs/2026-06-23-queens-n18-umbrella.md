@@ -282,6 +282,29 @@ store-shrink still helps by lowering the box/TT size needed. **So the gating unk
   is unchanged: skip the near-frontier + fit the (irreducible ~2.8–5 B) deep set on a 32–64 GB box, with the
   reuse-locality/density instrument + sidecar as the high-total fallback. The cost-inversion remains true in spirit (trade
   compute for I/O) but its specific node-reduction hopes are pruned by this measurement.
+- **★ DENSITY/BITMAP TEST — DONE, bits/node ALSO ~irreducible without a ranking (commit pending).** Extended `M_MODEL`
+  (`QUEENS_MODEL_DENSITY=1`) to record the DEEP (pc≥24) canonical occupancy masks (`lex_min8`) + measure structural
+  compressibility. **[measured n=18 A1C2E3G4I5, 175 k deep masks]:** raw mask 384 bits/node; current hash slot 64; naive
+  sorted delta-coding ~350 (fails — masks are *sparse* in 384-bit integer space); **zstd-19 = 70.8, xz-9 = 57.7 bits/node**
+  — i.e. general compression lands at **≈ the 64-bit hash slot** (deep store ~20–36 GB either way). **No bitmap floor on
+  this sample.** Caveat: it's a sparse 175 k slice of the ~5 B set; the full board is ~1000× denser ⇒ likely pessimistic.
+- **The fingerprint/correctness FLOOR is the real wall.** A *certified* TT needs ~54-bit collision-safety per key (a false
+  key-match = a wrong value = a wrong verdict). So any hash-based store — flat TT, MPHF+fp, xz-of-masks — floors at fp(54)
+  + value(2) ≈ **56–64 bits/node ⇒ ~35 GB**. The only escape to the **~7-bit floor** (log2(reachable/present), reachable ≈
+  42× present ⇒ ~4–6 GB, laptop-class) is **a bijective RANK into the reachable domain** — because then every offset is a
+  real position, so there are NO false matches to guard against and the 54-bit fp *vanishes* (value's "unknown" state IS
+  the miss). This is exactly how chess/checkers endgame tablebases (Nalimov/Syzygy) index positions into dense WDL tables.
+- **Background-encoder architecture (user) — sound but its two legs are weak as-is:** (1) the orbit-expansion leg (one
+  completed iso-key → many positions via the inverse map) buys ~nothing on deep bands (iso-merge 1.045× = singleton
+  classes), so it reduces to a *forward* encoder; (2) the compact-archive leg only pays if the encoding actually compresses,
+  which (per above) it doesn't without a ranking. The architecture becomes worthwhile IFF the combinatorial rank exists.
+- **★ DECISION (user): pursue (b) — CHASE THE RANKING.** The combinatorial-rank path is the one lever that breaks BOTH the
+  bits/node floor AND the fp floor (→ ~4–6 GB, fits the dev box). Launched a deep scoping sub-agent
+  ([proposal-2026-06-24-deep-tt-ranking.md](../proposal-2026-06-24-deep-tt-ranking.md), pending): combinatorial rank/unrank
+  of canonical non-attacking game states, the tablebase-indexing prior art (the closest precedent — they solve exactly this),
+  whether a bijective rank removes the fp floor, MPHF + background-rebuild as the fallback, and the first measurable step.
+  Deep keys dumped at `/tmp/queens-deep-masks.bin` for prototyping. **The (a) fallback stays bankable: skip + a flat TT on a
+  32–64 GB box solves n=18 regardless** — the ranking is the bet to get it onto the 26 GB dev box (or a laptop).
 - **zram as a compute-for-capacity tier (user Q).** The box's swap is `/dev/zram0` (compressed RAM ~3.4× on compressible
   data) — a tier between RAM (~100 ns) and NVMe (~50–100 µs): a page-fault + decompress ~1–3 µs, i.e. ~10–50× slower than
   RAM but ~10–50× faster than NVMe (in the spirit of the 1000:1 inversion). **But the benefit is gated by compressibility,
