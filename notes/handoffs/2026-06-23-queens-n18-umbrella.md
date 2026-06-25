@@ -305,6 +305,50 @@ store-shrink still helps by lowering the box/TT size needed. **So the gating unk
   whether a bijective rank removes the fp floor, MPHF + background-rebuild as the fallback, and the first measurable step.
   Deep keys dumped at `/tmp/queens-deep-masks.bin` for prototyping. **The (a) fallback stays bankable: skip + a flat TT on a
   32–64 GB box solves n=18 regardless** — the ranking is the bet to get it onto the 26 GB dev box (or a laptop).
+
+## Handoff Note — 2026-06-24 (session --10 cont.) — the CONVERGENCE: subtree-sharded + duplication + paged + per-shard rank
+
+Three measurements + a ranking-scoping agent converged on one architecture. **Instruments committed on `queens-n18`** (all
+gated, byte-identical off): `M_MODEL` key sweep (`QUEENS_MODEL_DENSITY`) + cross-root duplication (`QUEENS_MODEL_DUP`).
+
+- **Key/representation SWEEP — general compression floors at ~58 bits/node, nothing beats it.** Crossed {raw 384-bit mask,
+  u16 square-list, delta-coded squares} × {by-mask, by-pc, by-shape, by-centroid} and xz/zstd'd each: raw-mask+xz **57.7**,
+  sqlist 64.5, delta 72+ (delta-coding STRIPS the bitmask structure xz exploits). The shape shard key (pc+3×3 histogram)
+  **fragments** (148 k shards / 175 k masks ≈ singletons) and *hurts* (71 bits). ⇒ **No representation/ordering beats ~58
+  bits via general compression.** Sub-58 needs a domain RANK, not a better compressor.
+- **★ CROSS-ROOT DUPLICATION — the user's "duplication OK" bet is VALIDATED.** [measured n=14 full board, 2.05 M deep
+  positions] **mean distinct roots/position = 1.109×; 89.3% reached from a SINGLE root** (10.4% from 2). So sharding by root
+  (coarsest subtree) + duplicating costs only ~11%. Bracketed: root-level 1.11× → parent-level 1.6× (the measured blowup),
+  so **subtree-sharding duplication ∈ [1.1×, 1.6×] at ANY granularity** — cheap throughout, far below the re-exp we already
+  pay with skip. (Caveat: n≤16 only — the root bitmask caps at 64; n=18 has ~81 roots. Signal is strong.)
+- **★ RANKING scoping ([proposal-2026-06-24-deep-tt-ranking.md](../proposal-2026-06-24-deep-tt-ranking.md)) — the fp-free
+  global rank is THEOREM-impossible, but per-shard ranking still gets to ~5–13 bits/node.** Two hard walls: (1) **no
+  closed-form rank** for the feasible/reachable non-attacking set (n-queens counting is beyond #P; the only closed bijection
+  — the combinadic over all k-subsets — addresses a set 10²–10²¹× too sparse); (2) **a TT probes MISSES by design** (unlike
+  tablebases, which only probe legal solved positions), so even an MPHF *relocates* the fingerprint, not removes it. **So the
+  ~54-bit fp is SHRUNK, not removed** — to a **3–11-bit per-slice miss-guard** via density+slicing+sorting ⇒ realistic deep
+  store **~5–13 bits/node → ~2–8 GB → fits a 32–64 GB box outright** (the dense-slice tier — a keyless packed value-array
+  indexed by an in-slice rank — recovers most of the ~7-bit prize *locally* where density holds). Prior art (Nalimov/Syzygy/
+  Chinook/Awari) confirms the mechanism: slice by a monotone invariant (our **pc band = their stone-count layer**) + combinadic
+  rank within slice + Syzygy two-level sparse index + Nalimov's D4 fold (= our exact D4) — borrow the slicing, not the
+  fp-free property.
+
+**★★ THE CONVERGED ARCHITECTURE (both the user's paged-shard idea and the ranking path are the SAME density lever through
+two cache layers):**
+1. **Shard by access-locality** (DFS subtree-prefix), NOT a canonical key — dissolves the canonical-vs-locality deadlock
+   (no single key need be both shared and local). Maps onto Korf SDD/HBDDD (shard = duplicate-detection scope).
+2. **Duplicate across shards** instead of sharing — measured cheap (1.1–1.6×) on the 1.4 TB pool; wins the binding
+   **resident-RAM** axis (only the active DFS path's shards resident).
+3. **Page shards in/out** on subtree entry/exit (the locality that fixes session --9's random-read thrash → sequential-ish).
+4. **Rank within each shard** for density — `rank-within-shard` IS the per-shard density mechanism (the ranking path and the
+   paging path are the same lever). ~5–13 bits/node where the shard is dense.
+
+**⇒ DECISION TURNS ON ONE MEASUREMENT (next): per-shard DENSITY for subtree-prefix keys k∈{6,8,10,12}** — is a subtree-local
+domain dense enough that per-shard ranking pays (≥⅛ crossover), or still ~1/42 sparse? (The structural prior favors dense:
+deep = near-terminal = few completions; the prefix prunes infeasible directions.) Plus the paging reuse pattern (intra- vs
+cross-shard) + a combinadic rank/unrank bijectivity check on n≤12. This is the harder instrument (threads the k-prefix
+through the search); the access-local subtree key is the one to model (shape-key is dead). **(a) fallback stays bankable:
+skip + flat TT on a 32–64 GB box. The bet now: subtree-shard + per-shard rank → ~2–8 GB → the 26 GB dev box.**
 - **zram as a compute-for-capacity tier (user Q).** The box's swap is `/dev/zram0` (compressed RAM ~3.4× on compressible
   data) — a tier between RAM (~100 ns) and NVMe (~50–100 µs): a page-fault + decompress ~1–3 µs, i.e. ~10–50× slower than
   RAM but ~10–50× faster than NVMe (in the spirit of the 1000:1 inversion). **But the benefit is gated by compressibility,
