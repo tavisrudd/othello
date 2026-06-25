@@ -165,18 +165,25 @@ This is past re-warm (it froze 2 new segments / +70 M keys), so ~0.26 M/s is ste
 **★ io_uring async ribbon reads — Step A DONE, committed `6e89f9a`:** per-worker thread-local ring +
 `batch_pread(BandRead[])` in `burr.rs` (submit many band-window reads, wait together). `batch_pread_matches_pread`
 proves byte-identical to pread + ring reuse; skips where io_uring is unavailable. dep `io-uring = "0.7"`.
-**NOT yet wired into the search** — that's the remaining work:
-- **Step B** — batch the candidate ribbon reads inside the segment walk (`get_inner`): ~2–3 deep.
-- **Step C (the win)** — frontier/children prefetch: at a node, async-read the ordered children's ribbons
-  ahead via the ring (feed from `wins_inc_iter`'s materialized frontier), consume **in α-β/move order** so the
-  node count stays byte-identical (prefetch, not reorder). Goal: one deep-spine thread fills the 33K→56K+ queue.
-  Expected ~2× from the headroom; α-β-sensitive (speculative *reads* are fine — eviction-free — but must not
-  change expansions). Validate with the n=14 disk-off==on gate + a throughput/iowait A/B.
+- **Step B — LANDED + MEASURED (`c05866c`):** batch the segment walk's Bloom-hit candidate ribbon reads through
+  the ring (`MappedArchive::prefetch_window` / `SegArchive::prefetch_window` / a per-worker `WalkScratch`),
+  warming ARC, then read in walk order. Byte-identical (n=14 disk-off==on==2,823,498). **[measured n=18, re-warm]
+  iowait 95%→78%, ARC miss 24%→18%, but throughput FLAT ~0.2 M/s and pool IOPS FLAT ~30K — it does NOT fill the
+  queue:** the within-walk batch overlaps only ~2–3 candidate reads and the thread **still blocks per-walk**
+  (`submit_and_wait`). Net: a wash for speed. Kept as the foundation, not a win.
+- **Step C (the real lever, NOT built)** — frontier/children prefetch: at a node, async-read the *ordered
+  children's* ribbons ahead via the ring (feed from `wins_inc_iter`'s materialized frontier), consume **in
+  α-β/move order** so the node count stays byte-identical (prefetch, not reorder). Goal: one deep-spine thread
+  fills the 33K→56K+ queue (the per-walk block is the thing Step C removes). The bigger, riskier descent
+  restructure; α-β-sensitive (speculative *reads* are fine — eviction-free — but must not change expansions).
 
-**★ NEXT:** wire Step B then C (byte-identical gate each), measure whether the NVMe queue fills and iowait drops.
-**Open honest question for the user:** even fully integrated, io_uring is ~2× on a *fundamentally* disk-bound run
-(working set ≫ RAM) — so weigh it against the **capacity** path (a ~192–256 GB box removes the wall outright,
-likely a smaller real cost than chasing 2× and still being disk-bound). Watch script: `scratchpad/n18-watch.sh`.
+**★ NEXT — a decision, not more single-box code (user-gated):** Step B **measured that single-box io_uring is
+not transformative** (the within-walk batch is a wash). Step C *might* reach the ~2× headroom, but it's real work
+for a ~2× on a run that's still days-to-weeks AND fundamentally disk-bound. The honest alternative is **capacity**:
+a ~192–256 GB box holds the n=18 working set in ARC → the disk problem vanishes → back to multi-M/s, and the flat
+TT (trustworthy: `Slot` 55-bit fp = miss-not-wrong, ~2⁻⁵⁵ false-match = BuRR fp=54 class) becomes fast *and*
+correct with no eviction. So: (a) push Step C for the single-box ~2×, or (b) move to a bigger-RAM box / cluster.
+Watch script: `scratchpad/n18-watch.sh`. Run STOPPED + resumable (116 segments).
 
 ## Handoff Note — 2026-06-24 (session --8) — prefilter-on-resume + resume-hardening; cert strategy revised
 
