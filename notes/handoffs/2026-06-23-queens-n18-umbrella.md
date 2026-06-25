@@ -29,7 +29,15 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > wired store prefetch / MLP Bloom walk; major-faults 108K→0, ARC miss 88→24%) + **io_uring Step A** (`6e89f9a`
 > — the batch-read primitive). The run is still NVMe-bound with the disk **under-driven** (33K/56K IOPS); next
 > = wire io_uring into the search (Steps B/C) to fill the queue, vs the capacity path (more RAM). **Run STOPPED
-> + resumable. ★ See the session --9 note + `go`.**
+> + resumable.**
+>
+> **★ LATEST (sessions --10/--11): the store-layout study is COMPLETE — n=18 is solvable on COMMODITY hardware, no
+> cluster.** --10 modeled it (skip the near-frontier `[18,~25]` ⇒ deep set ≈2.8–5 B; canon/compression irreducible;
+> ranking is the lever). --11 ran the **gating per-shard DENSITY measurement** (`209a96e`, `model_n18_density_sweep`):
+> subtree-local deep domains **densify** (global 1/42 → ~1/10 at pc(P)≈50 → ~1/1 at pc(P)≲35). **Decision: (b) sub-RAM
+> store VIABLE — ~20–30 bits/node at fine sharding ⇒ ~9–19 GB ⇒ FITS the 26 GB dev box** (vs (a)'s bankable 32–64 GB
+> flat-TT box). **NEXT = implement the per-shard rank** ([proposal-2026-06-24-deep-tt-ranking.md]) and measure the REAL
+> bits/node, OR just run (a) (skip + flat TT on a bigger box). **★ See the session --11 note + `go`.**
 
 ## TL;DR state
 
@@ -100,6 +108,68 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    dump, then **run the independent checker** — *a verdict we can't certify, we don't claim* (Phase E).
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
+
+## Handoff Note — 2026-06-24 (session --11) — the GATING per-shard DENSITY measurement: (b) sub-RAM store VIABLE at fine sharding
+
+**The one remaining store-layout measurement (session --10's headline next-step) is DONE. Verdict: subtree-local deep
+domains DENSIFY strongly — the (b) sub-RAM store fits the 26 GB dev box.** Built the clean instrument, sidestepping the
+confounded in-search shard tap (the `par_wins_inc` path-threading-across-rayon mess) with a direct, rigorous test.
+
+**The instrument (committed `queens-n18` `209a96e`, gated/test-only, production byte-identical; gates green — `make test`,
+n=12 distinct 1,060,823, clippy/fmt):**
+- **`Queens::reachable_deep_from(blocked, pc_min, cap)`** — forward BFS from a prefix P that **stops descending the
+  instant a child drops below `pc_min`**, so it enumerates ONLY the narrow deep band (pc 24→pc(P)), not the 42× full
+  subtree that killed C2. Deduped by `pos_key` (D4 canon = the deep store's `d4_bits∘lex_min8` granularity), so the count
+  is directly comparable to `present`. The trick that makes "reachable" (the thing too big to enumerate, by definition)
+  tractable: cut at the deep-band floor.
+- **`model::deep_present_count` / `deep_present_per_pc`** + `wins_model`'s `QUEENS_MODEL_QUIET=1`.
+- **`model_n18_density_sweep`** test: treats an `--after`-style prefix as ONE shard; `density = present / reachable`
+  (present = pc≥24 store nodes in P's α-β proof DAG; reachable = pc≥24 forward-reachable from P = the rank *domain*).
+  Greedy diversified legal prefixes; sweeps shard depth; `QUEENS_REACH_BREAKDOWN=1` = the per-pc view.
+  Run: `QUEENS_PAR_DEPTH=1 QUEENS_MODEL=1 QUEENS_MODEL_QUIET=1 QUEENS_SKIP18=0 QUEENS_REACH_TARGETS="44,56,70,90" cargo
+  test --release model_n18_density_sweep -- --ignored --nocapture`. (`QUEENS_PAR_DEPTH=1` is **required** — else
+  `par_wins_inc` eats the top plies of the deep band before `wins_inc`/`record_edge` see them ⇒ `present` undercounts.)
+
+**[measured n=18] density rises sharply as shards get finer (the structural prior CONFIRMED):**
+
+| shard depth pc(P) | queens | density (present/reachable) | 1/density | regime                          |
+|-------------------|--------|-----------------------------|-----------|---------------------------------|
+| 58–63             | ~7     | 0.023–0.059                 | 17–43×    | ≈ the global 1/42 — sparse       |
+| 50–51             | ~8     | **0.085–0.12**              | 8–12×     | past the 1/8 win line            |
+| 41–48             | ~8     | 0.06–0.92 (high variance)   | 1–16×     | mostly dense                     |
+| 31–36             | ~9     | **0.82–1.00**               | 1.0–1.2×  | nearly fully dense               |
+
+(Global deep ratio = 42× ≈ density 0.024. n=12 control: 0.64–1.0 — dense, but tiny board.)
+
+**[measured] per-pc BREAKDOWN (one pc(P)=58 prefix, the granularity-free view):** the deep-store MASS is **bottom-heavy**
+— pc 24–30 = ~88% of `present` (the mass is at low pc, near the skip boundary, as hoped). But within ONE shallow subtree
+the density is **U-shaped**: the very bottom pc 24–27 is *sparse* (0.014–0.056 — `reachable` fans out hugely there:
+1813 at pc24 vs present 53), pc 28–30 is *dense* (0.18–0.34). **Resolution:** density is fundamentally about **shard
+granularity**, not pc — a *fine* shard (pc(P)≈30 prefix) covering those same pc 24–27 nodes has a small local fan ⇒ dense
+(~0.9, per the sweep); the shallow subtree's per-pc view conflates the fan from all intermediate branches. So fine
+sharding *captures* the density; the conclusion is granularity-dependent.
+
+**★ THE DECISION — (b) is VIABLE; it gets n=18 onto the 26 GB dev box, ~2–3× under (a)'s box.**
+- A keyless per-shard rank stores ~2 bits per *domain* slot ⇒ **`2/density` bits/node**. At the practical fine-shard
+  granularity (pc(P)≈40–50, density ~0.10) that's **~20 bits/node ideal** vs the **58–64-bit flat slot** ⇒ **~2.9×
+  shrink**. With realistic erosion (combinadic/MPHF overhead + the measured 1.1–1.6× cross-shard duplication) call it
+  ~20–30 bits/node ⇒ the **~2.8–5 B deep set → ~9–19 GB → FITS the 26 GB dev box** (vs (a)'s 32–64 GB flat-TT box).
+- **NOT the dreamed 10× / ~2–8 GB** — that needs either *very*-fine sharding (pc(P)≲35, density 0.5–0.9 → ~2–4 bits/node
+  keyless, but a huge shard count + paging + duplication pressure) OR the theorem-impossible global fp-free rank. The
+  density confirms the dense-slice keyless tier *pays only at very-fine granularity*; at moderate-fine it's ~par with an
+  MPHF+miss-guard (~7–16 bits/node).
+- **(a) stays bankable:** skip[18,~25] + a flat 55-bit-fp TT on a 32–64 GB box — no ranking, fast, trustworthy.
+
+**Caveat (the honest gap):** the measured density is `present/reachable` = the **IDEAL-rank ceiling**. The achievable
+combinadic-rank density is `present/(combinadic-domain)` ≤ this, and the per-shard combinadic gap is **unmeasured** (the
+ranking proposal's job). So this confirms the *prerequisite* (the domains are dense enough that ranking *can* pay) and
+sizes the *upper bound*; it does not yet pin the real bits/node.
+
+**⇒ NEXT (implementation, not more density research): the ranking proposal's per-shard rank.** Build the per-shard
+combinadic/MPHF rank ([proposal-2026-06-24-deep-tt-ranking.md]), measure the **REAL** bits/node (combinadic gap +
+duplication) and the **shard-count ↔ paging block-size ↔ duplication** tradeoff (very-fine = cheaper bits but more
+shards). Fastest route to a real n=18 run remains **(a): skip[18,~25] + flat TT on a 32–64 GB box** — the ranking is the
+bet to land it on the 26 GB dev box. Raw sweeps saved in `scratchpad/n18-density-{deep,map,focused,breakdown}.txt`.
 
 ## Handoff Note — 2026-06-24 (session --10) — store-layout MODEL (contiguity vs transposition): parent-contiguity wins, two-tier dead
 
