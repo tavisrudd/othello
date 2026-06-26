@@ -22,8 +22,14 @@ differential tests `direct_wK_matches_scalar` / `graph_wins8_matches_scalar`, pe
 | 2     | `win_emb` / `childmap_emb` (induced-subgraph invariance = `projected_code` soundness) | ✔ proved      |
 | 2     | `inducedGraph`, `firstPlayerWins_inducedGraph`, `buildPred_correct`, `not_win_empty` (`W_K` build) | ✔ proved      |
 | 2′    | concrete u128 code decode (`adj_from_code`/`projected_code` bit layout) | deferred → differential tests |
-| 3     | trust-chain doc + Lean↔Rust `#eval` cross-check                      | not started                    |
-| 4     | optional `PGame`/Sprague–Grundy bridge (→ items 1 & 3)              | not started                    |
+| 3     | trust-chain doc (`TRUST.md`) ✔; Lean↔Rust `#eval` cross-check       | doc done; `#eval` not started  |
+| 4a    | self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`) | ✔ proved          |
+| 4b    | Sprague–Grundy component-XOR sum (`grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂`, → item 3) | in progress       |
+
+mathlib `v4.32` **no longer ships `SetTheory/Game/`** (`PGame`, `Impartial`, `grundyValue`,
+`Nimber` were extracted to the standalone `CombinatorialGames` package). So Phase 4 is built
+**self-contained** rather than anchored to a now-absent mathlib `PGame` — which is exactly the
+"minimal mathlib footprint, no version churn" rationale Approach A was chosen for.
 
 ## Correspondence to the Rust
 
@@ -36,6 +42,7 @@ differential tests `direct_wK_matches_scalar` / `graph_wins8_matches_scalar`, pe
 | `firstPlayerWins`   | `get(k, code)` over the full graph         | first player wins this position  |
 | `graphOfCode` (P2)  | `adj_from_code` (`:501`)                   | decode upper-triangular `code`   |
 | `buildPred` (P2)    | `graph_wins` (`:541`)                      | one ply of the W8 build          |
+| `grundy` (P4a)      | per-node nimber / `mex` over moves         | Grundy value of a position       |
 
 ## Toolchain (nix flake + direnv)
 

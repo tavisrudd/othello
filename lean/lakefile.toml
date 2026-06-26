@@ -1,7 +1,9 @@
 name = "NodeKayles"
 defaultTargets = ["NodeKayles"]
 
-# mathlib (Finset, Equiv, card lemmas now; PGame/Sprague–Grundy in Phase 4). Tracking
+# mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
+# Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
+# the standalone CombinatorialGames package), so Phase 4 is built self-contained. Tracking
 # `master` keeps `lake exe cache get` serving prebuilt oleans; pin to a tag for
 # reproducibility once the first build is green (the pinned rev lands in lake-manifest.json).
 [[require]]

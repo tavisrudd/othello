@@ -23,6 +23,7 @@ The semantics of the leaf evaluator — the recurrence, its invariances, and the
 | **`buildPred_correct`**               | the build recurrence equals the true value                          | **`graph_wins` (`dense.rs:541`)**         |
 | `not_win_empty`                       | the terminal position is a loss for the mover                       | the `W0` base of the build                |
 | `firstPlayerWins`                     | first player wins ⇔ `win` over the full vertex set                  | `get(k, code)` over a complete graph      |
+| `grundy`, `win_iff_grundy_ne_zero` (Phase 4a) | the win predicate matches the Grundy characterization (`win ⇔ grundy ≠ 0`), `grundy = mex` over moves | the impartial-game / nimber semantics of a leaf |
 
 Reading: a Lean-verified `win` is the right recurrence (`win`); relabelling a child — which is
 all `projected_code` does — cannot change the value (`win_iso`, `win_emb`); and the table build
@@ -66,5 +67,10 @@ the layers) and `graph_wins8_matches_scalar` (`:1201`, the pext W8 build ≡ sca
   re-opens item 1 partially.
 - **Phase 2′** — model the u128 bit-layout and prove `adj_from_code`/`projected_code` correct (the
   option-B path; removes item 1 from the trusted base at the cost of heavy bit-arithmetic).
-- **Phase 4** — anchor `win` to mathlib's `PGame`/Sprague–Grundy (blessed semantics; delivers the
-  component-XOR decomposition — proposal items 1 & 3 — for free).
+- **Phase 4** — the Grundy/Sprague–Grundy layer. mathlib `v4.32` no longer ships `SetTheory/Game/`
+  (`PGame`/`Impartial`/`grundyValue`/`Nimber` were extracted to the standalone `CombinatorialGames`
+  package), so this is built **self-contained** rather than anchored to a now-absent mathlib `PGame`
+  — consistent with Approach A's "minimal mathlib footprint" rationale. **Phase 4a (done):** `grundy`
+  (= `mex` over moves) and `win_iff_grundy_ne_zero` (the P/N ↔ Grundy characterization). **Phase 4b
+  (in progress):** the component-XOR sum `grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂` for
+  edge-disjoint parts — the Sprague–Grundy dividend (proposal item 3) the solver's nimber lever uses.

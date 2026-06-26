@@ -52,8 +52,29 @@ All in `lean/NodeKayles/Basic.lean`; see `lean/TRUST.md` for the full Lean↔Rus
 Commits on `main`: `6ab6dc4` (skeleton+termination+proposal), `27cfa12` (`win_iso`),
 `eab53aa` (`win_emb`), `d7d61e7` (`buildPred_correct`), plus `TRUST.md` + this handoff.
 
+## ⚠ mathlib changed: `PGame` is GONE from mathlib (2026-06-26 finding)
+
+mathlib `v4.32.0-rc1` (our pin) **no longer contains `SetTheory/Game/`** — `PGame`,
+`Impartial`, `grundyValue`, and `Nimber` were extracted to the standalone
+**`CombinatorialGames`** package (which we do not depend on). The proposal's Approach-B /
+Phase-4 plan ("anchor `win` to mathlib's blessed `PGame` semantics") is therefore **not
+available without adding that external dep**. Decision taken (intent-based, ≥80/20, matches
+the documented Approach-A rationale of "minimal mathlib footprint, no version churn"): build
+the Grundy layer **self-contained**. If the user wants the *blessed-semantics* anchoring
+specifically, the fork is: add `CombinatorialGames` as a Lake require, vs. stay self-contained.
+
 ## Remaining work (clearly scoped, independent)
 
+- **Phase 4a — self-contained Grundy characterization — ✅ DONE** (`NodeKayles/Grundy.lean`).
+  `mex` (least-excludant via `Nat.find` + `Infinite.exists_notMem_finset`), `grundy` (= `mex`
+  over the children's Grundy values, same WF recursion as `win`), and `win_iff_grundy_ne_zero`
+  (the textbook P/N ↔ Grundy fact: `win ⇔ grundy ≠ 0`). `sorry`-free, `lake build` green.
+- **Phase 4b — Sprague–Grundy component-XOR sum** (the item-3 dividend, IN PROGRESS). Prove
+  `grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂` for edge-disjoint parts (no `G`-edge between
+  `S₁` and `S₂`). Reduces to the abstract nim-mex lemma `mex ({x^^^b | x∈A} ∪ {a^^^y | y∈B}) =
+  a^^^b` where `a = mex A, b = mex B`; the crux Nat-bit fact is "if the top set bit of `d` is set
+  in `a`, then `a ^^^ d < a`" (search `Mathlib/Data/Nat/Bitwise.lean`). This is what the solver's
+  component-nimber decomposition relies on.
 - **Phase 3 — `#eval` cross-check** (optional). Define a computable `Bool` twin `winB` (same
   recurrence returning `Bool`) + prove `winB ↔ win`; `#eval` it against dumped Rust `wins_rec`
   outputs. **Needs the concrete decode (Phase 2′)** to turn a Rust `code` into a Lean `Graph`,
@@ -62,9 +83,6 @@ Commits on `main`: `6ab6dc4` (skeleton+termination+proposal), `27cfa12` (`win_is
 - **Phase 2′ — bit-exact decode** (option B). Model `code : ℕ` with the upper-triangular bit
   layout; prove `adj_from_code`/`projected_code` implement the abstract ops. Heavy Nat-bit
   arithmetic; removes the serialization from the trusted base. Only if directness is wanted.
-- **Phase 4 — `PGame`/Sprague–Grundy bridge** (optional, → proposal items 1 & 3). Anchor `win`
-  to mathlib's impartial-game value; derive the component-XOR decomposition for free. Needs the
-  computable twin + a classical↔computable bridge.
 
 ## Codebase reference
 
@@ -106,9 +124,11 @@ Handoff Note (with session ID) per session.
 - [x] Phase 1 — `win` + termination, `win_iso`
 - [x] Phase 2 — `win_emb` (induced-subgraph invariance), `buildPred_correct`, `not_win_empty`
 - [x] Phase 3 (doc) — trust-chain `lean/TRUST.md`
+- [x] Phase 4a — self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`)
+- [ ] Phase 4b — Sprague–Grundy component-XOR sum (`grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂`) — IN PROGRESS
 - [ ] Phase 3 (`#eval`) — computable `Bool` twin + Lean↔Rust cross-check (needs Phase 2′)
 - [ ] Phase 2′ — bit-exact u128 code decode (option B)
-- [ ] Phase 4 — `PGame`/Sprague–Grundy bridge
+- [ ] Phase 4 (mathlib `PGame` bridge) — UNAVAILABLE in mathlib v4.32 (extracted to `CombinatorialGames`); fork to user
 
 ## Handoff Notes
 
