@@ -1,0 +1,13 @@
+name = "NodeKayles"
+defaultTargets = ["NodeKayles"]
+
+# mathlib (Finset, Equiv, card lemmas now; PGame/Sprague–Grundy in Phase 4). Tracking
+# `master` keeps `lake exe cache get` serving prebuilt oleans; pin to a tag for
+# reproducibility once the first build is green (the pinned rev lands in lake-manifest.json).
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "master"
+
+[[lean_lib]]
+name = "NodeKayles"

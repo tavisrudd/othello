@@ -1,0 +1,4 @@
+# Lake build output + fetched packages (mathlib lives under .lake/packages).
+/.lake/
+# direnv's cached dev shell.
+/.direnv/
