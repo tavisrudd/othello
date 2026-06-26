@@ -2,7 +2,21 @@
 
 ## Status
 
-Draft
+**SUPERSEDED IN DELIVERY (2026-06-26)** — this is the original design doc; Phases 1–4 are
+implemented (`lean/NodeKayles/`). The implementation deviates from the plan below; the
+**live record is the handoff** ([`handoffs/2026-06-26-lean-getk-verification.md`](handoffs/2026-06-26-lean-getk-verification.md))
+and [`lean/TRUST.md`](../lean/TRUST.md). Three claims in this doc are now stale:
+- **`win` is `Prop`, not `Bool`** (well-founded-recursion friction). It is therefore
+  noncomputable (`Nat.find`/`mex`), so the "computable spec / executable Lean-side differential
+  oracle against Rust" selling point (Approach A §Strengths, Recommendation §2) is **NOT
+  delivered** — it is deferred Phase 3 (a `Bool` twin `winB`).
+- **mathlib v4.32 removed `SetTheory/Game/`** (`PGame`/`Impartial`/`grundyValue` extracted to the
+  standalone `CombinatorialGames` package). Approach B / Phase 4's mathlib-`PGame` bridge is
+  **unavailable** without that external dep; Phase 4 was built **self-contained** (`grundy`,
+  `win_iff_grundy_ne_zero`, `grundy_iso`, `grundy_sum`).
+- **Phase 2 was delivered graph-level only** (`buildPred_correct` over induced subgraphs via
+  `orderEmbOfFin`); the `graphOfCode`/`slots`/`DenseGet`/`w8_table_correct` arena+decode model
+  (Layer A′) is **deferred to the Rust differential tests**, per 2-lite.
 
 ## Problem
 

@@ -144,6 +144,28 @@ theorem grundy_eq_mex_image (G : Graph k) (S : Finset (Fin k)) :
         = (fun u => grundy G (S \ closedNbhd G u)) ∘ Subtype.val from rfl,
      ← Finset.image_image, Finset.attach_image_val]
 
+/-- **Grundy iso-invariance** — the `grundy` analogue of `win_iso`: transporting the live set
+    along a graph isomorphism `e` preserves the Grundy *value* (not just win/loss). This is
+    what makes the component-nimber oracle's iso-keyed memoisation sound (a cached nimber may
+    be reused across isomorphic components). Proved by mirroring `grundy`'s recursion: the
+    children's Grundy multiset is carried across `e` (`closedNbhd_map` + `Finset.map_sdiff`),
+    so the two `mex` arguments coincide. -/
+theorem grundy_iso (G : Graph k) (H : Graph k') (e : Fin k ≃ Fin k')
+    (he : ∀ i j, G.adj i j = H.adj (e i) (e j)) (S : Finset (Fin k)) :
+    grundy G S = grundy H (S.map e.toEmbedding) := by
+  rw [grundy_eq_mex_image G S, grundy_eq_mex_image H (S.map e.toEmbedding)]
+  congr 1
+  rw [Finset.map_eq_image, Finset.image_image]
+  apply Finset.image_congr
+  intro u hu
+  have huS : u ∈ S := hu
+  dsimp only [Function.comp_apply, Equiv.coe_toEmbedding]
+  rw [grundy_iso G H e he (S \ closedNbhd G u)]
+  congr 1
+  rw [Finset.map_sdiff, ← closedNbhd_map G H e he u, Finset.map_eq_image, Equiv.coe_toEmbedding]
+termination_by S.card
+decreasing_by exact Finset.card_lt_card (sdiff_closedNbhd_ssubset G huS)
+
 /-- A move played from one side of an edge-disjoint split has its closed neighbourhood
     disjoint from the other side — so that side survives the move intact. -/
 private theorem closedNbhd_disjoint_of_noedge (G : Graph k) {S T : Finset (Fin k)} {u : Fin k}
@@ -177,7 +199,8 @@ private theorem child_ssubset (G : Graph k) {S₁ S₂ : Finset (Fin k)} {u : Fi
     `queens-component-nimber` branch). NOTE: the default `getK`/iso-dense path and the shipped
     n=18 verdict use only the boolean win/loss recurrence (`win`), not this XOR — so `grundy_sum`
     hardens a *gated/future* lever, not live production code. (Stated for the binary split; the
-    N-ary component XOR the oracle uses is the obvious induction on this.)
+    N-ary component XOR the oracle uses is the obvious induction on this, and the oracle's
+    iso-keyed per-component memo is covered by `grundy_iso`.)
 
     Proof: by well-founded recursion on `(S₁ ∪ S₂).card`. A move in `S₁` leaves `S₂` intact
     (`closedNbhd_disjoint_of_noedge`), so the child is the edge-disjoint split

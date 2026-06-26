@@ -127,12 +127,57 @@ Handoff Note (with session ID) per session.
 - [x] Phase 2 — `win_emb` (induced-subgraph invariance), `buildPred_correct`, `not_win_empty`
 - [x] Phase 3 (doc) — trust-chain `lean/TRUST.md`
 - [x] Phase 4a — self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`)
-- [x] Phase 4b — Sprague–Grundy component-XOR sum `grundy_sum` (kernel-complete, axioms clean)
+- [x] Phase 4b — `grundy_iso` (Grundy value iso-invariance) + Sprague–Grundy component-XOR sum `grundy_sum` (kernel-complete, axioms clean)
+- [x] Adversarial review — 3 rounds (integrity / faithfulness / correspondence / math / repro): proofs SOUND; all findings were doc-accuracy + repro hygiene, fixed
 - [ ] Phase 3 (`#eval`) — computable `Bool` twin + Lean↔Rust cross-check (needs Phase 2′)
 - [ ] Phase 2′ — bit-exact u128 code decode (option B)
 - [ ] Phase 4 (mathlib `PGame` bridge) — UNAVAILABLE in mathlib v4.32 (extracted to `CombinatorialGames`); fork to user
 
 ## Handoff Notes
+
+### Phase 4 (self-contained Grundy) + 3-round adversarial review (2026-06-26)
+
+**Session**: 2026-06-26--1 (`a9c933b4-0ad9-4d95-b63d-26ab2a6d0132`)
+**Commits** (on `main`): `017e2c2` (4a), `b60d26f` (4b sum), `f06439b` (R1 doc fixes),
+`cef97dd` (R2 doc fixes), + this session's R3 fixes (grundy_iso, repro pin, proposal banner).
+**Completed**:
+- **Discovered mathlib v4.32 REMOVED `SetTheory/Game/`** (`PGame`/`Impartial`/`grundyValue`/
+  `Nimber` → standalone `CombinatorialGames` pkg). So the proposal's Approach-B/Phase-4 PGame
+  bridge is unavailable without that dep. Chose (intent-based, matches Approach-A rationale) to
+  build the Grundy layer **self-contained**.
+- **Phase 4 (`NodeKayles/Grundy.lean`), all `sorry`-free / `lake build` green / axioms =
+  `[propext, Classical.choice, Quot.sound]`:** `mex` (least-excludant via `Nat.find` +
+  `Infinite.exists_notMem_finset`); `grundy` (mex over children, WF on `S.card`);
+  **`win_iff_grundy_ne_zero`** (P/N ↔ Grundy); the abstract **`mex_xor_union`** nim-mex core
+  (on mathlib's `Nat.lt_xor_cases` — no hand-rolled bit arithmetic); **`grundy_sum`** (component
+  XOR for no-edges-between parts, WF on `(S₁∪S₂).card`); **`grundy_iso`** (Grundy value
+  iso-invariance, analogue of `win_iso`). `grundy_eq_mex_image` is the subtype-free `mex` form.
+- **3 rounds of adversarial subagent review.** R1 (integrity/faithfulness/correspondence):
+  proofs airtight (all 26 decls clean axioms, no `sorry`/`native_decide`/disabled-checks,
+  termination genuine, defs non-vacuous). R2 (correspondence deep-dive + math adequacy): all 4
+  correspondence attacks FAITHFUL; **`win`/`grundy` reproduce literature Node-Kayles values
+  (isolated-vertex parity, P3 Grundy = 2 = Dawson's chess A002187, machine-checked)**. R3 (stale
+  docs / repro / completeness). **No proof/correspondence defect found** — every finding was
+  doc-accuracy or repro hygiene.
+**Fixes applied from review:** (1) `closedNbhd` polarity in the correspondence tables — the docs
+had mislabelled `closedNbhd G v` (the DELETED set `(1<<i)|adj[i]`) as `full & !(…)` (the
+COMPLEMENT / surviving child); split into correct rows (Basic.lean, TRUST, README — README's was
+missed in R1, caught in R3). (2) `grundy_sum`/`grundy_iso` scoped as the **gated/parked**
+component-nimber lever (`QUEENS_NIMBER_ORACLE` default-OFF + parked branch), NOT the live
+`getK`/n=18 path. (3) `buildPred_correct` "whole table build" softened to one-ply graph-level
+(decode/arena deferred). (4) named `winsw_scalar` (`dense.rs:1413`) as the wide-layer reference
+the n=18 get17/get18 leaves actually validate against (`wins_rec`:584 caps at k≤16). (5) "edge-
+disjoint" → "no edges between the parts". (6) **proposal annotated SUPERSEDED** (it still sold a
+`Bool` `win` / executable oracle + mathlib `PGame`). (7) **repro pin**: lakefile `rev` master →
+`571b8a8e…` + manifest `inputRev` matched (no more "manifest out of date" warning); README setup
+split into checkout (no `lake update`) vs bootstrap.
+**Build/verify recipe**: `cd lean && nix develop . --command bash -c 'lake build'` (~3-8s,
+mathlib cached). Axiom check: `lake env lean <file with #print axioms>`.
+**Notes for next**: remaining open items are Phase 2′ (bit-exact decode) and Phase 3 (`#eval`
+twin, needs 2′) — both partly re-open the deferred serialization layer; lower priority. The
+mathlib-`PGame` bridge is a user fork (add `CombinatorialGames` dep vs stay self-contained — we
+chose self-contained and it's now complete: win/grundy/iso/sum). Gotcha banked: a lambda's
+`(v : Fin k)` ascription forces `v : Fin k` (use `v.val`/`↑v` to coerce a subtype).
 
 ### Phases 1 & 2 + trust-chain doc (2026-06-26)
 

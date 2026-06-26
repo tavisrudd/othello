@@ -28,7 +28,7 @@ serialization layer (rides on the Rust differential tests `direct_wK_matches_sca
 | 2′    | concrete u128 code decode (`adj_from_code`/`projected_code` bit layout) | deferred → differential tests |
 | 3     | trust-chain doc (`TRUST.md`) ✔; Lean↔Rust `#eval` cross-check       | doc done; `#eval` not started  |
 | 4a    | self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`) | ✔ proved          |
-| 4b    | Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` when no edges run between the parts, → item 3) | ✔ proved (hardens the *gated/parked* nimber lever, not the default `getK`/n=18 path) |
+| 4b    | `grundy_iso` (Grundy value iso-invariance, analogue of `win_iso`) + Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` when no edges run between the parts, → item 3) | ✔ proved (hardens the *gated/parked* nimber lever, not the default `getK`/n=18 path) |
 
 All theorems depend only on `[propext, Classical.choice, Quot.sound]` (`#print axioms`) — no
 `sorryAx`, no `native_decide`, no custom axioms; kernel-complete.
@@ -44,8 +44,9 @@ mathlib `v4.32` **no longer ships `SetTheory/Game/`** (`PGame`, `Impartial`, `gr
 
 | Lean                | Rust (`dense.rs`)                         | meaning                          |
 |---------------------|-------------------------------------------|----------------------------------|
-| `win`               | `wins_rec` (`:584`)                        | `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` |
-| `closedNbhd G v`    | `full & !((1<<i) \| adj[i])`               | delete `{v} ∪ N(v)` (the move)   |
+| `win`               | `wins_rec` (`:584`, `#[cfg(test)]` scalar ref) | `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` |
+| `closedNbhd G v`    | `(1<<i) \| adj[i]` (the *deleted* set)      | delete `{v} ∪ N(v)` (the move)   |
+| `S \ closedNbhd G v`| `full & !((1<<i) \| adj[i])` (the child)    | the surviving live set after the move |
 | `firstPlayerWins`   | `get(k, code)` over the full graph         | first player wins this position  |
 | `graphOfCode` (P2)  | `adj_from_code` (`:501`)                   | decode upper-triangular `code`   |
 | `buildPred` (P2)    | `graph_wins` (`:541`)                      | one ply of the W8 build          |
@@ -63,11 +64,16 @@ cd lean
 direnv allow          # trust .envrc → builds the FHS dev shell, puts elan on PATH
                       # (or, without direnv: `nix develop`)
 
-# first-time project setup, inside the shell:
-lake update                                          # fetch mathlib (writes lake-manifest.json)
-cp .lake/packages/mathlib/lean-toolchain ./lean-toolchain   # match mathlib's exact Lean
-lake exe cache get                                   # download mathlib prebuilt oleans (the big step)
-lake build                                           # build NodeKayles
+# Building an EXISTING checkout (the normal case — manifest is committed & pinned):
+lake exe cache get    # download mathlib prebuilt oleans for the pinned rev
+lake build            # build NodeKayles
+# Do NOT run `lake update` on a checkout — it re-resolves mathlib to current master
+# (which needs a newer toolchain than the pinned RC) and defeats the version pin.
+
+# First-time BOOTSTRAP only (already done; recorded for provenance):
+#   lake update                                       # resolve mathlib → writes lake-manifest.json
+#   cp .lake/packages/mathlib/lean-toolchain ./lean-toolchain   # match mathlib's exact Lean
+#   lake exe cache get && lake build
 ```
 
 Commit `lakefile.toml`, `lean-toolchain`, and `lake-manifest.json` (the version pin);

@@ -3,13 +3,14 @@ defaultTargets = ["NodeKayles"]
 
 # mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
 # Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
-# the standalone CombinatorialGames package), so Phase 4 is built self-contained. Tracking
-# `master` keeps `lake exe cache get` serving prebuilt oleans; pin to a tag for
-# reproducibility once the first build is green (the pinned rev lands in lake-manifest.json).
+# the standalone CombinatorialGames package), so Phase 4 is built self-contained.
+# Pinned to the exact rev that matches lean-toolchain v4.32.0-rc1 (also in lake-manifest.json) so
+# the build is reproducible; bump to a release tag + stable toolchain when v4.32.0 ships. Do NOT
+# `lake update` on a checkout — it would re-float to master and break the toolchain pin.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
-rev = "master"
+rev = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 
 [[lean_lib]]
 name = "NodeKayles"

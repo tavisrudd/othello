@@ -24,6 +24,7 @@ The semantics of the leaf evaluator — the recurrence, its invariances, and the
 | `not_win_empty`                       | the terminal position is a loss for the mover                       | the `W0` base of the build                |
 | `firstPlayerWins`                     | first player wins ⇔ `win` over the full vertex set                  | `get(k, code)` over a complete graph      |
 | `grundy`, `win_iff_grundy_ne_zero` (Phase 4a) | the win predicate matches the Grundy characterization (`win ⇔ grundy ≠ 0`), `grundy = mex` over moves | the impartial-game / nimber semantics of a leaf |
+| `grundy_iso` (Phase 4b)               | the Grundy *value* is iso-invariant (the analogue of `win_iso`)      | the oracle's iso-keyed per-component nimber memo (a cached nimber reused across isomorphic components) |
 | `grundy_sum` (Phase 4b)               | no-edges-between-parts XOR: `grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` | the **gated/parked** component-nimber lever (`QUEENS_NIMBER_ORACLE`, default-OFF prototype in `iso_flat.rs`; parked `queens-component-nimber` branch) — **NOT** the default `getK` path or the n=18 verdict, which use only boolean win/loss |
 
 (All theorems: `#print axioms` = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.)
@@ -84,5 +85,7 @@ result is not specific to the `k ≤ 16` path.
   package), so this is built **self-contained** rather than anchored to a now-absent mathlib `PGame`
   — consistent with Approach A's "minimal mathlib footprint" rationale. **Phase 4a (done):** `grundy`
   (= `mex` over moves) and `win_iff_grundy_ne_zero` (the P/N ↔ Grundy characterization). **Phase 4b
-  (in progress):** the component-XOR sum `grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂` for
-  edge-disjoint parts — the Sprague–Grundy dividend (proposal item 3) the solver's nimber lever uses.
+  (done):** `grundy_iso` (Grundy iso-invariance) and the component-XOR sum `grundy_sum`
+  (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` when no edges run between the parts) — the
+  Sprague–Grundy dividend (proposal item 3) that the gated/parked nimber lever uses (the binary
+  `grundy_sum` + the obvious induction give the N-ary component XOR; `grundy_iso` covers the memo).
