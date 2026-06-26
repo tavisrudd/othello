@@ -120,4 +120,61 @@ decreasing_by
       | assumption
       | exact Finset.mem_map_equiv.mp (by assumption)
 
+/-- The child of a move carried across an embedding `ι` (the induced-subgraph case): in `H`
+    the move at `v` deletes `closedNbhd H v`, and its image under `ι` agrees, on `T.map ι ⊆
+    range ι`, with deleting `closedNbhd G (ι v)`. Hence the two children correspond. The
+    induced-subgraph analogue of `closedNbhd_map`. -/
+theorem childmap_emb (G : Graph k) (H : Graph k') (ι : Fin k' ↪ Fin k)
+    (he : ∀ a b, H.adj a b = G.adj (ι a) (ι b)) (T : Finset (Fin k')) (v : Fin k') :
+    (T \ closedNbhd H v).map ι = T.map ι \ closedNbhd G (ι v) := by
+  rw [Finset.map_sdiff]
+  ext x
+  simp only [Finset.mem_sdiff, and_congr_right_iff]
+  intro hxT
+  obtain ⟨u, _huT, rfl⟩ := Finset.mem_map.mp hxT
+  rw [not_iff_not, Finset.mem_map]
+  constructor
+  · rintro ⟨a, ha, hau⟩
+    rw [← hau]
+    simp only [closedNbhd, Finset.mem_filter, Finset.mem_univ, true_and] at ha ⊢
+    rcases ha with h | h
+    · exact Or.inl (by rw [h])
+    · exact Or.inr (by rw [← he v a]; exact h)
+  · intro h
+    refine ⟨u, ?_, rfl⟩
+    simp only [closedNbhd, Finset.mem_filter, Finset.mem_univ, true_and] at h ⊢
+    rcases h with h | h
+    · exact Or.inl (ι.injective h)
+    · exact Or.inr (by rw [he v u]; exact h)
+
+/-- **Induced-subgraph invariance.** If `H` is (isomorphic to) the subgraph of `G` induced
+    on the range of an embedding `ι` (`he`: `ι` carries `H`'s adjacency to `G`'s), then the
+    Node-Kayles value of any position `T` of `H` equals that of its image `T.map ι` in `G`.
+
+    This is the soundness of `projected_code` (`dense.rs:516`): the `getK` recurrence
+    resolves a child by relabelling its surviving vertices to `0..k'` and reading the
+    smaller `W{k'}` table — sound exactly because `win` sees only the induced subgraph.
+    Generalises `win_iso` (the `k' = k`, `ι` a bijection case). Proved by mirroring `win`'s
+    recursion (`termination_by T.card`), carrying each child across `ι` via `childmap_emb`. -/
+theorem win_emb (G : Graph k) (H : Graph k') (ι : Fin k' ↪ Fin k)
+    (he : ∀ a b, H.adj a b = G.adj (ι a) (ι b)) (T : Finset (Fin k')) :
+    win H T ↔ win G (T.map ι) := by
+  conv_lhs => rw [win.eq_def]
+  conv_rhs => rw [win.eq_def]
+  constructor
+  · rintro ⟨⟨v, hv⟩, hvlose⟩
+    refine ⟨⟨ι v, Finset.mem_map_of_mem ι hv⟩, ?_⟩
+    show ¬ win G (T.map ι \ closedNbhd G (ι v))
+    rw [← childmap_emb G H ι he T v, ← win_emb G H ι he]
+    exact hvlose
+  · rintro ⟨⟨x, hx⟩, hxlose⟩
+    obtain ⟨v, hv, rfl⟩ := Finset.mem_map.mp hx
+    refine ⟨⟨v, hv⟩, ?_⟩
+    show ¬ win H (T \ closedNbhd H v)
+    rw [win_emb G H ι he, childmap_emb G H ι he T v]
+    exact hxlose
+termination_by T.card
+decreasing_by
+  all_goals exact Finset.card_lt_card (sdiff_closedNbhd_ssubset H (by assumption))
+
 end NodeKayles

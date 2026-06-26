@@ -17,7 +17,8 @@ graph-isomorphism invariance of the win value.
 |-------|---------------------------------------------------------------------|--------------------------------|
 | 1     | `Graph`, `closedNbhd`, `win` (+ termination), `firstPlayerWins`      | ✔ proved                       |
 | 1     | `win_iso` (graph-iso invariance) + `closedNbhd_map`, `sdiff_…_ssubset` | ✔ proved (no `sorry`)        |
-| 2     | `graphOfCode`, `graphWin`, `buildPred_correct`, `w8_table_correct`  | not started                    |
+| 2     | `win_emb` / `childmap_emb` (induced-subgraph invariance = `projected_code` soundness) | ✔ proved (no `sorry`)        |
+| 2     | `graphOfCode`, `graphWin`, `buildPred_correct`, `w8_table_correct` (concrete code decode + build) | not started        |
 | 3     | trust-chain doc + Lean↔Rust `#eval` cross-check                      | not started                    |
 | 4     | optional `PGame`/Sprague–Grundy bridge (→ items 1 & 3)              | not started                    |
 
