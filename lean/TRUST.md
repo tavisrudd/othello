@@ -89,3 +89,11 @@ result is not specific to the `k ≤ 16` path.
   (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` when no edges run between the parts) — the
   Sprague–Grundy dividend (proposal item 3) that the gated/parked nimber lever uses (the binary
   `grundy_sum` + the obvious induction give the N-ary component XOR; `grundy_iso` covers the memo).
+  **Blessed-semantics upgrade path (deferred, not declined — decision 2026-06-26):** anchoring
+  `win`/`grundy` to a cited `Impartial`/`grundyValue` (so adequacy is a theorem, not self-asserted)
+  needs `vihdzp/combinatorial-games` (the extraction target), which tracks Lean `v4.31.0-rc2` —
+  behind our `v4.32.0-rc1`; adopting it would force a project downgrade (oleans are
+  toolchain-specific). Deferred until that library bumps to ≥ `v4.32`; the concrete bridge plan
+  (`toPGame` + `Impartial` instance + `win ↔ ¬(toPGame ≈ 0)`) is documented in `NodeKayles/Grundy.lean`'s
+  header. Until then the adequacy of `win`/`grundy` rests on the standard-recurrence argument +
+  literature values (P₃ = Grundy 2) + the Rust differential tests.

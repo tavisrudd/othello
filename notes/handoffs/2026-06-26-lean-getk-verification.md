@@ -60,8 +60,16 @@ mathlib `v4.32.0-rc1` (our pin) **no longer contains `SetTheory/Game/`** — `PG
 Phase-4 plan ("anchor `win` to mathlib's blessed `PGame` semantics") is therefore **not
 available without adding that external dep**. Decision taken (intent-based, ≥80/20, matches
 the documented Approach-A rationale of "minimal mathlib footprint, no version churn"): build
-the Grundy layer **self-contained**. If the user wants the *blessed-semantics* anchoring
-specifically, the fork is: add `CombinatorialGames` as a Lake require, vs. stay self-contained.
+the Grundy layer **self-contained**.
+
+**Blessed-semantics fork RESOLVED (2026-06-26): stay self-contained, document the upgrade path.**
+The extraction target is `vihdzp/combinatorial-games`; as of 2026-06-09 (commit #419) it tracks
+Lean **v4.31.0-rc2** + mathlib `acbd8f07`, *behind* our **v4.32.0-rc1** + `571b8a8e`. Since Lean
+oleans are toolchain-specific, adopting it now would force a project **downgrade** (re-pin
+toolchain + mathlib, re-fetch oleans, re-verify the proofs) — undoing the clean pinned state for a
+slightly-older Lean. User chose to keep the self-contained layer and **document why + the upgrade
+path in the proof code** (`lean/NodeKayles/Grundy.lean` header has the full `toPGame`/`Impartial`/
+bridge plan; mirrored in TRUST.md Phase 4). Revisit when the library bumps to ≥ v4.32.
 
 ## Remaining work (clearly scoped, independent)
 
@@ -131,7 +139,10 @@ Handoff Note (with session ID) per session.
 - [x] Adversarial review — 3 rounds (integrity / faithfulness / correspondence / math / repro): proofs SOUND; all findings were doc-accuracy + repro hygiene, fixed
 - [ ] Phase 3 (`#eval`) — computable `Bool` twin + Lean↔Rust cross-check (needs Phase 2′)
 - [ ] Phase 2′ — bit-exact u128 code decode (option B)
-- [ ] Phase 4 (mathlib `PGame` bridge) — UNAVAILABLE in mathlib v4.32 (extracted to `CombinatorialGames`); fork to user
+- [ ] Phase 4 (blessed-semantics `PGame` bridge) — DEFERRED (decision 2026-06-26): the target lib
+  `vihdzp/combinatorial-games` tracks Lean v4.31.0-rc2 (behind our v4.32.0-rc1) ⇒ would force a
+  project downgrade. Staying self-contained; upgrade path + bridge plan documented in
+  `lean/NodeKayles/Grundy.lean` header + TRUST.md. Revisit when the lib bumps to ≥ v4.32.
 
 ## Handoff Notes
 

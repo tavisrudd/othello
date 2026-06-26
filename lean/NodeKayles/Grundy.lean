@@ -1,20 +1,48 @@
 import NodeKayles.Basic
 
 /-!
-# Phase 4a — the Grundy characterization of `win` (self-contained Sprague–Grundy)
+# Phase 4 — the Grundy / Sprague–Grundy layer of the `getK` 2-lite verification (self-contained)
 
-mathlib `v4.32` no longer ships `SetTheory/Game/` — `PGame`, `Impartial`, `grundyValue`,
-and `Nimber` were extracted to the standalone `CombinatorialGames` package, which this
-project does not depend on. So instead of anchoring `win` to a now-absent mathlib `PGame`
-(the proposal's Approach-B / Phase-4 plan), the Grundy layer is built **self-contained** —
-consistent with the documented reason Approach A was chosen (minimal mathlib footprint,
-no version churn).
+`grundy G S` is the minimal excludant (`mex`) of its children's Grundy values — the standard
+impartial-game Grundy function. This file proves, with **no external game-theory dependency**:
 
-`grundy G S` is the minimal excludant (`mex`) of its children's Grundy values — the
-standard impartial-game Grundy function. `win_iff_grundy_ne_zero` proves the textbook
-P/N ↔ Grundy characterization (`win ⇔ grundy ≠ 0`); it is the foundation for the
-component-XOR decomposition (proposal item 3 — the solver's nimber lever), which builds
-on the `Nat.xor` Sprague–Grundy sum theorem.
+* `win_iff_grundy_ne_zero` — the textbook P/N ↔ Grundy characterization (`win ⇔ grundy ≠ 0`);
+* `grundy_iso` — the Grundy *value* is invariant under graph isomorphism;
+* `mex_xor_union` / `grundy_sum` — the Sprague–Grundy component-XOR sum (disjoint parts XOR),
+  built on mathlib's `Nat.lt_xor_cases`.
+
+## Why self-contained — and the upgrade path (decision 2026-06-26)
+
+The natural "blessed semantics" route would anchor `win`/`grundy` to a library's impartial-game
+value (`Impartial`, `grundyValue`), so a reviewer trusts a cited, peer-reviewed definition
+instead of checking that our recurrence is correct CGT. **That route is currently blocked, not
+chosen against:**
+
+* mathlib `v4.32` **removed `SetTheory/Game/`** — `PGame`/`Impartial`/`grundyValue`/`Nimber` were
+  extracted to the standalone library `vihdzp/combinatorial-games`. Plain mathlib no longer has them.
+* That library, as of 2026-06-09 (commit #419), tracks **Lean `v4.31.0-rc2`**, one minor version
+  behind this project's **`v4.32.0-rc1`** (see `lean-toolchain`). Lean `.olean`s are
+  toolchain-specific, so depending on it would force a *downgrade* of the whole project (re-pin
+  toolchain + mathlib, re-fetch oleans, re-verify these proofs) — undoing a clean, pinned, green
+  state for a slightly-older Lean. Not worth it now.
+
+So Phase 4 is built **self-contained**, which is also the documented reason Approach A was chosen
+(minimal mathlib footprint, no version churn). The cost: "`win`/`grundy` *are* the game value" is
+self-asserted (the standard finite-impartial normal-play recurrence), not a cited theorem — but it
+is corroborated against literature values (e.g. the path `P₃` has Grundy `2`, Dawson's chess / OEIS
+A002187) and by the Rust differential tests.
+
+**Upgrade path — when `combinatorial-games` ships a bump to Lean ≥ `v4.32` matching our toolchain:**
+1. `require` it in `lakefile.toml` (no project downgrade needed once toolchains match).
+2. Define `toPGame : Graph k → Finset (Fin k) → PGame` (moves = the `closedNbhd`-deletion children;
+   impartial ⇒ Left and Right options coincide), and an `Impartial (toPGame G S)` instance.
+3. Prove the bridge `win G S ↔ ¬ (toPGame G S ≈ 0)`, equivalently `grundy G S = grundyValue (toPGame G S)`.
+   This **removes the self-asserted adequacy from the trusted base** — the review payoff.
+4. `grundy_sum` then also follows from the library's `grundyValue_add` (nim-sum), and `grundy_iso`
+   from value-congruence; our self-contained versions stay as the computable-spec layer.
+
+`win_iff_grundy_ne_zero` / `grundy_sum` are the foundation for the component-XOR decomposition
+(proposal item 3 — the queens nimber lever; see `grundy_sum`'s docstring for the gated/parked scope).
 -/
 
 namespace NodeKayles
