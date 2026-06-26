@@ -276,6 +276,7 @@
   </blockquote>
   <p class="lede">Claude spent the night reopening an old negative result. The discarded experiment had used a processor's <dfn class="term" tabindex="0" data-tip="Bit extraction gathers selected bits from a machine word into a compact contiguous result; x86 BMI2 provides the pext instruction used here.">bit-extraction instruction</dfn> for a different task and much smaller cases. This time, the instruction made it cheaper to turn a board position into a compact graph. The solver could now decide every endgame with up to 16 available squares directly, instead of sending it through the main search. The next clean run finished in 33.9 seconds. The immediate target was 30 seconds.</p>
   <p class="lede">It fell quickly. Pushing the same exact-evaluation idea one layer higher (to 17 available squares) and then skipping the bookkeeping for a single tightly-bounded endgame size brought the search to about 23.4 seconds, and the whole solve—startup included—comfortably under 30. The story below follows the project through that frontier, where a four-front search for the next speedup converged on a different conclusion than “keep optimizing”: the solver is now close to what this machine can physically do for this algorithm, and the open questions have shifted from cycles to mathematics.</p>
+  <p class="lede"><strong>Update since this was written (June 26).</strong> Two developments postdate the 16×16 story above and are folded into the relevant sections below. First, <strong class="win">18×18 is solved: the first player wins</strong>, by the opening move <strong>I9</strong>, confirmed by two independently configured exhaustive searches that agree on the verdict, the winning move, and a 15-move principal variation while visiting very different position counts (≈258 vs ≈114 billion). Second, the dense leaf evaluator—the part of the solver where a bug in this class historically hid—was <strong>machine-checked in Lean&nbsp;4</strong>: its win/loss recurrence, isomorphism and induced-subgraph invariances, the table-build recurrence, and the Grundy characterization are proved with no <code>sorry</code>, depending only on standard axioms. Section&nbsp;14 and the correctness appendix carry the details.</p>
   <p class="lede" style="font-size:15px;color:var(--fg-faint)">This AI-written account is based on the project's code, commits, benchmark logs, and working notes. The measurements and engineering decisions are the programmer's.</p>
 </header>
 
@@ -304,7 +305,7 @@
   <a href="#micro">11 · Small changes, repeated billions of times</a>
   <a href="#numbers">12 · The numbers</a>
   <a href="#method">13 · How the speed was actually won</a>
-  <a href="#floor">14 · False floors and what is next</a>
+  <a href="#floor">14 · n=18 solved, and what is next</a>
   <a class="engineer" href="#appendix-iso-dense">Appendix · iso-dense deep dive</a>
   <a class="engineer" href="#appendix-timeline">Appendix · detailed project log</a>
 </nav>
@@ -317,7 +318,7 @@
 <div class="layman">
 <p>An empty chessboard offers room to roam. The first queen changes that at once, attacking every square along her row, column, and two diagonals.</p>
 <p>The players take turns placing queens on squares that remain safe. Each new queen must avoid all the others, and each one erases more possible moves. Eventually no safe square remains. The player facing that board loses.</p>
-<p>The rules produce no draws and leave no room for opinion. With perfect play, the first player can either force a win or cannot. On a 16×16 board, <span class="win">the second player wins</span>. The difficulty lies in proving it.</p>
+<p>The rules produce no draws and leave no room for opinion. With perfect play, the first player can either force a win or cannot. On a 16×16 board, <span class="win">the second player wins</span>; on an 18×18 board, <span class="win">the first player wins</span> (Section&nbsp;14). The difficulty lies in proving it.</p>
 <div class="keyidea">
   <span class="tag">The one picture to keep</span>
   <p>At every turn, the board splits into <strong>available squares</strong> (empty, safe, and legal) and everything else. A move can only shrink the available set. The game is a controlled collapse, and the last legal placement wins.</p>
@@ -1235,8 +1236,8 @@ fn pack(fp, val) -> Slot {
 
 <div class="card">
 <h4 style="margin-top:0">Validation gates (how we know the answer is right)</h4>
-<div class="layman"><p>Every change must pass two checks before it counts. First, the smart solver must agree with the dumb-but-certain solver on all small boards. Second, it must reproduce the <em>exact</em> count of genuinely-different boards at 12×12 — exactly <strong>1,060,823</strong>. If a change lost some merges, that count would change; if the table were too small, re-expansion would jump. The 16×16 verdict itself is cross-checked against an independent 2014 computation (Jenrich), which also found the second player wins.</p></div>
-<div class="engineer"><p>A change is not done until its gate passes: <code>solver_lineage_agrees</code> (every solver matches memo-less <code>naive</code> on small boards), a fresh <code>solve 12 iso-flat --distinct</code> (second-player win, exact distinct <strong>1,060,823</strong>, ~1.25× expansion), and the relevant kernel/variant agreement test. Full-scale changes also return a fresh n=16 <strong>SECOND</strong>. A distinct-count change means lost transposition merges; a re-expansion jump exposes an undersized table or speculative schedule. The verdict cross-checks Jenrich (arXiv:1312.5135) and OEIS A344227.</p></div>
+<div class="layman"><p>Every change must pass two checks before it counts. First, the smart solver must agree with the dumb-but-certain solver on all small boards. Second, it must reproduce the <em>exact</em> count of genuinely-different boards at 12×12 — exactly <strong>1,060,823</strong>. If a change lost some merges, that count would change; if the table were too small, re-expansion would jump. The 16×16 verdict itself is cross-checked against an independent 2014 computation (Jenrich), which also found the second player wins. The 18×18 verdict, having no prior result to check against, was instead required to survive two independently configured searches agreeing on the winner, the opening move, and the full winning line; and the small-graph evaluator at the solver's core was additionally proved correct by machine (Section&nbsp;14).</p></div>
+<div class="engineer"><p>A change is not done until its gate passes: <code>solver_lineage_agrees</code> (every solver matches memo-less <code>naive</code> on small boards), a fresh <code>solve 12 iso-flat --distinct</code> (second-player win, exact distinct <strong>1,060,823</strong>, ~1.25× expansion), and the relevant kernel/variant agreement test. Full-scale changes also return a fresh n=16 <strong>SECOND</strong>. A distinct-count change means lost transposition merges; a re-expansion jump exposes an undersized table or speculative schedule. The verdict cross-checks Jenrich (arXiv:1312.5135) and OEIS A344227. The dense layers are differential-tested against a scalar reference per code (W9–W16 vs <code>wins_rec</code>; W17–W20 vs the wide reference <code>winsw_scalar</code>—the leaves the n=18 verdict bottoms out on). For n=18 the absent external verdict is replaced by two-config cross-validation (W17 vs W18–20, agreeing on verdict + move + 15-ply PV) plus an independent raw-mask oracle on ~3,400 high-square subpositions; and the getK recurrence semantics are machine-checked in Lean&nbsp;4 (no <code>sorry</code>, standard axioms).</p></div>
 </div>
 </section>
 
@@ -1407,7 +1408,7 @@ fn pack(fp, val) -> Slot {
 
 <!-- ===================================================================== -->
 <section id="floor">
-<h2><span class="num">14</span>False floors, transpositions, and what is next</h2>
+<h2><span class="num">14</span>n=18 solved, false floors, and what is next</h2>
 <button type="button" class="sec-toggle" data-target="floor" aria-pressed="false">show Engineer view here</button>
 
 <div class="layman">
@@ -1427,7 +1428,7 @@ fn pack(fp, val) -> Slot {
 <div class="layman">
 <h3>Two horizons, not one vague “next optimization”</h3>
 <p><strong>16×16 now takes about 23.4 seconds of search, and well under 30 seconds end to end.</strong> Dynamic ordering and ETC first crossed one minute; cheaper graph construction then made exact evaluation profitable through sixteen and then seventeen squares; and a safe table-skip for eighteen-square endgames removed the last of the bookkeeping. The 30-second target is met. The remaining question changed character: a careful look at the running machine found it busy almost the whole time and limited by no single thing—so the next gains are either very small refactors, one untested pruning idea for symmetric openings, or a genuinely new theorem. The deepest open question (below) is now the most valuable one.</p>
-<p><strong>18×18 remains a capacity and algorithm-shape problem.</strong> Its estimated trillions of positions cannot live in the current flat RAM table. External layers and a frozen BuRR archive may still be necessary, but the n=16 frontier experiment exposed a central danger: reordering work for sorting/dedup nearly doubled the search by destroying cutoff-friendly move order. Any n=18 design must preserve or reconstruct those economics.</p>
+<p><strong>18×18 is now solved: the first player wins.</strong> The capacity problem was met not by external storage but by a deliberate trade—skip the transposition bookkeeping for the highest endgame bands (which are never reused), and give the rest a 17&nbsp;GB table sized to a single 26&nbsp;GB workstation. Two independently configured runs (a 17-square and a 20-square exact-evaluation ceiling) then agreed on the verdict, the winning opening I9, and the entire 15-move principal variation, while visiting very different numbers of positions (≈258 vs ≈114 billion). The disagreement in <em>how much</em> they searched, with agreement on the <em>answer</em>, is the cross-check. A full formal certificate of a hundred-billion-position search is infeasible, so that two-way agreement—on top of a leaf evaluator tested against an independent oracle and machine-checked in Lean—is the standard of proof.</p>
 <p>And the deepest open question: is there a clever <em>theorem</em> for even-sized boards (like the instant mirror-strategy for odd boards) that would make the search unnecessary entirely? None is known. Finding one would beat every silicon trick at once.</p>
 </div>
 <div class="engineer">
@@ -1439,14 +1440,22 @@ fn pack(fp, val) -> Slot {
 </ol>
 <p>A separate, earlier <em>memo-less</em> standalone get17 measured −19.4% nodes, +30.7% cycles/node, +5.7% wall before pc=17 was integrated as a getK leaf. That is a boundary for one implementation, not a declaration that any time is the floor; the present near-floor framing rests on the measured saturation audit, presented as evidence.</p>
 
-<h3>Track B — attempting n=18</h3>
-<ol>
-<li><strong>Break DFS residence carefully:</strong> external pc/ply windows with <dfn class="term" tabindex="0" data-tip="Delayed duplicate detection: collect, sort, and deduplicate a frontier in batches.">DDD</dfn> may be required for capacity, but the n=16 slot-order test added 94% nodes. A viable design must preserve, encode, or reconstruct cutoff-friendly move order.</li>
-<li><strong>Freeze completed layers:</strong> use value-only BuRR (~1.1 bits/key) when membership is known from the generated frontier. This is where BuRR returns; it is absent from the current live <code>iso-dense</code> search.</li>
-<li><strong>Carry forward the new dense ceiling:</strong> W17 with skip18 is the n=16 default, and K=17 is the n=16 wall sweet spot. n=18 must remeasure that crossover at the larger scale—whether a higher ceiling, a different safe band-skip, or deeper amortization moves it—rather than assuming K=17 is optimal there.</li>
-<li><strong>Make verification a first-class deliverable:</strong> there is no independent n=18 verdict. Reproducible layer hashes/counts, redundant runs or implementations, checkpointing, and deterministic frozen artifacts matter as much as wall time.</li>
-</ol>
-<p>The estimated n=18 set is on the order of 3 trillion positions. A compressed iso-keyed archive may be on the order of 130 GB, but that is only a sizing estimate. The +94% n=16 ordering tax makes the decisive unknown concrete: can a layer-oriented computation retain enough first-losing-child cutoff behavior to avoid materializing the whole retrograde graph?</p>
+<h3>Track B — n=18 (solved: first player wins)</h3>
+<p>n=18 fell to a capacity configuration of the same <code>iso-dense</code> solver, not to a new storage architecture. Two levers carried it. First, extend the cascade-free band-skip from {18} to <strong>[18,25]</strong>: these high-popcount bands are ~100% cold and every child bottoms out in a getK leaf, so skipping their key/probe/put is verdict-preserving and frees the table for the genuinely-reused lower bands. Second, a <strong>17 GB flat table</strong> (2.125×10⁹ slots) sized to the 26 GB box. An unconfigured attempt thrashed—table 100% full, ~99.7% cold, the root never converged—while the configured run drove the giant root I9 to convergence at ~10 M nodes/s.</p>
+<p>The verdict rests on <strong>two independently configured proving runs</strong> that differ in the dense leaf evaluator they use and agree on every observable:</p>
+<table>
+<thead><tr><th>run</th><th>dense ceiling</th><th>getK code path</th><th>verdict</th><th>root</th><th>positions</th><th>wall</th></tr></thead>
+<tbody>
+<tr><td>primary</td><td>K=17</td><td>W17 (192-bit code)</td><td><span class="win">first wins</span></td><td>I9</td><td>258,322,944,571</td><td>8h16m45s</td></tr>
+<tr><td>confirm</td><td>K=20</td><td>W18–20 (≥190-bit code)</td><td><span class="win">first wins</span></td><td>I9</td><td>114,318,641,519</td><td>7h08m39s</td></tr>
+</tbody>
+</table>
+<p>Both report a first-player win, both name <strong>I9</strong> (square 152) as the winning opening, and both produce the byte-identical 15-ply principal variation <code>I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14</code>, checked to be 15 legal non-attacking moves ending in a terminal position with the mover unable to reply (so the first player makes the last move). The two runs exercise different leaf-evaluator code and converge at node counts differing by more than 2×, so their agreement on the verdict, the move, and the entire PV—not any single run—is the evidence. The realized counts exceed a pre-run ~46-billion estimate because the table cannot hold the full working set: the overshoot is re-expansion, which also explains the 2× node-count gap between the configs (the higher ceiling shrinks the working set) and is precisely the regime the band-skip targets. The runs are not resumable (the flat table is not checkpointed); each completed in ~7–8 hours on 24 workers.</p>
+<p>A complete formal certificate of a 10¹¹-node search is infeasible, so the bar is cross-validated agreement, layered on the differential-tested leaf evaluator, an independent raw-mask oracle on thousands of high-square subpositions, an integer-width audit (the fix for the one real bug of this class—a <code>u8</code> square index that truncated and flipped a value at n≥17), and reproduction of Jenrich's full n≤16 sequence. The single component validated only at n≤16 (plus the two-run agreement) is the generic high-popcount α-β logic above the dense ceiling; both configs exercise it over different node sets and agree.</p>
+
+<h3>Track C — the leaf evaluator, machine-checked in Lean 4</h3>
+<p>The dense leaf evaluator decides ~21% of all nodes and is where this class of solver has historically had bugs, so its recurrence semantics are now machine-checked. A self-contained Lean 4 + mathlib development (<code>lean/NodeKayles/</code>) builds green with <strong>no <code>sorry</code></strong>, every theorem depending only on the three standard axioms <code>[propext, Classical.choice, Quot.sound]</code>—no <code>native_decide</code>, no custom axioms. Proved: the win/loss P/N recurrence is well-defined and terminating; its value is invariant under graph isomorphism (<code>win_iso</code>) and under induced-subgraph relabelling (<code>win_emb</code>, the soundness of the relabel-survivors-and-look-up step); the one-ply table-build recurrence equals the true value (<code>buildPred_correct</code>); and the Grundy characterization <code>win ⟺ grundy ≠ 0</code> with the Sprague–Grundy component sum (<code>grundy_sum</code>) and Grundy iso-invariance (<code>grundy_iso</code>).</p>
+<p>The scope is deliberately "2-lite": the bit-level <code>pext</code> code layout and decode are left to the existing differential tests (where they are cheapest to check), and the Lean↔Rust correspondence is hand-audited rather than mechanically transported. The Grundy/component results harden a parked, default-off decomposition lever; the boolean win/loss recurrence that produced the n=18 verdict is what the rest of the proof covers.</p>
 <p>The outsized theoretical lever remains an even-n pairing theorem analogous to the odd-n O(1) result. None is known; PSPACE-completeness of generalized Node Kayles does not rule one out for this board family.</p>
 </div>
 </section>
@@ -1562,8 +1571,11 @@ return LOSS</code></pre>
 <li>Behavior-changing full-scale experiments must return n=16 SECOND.</li>
 <li>Dynamic-order and order-plus-ETC variants match the validated default through the recorded n=16 verdict.</li>
 <li>The final n=16 verdict is independently cross-checked against Jenrich's 2014 71.46-billion-call computation.</li>
+<li>The n=18 first-player verdict is corroborated by two independently configured exhaustive searches—different dense leaf evaluators (W17 vs W18–20)—agreeing on the verdict, the winning move I9, and the 15-ply principal variation at node counts differing by more than 2×.</li>
+<li>An independent raw-mask negamax oracle (no getK, no canonicalization, no table) checks both solvers on ~3,400 18×18 subpositions spanning the high-index squares—the path that caught the <code>u8</code>-truncation bug at pc=3.</li>
+<li>The getK leaf evaluator's recurrence semantics are machine-checked in Lean 4 (the win/loss recurrence and its termination, isomorphism and induced-subgraph invariances, the build recurrence, and the Grundy characterization); no <code>sorry</code>, standard axioms only.</li>
 </ul>
-<p>The 55-bit TT fingerprint makes a false hit probabilistic, but the independent verdict and solver/kernel cross-checks make that risk observable at multiple levels. For n=18, where no independent verdict exists, frozen-layer hashes and redundant computation must replace that external safety net.</p>
+<p>The 55-bit TT fingerprint makes a false hit probabilistic, but the independent verdict and solver/kernel cross-checks make that risk observable at multiple levels. For n=18, where no prior verdict existed, that external safety net is replaced by two-way cross-validation between independently configured searches, the independent-oracle subposition differential, and a machine-checked leaf evaluator. The residual trusted component is the generic high-popcount α-β combination logic over the I9 subtree, validated at n≤16 and exercised identically by both configs.</p>
 </section>
 
 <!-- ===================================================================== -->
