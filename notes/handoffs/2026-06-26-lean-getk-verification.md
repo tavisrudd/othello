@@ -69,12 +69,14 @@ specifically, the fork is: add `CombinatorialGames` as a Lake require, vs. stay 
   `mex` (least-excludant via `Nat.find` + `Infinite.exists_notMem_finset`), `grundy` (= `mex`
   over the children's Grundy values, same WF recursion as `win`), and `win_iff_grundy_ne_zero`
   (the textbook P/N ↔ Grundy fact: `win ⇔ grundy ≠ 0`). `sorry`-free, `lake build` green.
-- **Phase 4b — Sprague–Grundy component-XOR sum** (the item-3 dividend, IN PROGRESS). Prove
-  `grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂` for edge-disjoint parts (no `G`-edge between
-  `S₁` and `S₂`). Reduces to the abstract nim-mex lemma `mex ({x^^^b | x∈A} ∪ {a^^^y | y∈B}) =
-  a^^^b` where `a = mex A, b = mex B`; the crux Nat-bit fact is "if the top set bit of `d` is set
-  in `a`, then `a ^^^ d < a`" (search `Mathlib/Data/Nat/Bitwise.lean`). This is what the solver's
-  component-nimber decomposition relies on.
+- **Phase 4b — Sprague–Grundy component-XOR sum — ✅ DONE** (`grundy_sum` in `NodeKayles/Grundy.lean`).
+  `grundy G (S₁ ∪ S₂) = grundy G S₁ ^^^ grundy G S₂` for edge-disjoint parts (`Disjoint S₁ S₂` +
+  no `G`-edge between them). Built on the abstract nim-mex `mex_xor_union` (`mex ({x^^^mexB | x∈A}
+  ∪ {y^^^mexA | y∈B}) = mexA ^^^ mexB`), which used mathlib's `Nat.lt_xor_cases`/`xor_trichotomy`
+  (no hand-rolled bit arithmetic needed). WF recursion on `(S₁∪S₂).card`; a move in one part leaves
+  the other intact. **`#print axioms grundy_sum` = `[propext, Classical.choice, Quot.sound]`** —
+  kernel-complete, no `sorryAx`/`native_decide`. This is the soundness of the solver's
+  component-nimber decomposition.
 - **Phase 3 — `#eval` cross-check** (optional). Define a computable `Bool` twin `winB` (same
   recurrence returning `Bool`) + prove `winB ↔ win`; `#eval` it against dumped Rust `wins_rec`
   outputs. **Needs the concrete decode (Phase 2′)** to turn a Rust `code` into a Lean `Graph`,
@@ -125,7 +127,7 @@ Handoff Note (with session ID) per session.
 - [x] Phase 2 — `win_emb` (induced-subgraph invariance), `buildPred_correct`, `not_win_empty`
 - [x] Phase 3 (doc) — trust-chain `lean/TRUST.md`
 - [x] Phase 4a — self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`)
-- [ ] Phase 4b — Sprague–Grundy component-XOR sum (`grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂`) — IN PROGRESS
+- [x] Phase 4b — Sprague–Grundy component-XOR sum `grundy_sum` (kernel-complete, axioms clean)
 - [ ] Phase 3 (`#eval`) — computable `Bool` twin + Lean↔Rust cross-check (needs Phase 2′)
 - [ ] Phase 2′ — bit-exact u128 code decode (option B)
 - [ ] Phase 4 (mathlib `PGame` bridge) — UNAVAILABLE in mathlib v4.32 (extracted to `CombinatorialGames`); fork to user

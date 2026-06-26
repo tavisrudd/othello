@@ -24,6 +24,9 @@ The semantics of the leaf evaluator — the recurrence, its invariances, and the
 | `not_win_empty`                       | the terminal position is a loss for the mover                       | the `W0` base of the build                |
 | `firstPlayerWins`                     | first player wins ⇔ `win` over the full vertex set                  | `get(k, code)` over a complete graph      |
 | `grundy`, `win_iff_grundy_ne_zero` (Phase 4a) | the win predicate matches the Grundy characterization (`win ⇔ grundy ≠ 0`), `grundy = mex` over moves | the impartial-game / nimber semantics of a leaf |
+| `grundy_sum` (Phase 4b)               | edge-disjoint parts XOR: `grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` | the solver's component-nimber decomposition (resolve a disconnected position by XOR-ing component nimbers) |
+
+(All theorems: `#print axioms` = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.)
 
 Reading: a Lean-verified `win` is the right recurrence (`win`); relabelling a child — which is
 all `projected_code` does — cannot change the value (`win_iso`, `win_emb`); and the table build

@@ -24,7 +24,10 @@ differential tests `direct_wK_matches_scalar` / `graph_wins8_matches_scalar`, pe
 | 2′    | concrete u128 code decode (`adj_from_code`/`projected_code` bit layout) | deferred → differential tests |
 | 3     | trust-chain doc (`TRUST.md`) ✔; Lean↔Rust `#eval` cross-check       | doc done; `#eval` not started  |
 | 4a    | self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`) | ✔ proved          |
-| 4b    | Sprague–Grundy component-XOR sum (`grundy (S₁ ⊔ S₂) = grundy S₁ ^^^ grundy S₂`, → item 3) | in progress       |
+| 4b    | Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` for edge-disjoint parts, → item 3) | ✔ proved      |
+
+All theorems depend only on `[propext, Classical.choice, Quot.sound]` (`#print axioms`) — no
+`sorryAx`, no `native_decide`, no custom axioms; kernel-complete.
 
 mathlib `v4.32` **no longer ships `SetTheory/Game/`** (`PGame`, `Impartial`, `grundyValue`,
 `Nimber` were extracted to the standalone `CombinatorialGames` package). So Phase 4 is built
