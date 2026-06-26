@@ -24,7 +24,7 @@ The semantics of the leaf evaluator — the recurrence, its invariances, and the
 | `not_win_empty`                       | the terminal position is a loss for the mover                       | the `W0` base of the build                |
 | `firstPlayerWins`                     | first player wins ⇔ `win` over the full vertex set                  | `get(k, code)` over a complete graph      |
 | `grundy`, `win_iff_grundy_ne_zero` (Phase 4a) | the win predicate matches the Grundy characterization (`win ⇔ grundy ≠ 0`), `grundy = mex` over moves | the impartial-game / nimber semantics of a leaf |
-| `grundy_sum` (Phase 4b)               | edge-disjoint parts XOR: `grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` | the **gated/parked** component-nimber lever (`QUEENS_NIMBER_ORACLE`, default-OFF prototype in `iso_flat.rs`; parked `queens-component-nimber` branch) — **NOT** the default `getK` path or the n=18 verdict, which use only boolean win/loss |
+| `grundy_sum` (Phase 4b)               | no-edges-between-parts XOR: `grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` | the **gated/parked** component-nimber lever (`QUEENS_NIMBER_ORACLE`, default-OFF prototype in `iso_flat.rs`; parked `queens-component-nimber` branch) — **NOT** the default `getK` path or the n=18 verdict, which use only boolean win/loss |
 
 (All theorems: `#print axioms` = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.)
 
@@ -44,8 +44,17 @@ verify the semantics of:
   `:516`, `extract_adj*`, the `pext` projections),
 - the W8 build's pext fast path (`graph_wins8` `:561`).
 
-Covered by: `direct_wK_matches_scalar_recurrence` (`dense.rs:1265`–1493, getK ≡ `wins_rec` across
-the layers) and `graph_wins8_matches_scalar` (`:1201`, the pext W8 build ≡ scalar `graph_wins`).
+Covered by: `direct_wK_matches_scalar_recurrence` (`dense.rs:1265`–1493, getK ≡ the scalar
+reference across the layers) and `graph_wins8_matches_scalar` (`:1201`, the pext W8 build ≡
+scalar `graph_wins`).
+
+**Two scalar references, one recurrence.** `wins_rec` (`:584`) is the `u16`-coded reference,
+so it caps at `k ≤ 16`. The **wide layers `get17`–`get20`** — which include the `get17`/`get18`
+leaves the **n=18 verdict actually bottoms out on** — validate against `winsw_scalar`
+(`dense.rs:1413`, tests `direct_w17..w20_matches_scalar_recurrence` `:1475`–1493). `winsw_scalar`
+is the *same* recurrence shape (`child = alive & !((1<<i) | adj[i])`, "∃ a move to a loss"), just
+on a wider code, so the general-`Fin k` Lean `win` underwrites **both** references — the Lean
+result is not specific to the `k ≤ 16` path.
 
 ## Out of scope (not part of `getK`)
 

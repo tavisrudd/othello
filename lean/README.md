@@ -28,7 +28,7 @@ serialization layer (rides on the Rust differential tests `direct_wK_matches_sca
 | 2′    | concrete u128 code decode (`adj_from_code`/`projected_code` bit layout) | deferred → differential tests |
 | 3     | trust-chain doc (`TRUST.md`) ✔; Lean↔Rust `#eval` cross-check       | doc done; `#eval` not started  |
 | 4a    | self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`) | ✔ proved          |
-| 4b    | Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` for edge-disjoint parts, → item 3) | ✔ proved (hardens the *gated/parked* nimber lever, not the default `getK`/n=18 path) |
+| 4b    | Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` when no edges run between the parts, → item 3) | ✔ proved (hardens the *gated/parked* nimber lever, not the default `getK`/n=18 path) |
 
 All theorems depend only on `[propext, Classical.choice, Quot.sound]` (`#print axioms`) — no
 `sorryAx`, no `native_decide`, no custom axioms; kernel-complete.

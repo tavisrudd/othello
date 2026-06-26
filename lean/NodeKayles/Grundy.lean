@@ -91,8 +91,9 @@ theorem firstPlayerWins_iff_grundy_ne_zero (G : Graph k) :
 /-! ## Phase 4b — the Sprague–Grundy component-XOR sum
 
 The dividend the solver's nimber/component decomposition relies on: a position that splits
-into two edge-disjoint parts has Grundy value the `Nat.xor` of the parts' values. The crux
-is the abstract nim-mex identity `mex_xor_union`, built on `Nat.lt_xor_cases`. -/
+into two parts with **no edges between them** (so the induced subgraph is their disjoint
+union — a disconnected position) has Grundy value the `Nat.xor` of the parts' values. The
+crux is the abstract nim-mex identity `mex_xor_union`, built on `Nat.lt_xor_cases`. -/
 
 /-- `mex` pinned by its two-sided characterisation: if every value below `n` is in `U` and
     `n` itself is not, then `mex U = n`. -/
@@ -168,7 +169,8 @@ private theorem child_ssubset (G : Graph k) {S₁ S₂ : Finset (Fin k)} {u : Fi
     exact ⟨fun _ => self_mem_closedNbhd G u, Finset.disjoint_left.mp hd hu⟩
 
 /-- **Sprague–Grundy component-XOR sum** (proposal item 3): a position that splits into two
-    edge-disjoint live sets has Grundy value the `Nat.xor` of the parts' values. This is the
+    live sets with no edges between them (`hnoedge` — the induced subgraph is their disjoint
+    union) has Grundy value the `Nat.xor` of the parts' values. This is the
     soundness of resolving a disconnected position by XOR-ing its components' nimbers instead
     of expanding the product game — the math behind the queens **component-nimber lever**
     (`QUEENS_NIMBER_ORACLE` in `iso_flat.rs`, default-OFF prototype, and the parked
