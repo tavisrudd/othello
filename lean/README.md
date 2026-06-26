@@ -9,14 +9,14 @@ The pext/BMI2 `getK` then rides on the existing Rust differential tests
 
 ## Status
 
-**Phase 1 — skeleton compiles** (Lean `v4.32.0-rc1` + mathlib, `lake build` green). The
-`win` well-founded **termination proof is kernel-checked**; `win_iso` is the one remaining
-`sorry`.
+**Phase 1 — COMPLETE** (Lean `v4.32.0-rc1` + mathlib, `lake build` green, **no `sorry`**).
+The spec backbone is fully proved, including `win`'s well-founded termination and
+graph-isomorphism invariance of the win value.
 
 | Phase | Content                                                              | State                          |
 |-------|---------------------------------------------------------------------|--------------------------------|
-| 1     | `Graph`, `closedNbhd`, `win` (+ termination), `firstPlayerWins`      | ✔ compiles (termination proved) |
-| 1     | `win_iso` (graph-iso invariance of the win value)                   | stated, `sorry` (in progress)  |
+| 1     | `Graph`, `closedNbhd`, `win` (+ termination), `firstPlayerWins`      | ✔ proved                       |
+| 1     | `win_iso` (graph-iso invariance) + `closedNbhd_map`, `sdiff_…_ssubset` | ✔ proved (no `sorry`)        |
 | 2     | `graphOfCode`, `graphWin`, `buildPred_correct`, `w8_table_correct`  | not started                    |
 | 3     | trust-chain doc + Lean↔Rust `#eval` cross-check                      | not started                    |
 | 4     | optional `PGame`/Sprague–Grundy bridge (→ items 1 & 3)              | not started                    |

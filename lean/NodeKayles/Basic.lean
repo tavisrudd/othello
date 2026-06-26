@@ -65,18 +65,59 @@ decreasing_by
     `queenGraph` is the Phase-2 board→graph bridge (`att08`/`adj_row_pext`). -/
 def firstPlayerWins (G : Graph k) : Prop := win G Finset.univ
 
+/-- A live vertex's move strictly shrinks the position — the termination fact, shared by
+    `win`'s recursion and `win_iso`'s. -/
+theorem sdiff_closedNbhd_ssubset (G : Graph k) {S : Finset (Fin k)} {v : Fin k}
+    (hv : v ∈ S) : S \ closedNbhd G v ⊂ S :=
+  (Finset.ssubset_iff_of_subset Finset.sdiff_subset).mpr
+    ⟨v, hv, fun hc => (Finset.mem_sdiff.mp hc).2 (self_mem_closedNbhd G v)⟩
+
+/-- `closedNbhd` commutes with a graph isomorphism `e`: the closed neighbourhood of `e v`
+    in `H` is the image under `e` of `v`'s closed neighbourhood in `G`. The geometric core
+    of `win_iso` / `projected_code`'s relabelling. -/
+theorem closedNbhd_map (G : Graph k) (H : Graph k') (e : Fin k ≃ Fin k')
+    (he : ∀ i j, G.adj i j = H.adj (e i) (e j)) (v : Fin k) :
+    closedNbhd H (e v) = (closedNbhd G v).map e.toEmbedding := by
+  ext u
+  rw [Finset.mem_map_equiv]
+  simp only [closedNbhd, Finset.mem_filter, Finset.mem_univ, true_and,
+    Equiv.symm_apply_eq, he v (e.symm u), Equiv.apply_symm_apply]
+
 /-- **Relabeling (isomorphism) invariance.** `win` depends only on the isomorphism class
     of `(G, S)`: transporting the live set along a graph isomorphism `e` preserves the
     value. The mathematical content behind `projected_code` (`dense.rs:516`) — the getK
     recurrence relabels each child's surviving vertices to `0..k'` to index a smaller
     table, and this lemma is what makes that lookup sound.
 
-    Proof (Phase-1 target): strong induction on `S.card`; `closedNbhd` commutes with `e`
-    (`he` + `symm`), and `Finset.map e.toEmbedding` commutes with `\` and `univ`, so both
-    sides run the same recurrence modulo `e`. -/
-theorem win_iso {k k' : ℕ} (G : Graph k) (H : Graph k') (e : Fin k ≃ Fin k')
+    Proved by mirroring `win`'s recursion (`termination_by S.card`): `closedNbhd_map` +
+    `Finset.map_sdiff` carry each child across `e`, and the recursive `win_iso` call closes
+    it on the strictly-smaller child. -/
+theorem win_iso (G : Graph k) (H : Graph k') (e : Fin k ≃ Fin k')
     (he : ∀ i j, G.adj i j = H.adj (e i) (e j)) (S : Finset (Fin k)) :
     win G S ↔ win H (S.map e.toEmbedding) := by
-  sorry
+  conv_lhs => rw [win.eq_def]
+  conv_rhs => rw [win.eq_def]
+  constructor
+  · rintro ⟨⟨v, hv⟩, hvlose⟩
+    have hev : e v ∈ S.map e.toEmbedding := by
+      rw [Finset.mem_map_equiv]; simpa using hv
+    refine ⟨⟨e v, hev⟩, ?_⟩
+    show ¬ win H (S.map e.toEmbedding \ closedNbhd H (e v))
+    rw [closedNbhd_map G H e he v, ← Finset.map_sdiff, ← win_iso G H e he]
+    exact hvlose
+  · rintro ⟨⟨w, hw⟩, hwlose⟩
+    rw [Finset.mem_map_equiv] at hw
+    refine ⟨⟨e.symm w, hw⟩, ?_⟩
+    show ¬ win G (S \ closedNbhd G (e.symm w))
+    rw [win_iso G H e he, Finset.map_sdiff, ← closedNbhd_map G H e he, Equiv.apply_symm_apply]
+    exact hwlose
+termination_by S.card
+decreasing_by
+  all_goals
+    refine Finset.card_lt_card (sdiff_closedNbhd_ssubset G ?_)
+    -- forward call: `v ∈ S` directly; backward call: `e.symm w ∈ S` from `w ∈ map e S`.
+    first
+      | assumption
+      | exact Finset.mem_map_equiv.mp (by assumption)
 
 end NodeKayles
