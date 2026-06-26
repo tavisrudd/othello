@@ -177,4 +177,55 @@ termination_by T.card
 decreasing_by
   all_goals exact Finset.card_lt_card (sdiff_closedNbhd_ssubset H (by assumption))
 
+/-! ## Phase 2 (graph-level): the `W_K` build recurrence is correct.
+
+`firstPlayerWins` is the value the dense tables store. `buildPred_correct` shows one ply of
+the build (`graph_wins`, `dense.rs:541`) — resolve each move's child by relabelling its
+survivors to a smaller induced graph and reading *its* value — equals the true value, and
+`not_win_empty` is the `W0` base case. The u128 bit-packing of the code (`adj_from_code` /
+`projected_code`) is the serialization layer, deferred to the Rust differential tests. -/
+
+/-- The subgraph of `G` induced on a live set `S`, relabelled to `Fin S.card` by the order
+    embedding `S.orderEmbOfFin`. Mirror of decoding a `projected_code` child to a smaller
+    labelled graph. -/
+def inducedGraph (G : Graph k) (S : Finset (Fin k)) : Graph S.card where
+  adj a b := G.adj (S.orderEmbOfFin rfl a) (S.orderEmbOfFin rfl b)
+  symm a b := G.symm (S.orderEmbOfFin rfl a) (S.orderEmbOfFin rfl b)
+  irrefl a := G.irrefl (S.orderEmbOfFin rfl a)
+
+/-- The order embedding sends the whole index set onto `S`. -/
+theorem univ_map_orderEmbOfFin (S : Finset (Fin k)) :
+    Finset.univ.map (S.orderEmbOfFin rfl).toEmbedding = S := by
+  apply Finset.eq_of_subset_of_card_le
+  · intro x hx
+    obtain ⟨a, -, rfl⟩ := Finset.mem_map.mp hx
+    exact Finset.orderEmbOfFin_mem S rfl a
+  · rw [Finset.card_map]; simp
+
+/-- The value of an induced subgraph equals the value of the corresponding position of `G`
+    — the bridge from a relabelled child back to `G`, via `win_emb`. -/
+theorem firstPlayerWins_inducedGraph (G : Graph k) (S : Finset (Fin k)) :
+    firstPlayerWins (inducedGraph G S) ↔ win G S := by
+  show win (inducedGraph G S) Finset.univ ↔ win G S
+  rw [win_emb G (inducedGraph G S) (S.orderEmbOfFin rfl).toEmbedding (fun _ _ => rfl)
+        Finset.univ, univ_map_orderEmbOfFin]
+
+/-- Base case (`W0`): the terminal position (no live vertex) is a loss for the mover. -/
+theorem not_win_empty (G : Graph k) : ¬ win G (∅ : Finset (Fin k)) := by
+  rw [win.eq_def]
+  rintro ⟨⟨v, hv⟩, -⟩
+  simp at hv
+
+/-- **The `W_K` build recurrence is correct** (`graph_wins`, `dense.rs:541`): the first
+    player wins `G` iff some move leaves the opponent a loss, each child resolved as the
+    value of a strictly smaller induced subgraph. With `not_win_empty` (the `W0` base) this
+    is the graph-level correctness of the whole `W0..W8` table build. -/
+theorem buildPred_correct (G : Graph k) :
+    firstPlayerWins G ↔
+      ∃ i : Fin k, ¬ firstPlayerWins (inducedGraph G (Finset.univ \ closedNbhd G i)) := by
+  simp only [firstPlayerWins_inducedGraph]
+  show win G Finset.univ ↔ ∃ i : Fin k, ¬ win G (Finset.univ \ closedNbhd G i)
+  rw [win.eq_def]
+  exact ⟨fun ⟨⟨i, _⟩, hi⟩ => ⟨i, hi⟩, fun ⟨i, hi⟩ => ⟨⟨i, Finset.mem_univ i⟩, hi⟩⟩
+
 end NodeKayles

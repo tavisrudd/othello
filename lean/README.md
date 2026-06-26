@@ -9,16 +9,19 @@ The pext/BMI2 `getK` then rides on the existing Rust differential tests
 
 ## Status
 
-**Phase 1 — COMPLETE** (Lean `v4.32.0-rc1` + mathlib, `lake build` green, **no `sorry`**).
-The spec backbone is fully proved, including `win`'s well-founded termination and
-graph-isomorphism invariance of the win value.
+**Phases 1 & 2 (graph-level) — COMPLETE** (Lean `v4.32.0-rc1` + mathlib, `lake build`
+green, **no `sorry`**). The Node-Kayles win predicate, its termination, the isomorphism /
+induced-subgraph invariances, and the `W_K` build recurrence are all machine-checked. The
+u128 bit-packing of the code is the deferred serialization layer (rides on the Rust
+differential tests `direct_wK_matches_scalar` / `graph_wins8_matches_scalar`, per 2-lite).
 
 | Phase | Content                                                              | State                          |
 |-------|---------------------------------------------------------------------|--------------------------------|
 | 1     | `Graph`, `closedNbhd`, `win` (+ termination), `firstPlayerWins`      | ✔ proved                       |
-| 1     | `win_iso` (graph-iso invariance) + `closedNbhd_map`, `sdiff_…_ssubset` | ✔ proved (no `sorry`)        |
-| 2     | `win_emb` / `childmap_emb` (induced-subgraph invariance = `projected_code` soundness) | ✔ proved (no `sorry`)        |
-| 2     | `graphOfCode`, `graphWin`, `buildPred_correct`, `w8_table_correct` (concrete code decode + build) | not started        |
+| 1     | `win_iso` (graph-iso invariance) + `closedNbhd_map`, `sdiff_…_ssubset` | ✔ proved                     |
+| 2     | `win_emb` / `childmap_emb` (induced-subgraph invariance = `projected_code` soundness) | ✔ proved      |
+| 2     | `inducedGraph`, `firstPlayerWins_inducedGraph`, `buildPred_correct`, `not_win_empty` (`W_K` build) | ✔ proved      |
+| 2′    | concrete u128 code decode (`adj_from_code`/`projected_code` bit layout) | deferred → differential tests |
 | 3     | trust-chain doc + Lean↔Rust `#eval` cross-check                      | not started                    |
 | 4     | optional `PGame`/Sprague–Grundy bridge (→ items 1 & 3)              | not started                    |
 
