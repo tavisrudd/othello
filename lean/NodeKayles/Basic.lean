@@ -8,8 +8,9 @@ the Lean mirror of the *scalar reference* in `rust/src/queens/dense.rs`:
 
 | Lean (here)          | Rust (`dense.rs`)                       | meaning                              |
 |----------------------|-----------------------------------------|--------------------------------------|
-| `win`                | `wins_rec` (`:584`)                      | `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])`     |
-| `closedNbhd G v`     | `full & !((1<<i) \| adj[i])` (per getK)  | delete `{v} ∪ N(v)` (the move)       |
+| `win`                | `wins_rec` (`:584`, the `#[cfg(test)]` scalar ref) | `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` |
+| `closedNbhd G v`     | `(1<<i) \| adj[i]` (the *deleted* set)    | delete `{v} ∪ N(v)` (the move)       |
+| `S \ closedNbhd G v` | `full & !((1<<i) \| adj[i])` (the child)  | the surviving live set after the move |
 | `firstPlayerWins`    | `get(k, code)` over the full graph       | first player wins this position      |
 
 `win` is a `Prop` here (Node-Kayles normal-play P/N value): clean for the `win_iso`
@@ -219,7 +220,9 @@ theorem not_win_empty (G : Graph k) : ¬ win G (∅ : Finset (Fin k)) := by
 /-- **The `W_K` build recurrence is correct** (`graph_wins`, `dense.rs:541`): the first
     player wins `G` iff some move leaves the opponent a loss, each child resolved as the
     value of a strictly smaller induced subgraph. With `not_win_empty` (the `W0` base) this
-    is the graph-level correctness of the whole `W0..W8` table build. -/
+    is the graph-level (one-ply) correctness of the `W_K` build recurrence; the concrete
+    table indexing, the flat-arena offset read, and the u128 `code` decode are NOT modelled
+    here — they ride on the Rust differential tests (see `TRUST.md`, "Deferred"). -/
 theorem buildPred_correct (G : Graph k) :
     firstPlayerWins G ↔
       ∃ i : Fin k, ¬ firstPlayerWins (inducedGraph G (Finset.univ \ closedNbhd G i)) := by

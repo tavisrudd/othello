@@ -3,17 +3,21 @@
 The 2-lite formal-verification effort scoped in
 [`../notes/proposal-2026-06-26-getk-lean-verification.md`](../notes/proposal-2026-06-26-getk-lean-verification.md).
 Goal: a machine-checked proof that the **scalar Node-Kayles recurrence** the dense
-evaluator implements is the correct game value, plus the **W0..W8 base-table build**.
-The pext/BMI2 `getK` then rides on the existing Rust differential tests
-(`direct_wK_matches_scalar_recurrence`, `graph_wins8_matches_scalar`).
+evaluator implements is the correct game value, plus the **one-ply (graph-level) `W_K`
+build recurrence**. The concrete table indexing / arena read / u128 `code` decode and the
+pext/BMI2 `getK` ride on the existing Rust differential tests
+(`direct_wK_matches_scalar_recurrence`, `graph_wins8_matches_scalar`). The Lean↔Rust
+correspondence itself (the Lean defs mirror `wins_rec`/`graph_wins`) is hand-audited, not
+machine-checked end-to-end — see `TRUST.md`.
 
 ## Status
 
 **Phases 1 & 2 (graph-level) — COMPLETE** (Lean `v4.32.0-rc1` + mathlib, `lake build`
 green, **no `sorry`**). The Node-Kayles win predicate, its termination, the isomorphism /
-induced-subgraph invariances, and the `W_K` build recurrence are all machine-checked. The
-u128 bit-packing of the code is the deferred serialization layer (rides on the Rust
-differential tests `direct_wK_matches_scalar` / `graph_wins8_matches_scalar`, per 2-lite).
+induced-subgraph invariances, and the one-ply `W_K` build recurrence are all machine-checked.
+The u128 bit-packing of the code, the table indexing, and the arena read are the deferred
+serialization layer (rides on the Rust differential tests `direct_wK_matches_scalar` /
+`graph_wins8_matches_scalar`, per 2-lite).
 
 | Phase | Content                                                              | State                          |
 |-------|---------------------------------------------------------------------|--------------------------------|
@@ -24,7 +28,7 @@ differential tests `direct_wK_matches_scalar` / `graph_wins8_matches_scalar`, pe
 | 2′    | concrete u128 code decode (`adj_from_code`/`projected_code` bit layout) | deferred → differential tests |
 | 3     | trust-chain doc (`TRUST.md`) ✔; Lean↔Rust `#eval` cross-check       | doc done; `#eval` not started  |
 | 4a    | self-contained Grundy: `mex`, `grundy`, `win_iff_grundy_ne_zero` (`NodeKayles/Grundy.lean`) | ✔ proved          |
-| 4b    | Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` for edge-disjoint parts, → item 3) | ✔ proved      |
+| 4b    | Sprague–Grundy component-XOR sum `grundy_sum` (`grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` for edge-disjoint parts, → item 3) | ✔ proved (hardens the *gated/parked* nimber lever, not the default `getK`/n=18 path) |
 
 All theorems depend only on `[propext, Classical.choice, Quot.sound]` (`#print axioms`) — no
 `sorryAx`, no `native_decide`, no custom axioms; kernel-complete.

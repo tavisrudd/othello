@@ -169,8 +169,13 @@ private theorem child_ssubset (G : Graph k) {S₁ S₂ : Finset (Fin k)} {u : Fi
 
 /-- **Sprague–Grundy component-XOR sum** (proposal item 3): a position that splits into two
     edge-disjoint live sets has Grundy value the `Nat.xor` of the parts' values. This is the
-    soundness of the solver's component-nimber decomposition — resolving a disconnected
-    position by XOR-ing its components' nimbers instead of expanding the product game.
+    soundness of resolving a disconnected position by XOR-ing its components' nimbers instead
+    of expanding the product game — the math behind the queens **component-nimber lever**
+    (`QUEENS_NIMBER_ORACLE` in `iso_flat.rs`, default-OFF prototype, and the parked
+    `queens-component-nimber` branch). NOTE: the default `getK`/iso-dense path and the shipped
+    n=18 verdict use only the boolean win/loss recurrence (`win`), not this XOR — so `grundy_sum`
+    hardens a *gated/future* lever, not live production code. (Stated for the binary split; the
+    N-ary component XOR the oracle uses is the obvious induction on this.)
 
     Proof: by well-founded recursion on `(S₁ ∪ S₂).card`. A move in `S₁` leaves `S₂` intact
     (`closedNbhd_disjoint_of_noedge`), so the child is the edge-disjoint split

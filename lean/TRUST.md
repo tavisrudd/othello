@@ -15,8 +15,8 @@ The semantics of the leaf evaluator — the recurrence, its invariances, and the
 
 | Lean (`NodeKayles/Basic.lean`)        | establishes                                                          | Rust underwritten                         |
 |---------------------------------------|---------------------------------------------------------------------|-------------------------------------------|
-| `Graph`, `closedNbhd`                 | the abstract Node-Kayles graph; a move deletes `{v} ∪ N(v)`         | the move `full & !((1<<i) \| adj[i])`     |
-| `win` (+ kernel-checked termination)  | the P/N recurrence `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` is well-defined | `wins_rec` (`dense.rs:584`)               |
+| `Graph`, `closedNbhd`                 | the abstract Node-Kayles graph; a move deletes `{v} ∪ N(v)`         | the deleted set `(1<<i) \| adj[i]`; the surviving child `S ∖ closedNbhd` is its complement `full & !((1<<i) \| adj[i])` |
+| `win` (+ kernel-checked termination)  | the P/N recurrence `W_K(G) = ∃v · ¬W_{K-1}(G∖N[v])` is well-defined | `wins_rec` (`dense.rs:584`, the `#[cfg(test)]` scalar reference; the production `getK` ties to it via the differential tests) |
 | `win_iso`                             | the value is invariant under a same-size relabelling                | labelled-code freedom; D4 canon at a leaf |
 | **`win_emb`**                         | the value is invariant under **induced-subgraph relabelling**       | **`projected_code` (`dense.rs:516`)** — the getK "relabel a child's survivors to `0..k'`, read the smaller `W{k'}`" step |
 | `inducedGraph`, `firstPlayerWins_inducedGraph` | a child resolves as the value of a smaller induced subgraph | decoding a `projected_code` child to a smaller labelled graph |
@@ -24,7 +24,7 @@ The semantics of the leaf evaluator — the recurrence, its invariances, and the
 | `not_win_empty`                       | the terminal position is a loss for the mover                       | the `W0` base of the build                |
 | `firstPlayerWins`                     | first player wins ⇔ `win` over the full vertex set                  | `get(k, code)` over a complete graph      |
 | `grundy`, `win_iff_grundy_ne_zero` (Phase 4a) | the win predicate matches the Grundy characterization (`win ⇔ grundy ≠ 0`), `grundy = mex` over moves | the impartial-game / nimber semantics of a leaf |
-| `grundy_sum` (Phase 4b)               | edge-disjoint parts XOR: `grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` | the solver's component-nimber decomposition (resolve a disconnected position by XOR-ing component nimbers) |
+| `grundy_sum` (Phase 4b)               | edge-disjoint parts XOR: `grundy (S₁∪S₂) = grundy S₁ ^^^ grundy S₂` | the **gated/parked** component-nimber lever (`QUEENS_NIMBER_ORACLE`, default-OFF prototype in `iso_flat.rs`; parked `queens-component-nimber` branch) — **NOT** the default `getK` path or the n=18 verdict, which use only boolean win/loss |
 
 (All theorems: `#print axioms` = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.)
 
