@@ -1,16 +1,19 @@
 # Othello + Non-Attacking Queens — project guide for Claude Code
 
 Two crates share the repo: the Python `othello` package (root) and the Rust port +
-Queens solver (`rust/`). Active work is in `rust/`; the live umbrella is the Queens
-n=16 roadmap in `notes/handoffs/`.
+Queens solver (`rust/`). Active work is in `rust/`; the latest milestone is
+**Queens n=18 SOLVED (first player)** — umbrella in `notes/handoffs/`.
 
 ## Current WIP
 **DO NOT add details/history here. Pointers only** (details live in the handoff/proposal).
 
-**★ Start here (active):** [Queens n=18 umbrella](notes/handoffs/2026-06-23-queens-n18-umbrella.md) —
-n=18 is the open board. Rep migration done + validated n≤16; first n=18 run found a **verdict bug**
-(fix first), then the BuRR-backed snapshotting build + a launched, instrumented run. Code is on
-branch `queens-n18` (worktree `/home/tavis/src/othello-n18`); handoffs/plan live here on main. **`go`.**
+**★ Queens n=18 — SOLVED: FIRST PLAYER WINS** (witness opening **I9**). [n=18 umbrella](notes/handoffs/2026-06-23-queens-n18-umbrella.md)
+— two independent getK-evaluator configs (`dense_k=17` W17 / `dense_k=20` W18–20) agree on verdict + winning move +
+the 15-move PV at different node counts (258 B / 114 B); corroborated by a clean int-sizing audit, an independent-oracle
+differential, and a reproduction of Jenrich's full n≤16 sequence. Enabler: **skip[18,25] + a 17 GB flat TT** made the
+giant root I9 converge on the 26 GB box (the un-skipped run thrashed). n=18 was genuinely open ⇒ new result, extends
+Jenrich (arXiv:1312.5135). Code on branch `queens-n18` (worktree `/home/tavis/src/othello-n18`); see the umbrella's
+**session --13 CONCLUSION**. **Pending:** user blessing → archive the umbrella + an OEIS A344227 submission. **`go`.**
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
