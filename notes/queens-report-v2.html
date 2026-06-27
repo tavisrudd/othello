@@ -138,11 +138,11 @@
   <h1>The Non-Attacking Queens Game
     <span class="sub">who wins 18×18 — the result, the engineering, and the AI agents behind it</span>
   </h1>
-  <p class="lede">In the Non-Attacking Queens game, two players take turns placing queens on a chessboard so that no queen attacks another; whoever has no legal move loses. One question hides an enormous search: with perfect play, who wins on an n×n board? This report gives a new answer — <strong class="win">on 18×18 the first player wins</strong> — describes the solver that proved it, and looks at how the work was actually done, much of it by AI coding agents under human direction.</p>
+  <p class="lede">In the Non-Attacking Queens game, two players take turns placing queens on a chessboard so that no queen attacks another; whoever has no legal move loses. One question hides an enormous search: with perfect play, who wins on an n×n board? This report gives a new answer — <strong class="win">on 18×18 the first player wins</strong> — describes the solver that proved it, and looks at how the work was done — much of it by AI coding agents under human direction.</p>
   <p class="lede" style="font-size:16px">It tells three stories, in three parts you can read independently:</p>
   <ul style="font-size:16.5px; color:var(--fg-dim); max-width:740px">
     <li><strong>Part&nbsp;I — The result.</strong> Who wins 18×18, and the standard of proof behind a verdict that no single computation can certify.</li>
-    <li><strong>Part&nbsp;II — The engineering.</strong> How the 16×16 search fell from ~56 minutes to ~23 seconds on one workstation, and how that made 18×18 reachable.</li>
+    <li><strong>Part&nbsp;II — The engineering.</strong> How the 16×16 search fell from ~56 minutes to ~23 seconds on one laptop-class machine, and how that made 18×18 reachable.</li>
     <li><strong>Part&nbsp;III — The method.</strong> How this was done with coding agents: what they accelerated, where they went wrong, and what human judgment had to supply.</li>
   </ul>
   <p class="lede" style="font-size:15px;color:var(--fg-faint)">This AI-written account is based on the project's code, commits, benchmark logs, and working notes. The measurements and engineering decisions are the programmer's.</p>
@@ -174,11 +174,11 @@
 <div class="summary-box">
 <p><strong>The game.</strong> Place queens on an n×n board one at a time, never letting two attack each other. When you cannot move, you lose. Each queen erases its row, column, and both diagonals from the squares still available, so the game is a controlled collapse: the player who makes the last legal placement wins. The only question is who that is, under perfect play.</p>
 
-<p><strong>The result.</strong> For odd boards the first player wins by a simple mirror trick, so the hard cases are even boards. The winners were known up through 16×16 (the second player wins there, from a 2014 computation by Thomas Jenrich). The next open board was 18×18. This project settled it: <strong class="win">on 18×18, the first player wins</strong>, with a winning first move we label <strong>I9</strong>. Because the proof visits roughly a hundred billion positions, no human can check it and no single program run can certify it. Instead, two differently-built versions of the solver were run independently; they agreed on the winner, on the winning move, and on a complete 15-move winning line, despite exploring very different numbers of positions. That agreement, together with smaller pieces checked against an independent reference and a part of the program proved correct by machine, is the evidence.</p>
+<p><strong>The result.</strong> For odd boards the first player wins by a simple mirror trick, so the hard cases are even boards. The winners were known up through 16×16 (the second player wins there, from a computation by Thomas Jenrich). The next open board was 18×18. This project settled it: <strong class="win">on 18×18, the first player wins</strong>, with a winning first move we label <strong>I9</strong>. Because the proof visits hundreds of billions of positions, no human can check it and no single program run can certify it. Instead, two versions of the solver, built around different evaluators, were run independently; they agreed on the winner, on the winning move, and on a complete 15-move winning line, despite exploring very different numbers of positions. That agreement, together with smaller pieces checked against an independent reference and a part of the program proved correct by machine, is the evidence.</p>
 
-<p><strong>The engineering.</strong> The first working solver proved the 16×16 answer in about 56 minutes. Steady optimization brought the same answer down to about 23 seconds — a roughly 140-fold speedup — on the same laptop-class machine. Three ideas did most of the work: <em>remembering</em> positions reached by different move orders so each is solved once; <em>recognizing</em> when two positions are the same shape and merging them; and <em>shortcutting</em> the endgame by computing small positions directly from precomputed tables instead of searching them. Layered on top were dozens of smaller changes, each kept only if a careful measurement showed it helped — and many discarded when it did not. The same compactness and speed are what let 18×18, with its hundred-billion-position search, fit and finish on a single 26&nbsp;GB machine.</p>
+<p><strong>The engineering.</strong> The first working solver proved the 16×16 answer in about 56 minutes. Steady optimization brought the same answer down to about 23 seconds — a roughly 140-fold speedup — on the same laptop-class machine. Three ideas did most of the work: <em>remembering</em> positions reached by different move orders so each is solved once; <em>recognizing</em> when two positions are the same shape and merging them; and <em>shortcutting</em> the endgame by computing small positions directly from precomputed tables instead of searching them. Many smaller changes layered on top, each kept only if a careful measurement showed it helped — and dropped when it did not. The same compactness and speed let 18×18 — whose search runs to hundreds of billions of positions — fit and finish on a single laptop-class machine.</p>
 
-<p><strong>The trust.</strong> A wrong answer here is silent — the program would simply print the opposite winner. So correctness was built in layers: the fast solver must agree with a slow, obviously-correct one on small boards; it must reproduce an exact count of distinct positions; its endgame tables are checked against a plain reference implementation; and the small-graph evaluator at its heart — the part where the one real bug of this kind once hid — was machine-checked in the Lean&nbsp;4 proof assistant, so its core logic is proved, not just tested.</p>
+<p><strong>The trust.</strong> A wrong answer here is silent — the program would simply print the opposite winner. So correctness was built in layers: the fast solver must agree with a slow, obviously-correct one on small boards; it must reproduce an exact count of distinct positions; its endgame tables are checked against a plain reference implementation; and the small-graph (leaf) evaluator at its heart — the part where the one real bug of this kind once hid — was machine-checked in the Lean&nbsp;4 proof assistant, so its core logic is proved, not just tested.</p>
 
 <p><strong>The method.</strong> The work was a hobby project with no users and a known correct answer for the cases below 18 — an unusually clean setting to test how far AI coding agents can drive real performance engineering. They could build and measure ideas far faster than a person, and under an overnight "be relentless" instruction they reopened a discarded idea that became the single biggest speedup. But they repeatedly mistook a current bottleneck, or a prototype's poor showing, for a fundamental limit. Human first-principles estimates decided which dead ends deserved another try and when a measured limit had truly been reached. Part&nbsp;III is about that division of labor.</p>
 </div>
@@ -194,11 +194,11 @@
 
 <section id="game">
 <h2><span class="num">1</span>The game and the question</h2>
-<p>Two players alternately place queens on an <code>n×n</code> board so that no queen attacks any other — no shared row, column, or diagonal. Under the <span class="term" tabindex="0" data-tip="Normal play: the player who makes the last legal move wins; equivalently, the player who cannot move loses.">normal-play convention</span>, the player who cannot move loses. The game is <em>impartial</em> — from any position both players have exactly the same moves available — so its outcome is determined entirely by the position, not by whose turn it is in any other sense.</p>
+<p>Two players alternately place queens on an <code>n×n</code> board so that no queen attacks any other — no shared row, column, or diagonal. Under the <span class="term" tabindex="0" data-tip="Normal play: the player who makes the last legal move wins; equivalently, the player who cannot move loses.">normal-play convention</span>, the player who cannot move loses. The game is <em>impartial</em> — from any position both players have exactly the same moves available — so the outcome is fixed by the position alone; which player faces it makes no difference to the moves on offer.</p>
 
 <p>The state that matters is the set of <strong>available squares</strong>: those still empty, safe, and legal. A move shrinks that set, deleting the chosen square together with every square it attacks. This is the only thing history contributes — two different sequences of moves that leave the same available squares are, from then on, the same game.</p>
 
-<p>That observation turns the game into a problem on a graph. Make each square a vertex, and join two squares by an edge when a queen on one attacks the other; this is the <strong>queen graph</strong> <code>Q<sub>n</sub></code>. A position is a set of live vertices; a move picks a live vertex <code>v</code> and deletes <code>v</code> and all its neighbours — its <em>closed neighbourhood</em>. This is exactly the impartial game <span class="term" tabindex="0" data-tip="Node-Kayles: players alternately pick a vertex and delete it together with all of its neighbours; last to move wins.">Node-Kayles</span> played on <code>Q<sub>n</sub></code>. Deciding the winner of Node-Kayles on a general graph is PSPACE-complete, so there is no expected shortcut formula for arbitrary boards — the practical tool is exhaustive search, and the engineering question is how far it can be pushed.</p>
+<p>That observation turns the game into a problem on a graph. Make each square a vertex, and join two squares by an edge when a queen on one attacks the other; this is the <strong>queen graph</strong> <code>Q<sub>n</sub></code>. A position is a set of live vertices; a move picks a live vertex <code>v</code> and deletes <code>v</code> and all its neighbours — its <em>closed neighbourhood</em>. This is exactly the impartial game <span class="term" tabindex="0" data-tip="Node-Kayles: players alternately pick a vertex and delete it together with all of its neighbours; last to move wins.">Node-Kayles</span> played on <code>Q<sub>n</sub></code>. Deciding the winner of Node-Kayles on a general graph is PSPACE-complete, so no general shortcut formula is expected for arbitrary boards — the practical tool is exhaustive search, and the engineering question is how far it can be pushed.</p>
 
 <details class="formal">
 <summary>The formal version — the win recurrence</summary>
@@ -212,9 +212,9 @@
 
 <section id="known">
 <h2><span class="num">2</span>What was already known</h2>
-<p>Odd boards are easy: the first player plays the centre square and thereafter mirrors the opponent through a 180° rotation, an O(1) strategy that needs no search. So the substantive open problems are the <strong>even</strong> boards.</p>
+<p>Odd boards are easy: the first player plays the centre square and thereafter mirrors the opponent through a 180° rotation — a mirror strategy that needs no search. So the substantive open problems are the <strong>even</strong> boards.</p>
 
-<p>For even boards the winners had been determined up through 16×16: the second player wins on 10×10, 12×12, and 14×14, and — from Thomas Jenrich's 2014 computation (arXiv:1312.5135) — the second player wins on <strong>16×16</strong> as well. Jenrich's search used a backtracking solver with partial symmetry handling and no transposition table, on the order of <strong>71 billion</strong> recursive calls over roughly a day. The Sprague–Grundy values of small boards are catalogued as OEIS sequence <strong>A344227</strong>. The next open even board — and the subject of this work — was <strong>18×18</strong>.</p>
+<p>For even boards the winners had been determined up through 16×16: the second player wins on 10×10, 12×12, and 14×14, and — from a computation by Thomas Jenrich (arXiv:1312.5135) — the second player wins on <strong>16×16</strong> as well. Jenrich's search used a backtracking solver with partial symmetry handling and no transposition table, on the order of <strong>71 billion</strong> recursive calls over roughly a day. The Sprague–Grundy values of small boards are catalogued as OEIS sequence <strong>A344227</strong>. The next open even board — and the subject of this work — was <strong>18×18</strong>.</p>
 
 <p>The solver in this report reproduces Jenrich's full sequence through 16×16 (second player) and agrees with A344227 over its catalogued range, which is the first-order check that its machinery computes the right game before it is trusted on new ground.</p>
 </section>
@@ -223,7 +223,7 @@
 <h2><span class="num">3</span>The 18×18 result and its proof</h2>
 <p><strong class="win">On the 18×18 board the first player wins.</strong> A winning opening is the move we label <strong>I9</strong> (square 152 in row-major numbering). Because the game is impartial and a winning first move exists, the result is an existence proof: the solver searched the single move I9 to a complete verdict and stopped.</p>
 
-<p>A search that visits on the order of <strong>10<sup>11</sup></strong> positions cannot be certified by a single run, and a full formal certificate of that many positions is infeasible. The verdict is therefore established by <strong>two independently configured proving runs</strong> of the same solver, differing in the dense leaf evaluator they use (Section&nbsp;6), which agree on every observable while exploring very different amounts of work:</p>
+<p>A search that visits on the order of <strong>10<sup>11</sup></strong> positions cannot be certified by a single run, and a full formal certificate of that many positions is infeasible. The verdict is therefore established by <strong>two independently configured proving runs</strong> of the same solver, differing in the dense leaf evaluator they use (Section&nbsp;6), which agree on every output while exploring very different amounts of work:</p>
 
 <table>
 <thead><tr><th>run</th><th>dense ceiling</th><th>evaluator path</th><th>verdict</th><th>opening</th><th class="num">positions</th><th class="num">wall</th></tr></thead>
@@ -243,12 +243,12 @@
 <p>To state the standard of proof precisely, the verdict rests on these layers, strongest first:</p>
 <ul>
 <li><strong>Two-way cross-validation</strong> — two independently configured exhaustive searches agree on verdict, move, and full principal variation (above).</li>
-<li><strong>A differential-tested leaf evaluator</strong> — the part of the program that decides small positions directly is checked, code by code, against a plain scalar reference, including the wide layers the 18×18 search actually bottoms out on (Section&nbsp;7).</li>
-<li><strong>An independent oracle</strong> — a separate, simpler implementation (raw masks, no tables, no symmetry) checks both solvers on thousands of high-index subpositions; this is the check that caught the one real bug of this class, an integer-width truncation that flipped a value at boards above 16 (Section&nbsp;6).</li>
+<li><strong>A differential-tested leaf evaluator</strong> — the part of the program that decides small positions directly is checked, code by code, against a plain scalar reference, including the wide layers the 18×18 search actually bottoms out on.</li>
+<li><strong>An independent oracle</strong> — a separate, simpler implementation (raw masks, no tables, no symmetry) checks both solvers on thousands of high-index subpositions; this is the check that caught the one real bug of this class — an integer-width truncation that flipped a value at boards above 16.</li>
 <li><strong>A machine-checked core</strong> — the leaf evaluator's recurrence is proved in Lean&nbsp;4 (Section&nbsp;4).</li>
 <li><strong>Reproduction of prior work</strong> — Jenrich's full sequence through 16×16, and OEIS A344227.</li>
 </ul>
-<p>The single component validated only at boards up through 16 (plus the two-run agreement) is the generic search-combination logic above the dense ceiling. Both configurations exercise it over different sets of positions and agree. We make no claim beyond this layered evidence: it is cross-validated agreement at very high confidence, not a single formal certificate.</p>
+<p>The one component validated only on boards up through 16 is the generic search-combination logic above the dense ceiling; we assume it correct there, on the strength of that validation and of the two runs exercising it over different positions with the same result. We make no claim beyond this layered evidence — cross-validated agreement at very high confidence, not a single formal certificate.</p>
 </section>
 
 <section id="lean">
@@ -269,7 +269,7 @@
 <summary>The formal version — what the proof underwrites, and what it defers</summary>
 <div class="body">
 <p>The development (<code>lean/NodeKayles/</code>) defines an abstract finite graph and the predicate <code>win S := ∃ v∈S, ¬ win (S∖N[v])</code>, proved terminating on <code>|S|</code>. Theorems: <code>win_iso</code> (isomorphism invariance), <code>win_emb</code> (induced-subgraph invariance — the soundness of the projected-code lookup), <code>buildPred_correct</code> (one-ply build equals the true value) with <code>not_win_empty</code> as the base case, and a Grundy layer (<code>mex</code>, <code>grundy</code>, <code>win_iff_grundy_ne_zero</code>, <code>grundy_sum</code>, <code>grundy_iso</code>). Every theorem's axiom footprint is exactly <code>[propext, Classical.choice, Quot.sound]</code>.</p>
-<p>Deferred to the Rust differential tests (Section&nbsp;7): the bit-layout and <code>pext</code> decode of the position code; the high-square search-combination logic; and the board→graph construction. The Lean↔Rust correspondence is hand-audited — auto-translation is not viable through the bit-extraction intrinsics and unchecked indexing the production evaluator uses. Adequacy of the abstract recurrence as "the game value" was cross-checked against the literature (e.g. the path on three vertices has Grundy value 2, Dawson's chess / OEIS A002187).</p>
+<p>Deferred to the Rust differential tests: the bit-layout and <code>pext</code> decode of the position code; the high-square search-combination logic; and the board→graph construction. The Lean↔Rust correspondence is hand-audited — auto-translation is not viable through the bit-extraction intrinsics and unchecked indexing the production evaluator uses. Adequacy of the abstract recurrence as "the game value" was cross-checked against the literature (e.g. the path on three vertices has Grundy value 2, Dawson's chess / OEIS A002187).</p>
 </div>
 </details>
 </section>
@@ -279,24 +279,70 @@
 <div class="part-head" id="part2">
   <div class="part-kicker">Part II</div>
   <h2>The engineering: 56 minutes → 23 seconds</h2>
-  <p>How the search was made fast enough that a hundred-billion-position board became tractable on one workstation — the levers that worked, the ones that did not, and how each was decided.</p>
+  <p>How the search was made fast enough that an 18×18 board — hundreds of billions of positions — became tractable on one laptop-class machine: the levers that worked, the ones that did not, and how each was decided.</p>
 </div>
 
 <section id="core">
 <h2><span class="num">5</span>The core search</h2>
-<p class="stub">[Part II is being written in the next round: the boolean search and alpha–beta, the flat lockless transposition table, and position canonicalization by board symmetry and graph isomorphism.]</p>
+<p>Strip away the board and the game is one boolean rule: a position is a win for the player to move exactly when some legal move hands the opponent a loss. The solver evaluates that rule depth-first, with <span class="term" tabindex="0" data-tip="Alpha–beta pruning skips branches that cannot change the already-known outcome.">alpha–beta pruning</span> — at a position where the mover is trying to win, the first move found that loses for the opponent ends the work on that position, because one winning move is all it takes. That cutoff is why move <em>order</em> matters so much later (Section&nbsp;7): find the refuting move first and you skip the rest.</p>
+
+<p>The first thing that makes the search tractable is that it is not really a tree. Different orders of the same moves reach the same set of available squares, and from there the game is identical — a <span class="term" tabindex="0" data-tip="A transposition is the same future position reached by a different order of moves.">transposition</span>. Remembering positions already solved turns an exponentially branching tree into a graph over <em>distinct</em> positions, and across billions of them that is the line between feasible and not. The memory is a <strong>transposition table</strong>: a large shared cache from a position to its win/loss value.</p>
+
+<p>Two further ideas shrink the set of distinct positions before any of them is stored. First, board <strong>symmetry</strong>: the eight rotations and reflections of a position are the same game, so each is folded to one canonical orientation. Second, and stronger, <strong>graph isomorphism</strong>: two positions whose available squares form the same conflict graph are the same game even when they sit differently on the board, and merging them is a further large reduction. The solver carries the eight orientations of each position incrementally and keys the table on a canonical form.</p>
+
+<details class="formal">
+<summary>The formal version — the lockless table</summary>
+<div class="body">
+<p>The table is one flat array of 8-byte atomic slots, read and written with relaxed atomics — no locks, no sharding. Each slot is a single 64-bit word: an in-use bit, the win/loss value, and a 55-bit fingerprint of the canonical key. Storing a fingerprint rather than the full key means a colliding probe returns a wrong value only with probability about 2<sup>−55</sup> (checked against Jenrich's known verdicts), and a one-word slot cannot tear — which is what makes the lockless design sound. The slot is found by a multiply-shift of the key's hash, so the table can be any size, fixed once at startup, and the next position's slot is prefetched while the current one is read.</p>
+</div>
+</details>
 </section>
 <section id="getk">
 <h2><span class="num">6</span>The dense leaf evaluator and the W<sub>K</sub> hierarchy</h2>
-<p class="stub">[Next round: how positions with few live squares are resolved directly from complete precomputed Node-Kayles tables via a bit-extraction child sweep, and how raising that ceiling paid off.]</p>
+<p>Most positions in the search are small — few squares still available — and these are both the most numerous and the least worth remembering, since their subtrees are shallow and rarely revisited. The solver decides them with no search at all. Once a position has at most <code>K</code> available squares (the <em>dense ceiling</em>), it is resolved directly from precomputed Node-Kayles values by a step we call the leaf evaluator.</p>
+
+<p>The base of that step is a complete table of every Node-Kayles position on up to eight vertices. Eight vertices allow 28 possible edges, so the table has 2<sup>28</sup> entries — 32&nbsp;megabytes, built once at startup, the same for every board size, and never wrong because it is exhaustive. For a position with nine to seventeen available squares the evaluator stores nothing; it computes the answer on the fly. It builds a compact bit-encoded description of the position's conflict graph, then for each possible move extracts the resulting smaller position with a single bit-gather instruction and looks <em>that</em> up — recursing down a few levels until everything bottoms out in the complete eight-vertex base. The position is a win if any move leads to a loss.</p>
+
+<p>This computes the values of layers that could never be stored — a complete nine-vertex table would be 8&nbsp;gigabytes, a ten-vertex one measured in terabytes — at no storage cost. Raising the ceiling <code>K</code> trades a little more arithmetic per position for a large cut in how many positions the main search ever expands, and the cut barely shrinks as the ceiling climbs:</p>
+
+<table>
+<thead><tr><th>dense ceiling</th><th class="num">positions searched (14×14)</th><th class="num">cut vs previous</th></tr></thead>
+<tbody>
+<tr><td>8 squares</td><td class="num">27,539,495</td><td class="num">—</td></tr>
+<tr><td>9 squares</td><td class="num">22,527,149</td><td class="num">−18%</td></tr>
+<tr><td>10 squares</td><td class="num">18,825,047</td><td class="num">−16%</td></tr>
+<tr><td>11 squares</td><td class="num">15,724,135</td><td class="num">−16%</td></tr>
+<tr><td>12 squares</td><td class="num">12,896,443</td><td class="num">−18%</td></tr>
+<tr><td>16 squares</td><td class="num">≈4.0 million</td><td class="num">−50% vs 12</td></tr>
+</tbody>
+</table>
+
+<p>The ceiling could be pushed from eight squares up to seventeen because of a separate, smaller change: building the bit-encoded graph description with a hardware bit-extraction instruction, one per row, instead of testing edges one bit at a time. That made the deep evaluator cheap enough that raising the ceiling paid all the way up — the single change that took the 16×16 search from over fifty seconds to about thirty-four. The ceiling settled at seventeen squares, the point where the search time stops falling: going higher still removes positions, but spends proportionally more time computing each one.</p>
 </section>
 <section id="stack">
 <h2><span class="num">7</span>The optimization stack, and what didn't work</h2>
-<p class="stub">[Next round: dynamic move ordering, enhanced transposition cutoff, branchless counting sort, the cascade-free band skip, memory and huge pages — and the instructive negatives (sorted-frontier pipelines, DFS parallelism on a transposition-saturated tail, component decomposition).]</p>
+<p>On top of the core search and the leaf evaluator sat a long series of smaller changes. Two principles ran through them: most of the leverage was in doing <em>less work</em> — searching fewer positions — rather than doing each unit faster, and nothing was kept unless an interleaved measurement showed it earned its place. The survivors:</p>
+<ul>
+<li><strong>Dynamic move ordering.</strong> At each position, search the most decisive moves first, by re-sorting the moves so the most constraining one — the one leaving the opponent fewest replies, including an immediate loss — comes first. Because the win-cutoff fires on the first refuting move, better order means fewer positions: this alone cut the 16×16 search about a third, in both positions searched and wall time.</li>
+<li><strong>Cutoff before recursing.</strong> Before searching a move's result, peek at the table to see if it is already known to lose, and cut immediately if so — a further ~18% fewer positions.</li>
+<li><strong>A branchless sort.</strong> The move-ordering sort had become the program's single largest source of branch mispredictions. Replacing it with a comparison-free counting sort — the same order, no data-dependent branch — cut wall time about an eighth while searching the identical positions.</li>
+<li><strong>Skipping bookkeeping for one endgame band.</strong> For positions with exactly eighteen available squares the solver builds no key, makes no probe, and writes no entry; it simply recurses. This is safe for precisely this band because every one of its children is a leaf-evaluator position, so re-reaching it costs one bounded evaluation, never a lost subtree. It is the only band where the shortcut can never cascade.</li>
+</ul>
+<p>Memory was managed as carefully as compute: the table is backed by 2-megabyte huge pages — forced explicitly, because the default mechanism only covers part of a large, randomly-touched table — and each position is a single 8-byte slot. At 18×18 the binding constraint was not speed but capacity: fitting enough of the working set in 26&nbsp;gigabytes that the search did not collapse into endless recomputation, which the band-skip and a 17-gigabyte table together achieved.</p>
+
+<h3>What didn't work — and why that mattered</h3>
+<p>As many ideas were built, measured, and discarded as were kept, and the failures shaped the design more than most of the wins did.</p>
+<ul>
+<li><strong>Reordering the search for memory locality</strong> nearly doubled the positions searched at 16×16. Streaming positions in a cache-friendly order forfeited the move ordering the win-cutoff depends on — proving, by its 94% penalty, that move order was worth roughly a factor of two. That negative is what motivated the dynamic-ordering win above.</li>
+<li><strong>Parallelising the deep tail across cores</strong> failed in five different forms. The tail is saturated with transpositions, so the work that would fill idle cores is the same positions other cores are already solving; every scheme added recomputation. The lever there was not parallelism.</li>
+<li><strong>Splitting a position into independent components and combining their values</strong> — the textbook Sprague–Grundy move — cut positions sharply but ran more than six times slower: component values cannot use the win-cutoff (every move must be examined), and the components that carry information are too large and too varied to tabulate. A position saved is worth only the cost of the position that replaces it.</li>
+</ul>
 </section>
 <section id="method">
 <h2><span class="num">8</span>How speed was measured</h2>
-<p class="stub">[Next round: interleaved A/B benchmarking, cycles-per-node as the noise-free metric, machine hygiene, and the rule against declaring a "floor."]</p>
+<p>A latency-bound parallel search is a hostile thing to benchmark, and the discipline for measuring it mattered as much as the changes being measured.</p>
+<p>Single timings lie. The machine throttles within a second of starting a solve, and the parallel cutoffs make the number of positions searched vary from run to run, so timing all of version A and then all of version B manufactures differences that are really thermal drift. Every comparison was therefore an <strong>interleaved A/B</strong> — the two builds alternated round by round. For changes that do not alter which positions are searched, the metric was <strong>cycles per position</strong>, which is immune to the noisy position count; for changes that do alter it, total cycles and wall time. And a smaller board could not be trusted to predict a larger one: the locality experiment that looked mildly negative at 14×14 was catastrophic at 16×16.</p>
+<p>The machine itself had to be controlled — compressed-RAM swap disabled, filesystem cache capped, page cache dropped and memory compacted — because a degraded machine once produced a confident "floor" that clean hardware promptly halved. That episode hardened a standing rule: never read a current bottleneck as a fundamental limit. Almost every such floor in this project turned out to be a measurement artifact or an untried idea, which is why the numbers here are presented as milestones, not bounds.</p>
 </section>
 
 
@@ -309,23 +355,28 @@
 
 <section id="setup">
 <h2><span class="num">9</span>The setup</h2>
-<p class="stub">[Part III is being written after Parts I–II: the origin (a university-level math problem given to the programmer's sixth-grade son by a university professor; the father nerd-sniped), and why this was an unusually clean test of agentic engineering — no users, a known correct answer, every speed claim measurable. To be written much clearer than the original telling.]</p>
+<p>The project began by accident. The programmer's sixth-grade son — who studies university-level mathematics with a university professor — had been pointed at the Non-Attacking Queens game and told to go learn about minimax and alpha–beta pruning. Helping him, his father got nerd-sniped, and the homework turned into a performance project that ran for days.</p>
+<p>What made it an unusually clean experiment in working with AI coding agents was the absence of everything that normally muddies one. There were no users, no deadline, and no product. The correct answer was already known for every board below the open one, so a regression announced itself at once as a wrong verdict. And every claim the work might make was a number a machine could measure — positions searched, cycles per position, wall-clock seconds — not a matter of taste. A setting where correctness is checkable and progress is measurable is exactly where an agent's output can be trusted or caught, which is what makes this hobby project double as a case study.</p>
 </section>
 <section id="overnight">
 <h2><span class="num">10</span>The overnight brief</h2>
-<p class="stub">[Next: the "be relentless" instruction and what the agent did with it — reopening a discarded negative result that became the single biggest speedup.]</p>
+<p>One night, with the 16×16 search sitting around fifty seconds, the programmer left the coding agent a deliberately open instruction: keep going, don't wait for me, be creative, don't get stuck, don't give up — be relentless. The point was to find out how far an agent would carry real optimization work unsupervised.</p>
+<p>It carried it a long way. The agent spent the night reopening a result the project had already written off. A processor bit-extraction instruction had been tried earlier — for a different purpose, at a scale too small to help — and filed as a dead end. The agent read that negative literally, noticed it had only ever been measured at tiny sizes, and retried it where it now mattered: building the leaf evaluator's graph description. It was the single biggest speedup of the project, and it cascaded, making it cheap to push the exact-evaluation ceiling far higher than before. By morning the search had dropped by a third.</p>
 </section>
 <section id="agents">
 <h2><span class="num">11</span>What agents did well, and badly</h2>
-<p class="stub">[Next: agents shortened the build-and-measure loop and drove much of the work autonomously, but repeatedly treated prototypes and current bottlenecks as fundamental floors; human first-principles estimates decided which negatives to retry and when a limit had earned its evidence.]</p>
+<p>The pattern that emerged was consistent. Agents were excellent at the build–measure loop: implementing an idea, wiring up a clean A/B, reading the counters, and moving to the next idea — faster than a person, and through the night. Much of the optimization stack in Part&nbsp;II was found this way.</p>
+<p>Where they failed was judgment about limits. Again and again an agent would measure a current bottleneck, or a first rough prototype, and conclude it was a fundamental floor — that the search could not get faster, that an idea was dead, that the machine was maxed out. Several of those floors were wrong, and the wins that followed came from refusing them: the bit-extraction instruction had been declared a dead end; a "36 million positions per second wall" was an artifact of a clogged machine; a memo-less form of the leaf evaluator lost badly on its own and then won when folded into the hierarchy. The agents did not reliably push back on their own measurements.</p>
+<p>That push-back — which negative result deserves another implementation, and when a measured limit has finally earned belief — came from human first-principles estimates. The division of labour was specific: the agent generates and measures; the human decides what a measurement means and which dead ends are only sleeping. Neither half would have reached the result alone.</p>
 </section>
 <section id="collab">
 <h2><span class="num">12</span>The collaboration model</h2>
-<p class="stub">[Next: the handoff-driven workflow, the keep/kill measurement discipline, and verification as a first-class deliverable — with the Lean proof and its rounds of adversarial subagent review as a worked example.]</p>
+<p>Two practices made the collaboration work across many sessions. The first was a written trail: each work stream kept a running handoff document — what was tried, what it measured, what was decided, what to do next — so a fresh agent could pick up cold without relearning the project or repeating a banked negative. The second was a strict keep/kill discipline: no change counted until its interleaved A/B passed and its validation gates held — agreement with a slow reference solver on small boards, an exact distinct-position count, the verdict against prior work. Speed was never allowed to cost correctness.</p>
+<p>Verification was treated as a deliverable in its own right, most visibly in the machine-checked proof of the leaf evaluator (Part&nbsp;I, Section&nbsp;4). That proof was itself produced and then hardened agentically: once the theorems were proved, several independent reviewer agents were turned loose to attack them — checking that the statements were faithful to the code, that nothing was quietly assumed away, that the build hid no gaps. They broke no proofs; what they found were places where the prose <em>around</em> the proof claimed more than the proof covered, which were then corrected. An agent that can both build a proof and adversarially review it is a different kind of collaborator from one that only writes code — and that, as much as the verdict or the speed, is what this project turned out to be a test of.</p>
 </section>
 
 <div class="footer">
-<p>Draft v2 — restructured into three parts (result · engineering · method), single register with a standalone plain-English summary, no inline callout boxes. Parts I and the summary are complete; Parts II and III are stubbed pending the next rounds. The companion specialist report is <code>queens-n18-paper.md</code>.</p>
+<p>Draft v2 — restructured into three parts (result · engineering · method), single register with a standalone plain-English summary, no inline callout boxes; the summary and all three parts are written. Still to port from the previous draft: the engineer-only appendices (the detailed dated timeline and the <code>iso-dense</code> reference), which is where precise dates and times live. The companion specialist report is <code>queens-n18-paper.md</code>.</p>
 </div>
 
 </div>
