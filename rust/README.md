@@ -197,8 +197,9 @@ loses (normal play). It is an *impartial* combinatorial game — a queen is
 colourless, so the legal moves depend only on the position, captured entirely by
 the **blocked mask** (occupied ∪ attacked). Placing a queen always adds the same
 attack set, so the whole game is a negamax over that mask, with transpositions
-merged by memoising on it. The board is a fixed multi-word bitset, so sizes up to
-16×16 fit (tractability runs out first).
+merged by memoising on it. The board is a fixed multi-word bitset (six `u64`
+words), so sizes up to 18×18 fit — and **18×18 is now solved** (below): a new
+result, the first-player win on the previously-open even board.
 
 ```console
 $ cargo run --release --bin queens -- solve 8            # who wins the empty board
@@ -209,14 +210,21 @@ $ cargo run --release --bin queens -- count 14 --parallel  # distinct positions 
 ```
 
 Squares are named file+rank (`d1`). It reproduces the paper's headline — on 8×8
-the **first player wins** — and extends past it:
+the **first player wins** — and **extends the known sequence to 18×18**:
 
-| board   | 1–9   | 10        | 11    | 12        | 13    | 14        | 15    |
-|---------|-------|-----------|-------|-----------|-------|-----------|-------|
-| winner  | first | **second**| first | **second**| first | **second**| first |
+| board  | 1–9   | 10         | 11    | 12         | 13    | 14         | 15    | 16         | 17    | 18                  |
+|--------|-------|------------|-------|------------|-------|------------|-------|------------|-------|---------------------|
+| winner | first | **second** | first | **second** | first | **second** | first | **second** | first | **first** ⭐ *new*  |
 
-**Every odd board is a first-player win**; small even boards (≤ 8) are too, then
-10/12/14 flip to the second player.
+**Every odd board is a first-player win** (a theorem, below); small even boards (≤ 8) are
+too; 10/12/14/16 are second-player wins (16×16 from Jenrich, 2014); and **18×18 is a
+first-player win — a new result**, the previously-open even board, with winning opening
+**I9**. The 16×16 and 18×18 verdicts come from the `iso-dense` solver (below); the 18×18
+result is established by two independently configured exhaustive searches that agree on the
+verdict, the move, and the full 15-move principal variation, and the solver's dense leaf
+evaluator is **machine-checked in Lean 4**. Write-ups:
+[`notes/queens-report.html`](../notes/queens-report.html) (narrative, three parts) and
+[`notes/queens-n18-paper.md`](../notes/queens-n18-paper.md) (specialist).
 
 ### Odd boards are a theorem, not a search
 
@@ -296,25 +304,34 @@ more than it saved; now `symmetry` is **faster** in wall-clock too (0.055 s vs
   must-refute-everything case of a second-player win). This recovers the
   sequential node count on first-player wins *and* parallelises the hard boards.
 
-### The n=16 frontier is a memory problem
+### Crossing the frontier: solving n=16 and n=18
 
-n=16 is a known second-player win (Jenrich, 2014; 71B calls, no table) but is out
-of reach of a single-box transposition table here: the search must retain its whole
-*distinct* working set, and that set is large. `queens count N` measures it directly
-— a HyperLogLog (lock-free, ~0.4% error) folds in every canonical key the search
-visits, with an exact hash set to validate it on the small boards. The distinct
-count climbs **94k → 1.07M → 49.3M** at n=10/12/14, *accelerating* (11× then 46× per
-two-step), which extrapolates to **billions** at n=16 — far past what even a
-compact 8 B/slot fingerprint table can hold in tens of GB. (The familiar "53M at
-n=14" is the *node*
-count; eviction re-expansion inflates it ~8 % above the 49.3M distinct truth.) So
-n=16 needs a fundamentally denser encoding of the solved set — the open frontier.
+n=16 was long out of reach of a single-box transposition table — the search must retain its
+whole *distinct* working set, which is large (`queens count N` measures it via a lock-free
+HyperLogLog: **94k → 1.07M → 49.3M** distinct at n=10/12/14, *accelerating*, ~billions
+extrapolated at n=16). The lever that crossed it was not a denser table but doing **less
+search**: a **dense leaf evaluator** that decides small positions directly, with no recursion.
 
-The win/loss value is exact, so the search is α-β with a hard cutoff (the first
-move handing the opponent a loss proves a win); the board's 8-fold dihedral
-symmetry canonicalises every position, merging ~8× of the states. 12×12 drops
-from ~6.3 s to ~0.6 s; 14×14 (53M nodes) lands in ~33 s on 24 threads (with the
-available-canon key above; ~78 s before it).
+The `iso-dense` solver resolves every position with at most 17 available squares (the *dense
+ceiling*) straight from precomputed Node-Kayles values — a complete 32 MiB table for ≤ 8
+vertices, and for 9–17 vertices an on-the-fly bit-extraction (`pext`) child sweep that computes
+the value without ever storing the astronomically large tables it stands in for. About a fifth
+of all positions are decided this way, with no probe and no subtree. Layered on top — dynamic
+move ordering (try the most forcing move first, so the win-cutoff fires early), an enhanced
+transposition cutoff, a branchless counting sort, and a cascade-free bookkeeping skip for the
+18-square band — this took the **16×16 search to ~23 s** on one machine (from the first solver's
+~56 min), matching Jenrich's second-player verdict.
+
+**18×18** then became a *capacity* problem rather than a speed one: its search visits hundreds of
+billions of positions, too many to remember on a 26 GB box. Skipping the transposition
+bookkeeping for the highest, never-reused endgame bands, plus a 17 GB table sized to the box, let
+the giant root converge. Two independently configured runs — a 17-square and a 20-square ceiling
+— then agreed on the verdict (**first player wins**), the opening **I9**, and the entire 15-move
+principal variation, while exploring 258 B vs 114 B positions. That agreement — on a leaf
+evaluator additionally machine-checked in Lean 4 — is the standard of proof: no single run of
+~10¹¹ positions can be certified, so two independent ones that agree, plus differential tests and
+an independent oracle, carry it. (The win/loss value is exact throughout, so the search stays α-β
+with a hard cutoff; the 8-fold dihedral symmetry merges ~8× of states before the table sees them.)
 
 ### How it compares to the published baselines
 
@@ -325,19 +342,19 @@ re-establishes it — but **no transposition table**. Its verdicts match ours on
 board; the per-node dihedral canon **plus** the TT make `parallel` far more node-
 efficient, and the advantage *grows* with `n`:
 
-| n  | Jenrich "sum of calls" | `parallel` nodes | distinct positions | node-efficiency |
-|----|------------------------|------------------|--------------------|-----------------|
-|  8 |                  2,266 |              629 |                625 |            3.6× |
-| 10 |                653,007 |           94,870 |             94,205 |            6.9× |
-| 12 |             11,334,613 |        1,069,880 |          1,060,823 |           10.6× |
-| 14 |          1,161,385,667 |       53,300,665 |         49,141,396 |           21.8× |
-| 16 |         71,461,975,237 |        *unsolved* |  ~9.2B (HLL est.) |             —   |
+| n  | Jenrich "sum of calls"       | our nodes                                  | distinct positions | node-efficiency |
+|----|------------------------------|--------------------------------------------|--------------------|-----------------|
+|  8 |                        2,266 | 629  (`parallel`)                          | 625                | 3.6×            |
+| 10 |                      653,007 | 94,870  (`parallel`)                       | 94,205             | 6.9×            |
+| 12 |                   11,334,613 | 1,069,880  (`parallel`)                    | 1,060,823          | 10.6×           |
+| 14 |                1,161,385,667 | 53,300,665  (`parallel`)                   | 49,141,396         | 21.8×           |
+| 16 |               71,461,975,237 | 307,608,950  (`iso-dense`)                 | ~7.5 B             | **~232×**       |
+| 18 | — (Jenrich stopped at 16)    | 258 B / 114 B  (`iso-dense`, two configs)  | —                  | new result      |
 
-Jenrich's n=14 took ~19 min on his hardware vs ~11 s here on 24 threads, but the
-hardware-independent figure is the **~22× fewer search calls**. His n=16 leaned on a
-hand-built opening book for player 2's first two replies and still ran ~23 h — so he
-*reached* a board our table can't yet hold (above), while we hold the efficiency crown
-on n ≤ 14.
+Jenrich's n=14 took ~19 min on his hardware vs ~11 s here, but the hardware-independent figure is
+the **~22× fewer search calls**. He reached n=16 with a hand-built opening book for player 2's
+first two replies and ~23 h of compute; the `iso-dense` solver now settles n=16 in ~23 s with
+**~232× fewer nodes**, and goes a board further — to **n=18**, which Jenrich never reached.
 
 Other solvers of this exact game: **Max Fan's general-graph Node-Kayles calculator**
 (Rust) computed the full nimbers OEIS A344227 lists through n=13 — deeper than our
@@ -348,10 +365,12 @@ those enumerate placements (a #P task) rather than solve a two-player game (PSPA
 complete here), so the node counts are not comparable — only the bitmask move generation
 is shared.
 
-### Future directions (a performance literature search)
+### How the frontier was crossed — and what's next
 
-The search is **TT/DRAM-latency-bound** (above), so the cheapest wins target per-node
-memory traffic rather than the algorithm:
+The search is **TT/DRAM-latency-bound**, so the wins targeted per-node memory traffic and node
+count rather than raw arithmetic. Most of the levers below landed on the way to the ~23 s n=16 /
+solved-n=18 result — the dense leaf evaluator above was the decisive one. The list, roughly in
+the order they paid off:
 
 - **Lockless, unsharded TT + prefetch + huge pages — done (Session 5).** Each slot is a
   single `u64`, so the whole `Vec<Mutex<Box<[Slot]>>>` became one flat
@@ -371,10 +390,12 @@ memory traffic rather than the algorithm:
   in the endgame; a connected-components check plus a nim-sum over a cached small-component
   nimber table prunes — and compresses — exactly where `mex` is cheap.
 
-For the **n=16 memory wall**, the structural lever is that **transpositions are strictly
-intra-ply**: every move places one queen, so two positions that transpose share a queen
-count. That partitions the table by ply and licenses *windowing* it — a ply-layered,
-**external-memory delayed-duplicate-detection** solve (Korf; Zhou–Hansen) streams all but
-a band of plies to disk (the billions of distinct positions fit there at a few bytes
-each), and each fully-solved ply freezes into a **BuRR / ribbon** value-only archive
-(~1.1 bits/position) so resident memory collapses as the search matures.
+The **n=16 wall has since fallen** to the dense leaf evaluator above, and **n=18** with it — so
+the next capacity frontier is **n=20**, where even the dense path overflows a single box. The
+structural lever there is that **transpositions are strictly intra-ply** (every move places one
+queen, so transposing positions share a queen count), which licenses *windowing* the table by
+ply: a ply-layered **external-memory delayed-duplicate-detection** solve (Korf; Zhou–Hansen) that
+streams all but a band of plies to disk, with each solved ply frozen into a **BuRR / ribbon**
+value-only archive (~1.1 bits/position) so resident memory collapses as the search matures. The
+full optimisation journey — and the instructive failures — is documented in
+[`notes/queens-report.html`](../notes/queens-report.html).
