@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Non-Attacking Queens Game — solving 18×18, building the solver, and doing it with agents</title>
+<script>document.documentElement.className = 'js';</script>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root {
+    --bg: #0f1419;
+    --bg-elev: #1a212b;
+    --bg-card: #18202a;
+    --fg: #e6edf3;
+    --fg-dim: #9fb0c0;
+    --fg-faint: #6b7d8f;
+    --accent: #4cc2ff;
+    --accent2: #ffb454;
+    --accent3: #7ee787;
+    --accent4: #ff7b9c;
+    --border: #2a3542;
+    --code-bg: #0b0f14;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.65;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 22px 120px; }
+
+  /* ---- hero ---- */
+  header.hero { padding: 64px 0 30px; }
+  header.hero h1 { font-size: 40px; line-height: 1.12; margin: 0 0 14px; letter-spacing: -0.5px; }
+  header.hero h1 .sub { display:block; font-size: 20px; color: var(--accent); font-weight: 500; margin-top: 8px; letter-spacing: 0;}
+  header.hero p.lede { font-size: 19px; color: var(--fg-dim); max-width: 740px; }
+
+  /* ---- part dividers ---- */
+  .part-head {
+    margin: 70px 0 0; padding: 26px 0 10px; border-top: 2px solid var(--accent);
+  }
+  .part-head .part-kicker { font-family: var(--mono); font-size: 13px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent); }
+  .part-head h2 { border: none; margin: 6px 0 4px; padding: 0; font-size: 30px; }
+  .part-head p { color: var(--fg-dim); margin: 6px 0 0; font-size: 16.5px; }
+
+  h2 { font-size: 26px; margin: 48px 0 6px; letter-spacing: -0.3px; padding-top: 10px; border-top: 1px solid var(--border); }
+  h2:first-of-type { border-top: none; }
+  h2 .num { color: var(--fg-faint); font-family: var(--mono); font-size: 18px; margin-right: 10px; font-weight: 400; }
+  h3 { font-size: 20px; margin: 30px 0 4px; color: var(--fg); }
+  h4 { font-size: 16px; margin: 22px 0 4px; color: var(--accent2); text-transform: uppercase; letter-spacing: .6px; }
+  p { margin: 12px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  strong { color: #fff; }
+  em { color: var(--fg); }
+
+  code { font-family: var(--mono); font-size: 0.86em; background: var(--code-bg);
+    padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border); color: #d3e3f0; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.5; }
+  pre code { background: none; border: none; padding: 0; }
+
+  /* inline glossary hint (kept — not a callout box) */
+  .term { position: relative; color: var(--accent); border-bottom: 1px dotted var(--accent); cursor: help; font-style: normal; }
+  .term::after {
+    content: attr(data-tip); display: none; position: absolute; z-index: 100;
+    left: 0; top: calc(100% + 7px); width: min(310px, 75vw); padding: 9px 11px;
+    border: 1px solid var(--border); border-radius: 8px; background: #202a36;
+    color: var(--fg); font: 13px/1.4 var(--sans); box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  .term:hover::after, .term:focus::after { display: block; }
+
+  /* collapsible "formal version" — the only inline box kept, for math only */
+  details.formal {
+    margin: 16px 0; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-elev); overflow: hidden;
+  }
+  details.formal > summary {
+    cursor: pointer; padding: 12px 16px; font-weight: 600; font-size: 14.5px;
+    color: var(--accent); list-style: none; user-select: none;
+  }
+  details.formal > summary::before { content: "▸ "; color: var(--fg-faint); }
+  details.formal[open] > summary::before { content: "▾ "; }
+  details.formal > summary:hover { background: rgba(76,194,255,0.06); }
+  details.formal .body { padding: 4px 18px 16px; border-top: 1px solid var(--border); font-size: 15px; color: var(--fg-dim); }
+  details.formal .body p:first-child { margin-top: 12px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14.5px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--accent); font-weight: 600; border-bottom: 2px solid var(--border); }
+  td.num, th.num { text-align: right; font-family: var(--mono); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .win { color: var(--accent3); }
+  .loss { color: var(--accent4); }
+
+  .summary-box {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 8px 24px 18px; margin: 28px 0;
+  }
+  .stub { color: var(--fg-faint); font-style: italic; }
+
+  figure { margin: 28px 0; }
+  figcaption { font-size: 13.5px; color: var(--fg-dim); text-align: center; margin-top: 10px; padding: 0 10px; }
+
+  .toc { columns: 2; column-gap: 30px; font-size: 14.5px; margin: 24px 0; }
+  .toc a { display: block; padding: 4px 0; color: var(--fg-dim); }
+  .toc a:hover { color: var(--accent); }
+  .toc .toc-part { color: var(--accent); font-weight: 600; padding-top: 10px; break-after: avoid; }
+  @media (max-width: 640px) {
+    .toc { columns: 1; }
+    header.hero h1 { font-size: 30px; }
+    body { font-size: 16px; }
+  }
+  .footer { margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--fg-faint); font-size: 13.5px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <h1>The Non-Attacking Queens Game
+    <span class="sub">who wins 18×18 — the result, the engineering, and the AI agents behind it</span>
+  </h1>
+  <p class="lede">In the Non-Attacking Queens game, two players take turns placing queens on a chessboard so that no queen attacks another; whoever has no legal move loses. One question hides an enormous search: with perfect play, who wins on an n×n board? This report gives a new answer — <strong class="win">on 18×18 the first player wins</strong> — describes the solver that proved it, and looks at how the work was actually done, much of it by AI coding agents under human direction.</p>
+  <p class="lede" style="font-size:16px">It tells three stories, in three parts you can read independently:</p>
+  <ul style="font-size:16.5px; color:var(--fg-dim); max-width:740px">
+    <li><strong>Part&nbsp;I — The result.</strong> Who wins 18×18, and the standard of proof behind a verdict that no single computation can certify.</li>
+    <li><strong>Part&nbsp;II — The engineering.</strong> How the 16×16 search fell from ~56 minutes to ~23 seconds on one workstation, and how that made 18×18 reachable.</li>
+    <li><strong>Part&nbsp;III — The method.</strong> How this was done with coding agents: what they accelerated, where they went wrong, and what human judgment had to supply.</li>
+  </ul>
+  <p class="lede" style="font-size:15px;color:var(--fg-faint)">This AI-written account is based on the project's code, commits, benchmark logs, and working notes. The measurements and engineering decisions are the programmer's.</p>
+</header>
+
+<!-- ===================================================================== -->
+<nav class="toc">
+  <a class="toc-part" href="#summary">Plain-English summary</a>
+  <a class="toc-part" href="#part1">Part I · The result</a>
+  <a href="#game">1 · The game and the question</a>
+  <a href="#known">2 · What was already known</a>
+  <a href="#result">3 · The 18×18 result and its proof</a>
+  <a href="#lean">4 · The leaf evaluator, machine-checked</a>
+  <a class="toc-part" href="#part2">Part II · The engineering</a>
+  <a href="#core">5 · The core search</a>
+  <a href="#getk">6 · The dense leaf evaluator</a>
+  <a href="#stack">7 · The optimization stack</a>
+  <a href="#method">8 · How speed was measured</a>
+  <a class="toc-part" href="#part3">Part III · The agentic method</a>
+  <a href="#setup">9 · The setup</a>
+  <a href="#overnight">10 · The overnight brief</a>
+  <a href="#agents">11 · What agents did well and badly</a>
+  <a href="#collab">12 · The collaboration model</a>
+</nav>
+
+<!-- ===================================================================== -->
+<section id="summary">
+<h2>Plain-English summary</h2>
+<div class="summary-box">
+<p><strong>The game.</strong> Place queens on an n×n board one at a time, never letting two attack each other. When you cannot move, you lose. Each queen erases its row, column, and both diagonals from the squares still available, so the game is a controlled collapse: the player who makes the last legal placement wins. The only question is who that is, under perfect play.</p>
+
+<p><strong>The result.</strong> For odd boards the first player wins by a simple mirror trick, so the hard cases are even boards. The winners were known up through 16×16 (the second player wins there, from a 2014 computation by Thomas Jenrich). The next open board was 18×18. This project settled it: <strong class="win">on 18×18, the first player wins</strong>, with a winning first move we label <strong>I9</strong>. Because the proof visits roughly a hundred billion positions, no human can check it and no single program run can certify it. Instead, two differently-built versions of the solver were run independently; they agreed on the winner, on the winning move, and on a complete 15-move winning line, despite exploring very different numbers of positions. That agreement, together with smaller pieces checked against an independent reference and a part of the program proved correct by machine, is the evidence.</p>
+
+<p><strong>The engineering.</strong> The first working solver proved the 16×16 answer in about 56 minutes. Steady optimization brought the same answer down to about 23 seconds — a roughly 140-fold speedup — on the same laptop-class machine. Three ideas did most of the work: <em>remembering</em> positions reached by different move orders so each is solved once; <em>recognizing</em> when two positions are the same shape and merging them; and <em>shortcutting</em> the endgame by computing small positions directly from precomputed tables instead of searching them. Layered on top were dozens of smaller changes, each kept only if a careful measurement showed it helped — and many discarded when it did not. The same compactness and speed are what let 18×18, with its hundred-billion-position search, fit and finish on a single 26&nbsp;GB machine.</p>
+
+<p><strong>The trust.</strong> A wrong answer here is silent — the program would simply print the opposite winner. So correctness was built in layers: the fast solver must agree with a slow, obviously-correct one on small boards; it must reproduce an exact count of distinct positions; its endgame tables are checked against a plain reference implementation; and the small-graph evaluator at its heart — the part where the one real bug of this kind once hid — was machine-checked in the Lean&nbsp;4 proof assistant, so its core logic is proved, not just tested.</p>
+
+<p><strong>The method.</strong> The work was a hobby project with no users and a known correct answer for the cases below 18 — an unusually clean setting to test how far AI coding agents can drive real performance engineering. They could build and measure ideas far faster than a person, and under an overnight "be relentless" instruction they reopened a discarded idea that became the single biggest speedup. But they repeatedly mistook a current bottleneck, or a prototype's poor showing, for a fundamental limit. Human first-principles estimates decided which dead ends deserved another try and when a measured limit had truly been reached. Part&nbsp;III is about that division of labor.</p>
+</div>
+</section>
+
+
+<!-- ============================ PART I ================================== -->
+<div class="part-head" id="part1">
+  <div class="part-kicker">Part I</div>
+  <h2>The result: who wins 18×18</h2>
+  <p>The game, what was known, the new verdict, and the standard of proof behind it — including the part of the solver that is proved, not merely tested.</p>
+</div>
+
+<section id="game">
+<h2><span class="num">1</span>The game and the question</h2>
+<p>Two players alternately place queens on an <code>n×n</code> board so that no queen attacks any other — no shared row, column, or diagonal. Under the <span class="term" tabindex="0" data-tip="Normal play: the player who makes the last legal move wins; equivalently, the player who cannot move loses.">normal-play convention</span>, the player who cannot move loses. The game is <em>impartial</em> — from any position both players have exactly the same moves available — so its outcome is determined entirely by the position, not by whose turn it is in any other sense.</p>
+
+<p>The state that matters is the set of <strong>available squares</strong>: those still empty, safe, and legal. A move shrinks that set, deleting the chosen square together with every square it attacks. This is the only thing history contributes — two different sequences of moves that leave the same available squares are, from then on, the same game.</p>
+
+<p>That observation turns the game into a problem on a graph. Make each square a vertex, and join two squares by an edge when a queen on one attacks the other; this is the <strong>queen graph</strong> <code>Q<sub>n</sub></code>. A position is a set of live vertices; a move picks a live vertex <code>v</code> and deletes <code>v</code> and all its neighbours — its <em>closed neighbourhood</em>. This is exactly the impartial game <span class="term" tabindex="0" data-tip="Node-Kayles: players alternately pick a vertex and delete it together with all of its neighbours; last to move wins.">Node-Kayles</span> played on <code>Q<sub>n</sub></code>. Deciding the winner of Node-Kayles on a general graph is PSPACE-complete, so there is no expected shortcut formula for arbitrary boards — the practical tool is exhaustive search, and the engineering question is how far it can be pushed.</p>
+
+<details class="formal">
+<summary>The formal version — the win recurrence</summary>
+<div class="body">
+<p>Write <code>S</code> for the set of live vertices and <code>N[v] = {v} ∪ N(v)</code> for the closed neighbourhood of <code>v</code>. The boolean predicate <code>win(S)</code> — "the player to move from <code>S</code> wins" — satisfies the normal-play P/N recurrence</p>
+<p style="text-align:center">\( \mathrm{win}(S) \iff \exists\, v \in S : \neg\,\mathrm{win}(S \setminus N[v]), \qquad \mathrm{win}(\varnothing) = \text{false}. \)</p>
+<p>A position is a win iff some move reaches a position that is a loss for the opponent; the empty position is a loss for the mover. The recursion is well-founded because <code>v ∈ N[v]</code>, so each child set <code>S \ N[v]</code> is a strict subset of <code>S</code>. Equivalently, via the Grundy value <code>g(S) = mex { g(S∖N[v]) : v∈S }</code>, the position is a win iff <code>g(S) ≠ 0</code>; and when <code>S</code> splits into two parts with no edges between them, <code>g</code> is the bitwise-xor of the parts' values (Sprague–Grundy). The solver uses the boolean form with alpha–beta pruning; the Grundy form reappears in the machine-checked verification (Section&nbsp;4).</p>
+</div>
+</details>
+</section>
+
+<section id="known">
+<h2><span class="num">2</span>What was already known</h2>
+<p>Odd boards are easy: the first player plays the centre square and thereafter mirrors the opponent through a 180° rotation, an O(1) strategy that needs no search. So the substantive open problems are the <strong>even</strong> boards.</p>
+
+<p>For even boards the winners had been determined up through 16×16: the second player wins on 10×10, 12×12, and 14×14, and — from Thomas Jenrich's 2014 computation (arXiv:1312.5135) — the second player wins on <strong>16×16</strong> as well. Jenrich's search used a backtracking solver with partial symmetry handling and no transposition table, on the order of <strong>71 billion</strong> recursive calls over roughly a day. The Sprague–Grundy values of small boards are catalogued as OEIS sequence <strong>A344227</strong>. The next open even board — and the subject of this work — was <strong>18×18</strong>.</p>
+
+<p>The solver in this report reproduces Jenrich's full sequence through 16×16 (second player) and agrees with A344227 over its catalogued range, which is the first-order check that its machinery computes the right game before it is trusted on new ground.</p>
+</section>
+
+<section id="result">
+<h2><span class="num">3</span>The 18×18 result and its proof</h2>
+<p><strong class="win">On the 18×18 board the first player wins.</strong> A winning opening is the move we label <strong>I9</strong> (square 152 in row-major numbering). Because the game is impartial and a winning first move exists, the result is an existence proof: the solver searched the single move I9 to a complete verdict and stopped.</p>
+
+<p>A search that visits on the order of <strong>10<sup>11</sup></strong> positions cannot be certified by a single run, and a full formal certificate of that many positions is infeasible. The verdict is therefore established by <strong>two independently configured proving runs</strong> of the same solver, differing in the dense leaf evaluator they use (Section&nbsp;6), which agree on every observable while exploring very different amounts of work:</p>
+
+<table>
+<thead><tr><th>run</th><th>dense ceiling</th><th>evaluator path</th><th>verdict</th><th>opening</th><th class="num">positions</th><th class="num">wall</th></tr></thead>
+<tbody>
+<tr><td>primary</td><td>17 squares</td><td>192-bit code</td><td><span class="win">first wins</span></td><td>I9</td><td class="num">258,322,944,571</td><td class="num">~8 h</td></tr>
+<tr><td>confirm</td><td>20 squares</td><td>≥190-bit code</td><td><span class="win">first wins</span></td><td>I9</td><td class="num">114,318,641,519</td><td class="num">~7 h</td></tr>
+</tbody>
+</table>
+
+<p>Both runs report a first-player win, both name <strong>I9</strong> as the winning opening, and both produce the byte-identical 15-move principal variation</p>
+<p style="text-align:center"><code>I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14</code></p>
+<p>which was checked to be fifteen legal non-attacking moves ending in a position with the mover unable to reply — so the first player makes the last move, consistent with a first-player win. The two runs share no leaf-evaluator code and converge at position counts differing by more than 2×, so it is their <em>agreement</em> on the verdict, the move, and the entire line — not any single run — that constitutes the evidence.</p>
+
+<p>The large, differing position counts are themselves informative. Both far exceed a pre-run estimate of ~46 billion because the transposition table cannot hold the full working set on a single machine, so positions that would be remembered in an unbounded table are recomputed. This <em>re-expansion</em> is also why the two configurations differ by more than 2×: the higher dense ceiling of the confirm run shrinks the working set and roughly halves the recomputation. Agreement on the answer despite disagreement on the effort is exactly the property a cross-check should have.</p>
+
+<h3>What is certified, cross-validated, and assumed</h3>
+<p>To state the standard of proof precisely, the verdict rests on these layers, strongest first:</p>
+<ul>
+<li><strong>Two-way cross-validation</strong> — two independently configured exhaustive searches agree on verdict, move, and full principal variation (above).</li>
+<li><strong>A differential-tested leaf evaluator</strong> — the part of the program that decides small positions directly is checked, code by code, against a plain scalar reference, including the wide layers the 18×18 search actually bottoms out on (Section&nbsp;7).</li>
+<li><strong>An independent oracle</strong> — a separate, simpler implementation (raw masks, no tables, no symmetry) checks both solvers on thousands of high-index subpositions; this is the check that caught the one real bug of this class, an integer-width truncation that flipped a value at boards above 16 (Section&nbsp;6).</li>
+<li><strong>A machine-checked core</strong> — the leaf evaluator's recurrence is proved in Lean&nbsp;4 (Section&nbsp;4).</li>
+<li><strong>Reproduction of prior work</strong> — Jenrich's full sequence through 16×16, and OEIS A344227.</li>
+</ul>
+<p>The single component validated only at boards up through 16 (plus the two-run agreement) is the generic search-combination logic above the dense ceiling. Both configurations exercise it over different sets of positions and agree. We make no claim beyond this layered evidence: it is cross-validated agreement at very high confidence, not a single formal certificate.</p>
+</section>
+
+<section id="lean">
+<h2><span class="num">4</span>The leaf evaluator, machine-checked</h2>
+<p>About a fifth of all positions in the search are decided not by recursion but by a direct <em>leaf evaluator</em> that resolves small positions from precomputed tables (Part&nbsp;II explains how). This is the component where this class of solver has historically had its one real bug — an integer that was too narrow, silently corrupting a square's identity on large boards — so it is the natural place to replace testing with proof.</p>
+
+<p>Its recurrence semantics are now machine-checked in a self-contained <strong>Lean&nbsp;4</strong> development. The build is green with <strong>no <code>sorry</code></strong> (no admitted gaps), and every theorem depends only on the three standard axioms of the mathematics library — there is no appeal to native code execution or any custom assumption. What is proved:</p>
+<ul>
+<li>the win/loss recurrence is <strong>well-defined and terminating</strong> (the search always bottoms out);</li>
+<li>its value is <strong>invariant under relabelling the board</strong> (graph isomorphism) and <strong>under restricting to a sub-board</strong> (induced subgraph) — the latter is exactly what licenses the evaluator's "relabel the surviving squares and look the value up" step;</li>
+<li>the one-step <strong>table-build recurrence equals the true value</strong>, bottoming out at the empty position;</li>
+<li>the <strong>Grundy characterization</strong> (<code>win ⟺ value ≠ 0</code>), the Sprague–Grundy <strong>component-sum</strong> rule, and Grundy invariance under isomorphism.</li>
+</ul>
+
+<p>The scope is deliberately limited — call it "verify the algorithm, test the bit-twiddling." The proof certifies the <em>recurrence and its invariances</em>; it does not model the compact bit-level encoding of a position (that is left to the differential tests, where it is cheapest to check), and the correspondence between the Lean definitions and the Rust functions they mirror is established by careful reading, not mechanical translation. The Grundy and component results harden an optional, currently-disabled decomposition feature; the verdict-producing search itself uses only the boolean win/loss recurrence, which is what the rest of the proof covers.</p>
+
+<details class="formal">
+<summary>The formal version — what the proof underwrites, and what it defers</summary>
+<div class="body">
+<p>The development (<code>lean/NodeKayles/</code>) defines an abstract finite graph and the predicate <code>win S := ∃ v∈S, ¬ win (S∖N[v])</code>, proved terminating on <code>|S|</code>. Theorems: <code>win_iso</code> (isomorphism invariance), <code>win_emb</code> (induced-subgraph invariance — the soundness of the projected-code lookup), <code>buildPred_correct</code> (one-ply build equals the true value) with <code>not_win_empty</code> as the base case, and a Grundy layer (<code>mex</code>, <code>grundy</code>, <code>win_iff_grundy_ne_zero</code>, <code>grundy_sum</code>, <code>grundy_iso</code>). Every theorem's axiom footprint is exactly <code>[propext, Classical.choice, Quot.sound]</code>.</p>
+<p>Deferred to the Rust differential tests (Section&nbsp;7): the bit-layout and <code>pext</code> decode of the position code; the high-square search-combination logic; and the board→graph construction. The Lean↔Rust correspondence is hand-audited — auto-translation is not viable through the bit-extraction intrinsics and unchecked indexing the production evaluator uses. Adequacy of the abstract recurrence as "the game value" was cross-checked against the literature (e.g. the path on three vertices has Grundy value 2, Dawson's chess / OEIS A002187).</p>
+</div>
+</details>
+</section>
+
+
+<!-- ============================ PART II ================================= -->
+<div class="part-head" id="part2">
+  <div class="part-kicker">Part II</div>
+  <h2>The engineering: 56 minutes → 23 seconds</h2>
+  <p>How the search was made fast enough that a hundred-billion-position board became tractable on one workstation — the levers that worked, the ones that did not, and how each was decided.</p>
+</div>
+
+<section id="core">
+<h2><span class="num">5</span>The core search</h2>
+<p class="stub">[Part II is being written in the next round: the boolean search and alpha–beta, the flat lockless transposition table, and position canonicalization by board symmetry and graph isomorphism.]</p>
+</section>
+<section id="getk">
+<h2><span class="num">6</span>The dense leaf evaluator and the W<sub>K</sub> hierarchy</h2>
+<p class="stub">[Next round: how positions with few live squares are resolved directly from complete precomputed Node-Kayles tables via a bit-extraction child sweep, and how raising that ceiling paid off.]</p>
+</section>
+<section id="stack">
+<h2><span class="num">7</span>The optimization stack, and what didn't work</h2>
+<p class="stub">[Next round: dynamic move ordering, enhanced transposition cutoff, branchless counting sort, the cascade-free band skip, memory and huge pages — and the instructive negatives (sorted-frontier pipelines, DFS parallelism on a transposition-saturated tail, component decomposition).]</p>
+</section>
+<section id="method">
+<h2><span class="num">8</span>How speed was measured</h2>
+<p class="stub">[Next round: interleaved A/B benchmarking, cycles-per-node as the noise-free metric, machine hygiene, and the rule against declaring a "floor."]</p>
+</section>
+
+
+<!-- ============================ PART III =============================== -->
+<div class="part-head" id="part3">
+  <div class="part-kicker">Part III</div>
+  <h2>The agentic method: how this was actually done</h2>
+  <p>A clean experiment in agent-driven engineering — a hobby project with a known answer below n=18 and every claim measurable — and what it revealed about where coding agents help and where they need a human.</p>
+</div>
+
+<section id="setup">
+<h2><span class="num">9</span>The setup</h2>
+<p class="stub">[Part III is being written after Parts I–II: the origin (a university-level math problem given to the programmer's sixth-grade son by a university professor; the father nerd-sniped), and why this was an unusually clean test of agentic engineering — no users, a known correct answer, every speed claim measurable. To be written much clearer than the original telling.]</p>
+</section>
+<section id="overnight">
+<h2><span class="num">10</span>The overnight brief</h2>
+<p class="stub">[Next: the "be relentless" instruction and what the agent did with it — reopening a discarded negative result that became the single biggest speedup.]</p>
+</section>
+<section id="agents">
+<h2><span class="num">11</span>What agents did well, and badly</h2>
+<p class="stub">[Next: agents shortened the build-and-measure loop and drove much of the work autonomously, but repeatedly treated prototypes and current bottlenecks as fundamental floors; human first-principles estimates decided which negatives to retry and when a limit had earned its evidence.]</p>
+</section>
+<section id="collab">
+<h2><span class="num">12</span>The collaboration model</h2>
+<p class="stub">[Next: the handoff-driven workflow, the keep/kill measurement discipline, and verification as a first-class deliverable — with the Lean proof and its rounds of adversarial subagent review as a worked example.]</p>
+</section>
+
+<div class="footer">
+<p>Draft v2 — restructured into three parts (result · engineering · method), single register with a standalone plain-English summary, no inline callout boxes. Parts I and the summary are complete; Parts II and III are stubbed pending the next rounds. The companion specialist report is <code>queens-n18-paper.md</code>.</p>
+</div>
+
+</div>
+</body>
+</html>
