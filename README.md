@@ -14,6 +14,21 @@ move. The point of the project is as much the **journey** — a documented serie
 of optimisation experiments, including the ones that didn't work — as the engine
 itself.
 
+## Also in this repo
+
+- **[`rust/`](rust/)** — a parallel **pure-Rust port** of this engine (identical rules and
+  black-centred values), plus a second binary: a solver for the adversarial **Non-Attacking
+  Queens** game (Node-Kayles on the queen graph). That solver produced the repo's headline
+  result — **18×18 is a first-player win**, a new result extending the sequence solved through
+  16×16 by Jenrich (2014) — and its dense leaf evaluator is **machine-checked in Lean 4**. See
+  [`rust/README.md`](rust/README.md).
+- **Write-ups of the Queens work** — a narrative account in
+  [`notes/queens-report.html`](notes/queens-report.html) (the result · the performance
+  engineering · how it was built with AI agents), and a specialist paper in
+  [`notes/queens-n18-paper.md`](notes/queens-n18-paper.md).
+- **[`lean/`](lean/)** — the self-contained Lean 4 + mathlib proof of the Queens leaf evaluator's
+  recurrence (kernel-complete, no `sorry`).
+
 ## Quick start
 
 ```console
