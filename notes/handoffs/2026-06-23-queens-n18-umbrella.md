@@ -111,6 +111,42 @@ Full detail + acceptance in `2026-06-23-n18-work-plan.md` (the user's explicit d
    **User-gated big gate** (hours-to-days of compute; a second-player sweep is ≫ the buggy run's 8 h).
 5. **(future) cluster** — TDS over 2.5 GbE for n≥20.
 
+## Handoff Note — 2026-06-26 — verification (Lean) + public writeups (paper + rebuilt report)
+
+**Session**: 2026-06-26 (`a9c933b4-0ad9-4d95-b63d-26ab2a6d0132`). Post-solve hardening +
+communication; no solver or verdict change. Three deliverables, all committed on `main`:
+
+1. **Lean verification of the `getK` leaf evaluator (2-lite) — LANDED.** The leaf evaluator's
+   recurrence semantics are machine-checked in Lean 4 + mathlib, `sorry`-free, axioms =
+   `[propext, Classical.choice, Quot.sound]`: `win` + termination, `win_iso`, `win_emb`
+   (= `projected_code` soundness), `buildPred_correct` (= `graph_wins`), and the Grundy layer
+   (`win_iff_grundy_ne_zero`, `mex_xor_union`, `grundy_sum`, `grundy_iso`). 2-lite scope: bit
+   serialization / `pext` decode stay on the differential tests; Lean↔Rust is hand-audited. Built
+   **self-contained** (mathlib v4.32 dropped `SetTheory/Game/`; the `vihdzp/combinatorial-games`
+   extraction lags our toolchain — blessed-`PGame` upgrade path documented in the code). Hardened
+   by **3 rounds of adversarial subagent review** (found only doc issues; proofs sound). Full
+   detail + commits in [`2026-06-26-lean-getk-verification.md`](2026-06-26-lean-getk-verification.md).
+   Commits `017e2c2` `b60d26f` `f06439b` `cef97dd` `8ddb2a5` `257f4dd`.
+
+2. **arXiv-level specialist paper — `notes/queens-n18-paper.md`** (commit `3d7e693`). The algorithm,
+   the layered performance engineering, the n=18 result with the two-config cross-validation, and
+   the validation/verification stack (incl. the Lean work); states the trust boundary precisely
+   (cross-validated agreement, **not** a single certificate; Lean = recurrence semantics, 2-lite).
+
+3. **Public narrative report rebuilt — `notes/queens-report.html`** (commits `2bddf6c` → `b9a8e59`).
+   The old braided plain/engineer-toggle report was restructured into one document with three
+   independently-readable parts (**result · engineering · agentic method**) on a single spine, a
+   standalone plain-English summary, no per-paragraph toggle, no inline callout boxes, and the two
+   engineer appendices (iso-dense reference + dated timeline). Made current: n=18 SOLVED + the Lean
+   verification lead from the top. Old version in git history + the untracked `queens-report.pre-edit`
+   backups.
+
+**Still pending (unchanged):** user blessing → archive this umbrella + an OEIS A344227 submission
+for the n=18 term; the writeups above are the communication artifacts for that. NOTE: the
+**TL;DR state** and **Next-session priorities** at the top of this doc are stale *pre-solve* text
+(they still say "BuRR is the path" / "needs the cluster") — superseded by the session --13
+CONCLUSION immediately below, kept as the historical record.
+
 ## Handoff Note — 2026-06-25 (session --13 CONCLUSION) — ★★★ n=18 SOLVED: FIRST PLAYER WINS (confirmed by two independent getK ceilings)
 
 **The confirmation run AGREES — n=18 is a first-player win.** Two solves with **different getK evaluator code
