@@ -57,6 +57,72 @@ estimate **~10–100 M nodes (pc≥26), ~100 M–1 B (pc≥18)**, pessimistic ta
   is a genuine engineering commitment — a user decision on "hardened certificate vs. the existing
   cross-config + partial-coverage confidence" is warranted before building the full checker.
 
+### Streaming-checker footprint (measured)
+
+The certificate is GB-scale on disk (pc≥26 ≈ 10–100 M nodes × ~50–80 B ≈ 0.5–8 GB), so neither
+disk nor RAM is a wall. The search DAG is **strictly ply-layered** (each move places exactly one
+queen ⇒ transpositions are intra-ply ⇒ edges go depth d→d+1 only), so a deepest-ply-first checker
+holds only a 2-ply window. But the per-ply layer widths (`strat-dag` per-ply histogram) are
+**sharply peaked** — one mid/late ply at the game's combinatorial peak holds the majority:
+
+| cert                          | interior nodes | widest ply layer | widest % |
+|-------------------------------|----------------|------------------|----------|
+| n=14 pc≥26 (skip-stored)      | 193,728        | 105,148          | 54.3 %   |
+| n=18 after I9 K8 G10, pc≥26   | 783,533        | 495,836          | 63.3 %   |
+| n=14 full-depth               | 16,662,863     | 11,884,516       | 71.3 %   |
+
+So ply-windowing trims RAM only **~1.4–2×** (the dominant layer can't be split — its nodes are
+mutually independent, verified against the next ply); GB-scale RAM comes from the cert being
+*small*, not from a thin window. What streaming genuinely buys: (1) it removes `check_cert.py`'s
+load-everything-into-one-dict random-access bottleneck (sequential ply sweep instead); (2)
+**check-as-you-go** — pipe the solver's per-ply output straight into the checker, never
+materialising the artifact, peak scratch ≈ 2 plies. The pc≥26 grounding is the real lever: it
+both shrinks the cert ~10× *and* truncates before the combinatorial peak (less peaked: 54–63 %
+vs full-depth's 71 %).
+
+## Partial-coverage certification — BANKED (2026-06-26)
+
+Executed the immediate, low-effort path (this proposal's open question 4 / Phase-4 fallback):
+independently machine-check the deepest feasible positions on the I9 winning line, using the
+*existing* pipeline untouched — `queens certify 18 <out> --after <PV prefix>` dumps the exact
+D4-canonical value table; `scripts/check_cert.py` re-derives the verdict from the game rules +
+its own D4 canon, sharing **no** solver code (not the search, canon, getK, or the tiny-graph path
+where the verdict bug lived).
+
+| position (after PV prefix)        | mover | pc  | positions  | independent verdict | check time |
+|-----------------------------------|-------|-----|------------|---------------------|------------|
+| I9 K8 G10 J11 H3 M7 N16 E4 (L=8)   | P1    | 32  | 854        | **WINS**            | <1 s       |
+| I9 K8 G10 J11 H3 M7 N16 (L=7)      | P2    | 44  | 24,407     | **LOSES**           | 2 s        |
+| I9 K8 G10 J11 H3 M7 (L=6)          | P1    | 63  | 125,680    | **WINS**            | 15 s       |
+| I9 K8 G10 J11 H3 (L=5)             | P2    | 88  | 2,686,210  | **LOSES**           | 369 s (~6m)|
+| I9 K8 G10 J11 (L=4)               | P1    | 110 | 5,056,478  | **WINS**            | 1083 s (~18m)|
+
+The verdicts **alternate** exactly as a winning line requires (P1-to-move ⇒ WINS, P2-to-move ⇒
+LOSES), each verified over **all** continuations from that position — not just the PV move. The
+`certify` working set grows steeply toward the root (854 → 24 K → 126 K → 2.7 M → 5.1 M …), and
+CPython `check_cert.py` (~8·pc² ops/entry) handles ≤~125 K in seconds; the multi-million L=4/L=5
+take 6–18 min and are the practical CPython frontier (a Rust checker — Phase 3 — is what lifts it
+further). **L=4 (pc=110) is the deepest CPython-feasible point**: "first player wins after I9 K8
+G10 J11, over all continuations," independently re-derived from the rules.
+
+**What this banks — precisely:**
+
+- **CERTIFIED, independent of all solver code:** every position on the I9 optimal line from the
+  deepest-feasible prefix down to the terminal is independently re-derived from the rules, with
+  the verdict alternation confirmed. This is genuine n=18 ground truth at real depth on authentic
+  high-square geometry — the verdict of e.g. "after I9 K8 G10 J11 H3 M7 (pc=63), the player to
+  move wins" holds over every continuation, checked by code that shares nothing with the solver.
+- **STILL on cross-config agreement (not independently certified):** the top ~3–4 plies — the
+  empty-board I9 root and the wide P2-branching just below it (pc ≳ 156), whose proof DAG is the
+  114–258 B-node solve — exceed both CPython and the certify memo solver. The root verdict
+  ("n=18 = first-player win, witness I9") continues to rest on the two independent getK configs
+  agreeing (W17 258 B / W18–20 114 B, byte-identical 15-move PV) + the Lean-checked recurrence +
+  the reproduced Jenrich n≤16 sequence.
+
+So the gap is now named to the ply: the winning line is independently machine-checked from the
+mid-game down; only the top few high-pc plies near the root remain on cross-config trust — which
+is exactly what a full Phase-3 Rust checker over the pc≥26 strategy DAG would close.
+
 ## Problem
 
 The headline result — **n=18 Non-Attacking Queens (Node-Kayles on the 18×18 queen graph)
