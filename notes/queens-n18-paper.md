@@ -59,8 +59,12 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
 
 1. **A new game-theoretic result: n = 18 is a first-player win.** The witness is the opening
    move **I9** (square 152 in the 0-based row-major numbering); the game is decided by an
-   exhaustive negamax search of the I9 subtree. This extends Jenrich's n ≤ 16 sequence and, if
-   accepted, adds a term to OEIS A344227.
+   exhaustive negamax search of the I9 subtree. This extends Jenrich's n ≤ 16 **win/loss**
+   sequence. It does **not** add a term to OEIS A344227, which records the exact Sprague–Grundy
+   *nimber* and is catalogued only through n = 13: an exhaustive solve yields the *outcome*, and a
+   first-player win fixes only that the nimber is nonzero, not its value. Indeed A344227's listed
+   values follow a conjectured n ≥ 10 oscillation 0 (even) / 1 (odd) — so an **even**-board
+   first-player win at n = 18 *contradicts* the even → 0 prediction rather than extending it.
 
 2. **A solver design** combining a lockless flat transposition table, isomorphism-aware
    position canonicalisation, and a *dense leaf evaluator* (`getK`) that resolves all positions
@@ -589,8 +593,10 @@ None of these undermines the qualitative result; they delimit what "proved" mean
 We determined that the Non-Attacking Queens game on the 18×18 board is a **first-player win**,
 witnessed by the opening move I9 and a 15-ply principal variation, by an exhaustive boolean
 game-tree search whose verdict is corroborated by two independently configured runs. The result
-extends Jenrich's n ≤ 16 sequence and, pending community review, contributes a term to OEIS
-A344227. The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
+extends Jenrich's n ≤ 16 **win/loss** sequence; it does **not** contribute a term to OEIS A344227
+(the Sprague–Grundy *nimber*, catalogued only through n = 13), since an outcome solve does not
+yield the nimber value, and an even-board first-player win in fact contradicts that sequence's
+conjectured even → 0 oscillation. The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
 the tree directly from precomputed Node-Kayles tables, isomorphism-aware canonicalisation over a
 lockless flat transposition table, dynamic move ordering, and a capacity configuration
 (band-skipped transposition work + a 17 GB table) tuned to a single workstation. The leaf

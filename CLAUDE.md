@@ -13,7 +13,10 @@ the 15-move PV at different node counts (258 B / 114 B); corroborated by a clean
 differential, and a reproduction of Jenrich's full n≤16 sequence. Enabler: **skip[18,25] + a 17 GB flat TT** made the
 giant root I9 converge on the 26 GB box (the un-skipped run thrashed). n=18 was genuinely open ⇒ new result, extends
 Jenrich (arXiv:1312.5135). Code on branch `queens-n18` (worktree `/home/tavis/src/othello-n18`); see the umbrella's
-**session --13 CONCLUSION**. **Pending:** user blessing → archive the umbrella + an OEIS A344227 submission. **`go`.**
+**session --13 CONCLUSION**. **Pending:** user blessing → archive the umbrella. (NOT an OEIS A344227 submission —
+that's the *nimber* sequence to n=13; our n=18 result is a win/loss OUTCOME, and an even first-player win even
+contradicts A344227's conjectured even→0 pattern. A real contribution needs the full nimber n=14..18 — separate
+open task. See the umbrella's 2026-06-28 OEIS note.) **`go`.**
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.

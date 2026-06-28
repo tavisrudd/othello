@@ -39,7 +39,9 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > genuinely OPEN (user-confirmed) ⇒ new result. The enabler: **skip[18,25] + a 17 GB flat TT on the 26 GB box** made
 > the giant root I9 converge (session --12 capacity bet; the un-skipped run thrashed). Outputs in
 > `othello-n18/rust/scratchpad/n18-*-RESULT.txt`. **NEXT: user blessing → update `CLAUDE.md` (n=18 no longer "open"),
-> archive this umbrella, consider an OEIS A344227 submission.** **★ See the session --13 CONCLUSION note + `go`.**
+> archive this umbrella. (NOT an OEIS A344227 submission — that's the *nimber* sequence to n=13; ours is a
+> win/loss outcome, and an even first-player win even contradicts its conjectured even→0 pattern — see the
+> 2026-06-28 OEIS note.)** **★ See the session --13 CONCLUSION note + `go`.**
 
 ## Handoff Note — 2026-06-27 — rule-A "explored nodes" telemetry (getK/W_K leaves now counted)
 
@@ -83,6 +85,30 @@ ratio × n=18 expansions (slight under-count; ratio drifts up ~+3%/step):
 their explored counts differ, exactly as their expansions do, 258 B vs 114 B; they agree on verdict + PV, not
 node count.) For an OEIS/paper note, lead with **distinct-mod-D4 + time + memory**; if reporting nodes, use
 explored (rule A) with the definition stated, and report W_K table coverage separately as precomputation.
+
+## Handoff Note — 2026-06-28 — ★ OEIS A344227 is NIMBERS to n=13, NOT our solves (correction)
+
+**The "OEIS A344227 submission" pending item is a category error — drop it.** A344227 is the
+**Sprague–Grundy nimber** sequence of the game (Max Fan & Matthew Bardoe, 2021), catalogued **only
+through n = 13**: `0,1,1,2,1,3,1,2,3,1,0,1,0,1` for n = 0..13 (verified vs the OEIS b-file this
+session; 0 = second-player win). Our n = 14–18 work computes the **win/loss OUTCOME** (P vs N =
+whether the nimber is 0 or ≠ 0), **not the nimber value**. So:
+
+- The n = 18 result does **not** add an A344227 term — a first-player win fixes only that the nimber
+  is **nonzero**, not which value, and we never computed the full nimber for n ≥ 14.
+- **Sharper:** A344227's listed values follow a conjectured n ≥ 10 oscillation **0 (even) / 1 (odd)**
+  (n=10..16 even boards are all nimber 0 / second-player wins). n = 18 is **even** yet a
+  **first-player win** ⇒ nimber ≠ 0 ⇒ it **CONTRADICTS** the conjectured even → 0 pattern. So the
+  result's significance vs A344227 is that it *refutes the conjecture's even-board prediction*, not
+  that it extends the sequence. (Worth foregrounding in the paper — done: the two "adds a term to
+  A344227" claims in `queens-n18-paper.md` are corrected.)
+- Extending A344227 itself needs the **full nimber** for n = 14, 15, 16, 17, 18 (a much harder
+  computation than the outcome solve — our `nimber` mode stalls; see the
+  `queens-game-cgt-references` reference + Max Fan's node-kayles solver). That, not the outcome
+  solve, would be the genuine OEIS contribution — a separate, open direction.
+
+What our solves DO extend: the **win/loss / winner** record (Jenrich's outcome sequence n ≤ 16 →
+n = 18), which is not A344227.
 
 ## TL;DR state
 
@@ -184,7 +210,8 @@ communication; no solver or verdict change. Three deliverables, all committed on
    verification lead from the top. Old version in git history + the untracked `queens-report.pre-edit`
    backups.
 
-**Still pending (unchanged):** user blessing → archive this umbrella + an OEIS A344227 submission
+**Still pending (unchanged):** user blessing → archive this umbrella. (NOT an OEIS A344227 submission — see
+the 2026-06-28 OEIS note: A344227 is the nimber sequence to n=13; our solve is a win/loss outcome.)
 for the n=18 term; the writeups above are the communication artifacts for that. NOTE: the
 **TL;DR state** and **Next-session priorities** at the top of this doc are stale *pre-solve* text
 (they still say "BuRR is the path" / "needs the cluster") — superseded by the session --13
@@ -230,8 +257,9 @@ is the move **I9** (square 152), with the optimal line above. This closes the op
 
 **Follow-ups (optional / next session):**
 - Bless + propagate: update the n=16-SOLVED framing in `othello/CLAUDE.md` ("n=18 is the open board") to n=18-SOLVED,
-  and archive this umbrella once the user accepts the result. Consider submitting the nimber/verdict to OEIS A344227
-  (n=18 term) if it isn't already there.
+  and archive this umbrella once the user accepts the result. **Do NOT submit the verdict to OEIS A344227** — that
+  is the *nimber* sequence (to n=13); our n=18 result is a win/loss outcome, not a nimber term (2026-06-28 note).
+  A genuine A344227 contribution would require the full **nimber** for n=14..18 — a separate, harder, open task.
 - The two LOW audit findings (fractional-skip hash words 4–5; WL-canon `u8`) — harden only if a fractional-skip or
   WL-keyed n=18 run is ever attempted (neither is on the solved run's path).
 - Capability banked: **skip[18,25] + a 17 GB flat TT on a 26 GB box solves n=18** — the session --12 capacity bet
