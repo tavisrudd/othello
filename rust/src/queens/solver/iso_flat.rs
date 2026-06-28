@@ -2684,6 +2684,25 @@ impl IsoFlat {
                 g_loss as f64 / gtot,
                 g_loss_per_cut,
             );
+            // Rule-A "explored nodes" = every position the search evaluates and does NOT α-β-prune.
+            // Each non-root explored node is exactly one resolved child of its parent, so
+            //   explored = roots + Σ_parents(children resolved) = roots + g_e_total + g_etc.
+            // g_e_total = descent-examined + no-cut degree (children resolved by descent-cut / loss
+            // nodes); g_etc = pre-pass (ETC / empty-child) cuts, each resolving ≈1 winning child (a
+            // slight under-count: the ETC's pre-cut Some(1) probes are not added — a ≤few-% band).
+            // getK / W_K / band / block / tiny children are resolved as single descent iterations
+            // (counted once); their internal recursion is a tablebase-style probe and is NOT
+            // re-counted — the standard game-solving / EGTB convention. The root fan (≤ a few dozen
+            // first moves) is the only un-counted layer; negligible vs the total. Contrast
+            // `tt.nodes()` = TT-miss expansions only (leaf evaluations excluded).
+            let explored = g_e_total + g_etc;
+            let expansions = self.tt.nodes();
+            println!(
+                "    explored (rule A, leaves incl) = {}   vs expansions (tt.nodes) = {}   ratio = {:.3}",
+                commas(explored),
+                commas(expansions),
+                explored as f64 / expansions.max(1) as f64,
+            );
         }
     }
 

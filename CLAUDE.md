@@ -120,6 +120,14 @@ TT, `MADV_COLLAPSE`) stays the default + A/B control, **byte-identical to before
 **n=16 leaderboard** (best clean-box wall; node count is ±18% node-noisy — for the W_K layers the
 node-count cut is the metric, deterministic at n=14, and the wall follows):
 
+> **The `nodes` column = `tt.nodes()` = TT-miss EXPANSIONS only** (the kept A/B metric — every historical
+> cyc/node delta is vs this). It does NOT count getK/W_K leaf probes, TT hits, or terminals. The **rule-A
+> "explored nodes"** (αβ-tree size; getK/W_K **and** the ≤7 DP as leaf evaluators — the CGT-standard count) is
+> **~5.6× larger**: the --7 DEFAULT n=16 ≈ **1.79 B explored** (W17, DK=17). Measured via `QUEENS_RANK=1`
+> (`print_rank_report`: `explored = g_e_total + g_etc`; gated, production byte-identical). n=18 ≈ **1.5 T**
+> (W17) / **0.75 T** (W20). Definition + per-n table + method: the **2026-06-27 note** in
+> [n18 umbrella](notes/handoffs/2026-06-23-queens-n18-umbrella.md).
+
 | solver              | n=16 wall  | nodes   | mechanism                                                            |
 |---------------------|------------|---------|----------------------------------------------------------------------|
 | **iso-dense W17 + degree-ordered getK + skip18 {18} (--7 DEFAULT)** | **23.44s** search (new clean-box record) / 307,608,950 nodes | 0.31 B | **★ #1 DEFAULT (--7, on main)**: on top of the W17 --18 default, **skip18 = {18} all-roots** — skip ALL TT work (canon `lex_min8`→`d4_bits`→`hash128` ≈ the #1 branch-mispredict step, + probe + put) for pc==18 nodes. Safe & cascade-free: pc==18 is the only band whose children are ALL getK leaves (pc≤17) ⇒ a re-expanded pc==18 node re-runs one bounded getK sweep, never an unmemoised subtree; ~100% cold (0.3% probe hit). **−2.5% wall / −3.6% cyc vs the W17 default, n-agnostic, verdict-preserving** (n12 distinct 1,060,823 exact). pc==18 is UNIQUE — every band extension ({19}, [18..22], {18,20,22,24}, fractional) measured dead. `QUEENS_SKIP18=0` reverts. |

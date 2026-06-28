@@ -41,6 +41,49 @@ default on main). n=18 is the next open even board — this umbrella tracks gett
 > `othello-n18/rust/scratchpad/n18-*-RESULT.txt`. **NEXT: user blessing → update `CLAUDE.md` (n=18 no longer "open"),
 > archive this umbrella, consider an OEIS A344227 submission.** **★ See the session --13 CONCLUSION note + `go`.**
 
+## Handoff Note — 2026-06-27 — rule-A "explored nodes" telemetry (getK/W_K leaves now counted)
+
+**Why:** our headline "nodes" (`tt.nodes()`) counts only **TT-miss expansions** — getK/W_K leaf probes, TT
+hits, and terminals are NOT counted (asked + confirmed by reading the descent: the `w*_get`/`w_wide_get`
+arms take no node counter; `bump_local` fires only after a probe miss in `wins_inc`). For a CGT write-up the
+standard quantity is **distinct positions (mod D4) + time + memory**; when a node count *is* reported it should
+be the **explored-tree size** (every position evaluated and not α-β-pruned), not the expansion subset.
+
+**Definition (rule A, the αβ-tree convention):** `explored = roots + Σ_parents(children resolved before
+cutoff)`. Every non-root explored node is exactly one resolved child of its parent. getK / W_K **and the ≤7
+DP** are **leaf evaluators** — counted as one probe each, internals excluded (the standard EGTB convention; the
+≤7 `solve_local` DP is an on-the-fly tablebase). This = `g_e_total + g_etc` in the `QUEENS_RANK` report.
+
+**Landed (this session):** `print_rank_report` now prints `explored (rule A) = g_e_total + g_etc` vs
+`tt.nodes()` + ratio — **measurement-only, gated under `QUEENS_RANK=1`, production byte-identical** (no
+hot-path change; same pattern as `--distinct`). Verdicts preserved (n=12/14/16 = second ✓). Exact value is
+±18% TT-eviction node-noisy, like all our node counts.
+
+**Measured (12 GB TT, `QUEENS_RANK=1`):**
+
+| n  | DK=17 (W17) explored | exp (`tt.nodes`) | ratio | DK=20 (W20) explored | exp | ratio |
+|----|----------------------|------------------|-------|----------------------|-----|-------|
+| 12 |              198,984 |           43,031 |  4.62 |              147,830 |        28,896 |  5.12 |
+| 14 |           12,060,424 |        2,788,957 |  4.32 |            6,069,018 |       845,238 |  7.18 |
+| 16 |    **1,789,680,546** |      316,903,589 |  5.65 |    **1,262,496,088** |   192,915,318 |  6.54 |
+
+The clean predictor is the per-fused-node multiplier `M = E/node + ETC%` (band-independent), which rises
+smoothly with n (DK=17 E/node: n12 5.11 → n14 5.47 → n16 5.705; ≤7-DP is only ~1.6% of `tt.nodes()` by n=16,
+so `ratio → M`). The n=12/14 *ratios* are depressed by a fat ≤7-DP band (21% of `tt.nodes()` at n=14) that
+fades by n=16 — extrapolate `M`, not the raw ratio.
+
+**n=18 — calc WITHOUT a rerun? Estimate yes, exact no.** The 8 h production solves recorded only
+`tt.nodes()` (258.3 B / 114.3 B); no per-pc/rank telemetry (an 8 h grind carries no measurement overhead), so
+the exact explored count needs **one instrumented `QUEENS_RANK=1` n=18 rerun**. Estimate = matching-DK n=16
+ratio × n=18 expansions (slight under-count; ratio drifts up ~+3%/step):
+- **W17 (DK=17):** 5.65–5.9 × 258.3 B ≈ **1.46–1.50 trillion** explored.
+- **W20 (DK=20):** 6.54–6.7 × 114.3 B ≈ **0.75–0.77 trillion** explored.
+
+(The two configs explore different-size trees — different DK collapses different amounts into getK leaves — so
+their explored counts differ, exactly as their expansions do, 258 B vs 114 B; they agree on verdict + PV, not
+node count.) For an OEIS/paper note, lead with **distinct-mod-D4 + time + memory**; if reporting nodes, use
+explored (rule A) with the definition stated, and report W_K table coverage separately as precomputation.
+
 ## TL;DR state
 
 - **Representation migration: DONE + validated on n≤16** (WORDS 4→6, MAX_N→18, u16 squares,
@@ -157,6 +200,11 @@ same 15-move principal variation** — at **different node counts**, proving the
 |-----|---------|-----------|---------|------|-------|------|----|
 | first (`queens:skip-flat-n18`) | 17 | W17 (3-word) | **first player wins** | I9 | 258,322,944,571 | 8h16m45s | I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14 |
 | confirm (`queens:confirm-dk20`) | 20 | W18/19/20 | **first player wins** | I9 | 114,318,641,519 | 7h08m39s | I9 K8 G10 J11 H3 M7 N16 E4 P6 D12 O13 F2 R5 L17 A14 |
+
+> **"nodes" here = `tt.nodes()` = TT-miss expansions only** (the recurse nodes that probe the flat TT and
+> expand). It does **not** count getK / W_K leaf probes, TT hits, or terminals — see the **2026-06-27 rule-A
+> explored-node** note below. The standard "nodes explored" (αβ-tree size, getK/≤7-DP as leaf evaluators) is
+> **~5.6× larger**: n=18 ≈ **1.5 T** (W17) / **0.75 T** (W20), estimated from the measured n=16 same-DK ratio.
 
 Outputs: `othello-n18/rust/scratchpad/n18-{FIRST-RUN,CONFIRM-dk20}-RESULT.txt`.
 
