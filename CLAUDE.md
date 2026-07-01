@@ -21,9 +21,13 @@ open task. See the umbrella's 2026-06-28 OEIS note.) **`go`.**
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
 
-**★ NEXT SESSION (user-chosen):** [SMT complementary-phase scheduling](notes/handoffs/2026-07-01-smt-complementary-scheduling.md)
-— convert the measured −21% cyc/node no-SMT reserve without dropping threads; probes P1–P4, each with a
-kill condition (an evidence-backed "contention is inherent" close is a valid outcome). **`go`.**
+**SMT complementary-phase scheduling — CLOSED (2026-07-02, the evidence-backed "contention is
+inherent" outcome):** [handoff](notes/handoffs/2026-07-01-smt-complementary-scheduling.md) — P1: the
+−21% cyc/node no-SMT reserve is intact in the killer regime (−20.6%); P2 killed it: two independent
+12t processes on sibling CPU sets contend identically to one 24t process ⇒ pure instruction-mix
+contention, zero intra-process component; P3 confirmed no counterweight phase (canon/TT ≈ 3.3% of
+cycles, getK/kernel ≈ 94%). No placement/routing scheme can convert the reserve; SMT stays on
+(+34% wall). Next open levers: 1 GB hugetlbfs TT pages (boot-time), killers-at-n=18.
 
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
 **LATEST (--15): goal → 30s END-TO-END (incl prep). Search −16% + prep −2s; best clean round ~33s, A/B good

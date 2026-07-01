@@ -303,8 +303,13 @@ parked `queens-tt-assoc-buckets` branch stays parked (its n=18/oversubscribed ra
 re-checking post-killer too, since killers should shrink that working set as well).
 
 **Record unchanged: 13.77s / 179.3M @ 12 GB** (six more default-stack runs this round: 13.8–16.0,
-killer-race + thermal noise). Next real levers remain: 1 GB TT pages (boot), complementary-phase
-SMT scheduling, killers-at-n=18.; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
+killer-race + thermal noise). Next real levers remain: 1 GB TT pages (boot), killers-at-n=18.
+**(2026-07-02 update: complementary-phase SMT scheduling = CLOSED — P1 re-baseline showed the
+reserve intact (cyc/node −20.6% at 12t) but P2 proved the contention pure instruction-mix (two
+independent 12t processes on sibling sets contend identically to one 24t process) and P3 found
+no counterweight phase (canon/TT ≈ 3.3% of cycles vs getK/kernel ≈ 94%) ⇒ no placement/routing
+scheme can convert it; the reserve is only reachable by shrinking the getK instruction mix
+itself. Full numbers: [SMT handoff](2026-07-01-smt-complementary-scheduling.md).)**; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
 **Session**: 2026-07-01--13. Catalyst: user asked to break the 23.44s floor, target sub-20, "get creative."
 
 **★★ THE WIN — `QUEENS_KILLER` (cross-root killer replies at the 2nd ply), gated, default OFF

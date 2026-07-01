@@ -102,11 +102,53 @@ hygiene per CLAUDE.md.
 
 ## Progress
 
-- [ ] P1: 12t-vs-24t re-baseline in the killer regime (kill if delta ≲10%)
-- [ ] P2: two 12t processes on sibling sets (kill if cyc/node ≈ 24t)
-- [ ] P3: cycle share of the canon/TT phase (kill if ≲10%)
-- [ ] P4: dual-pool sibling routing build + A/B (only if P1–P3 all pass)
+- [x] P1: 12t-vs-24t re-baseline in the killer regime — reserve INTACT (cyc/node −20.6%), kill not triggered
+- [x] P2: two 12t processes on sibling sets — **KILL FIRED**: dual cyc/node ≈ 6016 ≥ 24t's 5902 ⇒ contention is pure instruction-mix, zero intra-process component
+- [x] P3: cycle share of the canon/TT phase — **KILL FIRED**: canon/TT/par ≈ 3.3% (≤5.2% generous) ≪ 10% ⇒ no counterweight phase to pair
+- [x] ~~P4: dual-pool sibling routing build~~ — NOT WARRANTED (P2 and P3 both killed it)
+
+**LEVER CLOSED (2026-07-01): SMT contention is inherent to the instruction mix.** No
+thread-placement or task-routing scheme can convert the no-SMT reserve, because (a) the
+contention needs no shared process state to reproduce, and (b) ~94% of every thread's cycles
+are the same getK/kernel compute — both siblings run that mix no matter what a scheduler does.
+Converting the reserve would require changing the *instruction mix itself* (fewer port-heavy
+ops per node), which is the measured-at-floor getK territory, not a scheduling problem.
+SMT stays ON (24t nets +34% wall over 12t: 14.8s vs 19.8s).
 
 ## Handoff Notes
 
-(none yet — work starts next session)
+### Session 2026-07-02 — all three probes run; lever CLOSED at P2+P3 (both kill conditions fired)
+
+**P1 (re-baseline, killer regime, 4-round interleaved A/B via `queens-ab.sh 16 QUEENS_W12
+<taskset-wrapper> 4`, 12 GB TT):** the reserve survived the killer-regime node-mix change
+essentially unchanged — 12t (`taskset -c 0-11`, affinity 1:1 pin engaged) vs 24t:
+**nodes −5.0% | cyc/node −20.6% (5902 → 4687) | total cyc −24.5% | wall +33.8% (14.8 → 19.8s)**,
+consistent every round (on-side spread 4651–4712). Kill threshold (≲10%) not met ⇒ continued.
+
+**P2 (two independent 12t processes on sibling sets, own 2 GB TTs, 2 rounds + solo control):**
+
+| config                             | cyc/node   | wall   |
+|------------------------------------|------------|--------|
+| solo 12t on 0–11 (2 GB TT)         | 4542–4609  | ~19.4s |
+| dual 2×12t on 0–11 / 12–23         | 5980–6035  | ~28.1s |
+| 24t single process (P1, 12 GB TT)  | 5902       | ~14.8s |
+
+Dual-process cyc/node ≈ (actually ~2% above) the intra-process 24t figure, and aggregate dual
+throughput (2×~176 M / ~28s ≈ 12.6 M nodes/s) ≈ the 24t single-process rate. Two processes share
+NOTHING (separate TTs, separate rayon pools, no shared lines, no queues) yet contend identically
+⇒ **the SMT penalty is pure code-mix-vs-code-mix; there is no intra-process structural
+component for a scheduler to remove. Kill condition fired.**
+
+**P3 (phase attribution, `perf record -F 499` over a full 24t default run, 159 K samples,
+symbol-aggregated coverage ~99.6%):** deep kernel + getK ≈ **94%** of cycles (`wins_inc` 18.6,
+`sort_moves_by_degree` 6.9, `DenseW8::get9..16/get_dyn*` 45.4, `w9..w16/w_wide_get` 23.5);
+canon/TT/par region ≈ **3.3%** (`child_orient` 1.40, `mtt_get` 1.08, `mtt_put`/`band_entry`/
+`small_key_from_code`/`fill_class` ≈ 0.8 combined; ≤5.2% even counting memmove/memset + rayon
+closure glue). ≪ the 10% floor ⇒ **complementary pairing has no counterweight. Kill fired.**
+
+**Method notes:** P1 wrapper = 10-line `QUEENS_W12` taskset exec shim (scratchpad); P2 script
+pattern (interleaved solo/dual, per-process `perf stat -x,` + `--to-file` JSON) worth recreating
+from this note if ever needed at n=18 scale — note `perf stat -x,` names the event `cycles:u`
+(match `$3 ~ /^cycles/`, not `== "cycles"`). 2 GB TT confirmed fine again (41.6% full, killer
+regime). Remaining open levers from push-past-floor: 1 GB hugetlbfs TT pages (boot-time),
+killers-at-n=18.
