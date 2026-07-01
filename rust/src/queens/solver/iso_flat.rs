@@ -59,6 +59,27 @@ thread_local! {
     static IN_SCHED_ROOT: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
 }
 
+thread_local! {
+    /// The first-move square of the root this worker is currently resolving (set in `resolve`,
+    /// like [`IN_SKIP18_ROOT`]). Only read on the cold [`killer_loop`](Fused::killer_loop) paths
+    /// for refutation attribution; `u32::MAX` = not inside a root.
+    static CUR_ROOT_SQ: std::cell::Cell<u32> = const { std::cell::Cell::new(u32::MAX) };
+}
+
+/// `QUEENS_KILLER`: global per-square refutation tally for the 2nd-ply killer heuristic. When a
+/// root's depth-1 `.any()` finds its refuting reply, that square's count is bumped; later roots
+/// prepend the top-`killer_k` already-successful squares present in their own move set to their
+/// otherwise-unchanged 2nd-ply order. Cross-root signal: the depth-1 loops run concurrently, so a
+/// slow root picks up killers published by roots that finished earlier — attacking the measured
+/// critical path (one slow root's sequential 2nd-ply loop ≈ 95% of the n=16 wall; the front-load
+/// oracle showed −72% isolated / −13% full-run on such a root). Verdict-preserving: any
+/// permutation of an `.any()` over the same reply set proves the same value. Squares are in each
+/// root's canonical orientation frame (roots are D4-orbit representatives, so frames are
+/// comparable in practice; the A/B is the arbiter). Relaxed ordering — a stale read only costs
+/// a missed reordering opportunity, never soundness.
+static KILLER_HITS: [std::sync::atomic::AtomicU32; 256] =
+    [const { std::sync::atomic::AtomicU32::new(0) }; 256];
+
 /// One sq-0 2nd-ply move's in-situ schedule record (`QUEENS_SCHED`). `t_*_us` are µs since the
 /// search t0; `nodes` is the cumulative-node delta over the move's subtree (flush-coarse, exact to
 /// ~FLUSH_NODES); `child_pc` is the available count after the move (= its number of 3rd-ply child
@@ -1165,6 +1186,10 @@ pub struct IsoFlat {
     /// `QUEENS_SPLIT=1`: speculatively parallelize the depth-1 (2nd-ply) `.any()` — normally sequential
     /// (odd/prove-win). The "split that root" lever; viable because 2nd-ply moves are near-independent.
     split: bool,
+    /// `QUEENS_KILLER=<k>` (0 = off, the default): prepend up to `k` cross-root killer replies
+    /// (squares that already refuted another root, from [`KILLER_HITS`]) to each root's depth-1
+    /// 2nd-ply `.any()` order; the rest keep the existing order. See [`KILLER_HITS`].
+    killer_k: u32,
 }
 
 impl IsoFlat {
@@ -1423,6 +1448,11 @@ impl IsoFlat {
             sched_recs: std::sync::Mutex::new(Vec::new()),
             par_ord: std::env::var("QUEENS_PAR_ORD").as_deref() == Ok("1"),
             split: std::env::var("QUEENS_SPLIT").as_deref() == Ok("1"),
+            killer_k: std::env::var("QUEENS_KILLER")
+                .ok()
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(0)
+                .min(8),
             // Gather-time recurse-child prefetch (cheap-first PREFETCH lever). Resolved once here;
             // gated per node at the gather (off ⇒ byte-identical to the current prefetch behaviour).
             pf_deep: std::env::var("QUEENS_PFDEEP").as_deref() == Ok("1"),
@@ -4816,6 +4846,10 @@ impl IsoFlat {
             // refutation wins. Trades speculation on non-refuting moves for finding the refutation in
             // wall-parallel instead of after exploring them all in series. Depth-1 only (the root split).
             kids.par_iter().any(recurse)
+        } else if depth == 1 && (self.killer_k > 0 || self.root_timing) {
+            // QUEENS_KILLER (or refutation logging under QUEENS_ROOT_TIMING): the once-per-root
+            // sequential 2nd-ply loop, with cross-root killer replies optionally front-loaded.
+            self.killer_loop::<ORACLE, COUNT, WINDOW, DK>(q, att, orient, kids, depth, min_avail)
         } else {
             kids.iter().any(recurse)
         };
@@ -4827,6 +4861,83 @@ impl IsoFlat {
             self.par_tt_put::<COUNT>(key, pc, won as u8);
         }
         won
+    }
+
+    /// The killer-aware once-per-root 2nd-ply loop (`QUEENS_KILLER`, and refutation logging under
+    /// `QUEENS_ROOT_TIMING`). Semantically identical to `kids.iter().any(recurse)` — it explores
+    /// the same reply set and short-circuits on the first winner — but (a) with `killer_k > 0` it
+    /// front-loads up to `killer_k` squares that already refuted *other* roots (highest global
+    /// tally first, remaining moves in their existing order), and (b) it publishes this root's
+    /// refuting square to [`KILLER_HITS`] and, under root-timing, logs `(root, reply, rank)` so the
+    /// cross-root clustering is observable. Cold — runs once per root; the per-call `Vec` and the
+    /// O(kids²) stable-prepend are outside every hot path.
+    #[cold]
+    fn killer_loop<const ORACLE: bool, const COUNT: bool, const WINDOW: bool, const DK: u32>(
+        &self,
+        q: &Queens,
+        att: &[[Bits; 8]],
+        orient: &[Bits; 8],
+        kids: &[u8],
+        depth: u32,
+        min_avail: u32,
+    ) -> bool {
+        let avail = orient[0];
+        // Remaining reply squares in their existing order; each iteration either jumps to the
+        // hottest not-yet-tried killer (re-reading the GLOBAL table, so killers published by other
+        // roots *mid-loop* — the slow roots run tens of seconds — are picked up) or takes the next
+        // move in order. At most `killer_k` killer-jumps total caps the speculation if the shared
+        // killers happen not to refute this root. O(kids) scan per pick — cold, once per root.
+        let mut remaining: Vec<u8> = kids.to_vec();
+        let mut jumps = 0u32;
+        let mut rank = 0u32;
+        while !remaining.is_empty() {
+            let mut pick = 0usize;
+            if jumps < self.killer_k {
+                let (mut best_h, mut best_i) = (0u32, usize::MAX);
+                for (i, &s) in remaining.iter().enumerate() {
+                    let h = KILLER_HITS[s as usize].load(Ordering::Relaxed);
+                    if h > best_h {
+                        (best_h, best_i) = (h, i);
+                    }
+                }
+                if best_i != usize::MAX {
+                    pick = best_i;
+                    // Only a real reorder counts as a speculative jump.
+                    if best_i != 0 {
+                        jumps += 1;
+                    }
+                }
+            }
+            let sq = remaining.remove(pick);
+            rank += 1;
+            let a = att_for8(att, sq);
+            let child0 = avail.and_not(a[0]);
+            let child = child_orient(orient, a, child0);
+            let ckey = self.node_key(q, &child);
+            let won_kid = !self.par_wins_inc::<ORACLE, COUNT, WINDOW, DK>(
+                q,
+                att,
+                &child,
+                ckey,
+                depth + 1,
+                min_avail,
+            );
+            if won_kid {
+                KILLER_HITS[sq as usize].fetch_add(1, Ordering::Relaxed);
+                if self.root_timing {
+                    eprintln!(
+                        "[killer] root sq {} refuted by sq {} at rank {}/{} (killer jumps {})",
+                        CUR_ROOT_SQ.with(|c| c.get()),
+                        sq,
+                        rank,
+                        kids.len(),
+                        jumps,
+                    );
+                }
+                return true;
+            }
+        }
+        false
     }
 
     /// `QUEENS_SCHED` capture of the slow solo root (sq 0)'s 2nd-ply schedule. Mirrors the depth-1
@@ -5378,6 +5489,8 @@ impl Solver for IsoFlat {
             // whichever single root QUEENS_ONLY_ROOT isolates (so its depth-1 schedule is captured clean).
             IN_SCHED_ROOT
                 .with(|f| f.set(self.sched && (moves[idx] == 0 || only_root == Some(moves[idx]))));
+            // Killer-loop attribution: which root this worker is resolving (steal-off ⇒ stable).
+            CUR_ROOT_SQ.with(|c| c.set(moves[idx]));
             // The dense ceiling `dense_k` (and the WINDOW flag) is read **once here**, per root, to
             // select the `const DK` monomorphisation — never in the deep `wins_inc` loop or a probe.
             let wins = self.par_root(q, att, co, ckey, min_avail);

@@ -191,7 +191,44 @@ fn build_wide_induced(k: usize) -> Box<[Code192]> {
         }
         induced[alive] = acc;
     }
+    collapse_huge(&induced);
     induced
+}
+
+/// Huge-back a fully-built hot table: `MADV_HUGEPAGE` + a synchronous `MADV_COLLAPSE` on the
+/// page-aligned interior. The W8 arena (32 MB) and the wide induced tables (3..24 MB) are
+/// random-accessed on every getK leaf; on 4 KB pages each lookup risks a dTLB walk (measured
+/// ~8 dTLB misses/node at n=16 with the TT already huge-backed), while 2 MB pages cover a
+/// whole table with a handful of dTLB entries. The tables are fully populated by their build
+/// before this is called, so no prefault is needed (unlike the lazily-zeroed TT). Advisory —
+/// any failure (old kernel, THP off, misalignment) is ignored. `QUEENS_DENSE_HUGE=0` disables
+/// (the A/B control). Prep-time only; the search itself is byte-identical.
+fn collapse_huge<T>(slice: &[T]) {
+    #[cfg(target_os = "linux")]
+    {
+        if matches!(std::env::var("QUEENS_DENSE_HUGE").as_deref(), Ok("0")) {
+            return;
+        }
+        let base = slice.as_ptr() as usize;
+        let bytes = std::mem::size_of_val(slice);
+        // SAFETY: advisory page-backing hints on the page-aligned interior of our own live
+        // allocation (same alignment dance as `zeroed_huge_atomics` — a `Vec` pointer is not
+        // page-aligned, and an unaligned start EINVALs); contents are never read or written.
+        unsafe {
+            let page = libc::sysconf(libc::_SC_PAGESIZE).max(1) as usize;
+            let aligned = base.next_multiple_of(page);
+            let off = aligned - base;
+            if bytes > off {
+                const MADV_COLLAPSE: libc::c_int = 25; // Linux 6.1+
+                let ptr = aligned as *mut libc::c_void;
+                let len = bytes - off;
+                libc::madvise(ptr, len, libc::MADV_HUGEPAGE);
+                libc::madvise(ptr, len, MADV_COLLAPSE);
+            }
+        }
+    }
+    #[cfg(not(target_os = "linux"))]
+    let _ = slice;
 }
 
 /// `&'static` induced-mask table for wide layer `k` (17..20), built once (`OnceLock` per `k`).
@@ -715,6 +752,9 @@ impl DenseW8 {
             }
             flat
         });
+        // Idempotent (re-advising a collapsed range is a cheap no-op) — covers both the fresh
+        // build and the `QUEENS_W8_CACHE` load path without restructuring the init closure.
+        collapse_huge(arena);
         DenseW8 {
             arena,
             // ★ Default-ON (--18, promoted): the degree-ordered getK sweep is part of the FAST default.

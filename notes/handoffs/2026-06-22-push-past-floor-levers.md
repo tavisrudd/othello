@@ -206,6 +206,11 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
   one chunk per session, gated A/B per the harness.
 
 ## Progress
+- [x] ★★ **Cross-root killer replies (`QUEENS_KILLER`) → LANDED (gated, default off): n=16 record
+  23.44s → 14.60s (−38% wall / −41% nodes), cyc/node flat.** The dynamic ordering-family lever the
+  static-predictor kills never tried. Promote-to-default = open. See session 2026-07-01--13.
+- [x] `QUEENS_DENSE_HUGE` dense-arena MADV_COLLAPSE → LANDED default-on (~−0.5% cyc/node). BOLT /
+  K18+skip{19} / no-SMT / 20-thread-asymmetric all measured DEAD (same session).
 - [x] Tier-A: ETC probes-per-cut tap → pc-gate → n=16 A/B → **★ KILLED (net-negative).** Tap (`M_RANK`
   `etc_pr`/`pr/cut` columns) confirmed the shape exactly — ETC cuts ~0–5% of nodes in pc≤28 (`pr/cut`
   300–5000 = near-pure waste; ~208M of 1.32B probes), flips to 12–35% cuts at pc≥29. But the gate A/B
@@ -225,6 +230,86 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [x] 4-agent math/instruction/discipline sweep (--2 below) → near-floor; LANDED `w17_induced`→field −0.55% (clean balanced A/B).
 
 ## Handoff Notes
+
+### Session 2026-07-01--13 — ★★ CROSS-ROOT KILLER REPLIES: n=16 RECORD 23.44s → 14.60s (−38%), sub-20 GOAL SMASHED; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
+**Session**: 2026-07-01--13. Catalyst: user asked to break the 23.44s floor, target sub-20, "get creative."
+
+**★★ THE WIN — `QUEENS_KILLER` (cross-root killer replies at the 2nd ply), gated, default OFF
+(promote-to-default = open, needs the user's call).** The one ordering-family lever every prior
+predictor hunt skipped: not a *static* signal (degree/overlap/symmetry-defect — all dead) but the
+*dynamic* killer heuristic — when any root's depth-1 sequential `.any()` finds its refuting reply,
+publish that square to a global tally (`KILLER_HITS[256]`, relaxed atomics); every root's depth-1
+loop re-reads the table **each iteration** (the slow roots run tens of seconds — killers published
+mid-loop land) and jumps to the hottest not-yet-tried killer, capped at `QUEENS_KILLER=<k>`
+speculative jumps, remaining moves in the existing order. Verdict-preserving by construction (any
+permutation of an `.any()` over the same reply set). ~60 gated lines in `iso_flat.rs`
+(`killer_loop`, mirrors `sched_loop`; production path byte-identical with the flag off).
+- **n=16 interleaved A/B (4 rounds, 12 GB TT, k=4): nodes −37.6% · cyc/node +0.6% (the reorder is
+  FREE) · total cyc −37.2% · wall −43.3% (29.0s → 16.5s mean).** SECOND every round; gates green
+  (n12 iso-flat distinct 1,060,823 exact; n14 ≈29.2M re-exp 1.02×; `make test` 58 pass; clippy clean).
+- **Record runs (clean box): 17 GB TT 14.60s / 182.7M nodes** (prior record 23.44s / 307.6M = −38%
+  wall / −41% nodes); runs range 14.2–16.8s (killer propagation is a race between roots ⇒ its own
+  noise term). 12 GB with root-timing on: 14.24s. **TT now only 7.5–9% full — the killer cut
+  collapsed the working set**; TT size barely matters (8.6 GB ≈ 17 GB wall).
+- **Why it works (measured, `[killer]` log under `QUEENS_ROOT_TIMING`):** refuting replies cluster
+  HARD — the center squares (119/120 at n=16) refute ~23/36 roots at rank 1 (static degree-order
+  already tries them first), but the slow roots — exactly those whose first queen attacks the
+  center — used to burn 9–18 full non-refuting subtree proofs (ranks 17/18/15/14/9…) before finding
+  their off-center refuter (sq 90 et al). Those same off-center squares refute *several* such
+  roots ⇒ the first one to finish publishes, the rest jump. With killers on, nearly every root
+  refutes at rank 1 after ≤1 jump. This is the constructive payoff of the fresh root-timing
+  measurement: the wall was ONE root's sequential 2nd-ply loop (sq 71 ran 26.1s of a 27.5s wall =
+  95%, solo only 1.6s — the "solo tail" framing was stale; the cost was the wasted refutation
+  *prefix*, which the −72%/−13% sq-0 oracle had already sized).
+- **`killer_k` sweep: k=1/2/4/8 all within noise** (k=2-vs-4 A/B: wash, −1.2% nodes / +0.9% wall).
+  k=4 is the canonical config.
+- **New tail shape (root-timing with killers on): THREE roots tie at ~12.9s (91% of wall)** — incl.
+  the elder (sq 119), which runs first on an empty killer table and still pays rank 7/196. **Next
+  levers here:** (a) seed the elder — start 1–2 cheap fast roots before it so the table is warm
+  (fan-order change, cheap test); (b) the occasional unlucky root (one hit rank 18 with a failed
+  jump); (c) killers at n=18 (branch `queens-n18`) — if the clustering holds there, the n=18 wall
+  should drop similarly (BIG implication for the certificate/nimber work).
+
+**★ Banked small win — `QUEENS_DENSE_HUGE` (default ON, `=0` reverts): MADV_HUGEPAGE +
+MADV_COLLAPSE on the W8 flat arena (32 MB) + wide induced tables (3..24 MB)** (`collapse_huge` in
+`dense.rs`, same aligned-interior dance as `zeroed_huge_atomics`). ~−0.5% cyc/node pairwise (the
+A/B's −2.0% mean was one off-round outlier; pairs: −0.3/−6.9/+0.0/−0.6%). Kept: cheap, prep-time
+only, byte-identical search.
+
+**Measured DEAD this session (do not re-propose):**
+- **K=18 dense + skip band moved to {19}** (the untested {18,19}-adjacent hole): nodes −16.4% but
+  cyc/node +18.6% ⇒ wall +3.7%. W18's node cut stays work-conserving even with the cascade-free
+  skip band moved up. ({18,19} at K=17 itself remains untested — expected ≤1–2%, low priority.)
+- **BOLT post-link layout** (never tried; PGO's sibling): dyno-stats −44% taken branches, but
+  cyc/node +0.3% = WASH. With PGO (+2.6% at --15) this **closes the code-layout family**: the
+  frontend stall is data-dependent mispredicts + inherent fetch, not layout. (Relocs build:
+  `target-bolt/`, `-Wl,--emit-relocs`; bolt 19.1.7 via nix; `perf record -b` works on Zen5 —
+  `-j any,u` yields empty branch stacks, plain `-b` doesn't.)
+- **12 physical cores (no SMT, `taskset -c 0-11`): total cyc −27.3% / cyc/node −21.2% / nodes
+  −7.7% — but wall +24.3%.** SMT contention costs ~21% per-node throughput, yet the thread-level
+  parallelism it buys wins the wall. A large cycle-efficiency reserve locked behind parallelism
+  (future angle: anything that raises per-thread IPC without dropping threads).
+- **20-thread asymmetric** (drop only the 4 Zen5-perf SMT siblings, `taskset -c 0-11,16-23`):
+  +32% wall on round 1 — killed early. The 5 GHz uncontended-spine theory does not survive contact.
+
+**Diagnostics banked:**
+- **dTLB ≈ 8 misses/node (2.7 B/run) and they are the TT's, not the dense arenas'** (arena collapse
+  moved nothing): 12–17 GB on 2 MB pages = 6–8K pages > Zen5 L2 TLB. Fix = **1 GB hugetlbfs pages**
+  (boot-time reservation + a `MAP_HUGETLB|MAP_HUGE_1GB` path in `zeroed_huge_atomics`), ceiling
+  ~2–4% — user decision (boot param).
+- **The `claude` CLI sets `prctl(PR_SET_THP_DISABLE)`** — every process launched from its Bash tool
+  inherits THP-off (`THP_enabled: 0` in `/proc/<pid>/status`), so inline-launched solves run the TT
+  on 4 KB pages and MADV_COLLAPSE EINVALs. **All pane-launched runs (the A/B harness, records) are
+  unaffected** (tmux server ancestry has THP on). Bench discipline: measurement runs go through the
+  pane, always.
+- n=16 default TT resolved by `tt_bits` is 8.59 GB (2^30 slots), not the 17 GB the harness header
+  assumes — pass `QUEENS_TT_SLOTS=2147483648` explicitly for a 17 GB run.
+
+**Code state:** killer lever + dense-huge on main (this commit); `target-bolt/` build dir untracked
+(disposable). All gates green. **NEXT:** (1) user call on `QUEENS_KILLER=4` default promotion;
+(2) elder-root killer seeding (the 3-way 12.9s tie is the new wall); (3) port killers to the n=18
+branch and re-size the n=18 wall; (4) parked heavy levers unchanged (1 GB pages now has a measured
+target: the TT dTLB).
 
 ### Session 2026-06-23--3 — child_orient8 NO-GO, Tier-A ETC pc-gate KILLED, residual-stabilizer DEAD (last node-count idea), hot-struct discipline LANDED, fresh getK profile (at-floor), ★ flattened getK evaluator (`get_flat`) BUILT+A/B'd → DEAD (+21.7% cyc/node); **user called the floor**
 **Session**: 2026-06-23--3. Mode: intent-based (`yc mi`). Resumed `go` from this handoff. Cleared two
