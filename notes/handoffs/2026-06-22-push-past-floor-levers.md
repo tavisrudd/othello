@@ -231,7 +231,51 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 
 ## Handoff Notes
 
-### Session 2026-07-01--13 — ★★ CROSS-ROOT KILLER REPLIES: n=16 RECORD 23.44s → 14.60s (−38%), sub-20 GOAL SMASHED; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
+### Session 2026-07-01--13 (cont.) — killer PROMOTED TO DEFAULT + deep-ply killers + ETC-gate default: RECORD → 13.77s; the 10s push status
+**User directive**: promote `QUEENS_KILLER=4` to default; keep hunting toward 10s.
+
+**★ DEFAULTS PROMOTED (iso-dense only — iso-flat/iso-window keep the base-0 control, so the exact
+`--distinct` gate semantics are untouched; `QUEENS_FAST=0` reverts the whole stack):**
+1. **`QUEENS_KILLER=4`** (the record lever, `=0` reverts).
+2. **`QUEENS_KILLER_DEEP`** (NEW this session, default ON): killer jumps extended to the deeper odd
+   (prove-win) plies of the parallel upper tree — depth 3 and 5, one shared 256-square table per ply
+   band (below `min_avail` the deep kernel takes over, so deeper plies never reach it). **n=16 A/B
+   on top of killer=4: nodes −7.5% / total cyc −7.2% / wall −4.5%, cyc/node flat.** `=0` reverts.
+3. **ETC pc-gate (batch-probe off below pc 29) — the --3 kill REVERSED in the killer regime:** the
+   killer cut leaves the TT ~7.5–9% full, so the eviction-protection value that made the gate
+   net-negative (+2.0% nodes then) is gone. **A/B: cyc/node −1.2% (every pair), total cyc −1.8%,
+   nodes −0.6%.** Now default-on for iso-dense (`QUEENS_ETC_GATE=0` or `QUEENS_ETC_PC` overrides).
+
+**NEW RECORD (full default stack, clean box): 13.77s / 179.3M nodes at a 12 GB TT** (two runs
+13.76/13.77; 17 GB runs land 14.9–16.0 — at ~8% fill the big table only adds page mass, so **12 GB
+is now the better size**). vs yesterday's 23.44s = **−41% wall / −42% nodes**; vs the pre-killer
+default ≈ −52%.
+
+**10s push — measured DEAD/wash this round (all env-only unless noted):**
+- killer_k=8 (more jump budget with deep on): 16.3s single — worse. k=1/2/4 remain within noise.
+- `QUEENS_NO_ELDER` (fan all roots at once, small code change, gated): 15.8/16.6s vs 14.4 — the
+  elder still pays; it is ALSO the first killer publisher now (double role).
+- `QUEENS_WARM_RESTART` re-test (would seed killer tables in the warm phase): 17.8s — the 2s warm +
+  restart overhead dwarfs the seeding value at a 14s wall.
+- `QUEENS_PAR_MIN_AVAIL` 64 / 128: 16.0 / 14.9s — the 96 default stands. `QUEENS_PAR_DEPTH=4`: wash.
+- skip bands {18,19} (the last untested set): 15.2s single — negative in the killer regime.
+
+**Where the wall is NOW (root-timing under the new defaults):** 30/36 roots refute at rank 1
+(depth-1 ordering is maxed out); the wall = **4–5 slow roots tied at ~12.4s, ending together** —
+their cost is the refutation-*proof* mass (deep AND fans → the pc 13–21 transposition-coupled tail),
+i.e. the territory the pre-killer sessions exhausted. The killer family is spent at ply 1; the
+depth-3/5 tables banked their −7.5%. The late-refuting stragglers (rank 15/18, concurrent — their
+refuters publish only when they themselves finish) end before the wall, so they don't bind.
+
+**Open levers toward 10s (ranked):** (1) **1 GB hugetlbfs TT pages** — the measured ~8 dTLB
+misses/node are the TT's; needs boot-time reservation + a `MAP_HUGETLB` path (~2–4%); (2) the
+**parked heavy levers** (set-assoc/compact-slot TT — per-probe DRAM; BuRR) — note the regime change:
+TT now ~8% full at 12 GB, so capacity arguments shrink but latency ones stand; (3) **per-thread IPC**
+— the 12-core no-SMT run showed cyc/node −21% locked behind thread count (any lever that raises
+per-thread IPC without dropping threads); (4) killers at n=18 (port to `queens-n18`).
+
+**Gates (all green):** n12 iso-flat distinct 1,060,823 exact (killer scoped away from iso-flat ✓),
+n14 second, `make test` 58 pass, clippy clean.; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
 **Session**: 2026-07-01--13. Catalyst: user asked to break the 23.44s floor, target sub-20, "get creative."
 
 **★★ THE WIN — `QUEENS_KILLER` (cross-root killer replies at the 2nd ply), gated, default OFF

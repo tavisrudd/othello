@@ -77,8 +77,12 @@ thread_local! {
 /// root's canonical orientation frame (roots are D4-orbit representatives, so frames are
 /// comparable in practice; the A/B is the arbiter). Relaxed ordering — a stale read only costs
 /// a missed reordering opportunity, never soundness.
-static KILLER_HITS: [std::sync::atomic::AtomicU32; 256] =
-    [const { std::sync::atomic::AtomicU32::new(0) }; 256];
+///
+/// One table per odd (prove-win) ply of the parallel upper tree: index 0 = depth 1 (the 2nd-ply
+/// loop, the record lever), 1 = depth 3, 2 = depth ≥5 (`QUEENS_KILLER_DEEP` extends the jumps to
+/// depths 3+; below `min_avail` the deep kernel takes over, so deeper odd plies never get here).
+static KILLER_HITS: [[std::sync::atomic::AtomicU32; 256]; 3] =
+    [const { [const { std::sync::atomic::AtomicU32::new(0) }; 256] }; 3];
 
 /// One sq-0 2nd-ply move's in-situ schedule record (`QUEENS_SCHED`). `t_*_us` are µs since the
 /// search t0; `nodes` is the cumulative-node delta over the move's subtree (flush-coarse, exact to
@@ -1186,10 +1190,14 @@ pub struct IsoFlat {
     /// `QUEENS_SPLIT=1`: speculatively parallelize the depth-1 (2nd-ply) `.any()` — normally sequential
     /// (odd/prove-win). The "split that root" lever; viable because 2nd-ply moves are near-independent.
     split: bool,
-    /// `QUEENS_KILLER=<k>` (0 = off, the default): prepend up to `k` cross-root killer replies
-    /// (squares that already refuted another root, from [`KILLER_HITS`]) to each root's depth-1
-    /// 2nd-ply `.any()` order; the rest keep the existing order. See [`KILLER_HITS`].
+    /// `QUEENS_KILLER=<k>`: allow up to `k` cross-root killer-reply jumps (squares that already
+    /// refuted another root, from [`KILLER_HITS`]) in each root's depth-1 2nd-ply `.any()` order;
+    /// the rest keep the existing order. Base default 0 (iso-flat/iso-window control); the
+    /// iso-dense constructor promotes the measured default 4. See [`KILLER_HITS`].
     killer_k: u32,
+    /// `QUEENS_KILLER_DEEP=1` (default off): extend the killer jumps to the deeper odd (prove-win)
+    /// plies of the parallel upper tree (depth 3, 5) with one shared table per ply band.
+    killer_deep: bool,
 }
 
 impl IsoFlat {
@@ -1300,6 +1308,40 @@ impl IsoFlat {
         // whole-stack revert `QUEENS_FAST=0`. Empty `skip18_squares` ⇒ all roots (n-agnostic default).
         s.skip18 = !matches!(std::env::var("QUEENS_SKIP18").as_deref(), Ok("0"))
             && !matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0"));
+        // ★ DEFAULT-ON (2026-07-01, promoted): cross-root killer replies at the 2nd ply — each root
+        // publishes its refuting reply square; later roots jump to already-proven killers (the table
+        // is re-read mid-loop, so late-published killers land). n=16 A/B: −37.6% nodes / −43.3% wall,
+        // cyc/node flat; record 23.44s → 14.60s. Verdict-preserving (a pure reorder of the depth-1
+        // `.any()` — changes the node count *by design*, so NOT part of the exact `--distinct` gate;
+        // iso-flat/iso-window keep the base default 0 ⇒ control + `--distinct` intact).
+        // `QUEENS_KILLER=<k>` overrides (0 disables); `QUEENS_FAST=0` reverts the whole stack.
+        s.killer_k = std::env::var("QUEENS_KILLER")
+            .ok()
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(
+                if matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0")) {
+                    0
+                } else {
+                    4
+                },
+            )
+            .min(8);
+        // ★ DEFAULT-ON (2026-07-01, promoted with the killer): killer jumps at the deeper odd
+        // plies (depth 3/5, per-band tables) stack another −7.5% nodes / −4.5% wall on the depth-1
+        // win. `QUEENS_KILLER_DEEP=0` (or killer off / `QUEENS_FAST=0`) reverts.
+        s.killer_deep = !matches!(std::env::var("QUEENS_KILLER_DEEP").as_deref(), Ok("0"))
+            && !matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0"));
+        // ★ DEFAULT-ON (2026-07-01): the ETC pc-gate (batch-probe off below pc 29) re-tested
+        // POSITIVE in the killer regime — the killer cut leaves the TT ~7.5% full, so the
+        // eviction-protection value that originally killed the gate (--3: +2.0% nodes) is gone;
+        // now cyc/node −1.2% (every pair), total cyc −1.8%. `QUEENS_ETC_GATE=0` or
+        // `QUEENS_ETC_PC=<pc>` overrides; `QUEENS_FAST=0` reverts.
+        if std::env::var("QUEENS_ETC_PC").is_err()
+            && !matches!(std::env::var("QUEENS_ETC_GATE").as_deref(), Ok("0"))
+            && !matches!(std::env::var("QUEENS_FAST").as_deref(), Ok("0"))
+        {
+            s.etc_pc_gate = 29;
+        }
         s.skip18_squares = std::env::var("QUEENS_SKIP18_ROOTS")
             .ok()
             .map(|v| {
@@ -1453,6 +1495,7 @@ impl IsoFlat {
                 .and_then(|v| v.parse().ok())
                 .unwrap_or(0)
                 .min(8),
+            killer_deep: std::env::var("QUEENS_KILLER_DEEP").as_deref() == Ok("1"),
             // Gather-time recurse-child prefetch (cheap-first PREFETCH lever). Resolved once here;
             // gated per node at the gather (off ⇒ byte-identical to the current prefetch behaviour).
             pf_deep: std::env::var("QUEENS_PFDEEP").as_deref() == Ok("1"),
@@ -4849,7 +4892,13 @@ impl IsoFlat {
         } else if depth == 1 && (self.killer_k > 0 || self.root_timing) {
             // QUEENS_KILLER (or refutation logging under QUEENS_ROOT_TIMING): the once-per-root
             // sequential 2nd-ply loop, with cross-root killer replies optionally front-loaded.
-            self.killer_loop::<ORACLE, COUNT, WINDOW, DK>(q, att, orient, kids, depth, min_avail)
+            self.killer_loop::<ORACLE, COUNT, WINDOW, DK>(q, att, orient, kids, depth, min_avail, 0)
+        } else if self.killer_deep && self.killer_k > 0 {
+            // QUEENS_KILLER_DEEP: extend the killer jumps to the deeper odd (prove-win) plies of
+            // the parallel upper tree (depth 3, 5 — one shared table per ply band). Same
+            // mechanism: these loops hunt one refuting reply in static order today.
+            let t = (((depth - 1) / 2) as usize).min(2);
+            self.killer_loop::<ORACLE, COUNT, WINDOW, DK>(q, att, orient, kids, depth, min_avail, t)
         } else {
             kids.iter().any(recurse)
         };
@@ -4872,6 +4921,7 @@ impl IsoFlat {
     /// cross-root clustering is observable. Cold — runs once per root; the per-call `Vec` and the
     /// O(kids²) stable-prepend are outside every hot path.
     #[cold]
+    #[allow(clippy::too_many_arguments)]
     fn killer_loop<const ORACLE: bool, const COUNT: bool, const WINDOW: bool, const DK: u32>(
         &self,
         q: &Queens,
@@ -4880,7 +4930,9 @@ impl IsoFlat {
         kids: &[u8],
         depth: u32,
         min_avail: u32,
+        table: usize,
     ) -> bool {
+        let hits = &KILLER_HITS[table];
         let avail = orient[0];
         // Remaining reply squares in their existing order; each iteration either jumps to the
         // hottest not-yet-tried killer (re-reading the GLOBAL table, so killers published by other
@@ -4895,7 +4947,7 @@ impl IsoFlat {
             if jumps < self.killer_k {
                 let (mut best_h, mut best_i) = (0u32, usize::MAX);
                 for (i, &s) in remaining.iter().enumerate() {
-                    let h = KILLER_HITS[s as usize].load(Ordering::Relaxed);
+                    let h = hits[s as usize].load(Ordering::Relaxed);
                     if h > best_h {
                         (best_h, best_i) = (h, i);
                     }
@@ -4923,8 +4975,8 @@ impl IsoFlat {
                 min_avail,
             );
             if won_kid {
-                KILLER_HITS[sq as usize].fetch_add(1, Ordering::Relaxed);
-                if self.root_timing {
+                hits[sq as usize].fetch_add(1, Ordering::Relaxed);
+                if self.root_timing && table == 0 {
                     eprintln!(
                         "[killer] root sq {} refuted by sq {} at rank {}/{} (killer jumps {})",
                         CUR_ROOT_SQ.with(|c| c.get()),
@@ -5505,6 +5557,14 @@ impl Solver for IsoFlat {
             // other concurrent roots. The result is this root's value, not the board verdict.
             let idx = moves.iter().position(|&m| m == only).unwrap_or(0);
             resolve(idx, &pending[idx].0, pending[idx].1)
+        } else if std::env::var("QUEENS_NO_ELDER").as_deref() == Ok("1") {
+            // QUEENS_NO_ELDER: fan ALL roots at once (no sequential elder-brother warm phase).
+            // Experiment for the killer regime, where the slow roots dominate the wall and the
+            // elder's ~1.3s TT warm may no longer pay. Read once per solve (cold).
+            pending
+                .par_iter()
+                .enumerate()
+                .any(|(i, (co, ckey))| resolve(i, co, *ckey))
         } else {
             let (first, rest) = pending.split_first().unwrap();
             // Root 0 is the sequential elder-brother (warms the TT); roots 1.. fan via rayon.
