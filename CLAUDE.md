@@ -21,6 +21,10 @@ open task. See the umbrella's 2026-06-28 OEIS note.) **`go`.**
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
 
+**★ NEXT SESSION (user-chosen):** [SMT complementary-phase scheduling](notes/handoffs/2026-07-01-smt-complementary-scheduling.md)
+— convert the measured −21% cyc/node no-SMT reserve without dropping threads; probes P1–P4, each with a
+kill condition (an evidence-backed "contention is inherent" close is a valid outcome). **`go`.**
+
 **Newest thread:** [explicit-stack frontier](notes/handoffs/2026-06-19-explicit-stack-frontier.md) —
 **LATEST (--15): goal → 30s END-TO-END (incl prep). Search −16% + prep −2s; best clean round ~33s, A/B good
 rounds ~30.4s.** Landed on main: **(1) pext k=8 dense-table build** — prep was the k=8 table build (2^28 scalar
