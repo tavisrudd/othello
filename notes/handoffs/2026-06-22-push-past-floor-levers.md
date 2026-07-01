@@ -275,7 +275,36 @@ TT now ~8% full at 12 GB, so capacity arguments shrink but latency ones stand; (
 per-thread IPC without dropping threads); (4) killers at n=18 (port to `queens-n18`).
 
 **Gates (all green):** n12 iso-flat distinct 1,060,823 exact (killer scoped away from iso-flat ✓),
-n14 second, `make test` 58 pass, clippy clean.; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
+n14 second, `make test` 58 pass, clippy clean.
+
+### Session 2026-07-01--13 (cont. 2) — user-directed: lever 3 (per-thread IPC) and lever 2 (assoc TT), both CLOSED with evidence
+**Lever 3 (per-thread IPC) — the cheap probes are all null; the 21% SMT reserve needs a
+restructure, not a knob:**
+- **TT-size sweep** (the no-boot-change shot at the TT dTLB: 4 GB on 2 MB pages fits the L2 TLB):
+  12 GB ≈ 13.8–14.4s, 6 GB 14.8, 4 GB 15.1, **2 GB 13.8** — all inside the ±1.5s killer-race noise
+  band. No resolvable dTLB win, but **TT size is now a free parameter down to ~2 GB** (8→13% fill;
+  the killer cut collapsed the working set) — load-bearing for n≥17 memory planning.
+- **Fresh stall profile (new defaults, 14.1s run):** IPC 1.34; branch-misses 40.7/node ≈ ~12% of
+  cycles (data-dependent α-β early-outs + cpc dispatch — the at-floor getK territory; counting
+  sort + skip18 already took the orderable sites); L1i misses 5.2/node (modest); dTLB 8.9/node
+  (unchanged, TT-resident). Raw AMD `de_dis_dispatch_token_stalls*` events not accepted by this
+  kernel's perf.
+- **`QUEENS_DENSE_K=16` re-sweep in the killer regime** (smaller hot evaluator footprint):
+  17.0s / +45% nodes — W17 stays the ceiling; the killer regime did not move the crossover.
+- Verdict: the reachable IPC probes are exhausted; converting the measured no-SMT −21% cyc/node
+  reserve requires complementary-phase thread scheduling (research-grade, multi-session).
+
+**Lever 2 (set-assoc TT) — DEAD in the killer regime (definitive 4-round A/B):** flat-assoc
+(`QUEENS_TT_ASSOC=1`, the band-free bucket mode on main) = **cyc/node +4.9% (every round), nodes
++0.7%, total cyc +5.6%, wall +2.7%.** Both of its historical payoffs evaporated when the killer
+cut collapsed the TT working set to ~8% full: there is no eviction pressure to protect against
+(nodes flat) and no capacity squeeze — only the bucket probe's extra instructions remain. The
+parked `queens-tt-assoc-buckets` branch stays parked (its n=18/oversubscribed rationale would need
+re-checking post-killer too, since killers should shrink that working set as well).
+
+**Record unchanged: 13.77s / 179.3M @ 12 GB** (six more default-stack runs this round: 13.8–16.0,
+killer-race + thermal noise). Next real levers remain: 1 GB TT pages (boot), complementary-phase
+SMT scheduling, killers-at-n=18.; BOLT/K18+skip19/no-SMT all measured dead; dense-arena MADV_COLLAPSE banked; TT-dTLB + THP-disable diagnostics
 **Session**: 2026-07-01--13. Catalyst: user asked to break the 23.44s floor, target sub-20, "get creative."
 
 **★★ THE WIN — `QUEENS_KILLER` (cross-root killer replies at the 2nd ply), gated, default OFF
