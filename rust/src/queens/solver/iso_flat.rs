@@ -579,22 +579,48 @@ fn att08(att: &[[Bits; 8]], sq: u8) -> Bits {
     att_for8(att, sq)[0]
 }
 
+/// Byte indices `0..=255`: word `w`'s 64-byte slice `[w*64 .. w*64+64)` is the identity
+/// source vector for the [`verts_of`] `vpcompressb` extraction. 64-aligned for the load.
+#[repr(align(64))]
+struct IdentBytes([u8; 256]);
+static IDENT_BYTES: IdentBytes = {
+    let mut a = [0u8; 256];
+    let mut i = 0;
+    while i < 256 {
+        a[i] = i as u8;
+        i += 1;
+    }
+    IdentBytes(a)
+};
+
 /// Scatter the set-square indices of `avail` (ascending) into `verts[..pc]`. A closure-free
 /// twin of `avail.each(|v| ...)`: a plain `#[inline(always)]` fn with no `FnMut` reliably
 /// inlines into the giant `wins_inc`, where the closure form was being *outlined* to a shared
 /// `FnMut::call_mut` (~6.9% of n=16 search cycles — the closure is invoked once per live square,
 /// per `wK_get` entry on the pc 9..16 dense majority). Output is bit-identical to `each`.
+///
+/// AVX512-VBMI2 `vpcompressb` per word (compress the identity byte vector by the word's bit
+/// mask) replaces the serial `tzcnt`/`x &= x-1` scan — that loop's ~2-cycle-per-set-bit
+/// dependent chain measured ~9% of n=16 search cycles (srcline profile, 2026-07-02).
+/// `vpcompressb` preserves ascending bit order, so the output stays byte-identical.
 #[inline(always)]
 fn verts_of(avail: Bits, verts: &mut [u8]) {
+    use std::arch::x86_64::{
+        _mm512_load_si512, _mm512_mask_storeu_epi8, _mm512_maskz_compress_epi8,
+    };
     let mut n = 0usize;
     for (w, &word) in avail.0.iter().enumerate() {
-        let mut x = word;
-        while x != 0 {
-            // SAFETY: `verts.len() == popcount(avail)` at every call site (a pc==K node), so
-            // exactly `K` writes occur and `n < verts.len()` throughout.
-            unsafe { *verts.get_unchecked_mut(n) = (w as u32 * 64 + x.trailing_zeros()) as u8 };
-            n += 1;
-            x &= x - 1;
+        // SAFETY: znver5 ⇒ AVX512-BW/VBMI2. The masked store writes exactly `popcount(word)`
+        // bytes at `verts[n..]` (masked-out lanes are architecturally suppressed — no write,
+        // no fault), and `Σ popcount = verts.len()` at every call site (a pc==K node), so all
+        // writes are in bounds. `IDENT_BYTES` is 64-aligned for the aligned load.
+        unsafe {
+            let idx = _mm512_load_si512(IDENT_BYTES.0.as_ptr().add(w * 64) as *const _);
+            let c = _mm512_maskz_compress_epi8(word, idx);
+            let cnt = word.count_ones();
+            let smask = ((1u128 << cnt) - 1) as u64;
+            _mm512_mask_storeu_epi8(verts.as_mut_ptr().add(n) as *mut i8, smask, c);
+            n += cnt as usize;
         }
     }
     debug_assert_eq!(n, verts.len());
