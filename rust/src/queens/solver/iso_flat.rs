@@ -298,6 +298,10 @@ struct KprobeAcc {
     sim_s_hits: [u64; KPROBE_BANDS],
     sim_l_hits: [u64; KPROBE_BANDS],
     hll: [[u8; KPROBE_HLL_M]; KPROBE_BANDS],
+    // `QUEENS_KPROBE=2` only: per-band registers over the CANONICAL (iso-merged `comp_canon`) key —
+    // the Tier-C1 go/no-go quantity (canonical distinct = the value-table footprint; entries /
+    // canonical distinct = the amortisation multiplicity). Untouched at level 1.
+    hll_c: [[u8; KPROBE_HLL_M]; KPROBE_BANDS],
 }
 
 /// `M_RANK` (`QUEENS_RANK=1`) per-pc-band first-losing-child cutoff-rank tally (indexed by `node_pc`).
@@ -391,6 +395,7 @@ thread_local! {
             sim_s_hits: [0; KPROBE_BANDS],
             sim_l_hits: [0; KPROBE_BANDS],
             hll: [[0; KPROBE_HLL_M]; KPROBE_BANDS],
+            hll_c: [[0; KPROBE_HLL_M]; KPROBE_BANDS],
         })
     };
     /// Per-worker `M_RANK` accumulator; merged into the shared [`IsoFlat::rank_*`] at drain.
@@ -1180,8 +1185,15 @@ pub struct IsoFlat {
     /// tables (finite-size hit rates) — gates the code-keyed getK memo lever). Off = byte-identical
     /// M_ORD_W (the tap DCEs).
     kprobe: bool,
+    /// `QUEENS_KPROBE=2`: also fold each getK entry's CANONICAL key (`each_comp_canon`, the
+    /// iso-merged WL/IR certificate, components combined order-independently) into a second
+    /// per-band HLL — the Tier-C1 canonical-value-table go/no-go (footprint + multiplicity).
+    /// Much slower per entry (a WL canon per getK call); level 1 skips it.
+    kprobe_canon: bool,
     /// Shared per-band `M_KPROBE` HLLs (indexed pc−9); workers fold locals in at drain.
     kprobe_hll: Vec<Hll>,
+    /// Shared per-band canonical-key HLLs (level 2 only).
+    kprobe_hll_c: Vec<Hll>,
     /// Shared `M_KPROBE` per-band tallies (indexed pc−9), `AtomicU64`-backed.
     kprobe_entries: Box<[AtomicU64]>,
     kprobe_s_hits: Box<[AtomicU64]>,
@@ -1577,7 +1589,7 @@ impl IsoFlat {
         let segment = tt.is_segmented();
         let assoc = tt.is_assoc();
         let sidecar = std::env::var("QUEENS_SIDECAR").as_deref() == Ok("1");
-        let kprobe_on = std::env::var("QUEENS_KPROBE").as_deref() == Ok("1");
+        let kprobe_on = matches!(std::env::var("QUEENS_KPROBE").as_deref(), Ok("1") | Ok("2"));
         IsoFlat {
             name: if window { "iso-window" } else { "iso-flat" },
             tt,
@@ -1669,7 +1681,9 @@ impl IsoFlat {
             decprobe: std::env::var("QUEENS_DECPROBE").as_deref() == Ok("1"),
             dhist: std::env::var("QUEENS_DHIST").as_deref() == Ok("1"),
             kprobe: kprobe_on,
+            kprobe_canon: std::env::var("QUEENS_KPROBE").as_deref() == Ok("2"),
             kprobe_hll: (0..KPROBE_BANDS).map(|_| Hll::new(KPROBE_HLL_P)).collect(),
+            kprobe_hll_c: (0..KPROBE_BANDS).map(|_| Hll::new(KPROBE_HLL_P)).collect(),
             kprobe_entries: (0..KPROBE_BANDS).map(|_| AtomicU64::new(0)).collect(),
             kprobe_s_hits: (0..KPROBE_BANDS).map(|_| AtomicU64::new(0)).collect(),
             kprobe_l_hits: (0..KPROBE_BANDS).map(|_| AtomicU64::new(0)).collect(),
@@ -2611,6 +2625,9 @@ impl IsoFlat {
                     a.sim_s_hits[b] = 0;
                     a.sim_l_hits[b] = 0;
                     self.kprobe_hll[b].merge_from(&a.hll[b]);
+                    if self.kprobe_canon {
+                        self.kprobe_hll_c[b].merge_from(&a.hll_c[b]);
+                    }
                 }
             }
         });
@@ -2636,10 +2653,21 @@ impl IsoFlat {
             (1u64 << KPROBE_SIM_L_BITS) * 8 / (1024 * 1024),
         );
         println!(
-            "    {:>3} {:>15} {:>15} {:>8} {:>9} {:>9}",
-            "pc", "entries", "distinct", "repeat×", "hit%-s", "hit%-l"
+            "    {:>3} {:>15} {:>15} {:>8} {:>9} {:>9}{}",
+            "pc",
+            "entries",
+            "distinct",
+            "repeat×",
+            "hit%-s",
+            "hit%-l",
+            if self.kprobe_canon {
+                format!(" {:>15} {:>9}", "canon-dist", "c-rep×")
+            } else {
+                String::new()
+            },
         );
         let mut tot_distinct = 0.0f64;
+        let mut tot_cdist = 0.0f64;
         let (mut tot_s, mut tot_l) = (0u64, 0u64);
         for b in 0..KPROBE_BANDS {
             let n = ld(&self.kprobe_entries, b);
@@ -2652,8 +2680,15 @@ impl IsoFlat {
             let l = ld(&self.kprobe_l_hits, b);
             tot_s += s;
             tot_l += l;
+            let ctail = if self.kprobe_canon {
+                let cdist = self.kprobe_hll_c[b].estimate();
+                tot_cdist += cdist;
+                format!(" {:>15} {:>9.1}", commas(cdist as u64), n as f64 / cdist)
+            } else {
+                String::new()
+            };
             println!(
-                "    {:>3} {:>15} {:>15} {:>8.2} {:>8.1}% {:>8.1}%",
+                "    {:>3} {:>15} {:>15} {:>8.2} {:>8.1}% {:>8.1}%{ctail}",
                 b + 9,
                 commas(n),
                 commas(distinct as u64),
@@ -2663,8 +2698,17 @@ impl IsoFlat {
             );
         }
         if total > 0 {
+            let ctail = if self.kprobe_canon {
+                format!(
+                    " {:>15} {:>9.1}",
+                    commas(tot_cdist as u64),
+                    total as f64 / tot_cdist
+                )
+            } else {
+                String::new()
+            };
             println!(
-                "    all {:>15} {:>15} {:>8.2} {:>8.1}% {:>8.1}%",
+                "    all {:>15} {:>15} {:>8.2} {:>8.1}% {:>8.1}%{ctail}",
                 commas(total),
                 commas(tot_distinct as u64),
                 total as f64 / tot_distinct,
@@ -3923,6 +3967,25 @@ impl IsoFlat {
                     };
                     let hs = sim(&self.kprobe_sim_s);
                     let hl = sim(&self.kprobe_sim_l);
+                    // Level 2 (Tier-C1 go/no-go): the CANONICAL key — decompose the child graph and
+                    // combine each component's measurement-exact WL/IR certificate order-independently
+                    // (splitmix of (size, canon), wrapping-summed; the tail is 97–100% single-component
+                    // per DECPROBE, so the combine rarely fires). Runtime branch is fine: cold tap only.
+                    let canon_key = if self.kprobe_canon {
+                        let mut acc = 0u64;
+                        q.each_comp_canon(child0, |sz, key| {
+                            let mut h = key ^ ((sz as u64) << 56);
+                            h ^= h >> 30;
+                            h = h.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+                            h ^= h >> 27;
+                            h = h.wrapping_mul(0x94d0_49bb_1331_11eb);
+                            h ^= h >> 31;
+                            acc = acc.wrapping_add(h);
+                        });
+                        Some(Bits([acc, 0, 0, pc as u64]))
+                    } else {
+                        None
+                    };
                     KPROBE_ACC.with(|c| {
                         let mut a = c.borrow_mut();
                         let b = (pc - 9) as usize;
@@ -3930,6 +3993,9 @@ impl IsoFlat {
                         a.sim_s_hits[b] += hs as u64;
                         a.sim_l_hits[b] += hl as u64;
                         self.kprobe_hll[b].add_local(ck, &mut a.hll[b]);
+                        if let Some(ckey) = canon_key {
+                            self.kprobe_hll_c[b].add_local(ckey, &mut a.hll_c[b]);
+                        }
                     });
                 }
                 if pc == 0 {

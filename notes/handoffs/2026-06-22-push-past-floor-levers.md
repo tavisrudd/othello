@@ -218,9 +218,15 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
   cyc +0.7% / wall +3.6%.** The "node-identical" premise was WRONG: the cold-mass probes' value is the
   **win-child reuse** (`wv==1` eviction-protection skip), the SAME probe as the cut-probe ⇒ ungateable.
   Kept gated-off as substrate; one untried angle = larger TT (less eviction). `etc_probes` tap kept.
-- [ ] Tier-B1: n=16 sampled-HLL C confirm → (if GO) design idle-core eviction-recovery pre-fill.
+- [x] Tier-B1: eviction-recovery pre-fill → **CLOSED by regime change (2026-07-01--15, no build).** The
+  killer cut collapsed the TT working set to ~8–9% full and the --13 TT-size sweep measured 2 GB ≈ 12 GB
+  wall (nodes flat) ⇒ eviction costs ~nothing ⇒ there is no evicted-value pool worth re-filling. The
+  pre-killer C≈0.39 measurement no longer describes the production regime.
 - [x] Tier-B2: canon-skip oracle-sidecar upper-bound → **KILL** (skip-all +30.7% nodes/+15.1% wall; the unbounded re-exp cascade dwarfs the ~6–9% ceiling; exact-child0 can't separate the 0.2% recurring).
-- [ ] Tier-C1: ★ getK distinct-`comp_canon` @ K=9–12 offline count → (if GO) build the value layer.
+- [x] Tier-C1: ★ getK distinct-`comp_canon` count → **MEASURED at n=16 (`QUEENS_KPROBE=2`) → NO-GO,
+  closed (2026-07-01--15).** Gate passes only at pc9 (170K canonical keys, 289× multiplicity) where the
+  ~200-cyc get9 is cheaper than any canon; pc12+ (the cycle mass) = 50–81M keys at 1.2–1.9× = the
+  dead-memo regime. The treewidth anti-correlation again. See the --15 session note.
 - [x] Tier-C2 PREMISE TEST: treewidth min-fill → **GO**, confirmed n=14 (med 11) AND n=16 (med 10, mass bands 7–9, tree-like). (`scratchpad/treewidth.py`)
 - [x] Tier-C2 CONSTANT-FACTOR TEST → **★★ KILLED.** Subtree the DP replaces (alpha-beta + exact-availset memo, median 80–768 nodes at pc18–28) ≪ DP cost `3^(w+1)` (6.5K–43M); 0/358 graphs have subtree ≥ DP cost (max ratio 0.1). Premise true, not sufficient — tail is BREADTH not DEPTH; per-instance FPT can't pay. Tool: `rust/scripts/treewidth_dp_probe.py`. **Do not build the separator DP.**
 - [ ] Tier-C3: ranklab AND-node proof-cost skew → (if ≥20%) prototype the scheduler.
@@ -276,8 +282,52 @@ frontier dedup (+94% nodes), component decomposition (0-3% ≥2-comp), and now c
 22.5%, uniform). Probe cost: the tapped run is 28.9s vs 13.4s clean (~2.1×, cold-tap only).
 
 Gates green: `make test`, n=12 iso-flat distinct 1,060,823 exact, n=14 second / ≈29.2M / 1.02× re-exp.
-**Remaining open brainstorm ideas: C (loss-tail locality reorder — ceiling ≈32% of child-exams from the
-rank report) and E (mirror oracle) — both unprobed.**
+
+**(cont.) Tier-C1 (canonical getK value layer) — the designed go/no-go MEASURED: NO-GO, closed.**
+Extended the probe to `QUEENS_KPROBE=2`: per getK entry also fold the CANONICAL key
+(`each_comp_canon`, the measurement-exact WL/IR certificate — the machinery graph.rs built for
+exactly this gate; components combined order-independently) into a second per-band HLL. Full n=16
+run (179.7M nodes ≈ production, SECOND, 2m43s — the canon tap costs ~4 µs/entry, measurement only):
+
+| pc  | entries | canon-distinct | canon-mult× | (labelled distinct) |
+|-----|---------|----------------|-------------|---------------------|
+| 9   | 49.2M   | 170,045        | 289.3       | 34.8M               |
+| 10  | 90.5M   | 2.66M          | 34.0        | 72.6M               |
+| 11  | 98.6M   | 20.7M          | 4.8         | 74.9M               |
+| 12  | 92.0M   | 49.7M          | 1.9         | 63.3M               |
+| 13  | 98.7M   | 65.7M          | 1.5         | 68.7M               |
+| 14  | 105.7M  | 77.6M          | 1.4         | 79.4M               |
+| 15  | 100.9M  | 81.4M          | 1.2         | 82.5M               |
+| 16  | 84.0M   | 72.0M          | 1.2         | 72.6M               |
+| 17  | 60.3M   | 53.5M          | 1.1         | 53.5M               |
+| all | 779.9M  | 423.4M         | 1.8         | 603.2M              |
+
+**Reading — the C1 gate ("distinct fits L2/L3 AND multiplicity ≫10×") passes ONLY at pc9
+(170K keys ≈ 1.4 MB, 289×; pc10 borderline: 2.7M ≈ 21 MB, 34×) — and there the constant factor
+kills it:** a pc9 hit saves only the ~200-cyc get9 (code build + sweep), while the lookup must
+CANONIZE the 9-vertex graph first — the measurement-exact canon ran ~4 µs here, and even a tuned
+small-graph canon is ≫200 cyc (the iso-key cost lesson: canon ≈ 100× the D4 key). Where a hit
+would save real work (pc12+, the thousand-cycle sweeps ≈ the getK cycle mass), the canonical set
+is 50–81M per band (DRAM regime — the dead-memo footprint) at multiplicity 1.2–1.9. **The same
+anti-correlation as the treewidth kill: the gate quantity passes exactly where the work is too
+cheap to be worth replacing.** Bonus sizing: the iso merge on tail graphs is weak — 603M labelled
+→ 423M canonical = 1.42× (the ~3.4× figure was whole-board, does not transfer), which also sizes
+the "realizable-code compaction" idea from the DECPROBE close (item (a): now measured, dead).
+**Do not build the canonical value layer. The Tier-C1 box is closed** — and with it every memo
+flavor over the getK tail: labelled (kprobe L1), canonical (kprobe L2), component-Grundy
+(DECPROBE), frontier (L0/wave), exact-key skip (canon-skip B2).
+
+**(cont. 2) Brainstorm C (loss-tail locality reorder) — closed on the napkin, mechanisms absent:**
+(1) same-band grouping of getK children (the W*_MASKS-table locality a reorder would create)
+already exists — the dynamic sort key IS the child popcount (`sort_moves_by_degree`,
+iso_flat.rs), ascending ⇒ same-pc children are already adjacent; (2) entry-probe DRAM latency is
+already off the critical path (hash-carry prefetch; tt.rs = 0.13% of cache misses per the
+2026-07-02 key-cost split); (3) recurse-probe MLP batching already happens where it pays (the ETC
+batch, pc≥29). The 32% loss-node exam mass is getK compute + child subtree expansions — neither
+is sibling-order-addressable. And the reorder is only node-count-free at TRUE losses, which need
+the loss-predictor that already failed (--2). **E (mirror oracle) stays an unspecified label** —
+its plausible form (2nd-ply orbit/mirror dedup) was already closed by the residual-stabilizer
+code-read (--3: the D4 canon key IS the orbit-dedup).
 
 ### Session 2026-07-02 — micro-opt + profiling round: getK mask-prefetch + TABLE_OFF mask = cyc/node −2.1% (LANDED)
 
