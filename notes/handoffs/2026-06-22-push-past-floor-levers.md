@@ -316,6 +316,16 @@ node population) — it does not transfer. **What structure remains in the tail:
 play, not a math shortcut; unsized); (b) code-frequency skew (memo angles = the measured-negative
 L0 cousin); (c) nothing else — the boolean-decomposition cap on the sweep math stands.
 
+**(cont. 3) `QUEENS_RANK` re-run in the 13.43s stack (algorithmic-brainstorm gate): the DEEP
+ordering is NOT exhausted.** 185.2M expanded OR-nodes, E = 5.70 children examined/node,
+1.056 B child-exams total: ETC 3.2% / r0 23.7% / r1 16.8% / r2 11.7% / **r≥3 = 37.1% of nodes
+(mean rank ~8)** / nocut (true losses, unavoidable full scans) 7.6%. **ordering_loss = 555M
+avoidable child-exams = 52.6% of all child-exams** (the perfect-order ceiling). The depth-1/3/5
+killer family is spent, but the deep kernel below ply 5 orders by current-degree ONLY — no
+learned signal. This is the measured headroom behind the deep-history-heuristic idea (next-session
+candidate A). Loss-node share of exams ≈ 32% (0.076 × 23.91 / 5.70) — the move-order-SAFE
+locality-reorder ceiling (candidate C). Explored/expansions ratio re-confirmed 5.60 (1.062 B / 189.7M).
+
 **TT-key cost split (user question; profiling build, srcline-bucketed cycles, full n=16 default run):**
 the whole key pipeline ≈ **9% of cycles**, and it is CANON, not hashing:
 - **canon ≈ 7.5%** — `child_orient` (incremental 8-orientation images, 7 four-word and_nots/node) +
