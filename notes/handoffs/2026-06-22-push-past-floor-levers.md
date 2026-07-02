@@ -290,9 +290,13 @@ is data-dependent boolean structure — no orderable site left.
   to ~8%, transposition-saturated tail ⇒ the leaf-code set may be similarly skewed). **P0 before
   any build: a gated probe (HLL + top-k frequency skew of get9 codes over an n=16 run).** If the
   hot set ≲ tens of MB ⇒ build it; if ~uniform over 8 GiB ⇒ close the lever, DRAM latency eats it.
-- Remaining kernel candidates, updated: wide-layer (K=17..20) root-adj carry (same trick through
-  `get_dyn_wide`→`get_wide`, untried — w_wide_get ≈ 2.2% cycles so est <1%); `w9_get` still builds
-  its 36-bit code scalar (36 `row.get` bit-tests — a pext build + root-adj there is untried).
+- ~~Remaining kernel candidates~~ **both measured WASH and reverted (4-round A/B, built together):
+  w9 pext-build + get9 root-adj AND wide-layer (K=17..20) root-adj = cyc/node +0.3% with per-round
+  signs flipping (−1.1/+1.0/+0.9/+0.6) — no consistent direction, unlike the three every-round wins.**
+  Reading: w9's scalar 36-bit build ≈ the pext build + row capture (the extract saving cancels), and
+  w_wide's ≈2.2% share is sub-noise. Instructive negative: the root-adj trick only pays where `packed`
+  is a free byproduct AND the layer is fat (w10..w16); reverted by re-edit, tree byte-identical to
+  `2b7ebac`, gates re-verified before the A/B (all suites, n12 exact, n12/n14 iso-dense second).
 - **W9 full table: SKIPPED (user call)** — the conditional Fermi (DRAM ≥ compute unless the hot
   set is L3-resident) wasn't worth the probe + build risk.
 
