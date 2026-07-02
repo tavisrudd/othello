@@ -110,6 +110,21 @@ whether the nimber is 0 or ≠ 0), **not the nimber value**. So:
 What our solves DO extend: the **win/loss / winner** record (Jenrich's outcome sequence n ≤ 16 →
 n = 18), which is not A344227.
 
+**2026-07-01 UPDATE — n = 14..16 nimbers DONE: G(14) = 0, G(15) = 1, G(16) = 0.** The new
+heap-sum engine (`queens nimber <n>`: G(board) = the first k where board + Nim-heap(k) is a
+P-position — each round an α-β win/loss search with Grundy-valued dense leaves) reproduces
+A344227 exactly for n ≤ 13 and collects the three missing n ≤ 16 terms in seconds-to-minutes;
+full record + validation chain in
+[2026-07-01-queens-nimber-a344227](2026-07-01-queens-nimber-a344227.md). The conjectured
+oscillation now holds through 16 and is refuted at 18 (nonzero, value open). **Remaining for the
+full OEIS story: G(17), G(18)** — n18-branch scale, estimate before firing.
+Venue/community model for the eventual submission: **Dekking–Shallit–Sloane, "Queens in exile",
+ELJC 27(1) #P1.52 (2020)** — the OEIS-anchored queens-game publication pattern (Sloane co-author;
+the A274528/A274640 games cluster: Fokkink, Rust, Larsson, Wechsler, Heinz, Sigrist; OEIS
+*comments* are a citable channel there). Its Conjecture 26 (SG columns quasi-periodic, à la
+Dress–Flammenkamp–Pink) is a pattern worth checking against the extended A344227 data —
+different game family (single-token Wythoff-like), so a prompt, not a theorem.
+
 ## TL;DR state
 
 - **Representation migration: DONE + validated on n≤16** (WORDS 4→6, MAX_N→18, u16 squares,

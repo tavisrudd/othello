@@ -20,7 +20,7 @@ pub use incremental::Incremental;
 pub use iso_flat::IsoFlat;
 pub use memo::{BranchingStats, Tt};
 pub use naive::Naive;
-pub use nimber::Nimber;
+pub use nimber::{Nimber, NimberSum};
 pub use parallel::Parallel;
 pub use pn::Pn;
 pub use ranklab::run_ranklab;

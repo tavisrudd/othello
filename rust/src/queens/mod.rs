@@ -56,7 +56,7 @@ pub use geom::Queens;
 pub use graph::ModuleStats;
 pub use solver::{
     make_solver, run_ranklab, BranchingStats, Burr, Fused, Incremental, IsoBurr, IsoFlat, Naive,
-    Nimber, Parallel, Pn, Solver, StealReport, Tt, SOLVER_NAMES,
+    Nimber, NimberSum, Parallel, Pn, Solver, StealReport, Tt, SOLVER_NAMES,
 };
 pub use store::BurrStore;
 pub use tt::{archive_key_of, for_each_image_entry, QueensTt, TtHeader};
@@ -424,6 +424,28 @@ mod tests {
                 Naive::new().first_player_wins(&q),
                 "n={n}: nimber!=0 must agree with win/loss"
             );
+        }
+    }
+
+    /// The heap-sum nimber engine (`NimberSum`) matches OEIS A344227 and the independent
+    /// full-mex reference (`Nimber`): two disagreeing-by-construction engines (α-β heap-sum
+    /// rounds + Grundy dense leaves vs whole-DAG mex over a canon TT) must agree exactly.
+    #[test]
+    fn nimber_sum_matches_full_mex_and_oeis() {
+        const A344227: [u8; 14] = [0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1];
+        for n in 1..=11u32 {
+            let q = Queens::new(n);
+            let g = NimberSum::new(22)
+                .nimber(&q, 8)
+                .expect("nimber within max_k");
+            assert_eq!(g, A344227[n as usize], "n={n}: sum engine vs OEIS A344227");
+            if n <= 8 {
+                assert_eq!(
+                    g,
+                    Nimber::new(16).nimber(&q),
+                    "n={n}: sum engine vs full-mex reference"
+                );
+            }
         }
     }
 

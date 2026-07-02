@@ -23,7 +23,7 @@ use signal_hook::iterator::Signals;
 use othello::burr::{Archive, ShardedArchive};
 use othello::queens::{
     for_each_image_entry, make_solver, run_ranklab, Bits, Burr, Fused, Incremental, IsoBurr,
-    IsoFlat, Nimber, Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
+    IsoFlat, Nimber, NimberSum, Parallel, Queens, QueensTt, Solver, Tt, MAX_N, SOLVER_NAMES,
 };
 
 /// Nimbers (and the win/loss values for n=0..13) of OEIS A344227 — used to
@@ -159,6 +159,15 @@ enum Cmd {
     Nimber {
         #[arg(default_value_t = 8, value_parser = clap::value_parser!(u32).range(1..=MAX_N as i64))]
         n: u32,
+        /// Use the full-mex engine (expands the entire game DAG — the original
+        /// reference; hopeless past n≈13). Default is the heap-sum engine:
+        /// G(board) = the first k where board + Nim-heap(k) is a second-player
+        /// win, each round an α-β search with Grundy dense leaves.
+        #[arg(long)]
+        full: bool,
+        /// Highest heap size the sum engine tries before giving up (G ≤ 15).
+        #[arg(long, default_value_t = 8, value_parser = clap::value_parser!(u8).range(0..=15))]
+        max_k: u8,
     },
     /// Count the distinct positions the win/loss search visits (its true TT
     /// working set), via HyperLogLog. Use the counts for n=10/12/14 to
@@ -324,7 +333,7 @@ fn main() {
             },
             to_file,
         ),
-        Cmd::Nimber { n } => nimber_mode(&Queens::new(n)),
+        Cmd::Nimber { n, full, max_k } => nimber_mode(&Queens::new(n), full, max_k),
         Cmd::Count {
             n,
             parallel,
@@ -1915,22 +1924,62 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
     render(q, queens, blocked);
 }
 
-fn nimber_mode(q: &Queens) {
+fn nimber_mode(q: &Queens, full: bool, max_k: u8) {
     // The nimber must be *searched* even on odd boards (the pairing proves it is
-    // non-zero but not its value), and there is no α-β cutoff, so size the table
-    // by board size irrespective of parity. `QUEENS_TT_BITS` still overrides.
+    // non-zero but not its value). `QUEENS_TT_BITS` still overrides the size.
     let bits = std::env::var("QUEENS_TT_BITS")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(match q.n {
             0..=11 => 24,
             12 => 26,
+            13..=14 if !full => 28,
+            15.. if !full => 30,
             _ => 27,
         });
-    let solver = Nimber::new(bits);
+    if full {
+        let solver = Nimber::new(bits);
+        let t = Instant::now();
+        let g = solver.nimber(q);
+        let elapsed = t.elapsed().as_secs_f64();
+        report_nimber(q, g, solver.nodes(), elapsed, "full-mex");
+        return;
+    }
+    // The heap-sum engine: G(board) = the first k where board + Nim-heap(k) is a
+    // second-player win. One TT across rounds (win(avail,h) is round-independent).
+    let t0 = Instant::now();
+    let solver = NimberSum::new(bits);
+    eprintln!(
+        "\x1b[90m(prep {:.2}s · {})\x1b[0m",
+        t0.elapsed().as_secs_f64(),
+        solver.table_summary(),
+    );
     let t = Instant::now();
-    let g = solver.nimber(q);
-    let elapsed = t.elapsed().as_secs_f64();
+    for k in 0..=max_k {
+        let tr = Instant::now();
+        let win = solver.round_win(q, k);
+        eprintln!(
+            "\x1b[90m(round k={k}: board+heap({k}) is a {} · {:.2}s · {} nodes total)\x1b[0m",
+            if win {
+                "first-player WIN"
+            } else {
+                "second-player WIN (P-position)"
+            },
+            tr.elapsed().as_secs_f64(),
+            solver.nodes(),
+        );
+        if !win {
+            report_nimber(q, k, solver.nodes(), t.elapsed().as_secs_f64(), "heap-sum");
+            return;
+        }
+    }
+    println!(
+        "On the {n}×{n} board the Sprague-Grundy value is > {max_k} (every heap round won; raise --max-k).",
+        n = q.n,
+    );
+}
+
+fn report_nimber(q: &Queens, g: u8, nodes: u64, elapsed: f64, engine: &str) {
     let winner = if g == 0 { "second" } else { "first" };
     println!(
         "On the {n}×{n} board the Sprague-Grundy value is *{g}  ⇒  {winner} player wins.",
@@ -1941,7 +1990,7 @@ fn nimber_mode(q: &Queens) {
         Some(&exp) => println!("(MISMATCH vs OEIS A344227: expected *{exp})"),
         None => println!("(beyond OEIS A344227 — a new term)"),
     }
-    println!("(searched {} nodes in {:.3}s)", solver.nodes(), elapsed);
+    println!("(searched {nodes} nodes in {elapsed:.3}s · {engine} engine)");
 }
 
 /// Measure the distinct positions the win/loss search visits -- the table's true

@@ -808,7 +808,7 @@ impl DenseW8 {
     /// tail-call (the reduced graph has `≤1` isolated vertex, so the target `getK` won't recurse
     /// here again). `getK` for `k ≤ 11` take a `u64`; the reduced code always fits its layer.
     #[inline]
-    fn get_dyn(&self, k: usize, code: u128) -> bool {
+    pub(crate) fn get_dyn(&self, k: usize, code: u128) -> bool {
         match k {
             16 => self.get16(code),
             15 => self.get15(code),
@@ -1320,6 +1320,231 @@ fn build_tables() -> Vec<Box<[u64]>> {
     tables
 }
 
+// ========================= Grundy (Sprague-Grundy) dense layer =========================
+//
+// The nimber twin of the boolean `W0..=W8` layer, for the `queens nimber` sum-game engine
+// (OEIS A344227): `G_k[code]` = the Sprague-Grundy value of the labelled `k ≤ 8`-vertex
+// Node-Kayles graph, and `g9..g12` resolve 9..12-vertex graphs by a nested mex sweep over
+// the same const projection masks the boolean `get9..get12` use (the masks are pure code-space
+// geometry — value-independent). Unlike the boolean sweeps there is NO early-out: `mex` needs
+// every child's value. A game on `k` vertices has value `≤ k` (children have `≤ k-1` vertices,
+// so by induction mex is over values `≤ k-1`), hence one byte per code is ample.
+
+/// Byte offset of the `G_k` table in the flat Grundy arena (one byte per labelled code).
+/// The bytes twin of [`TABLE_OFF`].
+const fn gtable_offsets() -> [usize; 16] {
+    let mut off = [0usize; 16];
+    let mut k = 0;
+    while k <= W8_K {
+        off[k + 1] = off[k] + slots(k);
+        k += 1;
+    }
+    off
+}
+const GTABLE_OFF: [usize; 16] = gtable_offsets();
+
+/// Build-time scalar mex of one labelled `k ≤ 7`-vertex graph (the tiny tables; mirrors
+/// [`graph_wins`]).
+fn grundy_graph(k: usize, code: usize, tables: &[Box<[u8]>]) -> u8 {
+    let adj = adj_from_code(k, code as u128);
+    let full = (1u16 << k) - 1;
+    let mut seen = 0u32;
+    for i in 0..k {
+        let child = full & !((1u16 << i) | adj[i]);
+        let (ck, ccode) = projected_code(&adj, child);
+        seen |= 1u32 << tables[ck][ccode as usize];
+    }
+    (!seen).trailing_zeros() as u8
+}
+
+/// `pext` twin of [`grundy_graph`] specialised to `k == 8` — the dominant build cost
+/// (2^28 codes). Mirrors [`graph_wins8`] with mex accumulation instead of the early-out.
+#[inline]
+fn grundy_graph8(code: u64, tables: &[Box<[u8]>]) -> u8 {
+    use std::arch::x86_64::_pext_u64;
+    let (adj, _) = extract_adj::<8>(code, &W8_MASKS.0);
+    let full = (1u16 << 8) - 1;
+    let mut seen = 0u32;
+    #[allow(clippy::needless_range_loop)]
+    for i in 0..8 {
+        let child = full & !((1u16 << i) | adj[i]);
+        // SAFETY: target-cpu=znver5 ⇒ BMI2; same build invariant as `graph_wins8`.
+        let child_code = unsafe { _pext_u64(code, W8_MASKS.1[child as usize]) } as usize;
+        seen |= 1u32 << tables[child.count_ones() as usize][child_code];
+    }
+    (!seen).trailing_zeros() as u8
+}
+
+fn build_grundy_table(k: usize, tables: &[Box<[u8]>]) -> Box<[u8]> {
+    let mut out = vec![0u8; slots(k)].into_boxed_slice();
+    const CHUNK: usize = 1 << 16;
+    out.par_chunks_mut(CHUNK)
+        .enumerate()
+        .for_each(|(ci, chunk)| {
+            let base = ci * CHUNK;
+            for (i, slot) in chunk.iter_mut().enumerate() {
+                *slot = if k == 8 {
+                    grundy_graph8((base + i) as u64, tables)
+                } else {
+                    grundy_graph(k, base + i, tables)
+                };
+            }
+        });
+    out
+}
+
+fn build_grundy_tables() -> Vec<Box<[u8]>> {
+    let mut tables: Vec<Box<[u8]>> = Vec::with_capacity(W8_K + 1);
+    tables.push(vec![0u8].into_boxed_slice()); // G(empty graph) = 0
+    for k in 1..=W8_K {
+        tables.push(build_grundy_table(k, &tables));
+    }
+    tables
+}
+
+/// Complete Sprague-Grundy (nimber) tables for all labelled Node-Kayles graphs up to 8
+/// vertices, plus nested mex sweeps for 9..12 vertices — the Grundy twin of [`DenseW8`].
+/// Build ≈ the boolean W8 build without the early-out (a few seconds, parallel); no disk
+/// cache (nimber runs are one-off, unlike the per-solve boolean prep).
+pub(crate) struct GrundyW8 {
+    /// `G0..=G8` concatenated, one byte per code, indexed via [`GTABLE_OFF`].
+    arena: &'static [u8],
+}
+
+impl GrundyW8 {
+    pub(crate) fn build() -> Self {
+        static ARENA: OnceLock<Box<[u8]>> = OnceLock::new();
+        let arena: &'static [u8] = ARENA.get_or_init(|| {
+            let tables = build_grundy_tables();
+            let mut flat = vec![0u8; GTABLE_OFF[W8_K + 1]].into_boxed_slice();
+            for k in 0..=W8_K {
+                let off = GTABLE_OFF[k];
+                flat[off..off + tables[k].len()].copy_from_slice(&tables[k]);
+            }
+            // Theory bound: a Node-Kayles game on k vertices has G ≤ k. A violation means a
+            // build bug — fail loudly rather than return wrong nimbers.
+            let mx = flat.iter().copied().max().unwrap_or(0);
+            assert!(mx <= W8_K as u8, "GrundyW8 build: nimber {mx} > {W8_K}");
+            flat
+        });
+        collapse_huge(arena);
+        GrundyW8 { arena }
+    }
+
+    /// Nimber of a labelled `k ≤ 8`-vertex graph — one byte load.
+    #[inline]
+    pub(crate) fn get(&self, k: usize, code: usize) -> u8 {
+        debug_assert!(k <= W8_K && code < slots(k));
+        // SAFETY: as [`DenseW8::get`] — every caller passes `code < slots(k)`, and
+        // `GTABLE_OFF[k] + code < GTABLE_OFF[k + 1] ≤ arena.len()`.
+        unsafe { *self.arena.get_unchecked(GTABLE_OFF[k & 15] + code) }
+    }
+
+    /// Nimber of a labelled 9-vertex graph (36-bit code): one mex sweep, every child a
+    /// direct `G{≤8}` lookup. Mirrors [`DenseW8::get9`] (no iso-strip, no early-out).
+    pub(crate) fn g9(&self, code: u64) -> u8 {
+        use std::arch::x86_64::_pext_u64;
+        debug_assert!(code < (1u64 << 36));
+        let (adj, _) = extract_adj::<9>(code, &W9_MASKS.0);
+        let full = (1u16 << 9) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..9 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (8 - adj[i].count_ones()) as usize;
+            // SAFETY: znver5 ⇒ BMI2; same invariant as `DenseW8::get9`.
+            let child_code = unsafe { _pext_u64(code, W9_MASKS.1[child as usize]) } as usize;
+            seen |= 1u32 << self.get(cpc, child_code);
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Nimber of a labelled 10-vertex graph (45-bit code); a deg-0 child nests one [`g9`].
+    pub(crate) fn g10(&self, code: u64) -> u8 {
+        use std::arch::x86_64::_pext_u64;
+        debug_assert!(code < (1u64 << 45));
+        let (adj, _) = extract_adj::<10>(code, &W10_MASKS.0);
+        let full = (1u16 << 10) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..10 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (9 - adj[i].count_ones()) as usize;
+            // SAFETY: znver5 ⇒ BMI2; same invariant as `DenseW8::get10`.
+            let child_code = unsafe { _pext_u64(code, W10_MASKS.1[child as usize]) };
+            let g = if cpc == 9 {
+                self.g9(child_code)
+            } else {
+                self.get(cpc, child_code as usize)
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Nimber of a labelled 11-vertex graph (55-bit code).
+    pub(crate) fn g11(&self, code: u64) -> u8 {
+        use std::arch::x86_64::_pext_u64;
+        debug_assert!(code < (1u64 << 55));
+        let (adj, _) = extract_adj::<11>(code, &W11_MASKS.0);
+        let full = (1u16 << 11) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..11 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (10 - adj[i].count_ones()) as usize;
+            // SAFETY: znver5 ⇒ BMI2; same invariant as `DenseW8::get11`.
+            let child_code = unsafe { _pext_u64(code, W11_MASKS.1[child as usize]) };
+            let g = match cpc {
+                10 => self.g10(child_code),
+                9 => self.g9(child_code),
+                _ => self.get(cpc, child_code as usize),
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Nimber of a labelled 12-vertex graph (66-bit code, `u128` — the first past the `u64`
+    /// ceiling). Mirrors [`DenseW8::get12`] (label order; no prefetch/ordering micro-opts).
+    pub(crate) fn g12(&self, code: u128) -> u8 {
+        debug_assert!(code < (1u128 << 66));
+        let (adj, _) = extract_adj128::<12>(code, &W12_MASKS.0);
+        let full = (1u16 << 12) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..12 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (11 - adj[i].count_ones()) as usize;
+            let child_code = pext128(code, W12_MASKS.1[child as usize]);
+            let g = match cpc {
+                11 => self.g11(child_code),
+                10 => self.g10(child_code),
+                9 => self.g9(child_code),
+                _ => self.get(cpc, child_code as usize),
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Dispatch to the right layer for a runtime `k ≤ 12`.
+    #[inline]
+    pub(crate) fn grundy_dyn(&self, k: usize, code: u128) -> u8 {
+        match k {
+            12 => self.g12(code),
+            11 => self.g11(code as u64),
+            10 => self.g10(code as u64),
+            9 => self.g9(code as u64),
+            _ => self.get(k, code as usize),
+        }
+    }
+
+    pub(crate) fn bytes(&self) -> u64 {
+        self.arena.len() as u64
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1330,6 +1555,114 @@ mod tests {
     fn ref_tables() -> &'static [Box<[u64]>] {
         static T: OnceLock<Vec<Box<[u64]>>> = OnceLock::new();
         T.get_or_init(build_tables)
+    }
+
+    /// Pure recursive scalar mex reference (recurses to the empty graph — no tables, no
+    /// `pext`, fully independent). Tractable to `k = 8` (`8! ≈ 40K` paths per code).
+    fn grundy_rec_pure(k: usize, code: u128) -> u8 {
+        if k == 0 {
+            return 0;
+        }
+        let adj = adj_from_code(k, code);
+        let full = ((1u32 << k) - 1) as u16;
+        let mut seen = 0u32;
+        for i in 0..k {
+            let child = full & !((1u16 << i) | adj[i]);
+            let (ck, ccode) = projected_code(&adj, child);
+            seen |= 1u32 << grundy_rec_pure(ck, ccode);
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Scalar mex reference for `k = 9..=12` — the Grundy twin of [`wins_rec`]: recurses one
+    /// ply per layer, bottoming at the reference `G{≤8}` tables (themselves validated against
+    /// [`grundy_rec_pure`] — layered, like the boolean `direct_w*` chain).
+    fn grundy_rec(k: usize, code: u128, gtables: &[Box<[u8]>]) -> u8 {
+        if k <= W8_K {
+            return gtables[k][code as usize];
+        }
+        let adj = adj_from_code(k, code);
+        let full = ((1u32 << k) - 1) as u16;
+        let mut seen = 0u32;
+        for i in 0..k {
+            let child = full & !((1u16 << i) | adj[i]);
+            let (ck, ccode) = projected_code(&adj, child);
+            seen |= 1u32 << grundy_rec(ck, ccode, gtables);
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Cached reference `G0..=G8` tables (independent instance of the build, shared across
+    /// the Grundy tests like [`ref_tables`] is for the boolean chain).
+    fn ref_gtables() -> &'static [Box<[u8]>] {
+        static T: OnceLock<Vec<Box<[u8]>>> = OnceLock::new();
+        T.get_or_init(build_grundy_tables)
+    }
+
+    /// The Grundy arena matches the scalar mex reference exhaustively for small `k`, sampled
+    /// at `k = 7, 8`; and `G != 0 ⟺ W-win` against the independently built boolean tables
+    /// (the production-validated ground truth) at every checked code.
+    #[test]
+    fn grundy_tables_match_scalar_and_boolean() {
+        let g = GrundyW8::build();
+        let w = ref_tables();
+        #[allow(clippy::needless_range_loop)]
+        for k in 0..=6usize {
+            for code in 0..slots(k) {
+                let got = g.get(k, code);
+                assert_eq!(got, grundy_rec_pure(k, code as u128), "k={k} code={code}");
+                assert_eq!(
+                    got != 0,
+                    bit_get(&w[k], code),
+                    "k={k} code={code}: G!=0 must equal boolean win"
+                );
+            }
+        }
+        for k in [7usize, 8] {
+            // Deterministic stride + LCG sample (the exhaustive space is 2^21 / 2^28).
+            let mut x = 0x9E37_79B9u64;
+            for s in 0..1024u64 {
+                let code = if s % 2 == 0 {
+                    (s * 65_537) as usize % slots(k)
+                } else {
+                    x = x.wrapping_mul(6_364_136_223_846_793_005).wrapping_add(1);
+                    (x >> 16) as usize % slots(k)
+                };
+                let got = g.get(k, code);
+                assert_eq!(got, grundy_rec_pure(k, code as u128), "k={k} code={code}");
+                assert_eq!(got != 0, bit_get(&w[k], code), "k={k} code={code}");
+            }
+        }
+    }
+
+    /// The nested mex sweeps `g9..g12` match the scalar recursion and the boolean `wins_rec`
+    /// sign on deterministic pseudo-random codes.
+    #[test]
+    fn grundy_g9_to_g12_match_reference() {
+        let g = GrundyW8::build();
+        let w = ref_tables();
+        let gt = ref_gtables();
+        let mut x = 0xD1B5_4A32_D192_ED03u64;
+        for k in 9..=12usize {
+            let bits = k * (k - 1) / 2;
+            for _ in 0..48 {
+                x = x
+                    .wrapping_mul(6_364_136_223_846_793_005)
+                    .wrapping_add(1442695040888963407);
+                let hi = x;
+                x = x
+                    .wrapping_mul(6_364_136_223_846_793_005)
+                    .wrapping_add(1442695040888963407);
+                let code = (((hi as u128) << 64) | x as u128) & ((1u128 << bits) - 1);
+                let got = g.grundy_dyn(k, code);
+                assert_eq!(got, grundy_rec(k, code, gt), "k={k} code={code:#x}");
+                assert_eq!(
+                    got != 0,
+                    wins_rec(k, code, w),
+                    "k={k} code={code:#x}: G!=0 must equal boolean win"
+                );
+            }
+        }
     }
 
     #[test]

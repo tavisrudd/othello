@@ -15,8 +15,10 @@ giant root I9 converge on the 26 GB box (the un-skipped run thrashed). n=18 was 
 Jenrich (arXiv:1312.5135). Code on branch `queens-n18` (worktree `/home/tavis/src/othello-n18`); see the umbrella's
 **session --13 CONCLUSION**. **Pending:** user blessing → archive the umbrella. (NOT an OEIS A344227 submission —
 that's the *nimber* sequence to n=13; our n=18 result is a win/loss OUTCOME, and an even first-player win even
-contradicts A344227's conjectured even→0 pattern. A real contribution needs the full nimber n=14..18 — separate
-open task. See the umbrella's 2026-06-28 OEIS note.) **`go`.**
+contradicts A344227's conjectured even→0 pattern. A real contribution needs the full nimber n=14..18 —
+**n=14..16 DONE 2026-07-01: G = 0, 1, 0 via the new heap-sum `queens nimber` engine
+([handoff](notes/handoffs/2026-07-01-queens-nimber-a344227.md)); G(17)/G(18) remain.** See the umbrella's
+2026-06-28 OEIS note + its 2026-07-01 update.) **`go`.**
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
