@@ -231,6 +231,40 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 
 ## Handoff Notes
 
+### Session 2026-07-02 — micro-opt + profiling round: getK mask-prefetch + TABLE_OFF mask = cyc/node −2.1% (LANDED)
+
+**Profiling (fresh miss attribution on the 13.77s default stack, n=16, 24t):**
+- **Cycles** (from the SMT-close P3 record): getK/kernel ≈ 94% — `wins_inc` 18.6, `sort_moves_by_degree`
+  6.9, `DenseW8::get9..16/get_dyn*` 45.4, `w9..w16/w_wide_get` 23.5; canon/TT/par ≈ 3.3.
+- **Branch misses** (7.4 B/run): `wins_inc` 20%, the `wN_get` family ≈ 46% combined — the getK sweeps'
+  data-dependent child-outcome early-outs (the known at-floor α-β territory; counting sort + skip18
+  already took the orderable sites).
+- **Cache misses** (L1d-level, 4.5 B/run): `wins_inc` 30.6% (the TT probes), then **`get13`–`get16` +
+  `get_dyn_wide` ≈ 39%** — the deep layers' induced-masks tables (`W*_MASKS.1`, 2^K×16 B = 128 KB–1 MB;
+  wide K=17 3 MB) miss L1d/L2, and that load heads each sweep iteration's serial chain
+  (mask → pext → nested evaluator).
+- **Annotate** (`get10` loop): heat on the arena-load→`bt` chain and the loop-back `jb`, plus a live
+  `cmp/jae panic_bounds_check` pair per iteration — the `TABLE_OFF[cpc]` slice check.
+
+**The patch (unconditional, no gate — functionally a no-op per node):**
+1. **One-ahead mask prefetch** in the `get12`..`get16` sweeps + `get_wide` (K=17..20): while child j is
+   evaluated, `_mm_prefetch` child j+1's `W*_MASKS.1[nchild]` entry (address computable from
+   `order`/`adj` alone, ~5 ALU ops; an early cutoff wastes ≤1 line).
+2. **`TABLE_OFF` padded to 16 entries + `k & 15` index** in `DenseW8::get` — provably in-bounds, drops
+   the per-iteration bounds-check branch from every dense-loop bottom (the loops are frontend-bound).
+
+**A/B (4-round interleaved, 12 GB TT, two-binary wrapper on `QUEENS_UOPT`): cyc/node −2.1%
+(5894 → 5768, the on side lower in every round; spread −1.3..−3.4%), total cyc −3.9%, wall wash
+(+0.7%, inside the ±1.5s killer-race band; nodes −1.8% = same noise).** In the historical "real but
+small" micro-opt band (cf. the flat-arena −2.0%). Gates: `make test` all pass, n=12 iso-flat distinct
+1,060,823 exact (1.25× re-exp), n=14 second / distinct ≈29.2M / re-exp 1.02×.
+
+**Not pursued (measured/judged too small):** get9/10/11 arena-word pipelining (their masks are
+L1-resident, W7 is an L2 hit, est ≤0.3% for real I-cache bloat risk in the frontend-bound loop);
+2-ahead prefetch depth (nested-evaluator latency already covers one-ahead); first-child prefetch
+before the degree sort (child unknown pre-sort). The branch-miss mass (46% in the sweeps' early-outs)
+is data-dependent boolean structure — no orderable site left.
+
 ### Session 2026-07-01--13 (cont.) — killer PROMOTED TO DEFAULT + deep-ply killers + ETC-gate default: RECORD → 13.77s; the 10s push status
 **User directive**: promote `QUEENS_KILLER=4` to default; keep hunting toward 10s.
 

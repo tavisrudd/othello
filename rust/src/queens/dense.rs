@@ -422,6 +422,23 @@ fn pext128_wide(code: u128, mask: u128) -> u128 {
     lo | (hi << lo_bits)
 }
 
+/// One-ahead software prefetch of the next child's induced-mask entry in a getK sweep.
+/// The deep layers' masks tables (W12 64 KB .. W16 1 MB, wide K=17..20 up to 24 MB) miss
+/// L1d/L2, and that load heads each iteration's serial chain (mask → pext → nested
+/// evaluator) — the n=16 cache-miss profile concentrates in get13..16 on exactly this load.
+/// Issued one child ahead so the current child's evaluation hides the miss; an early cutoff
+/// wastes at most one prefetched line.
+#[inline(always)]
+fn prefetch_mask<T>(entry: &T) {
+    // SAFETY: prefetch is a hint with no architectural effect; the reference is a valid address.
+    unsafe {
+        std::arch::x86_64::_mm_prefetch(
+            entry as *const T as *const i8,
+            std::arch::x86_64::_MM_HINT_T0,
+        )
+    }
+}
+
 /// [`extract_adj`] for a `u128` code (W12/W13): same self-gap re-insertion, but the adjacency
 /// row (`≤ K-1 ≤ 12` bits, fits `u64`) is recovered with [`pext128`].
 #[inline]
@@ -519,8 +536,13 @@ const fn words(k: usize) -> usize {
 /// (load the box fat-pointer, then the word) plus its bounds-check `len` load. Every `getK`
 /// evaluator bottoms out in [`DenseW8::get`], so this shortens the critical chain of the whole
 /// dense bucket (~36 % of search cycles).
-const fn table_offsets() -> [usize; W8_K + 2] {
-    let mut o = [0usize; W8_K + 2];
+/// Padded to 16 entries (10..15 = 0) so the hot [`DenseW8::get`] can index with `k & 15` —
+/// provably in-bounds, which drops the `cmp/jae panic_bounds_check` pair from every getK
+/// inner-loop iteration (the sweep loops are frontend-bound; the dead branch costs fetch).
+/// A padding hit is impossible under the caller invariant (`k ≤ W8_K`, debug-asserted), and
+/// even then offset 0 keeps the arena access in-bounds for any `code < slots(8)`.
+const fn table_offsets() -> [usize; 16] {
+    let mut o = [0usize; 16];
     let mut k = 0;
     while k <= W8_K {
         o[k + 1] = o[k] + words(k);
@@ -528,7 +550,7 @@ const fn table_offsets() -> [usize; W8_K + 2] {
     }
     o
 }
-const TABLE_OFF: [usize; W8_K + 2] = table_offsets();
+const TABLE_OFF: [usize; 16] = table_offsets();
 
 #[inline]
 fn bit_get(bits: &[u64], idx: usize) -> bool {
@@ -778,7 +800,7 @@ impl DenseW8 {
         // so `TABLE_OFF[k] + code/64 < TABLE_OFF[k + 1] <= arena.len()`. The flat arena removes the
         // `Box<[u64]>` fat-pointer load + bounds-check `len` load that `&[Box<[u64]>]` indexing
         // emitted on this hot leaf (the bottom of every getK sweep).
-        let w = TABLE_OFF[k] + (code >> 6);
+        let w = TABLE_OFF[k & 15] + (code >> 6);
         (unsafe { *self.arena.get_unchecked(w) } >> (code & 63)) & 1 != 0
     }
 
@@ -927,8 +949,14 @@ impl DenseW8 {
         }
         let full = (1u16 << 12) - 1;
         let order = getk_order_u16::<12>(self.ord_getk, &adj);
-        for &iu in &order[..12] {
-            let i = iu as usize;
+        for j in 0..12 {
+            let i = order[j] as usize;
+            if j + 1 < 12 {
+                // One-ahead mask prefetch (see `prefetch_mask`); `& 15` proves the adj index.
+                let ni = order[j + 1] as usize & 15;
+                let nchild = full & !((1u16 << ni) | adj[ni]);
+                prefetch_mask(&W12_MASKS.1[nchild as usize]);
+            }
             let child = full & !((1u16 << i) | adj[i]);
             // `cpc = 12 - 1 - deg(i)` off the `child`→popcount chain (see get9).
             let cpc = (11 - adj[i].count_ones()) as usize;
@@ -960,8 +988,14 @@ impl DenseW8 {
         }
         let full = (1u16 << 13) - 1;
         let order = getk_order_u16::<13>(self.ord_getk, &adj);
-        for &iu in &order[..13] {
-            let i = iu as usize;
+        for j in 0..13 {
+            let i = order[j] as usize;
+            if j + 1 < 13 {
+                // One-ahead mask prefetch (see `prefetch_mask`); `& 15` proves the adj index.
+                let ni = order[j + 1] as usize & 15;
+                let nchild = full & !((1u16 << ni) | adj[ni]);
+                prefetch_mask(&W13_MASKS.1[nchild as usize]);
+            }
             let child = full & !((1u16 << i) | adj[i]);
             // `cpc = 13 - 1 - deg(i)` off the `child`→popcount chain (see get9).
             let cpc = (12 - adj[i].count_ones()) as usize;
@@ -1001,8 +1035,14 @@ impl DenseW8 {
         }
         let full = (1u16 << 14) - 1;
         let order = getk_order_u16::<14>(self.ord_getk, &adj);
-        for &iu in &order[..14] {
-            let i = iu as usize;
+        for j in 0..14 {
+            let i = order[j] as usize;
+            if j + 1 < 14 {
+                // One-ahead mask prefetch (see `prefetch_mask`); `& 15` proves the adj index.
+                let ni = order[j + 1] as usize & 15;
+                let nchild = full & !((1u16 << ni) | adj[ni]);
+                prefetch_mask(&W14_MASKS.1[nchild as usize]);
+            }
             let child = full & !((1u16 << i) | adj[i]);
             // `cpc = 14 - 1 - deg(i)` off the `child`→popcount chain (see get9).
             let cpc = (13 - adj[i].count_ones()) as usize;
@@ -1045,8 +1085,14 @@ impl DenseW8 {
         }
         let full = (1u16 << 15) - 1;
         let order = getk_order_u16::<15>(self.ord_getk, &adj);
-        for &iu in &order[..15] {
-            let i = iu as usize;
+        for j in 0..15 {
+            let i = order[j] as usize;
+            if j + 1 < 15 {
+                // One-ahead mask prefetch (see `prefetch_mask`); `& 15` proves the adj index.
+                let ni = order[j + 1] as usize & 15;
+                let nchild = full & !((1u16 << ni) | adj[ni]);
+                prefetch_mask(&W15_MASKS.1[nchild as usize]);
+            }
             let child = full & !((1u16 << i) | adj[i]);
             // `cpc = 15 - 1 - deg(i)` off the `child`→popcount chain (see get9).
             let cpc = (14 - adj[i].count_ones()) as usize;
@@ -1087,8 +1133,14 @@ impl DenseW8 {
         }
         let full = u16::MAX; // all 16 vertices (1u16 << 16 would overflow)
         let order = getk_order_u16::<16>(self.ord_getk, &adj);
-        for &iu in &order[..16] {
-            let i = iu as usize;
+        for j in 0..16 {
+            let i = order[j] as usize;
+            if j + 1 < 16 {
+                // One-ahead mask prefetch (see `prefetch_mask`); `& 15` proves the adj index.
+                let ni = order[j + 1] as usize & 15;
+                let nchild = full & !((1u16 << ni) | adj[ni]);
+                prefetch_mask(&W16_MASKS.1[nchild as usize]);
+            }
             let child = full & !((1u16 << i) | adj[i]);
             // `cpc = 16 - 1 - deg(i)` off the `child`→popcount chain (see get9). `full` is all 16
             // bits, so `{i} ∪ N[i] ⊆ full` (disjoint) and the identity is exact.
@@ -1136,8 +1188,19 @@ impl DenseW8 {
         let adj = extract_adj_wide::<K>(code, incident);
         let full = (1u32 << K) - 1;
         let order = getk_order_u32::<K>(self.ord_getk, &adj);
-        for &iu in &order[..K] {
-            let i = iu as usize;
+        for j in 0..K {
+            let i = order[j] as usize;
+            if j + 1 < K {
+                // One-ahead mask prefetch (see `prefetch_mask`) — the wide induced tables are
+                // 3..24 MB, so this load misses L2/L3.
+                // SAFETY: `order[..K]` holds vertex indices `< K ≤ 20` (`deg_order_desc` /
+                // `IDENTITY21` invariant), in bounds of `adj: [u32; 20]`.
+                let ni = order[j + 1] as usize;
+                let nadj = unsafe { *adj.get_unchecked(ni) };
+                let nchild = full & !((1u32 << ni) | nadj);
+                // SAFETY: `nchild < 2^K`, the induced table size (same invariant as `mask` below).
+                prefetch_mask(unsafe { induced.get_unchecked(nchild as usize) });
+            }
             let child = full & !((1u32 << i) | adj[i]);
             // `cpc = K - 1 - deg(i)` off the `child`→popcount chain (see get9): a move removes
             // `{i} ∪ N[i]` (disjoint, ⊆ full), so `popcount(adj[i])` (depends only on `adj[i]`)
