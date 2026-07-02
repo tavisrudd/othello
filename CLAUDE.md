@@ -184,12 +184,11 @@ Phase 2a sizing GO-on-paper but **2b de-risk found Approach B net-negative as bu
 
 **Bigger levers (multi-session, decide with the user):** grouped-frontier `k=9..12` — **scoped +
 Phase-0/1 measured**, see [proposal](notes/proposal-2026-06-18-grouped-frontier-ddd.md). Dedup
-**connected components, not whole graphs** (Sprague-Grundy XOR). Phase-1 verdict: raising the Lever-B
-component-nimber cap 7→12 cuts nodes **−74%** (n=14) but wall **6.6× worse** — the cutoff-free nimber
-*recursion* is the cost killer (per-unit-cost-bound, like the banked graph-iso-key −2.2×). Parked on
-branch `queens-component-nimber` (abf38ee, off main, **do not revert**). **Revival = a dense nimber
-table for components ≤8** (W8 but Grundy-valued, no recursion); measure its incremental value over
-iso-window first. Codex's frontier-chunk DDD **dropped** (no cheap proxy targets cross-root reuse, max
+**connected components, not whole graphs** (Sprague-Grundy XOR) — **CLOSED 2026-07-02 for the getK
+architecture**: a full-n=16 `QUEENS_DECPROBE` run (744 M getK nodes) shows the pc 9..16 tail graphs
+are 97–100% single connected components ("all comps ≤8" = 0.00% for pc ≥13) ⇒ a Grundy-W8 table has
+no nodes to fire on; the old Lever-B −74% (n=14, whole-board nodes, pre-W_K) does not transfer.
+Branch `queens-component-nimber` (abf38ee, off main, **do not revert**) stays parked as substrate. Codex's frontier-chunk DDD **dropped** (no cheap proxy targets cross-root reuse, max
 ρ=0.54 < 0.7). Also: **BuRR
 archive** (Chunk-4, eviction-free value-only ~1.1 bit/key — sound under windowing); **1 GB hugepages**
 for the TT (zero TT TLB miss, needs boot-time reservation). **Lit-search lever backlog — TRIAGED

@@ -293,6 +293,24 @@ is data-dependent boolean structure — no orderable site left.
 - Remaining kernel candidates, updated: wide-layer (K=17..20) root-adj carry (same trick through
   `get_dyn_wide`→`get_wide`, untried — w_wide_get ≈ 2.2% cycles so est <1%); `w9_get` still builds
   its 36-bit code scalar (36 `row.get` bit-tests — a pext build + root-adj there is untried).
+- **W9 full table: SKIPPED (user call)** — the conditional Fermi (DRAM ≥ compute unless the hot
+  set is L3-resident) wasn't worth the probe + build risk.
+
+**(cont. 2) Tail-structure question (user) → `QUEENS_DECPROBE` run: the getK tail has NO
+decomposition structure — the nimber-decomposition lever is CLOSED for this architecture.**
+Full n=16, 744 M getK nodes (pc 9..16): mean #components 1.003–1.13; **≥2-component rate falls
+12.5% (pc 9) → 0.3% (pc 16), and "all comps ≤8" is 12.46% at pc 9 (where get9 is already the
+cheap direct layer) then 1.15% → 0.00% for pc ≥ 13.** The tail's conflict graphs are 97–100%
+single connected components — queens' 4-line cliques keep 13+ scattered squares coupled. So a
+Grundy-valued W8 table + flood-fill XOR shortcut has essentially no nodes to fire on (and the
+same connectivity explains the earlier module/twin deaths — the whole structural-reduction
+cluster is now closed with three independent measurements: modules 0%, twins →0%, components
+→1.0). Trend is monotone ⇒ pc 17 (untapped, w_wide) ≈ 0.2%, pc ≥18 recurse nodes rarer still.
+The old Lever-B "−74% nodes at cap 12" predates the W_K layers (whole-board nodes, different
+node population) — it does not transfer. **What structure remains in the tail:** (a) the
+*realizable-code* set (queen-induced ⊂ all labelled graphs — a table-compaction/cache-residency
+play, not a math shortcut; unsized); (b) code-frequency skew (memo angles = the measured-negative
+L0 cousin); (c) nothing else — the boolean-decomposition cap on the sweep math stands.
 
 **TT-key cost split (user question; profiling build, srcline-bucketed cycles, full n=16 default run):**
 the whole key pipeline ≈ **9% of cycles**, and it is CANON, not hashing:
