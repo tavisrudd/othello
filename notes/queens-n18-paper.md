@@ -24,9 +24,21 @@ engineering that took the n = 16 search from minutes to tens of seconds and made
 tractable on a single 26 GB workstation; and (iii) a layered validation strategy, culminating
 in a machine-checked Lean 4 proof of the leaf evaluator's recurrence, its isomorphism and
 induced-subgraph invariances, the build recurrence, and the Sprague–Grundy/Grundy
-characterisation, kernel-complete and depending only on mathlib's standard axioms. We are
-explicit throughout about what is *certified*, what is *cross-validated*, and what is
-*deferred to differential testing*.
+characterisation, kernel-complete and depending only on mathlib's standard axioms. Separately,
+a heap-sum Sprague–Grundy engine — which decides `G(board) = k` by α-β-searching the game sum of
+the board with a Nim-heap of size `k` — **extends OEIS A344227**, the game's nimber sequence
+previously catalogued only through n = 13, with the three new terms **G(14) = 0, G(15) = 1,
+G(16) = 0** (G(17) is in flight at the time of writing); the engine reproduces the full-mex
+nimbers for n ≤ 8 and the A344227 terms for n ≤ 13 exactly, and its n = 14/16 values independently
+equal the production win/loss verdicts. We also give an elementary **structural theory** of the
+even/odd split: a 180°-rotation pairing argument reproves that every odd board is a first-player
+win and — new here — proves that the even-board outcome is decided *entirely by the long-diagonal
+moves* (the responder's mirror refutes any diagonal-free line), so an even-board first-player win
+*requires* a long-diagonal move — and the n = 18 witness I9 = (8, 8) lies on the main diagonal,
+exactly as the theorem demands. The reduction is proven; *why* the even pattern first breaks at
+n = 18, and the exact nimber values, are given as an explicit heuristic and as falsifiable
+predictions. We are explicit throughout about what is *certified*, what is *cross-validated*, and
+what is *deferred to differential testing* or *conjectural*.
 
 ---
 
@@ -64,7 +76,8 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
    *nimber* and is catalogued only through n = 13: an exhaustive solve yields the *outcome*, and a
    first-player win fixes only that the nimber is nonzero, not its value. Indeed A344227's listed
    values follow a conjectured n ≥ 10 oscillation 0 (even) / 1 (odd) — so an **even**-board
-   first-player win at n = 18 *contradicts* the even → 0 prediction rather than extending it.
+   first-player win at n = 18 *contradicts* the even → 0 prediction rather than extending it. (The
+   nimber *values* are extended separately, by the engine of contribution 5.)
 
 2. **A solver design** combining a lockless flat transposition table, isomorphism-aware
    position canonicalisation, and a *dense leaf evaluator* (`getK`) that resolves all positions
@@ -74,7 +87,7 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
 
 3. **A performance-engineering account** — measured, with both wins and instructive negatives —
    that reduced the n = 16 search from the first complete run's ≈10.0 × 10⁹ node evaluations /
-   ≈56 min to ≈3.08 × 10⁸ nodes / ≈23.4 s on the same machine, and made the n = 18 root feasible
+   ≈56 min to ≈1.79 × 10⁸ nodes / ≈13.4 s on the same machine, and made the n = 18 root feasible
    via a deliberate *capacity* configuration (band-skipped transposition work + a 17 GB flat
    table).
 
@@ -83,6 +96,23 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
    isomorphism and induced-subgraph invariances, the table-build recurrence, and the
    Grundy/Sprague–Grundy characterisation — kernel-complete with no `sorry` and depending only
    on the three standard mathlib axioms.
+
+5. **An extension of OEIS A344227 (the nimber sequence itself).** A separate *heap-sum
+   Sprague–Grundy engine* computes the exact nimber `G(n)` by α-β-searching the game sum
+   `board + Nim-heap(k)` for ascending `k` (a loss at `k` pins `G = k`), contributing the new
+   terms **G(14) = 0, G(15) = 1, G(16) = 0** beyond the previously catalogued n ≤ 13, with
+   **G(17) in flight** (Section 6). The engine reproduces the full-mex nimber for n ≤ 8 and
+   A344227 for n ≤ 13, and its n = 14/16 values independently coincide with the production
+   win/loss verdicts. These terms confirm the conjectured even → 0 / odd → 1 oscillation through
+   n = 16, which the n = 18 first-player win then breaks.
+
+6. **An elementary structural theory of the even/odd split** (Section 6). A 180°-rotation (`ρ`)
+   pairing argument reproves that every odd board is a first-player win, and — new — reduces the
+   even-board outcome *entirely* to the long-diagonal moves: the responder's mirror strategy
+   refutes any first-player line that avoids the long diagonals, so an even-board first-player win
+   *requires* a long-diagonal move. The n = 18 witness I9 = (8, 8) sits on the main diagonal, as
+   the theorem demands. The reduction is proven; *why* the pattern first breaks at n = 18, and the
+   exact nimber values, are given as a heuristic and as falsifiable predictions.
 
 ### 1.3 What this paper claims, and what it does not
 
@@ -93,7 +123,7 @@ an independent scalar reference, checked against an independent raw-mask oracle 
 high-index subpositions, audited for integer-width defects, and validated end-to-end against
 Jenrich's published n ≤ 16 sequence. The Lean proof hardens the *recurrence semantics* of the
 leaf evaluator (the historically bug-prone component), with the bit-level serialization left to
-differential tests. Section 7 states the residual trusted base precisely. We deliberately avoid
+differential tests. Section 8 states the residual trusted base precisely. We deliberately avoid
 claiming any "floor" on performance: the numbers below are milestones, not limits.
 
 ---
@@ -119,8 +149,8 @@ Equivalently, the **Grundy value** `grundy(G, S) = mex { grundy(G, S \ N[v]) : v
 characterises the outcome: `win(G, S) ⟺ grundy(G, S) ≠ 0`, and for a position that splits into
 two parts with no edges between them, `grundy(G, S₁ ∪ S₂) = grundy(G, S₁) ⊕ grundy(G, S₂)`
 (Sprague–Grundy). The solver uses the boolean form (with α-β pruning); the Grundy form is
-relevant to an optional component-decomposition lever (Section 4.6) and to the Lean
-verification (Section 6.3).
+relevant to an optional component-decomposition lever (Section 4.6), underpins the heap-sum
+nimber engine (Section 6), and is machine-checked in the Lean verification (Section 7.3).
 
 ### 2.2 Prior work
 
@@ -130,7 +160,8 @@ verification (Section 6.3).
   over roughly 23 hours. This is the baseline our kernel reproduces (verdicts and the n ≤ 16
   sequence) and improves on in node efficiency.
 - **OEIS A344227** records the Sprague–Grundy nimber of the game; our verdicts agree through the
-  catalogued range (n ≤ 13 for the nimber, the win/loss outcome through n = 16).
+  catalogued range (n ≤ 13 for the nimber, the win/loss outcome through n = 16). Section 6 extends
+  the nimber sequence itself to n = 16 (and reports the in-flight n = 17).
 - **Schaefer (1978)** established PSPACE-completeness of Node-Kayles, framing why exhaustive
   search, not a formula, is the tool.
 - **Sprague (1935), Grundy (1939); Conway,** *On Numbers and Games.* The impartial-game theory
@@ -166,7 +197,7 @@ single move I9 and stopped (Section 5).
 A position is the live mask `S = board & ¬blocked`, where `blocked` is the union of occupied
 and attacked squares. For n = 18 the board has 324 squares, so masks are 384-bit (`[u64; 6]`)
 and square indices are 16-bit (the consequences of getting this width wrong are the subject of
-Section 6.1).
+Section 7.1).
 
 Two canonicalisations merge equivalent positions before they reach the transposition table:
 
@@ -238,20 +269,22 @@ The n = 16 search wall-clock evolved through a sequence of solvers, each a named
 configuration (best clean-box search wall; node counts carry parallel noise except where the
 n = 14 deterministic figure is cited):
 
-| solver                                        | n=16 wall | nodes    | mechanism                                                      |
-|-----------------------------------------------|-----------|----------|----------------------------------------------------------------|
-| `iso-flat`                                    | 3m29s     | 6.1 B    | single selective-iso key over the flat lockless TT             |
-| `iso-window`                                  | 2m44s     | ≈5.1 B   | dense `W8` tail table over a huge-page-collapsed flat TT        |
-| `iso-dense` (W12, fused ETC)                  | 1m32s     | 1.70 B   | `getK` to ceiling 12 + fused enhanced-transposition cutoff      |
-| `iso-dense` + dynamic move ordering           | 1m02s     | 1.14 B   | re-sort children by current degree (Section 4.4)               |
-| `iso-dense` (W16) + ordering + ETC            | ≈34s      | 0.40 B   | pext code-build + ceiling raised 12 → 16 (Section 4.2/4.3)      |
-| `iso-dense` (W17) + degree-ordered `getK`     | ≈24.5s    | 0.31 B   | ceiling 17 (192-bit code), children swept degree-descending     |
-| `iso-dense` (W17) + ordering + `skip18` (now) | **23.44s**| **0.31 B**| also skip TT work for the `pc = 18` band (Section 4.5)         |
+| solver                                      | n=16 wall | nodes  | mechanism                                                   |
+|---------------------------------------------|-----------|--------|-------------------------------------------------------------|
+| `iso-flat`                                  | 3m29s     | 6.1 B  | single selective-iso key over the flat lockless TT          |
+| `iso-window`                                | 2m15s     | ≈5.1 B | dense `W8` tail table over a huge-page-collapsed flat TT    |
+| `iso-dense` (W12, fused ETC)                | 1m32s     | 1.70 B | `getK` to ceiling 12 + fused enhanced-transposition cutoff  |
+| `iso-dense` + dynamic move ordering         | 1m02s     | 1.14 B | re-sort children by current degree (Section 4.4)            |
+| `iso-dense` (W16) + ordering + ETC          | ≈34s      | 0.40 B | pext code-build + ceiling raised 12 → 16 (Section 4.2/4.3)  |
+| `iso-dense` (W17) + degree-ordered `getK`   | ≈24.5s    | 0.31 B | ceiling 17 (192-bit code), children swept degree-descending |
+| `iso-dense` (W17) + ordering + `skip18`     | 23.44s    | 0.31 B | also skip TT work for the `pc = 18` band (Section 4.5)      |
+| `iso-dense` W17 + killers + micro-ops (now) | 13.43s    | 0.18 B | cross-root killer replies + kernel micro-ops (Section 4.5)  |
 
 For reference, the first complete n = 16 solve (a D₄-parallel search, no dense evaluator)
 visited **10,017,867,872** nodes in ≈56 min on a thermally throttled box (≈42 min clean) — so
-the lineage represents roughly a 33× reduction in node evaluations and ~140× in wall time on the
-same hardware, with the verdict (second-player win) unchanged throughout.
+the current default (13.43 s, ≈1.79 × 10⁸ nodes; fastest single 12.43 s) represents roughly a
+55× reduction in node evaluations and a ~250× reduction in wall time on the same hardware, with
+the verdict (second-player win) unchanged throughout.
 
 ### 4.2 Raising the dense ceiling
 
@@ -267,6 +300,11 @@ Deterministic single-threaded n = 14 node counts:
 | W12     | 12,896,443  (−53 % vs W8)| −18.0 %       |
 | W13     | 10,339,019               | −19.8 %       |
 | K = 16  | ≈4.0 M  (−50 % vs K=12)  | (K15→16 −22 %)|
+
+(The `W8…W13` chain and the `K = 16` figure come from different measurement baselines: the
+chain was measured with the earlier static move ordering, the `K = 16` row under the dynamic-
+ordering default of Section 4.4, where `K = 12` measures ≈7.9 M — hence "−50 % vs K = 12"
+rather than −69 % against the row above.)
 
 Because the node-count cut is *inherent* (independent of table size), it holds at production
 scale: at n = 16 with a 17 GB table, raising the ceiling to 16 collapsed the working set so the
@@ -318,6 +356,22 @@ node reduction, a fact that recurs as the reason several throughput ideas failed
   slower; once counting sort sped it up, the warm ramp stopped paying, so disabling it by default
   was −3.2 % wall. (Levers are re-tested after each win, because wins change what the next lever
   is worth.)
+- **Cross-root killer replies** (the current record, −43 % wall over `skip18`). Each odd-ply
+  prove-a-loss fan-out in the parallel upper tree *publishes* the square that refuted it; later
+  root loops jump straight to an already-proven refuting reply instead of re-searching for one,
+  and the killer table is re-read mid-loop. This turned out to be the cheap predictor that a
+  prior saturation audit had judged missing for the wall-determining root's refuting second-ply
+  reply — the proven replies from sibling roots *are* that predictor. Depth-1 A/B: **−37.6 %
+  nodes / −43.3 % wall**; the deeper bands add −7.5 % / −4.5 %; an ETC pc-gate re-tested positive
+  at the resulting ~8 % table fill (so a 12 GB table now beats the 17 GB one at n = 16). Verdict
+  SECOND every round.
+- **Kernel micro-optimisations** (−8 % cycles/node cumulative, all byte-identical): a
+  `vpcompressb` (AVX-512-VBMI2) replacement for the ~9 %-of-cycles serial square-scatter
+  (`verts_of`, −4.3 %); a one-ahead `getK` mask prefetch with a `TABLE_OFF` mask index (−2.1 %);
+  and carrying the root adjacency into `getK` to skip a re-extraction (−2.5 %). Together with the
+  killers these took the clean-box n = 16 record from ≈23.4 s to **13.43 s** (fastest single
+  12.43 s) — a further reminder, on a search a prior audit had called "near-floor," that a
+  measured limit is a hypothesis, not a bound.
 
 Parallelism is parity-aware Young-brothers-wait: children are fanned out only at "prove-a-loss"
 plies, where every child must be searched anyway, so there is **zero speculation** — this scaled
@@ -435,7 +489,7 @@ last, 15th, move).
 The two runs use different code (a 3-word code path vs a ≥190-bit path), exercise different
 internal table dynamics, and converge at node counts differing by more than 2× — yet agree on
 the verdict, the move, and the entire PV. Because the leaf evaluator is the component where this
-class of solver has historically had bugs (Section 6.1), evaluating the same game two ways and
+class of solver has historically had bugs (Section 7.1), evaluating the same game two ways and
 obtaining the same answer is the central evidence.
 
 ### 5.3 On the node count
@@ -448,9 +502,206 @@ so much in node count (the higher dense ceiling of the confirm run shrinks the w
 roughly halves re-expansion) while agreeing on the value — and it is exactly the regime the
 band-skip configuration was designed for.
 
+### 5.4 An independent check on the principal variation, and its geometry
+
+As a third correctness check — independent of *both* solver kernels — the 15-move PV was
+re-verified by direct board arithmetic, with no search. All fifteen placements are pairwise
+non-attacking and available when played, and after the winner's fifteenth move the available set
+is *exactly empty*: the loser is left with no move, consistent with a first-player win (the first
+player makes the odd-numbered last move). The per-move deletion schedule (available squares
+remaining after each move) is
+
+```
+    I9:−68→256  K8:−56→200  G10:−44→156  J11:−46→110  H3:−22→88   M7:−25→63
+    N16:−19→44  E4:−12→32   P6:−9→23     D12:−9→14    O13:−5→9    F2:−4→5
+    R5:−2→3     L17:−2→1    A14:−1→0
+```
+
+The opening I9 deletes **68** squares — the maximum on an 18×18 board (its row and column, the
+full-length main diagonal, and a length-17 anti-diagonal): the two central main-diagonal squares
+are the most-forcing on any even board, so the winning strike is also the highest-degree opening
+(which the degree-ordering of Section 4.4 already tries first).
+
+The move also has a clean geometric reading that ties it to the structural theory of Section 6.
+I9 = (8, 8) is the exact centre of the *embedded 17×17 sub-board* [0..16]², and the squares it
+deletes are precisely the self-mirroring lines of the point reflection τ(x) = (16, 16) − x. The
+strike therefore reproduces the *odd-board* centre-and-mirror structure (Section 6.4, Lemma 2)
+inside that embedded odd sub-board, leaving only a 32-square live "L-border" (the last column and
+last row, minus the two squares I9 attacks) as the region τ cannot pair. Consistent with this,
+the winner's first reply **G10 is exactly τ(K8)** — the point-reflection of the loser's first
+reply through I9. Later winner replies are *not* τ-mirrors, so pure mirroring is not the played
+strategy (and opponent moves within a won line are ordering artefacts in any case); but the first
+exchange, the record deletion count, and the fact that the only two PV squares on long diagonals
+are I9 (main, the winning strike) and K8 (anti, the loser's reply) all match the picture the
+even-board theorem draws (Section 6.4).
+
 ---
 
-## 6. Validation and verification
+## 6. The Sprague–Grundy nimbers: extending A344227, and the structure of the even/odd split
+
+The n = 18 verdict of Section 5 is an *outcome* (first player wins ⟺ nimber ≠ 0). The nimber
+itself is a finer invariant, and two further threads sharpen the picture: a dedicated engine that
+computes the exact nimber `G(n)` and thereby extends OEIS A344227 beyond its previously catalogued
+range (Sections 6.1–6.3), and an elementary theory that explains the even/odd outcome split and
+locates where the even → 0 pattern must break (Sections 6.4–6.5). The engine's results are
+*cross-validated* to the same standard as the main solver; the theory's core reduction is
+*proven*; the "why n = 18" mechanism and the exact nimber values are marked *heuristic* and
+*predicted*.
+
+### 6.1 A heap-sum engine for the nimber
+
+The Grundy value cannot be obtained by the boolean solver directly: `mex` admits no α-β cutoff, so
+a full-DAG minimal-excludant reference must expand every reachable position — hopeless past
+n ≈ 13. The engine instead uses the **heap-sum reduction**. By Sprague–Grundy, `G(board) = k`
+iff the disjunctive game sum `board + Nim-heap(k)` is a P-position (a loss for the mover), because
+`G(board + Nim-heap(k)) = G(board) ⊕ k`, which is 0 exactly when `G(board) = k`. Win/loss of that
+*sum* **is** α-β-searchable. The driver solves `win(board, k)` for `k = 0, 1, 2, …` until the first
+LOSS: since the sum is a P-position for exactly one `k` (namely `k = G(board)`), any round that
+returns LOSS pins `G` exactly, and a round that returns WIN excludes that single value. One
+transposition table is shared across rounds (the state `(avail, h)` keys `win` independently of the
+round), and a `k = 0` LOSS is just the ordinary second-player win, so P-position boards cost one
+plain solve.
+
+The state `(avail, h)` carries the queen placements (which never change `h`) and the heap size
+(a move may reduce `h` to any `h' < h`). Three evaluator layers resolve it: a **Grundy dense
+leaf** (`pc ≤ gk`) that reads `G(avail)` from a new complete nimber table `GrundyW8` — the exact
+Grundy value of every labelled graph on ≤ 8 vertices — extended by nested `mex` sweeps `g9…g16`
+over the *same* projection geometry the boolean `getK` uses; a **boolean h = 0 leaf** (`pc ≤ bk`)
+that reuses the production dense evaluator whenever only "is `G ≠ 0`" is needed; and a **deep α-β**
+layer over the flat lockless table, heap moves probed first (an `h → 0` move is one dense lookup
+and fires whenever `G(avail) = 0`), queen moves in the production dynamic order.
+
+### 6.2 The extension: G(14) = 0, G(15) = 1, G(16) = 0, and G(17) in flight
+
+A344227 was catalogued through n = 13 as `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1` (offset 0).
+The engine adds the next three terms:
+
+| n  | G(n) | how established                                                                           |
+|----|------|-------------------------------------------------------------------------------------------|
+| 14 | 0    | `k = 0` LOSS (1.4 s / 11.0 M nodes); independently equals the production SECOND verdict   |
+| 15 | 1    | `k = 0` WIN + `k = 1` LOSS (23.8 s / 194 M nodes); reproduced at a different leaf ceiling |
+| 16 | 0    | `k = 0` LOSS (2 m 21 s / 1.06 B nodes); equals the production n = 16 SECOND verdict       |
+
+so the sequence through n = 16 reads `…, 0, 1, 0, 1, 0, 1, 0`. This **confirms** the OEIS-listed
+conjecture that for n ≥ 10 the nimber oscillates 0 (even) / 1 (odd) — through n = 16. The pattern
+is then **broken** at n = 18, whose first-player win forces `G(18) ≠ 0` (Section 5), contradicting
+the even → 0 half of that conjecture (the exact value is a separate computation; Section 6.5).
+
+**G(17) is in flight** at the time of writing (heap-sum engine, 17 GB table, on the n = 18-branch
+toolchain): `G(17) = [pending — run in progress 2026-07-02]`. The odd-board theory predicts
+`G(17) = 1` (Section 6.5), i.e. a `k = 0` WIN followed by a `k = 1` LOSS. **G(18)** is planned as
+the oscillation-breaker: each ascending-`k` round is itself an n = 18-scale search, so — since a
+LOSS at any `k` pins the value — the plan fires `k = 1` first, the most-probable value (Section
+6.5); the `h = 0` table-skip band and the wide boolean leaf are what make such a round converge on
+this box.
+
+### 6.3 Validating the nimber engine
+
+The engine carries its own layered validation, mirroring the main solver's:
+
+- **The nimber tables against a scalar `mex` reference.** `GrundyW8` is checked against a pure
+  scalar minimal-excludant recursion (exhaustively for ≤ 6 vertices, sampled at 7 and 8), and the
+  identity `G ≠ 0 ⟺ boolean-win` is cross-checked against the independently built boolean `W`
+  tables. The extension layers `g9…g16` are pinned to the validated `G ≤ 8` base by the same
+  differential-test pattern the boolean `direct_w*` chain uses.
+- **The engine against an independent full-`mex` reference and OEIS.** For n ≤ 8 the heap-sum
+  engine is checked against the full-DAG `mex` reference, and the command-line runs for n = 1…13
+  reproduce A344227 *exactly*.
+- **The new terms cross-checked two ways.** G(14) and G(16) independently equal the production
+  win/loss verdicts (a P-position is a `k = 0` LOSS by definition), and G(15) was reproduced under
+  a different Grundy-leaf ceiling (different leaf code paths, same value).
+- **Production untouched.** The engine is additive: the full test suite and the n = 12 / n = 14
+  distinct-count gates still pass.
+
+A subsequent engine tune (2026-07-02) raised the boolean `h = 0` leaf ceiling to `pc ≤ 20`
+(−63 % nodes at n = 15, because the `k = 0` round *is* a plain solve and inherits the production
+`dense_k` lever) and the Grundy-leaf ceiling to 16 (a *wash* — the heap-sum wall is almost
+entirely the `k = 0` round's `h = 0` search, since the `k ≥ 1` rounds ride the shared table, so
+the Grundy leaves, which serve only `h > 0` states, have little wall leverage until the table is
+oversubscribed at n ≥ 17).
+
+The engine's soundness rests on the Sprague–Grundy sum theorem `G(board + Nim-heap(k)) =
+G(board) ⊕ k` and the characterisation `win ⟺ G ≠ 0`. Both are exactly the results the Lean 4
+development machine-checks in the graph model (`grundy_sum`, `win_iff_grundy_ne_zero`; Section
+7.3) — so the *principle* the engine relies on is formally certified, while the engine's specific
+board + heap instantiation is validated by the differential and OEIS-agreement chain above rather
+than in Lean.
+
+### 6.4 The structure of the even/odd split
+
+The whole outcome split rests on one geometric fact. Let `ρ(r, c) = (n−1−r, n−1−c)` be the 180°
+rotation of the board, and call a square **self-mirroring** if a queen on it attacks its own
+`ρ`-image.
+
+**Lemma 1 (self-mirroring squares) — proven.** A square `s = (r, c)` is queen-adjacent to `ρ(s)`
+iff `s` lies on the main diagonal (`r = c`), the anti-diagonal (`r + c = n−1`), the centre row
+(`2r = n−1`), or the centre column (`2c = n−1`). *Proof.* `s` and `ρ(s)` share a row iff
+`r = n−1−r`; a column iff `c = n−1−c`; the main diagonal iff `r − c = (n−1−r) − (n−1−c) = c − r`,
+i.e. `r = c`; the anti-diagonal iff `r + c = (n−1−r) + (n−1−c)`, i.e. `r + c = n−1`; and
+queen-adjacency is exactly "shares a row, column, or diagonal." ∎ For **even** n, `2r = n−1` has
+no integer solution, so there is no centre row or column and the self-mirroring set is exactly the
+**two long diagonals**; for **odd** n it is the **four central lines** through the fixed centre
+cell. (`ρ` is moreover the *only* useful pairing symmetry: it is an involution with a small
+self-mirroring set, whereas each D₄ reflection makes an entire row, column, or diagonal
+self-mirroring, and the 90°/270° rotations are not involutions.)
+
+**Lemma 2 (odd boards) — proven.** For odd n the first player wins, so `G(n) ≥ 1`. *Proof.* Play
+the centre `c`. Its queen attacks the whole centre row, centre column, and both diagonals — by
+Lemma 1 (odd case) exactly every self-mirroring square. So the residual `R` is `ρ`-symmetric and
+contains no available self-mirroring square. The first player then *mirrors*: to any opponent move
+`s`, reply `ρ(s) ≠ s`, which is available because the placed set is `ρ`-symmetric (any earlier
+queen attacking `ρ(s)` would have a mirror image attacking `s` itself) and because `s`, being
+non-self-mirroring, does not attack `ρ(s)` (Lemma 1). The first player
+thus always has a reply and makes the last move, so `R` is a P-position and the root has a `G = 0`
+option, giving `mex ≥ 1`. ∎
+
+**Theorem 3 (even boards reduce to the diagonals) — proven.** For even n, from a `ρ`-symmetric
+position (the initial board is one), if the player to move plays a **non-diagonal** (non-
+self-mirroring) square `s`, the opponent can reply `ρ(s)` and restore a `ρ`-symmetric position:
+by Lemma 1, `s` non-diagonal means `ρ(s) ≠ s` and `s` does not attack `ρ(s)`, so `ρ(s)` survives
+`s`'s deletions, and removing `s` then `ρ(s)` (each with its attacks) is symmetric. Hence the
+mirror strategy is a valid winning strategy for the *responder* against any line that never plays
+a long-diagonal square. *Consequences:* **an even-board first-player win requires a long-diagonal
+move** (avoid them and the responder mirrors and wins); equivalently, `G(B_n) = 0` iff every
+long-diagonal deviation is refutable. The even-board outcome is decided *entirely* by the `O(n)`
+long-diagonal squares. ∎ This collapses the even-n question onto ≈ n/2 squares (mod D₄), and it
+matches the data: the n = 18 winning move I9 = (8, 8) is on the main diagonal, and all four central
+cells of any even board lie on a long diagonal — so the refutation of the even → 0 conjecture lands
+exactly where the theorem says the only threats live. The PV geometry of Section 5.4 shows the same
+structure concretely: I9 reproduces an odd-board centre-and-mirror on the embedded 17×17 sub-board.
+
+### 6.5 Why n = 18, boundedness, and predictions
+
+Theorem 3 reduces the even-n question to "is some long-diagonal opening winning?" but does not say
+*when* one first becomes so. The following is **heuristic, not a theorem.** A central-diagonal
+queen at `(d, d)`, `d ≈ n/2`, deletes its full row, full column, and both long diagonals — a
+"cross + X" whose arms scale with n — and its residual is *not* `ρ`-symmetric (row `d` maps to row
+`n−1−d`, only one of which is deleted), so the responder has no mirror and must out-play the first
+player in a genuinely asymmetric position. As n grows the central strike controls a larger absolute
+swath while the residual stays queen-dense, and at some size the first player's tempo outruns the
+responder's ability to re-establish a losing symmetry; n = 18 is empirically that size. No clean
+invariant (a monotone potential, a maximal-independent-set parity, a strategy-stealing argument)
+is known that predicts the n = 18 threshold — and the even subsequence was never monotone to zero
+anyway (`G(8) = 3`), so "eventually 0" was a fragile empirical pattern, now broken, not a law.
+
+**Boundedness is open, with a standing caveat.** Every known term is ≤ 3, but Node-Kayles Grundy
+values are **unbounded on general graphs** (explicit constructions in the Arc-Kayles / vertex-
+deletion literature), so *no* bound on the queen family is inherited — any bound must be a special
+structural fact, earned rather than assumed. (Structured graph families — trees, bounded
+neighbourhood-diversity — have provably eventually-periodic, hence bounded, Grundy sequences, but
+queen graphs are dense and irregular and are covered by none of those theorems.)
+
+The theory yields **falsifiable predictions.** (i) `G(17) = 1` (confidence ≈ 88 %): odd ⟹ `G ≥ 1`
+is proven, and every odd n ≥ 9 has been 1 (n = 9, 11, 13, 15); a `k ≥ 2` LOSS would refute the
+odd → 1 conjecture as sharply as n = 18 refuted even → 0. (ii) `G(18) ∈ {1, 2, 3}` with a prior
+peaked at **1** (≈ 55 %; then 2 ≈ 30 %, 3 ≈ 12 %, ≥ 4 ≈ 3 %): a single central-diagonal threat
+over an otherwise mirror-balanced remainder "looks like" a `*`-valued (value-1) game. Because a
+LOSS round pins `G` exactly, firing the most-probable `k = 1` first resolves G(18) in one search
+with ≈ 55 % probability. These are predictions, not results.
+
+---
+
+## 7. Validation and verification
 
 Correctness rests on a layered stack: a lineage agreement gate, exact distinct-count
 invariants, differential tests against an independent scalar reference, an independent raw-mask
@@ -458,7 +709,7 @@ oracle on adversarial subpositions, an integer-width audit, reproduction of Jenr
 sequence, and a machine-checked Lean proof of the leaf evaluator's semantics. The motivating
 defect class is described first.
 
-### 6.1 The motivating defect: `u8` square-index truncation
+### 7.1 The motivating defect: `u8` square-index truncation
 
 The one real bug found in this code class was a **leaf-decode defect**. The migration from n ≤ 16
 to n = 18 widened square indices from 8 to 16 bits across most of the code, but missed the
@@ -469,7 +720,7 @@ hence the looked-up value — a loss↔win flip. It was caught at `pc = 3` in mi
 independent-oracle differential (below) and fixed by widening the indices. This defect is the
 direct motivation for the Lean verification of the leaf evaluator's decode and recurrence.
 
-### 6.2 Test and cross-check hierarchy
+### 7.2 Test and cross-check hierarchy
 
 - **Lineage agreement.** Every solver variant matches the memo-less `naive` recurrence's verdict
   for all n ≤ 9. `naive` is the ground truth the entire lineage is pinned to.
@@ -499,12 +750,12 @@ direct motivation for the Lean verification of the leaf evaluator's decode and r
 - **Reproduction of prior work.** The kernel reproduces Jenrich's full n ≤ 16 sequence
   (n = 16 second-player win) and agrees with OEIS A344227 through the catalogued range.
 
-### 6.3 Machine-checked verification of the leaf evaluator (Lean 4)
+### 7.3 Machine-checked verification of the leaf evaluator (Lean 4)
 
 The leaf evaluator is where the historical bug lived and where ~21 %+ of search nodes are
 decided, so it is the target of a machine-checked proof. We follow a **"2-lite"** scope: prove
 the *recurrence/algorithm semantics* in Lean, and leave the bit-level `pext`/serialization to the
-differential tests of Section 6.2 (where they are cheapest to check). The development is a
+differential tests of Section 7.2 (where they are cheapest to check). The development is a
 self-contained Lean 4 + mathlib project (`lean/NodeKayles/`), `lake build` green with **no
 `sorry`**; every theorem depends only on the three standard mathlib axioms
 `[propext, Classical.choice, Quot.sound]` — no `sorryAx`, no `native_decide`, no custom axioms.
@@ -535,7 +786,7 @@ corroborated against the literature: the path `P₃` computes to Grundy value 2 
 OEIS A002187), and the isolated-vertex parity computes to `n mod 2`.
 
 **What is deferred (the 2-lite boundary).** Not modelled in Lean, and carried by the differential
-tests of Section 6.2: the u128 / 3-word **code bit-layout and its `pext` decode**
+tests of Section 7.2: the u128 / 3-word **code bit-layout and its `pext` decode**
 (`adj_from_code`, `projected_code`); the `pext` `W8` build fast path; the generic high-popcount
 α-β combination logic above the dense ceiling (test-covered for n ≤ 16); and the board→code build
 (the queen-graph construction). The **Lean↔Rust correspondence itself** — that the Lean
@@ -545,11 +796,15 @@ monomorphisation, and unchecked indexing). The move polarity is recorded explici
 `closedNbhd G v` (the deleted set `{v} ∪ N(v)`) corresponds to the Rust `(1<<i) | adj[i]`, and
 the surviving child `S \ closedNbhd` to its complement `full & ¬((1<<i) | adj[i])`.
 
-**Scope caveat.** `grundy_sum` and `grundy_iso` harden the mathematics of an **optional,
-default-off, parked** component-nimber lever (Section 4.6) — not the default `getK`/`iso-dense`
-path and **not** the n = 18 verdict, which use only the boolean `win` recurrence. They are
-included because the Grundy characterisation is the cleanest formal statement of the leaf
-evaluator's meaning and because the component-decomposition technique may be revisited.
+**Scope caveat.** `grundy_sum` and `grundy_iso` are **not** on the default `getK`/`iso-dense` path
+and **not** part of the n = 18 verdict, which use only the boolean `win` recurrence. They do,
+however, formalise the exact principle behind the heap-sum nimber engine of Section 6 — the
+Sprague–Grundy component sum `G(S₁ ∪ S₂) = G(S₁) ⊕ G(S₂)` and `win ⟺ G ≠ 0` — so the *mathematics*
+the engine relies on is machine-checked, even though the Lean statement is the graph-disjoint-union
+instantiation rather than the engine's board + Nim-heap sum (whose specific instantiation is
+validated empirically in Section 6.3). They also harden an optional, default-off component-nimber
+decomposition lever (Section 4.6). The Grundy characterisation is included because it is the
+cleanest formal statement of the leaf evaluator's meaning.
 
 The combinatorial-game theory was, until recently, in mathlib's `SetTheory/Game/`; it has since
 been extracted to a standalone library tracking an older Lean toolchain than this project's, so
@@ -561,7 +816,7 @@ matches our toolchain.
 
 ---
 
-## 7. Threats to validity
+## 8. Threats to validity
 
 We state the residual trusted base precisely.
 
@@ -577,7 +832,7 @@ We state the residual trusted base precisely.
 2. **The Lean proof covers the leaf evaluator's recurrence semantics, not the whole search.** It
    does not model the bit serialization, the high-popcount α-β, the transposition table, the
    concurrency, or the board→code build, and the Lean↔Rust correspondence is hand-audited
-   (Section 6.3).
+   (Section 7.3).
 3. **Benchmark numbers are single-machine and noisy.** All n = 16 wall/node figures carry ≈ ±18 %
    parallel node-count noise; deterministic n = 14 node counts are the noise-free measure.
    Throughput figures depend on a clean, huge-paged, non-throttled box.
@@ -588,15 +843,20 @@ None of these undermines the qualitative result; they delimit what "proved" mean
 
 ---
 
-## 8. Conclusion and future work
+## 9. Conclusion and future work
 
 We determined that the Non-Attacking Queens game on the 18×18 board is a **first-player win**,
 witnessed by the opening move I9 and a 15-ply principal variation, by an exhaustive boolean
 game-tree search whose verdict is corroborated by two independently configured runs. The result
-extends Jenrich's n ≤ 16 **win/loss** sequence; it does **not** contribute a term to OEIS A344227
-(the Sprague–Grundy *nimber*, catalogued only through n = 13), since an outcome solve does not
-yield the nimber value, and an even-board first-player win in fact contradicts that sequence's
-conjectured even → 0 oscillation. The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
+extends Jenrich's n ≤ 16 **win/loss** sequence. The n = 18 *outcome* does not by itself contribute
+a term to OEIS A344227 (the Sprague–Grundy *nimber*, catalogued only through n = 13), since an
+outcome solve does not yield the nimber value — and an even-board first-player win in fact
+contradicts that sequence's conjectured even → 0 oscillation. The nimber sequence *is* extended,
+separately, by a heap-sum Sprague–Grundy engine that certifies the new terms G(14) = 0, G(15) = 1,
+G(16) = 0 (with G(17) in flight), confirming the even → 0 / odd → 1 oscillation exactly up to the
+n = 18 break; and an elementary 180°-rotation pairing argument proves that the even-board outcome
+is decided entirely by the long-diagonal moves — the winning n = 18 opening I9 = (8, 8) being a
+main-diagonal move, as that theorem requires. The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
 the tree directly from precomputed Node-Kayles tables, isomorphism-aware canonicalisation over a
 lockless flat transposition table, dynamic move ordering, and a capacity configuration
 (band-skipped transposition work + a 17 GB table) tuned to a single workstation. The leaf
@@ -604,11 +864,16 @@ evaluator's recurrence semantics — the component where this solver class has h
 bugs — are machine-checked in Lean 4, kernel-complete and depending only on standard axioms,
 with the bit-level serialization deferred to differential tests.
 
-Directions for further work: closing the residual trusted base by modelling the u128 code decode
-in Lean (removing the serialization from differential-test-only status) and bridging `win`/
-`grundy` to a blessed `Impartial`/`grundyValue` once the external game-theory library matches the
-toolchain; a resumable, disk-backed transposition tier for n = 20; and pushing the n = 16 search
-below 20 s. We make no claim that any reported time is a floor.
+Directions for further work: completing **G(17)** (in flight) and computing **G(18)** — the
+oscillation-breaker whose value the theory predicts to be 1 — each round of which is an
+n = 18-scale search; closing the residual trusted base by modelling the u128 code decode in Lean
+(removing the serialization from differential-test-only status) and bridging `win`/`grundy` to a
+blessed `Impartial`/`grundyValue` once the external game-theory library matches the toolchain;
+attacking the heuristic "why n = 18" threshold and the boundedness question (open, with no bound
+inherited from general Node-Kayles); and a resumable, disk-backed transposition tier for n = 20.
+The n = 16 search, already carried below 20 s by cross-root killer replies and kernel
+micro-optimisation (13.43 s; Section 4.5), continues to reward levers a prior audit had called
+terminal — we make no claim that any reported time is a floor.
 
 ### Reproducibility
 
@@ -617,9 +882,12 @@ solver at the two configurations of Section 5.2 — the primary run sets `dense_
 confirm run `dense_k = 20`, both with the `pc ∈ [18,25]` transposition-skip and a 2.125 × 10⁹-slot
 table — on a 26 GB Zen 5 workstation compiled for `znver5`. The validation gates (lineage
 agreement, the n = 12 distinct count 1,060,823, the differential tests, the independent-oracle
-subposition check) run from the project's standard test target. The Lean development builds with
-Lean v4.32.0-rc1 + mathlib via `lake build`; a green build with no `sorry` warning is the gate,
-and `#print axioms` on each theorem yields the standard axiom triple.
+subposition check) run from the project's standard test target. The nimber terms of Section 6 are
+reproduced by the `queens nimber <n>` command (which prints the ascending-`k` rounds and the first
+LOSS), whose own gates check the engine against the full-`mex` reference for n ≤ 8 and against
+A344227 for n ≤ 13. The Lean development builds with Lean v4.32.0-rc1 + mathlib via `lake build`; a
+green build with no `sorry` warning is the gate, and `#print axioms` on each theorem yields the
+standard axiom triple.
 
 ---
 
@@ -641,3 +909,10 @@ and `#print axioms` on each theorem yields the standard axiom triple.
    the Grundy proofs.)
 8. OEIS A002187 (Dawson's chess / Grundy values of path Node-Kayles), used as a Lean adequacy
    cross-check.
+9. On the unboundedness of Node-Kayles / vertex-deletion-game Grundy values over general graphs
+   (via the "generalisation of Arc-Kayles" line, *International Journal of Game Theory*, 2018;
+   arXiv:1709.05219). Cited in Section 6.5 for the standing caveat that no bound on the queen
+   family is inherited.
+10. On eventually-periodic Grundy sequences for structured graph families (Node-Kayles on trees
+    and related families), and structural parameterisations of Node-Kayles (neighbourhood
+    diversity / modular-width). Context for Section 6.5's boundedness discussion.
