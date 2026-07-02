@@ -198,6 +198,13 @@ pub struct NimberSum {
     /// [`DenseW8::get_dyn_wide`] (the production W17..W20 evaluators). The k=0 round
     /// IS a plain-queens solve, so this is the production `dense_k` lever verbatim.
     bk: usize,
+    /// `h = 0` TT-skip band `[lo, hi]` (`QUEENS_NIMBER_SKIP="lo,hi"`, default empty) —
+    /// the production skip[18,25] analog: an in-band `h = 0` node skips ALL TT work
+    /// (D4 canon + hash + probe + put). With `bk = 20`, pc==21's children are all
+    /// boolean leaves (bounded recompute, the skip18 safety argument verbatim); deeper
+    /// bands trade bounded re-expansion into the leaf floor for TT pressure relief —
+    /// the lever that made the giant n=18 root converge on the 26 GB box.
+    skip: (u32, u32),
 }
 
 impl NimberSum {
@@ -215,12 +222,22 @@ impl NimberSum {
         if bk >= 17 {
             crate::queens::dense::warm_wide(bk);
         }
+        // "lo,hi" (e.g. "21,25"); anything unparseable (or unset) = empty band (1, 0).
+        let skip = std::env::var("QUEENS_NIMBER_SKIP")
+            .ok()
+            .and_then(|s| {
+                let (lo, hi) = s.split_once(',')?;
+                Some((lo.trim().parse().ok()?, hi.trim().parse().ok()?))
+            })
+            .filter(|&(lo, hi)| lo > bk as u32 && hi >= lo)
+            .unwrap_or((1, 0));
         NimberSum {
             tt: QueensTt::new(bits),
             dense: DenseW8::build(),
             grundy: GrundyW8::build(),
             gk,
             bk,
+            skip,
         }
     }
 
@@ -300,6 +317,12 @@ impl NimberSum {
         if pc <= self.gk {
             return self.grundy_leaf(q, avail, pc) != h;
         }
+        // The h=0 skip band: no canon, no probe, no put — bounded recompute instead of
+        // TT pressure (see the `skip` field). The node still counts (`bump`).
+        if h == 0 && (self.skip.0..=self.skip.1).contains(&(pc as u32)) {
+            self.tt.bump();
+            return self.expand_heap(q, blocked, h) || self.expand_queens(q, blocked, h);
+        }
         let (r0, f0) = QueensTt::hash128(q.pos_key(blocked));
         let (r, f) = (r0 ^ HMIX[h as usize].0, f0 ^ HMIX[h as usize].1);
         if let Some(v) = self.tt.get_hashed(r, f) {
@@ -357,6 +380,18 @@ impl NimberSum {
         if pc <= self.gk {
             return self.grundy_leaf(q, avail, pc) != h;
         }
+        // The near-root parallel plies sit far above any sensible skip band, but keep the
+        // semantics identical to `win` in case a wide band reaches them.
+        if h == 0 && (self.skip.0..=self.skip.1).contains(&(pc as u32)) {
+            self.tt.bump();
+            let mut kids = [0u32; SUM_MAXV];
+            let nk = self.gather_kids(q, blocked, &mut kids);
+            return self.expand_heap(q, blocked, h)
+                || kids[..nk].par_iter().any(|&kk| {
+                    let sq = kk & SQ_MASK;
+                    !self.win_par(q, q.place(blocked, sq), h, levels - 1)
+                });
+        }
         let (r0, f0) = QueensTt::hash128(q.pos_key(blocked));
         let (r, f) = (r0 ^ HMIX[h as usize].0, f0 ^ HMIX[h as usize].1);
         if let Some(v) = self.tt.get_hashed(r, f) {
@@ -397,8 +432,13 @@ impl NimberSum {
     }
 
     pub fn table_summary(&self) -> String {
+        let skip = if self.skip.0 <= self.skip.1 {
+            format!(" · h=0 TT-skip pc {}..={}", self.skip.0, self.skip.1)
+        } else {
+            String::new()
+        };
         format!(
-            "{} · G≤8 tables {} MB · Grundy-leaf pc≤{} · boolean h=0 leaf pc≤{}",
+            "{} · G≤8 tables {} MB · Grundy-leaf pc≤{} · boolean h=0 leaf pc≤{}{skip}",
             self.tt.summary(),
             self.grundy.bytes() / (1 << 20),
             self.gk,
