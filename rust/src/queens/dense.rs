@@ -1528,10 +1528,141 @@ impl GrundyW8 {
         (!seen).trailing_zeros() as u8
     }
 
-    /// Dispatch to the right layer for a runtime `k ≤ 12`.
+    /// Nimber of a labelled 13-vertex graph (78-bit code). Mirrors [`DenseW8::get13`]'s
+    /// child right-sizing (only a 12-vertex child needs the `u128` [`pext128_wide`]); no
+    /// early-out — mex needs every child.
+    pub(crate) fn g13(&self, code: u128) -> u8 {
+        debug_assert!(code < (1u128 << 78));
+        let (adj, _) = extract_adj128::<13>(code, &W13_MASKS.0);
+        let full = (1u16 << 13) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..13 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (12 - adj[i].count_ones()) as usize;
+            let mask = W13_MASKS.1[child as usize];
+            let g = if cpc == 12 {
+                self.g12(pext128_wide(code, mask))
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => self.g11(cc),
+                    10 => self.g10(cc),
+                    9 => self.g9(cc),
+                    _ => self.get(cpc, cc as usize),
+                }
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Nimber of a labelled 14-vertex graph (91-bit code); 12/13-vertex children stay `u128`.
+    pub(crate) fn g14(&self, code: u128) -> u8 {
+        debug_assert!(code < (1u128 << 91));
+        let (adj, _) = extract_adj128::<14>(code, &W14_MASKS.0);
+        let full = (1u16 << 14) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..14 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (13 - adj[i].count_ones()) as usize;
+            let mask = W14_MASKS.1[child as usize];
+            let g = if cpc >= 12 {
+                let cc = pext128_wide(code, mask);
+                if cpc == 13 {
+                    self.g13(cc)
+                } else {
+                    self.g12(cc)
+                }
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => self.g11(cc),
+                    10 => self.g10(cc),
+                    9 => self.g9(cc),
+                    _ => self.get(cpc, cc as usize),
+                }
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Nimber of a labelled 15-vertex graph (105-bit code).
+    pub(crate) fn g15(&self, code: u128) -> u8 {
+        debug_assert!(code < (1u128 << 105));
+        let (adj, _) = extract_adj128::<15>(code, &W15_MASKS.0);
+        let full = (1u16 << 15) - 1;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..15 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (14 - adj[i].count_ones()) as usize;
+            let mask = W15_MASKS.1[child as usize];
+            let g = if cpc >= 12 {
+                let cc = pext128_wide(code, mask);
+                match cpc {
+                    14 => self.g14(cc),
+                    13 => self.g13(cc),
+                    _ => self.g12(cc),
+                }
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => self.g11(cc),
+                    10 => self.g10(cc),
+                    9 => self.g9(cc),
+                    _ => self.get(cpc, cc as usize),
+                }
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Nimber of a labelled 16-vertex graph (120-bit code — the `u128` ceiling, as
+    /// [`DenseW8::get16`]).
+    pub(crate) fn g16(&self, code: u128) -> u8 {
+        debug_assert!(code < (1u128 << 120));
+        let (adj, _) = extract_adj128::<16>(code, &W16_MASKS.0);
+        let full = u16::MAX;
+        let mut seen = 0u32;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..16 {
+            let child = full & !((1u16 << i) | adj[i]);
+            let cpc = (15 - adj[i].count_ones()) as usize;
+            let mask = W16_MASKS.1[child as usize];
+            let g = if cpc >= 12 {
+                let cc = pext128_wide(code, mask);
+                match cpc {
+                    15 => self.g15(cc),
+                    14 => self.g14(cc),
+                    13 => self.g13(cc),
+                    _ => self.g12(cc),
+                }
+            } else {
+                let cc = pext128(code, mask);
+                match cpc {
+                    11 => self.g11(cc),
+                    10 => self.g10(cc),
+                    9 => self.g9(cc),
+                    _ => self.get(cpc, cc as usize),
+                }
+            };
+            seen |= 1u32 << g;
+        }
+        (!seen).trailing_zeros() as u8
+    }
+
+    /// Dispatch to the right layer for a runtime `k ≤ 16`.
     #[inline]
     pub(crate) fn grundy_dyn(&self, k: usize, code: u128) -> u8 {
         match k {
+            16 => self.g16(code),
+            15 => self.g15(code),
+            14 => self.g14(code),
+            13 => self.g13(code),
             12 => self.g12(code),
             11 => self.g11(code as u64),
             10 => self.g10(code as u64),
@@ -1635,15 +1766,16 @@ mod tests {
         }
     }
 
-    /// The nested mex sweeps `g9..g12` match the scalar recursion and the boolean `wins_rec`
-    /// sign on deterministic pseudo-random codes.
+    /// The nested mex sweeps `g9..g16` match the scalar recursion and the boolean `wins_rec`
+    /// sign on deterministic pseudo-random codes. Random codes are ~1/2 edge density, so the
+    /// no-early-out references stay tractable through k=16 (children drop deep per ply).
     #[test]
-    fn grundy_g9_to_g12_match_reference() {
+    fn grundy_g9_to_g16_match_reference() {
         let g = GrundyW8::build();
         let w = ref_tables();
         let gt = ref_gtables();
         let mut x = 0xD1B5_4A32_D192_ED03u64;
-        for k in 9..=12usize {
+        for k in 9..=16usize {
             let bits = k * (k - 1) / 2;
             for _ in 0..48 {
                 x = x
@@ -1660,6 +1792,30 @@ mod tests {
                     got != 0,
                     wins_rec(k, code, w),
                     "k={k} code={code:#x}: G!=0 must equal boolean win"
+                );
+            }
+        }
+        // Sparser codes (~1/4 edge density — AND of two shifted copies) exercise the deep
+        // high-cpc child nesting (isolated-removal chains) the dense samples rarely hit.
+        // Kept to a few samples per k: the no-early-out references grow fast as density drops.
+        for k in 13..=16usize {
+            let bits = k * (k - 1) / 2;
+            for _ in 0..8 {
+                x = x
+                    .wrapping_mul(6_364_136_223_846_793_005)
+                    .wrapping_add(1442695040888963407);
+                let hi = x;
+                x = x
+                    .wrapping_mul(6_364_136_223_846_793_005)
+                    .wrapping_add(1442695040888963407);
+                let dense = ((hi as u128) << 64) | x as u128;
+                let code = (dense & (dense >> 3)) & ((1u128 << bits) - 1);
+                let got = g.grundy_dyn(k, code);
+                assert_eq!(got, grundy_rec(k, code, gt), "sparse k={k} code={code:#x}");
+                assert_eq!(
+                    got != 0,
+                    wins_rec(k, code, w),
+                    "sparse k={k} code={code:#x}: G!=0 must equal boolean win"
                 );
             }
         }

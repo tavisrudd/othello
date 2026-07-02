@@ -165,10 +165,10 @@ const SUM_PAR_LEVELS: u32 = 2;
 ///
 /// State is `(avail, h)`: moves are queen placements (h unchanged) or heap reductions
 /// (`h' < h`, avail unchanged). Three leaf/probe layers do the heavy lifting:
-/// - `pc ≤ gk` (default 12): the node is `win ⟺ G(avail) ≠ h`, with `G` from the complete
-///   [`GrundyW8`] tables + nested mex sweeps — no expansion, any `h` (subsumes the boolean
-///   leaf at `h = 0`).
-/// - `h == 0`, `pc ≤ 16`: the plain-queens boolean [`DenseW8`] leaf (`win ⟺ W(avail)`).
+/// - `h == 0`, `pc ≤ 16`: the plain-queens boolean [`DenseW8`] leaf (`win ⟺ W(avail)`) —
+///   probed first: its child sweeps early-out, where a mex sweep must visit every child.
+/// - `h > 0`, `pc ≤ gk` (default 16): the node is `win ⟺ G(avail) ≠ h`, with `G` from the
+///   complete [`GrundyW8`] tables + nested mex sweeps `g9..g16` — no expansion, any `h`.
 /// - deep: flat lockless TT keyed `hash128(D4-canon) ⊕ HMIX[h]`, heap moves probed first
 ///   (they re-enter the same `avail` at lower `h` — usually a TT hit or a dense leaf, and a
 ///   `G(avail)=0` position wins instantly by the h→0 move), then queen moves in dynamic
@@ -177,8 +177,10 @@ pub struct NimberSum {
     tt: QueensTt,
     dense: DenseW8,
     grundy: GrundyW8,
-    /// Grundy-leaf ceiling (`QUEENS_NIMBER_GK`, 9..=12, default 12): a node with
+    /// Grundy-leaf ceiling (`QUEENS_NIMBER_GK`, 9..=16, default 16): a node with
     /// `pc ≤ gk` resolves by mex sweep instead of expansion. Resolved once here.
+    /// Only reached at `h > 0` — the `h = 0` subspace takes the cheaper boolean
+    /// early-out leaf first (win ⟺ W(avail), no full mex needed).
     gk: usize,
 }
 
@@ -187,8 +189,8 @@ impl NimberSum {
         let gk = std::env::var("QUEENS_NIMBER_GK")
             .ok()
             .and_then(|s| s.parse::<usize>().ok())
-            .unwrap_or(12)
-            .clamp(9, 12);
+            .unwrap_or(16)
+            .clamp(9, 16);
         NimberSum {
             tt: QueensTt::new(bits),
             dense: DenseW8::build(),
@@ -227,14 +229,17 @@ impl NimberSum {
     }
 
     /// Win/loss of the sum node `(avail = board ∖ blocked, heap h)`, sequential.
+    /// Leaf order matters: at `h = 0` the boolean early-out leaf is strictly cheaper
+    /// than a full mex sweep (win ⟺ W(avail) — the sweep's exact G is wasted work),
+    /// so it is probed first; the Grundy leaf serves the `h > 0` layers.
     fn win(&self, q: &Queens, blocked: Bits, h: u8) -> bool {
         let avail = q.board.and_not(blocked);
         let pc = avail.popcount() as usize;
-        if pc <= self.gk {
-            return self.grundy_leaf(q, avail, pc) != h;
-        }
         if h == 0 && pc <= 16 {
             return self.dense.get_dyn(pc, self.leaf_code(q, avail, pc));
+        }
+        if pc <= self.gk {
+            return self.grundy_leaf(q, avail, pc) != h;
         }
         let (r0, f0) = QueensTt::hash128(q.pos_key(blocked));
         let (r, f) = (r0 ^ HMIX[h as usize].0, f0 ^ HMIX[h as usize].1);
@@ -287,11 +292,11 @@ impl NimberSum {
         }
         let avail = q.board.and_not(blocked);
         let pc = avail.popcount() as usize;
-        if pc <= self.gk {
-            return self.grundy_leaf(q, avail, pc) != h;
-        }
         if h == 0 && pc <= 16 {
             return self.dense.get_dyn(pc, self.leaf_code(q, avail, pc));
+        }
+        if pc <= self.gk {
+            return self.grundy_leaf(q, avail, pc) != h;
         }
         let (r0, f0) = QueensTt::hash128(q.pos_key(blocked));
         let (r, f) = (r0 ^ HMIX[h as usize].0, f0 ^ HMIX[h as usize].1);
