@@ -265,6 +265,23 @@ L1-resident, W7 is an L2 hit, est ≤0.3% for real I-cache bloat risk in the fro
 before the degree sort (child unknown pre-sort). The branch-miss mass (46% in the sweeps' early-outs)
 is data-dependent boolean structure — no orderable site left.
 
+**TT-key cost split (user question; profiling build, srcline-bucketed cycles, full n=16 default run):**
+the whole key pipeline ≈ **9% of cycles**, and it is CANON, not hashing:
+- **canon ≈ 7.5%** — `child_orient` (incremental 8-orientation images, 7 four-word and_nots/node) +
+  `lex_min8` (7 `Bits` compares; its `cmp.rs` share ≈ 2.0%);
+- **`hash128` + TT get/put internals ≈ 0.7%**, `mtt_*` wrappers 0.6%, `d4_bits`/`graph_bits` 0.2%;
+- **prefetch instructions 2.1% of cycles / 8.5% of cache misses** — the hash-carry prefetch already
+  absorbs the probe's DRAM miss off the critical path (`tt.rs` shows only 0.13% of cache misses).
+Design consequence, recorded: the flat TT has NO pointer-following (canon key → `hash128` mulx →
+direct slot index → one 8 B load, fp in-slot); "index by a cheap fn of the exact key" would only
+remove the ~0.7% hash arithmetic while still needing an in-slot discriminator (the map is lossy),
+and removing CANON keys forfeits the D4 transposition merges (the orbit-dedup close proved
+mirror-hits are real TT traffic; skip18 showed even the best no-TT band only bought −3.6% cyc and
+every extension measured dead). A perfect/injective index needs the key set a priori — that is the
+BuRR archive idea (read-only, capacity lever), not a live-table option. Ceiling on ANY key-cost
+lever: ≤9%; the only real target inside it is canon (7.5%), and the cheap-canon alternative
+(iso key) is banked at 100× the D4 key's cost.
+
 ### Session 2026-07-01--13 (cont.) — killer PROMOTED TO DEFAULT + deep-ply killers + ETC-gate default: RECORD → 13.77s; the 10s push status
 **User directive**: promote `QUEENS_KILLER=4` to default; keep hunting toward 10s.
 
