@@ -168,6 +168,14 @@ enum Cmd {
         /// Highest heap size the sum engine tries before giving up (G ≤ 15).
         #[arg(long, default_value_t = 8, value_parser = clap::value_parser!(u8).range(0..=15))]
         max_k: u8,
+        /// First heap size the sum engine tries. ONLY sound when every k < min_k round
+        /// is already proven a first-player WIN by an external result (the ascending-k
+        /// round contract skips root heap moves to k' < k as known WINs): a k=0 skip
+        /// asserts "the plain board is a first-player win" — e.g. n=18 (the 2026-06
+        /// production solve), sparing a full n=18-scale round. G < min_k is then
+        /// excluded by assumption, not by search.
+        #[arg(long, default_value_t = 0, value_parser = clap::value_parser!(u8).range(0..=15))]
+        min_k: u8,
     },
     /// Count the distinct positions the win/loss search visits (its true TT
     /// working set), via HyperLogLog. Use the counts for n=10/12/14 to
@@ -333,7 +341,12 @@ fn main() {
             },
             to_file,
         ),
-        Cmd::Nimber { n, full, max_k } => nimber_mode(&Queens::new(n), full, max_k),
+        Cmd::Nimber {
+            n,
+            full,
+            max_k,
+            min_k,
+        } => nimber_mode(&Queens::new(n), full, max_k, min_k),
         Cmd::Count {
             n,
             parallel,
@@ -1924,7 +1937,7 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
     render(q, queens, blocked);
 }
 
-fn nimber_mode(q: &Queens, full: bool, max_k: u8) {
+fn nimber_mode(q: &Queens, full: bool, max_k: u8, min_k: u8) {
     // The sum engine's sequential `win` recursion runs the full remaining game depth on
     // one rayon worker; past n=16 that overflows the default 2 MB worker stack (observed:
     // n=17 stack-overflow abort). 256 MB is a virtual reservation — untouched pages never
@@ -1961,8 +1974,14 @@ fn nimber_mode(q: &Queens, full: bool, max_k: u8) {
         t0.elapsed().as_secs_f64(),
         solver.table_summary(),
     );
+    if min_k > 0 {
+        eprintln!(
+            "\x1b[33m(starting at k={min_k}: rounds k<{min_k} are ASSUMED first-player wins \
+             from an external result — G < {min_k} is excluded by assumption, not search)\x1b[0m",
+        );
+    }
     let t = Instant::now();
-    for k in 0..=max_k {
+    for k in min_k..=max_k.max(min_k) {
         let tr = Instant::now();
         let win = solver.round_win(q, k);
         eprintln!(
