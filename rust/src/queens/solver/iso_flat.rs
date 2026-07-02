@@ -142,6 +142,7 @@ const M_RANK: u8 = 13; // M_ORD_W + tap the first-losing-child cutoff rank (ETC 
 const M_COLD: u8 = 14; // M_ORD_W + tap the entry-probe hit/miss (cold-compute) fraction per pc, per-worker (`QUEENS_COLD=1`)
 const M_HITKEY: u8 = 15; // M_ORD_W + DUMP each pc≥17 entry probe's canonical key + avail bits (all hits, 1/64 misses) to a file for offline structural study of the 0.2% deep-tail hits (`QUEENS_HITKEY=1`)
 const M_DHIST: u8 = 16; // M_ORD_W + deep cutoff-history tiebreak in the dynamic move sort (`QUEENS_DHIST=1`)
+const M_KPROBE: u8 = 17; // M_ORD_W + tap every getK entry's labelled code: HLL distinct + memo-sim hit rate (`QUEENS_KPROBE=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -199,6 +200,18 @@ const SIZE_HLL_M: usize = 1 << SIZE_HLL_P;
 /// Per-worker cap on the slot-sorted-locality sample (routes). Bounds the memory the cold sort
 /// touches; the giant-root tail is one worker, so its sample is a contiguous probe-stream prefix.
 const SIZE_SAMPLE_CAP: usize = 4_000_000;
+
+/// `M_KPROBE` band range: getK entries are the descent's pc 9..=`DK` cheap arms; `DK` ≤ 20.
+const KPROBE_BANDS: usize = 12; // pc 9..=20, indexed pc-9
+/// Per-band HyperLogLog register width for the `M_KPROBE` distinct-code estimate. p=14 ⇒ 16 KB
+/// per band (12 bands ≈ 196 KB shared + per worker), ≈0.8% std err — ample for a repeat-rate ratio.
+const KPROBE_HLL_P: u32 = 14;
+const KPROBE_HLL_M: usize = 1 << KPROBE_HLL_P;
+/// `M_KPROBE` simulated code-keyed memo sizes (direct-mapped, 8 B tag/slot, shared across workers
+/// like a real memo would be): a small L3-resident-scale table and a large DRAM-scale table. The
+/// pair brackets the realizable hit rate between "cache-cheap" and "big but latency-priced".
+const KPROBE_SIM_S_BITS: u32 = 20; // 2^20 slots = 8 MiB
+const KPROBE_SIM_L_BITS: u32 = 26; // 2^26 slots = 512 MiB
 
 /// Per-worker, non-atomic accumulator for the `QUEENS_SIZE` (A'' Phase-2a) offload-sizing probe:
 /// the recurse-arm probe-stream width per available-popcount, a HyperLogLog of the probed
@@ -273,6 +286,18 @@ struct DecAcc {
     // max-component-size distribution per pc, bucketed: msz_dist[pc][s] = #nodes with max-comp-size==s.
     // s ranges 0..=16 (a pc==16 node's max comp is ≤16); index 0 unused.
     msz_dist: [[u64; 17]; MAXPC],
+}
+
+/// `M_KPROBE` (`QUEENS_KPROBE=1`) per-band getK-entry tally (indexed pc−9): entry count, a
+/// thread-local HLL register slice per band over the entry's labelled `(pc, code)` key (distinct ⇒
+/// the memo-hit ceiling `entries/distinct`), and hit counters for the two shared simulated
+/// direct-mapped memo tables. Merged into the shared [`IsoFlat::kprobe_*`] state at drain. Zero
+/// cost off the `M_KPROBE` monomorphisation.
+struct KprobeAcc {
+    entries: [u64; KPROBE_BANDS],
+    sim_s_hits: [u64; KPROBE_BANDS],
+    sim_l_hits: [u64; KPROBE_BANDS],
+    hll: [[u8; KPROBE_HLL_M]; KPROBE_BANDS],
 }
 
 /// `M_RANK` (`QUEENS_RANK=1`) per-pc-band first-losing-child cutoff-rank tally (indexed by `node_pc`).
@@ -356,6 +381,16 @@ thread_local! {
             all_le8: [0; MAXPC],
             all_le_km1: [0; MAXPC],
             msz_dist: [[0; 17]; MAXPC],
+        })
+    };
+    /// Per-worker `M_KPROBE` accumulator; merged into the shared [`IsoFlat::kprobe_*`] at drain.
+    /// Empty cost off the `M_KPROBE` path.
+    static KPROBE_ACC: RefCell<KprobeAcc> = const {
+        RefCell::new(KprobeAcc {
+            entries: [0; KPROBE_BANDS],
+            sim_s_hits: [0; KPROBE_BANDS],
+            sim_l_hits: [0; KPROBE_BANDS],
+            hll: [[0; KPROBE_HLL_M]; KPROBE_BANDS],
         })
     };
     /// Per-worker `M_RANK` accumulator; merged into the shared [`IsoFlat::rank_*`] at drain.
@@ -659,6 +694,41 @@ fn adj_row_pext(row: Bits, a: &[u64; 4], cpre: [u32; 3]) -> u64 {
             | (_pext_u64(r[2], a[2]) << cpre[1])
             | (_pext_u64(r[3], a[3]) << cpre[2])
     }
+}
+
+/// `M_KPROBE`: rebuild the labelled edge code of one getK-entry node (`avail`, pc==`k`) exactly as
+/// the `wN_get`/`w_wide_get` builders pack it (upper-triangular, ascending-square label order) for
+/// any runtime `k` in 9..=20, into words 0..=2; word 3 carries `k` so the folded key is band-tagged
+/// and bands never collide. This IS the key a code-keyed getK memo would use — two board positions
+/// with the same induced labelled graph produce the same key. Cold probe path only (`QUEENS_KPROBE`
+/// run); the tap DCEs off `M_KPROBE`, production never calls this.
+fn kprobe_code(att: &[[Bits; 8]], avail: Bits, k: u32) -> Bits {
+    debug_assert!((9..=20).contains(&k));
+    debug_assert_eq!(avail.popcount(), k);
+    let mut verts = [0u8; 20];
+    verts_of(avail, &mut verts[..k as usize]);
+    let a = &avail.0;
+    let c0 = a[0].count_ones();
+    let c1 = c0 + a[1].count_ones();
+    let c2 = c1 + a[2].count_ones();
+    let cpre = [c0, c1, c2];
+    let mut words = [0u64; 4];
+    let mut off = 0u32;
+    for i in 0..k {
+        let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+        let width = k - 1 - i;
+        let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
+        let lo = off & 63;
+        let wi = (off >> 6) as usize;
+        words[wi] |= contrib << lo;
+        // k=20 tops out at 190 code bits, so a straddle never reaches word 3 (the band tag).
+        if lo + width > 64 {
+            words[wi + 1] |= contrib >> (64 - lo);
+        }
+        off += width;
+    }
+    words[3] = k as u64;
+    Bits(words)
 }
 
 /// `M_DECPROBE` (`QUEENS_DECPROBE=1`) connected-component decomposition of one pc==`k` getK node's
@@ -1104,6 +1174,22 @@ pub struct IsoFlat {
     dec_all_le8: Box<[AtomicU64]>,
     dec_all_le_km1: Box<[AtomicU64]>,
     dec_msz: Box<[AtomicU64]>, // laid out [pc * 17 + size]
+    /// `QUEENS_KPROBE=1`: selects `const MODE = M_KPROBE` (= M_ORD_W + a cold tap on every getK
+    /// entry: rebuild the labelled `(pc, code)` key, fold it into a per-band HLL (distinct ⇒ the
+    /// repeat-rate ceiling `entries/distinct`) and probe two shared simulated direct-mapped memo
+    /// tables (finite-size hit rates) — gates the code-keyed getK memo lever). Off = byte-identical
+    /// M_ORD_W (the tap DCEs).
+    kprobe: bool,
+    /// Shared per-band `M_KPROBE` HLLs (indexed pc−9); workers fold locals in at drain.
+    kprobe_hll: Vec<Hll>,
+    /// Shared `M_KPROBE` per-band tallies (indexed pc−9), `AtomicU64`-backed.
+    kprobe_entries: Box<[AtomicU64]>,
+    kprobe_s_hits: Box<[AtomicU64]>,
+    kprobe_l_hits: Box<[AtomicU64]>,
+    /// `M_KPROBE` simulated memo tag tables (`fp|1` per slot, 0 = empty; direct-mapped, always-
+    /// replace). Shared across workers like a real memo would be; empty `Box<[]>` when off.
+    kprobe_sim_s: Box<[AtomicU64]>,
+    kprobe_sim_l: Box<[AtomicU64]>,
     /// `QUEENS_RANK=1`: selects `const MODE = M_RANK` (= M_ORD_W + a cold tap on the first-losing-child
     /// cutoff rank — gates the move-ordering lever). Per-pc ETC/descent-rank/no-cut stats merged from
     /// each worker's [`RANK_ACC`] at drain; report printed post-solve. Off = byte-identical M_ORD_W.
@@ -1491,6 +1577,7 @@ impl IsoFlat {
         let segment = tt.is_segmented();
         let assoc = tt.is_assoc();
         let sidecar = std::env::var("QUEENS_SIDECAR").as_deref() == Ok("1");
+        let kprobe_on = std::env::var("QUEENS_KPROBE").as_deref() == Ok("1");
         IsoFlat {
             name: if window { "iso-window" } else { "iso-flat" },
             tt,
@@ -1581,6 +1668,26 @@ impl IsoFlat {
                 || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1"),
             decprobe: std::env::var("QUEENS_DECPROBE").as_deref() == Ok("1"),
             dhist: std::env::var("QUEENS_DHIST").as_deref() == Ok("1"),
+            kprobe: kprobe_on,
+            kprobe_hll: (0..KPROBE_BANDS).map(|_| Hll::new(KPROBE_HLL_P)).collect(),
+            kprobe_entries: (0..KPROBE_BANDS).map(|_| AtomicU64::new(0)).collect(),
+            kprobe_s_hits: (0..KPROBE_BANDS).map(|_| AtomicU64::new(0)).collect(),
+            kprobe_l_hits: (0..KPROBE_BANDS).map(|_| AtomicU64::new(0)).collect(),
+            // The sim tag tables are the only heavy allocation (8 MiB + 512 MiB) — probe runs only.
+            kprobe_sim_s: (0..if kprobe_on {
+                1usize << KPROBE_SIM_S_BITS
+            } else {
+                0
+            })
+                .map(|_| AtomicU64::new(0))
+                .collect(),
+            kprobe_sim_l: (0..if kprobe_on {
+                1usize << KPROBE_SIM_L_BITS
+            } else {
+                0
+            })
+                .map(|_| AtomicU64::new(0))
+                .collect(),
             dec_nodes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             dec_ncomp_sum: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             dec_ge2: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
@@ -2491,6 +2598,82 @@ impl IsoFlat {
         self.drain_dec_local();
     }
 
+    /// Merge this worker's `M_KPROBE` accumulator ([`KPROBE_ACC`]) into the shared `kprobe_*` totals.
+    fn drain_kprobe_local(&self) {
+        KPROBE_ACC.with(|cell| {
+            let mut a = cell.borrow_mut();
+            for b in 0..KPROBE_BANDS {
+                if a.entries[b] != 0 {
+                    self.kprobe_entries[b].fetch_add(a.entries[b], Ordering::Relaxed);
+                    self.kprobe_s_hits[b].fetch_add(a.sim_s_hits[b], Ordering::Relaxed);
+                    self.kprobe_l_hits[b].fetch_add(a.sim_l_hits[b], Ordering::Relaxed);
+                    a.entries[b] = 0;
+                    a.sim_s_hits[b] = 0;
+                    a.sim_l_hits[b] = 0;
+                    self.kprobe_hll[b].merge_from(&a.hll[b]);
+                }
+            }
+        });
+    }
+
+    fn drain_kprobe_all(&self) {
+        rayon::broadcast(|_| self.drain_kprobe_local());
+        self.drain_kprobe_local();
+    }
+
+    /// Print the `M_KPROBE` (`QUEENS_KPROBE=1`) getK-entry repeat-rate report. Gates the code-keyed
+    /// getK memo lever: `repeat× = entries/distinct` is the infinite-memo hit ceiling per band, and
+    /// the two simulated direct-mapped tables give the realizable hit rate at an L3-resident size
+    /// (2^20 slots) and a DRAM size (2^26). A memo pays only where hit% × getK-cost saved exceeds
+    /// the probe's load cost — the deep bands (K≥13, the expensive sweeps) are the ones to read.
+    fn print_kprobe_report(&self) {
+        let ld = |b: &[AtomicU64], i: usize| b[i].load(Ordering::Relaxed);
+        let total: u64 = (0..KPROBE_BANDS).map(|b| ld(&self.kprobe_entries, b)).sum();
+        println!(
+            "\n  getK entry repeat-rate (QUEENS_KPROBE) — {} getK entries; memo sim {} KiB / {} MiB",
+            commas(total),
+            (1u64 << KPROBE_SIM_S_BITS) * 8 / 1024,
+            (1u64 << KPROBE_SIM_L_BITS) * 8 / (1024 * 1024),
+        );
+        println!(
+            "    {:>3} {:>15} {:>15} {:>8} {:>9} {:>9}",
+            "pc", "entries", "distinct", "repeat×", "hit%-s", "hit%-l"
+        );
+        let mut tot_distinct = 0.0f64;
+        let (mut tot_s, mut tot_l) = (0u64, 0u64);
+        for b in 0..KPROBE_BANDS {
+            let n = ld(&self.kprobe_entries, b);
+            if n == 0 {
+                continue;
+            }
+            let distinct = self.kprobe_hll[b].estimate();
+            tot_distinct += distinct;
+            let s = ld(&self.kprobe_s_hits, b);
+            let l = ld(&self.kprobe_l_hits, b);
+            tot_s += s;
+            tot_l += l;
+            println!(
+                "    {:>3} {:>15} {:>15} {:>8.2} {:>8.1}% {:>8.1}%",
+                b + 9,
+                commas(n),
+                commas(distinct as u64),
+                n as f64 / distinct,
+                100.0 * s as f64 / n as f64,
+                100.0 * l as f64 / n as f64,
+            );
+        }
+        if total > 0 {
+            println!(
+                "    all {:>15} {:>15} {:>8.2} {:>8.1}% {:>8.1}%",
+                commas(total),
+                commas(tot_distinct as u64),
+                total as f64 / tot_distinct,
+                100.0 * tot_s as f64 / total as f64,
+                100.0 * tot_l as f64 / total as f64,
+            );
+        }
+    }
+
     /// Merge this worker's `M_RANK` accumulator ([`RANK_ACC`]) into the shared `rank_*` totals.
     fn drain_rank_local(&self) {
         RANK_ACC.with(|cell| {
@@ -3361,7 +3544,8 @@ impl IsoFlat {
             || MODE == M_RANK
             || MODE == M_COLD
             || MODE == M_HITKEY
-            || MODE == M_DHIST;
+            || MODE == M_DHIST
+            || MODE == M_KPROBE;
         let ord_sort: bool = MODE == M_ORD || ord_w;
         // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
         // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
@@ -3720,6 +3904,32 @@ impl IsoFlat {
                         a.all_le8[b] += all_le8 as u64;
                         a.all_le_km1[b] += all_le_km1 as u64;
                         a.msz_dist[b][(msz as usize).min(16)] += 1;
+                    });
+                }
+                // M_KPROBE: tap every getK entry (a pc 9..=DK child is resolved by the cheap arms
+                // below, never recursed). Rebuild its labelled code — the key a code-keyed getK memo
+                // would use — fold into the band HLL, and probe the two shared simulated memo tables.
+                if MODE == M_KPROBE && pc >= 9 && pc <= DK {
+                    let ck = kprobe_code(att, child0, pc);
+                    let (route, fp) = QueensTt::hash128(ck);
+                    let tag = fp | 1;
+                    let sim = |t: &[AtomicU64]| {
+                        let i = (route as usize) & (t.len() - 1);
+                        let hit = t[i].load(Ordering::Relaxed) == tag;
+                        if !hit {
+                            t[i].store(tag, Ordering::Relaxed);
+                        }
+                        hit
+                    };
+                    let hs = sim(&self.kprobe_sim_s);
+                    let hl = sim(&self.kprobe_sim_l);
+                    KPROBE_ACC.with(|c| {
+                        let mut a = c.borrow_mut();
+                        let b = (pc - 9) as usize;
+                        a.entries[b] += 1;
+                        a.sim_s_hits[b] += hs as u64;
+                        a.sim_l_hits[b] += hl as u64;
+                        self.kprobe_hll[b].add_local(ck, &mut a.hll[b]);
                     });
                 }
                 if pc == 0 {
@@ -4861,6 +5071,9 @@ impl IsoFlat {
                     // Cold getK-decomposition tap on the production M_ORD_W path (explicit measurement,
                     // wins over the `wave`/`ord` defaults like `size`/`prof` do).
                     M_DECPROBE
+                } else if self.kprobe {
+                    // Cold getK-entry repeat-rate tap on the production M_ORD_W path.
+                    M_KPROBE
                 } else if self.rank {
                     // Cold first-losing-child rank tap on the production M_ORD_W path.
                     M_RANK
@@ -4923,6 +5136,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_DECPROBE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_DECPROBE>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_KPROBE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_KPROBE>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_RANK => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK>(
@@ -5747,6 +5963,10 @@ impl Solver for IsoFlat {
         if self.decprobe {
             self.drain_dec_all();
             self.print_dec_report();
+        }
+        if self.kprobe {
+            self.drain_kprobe_all();
+            self.print_kprobe_report();
         }
         if self.rank {
             self.drain_rank_all();

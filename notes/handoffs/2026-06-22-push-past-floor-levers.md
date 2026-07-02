@@ -228,8 +228,56 @@ runs in the `queens` tmux session, 8 GB TT (`QUEENS_TT_SLOTS=1000000000`), inter
 - [x] ★ 2nd-ply refutation lever explored → ORACLE ceiling sq-0 −72% / full-run −13%, but the predictor is CLOSED (degree/overlap/size/symmetry-defect all fail; split + par-ord DEAD). One untested idea left: residual-stabilizer 2nd-ply orbit-dedup on axis-roots.
 - [x] **★ residual-stabilizer 2nd-ply orbit-dedup → DEAD (2026-06-23--3, code-read + re-exp evidence, no build).** The D4-canonical TT key already IS the orbit-dedup: 2nd-ply nodes are keyed by `node_key` = `lex_min8` over all 8 dihedral orientations (transpose ∈ D4), and `par_wins_inc` probes (iso_flat.rs:4599) AND puts (:4808) under that key ⇒ a transpose-mirror is a TT HIT, not a recompute. n=14 re-exp ≈ 1.02× confirms no mass mirror-recompute. Orbit-dedup would at most save the mirror's canon-key build + probe (~a few cyc) for the ~100 axis-root 2nd-ply pairs = negligible vs 307M nodes. **The last untested node-count idea is closed.**
 - [x] 4-agent math/instruction/discipline sweep (--2 below) → near-floor; LANDED `w17_induced`→field −0.55% (clean balanced A/B).
+- [x] **Brainstorm B: getK code-keyed memo → ★ NO-GO (2026-07-01--15, `QUEENS_KPROBE` probe, no build).**
+  n=16: 780.7M getK entries / 605.1M distinct codes = repeat 1.29× (22.5% infinite-memo ceiling);
+  512 MiB sim memo hits 18.5%, 8 MiB 13.6% ⇒ near-uniform code stream, no hot set; best-hit bands are
+  the cheap sweeps. Closes the memo/dedup family (with L0, frontier-dedup, DECPROBE). Probe kept gated.
 
 ## Handoff Notes
+
+### Session 2026-07-01--15 — brainstorm candidate B executed: getK code-keyed memo = NO-GO (probe evidence); the memo/dedup family is now fully closed
+
+**Built `M_KPROBE` (`QUEENS_KPROBE=1`, gated substrate on main, production byte-identical off)** — an
+M_ORD_W measurement twin (like DECPROBE): at every getK entry (the descent's pc 9..=DK cheap arms) it
+rebuilds the labelled `(pc, code)` key exactly as the `wN_get` builders pack it (`kprobe_code`, the key a
+code-keyed getK memo would use), folds it into a per-band HLL (p=14), and probes two shared simulated
+direct-mapped memo tables (8 MiB / 512 MiB, `hash128` route+fp tags, always-replace). Report post-solve.
+
+**Full n=16 probe run (12 GB TT, DK=17; searched 178.8M nodes ≈ the production count, SECOND):**
+
+| pc  | entries | distinct | repeat× | hit% 8 MiB | hit% 512 MiB |
+|-----|---------|----------|---------|------------|--------------|
+| 9   | 47.5M   | 33.9M    | 1.40    | 9.4%       | 16.2%        |
+| 10  | 88.4M   | 69.6M    | 1.27    | 12.1%      | 16.1%        |
+| 11  | 98.0M   | 74.5M    | 1.32    | 16.1%      | 21.2%        |
+| 12  | 93.2M   | 64.3M    | 1.45    | 20.3%      | 27.0%        |
+| 13  | 100.6M  | 69.9M    | 1.44    | 19.4%      | 25.9%        |
+| 14  | 107.2M  | 81.9M    | 1.31    | 15.1%      | 20.4%        |
+| 15  | 101.7M  | 83.6M    | 1.22    | 10.8%      | 14.7%        |
+| 16  | 84.1M   | 73.0M    | 1.15    | 7.6%       | 10.4%        |
+| 17  | 59.9M   | 54.5M    | 1.10    | 5.7%       | 7.8%         |
+| all | 780.7M  | 605.1M   | 1.29    | 13.6%      | 18.5%        |
+
+**Reading — NO-GO, do not build the memo:**
+1. **No small hot set.** 605M distinct codes under 780.7M entries; an 8 MiB table catches only 13.6%
+   ⇒ the code stream is near-uniform, the exact "if ~uniform ⇒ close the lever, DRAM latency eats it"
+   arm of the W9-table Fermi (the user's skip call, now measured and vindicated at every K).
+2. **The ceiling is too low.** Infinite-memo dedup = 22.5% of entries; realizable (512 MiB, would
+   contend with the TT for DRAM/L3) = 18.5%. getK ≈ 69% of cycles ⇒ gross ceiling ~13% of cycles at
+   ZERO probe cost — and the real probe is a per-entry hash + an unprefetchable DRAM-scale load (no
+   lead: the code is built immediately before the sweep needs it) + a store on the 81.5% misses =
+   27M/s cross-core write traffic, the M_DHIST/L0 failure shape.
+3. **No band gate rescues it.** The best-hit bands (pc 11–13, 21–27%) are the *cheap* sweeps; the
+   expensive deep bands (K=16/17, where the getK cycle mass lives) hit only 7.8–10.4%.
+
+Cross-check: entries pc 9..16 = 720.8M vs DECPROBE's 744M getK nodes — consistent within node noise.
+**The whole memo/dedup family is now closed with converging evidence:** L0 probe-cache (+6% cyc/node),
+frontier dedup (+94% nodes), component decomposition (0-3% ≥2-comp), and now code-keyed memo (ceiling
+22.5%, uniform). Probe cost: the tapped run is 28.9s vs 13.4s clean (~2.1×, cold-tap only).
+
+Gates green: `make test`, n=12 iso-flat distinct 1,060,823 exact, n=14 second / ≈29.2M / 1.02× re-exp.
+**Remaining open brainstorm ideas: C (loss-tail locality reorder — ceiling ≈32% of child-exams from the
+rank report) and E (mirror oracle) — both unprobed.**
 
 ### Session 2026-07-02 — micro-opt + profiling round: getK mask-prefetch + TABLE_OFF mask = cyc/node −2.1% (LANDED)
 
