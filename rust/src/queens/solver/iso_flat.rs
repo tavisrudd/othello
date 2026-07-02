@@ -85,6 +85,15 @@ thread_local! {
 static KILLER_HITS: [[std::sync::atomic::AtomicU32; 256]; 3] =
     [const { [const { std::sync::atomic::AtomicU32::new(0) }; 256] }; 3];
 
+/// `M_DHIST` (`QUEENS_DHIST=1`) deep-kernel cutoff history: per-square tally of every fused-descent
+/// cutoff (the square whose child proved LOSS) across the whole run — the killer signal extended
+/// below ply 5, applied as a *tiebreak within equal-degree groups* of the dynamic move sort (never
+/// a jump, so the degree ordering's forcing-first structure is untouched). Gated by the rank
+/// report's measured headroom: ordering_loss = 52.6% of child-exams, r≥3 = 37.1% of nodes.
+/// Relaxed atomics; readers tolerate staleness; 16 cache lines spread the write traffic.
+static DEEP_HIST: [std::sync::atomic::AtomicU32; 256] =
+    [const { std::sync::atomic::AtomicU32::new(0) }; 256];
+
 /// One sq-0 2nd-ply move's in-situ schedule record (`QUEENS_SCHED`). `t_*_us` are µs since the
 /// search t0; `nodes` is the cumulative-node delta over the move's subtree (flush-coarse, exact to
 /// ~FLUSH_NODES); `child_pc` is the available count after the move (= its number of 3rd-ply child
@@ -132,6 +141,7 @@ const M_DECPROBE: u8 = 12; // M_ORD_W + tap the connected-component decomposabil
 const M_RANK: u8 = 13; // M_ORD_W + tap the first-losing-child cutoff rank (ETC vs descent rank vs no-cut) per pc (`QUEENS_RANK=1`)
 const M_COLD: u8 = 14; // M_ORD_W + tap the entry-probe hit/miss (cold-compute) fraction per pc, per-worker (`QUEENS_COLD=1`)
 const M_HITKEY: u8 = 15; // M_ORD_W + DUMP each pc≥17 entry probe's canonical key + avail bits (all hits, 1/64 misses) to a file for offline structural study of the 0.2% deep-tail hits (`QUEENS_HITKEY=1`)
+const M_DHIST: u8 = 16; // M_ORD_W + deep cutoff-history tiebreak in the dynamic move sort (`QUEENS_DHIST=1`)
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -1082,6 +1092,10 @@ pub struct IsoFlat {
     /// component stats merged from each worker's [`DEC_ACC`] at drain; report printed post-solve. Off =
     /// byte-identical M_ORD_W (the tap DCEs).
     decprobe: bool,
+    /// `QUEENS_DHIST=1`: selects `const MODE = M_DHIST` (M_ORD_W + the deep cutoff-history
+    /// tiebreak in the dynamic move sort — see [`DEEP_HIST`]). Verdict-preserving (an OR-node
+    /// child permutation); node set differs from the default ⇒ A/B on nodes/total-cyc/wall.
+    dhist: bool,
     /// Shared `M_DECPROBE` accumulator (6 metric arrays + the max-comp-size dist), `AtomicU64`-backed
     /// so workers fold their [`DEC_ACC`] in lock-free. Only populated when `decprobe`.
     dec_nodes: Box<[AtomicU64]>,
@@ -1566,6 +1580,7 @@ impl IsoFlat {
             ord_etc: std::env::var("QUEENS_ORD").as_deref() == Ok("2")
                 || std::env::var("QUEENS_ORD_ETC").as_deref() == Ok("1"),
             decprobe: std::env::var("QUEENS_DECPROBE").as_deref() == Ok("1"),
+            dhist: std::env::var("QUEENS_DHIST").as_deref() == Ok("1"),
             dec_nodes: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             dec_ncomp_sum: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
             dec_ge2: (0..MAXPC).map(|_| AtomicU64::new(0)).collect(),
@@ -3159,7 +3174,7 @@ impl IsoFlat {
     /// the *live* `avail`, so it sharpens deep in the tree where the board has filled. Stable sort ⇒
     /// equal-degree ties keep their `q.order` (the static order is the tiebreak). Verdict-preserving
     /// (reorder never changes the OR/AND value); the node-count delta vs static is the ordering gain.
-    fn sort_moves_by_degree(
+    fn sort_moves_by_degree<const HIST_TB: bool>(
         &self,
         dst: &mut [u8],
         deg: &mut [u16],
@@ -3175,6 +3190,58 @@ impl IsoFlat {
         // slice of this 7.5%-of-run function AND extra branches the frontend (22.6% stalled) must fetch.
         debug_assert_eq!(dst.len(), deg.len());
         let n = dst.len().min(deg.len()).min(MAXV);
+        if HIST_TB {
+            // M_DHIST: composite key = degree·4 + (3 − history bucket) — ascending degree exactly
+            // as the base path, but equal-degree ties break by DESCENDING deep-cutoff history
+            // ([`DEEP_HIST`]), bucketed 0..=3 against this node's own max tally (node-local
+            // normalization: no global total counter to contend on, and the bucketing adapts as
+            // tallies grow). hmax == 0 (no history yet) puts every move in bucket 0 ⇒ the key is a
+            // uniform offset of the base key ⇒ identical order. Same branchless stable counting
+            // sort over the 4n-key domain; `deg` still receives the REAL child degree (the fused
+            // descent reuses it as the child pc).
+            let mut hist = [0u32; MAXV];
+            let mut hmax = 0u32;
+            for k in 0..n {
+                let v = DEEP_HIST[dst[k] as usize].load(Ordering::Relaxed);
+                hist[k] = v;
+                hmax = hmax.max(v);
+            }
+            let (t1, t2, t3) = (hmax >> 2, hmax >> 1, hmax - (hmax >> 2));
+            let mut draw = [0u16; MAXV];
+            let mut dpc = [0u16; MAXV];
+            for k in 0..n {
+                let pc = avail.and_not(att_for8(att, dst[k])[0]).popcount() as u16;
+                let b = u16::from(hist[k] > t1) + u16::from(hist[k] > t2) + u16::from(hist[k] > t3);
+                dpc[k] = pc;
+                // `pc < n ≤ MAXV` ⇒ key < 4n ≤ 4·MAXV; the `& (4·MAXV − 1)` masks below elide the
+                // bounds checks exactly like the base path's `& (MAXV − 1)`.
+                draw[k] = pc * 4 + (3 - b);
+            }
+            let mut count = [0u16; MAXV * 4];
+            for &d in &draw[..n] {
+                count[(d as usize) & (MAXV * 4 - 1)] += 1;
+            }
+            let mut acc = 0u16;
+            for c in count[..4 * n].iter_mut() {
+                let cur = *c;
+                *c = acc;
+                acc += cur;
+            }
+            let mut src = [0u8; MAXV];
+            src[..n].copy_from_slice(&dst[..n]);
+            for k in 0..n {
+                let d = (draw[k] as usize) & (MAXV * 4 - 1);
+                let p = count[d] as usize;
+                count[d] += 1;
+                // SAFETY: stable counting sort ⇒ `p ∈ [0, n)` (same invariant as the base path),
+                // and `n ≤ dst.len()`/`deg.len()`.
+                unsafe {
+                    *dst.get_unchecked_mut(p) = src[k];
+                    *deg.get_unchecked_mut(p) = dpc[k];
+                }
+            }
+            return;
+        }
         // Degree key per move (current available-block popcount) in move order. A child drops the
         // placed square plus its attacked squares, so `0 ≤ degree < n` — the key fits the counting
         // sort's `[0, n)` index range. pc ≤ 256 fits u16.
@@ -3293,7 +3360,8 @@ impl IsoFlat {
             || MODE == M_DECPROBE
             || MODE == M_RANK
             || MODE == M_COLD
-            || MODE == M_HITKEY;
+            || MODE == M_HITKEY
+            || MODE == M_DHIST;
         let ord_sort: bool = MODE == M_ORD || ord_w;
         // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
         // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
@@ -3456,7 +3524,12 @@ impl IsoFlat {
             // `M_ORD_W` then runs the M_WAVE ETC body over the degree-sorted moves (ETC + ordering).
             let n = moves.len();
             sorted[..n].copy_from_slice(moves);
-            self.sort_moves_by_degree(&mut sorted[..n], &mut degbuf[..n], avail, att);
+            // `MODE` is const ⇒ one arm per monomorphisation (the dead arm DCEs; no per-node branch).
+            if MODE == M_DHIST {
+                self.sort_moves_by_degree::<true>(&mut sorted[..n], &mut degbuf[..n], avail, att);
+            } else {
+                self.sort_moves_by_degree::<false>(&mut sorted[..n], &mut degbuf[..n], avail, att);
+            }
             &sorted[..n]
         } else {
             moves
@@ -3779,6 +3852,12 @@ impl IsoFlat {
                     if MODE == M_RANK {
                         let r = i.min(RANK_BUCKETS - 1);
                         RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
+                    }
+                    // M_DHIST: publish the cutoff square to the deep-history tally (the sort's
+                    // equal-degree tiebreak). One relaxed add per winning node, spread over the
+                    // table's 16 lines.
+                    if MODE == M_DHIST {
+                        DEEP_HIST[sq as usize].fetch_add(1, Ordering::Relaxed);
                     }
                     result = true;
                     break;
@@ -4809,6 +4888,9 @@ impl IsoFlat {
                     M_L0
                 } else if self.wave_c {
                     M_WAVE_C
+                } else if self.dhist {
+                    // Production-candidate variant: M_ORD_W + the deep cutoff-history tiebreak.
+                    M_DHIST
                 } else if self.ord {
                     if self.ord_etc {
                         M_ORD_W
@@ -4850,6 +4932,9 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_HITKEY => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_HITKEY>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_DHIST => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_DHIST>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_SIZE_WAVE => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_SIZE_WAVE>(

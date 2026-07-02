@@ -326,6 +326,27 @@ learned signal. This is the measured headroom behind the deep-history-heuristic 
 candidate A). Loss-node share of exams ≈ 32% (0.076 × 23.91 / 5.70) — the move-order-SAFE
 locality-reorder ceiling (candidate C). Explored/expansions ratio re-confirmed 5.60 (1.062 B / 189.7M).
 
+**(cont. 4) Brainstorm candidates A + D executed — both NEGATIVE/CLOSED with evidence; B queued.**
+- **A: deep cutoff-history tiebreak (`M_DHIST`, `QUEENS_DHIST=1`, gated substrate kept on main) —
+  NEGATIVE AS BUILT (4-round A/B): nodes −2.7%, cyc/node +19.5%, wall +16.6%.** Build: per-square
+  `DEEP_HIST[256]` relaxed tally at every fused-descent cutoff + a node-locally-normalized 2-bit
+  bucket as the tiebreak within equal-degree groups (composite 4n-key counting sort; verdict
+  SECOND every round; control byte-identical — off-side cyc/node ≈ baseline). TWO findings:
+  (1) the COST is the sort's per-move reads of the hot cross-thread tally lines (writes ~10M/s ⇒
+  every read hits M-state lines elsewhere) — fixable (per-subtree snapshot / ~1s-refresh rank
+  table) but pointless because (2) the SIGNAL is weak: −2.7% nodes vs the 52.6% child-exam
+  ceiling — within an equal-degree group the global square identity barely predicts the cutoff;
+  degree already carries the deep ordering. The rank report's 52.6% headroom is real but needs a
+  CONTEXT-keyed signal (parent pc-band × square, or parent-key-local replies à la killers) —
+  untried, dampened expectations. Do not re-try the global form.
+- **D: root scheduling — CLOSED, zero slack (root-timing audit):** the 5 slow roots (11.4–11.5s
+  each) all START at 0.9s (right after the elder); longest root = 93% of total wall, solo tail
+  0%. The wall IS the slowest root's span; no permutation can help — only cutting inside the
+  slow roots (killers territory). Bonus: the audit run itself searched in **12.43s / 175.7M
+  nodes** (cold timing tap, production-identical path) — fastest single seen on the new stack.
+- **B (getK entry repeat-rate HLL probe → code-keyed getK memo) — still queued, the one open
+  brainstorm item.** C (loss-tail locality reorder) and E (mirror oracle) remain unprobed ideas.
+
 **TT-key cost split (user question; profiling build, srcline-bucketed cycles, full n=16 default run):**
 the whole key pipeline ≈ **9% of cycles**, and it is CANON, not hashing:
 - **canon ≈ 7.5%** — `child_orient` (incremental 8-orientation images, 7 four-word and_nots/node) +
