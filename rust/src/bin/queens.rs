@@ -1925,6 +1925,13 @@ fn solve(q: &Queens, solver_name: &str, distinct: bool, cp_opts: CpOpts, to_file
 }
 
 fn nimber_mode(q: &Queens, full: bool, max_k: u8) {
+    // The sum engine's sequential `win` recursion runs the full remaining game depth on
+    // one rayon worker; past n=16 that overflows the default 2 MB worker stack (observed:
+    // n=17 stack-overflow abort). 256 MB is a virtual reservation — untouched pages never
+    // commit. Errs harmlessly if a global pool already exists.
+    let _ = rayon::ThreadPoolBuilder::new()
+        .stack_size(256 << 20)
+        .build_global();
     // The nimber must be *searched* even on odd boards (the pairing proves it is
     // non-zero but not its value). `QUEENS_TT_BITS` still overrides the size.
     let bits = std::env::var("QUEENS_TT_BITS")

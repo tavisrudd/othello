@@ -155,6 +155,15 @@ const HMIX: [(u64, u64); 16] = {
 /// fan-out is speculative; two levels saturate the box on the boards this engine targets.
 const SUM_PAR_LEVELS: u32 = 2;
 
+/// Move-buffer capacity: a node can have up to `MAX_N²` available squares.
+const SUM_MAXV: usize = (crate::queens::MAX_N * crate::queens::MAX_N) as usize;
+
+/// Dynamic-order key packing `(child_pc << SQ_BITS) | sq` in a `u32`: 9 square bits cover
+/// boards past n=16 (a `u16` with 8 square bits silently corrupts keys once sq ≥ 256).
+const SQ_BITS: u32 = 9;
+const SQ_MASK: u32 = (1 << SQ_BITS) - 1;
+const _: () = assert!(SUM_MAXV <= SQ_MASK as usize + 1);
+
 /// **NimberSum** — the scalable Sprague-Grundy engine behind `queens nimber` (OEIS A344227).
 ///
 /// The full-mex [`Nimber`] must expand the *entire* game DAG (mex admits no cutoff), which is
@@ -312,22 +321,22 @@ impl NimberSum {
     /// The queens arm: children in dynamic order (child popcount ascending = most-forcing
     /// first — the production ordering win), any losing child wins.
     fn expand_queens(&self, q: &Queens, blocked: Bits, h: u8) -> bool {
-        let mut kids = [0u16; 256];
+        let mut kids = [0u32; SUM_MAXV];
         let nk = self.gather_kids(q, blocked, &mut kids);
         kids[..nk].iter().any(|&kk| {
-            let sq = (kk & 255) as u32;
+            let sq = kk & SQ_MASK;
             !self.win(q, q.place(blocked, sq), h)
         })
     }
 
-    /// Collect the available moves as `(child_pc << 8) | sq` keys, sorted ascending — the
-    /// dynamic move order. Returns the count.
-    fn gather_kids(&self, q: &Queens, blocked: Bits, kids: &mut [u16; 256]) -> usize {
+    /// Collect the available moves as `(child_pc << SQ_BITS) | sq` keys, sorted ascending —
+    /// the dynamic move order. Returns the count.
+    fn gather_kids(&self, q: &Queens, blocked: Bits, kids: &mut [u32; SUM_MAXV]) -> usize {
         let avail = q.board.and_not(blocked);
         let mut nk = 0usize;
         avail.each(|sq| {
             let cpc = avail.and_not(q.attack[sq as usize]).popcount();
-            kids[nk] = ((cpc as u16) << 8) | sq as u16;
+            kids[nk] = (cpc << SQ_BITS) | sq;
             nk += 1;
         });
         kids[..nk].sort_unstable();
@@ -355,10 +364,10 @@ impl NimberSum {
         }
         self.tt.bump();
         let win = self.expand_heap(q, blocked, h) || {
-            let mut kids = [0u16; 256];
+            let mut kids = [0u32; SUM_MAXV];
             let nk = self.gather_kids(q, blocked, &mut kids);
             kids[..nk].par_iter().any(|&kk| {
-                let sq = (kk & 255) as u32;
+                let sq = kk & SQ_MASK;
                 !self.win_par(q, q.place(blocked, sq), h, levels - 1)
             })
         };
