@@ -265,6 +265,35 @@ L1-resident, W7 is an L2 hit, est ≤0.3% for real I-cache bloat risk in the fro
 before the degree sort (child unknown pre-sort). The branch-miss mass (46% in the sweeps' early-outs)
 is data-dependent boolean structure — no orderable site left.
 
+**(cont.) Rounds 2+3 — ★ vpcompressb `verts_of` (−4.3%) + root-adj carry (−2.5%): NEW RECORD 13.43s.**
+- **Round 2 — `vpcompressb` `verts_of` (`a0e2979`): cyc/node −4.3% (every round), total cyc −4.0%,
+  wall −6.2%.** The serial `tzcnt`/`x&=x-1` scatter (~9% of cycles, srcline) → AVX512-VBMI2
+  `_mm512_maskz_compress_epi8` of a 64-aligned identity byte LUT per avail word + a masked byte
+  store of exactly `popcount` bytes (order-preserving ⇒ byte-identical output; masked-out lanes
+  can't fault). Box confirmed `avx512_vbmi2` (Strix Point Zen5; 256-bit double-pumped is fine here).
+- **Round 3 — root-adj carry into getK (`2b7ebac`): cyc/node −2.5% (every round), total cyc −4.5%,
+  wall −2.7%.** `w10..w16_get` already compute every labelled adjacency row (`adj_row_pext`) for
+  the code pack; `getN` re-derived the same rows via `extract_adj(128)`. Split into extract wrapper +
+  `getN_adj` core; the root passes `row = packed & !(1<<i)` (+ fused iso bits) — att masks are
+  self-inclusive, the extract row is self-gapped, so one `andn`+store per vertex replaces a pext +
+  gap-reinsert per row. Nested child calls keep the extract path. (Beat its ~1% napkin — roots are
+  a bigger share of getK entries than guessed.)
+- **Cumulative this session: cyc/node 5894 → 5428 ≈ −8% on top of the 13.77s stack. NEW RECORD:
+  two clean default-stack runs 13.47s / 13.43s (178.8M / 178.6M nodes, second, 12 GB TT);
+  interleaved singles as low as 12.7s.**
+- **W9 full-table lever — SCOPED, DO NOT BUILD BLIND:** 2^36 bits = 8 GiB (memory now fits: TT
+  valid down to 2 GB in the killer regime; ~2 min parallel one-time build, disk-cache like W8;
+  W10 = 4 TB ⇒ K=9 is this road's end). BUT the corrected Fermi: an unprefetched DRAM load
+  (~300–400 cyc) LOSES to `get9`'s ~150-cyc compute; mid-sweep `get9` calls (deg-1 children) have
+  too little prefetch lead to hide it. The lever only pays if the LIVE get9-code working set is
+  small enough to sit L2/L3-resident (plausible — the killer regime collapsed the TT working set
+  to ~8%, transposition-saturated tail ⇒ the leaf-code set may be similarly skewed). **P0 before
+  any build: a gated probe (HLL + top-k frequency skew of get9 codes over an n=16 run).** If the
+  hot set ≲ tens of MB ⇒ build it; if ~uniform over 8 GiB ⇒ close the lever, DRAM latency eats it.
+- Remaining kernel candidates, updated: wide-layer (K=17..20) root-adj carry (same trick through
+  `get_dyn_wide`→`get_wide`, untried — w_wide_get ≈ 2.2% cycles so est <1%); `w9_get` still builds
+  its 36-bit code scalar (36 `row.get` bit-tests — a pext build + root-adj there is untried).
+
 **TT-key cost split (user question; profiling build, srcline-bucketed cycles, full n=16 default run):**
 the whole key pipeline ≈ **9% of cycles**, and it is CANON, not hashing:
 - **canon ≈ 7.5%** — `child_orient` (incremental 8-orientation images, 7 four-word and_nots/node) +
