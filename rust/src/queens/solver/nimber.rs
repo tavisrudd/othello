@@ -165,8 +165,9 @@ const SUM_PAR_LEVELS: u32 = 2;
 ///
 /// State is `(avail, h)`: moves are queen placements (h unchanged) or heap reductions
 /// (`h' < h`, avail unchanged). Three leaf/probe layers do the heavy lifting:
-/// - `h == 0`, `pc ≤ 16`: the plain-queens boolean [`DenseW8`] leaf (`win ⟺ W(avail)`) —
-///   probed first: its child sweeps early-out, where a mex sweep must visit every child.
+/// - `h == 0`, `pc ≤ bk` (default 20 — the 3-word code ceiling): the plain-queens boolean [`DenseW8`] leaf
+///   (`win ⟺ W(avail)`; `u128` layers to 16, wide 3-word W17..W20 above) — probed first:
+///   its child sweeps early-out, where a mex sweep must visit every child.
 /// - `h > 0`, `pc ≤ gk` (default 16): the node is `win ⟺ G(avail) ≠ h`, with `G` from the
 ///   complete [`GrundyW8`] tables + nested mex sweeps `g9..g16` — no expansion, any `h`.
 /// - deep: flat lockless TT keyed `hash128(D4-canon) ⊕ HMIX[h]`, heap moves probed first
@@ -182,6 +183,12 @@ pub struct NimberSum {
     /// Only reached at `h > 0` — the `h = 0` subspace takes the cheaper boolean
     /// early-out leaf first (win ⟺ W(avail), no full mex needed).
     gk: usize,
+    /// Boolean `h = 0` leaf ceiling (`QUEENS_NIMBER_BK`, 16..=20, default 20): a
+    /// `h = 0` node with `pc ≤ bk` resolves from the dense boolean layers — `pc ≤ 16`
+    /// via the `u128` [`DenseW8::get_dyn`], 17..20 via the wide 3-word
+    /// [`DenseW8::get_dyn_wide`] (the production W17..W20 evaluators). The k=0 round
+    /// IS a plain-queens solve, so this is the production `dense_k` lever verbatim.
+    bk: usize,
 }
 
 impl NimberSum {
@@ -191,11 +198,20 @@ impl NimberSum {
             .and_then(|s| s.parse::<usize>().ok())
             .unwrap_or(16)
             .clamp(9, 16);
+        let bk = std::env::var("QUEENS_NIMBER_BK")
+            .ok()
+            .and_then(|s| s.parse::<usize>().ok())
+            .unwrap_or(20)
+            .clamp(16, 20);
+        if bk >= 17 {
+            crate::queens::dense::warm_wide(bk);
+        }
         NimberSum {
             tt: QueensTt::new(bits),
             dense: DenseW8::build(),
             grundy: GrundyW8::build(),
             gk,
+            bk,
         }
     }
 
@@ -222,10 +238,44 @@ impl NimberSum {
         code
     }
 
+    /// The 3-word labelled edge code for `17 ≤ pc ≤ 20` — the wide twin of
+    /// [`leaf_code`](Self::leaf_code) (C(20,2) = 190 bits ≤ 192).
+    fn leaf_code_wide(&self, q: &Queens, avail: Bits, pc: usize) -> [u64; 3] {
+        debug_assert!((17..=20).contains(&pc));
+        let mut verts = [0u32; 20];
+        let mut nv = 0usize;
+        avail.each(|v| {
+            verts[nv] = v;
+            nv += 1;
+        });
+        debug_assert_eq!(nv, pc);
+        let mut words = [0u64; 3];
+        let mut bit = 0u32;
+        for i in 0..pc {
+            let row = q.attack[verts[i] as usize];
+            for &vj in verts.iter().take(pc).skip(i + 1) {
+                words[(bit >> 6) as usize] |= (row.get(vj) as u64) << (bit & 63);
+                bit += 1;
+            }
+        }
+        words
+    }
+
     /// `G(avail)` for `pc ≤ gk` — table lookup / nested mex sweep, no expansion.
     #[inline]
     fn grundy_leaf(&self, q: &Queens, avail: Bits, pc: usize) -> u8 {
         self.grundy.grundy_dyn(pc, self.leaf_code(q, avail, pc))
+    }
+
+    /// The boolean `h = 0` leaf: `win ⟺ W(avail)` from the dense layers, `pc ≤ bk`.
+    #[inline]
+    fn boolean_leaf(&self, q: &Queens, avail: Bits, pc: usize) -> bool {
+        if pc <= 16 {
+            self.dense.get_dyn(pc, self.leaf_code(q, avail, pc))
+        } else {
+            self.dense
+                .get_dyn_wide(pc, &self.leaf_code_wide(q, avail, pc))
+        }
     }
 
     /// Win/loss of the sum node `(avail = board ∖ blocked, heap h)`, sequential.
@@ -235,8 +285,8 @@ impl NimberSum {
     fn win(&self, q: &Queens, blocked: Bits, h: u8) -> bool {
         let avail = q.board.and_not(blocked);
         let pc = avail.popcount() as usize;
-        if h == 0 && pc <= 16 {
-            return self.dense.get_dyn(pc, self.leaf_code(q, avail, pc));
+        if h == 0 && pc <= self.bk {
+            return self.boolean_leaf(q, avail, pc);
         }
         if pc <= self.gk {
             return self.grundy_leaf(q, avail, pc) != h;
@@ -292,8 +342,8 @@ impl NimberSum {
         }
         let avail = q.board.and_not(blocked);
         let pc = avail.popcount() as usize;
-        if h == 0 && pc <= 16 {
-            return self.dense.get_dyn(pc, self.leaf_code(q, avail, pc));
+        if h == 0 && pc <= self.bk {
+            return self.boolean_leaf(q, avail, pc);
         }
         if pc <= self.gk {
             return self.grundy_leaf(q, avail, pc) != h;
@@ -339,10 +389,11 @@ impl NimberSum {
 
     pub fn table_summary(&self) -> String {
         format!(
-            "{} · G≤8 tables {} MB · Grundy-leaf pc≤{}",
+            "{} · G≤8 tables {} MB · Grundy-leaf pc≤{} · boolean h=0 leaf pc≤{}",
             self.tt.summary(),
             self.grundy.bytes() / (1 << 20),
             self.gk,
+            self.bk,
         )
     }
 }
