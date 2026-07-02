@@ -15,7 +15,7 @@ use std::sync::OnceLock;
 /// the `u128`-returning [`pext128_wide`]. K=16 is the `u128` ceiling for the labelled code
 /// (16·15/2 = 120 ≤ 128); K=17 = 136 bits would need a wider code. The adjacency rows stay
 /// `≤15` bits (`u64`), so [`pext128`] still recovers them at every K.
-const MAX_DENSE_K: usize = 16;
+pub(crate) const MAX_DENSE_K: usize = 16;
 const W8_K: usize = 8;
 const W12_K: usize = 12;
 const W13_K: usize = 13;
@@ -867,10 +867,19 @@ impl DenseW8 {
     /// lookup). No allocation, no TT traffic, no re-expansion below pc==10.
     #[inline]
     pub(crate) fn get10(&self, code: u64) -> bool {
+        let (adj, iso) = extract_adj::<10>(code, &W10_MASKS.0);
+        self.get10_adj(code, &adj, iso)
+    }
+
+    /// [`get10`] with the adjacency rows (and fused iso bits) already known — the pc==10
+    /// `w10_get` root computes every row for the code build anyway (`adj_row_pext`), so the
+    /// root call skips the [`extract_adj`] re-derivation (one `pext` + gap-reinsert per row).
+    /// Nested (child) calls still enter via [`get10`]: a child only has its projected code.
+    #[inline]
+    pub(crate) fn get10_adj(&self, code: u64, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
         use std::arch::x86_64::_pext_u64;
 
         debug_assert!(code < (1u64 << 45));
-        let (adj, iso) = extract_adj::<10>(code, &W10_MASKS.0);
         if let Some((nrem, keep)) = iso_strip::<10>(iso) {
             // SAFETY: znver5 ⇒ BMI2. Project onto the isolated-free survivors.
             let rcode = unsafe { _pext_u64(code, W10_MASKS.1[keep as usize]) };
@@ -905,10 +914,16 @@ impl DenseW8 {
     /// bounded depth (≤ 2 nested levels) with no allocation, TT traffic, or re-expansion.
     #[inline]
     pub(crate) fn get11(&self, code: u64) -> bool {
+        let (adj, iso) = extract_adj::<11>(code, &W11_MASKS.0);
+        self.get11_adj(code, &adj, iso)
+    }
+
+    /// [`get11`] with precomputed adjacency rows (see [`get10_adj`]).
+    #[inline]
+    pub(crate) fn get11_adj(&self, code: u64, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
         use std::arch::x86_64::_pext_u64;
 
         debug_assert!(code < (1u64 << 55));
-        let (adj, iso) = extract_adj::<11>(code, &W11_MASKS.0);
         if let Some((nrem, keep)) = iso_strip::<11>(iso) {
             // SAFETY: znver5 ⇒ BMI2. Project onto the isolated-free survivors.
             let rcode = unsafe { _pext_u64(code, W11_MASKS.1[keep as usize]) };
@@ -942,13 +957,19 @@ impl DenseW8 {
     /// recovers the rows. No allocation, no TT traffic, no re-expansion below pc==12.
     #[inline]
     pub(crate) fn get12(&self, code: u128) -> bool {
-        debug_assert!(code < (1u128 << 66));
         let (adj, iso) = extract_adj128::<12>(code, &W12_MASKS.0);
+        self.get12_adj(code, &adj, iso)
+    }
+
+    /// [`get12`] with precomputed adjacency rows (see [`get10_adj`]).
+    #[inline]
+    pub(crate) fn get12_adj(&self, code: u128, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
+        debug_assert!(code < (1u128 << 66));
         if let Some((nrem, keep)) = iso_strip::<12>(iso) {
             return self.get_dyn(12 - nrem, pext128_wide(code, W12_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 12) - 1;
-        let order = getk_order_u16::<12>(self.ord_getk, &adj);
+        let order = getk_order_u16::<12>(self.ord_getk, adj);
         for j in 0..12 {
             let i = order[j] as usize;
             if j + 1 < 12 {
@@ -981,13 +1002,19 @@ impl DenseW8 {
     /// into the complete tables, no allocation, no TT traffic, no re-expansion below pc==13.
     #[inline]
     pub(crate) fn get13(&self, code: u128) -> bool {
-        debug_assert!(code < (1u128 << 78));
         let (adj, iso) = extract_adj128::<13>(code, &W13_MASKS.0);
+        self.get13_adj(code, &adj, iso)
+    }
+
+    /// [`get13`] with precomputed adjacency rows (see [`get10_adj`]).
+    #[inline]
+    pub(crate) fn get13_adj(&self, code: u128, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
+        debug_assert!(code < (1u128 << 78));
         if let Some((nrem, keep)) = iso_strip::<13>(iso) {
             return self.get_dyn(13 - nrem, pext128_wide(code, W13_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 13) - 1;
-        let order = getk_order_u16::<13>(self.ord_getk, &adj);
+        let order = getk_order_u16::<13>(self.ord_getk, adj);
         for j in 0..13 {
             let i = order[j] as usize;
             if j + 1 < 13 {
@@ -1028,13 +1055,19 @@ impl DenseW8 {
     /// no re-expansion below pc==14.
     #[inline]
     pub(crate) fn get14(&self, code: u128) -> bool {
-        debug_assert!(code < (1u128 << 91));
         let (adj, iso) = extract_adj128::<14>(code, &W14_MASKS.0);
+        self.get14_adj(code, &adj, iso)
+    }
+
+    /// [`get14`] with precomputed adjacency rows (see [`get10_adj`]).
+    #[inline]
+    pub(crate) fn get14_adj(&self, code: u128, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
+        debug_assert!(code < (1u128 << 91));
         if let Some((nrem, keep)) = iso_strip::<14>(iso) {
             return self.get_dyn(14 - nrem, pext128_wide(code, W14_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 14) - 1;
-        let order = getk_order_u16::<14>(self.ord_getk, &adj);
+        let order = getk_order_u16::<14>(self.ord_getk, adj);
         for j in 0..14 {
             let i = order[j] as usize;
             if j + 1 < 14 {
@@ -1078,13 +1111,19 @@ impl DenseW8 {
     /// have a `≤55`-bit code (`u64`). Bounded-depth recursion into the complete tables.
     #[inline]
     pub(crate) fn get15(&self, code: u128) -> bool {
-        debug_assert!(code < (1u128 << 105));
         let (adj, iso) = extract_adj128::<15>(code, &W15_MASKS.0);
+        self.get15_adj(code, &adj, iso)
+    }
+
+    /// [`get15`] with precomputed adjacency rows (see [`get10_adj`]).
+    #[inline]
+    pub(crate) fn get15_adj(&self, code: u128, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
+        debug_assert!(code < (1u128 << 105));
         if let Some((nrem, keep)) = iso_strip::<15>(iso) {
             return self.get_dyn(15 - nrem, pext128_wide(code, W15_MASKS.1[keep as usize]));
         }
         let full = (1u16 << 15) - 1;
-        let order = getk_order_u16::<15>(self.ord_getk, &adj);
+        let order = getk_order_u16::<15>(self.ord_getk, adj);
         for j in 0..15 {
             let i = order[j] as usize;
             if j + 1 < 15 {
@@ -1126,13 +1165,19 @@ impl DenseW8 {
     /// [`get15`]/[`get14`]/[`get13`]/[`get12`] via [`pext128_wide`]; smaller children fit `u64`.
     #[inline]
     pub(crate) fn get16(&self, code: u128) -> bool {
-        debug_assert!(code < (1u128 << 120));
         let (adj, iso) = extract_adj128::<16>(code, &W16_MASKS.0);
+        self.get16_adj(code, &adj, iso)
+    }
+
+    /// [`get16`] with precomputed adjacency rows (see [`get10_adj`]).
+    #[inline]
+    pub(crate) fn get16_adj(&self, code: u128, adj: &[u16; MAX_DENSE_K], iso: u16) -> bool {
+        debug_assert!(code < (1u128 << 120));
         if let Some((nrem, keep)) = iso_strip::<16>(iso) {
             return self.get_dyn(16 - nrem, pext128_wide(code, W16_MASKS.1[keep as usize]));
         }
         let full = u16::MAX; // all 16 vertices (1u16 << 16 would overflow)
-        let order = getk_order_u16::<16>(self.ord_getk, &adj);
+        let order = getk_order_u16::<16>(self.ord_getk, adj);
         for j in 0..16 {
             let i = order[j] as usize;
             if j + 1 < 16 {

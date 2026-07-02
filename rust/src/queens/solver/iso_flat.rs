@@ -25,6 +25,7 @@
 use super::graph::{small_canon_table, tiny_key_from_adj, TINY_TABLE_SLOTS};
 use super::incremental::{build_att, child_orient, lex_min8, orient_of};
 use super::*;
+use crate::queens::dense::MAX_DENSE_K;
 use crate::queens::tt::Probe3;
 use rayon::prelude::*;
 use std::cell::RefCell;
@@ -1685,13 +1686,21 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut code = 0u64;
         let mut off = 0u32;
+        // Root-adj carry: `packed` IS vertex i's labelled adjacency row (att masks are
+        // self-inclusive, so clearing bit i gives exactly the `extract_adj` row); `get10_adj`
+        // skips the root re-extraction (one pext + gap-reinsert per row). Same in w11..w16.
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..10u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 10 - 1 - i;
             code |= ((packed >> (i + 1)) & ((1u64 << width) - 1)) << off;
             off += width;
         }
-        dense8.get10(code)
+        dense8.get10_adj(code, &adjr, iso)
     }
 
     /// Resolve an 11-vertex graph directly from W0..W8 (the W11 layer). Twin of
@@ -1713,13 +1722,19 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut code = 0u64;
         let mut off = 0u32;
+        // Root-adj carry (see `w10_get`).
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..11u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 11 - 1 - i;
             code |= ((packed >> (i + 1)) & ((1u64 << width) - 1)) << off;
             off += width;
         }
-        dense8.get11(code)
+        dense8.get11_adj(code, &adjr, iso)
     }
 
     /// Resolve a 12-vertex graph directly from W0..W8 (the W12 layer, the first past the
@@ -1744,8 +1759,14 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
         let mut off = 0u32;
+        // Root-adj carry (see `w10_get`).
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..12u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 12 - 1 - i;
             let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
             let lo = off & 63;
@@ -1756,7 +1777,7 @@ impl IsoFlat {
             off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
-        dense8.get12(code)
+        dense8.get12_adj(code, &adjr, iso)
     }
 
     /// Resolve a 13-vertex graph directly from W0..W8 (the W13 layer). Twin of
@@ -1778,8 +1799,14 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
         let mut off = 0u32;
+        // Root-adj carry (see `w10_get`).
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..13u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 13 - 1 - i;
             let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
             let lo = off & 63;
@@ -1790,7 +1817,7 @@ impl IsoFlat {
             off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
-        dense8.get13(code)
+        dense8.get13_adj(code, &adjr, iso)
     }
 
     /// Resolve a 14-vertex graph directly from W0..W8 (the W14 layer, the `u128` code ceiling).
@@ -1812,8 +1839,14 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
         let mut off = 0u32;
+        // Root-adj carry (see `w10_get`).
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..14u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 14 - 1 - i;
             let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
             let lo = off & 63;
@@ -1824,7 +1857,7 @@ impl IsoFlat {
             off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
-        dense8.get14(code)
+        dense8.get14_adj(code, &adjr, iso)
     }
 
     /// Resolve a 15-vertex graph directly from W0..W8 (the W15 layer). Twin of
@@ -1846,8 +1879,14 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
         let mut off = 0u32;
+        // Root-adj carry (see `w10_get`).
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..15u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 15 - 1 - i;
             let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
             let lo = off & 63;
@@ -1858,7 +1897,7 @@ impl IsoFlat {
             off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
-        dense8.get15(code)
+        dense8.get15_adj(code, &adjr, iso)
     }
 
     /// Resolve a 16-vertex graph directly from W0..W8 (the W16 layer, the `u128` code ceiling).
@@ -1880,8 +1919,14 @@ impl IsoFlat {
         let cpre = [c0, c1, c2];
         let mut words = [0u64; 2];
         let mut off = 0u32;
+        // Root-adj carry (see `w10_get`).
+        let mut adjr = [0u16; MAX_DENSE_K];
+        let mut iso = 0u16;
         for i in 0..16u32 {
             let packed = adj_row_pext(att08(att, verts[i as usize]), a, cpre);
+            let row = (packed as u16) & !(1u16 << i);
+            adjr[i as usize] = row;
+            iso |= u16::from(row == 0) << i;
             let width = 16 - 1 - i;
             let contrib = (packed >> (i + 1)) & ((1u64 << width) - 1);
             let lo = off & 63;
@@ -1892,7 +1937,7 @@ impl IsoFlat {
             off += width;
         }
         let code = (words[0] as u128) | ((words[1] as u128) << 64);
-        dense8.get16(code)
+        dense8.get16_adj(code, &adjr, iso)
     }
 
     /// Resolve a `K`-vertex graph (K=17..20) directly from W0..W8 — the wide W_K layers, one or
