@@ -123,6 +123,9 @@ any scene addition should keep the page dependency-free and single-file.
 - [x] Phase 1: queens-core engine + harness (53 checks) + Scene 1 (play vs
       perfect solver, oracle, undo/reset, hover attack preview) + Scene 2
       (centre + 180° mirror demo with pair links)
+- [x] Scene 3 (user-requested, 2026-07-03): search-space stats + scaling —
+      live naive-vs-memo measurement n=1..10 with StatsSolver counters, log
+      chart with Rust milestones, KPI tiles, table view (harness now 72 checks)
 - [ ] Phase 2: D4 explorer, board⇄graph morph
 - [ ] Phase 3: n=18 PV theater, nimber chart (open G17/G18 cells), speedup
       timeline (needs leaderboard data block + dataviz skill)
@@ -147,6 +150,26 @@ mirror line, square names), 53-check validation harness, Scenes 1–2 wired.
 BigInt JS — n=10 is seconds, mitigated (see decisions); harness compares node
 counts as js ≤ rust within 1% rather than exact at n=9/10 (Rust TT eviction
 re-expansion, exact at n≤8).
+### Scene 3 Handoff (2026-07-03, same session)
+
+**Session**: 2026-07-03--1 (`3687af49-6338-44b5-91da-933ad4ba1086`)
+**Completed**: "How the search space grows" scene — a Run button re-solves
+n=1..10 live (naive + StatsSolver + Grundy, fresh core per step), progressive
+render into: KPI tiles (positions, moves explored, TT-hit split, avg cutoff
+position, the growing per-+2-rows factor), a log-scale line chart (live series
++ 6 hard-coded Rust milestones as diamonds, crosshair/tooltip with keyboard
+arrows, legend, table-view twin), all per the dataviz skill.
+**Key facts baked in**: naive n=10 = 13,990,969 nodes (~40 s live ⇒ shipped
+precomputed in `QueensData.naive10`; harness re-verifies under
+`QUEENS_TEST_SLOW=1`); naive regression pins {6:154, 7:1556, 8:7612, 9:49752};
+memo-vs-naive at n=10 ≈ ×149; n=8 avg win-node cutoff ≈ 2.01 tries.
+**Chart palette** (validated, dataviz six checks, all-pairs CVD, dark surface
+#18202a): memo #1f97d4 · naive #c98123 · milestones #cc4d75 (+ #3fae4f spare)
+— darker steps of the report's hue families; the page accent tokens are TOO
+LIGHT for marks (L>0.77, band is 0.48–0.67). Reuse these for future charts.
+**StatsSolver** is a separate instrumented `winsAvail` copy — harness asserts
+node-for-node identity with Solver; keep them in sync on any core change.
+
 **Instructions for next agent**: the page is UNVIEWED in a browser — do the
 visual pass before building more scenes if the box allows a browser by then;
 engine perf conclusions from this session were measured on a fully loaded box

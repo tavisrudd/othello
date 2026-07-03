@@ -101,6 +101,48 @@
     font-size: 12px; text-transform: uppercase; letter-spacing: .8px;
     color: var(--accent2); font-weight: 700; margin-right: 8px;
   }
+  .kpirow {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px; margin: 14px 0;
+  }
+  .tile {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .tile .tlabel { font-size: 12px; color: var(--fg-faint); letter-spacing: .3px; }
+  .tile .tvalue { font-size: 26px; font-weight: 600; margin: 2px 0 1px; }
+  .tile .tsub { font-size: 12px; color: var(--fg-dim); }
+  .chartcard {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px 8px; margin: 14px 0; position: relative;
+  }
+  .chartcard h3 { margin: 0 0 2px; font-size: 15.5px; }
+  .chartcard .chartsub { font-size: 12.5px; color: var(--fg-faint); margin: 0 0 8px; }
+  .chartcard svg { width: 100%; height: auto; display: block; }
+  .chartcard svg:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+  .legendrow { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--fg-dim); margin: 6px 0 2px; }
+  .legendrow .key { display: inline-flex; align-items: center; gap: 6px; }
+  .charttip {
+    position: absolute; pointer-events: none; display: none; z-index: 5;
+    background: rgba(15,20,25,0.96); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 11px; font-size: 12.5px; max-width: 300px;
+  }
+  .charttip .tt-n { color: var(--fg-faint); margin-bottom: 3px; }
+  .charttip .tt-row { display: flex; align-items: baseline; gap: 7px; }
+  .charttip .tt-key { width: 12px; height: 0; border-top: 3px solid; flex: none; transform: translateY(-3px); }
+  .charttip .tt-val { font-weight: 600; }
+  .charttip .tt-lbl { color: var(--fg-dim); }
+  details.tableview { margin: 12px 0 4px; }
+  details.tableview summary { cursor: pointer; color: var(--accent); font-size: 14px; }
+  .tableview table { border-collapse: collapse; width: 100%; margin: 10px 0 4px; font-size: 13px; }
+  .tableview th, .tableview td {
+    text-align: right; padding: 5px 9px; border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  .tableview th { color: var(--accent); font-weight: 600; }
+  .tableview th:first-child, .tableview td:first-child { text-align: left; }
+  .tableview td.dim { color: var(--fg-faint); }
+  .tableview tr.milestone td { color: var(--fg-dim); font-style: italic; }
   .planned { opacity: .62; }
   .planned .soon {
     font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px;
@@ -124,6 +166,7 @@
   <nav>
     <a href="#play">Play</a>
     <a href="#mirror">Odd boards</a>
+    <a href="#growth">Growth</a>
     <a href="#coming">More scenes</a>
     <a href="queens-report-intro-edit.html">the report</a>
     <a href="queens-n18-paper.md">the paper</a>
@@ -213,6 +256,44 @@
   answer; you run out first. This pairing argument is why every odd <i>n</i> is a
   first-player win, no computer needed — the hard, open cases are the even boards.
   <span class="backlink">Report <a href="queens-report-intro-edit.html#impartial">§3</a>.</span></div>
+</section>
+
+<!-- ============================ Scene 3: growth ====================== -->
+<section class="scene" id="growth">
+  <h2><span class="num">3</span>How the search space grows</h2>
+  <p class="sceneintro">Why is this game hard? Measure it: the button below makes
+  the page's own solver re-solve every board from 1×1 to 10×10 twice — once with
+  no memory (<b>naive</b>, the ground-truth recursion) and once with the
+  transposition table + symmetry folding — while counting every position it
+  expands and every move it tries. The chart puts those live numbers next to the
+  real Rust solver's milestones up to the 18×18 proof.</p>
+  <div class="stage" id="growthStage">
+    <div class="controls">
+      <button class="btn" id="growthRun">Run the live measurement (~5–10 s)</button>
+      <span class="statnote" id="growthProgress" style="margin-top:0"></span>
+    </div>
+    <div class="kpirow" id="growthTiles"></div>
+    <div class="chartcard" id="growthCard">
+      <h3>Positions searched vs board size</h3>
+      <p class="chartsub">log scale — every second gridline is ×100. Diamond
+      milestones come from the Rust solver; hover any board size for exact values.</p>
+      <div class="legendrow" id="growthLegend"></div>
+      <div id="growthChart"></div>
+      <div class="charttip" id="growthTip"></div>
+    </div>
+    <details class="tableview" id="growthTable">
+      <summary>Table view — every measured value</summary>
+    </details>
+  </div>
+  <div class="keyidea" id="growthIdea"><span class="tag">The scaling law</span>
+  There is no fixed base: each two extra rows multiply the searched positions by a
+  <em>growing</em> factor — run the measurement to see the sequence. Odd boards stay
+  cheap (the centre-and-mirror win of scene 2 shows up as a sawtooth); even boards
+  must refute <em>every</em> first move, and that is where the ten-billion-node
+  searches come from. Memoization + symmetry is what keeps the curve on this chart
+  at all. <span class="backlink">Report
+  <a href="queens-report-intro-edit.html#hard">§2</a>,
+  <a href="queens-report-intro-edit.html#lineage">§7</a>.</span></div>
 </section>
 
 <!-- ============================ planned scenes ======================= -->
@@ -473,6 +554,69 @@ var QueensCore = (function () {
     return first < 0 ? null : { sq: first, wins: false };
   };
 
+  // As naiveWins, but counting expansions (the memo-less baseline series).
+  function naiveCount(q, blocked) {
+    var nodes = 0;
+    function rec(b) {
+      nodes++;
+      for (var i = 0; i < q.order.length; i++) {
+        var sq = q.order[i];
+        if (q.isAvailable(b, sq) && !rec(q.place(b, sq))) return true;
+      }
+      return false;
+    }
+    var wins = rec(blocked);
+    return { wins: wins, nodes: nodes };
+  }
+
+  // Solver with search-statistics counters (the growth scene). A separate
+  // instrumented copy of winsAvail so the production hot path stays clean —
+  // node counts and verdicts are identical (harness-checked). Counter names
+  // mirror the Rust `count --branching` Tally.
+  function StatsSolver(q) {
+    Solver.call(this, q);
+    this.stats = {
+      rawHits: 0,      // memo hits on the raw available mask (move-order transpositions)
+      canonHits: 0,    // memo hits only after the D4 fold (symmetry merges)
+      edges: 0,        // child recursions = moves explored into
+      tried: 0,        // available moves iterated (incl. terminals and the cutoff move)
+      terminalWins: 0, // wins by a move that kills every remaining square
+      winNodes: 0, lossNodes: 0,
+      winTriedSum: 0   // Σ tried at win nodes: mean = cutoff position (ordering quality)
+    };
+  }
+  StatsSolver.prototype = Object.create(Solver.prototype);
+  StatsSolver.prototype.constructor = StatsSolver;
+  StatsSolver.prototype.winsAvail = function (avail) {
+    var S = this.stats;
+    var hit = this.memo.get(avail);
+    if (hit !== undefined) { S.rawHits++; return hit; }
+    var q = this.q;
+    var key = q.canon(avail);
+    if (key !== avail) {
+      hit = this.memo.get(key);
+      if (hit !== undefined) { S.canonHits++; this.memo.set(avail, hit); return hit; }
+    }
+    this.nodes++;
+    var aw = [], m = avail;
+    while (m) { aw.push(Number(m & 0xffffffffn)); m >>= 32n; }
+    var order = q.order, keep = this.keep, result = false, tried = 0;
+    for (var i = 0; i < order.length; i++) {
+      var sq = order[i], w = sq >> 5;
+      if (w >= aw.length || !((aw[w] >>> (sq & 31)) & 1)) continue;
+      tried++;
+      var child = avail & keep[sq];
+      if (child === 0n) { S.terminalWins++; result = true; break; }
+      S.edges++;
+      if (!this.winsAvail(child)) { result = true; break; }
+    }
+    S.tried += tried;
+    if (result) { S.winNodes++; S.winTriedSum += tried; } else { S.lossNodes++; }
+    this.memo.set(key, result);
+    if (avail !== key) this.memo.set(avail, result);
+    return result;
+  };
+
   // Full Sprague-Grundy value via mex, memoized, no cutoff (solver/nimber.rs).
   function Grundy(q) {
     this.q = q;
@@ -525,8 +669,8 @@ var QueensCore = (function () {
   }
 
   return {
-    Queens: Queens, Solver: Solver, Grundy: Grundy,
-    naiveWins: naiveWins, mirrorLine: mirrorLine,
+    Queens: Queens, Solver: Solver, StatsSolver: StatsSolver, Grundy: Grundy,
+    naiveWins: naiveWins, naiveCount: naiveCount, mirrorLine: mirrorLine,
     popcount: popcount, forEachBit: forEachBit,
     sqName: sqName, parseSq: parseSq
   };
@@ -552,6 +696,20 @@ var QueensData = {
     nodesW17: 258.3e9,
     nodesW20: 114.3e9
   },
+  // Search-space milestones from the Rust solver (the growth scene). Metrics
+  // differ by solver era — each point says what it counts.
+  milestones: [
+    { n: 12, v: 1060823, label: '1,060,823 distinct positions (iso key) — the exact validation gate' },
+    { n: 14, v: 49.3e6, label: '≈49.3M distinct positions (D4 key)' },
+    { n: 16, v: 10017867872, label: '10.0B nodes — first complete solver, 56 minutes (June 14)' },
+    { n: 16, v: 178555417, label: '178.6M nodes — current solver, 13.4 seconds' },
+    { n: 18, v: 258.3e9, label: '258.3B nodes — the n=18 proof (W17 config)' },
+    { n: 18, v: 114.3e9, label: '114.3B nodes — independent n=18 cross-check (W20 config)' }
+  ],
+  // naive (no memo) at n=10 with THIS page's engine: deterministic but ~40s,
+  // so it ships precomputed (2026-07-03). Re-verify: harness with
+  // QUEENS_TEST_SLOW=1.
+  naive10: { n: 10, nodes: 13990969 },
   // Does the first player win n×n? From the nimbers where known; n=18 solved
   // outcome-only. Returns true / false / null (open).
   firstPlayerWins: function (n) {
@@ -934,6 +1092,353 @@ var QueensData = {
     document.getElementById('mirrorReset').addEventListener('click',
       function () { newGame(st.n); });
     newGame(7);
+  })();
+
+  /* ---------------- scene 3: search-space growth ---------------- */
+  (function () {
+    var chartEl = document.getElementById('growthChart');
+    if (!chartEl) return;
+    // Chart series palette: darker steps of the report's hue families, snapped
+    // into the dark-mode lightness band and validated (dataviz six checks,
+    // all-pairs CVD) — the page accents themselves are too light for marks.
+    var SER = {
+      memo:  { color: '#1f97d4', label: 'memo + symmetry (this page)' },
+      naive: { color: '#c98123', label: 'naive — no memo (this page)' },
+      mile:  { color: '#cc4d75', label: 'Rust solver milestones' }
+    };
+    var D = QueensData;
+    var tipEl = document.getElementById('growthTip');
+    var cardEl = document.getElementById('growthCard');
+    var progressEl = document.getElementById('growthProgress');
+    var runBtn = document.getElementById('growthRun');
+
+    // results
+    var memoR = {};   // n -> {nodes, ms, stats}
+    var naiveR = {};  // n -> {nodes, pre}
+    var grundyR = {}; // n -> nimber
+    naiveR[10] = { nodes: D.naive10.nodes, pre: true };
+    var ran = false;
+
+    function fmtInt(v) { return v.toLocaleString('en-US'); }
+    function fmtCompact(v) {
+      if (v >= 1e9) return (v / 1e9).toFixed(1) + 'B';
+      if (v >= 1e6) return (v / 1e6).toFixed(1) + 'M';
+      if (v >= 1e4) return (v / 1e3).toFixed(0) + 'K';
+      return fmtInt(v);
+    }
+    function freshCore() {
+      try {
+        return new Function(document.getElementById('queens-core').textContent +
+          '; return QueensCore;')();
+      } catch (e) { return Core; }
+    }
+
+    /* ---- chart ---- */
+    var W = 860, H = 380, ML = 56, MR = 14, MT = 12, MB = 34;
+    var plotW = W - ML - MR, plotH = H - MT - MB;
+    var NMAX = 18, DECADES = 12;
+    function x(n) { return ML + (n - 0.5) * plotW / NMAX; }
+    function y(v) { return MT + plotH - (Math.log(Math.max(v, 1)) / Math.LN10) / DECADES * plotH; }
+    var SUP = { 2: '²', 4: '⁴', 6: '⁶', 8: '⁸', 10: '¹⁰', 12: '¹²' };
+
+    function drawChart() {
+      clear(chartEl);
+      var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, tabindex: 0, role: 'img',
+        'aria-label': 'positions searched versus board size, log scale' });
+      chartEl.appendChild(svg);
+      // grid: one hairline per decade, labels every second decade
+      for (var d = 0; d <= DECADES; d++) {
+        var gy = y(Math.pow(10, d));
+        add(svg, 'line', { x1: ML, y1: gy, x2: W - MR, y2: gy, stroke: COL.grid, 'stroke-width': 1 });
+        if (d % 2 === 0) {
+          add(svg, 'text', { x: ML - 8, y: gy + 4, 'text-anchor': 'end', fill: COL.faint,
+            'font-size': 11, 'font-family': 'monospace' }, d === 0 ? '1' : '10' + SUP[d]);
+        }
+      }
+      for (var n = 2; n <= NMAX; n += 2) {
+        add(svg, 'text', { x: x(n), y: H - 12, 'text-anchor': 'middle', fill: COL.faint,
+          'font-size': 11, 'font-family': 'monospace' }, String(n));
+      }
+      add(svg, 'text', { x: ML + plotW / 2, y: H - 0.5, 'text-anchor': 'middle',
+        fill: COL.faint, 'font-size': 11 }, 'board size n');
+      // milestones: diamonds (no connecting line — metrics differ per point)
+      D.milestones.forEach(function (ms) {
+        var cx = x(ms.n), cy = y(ms.v);
+        add(svg, 'path', {
+          d: 'M' + cx + ' ' + (cy - 6.5) + ' L' + (cx + 6.5) + ' ' + cy +
+             ' L' + cx + ' ' + (cy + 6.5) + ' L' + (cx - 6.5) + ' ' + cy + ' Z',
+          fill: SER.mile.color, stroke: COL.cellbg, 'stroke-width': 2
+        });
+      });
+      add(svg, 'text', { x: x(18) - 10, y: y(258.3e9) - 12, 'text-anchor': 'end',
+        fill: COL.dim, 'font-size': 11.5 }, 'the n=18 proof');
+      // live series: line + ringed dots + end label
+      [['naive', naiveR], ['memo', memoR]].forEach(function (pair) {
+        var s = SER[pair[0]], data = pair[1];
+        var pts = [];
+        for (var n = 1; n <= 10; n++) if (data[n]) pts.push([n, data[n].nodes]);
+        if (!pts.length) return;
+        if (pts.length > 1) {
+          add(svg, 'polyline', {
+            points: pts.map(function (p) { return x(p[0]) + ',' + y(p[1]); }).join(' '),
+            fill: 'none', stroke: s.color, 'stroke-width': 2,
+            'stroke-linejoin': 'round', 'stroke-linecap': 'round'
+          });
+        }
+        pts.forEach(function (p) {
+          add(svg, 'circle', { cx: x(p[0]), cy: y(p[1]), r: 4.5, fill: s.color,
+            stroke: COL.cellbg, 'stroke-width': 2 });
+        });
+        var last = pts[pts.length - 1];
+        add(svg, 'text', { x: x(last[0]) + 10, y: y(last[1]) + 4, fill: COL.dim,
+          'font-size': 11.5 }, pair[0] === 'memo' ? 'memo + symmetry' : 'naive');
+      });
+      // crosshair + hover/focus overlay
+      var cross = add(svg, 'line', { x1: 0, y1: MT, x2: 0, y2: MT + plotH,
+        stroke: COL.axis, 'stroke-width': 1, visibility: 'hidden' });
+      var overlay = add(svg, 'rect', { x: ML, y: MT, width: plotW, height: plotH,
+        fill: 'transparent' });
+      overlay.style.cursor = 'crosshair';
+      function dataAt(n) {
+        var rows = [];
+        if (naiveR[n]) rows.push({ c: SER.naive.color, v: fmtInt(naiveR[n].nodes),
+          l: 'naive' + (naiveR[n].pre ? ' (precomputed, ~40 s)' : '') });
+        if (memoR[n]) rows.push({ c: SER.memo.color, v: fmtInt(memoR[n].nodes),
+          l: 'memo + symmetry' });
+        if (grundyR[n] !== undefined) rows.push({ c: null, v: '⋆' + grundyR[n],
+          l: 'nimber (Sprague–Grundy)' });
+        D.milestones.forEach(function (ms) {
+          if (ms.n === n) rows.push({ c: SER.mile.color, v: '', l: ms.label });
+        });
+        return rows;
+      }
+      function snapN(px) { // nearest board size that has any data
+        var raw = (px - ML) / plotW * NMAX + 0.5;
+        var bestN = 0, bestD = 1e9;
+        for (var n = 1; n <= NMAX; n++) {
+          if (!dataAt(n).length) continue;
+          var d = Math.abs(n - raw);
+          if (d < bestD) { bestD = d; bestN = n; }
+        }
+        return bestN;
+      }
+      var curN = 0;
+      function showTip(n) {
+        curN = n;
+        var rows = dataAt(n);
+        if (!n || !rows.length) { hideTip(); return; }
+        cross.setAttribute('x1', x(n)); cross.setAttribute('x2', x(n));
+        cross.setAttribute('visibility', 'visible');
+        tipEl.textContent = '';
+        var head = document.createElement('div');
+        head.className = 'tt-n';
+        head.textContent = n + '×' + n + ' board';
+        tipEl.appendChild(head);
+        rows.forEach(function (r) {
+          var row = document.createElement('div');
+          row.className = 'tt-row';
+          var key = document.createElement('span');
+          key.className = 'tt-key';
+          key.style.borderTopColor = r.c || 'transparent';
+          row.appendChild(key);
+          if (r.v) {
+            var val = document.createElement('span');
+            val.className = 'tt-val';
+            val.textContent = r.v;
+            row.appendChild(val);
+          }
+          var lbl = document.createElement('span');
+          lbl.className = 'tt-lbl';
+          lbl.textContent = r.l;
+          row.appendChild(lbl);
+          tipEl.appendChild(row);
+        });
+        tipEl.style.display = 'block';
+        var cardW = cardEl.clientWidth;
+        var px = x(n) / W * cardW;
+        tipEl.style.left = Math.min(px + 14, cardW - tipEl.offsetWidth - 8) + 'px';
+        tipEl.style.top = '54px';
+      }
+      function hideTip() {
+        cross.setAttribute('visibility', 'hidden');
+        tipEl.style.display = 'none';
+        curN = 0;
+      }
+      overlay.addEventListener('pointermove', function (ev) {
+        var r = svg.getBoundingClientRect();
+        showTip(snapN((ev.clientX - r.left) / r.width * W));
+      });
+      overlay.addEventListener('pointerleave', hideTip);
+      svg.addEventListener('focus', function () { showTip(curN || snapN(x(10))); });
+      svg.addEventListener('blur', hideTip);
+      svg.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight') return;
+        ev.preventDefault();
+        var dir = ev.key === 'ArrowRight' ? 1 : -1;
+        for (var n = curN + dir; n >= 1 && n <= NMAX; n += dir) {
+          if (dataAt(n).length) { showTip(n); break; }
+        }
+      });
+    }
+
+    function drawLegend() {
+      var lg = document.getElementById('growthLegend');
+      lg.textContent = '';
+      [SER.memo, SER.naive, SER.mile].forEach(function (s, i) {
+        var key = document.createElement('span');
+        key.className = 'key';
+        var mark = document.createElement('span');
+        if (i < 2) {
+          mark.style.cssText = 'width:16px;border-top:3px solid ' + s.color +
+            ';display:inline-block;transform:translateY(-2px)';
+        } else {
+          mark.style.cssText = 'width:9px;height:9px;background:' + s.color +
+            ';display:inline-block;transform:rotate(45deg)';
+        }
+        key.appendChild(mark);
+        key.appendChild(document.createTextNode(' ' + s.label));
+        lg.appendChild(key);
+      });
+    }
+
+    function drawTiles() {
+      var wrap = document.getElementById('growthTiles');
+      wrap.textContent = '';
+      if (!memoR[10]) return;
+      var st = memoR[10].stats;
+      var tiles = [
+        ['Positions expanded — 10×10', fmtInt(memoR[10].nodes),
+          'naive needs ' + fmtInt(naiveR[10].nodes) + ' ⇒ ×' +
+          Math.round(naiveR[10].nodes / memoR[10].nodes) + ' saved by memo + symmetry'],
+        ['Moves explored — 10×10', fmtInt(st.edges),
+          fmtInt(st.tried) + ' tried incl. terminals and cutoffs'],
+        ['Transposition hits — 10×10', fmtInt(st.rawHits + st.canonHits),
+          fmtInt(st.rawHits) + ' by move order · ' + fmtInt(st.canonHits) +
+          ' only via the 8 symmetries'],
+        ['Avg cutoff position', (st.winTriedSum / st.winNodes).toFixed(2),
+          'moves tried at winning nodes before one works — the forcing order at work'],
+        ['Each +2 rows costs', '×' + Math.round(memoR[10].nodes / memoR[8].nodes),
+          ['4→6 ×' + (memoR[6].nodes / memoR[4].nodes).toFixed(1),
+           '6→8 ×' + (memoR[8].nodes / memoR[6].nodes).toFixed(1),
+           '8→10 ×' + (memoR[10].nodes / memoR[8].nodes).toFixed(0)
+          ].join(' · ') + ' — the factor itself grows']
+      ];
+      tiles.forEach(function (t) {
+        var d = document.createElement('div');
+        d.className = 'tile';
+        ['tlabel', 'tvalue', 'tsub'].forEach(function (cls, i) {
+          var s = document.createElement('div');
+          s.className = cls;
+          s.textContent = t[i];
+          d.appendChild(s);
+        });
+        wrap.appendChild(d);
+      });
+    }
+
+    function drawTable() {
+      var det = document.getElementById('growthTable');
+      var old = det.querySelector('table');
+      if (old) old.remove();
+      var tbl = document.createElement('table');
+      var tr = document.createElement('tr');
+      ['board', 'first player', 'nimber', 'naive nodes', 'memo nodes', 'saving',
+       'moves explored', 'TT hits (order / sym)', 'avg cutoff', 'time'].forEach(function (h) {
+        var th = document.createElement('th');
+        th.textContent = h;
+        tr.appendChild(th);
+      });
+      tbl.appendChild(tr);
+      function td(row, txt, dim) {
+        var c = document.createElement('td');
+        c.textContent = txt;
+        if (dim) c.className = 'dim';
+        row.appendChild(c);
+      }
+      for (var n = 1; n <= 10; n++) {
+        if (!memoR[n] && !naiveR[n]) continue;
+        var r = document.createElement('tr');
+        td(r, n + '×' + n);
+        td(r, memoR[n] ? (memoR[n].wins ? 'wins' : 'loses') : '—');
+        td(r, grundyR[n] !== undefined ? '⋆' + grundyR[n] : '—');
+        td(r, naiveR[n] ? fmtInt(naiveR[n].nodes) + (naiveR[n].pre ? ' *' : '') : '—');
+        td(r, memoR[n] ? fmtInt(memoR[n].nodes) : '—');
+        td(r, memoR[n] && naiveR[n] ?
+          '×' + (naiveR[n].nodes / memoR[n].nodes).toFixed(1) : '—');
+        td(r, memoR[n] ? fmtInt(memoR[n].stats.edges) : '—');
+        td(r, memoR[n] ? fmtInt(memoR[n].stats.rawHits) + ' / ' +
+          fmtInt(memoR[n].stats.canonHits) : '—');
+        td(r, memoR[n] && memoR[n].stats.winNodes ?
+          (memoR[n].stats.winTriedSum / memoR[n].stats.winNodes).toFixed(2) : '—');
+        td(r, memoR[n] ? (memoR[n].ms >= 100 ? (memoR[n].ms / 1000).toFixed(1) + ' s'
+          : memoR[n].ms + ' ms') : '—', true);
+        tbl.appendChild(r);
+      }
+      D.milestones.forEach(function (ms) {
+        var r = document.createElement('tr');
+        r.className = 'milestone';
+        td(r, ms.n + '×' + ms.n);
+        var c = document.createElement('td');
+        c.colSpan = 9;
+        c.style.textAlign = 'left';
+        c.textContent = 'Rust solver: ' + ms.label;
+        r.appendChild(c);
+        tbl.appendChild(r);
+      });
+      var note = det.querySelector('p') || det.appendChild(document.createElement('p'));
+      note.className = 'statnote';
+      note.textContent = '* precomputed with this same engine (deterministic, ~40 s live). ' +
+        'Nodes = distinct positions expanded; TT hits split: found under the same ' +
+        'available-square mask vs found only after folding the 8 board symmetries.';
+      det.insertBefore(tbl, note);
+    }
+
+    function renderAll() { drawLegend(); drawChart(); drawTiles(); drawTable(); }
+
+    /* ---- the measurement runner ---- */
+    function run() {
+      if (ran) return;
+      ran = true;
+      runBtn.disabled = true;
+      var steps = [];
+      for (var n = 1; n <= 10; n++) {
+        (function (n) {
+          if (n <= 9) steps.push(['naive ' + n + '×' + n, function () {
+            var C = freshCore(), q = new C.Queens(n);
+            naiveR[n] = C.naiveCount(q, 0n);
+          }]);
+          steps.push(['search ' + n + '×' + n, function () {
+            var C = freshCore(), q = new C.Queens(n);
+            var s = new C.StatsSolver(q);
+            var t0 = Date.now();
+            var wins = s.wins(0n);
+            memoR[n] = { nodes: s.nodes, ms: Date.now() - t0, wins: wins, stats: s.stats };
+          }]);
+          if (n <= 9) steps.push(['nimber ' + n + '×' + n, function () {
+            var C = freshCore(), q = new C.Queens(n);
+            grundyR[n] = new C.Grundy(q).nimber();
+          }]);
+        })(n);
+      }
+      var i = 0;
+      (function next() {
+        if (i >= steps.length) {
+          progressEl.textContent = 'done — the 10×10 solve is the slow one; ' +
+            'everything was measured in this page just now.';
+          renderAll();
+          return;
+        }
+        progressEl.textContent = 'measuring: ' + steps[i][0] + '…';
+        setTimeout(function () {
+          steps[i][1]();
+          i++;
+          if (i % 3 === 0 || i >= steps.length) renderAll();
+          next();
+        }, 16);
+      })();
+    }
+    runBtn.addEventListener('click', run);
+    renderAll();
   })();
 })();
 </script>

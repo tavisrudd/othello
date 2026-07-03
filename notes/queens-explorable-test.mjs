@@ -150,6 +150,56 @@ console.log('n=18 principal variation (I9 …):');
   check('round-trip sqName(parseSq)', pv.every(nm => Core.sqName(q, Core.parseSq(q, nm)) === nm));
 }
 
+// --- StatsSolver: identical search, sane counters ------------------------------
+console.log('StatsSolver vs Solver (identical nodes/verdicts) + counter sanity:');
+for (let n = 4; n <= 9; n++) {
+  const q1 = new Core.Queens(n), q2 = new Core.Queens(n);
+  const a = new Core.Solver(q1), b = new Core.StatsSolver(q2);
+  const wa = a.wins(0n), wb = b.wins(0n);
+  check(`n=${n} same verdict + node count`, wa === wb && a.nodes === b.nodes,
+    `${a.nodes} vs ${b.nodes}`);
+}
+{
+  const q = new Core.Queens(8);
+  const s = new Core.StatsSolver(q);
+  s.wins(0n);
+  const st = s.stats;
+  check('n=8 win+loss nodes = expansions', st.winNodes + st.lossNodes === s.nodes);
+  check('n=8 tried >= edges, both positive', st.tried >= st.edges && st.edges > 0);
+  check('n=8 both transposition kinds occur', st.rawHits > 0 && st.canonHits > 0,
+    `order=${st.rawHits} sym=${st.canonHits}`);
+  check('n=8 winTriedSum >= winNodes', st.winTriedSum >= st.winNodes,
+    `avg cutoff ${(st.winTriedSum / st.winNodes).toFixed(2)}`);
+}
+
+// --- naiveCount regression (pins the move order + recursion shape) -------------
+console.log('naiveCount node counts (engine regression values, 2026-07-03):');
+const naiveNodes = { 6: 154, 7: 1556, 8: 7612, 9: 49752 };
+for (const [n, want] of Object.entries(naiveNodes)) {
+  const q = new Core.Queens(Number(n));
+  const r = Core.naiveCount(q, 0n);
+  check(`naive n=${n} = ${want} nodes`, r.nodes === want, `got ${r.nodes}`);
+  check(`naive n=${n} verdict matches A344227`, r.wins === (Data.A344227[n] !== 0));
+}
+if (process.env.QUEENS_TEST_SLOW === '1') {
+  console.log('slow: verifying the precomputed naive n=10 point (~40s):');
+  const q = new Core.Queens(10);
+  const r = Core.naiveCount(q, 0n);
+  check('naive n=10 matches QueensData.naive10', r.nodes === Data.naive10.nodes,
+    `got ${r.nodes} want ${Data.naive10.nodes}`);
+} else {
+  console.log('  (skip: naive n=10 precomputed-point verify — set QUEENS_TEST_SLOW=1)');
+}
+
+// --- the scenes block at least parses (no DOM here to run it) ------------------
+console.log('scenes script:');
+try {
+  new Function(extract('queens-scenes'));
+  check('queens-scenes parses', true);
+} catch (e) {
+  check('queens-scenes parses', false, String(e));
+}
+
 // --- firstPlayerWins table -----------------------------------------------------
 console.log('QueensData.firstPlayerWins:');
 check('n=10,12,14,16 second player', [10, 12, 14, 16].every(n => Data.firstPlayerWins(n) === false));
