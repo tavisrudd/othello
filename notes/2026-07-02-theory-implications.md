@@ -325,9 +325,10 @@ hint, symmetric-diagonal-free instant leaf at h=0. New, in rough value order:
    dually get "search the center root first" for the WIN proof. PROVEN-sound; wall impact
    unmeasured (the deep tail is asymmetric, but this fires at the ROOT, not the tail —
    unlike the queued leaf test, a wash argument does not apply).
-3. **Theorem-3 regression gate (free correctness test)**: every non-diagonal even-n opening
-   must have G ≥ 1 (theory note §5.2). Cheap at n = 10, 12; catches engine bugs AND theory
-   gaps simultaneously.
+3. ~~**Theorem-3 regression gate**: every non-diagonal even-n opening must have G ≥ 1.~~
+   **RETRACTED 2026-07-03 — false at n=6** (non-diagonal openings (1,2)/(0,2) win; Theorem 3
+   constrains winning lines, not first moves — see the theory note §5.2 retraction and the
+   two 2026-07-03 notes). Not usable as a correctness gate at any n.
 4. **Symmetric-lattice search decomposition — speculation.** Theorem 3's proof implies an
    alternative even-n root algorithm: search only over (symmetric position, diagonal strike)
    pairs — non-diagonal moves are absorbed by the mirror rule, so the "upper" search tree is
@@ -414,7 +415,7 @@ refutation). Author-name and wording decisions are the user's.
 | P5 | odd persistence: G(19) = G(21) = 1 | ~90% each | any odd k ≥ 2 LOSS round refutes; G ≥ 1 is PROVEN so the risk is only upward |
 | P6 | the winning even-n openings are CENTRAL diagonal squares (the (n/2−1, n/2−1) class), not outer diagonal squares | ~75% | checkable at n=18 (root table exists) and n=20; embedded-odd-center mechanism predicts centrality, Theorem 3 alone only predicts diagonality |
 | P7 | at n = 10..16 the refutation of the central-diagonal opening routes through the border/Δ mechanism (a border move or a scar-set strike appears in the refuting PV) | ~60% | the §1.5 experiment decides it; a pure-inside-S refutation would falsify and send BB back to the drawing board |
-| P8 | every diagonal opening at even n ≤ 16 has G ≥ 1, every non-diagonal opening at even n has G ≥ 1, odd-n center residuals have G = 0 | ~99% (these are theorems + engine-correctness checks) | failures indicate engine bugs or a Lemma 1/Theorem 3 gap — this is the §6.3 gate |
+| P8 | every diagonal opening at even n ≤ 16 has G ≥ 1; ~~every non-diagonal opening at even n has G ≥ 1~~ (**clause RETRACTED 2026-07-03 — false at n=6**, see §6.3 item 3); odd-n center residuals have G = 0 | remaining clauses ~99% | failures indicate engine bugs or a Lemma 1/Theorem 3 gap |
 | P9 | where the next surprise lives, ranked: (i) G(18) ∈ {2,3} (45% combined); (ii) an odd-n value > 1 at some n ≥ 19 (the odd analog of the 18-breakage; nothing protects "exactly 1"); (iii) G(20) = 0 (regime re-entry — would be the most theoretically informative outcome on the board) | — | listed so the surprises are pre-registered, not post-hoc |
 
 ---

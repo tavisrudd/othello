@@ -355,11 +355,14 @@ each is chosen to discriminate a specific hypothesis. Ranked by information-per-
    - *Confirms/refutes*: Theorem 3's picture and pins the exact n where a central-diagonal
      opening first becomes winning. Cheap: one ply down, and for the losing cases the round is
      an ordinary sub-position solve.
-2. **Validation cross-check (should be a theorem, so it tests the engine): `G(non-diagonal
-   opening) ≥ 1` for even n, all n.** By Theorem 3 every non-diagonal opening is an N-position.
-   - *Predicts*: no even-n non-diagonal opening ever has `G=0`. If one did, either the engine is
-     wrong or Lemma 1/Theorem 3 has a gap. A clean, cheap correctness gate that also validates
-     the theory. Run for n=10,12 (small, fast).
+2. ~~**Validation cross-check: `G(non-diagonal opening) ≥ 1` for even n, all n.**~~
+   **RETRACTED 2026-07-03 — the inference was wrong and the claim is FALSE at n=6.**
+   Theorem 3 constrains winning *lines* (every winning line contains a long-diagonal move),
+   not the *first* move: a non-diagonal opening can win by striking a diagonal later. Computed
+   counterexample: at n=6 the non-diagonal openings (1,2)/(0,2) win, i.e. their residuals have
+   G=0 — verified on two independent brute-forcers (see the 2026-07-03 winning-geometry and
+   cgt-laws notes, which found it independently). Do NOT wire this in as a correctness gate.
+   Theorem 3 itself is intact.
 3. **Odd-n residual after the center is a P-position.** Compute `G(B_n after center)` for
    n=9,11,13,15,(17).
    - *Predicts*: `= 0` every time (Lemma 2's residual claim). Machine-confirms the proven half of
