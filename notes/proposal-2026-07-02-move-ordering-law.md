@@ -59,6 +59,28 @@ chess-engine study can produce (their orderings interact with windows, extension
    prior" datapoint for this paper.
 5. Small-n sweeps for model fitting (n=12/13/14, minutes each), reusing the T1 harness.
 
+## First data (2026-07-03, no-compile runs while the G(17) run owned the box)
+
+- **The per-band layer already exists**: `QUEENS_RANK=1` (`M_RANK`) emits the full per-pc
+  cutoff-rank histogram (ETC / r0 / r1 / r2 / r≥3 / no-cut with degrees, E/node, loss
+  decomposition) — measurement 1's "per-band" half was already built.
+- **Per-variant capture needed code**: `M_RANK` hardwires the M_ORD_W base (QUEENS_ORD is
+  ignored under the tap — verified empirically: identical node sets across QUEENS_ORD=0/1/2
+  under QUEENS_RANK=1). Extension WRITTEN (uncompiled, box owned by G(17)): the `mode_rank`
+  family — `M_RANK_O` (M_ORD twin), `M_RANK_WV` (M_WAVE twin), `M_RANK_N` (M_NORMAL twin) —
+  selected by the production `ord`/`ord_etc`/`wave` flags, with the plain-descent loop gaining
+  the same DCE'd-off tally sites the fused block already had. Compile + byte-identical-off
+  gate + n=12 variant captures queued for when the box frees.
+- **n=14 rank shape under M_ORD_W** (single-thread, killers off): ETC 1.7 %, r0 23.4 %,
+  r1 17.4 %, r2 12.5 %, **r≥3 38.7 %**, no-cut 6.3 %; E/node 5.46, loss/node 3.02. The fat
+  r≥3 tail says the ordering is far from exhausted — consistent with the banked ablations.
+- **Killer-transfer warning (a finding in itself)**: single-threaded n=14, killers ON costs
+  **+6.9 % nodes** (2,806,261 → 2,999,842) — yet production measured −37.6 %. The killer win
+  is a **cross-root parallel** phenomenon (replies published by concurrent workers on other
+  roots); sequentially the stale-reply pollution outweighs the transfer at n=14. The model's
+  killer section must be built in the parallel setting (or the sequential/parallel contrast
+  becomes its own result). Also: odd n short-circuits (center-steal) — even boards only.
+
 ## Deliverables & venue
 
 Fitted parametric law + tree-layer theorem + DAG/TT correction + killer-transfer section →
