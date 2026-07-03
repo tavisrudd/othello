@@ -126,6 +126,15 @@ any scene addition should keep the page dependency-free and single-file.
 - [x] Scene 3 (user-requested, 2026-07-03): search-space stats + scaling —
       live naive-vs-memo measurement n=1..10 with StatsSolver counters, log
       chart with Rust milestones, KPI tiles, table view (harness now 72 checks)
+- [x] Scene 4 (user-requested, 2026-07-03): tactic contributions — pre-canned
+      ablation ladder (bare α–β → +ordering → +memo → +symmetry, plus a
+      remove-the-cutoff reference; n selector 4..10) + the n=16 production
+      lineage small-multiples (wall + nodes, 12 tactics, tooltips + table).
+      ALL ladder cells re-derived by the harness (n=10 under QUEENS_TEST_SLOW,
+      verified green this session; 81 fast / 82 slow checks). New core exports:
+      `naiveCountUnordered`, `RawMemoSolver`. Notable data: at n=10 ordering
+      alone is only ×1.23 (loss board — every root move must be refuted) vs
+      ×38.6 at n=8; G(10)=0 confirmed live (552,611 full-mex nodes).
 - [ ] Phase 2: D4 explorer, board⇄graph morph
 - [ ] Phase 3: n=18 PV theater, nimber chart (open G17/G18 cells), speedup
       timeline (needs leaderboard data block + dataviz skill)

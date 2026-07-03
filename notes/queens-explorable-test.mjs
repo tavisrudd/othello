@@ -191,6 +191,63 @@ if (process.env.QUEENS_TEST_SLOW === '1') {
   console.log('  (skip: naive n=10 precomputed-point verify — set QUEENS_TEST_SLOW=1)');
 }
 
+// --- ablation ladder: every pre-canned cell re-derived live --------------------
+console.log('ablation ladder cells (pre-canned in QueensData) re-derived:');
+{
+  const rungFns = {
+    unordered: n => Core.naiveCountUnordered(new Core.Queens(n), 0n).nodes,
+    ordered: n => Core.naiveCount(new Core.Queens(n), 0n).nodes,
+    memo: n => { const s = new Core.RawMemoSolver(new Core.Queens(n)); s.wins(0n); return s.nodes; },
+    sym: n => { const s = new Core.Solver(new Core.Queens(n)); s.wins(0n); return s.nodes; },
+  };
+  const slow = process.env.QUEENS_TEST_SLOW === '1';
+  const maxN = slow ? 10 : 9;
+  for (const rung of Data.ablation.rungs) {
+    const got = [];
+    let ok = true;
+    for (const n of Data.ablation.ns) {
+      if (n > maxN) continue;
+      const v = rungFns[rung.key](n);
+      got.push(`${n}:${v}`);
+      if (v !== rung.nodes[n]) ok = false;
+    }
+    check(`rung "${rung.key}" cells n<=${maxN}`, ok, got.join(' '));
+  }
+  // the no-cutoff reference = the Grundy engine's expansion count
+  let ok = true;
+  for (const n of Data.ablation.ns) {
+    if (n > maxN) continue;
+    const g = new Core.Grundy(new Core.Queens(n));
+    g.nimber();
+    if (g.nodes !== Data.ablation.noCutoff.nodes[n]) ok = false;
+  }
+  check(`no-cutoff reference cells n<=${maxN}`, ok);
+  if (!slow) console.log('  (skip: n=10 cells — set QUEENS_TEST_SLOW=1, ~3 min)');
+  // ablated variants still agree on the verdict
+  let agree = true;
+  for (let n = 4; n <= 8; n++) {
+    const q = new Core.Queens(n);
+    const w = new Core.Solver(new Core.Queens(n)).wins(0n);
+    if (Core.naiveCountUnordered(q, 0n).wins !== w) agree = false;
+    const rm = new Core.RawMemoSolver(new Core.Queens(n));
+    if (rm.wins(0n) !== w) agree = false;
+  }
+  check('ablated variants agree on every verdict (n=4..8)', agree);
+}
+
+// --- lineage data sanity --------------------------------------------------------
+console.log('n=16 lineage data:');
+{
+  const L = Data.lineage16;
+  check('walls strictly decreasing',
+    L.every((m, i) => i === 0 || m.wall < L[i - 1].wall));
+  check('nodes non-increasing',
+    L.every((m, i) => i === 0 || m.nodes <= L[i - 1].nodes));
+  check('endpoints: 3360s/10.0B → 13.43s/0.18B',
+    L[0].wall === 3360 && L[0].nodes === 10.0e9 &&
+    L[L.length - 1].wall === 13.43 && L[L.length - 1].nodes === 0.18e9);
+}
+
 // --- the scenes block at least parses (no DOM here to run it) ------------------
 console.log('scenes script:');
 try {
