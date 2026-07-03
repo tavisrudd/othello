@@ -32,12 +32,19 @@ G(16) = 0** (G(17) is in flight at the time of writing); the engine reproduces t
 nimbers for n ≤ 8 and the A344227 terms for n ≤ 13 exactly, and its n = 14/16 values independently
 equal the production win/loss verdicts. We also give an elementary **structural theory** of the
 even/odd split: a 180°-rotation pairing argument reproves that every odd board is a first-player
-win and — new here — proves that the even-board outcome is decided *entirely by the long-diagonal
-moves* (the responder's mirror refutes any diagonal-free line), so an even-board first-player win
-*requires* a long-diagonal move — and the n = 18 witness I9 = (8, 8) lies on the main diagonal,
-exactly as the theorem demands. The reduction is proven; *why* the even pattern first breaks at
-n = 18, and the exact nimber values, are given as an explicit heuristic and as falsifiable
-predictions. We are explicit throughout about what is *certified*, what is *cross-validated*, and
+win and — new here — proves that an even-board first-player win *requires* a long-diagonal move
+at some ply (the responder's mirror refutes any diagonal-free line) — and the n = 18 witness
+I9 = (8, 8) lies on the main diagonal, consistent with that theorem, which constrains winning
+*lines*, not opening moves (at n = 6, computed non-diagonal openings win by striking a diagonal
+later). Two companion studies extend the theory: two further proven general laws (a
+**Closed-Pairing** theorem generalising the mirror argument to arbitrary matchings with a closure
+property, and a **Well-Covered Parity** law with the rook game as its special case), a computed
+geometry of winning openings on every solved small board supporting a *Forcing-Root* conjecture
+(the most-forcing square wins on every known first-player-win board), exhaustive ablations showing
+that refuting the central strike *requires* border access, torus-queens nimbers computed to
+n = 10, and a registered structural conjecture for n = 20 (first player, witness (9, 9)). The
+reduction and the new laws are proven; *why* the even pattern first breaks at n = 18, and the
+exact nimber values, are given as an explicit heuristic and as falsifiable predictions. We are explicit throughout about what is *certified*, what is *cross-validated*, and
 what is *deferred to differential testing* or *conjectural*.
 
 ---
@@ -107,12 +114,18 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
    n = 16, which the n = 18 first-player win then breaks.
 
 6. **An elementary structural theory of the even/odd split** (Section 6). A 180°-rotation (`ρ`)
-   pairing argument reproves that every odd board is a first-player win, and — new — reduces the
-   even-board outcome *entirely* to the long-diagonal moves: the responder's mirror strategy
-   refutes any first-player line that avoids the long diagonals, so an even-board first-player win
-   *requires* a long-diagonal move. The n = 18 witness I9 = (8, 8) sits on the main diagonal, as
-   the theorem demands. The reduction is proven; *why* the pattern first breaks at n = 18, and the
-   exact nimber values, are given as a heuristic and as falsifiable predictions.
+   pairing argument reproves that every odd board is a first-player win, and — new — proves that
+   an even-board first-player win *requires* a long-diagonal move: the responder's mirror strategy
+   refutes any first-player line that avoids the long diagonals. The n = 18 witness I9 = (8, 8)
+   sits on the main diagonal, consistent with the theorem — which constrains winning *lines*, not
+   first moves (computed n = 6 counterexample: non-diagonal openings win by striking a diagonal
+   later; Section 6.6). Two companion studies (Sections 6.6–6.8) extend the theory: the computed
+   geometry of winning openings and the *Forcing-Root* conjecture, root option-value spectra that
+   mechanically explain the small catalogued nimbers, exhaustive border-tempo ablations with a
+   torus-queens control computed to n = 10, and two new proven general laws (Closed-Pairing;
+   Well-Covered Parity). The reduction and the laws are proven; *why* the pattern first breaks at
+   n = 18, the exact nimber values, and the n = 20 outcome (Section 9) are stated as heuristics,
+   conjectures, and falsifiable predictions — never with the theorem's status.
 
 ### 1.3 What this paper claims, and what it does not
 
@@ -484,7 +497,9 @@ winning opening, and both produce the **byte-identical 15-ply principal variatio
 (squares `152, 136, 168, 189, 43, 120, 283, 58, 105, 201, 230, 23, 89, 299, 234`). The PV was
 checked to be a sequence of 15 legal non-attacking moves ending in a terminal position with the
 side-to-move unable to move — consistent with a first-player win (the first player makes the
-last, 15th, move).
+last, 15th, move). The PV is *not* itself the proof: it certifies the legality, terminality, and
+parity of one line, whereas the win claim rests on the exhaustive searches having refuted **every**
+opponent reply after I9 — which is exactly what the two independently configured runs each did.
 
 The two runs use different code (a 3-word code path vs a ≥190-bit path), exercise different
 internal table dynamics, and converge at node counts differing by more than 2× — yet agree on
@@ -543,10 +558,16 @@ The n = 18 verdict of Section 5 is an *outcome* (first player wins ⟺ nimber �
 itself is a finer invariant, and two further threads sharpen the picture: a dedicated engine that
 computes the exact nimber `G(n)` and thereby extends OEIS A344227 beyond its previously catalogued
 range (Sections 6.1–6.3), and an elementary theory that explains the even/odd outcome split and
-locates where the even → 0 pattern must break (Sections 6.4–6.5). The engine's results are
-*cross-validated* to the same standard as the main solver; the theory's core reduction is
-*proven*; the "why n = 18" mechanism and the exact nimber values are marked *heuristic* and
-*predicted*.
+locates where the even → 0 pattern must break (Sections 6.4–6.8). The engine's results are
+*cross-validated* to the same standard as the main solver. Throughout the theory sections we keep
+three claim levels strictly apart: (i) the **proven theorem** — every first-player winning line on
+an even board must eventually contain a long-diagonal move (Theorem 3); (ii) the **Forcing-Root
+conjecture** — when a board is an N-position, the central diagonal strike `c*` in particular wins
+(Section 6.6); and (iii) the **large-n heuristic** — winning roots tend central and diagonal.
+Levels (ii) and (iii) never borrow (i)'s status. The geometric and spectral claims of Sections
+6.6–6.7 are *computed* (exhaustive at the stated sizes, on independent brute-forcers
+cross-validated against A344227); the general laws of Section 6.8 are *proven*; the "why n = 18"
+mechanism and the exact nimber values are marked *heuristic* and *predicted*.
 
 ### 6.1 A heap-sum engine for the nimber
 
@@ -640,8 +661,9 @@ iff `s` lies on the main diagonal (`r = c`), the anti-diagonal (`r + c = n−1`)
 i.e. `r = c`; the anti-diagonal iff `r + c = (n−1−r) + (n−1−c)`, i.e. `r + c = n−1`; and
 queen-adjacency is exactly "shares a row, column, or diagonal." ∎ For **even** n, `2r = n−1` has
 no integer solution, so there is no centre row or column and the self-mirroring set is exactly the
-**two long diagonals**; for **odd** n it is the **four central lines** through the fixed centre
-cell. (`ρ` is moreover the *only* useful pairing symmetry: it is an involution with a small
+**two long diagonals** — which are disjoint for even n (they would meet only at a square with
+`r = c` and `r + c = n−1`, i.e. `2r = n−1`), hence exactly **2n squares**; for **odd** n it is the
+**four central lines** through the fixed centre cell. (`ρ` is moreover the *only* useful pairing symmetry: it is an involution with a small
 self-mirroring set, whereas each D₄ reflection makes an entire row, column, or diagonal
 self-mirroring, and the 90°/270° rotations are not involutions.)
 
@@ -662,18 +684,34 @@ by Lemma 1, `s` non-diagonal means `ρ(s) ≠ s` and `s` does not attack `ρ(s)`
 `s`'s deletions, and removing `s` then `ρ(s)` (each with its attacks) is symmetric. Hence the
 mirror strategy is a valid winning strategy for the *responder* against any line that never plays
 a long-diagonal square. *Consequences:* **an even-board first-player win requires a long-diagonal
-move** (avoid them and the responder mirrors and wins); equivalently, `G(B_n) = 0` iff every
-long-diagonal deviation is refutable. The even-board outcome is decided *entirely* by the `O(n)`
-long-diagonal squares. ∎ This collapses the even-n question onto ≈ n/2 squares (mod D₄), and it
-matches the data: the n = 18 winning move I9 = (8, 8) is on the main diagonal, and all four central
-cells of any even board lie on a long diagonal — so the refutation of the even → 0 conjecture lands
-exactly where the theorem says the only threats live. The PV geometry of Section 5.4 shows the same
-structure concretely: I9 reproduces an odd-board centre-and-mirror on the embedded 17×17 sub-board.
+move at some ply** (avoid them forever and the responder mirrors and wins); equivalently,
+`G(B_n) = 0` iff every long-diagonal deviation is refutable. In the strategy sense the even-board
+outcome turns *entirely* on the 2n long-diagonal squares: the responder's certificate is a mirror
+rule plus refutations of the diagonal deviations. ∎
+
+**Scope — lines, not first moves.** The theorem constrains winning *lines*, not the winning
+*opening*: it says every winning line must contain a long-diagonal move at some ply, not that the
+first move must be diagonal. The distinction is computed fact, not pedantry: at n = 6 the
+non-diagonal openings (1, 2) and (0, 2) are first-player wins — after (0, 2) and the mirror reply
+(5, 3), the opener's only winning continuations are the anti-diagonal squares (1, 4)/(4, 1), i.e.
+the mandatory diagonal strike arrives at ply 3 (Section 6.6). So the theorem collapses the even-n
+*strategy* certificate, but it does not by itself license restricting a root search to the
+diagonal opening classes; that stronger, root-level statement is precisely the (unproven)
+Forcing-Root conjecture of Section 6.6, and "winning roots tend central and diagonal" is a
+heuristic, one level weaker still. (One bookkeeping point: the four central cells of an even board
+form a *single* class under the dihedral symmetry — the diagonal classes mod D₄ are exactly
+`(d, d)`, `d = 0 … n/2 − 1` — so "the central class" is one candidate, not four.) The data remain
+consistent throughout: the n = 18 winning move I9 = (8, 8) is on the main diagonal, and the
+refutation of the even → 0 conjecture arrives exactly through the squares the theorem identifies
+as the only escape from the responder's mirror. The PV geometry of Section 5.4 shows the same
+structure concretely: I9 reproduces an odd-board centre-and-mirror on the embedded 17×17
+sub-board.
 
 ### 6.5 Why n = 18, boundedness, and predictions
 
-Theorem 3 reduces the even-n question to "is some long-diagonal opening winning?" but does not say
-*when* one first becomes so. The following is **heuristic, not a theorem.** A central-diagonal
+Theorem 3 makes the long-diagonal moves the crux of the even-n question — every winning line must
+contain one — but does not say *when* a winning line first exists. The following is **heuristic,
+not a theorem.** A central-diagonal
 queen at `(d, d)`, `d ≈ n/2`, deletes its full row, full column, and both long diagonals — a
 "cross + X" whose arms scale with n — and its residual is *not* `ρ`-symmetric (row `d` maps to row
 `n−1−d`, only one of which is deleted), so the responder has no mirror and must out-play the first
@@ -684,6 +722,15 @@ invariant (a monotone potential, a maximal-independent-set parity, a strategy-st
 is known that predicts the n = 18 threshold — and the even subsequence was never monotone to zero
 anyway (`G(8) = 3`), so "eventually 0" was a fragile empirical pattern, now broken, not a law.
 
+The "no clean invariant" observation can be sharpened into a small organising theorem: the even-n
+verdict sequence N, N, N, P, P, P, P, N (n = 4 … 18) is non-monotone, so **no quantity monotone in
+n can decide the even-board outcome**. Every natural scalar in the geometric family *is* monotone
+in n — the central strike's deletion count `4n − 4`, the residual area `(n − 2)²`, the live border
+`2(n − 2)`, the border/area ratio `2/(n − 4)` — so each is individually disqualified as a deciding
+invariant; any true threshold criterion must be non-monotone (modular, spectral, or genuinely
+game-tree-deep). The refutation-margin data of Section 6.6 make the same point empirically: the
+central strike's fortunes do not improve smoothly with n even inside the second-player band.
+
 **Boundedness is open, with a standing caveat.** Every known term is ≤ 3, but Node-Kayles Grundy
 values are **unbounded on general graphs** (explicit constructions in the Arc-Kayles / vertex-
 deletion literature), so *no* bound on the queen family is inherited — any bound must be a special
@@ -691,13 +738,194 @@ structural fact, earned rather than assumed. (Structured graph families — tree
 neighbourhood-diversity — have provably eventually-periodic, hence bounded, Grundy sequences, but
 queen graphs are dense and irregular and are covered by none of those theorems.)
 
-The theory yields **falsifiable predictions.** (i) `G(17) = 1` (confidence ≈ 88 %): odd ⟹ `G ≥ 1`
-is proven, and every odd n ≥ 9 has been 1 (n = 9, 11, 13, 15); a `k ≥ 2` LOSS would refute the
-odd → 1 conjecture as sharply as n = 18 refuted even → 0. (ii) `G(18) ∈ {1, 2, 3}` with a prior
-peaked at **1** (≈ 55 %; then 2 ≈ 30 %, 3 ≈ 12 %, ≥ 4 ≈ 3 %): a single central-diagonal threat
-over an otherwise mirror-balanced remainder "looks like" a `*`-valued (value-1) game. Because a
-LOSS round pins `G` exactly, firing the most-probable `k = 1` first resolves G(18) in one search
-with ≈ 55 % probability. These are predictions, not results.
+The theory yields **falsifiable predictions** (the quantified priors live in the project's
+research notes [11]; here we state only the structure). (i) `G(17) = 1`: odd ⟹ `G ≥ 1` is proven,
+and every computed odd n ≥ 9 has been 1 (n = 9, 11, 13, 15); a `k ≥ 2` LOSS would refute the
+odd → 1 conjecture as sharply as n = 18 refuted even → 0. (ii) `G(18)` small, most plausibly
+**1**: a single central-diagonal threat over an otherwise mirror-balanced remainder "looks like" a
+`*`-valued (value-1) game, and the root-spectrum data of Section 6.6 make 1 the modal option value
+near even roots. Because a LOSS round pins `G` exactly, the ascending-`k` driver fires `k = 1`
+first. These are predictions, not results.
+
+### 6.6 The geometry of winning openings: spectra, margins, and the Forcing-Root conjecture
+
+The computed claims in this and the next two subsections come from independent, from-scratch
+Python brute-forcers (bitmask-memoised win/loss search plus a full-`mex` Grundy variant) —
+independent of the production solver, the heap-sum engine, and the `naive` reference — which
+reproduce every value they can reach (`G(5 … 10) = 3, 1, 2, 3, 1, 0`, A344227 exact, and the
+outcome verdicts for n = 4 … 12) before being trusted on anything new. Full data, scripts, and
+proofs are in the companion notes [11, 12].
+
+**Which openings win.** Exhaustive enumeration of the winning opening classes (mod D₄), with
+`c*` denoting the central diagonal class `(n/2 − 1, n/2 − 1)` — the unique-mod-D₄
+maximum-deletion square of an even board (the centre plays that role for odd n):
+
+| n  | verdict | winning opening classes (mod D₄)             | most-forcing square wins? |
+|----|---------|----------------------------------------------|---------------------------|
+| 4  | first   | c* = (1,1) and (0,0)                         | yes                       |
+| 5  | first   | centre and (1,2)                             | yes                       |
+| 6  | first   | (2,2) = c*, (1,1), (0,0), (1,2), (0,2)       | yes                       |
+| 7  | first   | centre and (1,3)                             | yes                       |
+| 8  | first   | (3,3) = c* only — the unique winning opening | yes, uniquely             |
+| 9  | first   | centre, (2,4), (1,3), (0,1)                  | yes                       |
+| 10 | second  | none                                         | vacuous                   |
+| 11 | first   | every opening class wins                     | yes                       |
+| 12 | second  | none                                         | vacuous                   |
+| 18 | first   | I9 = c* (existential run; other roots open)  | yes                       |
+
+The n = 6 row contains the counterexample of Section 6.4's scope note: the non-diagonal classes
+(1, 2) and (0, 2) win, so Theorem 3 does not restrict first moves. The n = 8 row is the opposite
+extreme: `c*` is the *only* winning opening.
+
+**The Forcing-Root conjecture.** One pattern has never failed: **on every known first-player-win
+board, the maximum-deletion (most-forcing) square is a winning opening** — the centre for odd n
+(proven, Lemma 2), `c*` for even n (computed at 4, 6, 8; vacuously consistent at the second-player
+boards 10, 12, 14, 16; and the n = 18 witness I9 *is* `c*`, the board maximum at 68 deletions).
+Equivalently, conjectured: *a board is an N-position iff its most-forcing square wins.* This is a
+conjecture, supported by all data — nothing yet excludes an even N-board whose `c*` is refuted
+while some other root wins. Promoted to a theorem it would collapse the even-n *outcome* decision
+to a single root solve; even unproven it is the strongest known root-ordering prior (and is what
+the solver's degree ordering already tries first). It is a claim about *membership*, not
+uniqueness: only n = 8 has `c*` as the sole winner.
+
+**Root spectra mechanically explain the small nimbers.** The full option-value histograms at the
+root (mod D₄) are startlingly thin:
+
+| n  | root option-value histogram | mex = G(n) | mechanism                                 |
+|----|-----------------------------|------------|-------------------------------------------|
+| 9  | {0: 4, 3: 11}               | 1          | no option of value 1 or 2, so mex = 1     |
+| 10 | {1: 15}                     | 0          | every opening has value 1, so mex = 0     |
+| 11 | {0: 21}                     | 1          | every opening is a P-position, so mex = 1 |
+
+G(10) = 0 because *all fifteen* opening classes have value exactly 1; G(11) = 1 because every
+option is a P-position; G(9) = 1 despite value-3 options because values 1 and 2 are absent from
+the spectrum. **Conjecture S** (from the n = 10 datum): for even P-boards n ≥ 10 every opening has
+G = 1 — checkable one ply down with the heap-sum engine. Together with n = 11's all-zero spectrum
+it suggests a two-level 0 ↔ 1 resonance near the root, which would make G(17) = 1 and G(19) = 1
+near-mechanical and G(18)'s exact value the real outlier probe.
+
+**Refutation margins — a registered open puzzle.** The fraction of replies in `R_n` (the position
+after `c*`) that refute the strike is violently non-monotone: 0/36 at n = 8 (`c*` wins), 8/64 at
+n = 10, **100/100** at n = 12 (every reply refutes), 0/256 at n = 18 (`R` is again a P-position) —
+even though `G(R_10) = G(R_12) = 1`. No smooth "the strike gradually strengthens with n" story
+fits this; the margins at n = 14 and 16 are the cheap missing data points. (At n = 10 the four
+interior refuters are exactly the knight-neighbours of `c*` on the strike's own diagonal side —
+the nearest squares a queen does not attack — recorded as move-ordering fodder, not as a law.)
+
+### 6.7 Border tempo, the τ-scar trajectory, and the torus as a borderless control
+
+**The emerging decomposition.** After the central strike, `R_n` splits into three interacting
+parts: the *embedded odd-board centre residual* (the sub-board `S = [0 .. n−2]²` after its centre —
+literally `B_{n−1}` after Lemma 2's opening, hence a P-position on its own), the *live L-border*
+(the last row and column, `2(n − 2)` live squares), and the *cross-attack entanglement* between
+them. Write `τ(x) = (n − 2, n − 2) − x` for the point reflection of the sub-board about the
+strike — the general-n form of Section 5.4's τ. All the n-dependent difficulty lives in the
+border/scar entanglement: pure pairing cannot repair a border intrusion — a border square's
+τ-partner is off the sub-board, and its transpose partner is self-attacked — so any future even-n
+theorem needs inexact repair plus scar control, not a static mirror.
+
+**Border ablations (exhaustive at n = 8, 10, 12).** Three modified games on `R_n` quantify that
+frame:
+
+| n  | `R_n` outcome    | border deleted | intruder border-banned   | responder border-banned  |
+|----|------------------|----------------|--------------------------|--------------------------|
+| 8  | P — `c*` wins    | P              | P — still no refutation  | N — the `c*` win fails   |
+| 10 | N — `c*` refuted | P              | P — refutation collapses | N                        |
+| 12 | N — `c*` refuted | P              | P — refutation collapses | N                        |
+
+Deleting the border outright machine-verifies the embedded-odd-centre identity (column 3: the
+sub-board part of `R_n` is exactly `B_{n−1}` after its centre, so Lemma 2 applies verbatim). The
+decisive result is column 4: at n = 10 and n = 12, an intruder forbidden from ever playing a
+border square **cannot refute `c*` at all** — every refutation of the central strike *requires*
+intruder border tempo, a necessity established by exhaustion (upgrading what had previously been
+only a tendency). The interior scar battle alone is not enough. Dually (column 5), at n = 8 it is
+the *responder* who needs border access: banned from it, the `c*` win fails — the border battle is
+genuinely two-sided. In all three extracted optimal lines the side that wins `R_n` makes the
+*last border move*; border-tempo parity as the decision mechanism is conjecture-grade (three
+lines, and loser moves in a won line are ordering artefacts), but it matches the n = 18 PV
+exactly.
+
+**The τ-scar trajectory of the n = 18 PV.** Per-ply accounting of Section 5.4's PV (Δ = the scar
+set: live sub-board squares whose τ-partner is dead) shows the same shape in play [11]: exactly
+one literally mirrored exchange (G10 = τ(K8), restoring perfect sub-board symmetry at ply 3),
+after which the winner *abandons* τ even where the mirror reply was live — mirroring is the
+opening posture, not the strategy; from ply 6 to the end every loser move lands inside Δ (the
+loser is confined to scar squares, each move consuming scar); |Δ| after the winner's replies
+descends monotonically after an early spike and reaches 0 on the winner's last move; and the
+whole game contains exactly *one* border move — the winner takes the last live border square at
+ply 13, denying the loser the border tempo the ablations show a refuter needs. One line, so this
+is a computed trajectory and a conjectured mechanism, not a strategy extraction.
+
+**The torus as a borderless control.** On the torus (rows, columns, and both diagonal directions
+wrap), the queen graph is vertex-transitive; A344227's comments already record that the torus
+game's value therefore lies in {0, 1} for every n — that fact is cited, not claimed. New here are
+the computed terms:
+
+| n         | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|-----------|---|---|---|---|---|---|---|---|---|----|
+| G(torus)  | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0  |
+
+with **Conjecture T1: `G(torus_n) = n mod 2` for n ≥ 4.** The borderless board, in other words,
+does exactly what the plane was conjectured to do — and the plane's even → 0 pattern broke at
+n = 18 via structure the torus does not have. If T1 holds while the plane oscillation stays
+broken, the border is *provably* the whole story, isolated as the difference between two concrete
+sequences. The formally correct frame for any plane↔torus transfer is the proven embedding: the
+n×n plane queen graph is an induced subgraph of the m×m torus queen graph for every `m ≥ 2n − 1`
+[12] — though no *general* graph law can carry values across it (Section 6.8).
+
+### 6.8 Two proven general laws, and the no-go results that frame them
+
+Both laws are stated with proof sketches only; full proofs are in the companion note [12].
+
+**Theorem S1 (Closed-Pairing) — proven.** Let `A` be a Node-Kayles position and `π : A → A` a
+fixed-point-free involution (a perfect matching on the available set) such that (a) no pair is
+internally adjacent (`π(v) ∉ N[v]`), and (b) every pair's joint closed neighbourhood is
+π-invariant within `A` (`(N[v] ∪ N[π(v)]) ∩ A` is a union of π-pairs). Then `A` is a P-position:
+`G(A) = 0`. *Sketch.* Induction on |A|: the responder answers `v` with `π(v)` (legal by (a)); the
+joint deletion is π-invariant by (b), so π restricts to a closed pairing of the residual and the
+responder always has a reply, moving last. ∎ S1 strictly generalises the mirror/Copying-Lemma
+arguments of Section 6.4 — an involutive automorphism with no self-mirroring available square
+satisfies (a) and (b) automatically — but the pairing **need not come from a symmetry at all**: it
+is a purely combinatorial matching condition, checkable in `O(|A|³)` with no game search, so a
+closed pairing is a complete, search-free P-certificate. It is sufficient, not a characterisation
+(the 5-cycle has `G = 0` but, having odd order, admits no pairing). Where such certificates exist
+is computed [12]: they exist for the n = 4 central-strike residuals; for the P-boards n = 10 … 16
+their nonexistence on every opening residual is a *theorem* (those residuals are N-positions,
+which S1 forbids pairing); and none of the n = 6/8 winning residuals admits one. Past the smallest
+boards, winning defence therefore has irreducible adaptive strategy content — exactly where all
+current proof attempts stop, and consistent with Section 6.7's conclusion that the border demands
+inexact repair.
+
+**Well-Covered Parity Law — proven.** If a graph is *well-covered* (every maximal independent set
+has the same size `m`), then Node-Kayles on it has `G = m mod 2`, and every position's value is
+its own remaining fixed play length mod 2. *Sketch.* Residuals of well-covered graphs are
+well-covered with parameter `m − 1` (the maximal independent sets of `Γ ∖ N[v]` are exactly the
+maximal sets through `v`, minus `v`); by induction every option has value `(m − 1) mod 2`, and the
+mex is `m mod 2`. ∎ The classical rook-game solution `G = min(m, n) mod 2` is the special case
+"rook graphs are well-covered". Queen graphs fail well-coveredness decisively — already at n = 4
+maximal independent sets of sizes 3 and 4 coexist, and the spread widens with n — which is *why*
+the parity route closes the rook game and cannot close queens: fixed game length is exactly the
+well-covered property.
+
+**Small exact laws and framing no-gos** (each recorded to stop re-derivation [12]):
+
+- **True-Twin Deletion Lemma (proven).** If `N[u] = N[v]`, deleting `v` leaves every Grundy value
+  unchanged (twins persist or die together, and duplicate options never change a mex). Verified on
+  random graphs; consistent with the solver-side census that found the deep queen tail graphs
+  essentially twin-free — the lemma has nothing to fire on there.
+- **No Lipschitz edge-transfer law (computed no-go).** On random 9-vertex graphs a *single* added
+  edge moved `G` by as much as 5, so no bound of |G(plane) − G(torus)| by wraparound-edge counting
+  can exist as a general graph law; any plane↔torus transfer principle must use queen-specific
+  structure.
+- **Round cap (proven).** `G(position) ≤` the maximum remaining play length, so
+  `G(B_n) ≤ α(Q_n) ≤ n`; in particular `G(18) ∈ [1, 18]`, and the ascending-`k` heap-sum driver of
+  Section 6.1 never needs rounds `k > n`.
+- **Conjecture D1 (tested-consistent, n ≤ 8).** A ρ-symmetric even-board position with exactly one
+  available diagonal pair has `G ≤ 1`. The linear budget bound `G ≤ d` (d = live diagonal pairs) is
+  already **false** at `d = 2` (an n = 8 symmetric position with `G = 3` exists), so boundedness
+  cannot be reached by budget counting alone; `d = 1` is the first rung that survives all data. If
+  proven, D1 doubles as an engine leaf (at a symmetric one-pair state with heap `h ≥ 2` the mover
+  wins outright).
 
 ---
 
@@ -854,9 +1082,15 @@ outcome solve does not yield the nimber value — and an even-board first-player
 contradicts that sequence's conjectured even → 0 oscillation. The nimber sequence *is* extended,
 separately, by a heap-sum Sprague–Grundy engine that certifies the new terms G(14) = 0, G(15) = 1,
 G(16) = 0 (with G(17) in flight), confirming the even → 0 / odd → 1 oscillation exactly up to the
-n = 18 break; and an elementary 180°-rotation pairing argument proves that the even-board outcome
-is decided entirely by the long-diagonal moves — the winning n = 18 opening I9 = (8, 8) being a
-main-diagonal move, as that theorem requires. The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
+n = 18 break; and an elementary 180°-rotation pairing argument proves that every even-board
+first-player winning line must contain a long-diagonal move — the winning n = 18 opening
+I9 = (8, 8) being a main-diagonal move, consistent with that theorem (which constrains winning
+lines, not first moves; Section 6.6). Two companion theory studies add a computed geometry of
+winning openings supporting the Forcing-Root conjecture, root option-value spectra that
+mechanically explain the small catalogued nimbers, exhaustive ablations proving that refuting the
+central strike requires intruder border tempo at n = 10/12, torus-queens nimbers computed to
+n = 10 with a conjectured mod-2 law, and two new proven general laws — Closed-Pairing and
+Well-Covered Parity (Sections 6.6–6.8). The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
 the tree directly from precomputed Node-Kayles tables, isomorphism-aware canonicalisation over a
 lockless flat transposition table, dynamic move ordering, and a capacity configuration
 (band-skipped transposition work + a 17 GB table) tuned to a single workstation. The leaf
@@ -874,6 +1108,35 @@ inherited from general Node-Kayles); and a resumable, disk-backed transposition 
 The n = 16 search, already carried below 20 s by cross-root killer replies and kernel
 micro-optimisation (13.43 s; Section 4.5), continues to reward levers a prior audit had called
 terminal — we make no claim that any reported time is a floor.
+
+### Outlook: n = 20 — a registered prediction, not a result
+
+The next open even board is n = 20 (55 root classes mod D₄, of which 10 diagonal). Before any
+search is sized or run, the theory of Sections 6.6–6.8 is placed on record as a **falsifiable
+registered conjecture**: *n = 20 is a first-player win, with the central diagonal strike
+(9, 9) (= J10) as a witness.* This is a structural ranking plus a conjecture, not a probability
+claim (the research notes carry quantified priors [11]; the paper does not). The mechanism
+reading: (9, 9) tops every geometric ranking simultaneously and by arithmetic fact — the board
+maximum 76 deletions (uniquely, as the central class), mirror gap 1 (the diagonal square closest
+to its own ρ-image), and the exact embedded-odd-centre structure (it is the centre of the 19×19
+sub-board, precisely as I9 was of the 17×17), with a live L-border of 36 squares giving the most
+striker-favourable border/area ratio yet (0.125 vs n = 18's 0.143); the intruder's only proven
+refutation resource, border tempo (Section 6.7), keeps shrinking relative to the τ-paired
+territory; and on every known N-board the most-forcing square has been a winner (Forcing-Root,
+Section 6.6). The ranked root schedule an N-hunt should follow: **(9, 9)** first; then **(8, 8)**
+(the gap-3 diagonal); then **(8, 9)** (the strongest non-diagonal central neighbour — the n = 6
+data show near-central non-diagonal openings can win); then the remaining diagonals descending,
+interleaved with the deletion-ordered non-diagonal band. Theorem 3 licenses none of this as a
+restriction for a *P-proof* — refuting all 55 root classes remains the obligation if the board is
+a second-player win; only a proven Forcing-Root law would collapse the N-decision to one root.
+Cheap discriminators worth running before any campaign: the refutation margins and `G(R_n)` at
+n = 14 and 16 (does Section 6.6's margin non-monotonicity smooth into a trend?); the Conjecture S
+check at n = 12 (all root options G = 1?); a sizing probe for the τ-fold of the `c*` subtree; and
+a border-first child-ordering A/B at refutation nodes. The confidence is deliberately tempered:
+the refutation-margin puzzle proves the strike's fortunes are not smooth in n, so a second-player
+win at n = 20 cannot be excluded by any invariant tested — and would be the single most
+informative outcome available. Conditional on a first-player win, the same-mechanism reading
+predicts `G(20) = G(18)`. All of this is prediction; none of it is a result.
 
 ### Reproducibility
 
@@ -916,3 +1179,13 @@ standard axiom triple.
 10. On eventually-periodic Grundy sequences for structured graph families (Node-Kayles on trees
     and related families), and structural parameterisations of Node-Kayles (neighbourhood
     diversity / modular-width). Context for Section 6.5's boundedness discussion.
+11. *Winning geometry across the even boards, and the n = 20 candidate map.* Project research
+    note, 2026-07-03 (`notes/2026-07-03-winning-geometry-n20.md`): winning-opening enumeration,
+    root spectra, border ablations, the τ-scar trajectory, refutation margins, the n = 20 root
+    rankings, and the quantified priors behind Section 9's registered prediction.
+12. *CGT laws and tricks: new theorem directions beyond the mirror theory.* Project research
+    note, 2026-07-03 (`notes/2026-07-03-cgt-laws-and-tricks.md`): full proofs of Theorem S1
+    (Closed-Pairing), the Well-Covered Parity Law, the True-Twin Deletion Lemma, the
+    plane-in-torus embedding, and the round cap; the closed-pairing existence census; the torus
+    computation to n = 10; and the correction record for the retracted "non-diagonal openings are
+    N-positions" inference.
