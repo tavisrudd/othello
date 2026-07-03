@@ -1,10 +1,23 @@
-# Mirrors, parity, and one lemma: how placement games get solved
+# Mirrors, parity, and one lemma: how placement games collapse — or where they refuse to
 
-*A standalone primer on the Master Lemma and the three closure mechanisms, written for a
-reader with first-year mathematics (vectors, parity, induction). Everything here is
-rigorous; proof status is marked throughout. Companion research notes:
+*A standalone primer on the Mirror-Obstruction Lemma and the closure mechanisms it feeds,
+written for a reader with first-year mathematics (vectors, parity, induction). Everything
+here is rigorous; proof status is marked throughout. Companion research notes:
 [conjecture theory](2026-07-02-a344227-conjecture-theory.md),
-[implications & extensions](2026-07-02-theory-implications.md).*
+[implications & extensions](2026-07-02-theory-implications.md) (which call this lemma the
+"Master Lemma").*
+
+The Non-Attacking Queens Game was studied by Noon and Van Brummelen, later by Jenrich, and
+its Grundy values appear as OEIS A344227. This note does not introduce the game; it
+isolates a general mirror-obstruction lemma and applies it uniformly to several chess-piece
+placement games.
+
+**What is known vs new here.** Known/classical: the impartial-game recursion, the rooks
+solution, torus transitivity, and the odd-queens first-player win. New — or at least not
+found in the checked literature: the unified Mirror-Obstruction Lemma, the even-queens
+long-diagonal necessary condition, and the kings central-square reduction. (Literature
+checks for the knight and bishop solutions are still queued; they are marked "presumably
+folklore" below.)
 
 ---
 
@@ -77,11 +90,11 @@ restores the symmetry of the placed set. ∎
 So a mirror strategy is a *complete* winning strategy for the second player precisely when
 the board has **no fixed square and no self-mirroring squares** — and where it is not
 complete, its failure points are a short list of specific squares. That list is what the
-Master Lemma computes.
+Mirror-Obstruction Lemma computes.
 
 ---
 
-## 3. The Master Lemma
+## 3. The Mirror-Obstruction Lemma
 
 Describe a piece by its **move-vector set** V: the piece on square `s` attacks square `t`
 if and only if `t − s ∈ V` (as vectors). V is symmetric (`v ∈ V ⟺ −v ∈ V`). For example:
@@ -97,7 +110,7 @@ if and only if `t − s ∈ V` (as vectors). V is symmetric (`v ∈ V ⟺ −v �
 Let `p = ((n−1)/2, (n−1)/2)` be the board's center *point* (a square only when n is odd),
 and note `ρ(s) = 2p − s`.
 
-> **Master Lemma (proven).** The square `s` attacks its own mirror image if and only if
+> **Mirror-Obstruction Lemma (proven).** The square `s` attacks its own mirror image if and only if
 >
 > `ρ(s) − s = 2(p − s) ∈ V.`
 
@@ -121,7 +134,7 @@ one parity check plus the Copying Lemma.
 
 Every knight vector has **one odd and one even coordinate** — look at the list: `(1,2)`,
 `(2,1)`, and their sign changes. A both-odd vector is never a knight move, and neither is a
-both-even one. Conclusion, straight from the Master Lemma:
+both-even one. Conclusion, straight from the Mirror-Obstruction Lemma:
 
 > **On every board, no square attacks its own mirror image with knights.**
 
@@ -204,9 +217,11 @@ move 2 attacks — each starred square reflects to a plussed square):
 A delicious detail: `(1,1)` and `(1,2)` share a **row** — for queens this copy would be an
 illegal suicide, but bishops do not attack along rows. Each piece dies to its own weapon.
 
-For **odd n** the center-steal works again: the center bishop's attack set is exactly the
-two long diagonals, which is exactly the self-mirroring set (Master Lemma: both-even
-vectors in bishop's V are the diagonal ones), so player 1 steals the center and mirrors:
+For **odd n** the center-steal works again: the center bishop's *closed* attack set — its
+two diagonals plus the occupied center square itself (ordinary attack excludes the square a
+piece sits on) — is exactly the two long diagonals, which is exactly the self-mirroring set
+(Mirror-Obstruction Lemma: both-even vectors in bishop's V are the diagonal ones), so
+player 1 steals the center and mirrors:
 G ≥ 1. Computed small values: G(2..5) = 0, 2, 0, 1 — note G(3) = 2: odd bishop values are
 not all 1. Status: proven here (even-n complete); folklore check queued.
 
@@ -262,15 +277,15 @@ survives the central intrusions at n = 4). Odd kings: center steal ⟹ G ≥ 1, 
 
 ### 4.5 Queens: the hard one — a reduction, not a solution
 
-Queens are the union of rook rays and bishop rays, and the Master Lemma (both-odd
+Queens are the union of rook rays and bishop rays, and the Mirror-Obstruction Lemma (both-odd
 coordinates, even n) keeps exactly the bishop-type solutions: `2(p−s) ∥ (1,1)` gives
 `r = c`, and `2(p−s) ∥ (1,−1)` gives `r + c = n−1`. The rook rays contribute nothing
 (`n−1−2c = 0` has no integer solution for even n). So:
 
-> **For even n, the self-mirroring squares are exactly the two long diagonals** (2n−1
-> squares out of n²), and — Theorem 3 — **any first-player win must play a long-diagonal
-> square at some point**. Against any diagonal-free line, the second player mirrors and
-> wins. (Proven.)
+> **For even n, the self-mirroring squares are exactly the two long diagonals**, 2n
+> squares out of n² (the diagonals are disjoint when n is even), and — Theorem 3 —
+> **any first-player win must play a long-diagonal square at some point**. Against any
+> diagonal-free line, the second player mirrors and wins. (Proven.)
 
 Watch the mirror punish a diagonal-free line on 4×4 (`*` = the two long diagonals):
 
@@ -343,7 +358,7 @@ is what the rest of this project is about.
 
 | claim                                                | status                          |
 |------------------------------------------------------|---------------------------------|
-| Copying Lemma; Master Lemma; parity corollary        | proven (elementary, above)      |
+| Copying Lemma; Mirror-Obstruction Lemma; parity corollary        | proven (elementary, above)      |
 | knights: even ⟹ 2nd wins; odd ⟹ 1st wins            | proven here; folklore check due |
 | bishops: even ⟹ G = 0; odd ⟹ G ≥ 1                  | proven here; folklore check due |
 | rooks: G = min(m,n) mod 2                            | proven; classical               |
