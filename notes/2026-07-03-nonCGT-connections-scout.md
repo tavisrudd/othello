@@ -83,6 +83,14 @@ Nowakowski (CGT); N. J. A. Sloane (OEIS).
 
 ## 2. Reflecting/symmetric n-queens = a rigorous form of our mirror-obstruction theory — needs-theory (feasible)
 
+> **DEMOTED by the deep dive ([connections-deep-dive](2026-07-03-connections-deep-dive.md)
+> §2.1): "near-twin" is overstated — their object is a static placement-existence
+> statement on a modified attack geometry, ours a strategy statement on the standard
+> board; no reduction runs either way. The no-reflective-symmetry lemma is classical,
+> not a Dai–Kelly novelty. The real shared substrate is the Slater sum/difference label
+> structure + their absorption/completion technique. Survives as a related-work citation
+> pair + the T3 small-n-closure note (the Kelly contact vehicle).**
+
 **Bridge.** Slater's 1963 problem (pair 1..n with n+1..2n as (i, aᵢ) so all sums aᵢ+i and differences
 aᵢ−i are distinct — a distinct-difference/graceful labelling) is, by Klarner (1967), **equivalent to
 a reflecting n-queens configuration** (queens on a board with a reflecting strip, attacks bounce off

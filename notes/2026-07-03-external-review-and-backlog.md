@@ -49,6 +49,12 @@ potential/scar control.
 3. **Attack D1 before the full Border Battle**: ρ-symmetric even-board position with exactly
    one live diagonal pair has G ≤ 1 — the right scale for inventing the "almost mirror"
    method. (= cgt-laws note Conjecture D1 + its concrete n=6-DAG check.)
+   **DONE + REFUTED (2026-07-03, [almost-mirror](2026-07-03-almost-mirror-method.md)):
+   D1 is FALSE at n = 10 (G = 3 at d = 1, empty scar included); the general one-defect
+   pairing form fails already at 4 vertices
+   ([defective involutions](2026-07-03-defective-involutions.md) §4.4). The redirect:
+   extract the finite repair-oracle vocabulary (Theorem S2's conditional form is proven)
+   + run the certificate-uniformity probe at n = 10/12.**
 4. **Closed-Pairing S1**: supplied pairing = easy verification; FINDING one is the separate
    problem. (Proven 2026-07-03; the n=6/8 empirical non-existence already shows the static
    form is insufficient — the strategy-content upgrade S2 is the open piece.)

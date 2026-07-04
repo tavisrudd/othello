@@ -298,17 +298,23 @@ Exhaustive over all reachable symmetric positions:
 | 8 | 45: **0**          | 46: **1**  | 28: **3**  | 20: 3    | 5: 3     | 1: 3     |
 
 - `d = 0 ⟹ G = 0` is the PROVEN mirror leaf (implications §6.1) — reconfirmed.
-- **Conjecture D1 (TESTED-CONSISTENT, n ≤ 8): `d = 1 ⟹ G ≤ 1`.** Every symmetric
-  position with exactly one live diagonal pair has `G ∈ {0,1}` (99 positions across
-  n = 6, 8; max observed 1).
+- **Conjecture D1 — REFUTED at n = 10 (2026-07-03, later the same day).** The statement
+  `d = 1 ⟹ G ≤ 1` held over all 99 symmetric one-pair positions at n = 6, 8 but fails
+  exhaustively at n = 10: 40 reachable `d = 1` positions have `G ∈ {2, 3}`, including
+  empty-scar/true-twin cases (`Δ = ∅`, G = 3). `d` measures mirror-obstruction, not game
+  value. Full anatomy + the surviving Lemmas A–F and the oracle-conditional Theorem S2:
+  [almost-mirror method](2026-07-03-almost-mirror-method.md). The general pairing form
+  is independently refuted at 4 vertices (diamond, G = 2):
+  [defective involutions](2026-07-03-defective-involutions.md) §4.4.
 - **The linear budget bound `G ≤ d` is REFUTED** at n=8: a `d = 2` symmetric position
   with `G = 3` exists. So "almost-mirror ⟹ G small" is true at scar budget ≤ 1 and
   already false at 2 — the boundedness conjecture C1/C2 cannot be reached by budget
   counting alone. This sharpens where a boundedness proof must work: the first
   interesting case is two live diagonal pairs.
 
-If D1 is proven it is also an engine leaf: at a symmetric one-pair state `(avail, h)`
-with `h ≥ 2`, the mover wins outright (`G(avail) ≤ 1 < h ⟹ G ≠ h`).
+~~If D1 is proven it is also an engine leaf~~ — **DEAD (D1 refuted): do NOT wire in the
+symmetric one-pair `h ≥ 2` leaf**; a `d = 1` position can have `G = 3`, so the leaf
+would return wrong verdicts.
 
 ---
 
@@ -329,13 +335,21 @@ with `h ≥ 2`, the mover wins outright (`G(avail) ≤ 1 < h ⟹ G ≠ h`).
   `A` instantly. Caveat: the outcome solver's value layer measured NO-GO (Tier-C1), but
   the economics differ here — the nimber engine re-probes the same `avail` across
   rounds by design. Worth a gated A/B when the box frees up.
-- **Conditional leaf from D1** (§4.3) if proven; the `h ≥ 1` symmetric-diagonal-free
-  leaf and odd-center root fast path are already queued (implications §6.1–6.2 — cited,
-  not duplicated).
+- ~~Conditional leaf from D1~~ — **DEAD, D1 refuted** (§4.3). The `h ≥ 1`
+  symmetric-diagonal-free leaf (`d = 0 ⟹ G = 0`, PROVEN — still sound) and odd-center
+  root fast path remain queued (implications §6.1–6.2 — cited, not duplicated).
 
 ---
 
 ## 6. The single most promising next theorem
+
+**RESOLVED same day — REFUTED.** The attack below was executed (and extended to a full
+n = 10 DAG) in [almost-mirror method](2026-07-03-almost-mirror-method.md): D1 is FALSE
+at n = 10 (G = 3 at `d = 1`, even with empty scar), and §6's own hedge fired — "a
+counterexample at n = 10 would kill budget-style boundedness for good." The surviving
+theorem shape is the oracle-conditional S2 (proven there, §6): boundedness must be
+purchased per position by an explicit repair oracle, never by a static budget invariant.
+The section is kept as written for the record of why D1 was the right thing to test.
 
 > **Theorem candidate (D1): a ρ-symmetric even-board position with exactly one
 > available diagonal pair has `G ≤ 1`.**

@@ -920,12 +920,17 @@ well-covered property.
 - **Round cap (proven).** `G(position) ≤` the maximum remaining play length, so
   `G(B_n) ≤ α(Q_n) ≤ n`; in particular `G(18) ∈ [1, 18]`, and the ascending-`k` heap-sum driver of
   Section 6.1 never needs rounds `k > n`.
-- **Conjecture D1 (tested-consistent, n ≤ 8).** A ρ-symmetric even-board position with exactly one
-  available diagonal pair has `G ≤ 1`. The linear budget bound `G ≤ d` (d = live diagonal pairs) is
-  already **false** at `d = 2` (an n = 8 symmetric position with `G = 3` exists), so boundedness
-  cannot be reached by budget counting alone; `d = 1` is the first rung that survives all data. If
-  proven, D1 doubles as an engine leaf (at a symmetric one-pair state with heap `h ≥ 2` the mover
-  wins outright).
+- **Small-defect value bounds are false (computed refutation).** The natural conjecture that a
+  ρ-symmetric even-board position with exactly one available diagonal pair has `G ≤ 1` (D1;
+  tested-consistent at n ≤ 8) fails at n = 10: exhaustive enumeration of the reachable game DAG
+  exhibits `d = 1` positions with `G = 2` and `G = 3`, including cases whose diagonal pair is a
+  live true twin with empty scar. The linear budget bound `G ≤ d` already fails at `d = 2` (n = 8,
+  `G = 3`). Live diagonal-pair count therefore measures the *obstruction to the mirror pairing*,
+  not the Grundy value, and no budget-style invariant can bound `G`. What survives is
+  outcome-level: an empty-scar strike child is a P-position, so such positions are first-player
+  wins; and boundedness statements must carry an explicit repair-strategy object (an
+  oracle-conditional pairing theorem is proven in the companion notes) rather than a static
+  position invariant.
 
 ---
 
