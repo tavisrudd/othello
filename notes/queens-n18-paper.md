@@ -1201,8 +1201,8 @@ standard axiom triple.
 
 ## References
 
-1. T. Jenrich. *An optimal algorithm for solving the queens game and a proof that the second
-   player wins for n = 16.* arXiv:1312.5135, 2013/2014.
+1. T. Jenrich. *Successful strategies for a queens placing game on an n x n chess board.*
+   arXiv:1312.5135, 2013/2014.
 2. OEIS Foundation. *A344227: Sprague–Grundy values of the non-attacking queens placement game.*
    The On-Line Encyclopedia of Integer Sequences.
 3. T. J. Schaefer. *On the complexity of some two-person perfect-information games.* Journal of
