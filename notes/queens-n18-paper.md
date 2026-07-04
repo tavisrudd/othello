@@ -176,7 +176,40 @@ nimber engine (Section 6), and is machine-checked in the Lean verification (Sect
   catalogued range (n ≤ 13 for the nimber, the win/loss outcome through n = 16). Section 6 extends
   the nimber sequence itself to n = 16 (and reports the in-flight n = 17).
 - **Schaefer (1978)** established PSPACE-completeness of Node-Kayles, framing why exhaustive
-  search, not a formula, is the tool.
+  search, not a formula, is the tool. The complexity frame has since been refined in a way that
+  matches our result shape exactly: nimber-preserving reductions strictly refine
+  winnability-preserving ones, and Generalized Geography is complete for polynomially-short
+  impartial rulesets under them, while not every PSPACE-complete ruleset is Sprague–Grundy-complete
+  [13]. Computing the nimber is thus harder *in kind* than deciding the outcome — and our game is
+  itself polynomially short (game length ≤ α(Q_n) ≤ n), so it sits inside that completeness class.
+  The n = 18 *outcome* falling (Section 5) while the n = 18 *nimber* is still being computed
+  (Section 6) instantiates the gap.
+- **Nimber sequences of Node-Kayles families.** Grundy sequences of Node-Kayles are known to be
+  eventually periodic on several sparse structured families — paths (Dawson's chess, octal 0.137,
+  period 34), cycles, hypercubes, generalized Petersen graphs, and trees [10]. The queen family is
+  a dense, module-free test case where the analogous periodicity question (the graph counterpart
+  of Guy's nim-sequence question) is open; our extension supplies the terms the question needs.
+- **Parameterized hardness.** Node-Kayles is fixed-parameter tractable by vertex cover,
+  neighbourhood diversity, modular width, and twin cover, and W[1]-hard in the number of turns
+  [14]. The queen graph Q_n simultaneously defeats every one of these parameters — Θ(n)-cliques
+  (rows) blow up treewidth, the vertex cover has size n² − n, and our own measured module
+  statistics show the search tail is essentially module-free (Section 4.6) — so a solver's
+  reliance on transposition and move ordering rather than structural decomposition is forced by
+  the parameter map, and W[1]-hardness in turns says depth-parameterization cannot rescue it.
+- **The same object in statistical mechanics.** Viewed as a long-range hard-core lattice gas, the
+  n-queens system shows **no bulk thermodynamic phase transition** (Monte Carlo to N = 1024 plus a
+  transfer-matrix tensor network, recovering Simkin's counting constant) [15]. This is independent,
+  physics-side evidence complementary to our central structural finding: the hardness is not bulk
+  criticality — the torus game collapses to a parity law while all n-dependent difficulty
+  concentrates at the border (Section 6.7). Rooks correspond to the free-fermion case (dimers on
+  K_{n,n}); queens are the first interacting layer above it.
+- **Static symmetric solutions.** The static analogue of our mirror obstruction is classical: no
+  n-queens *solution* is fixed by any reflection (the symmetry classes are trivial, C₂, C₄ only).
+  Recent work on reflecting configurations — equivalent by Klarner to Slater's problem of pairing
+  1..n with n+1..2n under distinct sums and differences — shows the diagonal sum/difference
+  structure remains an active existence frontier in extremal combinatorics [16]. Our
+  Mirror-Obstruction Lemma (Section 6.4) is the strategic counterpart: the obstruction moves from
+  configurations to pairing strategies and localizes on the two long diagonals.
 - **Sprague (1935), Grundy (1939); Conway,** *On Numbers and Games.* The impartial-game theory
   underlying Sections 2.1 and 6.3.
 
@@ -409,7 +442,10 @@ a disabled flag with its measurement recorded.
   Sprague–Grundy, not the implementation: component nimbers are cutoff-free (every move must be
   refuted) and the value-bearing components are sizes 9–12 (millions of distinct graphs, not
   tabulable). Across the dense layers, positions are overwhelmingly a single component, so the
-  premise rarely fires.
+  premise rarely fires. A companion census of graph *modules* over the search tail found the same
+  emptiness one level down: twin pairs fall from ~4 % of vertices at pc = 13 to ~0 by pc = 18, and
+  size-≥3 modules are entirely absent — the tail is module-free, so modular-decomposition
+  reductions (and the FPT parameters built on them; Section 2.2) have nothing to fire on.
 - **Memo-less `get17`.** A table-free K = 17 evaluator cut nodes −19.4 % but cost +30.7 %
   cycles/node / +5.7 % wall: the `pc = 17` subtree is shallow, so a memoised recurse beats a
   memo-less recompute (the opposite of the deep layers).
@@ -1109,7 +1145,11 @@ n = 18-scale search; closing the residual trusted base by modelling the u128 cod
 (removing the serialization from differential-test-only status) and bridging `win`/`grundy` to a
 blessed `Impartial`/`grundyValue` once the external game-theory library matches the toolchain;
 attacking the heuristic "why n = 18" threshold and the boundedness question (open, with no bound
-inherited from general Node-Kayles); and a resumable, disk-backed transposition tier for n = 20.
+inherited from general Node-Kayles); exporting third-party-checkable certificates for the computed
+nimbers — adjacent work has produced checkable-certificate game solving and an empirical
+verification theorem for chess tablebases, but no proof-assistant-verified nimber table exists in
+the literature we know of, and our Lean layer (Section 7.3) is positioned to close that gap
+[17, 18]; and a resumable, disk-backed transposition tier for n = 20.
 The n = 16 search, already carried below 20 s by cross-root killer replies and kernel
 micro-optimisation (13.43 s; Section 4.5), continues to reward levers a prior audit had called
 terminal — we make no claim that any reported time is a floor.
@@ -1181,9 +1221,10 @@ standard axiom triple.
    (via the "generalisation of Arc-Kayles" line, *International Journal of Game Theory*, 2018;
    arXiv:1709.05219). Cited in Section 6.5 for the standing caveat that no bound on the queen
    family is inherited.
-10. On eventually-periodic Grundy sequences for structured graph families (Node-Kayles on trees
-    and related families), and structural parameterisations of Node-Kayles (neighbourhood
-    diversity / modular-width). Context for Section 6.5's boundedness discussion.
+10. K. Wong et al. *Nimber Sequences of Node-Kayles Games.* Journal of Integer Sequences 23,
+    2020 (paths, lattices, prisms, hypercubes, generalized Petersen families); N. Songsuwan.
+    *Node-Kayles on Trees.* arXiv:2512.24221 (eventual periodicity on regular-tree families).
+    Context for Sections 2.2 and 6.5's periodicity/boundedness discussion.
 11. *Winning geometry across the even boards, and the n = 20 candidate map.* Project research
     note, 2026-07-03 (`notes/2026-07-03-winning-geometry-n20.md`): winning-opening enumeration,
     root spectra, border ablations, the τ-scar trajectory, refutation margins, the n = 20 root
@@ -1194,3 +1235,26 @@ standard axiom triple.
     plane-in-torus embedding, and the round cap; the closed-pairing existence census; the torus
     computation to n = 10; and the correction record for the retracted "non-diagonal openings are
     N-positions" inference.
+13. K. Burke, M. Ferland, S.-H. Teng. *Winning the war by (strategically) losing battles:
+    settling the complexity of Grundy values in undirected geography.* arXiv:2109.05622 /
+    Theoretical Computer Science (nimber-preserving reductions; Generalized Geography is
+    Sprague–Grundy-complete for polynomially-short impartial rulesets; the nimber-vs-outcome
+    separation).
+14. Y. Kobayashi. *On structural parameterizations of Node Kayles.* arXiv:2003.11775;
+    T. Hanaka, H. Ono, K. Yoshiwatari. *Colored Node Kayles* (PSPACE-completeness on planar
+    max-degree-3 graphs; W[1]-hardness in the number of turns; FPT by vertex cover /
+    neighbourhood diversity / twin cover).
+15. Z. Liu, Y. Liao, L. Wang. *Statistical mechanics of the N-queens problem.* arXiv:2605.10326,
+    2026 (no bulk transition; tensor-network counting); M. Simkin. *The number of n-queens
+    configurations.* arXiv:2107.13460 (the counting constant recovered there).
+16. D. A. Klarner. *The problem of reflecting queens.* American Mathematical Monthly 74, 1967;
+    T. Dai, T. Kelly. *On the existence of reflecting n-queens configurations.* Forum of
+    Mathematics, Sigma (arXiv:2407.12742) — existence for all sufficiently large n; the finite
+    small-n gap is open.
+17. A. Pavlov. *Capture-Quiet Decomposition: a verification theorem for chess endgame
+    tablebases.* arXiv:2604.07907, 2026 (empirical validation across three- to six-piece
+    tablebases; not mechanised in a proof assistant).
+18. K. Takizawa. *Semi-strongly solved: certificate-exporting game solving* (6×6 Othello, 7×6
+    Connect Four). arXiv:2411.01029, rev. 2026; I. Shaik et al., QBF strategy validation,
+    SAT 2023. Third-party-checkable certificates without formal verification — the adjacent
+    lane for Section 9's certified-nimbers direction.
