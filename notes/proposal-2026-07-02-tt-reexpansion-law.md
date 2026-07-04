@@ -115,11 +115,17 @@ contention/thermal confounds that make wall times on a busy box garbage.
 | 15   | 891   | 2.73  | 63.4 %     |
 | 12   | 7.1k  | 3.93  | 74.6 %     |
 | 10   | 28k   | 5.79  | 82.7 %     |
+| 8    | 114k  | 8.60  | 88.4 %     |
+| 6    | 456k  | 17.17 | 94.2 %     |
+| 4    | 1.8M  | 27.70 | 96.4 %     |
+| 2    | 7.3M  | 53.39 | 98.1 %     |
 
-Same graceful no-knee shape — but the ceiling has NOT flattened by bits=10 (tiny-bits probe
-in flight): **R∞(12) ≈ 2.45 while R∞(14) ≥ 5.8 and climbing**. The unfold ceiling grows
-super-linearly in n — the quantitative mechanism that turns "graceful degradation at n ≤ 14"
-into the n=18 budget wall. Method note: odd n short-circuits to the center-steal mirror
+Same graceful no-knee shape — and the tiny-bits probe (completed 2026-07-03) shows the
+ceiling is NOT reached even at a 4-slot table: **R∞(12) ≈ 2.45 while R∞(14) ≥ 53, still
+growing ~1.9× per 2 bits removed at the bottom of the sweep**. At bits=2 the TT is doing
+essentially nothing — the W_K dense leaf tables alone bound the unfold at ~53× distinct.
+The unfold ceiling grows super-linearly in n — the quantitative mechanism that turns
+"graceful degradation at n ≤ 14" into the n=18 budget wall. Method note: odd n short-circuits to the center-steal mirror
 strategy (0 search nodes) — the sweep set is even boards only.
 
 **Model reframing forced by the data:** R(ρ) interpolates between R₀(n) (the fully-memoized
