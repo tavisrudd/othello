@@ -119,3 +119,63 @@ certificates a question about bounded defects of a near-perfect pairing.
   computationally, prove a general mirror-obstruction theorem that sharply restricts
   even-board wins, and use the n=18 winning line to identify a border-tempo mechanism that
   explains where the mirror strategy fails and where a future theorem might live."
+
+## Second review (2026-07-03, later): the Codex border overlap-graph results
+
+Verdict: "a major clarification pass — it did not find a small closed-form repair rule,
+but it identified the right invariant hierarchy." The useful invariant is no longer
+parity/endpoint/center-gap/offset; it is **overlap structure among active scar lines and
+their tau-mate lines**: `combined_asym(x,y) = |A(x,y) Δ tau(A(x,y))|` with `A(x,y)` the
+union of the six active line masks.
+
+**Strongest theorem-ready piece = Lemma O4** (active/mate incidence masks; asymmetry =
+xor-support count). It is definition-level exact, not empirical — use it to REPLACE any
+weaker "pairwise overlap might explain it" language.
+
+**B6 is now split into three claims (canonical statuses, use everywhere):**
+
+- **B6a** — exact incidence formula (O4). PROVEN by arithmetic.
+- **B6b** — row/col-kind quotient preserves the asymmetry score. Verified n ≤ 100 (2×
+  compression, zero score ambiguity); THE proof target (= closing Lemma O6).
+- **B6c** — asymmetry minimizers form small structured candidate sets (mean ~14, ~21% of
+  legal replies; exact-family buckets nearly tight, 78 extras all at score delta 4).
+  Verified n ≤ 100; a candidate GENERATOR, not a universal repair theorem.
+
+Do NOT state "B6 gives the repair move." State: "B6 gives a small arithmetic candidate
+set for border repair moves; strategic correctness still requires row/residual context."
+
+**Stop pursuing:** scalar orbit-count/cover/overlap summaries as theorem invariants
+(score-exact on only 7% of rows); cap4/cap2/boolean bucket signatures (spread up to 736 —
+metric scale is essential); any universal `y = f(x)` reply formula (O9: minimizer status
+is row-relative by definition, so no local signature can decide it).
+
+**O6 proof shape (the cleanest low-memory math target):** (1) six active line masks for
+the pair (x,y); (2) their six tau-mates via O1; (3) express |combined_asym| via O4;
+(4) transposition swaps row/col kinds and commutes with tau (= O5); (5) **the gap** —
+show the row/col quotient identifies only patterns whose xor-incidence counts are
+transpose-equivalent (never merges non-transpose patterns with different counts);
+(6) conclude the quotient preserves |combined_asym| for all even n.
+
+**Priority call adopted:** the solver-side telemetry test ("do solver-winning repair
+replies lie among exact asymmetry minimizers? if not, what is their asymmetry rank?")
+is now MORE important than extending the border tables past n=100. Telemetry fields per
+the Codex schema (n, ply, pc, root/parent/opponent move, candidate reply, tau legality,
+border state, combined_asym + rank, full-kind and row/col-quotient edge hashes, line-load
+deltas, child value).
+
+**Canonical model stack (current best):** mirror core + border occupancy ≤ 2 + exact
+active/mate incidence hypergraph + row/col quotient score invariant + asymmetry-rank
+candidate set + residual-state repair oracle.
+
+**Paper phrasing (banked verbatim-adjacent):** "The border-repair geometry admits an
+exact incidence description. For a row-to-column border exchange, the live scar is the
+union of six line masks in the embedded core, and its tau-asymmetry is the xor support
+between these active masks and their tau-mates. Exhaustive enumeration through n ≤ 100
+shows that simple coordinate rules do not determine the asymmetry minimizers. However,
+full line-kind overlap signatures determine the asymmetry score exactly, and quotienting
+row and column kinds preserves the score while giving a nontrivial 2× compression. Thus
+the border repair problem is not governed by a single offset formula; it is governed by
+a small incidence/overlap structure plus row-context-dependent ranking."
+
+**Next mathematical prize:** prove B6b (close O6), then solver evidence that low
+asymmetry rank correlates with actual winning repair moves.
