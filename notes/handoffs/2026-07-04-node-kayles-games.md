@@ -84,6 +84,27 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 
+**HEADLINE:** proved the **cap achievement game on `AG(n,q)` is a second-player win (P) for EVERY
+prime power `q` and every `n`** — subsuming and settling the cap-set (`q=3`) "always P" conjecture,
+so `d=5` and all `d` are resolved with no computation. Ran the whole session under `mi` (intent-based).
+Commits `efedbc5`→`24d33e4` on `main`. Everything below is landed + banked + committed.
+
+- **★★★ Landed (next-step #3): the cap-game theorem, all q.**
+  [`capset-game-theorem`](../2026-07-04-capset-game-theorem.md). Two mirrors by parity of the board
+  `qⁿ`, unified by one **parity lemma** (a σ-symmetric cap meets the mirror's invariant line in an
+  even count; the just-played legal move forces it to 0):
+  - `q` **odd** (board odd, no fpf involution) ⇒ **move-then-mirror** (P0′): P1's opening is a wasted
+    tempo, P2 replies any `b`, mirrors via the point reflection `σ_c`, center `c=(a+b)/2` (midpoint)
+    self-blocks (collinear with the opening pair).
+  - `q` **even/char 2** (board even) ⇒ **whole-board translation mirror** (P0): `τ_v(x)=x+v` IS a fpf
+    involution since `2v=0`.
+  Commits `d774307` (q=3), `624ddb7` (odd q), `a2d487b` (all q + char-2 discovery via AG(2,4)/(2,8)).
+  Verified: brute outcome P for AG(2,{3,4,5,7,8,9}) incl. **non-prime q=9** and char-2 q=4,8; both
+  strategies beat ALL P1 play (`../2026-07-04-{capset-proof,ag-strategy,validate-all,cap-agnq,cap-gf,gf}.py`).
+- **Cap follow-ons (conjectures, banked):** the **projective** cap game `PG(m,q)` is also P in all
+  small cases (PG(1/2/3,2), PG(1/2,3), PG(1,4/5); `../2026-07-04-proj-cap.py`) — but the affine proof
+  does NOT transfer (no translations, board parity varies), so **open**. `F₂ᵏ` sum-free game **=**
+  `PG(k−1,2)` cap game. Commit `24d33e4`.
 - **Landed (next-step #2):** the **game-(a) lemma bundle**
   [`2026-07-04-nodekayles-pairing-lemmas.md`](../2026-07-04-nodekayles-pairing-lemmas.md). Structure:
   master pairing lemma **P0** (closed pairing ⇒ P) stated at full graph generality (reusable for any
