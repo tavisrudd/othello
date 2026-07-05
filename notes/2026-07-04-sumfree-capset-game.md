@@ -86,12 +86,38 @@ negative results, so future effort is not wasted there).**
    definitive.) So no fixed defect bound works: P2 must tolerate an ever-larger asymmetry, and the
    S2 "large mirror + finite repair" schema does **not** apply at any bounded book size.
 
-⇒ the `n≡0 (mod 6)` half is genuinely deep: no pairing, no bounded-defect mirror. A proof needs a
-**different tool** — induction on n (the outcome is 6-periodic, so an `n → n−6` strategy reduction is
-the natural target), a potential-function / strategy-stealing argument, or a link to the
-maximal-sum-free-set structure of Z_n (Diananda–Yap). This is the open frontier of the law; the
-`gcd(n,6)=1` half is done and the `n≡2,3,4 (mod 6)` N-side is first-player-explicit (play `n/2` /
-`n/3`). (Analogue: game (a)'s odd-n deep P-positions, also un-pairable.)
+⇒ the `n≡0 (mod 6)` half is genuinely deep: no pairing, no bounded-defect mirror. It needs a
+**different tool** — the attack vectors below.
+
+### Attack vectors beyond pairing/S2 — one CONFIRMED lever
+
+- **Symmetry is fully dead (both directions closed).** Beyond negation, the only candidate
+  automorphisms are multipliers `x↦ax` with `a²≡1`. For `n=6` and **`n=18` the ONLY such involution
+  is negation itself** (`a²≡1 mod 18` ⇒ `a∈{1,17}`), and negation's defect is unbounded — so no
+  multiplier-reference bounded-defect proof can work uniformly (it dies at n=18). Symmetry-with-repair
+  is closed as a uniform tool.
+
+- **★ Disjunctive-sum DECOMPOSITION — VALID (the confirmed lever).** The sum-free game is a
+  well-behaved disjunctive game: `G(position) = XOR over connected components C of the residual
+  "armed-Schur-hypergraph" of G(subgame on C)`. Components = connectivity classes of the playable set
+  `L` under the couplings: `p+q∈L∪A`, `2p=q`, and `p−q∈A` (the three ways two playable elements can
+  share an armed Schur triple). **Verified with ZERO mismatches over ~70,000 reachable positions,
+  n=12,15,17,18,20,22,24,30** (`2026-07-04-sumfree-decomp.py`). Decomposition is frequent and grows:
+  35%→56%→66% of positions at n=12,18,24 (dense/prime n like 13 never decompose). This is the
+  hypergraph-Node-Kayles decomposition principle, correctly instantiated.
+  - **What it buys:** (1) a much faster solver (compute component nimbers, each on a smaller board);
+    (2) the right frame for the `n≡0 (mod 6)` proof — the P-ness must come from the *component
+    nimber structure* (e.g. components pairing into equal-nimber pairs under negation, XOR→0), which
+    is consistent with the unbounded *element* defect (elements migrate between components while the
+    component multiset stays nimber-balanced). This reduces the open half to a statement about
+    component nimbers, but does not by itself close it.
+
+- **Still open on top of decomposition:** induction `n→n−6` / a divisor reduction (Z₆ₖ has the even
+  subgroup Z₃ₖ), a potential/parity invariant, or the maximal-sum-free-set structure (Diananda–Yap).
+
+So the open frontier is now: **prove `n≡0 (mod 6)` P via the component-nimber structure** the
+decomposition exposes. The `gcd(n,6)=1` half is done; the `n≡2,4 (mod 6)` N-side is proven; only
+`n≡0` (P) and a clean `n≡3` opening remain. (Analogue: game (a)'s odd-n deep P-positions.)
 
 ## Result 2 — cap-set game on F₃ᵈ: second player wins for d=1,2,3
 
