@@ -29,9 +29,12 @@ Node-Kayles on Cay⁺(Z_n,S) — DONE** ([outcome law](notes/2026-07-04-cayley-n
 the law is an ASYMMETRY — P-positions (G=0) are pairing-explained on even n (translation L1 + a
 component-parity reduction `d=gcd(n,S)`), N-positions (G=1) mostly are NOT (residual/halving pairing
 covers only a minority); odd-n P-positions can never be paired (odd |V|). Paley p≡5 mod 8 open
-conjecture sits in the N-side gap. Full sym-S enum to n=20/19, all certs sound. **NEXT SESSION:**
-certify one interval-family C_n^k fixed-k column as eventually periodic (cyclic-power L8), or game (b)
-Schur sum-free (bigger-memory, parked). See the outcome-law note's Next steps.
+conjecture sits in the N-side gap. Full sym-S enum to n=20/19, all certs sound. **Interval family
+C_n^k = octal 0.[1×k][3×k]7** (verified 2 ways): k=1 = Dawson 0.137 (period 34; G(C_n)=1 iff n≡
+{6,10,22,26,30} mod 34); **k≥2 (0.11337, 0.1113337, …) UNBOUNDED nimbers through m=8000, no period —
+open octal games beyond Flammenkamp's ≤3-digit range** (fresh unbounded-Node-Kayles data point,
+lines up with trees). **NEXT SESSION:** write up R0+L1+L2+odd-n-impossibility lemma bundle (the clean
+proven output), or game (b) Schur sum-free (bigger-memory, parked). See the outcome-law note's Next steps.
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.

@@ -101,40 +101,86 @@ have **no affine-pairing certificate**, which is the structural reason it resist
 and needs the character-sum / Weil-closure argument (analytic-note plan step 4). The general sweep
 puts the Paley conjecture in its natural place: the sparse, hard corner of the N-side gap.
 
-## The interval family C_n^k (S = {±1,…,±k}) — the k-th power of a cycle
+## The interval family C_n^k (S = {±1,…,±k}) — the k-th power of a cycle → octal games
 
-Clean 2D table (rows n, cols k; `*` = k>(n−1)/2, i.e. K_n):
+Banked script: `2026-07-04-cayley-path-power.py`. First the coarse table (rows n, cols k;
+`*` = k>(n−1)/2, i.e. K_n):
 
 - **Even n: G = 0 for every k.** Fully explained by L1 — `k < n/2` ⇒ `n/2 ∉ S`. The entire even
   interval family is a P-position by translation pairing.
-- **Odd n: mixed.** `k=1` is the cycle `C_n` (Node-Kayles ≡ removing 3 consecutive → path
-  P_{n−3} = Dawson's chess, octal 0.137, eventually periodic); G(C_n)=1 at n=3,7,11,17,23,27,31,…
-  The endpoint `k=(n−1)/2` is `K_n` ⇒ G=1 (L4, one move clears the board). Each fixed-k column is
-  a finite octal-type game, expected eventually periodic in n (an L8 fixed-width-strip instance on
-  the cyclic power) — a concrete standalone periodicity sub-target.
+- **Odd n: mixed.** Endpoint `k=(n−1)/2` is `K_n` ⇒ G=1 (L4, one move clears the board).
+
+**The exact reduction (proven + verified two ways).** A first move on `C_n^k` deletes `2k+1`
+consecutive vertices → one run `P_{n−2k−1}^k`; a move at position `i` in a length-`m` run deletes
+`[i−k,i+k]` and splits into two independent shorter `P^k` runs `max(0,i−k)` and `max(0,m−1−i−k)`.
+So Node-Kayles on the k-th power of a path/cycle **is the octal game**
+
+```text
+P_n^k  =  0.[1×k][3×k]7      k=1: 0.137 (Dawson's chess) | k=2: 0.11337 | k=3: 0.1113337
+G(C_n^k) = 1  iff  g_path_k(n − 2k − 1) = 0.
+```
+
+Verified two independent ways: the split recursion equals a direct bitmask-Grundy on the actual
+`P_m^k` graph (k=2,3, m≤19, exact match), and equals an independent generic octal-game solver on
+`0.[1×k][3×k]7` (k=1,2,3, m≤400, exact match). The path↔cycle reduction cross-checks against the
+brute circulant engine (k=1..4, n<40, 0 mismatches).
+
+**k=1 — periodic (the classical result recovered).** `g_path_1` has **period 34, preperiod 52**
+(Guy–Smith certified), max value 9. ⇒ `G(C_n^1) = 1` exactly for `n ≡ {6,10,22,26,30} (mod 34)`
+for large `n` (small-n exceptions inside the preperiod: N at n=3,7,11,17,23,27,31). This is
+Dawson's chess, period 34 — a validation, not a new result.
+
+**k ≥ 2 — UNBOUNDED and periodicity OPEN (the real finding; corrects the earlier "expected
+periodic" guess).** `g_path_k` Grundy values **grow without bound** through m=8000 (k=2 reaches
+**228**, k=3 reaches **136**), with **no pure period and no arithmetic period** (saltus) detectable
+for `p < 2000` on the tail `[4000,8000]`. These are 5- and 7-digit octal codes — **beyond the
+≤3-digit range Flammenkamp's octal tables cover**, and octal periodicity is unproven in general
+(Guy's conjecture; even 3-digit octals have dozens of unsettled cases). So the interval family for
+`k ≥ 2` is a **fresh instance of unbounded Node-Kayles nimbers** — it lines up with the trees result
+(unbounded) and contrasts the 3×N clean-diagonal (bounded); it is NOT the quick periodic win first
+hoped for.
+
+**Cycle-outcome consequences (conjectural, from the data):**
+- `k=2` (0.11337): P-positions of the path game **thin out** — zero-gaps grow to 4174 by m=8000 and
+  the P/N indicator shows no period; only odd `n` can be N (even n = G=0 by L1) and those become rare.
+- `k=3` (0.1113337): **no path P-position beyond m=824** in the computed range ⇒ conjecturally
+  `G(C_n^3) = 0` (second player wins) for **all large n** — but uncertifiable while values stay
+  unbounded (a zero could reappear).
 
 ## What is proven vs. computed
 
 - **Proven** (proof-on-write, each with the sketch above): R0 component-parity reduction; L1;
   L2; the odd-n pairing impossibility; the interval-family even-n G=0 (a corollary of L1).
 - **Computed / conjectural:** the pairing-coverage percentages and the P-vs-N asymmetry headline
-  (empirical over the full enumeration to n≤20/19, sound throughout); the interval-family odd-n
-  fixed-k column periodicity (structurally expected, not yet certified).
+  (empirical over the full enumeration to n≤20/19, sound throughout); the `C_n^k` octal
+  identification `0.[1×k][3×k]7` (proven-on-write + verified two ways); the k≥2 unboundedness /
+  no-periodicity (empirical through m=8000, saltus search p<2000); the k=3 "P for all large n"
+  conjecture.
 - **Open (unchanged, now positioned):** the outcome of an arbitrary *connected* circulant has no
   simple closed form (Node-Kayles is PSPACE-complete in general); the value lives in the "gap" and
-  the only clean laws are for structured families (intervals, k-th-power residues / Paley).
+  the only clean laws are for structured families (intervals k=1, k-th-power residues / Paley).
+  **The k≥2 interval octals (0.11337, 0.1113337, …) are genuinely open** — their periodicity is a
+  case of Guy's octal conjecture beyond the catalogued range.
 
 ## Next steps
 
 1. **Write up R0 + L1 + L2 + the odd-n impossibility as a short lemma bundle** — these are clean,
    proven, and reusable across the torus/kings/Petersen programs (they are the abelian-Cayley core
    of the L1/L2 queue in the analytic note, now verified sound to n=20).
-2. **Interval-family periodicity:** certify one fixed-k column (k=2 or 3) as eventually periodic
-   via the boundary-transfer engine (the cyclic-power analog of the 3×N strip work) — a concrete,
-   provable closed form and the cleanest quick win here.
+2. **Interval-family octals (REVISED — periodicity is NOT a quick win).** The k≥2 columns are the
+   octal games `0.[1×k][3×k]7` with unbounded values; certifying periodicity ≡ resolving Guy's
+   conjecture for these codes — out of scope for a probe. The tractable pieces: (a) extend
+   `g_path_2`/`g_path_3` to m~10⁵–10⁶ (cheap C, the O(m²) split recursion) to firm up the
+   unboundedness and search for a large period/saltus; (b) settle the k=3 "P for all large n"
+   conjecture is likewise gated on the same octal question. Bank as: **the interval family is an
+   open-octal-game family, one clean k=1 result + a fresh unbounded-nimber data point.** Verify
+   whether the `0.[1×k][3×k]7` identification is already in the literature (Beaudou–Coupechoux–Dailly
+   "Octal games on graphs"; Guignard–Sopena) before any novelty claim.
 3. **N-side structure:** the pairing certificate is a minority on the N-side; the open question is
    what *does* certify the majority of circulant first-player wins. The Paley Weil-closure argument
    is one answer for one family; a second, non-pairing N-side certificate type (a potential
    function à la Erdős–Selfridge?) is the research-shaped lever flagged in the analytic note.
-4. **Sum-free game (b)** remains parked for a dedicated bigger-memory session (new subset-state
+4. **Write up R0 + L1 + L2 + odd-n impossibility as a lemma bundle** (step 1 above) — the clean,
+   proven, reusable output of this thread.
+5. **Sum-free game (b)** remains parked for a dedicated bigger-memory session (new subset-state
    solver) — do NOT start on the busy box.
