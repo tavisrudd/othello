@@ -94,6 +94,10 @@ if __name__ == "__main__":
         _selftest()
     nvals = []
     for n in range(lo, hi + 1):
+        if n % 2 == 0:
+            print(f"  n={n}: P (even, proven)", flush=True)
+            nvals.append((n, 0))
+            continue
         # outcome-only is much cheaper for larger n
         v = solve(n, grundy=False)
         nvals.append((n, v))
