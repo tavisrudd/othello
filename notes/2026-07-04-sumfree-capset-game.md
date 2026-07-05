@@ -19,23 +19,47 @@ The fast `addable` predicate was cross-checked against a direct `is_sum_free` re
 
 ## Result 1 — sum-free game on Z_n: a NEW sequence with a clean mod-6 outcome law
 
-Grundy(∅), n=1..36:
+Grundy(∅), n=1..44 (multiplier-quotient solver `2026-07-04-improved-sumfree.py`, validated vs the
+brute solver n≤36, ~11× smaller memo):
 
 ```text
-n:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
-G:  0 1 1 2 0 0 0 2 1  1  0  0  0  2  2  3  0  0  0  2  1  3  0  0  0  2  1  2  0  0  0  3  1  1  0  0
+n:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44
+G:  0 1 1 2 0 0 0 2 1  1  0  0  0  2  2  3  0  0  0  2  1  3  0  0  0  2  1  2  0  0  0  3  1  1  0  0  0  1  1  2  0  0  0  2
 ```
 
 - **OEIS: no matches** (`0,1,1,2,0,0,0,2,1,1,0,0,0,2,2,3,0,0,0,2` → "No results"). Genuinely new.
-- **★ Outcome law (conjectured, confirmed n=5..36):** the sum-free game is a **P-position (G=0,
-  second player wins) iff `n ≡ 0, 1, 5 (mod 6)`** — equivalently the first player wins iff
-  `n ≡ 2, 3, 4 (mod 6)`. Eighteen consecutive confirmations, no exception.
+- **★ Outcome law (confirmed n=5..44, 40 consecutive, zero exceptions):** the sum-free game is a
+  **P-position (G=0, second player wins) iff `n ≡ 0, 1, 5 (mod 6)`** — first player wins iff
+  `n ≡ 2, 3, 4 (mod 6)`.
 - **N-side nimbers are irregular** (like Paley: clean outcome, messy internals): `n≡2 mod 6` →
-  {2,2,2,2,3}; `n≡3` → {1,1,2,1,1,1}; `n≡4` → {2,1,3,3,2,1}. No simple period in the *values*, only
-  in the *outcome*.
-- **Tractable & scalable:** memo (distinct reachable positions) is small and grows only ~×1.4/step
-  (n=20→2,728; n=30→79,672; n=36→528,417). Python reaches ~n=42–44; a Rust solver with an
-  affine-symmetry quotient (`x↦ux`, `x↦−x`) reaches far past n=60 — well within the freed 18 GB.
+  {2,2,2,2,3,1,2}; `n≡3` → {1,1,2,1,1,1,1}; `n≡4` → {2,1,3,3,2,1,2}. Period in the *outcome* only.
+- **Tractable & scalable:** quotient memo grows ~×1.35/step (n=30→10,477; n=36→45,814; n=44→351,460;
+  even n larger). Python reaches ~n=48; a Rust solver reaches well past n=60 in the freed 18 GB.
+
+### Proof of the law — the coprime-to-6 half is DONE
+
+The negation mirror `x ↦ −x` (a sum-free-preserving involution) is a valid second-player pairing
+strategy **exactly when `gcd(n,6)=1`** — verified exhaustively over all reachable symmetric positions
+(`2026-07-04-sumfree-proof-probe.py`, n≤25) and proven:
+
+> **Lemma.** For `gcd(n,6)=1`, `G(sum-free game on Z_n) = 0` (second player wins).
+> *Proof.* The responder keeps the built set `A` symmetric (`A=−A`) by answering each first-player
+> move `x` with `−x`. This is always legal: if `A=−A` is sum-free and `A∪{x}` is sum-free, then
+> `A∪{x,−x}` is sum-free. The only new relations to rule out are `x+x=2x∈A∪{x,−x}` (needs `2x∉A`,
+> already forced because `A∪{x}` is sum-free; `2x=−x⟺3x=0` is excluded by `3∤n`; `2x=x⟺x=0`), its
+> negation image, and `x+a=−x` / `a+b=−x` (all excluded by symmetry + `A∪{x}` sum-free). Also `−x≠x`
+> since `2∤n`, and `−x∉A` since `A=−A, x∉A`. So the responder always has a reply; the first player
+> is the one who eventually cannot move ⇒ G=0. ∎
+
+This is the L2-analog for the achievement game — the exact `mod 6 = 1,5` slice.
+
+**Where the mirror breaks (matches the N-positions + the open half):**
+- **`n` even** → fixed point `x=n/2` (the order-2 element) has no mate. For `n≡2,4 (mod 6)` this is
+  an N-position and the first player exploits `n/2`; for **`n≡0 (mod 6)` the position is still P**
+  (empirically) but by a *different* strategy — negation alone fails, so this half needs a repair
+  (S2-style pairing-with-exception). **This is the open half of the law.**
+- **`n≡3 (mod 6)`** (odd, `3∣n`) → break at `x=n/3`: `3x=0 ⇒ x+x=2x=−x`, so the mirror move `−x`
+  collides with `x`. N-position; the first player's opening is `n/3`.
 
 ## Result 2 — cap-set game on F₃ᵈ: second player wins for d=1,2,3
 
@@ -62,14 +86,25 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
   the paper hook the arithmetic-Cayley cluster wanted.
 - It is the one top target the DECISION explicitly gated on RAM, now unblocked.
 
-## Next steps (the scale-up the free box unlocks)
+## Progress + next steps
 
-1. **Rust subset-state solver + affine-symmetry quotient** → sum-free Z_n to n≈60–80: full nimber
-   sequence for **OEIS submission** + firm/extend the mod-6 outcome law.
-2. **Cap-set d=4** (the RAM computation) → test "always P"; then d=5 if d=4 confirms and memory allows.
-3. **Prove the two laws.** mod-6 for Z_n: find the fixed-point-free involution / structural pairing
-   certifying `n≡0,1,5 mod 6` (this session's `whole_graph_paired`/`residual_paired` idea, adapted
-   to the hypergraph). Cap-set "always P": the pairing on F₃ᵈ.
-4. **Definitional variants to log** (each a distinct sequence): strong sum-free (`a≠b`, so `2a∈A`
+**DONE this session:** the coprime-to-6 half of the law is **proven** (negation-mirror lemma above);
+the sequence is computed and validated to n=44 (quotient solver); OEIS confirmed no-match.
+
+**Open / next (the scale-up the free box unlocks):**
+1. **Prove the `n≡0 (mod 6)` half** — the one remaining piece of the outcome law. Negation fixes
+   `n/2`; needs a mirror-with-finite-repair (the project's S2 schema) or a different involution.
+   Cheap to explore: run the game-(a) `residual_paired`-style search for an involution certifying
+   the P-positions at n=6,12,18,24, and look for the repair pattern at `n/2`.
+2. **Rust subset-state solver + multiplier quotient** → sum-free Z_n to n≈60–80: extend the nimber
+   sequence for **OEIS submission** and firm the law further. (Python quotient solver tops out ~n=48.)
+3. **Cap-set d=4** (the RAM computation, running) → test "always P"; d=5 if it confirms + memory allows.
+   Brute has no quotient; if it does not finish, the AGL(4,3)-quotient (Rust) is the way.
+4. **Prove cap-set "always P"** (d=1,2,3 so far) — the pairing on F₃ᵈ (note: `x↦−x` fixes 0 only,
+   but F₃ᵈ has no order-2 translation, so the argument differs from Z_n).
+5. **Definitional variants to log** (each a distinct sequence): strong sum-free (`a≠b`, so `2a∈A`
    allowed); sum-free in `{1..n}` (integers, not cyclic) vs `Z_n`; the `(I+I)∩S` S-sum-free family
    that connects back to game (a).
+
+Banked scripts: `2026-07-04-sumfree-capset-game.py` (brute + cap-set), `2026-07-04-improved-sumfree.py`
+(multiplier-quotient Grundy + outcome), `2026-07-04-sumfree-proof-probe.py` (negation-mirror verifier).
