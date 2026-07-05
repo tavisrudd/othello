@@ -164,9 +164,12 @@ hoped for.
 
 ## Next steps
 
-1. **Write up R0 + L1 + L2 + the odd-n impossibility as a short lemma bundle** — these are clean,
-   proven, and reusable across the torus/kings/Petersen programs (they are the abelian-Cayley core
-   of the L1/L2 queue in the analytic note, now verified sound to n=20).
+1. ~~**Write up R0 + L1 + L2 + the odd-n impossibility as a short lemma bundle**~~ — **DONE**
+   ([nodekayles-pairing-lemmas](2026-07-04-nodekayles-pairing-lemmas.md)): master pairing lemma P0
+   at full graph generality + P0′ move-and-mirror + odd-order impossibility, then the abelian-Cayley
+   specializations R0/L1/L2, all proof-on-write and generalized from `Z_n` to arbitrary finite
+   abelian `Γ` (torus/kings), re-verified with zero violations through `|Γ| ≤ 16` including
+   non-cyclic groups (`2026-07-04-abelian-nodekayles-verify.py`).
 2. **Interval-family octals (REVISED — periodicity is NOT a quick win).** The k≥2 columns are the
    octal games `0.[1×k][3×k]7` with unbounded values; certifying periodicity ≡ resolving Guy's
    conjecture for these codes — out of scope for a probe. The tractable pieces: (a) extend
@@ -180,7 +183,6 @@ hoped for.
    what *does* certify the majority of circulant first-player wins. The Paley Weil-closure argument
    is one answer for one family; a second, non-pairing N-side certificate type (a potential
    function à la Erdős–Selfridge?) is the research-shaped lever flagged in the analytic note.
-4. **Write up R0 + L1 + L2 + odd-n impossibility as a lemma bundle** (step 1 above) — the clean,
-   proven, reusable output of this thread.
+4. ~~Write up R0 + L1 + L2 + odd-n impossibility as a lemma bundle~~ — **DONE** (see step 1).
 5. **Sum-free game (b)** remains parked for a dedicated bigger-memory session (new subset-state
    solver) — do NOT start on the busy box.

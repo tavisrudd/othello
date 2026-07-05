@@ -29,7 +29,11 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 - [x] **Prior art (web-verified):** both games appear-novel; general-position achievement game does
   NOT scoop the cap game; **Impartial SET confirmed a *removal* game** (ours *builds*); neighbours
   cited (Anti-Set, Sieben, Benesh–Ernst, Wong; extremal cap = A090245).
-- [ ] Game (a) lemma bundle write-up (R0 + L1 + L2 + odd-n impossibility) — clean proven core, not yet written.
+- [x] **Game (a) lemma bundle write-up** (R0 + L1 + L2 + odd-n impossibility) — DONE
+  ([nodekayles-pairing-lemmas](../2026-07-04-nodekayles-pairing-lemmas.md)): master pairing lemma
+  P0 (graph-general) + P0′ move-and-mirror + odd-order impossibility, then abelian-Cayley R0/L1/L2,
+  all generalized from `Z_n` to arbitrary finite abelian `Γ` (reusable for torus/kings/Petersen),
+  machine-corroborated with zero violations through `|Γ| ≤ 16` incl. non-cyclic groups.
 - [ ] Cap-set "always P" proof + d=5.
 - [ ] Interval octals k≥2 periodicity decision.
 
@@ -37,7 +41,9 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 
 1. **Submit the sum-free sequence to OEIS** (user action) — package + b-file ready in the draft note.
    Optionally the outcome-indicator companion + the Paley-graph-game sequence.
-2. **Write up the game-(a) lemma bundle** — the reusable abelian-Cayley core (R0/L1/L2/odd-n).
+2. ~~**Write up the game-(a) lemma bundle**~~ — **DONE** 2026-07-04--3
+   ([nodekayles-pairing-lemmas](../2026-07-04-nodekayles-pairing-lemmas.md)). Reusable abelian-Cayley
+   core (R0/L1/L2/odd-n) + graph-general master pairing lemma.
 3. **Cap-set:** d=5 needs a nauty-style canonical labeling (the "restrict + exhaustive-tail" canon
    degrades on near-maximal symmetric caps); then attempt a proof of "always P" (must differ from the
    Z_n mirror — F₃ᵈ has no order-2 element).
@@ -62,3 +68,24 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
   untracked `notes/*.html` queens-report files.
 - **Method notes:** small-memory Python probes ran under `ulimit -Sv ~900MB` while the G(17) run held
   the box; once it freed RAM, the Rust quotient solvers + cap-set AGL quotient became feasible.
+
+## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
+
+- **Landed (next-step #2):** the **game-(a) lemma bundle**
+  [`2026-07-04-nodekayles-pairing-lemmas.md`](../2026-07-04-nodekayles-pairing-lemmas.md). Structure:
+  master pairing lemma **P0** (closed pairing ⇒ P) stated at full graph generality (reusable for any
+  vertex-transitive graph, incl. non-Cayley like Petersen) + **P0′** move-and-mirror (⇒ N) + the
+  odd-order impossibility, then the abelian-Cayley specializations **R0** (index-parity reduction),
+  **L1** (involution-translation pairing, even order), **L2** (negation steal, odd + doubling-closed).
+  All proof-on-write, no load-bearing machine step.
+- **Generalization beyond `Z_n`:** the outcome-law note proved R0/L1/L2 for circulants; I lifted them
+  to **arbitrary finite abelian `Γ`** (so they cover the torus `Z_m×Z_n`, king/rook graphs) and
+  machine-corroborated with a brute Grundy solver — **zero certificate violations through `|Γ| ≤ 16`
+  including non-cyclic groups** (`Z_3×Z_3`, `Z_2×Z_4`, `Z_2×Z_2×Z_2`, `Z_4×Z_4`, …). Script banked:
+  `../2026-07-04-abelian-nodekayles-verify.py`.
+- **Cross-refs updated:** outcome-law note next-steps #1/#4 marked DONE; Progress checkbox + next-step
+  #2 here checked off.
+- **Ran under `mi`** (intent-based); low-stakes reversible write-up on the handoff's own lever
+  sequence. Left `iso_flat.rs` + `notes/*.html` untouched (flagged not-this-thread by session --2).
+- **Next open (unchanged priority):** #1 OEIS submission (USER), then cap-set d=5 / "always P" proof,
+  interval octals k≥2, sum-free definitional variants.

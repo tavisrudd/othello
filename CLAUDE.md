@@ -45,9 +45,12 @@ O3=pair {n/3,2n/3} (3|n). 0 obstr ⇒ 2nd player mirrors (P); 1 ⇒ 1st player o
 Also: the game DECOMPOSES as a disjunctive sum over armed-Schur-hypergraph components (verified). En
 route CORRECTED a wrong "S2 dead" call (was measuring negation defect; translation mirror has zero
 defect). **OEIS submission DRAFT prepared** ([draft](notes/2026-07-04-sumfree-oeis-draft.md) + b-file)
-— **user submits, do NOT submit.** **NEXT:** cap-set game G(F₃ᵈ) d=4 (AGL(4,3)-quotient solver — IN
-PROGRESS, background agent; d=1,2,3=P, "always P?" open); formalize the 2 augmented-mirror cases; then
-write up R0+L1+L2 lemma bundle for game (a).
+— **user submits, do NOT submit.** cap-set game G(F₃ᵈ)=P for d=1..4 (AGL(4,3)-quotient solver, DONE);
+augmented-mirror cases closed by Lemma 4 (mod-6 proof fully symbolic). **Game-(a) lemma bundle WRITTEN**
+([pairing-lemmas](notes/2026-07-04-nodekayles-pairing-lemmas.md)): graph-general master pairing lemma +
+abelian-Cayley R0/L1/L2 + odd-order impossibility, generalized past `Z_n` to any finite abelian `Γ`
+(torus/kings), machine-checked to `|Γ|≤16`. **NEXT:** #1 OEIS submission (USER); then cap-set d=5 /
+"always P" proof; interval octals k≥2 periodicity; sum-free definitional variants.
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
