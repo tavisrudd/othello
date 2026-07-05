@@ -91,8 +91,8 @@ Commits `efedbc5`→`ffddf42` on `main`. Everything below is landed + banked + c
 
 **Results index (session --3), by strength:**
 1. **THEOREM** — cap game on `AG(n,q)` = P, all `n`, all prime powers `q` (both parities). ★★★
-2. **THEOREM** — 3-AP-free (cyclic cap) game on `Z_n`: **even `n` = P** (τ_{n/2} mirror); overall P
-   except sporadic `{1,7,19,47,49}`. New sequence.
+2. **THEOREM** — 3-AP-free (cyclic cap) game: P on **any even-order abelian group** (τ_t mirror,
+   `t` order 2); on `Z_n` overall P except sporadic `{1,7,19,47,49}`. New sequence.
 3. **Lemma bundle** — graph-general pairing certificates P0/P0′ + abelian-Cayley R0/L1/L2 + odd-order
    impossibility (proof-on-write, generalized past `Z_n`, machine-checked `|Γ|≤16`).
 4. **Data + correction** — interval octals `0.[1×k][3×k]7` to m=2·10⁶: no period p≤60000; k=3 ≈m^0.66,
@@ -169,8 +169,8 @@ and degrades to sporadic exceptions over `Z_n`.
 - **★ 3-AP-free (cyclic cap) game on Z_n — the cleanest new variant**
   ([ap-free-game](../2026-07-04-ap-free-game.md)). The proper cyclic analog of the cap game
   (cap = no 3 collinear = no 3-AP). **P for every n through 55 except the sporadic `{1,7,19,47,49}`**
-  (all odd; irregular — 47,49 adjacent, 49=7²; not centered-hexagonal — 37 is P). **Even n ⇒ P is
-  PROVEN** (τ_{n/2} translation mirror;
+  (all odd; irregular — 47,49 adjacent, 49=7²; not centered-hexagonal — 37 is P). **Even-order
+  abelian ⇒ P is PROVEN** (τ_t translation mirror, `t` order 2 — generalizes even-n `Z_n`;
   the 4∣n gap closes because x+n/4∈A would make x illegal via {x+n/4,x,x+3n/4}). Odd n: mostly P but
   no uniform certificate (midpoint reflection works only n=3,5,9,15; 7,19,47 genuinely N). **Isolates
   why the cap theorem is clean:** its center needs 3c=0 (every c in char p; only {0,n/3,2n/3} in Z_n),
