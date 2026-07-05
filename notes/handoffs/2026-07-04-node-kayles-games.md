@@ -154,11 +154,22 @@ game reduces to **`F₃ᵇ=N` + the `Z₂`-flip**. Script `../2026-07-05-sumfree
   `GL(4,3)` min-image (BSGS/partition-backtrack), pure-Python monomial symmetry insufficient. `F₃ᵇ=N`
   verified b≤3.
 
-**Next:** (1) **build a BSGS/nauty-style GL(n,3) minimal-image canonicalizer** (Rust) to resolve
-`F₃⁴`/`F₃⁵` — the concrete lever for `F₃ᵇ=N`; (2) prove the socle reduction (still meets the
-interference wall, but minimizes the core to elementary `(Z₂)^{≤1}×(Z₃)^b`); (3) a bespoke
-first-player strategy for `F₃ᵇ` (no shortcut exists — must be hand-built). Then OEIS submission
-(USER); projective `PG(n,q)` cap; interval octals.
+**★★ THEOREM `F₃ⁿ = N` for all `n` — PROVEN (move-then-mirror).** Reverse-engineered from the
+solver's `F₃³` strategy (every reply `= −(x₀+y)`): P1 opens center `o`, then answers each `y` with
+the **affine point-reflection `σ(y)=−o−y`** (unique fixed point `o`, already played ⇒ P1 keeps the
+one-move lead). Lemma (σ-mirror sum-clean on `F₃ⁿ`) proved algebraically — every new violation
+reduces to a violation of `A∪{y}`; the crux `2y=w` sub-case dies by `3y=0` (char 3 essential, matches
+why `σ` fails off pure `F₃ⁿ`). Machine-checked 0 violations exhaustive `n≤3` + 1.39M sampled `n=4`
+(`../2026-07-05-sumfree-mirror-check.py`). **Resolves `F₃⁴=N`** (which the search solver
+compute-walled) by construction. This closes the crux of the socle reduction's `s₂=0` side (with the
+socle reduction: `s₂=0 ⟹ N ⟺ r₃≥1`); and it is the bespoke first-player strategy the lit search said
+was the *only* route (strategy-stealing invalid). Standalone-novel (lit-confirmed unpublished).
+
+**Next:** (1) `Z₂×(Z₃)ᵇ = P` (verified `b≤3`) — likely a companion move-then-mirror on the residual;
+(2) prove the socle reduction (still meets the interference wall on the *reduction*, though its two
+endpoints `F₃ⁿ=N`/`s₂≥2=P` are now theorems); optional: a BSGS GL(n,3) canonicalizer is no longer
+needed for `F₃ᵇ` (proved) but still useful for `Z₂×Z₃ᵇ`. Then OEIS submission (USER); projective
+`PG(n,q)` cap; interval octals.
 
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 

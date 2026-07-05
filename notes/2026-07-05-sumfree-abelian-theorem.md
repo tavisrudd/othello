@@ -2,14 +2,19 @@
 
 **Date:** 2026-07-05. Upgrades the [abelian conjecture](2026-07-04-sumfree-variants.md) (verified on
 ~25 groups) to a **theorem** for all finite abelian `G` **except** the thin slice `2-rank ≤ 1 and
-3-rank ≥ 2`, which is confirmed computationally and reduced to a single lemma. Companion to the
-proven cyclic [mod-6 theorem](2026-07-04-sumfree-game-theorem.md) (whose Lemmas 1–4 this reuses).
+3-rank ≥ 2`. Companion to the proven cyclic [mod-6 theorem](2026-07-04-sumfree-game-theorem.md).
+**Headline results (this note):** (1) `s₂≥2 ⟹ P` for every `G`; (2) the **socle reduction** — the
+outcome depends only on `(2-rank, 3-rank)`, collapsing everything to the elementary socle
+`(Z₂)^{s₂}×(Z₃)^{r₃}` (conjecture, solver-verified); (3) **★★ THEOREM `F₃ⁿ = N` for all `n`** by a
+move-then-mirror strategy — closing the crux `s₂=0` family. The only remaining open pieces are the
+socle-reduction *proof* and `Z₂×(Z₃)ᵇ = P`.
 Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
 `2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`,
 `2026-07-05-sumfree-rho.py` (ρ-mirror + {2,3}-Sylow reduction),
 `2026-07-05-sumfree-redu.py` (outcome-reduction check),
 `2026-07-05-sumfree-socle.py` (socle reduction — outcome depends only on `(s₂,r₃)`),
-`2026-07-05-sumfree-fast.py` (GL(n,3)-symmetry-reduced solver for the socle games).
+`2026-07-05-sumfree-fast.py` (GL(n,3)-symmetry-reduced solver for the socle games),
+`2026-07-05-sumfree-mirror-check.py` (verifies the `F₃ⁿ=N` move-then-mirror theorem).
 
 ## The game and the criterion
 
@@ -242,16 +247,61 @@ Verified for general `G` (even/odd, with 6′- and higher-prime-power parts):
 
 **It collapses the whole open core to TWO small elementary families.** With `s₂≥2 ⟹ P` and `r₃≤1`
 already proven, the socle reduction leaves exactly:
-- **`(Z₃)^b`, `b ≥ 2`** — this *is* the `F₃ᵇ` sum-free game (conjectured **N**; solver: `b=2,3` N).
-- **`Z₂ × (Z₃)^b`, `b ≥ 2`** — conjectured **P** (solver: `b=2` P). Via the `s₂=1` reduction this is
-  "`{m}` is N"; note the `Z₂` factor *flips* the 3-group outcome (`Z₃ᵇ` = N but `Z₂×Z₃ᵇ` = P).
+- **`(Z₃)^b`** — this *is* the `F₃ᵇ` sum-free game. **NOW A THEOREM: `F₃ⁿ = N` for all `n`** (next
+  section — move-then-mirror).
+- **`Z₂ × (Z₃)^b`, `b ≥ 2`** — conjectured **P** (solver: `b≤3` P). Via the `s₂=1` reduction this is
+  "`{m}` is N"; the `Z₂` factor *flips* the 3-group outcome (`Z₃ᵇ` = N but `Z₂×Z₃ᵇ` = P). Likely a
+  companion move-then-mirror (open remains).
 
-So, modulo the socle reduction, **the entire abelian sum-free game reduces to `F₃ᵇ = N` plus the
-`Z₂`-flip** — one clean conjecture on elementary 3-groups. The S2 exception book is then a *finite*
-certificate on the socle; the socle games are small and directly attackable (the `b≥4` cases just
-exceed the naive solver — a Rust/`F₃`-tuned solver would extend the evidence). The socle reduction's
-*proof* still meets the interference wall, but it minimizes the irreducible core to elementary
-`(Z₂)^{≤1} × (Z₃)^b` — the sharpest statement of what remains open.
+So, modulo the socle reduction, **the entire abelian sum-free game reduces to `F₃ᵇ = N` (now proven)
+plus the `Z₂`-flip** — the irreducible open core is now just `Z₂×(Z₃)ᵇ = P` and the socle-reduction
+proof itself.
+
+### ★★ THEOREM — `F₃ⁿ = N` (first player wins) for all `n`, by move-then-mirror
+
+The crux conjecture is now a theorem. The winning move was reverse-engineered from the solver's `F₃³`
+strategy (every reply is `−(x₀+y)`), then proved. Prior-art note: the lit search confirmed
+strategy-stealing is **invalid** for this game, so a bespoke first-player strategy was the *only*
+route — this is it.
+
+**Strategy.** Player 1 opens any `o ∈ F₃ⁿ`, `o ≠ 0`. Thereafter it answers each opponent move `y`
+with **`σ(y) = −o − y`** — the affine point-reflection through center `o` (`σ(o)=o`, `σ²=id`, and `o`
+is its *only* fixed point since `σ(y)=y ⟺ 2y=−o ⟺ y=o`). This is the cap-game move-then-mirror shape,
+but now the center is *played* (it is a legal sum-free singleton), giving P1 the one-move lead.
+
+**Lemma (σ-mirror is sum-clean on `F₃ⁿ`).** Let `A ⊆ F₃ⁿ` be σ-symmetric (`σA=A`), sum-free, with
+`o ∈ A`; let `y ∉ A`, `y ≠ o`, and `A∪{y}` sum-free. Then `A∪{y, σy}` is sum-free.
+
+*Proof.* Put `w = σy = −o−y`; then `w ≠ y` and `w ∉ A` (else `σw=y∈A`). As `A∪{y}` is sum-free,
+every new violation involves `w`. Using `A=σA` (so `a∈A ⟹ σa=−o−a∈A`) and `o∈A`:
+- **`w = p+q`, `p,q ∈ A∪{y}`.** If `p,q∈A`: from `p+q=−o−y` get `y+p = −o−q = σq ∈ A`, a violation
+  of `A∪{y}`. If `p∈A, q=y`: `p+y=w` gives `p = y−o`, so `p+o=y` with `p,o∈A`, a violation. If
+  `p=q=y`: `2y=w` forces `3y=−o`, i.e. `o=0` — excluded.
+- **`p+w = r`, `p ∈ A∪{y}`, `r ∈ A∪{y,w}`.** If `p,r∈A`: from `p+w=r` get `y = p+σr ∈ A+A`, i.e.
+  `p+σr=y`, a violation. If `p∈A, r=y`: `p+w=y` gives `p=o−y`, so `y+p=o` with `p,o∈A`, a violation.
+  If `p=y, r∈A`: `y+w=r` gives `r=−o=2o`, but `o∈A ⟹ 2o∉A` (`o+o=2o`) — contradiction. The `p=w`
+  (`2w`) cases give `2w=o+y`, and `o+y∈A` would be a violation `o+y=(o+y)` of `A∪{y}`, so `o+y∉A`;
+  the rest force `o=0` or `w=0`. All excluded.
+
+No new violation survives. ∎ *(Char 3 is essential: the `2y=w` sub-case is killed only by `3y=0`; on
+a group with higher-order elements `σ` breaks — matching the non-pure-`F₃ⁿ` violations in `probe2`.)*
+
+**Theorem.** `F₃ⁿ` is an N-position for all `n ≥ 1`.
+
+*Proof.* `{o}` is sum-free and σ-symmetric. By the Lemma each P1 reply keeps the position σ-symmetric
+and sum-free. `σ`'s only fixed point `o` is already in `A`, so every opponent move `y` (necessarily
+`≠o`) has a distinct legal reply `σy ∉ A`; P1 is never forced onto `o` (would need `y=o`). Hence P1
+always has a reply, so the opponent is always the one who eventually cannot move — P1 makes the last
+move ⇒ N. ∎
+
+**Verification.** Lemma cleanness machine-checked: **0 violations**, exhaustive for `n=2,3` and over
+**1.39 M** σ-symmetric positions for `n=4` (`sumfree-mirror-check`, banked); `σ` has exactly one
+fixed point each; the solver's independently-found `F₃³` replies are exactly `σ(y)=−(o+y)`. This
+also **resolves `F₃⁴ = N`** — which the search solver compute-walled — by a constructive strategy.
+
+**Consequence.** With the socle reduction, `s₂=0 ⟹ outcome = outcome((Z₃)^{r₃})`, so `s₂=0` is now
+`N ⟺ r₃≥1 ⟺ τ₃=1` = the criterion (modulo the socle reduction). `F₃ⁿ=N` is also a clean standalone
+theorem — novel (lit-confirmed unpublished; strategy-stealing provably can't yield it).
 
 ## Prior art, maximal-set structure, and the compute frontier (2026-07-05 lit + solver sweep)
 
