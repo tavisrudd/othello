@@ -63,6 +63,41 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
    sub-O(m²) split) or accept as an open octal family.
 5. **Definitional variants** of the sum-free game (strong sum-free a≠b; {1..n} vs Z_n; F₂ⁿ/F₃ⁿ).
 
+## Handoff Note — session 2026-07-05--2 (`2d451ba6-8ddd-40c9-9def-aa1aaecd68a8`)
+
+**HEADLINE: `Z₂×F₃ᵇ = P` for all `b≥1` is now a THEOREM** — the last open endpoint of the abelian
+socle family. So **the entire finite-abelian sum-free classification is proven modulo ONLY the socle
+reduction** (both its endpoints `F₃ⁿ=N` and `Z₂×F₃ᵇ=P` are now theorems). Ran under `mi`. Full proof +
+verification: [`2026-07-05-sumfree-zmf3b-theorem.md`](../2026-07-05-sumfree-zmf3b-theorem.md).
+
+- **The strategy is ChatGPT's** (delivered mid-session): from `{m}` (`m=(1,0)`) reply `p=(0,a)` (any
+  `a≠0`), then mirror through the affine involution `σ(x)=(m+p)−x`, i.e. `σ(ε,v)=(1−ε,a−v)`. It
+  *pairs* the obstruction `m` with the reply `p` instead of trying to *fix* `m` (which is what every
+  earlier single-involution mover-mirror did — all failed on the m-coset O₃ doubling). `σ` flips `Z₂`
+  ⟹ **fixed-point-free** (dodges O₂); it's an affine `V`-reflection whose `+a` defect is repaired by a
+  **char-3 label flip** (dodges O₃, exactly like the `F₃ⁿ` proof); `k=m+p` **self-blocks**. It is the
+  "strictly-matched fpf involution" the lit search flagged as the canonical P-tool.
+- **My contribution:** (i) the clean **`(★)` reframing** — after `m`, the residual is a `Z₂`-labelled
+  game on `F₃ᵇ` where sum-free ⟺ *every additive triple `v+w=u` has odd label-sum `ε_v+ε_w+ε_u=1`*
+  (unifies all the ad-hoc constraints the mover-mirror attempts juggled); (ii) **exhaustive
+  verification** (no-symmetry brute `b≤2`; exhaustive local-invariant sweep over ALL σ-sym sum-free
+  positions `b≤3` = 0 lemma violations = complete proof for those `b`; adversarial all-lines; sampled
+  `b=4,5,6`); (iii) the **dimension-uniform proof of the pair-completion lemma** — every triple
+  containing the reply reduces, via one M-image `d↦a−d`, to a triple in `D∪{y}` whose (★)-legality
+  gives the needed label condition; the doubling cases close by an *always-present* triple
+  "(D-slot)`+y=`its M-mate" that pins `ℓ=0` (the char-3 analogue of "the center self-blocks").
+- **Codex flagged a solver bug** (relevant): `2026-07-05-sumfree-fast.py` reduces under full `Aut(G)`,
+  sound only when `Aut(G)` is transitive on legal first moves — true for pure `F₃ⁿ`, **false for `Z₈`,
+  `Z₁₀`, `Z₂×F₃ᵇ`** (wrong outcomes). Every check in the new note is brute or σ-pairing-only, immune.
+  Codex is building the corrected sound solver.
+- **Scripts banked:** `2026-07-05-sigma-verify.py`, `-sigma-t3.py`, `-sigma-residual-check.py`,
+  `-sigma-sampled.py`. Notes updated: the dedicated theorem note + the abelian-theorem note (both
+  socle endpoints now theorems) + the Codex assignment (primary closed → socle reduction is next).
+- **Next:** (1) the **socle reduction** is now the sole open piece — Codex's new primary (prove
+  `𝒢(G)=𝒢(G[6])`; the σ-mirror lesson = "pair the obstruction, don't fix it, mirror through an affine
+  center that flips a torsion coord" may attack the non-elementary 3-groups `Z₉,Z₂₇,…=N` and the
+  coprime collapse). (2) corrected solver + `Z₂×F₃⁴`/`F₃⁴,⁵` as canonicalizer checks. (3) OEIS (USER).
+
 ## Handoff Note — session 2026-07-04--2 (`f78c95d1-3c01-49d4-9f4b-fec58d939cd0`)
 
 - **Landed:** everything in Progress above. Headline = the sum-free mod-6 theorem (fully proven) +

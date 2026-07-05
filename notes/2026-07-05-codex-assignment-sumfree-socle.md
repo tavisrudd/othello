@@ -1,5 +1,21 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
+> **STATUS UPDATE 2026-07-05 — the PRIMARY target is CLOSED.** `Z₂×F₃ᵇ = P` for all `b≥1` is **PROVEN**
+> (ChatGPT's σ-mirror: reply `p=(0,a)`, mirror through `k=m+p` via `σ(ε,v)=(1−ε,a−v)` — fixed-point-free
+> because it flips `Z₂`, char-3 label-flip repairs the affine defect, `k=m+p` self-blocks). Exhaustively
+> verified `b≤3`, dimension-uniform proof for all `b`:
+> [`2026-07-05-sumfree-zmf3b-theorem.md`](2026-07-05-sumfree-zmf3b-theorem.md). **The `#4` hyperplane
+> induction (§4 below) is no longer needed — superseded.** Both socle endpoints (`F₃ⁿ=N`,
+> `Z₂×F₃ᵇ=P`) are now theorems, so **the SOCLE REDUCTION (§2 SECONDARY, and Task 4) is the sole
+> remaining open piece of the whole abelian classification — it is now Codex's PRIMARY target.**
+>
+> **Also do first: the sound solver.** A root-transitivity bug was found — the existing
+> `2026-07-05-sumfree-fast.py` reduces under the full `Aut(G)`, which is only valid when `Aut(G)` is
+> transitive on legal first moves (true for pure `F₃ⁿ`, **false for `Z₈`, `Z₁₀`, and `Z₂×F₃ᵇ`**, giving
+> wrong outcomes there). Build the corrected solver (orbit reps only where a transitivity proof or an
+> actual orbit computation justifies it), re-validate the mod-6 law + the two proven socle theorems,
+> then use it as the oracle for the socle-reduction attack below.
+
 **Written:** 2026-07-05. Self-contained — you need no other context. Companion notes (read if useful,
 but this file is complete): `notes/2026-07-05-sumfree-abelian-theorem.md` (all proofs + data) and its
 banked scripts `notes/2026-07-05-sumfree-*.py`. **Do not modify the git repo's source; work in a

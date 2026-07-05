@@ -6,8 +6,14 @@
 **Headline results (this note):** (1) `s₂≥2 ⟹ P` for every `G`; (2) the **socle reduction** — the
 outcome depends only on `(2-rank, 3-rank)`, collapsing everything to the elementary socle
 `(Z₂)^{s₂}×(Z₃)^{r₃}` (conjecture, solver-verified); (3) **★★ THEOREM `F₃ⁿ = N` for all `n`** by a
-move-then-mirror strategy — closing the crux `s₂=0` family. The only remaining open pieces are the
-socle-reduction *proof* and `Z₂×(Z₃)ᵇ = P`.
+move-then-mirror strategy — closing the crux `s₂=0` family.
+
+> **UPDATE 2026-07-05 — both socle endpoints are now THEOREMS.** `Z₂×(Z₃)ᵇ = P` for all `b≥1` is
+> **PROVEN** via ChatGPT's σ-mirror (play `p=(0,a)`, mirror through `k=m+p`; the char-3 label-flip
+> repairs the affine reflection's defect) — full proof + verification in the dedicated note
+> [`2026-07-05-sumfree-zmf3b-theorem.md`](2026-07-05-sumfree-zmf3b-theorem.md). Together with `F₃ⁿ=N`,
+> **the ONLY remaining open piece of the entire abelian classification is the socle-reduction proof
+> itself** (both its endpoints are now settled).
 Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
 `2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`,
 `2026-07-05-sumfree-rho.py` (ρ-mirror + {2,3}-Sylow reduction),
@@ -250,22 +256,19 @@ Verified for general `G` (even/odd, with 6′- and higher-prime-power parts):
 already proven, the socle reduction leaves exactly:
 - **`(Z₃)^b`** — this *is* the `F₃ᵇ` sum-free game. **NOW A THEOREM: `F₃ⁿ = N` for all `n`** (next
   section — move-then-mirror).
-- **`Z₂ × (Z₃)^b`, `b ≥ 2`** — conjectured **P** (solver: `b≤3` P). Via the **proven** `s₂=1`
-  reduction this is exactly "`{m}` is N" (mover wins from the order-2 singleton); the `Z₂` factor
-  *flips* the 3-group outcome (`Z₃ᵇ` = N but `Z₂×Z₃ᵇ` = P). **Mover-mirror attempts FAIL for `b≥2`**
-  (`sumfree-zm-mover.py`): glide `γ(ε,h)=(ε+1,−h)` (a `γy+γy=y` doubling on the `(0,·)` coset),
-  negation-on-`H`, and `ψ` (`(0,h)↦(0,2o−h)`, `(1,h)↦(1,−h)`, fixing `m` and the played center) all
-  break on the **m-coset** via an O₃ doubling. The obstruction is structural: **fixing `m` forces an
-  origin-centered `H`-reflection (= negation, which carries the O₃ doubling); any off-origin center
-  moves `m`.** So unlike the pure `F₃ⁿ` case (clean move-then-mirror) and the `r₃=1` case (Lemma 4),
-  `{m}` N for `r₃≥2` has **no clean single-involution mover-mirror** — the last genuinely open piece,
-  likely needing a two-phase / inductive argument. (The solver's extracted `{m}`-strategy is
-  correspondingly *not* a single involution — it F₃-reflects the `(0,·)` coset but handles the
-  m-coset ad hoc.)
+- **`Z₂ × (Z₃)^b`, `b ≥ 1` — NOW A THEOREM: `= P`** (full proof + verification in
+  [`2026-07-05-sumfree-zmf3b-theorem.md`](2026-07-05-sumfree-zmf3b-theorem.md)). Via the proven
+  `s₂=1` reduction this is "`{m}` is N"; the `Z₂` factor *flips* the 3-group outcome (`Z₃ᵇ`=N but
+  `Z₂×Z₃ᵇ`=P). The single-involution *fixing*-`m` mover-mirrors all FAIL for `b≥2`
+  (`sumfree-zm-mover.py`: glide, negation-on-`H`, `ψ` — each an O₃ doubling on the m-coset), because
+  fixing `m` forces an origin-centered reflection carrying the O₃ doubling. **The fix (ChatGPT):**
+  don't fix `m` — *pair* it. Mover replies `p=(0,a)`, completing the `σ`-pair `{m,p}`, then mirrors
+  through the affine involution `σ(x)=(m+p)−x = (1−ε, a−v)`. `σ` flips `Z₂` ⟹ fixed-point-free (dodges
+  O₂); it is an affine `V`-reflection whose `+a` defect is repaired by the **char-3 label flip**
+  (dodges O₃, as in the `F₃ⁿ` proof); and `k=m+p` self-blocks. Proven for all `b`.
 
-So, modulo the socle reduction, **the entire abelian sum-free game reduces to `F₃ᵇ = N` (now proven)
-plus the `Z₂`-flip** — the irreducible open core is now just `Z₂×(Z₃)ᵇ = P` and the socle-reduction
-proof itself.
+So the socle reduction now has **both endpoints as theorems** (`F₃ᵇ=N` and `Z₂×Z₃ᵇ=P`); the
+irreducible open core is **only the socle-reduction proof itself.**
 
 ### ★★ THEOREM — `F₃ⁿ = N` (first player wins) for all `n`, by move-then-mirror
 
@@ -368,10 +371,10 @@ is not enough.
 | `s₂ ≥ 2`, any `r₃`  | P | **PROVEN** | spare-order-2 translation mirror `τ_v`, `v≠x` |
 | `s₂=1, τ₃=0`        | N | **PROVEN** | reduction: `{m}` P via negation mirror (no O₃) |
 | `s₂=1, τ₃=1, r₃=1`  | P | **PROVEN** | reduction: `{m}` N via reply `t` + Lemma 4 |
-| `s₂=1, τ₃=1, r₃≥2`  | P | open (conf.) | Lemma R: `{m}` is N |
+| `s₂=1, τ₃=1, r₃≥2`  | P | **socle case PROVEN** (`Z₂×F₃ᵇ`); general via socle reduction | σ-mirror through `k=m+p` |
 | `s₂=0, τ₃=0`        | P | **PROVEN** | negation mirror from `∅` |
 | `s₂=0, τ₃=1, r₃=1`  | N | **PROVEN** | open `t` + Lemma 4 |
-| `s₂=0, τ₃=1, r₃≥2`  | N | open (conf.) | Lemma R: `∅` is N |
+| `s₂=0, τ₃=1, r₃≥2`  | N | **socle case PROVEN** (`F₃ᵇ=N`); general via socle reduction | σ move-then-mirror |
 
 ## Remarks
 
