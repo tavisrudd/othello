@@ -33,12 +33,25 @@ exceptions of the Paley game (a).
 
 ## Mechanism — clean on the even side, complex on the odd
 
-- **Even `n` ⇒ P (translation mirror, strategy-validated).** P2 mirrors each P1 move `x` with
-  `x + n/2` (`τ_{n/2}`, a fixed-point-free involution and AP-automorphism). An exhaustive check
-  confirms **this mirror beats every P1 line of play for all even `n ≤ 24`, including every `4 ∣ n`**
-  (`2026-07-04-ap-strategy.py`) — the reflection-line parity that makes the cap-game mirror work
-  carries over. (A short hand-proof that the mirror never fails is not yet written, but the strategy
-  is machine-verified and consistent with all even `n ≤ 46` being P.)
+- **Even `n` ⇒ P (translation mirror) — PROVEN.**
+
+  > **Theorem.** For even `n`, the 3-AP-free game on `Z_n` is a second-player win.
+  > *Proof.* Let `m = n/2`. `τ(x) = x + m` is a fixed-point-free involution (`2m ≡ 0`, `m ≠ 0`) and
+  > an AP-automorphism (translations preserve APs). P2 keeps the board `A` `τ`-symmetric (`A = A+m`)
+  > and AP-free, replying `τ(x)` to each legal P1 move `x`; then `x' := x+m ∉ A`, `≠ x`. `A ∪ {x, x'}`
+  > is AP-free — any new 3-AP involves `x'`:
+  > - **two `A`-points + `x'`:** `{x', s, t}`, `s,t∈A`; applying `τ` gives a 3-AP `{x, s+m, t+m} ⊆
+  >   A∪{x}` (`τ`-symmetry), contradicting `A∪{x}` AP-free.
+  > - **`x, x', s∈A`:** if `x` is the middle, `s = 2x−x' = x−m = x' ∉ A`; if `x'` middle, `s = 2x'−x
+  >   = x ∉ A` (`2m≡0`); if `s` middle, `2(s−x) = m`. For `n ≡ 2 (mod 4)`, `m` is odd and `2(s−x)=m`
+  >   has **no** solution. For `4 ∣ n`, `s ∈ {x+n/4, x+3n/4}`; but `x+n/4 ∈ A ⟺ x+3n/4 ∈ A`
+  >   (`τ`-symmetry), and then `{x+n/4, x, x+3n/4}` is a 3-AP with middle `x` and **both endpoints in
+  >   `A`**, so `x` would be illegal — contradiction. So no such `s`.
+  >
+  > Hence P2 always has a legal reply, makes the last move, and wins. ∎
+
+  Machine-checked: the `τ_{n/2}` mirror beats every P1 line of play for all even `n ≤ 24` (incl. every
+  `4∣n`) (`2026-07-04-ap-strategy.py`), consistent with all even `n ≤ 46` being P.
 - **Odd `n` ⇒ mostly P, but no single mechanism.** The cap-game move-then-mirror (open, reply,
   reflect through the midpoint center `c=(a+b)/2`, which self-blocks since `{a,c,b}` is a 3-AP)
   refutes the opening **only for `n = 3,5,9,15`**. For `n = 11,13,17,21,23` the game is still P but
@@ -63,8 +76,7 @@ on `Z_n`, a *different* relation `a+b+c=0`, which is irregular with no law at al
 
 - **New OEIS-absent sequence** (nimbers above); the exception set `{1,7,19,47,…}` is a candidate
   sub-sequence with no known formula.
-- **Even `n` ⇒ P** — winning strategy identified (`τ_{n/2}` mirror), machine-verified `n ≤ 24`; a
-  hand-proof of "the mirror never fails" is the clean next step (likely a parity-of-AP-completions
-  argument on the `4∣n` case).
-- **Odd `n`** — no clean law; `{7,19,47}` are N and even the P-values lack a uniform certificate.
-  Extending the exception set (Z_n brute is `O`-heavy past n≈50) and identifying a formula is open.
+- **Even `n` ⇒ P — PROVEN** (τ_{n/2} translation mirror, above). Clean sub-theorem.
+- **Odd `n`** — no clean law; `{7,19,47}` are N and even the odd P-values lack a uniform certificate
+  (the midpoint reflection works only for `n=3,5,9,15`). Extending the exception set (Z_n brute is
+  heavy past n≈50) and finding a formula for `{1,7,19,47,…}` is open.
