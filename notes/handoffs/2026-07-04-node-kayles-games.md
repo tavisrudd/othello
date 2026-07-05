@@ -97,7 +97,10 @@ Commits `efedbc5`→`ffddf42` on `main`. Everything below is landed + banked + c
    impossibility (proof-on-write, generalized past `Z_n`, machine-checked `|Γ|≤16`).
 4. **Data + correction** — interval octals `0.[1×k][3×k]7` to m=2·10⁶: no period p≤60000; k=3 ≈m^0.66,
    k=2 ~log; corrected the k=3 last-zero (824→827062).
-5. **New OEIS-absent sequences / conjectures** — sum-free variants (`F₂ᵏ`=P, `F₃ᵏ`=N, Z_n-strong,
+5. **★ Conjecture (clean, verified ~25 groups)** — the sum-free mod-6 law **generalizes to all finite
+   abelian `G`**: P iff 2-rank ≥ 2, or (2-rank ≤ 1 and 2-rank matches 3-torsion-presence). Reproduces
+   mod-6 for cyclic. Candidate companion to the `Z_n` sum-free theorem.
+6. **New OEIS-absent sequences / conjectures** — sum-free variants (`F₂ᵏ`=P, `F₃ᵏ`=N, Z_n-strong,
    Schur, zero-sum, interval-AP), projective cap game (P in small cases). `F₂ᵏ` = `PG(k−1,2)` cap.
 6. **Negative (banked)** — info-theory fishing: no theorem bridge (game value ∉ Strassen/Zuiddam
    spectrum).
@@ -165,7 +168,9 @@ and degrades to sporadic exceptions over `Z_n`.
   Vector-space split: **`F₂ᵏ`=P (k≥2), `F₃ᵏ`=N (k≥1)** — both conjectural, neither has a clean
   proof (parity of maximal sets forces only k≤3/k≤2; no mirror: F₃'s negation is broken everywhere by
   `2(−x)=x`, F₂'s char-2 has no fpf linear involution). Nice contrast to the cap game (same F₃ᵏ, but
-  `a+b+c=0` → P vs `a+b=c` → N). Scripts banked.
+  `a+b+c=0` → P vs `a+b=c` → N). **★ Also found: the mod-6 law GENERALIZES to all finite abelian `G`**
+  — clean criterion (P iff 2-rank≥2, or 2-rank≤1 matching 3-torsion-presence), zero mismatches on ~25
+  groups, a candidate companion theorem to the `Z_n` result. Scripts banked.
 - **★ 3-AP-free (cyclic cap) game on Z_n — the cleanest new variant**
   ([ap-free-game](../2026-07-04-ap-free-game.md)). The proper cyclic analog of the cap game
   (cap = no 3 collinear = no 3-AP). **P for every n through 55 except the sporadic `{1,7,19,47,49}`**
