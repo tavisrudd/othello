@@ -72,10 +72,14 @@ with projective lines `{a, b, a+b}` (3 points). So "no `a+b=c`" = "no 3 collinea
 no whole-board involution exists; a projective "always P" would need a move-then-mirror with a
 self-blocking center, which does not drop out as cleanly as the affine `σ_c` (open).
 
-## The CYCLIC cap game (zero-sum triples on Z_n) — no clean law (contrast to F₃ᵈ)
+## Zero-sum triples on Z_n (`a+b+c=0`) — no clean law
 
-Forbidding `a+b+c=0` (three *distinct*) on `Z_n` is the cyclic analog of the cap game (same relation,
-cyclic group instead of `F₃ᵈ`). Grundy(∅), n=1..21 (`2026-07-04-zerosum-zn.py`, OEIS-absent):
+(The *geometric* cyclic cap analog is the **3-AP-free game** `a+c=2b`, which is mostly-P with sporadic
+exceptions — see [ap-free-game](2026-07-04-ap-free-game.md). This section is the **different** relation
+`a+b+c=0`, which over `Z_n` is NOT the same as AP-free — they coincide only in char 3.)
+
+Forbidding `a+b+c=0` (three *distinct*) on `Z_n`. Grundy(∅), n=1..21 (`2026-07-04-zerosum-zn.py`,
+OEIS-absent):
 
 ```text
 n:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
