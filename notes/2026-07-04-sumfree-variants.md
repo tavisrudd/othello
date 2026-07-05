@@ -63,6 +63,15 @@ reflection `σ_c` is an automorphism, → P for all q); sum-free forbids `a+b=c`
 `2(−x)=x`, → N). Same group, different hypergraph, opposite outcome — a clean illustration that the
 outcome is a property of the *relation*, not just the group.
 
+**`F₂ᵏ` sum-free = the PROJECTIVE cap game `PG(k−1, 2)`.** Over `F₂`, `a+b=c ⟺ a+b+c=0`, and the
+nonzero vectors of `F₂ᵏ` are exactly the points of `PG(k−1, 2)` (one vector per projective point),
+with projective lines `{a, b, a+b}` (3 points). So "no `a+b=c`" = "no 3 collinear projectively" — the
+`F₂ᵏ` sum-free game **is** the cap game on `PG(k−1, 2)`. Hence `F₂ᵏ = P` (k=2,3,4) is the statement
+`PG(1/2/3, 2)` cap game `= P`, tying this conjecture to the projective cap game (the flagged
+`PG(n,q)` follow-on). Note `|PG(m,2)| = 2^{m+1}−1` is **odd**, so — like the odd-`q` affine case —
+no whole-board involution exists; a projective "always P" would need a move-then-mirror with a
+self-blocking center, which does not drop out as cleanly as the affine `σ_c` (open).
+
 ## Status / open
 
 - **New OEIS-absent sequences:** `Z_n` strong and `{1..n}` Schur (banked above). Extending them and

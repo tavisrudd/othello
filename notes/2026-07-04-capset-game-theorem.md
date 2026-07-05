@@ -108,9 +108,13 @@ outcome is uniformly P**. Higher dimension / larger field makes the game *easier
 - **Not the extremal cap problem.** This is the *game outcome*, orthogonal to *maximum cap size*
   (arcs/caps in finite geometry; Ellenberg–Gijswijt / FunSearch for `q = 3`). The theorem says nothing
   about cap sizes; the game's terminals are inclusion-*maximal* caps.
-- **Projective analogue (open).** The cap game on `PG(n, q)` has a different point-reflection /
-  translation structure (no affine translations; the relevant group is `PGL`), so it is a genuine
-  separate question — the natural next target.
+- **Projective analogue — conjecturally also always P, proof open.** The cap game on `PG(m, q)`
+  (points = 1-dim subspaces; lines = `q+1` points; cap = no 3 collinear) computes to **P in every
+  small case**: `PG(1/2/3, 2)` (the last two = Fano and beyond), `PG(1/2, 3)`, `PG(1, 4)`, `PG(1, 5)`
+  (`2026-07-04-proj-cap.py`). Note `PG(m, 2)` cap game = the `F₂^{m+1}` sum-free game (a+b=c ⟺
+  a+b+c=0 over F₂). But the affine proof does **not** transfer: `PG` has no translations, and the
+  board size `(q^{m+1}−1)/(q−1)` has no uniform parity, so neither mirror drops out — a projective
+  "always P" needs a genuinely different certificate (harmonic-homology involution?). Open.
 - **`k-cap` / higher-degree variants (open).** "No `t` collinear" for `t > 3`, or "no affine plane" /
   higher-flat achievement games, are not covered by this argument (the mirror can create a longer
   forbidden flat); each is a fresh problem.
