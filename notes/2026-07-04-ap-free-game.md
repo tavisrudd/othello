@@ -69,6 +69,13 @@ exception), which rules out any smooth/arithmetic pattern and the loose `A143128
 
 ## Why this matters — it isolates what makes the cap theorem clean
 
+**The two clean P-theorems together.** The 3-AP-free achievement game on an abelian group `G` is a
+second-player win in two provable regimes, by two mirrors: (i) `|G|` **even** → translation mirror
+`τ_t` (`t` order 2), *this note*; (ii) `G = F_qⁿ` (elementary abelian, any prime power `q`) →
+reflection/translation mirror = **the [cap theorem](2026-07-04-capset-game-theorem.md)** (since cap =
+3-AP-free on `F_qⁿ`). The uncovered middle — odd-order `G` that is *not* elementary abelian (e.g.
+`Z_n` odd, `Z_9`) — is "mostly P with sporadic exceptions" (`{7,19,47,49}` for `Z_n`).
+
 The cap game is **uniformly** P on `AG(n,q)` because the reflection center `c=(a+b)/2` satisfies the
 self-blocking identity `3c=0` **for every `c`** in characteristic `p` (the whole line collapses to
 the 3 relevant points, killing the extra AP-completions). Over `Z_n`, `3c=0` holds only at
