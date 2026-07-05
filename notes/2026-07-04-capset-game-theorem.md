@@ -1,108 +1,121 @@
-# The cap-set achievement game on F₃ᵈ — the "always P" theorem
+# The cap achievement game on AG(n,q) — the "always P" theorem (all odd q)
 
-**Date:** 2026-07-04. Clean write-up of the result whose conjecture was raised in
-[sumfree-capset-game](2026-07-04-sumfree-capset-game.md) (Result 2, verified d=1..4 by computer). The
-theorem below **proves it for all d**, so it also settles d=5 and beyond without the heavy
-canonicalization the computation needed. Uses the move-then-mirror pattern (P0′) of the
-[Node-Kayles pairing lemmas](2026-07-04-nodekayles-pairing-lemmas.md), instantiated on a hypergraph.
+**Date:** 2026-07-04. The conjecture raised in
+[sumfree-capset-game](2026-07-04-sumfree-capset-game.md) (Result 2, verified d=1..4 by an AGL(4,3)
+solver) is here a **theorem** — and it generalizes well beyond the cap-set case `q=3`: the game is a
+second-player win on `AG(n, q)` for **every odd prime power `q`**. In particular d=5 and all larger
+`F₃` dimensions are settled with no computation. Uses the move-then-mirror pattern (P0′) of the
+[Node-Kayles pairing lemmas](2026-07-04-nodekayles-pairing-lemmas.md), instantiated on the affine
+line hypergraph.
 
 ## The game
 
-Fix `d ≥ 1`. Two players alternately build a **cap** `A ⊆ F₃ᵈ` starting from `A = ∅`: a move adds a
-point `x ∉ A` such that `A ∪ {x}` is still a cap. A **cap** is a set containing no three distinct
-collinear points; three distinct points `a, b, c` are collinear **iff `a + b + c = 0`**, and any two
-distinct points `a, b` lie on a unique line whose third point is `−(a + b)`. Normal play: the player
-who cannot move (the current cap is inclusion-maximal) loses. This is impartial hypergraph
-Node-Kayles on the affine-line 3-uniform hypergraph of `F₃ᵈ`. Let `G(d)` be the Sprague–Grundy value
-of `∅`; the game is a second-player win iff `G(d) = 0`.
+Fix a dimension `n ≥ 1` and an odd prime power `q`. Two players alternately build a **cap**
+`A ⊆ AG(n, q) = F_qⁿ` starting from `A = ∅`: a move adds a point `x ∉ A` keeping `A` a cap, where a
+**cap** is a set with **no three distinct collinear points**. (Three distinct points `a, b, c` are
+collinear iff they lie on a common affine line; over `F_q` a line has `q` points. For `q = 3` a line
+is `{a, b, −(a+b)}`, so "no 3 collinear" = "no full line" — the classical **cap set** in `F₃ⁿ`.)
+Normal play: the player who cannot move (the cap is inclusion-maximal) loses. This is impartial
+hypergraph Node-Kayles on the collinear-triple hypergraph of `AG(n, q)`. Let `G(n, q)` be the
+Sprague–Grundy value of `∅`; second player wins iff `G(n, q) = 0`.
 
 ## The theorem
 
-> **Theorem.** For every `d ≥ 1`, the cap-set achievement game on `F₃ᵈ` is a **second-player win**:
-> `G(d) = 0`. (In particular d = 5 and all larger d, resolving the "always P" conjecture.)
+> **Theorem.** For every `n ≥ 1` and every **odd** prime power `q`, the cap achievement game on
+> `AG(n, q)` is a **second-player win**: `G(n, q) = 0`.
+>
+> **Cap-set corollary (`q = 3`).** `G(F₃ᵈ) = 0` for all `d` — the "always P" conjecture, settling
+> d = 5 and beyond with no computation.
 
 ## The tool: affine point reflection
 
-For a center `c ∈ F₃ᵈ`, the **point reflection** `σ_c(x) = 2c − x` is an affine automorphism of
-`F₃ᵈ` (it preserves lines, hence caps), an **involution** (`σ_c(σ_c(x)) = x`), with the **single
-fixed point `c`**. For `x ≠ c` the triple `{c, x, σ_c(x)}` is a **line**:
-`c + x + σ_c(x) = c + x + (2c − x) = 3c = 0`. (Negation `x ↦ −x = σ_0` is the special case `c = 0`.)
-
-The crucial F₃ arithmetic: since `−2 ≡ 1 (mod 3)`, if `c = −(a + b)` then `2c = a + b`, so
-`σ_c(a) = b` and `σ_c(b) = a` — reflection through the third point of a line **swaps the other two**.
+Over `F_q` with `q` odd, the **point reflection** `σ_c(x) = 2c − x` is an affine automorphism (it
+preserves lines, hence caps), an **involution** (`σ_c² = id`), with the **single fixed point `c`**
+(as `2` is invertible). For any line `ℓ` through `c`, `σ_c` maps `ℓ` onto itself, fixing only `c`
+(it reflects `ℓ` about `c`). The **midpoint** `c = (a + b)/2` of two distinct points exists (`2`
+invertible) and is collinear with `a, b`. (For `q = 3`, `(a+b)/2 = −(a+b)`, the third point of the
+line `{a,b}`.)
 
 ## Proof
 
-We show every opening move leaves an **N-position**; then `∅`, having no P-position among its
-options, is a P-position, so `G(d) = 0`.
+We show every opening move leaves an **N-position**; then `∅`, with no P-position among its options,
+is a P-position, so `G(n, q) = 0`.
 
-P1 opens with a point `a`. P2 replies with **any** point `b ≠ a` (one exists, `|F₃ᵈ| = 3ᵈ ≥ 3`). Let
-`c = −(a + b)` be the third point of the opening line `ℓ = {a, b, c}`. Two immediate facts:
+P1 opens with a point `a`. P2 replies with **any** point `b ≠ a`. Let `c = (a + b)/2`, the midpoint.
 
-- **`c` is dead for the rest of the game.** `a, b` are on the board and stay there, so adding `c`
-  would complete the line `ℓ` — `c` is forbidden from now on.
-- **`{a, b}` is `σ_c`-symmetric** (`σ_c` swaps `a, b`, by the arithmetic above) and `c ∉ {a, b}`.
+- **`c` is dead for the rest of the game.** `{a, b, c}` are three distinct collinear points, and
+  `a, b` stay on the board, so adding `c` would create three collinear — `c` is forbidden henceforth.
+- **`{a, b}` is `σ_c`-symmetric** (`σ_c(a) = 2c − a = b`, using `2c = a + b`) with `c ∉ {a, b}`.
 
-P2 now plays the **mirror strategy**: answer each P1 move `y` with `σ_c(y)`. Maintain the invariant
+P2 plays the **mirror strategy**: answer each P1 move `y` with `σ_c(y)`. Maintain the invariant
 
 > *(∗) the board `A` is a `σ_c`-symmetric cap with `c ∉ A`.*
 
 `(∗)` holds after `{a, b}`. Assume it holds and P1 plays a legal `y` (`A ∪ {y}` a cap, `y ∉ A`, and
-`y ≠ c` since `c` is forbidden). Then P2's reply `σ_c(y)` is legal and restores `(∗)`:
+`y ≠ c` since `c` is forbidden). Let `ℓ` be the line through `y` and `c` — equivalently through `y`
+and `σ_c(y) = 2c − y` (both on the reflection axis through `c`).
 
-- `σ_c(y) ∉ A` (as `σ_c(A) = A`, `y ∉ A`); `σ_c(y) ≠ y` and `≠ c` (both from `y ≠ c`).
-- `A ∪ {y, σ_c(y)}` is a cap. Any forbidden line must involve `σ_c(y)`:
-  - a line `{σ_c(y), p, q}` with `p, q ∈ A` maps under the automorphism `σ_c` to a line
-    `{y, σ_c(p), σ_c(q)} ⊆ A ∪ {y}` (as `σ_c(A) = A`) — impossible, `A ∪ {y}` is a cap;
-  - a line `{σ_c(y), y, p}` with `p ∈ A` forces `σ_c(y) + y + p = 2c + p = 0`, i.e. `p = c ∉ A` —
-    impossible;
-  - two new points cannot form a line without a third board point (the cases above).
-- The added points `y, σ_c(y)` are `≠ c`, so `c ∉ A` persists.
+**Parity lemma (the crux — this is where general `q` works, not just `q = 3`).** `A ∩ ℓ = ∅`.
+*Proof.* `ℓ` is `σ_c`-invariant, so `A ∩ ℓ` is `σ_c`-invariant; `σ_c` has no fixed point in `A`
+(`c ∉ A`), so `A ∩ ℓ` splits into 2-cycles ⇒ **`|A ∩ ℓ|` is even**. But `A ∪ {y}` is a cap and
+`y ∈ ℓ`, so at most two points of `A ∪ {y}` lie on `ℓ` ⇒ `|A ∩ ℓ| ≤ 1`. Even and `≤ 1` ⇒
+`|A ∩ ℓ| = 0`. ∎ *(For `q = 3`, `ℓ = {y, c, σ_c(y)}` has only `c` as a possible `A`-point and
+`c ∉ A`, so this is automatic — the general lemma reduces to the cap-set case.)*
 
-Hence P2 always has a legal reply after any P1 move. The game is finite, so P1 is the first unable to
-move: **P2 makes the last move and wins.** Every opening `{a}` is an N-position ⇒ `∅` is a
-P-position ⇒ `G(d) = 0`. ∎
+Now `A ∪ {y, σ_c(y)}` is a cap. `σ_c(y) ∉ A` (as `σ_c(A) = A`, `y ∉ A`); `σ_c(y) ≠ y` and `≠ c`
+(both from `y ≠ c`). Any forbidden collinear triple must involve `σ_c(y)`:
+
+- `{σ_c(y), p, r}` with `p, r ∈ A` collinear maps under the automorphism `σ_c` to a collinear triple
+  `{y, σ_c(p), σ_c(r)} ⊆ A ∪ {y}` (as `σ_c(A) = A`) — impossible, `A ∪ {y}` is a cap;
+- `{σ_c(y), y, p}` with `p ∈ A` collinear forces `p` onto the line through `σ_c(y)` and `y`, i.e.
+  `p ∈ A ∩ ℓ = ∅` — impossible;
+- no triple uses only the two new points.
+
+So `A ∪ {y, σ_c(y)}` is a cap and `(∗)` is restored (`c` is still absent, as `y, σ_c(y) ≠ c`). P2
+always has a legal reply; the game is finite; P1 is first unable to move ⇒ **P2 makes the last move
+and wins.** Every opening `{a}` is an N-position ⇒ `∅` is a P-position ⇒ `G(n, q) = 0`. ∎
 
 ## Why the odd-order obstruction is dodged
 
-`|F₃ᵈ| = 3ᵈ` is **odd**, so `F₃ᵈ` admits **no fixed-point-free involution** — a *whole-board*
-pairing certificate (Lemma P0 of the pairing bundle) is impossible, which is what the working note
-flagged as the barrier. The theorem does not need one: P1's opening is a **wasted tempo** that lets
-P2 place a mirror pair `{a, b}` whose reflection center `c` **self-blocks** (it is the third point of
-the opening line), reducing the rest to a clean fixed-point-free mirror `σ_c` on the **even** set
-`F₃ᵈ ∖ {c}`. This is exactly the **move-then-mirror corollary P0′** of the
-[pairing lemmas](2026-07-04-nodekayles-pairing-lemmas.md), in the hypergraph setting. Because
-`AGL(d, 3)` is **2-transitive** on `F₃ᵈ`, every ordered opening pair `(a, b)` is equivalent, so the
-single strategy covers all openings — there is no residue case-split.
+`|AG(n, q)| = qⁿ` is **odd** (q odd), so there is **no fixed-point-free involution** on the whole
+board — a *whole-board* pairing (Lemma P0 of the pairing bundle) is impossible, which the working
+note flagged as the barrier. None is needed: P1's opening is a **wasted tempo** that lets P2 place a
+mirror pair whose reflection center `c` **self-blocks** (it is the midpoint of the opening pair,
+collinear with it), reducing the rest to a fixed-point-free mirror `σ_c` on the **even** set
+`AG(n, q) ∖ {c}` — the **move-then-mirror corollary P0′** in the hypergraph setting. Because
+`AGL(n, q)` is **2-transitive**, every ordered opening pair `(a, b)` is equivalent, so one strategy
+covers all openings — no residue case-split.
 
 ## Contrast with the Z_n sum-free game
 
 The [Z_n sum-free game](2026-07-04-sumfree-game-theorem.md) uses the *same* reflection idea but its
-outcome is a nontrivial **mod-6 law**, because there the mirror has residue-dependent obstructions
-(the fixed point `n/2`, the collision pair `{n/3, 2n/3}`) that need not lie on the opening move and
-must be counted. In `F₃ᵈ` the affine 2-transitivity forces the single reflection fixed point onto the
-opening line, where it self-blocks, so **no obstruction survives and the outcome is uniformly P**. The
-cap game is "easier" precisely because affine symmetry is richer than cyclic symmetry — the opposite
-of the intuition that the higher-dimensional game should be harder.
+outcome is a nontrivial **mod-6 law**, because its mirror has residue-dependent obstructions (the
+fixed point `n/2`, the collision pair `{n/3, 2n/3}`) that need not lie on the opening move and must
+be counted. Over `AG(n, q)` the affine 2-transitivity forces the single reflection fixed point onto
+the opening line, where it self-blocks, so **no obstruction survives and the outcome is uniformly P**,
+for every odd `q`. The cap game is "easier" precisely because affine symmetry is richer than cyclic
+symmetry — the opposite of the intuition that higher-dimensional / larger-`q` games should be harder.
 
 ## Verification status
 
-- **Proved above, uniform in `d`** — no machine step is load-bearing.
-- **Corroboration.** A brute Grundy solver gives `G(1) = G(2) = G(3) = 0`; a direct simulation of the
-  P2 mirror strategy confirms **P2 wins against every P1 line of play** for d = 1, 2, 3 — i.e. the
-  *strategy itself*, not just the outcome, is validated (over all openings, all P1 replies). The prior
-  AGL(4,3) quotient solver independently gave `G(4) = 0`. Script: `2026-07-04-capset-proof.py`.
+- **Proved above, uniform in `n` and odd `q`** — no machine step is load-bearing.
+- **Corroboration.** Brute Grundy gives `G = 0` for `AG(2,3), AG(3,3), AG(1/2, 5), AG(1/2, 7)`
+  (`2026-07-04-cap-agnq.py`); a direct simulation of the P2 mirror strategy confirms **P2 wins
+  against every P1 line of play** for `AG(2,3), AG(2,5), AG(2,7), AG(3,3)` — the *strategy itself*,
+  not just the outcome (`2026-07-04-ag-strategy.py`, `2026-07-04-capset-proof.py`). The prior AGL(4,3)
+  quotient solver independently gave `G(F₃⁴) = 0`.
 
 ## Remarks
 
-- **Settles d = 5 (and all d).** The heavy `d = 5` canonicalization (nauty-style labeling) the working
-  note queued is now **unnecessary as a decision** — the theorem gives `G(5) = 0` directly. A machine
-  `d = 5` solve would be corroboration only.
-- **Not the extremal cap-set problem.** As in the working note: this is the *game outcome*, orthogonal
-  to the *maximum cap size* (Ellenberg–Gijswijt / FunSearch). The theorem says nothing about cap sizes;
-  the game's terminals are inclusion-*maximal* caps.
-- **Generalization (open).** The argument uses only: (i) lines are 3-element with `a+b+c=0`; (ii)
-  point reflection `σ_c` is a cap automorphism whose fixed point lies on every line through it; (iii)
-  the ground set has a legal opening. It should extend to the cap game on `F₃ⁿ`-like affine geometries
-  `AG(n, 3)` verbatim, and invites the analogous question for `AG(n, q)`, `q > 3` (where "line" has
-  `q` points and the reflection structure differs — a natural next target).
+- **Settles the cap-set `d = 5` (and all `d`).** The heavy nauty-style `d = 5` canonicalization the
+  working note queued is **unnecessary as a decision** — `G(F₃⁵) = 0` follows from the theorem.
+- **Boundary: `q` even fails the tool.** In characteristic 2, `σ_c(x) = 2c − x = −x = x`, i.e. the
+  point reflection collapses to the identity and the midpoint `(a+b)/2` does not exist — the proof
+  genuinely needs `q` odd. Whether the cap game on `AG(n, 2ᵏ)` is P is **open** (a natural next probe;
+  note `AG(n, 2)` caps are just "no 3 collinear" = affinely independent-ish sets, a different flavor).
+- **Not the extremal cap problem.** This is the *game outcome*, orthogonal to *maximum cap size*
+  (arcs/caps in finite geometry; Ellenberg–Gijswijt / FunSearch for `q = 3`). The theorem says nothing
+  about cap sizes; the game's terminals are inclusion-*maximal* caps.
+- **Projective analogue (open).** The same reflection tool suggests looking at the cap game on
+  `PG(n, q)`; the point-reflection / midpoint structure differs projectively, so it is a genuine
+  separate question.

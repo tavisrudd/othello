@@ -45,10 +45,12 @@ O3=pair {n/3,2n/3} (3|n). 0 obstr ⇒ 2nd player mirrors (P); 1 ⇒ 1st player o
 Also: the game DECOMPOSES as a disjunctive sum over armed-Schur-hypergraph components (verified). En
 route CORRECTED a wrong "S2 dead" call (was measuring negation defect; translation mirror has zero
 defect). **OEIS submission DRAFT prepared** ([draft](notes/2026-07-04-sumfree-oeis-draft.md) + b-file)
-— **user submits, do NOT submit.** **★★★ cap-set game G(F₃ᵈ)=P for ALL d — THEOREM PROVEN**
-([capset-theorem](notes/2026-07-04-capset-game-theorem.md)): move-then-mirror through the affine point
-reflection `σ_c` whose center `c=−(a+b)` self-blocks (third point of the opening line) ⇒ dodges the
-odd-order barrier; `AGL(d,3)` 2-transitivity ⇒ no case-split. Settles d=5 (and all d), no compute.
+— **user submits, do NOT submit.** **★★★ cap game on AG(n,q)=P for ALL n and all ODD q — THEOREM
+PROVEN** ([capset-theorem](notes/2026-07-04-capset-game-theorem.md)): move-then-mirror through the
+affine point reflection `σ_c`, center `c=(a+b)/2` self-blocks (midpoint, collinear with the opening
+pair) ⇒ dodges the odd-order barrier; the `q>3` step is a parity argument (σ_c-symmetric cap meets
+the reflection line in an even count ⇒ 0); `AGL(n,q)` 2-transitivity ⇒ no case-split. Subsumes the
+cap-set (q=3) conjecture; settles d=5 (and all d), no compute. Boundary: `q` even open.
 **Game-(a) lemma bundle WRITTEN** ([pairing-lemmas](notes/2026-07-04-nodekayles-pairing-lemmas.md)):
 graph-general master pairing lemma + abelian-Cayley R0/L1/L2 + odd-order impossibility, generalized
 past `Z_n` to any finite abelian `Γ` (torus/kings), machine-checked to `|Γ|≤16`. **Interval octals**
