@@ -98,9 +98,16 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
   textbook; octal-games-on-graphs (arXiv:1612.05772) studies fixed octals on trees, not powers of
   paths ⇒ identification appears-novel. Method note: solver is O(m²) (the single split digit);
   m~10⁷ needs a faster nim-convolution or accept the octal as open.
-- **Spawned (background, running):** a research scout on **information-theory open-problem
-  connections** to the whole program (long-shot fishing — user request). Strongest prior lead:
-  interval octals = independent sets in *powers* of cycles ↔ Shannon zero-error capacity. Memo →
-  `../../rust/…/scratchpad/it-connections-memo.md`; verdict pending.
+- **Info-theory fishing (user request) — DONE, verdict banked**
+  ([it-connections-scout](../2026-07-04-it-connections-scout.md)): **mostly C, two structural B's, no
+  substantive A.** Decisive framing negative (worth keeping so nobody re-fishes): our program computes
+  **game values** (nimbers/outcomes) while every open IT problem on the shared substrate (independent
+  sets in graphs/powers) is about **extremal size or asymptotic rate** — orthogonal invariants. Made
+  precise: the Grundy value is provably **not** a point of Strassen/Zuiddam's *asymptotic spectrum of
+  graphs* (arXiv:1807.00169) — not monotone under homomorphism, not multiplicative under strong
+  product, "additive" only as nim-XOR — so it cannot bound Shannon capacity via the one theory built
+  for that. Only actionable item is **B1**: aim our circulant/Cayley independent-set + symmetry-quotient
+  *compute stack* (not our theorems) at the Θ(C₇) Shannon-capacity lower-bound record (α(C₇^⊠5) ≥ 350)
+  — a compute-forward side quest in a competitive arena, no clear edge. B2 = a framing note only.
 - **Next open (unchanged priority):** #1 OEIS submission (USER), then cap-set d=5 / "always P" proof,
   interval octals k≥2 piece-b (push k=2 to 10⁷ — gated on a sub-O(m²) split), sum-free variants.
