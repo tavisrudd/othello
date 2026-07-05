@@ -87,7 +87,23 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 **HEADLINE:** proved the **cap achievement game on `AG(n,q)` is a second-player win (P) for EVERY
 prime power `q` and every `n`** — subsuming and settling the cap-set (`q=3`) "always P" conjecture,
 so `d=5` and all `d` are resolved with no computation. Ran the whole session under `mi` (intent-based).
-Commits `efedbc5`→`24d33e4` on `main`. Everything below is landed + banked + committed.
+Commits `efedbc5`→`ffddf42` on `main`. Everything below is landed + banked + committed.
+
+**Results index (session --3), by strength:**
+1. **THEOREM** — cap game on `AG(n,q)` = P, all `n`, all prime powers `q` (both parities). ★★★
+2. **THEOREM** — 3-AP-free (cyclic cap) game on `Z_n`: **even `n` = P** (τ_{n/2} mirror); overall P
+   except sporadic `{1,7,19,47,49}`. New sequence.
+3. **Lemma bundle** — graph-general pairing certificates P0/P0′ + abelian-Cayley R0/L1/L2 + odd-order
+   impossibility (proof-on-write, generalized past `Z_n`, machine-checked `|Γ|≤16`).
+4. **Data + correction** — interval octals `0.[1×k][3×k]7` to m=2·10⁶: no period p≤60000; k=3 ≈m^0.66,
+   k=2 ~log; corrected the k=3 last-zero (824→827062).
+5. **New OEIS-absent sequences / conjectures** — sum-free variants (`F₂ᵏ`=P, `F₃ᵏ`=N, Z_n-strong,
+   Schur, zero-sum, interval-AP), projective cap game (P in small cases). `F₂ᵏ` = `PG(k−1,2)` cap.
+6. **Negative (banked)** — info-theory fishing: no theorem bridge (game value ∉ Strassen/Zuiddam
+   spectrum).
+Key meta-lesson: "cap-type" (3-AP / a+b+c=0) achievement games are **P-leaning**; the mirror is clean
+exactly when the reflection center's identity `3c=0` holds everywhere = char-`p` vector spaces (`F₃ᵈ`),
+and degrades to sporadic exceptions over `Z_n`.
 
 - **★★★ Landed (next-step #3): the cap-game theorem, all q.**
   [`capset-game-theorem`](../2026-07-04-capset-game-theorem.md). Two mirrors by parity of the board
