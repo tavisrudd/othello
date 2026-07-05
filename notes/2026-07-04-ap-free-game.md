@@ -75,8 +75,10 @@ second-player win when **`|G|` is even** (translation mirror `τ_t`, `t` order 2
 "3-AP"), so it is P by the [cap theorem](2026-07-04-capset-game-theorem.md). *(Caveat: for `q ≥ 5` the
 cap game is **stricter** than the 3-AP-free game — a `q`-point line has collinear triples that are not
 APs — so the cap theorem does **not** settle the 3-AP-free game on `F_qⁿ`, `q>3`.)* The remaining odd
-side — odd-order `G` other than `F₃ⁿ` (e.g. `Z_n` odd, `Z_5`, `Z_9`, `Z_3×Z_5`) — is empirically
-mostly P (all P in tests except sporadic `Z_n` values `{7,19,47,49}`) but **unproven**.
+side — odd-order `G` other than `F₃ⁿ` (e.g. `Z_n` odd, `Z_5`, `Z_9`, `Z_3×Z_5`, `Z_25`, `Z_15`, and
+**`F₅²`** — order 25, elementary abelian but *not* the cap game) — is empirically **mostly P** (all P
+in tests except the sporadic `Z_n` values `{7,19,47,49}`) but **unproven**. Whether the 3-AP-free game
+on `F_qⁿ` (`q ≥ 5`) is always P is open (distinct from the cap theorem).
 
 The cap game is **uniformly** P on `AG(n,q)` because the reflection center `c=(a+b)/2` satisfies the
 self-blocking identity `3c=0` **for every `c`** in characteristic `p` (the whole line collapses to
