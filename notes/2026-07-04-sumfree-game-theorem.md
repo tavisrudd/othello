@@ -121,6 +121,21 @@ Cases by `n mod 6`, i.e. by which obstructions exist:
 `{n/2}` is an **N**-position, *because `n/3` exists* (`3∣n`) and lets the second player answer. The
 whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
 
+## Generalization to abelian groups (conjectured)
+
+The mod-6 law is the cyclic case of a clean criterion for the sum-free game on **any finite abelian
+group `G`** (verified, zero mismatches, ~25 groups —
+[sumfree-variants](2026-07-04-sumfree-variants.md)):
+
+> **Conjecture.** Let `s₂ = ` 2-rank of `G` and `τ₃ = [3 ∣ |G|]`. Second player wins iff `s₂ ≥ 2`,
+> or (`s₂ ≤ 1` and `s₂ = τ₃`).
+
+For cyclic `Z_n`, `s₂ = [2∣n] ∈ {0,1}`, so this reads "P iff `s₂ = τ₃`" = `n ≡ 0,1,5 (mod 6)` — the
+theorem above. The one new phenomenon for non-cyclic `G` is that **2-rank `≥ 2` forces P** (the
+`(Z₂)^r` 2-torsion self-neutralizes, even overriding a 3-torsion obstruction: `Z₂×Z₂×Z₉ = P` while
+`Z₉ = N`). A proof would extend the negation/translation-mirror obstruction-counting to the
+2-rank-`≥2` self-pairing.
+
 ## Verification status
 
 - **Lemmas 1–4 are proved above, uniform in `n`.** With Lemma 4 covering the two augmented-mirror
