@@ -98,6 +98,34 @@ verification: [`2026-07-05-sumfree-zmf3b-theorem.md`](../2026-07-05-sumfree-zmf3
   center that flips a torsion coord" may attack the non-elementary 3-groups `Z₉,Z₂₇,…=N` and the
   coprime collapse). (2) corrected solver + `Z₂×F₃⁴`/`F₃⁴,⁵` as canonicalizer checks. (3) OEIS (USER).
 
+**Codex round 1 — DONE (integrated, sound solver independently re-checked here).** Codex delivered the
+corrected solver + strategy verifier + socle probe (`notes/{sumfree_solver,verify_strategy,
+socle_reduction_probe}.py`, findings `notes/2026-07-05-codex-findings-sumfree.md`). I ran its selftest
+(legality vs brute Schur scan ✓) and the previously-**wrong** cases: `Z8=N` (move 4), `Z10=N`
+(move 5) — **now correct**; `Z2×F3²=P`. **The root-transitivity fix overturned NO theorem** (ours were
+brute/σ-verified, immune); it only corrected the buggy cyclic outcomes. Codex also independently
+re-ran the σ-theorem sweeps (b≤3, 0 violations) and re-killed the hyperplane candidates (superseded).
+- **★ Sharpening (important):** the socle reduction's *needed* content is only the open slice
+  `s₂≤1 ∧ r₃≥2` — for `r₃≤1`/`s₂≥2` the reduction is automatic (both endpoints already decided by the
+  proven theorems). Most of Codex's 12 test groups are already-proven `r₃≤1`/`s₂≥2` (e.g. `Z9` is
+  `r₃=1`, cyclic Sylow-3; `Z5×Z3`, `Z30`, `Z2×Z5×Z3` all `r₃≤1`) — so the genuinely-open data was thin.
+- **Genuinely-open (`r₃≥2`) confirmations I added** (sound solver, all match socle): **higher-3-power**
+  `Z9×Z3=N` (=`Z3²`; move `(0,1)`); **coprime** `Z5×Z3²=N` (=`Z3²`; move `(0,0,1)`); **higher-2-power**
+  `Z4×Z3²=P` (=`Z2×Z3²`). Plus `Z3³=N`. So the reduction holds across **all three collapse types** on
+  open-slice groups. The needed reduction = **"coprime + higher-power parts are outcome-neutral for
+  `s₂≤1, r₃≥2` groups"**, with both pure-socle endpoints now theorems.
+- **ρ-obstruction pinned (Codex):** the naive "negate coprime, fix `{2,3}`-part" mirror fails exactly
+  when the fixed part has 3-torsion, via the bad triple `a+y=ρ(y)`, `a=(ρ−1)y` (a pure-coprime
+  `−2·(coprime part)` already in the ρ-symmetric set); full negation dodges it via `A=−A`, partial
+  mirror loses that link. So the reduction needs a non-global-mirror idea.
+- **Sharpened next attack (the method that cracked `F₃ⁿ` AND `Z₂×F₃ᵇ` — reverse-engineer the solver
+  strategy):** extract the full winning reply-function for the cleanest genuinely-open N-case
+  **`Z9×Z3=N`** (self-contained higher-3-power, no coprime coupling; the combined B-game+negation
+  strategy is known to fail here — 48 illegal replies — so its strategy is something new) via
+  `verify_strategy.py`, and pattern-match for a move-then-mirror / invariant. Do the same for
+  `Z5×Z3²`. Possibly split the reduction into R1 (2-power), R2 (3-power), R3 (coprime) — they may need
+  distinct mechanisms.
+
 ## Handoff Note — session 2026-07-04--2 (`f78c95d1-3c01-49d4-9f4b-fec58d939cd0`)
 
 - **Landed:** everything in Progress above. Headline = the sum-free mod-6 theorem (fully proven) +
