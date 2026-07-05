@@ -87,5 +87,20 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
   #2 here checked off.
 - **Ran under `mi`** (intent-based); low-stakes reversible write-up on the handoff's own lever
   sequence. Left `iso_flat.rs` + `notes/*.html` untouched (flagged not-this-thread by session --2).
+- **Landed (next-step #4, piece a):** extended the **interval-family octals** `0.[1×k][3×k]7` from
+  the old m≤8000 probe to **m=2·10⁶** (fast C solver `../2026-07-04-octal.c`, validated on k=1 =
+  Dawson period 34). Commit `f4e17dc`. Findings: **no period** (pure/arithmetic) for p≤60000 on the
+  10⁶-wide tail `[10⁶,2·10⁶]`, both k. **Growth splits by k** — k=3 ≈ m^0.66 (record 4947, strong
+  unbounded); k=2 ~log (record 1314, records still rise but slowly ⇒ plausible-not-firm unbounded).
+  **Correction:** the note's "k=3 no path P beyond m=824" was an m≤8000 artifact — actual last path
+  zero is **m=827062** (k=2's is m=16168), so the k=2 cycle "2nd-player-for-large-n" conjecture is
+  well-supported and the k=3 one is weak (role reversal from the old note). Prior art: k=1=Dawson
+  textbook; octal-games-on-graphs (arXiv:1612.05772) studies fixed octals on trees, not powers of
+  paths ⇒ identification appears-novel. Method note: solver is O(m²) (the single split digit);
+  m~10⁷ needs a faster nim-convolution or accept the octal as open.
+- **Spawned (background, running):** a research scout on **information-theory open-problem
+  connections** to the whole program (long-shot fishing — user request). Strongest prior lead:
+  interval octals = independent sets in *powers* of cycles ↔ Shannon zero-error capacity. Memo →
+  `../../rust/…/scratchpad/it-connections-memo.md`; verdict pending.
 - **Next open (unchanged priority):** #1 OEIS submission (USER), then cap-set d=5 / "always P" proof,
-  interval octals k≥2, sum-free definitional variants.
+  interval octals k≥2 piece-b (push k=2 to 10⁷ — gated on a sub-O(m²) split), sum-free variants.
