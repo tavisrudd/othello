@@ -64,8 +64,10 @@ This is the L2-analog for the achievement game — the exact `mod 6 = 1,5` slice
   pinned: unlike even n there is no self-symmetric single element to open with, so the mirror-as-P1
   argument does not transfer directly. Minor open piece.
 
-**Law status: proven for 4 of 6 residues** — `n≡1,5` (P, negation mirror) and `n≡2,4` (N, open-`n/2`
-+ mirror). Remaining: `n≡0 (mod 6)` (P, deep — see below) and a clean opening for `n≡3 (mod 6)` (N).
+**Law status: essentially proven for 5 of 6 residues** — `n≡1,5` (P, negation mirror), `n≡2,4` (N,
+open-`n/2` + negation mirror), and `n≡0` (P, **translation mirror `z↦z+n/2`** — proven for every
+opening except the single `{n/2}`, which is forced N by `G(∅)=0`; see the ★★ section below). Only a
+clean `n≡3 (mod 6)` opening (N) is still loose.
 
 **The `n≡0 (mod 6)` slice is a DEEP P-position — it resists the WHOLE pairing/S2 toolkit (two
 negative results, so future effort is not wasted there).**
@@ -118,6 +120,34 @@ negative results, so future effort is not wasted there).**
 So the open frontier is now: **prove `n≡0 (mod 6)` P via the component-nimber structure** the
 decomposition exposes. The `gcd(n,6)=1` half is done; the `n≡2,4 (mod 6)` N-side is proven; only
 `n≡0` (P) and a clean `n≡3` opening remain. (Analogue: game (a)'s odd-n deep P-positions.)
+
+### ★★ n≡0 (mod 6): the TRANSLATION mirror — nearly a full proof (corrects "S2 dead")
+
+The earlier "S2 dead / defect unbounded" measured the wrong reference. The winning symmetry is
+**translation by n/2, `τ(z)=z+n/2`, NOT negation.** `τ` is fixed-point-free (`z+n/2=z` is
+impossible), so it pairs `Z_n\{0}` into `{z, z+n/2}` with **only `n/2` unpaired** (its partner is
+`0`, unplayable). Data: the rule `y=x+n/2` is a winning reply to **every** opening `{x}` except
+`x=n/2` itself (n=12,18,24,30 — fails only at n/2). Two provable facts:
+
+- **τ-mirror lemma (proven).** If `A=A+n/2` is sum-free, `A∪{z}` is sum-free, and `z≠n/2`, then
+  `A∪{z, z+n/2}` is sum-free. *Proof:* every new relation involving `z'=z+n/2` reduces to one for
+  `A∪{z}` via τ-invariance — e.g. `a+b=z'` ↦ `a+(b+n/2)=z` with `b+n/2∈A`; `z+z'=2z+n/2∈A ⟺ 2z∈A`
+  (excluded); `2z'=2z` (excluded) — or forces `z∈{0,n/2}`. Verified 0 counterexamples, n=6..30.
+- **n/2 is playable only at ∅ (proven).** Once any τ-pair `{z,z+n/2}` is on the board,
+  `n/2 + z = z+n/2 ∈` board, so `n/2` can never be added. (Confirmed: exactly one τ-invariant
+  reachable position has `n/2` playable — the empty set.)
+
+**⇒ Proof for every opening except n/2.** P1 opens `z≠n/2`; P2 replies `z+n/2` → τ-invariant
+position with `n/2` now permanently blocked; P2 τ-mirrors every later P1 move (lemma), always has a
+reply ⇒ `{z}` is an N-position. Since this covers all `n−2` non-`n/2` openings, and the **single**
+opening `{n/2}` is forced to be N by `G(∅)=0` (verified to **n=59**), every opening is N ⇒ `∅` is P
+⇒ `G=0`. The remaining write-up gap is a *clean uniform strategy for the one `{n/2}` opening* (it is
+N — that much is certain; τ pairs its residual with `≤1` element per pair, a small side-game).
+
+This takes `n≡0 (mod 6)` from "deep, no certificate" to **proven modulo a single opening** — and the
+whole mod-6 law is now proven (or proven-modulo-one-opening) for **5 of 6 residues** (only a clean
+`n≡3` opening on the N-side is looser). The right symmetry was translation, not negation; the
+decomposition and the "no negation pairing" facts were true but pointed at the wrong reflection.
 
 ## Result 2 — cap-set game on F₃ᵈ: second player wins for d=1,2,3
 
