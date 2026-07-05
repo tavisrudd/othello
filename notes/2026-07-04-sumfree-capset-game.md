@@ -213,10 +213,17 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
   maximum size); it has no bearing on our game's Grundy value, and G(4)=0 says nothing about max cap
   size. The relevant neighbour is the **maximal-cap spectrum** (sizes of inclusion-maximal caps),
   the analogue of Cameron–Erdős maximal-sum-free sets for the Z_n game.
-- **Novelty caveat (more fragile than the Z_n game).** An impartial last-player game *on caps*
-  plausibly hasn't been studied, but the cap-set literature is vast and well-trodden — this needs a
-  real prior-art search before any novelty claim. The **Z_n sum-free theorem is the solid
-  deliverable**; the cap-set cousin is a further question with a marquee problem next door.
+- **Novelty (prior-art search done 2026-07-04): appears-novel, but cite/distinguish named neighbours.**
+  Our cap game (impartial, *shared collection*, *normal* play, *building* a cap) is not: **Anti-Set**
+  (Clark–Fisk–Goren, *Involve* 2016 — separate hands, misère, strategy, no nimbers); **Impartial SET**
+  (Uiterwijk–Hufkens, CG 2022 — a *removal* game, nimbers computed; ours is the building complement);
+  or the **general-position achievement game** (Klavžar et al., arXiv:2111.07425 — which does NOT
+  scoop it: gp-forbidden = Hamming-betweenness triples, *disjoint* from Set-lines, and that paper does
+  only product graphs). Umbrella = Sieben's impartial hypergraph games (EJC 2023, framework only, no
+  AG(n,3)). No OEIS entry for the game nimbers. **Caveats:** the Impartial-SET rule and Sieben's
+  coverage were read from abstracts/snippets (full texts bot-walled) — re-verify before a writeup.
+  The **Z_n sum-free theorem is the solid deliverable**; the cap game is a further, defensible
+  direction with its neighbours now mapped.
 
 ## Why this is the high-value lever (recommendation)
 

@@ -51,9 +51,16 @@ making the last move, so a(5)=0 (second-player win). n=8: a(8)=2 (first-player w
 
 ### %Y (Cross-references)
 
-Related deletion/achievement games and the maximal-sum-free-set counting problem. (If the graph
-cousin — Node-Kayles on the quadratic-residue Cayley graph Cay^+(Z_p, QR) = Paley_p — is submitted,
-cross-reference it here.)
+Node-Kayles nimber sequences (the umbrella framework: this is Node-Kayles on the Cayley sum
+hypergraph of Z_n). The maximal-sum-free-set counting problem (the game's terminal positions).
+A344227 (nimbers of the non-attacking-queens Node-Kayles game). If the graph cousin — Node-Kayles on
+the quadratic-residue Cayley graph Cay^+(Z_p, QR) = Paley_p — is submitted, cross-reference it here.
+
+Prior-art note (search 2026-07-04): the sum-free-set *game* appears unpublished (nearest = Node-Kayles
+frameworks, group achievement games, maximal-sum-free-set counting — all distinct). The F_3^n cap
+cousin is likewise novel but has closer named neighbours to distinguish (Anti-Set, Clark–Fisk–Goren,
+*Involve* 2016; Impartial SET removal game, Uiterwijk–Hufkens, CG 2022). Distinct from the extremal
+cap-set sequence A090245.
 
 ### %K (Keywords)
 

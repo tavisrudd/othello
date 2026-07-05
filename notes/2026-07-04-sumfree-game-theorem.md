@@ -133,20 +133,41 @@ whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
 
 ## Remarks
 
-- **Novelty:** the impartial sum-free / Schur achievement game appears unstudied (Sieben's
-  hypergraph-games framework does not instantiate it; no prior "sum-free game" surfaced; OEIS returns
-  no match for the sequence). Nearest neighbours: Cameron–Erdős maximal-sum-free-set counting
-  (the game's terminal positions are maximal sum-free sets) and the arithmetic-Cayley Node-Kayles of
-  [game (a)](2026-07-04-cayley-nodekayles-outcome-law.md) — of which `Paley_p = Cay⁺(Z_p, QR)` is
-  the graph cousin.
+- **Novelty (prior-art search done 2026-07-04):** the impartial sum-free-set game on Z_n
+  **appears-novel** — no published *game* on sum-free sets surfaced, and OEIS has no match for the
+  sequence. Nearest neighbours (all distinct): the umbrella is **Node-Kayles on the Cayley sum
+  hypergraph** of Z_n (framework only — e.g. Wong, "Nimber Sequences of Node-Kayles Games," *J.
+  Integer Seq.* 23 (2024), computes graph families, not sum-free structure); Cameron–Erdős
+  **maximal-sum-free-set counting** (extremal, not a game; the game's terminals are maximal sum-free
+  sets); Anderson–Harary / Ernst–Sieben **group achievement games** (target = *generate the group*,
+  not sum-free); and the arithmetic-Cayley Node-Kayles of
+  [game (a)](2026-07-04-cayley-nodekayles-outcome-law.md), of which `Paley_p = Cay⁺(Z_p, QR)` is the
+  graph cousin. (Absence of a game is a one-pass negative — do a direct OEIS lookup of computed
+  values before staking the claim.)
 - **Structure exposed en route:** the game is a *disjunctive game* — `G(position) = XOR over
   connected components of the residual armed-Schur-hypergraph` (verified 0 mismatches / ~70k
   positions). Not needed for the theorem, but it is the fast-solver lever and a structural handle.
 - **The `F_3^d` cap-set cousin** (build a cap, last to move wins) is `G(d)=0` for `d=1,2,3,4`
   (d=4 via an AGL(4,3)-quotient solver, memo 7734). "Always P" is a 4-point conjecture; a proof must
   differ from the Z_n one (F₃ᵈ has no order-2 element, so no translation/negation fixed-point mirror
-  in the same form). This is **adjacent to, not the same as**, the famous extremal cap-set problem
-  (maximum cap size — Ellenberg–Gijswijt; DeepMind FunSearch's dim-8 lower bound): that asks how
-  *large* a cap is, our game asks who *wins*. The neighbour is the *maximal*-cap spectrum, not the
-  *maximum* cap. Novelty here is more fragile than the Z_n game (large literature) — check prior art
-  before claiming it.
+  in the same form). It is **adjacent to, not the same as**, the extremal cap-set problem (maximum cap
+  size — Ellenberg–Gijswijt, FunSearch): max size vs game outcome; the neighbour is the *maximal*-cap
+  spectrum, not the *maximum* cap (OEIS A090245 is the extremal one, distinct).
+- **Prior-art verdict on the cap game (search 2026-07-04): appears-novel, but with named neighbours
+  to CITE and DISTINGUISH** — this game (impartial, *shared collection*, *normal* play, *building* a
+  cap) is not any of:
+  - **Anti-Set** — Clark, Fisk, Goren, "A variation on the game Set," *Involve* 9(2):249–264 (2016):
+    *separate hands, misère, explicit strategy* (no nimbers). Different game.
+  - **Impartial SET** — Uiterwijk & Hufkens, CG 2022 (LNCS, Springer 2023,
+    doi:10.1007/978-3-031-34017-8_9; Hufkens M.Sc. thesis, Maastricht 2020): a *removal* game (a move
+    *takes* a collinear Set), nimbers computed. Ours *builds* a cap — the complementary game.
+    *(exact rules inferred from abstract/snippets — full text bot-walled, re-verify.)*
+  - **Sieben, "Impartial Hypergraph Games," EJC 30(2) #P2.13 (2023)** — the framework: our cap game is
+    the achievement/building game on the AG(n,3) line-hypergraph, which Sieben does not compute
+    (he computes product hypergraphs). *(PDF unparseable — re-verify.)*
+  - **General-position achievement game** (Klavžar–Neethu–Chandran, arXiv:2111.07425) does **NOT**
+    scoop it: gp-forbidden triples are Hamming-*betweenness* triples, a family **disjoint** from
+    Set-lines on H(n,3) (a line's third point is never Hamming-between the other two), and that paper
+    computes only Cartesian/lex products — no Hamming graphs, no caps.
+  - Also cite as distinct: Lampis–Mitsou, "Computational Complexity of the Game of Set," LATIN 2014 /
+    arXiv:1309.6504 (complexity of the removal/scoring family). No OEIS entry for the game nimbers.
