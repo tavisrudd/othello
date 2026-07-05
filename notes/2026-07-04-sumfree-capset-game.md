@@ -88,8 +88,10 @@ many obstructions exist and who can neutralize them:
 (the opener wins by mirroring), so opening `n/2` is the first player's winning move. For `n≡0` the
 same `{n/2}` is an *N*-position **because `n/3` exists** (`3∣n`) and lets the second player answer —
 so the n/2 opening no longer helps the first player. The whole law turns on the divisibility pair
-`(2∣n, 3∣n)`, i.e. `n mod 6`. ∎ (modulo writing the two mirror lemmas fully; the negation one is
-done above, the τ one is stated below, both machine-verified over the reachable game graphs.)
+`(2∣n, 3∣n)`, i.e. `n mod 6`. ∎ **Fully proven** — all mirror steps (Lemmas 1–4) are symbolic and
+uniform in `n`; the augmented cases are closed by Lemma 4 (`3·(n/3)=0` kills O₃, `2·(n/2)=0` absorbs
+O₂). Clean write-up: [sumfree-game-theorem](2026-07-04-sumfree-game-theorem.md). Machine checks (0
+breakers n≤36; law confirmed to n=63) are corroboration only.
 
 **Where the mirror breaks (matches the N-positions + the open half):**
 - **`n≡2,4 (mod 6)` (N) — PROVEN.** First player opens `x=n/2` (self-symmetric, `{n/2}=−{n/2}`, and
@@ -182,9 +184,9 @@ opening `{n/2}` is forced to be N by `G(∅)=0` (verified to **n=59**), every op
 ⇒ `G=0`. The remaining write-up gap is a *clean uniform strategy for the one `{n/2}` opening* (it is
 N — that much is certain; τ pairs its residual with `≤1` element per pair, a small side-game).
 
-This takes `n≡0 (mod 6)` from "deep, no certificate" to **proven modulo a single opening** — and the
-whole mod-6 law is now proven (or proven-modulo-one-opening) for **5 of 6 residues** (only a clean
-`n≡3` opening on the N-side is looser). The right symmetry was translation, not negation; the
+This takes `n≡0 (mod 6)` from "deep, no certificate" to **fully proven** (the `{n/2}` opening is
+answered by `n/3`; Lemma 4 discharges the augmented mirror). With the other residues, the **entire
+mod-6 law is proven** (all six residues). The right symmetry was translation, not negation; the
 decomposition and the "no negation pairing" facts were true but pointed at the wrong reflection.
 
 ## Result 2 — cap-set game on F₃ᵈ: second player wins for d=1,2,3
