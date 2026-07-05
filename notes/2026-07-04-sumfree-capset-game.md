@@ -54,11 +54,18 @@ strategy **exactly when `gcd(n,6)=1`** — verified exhaustively over all reacha
 This is the L2-analog for the achievement game — the exact `mod 6 = 1,5` slice.
 
 **Where the mirror breaks (matches the N-positions + the open half):**
-- **`n` even** → fixed point `x=n/2` (the order-2 element) has no mate. For `n≡2,4 (mod 6)` this is
-  an N-position and the first player exploits `n/2`; for **`n≡0 (mod 6)` the position is still P**
-  (empirically to n=42) but by a *different* strategy. **This is the open half of the law.**
-- **`n≡3 (mod 6)`** (odd, `3∣n`) → break at `x=n/3`: `3x=0 ⇒ x+x=2x=−x`, so the mirror move `−x`
-  collides with `x`. N-position; the first player's opening is `n/3`.
+- **`n≡2,4 (mod 6)` (N) — PROVEN.** First player opens `x=n/2` (self-symmetric, `{n/2}=−{n/2}`, and
+  sum-free since `n/2+n/2=0∉{n/2}`), then negation-mirrors as the responder. Valid because `3∤n`
+  removes the `3x=0` obstruction and the only fixed point `n/2` is already played — same lemma as the
+  P-side, with the roles swapped. Verified for all `n≡2,4 (mod 6)`, n≤32. So the first player wins.
+- **`n≡0 (mod 6)` (P) — OPEN.** Still P (empirically to n≈42) but negation fixes `n/2` **and** `3∣n`
+  gives the `n/3` obstruction, so the mirror fails and (below) no bounded repair exists.
+- **`n≡3 (mod 6)` (N)** — first player wins (G≥1, verified), but the clean opening is not yet
+  pinned: unlike even n there is no self-symmetric single element to open with, so the mirror-as-P1
+  argument does not transfer directly. Minor open piece.
+
+**Law status: proven for 4 of 6 residues** — `n≡1,5` (P, negation mirror) and `n≡2,4` (N, open-`n/2`
++ mirror). Remaining: `n≡0 (mod 6)` (P, deep — see below) and a clean opening for `n≡3 (mod 6)` (N).
 
 **The `n≡0 (mod 6)` slice is a DEEP P-position — it resists the WHOLE pairing/S2 toolkit (two
 negative results, so future effort is not wasted there).**
