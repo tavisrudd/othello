@@ -5,7 +5,9 @@
 3-rank ≥ 2`, which is confirmed computationally and reduced to a single lemma. Companion to the
 proven cyclic [mod-6 theorem](2026-07-04-sumfree-game-theorem.md) (whose Lemmas 1–4 this reuses).
 Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
-`2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`.
+`2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`,
+`2026-07-05-sumfree-rho.py` (ρ-mirror + {2,3}-Sylow reduction),
+`2026-07-05-sumfree-redu.py` (outcome-reduction check).
 
 ## The game and the criterion
 
@@ -159,6 +161,42 @@ groups of the original sweep.
   mixed/9-order elements veto its replies. Lemma R needs a new idea, likely inductive on `|G|`.
   **This also entangles Lemma R with the open `F₃ᵏ=N` conjecture** (the pure-3-group case is exactly
   that).
+- **Twisted-automorphism mirror `ρ` — FAILS, closing the whole mirror-method family** (`rho.py`).
+  Idea: mirror with `ρ =` negation on the 6′-part, identity on `G₆` — an order-2 automorphism with
+  fixed set `G₆` and (apparently) no O₂/O₃ bad pairs. It is **sum-clean iff `G₆` has no 3-torsion**
+  (0 violations for `Z2×Z5, Z5×Z2², Z35`; fails for every group with 3-torsion). Reason, exactly
+  pinned: the bad case is `a+z=ρz` with `a=(ρ−1)z = −2z′` on the negated part; **full** negation
+  excludes it because `A=−A ⟹ (−2z ∈ A ⟺ 2z ∈ A)`, already forbidden — but any **partial** mirror
+  keeps `A=ρA ≠ −A` and loses that link. **So full negation is the *only* sum-clean order-2
+  automorphism mirror, and its obstruction is inescapably O₂∪O₃.** Mirror methods cannot crack
+  `r₃≥2`; the route is induction or the outcome reduction above.
+
+## A cleaner reframing: the {2,3}-Sylow outcome reduction (conjecture, strongly supported)
+
+Chasing Lemma R produced a much cleaner structural conjecture. Write `G = G₆ × K` with `G₆` the
+**{2,3}-Sylow** (the 2-and-3-primary part) and `K` the **6′-part** (order coprime to 6).
+
+> **Master reduction (conjecture).** The sum-free game outcome depends **only on the {2,3}-Sylow**:
+> `G(G) = 0 ⟺ G(G₆) = 0`. The 6′-part is outcome-irrelevant.
+
+**Empirically robust** (`rho.py`/`redu.py`, exact solver): verified `outcome(G) = outcome(G₆)` for
+`Z10, Z14, Z22, Z2²×Z5, Z30, Z2×Z5×Z3, Z2×Z7×Z3, Z2²×Z7, Z35, Z5×Z3, Z7×Z3, Z11×Z3, Z13×Z3,
+Z5×Z3², Z25` — even and odd, zero mismatches. It **subsumes** the criterion: `s₂, τ₃` are properties
+of `G₆`, and the proven cases (`s₂≥2`, `r₃≤1`) are exactly the `G₆` structures we can already decide.
+
+Two sharp facts about it:
+- **It is an OUTCOME identity, not a nimber identity.** The full Grundy values differ
+  (`G(Z14)=*2` vs `G(Z2)=*1`; `G(Z5×Z3)=*2` vs `G(Z3)=*1`) — only *zero-ness* is preserved. So it is
+  **not** a disjunctive sum (that would preserve nimbers); the 6′-part shifts the nimber but never
+  its vanishing. A proof needs an outcome-preserving argument, not a Sprague–Grundy decomposition.
+- **For odd `G` it becomes:** `outcome(G) = outcome(G₃)` (3-Sylow), so the `s₂=0` side of Lemma R is
+  exactly **"every nonzero finite abelian 3-group is N"** — a clean generalization of the note's
+  `F₃ᵏ=N` conjecture, supported through `Z3, Z9, Z27, Z3², Z9×Z3, Z3³` (all N).
+
+The master reduction is **equivalent in difficulty to Lemma R** (its only new content is the
+unproven slice), but it is a far cleaner statement of the open problem, and it isolates the
+irreducible core: **outcomes of sum-free games on 2-and-3-groups.** All proven results here decide
+that core except `s₂ ≤ 1 ∧ r₃ ≥ 2`.
 
 ## Summary table
 

@@ -115,18 +115,24 @@ independent fingerprint route from the bits=31 run) on the `queens-n18` worktree
 and unblocks the A344227 paper/OEIS edits. Rebuilt the stale n18 binary first (`--min-k` postdated
 it). See [queens-nimber handoff](handoffs/2026-07-01-queens-nimber-a344227.md).
 
-**Lemma R attacked, NOT closed (natural routes exhausted — banked).** Tested the combined
-"B-game-on-order-3-elements + negation-mirror" first-player strategy against all opponent play:
-**wins pure `F₃ʳ`** (but that's tautologically the open `F₃ᵏ=N` conjecture) and **fails the moment
-any non-order-3 element exists** — `Z9×Z3`, `Z9×Z9`, and even elementary-Sylow-3-plus-coprime
-`Z5×Z3²`/`Z7×Z3²`. The order-3 obstruction **couples to the rest of `G` through the sum-free
-relation and does not decouple**; both mirrors miss O₃, `σ_c` needs char 3 everywhere. Lemma R
-needs a genuinely new idea (likely induction on `|G|`) and is **entangled with the open `F₃ᵏ=N`
-conjecture**. Details in the abelian-theorem note's open-slice section.
+**Lemma R attacked hard — NOT closed, but a CLEANER REFRAMING found (all banked).**
+- **★ Master reduction (new conjecture, strongly supported):** `outcome(G) = outcome(G₆)`, `G₆ =`
+  the {2,3}-Sylow — **the 6′-part (order coprime to 6) is outcome-irrelevant.** Solver-verified on
+  even+odd groups (`Z10,Z14,Z22,Z2²×Z5,Z30,Z2×Z5×Z3,Z35,Z5×Z3²,…`), 0 mismatches. It is an
+  **OUTCOME identity, not a nimber identity** (`G(Z14)=*2` vs `G(Z2)=*1` — only zero-ness preserved
+  ⇒ NOT a disjunctive sum). Reframes the whole criterion as a statement about **2-and-3-groups**;
+  for odd `G` it becomes "**every nonzero abelian 3-group is N**" (⊇ the `F₃ᵏ=N` conjecture). Same
+  difficulty as Lemma R but far cleaner.
+- **Mirror-method family CLOSED with a reason:** the combined B-game+negation strategy fails off pure
+  `F₃ʳ` (interference); the twisted automorphism mirror `ρ` (negate 6′-part, fix `G₆`) is sum-clean
+  **iff `G₆` has no 3-torsion** — the bad term `(ρ−1)z=−2z′` is excluded only by full negation's
+  `A=−A` link, which any partial mirror loses. **So full negation is the only sum-clean order-2
+  automorphism mirror; its obstruction is inescapably O₂∪O₃.** Mirrors cannot crack `r₃≥2`.
+- Scripts: `../2026-07-05-sumfree-{lemmaR,rho,redu}.py`. Details in the abelian-theorem note.
 
-**Next:** Lemma R via a fresh angle (induction on `|G|`; or the `s₂=1` `Z₂`-labelled-odd-part
-residual; note it subsumes `F₃ᵏ=N`); then OEIS submission (USER); projective `PG(n,q)` cap; interval
-octals k=2→10⁷.
+**Next:** prove the master reduction / Lemma R via a NON-mirror route — induction on `|G|`, or the
+`s₂=1` `Z₂`-labelled-odd-part residual; the crisp sub-target is "nonzero abelian 3-groups are N"
+(subsumes `F₃ᵏ=N`). Then OEIS submission (USER); projective `PG(n,q)` cap; interval octals k=2→10⁷.
 
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 
