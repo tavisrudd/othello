@@ -72,6 +72,24 @@ with projective lines `{a, b, a+b}` (3 points). So "no `a+b=c`" = "no 3 collinea
 no whole-board involution exists; a projective "always P" would need a move-then-mirror with a
 self-blocking center, which does not drop out as cleanly as the affine `σ_c` (open).
 
+## The CYCLIC cap game (zero-sum triples on Z_n) — no clean law (contrast to F₃ᵈ)
+
+Forbidding `a+b+c=0` (three *distinct*) on `Z_n` is the cyclic analog of the cap game (same relation,
+cyclic group instead of `F₃ᵈ`). Grundy(∅), n=1..21 (`2026-07-04-zerosum-zn.py`, OEIS-absent):
+
+```text
+n:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+G:  1 0 0 1 1 0 0 0 0  1  1  1  0  2  0  1  1  1  1  2  0
+```
+
+P at `n = 2,3,6,7,8,9,13,15,21` — **irregular, no residue law** (P spans residues 0,1,2,3 mod 6).
+Unlike the `F₃ᵈ` cap game (**always P**), the cyclic version is a genuine mix of P and N. **Why the
+cap theorem does not transfer to `Z_n`:** its self-blocking reflection center needs `3c=0` — in
+`F₃ᵈ` (char 3) that holds for *every* `c` (so the midpoint always self-blocks), but in `Z_n` only
+`c ∈ {0, n/3, 2n/3}` satisfy it, so the clean move-then-mirror is unavailable at a general opening.
+The cap game's uniform "always P" is thus special to the characteristic-`p` vector-space structure,
+not a feature of the `a+b+c=0` relation per se.
+
 ## Status / open
 
 - **New OEIS-absent sequences:** `Z_n` strong and `{1..n}` Schur (banked above). Extending them and
