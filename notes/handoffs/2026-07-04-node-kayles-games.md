@@ -130,9 +130,19 @@ it). See [queens-nimber handoff](handoffs/2026-07-01-queens-nimber-a344227.md).
   automorphism mirror; its obstruction is inescapably O₂∪O₃.** Mirrors cannot crack `r₃≥2`.
 - Scripts: `../2026-07-05-sumfree-{lemmaR,rho,redu}.py`. Details in the abelian-theorem note.
 
-**Next:** prove the master reduction / Lemma R via a NON-mirror route — induction on `|G|`, or the
-`s₂=1` `Z₂`-labelled-odd-part residual; the crisp sub-target is "nonzero abelian 3-groups are N"
-(subsumes `F₃ᵏ=N`). Then OEIS submission (USER); projective `PG(n,q)` cap; interval octals k=2→10⁷.
+**★ SHARPEST form — the SOCLE reduction (S2-framing payoff):** `outcome(G) = outcome(G[6])`,
+`G[6] = (Z₂)^{s₂}×(Z₃)^{r₃}` = the socle — **the outcome depends ONLY on `(2-rank, 3-rank)`.**
+Solver-verified on general `G` (`Z9→Z3`, `Z4→Z2`, 6′-parts all collapse; 0 mismatches). It came from
+the S2 lens: negation is sum-clean on *every* non-socle element (order-4/8/9/27/coprime all clean),
+so the exceptions are exactly the bounded socle `O₂∪O₃`. **Collapses the whole open core to two small
+elementary families:** `(Z₃)^b, b≥2` (= the `F₃ᵇ` game, conj. N; solver b≤3 N) and `Z₂×(Z₃)^b, b≥2`
+(conj. P; the `Z₂` flips the 3-group outcome). So — modulo the socle reduction — the entire abelian
+game reduces to **`F₃ᵇ=N` + the `Z₂`-flip**. Script `../2026-07-05-sumfree-socle.py`.
+
+**Next:** the crisp targets are now (1) prove the socle reduction (still meets the interference wall,
+but minimizes the core to elementary `(Z₂)^{≤1}×(Z₃)^b`); (2) solve/certify `F₃ᵇ` for `b≥4` (needs a
+Rust/`F₃`-tuned solver — naive Python caps ~`b=3`/54 elts) to strengthen `F₃ᵇ=N`; (3) an S2 finite
+certificate on the socle. Then OEIS submission (USER); projective `PG(n,q)` cap; interval octals.
 
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 

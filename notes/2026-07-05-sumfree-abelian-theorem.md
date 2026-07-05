@@ -7,7 +7,8 @@ proven cyclic [mod-6 theorem](2026-07-04-sumfree-game-theorem.md) (whose Lemmas 
 Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
 `2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`,
 `2026-07-05-sumfree-rho.py` (ρ-mirror + {2,3}-Sylow reduction),
-`2026-07-05-sumfree-redu.py` (outcome-reduction check).
+`2026-07-05-sumfree-redu.py` (outcome-reduction check),
+`2026-07-05-sumfree-socle.py` (socle reduction — outcome depends only on `(s₂,r₃)`).
 
 ## The game and the criterion
 
@@ -219,6 +220,37 @@ the same core rather than bypassing it** — recorded so the route isn't re-run 
   hits the **same** interference wall between obstruction-handling and mirroring. The open core is
   genuinely irreducible and subsumes `F₃ᵏ=N`; a proof needs a technique that does not rely on a
   global order-2 symmetry.
+
+### ★ Sharpest form — the SOCLE reduction (outcome depends only on `(s₂, r₃)`)
+
+Framing the problem as an **S2 bounded-exception book** (negation = the clean base mirror, its
+exceptions tabulated) sharpens the master reduction all the way down. **Negation `ν` is sum-clean on
+*every* non-socle element**: order-4/8/… are clean (`{z,−z}` sum-free since `2z ≠ −z` unless
+`3z=0`), order-9/27/… are clean (`3z ≠ 0`), coprime elements are clean. **The only exceptions are
+`O₂ ∪ O₃ = ` the socle `G[6] = {x : 6x=0} = (Z₂)^s₂ × (Z₃)^r₃`** — a bounded set. And the outcome is
+exactly that of the exception game:
+
+> **Socle reduction (conjecture, solver-verified, 0 mismatches).** `G(G)=0 ⟺ G(G[6])=0`, i.e. the
+> sum-free game outcome depends **only on the 2-rank and 3-rank**: it equals the game on the socle
+> `(Z₂)^{s₂} × (Z₃)^{r₃}`.
+
+Verified for general `G` (even/odd, with 6′- and higher-prime-power parts):
+`Z4,Z8,Z16,Z9,Z27,Z2×Z4,Z4×Z4,Z2×Z8,Z9×Z3,Z2×Z9,Z8×Z3,Z2²×Z9,Z10,Z14,Z30,Z35,Z5×Z9,Z5×Z3²,Z7×Z3`
+— every `outcome(G) = outcome(G[6])`. This **subsumes** both the `{2,3}-Sylow` reduction (`Z9→Z3`,
+`Z4→Z2` also collapse) and is the cleanest possible statement.
+
+**It collapses the whole open core to TWO small elementary families.** With `s₂≥2 ⟹ P` and `r₃≤1`
+already proven, the socle reduction leaves exactly:
+- **`(Z₃)^b`, `b ≥ 2`** — this *is* the `F₃ᵇ` sum-free game (conjectured **N**; solver: `b=2,3` N).
+- **`Z₂ × (Z₃)^b`, `b ≥ 2`** — conjectured **P** (solver: `b=2` P). Via the `s₂=1` reduction this is
+  "`{m}` is N"; note the `Z₂` factor *flips* the 3-group outcome (`Z₃ᵇ` = N but `Z₂×Z₃ᵇ` = P).
+
+So, modulo the socle reduction, **the entire abelian sum-free game reduces to `F₃ᵇ = N` plus the
+`Z₂`-flip** — one clean conjecture on elementary 3-groups. The S2 exception book is then a *finite*
+certificate on the socle; the socle games are small and directly attackable (the `b≥4` cases just
+exceed the naive solver — a Rust/`F₃`-tuned solver would extend the evidence). The socle reduction's
+*proof* still meets the interference wall, but it minimizes the irreducible core to elementary
+`(Z₂)^{≤1} × (Z₃)^b` — the sharpest statement of what remains open.
 
 ## Summary table
 
