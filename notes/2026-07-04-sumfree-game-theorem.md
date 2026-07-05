@@ -121,20 +121,28 @@ Cases by `n mod 6`, i.e. by which obstructions exist:
 `{n/2}` is an **N**-position, *because `n/3` exists* (`3∣n`) and lets the second player answer. The
 whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
 
-## Generalization to abelian groups (conjectured)
+## Generalization to abelian groups (PARTIALLY PROVEN — [2026-07-05](2026-07-05-sumfree-abelian-theorem.md))
 
 The mod-6 law is the cyclic case of a clean criterion for the sum-free game on **any finite abelian
-group `G`** (verified, zero mismatches, ~25 groups —
-[sumfree-variants](2026-07-04-sumfree-variants.md)):
+group `G`**:
 
-> **Conjecture.** Let `s₂ = ` 2-rank of `G` and `τ₃ = [3 ∣ |G|]`. Second player wins iff `s₂ ≥ 2`,
-> or (`s₂ ≤ 1` and `s₂ = τ₃`).
+> **Criterion.** Let `s₂ = ` 2-rank of `G`, `τ₃ = [3 ∣ |G|]`, `r₃ = ` 3-rank. Second player wins iff
+> `s₂ ≥ 2`, or (`s₂ ≤ 1` and `s₂ = τ₃`).
 
-For cyclic `Z_n`, `s₂ = [2∣n] ∈ {0,1}`, so this reads "P iff `s₂ = τ₃`" = `n ≡ 0,1,5 (mod 6)` — the
-theorem above. The one new phenomenon for non-cyclic `G` is that **2-rank `≥ 2` forces P** (the
-`(Z₂)^r` 2-torsion self-neutralizes, even overriding a 3-torsion obstruction: `Z₂×Z₂×Z₉ = P` while
-`Z₉ = N`). A proof would extend the negation/translation-mirror obstruction-counting to the
-2-rank-`≥2` self-pairing.
+For cyclic `Z_n`, `s₂ = [2∣n] ∈ {0,1}` and `r₃ ≤ 1`, so this reads "P iff `s₂ = τ₃`" =
+`n ≡ 0,1,5 (mod 6)` — the theorem above.
+
+**Now a THEOREM for `r₃ ≤ 1` or `s₂ ≥ 2`** ([abelian-theorem](2026-07-05-sumfree-abelian-theorem.md)):
+- **`s₂ ≥ 2 ⟹ P` for every `G`** — proved cleanly by the *translation mirror with a spare order-2
+  element*: to any opening `x`, reply `x+v` for an order-2 `v ≠ x` (exists since `2^{s₂}−1 ≥ 3`),
+  then `τ_v`-mirror (O₃-immune). The new phenomenon (`Z₂×Z₂×Z₉ = P` though `Z₉ = N`).
+- **`r₃ ≤ 1` (cyclic Sylow-3):** the six cases lift verbatim via Lemmas 1–4 (one order-3 pair, `≤1`
+  order-2 element — exactly the `Z_n` situation). A clean **reduction** for `s₂=1`: `∅` is P ⟺ `{m}`
+  is N (the unique order-2 `m`; `τ_m` handles every non-`m` opening for all 3-ranks).
+
+**Open slice `s₂ ≤ 1 and r₃ ≥ 2`** (multiple independent order-3 pairs — never occurs in `Z_n`):
+confirmed by the solver, reduced to one lemma. The affine reflection `σ_c` fails off pure `F₃ᵏ` and
+parity forces only small groups (measured — see the note).
 
 ## Verification status
 

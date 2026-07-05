@@ -117,9 +117,11 @@ examples:    Z5,Z7,Z11  Z8,Z10    Z2xZ2,Z4xZ4,Z2^3   Z9,Z3^2   Z6,Z12,Z2xZ9     
 The mechanism: a **lone** 2-torsion (`s₂=1`) is a negation-mirror obstruction; but `s₂ ≥ 2` gives the
 2-torsion subgroup `(Z₂)^r` a fixed-point-free involution that **self-neutralizes** it — and this
 even overrides a 3-torsion obstruction (`Z2×Z2×Z9 = P` while `Z9 = N`). 3-torsion has odd order and
-never self-neutralizes. **This is a genuine clean generalization of the mod-6 theorem** (still a
-conjecture — proof would extend the negation/translation-mirror obstruction-counting to the 2-rank-`≥2`
-self-pairing). A candidate companion result to the `Z_n` theorem.
+never self-neutralizes. **This is a genuine clean generalization of the mod-6 theorem** — now
+**PARTIALLY PROVEN** ([2026-07-05 abelian-theorem](2026-07-05-sumfree-abelian-theorem.md)): a
+theorem for all `G` with 3-rank `≤ 1` or 2-rank `≥ 2` (the `s₂≥2 ⟹ P` self-pairing is a clean
+translation-mirror proof); open only for 2-rank `≤ 1` and 3-rank `≥ 2` (multiple order-3 pairs),
+which is solver-confirmed and reduced to one lemma. A candidate companion result to the `Z_n` theorem.
 
 - **New OEIS-absent sequences:** `Z_n` strong and `{1..n}` Schur (banked above). Extending them and
   the `F₂ᵏ`/`F₃ᵏ` families is a possible OEIS contribution *separate from* the main `Z_n` submission.

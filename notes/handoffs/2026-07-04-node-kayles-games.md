@@ -82,6 +82,42 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 - **Method notes:** small-memory Python probes ran under `ulimit -Sv ~900MB` while the G(17) run held
   the box; once it freed RAM, the Rust quotient solvers + cap-set AGL quotient became feasible.
 
+## Handoff Note — session 2026-07-05--1 (`749a01ab-5976-4db1-99eb-f2d4e1bb9ea5`)
+
+**HEADLINE:** upgraded the abelian sum-free criterion from conjecture (verified ~25 groups) to a
+**THEOREM for all finite abelian `G` with 3-rank ≤ 1 or 2-rank ≥ 2**
+([abelian-theorem](../2026-07-05-sumfree-abelian-theorem.md)). Collaborative mode. Landed +
+committed on `main`.
+
+- **★★ `s₂ ≥ 2 ⟹ P` for every `G`** (the note's flagged "new phenomenon") — **clean proof**:
+  translation mirror with a *spare* order-2 element (`|G[2]\{0}| ≥ 3` ⟹ some order-2 `v ≠ x` for
+  every opening `x`; reply `x+v`, then `τ_v`-mirror, which is O₃-immune). Rests on the cyclic
+  Lemmas 2–3 (they lift verbatim). Covers an infinite family with **no cyclic analogue** (cyclic
+  ⟹ `s₂ ≤ 1`), incl. `Z2²×Z9 = P` though `Z9 = N`.
+- **★ Clean `s₂=1` reduction:** `∅` P ⟺ `{m}` N (unique order-2 `m`); `τ_m` handles every non-`m`
+  opening for **all** 3-ranks. Isolates the whole `s₂=1` difficulty into one position.
+- **`r₃ ≤ 1` cases:** the mod-6 Lemmas 1–4 lift verbatim (one order-3 pair) ⟹ criterion proven for
+  every group with cyclic Sylow-3.
+- **Open slice pinned:** `s₂ ≤ 1 AND r₃ ≥ 2` (multiple order-3 pairs — never occurs in `Z_n`);
+  solver-confirmed (Z3²,Z9×Z3,Z3³,Z2×Z3²,Z2²×Z3²), reduced to **Lemma R** (`{m}`/`∅` is N under
+  `τ₃=1`). Ruled OUT the easy mechanisms (measured, banked so nobody re-tries): affine reflection
+  `σ_c` preserves sum-freeness **only on pure `F₃ᵏ`** (360 viol. Z9×Z3, 104 Z2×Z3², 36 Z7×Z3);
+  parity forces only small groups (`r₃≥2` games are mixed-parity). Scripts banked
+  (`../2026-07-05-sumfree-{strat,probe2,verify-local}.py`); local mirror invariants machine-checked
+  0-violation on 16 groups.
+- **Cross-refs updated:** cyclic theorem note's "Generalization" section + variants note's
+  conjecture line now point to the partial theorem.
+
+**Parallel (queens thread, not this umbrella):** launched the **G(17)=2 revalidation** — the deferred
+k=1 differential (`queens nimber 17 --min-k 1 --max-k 1` at `QUEENS_TT_BITS=30`, fresh 8.6 GB TT =
+independent fingerprint route from the bits=31 run) on the `queens-n18` worktree, tmux
+`queens:13` (`g17-k1-reval`, marker `G17_K1_REVAL_DONE`). Overnight run; k=1=WIN reconfirms G(17)=2
+and unblocks the A344227 paper/OEIS edits. Rebuilt the stale n18 binary first (`--min-k` postdated
+it). See [queens-nimber handoff](handoffs/2026-07-01-queens-nimber-a344227.md).
+
+**Next:** Lemma R (prove the `r₃ ≥ 2` slice — the `Z₂`-labelled-odd-part residual is the handle);
+then OEIS submission (USER); projective `PG(n,q)` cap; interval octals k=2→10⁷.
+
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 
 **HEADLINE:** proved the **cap achievement game on `AG(n,q)` is a second-player win (P) for EVERY
