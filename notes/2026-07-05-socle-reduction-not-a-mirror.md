@@ -52,3 +52,40 @@ the mirror once the 3-part is non-elementary.
 - **Open question worth posing:** is `Z9×Z3=N` provable at all by a *succinct* strategy, or is its
   first-player win "essentially search"? The socle games (elementary) have one-line strategies; the
   reduction cases may not — which would itself be a structural statement about the game.
+
+## Attack 4 (coprime peel) — same verdict: not a mirror, even for elementary `H`
+
+Focused follow-up on the **coprime peel** `outcome(H×Z_p)=outcome(H)`, `p≥5` prime (target `Z3²×Z5=N`;
+scripts `2026-07-05-socle-coprime-{sigma-obstruction,mirror-search,fibered}.py`).
+
+**Structural sharpening (reduces the whole open problem).** The peel — and the entire socle reduction —
+is only nontrivial for **`s₂=0, τ₃=1`** (odd `G` *with* 3-torsion):
+- **`s₂≥2`:** already `P` for any 3-structure (Part-1 translation mirror `τ_v` with a spare order-2
+  element is O₃-immune and group-general) — the reduction is automatic.
+- **`s₂=1`:** the proven `τ_m` reduction gives `∅` P ⟺ `{m}` N for all 3-ranks; the coprime/2-power
+  parts ride along the translation. Open content = `{m}` N for a *non-elementary* 3-part.
+- **`s₂=0, τ₃=0`:** `P` by the negation mirror; coprime parts are negation-clean.
+So the non-socle parts are outcome-neutral **except through 3-torsion coupling**, and the irreducible
+open statement is essentially **"odd `G` with 3-torsion ⟹ N"** (⊇ `F₃ⁿ=N`) plus the `s₂=1`
+non-elementary `{m}`-case.
+
+**The `σ`-reflection obstruction, pinned.** For `σ_G(y)=−o−y` (`o=(o_H,0)` socle center), the
+char-3 identities that make the `F₃ⁿ` proof clean (`−2i=i`, `3i=0`) **fail off-base** (`i≠0`): the case
+`p+σy=y` forces the blocker `p=o+2y∈A` (whose σ-image is the doubling `2σy∈A`), and `y+p=o` — the
+`F₃ⁿ` escape — becomes `y+p=(o_H,3i)≠o`. Concretely (`Z3×Z7`, `o=(1,0)`): `y=(1,4)`, `w=σy=(1,3)`,
+`(0,1)+w=y` with `(0,1)=o+2y∈A`.
+
+**Every mirror shape fails (adversarially verified):**
+- global `σ_G` (fails, off-base blocker above);
+- combined "σ_H on base, `−y` off-base" (Codex: 1284 failures);
+- **all** structured single involutions `τ(h,i)=(σ_H(h) or −h,\; c−i)`, `c∈Z_p`, opening `τ`'s unique
+  fixed point `(o_H,3c)` — *including the order-15 openings* (`c≠0`): every one FAILS on `Z3×Z5`,
+  `Z3×Z7`, `Z3²×Z5`;
+- **fibered** "pin the `H`-projection to the winning `σ_H`, choose the `Z_p`-coordinate freely/adaptively":
+  FAILS on `Z3×Z5,Z3×Z7,Z3²×Z5,Z3²×Z7`.
+
+So no strategy whose `H`-projection is the `F₃ⁿ` mirror can win the peel — the hero must deviate the
+`H`-coordinate. **The coprime peel is genuinely adaptive**, matching `Z9×Z3`. **Attack 4 (mirror +
+bounded local repair) is a dead end**; the socle reduction is not a pairing phenomenon in *any* case
+(higher-3-power or coprime). Redirect effort to the structural/invariant routes (Attacks 2/3/5) or a
+novel technique — and to the sharpened target **"odd `G` with 3-torsion ⟹ N."**

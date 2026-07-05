@@ -144,6 +144,24 @@ re-ran the σ-theorem sweeps (b≤3, 0 violations) and re-killed the hyperplane 
   game-morphism `outcome(G)=outcome(G/K)`; (4) bounded-local-repair strategy for `Z3²×Z5` (the smallest
   hard coprime peel — the σ-lesson applied non-globally); (5) LMSF terminal-parity invariant.
 
+**Round 3 — Attack 4 (coprime peel) resolved NEGATIVE + a structural sharpening** (extends the
+not-a-mirror note; scripts `2026-07-05-socle-coprime-{sigma-obstruction,mirror-search,fibered}.py`).
+Codex's parallel round: all 5 attacks probed — peels all hold (A1); no nimber law (A2); `G→G/6G`
+preserves outcome but is not a game morphism on positions (A3); `Z3²×Z5=N` first move `(0,1,0)` socle,
+combined strategy fails 1284× (A4); LMSF `Z5×Z3` already mixed-parity (A5).
+- **★ Structural sharpening (I derived):** the socle reduction / classification's whole open content is
+  only **`s₂=0, τ₃=1`** (odd, 3-torsion) plus **`s₂=1` non-elementary `{m}` N**. `s₂≥2` is done (Part-1
+  translation `τ_v`, group-general, any 3-structure); `s₂=1` rides `τ_m`; `s₂=0,τ₃=0` is negation. So
+  non-socle parts are outcome-neutral **except through 3-torsion coupling**; the irreducible statement
+  is essentially **"odd `G` with 3-torsion ⟹ N"** (⊇ `F₃ⁿ=N`).
+- **★ Attack 4 = dead for mirrors (my focused work).** The coprime peel is NOT a mirror/fibered
+  strategy even for elementary `H`: global `σ_G`, combined, ALL structured single involutions
+  `(σ_H or −h, c−i)` incl. order-15 openings, and the fibered "pin `H`-projection to `σ_H`, free `Z_p`"
+  all FAIL (adversarial, `Z3×Z5/Z3×Z7/Z3²×Z5/Z3²×Z7`). `σ_G` obstruction pinned: char-3 (`−2i=i`, `3i=0`)
+  fails off-base, blocker `p=o+2y∈A`. So the win is genuinely adaptive (like `Z9×Z3`); the socle
+  reduction is not a pairing phenomenon in ANY case. **Redirect: pursue structural/invariant routes
+  (A2/A3/A5 refined) or a novel technique, targeting "odd `G` w/ 3-torsion ⟹ N".**
+
 ## Handoff Note — session 2026-07-04--2 (`f78c95d1-3c01-49d4-9f4b-fec58d939cd0`)
 
 - **Landed:** everything in Progress above. Headline = the sum-free mod-6 theorem (fully proven) +
