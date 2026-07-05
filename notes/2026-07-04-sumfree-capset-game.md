@@ -215,14 +215,17 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
   2-transitivity makes every opening equivalent ⇒ no residue case-split (unlike the Z_n mod-6 law).
   Validated: brute `G(1,2,3)=0` + the P2 strategy beats all P1 play d=1,2,3 (`2026-07-04-capset-proof.py`);
   d=4 outcome `G(4)=0` from the prior AGL(4,3) solver.
-- **★★ GENERALIZED to `AG(n,q)`, all ODD prime powers `q`** (not just `q=3`) — the *same* mirror
-  proof works once the key step is done right: the reflection line `ℓ` through `{y, σ_c(y)}` is
-  `σ_c`-invariant, so a `σ_c`-symmetric cap meets it in an **even** number of points; `y` legal ⇒
-  `|A∩ℓ|≤1` ⇒ `=0`, so the mirror never creates 3 collinear. Center `c=(a+b)/2` (midpoint, exists as
-  `q` odd) self-blocks. So **`G(n,q)=0` for every `n` and odd `q`.** Corroborated: brute outcome P
-  for `AG(2,5), AG(2,7)` and the strategy beats all P1 play there (`2026-07-04-cap-agnq.py`,
-  `2026-07-04-ag-strategy.py`). Boundary: `q` even (char 2) breaks the tool (`σ_c=id`, no midpoint) —
-  **open**. Full write-up now covers all odd `q`: [capset-game-theorem](2026-07-04-capset-game-theorem.md).
+- **★★★ GENERALIZED to `AG(n,q)`, EVERY prime power `q` (both parities)** (not just `q=3`).
+  `G(n,q)=0` for all `n` and all `q`, by a **shared parity lemma** with two mirrors:
+  - **`q` odd** — board `qⁿ` odd ⇒ no fixed-point-free involution ⇒ *move-then-mirror* (burn P1's
+    opening) via reflection `σ_c`, center `c=(a+b)/2` (midpoint) self-blocks.
+  - **`q` even (char 2)** — translation `τ_v(x)=x+v` **is** a fixed-point-free involution (`2v=0`) ⇒
+    *whole-board* mirror (P0), no opening burn.
+  Parity lemma (both): the mirror's invariant line `ℓ` meets a symmetric cap in an **even** count; the
+  just-played legal `y∈ℓ` forces `|A∩ℓ|≤1` ⇒ `=0`, so the mirror never makes 3 collinear. Corroborated:
+  brute outcome P for `AG(2,{4,5,7,8,9})` incl. non-prime `q=9` and char-2 `q=4,8`; both strategies
+  beat all P1 play (`2026-07-04-cap-gf.py`/`gf.py`/`validate-all.py`). The earlier "`q` even open" is
+  now **RESOLVED = P**. Full write-up: [capset-game-theorem](2026-07-04-capset-game-theorem.md).
 - **d=4 SOLVED: G(4) = 0 (P) — conjecture HOLDS through d=4, robustly verified.** A **full AGL(4,3)**
   quotient (complete-invariant canonical form: canon = min over an AGL-equivariant origin/frame of the
   GL-min image, validated 0 collisions vs brute full-group enumeration for d≤3, 0 equivariance

@@ -51,12 +51,13 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 2. ~~**Write up the game-(a) lemma bundle**~~ — **DONE** 2026-07-04--3
    ([nodekayles-pairing-lemmas](../2026-07-04-nodekayles-pairing-lemmas.md)). Reusable abelian-Cayley
    core (R0/L1/L2/odd-n) + graph-general master pairing lemma.
-3. ~~**Cap-set:** d=5 + "always P" proof~~ — **DONE + GENERALIZED 2026-07-04--3**
+3. ~~**Cap-set:** d=5 + "always P" proof~~ — **DONE + FULLY GENERALIZED 2026-07-04--3**
    ([capset-game-theorem](../2026-07-04-capset-game-theorem.md)): proven `G(n,q)=0` for **all `n` and
-   all ODD prime powers `q`** (not just q=3) via the self-blocking reflection-center mirror; the
-   `q>3` step works by a parity argument (σ_c-symmetric cap meets the reflection line in an even
-   count ⇒ 0). d=5 (and all `F₃` dims) settled = P, no canon needed. Corroborated on AG(2,5),AG(2,7).
-   *Open follow-on:* `q` even / char 2 (tool breaks); projective `PG(n,q)`.
+   EVERY prime power `q`, both parities**. `q` odd ⇒ move-then-mirror reflection σ_c (odd board, burn
+   opening, midpoint center self-blocks); `q` even/char 2 ⇒ whole-board translation mirror τ_v (which
+   IS a fpf involution since 2v=0). Shared parity lemma (symmetric cap meets the mirror line in an
+   even count ⇒ 0). d=5 settled = P. Corroborated AG(2,{4,5,7,8,9}) incl non-prime q=9 & char-2 q=4,8;
+   both strategies beat all P1 play. *Open follow-on:* projective `PG(n,q)`; "no t collinear" t>3.
 4. ~~**Interval octals** k≥2~~ — **piece (a) DONE 2026-07-04--3** (m=2·10⁶, no period p≤60000; k=3
    ≈m^0.66, k=2 ~log; last path zeros m=16168 / m=827062). Remaining: push k=2 to 10⁷ (needs a
    sub-O(m²) split) or accept as an open octal family.
