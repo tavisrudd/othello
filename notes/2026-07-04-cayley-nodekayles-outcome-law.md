@@ -130,22 +130,45 @@ brute circulant engine (k=1..4, n<40, 0 mismatches).
 for large `n` (small-n exceptions inside the preperiod: N at n=3,7,11,17,23,27,31). This is
 Dawson's chess, period 34 — a validation, not a new result.
 
-**k ≥ 2 — UNBOUNDED and periodicity OPEN (the real finding; corrects the earlier "expected
-periodic" guess).** `g_path_k` Grundy values **grow without bound** through m=8000 (k=2 reaches
-**228**, k=3 reaches **136**), with **no pure period and no arithmetic period** (saltus) detectable
-for `p < 2000` on the tail `[4000,8000]`. These are 5- and 7-digit octal codes — **beyond the
-≤3-digit range Flammenkamp's octal tables cover**, and octal periodicity is unproven in general
-(Guy's conjecture; even 3-digit octals have dozens of unsettled cases). So the interval family for
-`k ≥ 2` is a **fresh instance of unbounded Node-Kayles nimbers** — it lines up with the trees result
-(unbounded) and contrasts the 3×N clean-diagonal (bounded); it is NOT the quick periodic win first
-hoped for.
+**k ≥ 2 — no periodicity, growth UNBOUNDED but rate depends on k (extended to m = 2·10⁶, session
+--3).** These are 5- and 7-digit octal codes — **beyond the ≤3-digit range Flammenkamp's octal
+tables cover** — and octal periodicity is unproven in general (Guy's conjecture; even 3-digit octals
+have unsettled cases). A fast C octal solver (`2026-07-04-octal.c`, validated on k=1 = period 34,
+max 9) pushes the earlier m≤8000 probe out three decades:
 
-**Cycle-outcome consequences (conjectural, from the data):**
-- `k=2` (0.11337): P-positions of the path game **thin out** — zero-gaps grow to 4174 by m=8000 and
-  the P/N indicator shows no period; only odd `n` can be N (even n = G=0 by L1) and those become rare.
-- `k=3` (0.1113337): **no path P-position beyond m=824** in the computed range ⇒ conjecturally
-  `G(C_n^3) = 0` (second player wins) for **all large n** — but uncertifiable while values stay
-  unbounded (a zero could reappear).
+- **No period.** Neither a pure period nor an arithmetic period (saltus ≥ 0) exists for **p ≤ 60000**
+  on the **10⁶-wide tail `[10⁶, 2·10⁶]`**, both k=2 and k=3 — a far stronger negative than the
+  original "p < 2000 on `[4000,8000]`."
+- **The growth rate splits by k** (record = max Grundy value over `[0,m]`):
+  - **k=3 (`0.1113337`): power-law growth ≈ m^0.66, robustly unbounded.** Record 136 (m=8k) → 662
+    (10⁵) → 1546 (3·10⁵) → 3141 (10⁶) → **4947** (2·10⁶); the window-max climbs monotonically.
+  - **k=2 (`0.11337`): sub-power-law / roughly logarithmic — records still rise, but slowly.** 228
+    (m=8k) → 805 (10⁵) → 1066 (3·10⁵) → 1226 (10⁶) → **1314** (2·10⁶); the local exponent falls
+    0.18 → 0.10. New records keep appearing (no finite ceiling in evidence), but far slower than k=3,
+    so k=2 "unbounded" is plausible-but-not-firm, whereas k=3's is strong.
+
+So the interval family for `k ≥ 2` is a **fresh instance of unbounded (or at least aperiodic,
+record-breaking) Node-Kayles nimbers** — it lines up with the trees result (unbounded) and contrasts
+the 3×N clean-diagonal (bounded); it is NOT the periodic win first hoped for. **Prior art (checked
+2026-07-04):** k=1 = `0.137` = Dawson's chess is textbook (Guignard–Sopena, Uiterwijk); the "octal
+games on graphs" line (Beaudou–Coupechoux–Dailly–Gravier–Moncel–Parreau–Sopena, arXiv:1612.05772)
+plays a *fixed* small octal (`0.33`) on subdivided stars/bistars — the opposite direction — and does
+not treat Node-Kayles on *powers* of paths. Node-Kayles on `P_m^k` is a *distance game* (a new token
+must sit > k from all played), and the `0.[1×k][3×k]7` identification with unbounded/aperiodic
+nimbers for k ≥ 2 does not surface in that literature; consistent with the "appears-novel" framing.
+
+**Cycle-outcome consequences (conjectural; refined by the m ≤ 2·10⁶ last-P-position data).** Recall
+`G(C_n^k) = 1 ⇔ g_path_k(n − 2k − 1) = 0`, so the *cycle* is a first-player win exactly at the *path*
+game's P-positions (zeros). The last path zero found (over `[1, 2·10⁶]`):
+- `k=2` (0.11337): **last path zero at m = 16168**, then zero-free through 2·10⁶ (a ~1.98·10⁶ gap)
+  ⇒ conjecturally `G(C_n^2) = 0` (**second player wins**) for all `n > 16173`. Now the
+  better-supported "2nd-player-for-all-large-n" statement (even `n` is already G=0 by L1; the odd-`n`
+  N-positions die out by n ≈ 16173).
+- `k=3` (0.1113337): **last path zero at m = 827062** — the earlier "no P beyond m=824" was an
+  **artifact of the m ≤ 8000 range** (CORRECTED: zeros recur far later than believed). There is still
+  a zero-free tail `[827062, 2·10⁶]`, so `G(C_n^3) = 0` for large `n` holds *in the computed range*,
+  but with **low confidence** — a path zero appeared as late as 827062, so another could appear later;
+  the k=3 conjecture is much weaker than the k=2 one.
 
 ## What is proven vs. computed
 
@@ -153,9 +176,11 @@ hoped for.
   L2; the odd-n pairing impossibility; the interval-family even-n G=0 (a corollary of L1).
 - **Computed / conjectural:** the pairing-coverage percentages and the P-vs-N asymmetry headline
   (empirical over the full enumeration to n≤20/19, sound throughout); the `C_n^k` octal
-  identification `0.[1×k][3×k]7` (proven-on-write + verified two ways); the k≥2 unboundedness /
-  no-periodicity (empirical through m=8000, saltus search p<2000); the k=3 "P for all large n"
-  conjecture.
+  identification `0.[1×k][3×k]7` (proven-on-write + verified two ways); the k≥2 record-breaking /
+  no-periodicity (empirical through **m=2·10⁶**, no period p≤60000 on `[10⁶,2·10⁶]`; k=3 grows ≈m^0.66
+  so its unboundedness is strong, k=2 grows ~log so its unboundedness is plausible-not-firm); the
+  cycle "2nd player wins for all large n" conjecture (k=2 well-supported, last path zero m=16168;
+  k=3 weak, last path zero m=827062).
 - **Open (unchanged, now positioned):** the outcome of an arbitrary *connected* circulant has no
   simple closed form (Node-Kayles is PSPACE-complete in general); the value lives in the "gap" and
   the only clean laws are for structured families (intervals k=1, k-th-power residues / Paley).
@@ -171,14 +196,15 @@ hoped for.
    abelian `Γ` (torus/kings), re-verified with zero violations through `|Γ| ≤ 16` including
    non-cyclic groups (`2026-07-04-abelian-nodekayles-verify.py`).
 2. **Interval-family octals (REVISED — periodicity is NOT a quick win).** The k≥2 columns are the
-   octal games `0.[1×k][3×k]7` with unbounded values; certifying periodicity ≡ resolving Guy's
-   conjecture for these codes — out of scope for a probe. The tractable pieces: (a) extend
-   `g_path_2`/`g_path_3` to m~10⁵–10⁶ (cheap C, the O(m²) split recursion) to firm up the
-   unboundedness and search for a large period/saltus; (b) settle the k=3 "P for all large n"
-   conjecture is likewise gated on the same octal question. Bank as: **the interval family is an
-   open-octal-game family, one clean k=1 result + a fresh unbounded-nimber data point.** Verify
-   whether the `0.[1×k][3×k]7` identification is already in the literature (Beaudou–Coupechoux–Dailly
-   "Octal games on graphs"; Guignard–Sopena) before any novelty claim.
+   octal games `0.[1×k][3×k]7`; certifying periodicity ≡ resolving Guy's conjecture for these codes —
+   out of scope for a probe. **Piece (a) DONE (session --3):** the C solver `2026-07-04-octal.c`
+   extended `g_path_2`/`g_path_3` to **m=2·10⁶** — no period p≤60000 on `[10⁶,2·10⁶]`; k=3 grows
+   ≈m^0.66 (record 4947), k=2 grows ~log (record 1314); prior-art checked (identification does not
+   surface in the octal-games-on-graphs / distance-game literature; k=1=Dawson only). **Piece (b)**
+   (cycle "2nd player wins for large n") refined by the last-path-zero data: k=2 well-supported
+   (last zero m=16168), k=3 weak (last zero m=827062). Remaining open lever: push k=2 to m~10⁷ (needs
+   a sub-O(m²) split, or accept the octal is open); no cheap certification exists. Bank as: **an
+   open-octal-game family, one clean k=1 result + a fresh unbounded/aperiodic-nimber data point.**
 3. **N-side structure:** the pairing certificate is a minority on the N-side; the open question is
    what *does* certify the majority of circulant first-player wins. The Paley Weil-closure argument
    is one answer for one family; a second, non-pairing N-side certificate type (a potential
