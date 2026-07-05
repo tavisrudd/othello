@@ -60,14 +60,27 @@ This is the L2-analog for the achievement game — the exact `mod 6 = 1,5` slice
 - **`n≡3 (mod 6)`** (odd, `3∣n`) → break at `x=n/3`: `3x=0 ⇒ x+x=2x=−x`, so the mirror move `−x`
   collides with `x`. N-position; the first player's opening is `n/3`.
 
-**The `n≡0 (mod 6)` slice is a DEEP P-position — no pairing (negative result).** Extracting P2's
-winning replies to each P1 opening for n=6,12,18 (`2026-07-04-sumfree-strat-probe.py`) shows the
-winning reply is **not** the negation mate — negation loses as a reply for many openings, with
-*inconsistent* parity structure (n=12: neg wins only for odd openings; n=18: only for even; n=6:
-never). So `n≡0 (mod 6)` is P **without any negation-mirror certificate** — analogous to the deep
-odd-n P-positions of game (a) that resist all pairing. ⇒ a full proof of the mod-6 law needs a
-**non-pairing (inductive / strength) argument** for this slice; it is a real open sub-problem, not a
-quick lemma. (Do not hunt for a pairing here — verified there isn't a negation one.)
+**The `n≡0 (mod 6)` slice is a DEEP P-position — it resists the WHOLE pairing/S2 toolkit (two
+negative results, so future effort is not wasted there).**
+
+1. **No automorphism-pairing certificate.** Every automorphism of the Schur 3-uniform hypergraph on
+   Z_n is a multiplier `x↦ax` (`gcd(a,n)=1`) — `0` is the unique idempotent (`0+0=0`) so is fixed,
+   and the linear structure forces multipliers. A pairing strategy needs a **fixed-point-free**
+   involution automorphism of the playable set `Z_n\{0}`; the multiplier involutions (`a²≡1`) all
+   have a fixed point `(a−1)x≡0` with `x≠0` whenever `6∣n` (small factors 2 and 3 supply it). So no
+   automorphism pairing exists. (Extracting P2's winning replies for n=6,12,18 confirms it: the
+   winning reply is not the negation mate, with inconsistent parity across n.)
+2. **No bounded-defect S2 (symmetric-play-with-repair) certificate either.** Under the P2 strategy
+   that minimizes asymmetry `|A ⊕ (−A)|` among winning replies, the max asymmetry reached **grows**:
+   n=6→4, 12→4, 18→12, 24→16 (≈ 2n/3, unbounded). So P2 cannot win by staying within an O(1) defect
+   of a symmetric position — the S2 "large mirror + finite repair" schema does not apply.
+
+⇒ the `n≡0 (mod 6)` half is genuinely deep: no pairing, no bounded-defect mirror. A proof needs a
+**different tool** — induction on n (the outcome is 6-periodic, so an `n → n−6` strategy reduction is
+the natural target), a potential-function / strategy-stealing argument, or a link to the
+maximal-sum-free-set structure of Z_n (Diananda–Yap). This is the open frontier of the law; the
+`gcd(n,6)=1` half is done and the `n≡2,3,4 (mod 6)` N-side is first-player-explicit (play `n/2` /
+`n/3`). (Analogue: game (a)'s odd-n deep P-positions, also un-pairable.)
 
 ## Result 2 — cap-set game on F₃ᵈ: second player wins for d=1,2,3
 
