@@ -126,6 +126,24 @@ re-ran the σ-theorem sweeps (b≤3, 0 violations) and re-killed the hyperplane 
   `Z5×Z3²`. Possibly split the reduction into R1 (2-power), R2 (3-power), R3 (coprime) — they may need
   distinct mechanisms.
 
+**Round 2 (I ran the above) — the mirror method is OUT for the socle reduction (solid negative +
+5 parallel attacks queued for Codex).** Reverse-engineered `Z9×Z3=N`
+([`2026-07-05-socle-reduction-not-a-mirror.md`](../2026-07-05-socle-reduction-not-a-mirror.md)):
+- **Winning first moves = EXACTLY the 8 socle order-3 elements**; on socle moves the reply is the
+  `F₃²` reflection `σ(y)=−o−y` (forced for `(3,1),(6,1)`). So the socle sub-play *is* elementary `F₃²`.
+- **`Z9×Z3=N` is NOT a pairing/mirror position:** `σ`, `−y`, and **every** adaptive combination
+  (`σ else −y`, `−y else σ`, socle:σ/order-9:−y, both fallbacks) FAIL; the only reflection with the
+  played center `o` fixed is `σ=−o−y` (as `2o=−o`), which dies on order-9 (`2y=σy⟹3y=0` fails). The
+  win is genuinely adaptive. **`Z₂×(Z9×Z3)`: ChatGPT's σ-mirror fails for EVERY `a`** (socle+order-9).
+- **Interpretation:** the two proven socle endpoints are char-3-pure phenomena; the socle *reduction*
+  (elementary ← general) is a separate NON-mirror problem. Stop trying mirror variants on
+  non-elementary 3-groups. Scripts banked `2026-07-05-socle-{z9z3-strategy,z9z3-adaptive,z2z9z3-sigma}.py`.
+- **5 parallel attacks written into the Codex brief** (`2026-07-05-codex-assignment-sumfree-socle.md`
+  top section): (1) atomize into peels `P_cop(p)/P_2(k)/P_3(k)` + locate the hard core (3-torsion
+  coupling); (2) full-nimber law under peeling (`𝒢(G)↔𝒢(G[6])`, stronger than outcome); (3) quotient
+  game-morphism `outcome(G)=outcome(G/K)`; (4) bounded-local-repair strategy for `Z3²×Z5` (the smallest
+  hard coprime peel — the σ-lesson applied non-globally); (5) LMSF terminal-parity invariant.
+
 ## Handoff Note — session 2026-07-04--2 (`f78c95d1-3c01-49d4-9f4b-fec58d939cd0`)
 
 - **Landed:** everything in Progress above. Headline = the sum-free mod-6 theorem (fully proven) +

@@ -23,6 +23,66 @@ scratch dir and add new scripts under `notes/` only.**
 
 ---
 
+## ★ SOCLE REDUCTION — FIVE PARALLEL ATTACKS (2026-07-05, current focus)
+
+**Established negative (do NOT re-try): the mirror method does not extend past elementary 3-groups.**
+`Z9×Z3=N` is provably *not* a pairing/mirror position (winning first moves = exactly the socle
+order-3 elements; on-socle play = the `F₃²` reflection `σ(y)=−o−y`; on order-9 moves **no** consistent
+reply-mirror exists — `σ`, `−y`, and every adaptive combination fail). ChatGPT's `σ`-mirror fails on
+`Z₂×(Z9×Z3)` for **every** center `a`. So the two proven socle *endpoints* (`F₃ⁿ=N`, `Z₂×F₃ᵇ=P`) are
+char-3-pure phenomena; the socle *reduction* (elementary ← general) is a **separate, non-mirror
+problem** — see [`2026-07-05-socle-reduction-not-a-mirror.md`](2026-07-05-socle-reduction-not-a-mirror.md).
+Pursue the five attacks below **in parallel**; they are independent. **The needed statement:** for the
+open slice `s₂≤1 ∧ r₃≥2`, the non-socle parts (coprime, higher 2-/3-power) are **outcome-neutral**.
+
+**Attack 1 — Atomize the reduction; locate the hard core (foundational).** The full reduction iterates
+three atomic peels: `P_cop(p)`: `outcome(H×Z_p)=outcome(H)`, `p≥5` prime; `P_2(k)`:
+`outcome(H×Z_{2ᵏ})=outcome(H×Z_{2ᵏ⁻¹})`; `P_3(k)`: `outcome(H×Z_{3ᵏ})=outcome(H×Z_{3ᵏ⁻¹})`. With the
+sound solver, verify each peel over many `H` (include `r₃≥2`, mixed parity) **and record, per peel,
+whether it admits a matched involution** (e.g. `ρ` = negate-the-new-factor works for `P_cop` iff `H`
+has no 3-torsion). Deliverable: a table (peel × H-class → holds? / mirror-able?) that pins exactly
+which peels need a genuinely new argument (conjecture: precisely those where `H` has 3-torsion — the
+coupling Codex already found via `a+y=ρ(y)`, `a=(ρ−1)y`).
+
+**Attack 2 — Full nimber law under peeling (high-payoff structural).** It is not a nimber identity
+(`𝒢(Z14)=∗2` vs `𝒢(Z2)=∗1`), but compute the **full Grundy value** `𝒢` for `G`, `G[6]`, and the
+intermediate peels across many groups, and hunt for a **regular law**: is `𝒢(H×Z_p)` a function of
+`𝒢(H)` and `p`? Is the nim-difference `𝒢(H×Z_p) ⊖ 𝒢(H)` constant/periodic in `p`? Does `𝒢` stay in a
+bounded set once `(s₂,r₃)` is fixed? A clean nimber law would **prove the outcome identity as a
+corollary** and is strictly stronger. Deliverable: nimber tables + any conjectured `𝒢(G) ↔ 𝒢(G[6])`
+law.
+
+**Attack 3 — Quotient game-morphism `outcome(G)=outcome(G/K)` (structural/inductive).** Rather than
+peel a direct factor, quotient by a characteristic subgroup `K` inside the non-socle part (candidates:
+`K=6G`, the top layer of a `p`-power, a Frattini-type subgroup). Probe `outcome(G)` vs `outcome(G/K)`
+for each candidate `K`; find one where they always agree, then check whether the quotient map
+`q:G→G/K` is a **game morphism** (legal sum-free moves lift/descend, giving a strategy correspondence).
+A working `K` yields an induction on `|G|`. Deliverable: which `K` preserve the outcome; whether the
+induced correspondence is sound.
+
+**Attack 4 — Bounded-local-repair strategy for one hard coprime peel (the σ-lesson, applied
+non-globally).** The σ-lesson was *don't* fix the obstruction with a global involution — spend a
+bounded detour. On `H×Z_p` (take `H=Z3²`, so `Z3²×Z5=N` — the smallest genuinely-open coprime peel),
+search for an explicit first-player strategy: run the `F₃²` socle strategy on `H×{0}`, pair the
+coprime/mixed elements, and insert a **bounded local repair** exactly at the `a+y=ρ(y)` blocker
+positions. Use `verify_strategy.py` to test candidate detour rules over all lines. An explicit verified
+strategy for even this one peel would be the first non-mirror socle-reduction proof. Deliverable: a
+verified strategy for `Z3²×Z5`, or the precise obstruction that blocks every bounded repair.
+
+**Attack 5 — LMSF terminal-parity invariant (the "different invariant" route).** Game length =
+`|final locally-maximal sum-free set|`; first player wins iff it can force an **odd-size** maximal set.
+Compute the LMSF **size distributions** of the open-slice groups vs their socles and look for a
+size-parity correspondence (a bijection `LMSF(G)↔LMSF(G[6])` preserving size mod 2, or a proof the
+achievable-parity sets match). If maximal-set parity structure is preserved by peeling, that routes to
+the outcome identity with no strategy at all. Deliverable: LMSF size/parity tables + any correspondence.
+
+**Report** into `notes/2026-07-05-codex-findings-sumfree.md` (append a socle-reduction section): per
+attack, what the data shows, any proof or precise obstruction, and verified-vs-inferred. A clean
+"Attack 1 table + Attack 2 nimber law conjecture + Attack 4 verified `Z3²×Z5` strategy" would be an
+excellent round.
+
+---
+
 ## 0. The game (precise definition)
 
 Fix a finite abelian group `G` (written additively). Two players alternately build a subset
