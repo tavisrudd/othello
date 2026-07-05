@@ -198,6 +198,28 @@ unproven slice), but it is a far cleaner statement of the open problem, and it i
 irreducible core: **outcomes of sum-free games on 2-and-3-groups.** All proven results here decide
 that core except `s₂ ≤ 1 ∧ r₃ ≥ 2`.
 
+**Induction attempt (peel one coprime factor: `outcome(H × Z_m) = outcome(H)`, `gcd(m,6)=1`).**
+Pursued as the natural non-mirror proof route. It has a clean structural basis but **re-localizes to
+the same core rather than bypassing it** — recorded so the route isn't re-run blind:
+- **Exact structural fact (proven, `rho.py`/probe):** since 2,3 are invertible mod `m`, every
+  order-2 and order-3 element of `H × Z_m` has `Z_m`-coordinate `0`. So **`H × Z_m` has *exactly*
+  the O₂/O₃ obstruction of `H`** (the pure-`H` copy `H×{0}`), and the entire `Z_m`/mixed part is
+  negation-clean (no new bad pairs). This is *why* the coprime part is outcome-neutral.
+- **`s₂ ≥ 1` transfers cleanly:** the 2-rank is preserved by a coprime factor, so `s₂≥2 ⟹ P` and the
+  `s₂=1` reduction apply to `H × Z_m` verbatim. Illustration: `Z30 ≅ Z6×Z5`, and its winning
+  translation mirror `T_{15}` is — under CRT — `T_{(3,0)}` = translate by the order-2 element of the
+  `Z6`-part, **identity on `Z5`**; the mirror lives entirely in the {2,3}-part and the coprime part
+  rides trivially.
+- **`s₂ = 0` does NOT drop out:** lifting a winning `H`-strategy by "full negation on the `Z_m`
+  coordinate" fails for the *same* reason the combined B-game strategy failed — the obstruction-
+  handling moves (pure-`H` order-3 plays) interfere with the mirror of the mixed `(h,i)` elements,
+  the identical `a+z=ρz` collision. The product game does not cleanly project onto `H`. So the
+  induction step is true but its proof is exactly as hard as resolving `H`'s own `r₃≥2` core.
+- **Upshot:** every route (5 attacks: negation, translation, `σ_c`, combined B-game, `ρ`/induction)
+  hits the **same** interference wall between obstruction-handling and mirroring. The open core is
+  genuinely irreducible and subsumes `F₃ᵏ=N`; a proof needs a technique that does not rely on a
+  global order-2 symmetry.
+
 ## Summary table
 
 | `(s₂, τ₃)` and `r₃` | outcome | status | mechanism |
