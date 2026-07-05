@@ -322,3 +322,53 @@ disjoint from under `a+b=c`; the failure is subtler). Lower priority.
   (because `m + (0,v) = (1,v)`). So the `{m}`-residual is a "`Z₂`-labelled `F₃ᵇ` game": each `v` gets
   a label in `{0,1}` and a Schur triple `v+w=u` is a violation only if the labels satisfy
   `ε_v + ε_w = ε_u`. The label freedom is *why* `Z₂×F₃ᵇ` flips to P — exploit it.
+
+---
+
+## ★★ ROUND-3 UPDATE (2026-07-05) — the BOOK shrinks the residue; new target = adaptive coupled pairing
+
+Claude took the "bounded-exception book" angle and it produced a real narrowing. Full detail:
+[`2026-07-05-socle-book-residue-shrink.md`](2026-07-05-socle-book-residue-shrink.md); scripts
+`2026-07-05-socle-book-{residue,investigate,scaling}.py`.
+
+**Established (build on these; do not redo):**
+- For odd `G`, negation `ν(x)=−x` is sum-clean on **every element except order-3** — the exceptions
+  are exactly the socle `G[3]\{0}`, size `3^{r₃}−1`, **independent of `|G|`.** Call order-3 = *socle*,
+  the rest = *bulk*. **Parity reformulation:** bulk negation-paired ⟹ even ⟹ outcome = socle-move
+  parity; P1 wins ⟺ it forces odd socle-moves = the socle `F₃^{r₃}=N` game.
+- The book strategy (open socle `o`; **bulk** opponent move → reply `−y`; **socle** opponent move →
+  reply a winning socle move) gives: **bulk reply always LEGAL** (0 genuine bulk-fails, any coprime
+  part); **`r₃≤1` WINS outright** (uniform proof of the coprime + higher-power peel for cyclic-Sylow-3:
+  `Z3×Z_p` any `p`, `Z3³`).
+- **`r₃≥2` LIMIT (brute-verified — do not retry fixed negation-bulk):** forcing bulk = negation
+  **loses**. On `Z9×Z3` the book position `{o}∪`(two bulk pairs) is an OPPONENT-win and the stuck node
+  is a genuine hero-loss (not one repair short). Reason: the fixed bulk pairing manufactures Schur
+  obstructions (`σ(y)+z ∈ A`) that kill the socle-σ reply. The failure is **coprime-independent**
+  (socle-fail = 1 for `Z5,Z7,Z11,Z9`).
+
+**★ New primary target: an ADAPTIVE bulk pairing coupled to the socle game.** The residue is now
+1-parameter (`r₃≥2`) + "the bulk must be paired *adaptively*, shifting with the socle center/state, so
+the socle-σ reply is never blocked." A *matched involution coupled to the socle*, not a fixed one.
+Concrete tasks (use `sumfree_solver.py` + `verify_strategy.py`):
+
+1. **Extract & characterize the solver's bulk-handling on `Z9×Z3` and `Z5×Z3²`.** Dump the full winning
+   first-player strategy; for each hero reply to a *bulk* opponent move, record how it deviates from
+   `−y`. Is it negation with *bounded* deviations? Are the deviations a function of the current socle
+   center `o` / socle-position (e.g. reply `−y` normally but `σ_o(y)=−o−y` or `−y+`(socle shift) at
+   flagged positions)? This is the reverse-engineering that cracked `F₃ⁿ` and `Z₂×F₃ᵇ`.
+2. **Test candidate coupled pairings** `π_o(z)` on the bulk, parameterized by the socle center `o`:
+   e.g. `z ↦ −y` vs `z ↦ −o−z` chosen by a socle-consistency rule; or a pairing that avoids
+   `π_o(z)+z' ∈ σ_o(socle)`. Adversarially verify (like the σ-theorem) on `Z9×Z3`, `Z5×Z3²`,
+   `Z3²×Z7`. Even one verified coupled pairing that wins a genuinely-open `r₃=2` case = the breakthrough.
+3. **Is the `r₃=2` residue a single universal socle configuration?** The stuck node's *socle
+   projection* looked constant across coprime parts — confirm it is literally the same socle
+   configuration for `Z9×Z3, Z5×Z3², Z3²×Z7`. If so, resolving that one configuration closes **all**
+   `r₃=2` peels at once.
+4. **Parity route (Attack 2, revived):** since outcome = socle-move parity *when the bulk is paired*,
+   the whole reduction = "P1 can keep the bulk paired while running the socle game." Try to prove this
+   directly: characterize exactly when a bulk element becomes unpairable (its `π_o`-partner blocked)
+   and show P1 can always avoid/repair it within the socle schedule.
+
+**Report** by appending to `notes/2026-07-05-codex-findings-sumfree.md`. Do not overclaim; a verified
+coupled pairing for one `r₃=2` group, or a precise proof that no bounded coupled pairing exists, are
+both excellent outcomes. Skip the mirror families already closed (§ROUND-2) and fixed negation-bulk.
