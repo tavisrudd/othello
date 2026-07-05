@@ -14,7 +14,8 @@ Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
 `2026-07-05-sumfree-redu.py` (outcome-reduction check),
 `2026-07-05-sumfree-socle.py` (socle reduction — outcome depends only on `(s₂,r₃)`),
 `2026-07-05-sumfree-fast.py` (GL(n,3)-symmetry-reduced solver for the socle games),
-`2026-07-05-sumfree-mirror-check.py` (verifies the `F₃ⁿ=N` move-then-mirror theorem).
+`2026-07-05-sumfree-mirror-check.py` (verifies the `F₃ⁿ=N` move-then-mirror theorem),
+`2026-07-05-sumfree-zm-mover.py` (`Z₂×F₃ᵇ=P` mover-mirror attempts — all fail on the m-coset).
 
 ## The game and the criterion
 
@@ -249,9 +250,18 @@ Verified for general `G` (even/odd, with 6′- and higher-prime-power parts):
 already proven, the socle reduction leaves exactly:
 - **`(Z₃)^b`** — this *is* the `F₃ᵇ` sum-free game. **NOW A THEOREM: `F₃ⁿ = N` for all `n`** (next
   section — move-then-mirror).
-- **`Z₂ × (Z₃)^b`, `b ≥ 2`** — conjectured **P** (solver: `b≤3` P). Via the `s₂=1` reduction this is
-  "`{m}` is N"; the `Z₂` factor *flips* the 3-group outcome (`Z₃ᵇ` = N but `Z₂×Z₃ᵇ` = P). Likely a
-  companion move-then-mirror (open remains).
+- **`Z₂ × (Z₃)^b`, `b ≥ 2`** — conjectured **P** (solver: `b≤3` P). Via the **proven** `s₂=1`
+  reduction this is exactly "`{m}` is N" (mover wins from the order-2 singleton); the `Z₂` factor
+  *flips* the 3-group outcome (`Z₃ᵇ` = N but `Z₂×Z₃ᵇ` = P). **Mover-mirror attempts FAIL for `b≥2`**
+  (`sumfree-zm-mover.py`): glide `γ(ε,h)=(ε+1,−h)` (a `γy+γy=y` doubling on the `(0,·)` coset),
+  negation-on-`H`, and `ψ` (`(0,h)↦(0,2o−h)`, `(1,h)↦(1,−h)`, fixing `m` and the played center) all
+  break on the **m-coset** via an O₃ doubling. The obstruction is structural: **fixing `m` forces an
+  origin-centered `H`-reflection (= negation, which carries the O₃ doubling); any off-origin center
+  moves `m`.** So unlike the pure `F₃ⁿ` case (clean move-then-mirror) and the `r₃=1` case (Lemma 4),
+  `{m}` N for `r₃≥2` has **no clean single-involution mover-mirror** — the last genuinely open piece,
+  likely needing a two-phase / inductive argument. (The solver's extracted `{m}`-strategy is
+  correspondingly *not* a single involution — it F₃-reflects the `(0,·)` coset but handles the
+  m-coset ad hoc.)
 
 So, modulo the socle reduction, **the entire abelian sum-free game reduces to `F₃ᵇ = N` (now proven)
 plus the `Z₂`-flip** — the irreducible open core is now just `Z₂×(Z₃)ᵇ = P` and the socle-reduction

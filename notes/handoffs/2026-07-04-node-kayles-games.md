@@ -165,7 +165,16 @@ compute-walled) by construction. This closes the crux of the socle reduction's `
 socle reduction: `s₂=0 ⟹ N ⟺ r₃≥1`); and it is the bespoke first-player strategy the lit search said
 was the *only* route (strategy-stealing invalid). Standalone-novel (lit-confirmed unpublished).
 
-**Next:** (1) `Z₂×(Z₃)ᵇ = P` (verified `b≤3`) — likely a companion move-then-mirror on the residual;
+**`Z₂×(Z₃)ᵇ = P` (r₃≥2) — attacked, NOT closed (banked).** Via the proven `s₂=1` reduction ⟺ "`{m}`
+is N". Three mover-mirrors FAIL for `b≥2` (`../2026-07-05-sumfree-zm-mover.py`): glide
+`γ(ε,h)=(ε+1,−h)`, negation-on-`H`, and `ψ` (fix `m`+center) — all break on the **m-coset** via an O₃
+doubling. Structural tension: fixing `m` needs an origin-centered `H`-reflection (= negation, O₃
+doubling); off-origin centers move `m`. Unlike pure `F₃ⁿ` (clean) and `r₃=1` (Lemma 4), `{m}` N for
+`r₃≥2` has **no clean single-involution mover-mirror** — the last open piece, likely two-phase/
+inductive. The solver's `{m}`-strategy is correspondingly not an involution.
+
+**Next:** (1) `Z₂×(Z₃)ᵇ = P` via a two-phase/inductive argument (mirror the `(0,·)` coset by the
+`F₃ⁿ`-clean σ, handle the m-coset separately — the open crux);
 (2) prove the socle reduction (still meets the interference wall on the *reduction*, though its two
 endpoints `F₃ⁿ=N`/`s₂≥2=P` are now theorems); optional: a BSGS GL(n,3) canonicalizer is no longer
 needed for `F₃ᵇ` (proved) but still useful for `Z₂×Z₃ᵇ`. Then OEIS submission (USER); projective
