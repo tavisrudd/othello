@@ -1,0 +1,52 @@
+Sum-free game Z_n, Grundy(empty), multiplier-quotient solver:
+  n= 1: G=0  memo=       1  mod6=1 law=P obs=P
+  n= 2: G=1  memo=       2  mod6=2 law=N obs=N
+  n= 3: G=1  memo=       2  mod6=3 law=N obs=N
+  n= 4: G=2  memo=       4  mod6=4 law=N obs=N
+  n= 5: G=0  memo=       3  mod6=5 law=P obs=P
+  n= 6: G=0  memo=       9  mod6=0 law=P obs=P
+  n= 7: G=0  memo=       4  mod6=1 law=P obs=P
+  n= 8: G=2  memo=      13  mod6=2 law=N obs=N
+  n= 9: G=1  memo=       9  mod6=3 law=N obs=N
+  n=10: G=1  memo=      23  mod6=4 law=N obs=N
+  n=11: G=0  memo=      10  mod6=5 law=P obs=P
+  n=12: G=0  memo=      55  mod6=0 law=P obs=P
+  n=13: G=0  memo=      17  mod6=1 law=P obs=P
+  n=14: G=2  memo=      62  mod6=2 law=N obs=N
+  n=15: G=2  memo=      58  mod6=3 law=N obs=N
+  n=16: G=3  memo=     106  mod6=4 law=N obs=N
+  n=17: G=0  memo=      47  mod6=5 law=P obs=P
+  n=18: G=0  memo=     260  mod6=0 law=P obs=P
+  n=19: G=0  memo=      80  mod6=1 law=P obs=P
+  n=20: G=2  memo=     412  mod6=2 law=N obs=N
+  n=21: G=1  memo=     247  mod6=3 law=N obs=N
+  n=22: G=3  memo=     567  mod6=4 law=N obs=N
+  n=23: G=0  memo=     238  mod6=5 law=P obs=P
+  n=24: G=0  memo=    1593  mod6=0 law=P obs=P
+  n=25: G=0  memo=     519  mod6=1 law=P obs=P
+  n=26: G=2  memo=    1765  mod6=2 law=N obs=N
+  n=27: G=1  memo=    1049  mod6=3 law=N obs=N
+  n=28: G=2  memo=    3519  mod6=4 law=N obs=N
+  n=29: G=0  memo=    1216  mod6=5 law=P obs=P
+  n=30: G=0  memo=   10477  mod6=0 law=P obs=P
+  n=31: G=0  memo=    2064  mod6=1 law=P obs=P
+  n=32: G=3  memo=    9583  mod6=2 law=N obs=N
+  n=33: G=1  memo=    5920  mod6=3 law=N obs=N
+  n=34: G=1  memo=   17712  mod6=4 law=N obs=N
+  n=35: G=0  memo=    8999  mod6=5 law=P obs=P
+  n=36: G=0  memo=   45814  mod6=0 law=P obs=P
+  n=37: G=0  memo=   10117  mod6=1 law=P obs=P
+  n=38: G=1  memo=   56538  mod6=2 law=N obs=N
+  n=39: G=1  memo=   27293  mod6=3 law=N obs=N
+  n=40: G=2  memo=  127569  mod6=4 law=N obs=N
+  n=41: G=0  memo=   28754  mod6=5 law=P obs=P
+  n=42: G=0  memo=  306606  mod6=0 law=P obs=P
+  n=43: G=0  memo=   47943  mod6=1 law=P obs=P
+  n=44: G=2  memo=  351460  mod6=2 law=N obs=N
+  n=45: G=1  memo=  159793  mod6=3 law=N obs=N
+  n=46: G=2  memo=  600920  mod6=4 law=N obs=N
+  n=47: G=0  memo=  133538  mod6=5 law=P obs=P
+  n=48: G=0  memo= 1592279  mod6=0 law=P obs=P
+  n=49: G=0  memo=  247390  mod6=1 law=P obs=P
+  n=50: G=1  memo= 2463685  mod6=2 law=N obs=N
+  n=51: G=1  memo=  578318  mod6=3 law=N obs=N

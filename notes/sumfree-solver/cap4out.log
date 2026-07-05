@@ -1,0 +1,2 @@
+Cap-set game on F_3^4: |space|=81 points  [outcome-only]
+d=4: empty is P => G(4)==0  (memo=7734, 392.919s)   conjecture 'always P (G=0)': HOLDS

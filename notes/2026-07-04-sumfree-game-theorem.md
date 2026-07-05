@@ -126,7 +126,7 @@ whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
 - **Lemmas 1–4 are proved above, uniform in `n`.** With Lemma 4 covering the two augmented-mirror
   cases (`n≡3` opening; `{n/2,n/3}` P-position for `n≡0`), the six-case proof is **complete** — no
   remaining machine-only step; the machine checks (0 mirror-breakers over all reachable positions
-  n≤36; outcome law confirmed by the exact solver to **n=63**, zero exceptions) are corroboration,
+  n≤36; outcome law confirmed by the exact solver to **n=65**, zero exceptions) are corroboration,
   not load-bearing.
 - The only non-symbolic inputs are the finite base cases `n < 5` (direct: `G=0,1,1,2` for n=1..4),
   which the periodic law does not claim.

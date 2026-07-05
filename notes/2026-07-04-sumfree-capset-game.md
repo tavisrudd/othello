@@ -96,18 +96,20 @@ so the n/2 opening no longer helps the first player. The whole law turns on the 
 `(2∣n, 3∣n)`, i.e. `n mod 6`. ∎ **Fully proven** — all mirror steps (Lemmas 1–4) are symbolic and
 uniform in `n`; the augmented cases are closed by Lemma 4 (`3·(n/3)=0` kills O₃, `2·(n/2)=0` absorbs
 O₂). Clean write-up: [sumfree-game-theorem](2026-07-04-sumfree-game-theorem.md). Machine checks (0
-breakers n≤36; law confirmed to n=63) are corroboration only.
+breakers n≤36; law confirmed to n=65) are corroboration only.
 
 **Where the mirror breaks (matches the N-positions + the open half):**
 - **`n≡2,4 (mod 6)` (N) — PROVEN.** First player opens `x=n/2` (self-symmetric, `{n/2}=−{n/2}`, and
   sum-free since `n/2+n/2=0∉{n/2}`), then negation-mirrors as the responder. Valid because `3∤n`
   removes the `3x=0` obstruction and the only fixed point `n/2` is already played — same lemma as the
   P-side, with the roles swapped. Verified for all `n≡2,4 (mod 6)`, n≤32. So the first player wins.
-- **`n≡0 (mod 6)` (P) — OPEN.** Still P (empirically to n≈42) but negation fixes `n/2` **and** `3∣n`
-  gives the `n/3` obstruction, so the mirror fails and (below) no bounded repair exists.
-- **`n≡3 (mod 6)` (N)** — first player wins (G≥1, verified), but the clean opening is not yet
-  pinned: unlike even n there is no self-symmetric single element to open with, so the mirror-as-P1
-  argument does not transfer directly. Minor open piece.
+- **`n≡0 (mod 6)` (P) — negation fails, but PROVEN** via the *translation* mirror (see the ★★★
+  section + the τ-mirror block below): negation fixes `n/2` **and** `3∣n` gives the `n/3` obstruction,
+  so the negation mirror can't set up — but `τ(z)=z+n/2` (fixed-point-free) does, with the `n/2`
+  opening answered by `n/3` (Lemma 4). *(The exploration below records the dead-ends — negation
+  pairing and bounded-defect S2 both fail — before the translation mirror resolved it.)*
+- **`n≡3 (mod 6)` (N) — PROVEN** (superseding the earlier "not yet pinned" note): first player opens
+  `x=n/3`, blocking `2n/3`, then negation-mirrors (Lemma 4 with `E={n/3}`). Verified n=9..33.
 
 **Law status: PROVEN — all six residues** (see the ★★★ complete-proof section below). `n≡1,5` (P,
 negation mirror); `n≡2,4` (N, open-`n/2` + mirror); `n≡3` (N, open-`n/3` + mirror); `n≡0` (P,
@@ -203,12 +205,23 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
 ```
 
 - **Conjecture: the cap-set game is always a P-position (G=0)** — the responder always wins.
-- **d=4 COMPUTED: G(4) = 0 (P) — conjecture HOLDS through d=4.** An AGL(4,3)-quotient,
-  outcome-only (P/N) Rust solver (`sumfree-solver/`) reaches d=4 (81 points) with memo just **7,734**
-  in ~6.5 min — the affine symmetry collapses it entirely. So G(d)=0 for d=1,2,3,4; "always P" is now
-  a 4-point conjecture including the nontrivial d=4 (max cap in F₃⁴ = 20). d=5 (243 points) is the
-  next test. A proof would likely mirror the Z_n story (a fixed-point-free involution / translation on
-  F₃ᵈ; note F₃ᵈ has no order-2 element, so the argument must differ — an open sub-problem).
+- **d=4 SOLVED: G(4) = 0 (P) — conjecture HOLDS through d=4, robustly verified.** A **full AGL(4,3)**
+  quotient (complete-invariant canonical form: canon = min over an AGL-equivariant origin/frame of the
+  GL-min image, validated 0 collisions vs brute full-group enumeration for d≤3, 0 equivariance
+  failures over 200k+ random affine maps at d=4). Confirmed **two independent ways that agree** —
+  outcome-only P/N (empty is P, 8191 classes, ~6s) and full Grundy mex (G(4)=0, **9908 classes** =
+  the total number of AGL(4,3)-inequivalent caps of all sizes 0–20, ~17s) — and by **two independent
+  binaries** (u128 and 256-bit builds, byte-identical class counts), <100 MB RSS. So G(d)=0 for
+  d=1,2,3,4; "always P" is a 4-point conjecture including the nontrivial d=4 (max cap in F₃⁴ = 20).
+- **d=5 did NOT finish** (needs >128-bit sets; the "restrict + exhaustive-tail" canonicalization
+  degrades on near-maximal symmetric caps — DFS dives to a 45-point maximal cap and the invariant
+  loses discrimination). No statement about G(5). Cracking it needs a true nauty-style canonical
+  labeling (refine to a discrete coloring, branch only over real automorphisms). A *proof* of
+  "always P" would need a strategy on F₃ᵈ that differs from the Z_n one (F₃ᵈ has no order-2 element,
+  so no translation/negation fixed-point mirror in the same form) — an open sub-problem.
+- Solver sources banked in `sumfree-solver/` (`capset2.rs` u128 d≤4, `capset5.rs` 256-bit d≤5,
+  `results.log` with reproduce commands: `./capset2 4 solve agl`, `./capset2 3 validate`,
+  `./capset2 4 invcheck`).
 - **Not the FunSearch result.** DeepMind's cap-set contribution is a *larger dim-8 cap* (a bound on
   maximum size); it has no bearing on our game's Grundy value, and G(4)=0 says nothing about max cap
   size. The relevant neighbour is the **maximal-cap spectrum** (sizes of inclusion-maximal caps),

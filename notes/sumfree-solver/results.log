@@ -1,0 +1,149 @@
+================================================================================
+CAP-SET GAME on F_3^d  --  Grundy value of the empty cap G(d)
+Standalone research probe.  2026-07-04.
+================================================================================
+
+GAME (impartial, normal play, last player to move wins):
+  Position = a cap C subset F_3^d = a point set with NO 3 distinct collinear
+             points (no {a,b,c} subset C with a+b+c=0 in F_3^d).
+  Move     = add a point p not in C keeping C a cap (p completes no line with
+             two existing points: no a,b in C with a+b+p=0).
+  G(d)     = Grundy value of the EMPTY cap.  (G=0  <=>  P-position  <=>  2nd
+             player wins.)  Known: G(1)=G(2)=G(3)=0.  Conjecture: G(d)=0 for all d.
+
+--------------------------------------------------------------------------------
+RESULT
+--------------------------------------------------------------------------------
+  G(1) = 0        (reproduced)
+  G(2) = 0        (reproduced)
+  G(3) = 0        (reproduced)
+  G(4) = 0   <==  NEW.  The "always P (G=0)" conjecture SURVIVES d=4.
+                  Second player wins the cap-set game on F_3^4 (81 points).
+  G(5) : NOT DETERMINED -- intractable with this approach in the memory/time
+         budget (see the d=5 section).
+
+  G(4)=0 was computed TWO independent ways that agree exactly:
+    * outcome-only (P/N) search : empty is P  ->  G(4)==0, 8191 classes,  5.7 s
+    * full Grundy (mex, no cutoff): G(4) = 0 exactly, 9908 classes, 16.6 s
+  and by TWO independent binaries (a u128 build and a 256-bit build) that
+  produce byte-identical class counts.
+
+--------------------------------------------------------------------------------
+SYMMETRY REDUCTION USED
+--------------------------------------------------------------------------------
+The full affine group AGL(d,3) = translations (3^d) semidirect GL(d,3) preserves
+caps and preserves the game, so it is Grundy-preserving.  We memoise on an
+AGL-CANONICAL FORM of each cap.  |GL(4,3)| ~= 24.26 million, so orbiting the full
+group per state is out; instead:
+
+  canon(C) = min over origin o in a canonically-chosen subset S(C) of C,
+             of the GL-min-image of (C - o),
+  where the GL-min-image maps an ordered independent frame drawn from the cap's
+  OWN vectors to the standard basis e_0,e_1,... (index 3^j is the smallest new
+  index a fresh basis vector can introduce at depth j), found by a prefix-pruned,
+  best-first DFS over frames.
+
+  Speed comes from restricting, by an AGL-EQUIVARIANT per-point signature, both
+    (a) the origin set S(C) = argmax_o sighash(o), and
+    (b) the first frame vector b_0 = argmax over directions of endpoint sighash,
+  where sighash(p) = hash( par(p), sorted multiset of (cw{p,q}, par(q)) ),
+    par(p)  = # parallelograms through p in C = #{(q,r): q,r in C\{p}, q!=r,
+              (q+r-p) in C},
+    cw{p,q} = #{e != p,q : (p+q-e) in C}.
+  Because each restricting set is equivariant and the per-origin GL-min is exact,
+  the result is a PROVABLY COMPLETE invariant (canon(C) is always an AGL-image of
+  C, so it can never merge two distinct orbits).  It is NOT the global lex-min
+  image, so it is validated differently (below).
+
+  This restriction cut canon DFS nodes ~25-85x on the mid-size caps that dominate
+  the search (size-10: 5494 -> 205 nodes; size-15: 26966 -> 245 nodes), turning a
+  solver that produced ZERO progress on d=4 in 120 s into one that finishes d=4
+  in seconds.
+
+A translation-only quotient (min over the 3^d translations; O(n*k), ~1 us) was
+also implemented and is exact/Grundy-preserving, but it is FAR too coarse: the
+d=4 outcome search under translation-only passed 32 MILLION classes and was still
+growing linearly (every cap in AG(4,3) is reachable, and there are billions), so
+it cannot finish in memory.  The full AGL quotient is ~165x smaller at d=3 and
+proved decisive at d=4 (9908 classes total).
+
+--------------------------------------------------------------------------------
+VALIDATION (why G(4)=0 is trustworthy)
+--------------------------------------------------------------------------------
+  1. G(1)=G(2)=G(3)=0 reproduced (both outcome and full Grundy).
+  2. Canon completeness vs BRUTE full-group AGL for d<=3:
+       - invariance: canon(C) == canon(g.C) for random g in AGL  -> 0 failures
+       - orbit-partition match: canon(.) and brute canon_brute(.) induce the
+         IDENTICAL partition on the random sample
+       d=2: invariance_fail=0 partition_fail=0 / 300000 samples (5 classes)
+       d=3: invariance_fail=0 partition_fail=0 /  60000 samples (17 classes)
+  3. Canon equivariance at d=4 under 200000 random affine maps -> 0 failures.
+     (Completeness at d=4 needs no brute enumeration: canon(C) is by construction
+      an AGL-image of C, so distinct orbits cannot collide; only equivariance is
+      an implementation risk, and that is what the invariance test checks.)
+  4. The 256-bit build reproduces the u128 build EXACTLY: G(1..4) and every memo
+     count (3, 5, 17, 8191 outcome, 9908 full) match to the digit.
+  5. Canon equivariance at d=5 under 20000 random affine maps -> 0 failures.
+
+--------------------------------------------------------------------------------
+MEMO SIZE / WALL TIME / MEMORY  (single-threaded)
+--------------------------------------------------------------------------------
+  d   mode      G   classes (memo)   wall     peak RSS
+  1   full      0   3                0.000s   <5 MB
+  2   full      0   5                0.000s   <5 MB
+  3   full      0   17               0.006s   <5 MB
+  4   outcome   0   8191             5.7 s    <100 MB
+  4   full      0   9908             16.6 s   <100 MB   (= # AGL(4,3)-inequivalent
+                                                          caps of ALL sizes 0..20,
+                                                          all reachable from empty)
+  Memory was capped (env CAP_MAX_SLOTS_POW2, default 2^28 slots ~ 4.6 GB) but the
+  d=4 memo (9908 entries) is tiny, so the cap never engaged.  Nothing else on the
+  box was disrupted.
+
+--------------------------------------------------------------------------------
+d = 5  (243 points; conditional stretch -- DID NOT FINISH)
+--------------------------------------------------------------------------------
+F_3^5 needs a >128-bit set, so a separate 256-bit build (capset5) was written and
+cross-validated to reproduce d<=4 exactly.  The d=5 outcome search then:
+  * ran ~6 min at 100% CPU and had evaluated < 1,000,000 nodes with a tiny memo
+    (~10 MB) -- i.e. it never got near the class-count wall; it was stuck
+    canonicalising the deep large caps.
+  * The DFS dives immediately to a maximal cap (max cap in F_3^5 = 45 points), and
+    canonicalising large dim-5 caps is very expensive: on near-maximal, highly
+    symmetric caps the per-point signature loses discrimination, so the frame DFS
+    falls back toward exhaustive (the same effect seen at d=4 only for the rare
+    size-20 complete cap, at ~39 ms each).
+  * Canon cost at d=5 is ~5-10x the d=4 cost even at mid sizes (size 12-16 ~500-670
+    us vs ~75 us at d=4), and the total AGL-class count for d=5 is far larger than
+    d=4's 9908 (d=3 -> d=4 grew ~583x).
+  Largest depth reached: full (max cap ~45; DFS was deep in the first branch).
+  Best partial evidence for d=5: NONE beyond the validated canon -- the search did
+  not complete even the first maximal branch, so no statement about G(5) is made.
+  Making d=5 tractable would need a genuinely faster canonical LABELLING (nauty-
+  style iterative refinement to a discrete colouring, branching only over real
+  automorphisms) rather than the "restrict + exhaustive-tail" scheme here.
+
+--------------------------------------------------------------------------------
+FILES
+--------------------------------------------------------------------------------
+  capset.rs   : prior agent's brute reference (correct but does not finish d=4;
+                canon ~2-22 ms/cap).  Kept for the rules only.
+  capset2.rs  : u128 solver (d<=4).  Fast restricted-AGL canon.  <-- main d=4 result
+  capset5.rs  : 256-bit port (d<=5).  Cross-validated identical to capset2 for d<=4;
+                used for the d=5 attempt.
+  results.log : this file.
+
+  Build: rustc -C opt-level=3 -C target-cpu=native -C link-arg=-fuse-ld=mold \
+                capset2.rs -o capset2      (likewise capset5.rs)
+  Run:   ./capset2 <d> <mode> [sym]   mode = outcome|solve|validate|invcheck|bench
+                                      sym  = agl (default) | trans
+         env CAP_MAX_SLOTS_POW2=<k>   caps memo at 2^k slots
+         env CAP_INVCHECK_ITERS=<n>   invcheck sample count
+
+  Reproduce the headline:
+    ./capset2 2 validate          # 0/0 fails, 5 classes
+    ./capset2 3 validate          # 0/0 fails, 17 classes
+    ./capset2 4 invcheck          # 0 fails / 200000 affine maps
+    ./capset2 4 solve  agl        # G(4) = 0, memo 9908
+    ./capset2 4 outcome agl       # empty is P => G(4)==0, memo 8191
+================================================================================

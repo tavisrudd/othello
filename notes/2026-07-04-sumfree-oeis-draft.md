@@ -5,7 +5,7 @@
 solver for the tail). The proven outcome law is in
 [sumfree-game-theorem](2026-07-04-sumfree-game-theorem.md).
 
-Companion b-file: `2026-07-04-sumfree-bfile.txt` (n=1..61; upload as the OEIS b-file).
+Companion b-file: `2026-07-04-sumfree-bfile.txt` (n=1..65; upload as the OEIS b-file).
 
 ---
 
@@ -19,12 +19,12 @@ Grundy value of the empty starting position.
 
 `1` (first term is a(1) = 0).
 
-### %S %T %U (Data)  — first 61 terms
+### %S %T %U (Data)  — first 65 terms
 
 ```
 0, 1, 1, 2, 0, 0, 0, 2, 1, 1, 0, 0, 0, 2, 2, 3, 0, 0, 0, 2, 1, 3, 0, 0, 0, 2, 1,
 2, 0, 0, 0, 3, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 2, 1, 2, 0, 0, 0, 1, 1, 2, 0, 0,
-0, 2, 1, 3, 0, 0, 0
+0, 2, 1, 3, 0, 0, 0, 3, 1, 2, 0
 ```
 
 ### %C (Comments)
@@ -37,7 +37,7 @@ Grundy value of the empty starting position.
   second player wins iff n is congruent to 0, 1, or 5 mod 6. The first player wins iff n == 2, 3, 4
   (mod 6). (For n <= 4: a(1)=0, a(2)=a(3)>0, a(4)>0.)
 - The Grundy values a(n) themselves are NOT eventually periodic — only the outcome (whether a(n)=0)
-  is periodic mod 6. Values through n=61 lie in {0,1,2,3}.
+  is periodic mod 6. Values through n=65 lie in {0,1,2,3}.
 - Proof sketch: the second player wins by a "mirror" (copying) strategy — negation x -> -x when
   gcd(n,6)=1, and translation x -> x + n/2 when 6 | n. The negation mirror has two obstructions,
   the fixed point n/2 (present iff 2|n) and the pair {n/3, 2n/3} (present iff 3|n); n mod 6 counts
@@ -79,7 +79,7 @@ Tavis Rudd (submitter), Jul 04 2026.
 2. Upload `2026-07-04-sumfree-bfile.txt` as the b-file (rename to `bXXXXXX.txt` after A-number
    assignment).
 3. Decide keywords (`nice` is a maintainer call — leave it off the initial submission).
-4. Optionally extend the b-file: the Rust solver in `sumfree-solver/` continues past n=61 (even n
+4. Optionally extend the b-file: the Rust solver in `sumfree-solver/` continues past n=65 only with a compact memo key (even n
    are the slow ones; n=62,64 need more time/memory). Re-run to lengthen before submitting if desired.
 5. Optionally submit the companion outcome-indicator sequence (1 if n==0,1,5 mod 6 else 0) and/or the
    Paley graph game sequence.
