@@ -69,12 +69,14 @@ exception), which rules out any smooth/arithmetic pattern and the loose `A143128
 
 ## Why this matters — it isolates what makes the cap theorem clean
 
-**The two clean P-theorems together.** The 3-AP-free achievement game on an abelian group `G` is a
-second-player win in two provable regimes, by two mirrors: (i) `|G|` **even** → translation mirror
-`τ_t` (`t` order 2), *this note*; (ii) `G = F_qⁿ` (elementary abelian, any prime power `q`) →
-reflection/translation mirror = **the [cap theorem](2026-07-04-capset-game-theorem.md)** (since cap =
-3-AP-free on `F_qⁿ`). The uncovered middle — odd-order `G` that is *not* elementary abelian (e.g.
-`Z_n` odd, `Z_9`) — is "mostly P with sporadic exceptions" (`{7,19,47,49}` for `Z_n`).
+**Provable P regimes.** The 3-AP-free achievement game on an abelian group `G` is a proven
+second-player win when **`|G|` is even** (translation mirror `τ_t`, `t` order 2 — *this note*). For
+**`G = F₃ⁿ`** it coincides with the cap game (an `F₃` line has exactly 3 points, so "3 collinear" =
+"3-AP"), so it is P by the [cap theorem](2026-07-04-capset-game-theorem.md). *(Caveat: for `q ≥ 5` the
+cap game is **stricter** than the 3-AP-free game — a `q`-point line has collinear triples that are not
+APs — so the cap theorem does **not** settle the 3-AP-free game on `F_qⁿ`, `q>3`.)* The remaining odd
+side — odd-order `G` other than `F₃ⁿ` (e.g. `Z_n` odd, `Z_5`, `Z_9`, `Z_3×Z_5`) — is empirically
+mostly P (all P in tests except sporadic `Z_n` values `{7,19,47,49}`) but **unproven**.
 
 The cap game is **uniformly** P on `AG(n,q)` because the reflection center `c=(a+b)/2` satisfies the
 self-blocking identity `3c=0` **for every `c`** in characteristic `p` (the whole line collapses to
