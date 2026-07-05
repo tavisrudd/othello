@@ -315,7 +315,7 @@ special case; (b) the classical-sum-free **Schur hypergraph game** (build a set 
 spirit lives in (b); cheap engine-reuse lives in (a).
 
 **★ DECISION (2026-07-04): game (a) — GRAPH Node-Kayles on Cay⁺(Z_n, S) — is QUEUED FOR THE NEXT
-SESSION.** Reuse the validated `arith_cayley.py` engine (Paley = Cay⁺(Z_p, QR) is the anchor); sweep
+SESSION.** Reuse the validated `arith_cayley.py` engine (banked as `2026-07-04-arith-cayley.py`; Paley = Cay⁺(Z_p, QR) is the anchor); sweep
 symmetric connection-set families (intervals, QR, {±1..±k}, random symmetric S) and look for a
 structural outcome law (when does the residual-pairing / a halving-type condition fire?). Game (b),
 the classical Schur sum-free game, is parked for a dedicated session (new subset-state solver, more

@@ -17,8 +17,16 @@ Jenrich (arXiv:1312.5135). Code on branch `queens-n18` (worktree `/home/tavis/sr
 that's the *nimber* sequence to n=13; our n=18 result is a win/loss OUTCOME, and an even first-player win even
 contradicts A344227's conjectured even→0 pattern. A real contribution needs the full nimber n=14..18 —
 **n=14..16 DONE 2026-07-01: G = 0, 1, 0 via the new heap-sum `queens nimber` engine
-([handoff](notes/handoffs/2026-07-01-queens-nimber-a344227.md)); G(17)/G(18) remain.** See the umbrella's
+([handoff](notes/handoffs/2026-07-01-queens-nimber-a344227.md)); G(17) nimber (k=2) run IN PROGRESS 2026-07-04 — occupying the ~17 GB TT ⇒ box RAM tied up, small-memory (≤1 GB) single-core probes only until it finishes; G(18) remains.** See the umbrella's
 2026-06-28 OEIS note + its 2026-07-01 update.) **`go`.**
+
+**Node-Kayles open-problem exploration (2026-07-04, committed `39fd65b`):** cross-domain scout survey +
+consequence maps + go-deep results in [open-problem targets](notes/2026-07-04-node-kayles-open-problem-targets.md)
+(+ analytic-plan, n20-plan, trees-deep-dive). Peisert = clean G=1 theorem + a sufficient-direction Cayley
+lemma (the full Paley finite-exception story is k=2-only); trees Node-Kayles nimbers UNBOUNDED (bounded-DP
+route closed, L3 validated); 3xN A316632 extended to n=22 (boundedness favored). **NEXT SESSION: game (a)
+circulant Node-Kayles on Cay⁺(Z_n,S)** — small-memory, reuses `arith_cayley.py` (banked as
+`notes/2026-07-04-arith-cayley.py`); see the note's ★ DECISION + Master synthesis.
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.

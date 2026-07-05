@@ -7,3 +7,6 @@
 
 # Frozen per-generation queens binaries (large, generated; rebuild from the tagged commit).
 /bin/gen/queens-*
+
+# perf analysis scratch output (generated)
+/.perf-analysis/
