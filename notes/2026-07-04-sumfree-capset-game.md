@@ -56,10 +56,18 @@ This is the L2-analog for the achievement game — the exact `mod 6 = 1,5` slice
 **Where the mirror breaks (matches the N-positions + the open half):**
 - **`n` even** → fixed point `x=n/2` (the order-2 element) has no mate. For `n≡2,4 (mod 6)` this is
   an N-position and the first player exploits `n/2`; for **`n≡0 (mod 6)` the position is still P**
-  (empirically) but by a *different* strategy — negation alone fails, so this half needs a repair
-  (S2-style pairing-with-exception). **This is the open half of the law.**
+  (empirically to n=42) but by a *different* strategy. **This is the open half of the law.**
 - **`n≡3 (mod 6)`** (odd, `3∣n`) → break at `x=n/3`: `3x=0 ⇒ x+x=2x=−x`, so the mirror move `−x`
   collides with `x`. N-position; the first player's opening is `n/3`.
+
+**The `n≡0 (mod 6)` slice is a DEEP P-position — no pairing (negative result).** Extracting P2's
+winning replies to each P1 opening for n=6,12,18 (`2026-07-04-sumfree-strat-probe.py`) shows the
+winning reply is **not** the negation mate — negation loses as a reply for many openings, with
+*inconsistent* parity structure (n=12: neg wins only for odd openings; n=18: only for even; n=6:
+never). So `n≡0 (mod 6)` is P **without any negation-mirror certificate** — analogous to the deep
+odd-n P-positions of game (a) that resist all pairing. ⇒ a full proof of the mod-6 law needs a
+**non-pairing (inductive / strength) argument** for this slice; it is a real open sub-problem, not a
+quick lemma. (Do not hunt for a pairing here — verified there isn't a negation one.)
 
 ## Result 2 — cap-set game on F₃ᵈ: second player wins for d=1,2,3
 
