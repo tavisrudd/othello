@@ -173,8 +173,19 @@ doubling); off-origin centers move `m`. Unlike pure `F₃ⁿ` (clean) and `r₃=
 `r₃≥2` has **no clean single-involution mover-mirror** — the last open piece, likely two-phase/
 inductive. The solver's `{m}`-strategy is correspondingly not an involution.
 
-**Next:** (1) `Z₂×(Z₃)ᵇ = P` via a two-phase/inductive argument (mirror the `(0,·)` coset by the
-`F₃ⁿ`-clean σ, handle the m-coset separately — the open crux);
+**Update (ChatGPT-suggested attacks tried):** two more V-reflection mirrors fail — `ρ(ε,v)=(ε,−o−v)`
+(affine σ on V, Z₂ fixed: center `o≠0` moves `m`, and `(0,2o)↦0` since no center is *played* to
+self-block it) and e-coord negation `μ` (automorphism ⇒ O₃ doubling on the ⟨e⟩-axis). **5+ involutions
+now fail on the same m-obstruction**, structurally pinned: *fixing `m` needs an origin-centered
+V-automorphism (= negation, O₃ doubling); any off-origin affine center (which dodges O₃ via char 3)
+moves `m`.* The label-rescue pairing also fails directly (answering `(0,v)` on `−v`: `(0,v)+(0,v)=(0,−v)`
+doubling, or `(0,v)+(1,−v)=m`). So `{m}` N has **no single-involution mirror** — a real barrier.
+**Untried lead = ChatGPT #4 hyperplane induction** (`b→b−1`): split `V=H⊕⟨e⟩`, run the inductive
+`Z₂×F₃^{b−1}` strategy on the `e=0` slice `S₀`, pair the `e=1,e=2` slices, handle the ⟨e⟩-axis; a
+multi-part (non-involution) argument, the genuine open crux.
+
+**Next:** (1) `Z₂×(Z₃)ᵇ = P` via the ChatGPT-#4 hyperplane induction (`e=0` slice by induction +
+`e=1↔e=2` pairing + ⟨e⟩-axis handling) — the open crux;
 (2) prove the socle reduction (still meets the interference wall on the *reduction*, though its two
 endpoints `F₃ⁿ=N`/`s₂≥2=P` are now theorems); optional: a BSGS GL(n,3) canonicalizer is no longer
 needed for `F₃ᵇ` (proved) but still useful for `Z₂×Z₃ᵇ`. Then OEIS submission (USER); projective
