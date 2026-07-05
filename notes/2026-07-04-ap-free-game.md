@@ -23,13 +23,14 @@ n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 G: 1 0 0 0 0 0 1 0 0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0
 ```
 
-> **The game is a second-player win (P) for every `n` through 47 EXCEPT the sporadic set
-> `{1, 7, 19, 47}`** (all odd), which are first-player wins. Computed `n = 1..47` (outcome-only for
-> the larger `n`); every even `n ≤ 46` is P, and the only N-positions are `1, 7, 19, 47`.
+> **The game is a second-player win (P) for every `n` through 55 EXCEPT the sporadic set
+> `{1, 7, 19, 47, 49}`** (all odd), which are first-player wins. Computed `n = 1..55` (outcome-only
+> for the larger `n`, even `n` skipped as proven P below); the only N-positions are `1, 7, 19, 47, 49`.
 
-The exception set `{1,7,19,47,…}` has **no clean formula** — not the centered hexagonal numbers
-(`37` is P, not N), only a loose unverifiable 4-term OEIS overlap. Sporadic, like the finite
-exceptions of the Paley game (a).
+The exception set `{1,7,19,47,49,…}` is **genuinely irregular, no clean formula** — not centered
+hexagonal (`37` is P), and `47, 49` are **adjacent** odd exceptions (`49 = 7²`, `7` also an
+exception), which rules out any smooth/arithmetic pattern and the loose `A143128` overlap (that had
+`47 → 77`, not `49`). Sporadic, like the finite exceptions of the Paley game (a).
 
 ## Mechanism — clean on the even side, complex on the odd
 
