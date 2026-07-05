@@ -20,7 +20,8 @@ contradicts A344227's conjectured even→0 pattern. A real contribution needs th
 ([handoff](notes/handoffs/2026-07-01-queens-nimber-a344227.md)); G(17) nimber (k=2) run IN PROGRESS 2026-07-04 — occupying the ~17 GB TT ⇒ box RAM tied up, small-memory (≤1 GB) single-core probes only until it finishes; G(18) remains.** See the umbrella's
 2026-06-28 OEIS note + its 2026-07-01 update.) **`go`.**
 
-**Node-Kayles open-problem exploration (2026-07-04, committed `39fd65b`):** cross-domain scout survey +
+**Node-Kayles open-problem exploration (2026-07-04):** umbrella/entry point =
+[node-kayles-games handoff](notes/handoffs/2026-07-04-node-kayles-games.md). Cross-domain scout survey +
 consequence maps + go-deep results in [open-problem targets](notes/2026-07-04-node-kayles-open-problem-targets.md)
 (+ analytic-plan, n20-plan, trees-deep-dive). Peisert = clean G=1 theorem + a sufficient-direction Cayley
 lemma (the full Paley finite-exception story is k=2-only); trees Node-Kayles nimbers UNBOUNDED (bounded-DP
