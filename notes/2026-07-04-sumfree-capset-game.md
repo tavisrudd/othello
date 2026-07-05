@@ -195,12 +195,13 @@ d=2: G=0 (memo 172,    |F_3^d|=9)
 d=3: G=0 (memo 367,525,|F_3^d|=27)
 ```
 
-- **Conjecture: the cap-set game is always a P-position (G=0)** — the responder always wins. If
-  true it likely has a pairing/strategy proof (candidate: the `x↦−x` structure, though it fixes 0;
-  needs the residual-pairing treatment from the game-(a) work).
-- **d=4 (81 points) is THE RAM-gated computation** — memo will be large (d=3 already 367k; caps in
-  F₃⁴ number in the millions). This is the direct next run the freed box unlocks, and it tests the
-  "always P" conjecture on the first dimension where max-caps get interesting (max cap in F₃⁴ = 20).
+- **Conjecture: the cap-set game is always a P-position (G=0)** — the responder always wins.
+- **d=4 COMPUTED: G(4) = 0 (P) — conjecture HOLDS through d=4.** An AGL(4,3)-quotient,
+  outcome-only (P/N) Rust solver (`sumfree-solver/`) reaches d=4 (81 points) with memo just **7,734**
+  in ~6.5 min — the affine symmetry collapses it entirely. So G(d)=0 for d=1,2,3,4; "always P" is now
+  a 4-point conjecture including the nontrivial d=4 (max cap in F₃⁴ = 20). d=5 (243 points) is the
+  next test. A proof would likely mirror the Z_n story (a fixed-point-free involution / translation on
+  F₃ᵈ; note F₃ᵈ has no order-2 element, so the argument must differ — an open sub-problem).
 
 ## Why this is the high-value lever (recommendation)
 

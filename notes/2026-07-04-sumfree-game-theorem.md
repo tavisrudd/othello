@@ -127,5 +127,7 @@ whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
 - **Structure exposed en route:** the game is a *disjunctive game* — `G(position) = XOR over
   connected components of the residual armed-Schur-hypergraph` (verified 0 mismatches / ~70k
   positions). Not needed for the theorem, but it is the fast-solver lever and a structural handle.
-- **The `F_3^d` cap-set cousin** (build a cap, last to move wins) is `G(1)=G(2)=G(3)=0`; whether
-  it is always P is open (d=4 in progress).
+- **The `F_3^d` cap-set cousin** (build a cap, last to move wins) is `G(d)=0` for `d=1,2,3,4`
+  (d=4 via an AGL(4,3)-quotient solver, memo 7734). "Always P" is now a 4-point conjecture; a proof
+  must differ from the Z_n one (F₃ᵈ has no order-2 element, so no translation/negation fixed-point
+  mirror in the same form).
