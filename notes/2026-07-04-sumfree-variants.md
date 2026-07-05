@@ -94,7 +94,28 @@ cap theorem does not transfer to `Z_n`:** its self-blocking reflection center ne
 The cap game's uniform "always P" is thus special to the characteristic-`p` vector-space structure,
 not a feature of the `a+b+c=0` relation per se.
 
-## Status / open
+## The mod-6 law is CYCLIC-specific — it does not generalize simply to abelian G
+
+The proven `Z_n` law reads "P iff an **even number** of negation-obstructions" (`O₂` = the 2-torsion
+fixed point `n/2`, exists iff `2∣n`; `O₃` = the 3-torsion pair, exists iff `3∣n`). Testing the
+sum-free game on general abelian `G` (`2026-07-04-sumfree-abelian.py`; reproduces the `Z_n` mod-6
+sequence exactly as a control) shows this **does not** extend by a simple obstruction count. Outcomes
+by `(2\text{-rank}, 3\text{-rank})` of `G`:
+
+```text
+(2r,3r):  (0,0)P  (1,0)N  (2,0)P  (3,0)P  (0,1)N  (0,2)N  (1,1)P  (2,1)P
+examples: Z5,Z7   Z8,Z10  Z2xZ2   Z2^3    Z9      Z3xZ3   Z6,Z12  Z2xZ6
+```
+
+- A **lone** 2-torsion (2-rank 1, e.g. `Z8,Z10`) is an obstruction ⇒ N; but 2-rank `≥2`
+  (`Z2×Z2`, `Z2×Z4`, `Z2³`) is **P** — the extra order-2 elements form a subgroup that self-neutralizes
+  (a fixed-point-free translation inside the 2-torsion `(Z₂)^r`).
+- Any 3-torsion (`Z9`, `Z3×Z3`) alone ⇒ N — 3-torsion has odd order and cannot self-neutralize.
+- But the two interact: `Z2×Z6 = Z2×Z2×Z3` (2-rank 2, 3-rank 1) is **P** while `Z9` (3-rank 1) is
+  **N** — the 2-rank-2 subgroup neutralizes even the 3-torsion obstruction. No simple `(2r,3r)` parity
+  formula fits (`(2,1)` is P but the "even-count" guess predicts N). **The general-abelian criterion
+  is open** — a real generalization of the mod-6 theorem, harder than a torsion count. The mod-6 law
+  is special to the cyclic case (2-rank, 3-rank ∈ {0,1}).
 
 - **New OEIS-absent sequences:** `Z_n` strong and `{1..n}` Schur (banked above). Extending them and
   the `F₂ᵏ`/`F₃ᵏ` families is a possible OEIS contribution *separate from* the main `Z_n` submission.
