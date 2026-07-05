@@ -122,5 +122,13 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
   for that. Only actionable item is **B1**: aim our circulant/Cayley independent-set + symmetry-quotient
   *compute stack* (not our theorems) at the Θ(C₇) Shannon-capacity lower-bound record (α(C₇^⊠5) ≥ 350)
   — a compute-forward side quest in a competitive arena, no clear edge. B2 = a framing note only.
-- **Next open (unchanged priority):** #1 OEIS submission (USER), then cap-set d=5 / "always P" proof,
-  interval octals k≥2 piece-b (push k=2 to 10⁷ — gated on a sub-O(m²) split), sum-free variants.
+- **Sum-free definitional variants (next-step #5) — EXPLORED**
+  ([sumfree-variants](../2026-07-04-sumfree-variants.md)). New OEIS-absent sequences: `Z_n`-strong
+  (irregular) and `{1..n}` Schur (outcome near-law "P iff n≡3,4,5 mod6" that BREAKS at n=17).
+  Vector-space split: **`F₂ᵏ`=P (k≥2), `F₃ᵏ`=N (k≥1)** — both conjectural, neither has a clean
+  proof (parity of maximal sets forces only k≤3/k≤2; no mirror: F₃'s negation is broken everywhere by
+  `2(−x)=x`, F₂'s char-2 has no fpf linear involution). Nice contrast to the cap game (same F₃ᵏ, but
+  `a+b+c=0` → P vs `a+b=c` → N). Scripts banked.
+- **Next open (priority):** #1 OEIS submission (USER; possibly + the new variant sequences); interval
+  octals k=2→10⁷ (gated on sub-O(m²) split); cap game on `PG(n,q)` / "no t collinear" t>3; the
+  `F₂ᵏ`/`F₃ᵏ` conjectures (need a non-mirror argument); game-(a) N-side certificate (research-shaped).
