@@ -33,8 +33,20 @@ conjecture sits in the N-side gap. Full sym-S enum to n=20/19, all certs sound. 
 C_n^k = octal 0.[1×k][3×k]7** (verified 2 ways): k=1 = Dawson 0.137 (period 34; G(C_n)=1 iff n≡
 {6,10,22,26,30} mod 34); **k≥2 (0.11337, 0.1113337, …) UNBOUNDED nimbers through m=8000, no period —
 open octal games beyond Flammenkamp's ≤3-digit range** (fresh unbounded-Node-Kayles data point,
-lines up with trees). **NEXT SESSION:** write up R0+L1+L2+odd-n-impossibility lemma bundle (the clean
-proven output), or game (b) Schur sum-free (bigger-memory, parked). See the outcome-law note's Next steps.
+lines up with trees). **★ game (b) SUM-FREE achievement game on Z_n — SOLVED + THEOREM PROVEN**
+([theorem](notes/2026-07-04-sumfree-game-theorem.md), [game+cap-set](notes/2026-07-04-sumfree-capset-game.md)):
+new impartial game (build a sum-free set, last to move wins; = Schur-hypergraph Node-Kayles), NEW
+sequence (OEIS: no match, computed to n=61 by a Rust multiplier-quotient solver). **Outcome theorem
+(all 6 residues proven): G(Z_n)=0 (2nd player wins) iff n≡0,1,5 mod 6.** Proof = negation mirror
+z↦−z with 2 obstructions counted by n mod 6 = (n mod 2, n mod 3): O2=fixed point n/2 (2|n),
+O3=pair {n/3,2n/3} (3|n). 0 obstr ⇒ 2nd player mirrors (P); 1 ⇒ 1st player opens on it then mirrors
+(N); 2 (n≡0) ⇒ 2nd player wins via TRANSLATION mirror z↦z+n/2 (n/2-opening answered by n/3) (P).
+Also: the game DECOMPOSES as a disjunctive sum over armed-Schur-hypergraph components (verified). En
+route CORRECTED a wrong "S2 dead" call (was measuring negation defect; translation mirror has zero
+defect). **OEIS submission DRAFT prepared** ([draft](notes/2026-07-04-sumfree-oeis-draft.md) + b-file)
+— **user submits, do NOT submit.** **NEXT:** cap-set game G(F₃ᵈ) d=4 (AGL(4,3)-quotient solver — IN
+PROGRESS, background agent; d=1,2,3=P, "always P?" open); formalize the 2 augmented-mirror cases; then
+write up R0+L1+L2 lemma bundle for game (a).
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
