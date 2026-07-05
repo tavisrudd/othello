@@ -34,25 +34,30 @@ exception), which rules out any smooth/arithmetic pattern and the loose `A143128
 
 ## Mechanism — clean on the even side, complex on the odd
 
-- **Even `n` ⇒ P (translation mirror) — PROVEN.**
+- **Even order ⇒ P (translation mirror) — PROVEN, and general (any even-order abelian group).**
 
-  > **Theorem.** For even `n`, the 3-AP-free game on `Z_n` is a second-player win.
-  > *Proof.* Let `m = n/2`. `τ(x) = x + m` is a fixed-point-free involution (`2m ≡ 0`, `m ≠ 0`) and
-  > an AP-automorphism (translations preserve APs). P2 keeps the board `A` `τ`-symmetric (`A = A+m`)
-  > and AP-free, replying `τ(x)` to each legal P1 move `x`; then `x' := x+m ∉ A`, `≠ x`. `A ∪ {x, x'}`
-  > is AP-free — any new 3-AP involves `x'`:
-  > - **two `A`-points + `x'`:** `{x', s, t}`, `s,t∈A`; applying `τ` gives a 3-AP `{x, s+m, t+m} ⊆
-  >   A∪{x}` (`τ`-symmetry), contradicting `A∪{x}` AP-free.
-  > - **`x, x', s∈A`:** if `x` is the middle, `s = 2x−x' = x−m = x' ∉ A`; if `x'` middle, `s = 2x'−x
-  >   = x ∉ A` (`2m≡0`); if `s` middle, `2(s−x) = m`. For `n ≡ 2 (mod 4)`, `m` is odd and `2(s−x)=m`
-  >   has **no** solution. For `4 ∣ n`, `s ∈ {x+n/4, x+3n/4}`; but `x+n/4 ∈ A ⟺ x+3n/4 ∈ A`
-  >   (`τ`-symmetry), and then `{x+n/4, x, x+3n/4}` is a 3-AP with middle `x` and **both endpoints in
-  >   `A`**, so `x` would be illegal — contradiction. So no such `s`.
+  > **Theorem.** Let `G` be a finite abelian group of **even order**. The 3-AP-free achievement game
+  > on `G` (build `A ⊆ G` with no distinct `a,b,c`, `a+c=2b`; last to move wins) is a **second-player
+  > win**. (`Z_n` even is the case `t = n/2`.)
   >
-  > Hence P2 always has a legal reply, makes the last move, and wins. ∎
+  > *Proof.* By Cauchy `G` has an element `t` of order 2. `τ(x)=x+t` is a fixed-point-free involution
+  > (`2t=0`, `t≠0`) and an AP-automorphism (`(a+t)+(c+t)=a+c+2t=a+c=2(b+t)`). P2 keeps the board `A`
+  > `τ`-symmetric (`A=A+t`) and AP-free, replying `τ(x)` to each legal P1 move `x`; then `x':=x+t∉A`,
+  > `≠x`. `A∪{x,x'}` is AP-free — any new 3-AP involves `x'`:
+  > - **two `A`-points + `x'`:** `{x',s,r}`, `s,r∈A`; `τ`-image `{x,s+t,r+t}⊆A∪{x}` is a 3-AP,
+  >   contradicting `A∪{x}` AP-free.
+  > - **`x,x',s∈A`:** `x` middle ⇒ `s=2x−x'=x−t=x'∉A`; `x'` middle ⇒ `s=2x'−x=x∉A` (`2t=0`);
+  >   `s` middle ⇒ `2(s−x)=t`. If `t∉2G` this has **no** solution. If `t=2u`, then `s=x+u`; by
+  >   `τ`-symmetry `x+u∈A ⇒ x+u+t=x+3u∈A`, and `x+3u=x−u` (since `4u=2t=0`), so **both** `x±u∈A`,
+  >   making `{x−u,x,x+u}` a 3-AP with middle `x` ⇒ `x` illegal. Contradiction.
+  >
+  > Hence P2 always has a legal reply, makes the last move, and wins. ∎ *(The crux `4u=2t=0` uses
+  > `t` order 2 — this is what closes the `4∣n` case for `Z_n`.)*
 
-  Machine-checked: the `τ_{n/2}` mirror beats every P1 line of play for all even `n ≤ 24` (incl. every
-  `4∣n`) (`2026-07-04-ap-strategy.py`), consistent with all even `n ≤ 46` being P.
+  Machine-verified: outcome **P and the `τ_t` mirror beats every P1 line** for **all even-order
+  abelian groups tested** — `Z_{4,6,8,10,12}`, `Z_2×Z_2`, `Z_2×Z_4`, `Z_2×Z_3`, `Z_2×Z_2×Z_2`,
+  `Z_2×Z_6`, `Z_4×Z_4` (`2026-07-04-ap-abelian.py`, `2026-07-04-ap-strategy.py`). Odd-order abelian
+  is mostly P (`Z_3×Z_3`=cap, `Z_9`, `Z_5`, `Z_3×Z_5` all P; `Z_7`=N) — the "hard side," as for `Z_n`.
 - **Odd `n` ⇒ mostly P, but no single mechanism.** The cap-game move-then-mirror (open, reply,
   reflect through the midpoint center `c=(a+b)/2`, which self-blocks since `{a,c,b}` is a 3-AP)
   refutes the opening **only for `n = 3,5,9,15`**. For `n = 11,13,17,21,23` the game is still P but
@@ -93,7 +98,8 @@ P-leaning; the cyclic version is cleaner (even n provably P) thanks to its trans
 
 - **New OEIS-absent sequence** (nimbers above); the exception set `{1,7,19,47,…}` is a candidate
   sub-sequence with no known formula.
-- **Even `n` ⇒ P — PROVEN** (τ_{n/2} translation mirror, above). Clean sub-theorem.
+- **Even-order abelian `G` ⇒ P — PROVEN** (τ_t translation mirror, above; `Z_n` even is a special
+  case). Clean theorem, machine-verified across even-order groups.
 - **Odd `n`** — no clean law; `{7,19,47}` are N and even the odd P-values lack a uniform certificate
   (the midpoint reflection works only for `n=3,5,9,15`). Extending the exception set (Z_n brute is
   heavy past n≈50) and finding a formula for `{1,7,19,47,…}` is open.
