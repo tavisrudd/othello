@@ -24,9 +24,14 @@ contradicts A344227's conjectured even→0 pattern. A real contribution needs th
 consequence maps + go-deep results in [open-problem targets](notes/2026-07-04-node-kayles-open-problem-targets.md)
 (+ analytic-plan, n20-plan, trees-deep-dive). Peisert = clean G=1 theorem + a sufficient-direction Cayley
 lemma (the full Paley finite-exception story is k=2-only); trees Node-Kayles nimbers UNBOUNDED (bounded-DP
-route closed, L3 validated); 3xN A316632 extended to n=22 (boundedness favored). **NEXT SESSION: game (a)
-circulant Node-Kayles on Cay⁺(Z_n,S)** — small-memory, reuses `arith_cayley.py` (banked as
-`notes/2026-07-04-arith-cayley.py`); see the note's ★ DECISION + Master synthesis.
+route closed, L3 validated); 3xN A316632 extended to n=22 (boundedness favored). **game (a) circulant
+Node-Kayles on Cay⁺(Z_n,S) — DONE** ([outcome law](notes/2026-07-04-cayley-nodekayles-outcome-law.md)):
+the law is an ASYMMETRY — P-positions (G=0) are pairing-explained on even n (translation L1 + a
+component-parity reduction `d=gcd(n,S)`), N-positions (G=1) mostly are NOT (residual/halving pairing
+covers only a minority); odd-n P-positions can never be paired (odd |V|). Paley p≡5 mod 8 open
+conjecture sits in the N-side gap. Full sym-S enum to n=20/19, all certs sound. **NEXT SESSION:**
+certify one interval-family C_n^k fixed-k column as eventually periodic (cyclic-power L8), or game (b)
+Schur sum-free (bigger-memory, parked). See the outcome-law note's Next steps.
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.

@@ -321,6 +321,19 @@ structural outcome law (when does the residual-pairing / a halving-type conditio
 the classical Schur sum-free game, is parked for a dedicated session (new subset-state solver, more
 memory) — do NOT start it on the busy box.
 
+**★ EXECUTED (2026-07-04, later): game (a) done ⇒
+[cayley-nodekayles-outcome-law](2026-07-04-cayley-nodekayles-outcome-law.md).** Full symmetric-S
+enumeration to n=20 (even) / n=19 (odd). The law is an **ASYMMETRY**: P-positions (G=0) are
+pairing-explained on even n (translation L1 covers exactly the n/2∉S half; a component-parity
+reduction `d=gcd(n,S)` handles disconnected-even ⇒ P), but N-positions (G=1) are **mostly NOT**
+pairing-certified (residual/halving pairing covers only a minority — n=16: 1/45). Odd-n P-positions
+can *never* be paired (odd |V| ⇒ no fixed-point-free involution; C₅ is the witness). All
+certificates verified sound (0 violations / full enum). The residual-pairing condition = L2 negation
+steal, which fires exactly for the halving-closed (2S=S) slice — and the Paley p≡5 mod 8 open
+conjecture sits precisely in the N-side gap (G=1, provably no affine pairing ⇒ needs Weil). Interval
+family C_n^k: even n all G=0 (L1); odd-n fixed-k columns are finite octal-type games (eventually
+periodic; k=1 = Dawson cycle). Banked: `2026-07-04-cayley-sweep.py`, `2026-07-04-cayley-cert.py`.
+
 Pairing precision: x↦c−x is an automorphism of Cay⁺(Z_n,S) iff 2c−S=S, and certifies a *residual*
 P-position only when fixed-point-free and N[v]∩N[σv]=∅ — for dense diameter-2 graphs (Paley) the
 full-graph mirror fails (Paley is N, G=1); the pairing that gives G=1 acts on the *child/residual*,
