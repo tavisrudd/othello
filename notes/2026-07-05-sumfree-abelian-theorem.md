@@ -8,7 +8,8 @@ Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
 `2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`,
 `2026-07-05-sumfree-rho.py` (ρ-mirror + {2,3}-Sylow reduction),
 `2026-07-05-sumfree-redu.py` (outcome-reduction check),
-`2026-07-05-sumfree-socle.py` (socle reduction — outcome depends only on `(s₂,r₃)`).
+`2026-07-05-sumfree-socle.py` (socle reduction — outcome depends only on `(s₂,r₃)`),
+`2026-07-05-sumfree-fast.py` (GL(n,3)-symmetry-reduced solver for the socle games).
 
 ## The game and the criterion
 
@@ -251,6 +252,54 @@ certificate on the socle; the socle games are small and directly attackable (the
 exceed the naive solver — a Rust/`F₃`-tuned solver would extend the evidence). The socle reduction's
 *proof* still meets the interference wall, but it minimizes the irreducible core to elementary
 `(Z₂)^{≤1} × (Z₃)^b` — the sharpest statement of what remains open.
+
+## Prior art, maximal-set structure, and the compute frontier (2026-07-05 lit + solver sweep)
+
+Three subagents (two literature, one solver) swept the open core (`F₃ᵇ` and `Z₂×Z₃ᵇ`).
+
+**Novelty — confirmed with coordinates.** The game-*type* is Sieben's building-avoidance game `AVD(H)`
+= Node-Kayles on a hypergraph (**Sieben, "Impartial Hypergraph Games," EJC 30(2) 2023, #P2.13**), but
+he never instantiates the Schur/sum-free hypergraph; **no Grundy/outcome for `F₃ⁿ` or any abelian
+group is published, and OEIS is empty.** Neighbors to cite-and-distinguish: Anderson–Harary /
+Ernst–Sieben *generating* games (target = generate `G`, not sum-free); Maker–Breaker **Rado games**
+(partizan, *create* a solution); ***nofil* on Steiner triple systems** (arXiv:2103.13501 — reduces to
+Node-Kayles but STS ≠ Schur, PSPACE-complete); Impartial SET (removal); the cap-set game (relation
+`a+b+c=0`, distinct). **Terminology bridge:** our terminals are **"locally maximal sum-free sets"
+(LMSF)** in the group-theory literature — the right search term.
+
+**No shortcut — the decisive negative.** (i) **Strategy-stealing is INVALID here**: monotonicity
+fails (adding an element *removes* future legal moves), and it would contradict our own `Z_n`
+P-positions; there is **no general first-player tool** for Node-Kayles/achievement games. (ii) the
+LMSF structure gives no parity handle below the gap (next). ⇒ **`F₃ᵇ=N` must be settled by
+computation or a bespoke first-player strategy.** The general SECOND-player tool — a **strictly
+matched fixed-point-free involution** (Andres–Huggan–McInerney–Nowakowski) — is the right frame for
+the `Z₂×Z₃ᵇ=P` side (it is the abstract genus of our translation/negation mirrors).
+
+**LMSF structure in `F₃ⁿ` (the game's terminals).** `μ(F₃ⁿ)=3ⁿ⁻¹` (**Green–Ruzsa**, Israel J. Math
+147 (2005); type-II group), attained exactly by **affine hyperplane cosets `{φ=1}`** (size `3ⁿ⁻¹`,
+odd). **Lev's gap** (**Lev, JCTA 111 (2005) 337–346**): `|A| > 5·3ⁿ⁻³ ⟹ A ⊆ a hyperplane`, so LMSF
+sizes lie in `{Ω(3^{n/2}), …, 5·3ⁿ⁻³} ∪ {3ⁿ⁻¹}` with an **empty gap** `(5·3ⁿ⁻³, 3ⁿ⁻¹)`; the two top
+sizes are **odd**, the small ones **mixed-parity**; min size `Ω(√|G|)` (**Giudici–Hart**, EJC 2009 —
+exact min open). **Not well-covered for `n≥3`** (matches our data `F₃³` sizes `{4,5,9}`), and **no
+classification exists below the gap** — exactly where the game outcome is decided.
+
+**Solver sweep** (bitmask positions, `O(1)` incremental legality via `SumSet`/`DiffSet`/doubling-
+preimage, `GL(n,3)`-canonical memo, α-β; validated against the reference on 17 groups —
+`2026-07-05-sumfree-fast.py`):
+- **`Z₂×(Z₃)³ = P` — CONFIRMED** (the P family now verified to `b=3`). Winning play = translation
+  mirror `z↦z+t` on the order-2 element `t` (fpf involution, `2t=0`), the even-order structure, one
+  `x=t` exception. LMSF sizes `min 7, max 27`, mixed parity.
+- **`F₃⁴ = N`: COMPUTE-WALLED** — 35 M+ nodes / 600 s, no termination; **memory-safe (<800 MB)**, so
+  a *compute* wall. The decisive lever is *full* `GL(4,3)` canonicalization (it cut the analogous
+  `Z₂×Z₃³` by ~60×), but `|GL(4,3)|=24.3M` is too large to enumerate for per-node min-image; the
+  correct tool is a **BSGS minimal-image / partition-backtrack canonicalizer** (Linton-style), not
+  pure CPython. `F₃⁴` max sum-free set `= 27 =` the hyperplane `{x₀=1}` (matches Lev). So `F₃ᵇ=N`
+  stands **verified `b≤3`**, consistent-but-unconfirmed at `b=4`.
+
+**Compute frontier / next tool.** `F₃⁴` (and likely `F₃⁵`) is reachable with a proper minimal-image
+canonicalizer under `GL(n,3)` — a Rust/nauty-style implementation is the concrete next step to
+strengthen `F₃ᵇ=N` (the crux conjecture the socle reduction leaves). Pure-Python + monomial symmetry
+is not enough.
 
 ## Summary table
 

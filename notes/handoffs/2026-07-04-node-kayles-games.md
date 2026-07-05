@@ -139,10 +139,26 @@ elementary families:** `(Z₃)^b, b≥2` (= the `F₃ᵇ` game, conj. N; solver 
 (conj. P; the `Z₂` flips the 3-group outcome). So — modulo the socle reduction — the entire abelian
 game reduces to **`F₃ᵇ=N` + the `Z₂`-flip**. Script `../2026-07-05-sumfree-socle.py`.
 
-**Next:** the crisp targets are now (1) prove the socle reduction (still meets the interference wall,
-but minimizes the core to elementary `(Z₂)^{≤1}×(Z₃)^b`); (2) solve/certify `F₃ᵇ` for `b≥4` (needs a
-Rust/`F₃`-tuned solver — naive Python caps ~`b=3`/54 elts) to strengthen `F₃ᵇ=N`; (3) an S2 finite
-certificate on the socle. Then OEIS submission (USER); projective `PG(n,q)` cap; interval octals.
+**Lit + solver sweep of the socle core (3 subagents, 2026-07-05).**
+- **Novelty CONFIRMED + no shortcut.** Game-type = Sieben's `AVD` (Node-Kayles on a hypergraph, EJC
+  2023); Schur/sum-free instance unpublished, no `F₃ⁿ`/abelian outcome anywhere, OEIS empty.
+  **Strategy-stealing is INVALID** (monotonicity fails), no general first-player tool ⇒ `F₃ᵇ=N` needs
+  compute or a bespoke first-player strategy. Second-player `Z₂×Z₃ᵇ=P` fits the strictly-matched-
+  involution frame. Terminals = "locally maximal sum-free sets" (LMSF).
+- **LMSF structure in `F₃ⁿ`** (Green–Ruzsa, Lev JCTA 2005, Giudici–Hart): `μ=3ⁿ⁻¹` (hyperplane
+  cosets), **Lev gap** — sizes in `{Ω(3^{n/2})…5·3ⁿ⁻³}∪{3ⁿ⁻¹}`, empty gap `(5·3ⁿ⁻³,3ⁿ⁻¹)`, top two
+  odd, small mixed; not well-covered `n≥3`; **no classification below the gap** (where the game
+  lives). No parity shortcut.
+- **Solver** (`../2026-07-05-sumfree-fast.py`, GL(n,3)-canonical memo): **`Z₂×Z₃³ = P` CONFIRMED**
+  (P family verified to b=3); **`F₃⁴` COMPUTE-WALLED** (35M+ nodes/600s, mem-safe) — needs *full*
+  `GL(4,3)` min-image (BSGS/partition-backtrack), pure-Python monomial symmetry insufficient. `F₃ᵇ=N`
+  verified b≤3.
+
+**Next:** (1) **build a BSGS/nauty-style GL(n,3) minimal-image canonicalizer** (Rust) to resolve
+`F₃⁴`/`F₃⁵` — the concrete lever for `F₃ᵇ=N`; (2) prove the socle reduction (still meets the
+interference wall, but minimizes the core to elementary `(Z₂)^{≤1}×(Z₃)^b`); (3) a bespoke
+first-player strategy for `F₃ᵇ` (no shortcut exists — must be hand-built). Then OEIS submission
+(USER); projective `PG(n,q)` cap; interval octals.
 
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 
