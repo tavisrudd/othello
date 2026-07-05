@@ -204,7 +204,17 @@ d=2: G=0 (memo 172,    |F_3^d|=9)
 d=3: G=0 (memo 367,525,|F_3^d|=27)
 ```
 
-- **Conjecture: the cap-set game is always a P-position (G=0)** — the responder always wins.
+- **★★★ THEOREM (PROVEN, all d): the cap-set game is always a P-position (G=0)** — the second player
+  always wins. Clean write-up: [capset-game-theorem](2026-07-04-capset-game-theorem.md). The
+  conjecture below is now a theorem; **d=5 (and every d) is settled = P without computation.**
+  *Mechanism:* P1's opening `a` is a wasted tempo — P2 replies any `b≠a`, and thereafter mirrors
+  through the **affine point reflection `σ_c(x)=2c−x`** whose center `c=−(a+b)` is the third point of
+  the opening line `{a,b,c}`. Because `a,b` are down, `c` is permanently unplayable (self-blocks), so
+  the mirror runs cleanly on the even set `F₃ᵈ∖{c}`. The odd-order "no fixed-point-free involution"
+  barrier is dodged (it's a move-then-mirror = P0′, not a whole-board pairing); `AGL(d,3)`
+  2-transitivity makes every opening equivalent ⇒ no residue case-split (unlike the Z_n mod-6 law).
+  Validated: brute `G(1,2,3)=0` + the P2 strategy beats all P1 play d=1,2,3 (`2026-07-04-capset-proof.py`);
+  d=4 outcome `G(4)=0` from the prior AGL(4,3) solver.
 - **d=4 SOLVED: G(4) = 0 (P) — conjecture HOLDS through d=4, robustly verified.** A **full AGL(4,3)**
   quotient (complete-invariant canonical form: canon = min over an AGL-equivariant origin/frame of the
   GL-min image, validated 0 collisions vs brute full-group enumeration for d≤3, 0 equivariance
@@ -213,12 +223,14 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
   the total number of AGL(4,3)-inequivalent caps of all sizes 0–20, ~17s) — and by **two independent
   binaries** (u128 and 256-bit builds, byte-identical class counts), <100 MB RSS. So G(d)=0 for
   d=1,2,3,4; "always P" is a 4-point conjecture including the nontrivial d=4 (max cap in F₃⁴ = 20).
-- **d=5 did NOT finish** (needs >128-bit sets; the "restrict + exhaustive-tail" canonicalization
-  degrades on near-maximal symmetric caps — DFS dives to a 45-point maximal cap and the invariant
-  loses discrimination). No statement about G(5). Cracking it needs a true nauty-style canonical
-  labeling (refine to a discrete coloring, branch only over real automorphisms). A *proof* of
-  "always P" would need a strategy on F₃ᵈ that differs from the Z_n one (F₃ᵈ has no order-2 element,
-  so no translation/negation fixed-point mirror in the same form) — an open sub-problem.
+- **d=5 — now SETTLED = P by the theorem above** (the "always P" proof gives `G(d)=0` for every d, so
+  `G(5)=0`). The earlier compute attempt did NOT finish (needs >128-bit sets; the "restrict +
+  exhaustive-tail" canonicalization degrades on near-maximal symmetric caps — DFS dives to a 45-point
+  maximal cap and the invariant loses discrimination). That heavy nauty-style `d=5` solve is now
+  **unnecessary as a decision** — a machine `d=5` run would be corroboration only. **RESOLVED:** the
+  "different strategy than Z_n" the note called for is the **move-then-mirror through a self-blocking
+  reflection center** — negation *does* have a fixed point (0), but the point reflection's fixed point
+  always lands on the opening line and self-blocks, so no order-2 whole-board element is needed.
 - Solver sources banked in `sumfree-solver/` (`capset2.rs` u128 d≤4, `capset5.rs` 256-bit d≤5,
   `results.log` with reproduce commands: `./capset2 4 solve agl`, `./capset2 3 validate`,
   `./capset2 4 invcheck`).

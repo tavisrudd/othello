@@ -24,8 +24,14 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
   negation + translation mirrors; Lemmas 1–4 symbolic, no load-bearing machine step). New OEIS-absent
   sequence to **n=65** (banked Rust multiplier-quotient solver). **OEIS submission DRAFT ready — USER
   submits, do NOT submit.**
-- [x] **Cap-set game on F₃ᵈ = P for d=1..4** (validated full-AGL(4,3)-quotient solver, dual-verified,
-  2 binaries). d=5 unfinished (canon bottleneck).
+- [x] **★★★ Cap-set game on F₃ᵈ = P for ALL d — THEOREM PROVEN** (session --3;
+  [capset-game-theorem](../2026-07-04-capset-game-theorem.md)). Move-then-mirror: P1's opening `a` is
+  a wasted tempo, P2 replies any `b≠a` and mirrors through the affine point reflection `σ_c`,
+  `c=−(a+b)` the third point of the opening line — `c` self-blocks (it's on `{a,b,c}`), dodging the
+  odd-order "no fixed-point-free involution" barrier (P0′, not whole-board pairing); `AGL(d,3)`
+  2-transitivity ⇒ no residue case-split. **Settles d=5 (and all d) with no computation.** Earlier
+  status was d=1..4 by AGL(4,3) solver; the heavy d=5 canon is now moot. Validated: brute G(1,2,3)=0
+  + P2 strategy beats all P1 play d=1,2,3 (`../2026-07-04-capset-proof.py`); d=4 outcome from AGL solver.
 - [x] **Prior art (web-verified):** both games appear-novel; general-position achievement game does
   NOT scoop the cap game; **Impartial SET confirmed a *removal* game** (ours *builds*); neighbours
   cited (Anti-Set, Sieben, Benesh–Ernst, Wong; extremal cap = A090245).
@@ -34,8 +40,9 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
   P0 (graph-general) + P0′ move-and-mirror + odd-order impossibility, then abelian-Cayley R0/L1/L2,
   all generalized from `Z_n` to arbitrary finite abelian `Γ` (reusable for torus/kings/Petersen),
   machine-corroborated with zero violations through `|Γ| ≤ 16` incl. non-cyclic groups.
-- [ ] Cap-set "always P" proof + d=5.
-- [ ] Interval octals k≥2 periodicity decision.
+- [x] **Cap-set "always P" proof + d=5 — DONE** (theorem above; d=5 settled = P, no compute needed).
+- [ ] Interval octals k≥2 periodicity decision — advanced to m=2·10⁶ (no period p≤60000; growth
+  ≈m^0.66 for k=3, ~log for k=2); periodicity itself is Guy's-conjecture-open.
 
 ## Next steps (priority order)
 
@@ -44,10 +51,13 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 2. ~~**Write up the game-(a) lemma bundle**~~ — **DONE** 2026-07-04--3
    ([nodekayles-pairing-lemmas](../2026-07-04-nodekayles-pairing-lemmas.md)). Reusable abelian-Cayley
    core (R0/L1/L2/odd-n) + graph-general master pairing lemma.
-3. **Cap-set:** d=5 needs a nauty-style canonical labeling (the "restrict + exhaustive-tail" canon
-   degrades on near-maximal symmetric caps); then attempt a proof of "always P" (must differ from the
-   Z_n mirror — F₃ᵈ has no order-2 element).
-4. **Interval octals** k≥2: extend `g_path_k` far + k-kernel/period test (or accept as open octals).
+3. ~~**Cap-set:** d=5 + "always P" proof~~ — **DONE 2026-07-04--3**
+   ([capset-game-theorem](../2026-07-04-capset-game-theorem.md)): proven for all d via the
+   self-blocking reflection-center mirror; d=5 settled = P, no canon needed. *Open follow-on:* the
+   `AG(n,q)` generalization for `q>3` (line has `q` points; reflection structure differs).
+4. ~~**Interval octals** k≥2~~ — **piece (a) DONE 2026-07-04--3** (m=2·10⁶, no period p≤60000; k=3
+   ≈m^0.66, k=2 ~log; last path zeros m=16168 / m=827062). Remaining: push k=2 to 10⁷ (needs a
+   sub-O(m²) split) or accept as an open octal family.
 5. **Definitional variants** of the sum-free game (strong sum-free a≠b; {1..n} vs Z_n; F₂ⁿ/F₃ⁿ).
 
 ## Handoff Note — session 2026-07-04--2 (`f78c95d1-3c01-49d4-9f4b-fec58d939cd0`)

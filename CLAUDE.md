@@ -45,12 +45,16 @@ O3=pair {n/3,2n/3} (3|n). 0 obstr ⇒ 2nd player mirrors (P); 1 ⇒ 1st player o
 Also: the game DECOMPOSES as a disjunctive sum over armed-Schur-hypergraph components (verified). En
 route CORRECTED a wrong "S2 dead" call (was measuring negation defect; translation mirror has zero
 defect). **OEIS submission DRAFT prepared** ([draft](notes/2026-07-04-sumfree-oeis-draft.md) + b-file)
-— **user submits, do NOT submit.** cap-set game G(F₃ᵈ)=P for d=1..4 (AGL(4,3)-quotient solver, DONE);
-augmented-mirror cases closed by Lemma 4 (mod-6 proof fully symbolic). **Game-(a) lemma bundle WRITTEN**
-([pairing-lemmas](notes/2026-07-04-nodekayles-pairing-lemmas.md)): graph-general master pairing lemma +
-abelian-Cayley R0/L1/L2 + odd-order impossibility, generalized past `Z_n` to any finite abelian `Γ`
-(torus/kings), machine-checked to `|Γ|≤16`. **NEXT:** #1 OEIS submission (USER); then cap-set d=5 /
-"always P" proof; interval octals k≥2 periodicity; sum-free definitional variants.
+— **user submits, do NOT submit.** **★★★ cap-set game G(F₃ᵈ)=P for ALL d — THEOREM PROVEN**
+([capset-theorem](notes/2026-07-04-capset-game-theorem.md)): move-then-mirror through the affine point
+reflection `σ_c` whose center `c=−(a+b)` self-blocks (third point of the opening line) ⇒ dodges the
+odd-order barrier; `AGL(d,3)` 2-transitivity ⇒ no case-split. Settles d=5 (and all d), no compute.
+**Game-(a) lemma bundle WRITTEN** ([pairing-lemmas](notes/2026-07-04-nodekayles-pairing-lemmas.md)):
+graph-general master pairing lemma + abelian-Cayley R0/L1/L2 + odd-order impossibility, generalized
+past `Z_n` to any finite abelian `Γ` (torus/kings), machine-checked to `|Γ|≤16`. **Interval octals**
+extended to m=2·10⁶ (no period p≤60000; k=3 ≈m^0.66, k=2 ~log). **Info-theory fishing = mostly C**
+(no theorem bridge; game value ∉ Strassen/Zuiddam spectrum). **NEXT:** #1 OEIS submission (USER); then
+AG(n,q) cap-game generalization (q>3), interval-octal k=2→10⁷, sum-free definitional variants.
 
 **Prior umbrella (n=16 SOLVED, second player):** [Queens n=16 roadmap](notes/handoffs/2026-06-15-queens-memory-roadmap.md)
 — Progress + Lever backlog hold the n=16 lineage history.
