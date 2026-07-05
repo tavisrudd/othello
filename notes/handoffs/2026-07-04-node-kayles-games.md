@@ -162,6 +162,24 @@ combined strategy fails 1284× (A4); LMSF `Z5×Z3` already mixed-parity (A5).
   reduction is not a pairing phenomenon in ANY case. **Redirect: pursue structural/invariant routes
   (A2/A3/A5 refined) or a novel technique, targeting "odd `G` w/ 3-torsion ⟹ N".**
 
+**Round 4 — the bounded-exception BOOK genuinely shrinks the residue** (positive result,
+[`2026-07-05-socle-book-residue-shrink.md`](../2026-07-05-socle-book-residue-shrink.md); scripts
+`2026-07-05-socle-book-{residue,investigate,scaling}.py`). Base = negation mirror; its only exceptions
+are the **order-3 (socle) elements** — set size `3^{r₃}−1`, depending only on `r₃`, NOT on `|G|`.
+Parity reformulation: bulk negation-paired ⟹ even ⟹ outcome = socle-move parity.
+- **Bulk reply always LEGAL** (0 genuine bulk-fails, every group / any coprime part) — the
+  coprime/higher-power part adds no *illegal* obstruction.
+- **`r₃≤1` PROVEN outright:** `Z3×Z_p` (any `p`), `Z3³` all WIN under negation-bulk + socle-book — a
+  clean uniform proof of the coprime + higher-power peel for cyclic-Sylow-3 groups.
+- **`r₃≥2` limit (brute-verified, corrected mid-round):** fixed negation-bulk **loses** — the `Z9×Z3`
+  book position `{o}∪`(two bulk pairs) is an opponent-win; the stuck node is a genuine hero-loss (NOT a
+  one-move repair). So the hero must pair the bulk **adaptively**, coupled to the socle. The failure is
+  **coprime-independent** (socle-fail = 1 for `Z5,Z7,Z11,Z9` alike).
+- **Net shrink:** open problem drops from a 2-parameter family (`r₃` × arbitrary bulk) to **`r₃≥2` + a
+  coprime-independent adaptive-bulk-pairing requirement**; `r₃≤1` closed, bulk-legality proven all `r₃`.
+  **Next:** an *adaptive* bulk pairing that shifts with the socle center so the socle-σ reply is never
+  blocked (a "matched involution coupled to the socle game").
+
 ## Handoff Note — session 2026-07-04--2 (`f78c95d1-3c01-49d4-9f4b-fec58d939cd0`)
 
 - **Landed:** everything in Progress above. Headline = the sum-free mod-6 theorem (fully proven) +
