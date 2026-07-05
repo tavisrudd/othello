@@ -5,7 +5,7 @@
 3-rank ≥ 2`, which is confirmed computationally and reduced to a single lemma. Companion to the
 proven cyclic [mod-6 theorem](2026-07-04-sumfree-game-theorem.md) (whose Lemmas 1–4 this reuses).
 Scripts banked: `2026-07-05-sumfree-strat.py`, `2026-07-05-sumfree-probe2.py`,
-`2026-07-05-sumfree-verify-local.py`.
+`2026-07-05-sumfree-verify-local.py`, `2026-07-05-sumfree-lemmaR.py`.
 
 ## The game and the criterion
 
@@ -145,6 +145,20 @@ groups of the original sweep.
   `strat.py`. (The `s₂=1` residual after `m` is a `Z₂`-labelled sum-free game on the odd part `H`,
   where a sum `a+b=c` in `H` is *rescued* iff the labels satisfy `ε_c ≠ ε_a+ε_b` — a possible handle
   for Lemma R.)
+- **Combined strategy (B-game + negation mirror) — FAILS off pure `F₃ʳ`** (`lemmaR.py`, the most
+  promising route, decisively closed). Idea: first player opens a winning first move of the
+  `F₃ʳ` sum-free "B-game" on the order-3 subgroup `T\{0}`, answers later **order-3** moves with the
+  B-game winning reply, and **negation-mirrors** every non-order-3 move. Verified over ALL opponent
+  play: it **wins pure `F₃ʳ`** (`Z3², Z3³` — but there it *is* the whole game, so this is just the
+  note's own `F₃ᵏ=N` conjecture, no new content) and **fails everywhere a non-order-3 element
+  exists** — `Z9×Z3`/`Z9×Z9` (order-9 elements block the B-reply, 48/49952 illegal replies) AND
+  even elementary-Sylow-3-plus-coprime `Z5×Z3²`/`Z7×Z3²` (1284/23670 illegal replies, legality-aware
+  choice does not help). **The order-3 obstruction couples to the rest of `G` through the sum-free
+  relation and does not decouple** — a genuine barrier: the two mirrors (negation, translation)
+  don't apply to O₃, `σ_c` needs char 3 everywhere, and the B-game can't be run "in parallel" because
+  mixed/9-order elements veto its replies. Lemma R needs a new idea, likely inductive on `|G|`.
+  **This also entangles Lemma R with the open `F₃ᵏ=N` conjecture** (the pure-3-group case is exactly
+  that).
 
 ## Summary table
 

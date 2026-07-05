@@ -115,8 +115,18 @@ independent fingerprint route from the bits=31 run) on the `queens-n18` worktree
 and unblocks the A344227 paper/OEIS edits. Rebuilt the stale n18 binary first (`--min-k` postdated
 it). See [queens-nimber handoff](handoffs/2026-07-01-queens-nimber-a344227.md).
 
-**Next:** Lemma R (prove the `r₃ ≥ 2` slice — the `Z₂`-labelled-odd-part residual is the handle);
-then OEIS submission (USER); projective `PG(n,q)` cap; interval octals k=2→10⁷.
+**Lemma R attacked, NOT closed (natural routes exhausted — banked).** Tested the combined
+"B-game-on-order-3-elements + negation-mirror" first-player strategy against all opponent play:
+**wins pure `F₃ʳ`** (but that's tautologically the open `F₃ᵏ=N` conjecture) and **fails the moment
+any non-order-3 element exists** — `Z9×Z3`, `Z9×Z9`, and even elementary-Sylow-3-plus-coprime
+`Z5×Z3²`/`Z7×Z3²`. The order-3 obstruction **couples to the rest of `G` through the sum-free
+relation and does not decouple**; both mirrors miss O₃, `σ_c` needs char 3 everywhere. Lemma R
+needs a genuinely new idea (likely induction on `|G|`) and is **entangled with the open `F₃ᵏ=N`
+conjecture**. Details in the abelian-theorem note's open-slice section.
+
+**Next:** Lemma R via a fresh angle (induction on `|G|`; or the `s₂=1` `Z₂`-labelled-odd-part
+residual; note it subsumes `F₃ᵏ=N`); then OEIS submission (USER); projective `PG(n,q)` cap; interval
+octals k=2→10⁷.
 
 ## Handoff Note — session 2026-07-04--3 (`4de57ec0-7625-488b-8b7b-209e783bac6a`)
 
