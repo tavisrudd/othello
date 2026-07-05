@@ -70,10 +70,14 @@ negative results, so future effort is not wasted there).**
    have a fixed point `(a−1)x≡0` with `x≠0` whenever `6∣n` (small factors 2 and 3 supply it). So no
    automorphism pairing exists. (Extracting P2's winning replies for n=6,12,18 confirms it: the
    winning reply is not the negation mate, with inconsistent parity across n.)
-2. **No bounded-defect S2 (symmetric-play-with-repair) certificate either.** Under the P2 strategy
-   that minimizes asymmetry `|A ⊕ (−A)|` among winning replies, the max asymmetry reached **grows**:
-   n=6→4, 12→4, 18→12, 24→16 (≈ 2n/3, unbounded). So P2 cannot win by staying within an O(1) defect
-   of a symmetric position — the S2 "large mirror + finite repair" schema does not apply.
+2. **No bounded-defect S2 (symmetric-play-with-repair) certificate either — proven by the
+   constrained solver.** Solve the game with P2 *restricted* to moves keeping `|A ⊕ (−A)| ≤ c`
+   (`2026-07-04-sumfree-s2-probe.py` measures a greedy proxy; the exact constrained minimax gives the
+   true minimal `c`). P2 still wins ∅ only as `c` grows: **min c = 4,4,4,8,8,8,12,>12 for
+   n=6,12,18,24,30,36,42,48** — a staircase `≈ 2n/9`, **linearly unbounded**. (The earlier greedy
+   proxy over-counted — n=18 needs only c=4 optimally, not 12 — but the constrained minimax is
+   definitive.) So no fixed defect bound works: P2 must tolerate an ever-larger asymmetry, and the
+   S2 "large mirror + finite repair" schema does **not** apply at any bounded book size.
 
 ⇒ the `n≡0 (mod 6)` half is genuinely deep: no pairing, no bounded-defect mirror. A proof needs a
 **different tool** — induction on n (the outcome is 6-periodic, so an `n → n−6` strategy reduction is
