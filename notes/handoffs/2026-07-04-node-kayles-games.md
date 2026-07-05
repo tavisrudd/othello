@@ -185,7 +185,11 @@ doubling, or `(0,v)+(1,−v)=m`). So `{m}` N has **no single-involution mirror**
 multi-part (non-involution) argument, the genuine open crux.
 
 **Next:** (1) `Z₂×(Z₃)ᵇ = P` via the ChatGPT-#4 hyperplane induction (`e=0` slice by induction +
-`e=1↔e=2` pairing + ⟨e⟩-axis handling) — the open crux;
+`e=1↔e=2` pairing + ⟨e⟩-axis handling) — the open crux, **queued for a dedicated new session**; a
+self-contained brief for an external agent (Codex) is written at
+[../2026-07-05-codex-assignment-sumfree-socle.md](../2026-07-05-codex-assignment-sumfree-socle.md)
+(fast GL(n,3) canonicalizing solver + strategy-verification harness + the #4 attempt + socle
+reduction);
 (2) prove the socle reduction (still meets the interference wall on the *reduction*, though its two
 endpoints `F₃ⁿ=N`/`s₂≥2=P` are now theorems); optional: a BSGS GL(n,3) canonicalizer is no longer
 needed for `F₃ᵇ` (proved) but still useful for `Z₂×Z₃ᵇ`. Then OEIS submission (USER); projective
