@@ -143,6 +143,10 @@ whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
   connected components of the residual armed-Schur-hypergraph` (verified 0 mismatches / ~70k
   positions). Not needed for the theorem, but it is the fast-solver lever and a structural handle.
 - **The `F_3^d` cap-set cousin** (build a cap, last to move wins) is `G(d)=0` for `d=1,2,3,4`
-  (d=4 via an AGL(4,3)-quotient solver, memo 7734). "Always P" is now a 4-point conjecture; a proof
-  must differ from the Z_n one (F₃ᵈ has no order-2 element, so no translation/negation fixed-point
-  mirror in the same form).
+  (d=4 via an AGL(4,3)-quotient solver, memo 7734). "Always P" is a 4-point conjecture; a proof must
+  differ from the Z_n one (F₃ᵈ has no order-2 element, so no translation/negation fixed-point mirror
+  in the same form). This is **adjacent to, not the same as**, the famous extremal cap-set problem
+  (maximum cap size — Ellenberg–Gijswijt; DeepMind FunSearch's dim-8 lower bound): that asks how
+  *large* a cap is, our game asks who *wins*. The neighbour is the *maximal*-cap spectrum, not the
+  *maximum* cap. Novelty here is more fragile than the Z_n game (large literature) — check prior art
+  before claiming it.

@@ -13,7 +13,12 @@ this is the additive-combinatorics twin.
   playable: `0+0=0`.) This is hypergraph Node-Kayles (Sieben's frame) on the Schur 3-uniform
   hypergraph — a **subset-state** solver (the RAM-gated object the DECISION parked).
 - **Cap-set on F₃ᵈ:** position = a cap (no `a+b+c=0`, distinct). Move = add a point keeping it a
-  cap. The impartial-game version of the **cap-set problem** (Croot–Lev–Pach / Ellenberg–Gijswijt).
+  cap; last to move wins. This is an impartial last-player game **on caps** — **adjacent to, NOT a
+  version of**, the famous *extremal* cap-set problem (how *large* can a cap be: Croot–Lev–Pach /
+  Ellenberg–Gijswijt `O(2.756ⁿ)`; DeepMind's FunSearch pushed the dim-8 *lower* bound to 512,
+  *Nature* 2023). The extremal problem asks max size; our game asks who *wins* — orthogonal. The only
+  link: the game's terminal positions are inclusion-**maximal** caps (not the *maximum* cap), and
+  game length ≤ max cap size.
 
 The fast `addable` predicate was cross-checked against a direct `is_sum_free` rebuild (0 mismatches).
 
@@ -204,6 +209,14 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
   a 4-point conjecture including the nontrivial d=4 (max cap in F₃⁴ = 20). d=5 (243 points) is the
   next test. A proof would likely mirror the Z_n story (a fixed-point-free involution / translation on
   F₃ᵈ; note F₃ᵈ has no order-2 element, so the argument must differ — an open sub-problem).
+- **Not the FunSearch result.** DeepMind's cap-set contribution is a *larger dim-8 cap* (a bound on
+  maximum size); it has no bearing on our game's Grundy value, and G(4)=0 says nothing about max cap
+  size. The relevant neighbour is the **maximal-cap spectrum** (sizes of inclusion-maximal caps),
+  the analogue of Cameron–Erdős maximal-sum-free sets for the Z_n game.
+- **Novelty caveat (more fragile than the Z_n game).** An impartial last-player game *on caps*
+  plausibly hasn't been studied, but the cap-set literature is vast and well-trodden — this needs a
+  real prior-art search before any novelty claim. The **Z_n sum-free theorem is the solid
+  deliverable**; the cap-set cousin is a further question with a marquee problem next door.
 
 ## Why this is the high-value lever (recommendation)
 
@@ -211,8 +224,10 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
 - Two clean conjectural laws in one prototype session — a mod-6 outcome theorem candidate for Z_n
   and an "always P" candidate for the cap-set game — both **provable-shaped** (pairing / structure),
   reusing this thread's certificate machinery.
-- **Cap-set hook**: the F₃ᵈ version is the impartial-game face of a marquee combinatorics problem —
-  the paper hook the arithmetic-Cayley cluster wanted.
+- **Cap-set adjacency** (not a hook to lean on): the F₃ᵈ game sits *next to* a marquee problem (max
+  cap size — Ellenberg–Gijswijt, FunSearch), but it is a *different* question (game outcome vs
+  extremal size). Treat as a further direction, not a load-bearing claim — see the novelty caveat in
+  Result 2. The **Z_n sum-free theorem** is the deliverable.
 - It is the one top target the DECISION explicitly gated on RAM, now unblocked.
 
 ## Progress + next steps
