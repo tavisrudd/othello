@@ -216,12 +216,15 @@ d=3: G=0 (memo 367,525,|F_3^d|=27)
 - **Novelty (prior-art search done 2026-07-04): appears-novel, but cite/distinguish named neighbours.**
   Our cap game (impartial, *shared collection*, *normal* play, *building* a cap) is not: **Anti-Set**
   (Clark–Fisk–Goren, *Involve* 2016 — separate hands, misère, strategy, no nimbers); **Impartial SET**
-  (Uiterwijk–Hufkens, CG 2022 — a *removal* game, nimbers computed; ours is the building complement);
+  (Uiterwijk–Hufkens, CG 2022 — **confirmed a *removal* game**: "a move means taking … a Set",
+  "players take turns removing cards that form valid Sets"; ours *builds* a cap — different game);
   or the **general-position achievement game** (Klavžar et al., arXiv:2111.07425 — which does NOT
   scoop it: gp-forbidden = Hamming-betweenness triples, *disjoint* from Set-lines, and that paper does
-  only product graphs). Umbrella = Sieben's impartial hypergraph games (EJC 2023, framework only, no
-  AG(n,3)). No OEIS entry for the game nimbers. **Caveats:** the Impartial-SET rule and Sieben's
-  coverage were read from abstracts/snippets (full texts bot-walled) — re-verify before a writeup.
+  only product graphs). Umbrella = Sieben's impartial hypergraph games (EJC 2023) and the Benesh–Ernst
+  impartial *building* games on graphs (geodetic, not caps) — framework family, no AG(n,3)/cap
+  instance. No OEIS entry for the game nimbers. **Caveat:** Sieben's exact coverage was read from
+  snippets (full text bot-walled) — the Impartial-SET rule is now verified (removal, from the public
+  abstract).
   The **Z_n sum-free theorem is the solid deliverable**; the cap game is a further, defensible
   direction with its neighbours now mapped.
 

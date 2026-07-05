@@ -159,9 +159,16 @@ whole law turns on the divisibility pair `(2∣n, 3∣n) = n mod 6`.
   - **Anti-Set** — Clark, Fisk, Goren, "A variation on the game Set," *Involve* 9(2):249–264 (2016):
     *separate hands, misère, explicit strategy* (no nimbers). Different game.
   - **Impartial SET** — Uiterwijk & Hufkens, CG 2022 (LNCS, Springer 2023,
-    doi:10.1007/978-3-031-34017-8_9; Hufkens M.Sc. thesis, Maastricht 2020): a *removal* game (a move
-    *takes* a collinear Set), nimbers computed. Ours *builds* a cap — the complementary game.
-    *(exact rules inferred from abstract/snippets — full text bot-walled, re-verify.)*
+    doi:10.1007/978-3-031-34017-8_9; Hufkens M.Sc. thesis, Maastricht 2020): **CONFIRMED a *removal*
+    game** — the abstract states "a move means taking a number of cards … (a Set)" and "players take
+    turns removing cards that form valid Sets"; `SET-v-c` = v values per characteristic, c
+    characteristics (SET-4-3 = the 81-card deck). They remove lines from the layout; **we build an
+    independent set (cap) by adding points** — different move set, different game (both live on the
+    AG(n,3) line-hypergraph). *(rules verified 2026-07-04 from the public abstract text; the CG-2022
+    full chapter is paywalled but the move rule is unambiguous.)*
+  - **Impartial geodetic building games on graphs** — Benesh, Ernst, Sieben (Semantic Scholar): a
+    *building* game in the same active "impartial games on graphs" family (geodetic sets, not caps —
+    geodesic/betweenness structure, disjoint from Set-lines as above). A framework-family relative.
   - **Sieben, "Impartial Hypergraph Games," EJC 30(2) #P2.13 (2023)** — the framework: our cap game is
     the achievement/building game on the AG(n,3) line-hypergraph, which Sieben does not compute
     (he computes product hypergraphs). *(PDF unparseable — re-verify.)*
