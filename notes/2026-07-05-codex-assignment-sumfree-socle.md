@@ -81,6 +81,39 @@ attack, what the data shows, any proof or precise obstruction, and verified-vs-i
 "Attack 1 table + Attack 2 nimber law conjecture + Attack 4 verified `Z3²×Z5` strategy" would be an
 excellent round.
 
+### ★ ROUND-2 UPDATE (2026-07-05): target sharpened, Attack 4 closed NEGATIVE, two bets left
+
+**Sharpened target — the whole open problem is one statement.** `s₂≥2` is done (translation `τ_v`,
+any 3-structure), `s₂=1` rides `τ_m` to `{m}` N, `s₂=0,τ₃=0` is negation. So the entire socle
+reduction + open classification slice reduces to:
+> **`odd G with 3-torsion ⟹ N`** (⊇ `F₃ⁿ=N`), plus the `s₂=1` non-elementary `{m}` N.
+Attack this directly — it subsumes the reduction.
+
+**Attack 4 (mirror + local repair) is CLOSED — negative.** The coprime peel is not a
+mirror/fibered/projection strategy even for elementary `H`: global `σ_G`, combined, ALL structured
+single involutions `(σ_H`/`−h, c−i)` incl. order-15 openings, and the fibered "`H`-projection = `σ_H`,
+`Z_p` free" all FAIL (`2026-07-05-socle-reduction-not-a-mirror.md`, Attack-4 section). **The wall:**
+`base + off-base = off-base` couples the parts, so nothing separates them; and the socle is not a
+direct summand when the 3-part is non-elementary (`Z9×Z3` has no retraction onto its socle). The win
+is genuinely adaptive. **Stop hunting for a succinct mirror.**
+
+**Two live bets (both structural, non-mirror):**
+- **Attack 3-refined — a *twisted* game morphism.** The naive `G→G/6G` projection fails (sends
+  sum-free → non-sum-free). Look for a non-obvious position-correspondence between `G` and `G[6]`
+  (e.g. map a `G`-position to a socle-position via its 3-torsion "shadow" + a repair), or a
+  strategy-lifting that survives the base/off-base coupling. Even a *conjectured* correspondence
+  verified on `Z9×Z3`, `Z5×Z3²` would be progress.
+- **Attack 6 (new) — bounded search for a succinct adaptive strategy.** Since the win is adaptive,
+  ask whether it is *succinctly* adaptive: e.g. is there a small "state" (a few bits beyond the socle
+  σ-position) that determines the reply? Extract the solver's `Z9×Z3` and `Z5×Z3²` strategies fully
+  and look for a low-complexity decision rule (socle σ + a bounded rule on the non-socle layers). If
+  the strategy has no succinct form, that is itself a publishable structural fact (the reduction cases
+  are "essentially search," unlike the one-line socle theorems).
+
+If neither yields, the defensible published position stands on its own: **classification proven for
+`r₃≤1` and `s₂≥2`, both socle endpoints (`F₃ⁿ=N`, `Z₂×F₃ᵇ=P`) as theorems, `r₃≥2` slice as a
+solver-verified conjecture reduced to "odd `G` with 3-torsion ⟹ N".**
+
 ---
 
 ## 0. The game (precise definition)
