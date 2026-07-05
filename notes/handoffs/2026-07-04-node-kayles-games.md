@@ -11,6 +11,37 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 - [OEIS submission draft](../2026-07-04-sumfree-oeis-draft.md) + `../2026-07-04-sumfree-bfile.txt`
 - Banked scripts: `../2026-07-04-cayley-*.py`, `../2026-07-04-sumfree-*.py`, `../2026-07-04-improved-sumfree.py`, `../2026-07-04-cayley-path-power.py`; Rust solvers in `../sumfree-solver/` (binaries gitignored).
 
+## ▶ RESUME HERE — sum-free socle reduction (updated 2026-07-05, session `2d451ba6`)
+
+**State of the abelian sum-free game classification:**
+- **★ THEOREM this session: `Z₂×F₃ᵇ = P` for all `b≥1`** (σ-mirror through `k=m+p`) — the last socle
+  *endpoint*. Full proof + verification: [`../2026-07-05-sumfree-zmf3b-theorem.md`](../2026-07-05-sumfree-zmf3b-theorem.md).
+- Classification **proven** for `r₃≤1` and `s₂≥2`; both socle endpoints (`F₃ⁿ=N`, `Z₂×F₃ᵇ=P`) are
+  theorems. Sound solver landed (Codex; `../sumfree_solver.py`, root-transitivity bug fixed).
+- **Sole open piece = the SOCLE REDUCTION** `𝒢(G)=𝒢(G[6])`, sharpened to **"odd `G` with 3-torsion ⟹ N"**
+  (+ `s₂=1` non-elementary `{m}` N). Solver-verified on the small `r₃≥2` cases.
+
+**What's been ruled out (do NOT retry):** the reduction is NOT a mirror/pairing phenomenon —
+global σ, combined, all structured single involutions (incl. order-15 openings), fibered `H`-mirror,
+and **adaptive AFFINE** involutions all fail (`../2026-07-05-socle-reduction-not-a-mirror.md`; Codex
+findings §"Adaptive Affine Mirrors Are Insufficient"). Fixed negation-bulk provably LOSES for `r₃≥2`.
+Nimber-law and naive quotient (`G→G/6G`) also dead.
+
+**Best lead = the BOOK route** (`../2026-07-05-socle-book-residue-shrink.md` + Codex findings
+§"Rule Book Residue Shrink"): negation is clean except on order-3 (socle) elements (bounded by `r₃`,
+not `|G|`); `r₃≤1` peel is PROVEN by the book; and Codex's `strategy_book_miner.py` reduces the
+smallest hard peel `Z3²×Z5` to a **finite 201-entry canonical exception book** under broad local reply
+families. Terminal-parity is essentially circular (normal-play) — skip it.
+
+**▶ CONCRETE NEXT STEP:** test whether the 201-book is **coprime-independent** — run
+`../strategy_book_miner.py` on `Z3²×Z7` and diff the canonical-position structure against `Z3²×Z5`
+(scaling probe already showed the socle-fail count is `p`-independent). If it's the same book up to
+`Z_p` relabeling → the book-proof route is viable (prove the broad-family lemmas + verify the finite
+book + generalize by orbit/stabilizer or induction); if it blows up with `p` → route likely dead and
+the classification rests where it is. Then: OEIS submission (USER-only, still pending).
+
+Full session log: **Handoff Note — session 2026-07-05--2/--3** below (rounds 1–4 + Codex rounds 1–3).
+
 ## Progress
 
 - [x] **Game (a): Cay⁺(Z_n,S) Node-Kayles outcome-law MAP.** P-side pairing / N-side gap asymmetry;
