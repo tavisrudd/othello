@@ -73,6 +73,22 @@ the **characteristic-`p` vector-space structure**, not of the AP/cap relation it
 game is the control that proves it. (Compare the [zero-sum triple game](2026-07-04-sumfree-variants.md)
 on `Z_n`, a *different* relation `a+b+c=0`, which is irregular with no law at all.)
 
+## Sibling: the INTERVAL 3-AP-free game `{1..n}` (no wrap)
+
+The achievement-game version of the classical 3-AP-free sets (Roth/Behrend `r₃(n)`), on `{1,…,n}`
+with integer (non-cyclic) APs. No group symmetry ⇒ no mirror. Grundy(∅), n=1..28
+(`2026-07-04-ap-interval.py`, OEIS-absent):
+
+```text
+n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 ... 28
+G: 1 0 0 1 1 0 0 0 0  3  3  0  0  0  0  0  2  0 ...  3
+```
+
+Also **mostly P**, with irregular N-exceptions `{1,4,5,10,11,17,28}` (more frequent than the cyclic
+version, and no pattern — as expected without symmetry). So *both* the cyclic and interval 3-AP-free
+games trend second-player-win, reinforcing that "cap-type" (3-AP-free) achievement games are
+P-leaning; the cyclic version is cleaner (even n provably P) thanks to its translation symmetry.
+
 ## Status / open
 
 - **New OEIS-absent sequence** (nimbers above); the exception set `{1,7,19,47,…}` is a candidate
