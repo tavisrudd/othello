@@ -150,6 +150,14 @@ Commits `efedbc5`→`24d33e4` on `main`. Everything below is landed + banked + c
   proof (parity of maximal sets forces only k≤3/k≤2; no mirror: F₃'s negation is broken everywhere by
   `2(−x)=x`, F₂'s char-2 has no fpf linear involution). Nice contrast to the cap game (same F₃ᵏ, but
   `a+b+c=0` → P vs `a+b=c` → N). Scripts banked.
-- **Next open (priority):** #1 OEIS submission (USER; possibly + the new variant sequences); interval
-  octals k=2→10⁷ (gated on sub-O(m²) split); cap game on `PG(n,q)` / "no t collinear" t>3; the
-  `F₂ᵏ`/`F₃ᵏ` conjectures (need a non-mirror argument); game-(a) N-side certificate (research-shaped).
+- **★ 3-AP-free (cyclic cap) game on Z_n — the cleanest new variant**
+  ([ap-free-game](../2026-07-04-ap-free-game.md)). The proper cyclic analog of the cap game
+  (cap = no 3 collinear = no 3-AP). **P for every n through 47 except the sporadic `{1,7,19,47}`**
+  (all odd; not centered-hexagonal — 37 is P). **Even n ⇒ P is PROVEN** (τ_{n/2} translation mirror;
+  the 4∣n gap closes because x+n/4∈A would make x illegal via {x+n/4,x,x+3n/4}). Odd n: mostly P but
+  no uniform certificate (midpoint reflection works only n=3,5,9,15; 7,19,47 genuinely N). **Isolates
+  why the cap theorem is clean:** its center needs 3c=0 (every c in char p; only {0,n/3,2n/3} in Z_n),
+  so Z_n's extra AP-completions (3y−2c,4c−3y) break the mirror sporadically. New OEIS-absent sequence.
+- **Next open (priority):** #1 OEIS submission (USER; possibly + the new variant sequences); a formula
+  for the AP-free exception set `{1,7,19,47,…}`; interval octals k=2→10⁷ (sub-O(m²) split); projective
+  `PG(n,q)` cap "always P" proof; `F₂ᵏ`/`F₃ᵏ` conjectures (non-mirror argument); game-(a) N-side cert.
