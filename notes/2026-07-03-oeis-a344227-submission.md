@@ -267,20 +267,28 @@ at nothing invites the same "where is it" review request as a missing `%H`.
 
 ## 8. "with G(17)" swap-in variant (hold until the run lands)
 
-**Do not paste this variant until the in-flight G(17) run reports a k=0 WIN + k=1 LOSS** (which
-pins G(17) = 1). The theory note predicts G(17) = 1 with ~88% confidence, and the run is expected
-to finish within days — but **ASSUMED-VERIFY-BEFORE-SUBMIT: G(17) is not yet computed.** If the
-run instead pins a different value, substitute it verbatim below.
+> **UPDATE 2026-07-04 — the run landed: G(17) = 2, NOT 1.** `queens nimber 17` reported
+> k=0 WIN + k=1 WIN + k=2 LOSS ⇒ **a(17) = 2** (~585 B nodes / ~59 h; branch `queens-n18`,
+> `QUEENS_TT_BITS=31`). This breaks odd→1 and misses the ~88% G=1 prediction. **STILL PENDING an
+> independent-hash k=1 rerun** (collision gate) before submission — see the nimber handoff's
+> Session 2026-07-04 note. The "predicted 1" text below is void; use **2** everywhere per the
+> line-296 fallback (trailing DATA digit → 2, the `17 1` b-file line → `17 2`). The DATA/b-file
+> blocks below are left showing the old `1` as a record of the prediction — do not paste them
+> as-is.
 
-DATA line (predicted a(17) = 1):
-```
-%S A344227 0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0,1
-```
-Full sequence, offset 0: `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1`
+**Do not paste this variant until the G(17) k=1 rerun confirms** (the original guard "k=0 WIN +
+k=1 LOSS ⟹ G=1" is moot — k=1 was a WIN, k=2 the LOSS; G = 2). **ASSUMED-VERIFY-BEFORE-SUBMIT:
+G(17) = 2 is computed but not yet independently revalidated.**
 
-b-file tail to append (after the `16 0` line in §4):
+DATA line (~~predicted a(17) = 1~~ → actual a(17) = **2**):
 ```
-17 1
+%S A344227 0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0,2
+```
+Full sequence, offset 0: `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1, 0, 1, 0, 2`
+
+b-file tail to append (after the `16 0` line in §4) — **actual value 2** (the `17 1` is the void prediction):
+```
+17 2
 ```
 
 EXTENSIONS line:
