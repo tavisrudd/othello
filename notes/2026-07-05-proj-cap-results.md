@@ -26,6 +26,7 @@ orbit and every second reply is game-equivalent.
 | PG(2,7)   |     57 |              1 | P       | 0           |   28651 | q odd ★ falsification test         |
 | PG(2,8)   |     73 |              1 | P       | 0           |  130936 | q even (char 2)                    |
 | PG(2,9)   |     91 |              1 | P       | 0           |  493556 | q=3^2 ★ non-prime field, odd char  |
+| PG(2,11)  |    133 |              1 | P       | 0           | 11289645| q odd (prime) ★ 2026-07-06         |
 | PG(3,2)   |     15 |              1 | P       | 0           |     791 | = F_2^4 sum-free                   |
 | PG(4,2)   |     31 |              1 | P       | 0           |  311926 | = F_2^5 sum-free                   |
 | PG(3,3)   |     40 |              1 | P       | 0           |   55909 | m=3, odd char                      |
@@ -33,8 +34,8 @@ orbit and every second reply is game-equivalent.
 ## Reading
 
 - **Every computed case is P.** The conjecture `G(PG(m,q))=0` survives every test.
-- **Every q-odd plane is P** — `PG(2,{3,5,7,9})`, including the non-prime char-3 field
-  `q=9`. This is the important result of the session: the q-odd planar case, where the
+- **Every q-odd plane is P** — `PG(2,{3,5,7,9,11})`, including the non-prime char-3 field
+  `q=9` and the prime `q=11` (added 2026-07-06). This is the important result of the session: the q-odd planar case, where the
   natural single-involution mirror is obstructed (handoff R4), is nonetheless a
   second-player win in outcome. So P2 has a winning strategy there; what we lack is a
   clean *uniform proof*, not the verdict.

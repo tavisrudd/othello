@@ -105,6 +105,25 @@ bulk replies for `q≥9`. So **central symmetry + local patch is insufficient fo
 decomposition, or a strategy that keeps the center's row+col permanently balanced without breaking
 global symmetry). Outcome stays P (computed q≤9).
 
+**UPDATE 2026-07-06 — the ENTIRE single-involution mirror approach is CLOSED (evidence):** full
+analysis in `2026-07-06-qodd-mirror-obstruction.md`. The grid hypergraph's automorphism involutions
+are exactly two families (fundamental theorem of affine geometry ⇒ monomial affine maps):
+central symmetry `σ_c` and the **antidiagonal (transpose-type)** involutions. The antidiagonal was
+previously dismissed ("fixed locus = a whole live line") but **never tested as a bulk-forced mirror
+with free handling of that line** — and it is genuinely *better* than `σ_c`: its problem-set is a
+single fixed line `ℓ` in a NON-burned direction, pointwise fixed (so axis moves CAN be answered
+symmetrically). Under the most permissive bulk-forced test (force `φ` on the bulk, reply FREELY to
+problem-set moves, best involution): **`σ_c` wins q≤7 fails q=9; the antidiagonal wins q≤9 fails
+q=11 (all 100 φ)**. Neither is uniform. Poison mechanism pinned (`2026-07-06-trace-fail.py`): a
+mirror `φ(w)` is illegal iff an occupied problem-set point sits on the φ-invariant line `wφ(w)` (its
+axis-intersection); every problem-set reply eventually detonates. The antidiagonal has an EXTRA
+row/col-swap poison channel (an unpaired reply's `φ`-shadow leaves a row/col hole). **So the uniform
+q-odd proof cannot be a fixed-involution mirror — it needs an adaptive-involution or non-mirror
+(Grundy-decomposition / counting) mechanism.** New outcome datum: **PG(2,11)=P** (11.3M states,
+`2026-07-05-proj-cap-fast.py`); the q-odd ladder is P for q=3,5,7,9,11. `σ_c` scripts:
+`2026-07-06-qodd-bulk-forced.py`; antidiagonal: `2026-07-06-mirror-family.py` (+ axis / M_p /
+free-large / trace variants).
+
 ### R5. Feasibility — the plan is too pessimistic
 
 - **Caps are small.** Max cap in `PG(2,q)` = `q+1` (q odd) / `q+2` (q even); in `PG(3,q)` = `q^2+1`
@@ -499,10 +518,26 @@ symmetry + local special-line patch is insufficient for q≥9 (the two special l
 mirror; q≤7 success was small-case luck). The uniform q-odd proof remains open and now needs a
 non-central-symmetry idea.
 
-**Next:** (3') new q-odd mechanism — Sprague–Grundy decomposition of the grid game, OR a
-strategy keeping the center's row+col permanently balanced without breaking global symmetry;
-worth extracting the solver's actual special-line replies for structure. (0) import q=2 column
-beyond PG(4,2) from the F_2^{m+1} sum-free solver. (4) canonical solver for PG(5,2)/larger.
+**2026-07-06 (session 2) — the WHOLE single-involution mirror approach CLOSED; PG(2,11)=P.**
+Details in `2026-07-06-qodd-mirror-obstruction.md`. Enumerated the grid hypergraph's involution
+automorphisms (monomial affine ⇒ exactly two families: central symmetry + antidiagonal). Tested
+the antidiagonal/transpose mirror — never tried before — as a bulk-forced mirror with free axis
+handling: it is strictly better than `σ_c` (problem-set = 1 pointwise-fixed line vs the 2-line
+cross) and wins q≤9, but **fails q=11 (all 100 φ)**. `σ_c` (free cross, any center) fails q=9.
+Neither uniform; poison mechanism identified (occupied problem-point on a φ-invariant mirror
+line; antidiagonal has an extra row/col-swap channel). Also computed **PG(2,11)=P** (11.3M
+states) — q-odd ladder now P for q=3,5,7,9,11.
+
+**Next:** (3'') the mirror route is CLOSED — pursue a NON-mirror mechanism. For the PLANE:
+(a) **adaptive-involution** strategy — re-symmetrize after each problem-set move (obstruction:
+re-symmetrizing an asymmetric S under a new monomial involution is generally impossible).
+(b) **non-constructive parity/counting** argument (no explicit pairing). NOTE: **Sprague–Grundy
+decomposition is unpromising in the plane** — every pair of points lies on a line, so the
+available set never partitions into independent blocks; decomposition is better aimed at the
+`m ≥ 3` lift (points can be genuinely far apart). Also: (c) push the outcome ladder to
+**PG(2,13)** (~200M states — needs a canonical/PGL-reduced solver, not the naive memo).
+(0) import q=2 column beyond PG(4,2) from the F_2^{m+1} sum-free solver. (4) canonical solver
+for PG(5,2)/larger + the `m ≥ 3` decomposition probe.
 
 ## Handoff Summary
 
