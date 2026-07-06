@@ -25,6 +25,7 @@ use std::hash::{BuildHasherDefault, Hasher};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::thread;
+use std::time::{Duration, Instant};
 
 const MAXW: usize = 16; // supports N = q*q <= 1024, i.e. q <= 32
 type Mask = [u64; MAXW];
@@ -383,6 +384,7 @@ impl<'a> Solver<'a> {
 struct Memo {
     shards: Vec<Mutex<FnvMap<u128, bool>>>,
     mask: usize,
+    inserts: AtomicUsize, // approximate node-work counter (may double-count concurrent recompute)
 }
 impl Memo {
     fn new(log2: usize) -> Memo {
@@ -390,6 +392,7 @@ impl Memo {
         Memo {
             shards: (0..n).map(|_| Mutex::new(FnvMap::default())).collect(),
             mask: n - 1,
+            inserts: AtomicUsize::new(0),
         }
     }
     #[inline]
@@ -403,6 +406,11 @@ impl Memo {
     #[inline]
     fn insert(&self, fp: u128, v: bool) {
         self.shards[self.shard(fp)].lock().unwrap().insert(fp, v);
+        self.inserts.fetch_add(1, Ordering::Relaxed);
+    }
+    #[inline]
+    fn work(&self) -> usize {
+        self.inserts.load(Ordering::Relaxed)
     }
     fn len(&self) -> usize {
         self.shards.iter().map(|s| s.lock().unwrap().len()).sum()
@@ -500,24 +508,58 @@ fn solve_parallel(q: usize, nthreads: usize, depth: usize) {
         let mut occ: Vec<u16> = Vec::new();
         enumerate(&b, depth, &mut occ, &empty, &empty, &mut visited, &mut frontier);
     }
+    eprintln!(
+        "  [par q={}] {} frontier tasks (depth {}), {} threads — solving...",
+        q, frontier.len(), depth, nthreads
+    );
     // phase 2: parallel solve of frontier subtrees over the shared memo
     let idx = AtomicUsize::new(0);
+    let done_tasks = AtomicUsize::new(0);
+    let start = Instant::now();
+    let total = frontier.len();
     thread::scope(|s| {
-        for _ in 0..nthreads {
-            let (b, memo, frontier, idx) = (&b, &memo, &frontier, &idx);
+        // live progress reporter (stderr): tasks done/total, nodes memoized, nodes/s
+        {
+            let (memo, done_tasks, start) = (&memo, &done_tasks, &start);
             s.spawn(move || {
+                let (mut last_n, mut last_t) = (0usize, 0.0f64);
                 loop {
-                    let i = idx.fetch_add(1, Ordering::Relaxed);
-                    if i >= frontier.len() {
+                    thread::sleep(Duration::from_secs(5));
+                    let d = done_tasks.load(Ordering::Relaxed);
+                    let n = memo.work();
+                    let el = start.elapsed().as_secs_f64();
+                    let rate = if el > last_t {
+                        (n - last_n) as f64 / (el - last_t)
+                    } else {
+                        0.0
+                    };
+                    eprintln!(
+                        "  [par q={} {:6.0}s] tasks {:>5}/{:<5}  nodes {:>13}  {:>10.0} nodes/s",
+                        q, el, d, total, n, rate
+                    );
+                    last_n = n;
+                    last_t = el;
+                    if d >= total {
                         break;
                     }
-                    let (occ0, chosen, forbidden) = &frontier[i];
-                    let mut occ = occ0.clone();
-                    g_par(b, memo, &mut occ, chosen, forbidden);
                 }
             });
         }
+        for _ in 0..nthreads {
+            let (b, memo, frontier, idx, done_tasks) = (&b, &memo, &frontier, &idx, &done_tasks);
+            s.spawn(move || loop {
+                let i = idx.fetch_add(1, Ordering::Relaxed);
+                if i >= frontier.len() {
+                    break;
+                }
+                let (occ0, chosen, forbidden) = &frontier[i];
+                let mut occ = occ0.clone();
+                g_par(b, memo, &mut occ, chosen, forbidden);
+                done_tasks.fetch_add(1, Ordering::Relaxed);
+            });
+        }
     });
+    eprintln!("  [par q={} {:6.0}s] phase-2 done, finishing top pass", q, start.elapsed().as_secs_f64());
     // phase 3: sequential top pass (children at the frontier are memoized)
     let mut occ: Vec<u16> = Vec::new();
     let root_n = g_par(&b, &memo, &mut occ, &empty, &empty);

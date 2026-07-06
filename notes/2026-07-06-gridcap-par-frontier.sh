@@ -2,14 +2,21 @@
 # Parallel (24-thread) outcome frontier: extend the PG(2,q) ladder to q=23..31.
 # Each q is internally multi-threaded (sharded memo + depth-4 frontier split); run
 # sequentially so threads never oversubscribe. Memory-capped so a too-big q dies clean.
+#
+# MONITORING: the solver streams live progress (tasks done/total, nodes memoized, nodes/s)
+# to stderr, which this runner appends to $PROG. Watch it live with:
+#     tail -f notes/2026-07-06-gridcap-par-progress.log
+# Final result lines (root P/N) go to $LOG.
 set -u
-BIN=/tmp/gridcap_par
+BIN=/tmp/gridcap_par2
 LOG=/home/tavis/src/othello/notes/2026-07-06-gridcap-par-frontier.log
+PROG=/home/tavis/src/othello/notes/2026-07-06-gridcap-par-progress.log
 ulimit -Sv 23000000   # ~22 GB
 run() {
   local q="$1" t0 t1 out rc
+  echo "==== q=$q start $(date +%T) ====" >> "$PROG"
   t0=$(date +%s)
-  out=$("$BIN" par "$q" 24 4 2>&1); rc=$?
+  out=$("$BIN" par "$q" 24 4 2>>"$PROG"); rc=$?   # stdout=result, stderr=live progress -> PROG
   t1=$(date +%s)
   [ $rc -ne 0 ] && out="q=$q DIED rc=$rc (mem cap / OOM)"
   printf '[%6ds] %s\n' "$((t1 - t0))" "$out" | tee -a "$LOG"
