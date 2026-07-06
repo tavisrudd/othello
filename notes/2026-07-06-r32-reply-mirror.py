@@ -60,7 +60,8 @@ def main():
         """Bob's *0-replies to `board` (the moves b making {board,b}=*0)."""
         start = ";".join(coordstr(e) for e in board)
         r = subprocess.run([GRUNDY, ",".join(map(str, mods)),
-                            "--start", start, "--children", "--preply"],
+                            "--start", start, "--children", "--preply",
+                            "-j", os.environ.get("PREPLY_J", "6")],
                            capture_output=True, text=True)
         outs = []
         for line in r.stdout.splitlines():

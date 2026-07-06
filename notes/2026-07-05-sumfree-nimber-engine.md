@@ -398,3 +398,37 @@ existential P-replies vs universal ∗1-absence, and a 2-lemma target both of wh
 (the full P-reply set of an opening). Script `../2026-07-06-r32-reply-mirror.py` extracts Bob's
 winning-reply function from a P-position (feeds the adaptive-mirror search). **Compute owns the
 orbit-child + P-reply data; Codex proves Lemma A/B.**
+
+### The strategy is genuinely ADAPTIVE — no fixed pairing (proof + data)
+
+Reply-function extraction (`r32-reply-mirror.py`, p=7): from `{s,t}` **every** legal Alice move `a` has a
+**mutual** ∗0-partner `b` (a is a P-reply to b *and* b to a): **54/54 for Lemma A, 53/53 for Lemma B, zero
+problem-set moves.** So a 1-ply pairing exists — but it is a *game-tree* pairing, **not** a fixed symmetry:
+
+> **No fixed-Schur-involution pairing can exist (proof).** A winning "reply `φ(a)`" strategy with a *fixed*
+> fpf involution `φ` needs `φ` to preserve the Schur relation on the residual and fix the seeds. But
+> `V ∪ {s,t}` (the 54 legal moves + 2 seeds = 56 of the 63 nonzero elements) **generates `G`**, so any such
+> `φ` extends to an `Aut(G)` map fixing `{s,t}` — which is the **identity** (s order-3, t order-3p ⇒ the
+> stabiliser is trivial). Contradiction with fpf. ∎
+
+Hence the fixed-φ mirror is dead (the same wall the abelian note hit for the *whole board*, here at the
+2-element residual), and Bob's win is adaptive (a fixed pairing breaks at deeper plies — the mutual-partner
+sets have size >1 precisely so Bob can re-choose). This is the exact shape of Codex's `Z3²×Z7=P`
+reverse-engineering; the reply tables (`scratchpad/reply{A,B}_p7.log`) are the seed data.
+
+### Asymmetry between the two lemmas (a handle for Lemma B only)
+
+- **Lemma A `{socle,mixed}`** — the two seeds sit on **different socle-lines** (`(0,1)` vs `(1,0)`) ⇒
+  **trivial** `Aut(G)`-stabiliser ⇒ *no* symmetry at all. Pure adaptive.
+- **Lemma B `{coprime,mixed}`** — both seeds have socle-part in `⟨(0,1)⟩` ⇒ stabilised by the involution
+  **`α =` (negate-1st-socle-coord, id on `Z_p`)**, whose fixed locus is the subgroup `F={a=0}≅Z3×Z_p`
+  containing `s,t`. Tempting decomposition: α-mirror the off-`F` moves, play the **warm-up** `Z3×Z_p`
+  strategy on `F`. **It FAILS** (checked): an off-`F` mirror pair sums *into* `F`
+  (`a+α(a)=(0,2a₂,2c)∈F`), depositing constraints, so the on-`F` game is **not** the standalone warm-up —
+  and indeed the standalone on-axis value `𝒢({(0,1),(1,1)})` in `Z3×Z_p` is `∗0` at p=7 but **N at
+  p=11,13**, while the full Lemma-B position stays ∗0. So α is a *partial* handle with the same
+  "coupling-doesn't-decouple" barrier; Lemma B is adaptive too, but has this extra reflection structure
+  Lemma A lacks — the recommended first target for Codex.
+
+Both lemmas: soundness cross-checked — the independent **boolean** Go solver (`sumfree.go`) also returns
+`OUTCOME=P` for `{s,t}` at p=7 (Lemma A 776K nodes, Lemma B 134K nodes), agreeing with the Grundy engine.
