@@ -92,6 +92,19 @@ Closing either failure set is the theorem. This is far more tractable than "invo
 subspaces." Because it might genuinely FAIL, treat `PG(2,{5,7,9})` as a falsification test, not a
 confirmation.
 
+**UPDATE 2026-07-05 — central symmetry route ATTACKED and found INSUFFICIENT (evidence):** full
+analysis in `2026-07-05-qodd-central-symmetry-findings.md`. Grid reformulation (residual = q×q
+partial-permutation-matrix + cap; each row/col holds ≤1 cell ever). Among collineation involutions
+only central symmetry `σ_c` is viable (reflections force burned pairs). The **`σ_c` parity lemma
+HOLDS** off the center's row/col (machine-verified 0 violations, `q=3..11`, incl. composite q=9;
+`2026-07-05-sigma-lemma-test.py`). BUT `σ_c` cannot mirror the center's row/col (image lands on the
+same full line), and both patches tried — fixed transpose cross-pairing (works q=3 only) and
+adaptive row↔col answering (works q≤7, **FAILS q=9,11**) — break `σ_c`-symmetry, which poisons later
+bulk replies for `q≥9`. So **central symmetry + local patch is insufficient for q≥9**; the small-case
+(q≤7) success was misleading. The q-odd proof needs a genuinely different mechanism (Grundy
+decomposition, or a strategy that keeps the center's row+col permanently balanced without breaking
+global symmetry). Outcome stays P (computed q≤9).
+
 ### R5. Feasibility — the plan is too pessimistic
 
 - **Caps are small.** Max cap in `PG(2,q)` = `q+1` (q odd) / `q+2` (q even); in `PG(3,q)` = `q^2+1`
@@ -480,9 +493,16 @@ needs the sum-free import or a canonical solver; off critical path.
 is killed by σ-symmetry forcing the direction-`v` line through any legal P1 move empty).
 Strategy verified stuck-free for `q=2,4,8` (0 illegal replies).
 
-**Next:** (3) attack the q-odd planar kernel (R4) — the real open problem; all q-odd planes
-are P in outcome but the uniform proof is missing. (0) import q=2 column beyond PG(4,2) from
-the F_2^{m+1} sum-free solver. (4) canonical solver for PG(5,2)/larger.
+**q-odd kernel (R6-3) ATTACKED:** `2026-07-05-qodd-central-symmetry-findings.md`. Grid
+reformulation + `σ_c` parity lemma confirmed (q≤11) + evidence-backed NEGATIVE: central
+symmetry + local special-line patch is insufficient for q≥9 (the two special lines poison the
+mirror; q≤7 success was small-case luck). The uniform q-odd proof remains open and now needs a
+non-central-symmetry idea.
+
+**Next:** (3') new q-odd mechanism — Sprague–Grundy decomposition of the grid game, OR a
+strategy keeping the center's row+col permanently balanced without breaking global symmetry;
+worth extracting the solver's actual special-line replies for structure. (0) import q=2 column
+beyond PG(4,2) from the F_2^{m+1} sum-free solver. (4) canonical solver for PG(5,2)/larger.
 
 ## Handoff Summary
 
