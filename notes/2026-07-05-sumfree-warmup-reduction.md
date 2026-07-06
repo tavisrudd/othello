@@ -75,10 +75,12 @@ Status:
 - **The lemma genuinely breaks at `p=5`** — verified this session: `𝒢({5,3}) = 𝒢({5,1}) = ∗3` (not `∗1`), and the
   order-5 singleton `𝒢({3}) = ∗1`, giving root `mex{0,1,4} = ∗2 = 𝒢(Z₁₅)`. So the lemma is *exactly* a `p ≥ 7`
   statement, not a formality: the mechanism that makes it `∗1` for `p≥7` must fail precisely at `p=5`.
-- **No uniform `∗0`-child witness.** Codex's AP-mirror P-child `{p,3,6−p}` is `∗0` for `p ≤ 23` but **`∗4` at
-  `p=29`** (engine, this thread) — so even the "`∗0` present" half lacks a single clean representative across `p`.
-  Both AP-mirror branches reduce to "at most 7 explicit exceptional first deviations," but the P-child itself is
-  non-uniform, and the "`∗1` absent" half has no line-of-sight proof.
+- **No uniform `∗0`-child witness — and the two branches are ASYMMETRIC.** Codex's AP-mirror P-child for the
+  `{p,3}` branch, `{p,3,6−p}`, is `∗0` for `p ≤ 23` but **`∗4` at `p=29`** — so that branch's `∗0`-witness is
+  non-uniform. The `{p,1}` branch's AP-child `(p+1)/2` is **more robust: `∗0` for p=7…19 (Codex), 23, 29, 31**
+  (this session; p=31 = 106M nodes on the full box), no break yet. So the "`∗0` present" half has a clean witness
+  for `{p,1}` well past where `{p,3}`'s fails — the difficulty is concentrated in the `{p,3}` branch and, for both,
+  in the "`∗1` absent" half, which has no line-of-sight proof.
 
 ## Why `p=5` is sporadic (the precise statement)
 

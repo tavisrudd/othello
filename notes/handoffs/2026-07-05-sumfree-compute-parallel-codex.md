@@ -139,8 +139,8 @@ just "oracle for Codex"). State of the open problem:
   ⇒`∗0`; symmetric+order-3-alive ⇒ a `∗0` child; symmetric mex reduction. Gives root`=∗1` ⟺
   `G({p,1})=G({p,3})=∗1` (two-move lemma). **Verified the lemma BREAKS at p=5** (both `∗3`, not `∗1`) —
   exactly why `G(Z15)=∗2` (the order-p singleton `{3}=∗1` there). So the lemma is a sharp `p≥7` statement.
-- **`{p,1}` branch AP-child `(p+1)/2` — CHECKED past p=19 (was the open TODO): holds `∗0` for p=17,19,23,29**
-  (session --7, full engine; p=31 in flight). Does NOT break at p=29 — asymmetric with `{p,3}`.
+- **`{p,1}` branch AP-child `(p+1)/2` — CHECKED past p=19 (was the open TODO): holds `∗0` for p=17,19,23,29,31**
+  (session --7, full engine; p=31 = 106M nodes). Does NOT break — asymmetric with `{p,3}` (which broke to `∗4` at p=29).
 - **`{p,3}` branch is the hard one (--5b):** `c=6-p` is NOT a uniform P-child (`∗4` at p=29); mirror
   cert fails. Genuinely non-mirror. **No uniform `∗0`-child witness exists for either branch.**
 - **The real crux (both branches, unproven):** the "**missing ∗1** in the child spectrum," uniformly
@@ -279,9 +279,10 @@ two-move reduction was a heuristic; I re-derived it from the proven **Lemmas 1 &
 
 **Compute — frontier extended, families mapped as intractable** (all runs `notes/sumfree-go/`, GOMEMLIMIT-
 capped, mem-guarded):
-- **`{p,1}` AP-child `(p+1)/2` = `∗0` (P) for p=17,19,23,29** (full engine; the handoff's open TODO). Does
-  **not** break at p=29 (contrast `{p,3}`'s `6−p` which broke to `∗4` at p=29). p=31 (`Z93`) times out at
-  ~70M nodes — the compute wall. Frontier extension for p=31,37 running (`frontier_results.txt`).
+- **`{p,1}` AP-child `(p+1)/2` = `∗0` (P) for p=17,19,23,29,31** (full engine; the handoff's open TODO;
+  p=31 = 106M nodes / 1120s on the full box). Does **not** break (contrast `{p,3}`'s `6−p` which broke to
+  `∗4` at p=29) — the two warm-up branches are genuinely asymmetric. p=37 + the `{p,3}` post-break values
+  at 31/37 were still in flight at wrap (`frontier_results.txt`).
 - **Falsification N-hunt held:** boolean `Z3²×Z_p` p=11..23 all timeout (= consistent-with-P; a first-player
   win would cut off fast — none did). **No conjecture-breaker.** (p≥29 exceed the solvers' 256-bit mask.)
 - **Extended families are compute-BLOCKED (finding, not a gap):** `Z9×Z3×Z{5,7}`, `Z3³×Z{5,7}`, `Z3²×Z25`
