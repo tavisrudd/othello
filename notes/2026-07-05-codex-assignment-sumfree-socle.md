@@ -1,5 +1,61 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
+> # ★ CURRENT INSTRUCTIONS — 2026-07-06 (authoritative; SUPERSEDES Rounds 4–7 below, kept only as history)
+>
+> **Read this block; everything under it is superseded context.** The sum-free warm-up is down to a single
+> open statement with a single viable method; the dead ends are all recorded with witnesses so you don't
+> re-walk them.
+>
+> ## State of the warm-up `𝒢(Z₃×Z_p) = ∗1` (p ≥ 7; `∗2` at p=5) — what is PROVEN
+> - **Reduction (PROVEN, from Lemmas 1&4 → Facts B/C/D):** `𝒢(Z_{3p})=∗1 ⟺ 𝒢({p,1})=𝒢({p,3})=∗1`
+>   (two-move lemma; sharp — it *breaks* at p=5). See `2026-07-05-sumfree-warmup-reduction.md`.
+> - **∗0-present half (PROVEN, uniform, no book):** `{p,k,−k}=∗0` for any non-order-3 `k`, via Fact C. So
+>   `{p,3,−3}`,`{p,1,−1}` are the ∗0-children. The old AP-mirror `6−p`/`(p+1)/2` route is SUPERSEDED — drop it.
+> - **⇒ THE SINGLE OPEN TARGET — the ∗1-absent half:** for p ≥ 7, **no child of `{p,3}` or `{p,1}` is ∗1.**
+>   Equivalently (session `--3`): a **bare two-defect position `{p,e,z}` (no symmetric colored pair) is never ∗1.**
+>
+> ## RULED OUT — do NOT retry (each has a concrete witness; details in the nimber-engine note)
+> 1. **Component / disjunctive-sum decomposition** — children of `{p,e}` are single connected components at
+>    p≥11 (the p=7 split was a small-|G| artifact). No XOR handle at the child level.
+> 2. **The AP-mirror ∗0-route** — `{p,3,6−p}=∗4` at p=29; superseded by `{p,k,−k}`.
+> 3. **Any fixed single-token pairing/mirror strategy on `{p,e}+∗1`** — the negation-mirror reply is NOT
+>    value-preserving (`{3,7}=∗1` but mirroring Alice's `1` lands on `{1,3,7,20}=∗3`, since `σ` moves `p↦2p`),
+>    and a single break-move double-blocks both the mirror `−m` and the migrate `−d` replies (`{1,3,7,20}`+`9`:
+>    `12=3+9`, `18=9+9`). Exhaustive minimax STUCKs at every p=7,11,13,17.
+> 4. **A static board-signature monovariant** — ∗1 is ~40% of positions, every signature; and **not an F₃-color
+>    law** (`{2,11,20}=∗1` is F₃-monochromatic but that dies at p=17). The monovariant must be a mex/recursion
+>    invariant, not a board feature.
+> 5. **Brute outcome/nimber sweeps past p≈29** — compute wall; the oracle's reachable family data is exhausted.
+>
+> ## THE ONLY VIABLE METHOD — an adaptive (non-pairing) strategy
+> Prove `𝒢({p,e})=∗1` by an **adaptive** winning strategy for the responder in `{p,e}+∗1` (reply is
+> `G`-dependent, not a formula — your `Z3²×Z7=P` reverse-engineering technique). Two structural handles, both
+> yours and compute's:
+> - **The obstruction is exactly three defect-blocks** `{2d, d+p, d·2⁻¹}` (mirror-break lemma, exhaustively
+>   verified): every legal move pairs under negation *except* the ≤3 whose mirror hits a defect-block. Control
+>   these three and the rest mirrors.
+> - **Your colored-fiber frame is the right coordinate system:** `Z_{3p}≅F_p×F_3`, residual = a colored set
+>   `f:S⊂F_p^*→F_3` forbidding colored Schur equations; each `F_p`-fiber holds ≤1 element after `p` (= the
+>   `d+p` block). **Induct on (defect-count, PAIR-count)** — ∗1 two-defect positions all carry a symmetric
+>   pair; the bare `{p,e,z}` targets have none. Your "every non-P two-defect has a one-defect ∗1 child" is
+>   FALSE as stated (33/91 fail at p=11); the recursion must track the pair count.
+>
+> ## PARALLEL / NEXT TARGET — the r₃=2 lift (the main conjecture)
+> `𝒢(Z3²×Z_p)=∗0` (P) for p ≥ 7 (`∗2`/N at p=5). Same shape one rank up: `= P ⟺` none of the 3 first-move
+> orbit-children (socle/coprime/mixed) is `∗0`. Same `(defect-count, pair-count)` structure. **Compute owns the
+> orbit-child data — request it** and lift the warm-up technique.
+>
+> ## Tools / coordination
+> The **`grundy` oracle** (`notes/sumfree-go/grundy`) — request any position, `--children` (child spectrum),
+> or `--compdump` (component multiset). **Don't rebuild solvers.** Report into `codex-findings-sumfree.md`.
+> Lane split: **compute owns the ∗1-half structural data + the engine; you own the proof.** Full data:
+> `2026-07-05-sumfree-nimber-engine.md` (§"2026-07-06 (session `--3`)", Findings 1–4) and `-warmup-reduction.md`.
+> (Your proj-cap lane is fine to run in parallel; this banner is the sum-free state for when you resume it.)
+>
+> ---
+>
+> ## History (superseded — for provenance only)
+>
 > **★★★★★★★ ROUND-7 compute update — 2026-07-06 (session `--3`, `mi`). The ∗1-absent half is LOCALIZED and
 > the fixed-pairing route is CLOSED. Read this before ROUND-6.** Full write-up + reproducible scripts:
 > `2026-07-05-sumfree-nimber-engine.md` §"2026-07-06 (session `--3`)". Three findings for your proof:
