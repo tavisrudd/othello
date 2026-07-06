@@ -125,6 +125,20 @@ needs to find the real law.
 
 ### ★ RESUME HERE (next session)
 
+**2026-07-06 UPDATE (session `--3`): ∗1-absent half LOCALIZED; the fixed-pairing route is CLOSED.** The
+compute lane mapped the obstruction and killed the two natural elementary routes (writeup:
+[nimber-engine note](../2026-07-05-sumfree-nimber-engine.md) §"2026-07-06 (session `--3`)"; scripts
+`../2026-07-06-sumfree-*.py`; second independent solver cross-checks the Go engine). (1) **Mirror-break
+lemma** (exhaustive, p=7,11,13): for any single-defect board `{p}∪S∪{d}` the legal `z` with `−z` illegal are
+EXACTLY the ≤3 negations of the defect-blocks `{2d, d+p, d·2⁻¹}` — the whole obstruction is *three* blocks.
+(2) **The single-token pairing/mirror strategy is DEAD** — the mirror reply isn't value-preserving (`{3,7}=∗1`
+but mirroring lands on `{1,3,7,20}=∗3`, since `σ` moves `p↦2p`), and a single break-move double-blocks both
+mirror and migrate replies (`{1,3,7,20}`+`9`); exhaustive minimax STUCKs at p=7,11,13,17. ⇒ `𝒢({p,e})=∗1`
+holds **only via adaptive (non-mirror) play** — the sole surviving avenue, handed to Codex (banner Round-7).
+(3) A **static-signature monovariant is ruled out** (∗1 = ~40% of positions, every signature). NEXT: the
+non-mirror adaptive strategy (à la `Z3²×Z7`), controlling the three defect-blocks — NOT more brute sweeps,
+NOT pairing. Codex owns the proof; compute is the oracle. Below is the (still-current) `--2` state.
+
 **2026-07-06 UPDATE (session `--2`): the warm-up is down to ONE open statement — the ∗1-absent half.**
 The **∗0-present half is CLOSED** (proven, uniform): `{p,k,−k}` = ∗0 for any non-order-3 `k` by the
 proven Fact C, so `{p,3,−3}`/`{p,1,−1}` are exception-free ∗0-children — this **supersedes** Codex's
@@ -404,3 +418,46 @@ addendum). Files: `cmd_grundy/grundy.go` (+`--compdump`), `../2026-07-05-codex-a
 (Round-6 banner), `../2026-07-05-sumfree-nimber-engine.md` (2026-07-06 addendum), this handoff. Left
 untouched (not mine): `py_cross.log`, the queens-lane files (`iso_flat.rs`, queens-report htmls) — all
 pre-existing uncommitted changes, not part of this work.
+
+---
+
+### 2026-07-06 — session `2026-07-06--3` (`f97581c0`, `mi`): ∗1-absent LOCALIZED; fixed-pairing route CLOSED; Codex-convergent
+
+**Context:** `go mi`, Codex still running (pid 3672900, `rust/` sandbox). Stayed in the `notes/` Go/Python
+lane; box free (17 GB). Owned the ∗1-absent half; Codex owns the proof + its colored-fiber reformulation.
+
+**★ Three findings (writeup: [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md) §"2026-07-06
+(session `--3`)"; scripts `../2026-07-06-sumfree-*.py`):**
+1. **Mirror-break lemma** (exhaustive, all reachable single-defect boards p=7,11,13, 0 mismatches): for
+   `{p}∪S∪{d}` (S symmetric), the legal `z` with `−z` illegal are EXACTLY the ≤3 negations of the defect-blocks
+   `{2d, d+p, d·2⁻¹}`. The obstruction to a mirror responder strategy is *three defect-generated blocks*, no more.
+2. **The single-token pairing/mirror strategy is DEAD** (definitive; exhaustive minimax STUCKs at p=7,11,13,17):
+   (a) the mirror reply is not value-preserving — `{3,7}=∗1` but mirroring Alice's `1` → `{1,3,7,20}=∗3` (`σ`
+   moves `p↦2p`, not an automorphism of a `p`-board); (b) one break-move double-blocks both mirror `−m` and
+   migrate `−d` (`{1,3,7,20}`+`9`: `12=3+9` and `18=9+9`). ⇒ `𝒢({p,e})=∗1` holds only via **adaptive** play.
+3. **Static-signature monovariant ruled out** — ∗1 ≈ 40% of positions, every board signature (`star1-profile`).
+
+**★ Independent solver cross-check (soundness, item D):** a from-scratch Python nimber solver
+(`../2026-07-06-sumfree-nim-solver.py`, multiplier-canonical memo) matches the Go engine's
+`{11,3}/{11,1}/{13,3}/{13,1}` child histograms **exactly**.
+
+**★ Codex convergence (no collision, mutual reinforcement):** Codex independently reached the same wall via
+its **colored-fiber frame** `Z_{3p} ≅ F_p × F_3` (each `F_p`-fiber ≤1 after `p` placed = my `d+p` block; the
+3 defect-blocks = its colored-Schur constraints) and its "Reply-Formula Mining" (185 non-P children: mate
+replies hit ∗1 only 130/185, no affine witness) = my Finding 2. Both lanes now agree: the proof needs a
+**monovariant on the two-defect colored Schur graph** (Finding 3: a mex/recursion invariant, not a static
+feature). **Codex banner Round-7** hands it the pairing-is-dead result and points at the adaptive route.
+
+**Validation gate held:** the independent Python solver reproduces the Go engine's `{p,e}` child spectra
+exactly (p=11,13); `{p,e}` mex `=∗1`; `𝒢({1,3,7,20})=∗3` confirmed by both solvers.
+
+**Next:** the non-mirror adaptive strategy for `{p,e}+∗1` controlling the three defect-blocks (Codex's proof
+lane, engine as oracle). Do NOT retry fixed pairing/mirror (closed) or brute sweeps (exhausted). The r₃=2
+main conjecture is the same shape one rank up.
+
+**Handoff Note — session `2026-07-06--3` (`f97581c0-7ca0-40ed-a905-80588c5d90d6`), `mi`.** Files (mine only):
+`../2026-07-05-sumfree-nimber-engine.md` (--3 addendum + Codex-convergence), `../2026-07-05-codex-assignment-sumfree-socle.md`
+(Round-7 compute banner), `../2026-07-06-sumfree-{nim-solver,mirror-break,break-exhaustive,strategy-verify,star1-profile}.py`
+(new scripts), this handoff. **Left untouched (not mine):** `codex-findings-sumfree.md` (Codex, uncommitted
+mid-flight — the colored-fiber + reply-mining work), `cmd_par/sumfree_par.go`, `py_cross.log`, queens-lane files.
+No solver source changed (Python tooling only; `grundy` binary rebuilt but unchanged source).

@@ -219,3 +219,82 @@ CLOSED".
 which the microscopy above shows is a **single-connected-graph mex fact** (decomposition can't touch it):
 "mex of a connected armed-Schur graph is never ∗1, uniform in p." That is the whole remaining crux;
 it needs a graph monovariant or the non-mirror adaptive route, not more brute sweeps.
+
+---
+
+## 2026-07-06 (session `--3`, `mi`): the ∗1-absent half — the mirror-break lemma + the pairing route CLOSED
+
+Compute lane owns the ∗1-absent half. This session **maps the obstruction precisely** and **closes the two
+most natural elementary routes** with concrete witnesses, redirecting the proof to the non-mirror adaptive
+route. All results independently reproduced by a **second, from-scratch nimber solver** (Python,
+multiplier-canonical memo) that matches the Go engine's `{11,3}/{11,1}/{13,3}/{13,1}` child histograms
+*exactly* — a soundness cross-check (item D). Scripts: `notes/2026-07-06-sumfree-{nim-solver,mirror-break,break-exhaustive,strategy-verify,star1-profile}.py`.
+
+### ★ Finding 1 — the mirror-break lemma (the exact localization of the obstruction)
+
+Frame `𝒢({p,e}) = ∗1` (e ∈ {1,3}) as: **`{p,e} + ∗1` is a P-position** (responder Rita wins). The board
+`{p,e}` has a *single mirror defect*: negation `σ(z)=−z` is the only game automorphism, and it sends the
+order-3 element `p ↦ 2p` (which is **dead**: `p+p=2p` is blocked), so `σ` fixes no board containing `p`. The
+lone unpaired element is `e` (its partner `−e` is absent). The natural responder strategy is *mirror `z↦−z`,
+cash the token on the defect*. Its **only** failure points are legal moves `z` whose mirror `−z` is illegal.
+
+> **Lemma (mirror-break).** For any single-defect board `B = {p} ∪ S ∪ {d}` (S = −S symmetric & sum-free
+> with `p`; `2p` dead; `d` a non-order-3 defect, `−d ∉ B`), the legal moves `z` with `−z` **illegal** are
+> **exactly** the (≤3) legal negations of the three *defect-generated asymmetric blocks*
+> > `{ 2d (=d+d),  d+p (defect + live order-3),  d·2⁻¹ (the half h with 2h=d) }`.
+> Everything else pairs: `z` legal ⟹ `−z` legal.
+
+**Verified EXHAUSTIVELY** over *all* reachable single-defect boards at `p=7,11,13` (21 / 163 / 436 boards):
+**0 mismatches** vs the predicted 3-element set (`break-exhaustive.py`). Mechanism: `S` symmetric ⇒ its blocks
+are mirror-matched; `2p` dead ⇒ `p`'s sums `p+s` don't yield breaks; so **only the defect `d` produces
+asymmetric blocks, and exactly these three.** At `B={p,e}` the three breaks are `z ∈ {−2e, −(e+p), −e·2⁻¹}`
+(e.g. `{11,3}`: `z=27,19,15`; `{11,1}`: `z=31,21,16`) — uniform in `p`.
+
+This is the sharpest statement to date of *why* the ∗1-absent half resists elementary methods: the obstruction
+is **three defect-blocks**, no more, no fewer.
+
+### ★ Finding 2 — the single-token pairing/mirror strategy is CLOSED (definitive negative, two witnesses)
+
+An explicit responder policy (mirror `−m`; on a break-move migrate the defect via `−d`; cash the token via
+the proven Fact C) was coded and **exhaustively minimax-verified** against all Alice lines
+(`strategy-verify.py`). **It FAILS at every `p=7,11,13,17`**, for two independent reasons — either is fatal:
+
+1. **The negation-mirror reply does not preserve value.** From `{3,7}=∗1` (Z21), Alice plays `1`, Rita
+   "mirrors" `−1=20` → `{1,3,7,20}` which is **`∗3`, not `∗1`** (both solvers). Because `σ` is not an
+   automorphism of a `p`-board, `m ↦ −m` is **not** a value-preserving pairing — the whole fixed-mirror
+   family is unsound here. (Contrast Fact C, which is a genuine one-move-then-mirror backed by Lemma 4 on a
+   *symmetric* remainder with `2p` permanently dead.)
+2. **A single break-move double-blocks both replies.** Even granting the mirror, at `{1,3,7,20}` Alice plays
+   `m=9`: the mirror reply `−9=12` is illegal (`3+9=12`) **and** the migrate reply `−d=−3=18` is illegal
+   (`9+9=18`). One token cannot cover two simultaneously-destroyed options. This is the exact, concrete form
+   of the warmup note's "destructible resource" lead-2.
+
+**⇒ `𝒢({p,e})=∗1` holds but is NOT provable by any fixed single-token pairing/mirror strategy on `{p,e}+∗1`.**
+The position is a Rita win only via **adaptive** play (Rita's correct reply to Alice's `1` is *not* the mirror
+— she needs `G({1,3,7})`-dependent adaptive choice). This is the non-mirror adaptive route (à la the `Z3²×Z7`
+reverse-engineering) — the sole surviving avenue for this half.
+
+### ★ Finding 3 — the ∗1-class is structurally diverse (rules out a naive signature monovariant)
+
+Enumerating all reachable canonical positions (`star1-profile.py`): ∗1 is **~40%** of positions (Z21: 91/247,
+Z33: 2038/5920, Z39: 9706/27293) and spans every structural signature — symmetric & not, order-3 alive &
+dead, defect sizes 0–10. So there is **no simple "∗1 has structural feature X" characterization** for a
+children-of-`{p,e}` avoid-X argument. (The only clean ∗1 sub-class is *symmetric + order-3-alive + defect 0*,
+which children of `{p,e}` — never symmetric — trivially avoid, but it's a vanishing fraction.) A monovariant, if
+one exists, must be a genuine mex/recursion invariant, not a static board feature.
+
+**Bottom line (compute lane):** the ∗1-absent half is localized to the **three defect-blocks** (Finding 1),
+the **fixed-pairing route is dead** (Finding 2), and a **static-signature monovariant is ruled out**
+(Finding 3). The remaining avenue is the **non-mirror adaptive strategy** — Rita's winning reply to a defect-
+or break-move is `G`-dependent, not a formula. Handed to Codex's proof lane (banner updated). No more brute
+sweeps.
+
+**Convergence with Codex (same day, independent).** Codex's `codex-findings-sumfree.md` reaches the identical
+wall from a complementary frame — the **colored-fiber reformulation** `Z_{3p} ≅ F_p × F_3`: once `p` is placed
+each nonzero `F_p`-fiber holds ≤1 element, and the residual game is building a colored set `f: S⊂F_p^* → F_3`
+forbidding colored Schur equations in both coordinates. That "≤1 per fiber" fact **is Finding 1's `d+p`
+defect-block** (`x±p` illegal), and the full three-block set `{2d, d+p, d·2⁻¹}` is exactly the colored-Schur
+constraint pair in Codex's frame. Codex's independent "Reply-Formula Mining" (185 non-P children, p=11–19:
+mate replies hit ∗1 in only 130/185; no uniform affine witness) corroborates that the winning reply is
+**adaptive, not a formula** — matching Finding 2. Both lanes now agree the proof needs a **monovariant on the
+two-defect colored Schur graph**, and Finding 3 sharpens it: not a static board feature, a mex/recursion invariant.

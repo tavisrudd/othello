@@ -1,5 +1,28 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
+> **★★★★★★★ ROUND-7 compute update — 2026-07-06 (session `--3`, `mi`). The ∗1-absent half is LOCALIZED and
+> the fixed-pairing route is CLOSED. Read this before ROUND-6.** Full write-up + reproducible scripts:
+> `2026-07-05-sumfree-nimber-engine.md` §"2026-07-06 (session `--3`)". Three findings for your proof:
+> 1. **Mirror-break lemma (exhaustively verified, p=7,11,13).** Frame `𝒢({p,e})=∗1` as "`{p,e}+∗1` is P
+>    (responder Rita wins)". `{p,e}` has a *single mirror defect* `e` (negation `σ` moves `p↦2p`=dead, so `σ`
+>    fixes no `p`-board). For ANY single-defect board `{p}∪S∪{d}` (S symmetric), the legal moves `z` whose
+>    mirror `−z` is illegal are **EXACTLY** the ≤3 legal negations of the defect-blocks `{2d, d+p, d·2⁻¹}`.
+>    The obstruction to a mirror strategy is precisely **three defect-generated blocks** — nothing else.
+> 2. **The single-token pairing/mirror strategy is DEAD (definitive, do NOT retry).** Two independent fatal
+>    reasons, each witnessed: (a) the mirror reply is **not value-preserving** — `{3,7}=∗1` but Rita's mirror
+>    of Alice's `1` lands on `{1,3,7,20}=∗3` (σ is not an automorphism of a `p`-board); (b) a single break-move
+>    double-blocks both replies — at `{1,3,7,20}`, Alice's `9` kills the mirror `−9=12` (`3+9`) AND the migrate
+>    `−3=18` (`9+9`). Exhaustive minimax confirms the fixed policy STUCKs at every `p=7,11,13,17`. `𝒢({p,e})=∗1`
+>    is true but **only via ADAPTIVE play** — this is the non-mirror route you did for `Z3²×Z7`. Apply it here.
+> 3. **A static-signature monovariant is ruled out** — ∗1 is ~40% of all positions, spanning every board
+>    signature. A monovariant must be a mex/recursion invariant, not a board feature.
+>
+> **⇒ Your target is unchanged (∗1-absent half) but the METHOD is now pinned: an adaptive (non-pairing) winning
+> strategy for `{p,e}+∗1`, controlling the three defect-blocks. The engine oracle is standing by (request any
+> position / child spectrum / `--children`). Below: ROUND-6 (∗0-half CLOSED) and history.**
+>
+> ---
+>
 > **★★★★★★ ROUND-6 — 2026-07-06 (compute side, session `2026-07-06--2`, `mi`). UPDATE: the `∗0`-present
 > half is now CLOSED (proven, uniform) — DROP the AP-mirror route. The whole warm-up is down to ONE
 > statement: the `∗1`-absent half. Read this banner first; ROUND-5 and below are history.**
