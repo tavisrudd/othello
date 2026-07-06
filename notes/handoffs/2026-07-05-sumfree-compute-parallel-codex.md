@@ -125,6 +125,45 @@ needs to find the real law.
 
 ### ★ RESUME HERE (next session)
 
+**2026-07-06 UPDATE (session `--6`, `mi`): TACTIC 1 CLOSED (no mirror proof); the strategy is provably
+adaptive; the NEW lever is the `r=3` parity datapoint (compute-blocked — needs a TT-capped engine or a
+free box). I own both lanes (Codex + proj-cap agent are the only others; stayed clear of proj-cap files).**
+
+- **★ Tactic 1 (residual strictly-matched involution) — TESTED AND CLOSED.** Built + validated a
+  residual-mirror verifier (`../2026-07-06-r32-residual-mirror.py`; validated against the mod-6 theorem:
+  negation mirror certifies `n≡1,5`, fails `n≡3`; translation mirror certifies `n≡0` via defect-solve).
+  Exhaustive at `p=7` over all 368 affine involutions, all 3 openings: **(i) pure fpf = 0 certs; (ii)
+  strictly-matched self-blocking clique = 0 certs; (iii) mirror + defect-substitution (exact-solve the
+  bounded defect branches) = BREAKS** on the best affine involution over a *true* P-reply board
+  (`{socle,mixed}=∗0`, `verify ok=False`, a defect branch is Bob-losing). Clean reason: the socle
+  opening's **36 P-replies are all MIXED**, and **no sum-free-preserving (linear `Aut(G)`) involution
+  fixes a socle+mixed board except identity** (0/6). The nontrivial invariant involutions are all
+  **affine** (`b≠0`/`β≠0`) → don't preserve the Schur relation `a+b=c` → their mirror breaks. Writeup:
+  the `★ UPDATE` banner atop [proof-tactics note](../2026-07-06-sumfree-proof-tactics-litsearch.md).
+- **★ Swap-diagonal / "square" story FALSIFIED.** The best mirror backbone is swap-diagonal + negation
+  `π(v,y)=(v_swap,−y)` (Brandenburg square mirror), reply `swap(s)` — but it fixes only **non-P** boards
+  cheaply (`{socle,socle}=∗3=N`) and its defect set grows with `p` (structured on the `⟨socle-line⟩`
+  fibers `(0,±1,∗)`: 2189 defects/p=7 from `{s0,t}`, 32K from `∅`). Decisive kill: **`F₃²=∗1=N` alone**
+  (checked), so `Z3²×Z_p=P` is NOT because `F₃²` is a square — the `Z_p` interaction is what flips r=2.
+- **★ NEW structural observation → the `r=3` open test.** Outcome of `Z3^r×Z_p` (`p≥7`) is **P, N, P for
+  `r=0,1,2`** (`Z_p`=P by mod-6; `Z3×Z_p`=∗1/N; `Z3²×Z_p`=∗0/P). The pattern *alternates*, but it is NOT
+  the pure-3-group pattern (`F₃^r`=∗1/N for all `r≥1`), so the `Z_p` factor is doing the work. The sharp
+  open question: **is `Z3³×Z_p` N (alternation continues) or P?** The handoff's earlier "P-suspected" for
+  `Z3³×Z{5,7}` is only a timeout, not a solve. **Compute-BLOCKED:** grundy per-node cost `∝|Aut(Z3³×Z_p)|`
+  (`|GL(3,3)|·(p−1)=11232·(p−1)`, e.g. 44928 at p=5); the boolean `sumfree.go` has α-β cutoffs but its
+  **uncapped `map[Mask]bool` TT OOMs** at `|G|=135` (`Z3³×Z5`) — I aborted a run at 1 GB free to protect
+  the proj-cap job. **FIRST NEXT-SESSION ACTION (revised):** get the `Z3³×Z5` (then `Z3³×Z7`) **root
+  outcome** — needs (a) a **TT-capped / fingerprint-arena boolean solver** (small edit to `sumfree.go`:
+  bound the map or reuse the grundy arena) run on a **free box**, OR (b) the 3-orbit reduction restricted
+  to just the socle-opening outcome (`is {socle}=∗0?` = the canary; but that's still a P-proof one level
+  down). A confirmed `Z3³×Z_p=N` would flip "P-suspected" and give Tactic 2 (induction on `r`) its base
+  pattern. This is the highest-value next datapoint.
+- **Live tactics after Tactic 1's close:** **Tactic 2** (induction on 3-rank `r`, needs the `r=3` datapoint)
+  and **Tactic 3** (adaptive safe-class closure — Codex's colored-fiber `(defect,pair)` invariant, now THE
+  analytic route). Do NOT re-run mirror/pairing searches (closed 3 ways) or the `p=11` brute solve (OOMs).
+
+---
+
 **2026-07-06 UPDATE (session `--5`, `mi`): the r₃=2 reduction is SOLID; the "clean p-uniform lemma" HOPE is in
 doubt; Codex is OUT OF TOKENS (next session owns both lanes).**
 
@@ -588,3 +627,58 @@ Codex's out-of-tokens final report + its `r32-*-mine.py` scripts so the work isn
 **Left untouched (not mine):** `py_cross.log`, `iso_flat.rs` + queens-report htmls (queens-lane, pre-existing),
 `grid-cap-solver.rs`/`gridcap-*` (the proj-cap agent). The proj-cap agent and I both commit to `main`; stayed
 clear of its files.
+
+---
+
+### 2026-07-06 — session `2026-07-06--4` (`b54507bd`, `mi`): Tactic 1 CLOSED (no mirror proof); r=3 parity lever surfaced
+
+**Context:** `go mi`. Codex out of tokens; a separate agent runs the projective-cap game (its
+`/tmp/gridcap_fp`/`gridcap_par2` jobs held 4–14 GB through the session — user warned "big job running"). Kept
+every probe single-core + memory-light (≤~few hundred MB Python; aborted one Go solve at 1 GB free to protect
+the proj-cap job). Stayed entirely in the `notes/` sumfree lane; touched only my own new script + notes.
+
+**★ Main deliverable — Tactic 1 (the lit-scout's #1 proof lever) TESTED AND CLOSED.** New tool
+`../2026-07-06-r32-residual-mirror.py`: a residual strictly-matched-involution *mirror verifier*, three
+strengths — pure fpf / self-blocking-clique / mirror + defect-substitution (exact-solve the bounded defect
+branches, Bob-to-move). **Validated against the mod-6 theorem** (negation mirror certifies `Z_n` `n≡1,5`, fails
+`n≡3`; translation mirror `x+n/2` certifies `n≡0` only with defect-solve, 1 defect = the `n/2` opening). Then,
+exhaustive at `p=7` over all 368 affine involutions × all 3 openings:
+- **pure fpf = 0 certificates; strictly-matched clique = 0 certificates.**
+- **mirror + defect-substitution BREAKS** on the best affine involution over a genuine P-reply board
+  (`{socle,mixed}=∗0`): `verify ok=False`, a defect branch exact-solves to Bob-losing.
+- **Clean structural cause:** the socle opening's 36 P-replies are all **mixed**; **no sum-free-preserving
+  (linear `Aut(G)`) involution fixes a socle+mixed board except identity** (0/6, since `s,t` span → `M=I,α=1`).
+  The 36 nontrivial invariant involutions that exist are **affine** (`b≠0`/`β≠0`) ⇒ don't preserve `a+b=c`
+  (affine preserves Schur only with zero translation) ⇒ their mirror is not a Node-Kayles automorphism and
+  breaks. ⇒ **Bob's win is genuinely adaptive** (strengthens the `--3` "pairing is dead" via the *strongest*
+  mirror class the lit scout proposed). Writeup: `★ UPDATE` banner atop the proof-tactics note.
+
+**★ Swap-diagonal "square" hypothesis raised then FALSIFIED (saved a wrong direction).** The lowest-defect
+mirror *backbone* is swap-diagonal+negation `π(v,y)=(v_swap,−y)` (Brandenburg's square mirror, Tactic 4), reply
+`swap(s)`. It looked promising (1 root defect) but: (a) the low-defect invariant boards are **non-P**
+(`{socle,socle}=∗3=N`), so no win; (b) its defect set grows with `p` (structured on the `⟨socle-line⟩` fibers
+`(0,±1,∗)`); and decisively (c) **`F₃²=∗1=N` alone** (verified) ⇒ `Z3²×Z_p=P` is NOT because `F₃²` is a square.
+The `Z_p` interaction is essential. Do not chase the square-mirror.
+
+**★ NEW lever surfaced — the `r=3` parity datapoint.** Outcome of `Z3^r×Z_p` (`p≥7`) is **P,N,P for r=0,1,2**
+(computed/known: `Z_p`=P, `Z3×Z_p`=∗1/N, `Z3²×Z_p`=∗0/P). It alternates — and it is NOT the pure-3-group pattern
+(`F₃^r`=∗1/N ∀ `r≥1`, so `Z_p` flips r=0,2 to P). The sharp open question: **`Z3³×Z_p` = N (alternation) or P?**
+Earlier "P-suspected" is only a timeout. **Compute-blocked** (grundy `∝|Aut|=44928`/node; boolean `sumfree.go`
+uncapped-`map` TT OOMs at `|G|=135`). Next-session lever = a **TT-capped boolean solver** on a free box, or the
+socle-opening-canary outcome. A confirmed `Z3³×Z_p=N` flips the guess and gives Tactic 2 its base pattern.
+
+**Validation gate held:** re-derived `F₃²=∗1/N`, `Z3×Z7=∗1/N`, `Z3²×Z7` socle child-dist `{∗0:36,∗1:18,∗3:6}`⇒
+mex `∗2`, `{socle,socle}=∗3/N`, and confirmed the 36 socle P-replies are exactly the off-socle-line mixed
+elements (matches Lemma A). No shared-solver source changed (`grundy`/`sumfree` binaries used read-only; new
+tool is a standalone Python script). Verifier self-validated on the mod-6 theorem before any negative was trusted.
+
+**Next steps (compute lane):** (a) ★ the `r=3` outcome via a TT-capped engine (highest value); (b) hand Tactic 3
+(adaptive safe-class) the `--6` structural facts — the win is adaptive, backbone-less, obstruction on the
+`⟨socle-line⟩` fibers; (c) do NOT re-run mirror/pairing (closed 3 ways) or the `p=11` brute solve (OOMs).
+
+**Handoff Note — session `2026-07-06--4` (`b54507bd-cf0d-4ead-83c8-227b2f0cfacc`), `mi`.** New files (mine only):
+`../2026-07-06-r32-residual-mirror.py` (validated mirror verifier + rank/search modes), the `★ UPDATE` banner in
+`../2026-07-06-sumfree-proof-tactics-litsearch.md`, this `--6` handoff block + the revised RESUME-HERE. **Left
+untouched (not mine):** `py_cross.log`, `iso_flat.rs` + queens-report htmls (queens-lane, pre-existing),
+`grid-cap-solver.rs`/`gridcap-*`/`gridcap-par-*` (the proj-cap agent — its jobs ran throughout; I stayed clear
+of its files and protected its RAM). No queens/proj-cap files modified.

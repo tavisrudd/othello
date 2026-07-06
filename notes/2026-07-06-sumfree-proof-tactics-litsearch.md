@@ -1,5 +1,33 @@
 # Proof tactics for the sum-free game on `Z3^r × Z_p` — a literature scout
 
+> **★ UPDATE 2026-07-06 (session `--6`): TACTIC 1 TESTED AND CLOSED.** The residual
+> strictly-matched-involution route (this report's #1 lever) does **not** yield a mirror
+> proof, verified exhaustively at `p=7` with a validated verifier (script
+> `2026-07-06-r32-residual-mirror.py`; validated to reproduce the mod-6 theorem —
+> negation mirror certifies `n≡1,5`, fails `n≡3`, translation mirror certifies `n≡0`).
+> Three verifier strengths all fail for **every** opening (socle/coprime/mixed):
+> **(i) pure fpf** mirror — 0 certificates over all 368 affine involutions;
+> **(ii) strictly-matched (self-blocking fixed clique)** — 0 certificates;
+> **(iii) mirror + defect-substitution** (exact-solve the bounded defect branches, Bob-to-move) —
+> the best affine involution on a *true* P-reply board (`{socle,mixed}=∗0`) **breaks**
+> (`verify ok=False`, a defect branch is Bob-losing). Clean structural reason:
+> the socle opening's 36 P-replies are all **mixed** elements, and **no sum-free-preserving
+> (linear `Aut(G)`) involution fixes a socle+mixed board except the identity** (0/6 checked;
+> `s,t` span enough of `G` to force `M=I,α=1`). The 36 nontrivial invariant involutions that
+> *do* exist are all **affine** (`b≠0`/`β≠0`), which do **not** preserve the Schur relation
+> `a+b=c` (affine preserves it only with zero translation) — so their "mirror" is not a
+> Node-Kayles automorphism and it breaks. The best mirror *backbone* is the **swap-diagonal +
+> negation** `π(v,y)=(v_swap,−y)` (Brandenburg's square mirror, Tactic 4) with reply `swap(s)`,
+> but (a) it fixes only **non-P** boards cheaply (`{socle,socle}=∗3=N`), and (b) the square
+> story is **falsified**: `F₃²=∗1=N` alone, so `Z3²×Z_p=P` is *not* explained by `F₃²` being a
+> square — the `Z_p` factor's interaction is essential. **⇒ Bob's winning strategy is genuinely
+> adaptive** (confirms/strengthens prior `--3` "pairing is dead" via the strongest mirror class).
+> Live tactics now: **Tactic 2** (induction on 3-rank `r`) and **Tactic 3** (adaptive safe-class
+> closure). New structural observation + its sharp open test in the handoff (`--6` block):
+> outcome is **P,N,P for `r=0,1,2`** (`p≥7`) ⇒ the `r=3` datapoint `Z3³×Z_p` is *the* next
+> question (compute-blocked: grundy per-node cost `∝|Aut|=44928`; the boolean solver's uncapped
+> `map` TT OOMs at `|G|=135` — needs a TT-capped engine or a free box).
+
 **Date:** 2026-07-06. A focused web literature search for *proof techniques* (not just related
 games) that could settle the open kernel of the sum-free achievement game:
 
