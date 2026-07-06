@@ -125,6 +125,45 @@ needs to find the real law.
 
 ### ★ RESUME HERE (next session)
 
+**2026-07-06 UPDATE (session `--5`, `mi`): the r₃=2 reduction is SOLID; the "clean p-uniform lemma" HOPE is in
+doubt; Codex is OUT OF TOKENS (next session owns both lanes).**
+
+- **What's rock-solid (committed):** the reduction `𝒢(Z3^r×Z_p)=mex{n_soc,n_cop,n_mix}` (uniform in `r`; `Aut`
+  gives exactly 3 orbits), so **`P ⟺` each opening is N `⟺` each opening has a P-reply**. Verified p=5,7. The
+  `p=5` exception localizes to Lemma A. The socle opening is the governing "canary" (∗0 always at r=1 ⇒ N;
+  ∗0 only at p=5 for r=2 ⇒ P for p≥7). This is the session's durable contribution.
+- **What got KILLED this session:** Codex's Lemma-B **zero-sum-triple** route (`Bob replies r=−s−t`) — a p=7
+  coincidence: triple `{s,t,−s−t}` is `∗1`/all-P at p=7 but **`∗6`/mixed at p=11** (full engine, no 60s cap).
+  Codex independently confirmed (CRT table + mirror-cert probes 0/46 + α-reflection is only a diagnostic).
+  **Lesson banked:** every candidate lemma is a p=7 coincidence risk — stress-test past p=7 BEFORE writing a proof.
+- **The now-suspect claim (VERIFY FIRST):** my own "p-uniform representatives" (Lemma A `{(0,1,0),(1,0,1)}`,
+  Lemma B `{(0,0,1),(0,1,1)}` with fiber `c=1`) were **only verified at p=5,7** — same coincidence risk. **A
+  direct `grundy 3,3,11 --start "0,0,1;0,1,1"` (Lemma B) was RUNNING at session end** (parallel grundy + boolean
+  race; ~8+ min, not yet converged). **★ FIRST NEXT-SESSION ACTION: get this p=11 value** (re-run if needed;
+  also Lemma A `"0,1,0;1,0,1"` at p=11). Three outcomes:
+  1. **Lemma B = ∗0 at p=11** ⇒ the representative survives; then dump its first-layer P-replies at p=11 and
+     find the (likely p-DEPENDENT, not uniform) structure. Reduction confirmed for the coprime opening at p=11.
+  2. **Lemma B ≠ ∗0 but coprime opening still N** (some *other* P-reply is ∗0) ⇒ the `c=1` rep was a p=7
+     coincidence; the reduction still holds but there is **no uniform representative** — the openings-are-N
+     proof is adaptive/p-dependent (back to the hard core, but existential). Rewrite the two-lemma framing.
+  3. **Coprime opening has NO P-reply at p=11** ⇒ it is ∗0 ⇒ root=N ⇒ **`Z3²×Z11=N`, conjecture FALSE at p=11**
+     (unlikely — indirect evidence `Z3²×Z_p` boolean N-hunt timed out p=11..23 = consistent-with-P — but not
+     ruled out; would be a major finding). Verify with a second solver before believing.
+- **The honest picture going forward:** the P-replies are looking **adaptive / p-dependent**, not clean fixed
+  pairings (no `Aut(G)` involution fixes `{s,t}`; the α-reflection couples through F; the zero-triple died).
+  Lemma A is the hard case (trivial stabiliser, no mechanism); Lemma B had two handles, both now shown
+  insufficient. The *reduction* is the win; the *lemmas* bottom out at the same adaptive core as the warm-up,
+  just existential instead of universal.
+- **NEXT-STEP QUEUE (compute lane, next session):** (a) ★ resolve the p=11 Lemma A/B values; (b) if a lemma
+  survives, characterise its p-dependent P-reply structure (Codex's specific asks: test formulas `−a−s+t`,
+  `−a+2s−2t` for the coprime opening; dump first-layer P-replies at p=11); (c) the **r=3 extension**
+  (`Z3³×Z_p`: same 3-orbit reduction, only needs the 3 *opening* outcomes — the reduction sidesteps the
+  blocked full solve; predict whether the socle opening reverts); (d) the deep open target — an adaptive
+  monovariant proving "each opening is N", shared with the warm-up ∗1-absent core. Codex's postmortem +
+  scripts (`r32-*-mine.py`) are the reverse-engineering substrate. Full data: [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
+  §§"2026-07-06 (session `--4`)" and the zero-triple/unification subsections; [codex-findings](../2026-07-05-codex-findings-sumfree.md)
+  §"R3=2 Doc Check". Below is the (still-current) `--4` state.
+
 **2026-07-06 UPDATE (session `--4`, `mi`): the MAIN conjecture (r₃=2) reduced to TWO 2-element P-lemmas — an
 EXISTENTIAL target, easier than the warm-up.** While Codex works the warm-up ∗1-absent proof, compute took the
 banner's "PARALLEL / NEXT TARGET" — `𝒢(Z3²×Z_p)=P` (p≥7). **Rigorous reduction:** `Aut=GL(2,3)×Z_p^*` ⇒ 3
@@ -490,3 +529,41 @@ clarification). Files (mine only): `../2026-07-05-sumfree-nimber-engine.md` (--3
 this handoff. **Left untouched (not mine):** `codex-findings-sumfree.md` (Codex, uncommitted mid-flight — the
 colored-fiber + reply-mining work), `cmd_par/sumfree_par.go`, `py_cross.log`, queens-lane files. No solver
 source changed (Python tooling only; `grundy` binary rebuilt but unchanged source).
+
+---
+
+### 2026-07-06 — session `2026-07-06--5` (`mi`): r₃=2 MAIN-conjecture reduction; zero-triple trap caught; Codex out of tokens
+
+**Context:** user "stay on sumfree alongside codex". Took the banner's PARALLEL target (the r₃=2 main
+conjecture). Codex worked the r₃=2 lemmas in parallel (used my `grundy` oracle + built its own `r32-*-mine.py`
+tools), then ran out of tokens — its final report is committed (`7abbc7d`). **Next session owns both lanes.**
+
+**Delivered (committed `19bc82c`→`bb9d75a`→`e05270c`→`7abbc7d`):**
+1. **★ The reduction** `𝒢(Z3^r×Z_p)=mex{n_soc,n_cop,n_mix}` (uniform in r; 3 orbits) ⇒ **`P ⟺` each opening
+   has a P-reply**. An *existential* target (vs the warm-up's universal ∗1-absence). Collapses r₃=2 to Lemma A
+   `{socle,mixed}=∗0` + Lemma B `{coprime,mixed}=∗0`. `p=5` exception localizes to Lemma A (`∗3`, sharp). Socle
+   opening = the canary. Verified p=5,7 (Grundy + boolean agree).
+2. **★ Caught the trap:** Codex's Lemma-B zero-sum-triple mechanism is a **p=7 coincidence** — `{s,t,−s−t}` is
+   `∗1`/all-P at p=7 but **`∗6`/mixed at p=11** (full engine). Banner-warned Codex; Codex independently confirmed
+   (mirror-cert 0/46, α is only a diagnostic). Route killed cleanly before it became a written proof.
+3. Tooling: `grundy --preply` (dump full P-reply set); `../2026-07-06-r32-reply-mirror.py` (Bob's reply
+   function — 54/54, 53/53 mutual partners, but proved NO fixed-Schur-involution can exist ⇒ strategy is
+   adaptive). Structural asymmetry recorded: Lemma A trivial stabiliser (hard); Lemma B has the α-reflection
+   (partial, coupling-limited).
+
+**Left RUNNING at session end (the live branch):** `grundy 3,3,11 --start "0,0,1;0,1,1"` (+ boolean race) — the
+direct p=11 value of Lemma B, ~10 min in and not converged (grundy ~1.1 GB). **This is Codex's #1 "next data
+needed" and the FIRST next-session action.** Re-run if the background job didn't persist: `cd notes/sumfree-go
+&& ./grundy 3,3,11 --start "0,0,1;0,1,1"` and `./grundy 3,3,11 --start "0,1,0;1,0,1"` (Lemma A). Interpretation
+of the three outcomes is in the RESUME-HERE `--5` block above.
+
+**Validation gate held:** re-ran `Z15=∗2`, `Z3²×Z5=∗2/N`, `Z3²×Z7=∗0/P` + all 3 orbit-child nimbers (mex
+matches root), the p=5 discriminator (`{socle,mixed}=∗3`), and boolean-vs-Grundy agreement on both lemmas at
+p=7. `grundy --preply` is additive (existing modes byte-identical). No shared-solver source changed.
+
+**Handoff Note — session `2026-07-06--5` (`85a2e80b`), `mi`.** My commits: `19bc82c` (reduction), `bb9d75a`
+(adaptive-strategy findings), `e05270c` (zero-triple trap + unification + banner warn), `7abbc7d` (committed
+Codex's out-of-tokens final report + its `r32-*-mine.py` scripts so the work isn't lost), + this handoff.
+**Left untouched (not mine):** `py_cross.log`, `iso_flat.rs` + queens-report htmls (queens-lane, pre-existing),
+`grid-cap-solver.rs`/`gridcap-*` (the proj-cap agent). The proj-cap agent and I both commit to `main`; stayed
+clear of its files.
