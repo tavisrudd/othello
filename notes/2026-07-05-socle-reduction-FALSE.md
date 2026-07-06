@@ -106,10 +106,20 @@ found** before being killed (an N would cut off at the first winning opening —
 only ~8.7K nodes — so `p=11` is P with very high confidence, not yet a completed proof). This is **not**
 a `p mod 3` split: `p=5≡2` (N) but `p=11≡2` (P). So `p=5` looks sporadic.
 
+**Opening-reply seed data** (`sumfree_par --openings --start`, `Z3²×Z7`, 2nd-player winning replies):
+- **socle opening `(0,1,0)`** → 36 replies = *exactly* the mixed elements `(w,c)` with `w` **off** the
+  socle-line `⟨(0,1)⟩={(0,0),(0,1),(0,2)}` and `c∈Z7\0` (`(9−3)·6=36`). Not negation, not socle.
+- **mixed opening `(1,0,1)`** → 18 replies, and **negation `(2,0,6)` is among them** (mixed elements
+  mirror cleanly).
+- **coprime opening `(0,0,1)`** → 18 replies, but **negation `(0,0,6)` is NOT** among them — the coprime
+  part does not simply self-mirror inside the big group.
+So 2nd player's first answer to a socle opening is a *mixed* element off the opening's socle-line; the
+subsequent play is where the adaptivity lives.
+
 Routes to settle it (brute is out):
 1. **Extract + characterize the adaptive 2nd-player strategy** for `Z3²×Z7` (the method that cracked
    `F3ⁿ` and `Z2×F3ᵇ`) and generalize to `p≥7` — the win is adaptive, so look for an invariant, not a
-   pairing.
+   pairing. Seed = the opening replies above.
 2. **A more compact solver** (2-word masks for `|G|≤128`, value-only archive) to push a couple more `p`.
 3. **Explain why `p=5` is the exception** (max sum-free set parity? a small-`|G|` accident?).
 

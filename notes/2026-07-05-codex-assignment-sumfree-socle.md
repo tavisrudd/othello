@@ -1,20 +1,41 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
-> **STATUS UPDATE 2026-07-05 — the PRIMARY target is CLOSED.** `Z₂×F₃ᵇ = P` for all `b≥1` is **PROVEN**
-> (ChatGPT's σ-mirror: reply `p=(0,a)`, mirror through `k=m+p` via `σ(ε,v)=(1−ε,a−v)` — fixed-point-free
-> because it flips `Z₂`, char-3 label-flip repairs the affine defect, `k=m+p` self-blocks). Exhaustively
-> verified `b≤3`, dimension-uniform proof for all `b`:
-> [`2026-07-05-sumfree-zmf3b-theorem.md`](2026-07-05-sumfree-zmf3b-theorem.md). **The `#4` hyperplane
-> induction (§4 below) is no longer needed — superseded.** Both socle endpoints (`F₃ⁿ=N`,
-> `Z₂×F₃ᵇ=P`) are now theorems, so **the SOCLE REDUCTION (§2 SECONDARY, and Task 4) is the sole
-> remaining open piece of the whole abelian classification — it is now Codex's PRIMARY target.**
+> **★★★ STATUS UPDATE 2026-07-05--4 — THE SOCLE REDUCTION IS FALSE. This whole assignment below is
+> SUPERSEDED. Do NOT pursue the five attacks, the book route, or any "prove the reduction" task.**
 >
-> **Also do first: the sound solver.** A root-transitivity bug was found — the existing
-> `2026-07-05-sumfree-fast.py` reduces under the full `Aut(G)`, which is only valid when `Aut(G)` is
-> transitive on legal first moves (true for pure `F₃ⁿ`, **false for `Z₈`, `Z₁₀`, and `Z₂×F₃ᵇ`**, giving
-> wrong outcomes there). Build the corrected solver (orbit reps only where a transitivity proof or an
-> actual orbit computation justifies it), re-validate the mod-6 law + the two proven socle theorems,
-> then use it as the oracle for the socle-reduction attack below.
+> **`Z3²×Z7 = P`** (second player wins), confirmed by two independent sound solvers (a new Go
+> full-`Aut` solver `notes/sumfree-go/` + the Python `sumfree_solver.py`). Since `G[6]=Z3²` is `N`,
+> this **disproves `𝒢(G)=𝒢(G[6])` and "odd `G` w/ 3-torsion ⟹ N".** And `Z3²×Z5=N` while `Z3²×Z7=P` —
+> the coprime factor's *size* flips the outcome. Full note:
+> [`2026-07-05-socle-reduction-FALSE.md`](2026-07-05-socle-reduction-FALSE.md). (The old
+> `socle-book-scaling.py` never solved the outcome — it counted a heuristic's local fails and was
+> misread as "uniformly N.")
+>
+> **What SURVIVES:** all direct theorems (`F₃ⁿ=N`, `Z₂×F₃ᵇ=P`, `s₂≥2⟹P`, `s₂=1` reduction, `r₃≤1⟹N`).
+> **What DIES:** the socle reduction + everything below this banner. The classification is **not** nearly
+> complete — the `s₂≤1, r₃≥2` slice is genuinely non-uniform in the coprime/higher-power part.
+>
+> **★ NEW PRIMARY TARGET (Codex): characterize the `s₂≤1, r₃≥2` outcome.** Concretely:
+> 1. **Settle the conjecture `Z3²×Z_p = N` iff `p=5` (prime `p≠3`), else `P`.** `p=5→N`, `p=7→P` are
+>    rigorous; `p=11` is strongly `P` (100M+ canonical nodes, no winning opening). NOT a `p mod 3`
+>    split (`p=5≡2`, `p=11≡2`), so `p=5` looks sporadic. Brute is infeasible past `p=7` — you need a
+>    **strategy/invariant proof** that `Z3²×Z_p=P` for all `p≥7`, plus an explanation of the `p=5`
+>    exception (max-sum-free-set parity? a small-`|G|` accident?).
+> 2. **`Z3²×Z7=P` is a NON-PAIRING / adaptive P-position** (verified: no negation-bulk+socle-repair
+>    mirror works, 0/60; odd `|G|` ⇒ no translation mirror). So the proof needs a *new* technique — an
+>    adaptive strategy or a game-value invariant, not a static involution. **Extracted opening replies
+>    (Go `--openings --start`), use as seed data:** to the socle opening `(0,1,0)` the winning replies
+>    are exactly the 36 **mixed** elements `(w,c)` with `w` off the socle-line `⟨(0,1)⟩` and `c≠0`; to a
+>    mixed opening negation is among the replies; to the coprime opening `(0,0,1)` negation `(0,0,6)` is
+>    NOT a winning reply. Reverse-engineer the full adaptive strategy (the method that cracked `F₃ⁿ` and
+>    `Z₂×F₃ᵇ`) and look for the invariant.
+> 3. **Re-derive the correct abelian classification.** With the reduction dead, map `outcome(G)` for
+>    `s₂≤1, r₃≥2` empirically (small groups, the Go solver) and find the real law.
+>
+> **Tool:** `notes/sumfree-go/` — `sumfree.go` (sequential, full-`Aut` canonical negamax; validated on
+> all cyclic `Z_n`, `Z3²×Z5=N` w/ 8 socle openings, `Z3³=N`, `Z2×Z3²=P`, `r₃=1` peels N),
+> `cmd_par/sumfree_par.go` (sharded-TT parallel ~5×; modes `--openings`, `--start`, `--pairing`
+> mirror-verifier, `--strategy`). `go build`, no deps, memory-light compile. Everything below is history.
 
 **Written:** 2026-07-05. Self-contained — you need no other context. Companion notes (read if useful,
 but this file is complete): `notes/2026-07-05-sumfree-abelian-theorem.md` (all proofs + data) and its

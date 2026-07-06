@@ -564,6 +564,133 @@ func (s *Solver) win(a Mask) bool {
 	return res
 }
 
+// elemKind classifies x by order (in Z3^2 x Z_p): socle=order3, coprime=order p,
+// mixed=order 3p.
+func (g *Group) elemKind(x int) string {
+	switch g.order(x) {
+	case 3:
+		return "socle"
+	default:
+		// order p (coprime) has F3^2 coords zero; mixed has both nonzero
+		e := g.elems[x]
+		if e[0] == 0 && e[1] == 0 {
+			return "coprime"
+		}
+		return "mixed"
+	}
+}
+
+// extractStrategy: from empty (must be P), walk the 2nd-player winning strategy
+// (2nd replies; 1st branches over ALL moves). Prefer the negation reply; record
+// where 2nd MUST deviate (exceptions) and how. Reveals the adaptive structure.
+func (s *Solver) extractStrategy(cap int) {
+	g := s.g
+	var empty Mask
+	if s.win(empty) {
+		fmt.Println("  game is N (1st wins) — no 2nd-player strategy to extract")
+		return
+	}
+	visited := make(map[Mask]bool)
+	decisions := 0
+	negHits := 0
+	exByXkind := map[string]int{}
+	exDelta := map[string]int{} // "xkind->rkind:df3a,df3b,dk"  aggregated
+	capped := false
+	var exExamples []string
+
+	var walk func(a Mask)
+	walk = func(a Mask) {
+		if capped || visited[a] {
+			return
+		}
+		if len(visited) >= cap {
+			capped = true
+			return
+		}
+		visited[a] = true
+		legal := g.legalMask(a)
+		moves := s.movesOf(legal)
+		for _, x := range moves {
+			child := a
+			child.setBit(x)
+			// 2nd player's winning reply: r with win(child|r)==false
+			negr := g.neg[x]
+			chosen := -1
+			// prefer negation if legal, distinct, and winning
+			if negr != x && g.legalHas(child, negr) {
+				c2 := child
+				c2.setBit(negr)
+				if !s.win(c2) {
+					chosen = negr
+				}
+			}
+			if chosen == -1 {
+				cl := s.movesOf(g.legalMask(child))
+				for _, r := range cl {
+					if r == x {
+						continue
+					}
+					c2 := child
+					c2.setBit(r)
+					if !s.win(c2) {
+						chosen = r
+						break
+					}
+				}
+			}
+			if chosen == -1 {
+				// should not happen (child is N ⇒ has a winning reply)
+				fmt.Printf("  WARN no winning reply to %v at pc=%d\n", g.elems[x], a.popcount())
+				continue
+			}
+			decisions++
+			if chosen == g.neg[x] {
+				negHits++
+			} else {
+				xk, rk := g.elemKind(x), g.elemKind(chosen)
+				exByXkind[xk]++
+				ex, ec := g.elems[x], g.elems[chosen]
+				df3a := (ec[0] - ex[0] + 3) % 3
+				df3b := (ec[1] - ex[1] + 3) % 3
+				dk := (ec[2] - ex[2] + g.mods[2]) % g.mods[2]
+				exDelta[fmt.Sprintf("%s->%s dF3=(%d,%d) dk=%d", xk, rk, df3a, df3b, dk)]++
+				if len(exExamples) < 8 {
+					exExamples = append(exExamples, fmt.Sprintf("A(pc=%d) x=%v -> r=%v", a.popcount(), ex, ec))
+				}
+			}
+			nxt := child
+			nxt.setBit(chosen)
+			walk(nxt)
+		}
+	}
+	walk(empty)
+
+	fmt.Printf("  strategy-tree positions=%d%s  decisions=%d  negation=%d (%.1f%%)  exceptions=%d\n",
+		len(visited), map[bool]string{true: " (CAPPED)", false: ""}[capped],
+		decisions, negHits, 100*float64(negHits)/float64(decisions), decisions-negHits)
+	fmt.Printf("  exceptions by x-kind: %v\n", exByXkind)
+	fmt.Printf("  exception (x-kind->r-kind, delta) histogram:\n")
+	type kv struct {
+		k string
+		v int
+	}
+	var kvs []kv
+	for k, v := range exDelta {
+		kvs = append(kvs, kv{k, v})
+	}
+	sort.Slice(kvs, func(i, j int) bool { return kvs[i].v > kvs[j].v })
+	for i, e := range kvs {
+		if i >= 20 {
+			break
+		}
+		fmt.Printf("    %-34s %d\n", e.k, e.v)
+	}
+	fmt.Printf("  example exceptions:\n")
+	for _, e := range exExamples {
+		fmt.Printf("    %s\n", e)
+	}
+}
+
 func (s *Solver) winningOpenings(start Mask) []int {
 	legal := s.g.legalMask(start)
 	moves := s.movesOf(legal)
@@ -632,6 +759,7 @@ func main() {
 	parPly := 10
 	openings := false
 	pairing := false
+	strategy := false
 	startCoords := ""
 	args := os.Args[2:]
 	for i := 0; i < len(args); i++ {
@@ -650,6 +778,8 @@ func main() {
 			openings = true
 		case "--pairing":
 			pairing = true
+		case "--strategy":
+			strategy = true
 		case "--start":
 			if i+1 < len(args) {
 				startCoords = args[i+1]
@@ -704,6 +834,13 @@ func main() {
 			}
 		}
 	}()
+
+	if strategy {
+		s.extractStrategy(20_000_000)
+		close(done)
+		fmt.Printf("  nodes=%d tt=%d time=%.2fs rss=%dMB\n", s.nodes, s.tt.size(), time.Since(t0).Seconds(), rssMB())
+		return
+	}
 
 	if openings {
 		wins := s.winningOpenings(start)
