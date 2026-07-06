@@ -146,10 +146,14 @@ free box). I own both lanes (Codex + proj-cap agent are the only others; stayed 
   fibers `(0,±1,∗)`: 2189 defects/p=7 from `{s0,t}`, 32K from `∅`). Decisive kill: **`F₃²=∗1=N` alone**
   (checked), so `Z3²×Z_p=P` is NOT because `F₃²` is a square — the `Z_p` interaction is what flips r=2.
 - **★ NEW structural observation → the `r=3` open test.** Outcome of `Z3^r×Z_p` (`p≥7`) is **P, N, P for
-  `r=0,1,2`** (`Z_p`=P by mod-6; `Z3×Z_p`=∗1/N; `Z3²×Z_p`=∗0/P). The pattern *alternates*, but it is NOT
-  the pure-3-group pattern (`F₃^r`=∗1/N for all `r≥1`), so the `Z_p` factor is doing the work. The sharp
-  open question: **is `Z3³×Z_p` N (alternation continues) or P?** The handoff's earlier "P-suspected" for
-  `Z3³×Z{5,7}` is only a timeout, not a solve. **Compute-BLOCKED:** grundy per-node cost `∝|Aut(Z3³×Z_p)|`
+  `r=0,1,2`** (`Z_p`=P by mod-6; `Z3×Z_p`=∗1/N; `Z3²×Z_p`=∗0/P) — NOT the pure-3-group pattern (`F₃^r`=∗1/N
+  ∀`r≥1`), so the `Z_p` factor flips r=0,2 to P. **Two competing heuristics disagree at `r=3`:** (1) naïve
+  *alternation* P,N,P,N,… ⇒ `Z3³×Z_p`=N; (2) the *monotone-resource* view — the actual r=1→r=2 mechanism is
+  "each extra `F₃` factor hands Bob one more independent `O₃` pair, pushing the socle opening OFF `∗0`," which
+  is monotone ⇒ r≥2 all P ⇒ law **"N iff r=1"** (cleaner, matches "r₃=1 always N"; r=0 P, r=1 N special).
+  **Heuristic (2) is better-grounded** (it's the proven reason r=2 is P; (1) is 3-point curve-fitting). So
+  `Z3³×Z_p` is genuinely open, most likely **P**. The handoff's earlier "P-suspected" for `Z3³×Z{5,7}` is
+  only a timeout, not a solve — but it lines up with heuristic (2). **Compute-BLOCKED:** grundy per-node cost `∝|Aut(Z3³×Z_p)|`
   (`|GL(3,3)|·(p−1)=11232·(p−1)`, e.g. 44928 at p=5); the boolean `sumfree.go` has α-β cutoffs but its
   **uncapped `map[Mask]bool` TT OOMs** at `|G|=135` (`Z3³×Z5`) — I aborted a run at 1 GB free to protect
   the proj-cap job. **FIRST NEXT-SESSION ACTION (revised):** get the `Z3³×Z5` (then `Z3³×Z7`) **root
@@ -660,12 +664,15 @@ mirror *backbone* is swap-diagonal+negation `π(v,y)=(v_swap,−y)` (Brandenburg
 `(0,±1,∗)`); and decisively (c) **`F₃²=∗1=N` alone** (verified) ⇒ `Z3²×Z_p=P` is NOT because `F₃²` is a square.
 The `Z_p` interaction is essential. Do not chase the square-mirror.
 
-**★ NEW lever surfaced — the `r=3` parity datapoint.** Outcome of `Z3^r×Z_p` (`p≥7`) is **P,N,P for r=0,1,2**
-(computed/known: `Z_p`=P, `Z3×Z_p`=∗1/N, `Z3²×Z_p`=∗0/P). It alternates — and it is NOT the pure-3-group pattern
-(`F₃^r`=∗1/N ∀ `r≥1`, so `Z_p` flips r=0,2 to P). The sharp open question: **`Z3³×Z_p` = N (alternation) or P?**
-Earlier "P-suspected" is only a timeout. **Compute-blocked** (grundy `∝|Aut|=44928`/node; boolean `sumfree.go`
-uncapped-`map` TT OOMs at `|G|=135`). Next-session lever = a **TT-capped boolean solver** on a free box, or the
-socle-opening-canary outcome. A confirmed `Z3³×Z_p=N` flips the guess and gives Tactic 2 its base pattern.
+**★ NEW lever surfaced — the `r=3` datapoint.** Outcome of `Z3^r×Z_p` (`p≥7`) is **P,N,P for r=0,1,2**
+(computed/known: `Z_p`=P, `Z3×Z_p`=∗1/N, `Z3²×Z_p`=∗0/P) — NOT the pure-3-group pattern (`F₃^r`=∗1/N ∀`r≥1`,
+so `Z_p` flips r=0,2 to P). **Two heuristics disagree at r=3:** (1) alternation ⇒ N; (2) monotone-resource
+(the proven r=1→r=2 mechanism: each extra `F₃` gives Bob one more `O₃` pair ⇒ socle opening further off `∗0`
+⇒ P) ⇒ law **"N iff r=1"** ⇒ P. (2) is better-grounded (r=2's actual cause; (1) is 3-point fitting), so
+`Z3³×Z_p` is most likely **P**. **Compute-blocked** (grundy `∝|Aut|=44928`/node; boolean `sumfree.go`
+uncapped-`map` TT OOMs at `|G|=135`). Next-session lever = a **TT-capped boolean solver** (own the Go solver —
+bound the map / reuse the grundy fingerprint arena) on a free box, or the socle-opening-canary outcome. The
+`r=3` outcome decides between the two laws and gives Tactic 2 (induction on `r`) its base pattern.
 
 **Validation gate held:** re-derived `F₃²=∗1/N`, `Z3×Z7=∗1/N`, `Z3²×Z7` socle child-dist `{∗0:36,∗1:18,∗3:6}`⇒
 mex `∗2`, `{socle,socle}=∗3/N`, and confirmed the 36 socle P-replies are exactly the off-socle-line mixed
