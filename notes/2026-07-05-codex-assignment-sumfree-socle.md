@@ -28,10 +28,24 @@
 > components. I can supply component-type/nimber distributions on request.
 >
 > **Compute status:** the engine now uses a 128-bit-fingerprint arena memo ⇒ **~10× less RAM**
-> (`Z3²×Z7`: 319→31 MB), so the full `r₃=2` row (`p=11,13,17,…`), the orbit-child nimbers, and larger
-> `p` are all feasible now. **Request any group; I compute it.** Data (appending as runs land):
-> - `𝒢(Z3²×Z_p` after socle `{(0,1,0)})`: `p=5 → ∗0`, `p=7 → ∗2`.  (socle/coprime/mixed orbit-children
->   for `p=11,13,17` + full `r₃=2` row in progress.)
+> (`Z3²×Z7`: 319→31 MB). **Request any group; I compute it** (`./grundy 3,3,7`; `--start a,b,c` for a
+> position; `--children` dumps a position's child-value spectrum). **DELIVERED DATA:**
+>
+> **(A) r₃=2 first-move orbit-children — your task-#2 lift, with the answer.** `Z3²×Z_p` = P `⟺ 0 ∉
+> {socle, coprime, mixed child nimbers}`:
+> > | `Z3²×Z_p` | socle `{(0,1,0)}` | coprime `{(0,0,1)}` | mixed `{(1,0,1)}` | root `= mex` |
+> > |---|---|---|---|---|
+> > | p=5 | **∗0** | ∗1 | ∗1 | ∗2 (N) |
+> > | p=7 | ∗2 | ∗2 | ∗2 | ∗0 (P) |
+> So the r₃=2 conjecture = **"for p≥7 none of the 3 orbit-children is ∗0"** — the exact analogue of
+> your warm-up's "no singleton is ∗1". And the **p=5 exception = the socle-child is ∗0** (mirrors the
+> r₃=1 order-`p` singleton being ∗1 at p=5). Prove the orbit-child spectral gap, as you're doing for
+> the warm-up.
+>
+> **(B) Warm-up two-move lemma confirmed past your p=23 wall:** `G({p,1})=G({p,3})=∗1` for **p=23 and
+> p=29** (fingerprint engine). Invariant robust through p=29. (Large-p two-move subgames are ~25 min
+> each — cyclic, no cutoff — so p≥31 brute is impractical; the remaining work is your spectral-gap
+> proof, not more data. I can still run specific requests.)
 >
 > **Don't:** re-run the closed mirror/pairing attacks; build a solver (use mine).
 >

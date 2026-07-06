@@ -80,6 +80,43 @@ The **exact Grundy values** across the coprime-peel families (the win/loss view 
    accident; `p=5` is a *nimber constant* `∗2` — a `Z5`-specific structural fact to be explained.
 3. **`Z3²×Z7 = ∗0` (P)** confirmed a third independent way (now with the exact nimber, not just P/L).
 
+**Bridge to Codex's outcome discriminator.** Codex found the `p=5`/`p≥7` split is decided by the socle
+opening: `{(0,1,0)}` is a *winning* first move at `p=5` but not at `p=7`. As a nimber (the same
+currency as the table above):
+
+| p | `𝒢(Z3²×Z_p)` full | `𝒢(Z3²×Z_p` after `{(0,1,0)})` |
+|---|-------------------|--------------------------------|
+| 5 | ∗2 (N) | **∗0 (P)** — socle opening wins (moves to P) |
+| 7 | ∗0 (P) | **∗2 (N)** — socle opening loses (moves to N) |
+
+The full-game and post-socle-opening nimbers *swap* `∗2 ↔ ∗0` between `p=5` and `p=7` — a compact
+nimber statement of exactly Codex's discriminator, and a candidate handle for the `p=5` proof.
+
+## The conjecture as a first-move-orbit spectral criterion
+
+`Z3²×Z_p` has exactly **3 first-move orbits** under `Aut = GL(2,3)×Z_p^*`: **socle** `(v,0)`, **coprime**
+`(0,k)`, **mixed** `(v,k)`. So `𝒢(root) = mex` of the three orbit-child nimbers, and
+`Z3²×Z_p = P ⟺ 𝒢=0 ⟺ 0 ∉ {orbit-child nimbers}`. Engine data:
+
+| `Z3²×Z_p` | socle `{(0,1,0)}` | coprime `{(0,0,1)}` | mixed `{(1,0,1)}` | root `= mex` |
+|-----------|-------------------|---------------------|-------------------|--------------|
+| **p=5**   | **∗0** | ∗1 | ∗1 | ∗2 (**N**) |
+| **p=7**   | ∗2 | ∗2 | ∗2 | ∗0 (**P**) |
+
+**The conjecture `Z3²×Z_p=P` (p≥7) ⟺ "none of the 3 orbit-children is ∗0"** — the exact analogue of
+the r₃=1 warm-up's "no singleton is ∗1". And **the `p=5` exception is precisely the socle-child
+dropping to `∗0`** (mirroring the r₃=1 story where the order-`p` *singleton* is `∗1` only at `p=5`).
+This is the clean handle for Codex's r₃=2 lift.
+
+## Warm-up two-move lemma — confirmed past Codex's compute wall
+
+Codex reduced `𝒢(Z3×Z_p)=∗1` (p≥7) to: `G({p,1}) = G({p,3}) = ∗1` in `Z_{3p}` (the "missing-∗1
+spectral gap"). Codex verified `p=7..19`; its brute solver stalled at `p=23`. The fingerprint engine
+confirms the invariant **holds through p=29** (`G({p,1})=G({p,3})=∗1` for `p=23, 29`; `--children`
+reproduces Codex's child histograms exactly). Large-`p` two-move subgames are expensive (cyclic, no
+Grundy cutoff — ~25 min each at `p=29`), so this is the practical ceiling for brute confirmation; the
+rest is Codex's spectral-gap proof.
+
 ## Files
 
 | file | what |
