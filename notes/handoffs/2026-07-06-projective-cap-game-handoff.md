@@ -580,14 +580,54 @@ throughput monitoring on stderr. **Findings:**
 - Net: the compute route is exhausted on this box; **the uniform proof (route A below) is now
   the clear priority** — the exponential state-space growth says brute force won't settle it.
 
+**2026-07-06 (session 4) — route (A): the FRAME REDUCTION (collapses the whole game to ONE
+position) + a growing ESCAPE MARGIN falsification signal.** Full writeup
+`2026-07-06-frame-reduction.md`. Two contributions:
+- **★ Frame reduction (proved + exhaustively verified, all q):**
+  `PG(2,q)=P ⟺ the projective FRAME (4 points in general position, no 3 collinear) is a
+  P-position.` Proof: `PGL(3,q)` is transitive on points/pairs/triangles/**frames**, so sizes
+  0..4 are EACH a single game-value orbit; the normal-play recursion then gives the value chain
+  `∅(P) → point(N) → pair(P) → triangle(N) → frame(P)`, so `v(∅)=v(frame)`. Size 4 is the floor
+  (size 5 splits into orbits). Verified two ways: projective solver (`2026-07-06-frame-orbit-verify.py`,
+  sizes 1..4 single orbit + chain, q≤7) and grid solver (`2026-07-06-frame-reduction-verify.py`,
+  q≤9). **Unifies even+odd** (both restate as "the frame is P"; even's `τ_v` proof is one such
+  proof) and **sharpens the odd target to a single, maximally-symmetric (`S_4`) position.** The
+  defect note's "all size-2 grid positions are P" sub-statement is exactly this, now collapsed
+  to ONE position (size-2 grid = a single orbit too) and lifted to the coordinate-free frame.
+- **Single-involution route re-closed in frame language, incl. the previously-UNTESTABLE
+  transpose.** The frame's Klein-4 stabiliser {id, σ_c, τ, σ_c·τ}; σ_c and τ have DEAD fixed
+  loci (they land on the burned opening line / frame diagonal). `2026-07-06-frame-mirror-test.py`:
+  **τ (transpose) wins only q=3** (problem set = the 2 frame-antidiagonals `r+c=0,2`), **σ_c wins
+  q≤7**, **σ_c·τ (centre antidiagonal) wins q≤9, fails q=11** (live fixed line `r+c=1`). τ was
+  never testable before — the old scripts build size-2 by P2 replying `φ(x₁)`, which needs
+  `φ(x₁)≠x₁`, and τ fixes x₁; the frame is τ-symmetric so τ is legitimate there. All three fail
+  at bounded q ⇒ no uniform single involution (consistent with `2026-07-06-qodd-mirror-obstruction.md`).
+- **Adaptive re-symmetrisation** (`2026-07-06-adaptive-resym-test.py`, depth-1): the direct form
+  (new `φ'` answers the break `x` with its mirror partner `y=φ'(x)`) **fails at q≥11**; the
+  relaxed form (any legal `y` landing in *some* symmetric position) always succeeds — so adaptive
+  is not trivially dead, but its natural pairing form breaks.
+- **★ ESCAPE MARGIN — a quantitative falsification signal + concrete proof target**
+  (`2026-07-06-escape-margin.py`). The crux is now: *every legal size-3 grid position has a P
+  size-4 child.* Measured the number of P size-4 children (the "escape margin") over ALL size-3
+  positions: **minimum = 1 (q=5), 7 (q=7), 13 (q=9), 13 (q=11)** (q=3 vacuous: frame is already
+  a size-2 maximal cap). Stays **bounded away from 0** ⇒ crux holds in every computed case; the
+  tight q=5 (unique escape) relaxes with q. NOT a linear law — an early `3q−14` fit on q=5,7,9 is
+  BROKEN by q=11 (13, not 19); the minimum plateaus at 13 for q=9,11, and the histogram has only
+  two escape classes at q=9,11 (both min 13), hinting a `q`-independent "tightest-triangle" floor.
+  If the minimum ever hit 0 the root flips (counterexample); it doesn't.
+
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
-CLOSED at q=19 (memory wall, margin growing 4→6). The live routes, in priority order given the
-defect structure:
-- **(A) ★ TOP PRIORITY — Prove the margin / a size-2-are-P sub-statement** — the reduction above,
-  now the clear path since brute force is walled. Attack the finite geometric statement "every
-  3-cell partial-permutation cap extends to a size-4 P-position", or characterize odd maximal
-  caps well enough to bound the defect region (min-dev-size ≥ 1 for all q). The margin GROWING
-  (4→6) is encouragement. Cleanest route to a uniform PLANE proof.
+CLOSED at q=19 (memory wall, margin growing 4→6), single-involution re-closed from the frame,
+adaptive direct-pairing closed at q≥11. **Frame reduction is the new clean target.** Live routes,
+priority order:
+- **(A) ★ TOP PRIORITY — Prove "the frame is P" via the escape margin.** The reduction makes this
+  the whole theorem. Concrete finite-geometry target: *every 3-cell partial-permutation cap has ≥1
+  size-4 P-extension* (measured min escape = 1,7,13,13 for q=5,7,9,11 — want ≥1 ∀q). A P size-4
+  child = an even-P position = one NOT completable-to-an-odd-maximal-cap-in-one-move; so this is an
+  avoidance statement about **odd maximal caps (arcs)** — bring arc theory (odd maximal caps first
+  appear q=9, size 5). Next: characterize the min-escape "tightest triangle" type (only two escape
+  classes at q=9,11, both min 13 — a possibly q-independent floor would already give ≥1), and
+  push the escape-margin table to q=13 (needs the Rust solver + a per-position escape mode).
 - **(B) DONE — compiled parallel fixed-arena solver** (`2026-07-06-grid-cap-solver.rs`,
   `2026-07-06-gridcap-rust-ladder.md`): ladder re-confirmed P through q=19, margin grows 4→6,
   exhaustive wall at q=23 (>10⁹ classes, ~×9/step). Reusable tool. Pushing q≥23 needs a
