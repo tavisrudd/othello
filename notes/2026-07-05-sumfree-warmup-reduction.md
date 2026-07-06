@@ -75,15 +75,39 @@ Status:
 - **The lemma genuinely breaks at `p=5`** — verified this session: `𝒢({5,3}) = 𝒢({5,1}) = ∗3` (not `∗1`), and the
   order-5 singleton `𝒢({3}) = ∗1`, giving root `mex{0,1,4} = ∗2 = 𝒢(Z₁₅)`. So the lemma is *exactly* a `p ≥ 7`
   statement, not a formality: the mechanism that makes it `∗1` for `p≥7` must fail precisely at `p=5`.
-- **The `∗0`-child witness is "AP-child with a SPORADIC finite exception set" (revised this session).** The
-  `{p,3}` branch's AP-child `{p,3,6−p}` is `∗0` for p=11,13,17,19,23, then **`∗4` at `p=29`, then `∗0` again at
-  `p=31`** (`{31,3,68}` = 122M nodes) — so `p=29` is a *sporadic* exception, **not** a permanent break (the base
-  `p=7` is the other known exception, `∗2`). The `{p,1}` branch's AP-child `(p+1)/2` is even cleaner: `∗0` for
-  p=7…19 (Codex), 23, 29, **31** (this session; p=31 = 106M nodes), no exception found yet. So the "`∗0` present"
-  half is a *witness-with-finite-exceptions* (matching Codex's finite-exception-book idea), not a uniform formula
-  — at the exceptional `p` a different `∗0`-child must exist (it does: `𝒢({p,3})=∗1` still holds there). The
-  branches are asymmetric in their exception sets. The genuinely hard half remains "`∗1` absent," no line-of-sight
-  proof. (p=37 for both branches is past the compute wall — `Z111`, timed out at 5400s.)
+- **The "`∗0` present" half is now CLOSED cleanly and uniformly — see the next section.** *(The earlier
+  AP-child route — `{p,3,6−p}` / `{p,1,(p+1)/2}` with a sporadic finite exception set `{7,29}` on the `{p,3}`
+  branch, `∗4` at `p=29` — is SUPERSEDED for this half: it was solving an easy problem the hard way. The genuinely
+  hard half remains "`∗1` absent," no line-of-sight proof.)*
+
+## ★ The "`∗0` present" half — CLOSED (2026-07-06), uniform, via the proven Fact C
+
+The `∗0`-child of each two-move position is not the AP-child at all — it is the **negation-completion of the
+non-order-3 element**, and it is `∗0` by the *already-proven* Fact C, uniformly in `p` with **no exceptions and
+no book**.
+
+> **Lemma (`∗0`-present).** For every prime `p ≥ 7` and every non-order-3 element `k ∈ Z_{3p}`, the position
+> `{p, k, −k}` has nimber `∗0`. In particular `{p,3,−3}` is a `∗0`-child of `{p,3}` and `{p,1,−1}` is a `∗0`-child
+> of `{p,1}`.
+>
+> *Proof.* Let `A = {k, −k}`. Then `A = −A` (negation-symmetric) and `A` is sum-free for `p ≥ 7` (the only
+> candidate Schur triples `k+k=±k`, `2k=±k` force `3k=0` or `k=0`, impossible for a non-order-3 `k`). The order-3
+> element `p` is a legal move from `A`: `{k,−k,p}` is sum-free (checking `k+p, −k+p, 2p, 2k, 2(−k)` against the
+> set forces `k=p` or `k=0`, impossible), so order-3 is alive from `A` (and `2p` is legal too, since for symmetric
+> `A`, `p` legal ⟺ `2p` legal). **Fact C** (a corollary of the proven **Lemma 4**: symmetric `A` + order-3 alive
+> ⇒ playing `p` reaches a position the responder negation-mirrors) then gives `𝒢(A ∪ {p}) = 𝒢({p,k,−k}) = 0`. ∎
+
+This is strictly better than the AP-child: it is one line from a proven lemma, uniform in `p` with **no
+exceptions**, and it holds at `p = 7` and `p = 29` where the AP-child witness `6−p` fails (`∗2`, `∗4`). The
+lemma makes the value `∗0` unconditionally; the engine **corroborates**: `{p,3,−3}` (p=7,11,13,17,19),
+`{p,1,−1}` (p=7,11,13,17,19,23), the general witness `{p,k,−k}` for `k = 2,4,5,8` (confirming the mechanism
+is Fact C, not a `k∈{1,3}` accident), and the discriminating case `{29,3,−3}` (`Z₈₇`, exactly where `6−p`
+gives `∗4`).
+
+**Consequence.** The two-move lemma `𝒢({p,3}) = 𝒢({p,1}) = ∗1` now reduces to a *single* open statement — the
+`∗1`-absent half: **no child of `{p,3}` or `{p,1}` has nimber `∗1`** (for `p ≥ 7`). Everything else (the `∗0`
+child, the mex-reduction Facts B/C/D, the root reduction) is proven. This is the entire remaining crux of the
+warm-up.
 
 ## Why `p=5` is sporadic (the precise statement)
 

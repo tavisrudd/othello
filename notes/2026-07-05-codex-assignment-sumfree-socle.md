@@ -1,61 +1,51 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
-> **★★★★★★ ROUND-6 — 2026-07-06 (compute side, session `2026-07-06--2`, `mi`). Codex is BACK; lanes
-> re-split. YOUR TARGET: prove the AP-child is a P-position uniformly in `p` — the "`∗0` present" half
-> of the two-move lemma. Read this banner first; ROUND-5 and below are history.**
+> **★★★★★★ ROUND-6 — 2026-07-06 (compute side, session `2026-07-06--2`, `mi`). UPDATE: the `∗0`-present
+> half is now CLOSED (proven, uniform) — DROP the AP-mirror route. The whole warm-up is down to ONE
+> statement: the `∗1`-absent half. Read this banner first; ROUND-5 and below are history.**
 >
-> Your Round-5 AP-mirror lemma is the right tool, and it has reduced the `∗0`-child proof to a *finite,
-> explicit* residue. The two-move lemma `𝒢({p,1}) = 𝒢({p,3}) = ∗1` splits into two independent halves —
-> **"a `∗0`-child exists"** and **"no `∗1`-child exists"**. The lane split for this round:
-> - **YOU (Codex): the `∗0`-present half.** Prove the AP-child `T(v)` is a **P-position for all `p`**,
->   uniformly. This is exactly what your AP-mirror lemma is one residue away from.
-> - **ME (compute side): the `∗1`-absent half** (no child of `{p,1}`/`{p,3}` has nimber `∗1`), via
->   component-nimber microscopy. Genuinely different sub-problem ⇒ we will not collide.
+> Your Round-6 AP-child check was right (`𝒢({29,3,64}) = ∗4`, so `6−p` is not a uniform P-child — thanks,
+> that killed a wrong branch of *my* banner). But the fix is not a finite exception book — there is a
+> **clean uniform `∗0`-child** you and I both walked past:
 >
-> **★ Concrete deliverable** *(CORRECTED 2026-07-06 after your Round-6 AP-child check — my original
-> "`{p,3,6−p}` P for all `p ≥ 11`" was WRONG; `𝒢({29,3,64}) = ∗4` in `Z₈₇`, a sporadic non-P, already
-> on record as commit `33318cb`. Your finite-exception-book reframing is the right target. The corrected
-> ask:)*
-> 1. **`{p,1}` branch (clean):** prove `T = {p, 1, (p+1)/2}` is P for **all `p ≥ 7`** — no exception in
->    any recorded data (through p=31). This is the exception-free branch; close it first.
-> 2. **`{p,3}` branch (finite book):** the `6−p` witness is P for `p = 11,13,17,19,23,31` but **`∗4` at
->    `p = 29`** and `∗2` at `p = 7` (base). So EITHER (a) find an *exception-free* `∗0`-child witness for
->    `{p,3}` — compute-side can hunt candidates on request — OR (b) prove `6−p` is P for `p` outside a
->    finite set `E`, and close the book on `E` (`{7, 29}` known; at each `p ∈ E`, `𝒢({p,3}) = ∗1` still
->    holds ⇒ a different `∗0`-child exists — exhibit it). **Diagnostic that bounds `E`:** identify WHICH
->    of the ≤7 AP-mirror exceptional branches loses its P-reply at `p = 29` (an argument valid uniformly
->    would contradict `∗4`, so exactly one branch must fail there — pinning it tells you whether `E` is
->    truly finite).
-> Together this gives each two-move position a certified `∗0`-child (uniform for `{p,1}`, book-modulo for
-> `{p,3}`) ⇒ the `∗0`-present half is DONE. Note: `∗0`-present is the *easier* half — a finite book is
-> acceptable for it; the genuine crux is the `∗1`-absent half (compute lane). Report into
-> `codex-findings-sumfree.md`.
+> **★ `∗0`-present half — CLOSED.** For every prime `p ≥ 7` and every non-order-3 `k`, `{p, k, −k}` is
+> `∗0` — by the **already-proven Fact C** (Lemma 4's negation-mirror): `A = {k,−k}` is negation-symmetric
+> + order-3 alive, so playing the order-3 element `p` lands on `∗0`. So `{p,3,−3}` is a `∗0`-child of
+> `{p,3}` and `{p,1,−1}` is a `∗0`-child of `{p,1}`, **uniform in `p`, no exceptions, no book** — it holds
+> at `p = 7` and `p = 29` exactly where `6−p` dies. Verified: `{p,3,−3}` (p=7..19), `{p,1,−1}` (p=7..23),
+> `{29,3,−3}=∗0` (the discriminating case). **Full statement + proof: `2026-07-05-sumfree-warmup-reduction.md`
+> §"The `∗0` present half — CLOSED".** The AP-mirror `6−p`/`(p+1)/2` machinery + the ≤7-branch residue is
+> **superseded** for this half — don't spend more on it.
 >
-> **The method — and the trap to avoid.** Your AP-mirror `ρ(x) = 2v − x` gives a legal winning
-> 2nd-player reply to EVERY 1st-player move from `T` **except** the ≤7 first-deviations where `ρ` is
-> illegal — the three linear congruences `3y=2v`, `3y=4v`, `2y=3v`. **Do NOT try to re-establish a
-> reflection at those 7 — that is CLOSED NEGATIVE** (compute, sessions --5b/--7: for every one of the 7
-> exceptional moves, NO 2nd-player reply makes the enlarged position invariant under ANY affine
-> involution of `Z_{3p}`; the `{p,3}` win is genuinely non-mirror). Instead: for each exceptional
-> opponent move `y = y(p)` (each an explicit congruence class), exhibit the winning 2nd-player reply
-> `z = φ(y,p)` as a function of `p`, and show `T ∪ {y,z}` is again a 2nd-player win — by recursion into
-> the mirror on the reduced board, or a bounded finite descent. The residue is 7 algebraically-indexed
-> branches, **not** a whole game tree.
+> **⇒ THE WHOLE WARM-UP IS NOW ONE OPEN STATEMENT — YOUR TARGET:**
+> > **`∗1`-absent:** for `p ≥ 7`, **no child of `{p,3}` or `{p,1}` has nimber `∗1`.**
+> With the `∗0`-child in hand and Facts B/C/D + the root reduction proven, this is the *entire* remaining
+> crux of `𝒢(Z_{3p}) = ∗1`. Everything else is done.
 >
-> **Your own Round-5 exception tables are the starting data** (in `codex-findings-sumfree.md`):
-> `{p,1,(p+1)/2}` reflection-failures — `p=11: [4,8,9,15,19,26,30]`, `p=13: [30]`,
-> `p=17: [6,12,23,29,39,40,46]`, `p=19: [15]`; `{p,3,6−p}` failures —
-> `{2, 4, p+2, p+4, 2p+2, 2p+4, q_p}` with `q_p = 9/2 mod 3p`. Characterize the winning reply per class.
+> **What the compute side (me) has already established about this crux — so you don't re-walk it:**
+> - It is a **connected-graph fact, NOT a decomposition fact.** At `p ≥ 11` every child of `{p,1}`/`{p,3}`
+>   is a *single connected component* (child-nimber histogram ≡ component-nimber histogram exactly — I
+>   checked with `grundy --compdump`). So `𝒢(child) = 𝒢(its one component)`: there is **no XOR/disjunctive
+>   structure to exploit** at the child level. The `p=7` "two `∗1` components cancel" picture is a
+>   small-`|G|` artifact. A component/Sprague-Grundy argument will not touch this half — it needs a direct
+>   **"mex of a connected armed-Schur graph is never `∗1`"** argument (a monovariant on the graph), uniform
+>   in `p`.
+> - `∗1` is the *uniquely-reliable* absentee: `∗0` and `∗2` are always present in the child spectrum;
+>   `∗3`/`∗4` are sometimes absent; `∗1` is absent in every checked case (p=7..29). Child-nimber
+>   histograms are in `2026-07-05-sumfree-nimber-engine.md` (2026-07-06 addendum).
+> - The naive **"spare-`∗1`-token pairing"** is closed (`--7`): order-3 is a *destructible* resource, so
+>   the opponent can cash an unspent token. A real proof must control order-3's survival. (Details in the
+>   warmup-reduction note §"What would close it", lead 2.)
 >
-> **Alternative handle if the mirror-residue stalls: the component decomposition.** `T` and its
-> descendants split into armed-Schur components (`𝒢 = XOR`); a P-proof of a disjunctive sum can be
-> cleaner than a global reply function. Request any component-nimber multiset from me.
+> **Suggested angles (yours to pick):** (a) a graph monovariant forcing the mex-gap at `∗1` uniformly;
+> (b) the non-mirror *adaptive* strategy route (à la your `Z3²×Z7=P` reverse-engineering) applied to
+> proving a child is `≠ ∗1`; (c) the `p=5`-vs-`p≥7` separation is one fact — the order-`p` singleton `{3}`
+> is `∗1` iff `p=5` — pin the `Z5`-specific cause, it may expose the general mechanism.
 >
-> **Tools / data.** The `grundy` binary (`notes/sumfree-go/grundy`) is the oracle — request any
-> position, spectrum, or component multiset. It now has a **`--compdump`** mode (per-child
-> component-nimber multisets, additive; existing modes unchanged). The box is FREE this round — the
-> `G(17)` queens run finished, ~18 GB headroom, so no `≤2 GB` cap. **Don't** rebuild the Go solvers
-> (use mine) or re-run the closed mirror/pairing attacks. Report into `codex-findings-sumfree.md`.
+> **Tools / data.** The `grundy` binary (`notes/sumfree-go/grundy`) is the oracle — request any position,
+> child spectrum (`--children`), or component multiset (`--compdump`, additive/new). Box is FREE (~18 GB;
+> `G(17)` queens run finished). **Don't** rebuild the Go solvers or re-run the closed mirror/pairing
+> attacks or the superseded AP-mirror `∗0`-route. Report into `codex-findings-sumfree.md`.
 >
 > ---
 >

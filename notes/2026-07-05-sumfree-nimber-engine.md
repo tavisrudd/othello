@@ -208,7 +208,14 @@ single `p`-linear reply that works across `p`. E.g. the constant exception `y=2`
   exceptions (`y ∈ {2,4,p+2,p+4}`) at `p=11,13,17` were computed and are reproducible via
   `grundy Z_{3p} --start "p;3;(6−p);y" --children` (read the `moves to *0` line).
 
-**Bottom line:** both halves of the two-move lemma resist the clean tools — the ∗1-absent half is a
-single-connected-graph mex fact (decomposition can't touch it), and the ∗0-half's residue is non-mirror
-and non-formulaic. This sharpens *where* the analytic difficulty actually lives; it does not close it.
-Consistent with the handoff's "the oracle is exhausted; the bottleneck is analytic."
+**Update (same session): the ∗0-present half is now CLOSED, cleanly.** The AP-child residue turned out to
+be the wrong witness — a P-child hunt found `{p,k,−k}` = ∗0 for every non-order-3 `k` (uniform, no book),
+a one-liner from the proven Fact C (`{k,−k}` symmetric + order-3 alive ⇒ play `p` → ∗0 by Lemma 4). So
+`{p,3,−3}`/`{p,1,−1}` are the exception-free ∗0-children; full proof in
+[`2026-07-05-sumfree-warmup-reduction.md`](2026-07-05-sumfree-warmup-reduction.md) §"The ∗0 present half —
+CLOSED".
+
+**Bottom line:** the warm-up two-move lemma is now down to its **single** open half — the ∗1-absent half,
+which the microscopy above shows is a **single-connected-graph mex fact** (decomposition can't touch it):
+"mex of a connected armed-Schur graph is never ∗1, uniform in p." That is the whole remaining crux;
+it needs a graph monovariant or the non-mirror adaptive route, not more brute sweeps.

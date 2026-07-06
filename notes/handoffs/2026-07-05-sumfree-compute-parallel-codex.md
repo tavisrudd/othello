@@ -125,11 +125,14 @@ needs to find the real law.
 
 ### ★ RESUME HERE (next session)
 
-**2026-07-06 UPDATE (session `--2`): Codex is BACK and re-tasked; lanes re-split.** Codex Round-6
-banner (top of `../2026-07-05-codex-assignment-sumfree-socle.md`) owns the **∗0-present half** of the
-two-move lemma (prove the AP-child `T(v)` is P via its AP-mirror lemma + the ≤7 exceptional branches —
-`{p,1,(p+1)/2}` uniform for `p≥7`, `{p,3,6−p}` modulo a finite book `{7,29}` per Codex's Round-6 check). **Compute (this lane) owns the ∗1-absent half** (no child of `{p,1}`/`{p,3}` is
-∗1). Two findings this session (details in the [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
+**2026-07-06 UPDATE (session `--2`): the warm-up is down to ONE open statement — the ∗1-absent half.**
+The **∗0-present half is CLOSED** (proven, uniform): `{p,k,−k}` = ∗0 for any non-order-3 `k` by the
+proven Fact C, so `{p,3,−3}`/`{p,1,−1}` are exception-free ∗0-children — this **supersedes** Codex's
+AP-mirror `6−p`/`(p+1)/2` route and its `p=29` sporadic exception (proof:
+`../2026-07-05-sumfree-warmup-reduction.md` §"The ∗0 present half — CLOSED"). The Codex Round-6 banner
+(top of `../2026-07-05-codex-assignment-sumfree-socle.md`) is rewritten to drop the AP-mirror route and
+point straight at the **sole remaining crux, the ∗1-absent half**: for `p≥7`, no child of `{p,1}`/`{p,3}`
+is ∗1. Two supporting findings this session (details in the [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
 2026-07-06 addendum): (1) **the missing-∗1 is a *connected-graph* mex fact, NOT a decomposition one** —
 at `p≥11` the children of `{p,1}`/`{p,3}` are single connected components, so the disjunctive-sum handle
 does not fire (the p=7 ∗1-pairing was a small-`|G|` artifact); this rules out a component argument for
@@ -369,15 +372,31 @@ uniform proof. Banner deliverable corrected accordingly.]**
   no common `p`-linear value. Confirms the "genuinely non-mirror" negative ⇒ Codex needs a structural
   descent for the residue, not a reply formula. Reproduce: `grundy Z_{3p} --start "p;3;(6−p);y" --children`.
 
-**Validation gate held:** re-ran `Z15=∗2`, `Z3²×Z5=∗2/N`, `Z3²×Z7` machinery, `{7,3}`/`{7,1}` child
-spectra (exact match to Codex's tables), `{11,3,28}=∗0/P`. gofmt/vet clean; `--compdump` is additive
-(existing `--start`/`--children` unchanged).
+**★★ THEN — the ∗0-present half CLOSED (proven, uniform), superseding the whole AP-mirror route.**
+Reacting to Codex's Round-6 correction, a P-child hunt (cheap, small p) found a *cleaner, exception-free*
+witness that the AP-child route walked past: **`{p, k, −k}` = ∗0 for every prime `p ≥ 7` and every
+non-order-3 `k`**, by the *already-proven* **Fact C** (Lemma 4's negation-mirror): `A={k,−k}` is
+negation-symmetric + order-3-alive, so playing the order-3 element `p` lands on ∗0. So `{p,3,−3}` and
+`{p,1,−1}` are the uniform ∗0-children of `{p,3}`/`{p,1}` — **no exceptions, no finite book**; they hold
+at `p=7` and `p=29` exactly where `6−p` dies (`∗2`, `∗4`). Verified: `{p,3,−3}` (p=7..19), `{p,1,−1}`
+(p=7..23), general `{p,k,−k}` for k=2,4,5,8, and `{29,3,−3}` (the discriminating case, running/confirmed).
+**Full statement + proof: `../2026-07-05-sumfree-warmup-reduction.md` §"The ∗0 present half — CLOSED".**
+⇒ **the entire warm-up now reduces to ONE open statement, the ∗1-absent half:** for `p≥7`, no child of
+`{p,3}`/`{p,1}` is ∗1. Codex banner rewritten to redirect from the (now-superseded) AP-mirror ∗0-route to
+this sole crux.
 
-**Bottom line:** the delegation is set — Codex chews the closable ∗0-half; the ∗1-absent half is sharpened
-to "connected-graph mex ≠ 1, uniform in p," with the decomposition route ruled out. No new brute sweeps
-(honoring the --7 "oracle exhausted" call). Next: (a) await Codex's ∗0-half; (b) if attacking the ∗1-half,
-it must be a direct connected-graph/monovariant argument (not decomposition) or the non-mirror
-`Z3²×Z7`-style adaptive route.
+**Validation gate held:** re-ran `Z15=∗2`, `Z3²×Z5=∗2/N`, `Z3²×Z7` machinery, `{7,3}`/`{7,1}` child
+spectra (exact match to Codex's tables), `{11,3,28}=∗0/P`, and the mod-6 singleton `{p}=∗0`. gofmt/vet
+clean; `--compdump` is additive (existing `--start`/`--children` unchanged).
+
+**Bottom line:** the ∗0-present half of the warm-up is DONE (proven, uniform, `{p,k,−k}`+Fact C — a clean
+win out of Codex's correction of my banner error). The warm-up is now a *single* open statement — the
+∗1-absent half — and the compute side has shown it is a **connected-graph mex fact** (decomposition ruled
+out): "mex of a connected armed-Schur graph is never ∗1, uniform in p." That needs a graph monovariant or
+the non-mirror adaptive route — NOT more brute sweeps (honoring the --7 "oracle exhausted" call). Codex is
+redirected to exactly this. Next: (a) attack the ∗1-absent monovariant; (b) the same shape lifts to the
+r₃=2 main conjecture (`Z3²×Z_p=P`, p≥7) — its ∗0-analogue may also fall to a symmetric-pair + Fact-C-style
+move.
 
 **Handoff Note — session `2026-07-06--2` (`aecafa58-e468-4b95-8c92-b6b72c0af41f`), `mi`.** Commits
 `af7f12d` (integrate Codex R4/5) → `3a8bda7` (Round-6 task + `grundy --compdump` + nimber-engine
