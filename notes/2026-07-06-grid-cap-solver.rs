@@ -14,6 +14,9 @@
 //   outcome  q   -- early-break, prints root P/N (the falsification signal) + #classes
 //   defect   q   -- FULL expansion; also prints parity-defect diagnostics:
 //                   min-deviating-size (root-safety margin), #odd-maximal-cap classes, etc.
+//   escape   q   -- per-size-3-class escape margin (# P size-4 children) + bad-parity split
+//                   (route-A crux 2026-07-06-escape-count-lemma.md): min/max escape, histogram,
+//                   #even-escape (=bad-odd) classes, parity-proof holds/breaks. Single-threaded.
 //
 // Build:  rustc -O -C target-cpu=native 2026-07-06-grid-cap-solver.rs -o /tmp/gridcap
 // Falsification watch: if `outcome` ever prints N (first-player win), PG(2,q) has a
@@ -672,6 +675,129 @@ fn solve_parallel(q: usize, nthreads: usize, depth: usize, arena_log2: usize) {
     );
 }
 
+// ---- ESCAPE mode: per-size-3-class escape margin + bad-parity distribution ----
+// Route (A) falsification data (2026-07-06-frame-reduction.md / -escape-count-lemma.md):
+//   escape(S3) = # P size-4 children of a size-3 grid position S3.
+//   total(S3)  = # legal size-4 extensions = q^2-9q+21 (the total lemma, constant).
+//   bad(S3)    = total - escape.  For odd q, total is odd, so  bad even <=> escape odd.
+// Crux: escape >= 1 for every S3  <=>  PG(2,q)=P.  Parity proof works iff every bad is even
+// (equivalently every escape odd).  This mode reports, over all CANONICAL size-3 classes:
+//   min/max escape (falsification: min must stay >=1), the escape histogram, and the count of
+//   classes with EVEN escape (= bad ODD, where the parity proof breaks).  Single-threaded (light
+//   footprint) full expansion to memoize all classes, then a size-3 post-pass.
+fn solve_escape(q: usize) {
+    let b = Board::new(q);
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    // phase 1: full expansion => every reachable class (all sizes) memoized P/N
+    let mut occ: Vec<u16> = Vec::new();
+    let root_n = s.g(&mut occ, &empty, &empty);
+
+    // phase 2: enumerate canonical size-3 classes; for each count P size-4 children
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    {
+        let mut visited: HashSet<u128> = HashSet::new();
+        let mut occ3: Vec<u16> = Vec::new();
+        enumerate(&b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+    }
+    let total_expected = (q * q + 21).wrapping_sub(9 * q); // q^2 - 9q + 21
+    let mut min_esc = usize::MAX;
+    let mut max_esc = 0usize;
+    let mut even_esc = 0u64; // classes with escape even  (= bad odd)
+    let mut bad_total_ne = 0u64; // classes where total != q^2-9q+21 (must be 0)
+    let mut min_rep: Vec<u16> = Vec::new(); // occ of a min-escape representative
+    let mut hist: std::collections::BTreeMap<usize, u64> = std::collections::BTreeMap::new();
+    for (occ0, chosen, forbidden) in &frontier {
+        let mut avail = [0u64; MAXW];
+        for i in 0..MAXW {
+            avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+        }
+        let mut n_p = 0usize;
+        let mut n_tot = 0usize;
+        let mut occ = occ0.clone();
+        for w in 0..MAXW {
+            let mut bits = avail[w];
+            while bits != 0 {
+                let tz = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                let z = w * 64 + tz;
+                n_tot += 1;
+                let mut nchosen = *chosen;
+                set_bit(&mut nchosen, z);
+                let mut nforb = *forbidden;
+                mask_or(&mut nforb, &b.rc_mask[z]);
+                for &x in occ0.iter() {
+                    mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+                }
+                occ.push(z as u16);
+                let key = b.canon(&occ);
+                occ.pop();
+                // full expansion memoized every class; missing => recompute (shouldn't happen)
+                let is_n = match s.memo.get(&key) {
+                    Some(&v) => v,
+                    None => {
+                        occ.push(z as u16);
+                        let v = s.g(&mut occ, &nchosen, &nforb);
+                        occ.pop();
+                        v
+                    }
+                };
+                if !is_n {
+                    n_p += 1; // P child = an escape
+                }
+            }
+        }
+        if n_tot != total_expected {
+            bad_total_ne += 1;
+        }
+        if n_p < min_esc {
+            min_esc = n_p;
+            min_rep = occ0.clone();
+        }
+        if n_p > max_esc {
+            max_esc = n_p;
+        }
+        if n_p % 2 == 0 {
+            even_esc += 1;
+        }
+        *hist.entry(n_p).or_insert(0) += 1;
+    }
+    let ncls = frontier.len() as u64;
+    let outcome = if root_n { "N (COUNTEREXAMPLE!)" } else { "P" };
+    let hs: Vec<String> = hist.iter().map(|(k, v)| format!("{}:{}", k, v)).collect();
+    let parity_ok = even_esc == 0;
+    println!(
+        "q={:>3}  root={}  size3-classes={}  total(q^2-9q+21)={}{}  min-escape={}  max-escape={}  \
+         bad-odd(even-escape) classes={}/{}  parity-proof={}",
+        q,
+        outcome,
+        ncls,
+        total_expected,
+        if bad_total_ne > 0 {
+            format!(" [!! {} classes with total != formula]", bad_total_ne)
+        } else {
+            String::new()
+        },
+        if min_esc == usize::MAX { 0 } else { min_esc },
+        max_esc,
+        even_esc,
+        ncls,
+        if parity_ok { "HOLDS (all bad even)" } else { "BREAKS" },
+    );
+    println!("      escape-histogram (escape:classes) = {}", hs.join(" "));
+    let rep: Vec<(usize, usize)> = min_rep.iter().map(|&c| (c as usize / q, c as usize % q)).collect();
+    println!("      min-escape representative S3 (cells) = {:?}", rep);
+}
+
 fn solve(q: usize, full: bool) {
     let b = Board::new(q);
     let mut s = Solver {
@@ -722,11 +848,18 @@ fn main() {
         solve_parallel(q, nthreads, depth, arena_log2);
         return;
     }
+    if args[1] == "escape" {
+        for a in &args[2..] {
+            let q: usize = a.parse().expect("q must be an integer");
+            solve_escape(q);
+        }
+        return;
+    }
     let full = match args[1].as_str() {
         "outcome" => false,
         "defect" => true,
         _ => {
-            eprintln!("mode must be 'outcome' | 'defect' | 'par'");
+            eprintln!("mode must be 'outcome' | 'defect' | 'escape' | 'par'");
             std::process::exit(2);
         }
     };

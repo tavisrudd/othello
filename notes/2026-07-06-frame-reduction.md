@@ -156,6 +156,14 @@ uniform planar proof needs.
 
 ## The escape margin (a positive falsification signal + proof target)
 
+> **CORRECTION 2026-07-06 (`2026-07-06-escape-margin-erratic.md`).** Extending this table past
+> the q=11 wall with a compiled `escape` mode kills the optimism below. min-escape is **erratic,
+> not "bounded away from 0 / relaxing as q grows"**: `1,7,13,13,46,5` for q=5,7,9,11,13,17 — it
+> **crashes to 5 at q=17**, where `bad = 152` of `total = 157`. So **"`total` outgrows `bad`" is
+> false** (`bad` is Θ(q²) ≈ total), and the crux is a delicate near-cancellation. The
+> "`3q−14`/plateau" reading and the arc-scarcity proof target are both refuted. The margin tracks
+> odd-complete-arc abundance (irregular in q), and the falsification test is genuinely live.
+
 `2026-07-06-escape-margin.py` computes, over ALL legal size-3 grid positions, the number of P
 size-4 children each has — the **escape margin**. The crux needs the minimum ≥ 1; a `0` would
 flip the root to N (counterexample).

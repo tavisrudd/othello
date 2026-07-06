@@ -637,25 +637,62 @@ position) + a growing ESCAPE MARGIN falsification signal.** Full writeup
   geometric property and `bad` is genuinely arc-theoretic (re-check as deeper defects enter q≥13).
   Total lemma + internals confirmed q≤13 (`total(13)=73`).
 
+**2026-07-06 (session 5) — the escape MARGIN is ERRATIC and `bad ≈ total` at q=17: sub-attack 1
+(area bound) is DEAD, the falsification test is LIVE.** Full writeup
+`2026-07-06-escape-margin-erratic.md`. Added a compiled **`escape` mode** to the Rust grid solver
+(per-size-3-class escape = #P size-4 children, `bad = total − escape`, bad-parity split,
+min-escape representative; single-threaded, light footprint — box was core-busy with the sumfree
+run). Validated **exactly** against an independent raw-bitmask solver
+(`2026-07-06-escape-spotcheck.py`, no canon/shared memo) on the min-escape reps: q=11→13/43,
+q=13→46/73, **q=17→5/157**. Extended the escape/bad-parity table past the pure-Python q=11 wall:
+- **min-escape = `1,7,13,13,46,5,211` (q=5,7,9,11,13,17,19)** — **erratic, NOT growing**; crashes
+  to **5 at q=17** then back to the max **211 at q=19**. **At q=17 `bad = 152` of `total = 157`**
+  (odd maximal caps cover 97% of a 3-cap's extensions) ⇒ **`bad` is Θ(q²) ≈ total**. This
+  **refutes** the escape-count-lemma/frame-reduction claim that "`total` (O(q²)) outgrows `bad`"
+  (correction banners added to both notes).
+- **Sub-attack 1 (bound `bad = o(q²)` by arc theory) is CLOSED** — no room for an area bound; the
+  crux `escape ≥ 1` is a *delicate near-cancellation* of two Θ(q²) quantities. **Sub-attack 2
+  (refined parity) weakened**: `bad`-odd fraction 0,0,0,25%,25%,**57%**,0% (q=5..19) — parity
+  covers a minority by q=17.
+- **min-dev-size ↔ escape link (correction):** root=P ⟺ min-escape ≥ 1 ⟺ min-dev-size ≥ 4, and
+  min-dev-size ∈ {0}∪{4,5,…} (jumps 0→≥4). So the gridcap-ladder note's "margin grows 4→6 ⇒ root
+  safer" is a misreading — 4-vs-6 is endgame defect depth, not a root buffer; the *accurate* fine
+  safety measure is the erratic min-escape. **Cross-check CONFIRMED:** min-dev-size=6 at q=19 ⇒
+  every size-4 P ⇒ min-escape = total = 211 (bad=0, pure parity at low sizes) — the escape run
+  gives exactly `211:27`, so two independent code paths agree. The margin swings 5 (q=17) → 211
+  (q=19), proving it is arc-driven and unpredictable.
+- **Net:** the counting/area routes of (A) are dead; the conjecture is protected only by
+  exhaustive checks (walled at q=19), not by any margin. **Live routes:** (i) a direct
+  adaptive-strategy proof; (ii) a finer-than-mod-2 invariant surviving `bad` odd; (iii) test
+  whether the "size-4 N ⟺ embeds in odd maximal cap" boundary characterization still holds at
+  q=13,17 — if so `bad` is arc-computable (no game recursion) and falsification can push past q=19
+  cheaply. Artifacts: `escape` mode in `2026-07-06-grid-cap-solver.rs`, `-escape-spotcheck.py`,
+  `-escape-q17.log`, `-escape-q19.log`, `-escape-margin-erratic.md`.
+
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
-CLOSED at q=19 (memory wall, margin growing 4→6), single-involution re-closed from the frame,
-adaptive direct-pairing closed at q≥11. **Frame reduction is the new clean target.** Live routes,
-priority order:
-- **(A) ★ TOP PRIORITY — Prove the reduced crux `bad(S₃) < q²−9q+21`.** The frame reduction + total
-  lemma make this the WHOLE odd theorem, and the parity proof already settles q≤9 (bad even). Two
-  concrete sub-attacks:
-  1. **Bound `bad` by arc theory.** `bad(S₃)` = # free-free cells covered by odd maximal caps
-     (odd complete arcs through the burned pair) containing `S₃`. Bound this above by `q²−9q+20`
-     using the size spectrum / scarcity of odd complete arcs in PG(2,q). (Caution: complete-arc
-     spectra are a hard finite-geometry area — this may be genuinely deep.)
-  2. **Refined parity for the bad-odd defects.** Parity fails at q≥11 only on the `bad`-odd
-     positions (24200/145200 at q=11, escape=18). Find a secondary invariant / pairing showing
-     `escape ≥ 1` (indeed ≥ some floor) even there — e.g. characterize when `bad` is odd (which
-     odd maximal caps flip its parity) and bound the count then. The min-escape "tightest" class
-     (only two escape classes at q=9,11, both min 13 — a possibly q-independent floor) is the
-     place to look.
-  Also: push the escape/parity table past the pure-Python q=11 wall (Rust solver + a per-size-3
-  escape mode) to watch min-escape and the bad-parity fraction at q=13,17,19.
+CLOSED at q=19 (memory wall), single-involution re-closed from the frame,
+adaptive direct-pairing closed at q≥11. **Escape margin is ERRATIC (session 5): min-escape swings
+1→46→5→211 through q=19, `bad ≈ total` at q=17, so the area/counting sub-attacks of (A) are
+DEAD.** Live routes, priority order:
+- **(A) Prove the reduced crux `bad(S₃) < q²−9q+21`** — still the WHOLE odd theorem (frame
+  reduction + total lemma), parity proof settles q≤9. **BUT the two counting sub-attacks are now
+  DEAD/weak (session 5):**
+  1. ~~**Bound `bad` by arc theory** (`bad = o(q²)`).~~ **CLOSED** — at q=17 `bad = 152` of
+     `total = 157`, i.e. `bad` is **Θ(q²) ≈ total**; there is no area room for an `o(q²)` bound.
+     (The min-escape triangle's `bad = 0,0,8` at q=5,7,9 looked bounded but was small-q luck; odd
+     complete arcs proliferate and cover ~97% of extensions by q=17.)
+  2. **Refined parity for the bad-odd defects** — **WEAKENED**: `bad`-odd is now the *majority*
+     (12/21 = 57% of size-3 classes at q=17), so parity covers a minority. Still the only counting
+     handle if a secondary invariant can be found, but it is not close to sufficient alone.
+  **What's actually live for a proof:** the crux `escape ≥ 1` is a *delicate near-cancellation* of
+  two Θ(q²) quantities (`escape = total − bad`), so it needs FINE structure, not a size bound:
+  (i) a **direct adaptive-strategy** proof (relaxed adaptive reaches a symmetric position at q≤13,
+  `-adaptive-resym-test.py` — find a maintainable invariant); (ii) a **finer-than-mod-2 invariant**
+  that survives `bad` odd and explains why `escape ≥ 1` persists even when `bad ≈ total`.
+  **Cheap falsification-extension lead:** test whether the boundary characterization "size-4 N ⟺
+  embeds in an odd maximal cap" (validated q≤9) still holds at q=13,17 — if so `bad` is computable
+  from **arc geometry alone** (no game recursion), which could push the min-escape falsification
+  watch well past the q=19 exhaustive wall.
 - **(B) DONE — compiled parallel fixed-arena solver** (`2026-07-06-grid-cap-solver.rs`,
   `2026-07-06-gridcap-rust-ladder.md`): ladder re-confirmed P through q=19, margin grows 4→6,
   exhaustive wall at q=23 (>10⁹ classes, ~×9/step). Reusable tool. Pushing q≥23 needs a

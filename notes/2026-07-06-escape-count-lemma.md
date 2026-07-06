@@ -1,5 +1,14 @@
 # PG(2,q) cap game: the escape-count (total) lemma + a parity proof for q ≤ 9 (2026-07-06)
 
+> **CORRECTION 2026-07-06 (see `2026-07-06-escape-margin-erratic.md`).** The total lemma
+> (`total = q²−9q+21`, odd) and the q≤9 parity proof below are correct. But the note's optimism
+> that the crux `bad < total` holds because **`total` (O(q²)) outgrows `bad`** is **refuted by
+> new data**: at **q=17, `bad = 152` of `total = 157`** (odd maximal caps cover 97% of a 3-cap's
+> extensions), so `bad` is **Θ(q²) ≈ total**, and min-escape is **erratic** (`1,7,13,13,46,5` for
+> q=5..17, crashing to 5 at q=17). Sub-attack 1 (bound `bad = o(q²)` by arc theory) is therefore
+> **dead**, and the crux is a *delicate near-cancellation*, not an area margin. Read the erratic
+> note before using anything below as a proof strategy.
+
 Builds on the **frame reduction** (`2026-07-06-frame-reduction.md`): `PG(2,q)=P ⟺` the frame is
 a P-position `⟺` every legal **size-3 grid position** `S₃` (a 3-cell partial-permutation cap in
 `F_q×F_q`) has a **P size-4 child**, i.e. its **escape** = (# P size-4 children) is `≥ 1`.

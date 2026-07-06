@@ -57,6 +57,14 @@ a **proof** would go further. The exponential growth is itself a reason to prefe
 
 ## The falsification signal: the parity-defect margin (the headline)
 
+> **CORRECTION 2026-07-06 (`2026-07-06-escape-margin-erratic.md`).** "min-dev-size grows 4→6 ⇒
+> the root gets safer" **overstates it.** By the frame chain, root=P ⟺ min-dev-size ≥ 4, and
+> min-dev-size ∈ {0}∪{4,5,…} — it jumps from 0 (root N) straight to ≥4, so **4 vs 6 is endgame
+> defect depth, not a root-safety buffer** (the root is equally P either way). The *accurate* fine
+> safety measure is the per-size-3 **escape margin**, and it is **erratic**: min-escape swings
+> `1,7,13,13,46,5,211` through q=19 (thinnest 5 at q=17, where `bad ≈ total`). The rigorous
+> content of this section is just "root P, confirmed exhaustively through q=19."
+
 `min-dev-size` = smallest position size whose P/N value disagrees with the naive parity law
 "P iff |S| even". **The root (size 0) flips to N — a counterexample — exactly when it hits 0.**
 It stays not just positive but **grows**:
