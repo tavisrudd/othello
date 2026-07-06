@@ -88,6 +88,17 @@ fields, precisely where the single-involution mirror proof fails
   6 get large, memo ballooned past ~1.3 GB with no sign of stopping. It needs either the
   existing F_2^6 sum-free result imported, or a canonical solver. Not on the critical path.
 
+## Parity-defect structure (2026-07-06) — why q=9 is the threshold
+
+The game is **exactly "P iff |S| even" for q ≤ 7** (pure parity, 0 defects); the naive parity
+proof would give `PG(2,q)=P` for free if it held. It **breaks at q=9**, seeded by the first
+**odd maximal caps** (size 5) — the same q where the `σ_c` mirror first fails. The deviations
+back-propagate into an endgame **defect region** whose **minimum deviating size stays 4 for
+q=9,11,13**, so the root (size 0) stays P by a margin. Full analysis + the sharpened
+reformulation (`PG(2,q)=P ⟺ P2 avoids odd maximal caps ⟺ the defect region never reaches the
+root`) and the falsification framing (watch min-deviating-size as q grows) in
+`2026-07-06-qodd-parity-defect-structure.md`.
+
 ## Next
 
 - Import the q=2 column beyond `PG(4,2)` from the `F_2^{m+1}` sum-free solver (R6-0).

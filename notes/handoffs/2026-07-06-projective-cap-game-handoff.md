@@ -534,17 +534,45 @@ state collapse ~3000× (q=13: 3672 full-group states vs ~3×10⁸ naive). New: *
 now **P for q=3,5,7,9,11,13,17,19**. (Pure CPython walls around here; q=23 OOMs the 13 GB cap;
 a compiled port would extend cheaply.)
 
-**Next:** (3'') the mirror route is CLOSED — pursue a NON-mirror mechanism. For the PLANE:
-(a) **adaptive-involution** strategy — re-symmetrize after each problem-set move (obstruction:
-re-symmetrizing an asymmetric S under a new monomial involution is generally impossible).
-(b) **non-constructive parity/counting** argument (no explicit pairing). NOTE: **Sprague–Grundy
-decomposition is unpromising in the plane** — every pair of points lies on a line, so the
-available set never partitions into independent blocks; decomposition is better aimed at the
-`m ≥ 3` lift (points can be genuinely far apart). Also: (c) **DONE PG(2,13)=P** via the new
-canonical grid solver; to push further (q=17,19,23,25,27,…) **port the grid-canon solver to
-Rust/compiled** — pure CPython walls at q≥17 (canon cost × state count). (0) import q=2 column
-beyond PG(4,2) from the F_2^{m+1} sum-free solver. (4) canonical solver for PG(5,2)/larger +
-the `m ≥ 3` decomposition probe.
+**2026-07-06 (session 3) — the PARITY-DEFECT STRUCTURE: the two failed routes are ONE
+failure, seeded by odd maximal caps at exactly q=9.** Full analysis in
+`2026-07-06-qodd-parity-defect-structure.md`. Attacked the counting/parity route. Key facts:
+- **The game is EXACTLY parity ("P iff |S| even") for q ≤ 7** (0 defects, verified both naive
+  and canonical full-expansion solvers). That is precisely why mirror AND parity both work
+  trivially there — below q=9 there is nothing to steer around.
+- **The first ODD maximal cap appears at q=9 (size 5)** — the SAME q where `σ_c` first fails
+  and one below the antidiagonal's q=11. So all three route-failures share one cause: odd
+  maximal caps don't exist below q=9. A maximal cap is a P-position (mover stuck), so odd
+  maximal caps are the ONLY seeds of parity-deviation; they back-propagate (even-but-N =
+  "can complete an odd maximal cap"; deeper non-maximal odd-but-P) into a defect region.
+- **The defect region stays in the endgame: minimum deviating size = 4 for q = 9, 11, 13**
+  (root at size 0 safe by margin ≥ 4). It GROWS with q (q=13 has far more non-maximal odd-P
+  classes than q=11) but has not reached the root.
+- **Sharpened reformulation:** `PG(2,q)=P ⟺ the odd-maximal-cap defects never reach the root
+  ⟺ P2 can steer to an even maximal cap`. Two sufficient sub-statements: (1) *all size-2
+  positions are P* (⟺ all size-3 N ⟺ every 3-cell partial-perm cap extends to a size-4
+  P-position) ⇒ root P immediately; (2) a structural bound on odd maximal caps holding the
+  defect region away from the root for all q.
+- **This MOTIVATES extending the ladder as a real FALSIFICATION test** (not confirmation):
+  watch the **minimum deviating size** — if it ever drops toward 0/1 the root flips
+  (`PG(2,q)` becomes N = counterexample); if it stays bounded below, that bound is the proof.
+Artifacts: `2026-07-06-grid-maximal-parity.py`, `-maximal-parity-sample.py`, `-invariant-hunt.py`,
+`-exception-structure.py`, `-exception-canon.py`.
+
+**Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps). The live routes, in
+priority order given the defect structure:
+- **(A) Prove the margin / a size-2-are-P sub-statement** — the reduction above. Attack the
+  finite geometric statement "every 3-cell partial-permutation cap extends to a size-4
+  P-position", or characterize odd maximal caps well enough to bound the defect region. This
+  is the cleanest path to a uniform PLANE proof.
+- **(B) Extend the ladder as a falsification test (port `2026-07-06-grid-canon2.py` to
+  Rust/compiled)** — now well-motivated: track min-deviating-size vs q. Pure CPython walls at
+  q≥17. If it flips, that's the headline; if not, it feeds (A).
+- (a) adaptive-involution / (b) counting — subsumed by (A)'s framing. **Sprague–Grundy
+  decomposition unpromising in the plane** (every pair collinear ⇒ no independent blocks);
+  aim decomposition at the `m ≥ 3` lift.
+- (0) import q=2 column beyond PG(4,2) from the F_2^{m+1} sum-free solver.
+- (4) canonical solver for PG(5,2)/larger + the `m ≥ 3` decomposition probe.
 
 ## Handoff Summary
 
