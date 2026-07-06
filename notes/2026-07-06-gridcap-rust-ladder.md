@@ -2,48 +2,64 @@
 
 Route (B) from the handoff: port the canonical grid solver to compiled code and extend the
 outcome ladder past q=19 as a **falsification test** for `G(PG(m,q))=0`, tracking the
-parity-defect margin (`2026-07-06-qodd-parity-defect-structure.md`).
+parity-defect margin (`2026-07-06-qodd-parity-defect-structure.md`). Outcome: the ladder is
+re-confirmed **P through q=19** with a **growing** safety margin, and the exhaustive canonical
+state space is measured to grow ~×9 per q-step, hitting a hard memory wall (>10⁹ classes) at
+q=23 on this 26 GB box. Brute-force falsification therefore stops at q=19; going further needs
+the proof, not more compute.
 
 ## The solver
 
-`2026-07-06-grid-cap-solver.rs` — standalone Rust (build: `rustc -O -C target-cpu=native`).
-Same residual grid game as `2026-07-06-grid-canon2.py`: cells of `F_q×F_q`, legal =
+`2026-07-06-grid-cap-solver.rs` — standalone Rust (`rustc -O -C target-cpu=native`). Same
+residual grid game as `2026-07-06-grid-canon2.py`: cells of `F_q×F_q`, legal =
 partial-permutation matrix + affine cap, P1 first, `PG(2,q)=P ⟺ first-player loss`. Canonicalizes
-`chosen` under the full grid automorphism group `G={(r,c)↦(ar+s,bc+t)}⋊swap` via the anchor
-min-image, memoized on a **u128 fingerprint** of the canonical form (~3× leaner than exact keys;
-collision probability ≈ 10⁻²⁰ at 10⁹ keys). Two modes: `outcome` (early-break, root P/N — the
-falsification signal) and `defect` (full expansion, computes the parity-defect diagnostics).
+`chosen` under the full grid automorphism group `G={(r,c)↦(ar+s,bc+t)}⋊swap`. Modes: `outcome`
+(early-break root P/N), `defect` (full expansion, parity-defect diagnostics), `par` (parallel).
 
-**Validation.** The Rust solver reproduces the Python solvers **exactly**: identical canonical
-class counts for every `q ≤ 17` (e.g. q=13 outcome 3672, q=17 outcome 1,241,811) and identical
-defect diagnostics for `q ≤ 13` (q=9: min-dev-size 4, 1 odd-maximal-cap; q=13: 770 odd-maximal +
-21 non-maximal odd-P). The fingerprint version matches the exact-key version class-for-class
-through q=17 — so no collisions occur at that scale and the fingerprint canon is sound.
+**Validation.** Reproduces the Python solvers **exactly**: identical outcomes for every q, and
+identical deterministic `defect` diagnostics for q ≤ 13 (q=9: min-dev-size 4, 1 odd-maximal-cap;
+q=13: 770 odd-maximal + 21 non-maximal odd-P, exact class count 9299). The parallel path matches
+outcome P at every q and matches class counts within parallel nondeterminism (q=17 ≈ 1.756M).
 
-## Extended outcome ladder — every case still P
+### Performance work (this session)
 
-`PG(2,q) = P` (second-player win) confirmed by the compiled solver for the **q-odd ladder**:
+- **Parallel `par` mode**: sharded work over a depth-4 frontier split; workers share transpositions
+  through one memo. ~10× over single-thread at q=17.
+- **Fixed-arena memo (Tiger-style)**: replaced a sharded `HashMap` (per-entry malloc, reallocs on
+  growth, ~44 B/entry, OOM churn) with a **`Box<[u128]>` open-addressing arena sized once at startup
+  and never grown** — no allocation in the hot loop, constant/predictable RSS. Each slot packs a
+  126-bit key + value + occupied bit into 16 B (collision ≈ 10⁻²⁰ at 10⁹ keys).
+- **Canon hotspot (was 93.9% of cycles)** — three validated passes (`defect` counts unchanged
+  77/739/9299): (1) **order-independent set-hash** (sum of per-cell hashes, min over anchors) instead
+  of sort + `Vec` + clone; (2) precompute each cell's (row,col) once — no div/mod in the O(|occ|³)
+  inner loop; (3) hoist the per-`ui` translation out of the `(vi,sw)` loop + subtraction table + no
+  per-cell swap branch. **Net 3.3× faster** (q=19: 36s → 11s); canon is still dominant but is now
+  inherent O(|occ|³) anchor work.
+- **Live monitoring**: `par` streams `tasks done/total · classes · classes/s` to stderr every 5s;
+  the runner tees it to a `tail -f`-able log.
 
-| q | root | canon classes (outcome, early-break) | notes |
+## Extended outcome ladder — P through q=19, then a memory wall
+
+| q | root | canon classes (parallel) | notes |
 |---:|:--:|---:|---|
-| 13 | P | 3,672 | validated vs Python |
-| 17 | P | 1,241,811 | validated vs Python; ≡2 mod 3 (large) |
-| 19 | P | 3,202,913 | ≡1 mod 3 |
-| 23 | P | _pending_ | prime, ≡2 mod 3 (large) |
-| 25 | P | _pending_ | 5² (char 5, non-prime field) |
-| 27 | P | _pending_ | 3³ (char 3, non-prime field) |
-| 29 | P | _pending_ | prime, ≡2 mod 3 (large) |
-| 31 | P | _pending_ | prime, ≡1 mod 3; N=961 (MAXW ceiling) |
+| 13 | P | 7,973 | validated vs Python |
+| 17 | P | 1,756,687 | validated vs Python |
+| 19 | P | 16,740,800 | 11s (24 threads, opt) |
+| 23 | ? | **> 946,000,000** (not finished) | arena guard tripped at 946M classes / ~11% of frontier tasks; true total > 10⁹ |
+| 25,27,29,31 | ? | larger still | beyond 26 GB (see below) |
 
-The class count is **not monotonic in q** — it swings with `q mod 3` (which controls the cap
-structure): the ≡2 mod 3 primes (17, 23, 29) are markedly larger than the ≡1 mod 3 ones (13,
-19, 31). The certified quantity is the **outcome**, validated exactly against Python for q≤17.
+**Every solved case is P.** The exhaustive canonical class count grows **~×9 per q-step**
+(q=17: 1.76M → q=19: 16.7M → q=23: >10⁹). At 16 B/class a billion classes is ~16 GB *plus*
+open-addressing headroom, so q=23 needs a >2³⁰-slot (>17 GB) arena and — extrapolating — q ≥ 23
+exceeds this box's 26 GB RAM. This is a resource wall of **exhaustive enumeration on a 26 GB box**,
+not a fundamental limit: a larger-memory machine, a tighter key (marginal), or — the real lever —
+a **proof** would go further. The exponential growth is itself a reason to prefer the proof route.
 
-## The falsification signal: the parity-defect margin
+## The falsification signal: the parity-defect margin (the headline)
 
 `min-dev-size` = smallest position size whose P/N value disagrees with the naive parity law
-"P iff |S| even". **The root (size 0) flips to N — a counterexample — exactly when min-dev-size
-hits 0.** So min-dev-size is the distance-to-counterexample, and it stays comfortably positive:
+"P iff |S| even". **The root (size 0) flips to N — a counterexample — exactly when it hits 0.**
+It stays not just positive but **grows**:
 
 | q | min-dev-size (root safety margin) | smallest odd maximal cap |
 |---:|:--:|:--:|
@@ -53,15 +69,13 @@ hits 0.** So min-dev-size is the distance-to-counterexample, and it stays comfor
 | 13 | 4 | 7 |
 | 17 | 4 | 9 |
 | 19 | **6** | 9 |
-| 23 | _pending_ | _pending_ |
 
-The margin is not just positive but **grows** (4 through q=17, then 6 at q=19) — the defect
-region stays deep in the endgame and, if anything, retreats further from the root as q grows.
-This is strong evidence the conjecture is safe; a uniform proof would lower-bound min-dev-size ≥ 1
-for all q (equivalently, bound the odd-maximal-cap defect region away from the empty position).
+The defect region stays deep in the endgame and, if anything, retreats from the root as q grows
+(4 through q=17, then 6 at q=19). Combined with the exhaustive P verdict through q=19, this is
+strong evidence `G(PG(2,q))=0` is safe; a uniform proof would lower-bound min-dev-size ≥ 1 for all q.
 
 ## Artifacts
 
-- `2026-07-06-grid-cap-solver.rs` — the compiled solver (outcome + defect modes).
-- `2026-07-06-gridcap-frontier.sh` / `-ladder*.sh` — batch runners (memory-capped).
-- `2026-07-06-gridcap-*.log` — raw run logs.
+- `2026-07-06-grid-cap-solver.rs` — the compiled solver (outcome / defect / par modes).
+- `2026-07-06-gridcap-par-frontier.sh`, `-primes.sh`, `-ladder*.sh` — runners (memory-capped).
+- `2026-07-06-gridcap-*.log` — run logs (outcome, defect diagnostics, live progress).

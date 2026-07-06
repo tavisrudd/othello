@@ -559,15 +559,39 @@ failure, seeded by odd maximal caps at exactly q=9.** Full analysis in
 Artifacts: `2026-07-06-grid-maximal-parity.py`, `-maximal-parity-sample.py`, `-invariant-hunt.py`,
 `-exception-structure.py`, `-exception-canon.py`.
 
-**Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps). The live routes, in
-priority order given the defect structure:
-- **(A) Prove the margin / a size-2-are-P sub-statement** — the reduction above. Attack the
-  finite geometric statement "every 3-cell partial-permutation cap extends to a size-4
-  P-position", or characterize odd maximal caps well enough to bound the defect region. This
-  is the cleanest path to a uniform PLANE proof.
-- **(B) Extend the ladder as a falsification test (port `2026-07-06-grid-canon2.py` to
-  Rust/compiled)** — now well-motivated: track min-deviating-size vs q. Pure CPython walls at
-  q≥17. If it flips, that's the headline; if not, it feeds (A).
+**2026-07-06 (session 3 cont.) — route (B) DONE: compiled parallel fixed-arena solver;
+ladder re-confirmed P through q=19 with GROWING margin; exhaustive wall at q=23.** Full
+writeup `2026-07-06-gridcap-rust-ladder.md`. Ported the canonical grid solver to Rust
+(`2026-07-06-grid-cap-solver.rs`, modes outcome/defect/par), validated **exactly** vs Python
+(deterministic defect counts 77/739/9299; outcomes P every q). Perf: canon was 93.9% of cycles
+⇒ replaced sort+Vec+clone with an **order-independent set-hash min over anchors**, precomputed
+per-cell (r,c), hoisted the per-anchor translation, subtraction table ⇒ **3.3× faster**
+(q=19 36s→11s). Memory: replaced the sharded HashMap (OOM churn) with a **fixed `Box<[u128]>`
+open-addressing arena** (Tiger-style: sized once, never grown, 16 B/slot, constant RSS). Live
+throughput monitoring on stderr. **Findings:**
+- **Outcome P re-confirmed q≤19** (fast, independent code path). **min-dev-size margin GROWS:
+  4 (q=9,11,13,17) → 6 (q=19)** — the root stays far from a flip and, if anything, gets safer.
+- **Exhaustive WALL at q=23**: the canonical class count grows **~×9 per q-step** (q=17 1.76M →
+  q=19 16.7M → q=23 **>946M and not finished**, ~11% of frontier tasks). q≥23 needs a >2³⁰-slot
+  (>17 GB) arena and extrapolates past this 26 GB box. This is a resource wall of exhaustive
+  enumeration on this box — NOT a fundamental limit (bigger RAM / tighter key / a proof go
+  further) — but it means **brute-force falsification stops at q=19**. The ×9 growth is itself
+  a reason to prefer the proof route.
+- Net: the compute route is exhausted on this box; **the uniform proof (route A below) is now
+  the clear priority** — the exponential state-space growth says brute force won't settle it.
+
+**Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
+CLOSED at q=19 (memory wall, margin growing 4→6). The live routes, in priority order given the
+defect structure:
+- **(A) ★ TOP PRIORITY — Prove the margin / a size-2-are-P sub-statement** — the reduction above,
+  now the clear path since brute force is walled. Attack the finite geometric statement "every
+  3-cell partial-permutation cap extends to a size-4 P-position", or characterize odd maximal
+  caps well enough to bound the defect region (min-dev-size ≥ 1 for all q). The margin GROWING
+  (4→6) is encouragement. Cleanest route to a uniform PLANE proof.
+- **(B) DONE — compiled parallel fixed-arena solver** (`2026-07-06-grid-cap-solver.rs`,
+  `2026-07-06-gridcap-rust-ladder.md`): ladder re-confirmed P through q=19, margin grows 4→6,
+  exhaustive wall at q=23 (>10⁹ classes, ~×9/step). Reusable tool. Pushing q≥23 needs a
+  bigger-RAM box or a much tighter key (marginal) — low ROI vs (A).
 - (a) adaptive-involution / (b) counting — subsumed by (A)'s framing. **Sprague–Grundy
   decomposition unpromising in the plane** (every pair collinear ⇒ no independent blocks);
   aim decomposition at the `m ≥ 3` lift.
