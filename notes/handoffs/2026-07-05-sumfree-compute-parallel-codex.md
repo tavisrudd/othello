@@ -154,8 +154,50 @@ accident. `Z3²×Z{11,13,17}` **running** (memory-safe; steep node growth with `
 solvers — *request any nimber from me*; prove `𝒢(Z3×Z_p)=∗1` (p≥7), `Z3²×Z_p=P` (p≥7) via the
 component structure, and explain the `p=5 ∗2` cause.
 
-**Next:** (1) land `Z3²×Z11/13/17` → fill the r₃=2 row; is it `2,0,0,0,…`? (2) extend `Z3²×Z25`,
-`Z9×Z3×Z_p`, r₃=3 (expensive — `GL(3,3)`); (3) B1/B2 (strategy dataset/invariant search) if Codex wants
-it; (4) faster full-`Aut` min-image (the only remaining perf lever — subgroup-reduction is closed
-negative). **A2/A3 fold into the grundy sweep** (the engine is the outcome oracle; ~50× fewer nodes
-than boolean on P-cases, so no separate boolean N-sweep needed).
+### 2026-07-05 (cont.) — parallelize, fingerprint arena (memory fix), orbit-child data
+
+**Engine hardening (all committed, all validated against the 50+ gate):**
+- **Parallelized** (`-j`/`--par-ply`, sharded memo, select-based bounded fork): **5.7×** on `Z3²×Z7`
+  (29.5→5.2 s), race-detector clean. Grundy has no cutoff ⇒ children compute concurrently.
+- **Fingerprint arena memo** (the memory fix — user's "prealloc/arena it?"): replaced `map[ckey]int8`
+  (64-byte key + bucket/GC/growth overhead) with a sharded preallocated open-addressing table keyed by
+  a **128-bit fingerprint** of the canonical `(U,A_rel)`. **~10× less RAM** (`Z3²×Z7` 319→31 MB;
+  `Z3²×Z11` was 10.7 GB on the map → arena stays lean). Sound w/ overwhelming probability (collision
+  ~2⁻⁷⁰; the queens-TT argument). Pair with `GOMEMLIMIT` as an OOM guard. **Memory, not CPU, was the
+  binding wall** for the full family — this lifts it, but large-`p` full games are still slow (no
+  cutoff): full `Z3²×Z11` hit **40 M+ memo entries** and did not converge in ~30 min.
+- **`--children`** mode: dumps a position's child-value spectrum (validated exact vs Codex's Z15
+  histogram). Feeds Codex's spectral-gap approach.
+
+**Key structural data delivered to Codex** (both handed to its Round-5 banner):
+- **r₃=2 as an orbit-child spectral criterion.** `Z3²×Z_p` has 3 first-move orbits (socle/coprime/
+  mixed); `= P ⟺ 0 ∉ {their nimbers}`. **p=5:** socle `∗0`, coprime `∗1`, mixed `∗1` → mex `∗2` (N);
+  **p=7:** all three `∗2` → mex `∗0` (P). So the conjecture = "for p≥7 no orbit-child is `∗0`", and the
+  **p=5 exception = the socle-child drops to `∗0`** (analogue of the r₃=1 order-`p` singleton being `∗1`
+  at p=5).
+- **Warm-up two-move lemma confirmed past Codex's p=23 solver wall:** `G({p,1})=G({p,3})=∗1` for
+  **p=23, 29** (fingerprint engine). Large-`p` two-move subgames are ~25 min each (cyclic, no cutoff) ⇒
+  brute ceiling ~p=29; the rest is Codex's spectral-gap proof, not more data.
+
+**Collaboration state (Codex, in `rust/` sandbox, reports to `../2026-07-05-codex-findings-sumfree.md`):**
+Rounds 4→5 productive. Codex reduced the r₃=1 warm-up to the two-move lemma, then to a **spectral-gap
+invariant** ("the missing `∗1` in the child spectrum") with a finite-failure-set P-child for `{p,1}`.
+**Codex is continuing now** on the analytic spectral-gap proofs (both the warm-up and the r₃=2 lift).
+
+**Next steps (compute side, when resumed):**
+1. On Codex request only — specific groups/positions via `./grundy <mods> [--start ..] [--children]`.
+   The engine is the on-demand nimber oracle; Codex drives.
+2. Deferred as low-value/expensive: full `Z3²×Z11+` nimbers (40 M+ memo, no cutoff — orbit-children
+   already give the conclusion), r₃=3 family (`GL(3,3)` blows up `|Aut|`), larger-`p` two-move brute.
+3. Open perf lever if ever needed: a faster full-`Aut` min-image (subgroup-reduction is closed
+   negative). Not worth it now — memory was the wall and the arena fixed it.
+
+**Handoff Note — session `2026-07-05--5` (`c5c3bf7d-11f1-48ab-aa12-e95878473236`), `mi`.**
+Commits `21baa03` (A1 engine + probe) → `24cb5d5` (parallel) → `ecb872d` (fingerprint arena + Codex
+R5) → `663401c` (`--children`) → `20f5c28` (orbit-child data + warm-up p=29). Files: `cmd_grundy/
+grundy.go` (new engine), `cmd_probe/decomp.go` (new probe), `../2026-07-05-sumfree-nimber-engine.md`
+(findings), `../2026-07-05-codex-assignment-sumfree-socle.md` (R4/R5 tasks). Validation gate held
+throughout (cyclic mod-6 nimbers, `Z3²×Z5=∗2`/N, `Z3³=∗1`/N, `Z2×Z3²=∗0`/P, r₃=1 peels, `Z3²×Z7=∗0`/P).
+**Not moved to done/** — Codex's proofs are in flight and the engine remains the standing compute oracle.
+Left untouched (not mine): `cmd_par/sumfree_par.go` (concurrent Claude), `codex-findings-sumfree.md`
+(Codex), the queens-lane files.
