@@ -137,10 +137,22 @@ doubt; Codex is OUT OF TOKENS (next session owns both lanes).**
   Codex independently confirmed (CRT table + mirror-cert probes 0/46 + α-reflection is only a diagnostic).
   **Lesson banked:** every candidate lemma is a p=7 coincidence risk — stress-test past p=7 BEFORE writing a proof.
 - **The now-suspect claim (VERIFY FIRST):** my own "p-uniform representatives" (Lemma A `{(0,1,0),(1,0,1)}`,
-  Lemma B `{(0,0,1),(0,1,1)}` with fiber `c=1`) were **only verified at p=5,7** — same coincidence risk. **A
-  direct `grundy 3,3,11 --start "0,0,1;0,1,1"` (Lemma B) was RUNNING at session end** (parallel grundy + boolean
-  race; ~8+ min, not yet converged). **★ FIRST NEXT-SESSION ACTION: get this p=11 value** (re-run if needed;
-  also Lemma A `"0,1,0;1,0,1"` at p=11). Three outcomes:
+  Lemma B `{(0,0,1),(0,1,1)}` with fiber `c=1`) were **only verified at p=5,7** — same coincidence risk.
+  **⚠ DIRECT p=11 VERIFICATION IS COMPUTE-INFEASIBLE with the current engine.** A `grundy 3,3,11 --start
+  "0,0,1;0,1,1"` race (parallel grundy + boolean) ran **96 min without converging** and **ballooned to 9.1 GB**
+  (grundy) + 3.3 GB (boolean) before I killed it for memory safety — the `Z3²×Z11` non-convergence regime the
+  box-hygiene notes warned about (unbounded distinct canonical positions; fingerprint memo grows without bound;
+  P-positions have no boolean cutoff). So **"get the p=11 value" is NOT a plug-and-play action** — the engine
+  needs a step first. Options: (i) **stronger canonicalization / compiled port** (the arena grows because too
+  many positions are canonically distinct at p=11), or a `GOMEMLIMIT`-bounded run (may not finish); (ii) a
+  **targeted N-witness** (find one P-reply `{(0,0,1),t}=∗0`) — but each such check is itself a full P-proof that
+  blows up the same way; (iii) **lean on the theorem + indirect evidence**: the *reduction* is a theorem (p=5,7)
+  and does NOT need p=11, and `Z3²×Z11=P` has indirect support (boolean N-hunt from `∅` timed out p=11..23 =
+  consistent-with-P). Honest status: **the "p-uniform c=1 representative" is UNCONFIRMED past p=7 and currently
+  uncheckable** — treat "two clean p-uniform lemmas" as p≤7 packaging, NOT established fact.
+  **★ FIRST NEXT-SESSION ACTION (revised): improve the engine (canonicalization/compiled port) OR pursue the
+  tactic-1 residual-involution PROOF route — do NOT just re-launch the p=11 brute solve (it will re-OOM).**
+  If the engine is improved, the three outcomes to distinguish for Lemma B at p=11:
   1. **Lemma B = ∗0 at p=11** ⇒ the representative survives; then dump its first-layer P-replies at p=11 and
      find the (likely p-DEPENDENT, not uniform) structure. Reduction confirmed for the coprime opening at p=11.
   2. **Lemma B ≠ ∗0 but coprime opening still N** (some *other* P-reply is ∗0) ⇒ the `c=1` rep was a p=7
@@ -154,13 +166,22 @@ doubt; Codex is OUT OF TOKENS (next session owns both lanes).**
   Lemma A is the hard case (trivial stabiliser, no mechanism); Lemma B had two handles, both now shown
   insufficient. The *reduction* is the win; the *lemmas* bottom out at the same adaptive core as the warm-up,
   just existential instead of universal.
-- **NEXT-STEP QUEUE (compute lane, next session):** (a) ★ resolve the p=11 Lemma A/B values; (b) if a lemma
-  survives, characterise its p-dependent P-reply structure (Codex's specific asks: test formulas `−a−s+t`,
-  `−a+2s−2t` for the coprime opening; dump first-layer P-replies at p=11); (c) the **r=3 extension**
-  (`Z3³×Z_p`: same 3-orbit reduction, only needs the 3 *opening* outcomes — the reduction sidesteps the
-  blocked full solve; predict whether the socle opening reverts); (d) the deep open target — an adaptive
-  monovariant proving "each opening is N", shared with the warm-up ∗1-absent core. Codex's postmortem +
-  scripts (`r32-*-mine.py`) are the reverse-engineering substrate. Full data: [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
+- **★ TOP PROOF LEAD (lit search, session `--5`):** [proof-tactics report](../2026-07-06-sumfree-proof-tactics-litsearch.md)
+  — **Tactic 1: strictly-matched involution on the RESIDUAL** (Andres–Huggan–Mc Inerney–Nowakowski, TCS 2019 /
+  Algorithmica 2022): drop fixed-point-freeness; a mirror works if the involution's fixed set is a **self-blocking
+  clique**. This is EXACTLY the O₃ pair `{s,2s}` the socle seed already consumes. Every closed involution attacked
+  `∅`; the reduction only needs the *residual* to mirror. **Concrete untested experiment:** search for an affine
+  reflection `σ(x)=c−x` on the post-seed residual whose only non-mirrorable points are the seed-neutralized
+  O₃-clique — a generalization of the team's proven `F₃ⁿ`/`Z₂×F₃ᵇ` mirrors. (Tactic 2: induction on 3-rank r via
+  the orbit reduction. Tactic 3: adaptive safe-class closure + Walnut automatic-proofs for base cases.) This is
+  the highest-value next lever — a PROOF route that sidesteps the compute-infeasible p=11 brute solve.
+- **NEXT-STEP QUEUE (compute lane, next session):** (a) ★★ **pursue Tactic 1** (residual involution with a
+  self-blocking clique core) — proof, not brute force; (b) engine upgrade (stronger canon / compiled port) IF a
+  p=11 datapoint is still wanted — the current engine OOMs on it; (c) if a lemma is confirmed, characterise its
+  p-dependent P-reply structure (Codex's asks: test `−a−s+t`, `−a+2s−2t`); (d) the **r=3 extension**
+  (`Z3³×Z_p`: same 3-orbit reduction, only needs the 3 *opening* outcomes — sidesteps the blocked full solve);
+  (e) the deep target — an adaptive monovariant proving "each opening is N", shared with the warm-up ∗1-absent
+  core. Codex's postmortem + scripts (`r32-*-mine.py`) are the reverse-engineering substrate. Full data: [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
   §§"2026-07-06 (session `--4`)" and the zero-triple/unification subsections; [codex-findings](../2026-07-05-codex-findings-sumfree.md)
   §"R3=2 Doc Check". Below is the (still-current) `--4` state.
 
