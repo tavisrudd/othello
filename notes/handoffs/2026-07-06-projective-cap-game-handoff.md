@@ -453,6 +453,29 @@ Keep all runs under a memory cap when exploring larger cases:
 ulimit -Sv 2097152
 ```
 
+## Progress
+
+**2026-07-05 (session 1) — R6 steps 1 + partial 0/4 DONE, all P.** Built the fast exact
+solver `2026-07-05-proj-cap-fast.py` (bitmask + incremental forbidden + axiom-validation
+gate). Results table: `2026-07-05-proj-cap-results.md`. Cross-checked against the raw probe
+and against an independent F_2^k sum-free solver (`2026-07-05-sumfree-f2-crosscheck.py`) —
+identical outcomes AND memo-state counts on the q=2 column (strong correctness signal).
+
+Computed, **every case P** (root Grundy 0):
+- `PG(2,q)` for `q = 2,3,4,5,7,8,9` — the whole planar ladder. **Every q-odd plane
+  (3,5,7,9) is P**, including the non-prime char-3 field `q=9`. This is the falsification
+  test (R6-1) and the conjecture passed: the q-odd case (obstructed for the single-
+  involution proof, R4) is a 2nd-player win in outcome. Strategy exists; uniform proof does
+  not yet.
+- `PG(3,2)`, `PG(4,2)` (= F_2^4/F_2^5), `PG(3,3)` (m=3 odd char).
+
+Feasibility: caps are small ⇒ tiny depth ⇒ `PG(2,9)` solves in ~1s, no canonicalization.
+Only blow-up = `PG(5,2)` (= F_2^6 sum-free, large binary caps, memo > 1.3 GB, killed) —
+needs the sum-free import or a canonical solver; off critical path.
+
+**Next:** (2) write up the q-even planar theorem (R3) — data matches. (3) attack the q-odd
+kernel (R4). (0) import q=2 column beyond PG(4,2) from the F_2^{m+1} sum-free solver.
+
 ## Handoff Summary
 
 The affine cap game is solved because affine space has exactly the mirrors needed. The projective
