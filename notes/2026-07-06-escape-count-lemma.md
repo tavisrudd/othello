@@ -40,9 +40,9 @@ the unused col `c_k`. So `|L_{ij} ∩ (\text{used row}∪\text{used col})| = 4`,
 Therefore `total = (q-3)² − 3(q-4) = q² − 9q + 21`. ∎
 
 The proof uses **only** the partial-permutation and cap properties, so it holds for every `q`.
-Verified for all size-3 positions at `q=5,7,9,11(,13)` (`2026-07-06-total-lemma-verify.py`,
-checking `total`, `|FF|=(q-3)²`, `|L∩FF|=q-4`, pair-lines-meet-only-at-vertices), and
-`total=43` constant at `q=11` (`2026-07-06-escape-parity.py`).
+Verified for **all** size-3 positions at `q=5,7,9,11,13` (`2026-07-06-total-lemma-verify.py`,
+checking `total`, `|FF|=(q-3)²`, `|L∩FF|=q-4`, pair-lines-meet-only-at-vertices; e.g.
+`total(13)=73`), and `total=43` constant at `q=11` (`2026-07-06-escape-parity.py`).
 
 ## The parity consequence and a proof for q ≤ 9
 
@@ -82,12 +82,22 @@ The frame reduction + total lemma turn the whole planar odd conjecture into one 
 > (equivalently `bad(S₃) < total`, i.e. `escape ≥ 1`).
 
 `bad(S₃)` = the number of cells `w` such that `S₃∪{w}` lies in some **odd maximal cap** (odd
-complete arc through the burned pair). So the crux is a finite **arc-theoretic upper bound**: the
-cells of `FF` covered by odd maximal caps through `S₃` never exhaust all `q²−9q+21` legal
-extensions. The parity proof handles the regime where these covering cells come in an even count
-(`q ≤ 9`); the general bound is the open kernel, and it lives in the theory of complete arcs (the
-size spectrum of complete arcs in `PG(2,q)` is itself a hard, well-studied area — a caution that
-this crux is not merely mechanical).
+complete arc through the burned pair). This is rigorous because of a **validated boundary
+characterization** (`2026-07-06-boundary-char-verify.py`, exhaustive q≤9, zero mismatches):
+
+> a size-4 grid position `W` is `N` ⟺ `W` embeds in an **odd maximal cap** (`∃` odd maximal cap
+> `⊇ W`).
+
+I.e. the game value of a size-4 position is a purely **static geometric** property — whether it
+sits inside an odd complete arc — so `bad(S₃) = #{w ∈ FF : S₃∪{w} ⊆ some odd maximal cap}` is
+arc-theoretic, not game-recursive. (Verified q≤9; at larger `q` deeper defects may enter and it
+should be re-checked, but if it persists it collapses the whole crux to arc geometry.)
+
+So the crux is a finite **arc-theoretic upper bound**: the cells of `FF` covered by odd maximal
+caps through `S₃` never exhaust all `q²−9q+21` legal extensions. The parity proof handles the
+regime where these covering cells come in an even count (`q ≤ 9`); the general bound is the open
+kernel, and it lives in the theory of complete arcs (the size spectrum of complete arcs in
+`PG(2,q)` is itself a hard, well-studied area — a caution that this crux is not merely mechanical).
 
 ## Status
 
@@ -102,3 +112,5 @@ this crux is not merely mechanical).
 - `2026-07-06-escape-parity.py` — parities of total/bad/escape over all size-3 positions; total
   constant & odd (q≤11), `bad` even for q≤9, bad-odd defects at q=11.
 - `2026-07-06-escape-margin.py` — the escape distribution + total/bad/escape decomposition.
+- `2026-07-06-boundary-char-verify.py` — validates "size-4 `N` ⟺ embeds in an odd maximal cap"
+  (exhaustive q≤9, zero mismatches; q=9: 51840 = 51840), making `bad` fully arc-theoretic.

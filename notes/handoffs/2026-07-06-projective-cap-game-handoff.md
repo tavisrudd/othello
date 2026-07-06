@@ -631,7 +631,11 @@ position) + a growing ESCAPE MARGIN falsification signal.** Full writeup
   escape stays ≥13. **Reduced crux (whole odd conjecture in one inequality):** `PG(2,q)=P ⟺
   bad(S₃) < q²−9q+21 ∀S₃` — i.e. the cells covered by **odd maximal caps (complete arcs)** through
   a 3-cap never exhaust its `q²−9q+21` free-free extensions. This is an arc-theoretic bound; the
-  parity proof is exactly the "bad-even" (q≤9) regime.
+  parity proof is exactly the "bad-even" (q≤9) regime. **Boundary characterization VALIDATED**
+  (`2026-07-06-boundary-char-verify.py`, exhaustive q≤9, 0 mismatches, q=9: 51840=51840): a size-4
+  position is `N` ⟺ it **embeds in an odd maximal cap** — so size-4 game value is a static
+  geometric property and `bad` is genuinely arc-theoretic (re-check as deeper defects enter q≥13).
+  Total lemma + internals confirmed q≤13 (`total(13)=73`).
 
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
 CLOSED at q=19 (memory wall, margin growing 4→6), single-involution re-closed from the frame,
