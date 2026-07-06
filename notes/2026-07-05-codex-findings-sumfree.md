@@ -843,27 +843,546 @@ has been narrowed to:
 The AP-mirror lemma handles the first P-child candidate uniformly; it does not yet prove the missing
 `1` in the full child spectrum.
 
-## Round-6 AP-Child Check
+## Round-6 Recheck: Current Target Is Missing `*1`
 
-The Round-6 banner asks for a uniform proof that the AP-child
+The assignment was updated again after the AP-child correction. The `*0`-present half is now closed:
+for every non-order-3 `k`, `{p,k,-k}` is `*0` by Fact C applied to the symmetric set `{k,-k}`. So the
+AP-child route and the finite-exception book for `6-p` are superseded.
 
-`T(v) = {p, v, 2v-p}`
+The active target is now the single remaining half of the two-move lemma:
 
-is P in the two cases `v=(p+1)/2` and `v=3`, i.e.
+> For every prime `p>=7`, no legal child of `{p,1}` or `{p,3}` has nimber `*1`.
 
-- `{p,1,(p+1)/2}` is P for all primes `p>=7`;
-- `{p,3,6-p}` is P for all primes `p>=11`.
+I re-ran the relevant `--compdump` checks with the correct cyclic `--start` syntax, using semicolons
+(`--start 'p;k'`). Comma syntax is for coordinates in product groups, not multiple elements in a
+cyclic group.
 
-The second requested statement is false as written. The exact component-Grundy data already recorded
-in `2026-07-05-sumfree-nimber-engine.md` and `2026-07-05-sumfree-warmup-reduction.md` gives
+Correct parent-level compdump confirmations:
 
-`G({29,3,64}) = *4` in `Z_87`,
+| start | child-nimber histogram | component structure |
+|---|---|---|
+| `{11,1}` | `*0:5 *2:6 *5:7 *6:6` | every child one component |
+| `{11,3}` | `*0:7 *2:4 *4:1 *5:6 *6:5 *7:1` | every child one component |
+| `{13,1}` | `*0:7 *2:5 *3:10 *5:1 *7:4 *8:3` | every child one component |
+| `{13,3}` | `*0:10 *2:7 *3:2 *5:1 *6:2 *7:5 *8:3` | every child one component |
+| `{23,1}` | `*0:34 *3:2 *4:16 *5:3 *9:2 *10:3` | every child one component |
+| `{23,3}` | `*0:53 *3:1 *4:2 *9:2 *10:2` | every child one component |
 
-so `{p,3,6-p}` is not a P-position at `p=29`. The current `HEAD` commit message repeats the same
-conclusion: `{31,3,68}=*0` recovers at `p=31`, but the `p=29` value remains a sporadic `*4`
-exception. Therefore no uniform proof of the Round-6 `{p,3,6-p}` claim can exist.
+This strengthens the compute-side warning: the missing `*1` is not an XOR cancellation fact at this
+depth.
 
-This does not refute the two-move lemma `G({p,3})=*1`; it refutes only this proposed uniform P-child
-witness. The corrected target for the `*0`-present half must allow a finite exception book for the
-`{p,3}` branch, at least including `p=7` and `p=29`, while the `{p,1,(p+1)/2}` branch remains
-compatible with all recorded data.
+### CRT/Fiber Reduction
+
+There is a cleaner model after the order-3 element `p` has been played. Use CRT coordinates
+
+`Z_{3p} ~= F_p x F_3`.
+
+The element `p` has `F_p` coordinate `0`. If a non-order-3 element `x` is present, then `x+p` and
+`x-p` are immediately illegal because they complete a Schur triple with `p`. Therefore, after `p` is
+placed, each nonzero `F_p` fiber can contain at most one played element.
+
+The residual game can be viewed as building a partial colored set
+
+`f: S subset F_p^* -> F_3`,
+
+with one color per used `F_p` coordinate, and forbidding colored Schur equations
+
+`r_i + r_j = r_l` and `c_i + c_j = c_l`.
+
+Automorphisms fixing `p` have multiplier `u == 1 mod 3`, so they preserve the `F_3` color and scale
+the `F_p` coordinate. Thus the two starts normalize to one used fiber:
+
+- `{p,1}` becomes the colored point `(1,1)`;
+- `{p,3}` becomes the colored point `(1,0)`.
+
+The missing-`*1` statement is equivalently: after either initial colored point, every legal second
+colored point `(s,d)` gives a two-defect colored position whose Grundy value is never `1`.
+
+### Reply-Formula Mining
+
+For each non-P child of `{p,k}` through `p=19`, I mined its moves to `*1`. Every sampled non-P child
+does have at least one `*1` option, as mex requires, but the witness is not a simple uniform affine
+formula in `p,k,y`.
+
+Sample set: all non-P children of `{p,1}` and `{p,3}` for `p=11,13,17,19` (`185` cases). Results:
+
+- the mate replies `-k` or `-y` hit a `*1` option in `130/185` cases;
+- no single formula `a*p + b*k + c*y` with `a in {0,1,2}` and `|b|,|c|<=5` hits a `*1` option in all
+  cases;
+- a greedy cover over that small affine family still needed `12` formulas, with irregular leftovers.
+
+So the proof is not a closed-form reply table.
+
+## Round-7 Doc Check: Updated Current Instructions
+
+The assignment now has an authoritative "CURRENT INSTRUCTIONS" block, superseding the Round-6 text
+and my previous proposed next step. The open statement remains the `*1`-absent half, but the method is
+more sharply pinned:
+
+> For `p>=7`, no child of `{p,1}` or `{p,3}` has nimber `*1`.
+
+Equivalently in the colored-fiber frame: a **bare two-defect** position `{p,e,z}` with no symmetric
+colored pair is never `*1`.
+
+The previous induction idea "every non-P two-defect has a one-defect `*1` child" is false; the
+compute note reports `33/91` failures at `p=11`. Also, two-defect `*1` positions do exist, but every
+one seen carries at least one symmetric colored pair. Therefore the right recursion variable is not
+just defect count; it is `(defect-count, pair-count)`.
+
+Current ruled-out routes:
+
+- child-level component/XOR decomposition;
+- AP-mirror `*0` route;
+- fixed single-token pairing/mirror on `{p,e}+*1`;
+- static board-signature or `F_3`-color monovariants;
+- more brute sweeps past the current oracle range.
+
+Current viable route:
+
+- Build an adaptive, non-pairing strategy for `{p,e}+*1`.
+- Use the mirror-break lemma: for a single-defect board `{p} union S union {d}` with `S=-S`, every
+  legal move mirrors under negation except the at-most-three moves whose mirrors hit the defect blocks
+  `{2d, d+p, d/2}`.
+- Induct/control the state by `(defect-count, pair-count)` in the colored-fiber model.
+
+### Adaptive Strategy Shape
+
+I added `2026-07-06-sumfree-defect-automaton.py` to extract an oracle responder strategy for
+`{p,e}+*1` for small `p`, choosing replies in this
+priority order where possible:
+
+1. take the token if Alice's board move lands on a P child;
+2. mirror Alice's new move if that lands back on a `*1` board;
+3. close an existing defect if that lands back on a `*1` board;
+4. otherwise choose a `*1` board reply minimizing `(defect-count, -pair-count, size)`.
+
+This is not a proof, but it describes the adaptive lane's shape.
+
+Reproduce:
+
+`python3 notes/2026-07-06-sumfree-defect-automaton.py --primes 7,11,13 --branches 1,3 --max-rows 12`
+
+| start | token-present `*1` boards reached | reply counts |
+|---|---:|---|
+| `{7,1}` | 4 | mirror 3, take-token 19 |
+| `{7,3}` | 8 | close-defect 4, adaptive 3, take-token 22 |
+| `{11,1}` | 89 | mirror 38, close-defect 23, adaptive 47, take-token 327 |
+| `{11,3}` | 82 | mirror 37, close-defect 22, adaptive 39, take-token 352 |
+| `{13,1}` | 220 | mirror 123, close-defect 64, adaptive 64, take-token 1248 |
+| `{13,3}` | 204 | mirror 144, close-defect 49, adaptive 48, take-token 1130 |
+
+The reached token-present `*1` boards lie in a simple shape ladder:
+
+`(size, defects, pairs) = (2,1,0), (4,1,1), (4,3,0), (6,1,2), (6,3,1), (6,5,0), ...`
+
+So the adaptive strategy naturally tracks `(defect-count, pair-count)`: mirror/close-defect moves
+shift toward more pairs, while genuinely adaptive replies sometimes create higher odd defect-count
+boards with fewer pairs. This matches the current assignment's warning that pair-count, not just
+defect-count, is load-bearing.
+
+Transition grammar visible in the oracle:
+
+- `mirror-new`: `(size, defects, pairs) -> (size+2, defects, pairs+1)`;
+- `close-defect`: also shifts toward one more symmetric pair, usually preserving the defect count
+  after Alice creates a fresh defect;
+- `old/new-defect-block` and `adaptive-other`: typically
+  `(size, defects, pairs) -> (size+2, defects+2, pairs)`;
+- `take-token`: Alice has moved to a P child, so Rita cashes the `*1` token and leaves the board game
+  at `*0`.
+
+This suggests a proof by defining a safe recursively-generated class `Safe(d,c)` of token-present
+`*1` boards: every Alice move either is a P child (cash token), admits a pair-gaining mirror/close
+reply, or is one of the defect-block cases where Rita can move to the next higher-defect same-pair
+safe class. The missing piece is a symbolic existence proof for the last branch.
+
+### Defect-Block Candidate Is Incomplete
+
+I also tested a local candidate for the `*1` reply from a non-P bare two-defect board `{p,k,y}`:
+try closing either defect (`-k`, `-y`) or playing the negation of one of either defect's three
+mirror-break blocks (`-2d`, `-(d+p)`, `-d/2` for `d in {k,y}`).
+
+Coverage among non-P children of `{p,k}`:
+
+| p | k | non-P children | covered by close/break candidates | misses |
+|---:|---:|---:|---:|---:|
+| 11 | 1 | 19 | 16 | 3 |
+| 11 | 3 | 17 | 12 | 5 |
+| 13 | 1 | 23 | 19 | 4 |
+| 13 | 3 | 20 | 16 | 4 |
+| 17 | 1 | 15 | 15 | 0 |
+| 17 | 3 | 23 | 23 | 0 |
+| 19 | 1 | 36 | 32 | 4 |
+| 19 | 3 | 32 | 32 | 0 |
+
+Thus the three-block mirror-break lemma is the right localization for single-defect boards, but a
+bare two-defect proof still needs a genuinely adaptive recursion. The local "close a defect or reply
+at a defect block" rule is not sufficient.
+
+### Initial-Layer Colored Probe
+
+I added `2026-07-06-sumfree-initial-layer.py` to isolate the first hard layer. It normalizes
+`{p,e,y}` in the colored-fiber coordinates by the unique multiplier `u == 1 (mod 3)` with
+`u e == 1 (mod p)`, so the initial defect is `(1, e mod 3)`, and then records every `*1`
+reply `z` to the non-P child.
+
+Reproduce:
+
+`python3 notes/2026-07-06-sumfree-initial-layer.py --primes 7,11,13 --branches 1,3 --max-rows 6`
+
+This sharpened the previous negative result:
+
+- even after considering **all** `*1` replies, not just the oracle's chosen reply, there are
+  initial children whose only `*1` replies are `adaptive-other`;
+- the adaptive-only residue already appears at `p=11,13`, so the first transition
+  `(2,1,0) -> (4,3,0)` cannot be replaced by "mirror, close a defect, or hit one of the three
+  defect-blocks";
+- a small normalized affine cover is fragmented.  For example:
+
+| start | P children | adaptive-only non-P children | greedy small-affine cover of adaptive-only |
+|---|---:|---:|---|
+| `{11,1}` | 5 | 3 | `2y;cy+ce`, `1-y;cy+ce`, `2y-1;cy` |
+| `{11,3}` | 7 | 5 | `-2y+1;1` hits 2, then three singleton formulas |
+| `{13,1}` | 7 | 4 | `-2y;-ce` hits 2, then two singleton formulas |
+| `{13,3}` | 10 | 4 | four singleton formulas |
+
+The Go oracle gives the larger first-layer sanity check quickly:
+
+- `{17,1}` child spectrum is `{*0:27 *2:3 *4:2 *5:6 *6:3 *10:1}`;
+- `{17,3}` child spectrum is `{*0:19 *2:1 *3:1 *4:2 *5:10 *6:1 *7:2 *9:2 *10:1 *11:2 *12:1}`.
+
+So `*1` is still absent at the base layer, but the P-locus has become large rather than cleaner.
+
+I also checked whether the shape ladder itself could be the invariant. It cannot: among canonical
+positions with `p` present and `2p` absent, shape is only a coarse guide.  For instance:
+
+| p | shape `(size, defects, pairs)` | `*1` boards / all boards |
+|---:|---|---:|
+| 11 | `(4,1,1)` | `10/17` |
+| 11 | `(4,3,0)` | `24/92` |
+| 11 | `(6,3,1)` | `91/161` |
+| 13 | `(4,1,1)` | `13/25` |
+| 13 | `(4,3,0)` | `43/155` |
+| 13 | `(6,3,1)` | `241/526` |
+
+So `(defect-count, pair-count)` is the recursion variable, but not the whole state descriptor.
+The eventual safe class needs an additional mex/strategy witness.
+
+Conclusion: the proof obligation should be stated as a closure property of a recursively generated
+safe class, not as a closed-form reply function.  A plausible next lemma is:
+
+> For every safe one-defect token position `{p} union S union D + *1`, any Alice move either lands on a
+> P child, admits a pair-gaining safe reply, or admits a defect-expanding safe reply.  The last case is
+> allowed to depend on the current safe witness, not just on `(p,e,y)`.
+
+This is closer to a strategy certificate / invariant than to a formula table.  The first layer shows
+why the witness has to carry recursion state: the same normalized affine forms that help one residue
+class are singleton-only in another.
+
+## R3=2 Doc Check: Two 2-Element P-Lemmas
+
+The assignment's current block now also promotes the rank-2 lift:
+
+`G(Z_3^2 x Z_p)=*0` for `p>=7`
+
+has been reduced by the compute note to two existential P-lemmas:
+
+- **Lemma A:** `{(0,1,0),(1,0,1)}=*0`;
+- **Lemma B:** `{(0,0,1),(0,1,1)}=*0`.
+
+Lemma A certifies both the socle and mixed openings; Lemma B certifies the coprime opening.
+The p=5 exception localizes to Lemma A (`*3` at p=5), while Lemma B remains P at p=5.
+
+I added `2026-07-06-r32-pairing-mine.py`, which uses the existing Go `grundy` oracle to mine the
+first reply layer after one of these 2-element P positions.  It summarizes reply types and tests
+small formulas of the form
+
+`b = c_a a + c_s s + c_t t`
+
+where `a` is Alice's move and `{s,t}` is the candidate P-position.
+
+Reproduce:
+
+`python3 notes/2026-07-06-r32-pairing-mine.py 7 0,1,0 1,0,1 --max-rows 16`
+
+`python3 notes/2026-07-06-r32-pairing-mine.py 7 0,0,1 0,1,1 --max-rows 16`
+
+At p=7:
+
+| lemma | legal Alice moves from `{s,t}` | best small formula hit | greedy cover shape |
+|---|---:|---|---|
+| A `{socle,mixed}` | 54 | `2a-s+2t` hits `21/54` | needs 11 formula pieces in the tested family |
+| B `{coprime,mixed}` | 53 | `-s-t` hits `46/53` | `-s-t` hits 46, then 5 and 2 more |
+
+The "mutual partner" count printed by the script is mostly a sanity check: if `{s,t,a,b}` is a P
+child then the set is unordered, so `a` and `b` reply to each other whenever both are legal from
+`{s,t}`.  It is not itself a proof certificate.  The useful information is the formula coverage and
+the type split.
+
+### Lemma B: Zero-Sum Triple Lead (Killed at p=11)
+
+This subsection is now historical.  Compute session `--5` directly refuted the proposed uniform
+zero-sum-triple mechanism at `p=11`, so none of the p=7 observations below should be used as a proof
+route for Lemma B.
+
+The refuting value is:
+
+`{s,t,-s-t}={(0,0,1),(0,1,1),(0,2,9)}`
+
+in `Z_3^2 x Z_11`, with value `*6`, not `*1`.  Its child spectrum is
+
+`{*0:30 *1:2 *2:1 *3:4 *4:30 *5:1 *8:12}`.
+
+Thus the claim "every legal child of `{s,t,-s-t}` is P" is false at `p=11`.  The constant reply
+`r=-s-t` explains a large p=7 pocket but does not win uniformly.
+
+The p=7 mining originally suggested a cleaner first-layer mechanism than Lemma A.  Let
+
+`s=(0,0,1)`, `t=(0,1,1)`, and `r=-s-t=(0,2,-2)`.
+
+At `p=7`, the zero-sum triple `{s,t,r}` has value `*1`, and every one of its legal children is P:
+
+`grundy 3,3,7 --start '0,0,1;0,1,1;0,2,5' --children`
+
+returns child spectrum `{*0:46}` and hence `G({s,t,r})=*1`.
+
+At p=7, this explains the large constant-reply pocket in Lemma B: if Alice plays a move `a` from
+`{s,t}` and `r` remains legal, Bob can reply `r`, landing on the P child `{s,t,r,a}` of the zero-sum
+triple.
+
+The moves that make `r` illegal are bounded and algebraic.  For `p>=7`, they are contained in
+
+`{ r, -s, -t, 2r, r-s, r-t, s-r, t-r, r/2 }`,
+
+with overlaps depending on `p`.  Counts from the legality calculation:
+
+| p | blockers for the reply `r=-s-t` |
+|---:|---:|
+| 7 | 7 including `r` itself |
+| 11 | 9 including `r` itself |
+| 13 | 9 including `r` itself |
+
+At `p=5`, this bounded-blocker description fails in the expected small-prime way: many off-subgroup
+moves block `r`, and the zero-sum triple still has value `*1` but only one P child.  The p=11
+computation shows that the p=7 success was another small-prime coincidence, not a p>=7 separation.
+
+The blocker-set derivation is elementary.  Assume Alice has made a legal move `a` from `{s,t}` and
+Bob wants to add `r`.  Since `{s,t,a}` and `{s,t,r}` are already sum-free, a new Schur violation after
+adding `r` must use both `a` and `r`, or use `r+r=a`, or use `a+a=r`.  Thus the only possibilities are
+
+- `a=r` (Alice has taken the intended reply);
+- `2r=a`;
+- `2a=r`, i.e. `a=r/2`;
+- `a+r=s` or `a+r=t`, i.e. `a=s-r` or `a=t-r`;
+- `a+s=r` or `a+t=r`, i.e. `a=r-s` or `a=r-t`;
+- `s+r=a` or `t+r=a`, i.e. `a=-t` or `a=-s` because `r=-s-t`.
+
+Intersecting this nine-element candidate set with the legal moves from `{s,t}` gives the actual
+blockers.  Some candidates can be illegal before Bob moves; for example at `p=7`, `r-s=(0,2,4)` is
+not an Alice move because `2(r-s)=t`.
+
+For the seven p=7 blocker cases, the Go oracle gives P replies in each case.  Example spectra:
+
+- Alice `a=r=(0,2,5)`: child spectrum `{*0:46}`, so after Alice takes `r`, Bob can play any legal
+  child of the zero-sum triple.
+- Alice `a=-s=(0,0,6)`: child spectrum includes `*0:8`.
+- Alice `a=2r=s-r=(0,1,3)`: child spectrum includes `*0:3`.
+
+This was the proposed proof split for Lemma B, now invalid:
+
+1. Prove the zero-sum triple lemma for `p>=7`: every legal child of `{s,t,-s-t}` is P.
+2. Handle the bounded Schur-blocker set for `r` by a small algebraic table.
+
+Step 1 is false at `p=11`.  Do not continue this as a proof route.  The remaining open question is
+whether Lemma B itself, `{s,t}=*0`, survives at `p=11`; if it does, its proof has to use a different
+P-reply/adaptive certificate.
+
+### Lemma B: What the Zero-Sum Triple Is Not
+
+I checked two tempting simplifications of the zero-sum triple route.
+
+First, the triple is not explained purely by its cyclic subgroup.  It lies in the subgroup
+`{first coordinate = 0} ~= Z_3 x Z_p ~= Z_{3p}`.  In CRT coordinates it is:
+
+| p | cyclic coordinates for `{s,t,r}` in `Z_{3p}` | cyclic value |
+|---:|---|---|
+| 7 | `{15,1,5}` | `*1`, children all `*0` |
+| 11 | `{12,1,20}` | `*0` |
+| 13 | `{27,1,11}` | `*6` |
+| 17 | `{18,1,32}` | `*5` |
+
+So the full `Z_3^2 x Z_p` ambient structure is doing real work; the cyclic subgroup value does not
+uniformly carry the triple.
+
+Second, I added two mirror-certificate probes:
+
+- `2026-07-06-r32-zero-triple-mirror.py`: tests point reflections `x -> c-x`;
+- `2026-07-06-r32-affine-involution-cert.py`: tests structured affine involutions
+  `(h,k) -> (M h + b, alpha k + beta)` with `M in GL(2,3)` and `alpha in {1,-1}`.
+
+At p=7 neither family certifies any of the 46 P-children of `{s,t,r}`:
+
+`python3 notes/2026-07-06-r32-affine-involution-cert.py --p 7 --max-rows 12`
+
+reports `certified children: 0/46`.
+
+Thus even before the p=11 refutation, the cleaner Lemma-B zero-sum triple was not a hidden global
+affine mirror.  The split that looked useful at p=7 was:
+
+- generic first reply `r=-s-t`;
+- bounded blocker table for when `r` is unavailable;
+- adaptive proof/certificate for the P children of `{s,t,r}`.
+
+After compute session `--5`, this split should be treated as a p=7 postmortem only.
+
+I added `2026-07-06-r32-position-reply-mine.py` to inspect that last layer.  Representative p=7
+P-children of `{s,t,r}` have small but piecewise oracle-reply covers:
+
+| child `a` added to `{s,t,r}` | legal opponent moves | greedy cover in tested linear forms |
+|---|---:|---|
+| `(0,0,3)` coprime | 42 | 2 pieces |
+| `(1,0,0)` socle | 35 | 5 pieces |
+| `(1,0,1)` mixed | 34 | 5 pieces |
+
+At p=7 this pointed to a finite adaptive certificate for the zero-sum triple children, not an
+involution lemma.  Since the triple fails at p=11, mining those certificates is no longer a direct
+Lemma-B proof path; it is useful only for understanding why the p=7 pocket was misleading.
+
+I then computed the stabilizer orbits of legal children of `{s,t,r}` under the subgroup of
+`GL(2,3) x F_p^*` that fixes the triple.  Since `s=(0,0,1)` is the only pure-coprime point in the
+triple, the `F_p^*` scale is forced to `1`; the stabilizer is the 6-element subgroup of `GL(2,3)`
+fixing the socle vector of `t`.
+
+Orbit counts by legality only:
+
+| p | legal children of `{s,t,r}` | stabilizer orbits | inline orbits | off-line orbits |
+|---:|---:|---:|---:|---:|
+| 7 | 46 | 11 | 4 | 7 |
+| 11 | 80 | 25 | 14 | 11 |
+| 13 | 98 | 33 | 20 | 13 |
+| 17 | 134 | 49 | 32 | 17 |
+
+The off-line part is one orbit for each `Z_p` fiber (`k=0,...,p-1`).  Thus the hoped-for "small
+finite table" was already too optimistic; after the p=11 failure, the p=7 table is best kept as
+reverse-engineering data rather than a prototype to lift.
+
+### Lemma B: Fiber-Level Prototype at p=7
+
+I added `2026-07-06-r32-zero-triple-fiber-mine.py` to mine the off-line family
+
+`B_k = {s,t,r,(1,0,k)}`.
+
+At p=7 all seven `B_k` are P, but their largest reply pockets are not a single uniform formula in
+the tested linear family.  The script output:
+
+| k | legal opponent moves from `B_k` | greedy cover piece sizes | first piece |
+|---:|---:|---|---|
+| 0 | 35 | `16 11 5 2 1` | `-2s+r-a` |
+| 1 | 34 | `17 9 5 2 1` | `-2s+t-r` |
+| 2 | 34 | `21 7 4 1 1` | `-2s-t-r+2a` |
+| 3 | 35 | `22 9 4` | `-2s+2t+r` |
+| 4 | 34 | `14 10 5 3 1 1` | `-2s-t+a` |
+| 5 | 35 | `13 8 5 4 2 1 1 1` | `-2s+t+r+2a` |
+| 6 | 34 | `14 10 4 3 2 1` | `-2s-t-r-2a` |
+
+The first pieces are all constant replies (coefficient of the opponent move is `0`), but the
+constant varies with the fiber.  Counting literal constant replies confirms this is not just a
+coefficient-tie artifact; e.g. the best constants cover:
+
+| k | best literal constant reply | hits |
+|---:|---|---:|
+| 0 | `(2,2,3)` | 16 |
+| 1 | `(0,2,1)` | 17 |
+| 2 | `(2,0,3)` | 21 |
+| 3 | `(0,1,5)` | 22 |
+| 4 | `(1,2,1)` | 14 |
+| 5 | `(2,0,0)` | 13 |
+| 6 | `(1,0,1)` | 14 |
+
+The p=7 data looks like "constant-pocket plus repairs" with the constant depending on `k`, but the
+p=11 failure of the parent triple means these `B_k` boards are not currently high-value Lemma-B
+targets.
+
+Local p=11 spot checks of `B_0` and `B_1` both hit a 60-second timeout with the Go oracle:
+
+- `grundy 3,3,11 --start '0,0,1;0,1,1;0,2,9;1,0,0'`;
+- `grundy 3,3,11 --start '0,0,1;0,1,1;0,2,9;1,0,1'`.
+
+These timeouts are now superseded by the full p=11 triple computation.  Even if some `B_k` happen to
+be P at p=11, the parent `{s,t,r}` is not `*1`, so the zero-sum-triple route no longer supplies the
+generic first reply for Lemma B.
+
+### Lemma B: Alpha Reflection Diagnostic
+
+The compute note points out a special Lemma-B involution
+
+`alpha(a,b,k)=(-a,b,k)`,
+
+fixing the axis subgroup `F={a=0}` that contains `s,t,r`.  I added
+`2026-07-06-r32-alpha-mine.py` to measure exactly what this handle does.
+
+At the first layer from `{s,t}` for p=7:
+
+- axis legal moves: `11`;
+- off-axis legal moves: `42`;
+- `alpha` reply illegal: `6`;
+- `alpha` reply legal: `36`;
+- among legal `alpha` replies, values are `*0:20, *3:10, *4:2, *6:4`.
+
+The illegal `alpha` replies are precisely where the deposited axis sum
+
+`d=a+alpha(a)`
+
+is already forbidden by the seed structure:
+
+| Alice move `a` | `alpha(a)` | deposit |
+|---|---|---|
+| `(1,0,0)` | `(2,0,0)` | `(0,0,0)` |
+| `(1,0,4)` | `(2,0,4)` | `s=(0,0,1)` |
+| `(1,2,4)` | `(2,2,4)` | `t=(0,1,1)` |
+
+and the three `a_1=2` mirrors of these.
+
+The legal `alpha` reply is not value-preserving.  The full alpha-pair board's value is also not the
+standalone axis value:
+
+| deposit `d` | full `{s,t,a,alpha(a)}` value | standalone axis `{s,t,d}` value |
+|---|---:|---:|
+| `(0,0,2)` | `*0` | `*3` |
+| `(0,0,3)` | `*3` | `*1` |
+| `(0,0,6)` | `*4` | `*3` |
+| `(0,1,0)` | `*0` | `*0` |
+| `(0,1,4)` | `*3` | `*1` |
+| `(0,2,0)` | `*6` | `*2` |
+| `(0,2,4)` | `*3` | `*0` |
+
+So `alpha` confirms the coupling mechanism but does not by itself prove Lemma B.
+
+I also checked whether `alpha` helps one layer later, from the zero-sum triple `{s,t,r}`.  It does
+not: among off-axis legal children of `{s,t,r}` at p=7, `alpha` is illegal for `8`; for the `34`
+legal `alpha` replies, values are `*1:28, *2:4, *5:2` and **none are P**.
+
+Conclusion: `alpha` is best treated as a diagnostic for the axis-deposit obstruction, not as the
+strategy.  The actual Lemma-B certificate, if Lemma B survives at p=11, must use a different reply
+mechanism than the zero-sum-triple constant lane.
+
+Finally, I tried the boolean solver on the first higher-p fiber targets:
+
+- `sumfree_par 3,3,11 --start '0,0,1;0,1,1;0,2,9;1,0,0'`;
+- `sumfree_par 3,3,11 --start '0,0,1;0,1,1;0,2,9;1,0,1'`.
+
+Both hit a 60-second timeout after roughly `3.6-3.7M` nodes, so Claude's higher-n compute remains
+the right source for these confirmations.
+
+### Lemma B: Current Next Data Needed
+
+The live branch is now:
+
+- direct value of Lemma B at `p=11`, i.e. `{(0,0,1),(0,1,1)}`;
+- if it is P, dump first-layer P replies from `{s,t}` at `p=11`;
+- compare formula coverage for the non-`r=-s-t` p=7 candidates, especially `-a-s+t` and
+  `-a+2s-2t`;
+- if Lemma B is not P at `p=11`, the two-lemma reduction needs a replacement P-reply for the coprime
+  opening rather than a proof of this representative.
+
+Until that data arrives, the safe statement is: Lemma A/B remain the right stated targets from the
+assignment, but Lemma B's p=7 zero-sum triple explanation has been killed.
