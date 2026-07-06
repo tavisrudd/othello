@@ -12,12 +12,24 @@
 > - **ME (compute side): the `∗1`-absent half** (no child of `{p,1}`/`{p,3}` has nimber `∗1`), via
 >   component-nimber microscopy. Genuinely different sub-problem ⇒ we will not collide.
 >
-> **★ Concrete deliverable.** Prove, uniformly in the prime `p`:
-> > `T = {p, 1, (p+1)/2}` is P for all `p ≥ 7`, **and** `T = {p, 3, 6−p}` is P for all `p ≥ 11`.
-> (Base `p=7` for the second branch: use the P-child `{7,3,5} = (p+3)/2` — `6−p = ∗2` there, verified.)
-> Combined with your reduction, this certifies each two-move position a uniform `∗0`-child ⇒ the
-> `∗0`-present half is DONE for the whole family. That alone is the first proven structural piece of the
-> warm-up; report it into `codex-findings-sumfree.md`.
+> **★ Concrete deliverable** *(CORRECTED 2026-07-06 after your Round-6 AP-child check — my original
+> "`{p,3,6−p}` P for all `p ≥ 11`" was WRONG; `𝒢({29,3,64}) = ∗4` in `Z₈₇`, a sporadic non-P, already
+> on record as commit `33318cb`. Your finite-exception-book reframing is the right target. The corrected
+> ask:)*
+> 1. **`{p,1}` branch (clean):** prove `T = {p, 1, (p+1)/2}` is P for **all `p ≥ 7`** — no exception in
+>    any recorded data (through p=31). This is the exception-free branch; close it first.
+> 2. **`{p,3}` branch (finite book):** the `6−p` witness is P for `p = 11,13,17,19,23,31` but **`∗4` at
+>    `p = 29`** and `∗2` at `p = 7` (base). So EITHER (a) find an *exception-free* `∗0`-child witness for
+>    `{p,3}` — compute-side can hunt candidates on request — OR (b) prove `6−p` is P for `p` outside a
+>    finite set `E`, and close the book on `E` (`{7, 29}` known; at each `p ∈ E`, `𝒢({p,3}) = ∗1` still
+>    holds ⇒ a different `∗0`-child exists — exhibit it). **Diagnostic that bounds `E`:** identify WHICH
+>    of the ≤7 AP-mirror exceptional branches loses its P-reply at `p = 29` (an argument valid uniformly
+>    would contradict `∗4`, so exactly one branch must fail there — pinning it tells you whether `E` is
+>    truly finite).
+> Together this gives each two-move position a certified `∗0`-child (uniform for `{p,1}`, book-modulo for
+> `{p,3}`) ⇒ the `∗0`-present half is DONE. Note: `∗0`-present is the *easier* half — a finite book is
+> acceptable for it; the genuine crux is the `∗1`-absent half (compute lane). Report into
+> `codex-findings-sumfree.md`.
 >
 > **The method — and the trap to avoid.** Your AP-mirror `ρ(x) = 2v − x` gives a legal winning
 > 2nd-player reply to EVERY 1st-player move from `T` **except** the ≤7 first-deviations where `ρ` is

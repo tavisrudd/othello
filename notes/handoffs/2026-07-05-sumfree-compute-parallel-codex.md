@@ -127,8 +127,8 @@ needs to find the real law.
 
 **2026-07-06 UPDATE (session `--2`): Codex is BACK and re-tasked; lanes re-split.** Codex Round-6
 banner (top of `../2026-07-05-codex-assignment-sumfree-socle.md`) owns the **∗0-present half** of the
-two-move lemma (prove the AP-child `T(v)` is P uniformly in `p` via its AP-mirror lemma + the ≤7
-exceptional branches). **Compute (this lane) owns the ∗1-absent half** (no child of `{p,1}`/`{p,3}` is
+two-move lemma (prove the AP-child `T(v)` is P via its AP-mirror lemma + the ≤7 exceptional branches —
+`{p,1,(p+1)/2}` uniform for `p≥7`, `{p,3,6−p}` modulo a finite book `{7,29}` per Codex's Round-6 check). **Compute (this lane) owns the ∗1-absent half** (no child of `{p,1}`/`{p,3}` is
 ∗1). Two findings this session (details in the [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
 2026-07-06 addendum): (1) **the missing-∗1 is a *connected-graph* mex fact, NOT a decomposition one** —
 at `p≥11` the children of `{p,1}`/`{p,3}` are single connected components, so the disjunctive-sum handle
@@ -347,11 +347,14 @@ instrumentation on `cmd_par/sumfree_par.go` were sitting uncommitted in the tree
 
 **★ Delegation — Codex Round-6 banner** (`3a8bda7`, top of `../2026-07-05-codex-assignment-sumfree-socle.md`):
 prove the AP-child `T(v)` is a **P-position uniformly in `p`** — the "∗0 present" half of the two-move
-lemma `𝒢({p,1})=𝒢({p,3})=∗1`. Concretely: `{p,1,(p+1)/2}` P for `p≥7`, `{p,3,6−p}` P for `p≥11` (base
-`p=7` uses `(p+3)/2`). Method = its own AP-mirror lemma for all-but-≤7 opponent moves + a structural
-descent for the ≤7 exceptions (explicit congruence classes). Explicit warning baked in: **do NOT re-hunt
-a reflection for the 7 exceptions — CLOSED negative** (they're genuinely non-mirror). Lane split stated so
-we don't collide: Codex = ∗0-half, compute = ∗1-half.
+lemma `𝒢({p,1})=𝒢({p,3})=∗1`. Concretely: `{p,1,(p+1)/2}` P for `p≥7` (clean); `{p,3,6−p}` P for `p≥11`
+**modulo a finite exception book** (`{7,29}`). Method = its own AP-mirror lemma for all-but-≤7 opponent
+moves + a structural descent for the ≤7 exceptions (explicit congruence classes). Explicit warning baked
+in: **do NOT re-hunt a reflection for the 7 exceptions — CLOSED negative** (they're genuinely non-mirror).
+Lane split stated so we don't collide: Codex = ∗0-half, compute = ∗1-half. **[CORRECTED same day: my
+banner's original "`{p,3,6−p}` P for all `p≥11`" was WRONG — Codex's Round-6 check flagged `𝒢({29,3,64})=∗4`
+(sporadic non-P, on record as `33318cb`); the ∗0-half for the `{p,3}` branch needs the finite book, not a
+uniform proof. Banner deliverable corrected accordingly.]**
 
 **★ Compute side (mine) — two findings** ([nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
 2026-07-06 addendum; new tool `grundy --compdump` = per-child armed-component nimber multiset):
