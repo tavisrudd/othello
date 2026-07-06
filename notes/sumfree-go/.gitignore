@@ -2,3 +2,8 @@
 # and `go build -o sumfree_par ./cmd_par/sumfree_par.go`
 /sumfree
 /sumfree_par
+# GO111MODULE=off go build -o grundy ./cmd_grundy/grundy.go
+/grundy
+# GO111MODULE=off go build -o probe ./cmd_probe/decomp.go
+/probe
+/grundy2

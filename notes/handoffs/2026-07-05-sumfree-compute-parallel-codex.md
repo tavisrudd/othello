@@ -118,3 +118,44 @@ needs to find the real law.
 - **Model**: Opus for A1/B1 (design); Sonnet fine for D/E and running sweeps.
 - **Notes**: A1 first — it unblocks the most and produces the nimber data Codex wants. If A1 stalls,
   A2 gets one or two more rigorous `p` and A3 hunts a conjecture-breaker cheaply.
+
+---
+
+## Progress
+
+### 2026-07-05 — session `c5c3bf7d` (`mi`): A1 DELIVERED (nimber engine), Codex tasked
+
+**Box freed:** the G(17) queens nimber run **finished** (`G(17)=∗2`, first-player win, a new A344227
+term; 584 B nodes / 59 h) ⇒ the ≤2 GB constraint is lifted (17 GB free). Codex still active in `rust/`;
+stayed in the `notes/` Go lane. A concurrent Claude session was editing `cmd_par/sumfree_par.go`
+(strategy-extractor enrichment, the B2 lane) — kept fully clear of it by putting new tools in **new
+command dirs**.
+
+**A1 = DONE (the TOP item).** Built the Grundy/decomposition engine
+`notes/sumfree-go/cmd_grundy/grundy.go`. Full write-up + data:
+[`../2026-07-05-sumfree-nimber-engine.md`](../2026-07-05-sumfree-nimber-engine.md).
+- **De-risked first** (`cmd_probe/decomp.go`): the decomposition **fires** — 84% of nodes split into
+  ≥2 components (82–99% in the deep tail), the opposite of the queens component-nimber lever. Go.
+- **Engine:** disjunctive-sum recursion, memoizes the canonical *armed Schur hypergraph* of each
+  component under `Aut(G)`; size-1/2 fast path. **Validated on 50+ values** (Codex's whole Python
+  Grundy table exactly + cyclic mod-6 nimbers `n=2..31` + theorem groups).
+- **Key result:** **`Z3²×Z7 = ∗0` (P)** solved in ~30 s — Codex's Python couldn't finish it. Now
+  confirmed a 3rd way, with the exact nimber.
+- **Perf:** `GRUNDY_NOMULT` (drop `Z_p`-multiplier autos) = measured-NEGATIVE (+6× nodes; full `Aut`
+  merging wins). size-≤2 component fast path = −34% wall. Per-node cost `∝ |Aut| ∝ p` is the wall for
+  large `p` (memory is flat/tiny).
+
+**Nimber data (Attack 2, delivered to Codex):** `𝒢(Z3×Z_p) = ∗1` for `p≥7`, `∗2` at `p=5` (verified
+`p=7..19`; all N — a nimber law refining a known-outcome family). `𝒢(Z3²×Z5)=∗2`, `𝒢(Z3²×Z7)=∗0`.
+**`p=5` carries `∗2` in BOTH families** — the sporadic `p=5` is a nimber constant, not an outcome
+accident. `Z3²×Z{11,13,17}` **running** (memory-safe; steep node growth with `p`).
+
+**Codex tasked** (Round-4 banner atop `../2026-07-05-codex-assignment-sumfree-socle.md`): stop building
+solvers — *request any nimber from me*; prove `𝒢(Z3×Z_p)=∗1` (p≥7), `Z3²×Z_p=P` (p≥7) via the
+component structure, and explain the `p=5 ∗2` cause.
+
+**Next:** (1) land `Z3²×Z11/13/17` → fill the r₃=2 row; is it `2,0,0,0,…`? (2) extend `Z3²×Z25`,
+`Z9×Z3×Z_p`, r₃=3 (expensive — `GL(3,3)`); (3) B1/B2 (strategy dataset/invariant search) if Codex wants
+it; (4) faster full-`Aut` min-image (the only remaining perf lever — subgroup-reduction is closed
+negative). **A2/A3 fold into the grundy sweep** (the engine is the outcome oracle; ~50× fewer nodes
+than boolean on P-cases, so no separate boolean N-sweep needed).

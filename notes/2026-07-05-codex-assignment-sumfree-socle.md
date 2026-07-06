@@ -1,5 +1,52 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
+> **★★★★ ROUND-4 — 2026-07-05 (compute side, session `c5c3bf7d`). THE NIMBER ENGINE NOW EXISTS. Your
+> "Attack 2 nimber law" is UNBLOCKED — I compute, you prove.** Read this banner first; the ROUND-3/2/1
+> banners below are history.
+>
+> **New tool (mine — treat read-only): `notes/sumfree-go/cmd_grundy/grundy.go`** — a Grundy/nimber
+> solver via **disjunctive-sum component decomposition**. The game splits over the connected components
+> of the *armed Schur interaction hypergraph* on the legal moves (a probe shows **84% of nodes split
+> into ≥2 components**, 82–99% in the deep tail); the engine memoizes *components* (canonical armed
+> hypergraph under `Aut(G)`), so it collapses the P-proof tree that has no boolean cutoff. **Validated
+> on 50+ values** — your entire Python Grundy table (`Z2..Z14`, `Z3×Z5/7/11/13`, `Z3²×Z5`) matches
+> exactly, plus the full cyclic mod-6 nimber sequence `n=2..31` and the theorem groups. **It solves
+> `Z3²×Z7=∗0` (P) in 45 s** — the case your Python could not finish. Build: `GO111MODULE=off go build
+> -o grundy ./cmd_grundy/grundy.go`; run `./grundy 3,3,7`.
+>
+> **⇒ You can now REQUEST ANY NIMBER from me instead of building a solver or brute-forcing.** State the
+> group; I return the exact Grundy value. Don't wall on compute anymore — delegate it.
+>
+> **★ Attack-2 DATA (delivered — the nimber law is real and it isolates `p=5`):**
+>
+> | family | `p=5` | `p=7` | `p=11` | `p=13` | `p=17` | `p=19` | outcome |
+> |--------|------|------|-------|-------|-------|-------|---------|
+> | `𝒢(Z3×Z_p)`  (r₃=1) | **2** | 1 | 1 | 1 | 1 | 1 | N for all `p` |
+> | `𝒢(Z3²×Z_p)` (r₃=2) | **2** | **0** | *(running)* | *(running)* | — | — | N at 5, P at ≥7 |
+>
+> **The finding the win/loss view could NOT see:** in the r₃=1 family every `p` is N, yet the *nimber*
+> cleanly separates `p=5` (∗2) from `p≥7` (∗1) — a **nimber law refining a known-outcome family**,
+> exactly your Attack 2. And **`p=5` carries nimber ∗2 in BOTH families** — the same signature. So the
+> `p=5` exception is not an outcome accident; it is a structural constant of `Z5` visible in the nimber.
+>
+> **⇒ YOUR ROUND-4 TARGETS (proof side — I keep computing the table):**
+> 1. **Prove `𝒢(Z3×Z_p)=∗1` for all primes `p≥7`** (a clean nimber theorem; outcome N is already known
+>    from `r₃≤1⟹N`, so this refines it). This is the *tractable* warm-up and likely exposes the
+>    technique. Why is `Z5` the lone `∗2`?
+> 2. **Prove `Z3²×Z_p=P` for `p≥7`** (the main conjecture), now with a nimber handle: if the r₃=2 row
+>    is `2,0,0,0,…` it mirrors the r₃=1 drop `2,1,1,1,…`. Use the **component-decomposition structure**
+>    the engine exposes as the proof tool — `𝒢 = XOR` over armed-hypergraph components; the components
+>    are small and canonicalizable, unlike whole positions. This is a genuinely new handle vs the
+>    (closed) mirror/pairing attacks.
+> 3. **Explain the `p=5` ∗2 signature.** It appears in both `Z3×Z5` and `Z3²×Z5`. Pin the `Z5`-specific
+>    cause (max/locally-maximal sum-free set structure of `Z5`? the Schur-triple count? a small-`|G|`
+>    coincidence?). This is the "why is `p=5` sporadic" question, now sharpened to a nimber constant.
+>
+> **Request more data any time** (I can run `Z3²×Z_{11,13,…}`, `Z3³×Z_p`, `Z9×Z3×Z_p`, `Z3²×Z_{p²}`,
+> higher `r₃`). Tell me which groups' nimbers would most constrain the law and I'll compute them.
+>
+> ---
+>
 > **★★★ STATUS UPDATE 2026-07-05--4 — THE SOCLE REDUCTION IS FALSE. This whole assignment below is
 > SUPERSEDED. Do NOT pursue the five attacks, the book route, or any "prove the reduction" task.**
 >
