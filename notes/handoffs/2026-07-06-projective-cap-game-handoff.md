@@ -24,6 +24,98 @@ The affine proof does **not** transfer directly. In projective space there are n
 parity varies, and the affine odd-`q` self-blocking midpoint trick has no obvious projective
 replacement.
 
+## Review Corrections (2026-07-05)
+
+A review pass reworked the math below. These supersede the looser statements later in the doc; read
+them first, they change the priorities.
+
+### R0. Structural fact — projective space has NO fixed-point-free collineation involution
+
+For **every** `(m,q)`. Odd char: an involution in `PGL(m+1,q)` splits into `±1` eigenspaces, each a
+nonempty fixed subspace. Even char: an involution is unipotent `1+N`, `N^2=0`, with nonempty fixed
+space `ker N`. Either way the fixed locus is nonempty. This is the clean reason affine is easy and
+projective is hard: affine has translations (fpf) as a whole-board mirror; projective has none. So a
+whole-board pairing NEVER exists here — every case must burn opening moves and mirror on a residual.
+
+### R1. Parity, stated once
+
+`|PG(m,q)| = 1 + q + ... + q^m` is **even iff (q odd and m odd)**, odd otherwise. In particular
+**every `PG(2,q)` is odd** (`q^2+q+1 = q(q+1)+1`), so the plane always burns a move regardless of q's
+parity. Even the even-board cases (e.g. `PG(3,3)`, 40 points) get no free pairing, by R0.
+
+### R2. The residual after the opening line is a CONSTRAINED affine game, not `AG(2,q)`
+
+This is load-bearing and fixes a repeated mis-statement below (Attack 2, "Expected Patterns").
+After P1 plays `a`, P2 plays `b`, the line `L=ab` is the line at infinity and `a,b` are two
+*directions*. A later collinear triple `{a,x,y}` = two affine points on a direction-`a` line. So the
+residual hypergraph on the `q^2` affine points is:
+
+> residual cap  ⟺  affine cap  AND  ≤1 point per direction-`a` line  AND  ≤1 point per direction-`b` line.
+
+Affine caps with **two burned parallel classes**. The affine theorem is about the *unconstrained*
+game and does not apply directly. Every mirror argument must be checked against these two extra
+2-point edges.
+
+### R3. q-even planes are provable NOW (write as a lemma)
+
+`PG(2,q)`, `q` even. P1 plays `a`; P2 plays any `b`; `L=ab`. On the residual hypergraph `H'` (R2),
+any translation `τ_v` is an automorphism (translations preserve collinear triples AND parallel
+classes ⇒ they preserve both burned-direction edges). Pick `v` **not** in direction `a` or `b`. In
+char 2, `τ_v` is a **fixed-point-free involution automorphism of `H'`** (`τ_v^2=id` since `2v=0`;
+fpf since `v≠0`). The `v ∉ {dir a, dir b}` choice is exactly what keeps `x, τ(x)` off a shared
+burned-direction line. fpf involution automorphism ⇒ whole-residual pairing (P0 lemma,
+`nodekayles-pairing-lemmas`) ⇒ residual is a 2nd-player win; P1 moves first into the empty residual
+⇒ P2 wins ⇒ `G(PG(2,q))=0`. Needs the legality/parity lemma written against `H'`, but it is a lemma,
+not an open problem. **Verify on `PG(2,{2,4,8})` then write it up.**
+
+### R4. q-odd planes are the real open kernel — the obstruction is concrete and bounded
+
+`q` odd has no translation involution (`τ_v` has order `p`, odd). The two natural involutions each
+fail on a small, explicit set:
+
+1. **Homology, axis `L=ab`, center `o` off `L`.** The `q+1` axis points are all dead (2 played +
+   `q-1` forbidden), so the axis is handled — but the center `o` is off `L`, hence **live**, and is
+   the unique other fixed point. By the central-collineation property `{x,σ(x),o}` are always
+   collinear, so the *first completed mirror pair kills `o`*. Gap: if P1's first post-opening move
+   is `o` itself, P2 is thrown out of the mirror into `{a,b,o}` with no automatic continuation. (NOT
+   a clean P2 loss — once `o` is played every `σ`-pair also collides with `o`, so P1 can't steal the
+   mirror either — but P2's strategy is undefined there.)
+2. **Central-symmetry residual route.** After an affine reply, `σ_c(x)=2c−x` with `c` on line
+   `x1x2` (dead). `σ_c ∈ Aut(H')` with one fixed point `c` (dead), pairing the ordinary-cap
+   structure — **except** on the two lines through `c` in directions `a` and `b`, where `x` and
+   `σ_c(x)` form a burned-direction pair ⇒ illegal reply. Failure set = exactly those two lines
+   (`q` points each).
+
+Closing either failure set is the theorem. This is far more tractable than "involutions have fixed
+subspaces." Because it might genuinely FAIL, treat `PG(2,{5,7,9})` as a falsification test, not a
+confirmation.
+
+### R5. Feasibility — the plan is too pessimistic
+
+- **Caps are small.** Max cap in `PG(2,q)` = `q+1` (q odd) / `q+2` (q even); in `PG(3,q)` = `q^2+1`
+  (ovoid). So game DEPTH is tiny: `PG(2,9)` is depth ≤ 11 on 91 points, `PG(3,3)` depth ≤ 10 on 40.
+  All easily solvable — push the table well past `q=5`.
+- **`PGL(m+1,q)` is 2-transitive on points** ⇒ the opening *pair* `{a,b}` is a single orbit ⇒ **all
+  second replies are game-equivalent** (identical Grundy). This kills the "classify winning second
+  replies" deliverable — they are all the same value. Orbit branching starts only at cap size >
+  `m+2`.
+- **q=2 column is free:** `PG(m,2)` cap game ≡ `F_2^{m+1}` sum-free game. `PG(4,2)=F_2^5`. **Import
+  from the existing sum-free solver**, don't re-derive.
+- q=2, `m≥3` caveat: a linear involution `1+N` in `GL(k,2)` has fixed space `dim ≥ k/2` — too big to
+  block from one opening pair, so `PG(m,2)` `m≥3` needs a non-linear or non-pairing strategy. This is
+  the hard q=2 frontier.
+
+### R6. Reprioritized sequence
+
+0. Import `PG(m,2)` outcomes from the `F_2^{m+1}` sum-free solver (free data).
+1. Solve `PG(2,q)` for `q=3,5,7,8,9` exactly — falsification test for the q-odd case.
+2. Write the q-even planar lemma (R3) + verify on `PG(2,{2,4,8})`.
+3. Attack the q-odd kernel (R4): handle the center move / the two burned-direction lines.
+4. `PG(3,3)`, `PG(4,2)` for the `m≥3` picture.
+
+Attack 5 (counterexample search) is now co-equal with the proof attacks, not last. Attack 3
+(plane-first induction) is weakest — deprioritize behind 1/2.
+
 ## Existing Context To Read First
 
 Read these notes before doing new work:
@@ -201,9 +293,10 @@ deletes only a line, not a hyperplane, unless `m=2`.
 
 Special case `PG(2,q)`:
 
-- Deleting the opening line leaves `q^2` affine points.
-- This case may be directly reducible to `AG(2,q)`-style pairing.
-- Prove `PG(2,q)` first if possible; it may expose the right geometry.
+- Deleting the opening line leaves `q^2` affine points — but the residual game is the CONSTRAINED
+  affine game of R2 (two burned parallel classes), not plain `AG(2,q)`. See R2/R3/R4.
+- q even: reducible now (R3, translation mirror survives the constraint). q odd: obstructed (R4).
+- Prove `PG(2,q)` first; it exposes the right geometry.
 
 ### Attack 3: Plane-First Proof
 
@@ -256,12 +349,14 @@ For `PG(2,q)`:
 - P1 opens `a`.
 - P2 may reply `b`.
 - The rest of line `ab` is forbidden.
-- Remaining points form `AG(2,q)` after deleting line `ab`.
+- Remaining points form `AG(2,q)` after deleting line `ab`, but the residual GAME carries two burned
+  parallel classes (R2) — it is not the plain affine cap game.
 
-Question:
+Question (refined by R2–R4):
 
-> Is there a P2 reply `b` such that the residual cap game on the affine complement is exactly, or
-> strategically equivalent to, the affine cap game?
+> The residual is affine caps with ≤1 point per direction-`a`/`b` line. For q even a translation
+> mirror `τ_v` (`v ∉ {dir a, dir b}`) fpf-pairs it (R3). For q odd every candidate involution leaves
+> a live fixed point or breaks on the two burned-direction lines through the center (R4). Close that.
 
 For `q=2`:
 
