@@ -123,6 +123,39 @@ needs to find the real law.
 
 ## Progress
 
+### ★ RESUME HERE (next session) — Codex is OUT OF TOKENS; you own BOTH lanes now
+
+Codex ran out of tokens end of `--5`. The next session inherits **compute + the proofs** (no longer
+just "oracle for Codex"). State of the open problem:
+
+- **Two conjectures, both very likely true, neither proven.** (1) Warm-up `𝒢(Z3×Z_p)=∗1` (p≥7);
+  (2) main `Z3²×Z_p=P` (p≥7). Both reduce to a clean **spectral criterion**: a position's Grundy is
+  forced because its child-value spectrum *contains* the needed value and *misses* another. See the
+  full picture in [`../2026-07-05-sumfree-nimber-engine.md`](../2026-07-05-sumfree-nimber-engine.md)
+  and Codex's reasoning in [`../2026-07-05-codex-findings-sumfree.md`](../2026-07-05-codex-findings-sumfree.md)
+  (Round-4/5 sections).
+- **Warm-up reduction (Codex's, solid):** root has 3 orbits; order-3 singleton `{p}=∗0`; so root`=∗1`
+  ⟺ the two-move positions `G({p,1})=G({p,3})=∗1`. Each `=∗1` ⟺ its child spectrum has `∗0`, lacks `∗1`.
+  Confirmed by engine to p=29.
+- **`{p,1}` branch:** clean AP-child `(p+1)/2`, reflection `ρ(x)=p+1-x`, finite (≤7) failure set
+  (Codex). *Not stress-tested past p=19 — CHECK first.*
+- **`{p,3}` branch is the hard one (my --5b negatives):** `c=6-p` is NOT a uniform P-child (`∗4` at
+  p=29), and the mirror-certificate idea fails (P-replies aren't reflection-invariant). Genuinely
+  non-mirror. Needs a different idea.
+- **The real crux (both branches, unproven):** the "**missing ∗1** in the child spectrum," uniformly
+  in p. This is the classic-hard part (nimber non-values across an infinite family; the values aren't
+  periodic). No line-of-sight proof.
+- **Tools ready:** `cmd_grundy/grundy.go` — fast (parallel) + memory-lean (fingerprint arena) nimber
+  engine; `./grundy <mods> [--start a,b,c;..] [--children]` (`--children` = child-value spectrum).
+  Validated on 50+ values. Confidence estimate (mine): conjectures true ~90%+; a *rigorous* warm-up
+  proof ~45–55%; r₃=2 ~25–35%.
+- **Next moves:** (a) verify `{p,1}` AP-child holds past p=19; (b) attack the "missing ∗1" — look for a
+  structural invariant on the armed components forcing the spectral gap, not more data points;
+  (c) for r₃=2, the orbit-child criterion (p=5 socle-child `∗0`→N; p=7 all `∗2`→P). Brute has no cutoff
+  and large-p is expensive — spend effort on structure, not sweeps.
+
+---
+
 ### 2026-07-05 — session `c5c3bf7d` (`mi`): A1 DELIVERED (nimber engine), Codex tasked
 
 **Box freed:** the G(17) queens nimber run **finished** (`G(17)=∗2`, first-player win, a new A344227
