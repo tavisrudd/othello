@@ -798,6 +798,133 @@ fn solve_escape(q: usize) {
     println!("      min-escape representative S3 (cells) = {:?}", rep);
 }
 
+// ---- BOUNDARY mode: test "size-4 N  <=>  embeds in an odd maximal cap" at larger q ----
+// The boundary characterization (validated q<=9, 2026-07-06-boundary-char-verify.py) says a
+// size-4 grid position's GAME value is a purely STATIC geometric property: N iff it extends to
+// an odd maximal cap.  If it still holds at q=13,17, `bad` is arc-computable (no game recursion)
+// and the falsification watch can push past the q=19 exhaustive wall.  This mode computes, over
+// all canonical size-4 classes, (a) the true game value and (b) emb = "extends to an odd maximal
+// cap", and reports mismatches.  Both are G-invariants, so per-canonical-class is exact.
+
+// emb(occ) = does `occ` extend to an ODD maximal cap?  Existential over maximal leaves' parity.
+// Memoized on canon (a G-invariant).  Independent of the game minimax memo.
+fn emb_rec(
+    b: &Board,
+    emb: &mut FnvMap<u128, bool>,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> bool {
+    let key = b.canon(occ);
+    if let Some(&v) = emb.get(&key) {
+        return v;
+    }
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+    }
+    let mut any = false;
+    for w in 0..MAXW {
+        if avail[w] != 0 {
+            any = true;
+            break;
+        }
+    }
+    let v = if !any {
+        occ.len() % 2 == 1 // maximal cap: contributes iff odd
+    } else {
+        let mut found = false;
+        'outer: for w in 0..MAXW {
+            let mut bits = avail[w];
+            while bits != 0 {
+                let tz = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                let z = w * 64 + tz;
+                let mut nchosen = *chosen;
+                set_bit(&mut nchosen, z);
+                let mut nforb = *forbidden;
+                mask_or(&mut nforb, &b.rc_mask[z]);
+                for &x in occ.iter() {
+                    mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+                }
+                occ.push(z as u16);
+                let r = emb_rec(b, emb, occ, &nchosen, &nforb);
+                occ.pop();
+                if r {
+                    found = true;
+                    break 'outer;
+                }
+            }
+        }
+        found
+    };
+    emb.insert(key, v);
+    v
+}
+
+fn solve_boundary(q: usize) {
+    let b = Board::new(q);
+    // main game solve (full expansion) => memo has N/P for every class
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    let mut occ0: Vec<u16> = Vec::new();
+    let root_n = s.g(&mut occ0, &empty, &empty);
+
+    // enumerate canonical size-4 classes
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    {
+        let mut visited: HashSet<u128> = HashSet::new();
+        let mut occ4: Vec<u16> = Vec::new();
+        enumerate(&b, 4, &mut occ4, &empty, &empty, &mut visited, &mut frontier);
+    }
+    let mut emb: FnvMap<u128, bool> = FnvMap::default();
+    let mut nclasses = 0u64;
+    let mut n_count = 0u64; // #N classes
+    let mut emb_count = 0u64; // #emb-in-odd-maximal classes
+    let mut mism = 0u64; // #classes where game-N != emb
+    let mut mism_rep: Vec<u16> = Vec::new();
+    for (occ, chosen, forbidden) in &frontier {
+        let key = b.canon(occ);
+        let gv = *s.memo.get(&key).expect("size-4 class must be memoized");
+        let mut occm = occ.clone();
+        let e = emb_rec(&b, &mut emb, &mut occm, chosen, forbidden);
+        nclasses += 1;
+        if gv {
+            n_count += 1;
+        }
+        if e {
+            emb_count += 1;
+        }
+        if gv != e {
+            mism += 1;
+            if mism_rep.is_empty() {
+                mism_rep = occ.clone();
+            }
+        }
+    }
+    let outcome = if root_n { "N" } else { "P" };
+    let verdict = if mism == 0 { "HOLDS" } else { "FAILS" };
+    println!(
+        "q={:>3}  root={}  size4-classes={}  game-N={}  emb-odd-maximal={}  mismatches={}  \
+         boundary-char={}",
+        q, outcome, nclasses, n_count, emb_count, mism, verdict
+    );
+    if mism > 0 {
+        let rep: Vec<(usize, usize)> =
+            mism_rep.iter().map(|&c| (c as usize / q, c as usize % q)).collect();
+        println!("      first mismatch representative (cells) = {:?}", rep);
+    }
+}
+
 fn solve(q: usize, full: bool) {
     let b = Board::new(q);
     let mut s = Solver {
@@ -855,11 +982,18 @@ fn main() {
         }
         return;
     }
+    if args[1] == "boundary" {
+        for a in &args[2..] {
+            let q: usize = a.parse().expect("q must be an integer");
+            solve_boundary(q);
+        }
+        return;
+    }
     let full = match args[1].as_str() {
         "outcome" => false,
         "defect" => true,
         _ => {
-            eprintln!("mode must be 'outcome' | 'defect' | 'escape' | 'par'");
+            eprintln!("mode must be 'outcome' | 'defect' | 'escape' | 'boundary' | 'par'");
             std::process::exit(2);
         }
     };

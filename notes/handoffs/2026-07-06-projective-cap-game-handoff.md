@@ -661,13 +661,15 @@ q=13→46/73, **q=17→5/157**. Extended the escape/bad-parity table past the pu
   every size-4 P ⇒ min-escape = total = 211 (bad=0, pure parity at low sizes) — the escape run
   gives exactly `211:27`, so two independent code paths agree. The margin swings 5 (q=17) → 211
   (q=19), proving it is arc-driven and unpredictable.
-- **Net:** the counting/area routes of (A) are dead; the conjecture is protected only by
+- **Boundary characterization "size-4 N ⟺ embeds in odd maximal cap" TESTED (`boundary` mode) —
+  FAILS at q=11,13,17** (holds q≤9 only): only `N ⟹ embeds` survives; embedding becomes
+  near-universal (all 192 classes embed at q=13, all 735 at q=17) so `bad` is NOT arc-computable.
+  Closes the cheap-falsification-shortcut idea.
+- **Net:** the counting/area/arc routes of (A) are dead; the conjecture is protected only by
   exhaustive checks (walled at q=19), not by any margin. **Live routes:** (i) a direct
-  adaptive-strategy proof; (ii) a finer-than-mod-2 invariant surviving `bad` odd; (iii) test
-  whether the "size-4 N ⟺ embeds in odd maximal cap" boundary characterization still holds at
-  q=13,17 — if so `bad` is arc-computable (no game recursion) and falsification can push past q=19
-  cheaply. Artifacts: `escape` mode in `2026-07-06-grid-cap-solver.rs`, `-escape-spotcheck.py`,
-  `-escape-q17.log`, `-escape-q19.log`, `-escape-margin-erratic.md`.
+  adaptive-strategy proof; (ii) a finer-than-mod-2 invariant surviving `bad` odd. Artifacts:
+  `escape` + `boundary` modes in `2026-07-06-grid-cap-solver.rs`, `-escape-spotcheck.py`,
+  `-escape-q17/q19.log`, `-boundary-q17.log`, `-escape-margin-erratic.md`.
 
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
 CLOSED at q=19 (memory wall), single-involution re-closed from the frame,
@@ -689,10 +691,12 @@ DEAD.** Live routes, priority order:
   (i) a **direct adaptive-strategy** proof (relaxed adaptive reaches a symmetric position at q≤13,
   `-adaptive-resym-test.py` — find a maintainable invariant); (ii) a **finer-than-mod-2 invariant**
   that survives `bad` odd and explains why `escape ≥ 1` persists even when `bad ≈ total`.
-  **Cheap falsification-extension lead:** test whether the boundary characterization "size-4 N ⟺
-  embeds in an odd maximal cap" (validated q≤9) still holds at q=13,17 — if so `bad` is computable
-  from **arc geometry alone** (no game recursion), which could push the min-escape falsification
-  watch well past the q=19 exhaustive wall.
+  **Falsification-shortcut lead — TESTED and CLOSED (session 5, `boundary` mode).** The boundary
+  characterization "size-4 N ⟺ embeds in an odd maximal cap" (validated q≤9) **FAILS at q=11,13,17**:
+  only `N ⟹ embeds` survives, the converse dies as odd maximal caps proliferate (embed-in-odd-maximal
+  vs game-N classes = 80/50 at q=11, **192/61** at q=13 with all 192 embedding, **735/671** at q=17
+  with all embedding). So `bad` is **not** arc-computable and there is no cheap way past the q=19
+  exhaustive wall; `bad` stays a genuine game quantity.
 - **(B) DONE — compiled parallel fixed-arena solver** (`2026-07-06-grid-cap-solver.rs`,
   `2026-07-06-gridcap-rust-ladder.md`): ladder re-confirmed P through q=19, margin grows 4→6,
   exhaustive wall at q=23 (>10⁹ classes, ~×9/step). Reusable tool. Pushing q≥23 needs a

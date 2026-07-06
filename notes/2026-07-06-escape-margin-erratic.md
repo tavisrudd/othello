@@ -102,6 +102,31 @@ everywhere) — while q=17 is the thinnest margin seen (5, `bad ≈ total`). The
 **5 (q=17) to 211 (q=19)** is the sharpest statement that it is arc-driven and unpredictable,
 **not** a monotone buffer.
 
+## The boundary characterization fails at q≥11 (the arc shortcut is closed)
+
+The escape-count-lemma reframed `bad` as *arc-theoretic* via the boundary characterization
+*"size-4 `N` ⟺ embeds in an odd maximal cap"* (validated q≤9), which would make `bad` computable
+from arc geometry alone — a potential cheap way past the exhaustive wall. The `boundary` mode
+(`2026-07-06-grid-cap-solver.rs`) tests it over all canonical size-4 classes:
+
+| q | size-4 classes | game-`N` | embed-in-odd-maximal | mismatches | characterization |
+|---:|---:|---:|---:|---:|---|
+| 7 | 7 | 0 | 0 | 0 | holds (vacuous) |
+| 9 | 27 | 5 | 5 | 0 | **holds** |
+| 11 | 80 | 50 | 80 | 30 | **FAILS** |
+| 13 | 192 | 61 | **192** (all) | 131 | **FAILS** |
+| 17 | 735 | 671 | **735** (all) | 64 | **FAILS** |
+
+`mismatches = embed − N` exactly, so only the forward direction **`N ⟹ embeds`** survives; the
+converse **`embeds ⟹ N`** dies for q≥11. It is a small-`q` artifact: below q=11 odd maximal caps
+are so scarce that embedding in one = being forced into it (= `N`); at/above q=11 a position can
+embed in an odd maximal cap yet be `P` (the opponent steers to an *even* maximal cap). By q=13
+**every** size-4 position embeds in some odd maximal cap, so embedding is near-universal and
+carries no value information. `bad` is therefore **not** arc-computable for q≥11 (`bad_game ≠
+bad_arc`); the arc-geometry reframing and its falsification shortcut are closed. The only
+salvage — the contrapositive `only-even-completions ⟹ P` (a valid P-sufficiency test) — is
+vacuous by q=13.
+
 ## Implications for the proof (route A reassessment)
 
 - **Counting/area route of (A) is closed.** `bad` is Θ(q²) (≈ total at q=17), so no upper bound
@@ -116,10 +141,14 @@ everywhere) — while q=17 is the thinnest margin seen (5, `bad ≈ total`). The
   invariant), or (ii) a **finer invariant** than mod-2 parity that survives when `bad` is odd and
   explains the persistent `escape ≥ 1` despite `bad ≈ total`. (iii) Pushing exhaustive
   falsification past q=19 needs a bigger box or a tighter key.
-- A geometric shortcut: **if** the boundary characterization "size-4 N ⟺ embeds in an odd
-  maximal cap" (validated q≤9) still holds at q=13,17, then `bad` is computable from *arc
-  geometry alone* (no game recursion), which could push the falsification watch past q=19 far
-  more cheaply. Worth testing the characterization at q=13,17 next.
+- ~~A geometric shortcut via the boundary characterization "size-4 N ⟺ embeds in an odd maximal
+  cap".~~ **TESTED and CLOSED** (`boundary` mode, this session). The characterization holds only
+  q≤9; it **FAILS at q=11,13,17**. Only `N ⟹ embeds` survives — the converse dies as odd maximal
+  caps proliferate: (embed-in-odd-maximal vs game-N) classes = 80/50 (q=11), **192/61** (q=13, all
+  192 embed), **735/671** (q=17, all embed). Embedding becomes near-universal and informationless,
+  so `bad` is **not** arc-computable and there is no cheap falsification shortcut. (The
+  contrapositive `only-even-completions ⟹ P` is a valid P-sufficiency test but vacuous by q=13,
+  where every position embeds in an odd maximal cap.) `bad` stays a genuine game quantity.
 
 ## Artifacts
 

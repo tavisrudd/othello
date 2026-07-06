@@ -90,17 +90,24 @@ The frame reduction + total lemma turn the whole planar odd conjecture into one 
 > `PG(2,q) = P  ⟺  bad(S₃) ≤ q² − 9q + 20  for every size-3 grid position S₃`
 > (equivalently `bad(S₃) < total`, i.e. `escape ≥ 1`).
 
-`bad(S₃)` = the number of cells `w` such that `S₃∪{w}` lies in some **odd maximal cap** (odd
-complete arc through the burned pair). This is rigorous because of a **validated boundary
-characterization** (`2026-07-06-boundary-char-verify.py`, exhaustive q≤9, zero mismatches):
+`bad(S₃)` = the number of cells `w` such that `S₃∪{w}` is a **game-N** size-4 position.
 
-> a size-4 grid position `W` is `N` ⟺ `W` embeds in an **odd maximal cap** (`∃` odd maximal cap
-> `⊇ W`).
+> **CORRECTION 2026-07-06 (`2026-07-06-escape-margin-erratic.md`, `boundary` mode).** The tempting
+> reframing — "`bad` = # cells embedding in an **odd maximal cap**, a purely static arc property"
+> — rested on the boundary characterization *"size-4 `N` ⟺ embeds in an odd maximal cap"*
+> (validated q≤9). **Re-checking at larger q, it FAILS at q=11,13,17.** Only the forward direction
+> **`N ⟹ embeds`** survives; the converse dies as odd maximal caps proliferate: classes embedding
+> in *some* odd maximal cap vs game-N are 80 vs 50 (q=11), **192 vs 61** (q=13, *all* 192 embed),
+> **735 vs 671** (q=17, *all* embed). So embedding becomes **near-universal and near-informationless**,
+> `bad_game ≠ bad_arc` for q≥11, and `bad` is **not arc-computable** — killing the "collapse to arc
+> geometry" hope and the falsification-shortcut it implied. `bad` stays a genuine game quantity
+> (= total − escape), computed directly by the `escape` mode.
 
-I.e. the game value of a size-4 position is a purely **static geometric** property — whether it
-sits inside an odd complete arc — so `bad(S₃) = #{w ∈ FF : S₃∪{w} ⊆ some odd maximal cap}` is
-arc-theoretic, not game-recursive. (Verified q≤9; at larger `q` deeper defects may enter and it
-should be re-checked, but if it persists it collapses the whole crux to arc geometry.)
+The (q≤9-only) characterization said the game value of a size-4 position is a static geometric
+property — whether it sits inside an odd complete arc. That is a small-`q` artifact: below q=11
+odd maximal caps are so scarce that embedding in one = being forced into it (= `N`); at/above q=11
+a position can embed in an odd maximal cap yet still be `P` (the opponent steers to an even maximal
+cap), so embedding no longer determines the value.
 
 So the crux is a finite **arc-theoretic upper bound**: the cells of `FF` covered by odd maximal
 caps through `S₃` never exhaust all `q²−9q+21` legal extensions. The parity proof handles the
