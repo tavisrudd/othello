@@ -47,8 +47,8 @@ contains both `x` and `σ_c(x)`: a row/col 2-edge forces `x` onto the center's r
 and `σ_c(w)` lies on it too, so `{x,w,σ_c(w)} ⊆ S∪{x}` is a collinear triple — contradiction. ∎
 
 Machine-verified with **zero violations** over all `σ_c`-symmetric legal positions reachable
-by bulk-only play (`2026-07-05-sigma-lemma-test.py`): `q = 3,5,7,9,11` (1.5M checks at q=11;
-q=13 running), including the composite field `q=9`.
+by bulk-only play (`2026-07-05-sigma-lemma-test.py`): `q = 3,5,7,9,11,13` (13.4M checks at
+q=13), including the composite field `q=9`.
 
 ## The obstruction: the two special lines poison the mirror for q ≥ 9
 
