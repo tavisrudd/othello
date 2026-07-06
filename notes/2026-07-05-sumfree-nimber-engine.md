@@ -319,3 +319,82 @@ Codex's induction runs between one-defect and two-defect *colored* positions. Tw
   color-2-monochromatic sets exist) has **zero** ∗1 among them, and the general ∗1 class is polychromatic
   (`{1,3,7,9,20}` spans colors `{0,1,2}`). So `{2,11,20}` is a small-`p` artifact, not a color law; the
   monovariant is not F₃-color. Recorded to save Codex the same dead end.
+
+---
+
+## 2026-07-06 (session `--4`, `mi`): the r₃=2 MAIN conjecture reduces to TWO 2-element P-lemmas — an EXISTENTIAL target (easier than the warm-up)
+
+While Codex works the warm-up's ∗1-absent half, the compute lane picked up the **main** conjecture
+`𝒢(Z3²×Z_p) = ∗0` (P) for `p ≥ 7` (`∗2`/N at `p=5`) — the banner's "PARALLEL / NEXT TARGET". The
+result: a **rigorous reduction** that turns the whole-board P-proof into two concrete 2-element P-lemmas,
+and — crucially — the target is now **existential** ("each opening has *a* good answer"), not the
+warm-up's universal ∗1-absence. This sidesteps the entire closed mirror-method wall of the
+[abelian theorem](2026-07-05-sumfree-abelian-theorem.md) §"open slice" (every *whole-board* involution
+mirror is dead for `r₃≥2`; but those all attacked `∅`, not the post-opening residual).
+
+### The reduction (rigorous — a theorem, no compute needed)
+
+`Aut(Z3²×Z_p) = GL(2,3) × Z_p^*` for `p≠3` (coprime factors), `|Aut| = 48(p−1)` (engine headers confirm:
+192,288,480 at p=5,7,11). It has **exactly 3 orbits on `G\{0}`**: **socle** `(v,0)` `v≠0`, **coprime**
+`(0,c)` `c≠0`, **mixed** `(v,c)` both `≠0` (each factor acts transitively on its part). Nimber is
+`Aut`-invariant, so every first-move child `{g}` has nimber depending only on its orbit ⇒
+
+> **`𝒢(root) = mex{ n_socle, n_coprime, n_mixed }`**, hence
+> **`Z3²×Z_p = P ⟺ 0 ∉ {n_socle, n_coprime, n_mixed} ⟺` each of the 3 openings `{s}` is an N-position
+> `⟺` each opening has a P-reply `{s,t}=∗0`.**
+
+All three conditions are **existential** (a position is N iff it has *one* move to ∗0). Contrast the
+warm-up, whose criterion `𝒢=∗1` needed the *universal* "∗1 absent from the whole child spectrum".
+
+### Collapse to TWO lemmas (the mixed opening reuses the socle P-position)
+
+Engine data (p=7): the P-replies to each opening are
+- **socle** `(0,1,0)` → all `(v,c)` with `v ∉ ⟨(0,1)⟩` and `c≠0` (36 = 6×6 mixed off-line; matches the
+  earlier Go `--openings` find);
+- **coprime** `(0,0,1)` → 18 replies (mixed with `c∈{1,3}`, all 8 `v≠0`; plus pure `(0,0,c)`, `c∈{3,5}`);
+- **mixed** `(1,0,1)` → 18 replies, **including the socle element `(0,1,0)`**.
+
+Because `{(0,1,0),(1,0,1)}` is reachable from BOTH the socle opening (add mixed) and the mixed opening
+(add socle) — the **same** ∗0 position — a single P-position certifies two openings. So the conjecture
+collapses to two 2-element P-lemmas, with `p`-independent representatives (fiber coord `c=1`):
+
+> **Lemma A.** `{socle, mixed} = {(0,1,0),(1,0,1)} = ∗0` ⟹ socle opening N **and** mixed opening N.
+> **Lemma B.** `{coprime, mixed} = {(0,0,1),(0,1,1)} = ∗0` ⟹ coprime opening N.
+> Both ⟹ all three `n_• ≠ 0` ⟹ `mex = 0` ⟹ **`Z3²×Z_p = P`**. ∎ (given A,B)
+
+(Legality of the certifying moves is immediate — A/B are themselves sum-free 2-element positions.)
+
+### The `p=5` exception is SHARP and localizes to Lemma A (r₃=2 analogue of the warm-up's `p=5` break)
+
+| position | `p=5` | `p=7` | `p≥7` (conj.) |
+|----------|-------|-------|---------------|
+| `{socle,mixed}`   (Lemma A) | **∗3** | **∗0** | ∗0 |
+| `{coprime,mixed}` (Lemma B) | ∗0    | ∗0    | ∗0 |
+
+At `p=5` **only Lemma A breaks** (`∗3` not `∗0`): the socle opening then has *no* P-reply, so it is itself
+`∗0` (P) ⇒ root `= mex{0,1,1} = ∗2` (N). At `p≥7` both hold ⇒ `mex{≠0,≠0,≠0} = 0` (P). This is the exact
+mirror of the warm-up story where `{p,1}=𝒢({p,3})=∗1` for `p≥7` but `∗3` at `p=5` (the `p=5` singleton
+drop). Lemma B holds *even at `p=5`* — it is the "always-P" leg; **Lemma A carries the whole exception.**
+
+### Status of the two lemmas — the mirror is residual/adaptive (Codex's proof lane)
+
+- Verified by the engine: `p=5,7` (both lemmas). `p=11,13` running (2-element solves in `|G|=99,117`
+  are slow — no Grundy cutoff; `p=11` Lemma A ≈ tens of minutes).
+- **No `Aut(G)` involution fixes `{s,t}`** (s order-3, t order-3p ⇒ any set-stabiliser fixes both
+  pointwise ⇒ identity). So Lemma A/B's mirror is **not** a global group involution — it is a
+  board-dependent residual pairing (exactly the affine-capset move-then-reflect shape, and the abelian
+  note's "no single global involution" for `r₃≥2`).
+- **Proof hint (why the post-opening residual may succeed where `∅` fails):** the socle seed `s=(0,1,0)`
+  is order-3, so playing it **forbids `−s=2s`** — it *consumes one O₃ pair* of the four in `Z3²`. The
+  whole-board negation mirror from `∅` dies at all 4 O₃ pairs; from `{s,t}` one is already neutralised,
+  which is precisely the resource Lemma 4 spends per pair. Whether the remaining O₃ structure + the mixed
+  seed `t` admits an adaptive negation-mirror is the open sub-problem — handed to Codex.
+
+### Why this is the higher-value push
+
+The main conjecture (rank-2) via this route is **structurally easier** than the warm-up (rank-1):
+existential P-replies vs universal ∗1-absence, and a 2-lemma target both of whose positions are tiny and
+`p`-uniform. Tools: `grundy … --start "s;t"` (nimber of any 2-element position), `--children --preply`
+(the full P-reply set of an opening). Script `../2026-07-06-r32-reply-mirror.py` extracts Bob's
+winning-reply function from a P-position (feeds the adaptive-mirror search). **Compute owns the
+orbit-child + P-reply data; Codex proves Lemma A/B.**

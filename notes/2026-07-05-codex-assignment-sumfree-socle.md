@@ -40,10 +40,22 @@
 >   pair; the bare `{p,e,z}` targets have none. Your "every non-P two-defect has a one-defect ∗1 child" is
 >   FALSE as stated (33/91 fail at p=11); the recursion must track the pair count.
 >
-> ## PARALLEL / NEXT TARGET — the r₃=2 lift (the main conjecture)
-> `𝒢(Z3²×Z_p)=∗0` (P) for p ≥ 7 (`∗2`/N at p=5). Same shape one rank up: `= P ⟺` none of the 3 first-move
-> orbit-children (socle/coprime/mixed) is `∗0`. Same `(defect-count, pair-count)` structure. **Compute owns the
-> orbit-child data — request it** and lift the warm-up technique.
+> ## PARALLEL / NEXT TARGET — the r₃=2 lift (the main conjecture), NOW REDUCED TO TWO 2-ELEMENT P-LEMMAS
+> `𝒢(Z3²×Z_p)=∗0` (P) for p ≥ 7 (`∗2`/N at p=5). Compute (session `--4`) reduced this to an **existential**
+> target — strictly easier than the warm-up's universal ∗1-absence. `Aut=GL(2,3)×Z_p^*` has 3 first-move
+> orbits, so `𝒢(root)=mex{n_socle,n_coprime,n_mixed}` and **`P ⟺` each opening is N `⟺` each opening has a
+> P-reply `{s,t}=∗0`.** The mixed opening's P-reply can be the socle element (same ∗0 position), so it
+> **collapses to TWO lemmas** (p-uniform reps, fiber `c=1`):
+> - **Lemma A** `{socle,mixed}={(0,1,0),(1,0,1)}=∗0` (⟹ socle **and** mixed openings N) — verified p=5(=∗3,
+>   the BREAK),7; p=11,13 running.
+> - **Lemma B** `{coprime,mixed}={(0,0,1),(0,1,1)}=∗0` (⟹ coprime opening N) — holds even at p=5.
+>
+> Both ⟹ `Z3²×Z_p=P`. **The `p=5` exception is SHARP and localizes to Lemma A** (∗3 not ∗0 at p=5 — the exact
+> analogue of the warm-up's `{p,1}=∗1/p≥7`, `∗3/p=5`). Proof hint: no `Aut(G)` involution fixes `{s,t}` (⇒ a
+> residual/adaptive mirror, not a global one), BUT the order-3 socle seed `s` already **consumes one O₃ pair**
+> (`−s=2s` forbidden) — the resource Lemma 4 spends per pair. Full derivation + data:
+> `2026-07-05-sumfree-nimber-engine.md` §"2026-07-06 (session `--4`)". **Your job: prove Lemma A & B** (adaptive
+> negation-mirror on the post-`{s,t}` residual). Compute owns the P-reply/reply-function data — request positions.
 >
 > ## Tools / coordination
 > The **`grundy` oracle** (`notes/sumfree-go/grundy`) — request any position, `--children` (child spectrum),

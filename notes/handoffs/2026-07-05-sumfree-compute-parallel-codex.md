@@ -125,6 +125,23 @@ needs to find the real law.
 
 ### ★ RESUME HERE (next session)
 
+**2026-07-06 UPDATE (session `--4`, `mi`): the MAIN conjecture (r₃=2) reduced to TWO 2-element P-lemmas — an
+EXISTENTIAL target, easier than the warm-up.** While Codex works the warm-up ∗1-absent proof, compute took the
+banner's "PARALLEL / NEXT TARGET" — `𝒢(Z3²×Z_p)=P` (p≥7). **Rigorous reduction:** `Aut=GL(2,3)×Z_p^*` ⇒ 3
+first-move orbits ⇒ `𝒢(root)=mex{n_socle,n_coprime,n_mixed}` ⇒ **`P ⟺` each opening is N `⟺` each opening has
+a P-reply `{s,t}=∗0`** (existential — one good answer each, vs the warm-up's *universal* ∗1-absence). The mixed
+opening reuses the socle P-position, collapsing it to **Lemma A `{socle,mixed}=∗0`** (⟹ socle+mixed N) and
+**Lemma B `{coprime,mixed}=∗0`** (⟹ coprime N); both ⇒ P. **The `p=5` exception is SHARP: only Lemma A breaks
+(∗3 not ∗0 at p=5)** — exact analogue of the warm-up's `{p,1}=∗1/p≥7, ∗3/p=5`. Verified p=5,7 (both engine +
+p=5 discriminator); **p=11,13 running** (slow 2-element solves). No `Aut(G)` involution fixes `{s,t}` ⇒ the
+mirror is residual/adaptive (Codex's lane); proof hint = the order-3 socle seed **consumes one O₃ pair**
+(`−s=2s` forbidden), the exact resource that killed the whole-board mirror for r₃≥2. Full writeup:
+[nimber-engine note](../2026-07-05-sumfree-nimber-engine.md) §"2026-07-06 (session `--4`)"; Codex banner's
+r₃=2 target rewritten to the two lemmas; new tool `grundy --preply` (full P-reply dump) + script
+`../2026-07-06-r32-reply-mirror.py` (extracts Bob's winning-reply function). **NEXT (compute):** land p=11,13
+Lemma A/B; extract the reply function to hand Codex the adaptive-mirror structure; the same orbit reduction
+lifts to `Z3³×Z_p`/`Z9×Z3×Z_p` (r₃=3, more orbits). Below is the (still-current) `--3` state.
+
 **2026-07-06 UPDATE (session `--3`): ∗1-absent half LOCALIZED; the fixed-pairing route is CLOSED.** The
 compute lane mapped the obstruction and killed the two natural elementary routes (writeup:
 [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md) §"2026-07-06 (session `--3`)"; scripts

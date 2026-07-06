@@ -712,6 +712,7 @@ func main() {
 	parPly := 10
 	childrenMode := false
 	compdumpMode := false
+	preplyDump := false
 	for i := 2; i < len(os.Args); i++ {
 		switch os.Args[i] {
 		case "--start":
@@ -721,6 +722,8 @@ func main() {
 			}
 		case "--children":
 			childrenMode = true
+		case "--preply":
+			preplyDump = true
 		case "--compdump":
 			compdumpMode = true
 		case "-j":
@@ -809,6 +812,16 @@ func main() {
 			strings.Join(parts, " "), mexv, legal.popcount())
 		if len(zeros) > 0 && len(zeros) <= 12 {
 			fmt.Printf("  moves to *0 (P-children): %s\n", strings.Join(zeros, " "))
+		}
+		if preplyDump && len(zeros) > 0 {
+			// Full P-reply dump (one element per line, "a,b,c") for structural
+			// analysis of the opening's P-replies; gated so default output is unchanged.
+			fmt.Printf("  PREPLY-COUNT %d\n", len(zeros))
+			for _, z := range zeros {
+				// z is Go-slice form "[a b c]"; re-render as comma-joined coords.
+				z = strings.Trim(z, "[]")
+				fmt.Printf("  PREPLY %s\n", strings.Join(strings.Fields(z), ","))
+			}
 		}
 		fmt.Printf("  nodes=%d  memo=%d  time=%.2fs  rss=%dMB\n",
 			atomic.LoadInt64(&s.nodes), s.memoSize(), time.Since(t0).Seconds(), rssMB())
