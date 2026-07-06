@@ -48,7 +48,15 @@
 > **collapses to TWO lemmas** (p-uniform reps, fiber `c=1`):
 > - **Lemma A** `{socle,mixed}={(0,1,0),(1,0,1)}=∗0` (⟹ socle **and** mixed openings N) — verified p=5(=∗3,
 >   the BREAK),7; p=11,13 running.
-> - **Lemma B** `{coprime,mixed}={(0,0,1),(0,1,1)}=∗0` (⟹ coprime opening N) — holds even at p=5.
+> - **Lemma B** `{coprime,mixed}={(0,0,1),(0,1,1)}=∗0` (⟹ coprime opening N) — holds p=5,7; **p=11 under verify**.
+>
+> > **⚠ 2026-07-06 (compute session `--5`) — your zero-sum-triple mechanism for Lemma B FAILS at p=11. DO NOT
+> > write it up as proven.** Verified on the full `grundy` engine (no 60s cap): the triple
+> > `{s,t,−s−t}={(0,0,1),(0,1,1),(0,2,9)}` at p=11 is **`∗6`**, NOT `∗1`, with a **mixed** child spectrum
+> > `{*0:30 *1:2 *2:1 *3:4 *4:30 *5:1 *8:12}` — so "every child of the zero-sum triple is P" is **false at p=11**
+> > (it was a p=7 coincidence — the same verified-then-fails trap as the AP-child `6−p` at p=29). The "reply
+> > `r=−s−t`" strategy therefore does not win uniformly. Whether **Lemma B itself** (`{s,t}=∗0`) survives at p=11
+> > is under direct verification now; if it does, it needs a *different* proof than the zero-sum triple.
 >
 > Both ⟹ `Z3²×Z_p=P`. **The `p=5` exception is SHARP and localizes to Lemma A** (∗3 not ∗0 at p=5 — the exact
 > analogue of the warm-up's `{p,1}=∗1/p≥7`, `∗3/p=5`). Proof hint: no `Aut(G)` involution fixes `{s,t}` (⇒ a

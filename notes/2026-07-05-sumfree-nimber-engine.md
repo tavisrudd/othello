@@ -432,3 +432,52 @@ reverse-engineering; the reply tables (`scratchpad/reply{A,B}_p7.log`) are the s
 
 Both lemmas: soundness cross-checked — the independent **boolean** Go solver (`sumfree.go`) also returns
 `OUTCOME=P` for `{s,t}` at p=7 (Lemma A 776K nodes, Lemma B 134K nodes), agreeing with the Grundy engine.
+
+### The reduction is UNIFORM across all 3-ranks — one framework for the whole `Z3^r × Z_p` family
+
+The orbit argument used nothing special about `r=2`: for **every** `r≥1`, `Aut(Z3^r×Z_p)=GL(r,3)×Z_p^*` is
+transitive on the socle `Z3^r\{0}` and on `Z_p\{0}`, so there are always exactly **3 orbits**
+(socle/coprime/mixed) and
+
+> **`𝒢(Z3^r×Z_p) = mex{ n_soc, n_cop, n_mix }` for all `r≥1`; outcome `= P ⟺` none of the 3 orbit-openings
+> is `∗0`.**
+
+The orbit-opening nimbers (engine; the socle opening is the **governing canary**):
+
+| `r` | family | socle `{(v,0)}` | coprime `{(0,c)}` | mixed `{(v,c)}` | root `= mex` | outcome |
+|-----|--------|-----------------|-------------------|-----------------|--------------|---------|
+| 1 | `Z3×Z5`  | **∗0** | ∗1 | ∗4 | ∗2 | N |
+| 1 | `Z3×Z7`  | **∗0** | ∗2 | ∗2 | ∗1 | N |
+| 1 | `Z3×Z11` | **∗0** | ∗0 | ∗6 | ∗1 | N |
+| 2 | `Z3²×Z5` | **∗0** | ∗1 | ∗1 | ∗2 | N |
+| 2 | `Z3²×Z7` | ∗2   | ∗2 | ∗2 | ∗0 | **P** |
+
+**Reading:** at `r=1` the socle opening is `∗0` for *every* `p` — playing a lone order-3 element is always a
+winning first move (the one O₃ pair *is* the obstruction) ⇒ `Z3×Z_p` is **always N**. At `r=2` that free win
+**evaporates for `p≥7`** (socle opening `∗2`): with 4 O₃ pairs, spending one on the opening leaves the
+responder able to neutralise the rest, so the socle opening becomes N and — with coprime/mixed also N — the
+**root flips to P**. `p=5` is the lone hold-out where the socle opening is still `∗0`. So the whole
+`Z3^r×Z_p` outcome question is exactly **"is the socle opening `∗0`?"**, and the `r=1→2` flip is the socle
+opening losing its always-winning status. **This predicts the `r=3` question sharply:** does the `Z3³×Z_p`
+socle opening stay N (like `r=2, p≥7`, ⇒ likely more P) or revert? — the natural next probe (the full-game
+solve is blocked, but the reduction only needs the 3 *opening* outcomes, i.e. 2-element P-lemmas).
+
+### Codex's Lemma-B "zero-sum triple" mechanism — VERIFIED-THEN-FAILS at p=11 (trap caught)
+
+Codex (findings §"R3=2 Doc Check") proposed a clean route for **Lemma B**: with `r=−s−t=(0,2,−2)`, the
+zero-sum triple `{s,t,r}` is `∗1` at p=7 with **every** child `∗0` (`{*0:46}`), so Bob replies `r` and lands
+on a guaranteed-P child (modulo a bounded Schur-blocker set for when `r` is illegal). Codex's oracle 60s-caps
+at p=11, so it could not test it. **The full `grundy` engine (no cap) KILLS the mechanism at p=11:**
+
+| p | `𝒢({s,t,−s−t})` | child spectrum | all-children-P? |
+|---|-----------------|----------------|-----------------|
+| 7  | `∗1` | `{*0:46}` | **yes** |
+| 11 | `∗6` | `{*0:30 *1:2 *2:1 *3:4 *4:30 *5:1 *8:12}` | **NO** |
+
+So "every child of the zero-sum triple is P" is a **p=7 coincidence** — the exact verified-then-fails shape as
+the AP-child `6−p` (`∗0` to p=23, `∗4` at p=29). Codex's "reply `r`" strategy does not win uniformly; banner
+warned. **This does NOT settle Lemma B itself** (`{s,t}=∗0`) — only Codex's *route* to it. Lemma A's own
+zero-sum triple `{(0,1,0),(1,0,1),(2,2,6)}` is already `∗2`/mixed at p=7 (never had the mechanism). Direct
+`{s,t}=∗0` verification at p=11 is in flight (whether Lemma B survives with a *different* proof, or the
+`{(0,0,1),(0,1,1)}` representative itself fails at p=11 — in which case the coprime opening's N-status needs a
+different P-reply). **Lesson (prognosis §): stress-test every candidate lemma past p=7 before writing it as a proof.**
