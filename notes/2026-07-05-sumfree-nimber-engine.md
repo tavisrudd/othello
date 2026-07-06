@@ -147,7 +147,7 @@ uniform is now also worth checking before leaning on it.)
 
 | file | what |
 |------|------|
-| `notes/sumfree-go/cmd_grundy/grundy.go` | the nimber engine (self-contained; `GO111MODULE=off go build -o grundy ./cmd_grundy/grundy.go`) |
+| `notes/sumfree-go/cmd_grundy/grundy.go` | the nimber engine (self-contained; `GO111MODULE=off go build -o grundy ./cmd_grundy/grundy.go`). Modes: `--start`, `--children` (child-value spectrum), **`--compdump`** (per-child armed-component nimber multiset + XOR — see the 2026-07-06 addendum) |
 | `notes/sumfree-go/cmd_probe/decomp.go`  | decomposition-frequency probe (`go build -o probe ./cmd_probe/decomp.go`) |
 
 Both are standalone `main` packages copying the stable group machinery from `../sumfree.go`; neither
@@ -161,3 +161,54 @@ touches the shared solver files Codex uses.
   `Z9×Z3×Z_p`.
 - Codex proves: `𝒢(Z3×Z_p)=∗1` (p≥7), `Z3²×Z_p=P` (p≥7) via the component structure, and the `p=5 ∗2`
   cause. See the Round-4 banner in `2026-07-05-codex-assignment-sumfree-socle.md`.
+
+---
+
+## 2026-07-06 (session `--2`, `mi`): compdump microscopy — the missing-∗1 is a *connected-graph* fact, not a decomposition one
+
+**Lane split this session:** Codex (back, Round-6 banner) takes the **∗0-present half** of the two-move
+lemma (prove the AP-child `T(v)` is P uniformly in `p`); the compute side (here) takes the **∗1-absent
+half** (no child of `{p,1}`/`{p,3}` is ∗1). New tool: `grundy --compdump` — for a start position it
+decomposes **every legal child** into armed-Schur components and prints the multiset of component
+nimbers (whose XOR is the child's nimber), plus histograms and a count of children whose comp-multiset
+contains a ∗1.
+
+**★ Finding 1 (a decisive NEGATIVE): the shallow component-decomposition handle does NOT explain the
+missing ∗1.** For `{p,1}` and `{p,3}` at `p ≥ 11`, **every legal child is a single connected component**
+— the child-nimber histogram equals the component-nimber histogram exactly (0 children decompose). So
+`𝒢(child) = 𝒢(its one component)` with no XOR structure to exploit. The tempting mechanism seen at
+`p=7` — where a child like `{7,3}+[8]` splits into `[1:∗1, 4:∗1]` (an isolated vertex ∗1 paired with a
+∗1 block) so the two ∗1's XOR to ∗0 — is a **small-`|G|` artifact**: at `p ≥ 11` there are no isolated
+vertices and no splits at this depth. (This matches Codex's Round-4 depth-1 connectivity table.) ⇒
+**the missing-∗1 cannot be proven by a component/disjunctive-sum argument at the child level; it is a
+genuine "mex of a single connected armed-Schur graph never equals 1" fact** — which is the hard core,
+and it rules out the decomposition route for this specific half.
+
+- Data (child-nimber histograms, `--compdump`): `{11,3}` `{∗0:7 ∗2:4 ∗4:1 ∗5:6 ∗6:5 ∗7:1}`;
+  `{11,1}` `{∗0:5 ∗2:6 ∗5:7 ∗6:6}`; `{13,3}` `{∗0:10 ∗2:7 ∗3:2 ∗5:1 ∗6:2 ∗7:5 ∗8:3}`;
+  `{13,1}` `{∗0:7 ∗2:5 ∗3:10 ∗5:1 ∗7:4 ∗8:3}`. In all of these the component-nimber histogram is
+  **identical** (single components). **∗1 is the uniquely-reliable absentee** — ∗0 and ∗2 are always
+  present, ∗3/∗4 are sometimes absent, but ∗1 is absent in every checked case.
+
+**★ Finding 2 (compute support handed to Codex's ∗0-half): the exceptional-branch replies are NOT a
+uniform linear formula.** For the `{p,3,6−p}` AP-child, the ≤7 first-deviations where the mirror
+`ρ(x)=6−x` is illegal each have winning 2nd-player replies (P-children of `T∪{y}`), but there is no
+single `p`-linear reply that works across `p`. E.g. the constant exception `y=2`:
+
+  | `p` | `T={p,3,6−p}` | winning replies to `y=2` (P-children of `T∪{2}`) |
+  |----:|---------------|---------------------------------------------------|
+  | 11  | `{11,3,28}`   | `[15]` |
+  | 13  | `{13,3,32}`   | `[17, 31, 36, 37]` |
+  | 17  | `{17,3,40}`   | `[30, 31, 35]` |
+
+  No common `p`-linear value (`p+4` = 15,17,21 hits at p=11,13 but misses at p=17). This **confirms the
+  earlier "genuinely non-mirror" negative** (sessions --5b/--7): the exceptional replies do not restore
+  a reflection and are not a lookup formula ⇒ Codex's ∗0-half proof needs a **structural/recursive
+  descent** argument for the residue, not a closed-form reply. The full reply sets for the four scaling
+  exceptions (`y ∈ {2,4,p+2,p+4}`) at `p=11,13,17` were computed and are reproducible via
+  `grundy Z_{3p} --start "p;3;(6−p);y" --children` (read the `moves to *0` line).
+
+**Bottom line:** both halves of the two-move lemma resist the clean tools — the ∗1-absent half is a
+single-connected-graph mex fact (decomposition can't touch it), and the ∗0-half's residue is non-mirror
+and non-formulaic. This sharpens *where* the analytic difficulty actually lives; it does not close it.
+Consistent with the handoff's "the oracle is exhausted; the bottleneck is analytic."

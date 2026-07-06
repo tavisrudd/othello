@@ -12,9 +12,10 @@
 // positions, which collapses the P-proof tree that has no boolean cutoff.
 //
 // Correctness gate (Codex's exact Grundy table + the mod-6 cyclic law):
-//   Z2=1 Z3=1 Z5=0 Z7=0 Z9=1 Z10=1 Z14=2  Z2xZ3=0  Z3^2=1
-//   Z3xZ5=2 Z3xZ7=1 Z3xZ11=1 Z3xZ13=1  Z3^2xZ5=2   and Z3^2xZ7 => 0 (P)
-//   cyclic Z_n: Grundy 0 iff n = 0,1,5 mod 6.
+//
+//	Z2=1 Z3=1 Z5=0 Z7=0 Z9=1 Z10=1 Z14=2  Z2xZ3=0  Z3^2=1
+//	Z3xZ5=2 Z3xZ7=1 Z3xZ11=1 Z3xZ13=1  Z3^2xZ5=2   and Z3^2xZ7 => 0 (P)
+//	cyclic Z_n: Grundy 0 iff n = 0,1,5 mod 6.
 //
 // Build: go build -o grundy ./cmd_grundy/grundy.go
 // Run:   ./grundy 3,3,7
@@ -699,7 +700,7 @@ func parseMods(s string) []int {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: grundy <mods>   e.g. grundy 3,3,7   [--start c0,c1,..;..]")
+		fmt.Fprintln(os.Stderr, "usage: grundy <mods>   e.g. grundy 3,3,7   [--start c0,c1,..;..] [--children] [--compdump]")
 		os.Exit(2)
 	}
 	mods := parseMods(os.Args[1])
@@ -710,6 +711,7 @@ func main() {
 	}
 	parPly := 10
 	childrenMode := false
+	compdumpMode := false
 	for i := 2; i < len(os.Args); i++ {
 		switch os.Args[i] {
 		case "--start":
@@ -719,6 +721,8 @@ func main() {
 			}
 		case "--children":
 			childrenMode = true
+		case "--compdump":
+			compdumpMode = true
 		case "-j":
 			if i+1 < len(os.Args) {
 				j, _ = strconv.Atoi(os.Args[i+1])
@@ -811,6 +815,62 @@ func main() {
 		return
 	}
 
+	if compdumpMode {
+		// For each legal child of the start position, decompose it into armed
+		// Schur components and report the multiset of component nimbers (whose
+		// XOR is the child's nimber). Microscopy for the "missing *1" question:
+		// which nimbers appear as child values, and via which component structure
+		// -- in particular whether *1 ever appears as a *component* nimber or is
+		// excluded outright.
+		legal := g.legalMask(start)
+		childHist := map[int]int{} // child nimber (XOR) -> count
+		compHist := map[int]int{}  // component nimber -> count over all children
+		withStar1Comp := 0         // #children whose comp-multiset contains a *1
+		star1Xor := 0              // #children whose XOR == *1  (want 0 for p>=7)
+		type crow struct {
+			mv    string
+			xor   int
+			comps string
+		}
+		var rows []crow
+		legal.forEach(func(mv int) {
+			child := start
+			child.setBit(mv)
+			cu := g.legalMask(child)
+			comps := g.components(child, cu)
+			x := 0
+			has1 := false
+			parts := make([]string, len(comps))
+			for i, c := range comps {
+				v := s.sub(child, c)
+				x ^= v
+				compHist[v]++
+				if v == 1 {
+					has1 = true
+				}
+				parts[i] = fmt.Sprintf("%d:*%d", c.popcount(), v)
+			}
+			childHist[x]++
+			if has1 {
+				withStar1Comp++
+			}
+			if x == 1 {
+				star1Xor++
+			}
+			rows = append(rows, crow{fmt.Sprint(g.elems[mv]), x, strings.Join(parts, ",")})
+		})
+		close(done)
+		for _, r := range rows {
+			fmt.Printf("  child +%-10s XOR=*%d  comps(size:nim)=[%s]\n", r.mv, r.xor, r.comps)
+		}
+		fmt.Printf("  CHILD-NIMBER HIST:            %s  => GRUNDY(pos)=mex=*%d\n", histStr(childHist), mex(toBoolSet(childHist)))
+		fmt.Printf("  COMPONENT-NIMBER HIST (all):  %s\n", histStr(compHist))
+		fmt.Printf("  children with a *1 COMPONENT: %d   children with XOR==*1: %d\n", withStar1Comp, star1Xor)
+		fmt.Printf("  nodes=%d  memo=%d  time=%.2fs  rss=%dMB\n",
+			atomic.LoadInt64(&s.nodes), s.memoSize(), time.Since(t0).Seconds(), rssMB())
+		return
+	}
+
 	gval := s.sub(start, g.full)
 	close(done)
 	outcome := "P"
@@ -827,4 +887,29 @@ func sortInts(a []int) {
 			a[j-1], a[j] = a[j], a[j-1]
 		}
 	}
+}
+
+// histStr formats a nimber-count map "*v:n" ascending by v.
+func histStr(h map[int]int) string {
+	vals := make([]int, 0, len(h))
+	for v := range h {
+		vals = append(vals, v)
+	}
+	sortInts(vals)
+	parts := make([]string, len(vals))
+	for i, v := range vals {
+		parts[i] = fmt.Sprintf("*%d:%d", v, h[v])
+	}
+	return strings.Join(parts, " ")
+}
+
+// toBoolSet turns a value-count histogram into a presence set (for mex).
+func toBoolSet(h map[int]int) map[int]bool {
+	s := map[int]bool{}
+	for v, n := range h {
+		if n > 0 {
+			s[v] = true
+		}
+	}
+	return s
 }

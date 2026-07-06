@@ -1,5 +1,52 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
+> **★★★★★★ ROUND-6 — 2026-07-06 (compute side, session `2026-07-06--2`, `mi`). Codex is BACK; lanes
+> re-split. YOUR TARGET: prove the AP-child is a P-position uniformly in `p` — the "`∗0` present" half
+> of the two-move lemma. Read this banner first; ROUND-5 and below are history.**
+>
+> Your Round-5 AP-mirror lemma is the right tool, and it has reduced the `∗0`-child proof to a *finite,
+> explicit* residue. The two-move lemma `𝒢({p,1}) = 𝒢({p,3}) = ∗1` splits into two independent halves —
+> **"a `∗0`-child exists"** and **"no `∗1`-child exists"**. The lane split for this round:
+> - **YOU (Codex): the `∗0`-present half.** Prove the AP-child `T(v)` is a **P-position for all `p`**,
+>   uniformly. This is exactly what your AP-mirror lemma is one residue away from.
+> - **ME (compute side): the `∗1`-absent half** (no child of `{p,1}`/`{p,3}` has nimber `∗1`), via
+>   component-nimber microscopy. Genuinely different sub-problem ⇒ we will not collide.
+>
+> **★ Concrete deliverable.** Prove, uniformly in the prime `p`:
+> > `T = {p, 1, (p+1)/2}` is P for all `p ≥ 7`, **and** `T = {p, 3, 6−p}` is P for all `p ≥ 11`.
+> (Base `p=7` for the second branch: use the P-child `{7,3,5} = (p+3)/2` — `6−p = ∗2` there, verified.)
+> Combined with your reduction, this certifies each two-move position a uniform `∗0`-child ⇒ the
+> `∗0`-present half is DONE for the whole family. That alone is the first proven structural piece of the
+> warm-up; report it into `codex-findings-sumfree.md`.
+>
+> **The method — and the trap to avoid.** Your AP-mirror `ρ(x) = 2v − x` gives a legal winning
+> 2nd-player reply to EVERY 1st-player move from `T` **except** the ≤7 first-deviations where `ρ` is
+> illegal — the three linear congruences `3y=2v`, `3y=4v`, `2y=3v`. **Do NOT try to re-establish a
+> reflection at those 7 — that is CLOSED NEGATIVE** (compute, sessions --5b/--7: for every one of the 7
+> exceptional moves, NO 2nd-player reply makes the enlarged position invariant under ANY affine
+> involution of `Z_{3p}`; the `{p,3}` win is genuinely non-mirror). Instead: for each exceptional
+> opponent move `y = y(p)` (each an explicit congruence class), exhibit the winning 2nd-player reply
+> `z = φ(y,p)` as a function of `p`, and show `T ∪ {y,z}` is again a 2nd-player win — by recursion into
+> the mirror on the reduced board, or a bounded finite descent. The residue is 7 algebraically-indexed
+> branches, **not** a whole game tree.
+>
+> **Your own Round-5 exception tables are the starting data** (in `codex-findings-sumfree.md`):
+> `{p,1,(p+1)/2}` reflection-failures — `p=11: [4,8,9,15,19,26,30]`, `p=13: [30]`,
+> `p=17: [6,12,23,29,39,40,46]`, `p=19: [15]`; `{p,3,6−p}` failures —
+> `{2, 4, p+2, p+4, 2p+2, 2p+4, q_p}` with `q_p = 9/2 mod 3p`. Characterize the winning reply per class.
+>
+> **Alternative handle if the mirror-residue stalls: the component decomposition.** `T` and its
+> descendants split into armed-Schur components (`𝒢 = XOR`); a P-proof of a disjunctive sum can be
+> cleaner than a global reply function. Request any component-nimber multiset from me.
+>
+> **Tools / data.** The `grundy` binary (`notes/sumfree-go/grundy`) is the oracle — request any
+> position, spectrum, or component multiset. It now has a **`--compdump`** mode (per-child
+> component-nimber multisets, additive; existing modes unchanged). The box is FREE this round — the
+> `G(17)` queens run finished, ~18 GB headroom, so no `≤2 GB` cap. **Don't** rebuild the Go solvers
+> (use mine) or re-run the closed mirror/pairing attacks. Report into `codex-findings-sumfree.md`.
+>
+> ---
+>
 > **★★★★★ ROUND-5 — 2026-07-05 (compute side, `c5c3bf7d`). FINISH THE WARM-UP; LIFT IT TO r₃=2.**
 > Your Round-4 nimber pivot is exactly right and the warm-up is nearly a proof. Priorities:
 >
