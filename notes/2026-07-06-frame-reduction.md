@@ -173,10 +173,14 @@ computed case, and the tight `q=5` case (a unique escape) relaxes as `q` grows. 
 clean linear law (an earlier `3q−14` fit on `q=5,7,9` is broken by `q=11`, whose minimum is 13,
 not 19; the minimum plateaus at 13 for `q=9,11`).
 
-**The decomposition that matters for a proof.** For a triangle, `escape = (total legal size-4
-extensions) − (bad extensions)`, where a **bad** extension is one to an **even-`N`** size-4
-position — i.e. one from which the mover completes an **odd maximal cap** in one move. Tracking
-the min-escape triangle (`{(0,0),(1,1),(2,3)}` up to symmetry across the computed `q`):
+(Here a "size-3 grid position" is a 3-cell partial-permutation cap — **not** the projective
+triangle, which is the grid size-1 object; the escape crux lives one level below the frame:
+grid size-3 → size-4, i.e. projective size-5 → size-6.)
+
+**The decomposition that matters for a proof.** For a size-3 grid position, `escape = (total
+legal size-4 extensions) − (bad extensions)`, where a **bad** extension is one to an **even-`N`**
+size-4 position — i.e. one from which the mover completes an **odd maximal cap** in one move.
+Tracking the min-escape 3-cell position (`{(0,0),(1,1),(2,3)}` up to symmetry across computed `q`):
 
 | q | total ext | bad ext (odd-maximal-completable) | escape = P ext |
 |---:|---:|---:|---:|
@@ -187,10 +191,10 @@ the min-escape triangle (`{(0,0),(1,1),(2,3)}` up to symmetry across the compute
 Bad extensions are **exactly 0 for `q ≤ 7`** (no odd maximal caps exist — pure parity) and first
 appear at `q=9` (8 of the 21), matching the parity-defect seed. The escape stays positive because
 **`total` (≈ area, `O(q²)`) outgrows `bad`**. So the crux `escape ≥ 1` becomes: *the number of
-size-4 extensions of a triangle that are one move from an odd maximal cap never reaches the total
-number of extensions.* This is a finite arc-theoretic counting statement — bound `bad` above (via
-the structure/scarcity of odd maximal caps) and `total` below. That is the concrete open target;
-min-escape (finer than min-dev-size) is the quantity to watch as the ladder extends.
+size-4 extensions of a 3-cell position that are one move from an odd maximal cap never reaches the
+total number of extensions.* This is a finite arc-theoretic counting statement — bound `bad` above
+(via the structure/scarcity of odd maximal caps) and `total` below. That is the concrete open
+target; min-escape (finer than min-dev-size) is the quantity to watch as the ladder extends.
 
 ## Artifacts
 

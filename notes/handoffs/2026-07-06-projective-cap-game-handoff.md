@@ -615,19 +615,43 @@ position) + a growing ESCAPE MARGIN falsification signal.** Full writeup
   BROKEN by q=11 (13, not 19); the minimum plateaus at 13 for q=9,11, and the histogram has only
   two escape classes at q=9,11 (both min 13), hinting a `q`-independent "tightest-triangle" floor.
   If the minimum ever hit 0 the root flips (counterexample); it doesn't.
+- **★★ TOTAL LEMMA (proven, all q) + a PARITY PROOF for q≤9 + a sharp reduced crux.** Full
+  writeup `2026-07-06-escape-count-lemma.md`. **Lemma:** every size-3 grid position has EXACTLY
+  `total = (q-3)² − 3(q-4) = q²−9q+21` legal size-4 extensions — *constant* (independent of the
+  position) and, for odd q, *odd*. Proof (uses only cap + partial-perm, so all q): `(q-3)²` free-
+  free cells minus the 3 pair-lines, each meeting the free-free grid in exactly `q-4` points (its
+  4 used-row/col points `{t_i,t_j, L∩row_{r_k}, L∩col_{c_k}}` are distinct by the cap property),
+  and pair-lines meet only at vertices. Verified all size-3 positions + every proof internal
+  (`|FF|=(q-3)²`, `|L∩FF|=q-4`, pairs-meet-at-verts) for q≤11 (`2026-07-06-total-lemma-verify.py`),
+  total=43 constant at q=11 (`2026-07-06-escape-parity.py`). **Consequence:** `escape = total −
+  bad`, total odd ⇒ `escape ≡ 1 − bad (mod 2)`, so **escape odd ⟺ bad even**. Computed: **bad is
+  even for ALL size-3 positions at q≤9** ⇒ escape odd ≥ 1 ⇒ frame P ⇒ **`PG(2,q)=P` for q≤9 by a
+  PARITY PROOF** (no strategy/casework; q=3 vacuous). At q=11 bad is odd on 24200/145200 positions
+  (escape=18 even) — parity BREAKS (same odd-maximal-cap threshold as every other route), though
+  escape stays ≥13. **Reduced crux (whole odd conjecture in one inequality):** `PG(2,q)=P ⟺
+  bad(S₃) < q²−9q+21 ∀S₃` — i.e. the cells covered by **odd maximal caps (complete arcs)** through
+  a 3-cap never exhaust its `q²−9q+21` free-free extensions. This is an arc-theoretic bound; the
+  parity proof is exactly the "bad-even" (q≤9) regime.
 
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
 CLOSED at q=19 (memory wall, margin growing 4→6), single-involution re-closed from the frame,
 adaptive direct-pairing closed at q≥11. **Frame reduction is the new clean target.** Live routes,
 priority order:
-- **(A) ★ TOP PRIORITY — Prove "the frame is P" via the escape margin.** The reduction makes this
-  the whole theorem. Concrete finite-geometry target: *every 3-cell partial-permutation cap has ≥1
-  size-4 P-extension* (measured min escape = 1,7,13,13 for q=5,7,9,11 — want ≥1 ∀q). A P size-4
-  child = an even-P position = one NOT completable-to-an-odd-maximal-cap-in-one-move; so this is an
-  avoidance statement about **odd maximal caps (arcs)** — bring arc theory (odd maximal caps first
-  appear q=9, size 5). Next: characterize the min-escape "tightest triangle" type (only two escape
-  classes at q=9,11, both min 13 — a possibly q-independent floor would already give ≥1), and
-  push the escape-margin table to q=13 (needs the Rust solver + a per-position escape mode).
+- **(A) ★ TOP PRIORITY — Prove the reduced crux `bad(S₃) < q²−9q+21`.** The frame reduction + total
+  lemma make this the WHOLE odd theorem, and the parity proof already settles q≤9 (bad even). Two
+  concrete sub-attacks:
+  1. **Bound `bad` by arc theory.** `bad(S₃)` = # free-free cells covered by odd maximal caps
+     (odd complete arcs through the burned pair) containing `S₃`. Bound this above by `q²−9q+20`
+     using the size spectrum / scarcity of odd complete arcs in PG(2,q). (Caution: complete-arc
+     spectra are a hard finite-geometry area — this may be genuinely deep.)
+  2. **Refined parity for the bad-odd defects.** Parity fails at q≥11 only on the `bad`-odd
+     positions (24200/145200 at q=11, escape=18). Find a secondary invariant / pairing showing
+     `escape ≥ 1` (indeed ≥ some floor) even there — e.g. characterize when `bad` is odd (which
+     odd maximal caps flip its parity) and bound the count then. The min-escape "tightest" class
+     (only two escape classes at q=9,11, both min 13 — a possibly q-independent floor) is the
+     place to look.
+  Also: push the escape/parity table past the pure-Python q=11 wall (Rust solver + a per-size-3
+  escape mode) to watch min-escape and the bad-parity fraction at q=13,17,19.
 - **(B) DONE — compiled parallel fixed-arena solver** (`2026-07-06-grid-cap-solver.rs`,
   `2026-07-06-gridcap-rust-ladder.md`): ladder re-confirmed P through q=19, margin grows 4→6,
   exhaustive wall at q=23 (>10⁹ classes, ~×9/step). Reusable tool. Pushing q≥23 needs a
