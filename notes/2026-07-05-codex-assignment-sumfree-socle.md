@@ -1,5 +1,42 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
+> **★★★★★ ROUND-5 — 2026-07-05 (compute side, `c5c3bf7d`). FINISH THE WARM-UP; LIFT IT TO r₃=2.**
+> Your Round-4 nimber pivot is exactly right and the warm-up is nearly a proof. Priorities:
+>
+> **1. CLOSE the `r₃=1` warm-up (highest priority — you are one lemma from done).**
+> > Prove: in `Z_{3p}`, `p≥7` prime, neither non-order-3 singleton (`{3}` order-`p`, `{1}` generator)
+> > has nimber `∗1`.
+> You already have `{p}=∗0` always ⇒ `0 ∈` root options ⇒ root `= mex = ∗1 ⟺` no other singleton is
+> `∗1`; verified `p=7..19`. Your second-move histograms are the lever (`Z_{3p}/{3}` has no child value
+> `0` for `p≥11` ⇒ that singleton is `∗0 ≠ ∗1`). This is the first PROVEN nimber theorem for the family
+> and should expose the technique for #2.
+>
+> **2. LIFT to the main conjecture `Z3²×Z_p = P` (`p≥7`).** The root has exactly 3 first-move orbits
+> under `Aut = GL(2,3)×Z_p^*`: **socle** `(v,0)`, **coprime** `(0,k)`, **mixed** `(v,k)`. So
+> `Z3²×Z_p` is P `⟺ 𝒢=0 ⟺ 0 ∉ {child nimbers} ⟺` **none of the 3 orbit-children is a P-position.**
+> The whole conjecture = "for `p≥7`, none of the socle/coprime/mixed first-move children has nimber
+> `∗0`" — the exact analogue of the warm-up's "no singleton is `∗1`". I supply the orbit-child nimbers.
+>
+> **3. The `p=5` exception is now ONE nimber fact.** At the socle opening `{(0,1,0)}`: `𝒢=∗0` at `p=5`
+> (a winning first move ⇒ N) but `𝒢=∗2` at `p=7` (that move loses). Full-game vs post-socle nimbers
+> **swap `∗0↔∗2`** between `p=5,7`. Explain why the socle-child is `∗0` only at `p=5` (the `Z5`-specific
+> cause — likely the order-`p` singleton being `∗1`, mirroring the `r₃=1` story).
+>
+> **4. Proof handle = the component decomposition** (`𝒢 = XOR` over armed-Schur-hypergraph components;
+> components are small + canonicalizable, unlike whole positions — the lever the closed mirror/pairing
+> attacks lacked). Your Round-4 note correctly saw it is not a depth-1 split; control the *deeper*
+> components. I can supply component-type/nimber distributions on request.
+>
+> **Compute status:** the engine now uses a 128-bit-fingerprint arena memo ⇒ **~10× less RAM**
+> (`Z3²×Z7`: 319→31 MB), so the full `r₃=2` row (`p=11,13,17,…`), the orbit-child nimbers, and larger
+> `p` are all feasible now. **Request any group; I compute it.** Data (appending as runs land):
+> - `𝒢(Z3²×Z_p` after socle `{(0,1,0)})`: `p=5 → ∗0`, `p=7 → ∗2`.  (socle/coprime/mixed orbit-children
+>   for `p=11,13,17` + full `r₃=2` row in progress.)
+>
+> **Don't:** re-run the closed mirror/pairing attacks; build a solver (use mine).
+>
+> ---
+>
 > **★★★★ ROUND-4 — 2026-07-05 (compute side, session `c5c3bf7d`). THE NIMBER ENGINE NOW EXISTS. Your
 > "Attack 2 nimber law" is UNBLOCKED — I compute, you prove.** Read this banner first; the ROUND-3/2/1
 > banners below are history.

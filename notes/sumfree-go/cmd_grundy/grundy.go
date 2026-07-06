@@ -371,21 +371,81 @@ func (g *Group) components(a, u Mask) []Mask {
 
 // ---------- Grundy solver ----------
 
-type ckey struct{ u, a Mask }
+// The memo key is a 128-bit FINGERPRINT of the canonical armed component
+// (U, A_rel).  Storing the fingerprint in a flat preallocated open-addressing
+// table — rather than the two 64-byte Masks in a Go map — cuts the per-entry
+// footprint ~4x (17 packed bytes vs a 64-byte key plus Go-map bucket/overflow
+// and 2x growth-transient) and removes the entries from GC scanning, letting
+// larger p fit in RAM.  Sound with overwhelming probability: over 1e8 entries
+// the 128-bit collision probability is ~2^-70 (the fingerprint-TT argument the
+// queens solver uses).  Validated exact-equivalent to the map engine on the
+// 50+ gate values.
 
-func (k ckey) hash() uint64 {
-	h := k.u[0]*0x9E3779B97F4A7C15 ^ k.u[1]*0xC2B2AE3D27D4EB4F ^ k.u[2]*0x165667B19E3779F9 ^ k.u[3]*0xD6E8FEB86659FD93
-	h ^= k.a[0]*0xFF51AFD7ED558CCD ^ k.a[1]*0xC4CEB9FE1A85EC53 ^ k.a[2]*0x9E3779B185EBCA87 ^ k.a[3]*0xF58476D1CE4E5B9
-	h ^= h >> 31
-	return h * 0xBF58476D1CE4E5B9
+func fingerprint(u, a Mask) (uint64, uint64) {
+	h0 := u[0]*0x9E3779B97F4A7C15 ^ u[1]*0xC2B2AE3D27D4EB4F ^ u[2]*0x165667B19E3779F9 ^ u[3]*0xD6E8FEB86659FD93
+	h0 ^= a[0]*0xFF51AFD7ED558CCD ^ a[1]*0xC4CEB9FE1A85EC53 ^ a[2]*0x2545F4914F6CDD1D ^ a[3]*0x9E3779B185EBCA87
+	h0 ^= h0 >> 30
+	h0 *= 0xBF58476D1CE4E5B9
+	h0 ^= h0 >> 27
+	h0 *= 0x94D049BB133111EB
+	h0 ^= h0 >> 31
+	h1 := u[0]*0xD1B54A32D192ED03 ^ u[1]*0xAEF17502108EF2D9 ^ u[2]*0xA0761D6478BD642F ^ u[3]*0xE7037ED1A0B428DB
+	h1 ^= a[0]*0x8EBC6AF09C88C6E3 ^ a[1]*0x589965CC75374CC3 ^ a[2]*0x1D8E4E27C47D124F ^ a[3]*0xEB44ACCAB455D165
+	h1 ^= h1 >> 30
+	h1 *= 0xBF58476D1CE4E5B9
+	h1 ^= h1 >> 27
+	h1 *= 0x94D049BB133111EB
+	h1 ^= h1 >> 31
+	return h0, h1
 }
 
 const nShards = 512
 
+// memoShard is a linear-probing open-addressing table on the 128-bit
+// fingerprint (k0,k1) -> nimber value.  val == -1 marks an empty slot (nimbers
+// are 0..127).  Sized to a power of two; grows (doubles + rehashes) past 0.7
+// load.  k0,k1,val are parallel slices so there is no per-slot struct padding.
 type memoShard struct {
-	mu sync.Mutex
-	m  map[ckey]int8
-	_  [40]byte // pad to reduce false sharing
+	mu   sync.Mutex
+	k0   []uint64
+	k1   []uint64
+	val  []int8
+	used int
+	mask uint64 // len-1 (len is a power of two)
+}
+
+func (sh *memoShard) init(n int) {
+	sh.k0 = make([]uint64, n)
+	sh.k1 = make([]uint64, n)
+	sh.val = make([]int8, n)
+	for i := range sh.val {
+		sh.val[i] = -1
+	}
+	sh.mask = uint64(n - 1)
+}
+
+// grow doubles the shard and rehashes (caller holds sh.mu).
+func (sh *memoShard) grow() {
+	ok0, ok1, oval := sh.k0, sh.k1, sh.val
+	n := int(sh.mask+1) * 2
+	sh.k0 = make([]uint64, n)
+	sh.k1 = make([]uint64, n)
+	sh.val = make([]int8, n)
+	for i := range sh.val {
+		sh.val[i] = -1
+	}
+	sh.mask = uint64(n - 1)
+	sh.used = 0
+	for j := range oval {
+		if oval[j] != -1 {
+			i := (ok0[j] >> 9) & sh.mask
+			for sh.val[i] != -1 {
+				i = (i + 1) & sh.mask
+			}
+			sh.k0[i], sh.k1[i], sh.val[i] = ok0[j], ok1[j], oval[j]
+			sh.used++
+		}
+	}
 }
 
 type gsolver struct {
@@ -397,26 +457,53 @@ type gsolver struct {
 	t0     time.Time
 }
 
-func (s *gsolver) memoGet(k ckey) (int8, bool) {
-	sh := &s.shard[k.hash()&(nShards-1)]
+// probe start uses bits above the low 9 (which select the shard) to decorrelate.
+func (s *gsolver) memoGet(f0, f1 uint64) (int8, bool) {
+	sh := &s.shard[f0&(nShards-1)]
 	sh.mu.Lock()
-	v, ok := sh.m[k]
-	sh.mu.Unlock()
-	return v, ok
+	i := (f0 >> 9) & sh.mask
+	for {
+		v := sh.val[i]
+		if v == -1 {
+			sh.mu.Unlock()
+			return 0, false
+		}
+		if sh.k0[i] == f0 && sh.k1[i] == f1 {
+			sh.mu.Unlock()
+			return v, true
+		}
+		i = (i + 1) & sh.mask
+	}
 }
 
-func (s *gsolver) memoPut(k ckey, v int8) {
-	sh := &s.shard[k.hash()&(nShards-1)]
+func (s *gsolver) memoPut(f0, f1 uint64, v int8) {
+	sh := &s.shard[f0&(nShards-1)]
 	sh.mu.Lock()
-	sh.m[k] = v
-	sh.mu.Unlock()
+	if uint64(sh.used+1)*10 >= (sh.mask+1)*7 { // load factor 0.7
+		sh.grow()
+	}
+	i := (f0 >> 9) & sh.mask
+	for {
+		if sh.val[i] == -1 {
+			sh.k0[i], sh.k1[i], sh.val[i] = f0, f1, v
+			sh.used++
+			sh.mu.Unlock()
+			return
+		}
+		if sh.k0[i] == f0 && sh.k1[i] == f1 {
+			sh.val[i] = v
+			sh.mu.Unlock()
+			return
+		}
+		i = (i + 1) & sh.mask
+	}
 }
 
 func (s *gsolver) memoSize() int {
 	n := 0
 	for i := range s.shard {
 		s.shard[i].mu.Lock()
-		n += len(s.shard[i].m)
+		n += s.shard[i].used
 		s.shard[i].mu.Unlock()
 	}
 	return n
@@ -442,7 +529,7 @@ func applyPerm(m Mask, p []uint16) Mask {
 // arming of the hypergraph: the A-elements that are a sum/difference of two
 // U-members (the only part of A that affects the subgame on U).  Two subgames
 // with the same armedKey have Aut-isomorphic armed hypergraphs => equal Grundy.
-func (s *gsolver) armedKey(a, u Mask) ckey {
+func (s *gsolver) armedKey(a, u Mask) (uint64, uint64) {
 	g := s.g
 	// arel = A ∩ { x+y, x-y : x,y in U }
 	var arel Mask
@@ -477,7 +564,7 @@ func (s *gsolver) armedKey(a, u Mask) ckey {
 			}
 		}
 	}
-	return ckey{bestU, bestA}
+	return fingerprint(bestU, bestA)
 }
 
 func mex(seen map[int]bool) int {
@@ -547,8 +634,8 @@ func (s *gsolver) sub(a, c Mask) int {
 	if pc == 2 {
 		return 1
 	}
-	key := s.armedKey(a, u)
-	if v, ok := s.memoGet(key); ok {
+	f0, f1 := s.armedKey(a, u)
+	if v, ok := s.memoGet(f0, f1); ok {
 		return int(v)
 	}
 	atomic.AddInt64(&s.nodes, 1)
@@ -580,7 +667,7 @@ func (s *gsolver) sub(a, c Mask) int {
 		fmt.Fprintf(os.Stderr, "grundy value %d exceeds int8\n", v)
 		os.Exit(1)
 	}
-	s.memoPut(key, int8(v))
+	s.memoPut(f0, f1, int8(v))
 	return v
 }
 
@@ -651,7 +738,7 @@ func main() {
 
 	s := &gsolver{g: g, sem: make(chan struct{}, j), parPly: parPly, t0: t0}
 	for i := range s.shard {
-		s.shard[i].m = make(map[ckey]int8)
+		s.shard[i].init(256)
 	}
 
 	// progress ticker
