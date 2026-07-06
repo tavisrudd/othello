@@ -123,10 +123,22 @@ needs to find the real law.
 
 ## Progress
 
-### ★ RESUME HERE (next session) — Codex is OUT OF TOKENS; you own BOTH lanes now
+### ★ RESUME HERE (next session)
 
-Codex ran out of tokens end of `--5`. The next session inherits **compute + the proofs** (no longer
-just "oracle for Codex"). State of the open problem:
+**2026-07-06 UPDATE (session `--2`): Codex is BACK and re-tasked; lanes re-split.** Codex Round-6
+banner (top of `../2026-07-05-codex-assignment-sumfree-socle.md`) owns the **∗0-present half** of the
+two-move lemma (prove the AP-child `T(v)` is P uniformly in `p` via its AP-mirror lemma + the ≤7
+exceptional branches). **Compute (this lane) owns the ∗1-absent half** (no child of `{p,1}`/`{p,3}` is
+∗1). Two findings this session (details in the [nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
+2026-07-06 addendum): (1) **the missing-∗1 is a *connected-graph* mex fact, NOT a decomposition one** —
+at `p≥11` the children of `{p,1}`/`{p,3}` are single connected components, so the disjunctive-sum handle
+does not fire (the p=7 ∗1-pairing was a small-`|G|` artifact); this rules out a component argument for
+the ∗1-half. (2) **the AP-child exceptional-branch replies are non-mirror and not a uniform `p`-linear
+formula** (confirmed `{p,3,6−p}`, `y∈{2,4,p+2,p+4}`, p=11,13,17) ⇒ Codex's residue needs a structural
+descent, not a lookup. New tool: `grundy --compdump`. Below is the pre-existing (still-current) state.
+
+The prior session (`--7`) inherited **compute + the proofs** when Codex was out of tokens. State of the
+open problem:
 
 - **Two conjectures, both very likely true, neither proven.** (1) Warm-up `𝒢(Z3×Z_p)=∗1` (p≥7);
   (2) main `Z3²×Z_p=P` (p≥7). Both reduce to a clean **spectral criterion**: a position's Grundy is
@@ -319,3 +331,54 @@ brute sweeps — the reduction note frames exactly what remains.
 106M nodes; `{p,3}` 122M nodes, recovering from its `∗4` at p=29 ⇒ sporadic exception, not a break); p=37
 both TIMEOUT at `Z111` (compute wall). Commits `247feff` → `2b7a878` → `b6765e1` → this. All background
 compute stopped; only `memguard.sh` may still idle in `/tmp` scratchpad (harmless, self-exits ~05:00).
+
+---
+
+### 2026-07-06 — session `2026-07-06--2` (`aecafa58`, `mi`): Codex re-tasked (∗0-half), compute owns ∗1-half
+
+**Context:** user said "assign some work to codex while you continue." Codex has tokens again ⇒ delegated
+the tractable, closable half of the warm-up and kept the hard analytic crux on the compute lane. Box is
+free (G(17) queens run long done; 18 GB headroom, no memory cap). Stayed in the `notes/` Go lane.
+
+**Committed first: Codex's uncommitted Round-4/5 work** (`af7f12d`) — the 381-line nimber-pivot +
+two-move/AP-mirror sections of `codex-findings-sumfree.md` and the `--strategy-cap`/elem-kind
+instrumentation on `cmd_par/sumfree_par.go` were sitting uncommitted in the tree; integrated + built-clean
+(both binaries compile) before building on them.
+
+**★ Delegation — Codex Round-6 banner** (`3a8bda7`, top of `../2026-07-05-codex-assignment-sumfree-socle.md`):
+prove the AP-child `T(v)` is a **P-position uniformly in `p`** — the "∗0 present" half of the two-move
+lemma `𝒢({p,1})=𝒢({p,3})=∗1`. Concretely: `{p,1,(p+1)/2}` P for `p≥7`, `{p,3,6−p}` P for `p≥11` (base
+`p=7` uses `(p+3)/2`). Method = its own AP-mirror lemma for all-but-≤7 opponent moves + a structural
+descent for the ≤7 exceptions (explicit congruence classes). Explicit warning baked in: **do NOT re-hunt
+a reflection for the 7 exceptions — CLOSED negative** (they're genuinely non-mirror). Lane split stated so
+we don't collide: Codex = ∗0-half, compute = ∗1-half.
+
+**★ Compute side (mine) — two findings** ([nimber-engine note](../2026-07-05-sumfree-nimber-engine.md)
+2026-07-06 addendum; new tool `grundy --compdump` = per-child armed-component nimber multiset):
+- **Missing-∗1 is a connected-graph fact, decomposition is a DEAD END for it.** At `p≥11` every legal
+  child of `{p,1}`/`{p,3}` is a **single connected component** (child-nimber hist ≡ component-nimber hist
+  exactly). So `𝒢(child)=𝒢(its one component)` — no XOR structure. The p=7 mechanism (a child splits into
+  `[1:∗1, 4:∗1]`, two ∗1's cancel to ∗0) is a small-`|G|` artifact. ⇒ the ∗1-absent half **cannot** be a
+  disjunctive-sum argument; it is "mex of a single connected armed-Schur graph is never 1," the hard core.
+  ∗1 is the uniquely-reliable absentee (∗0, ∗2 always present; ∗3/∗4 sometimes absent).
+- **AP-child exceptional replies are non-formulaic** (compute support for Codex's ∗0-half): for
+  `{p,3,6−p}` the winning replies to `y=2` are `[15]`(p=11), `[17,31,36,37]`(p=13), `[30,31,35]`(p=17) —
+  no common `p`-linear value. Confirms the "genuinely non-mirror" negative ⇒ Codex needs a structural
+  descent for the residue, not a reply formula. Reproduce: `grundy Z_{3p} --start "p;3;(6−p);y" --children`.
+
+**Validation gate held:** re-ran `Z15=∗2`, `Z3²×Z5=∗2/N`, `Z3²×Z7` machinery, `{7,3}`/`{7,1}` child
+spectra (exact match to Codex's tables), `{11,3,28}=∗0/P`. gofmt/vet clean; `--compdump` is additive
+(existing `--start`/`--children` unchanged).
+
+**Bottom line:** the delegation is set — Codex chews the closable ∗0-half; the ∗1-absent half is sharpened
+to "connected-graph mex ≠ 1, uniform in p," with the decomposition route ruled out. No new brute sweeps
+(honoring the --7 "oracle exhausted" call). Next: (a) await Codex's ∗0-half; (b) if attacking the ∗1-half,
+it must be a direct connected-graph/monovariant argument (not decomposition) or the non-mirror
+`Z3²×Z7`-style adaptive route.
+
+**Handoff Note — session `2026-07-06--2` (`aecafa58-e468-4b95-8c92-b6b72c0af41f`), `mi`.** Commits
+`af7f12d` (integrate Codex R4/5) → `3a8bda7` (Round-6 task + `grundy --compdump` + nimber-engine
+addendum). Files: `cmd_grundy/grundy.go` (+`--compdump`), `../2026-07-05-codex-assignment-sumfree-socle.md`
+(Round-6 banner), `../2026-07-05-sumfree-nimber-engine.md` (2026-07-06 addendum), this handoff. Left
+untouched (not mine): `py_cross.log`, the queens-lane files (`iso_flat.rs`, queens-report htmls) — all
+pre-existing uncommitted changes, not part of this work.
