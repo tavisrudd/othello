@@ -201,3 +201,14 @@ throughout (cyclic mod-6 nimbers, `Z3²×Z5=∗2`/N, `Z3³=∗1`/N, `Z2×Z3²=�
 **Not moved to done/** — Codex's proofs are in flight and the engine remains the standing compute oracle.
 Left untouched (not mine): `cmd_par/sumfree_par.go` (concurrent Claude), `codex-findings-sumfree.md`
 (Codex), the queens-lane files.
+
+**Late-session addendum (--5b): two NEGATIVES on the warm-up `{p,3}` branch** (details in
+`../2026-07-05-sumfree-nimber-engine.md` §`{p,3}` branch; passed to Codex's brief §C). Codex's Round-5
+unified both two-move branches under an AP-mirror lemma with P-child `{p,3,6-p}` (`v=3`, `ρ(x)=6-x`).
+Compute found: (1) **`c=6-p` is NOT a uniform P-child** — `∗0` for `p=11..23` but **`∗4` at `p=29`**
+(deterministic; validated engine) — so the uniform-representative claim was a `p≤23` coincidence; (2)
+**the finite-state mirror certificate fails at `p=11`** — for all 7 exceptional moves, no solver
+P-reply makes the enlarged position invariant under any affine involution of `Z_{3p}` (all three
+nontrivial checked; scripts `scratchpad/mirrorcert*.py`). The `{p,3}` win is genuinely non-mirror; its
+two-move-lemma proof needs a different idea than AP-child + finite-exception reflection. Open compute
+offers to Codex: re-check the `{p,1}` AP-child `(p+1)/2` past `p=19`; any specific position on request.

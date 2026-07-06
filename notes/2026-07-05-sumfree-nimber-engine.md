@@ -117,6 +117,32 @@ reproduces Codex's child histograms exactly). Large-`p` two-move subgames are ex
 Grundy cutoff — ~25 min each at `p=29`), so this is the practical ceiling for brute confirmation; the
 rest is Codex's spectral-gap proof.
 
+## `{p,3}` branch — two measured NEGATIVES (caution: the clean-mirror story is incomplete there)
+
+Codex's Round-5 unified both two-move branches under one AP-mirror lemma: `T(v)={a,v,2v-a}` with
+reflection `ρ(x)=2v-x`, choosing `v=3` for the `{p,3}` branch ⇒ the P-child `{p,3,6-p}` and mirror
+`ρ(x)=6-x`. Compute stress-tested this and found two things it does **not** support:
+
+- **`c=6-p` is NOT a uniform P-child.** `G({p,3,6-p}) = ∗0` (P) for `p=11,13,17,19,23` — but **`∗4`
+  (NOT P) at `p=29`** (fingerprint engine; the Grundy value is deterministic, and the engine is
+  validated exact on 50+ values, so this is not a race/collision artifact). So the "uniform AP-child
+  for `{p,3}`" was a `p≤23` coincidence; the base case `p=7` is separately `∗2`. The `{p,3}` branch
+  has no single clean P-child representative across `p`.
+- **The finite-state mirror certificate fails at `p=11`.** Idea tested: after an exceptional move `y`
+  (where `ρ(y)` is illegal), reply with a solver P-reply `z'` that makes the enlarged position
+  `{p,3,6-p,y,z'}` invariant under a *new* affine reflection. For **all 7** exceptional moves, **none**
+  of the solver's P-replies makes `{T(v),y,z'}` invariant under **any** affine involution of `Z_{3p}`
+  (checked all three nontrivial involutions `x↦u·x+t`: `-1`, fix-`Z3`/neg-`Z_p`, neg-`Z3`/fix-`Z_p`).
+  So the adaptive replies are genuinely non-mirror — they do not re-establish a reflection. (Scripts:
+  `scratchpad/mirrorcert*.py`; P-reply data from `grundy --children`.)
+
+**Reading:** the `{p,3}` branch resists the clean-mirror approach — echoing the earlier "all
+mirror/pairing attacks closed" finding, now on the warm-up's harder branch. A proof there needs a
+different idea than "AP-child + reflection with a finite exception book." This is exactly the
+"verified-then-fails / no clean mirror" evidence that keeps the warm-up an open proof, not a formality.
+(The `{p,1}` branch's AP-child `(p+1)/2` was not stress-tested past Codex's `p≤19`; whether *it* stays
+uniform is now also worth checking before leaning on it.)
+
 ## Files
 
 | file | what |

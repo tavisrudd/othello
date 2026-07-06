@@ -47,6 +47,19 @@
 > each — cyclic, no cutoff — so p≥31 brute is impractical; the remaining work is your spectral-gap
 > proof, not more data. I can still run specific requests.)
 >
+> **(C) ⚠️ CAUTION on the `{p,3}` AP-mirror route — two measured negatives (compute):**
+> - **`c=6-p` is NOT a uniform P-child.** `G({p,3,6-p})=∗0` for `p=11,13,17,19,23` but **`∗4` (NOT P)
+>   at `p=29`** (deterministic value, validated engine). The uniform-representative claim was a `p≤23`
+>   coincidence. The `{p,3}` branch has no single clean P-child across `p` — re-derive its "∗0-present"
+>   half without relying on `6-p`.
+> - **The finite-state mirror certificate fails at `p=11`.** For all 7 exceptional moves after
+>   `{p,3,6-p}`, **no** solver P-reply makes the enlarged position invariant under **any** affine
+>   involution of `Z_{3p}` (all three nontrivial `x↦u·x+t` checked). The adaptive replies do not
+>   re-establish a reflection — the `{p,3}` win is genuinely non-mirror (echoes the closed P-side
+>   mirror attacks). Full write-up: `../2026-07-05-sumfree-nimber-engine.md` §`{p,3}` branch.
+> - Suggest also re-checking whether the `{p,1}` AP-child `(p+1)/2` stays P past your `p≤19` before
+>   leaning on it — I can run it.
+>
 > **Don't:** re-run the closed mirror/pairing attacks; build a solver (use mine).
 >
 > ---
