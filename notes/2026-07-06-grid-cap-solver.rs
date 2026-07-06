@@ -66,6 +66,7 @@ struct GF {
     mul: Vec<u16>,
     inv: Vec<u16>,
     neg: Vec<u16>,
+    subt: Vec<u16>, // subt[x*q+y] = x - y (one lookup)
 }
 
 fn is_prime(m: usize) -> bool {
@@ -167,7 +168,17 @@ impl GF {
                 }
             }
         }
-        GF { q, add, mul, inv, neg }
+        let mut subt = vec![0u16; q * q];
+        for x in 0..q {
+            for y in 0..q {
+                subt[x * q + y] = add[x * q + neg[y] as usize];
+            }
+        }
+        GF { q, add, mul, inv, neg, subt }
+    }
+    #[inline]
+    fn subf(&self, x: usize, y: usize) -> usize {
+        self.subt[x * self.q + y] as usize
     }
     #[inline]
     fn a(&self, x: usize, y: usize) -> usize {
@@ -190,6 +201,7 @@ struct Board {
     rc_mask: Vec<Mask>,     // same row or col as cell i
     line_mask: Vec<Mask>,   // [x*N + z] = all cells on affine line through x and z
     all: Mask,
+    cellh: Vec<(u64, u64)>, // per-cell (h1,h2) for order-independent set hashing in canon
 }
 
 impl Board {
@@ -235,68 +247,76 @@ impl Board {
         for i in 0..n {
             set_bit(&mut all, i);
         }
-        Board { gf, q, n, rc_mask, line_mask, all }
-    }
-
-    // 128-bit fingerprint of a sorted cell list (two independent 64-bit poly hashes).
-    // Collision prob for ~1e9 keys ~ 1e-20; validated at small q by matching exact class counts.
-    #[inline]
-    fn fp(list: &[u16]) -> u128 {
-        let mut h1: u64 = 0x243f6a8885a308d3;
-        let mut h2: u64 = 0x13198a2e03707344;
-        for &x in list {
-            h1 = (h1 ^ x as u64).wrapping_mul(0x100000001b3);
-            h2 = h2.rotate_left(7) ^ (x as u64).wrapping_mul(0x9e3779b97f4a7c15);
-            h2 = h2.wrapping_mul(0xff51afd7ed558ccd);
+        // per-cell strong hashes (two independent 64-bit mixes) for order-independent set hashing
+        let mut cellh = vec![(0u64, 0u64); n];
+        for (i, h) in cellh.iter_mut().enumerate() {
+            let c = i as u64;
+            let mut x = c.wrapping_add(0x9e3779b97f4a7c15);
+            x = (x ^ (x >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
+            x = (x ^ (x >> 27)).wrapping_mul(0x94d049bb133111eb);
+            let h1 = x ^ (x >> 31);
+            let mut y = c.wrapping_add(0xd1b54a32d192ed03);
+            y = (y ^ (y >> 29)).wrapping_mul(0xff51afd7ed558ccd);
+            y = (y ^ (y >> 32)).wrapping_mul(0xc4ceb9fe1a85ec53);
+            let h2 = y ^ (y >> 29);
+            *h = (h1, h2);
         }
-        ((h1 as u128) << 64) | (h2 as u128)
+        Board { gf, q, n, rc_mask, line_mask, all, cellh }
     }
 
-    // canonical fingerprint = fp of the lexicographically-min anchor image over the full group.
+    // Canonical fingerprint = MIN over all anchor images of an ORDER-INDEPENDENT set hash.
+    // For each ordered occupied pair (u,v) and swap, the unique g in G with g(u)=(0,0),
+    // (optional swap), g(v)=(1,1) maps the position to an image set; its set-hash is the sum of
+    // per-cell hashes (commutative => no sort). The image-set collection is identical for all
+    // G-equivalent positions, so the min set-hash is a G-invariant (validated by matching exact
+    // class counts). No sort, no Vec, no allocation; per-cell (r,c) precomputed once.
     fn canon(&self, occ: &[u16]) -> u128 {
-        let q = self.q;
-        if occ.len() <= 1 {
-            // 0 or 1 cell: all such positions are one orbit; fixed sentinel per size.
-            return occ.len() as u128;
+        let n = occ.len();
+        if n <= 1 {
+            return n as u128; // 0/1 cell: single orbit, sentinel per size
         }
+        let q = self.q;
         let gf = &self.gf;
-        let mut best: Option<Vec<u16>> = None;
-        let mut buf = vec![0u16; occ.len()];
-        for &ui in occ {
-            let (ur, uc) = (ui as usize / q, ui as usize % q);
-            for &vi in occ {
+        let cellh = &self.cellh;
+        let mut rows = [0usize; 64];
+        let mut cols = [0usize; 64];
+        for k in 0..n {
+            let c = occ[k] as usize;
+            rows[k] = c / q;
+            cols[k] = c % q;
+        }
+        let mut best: u128 = u128::MAX;
+        let mut tr = [0usize; 64]; // cell coords after translating u->origin (per ui; reused)
+        let mut tc = [0usize; 64];
+        for ui in 0..n {
+            let (ur, uc) = (rows[ui], cols[ui]);
+            for k in 0..n {
+                tr[k] = gf.subf(rows[k], ur); // hoisted: depends only on ui, not on (vi,sw)
+                tc[k] = gf.subf(cols[k], uc);
+            }
+            for vi in 0..n {
                 if vi == ui {
                     continue;
                 }
-                let (vr, vc) = (vi as usize / q, vi as usize % q);
-                // v after translate u->origin
-                let tvr = gf.sub(vr, ur);
-                let tvc = gf.sub(vc, uc);
-                for sw in 0..2 {
-                    let (pvr, pvc) = if sw == 1 { (tvc, tvr) } else { (tvr, tvc) };
-                    // both nonzero (distinct row & col from u)
-                    let a = gf.inv[pvr] as usize;
-                    let b = gf.inv[pvc] as usize;
-                    for (k, &xi) in occ.iter().enumerate() {
-                        let (xr, xc) = (xi as usize / q, xi as usize % q);
-                        let mut yr = gf.sub(xr, ur);
-                        let mut yc = gf.sub(xc, uc);
-                        if sw == 1 {
-                            std::mem::swap(&mut yr, &mut yc);
-                        }
-                        let rr = gf.m(a, yr);
-                        let cc = gf.m(b, yc);
-                        buf[k] = (rr * q + cc) as u16;
+                // sw=0: rows=tr, cols=tc;  sw=1: rows=tc, cols=tr (swap exchanges the roles)
+                for &(sr, sc) in &[(&tr, &tc), (&tc, &tr)] {
+                    let a = gf.inv[sr[vi]] as usize; // scale v's row-coord to 1
+                    let b = gf.inv[sc[vi]] as usize; // scale v's col-coord to 1
+                    let (mut s1, mut s2) = (0u64, 0u64);
+                    for k in 0..n {
+                        let idx = gf.m(a, sr[k]) * q + gf.m(b, sc[k]);
+                        let (h1, h2) = cellh[idx];
+                        s1 = s1.wrapping_add(h1);
+                        s2 = s2.wrapping_add(h2);
                     }
-                    buf.sort_unstable();
-                    match &best {
-                        Some(cur) if cur.as_slice() <= buf.as_slice() => {}
-                        _ => best = Some(buf.clone()),
+                    let h = ((s1 as u128) << 64) | (s2 as u128);
+                    if h < best {
+                        best = h;
                     }
                 }
             }
         }
-        Self::fp(&best.unwrap())
+        best
     }
 }
 
@@ -379,41 +399,113 @@ impl<'a> Solver<'a> {
     }
 }
 
-// ---- parallel outcome solver ----
-// Sharded concurrent memo. Keys are u128 fingerprints (already well-mixed) -> IdHash + low-bit shard.
+// ---- parallel outcome solver: FIXED-ARENA open-addressing memo (Tiger-style) ----
+// One Box<[u128]> per shard, sized once at startup, NEVER grown — no per-node allocation.
+// Slot encoding (a slot is one u128): bit127 = occupied, bit126 = value (P/N), bits[0..125] =
+// 126-bit key discriminator (fp >> shard_log2). Empty slot = 0. Linear probing within a shard.
+// 126-bit key => collision prob ~ (1e9)^2 / 2^126 ~ 1e-20 at a billion classes.
+const OCC: u128 = 1u128 << 127;
+const VAL: u128 = 1u128 << 126;
+const KMASK: u128 = (1u128 << 126) - 1;
+
+struct Shard {
+    slots: Box<[u128]>, // allocated once (zeroed, lazily faulted); never resized
+    len: usize,
+}
+impl Shard {
+    fn new(cap: usize) -> Shard {
+        Shard {
+            slots: vec![0u128; cap].into_boxed_slice(),
+            len: 0,
+        }
+    }
+    #[inline]
+    fn get(&self, k: u128) -> Option<bool> {
+        let cap = self.slots.len();
+        let mut h = (k as usize) & (cap - 1);
+        loop {
+            let s = self.slots[h];
+            if s == 0 {
+                return None;
+            }
+            if (s & KMASK) == k {
+                return Some(s & VAL != 0);
+            }
+            h = (h + 1) & (cap - 1);
+        }
+    }
+    // returns true if a NEW slot was filled
+    #[inline]
+    fn insert(&mut self, k: u128, v: bool) -> bool {
+        let cap = self.slots.len();
+        let mut h = (k as usize) & (cap - 1);
+        loop {
+            let s = self.slots[h];
+            if s == 0 {
+                self.slots[h] = OCC | (if v { VAL } else { 0 }) | k;
+                self.len += 1;
+                return true;
+            }
+            if (s & KMASK) == k {
+                return false;
+            }
+            h = (h + 1) & (cap - 1);
+        }
+    }
+}
+
 struct Memo {
-    shards: Vec<Mutex<FnvMap<u128, bool>>>,
+    shards: Box<[Mutex<Shard>]>,
+    shard_log2: u32,
     mask: usize,
-    inserts: AtomicUsize, // approximate node-work counter (may double-count concurrent recompute)
+    inserts: AtomicUsize, // distinct-class fill counter (progress metric)
 }
 impl Memo {
-    fn new(log2: usize) -> Memo {
-        let n = 1usize << log2;
+    // total_log2 = log2(total slots); shard_log2 = log2(#shards). Arena bytes = 16 << total_log2.
+    fn new(total_log2: usize, shard_log2: usize) -> Memo {
+        let nshards = 1usize << shard_log2;
+        let shardcap = 1usize << (total_log2 - shard_log2);
+        let shards: Vec<Mutex<Shard>> =
+            (0..nshards).map(|_| Mutex::new(Shard::new(shardcap))).collect();
         Memo {
-            shards: (0..n).map(|_| Mutex::new(FnvMap::default())).collect(),
-            mask: n - 1,
+            shards: shards.into_boxed_slice(),
+            shard_log2: shard_log2 as u32,
+            mask: nshards - 1,
             inserts: AtomicUsize::new(0),
         }
     }
     #[inline]
-    fn shard(&self, fp: u128) -> usize {
-        (fp as usize) & self.mask
+    fn split(&self, fp: u128) -> (usize, u128) {
+        // shard = low bits; in-shard key = the remaining high bits (disjoint => uniform probe)
+        ((fp as usize) & self.mask, fp >> self.shard_log2)
     }
     #[inline]
     fn get(&self, fp: u128) -> Option<bool> {
-        self.shards[self.shard(fp)].lock().unwrap().get(&fp).copied()
+        let (s, k) = self.split(fp);
+        self.shards[s].lock().unwrap().get(k)
     }
     #[inline]
     fn insert(&self, fp: u128, v: bool) {
-        self.shards[self.shard(fp)].lock().unwrap().insert(fp, v);
-        self.inserts.fetch_add(1, Ordering::Relaxed);
+        let (s, k) = self.split(fp);
+        let mut sh = self.shards[s].lock().unwrap();
+        // guard: >87.5% full degrades probing badly => the arena was under-sized
+        if sh.len + (sh.len >> 3) >= sh.slots.len() {
+            eprintln!(
+                "FATAL: memo shard {}/{} nearly full ({}/{}); rerun with a larger arena log2",
+                s, self.mask + 1, sh.len, sh.slots.len()
+            );
+            std::process::exit(3);
+        }
+        if sh.insert(k, v) {
+            self.inserts.fetch_add(1, Ordering::Relaxed);
+        }
     }
     #[inline]
     fn work(&self) -> usize {
         self.inserts.load(Ordering::Relaxed)
     }
     fn len(&self) -> usize {
-        self.shards.iter().map(|s| s.lock().unwrap().len()).sum()
+        self.shards.iter().map(|s| s.lock().unwrap().len).sum()
     }
 }
 
@@ -497,9 +589,15 @@ fn enumerate(
     }
 }
 
-fn solve_parallel(q: usize, nthreads: usize, depth: usize) {
+fn solve_parallel(q: usize, nthreads: usize, depth: usize, arena_log2: usize) {
     let b = Board::new(q);
-    let memo = Memo::new(12); // 4096 shards
+    let memo = Memo::new(arena_log2, 12); // fixed arena: (1<<arena_log2) slots, 4096 shards
+    eprintln!(
+        "  [par q={}] arena {} slots ({} GB, fixed)",
+        q,
+        1usize << arena_log2,
+        ((16usize << arena_log2) as f64) / 1e9
+    );
     let empty = [0u64; MAXW];
     // phase 1: frontier (sequential, cheap)
     let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
@@ -613,14 +711,15 @@ fn main() {
         std::process::exit(2);
     }
     if args[1] == "par" {
-        // par <q> [threads] [depth]
+        // par <q> [threads] [depth] [arena_log2]
         let q: usize = args[2].parse().expect("q must be an integer");
         let nthreads: usize = args
             .get(3)
             .and_then(|s| s.parse().ok())
             .unwrap_or_else(|| thread::available_parallelism().map(|n| n.get()).unwrap_or(8));
         let depth: usize = args.get(4).and_then(|s| s.parse().ok()).unwrap_or(4);
-        solve_parallel(q, nthreads, depth);
+        let arena_log2: usize = args.get(5).and_then(|s| s.parse().ok()).unwrap_or(29);
+        solve_parallel(q, nthreads, depth, arena_log2);
         return;
     }
     let full = match args[1].as_str() {
