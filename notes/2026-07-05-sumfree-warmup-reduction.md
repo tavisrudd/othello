@@ -75,12 +75,15 @@ Status:
 - **The lemma genuinely breaks at `p=5`** — verified this session: `𝒢({5,3}) = 𝒢({5,1}) = ∗3` (not `∗1`), and the
   order-5 singleton `𝒢({3}) = ∗1`, giving root `mex{0,1,4} = ∗2 = 𝒢(Z₁₅)`. So the lemma is *exactly* a `p ≥ 7`
   statement, not a formality: the mechanism that makes it `∗1` for `p≥7` must fail precisely at `p=5`.
-- **No uniform `∗0`-child witness — and the two branches are ASYMMETRIC.** Codex's AP-mirror P-child for the
-  `{p,3}` branch, `{p,3,6−p}`, is `∗0` for `p ≤ 23` but **`∗4` at `p=29`** — so that branch's `∗0`-witness is
-  non-uniform. The `{p,1}` branch's AP-child `(p+1)/2` is **more robust: `∗0` for p=7…19 (Codex), 23, 29, 31**
-  (this session; p=31 = 106M nodes on the full box), no break yet. So the "`∗0` present" half has a clean witness
-  for `{p,1}` well past where `{p,3}`'s fails — the difficulty is concentrated in the `{p,3}` branch and, for both,
-  in the "`∗1` absent" half, which has no line-of-sight proof.
+- **The `∗0`-child witness is "AP-child with a SPORADIC finite exception set" (revised this session).** The
+  `{p,3}` branch's AP-child `{p,3,6−p}` is `∗0` for p=11,13,17,19,23, then **`∗4` at `p=29`, then `∗0` again at
+  `p=31`** (`{31,3,68}` = 122M nodes) — so `p=29` is a *sporadic* exception, **not** a permanent break (the base
+  `p=7` is the other known exception, `∗2`). The `{p,1}` branch's AP-child `(p+1)/2` is even cleaner: `∗0` for
+  p=7…19 (Codex), 23, 29, **31** (this session; p=31 = 106M nodes), no exception found yet. So the "`∗0` present"
+  half is a *witness-with-finite-exceptions* (matching Codex's finite-exception-book idea), not a uniform formula
+  — at the exceptional `p` a different `∗0`-child must exist (it does: `𝒢({p,3})=∗1` still holds there). The
+  branches are asymmetric in their exception sets. The genuinely hard half remains "`∗1` absent," no line-of-sight
+  proof. (p=37 for both branches is past the compute wall — `Z111`, timed out at 5400s.)
 
 ## Why `p=5` is sporadic (the precise statement)
 

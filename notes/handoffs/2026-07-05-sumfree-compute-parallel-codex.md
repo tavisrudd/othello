@@ -141,8 +141,10 @@ just "oracle for Codex"). State of the open problem:
   exactly why `G(Z15)=∗2` (the order-p singleton `{3}=∗1` there). So the lemma is a sharp `p≥7` statement.
 - **`{p,1}` branch AP-child `(p+1)/2` — CHECKED past p=19 (was the open TODO): holds `∗0` for p=17,19,23,29,31**
   (session --7, full engine; p=31 = 106M nodes). Does NOT break — asymmetric with `{p,3}` (which broke to `∗4` at p=29).
-- **`{p,3}` branch is the hard one (--5b):** `c=6-p` is NOT a uniform P-child (`∗4` at p=29); mirror
-  cert fails. Genuinely non-mirror. **No uniform `∗0`-child witness exists for either branch.**
+- **`{p,3}` branch is the hard one (--5b/--7):** `c=6-p` is `∗0` for p=11..23, `∗4` at p=29, **`∗0` again at
+  p=31** — a *sporadic* finite exception set {7,29}, NOT a permanent break (revised --7). Mirror cert fails;
+  the `∗0`-witness is "AP-child + finite exception book," matching Codex's route (the "`∗1` absent" half is
+  the genuinely open part).
 - **The real crux (both branches, unproven):** the "**missing ∗1** in the child spectrum," uniformly
   in p. Classic-hard (nimber non-values across an infinite family; values non-periodic). No line-of-sight
   proof. The **naive spare-`∗1`-token pairing is now closed** (--7): order-3 is a *destructible resource*
@@ -280,9 +282,13 @@ two-move reduction was a heuristic; I re-derived it from the proven **Lemmas 1 &
 **Compute — frontier extended, families mapped as intractable** (all runs `notes/sumfree-go/`, GOMEMLIMIT-
 capped, mem-guarded):
 - **`{p,1}` AP-child `(p+1)/2` = `∗0` (P) for p=17,19,23,29,31** (full engine; the handoff's open TODO;
-  p=31 = 106M nodes / 1120s on the full box). Does **not** break (contrast `{p,3}`'s `6−p` which broke to
-  `∗4` at p=29) — the two warm-up branches are genuinely asymmetric. p=37 + the `{p,3}` post-break values
-  at 31/37 were still in flight at wrap (`frontier_results.txt`).
+  p=31 = 106M nodes / 1120s on the full box). No exception found yet.
+- **`{p,3}` AP-child `6−p`: `∗4` at p=29 was a SPORADIC exception, not a break — it is `∗0` AGAIN at p=31**
+  (`{31,3,68}` = 122M nodes, `∗0`/P). So the pattern is `∗0` (p=11..23), `∗4` (p=29), `∗0` (p=31); the known
+  exceptions are p=7 (`∗2`) and p=29 (`∗4`). This *softens* the earlier "the `{p,3}` branch breaks" reading
+  into **"AP-child with a sporadic finite exception set"** — closer to Codex's finite-exception-book route
+  (at exceptional p, a different `∗0`-child exists since `𝒢({p,3})=∗1` still holds). p=37 both branches =
+  TIMEOUT (`Z111`, 5400s — the compute wall).
 - **Falsification N-hunt held:** boolean `Z3²×Z_p` p=11..23 all timeout (= consistent-with-P; a first-player
   win would cut off fast — none did). **No conjecture-breaker.** (p≥29 exceed the solvers' 256-bit mask.)
 - **Extended families are compute-BLOCKED (finding, not a gap):** `Z9×Z3×Z{5,7}`, `Z3³×Z{5,7}`, `Z3²×Z25`
@@ -309,5 +315,7 @@ brute sweeps — the reduction note frames exactly what remains.
 `notes/2026-07-05-sumfree-litcheck.md`; handoff updated. Validation gate held (reproduced `Z3²×Z5=∗2/N`,
 `Z3²×Z7=∗0/P`, `Z15=∗2`, cyclic values, the two-move lemma p≥7 and its p=5 break). No solver source changed
 (new tooling only in `/tmp` scratchpad scripts). Left untouched (not mine): `cmd_par/sumfree_par.go`,
-`codex-findings-sumfree.md`, queens-lane files. Frontier p=31/37 AP-child run may still be in flight —
-see `scratchpad/frontier_results.txt`; a TIMEOUT there just means the compute wall, not a new result.
+`codex-findings-sumfree.md`, queens-lane files. Frontier run COMPLETE: p=31 both branches `∗0` (`{p,1}`
+106M nodes; `{p,3}` 122M nodes, recovering from its `∗4` at p=29 ⇒ sporadic exception, not a break); p=37
+both TIMEOUT at `Z111` (compute wall). Commits `247feff` → `2b7a878` → `b6765e1` → this. All background
+compute stopped; only `memguard.sh` may still idle in `/tmp` scratchpad (harmless, self-exits ~05:00).
