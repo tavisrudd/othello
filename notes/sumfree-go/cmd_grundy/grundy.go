@@ -24,8 +24,11 @@ import (
 	"fmt"
 	"math/bits"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -370,11 +373,53 @@ func (g *Group) components(a, u Mask) []Mask {
 
 type ckey struct{ u, a Mask }
 
+func (k ckey) hash() uint64 {
+	h := k.u[0]*0x9E3779B97F4A7C15 ^ k.u[1]*0xC2B2AE3D27D4EB4F ^ k.u[2]*0x165667B19E3779F9 ^ k.u[3]*0xD6E8FEB86659FD93
+	h ^= k.a[0]*0xFF51AFD7ED558CCD ^ k.a[1]*0xC4CEB9FE1A85EC53 ^ k.a[2]*0x9E3779B185EBCA87 ^ k.a[3]*0xF58476D1CE4E5B9
+	h ^= h >> 31
+	return h * 0xBF58476D1CE4E5B9
+}
+
+const nShards = 512
+
+type memoShard struct {
+	mu sync.Mutex
+	m  map[ckey]int8
+	_  [40]byte // pad to reduce false sharing
+}
+
 type gsolver struct {
-	g     *Group
-	memo  map[ckey]int8
-	nodes int64
-	t0    time.Time
+	g      *Group
+	shard  [nShards]memoShard
+	nodes  int64
+	sem    chan struct{}
+	parPly int
+	t0     time.Time
+}
+
+func (s *gsolver) memoGet(k ckey) (int8, bool) {
+	sh := &s.shard[k.hash()&(nShards-1)]
+	sh.mu.Lock()
+	v, ok := sh.m[k]
+	sh.mu.Unlock()
+	return v, ok
+}
+
+func (s *gsolver) memoPut(k ckey, v int8) {
+	sh := &s.shard[k.hash()&(nShards-1)]
+	sh.mu.Lock()
+	sh.m[k] = v
+	sh.mu.Unlock()
+}
+
+func (s *gsolver) memoSize() int {
+	n := 0
+	for i := range s.shard {
+		s.shard[i].mu.Lock()
+		n += len(s.shard[i].m)
+		s.shard[i].mu.Unlock()
+	}
+	return n
 }
 
 // applyPerm maps every set bit of m through permutation p.
@@ -445,6 +490,30 @@ func mex(seen map[int]bool) int {
 
 // sub returns the Grundy value of the subgame from placed set A with moves
 // restricted to component C.
+// forkChildren evaluates the given tasks, running each in a worker goroutine
+// when a semaphore slot is free and inline otherwise (the standard bounded-pool
+// recursion pattern — never blocks on a full pool, so it cannot deadlock).
+// Grundy has no cutoff, so every task must run; results are order-independent.
+func (s *gsolver) forkChildren(n int, run func(i int) int) []int {
+	results := make([]int, n)
+	var wg sync.WaitGroup
+	for i := 0; i < n; i++ {
+		select {
+		case s.sem <- struct{}{}:
+			wg.Add(1)
+			go func(i int) {
+				defer wg.Done()
+				defer func() { <-s.sem }()
+				results[i] = run(i)
+			}(i)
+		default:
+			results[i] = run(i)
+		}
+	}
+	wg.Wait()
+	return results
+}
+
 func (s *gsolver) sub(a, c Mask) int {
 	u := c.and(s.g.legalMask(a))
 	pc := u.popcount()
@@ -456,7 +525,16 @@ func (s *gsolver) sub(a, c Mask) int {
 		return 1
 	}
 	comps := s.g.components(a, u)
+	depth := a.popcount()
 	if len(comps) >= 2 {
+		if depth < s.parPly {
+			res := s.forkChildren(len(comps), func(i int) int { return s.sub(a, comps[i]) })
+			x := 0
+			for _, r := range res {
+				x ^= r
+			}
+			return x
+		}
 		x := 0
 		for _, ci := range comps {
 			x ^= s.sub(a, ci)
@@ -470,24 +548,39 @@ func (s *gsolver) sub(a, c Mask) int {
 		return 1
 	}
 	key := s.armedKey(a, u)
-	if v, ok := s.memo[key]; ok {
+	if v, ok := s.memoGet(key); ok {
 		return int(v)
 	}
-	s.nodes++
+	atomic.AddInt64(&s.nodes, 1)
 	seen := map[int]bool{}
-	u.forEach(func(mv int) {
-		child := a
-		child.setBit(mv)
-		rest := u
-		rest.clearBit(mv)
-		seen[s.sub(child, rest)] = true
-	})
+	if depth < s.parPly {
+		var moves []int
+		u.forEach(func(mv int) { moves = append(moves, mv) })
+		res := s.forkChildren(len(moves), func(i int) int {
+			child := a
+			child.setBit(moves[i])
+			rest := u
+			rest.clearBit(moves[i])
+			return s.sub(child, rest)
+		})
+		for _, r := range res {
+			seen[r] = true
+		}
+	} else {
+		u.forEach(func(mv int) {
+			child := a
+			child.setBit(mv)
+			rest := u
+			rest.clearBit(mv)
+			seen[s.sub(child, rest)] = true
+		})
+	}
 	v := mex(seen)
 	if v > 127 {
 		fmt.Fprintf(os.Stderr, "grundy value %d exceeds int8\n", v)
 		os.Exit(1)
 	}
-	s.memo[key] = int8(v)
+	s.memoPut(key, int8(v))
 	return v
 }
 
@@ -524,10 +617,28 @@ func main() {
 	}
 	mods := parseMods(os.Args[1])
 	startCoords := ""
+	j := runtime.NumCPU() - 2
+	if j < 1 {
+		j = 1
+	}
+	parPly := 10
 	for i := 2; i < len(os.Args); i++ {
-		if os.Args[i] == "--start" && i+1 < len(os.Args) {
-			startCoords = os.Args[i+1]
-			i++
+		switch os.Args[i] {
+		case "--start":
+			if i+1 < len(os.Args) {
+				startCoords = os.Args[i+1]
+				i++
+			}
+		case "-j":
+			if i+1 < len(os.Args) {
+				j, _ = strconv.Atoi(os.Args[i+1])
+				i++
+			}
+		case "--par-ply":
+			if i+1 < len(os.Args) {
+				parPly, _ = strconv.Atoi(os.Args[i+1])
+				i++
+			}
 		}
 	}
 	t0 := time.Now()
@@ -536,9 +647,12 @@ func main() {
 	for i, m := range mods {
 		name[i] = "Z" + strconv.Itoa(m)
 	}
-	fmt.Printf("[%s] |G|=%d |Aut|=%d\n", strings.Join(name, "x"), g.N, len(g.auto))
+	fmt.Printf("[%s] |G|=%d |Aut|=%d  j=%d par-ply=%d\n", strings.Join(name, "x"), g.N, len(g.auto), j, parPly)
 
-	s := &gsolver{g: g, memo: make(map[ckey]int8, 1<<20), t0: t0}
+	s := &gsolver{g: g, sem: make(chan struct{}, j), parPly: parPly, t0: t0}
+	for i := range s.shard {
+		s.shard[i].m = make(map[ckey]int8)
+	}
 
 	// progress ticker
 	done := make(chan struct{})
@@ -551,7 +665,7 @@ func main() {
 				return
 			case <-tk.C:
 				fmt.Fprintf(os.Stderr, "  [%4.0fs] nodes=%d memo=%d rss=%dMB\n",
-					time.Since(t0).Seconds(), s.nodes, len(s.memo), rssMB())
+					time.Since(t0).Seconds(), atomic.LoadInt64(&s.nodes), s.memoSize(), rssMB())
 			}
 		}
 	}()
@@ -574,5 +688,5 @@ func main() {
 		outcome = "N"
 	}
 	fmt.Printf("  GRUNDY=%d  OUTCOME=%s  nodes=%d  memo=%d  time=%.2fs  rss=%dMB\n",
-		gval, outcome, s.nodes, len(s.memo), time.Since(t0).Seconds(), rssMB())
+		gval, outcome, atomic.LoadInt64(&s.nodes), s.memoSize(), time.Since(t0).Seconds(), rssMB())
 }
