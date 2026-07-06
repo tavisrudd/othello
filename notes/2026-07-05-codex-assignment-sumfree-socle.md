@@ -50,7 +50,8 @@
 > or `--compdump` (component multiset). **Don't rebuild solvers.** Report into `codex-findings-sumfree.md`.
 > Lane split: **compute owns the ∗1-half structural data + the engine; you own the proof.** Full data:
 > `2026-07-05-sumfree-nimber-engine.md` (§"2026-07-06 (session `--3`)", Findings 1–4) and `-warmup-reduction.md`.
-> (Your proj-cap lane is fine to run in parallel; this banner is the sum-free state for when you resume it.)
+> (Note: the parallel `proj-cap` work committing to `main` is a **separate agent**, not you — stay in the
+> sum-free `notes/` lane and don't touch `2026-07-06-projective-cap-game-handoff.md` or its `grid-canon` files.)
 >
 > ---
 >
