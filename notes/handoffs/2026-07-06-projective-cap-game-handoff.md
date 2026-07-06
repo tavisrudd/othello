@@ -66,7 +66,9 @@ fpf since `v≠0`). The `v ∉ {dir a, dir b}` choice is exactly what keeps `x, 
 burned-direction line. fpf involution automorphism ⇒ whole-residual pairing (P0 lemma,
 `nodekayles-pairing-lemmas`) ⇒ residual is a 2nd-player win; P1 moves first into the empty residual
 ⇒ P2 wins ⇒ `G(PG(2,q))=0`. Needs the legality/parity lemma written against `H'`, but it is a lemma,
-not an open problem. **Verify on `PG(2,{2,4,8})` then write it up.**
+not an open problem. **DONE 2026-07-05** — full proof + parity lemma in
+`2026-07-05-qeven-plane-theorem.md`; strategy verified stuck-free over all P1 lines for
+`q=2,4,8` (`2026-07-05-qeven-mirror-verify.py`).
 
 ### R4. q-odd planes are the real open kernel — the obstruction is concrete and bounded
 
@@ -473,8 +475,14 @@ Feasibility: caps are small ⇒ tiny depth ⇒ `PG(2,9)` solves in ~1s, no canon
 Only blow-up = `PG(5,2)` (= F_2^6 sum-free, large binary caps, memo > 1.3 GB, killed) —
 needs the sum-free import or a canonical solver; off critical path.
 
-**Next:** (2) write up the q-even planar theorem (R3) — data matches. (3) attack the q-odd
-kernel (R4). (0) import q=2 column beyond PG(4,2) from the F_2^{m+1} sum-free solver.
+**q-even planar theorem (R6-2) DONE:** `2026-07-05-qeven-plane-theorem.md` — full proof
+(translation mirror `τ_v`, `v ∉ {a,b}`) with the parity lemma worked out (the 3-edge case
+is killed by σ-symmetry forcing the direction-`v` line through any legal P1 move empty).
+Strategy verified stuck-free for `q=2,4,8` (0 illegal replies).
+
+**Next:** (3) attack the q-odd planar kernel (R4) — the real open problem; all q-odd planes
+are P in outcome but the uniform proof is missing. (0) import q=2 column beyond PG(4,2) from
+the F_2^{m+1} sum-free solver. (4) canonical solver for PG(5,2)/larger.
 
 ## Handoff Summary
 
