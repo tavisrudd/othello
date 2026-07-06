@@ -709,6 +709,7 @@ func main() {
 		j = 1
 	}
 	parPly := 10
+	childrenMode := false
 	for i := 2; i < len(os.Args); i++ {
 		switch os.Args[i] {
 		case "--start":
@@ -716,6 +717,8 @@ func main() {
 				startCoords = os.Args[i+1]
 				i++
 			}
+		case "--children":
+			childrenMode = true
 		case "-j":
 			if i+1 < len(os.Args) {
 				j, _ = strconv.Atoi(os.Args[i+1])
@@ -768,6 +771,46 @@ func main() {
 			start.setBit(g.idx[keyOf(e)])
 		}
 	}
+	if childrenMode {
+		// Report the child-value distribution of the start position: the nimber
+		// of every legal child (the mex of these IS the position's Grundy value).
+		// Shows exactly why the option set includes/excludes given nimbers.
+		legal := g.legalMask(start)
+		hist := map[int]int{}
+		var zeros []string
+		legal.forEach(func(mv int) {
+			child := start
+			child.setBit(mv)
+			gv := s.sub(child, g.full)
+			hist[gv]++
+			if gv == 0 {
+				zeros = append(zeros, fmt.Sprint(g.elems[mv]))
+			}
+		})
+		close(done)
+		vals := make([]int, 0, len(hist))
+		for v := range hist {
+			vals = append(vals, v)
+		}
+		sortInts(vals)
+		parts := make([]string, len(vals))
+		for i, v := range vals {
+			parts[i] = fmt.Sprintf("*%d:%d", v, hist[v])
+		}
+		mexv := 0
+		for hist[mexv] > 0 {
+			mexv++
+		}
+		fmt.Printf("  CHILD-DIST {%s}  => GRUNDY(pos)=mex=*%d  legal_moves=%d\n",
+			strings.Join(parts, " "), mexv, legal.popcount())
+		if len(zeros) > 0 && len(zeros) <= 12 {
+			fmt.Printf("  moves to *0 (P-children): %s\n", strings.Join(zeros, " "))
+		}
+		fmt.Printf("  nodes=%d  memo=%d  time=%.2fs  rss=%dMB\n",
+			atomic.LoadInt64(&s.nodes), s.memoSize(), time.Since(t0).Seconds(), rssMB())
+		return
+	}
+
 	gval := s.sub(start, g.full)
 	close(done)
 	outcome := "P"
@@ -776,4 +819,12 @@ func main() {
 	}
 	fmt.Printf("  GRUNDY=%d  OUTCOME=%s  nodes=%d  memo=%d  time=%.2fs  rss=%dMB\n",
 		gval, outcome, atomic.LoadInt64(&s.nodes), s.memoSize(), time.Since(t0).Seconds(), rssMB())
+}
+
+func sortInts(a []int) {
+	for i := 1; i < len(a); i++ {
+		for j := i; j > 0 && a[j-1] > a[j]; j-- {
+			a[j-1], a[j] = a[j], a[j-1]
+		}
+	}
 }
