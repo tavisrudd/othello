@@ -11,36 +11,46 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 - [OEIS submission draft](../2026-07-04-sumfree-oeis-draft.md) + `../2026-07-04-sumfree-bfile.txt`
 - Banked scripts: `../2026-07-04-cayley-*.py`, `../2026-07-04-sumfree-*.py`, `../2026-07-04-improved-sumfree.py`, `../2026-07-04-cayley-path-power.py`; Rust solvers in `../sumfree-solver/` (binaries gitignored).
 
-## ▶ RESUME HERE — sum-free socle reduction (updated 2026-07-05, session `2d451ba6`)
+## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 
-**State of the abelian sum-free game classification:**
-- **★ THEOREM this session: `Z₂×F₃ᵇ = P` for all `b≥1`** (σ-mirror through `k=m+p`) — the last socle
-  *endpoint*. Full proof + verification: [`../2026-07-05-sumfree-zmf3b-theorem.md`](../2026-07-05-sumfree-zmf3b-theorem.md).
-- Classification **proven** for `r₃≤1` and `s₂≥2`; both socle endpoints (`F₃ⁿ=N`, `Z₂×F₃ᵇ=P`) are
-  theorems. Sound solver landed (Codex; `../sumfree_solver.py`, root-transitivity bug fixed).
-- **Sole open piece = the SOCLE REDUCTION** `𝒢(G)=𝒢(G[6])`, sharpened to **"odd `G` with 3-torsion ⟹ N"**
-  (+ `s₂=1` non-elementary `{m}` N). Solver-verified on the small `r₃≥2` cases.
+**★★★ `Z3²×Z7 = P` — the socle reduction is disproven.** Full note:
+[`../2026-07-05-socle-reduction-FALSE.md`](../2026-07-05-socle-reduction-FALSE.md).
+The book route (`strategy_book_miner`, `socle-book-*`) is **moot — do NOT resume it.**
 
-**What's been ruled out (do NOT retry):** the reduction is NOT a mirror/pairing phenomenon —
-global σ, combined, all structured single involutions (incl. order-15 openings), fibered `H`-mirror,
-and **adaptive AFFINE** involutions all fail (`../2026-07-05-socle-reduction-not-a-mirror.md`; Codex
-findings §"Adaptive Affine Mirrors Are Insufficient"). Fixed negation-bulk provably LOSES for `r₃≥2`.
-Nimber-law and naive quotient (`G→G/6G`) also dead.
+- `Z3²×Z5=N` but `Z3²×Z7=P`, even though both have `G[6]=Z3²` (=N). So `𝒢(G)=𝒢(G[6])` and the
+  sharpening **"odd `G` w/ 3-torsion ⟹ N" are FALSE** (`Z3²×Z7` is odd with 3-torsion, yet P).
+  The coprime factor's *size* flips the outcome.
+- **Confirmed ×2** (canon-independent ⇒ sound): the **new Go solver**
+  [`../sumfree-go/sumfree.go`](../sumfree-go/sumfree.go) (full-`Aut` canon, `P`, 0 openings) **and**
+  the existing Python `sumfree_solver.py` (`canon=coordinate-subgroup`, `P`, 5.2M nodes). The
+  book-miner's *"no winning move in N-position"* crash on p=7 was the same signal.
+- **Why it was missed:** `../2026-07-05-socle-book-scaling.py` never solved the outcome — it starts
+  from `{socle opening}` and only counts a *heuristic* strategy's local fails; "socle-fail=1, constant
+  in p" was misread as "uniformly N." `Z3²×Z7`'s true outcome was never soundly checked until now.
 
-**Best lead = the BOOK route** (`../2026-07-05-socle-book-residue-shrink.md` + Codex findings
-§"Rule Book Residue Shrink"): negation is clean except on order-3 (socle) elements (bounded by `r₃`,
-not `|G|`); `r₃≤1` peel is PROVEN by the book; and Codex's `strategy_book_miner.py` reduces the
-smallest hard peel `Z3²×Z5` to a **finite 201-entry canonical exception book** under broad local reply
-families. Terminal-parity is essentially circular (normal-play) — skip it.
+**What SURVIVES (direct theorems, re-confirmed by the Go solver):** `F₃ⁿ=N`, `Z₂×F₃ᵇ=P`, `s₂≥2⟹P`,
+the `s₂=1` reduction, `r₃≤1⟹N` (`Z3×Z_p`). **What DIES:** the socle reduction / whole book program.
+The classification is **not** nearly complete — the open slice (`s₂≤1, r₃≥2`) is genuinely non-uniform.
 
-**▶ CONCRETE NEXT STEP:** test whether the 201-book is **coprime-independent** — run
-`../strategy_book_miner.py` on `Z3²×Z7` and diff the canonical-position structure against `Z3²×Z5`
-(scaling probe already showed the socle-fail count is `p`-independent). If it's the same book up to
-`Z_p` relabeling → the book-proof route is viable (prove the broad-family lemmas + verify the finite
-book + generalize by orbit/stabilizer or induction); if it blows up with `p` → route likely dead and
-the classification rests where it is. Then: OEIS submission (USER-only, still pending).
+**★ New Go solvers = the tool** (`../sumfree-go/`, single files, `go build`, no deps, memory-light
+compile — no rustc OOM): `sumfree.go` (sequential, negamax + full-`Aut(G)` canonical TT) +
+`cmd_par/sumfree_par.go` (sharded-TT parallel, ~5×, + a `--pairing` mirror verifier). Validated on all
+cyclic `Z_n`, `Z3²×Z5=N` (8 socle openings exact), `Z3³=N`, `Z2×Z3²=P`, `r₃=1` peels all N. N-cases
+fast (cutoff at first winning opening); **P-cases explode** (no boolean cutoff): `Z3²×Z11` blew past
+**100M nodes / 8 GB without converging** ⇒ brute outcome is infeasible past `p=7` on this box.
 
-Full session log: **Handoff Note — session 2026-07-05--2/--3** below (rounds 1–4 + Codex rounds 1–3).
+**Two sharper facts this session:** (1) `Z3²×Z7=P` is a **non-pairing / adaptive** P-position — the
+`--pairing` verifier finds **no** negation-bulk+socle-repair mirror (0/60) for any `p`, and odd `|G|`
+rules out a translation mirror. So neither standard mirror proves it. (2) **Leading conjecture:
+`Z3²×Z_p = N` iff `p=5`, else P** (`p=5→N`, `p=7→P` rigorous; `p=11` strongly P; NOT a `p mod 3`
+split, so `p=5` is sporadic).
+
+**▶ CONCRETE NEXT STEP:** settle the conjecture. Brute is out ⇒ **extract + characterize the adaptive
+2nd-player winning strategy for `Z3²×Z7`** (the method that cracked `F3ⁿ`/`Z2×F3ᵇ`) and generalize to
+`p≥7` — look for an *invariant*, not a pairing. Secondary: a compact 2-word-mask solver to push a couple
+more `p`; explain the `p=5` exception (max-sum-free-set parity?). OEIS submission still pending (USER).
+
+Full session log: **Handoff Note — session 2026-07-05--4** + **--2/--3** below.
 
 ## Progress
 
@@ -93,6 +103,40 @@ Full session log: **Handoff Note — session 2026-07-05--2/--3** below (rounds 1
    ≈m^0.66, k=2 ~log; last path zeros m=16168 / m=827062). Remaining: push k=2 to 10⁷ (needs a
    sub-O(m²) split) or accept as an open octal family.
 5. **Definitional variants** of the sum-free game (strong sum-free a≠b; {1..n} vs Z_n; F₂ⁿ/F₃ⁿ).
+
+## Handoff Note — session 2026-07-05--4 (`2bf7abb3-c0ff-48a2-9c80-e08a4acfe74f`)
+
+**HEADLINE: the SOCLE REDUCTION is FALSE — `Z3²×Z7 = P`.** Ran under `mi`. Full note:
+[`2026-07-05-socle-reduction-FALSE.md`](../2026-07-05-socle-reduction-FALSE.md).
+
+- **What happened:** the user asked for a fast small solver (Go, no rustc — OOM risk from the live G(17)
+  queens run). Built `notes/sumfree-go/sumfree.go` (sequential, full-`Aut(G)` canonical negamax). While
+  running the handoff's "concrete next step" (201-book coprime-independence on `Z3²×Z7`), the generalized
+  `strategy_book_miner` **crashed with "no winning move in N-position"** — because `Z3²×Z7` is not N.
+- **`Z3²×Z7 = P`, confirmed ×2:** the Go solver (`|Aut|=288`, `P`, 0 openings, 837K nodes) **and** the
+  existing Python `sumfree_solver.py` (`canon=coordinate-subgroup`, `P`, 5.2M nodes). Two different sound
+  canons agreeing ⇒ sound. This falsifies `𝒢(G)=𝒢(G[6])` and "odd `G` w/ 3-torsion ⟹ N": `G[6]=Z3²`
+  is N but `Z3²×Z7` is P. **`Z3²×Z5=N` but `Z3²×Z7=P`** — the coprime factor's size flips the outcome.
+- **Why it was missed:** `2026-07-05-socle-book-scaling.py` never solved the outcome — its `book()`
+  starts from `{socle opening}` and only counts a *heuristic* strategy's local fails. "socle-fail=1,
+  constant in p" was misread as "uniformly N"; the true outcome of `Z3²×Z7` was never soundly checked.
+- **Solver validation** (all pass): cyclic `Z_n` = mod-6 theorem; `Z3²×Z5=N` w/ the 8 socle openings
+  exact; `Z3³=N`, `Z2×Z3²=P`; `r₃=1` peels `Z3×Z5/7/11/13` all N.
+- **Parallel solver** `cmd_par/sumfree_par.go` (sharded TT + worker pool, ~5×, + `--pairing` verifier).
+  Brute P-proofs explode: `Z3²×Z11` > **100M nodes / 8 GB, no convergence** ⇒ killed (protect G(17)).
+  Brute outcome is infeasible past `p=7` here.
+- **`Z3²×Z7=P` is NON-PAIRING/adaptive:** `--pairing` finds no negation-bulk+socle-repair mirror (0/60,
+  every p); odd `|G|` ⇒ no translation mirror. Verifier validated (`Z5/Z7/Z25` negation ✓, `Z3` none,
+  `Z2×Z3²` no *negation* pairing — it wins by translation). Leading **conjecture: `Z3²×Z_p=N` iff `p=5`,
+  else P** (not a `p mod 3` split; `p=5` sporadic; `p=11` strongly P — 100M nodes, no winning opening).
+- **What survives:** all direct theorems (`F₃ⁿ=N`, `Z₂×F₃ᵇ=P`, `s₂≥2⟹P`, `s₂=1` reduction, `r₃≤1⟹N`).
+  **What dies:** the socle reduction + the whole book program (`socle-book-*`, `strategy_book_miner`).
+  The classification is NOT nearly complete — the `s₂≤1, r₃≥2` slice is genuinely non-uniform.
+- **Scripts banked:** `notes/sumfree-go/` (Go solvers), `2026-07-05-socle-book-coprime.py` (generalized
+  miner, superseded), `2026-07-05-sumfree-z3sq-pairing.py` (Python pairing search — too slow, Go version
+  used instead). **Next:** extract/characterize the adaptive `Z3²×Z7` P-strategy; a compact solver for a
+  couple more `p`; explain the `p=5` exception. OEIS submission still pending (USER-only).
+- **Did NOT commit** (awaiting user go-ahead under `mi`).
 
 ## Handoff Note — session 2026-07-05--2 (`2d451ba6-8ddd-40c9-9def-aa1aaecd68a8`)
 
