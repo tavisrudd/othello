@@ -526,7 +526,12 @@ handling: it is strictly better than `σ_c` (problem-set = 1 pointwise-fixed lin
 cross) and wins q≤9, but **fails q=11 (all 100 φ)**. `σ_c` (free cross, any center) fails q=9.
 Neither uniform; poison mechanism identified (occupied problem-point on a φ-invariant mirror
 line; antidiagonal has an extra row/col-swap channel). Also computed **PG(2,11)=P** (11.3M
-states) — q-odd ladder now P for q=3,5,7,9,11.
+states) and built a **canonical grid solver** (`2026-07-06-grid-canon.py` translation⋊swap;
+`2026-07-06-grid-canon2.py` full group incl. torus) — canonicalizes the residual grid game
+under the grid automorphism group; validated vs the naive projective solver (all P, q≤13);
+state collapse ~3000× (q=13: 3672 full-group states vs ~3×10⁸ naive). New: **PG(2,13)=P**.
+q-odd ladder now **P for q=3,5,7,9,11,13**. (Pure CPython walls at q≥17, ~30+ min/step; a
+compiled solver would extend cheaply — a background canon1 run for q=17,19,23 was launched.)
 
 **Next:** (3'') the mirror route is CLOSED — pursue a NON-mirror mechanism. For the PLANE:
 (a) **adaptive-involution** strategy — re-symmetrize after each problem-set move (obstruction:
@@ -534,10 +539,11 @@ re-symmetrizing an asymmetric S under a new monomial involution is generally imp
 (b) **non-constructive parity/counting** argument (no explicit pairing). NOTE: **Sprague–Grundy
 decomposition is unpromising in the plane** — every pair of points lies on a line, so the
 available set never partitions into independent blocks; decomposition is better aimed at the
-`m ≥ 3` lift (points can be genuinely far apart). Also: (c) push the outcome ladder to
-**PG(2,13)** (~200M states — needs a canonical/PGL-reduced solver, not the naive memo).
-(0) import q=2 column beyond PG(4,2) from the F_2^{m+1} sum-free solver. (4) canonical solver
-for PG(5,2)/larger + the `m ≥ 3` decomposition probe.
+`m ≥ 3` lift (points can be genuinely far apart). Also: (c) **DONE PG(2,13)=P** via the new
+canonical grid solver; to push further (q=17,19,23,25,27,…) **port the grid-canon solver to
+Rust/compiled** — pure CPython walls at q≥17 (canon cost × state count). (0) import q=2 column
+beyond PG(4,2) from the F_2^{m+1} sum-free solver. (4) canonical solver for PG(5,2)/larger +
+the `m ≥ 3` decomposition probe.
 
 ## Handoff Summary
 

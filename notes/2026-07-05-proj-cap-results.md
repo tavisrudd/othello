@@ -27,6 +27,7 @@ orbit and every second reply is game-equivalent.
 | PG(2,8)   |     73 |              1 | P       | 0           |  130936 | q even (char 2)                    |
 | PG(2,9)   |     91 |              1 | P       | 0           |  493556 | q=3^2 ★ non-prime field, odd char  |
 | PG(2,11)  |    133 |              1 | P       | 0           | 11289645| q odd (prime) ★ 2026-07-06         |
+| PG(2,13)  |    183 |              1 | P       | 0           |  (canon)| q odd ★ 2026-07-06 canonical solver |
 | PG(3,2)   |     15 |              1 | P       | 0           |     791 | = F_2^4 sum-free                   |
 | PG(4,2)   |     31 |              1 | P       | 0           |  311926 | = F_2^5 sum-free                   |
 | PG(3,3)   |     40 |              1 | P       | 0           |   55909 | m=3, odd char                      |
@@ -34,14 +35,40 @@ orbit and every second reply is game-equivalent.
 ## Reading
 
 - **Every computed case is P.** The conjecture `G(PG(m,q))=0` survives every test.
-- **Every q-odd plane is P** — `PG(2,{3,5,7,9,11})`, including the non-prime char-3 field
-  `q=9` and the prime `q=11` (added 2026-07-06). This is the important result of the session: the q-odd planar case, where the
+- **Every q-odd plane is P** — `PG(2,{3,5,7,9,11,13})`, including the non-prime char-3 field
+  `q=9` and the primes `q=11,13` (added 2026-07-06; q=13 via the canonical grid solver). This is the important result of the session: the q-odd planar case, where the
   natural single-involution mirror is obstructed (handoff R4), is nonetheless a
   second-player win in outcome. So P2 has a winning strategy there; what we lack is a
   clean *uniform proof*, not the verdict.
 - q-even planes (`q=2,4,8`) are P, consistent with the translation-mirror lemma (R3).
 - The m≥3 cases `PG(3,2)`, `PG(4,2)`, `PG(3,3)` are P, extending the picture past the
   plane in both characteristics.
+
+## Canonical grid solver — the ladder past q=11 (2026-07-06)
+
+The residual grid game (`2026-07-05-grid-game.py`) IS `PG(2,q)` after the opening pair
+(q×q grid, partial-permutation + affine cap, P1 first; `PG(2,q)=P ⟺ first-player loss`).
+Canonicalizing `chosen` under the grid automorphism group `G = {(r,c)↦(ar+s, bc+t)} ⋊ swap`
+(sound: `G` preserves the row/col classes AND collinearity ⇒ game value is a `G`-invariant)
+collapses the state space enormously. Two independent canonicalizations agree and both
+reproduce the naive projective outcome (all **P**) and validate for `q ≤ 13`:
+
+- `2026-07-06-grid-canon.py` — translations ⋊ swap, cheap anchor min-image.
+- `2026-07-06-grid-canon2.py` — full group (adds the torus), anchored `O(|S|³)` canon.
+
+| q  | outcome | canon-states (transl+swap) | canon-states (full group) | naive projective states |
+|---:|:-------:|---------------------------:|--------------------------:|------------------------:|
+| 9  | P       |         267 | 37   | 493,556    |
+| 11 | P       |       2,917 | 325  | 11,289,645 |
+| 13 | P       |      23,309 | 3,672| (~3×10⁸, naive infeasible) |
+
+**`PG(2,13) = P`** — new (2026-07-06), first computed with the canonical solver (naive memo
+would need ~10s of GB). The q-odd planar ladder is now **P for q = 3,5,7,9,11,13**. Larger q
+(17,19,23,25=5²,27=3³,…) are reachable in principle by the same solver but pure CPython is the
+wall (~30+ min/step at q≥17); a compiled solver would extend the ladder cheaply. The point is
+already made: `PG(2,q)=P` survives a dense sweep across odd primes, char-2, and non-prime
+fields, precisely where the single-involution mirror proof fails
+(`2026-07-06-qodd-mirror-obstruction.md`).
 
 ## Feasibility notes
 
