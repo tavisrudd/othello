@@ -33,9 +33,9 @@ column once** (`q` points total). Hence it has exactly 3 points in used rows —
 `{t_i, t_j, L_{ij}∩\text{col }c_k}`. Their union is
 `{t_i, t_j, A, B}` with `A=L_{ij}∩\text{row }r_k`, `B=L_{ij}∩\text{col }c_k`. These four are
 **distinct**: `A=B` would put the cell `(r_k,c_k)=t_k` on `L_{ij}`, making `t₁,t₂,t₃` collinear,
-contradicting the cap property; and `A,B ≠ t_i,t_j` since `A` is in the unused row `r_k`, `B` in
-the unused col `c_k`. So `|L_{ij} ∩ (\text{used row}∪\text{used col})| = 4`, giving
-`|L_{ij} ∩ FF| = q-4`.
+contradicting the cap property; and `A,B ≠ t_i,t_j` since `A` lies in row `r_k ∉ {r_i,r_j}` and
+`B` in col `c_k ∉ {c_i,c_j}` (here `r_k,c_k` are the *third* used row/col, those of `t_k`). So
+`|L_{ij} ∩ (\text{used row}∪\text{used col})| = 4`, giving `|L_{ij} ∩ FF| = q-4`.
 
 Therefore `total = (q-3)² − 3(q-4) = q² − 9q + 21`. ∎
 
