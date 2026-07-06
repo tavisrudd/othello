@@ -298,3 +298,24 @@ constraint pair in Codex's frame. Codex's independent "Reply-Formula Mining" (18
 mate replies hit ∗1 in only 130/185; no uniform affine witness) corroborates that the winning reply is
 **adaptive, not a formula** — matching Finding 2. Both lanes now agree the proof needs a **monovariant on the
 two-defect colored Schur graph**, and Finding 3 sharpens it: not a static board feature, a mex/recursion invariant.
+
+### Finding 4 (session `--3` cont.) — the recursion is *defect-count × pair-count*, not defect-count alone
+
+Codex's induction runs between one-defect and two-defect *colored* positions. Two clarifications for it
+(scripts `../2026-07-06-sumfree-{defect-recursion,three-elt,color-mechanism}.py`; "colored-defect count"
+`cd(A) = #{non-order-3 x∈A : −x∉A}`):
+
+- **The lemma "every non-P two-defect position has a one-defect ∗1 child" is FALSE as stated** (33/91 fail at
+  p=11). And **∗1 two-defect positions DO exist** (16 at p=11, 31 at p=13) — e.g. `{1,3,7,9,20}=∗1` (which is
+  the very position where §Finding-2's mirror strategy STUCKs; `{p,e}` reaches it deeper). **But every ∗1
+  two-defect position carries ≥1 symmetric colored pair** (`Sym≠∅`). The *immediate* children `{p,e,z}` have
+  `Sym=∅` (exactly the two defects `e,z`) — these are the ∗1-free objects. ⇒ the correct induction variable is
+  **(defect-count, pair-count)**: ∗1 appears at two-defect *with* pairs, never at two-defect *without* pairs.
+  The `{p,e}`-child claim is specifically "`Sym=∅` two-defect (i.e. bare `{p,e,z}`) is never ∗1."
+- **A static color signature does NOT separate ∗1** (checked, honest negative). Among all 3-element `{p,d1,d2}`
+  (p=7..19), exactly one is ∗1 — `{2,11,20}` at p=11, which happens to be F₃-monochromatic (colors `2,2,2`, so
+  the F₃-Schur constraint `2+2≠2` never couples them). Tempting mechanism: "3-elt ∗1 ⟹ F₃-monochromatic ⟹
+  `{p,3,z}` (carries color-0 `3`) is never ∗1." **But it does not reproduce** — p=17 (also `p≡2`, so
+  color-2-monochromatic sets exist) has **zero** ∗1 among them, and the general ∗1 class is polychromatic
+  (`{1,3,7,9,20}` spans colors `{0,1,2}`). So `{2,11,20}` is a small-`p` artifact, not a color law; the
+  monovariant is not F₃-color. Recorded to save Codex the same dead end.

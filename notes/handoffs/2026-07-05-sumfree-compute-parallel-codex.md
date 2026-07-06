@@ -451,13 +451,25 @@ feature). **Codex banner Round-7** hands it the pairing-is-dead result and point
 **Validation gate held:** the independent Python solver reproduces the Go engine's `{p,e}` child spectra
 exactly (p=11,13); `{p,e}` mex `=∗1`; `𝒢({1,3,7,20})=∗3` confirmed by both solvers.
 
-**Next:** the non-mirror adaptive strategy for `{p,e}+∗1` controlling the three defect-blocks (Codex's proof
-lane, engine as oracle). Do NOT retry fixed pairing/mirror (closed) or brute sweeps (exhausted). The r₃=2
-main conjecture is the same shape one rank up.
+**★ Finding 4 (recursion clarification, for Codex's induction; scripts `../2026-07-06-sumfree-{defect-recursion,
+three-elt,color-mechanism}.py`):** the induction variable is **(defect-count, pair-count)**, not defect-count.
+∗1 two-defect positions DO exist (16 at p=11, 31 at p=13) but **all carry ≥1 symmetric colored pair**
+(`Sym≠∅`; e.g. `{1,3,7,9,20}=∗1` — the exact position where Finding-2's mirror strategy STUCKs). The `{p,e}`
+children are the `Sym=∅` (bare `{p,e,z}`) two-defect positions, and those are the ∗1-free ones; the naive
+lemma "every non-P two-defect has a one-defect ∗1 child" is FALSE (33/91 fail at p=11). Also an honest color
+negative: `{2,11,20}=∗1` is F₃-monochromatic but does NOT reproduce at p=17 ⇒ the monovariant is not F₃-color.
 
-**Handoff Note — session `2026-07-06--3` (`f97581c0-7ca0-40ed-a905-80588c5d90d6`), `mi`.** Files (mine only):
-`../2026-07-05-sumfree-nimber-engine.md` (--3 addendum + Codex-convergence), `../2026-07-05-codex-assignment-sumfree-socle.md`
-(Round-7 compute banner), `../2026-07-06-sumfree-{nim-solver,mirror-break,break-exhaustive,strategy-verify,star1-profile}.py`
-(new scripts), this handoff. **Left untouched (not mine):** `codex-findings-sumfree.md` (Codex, uncommitted
-mid-flight — the colored-fiber + reply-mining work), `cmd_par/sumfree_par.go`, `py_cross.log`, queens-lane files.
-No solver source changed (Python tooling only; `grundy` binary rebuilt but unchanged source).
+**Next:** the non-mirror adaptive strategy for `{p,e}+∗1` controlling the three defect-blocks (Codex's proof
+lane, engine as oracle). Do NOT retry fixed pairing/mirror (closed), brute sweeps (exhausted), or an F₃-color
+monovariant (killed). **Bigger open direction for compute (needs user greenlight):** the **r₃=2 lift** — the
+main conjecture `Z3²×Z_p=P` (p≥7) has the same (defect-count, pair-count) shape one rank up, and compute owns
+the orbit-child data; that's the non-duplicative high-value next push if the warm-up proof stalls.
+
+**Handoff Note — session `2026-07-06--3` (`f97581c0-7ca0-40ed-a905-80588c5d90d6`), `mi`.** Two commits:
+`fe8698d` (mirror-break lemma + pairing route CLOSED, Findings 1–3) and a follow-up (Finding 4 recursion
+clarification). Files (mine only): `../2026-07-05-sumfree-nimber-engine.md` (--3 addendum + Codex-convergence
++ Finding 4), `../2026-07-05-codex-assignment-sumfree-socle.md` (Round-7 compute banner), and new scripts
+`../2026-07-06-sumfree-{nim-solver,mirror-break,break-exhaustive,strategy-verify,star1-profile,defect-recursion,three-elt,color-mechanism}.py`,
+this handoff. **Left untouched (not mine):** `codex-findings-sumfree.md` (Codex, uncommitted mid-flight — the
+colored-fiber + reply-mining work), `cmd_par/sumfree_par.go`, `py_cross.log`, queens-lane files. No solver
+source changed (Python tooling only; `grundy` binary rebuilt but unchanged source).

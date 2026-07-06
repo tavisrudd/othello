@@ -15,7 +15,14 @@
 >    `−3=18` (`9+9`). Exhaustive minimax confirms the fixed policy STUCKs at every `p=7,11,13,17`. `𝒢({p,e})=∗1`
 >    is true but **only via ADAPTIVE play** — this is the non-mirror route you did for `Z3²×Z7`. Apply it here.
 > 3. **A static-signature monovariant is ruled out** — ∗1 is ~40% of all positions, spanning every board
->    signature. A monovariant must be a mex/recursion invariant, not a board feature.
+>    signature (incl. F₃-color: I checked; `{2,11,20}=∗1` is F₃-monochromatic but that's a small-`p` artifact,
+>    p=17 kills it — do NOT chase an F₃-color law). A monovariant must be a mex/recursion invariant, not a feature.
+> 4. **Your one-defect/two-defect induction: the variable is (defect-count, PAIR-count), not defect-count.**
+>    ∗1 two-defect positions exist but **all carry ≥1 symmetric colored pair** (`Sym≠∅`; e.g. `{1,3,7,9,20}=∗1`).
+>    The `{p,e}` children are the `Sym=∅` two-defect positions (bare `{p,e,z}`) — those are the ∗1-free ones.
+>    So the claim to induct is "**bare two-defect `{p,e,z}` (no pairs) is never ∗1**", and the lemma "every
+>    non-P two-defect has a one-defect ∗1 child" is FALSE as stated (33/91 fail at p=11) — the recursion must
+>    track the pair count. (Full data: nimber-engine note §Finding 4.)
 >
 > **⇒ Your target is unchanged (∗1-absent half) but the METHOD is now pinned: an adaptive (non-pairing) winning
 > strategy for `{p,e}+∗1`, controlling the three defect-blocks. The engine oracle is standing by (request any
