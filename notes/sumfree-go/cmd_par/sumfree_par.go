@@ -593,7 +593,13 @@ func (s *Solver) extractStrategy(cap int) {
 	visited := make(map[Mask]bool)
 	decisions := 0
 	negHits := 0
+	byXkind := map[string]int{}
+	negByXkind := map[string]int{}
+	exNegIllegal := map[string]int{}
+	exNegLosing := map[string]int{}
+	exByDepth := map[int]int{}
 	exByXkind := map[string]int{}
+	exKindPair := map[string]int{}
 	exDelta := map[string]int{} // "xkind->rkind:df3a,df3b,dk"  aggregated
 	capped := false
 	var exExamples []string
@@ -644,11 +650,21 @@ func (s *Solver) extractStrategy(cap int) {
 				continue
 			}
 			decisions++
+			xk := g.elemKind(x)
+			byXkind[xk]++
 			if chosen == g.neg[x] {
 				negHits++
+				negByXkind[xk]++
 			} else {
-				xk, rk := g.elemKind(x), g.elemKind(chosen)
+				rk := g.elemKind(chosen)
 				exByXkind[xk]++
+				exByDepth[a.popcount()]++
+				exKindPair[xk+"->"+rk]++
+				if negr != x && g.legalHas(child, negr) {
+					exNegLosing[xk]++
+				} else {
+					exNegIllegal[xk]++
+				}
 				ex, ec := g.elems[x], g.elems[chosen]
 				df3a := (ec[0] - ex[0] + 3) % 3
 				df3b := (ec[1] - ex[1] + 3) % 3
@@ -668,7 +684,12 @@ func (s *Solver) extractStrategy(cap int) {
 	fmt.Printf("  strategy-tree positions=%d%s  decisions=%d  negation=%d (%.1f%%)  exceptions=%d\n",
 		len(visited), map[bool]string{true: " (CAPPED)", false: ""}[capped],
 		decisions, negHits, 100*float64(negHits)/float64(decisions), decisions-negHits)
+	fmt.Printf("  decisions by x-kind: %v\n", byXkind)
+	fmt.Printf("  negation by x-kind: %v\n", negByXkind)
 	fmt.Printf("  exceptions by x-kind: %v\n", exByXkind)
+	fmt.Printf("  exceptions by x-kind->reply-kind: %v\n", exKindPair)
+	fmt.Printf("  exception negation status: illegal=%v legal-but-losing=%v\n", exNegIllegal, exNegLosing)
+	fmt.Printf("  exceptions by depth: %v\n", exByDepth)
 	fmt.Printf("  exception (x-kind->r-kind, delta) histogram:\n")
 	type kv struct {
 		k string
@@ -748,7 +769,7 @@ func parseMods(s string) []int {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: sumfree_par <mods> [-j N] [--par-ply P] [--openings] [--start ..]")
+		fmt.Fprintln(os.Stderr, "usage: sumfree_par <mods> [-j N] [--par-ply P] [--openings] [--start ..] [--strategy-cap N]")
 		os.Exit(2)
 	}
 	mods := parseMods(os.Args[1])
@@ -760,6 +781,7 @@ func main() {
 	openings := false
 	pairing := false
 	strategy := false
+	strategyCap := 20_000_000
 	startCoords := ""
 	args := os.Args[2:]
 	for i := 0; i < len(args); i++ {
@@ -780,6 +802,11 @@ func main() {
 			pairing = true
 		case "--strategy":
 			strategy = true
+		case "--strategy-cap":
+			if i+1 < len(args) {
+				strategyCap, _ = strconv.Atoi(args[i+1])
+				i++
+			}
 		case "--start":
 			if i+1 < len(args) {
 				startCoords = args[i+1]
@@ -836,7 +863,7 @@ func main() {
 	}()
 
 	if strategy {
-		s.extractStrategy(20_000_000)
+		s.extractStrategy(strategyCap)
 		close(done)
 		fmt.Printf("  nodes=%d tt=%d time=%.2fs rss=%dMB\n", s.nodes, s.tt.size(), time.Since(t0).Seconds(), rssMB())
 		return
