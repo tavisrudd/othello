@@ -529,10 +529,10 @@ line; antidiagonal has an extra row/col-swap channel). Also computed **PG(2,11)=
 states) and built a **canonical grid solver** (`2026-07-06-grid-canon.py` translation⋊swap;
 `2026-07-06-grid-canon2.py` full group incl. torus) — canonicalizes the residual grid game
 under the grid automorphism group; validated vs the naive projective solver (all P, q≤13);
-state collapse ~3000× (q=13: 3672 full-group states vs ~3×10⁸ naive). New: **PG(2,13)=P** and
-**PG(2,17)=P** (q=17: 15.5M translation+swap states, ~15 min / 1.6 GB). q-odd ladder now
-**P for q=3,5,7,9,11,13,17**. (Pure CPython walls around here; q=19 OOMs the box under the
-canon; a compiled port would extend cheaply.)
+state collapse ~3000× (q=13: 3672 full-group states vs ~3×10⁸ naive). New: **PG(2,13)=P**,
+**PG(2,17)=P**, **PG(2,19)=P** (q=17: 15.5M states ~15 min; q=19: 11.7M states). q-odd ladder
+now **P for q=3,5,7,9,11,13,17,19**. (Pure CPython walls around here; q=23 OOMs the 13 GB cap;
+a compiled port would extend cheaply.)
 
 **Next:** (3'') the mirror route is CLOSED — pursue a NON-mirror mechanism. For the PLANE:
 (a) **adaptive-involution** strategy — re-symmetrize after each problem-set move (obstruction:

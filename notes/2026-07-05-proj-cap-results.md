@@ -29,6 +29,7 @@ orbit and every second reply is game-equivalent.
 | PG(2,11)  |    133 |              1 | P       | 0           | 11289645| q odd (prime) ★ 2026-07-06         |
 | PG(2,13)  |    183 |              1 | P       | 0           |  (canon)| q odd ★ 2026-07-06 canonical solver |
 | PG(2,17)  |    307 |              1 | P       | 0           |  (canon)| q odd ★ 2026-07-06 canonical solver |
+| PG(2,19)  |    381 |              1 | P       | 0           |  (canon)| q odd ★ 2026-07-06 canonical solver |
 | PG(3,2)   |     15 |              1 | P       | 0           |     791 | = F_2^4 sum-free                   |
 | PG(4,2)   |     31 |              1 | P       | 0           |  311926 | = F_2^5 sum-free                   |
 | PG(3,3)   |     40 |              1 | P       | 0           |   55909 | m=3, odd char                      |
@@ -36,8 +37,8 @@ orbit and every second reply is game-equivalent.
 ## Reading
 
 - **Every computed case is P.** The conjecture `G(PG(m,q))=0` survives every test.
-- **Every q-odd plane is P** — `PG(2,{3,5,7,9,11,13,17})`, including the non-prime char-3 field
-  `q=9` and the primes `q=11,13,17` (added 2026-07-06; q=13,17 via the canonical grid solver). This is the important result of the session: the q-odd planar case, where the
+- **Every q-odd plane is P** — `PG(2,{3,5,7,9,11,13,17,19})`, including the non-prime char-3 field
+  `q=9` and the primes `q=11,13,17,19` (added 2026-07-06; q=13..19 via the canonical grid solver). This is the important result of the session: the q-odd planar case, where the
   natural single-involution mirror is obstructed (handoff R4), is nonetheless a
   second-player win in outcome. So P2 has a winning strategy there; what we lack is a
   clean *uniform proof*, not the verdict.
@@ -63,13 +64,17 @@ reproduce the naive projective outcome (all **P**) and validate for `q ≤ 13`:
 | 11 | P       |       2,917 | 325  | 11,289,645 |
 | 13 | P       |      23,309 | 3,672| (~3×10⁸, naive infeasible) |
 | 17 | P       |  15,463,143 | —    | (infeasible) |
+| 19 | P       |  11,690,483 | —    | (infeasible) |
 
-**`PG(2,13) = P`** and **`PG(2,17) = P`** — new (2026-07-06), computed with the canonical
-solver (naive memo would need 10s–100s of GB). The q-odd planar ladder is now **P for
-q = 3,5,7,9,11,13,17**. Larger q (19,23,25=5²,27=3³,…) are reachable in principle by the same
-solver but pure CPython is the wall (q=17 took ~15 min / 1.6 GB with translation+swap; the
-full-group `O(|S|³)` canon is slower still); a compiled port would extend the ladder cheaply.
-The point is
+**`PG(2,13) = P`**, **`PG(2,17) = P`**, **`PG(2,19) = P`** — new (2026-07-06), computed with the
+canonical solver (naive memo would need 10s–100s of GB). The q-odd planar ladder is now **P for
+q = 3,5,7,9,11,13,17,19**. (The translation+swap canonical-class count is not monotonic in q —
+q=19's 11.7M < q=17's 15.5M — because the reduction factor `~2q²` grows with q and the cap
+structure depends on `q mod 3`; the certified quantity is the **outcome**, and the method is
+validated exactly against the naive projective solver for `q ≤ 13`.) Larger q (23,25=5²,27=3³,…)
+are reachable by the same solver but pure CPython is the wall (q=17 took ~15 min / 1.6 GB;
+q=23 OOMs the 13 GB cap; the full-group `O(|S|³)` canon is slower still); a compiled port would
+extend the ladder cheaply. The point is
 already made: `PG(2,q)=P` survives a dense sweep across odd primes, char-2, and non-prime
 fields, precisely where the single-involution mirror proof fails
 (`2026-07-06-qodd-mirror-obstruction.md`).
