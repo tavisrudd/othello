@@ -134,25 +134,33 @@ just "oracle for Codex"). State of the open problem:
   full picture in [`../2026-07-05-sumfree-nimber-engine.md`](../2026-07-05-sumfree-nimber-engine.md)
   and Codex's reasoning in [`../2026-07-05-codex-findings-sumfree.md`](../2026-07-05-codex-findings-sumfree.md)
   (Round-4/5 sections).
-- **Warm-up reduction (Codex's, solid):** root has 3 orbits; order-3 singleton `{p}=∗0`; so root`=∗1`
-  ⟺ the two-move positions `G({p,1})=G({p,3})=∗1`. Each `=∗1` ⟺ its child spectrum has `∗0`, lacks `∗1`.
-  Confirmed by engine to p=29.
-- **`{p,1}` branch:** clean AP-child `(p+1)/2`, reflection `ρ(x)=p+1-x`, finite (≤7) failure set
-  (Codex). *Not stress-tested past p=19 — CHECK first.*
-- **`{p,3}` branch is the hard one (my --5b negatives):** `c=6-p` is NOT a uniform P-child (`∗4` at
-  p=29), and the mirror-certificate idea fails (P-replies aren't reflection-invariant). Genuinely
-  non-mirror. Needs a different idea.
+- **Warm-up reduction — now RIGOROUS down to one lemma** (session --7, [warmup-reduction note](../2026-07-05-sumfree-warmup-reduction.md)):
+  re-derived from the **PROVEN** mirror Lemmas 1&4 (not heuristic). Facts B/C/D: symmetric+order-3-dead
+  ⇒`∗0`; symmetric+order-3-alive ⇒ a `∗0` child; symmetric mex reduction. Gives root`=∗1` ⟺
+  `G({p,1})=G({p,3})=∗1` (two-move lemma). **Verified the lemma BREAKS at p=5** (both `∗3`, not `∗1`) —
+  exactly why `G(Z15)=∗2` (the order-p singleton `{3}=∗1` there). So the lemma is a sharp `p≥7` statement.
+- **`{p,1}` branch AP-child `(p+1)/2` — CHECKED past p=19 (was the open TODO): holds `∗0` for p=17,19,23,29**
+  (session --7, full engine; p=31 in flight). Does NOT break at p=29 — asymmetric with `{p,3}`.
+- **`{p,3}` branch is the hard one (--5b):** `c=6-p` is NOT a uniform P-child (`∗4` at p=29); mirror
+  cert fails. Genuinely non-mirror. **No uniform `∗0`-child witness exists for either branch.**
 - **The real crux (both branches, unproven):** the "**missing ∗1** in the child spectrum," uniformly
-  in p. This is the classic-hard part (nimber non-values across an infinite family; the values aren't
-  periodic). No line-of-sight proof.
+  in p. Classic-hard (nimber non-values across an infinite family; values non-periodic). No line-of-sight
+  proof. The **naive spare-`∗1`-token pairing is now closed** (--7): order-3 is a *destructible resource*
+  (dies once `a+b=p` lands), so the opponent cashes the unspent token — a real proof must control this.
 - **Tools ready:** `cmd_grundy/grundy.go` — fast (parallel) + memory-lean (fingerprint arena) nimber
   engine; `./grundy <mods> [--start a,b,c;..] [--children]` (`--children` = child-value spectrum).
   Validated on 50+ values. Confidence estimate (mine): conjectures true ~90%+; a *rigorous* warm-up
   proof ~45–55%; r₃=2 ~25–35%.
-- **Next moves:** (a) verify `{p,1}` AP-child holds past p=19; (b) attack the "missing ∗1" — look for a
-  structural invariant on the armed components forcing the spectral gap, not more data points;
-  (c) for r₃=2, the orbit-child criterion (p=5 socle-child `∗0`→N; p=7 all `∗2`→P). Brute has no cutoff
-  and large-p is expensive — spend effort on structure, not sweeps.
+- **Next moves:** (a) ~~verify `{p,1}` AP-child past p=19~~ **DONE (--7): holds `∗0` to p=29**; (b) attack
+  the "missing ∗1" — a structural invariant on the armed components forcing the spectral gap, not more
+  data points (the compute wall is real: even the 3-element AP-child times out at p=31, `Z93`, ~70M+
+  nodes; 2-element two-move worse); (c) for r₃=2, the orbit-child criterion. **Extended families are
+  compute-BLOCKED (--7 finding):** `Z9×Z3×Z_p`, `Z3³×Z_p`, `Z3²×Z25` all intractable (boolean N-hunt
+  times out ⇒ P-suspected/no-cutoff; grundy exact blows up, per-node cost `∝|Aut|` — `Z9×Z3×Z5` = 50M
+  nodes no convergence). The r₃≥2 law needs **structure, not sweeps**.
+- **The proof, not the oracle, is the bottleneck now.** The engine is a validated oracle but the family
+  data it can reach is exhausted; the remaining work is analytic (the missing-∗1 invariant, or a
+  non-mirror strategy à la Codex's adaptive `Z3²×Z7` win).
 
 ---
 
@@ -245,3 +253,60 @@ P-reply makes the enlarged position invariant under any affine involution of `Z_
 nontrivial checked; scripts `scratchpad/mirrorcert*.py`). The `{p,3}` win is genuinely non-mirror; its
 two-move-lemma proof needs a different idea than AP-child + finite-exception reflection. Open compute
 offers to Codex: re-check the `{p,1}` AP-child `(p+1)/2` past `p=19`; any specific position on request.
+
+---
+
+### 2026-07-05 — session `2026-07-05--7` (`f240444b`, `mi`): OWN BOTH LANES — reduction hardened, frontier + families mapped
+
+**Context:** inherited both lanes (Codex out of tokens). User → bed ("have fun"), so ran an autonomous
+overnight campaign. G(17) done ⇒ box free (17 GB); no memory constraint. Kept to the `notes/` Go lane.
+
+**★ Main deliverable — the warm-up reduction is now grounded in the PROVEN mirror lemmas**
+([warmup-reduction note](../2026-07-05-sumfree-warmup-reduction.md), committed `247feff`). Codex's
+two-move reduction was a heuristic; I re-derived it from the proven **Lemmas 1 & 4** of the mod-6 theorem:
+- **Fact B** (new, proven): symmetric `A=−A` + order-3 dead ⇒ `𝒢(A)=∗0` (Lemma 1 lifted to a nimber).
+- **Fact C** (proven, via Lemma 4): symmetric + order-3 alive ⇒ playing `p` reaches a `∗0` child.
+- **Fact D** (proven): symmetric mex reduction ⇒ `𝒢(A)=∗1 ⟺ no non-order-3 child is ∗1`.
+- ⇒ `𝒢(Z_{3p})=∗1 ⟺ 𝒢({p,1})=𝒢({p,3})=∗1` (two-move lemma), every step a corollary of proven lemmas.
+- **Verified the two-move lemma BREAKS at p=5:** `𝒢({5,3})=𝒢({5,1})=∗3` (not `∗1`); order-5 singleton
+  `𝒢({3})=∗1` ⇒ root `mex{0,1,4}=∗2=𝒢(Z₁₅)`. So the lemma is a *sharp* `p≥7` statement, not a formality.
+- **Closed the naive "just mirror it" route with a reason:** the spare-`∗1`-token pairing (pair the token
+  with the single order-3 move — only one of `p,2p` ever playable since `p+p=2p` — and negation-mirror the
+  rest via Lemma 4) fails because **order-3 is a destructible resource**: it dies the instant some `a+b=p`
+  lands on the (symmetric) board, and then the position is `∗0+∗1=∗1` on the opponent's turn ⇒ opponent
+  cashes the token. A real proof must additionally control order-3's survival — which is *precisely* the
+  p=5 phenomenon (order-3 blocked early), though it doesn't by itself separate p=5 from p≥7.
+
+**Compute — frontier extended, families mapped as intractable** (all runs `notes/sumfree-go/`, GOMEMLIMIT-
+capped, mem-guarded):
+- **`{p,1}` AP-child `(p+1)/2` = `∗0` (P) for p=17,19,23,29** (full engine; the handoff's open TODO). Does
+  **not** break at p=29 (contrast `{p,3}`'s `6−p` which broke to `∗4` at p=29). p=31 (`Z93`) times out at
+  ~70M nodes — the compute wall. Frontier extension for p=31,37 running (`frontier_results.txt`).
+- **Falsification N-hunt held:** boolean `Z3²×Z_p` p=11..23 all timeout (= consistent-with-P; a first-player
+  win would cut off fast — none did). **No conjecture-breaker.** (p≥29 exceed the solvers' 256-bit mask.)
+- **Extended families are compute-BLOCKED (finding, not a gap):** `Z9×Z3×Z{5,7}`, `Z3³×Z{5,7}`, `Z3²×Z25`
+  — boolean N-hunt all timeout (P-suspected, no cutoff); grundy exact blows up (`Z9×Z3×Z5` = 50M nodes /
+  23M memo / no convergence in 40 min) because per-node cost `∝|Aut|`. These are the open r₃≥2 slice where
+  the proven abelian criterion mispredicts, and they're beyond current tooling. Composite-coprime
+  (`Z3²×Z35`, `Z3²×Z5×Z11`) need a >256-bit mask (a trivial `const W` edit on the Go tooling, deferred as
+  low-value until the analytic side moves).
+
+**Lit check** ([litcheck note](../2026-07-05-sumfree-litcheck.md), committed): the game + the "N iff p=5"
+nimber phenomenon **appear NOVEL**. Must-cite framework = **Sieben, *Impartial Hypergraph Games*, EJC 30(2)
+2023, #P2.13** (our game = his building game on the Schur 3-hypergraph). Correction: the Node-Kayles nimber
+paper (Wong et al.) is **J. Integer Seq. 23 (2020)**, not 2024. Group-*generation* games (Anderson–Harary,
+Benesh–Ernst–Sieben) are distinct (target = generate the group); Impartial SET (Uiterwijk–Hufkens) is a
+*removal* game. OEIS has no match — consistent with the prepared draft.
+
+**Bottom line for next session:** the ORACLE is exhausted (family data it can reach is mined; further sweeps
+just time out). The bottleneck is **analytic**: prove the missing-∗1 invariant (a monovariant on the armed
+components), or find a non-mirror strategy (à la Codex's adaptive `Z3²×Z7=P`). Do NOT spend the box on more
+brute sweeps — the reduction note frames exactly what remains.
+
+**Handoff Note — session `2026-07-05--7` (`f240444b-7592-4ef6-b787-54adfb4c21ca`), `mi`.** Commit `247feff`
+(warmup-reduction note + litcheck note). Files new: `notes/2026-07-05-sumfree-warmup-reduction.md`,
+`notes/2026-07-05-sumfree-litcheck.md`; handoff updated. Validation gate held (reproduced `Z3²×Z5=∗2/N`,
+`Z3²×Z7=∗0/P`, `Z15=∗2`, cyclic values, the two-move lemma p≥7 and its p=5 break). No solver source changed
+(new tooling only in `/tmp` scratchpad scripts). Left untouched (not mine): `cmd_par/sumfree_par.go`,
+`codex-findings-sumfree.md`, queens-lane files. Frontier p=31/37 AP-child run may still be in flight —
+see `scratchpad/frontier_results.txt`; a TIMEOUT there just means the compute wall, not a new result.
