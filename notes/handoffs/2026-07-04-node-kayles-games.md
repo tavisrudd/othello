@@ -39,19 +39,21 @@ rename Lean files to match older prose names.
 - anchored order-three mirror layer:
   `anchored_neg_mirror_legal` in [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean)
   and the finite-game wrappers `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`, and
-  `initial_win_of_orderThree_anchor` in [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean);
-- partial cyclic `ZMod n` bridge:
+  `initial_win_of_orderThree_anchor` in [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean),
+  plus the even-branch blocker invariant `AnchoredNegGoodWith`;
+- cyclic `ZMod n` bridge in normal-form branches:
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
-  `initial_win_of_even_of_not_three_dvd`;
+  `initial_win_of_even_of_not_three_dvd`, plus `initial_win_of_three_mul_odd` for `n = 3*k`, `k` odd
+  and `initial_isP_of_six_mul` for `n = 6*k`;
 - Queens coordinate/game bridge targets:
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level iff theorem; the
-cyclic arithmetic instantiation of the anchored order-three layer for `n ≡ 0,3 mod 6`; the full
-finite-abelian rank/cardinality bookkeeping needed for the full `r3 <= 1` abelian theorem; the affine
-cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a polished top-level iff
+over an arbitrary `n % 6`; the full finite-abelian rank/cardinality bookkeeping needed for the full
+`r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the projective odd-plane escape theorem;
+and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

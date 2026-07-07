@@ -307,6 +307,66 @@ theorem anchoredNegGood_isP_of_live_obstructions {t : G}
     (anchoredNegGood_step_of_live_obstructions
       (G := G) (t := t) ht2 hfixed hnoO3 hnoAnchorDouble) S hgood
 
+/--
+Anchored negation positions with an additional permanent blocker `m`.
+
+This is the even cyclic `3 ∣ n` state invariant: the order-three anchor `t`
+is treated asymmetrically, while the order-two point `m` remains present and
+blocks the second solution of `2y = -t`.
+-/
+def AnchoredNegGoodWith (t m : G) (S : Finset G) : Prop :=
+  AnchoredNegGood t S ∧ m ∈ S
+
+omit [Fintype G] in
+theorem anchoredNegGoodWith_step_of_live_obstructions {t m : G}
+    (ht2 : t + t = -t)
+    (hfixed :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGoodWith t m S -> Move S y -> -y ≠ y)
+    (hnoO3 :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGoodWith t m S -> Move S y -> y + y ≠ -y)
+    (hnoAnchorDouble :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGoodWith t m S -> Move S y -> y + y ≠ -t) :
+    ∀ {S : Finset G}, AnchoredNegGoodWith t m S -> ∀ y : G, Move S y ->
+      ∃ r : G, Move (insert y S) r ∧ AnchoredNegGoodWith t m (insert r (insert y S)) := by
+  intro S hgood y hymove
+  rcases hgood with ⟨hanchored, hmS⟩
+  rcases hanchored with ⟨hvalid, htS, hsym⟩
+  let r := -y
+  have hylegal : Legal (S : Set G) y := legal_of_move hymove
+  have hrlegal : Legal (insert y (S : Set G)) r := by
+    simpa [r] using anchored_neg_mirror_legal
+      (G := G) (A := (S : Set G)) (t := t) (x := y)
+      hvalid (by simpa [Finset.mem_coe] using htS) ht2 hsym hylegal
+      (hfixed ⟨⟨hvalid, htS, hsym⟩, hmS⟩ hymove)
+      (hnoO3 ⟨⟨hvalid, htS, hsym⟩, hmS⟩ hymove)
+      (hnoAnchorDouble ⟨⟨hvalid, htS, hsym⟩, hmS⟩ hymove)
+  have hrmove : Move (insert y S) r :=
+    move_of_legal (S := insert y S) (x := r) (by simpa using hrlegal)
+  refine ⟨r, hrmove, ?_⟩
+  refine ⟨?_, ?_⟩
+  · refine ⟨hrmove.2, ?_, ?_⟩
+    · simp [htS]
+    · intro z
+      simpa [r, Finset.mem_coe] using
+        (anchoredNegInvariant_insert_pair (A := (S : Set G)) (t := t) (y := y) hsym
+          (z := z))
+  · simp [hmS]
+
+theorem anchoredNegGoodWith_isP_of_live_obstructions {t m : G}
+    (ht2 : t + t = -t)
+    (hfixed :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGoodWith t m S -> Move S y -> -y ≠ y)
+    (hnoO3 :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGoodWith t m S -> Move S y -> y + y ≠ -y)
+    (hnoAnchorDouble :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGoodWith t m S -> Move S y -> y + y ≠ -t)
+    {S : Finset G} (hgood : AnchoredNegGoodWith t m S) :
+    IsP S :=
+  FiniteBuildGame.isP_of_replyStrategy
+    (Valid := Valid) (Good := AnchoredNegGoodWith t m)
+    (anchoredNegGoodWith_step_of_live_obstructions
+      (G := G) (t := t) (m := m) ht2 hfixed hnoO3 hnoAnchorDouble) S hgood
+
 theorem orderThree_singleton_isP_of_live_obstructions {t : G}
     (ht2 : t + t = -t) (ht0 : t ≠ 0)
     (hfixed :
