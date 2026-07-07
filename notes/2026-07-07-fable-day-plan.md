@@ -66,12 +66,12 @@ pointer in the nimber handoff when its pane is read back.
 
 - **W2-1. F4-lite (~30min):** read any landed C-reports (C3 gate is the blocker for O2's q=23
   campaign), mark queue entries, fold findings.
-- **W2-2. Launch the Phase-0a probe sub (Opus, background):** implement + run the
+- **W2-2. P0a probe → Codex C10 (reassigned):** implement + run the
   border-signature census/valtest probe per **Appendix P0a** below. This is the n=20 plan's
   load-bearing unknown (does the border state compress to a small signature?) measured BEFORE
   building the full certificate extractor — a day of build effort gated on a hours-scale probe.
   Standard sub guardrails + exact-match gates (in the appendix).
-- **W2-3. Fable (while the sub runs): extractor design spec.** Write the certificate extractor's
+- **W2-3. DONE (session 2): extractor design spec** written — `2026-07-07-central-child-certificate-spec.md`; build queued as C11 (gated on C10). Original scope: write the certificate extractor's
   soundness-critical design as a spec note ready for a window-3 build sub: the certification
   invariant ("paired core + border state", per the n20 plan's automatic-tau scope note), the
   exception-table format, the four opponent-move classes and their handlers, the endgame parity

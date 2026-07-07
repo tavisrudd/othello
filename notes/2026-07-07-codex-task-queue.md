@@ -153,6 +153,28 @@ you start; otherwise state the pieces against the n20 plan's §Soundness-boundar
 
 Report file: `notes/2026-07-07-codex-cert-format-scaffold.md`.
 
+## C10. P0a border-signature census/valtest probe (n=20 lucky plan, Phase 0a)
+
+Implement + run the probe EXACTLY per **Appendix P0a of `2026-07-07-fable-day-plan.md`**
+(spec is self-contained there: modes `census`/`valtest`, signature v0/v1 definitions, gates,
+guardrails). Reassigned from Opus to Codex per the standing delegation rule. Single-core,
+≤1 GB, no n=20 runs. Deliverable = the report file with the census tables (n=12,14,16,18) and
+valtest violations verbatim. This gates C11.
+
+Report file: `notes/2026-07-07-p0a-border-signature-report.md`.
+
+## C11. Central-child certificate extractor build (GATED on C10)
+
+Build per **`2026-07-07-central-child-certificate-spec.md`** (the soundness contract — do not
+weaken any obligation; signatures organize, never certify; separate checker pass + mutation
+gate). START ONLY IF C10's census shows #v1-signatures growing clearly slower than #border
+subsets at n=18 (depth ≥ 3) AND valtest violations are zero or obviously structured; if the
+result is ambiguous, STOP and wait for Fable's window-3 calibration call. Work the gates in
+order (G1 n=6..12, G2 mutation, G3 n=18 I9 Phase 0); report compression stats per G3. The n=18
+Phase-0 run may continue past your session — checkpoint the exception book.
+
+Report file: `notes/2026-07-07-codex-cert-extractor-report.md`.
+
 ## Standing (unchanged)
 
 WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per
