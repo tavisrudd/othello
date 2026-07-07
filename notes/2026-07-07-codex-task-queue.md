@@ -41,7 +41,7 @@ if it exists when you start.
 Report file: `notes/2026-07-07-codex-conic-scaffold-report.md` (list of Lean names + file, what
 is stated vs sorry-free vs deferred).
 
-## C3. Discharge the esc-mode validation gate (q=17 + q=19)
+## C3. Discharge the esc-mode validation gate (q=17 + q=19) [REPORTED 2026-07-07]
 
 O2 implemented the `esc` mode in `notes/2026-07-06-grid-cap-solver.rs` (uncommitted working
 tree) and validated q=11/q=13 byte-identical to `escape` mode, but the mandated q=17/q=19
