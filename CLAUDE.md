@@ -15,6 +15,11 @@ Queens solver (`rust/`). Active work is in `rust/`; the latest milestone is
 `GridGame`/`GridCounting` scaffolding, and Queens coordinate/game-mapping lemmas. Remaining live
 game proofs: projective odd-plane `OddEscapeGameStatement` and Queens `N20J10LuckyTarget`.
 
+**Fable-delegated queue (2026-07-07):** tasks + file-based report-back protocol in
+[codex task queue](notes/2026-07-07-codex-task-queue.md) (C1 = Lemma-4 correction machine-check,
+PRIORITY; C2 = conic-localization Lean scaffold). Codex reports via the per-task report files;
+Fable reads them at day-end wrap.
+
 ### Claude WIP
 
 **★ Queens n=18 — SOLVED: FIRST PLAYER WINS** (witness opening **I9**). [n=18 umbrella](notes/handoffs/2026-06-23-queens-n18-umbrella.md)

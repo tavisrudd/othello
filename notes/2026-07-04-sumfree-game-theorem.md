@@ -71,6 +71,13 @@ The translation `τ(z)=z+m` is **fixed-point-free** (`z+m=z` impossible), so it 
 *Proof.* `A ≠ ∅` contains some `z` and its mate `z+m`; then `(n/2) + z = z+m ∈ A`, so adding `n/2`
 completes `z + (n/2) = z+m`. ∎ Hence `n/2` is playable only from `∅`.
 
+> **CORRECTION 2026-07-07: Lemma 4 as stated below is FALSE** — it needs the extra hypothesis
+> `z ≠ t + n/2` (equivalently `2(z−t) ≠ 0`). Smallest counterexample `n=6`: `C={2}`, `z=5`,
+> reply `w=1` gives `1+1=2`. The theorem is unaffected (in every use `z = t + n/2` is illegal or
+> nonexistent). Corrected statement + exhaustive case analysis:
+> [kernel (a)](2026-07-07-kernel-sumfree-zn.md); machine confirmation (all breakers are exactly
+> this family, n ≤ 120): [Codex check](2026-07-07-codex-lemma4-check.md).
+
 **Lemma 4 (negation mirror with fixed extras — kills O₃, absorbs O₂).** Suppose `3 ∣ n`, put
 `t = n/3` (so `3t = 0`, `−t = 2t`). Let `E ⊆ {n/2, t}` (with `n/2 ∈ E ⇒ 2∣n`), and let
 `C = E ∪ S` with `S = −S`, `C` sum-free, and (if `t ∈ E`) `2t ∉ C`. Then for any move `z` with

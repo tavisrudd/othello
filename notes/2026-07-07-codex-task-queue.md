@@ -41,6 +41,31 @@ if it exists when you start.
 Report file: `notes/2026-07-07-codex-conic-scaffold-report.md` (list of Lean names + file, what
 is stated vs sorry-free vs deferred).
 
+## C3. Discharge the esc-mode validation gate (q=17 + q=19)
+
+O2 implemented the `esc` mode in `notes/2026-07-06-grid-cap-solver.rs` (uncommitted working
+tree) and validated q=11/q=13 byte-identical to `escape` mode, but the mandated q=17/q=19
+exact-match gate was interrupted at 6/21 q=17 classes (all matching so far). Everything needed —
+build line, run commands, required-empty diffs against `2026-07-06-escape-q17.log` /
+`-q19.log`, caveats — is in [O2's handoff](2026-07-07-esc23-o2-handoff.md). Run the gate to
+completion (single-core, ~23 s/class at q=17, RSS ~80 MB — safe under the box constraint).
+PASS = empty diffs on both q. Do NOT start any q=23 campaign.
+
+Report file: `notes/2026-07-07-codex-esc-gate-report.md`.
+
+## C4. Fill the arc-census paywalled gaps (q=23, q=25; q=31 full classification)
+
+O1's census ([2026-07-07-arc-census-o1.md](2026-07-07-arc-census-o1.md)) fully sourced q=27/29
+and all six minimum sizes, but the complete size spectra/counts for q=23 and q=25 live in
+paywalled papers (Coolsaet–Sticker JCD 17 (2009); Marcugini et al. Discrete Math 307 (2007);
+Faina et al. Ars Comb 47 (1997)), plus Coolsaet JCD 23 (2015) for the full q=31 classification
+and Kéri JCD 14 (2006) for large-size counts. The note's GAPS section lists the exact (q, cell)
+→ paper+table map. If you have library/alternate access, extract those tables into the census
+note's format (append a `## C4 fill` section; tabulation only, per-claim citations, no
+interpretation). If access also fails, record that and stop.
+
+Report file: `notes/2026-07-07-codex-arc-census-fill.md`.
+
 ## Standing (unchanged)
 
 WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per
