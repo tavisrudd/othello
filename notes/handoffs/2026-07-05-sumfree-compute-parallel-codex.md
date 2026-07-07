@@ -94,9 +94,16 @@ The Lean layer is narrower than this compute log. Current build check:
 - labelled-to-group bridge:
   [`../../lean/Sumfree/Z2F3Bridge.lean`](../../lean/Sumfree/Z2F3Bridge.lean);
 - full `ZMod 2 x F_3^b` game theorem:
-  `Sumfree.Z2F3Game.initial_isP` in
+  `Sumfree.Z2F3Game.initial_isP` and the ranked package theorem
+  `Sumfree.Z2F3Game.ranked_initial_isP` in
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
-  [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
+  [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean);
+- concrete rank bridge for the same `ZMod 2 x F_3^b` model in
+  [`../../lean/Sumfree/Z2F3Ranks.lean`](../../lean/Sumfree/Z2F3Ranks.lean):
+  `orderTwoKernelElements_z2v_zmod3_module`,
+  `orderThreeKernelElements_z2v_zmod3_module`, `hasTwoRank_z2v_zmod3_module`,
+  `hasThreeRank_z2v_zmod3_module`, `hasRanks_z2v_zmod3_module`, and
+  the underlying kernel-cardinality computations.
 
 **Not yet formalized in Lean:** deriving `HasTwoRank` and `HasThreeRank` for arbitrary finite
 abelian groups from a structure-theorem/rank API; any nimber/Grundy statements from this compute log;

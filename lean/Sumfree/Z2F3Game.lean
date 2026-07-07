@@ -1,5 +1,6 @@
 import Sumfree.Game
 import Sumfree.Z2F3Bridge
+import Sumfree.Z2F3Ranks
 
 /-!
 # Finite game bridge for `ZMod 2 × F_3^b`
@@ -190,6 +191,21 @@ theorem initial_isP [Nontrivial V]
     simpa [m] using afterOrderTwo_win hchar3 ha0
   · exact Game.win_after_nonexception_opening_of_orderTwoMirror
       (G := Z2V V) (v := m) (x := x) hm2 hm0 hxmove hx_m
+
+/--
+Ranked form of the `ZMod 2 × F_3^b` root theorem: the concrete product has
+2-rank `1`, 3-rank `finrank V`, and the empty game is P.
+-/
+theorem ranked_initial_isP [Module (ZMod 3) V] [Nontrivial V] :
+    Game.HasTwoRank (Z2V V) 1 ∧
+      Game.HasThreeRank (Z2V V) (Module.finrank (ZMod 3) V) ∧
+        IsP (∅ : Finset (Z2V V)) := by
+  refine ⟨Game.hasTwoRank_z2v_zmod3_module,
+    Game.hasThreeRank_z2v_zmod3_module, ?_⟩
+  exact initial_isP (V := V) (by
+    intro z
+    simpa [three_nsmul, add_assoc] using
+      (ZModModule.char_nsmul_eq_zero (n := 3) z))
 
 end Z2F3Game
 end Sumfree

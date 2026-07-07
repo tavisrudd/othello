@@ -273,6 +273,10 @@ irreducible open core is **only the socle-reduction proof itself.**
 **Lean endpoint status (2026-07-07).** The two socle endpoint game theorems are now formalized:
 `Sumfree.Game.f3_initial_win` in [`../lean/Sumfree/Game.lean`](../lean/Sumfree/Game.lean) and
 `Sumfree.Z2F3Game.initial_isP` in [`../lean/Sumfree/Z2F3Game.lean`](../lean/Sumfree/Z2F3Game.lean).
+The matching concrete rank facts for `Z₂ × F₃ᵇ` now live in
+[`../lean/Sumfree/Z2F3Ranks.lean`](../lean/Sumfree/Z2F3Ranks.lean):
+`hasTwoRank_z2v_zmod3_module` and `hasThreeRank_z2v_zmod3_module`; the combined ranked outcome
+package is `Sumfree.Z2F3Game.ranked_initial_isP`.
 
 ### ★★ THEOREM — `F₃ⁿ = N` (first player wins) for all `n`, by move-then-mirror
 

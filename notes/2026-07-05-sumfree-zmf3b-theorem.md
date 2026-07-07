@@ -90,7 +90,11 @@ labelled move. The shared finite-game certificate lemmas now live in
 formalized in [`../lean/Sumfree/Z2F3Game.lean`](../lean/Sumfree/Z2F3Game.lean): `encodedGood_step`,
 `basePair_isP`, `afterOrderTwo_win`, and `initial_isP`. The former target file now only keeps
 cross-reference statements in
-[`../lean/Sumfree/Almost/Z2F3Outcome.lean`](../lean/Sumfree/Almost/Z2F3Outcome.lean).
+[`../lean/Sumfree/Almost/Z2F3Outcome.lean`](../lean/Sumfree/Almost/Z2F3Outcome.lean). The matching
+rank-count facts for this concrete product model are formalized in
+[`../lean/Sumfree/Z2F3Ranks.lean`](../lean/Sumfree/Z2F3Ranks.lean):
+`hasTwoRank_z2v_zmod3_module` and `hasThreeRank_z2v_zmod3_module`; the combined ranked outcome
+package is `Sumfree.Z2F3Game.ranked_initial_isP`.
 
 > **Lemma.** Let `D` be `M`-symmetric and `(★)`-valid with `{0↦1, a↦0} ⊆ D`. Let `(y, ℓ)` be a legal
 > move (`y ∉ D`, and `D ∪ {y↦ℓ}` is `(★)`-valid). Then the mirror reply `(y*, 1−ℓ)`, `y* = a−y`, is a

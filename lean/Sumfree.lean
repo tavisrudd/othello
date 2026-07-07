@@ -4,6 +4,7 @@ import Sumfree.RankCounts
 import Sumfree.CyclicZMod
 import Sumfree.Z2F3Labels
 import Sumfree.Z2F3Bridge
+import Sumfree.Z2F3Ranks
 import Sumfree.Z2F3Game
 import Sumfree.Almost.F3Outcome
 import Sumfree.Almost.Z2F3Outcome
