@@ -479,6 +479,27 @@ theorem initial_win_of_unique_orderTwo_no_nonzero_orderThree {m : G}
     rw [hempty] at hxmem
     simp at hxmem
 
+/--
+Cardinality form of the unique order-two/no order-three theorem.
+
+If there is exactly one nonzero order-two element and no nonzero order-three
+negation obstruction, opening the unique order-two element wins.
+-/
+theorem initial_win_of_one_nonzero_orderTwo_no_nonzero_orderThree
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 1)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 0) :
+    Win (∅ : Finset G) := by
+  rcases Finset.card_eq_one.mp h2 with ⟨m, hmset⟩
+  have hm : m ∈ NonzeroOrderTwoElements (G := G) := by
+    rw [hmset]
+    simp
+  refine initial_win_of_unique_orderTwo_no_nonzero_orderThree
+    (G := G) (m := m) hm ?_ h3
+  intro x hx
+  have hxsingleton : x ∈ ({m} : Finset G) := by
+    rwa [← hmset]
+  simpa using hxsingleton
+
 end FiniteObstructions
 
 section Tau
@@ -615,6 +636,12 @@ theorem initial_isP_of_two_nonzero_orderTwo
     exact hab (by rw [← hxa, hxb])
   · have ha' := (mem_nonzeroOrderTwoElements (G := G) (v := a)).1 ha
     exact ⟨a, ha'.1, ha'.2, hxa⟩
+
+/-- Cardinality-inequality form of the spare order-two theorem. -/
+theorem initial_isP_of_at_least_two_nonzero_orderTwo
+    (hcard : 2 ≤ (NonzeroOrderTwoElements (G := G)).card) :
+    IsP (∅ : Finset G) :=
+  initial_isP_of_two_nonzero_orderTwo (G := G) (by omega)
 
 /--
 For any fixed nonzero order-two element `m`, all openings except `m` are

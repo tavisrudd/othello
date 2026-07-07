@@ -40,8 +40,10 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean):
   `NonzeroOrderTwoElements`, `NonzeroOrderThreeElements`,
   `initial_isP_of_no_nonzero_orderTwo_or_three`,
-  `initial_win_of_unique_orderTwo_no_nonzero_orderThree`, and
-  `initial_isP_of_two_nonzero_orderTwo`;
+  `initial_win_of_unique_orderTwo_no_nonzero_orderThree`,
+  `initial_win_of_one_nonzero_orderTwo_no_nonzero_orderThree`,
+  `initial_isP_of_two_nonzero_orderTwo`, and
+  `initial_isP_of_at_least_two_nonzero_orderTwo`;
 - finite-game anchored order-three strategy layer in
   [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean):
   `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`,

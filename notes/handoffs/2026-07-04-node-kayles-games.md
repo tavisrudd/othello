@@ -35,7 +35,9 @@ rename Lean files to match older prose names.
   (`NonzeroOrderTwoElements`, `NonzeroOrderThreeElements`,
   `initial_isP_of_no_nonzero_orderTwo_or_three`,
   `initial_win_of_unique_orderTwo_no_nonzero_orderThree`, and
-  `initial_isP_of_two_nonzero_orderTwo`);
+  `initial_win_of_one_nonzero_orderTwo_no_nonzero_orderThree`,
+  `initial_isP_of_two_nonzero_orderTwo`, and
+  `initial_isP_of_at_least_two_nonzero_orderTwo`);
 - anchored order-three mirror layer:
   `anchored_neg_mirror_legal` in [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean)
   and the finite-game wrappers `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`, and
