@@ -828,6 +828,28 @@ cross-checked against their STS(9)); the `PG(m,2)` column (P for m ≤ 4) breaks
 nim-parity trend and is a clean open conjecture in their language (smallest open case
 `STS(63)` = `F₂⁶` sum-free). Cite in the projective paper.
 
+**2026-07-07 (session 9, Fable F2) — ★ the INTRUSION CALCULUS: (ON) PROVED for q=5,7; the
+on-conic subtree uniformized; the hard core isolated.** Full writeup
+[`2026-07-07-onconic-intrusion-calculus.md`](../2026-07-07-onconic-intrusion-calculus.md),
+verifier `2026-07-07-onconic-intrusion-check.py` (all green, q=7/11 exhaustive, q=13 sample).
+Grid game reframed as pure arc-building on `PG(2,q)` from the pre-played `{a,b}` (rows/cols =
+secants through a,b; odd maximal grid caps = odd complete arcs). Results: (i) **Lemma I** —
+an on-conic S₄'s value depends only on its 6-point parameter subset of `P¹` mod the FULL
+`PGL(2,q)` (a,b are not special in the subtree; 5 points pin the conic ⇒ stab(𝒞) ≅ PGL(2));
+consistency prediction vs q=17 feat data delegated (Codex C5). (ii) **Lemma III** — one
+intruder `x` = the classical projection involution `σ_x` on the conic (ψ_u = centers on line
+ab); survivors = σ_x-pairs + tangency singletons exactly; conic-only continuation length
+`M = (q+1−2c+τ_x)/2`; legal-intruder constraint `τ_x ≤ 2τ_played + (q+1−2c)` (count form of
+the top-gap `m ≤ (q+3)/2`). (iii) **Theorem — (ON) holds for q=5,7 by proof** (no legal
+intrusion exists at c=6 ⇒ conic-only parity; first proved instances; q=9 reducible to a ≤15-
+point intruder game, not pushed). (iv) **Obstruction statement**: one-intruder parity cannot
+decide (ON) (the mover picks τ_x; onN data {11,17} vs {13,19} straddles q mod 4); the open
+core is the ≥2-intruder residual whose state = dihedral orbit structure of `⟨σ_x, σ_x'⟩` —
+element orders divide `q±1` — the first structural bridge from game value to the arithmetic
+of q, and the identified entry point of the observed erraticness. Next options in the note §6:
+winning-intrusion census keyed on `(τ_x, τ_played, ord(σσ'))`, a second-intrusion answer
+lemma (candidate uniform mechanism), q=9 warm-up certificate.
+
 **Open-math plan written**: [`2026-07-07-projcap-open-math-plan.md`](../2026-07-07-projcap-open-math-plan.md)
 — settled-results table, the open kernel (ESC) with its known proof constraints, attack routes
 (A adaptive-invariant / B finer counting / C per-q Lean certificates / D falsification / E m≥3)

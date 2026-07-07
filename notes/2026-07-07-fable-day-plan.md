@@ -11,6 +11,22 @@ small-memory/single-core; no q=23 runs today.
 Conic localization lemma + (ON) refinement (committed `cabb90c`, `7a42e16`); nofil prior-art
 discovery, doc corrections incl. the REVISED novelty verdict (committed `d1ccb5f`).
 
+## Status (updated end of Fable session 1, ~mid-day)
+
+- **F1 DONE** (commit `6b4f57f`): four kernels written — `2026-07-07-kernel-{sumfree-zn,
+  affine-cap, nofil-corollaries, conic-localization}.md`. En route: **sum-free Lemma 4 was
+  FALSE as stated** (breaker family `z = t + n/2`; theorem uses safe); corrected + banner on
+  the 2026-07-04 note + Codex-confirmed to n ≤ 120 (C1 report).
+- **F2 DONE** (commit `99fb6f4`): [intrusion calculus](2026-07-07-onconic-intrusion-calculus.md)
+  — (ON) PROVED q=5,7; PGL(2) uniformization; one-intruder parity solved; multi-intruder
+  dihedral core isolated. Machine-verified.
+- **O1–O4 all delivered**: arc census (q=27/29 full, q=23/25 gaps → C4); esc mode (q=11/13
+  gates PASS byte-identical, q=17/19 gate → C3); LaTeX scaffold (compiles, kernels as \input
+  slots); related-work pulls (Szőnyi–Weiner vs Ball–Lavrauw scoping catch).
+- **Codex queue** ([tasks](2026-07-07-codex-task-queue.md)): C1 REPORTED, C2 REPORTED,
+  C3–C5 pending. Per user: further delegation goes to Codex, not Opus subs.
+- **F3 (soundness audit) + F4 (wrap/review of C-reports) → NEXT (fresh) SESSION.**
+
 ## Fable blocks (rest of day, in order)
 
 - **F1. Paper math kernels (~2–3h).** Write the load-bearing mathematics paper-ready, one note

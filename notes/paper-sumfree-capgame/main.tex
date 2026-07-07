@@ -1,0 +1,345 @@
+\documentclass[11pt]{article}
+
+% ---------------------------------------------------------------------------
+% Sum-free + affine-cap achievement games (Nofil genus): paper scaffold.
+% Structure + non-proof sections drafted by an assistant from the repo notes
+% (2026-07-07). The four theorem-proof sections are \input slots written
+% separately by the lead author -- see kernels/*.tex (each a stub + TODO).
+%
+% Every drafted paragraph block below is flagged
+%   % DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+% and every specific numeric count carries a "% SOURCE:" comment.
+% ---------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% --- theorem environments (used by the kernel sections) ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% --- common macros ---
+\newcommand{\Znn}{\mathbb{Z}}
+\newcommand{\Zn}[1]{\mathbb{Z}_{#1}}
+\newcommand{\Fq}{\mathbb{F}_q}
+\newcommand{\AG}{\mathrm{AG}}
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\STS}{\mathrm{STS}}
+\newcommand{\Grundy}{\mathcal{G}}       % Sprague-Grundy value
+
+% ===========================================================================
+\title{%
+  % TODO(title): placeholder -- lead author to finalize.
+  Achievement games in the Nofil genus:\\
+  the sum-free game on $\Zn{n}$ and the cap game on $\AG(n,q)$}
+
+\author{%
+  % TODO(authors): placeholder author block.
+  Tavis Rudd \and (co-authors TBD)}
+
+\date{Draft \today}
+
+\begin{document}
+\maketitle
+
+% ---------------------------------------------------------------------------
+\begin{abstract}
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+We study impartial, normal-play achievement (building) games in the genus introduced by
+Huggan, Huntemann, and Stevens under the name \emph{Nofil}~\cite{huggan2022nofil}: a move adds
+a point to the built set as long as it does not complete a forbidden triple, and the last
+player able to move wins. We determine the outcome for two structured families. First, for the
+\emph{sum-free achievement game} on $\Zn{n}$ (build a sum-free subset of $\Zn{n}$; a move adds
+$x$ keeping the set free of solutions of $a+b=c$), we prove that for $n \geq 5$ the second player
+wins if and only if $n \equiv 0, 1, 5 \pmod 6$. The associated sequence of Sprague--Grundy values
+appears to be new. Second, for the \emph{cap achievement game} on $\AG(n,q)=\Fq^n$ (build a cap,
+i.e.\ a set with no three collinear points), we prove that the second player wins for every $n$
+and every prime power $q$; the $q=3$ case is the cap-set game, so this settles it in every
+dimension---including $d=5$---with no computation. Translated into Nofil's language, the affine
+theorem gives Nofil its first infinite family of Steiner triple systems with a determined
+outcome (nim-value $0$ on $\STS(3^n)$ for all $n$), and the $\mathbb{F}_2$ sum-free data
+supplies structured entries that cut against a $v \bmod 6$ nim-parity trend visible in the
+computed Nofil data. We record extensive computational corroboration and a conic-localization
+lemma directed at the open projective analogue.
+\end{abstract}
+
+% ===========================================================================
+\section{Introduction}
+\label{sec:intro}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+An impartial \emph{achievement game} on a hypergraph is played by two players who alternately
+choose previously unchosen vertices; a vertex is a legal move only while the set of chosen
+vertices, together with the new vertex, remains free of any hyperedge. Under normal play the
+last player able to move wins. Huggan, Huntemann, and Stevens~\cite{huggan2022nofil} study this
+game on the block hypergraph of a Steiner triple system under the name \emph{Nofil} (``Next One
+to FIll is the Loser'': a move that would complete a block of already-chosen points is illegal).
+They show, among other things, that deciding the outcome of Nofil positions on Steiner triple
+systems is PSPACE-complete, and that once the available hypergraph collapses to a graph the game
+is exactly Node-Kayles~\cite{sieben2023hypergraph}. General positions of this genus are therefore
+intractable, which places \emph{theorems for structured families} at the tractable frontier.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+This paper determines the outcome for two such families, both instances of the same genus.
+\begin{itemize}
+  \item \textbf{The sum-free game on $\Zn{n}$} (Section~\ref{sec:sumfree-zn}). A position is a
+    sum-free subset $A \subseteq \Zn{n}$ (no $a+b=c$ with $a,b,c \in A$, and $a=b$ permitted so
+    that $2a \in A$ is forbidden); a move adds an element keeping $A$ sum-free. This is Nofil's
+    genus on the Schur $3$-uniform hypergraph of $\Zn{n}$, which is not a Steiner triple system.
+    We prove a clean residue law: for $n \geq 5$ the second player wins iff $n \equiv 0,1,5
+    \pmod 6$.
+  \item \textbf{The cap game on $\AG(n,q)$} (Section~\ref{sec:affine-cap}). A position is a cap
+    in $\AG(n,q)=\Fq^n$ (no three collinear points); a move adds a point keeping it a cap. We
+    prove that the second player wins for every $n$ and every prime power $q$. For $q=3$ this is
+    the cap-set game and the result settles every dimension without computation.
+\end{itemize}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+We then draw out the consequences in Nofil's own terms (Section~\ref{sec:nofil-corollaries}).
+Every $\AG(n,3)$ is a Steiner triple system $\STS(3^n)$, so the affine theorem gives Nofil its
+first infinite family with a determined outcome; since these systems are vertex-transitive, their
+nim-value lies in $\{0,1\}$ (Proposition~6 of~\cite{huggan2022nofil}), and a second-player win
+pins it to exactly $0$. The $\mathbb{F}_2$ sum-free game coincides with the cap game on
+$\PG(m,2)=\STS(2^{m+1}-1)$; its computed values give the projective column and a structured
+observation about the $v \bmod 6$ nim-parity trend seen in the Nofil data. The projective cap
+game in general remains open, and Section~\ref{sec:conic-localization} records a conic-localization
+lemma directed at it.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{Relation to prior work and novelty.} The game genus itself is published: our games
+are Nofil~\cite{huggan2022nofil} on particular $3$-uniform hypergraphs, and we frame our
+contributions as new theorems and infinite families \emph{inside} that genus rather than as a new
+game. Within the genus, the sum-free achievement game on $\Zn{n}$ appears to be a previously
+unstudied instance---a prior-art search surfaced no published game on sum-free sets, and the
+resulting Grundy sequence has no match in the OEIS---while the cap game specializes the genus to
+the two classical infinite Steiner-triple-system families (affine and projective). Two independent
+cross-checks against the published Nofil data confirm the placement: the Fano plane
+$\PG(2,2)=\STS(7)$ has nim-value $0$, matching our $\mathbb{F}_2$ result, and the unique
+$\STS(9)=\AG(2,3)$ has nim-value $0$, matching the affine theorem's specialization.
+% SOURCE: cross-checks and novelty verdict, notes/2026-07-07-nofil-connection.md and
+% notes/2026-07-04-sumfree-game-theorem.md (revised 2026-07-07).
+
+% ===========================================================================
+\section{Preliminaries and conventions}
+\label{sec:prelim}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+We use standard impartial-game theory. All games here are finite, impartial, and played under
+the \emph{normal-play} convention: the player facing a position with no legal move loses. For a
+position $P$ we write $\Grundy(P)$ for its Sprague--Grundy (nim-) value; $P$ is a \emph{$P$-position}
+(a second-player win) iff $\Grundy(P)=0$, and an \emph{$N$-position} (a first-player win) otherwise.
+The Sprague--Grundy value of a disjunctive sum of independent components is the nim-sum (bitwise
+XOR) of the components' values.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\begin{definition}[Achievement game on a hypergraph]
+Let $H=(V,\mathcal{E})$ be a hypergraph. In the \emph{achievement game} on $H$, players alternately
+add a vertex to a jointly built set $A \subseteq V$; adding $x \notin A$ is legal iff $A \cup \{x\}$
+contains no hyperedge of $H$. Play starts from $A=\varnothing$; the last player to move wins.
+Equivalently this is \emph{hypergraph Node-Kayles}: the reachable positions are the hyperedge-free
+(``independent'') subsets of $H$, and terminal positions are the inclusion-maximal ones.
+\end{definition}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\begin{remark}
+For a $3$-uniform $H$ this is exactly Nofil~\cite{huggan2022nofil} on $H$ (a move completing a
+hyperedge is illegal; normal play). When $H$ is the block hypergraph of a Steiner triple system,
+it is Nofil in the original sense. Our two families use $H$ equal to the Schur triple hypergraph
+of $\Zn{n}$ and the collinear-triple hypergraph of $\AG(n,q)$; the latter is a Steiner triple
+system exactly when $q=3$.
+\end{remark}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+We record the objects and conventions used throughout.
+\begin{itemize}
+  \item \emph{Sum-free set.} $A \subseteq \Zn{n}$ is \emph{sum-free} if there is no solution of
+    $a+b=c$ with $a,b,c \in A$; we allow $a=b$, so $2a=c$ is also forbidden. The element $0$ is
+    never playable ($0+0=0$), so the game lives on $\Zn{n} \setminus \{0\}$.
+  \item \emph{Cap.} $A \subseteq \AG(n,q)=\Fq^n$ is a \emph{cap} if it contains no three distinct
+    collinear points. A line over $\Fq$ has $q$ points; for $q=3$, ``no three collinear'' is ``no
+    full line,'' the classical cap-set condition, and $a,b,c$ collinear iff $a+b+c=0$.
+  \item \emph{Symmetry.} Both games carry rich automorphism groups (affine maps; multiplications
+    and negation on $\Zn{n}$). A hypergraph automorphism that is a fixed-point-free involution with
+    no vertex adjacent to its image yields a mirror (pairing) strategy for the second player; this
+    is the engine of both theorems and is developed in the respective sections.
+  \item \emph{Vertex-transitivity.} If the automorphism group acts transitively on vertices, all
+    opening moves are equivalent, so the root nim-value lies in $\{0,1\}$; this is Proposition~6
+    of~\cite{huggan2022nofil} and applies to every $\AG(n,q)$ and every $\Zn{n}$.
+  \item \emph{Decomposition.} The sum-free game decomposes as a disjunctive sum over the connected
+    components of the residual ``armed'' Schur hypergraph, with $\Grundy$ the nim-sum of the
+    components' values; we use this only as a solver lever and structural handle, not in the proofs.
+\end{itemize}
+
+% ===========================================================================
+% --- The four theorem-proof sections: EMPTY \input slots, written separately ---
+% ===========================================================================
+
+% TODO(F1a): sum-free Z_n mod-6 outcome theorem + proof -- lead author writes kernels/sumfree-zn.tex.
+\input{kernels/sumfree-zn}
+
+% TODO(F1b): affine cap AG(n,q) always-P theorem + proof -- lead author writes kernels/affine-cap.tex.
+\input{kernels/affine-cap}
+
+% TODO(F1c): Nofil corollaries (AG(n,3) STS family; PG(m,2) column) -- lead author writes kernels/nofil-corollaries.tex.
+\input{kernels/nofil-corollaries}
+
+% TODO(F1d): projective cap game + conic-localization lemmas -- lead author writes kernels/conic-localization.tex.
+\input{kernels/conic-localization}
+
+% ===========================================================================
+\section{Computational results}
+\label{sec:computational}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+The theorems above are proved uniformly and no machine step is load-bearing; the computations in
+this section are corroboration, and they also produced the new integer sequence.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{The sum-free sequence on $\Zn{n}$.} A multiplier-quotient Grundy solver (Rust) computed
+$\Grundy(\varnothing)$ for $\Zn{n}$; the values were validated against a direct brute-force solver
+for small $n$, and the outcome law was confirmed with zero exceptions.
+The first terms $a(n)=\Grundy(\varnothing)$, $n=1,\dots,27$, are
+% SOURCE: notes/2026-07-04-sumfree-oeis-draft.md (b-file n=1..65) and
+% notes/2026-07-04-sumfree-capset-game.md (Result 1 table).
+\[
+  0,\,1,\,1,\,2,\,0,\,0,\,0,\,2,\,1,\,1,\,0,\,0,\,0,\,2,\,2,\,3,\,0,\,0,\,0,\,2,\,1,\,3,\,0,\,0,\,0,\,2,\,1,\dots
+\]
+The sequence was computed through $n=65$; all values through $n=65$ lie in $\{0,1,2,3\}$, and the
+sequence is not eventually periodic---only the \emph{outcome} (whether $a(n)=0$) is periodic mod
+$6$. A direct OEIS lookup of the initial terms returns no match, so the sequence appears to be new.
+% SOURCE: computed through n=65 and OEIS no-match, notes/2026-07-04-sumfree-oeis-draft.md;
+% values validated vs brute-force for small n, notes/2026-07-04-sumfree-capset-game.md.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+Two further checks support the proof mechanism. The mirror steps were verified to have zero
+counterexamples over all reachable symmetric positions for $n \leq 36$, and the outcome law was
+confirmed for every $n$ from $5$ to $65$ without exception.
+% SOURCE: 0 mirror-breakers n<=36 and law confirmed to n=65, notes/2026-07-04-sumfree-game-theorem.md.
+Independently, the disjunctive-sum decomposition (nim-sum over connected components of the residual
+armed Schur hypergraph) was checked with zero mismatches over roughly $70{,}000$ reachable positions
+for $n \in \{12,15,17,18,20,22,24,30\}$.
+% SOURCE: ~70,000 positions, listed n, 0 mismatches, notes/2026-07-04-sumfree-capset-game.md.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{The cap game on $\AG(n,q)$.} Brute-force Sprague--Grundy solves confirm the second-player
+win ($\Grundy=0$) in every case attempted: $\AG(2,3)$ and $\AG(3,3)$ ($q=3$); $\AG(1,5),\AG(2,5)$ and
+$\AG(1,7),\AG(2,7)$ (odd prime $q$); $\AG(2,9)$ (odd non-prime $q$, $81$ points, $410{,}575$ reachable
+states); and $\AG(1,4),\AG(2,4)$ and $\AG(1,8),\AG(2,8)$ (characteristic $2$).
+% SOURCE: enumerated cases incl. AG(2,9) 81 pts / 410,575 states, notes/2026-07-04-capset-game-theorem.md.
+For $q=3$ the four-dimensional case was solved via a full $\mathrm{AGL}(4,3)$ canonical quotient: the
+outcome-only solve returns a $P$-position over $8191$ classes, and the full Grundy solve returns
+$\Grundy(\AG(4,3))=0$ over $9908$ inequivalent caps (of all sizes $0$--$20$), the two agreeing and
+reproduced by two independent binaries.
+% SOURCE: AGL(4,3) quotient, 8191 outcome classes / 9908 Grundy classes, notes/2026-07-04-sumfree-capset-game.md.
+The explicit mirror strategies were validated to beat every first-player line of play: the reflection
+mirror for $\AG(2,3),\AG(2,5),\AG(2,7),\AG(3,3)$ and the translation mirror for $\AG(2,4),\AG(2,8)$.
+% SOURCE: strategy validation runs, notes/2026-07-04-capset-game-theorem.md.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{Cross-checks against the Nofil data.} The two smallest classical Steiner triple systems
+match: $\STS(7)$ (the Fano plane $=\PG(2,2)$) has nim-value $0$, agreeing with the $\mathbb{F}_2$
+sum-free result, and the unique $\STS(9)=\AG(2,3)$ has nim-value $0$, agreeing with the affine
+theorem---both as computed in~\cite{huggan2022nofil}. For the projective column, the
+$\mathbb{F}_2$ sum-free game equals the cap game on $\PG(m,2)=\STS(2^{m+1}-1)$ and was computed to
+be a second-player win ($\Grundy=0$) for $m \leq 4$ (orders $7,15,31$); $m=5$ (order $63$,
+$\STS(63)$) is open. By contrast the generic Nofil data are irregular---for example $\STS(13)$ has
+nim-value $1$, most $\STS(15)$ and $\STS(21)$ have nim-value $0$ with values up to $3$ occurring,
+and $\STS(25)$ shows mixed values---so the uniform $P$ on our infinite families is special rather
+than generic.
+% SOURCE: STS(7),STS(9) matches; PG(m,2) value 0 for m<=4 / order 63 open; generic STS calibration
+% (STS 13/15/21/25) -- notes/2026-07-07-nofil-connection.md (generic figures from Huggan-Huntemann-Stevens).
+
+% ===========================================================================
+\section{Related work}
+\label{sec:related}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{The Nofil genus.} Huggan, Huntemann, and Stevens~\cite{huggan2022nofil} introduced Nofil
+on Steiner triple systems, computed nim-values for all systems of small order, proved
+PSPACE-completeness of the outcome problem (via a Node-Kayles reduction), and observed the
+Node-Kayles endgame. Their program is exhaustive to small order plus samples at larger orders, and
+no infinite family had a determined outcome; a $2025$ follow-up~\cite{huntemann2025minimal} develops
+the associated point-deletion / graph-embedding machinery. Our results live in this genus.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{Impartial games on hypergraphs and groups.} Sieben's impartial hypergraph
+games~\cite{sieben2023hypergraph} give the general achievement/building-game framework; our games
+are the achievement game on specific $3$-uniform hypergraphs. A closely related active line is the
+impartial \emph{group generation} achievement games of Benesh, Ernst, and
+Sieben~\cite{benesh2016symmetric,benesh2018nilpotent}, where the winning condition is generating the
+group rather than staying sum-free or cap---a framework relative with a different objective.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{Games on \textsc{Set}.} Several games share the $\AG(n,3)$ line structure but are distinct
+from ours. \emph{Anti-Set}~\cite{clark2016antiset} is a mis\`ere game with separate hands and an
+explicit strategy (no nim-values). The impartial \textsc{Set} game of Uiterwijk and
+Hufkens~\cite{uiterwijk2023impartialset} is a \emph{removal} game (players take lines out of the
+layout), whereas our players \emph{build} a cap by adding points---a different move set on the same
+line hypergraph. Lampis and Mitsou~\cite{lampis2014setcomplexity} analyze the computational
+complexity of the \textsc{Set} family. None of these compute the achievement-game nim-values studied
+here.
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\paragraph{Extremal cap sets and sum-free sets.} The cap game is adjacent to, but distinct from, the
+extremal cap-set problem (the maximum size of a cap): Croot, Lev, and
+Pach~\cite{croot2017progression} and Ellenberg and Gijswijt~\cite{ellenberg2017capset} bound the
+maximum size for $q=3$, and program search has improved low-dimensional lower
+bounds~\cite{romeraparedes2024funsearch}. These concern maximum size; our game concerns the outcome,
+and the theorem says nothing about cap sizes (the game's terminals are inclusion-\emph{maximal}, not
+\emph{maximum}, caps). Likewise the structure of sum-free and maximal-sum-free sets---classical
+material of Wallis, Street, and Wallis~\cite{wallis1972combinatorics}, Diananda and
+Yap~\cite{diananda1969maximal}, and Green and Ruzsa~\cite{green2005sumfree}---describes the terminal
+positions of the $\Zn{n}$ game but not its outcome. The umbrella framework is Node-Kayles, whose
+nim-value sequences have been tabulated for several graph families~\cite{wong2024nimber}.
+
+% ===========================================================================
+\section{Open problems}
+\label{sec:open}
+
+% DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
+\begin{enumerate}
+  \item \textbf{The projective cap game.} Is the cap game on $\PG(m,q)$ always a second-player win?
+    It is computed to be $P$ in every small case, but the affine proof does not transfer:
+    $\PG(m,q)$ has no translations and the board size $(q^{m+1}-1)/(q-1)$ has no uniform parity, so
+    neither mirror drops out. Section~\ref{sec:conic-localization} is a partial step; a general
+    certificate is open.
+  \item \textbf{The smallest open projective column entry.} Is $\PG(5,2)=\STS(63)$, equivalently the
+    $\mathbb{F}_2^6$ sum-free game, a second-player win? This is the smallest open case of the
+    conjecture that $\PG(m,2)$ is always $P$, and a concrete Nofil target.
+    % SOURCE: STS(63)/m=5 as the concrete open target, notes/2026-07-07-nofil-connection.md.
+  \item \textbf{The abelian generalization of the sum-free law.} The mod-$6$ law is the cyclic case
+    of a criterion for the sum-free game on any finite abelian group, proved when the Sylow-$3$
+    subgroup is cyclic or the $2$-rank is at least $2$; the slice with $2$-rank $\leq 1$ and $3$-rank
+    $\geq 2$ (never occurring in $\Zn{n}$) remains open.
+    % SOURCE: abelian criterion status, notes/2026-07-04-sumfree-game-theorem.md (generalization section).
+  \item \textbf{Structure of the $N$-side nim-values.} The sum-free outcome is periodic mod $6$, but
+    the nim-values themselves are irregular on the first-player-win residues; no closed form is known.
+  \item \textbf{Higher-degree variants.} ``No $t$ collinear'' for $t>3$, or higher-flat achievement
+    games, are not covered by the mirror argument (a mirror can create a longer forbidden flat) and
+    are open.
+  \item \textbf{Complexity of structured positions.} Nofil is PSPACE-complete on Steiner triple
+    systems in general~\cite{huggan2022nofil}; the complexity of deciding positions of the
+    $\AG(n,q)$ and $\PG(2,q)$ games specifically is open.
+\end{enumerate}
+
+% ===========================================================================
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

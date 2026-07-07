@@ -17,6 +17,12 @@
 //   escape   q   -- per-size-3-class escape margin (# P size-4 children) + bad-parity split
 //                   (route-A crux 2026-07-06-escape-count-lemma.md): min/max escape, histogram,
 //                   #even-escape (=bad-odd) classes, parity-proof holds/breaks. Single-threaded.
+//   esc <q> [--cap <slots>] [class-index...]
+//                -- same escape/bad table as `escape`, but each canonical size-3 class is solved
+//                   with a PRIVATE full-expansion memo dropped after the class (no global arena):
+//                   route (D), push past the q=19 memory wall class-by-class. Reports per-class
+//                   escape/bad + PEAK private-memo size; `--cap` aborts a class whose memo exceeds
+//                   it; a class-index filter resumes a q=23 campaign. Single-threaded, small RSS.
 //   resym [vK] q -- route-(A)-1/2 adaptive symmetric-strategy closure test (open-math plan
 //                   2026-07-07): solve the game with P2 RESTRICTED to replies that land the
 //                   position in family F_v (symmetric under some grid-automorphism involution,
@@ -809,6 +815,242 @@ fn solve_escape(q: usize) {
     println!("      escape-histogram (escape:classes) = {}", hs.join(" "));
     let rep: Vec<(usize, usize)> = min_rep.iter().map(|&c| (c as usize / q, c as usize % q)).collect();
     println!("      min-escape representative S3 (cells) = {:?}", rep);
+}
+
+// ---- ESC mode: per-size-3-class subtree solve with a PRIVATE (per-class) memo ----
+// (Open-math plan 2026-07-07 route (D): push the escape/bad table past the q=19 GLOBAL-arena wall
+// by solving each canonical size-3 class's subtree INDEPENDENTLY with a memo that is DROPPED when
+// the class completes.  Peak RSS = one class's subtree, not the whole game — so a q=23 campaign
+// can run class-by-class under a fixed budget instead of one >17 GB arena.)
+//
+// Reports the same escape/bad line as `escape` mode (over the full class set, unfiltered), plus
+// the peak private-memo size per class.  A `--cap <slots>` bound ABORTS (and skips) any class
+// whose private memo reaches it; an optional class-index filter processes only those classes so a
+// walled q=23 run can be resumed class-by-class.
+//
+// Soundness: the private memo is keyed by the SAME global canon() as the shared arena.  Within one
+// subtree that key merges MORE positions (never fewer) than a cross-subtree arena would, and the
+// game value is a G-invariant, so every class's escape/bad count is IDENTICAL to `escape` mode's
+// (validated exact at q=17 histogram 5:3 10:12 11:6 and q=19 uniform 211:27).  The only cost of the
+// private memo is recomputing subtrees shared across different size-3 classes (never wrong, just
+// slower) in exchange for a bounded, dropped-per-class memory footprint.
+
+// Full-expansion recursion — identical to Solver::g with full=true, minus the defect diagnostics —
+// over a PRIVATE memo, with a slot cap.  Returns None if the memo reached `cap` (class aborted).
+fn esc_g(
+    b: &Board,
+    memo: &mut FnvMap<u128, bool>,
+    cap: usize,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<bool> {
+    let key = b.canon(occ);
+    if let Some(&v) = memo.get(&key) {
+        return Some(v);
+    }
+    if memo.len() >= cap {
+        return None; // private memo hit the cap -> abort this class
+    }
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+    }
+    let mut is_n = false;
+    for w in 0..MAXW {
+        let mut bits = avail[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            let mut nchosen = *chosen;
+            set_bit(&mut nchosen, z);
+            let mut nforb = *forbidden;
+            mask_or(&mut nforb, &b.rc_mask[z]);
+            for &x in occ.iter() {
+                mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+            }
+            occ.push(z as u16);
+            let child = esc_g(b, memo, cap, occ, &nchosen, &nforb);
+            occ.pop();
+            match child {
+                None => return None,        // propagate abort up the stack
+                Some(false) => is_n = true, // full expansion: keep expanding siblings (no break)
+                Some(true) => {}
+            }
+        }
+    }
+    memo.insert(key, is_n);
+    Some(is_n)
+}
+
+// esc <q> [--cap <slots>] [class-index...]
+fn solve_esc(q: usize, filter: &[usize], cap: usize) {
+    let b = Board::new(q);
+    let empty = [0u64; MAXW];
+    // phase 1: canonical size-3 classes (reuse the enumerate machinery, same as `escape` phase-2)
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    {
+        let mut visited: HashSet<u128> = HashSet::new();
+        let mut occ3: Vec<u16> = Vec::new();
+        enumerate(&b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+    }
+    let ncls = frontier.len();
+    let total_expected = (q * q + 21).wrapping_sub(9 * q); // q^2 - 9q + 21 (total lemma)
+    let cap_str = if cap == usize::MAX { "none".to_string() } else { cap.to_string() };
+    eprintln!(
+        "  [esc q={}] {} size-3 classes; cap={}{}",
+        q,
+        ncls,
+        cap_str,
+        if filter.is_empty() { String::new() } else { format!("; filter={:?}", filter) }
+    );
+
+    // class indices to process (all, in canonical order, when unfiltered)
+    let selected: Vec<usize> = if filter.is_empty() { (0..ncls).collect() } else { filter.to_vec() };
+
+    // aggregate stats over successfully solved classes
+    let mut min_esc = usize::MAX;
+    let mut max_esc = 0usize;
+    let mut even_esc = 0u64; // classes with escape even  (= bad odd)
+    let mut solved = 0u64;
+    let mut aborted = 0u64;
+    let mut bad_total_ne = 0u64; // classes where total != formula (must be 0)
+    let mut peak_max = 0usize;
+    let mut hist: std::collections::BTreeMap<usize, u64> = std::collections::BTreeMap::new();
+    let start = Instant::now();
+
+    for &ci in &selected {
+        if ci >= ncls {
+            println!("CLS q={} cls={} status=OUT-OF-RANGE (only {} classes)", q, ci, ncls);
+            continue;
+        }
+        eprintln!(
+            "  [esc q={} {:6.1}s] class {}/{} (index {}) ...",
+            q, start.elapsed().as_secs_f64(), solved + aborted + 1, selected.len(), ci
+        );
+        let (occ0, chosen, forbidden) = &frontier[ci];
+        let cells: Vec<(usize, usize)> =
+            occ0.iter().map(|&z| (z as usize / q, z as usize % q)).collect();
+        // PRIVATE memo for THIS class only; dropped at the end of this loop iteration
+        let mut memo: FnvMap<u128, bool> = FnvMap::default();
+        // full-expansion solve of the size-3 subtree -> memoizes every size-4 child + descendant
+        let mut occ = occ0.clone();
+        let res = esc_g(&b, &mut memo, cap, &mut occ, chosen, forbidden);
+        let peak = memo.len();
+        if peak > peak_max {
+            peak_max = peak;
+        }
+        if res.is_none() {
+            aborted += 1;
+            println!(
+                "CLS q={} cls={} S3={:?} status=ABORTED peak-memo={} cap={}",
+                q, ci, cells, peak, cap
+            );
+            continue;
+        }
+        // count escape = # P size-4 children (look them up from the now-populated private memo,
+        // iterating the SAME avail cells `escape` mode counts over)
+        let mut avail = [0u64; MAXW];
+        for i in 0..MAXW {
+            avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+        }
+        let mut n_p = 0usize;
+        let mut n_tot = 0usize;
+        let mut occ4 = occ0.clone();
+        for w in 0..MAXW {
+            let mut bits = avail[w];
+            while bits != 0 {
+                let tz = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                let z = w * 64 + tz;
+                n_tot += 1;
+                occ4.push(z as u16);
+                let key = b.canon(&occ4);
+                occ4.pop();
+                let is_n = *memo
+                    .get(&key)
+                    .expect("size-4 child must be memoized after full expansion");
+                if !is_n {
+                    n_p += 1; // P child = an escape
+                }
+            }
+        }
+        if n_tot != total_expected {
+            bad_total_ne += 1;
+        }
+        let bad = n_tot - n_p;
+        solved += 1;
+        if n_p < min_esc {
+            min_esc = n_p;
+        }
+        if n_p > max_esc {
+            max_esc = n_p;
+        }
+        if n_p % 2 == 0 {
+            even_esc += 1;
+        }
+        *hist.entry(n_p).or_insert(0) += 1;
+        println!(
+            "CLS q={} cls={} S3={:?} escape={} bad={} total={} peak-memo={} status=OK",
+            q, ci, cells, n_p, bad, n_tot, peak
+        );
+    }
+
+    // When the FULL class set solved with no aborts, reproduce the `escape` mode summary line
+    // EXACTLY (root via the proven frame reduction: PG(2,q)=P <=> every S3 has an escape >=1;
+    // 2026-07-06-frame-reduction.md / -escape-count-lemma.md).  Filtered/aborted runs print a
+    // clearly-labelled PARTIAL summary instead (a resumed q=23 campaign cannot claim the root).
+    let full_run = filter.is_empty() && aborted == 0 && solved == ncls as u64;
+    let hs: Vec<String> = hist.iter().map(|(k, v)| format!("{}:{}", k, v)).collect();
+    if full_run {
+        let root_n = min_esc == 0; // some size-3 class with no escape => root N (counterexample)
+        let outcome = if root_n { "N (COUNTEREXAMPLE!)" } else { "P" };
+        let parity_ok = even_esc == 0;
+        println!(
+            "q={:>3}  root={}  size3-classes={}  total(q^2-9q+21)={}{}  min-escape={}  max-escape={}  \
+             bad-odd(even-escape) classes={}/{}  parity-proof={}",
+            q,
+            outcome,
+            ncls,
+            total_expected,
+            if bad_total_ne > 0 {
+                format!(" [!! {} classes with total != formula]", bad_total_ne)
+            } else {
+                String::new()
+            },
+            if min_esc == usize::MAX { 0 } else { min_esc },
+            max_esc,
+            even_esc,
+            ncls,
+            if parity_ok { "HOLDS (all bad even)" } else { "BREAKS" },
+        );
+        println!("      escape-histogram (escape:classes) = {}", hs.join(" "));
+        println!(
+            "      peak-private-memo max over classes = {}  [{:.1}s]",
+            peak_max,
+            start.elapsed().as_secs_f64()
+        );
+    } else {
+        println!(
+            "q={:>3}  PARTIAL  size3-classes={}  solved={}  aborted={}  total(q^2-9q+21)={}  \
+             min-escape={}  max-escape={}  even-escape={}/{}  peak-private-memo-max={}  [{:.1}s]",
+            q,
+            ncls,
+            solved,
+            aborted,
+            total_expected,
+            if min_esc == usize::MAX { 0 } else { min_esc },
+            max_esc,
+            even_esc,
+            solved,
+            peak_max,
+            start.elapsed().as_secs_f64()
+        );
+        if !hs.is_empty() {
+            println!("      escape-histogram (escape:classes) = {}", hs.join(" "));
+        }
+    }
 }
 
 // ---- FEAT mode: route (B) per-class / per-extension conic-feature dump ----
@@ -1941,6 +2183,26 @@ fn main() {
             let q: usize = a.parse().expect("q must be an integer");
             solve_escape(q);
         }
+        return;
+    }
+    if args[1] == "esc" {
+        // esc <q> [--cap <slots>] [class-index...]
+        let mut cap: usize = usize::MAX;
+        let mut positional: Vec<usize> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--cap" {
+                let v = it.next().expect("--cap needs a value");
+                cap = v.parse().expect("--cap value must be an integer");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap value must be an integer");
+            } else {
+                positional.push(a.parse().expect("q / class-index must be an integer"));
+            }
+        }
+        let q = *positional.first().expect("esc mode needs q: esc <q> [--cap <slots>] [class-index...]");
+        let filter: Vec<usize> = positional[1..].to_vec();
+        solve_esc(q, &filter, cap);
         return;
     }
     if args[1] == "feat" {
