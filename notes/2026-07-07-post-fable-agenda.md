@@ -250,10 +250,33 @@ existing problems to close — each seeded by an artifact already on this list)
    category + functor; compact-closed stretch lower. Refusal boundary: no applied-CT framing
    papers without a formalized theorem attached — the artifact is mathlib code, not diagrams.**
 
+16. **SAT/QBF: benchmark family + certified isomorph rejection.** Two-part item, both
+   SAT-community-shaped. (a) ~85% banker: package our games as a structured QBF/SAT benchmark
+   family with VERIFIED ground truth (queens Node-Kayles n ≤ 18, projective-cap escape
+   instances, sum-free games — positional games are an established QBF application, and
+   benchmark families with known answers + scaling knobs (n, q) are exactly what QBFEVAL/SAT
+   Competition want; our certificates make the answers trustworthy, which most game
+   benchmarks lack). (b) the opener: SAT's proof-logging wave (DRAT → VeriPB, certified
+   symmetry breaking is an active frontier) has not reached isomorph-rejection SEARCH — our
+   exact-canon audit trails (C8, item 2) are precisely the missing certificate; bridging our
+   censuses to VeriPB-style logged proofs would land finite-geometry classification inside
+   SAT's verification ecosystem. Seed: item 2 + the C8 exact-canon work.
+17. **The finite-field polynomial method, formalized (the algebraic-geometry boundary).**
+   Genuine scheme-theoretic algebraic geometry is outside this team's toolkit — refusal. The
+   boundary that IS ours: the polynomial method over F_q (Rédei polynomials, Blokhuis/Szőnyi
+   lacunary-polynomial machinery, Szőnyi–Weiner stability) — the workhorse of every modern
+   finite-geometry bound including the (ON) kernel's own inputs, and unformalized. Calibration
+   anchor: the Ellenberg–Gijswijt cap-set proof WAS formalized (Dahmen–Hölzl–Lewis, ITP 2019)
+   — that is the existence proof that this genre lands at ITP, and the reason to verify
+   prior art before every claim here. The Rédei/lacunary layer + one applied bound would be
+   the natural sequel, extends items 3/10 on the same Codex lane, and directly serves Track K
+   (a formalized Szőnyi–Weiner statement sharpens what the (ON) attempt may assume). **Odds:
+   ~35–45%; enter only after item 10's foundations exist.**
+
 These are portfolio-capped: at most ONE area-opener active at a time, entered only through
 its already-listed seed artifact (12 ← items 7 + C9/C11; 13 ← items 2/4/11; 14 ← item 5;
-15 ← the NodeKayles Lean development + item 12's format), so a failed opening still leaves
-the seed's standalone value.
+15 ← the NodeKayles Lean development + item 12's format; 16 ← item 2/C8 + the certificates;
+17 ← item 10's foundations), so a failed opening still leaves the seed's standalone value.
 
 ### Part III refusals (same rule as Part II)
 
