@@ -216,11 +216,147 @@ theorem psi_hyperbolaParamPoint {rho A B u t : K}
   · field_simp [hB, hu, ht]
   · field_simp [hB, hu, ht]
 
+omit [Fintype K] [DecidableEq K] in
+theorem psi_bijective {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0) :
+    Function.Bijective (psi (K := K) rho A B u) :=
+  (psi_involutive (K := K) hB hu).bijective
+
+omit [Fintype K] [DecidableEq K] in
+theorem psi_first_eq_iff {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    {p q : GridPoint K} :
+    (psi (K := K) rho A B u p).1 = (psi (K := K) rho A B u q).1 ↔
+      p.2 = q.2 := by
+  constructor
+  · intro h
+    have hsub := congrArg (fun z : K => z - rho) h
+    simp [psi] at hsub
+    rcases hsub with hpq | huzero | hBzero
+    · exact hpq
+    · exact (hu huzero).elim
+    · exact (hB hBzero).elim
+  · intro h
+    simp [psi, h]
+
+omit [Fintype K] [DecidableEq K] in
+theorem psi_second_eq_iff {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    {p q : GridPoint K} :
+    (psi (K := K) rho A B u p).2 = (psi (K := K) rho A B u q).2 ↔
+      p.1 = q.1 := by
+  constructor
+  · intro h
+    have hsub := congrArg (fun z : K => z - A) h
+    simp [psi] at hsub
+    rcases hsub with hpq | hBzero | huzero
+    · exact hpq
+    · exact (hB hBzero).elim
+    · exact (hu huzero).elim
+  · intro h
+    simp [psi, h]
+
+omit [Fintype K] [DecidableEq K] in
+theorem collinear_psi_iff {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    (p q r : GridPoint K) :
+    Collinear (K := K) (psi (K := K) rho A B u p)
+      (psi (K := K) rho A B u q) (psi (K := K) rho A B u r) ↔
+      Collinear (K := K) p q r := by
+  constructor
+  · intro h
+    have hcancel :
+        (B * u) * ((q.2 - p.2) * (r.1 - p.1)) =
+          (B * u) * ((q.1 - p.1) * (r.2 - p.2)) := by
+      unfold Collinear psi at h
+      field_simp [hB, hu] at h
+      ring_nf at h ⊢
+      exact h
+    unfold Collinear
+    exact (mul_left_cancel₀ (mul_ne_zero hB hu) hcancel).symm
+  · intro h
+    have hmul :
+        (B * u) * ((q.2 - p.2) * (r.1 - p.1)) =
+          (B * u) * ((q.1 - p.1) * (r.2 - p.2)) := by
+      unfold Collinear at h
+      rw [h.symm]
+    unfold Collinear psi
+    field_simp [hB, hu]
+    ring_nf at hmul ⊢
+    exact hmul
+
 /-- A map that acts as a symmetry of residual-grid positions. -/
 def GridSymmetry (f : GridPoint K -> GridPoint K) : Prop :=
   Function.Bijective f ∧
     ∀ S : Finset (GridPoint K),
       GridCap (K := K) (S.image f) ↔ GridCap (K := K) S
+
+omit [Fintype K] in
+theorem rowSparse_image_psi {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    {S : Finset (GridPoint K)} (hS : GridCap (K := K) S) :
+    RowSparse (K := K) (S.image (psi (K := K) rho A B u)) := by
+  intro p q hp hq hrow
+  rcases Finset.mem_image.mp hp with ⟨p0, hp0, rfl⟩
+  rcases Finset.mem_image.mp hq with ⟨q0, hq0, rfl⟩
+  have hcol : p0.2 = q0.2 := (psi_first_eq_iff (K := K) hB hu).mp hrow
+  have hpq : p0 = q0 := hS.1.2 hp0 hq0 hcol
+  rw [hpq]
+
+omit [Fintype K] in
+theorem colSparse_image_psi {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    {S : Finset (GridPoint K)} (hS : GridCap (K := K) S) :
+    ColSparse (K := K) (S.image (psi (K := K) rho A B u)) := by
+  intro p q hp hq hcol
+  rcases Finset.mem_image.mp hp with ⟨p0, hp0, rfl⟩
+  rcases Finset.mem_image.mp hq with ⟨q0, hq0, rfl⟩
+  have hrow : p0.1 = q0.1 := (psi_second_eq_iff (K := K) hB hu).mp hcol
+  have hpq : p0 = q0 := hS.1.1 hp0 hq0 hrow
+  rw [hpq]
+
+omit [Fintype K] in
+theorem affineCap_image_psi {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    {S : Finset (GridPoint K)} (hS : GridCap (K := K) S) :
+    AffineCap (K := K) (S.image (psi (K := K) rho A B u)) := by
+  intro a b c ha hb hc hab hac hbc hcol
+  rcases Finset.mem_image.mp ha with ⟨a0, ha0, rfl⟩
+  rcases Finset.mem_image.mp hb with ⟨b0, hb0, rfl⟩
+  rcases Finset.mem_image.mp hc with ⟨c0, hc0, rfl⟩
+  have hab0 : a0 ≠ b0 := fun h => hab (by rw [h])
+  have hac0 : a0 ≠ c0 := fun h => hac (by rw [h])
+  have hbc0 : b0 ≠ c0 := fun h => hbc (by rw [h])
+  exact hS.2 ha0 hb0 hc0 hab0 hac0 hbc0
+    ((collinear_psi_iff (K := K) hB hu a0 b0 c0).mp hcol)
+
+omit [Fintype K] in
+theorem gridCap_image_psi {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    {S : Finset (GridPoint K)} (hS : GridCap (K := K) S) :
+    GridCap (K := K) (S.image (psi (K := K) rho A B u)) :=
+  ⟨⟨rowSparse_image_psi (K := K) hB hu hS,
+    colSparse_image_psi (K := K) hB hu hS⟩,
+    affineCap_image_psi (K := K) hB hu hS⟩
+
+omit [Fintype K] in
+theorem gridCap_image_psi_iff {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
+    (S : Finset (GridPoint K)) :
+    GridCap (K := K) (S.image (psi (K := K) rho A B u)) ↔
+      GridCap (K := K) S := by
+  constructor
+  · intro hS
+    have htwice :
+        (S.image (psi (K := K) rho A B u)).image (psi (K := K) rho A B u) = S := by
+      rw [Finset.image_image]
+      have hcomp : (psi (K := K) rho A B u) ∘
+          (psi (K := K) rho A B u) = id :=
+        funext (psi_involutive (K := K) hB hu)
+      rw [hcomp]
+      simp
+    have htwiceCap :
+        GridCap (K := K)
+          ((S.image (psi (K := K) rho A B u)).image (psi (K := K) rho A B u)) :=
+      gridCap_image_psi (K := K) (rho := rho) (A := A) hB hu hS
+    simpa [htwice] using htwiceCap
+  · exact gridCap_image_psi (K := K) (rho := rho) (A := A) hB hu
+
+omit [Fintype K] in
+theorem psi_gridSymmetry {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0) :
+    GridSymmetry (K := K) (psi (K := K) rho A B u) :=
+  ⟨psi_bijective (K := K) hB hu, gridCap_image_psi_iff (K := K) hB hu⟩
 
 /--
 Target: each `psi_u` is a grid-symmetry involution preserving the hyperbola and
@@ -239,6 +375,14 @@ def PsiInvolutionStatement : Prop :=
           t ≠ 0 ->
             psi (K := K) rho A B u (hyperbolaParamPoint rho A B t) =
               hyperbolaParamPoint rho A B (u / t)
+
+omit [Fintype K] in
+theorem psiInvolutionStatement : PsiInvolutionStatement (K := K) := by
+  intro rho A B u hB hu
+  exact ⟨psi_involutive (K := K) hB hu,
+    psi_gridSymmetry (K := K) hB hu,
+    psi_onHyperbola_iff (K := K) hB hu,
+    fun t ht => psi_hyperbolaParamPoint (K := K) hB hu ht⟩
 
 /--
 The on-conic escape refinement: the future odd-plane kernel should find a

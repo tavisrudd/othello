@@ -19,6 +19,10 @@ The scaffold follows the statement decomposition in
 hyperbola normal form, the `q - 4` on-conic legal-extension count target, odd maximality target,
 and the `psi_u` involution substrate.
 
+Follow-up after WP-1/WP-2: the `psi_u` grid-symmetry part is no longer only a target.
+`psi_gridSymmetry` proves that `psi_u` preserves residual `GridCap`, and
+`psiInvolutionStatement` discharges the packaged `PsiInvolutionStatement`.
+
 The file contains no `sorry`, `admit`, or `axiom`. The high-level geometric facts are `Prop`
 targets rather than asserted theorems. The coordinate facts for `psi_u` that are local algebra
 are proved.
@@ -71,6 +75,17 @@ psi_involutive
 psi_onHyperbola_iff
 psi_hyperbolaParamPoint
 GridSymmetry
+psi_bijective
+psi_first_eq_iff
+psi_second_eq_iff
+collinear_psi_iff
+rowSparse_image_psi
+colSparse_image_psi
+affineCap_image_psi
+gridCap_image_psi
+gridCap_image_psi_iff
+psi_gridSymmetry
+psiInvolutionStatement
 ```
 
 ## What is proved now
@@ -85,6 +100,9 @@ The following are sorry-free Lean theorems:
 - `psi_involutive`: if `B != 0` and `u != 0`, then `psi rho A B u` is involutive.
 - `psi_onHyperbola_iff`: under the same nonzero hypotheses, `psi_u` preserves the hyperbola.
 - `psi_hyperbolaParamPoint`: on parametrized conic points, `psi_u` acts as `t |-> u / t`.
+- `psi_gridSymmetry`: under the same nonzero hypotheses, `psi_u` is a residual-grid symmetry:
+  it is bijective and preserves `GridCap` under finite-set image.
+- `psiInvolutionStatement`: the full packaged `PsiInvolutionStatement` is proved.
 
 ## What is only stated
 
@@ -97,8 +115,6 @@ The following are statement-level targets:
   there are exactly `q - 4` of them.
 - `OddHyperbolaMaximalStatement`: in odd characteristic, the hyperbola cell set is a maximal grid
   cap of size `q - 1`.
-- `PsiInvolutionStatement`: packages the proved `psi_u` algebra with the still-deferred grid
-  symmetry proof.
 - `OnConicEscapeStatement`: the empirical ON target, tied to the formal residual grid-game
   `GridGame.IsP` predicate.
 
@@ -118,9 +134,8 @@ eventual proof of "unique conic through the 5-arc" still needs either:
 - a self-contained coordinate proof that every relevant conic through the burned directions is
   represented by this chart and that the excluded `delta = 0` case is degenerate/collinear.
 
-The grid-symmetry part of `psi_u` is also still a target. The algebraic involution and
-hyperbola-preservation facts are already proved; what remains is proving that `psi_u` preserves
-rows/columns up to exchange and affine collinearity, hence preserves `GridCap`.
+The grid-symmetry part of `psi_u` is now proved. The proof shows that `psi_u` exchanges row and
+column equalities and transports affine collinearity by the nonzero determinant factor `B*u`.
 
 ## Verification
 
@@ -168,4 +183,19 @@ rg -n "sorry|axiom|admit" lean/ProjectiveCap/ConicLocalization.lean || true
 Output:
 
 ```text
+```
+
+Follow-up verification after proving `psi_gridSymmetry` / `psiInvolutionStatement`:
+
+```bash
+nix develop --command lake build ProjectiveCap
+```
+
+Output:
+
+```text
+warning: Git tree '/home/tavis/src/othello' is dirty
+✔ [3004/3006] Built ProjectiveCap.ConicLocalization (3.0s)
+✔ [3005/3006] Built ProjectiveCap (2.3s)
+Build completed successfully (3006 jobs).
 ```
