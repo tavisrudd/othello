@@ -244,6 +244,86 @@ theorem initial_win_of_orderTwo_no_other_negation_obstructions {m : G}
 
 end Neg
 
+section FiniteObstructions
+
+/-- The finite set of nonzero order-two elements. -/
+noncomputable def NonzeroOrderTwoElements : Finset G :=
+  Finset.univ.filter fun v => v + v = 0 ∧ v ≠ 0
+
+theorem mem_nonzeroOrderTwoElements {v : G} :
+    v ∈ NonzeroOrderTwoElements (G := G) ↔ v + v = 0 ∧ v ≠ 0 := by
+  classical
+  simp [NonzeroOrderTwoElements]
+
+/-- The finite set of nonzero elements causing the negation order-three obstruction. -/
+noncomputable def NonzeroOrderThreeElements : Finset G :=
+  Finset.univ.filter fun v => v + v = -v ∧ v ≠ 0
+
+theorem mem_nonzeroOrderThreeElements {v : G} :
+    v ∈ NonzeroOrderThreeElements (G := G) ↔ v + v = -v ∧ v ≠ 0 := by
+  classical
+  simp [NonzeroOrderThreeElements]
+
+omit [Fintype G] [DecidableEq G] in
+private theorem add_self_eq_zero_of_neg_eq_self {x : G} (hx : -x = x) :
+    x + x = 0 := by
+  calc
+    x + x = x + -x := by simp [hx]
+    _ = 0 := by simp
+
+/--
+Concrete finite-set version of the no-obstruction negation theorem: if there
+are no nonzero order-two or order-three obstruction elements, the empty game is
+P.
+-/
+theorem initial_isP_of_no_nonzero_orderTwo_or_three
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 0)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 0) :
+    IsP (∅ : Finset G) := by
+  refine initial_isP_of_negation_no_obstructions (G := G) ?_ ?_
+  · intro x hx0 hneg
+    have hx2 : x + x = 0 := add_self_eq_zero_of_neg_eq_self hneg
+    have hxmem : x ∈ NonzeroOrderTwoElements (G := G) :=
+      (mem_nonzeroOrderTwoElements (G := G) (v := x)).2 ⟨hx2, hx0⟩
+    have hempty : NonzeroOrderTwoElements (G := G) = ∅ :=
+      Finset.card_eq_zero.mp h2
+    rw [hempty] at hxmem
+    simp at hxmem
+  · intro x hx0 hx3
+    have hxmem : x ∈ NonzeroOrderThreeElements (G := G) :=
+      (mem_nonzeroOrderThreeElements (G := G) (v := x)).2 ⟨hx3, hx0⟩
+    have hempty : NonzeroOrderThreeElements (G := G) = ∅ :=
+      Finset.card_eq_zero.mp h3
+    rw [hempty] at hxmem
+    simp at hxmem
+
+/--
+If `m` is the unique nonzero order-two element and there are no nonzero
+order-three obstructions, opening at `m` wins.
+-/
+theorem initial_win_of_unique_orderTwo_no_nonzero_orderThree {m : G}
+    (hm : m ∈ NonzeroOrderTwoElements (G := G))
+    (hunique : ∀ {x : G}, x ∈ NonzeroOrderTwoElements (G := G) -> x = m)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 0) :
+    Win (∅ : Finset G) := by
+  have hm' := (mem_nonzeroOrderTwoElements (G := G) (v := m)).1 hm
+  refine initial_win_of_orderTwo_no_other_negation_obstructions
+    (G := G) (m := m) hm'.1 hm'.2 ?_ ?_
+  · intro x hx0 hxm hneg
+    have hx2 : x + x = 0 := add_self_eq_zero_of_neg_eq_self hneg
+    have hxmem : x ∈ NonzeroOrderTwoElements (G := G) :=
+      (mem_nonzeroOrderTwoElements (G := G) (v := x)).2 ⟨hx2, hx0⟩
+    exact hxm (hunique hxmem)
+  · intro x hx0 _ hx3
+    have hxmem : x ∈ NonzeroOrderThreeElements (G := G) :=
+      (mem_nonzeroOrderThreeElements (G := G) (v := x)).2 ⟨hx3, hx0⟩
+    have hempty : NonzeroOrderThreeElements (G := G) = ∅ :=
+      Finset.card_eq_zero.mp h3
+    rw [hempty] at hxmem
+    simp at hxmem
+
+end FiniteObstructions
+
 section Tau
 
 /-- Mirror-ready positions for translation by an order-two element. -/
@@ -360,6 +440,24 @@ theorem initial_isP_of_spare_orderTwo
   rcases hspare x hxmove with ⟨v, hv2, hv0, hxv⟩
   exact win_after_nonexception_opening_of_orderTwoMirror
     (G := G) (v := v) (x := x) hv2 hv0 hxmove hxv
+
+/--
+If there are at least two nonzero order-two elements, every opening has a
+distinct order-two translation available, so the empty game is P.
+-/
+theorem initial_isP_of_two_nonzero_orderTwo
+    (hcard : 1 < (NonzeroOrderTwoElements (G := G)).card) :
+    IsP (∅ : Finset G) := by
+  refine initial_isP_of_spare_orderTwo (G := G) ?_
+  intro x hxmove
+  rcases Finset.one_lt_card.mp hcard with ⟨a, ha, b, hb, hab⟩
+  by_cases hxa : x = a
+  · have hb' := (mem_nonzeroOrderTwoElements (G := G) (v := b)).1 hb
+    refine ⟨b, hb'.1, hb'.2, ?_⟩
+    intro hxb
+    exact hab (by rw [← hxa, hxb])
+  · have ha' := (mem_nonzeroOrderTwoElements (G := G) (v := a)).1 ha
+    exact ⟨a, ha'.1, ha'.2, hxa⟩
 
 /--
 For any fixed nonzero order-two element `m`, all openings except `m` are
