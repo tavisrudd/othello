@@ -20,9 +20,13 @@ The Lean layer is narrower than this compute log. Current build check:
 
 **Formalized in Lean and build-green:**
 - finite normal-play building-game semantics:
-  [`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean);
+  [`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean), now including the
+  generic `Grundy` recurrence plus `win_iff_grundy_ne_zero` and `isP_iff_grundy_eq_zero`;
 - sum-free legality plus local mirror lemmas:
   [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean);
+- SumFree-specific Grundy aliases in
+  [`../../lean/Sumfree/Grundy.lean`](../../lean/Sumfree/Grundy.lean):
+  `Sumfree.Game.Grundy`, `win_iff_grundy_ne_zero`, and `isP_iff_grundy_eq_zero`;
 - anchored order-three negation mirror kernel:
   `anchored_neg_mirror_legal` in
   [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean), formalizing the
@@ -140,8 +144,8 @@ The Lean layer is narrower than this compute log. Current build check:
   `hasThreeRank_z2v_zmod3_module`, `hasRanks_z2v_zmod3_module`, and
   the underlying kernel-cardinality computations.
 
-**Not yet formalized in Lean:** any nimber/Grundy statements from this compute log; the warm-up
-`Z3 x Z_p` Grundy/spectral `*1` statement; and the open/adaptive `Z3^2 x Z_p` program. The exact
+**Not yet formalized in Lean:** any concrete nimber/Grundy value statements from this compute log; the
+warm-up `Z3 x Z_p` Grundy/spectral `*1` statement; and the open/adaptive `Z3^2 x Z_p` program. The exact
 finite-abelian classification is formalized only through the `r₃ <= 1` wrapper above. The socle reduction is false
 and must not be resurrected as a target.
 

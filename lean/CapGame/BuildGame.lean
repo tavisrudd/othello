@@ -164,6 +164,76 @@ decreasing_by
   rw [hcardy, hcardx]
   omega
 
+/-! ## Generic Grundy values -/
+
+/-- Minimal excludant of a finite set of natural numbers. -/
+noncomputable def mex (T : Finset ℕ) : ℕ :=
+  Nat.find (Infinite.exists_notMem_finset T)
+
+/-- The mex is not in the finite set. -/
+theorem mex_not_mem (T : Finset ℕ) : mex T ∉ T :=
+  Nat.find_spec (Infinite.exists_notMem_finset T)
+
+/-- Every natural below the mex is in the finite set. -/
+theorem lt_mex_mem {T : Finset ℕ} {m : ℕ} (h : m < mex T) : m ∈ T := by
+  have := Nat.find_min (Infinite.exists_notMem_finset T) h
+  simpa using this
+
+/-- The mex is zero exactly when zero is absent. -/
+theorem mex_eq_zero_iff {T : Finset ℕ} : mex T = 0 ↔ (0 : ℕ) ∉ T := by
+  constructor
+  · intro h hmem
+    rw [← h] at hmem
+    exact mex_not_mem T hmem
+  · intro h
+    rcases Nat.eq_zero_or_pos (mex T) with h0 | hpos
+    · exact h0
+    · exact absurd (lt_mex_mem hpos) h
+
+/-- The mex is nonzero exactly when zero is present. -/
+theorem mex_ne_zero_iff {T : Finset ℕ} : mex T ≠ 0 ↔ (0 : ℕ) ∈ T := by
+  rw [ne_eq, mex_eq_zero_iff, not_not]
+
+/-- Grundy value of a finite normal-play building-game position. -/
+noncomputable def Grundy (Valid : Finset α -> Prop) (S : Finset α) : ℕ :=
+  mex ((LegalExtensions Valid S).attach.image
+    fun x : {x // x ∈ LegalExtensions Valid S} => Grundy Valid (insert (x : α) S))
+termination_by Fintype.card α - S.card
+decreasing_by
+  classical
+  have hxmove : Move Valid S x := mem_legalExtensions.mp x.2
+  have hx : (x : α) ∉ S := hxmove.1
+  have hcard : (insert (x : α) S).card = S.card + 1 :=
+    Finset.card_insert_of_notMem hx
+  have hlt : S.card < Fintype.card α := card_lt_univ_of_notMem hx
+  rw [hcard]
+  omega
+
+/-- Normal-play wins are exactly the positions with nonzero Grundy value. -/
+theorem win_iff_grundy_ne_zero {Valid : Finset α -> Prop} {S : Finset α} :
+    Win Valid S ↔ Grundy Valid S ≠ 0 := by
+  rw [Win.eq_def, Grundy.eq_def, mex_ne_zero_iff, Finset.mem_image]
+  simp only [Finset.mem_attach, true_and]
+  refine exists_congr (fun x => ?_)
+  rw [win_iff_grundy_ne_zero (Valid := Valid) (S := insert (x : α) S)]
+  exact not_ne_iff
+termination_by Fintype.card α - S.card
+decreasing_by
+  classical
+  have hxmove : Move Valid S (x : α) := mem_legalExtensions.mp x.2
+  have hx : (x : α) ∉ S := hxmove.1
+  have hcard : (insert (x : α) S).card = S.card + 1 :=
+    Finset.card_insert_of_notMem hx
+  have hlt : S.card < Fintype.card α := card_lt_univ_of_notMem hx
+  rw [hcard]
+  omega
+
+/-- P-positions are exactly the positions with Grundy value zero. -/
+theorem isP_iff_grundy_eq_zero {Valid : Finset α -> Prop} {S : Finset α} :
+    IsP Valid S ↔ Grundy Valid S = 0 := by
+  rw [IsP, win_iff_grundy_ne_zero]
+  exact not_ne_iff
+
 /-! ## Game-value transport along board symmetries -/
 
 omit [Fintype α] in
