@@ -31,27 +31,30 @@ given q is equivalent to `PG(2,q) = P`. Known constraints on any proof of (ESC):
 - It cannot be a fixed-involution mirror (all closed), cannot be naive parity (`bad` odd on a
   majority of classes by q=17), cannot be an area bound (`bad = 152` of `total = 157` at q=17),
   and cannot route through static arc-embedding (boundary characterization false from q=11).
+- **It cannot maintain ANY symmetry invariant (added 2026-07-07):** no play-closed family of
+  positions with nontrivial stabilizer exists for q = 11, 13, 17
+  (`2026-07-07-resym-symmetric-family-dead.md`) — the winning strategy passes through
+  stabilizer-free positions from size 6 on.
 - min-escape over classes is **erratic**: `1, 7, 13, 13, 46, 5, 211` for `q = 5..19`. Whatever
   protects `escape ≥ 1` is a near-cancellation of two `Θ(q²)` quantities — the proof must produce
   a *witness cell*, not a size estimate.
 
 ## 3. Attack routes, priority order
 
-### (A) Adaptive-strategy invariant — the main proof bet
-Depth-1 evidence: forced direct pairing fails at `q ≥ 11`, but the *relaxed* adaptive form (any
-legal reply landing in some symmetric position) succeeds everywhere tested
-(`2026-07-06-adaptive-resym-test.py`, q ≤ 13). What is missing is a maintainable invariant.
-Next actions:
-1. Extend the Rust grid solver with a `resym` mode: from each reachable "symmetric" position and
-   each break move, enumerate ALL replies that restore symmetry under ANY involution of the grid
-   automorphism group (central + antidiagonal families), producing the symmetric-reply multigraph.
-2. Search that graph for a subfamily closed under play (candidate invariant = "symmetric under
-   some involution whose problem set is currently dead", possibly plus a potential function on
-   the center row/col balance). Depth ≥ 2 validation, q = 11..17.
-3. If a closed subfamily exists, write the strategy lemma in the `isP_of_replyStrategy` /
-   `MirrorGood` style already formalized for the affine game — the Lean kernel is ready for it.
+### (A) Adaptive-strategy invariant — ~~the main proof bet~~ **CLOSED (2026-07-07, session 7)**
+The resym experiment was run to full depth (`resym` mode in `2026-07-06-grid-cap-solver.rs`;
+writeup `2026-07-07-resym-symmetric-family-dead.md`): the play-closed symmetric subfamily does
+NOT exist for q = 11, 13, 17 — not for involutions (v0), not for ANY nontrivial stabilizer (v3,
+whole automorphism group incl. Frobenius twists), not even filtered to true P-positions (v4).
+Exhaustive verdict, not a sample (the reachable symmetric space is tens of states per q).
+Witness at q=11, verified by the exact solver: from the transpose-symmetric P-position
+{(0,0),(1,1),(2,3),(3,2)}, the break (4,9) has 5 winning replies — all 7 legal replies have
+trivial stabilizer. The depth-1 "relaxed adaptive succeeds" was one-step-only; staying symmetric
+is impossible from size 6. **No symmetry-shaped invariant can carry the uniform proof.** Route
+(B) inherits "main proof bet" status; any strategy lemma will be certificate/potential-function
+shaped, not `MirrorGood`-shaped.
 
-### (B) Finer counting invariant — second proof bet
+### (B) Finer counting invariant — the main proof bet (was second; (A) closed 2026-07-07)
 The total lemma's proof splits `total` as `(q−3)² − 3(q−4)` with per-pair-line traces of exact
 size `q−4`. Hunt a refinement (mod 4, mod p, or weighted by pair-line incidence pattern) that
 survives `bad` odd. Next actions: per-class regression of `escape`/`bad` against arc-geometric
@@ -102,7 +105,11 @@ from the F_2^{m+1} sum-free solver. Blocked on the planar theorem; do not start 
 
 ## 5. Recommended next session
 
-Math: start (A)-1/2 (the resym-mode experiment) — it is the only route that can produce the
-uniform theorem and it has an unexplored, well-defined experiment in front of it.
+~~Math: start (A)-1/2 (the resym-mode experiment)~~ **DONE 2026-07-07 — negative; (A) closed.**
+Math: route (B) — per-class regression of `escape`/`bad` against arc-geometric features on the
+q = 11..19 data; per-pair-line-trace parity/weight invariants. The session-7 witness break
+(q=11, S = {(0,0),(1,1),(2,3),(3,2)}, x = (4,9), winning replies {(5,4),(5,6),(5,10),(8,6),
+(9,10)}) is a concrete test case any candidate invariant must explain. Route (C) per-q Lean
+certificates is the parallel guaranteed-value track.
 Lean: WP-1 (frame⇄grid bridge), then WP-2 (q-even theorem) — both are closed-form formalization
 tasks with no open-math risk.

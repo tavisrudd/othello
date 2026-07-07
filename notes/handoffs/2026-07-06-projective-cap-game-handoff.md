@@ -773,6 +773,29 @@ Basic/Independence/Subspace API):
   rank-3 `V` (any field), `InitialPStatement ↔ IsP (frame)` with no remaining hypotheses beyond
   `finrank K V = 3`. Axioms: the standard three, no `sorry`. Full `lake build` green.
 
+**2026-07-07 (session 7) — ★ route (A)-1/2 EXECUTED TO FULL DEPTH: the adaptive
+symmetric-strategy route is DEAD for q ≥ 11, in every form.** Full writeup
+[`2026-07-07-resym-symmetric-family-dead.md`](../2026-07-07-resym-symmetric-family-dead.md).
+Added a `resym` mode to the Rust grid solver: solve the game with P2 RESTRICTED to replies
+landing in a symmetric family F — the exhaustive AND-OR search for a play-closed symmetric
+subfamily containing the frame (`SAFE(frame)=YES` ⟺ such a subfamily exists ⟺ an adaptive
+symmetric P2 strategy exists). Families tested, each exhaustively enumerated (semilinear
+monomial maps incl. Frobenius twists): **v0** = symmetric under some involution, **v3** =
+symmetric under ANY nontrivial automorphism (the maximal symmetry family; 24k–148k maps),
+**v4** = v3 ∧ true P-position. **Result: SAFE for q ≤ 9 (all variants, incl. even-q positive
+controls via the translation mirror); NO for q = 11, 13, 17** (v0+v3+v4 at 11; v0+v4 at 13,
+v3 follows since SAFE_v3=SAFE_v4; v0+v3 at 17). The session-4 depth-1 "relaxed adaptive always
+succeeds" was a mirage — one re-symmetrization is always possible, staying symmetric is not.
+**Concrete obstruction witness (q=11, verified independently by the exact solver via the new
+`checkpos`/`breaks` modes): S = {(0,0),(1,1),(2,3),(3,2)} (transpose-symmetric, true P), break
+x=(4,9): 5 winning replies exist, ALL 7 legal replies have trivial stabilizer** — P2 is forced
+out of the symmetric world by move 6. The reachable symmetric space is tiny (tens of states/q),
+so these are full exhaustions. The q≤9 / q≥11 threshold matches every other route's wall.
+**Consequence: no invariant of the form "position has symmetry X" can carry the uniform proof;
+route (B) finer counting / potential-function is now the main bet, (C) per-q certificates
+unaffected.** Artifacts: `resym`(v0..v4)/`breaks`/`checkpos` modes in
+`2026-07-06-grid-cap-solver.rs`.
+
 **Open-math plan written**: [`2026-07-07-projcap-open-math-plan.md`](../2026-07-07-projcap-open-math-plan.md)
 — settled-results table, the open kernel (ESC) with its known proof constraints, attack routes
 (A adaptive-invariant / B finer counting / C per-q Lean certificates / D falsification / E m≥3)
@@ -797,9 +820,13 @@ DEAD.** Live routes, priority order:
      handle if a secondary invariant can be found, but it is not close to sufficient alone.
   **What's actually live for a proof:** the crux `escape ≥ 1` is a *delicate near-cancellation* of
   two Θ(q²) quantities (`escape = total − bad`), so it needs FINE structure, not a size bound:
-  (i) a **direct adaptive-strategy** proof (relaxed adaptive reaches a symmetric position at q≤13,
-  `-adaptive-resym-test.py` — find a maintainable invariant); (ii) a **finer-than-mod-2 invariant**
-  that survives `bad` odd and explains why `escape ≥ 1` persists even when `bad ≈ total`.
+  ~~(i) a **direct adaptive-strategy** proof~~ **CLOSED (session 7,
+  `2026-07-07-resym-symmetric-family-dead.md`): no play-closed symmetric family exists for
+  q ≥ 11 — even "symmetric under ANY nontrivial automorphism ∧ true P" fails; P2's winning
+  strategy is forced through stabilizer-free positions by size 6.** What survives: (ii) a
+  **finer-than-mod-2 invariant / counting or potential-function argument** that survives `bad`
+  odd and explains why `escape ≥ 1` persists even when `bad ≈ total` — necessarily asymmetric
+  in form.
   **Falsification-shortcut lead — TESTED and CLOSED (session 5, `boundary` mode).** The boundary
   characterization "size-4 N ⟺ embeds in an odd maximal cap" (validated q≤9) **FAILS at q=11,13,17**:
   only `N ⟹ embeds` survives, the converse dies as odd maximal caps proliferate (embed-in-odd-maximal

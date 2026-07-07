@@ -17,6 +17,19 @@
 //   escape   q   -- per-size-3-class escape margin (# P size-4 children) + bad-parity split
 //                   (route-A crux 2026-07-06-escape-count-lemma.md): min/max escape, histogram,
 //                   #even-escape (=bad-odd) classes, parity-proof holds/breaks. Single-threaded.
+//   resym [vK] q -- route-(A)-1/2 adaptive symmetric-strategy closure test (open-math plan
+//                   2026-07-07): solve the game with P2 RESTRICTED to replies that land the
+//                   position in family F_v (symmetric under some grid-automorphism involution,
+//                   v0 = symmetry only / v1 = + fixed cells dead / v2 = + problem set dead /
+//                   v3 = symmetric under ANY nontrivial automorphism, order >= 2 /
+//                   v4 = v3 AND a true P-position of the exact game).
+//                   frame-SAFE=YES is a machine-checked adaptive P2 strategy proof for PG(2,q).
+//                   RESULT 2026-07-07: YES for q<=9 (every variant), NO for q=11,13,17 (even
+//                   v3/v4) — the symmetric-family route is dead; see
+//                   2026-07-07-resym-symmetric-family-dead.md.
+//   breaks   q   -- exact cross-check: for every P1 break from the frame, #replies / #true-P
+//                   replies / #P-replies that are symmetric (nontrivial stabilizer).
+//   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
 //
 // Build:  rustc -O -C target-cpu=native 2026-07-06-grid-cap-solver.rs -o /tmp/gridcap
 // Falsification watch: if `outcome` ever prints N (first-player win), PG(2,q) has a
@@ -925,6 +938,731 @@ fn solve_boundary(q: usize) {
     }
 }
 
+// ---- RESYM mode: route (A) adaptive symmetric-strategy closure test ----
+// (Open-math plan 2026-07-07 §(A)-1/2; depth-1 evidence in 2026-07-06-adaptive-resym-test.py.)
+// Family F_v over EVEN-size legal grid positions S:
+//   exists involution phi (semilinear monomial grid-hypergraph automorphism, phi != id,
+//   enumerated EXHAUSTIVELY: both coordinate orders x all scalings/shifts x Frobenius twists
+//   for prime-power q) with phi(S) = S and, per variant:
+//     v0  no extra condition (broadest family; SAFE_v0(frame)=NO kills the whole
+//         adaptive-involution route at this q)
+//     v1  every phi-FIXED cell is dead (not legally playable) in S  [the depth-1 test's cond]
+//     v2  phi's whole PROBLEM SET is dead: cells whose phi-image shares a row or column with
+//         them (incl fixed cells) — the mirror-legality obstruction set of the
+//         mirror-obstruction note (sigma_c: center row+col; antidiagonal: its fixed line)
+// SAFE(S) = P1 stuck at S, or EVERY legal P1 move x admits a legal reply y with
+// S+{x,y} in F_v and SAFE(S+{x,y}) — i.e. the game value with P2 restricted to
+// symmetry-restoring replies.  SAFE(frame)=YES is a machine-checked adaptive-strategy P2 proof
+// that the frame is P, hence PG(2,q)=P by the frame reduction (2026-07-06-frame-reduction.md).
+// Memoizing SAFE on canon() is exact: G conjugates the involution set to itself (semilinearity
+// and swap-parity are preserved by conjugation) and preserves legality/deadness, so F_v and
+// SAFE are G-invariants.
+// Reply-existence per (T = S+x, phi): let D = phi(T)\T.  |D| >= 2: phi can never be restored by
+// one reply.  |D| = 1: the unique candidate is y = the element of D (then phi(T+y) = T+y
+// automatically: the lone unmatched t0 in T\phi(T) satisfies phi(t0) = y).  |D| = 0 (phi already
+// preserves T): y must be a phi-fixed legal cell.
+
+#[derive(Clone)]
+struct Involution {
+    perm: Vec<u16>, // cell permutation
+    fixed: Mask,    // fixed cells
+    problem: Mask,  // cells whose image shares a row/col with them (incl fixed)
+    kind: usize,    // 0 central, 1 antidiag/swap, 2 translation (char 2), 3 frob-twisted, 4 reflection
+}
+
+// all field automorphisms of GF(q) as value maps (id, frob, frob^2, ...)
+fn field_autos(gf: &GF) -> Vec<Vec<u16>> {
+    let q = gf.q;
+    // characteristic p = additive order of 1
+    let mut p = 1usize;
+    let mut x = 1usize;
+    while x != 0 {
+        x = gf.a(x, 1);
+        p += 1;
+    }
+    let pow = |b0: usize, mut e: usize| -> usize {
+        let mut b = b0;
+        let mut r = 1usize;
+        while e > 0 {
+            if e & 1 == 1 {
+                r = gf.m(r, b);
+            }
+            b = gf.m(b, b);
+            e >>= 1;
+        }
+        r
+    };
+    let frob: Vec<u16> = (0..q).map(|v| pow(v, p) as u16).collect();
+    let mut autos: Vec<Vec<u16>> = vec![(0..q as u16).collect()];
+    let mut cur = frob.clone();
+    while cur.iter().enumerate().any(|(i, &v)| v as usize != i) {
+        autos.push(cur.clone());
+        cur = (0..q).map(|v| frob[cur[v] as usize]).collect();
+    }
+    autos
+}
+
+// exhaustive: every involution of the form (r,c) -> (a*s(r)+s1, b*s(c)+t1) or the swapped form,
+// s a field automorphism — deduped. Includes maps useless as mirrors (reflections); they never
+// witness membership of a legal |S|>=2 position (their orbits pair cells within a row/col), so
+// including them is sound and costs nothing.
+fn all_involutions(b: &Board) -> Vec<Involution> {
+    let gf = &b.gf;
+    let q = gf.q;
+    let n = b.n;
+    let autos = field_autos(gf);
+    let neg1 = gf.neg[1] as usize;
+    let mut seen: HashSet<Vec<u16>> = HashSet::new();
+    let mut out: Vec<Involution> = Vec::new();
+    let mut perm = vec![0u16; n];
+    for (si, sigma) in autos.iter().enumerate() {
+        for swap in [false, true] {
+            for alpha in 1..q {
+                for beta in 1..q {
+                    for s in 0..q {
+                        for t in 0..q {
+                            for r in 0..q {
+                                for c in 0..q {
+                                    let (u, v) = if swap { (c, r) } else { (r, c) };
+                                    let rr = gf.a(gf.m(alpha, sigma[u] as usize), s);
+                                    let cc = gf.a(gf.m(beta, sigma[v] as usize), t);
+                                    perm[r * q + c] = (rr * q + cc) as u16;
+                                }
+                            }
+                            let mut is_inv = true;
+                            let mut is_id = true;
+                            for i in 0..n {
+                                if perm[perm[i] as usize] as usize != i {
+                                    is_inv = false;
+                                    break;
+                                }
+                                if perm[i] as usize != i {
+                                    is_id = false;
+                                }
+                            }
+                            if !is_inv || is_id || !seen.insert(perm.clone()) {
+                                continue;
+                            }
+                            let mut fixed = [0u64; MAXW];
+                            let mut problem = [0u64; MAXW];
+                            for i in 0..n {
+                                let j = perm[i] as usize;
+                                if j == i {
+                                    set_bit(&mut fixed, i);
+                                    set_bit(&mut problem, i);
+                                } else if i / q == j / q || i % q == j % q {
+                                    set_bit(&mut problem, i);
+                                }
+                            }
+                            let kind = if si != 0 {
+                                3
+                            } else if swap {
+                                1
+                            } else if alpha == 1 && beta == 1 {
+                                2
+                            } else if alpha == neg1 && beta == neg1 {
+                                0
+                            } else {
+                                4
+                            };
+                            out.push(Involution { perm: perm.clone(), fixed, problem, kind });
+                        }
+                    }
+                }
+            }
+        }
+    }
+    out
+}
+
+// v3 family: symmetric under ANY nontrivial grid automorphism (order >= 2) — the maximal
+// symmetry-based family. Enumerates the whole automorphism group (semilinear monomial affine,
+// both coordinate orders); for a general g the |D|=1 reply y additionally needs g(y) in U
+// (automatic for involutions, checked explicitly here); |D|=0 replies need g(y)=y.
+fn all_autos(b: &Board) -> Vec<Involution> {
+    let gf = &b.gf;
+    let q = gf.q;
+    let n = b.n;
+    let autos = field_autos(gf);
+    let neg1 = gf.neg[1] as usize;
+    let mut seen: HashSet<Vec<u16>> = HashSet::new();
+    let mut out: Vec<Involution> = Vec::new();
+    let mut perm = vec![0u16; n];
+    for (si, sigma) in autos.iter().enumerate() {
+        for swap in [false, true] {
+            for alpha in 1..q {
+                for beta in 1..q {
+                    for s in 0..q {
+                        for t in 0..q {
+                            for r in 0..q {
+                                for c in 0..q {
+                                    let (u, v) = if swap { (c, r) } else { (r, c) };
+                                    let rr = gf.a(gf.m(alpha, sigma[u] as usize), s);
+                                    let cc = gf.a(gf.m(beta, sigma[v] as usize), t);
+                                    perm[r * q + c] = (rr * q + cc) as u16;
+                                }
+                            }
+                            let mut is_id = true;
+                            for i in 0..n {
+                                if perm[i] as usize != i {
+                                    is_id = false;
+                                    break;
+                                }
+                            }
+                            if is_id || !seen.insert(perm.clone()) {
+                                continue;
+                            }
+                            let mut is_inv = true;
+                            for i in 0..n {
+                                if perm[perm[i] as usize] as usize != i {
+                                    is_inv = false;
+                                    break;
+                                }
+                            }
+                            let mut fixed = [0u64; MAXW];
+                            let mut problem = [0u64; MAXW];
+                            for i in 0..n {
+                                let j = perm[i] as usize;
+                                if j == i {
+                                    set_bit(&mut fixed, i);
+                                    set_bit(&mut problem, i);
+                                } else if i / q == j / q || i % q == j % q {
+                                    set_bit(&mut problem, i);
+                                }
+                            }
+                            let kind = if !is_inv {
+                                5
+                            } else if si != 0 {
+                                3
+                            } else if swap {
+                                1
+                            } else if alpha == 1 && beta == 1 {
+                                2
+                            } else if alpha == neg1 && beta == neg1 {
+                                0
+                            } else {
+                                4
+                            };
+                            out.push(Involution { perm: perm.clone(), fixed, problem, kind });
+                        }
+                    }
+                }
+            }
+        }
+    }
+    out
+}
+
+struct ResymStats {
+    states: u64,
+    max_size: usize,
+    kind_wins: [u64; 6],
+    fail_min_size: usize,
+    fail_rep: Vec<u16>, // S cells with the unanswerable break x last
+    fail_max_size: usize,
+    fail_max_rep: Vec<u16>, // deepest failing (S,x): there NO symmetric family reply exists at all
+    start: Instant,
+}
+
+#[allow(clippy::too_many_arguments)]
+fn resym_safe(
+    b: &Board,
+    invs: &[Involution],
+    memo: &mut FnvMap<u128, bool>,
+    game: Option<&FnvMap<u128, bool>>, // exact game values (v4: family also requires true P)
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+    variant: usize,
+    st: &mut ResymStats,
+) -> bool {
+    let key = b.canon(occ);
+    if let Some(&v) = memo.get(&key) {
+        return v;
+    }
+    st.states += 1;
+    if occ.len() > st.max_size {
+        st.max_size = occ.len();
+    }
+    if st.states % 100_000 == 0 {
+        eprintln!(
+            "  [resym {:6.0}s] states={}  max-size={}",
+            st.start.elapsed().as_secs_f64(),
+            st.states,
+            st.max_size
+        );
+    }
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+    }
+    if avail.iter().all(|&w| w == 0) {
+        memo.insert(key, true); // P1 stuck: P2 already won
+        return true;
+    }
+    let mut all_answered = true;
+    'xloop: for w in 0..MAXW {
+        let mut bits = avail[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let x = w * 64 + tz;
+            // T = S + x
+            let mut chosen_t = *chosen;
+            set_bit(&mut chosen_t, x);
+            let mut forb_t = *forbidden;
+            mask_or(&mut forb_t, &b.rc_mask[x]);
+            for &o in occ.iter() {
+                mask_or(&mut forb_t, &b.line_mask[o as usize * b.n + x]);
+            }
+            let mut avail_t = [0u64; MAXW];
+            for i in 0..MAXW {
+                avail_t[i] = b.all[i] & !chosen_t[i] & !forb_t[i];
+            }
+            occ.push(x as u16);
+            // gather symmetry-restoring reply candidates (y, phi)
+            let mut cand = [0u64; MAXW];
+            let mut pairs: Vec<(u16, u32)> = Vec::new();
+            for (pi, inv) in invs.iter().enumerate() {
+                let mut dcnt = 0usize;
+                let mut dy = 0usize;
+                for &tcell in occ.iter() {
+                    let im = inv.perm[tcell as usize] as usize;
+                    if chosen_t[im >> 6] & (1u64 << (im & 63)) == 0 {
+                        dcnt += 1;
+                        if dcnt > 1 {
+                            break;
+                        }
+                        dy = im;
+                    }
+                }
+                if dcnt == 1 {
+                    // legal, and g(U)=U: g(y) must land back in U = T+{y} (automatic for
+                    // involutions, needed for general g in the v3 family)
+                    let gy = inv.perm[dy] as usize;
+                    if avail_t[dy >> 6] & (1u64 << (dy & 63)) != 0
+                        && (gy == dy || chosen_t[gy >> 6] & (1u64 << (gy & 63)) != 0)
+                    {
+                        pairs.push((dy as u16, pi as u32));
+                        set_bit(&mut cand, dy);
+                    }
+                } else if dcnt == 0 {
+                    for w2 in 0..MAXW {
+                        let mut fb = inv.fixed[w2] & avail_t[w2];
+                        while fb != 0 {
+                            let tz2 = fb.trailing_zeros() as usize;
+                            fb &= fb - 1;
+                            pairs.push(((w2 * 64 + tz2) as u16, pi as u32));
+                            set_bit(&mut cand, w2 * 64 + tz2);
+                        }
+                    }
+                }
+            }
+            let mut answered = false;
+            'yloop: for w2 in 0..MAXW {
+                let mut yb = cand[w2];
+                while yb != 0 {
+                    let tz2 = yb.trailing_zeros() as usize;
+                    yb &= yb - 1;
+                    let y = w2 * 64 + tz2;
+                    // U = T + y
+                    let mut chosen_u = chosen_t;
+                    set_bit(&mut chosen_u, y);
+                    let mut forb_u = forb_t;
+                    mask_or(&mut forb_u, &b.rc_mask[y]);
+                    for &o in occ.iter() {
+                        mask_or(&mut forb_u, &b.line_mask[o as usize * b.n + y]);
+                    }
+                    let mut avail_u = [0u64; MAXW];
+                    for i in 0..MAXW {
+                        avail_u[i] = b.all[i] & !chosen_u[i] & !forb_u[i];
+                    }
+                    // v4: family also requires U to be a TRUE P-position of the game
+                    if let Some(gm) = game {
+                        occ.push(y as u16);
+                        let ukey = b.canon(occ);
+                        occ.pop();
+                        match gm.get(&ukey) {
+                            Some(&is_n) if !is_n => {}
+                            _ => continue, // N or unreachable: not in the v4 family
+                        }
+                    }
+                    // membership witness: some phi restoring symmetry that passes the variant
+                    let mut witness: Option<u32> = None;
+                    for &(py, pi) in pairs.iter() {
+                        if py as usize != y {
+                            continue;
+                        }
+                        let inv = &invs[pi as usize];
+                        let ok = match variant {
+                            0 => true,
+                            1 => (0..MAXW).all(|i| inv.fixed[i] & avail_u[i] == 0),
+                            _ => (0..MAXW).all(|i| inv.problem[i] & avail_u[i] == 0),
+                        };
+                        if ok {
+                            witness = Some(pi);
+                            break;
+                        }
+                    }
+                    let wpi = match witness {
+                        Some(p) => p,
+                        None => continue,
+                    };
+                    occ.push(y as u16);
+                    let ok = resym_safe(b, invs, memo, game, occ, &chosen_u, &forb_u, variant, st);
+                    occ.pop();
+                    if ok {
+                        st.kind_wins[invs[wpi as usize].kind] += 1;
+                        answered = true;
+                        break 'yloop;
+                    }
+                }
+            }
+            occ.pop();
+            if !answered {
+                if occ.len() < st.fail_min_size {
+                    st.fail_min_size = occ.len();
+                    st.fail_rep = occ.clone();
+                    st.fail_rep.push(x as u16);
+                }
+                if st.fail_max_rep.is_empty() || occ.len() > st.fail_max_size {
+                    st.fail_max_size = occ.len();
+                    st.fail_max_rep = occ.clone();
+                    st.fail_max_rep.push(x as u16);
+                }
+                all_answered = false;
+                break 'xloop;
+            }
+        }
+    }
+    memo.insert(key, all_answered);
+    all_answered
+}
+
+// ---- BREAKS mode: cross-validate resym against the exact game ----
+// Full-expands the true game, then for EVERY legal P1 break x from the frame reports: #legal
+// replies, #true-P replies (P2's real winning replies), and #P replies whose position has a
+// nontrivial stabilizer (is symmetric under some grid automorphism).  If some x has P>=1 but
+// symmetric-P=0, the resym family loss is confirmed by the exact solver at the first level and
+// P2's real winning replies there are ALL asymmetric.
+fn solve_breaks(q: usize) {
+    let b = Board::new(q);
+    let autos = all_autos(&b);
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    let mut occ0: Vec<u16> = Vec::new();
+    let root_n = s.g(&mut occ0, &empty, &empty);
+    // frame
+    let c0 = 0usize;
+    let c1 = q + 1;
+    let mut chosen = empty;
+    set_bit(&mut chosen, c0);
+    set_bit(&mut chosen, c1);
+    let mut forb = empty;
+    mask_or(&mut forb, &b.rc_mask[c0]);
+    mask_or(&mut forb, &b.rc_mask[c1]);
+    mask_or(&mut forb, &b.line_mask[c0 * b.n + c1]);
+    let occ: Vec<u16> = vec![c0 as u16, c1 as u16];
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forb[i];
+    }
+    let symmetric = |u: &[u16], chos: &Mask| -> bool {
+        'g: for g in autos.iter() {
+            for &cell in u.iter() {
+                let im = g.perm[cell as usize] as usize;
+                if chos[im >> 6] & (1u64 << (im & 63)) == 0 {
+                    continue 'g;
+                }
+            }
+            return true;
+        }
+        false
+    };
+    println!(
+        "q={:>3}  root={}  breaks-from-frame analysis (per P1 move x: replies / P-replies / symmetric-P-replies)",
+        q,
+        if root_n { "N (COUNTEREXAMPLE!)" } else { "P" }
+    );
+    let mut worst: (usize, usize, Vec<(usize, usize)>) = (usize::MAX, usize::MAX, Vec::new());
+    let mut n_breaks = 0usize;
+    let mut n_sym0 = 0usize; // breaks whose P-replies are ALL asymmetric
+    for w in 0..MAXW {
+        let mut bits = avail[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let x = w * 64 + tz;
+            n_breaks += 1;
+            let mut chosen_t = chosen;
+            set_bit(&mut chosen_t, x);
+            let mut forb_t = forb;
+            mask_or(&mut forb_t, &b.rc_mask[x]);
+            for &o in occ.iter() {
+                mask_or(&mut forb_t, &b.line_mask[o as usize * b.n + x]);
+            }
+            let mut avail_t = [0u64; MAXW];
+            for i in 0..MAXW {
+                avail_t[i] = b.all[i] & !chosen_t[i] & !forb_t[i];
+            }
+            let mut occ_t = occ.clone();
+            occ_t.push(x as u16);
+            let (mut n_tot, mut n_p, mut n_symp) = (0usize, 0usize, 0usize);
+            for w2 in 0..MAXW {
+                let mut yb = avail_t[w2];
+                while yb != 0 {
+                    let tz2 = yb.trailing_zeros() as usize;
+                    yb &= yb - 1;
+                    let y = w2 * 64 + tz2;
+                    n_tot += 1;
+                    let mut chosen_u = chosen_t;
+                    set_bit(&mut chosen_u, y);
+                    let mut forb_u = forb_t;
+                    mask_or(&mut forb_u, &b.rc_mask[y]);
+                    for &o in occ_t.iter() {
+                        mask_or(&mut forb_u, &b.line_mask[o as usize * b.n + y]);
+                    }
+                    let mut occ_u = occ_t.clone();
+                    occ_u.push(y as u16);
+                    let key = b.canon(&occ_u);
+                    let is_n = match s.memo.get(&key) {
+                        Some(&v) => v,
+                        None => s.g(&mut occ_u.clone(), &chosen_u, &forb_u),
+                    };
+                    if !is_n {
+                        n_p += 1;
+                        if symmetric(&occ_u, &chosen_u) {
+                            n_symp += 1;
+                        }
+                    }
+                }
+            }
+            if n_p > 0 && n_symp == 0 {
+                n_sym0 += 1;
+            }
+            if (n_symp, n_p) < (worst.0, worst.1) {
+                let cells: Vec<(usize, usize)> =
+                    occ_t.iter().map(|&c| (c as usize / q, c as usize % q)).collect();
+                worst = (n_symp, n_p, cells);
+            }
+            println!(
+                "      x=({},{})  replies={}  P={}  symmetric-P={}{}",
+                x / q,
+                x % q,
+                n_tot,
+                n_p,
+                n_symp,
+                if n_p > 0 && n_symp == 0 { "   <-- P-replies ALL asymmetric" } else { "" }
+            );
+        }
+    }
+    println!(
+        "      summary: {} breaks, {} with all-asymmetric P-replies; worst (sym-P, P) = ({}, {}) at {:?}",
+        n_breaks, n_sym0, worst.0, worst.1, worst.2
+    );
+}
+
+// ---- CHECKPOS mode: exact reply analysis for one position + break ----
+// checkpos <q> r,c r,c ... / rx,cx   (last cell after '/' = P1's break move)
+// Prints every legal reply with its exact game value and stabilizer status.
+fn solve_checkpos(q: usize, scells: &[(usize, usize)], bx: (usize, usize)) {
+    let b = Board::new(q);
+    let autos = all_autos(&b);
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    let mut occ0: Vec<u16> = Vec::new();
+    s.g(&mut occ0, &empty, &empty);
+    // build position T = S + x incrementally
+    let mut chosen = empty;
+    let mut forb = empty;
+    let mut occ: Vec<u16> = Vec::new();
+    let add = |cell: (usize, usize), occ: &mut Vec<u16>, chosen: &mut Mask, forb: &mut Mask| {
+        let i = cell.0 * q + cell.1;
+        for &o in occ.iter() {
+            mask_or(forb, &b.line_mask[o as usize * b.n + i]);
+        }
+        mask_or(forb, &b.rc_mask[i]);
+        set_bit(chosen, i);
+        occ.push(i as u16);
+    };
+    for &c in scells {
+        add(c, &mut occ, &mut chosen, &mut forb);
+    }
+    let skey = b.canon(&occ);
+    let s_val = s.memo.get(&skey).map(|&v| if v { "N" } else { "P" }).unwrap_or("?");
+    add(bx, &mut occ, &mut chosen, &mut forb);
+    let tkey = b.canon(&occ);
+    let t_val = s.memo.get(&tkey).map(|&v| if v { "N" } else { "P" }).unwrap_or("?");
+    println!(
+        "q={}  S={:?} ({})  break x={:?} => T ({})  replies:",
+        q, scells, s_val, bx, t_val
+    );
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forb[i];
+    }
+    let symmetric = |u: &[u16], chos: &Mask| -> bool {
+        'g: for g in autos.iter() {
+            for &cell in u.iter() {
+                let im = g.perm[cell as usize] as usize;
+                if chos[im >> 6] & (1u64 << (im & 63)) == 0 {
+                    continue 'g;
+                }
+            }
+            return true;
+        }
+        false
+    };
+    let (mut n_tot, mut n_p, mut n_symp) = (0usize, 0usize, 0usize);
+    for w in 0..MAXW {
+        let mut yb = avail[w];
+        while yb != 0 {
+            let tz = yb.trailing_zeros() as usize;
+            yb &= yb - 1;
+            let y = w * 64 + tz;
+            n_tot += 1;
+            let mut chosen_u = chosen;
+            set_bit(&mut chosen_u, y);
+            let mut forb_u = forb;
+            mask_or(&mut forb_u, &b.rc_mask[y]);
+            for &o in occ.iter() {
+                mask_or(&mut forb_u, &b.line_mask[o as usize * b.n + y]);
+            }
+            let mut occ_u = occ.clone();
+            occ_u.push(y as u16);
+            let key = b.canon(&occ_u);
+            let is_n = match s.memo.get(&key) {
+                Some(&v) => v,
+                None => s.g(&mut occ_u.clone(), &chosen_u, &forb_u),
+            };
+            let sym = symmetric(&occ_u, &chosen_u);
+            if !is_n {
+                n_p += 1;
+                if sym {
+                    n_symp += 1;
+                }
+            }
+            println!(
+                "      y=({},{})  {}  {}",
+                y / q,
+                y % q,
+                if is_n { "N" } else { "P  <-- winning" },
+                if sym { "[symmetric]" } else { "" }
+            );
+        }
+    }
+    println!("      total={}  P={}  symmetric-P={}", n_tot, n_p, n_symp);
+}
+
+fn solve_resym(q: usize, variant: usize) {
+    let b = Board::new(q);
+    let t0 = Instant::now();
+    let invs = if variant >= 3 { all_autos(&b) } else { all_involutions(&b) };
+    // v4: family = symmetric AND true-P; full-expand the exact game first
+    let game_memo: Option<FnvMap<u128, bool>> = if variant == 4 {
+        let mut s = Solver {
+            b: &b,
+            memo: FnvMap::default(),
+            full: true,
+            min_dev: usize::MAX,
+            odd_max: 0,
+            odd_max_min: usize::MAX,
+            dev_even_n: 0,
+            dev_odd_p: 0,
+        };
+        let empty = [0u64; MAXW];
+        let mut occ0: Vec<u16> = Vec::new();
+        s.g(&mut occ0, &empty, &empty);
+        eprintln!("  [resym q={} v4] exact game expanded: {} classes", q, s.memo.len());
+        Some(s.memo)
+    } else {
+        None
+    };
+    let mut kc = [0usize; 6];
+    for inv in &invs {
+        kc[inv.kind] += 1;
+    }
+    eprintln!(
+        "  [resym q={} v{}] {} symmetries (central {}, antidiag {}, translation {}, frob {}, reflection {}, order>2 {}) built in {:.1}s",
+        q, variant, invs.len(), kc[0], kc[1], kc[2], kc[3], kc[4], kc[5],
+        t0.elapsed().as_secs_f64()
+    );
+    // frame = grid size-2 position {(0,0),(1,1)} (single G-orbit of legal pairs); with the
+    // trivial sizes 0..2 chain this decides PG(2,q) (frame reduction).
+    let empty = [0u64; MAXW];
+    let c0 = 0usize;
+    let c1 = q + 1;
+    let mut chosen = empty;
+    set_bit(&mut chosen, c0);
+    set_bit(&mut chosen, c1);
+    let mut forb = empty;
+    mask_or(&mut forb, &b.rc_mask[c0]);
+    mask_or(&mut forb, &b.rc_mask[c1]);
+    mask_or(&mut forb, &b.line_mask[c0 * b.n + c1]);
+    let mut occ: Vec<u16> = vec![c0 as u16, c1 as u16];
+    let mut memo: FnvMap<u128, bool> = FnvMap::default();
+    let mut st = ResymStats {
+        states: 0,
+        max_size: 2,
+        kind_wins: [0; 6],
+        fail_min_size: usize::MAX,
+        fail_rep: Vec::new(),
+        fail_max_size: 0,
+        fail_max_rep: Vec::new(),
+        start: Instant::now(),
+    };
+    let safe = resym_safe(
+        &b, &invs, &mut memo, game_memo.as_ref(), &mut occ, &chosen, &forb, variant, &mut st,
+    );
+    println!(
+        "q={:>3}  v{}  frame-SAFE={}  states={}  max-size={}  witness-kinds central:{} antidiag:{} translation:{} frob:{} reflection:{} order>2:{}  [{:.1}s]",
+        q,
+        variant,
+        if safe { "YES (adaptive P2 strategy verified => PG(2,q)=P)" } else { "NO" },
+        st.states,
+        st.max_size,
+        st.kind_wins[0],
+        st.kind_wins[1],
+        st.kind_wins[2],
+        st.kind_wins[3],
+        st.kind_wins[4],
+        st.kind_wins[5],
+        st.start.elapsed().as_secs_f64()
+    );
+    if !safe {
+        let rep: Vec<(usize, usize)> =
+            st.fail_rep.iter().map(|&c| (c as usize / q, c as usize % q)).collect();
+        println!(
+            "      first unrecoverable break: |S|={}  S+x cells (break x last) = {:?}",
+            st.fail_min_size, rep
+        );
+        let repm: Vec<(usize, usize)> =
+            st.fail_max_rep.iter().map(|&c| (c as usize / q, c as usize % q)).collect();
+        println!(
+            "      deepest failing break (zero family replies there): |S|={}  S+x cells (break x last) = {:?}",
+            st.fail_max_size, repm
+        );
+    }
+}
+
 fn solve(q: usize, full: bool) {
     let b = Board::new(q);
     let mut s = Solver {
@@ -979,6 +1717,49 @@ fn main() {
         for a in &args[2..] {
             let q: usize = a.parse().expect("q must be an integer");
             solve_escape(q);
+        }
+        return;
+    }
+    if args[1] == "resym" {
+        // resym [v0|v1|v2] <q> [q2 ...]
+        let mut rest: &[String] = &args[2..];
+        let mut variant = 0usize;
+        if !rest.is_empty() && rest[0].starts_with('v') {
+            variant = rest[0][1..].parse().expect("variant must be v0|v1|v2");
+            rest = &rest[1..];
+        }
+        for a in rest {
+            let q: usize = a.parse().expect("q must be an integer");
+            solve_resym(q, variant);
+        }
+        return;
+    }
+    if args[1] == "checkpos" {
+        // checkpos <q> r,c r,c ... / rx,cx
+        let q: usize = args[2].parse().expect("q must be an integer");
+        let mut cells: Vec<(usize, usize)> = Vec::new();
+        let mut bx: Option<(usize, usize)> = None;
+        let mut after_slash = false;
+        for a in &args[3..] {
+            if a == "/" {
+                after_slash = true;
+                continue;
+            }
+            let (r, c) = a.split_once(',').expect("cell must be r,c");
+            let cell = (r.parse().unwrap(), c.parse().unwrap());
+            if after_slash {
+                bx = Some(cell);
+            } else {
+                cells.push(cell);
+            }
+        }
+        solve_checkpos(q, &cells, bx.expect("break cell after /"));
+        return;
+    }
+    if args[1] == "breaks" {
+        for a in &args[2..] {
+            let q: usize = a.parse().expect("q must be an integer");
+            solve_breaks(q);
         }
         return;
     }
