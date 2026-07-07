@@ -236,9 +236,24 @@ existing problems to close — each seeded by an artifact already on this list)
    discipline and ships the benchmark gets cited by both sides. User-fronted; Fable-style
    audits are the method being packaged.
 
+15. **Joyal's category of games in Lean/mathlib (strategies as morphisms).** The one
+   category-theory item that passes the filter. Joyal (1977) observed that Conway games form
+   a category — morphisms ARE winning strategies, composition is strategy pasting — the
+   ancestor of compositional game theory. mathlib already has `SetTheory.Game` and surreals
+   but (verify first) NOT the categorical structure. Formalizing the category (and as stretch,
+   its monoidal/compact-closed structure with disjunctive sum as tensor and Sprague–Grundy as
+   a monoidal functor to nimbers) is Codex-lane work sitting directly on our
+   NodeKayles/Certificate development — a reply-book certificate IS a strategy-morphism made
+   concrete, so item 12's format spec gets its semantics section for free (certificate
+   composition = morphism composition; the coverage proof = totality of the strategy).
+   Audience: CT + formalization + CGT simultaneously — rare triple. **Odds: ~45–55% for the
+   category + functor; compact-closed stretch lower. Refusal boundary: no applied-CT framing
+   papers without a formalized theorem attached — the artifact is mathlib code, not diagrams.**
+
 These are portfolio-capped: at most ONE area-opener active at a time, entered only through
-its already-listed seed artifact (12 ← items 7 + C9/C11; 13 ← items 2/4/11; 14 ← item 5), so
-a failed opening still leaves the seed's standalone value.
+its already-listed seed artifact (12 ← items 7 + C9/C11; 13 ← items 2/4/11; 14 ← item 5;
+15 ← the NodeKayles Lean development + item 12's format), so a failed opening still leaves
+the seed's standalone value.
 
 ### Part III refusals (same rule as Part II)
 
