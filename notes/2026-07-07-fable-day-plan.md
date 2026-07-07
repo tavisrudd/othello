@@ -56,10 +56,11 @@ discovery, doc corrections incl. the REVISED novelty verdict (committed `d1ccb5f
 ## Later windows (2 × 5hr remaining) — F4 + n=20 lucky-plan ramp
 
 Added end of Fable session 2 (~19:00). Target: [n=20 lucky-first-win plan](2026-07-04-n20-lucky-first-win-plan.md).
-**Box status change (checked this session): no queens process is running — the G(17) nimber run
-is no longer occupying RAM (~15 GB available).** First action next window: confirm whether G(17)
-finished (check `queens` tmux window 1 scrollback / result JSON) and record the nimber if so. If
-it completed, the ≤1 GB sub constraint is LIFTED for the rest of the day.
+**Box status (user-corrected 2026-07-07 evening): the queens G(17) run is DONE — G(17) = 2
+VERIFIED** (recorded in the nimber handoff; G(18) remains). But the **sum-free z5 run
+(`z3cubed-z5` lineage) is still running** and owns part of the box, so the ≤1 GB single-core
+sub constraint HOLDS for both remaining windows. Record the G(17) revalidation config/log
+pointer in the nimber handoff when its pane is read back.
 
 ### Window 2 (next 5hr)
 
