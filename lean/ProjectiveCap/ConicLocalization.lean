@@ -392,6 +392,90 @@ theorem onConicLegalExtensionCountStatement :
     norm_num [Nat.cast_sub hle1, Nat.cast_sub hle3]
     ring
 
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbola_center_secant_collinear {rho A B t : K} (ht : t ≠ 0) :
+    Collinear (K := K) (rho, A)
+      (hyperbolaParamPoint rho A B t)
+      (hyperbolaParamPoint rho A B (-t)) := by
+  unfold Collinear hyperbolaParamPoint
+  field_simp [ht]
+  ring
+
+theorem maximalGridCap_hyperbolaCells_of_two_ne_zero {rho A B : K}
+    (h2 : (2 : K) ≠ 0) (hB : B ≠ 0) :
+    MaximalGridCap (K := K) (HyperbolaCells (K := K) rho A B) := by
+  let H := HyperbolaCells (K := K) rho A B
+  refine ⟨gridCap_hyperbolaCells (K := K) hB, ?_⟩
+  intro p hpnot hcapInsert
+  by_cases hrow : p.1 = rho
+  · by_cases hcol : p.2 = A
+    · have hpcenter : p = (rho, A) := Prod.ext hrow hcol
+      subst p
+      let q := hyperbolaParamPoint rho A B 1
+      let r := hyperbolaParamPoint rho A B (-1)
+      have hqH : q ∈ H :=
+        mem_hyperbolaCells.mpr (hyperbolaParamPoint_onHyperbola (K := K) one_ne_zero)
+      have hrH : r ∈ H := by
+        have hneg : (-1 : K) ≠ 0 := neg_ne_zero.mpr one_ne_zero
+        exact mem_hyperbolaCells.mpr (hyperbolaParamPoint_onHyperbola (K := K) hneg)
+      have hpMem : (rho, A) ∈ insert (rho, A) H := by simp
+      have hqMem : q ∈ insert (rho, A) H := Finset.mem_insert.mpr (Or.inr hqH)
+      have hrMem : r ∈ insert (rho, A) H := Finset.mem_insert.mpr (Or.inr hrH)
+      have hpq : (rho, A) ≠ q := by
+        intro h
+        have hf := congrArg Prod.fst h
+        simp [q, hyperbolaParamPoint] at hf
+      have hpr : (rho, A) ≠ r := by
+        intro h
+        have hf := congrArg Prod.fst h
+        simp [r, hyperbolaParamPoint] at hf
+      have hqr : q ≠ r := by
+        intro h
+        have hf := congrArg Prod.fst h
+        simp [q, r, hyperbolaParamPoint] at hf
+        have htwo : (2 : K) = 0 := by linear_combination hf
+        exact h2 htwo
+      exact hcapInsert.2 hpMem hqMem hrMem hpq hpr hqr
+        (hyperbola_center_secant_collinear (K := K) (rho := rho) (A := A) (B := B)
+          (t := 1) one_ne_zero)
+    · let t := B / (p.2 - A)
+      let q := hyperbolaParamPoint rho A B t
+      have ht : t ≠ 0 := div_ne_zero hB (sub_ne_zero.mpr hcol)
+      have hqH : q ∈ H :=
+        mem_hyperbolaCells.mpr (hyperbolaParamPoint_onHyperbola (K := K) ht)
+      have hpMem : p ∈ insert p H := by simp
+      have hqMem : q ∈ insert p H := Finset.mem_insert.mpr (Or.inr hqH)
+      have hqcol : p.2 = q.2 := by
+        have hq2 : q.2 = A + (p.2 - A) := by
+          simp [q, t, hyperbolaParamPoint]
+          field_simp [hB, sub_ne_zero.mpr hcol]
+          ring
+        calc
+          p.2 = A + (p.2 - A) := by ring
+          _ = q.2 := hq2.symm
+      have hpq : p ≠ q := by
+        intro hpq
+        exact hpnot (hpq ▸ hqH)
+      exact hpq (hcapInsert.1.2 hpMem hqMem hqcol)
+  · let t := p.1 - rho
+    let q := hyperbolaParamPoint rho A B t
+    have ht : t ≠ 0 := sub_ne_zero.mpr hrow
+    have hqH : q ∈ H :=
+      mem_hyperbolaCells.mpr (hyperbolaParamPoint_onHyperbola (K := K) ht)
+    have hpMem : p ∈ insert p H := by simp
+    have hqMem : q ∈ insert p H := Finset.mem_insert.mpr (Or.inr hqH)
+    have hqrow : p.1 = q.1 := by simp [q, t, hyperbolaParamPoint]
+    have hpq : p ≠ q := by
+      intro hpq
+      exact hpnot (hpq ▸ hqH)
+    exact hpq (hcapInsert.1.1 hpMem hqMem hqrow)
+
+theorem oddHyperbolaMaximalStatement :
+    OddHyperbolaMaximalStatement (K := K) := by
+  intro rho A B h2 hB
+  exact ⟨maximalGridCap_hyperbolaCells_of_two_ne_zero (K := K) h2 hB,
+    (gridCap_hyperbolaCells_and_card (K := K) hB).2⟩
+
 /--
 The translated-coordinate map
 `(t, s) |-> ((u / B) * s, (B / u) * t)`, transported back to grid
