@@ -66,6 +66,22 @@ interpretation). If access also fails, record that and stop.
 
 Report file: `notes/2026-07-07-codex-arc-census-fill.md`.
 
+## C5. Test the PGL(2)-orbit value-invariance prediction (q=17 feat data)
+
+Lemma I of [onconic intrusion calculus](2026-07-07-onconic-intrusion-calculus.md) predicts: two
+on-conic size-4 positions whose 6-point parameter sets `{∞, 0, t₁, t₂, t₃, t₄} ⊂ P¹(F_17)` are
+equivalent under the FULL `PGL(2,17)` must have equal game values. Test it against the q=17
+`feat` data: regenerate the per-class per-extension `pos=on` value lines
+(`2026-07-06-grid-cap-solver.rs` feat mode, q=17, ~minutes, small memory), reconstruct each
+on-conic S₄'s parameter 6-subset (the conic reconstruction recipe is in
+`2026-07-07-conic-localization-onconic-escape.md` §4), bucket the 6-subsets by
+`PGL(2,17)`-canonical form (orbit of the 6-set under all Möbius maps; brute-force canonicalize —
+|PGL(2,17)| = 4896, ≤ 273 subsets, trivial compute), and check value-constancy per bucket. Any
+violation REFUTES Lemma I (report it verbatim — it would mean an error in the uniformization
+argument); constancy + the bucket count is the payoff either way (how much the moduli collapse).
+
+Report file: `notes/2026-07-07-codex-pgl2-orbit-check.md`.
+
 ## Standing (unchanged)
 
 WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per
