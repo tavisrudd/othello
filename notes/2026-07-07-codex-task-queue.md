@@ -82,6 +82,64 @@ argument); constancy + the bucket count is the payoff either way (how much the m
 
 Report file: `notes/2026-07-07-codex-pgl2-orbit-check.md`.
 
+## C6. Fix the latent GF(49) reducible-polynomial bug + field self-check (AFTER C3 completes)
+
+F3 audit finding B1 (`2026-07-07-f3-soundness-audit.md`): `irred(49)` in
+`2026-07-06-grid-cap-solver.rs` returns `x²+3` over F₇, which is REDUCIBLE (−3 ≡ 4 = 2² mod 7;
+the comment tested `c` nonsquare instead of `−c`). Latent only — MAXW caps q ≤ 32 and a q=49
+run panics on mask width first; no existing result touched. **Wait until your C3 gate is done
+before editing the file** (don't rebuild under your own running gate). Then:
+1. Replace the entry with `x²+1` over F₇ (irreducible: −1 nonsquare, 7 ≡ 3 mod 4); fix the
+   comment.
+2. Add a startup self-check in `GF::new`: assert no zero divisors / every nonzero element got
+   an inverse (cheap O(q²) table scan), so any future bad `irred` entry fails loudly instead of
+   silently computing over a ring.
+3. Add an explicit `assert!(q * q <= 64 * MAXW, ...)` at `Board::new` entry with a clear
+   message (today's failure mode is an index panic deep in `set_bit`).
+4. Verify: rebuild, re-run one small validation (`escape 7` or the q=11 esc class 0) and
+   confirm byte-identical output to before the edit.
+
+Report file: `notes/2026-07-07-codex-gf49-fix.md`.
+
+## C7. Machine-check + write up the automorphism-exhaustiveness lemma
+
+F3 audit finding D1: the resym NO verdicts (q=11,13,17) rest on "the semilinear monomial
+affine maps (both coordinate orders) are ALL automorphisms of the grid game hypergraph" —
+true, but the proof is nowhere in the notes. Two deliverables:
+1. **Prose lemma note** with the two-step argument (sketch in the audit note §2(b)): a
+   legality-preserving cell bijection (i) preserves illegal pairs ⇒ rook's-graph automorphism
+   ⇒ (row perm × col perm) ⋊ swap for q ≠ 4 (cite Aut(K_q□K_q)); (ii) preserves collinear
+   triples with distinct rows/cols ⇒ collineation of AG(2,q) ⇒ monomial semilinear with a
+   SINGLE field automorphism σ on both coordinates (show the σ ≠ τ twisted form breaks
+   collinearity explicitly). Conclude: the `all_autos` enumeration is the full group.
+2. **Brute-force check at q=5 (and q=7 if it fits the box budget):** enumerate all
+   (row perm × col perm) ⋊ swap maps (2·(q!)² — 28,800 at q=5), filter those preserving the
+   set of non-axis collinear triples, and confirm the survivors are EXACTLY the 2(q−1)²q²·e
+   maps `all_autos` builds (compare as permutation sets, not counts). Single-core, tiny RAM.
+
+Report file: `notes/2026-07-07-codex-autgroup-check.md`.
+
+## C8. Exact-canon cross-validation of the fingerprint canon (q=11, q=13 + q=17 witnesses)
+
+F3 audit finding D2: `canon()` is a 128-bit additive fingerprint (min over anchor images of a
+sum-of-cell-hashes), not an exact canonical form — a collision would silently merge classes.
+Collision odds are negligible and small-q class counts were validated, but the paper-grade
+claims should rest on an explicit check:
+1. Implement (or port from the Python `2026-07-06-grid-canon2.py` canon if it is exact) an
+   EXACT canonical form: min over the same anchor images of the *sorted cell list itself*
+   (lexicographic), no hashing.
+2. For q=11 and q=13: recount all canonical classes per size (full expansion) under both keys;
+   confirm identical counts per size. For q=17: re-canonicalize just the size-3 classes and
+   each min-escape class's size-4 children under the exact key; confirm the escape histogram
+   (5:3 10:12 11:6) is reproduced.
+3. Report the counts verbatim; any mismatch is a MAJOR finding (report and stop — do not
+   "fix").
+Memory note: full q=13 expansion fits the ≤1 GB budget; q=17 full expansion does NOT — use the
+esc-mode private-memo machinery for the q=17 step (class-by-class), or skip to size-3/size-4
+re-canonicalization only.
+
+Report file: `notes/2026-07-07-codex-exact-canon-check.md`.
+
 ## Standing (unchanged)
 
 WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per

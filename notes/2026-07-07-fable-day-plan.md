@@ -24,8 +24,17 @@ discovery, doc corrections incl. the REVISED novelty verdict (committed `d1ccb5f
   gates PASS byte-identical, q=17/19 gate → C3); LaTeX scaffold (compiles, kernels as \input
   slots); related-work pulls (Szőnyi–Weiner vs Ball–Lavrauw scoping catch).
 - **Codex queue** ([tasks](2026-07-07-codex-task-queue.md)): C1 REPORTED, C2 REPORTED,
-  C3–C5 pending. Per user: further delegation goes to Codex, not Opus subs.
-- **F3 (soundness audit) + F4 (wrap/review of C-reports) → NEXT (fresh) SESSION.**
+  C3 in progress (q=19 gate), C4–C5 pending, **C6–C8 added by F3** (GF(49) fix, automorphism-
+  exhaustiveness lemma + check, exact-canon cross-validation). Per user: further delegation
+  goes to Codex, not Opus subs.
+- **F3 DONE (Fable session 2):** [soundness audit](2026-07-07-f3-soundness-audit.md) — all four
+  referee-probe targets audited from scratch and SOUND (frame chain incl. terminal edge case +
+  quantifier step; resym reply reconstruction/memoization + enumeration; canon min-image
+  invariance; escape/esc/feat memo reuse + enumerate orbit-BFS). One latent bug found:
+  `irred(49)` is reducible over F₇ (unreachable today, → C6). Three doc gaps ranked (D1
+  automorphism-exhaustiveness lemma unwritten → C7; D2 fingerprint caveat → C8 + paper text;
+  D3 crux-quantifier sentence → kernel text).
+- **F4 (wrap/review of C-reports) → remaining.**
 
 ## Fable blocks (rest of day, in order)
 
