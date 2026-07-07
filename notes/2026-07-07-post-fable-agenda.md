@@ -207,6 +207,39 @@ month-1 items are moving.
    census note that P3 then cites. Opus-executable against a spec; the exact-canon check (C8)
    is the soundness gate it inherits.
 
+### Part III area-openers (added on request: NEW territory this team could define, not
+existing problems to close — each seeded by an artifact already on this list)
+
+12. **A universal certificate standard for solved games ("DRAT for games").** Solved-game
+   claims (Checkers, Connect-4, Othello 2023, our n=18) are trust-our-code claims; SAT fixed
+   the same credibility gap by standardizing DRAT + independent checkers, and that standard
+   MADE the modern SAT-results ecosystem. Nobody has done it for game solutions. We are
+   unusually placed: the C9/C11 reply-book format + Lean checker is a working prototype, and
+   Qubic (item 7) + queens n=18 are the first two certified instances. Opening move: format
+   spec + two reference checkers (fast native + Lean) + the two instances + a position paper
+   ("solved games should ship certificates"). If it catches, every future solving claim cites
+   the format. Visibility: SAT/ICGA/ITP triple audience.
+13. **A verified small-geometry database (LMFDB-style, for finite geometry).** The
+   finite-geometry literature runs on scattered tables in papers (the O1 census's paywalled
+   gaps are the symptom). An open, queryable database of small-q objects — arcs, caps,
+   spectra, automorphisms, completeness certificates — with every entry carrying an
+   isomorph-rejection audit trail (item 2's machinery) would do for the field what LMFDB did
+   for number theory, at a tractable scale. v0 = our own verified censuses (items 4, 11, the
+   arc cross-check C4) behind one schema. Infrastructure prestige compounds; every census
+   note thereafter is also a database release.
+14. **Soundness engineering for AI-assisted mathematics (protocol + benchmark).** Item 5 is
+   the case study; the area is the generalization: named, reusable protocols (adversarial
+   audit passes, exact-match validation gates, negative-result ledgers, delegation contracts)
+   plus a benchmark built from REAL research tasks with machine-checkable gates — this repo
+   has dozens (the C-queue's report-file gates are exactly that shape). The 2026 discourse on
+   AI mathematics is loud on capability and thin on auditability; the team that names the
+   discipline and ships the benchmark gets cited by both sides. User-fronted; Fable-style
+   audits are the method being packaged.
+
+These are portfolio-capped: at most ONE area-opener active at a time, entered only through
+its already-listed seed artifact (12 ← items 7 + C9/C11; 13 ← items 2/4/11; 14 ← item 5), so
+a failed opening still leaves the seed's standalone value.
+
 ### Part III refusals (same rule as Part II)
 
 Max cap in AG(7,3) (search space beyond any single box; heavily attempted), hyperovals in
