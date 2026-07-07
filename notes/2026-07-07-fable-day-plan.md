@@ -53,6 +53,84 @@ discovery, doc corrections incl. the REVISED novelty verdict (committed `d1ccb5f
 - **F4. Wrap.** Review sub outputs, t-done, final handoff updates, leave the post-Fable agenda
   (`2026-07-07-post-fable-agenda.md`) as the standing plan.
 
+## Later windows (2 × 5hr remaining) — F4 + n=20 lucky-plan ramp
+
+Added end of Fable session 2 (~19:00). Target: [n=20 lucky-first-win plan](2026-07-04-n20-lucky-first-win-plan.md).
+**Box status change (checked this session): no queens process is running — the G(17) nimber run
+is no longer occupying RAM (~15 GB available).** First action next window: confirm whether G(17)
+finished (check `queens` tmux window 1 scrollback / result JSON) and record the nimber if so. If
+it completed, the ≤1 GB sub constraint is LIFTED for the rest of the day.
+
+### Window 2 (next 5hr)
+
+- **W2-1. F4-lite (~30min):** read any landed C-reports (C3 gate is the blocker for O2's q=23
+  campaign), mark queue entries, fold findings.
+- **W2-2. Launch the Phase-0a probe sub (Opus, background):** implement + run the
+  border-signature census/valtest probe per **Appendix P0a** below. This is the n=20 plan's
+  load-bearing unknown (does the border state compress to a small signature?) measured BEFORE
+  building the full certificate extractor — a day of build effort gated on a hours-scale probe.
+  Standard sub guardrails + exact-match gates (in the appendix).
+- **W2-3. Fable (while the sub runs): extractor design spec.** Write the certificate extractor's
+  soundness-critical design as a spec note ready for a window-3 build sub: the certification
+  invariant ("paired core + border state", per the n20 plan's automatic-tau scope note), the
+  exception-table format, the four opponent-move classes and their handlers, the endgame parity
+  case (core-thin positions where live border cells decide who moves last — must be explicit in
+  the coverage argument), terminal claims (S1 pairing / tau-symmetric leaf / dense exact leaf /
+  solved leaf), and the small-n validation gates. This is convention-trap work — Fable only.
+- **W2-4. Codex C9 (queued):** Lean statement-level scaffold for the tau-mirror + exception-table
+  reply-book certificate format targeting `Queens.N20J10LuckyTarget` (extends
+  `NodeKayles/Certificate.lean`'s reply-book kernel). Statement shape must match W2-3's spec.
+
+### Window 3 (last 5hr)
+
+- **W3-1. Calibration call (Fable):** read the P0a probe report. GO test = v1-signature count
+  grows far slower than border-subset count at n=18 depth ≥ 3 AND valtest shows 0 (or structured,
+  explainable) bucket violations at n ≤ 12. NO-GO = signatures ≈ subsets (no compression) or
+  valtest violations are unstructured — then per the n20 plan §Phase 0, do NOT start n=20; write
+  the redirect (improve certificate vocabulary on n=18) and stop the lucky-plan ramp.
+- **W3-2. If GO: launch the extractor build sub** (Opus, spec from W2-3, calibrate on n ≤ 12
+  gates in-window; the full n=18 I9 Phase-0 run continues past the window — overnight-safe,
+  small-memory by design, checkpointed per exception-book growth).
+- **W3-3. F4 full wrap:** review all C-reports (C1–C9), t-done, day-plan + n20-plan status
+  updates, post-Fable agenda (`2026-07-07-post-fable-agenda.md`) as the standing plan, incl. the
+  n=20 next step for whoever picks it up (Phase 0 completion criteria are in the n20 plan).
+
+## Appendix P0a: border-signature census/valtest probe (for the W2-2 Opus sub)
+
+Standalone single-file Rust probe (pattern: `2026-07-06-grid-cap-solver.rs`; `rustc -O`, no
+crates needed, single-core, ≤1 GB). Board: flat n×n queens, central-diagonal strike
+`c* = (n/2−1, n/2−1)` (I9 at n=18, J10 at n=20), residual `R_n`; `S = [0..n−3]²`,
+`tau(x) = (n−3−x_r, n−3−x_c)` on live core cells, `L = row n−1 ∪ col n−1` (the two clique arms).
+Opponent moves first in `R_n`.
+
+- **Mode `census <n> <max-exchanges>`:** explore `R_n` under the FORCED-TAU rule — every
+  opponent core move `x` with `tau(x)` live is answered `tau(x)` immediately (one reply, no
+  branching); opponent border moves and scar moves (core `x` with `tau(x)` dead) branch fully;
+  our replies to border/scar moves branch fully (this over-approximates any reply book's
+  reachable set). Depth = number of non-mirror events (border moves + scar moves), capped at
+  `max-exchanges` (run 2, 3, 4). At each reached state record: (a) the exact border live subset,
+  (b) signature v0 = (row-arm live count, col-arm live count), (c) signature v1 = v0 + per-arm
+  sorted multiset of live-border-cell core-incidence counts (# live core cells each live border
+  cell attacks). Report per depth: #states, #distinct border subsets, #distinct v0, #distinct
+  v1. Run n = 12, 14, 16, 18. **The compression hypothesis predicts #v1 ≪ #subsets, flattening
+  with depth.**
+- **Mode `valtest <n>`:** n ≤ 12 only. Exact memoized solver for residual positions (plain
+  HashMap memo on the live-set bitboard, no symmetry needed; n=12 residual fits easily). For
+  every state reached by `census` at ≤ 3 exchanges, bucket by (canonical scarred-core class,
+  v1 signature) where the core class is the tau-folded live-core multiset — document the exact
+  key — and report any bucket whose members have differing P/N values, verbatim. 0 violations =
+  v1 is a sufficient exception-table index at small n (evidence, not proof — the extractor's
+  soundness never rests on this; compression forecasting only).
+- **Gates (must pass before any n=18 census is reported):** (1) the probe's own solver on the
+  FULL board (empty position, no strike) reproduces the known outcomes for n = 4..9 — cross-check
+  against `queens solve <n> naive` verdicts; (2) `valtest` at n=8: the probe's residual verdict
+  for the central child matches the sign implied by the full-board solve + first-move search done
+  by the probe itself (self-consistency); (3) census at n=12 with max-exchanges=0 must show
+  exactly 1 state (all-mirror line, no events).
+- **Guardrails:** no novelty/interpretation in the report — tables + violations verbatim; no
+  n=20 runs; don't touch the queens tmux panes; report file
+  `notes/2026-07-07-p0a-border-signature-report.md`.
+
 ## Opus subagent tasks (launch in background; Fable reviews outputs)
 
 - **O1. Arc-data pull.** From the complete-arc classification literature (arXiv 1005.3412,

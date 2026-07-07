@@ -140,6 +140,19 @@ re-canonicalization only.
 
 Report file: `notes/2026-07-07-codex-exact-canon-check.md`.
 
+## C9. Lean statement scaffold — tau-mirror + exception-table certificate format (n=20 lucky plan)
+
+Statement-level only (no proof obligation), after WP-1/WP-2 and C1–C8 work. Target: the Phase-3
+artifact format of [`2026-07-04-n20-lucky-first-win-plan.md`](2026-07-04-n20-lucky-first-win-plan.md)
+— extend the reply-book kernel in `lean/NodeKayles/Certificate.lean` toward
+`Queens.N20J10LuckyTarget`: a certificate datatype of (automatic tau rule on the paired core +
+border/scar exception table + terminal claims: closed pairing / tau-symmetric leaf / solved
+leaf) and a checker-statement `certificate valid → position is P`. Fable is writing the
+extractor design spec in window 2 (day plan W2-3) — match its decomposition if it exists when
+you start; otherwise state the pieces against the n20 plan's §Soundness-boundaries list.
+
+Report file: `notes/2026-07-07-codex-cert-format-scaffold.md`.
+
 ## Standing (unchanged)
 
 WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per
