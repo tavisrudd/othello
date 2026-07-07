@@ -41,8 +41,12 @@ escape/bad split is formalized there as `EscapeExtensions`, `BadExtensions`,
 `legalExtensions_card_eq_escape_add_bad`, and
 `oddEscapeStatement_iff_escapeExtensions_nonempty`. The normalized residual seed facts are in
 [`../../lean/ProjectiveCap/GridSeed.lean`](../../lean/ProjectiveCap/GridSeed.lean):
-`StandardResidualSeed`, `standardResidualSeed_card`, and `standardResidualSeed_gridCap`. Stable
-theorem targets that are not yet proved in Lean are named in
+`StandardResidualSeed`, `standardResidualSeed_card`, and `standardResidualSeed_gridCap`. The first
+counting prerequisites are in
+[`../../lean/ProjectiveCap/GridCounting.lean`](../../lean/ProjectiveCap/GridCounting.lean):
+`UsedRows`, `UsedCols`, `FreeFreeCells`, `PairLine`, `PairLineBlockedBy`,
+`card_usedRows_of_card_three`, and `card_usedCols_of_card_three`. Stable theorem targets that are
+not yet proved in Lean are named in
 [`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), and the
 odd-plane escape target is isolated in
 [`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).
