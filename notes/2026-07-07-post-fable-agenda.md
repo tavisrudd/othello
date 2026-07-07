@@ -186,6 +186,27 @@ month-1 items are moving.
    Adjacent same-shape alternative if scouting fails: exact Davenport constants for specific
    small abelian groups (sum-free machinery reuse). **Odds: ~35–45% conditional on scoping.**
 
+### Part III bankers (added on request: high-visibility AND P ≥ 80%)
+
+9. **JOSS paper + artifact release of the solver stack** (~85%). The queens/nimber/grid-cap
+   solvers are already validation-gated, documented in handoffs, and methodologically unusual
+   (auditable exact search). Package + document + submit to the Journal of Open Source
+   Software: near-certain acceptance for working, documented research software, a DOI every
+   subsequent paper cites, and standing visibility in the computational-math tooling world.
+   Opus-executable end to end; user approves the release boundary.
+10. **mathlib foundations PR: finite projective/affine planes, arcs, conics** (~80–85%). The
+   guaranteed floor under the Segre bet (item 3): land the vocabulary layer (PG(2,q)/AG(2,q),
+   arcs, tangent counts, the conic basics the ProjectiveCap work already states privately) as
+   mathlib contributions. mathlib PRs are high-visibility in formalization, Codex owns the
+   lane, and the work is not wasted in any Segre outcome — it is the prerequisite either way.
+11. **Affine complete-cap spectra census, q ≤ 19** (~80%). Our defect/feat/escape runs already
+   enumerate the odd maximal grid caps; the one-step generalization (full complete-cap size
+   spectra in AG(2,q), all parities, with counts up to equivalence) is certain compute on
+   in-hand code, fills a census cell the projective-arc literature mostly skips (novelty
+   search first, nofil rule), and ships as OEIS sequences + a short JCD/Ars Combinatoria-style
+   census note that P3 then cites. Opus-executable against a spec; the exact-canon check (C8)
+   is the soundness gate it inherits.
+
 ### Part III refusals (same rule as Part II)
 
 Max cap in AG(7,3) (search space beyond any single box; heavily attempted), hyperovals in
