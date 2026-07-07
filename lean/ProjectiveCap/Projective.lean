@@ -85,6 +85,38 @@ abbrev Win (S : Finset (Point K V)) : Prop :=
 def InitialPStatement : Prop :=
   FiniteBuildGame.IsP (Cap K V) (∅ : Finset (Point K V))
 
+/-- Single-orbit transitivity of cap-preserving point permutations on one size
+layer of cap positions.  For `k ≤ 4` this is the game-facing form of
+`PGL`-transitivity on points, pairs, triangles, and frames. -/
+def CapTransitiveStatement (k : ℕ) : Prop :=
+  ∀ ⦃S T : Finset (Point K V)⦄, Cap K V S -> Cap K V T ->
+    S.card = k -> T.card = k ->
+      ∃ e : Point K V ≃ Point K V,
+        (∀ U : Finset (Point K V), Cap K V (U.map e.toEmbedding) ↔ Cap K V U) ∧
+          S.map e.toEmbedding = T
+
+/--
+Frame reduction, game-theoretic half: single-orbit transitivity at sizes
+`1..4` plus extendability below size `4` collapse the projective conjecture to
+the value of a single frame position.  The four transitivity hypotheses and
+the extendability hypothesis are the remaining geometric obligations.
+-/
+theorem initialPStatement_iff_isP_frame
+    (h1 : CapTransitiveStatement (K := K) (V := V) 1)
+    (h2 : CapTransitiveStatement (K := K) (V := V) 2)
+    (h3 : CapTransitiveStatement (K := K) (V := V) 3)
+    (h4 : CapTransitiveStatement (K := K) (V := V) 4)
+    (hext : ∀ S : Finset (Point K V), Cap K V S -> S.card ≤ 3 ->
+      ∃ x : Point K V, FiniteBuildGame.Move (Cap K V) S x)
+    {F : Finset (Point K V)} (hF : Cap K V F) (hFcard : F.card = 4) :
+    (InitialPStatement (K := K) (V := V) ↔ FiniteBuildGame.IsP (Cap K V) F) :=
+  FiniteBuildGame.isP_empty_iff_isP_of_frame_chain
+    (FiniteBuildGame.sizeValueConstant_of_transitive h1)
+    (FiniteBuildGame.sizeValueConstant_of_transitive h2)
+    (FiniteBuildGame.sizeValueConstant_of_transitive h3)
+    (FiniteBuildGame.sizeValueConstant_of_transitive h4)
+    hext (cap_empty (K := K) (V := V)) hF hFcard
+
 end Game
 
 end Projective

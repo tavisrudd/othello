@@ -164,4 +164,146 @@ decreasing_by
   rw [hcardy, hcardx]
   omega
 
+/-! ## Game-value transport along board symmetries -/
+
+omit [Fintype α] in
+theorem move_map {Valid : Finset α -> Prop} (e : α ≃ α)
+    (hValid : ∀ S : Finset α, Valid (S.map e.toEmbedding) ↔ Valid S)
+    {S : Finset α} {x : α} :
+    Move Valid (S.map e.toEmbedding) (e x) ↔ Move Valid S x := by
+  have hmem : e x ∈ S.map e.toEmbedding ↔ x ∈ S := by
+    rw [Finset.mem_map_equiv, Equiv.symm_apply_apply]
+  have hins : insert (e x) (S.map e.toEmbedding) = (insert x S).map e.toEmbedding := by
+    simp [Finset.map_insert]
+  unfold Move
+  rw [hins, hValid, hmem]
+
+/-- Normal-play game values are invariant under a validity-preserving
+permutation of the board. -/
+theorem win_map {Valid : Finset α -> Prop} (e : α ≃ α)
+    (hValid : ∀ S : Finset α, Valid (S.map e.toEmbedding) ↔ Valid S)
+    (S : Finset α) : Win Valid (S.map e.toEmbedding) ↔ Win Valid S := by
+  rw [win_iff_exists_move, win_iff_exists_move]
+  constructor
+  · rintro ⟨y, hymove, hylose⟩
+    have hy : e (e.symm y) = y := e.apply_symm_apply y
+    rw [← hy] at hymove hylose
+    have hxmove : Move Valid S (e.symm y) := (move_map e hValid).mp hymove
+    refine ⟨e.symm y, hxmove, fun hwin => hylose ?_⟩
+    have hins : insert (e (e.symm y)) (S.map e.toEmbedding) =
+        (insert (e.symm y) S).map e.toEmbedding := by
+      simp [Finset.map_insert]
+    rw [hins]
+    exact (win_map e hValid (insert (e.symm y) S)).mpr hwin
+  · rintro ⟨x, hxmove, hxlose⟩
+    refine ⟨e x, (move_map e hValid).mpr hxmove, fun hwin => hxlose ?_⟩
+    have hins : insert (e x) (S.map e.toEmbedding) =
+        (insert x S).map e.toEmbedding := by
+      simp [Finset.map_insert]
+    rw [hins] at hwin
+    exact (win_map e hValid (insert x S)).mp hwin
+termination_by Fintype.card α - S.card
+decreasing_by
+  · classical
+    have hx : e.symm y ∉ S := hxmove.1
+    have hcard : (insert (e.symm y) S).card = S.card + 1 :=
+      Finset.card_insert_of_notMem hx
+    have hlt : S.card < Fintype.card α := card_lt_univ_of_notMem hx
+    rw [hcard]
+    omega
+  · classical
+    have hx : x ∉ S := hxmove.1
+    have hcard : (insert x S).card = S.card + 1 :=
+      Finset.card_insert_of_notMem hx
+    have hlt : S.card < Fintype.card α := card_lt_univ_of_notMem hx
+    rw [hcard]
+    omega
+
+theorem isP_map {Valid : Finset α -> Prop} (e : α ≃ α)
+    (hValid : ∀ S : Finset α, Valid (S.map e.toEmbedding) ↔ Valid S)
+    (S : Finset α) : IsP Valid (S.map e.toEmbedding) ↔ IsP Valid S :=
+  not_congr (win_map e hValid S)
+
+/-! ## Size-orbit value chains -/
+
+/-- All valid positions of one size share a single game value. -/
+def SizeValueConstant (Valid : Finset α -> Prop) (k : ℕ) : Prop :=
+  ∀ ⦃S T : Finset α⦄, Valid S -> Valid T -> S.card = k -> T.card = k ->
+    (Win Valid S ↔ Win Valid T)
+
+/-- Single-orbit transitivity under validity-preserving symmetries forces a
+single game value on each size layer. -/
+theorem sizeValueConstant_of_transitive {Valid : Finset α -> Prop} {k : ℕ}
+    (htrans : ∀ ⦃S T : Finset α⦄, Valid S -> Valid T -> S.card = k -> T.card = k ->
+      ∃ e : α ≃ α, (∀ U : Finset α, Valid (U.map e.toEmbedding) ↔ Valid U) ∧
+        S.map e.toEmbedding = T) :
+    SizeValueConstant Valid k := by
+  intro S T hS hT hSk hTk
+  obtain ⟨e, hVe, hST⟩ := htrans hS hT hSk hTk
+  rw [← hST, win_map e hVe]
+
+/-- Value alternation across one size layer: if the next layer has a single
+value and the position can move at all, its value is the negation of the next
+layer's value. -/
+theorem win_iff_not_win_succ {Valid : Finset α -> Prop} {k : ℕ}
+    (hconst : SizeValueConstant Valid (k + 1))
+    {S T : Finset α} (hSk : S.card = k) (hmove : ∃ x, Move Valid S x)
+    (hT : Valid T) (hTk : T.card = k + 1) :
+    Win Valid S ↔ ¬ Win Valid T := by
+  constructor
+  · intro hwin hTwin
+    rcases win_iff_exists_isP_child.mp hwin with ⟨x, hxmove, hxP⟩
+    have hcard : (insert x S).card = k + 1 := by
+      rw [Finset.card_insert_of_notMem hxmove.1, hSk]
+    exact hxP ((hconst hxmove.2 hT hcard hTk).mpr hTwin)
+  · intro hTlose
+    rcases hmove with ⟨x, hxmove⟩
+    have hcard : (insert x S).card = k + 1 := by
+      rw [Finset.card_insert_of_notMem hxmove.1, hSk]
+    refine win_of_move_to_isP hxmove ?_
+    exact fun hwin => hTlose ((hconst hxmove.2 hT hcard hTk).mp hwin)
+
+/--
+Frame chain: if sizes `1..4` each carry a single game value and every valid
+position of size at most `3` can still move, the empty position and any valid
+size-`4` position have the same outcome.
+
+This is the game-theoretic half of the projective frame reduction; the
+geometric half supplies the four `SizeValueConstant` hypotheses from
+`PGL`-transitivity on points, pairs, triangles, and frames.
+-/
+theorem isP_empty_iff_isP_of_frame_chain {Valid : Finset α -> Prop}
+    (h1 : SizeValueConstant Valid 1) (h2 : SizeValueConstant Valid 2)
+    (h3 : SizeValueConstant Valid 3) (h4 : SizeValueConstant Valid 4)
+    (hext : ∀ S : Finset α, Valid S -> S.card ≤ 3 -> ∃ x, Move Valid S x)
+    (hempty : Valid (∅ : Finset α))
+    {F : Finset α} (hF : Valid F) (hFcard : F.card = 4) :
+    (IsP Valid (∅ : Finset α) ↔ IsP Valid F) := by
+  classical
+  obtain ⟨x1, hm1⟩ := hext ∅ hempty (by simp)
+  set S1 : Finset α := insert x1 ∅ with hS1def
+  have hS1 : Valid S1 := hm1.2
+  have hS1card : S1.card = 1 := by simp [hS1def]
+  obtain ⟨x2, hm2⟩ := hext S1 hS1 (by omega)
+  set S2 : Finset α := insert x2 S1 with hS2def
+  have hS2 : Valid S2 := hm2.2
+  have hS2card : S2.card = 2 := by
+    rw [hS2def, Finset.card_insert_of_notMem hm2.1, hS1card]
+  obtain ⟨x3, hm3⟩ := hext S2 hS2 (by omega)
+  set S3 : Finset α := insert x3 S2 with hS3def
+  have hS3 : Valid S3 := hm3.2
+  have hS3card : S3.card = 3 := by
+    rw [hS3def, Finset.card_insert_of_notMem hm3.1, hS2card]
+  have c01 : Win Valid (∅ : Finset α) ↔ ¬ Win Valid S1 :=
+    win_iff_not_win_succ h1 (by simp) ⟨x1, hm1⟩ hS1 hS1card
+  have c12 : Win Valid S1 ↔ ¬ Win Valid S2 :=
+    win_iff_not_win_succ h2 hS1card ⟨x2, hm2⟩ hS2 hS2card
+  have c23 : Win Valid S2 ↔ ¬ Win Valid S3 :=
+    win_iff_not_win_succ h3 hS2card ⟨x3, hm3⟩ hS3 hS3card
+  have c34 : Win Valid S3 ↔ ¬ Win Valid F :=
+    win_iff_not_win_succ h4 hS3card (hext S3 hS3 (by omega)) hF hFcard
+  unfold IsP
+  rw [c01, c12, c23, c34]
+  tauto
+
 end FiniteBuildGame

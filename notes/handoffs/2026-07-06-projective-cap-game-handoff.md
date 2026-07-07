@@ -46,15 +46,34 @@ escape/bad split is formalized there as `EscapeExtensions`, `BadExtensions`,
 counting prerequisites are in
 [`../../lean/ProjectiveCap/GridCounting.lean`](../../lean/ProjectiveCap/GridCounting.lean):
 `UsedRows`, `UsedCols`, `FreeFreeCells`, `PairLine`, `PairLineBlockedBy`,
-`card_usedRows_of_card_three`, and `card_usedCols_of_card_three`. Stable theorem targets that are
-not yet proved in Lean are named in
+`card_usedRows_of_card_three`, and `card_usedCols_of_card_three`. Stable theorem targets are named in
 [`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), whose
 `legalGridExtensions_eq_gridGame` theorem ties the old stable extension set to the real grid-game
 extension set. The
 odd-plane escape target is isolated in
 [`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).
 The game-valued residual target is `ProjectiveCap.Almost.OddEscapeGameStatement`; it is still a
-target statement, not a theorem. The old
+target statement, not a theorem (it is open mathematics for general odd `q`).
+
+**UPDATE 2026-07-07 (session 6):** the **total lemma is now a Lean theorem** —
+[`../../lean/ProjectiveCap/ExtensionCount.lean`](../../lean/ProjectiveCap/ExtensionCount.lean)
+proves `Stable.SizeThreeExtensionCountStatement` (`sizeThreeExtensionCount`; the
+`q²−9q+21` count for every size-3 grid cap, every finite field). The **parity route is
+formalized** in
+[`../../lean/ProjectiveCap/EscapeParity.lean`](../../lean/ProjectiveCap/EscapeParity.lean):
+`oddEscapeGameStatement_of_forall_even_bad` reduces `OddEscapeGameStatement` for odd `q` to the
+bad-parity hypothesis (`Even (BadExtensions S₃).card` for all `S₃`) — exactly the regime that
+settles `q ≤ 9` in prose. The **frame-reduction game skeleton is formalized**: the
+`FiniteBuildGame` kernel now has `win_map`/`isP_map` (value transport along validity-preserving
+board permutations), `SizeValueConstant`, `win_iff_not_win_succ`, and
+`isP_empty_iff_isP_of_frame_chain`
+([`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean)); the projective wrapper
+`Projective.initialPStatement_iff_isP_frame`
+([`../../lean/ProjectiveCap/Projective.lean`](../../lean/ProjectiveCap/Projective.lean)) collapses
+the conjecture to one frame position, with the remaining geometric obligations named as
+hypotheses: `CapTransitiveStatement k` for `k = 1..4` (PGL-transitivity on points / pairs /
+triangles / frames, cap-preserving) and cap extendability at sizes `≤ 3`. All new theorems check
+with axioms `[propext, Classical.choice, Quot.sound]` only. The old
 `ProjectiveCap/Affine.lean` and `ProjectiveCap/BuildGame.lean` files are compatibility imports only;
 new affine work should use the `CapGame` namespace.
 
@@ -699,6 +718,37 @@ q=13→46/73, **q=17→5/157**. Extended the escape/bad-parity table past the pu
   adaptive-strategy proof; (ii) a finer-than-mod-2 invariant surviving `bad` odd. Artifacts:
   `escape` + `boundary` modes in `2026-07-06-grid-cap-solver.rs`, `-escape-spotcheck.py`,
   `-escape-q17/q19.log`, `-boundary-q17.log`, `-escape-margin-erratic.md`.
+
+**2026-07-07 (session 6) — LEAN: total lemma PROVEN, parity route FORMALIZED, frame reduction
+SKELETONIZED.** All in `lean/` (full `lake build` green; axioms = the standard three, no `sorry`):
+- **★ `ProjectiveCap/ExtensionCount.lean` — `Stable.SizeThreeExtensionCountStatement` is now a
+  theorem** (`sizeThreeExtensionCount` / `card_legalGridExtensions_of_card_three`): every size-3
+  grid cap has exactly `q²−9q+21` legal extensions, over every finite field (vacuous below the
+  first size-3 cap, so no `q ≥ 4` side condition needed). Proof as in the prose note: legal =
+  free-free minus the 3 pair-lines; each pair-line is row-parametrized (`lineRowPoint`) and meets
+  the free-free grid in exactly `q−4` cells (the 4 excluded rows `{a₁,b₁,c₁,d}` distinct by the
+  cap property); traces pairwise disjoint via a Cramer-identity two-secants lemma
+  (`collinear_of_collinear_pair`, `linear_combination`); ℤ-cast assembly. En route: decidability
+  instances for `Collinear`/`PairLineBlockedBy` (kills classical-instance mismatch),
+  determinant-symmetry lemmas, `legalGridExtensions_eq_filter_freeFree`.
+- **`ProjectiveCap/EscapeParity.lean` — the parity route formalized**: for odd `q` the legal count
+  is odd (`odd_card_gridGame_legalExtensions`), so `Even bad ⇒ escape ≥ 1`
+  (`escapeExtensions_nonempty_of_even_bad`), so `OddEscapeGameStatement` follows from the
+  all-positions bad-parity hypothesis (`oddEscapeGameStatement_of_forall_even_bad`). This is the
+  exact formal shape of the prose parity proof for `q ≤ 9`; the hypothesis is known TRUE for
+  `q ≤ 9`, FALSE from `q = 11` (bad-odd defects), so the remaining gap is per-`q` discharge
+  (small-field computation) or the open general-`q` argument.
+- **`CapGame/BuildGame.lean` — kernel extended with the frame-chain machinery**: `move_map` /
+  `win_map` / `isP_map` (game-value transport along any validity-preserving board permutation —
+  previously missing, needed by every symmetry argument), `SizeValueConstant`,
+  `sizeValueConstant_of_transitive`, `win_iff_not_win_succ` (value alternation across a
+  single-valued size layer), and `isP_empty_iff_isP_of_frame_chain` (sizes 1–4 single-valued +
+  extendability ≤ 3 ⇒ `IsP ∅ ↔ IsP F` for any valid size-4 `F`).
+- **`ProjectiveCap/Projective.lean` — `initialPStatement_iff_isP_frame`**: the frame reduction for
+  the actual projective cap game, with the geometric obligations as named hypotheses
+  (`CapTransitiveStatement k`, `k = 1..4`, + extendability). Formalizing those from mathlib's
+  projectivization (PGL transitivity on points/pairs/triangles/frames) is the next Lean work
+  package; the game-theoretic half is done.
 
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
 CLOSED at q=19 (memory wall), single-involution re-closed from the frame,
