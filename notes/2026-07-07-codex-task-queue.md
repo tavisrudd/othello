@@ -82,7 +82,7 @@ argument); constancy + the bucket count is the payoff either way (how much the m
 
 Report file: `notes/2026-07-07-codex-pgl2-orbit-check.md`.
 
-## C6. Fix the latent GF(49) reducible-polynomial bug + field self-check (AFTER C3 completes)
+## C6. Fix the latent GF(49) reducible-polynomial bug + field self-check (AFTER C3 completes) [REPORTED 2026-07-07]
 
 F3 audit finding B1 (`2026-07-07-f3-soundness-audit.md`): `irred(49)` in
 `2026-07-06-grid-cap-solver.rs` returns `x²+3` over F₇, which is REDUCIBLE (−3 ≡ 4 = 2² mod 7;

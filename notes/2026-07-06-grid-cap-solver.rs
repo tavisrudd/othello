@@ -115,7 +115,7 @@ fn irred(q: usize) -> (usize, Vec<i64>) {
         25 => (5, vec![3, 0, 1]),
         27 => (3, vec![1, 2, 0, 1]),
         32 => (2, vec![1, 0, 1, 0, 0, 1]), // x^5 + x^2 + 1 over F_2
-        49 => (7, vec![3, 0, 1]),          // x^2 + 3 (3 nonsquare mod 7)
+        49 => (7, vec![1, 0, 1]),          // x^2 + 1 (-1 nonsquare mod 7)
         _ => panic!("unsupported prime power q={}", q),
     }
 }
@@ -190,6 +190,25 @@ impl GF {
                 }
             }
         }
+        for a in 1..q {
+            assert!(
+                inv[a] != 0 && mul[a * q + inv[a] as usize] == 1,
+                "GF({}) element {} has no multiplicative inverse; check irreducible polynomial",
+                q,
+                a
+            );
+        }
+        for a in 1..q {
+            for b in 1..q {
+                assert!(
+                    mul[a * q + b] != 0,
+                    "GF({}) has zero divisor {} * {}; check irreducible polynomial",
+                    q,
+                    a,
+                    b
+                );
+            }
+        }
         let mut subt = vec![0u16; q * q];
         for x in 0..q {
             for y in 0..q {
@@ -228,8 +247,17 @@ struct Board {
 
 impl Board {
     fn new(q: usize) -> Board {
+        let n = q
+            .checked_mul(q)
+            .expect("q*q overflow while constructing board");
+        assert!(
+            n <= 64 * MAXW,
+            "q={} gives {} cells, but this bit-mask build supports at most {} cells",
+            q,
+            n,
+            64 * MAXW
+        );
         let gf = GF::new(q);
-        let n = q * q;
         let cell = |r: usize, c: usize| r * q + c;
         let mut rc_mask = vec![[0u64; MAXW]; n];
         for r in 0..q {
