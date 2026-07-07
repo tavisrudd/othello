@@ -670,6 +670,227 @@ theorem initial_isP_iff_orderTwo_child_win {m : G}
 
 end Tau
 
+section OneOrderThreePair
+
+omit [Fintype G] [DecidableEq G] in
+private theorem zero_of_add_self_eq_self {x : G} (h : x + x = x) : x = 0 := by
+  have h' := congrArg (fun z => z + -x) h
+  simpa [add_assoc] using h'
+
+omit [Fintype G] [DecidableEq G] in
+private theorem zero_of_add_right_eq_left {x y : G} (h : x + y = x) : y = 0 := by
+  have h' := congrArg (fun z => -x + z) h
+  simpa [add_assoc, add_comm, add_left_comm] using h'
+
+omit [Fintype G] [DecidableEq G] in
+private theorem zero_of_add_left_eq_right {x y : G} (h : x + y = y) : x = 0 := by
+  have h' := congrArg (fun z => z + -y) h
+  simpa [add_assoc, add_comm, add_left_comm] using h'
+
+omit [Fintype G] in
+/--
+Abstract two-point validity lemma for a played order-two blocker `m` and a
+played order-three anchor `t`.
+-/
+theorem valid_pair_orderTwo_orderThree {m t : G}
+    (hm2 : m + m = 0) (hm0 : m ≠ 0)
+    (ht2 : t + t = -t) (ht0 : t ≠ 0)
+    (hm_ne_negt : m ≠ -t) :
+    Valid (insert t ({m} : Finset G)) := by
+  intro a b c ha hb hc hsum
+  simp only [Finset.mem_coe, Finset.mem_insert, Finset.mem_singleton] at ha hb hc
+  rcases ha with haT | haM
+  · rcases hb with hbT | hbM
+    · rcases hc with hcT | hcM
+      · have h : t + t = t := by simpa [haT, hbT, hcT] using hsum
+        exact ht0 (zero_of_add_self_eq_self h)
+      · have h : t + t = m := by simpa [haT, hbT, hcM] using hsum
+        have hm_eq_negt : m = -t := by
+          rw [← h]
+          exact ht2
+        exact hm_ne_negt hm_eq_negt
+    · rcases hc with hcT | hcM
+      · have h : t + m = t := by simpa [haT, hbM, hcT] using hsum
+        exact hm0 (zero_of_add_right_eq_left h)
+      · have h : t + m = m := by simpa [haT, hbM, hcM] using hsum
+        exact ht0 (zero_of_add_left_eq_right h)
+  · rcases hb with hbT | hbM
+    · rcases hc with hcT | hcM
+      · have h : m + t = t := by simpa [haM, hbT, hcT] using hsum
+        exact hm0 (zero_of_add_left_eq_right h)
+      · have h : m + t = m := by simpa [haM, hbT, hcM] using hsum
+        exact ht0 (zero_of_add_right_eq_left h)
+    · rcases hc with hcT | hcM
+      · have h : m + m = t := by simpa [haM, hbM, hcT] using hsum
+        exact ht0 (by simpa [hm2] using h.symm)
+      · have h : m + m = m := by simpa [haM, hbM, hcM] using hsum
+        exact hm0 (by simpa [hm2] using h.symm)
+
+omit [Fintype G] [DecidableEq G] in
+private theorem eq_anchor_of_anchorDouble_no_orderTwo {t y : G}
+    (ht2 : t + t = -t)
+    (hno2 : ∀ x : G, x + x = 0 -> x = 0)
+    (hy : y + y = -t) :
+    y = t := by
+  have hdiff : (y - t) + (y - t) = 0 := by
+    calc
+      (y - t) + (y - t) = (y + y) - (t + t) := by abel
+      _ = 0 := by rw [hy, ht2]; simp
+  exact sub_eq_zero.mp (hno2 (y - t) hdiff)
+
+omit [Fintype G] [DecidableEq G] in
+private theorem eq_anchor_or_anchor_add_blocker_of_anchorDouble_unique_orderTwo {t m y : G}
+    (ht2 : t + t = -t)
+    (hO2 : ∀ x : G, x + x = 0 -> x = 0 ∨ x = m)
+    (hy : y + y = -t) :
+    y = t ∨ y = t + m := by
+  have hdiff : (y - t) + (y - t) = 0 := by
+    calc
+      (y - t) + (y - t) = (y + y) - (t + t) := by abel
+      _ = 0 := by rw [hy, ht2]; simp
+  rcases hO2 (y - t) hdiff with hzero | hm
+  · exact Or.inl (sub_eq_zero.mp hzero)
+  · right
+    calc
+      y = (y - t) + t := by abel
+      _ = m + t := by rw [hm]
+      _ = t + m := by abel
+
+omit [Fintype G] [DecidableEq G] in
+private theorem orderTwo_ne_neg_orderThree {m t : G}
+    (hm2 : m + m = 0) (ht2 : t + t = -t) (ht0 : t ≠ 0) :
+    m ≠ -t := by
+  intro hm
+  have hneg2 : -t + -t = t := by
+    have h := congrArg Neg.neg ht2
+    simpa using h
+  have ht2zero : -t + -t = 0 := by
+    simpa [hm] using hm2
+  have htzero : t = 0 := by
+    rw [← hneg2]
+    exact ht2zero
+  exact ht0 htzero
+
+/--
+Abstract `s₂=0, r₃=1` branch: if there are no order-two obstructions and the
+only order-three obstructions are `t` and `-t`, opening at `t` wins.
+-/
+theorem initial_win_of_no_orderTwo_one_orderThreePair {t : G}
+    (ht2 : t + t = -t) (ht0 : t ≠ 0)
+    (hno2 : ∀ x : G, x + x = 0 -> x = 0)
+    (hO3 : ∀ x : G, x + x = -x -> x = 0 ∨ x = t ∨ x = -t) :
+    Win (∅ : Finset G) :=
+  initial_win_of_orderThree_anchor
+    (G := G) (t := t) ht2 ht0
+    (by
+      intro S y _hgood hymove hy
+      have hylegal : Legal (S : Set G) y := legal_of_move hymove
+      have hy0 : y ≠ 0 := legal_ne_zero hylegal
+      have hy2 : y + y = 0 := by
+        calc
+          y + y = y + -y := by simp [hy]
+          _ = 0 := by simp
+      exact hy0 (hno2 y hy2))
+    (by
+      intro S y hgood hymove hy3
+      rcases hgood with ⟨_hvalid, htS, _hsym⟩
+      have hylegal : Legal (S : Set G) y := legal_of_move hymove
+      have hy0 : y ≠ 0 := legal_ne_zero hylegal
+      rcases hO3 y hy3 with hyzero | hyt | hynegt
+      · exact hy0 hyzero
+      · exact hymove.1 (by simpa [hyt] using htS)
+      · have htIns : t ∈ insert y (S : Set G) :=
+          Or.inr (by simpa [Finset.mem_coe] using htS)
+        have hyIns : y ∈ insert y (S : Set G) := Or.inl rfl
+        exact hylegal.2 htIns htIns hyIns (by simpa [hynegt] using ht2))
+    (by
+      intro S y hgood hymove hy
+      rcases hgood with ⟨_hvalid, htS, _hsym⟩
+      have hyt : y = t := eq_anchor_of_anchorDouble_no_orderTwo ht2 hno2 hy
+      exact hymove.1 (by simpa [hyt] using htS))
+
+/--
+Abstract `s₂=1, r₃=1` branch: if `m` is the unique nonzero order-two
+obstruction and `t,-t` are the only order-three obstructions, then the empty
+game is P. The proof opens the order-two child `{m}`, then uses the anchored
+order-three pair `{m,t}`.
+-/
+theorem initial_isP_of_unique_orderTwo_one_orderThreePair {m t : G}
+    (hm2 : m + m = 0) (hm0 : m ≠ 0)
+    (hO2 : ∀ x : G, x + x = 0 -> x = 0 ∨ x = m)
+    (ht2 : t + t = -t) (ht0 : t ≠ 0)
+    (hO3 : ∀ x : G, x + x = -x -> x = 0 ∨ x = t ∨ x = -t) :
+    IsP (∅ : Finset G) := by
+  have hm_ne_negt : m ≠ -t := orderTwo_ne_neg_orderThree hm2 ht2 ht0
+  have hvalidPair : Valid (insert t ({m} : Finset G)) :=
+    valid_pair_orderTwo_orderThree (m := m) (t := t) hm2 hm0 ht2 ht0 hm_ne_negt
+  have hgoodPair : AnchoredNegGoodWith t m (insert t ({m} : Finset G)) := by
+    refine ⟨⟨hvalidPair, by simp, ?_⟩, by simp⟩
+    have hnegm : -m = m := by
+      have h := congrArg (fun z => -m + z) hm2
+      simpa [add_assoc] using h.symm
+    intro z hz hzt
+    simp only [Finset.mem_coe, Finset.mem_insert, Finset.mem_singleton] at hz ⊢
+    rcases hz with hzT | hzM
+    · exact (hzt hzT).elim
+    · right
+      simp [hzM, hnegm]
+  have hpairP : IsP (insert t ({m} : Finset G)) :=
+    anchoredNegGoodWith_isP_of_live_obstructions
+      (G := G) (t := t) (m := m) ht2
+      (by
+        intro S y hgood hymove hy
+        rcases hgood with ⟨_hanchored, hmS⟩
+        have hylegal : Legal (S : Set G) y := legal_of_move hymove
+        have hy2 : y + y = 0 := by
+          calc
+            y + y = y + -y := by simp [hy]
+            _ = 0 := by simp
+        rcases hO2 y hy2 with hyzero | hym
+        · exact (legal_ne_zero hylegal) hyzero
+        · exact hymove.1 (by simpa [hym] using hmS))
+      (by
+        intro S y hgood hymove hy3
+        rcases hgood with ⟨⟨_hvalid, htS, _hsym⟩, _hmS⟩
+        have hylegal : Legal (S : Set G) y := legal_of_move hymove
+        have hy0 : y ≠ 0 := legal_ne_zero hylegal
+        rcases hO3 y hy3 with hyzero | hyt | hynegt
+        · exact hy0 hyzero
+        · exact hymove.1 (by simpa [hyt] using htS)
+        · have htIns : t ∈ insert y (S : Set G) :=
+            Or.inr (by simpa [Finset.mem_coe] using htS)
+          have hyIns : y ∈ insert y (S : Set G) := Or.inl rfl
+          exact hylegal.2 htIns htIns hyIns (by simpa [hynegt] using ht2))
+      (by
+        intro S y hgood hymove hy
+        rcases hgood with ⟨⟨_hvalid, htS, _hsym⟩, hmS⟩
+        have hylegal : Legal (S : Set G) y := legal_of_move hymove
+        rcases eq_anchor_or_anchor_add_blocker_of_anchorDouble_unique_orderTwo
+            ht2 hO2 hy with hyt | hytm
+        · exact hymove.1 (by simpa [hyt] using htS)
+        · have htIns : t ∈ insert y (S : Set G) :=
+            Or.inr (by simpa [Finset.mem_coe] using htS)
+          have hmIns : m ∈ insert y (S : Set G) :=
+            Or.inr (by simpa [Finset.mem_coe] using hmS)
+          have hyIns : y ∈ insert y (S : Set G) := Or.inl rfl
+          exact hylegal.2 htIns hmIns hyIns (by simp [hytm]))
+      hgoodPair
+  have htm : t ≠ m := by
+    intro htm
+    have hnegt_zero : -t = 0 := by
+      rw [← ht2, htm, hm2]
+    have htzero : t = 0 := by
+      have h := congrArg Neg.neg hnegt_zero
+      simpa using h
+    exact ht0 htzero
+  have hmove : Move ({m} : Finset G) t := by
+    exact ⟨by simp [htm], hvalidPair⟩
+  have hchildWin : Win ({m} : Finset G) :=
+    FiniteBuildGame.win_of_move_to_isP hmove hpairP
+  exact (initial_isP_iff_orderTwo_child_win (G := G) (m := m) hm2 hm0).2 hchildWin
+
+end OneOrderThreePair
+
 section F3
 
 variable {V : Type*} [AddCommGroup V] [Fintype V] [DecidableEq V]

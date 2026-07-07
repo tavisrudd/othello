@@ -43,7 +43,9 @@ rename Lean files to match older prose names.
   `anchored_neg_mirror_legal` in [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean)
   and the finite-game wrappers `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`, and
   `initial_win_of_orderThree_anchor` in [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean),
-  plus the even-branch blocker invariant `AnchoredNegGoodWith`;
+  plus the even-branch blocker invariant `AnchoredNegGoodWith` and the abstract one-order-three-pair
+  wrappers `initial_win_of_no_orderTwo_one_orderThreePair` and
+  `initial_isP_of_unique_orderTwo_one_orderThreePair`;
 - cyclic `ZMod n` bridge in normal-form branches:
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
@@ -61,9 +63,10 @@ rename Lean files to match older prose names.
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** the full finite-abelian rank/cardinality
-bookkeeping needed for the full `r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the
-projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** the finite-abelian rank/cardinality bookkeeping
+needed to feed the obstruction and one-order-three-pair wrappers into the full `r3 <= 1` abelian
+theorem; the affine cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens
+`N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

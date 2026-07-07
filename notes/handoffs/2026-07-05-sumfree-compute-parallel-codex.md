@@ -49,7 +49,9 @@ The Lean layer is narrower than this compute log. Current build check:
   `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`,
   `orderThree_singleton_isP_of_live_obstructions`, `initial_win_of_orderThree_anchor`,
   plus the even-branch blocker invariant `AnchoredNegGoodWith` and
-  `anchoredNegGoodWith_isP_of_live_obstructions`;
+  `anchoredNegGoodWith_isP_of_live_obstructions`; abstract one-order-three-pair classifiers
+  `initial_win_of_no_orderTwo_one_orderThreePair` and
+  `initial_isP_of_unique_orderTwo_one_orderThreePair`;
 - cyclic `ZMod n` bridge in normal-form branches in
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean):
   `initial_isP_of_odd_of_not_three_dvd` proves the odd, `3 ∤ n` P cases and
@@ -78,10 +80,10 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
 **Not yet formalized in Lean:** the full finite-abelian rank/cardinality bookkeeping turning the
-finite obstruction wrappers into named `s2 >= 2`, `s2 = 1`, and `r3 <= 1` classification statements;
-any nimber/Grundy statements from this compute log; the warm-up `Z3 x Z_p` spectral statements; and
-the open/adaptive `Z3^2 x Z_p` program. The socle reduction is false and must not be resurrected as a
-target.
+finite obstruction and one-order-three-pair wrappers into named `s2 >= 2`, `s2 = 1`, and `r3 <= 1`
+classification statements; any nimber/Grundy statements from this compute log; the warm-up
+`Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p` program. The socle reduction is
+false and must not be resurrected as a target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills
