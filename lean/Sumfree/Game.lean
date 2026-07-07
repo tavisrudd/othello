@@ -1041,6 +1041,42 @@ theorem initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two
   rcases Finset.card_pos.mp h3pos with ⟨t, ht⟩
   exact initial_isP_of_one_orderTwo_two_nonzero_orderThree (G := G) hm ht h2 h3
 
+/--
+Combined P-side obstruction-count theorem covering the formally proved
+`r₃ ≤ 1` branches and all cases with at least two nonzero order-two elements.
+-/
+theorem initial_isP_of_obstruction_count_P_cases
+    (h :
+      2 ≤ (NonzeroOrderTwoElements (G := G)).card ∨
+        ((NonzeroOrderTwoElements (G := G)).card = 0 ∧
+          (NonzeroOrderThreeElements (G := G)).card = 0) ∨
+        ((NonzeroOrderTwoElements (G := G)).card = 1 ∧
+          (NonzeroOrderThreeElements (G := G)).card = 2)) :
+    IsP (∅ : Finset G) := by
+  rcases h with h2ge | h00 | h12
+  · exact initial_isP_of_at_least_two_nonzero_orderTwo (G := G) h2ge
+  · rcases h00 with ⟨h2, h3⟩
+    exact initial_isP_of_no_nonzero_orderTwo_or_three (G := G) h2 h3
+  · rcases h12 with ⟨h2, h3⟩
+    exact initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two (G := G) h2 h3
+
+/--
+Combined N-side obstruction-count theorem for the two formally proved
+`r₃ ≤ 1`, `s₂ ≤ 1` N branches.
+-/
+theorem initial_win_of_obstruction_count_N_cases
+    (h :
+      ((NonzeroOrderTwoElements (G := G)).card = 1 ∧
+        (NonzeroOrderThreeElements (G := G)).card = 0) ∨
+      ((NonzeroOrderTwoElements (G := G)).card = 0 ∧
+        (NonzeroOrderThreeElements (G := G)).card = 2)) :
+    Win (∅ : Finset G) := by
+  rcases h with h10 | h02
+  · rcases h10 with ⟨h2, h3⟩
+    exact initial_win_of_one_nonzero_orderTwo_no_nonzero_orderThree (G := G) h2 h3
+  · rcases h02 with ⟨h2, h3⟩
+    exact initial_win_of_no_orderTwo_nonzeroOrderThree_card_eq_two (G := G) h2 h3
+
 end OneOrderThreePair
 
 section F3

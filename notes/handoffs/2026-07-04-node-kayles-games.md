@@ -47,7 +47,8 @@ rename Lean files to match older prose names.
   wrappers `initial_win_of_no_orderTwo_one_orderThreePair` and
   `initial_isP_of_unique_orderTwo_one_orderThreePair`, with cardinality bridges
   `initial_win_of_no_orderTwo_nonzeroOrderThree_card_eq_two` and
-  `initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two`;
+  `initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two`, packaged by
+  `initial_isP_of_obstruction_count_P_cases` and `initial_win_of_obstruction_count_N_cases`;
 - cyclic `ZMod n` bridge in normal-form branches:
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
@@ -66,8 +67,9 @@ rename Lean files to match older prose names.
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
 **Still text/computation only, not Lean theorems:** the finite-abelian algebra turning named ranks
-`s2` and `r3` into the obstruction-cardinality hypotheses used by the SumFree wrappers; the affine cap
-all-`q` theorem; the projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
+`s2` and `r3` into the obstruction-cardinality hypotheses used by the SumFree count-case wrappers;
+the affine cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens
+`N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 
