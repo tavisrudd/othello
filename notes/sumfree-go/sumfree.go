@@ -366,15 +366,25 @@ func fingerprint(a Mask) (uint64, uint64) {
 	return h0, h1
 }
 
-// The TT is sharded (nShards independent tables, each behind its own mutex) so
-// the parallel search's concurrent get/put on different fingerprints rarely
-// contend.  Each shard is a linear-probing open-addressing table on the 128-bit
-// fingerprint (k0,k1) -> {0,1}; val==-1 marks an empty slot; k0,k1,val are
-// parallel slices (no per-slot padding).  A shard doubles + rehashes past 0.7
-// load.  Uncontended lock/unlock (~20ns) is negligible against the per-node
-// canon over all |Aut| permutations that dominates the search.
+// Two TT arenas, both sharded (nShards independent tables, each behind its own
+// mutex) so the parallel search's concurrent get/put on different fingerprints
+// rarely contend.  Uncontended lock/unlock (~20 ns) is negligible against the
+// per-node canon over all |Aut| permutations that dominates the search.
+//
+//   - DEFAULT (memoShard): an EXACT growing memo.  Linear-probing open addressing
+//     on the 128-bit fingerprint (k0,k1) -> {0,1}; val==-1 marks empty; k0,k1,val
+//     are parallel slices (no per-slot padding).  Doubles + rehashes past 0.7
+//     load, never evicts.  Bounded only by RAM; the validated default.
+//   - FIXED (fixedShard, opt-in via SUMFREE_TT_GB / SUMFREE_TT_SLOTS): a bounded
+//     evicting cache, sized once and never grown, so it CANNOT OOM.  See its note.
 
 const nShards = 512
+
+// ways = entries per cache-line bucket in the fixed arena.  ways*8 bytes == 64 ==
+// one cache line, so a probe of a bucket is a single memory access.
+const ways = 8
+
+const _ = "tiger: ways*8 must equal a 64-byte cache line" // ways*8 == 64 by construction
 
 type memoShard struct {
 	mu   sync.Mutex
@@ -419,23 +429,73 @@ func (sh *memoShard) grow() {
 	}
 }
 
+// fixedShard is the FIXED-RAM evicting arena (Tiger-style tight representation).
+// One shard is a flat []uint64 of `nBuckets*ways` slots; bucket b owns the
+// contiguous run slot[b*ways : b*ways+ways] == one 64-byte cache line.  Each slot
+// packs an entry into a single u64:
+//
+//	bits 63..7 : sig   (57-bit fingerprint signature, the high bits of f1)
+//	bits  6..2 : cost  (5-bit log2 subtree-node-count class, the eviction key)
+//	bits  1..0 : tag   (0 = empty, 1 = loss/P, 2 = win/N)
+//
+// 8 bytes/entry vs the default arena's 21 (u64+u64+i8), so a given RAM budget
+// holds ~2.6x more of the working set -> eviction bites far later.  The key is
+// (shard bits + bucket index from f0) + (57-bit sig from f1) ~= 90+ effective
+// bits, so a false match is ~2^-50 at 1e9 entries (the fingerprint-TT argument).
+// It NEVER grows: on a full bucket it evicts the lowest cost-class way (keeping
+// the expensive-to-recompute deep subtrees, discarding cheap near-leaf ones), so
+// RAM is fixed and it cannot OOM.  Eviction is correctness-preserving -- an
+// evicted position is simply recomputed -- so only speed (re-expansion) is traded.
+type fixedShard struct {
+	mu    sync.Mutex
+	slot  []uint64
+	bmask uint64 // nBuckets-1 (nBuckets is a power of two)
+	used  int
+}
+
+func (fs *fixedShard) init(nBuckets int) {
+	fs.slot = make([]uint64, nBuckets*ways) // zeroed => every slot tag==0 (empty)
+	fs.bmask = uint64(nBuckets - 1)
+}
+
+const fixedSigMask = (uint64(1) << 57) - 1
+
 // ---------- solver ----------
 
 type Solver struct {
-	g          *Group
-	shard      [nShards]memoShard
-	totalUsed  int64 // atomic: total live TT entries (for progress + cap)
-	capped     int32 // atomic: 1 once the hard cap is reached
-	capEntries int   // 0 = unbounded
-	nodes      int64 // atomic
-	order      bool
-	sem        chan struct{} // bounded worker pool for the parallel fork
-	parPly     int           // fork younger brothers only above this ply (0 = fully sequential)
+	g         *Group
+	shard     [nShards]memoShard  // default exact growing arena
+	fshard    [nShards]fixedShard // fixed evicting arena (used iff fixed)
+	fixed     bool
+	totalUsed int64 // atomic: live TT entries (progress)
+	nodes     int64 // atomic
+	order     bool
+	sem       chan struct{} // bounded worker pool for the parallel fork
+	parPly    int           // fork younger brothers only above this ply (0 = fully sequential)
 }
 
-// memoGet / memoPut probe within a shard selected by the low fingerprint bits;
-// the probe start uses bits above the low 9 (which pick the shard) to decorrelate.
-func (s *Solver) memoGet(f0, f1 uint64) (int8, bool) {
+// memoGet returns (value, subtree-size estimate, hit).  The estimate is the
+// recompute cost carried for the fixed arena's eviction accounting (0 for the
+// default arena, which never evicts).  Probe start uses bits above the low 9
+// (which pick the shard) to decorrelate from shard selection.
+func (s *Solver) memoGet(f0, f1 uint64) (int8, uint32, bool) {
+	if s.fixed {
+		fs := &s.fshard[f0&(nShards-1)]
+		fs.mu.Lock()
+		base := int((f0>>9)&fs.bmask) * ways
+		sig := (f1 >> 7) & fixedSigMask
+		for w := 0; w < ways; w++ {
+			slot := fs.slot[base+w]
+			if slot&3 != 0 && slot>>7 == sig {
+				tag := int8(slot & 3)
+				est := uint32(1) << ((slot >> 2) & 31)
+				fs.mu.Unlock()
+				return tag - 1, est, true // tag 1->0 (loss/P), 2->1 (win/N)
+			}
+		}
+		fs.mu.Unlock()
+		return 0, 0, false
+	}
 	sh := &s.shard[f0&(nShards-1)]
 	sh.mu.Lock()
 	i := (f0 >> 9) & sh.mask
@@ -443,20 +503,63 @@ func (s *Solver) memoGet(f0, f1 uint64) (int8, bool) {
 		v := sh.val[i]
 		if v == -1 {
 			sh.mu.Unlock()
-			return 0, false
+			return 0, 0, false
 		}
 		if sh.k0[i] == f0 && sh.k1[i] == f1 {
 			sh.mu.Unlock()
-			return v, true
+			return v, 0, true
 		}
 		i = (i + 1) & sh.mask
 	}
 }
 
-func (s *Solver) memoPut(f0, f1 uint64, v int8) {
-	// Hard cap: once total entries hit the cap, stop inserting.  Correctness is
-	// preserved -- un-memoized nodes are simply re-explored -- and RAM is bounded.
-	if s.capEntries > 0 && atomic.LoadInt32(&s.capped) != 0 {
+// memoPut stores (value, subtree cost).  cost drives the fixed arena's eviction
+// (larger subtree class survives); the default arena ignores it.
+func (s *Solver) memoPut(f0, f1 uint64, v int8, cost uint32) {
+	if s.fixed {
+		fs := &s.fshard[f0&(nShards-1)]
+		fs.mu.Lock()
+		base := int((f0>>9)&fs.bmask) * ways
+		sig := (f1 >> 7) & fixedSigMask
+		tag := uint64(v) + 1 // 0 (loss) -> 1, 1 (win) -> 2
+		cc := uint64(bits.Len32(cost))
+		if cc > 31 {
+			cc = 31
+		}
+		emptyW, minW := -1, 0
+		minCC := uint64(32)
+		for w := 0; w < ways; w++ {
+			slot := fs.slot[base+w]
+			if slot&3 == 0 {
+				if emptyW < 0 {
+					emptyW = w
+				}
+				continue
+			}
+			if slot>>7 == sig { // update in place; keep the larger cost class
+				if ec := (slot >> 2) & 31; ec > cc {
+					cc = ec
+				}
+				fs.slot[base+w] = sig<<7 | cc<<2 | tag
+				fs.mu.Unlock()
+				return
+			}
+			if c := (slot >> 2) & 31; c < minCC {
+				minCC = c
+				minW = w
+			}
+		}
+		if emptyW >= 0 {
+			fs.slot[base+emptyW] = sig<<7 | cc<<2 | tag
+			fs.used++
+			atomic.AddInt64(&s.totalUsed, 1)
+			fs.mu.Unlock()
+			return
+		}
+		if cc >= minCC { // full bucket: evict the cheapest way for a >=-value newcomer
+			fs.slot[base+minW] = sig<<7 | cc<<2 | tag
+		}
+		fs.mu.Unlock()
 		return
 	}
 	sh := &s.shard[f0&(nShards-1)]
@@ -467,11 +570,6 @@ func (s *Solver) memoPut(f0, f1 uint64, v int8) {
 	i := (f0 >> 9) & sh.mask
 	for {
 		if sh.val[i] == -1 {
-			if s.capEntries > 0 && atomic.LoadInt64(&s.totalUsed) >= int64(s.capEntries) {
-				atomic.StoreInt32(&s.capped, 1)
-				sh.mu.Unlock()
-				return
-			}
 			sh.k0[i], sh.k1[i], sh.val[i] = f0, f1, v
 			sh.used++
 			atomic.AddInt64(&s.totalUsed, 1)
@@ -543,10 +641,20 @@ func (s *Solver) moveOrder(a, legal Mask, out []int) int {
 	return n
 }
 
-func (s *Solver) win(a Mask) bool {
+func addSat(a, b uint32) uint32 {
+	if s := uint64(a) + uint64(b); s <= 0xFFFFFFFF {
+		return uint32(s)
+	}
+	return 0xFFFFFFFF
+}
+
+// win returns (player-to-move wins?, subtree node count).  The node count is the
+// recompute cost stored with the entry so the fixed arena can prefer keeping
+// expensive (deep) subtrees over cheap near-leaf ones when it evicts.
+func (s *Solver) win(a Mask) (bool, uint32) {
 	f0, f1 := fingerprint(s.g.canon(a))
-	if v, ok := s.memoGet(f0, f1); ok {
-		return v == 1
+	if v, est, ok := s.memoGet(f0, f1); ok {
+		return v == 1, est
 	}
 	atomic.AddInt64(&s.nodes, 1)
 	legal := s.g.legalMask(a)
@@ -554,6 +662,7 @@ func (s *Solver) win(a Mask) bool {
 	n := s.moveOrder(a, legal, mvs[:])
 
 	res := false
+	cost := uint32(1)
 	depth := a.popcount()
 	if s.parPly > 0 && depth < s.parPly && n > 1 {
 		// YBWC: the eldest son is tried SEQUENTIALLY -- with move ordering it is
@@ -561,15 +670,21 @@ func (s *Solver) win(a Mask) bool {
 		// speculative work.  Only when it does NOT cut off (this is then most
 		// likely a prove-a-loss / P-node, whose children must all be checked --
 		// there is no cutoff left to lose) do we fork the younger brothers.
-		if !s.win(childMask(a, mvs[0])) {
+		w0, c0 := s.win(childMask(a, mvs[0]))
+		cost = addSat(cost, c0)
+		if !w0 {
 			res = true
 		} else {
-			res = s.forkRest(a, mvs[1:n])
+			r, c := s.forkRest(a, mvs[1:n])
+			cost = addSat(cost, c)
+			res = r
 		}
 	} else {
 		// Sequential with the alpha-beta cutoff (also the deterministic -j1 path).
 		for i := 0; i < n; i++ {
-			if !s.win(childMask(a, mvs[i])) {
+			w, c := s.win(childMask(a, mvs[i]))
+			cost = addSat(cost, c)
+			if !w {
 				res = true
 				break
 			}
@@ -580,19 +695,20 @@ func (s *Solver) win(a Mask) bool {
 	if res {
 		v = 1
 	}
-	s.memoPut(f0, f1, v)
-	return res
+	s.memoPut(f0, f1, v, cost)
+	return res, cost
 }
 
 // forkRest evaluates the younger-brother moves concurrently: each runs in a
 // worker goroutine when a semaphore slot is free and inline otherwise (the
 // standard bounded-pool recursion -- never blocks on a full pool, so it cannot
-// deadlock).  Returns true as soon as any child is a loss (this node is then a
-// win).  All brothers are evaluated (no cutoff between them); with good move
+// deadlock).  Returns (any child is a loss => this node is a win, summed subtree
+// cost).  All brothers are evaluated (no cutoff between them); with good move
 // ordering the cutoff, if any, was already the eldest son, so the speculative
 // work here is small.
-func (s *Solver) forkRest(a Mask, moves []int) bool {
+func (s *Solver) forkRest(a Mask, moves []int) (bool, uint32) {
 	results := make([]bool, len(moves))
+	costs := make([]uint32, len(moves))
 	var wg sync.WaitGroup
 	for i := range moves {
 		mv := moves[i]
@@ -602,19 +718,22 @@ func (s *Solver) forkRest(a Mask, moves []int) bool {
 			go func(i, mv int) {
 				defer wg.Done()
 				defer func() { <-s.sem }()
-				results[i] = s.win(childMask(a, mv))
+				results[i], costs[i] = s.win(childMask(a, mv))
 			}(i, mv)
 		default:
-			results[i] = s.win(childMask(a, mv))
+			results[i], costs[i] = s.win(childMask(a, mv))
 		}
 	}
 	wg.Wait()
-	for _, r := range results {
-		if !r { // a child is a loss => this position is a win (N)
-			return true
+	found := false
+	total := uint32(0)
+	for i := range results {
+		total = addSat(total, costs[i])
+		if !results[i] { // a child is a loss => this position is a win (N)
+			found = true
 		}
 	}
-	return false
+	return found, total
 }
 
 func (s *Solver) winningOpenings(start Mask) []int {
@@ -623,7 +742,7 @@ func (s *Solver) winningOpenings(start Mask) []int {
 	legal.forEach(func(x int) {
 		child := start
 		child.setBit(x)
-		if !s.win(child) {
+		if w, _ := s.win(child); !w {
 			wins = append(wins, x)
 		}
 	})
@@ -648,7 +767,8 @@ func parseMods(s string) []int {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: sumfree <mods> [--openings] [--start c0,c1,..;..] [-j N|-j 0=all] [--par-ply P]")
+		fmt.Fprintln(os.Stderr, "usage: sumfree <mods> [--openings] [--start c0,c1,..;..] [-j N|-j 0=all] [--par-ply P]\n"+
+			"  env: SUMFREE_TT_GB=N or SUMFREE_TT_SLOTS=N => fixed evicting arena (bounded RAM); SUMFREE_ORDER=0 => no move ordering")
 		os.Exit(2)
 	}
 	mods := parseMods(os.Args[1])
@@ -712,25 +832,44 @@ func main() {
 			start.setBit(g.idx[keyOf(e)])
 		}
 	}
-	// TT/solver config, resolved once (never in the hot loop): per-shard initial
-	// slots, optional hard total-entry cap for a tight box, move ordering on/off.
-	initSlots := 1
-	for initSlots < envInt("SUMFREE_TT_INIT", 256) {
-		initSlots <<= 1 // power of two (open-addressing mask requires it)
-	}
-	capEntries := envInt("SUMFREE_TT_CAP", 0)
+	// TT config, resolved once (never in the hot loop).  Default = the exact GROWING
+	// arena (bounded only by RAM).  If SUMFREE_TT_GB (RAM budget, GiB) or
+	// SUMFREE_TT_SLOTS (total slots) is set, use the FIXED tight evicting arena
+	// instead: bounded RAM, cannot OOM (see fixedShard).  8 bytes per packed slot.
 	order := os.Getenv("SUMFREE_ORDER") != "0" // default on
-	s := &Solver{g: g, order: order, sem: make(chan struct{}, j), parPly: parPly, capEntries: capEntries}
-	for i := range s.shard {
-		s.shard[i].init(initSlots)
+	s := &Solver{g: g, order: order, sem: make(chan struct{}, j), parPly: parPly}
+	totalSlots := envInt("SUMFREE_TT_SLOTS", 0)
+	if gb := envInt("SUMFREE_TT_GB", 0); gb > 0 && totalSlots == 0 {
+		totalSlots = gb * (1 << 30) / 8
+	}
+	ttDesc := "growing (exact)"
+	if totalSlots > 0 {
+		s.fixed = true
+		pb := 1
+		for pb*2*nShards*ways <= totalSlots {
+			pb <<= 1 // largest power-of-two buckets/shard within the budget
+		}
+		for i := range s.fshard {
+			s.fshard[i].init(pb)
+		}
+		slots := pb * nShards * ways
+		ttDesc = fmt.Sprintf("fixed %.1fGiB (%d slots, evicting)", float64(slots)*8/(1<<30), slots)
+	} else {
+		initSlots := 1
+		for initSlots < envInt("SUMFREE_TT_INIT", 256) {
+			initSlots <<= 1 // power of two (open-addressing mask requires it)
+		}
+		for i := range s.shard {
+			s.shard[i].init(initSlots)
+		}
 	}
 
 	name := make([]string, len(mods))
 	for i, m := range mods {
 		name[i] = "Z" + strconv.Itoa(m)
 	}
-	fmt.Printf("[%s] |G|=%d |Aut|=%d  order=%v j=%d par-ply=%d cap=%d\n",
-		strings.Join(name, "x"), g.N, len(g.auto), order, j, parPly, capEntries)
+	fmt.Printf("[%s] |G|=%d |Aut|=%d  order=%v j=%d par-ply=%d tt=%s\n",
+		strings.Join(name, "x"), g.N, len(g.auto), order, j, parPly, ttDesc)
 
 	// Progress ticker (stderr): for the large groups these runs can take many
 	// minutes; report nodes and RSS so the run is followable and memory is watched.
@@ -762,7 +901,7 @@ func main() {
 		}
 		fmt.Printf("  moves=%s\n", strings.Join(labels, " "))
 	} else {
-		w := s.win(start)
+		w, _ := s.win(start)
 		outcome := "P"
 		if w {
 			outcome = "N"
@@ -776,12 +915,8 @@ func main() {
 		}
 	}
 	close(done)
-	capNote := ""
-	if atomic.LoadInt32(&s.capped) != 0 {
-		capNote = " (TT CAPPED — some nodes re-explored)"
-	}
-	fmt.Printf("  nodes=%d tt=%d time=%.2fs rss=%dMB%s\n",
-		atomic.LoadInt64(&s.nodes), atomic.LoadInt64(&s.totalUsed), time.Since(t0).Seconds(), rssMB(), capNote)
+	fmt.Printf("  nodes=%d tt=%d time=%.2fs rss=%dMB\n",
+		atomic.LoadInt64(&s.nodes), atomic.LoadInt64(&s.totalUsed), time.Since(t0).Seconds(), rssMB())
 }
 
 func envInt(name string, def int) int {

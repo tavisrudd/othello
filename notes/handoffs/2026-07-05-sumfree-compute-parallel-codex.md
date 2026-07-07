@@ -155,6 +155,17 @@ PROGRESS; p=11 Lemma A/B direct solve confirmed COMPUTE-INFEASIBLE.**
   the p=11-infeasible RESULTS, and the NEW lever — build the **induction-on-3-rank-`r`** step ahead of the
   `Z3³×Z5` verdict (heuristic-2 "N iff r=1" predicts P via one more free `O₃` pair per `F₃` factor). Standing
   analytic targets unchanged. Run logs: `notes/2026-07-06-z3cubed-z5.log` (+ the killed `lemma{A,B}-p11.log`).
+- **★ Fixed-RAM evicting arena added** (opt-in `SUMFREE_TT_GB=N` / `SUMFREE_TT_SLOTS=N`) — so a bounded run
+  can't OOM (the p=11 pair killed the box by *growing* two unbounded arenas to ~10 GB each). Tiger-style tight
+  representation: each entry is a **single packed u64** (`sig:57 | cost:5 | tag:2`) in **cache-line buckets**
+  (8 ways = 64 B = one memory access per probe) → **8 B/entry vs the default 21 B**, so a RAM budget holds ~2.6×
+  more of the working set (a fixed 16 GiB ≈ 2.1 B entries) and eviction bites far later. On a full bucket it
+  evicts the **lowest cost-class way** (keeps expensive deep subtrees, discards cheap near-leaf ones; the
+  per-node subtree size is threaded through `win`). Eviction is correctness-preserving (evicted ⇒ recomputed).
+  Validated: default arena byte-identical (`-j1` Z3²×Z7 = exact 414,168); **fixed-when-fits = exact 414,168**;
+  fixed-tiny evicts (bounded `tt`, correct outcome, ~2× re-exp); race-clean fixed+parallel. **To do p=11
+  later:** ONE probe at a time, `SUMFREE_TT_GB=16 -j 0` — bounded RAM, ~9× parallel, the ~15-25 GB working set
+  is close to the arena so eviction/re-exp stays low. (Running both concurrently is what OOM'd.)
 
 ---
 
