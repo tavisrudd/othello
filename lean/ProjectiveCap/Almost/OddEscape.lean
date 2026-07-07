@@ -1,4 +1,5 @@
 import ProjectiveCap.StableFacts
+import ProjectiveCap.GridGame
 
 /-!
 # Almost target: odd projective-plane escape theorem
@@ -27,6 +28,13 @@ def OddEscapeStatement (IsP : GridPPosition K) : Prop :=
     GridCap S ->
     ∃ p : GridPoint K,
       p ∈ Stable.LegalGridExtensions (K := K) S ∧ IsP (insert p S)
+
+/--
+The same escape target, now tied to the formal normal-play residual grid game.
+This is still a target statement, not a theorem.
+-/
+def OddEscapeGameStatement : Prop :=
+  GridGame.OddEscapeStatement (K := K)
 
 end Almost
 end ProjectiveCap

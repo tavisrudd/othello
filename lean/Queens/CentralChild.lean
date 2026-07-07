@@ -1,0 +1,59 @@
+import Queens.Basic
+import NodeKayles.Certificate
+
+/-!
+# Central-child targets for the n=20 plan
+
+The n=20 lucky-first-win plan reduces the hoped-for root win to proving that
+the child after `J10 = (9,9)` is a P-position.  This file gives that statement
+and the n=18 calibration target precise Lean names.
+-/
+
+namespace Queens
+
+/-- The `I9 = (8,8)` square on the `18 x 18` board, using zero-based indices. -/
+def I9 : Fin (18 * 18) :=
+  index 18 8 8 (by decide) (by decide)
+
+/-- The `J10 = (9,9)` square on the `20 x 20` board, using zero-based indices. -/
+def J10 : Fin (20 * 20) :=
+  index 20 9 9 (by decide) (by decide)
+
+/-- Live set after a fixed root move. -/
+def centralChildLive (n : ℕ) (root : Fin (n * n)) : Finset (Fin (n * n)) :=
+  NodeKayles.child (queenGraph n) Finset.univ root
+
+/-- The root-child P-position target for a concrete first move. -/
+def RootChildIsP (n : ℕ) (root : Fin (n * n)) : Prop :=
+  ¬ NodeKayles.win (queenGraph n) (centralChildLive n root)
+
+/-- Calibration target from the plan: prove the child after `I9` on `18 x 18` is P. -/
+def N18I9CalibrationTarget : Prop :=
+  RootChildIsP 18 I9
+
+/-- Lucky n=20 target: prove the child after `J10` on `20 x 20` is P. -/
+def N20J10LuckyTarget : Prop :=
+  RootChildIsP 20 J10
+
+/-- A certified P child after a root move proves the whole board is an N-position. -/
+theorem firstPlayerWins_of_rootChildIsP {n : ℕ} {root : Fin (n * n)}
+    (h : RootChildIsP n root) : NodeKayles.firstPlayerWins (queenGraph n) := by
+  exact NodeKayles.firstPlayerWins_of_move_to_not_win (G := queenGraph n) (v := root) h
+
+/-- The `19 x 19` core inside the `20 x 20` central-child geometry. -/
+def N20Core : Finset (Fin (20 * 20)) :=
+  Finset.univ.filter (fun i => row 20 i < 19 ∧ col 20 i < 19)
+
+/-- The row/column-19 border from the n=20 central-child plan. -/
+def N20Border : Finset (Fin (20 * 20)) :=
+  Finset.univ.filter (fun i => row 20 i = 19 ∨ col 20 i = 19)
+
+/--
+The tau relation on the `19 x 19` core: `(r,c)` is paired with
+`(18-r,18-c)`.  It is a relation for now rather than a function, avoiding any
+premature proof that every flattened index lies in the intended core.
+-/
+def N20TauRelated (i j : Fin (20 * 20)) : Prop :=
+  row 20 j = 18 - row 20 i ∧ col 20 j = 18 - col 20 i
+
+end Queens

@@ -93,6 +93,13 @@ outcome is uniformly P**. Higher dimension / larger field makes the game *easier
 ## Verification status
 
 - **Proved above, uniform in `n` and `q` (both parities)** — no machine step is load-bearing.
+- **Lean status (2026-07-07):** the formal game vocabulary now lives in
+  [`../lean/ProjectiveCap/BuildGame.lean`](../lean/ProjectiveCap/BuildGame.lean) and
+  [`../lean/ProjectiveCap/Affine.lean`](../lean/ProjectiveCap/Affine.lean).  The affine theorem is
+  represented there as `ProjectiveCap.Affine.InitialPStatement`; the parity-mirror proof is not yet
+  formalized.  The projective analogue is separated in
+  [`../lean/ProjectiveCap/Projective.lean`](../lean/ProjectiveCap/Projective.lean), so affine and
+  projective claims cannot be accidentally conflated.
 - **Corroboration (brute Grundy outcome = P):** `AG(2,3), AG(3,3)` (`q=3`); `AG(1/2, 5)`, `AG(1/2, 7)`
   (odd prime); `AG(2, 9)` (odd **non-prime**, 81 pts, 410 575 states); `AG(1/2, 4)`, `AG(1/2, 8)`
   (**char 2**). Scripts `2026-07-04-cap-agnq.py` (prime q), `2026-07-04-cap-gf.py` (+ `2026-07-04-gf.py`,

@@ -30,11 +30,19 @@ A review pass reworked the math below. These supersede the looser statements lat
 them first, they change the priorities.
 
 **Lean status (2026-07-07).** The residual grid vocabulary has started in
-[`../../lean/ProjectiveCap/Grid.lean`](../../lean/ProjectiveCap/Grid.lean). Stable theorem targets
-that are not yet proved in Lean are named in
+[`../../lean/ProjectiveCap/Grid.lean`](../../lean/ProjectiveCap/Grid.lean). The finite
+normal-play "add one legal point" kernel is in
+[`../../lean/ProjectiveCap/BuildGame.lean`](../../lean/ProjectiveCap/BuildGame.lean), with the
+affine cap game in
+[`../../lean/ProjectiveCap/Affine.lean`](../../lean/ProjectiveCap/Affine.lean), the projective cap
+game in [`../../lean/ProjectiveCap/Projective.lean`](../../lean/ProjectiveCap/Projective.lean), and
+the residual grid game in
+[`../../lean/ProjectiveCap/GridGame.lean`](../../lean/ProjectiveCap/GridGame.lean). Stable theorem
+targets that are not yet proved in Lean are named in
 [`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), and the
 odd-plane escape target is isolated in
 [`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).
+The game-valued residual target is `ProjectiveCap.Almost.OddEscapeGameStatement`.
 
 ### R0. Structural fact — projective space has NO fixed-point-free collineation involution
 

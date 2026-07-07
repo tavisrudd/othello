@@ -22,6 +22,20 @@ prove that R_20 = B_20 after (9,9) is a P-position.
 
 That is still large, but it has far more structure than an arbitrary root child.
 
+**Lean status (2026-07-07).** The abstract Node-Kayles semantics are in
+[`../lean/NodeKayles/Basic.lean`](../lean/NodeKayles/Basic.lean), with a reply-book kernel lemma in
+[`../lean/NodeKayles/Certificate.lean`](../lean/NodeKayles/Certificate.lean). The queens board
+bridge is now started in [`../lean/Queens/Basic.lean`](../lean/Queens/Basic.lean), and the named
+central-child targets are:
+
+- `Queens.N18I9CalibrationTarget` in
+  [`../lean/Queens/CentralChild.lean`](../lean/Queens/CentralChild.lean);
+- `Queens.N20J10LuckyTarget` in
+  [`../lean/Queens/CentralChild.lean`](../lean/Queens/CentralChild.lean).
+
+The theorem `Queens.firstPlayerWins_of_rootChildIsP` records the exact game mapping: proving the
+root child is a P-position proves the full board is an N-position for that root.
+
 ## Structural decomposition
 
 After the central diagonal strike `c* = (9,9)`, write:
