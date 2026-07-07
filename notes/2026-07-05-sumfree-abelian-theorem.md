@@ -272,6 +272,11 @@ irreducible open core is **only the socle-reduction proof itself.**
 
 ### ★★ THEOREM — `F₃ⁿ = N` (first player wins) for all `n`, by move-then-mirror
 
+**Lean status (2026-07-07).** The local mirror-legality kernel is formalized as
+`f3_affine_mirror_legal` in [`../lean/Sumfree/MirrorLemmas.lean`](../lean/Sumfree/MirrorLemmas.lean).
+The global game-outcome theorem still needs formal game semantics; its current target stub is
+[`../lean/Sumfree/Almost/F3Outcome.lean`](../lean/Sumfree/Almost/F3Outcome.lean).
+
 The crux conjecture is now a theorem. The winning move was reverse-engineered from the solver's `F₃³`
 strategy (every reply is `−(x₀+y)`), then proved. Prior-art note: the lit search confirmed
 strategy-stealing is **invalid** for this game, so a bespoke first-player strategy was the *only*

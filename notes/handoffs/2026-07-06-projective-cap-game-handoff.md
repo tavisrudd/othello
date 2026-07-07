@@ -29,6 +29,13 @@ replacement.
 A review pass reworked the math below. These supersede the looser statements later in the doc; read
 them first, they change the priorities.
 
+**Lean status (2026-07-07).** The residual grid vocabulary has started in
+[`../../lean/ProjectiveCap/Grid.lean`](../../lean/ProjectiveCap/Grid.lean). Stable theorem targets
+that are not yet proved in Lean are named in
+[`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), and the
+odd-plane escape target is isolated in
+[`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).
+
 ### R0. Structural fact — projective space has NO fixed-point-free collineation involution
 
 For **every** `(m,q)`. Odd char: an involution in `PGL(m+1,q)` splits into `±1` eigenspaces, each a

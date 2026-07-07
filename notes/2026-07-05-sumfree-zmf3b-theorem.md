@@ -75,6 +75,12 @@ against a no-symmetry brute solver (below). In `(★)` language:
 
 ## Pair-completion Lemma (proved for all `b`)
 
+**Lean status (2026-07-07).** The labelled local layer is formalized in
+[`../lean/Sumfree/Z2F3Labels.lean`](../lean/Sumfree/Z2F3Labels.lean): `deadSlot_not_labelLegal`,
+`avoidsDeadSlot_of_labelLegal`, the explicit `PairCompleted` bundle, and `pair_completion`. The
+global `{m}`-is-N / empty-is-P game theorem is not yet formalized; its statement target is isolated in
+[`../lean/Sumfree/Almost/Z2F3Outcome.lean`](../lean/Sumfree/Almost/Z2F3Outcome.lean).
+
 > **Lemma.** Let `D` be `M`-symmetric and `(★)`-valid with `{0↦1, a↦0} ⊆ D`. Let `(y, ℓ)` be a legal
 > move (`y ∉ D`, and `D ∪ {y↦ℓ}` is `(★)`-valid). Then the mirror reply `(y*, 1−ℓ)`, `y* = a−y`, is a
 > **fresh legal** move and `D' = D ∪ {y↦ℓ, y*↦1−ℓ}` is `(★)`-valid.
