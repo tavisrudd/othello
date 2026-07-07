@@ -28,6 +28,11 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Grundy.lean`](../../lean/Sumfree/Grundy.lean):
   `Sumfree.Game.Grundy`, `win_iff_grundy_ne_zero`, `isP_iff_grundy_eq_zero`, and the
   concrete exponent-three root nimber theorem `f3_grundy_empty_eq_one`;
+- zero-Grundy corollaries for the proved rank-count P branches in
+  [`../../lean/Sumfree/GrundyRanks.lean`](../../lean/Sumfree/GrundyRanks.lean):
+  `initial_grundy_eq_zero_of_rank_count_P_cases`,
+  `initial_grundy_eq_zero_iff_rank_count_P_cases_of_threeRank_le_one`, and the canonical-rank
+  wrapper `initial_grundy_eq_zero_iff_rank_P_cases_of_threeRank_le_one`;
 - anchored order-three negation mirror kernel:
   `anchored_neg_mirror_legal` in
   [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean), formalizing the
@@ -146,9 +151,9 @@ The Lean layer is narrower than this compute log. Current build check:
   `hasThreeRank_z2v_zmod3_module`, `hasRanks_z2v_zmod3_module`, and
   the underlying kernel-cardinality computations.
 
-**Not yet formalized in Lean:** concrete nimber/Grundy value statements beyond the exponent-three
-root value and `ZMod 2 x F_3^b` zero value above; the warm-up `Z3 x Z_p` Grundy/spectral `*1`
-statement; and the open/adaptive `Z3^2 x Z_p` program. The exact
+**Not yet formalized in Lean:** concrete positive nimber/Grundy value statements beyond the
+exponent-three root value above; the warm-up `Z3 x Z_p` Grundy/spectral `*1` statement; and the
+open/adaptive `Z3^2 x Z_p` program. The exact
 finite-abelian classification is formalized only through the `r₃ <= 1` wrapper above. The socle reduction is false
 and must not be resurrected as a target.
 

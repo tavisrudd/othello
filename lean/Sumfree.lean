@@ -9,6 +9,7 @@ import Sumfree.CyclicZMod
 import Sumfree.CyclicRanks
 import Sumfree.FiniteAbelianRanks
 import Sumfree.CanonicalRanks
+import Sumfree.GrundyRanks
 import Sumfree.FiniteAbelianOutcome
 import Sumfree.Z3ProductOutcome
 import Sumfree.Z2F3Labels
