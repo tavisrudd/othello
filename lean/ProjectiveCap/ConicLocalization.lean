@@ -1,5 +1,6 @@
 import ProjectiveCap.GridCounting
 import ProjectiveCap.GridGame
+import ProjectiveCap.Almost.OddEscape
 import Mathlib.Tactic
 
 /-!
@@ -397,6 +398,23 @@ def OnConicEscapeStatement : Prop :=
           HyperbolaFits (K := K) S rho A B ∧
           p ∈ OnConicLegalExtensions (K := K) S rho A B ∧
           GridGame.IsP (K := K) (insert p S)
+
+/-- The on-conic refinement immediately implies the ordinary odd escape target. -/
+theorem oddEscapeStatement_of_onConicEscapeStatement
+    (hON : OnConicEscapeStatement (K := K)) :
+    GridGame.OddEscapeStatement (K := K) := by
+  rw [GridGame.oddEscapeStatement_iff_escapeExtensions_nonempty]
+  intro S hcard hcap
+  rcases hON S hcard hcap with ⟨rho, A, B, p, _hB, _hfit, hpOn, hpP⟩
+  refine ⟨p, ?_⟩
+  exact GridGame.mem_escapeExtensions.mpr
+    ⟨(mem_onConicLegalExtensions (K := K)).mp hpOn |>.2, hpP⟩
+
+/-- The same implication in the `Almost` namespace's target spelling. -/
+theorem almostOddEscapeGameStatement_of_onConicEscapeStatement
+    (hON : OnConicEscapeStatement (K := K)) :
+    Almost.OddEscapeGameStatement (K := K) :=
+  oddEscapeStatement_of_onConicEscapeStatement (K := K) hON
 
 end ConicLocalization
 end ProjectiveCap

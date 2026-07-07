@@ -21,7 +21,10 @@ and the `psi_u` involution substrate.
 
 Follow-up after WP-1/WP-2: the `psi_u` grid-symmetry part is no longer only a target.
 `psi_gridSymmetry` proves that `psi_u` preserves residual `GridCap`, and
-`psiInvolutionStatement` discharges the packaged `PsiInvolutionStatement`.
+`psiInvolutionStatement` discharges the packaged `PsiInvolutionStatement`.  The
+on-conic refinement is also connected to the existing odd-escape target by
+`oddEscapeStatement_of_onConicEscapeStatement` and
+`almostOddEscapeGameStatement_of_onConicEscapeStatement`.
 
 The file contains no `sorry`, `admit`, or `axiom`. The high-level geometric facts are `Prop`
 targets rather than asserted theorems. The coordinate facts for `psi_u` that are local algebra
@@ -86,6 +89,8 @@ gridCap_image_psi
 gridCap_image_psi_iff
 psi_gridSymmetry
 psiInvolutionStatement
+oddEscapeStatement_of_onConicEscapeStatement
+almostOddEscapeGameStatement_of_onConicEscapeStatement
 ```
 
 ## What is proved now
@@ -103,6 +108,10 @@ The following are sorry-free Lean theorems:
 - `psi_gridSymmetry`: under the same nonzero hypotheses, `psi_u` is a residual-grid symmetry:
   it is bijective and preserves `GridCap` under finite-set image.
 - `psiInvolutionStatement`: the full packaged `PsiInvolutionStatement` is proved.
+- `oddEscapeStatement_of_onConicEscapeStatement`: the on-conic witness refinement implies
+  `GridGame.OddEscapeStatement`.
+- `almostOddEscapeGameStatement_of_onConicEscapeStatement`: the same implication in the
+  `Almost.OddEscapeGameStatement` spelling.
 
 ## What is only stated
 
