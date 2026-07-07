@@ -65,8 +65,9 @@ The Lean layer is narrower than this compute log. Current build check:
   full kernel finsets `OrderTwoKernelElements`, `OrderThreeKernelElements`, card conversions
   `orderTwoKernelElements_card` and `orderThreeKernelElements_card`, torsion-membership bridges
   `mem_orderTwoKernelElements_iff_two_nsmul` and `mem_orderThreeKernelElements_iff_three_nsmul`,
-  rank predicates
-  `HasTwoRank`, `HasThreeRank`,
+  rank predicates `HasTwoRank`, `HasThreeRank`, elementary vector-space constructors
+  `hasTwoRank_finrank_zmod2`, `hasThreeRank_zero_of_zmod2_module`,
+  `hasTwoRank_zero_of_zmod3_module`, and `hasThreeRank_finrank_zmod3`,
   `initial_isP_of_rank_count_P_cases`, `initial_win_of_rank_count_N_cases`,
   `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one`, and
   `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;
@@ -97,11 +98,10 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
-**Not yet formalized in Lean:** deriving `HasTwoRank` and `HasThreeRank` from a finite-abelian
-structure-theorem/rank API, rather than taking them as explicit cardinality interfaces; any
-nimber/Grundy statements from this compute log; the warm-up `Z3 x Z_p` spectral statements; and the
-open/adaptive `Z3^2 x Z_p` program. The socle reduction is false and must not be resurrected as a
-target.
+**Not yet formalized in Lean:** deriving `HasTwoRank` and `HasThreeRank` for arbitrary finite
+abelian groups from a structure-theorem/rank API; any nimber/Grundy statements from this compute log;
+the warm-up `Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p` program. The socle
+reduction is false and must not be resurrected as a target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills

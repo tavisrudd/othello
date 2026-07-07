@@ -1,4 +1,5 @@
 import Sumfree.Game
+import Mathlib.FieldTheory.Finiteness
 
 /-!
 # Rank-count interface for finite sum-free games
@@ -97,6 +98,76 @@ size `3^r`, so the nonzero obstruction set has size `3^r - 1`.
 def HasThreeRank (G : Type*) [AddCommGroup G] [Fintype G] [DecidableEq G] (r : ℕ) :
     Prop :=
   (OrderThreeKernelElements (G := G)).card = 3 ^ r
+
+theorem orderTwoKernelElements_eq_univ_of_zmod2_module [Module (ZMod 2) G] :
+    OrderTwoKernelElements (G := G) = Finset.univ := by
+  ext x
+  rw [mem_orderTwoKernelElements_iff_two_nsmul]
+  simp [ZModModule.char_nsmul_eq_zero (n := 2) x]
+
+theorem orderThreeKernelElements_eq_singleton_zero_of_zmod2_module [Module (ZMod 2) G] :
+    OrderThreeKernelElements (G := G) = {0} := by
+  ext x
+  rw [mem_orderThreeKernelElements_iff_three_nsmul]
+  constructor
+  · intro hx
+    have hxscalar : (3 : ZMod 2) • x = 0 :=
+      (Nat.cast_smul_eq_nsmul (R := ZMod 2) 3 x).trans hx
+    rcases smul_eq_zero.mp hxscalar with h3 | hxzero
+    · exact ((by decide : (3 : ZMod 2) ≠ 0) h3).elim
+    · simpa using hxzero
+  · intro hx
+    have hx0 : x = 0 := by simpa using hx
+    rw [hx0]
+    simp
+
+theorem hasTwoRank_finrank_zmod2 [Module (ZMod 2) G] :
+    HasTwoRank G (Module.finrank (ZMod 2) G) := by
+  unfold HasTwoRank
+  rw [orderTwoKernelElements_eq_univ_of_zmod2_module, Finset.card_univ]
+  rw [@Module.card_eq_pow_finrank (K := ZMod 2) (V := G)]
+  rw [show Fintype.card (ZMod 2) = 2 by exact ZMod.card 2]
+
+theorem hasThreeRank_zero_of_zmod2_module [Module (ZMod 2) G] :
+    HasThreeRank G 0 := by
+  unfold HasThreeRank
+  rw [orderThreeKernelElements_eq_singleton_zero_of_zmod2_module]
+  simp
+
+theorem orderTwoKernelElements_eq_singleton_zero_of_zmod3_module [Module (ZMod 3) G] :
+    OrderTwoKernelElements (G := G) = {0} := by
+  ext x
+  rw [mem_orderTwoKernelElements_iff_two_nsmul]
+  constructor
+  · intro hx
+    have hxscalar : (2 : ZMod 3) • x = 0 :=
+      (Nat.cast_smul_eq_nsmul (R := ZMod 3) 2 x).trans hx
+    rcases smul_eq_zero.mp hxscalar with h2 | hxzero
+    · exact ((by decide : (2 : ZMod 3) ≠ 0) h2).elim
+    · simpa using hxzero
+  · intro hx
+    have hx0 : x = 0 := by simpa using hx
+    rw [hx0]
+    simp
+
+theorem orderThreeKernelElements_eq_univ_of_zmod3_module [Module (ZMod 3) G] :
+    OrderThreeKernelElements (G := G) = Finset.univ := by
+  ext x
+  rw [mem_orderThreeKernelElements_iff_three_nsmul]
+  simp [ZModModule.char_nsmul_eq_zero (n := 3) x]
+
+theorem hasTwoRank_zero_of_zmod3_module [Module (ZMod 3) G] :
+    HasTwoRank G 0 := by
+  unfold HasTwoRank
+  rw [orderTwoKernelElements_eq_singleton_zero_of_zmod3_module]
+  simp
+
+theorem hasThreeRank_finrank_zmod3 [Module (ZMod 3) G] :
+    HasThreeRank G (Module.finrank (ZMod 3) G) := by
+  unfold HasThreeRank
+  rw [orderThreeKernelElements_eq_univ_of_zmod3_module, Finset.card_univ]
+  rw [@Module.card_eq_pow_finrank (K := ZMod 3) (V := G)]
+  rw [show Fintype.card (ZMod 3) = 3 by exact ZMod.card 3]
 
 theorem nonzeroOrderTwo_card_eq_zero_of_hasTwoRank_zero
     (h : HasTwoRank G 0) :

@@ -53,7 +53,8 @@ rename Lean files to match older prose names.
   [`../../lean/Sumfree/RankCounts.lean`](../../lean/Sumfree/RankCounts.lean), with
   full kernel finsets `OrderTwoKernelElements`, `OrderThreeKernelElements`, card conversions to the
   nonzero obstruction finsets, `2 • x = 0` / `3 • x = 0` membership bridges, `HasTwoRank`,
-  `HasThreeRank`, `initial_isP_of_rank_count_P_cases`, and
+  `HasThreeRank`, elementary `ZMod 2`/`ZMod 3` module rank constructors,
+  `initial_isP_of_rank_count_P_cases`, and
   `initial_win_of_rank_count_N_cases`, plus the `r3 <= 1` iff wrappers
   `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one` and
   `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;
@@ -74,9 +75,9 @@ rename Lean files to match older prose names.
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** deriving `HasTwoRank` and `HasThreeRank` from a
-finite-abelian structure-theorem/rank API; the affine cap all-`q` theorem; the projective odd-plane
-escape theorem; and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** deriving `HasTwoRank` and `HasThreeRank` for
+arbitrary finite abelian groups from a structure-theorem/rank API; the affine cap all-`q` theorem;
+the projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 
