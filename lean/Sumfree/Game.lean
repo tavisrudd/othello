@@ -889,6 +889,158 @@ theorem initial_isP_of_unique_orderTwo_one_orderThreePair {m t : G}
     FiniteBuildGame.win_of_move_to_isP hmove hpairP
   exact (initial_isP_iff_orderTwo_child_win (G := G) (m := m) hm2 hm0).2 hchildWin
 
+/-- If the nonzero order-two obstruction set is empty, all order-two elements are zero. -/
+theorem orderTwo_eq_zero_of_nonzeroOrderTwo_card_eq_zero
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 0) :
+    ∀ x : G, x + x = 0 -> x = 0 := by
+  intro x hx2
+  by_contra hx0
+  have hxmem : x ∈ NonzeroOrderTwoElements (G := G) :=
+    (mem_nonzeroOrderTwoElements (G := G) (v := x)).2 ⟨hx2, hx0⟩
+  have hempty : NonzeroOrderTwoElements (G := G) = ∅ :=
+    Finset.card_eq_zero.mp h2
+  rw [hempty] at hxmem
+  simp at hxmem
+
+/--
+If the nonzero order-two obstruction set is the singleton `{m}`, every
+order-two element is either `0` or `m`.
+-/
+theorem orderTwo_eq_zero_or_unique_of_nonzeroOrderTwo_card_eq_one {m : G}
+    (hm : m ∈ NonzeroOrderTwoElements (G := G))
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 1) :
+    ∀ x : G, x + x = 0 -> x = 0 ∨ x = m := by
+  intro x hx2
+  by_cases hx0 : x = 0
+  · exact Or.inl hx0
+  · right
+    have hxmem : x ∈ NonzeroOrderTwoElements (G := G) :=
+      (mem_nonzeroOrderTwoElements (G := G) (v := x)).2 ⟨hx2, hx0⟩
+    rcases Finset.card_eq_one.mp h2 with ⟨a, ha⟩
+    have hma : m = a := by
+      have hm' := hm
+      rw [ha] at hm'
+      simpa using hm'
+    have hxa : x = a := by
+      have hxmem' := hxmem
+      rw [ha] at hxmem'
+      simpa using hxmem'
+    exact hxa.trans hma.symm
+
+theorem neg_mem_nonzeroOrderThreeElements {t : G}
+    (ht : t ∈ NonzeroOrderThreeElements (G := G)) :
+    -t ∈ NonzeroOrderThreeElements (G := G) := by
+  rcases (mem_nonzeroOrderThreeElements (G := G) (v := t)).1 ht with ⟨ht2, ht0⟩
+  refine (mem_nonzeroOrderThreeElements (G := G) (v := -t)).2 ⟨?_, ?_⟩
+  · have h := congrArg Neg.neg ht2
+    simpa using h
+  · intro hneg0
+    have htzero : t = 0 := by
+      have h := congrArg Neg.neg hneg0
+      simpa using h
+    exact ht0 htzero
+
+theorem nonzeroOrderThree_ne_neg {t : G}
+    (ht : t ∈ NonzeroOrderThreeElements (G := G)) :
+    t ≠ -t := by
+  rcases (mem_nonzeroOrderThreeElements (G := G) (v := t)).1 ht with ⟨ht2, ht0⟩
+  intro htneg
+  have hself : t + t = t := by
+    rw [← htneg] at ht2
+    exact ht2
+  exact ht0 (zero_of_add_self_eq_self hself)
+
+/--
+If the nonzero order-three obstruction set has cardinality two and contains
+`t`, then the only order-three obstruction elements are `0`, `t`, and `-t`.
+-/
+theorem orderThree_eq_zero_or_pair_of_nonzeroOrderThree_card_eq_two {t : G}
+    (ht : t ∈ NonzeroOrderThreeElements (G := G))
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 2) :
+    ∀ x : G, x + x = -x -> x = 0 ∨ x = t ∨ x = -t := by
+  intro x hx3
+  by_cases hx0 : x = 0
+  · exact Or.inl hx0
+  · right
+    have hxmem : x ∈ NonzeroOrderThreeElements (G := G) :=
+      (mem_nonzeroOrderThreeElements (G := G) (v := x)).2 ⟨hx3, hx0⟩
+    have htneg : t ≠ -t := nonzeroOrderThree_ne_neg (G := G) ht
+    have hnegmem : -t ∈ NonzeroOrderThreeElements (G := G) :=
+      neg_mem_nonzeroOrderThreeElements (G := G) ht
+    have hpair_subset :
+        ({t, -t} : Finset G) ⊆ NonzeroOrderThreeElements (G := G) := by
+      intro z hz
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hz
+      rcases hz with hzt | hzneg
+      · simpa [hzt] using ht
+      · simpa [hzneg] using hnegmem
+    have hpair_card : ({t, -t} : Finset G).card = 2 := by
+      simp [htneg]
+    have hpair_eq :
+        ({t, -t} : Finset G) = NonzeroOrderThreeElements (G := G) :=
+      Finset.eq_of_subset_of_card_le hpair_subset (by rw [hpair_card, h3])
+    have hxpair : x ∈ ({t, -t} : Finset G) := by
+      rw [hpair_eq]
+      exact hxmem
+    simpa using hxpair
+
+/--
+Cardinality-wrapper for the `s₂=0, r₃=1` branch: no nonzero order-two
+obstructions and exactly one nonzero order-three pair imply N.
+-/
+theorem initial_win_of_no_orderTwo_two_nonzero_orderThree {t : G}
+    (ht : t ∈ NonzeroOrderThreeElements (G := G))
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 0)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 2) :
+    Win (∅ : Finset G) := by
+  rcases (mem_nonzeroOrderThreeElements (G := G) (v := t)).1 ht with ⟨ht2, ht0⟩
+  exact initial_win_of_no_orderTwo_one_orderThreePair
+    (G := G) (t := t) ht2 ht0
+    (orderTwo_eq_zero_of_nonzeroOrderTwo_card_eq_zero (G := G) h2)
+    (orderThree_eq_zero_or_pair_of_nonzeroOrderThree_card_eq_two (G := G) ht h3)
+
+/--
+Parameter-free cardinality-wrapper for the `s₂=0, r₃=1` branch.
+-/
+theorem initial_win_of_no_orderTwo_nonzeroOrderThree_card_eq_two
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 0)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 2) :
+    Win (∅ : Finset G) := by
+  have hpos : 0 < (NonzeroOrderThreeElements (G := G)).card := by omega
+  rcases Finset.card_pos.mp hpos with ⟨t, ht⟩
+  exact initial_win_of_no_orderTwo_two_nonzero_orderThree (G := G) ht h2 h3
+
+/--
+Cardinality-wrapper for the `s₂=1, r₃=1` branch: one nonzero order-two
+obstruction and exactly one nonzero order-three pair imply P.
+-/
+theorem initial_isP_of_one_orderTwo_two_nonzero_orderThree {m t : G}
+    (hm : m ∈ NonzeroOrderTwoElements (G := G))
+    (ht : t ∈ NonzeroOrderThreeElements (G := G))
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 1)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 2) :
+    IsP (∅ : Finset G) := by
+  rcases (mem_nonzeroOrderTwoElements (G := G) (v := m)).1 hm with ⟨hm2, hm0⟩
+  rcases (mem_nonzeroOrderThreeElements (G := G) (v := t)).1 ht with ⟨ht2, ht0⟩
+  exact initial_isP_of_unique_orderTwo_one_orderThreePair
+    (G := G) (m := m) (t := t) hm2 hm0
+    (orderTwo_eq_zero_or_unique_of_nonzeroOrderTwo_card_eq_one (G := G) hm h2)
+    ht2 ht0
+    (orderThree_eq_zero_or_pair_of_nonzeroOrderThree_card_eq_two (G := G) ht h3)
+
+/--
+Parameter-free cardinality-wrapper for the `s₂=1, r₃=1` branch.
+-/
+theorem initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two
+    (h2 : (NonzeroOrderTwoElements (G := G)).card = 1)
+    (h3 : (NonzeroOrderThreeElements (G := G)).card = 2) :
+    IsP (∅ : Finset G) := by
+  have h2pos : 0 < (NonzeroOrderTwoElements (G := G)).card := by omega
+  have h3pos : 0 < (NonzeroOrderThreeElements (G := G)).card := by omega
+  rcases Finset.card_pos.mp h2pos with ⟨m, hm⟩
+  rcases Finset.card_pos.mp h3pos with ⟨t, ht⟩
+  exact initial_isP_of_one_orderTwo_two_nonzero_orderThree (G := G) hm ht h2 h3
+
 end OneOrderThreePair
 
 section F3
