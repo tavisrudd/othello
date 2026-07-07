@@ -130,6 +130,47 @@ def HyperbolaNormalFormStatement : Prop :=
             HyperbolaFits (K := K) S rho' A' B' ->
               rho' = rho ∧ A' = A ∧ B' = B
 
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaConic_nondegenerate {rho A B : K} (hB : B ≠ 0) :
+    (hyperbolaConic (K := K) rho A B).Nondegenerate := by
+  simpa [BurnedDirectionConic.Nondegenerate, BurnedDirectionConic.B, hyperbolaConic] using hB
+
+omit [Fintype K] [DecidableEq K] in
+theorem burnedDirectionConic_eq_hyperbolaConic_of_params
+    (C : BurnedDirectionConic K) {rho A B : K}
+    (hrho : C.rho = rho) (hA : C.A = A) (hB : C.B = B) :
+    C = hyperbolaConic (K := K) rho A B := by
+  cases C with
+  | mk eps zeta gamma =>
+      simp [BurnedDirectionConic.rho, BurnedDirectionConic.A,
+        BurnedDirectionConic.B, hyperbolaConic] at hrho hA hB ⊢
+      constructor
+      · linear_combination -hA
+      · constructor
+        · linear_combination -hrho
+        · linear_combination -hB + (-zeta) * hA + A * hrho
+
+omit [Fintype K] [DecidableEq K] in
+theorem uniqueConicThroughFiveArcStatement_of_hyperbolaNormalFormStatement
+    (hNF : HyperbolaNormalFormStatement (K := K)) :
+    UniqueConicThroughFiveArcStatement (K := K) := by
+  intro S hcard hS
+  rcases hNF S hcard hS with ⟨rho, A, B, hB, hfit, huniq⟩
+  refine ⟨hyperbolaConic (K := K) rho A B,
+    hyperbolaConic_nondegenerate (K := K) hB, ?_, ?_⟩
+  · intro p hp
+    exact (BurnedDirectionConic.onAffine_iff_onHyperbola
+      (K := K) (C := hyperbolaConic (K := K) rho A B) p).mpr
+        (by simpa [BurnedDirectionConic.rho, BurnedDirectionConic.A,
+          BurnedDirectionConic.B, hyperbolaConic] using hfit p hp)
+  · intro D hDnondeg hDfit
+    have hDfitHyper : HyperbolaFits (K := K) S D.rho D.A D.B := by
+      intro p hp
+      exact (BurnedDirectionConic.onAffine_iff_onHyperbola (K := K) (C := D) p).mp
+        (hDfit p hp)
+    rcases huniq D.rho D.A D.B hDnondeg hDfitHyper with ⟨hrho, hA, hB'⟩
+    exact burnedDirectionConic_eq_hyperbolaConic_of_params (K := K) D hrho hA hB'
+
 /-- Legal on-conic extensions of `S`, relative to a chosen hyperbola model. -/
 noncomputable def OnConicLegalExtensions
     (S : Finset (GridPoint K)) (rho A B : K) : Finset (GridPoint K) := by

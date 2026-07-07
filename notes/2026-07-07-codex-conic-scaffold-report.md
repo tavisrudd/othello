@@ -56,6 +56,9 @@ BurnedDirectionConic.B
 BurnedDirectionConic.Nondegenerate
 BurnedDirectionConic.onAffine_iff_onHyperbola
 hyperbolaConic
+hyperbolaConic_nondegenerate
+burnedDirectionConic_eq_hyperbolaConic_of_params
+uniqueConicThroughFiveArcStatement_of_hyperbolaNormalFormStatement
 ```
 
 High-level target statements:
@@ -122,6 +125,8 @@ The following are sorry-free Lean theorems:
 - `mem_hyperbolaCells`: membership in `HyperbolaCells` is exactly `OnHyperbola`.
 - `BurnedDirectionConic.onAffine_iff_onHyperbola`: the normalized burned-direction conic chart is
   equivalent to the hyperbola normal form with `rho = -zeta`, `A = -eps`, `B = zeta*eps - gamma`.
+- `uniqueConicThroughFiveArcStatement_of_hyperbolaNormalFormStatement`: the hyperbola normal-form
+  target implies the unique burned-direction conic target.
 - `mem_onConicLegalExtensions`: membership in `OnConicLegalExtensions` is exactly on-hyperbola
   plus legal grid extension.
 - `onHyperbola_iff_exists_param`: for `B != 0`, the hyperbola is exactly the image of the
