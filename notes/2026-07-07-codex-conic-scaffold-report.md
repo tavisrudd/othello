@@ -1,0 +1,171 @@
+# Codex C2 conic scaffold report (2026-07-07)
+
+## Result
+
+Added a new Lean module:
+
+```text
+lean/ProjectiveCap/ConicLocalization.lean
+```
+
+and imported it from:
+
+```text
+lean/ProjectiveCap.lean
+```
+
+The scaffold follows the statement decomposition in
+`2026-07-07-kernel-conic-localization.md`: normalized conics through the two burned directions,
+hyperbola normal form, the `q - 4` on-conic legal-extension count target, odd maximality target,
+and the `psi_u` involution substrate.
+
+The file contains no `sorry`, `admit`, or `axiom`. The high-level geometric facts are `Prop`
+targets rather than asserted theorems. The coordinate facts for `psi_u` that are local algebra
+are proved.
+
+## Lean names
+
+Namespace:
+
+```text
+ProjectiveCap.ConicLocalization
+```
+
+Core coordinate vocabulary:
+
+```text
+OnHyperbola
+HyperbolaCells
+mem_hyperbolaCells
+HyperbolaFits
+BurnedDirectionConic
+BurnedDirectionConic.OnAffine
+BurnedDirectionConic.rho
+BurnedDirectionConic.A
+BurnedDirectionConic.B
+BurnedDirectionConic.Nondegenerate
+BurnedDirectionConic.onAffine_iff_onHyperbola
+hyperbolaConic
+```
+
+High-level target statements:
+
+```text
+UniqueConicThroughFiveArcStatement
+HyperbolaNormalFormStatement
+OnConicLegalExtensions
+mem_onConicLegalExtensions
+OnConicLegalExtensionCountStatement
+MaximalGridCap
+OddHyperbolaMaximalStatement
+PsiInvolutionStatement
+OnConicEscapeStatement
+```
+
+`psi_u` substrate:
+
+```text
+hyperbolaParamPoint
+psi
+psi_involutive
+psi_onHyperbola_iff
+psi_hyperbolaParamPoint
+GridSymmetry
+```
+
+## What is proved now
+
+The following are sorry-free Lean theorems:
+
+- `mem_hyperbolaCells`: membership in `HyperbolaCells` is exactly `OnHyperbola`.
+- `BurnedDirectionConic.onAffine_iff_onHyperbola`: the normalized burned-direction conic chart is
+  equivalent to the hyperbola normal form with `rho = -zeta`, `A = -eps`, `B = zeta*eps - gamma`.
+- `mem_onConicLegalExtensions`: membership in `OnConicLegalExtensions` is exactly on-hyperbola
+  plus legal grid extension.
+- `psi_involutive`: if `B != 0` and `u != 0`, then `psi rho A B u` is involutive.
+- `psi_onHyperbola_iff`: under the same nonzero hypotheses, `psi_u` preserves the hyperbola.
+- `psi_hyperbolaParamPoint`: on parametrized conic points, `psi_u` acts as `t |-> u / t`.
+
+## What is only stated
+
+The following are statement-level targets:
+
+- `UniqueConicThroughFiveArcStatement`: unique nondegenerate conic through the size-three grid
+  seed plus burned directions, encoded in the normalized burned-direction chart.
+- `HyperbolaNormalFormStatement`: unique `(rho, A, B)` with `B != 0` fitting the size-three seed.
+- `OnConicLegalExtensionCountStatement`: every non-seed hyperbola cell is a legal extension and
+  there are exactly `q - 4` of them.
+- `OddHyperbolaMaximalStatement`: in odd characteristic, the hyperbola cell set is a maximal grid
+  cap of size `q - 1`.
+- `PsiInvolutionStatement`: packages the proved `psi_u` algebra with the still-deferred grid
+  symmetry proof.
+- `OnConicEscapeStatement`: the empirical ON target, tied to the formal residual grid-game
+  `GridGame.IsP` predicate.
+
+## Deferred vocabulary
+
+This scaffold does not yet formalize projective conics as projective quadratic forms. Instead,
+`BurnedDirectionConic` is the normalized chart for conics through the two burned directions:
+
+```text
+r*c + eps*r + zeta*c + gamma = 0
+```
+
+That is enough to name the conic-localization targets and the hyperbola normal form, but the
+eventual proof of "unique conic through the 5-arc" still needs either:
+
+- a real projective conic object and a theorem connecting it to this normalized chart; or
+- a self-contained coordinate proof that every relevant conic through the burned directions is
+  represented by this chart and that the excluded `delta = 0` case is degenerate/collinear.
+
+The grid-symmetry part of `psi_u` is also still a target. The algebraic involution and
+hyperbola-preservation facts are already proved; what remains is proving that `psi_u` preserves
+rows/columns up to exchange and affine collinearity, hence preserves `GridCap`.
+
+## Verification
+
+Command:
+
+```bash
+LEAN_NUM_THREADS=1 nix develop --command lake build ProjectiveCap.ConicLocalization
+```
+
+Output:
+
+```text
+warning: Git tree '/home/tavis/src/othello' is dirty
+✔ [2984/2986] Built ProjectiveCap.GridGame (4.9s)
+✔ [2985/2986] Built ProjectiveCap.GridCounting (4.5s)
+✔ [2986/2986] Built ProjectiveCap.ConicLocalization (3.1s)
+Build completed successfully (2986 jobs).
+```
+
+Command:
+
+```bash
+LEAN_NUM_THREADS=1 nix develop --command lake build ProjectiveCap
+```
+
+Output:
+
+```text
+warning: Git tree '/home/tavis/src/othello' is dirty
+✔ [2992/2998] Built ProjectiveCap.PlaneTransitivity (21s)
+✔ [2994/2998] Built ProjectiveCap.Almost.OddEscape (3.4s)
+✔ [2996/3004] Built ProjectiveCap.ExtensionCount (6.9s)
+✔ [2998/3004] Built ProjectiveCap.EscapeParity (2.9s)
+✔ [3002/3004] Built CapGame.Affine (3.2s)
+✔ [3003/3004] Built ProjectiveCap (2.7s)
+Build completed successfully (3004 jobs).
+```
+
+Command:
+
+```bash
+rg -n "sorry|axiom|admit" lean/ProjectiveCap/ConicLocalization.lean || true
+```
+
+Output:
+
+```text
+```

@@ -8,5 +8,6 @@ import ProjectiveCap.GridGame
 import ProjectiveCap.GridCounting
 import ProjectiveCap.StableFacts
 import ProjectiveCap.ExtensionCount
+import ProjectiveCap.ConicLocalization
 import ProjectiveCap.EscapeParity
 import ProjectiveCap.Almost.OddEscape

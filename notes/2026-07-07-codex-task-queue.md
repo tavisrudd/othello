@@ -28,7 +28,7 @@ Task:
 
 Report file: `notes/2026-07-07-codex-lemma4-check.md`.
 
-## C2. Lean statement scaffold — conic localization lemma (optional, after WP-1/WP-2)
+## C2. Lean statement scaffold — conic localization lemma (optional, after WP-1/WP-2) [REPORTED 2026-07-07]
 
 Per the day plan's Codex section: statement-level scaffold only (no proof obligation) for the
 conic localization lemma of `2026-07-07-conic-localization-onconic-escape.md` §1 — the unique
