@@ -71,6 +71,10 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_isP_of_rank_count_P_cases`, `initial_win_of_rank_count_N_cases`,
   `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one`, and
   `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;
+- additive-equivalence invariance for rank predicates in
+  [`../../lean/Sumfree/RankEquiv.lean`](../../lean/Sumfree/RankEquiv.lean):
+  `orderTwoKernelElements_eq_map_addEquiv`, `orderThreeKernelElements_eq_map_addEquiv`,
+  `hasTwoRank_of_addEquiv`, and `hasThreeRank_of_addEquiv`;
 - product rules for rank predicates in
   [`../../lean/Sumfree/RankProducts.lean`](../../lean/Sumfree/RankProducts.lean):
   `orderTwoKernelElements_prod`, `orderThreeKernelElements_prod`,

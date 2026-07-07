@@ -1,6 +1,7 @@
 import Sumfree.MirrorLemmas
 import Sumfree.Game
 import Sumfree.RankCounts
+import Sumfree.RankEquiv
 import Sumfree.RankProducts
 import Sumfree.CyclicZMod
 import Sumfree.CyclicRanks
