@@ -360,8 +360,8 @@ theorem psi_gridSymmetry {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0) :
   ⟨psi_bijective (K := K) hB hu, gridCap_image_psi_iff (K := K) hB hu⟩
 
 /--
-Target: each `psi_u` is a grid-symmetry involution preserving the hyperbola and
-acting on the conic parameter by `t |-> u / t`.
+Packaged statement: each `psi_u` is a grid-symmetry involution preserving the
+hyperbola and acting on the conic parameter by `t |-> u / t`.
 -/
 def PsiInvolutionStatement : Prop :=
   ∀ rho A B u : K,

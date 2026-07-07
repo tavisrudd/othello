@@ -11,10 +11,10 @@ This module isolates the WP-1 proof obligation from the projective-cap plan.
 After two projective directions are fixed, the remaining affine chart should be
 equivalent to the residual grid game with the two burned parallel classes.
 
-The coordinate construction of the bridge is still deferred.  What is proved
-here is the game-theoretic consequence: once the coordinate bridge supplies the
-validity equivalence, normal-play values transport from the fixed projective
-residual to the residual grid game.
+The coordinate construction and validity bridge are proved in the standard
+coordinate model.  The game-theoretic consequence is isolated separately:
+normal-play values transport from the fixed projective residual to the residual
+grid game through any `FrameGridBridge`.
 -/
 
 open scoped LinearAlgebra.Projectivization
