@@ -14,6 +14,14 @@ namespace CyclicZMod
 
 open Sumfree.Game
 
+/-- The 2-rank of a nonzero cyclic group `ZMod n`. -/
+def zmodTwoRank (n : ℕ) : ℕ :=
+  if Even n then 1 else 0
+
+/-- The 3-rank of a nonzero cyclic group `ZMod n`. -/
+def zmodThreeRank (n : ℕ) : ℕ :=
+  if 3 ∣ n then 1 else 0
+
 theorem nonzeroOrderTwoElements_card_eq_one_of_even {n : ℕ} [NeZero n] (hn : Even n) :
     (NonzeroOrderTwoElements (G := ZMod n)).card = 1 := by
   apply Finset.card_eq_one.mpr
@@ -104,6 +112,20 @@ theorem hasThreeRank_zmod_one_of_three_mul {k : ℕ} [NeZero (3 * k)] :
   unfold HasThreeRank
   rw [orderThreeKernelElements_card, nonzeroOrderThreeElements_card_eq_two_of_three_mul]
   norm_num
+
+theorem hasTwoRank_zmod {n : ℕ} [NeZero n] :
+    HasTwoRank (ZMod n) (zmodTwoRank n) := by
+  by_cases hn : Even n
+  · simp [zmodTwoRank, hn, hasTwoRank_zmod_of_even hn]
+  · have hodd : Odd n := Nat.not_even_iff_odd.1 hn
+    simp [zmodTwoRank, hn, hasTwoRank_zmod_of_odd hodd]
+
+theorem hasThreeRank_zmod {n : ℕ} [NeZero n] :
+    HasThreeRank (ZMod n) (zmodThreeRank n) := by
+  by_cases h3 : 3 ∣ n
+  · rcases h3 with ⟨k, rfl⟩
+    simp [zmodThreeRank, dvd_mul_right, hasThreeRank_zmod_one_of_three_mul (k := k)]
+  · simp [zmodThreeRank, h3, hasThreeRank_zmod_zero_of_not_three_dvd h3]
 
 end CyclicZMod
 end Sumfree
