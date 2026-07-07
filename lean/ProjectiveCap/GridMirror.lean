@@ -1,3 +1,4 @@
+import ProjectiveCap.FrameGridBridge
 import ProjectiveCap.GridGame
 import ProjectiveCap.GridSeed
 import Mathlib.Tactic
@@ -408,6 +409,25 @@ theorem isP_of_diagMirrorGood (h2 : (2 : K) = 0) {S : Finset (GridPoint K)}
 theorem standardResidualSeed_isP_of_charTwo (h2 : (2 : K) = 0) :
     GridGame.IsP (K := K) (StandardResidualSeed (K := K)) :=
   isP_of_diagMirrorGood (K := K) h2 (standardResidualSeed_diagMirrorGood (K := K) h2)
+
+/--
+Composition of WP-1 and WP-2: in the standard coordinate projective plane over
+characteristic two, the normalized two-direction frame with residual seed
+`{(0,0), (1,1)}` is a P-position for the fixed-prefix residual game.
+-/
+theorem coordinateProjectiveFrame_isP_of_charTwo
+    [DecidableEq (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    (h2 : (2 : K) = 0) :
+    FiniteBuildGame.IsP
+      (Projective.FrameGridBridge.FixedValid
+        (Projective.FrameGridBridge.Coordinate.coordinateBridge (K := K)))
+      (StandardResidualSeed (K := K)) := by
+  simpa [Projective.FrameGridBridge.Coordinate.coordinateBridge,
+    Projective.FrameGridBridge.Coordinate.bridgeOfValidity] using
+    (Projective.FrameGridBridge.isP_projectiveFrame_iff_standardResidualSeed
+      (Projective.FrameGridBridge.Coordinate.coordinateBridge (K := K))).mpr
+      (standardResidualSeed_isP_of_charTwo (K := K) h2)
 
 end Game
 
