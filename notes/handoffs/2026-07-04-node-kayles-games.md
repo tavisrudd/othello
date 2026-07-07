@@ -29,13 +29,17 @@ rename Lean files to match older prose names.
   [`../../lean/Sumfree/Z2F3Bridge.lean`](../../lean/Sumfree/Z2F3Bridge.lean),
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), and wrappers under
   [`../../lean/Sumfree/Almost/`](../../lean/Sumfree/Almost/);
+- abstract SumFree mirror theorem layer in [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean):
+  no-obstruction negation mirror, spare-order-two P theorem, order-two singleton reduction, and
+  order-two/no-other-negation-obstruction N theorem;
 - Queens coordinate/game bridge targets:
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level theorem, the
-broader abelian sum-free theorem pieces, the affine cap all-`q` theorem, the projective odd-plane
-escape theorem, and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level theorem; the
+concrete rank/cardinality bookkeeping and Lemma-4/order-three-extra argument needed for the full
+`r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the projective odd-plane escape theorem;
+and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

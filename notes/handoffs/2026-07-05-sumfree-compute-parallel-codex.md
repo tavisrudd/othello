@@ -27,6 +27,11 @@ The Lean layer is narrower than this compute log. Current build check:
   `Sumfree.Game.f3_initial_win` in
   [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean), with stable wrapper names in
   [`../../lean/Sumfree/Almost/F3Outcome.lean`](../../lean/Sumfree/Almost/F3Outcome.lean);
+- abstract negation/translation game theorem layer in
+  [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean):
+  `initial_isP_of_negation_no_obstructions`, `initial_isP_of_spare_orderTwo`,
+  `initial_isP_iff_orderTwo_child_win`, `orderTwo_singleton_isP_of_negation_no_other_obstructions`,
+  and `initial_win_of_orderTwo_no_other_negation_obstructions`;
 - labelled `ZMod 2 x F_3^b` residual proof:
   `deadSlot_not_labelLegal`, `PairCompleted`, and `pair_completion` in
   [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean);
@@ -37,10 +42,11 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
-**Not yet formalized in Lean:** the cyclic `Z_n` mod-6 theorem as a top-level theorem; the broader
-abelian theorem pieces (`s2 >= 2`, `s2 = 1` reduction, `r3 <= 1`); any nimber/Grundy statements from
-this compute log; the warm-up `Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p`
-program. The socle reduction is false and must not be resurrected as a target.
+**Not yet formalized in Lean:** the cyclic `Z_n` mod-6 theorem as a top-level theorem; the concrete
+rank/cardinality bookkeeping turning the abstract order-two hypotheses into `s2 >= 2` and `s2 = 1`
+statements; the Lemma-4/order-three-extra argument for the `r3 <= 1` cases; any nimber/Grundy
+statements from this compute log; the warm-up `Z3 x Z_p` spectral statements; and the open/adaptive
+`Z3^2 x Z_p` program. The socle reduction is false and must not be resurrected as a target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills

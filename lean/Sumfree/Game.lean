@@ -80,6 +80,170 @@ theorem empty_move_iff_ne_zero {o : G} :
     Move (∅ : Finset G) o ↔ o ≠ 0 := by
   simp [Move, FiniteBuildGame.Move, valid_singleton_iff]
 
+omit [Fintype G] [DecidableEq G] in
+theorem legal_ne_zero {A : Set G} {x : G} (hx : Legal A x) :
+    x ≠ 0 := by
+  intro hx0
+  exact hx.2 (Or.inl rfl) (Or.inl rfl) (Or.inl rfl) (by simp [hx0])
+
+section Neg
+
+/-- Mirror-ready positions for the negation strategy. -/
+def NegGood (S : Finset G) : Prop :=
+  Valid S ∧ NegInvariant (S : Set G)
+
+omit [Fintype G] [DecidableEq G] in
+theorem negInvariant_empty :
+    NegInvariant ((∅ : Finset G) : Set G) := by
+  intro x hx
+  simp at hx
+
+omit [Fintype G] [DecidableEq G] in
+theorem negInvariant_insert_pair {A : Set G} {y : G}
+    (hA : NegInvariant A) :
+    NegInvariant (insert (-y) (insert y A)) := by
+  intro z hz
+  rcases hz with hzNeg | hzRest
+  · subst z
+    exact Or.inr (Or.inl (by simp))
+  · rcases hzRest with hzY | hzA
+    · subst z
+      exact Or.inl rfl
+    · exact Or.inr (Or.inr (hA hzA))
+
+omit [Fintype G] in
+theorem negGood_step_of_live_no_obstructions
+    (hfixed : ∀ {S : Finset G} {y : G}, NegGood S -> Move S y -> -y ≠ y)
+    (hnoO3 : ∀ {S : Finset G} {y : G}, NegGood S -> Move S y -> y + y ≠ -y) :
+    ∀ {S : Finset G}, NegGood S -> ∀ y : G, Move S y ->
+      ∃ r : G, Move (insert y S) r ∧ NegGood (insert r (insert y S)) := by
+  intro S hgood y hymove
+  have hfixed_y : -y ≠ y := hfixed hgood hymove
+  have hnoO3_y : y + y ≠ -y := hnoO3 hgood hymove
+  rcases hgood with ⟨hvalid, hneg⟩
+  let r := -y
+  have hylegal : Legal (S : Set G) y := legal_of_move hymove
+  have hrlegal : Legal (insert y (S : Set G)) r := by
+    simpa [r] using neg_mirror_legal
+      (G := G) (A := (S : Set G)) (x := y)
+      hvalid hneg hylegal hfixed_y hnoO3_y
+  have hrmove : Move (insert y S) r :=
+    move_of_legal (S := insert y S) (x := r) (by simpa using hrlegal)
+  refine ⟨r, hrmove, ?_⟩
+  refine ⟨hrmove.2, ?_⟩
+  intro z
+  simpa [r, Finset.mem_coe] using
+    (negInvariant_insert_pair (A := (S : Set G)) (y := y) hneg (x := z))
+
+omit [Fintype G] in
+theorem negGood_step
+    (hfixed : ∀ x : G, x ≠ 0 -> -x ≠ x)
+    (hnoO3 : ∀ x : G, x ≠ 0 -> x + x ≠ -x) :
+    ∀ {S : Finset G}, NegGood S -> ∀ y : G, Move S y ->
+      ∃ r : G, Move (insert y S) r ∧ NegGood (insert r (insert y S)) := by
+  exact negGood_step_of_live_no_obstructions
+    (G := G)
+    (fun {S} {y} _ hymove =>
+      hfixed y (legal_ne_zero (legal_of_move (S := S) hymove)))
+    (fun {S} {y} _ hymove =>
+      hnoO3 y (legal_ne_zero (legal_of_move (S := S) hymove)))
+
+theorem negGood_isP_of_live_no_obstructions
+    (hfixed : ∀ {S : Finset G} {y : G}, NegGood S -> Move S y -> -y ≠ y)
+    (hnoO3 : ∀ {S : Finset G} {y : G}, NegGood S -> Move S y -> y + y ≠ -y)
+    {S : Finset G} (hgood : NegGood S) :
+    IsP S :=
+  FiniteBuildGame.isP_of_replyStrategy
+    (Valid := Valid) (Good := NegGood)
+    (negGood_step_of_live_no_obstructions (G := G) hfixed hnoO3) S hgood
+
+/--
+If negation has no nonzero fixed point and no nonzero order-three collision,
+the empty sum-free game is a P-position.
+-/
+theorem initial_isP_of_negation_no_obstructions
+    (hfixed : ∀ x : G, x ≠ 0 -> -x ≠ x)
+    (hnoO3 : ∀ x : G, x ≠ 0 -> x + x ≠ -x) :
+    IsP (∅ : Finset G) := by
+  have hgood : NegGood (G := G) (∅ : Finset G) :=
+    ⟨valid_empty (G := G), negInvariant_empty (G := G)⟩
+  exact FiniteBuildGame.isP_of_replyStrategy
+    (Valid := Valid) (Good := NegGood)
+    (negGood_step (G := G) hfixed hnoO3) (∅ : Finset G) hgood
+
+omit [Fintype G] [DecidableEq G] in
+private theorem neg_eq_self_of_add_self_eq_zero {m : G} (hm2 : m + m = 0) :
+    -m = m := by
+  have h := congrArg (fun t => -m + t) hm2
+  simpa [add_assoc] using h.symm
+
+def NegGoodWith (m : G) (S : Finset G) : Prop :=
+  NegGood S ∧ m ∈ S
+
+omit [Fintype G] [DecidableEq G] in
+theorem negInvariant_orderTwo_singleton {m : G} (hm2 : m + m = 0) :
+    NegInvariant (({m} : Finset G) : Set G) := by
+  intro x hx
+  simp only [Finset.mem_coe, Finset.mem_singleton] at hx ⊢
+  subst x
+  exact neg_eq_self_of_add_self_eq_zero hm2
+
+omit [Fintype G] in
+theorem negGoodWith_step_of_no_other_obstructions {m : G}
+    (hfixed : ∀ x : G, x ≠ 0 -> x ≠ m -> -x ≠ x)
+    (hnoO3 : ∀ x : G, x ≠ 0 -> x ≠ m -> x + x ≠ -x) :
+    ∀ {S : Finset G}, NegGoodWith m S -> ∀ y : G, Move S y ->
+      ∃ r : G, Move (insert y S) r ∧ NegGoodWith m (insert r (insert y S)) := by
+  intro S hgood y hymove
+  rcases hgood with ⟨hnegGood, hmS⟩
+  rcases hnegGood with ⟨hvalid, hneg⟩
+  let r := -y
+  have hylegal : Legal (S : Set G) y := legal_of_move hymove
+  have hy0 : y ≠ 0 := legal_ne_zero hylegal
+  have hym : y ≠ m := by
+    intro h
+    exact hymove.1 (by simpa [h] using hmS)
+  have hrlegal : Legal (insert y (S : Set G)) r := by
+    simpa [r] using neg_mirror_legal
+      (G := G) (A := (S : Set G)) (x := y)
+      hvalid hneg hylegal (hfixed y hy0 hym) (hnoO3 y hy0 hym)
+  have hrmove : Move (insert y S) r :=
+    move_of_legal (S := insert y S) (x := r) (by simpa using hrlegal)
+  refine ⟨r, hrmove, ?_⟩
+  refine ⟨⟨hrmove.2, ?_⟩, ?_⟩
+  · intro z
+    simpa [r, Finset.mem_coe] using
+      (negInvariant_insert_pair (A := (S : Set G)) (y := y) hneg (x := z))
+  · exact by simp [hmS]
+
+theorem orderTwo_singleton_isP_of_negation_no_other_obstructions {m : G}
+    (hm2 : m + m = 0) (hm0 : m ≠ 0)
+    (hfixed : ∀ x : G, x ≠ 0 -> x ≠ m -> -x ≠ x)
+    (hnoO3 : ∀ x : G, x ≠ 0 -> x ≠ m -> x + x ≠ -x) :
+    IsP ({m} : Finset G) := by
+  have hgood : NegGoodWith (G := G) m ({m} : Finset G) :=
+    ⟨⟨valid_singleton_of_ne_zero (G := G) hm0,
+        negInvariant_orderTwo_singleton (G := G) hm2⟩,
+      by simp⟩
+  exact FiniteBuildGame.isP_of_replyStrategy
+    (Valid := Valid) (Good := NegGoodWith m)
+    (negGoodWith_step_of_no_other_obstructions (G := G) hfixed hnoO3)
+    ({m} : Finset G) hgood
+
+theorem initial_win_of_orderTwo_no_other_negation_obstructions {m : G}
+    (hm2 : m + m = 0) (hm0 : m ≠ 0)
+    (hfixed : ∀ x : G, x ≠ 0 -> x ≠ m -> -x ≠ x)
+    (hnoO3 : ∀ x : G, x ≠ 0 -> x ≠ m -> x + x ≠ -x) :
+    Win (∅ : Finset G) := by
+  have hmove : Move (∅ : Finset G) m :=
+    (empty_move_iff_ne_zero (G := G)).2 hm0
+  exact FiniteBuildGame.win_of_move_to_isP hmove
+    (by
+      simpa using orderTwo_singleton_isP_of_negation_no_other_obstructions
+        (G := G) hm2 hm0 hfixed hnoO3)
+
+end Neg
+
 section Tau
 
 /-- Mirror-ready positions for translation by an order-two element. -/
@@ -179,6 +343,48 @@ theorem win_after_nonexception_opening_of_orderTwoMirror {v x : G}
   rcases tauPairGood_from_empty (G := G) hv2 hv0 hxmove hx_ne_v with
     ⟨r, hrmove, hgood⟩
   exact FiniteBuildGame.win_of_move_to_isP hrmove (tauGood_isP (G := G) hv2 hv0 hgood)
+
+/--
+If every legal opening has a distinct nonzero order-two translation available,
+then the empty game is a P-position.
+
+This is the abstract Lean form of the `s₂ >= 2` spare-order-two argument.
+-/
+theorem initial_isP_of_spare_orderTwo
+    (hspare : ∀ x : G, Move (∅ : Finset G) x ->
+      ∃ v : G, v + v = 0 ∧ v ≠ 0 ∧ x ≠ v) :
+    IsP (∅ : Finset G) := by
+  change FiniteBuildGame.IsP Valid (∅ : Finset G)
+  rw [FiniteBuildGame.isP_iff_all_children_win]
+  intro x hxmove
+  rcases hspare x hxmove with ⟨v, hv2, hv0, hxv⟩
+  exact win_after_nonexception_opening_of_orderTwoMirror
+    (G := G) (v := v) (x := x) hv2 hv0 hxmove hxv
+
+/--
+For any fixed nonzero order-two element `m`, all openings except `m` are
+answered by the `tau_m` mirror. Thus the empty game is P exactly when the
+singleton `{m}` is N.
+-/
+theorem initial_isP_iff_orderTwo_child_win {m : G}
+    (hm2 : m + m = 0) (hm0 : m ≠ 0) :
+    IsP (∅ : Finset G) ↔ Win ({m} : Finset G) := by
+  constructor
+  · intro hP
+    have hmove : Move (∅ : Finset G) m :=
+      (empty_move_iff_ne_zero (G := G)).2 hm0
+    have hall := (FiniteBuildGame.isP_iff_all_children_win
+      (Valid := Valid) (S := (∅ : Finset G))).mp hP
+    simpa using hall m hmove
+  · intro hmwin
+    change FiniteBuildGame.IsP Valid (∅ : Finset G)
+    rw [FiniteBuildGame.isP_iff_all_children_win]
+    intro x hxmove
+    by_cases hxm : x = m
+    · subst x
+      simpa using hmwin
+    · exact win_after_nonexception_opening_of_orderTwoMirror
+        (G := G) (v := m) (x := x) hm2 hm0 hxmove hxm
 
 end Tau
 
