@@ -13,6 +13,35 @@ The **sum-free achievement game** on a finite abelian group `G`: players alterna
 keeping the chosen set sum-free (no `a+b=c`, `a=b` allowed); last to move wins (normal play).
 `N` = player-to-move (1st) wins, `P` = 2nd wins.
 
+## Current Lean/proof status (2026-07-07)
+
+The Lean layer is narrower than this compute log. Current build check:
+`cd lean && nix develop -c env LEAN_NUM_THREADS=2 lake build Sumfree`.
+
+**Formalized in Lean and build-green:**
+- finite normal-play building-game semantics:
+  [`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean);
+- sum-free legality plus local mirror lemmas:
+  [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean);
+- finite sum-free game bridge and exponent-three theorem:
+  `Sumfree.Game.f3_initial_win` in
+  [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean), with stable wrapper names in
+  [`../../lean/Sumfree/Almost/F3Outcome.lean`](../../lean/Sumfree/Almost/F3Outcome.lean);
+- labelled `ZMod 2 x F_3^b` residual proof:
+  `deadSlot_not_labelLegal`, `PairCompleted`, and `pair_completion` in
+  [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean);
+- labelled-to-group bridge:
+  [`../../lean/Sumfree/Z2F3Bridge.lean`](../../lean/Sumfree/Z2F3Bridge.lean);
+- full `ZMod 2 x F_3^b` game theorem:
+  `Sumfree.Z2F3Game.initial_isP` in
+  [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
+  [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
+
+**Not yet formalized in Lean:** the cyclic `Z_n` mod-6 theorem as a top-level theorem; the broader
+abelian theorem pieces (`s2 >= 2`, `s2 = 1` reduction, `r3 <= 1`); any nimber/Grundy statements from
+this compute log; the warm-up `Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p`
+program. The socle reduction is false and must not be resurrected as a target.
+
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills
 `𝒢(G)=𝒢(G[6])` and "odd `G` w/ 3-torsion ⟹ N". Read first:

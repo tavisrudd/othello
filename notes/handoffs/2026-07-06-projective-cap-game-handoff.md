@@ -29,7 +29,8 @@ replacement.
 A review pass reworked the math below. These supersede the looser statements later in the doc; read
 them first, they change the priorities.
 
-**Lean status (2026-07-07).** The residual grid vocabulary has started in
+**Lean status (2026-07-07).** Cross-references below name the current files; do not rename Lean files
+to match older prose. The residual grid vocabulary has started in
 [`../../lean/ProjectiveCap/Grid.lean`](../../lean/ProjectiveCap/Grid.lean). The finite
 normal-play "add one legal point" kernel is in
 [`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean), with the affine cap game in
@@ -52,7 +53,8 @@ not yet proved in Lean are named in
 extension set. The
 odd-plane escape target is isolated in
 [`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).
-The game-valued residual target is `ProjectiveCap.Almost.OddEscapeGameStatement`. The old
+The game-valued residual target is `ProjectiveCap.Almost.OddEscapeGameStatement`; it is still a
+target statement, not a theorem. The old
 `ProjectiveCap/Affine.lean` and `ProjectiveCap/BuildGame.lean` files are compatibility imports only;
 new affine work should use the `CapGame` namespace.
 

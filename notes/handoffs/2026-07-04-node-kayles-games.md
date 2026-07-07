@@ -11,6 +11,32 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 - [OEIS submission draft](../2026-07-04-sumfree-oeis-draft.md) + `../2026-07-04-sumfree-bfile.txt`
 - Banked scripts: `../2026-07-04-cayley-*.py`, `../2026-07-04-sumfree-*.py`, `../2026-07-04-improved-sumfree.py`, `../2026-07-04-cayley-path-power.py`; Rust solvers in `../sumfree-solver/` (binaries gitignored).
 
+## Current Lean status (2026-07-07)
+
+Lean cross-references should point to the current files under [`../../lean/`](../../lean/); do not
+rename Lean files to match older prose names.
+
+**Build-green Lean coverage now includes:**
+- Node-Kayles recurrence, certificates, and Grundy/component-XOR layer:
+  [`../../lean/NodeKayles/Basic.lean`](../../lean/NodeKayles/Basic.lean),
+  [`../../lean/NodeKayles/Certificate.lean`](../../lean/NodeKayles/Certificate.lean), and
+  [`../../lean/NodeKayles/Grundy.lean`](../../lean/NodeKayles/Grundy.lean);
+- shared finite building-game semantics:
+  [`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean);
+- sum-free formal endpoints `F_3^n = N` and `ZMod 2 x F_3^b = P`:
+  [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean),
+  [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean),
+  [`../../lean/Sumfree/Z2F3Bridge.lean`](../../lean/Sumfree/Z2F3Bridge.lean),
+  [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), and wrappers under
+  [`../../lean/Sumfree/Almost/`](../../lean/Sumfree/Almost/);
+- Queens coordinate/game bridge targets:
+  [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
+  [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
+
+**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level theorem, the
+broader abelian sum-free theorem pieces, the affine cap all-`q` theorem, the projective odd-plane
+escape theorem, and the Queens `N20J10LuckyTarget`.
+
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 
 **★★★ `Z3²×Z7 = P` — the socle reduction is disproven.** Full note:
@@ -61,7 +87,8 @@ Full session log: **Handoff Note — session 2026-07-05--4** + **--2/--3** below
 - [x] **Interval family C_n^k = octal `0.[1×k][3×k]7`** (verified 2 ways). k=1 = Dawson 0.137
   (period 34); **k≥2 UNBOUNDED nimbers, no period → open octal games** (Guy-conjecture instances).
 - [x] **★ Game (b): sum-free achievement game on Z_n — SOLVED, theorem PROVEN.**
-  `G(Z_n)=0 (2nd player wins) iff n≡0,1,5 (mod 6)`, all six residues (obstruction-counting via
+  `G(Z_n)=0 (2nd player wins) iff n≡0,1,5 (mod 6)`, all six residues (text proof; not yet a
+  top-level Lean theorem; obstruction-counting via
   negation + translation mirrors; Lemmas 1–4 symbolic, no load-bearing machine step). New OEIS-absent
   sequence to **n=65** (banked Rust multiplier-quotient solver). **OEIS submission DRAFT ready — USER
   submits, do NOT submit.**

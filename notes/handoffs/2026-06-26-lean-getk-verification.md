@@ -38,7 +38,9 @@ nix flake + direnv). Phases 1 & 2 are **complete, committed, and `sorry`-free**.
 
 ## Status — what is proved (no `sorry`)
 
-All in `lean/NodeKayles/Basic.lean`; see `lean/TRUST.md` for the full Lean↔Rust map.
+Core recurrence and graph-bridge theorems live in `lean/NodeKayles/Basic.lean`; the certificate
+kernel is in `lean/NodeKayles/Certificate.lean`; the self-contained Grundy and component-XOR layer is
+in `lean/NodeKayles/Grundy.lean`. See `lean/TRUST.md` for the full Lean↔Rust map.
 
 | Lean | establishes | Rust |
 |------|-------------|------|
@@ -98,7 +100,9 @@ bridge plan; mirrored in TRUST.md Phase 4). Revisit when the library bumps to �
 
 | What | Where |
 |------|-------|
-| All Lean theorems | `lean/NodeKayles/Basic.lean` |
+| Node-Kayles recurrence / graph bridge | `lean/NodeKayles/Basic.lean` |
+| Certificate kernel | `lean/NodeKayles/Certificate.lean` |
+| Grundy and component-XOR layer | `lean/NodeKayles/Grundy.lean` |
 | Trust-chain doc | `lean/TRUST.md` |
 | Project status / build steps | `lean/README.md` |
 | Scalar spec (mirror target) | `dense.rs:584` `wins_rec`, `:541` `graph_wins`, `:516` `projected_code`, `:501` `adj_from_code` |
