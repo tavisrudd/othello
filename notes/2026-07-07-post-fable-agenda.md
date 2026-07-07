@@ -309,6 +309,54 @@ Item 5 (methods paper) rides with P2's writing window. Items 2 and 6 are explici
 scout-then-decide. Standing rule unchanged: every new item gets its own novelty search before
 any "new/first" claim is written down.
 
+## Elaborations — highest-value items, one at a time (Fable, in rank order)
+
+Overall rank by the agenda's own criterion (P × value): **P1 → item 12 → P2 → C1 → item 13 →
+item 1 (torus)**. Elaborations added as written; each states contribution weight, kill risks,
+and execution shape.
+
+### E1. P1 — the sum-free + affine-cap paper (rank #1)
+
+**Why it outranks everything:** it is the only item where the research is FINISHED and the
+value locked in — two proven theorems plus a new object, needing only assembly. Every other
+high-value item carries compute risk (C1; P2's G(18) call), adoption risk (12, 13), or proof
+risk (Track K). P1's residual risk is editorial. A ~95% × high-value item gets finished first,
+and it is the team's proof-of-credibility for the ambitious items behind it.
+
+**Contents ranked by contribution weight:**
+
+1. **The AG(n,q) cap-game theorem — P for all n, EVERY prime power q.** Stronger than it
+   looks: the whole affine hierarchy settled with no compute in the proof — two mirrors split
+   by characteristic (reflection σ_c + parity lemma, q odd; translation τ_v, fixed-point-free
+   exactly because 2v = 0, char 2), unified by the shared parity lemma. Subsumes the q=3
+   cap-set game conjecture, settles all dimensions. Referee-attractive: the char-2/odd
+   dichotomy is EXPLAINED by the mechanism, not case-bashed.
+2. **The sum-free Z_n outcome theorem, all six residues.** New impartial game, new sequence
+   (no OEIS match to n=61), complete classification via obstruction counting (O2/O3 by n mod
+   6; translation-mirror rescue at n≡0). The Lemma-4 episode goes IN the paper as a remark —
+   we found our own false lemma, corrected it, machine-checked to n ≤ 120 (C1 report). It
+   forecloses the exact hole a referee would hunt and displays the verification discipline.
+3. **The nofil corollaries** — first infinite determined STS family (AG(n,3) as STS) + the
+   PG(m,2)/mod-6 observation. The positioning contribution: answers a published question's
+   structured side and frames everything inside an existing genus (JCD 2022), not a
+   self-invented game.
+
+**Kill risks + mitigations in place:** (i) the convention equivalence (nofil's conventions vs
+ours) — a silent mismatch would invalidate the corollaries; that is why kernel (c) proves the
+equivalence carefully, and it is the one section Opus must not touch beyond typesetting.
+(ii) Novelty wording — the nofil prior-art revision is the cautionary tale; the abstract
+claims the theorems and the family, never "a new game."
+
+**Execution shape (~2 Opus sessions + one user pass):** F1 kernels = the load-bearing
+sections, written; O3 scaffold compiles with `\input` slots; O4 related work pulled. Opus:
+drop kernels into slots, write intro/discussion FROM the kernels, consistency pass under the
+standing guardrails; user review → venue. Venue: J. Combin. Designs first (nofil framing
+hands them natural referees: Huggan/Huntemann/Stevens); Integers fallback costs only
+reformatting.
+
+**Unlocks:** P0 ships WITH it (b-file ↔ paper cross-citation); P3 cites its framing; Part II
+item 1 (Bose/Skolem) becomes "the sequel" with a warm referee pool.
+
 ### Sequencing recommendation
 
 Month 1: P0, P1, C1, WP-1/WP-2 (+ C5 in idle cycles). Month 2: P2 (post-G(17)), C2, item 4,
