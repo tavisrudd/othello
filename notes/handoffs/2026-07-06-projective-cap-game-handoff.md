@@ -818,6 +818,16 @@ conic position on/external/internal). Two results:
 - **Route (D) note:** per-S₃ subtree solves (private memo) could push the (ON)/escape table to
   q=23 without the walled global arena — size it AFTER the G(17) nimber run frees the box.
 
+**2026-07-07 (session 8 cont.) — published prior art for the GENUS found: nofil.**
+[`2026-07-07-nofil-connection.md`](../2026-07-07-nofil-connection.md): Huggan–Huntemann–Stevens
+(JCD 2022, arXiv:2103.13501) play the identical game on Steiner triple systems; deciding nofil
+positions on STS is **PSPACE-complete** (Node-Kayles endgame embedding) — import as motivation:
+structured-family theorems are the tractable frontier, and `PG(2,q)` sits just past it. Our
+exports: the affine theorem = nofil's first infinite determined STS family (`AG(n,3)`, value 0,
+cross-checked against their STS(9)); the `PG(m,2)` column (P for m ≤ 4) breaks their v mod 6
+nim-parity trend and is a clean open conjecture in their language (smallest open case
+`STS(63)` = `F₂⁶` sum-free). Cite in the projective paper.
+
 **Open-math plan written**: [`2026-07-07-projcap-open-math-plan.md`](../2026-07-07-projcap-open-math-plan.md)
 — settled-results table, the open kernel (ESC) with its known proof constraints, attack routes
 (A adaptive-invariant / B finer counting / C per-q Lean certificates / D falsification / E m≥3)

@@ -126,3 +126,11 @@ outcome is uniformly P**. Higher dimension / larger field makes the game *easier
 - **`k-cap` / higher-degree variants (open).** "No `t` collinear" for `t > 3`, or "no affine plane" /
   higher-flat achievement games, are not covered by this argument (the mirror can create a longer
   forbidden flat); each is a fresh problem.
+- **Published prior art for the genus — nofil (added 2026-07-07).** Huggan–Huntemann–Stevens,
+  *Nofil on Steiner triple systems*, J. Combin. Designs 30 (2022) 19–47 (arXiv:2103.13501) is the
+  SAME game (block-filling moves illegal, normal play, last mover wins) on STS. `AG(n,3)` is an
+  STS, so **this theorem's `q=3` case gives nofil its first infinite determined STS family:
+  nim-value 0 on `STS(3ⁿ)` for all `n`** (their Prop. 6, vertex-transitivity, pins the value to
+  {0,1}; P ⇒ 0). Their computed STS(9) = `AG(2,3)` (value 0) independently cross-checks the
+  theorem. The paper's framing must position the theorem INSIDE their genus (new families/theorems,
+  not a new game). Full map: [nofil connection](2026-07-07-nofil-connection.md).

@@ -8,6 +8,11 @@ Umbrella + entry point for the Node-Kayles open-problem thread. Detailed notes:
 - [game (a) Cay⁺(Z_n,S) outcome law](../2026-07-04-cayley-nodekayles-outcome-law.md)
 - [game (b) sum-free / cap-set](../2026-07-04-sumfree-capset-game.md) — detailed working log.
 - [★ sum-free theorem (clean write-up)](../2026-07-04-sumfree-game-theorem.md)
+- [★ nofil connection (2026-07-07)](../2026-07-07-nofil-connection.md) — the genus IS published
+  (Huggan–Huntemann–Stevens, JCD 2022, same game on STS); our AG(n,3) theorem = nofil's first
+  infinite determined family; PG(m,2) column = their open frontier; PSPACE + Node-Kayles-endgame
+  imports. REVISES the 2026-07-04 "appears-novel" verdict — papers frame as new theorems in their
+  genus.
 - [OEIS submission draft](../2026-07-04-sumfree-oeis-draft.md) + `../2026-07-04-sumfree-bfile.txt`
 - Banked scripts: `../2026-07-04-cayley-*.py`, `../2026-07-04-sumfree-*.py`, `../2026-07-04-improved-sumfree.py`, `../2026-07-04-cayley-path-power.py`; Rust solvers in `../sumfree-solver/` (binaries gitignored).
 

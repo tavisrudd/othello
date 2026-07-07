@@ -56,11 +56,16 @@ hypergraph of Z_n). The maximal-sum-free-set counting problem (the game's termin
 A344227 (nimbers of the non-attacking-queens Node-Kayles game). If the graph cousin — Node-Kayles on
 the quadratic-residue Cayley graph Cay^+(Z_p, QR) = Paley_p — is submitted, cross-reference it here.
 
-Prior-art note (search 2026-07-04): the sum-free-set *game* appears unpublished (nearest = Node-Kayles
-frameworks, group achievement games, maximal-sum-free-set counting — all distinct). The F_3^n cap
-cousin is likewise novel but has closer named neighbours to distinguish (Anti-Set, Clark–Fisk–Goren,
-*Involve* 2016; Impartial SET removal game, Uiterwijk–Hufkens, CG 2022). Distinct from the extremal
-cap-set sequence A090245.
+Prior-art note (search 2026-07-04; REVISED 2026-07-07): the game GENUS is published as "nofil" —
+M. A. Huggan, S. Huntemann, B. Stevens, The combinatorial game Nofil played on Steiner triple
+systems, J. Combin. Designs 30 (2022) 19-47, arXiv:2103.13501 (same rules on STS block
+hypergraphs; cite in %D/%H). The sum-free-set game on Z_n is that genus on the (non-STS)
+Schur-triple hypergraph and appears unpublished as an instance; this sequence is new. Other
+neighbours to distinguish: Node-Kayles frameworks, group achievement games (Benesh-Ernst-Sieben),
+maximal-sum-free-set counting; the F_3^n cap cousin = nofil on the affine STS family (Anti-Set,
+Clark-Fisk-Goren, *Involve* 2016 and the Impartial SET removal game, Uiterwijk-Hufkens, CG 2022
+remain distinct). Distinct from the extremal cap-set sequence A090245. See
+2026-07-07-nofil-connection.md.
 
 ### %K (Keywords)
 

@@ -176,9 +176,17 @@ parity forces only small groups (measured — see the note).
   in the same form). It is **adjacent to, not the same as**, the extremal cap-set problem (maximum cap
   size — Ellenberg–Gijswijt, FunSearch): max size vs game outcome; the neighbour is the *maximal*-cap
   spectrum, not the *maximum* cap (OEIS A090245 is the extremal one, distinct).
-- **Prior-art verdict on the cap game (search 2026-07-04): appears-novel, but with named neighbours
-  to CITE and DISTINGUISH** — this game (impartial, *shared collection*, *normal* play, *building* a
-  cap) is not any of:
+- **Prior-art verdict on the cap game — REVISED 2026-07-07: the GENUS is published.**
+  Huggan–Huntemann–Stevens, *Nofil on Steiner triple systems*, J. Combin. Designs 30 (2022) 19–47
+  (arXiv:2103.13501): the identical game (block-filling moves illegal, normal play) on STS —
+  `AG(n,3)` and `PG(m,2)` are the two classical infinite STS families, so the cap-set game and the
+  `F₂` sum-free game are nofil on those systems. Their STS(9)=`AG(2,3)` and STS(7)=Fano values (0)
+  cross-check ours; our affine theorem gives nofil its first infinite determined family, and our
+  `PG(m,2)` P-data (m ≤ 4) breaks their v mod 6 nim-parity trend. The `Z_n` sum-free game is the
+  same genus on a non-STS Schur-triple hypergraph (novel INSTANCE, published genus). Papers must
+  frame contributions as new theorems/families inside their genus, not a new game. Details:
+  [nofil connection](2026-07-07-nofil-connection.md). *(The 2026-07-04 verdict below stands for the
+  named non-nofil neighbours.)* This game is not any of:
   - **Anti-Set** — Clark, Fisk, Goren, "A variation on the game Set," *Involve* 9(2):249–264 (2016):
     *separate hands, misère, explicit strategy* (no nimbers). Different game.
   - **Impartial SET** — Uiterwijk & Hufkens, CG 2022 (LNCS, Springer 2023,
