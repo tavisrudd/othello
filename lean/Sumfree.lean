@@ -6,6 +6,7 @@ import Sumfree.RankProducts
 import Sumfree.RankPi
 import Sumfree.CyclicZMod
 import Sumfree.CyclicRanks
+import Sumfree.FiniteAbelianRanks
 import Sumfree.Z2F3Labels
 import Sumfree.Z2F3Bridge
 import Sumfree.Z2F3Ranks
