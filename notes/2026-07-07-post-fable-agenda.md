@@ -273,6 +273,20 @@ existing problems to close — each seeded by an artifact already on this list)
    (a formalized Szőnyi–Weiner statement sharpens what the (ON) attempt may assume). **Odds:
    ~35–45%; enter only after item 10's foundations exist.**
 
+18. **Commercial face: certified plans + agent verification harnesses.** Two transfers with
+   real 2026 demand, both re-uses of what's already being built. (a) A reply-book certificate
+   IS a machine-checkable *contingent plan* — a policy with a coverage proof over every
+   adversary/environment move. That is what safety-critical autonomy, logistics, and
+   reactive-synthesis-adjacent controller verification pay for: expensive planner emits,
+   cheap independent checker validates, auditor re-runs the checker (the SAT/DRAT commercial
+   pattern, applied to planning). Seed: C9/C11 + item 12's format — the demo is "certified
+   adversarial plan, checked in milliseconds". (b) The audit-gate delegation protocol (exact-
+   match validation gates, adversarial audit passes, report-file contracts — the C-queue
+   mechanics) is a working QA harness for agentic AI, which enterprises currently lack and
+   are actively buying; item 14's benchmark is its evidence base. Disposition: NOT a paper
+   lane — user decides whether/how to commercialize (open-core protocol + consulting is the
+   low-lift shape); the research items stand alone regardless.
+
 These are portfolio-capped: at most ONE area-opener active at a time, entered only through
 its already-listed seed artifact (12 ← items 7 + C9/C11; 13 ← items 2/4/11; 14 ← item 5;
 15 ← the NodeKayles Lean development + item 12's format; 16 ← item 2/C8 + the certificates;
