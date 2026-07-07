@@ -664,5 +664,18 @@ theorem initial_isP_of_six_mul {k : ℕ} [NeZero (6 * k)] :
     FiniteBuildGame.win_of_move_to_isP hmove hpairP
   exact (initial_isP_iff_orderTwo_child_win (G := ZMod (6 * k)) (m := m) hm2 hm0).2 hchildWin
 
+/-- Divisibility wrapper for the cyclic `n ≡ 0 (mod 6)` branch. -/
+theorem initial_isP_of_six_dvd {n : ℕ} [NeZero n] (h6 : 6 ∣ n) :
+    Game.IsP (∅ : Finset (ZMod n)) := by
+  rcases h6 with ⟨k, rfl⟩
+  exact initial_isP_of_six_mul (k := k)
+
+/-- Equality wrapper for the cyclic `n ≡ 3 (mod 6)` branch. -/
+theorem initial_win_of_eq_three_mul_odd {n k : ℕ} [NeZero n]
+    (hn : n = 3 * k) (hk : Odd k) :
+    Game.Win (∅ : Finset (ZMod n)) := by
+  subst n
+  exact initial_win_of_three_mul_odd (k := k) hk
+
 end CyclicZMod
 end Sumfree

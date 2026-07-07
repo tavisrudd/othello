@@ -47,7 +47,8 @@ rename Lean files to match older prose names.
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
   `initial_win_of_even_of_not_three_dvd`, plus `initial_win_of_three_mul_odd` for `n = 3*k`, `k` odd
-  and `initial_isP_of_six_mul` for `n = 6*k`;
+  and `initial_isP_of_six_mul` for `n = 6*k`, with arbitrary-`n` wrappers `initial_isP_of_six_dvd`
+  and `initial_win_of_eq_three_mul_odd`;
 - Queens coordinate/game bridge targets:
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).

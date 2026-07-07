@@ -55,7 +55,8 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_isP_of_odd_of_not_three_dvd` proves the odd, `3 ∤ n` P cases and
   `initial_win_of_even_of_not_three_dvd` proves the even, `3 ∤ n` N cases from the obstruction wrappers;
   `initial_win_of_three_mul_odd` proves the `n = 3*k`, `k` odd N branch; and
-  `initial_isP_of_six_mul` proves the `n = 6*k` P branch;
+  `initial_isP_of_six_mul` proves the `n = 6*k` P branch, with arbitrary-`n` wrappers
+  `initial_isP_of_six_dvd` and `initial_win_of_eq_three_mul_odd`;
 - labelled `ZMod 2 x F_3^b` residual proof:
   `deadSlot_not_labelLegal`, `PairCompleted`, and `pair_completion` in
   [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean);
