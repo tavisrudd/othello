@@ -437,6 +437,44 @@ must quote identical numbers from one generated source — no hand-copied tables
 **Unlocks:** the A344227 OEIS update (user); the n=18 certificate becomes item 12's flagship
 instance; the methodology section seeds item 9 (JOSS) and item 14's case-study corpus.
 
+### E4. C1 — the q=23 escape table (rank #4)
+
+**Why #4 despite being "just compute":** it is the only item on the list with a live
+possibility of CHANGING WHAT IS TRUE for the whole program, in either direction, and the
+2026-07-06 correction made that possibility real. The old reading ("min-escape relaxes as q
+grows") died: min-escape is erratic — 1, 7, 13, 13, 46, then **5 at q=17 with bad = 152 of
+157**. The crux is a near-cancellation, not a comfortable margin. q=23 is the next
+uncomputed rung where the cancellation could complete. Every session spent on route-(B)
+invariants or Lean certificates is working ON a conjecture that q=23 could simply refute —
+which is why the falsification data outranks all of Track K at current odds.
+
+**Both outcomes are wins, asymmetrically:**
+- *escape = 0 at some class:* PG(2,23) is N — the conjecture is FALSE, the program pivots to
+  characterizing the counterexample, and that paper (a first-player win in a projective cap
+  game, against the parity heuristic and the q ≤ 19 data) is the best publication the program
+  could produce. Everything else on the list re-ranks the same day.
+- *min-escape ≥ 1:* the ladder extends, the erratic-margin data sharpens (does the q=17 crash
+  recur? deepen?), P3 gains its strongest table, and the odd-complete-arc-abundance coupling
+  gets a real test (O1's census gives the arc counts to correlate against).
+
+**Execution state (all gates in place):** the `esc` private-memo mode exists precisely for
+this (the q=19 global-arena wall), C3 is finishing its q=17/q=19 exact-match validation gate
+now, and the mode's class-index filter makes the campaign resumable class-by-class under the
+box's memory ceiling. Remaining unknowns: per-class peak memo at q=23 (C3's report gives the
+q=19 scaling datum; extrapolate before committing the box) and wall-clock (campaign-sized,
+fine to spread across days as the z5 run allows).
+
+**Kill risks:** (i) *memory* — a q=23 class blows the `--cap`; mitigation is built in (abort
++ report + resume), and a handful of walled classes still yields a partial table with the
+min over solved classes as a conditional bound — report it as PARTIAL, never as the verdict.
+(ii) *Silent wrongness* — the F3 audit + C8 exact-canon check exist for exactly this run;
+run C8's q=17 witness recheck BEFORE trusting a q=23 surprise in either direction. A q=23
+escape=0 claim goes through independent re-verification of that single class (fresh code
+path, exact canon) before anyone says "counterexample."
+
+**Unlocks:** P3's data spine; the (ON)/route-(B) go/no-go re-rank; item 11's census shares
+the same runs.
+
 ### Sequencing recommendation
 
 Month 1: P0, P1, C1, WP-1/WP-2 (+ C5 in idle cycles). Month 2: P2 (post-G(17)), C2, item 4,
