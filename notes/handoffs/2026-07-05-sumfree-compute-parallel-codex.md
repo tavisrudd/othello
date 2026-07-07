@@ -105,6 +105,11 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/FiniteAbelianRanks.lean`](../../lean/Sumfree/FiniteAbelianRanks.lean):
   `exists_cyclic_factor_rank_counts` transports the cyclic-factor rank counts from
   `AddCommGroup.equiv_directSum_zmod_of_finite'` back to an arbitrary finite abelian group;
+- canonical finite-abelian rank API in
+  [`../../lean/Sumfree/CanonicalRanks.lean`](../../lean/Sumfree/CanonicalRanks.lean):
+  `twoRank` and `threeRank` are chosen from the finite-abelian existence theorem, while
+  `hasTwoRank_unique`, `hasThreeRank_unique`, `hasTwoRank_iff_eq_twoRank`, and
+  `hasThreeRank_iff_eq_threeRank` prove independence from the chosen cyclic decomposition;
 - finite-abelian outcome wrapper in
   [`../../lean/Sumfree/FiniteAbelianOutcome.lean`](../../lean/Sumfree/FiniteAbelianOutcome.lean):
   `exists_cyclic_factor_rank_counts_with_outcome_of_threeRank_le_one` combines those
@@ -135,8 +140,7 @@ The Lean layer is narrower than this compute log. Current build check:
   `hasThreeRank_z2v_zmod3_module`, `hasRanks_z2v_zmod3_module`, and
   the underlying kernel-cardinality computations.
 
-**Not yet formalized in Lean:** a canonical named `s₂/r₃` API independent of the cyclic factors chosen
-by mathlib's structure theorem; any nimber/Grundy statements from this compute log; the warm-up
+**Not yet formalized in Lean:** any nimber/Grundy statements from this compute log; the warm-up
 `Z3 x Z_p` Grundy/spectral `*1` statement; and the open/adaptive `Z3^2 x Z_p` program. The exact
 finite-abelian classification is formalized only through the `r₃ <= 1` wrapper above. The socle reduction is false
 and must not be resurrected as a target.
