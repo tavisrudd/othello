@@ -61,6 +61,11 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two`; combined count-case wrappers
   `initial_isP_of_obstruction_count_P_cases` and
   `initial_win_of_obstruction_count_N_cases`;
+- rank-count interface in [`../../lean/Sumfree/RankCounts.lean`](../../lean/Sumfree/RankCounts.lean):
+  `HasTwoRank`, `HasThreeRank`,
+  `initial_isP_of_rank_count_P_cases`, `initial_win_of_rank_count_N_cases`,
+  `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one`, and
+  `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;
 - cyclic `ZMod n` bridge in normal-form branches in
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean):
   `initial_isP_of_odd_of_not_three_dvd` proves the odd, `3 ∤ n` P cases and
@@ -88,11 +93,11 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
-**Not yet formalized in Lean:** the finite-abelian algebra turning named ranks `s2` and `r3` into
-the obstruction-cardinality hypotheses (`O2.card = 0/1/≥2`, `O3.card = 0/2`) used by the combined
-count-case wrappers; any nimber/Grundy statements from this compute log; the warm-up `Z3 x Z_p`
-spectral statements; and the open/adaptive `Z3^2 x Z_p` program. The socle reduction is false and
-must not be resurrected as a target.
+**Not yet formalized in Lean:** deriving `HasTwoRank` and `HasThreeRank` from a finite-abelian
+structure-theorem/rank API, rather than taking them as explicit cardinality interfaces; any
+nimber/Grundy statements from this compute log; the warm-up `Z3 x Z_p` spectral statements; and the
+open/adaptive `Z3^2 x Z_p` program. The socle reduction is false and must not be resurrected as a
+target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills

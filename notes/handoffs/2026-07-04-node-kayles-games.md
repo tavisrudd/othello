@@ -49,6 +49,12 @@ rename Lean files to match older prose names.
   `initial_win_of_no_orderTwo_nonzeroOrderThree_card_eq_two` and
   `initial_isP_of_one_orderTwo_nonzeroOrderThree_card_eq_two`, packaged by
   `initial_isP_of_obstruction_count_P_cases` and `initial_win_of_obstruction_count_N_cases`;
+- SumFree rank-count interface:
+  [`../../lean/Sumfree/RankCounts.lean`](../../lean/Sumfree/RankCounts.lean), with
+  `HasTwoRank`, `HasThreeRank`, `initial_isP_of_rank_count_P_cases`, and
+  `initial_win_of_rank_count_N_cases`, plus the `r3 <= 1` iff wrappers
+  `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one` and
+  `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;
 - cyclic `ZMod n` bridge in normal-form branches:
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
@@ -66,10 +72,9 @@ rename Lean files to match older prose names.
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** the finite-abelian algebra turning named ranks
-`s2` and `r3` into the obstruction-cardinality hypotheses used by the SumFree count-case wrappers;
-the affine cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens
-`N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** deriving `HasTwoRank` and `HasThreeRank` from a
+finite-abelian structure-theorem/rank API; the affine cap all-`q` theorem; the projective odd-plane
+escape theorem; and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 
