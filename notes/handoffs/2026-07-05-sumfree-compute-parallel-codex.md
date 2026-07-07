@@ -89,6 +89,9 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_win_of_mod_six_two_or_three_or_four`, packaged as biconditionals
   `initial_isP_iff_mod_six_zero_or_one_or_five` and
   `initial_win_iff_mod_six_two_or_three_or_four`;
+- cyclic rank-count wrappers in [`../../lean/Sumfree/CyclicRanks.lean`](../../lean/Sumfree/CyclicRanks.lean):
+  `hasTwoRank_zmod_of_odd`, `hasTwoRank_zmod_of_even`,
+  `hasThreeRank_zmod_zero_of_not_three_dvd`, and `hasThreeRank_zmod_one_of_three_mul`;
 - labelled `ZMod 2 x F_3^b` residual proof:
   `deadSlot_not_labelLegal`, `avoidsDeadSlot_of_labelLegal`,
   `LabelLegal.move_ne_zero_of_anchor`, `LabelLegal.move_ne_anchor_of_anchor`, the explicit
