@@ -87,6 +87,10 @@ card_hyperbolaCells
 rowSparse_hyperbolaCells
 colSparse_hyperbolaCells
 partialPermutation_hyperbolaCells
+not_collinear_hyperbolaParamPoint
+affineCap_hyperbolaCells
+gridCap_hyperbolaCells
+gridCap_hyperbolaCells_and_card
 psi
 psi_involutive
 psi_onHyperbola_iff
@@ -121,6 +125,8 @@ The following are sorry-free Lean theorems:
 - `card_hyperbolaCells`: for `B != 0`, `HyperbolaCells` has cardinality `Fintype.card K - 1`.
 - `partialPermutation_hyperbolaCells`: for `B != 0`, the hyperbola cell set has at most one
   point in each row and column.
+- `gridCap_hyperbolaCells_and_card`: for `B != 0`, the hyperbola cell set is a residual
+  `GridCap` and has cardinality `Fintype.card K - 1`.
 - `psi_involutive`: if `B != 0` and `u != 0`, then `psi rho A B u` is involutive.
 - `psi_onHyperbola_iff`: under the same nonzero hypotheses, `psi_u` preserves the hyperbola.
 - `psi_hyperbolaParamPoint`: on parametrized conic points, `psi_u` acts as `t |-> u / t`.

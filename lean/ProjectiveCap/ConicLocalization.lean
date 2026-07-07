@@ -303,6 +303,63 @@ theorem partialPermutation_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
     PartialPermutation (K := K) (HyperbolaCells (K := K) rho A B) :=
   ⟨rowSparse_hyperbolaCells (K := K) hB, colSparse_hyperbolaCells (K := K) hB⟩
 
+omit [Fintype K] [DecidableEq K] in
+theorem not_collinear_hyperbolaParamPoint {rho A B t s v : K}
+    (hB : B ≠ 0) (ht : t ≠ 0) (hs : s ≠ 0) (hv : v ≠ 0)
+    (hts : t ≠ s) (htv : t ≠ v) (hsv : s ≠ v) :
+    ¬ Collinear (K := K)
+      (hyperbolaParamPoint rho A B t)
+      (hyperbolaParamPoint rho A B s)
+      (hyperbolaParamPoint rho A B v) := by
+  intro hcol
+  have hcancel :
+      (B * (s - t) * (v - t)) * (v - s) = 0 := by
+    unfold Collinear hyperbolaParamPoint at hcol
+    field_simp [hB, ht, hs, hv] at hcol
+    ring_nf at hcol ⊢
+    linear_combination hcol
+  have hleft : B * (s - t) * (v - t) ≠ 0 := by
+    refine mul_ne_zero (mul_ne_zero hB ?_) ?_
+    · exact sub_ne_zero.mpr hts.symm
+    · exact sub_ne_zero.mpr htv.symm
+  have hvsub : v - s = 0 := by
+    have hcancel' : (B * (s - t) * (v - t)) * (v - s) =
+        (B * (s - t) * (v - t)) * 0 := by
+      simpa using hcancel
+    exact mul_left_cancel₀ hleft hcancel'
+  exact hsv (sub_eq_zero.mp hvsub).symm
+
+omit [DecidableEq K] in
+theorem affineCap_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
+    AffineCap (K := K) (HyperbolaCells (K := K) rho A B) := by
+  intro a b c ha hb hc hab hac hbc hcol
+  have haOn : OnHyperbola (K := K) rho A B a := mem_hyperbolaCells.mp ha
+  have hbOn : OnHyperbola (K := K) rho A B b := mem_hyperbolaCells.mp hb
+  have hcOn : OnHyperbola (K := K) rho A B c := mem_hyperbolaCells.mp hc
+  rcases (onHyperbola_iff_exists_param (K := K) hB).mp haOn with ⟨t, ht, rfl⟩
+  rcases (onHyperbola_iff_exists_param (K := K) hB).mp hbOn with ⟨s, hs, rfl⟩
+  rcases (onHyperbola_iff_exists_param (K := K) hB).mp hcOn with ⟨v, hv, rfl⟩
+  have hts : t ≠ s := fun h => hab (by rw [h])
+  have htv : t ≠ v := fun h => hac (by rw [h])
+  have hsv : s ≠ v := fun h => hbc (by rw [h])
+  exact not_collinear_hyperbolaParamPoint (K := K) hB ht hs hv hts htv hsv hcol
+
+omit [DecidableEq K] in
+theorem gridCap_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
+    GridCap (K := K) (HyperbolaCells (K := K) rho A B) :=
+  ⟨partialPermutation_hyperbolaCells (K := K) hB,
+    affineCap_hyperbolaCells (K := K) hB⟩
+
+theorem gridCap_hyperbolaCells_and_card {rho A B : K} (hB : B ≠ 0) :
+    GridCap (K := K) (HyperbolaCells (K := K) rho A B) ∧
+      ((HyperbolaCells (K := K) rho A B).card : Int) =
+        (Fintype.card K : Int) - 1 := by
+  exact ⟨gridCap_hyperbolaCells (K := K) hB, by
+    rw [card_hyperbolaCells (K := K) hB]
+    have hcard_pos : 0 < Fintype.card K := Fintype.card_pos_iff.mpr ⟨(0 : K)⟩
+    have hle : 1 ≤ Fintype.card K := Nat.succ_le_of_lt hcard_pos
+    norm_num [Nat.cast_sub hle]⟩
+
 /--
 The translated-coordinate map
 `(t, s) |-> ((u / B) * s, (B / u) * t)`, transported back to grid
