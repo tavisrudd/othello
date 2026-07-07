@@ -1,4 +1,4 @@
-import Sumfree.Game
+import Sumfree.Grundy
 import Sumfree.Z2F3Bridge
 import Sumfree.Z2F3Ranks
 
@@ -191,6 +191,12 @@ theorem initial_isP [Nontrivial V]
     simpa [m] using afterOrderTwo_win hchar3 ha0
   · exact Game.win_after_nonexception_opening_of_orderTwoMirror
       (G := Z2V V) (v := m) (x := x) hm2 hm0 hxmove hx_m
+
+/-- The proved `ZMod 2 × F_3^b` P theorem gives root Grundy value `0`. -/
+theorem initial_grundy_eq_zero [Nontrivial V]
+    (hchar3 : ∀ z : V, z + z + z = 0) :
+    Game.Grundy (∅ : Finset (Z2V V)) = 0 :=
+  Game.isP_iff_grundy_eq_zero.1 (initial_isP hchar3)
 
 /--
 Ranked form of the `ZMod 2 × F_3^b` root theorem: the concrete product has

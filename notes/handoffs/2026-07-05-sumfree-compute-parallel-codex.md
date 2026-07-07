@@ -136,7 +136,8 @@ The Lean layer is narrower than this compute log. Current build check:
 - full `ZMod 2 x F_3^b` game theorem:
   `Sumfree.Z2F3Game.initial_isP` and the ranked package theorem
   `Sumfree.Z2F3Game.ranked_initial_isP` in
-  [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
+  [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), plus the root
+  nimber corollary `Sumfree.Z2F3Game.initial_grundy_eq_zero`, with wrappers in
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean);
 - concrete rank bridge for the same `ZMod 2 x F_3^b` model in
   [`../../lean/Sumfree/Z2F3Ranks.lean`](../../lean/Sumfree/Z2F3Ranks.lean):
@@ -146,8 +147,8 @@ The Lean layer is narrower than this compute log. Current build check:
   the underlying kernel-cardinality computations.
 
 **Not yet formalized in Lean:** concrete nimber/Grundy value statements beyond the exponent-three
-root value above; the warm-up `Z3 x Z_p` Grundy/spectral `*1` statement; and the open/adaptive
-`Z3^2 x Z_p` program. The exact
+root value and `ZMod 2 x F_3^b` zero value above; the warm-up `Z3 x Z_p` Grundy/spectral `*1`
+statement; and the open/adaptive `Z3^2 x Z_p` program. The exact
 finite-abelian classification is formalized only through the `r₃ <= 1` wrapper above. The socle reduction is false
 and must not be resurrected as a target.
 
