@@ -125,6 +125,39 @@ needs to find the real law.
 
 ### ★ RESUME HERE (next session)
 
+**2026-07-06 UPDATE (compute session `--7`, `mi`): boolean solver `sumfree.go` UPGRADED (preallocated arena +
+move ordering + opt-in parallel) — the OOM is FIXED; `Z3³×Z5` (the r=3 datapoint) is now runnable and IN
+PROGRESS; p=11 Lemma A/B direct solve confirmed COMPUTE-INFEASIBLE.**
+
+- **★ `sumfree.go` engine upgrade** (the user's "if go, optimize it + use a preallocated arena"): replaced the
+  OOM-prone `map[Mask]bool` TT with a **preallocated 128-bit fingerprint open-addressing arena** (~17 B/entry,
+  GC-invisible, sharded) — constant tiny RSS (`Z3³×Z5` runs at ~0.7 GB, not the >10 GB the map hit at |G|=135).
+  Added **move ordering** (most-forcing-first): −50% nodes / −59% wall on `Z3²×Z7` (836,807→414,168 nodes,
+  11.9→4.8 s), deterministic; arena verified node-identical (order-off = exact 836,807). Added **opt-in
+  parallelism** (`-j N`, `-j 0`=all; sound YBWC — eldest son sequential preserves the α-β cutoff, younger
+  brothers fork). Default stays **serial+ordering** (deterministic). Race-detector clean. Validation gate held
+  (mod-6 law; `Z3²×Z5=N`+8 socle openings; `Z3³=N`; `Z2×Z3²=P`; r₃=1 peels `Z3×Z{5,7,11,13}=N`; `Z3²×Z7=P`).
+- **Parallelism is transposition-bound** (as expected — the queens lesson): deep recursive forking re-expands
+  shared transpositions (2–3.4× node inflation on the shallow `Z3²×Z7`). But the DEEP heavy target `Z3³×Z5`
+  (|Aut|=44,928/node) parallelizes well at a shallow fork horizon (`--par-ply 10`): ~22 cores, only ~1.1×
+  re-expansion, ~9× throughput — its wide top has low cross-branch sharing. `-j 0` for wall-time; serial for
+  determinism. A bigger parallel win would need ABDADA-style in-flight markers to stop the re-expansion.
+- **★ `Z3³×Z5` (r=3 datapoint) IN PROGRESS** — the case that was OOM-infeasible for both `grundy` and
+  `sumfree_par` now runs at ~0.7 GB. Big P-proof (no root cutoff); ~23M nodes and climbing, no verdict yet.
+  `Z3³×Z7` is the next r=3 datum. This is Tactic 2's base pattern (see Codex banner).
+- **p=11 Lemma A/B direct solve = COMPUTE-INFEASIBLE** — `{(0,0,1),(0,1,1)}` and `{(0,1,0),(1,0,1)}` on
+  `Z3²×Z11` ran to >188M / >197M canonical nodes with zero convergence (nodes≈memo, no cutoff), ~10 GB RSS each
+  before I stopped them to avoid OOM. The arena+ordering upgrade extends reach (it cracked `Z3³×Z5`, |G|=135)
+  but these 2-element P-proofs on |G|=99 are a bigger distinct-position space. The two-lemma reduction is
+  already a theorem at p=5,7 and does NOT need p=11 (session `--5`) ⇒ its p≥11 confirmation must come from the
+  adaptive-strategy PROOF, not a solve. Recorded in Codex's brief RESULTS line.
+- **Codex re-tasked** (new top banner of `2026-07-05-codex-assignment-sumfree-socle.md`): engine-upgrade news,
+  the p=11-infeasible RESULTS, and the NEW lever — build the **induction-on-3-rank-`r`** step ahead of the
+  `Z3³×Z5` verdict (heuristic-2 "N iff r=1" predicts P via one more free `O₃` pair per `F₃` factor). Standing
+  analytic targets unchanged. Run logs: `notes/2026-07-06-z3cubed-z5.log` (+ the killed `lemma{A,B}-p11.log`).
+
+---
+
 **2026-07-06 UPDATE (session `--6`, `mi`): TACTIC 1 CLOSED (no mirror proof); the strategy is provably
 adaptive; the NEW lever is the `r=3` parity datapoint (compute-blocked — needs a TT-capped engine or a
 free box). I own both lanes (Codex + proj-cap agent are the only others; stayed clear of proj-cap files).**

@@ -1,6 +1,65 @@
 # Research assignment (for Codex): the sum-free achievement game on `Z₂ × F₃ᵇ`, and the socle reduction
 
-> # ★ CURRENT INSTRUCTIONS — 2026-07-06 (authoritative; SUPERSEDES Rounds 4–7 below, kept only as history)
+> # ★★ CURRENT INSTRUCTIONS — 2026-07-06 (compute session `--7`, `mi`) — ENGINE UPGRADED: your blocked data is now DELIVERABLE, and the r=3 datapoint is LANDING
+>
+> **Read this first; the STANDING ANALYTIC TARGETS block below is still valid — this only adds fresh compute
+> capability + a new lever.** Two things changed that directly unblock you.
+>
+> ## (1) The boolean solver `sumfree.go` got a major upgrade
+> (compute lane; `grundy`/`sumfree_par` untouched — same oracles you already use.)
+> - **Preallocated fingerprint-arena TT** (128-bit key, ~17 B/entry, GC-invisible) replaces the `map[Mask]bool`
+>   that OOM'd — constant, tiny RSS (`Z3³×Z5` is running right now at ~80 MB, not the >10 GB that killed it).
+> - **Move ordering** (most-forcing-first): −50% nodes / −59% wall, deterministic.
+> - **Optional parallelism** (`-j N`, `-j 0`=all cores; sound YBWC). Default stays serial+ordering (deterministic).
+> - **⇒ It reaches the p=11 two-element subgames `sumfree_par` timed out on.** For the boolean solver
+>   **OUTCOME=P ⟺ ∗0** (P is the *unique* Grundy-0 outcome), so a `sumfree 3,3,p --start "s;t"` solve decides
+>   "**is `{s,t}=∗0`?**" directly — i.e. it settles **Lemma A / Lemma B with no nimber engine and no timeout**.
+>
+> ## (2) The exact data your "Current Next Data Needed" list wants is being computed NOW
+> (compute owns these — do **not** launch them yourself; request more via the oracle.)
+> - **Lemma B `{(0,0,1),(0,1,1)}` at p=11** and **Lemma A `{(0,1,0),(1,0,1)}` at p=11** — RUNNING.
+> - **★ RESULTS (2026-07-06): direct solve of Lemma A/B at p=11 is COMPUTE-INFEASIBLE.** Both ran to
+>   **>188M (A) / >197M (B) canonical nodes with zero convergence** (nodes≈memo throughout, no α-β cutoff — the
+>   signature of a huge distinct P-position space), reaching ~10 GB RSS each before I stopped them to avoid OOM.
+>   So the p=11 values will **not** come from a raw solve (the arena+ordering upgrade extends reach — it cracked
+>   `Z3³×Z5`, |G|=135 — but these 2-element P-proofs on `Z3²×Z11`, |G|=99, are a bigger distinct-position space).
+>   **The reduction is already a theorem at p=5,7 and does NOT need p=11** (per session `--5`); p=11 was only a
+>   confidence stress-test. ⇒ the two-lemma confirmation must come from the **adaptive-strategy proof, not a
+>   solve**. The r=3 datapoint below is the better-conditioned compute target and is still running.
+> - If **Lemma B is P (=∗0) at p=11**: I dump its first-layer P-replies (`sumfree … --openings` from `{s,t}`) so
+>   you can read the *adaptive* reply structure (the non-formula reply you need — the zero-sum-triple lane is dead).
+> - If **Lemma B is NOT P at p=11**: the two-lemma reduction needs a **replacement P-reply for the coprime
+>   opening** — I dump all P-replies of the coprime opening `{(0,0,1)}` so you can restate the representative.
+> - I can now also push **Lemma A/B to p=13, 17** (previously a hard wall) — say which you want.
+>
+> ## (3) NEW LEVER — the r=3 datapoint (your Tactic 2 base pattern) is LANDING
+> The arena made `|G|=135` fit, so **`Z3³×Z5` is being solved right now** — the case that was compute-infeasible
+> (the OOM that both `grundy` and `sumfree_par` hit). **`Z3³×Z7` is next.** This fixes the **r=3 term** of the
+> ladder `𝒢(Z3^r×Z_p)`, currently `P, N, P` for `r=0,1,2`.
+>
+> **Your assignment: build the induction-on-3-rank-`r` step ahead of the number.** Heuristic (2) — the
+> *monotone-resource* view, better-grounded than naïve alternation — predicts **`Z3³×Z_p = P`**: each extra `F₃`
+> factor hands the responder **one more independent `O₃` pair**, pushing the socle opening further **off ∗0**
+> (the exact resource that flips r=2 to P). Formalize this as an inductive step `r → r+1`: does one more free `O₃`
+> pair preserve "**every first-move orbit is N**" (equivalently, keep every opening's ∗0-reply available)? If the
+> datapoint returns **P**, that step is your Tactic-2 proof and `Z3³×Z5` is its base; if **N**, heuristic (2) is
+> falsified and naïve alternation (`P,N,P,N,…`) returns. Either way it is decisive. **Tell me the exact positions
+> whose outcomes would confirm or refute your candidate inductive step** and I'll compute them.
+>
+> ## Coordination (unchanged)
+> Request any position from the `sumfree`/`grundy` oracles (`notes/sumfree-go/`); **don't rebuild solvers.**
+> Report into `codex-findings-sumfree.md`. Stay in the sum-free `notes/` lane — the parallel `proj-cap` work
+> committing to `main` is a **separate agent**; don't touch `2026-07-06-projective-cap-game-handoff.md` or its
+> `grid-canon` files. The STANDING ANALYTIC TARGETS below (the ∗1-absent warm-up half; the adaptive Lemma A & B
+> proofs; the colored-fiber `(defect, pair-count)` induction; the RULED-OUT list) are unchanged — do not re-walk
+> the ruled-out routes.
+>
+> **★ RESULTS line (2026-07-06):** _Lemma A p11 = **INFEASIBLE** (>188M nodes, no convergence, stopped @ ~10 GB) ·
+> Lemma B p11 = **INFEASIBLE** (>197M nodes, same) · Z3³×Z5 = **still running** (~22M nodes, RAM-cheap ~0.7 GB)_.
+>
+> ---
+
+> # ★ STANDING ANALYTIC TARGETS — 2026-07-06 (the proof work; still open — read after the CURRENT INSTRUCTIONS above)
 >
 > **Read this block; everything under it is superseded context.** The sum-free warm-up is down to a single
 > open statement with a single viable method; the dead ends are all recorded with witnesses so you don't
