@@ -94,10 +94,11 @@ outcome is uniformly P**. Higher dimension / larger field makes the game *easier
 
 - **Proved above, uniform in `n` and `q` (both parities)** — no machine step is load-bearing.
 - **Lean status (2026-07-07):** the formal game vocabulary now lives in
-  [`../lean/ProjectiveCap/BuildGame.lean`](../lean/ProjectiveCap/BuildGame.lean) and
-  [`../lean/ProjectiveCap/Affine.lean`](../lean/ProjectiveCap/Affine.lean).  The affine theorem is
-  represented there as `ProjectiveCap.Affine.InitialPStatement`; the parity-mirror proof is not yet
-  formalized.  The projective analogue is separated in
+  [`../lean/CapGame/BuildGame.lean`](../lean/CapGame/BuildGame.lean), with the affine cap game in
+  [`../lean/CapGame/Affine.lean`](../lean/CapGame/Affine.lean).  The proof-critical mirror layer is
+  formalized as `CapGame.Affine.mirror_move_legal`, `mirrorGood_step`,
+  `initialP_of_fixedPointFreeInvolution`, `initialP_of_orderTwoTranslation`, and
+  `initialP_of_pointReflection`.  The projective analogue is separated in
   [`../lean/ProjectiveCap/Projective.lean`](../lean/ProjectiveCap/Projective.lean), so affine and
   projective claims cannot be accidentally conflated.
 - **Corroboration (brute Grundy outcome = P):** `AG(2,3), AG(3,3)` (`q=3`); `AG(1/2, 5)`, `AG(1/2, 7)`

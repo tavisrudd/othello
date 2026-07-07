@@ -1,10 +1,10 @@
-import ProjectiveCap.BuildGame
+import CapGame.BuildGame
 import Mathlib.LinearAlgebra.Projectivization.Collinear
 
 /-!
 # Projective cap achievement game
 
-This is the projective analogue of `ProjectiveCap.Affine`: positions are finite
+This is the projective analogue of `CapGame.Affine`: positions are finite
 sets of points of projective space with no three selected points on a projective
 line, and moves add one point while preserving that predicate.
 -/

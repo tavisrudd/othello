@@ -1,5 +1,5 @@
 import ProjectiveCap.Grid
-import ProjectiveCap.BuildGame
+import CapGame.BuildGame
 
 /-!
 # Residual grid cap game
