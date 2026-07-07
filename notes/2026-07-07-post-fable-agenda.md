@@ -399,6 +399,44 @@ outcome-certificates for finite two-player perfect-information games, extensions
 morphism composition); item 16(a) benchmarks carry the certificates as ground truth; item 18's
 "certified contingent plans" is this format sold to a different buyer.
 
+### E3. P2 — the queens Node-Kayles paper (rank #3)
+
+**Why #3:** now UNBLOCKED (G(17)=2 verified 2026-07-07) and the results became strictly
+better while we waited: both halves of the conjectured pattern are now broken — even→0 dies
+at n=18 (first-player win), odd→1 dies at n=17 (G=2). A paper that merely extended a table
+became a paper that refutes the standing structural guess about A344227. Ranks below P1 only
+because assembly is heavier (methodology sections) and below 12 only on ceiling.
+
+**Contents ranked:**
+1. **Outcome n ≤ 18** — n=18 was genuinely open; extends Jenrich (arXiv:1312.5135); the even
+   first-player win is the surprise. Two independent evaluator configs agreeing on verdict +
+   winning move + 15-move PV at different node counts is the credibility core.
+2. **Nimbers n = 14..17 (G = 0, 1, 0, 2)** — the A344227 extension (user submits the OEIS
+   side). G(17)=2 breaking odd→1 turns the sequence from "resonant" to "wild", which is the
+   interesting claim; the theory note's failed ~88% G=1 prediction is worth reporting as a
+   calibration datum.
+3. **Methodology** — the W_K dense-layer hierarchy, canonicalization stack, and the
+   verification discipline (independent-oracle differential, int-sizing audit, Jenrich n ≤ 16
+   reproduction). Enough to reproduce, not a solver tour; the JOSS artifact (item 9) is where
+   the full engineering story lives — cross-cite instead of bloating this paper.
+
+**Kill risks:** (i) *reproducibility skepticism* — mitigated by the two-config agreement and,
+if item 12 moves fast enough, by shipping the n=18 reply-book certificate WITH the paper (the
+ideal version: first solved-game paper whose headline claim is independently checkable).
+Decide at assembly time whether to wait for C11 — recommendation: do NOT block on it; add the
+certificate in revision if ready. (ii) *The G(18) question* — the paper is complete without
+it; say "open" plainly. C3's weeks-scale gamble is a separate user decision and must not gate
+submission. (iii) Venue fit — Integers (games section) or ICGA Journal; Jenrich lineage
+suggests the former.
+
+**Execution shape:** Opus assembles from the n=18 umbrella + nimber handoff (both are
+publication-grade logs already); Fable-successor/user writes only the introduction's claims
+paragraph and checks every "proven/computed/verified" verb. The OEIS b-file and the paper
+must quote identical numbers from one generated source — no hand-copied tables.
+
+**Unlocks:** the A344227 OEIS update (user); the n=18 certificate becomes item 12's flagship
+instance; the methodology section seeds item 9 (JOSS) and item 14's case-study corpus.
+
 ### Sequencing recommendation
 
 Month 1: P0, P1, C1, WP-1/WP-2 (+ C5 in idle cycles). Month 2: P2 (post-G(17)), C2, item 4,
