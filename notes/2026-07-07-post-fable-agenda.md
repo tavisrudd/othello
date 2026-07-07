@@ -357,6 +357,48 @@ reformatting.
 **Unlocks:** P0 ships WITH it (b-file ↔ paper cross-citation); P3 cites its framing; Part II
 item 1 (Bose/Skolem) becomes "the sequel" with a warm referee pool.
 
+### E2. Item 12 — the certificate standard for solved games (rank #2)
+
+**Why #2:** highest ceiling on the list. P1 is the best bounded artifact; this is the best
+*compounding* one — a standard, if adopted, gets cited by every subsequent solving claim in
+the field, and we would own the reference implementation. It ranks above P2 because its seed
+artifacts (C9/C11, Qubic) are being built anyway, so the marginal cost of the OPENING move is
+one format spec + one position paper.
+
+**The core claim that sells it:** solved-game results are today verified by trusting the
+solver's authors — Checkers (2007), Othello (2023), our n=18 all share this gap. SAT had the
+identical credibility problem and fixed it structurally: DRAT made "solved" mean "shipped a
+proof an independent 500-line checker validates." Nothing plays that role for games, and the
+technical obstacle (win certificates look exponential) is FALSE for the reply-book form: a
+P-proof needs one reply per opponent move, not all replies — compactness is exactly what our
+n=18/n=20 certificate program measures. That measured compression ratio becomes the position
+paper's central evidence.
+
+**What "opening the area" concretely means (in order):**
+1. **Format spec v1** — the reply-book/coverage format from the C9 datatype: node kinds,
+   terminal claims, composition (sub-certificates), and a versioned container. Written
+   AGAINST two implemented checkers, never speculative.
+2. **Two independent checkers** — fast native + Lean kernel (C9/C11 deliverables). The pair
+   is the point: format bugs die when two implementations must agree.
+3. **Two flagship instances** — Qubic (item 7; historic, popular, small) and queens n=18
+   (ours, new, big — proves the format scales past toy games).
+4. **The position paper** — "solved games should ship certificates": the trust gap, the
+   format, the two instances, compression data, and an explicit call with a hosted validator.
+   Venue: ICGA Journal for the community + an ITP/CPP tool paper for the checker.
+
+**Kill risks:** (i) *compression fails at scale* — if n=18's certificate is not compellingly
+smaller than the search trace, the standard claim weakens to "verifiable" without "compact";
+still publishable, ceiling drops. This is measured by C11/G3 BEFORE any position paper is
+written — the gate is built in. (ii) *Adoption inertia* — mitigated by picking instances
+people already care about and by the validator being trivially runnable; but adoption is
+genuinely out of our control, which is why this is an area-opener (option-priced), not a
+banker. (iii) Scope creep toward partizan/scoring games in v1 — refuse; v1 is
+outcome-certificates for finite two-player perfect-information games, extensions are v2.
+
+**Unlocks:** item 15 supplies the semantics section (certificate composition = strategy-
+morphism composition); item 16(a) benchmarks carry the certificates as ground truth; item 18's
+"certified contingent plans" is this format sold to a different buyer.
+
 ### Sequencing recommendation
 
 Month 1: P0, P1, C1, WP-1/WP-2 (+ C5 in idle cycles). Month 2: P2 (post-G(17)), C2, item 4,
