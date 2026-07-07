@@ -1,4 +1,5 @@
 import CapGame.BuildGame
+import Mathlib.Data.Fintype.Pi
 import Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional
 import Mathlib.LinearAlgebra.AffineSpace.Midpoint
 
@@ -442,6 +443,38 @@ theorem initialP_of_pointReflection [Nontrivial V] [Invertible (2 : K)] :
         (by simpa [e] using hfix)
     subst z
     exact hzmove.2 (by simp) (by simp) (by simp) hcx hcy hyx.symm hcenter_col
+
+/--
+The affine cap achievement game is a P-position on every finite nontrivial
+affine space over a field.
+
+If `(2 : K) = 0`, a nonzero translation is a fixed-point-free involution.  If
+`(2 : K) ≠ 0`, point reflection after the opening exchange gives the
+self-blocking mirror center.
+-/
+theorem initialP_of_nontrivial [Nontrivial V] :
+    InitialPStatement (K := K) (V := V) := by
+  by_cases h2 : (2 : K) = 0
+  · obtain ⟨v, hv0⟩ := exists_ne (0 : V)
+    have hvv : v + v = 0 := by
+      rw [← two_smul K v, h2, zero_smul]
+    exact initialP_of_orderTwoTranslation (K := K) (V := V) v hv0 hvv
+  · letI : Invertible (2 : K) := invertibleOfNonzero h2
+    exact initialP_of_pointReflection (K := K) (V := V)
+
+/-- Coordinate-space form: the affine cap game on `K^ι` is P for every
+nonempty finite coordinate set over a finite field. -/
+theorem initialP_pi {ι : Type*} [Fintype K] [DecidableEq K] [Fintype ι] [DecidableEq ι]
+    [Nonempty ι] :
+    InitialPStatement (K := K) (V := ι -> K) :=
+  initialP_of_nontrivial (K := K) (V := ι -> K)
+
+/-- Paper-facing finite-dimensional form: the affine cap game on `AG(n,K)` is
+P for every positive finite dimension over a finite field. -/
+theorem initialP_fin (n : ℕ) [Fintype K] [DecidableEq K] (hn : 0 < n) :
+    InitialPStatement (K := K) (V := Fin n -> K) := by
+  haveI : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
+  exact initialP_pi (K := K) (ι := Fin n)
 
 end Game
 

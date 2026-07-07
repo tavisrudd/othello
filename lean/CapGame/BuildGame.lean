@@ -312,6 +312,70 @@ theorem isP_map {Valid : Finset α -> Prop} (e : α ≃ α)
     (S : Finset α) : IsP Valid (S.map e.toEmbedding) ↔ IsP Valid S :=
   not_congr (win_map e hValid S)
 
+omit [Fintype α] in
+/-- Legal moves are transported by an equivalence between two board types when
+the validity predicates match under the equivalence. -/
+theorem move_equiv {β : Type*} [Fintype β] [DecidableEq β]
+    {Validα : Finset α -> Prop} {Validβ : Finset β -> Prop} (e : α ≃ β)
+    (hValid : ∀ S : Finset α, Validβ (S.map e.toEmbedding) ↔ Validα S)
+    {S : Finset α} {x : α} :
+    Move Validβ (S.map e.toEmbedding) (e x) ↔ Move Validα S x := by
+  have hmem : e x ∈ S.map e.toEmbedding ↔ x ∈ S := by
+    rw [Finset.mem_map_equiv, Equiv.symm_apply_apply]
+  have hins : insert (e x) (S.map e.toEmbedding) = (insert x S).map e.toEmbedding := by
+    simp [Finset.map_insert]
+  unfold Move
+  rw [hins, hValid, hmem]
+
+/-- Normal-play game values are invariant under a validity-preserving
+equivalence between two board types. -/
+theorem win_equiv {β : Type*} [Fintype β] [DecidableEq β]
+    {Validα : Finset α -> Prop} {Validβ : Finset β -> Prop} (e : α ≃ β)
+    (hValid : ∀ S : Finset α, Validβ (S.map e.toEmbedding) ↔ Validα S)
+    (S : Finset α) : Win Validβ (S.map e.toEmbedding) ↔ Win Validα S := by
+  rw [win_iff_exists_move, win_iff_exists_move]
+  constructor
+  · rintro ⟨y, hymove, hylose⟩
+    let x : α := e.symm y
+    have hy : e x = y := e.apply_symm_apply y
+    rw [← hy] at hymove hylose
+    have hxmove : Move Validα S x := (move_equiv e hValid).mp hymove
+    refine ⟨x, hxmove, fun hwin => hylose ?_⟩
+    have hins : insert (e x) (S.map e.toEmbedding) =
+        (insert x S).map e.toEmbedding := by
+      simp [Finset.map_insert]
+    rw [hins]
+    exact (win_equiv e hValid (insert x S)).mpr hwin
+  · rintro ⟨x, hxmove, hxlose⟩
+    refine ⟨e x, (move_equiv e hValid).mpr hxmove, fun hwin => hxlose ?_⟩
+    have hins : insert (e x) (S.map e.toEmbedding) =
+        (insert x S).map e.toEmbedding := by
+      simp [Finset.map_insert]
+    rw [hins] at hwin
+    exact (win_equiv e hValid (insert x S)).mp hwin
+termination_by Fintype.card α - S.card
+decreasing_by
+  · classical
+    have hx : x ∉ S := hxmove.1
+    have hcard : (insert x S).card = S.card + 1 :=
+      Finset.card_insert_of_notMem hx
+    have hlt : S.card < Fintype.card α := card_lt_univ_of_notMem hx
+    rw [hcard]
+    omega
+  · classical
+    have hx : x ∉ S := hxmove.1
+    have hcard : (insert x S).card = S.card + 1 :=
+      Finset.card_insert_of_notMem hx
+    have hlt : S.card < Fintype.card α := card_lt_univ_of_notMem hx
+    rw [hcard]
+    omega
+
+theorem isP_equiv {β : Type*} [Fintype β] [DecidableEq β]
+    {Validα : Finset α -> Prop} {Validβ : Finset β -> Prop} (e : α ≃ β)
+    (hValid : ∀ S : Finset α, Validβ (S.map e.toEmbedding) ↔ Validα S)
+    (S : Finset α) : IsP Validβ (S.map e.toEmbedding) ↔ IsP Validα S :=
+  not_congr (win_equiv e hValid S)
+
 /-! ## Size-orbit value chains -/
 
 /-- All valid positions of one size share a single game value. -/

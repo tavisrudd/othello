@@ -5,6 +5,7 @@ import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.Grid
 import ProjectiveCap.GridSeed
 import ProjectiveCap.GridGame
+import ProjectiveCap.FrameGridBridge
 import ProjectiveCap.GridCounting
 import ProjectiveCap.StableFacts
 import ProjectiveCap.ExtensionCount
