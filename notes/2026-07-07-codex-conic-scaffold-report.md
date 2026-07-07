@@ -43,7 +43,10 @@ Core coordinate vocabulary:
 ```text
 OnHyperbola
 HyperbolaCells
+NonzeroParams
 mem_hyperbolaCells
+mem_nonzeroParams
+card_nonzeroParams
 HyperbolaFits
 BurnedDirectionConic
 BurnedDirectionConic.OnAffine
@@ -79,6 +82,8 @@ onHyperbola_first_ne_rho
 onHyperbola_second_ne_A
 onHyperbola_eq_hyperbolaParamPoint
 onHyperbola_iff_exists_param
+hyperbolaCells_eq_image_nonzeroParams
+card_hyperbolaCells
 psi
 psi_involutive
 psi_onHyperbola_iff
@@ -110,6 +115,7 @@ The following are sorry-free Lean theorems:
   plus legal grid extension.
 - `onHyperbola_iff_exists_param`: for `B != 0`, the hyperbola is exactly the image of the
   nonzero-parameter map `t |-> (rho + t, A + B/t)`.
+- `card_hyperbolaCells`: for `B != 0`, `HyperbolaCells` has cardinality `Fintype.card K - 1`.
 - `psi_involutive`: if `B != 0` and `u != 0`, then `psi rho A B u` is involutive.
 - `psi_onHyperbola_iff`: under the same nonzero hypotheses, `psi_u` preserves the hyperbola.
 - `psi_hyperbolaParamPoint`: on parametrized conic points, `psi_u` acts as `t |-> u / t`.

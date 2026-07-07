@@ -31,11 +31,23 @@ noncomputable def HyperbolaCells (rho A B : K) : Finset (GridPoint K) := by
   classical
   exact Finset.univ.filter fun p => OnHyperbola (K := K) rho A B p
 
+/-- Nonzero field parameters for the hyperbola parametrization. -/
+noncomputable def NonzeroParams : Finset K :=
+  Finset.univ.erase 0
+
 omit [DecidableEq K] in
 theorem mem_hyperbolaCells {rho A B : K} {p : GridPoint K} :
     p ∈ HyperbolaCells (K := K) rho A B ↔ OnHyperbola (K := K) rho A B p := by
   classical
   simp [HyperbolaCells]
+
+theorem mem_nonzeroParams {t : K} :
+    t ∈ NonzeroParams (K := K) ↔ t ≠ 0 := by
+  simp [NonzeroParams]
+
+theorem card_nonzeroParams :
+    (NonzeroParams (K := K)).card = Fintype.card K - 1 := by
+  simp [NonzeroParams]
 
 /-- A residual-grid seed lies on a hyperbola normal form. -/
 def HyperbolaFits (S : Finset (GridPoint K)) (rho A B : K) : Prop :=
@@ -235,6 +247,19 @@ theorem onHyperbola_iff_exists_param {rho A B : K} (hB : B ≠ 0)
     exact onHyperbola_first_ne_rho (K := K) hB hp (sub_eq_zero.mp hz)
   · rintro ⟨t, ht, rfl⟩
     exact hyperbolaParamPoint_onHyperbola (K := K) ht
+
+theorem hyperbolaCells_eq_image_nonzeroParams {rho A B : K} (hB : B ≠ 0) :
+    HyperbolaCells (K := K) rho A B =
+      (NonzeroParams (K := K)).image (hyperbolaParamPoint rho A B) := by
+  ext p
+  rw [mem_hyperbolaCells, onHyperbola_iff_exists_param (K := K) hB]
+  simp [mem_nonzeroParams, eq_comm]
+
+theorem card_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
+    (HyperbolaCells (K := K) rho A B).card = Fintype.card K - 1 := by
+  rw [hyperbolaCells_eq_image_nonzeroParams (K := K) hB]
+  rw [Finset.card_image_of_injective _ (hyperbolaParamPoint_injective (K := K) rho A B)]
+  exact card_nonzeroParams (K := K)
 
 /--
 The translated-coordinate map
