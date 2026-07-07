@@ -347,6 +347,210 @@ theorem neg_mirror_legal
         · exact hA haA hbA hcA hsum
 
 /--
+Negation mirror step with one anchored order-three exception.
+
+The set `A` is symmetric under negation except that it contains an anchor `t`
+but not its mate `-t`; the equation `t + t = -t` makes that missing mate
+self-blocked.  The extra hypothesis `x + x ≠ -t` is the remaining collision
+which, in cyclic applications, is ruled out either by oddness or by the played
+order-two anchor.
+-/
+theorem anchored_neg_mirror_legal
+    {A : Set G} {t x : G}
+    (hA : SumFree A)
+    (htA : t ∈ A)
+    (ht2 : t + t = -t)
+    (hsym : ∀ {z : G}, z ∈ A -> z ≠ t -> -z ∈ A)
+    (hx : Legal A x)
+    (hx_ne_neg : -x ≠ x)
+    (hx_no_o3 : x + x ≠ -x)
+    (hx_no_anchor_double : x + x ≠ -t) :
+    Legal (insert x A) (-x) := by
+  let B : Set G := {z | z ∈ A ∧ z ≠ t}
+  have hxmem : x ∈ insert x A := Or.inl rfl
+  have hAins {z : G} (hz : z ∈ A) : z ∈ insert x A := Or.inr hz
+  have ht0 : t ≠ 0 := by
+    intro htzero
+    exact hA htA htA htA (by simp [htzero])
+  have hneg_t_not_A : -t ∉ A := by
+    intro hneg
+    exact hA htA htA hneg ht2
+  have hnegx_ne_t : -x ≠ t := by
+    intro hnegx
+    have hx_eq : x = -t := by
+      have h := congrArg Neg.neg hnegx
+      simpa using h
+    have hdouble : x + x = t := by
+      have hnegt_double : -t + -t = t := by
+        have h := congrArg Neg.neg ht2
+        simpa [neg_add, add_comm] using h
+      simpa [hx_eq] using hnegt_double
+    exact hx.2 hxmem hxmem (hAins htA) hdouble
+  have hBsum : SumFree B := by
+    intro a b c ha hb hc hsum
+    exact hA ha.1 hb.1 hc.1 hsum
+  have hBneg : NegInvariant B := by
+    intro z hz
+    rcases hz with ⟨hzA, hzt⟩
+    refine ⟨hsym hzA hzt, ?_⟩
+    intro hnegz
+    have hz_eq_negt : z = -t := by
+      have h := congrArg Neg.neg hnegz
+      simpa using h
+    exact hneg_t_not_A (by simpa [hz_eq_negt] using hzA)
+  have hxB : Legal B x := by
+    have mem_insertA_of_mem_insertB {z : G} (hz : z ∈ insert x B) :
+        z ∈ insert x A := by
+      rcases hz with hzX | hzB
+      · exact Or.inl hzX
+      · exact Or.inr hzB.1
+    constructor
+    · intro hxBmem
+      exact hx.1 hxBmem.1
+    · intro a b c ha hb hc hsum
+      exact hx.2 (mem_insertA_of_mem_insertB ha) (mem_insertA_of_mem_insertB hb)
+        (mem_insertA_of_mem_insertB hc) hsum
+  have hBlegal : Legal (insert x B) (-x) :=
+    neg_mirror_legal hBsum hBneg hxB hx_ne_neg hx_no_o3
+  have mem_no_t {z : G} (hz : z ∈ insert (-x) (insert x A)) (hzt : z ≠ t) :
+      z ∈ insert (-x) (insert x B) := by
+    rcases hz with hzNeg | hzRest
+    · exact Or.inl hzNeg
+    · rcases hzRest with hzX | hzA
+      · exact Or.inr (Or.inl hzX)
+      · exact Or.inr (Or.inr ⟨hzA, hzt⟩)
+  have mem_no_neg {z : G} (hz : z ∈ insert (-x) (insert x A)) (hzneg : z ≠ -x) :
+      z ∈ insert x A := by
+    rcases hz with hzNeg | hzRest
+    · exact (hzneg hzNeg).elim
+    · exact hzRest
+  have no_neg_add_t {d : G}
+      (hd : d ∈ insert (-x) (insert x A)) (h : -x + t = d) : False := by
+    rcases hd with hdNeg | hdRest
+    · have htzero : t = 0 := by
+        calc
+          t = x + (-x + t) := by abel
+          _ = x + -x := by rw [h, hdNeg]
+          _ = 0 := by simp
+      exact ht0 htzero
+    · rcases hdRest with hdX | hdA
+      · have hdouble : x + x = t := by
+          calc
+            x + x = x + (-x + t) := by rw [h, hdX]
+            _ = t := by abel
+        exact hx.2 hxmem hxmem (hAins htA) hdouble
+      · have hxt : x + d = t := by
+          calc
+            x + d = x + (-x + t) := by rw [h]
+            _ = t := by abel
+        exact hx.2 hxmem (hAins hdA) (hAins htA) hxt
+  have no_neg_add_to_t {d : G}
+      (hd : d ∈ insert (-x) (insert x A)) (h : -x + d = t) : False := by
+    rcases hd with hdNeg | hdRest
+    · have hdouble : x + x = -t := by
+        have h' : -x + -x = t := by simpa [hdNeg] using h
+        exact add_self_eq_neg_of_neg_add_neg_eq h'
+      exact hx_no_anchor_double hdouble
+    · rcases hdRest with hdX | hdA
+      · have htzero : t = 0 := by
+          calc
+            t = -x + x := by rw [← h, hdX]
+            _ = 0 := by simp
+        exact ht0 htzero
+      · have hxt : x + t = d := by
+          calc
+            x + t = x + (-x + d) := by rw [h]
+            _ = d := by abel
+        exact hx.2 hxmem (hAins htA) (hAins hdA) hxt
+  have no_t_add_to_neg {d : G}
+      (hd : d ∈ insert (-x) (insert x A)) (h : t + d = -x) : False := by
+    rcases hd with hdNeg | hdRest
+    · have htzero : t = 0 := by
+        have h' : -x + t = -x := by
+          simpa [add_comm, hdNeg] using h
+        exact zero_of_neg_add_eq_neg h'
+      exact ht0 htzero
+    · rcases hdRest with hdX | hdA
+      · have hdouble : x + x = -t := by
+          have htx : t + x = -x := by
+            simpa [hdX] using h
+          have hzero : t + (x + x) = 0 := by
+            calc
+              t + (x + x) = (t + x) + x := by abel
+              _ = -x + x := by rw [htx]
+              _ = 0 := by simp
+          calc
+            x + x = 0 + (x + x) := by simp
+            _ = (-t + t) + (x + x) := by simp
+            _ = -t + (t + (x + x)) := by abel
+            _ = -t + 0 := by rw [hzero]
+            _ = -t := by simp
+        exact hx_no_anchor_double hdouble
+      · by_cases hdt : d = t
+        · have hx_eq_t : x = t := by
+            have hneg_eq : -x = -t := by
+              calc
+                -x = t + d := h.symm
+                _ = -t := by simpa [hdt] using ht2
+            have h := congrArg Neg.neg hneg_eq
+            simpa using h
+          exact hx.1 (by simpa [hx_eq_t] using htA)
+        · have hnegdA : -d ∈ A := hsym hdA hdt
+          have hxt : x + t = -d := by
+            have hx_eq : x = -(t + d) := by
+              have h' := congrArg Neg.neg h
+              simpa [neg_add] using h'.symm
+            calc
+              x + t = -(t + d) + t := by rw [hx_eq]
+              _ = -d := by abel
+          exact hx.2 hxmem (hAins htA) (hAins hnegdA) hxt
+  constructor
+  · intro hmem
+    rcases hmem with hxneg | hAneg
+    · exact hx_ne_neg hxneg
+    · by_cases hnegt : -x = t
+      · exact hnegx_ne_t hnegt
+      · exact hx.1 (by simpa using hsym hAneg hnegt)
+  · intro a b c ha hb hc hsum
+    by_cases hT : a = t ∨ b = t ∨ c = t
+    · by_cases hN : a = -x ∨ b = -x ∨ c = -x
+      · rcases hT with haT | hbT | hcT
+        · rcases hN with haN | hbN | hcN
+          · exact hnegx_ne_t (by rw [← haN, haT])
+          · subst a
+            subst b
+            exact no_neg_add_t hc (by simpa [add_comm] using hsum)
+          · subst a
+            subst c
+            exact no_t_add_to_neg hb hsum
+        · rcases hN with haN | hbN | hcN
+          · subst a
+            subst b
+            exact no_neg_add_t hc hsum
+          · exact hnegx_ne_t (by rw [← hbN, hbT])
+          · subst b
+            subst c
+            exact no_t_add_to_neg ha (by simpa [add_comm] using hsum)
+        · rcases hN with haN | hbN | hcN
+          · subst a
+            subst c
+            exact no_neg_add_to_t hb hsum
+          · subst b
+            subst c
+            exact no_neg_add_to_t ha (by simpa [add_comm] using hsum)
+          · exact hnegx_ne_t (by rw [← hcN, hcT])
+      · exact hx.2
+          (mem_no_neg ha (fun h => hN (Or.inl h)))
+          (mem_no_neg hb (fun h => hN (Or.inr (Or.inl h))))
+          (mem_no_neg hc (fun h => hN (Or.inr (Or.inr h))))
+          hsum
+    · exact hBlegal.2
+        (mem_no_t ha (fun h => hT (Or.inl h)))
+        (mem_no_t hb (fun h => hT (Or.inr (Or.inl h))))
+        (mem_no_t hc (fun h => hT (Or.inr (Or.inr h))))
+        hsum
+
+/--
 Translation mirror step for a nonzero order-two translation.
 
 Paper source: cyclic Lemma 2, group-general.

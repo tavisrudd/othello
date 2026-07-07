@@ -36,6 +36,10 @@ rename Lean files to match older prose names.
   `initial_isP_of_no_nonzero_orderTwo_or_three`,
   `initial_win_of_unique_orderTwo_no_nonzero_orderThree`, and
   `initial_isP_of_two_nonzero_orderTwo`);
+- anchored order-three mirror layer:
+  `anchored_neg_mirror_legal` in [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean)
+  and the finite-game wrappers `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`, and
+  `initial_win_of_orderThree_anchor` in [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean);
 - partial cyclic `ZMod n` bridge:
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
@@ -45,10 +49,9 @@ rename Lean files to match older prose names.
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
 **Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level iff theorem; the
-`3 ∣ n` cyclic cases (`n ≡ 0,3 mod 6`) that need the order-three extra-reply/Lemma-4 argument; the
-full finite-abelian rank/cardinality bookkeeping needed for the full `r3 <= 1` abelian theorem; the
-affine cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens
-`N20J10LuckyTarget`.
+cyclic arithmetic instantiation of the anchored order-three layer for `n ≡ 0,3 mod 6`; the full
+finite-abelian rank/cardinality bookkeeping needed for the full `r3 <= 1` abelian theorem; the affine
+cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

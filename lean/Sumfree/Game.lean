@@ -242,6 +242,103 @@ theorem initial_win_of_orderTwo_no_other_negation_obstructions {m : G}
       simpa using orderTwo_singleton_isP_of_negation_no_other_obstructions
         (G := G) hm2 hm0 hfixed hnoO3)
 
+/-- Mirror-ready positions for negation with one anchored order-three exception. -/
+def AnchoredNegGood (t : G) (S : Finset G) : Prop :=
+  Valid S ∧ t ∈ S ∧
+    ∀ {z : G}, z ∈ (S : Set G) -> z ≠ t -> -z ∈ (S : Set G)
+
+omit [Fintype G] [DecidableEq G] in
+theorem anchoredNegInvariant_insert_pair {A : Set G} {t y : G}
+    (hA : ∀ {z : G}, z ∈ A -> z ≠ t -> -z ∈ A) :
+    (∀ {z : G}, z ∈ insert (-y) (insert y A) -> z ≠ t ->
+      -z ∈ insert (-y) (insert y A)) := by
+  intro z hz hzt
+  rcases hz with hzNeg | hzRest
+  · subst z
+    exact Or.inr (Or.inl (by simp))
+  · rcases hzRest with hzY | hzA
+    · subst z
+      exact Or.inl rfl
+    · exact Or.inr (Or.inr (hA hzA hzt))
+
+omit [Fintype G] in
+theorem anchoredNegGood_step_of_live_obstructions {t : G}
+    (ht2 : t + t = -t)
+    (hfixed :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> -y ≠ y)
+    (hnoO3 :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -y)
+    (hnoAnchorDouble :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -t) :
+    ∀ {S : Finset G}, AnchoredNegGood t S -> ∀ y : G, Move S y ->
+      ∃ r : G, Move (insert y S) r ∧ AnchoredNegGood t (insert r (insert y S)) := by
+  intro S hgood y hymove
+  rcases hgood with ⟨hvalid, htS, hsym⟩
+  let r := -y
+  have hylegal : Legal (S : Set G) y := legal_of_move hymove
+  have hrlegal : Legal (insert y (S : Set G)) r := by
+    simpa [r] using anchored_neg_mirror_legal
+      (G := G) (A := (S : Set G)) (t := t) (x := y)
+      hvalid (by simpa [Finset.mem_coe] using htS) ht2 hsym hylegal
+      (hfixed ⟨hvalid, htS, hsym⟩ hymove)
+      (hnoO3 ⟨hvalid, htS, hsym⟩ hymove)
+      (hnoAnchorDouble ⟨hvalid, htS, hsym⟩ hymove)
+  have hrmove : Move (insert y S) r :=
+    move_of_legal (S := insert y S) (x := r) (by simpa using hrlegal)
+  refine ⟨r, hrmove, ?_⟩
+  refine ⟨hrmove.2, ?_, ?_⟩
+  · simp [htS]
+  · intro z
+    simpa [r, Finset.mem_coe] using
+      (anchoredNegInvariant_insert_pair (A := (S : Set G)) (t := t) (y := y) hsym (z := z))
+
+theorem anchoredNegGood_isP_of_live_obstructions {t : G}
+    (ht2 : t + t = -t)
+    (hfixed :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> -y ≠ y)
+    (hnoO3 :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -y)
+    (hnoAnchorDouble :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -t)
+    {S : Finset G} (hgood : AnchoredNegGood t S) :
+    IsP S :=
+  FiniteBuildGame.isP_of_replyStrategy
+    (Valid := Valid) (Good := AnchoredNegGood t)
+    (anchoredNegGood_step_of_live_obstructions
+      (G := G) (t := t) ht2 hfixed hnoO3 hnoAnchorDouble) S hgood
+
+theorem orderThree_singleton_isP_of_live_obstructions {t : G}
+    (ht2 : t + t = -t) (ht0 : t ≠ 0)
+    (hfixed :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> -y ≠ y)
+    (hnoO3 :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -y)
+    (hnoAnchorDouble :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -t) :
+    IsP ({t} : Finset G) := by
+  have hgood : AnchoredNegGood (G := G) t ({t} : Finset G) := by
+    refine ⟨valid_singleton_of_ne_zero (G := G) ht0, by simp, ?_⟩
+    intro z hz hzt
+    simp only [Finset.mem_coe, Finset.mem_singleton] at hz
+    exact (hzt hz).elim
+  exact anchoredNegGood_isP_of_live_obstructions
+    (G := G) (t := t) ht2 hfixed hnoO3 hnoAnchorDouble hgood
+
+theorem initial_win_of_orderThree_anchor {t : G}
+    (ht2 : t + t = -t) (ht0 : t ≠ 0)
+    (hfixed :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> -y ≠ y)
+    (hnoO3 :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -y)
+    (hnoAnchorDouble :
+      ∀ {S : Finset G} {y : G}, AnchoredNegGood t S -> Move S y -> y + y ≠ -t) :
+    Win (∅ : Finset G) := by
+  have hmove : Move (∅ : Finset G) t :=
+    (empty_move_iff_ne_zero (G := G)).2 ht0
+  exact FiniteBuildGame.win_of_move_to_isP hmove
+    (orderThree_singleton_isP_of_live_obstructions
+      (G := G) (t := t) ht2 ht0 hfixed hnoO3 hnoAnchorDouble)
+
 end Neg
 
 section FiniteObstructions

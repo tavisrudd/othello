@@ -23,6 +23,10 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/CapGame/BuildGame.lean`](../../lean/CapGame/BuildGame.lean);
 - sum-free legality plus local mirror lemmas:
   [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean);
+- anchored order-three negation mirror kernel:
+  `anchored_neg_mirror_legal` in
+  [`../../lean/Sumfree/MirrorLemmas.lean`](../../lean/Sumfree/MirrorLemmas.lean), formalizing the
+  local Lemma-4 mechanism with one played order-three anchor and explicit live-collision hypotheses;
 - finite sum-free game bridge and exponent-three theorem:
   `Sumfree.Game.f3_initial_win` in
   [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean), with stable wrapper names in
@@ -38,6 +42,10 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_isP_of_no_nonzero_orderTwo_or_three`,
   `initial_win_of_unique_orderTwo_no_nonzero_orderThree`, and
   `initial_isP_of_two_nonzero_orderTwo`;
+- finite-game anchored order-three strategy layer in
+  [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean):
+  `AnchoredNegGood`, `anchoredNegGood_isP_of_live_obstructions`,
+  `orderThree_singleton_isP_of_live_obstructions`, and `initial_win_of_orderThree_anchor`;
 - partial cyclic `ZMod n` bridge in
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean):
   `initial_isP_of_odd_of_not_three_dvd` proves the odd, `3 ∤ n` P cases and
@@ -52,12 +60,12 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
-**Not yet formalized in Lean:** the cyclic `Z_n` mod-6 theorem as a top-level iff theorem; the `3 ∣ n`
-cyclic cases that need the order-three extra-reply/Lemma-4 argument (`n ≡ 0,3 mod 6`); the full
-finite-abelian rank/cardinality bookkeeping turning the finite obstruction wrappers into named
-`s2 >= 2`, `s2 = 1`, and `r3 <= 1` classification statements; any nimber/Grundy statements from this
-compute log; the warm-up `Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p` program.
-The socle reduction is false and must not be resurrected as a target.
+**Not yet formalized in Lean:** the cyclic `Z_n` mod-6 theorem as a top-level iff theorem; the cyclic
+arithmetic instantiation of the anchored order-three layer for `n ≡ 0,3 mod 6`; the full finite-abelian
+rank/cardinality bookkeeping turning the finite obstruction wrappers into named `s2 >= 2`, `s2 = 1`,
+and `r3 <= 1` classification statements; any nimber/Grundy statements from this compute log; the
+warm-up `Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p` program. The socle
+reduction is false and must not be resurrected as a target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills
