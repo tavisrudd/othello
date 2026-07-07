@@ -146,8 +146,8 @@ theorem mem_onConicLegalExtensions
   simp [OnConicLegalExtensions, mem_hyperbolaCells]
 
 /--
-Target: every non-seed cell on the size-three seed's conic is legal, and there
-are exactly `q - 4` such legal on-conic extensions.
+Packaged statement: every non-seed cell on the size-three seed's conic is legal,
+and there are exactly `q - 4` such legal on-conic extensions.
 -/
 def OnConicLegalExtensionCountStatement : Prop :=
   ∀ S : Finset (GridPoint K), ∀ rho A B : K,
@@ -168,8 +168,8 @@ def MaximalGridCap (S : Finset (GridPoint K)) : Prop :=
     ∀ p : GridPoint K, p ∉ S -> ¬ GridCap (K := K) (insert p S)
 
 /--
-Target: for odd characteristic, the affine hyperbola cell set is a maximal
-grid cap of size `q - 1`.
+Packaged statement: for odd characteristic, the affine hyperbola cell set is a
+maximal grid cap of size `q - 1`.
 -/
 def OddHyperbolaMaximalStatement : Prop :=
   ∀ rho A B : K,
