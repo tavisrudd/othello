@@ -89,7 +89,7 @@ pointer in the nimber handoff when its pane is read back.
   explainable) bucket violations at n ≤ 12. NO-GO = signatures ≈ subsets (no compression) or
   valtest violations are unstructured — then per the n20 plan §Phase 0, do NOT start n=20; write
   the redirect (improve certificate vocabulary on n=18) and stop the lucky-plan ramp.
-- **W3-2. If GO: launch the extractor build sub** (Opus, spec from W2-3, calibrate on n ≤ 12
+- **W3-2. If GO: greenlight Codex C11 (extractor build)** (spec = the committed W2-3 note; calibrate on n ≤ 12
   gates in-window; the full n=18 I9 Phase-0 run continues past the window — overnight-safe,
   small-memory by design, checkpointed per exception-book growth).
 - **W3-3. F4 full wrap:** review all C-reports (C1–C9), t-done, day-plan + n20-plan status
