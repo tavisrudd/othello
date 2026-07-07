@@ -1,6 +1,7 @@
-import ProjectiveCap.Projective
+import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.GridGame
 import ProjectiveCap.GridSeed
+import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import Mathlib.Tactic
 
 /-!
@@ -196,21 +197,404 @@ def affineEmbedding : GridPoint K ↪ Point K (PlaneVec K) where
   toFun := affinePoint (K := K)
   inj' := affinePoint_injective (K := K)
 
+theorem mk_collinear_iff_det_eq_zero {x y z : PlaneVec K}
+    (hx : x ≠ 0) (hy : y ≠ 0) (hz : z ≠ 0) :
+    Projective.Collinear K (PlaneVec K)
+        (Projectivization.mk K x hx)
+        (Projectivization.mk K y hy)
+        (Projectivization.mk K z hz) ↔
+      Matrix.det ![x, y, z] = 0 := by
+  constructor
+  · intro hcol
+    by_contra hdet
+    have hli : LinearIndependent K ![x, y, z] :=
+      Matrix.linearIndependent_rows_of_det_ne_zero hdet
+    have hind :
+        Projectivization.Independent
+          ![Projectivization.mk K x hx, Projectivization.mk K y hy,
+            Projectivization.mk K z hz] :=
+      Projective.independent_triple_of_li (K := K) (V := PlaneVec K) hx hy hz hli
+    have hdep :
+        Projectivization.Dependent
+          ![Projectivization.mk K x hx, Projectivization.mk K y hy,
+            Projectivization.mk K z hz] :=
+      (Projective.collinear_iff_dependent (K := K) (V := PlaneVec K)).mp hcol
+    exact (Projectivization.dependent_iff_not_independent.mp hdep) hind
+  · intro hdet
+    have hnli : ¬ LinearIndependent K ![x, y, z] := by
+      intro hli
+      let A : Matrix (Fin 3) (Fin 3) K := ![x, y, z]
+      have hliA : LinearIndependent K A.row := by
+        simpa [A, Matrix.row] using hli
+      have hmatunit : IsUnit A :=
+        (Matrix.linearIndependent_rows_iff_isUnit (A := A)).mp hliA
+      have hunit : IsUnit A.det :=
+        (Matrix.isUnit_iff_isUnit_det A).mp hmatunit
+      have hdetA : A.det = 0 := by
+        simpa [A] using hdet
+      exact hunit.ne_zero hdetA
+    have hdep :
+        Projectivization.Dependent
+          ![Projectivization.mk K x hx, Projectivization.mk K y hy,
+            Projectivization.mk K z hz] := by
+      have hraw := Projectivization.Dependent.mk (K := K) (V := PlaneVec K)
+        ![x, y, z] (fun i => by fin_cases i <;> assumption) hnli
+      convert hraw using 1
+      ext i
+      fin_cases i <;> rfl
+    exact (Projective.collinear_iff_dependent (K := K) (V := PlaneVec K)).mpr hdep
+
+theorem det_rowDirection_affine_affine (p q : GridPoint K) :
+    Matrix.det ![rowDirectionVec (K := K), affineVec (K := K) p,
+      affineVec (K := K) q] = p.2 - q.2 := by
+  rw [Matrix.det_fin_three]
+  simp [rowDirectionVec, affineVec]
+
+theorem det_colDirection_affine_affine (p q : GridPoint K) :
+    Matrix.det ![colDirectionVec (K := K), affineVec (K := K) p,
+      affineVec (K := K) q] = q.1 - p.1 := by
+  rw [Matrix.det_fin_three]
+  simp [colDirectionVec, affineVec]
+  ring
+
+theorem det_rowDirection_colDirection_affine (p : GridPoint K) :
+    Matrix.det ![rowDirectionVec (K := K), colDirectionVec (K := K),
+      affineVec (K := K) p] = 1 := by
+  rw [Matrix.det_fin_three]
+  simp [rowDirectionVec, colDirectionVec, affineVec]
+
+theorem det_affine_affine_affine (p q r : GridPoint K) :
+    Matrix.det ![affineVec (K := K) p, affineVec (K := K) q,
+      affineVec (K := K) r] =
+      (q.1 - p.1) * (r.2 - p.2) - (q.2 - p.2) * (r.1 - p.1) := by
+  rw [Matrix.det_fin_three]
+  simp [affineVec]
+  ring
+
+theorem collinear_rowDirection_affine_iff (p q : GridPoint K) :
+    Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+      (affinePoint (K := K) p) (affinePoint (K := K) q) ↔ p.2 = q.2 := by
+  change Projective.Collinear K (PlaneVec K)
+      (Projectivization.mk K (rowDirectionVec (K := K)) rowDirectionVec_ne_zero)
+      (Projectivization.mk K (affineVec (K := K) p) (affineVec_ne_zero p))
+      (Projectivization.mk K (affineVec (K := K) q) (affineVec_ne_zero q)) ↔ p.2 = q.2
+  rw [mk_collinear_iff_det_eq_zero rowDirectionVec_ne_zero (affineVec_ne_zero p)
+    (affineVec_ne_zero q), det_rowDirection_affine_affine]
+  exact sub_eq_zero
+
+theorem collinear_colDirection_affine_iff (p q : GridPoint K) :
+    Projective.Collinear K (PlaneVec K) (colDirection (K := K))
+      (affinePoint (K := K) p) (affinePoint (K := K) q) ↔ p.1 = q.1 := by
+  change Projective.Collinear K (PlaneVec K)
+      (Projectivization.mk K (colDirectionVec (K := K)) colDirectionVec_ne_zero)
+      (Projectivization.mk K (affineVec (K := K) p) (affineVec_ne_zero p))
+      (Projectivization.mk K (affineVec (K := K) q) (affineVec_ne_zero q)) ↔ p.1 = q.1
+  rw [mk_collinear_iff_det_eq_zero colDirectionVec_ne_zero (affineVec_ne_zero p)
+    (affineVec_ne_zero q), det_colDirection_affine_affine]
+  rw [sub_eq_zero]
+  exact eq_comm
+
+theorem not_collinear_row_col_affine (p : GridPoint K) :
+    ¬ Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+      (colDirection (K := K)) (affinePoint (K := K) p) := by
+  intro hcol
+  have hdet := (mk_collinear_iff_det_eq_zero
+    (K := K) rowDirectionVec_ne_zero colDirectionVec_ne_zero (affineVec_ne_zero p)).mp
+    (by simpa [rowDirection, colDirection, affinePoint] using hcol)
+  simp [det_rowDirection_colDirection_affine] at hdet
+
+theorem collinear_affine_iff_grid (p q r : GridPoint K) :
+    Projective.Collinear K (PlaneVec K) (affinePoint (K := K) p)
+      (affinePoint (K := K) q) (affinePoint (K := K) r) ↔
+      ProjectiveCap.Collinear (K := K) p q r := by
+  change Projective.Collinear K (PlaneVec K)
+      (Projectivization.mk K (affineVec (K := K) p) (affineVec_ne_zero p))
+      (Projectivization.mk K (affineVec (K := K) q) (affineVec_ne_zero q))
+      (Projectivization.mk K (affineVec (K := K) r) (affineVec_ne_zero r)) ↔
+    ProjectiveCap.Collinear (K := K) p q r
+  rw [mk_collinear_iff_det_eq_zero (affineVec_ne_zero p) (affineVec_ne_zero q)
+    (affineVec_ne_zero r), det_affine_affine_affine]
+  unfold ProjectiveCap.Collinear
+  constructor <;> intro h
+  · linear_combination h
+  · linear_combination h
+
 variable [DecidableEq (Point K (PlaneVec K))]
 
 /-- The fixed pair of burned directions in the standard coordinate model. -/
 def fixedDirections : Finset (Point K (PlaneVec K)) :=
   ({rowDirection (K := K), colDirection (K := K)} : Finset (Point K (PlaneVec K)))
 
+theorem rowDirection_mem_fixedDirections :
+    rowDirection (K := K) ∈ fixedDirections (K := K) := by
+  simp [fixedDirections]
+
+theorem colDirection_mem_fixedDirections :
+    colDirection (K := K) ∈ fixedDirections (K := K) := by
+  simp [fixedDirections]
+
+omit [DecidableEq (Point K (PlaneVec K))] in
+theorem affinePoint_mem_map {S : Finset (GridPoint K)} {p : GridPoint K} (hp : p ∈ S) :
+    affinePoint (K := K) p ∈ S.map (affineEmbedding (K := K)) := by
+  exact Finset.mem_map.mpr ⟨p, hp, rfl⟩
+
+theorem mem_fixed_union_image_cases [DecidableEq K] {S : Finset (GridPoint K)}
+    {x : Point K (PlaneVec K)}
+    (hx : x ∈ fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) :
+    x = rowDirection (K := K) ∨ x = colDirection (K := K) ∨
+      ∃ p : GridPoint K, p ∈ S ∧ x = affinePoint (K := K) p := by
+  rcases Finset.mem_union.mp hx with hfixed | himage
+  · have hfixed' : x = rowDirection (K := K) ∨ x = colDirection (K := K) := by
+      simpa [fixedDirections] using hfixed
+    rcases hfixed' with hrow | hcol
+    · exact Or.inl hrow
+    · exact Or.inr (Or.inl hcol)
+  · rcases Finset.mem_map.mp himage with ⟨p, hp, hpx⟩
+    exact Or.inr (Or.inr ⟨p, hp, hpx.symm⟩)
+
+omit [DecidableEq (Point K (PlaneVec K))] in
+theorem projectiveCollinear_congr_set {a b c a' b' c' : Point K (PlaneVec K)}
+    (hset : ({a, b, c} : Set (Point K (PlaneVec K))) = {a', b', c'}) :
+    Projective.Collinear K (PlaneVec K) a b c ↔
+      Projective.Collinear K (PlaneVec K) a' b' c' := by
+  unfold Projective.Collinear
+  rw [hset]
+
+omit [DecidableEq (Point K (PlaneVec K))] in
+theorem not_collinear_row_affine_affine {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) {p q : GridPoint K}
+    (hp : p ∈ S) (hq : q ∈ S) (hpq : p ≠ q) :
+    ¬ Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+      (affinePoint (K := K) p) (affinePoint (K := K) q) := by
+  intro hcol
+  have heq : p.2 = q.2 := (collinear_rowDirection_affine_iff (K := K) p q).mp hcol
+  exact hpq (hS.1.2 hp hq heq)
+
+omit [DecidableEq (Point K (PlaneVec K))] in
+theorem not_collinear_col_affine_affine {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) {p q : GridPoint K}
+    (hp : p ∈ S) (hq : q ∈ S) (hpq : p ≠ q) :
+    ¬ Projective.Collinear K (PlaneVec K) (colDirection (K := K))
+      (affinePoint (K := K) p) (affinePoint (K := K) q) := by
+  intro hcol
+  have heq : p.1 = q.1 := (collinear_colDirection_affine_iff (K := K) p q).mp hcol
+  exact hpq (hS.1.1 hp hq heq)
+
+omit [DecidableEq (Point K (PlaneVec K))] in
+theorem not_collinear_affine_affine_affine {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) {p q r : GridPoint K}
+    (hp : p ∈ S) (hq : q ∈ S) (hr : r ∈ S)
+    (hpq : p ≠ q) (hpr : p ≠ r) (hqr : q ≠ r) :
+    ¬ Projective.Collinear K (PlaneVec K) (affinePoint (K := K) p)
+      (affinePoint (K := K) q) (affinePoint (K := K) r) := by
+  intro hcol
+  exact hS.2 hp hq hr hpq hpr hqr
+    ((collinear_affine_iff_grid (K := K) p q r).mp hcol)
+
+theorem gridCap_of_projectiveCap [DecidableEq K] {S : Finset (GridPoint K)}
+    (hcap : Cap K (PlaneVec K)
+      (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)))) :
+    GridCap (K := K) S := by
+  constructor
+  · constructor
+    · intro p q hp hq hrow
+      by_cases hpq : p = q
+      · exact hpq
+      · exfalso
+        have hcol :
+            Projective.Collinear K (PlaneVec K) (colDirection (K := K))
+              (affinePoint (K := K) p) (affinePoint (K := K) q) :=
+          (collinear_colDirection_affine_iff (K := K) p q).mpr hrow
+        have hcolMem :
+            colDirection (K := K) ∈
+              fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+          Finset.mem_union_left _ (colDirection_mem_fixedDirections (K := K))
+        have hpMem :
+            affinePoint (K := K) p ∈
+              fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+          Finset.mem_union_right _ (affinePoint_mem_map (K := K) hp)
+        have hqMem :
+            affinePoint (K := K) q ∈
+              fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+          Finset.mem_union_right _ (affinePoint_mem_map (K := K) hq)
+        exact hcap hcolMem hpMem hqMem
+          ((affinePoint_ne_colDirection (K := K) p).symm)
+          ((affinePoint_ne_colDirection (K := K) q).symm)
+          (fun hpqPoint => hpq ((affinePoint_injective (K := K)) hpqPoint))
+          hcol
+    · intro p q hp hq hcolEq
+      by_cases hpq : p = q
+      · exact hpq
+      · exfalso
+        have hcol :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (affinePoint (K := K) p) (affinePoint (K := K) q) :=
+          (collinear_rowDirection_affine_iff (K := K) p q).mpr hcolEq
+        have hrowMem :
+            rowDirection (K := K) ∈
+              fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+          Finset.mem_union_left _ (rowDirection_mem_fixedDirections (K := K))
+        have hpMem :
+            affinePoint (K := K) p ∈
+              fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+          Finset.mem_union_right _ (affinePoint_mem_map (K := K) hp)
+        have hqMem :
+            affinePoint (K := K) q ∈
+              fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+          Finset.mem_union_right _ (affinePoint_mem_map (K := K) hq)
+        exact hcap hrowMem hpMem hqMem
+          ((affinePoint_ne_rowDirection (K := K) p).symm)
+          ((affinePoint_ne_rowDirection (K := K) q).symm)
+          (fun hpqPoint => hpq ((affinePoint_injective (K := K)) hpqPoint))
+          hcol
+  · intro p q r hp hq hr hpq hpr hqr hgrid
+    have hpMem :
+        affinePoint (K := K) p ∈
+          fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+      Finset.mem_union_right _ (affinePoint_mem_map (K := K) hp)
+    have hqMem :
+        affinePoint (K := K) q ∈
+          fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+      Finset.mem_union_right _ (affinePoint_mem_map (K := K) hq)
+    have hrMem :
+        affinePoint (K := K) r ∈
+          fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+      Finset.mem_union_right _ (affinePoint_mem_map (K := K) hr)
+    exact hcap hpMem hqMem hrMem
+      (fun hpqPoint => hpq ((affinePoint_injective (K := K)) hpqPoint))
+      (fun hprPoint => hpr ((affinePoint_injective (K := K)) hprPoint))
+      (fun hqrPoint => hqr ((affinePoint_injective (K := K)) hqrPoint))
+      ((collinear_affine_iff_grid (K := K) p q r).mpr hgrid)
+
+theorem projectiveCap_of_gridCap [DecidableEq K] {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    Cap K (PlaneVec K)
+      (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) := by
+  intro a b c ha hb hc hab hac hbc hcol
+  rcases mem_fixed_union_image_cases (K := K) ha with rfl | rfl | ⟨pa, hpa, rfl⟩
+  · rcases mem_fixed_union_image_cases (K := K) hb with rfl | rfl | ⟨pb, hpb, rfl⟩
+    · exact hab rfl
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · exact hac rfl
+      · exact hbc rfl
+      · exact not_collinear_row_col_affine (K := K) pc hcol
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · exact hac rfl
+      · have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (colDirection (K := K)) (affinePoint (K := K) pb) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_col_affine (K := K) pb hcanon
+      · have hpbpc : pb ≠ pc := by
+          intro h
+          exact hbc (by simp [h])
+        exact not_collinear_row_affine_affine (K := K) hS hpb hpc hpbpc hcol
+  · rcases mem_fixed_union_image_cases (K := K) hb with rfl | rfl | ⟨pb, hpb, rfl⟩
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · exact hbc rfl
+      · exact hac rfl
+      · have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (colDirection (K := K)) (affinePoint (K := K) pc) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_col_affine (K := K) pc hcanon
+    · exact hab rfl
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (colDirection (K := K)) (affinePoint (K := K) pb) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_col_affine (K := K) pb hcanon
+      · exact hac rfl
+      · have hpbpc : pb ≠ pc := by
+          intro h
+          exact hbc (by simp [h])
+        exact not_collinear_col_affine_affine (K := K) hS hpb hpc hpbpc hcol
+  · rcases mem_fixed_union_image_cases (K := K) hb with rfl | rfl | ⟨pb, hpb, rfl⟩
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · exact hbc rfl
+      · have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (colDirection (K := K)) (affinePoint (K := K) pa) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_col_affine (K := K) pa hcanon
+      · have hpapc : pa ≠ pc := by
+          intro h
+          exact hac (by simp [h])
+        have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (affinePoint (K := K) pa) (affinePoint (K := K) pc) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_affine_affine (K := K) hS hpa hpc hpapc hcanon
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (colDirection (K := K)) (affinePoint (K := K) pa) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_col_affine (K := K) pa hcanon
+      · exact hbc rfl
+      · have hpapc : pa ≠ pc := by
+          intro h
+          exact hac (by simp [h])
+        have hcanon :
+            Projective.Collinear K (PlaneVec K) (colDirection (K := K))
+              (affinePoint (K := K) pa) (affinePoint (K := K) pc) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_col_affine_affine (K := K) hS hpa hpc hpapc hcanon
+    · rcases mem_fixed_union_image_cases (K := K) hc with rfl | rfl | ⟨pc, hpc, rfl⟩
+      · have hpapb : pa ≠ pb := by
+          intro h
+          exact hab (by simp [h])
+        have hcanon :
+            Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+              (affinePoint (K := K) pa) (affinePoint (K := K) pb) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_row_affine_affine (K := K) hS hpa hpb hpapb hcanon
+      · have hpapb : pa ≠ pb := by
+          intro h
+          exact hab (by simp [h])
+        have hcanon :
+            Projective.Collinear K (PlaneVec K) (colDirection (K := K))
+              (affinePoint (K := K) pa) (affinePoint (K := K) pb) :=
+          (projectiveCollinear_congr_set (K := K)
+            (by ext x; simp [or_left_comm, or_comm])).mp hcol
+        exact not_collinear_col_affine_affine (K := K) hS hpa hpb hpapb hcanon
+      · have hpapb : pa ≠ pb := by
+          intro h
+          exact hab (by simp [h])
+        have hpapc : pa ≠ pc := by
+          intro h
+          exact hac (by simp [h])
+        have hpbpc : pb ≠ pc := by
+          intro h
+          exact hbc (by simp [h])
+        exact not_collinear_affine_affine_affine (K := K) hS
+          hpa hpb hpc hpapb hpapc hpbpc hcol
+
 /--
-Concrete coordinate statement still left for WP-1: the projective cap condition
-with the two direction points adjoined is exactly the residual grid cap
-condition.
+Concrete coordinate bridge for WP-1: the projective cap condition with the two
+direction points adjoined is exactly the residual grid cap condition.
 -/
 def ValidityStatement [Fintype K] [DecidableEq K] : Prop :=
   ∀ S : Finset (GridPoint K),
     Cap K (PlaneVec K) (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) ↔
       GridCap S
+
+/-- The coordinate frame-to-grid validity bridge. -/
+theorem validityStatement [Fintype K] [DecidableEq K] :
+    ValidityStatement (K := K) := by
+  intro S
+  constructor
+  · exact gridCap_of_projectiveCap (K := K)
+  · exact projectiveCap_of_gridCap (K := K)
 
 /-- The coordinate validity statement instantiates the abstract bridge. -/
 noncomputable def bridgeOfValidity [Fintype K] [DecidableEq K]
@@ -227,6 +611,16 @@ theorem statement_of_validity [Fintype K] [DecidableEq K]
     (h : ValidityStatement (K := K)) :
     Statement (K := K) (V := PlaneVec K) := by
   exact ⟨bridgeOfValidity (K := K) h⟩
+
+/-- The standard coordinate frame-grid bridge. -/
+noncomputable def coordinateBridge [Fintype K] [DecidableEq K] :
+    FrameGridBridge K (PlaneVec K) (GridPoint K) :=
+  bridgeOfValidity (K := K) (validityStatement (K := K))
+
+/-- WP-1 completed in the standard coordinate projective plane. -/
+theorem coordinateStatement [Fintype K] [DecidableEq K] :
+    Statement (K := K) (V := PlaneVec K) :=
+  statement_of_validity (K := K) (validityStatement (K := K))
 
 end Coordinate
 end FrameGridBridge

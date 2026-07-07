@@ -58,8 +58,11 @@ This overlay records post-agenda gate status without rewriting Fable's ranked me
   speculative certified-isomorph-rejection wedge.
 - **Affine cap Lean theorem completed:** commit `965d660` proves the all-nontrivial finite affine
   cap-game theorem in `CapGame.Affine.initialP_of_nontrivial`, with polished `ι -> K` and
-  `Fin n -> K` variants. The live Lean lane now moves to ProjectiveCap WP-1: prove the
-  frame-to-grid validity bridge in `ProjectiveCap.FrameGridBridge`.
+  `Fin n -> K` variants.
+- **ProjectiveCap WP-1 completed:** `ProjectiveCap.FrameGridBridge.Coordinate.validityStatement`
+  proves the fixed two-direction projective cap condition is equivalent to residual `GridCap`;
+  `coordinateBridge` now instantiates the abstract frame-grid bridge. The live Lean lane moves
+  to WP-2: the q-even residual-grid mirror theorem.
 
 ## Part I — repo follow-on, by track
 
