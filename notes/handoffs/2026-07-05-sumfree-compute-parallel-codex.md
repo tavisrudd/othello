@@ -105,6 +105,11 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/FiniteAbelianRanks.lean`](../../lean/Sumfree/FiniteAbelianRanks.lean):
   `exists_cyclic_factor_rank_counts` transports the cyclic-factor rank counts from
   `AddCommGroup.equiv_directSum_zmod_of_finite'` back to an arbitrary finite abelian group;
+- finite-abelian outcome wrapper in
+  [`../../lean/Sumfree/FiniteAbelianOutcome.lean`](../../lean/Sumfree/FiniteAbelianOutcome.lean):
+  `exists_cyclic_factor_rank_counts_with_outcome_of_threeRank_le_one` combines those
+  noncanonical cyclic-factor rank counts with the exact proved P/N criterion whenever the
+  extracted 3-rank sum is at most one;
 - labelled `ZMod 2 x F_3^b` residual proof:
   `deadSlot_not_labelLegal`, `avoidsDeadSlot_of_labelLegal`,
   `LabelLegal.move_ne_zero_of_anchor`, `LabelLegal.move_ne_anchor_of_anchor`, the explicit
@@ -127,8 +132,9 @@ The Lean layer is narrower than this compute log. Current build check:
 
 **Not yet formalized in Lean:** a canonical named `s₂/r₃` API independent of the cyclic factors chosen
 by mathlib's structure theorem; any nimber/Grundy statements from this compute log; the warm-up
-`Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p` program. The socle reduction is
-false and must not be resurrected as a target.
+`Z3 x Z_p` spectral statements; and the open/adaptive `Z3^2 x Z_p` program. The exact finite-abelian
+classification is formalized only through the `r₃ <= 1` wrapper above. The socle reduction is false
+and must not be resurrected as a target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills

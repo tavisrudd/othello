@@ -276,7 +276,11 @@ irreducible open core is **only the socle-reduction proof itself.**
 The matching concrete rank facts for `Z₂ × F₃ᵇ` now live in
 [`../lean/Sumfree/Z2F3Ranks.lean`](../lean/Sumfree/Z2F3Ranks.lean):
 `hasTwoRank_z2v_zmod3_module` and `hasThreeRank_z2v_zmod3_module`; the combined ranked outcome
-package is `Sumfree.Z2F3Game.ranked_initial_isP`.
+package is `Sumfree.Z2F3Game.ranked_initial_isP`. The noncanonical finite-abelian cyclic-factor
+rank bridge is [`../lean/Sumfree/FiniteAbelianRanks.lean`](../lean/Sumfree/FiniteAbelianRanks.lean),
+and the exact proved `r3 <= 1` finite-abelian outcome wrapper is
+`exists_cyclic_factor_rank_counts_with_outcome_of_threeRank_le_one` in
+[`../lean/Sumfree/FiniteAbelianOutcome.lean`](../lean/Sumfree/FiniteAbelianOutcome.lean).
 
 ### ★★ THEOREM — `F₃ⁿ = N` (first player wins) for all `n`, by move-then-mirror
 
