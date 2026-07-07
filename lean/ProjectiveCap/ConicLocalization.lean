@@ -173,6 +173,69 @@ def OddHyperbolaMaximalStatement : Prop :=
 def hyperbolaParamPoint (rho A B t : K) : GridPoint K :=
   (rho + t, A + B / t)
 
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaParamPoint_injective (rho A B : K) :
+    Function.Injective (hyperbolaParamPoint (K := K) rho A B) := by
+  intro t s h
+  have hfirst := congrArg Prod.fst h
+  simp [hyperbolaParamPoint] at hfirst
+  linear_combination hfirst
+
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaParamPoint_onHyperbola {rho A B t : K} (ht : t ≠ 0) :
+    OnHyperbola (K := K) rho A B (hyperbolaParamPoint rho A B t) := by
+  unfold OnHyperbola hyperbolaParamPoint
+  field_simp [ht]
+  ring
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_first_ne_rho {rho A B : K} (hB : B ≠ 0)
+    {p : GridPoint K} (hp : OnHyperbola (K := K) rho A B p) :
+    p.1 ≠ rho := by
+  intro h
+  unfold OnHyperbola at hp
+  rw [h, sub_self, zero_mul] at hp
+  exact hB hp.symm
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_second_ne_A {rho A B : K} (hB : B ≠ 0)
+    {p : GridPoint K} (hp : OnHyperbola (K := K) rho A B p) :
+    p.2 ≠ A := by
+  intro h
+  unfold OnHyperbola at hp
+  rw [h, sub_self, mul_zero] at hp
+  exact hB hp.symm
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_eq_hyperbolaParamPoint {rho A B : K} (hB : B ≠ 0)
+    {p : GridPoint K} (hp : OnHyperbola (K := K) rho A B p) :
+    p = hyperbolaParamPoint rho A B (p.1 - rho) := by
+  ext
+  · simp [hyperbolaParamPoint]
+  · have ht : p.1 - rho ≠ 0 := by
+      intro hz
+      exact onHyperbola_first_ne_rho (K := K) hB hp (sub_eq_zero.mp hz)
+    have hdiv : B / (p.1 - rho) = p.2 - A := by
+      unfold OnHyperbola at hp
+      rw [← hp]
+      field_simp [ht]
+    calc
+      p.2 = A + (p.2 - A) := by ring
+      _ = A + B / (p.1 - rho) := by rw [← hdiv]
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_iff_exists_param {rho A B : K} (hB : B ≠ 0)
+    {p : GridPoint K} :
+    OnHyperbola (K := K) rho A B p ↔
+      ∃ t : K, t ≠ 0 ∧ p = hyperbolaParamPoint rho A B t := by
+  constructor
+  · intro hp
+    refine ⟨p.1 - rho, ?_, onHyperbola_eq_hyperbolaParamPoint (K := K) hB hp⟩
+    intro hz
+    exact onHyperbola_first_ne_rho (K := K) hB hp (sub_eq_zero.mp hz)
+  · rintro ⟨t, ht, rfl⟩
+    exact hyperbolaParamPoint_onHyperbola (K := K) ht
+
 /--
 The translated-coordinate map
 `(t, s) |-> ((u / B) * s, (B / u) * t)`, transported back to grid

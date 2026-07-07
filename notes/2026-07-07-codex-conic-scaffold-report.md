@@ -73,6 +73,12 @@ OnConicEscapeStatement
 
 ```text
 hyperbolaParamPoint
+hyperbolaParamPoint_injective
+hyperbolaParamPoint_onHyperbola
+onHyperbola_first_ne_rho
+onHyperbola_second_ne_A
+onHyperbola_eq_hyperbolaParamPoint
+onHyperbola_iff_exists_param
 psi
 psi_involutive
 psi_onHyperbola_iff
@@ -102,6 +108,8 @@ The following are sorry-free Lean theorems:
   equivalent to the hyperbola normal form with `rho = -zeta`, `A = -eps`, `B = zeta*eps - gamma`.
 - `mem_onConicLegalExtensions`: membership in `OnConicLegalExtensions` is exactly on-hyperbola
   plus legal grid extension.
+- `onHyperbola_iff_exists_param`: for `B != 0`, the hyperbola is exactly the image of the
+  nonzero-parameter map `t |-> (rho + t, A + B/t)`.
 - `psi_involutive`: if `B != 0` and `u != 0`, then `psi rho A B u` is involutive.
 - `psi_onHyperbola_iff`: under the same nonzero hypotheses, `psi_u` preserves the hyperbola.
 - `psi_hyperbolaParamPoint`: on parametrized conic points, `psi_u` acts as `t |-> u / t`.
