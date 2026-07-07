@@ -263,6 +263,45 @@ theorem det_rowDirection_colDirection_affine (p : GridPoint K) :
   rw [Matrix.det_fin_three]
   simp [rowDirectionVec, colDirectionVec, affineVec]
 
+theorem det_rowDirection_colDirection_vec (v : PlaneVec K) :
+    Matrix.det ![rowDirectionVec (K := K), colDirectionVec (K := K), v] = v 2 := by
+  rw [Matrix.det_fin_three]
+  simp [rowDirectionVec, colDirectionVec]
+
+theorem collinear_row_col_mk_of_coord2_eq_zero {v : PlaneVec K} (hv : v ≠ 0)
+    (h2 : v 2 = 0) :
+    Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+      (colDirection (K := K)) (Projectivization.mk K v hv) := by
+  change Projective.Collinear K (PlaneVec K)
+      (Projectivization.mk K (rowDirectionVec (K := K)) rowDirectionVec_ne_zero)
+      (Projectivization.mk K (colDirectionVec (K := K)) colDirectionVec_ne_zero)
+      (Projectivization.mk K v hv)
+  rw [mk_collinear_iff_det_eq_zero rowDirectionVec_ne_zero colDirectionVec_ne_zero hv,
+    det_rowDirection_colDirection_vec, h2]
+
+theorem point_eq_affine_or_collinear_row_col
+    (x : Point K (PlaneVec K)) :
+    (∃ p : GridPoint K, x = affinePoint (K := K) p) ∨
+      Projective.Collinear K (PlaneVec K) (rowDirection (K := K))
+        (colDirection (K := K)) x := by
+  induction x using Projectivization.ind with
+  | h v hv =>
+      by_cases h2 : v 2 = 0
+      · right
+        exact collinear_row_col_mk_of_coord2_eq_zero (K := K) hv h2
+      · left
+        let p : GridPoint K := (v 0 / v 2, v 1 / v 2)
+        refine ⟨p, ?_⟩
+        change Projectivization.mk K v hv =
+          Projectivization.mk K (affineVec (K := K) p) (affineVec_ne_zero p)
+        refine (Projectivization.mk_eq_mk_iff' K v (affineVec (K := K) p)
+          hv (affineVec_ne_zero p)).mpr ?_
+        refine ⟨v 2, ?_⟩
+        ext i
+        fin_cases i <;> simp [p, affineVec]
+        · field_simp [h2]
+        · field_simp [h2]
+
 theorem det_affine_affine_affine (p q r : GridPoint K) :
     Matrix.det ![affineVec (K := K) p, affineVec (K := K) q,
       affineVec (K := K) r] =
