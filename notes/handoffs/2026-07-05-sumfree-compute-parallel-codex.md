@@ -61,7 +61,9 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_isP_of_mod_six_eq_five`, `initial_win_of_mod_six_eq_two`,
   `initial_win_of_mod_six_eq_three`, and `initial_win_of_mod_six_eq_four`; and combined
   branch statements `initial_isP_of_mod_six_zero_or_one_or_five` and
-  `initial_win_of_mod_six_two_or_three_or_four`;
+  `initial_win_of_mod_six_two_or_three_or_four`, packaged as biconditionals
+  `initial_isP_iff_mod_six_zero_or_one_or_five` and
+  `initial_win_iff_mod_six_two_or_three_or_four`;
 - labelled `ZMod 2 x F_3^b` residual proof:
   `deadSlot_not_labelLegal`, `PairCompleted`, and `pair_completion` in
   [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean);
@@ -72,12 +74,11 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), with wrappers in
   [`../../lean/Sumfree/Almost/Z2F3Outcome.lean`](../../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
-**Not yet formalized in Lean:** an optional iff/exclusivity wrapper packaging the cyclic `Z_n`
-mod-6 theorem as one biconditional over `n % 6`; the full finite-abelian rank/cardinality bookkeeping
-turning the finite obstruction wrappers into named `s2 >= 2`, `s2 = 1`, and `r3 <= 1` classification
-statements; any nimber/Grundy statements from this compute log; the warm-up `Z3 x Z_p` spectral
-statements; and the open/adaptive `Z3^2 x Z_p` program. The socle reduction is false and must not be
-resurrected as a target.
+**Not yet formalized in Lean:** the full finite-abelian rank/cardinality bookkeeping turning the
+finite obstruction wrappers into named `s2 >= 2`, `s2 = 1`, and `r3 <= 1` classification statements;
+any nimber/Grundy statements from this compute log; the warm-up `Z3 x Z_p` spectral statements; and
+the open/adaptive `Z3^2 x Z_p` program. The socle reduction is false and must not be resurrected as a
+target.
 
 Session 2026-07-05--4 **disproved the socle reduction**: `Z3²×Z5 = N` but **`Z3²×Z7 = P`**, both
 rigorous (two independent sound solvers agree). Since `G[6]=Z3²` (=N) for both, this kills

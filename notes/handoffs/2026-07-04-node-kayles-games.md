@@ -53,15 +53,16 @@ rename Lean files to match older prose names.
   `initial_isP_of_mod_six_eq_five`, `initial_win_of_mod_six_eq_two`,
   `initial_win_of_mod_six_eq_three`, and `initial_win_of_mod_six_eq_four`, and
   combined branch statements `initial_isP_of_mod_six_zero_or_one_or_five` and
-  `initial_win_of_mod_six_two_or_three_or_four`;
+  `initial_win_of_mod_six_two_or_three_or_four`, packaged as biconditionals
+  `initial_isP_iff_mod_six_zero_or_one_or_five` and
+  `initial_win_iff_mod_six_two_or_three_or_four`;
 - Queens coordinate/game bridge targets:
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** the optional cyclic `Z_n` mod-6 biconditional
-packaging as a single iff over `n % 6`; the full finite-abelian rank/cardinality bookkeeping needed
-for the full `r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the projective odd-plane
-escape theorem; and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** the full finite-abelian rank/cardinality
+bookkeeping needed for the full `r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the
+projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

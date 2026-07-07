@@ -787,5 +787,41 @@ theorem initial_win_of_mod_six_two_or_three_or_four {n : ℕ} [NeZero n]
   · exact initial_win_of_mod_six_eq_three (n := n) h3
   · exact initial_win_of_mod_six_eq_four (n := n) h4
 
+/-- One-line P-side cyclic mod-6 theorem. -/
+theorem initial_isP_iff_mod_six_zero_or_one_or_five {n : ℕ} [NeZero n] :
+    Game.IsP (∅ : Finset (ZMod n)) ↔ n % 6 = 0 ∨ n % 6 = 1 ∨ n % 6 = 5 := by
+  constructor
+  · intro hP
+    have hlt : n % 6 < 6 := Nat.mod_lt n (by decide)
+    interval_cases hmod : n % 6
+    · exact Or.inl rfl
+    · exact Or.inr (Or.inl rfl)
+    · exfalso
+      exact hP (initial_win_of_mod_six_eq_two (n := n) hmod)
+    · exfalso
+      exact hP (initial_win_of_mod_six_eq_three (n := n) hmod)
+    · exfalso
+      exact hP (initial_win_of_mod_six_eq_four (n := n) hmod)
+    · exact Or.inr (Or.inr rfl)
+  · exact initial_isP_of_mod_six_zero_or_one_or_five (n := n)
+
+/-- One-line N-side cyclic mod-6 theorem. -/
+theorem initial_win_iff_mod_six_two_or_three_or_four {n : ℕ} [NeZero n] :
+    Game.Win (∅ : Finset (ZMod n)) ↔ n % 6 = 2 ∨ n % 6 = 3 ∨ n % 6 = 4 := by
+  constructor
+  · intro hW
+    have hlt : n % 6 < 6 := Nat.mod_lt n (by decide)
+    interval_cases hmod : n % 6
+    · exfalso
+      exact (initial_isP_of_mod_six_eq_zero (n := n) hmod) hW
+    · exfalso
+      exact (initial_isP_of_mod_six_eq_one (n := n) hmod) hW
+    · exact Or.inl rfl
+    · exact Or.inr (Or.inl rfl)
+    · exact Or.inr (Or.inr rfl)
+    · exfalso
+      exact (initial_isP_of_mod_six_eq_five (n := n) hmod) hW
+  · exact initial_win_of_mod_six_two_or_three_or_four (n := n)
+
 end CyclicZMod
 end Sumfree
