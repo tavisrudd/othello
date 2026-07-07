@@ -50,3 +50,6 @@ Sum-free game Z_n, Grundy(empty), multiplier-quotient solver:
   n=49: G=0  memo=  247390  mod6=1 law=P obs=P
   n=50: G=1  memo= 2463685  mod6=2 law=N obs=N
   n=51: G=1  memo=  578318  mod6=3 law=N obs=N
+  n=52: G=2  memo= 3839130  mod6=4 law=N obs=N
+SEQ [0, 1, 1, 2, 0, 0, 0, 2, 1, 1, 0, 0, 0, 2, 2, 3, 0, 0, 0, 2, 1, 3, 0, 0, 0, 2, 1, 2, 0, 0, 0, 3, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 2, 1, 2, 0, 0, 0, 1, 1, 2]
+IMPROVED_DONE

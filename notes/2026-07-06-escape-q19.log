@@ -1,0 +1,3 @@
+q= 19  root=P  size3-classes=27  total(q^2-9q+21)=211  min-escape=211  max-escape=211  bad-odd(even-escape) classes=0/27  parity-proof=HOLDS (all bad even)
+      escape-histogram (escape:classes) = 211:27
+Q19_DONE

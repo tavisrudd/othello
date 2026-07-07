@@ -1386,3 +1386,138 @@ The live branch is now:
 
 Until that data arrives, the safe statement is: Lemma A/B remain the right stated targets from the
 assignment, but Lemma B's p=7 zero-sum triple explanation has been killed.
+
+
+## 2026-07-06 Addendum: Rank-Lift Candidate for `Z3^r x Z_p`
+
+The current assignment asks for an induction-on-3-rank step before the `r=3` full-board datapoint
+lands. I did not run solvers here; the machine is busy and compute already owns the long jobs. This
+is the proposed proof target and the exact oracle data that would validate or refute it.
+
+### Uniform first-move reduction
+
+For every `r>=1` and prime `p!=3`, write
+
+`G_{r,p}=F_3^r x Z_p`.
+
+The automorphism group `GL(r,3) x Z_p^*` has exactly three orbits on nonzero elements:
+
+- socle: `(v,0)`, `v!=0`;
+- coprime: `(0,c)`, `c!=0`;
+- mixed: `(v,c)`, `v!=0`, `c!=0`.
+
+Thus
+
+`G(G_{r,p}) = mex{n_soc(r,p), n_cop(r,p), n_mix(r,p)}`,
+
+where these are the Grundy values after one representative opening. Hence the root is P iff all
+three openings are N, equivalently iff each opening has at least one two-element P-reply.
+
+This gives an existential target for every rank: find P two-element witnesses for the three opening
+orbits. For `r=2`, the existing witnesses are exactly Lemma A and Lemma B. For `r=3`, the same orbit
+logic reduces the full P prediction to the same three opening orbits; in favorable cases two
+two-element witnesses still suffice, while the validation list below includes four representatives to
+test whether the new coordinate is genuinely usable.
+
+### Candidate monotone-resource induction
+
+The useful invariant is not naive parity of `r`; it is the number of unused order-3 pairs after the
+opening. In `F_3^r` the nonzero socle elements split into `(3^r-1)/2` pairs `{u,-u}`. A socle opening
+uses one such pair by making `-u=2u` illegal. Passing from rank `r` to `r+1` embeds the old board in a
+hyperplane and adds a large supply of new off-hyperplane order-3 pairs.
+
+Candidate induction statement:
+
+> If for `G_{r,p}` each first-move orbit has a two-element P-reply whose two played socle projections
+> span a subspace `U <= F_3^r`, then in `G_{r+1,p}` the same representative, embedded in a hyperplane,
+> remains N after the corresponding opening; moreover each new off-hyperplane Alice move can be
+> answered inside its affine two-plane modulo `U`, leaving the quotient resource no smaller than in
+> rank `r`.
+
+Concretely, the induction should preserve the property
+
+`R(r,p): every first-move orbit of G_{r,p} has a P-reply of socle-span dimension <= 2`.
+
+Why this is plausible: the hard obstruction in the failed global mirrors is destructible order-3
+resource. A rank lift does not remove the old resource, but it gives the responder additional
+independent `{w,-w}` pairs that are not touched by an opening contained in the old hyperplane. The
+responder's job is to spend these extra pairs as a buffer when Alice plays outside the hyperplane,
+then return to a rank-`r` residual. If this works, `R(2,p)` implies `R(3,p)` for `p>=7`, and then
+`Z3^3 x Z_p` is P rather than the naive alternating N.
+
+The statement is deliberately existential. It does not require a fixed involution or a formula reply;
+it only predicts that the embedded rank-2 P witnesses survive after one extra `F_3` coordinate, and
+that off-hyperplane moves have P-replies using the extra coordinate.
+
+### Decisive `r=3` positions
+
+Use coordinates `(a,b,c,k)` for `F_3^3 x Z_p`. The rank-2 hyperplane is `c=0`. The first batch is the
+minimal validation set for the monotone-resource step at `p=5,7,11` and then `p=13,17` if feasible:
+
+1. Embedded Lemma A / socle+mixed witness:
+
+   `sumfree 3,3,3,p --start "0,1,0,0;1,0,0,1"`
+
+   Expected by the monotone-resource induction: `OUTCOME=P` for `p>=7`. If this is N for `p=7` or
+   `p=11`, the embedded-witness induction is false.
+
+2. Embedded Lemma B / coprime+mixed witness:
+
+   `sumfree 3,3,3,p --start "0,0,0,1;0,1,0,1"`
+
+   Expected: `OUTCOME=P` at least for the same primes where rank-2 Lemma B is P. If rank-2 Lemma B
+   survives at `p=11` but this embedded version fails, then the extra rank is not monotone in the
+   needed sense.
+
+3. A genuinely new off-hyperplane socle answer to the socle opening:
+
+   `sumfree 3,3,3,p --start "0,1,0,0;0,0,1,1"`
+
+   This tests whether the extra coordinate itself supplies the responder resource, rather than merely
+   preserving the old rank-2 witness. Expected: `OUTCOME=P` for `p>=7` if the rank-lift buffer picture
+   is correct.
+
+4. A genuinely new off-hyperplane mixed answer to the coprime opening:
+
+   `sumfree 3,3,3,p --start "0,0,0,1;0,0,1,1"`
+
+   Expected: `OUTCOME=P` for `p>=7`. Failure here would mean coprime openings cannot always be
+   neutralized by the new `F_3` direction.
+
+These four positions are enough to distinguish the two main scenarios:
+
+- If all four are P for `p=7` and `p=11`, and the full `Z3^3 x Z5` root returns P, the monotone-resource
+  induction is strongly supported. The next proof task is to show that every off-hyperplane Alice move
+  from the embedded P boards has an off-hyperplane P-reply, reducing the rest to the rank-2 lemmas.
+- If the full root is N, or any embedded witness above fails while the corresponding rank-2 witness
+  holds, then the monotone-resource induction is false and the naive alternation picture regains
+  credibility.
+
+### First-layer data to request if a two-element board is P
+
+For each P result above, request the P-reply dump from that two-element board:
+
+`grundy 3,3,3,p --start "..." --children --preply`
+
+Classify Alice moves by whether their socle projection lies in the old hyperplane `c=0` and whether
+their reply also lies in `c=0`:
+
+- `H -> H`: should match the rank-2 reply structure;
+- `H -> offH`: extra resource is being used even for old moves;
+- `offH -> H`: rank lift is collapsing new moves back into the old board;
+- `offH -> offH`: the desired buffer behavior.
+
+The key confirmation for the induction is not just that the board is P, but that every off-hyperplane
+move has at least one P-reply whose pair with Alice's move spans a two-dimensional affine slice over
+the old witness span. That is the local shape needed to turn the extra `O_3` pairs into a reusable
+rank-lift argument.
+
+### Current safe conclusion
+
+Do not write the rank-lift as proved. The clean claim to test is:
+
+`R(2,p) => R(3,p)` for `p>=7`, witnessed by the four two-element positions above.
+
+A P datapoint for full `Z3^3 x Z5` plus P outcomes for these positions at `p=7` and `p=11` would make
+this the leading proof route. A single failure among the embedded witnesses is enough to reject the
+monotone-resource induction in its present form.

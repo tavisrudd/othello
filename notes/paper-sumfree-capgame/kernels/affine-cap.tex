@@ -1,7 +1,108 @@
 \section{The cap achievement game on \texorpdfstring{$\mathrm{AG}(n,q)$}{AG(n,q)}}
 \label{sec:affine-cap}
 
-%TODO (lead author, F1b): statement + full proof that the affine cap game on AG(n,q) is a
-%second-player win for every n and every prime power q -- the shared parity lemma plus the
-%two mirrors (translation tau_v for q even/char 2; move-then-reflect sigma_c for q odd).
-%Source: notes/2026-07-04-capset-game-theorem.md. Do NOT draft proof text here.
+Let $\AG(n,q)$ denote the affine space $\Fq^n$, where $q$ is a prime power. A
+\emph{cap} is a set of points containing no three distinct collinear points. The cap
+achievement game starts from the empty cap and alternately adds points while preserving
+the cap condition.
+
+\begin{theorem}[Affine cap outcome law]
+\label{thm:affine-cap}
+For every $n\geq 1$ and every prime power $q$, the cap achievement game on $\AG(n,q)$
+is a second-player win.
+\end{theorem}
+
+For $q=3$ this is the cap-set achievement game on $\mathbb F_3^n$, so the theorem settles
+that game in every dimension without computation.
+
+We use two elementary facts about affine mirrors. A \emph{cap automorphism} is a
+permutation of $\Fq^n$ taking affine lines to affine lines; every invertible affine map is
+one. Such a map preserves caps and legal moves.
+
+\begin{lemma}[Line-parity lemma]
+\label{lem:affine-line-parity}
+Let $\sigma$ be a cap automorphism, let $A$ be a $\sigma$-symmetric cap, and let $\ell$
+be a line with $\sigma(\ell)=\ell$. Suppose that on $\ell$, the map $\sigma$ acts
+fixed-point-freely away from a set $F\subseteq \ell$, and that $A\cap F=\varnothing$.
+If some $y\in \ell$ is a legal move at $A$, then $A\cap \ell=\varnothing$.
+\end{lemma}
+
+\begin{proof}
+The set $A\cap\ell$ is $\sigma$-invariant and misses $F$, so it is partitioned into
+2-element $\sigma$-orbits. Hence $|A\cap\ell|$ is even. Since $A\cup\{y\}$ is a cap and
+$y\in\ell$, the line $\ell$ contains at most two points of $A\cup\{y\}$, so
+$|A\cap\ell|\leq 1$. The only even possibility is $0$.
+\end{proof}
+
+\begin{lemma}[Mirror step]
+\label{lem:affine-mirror-step}
+Let $\sigma$ be an involutive cap automorphism, let $A$ be a $\sigma$-symmetric cap, and
+let $y$ be a legal move at $A$ with $\sigma(y)\neq y$. Let $\ell$ be the line through
+$y$ and $\sigma(y)$. If $A\cap\ell=\varnothing$, then $\sigma(y)$ is a legal reply and
+$A\cup\{y,\sigma(y)\}$ is a cap.
+\end{lemma}
+
+\begin{proof}
+If $\sigma(y)\in A$, then $y=\sigma(\sigma(y))\in \sigma(A)=A$, contradicting that $y$
+is a move. Suppose $A\cup\{y,\sigma(y)\}$ contains three distinct collinear points. Any
+such triple must contain $\sigma(y)$, since $A\cup\{y\}$ is already a cap. If the other
+two points are in $A$, applying $\sigma$ gives a collinear triple in $A\cup\{y\}$, a
+contradiction. If the triple is $\{y,\sigma(y),p\}$ with $p\in A$, then $p$ lies on
+the line $\ell$, contradicting $A\cap\ell=\varnothing$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:affine-cap}]
+First suppose $q$ is even. If $q=2$, every subset is a cap and the board has $2^n$ points,
+an even number, so the second player wins by any fixed pairing of the board.
+
+Now let $q\geq 4$ be even. Choose a nonzero vector $v\in\Fq^n$ and define
+\[
+  \tau_v(x)=x+v.
+\]
+In characteristic $2$, $\tau_v$ is a fixed-point-free involution and an affine cap
+automorphism. Let
+\[
+  \mathcal P=\{A\subseteq\Fq^n: A\text{ is a cap and }A=\tau_v(A)\}.
+\]
+The empty set lies in $\mathcal P$. If $A\in\mathcal P$ and $y$ is a legal move, let
+$\ell=\{y+sv:s\in\Fq\}$ be the line through $y$ and $\tau_v(y)$. The translation
+$\tau_v$ preserves $\ell$ and acts on it as $s\mapsto s+1$, fixed-point-freely. By
+Lemma~\ref{lem:affine-line-parity}, $A\cap\ell=\varnothing$; by
+Lemma~\ref{lem:affine-mirror-step}, $\tau_v(y)$ is a legal reply and the resulting cap
+is again in $\mathcal P$. Lemma~\ref{lem:sumfree-responder} proves that the empty
+position is $P$.
+
+Now suppose $q$ is odd. The board has odd size, so a whole-board fixed-point-free mirror
+cannot exist. Instead the second player builds a blocked fixed point. Let the first
+player open at $a$. The second player chooses any $b\neq a$, which is legal because two
+points always form a cap. Let
+\[
+  c=\frac{a+b}{2}.
+\]
+Then $a,b,c$ are distinct collinear points, so once $a$ and $b$ have been played, $c$ is
+not legal for the rest of the game. Let
+\[
+  \sigma_c(x)=2c-x
+\]
+be the point reflection through $c$. This is an affine involution, fixes exactly $c$, and
+swaps $a$ and $b$. Define
+\[
+  \mathcal P=\{A\subseteq\Fq^n: A\text{ is a cap},\ A=\sigma_c(A),\ \{a,b\}\subseteq A,
+    \ c\notin A\}.
+\]
+The position $\{a,b\}$ lies in $\mathcal P$. If $A\in\mathcal P$ and $y$ is legal, then
+$y\neq c$, since $c$ is blocked by $a,b$. Thus $\sigma_c(y)\neq y$. The line $\ell$
+through $y$ and $\sigma_c(y)$ passes through $c$ and is $\sigma_c$-invariant; on
+$\ell\setminus\{c\}$, the reflection is fixed-point-free. Since $A\cap\{c\}=\varnothing$,
+Lemma~\ref{lem:affine-line-parity} gives $A\cap\ell=\varnothing$, and
+Lemma~\ref{lem:affine-mirror-step} makes $\sigma_c(y)$ a legal reply. The new position
+is again in $\mathcal P$. Therefore $\{a,b\}$ is a $P$-position by
+Lemma~\ref{lem:sumfree-responder}. Since the second player can reach such a position
+after every opening $a$, the empty position is $P$.
+\end{proof}
+
+The two cases explain why affine space is easier than the projective analogue. In even
+characteristic, translations give a fixed-point-free pairing of the whole board. In odd
+characteristic, the unavoidable fixed point of a reflection is placed on the opening secant,
+where it is permanently blocked. Projective spaces have neither translations nor such a
+one-point fixed set, which is why the projective cap game remains open.

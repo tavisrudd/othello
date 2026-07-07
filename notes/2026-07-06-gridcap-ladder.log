@@ -1,0 +1,4 @@
+=== gridcap ladder Mon Jul  6 10:31:00 AM PDT 2026 ===
+[ 157s] q= 17  root=P (2nd wins)  classes=2110968  min-dev-size=4  odd-maximal-caps=143854 (min size 9)  even-but-N=859164 odd-but-P=242072
+[  75s] q= 19  root=P (2nd wins)  classes=3202913
+[2743s] q= 19  root=P (2nd wins)  classes=33949628  min-dev-size=6  odd-maximal-caps=692595 (min size 9)  even-but-N=10757220 odd-but-P=2407528

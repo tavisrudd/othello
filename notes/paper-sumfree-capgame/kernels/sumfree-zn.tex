@@ -1,7 +1,195 @@
 \section{The sum-free achievement game on \texorpdfstring{$\mathbb{Z}_n$}{Zn}}
 \label{sec:sumfree-zn}
 
-%TODO (lead author, F1a): statement + full proof of the mod-6 outcome theorem for the
-%sum-free achievement game on Z_n -- Lemmas 1-4 (negation mirror; translation mirror by
-%n/2; n/2 self-block; negation mirror with fixed extras) and the six-residue obstruction
-%count. Source: notes/2026-07-04-sumfree-game-theorem.md. Do NOT draft proof text here.
+For this section write all additions in $\Zn{n}$. A set $A\subseteq \Zn{n}$ is
+\emph{sum-free} if there are no $a,b,c\in A$, with repetition allowed, such that
+$a+b=c$. Thus $0$ is never playable, since $0+0=0$.
+
+When $2\mid n$ let $m=n/2$, the unique nonzero element with $2m=0$. When $3\mid n$ let
+$t=n/3$, so $3t=0$ and $-t=2t$.
+
+\begin{theorem}[Cyclic sum-free outcome law]
+\label{thm:sumfree-zn}
+For every $n\geq 1$, the sum-free achievement game on $\Zn{n}$ is a second-player win
+if and only if
+\[
+  n \equiv 0,1,5 \pmod 6.
+\]
+Equivalently, it is a first-player win exactly for $n\equiv 2,3,4\pmod 6$.
+\end{theorem}
+
+The proof is a mirror-strategy proof. The negation mirror $x\mapsto -x$ has exactly two
+obstructions: the order-$2$ fixed point $m$, when $2\mid n$, and the order-$3$ pair
+$\{t,2t\}$, when $3\mid n$, since $t+t=2t$. The outcome is $P$ precisely when these
+obstructions occur in matched parity: neither exists, or both exist.
+
+\begin{lemma}[Responder principle]
+\label{lem:sumfree-responder}
+Let $\mathcal P$ be a collection of positions in a finite normal-play addition game. Suppose
+that for every $A\in\mathcal P$ and every legal move $z$ from $A$, there is a legal reply
+$w$ from $A\cup\{z\}$ such that $A\cup\{z,w\}\in\mathcal P$. Then every position in
+$\mathcal P$ is a $P$-position.
+\end{lemma}
+
+\begin{proof}
+Use induction on the number of remaining legal moves in the finite game tree. If the player
+to move at $A\in\mathcal P$ has no move, they lose. Otherwise, after any move $z$, the
+responder chooses the promised $w$ and reaches a smaller position $A'\in\mathcal P$; by
+induction $A'$ is a $P$-position for the next player to move. Thus every move from $A$ is
+answered by a move to a $P$-position, so $A$ is itself a $P$-position.
+\end{proof}
+
+\begin{lemma}[Negation step]
+\label{lem:sumfree-negation}
+Let $A\subseteq \Zn{n}\setminus\{0\}$ be sum-free and satisfy $A=-A$. Let $z\notin A$ be
+a legal move at $A$. If $2z\neq 0$ and $3z\neq 0$, then $w=-z$ is a legal reply and
+$A\cup\{z,w\}$ is sum-free.
+\end{lemma}
+
+\begin{proof}
+First, $w\notin A\cup\{z\}$: if $w\in A$, then $z=-w\in -A=A$, and if $w=z$ then
+$2z=0$. Put $B=A\cup\{z,w\}$. Any sum-free violation in $B$ not involving $w$ is already
+a violation in $A\cup\{z\}$. If a violation involves $w$ but not $z$, negating the relation
+gives a violation involving $z$ but not $w$, again inside $A\cup\{z\}$.
+
+It remains only to check relations involving both $z$ and $w$, or $w$ twice. Since
+$z+w=0\notin B$, that shape is impossible. If $z+b=w$, then $b=-2z$; for $b\in A$ this
+would imply $2z\in A$ and hence $z+z=2z$ already violates $A\cup\{z\}$, while
+$b=z$ gives $3z=0$ and $b=w$ gives $z=0$. The case $w+b=z$ is analogous. Finally,
+$w+w=-2z$; if $-2z\in A$, symmetry gives $2z\in A$, and the alternatives $-2z=z$ or
+$-2z=w$ force $3z=0$ or $z=0$. All cases are excluded.
+\end{proof}
+
+\begin{lemma}[Translation step]
+\label{lem:sumfree-translation}
+Assume $2\mid n$, and let $m=n/2$. Let $A\subseteq \Zn{n}\setminus\{0\}$ be sum-free and
+satisfy $A=A+m$. Let $z\notin A$ be a legal move at $A$, with $z\neq m$. Then
+$w=z+m$ is a legal reply and $A\cup\{z,w\}$ is sum-free.
+\end{lemma}
+
+\begin{proof}
+The element $m$ is not in $A$: by $A=A+m$, $m\in A$ would imply $0=m+m\in A$. Also
+$w\notin A$ because $w\in A$ would imply $z=w+m\in A$, and $w\notin\{0,z\}$ because
+$w=0$ gives $z=m$ and $w=z$ gives $m=0$.
+
+Let $B=A\cup\{z,w\}$. Any new violation must involve $w$. If $a+b=w$ with
+$a,b\in A$, then $a+(b+m)=z$ and $b+m\in A$, contradicting legality of $z$. If
+$w+b=c$ with $b,c\in A$, then $z+b=c+m\in A$, again a contradiction. If $z+b=w$
+or $w+b=z$ with $b\in A$, then $b=m$, impossible. If $w+z=c$, then
+$c=2z+m$; for $c\in A$, adding $m$ gives $2z\in A$, contradicting legality of $z$,
+and the cases $c=z,w$ force $z=m,0$. Finally, $w+w=2z$, which is excluded in the
+same way if $2z\in A$, and equals $z$ or $w$ only when $z=0$ or $z=m$.
+\end{proof}
+
+\begin{lemma}[$m$ self-blocks]
+\label{lem:sumfree-m-self-blocks}
+Assume $2\mid n$ and let $m=n/2$. If $A\neq\varnothing$ is sum-free and satisfies
+$A=A+m$, then $m$ is not a legal move at $A$.
+\end{lemma}
+
+\begin{proof}
+Choose $z\in A$. Then $z+m\in A$, so adding $m$ creates the relation $m+z=z+m$.
+\end{proof}
+
+\begin{lemma}[Negation step with the order-$3$ extra]
+\label{lem:sumfree-negation-extra}
+Assume $3\mid n$, and let $t=n/3$. Let $C\subseteq\Zn{n}\setminus\{0\}$ be sum-free
+and suppose $C\setminus\{t\}$ is symmetric under negation. Let $z\notin C$ be a legal
+move at $C$. If
+\[
+  2z\neq 0,\qquad 3z\neq 0,\qquad 2(z-t)\neq 0,
+\]
+then $w=-z$ is a legal reply and $C\cup\{z,w\}$ is sum-free.
+\end{lemma}
+
+\begin{proof}
+The first two hypotheses give $z\neq 0$, $w\neq z$, and $z\notin\{t,2t\}$. If
+$w\in C\setminus\{t\}$ then $z=-w\in C\setminus\{t\}$, impossible; if $w=t$ then
+$z=2t$, also impossible. Hence $w\notin C\cup\{z\}$.
+
+Put $S=C\setminus\{t\}$. Since $S=-S$, any violation in $S\cup\{z,w\}$ is excluded by
+the same argument as Lemma~\ref{lem:sumfree-negation}. Thus any remaining new violation
+must involve both $w$ and the distinguished element $t$.
+
+We check the possible shapes. If $t+b=w$ with $b\in S$, then $z+t=-b\in S\subseteq C$,
+contradicting legality of $z$. If $w+b=t$ with $b\in S$, then $z+t=b\in C$, again a
+contradiction. If $w+t=c$ with $c\in S$, then $z+c=t\in C$, again a contradiction.
+The relations $t+t=w$, $w+t=t$, $w+z=t$, and $w+t=w$ force respectively
+$z=t$, $z=0$, $t=0$, and $t=0$. The relations $t+z=w$ and $w+w=t$ are both exactly
+$2(z-t)=0$, excluded. Finally, $w+t=z$ gives $t=2z$, so $z+z=t\in C$, contradicting
+legality of $z$. No violation remains.
+\end{proof}
+
+\begin{remark}
+The final hypothesis in Lemma~\ref{lem:sumfree-negation-extra} is necessary. Without it,
+when $n$ is even the choice $z=t+m$ may break the mirror: for example, in $\Zn{12}$ take
+$t=4$, $C=\{4\}$, and $z=10$. Then $C\cup\{z\}$ is sum-free, but the mirror reply
+$w=2$ creates $2+2=4$. The theorem below never uses the bad configuration: when
+$n\equiv 3\pmod 6$ no $m$ exists, and when $n\equiv 0\pmod 6$ the relevant augmented
+position already contains $m$, making $t+m$ illegal.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sumfree-zn}]
+We split according to $n\bmod 6$.
+
+If $n\equiv 1,5\pmod 6$, neither obstruction exists. Let
+\[
+  \mathcal P=\{A\subseteq \Zn{n}: A\text{ is sum-free and }A=-A\}.
+\]
+The empty set lies in $\mathcal P$. At $A\in\mathcal P$, every legal move $z$ has
+$2z\neq 0$ and $3z\neq 0$, so Lemma~\ref{lem:sumfree-negation} gives the reply $-z$
+and returns to $\mathcal P$. By Lemma~\ref{lem:sumfree-responder}, $\varnothing$ is a
+$P$-position.
+
+If $n\equiv 2,4\pmod 6$, the only obstruction is $m$. The first player opens $m$, which
+is legal since $m+m=0$. Let
+\[
+  \mathcal P=\{A\subseteq \Zn{n}: m\in A,\ A\text{ is sum-free and }A=-A\}.
+\]
+The position $\{m\}$ lies in $\mathcal P$. At every $A\in\mathcal P$, a legal move
+$z$ is not $m$, so $2z\neq 0$; also $3z\neq 0$ because $3\nmid n$. Lemma~\ref{lem:sumfree-negation}
+therefore gives a negation reply, and Lemma~\ref{lem:sumfree-responder} shows that
+$\{m\}$ is a $P$-position. Hence the first move to $m$ wins.
+
+If $n\equiv 3\pmod 6$, the only obstruction is the order-$3$ pair. The first player
+opens $t$, which is legal because $t+t=2t\notin\{t\}$. Let
+\[
+  \mathcal P=\{C\subseteq \Zn{n}: t\in C,\ C\text{ is sum-free, and }C\setminus\{t\}
+    \text{ is symmetric}\}.
+\]
+At $C\in\mathcal P$, the element $2t$ is not legal because $t+t=2t$, and no nonzero
+order-$2$ element exists. Thus every legal $z$ satisfies the hypotheses of
+Lemma~\ref{lem:sumfree-negation-extra}, which supplies the reply $-z$ and returns to
+$\mathcal P$. Hence $\{t\}$ is a $P$-position, so the first player wins by opening $t$.
+
+It remains to handle $n\equiv 0\pmod 6$, where both obstructions exist. We show that
+every first move is answered by a move to a $P$-position.
+
+First suppose the opening is $x\neq m$. The second player replies $x+m$, legal by
+Lemma~\ref{lem:sumfree-translation} with $A=\varnothing$. Let
+\[
+  \mathcal P=\{A\subseteq \Zn{n}: A\neq\varnothing,\ A\text{ is sum-free, and }A=A+m\}.
+\]
+The position $\{x,x+m\}$ lies in $\mathcal P$. At every $A\in\mathcal P$, the move $m$
+is illegal by Lemma~\ref{lem:sumfree-m-self-blocks}; every other legal move is answered
+by Lemma~\ref{lem:sumfree-translation}. Thus $\{x,x+m\}$ is a $P$-position.
+
+Now suppose the opening is $m$. The second player replies $t$. The position $\{m,t\}$
+is sum-free: the sums $m+m=0$, $t+t=2t$, and $m+t$ are all outside $\{m,t\}$. Let
+\[
+  \mathcal P=\{C\subseteq \Zn{n}: \{m,t\}\subseteq C,\ C\text{ is sum-free, and }
+    C\setminus\{t\}\text{ is symmetric}\}.
+\]
+At $C\in\mathcal P$, a legal $z$ is not $m$ or $t$; $2t$ is illegal because $t+t=2t$;
+and $t+m$ is illegal because $m+(t+m)=t$. Hence $2z\neq 0$, $3z\neq 0$, and
+$2(z-t)\neq 0$. Lemma~\ref{lem:sumfree-negation-extra} gives the reply $-z$ and returns
+to $\mathcal P$, so $\{m,t\}$ is a $P$-position.
+
+Thus every opening in the $n\equiv 0\pmod 6$ case is answered by a move to a $P$-position,
+and the empty position is itself a $P$-position. The four residue cases prove the theorem.
+\end{proof}
+
+The proof also explains the only subtle residue distinction. When $n\equiv 2,4\pmod 6$,
+the position $\{m\}$ is $P$, so the first player wins by opening there. When
+$n\equiv 0\pmod 6$, the same opening is no longer winning because the second player has
+the order-$3$ reply $t$, reaching the $P$-position $\{m,t\}$.

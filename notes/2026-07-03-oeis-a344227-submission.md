@@ -1,11 +1,10 @@
-# OEIS A344227 extension — ready-to-paste submission package (2026-07-03)
+# OEIS A344227 extension — ready-to-paste submission package (2026-07-03; updated 2026-07-07)
 
 **Purpose**: extend OEIS **A344227** (Sprague-Grundy / nimber values of the Non-Attacking
 Queens game = Node-Kayles on the queen graph), catalogued only through n = 13, with the new
-computed terms **G(14) = 0, G(15) = 1, G(16) = 0**, plus a hold-slot for **G(17)** (run in
-flight, expected to pin the value — predicted 1 — within days).
+computed terms **G(14) = 0, G(15) = 1, G(16) = 0, G(17) = 2**.
 
-**Author of the new terms**: Tavis Rudd. **Extension date used below**: Jul 03 2026 (adjust to
+**Author of the new terms**: Tavis Rudd. **Extension date used below**: Jul 07 2026 (adjust to
 the actual submission date before pasting).
 
 **Provenance of the data**: the heap-sum nimber engine in this repo
@@ -14,18 +13,18 @@ the actual submission date before pasting).
 Submission rationale in [notes/2026-07-03-connections-deep-dive.md §3.1](2026-07-03-connections-deep-dive.md).
 n = 18 outcome + Jenrich citation phrasing from [notes/queens-n18-paper.md](queens-n18-paper.md) §Abstract/§1.
 
-**Status of this note**: DRAFT package. Every item that rests on an unverified external fact or
-on the in-flight G(17) run is tagged **ASSUMED-VERIFY-BEFORE-SUBMIT**; a consolidated list of
-those tags is at the end.
+**Status of this note**: DRAFT package for the user to review and submit. The A344227 entry was
+rechecked live on 2026-07-07 and still lists only n = 0..13 at revision #54; recheck again at
+submission time. Items that require a public code/preprint artifact are called out in Section 13.
 
 ---
 
-## 1. Current A344227 entry (fetched live, 2026-07-03)
+## 1. Current A344227 entry (fetched live 2026-07-03, rechecked 2026-07-07)
 
 Fetched via `curl -sL -A "Mozilla/5.0" "https://oeis.org/search?q=id:A344227&fmt=text"`
 (the plain `oeis.org/A344227` page 403s WebFetch; the search endpoint returned the record).
-**Revision at fetch: #54, dated May 27 2025.** Edit from that revision so the submitter starts
-from current state.
+**Revision at fetch and recheck: #54, dated May 27 2025.** Edit from that revision so the
+submitter starts from current state.
 
 Exact existing fields (verbatim, internal OEIS `%`-line format):
 
@@ -92,28 +91,28 @@ Our engine reproduces every catalogued term. Basis (from the handoff's validatio
   (exhaustive k <= 6, sampled k = 7, 8) and against the independently built boolean win/loss
   tables (G != 0 iff a win);
 - the new terms n = 14 and n = 16 independently equal the production boolean win/loss verdicts
-  (G = 0 iff second-player win, by definition), and n = 15 was reproduced under a different leaf
-  boundary (`QUEENS_NIMBER_GK`), exercising different code paths, with the same G.
+  (G = 0 iff second-player win, by definition), n = 15 was reproduced under a different leaf
+  boundary (`QUEENS_NIMBER_GK`), exercising different code paths, with the same G, and n = 17 was
+  verified after the initial long run on the n = 18 branch.
 
 Conclusion: the new terms are consistent with the existing entry on the full overlap and are
-cross-validated by construction. No conflict; the extension only appends indices 14, 15, 16
-(and, pending, 17).
+cross-validated by construction. No conflict; the extension only appends indices 14, 15, 16, 17.
 
 ---
 
 ## 3. Extended term list (`%S` / DATA)
 
-New terms appended at indices 14, 15, 16:
+New terms appended at indices 14, 15, 16, 17:
 
 ```
-%S A344227 0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0
+%S A344227 0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0,2
 %O A344227 0,4
 ```
 
-- Full sequence, offset 0: `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1, 0, 1, 0`
-- The three appended values are `a(14)=0, a(15)=1, a(16)=0`.
+- Full sequence, offset 0: `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1, 0, 1, 0, 2`
+- The four appended values are `a(14)=0, a(15)=1, a(16)=0, a(17)=2`.
 - OEIS auto-wraps DATA across `%S`/`%T`/`%U`; the editor pastes one comma-separated list into
-  the DATA box. 17 terms fit on `%S` alone, but let the editor rewrap.
+  the DATA box. 18 terms fit on `%S` alone, but let the editor rewrap.
 - Offset `%O` stays `0,4` (a(3)=2 is still the first term with absolute value > 1).
 
 ---
@@ -122,11 +121,11 @@ New terms appended at indices 14, 15, 16:
 
 Each line is `n a(n)`, one term per line, starting at the offset (n = 0). This is the complete
 b-file including the existing terms (OEIS wants the b-file to cover the full range, not just the
-new tail). Upload as `b344227.txt`.
+new tail). Companion file in this repo: [`b344227.txt`](b344227.txt). Upload it as `b344227.txt`.
 
 ```
 # A344227 Sprague-Grundy value for the Node-Kayles game played on the n-queens graph.
-# Terms a(0)..a(13) from Max Fan / H. Noon (original entry); a(14)-a(16) from Tavis Rudd, Jul 03 2026.
+# Terms a(0)..a(13) from Max Fan / H. Noon (original entry); a(14)-a(17) from Tavis Rudd, Jul 07 2026.
 0 0
 1 1
 2 1
@@ -144,6 +143,7 @@ new tail). Upload as `b344227.txt`.
 14 0
 15 1
 16 0
+17 2
 ```
 
 Notes:
@@ -164,26 +164,27 @@ and spell out symbols the OEIS text layer mangles.
 ### (i) Method note — heap-sum equivalence
 
 ```
-%C A344227 a(14) onward are computed by a heap-sum reduction rather than by direct mex evaluation. By the Sprague-Grundy theorem, G(board) = k iff the disjunctive sum of the board with a single Nim-heap of size k is a P-position (a second-player win), since G(board) XOR k = 0 exactly when k = G(board). Deciding whether board + Nim-heap(k) is a P-position is an ordinary alpha-beta win/loss search, which (unlike a direct mex, that must expand every child) admits cutoffs; solving it for k = 0, 1, 2, ... and taking the first k whose round is a loss for the player to move yields G(board) = k. - Tavis Rudd, Jul 03 2026
+%C A344227 a(14) onward are computed by a heap-sum reduction rather than by direct mex evaluation. By the Sprague-Grundy theorem, G(board) = k iff the disjunctive sum of the board with a single Nim-heap of size k is a P-position (a second-player win), since G(board) XOR k = 0 exactly when k = G(board). Deciding whether board + Nim-heap(k) is a P-position is an ordinary alpha-beta win/loss search, which (unlike a direct mex, that must expand every child) admits cutoffs; solving it for k = 0, 1, 2, ... and taking the first k whose round is a loss for the player to move yields G(board) = k. - Tavis Rudd, Jul 07 2026
 ```
 
-### (ii) The n = 18 outcome remark (the conjecture breaks)
+### (ii) Pattern-break remark
 
 ```
-%C A344227 The empirical oscillation noted above (a(n) = 0 for even n and 1 for odd n, n >= 10) does not continue: the 18 X 18 game is a first-player win (an exhaustive search finds a winning opening at row 9, column 9, on the main diagonal), so a(18) is nonzero even though its exact nimber value is not yet computed. Hence the sequence is not eventually the period-2 word 0, 1, 0, 1, ... . - Tavis Rudd, Jul 03 2026
+%C A344227 The empirical oscillation noted above (a(n) = 0 for even n and 1 for odd n, n >= 10) does not continue: a(17) = 2, and the 18 X 18 game is a first-player win (an exhaustive search finds a winning opening at row 9, column 9, on the main diagonal), so a(18) is nonzero even though its exact nimber value is not yet computed. Hence the sequence is not eventually the period-2 word 0, 1, 0, 1, ... . - Tavis Rudd, Jul 07 2026
 ```
 
 Wording rationale:
-- (ii) states only what a win/loss solve establishes: a(18) != 0. It does **not** assert a value
-  for a(18) (the nimber is still computing). This keeps the comment defensible.
+- (ii) states the exact computed odd-side break `a(17)=2` and only what the n = 18 win/loss solve
+  establishes: a(18) != 0. It does **not** assert a value for a(18) (the nimber remains open).
+  This keeps the comment defensible.
 - "at row 9, column 9" = the paper's witness opening I9 = (8,8) in 0-based row-major (square 152);
   stated 1-based to avoid an off-by-one in the OEIS text. Keep or drop the coordinate at the
   submitter's discretion — it adds a concrete verifiable anchor but is not required.
-- **ASSUMED-VERIFY-BEFORE-SUBMIT**: comment (ii) rests on our unpublished n = 18 computation.
-  OEIS reviewers routinely ask for a citable source on a claim like this (see §9). It is
-  strongest paired with the LINKS entry in §6 (a public preprint/repo). If no public artifact
-  exists at submission time, consider deferring (ii) to a follow-up edit once the arXiv preprint
-  is posted, and submit the terms + method comment (i) first — the terms are the priority stamp.
+- Comment (ii) rests partly on our unpublished n = 18 computation. OEIS reviewers routinely ask
+  for a citable source on a claim like this (see Section 9). It is strongest paired with the LINKS
+  entry in Section 7.2 (a public preprint/repo). If no public artifact exists at submission time,
+  consider deferring the n = 18 sentence to a follow-up edit and keeping only the `a(17)=2`
+  pattern-break sentence now.
 
 ---
 
@@ -192,12 +193,12 @@ Wording rationale:
 OEIS credits appended terms on an `%E` line:
 
 ```
-%E A344227 a(14)-a(16) from _Tavis Rudd_, Jul 03 2026
+%E A344227 a(14)-a(17) from _Tavis Rudd_, Jul 07 2026
 ```
 
 - The `_Tavis Rudd_` underscore markup renders the name as an OEIS author link once the
   submitter's account name matches. If submitting under a different display name, adjust.
-- If G(17) lands before submission, use the §8 variant line `a(14)-a(17) from _Tavis Rudd_, ...`.
+- Match the date to the actual submission date before pasting.
 
 ---
 
@@ -215,8 +216,7 @@ n = 18 comment's context:
 
 - Title/author/date **VERIFIED** against arxiv.org this session: "Successful strategies for a
   queens placing game on an n x n chess board", Thomas Jenrich, submitted 2013-12-18 (v-online
-  2014-04-21). (Note: our internal paper draft mis-cites this title as "A new winning strategy for
-  the game of non-attacking queens" — use the verified title above, not the paper's string.)
+  2014-04-21). The paper draft now uses this verified title.
 - Jenrich's abstract confirms the win/loss outcomes our nimber signs agree with: first-player wins
   for n = 4, 6, 8 and odd n; second-player wins for n = 10, 12, 14, 16 (so a(10)=a(12)=a(14)=a(16)=0
   as P-positions). Jenrich reports outcomes, not nimbers, so this is corroboration/context, not a
@@ -265,44 +265,23 @@ at nothing invites the same "where is it" review request as a missing `%H`.
 
 ---
 
-## 8. "with G(17)" swap-in variant (hold until the run lands)
+## 8. G(17) provenance
 
-> **UPDATE 2026-07-04 — the run landed: G(17) = 2, NOT 1.** `queens nimber 17` reported
-> k=0 WIN + k=1 WIN + k=2 LOSS ⇒ **a(17) = 2** (~585 B nodes / ~59 h; branch `queens-n18`,
-> `QUEENS_TT_BITS=31`). This breaks odd→1 and misses the ~88% G=1 prediction. **STILL PENDING an
-> independent-hash k=1 rerun** (collision gate) before submission — see the nimber handoff's
-> Session 2026-07-04 note. The "predicted 1" text below is void; use **2** everywhere per the
-> line-296 fallback (trailing DATA digit → 2, the `17 1` b-file line → `17 2`). The DATA/b-file
-> blocks below are left showing the old `1` as a record of the prediction — do not paste them
-> as-is.
+`queens nimber 17` on the `queens-n18` worktree reported:
 
-**Do not paste this variant until the G(17) k=1 rerun confirms** (the original guard "k=0 WIN +
-k=1 LOSS ⟹ G=1" is moot — k=1 was a WIN, k=2 the LOSS; G = 2). **ASSUMED-VERIFY-BEFORE-SUBMIT:
-G(17) = 2 is computed but not yet independently revalidated.**
+| round | verdict |
+|-------|---------|
+| k = 0 | WIN     |
+| k = 1 | WIN     |
+| k = 2 | LOSS    |
 
-DATA line (~~predicted a(17) = 1~~ → actual a(17) = **2**):
-```
-%S A344227 0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0,2
-```
-Full sequence, offset 0: `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1, 0, 1, 0, 2`
+The first LOSS is at `k = 2`, so **a(17) = G(17) = 2**. The initial run used branch
+`queens-n18`, `QUEENS_TT_BITS=31`, `bk=20/gk=16`, and took about 585 B cumulative nodes / 59 h.
+The value was verified on 2026-07-07; the release capsule still needs the exact verification
+log/config pointer recorded in the nimber handoff before public artifact packaging.
 
-b-file tail to append (after the `16 0` line in §4) — **actual value 2** (the `17 1` is the void prediction):
-```
-17 2
-```
-
-EXTENSIONS line:
-```
-%E A344227 a(14)-a(17) from _Tavis Rudd_, Jul 03 2026
-```
-
-b-file header credit line becomes:
-```
-# Terms a(0)..a(13) from Max Fan / H. Noon (original entry); a(14)-a(17) from Tavis Rudd, Jul 03 2026.
-```
-
-Offset unchanged (`0,4`). If G(17) turns out != 1, replace the trailing `1` in the DATA line, the
-`17 1` b-file line's value, and keep the `a(14)-a(17)` credit.
+This result breaks the odd-side `a(n)=1` prediction and makes the old "with G(17)" swap-in variant
+obsolete: the DATA line, b-file, and `%E` credit in Sections 3, 4, and 6 already include `a(17)=2`.
 
 ---
 
@@ -320,18 +299,18 @@ A002186` stands (A000170 = counts of n-queens solutions; the A316xxx block = rel
 
 ---
 
-## 10. Assembled diff — what changes in the entry (G(14)-G(16) version)
+## 10. Assembled diff — what changes in the entry
 
 Paste-ready summary of every edit against revision #54. Lines marked `+` are added; `~` modified.
 
 ```
-~ %S  0,1,1,2,1,3,1,2,3,1,0,1,0,1   ->   0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0
-+ b344227.txt   (full b-file, indices 0..16; see section 4)
-+ %C  a(14) onward are computed by a heap-sum reduction ...  - Tavis Rudd, Jul 03 2026     (section 5(i))
-+ %C  The empirical oscillation noted above ... a(18) is nonzero ...  - Tavis Rudd, Jul 03 2026  (section 5(ii); hold if no source link)
+~ %S  0,1,1,2,1,3,1,2,3,1,0,1,0,1   ->   0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0,2
++ b344227.txt   (full b-file, indices 0..17; see section 4)
++ %C  a(14) onward are computed by a heap-sum reduction ...  - Tavis Rudd, Jul 07 2026     (section 5(i))
++ %C  The empirical oscillation noted above ... a(17)=2 and a(18) is nonzero ...  - Tavis Rudd, Jul 07 2026  (section 5(ii); hold n=18 sentence if no source link)
 + %H  Thomas Jenrich, Successful strategies for a queens placing game ... arXiv:1312.5135      (section 7.1)
 + %H  Tavis Rudd, <public repo or arXiv preprint>   (section 7.2 — ONLY once a public URL exists)
-+ %E  a(14)-a(16) from _Tavis Rudd_, Jul 03 2026                                              (section 6)
++ %E  a(14)-a(17) from _Tavis Rudd_, Jul 07 2026                                              (section 6)
   %O  0,4    (unchanged)
   %K  more,nonn   (unchanged; consider whether 'more' still applies after the extension)
   %Y  unchanged
@@ -352,30 +331,24 @@ Step-by-step for a first-time or returning OEIS contributor:
    before edits are accepted — do this a few days ahead if the account is new).
 2. **Open the entry for editing**: go to https://oeis.org/A344227 , confirm it is still at
    revision #54 (or note the current revision), click **"edit"**. If the revision advanced since
-   2026-07-03, re-diff against the new state before pasting (someone may have edited it).
+   the 2026-07-07 recheck, re-diff against the new state before pasting (someone may have edited it).
 3. **DATA**: replace the term list with the section 3 line
-   `0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0`. Leave the offset `0,4` alone.
-4. **b-file**: upload `b344227.txt` with the exact section 4 content (indices 0..16). OEIS
+   `0,1,1,2,1,3,1,2,3,1,0,1,0,1,0,1,0,2`. Leave the offset `0,4` alone.
+4. **b-file**: upload `b344227.txt` with the exact section 4 content (indices 0..17). OEIS
    validates it against the DATA line — they must agree on the overlap.
 5. **COMMENTS**: add the method comment 5(i). Add the n = 18 comment 5(ii) **only if** you are
    also adding a citable source link this round (section 7.2); otherwise defer it.
 6. **LINKS**: add the Jenrich `%H` (7.1). Add your own program/preprint `%H` (7.2) **only if a
    public URL exists** — otherwise leave it out and add it in a follow-up edit.
-7. **EXTENSIONS**: add `a(14)-a(16) from _Tavis Rudd_, <submission date>` (section 6). Match the
+7. **EXTENSIONS**: add `a(14)-a(17) from _Tavis Rudd_, <submission date>` (section 6). Match the
    date to the actual day you submit.
 8. **Keywords**: leave `nonn`; decide on `more` (it signals "more terms wanted" — reasonable to
-   keep, since n >= 17 is still open).
+   keep, since n >= 18 exact nimbers are still open).
 9. **Save as a draft, then submit for review.** Add a short note in the edit's comment box:
-   "Extending to a(16) via a heap-sum Sprague-Grundy engine; a(14)/a(16) also equal the
-   production win/loss verdicts, a(15) reproduced under two leaf configs; n<=13 reproduced
-   exactly. b-file attached."
+   "Extending to a(17) via a heap-sum Sprague-Grundy engine; a(14)/a(16) also equal the
+   production win/loss verdicts, a(15) reproduced under two leaf configs, a(17) verified after a
+   long heap-sum run; n<=13 reproduced exactly. b-file attached."
 10. **Respond to review.** Expect one or more editors to comment; answer promptly (see section 12).
-
-### If the G(17) run lands first
-
-Swap in the section 8 variant: DATA line ending `...,0,1`, b-file with a `17 1` line appended,
-and `%E a(14)-a(17) from _Tavis Rudd_, <date>`. **Only after** the run reports k=0 WIN + k=1 LOSS
-(value pinned). If it pins a value other than 1, substitute that value everywhere.
 
 ---
 
@@ -385,7 +358,7 @@ and `%E a(14)-a(17) from _Tavis Rudd_, <date>`. **Only after** the run reports k
 |------------------------------------------------|----------------------------------------------------------------------------|
 | **Verifiability of the terms** — "how computed, can anyone reproduce?" | The method comment 5(i) describes the heap-sum reduction; the strongest answer is a **public code link** (7.2 option 1). The existing Haskell `%o` is a naive mex and cannot reach n >= 14 in practice, so it does **not** independently confirm the new terms — say so if asked, and point at the engine. |
 | **Program availability** — OEIS prefers a runnable program for computed terms | Provide the public repo (7.2) or at minimum the method `%C` + a description precise enough to reimplement. Flag: no public repo exists yet — creating one materially strengthens the submission. |
-| **Independent cross-check** of a(14..16)        | a(14), a(16) equal the production boolean win/loss verdicts (G=0 iff second wins); those outcomes match **Jenrich** (n=10,12,14,16 second-player) — cite the 7.1 link. a(15) reproduced under two leaf configs. n<=13 reproduced exactly vs the catalogued values. |
+| **Independent cross-check** of a(14..17)        | a(14), a(16) equal the production boolean win/loss verdicts (G=0 iff second wins); those outcomes match **Jenrich** (n=10,12,14,16 second-player) — cite the 7.1 link. a(15) reproduced under two leaf configs. a(17) was verified after the initial long heap-sum run. n<=13 reproduced exactly vs the catalogued values. |
 | **The n = 18 comment** — "unpublished claim"    | It asserts only a(18) != 0 (a win/loss fact), not a value. Still, expect a request for a citable source; pair it with a preprint/repo link or defer it to a follow-up edit. |
 | **Offset / indexing correctness**               | Offset stays `0,4`; a(n) is the value on the n X n board; b-file index 0 = offset. Double-checked in section 1. |
 | **Keyword hygiene** (`more`, `nonn`)            | `nonn` holds (all terms >= 0). `more` stays until the sequence is closed. Do not add `hard`/`nice` unless an editor requests. |
@@ -393,20 +366,19 @@ and `%E a(14)-a(17) from _Tavis Rudd_, <date>`. **Only after** the run reports k
 
 ---
 
-## 13. Consolidated ASSUMED-VERIFY-BEFORE-SUBMIT flags
+## 13. Remaining pre-submit checks
 
-1. **G(17) = 1 is NOT computed** — it is the in-flight run's predicted outcome (~88% per the
-   theory note). Do **not** paste the section 8 "with G(17)" variant until the run reports k=0 WIN
-   + k=1 LOSS. If a different value is pinned, substitute it.
-2. **No public artifact for our computation** — `git remote -v` is empty; there is no public repo
+1. **No public artifact for our computation** — `git remote -v` is empty; there is no public repo
    or arXiv preprint yet. The Rudd `%H` (7.2) and the n = 18 source-backed comment (5(ii)) are
    blocked on creating one (public GitHub mirror or arXiv post). The terms + b-file + `%E` +
    method comment can go in without it (priority stamp), with the link added in a follow-up edit.
+2. **G(17) verification pointer** — the value is locked as `a(17)=2`, but the release capsule still
+   needs the exact 2026-07-07 verification log/config pointer recorded in the nimber handoff.
 3. **Entry revision may have advanced** — snapshot is #54 (May 27 2025). Re-check at submission
    time and re-diff if it changed.
-4. **Submission date** — every `Jul 03 2026` in `%E`, `%C` signatures, and the b-file header is a
-   placeholder; set them to the actual submission date.
+4. **Submission date** — dates in `%E`, `%C` signatures, and the b-file header are paste-time
+   placeholders; set them consistently to the actual submission date.
 5. **Jenrich title** — VERIFIED this session ("Successful strategies for a queens placing game on
-   an n x n chess board"); note the internal paper draft mis-cites it — use the verified string.
+   an n x n chess board"); use that string.
 6. **`%o` program stub (7.3)** — only include if a real code link accompanies it; a pointer to a
    non-public artifact draws the same review request as a missing link.

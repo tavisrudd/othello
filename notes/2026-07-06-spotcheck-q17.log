@@ -1,0 +1,4 @@
+q=17: total(q^2-9q+21)=157
+  S3=[(0, 0), (1, 1), (2, 5)]  escape(#P size-4)=5  total=157  bad=152
+SPOTCHECK_DONE
+DONE

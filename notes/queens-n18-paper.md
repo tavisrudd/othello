@@ -27,10 +27,11 @@ induced-subgraph invariances, the build recurrence, and the Sprague–Grundy/Gru
 characterisation, kernel-complete and depending only on mathlib's standard axioms. Separately,
 a heap-sum Sprague–Grundy engine — which decides `G(board) = k` by α-β-searching the game sum of
 the board with a Nim-heap of size `k` — **extends OEIS A344227**, the game's nimber sequence
-previously catalogued only through n = 13, with the three new terms **G(14) = 0, G(15) = 1,
-G(16) = 0** (G(17) is in flight at the time of writing); the engine reproduces the full-mex
-nimbers for n ≤ 8 and the A344227 terms for n ≤ 13 exactly, and its n = 14/16 values independently
-equal the production win/loss verdicts. We also give an elementary **structural theory** of the
+previously catalogued only through n = 13, with the four new terms **G(14) = 0, G(15) = 1,
+G(16) = 0, and G(17) = 2**; the engine reproduces the full-mex nimbers for n ≤ 8 and the A344227
+terms for n ≤ 13 exactly, and its n = 14/16 values independently equal the production win/loss
+verdicts. The value G(17)=2 also refutes the conjectured odd → 1 continuation. We also give an
+elementary **structural theory** of the
 even/odd split: a 180°-rotation pairing argument reproves that every odd board is a first-player
 win and — new here — proves that an even-board first-player win *requires* a long-diagonal move
 at some ply (the responder's mirror refutes any diagonal-free line) — and the n = 18 witness
@@ -43,8 +44,9 @@ geometry of winning openings on every solved small board supporting a *Forcing-R
 (the most-forcing square wins on every known first-player-win board), exhaustive ablations showing
 that refuting the central strike *requires* border access, torus-queens nimbers computed to
 n = 10, and a registered structural conjecture for n = 20 (first player, witness (9, 9)). The
-reduction and the new laws are proven; *why* the even pattern first breaks at n = 18, and the
-exact nimber values, are given as an explicit heuristic and as falsifiable predictions. We are explicit throughout about what is *certified*, what is *cross-validated*, and
+reduction and the new laws are proven; *why* the even pattern first breaks at n = 18, the exact
+value of G(18), and the n = 20 outcome are given as explicit heuristics and falsifiable
+predictions. We are explicit throughout about what is *certified*, what is *cross-validated*, and
 what is *deferred to differential testing* or *conjectural*.
 
 ---
@@ -107,11 +109,11 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
 5. **An extension of OEIS A344227 (the nimber sequence itself).** A separate *heap-sum
    Sprague–Grundy engine* computes the exact nimber `G(n)` by α-β-searching the game sum
    `board + Nim-heap(k)` for ascending `k` (a loss at `k` pins `G = k`), contributing the new
-   terms **G(14) = 0, G(15) = 1, G(16) = 0** beyond the previously catalogued n ≤ 13, with
-   **G(17) in flight** (Section 6). The engine reproduces the full-mex nimber for n ≤ 8 and
-   A344227 for n ≤ 13, and its n = 14/16 values independently coincide with the production
-   win/loss verdicts. These terms confirm the conjectured even → 0 / odd → 1 oscillation through
-   n = 16, which the n = 18 first-player win then breaks.
+   terms **G(14) = 0, G(15) = 1, G(16) = 0, G(17) = 2** beyond the previously catalogued
+   n ≤ 13 (Section 6). The engine reproduces the full-mex nimber for n ≤ 8 and A344227 for
+   n ≤ 13, and its n = 14/16 values independently coincide with the production win/loss verdicts.
+   The new values break both halves of the conjectured oscillation: odd → 1 fails at n = 17, and
+   even → 0 fails at n = 18.
 
 6. **An elementary structural theory of the even/odd split** (Section 6). A 180°-rotation (`ρ`)
    pairing argument reproves that every odd board is a first-player win, and — new — proves that
@@ -124,8 +126,8 @@ of small boards are catalogued in OEIS **A344227**. The next open even board was
    mechanically explain the small catalogued nimbers, exhaustive border-tempo ablations with a
    torus-queens control computed to n = 10, and two new proven general laws (Closed-Pairing;
    Well-Covered Parity). The reduction and the laws are proven; *why* the pattern first breaks at
-   n = 18, the exact nimber values, and the n = 20 outcome (Section 9) are stated as heuristics,
-   conjectures, and falsifiable predictions — never with the theorem's status.
+   n = 18, the exact nimber value G(18), and the n = 20 outcome (Section 9) are stated as
+   heuristics, conjectures, and falsifiable predictions — never with the theorem's status.
 
 ### 1.3 What this paper claims, and what it does not
 
@@ -174,7 +176,7 @@ nimber engine (Section 6), and is machine-checked in the Lean verification (Sect
   sequence) and improves on in node efficiency.
 - **OEIS A344227** records the Sprague–Grundy nimber of the game; our verdicts agree through the
   catalogued range (n ≤ 13 for the nimber, the win/loss outcome through n = 16). Section 6 extends
-  the nimber sequence itself to n = 16 (and reports the in-flight n = 17).
+  the nimber sequence itself through n = 17.
 - **Schaefer (1978)** established PSPACE-completeness of Node-Kayles, framing why exhaustive
   search, not a formula, is the tool. The complexity frame has since been refined in a way that
   matches our result shape exactly: nimber-preserving reductions strictly refine
@@ -603,7 +605,7 @@ conjecture** — when a board is an N-position, the central diagonal strike `c*`
 Levels (ii) and (iii) never borrow (i)'s status. The geometric and spectral claims of Sections
 6.6–6.7 are *computed* (exhaustive at the stated sizes, on independent brute-forcers
 cross-validated against A344227); the general laws of Section 6.8 are *proven*; the "why n = 18"
-mechanism and the exact nimber values are marked *heuristic* and *predicted*.
+mechanism and the exact value of G(18) are marked *heuristic* and *predicted*.
 
 ### 6.1 A heap-sum engine for the nimber
 
@@ -628,29 +630,28 @@ that reuses the production dense evaluator whenever only "is `G ≠ 0`" is neede
 layer over the flat lockless table, heap moves probed first (an `h → 0` move is one dense lookup
 and fires whenever `G(avail) = 0`), queen moves in the production dynamic order.
 
-### 6.2 The extension: G(14) = 0, G(15) = 1, G(16) = 0, and G(17) in flight
+### 6.2 The extension: G(14) = 0, G(15) = 1, G(16) = 0, and G(17) = 2
 
 A344227 was catalogued through n = 13 as `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1` (offset 0).
-The engine adds the next three terms:
+The engine adds the next four terms:
 
 | n  | G(n) | how established                                                                           |
 |----|------|-------------------------------------------------------------------------------------------|
 | 14 | 0    | `k = 0` LOSS (1.4 s / 11.0 M nodes); independently equals the production SECOND verdict   |
 | 15 | 1    | `k = 0` WIN + `k = 1` LOSS (23.8 s / 194 M nodes); reproduced at a different leaf ceiling |
 | 16 | 0    | `k = 0` LOSS (2 m 21 s / 1.06 B nodes); equals the production n = 16 SECOND verdict       |
+| 17 | 2    | `k = 0` WIN + `k = 1` WIN + `k = 2` LOSS; 17 GB table, about 585 B nodes / 59 h, verified 2026-07-07 |
 
-so the sequence through n = 16 reads `…, 0, 1, 0, 1, 0, 1, 0`. This **confirms** the OEIS-listed
-conjecture that for n ≥ 10 the nimber oscillates 0 (even) / 1 (odd) — through n = 16. The pattern
-is then **broken** at n = 18, whose first-player win forces `G(18) ≠ 0` (Section 5), contradicting
-the even → 0 half of that conjecture (the exact value is a separate computation; Section 6.5).
+so the sequence through n = 17 reads `0, 1, 1, 2, 1, 3, 1, 2, 3, 1, 0, 1, 0, 1, 0, 1, 0, 2`.
+This confirms the OEIS-listed conjecture that for n ≥ 10 the nimber oscillates 0 (even) / 1
+(odd) only through n = 16. It is **broken** at n = 17, where `G(17) = 2` contradicts the odd → 1
+half, and independently at n = 18, whose first-player win forces `G(18) ≠ 0` (Section 5),
+contradicting the even → 0 half.
 
-**G(17) is in flight** at the time of writing (heap-sum engine, 17 GB table, on the n = 18-branch
-toolchain): `G(17) = [pending — run in progress 2026-07-02]`. The odd-board theory predicts
-`G(17) = 1` (Section 6.5), i.e. a `k = 0` WIN followed by a `k = 1` LOSS. **G(18)** is planned as
-the oscillation-breaker: each ascending-`k` round is itself an n = 18-scale search, so — since a
-LOSS at any `k` pins the value — the plan fires `k = 1` first, the most-probable value (Section
-6.5); the `h = 0` table-skip band and the wide boolean leaf are what make such a round converge on
-this box.
+The exact value of **G(18)** remains open. Since the production outcome already proves
+`G(18) ≠ 0`, the exact-nimber plan can skip the `k = 0` reproof and fire `k = 1` first; a LOSS at
+any `k ≥ 1` pins the value, while a WIN excludes that one value. The `h = 0` table-skip band and
+the wide boolean leaf are what make such a round plausible on this box.
 
 ### 6.3 Validating the nimber engine
 
@@ -665,8 +666,9 @@ The engine carries its own layered validation, mirroring the main solver's:
   engine is checked against the full-DAG `mex` reference, and the command-line runs for n = 1…13
   reproduce A344227 *exactly*.
 - **The new terms cross-checked two ways.** G(14) and G(16) independently equal the production
-  win/loss verdicts (a P-position is a `k = 0` LOSS by definition), and G(15) was reproduced under
-  a different Grundy-leaf ceiling (different leaf code paths, same value).
+  win/loss verdicts (a P-position is a `k = 0` LOSS by definition), G(15) was reproduced under a
+  different Grundy-leaf ceiling (different leaf code paths, same value), and G(17) was verified
+  after the initial long run on the n = 18 branch.
 - **Production untouched.** The engine is additive: the full test suite and the n = 12 / n = 14
   distinct-count gates still pass.
 
@@ -774,14 +776,15 @@ structural fact, earned rather than assumed. (Structured graph families — tree
 neighbourhood-diversity — have provably eventually-periodic, hence bounded, Grundy sequences, but
 queen graphs are dense and irregular and are covered by none of those theorems.)
 
-The theory yields **falsifiable predictions** (the quantified priors live in the project's
-research notes [11]; here we state only the structure). (i) `G(17) = 1`: odd ⟹ `G ≥ 1` is proven,
-and every computed odd n ≥ 9 has been 1 (n = 9, 11, 13, 15); a `k ≥ 2` LOSS would refute the
-odd → 1 conjecture as sharply as n = 18 refuted even → 0. (ii) `G(18)` small, most plausibly
-**1**: a single central-diagonal threat over an otherwise mirror-balanced remainder "looks like" a
-`*`-valued (value-1) game, and the root-spectrum data of Section 6.6 make 1 the modal option value
-near even roots. Because a LOSS round pins `G` exactly, the ascending-`k` driver fires `k = 1`
-first. These are predictions, not results.
+The theory yielded one falsified prediction and one live one (the quantified priors live in the
+project's research notes [11]; here we state only the structure). The odd-board theorem proves
+`G ≥ 1`, and every computed odd n ≥ 9 had been 1 (n = 9, 11, 13, 15), so the pre-run prediction
+was `G(17) = 1`; the verified value `G(17) = 2` is the first odd-side failure and a useful
+calibration point. The live prediction is that `G(18)` is small, most plausibly **1**: a single
+central-diagonal threat over an otherwise mirror-balanced remainder "looks like" a `*`-valued
+(value-1) game, and the root-spectrum data of Section 6.6 make 1 the modal option value near even
+roots. Because a LOSS round pins `G` exactly, the exact-nimber driver fires `k = 1` first. This is
+a prediction, not a result.
 
 ### 6.6 The geometry of winning openings: spectra, margins, and the Forcing-Root conjecture
 
@@ -837,8 +840,8 @@ G(10) = 0 because *all fifteen* opening classes have value exactly 1; G(11) = 1 
 option is a P-position; G(9) = 1 despite value-3 options because values 1 and 2 are absent from
 the spectrum. **Conjecture S** (from the n = 10 datum): for even P-boards n ≥ 10 every opening has
 G = 1 — checkable one ply down with the heap-sum engine. Together with n = 11's all-zero spectrum
-it suggests a two-level 0 ↔ 1 resonance near the root, which would make G(17) = 1 and G(19) = 1
-near-mechanical and G(18)'s exact value the real outlier probe.
+it suggested a two-level 0 ↔ 1 resonance near the root. The verified value `G(17) = 2` shows that
+resonance is too tight on the odd side; `G(18)` remains the real exact-value probe.
 
 **Refutation margins — a registered open puzzle.** The fraction of replies in `R_n` (the position
 after `c*`) that refute the strike is violently non-monotone: 0/36 at n = 8 (`c*` wins), 8/64 at
@@ -1122,26 +1125,28 @@ a term to OEIS A344227 (the Sprague–Grundy *nimber*, catalogued only through n
 outcome solve does not yield the nimber value — and an even-board first-player win in fact
 contradicts that sequence's conjectured even → 0 oscillation. The nimber sequence *is* extended,
 separately, by a heap-sum Sprague–Grundy engine that certifies the new terms G(14) = 0, G(15) = 1,
-G(16) = 0 (with G(17) in flight), confirming the even → 0 / odd → 1 oscillation exactly up to the
-n = 18 break; and an elementary 180°-rotation pairing argument proves that every even-board
-first-player winning line must contain a long-diagonal move — the winning n = 18 opening
-I9 = (8, 8) being a main-diagonal move, consistent with that theorem (which constrains winning
-lines, not first moves; Section 6.6). Two companion theory studies add a computed geometry of
-winning openings supporting the Forcing-Root conjecture, root option-value spectra that
+G(16) = 0, and G(17) = 2, so the conjectured even → 0 / odd → 1 oscillation is broken on the odd
+side at n = 17 and on the even side by the n = 18 outcome; and an elementary 180°-rotation pairing
+argument proves that every even-board first-player winning line must contain a long-diagonal move
+— the winning n = 18 opening I9 = (8, 8) is a main-diagonal move, consistent with that theorem
+(which constrains winning lines, not first moves; Section 6.6). Two companion theory studies add a
+computed geometry of winning openings supporting the Forcing-Root conjecture, root option-value spectra that
 mechanically explain the small catalogued nimbers, exhaustive ablations proving that refuting the
 central strike requires intruder border tempo at n = 10/12, torus-queens nimbers computed to
 n = 10 with a conjectured mod-2 law, and two new proven general laws — Closed-Pairing and
-Well-Covered Parity (Sections 6.6–6.8). The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of
-the tree directly from precomputed Node-Kayles tables, isomorphism-aware canonicalisation over a
+Well-Covered Parity (Sections 6.6–6.8).
+
+The enabling techniques are a dense leaf evaluator that resolves the deepest fifth of the tree
+directly from precomputed Node-Kayles tables, isomorphism-aware canonicalisation over a
 lockless flat transposition table, dynamic move ordering, and a capacity configuration
 (band-skipped transposition work + a 17 GB table) tuned to a single workstation. The leaf
 evaluator's recurrence semantics — the component where this solver class has historically had
 bugs — are machine-checked in Lean 4, kernel-complete and depending only on standard axioms,
 with the bit-level serialization deferred to differential tests.
 
-Directions for further work: completing **G(17)** (in flight) and computing **G(18)** — the
-oscillation-breaker whose value the theory predicts to be 1 — each round of which is an
-n = 18-scale search; closing the residual trusted base by modelling the u128 code decode in Lean
+Directions for further work: computing **G(18)** — the exact oscillation-breaker whose value the
+theory predicts to be 1, and each round of which is an n = 18-scale search; closing the residual
+trusted base by modelling the u128 code decode in Lean
 (removing the serialization from differential-test-only status) and bridging `win`/`grundy` to a
 blessed `Impartial`/`grundyValue` once the external game-theory library matches the toolchain;
 attacking the heuristic "why n = 18" threshold and the boundedness question (open, with no bound
@@ -1190,10 +1195,11 @@ solver at the two configurations of Section 5.2 — the primary run sets `dense_
 confirm run `dense_k = 20`, both with the `pc ∈ [18,25]` transposition-skip and a 2.125 × 10⁹-slot
 table — on a 26 GB Zen 5 workstation compiled for `znver5`. The validation gates (lineage
 agreement, the n = 12 distinct count 1,060,823, the differential tests, the independent-oracle
-subposition check) run from the project's standard test target. The nimber terms of Section 6 are
-reproduced by the `queens nimber <n>` command (which prints the ascending-`k` rounds and the first
-LOSS), whose own gates check the engine against the full-`mex` reference for n ≤ 8 and against
-A344227 for n ≤ 13. The Lean development builds with Lean v4.32.0-rc1 + mathlib via `lake build`; a
+subposition check) run from the project's standard test target. The nimber terms of Section 6,
+including G(14) through G(17), are reproduced by the `queens nimber <n>` command (which prints the
+ascending-`k` rounds and the first LOSS), whose own gates check the engine against the full-`mex`
+reference for n ≤ 8 and against A344227 for n ≤ 13. The Lean development builds with Lean
+v4.32.0-rc1 + mathlib via `lake build`; a
 green build with no `sorry` warning is the gate, and `#print axioms` on each theorem yields the
 standard axiom triple.
 

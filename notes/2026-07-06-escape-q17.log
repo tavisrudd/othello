@@ -1,0 +1,3 @@
+q= 17  root=P  size3-classes=21  total(q^2-9q+21)=157  min-escape=5  max-escape=11  bad-odd(even-escape) classes=12/21  parity-proof=BREAKS
+      escape-histogram (escape:classes) = 5:3 10:12 11:6
+Q17_DONE

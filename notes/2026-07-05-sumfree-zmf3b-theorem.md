@@ -126,8 +126,8 @@ slot via `d ↦ d*`. Every equality below is in `V = F₃ᵇ` (use `−2t = t`, 
   `0+(1−ε_s)+ℓ = 1` ⟹ `ε_s=0`. Required: `(1−ℓ)+ε_s+ℓ = 1+ε_s = 1`. ✓
 - **(b3)** `y+d=y*` with `d∈D`: then `d = a+y`, so `d* = −y = 2y ∈ D`, and the doubling `y+y=d*`
   gives `ε_{d*}=1` ⟹ `ε_d=0`. Required: `ℓ+ε_d+(1−ℓ)=1+ε_d=1`. ✓
-- **(b4/b5)** `2y*=y`, `2y=y*`, or a summand equal to `0`: each forces `a=0` or `y∈{0,a}` — all
-  excluded.
+- **(b4/b5)** `2y*=y` or `2y=y*` forces `a=0` or `y∈{0,a}` — all excluded. Anchor triples
+  with the `0` slot are harmless separately: their label sum is automatically odd because `eps_0=1`.
 
 Every triple containing `y*` satisfies `(★)`. So `D'` is `(★)`-valid. ∎
 
@@ -151,9 +151,10 @@ fresh. Thus the mover always answers; the opponent is the one who eventually can
 is N. By the proven **`s₂=1` reduction** (`∅` P ⟺ `{m}` N — Part 2 of the abelian note), `∅` is a
 P-position. ∎
 
-**Consequence — the abelian program.** Combined with the already-proven pieces (`s₂≥2 ⟹ P`,
-`r₃ ≤ 1 ⟹` criterion, and `F₃ⁿ = N`), the **only** remaining open piece of the entire finite-abelian
-sum-free classification is now the **socle reduction** itself:
+**Consequence — historical abelian-program note, superseded.** The theorem above remains valid. The
+classification consequence below was later superseded by `2026-07-05-socle-reduction-FALSE.md`: the socle
+reduction is false (`Z3^2 x Z7 = P` while `Z3^2 = N`). Keep the following paragraph only as provenance for
+what the theorem would have implied if that reduction had survived:
 
 > `𝒢(G) = 0 ⟺ 𝒢(G[6]) = 0`  (outcome depends only on `(2-rank, 3-rank)`).
 

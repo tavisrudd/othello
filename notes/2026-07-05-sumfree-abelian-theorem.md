@@ -1,5 +1,12 @@
 # The sum-free game on finite abelian groups — the 2-rank criterion, PROVEN for 3-rank ≤ 1 or 2-rank ≥ 2
 
+**AUDIT 2026-07-06.** The direct theorems in this note (`s2 >= 2 -> P`, the `s2=1` reduction, the `r3 <= 1` cases, and `F3^n=N`) still pass proof review. The socle-reduction claims and any "only remaining open piece" consequence are superseded: `2026-07-05-socle-reduction-FALSE.md` gives `Z3^2 x Z7 = P` while `Z3^2 = N`. Treat socle-reduction passages below as historical, not landed.
+
+**AUDIT 2026-07-07.** The cyclic Lemma 4 used below must be read in its corrected form
+(`z ≠ t+m`, equivalently `2(z−t)≠0`, when an order-2 element `m` exists); see
+`2026-07-07-codex-lemma4-check.md`. The direct abelian `r3≤1` cases remain safe: the `{m,t}` use
+makes `z=t+m` illegal because `z+t=m`, and the `{t}` use has no order-2 element.
+
 **Date:** 2026-07-05. Upgrades the [abelian conjecture](2026-07-04-sumfree-variants.md) (verified on
 ~25 groups) to a **theorem** for all finite abelian `G` **except** the thin slice `2-rank ≤ 1 and
 3-rank ≥ 2`. Companion to the proven cyclic [mod-6 theorem](2026-07-04-sumfree-game-theorem.md).
@@ -43,7 +50,7 @@ the mod-6 theorem.
 > `s₂ ≥ 2`.** In particular:
 > - **`s₂ ≥ 2 ⟹ P`** for every `G` (any 3-structure) — the new phenomenon, proved cleanly below.
 > - For `G` whose Sylow-3 subgroup is **cyclic** (`r₃ ≤ 1`), the outcome is exactly the criterion,
->   by a verbatim lift of the cyclic Lemmas 1–4.
+>   by a lift of cyclic Lemmas 1–3 and the corrected cyclic Lemma 4.
 >
 > The remaining slice **`s₂ ≤ 1 and r₃ ≥ 2`** (multiple independent order-3 pairs) is **open**;
 > the criterion is confirmed there by the exact solver (Z3², Z9×Z3, Z3³, Z2×Z3², Z2²×Z3², …) and
@@ -114,8 +121,9 @@ This isolates the entire `s₂=1` difficulty into the single position `{m}`, for
   **P** ⟹ `∅` is **N**. (Generalizes `n ≡ 2,4`.)
 - **`s₂=1, τ₃=1, r₃=1` (⟹ P).** The 3-torsion is `Z₃ = {0, t, 2t}` — one O₃ pair. From `{m}` the
   mover replies `t`; playing `t` blocks `2t` (`t+t=2t`). The position `{m, t}` is then **P** by the
-  cyclic **Lemma 4** with `E = {m, t}` (its "uses `t`" family is killed by `3t=0`, its "uses `m`"
-  family by `2m=0`, `m=−m`; both proofs are group-general) ⟹ `{m}` is **N** ⟹ `∅` is **P**.
+  corrected cyclic **Lemma 4** with `E = {m, t}` (its "uses `t`" family is killed by `3t=0`, its
+  "uses `m`" family by `2m=0`, `m=−m`; the extra excluded branch `z=t+m` is already illegal since
+  `z+t=m∈E`; all proofs are group-general) ⟹ `{m}` is **N** ⟹ `∅` is **P**.
   (Generalizes `n ≡ 0`.) Lemma 4 neutralizes exactly **one** O₃ pair — the reason `r₃ ≥ 2` is open.
 
 ## Part 3 — the `s₂ = 0` cases
@@ -126,7 +134,8 @@ is **no** order-2 element, so **no translation mirror is available**.
 - **`s₂=0, τ₃=0` (⟹ P).** `gcd(|G|,6)=1`: no O₂, no O₃. Second player negation-mirrors from `∅`
   (Lemma 1 applies to every move) ⟹ **P**. (Generalizes `n ≡ 1,5`.)
 - **`s₂=0, τ₃=1, r₃=1` (⟹ N).** Sylow-3 `= Z₃`, one O₃ pair `{t, 2t}`. First player opens `t`,
-  blocking `2t`; then negation-mirrors via Lemma 4 with `E = {t}` (no O₂ term) ⟹ **N**.
+  blocking `2t`; then negation-mirrors via corrected Lemma 4 with `E = {t}` (no O₂ term, so the
+  new `t+m` exclusion is nonexistent) ⟹ **N**.
   (Generalizes `n ≡ 3`.)
 
 ## The open slice: `s₂ ≤ 1 and r₃ ≥ 2`

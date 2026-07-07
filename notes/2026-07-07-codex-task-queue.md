@@ -53,7 +53,7 @@ PASS = empty diffs on both q. Do NOT start any q=23 campaign.
 
 Report file: `notes/2026-07-07-codex-esc-gate-report.md`.
 
-## C4. Fill the arc-census paywalled gaps (q=23, q=25; q=31 full classification)
+## C4. Fill the arc-census paywalled gaps (q=23, q=25; q=31 full classification) [REPORTED 2026-07-07]
 
 O1's census ([2026-07-07-arc-census-o1.md](2026-07-07-arc-census-o1.md)) fully sourced q=27/29
 and all six minimum sizes, but the complete size spectra/counts for q=23 and q=25 live in
@@ -66,7 +66,7 @@ interpretation). If access also fails, record that and stop.
 
 Report file: `notes/2026-07-07-codex-arc-census-fill.md`.
 
-## C5. Test the PGL(2)-orbit value-invariance prediction (q=17 feat data)
+## C5. Test the PGL(2)-orbit value-invariance prediction (q=17 feat data) [REPORTED 2026-07-07]
 
 Lemma I of [onconic intrusion calculus](2026-07-07-onconic-intrusion-calculus.md) predicts: two
 on-conic size-4 positions whose 6-point parameter sets `{∞, 0, t₁, t₂, t₃, t₄} ⊂ P¹(F_17)` are
@@ -101,7 +101,7 @@ before editing the file** (don't rebuild under your own running gate). Then:
 
 Report file: `notes/2026-07-07-codex-gf49-fix.md`.
 
-## C7. Machine-check + write up the automorphism-exhaustiveness lemma
+## C7. Machine-check + write up the automorphism-exhaustiveness lemma [REPORTED 2026-07-07]
 
 F3 audit finding D1: the resym NO verdicts (q=11,13,17) rest on "the semilinear monomial
 affine maps (both coordinate orders) are ALL automorphisms of the grid game hypergraph" —
@@ -119,7 +119,7 @@ true, but the proof is nowhere in the notes. Two deliverables:
 
 Report file: `notes/2026-07-07-codex-autgroup-check.md`.
 
-## C8. Exact-canon cross-validation of the fingerprint canon (q=11, q=13 + q=17 witnesses)
+## C8. Exact-canon cross-validation of the fingerprint canon (q=11, q=13 + q=17 witnesses) [REPORTED 2026-07-07]
 
 F3 audit finding D2: `canon()` is a 128-bit additive fingerprint (min over anchor images of a
 sum-of-cell-hashes), not an exact canonical form — a collision would silently merge classes.
@@ -140,7 +140,7 @@ re-canonicalization only.
 
 Report file: `notes/2026-07-07-codex-exact-canon-check.md`.
 
-## C9. Lean statement scaffold — tau-mirror + exception-table certificate format (n=20 lucky plan)
+## C9. Lean statement scaffold — tau-mirror + exception-table certificate format (n=20 lucky plan) [REPORTED 2026-07-07]
 
 Statement-level only (no proof obligation), after WP-1/WP-2 and C1–C8 work. Target: the Phase-3
 artifact format of [`2026-07-04-n20-lucky-first-win-plan.md`](2026-07-04-n20-lucky-first-win-plan.md)
@@ -153,7 +153,7 @@ you start; otherwise state the pieces against the n20 plan's §Soundness-boundar
 
 Report file: `notes/2026-07-07-codex-cert-format-scaffold.md`.
 
-## C10. P0a border-signature census/valtest probe (n=20 lucky plan, Phase 0a)
+## C10. P0a border-signature census/valtest probe (n=20 lucky plan, Phase 0a) [REPORTED 2026-07-07]
 
 Implement + run the probe EXACTLY per **Appendix P0a of `2026-07-07-fable-day-plan.md`**
 (spec is self-contained there: modes `census`/`valtest`, signature v0/v1 definitions, gates,
@@ -163,7 +163,7 @@ valtest violations verbatim. This gates C11.
 
 Report file: `notes/2026-07-07-p0a-border-signature-report.md`.
 
-## C11. Central-child certificate extractor build (GATED on C10)
+## C11. Central-child certificate extractor build (GATED on C10) [NO-GO 2026-07-07]
 
 Build per **`2026-07-07-central-child-certificate-spec.md`** (the soundness contract — do not
 weaken any obligation; signatures organize, never certify; separate checker pass + mutation
@@ -172,6 +172,10 @@ subsets at n=18 (depth ≥ 3) AND valtest violations are zero or obviously struc
 result is ambiguous, STOP and wait for Fable's window-3 calibration call. Work the gates in
 order (G1 n=6..12, G2 mutation, G3 n=18 I9 Phase 0); report compression stats per G3. The n=18
 Phase-0 run may continue past your session — checkpoint the exception book.
+
+NO-GO note: C10 found mixed-value valtest buckets at n=8/n=10, n=12 valtest exceeds the
+original 1 GB cap, and n=18 has only a 10 GB diagnostic depth-2 row (no depth ≥3 evidence).
+Do not start C11 from the current P0a data.
 
 Report file: `notes/2026-07-07-codex-cert-extractor-report.md`.
 

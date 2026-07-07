@@ -2,9 +2,9 @@
 
 % ---------------------------------------------------------------------------
 % Sum-free + affine-cap achievement games (Nofil genus): paper scaffold.
-% Structure + non-proof sections drafted by an assistant from the repo notes
-% (2026-07-07). The four theorem-proof sections are \input slots written
-% separately by the lead author -- see kernels/*.tex (each a stub + TODO).
+% Structure + non-proof sections drafted from the repo notes (2026-07-07).
+% The theorem-proof sections live in kernels/*.tex; each has first-pass proof
+% text, with conic-localization explicitly framed as partial/open-frontier work.
 %
 % Every drafted paragraph block below is flagged
 %   % DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
@@ -66,8 +66,8 @@ Huggan, Huntemann, and Stevens under the name \emph{Nofil}~\cite{huggan2022nofil
 a point to the built set as long as it does not complete a forbidden triple, and the last
 player able to move wins. We determine the outcome for two structured families. First, for the
 \emph{sum-free achievement game} on $\Zn{n}$ (build a sum-free subset of $\Zn{n}$; a move adds
-$x$ keeping the set free of solutions of $a+b=c$), we prove that for $n \geq 5$ the second player
-wins if and only if $n \equiv 0, 1, 5 \pmod 6$. The associated sequence of Sprague--Grundy values
+$x$ keeping the set free of solutions of $a+b=c$), we prove that for every $n \geq 1$ the second
+player wins if and only if $n \equiv 0, 1, 5 \pmod 6$. The associated sequence of Sprague--Grundy values
 appears to be new. Second, for the \emph{cap achievement game} on $\AG(n,q)=\Fq^n$ (build a cap,
 i.e.\ a set with no three collinear points), we prove that the second player wins for every $n$
 and every prime power $q$; the $q=3$ case is the cap-set game, so this settles it in every
@@ -102,7 +102,7 @@ This paper determines the outcome for two such families, both instances of the s
     sum-free subset $A \subseteq \Zn{n}$ (no $a+b=c$ with $a,b,c \in A$, and $a=b$ permitted so
     that $2a \in A$ is forbidden); a move adds an element keeping $A$ sum-free. This is Nofil's
     genus on the Schur $3$-uniform hypergraph of $\Zn{n}$, which is not a Steiner triple system.
-    We prove a clean residue law: for $n \geq 5$ the second player wins iff $n \equiv 0,1,5
+    We prove a clean residue law: for every $n \geq 1$ the second player wins iff $n \equiv 0,1,5
     \pmod 6$.
   \item \textbf{The cap game on $\AG(n,q)$} (Section~\ref{sec:affine-cap}). A position is a cap
     in $\AG(n,q)=\Fq^n$ (no three collinear points); a move adds a point keeping it a cap. We
@@ -187,19 +187,15 @@ We record the objects and conventions used throughout.
 \end{itemize}
 
 % ===========================================================================
-% --- The four theorem-proof sections: EMPTY \input slots, written separately ---
+% --- The theorem-proof sections ---
 % ===========================================================================
 
-% TODO(F1a): sum-free Z_n mod-6 outcome theorem + proof -- lead author writes kernels/sumfree-zn.tex.
 \input{kernels/sumfree-zn}
 
-% TODO(F1b): affine cap AG(n,q) always-P theorem + proof -- lead author writes kernels/affine-cap.tex.
 \input{kernels/affine-cap}
 
-% TODO(F1c): Nofil corollaries (AG(n,3) STS family; PG(m,2) column) -- lead author writes kernels/nofil-corollaries.tex.
 \input{kernels/nofil-corollaries}
 
-% TODO(F1d): projective cap game + conic-localization lemmas -- lead author writes kernels/conic-localization.tex.
 \input{kernels/conic-localization}
 
 % ===========================================================================

@@ -1,0 +1,30 @@
+CLS q=19 cls=0 S3=[(0, 0), (1, 1), (2, 3)] escape=211 bad=0 total=211 peak-memo=31678374 status=OK
+CLS q=19 cls=1 S3=[(0, 0), (1, 1), (2, 4)] escape=211 bad=0 total=211 peak-memo=31723507 status=OK
+CLS q=19 cls=2 S3=[(0, 0), (1, 1), (2, 5)] escape=211 bad=0 total=211 peak-memo=31677887 status=OK
+CLS q=19 cls=3 S3=[(0, 0), (1, 1), (2, 7)] escape=211 bad=0 total=211 peak-memo=32120979 status=OK
+CLS q=19 cls=4 S3=[(0, 0), (1, 1), (2, 8)] escape=211 bad=0 total=211 peak-memo=31994861 status=OK
+CLS q=19 cls=5 S3=[(0, 0), (1, 1), (2, 9)] escape=211 bad=0 total=211 peak-memo=31827659 status=OK
+CLS q=19 cls=6 S3=[(0, 0), (1, 1), (2, 10)] escape=211 bad=0 total=211 peak-memo=26739677 status=OK
+CLS q=19 cls=7 S3=[(0, 0), (1, 1), (2, 15)] escape=211 bad=0 total=211 peak-memo=31581336 status=OK
+CLS q=19 cls=8 S3=[(0, 0), (1, 1), (3, 4)] escape=211 bad=0 total=211 peak-memo=31443865 status=OK
+CLS q=19 cls=9 S3=[(0, 0), (1, 1), (3, 5)] escape=211 bad=0 total=211 peak-memo=31464447 status=OK
+CLS q=19 cls=10 S3=[(0, 0), (1, 1), (3, 6)] escape=211 bad=0 total=211 peak-memo=31660874 status=OK
+CLS q=19 cls=11 S3=[(0, 0), (1, 1), (3, 7)] escape=211 bad=0 total=211 peak-memo=31830820 status=OK
+CLS q=19 cls=12 S3=[(0, 0), (1, 1), (3, 8)] escape=211 bad=0 total=211 peak-memo=32067520 status=OK
+CLS q=19 cls=13 S3=[(0, 0), (1, 1), (3, 11)] escape=211 bad=0 total=211 peak-memo=25986137 status=OK
+CLS q=19 cls=14 S3=[(0, 0), (1, 1), (3, 12)] escape=211 bad=0 total=211 peak-memo=32256552 status=OK
+CLS q=19 cls=15 S3=[(0, 0), (1, 1), (3, 13)] escape=211 bad=0 total=211 peak-memo=25972628 status=OK
+CLS q=19 cls=16 S3=[(0, 0), (1, 1), (3, 14)] escape=211 bad=0 total=211 peak-memo=31480364 status=OK
+CLS q=19 cls=17 S3=[(0, 0), (1, 1), (3, 15)] escape=211 bad=0 total=211 peak-memo=31462910 status=OK
+CLS q=19 cls=18 S3=[(0, 0), (1, 1), (3, 16)] escape=211 bad=0 total=211 peak-memo=31649264 status=OK
+CLS q=19 cls=19 S3=[(0, 0), (1, 1), (3, 17)] escape=211 bad=0 total=211 peak-memo=25988142 status=OK
+CLS q=19 cls=20 S3=[(0, 0), (1, 1), (4, 5)] escape=211 bad=0 total=211 peak-memo=25956421 status=OK
+CLS q=19 cls=21 S3=[(0, 0), (1, 1), (4, 6)] escape=211 bad=0 total=211 peak-memo=32221403 status=OK
+CLS q=19 cls=22 S3=[(0, 0), (1, 1), (4, 8)] escape=211 bad=0 total=211 peak-memo=31732302 status=OK
+CLS q=19 cls=23 S3=[(0, 0), (1, 1), (4, 12)] escape=211 bad=0 total=211 peak-memo=31709086 status=OK
+CLS q=19 cls=24 S3=[(0, 0), (1, 1), (4, 14)] escape=211 bad=0 total=211 peak-memo=26420331 status=OK
+CLS q=19 cls=25 S3=[(0, 0), (1, 1), (4, 16)] escape=211 bad=0 total=211 peak-memo=25939341 status=OK
+CLS q=19 cls=26 S3=[(0, 0), (1, 1), (8, 12)] escape=211 bad=0 total=211 peak-memo=13424520 status=OK
+q= 19  root=P  size3-classes=27  total(q^2-9q+21)=211  min-escape=211  max-escape=211  bad-odd(even-escape) classes=0/27  parity-proof=HOLDS (all bad even)
+      escape-histogram (escape:classes) = 211:27
+      peak-private-memo max over classes = 32256552  [12852.4s]

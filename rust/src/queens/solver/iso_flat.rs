@@ -143,6 +143,16 @@ const M_COLD: u8 = 14; // M_ORD_W + tap the entry-probe hit/miss (cold-compute) 
 const M_HITKEY: u8 = 15; // M_ORD_W + DUMP each pc≥17 entry probe's canonical key + avail bits (all hits, 1/64 misses) to a file for offline structural study of the 0.2% deep-tail hits (`QUEENS_HITKEY=1`)
 const M_DHIST: u8 = 16; // M_ORD_W + deep cutoff-history tiebreak in the dynamic move sort (`QUEENS_DHIST=1`)
 const M_KPROBE: u8 = 17; // M_ORD_W + tap every getK entry's labelled code: HLL distinct + memo-sim hit rate (`QUEENS_KPROBE=1`)
+const M_RANK_O: u8 = 18; // M_ORD + the M_RANK rank tap: rank capture under dynamic ordering, no ETC (`QUEENS_RANK=1 QUEENS_ORD=1`)
+const M_RANK_WV: u8 = 19; // M_WAVE + the M_RANK rank tap: rank capture under static order + ETC (`QUEENS_RANK=1 QUEENS_ORD=0`)
+const M_RANK_N: u8 = 20; // M_NORMAL + the M_RANK rank tap: static order, no ETC (`QUEENS_RANK=1 QUEENS_ORD=0 QUEENS_WAVE=0`). NOTE: unlike the byte-identical M_NORMAL control, node_pc is live here, so the production skip18 default applies — set QUEENS_SKIP18=0 for a skip-free capture.
+
+/// The `M_RANK` tap family: the same first-losing-child rank tally captured on each ordering
+/// base (the M1 per-variant capture). `MODE` is a const generic ⇒ the predicate folds to a
+/// compile-time constant and every tap DCEs off the non-rank instantiations.
+const fn mode_rank(mode: u8) -> bool {
+    matches!(mode, M_RANK | M_RANK_O | M_RANK_WV | M_RANK_N)
+}
 
 /// Max recurse-arm children [`wins_inc`](IsoFlat::wins_inc)'s `M_WAVE` ETC pre-pass batches per
 /// node (the sorted-wave window). The deep-tail nodes the lever targets fan out to a handful of
@@ -3590,7 +3600,7 @@ impl IsoFlat {
             || MODE == M_HITKEY
             || MODE == M_DHIST
             || MODE == M_KPROBE;
-        let ord_sort: bool = MODE == M_ORD || ord_w;
+        let ord_sort: bool = MODE == M_ORD || MODE == M_RANK_O || ord_w;
         // A'' Phase-2a offload sizing (`M_SIZE`/`M_SIZE_WAVE` only; DCEs to nothing on every other
         // `MODE`, so the control path is byte-identical). Every `wins_inc` entry performs exactly one
         // flat-TT get below, so tapping here records the recurse-arm probe stream the idle-core producer
@@ -3789,11 +3799,17 @@ impl IsoFlat {
         // `M_L0` runs it with the L0 probe cache layered into `mtt_get`/`mtt_put` (production identical);
         // `M_WAVE_C` runs it with the recurse arm hoisted to the front of the fused-descent cascade;
         // `M_ORD_W` runs it over degree-sorted moves (dynamic ordering + ETC).
-        if MODE == M_WAVE || MODE == M_SIZE_WAVE || MODE == M_L0 || MODE == M_WAVE_C || ord_w {
+        if MODE == M_WAVE
+            || MODE == M_SIZE_WAVE
+            || MODE == M_L0
+            || MODE == M_WAVE_C
+            || MODE == M_RANK_WV
+            || ord_w
+        {
             let recurse_min = DK.max(self.block_k).max(self.iso_max_avail);
             // M_RANK: count this expanded OR-node once at block entry; the resolution site (an ETC
             // pre-descent cut, a descent-rank cut, or the no-cut loop end) records exactly one outcome.
-            if MODE == M_RANK {
+            if mode_rank(MODE) {
                 RANK_ACC.with(|c| c.borrow_mut().nodes[node_pc as usize] += 1);
             }
             // SoA descriptor store, recurse children in move order (consumed in order by the descent).
@@ -3821,7 +3837,7 @@ impl IsoFlat {
                     let pc = degs[i & (MAXV - 1)] as u32;
                     if pc == 0 {
                         // M_RANK: an empty child found during the gather is a pre-descent (ETC-side) cut.
-                        if MODE == M_RANK {
+                        if mode_rank(MODE) {
                             RANK_ACC.with(|c| c.borrow_mut().etc_cut[node_pc as usize] += 1);
                         }
                         if !skip_tt {
@@ -3897,14 +3913,14 @@ impl IsoFlat {
             // gated node's descent still gets warm entry probes — just without the redundant eager probe.
             if nw >= 2 && node_pc >= self.etc_pc_gate {
                 // M_RANK (Tier-A tap): tally the ETC probes this batch issues (one per recurse child).
-                if MODE == M_RANK {
+                if mode_rank(MODE) {
                     RANK_ACC.with(|c| c.borrow_mut().etc_probes[node_pc as usize] += nw as u64);
                 }
                 for j in 0..nw {
                     let v = self.mtt_get::<COUNT, MODE>(wk[j], wr[j], wf[j], 0);
                     if v == Some(0) {
                         // M_RANK: a proven-loss child found by the ETC pre-pass = a pre-descent cut.
-                        if MODE == M_RANK {
+                        if mode_rank(MODE) {
                             RANK_ACC.with(|c| c.borrow_mut().etc_cut[node_pc as usize] += 1);
                         }
                         if !skip_tt {
@@ -4000,7 +4016,7 @@ impl IsoFlat {
                 }
                 if pc == 0 {
                     // M_RANK: an empty child reached in the descent is the first cut at this rank `i`.
-                    if MODE == M_RANK {
+                    if mode_rank(MODE) {
                         let r = i.min(RANK_BUCKETS - 1);
                         RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
                     }
@@ -4125,7 +4141,7 @@ impl IsoFlat {
                 if lost {
                     // M_RANK: first proven-loss child in move order ⇒ this OR-node wins. `i` is its
                     // 0-based descent rank. The last bucket absorbs the rank ≥ RANK_BUCKETS-1 tail.
-                    if MODE == M_RANK {
+                    if mode_rank(MODE) {
                         let r = i.min(RANK_BUCKETS - 1);
                         RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
                     }
@@ -4142,7 +4158,7 @@ impl IsoFlat {
             // M_RANK: the descent completed with no cut ⇒ a LOSS node (full scan, no winning move).
             // A LOSS node examines *every* child, so it contributes its full degree (`moves.len()`,
             // the available-move count) to `E`'s `degree*nocut` term.
-            if MODE == M_RANK && !result {
+            if mode_rank(MODE) && !result {
                 RANK_ACC.with(|c| {
                     let mut a = c.borrow_mut();
                     a.no_cut[node_pc as usize] += 1;
@@ -4160,10 +4176,22 @@ impl IsoFlat {
             }
             return result;
         }
+        // M_RANK_O / M_RANK_N: the unfused twins descend this plain loop, so the rank tally
+        // lives here too. `ri` is bumped only inside `mode_rank` blocks ⇒ the counter and every
+        // tally DCE off the non-rank instantiations (byte-identical production loop).
+        if mode_rank(MODE) {
+            RANK_ACC.with(|c| c.borrow_mut().nodes[node_pc as usize] += 1);
+        }
+        let mut ri: usize = 0;
         for &sq in moves {
             let a = att_for8(att, sq);
             let child0 = avail.and_not(a[0]);
             if child0 == Bits::ZERO {
+                // M_RANK family: an empty child is the first cut, at 0-based descent rank `ri`.
+                if mode_rank(MODE) {
+                    let r = ri.min(RANK_BUCKETS - 1);
+                    RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
+                }
                 result = true;
                 break;
             }
@@ -4229,9 +4257,26 @@ impl IsoFlat {
                 )
             };
             if lost {
+                // M_RANK family: first proven-loss child at 0-based descent rank `ri`.
+                if mode_rank(MODE) {
+                    let r = ri.min(RANK_BUCKETS - 1);
+                    RANK_ACC.with(|c| c.borrow_mut().rank_dist[node_pc as usize][r] += 1);
+                }
                 result = true;
                 break;
             }
+            if mode_rank(MODE) {
+                ri += 1;
+            }
+        }
+        // M_RANK family: descent completed with no cut ⇒ a LOSS node; it examined every child,
+        // so it contributes its full degree to `E`'s `degree·nocut` term.
+        if mode_rank(MODE) && !result {
+            RANK_ACC.with(|c| {
+                let mut a = c.borrow_mut();
+                a.no_cut[node_pc as usize] += 1;
+                a.no_cut_deg[node_pc as usize] += moves.len() as u64;
+            });
         }
         if MODE == M_PROF {
             let t = rdtsc();
@@ -5141,8 +5186,22 @@ impl IsoFlat {
                     // Cold getK-entry repeat-rate tap on the production M_ORD_W path.
                     M_KPROBE
                 } else if self.rank {
-                    // Cold first-losing-child rank tap on the production M_ORD_W path.
-                    M_RANK
+                    // Cold first-losing-child rank tap. The base ordering is selected by the same
+                    // `ord`/`ord_etc`/`wave` flags production uses, so the rank distribution is
+                    // capturable under each ordering variant (the M1 per-variant capture):
+                    // default → M_RANK (M_ORD_W twin); QUEENS_ORD=1 → M_RANK_O (M_ORD twin);
+                    // QUEENS_ORD=0 → M_RANK_WV (M_WAVE twin); +QUEENS_WAVE=0 → M_RANK_N (M_NORMAL).
+                    if self.ord {
+                        if self.ord_etc {
+                            M_RANK
+                        } else {
+                            M_RANK_O
+                        }
+                    } else if self.wave {
+                        M_RANK_WV
+                    } else {
+                        M_RANK_N
+                    }
                 } else if self.cold {
                     // Cold entry-probe hit/miss tap on the production M_ORD_W path.
                     M_COLD
@@ -5208,6 +5267,15 @@ impl IsoFlat {
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_RANK => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_RANK_O => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK_O>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_RANK_WV => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK_WV>(
+                    q, att, orient, key, route, fp, order8, &mut nodes,
+                ),
+                M_RANK_N => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_RANK_N>(
                     q, att, orient, key, route, fp, order8, &mut nodes,
                 ),
                 M_COLD => self.wins_inc::<ORACLE, COUNT, WINDOW, DK, M_COLD>(

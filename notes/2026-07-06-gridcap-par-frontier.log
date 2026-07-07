@@ -1,0 +1,2 @@
+=== gridcap parallel frontier (opt, fixed-arena) Mon Jul  6 02:29:29 PM PDT 2026 ===
+[   487s] q=23 DIED rc=3 (mem cap / arena full)

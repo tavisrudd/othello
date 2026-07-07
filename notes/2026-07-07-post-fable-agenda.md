@@ -5,6 +5,62 @@ today. Part I = this repo. Part II = open problems elsewhere that this team coul
 with calibrated odds and explicit refusals. The ranking criterion throughout: **probability of a
 finished, submittable artifact** × its value — not interestingness alone.
 
+## Codex execution overlay (2026-07-07)
+
+This overlay records post-agenda gate status without rewriting Fable's ranked memo.
+
+- **Label warning:** Track-C labels below are agenda-local. They are not the same namespace as
+  `2026-07-07-codex-task-queue.md` (`C1..C11`).
+- **q=23 escape table is C3-unblocked but compute-gated.** Codex queue C8 is reported
+  (exact-canon check passed), and the C3 q=17/q=19 private-memo runs passed their gate; see
+  `2026-07-07-codex-esc-gate-report.md` plus the persisted full logs
+  `2026-07-07-escape-q17-full.log` and `2026-07-07-escape-q19-full.log`. Do not launch q=23 until
+  the box policy/user timing allows a heavy run.
+- **GF(49) hygiene can start.** Codex queue C6 is no longer blocked by a live q=19 process; the
+  old-binary run is auditable through the persisted logs above. Keep any GF(49) verification runs
+  light until the sum-free z5 run frees the box.
+- **Certificate-standard items are downgraded for now.** C9 produced a Lean statement scaffold, but
+  C10's P0a probe is a no-go for C11: mixed-value valtest buckets at n=8/n=10, n=12 valtest exceeds
+  the 1 GB gate, and the 10 GB diagnostic reaches only n=18 depth 2. So items depending on "C9/C11
+  reply-book checker as a working prototype" should be read as future work, not current
+  infrastructure.
+- **Immediate agenda work that is still safe while heavy compute is constrained:** GF(49) hygiene,
+  P1 paper assembly/proof cleanup, P2 release-boundary/reproducibility planning, agenda Track-C4
+  arc-census cross-check, and Lean WP-1/WP-2 statement/proof work. Avoid new heavy compute until
+  the sum-free z5 run frees the box.
+- **Track-C4 arc-census cross-check has a first pass:** see
+  `2026-07-07-arc-census-cross-check.md`. No mismatch found; the key correction is that grid
+  maximal caps are only affine-relative complete after adding the two direction points, so the
+  literature spectra are a size gate until an infinity-point completeness filter plus full
+  projective recanon exist.
+- **P1 paper assembly moved:** all four `paper-sumfree-capgame/kernels/*.tex` slots now have
+  first-pass content: cyclic mod-6 theorem proof with corrected Lemma 4, affine cap mirror proof,
+  Nofil convention/corollaries, and conic-localization partial results plus the on-conic
+  conjecture. Full TeX compile not run locally because `latexmk`/`pdflatex` are not installed in
+  the current path.
+- **P1 bibliography tightened:** `paper-sumfree-capgame/refs.bib` metadata was filled for the
+  Nofil follow-up, Sieben hypergraph games, group-generation achievement games, Anti-Set,
+  FunSearch, Diananda--Yap, Green--Ruzsa, and Node-Kayles nimber references. Remaining TODOs in
+  the paper directory are just title/authors plus the missing local TeX compile.
+- **P2 queens paper stale-G17 pass done:** `queens-n18-paper.md` now treats `G(17)=2` as verified
+  (not in flight), records the odd-side failure of the 0/1 oscillation, and leaves only exact
+  `G(18)` as the nimber computation still open.
+- **P2 release boundary scoped:** see `2026-07-07-queens-release-boundary.md`. P2 should ship a
+  small evidence capsule (frozen configs/logs/gates/OEIS source), while full solver packaging and
+  performance history belong to the later JOSS/artifact item. Main housekeeping gap: fill the
+  2026-07-07 `G(17)` verification log/config pointer in the nimber handoff.
+- **A344227 OEIS package updated:** `2026-07-03-oeis-a344227-submission.md` now appends
+  `a(14)..a(17)=0,1,0,2` in the DATA/b-file/credit/checklist, with companion upload file
+  `b344227.txt` validated against the proposed DATA line. User submits; Codex does not.
+- **Part III top-items research note added:** see `2026-07-07-part-iii-top-items-research.md`.
+  Main correction: torus no-three-in-line needs a line-convention spec before code, item 12/Qubic
+  are blocked on a real C11 checker path, and item 16 splits into an easy benchmark package plus a
+  speculative certified-isomorph-rejection wedge.
+- **Affine cap Lean theorem completed:** commit `965d660` proves the all-nontrivial finite affine
+  cap-game theorem in `CapGame.Affine.initialP_of_nontrivial`, with polished `ι -> K` and
+  `Fin n -> K` variants. The live Lean lane now moves to ProjectiveCap WP-1: prove the
+  frame-to-grid validity bridge in `ProjectiveCap.FrameGridBridge`.
+
 ## Part I — repo follow-on, by track
 
 ### Track P: papers (Opus assembles, user reviews/submits)
@@ -525,6 +581,142 @@ class counts, publish the swath that finishes; a partial table of exact values i
 best table in existence. (iii) Definitional forks (lines vs geodesics vs 3-term APs on the
 torus) — pick the AP/modular-line convention the literature uses, state it in the note's
 first section, and add the convention-equivalence check to the validation gates.
+
+## Part III elaborations (same fashion; items 12, 13, 1 already covered as E2/E5/E6)
+
+Rank within Part III after those three: **7 → 14 → 16 → 2 → 3**, then the tail in compact
+form.
+
+### E7. Item 7 — Lean-verified Qubic (Part III rank #4)
+
+**Why here:** the cheapest high-visibility artifact on the whole list ONCE C11 exists — the
+marginal work is a re-solve plus certificate emission for a game whose solution shape
+(strategy book + coverage) was published in 1980. It is also item 12's adoption engine: a
+standard with only our own queens instance looks self-serving; a standard whose second
+instance certifies a 45-year-old celebrated result looks like infrastructure.
+
+**Contents:** (1) modern re-solve of Qubic emitting the reply-book format (PN search;
+small compute on this box); (2) checker validation, native + Lean; (3) the comparison
+nobody has done — our machine-derived reply book vs Patashnik's hand-built 2,929-move book:
+where they agree, where machine play is simpler, what his book's redundancy was. That
+comparison section is what makes it a paper rather than a stunt.
+
+**Kill risks:** (i) *first-move asymmetry* — Qubic is a first-player WIN, so the certificate
+is an N-certificate (our reply-book kernel proves P-positions; the N-form is "one winning
+move + P-certificate of the child" — the C9 datatype must support this from day one, note it
+in the format spec NOW). (ii) Patashnik's book may be unrecoverable in machine form —
+acceptable; the comparison degrades to statistics vs his paper's counts. (iii) State-space
+size surprises — Qubic's tree with modern ordering is well inside this box; if not, weak-
+solve one symmetry class of openings and say so.
+
+### E8. Item 14 — soundness engineering for AI-assisted math (Part III rank #5)
+
+**Why here:** the highest-variance item after 12 — its value is set by an external clock
+(the 2026 AI-math moment) that we do not control, which caps its rank despite the ceiling.
+The team's edge is unfakeable evidence: a repo where the protocols VISIBLY caught errors
+(the false Lemma 4, the wrong "S2 dead" call, the GF(49) latent bug, the erratic-margin
+correction) — most writing in this space has no such ledger.
+
+**Contents ranked:** (1) the protocol paper — named, reusable mechanisms (adversarial audit
+passes, exact-match validation gates, negative-result ledgers, delegation contracts with
+report files) each illustrated by a real caught error; (2) the benchmark — research tasks
+with machine-checkable gates harvested from the C-queue pattern, scored on soundness (did
+the agent's claim survive the gate?) not helpfulness; (3) the essay claim: capability
+evaluation without soundness evaluation is mismeasuring research AI.
+
+**Kill risks:** (i) *genre saturation* — many AI-math manifestos; the differentiator is the
+ledger of caught errors and the runnable benchmark; if reduced to opinion, drop it. (ii)
+*Benchmark gaming/contamination* — publish gates + a holdout protocol, accept imperfection;
+the protocol paper carries the load. (iii) User-facing: this one is ABOUT our workflow, so
+the user decides voice, venue, and what internal material is publishable.
+
+### E9. Item 16 — SAT/QBF benchmarks + certified isomorph rejection (Part III rank #6)
+
+**Why here:** the banker half is nearly free and buys entry into the SAT community; the
+opener half is the sharpest technical wedge on the beyond-CGT list. VeriPB-era proof logging
+certifies propositional reasoning and (recently) symmetry BREAKING, but isomorph-rejection
+SEARCH — canonical-form-based pruning of a search tree, nauty-style — still terminates in
+"trust the canonicalizer." Our F3-audited canon + C8 exact-canon machinery is a worked
+answer: log the anchor-image argument as a checkable claim per pruned branch.
+
+**Contents:** (a) benchmark family: queens Node-Kayles, cap escape instances, sum-free games
+as QBF/SAT with (n, q) scaling knobs and certificate-backed ground truth; submit to
+QBFEVAL/SAT Competition. (b) the wedge paper: a certified-isomorph-rejection schema (what a
+canonicalization must emit for a proof logger to check it) + implementation on one of our
+censuses, aimed at SAT conference.
+
+**Kill risks:** (i) benchmark ignored — cheap enough not to matter; ground-truth certificates
+are the differentiator. (ii) The wedge may need VeriPB extensions (group-action reasoning
+is exactly what current proof formats handle awkwardly) — if so, the paper becomes "here is
+the gap + a proposed rule + a prototype," which the SAT community historically welcomes.
+(iii) Encoding quality: naive game→QBF encodings are strawmen; use the published positional-
+game encodings (Mayer-Eichberger–Saffidine lineage) as the baseline, not our own first cut.
+
+### E10. Item 2 — verified classification certificates (Part III rank #7)
+
+**Why here:** the load-bearing middle of the verification cluster — it feeds 13 (DB rows),
+16(b) (the logged-proof schema), and 12 (same checker discipline), but unlike them it has a
+self-contained first artifact: ONE published classification regenerated with an audit trail
+and re-checked independently. Rank capped by scoping risk: the right first target must be
+small enough to finish and known enough to matter.
+
+**Target selection criteria (do this scoping in one session):** a classification (a) whose
+original was computer-assisted with no published certificate, (b) reproducible on this box
+in days, (c) with a community that will notice — candidates: complete arcs in PG(2,q) for
+one small q, or the hyperoval classification at q=32 (Penttila–Royle) if sizing permits.
+Deliverable: regenerated classification + audit trail + independent checker + a "certificate
+or it didn't happen" methods section.
+
+**Kill risks:** (i) *sizing surprise* — the original searches ran on 1990s hardware but with
+domain-specific pruning we would have to re-derive and VERIFY (that is the actual work; do
+not underestimate it). (ii) *A mismatch with the published result* — treat exactly like the
+C8 protocol: independent re-verification of the disputed orbit before any claim in either
+direction; a confirmed mismatch is a major finding handled with maximal care. (iii) Checker
+scope creep — the checker validates the isomorph-rejection logic, not the domain math;
+state the trust boundary explicitly.
+
+### E11. Item 3 — Segre's theorem in Lean (Part III rank #8)
+
+**Why here:** the prestige formalization target, ranked below the verification cluster
+because it is months-scale with real convention risk and no partial-credit publication until
+item 10's foundations exist (which ARE the partial credit — that is why 10 is a banker and
+this is a bet).
+
+**Decomposition (the part that decides success):** (1) foundations = item 10 (arcs, tangent
+lines, conics over GF(q) in mathlib style); (2) the lemma of tangents (the convention-dense
+core: products of tangent-direction ratios via the multiplicative structure of GF(q)*; every
+sign/orientation convention is a trap — this is where a written expert decomposition earns
+its keep); (3) the counting finish (q odd ⇒ the (q+1)-arc's tangent structure forces a
+conic). Milestone rule: (2) alone, formalized, is announceable at a Lean community level
+even if (3) stalls.
+
+**Kill risks:** (i) *someone is already doing it* — the mandatory prior-art sweep includes
+asking on the Lean Zulip, not just searching; (ii) *convention drift between (1) and (2)* —
+freeze the geometry conventions in a design doc reviewed by the user before (2) starts;
+(iii) Codex bandwidth — this enters the queue only after WP-2 and the C-queue clear; it is
+the first thing to PAUSE if C11 or the falsification frontier needs Lean support.
+
+### E12. Part III tail, compact (ranks #9–#15)
+
+- **Item 9 (JOSS):** do it the month P2 ships — the release is P2's reproducibility story;
+  risk is only the release-boundary review (user). Zero research risk; don't let it drift.
+- **Item 10 (mathlib foundations):** start when Segre's prior-art sweep comes back clean;
+  it is also the dependency of 17 and the floor under 3 — highest-priority tail item.
+- **Item 11 (affine cap census):** ride the C1/q=23 runs — same enumeration, one extra
+  reporting pass; publish with the C8 gate stamped in the methods section.
+- **Item 4 (sum-free census):** idle-cycle work for the z5-era tooling; batch with 11's
+  OEIS submissions.
+- **Item 5 (methods case study):** fold INTO E8's protocol paper unless a solicited venue
+  appears — one strong paper beats two thin ones.
+- **Item 15 (Joyal):** gate on 12's format spec v1 — the semantics section should be written
+  against a frozen format, not a moving one.
+- **Item 17 (polynomial method):** strictly after 10; first milestone = formalized statement
+  (not proof) of one Szőnyi–Weiner-style stability lemma, which already sharpens Track K.
+- **Item 8 (queens domination) / item 6 (extremal scouting):** each gets ONE scouting
+  session against current tables before any commitment; the scouting note is the deliverable
+  either way.
+- **Item 18 (commercial):** entirely user-paced; the only preparation worth doing now is
+  keeping 12's checker demo runnable in minutes — that demo IS the pitch.
 
 ### Sequencing recommendation
 

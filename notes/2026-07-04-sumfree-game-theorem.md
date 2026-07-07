@@ -71,29 +71,28 @@ The translation `τ(z)=z+m` is **fixed-point-free** (`z+m=z` impossible), so it 
 *Proof.* `A ≠ ∅` contains some `z` and its mate `z+m`; then `(n/2) + z = z+m ∈ A`, so adding `n/2`
 completes `z + (n/2) = z+m`. ∎ Hence `n/2` is playable only from `∅`.
 
-> **CORRECTION 2026-07-07: Lemma 4 as stated below is FALSE** — it needs the extra hypothesis
-> `z ≠ t + n/2` (equivalently `2(z−t) ≠ 0`). Smallest counterexample `n=6`: `C={2}`, `z=5`,
-> reply `w=1` gives `1+1=2`. The theorem is unaffected (in every use `z = t + n/2` is illegal or
-> nonexistent). Corrected statement + exhaustive case analysis:
-> [kernel (a)](2026-07-07-kernel-sumfree-zn.md); machine confirmation (all breakers are exactly
-> this family, n ≤ 120): [Codex check](2026-07-07-codex-lemma4-check.md).
+**Lemma 4 (negation mirror with fixed extras — kills O₃, absorbs O₂), corrected 2026-07-07.**
+Suppose `3 ∣ n`, put `t = n/3` (so `3t = 0`, `−t = 2t`). Let `E ⊆ {n/2, t}` (with
+`n/2 ∈ E ⇒ 2∣n`), and let `C = E ∪ S` with `S = −S`, `C` sum-free, and (if `t ∈ E`) `2t ∉ C`.
+Then for any move `z` with `C ∪ {z}` sum-free,
+`z ∉ {0, n/2, t, 2t}`, and also `z ≠ t+n/2` when `2∣n` (equivalently `2(z−t) ≠ 0`), the reply
+`w = −z` is legal and `C ∪ {z, w}` is sum-free.
 
-**Lemma 4 (negation mirror with fixed extras — kills O₃, absorbs O₂).** Suppose `3 ∣ n`, put
-`t = n/3` (so `3t = 0`, `−t = 2t`). Let `E ⊆ {n/2, t}` (with `n/2 ∈ E ⇒ 2∣n`), and let
-`C = E ∪ S` with `S = −S`, `C` sum-free, and (if `t ∈ E`) `2t ∉ C`. Then for any move `z` with
-`C ∪ {z}` sum-free and `z ∉ {0, n/2, t, 2t}`, the reply `w = −z` is legal and `C ∪ {z, w}` is
-sum-free.
+*Proof.* This is Lemma 1's negation step with one asymmetric extra `t` and possibly one self-paired
+extra `n/2`. New violations not involving either extra reduce exactly as in Lemma 1 to violations
+of `C ∪ {z}`. A violation using `n/2` gives `z = n/2 − c` for some `c ∈ C`, hence
+`z+n/2 = −c ∈ C`, already contradicting legality of `z`. A violation using `t` either similarly
+forces an already-present violation `z+t ∈ C`, or is one of the square/cross cases
+`w+w=t` or `t+z=w`; both are exactly `2z=2t`, i.e. `2(z−t)=0`, excluded. Thus no new violation
+survives. ∎
 
-*Proof.* By Lemma 1's argument, every new violation involving `w` reduces to a violation of
-`C ∪ {z}` **unless** it uses the asymmetric extra `t` (whose mate `2t ∉ C`) or the self-paired
-`n/2`. Both remaining families are impossible:
-- *Uses `t`:* a violation `w = t + b` (`b ∈ C`) forces `z = −w = −t − b = 2t − b` (as `−t = 2t`).
-  But then `z + t = 3t − b = −b`, and `−b ∈ C` for `b ∈ S ∪ {n/2}` (`b=t ⇒ z=t∈C`, excluded;
-  `b=2t ∉ C`). So `C ∪ {z}` already violates (`z + t = −b ∈ C`) — contradicting `z` legal.
-- *Uses `n/2`:* a violation `w + n/2 = c` (`c ∈ C`) forces `z = n/2 − c`, whence
-  `z + n/2 = 2·(n/2) − c = −c ∈ C` — again `C ∪ {z}` violates. Contradiction.
-So no new violation survives; `w=−z` is a legal, sum-free reply. ∎ *(3t=0 is what neutralizes O₃;
-2·(n/2)=0 and `n/2 = −n/2` is what absorbs O₂. Mechanism machine-checked: 0 breakers, n=6..36.)*
+The extra hypothesis is necessary. Smallest counterexample to the old standalone statement:
+`n=6`, `t=2`, `C={2}`, `z=5`, reply `w=1`, and `1+1=2`. The theorem is unaffected: in the
+`n≡3` use there is no `n/2`, and in the `n≡0` use with `E={n/2,t}`, the bad move `z=t+n/2` is
+already illegal because `z+t=n/2∈C`. Machine confirmation: all breakers through `n≤120` are exactly
+this family, and the corrected statement has zero breakers
+([Codex check](2026-07-07-codex-lemma4-check.md)); the paper-ready exhaustive case analysis is in
+[kernel (a)](2026-07-07-kernel-sumfree-zn.md).
 
 ## Proof of the Theorem — obstruction counting
 
@@ -143,7 +142,8 @@ For cyclic `Z_n`, `s₂ = [2∣n] ∈ {0,1}` and `r₃ ≤ 1`, so this reads "P 
 - **`s₂ ≥ 2 ⟹ P` for every `G`** — proved cleanly by the *translation mirror with a spare order-2
   element*: to any opening `x`, reply `x+v` for an order-2 `v ≠ x` (exists since `2^{s₂}−1 ≥ 3`),
   then `τ_v`-mirror (O₃-immune). The new phenomenon (`Z₂×Z₂×Z₉ = P` though `Z₉ = N`).
-- **`r₃ ≤ 1` (cyclic Sylow-3):** the six cases lift verbatim via Lemmas 1–4 (one order-3 pair, `≤1`
+- **`r₃ ≤ 1` (cyclic Sylow-3):** the six cases lift via Lemmas 1–3 and the corrected Lemma 4
+  (one order-3 pair, `≤1`
   order-2 element — exactly the `Z_n` situation). A clean **reduction** for `s₂=1`: `∅` is P ⟺ `{m}`
   is N (the unique order-2 `m`; `τ_m` handles every non-`m` opening for all 3-ranks).
 
@@ -153,10 +153,11 @@ parity forces only small groups (measured — see the note).
 
 ## Verification status
 
-- **Lemmas 1–4 are proved above, uniform in `n`.** With Lemma 4 covering the two augmented-mirror
+- **Lemmas 1–4 are proved above, uniform in `n`.** With the corrected Lemma 4 covering the two augmented-mirror
   cases (`n≡3` opening; `{n/2,n/3}` P-position for `n≡0`), the six-case proof is **complete** — no
-  remaining machine-only step; the machine checks (0 mirror-breakers over all reachable positions
-  n≤36; outcome law confirmed by the exact solver to **n=65**, zero exceptions) are corroboration,
+  remaining machine-only step; the machine checks (all old Lemma-4 breakers are exactly the
+  excluded `z=t+n/2` family through `n≤120`; outcome law confirmed by the exact solver to **n=65**,
+  zero exceptions) are corroboration,
   not load-bearing.
 - The only non-symbolic inputs are the finite base cases `n < 5` (direct: `G=0,1,1,2` for n=1..4),
   which the periodic law does not claim.

@@ -1,8 +1,177 @@
 \section{Projective cap games and conic localization}
 \label{sec:conic-localization}
 
-%TODO (lead author, F1d): the projective cap game on PG(m,q) and the conic-localization /
-%psi_u lemmas in publishable form (the Moebius/hyperbola normal form). Source: the projective
-%cap work (notes/2026-07-04-capset-game-theorem.md projective remark; the ProjectiveCap Lean
-%scaffolding). This section is a partial/open-frontier proof section -- state exactly what is
-%proved vs conjectured. Do NOT draft proof text here.
+We close with a partial result for the projective analogue. This section is not a proof that
+the projective cap game is always a second-player win; it isolates the finite-geometric
+structure of the local obstruction that remains after the affine theorem.
+
+\paragraph{The residual grid game.}
+After two projective opening points are placed on the line at infinity, the remaining affine
+points may be represented as a grid $\Fq\times\Fq$. A residual position is a set of cells
+that is both a partial permutation (no two cells in a common row or column) and an affine cap
+(no three cells collinear in $\AG(2,q)$). A move adds a cell preserving both conditions.
+The row and column constraints encode the two already-played directions at infinity.
+
+Embed $(r,c)\in\Fq^2$ as $(r:c:1)\in\PG(2,q)$ and let
+\[
+  a=(1:0:0),\qquad b=(0:1:0)
+\]
+be the two direction points. Lines through $a$ are affine columns, lines through $b$ are
+affine rows, and the line $ab$ is the line at infinity.
+
+\begin{lemma}[The associated 5-arc]
+\label{lem:grid-five-arc}
+Let $S_3=\{(r_i,c_i):1\leq i\leq 3\}$ be a size-$3$ residual grid position. Then
+$S_3\cup\{a,b\}$ is a $5$-arc in $\PG(2,q)$.
+\end{lemma}
+
+\begin{proof}
+A collinear triple containing both $a$ and $b$ would lie on the line at infinity, but all
+cells of $S_3$ have affine coordinate $z=1$. A triple containing $a$ and two cells would
+put those two cells in one column; a triple containing $b$ and two cells would put them in
+one row. Both are forbidden by the partial-permutation condition. A triple consisting of
+the three cells is forbidden by the affine-cap condition.
+\end{proof}
+
+\begin{theorem}[Conic localization]
+\label{thm:conic-localization}
+Let $S_3$ be a size-$3$ residual grid position. Then there is a unique nondegenerate conic
+$\mathcal C\subseteq\PG(2,q)$ through $S_3\cup\{a,b\}$. Its affine part has the form
+\[
+  \mathcal C_{\rm aff}
+  =\{(r,c)\in\Fq^2:(r-\rho)(c-\alpha)=B\}
+\]
+for uniquely determined $\rho,\alpha\in\Fq$ and $B\in\Fq^\ast$. In particular,
+$\mathcal C_{\rm aff}$ has exactly $q-1$ cells, one in each row $r\neq\rho$ and one in
+each column $c\neq\alpha$.
+
+Moreover, every cell of $\mathcal C_{\rm aff}\setminus S_3$ is a legal extension of
+$S_3$. The set $\mathcal C_{\rm aff}$ is itself a residual grid position; if $q$ is odd,
+it is inclusion-maximal and has even size $q-1$.
+\end{theorem}
+
+\begin{proof}
+Write a conic as the zero set of a nonzero quadratic form
+\[
+Q(r,c,z)=\lambda r^2+\mu c^2+\gamma z^2+\delta rc+\epsilon rz+\zeta cz.
+\]
+The conditions $Q(a)=Q(b)=0$ force $\lambda=\mu=0$. If $\delta=0$, then
+$Q=z(\epsilon r+\zeta c+\gamma z)$, so the three affine cells of $S_3$ would lie on one
+line, contradicting the cap condition. Thus $\delta\neq 0$; scale so that $\delta=1$.
+The affine equation is then
+\[
+  rc+\epsilon r+\zeta c+\gamma=0.
+\]
+The three cell conditions are a linear system in $(\epsilon,\zeta,\gamma)$ with coefficient
+rows $(r_i,c_i,1)$. Its determinant is the collinearity determinant of the three cells,
+nonzero because $S_3$ is an affine cap. Hence the conic is unique. Completing the product
+gives
+\[
+  rc+\epsilon r+\zeta c+\gamma=(r-\rho)(c-\alpha)-B
+\]
+with $\rho=-\zeta$, $\alpha=-\epsilon$, and $B=\rho\alpha-\gamma$.
+
+We have $B\neq 0$. If $B=0$, the affine equation factors as
+$(r-\rho)(c-\alpha)=0$, the union of one row and one column; three cells lying in this
+union force two to share a row or a column. The same factorization argument also shows
+nondegeneracy: if the projective conic factored into two lines, the five arc points would
+lie on two lines, hence three of them on one line, contradicting
+Lemma~\ref{lem:grid-five-arc}.
+
+Since $B\neq 0$, each row $r\neq\rho$ contains the unique conic cell
+\[
+  c=\alpha+\frac{B}{r-\rho},
+\]
+and no cell occurs in row $\rho$; similarly, each column $c\neq\alpha$ occurs exactly once.
+Thus $\mathcal C_{\rm aff}$ has $q-1$ cells and is a partial permutation.
+
+Let $x\in\mathcal C_{\rm aff}\setminus S_3$. The row and column uniqueness just proved show
+that $x$ uses none of the three rows or columns already used by $S_3$. If $x$ and two cells
+of $S_3$ were collinear, a line would meet the nondegenerate conic $\mathcal C$ in three
+distinct points, impossible. Hence $S_3\cup\{x\}$ is a legal residual position. The same
+two-point line bound shows that $\mathcal C_{\rm aff}$ itself is an affine cap, so it is a
+residual grid position.
+
+Assume now that $q$ is odd. Let $x=(r,c)\notin\mathcal C_{\rm aff}$. If $r\neq\rho$, then
+row $r$ already contains a conic cell, so $x$ is illegal. If $r=\rho$ and $c\neq\alpha$,
+then column $c$ already contains a conic cell, so $x$ is illegal. The only remaining cell is
+the center $(\rho,\alpha)$. In translated coordinates $t=r-\rho$, $s=c-\alpha$, the conic
+cells are
+\[
+  P_t=(t,B/t),\qquad t\in\Fq^\ast.
+\]
+For any $t\in\Fq^\ast$, the two points $P_t$ and $P_{-t}$ are distinct, and the center is
+on the line through them. Adding the center therefore creates a collinear triple. Thus
+every off-conic cell is illegal, and $\mathcal C_{\rm aff}$ is maximal.
+\end{proof}
+
+\begin{remark}[Even characteristic]
+\label{rem:even-conic-nucleus}
+The maximality conclusion is genuinely odd-characteristic. If $q$ is even, the center
+$(\rho,\alpha)$ is the nucleus of the conic: no secant through two distinct conic cells
+passes through it, and $\mathcal C_{\rm aff}\cup\{(\rho,\alpha)\}$ is a larger residual
+position. This is harmless for the main theorem, since even-characteristic affine games are
+already settled by the translation mirror of Section~\ref{sec:affine-cap}.
+\end{remark}
+
+\begin{corollary}[On-conic extension count]
+\label{cor:on-conic-count}
+Every size-$3$ residual grid position has exactly $q-4$ legal extensions on its conic. If
+one also uses the total extension count $q^2-9q+21$, the number of off-conic legal extensions
+is $(q-5)^2$.
+\end{corollary}
+
+\begin{proof}
+The conic has $q-1$ affine cells, three of which are the cells of $S_3$, and
+Theorem~\ref{thm:conic-localization} says that all remaining conic cells are legal. The
+off-conic formula is the subtraction
+\[
+  q^2-9q+21-(q-4)=q^2-10q+25=(q-5)^2.
+\]
+\end{proof}
+
+\begin{lemma}[Multiplicative conic reflections]
+\label{lem:psi-u}
+Work in translated coordinates $t=r-\rho$, $s=c-\alpha$, so that
+$\mathcal C_{\rm aff}=\{(t,B/t):t\in\Fq^\ast\}$. For $u\in\Fq^\ast$ define
+\[
+  \psi_u(t,s)=\left(\frac{u}{B}s,\frac{B}{u}t\right).
+\]
+Then $\psi_u$ is an involutive grid symmetry, it maps $\mathcal C_{\rm aff}$ to itself, and
+on the conic parameter it acts by $t\mapsto u/t$. Its fixed-point set is the line
+$s=(B/u)t$; for $q$ odd this line meets the conic in two cells if $u$ is a square and in no
+cells if $u$ is a nonsquare.
+\end{lemma}
+
+\begin{proof}
+The displayed map is linear, invertible, and squares to the identity. It exchanges the row
+and column families, so it preserves the partial-permutation condition, and being linear it
+preserves affine collinearity. On a conic point,
+\[
+  \psi_u(t,B/t)=\left(u/t,\,B/(u/t)\right),
+\]
+so the parameter changes by $t\mapsto u/t$. The fixed equations are equivalent to
+$s=(B/u)t$. Intersecting this line with the conic gives $t=u/t$, i.e. $t^2=u$, which has
+two or zero solutions over $\Fq$ when $q$ is odd according as $u$ is or is not a square.
+\end{proof}
+
+\begin{conjecture}[On-conic escape]
+\label{conj:on-conic-escape}
+For odd $q$, every size-$3$ residual grid position has at least one legal extension on its
+conic that is a $P$-position of the residual grid game.
+\end{conjecture}
+
+Conjecture~\ref{conj:on-conic-escape} implies the local escape statement used in the frame
+reduction for $\PG(2,q)$, and hence would imply the projective-plane second-player win in
+that reduction. It is strictly stronger than the escape statement: a class with all on-conic
+extensions $N$ but an off-conic $P$ extension would refute the conjecture without refuting the
+projective outcome.
+
+The evidence is exhaustive through the current wall: $q=5,7,9,11,13,17,19$, including the
+non-prime field $q=9$. The data also rule out several simpler laws. In particular, not every
+on-conic extension is a $P$-position, the value is not determined by a fixed quadratic-character
+formula in the conic parameters, and parity of the number of maximal completions does not decide
+the on-conic value. The useful reduction is nevertheless substantial: the witness search drops
+from the full two-dimensional grid to the one-dimensional conic parameter set
+$\Fq^\ast\setminus S_3$ modulo the rotations $t\mapsto kt$ and the reflections of
+Lemma~\ref{lem:psi-u}.

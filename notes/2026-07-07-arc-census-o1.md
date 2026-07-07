@@ -237,3 +237,81 @@ Also unresolved (not from memory — flagged for a reader with journal access):
 | 29 | ✓        | ✓ [CS-2729]   | ✓ [CS-2729] T3  | ✓ 13,15,17,19,21|
 | 31 | ✓        | GAP           | GAP (3391 partial only) | GAP     |
 | 32 | ✓        | GAP           | GAP (9300/9302 partial only) | GAP  |
+
+## C4 fill — Codex partial accessible-source pass (2026-07-07)
+
+Sources accessed in this fill:
+
+- **[FMMP-23spec-fill]** G. Faina, S. Marcugini, A. Milani, F. Pambianco, *"The spectrum of
+  the values k for which there exists a complete k-arc in PG(2,q) for q≤23"*, Ars Combinatoria
+  47 (1997), 3–11. Combinatorial Press PDF reachable at
+  `https://combinatorialpress.com/article/ars/Volume%20047/volume_47_paper-1.pdf`; PDF is a
+  scanned image, so cells below were read from rendered page images.
+- **[MMP-25spec-abs]** S. Marcugini, A. Milani, F. Pambianco, *"Complete arcs in PG(2,25):
+  the spectrum of the sizes and the classification of the smallest complete arcs"*, Discrete
+  Math. 307 (2007), 739–747. ScienceDirect abstract page
+  `https://www.sciencedirect.com/science/article/pii/S0012365X06008016`.
+- **[MMP-min-fill]** S. Marcugini, A. Milani, F. Pambianco, *"Minimal complete arcs in
+  PG(2,q), q≤32"*, arXiv:1005.3412, table "Value of t(2,q), q≤29".
+- **[Cool-31-abs-fill]** K. Coolsaet, *"The complete arcs of PG(2,31)"*, JCD 23(12)
+  (2015), 522–533. Abstract text visible via indexed Wiley/ResearchGate snippets only; full
+  table still not accessed.
+
+### q = 23 fills
+
+Source: [FMMP-23spec-fill] Theorem 5.1, rendered PDF page 8.
+
+- **Full spectrum:** `{10, 12, 13, 14, 15, 16, 17, 24}`.
+- **Nonexistence:** no complete 11-arcs; no complete sizes outside the spectrum above.
+- **Smallest class count:** one complete 10-arc up to projectivity. Cross-check:
+  [MMP-min-fill] table gives `t(2,23)=10` and `1` class.
+- **Largest/conic count:** one complete 24-arc up to projectivity ([FMMP-23spec-fill],
+  rendered PDF page 9: "the existence and the uniqueness of the complete 24-arc").
+- **Still not filled:** per-size counts for `k = 12, 13, 14, 15, 16, 17`; these remain in
+  [CS-2325], not in the accessible spectrum paper.
+
+Tabulation:
+
+| k  | status / N_k | source |
+|----|--------------|--------|
+| 10 | exists; `N_10 = 1` up to projectivity | [FMMP-23spec-fill] Thm. 5.1; [MMP-min-fill] table |
+| 11 | no complete 11-arcs | [FMMP-23spec-fill] Thm. 5.1 proof |
+| 12 | exists; count not filled | [FMMP-23spec-fill] Thm. 5.1 |
+| 13 | exists; count not filled | [FMMP-23spec-fill] Thm. 5.1 |
+| 14 | exists; count not filled | [FMMP-23spec-fill] Thm. 5.1 |
+| 15 | exists; count not filled | [FMMP-23spec-fill] Thm. 5.1 |
+| 16 | exists; count not filled | [FMMP-23spec-fill] Thm. 5.1 |
+| 17 | exists; count not filled | [FMMP-23spec-fill] Thm. 5.1 |
+| 18–23 | no complete arcs | [FMMP-23spec-fill] Thm. 5.1 |
+| 24 | exists; `N_24 = 1` up to projectivity | [FMMP-23spec-fill] page 9 |
+
+### q = 25 fills
+
+Sources: [MMP-25spec-abs] abstract; [MMP-min-fill] table.
+
+- **Smallest class count:** `t(2,25)=12`; `606` non-equivalent complete 12-arcs.
+- **Nonexistence:** no complete 19-arcs and no complete 20-arcs.
+- **Still not filled:** full spectrum list as an explicit set, and per-size counts other than
+  `k=12`; the accessible abstract says the spectrum is determined but does not list it.
+
+Tabulation:
+
+| k  | status / N_k | source |
+|----|--------------|--------|
+| 12 | exists; `N_12 = 606` non-equivalent classes | [MMP-25spec-abs]; [MMP-min-fill] table |
+| 19 | no complete 19-arcs | [MMP-25spec-abs] |
+| 20 | no complete 20-arcs | [MMP-25spec-abs] |
+
+### q = 31 fills
+
+Source: [Cool-31-abs-fill] abstract/snippet only; full paper tables still not accessed.
+
+- **Corrected Kéri large-size count:** `N_22 = 12` complete 22-arcs up to projective
+  equivalence, not 11.
+- **Still not filled:** full q=31 spectrum and all other per-size counts from [Cool-31].
+
+Tabulation:
+
+| k  | status / N_k | source |
+|----|--------------|--------|
+| 22 | exists; `N_22 = 12` up to projective equivalence | [Cool-31-abs-fill] |

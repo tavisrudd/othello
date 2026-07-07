@@ -72,4 +72,44 @@ premature proof that every flattened index lies in the intended core.
 def N20TauRelated (i j : Fin (20 * 20)) : Prop :=
   row 20 j = 18 - row 20 i ∧ col 20 j = 18 - col 20 i
 
+/-! ## Certificate targets
+
+These aliases connect the generic Node-Kayles reply-book scaffold to the two
+central-child positions used by the n=20 certificate plan.  The certificate
+validity predicate is the checker contract; unresolved extractor leaves are not
+accepted by `NodeKayles.CertificateArtifact.Valid`.
+-/
+
+/-- Final certificate type for the known n=18 `I9` calibration child. -/
+abbrev N18I9Certificate :=
+  NodeKayles.FinalCertificate (queenGraph 18) (centralChildLive 18 I9)
+
+/-- Final certificate type for the n=20 `J10` lucky child. -/
+abbrev N20J10Certificate :=
+  NodeKayles.FinalCertificate (queenGraph 20) (centralChildLive 20 J10)
+
+/-- Extractor artifact type for the n=20 `J10` lucky child, including unresolved drafts. -/
+abbrev N20J10Artifact :=
+  NodeKayles.CertificateArtifact (queenGraph 20) (centralChildLive 20 J10)
+
+/-- A valid final certificate proves the n=18 calibration child is P. -/
+theorem N18I9CalibrationTarget_of_certificate (cert : N18I9Certificate)
+    (hvalid : cert.Valid) : N18I9CalibrationTarget := by
+  exact cert.isP hvalid
+
+/-- A valid final certificate proves the n=20 lucky child is P. -/
+theorem N20J10LuckyTarget_of_certificate (cert : N20J10Certificate)
+    (hvalid : cert.Valid) : N20J10LuckyTarget := by
+  exact cert.isP hvalid
+
+/-- A valid extractor artifact proves the n=20 lucky child is P; unresolved leaves are rejected. -/
+theorem N20J10LuckyTarget_of_artifact (artifact : N20J10Artifact)
+    (hvalid : artifact.Valid) : N20J10LuckyTarget := by
+  exact artifact.isP hvalid
+
+/-- A valid n=20 `J10` child certificate proves the full `20 x 20` board is first-player winning. -/
+theorem firstPlayerWins20_of_N20J10Certificate (cert : N20J10Certificate)
+    (hvalid : cert.Valid) : NodeKayles.firstPlayerWins (queenGraph 20) := by
+  exact firstPlayerWins_of_rootChildIsP (N20J10LuckyTarget_of_certificate cert hvalid)
+
 end Queens

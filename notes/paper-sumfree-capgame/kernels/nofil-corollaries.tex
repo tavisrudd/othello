@@ -1,8 +1,123 @@
 \section{Corollaries for Nofil on Steiner triple systems}
 \label{sec:nofil-corollaries}
 
-%TODO (lead author, F1c): the Nofil corollaries -- (i) AG(n,3) as an STS gives the first
-%infinite determined Nofil family, nim-value 0 on STS(3^n) for all n (via vertex-transitivity,
-%Prop. 6 of Huggan-Huntemann-Stevens); (ii) the PG(m,2) = STS(2^{m+1}-1) sum-free column and
-%the v mod 6 nim-parity observation. Prove the convention equivalence carefully (the one place
-%a silent error kills the paper). Source: notes/2026-07-07-nofil-connection.md. Do NOT draft here.
+We now translate the two main families into the terminology of Nofil on Steiner triple
+systems. The only delicate point is convention: Nofil is phrased as avoiding a move that
+``fills'' a block, while our games are phrased as building an independent set in a forbidden
+hypergraph. The next proposition records that these are the same game tree.
+
+\begin{proposition}[Convention equivalence]
+\label{prop:nofil-convention-equivalence}
+Let $H=(V,\mathcal B)$ be a finite hypergraph, and call $A\subseteq V$ independent if it
+contains no member of $\mathcal B$. Consider the achievement game in which a move from
+an independent set $A$ chooses $x\notin A$ such that $A\cup\{x\}$ is independent. Also
+consider the Nofil rule in which a point $x$ is playable at $A$ if there is no block
+$B\in\mathcal B$ with $x\in B$ and $B\setminus\{x\}\subseteq A$. A play sequence
+$x_1,\ldots,x_k$ is legal for the Nofil rule if and only if every prefix set
+$\{x_1,\ldots,x_i\}$ is independent. Consequently the two rules have identical reachable
+positions, identical move relation, and identical Sprague--Grundy values.
+\end{proposition}
+
+\begin{proof}
+Suppose first that $A$ is independent and $x\notin A$. Then $A\cup\{x\}$ fails to be
+independent if and only if it contains some block $B$. Since $A$ itself is independent,
+such a block must contain $x$, and then $B\setminus\{x\}\subseteq A$; equivalently, $x$
+fills a block at $A$. Thus, from every independent position, the achievement-legal moves
+are exactly the Nofil-playable moves.
+
+The empty set is independent. Inducting over prefixes gives both directions: every legal
+Nofil history has independent prefix sets, and any ordering whose prefix sets are all
+independent is legal move by move. The position is determined by the set already played,
+not by the order in which it was played, so the game trees coincide. Since both games use
+normal play, the Sprague--Grundy values coincide as well.
+\end{proof}
+
+\begin{lemma}[The affine and projective STS families]
+\label{lem:classical-sts-families}
+The following identifications hold.
+\begin{enumerate}
+  \item The lines of $\AG(n,3)$ form a Steiner triple system on $3^n$ points. Under
+    Proposition~\ref{prop:nofil-convention-equivalence}, Nofil on this system is the cap
+    achievement game on $\AG(n,3)$.
+  \item The lines of $\PG(m,2)$ form a Steiner triple system on $2^{m+1}-1$ points. Under
+    the same convention equivalence, Nofil on this system is the sum-free achievement game
+    on $\mathbb F_2^{m+1}$, with the zero element omitted because it is never playable.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $\AG(n,3)$, the affine line through distinct points $a,b\in\mathbb F_3^n$ is
+\[
+  \{a,\ b,\ 2b-a\}.
+\]
+These three points sum to zero, and conversely any three distinct points of
+$\mathbb F_3^n$ with sum zero are exactly such an affine line. Hence every pair of
+points lies in a unique 3-point line, so the line design is an $\STS(3^n)$. Since each
+line has exactly three points, an independent set for this line hypergraph is precisely
+a cap: it contains no three collinear points.
+
+For $\PG(m,2)$, each projective point has a unique nonzero vector representative in
+$\mathbb F_2^{m+1}$. Three distinct projective points are collinear if and only if their
+representatives are linearly dependent, equivalently if they are $\{a,b,a+b\}$ for
+distinct nonzero $a,b$. This gives a Steiner triple system on the nonzero vectors of
+$\mathbb F_2^{m+1}$. In the sum-free game, the degenerate relation $a+a=c$ forces
+$c=0$, and $0$ is never a legal element since $0+0=0$. Thus the remaining forbidden
+relations are exactly the projective-line triples $\{a,b,a+b\}$.
+\end{proof}
+
+\begin{corollary}[The affine Nofil family]
+\label{cor:affine-nofil-family}
+For every $n\geq 1$, Nofil on the affine Steiner triple system $\STS(3^n)$ has
+Sprague--Grundy value $0$.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:classical-sts-families}, this game is the cap achievement game on
+$\AG(n,3)$. The theorem of Section~\ref{sec:affine-cap} says that the cap achievement
+game on $\AG(n,q)$ is a second-player win for every $n$ and every prime power $q$.
+Therefore the position is a $P$-position, which is equivalent to Sprague--Grundy value
+$0$.
+\end{proof}
+
+Corollary~\ref{cor:affine-nofil-family} gives a uniform determined family inside the
+Nofil program of Huggan, Huntemann, and Stevens~\cite{huggan2022nofil}. It is consistent
+with their vertex-transitivity observation: affine translations act transitively on the
+points of $\AG(n,3)$, so their Proposition~6 restricts the nim-value to $\{0,1\}$, and
+the cap theorem pins it to $0$.
+
+\paragraph{The projective column.}
+Lemma~\ref{lem:classical-sts-families} also identifies Nofil on the projective Steiner
+triple system $\STS(2^{m+1}-1)$ with the sum-free game on $\mathbb F_2^{m+1}$. The
+current status is computational:
+\[
+\begin{array}{c@{\quad}c@{\quad}c@{\quad}c@{\quad}l}
+m & v=2^{m+1}-1 & v\bmod 6 & \text{value} & \text{status}\\
+\hline
+1 & 3  & 3 & 0 & \text{trivial one-block system}\\
+2 & 7  & 1 & 0 & \text{computed; Fano plane, matching HHS}\\
+3 & 15 & 3 & 0 & \text{computed}\\
+4 & 31 & 1 & 0 & \text{computed}\\
+\geq 5 & 63,\ldots & 3,1,\ldots & ? & \text{open}
+\end{array}
+\]
+The smallest open case is therefore $\STS(63)$, equivalently the sum-free game on
+$\mathbb F_2^6$.
+
+\begin{conjecture}
+\label{conj:projective-sts-nofil}
+Nofil on $\STS(2^{m+1}-1)$ has Sprague--Grundy value $0$ for every $m\geq 1$.
+\end{conjecture}
+
+This projective conjecture should not be viewed as a formal consequence of the affine
+mirror theorem. Over $\mathbb F_2$, every linear involution has a large fixed space, so
+the fixed-point-free translation mirror used in the affine even-characteristic proof is
+not available on projective space.
+
+\paragraph{Order congruence is not the whole story.}
+The computed Nofil data in~\cite{huggan2022nofil} suggest visible dependence on the order
+of the Steiner triple system modulo $6$, but the classical geometries show that congruence
+alone cannot be the invariant. The affine family has $3^n\equiv 3\pmod 6$ and value $0$,
+in line with the even-value tendency in those data. The projective family alternates
+$2^{m+1}-1\equiv 3,1\pmod 6$; the computed case $m=4$ gives an $\STS(31)$ with
+$31\equiv 1\pmod 6$ and value $0$. If Conjecture~\ref{conj:projective-sts-nofil} holds,
+these are infinitely many structured exceptions to any rule depending only on $v\bmod 6$.

@@ -1,0 +1,3 @@
+q= 17  root=P  size4-classes=735  game-N=671  emb-odd-maximal=735  mismatches=64  boundary-char=FAILS
+      first mismatch representative (cells) = [(0, 0), (1, 1), (2, 3), (3, 4)]
+Q17B_DONE

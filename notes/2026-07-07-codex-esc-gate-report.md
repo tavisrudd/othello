@@ -5,6 +5,23 @@ Date: 2026-07-07
 Scope: discharge the mandated `esc` validation gate for `q=17` and `q=19` against the
 reference `escape` logs. No `q=23` campaign was started.
 
+## Artifacts
+
+Historical summary-marker logs:
+
+- `notes/2026-07-06-escape-q17.log`
+- `notes/2026-07-06-escape-q19.log`
+
+Full private-memo rerun logs persisted from `/tmp`:
+
+- `notes/2026-07-07-escape-q17-full.log`
+- `notes/2026-07-07-escape-q19-full.log`
+
+The historical logs contain only the two aggregate summary lines plus `Q17_DONE`/`Q19_DONE`.
+The full logs contain every `CLS` row plus the same aggregate summary and the peak-private-memo
+line. A literal diff against the historical logs is therefore intentionally nonempty; the
+validation diff filters the per-class rows and peak line, then compares the aggregate summary.
+
 ## Build
 
 Run from `notes/`:
@@ -44,6 +61,11 @@ Output:
 ```text
 diff17_exit=0
 ```
+
+Class-row check:
+
+- Full log class rows: 21.
+- Non-OK class rows: 0.
 
 Result: PASS. All 21 size-3 classes completed with `status=OK`.
 
@@ -85,6 +107,11 @@ Output:
 diff19_exit=0
 ```
 
+Class-row check:
+
+- Full log class rows: 27.
+- Non-OK class rows: 0.
+
 Result: PASS. All 27 size-3 classes completed with `status=OK`.
 
 ## Notes
@@ -93,4 +120,15 @@ Result: PASS. All 27 size-3 classes completed with `status=OK`.
   does not fit under the original 1 GB/2 GB caps.
 - The `esc` summary matches the reference `escape` summary and histogram for both q=17
   and q=19 after removing per-class `CLS` lines and the extra peak-memo line.
+- The full q=17/q=19 logs are now persisted in `notes/` so the gate is auditable after `/tmp`
+  cleanup.
 - No q=23 or larger run was started.
+
+## Operational consequence
+
+C3 q=17/q=19 validation passed at the aggregate and per-class status level.
+
+- q=23 is no longer blocked by this validation gate; it remains a heavy-compute launch decision
+  and should wait for the box policy/user timing.
+- GF(49) hygiene can now edit `notes/2026-07-06-grid-cap-solver.rs`; the old q=19 binary run is
+  finished and its full output has been persisted.

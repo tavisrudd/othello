@@ -43,7 +43,11 @@ making better proof-design choices in Lean.
   group-play legality, but the full game-semantics bridge is still local rather
   than imported from `CombinatorialGames`.
 - ProjectiveCap currently has residual grid vocabulary and stable proposition
-  targets, not a full finite projective plane game model.
+  targets, not a full finite projective plane game model. The immediate open
+  bridge is `ProjectiveCap.FrameGridBridge.Coordinate.ValidityStatement`.
+- Affine cap-set game outcome is now formalized for every nontrivial finite
+  `K`-vector space: see `CapGame.Affine.initialP_of_nontrivial` and commit
+  `965d660`.
 - Queens is best treated as a NodeKayles-style finite graph game: the central
   task is certificate compression, not a generic solver theorem.
 
