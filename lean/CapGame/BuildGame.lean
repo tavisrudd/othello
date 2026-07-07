@@ -194,6 +194,24 @@ theorem mex_eq_zero_iff {T : Finset ℕ} : mex T = 0 ↔ (0 : ℕ) ∉ T := by
 theorem mex_ne_zero_iff {T : Finset ℕ} : mex T ≠ 0 ↔ (0 : ℕ) ∈ T := by
   rw [ne_eq, mex_eq_zero_iff, not_not]
 
+/-- Characterize the mex by lower containment and self-exclusion. -/
+theorem mex_eq_of {T : Finset ℕ} {n : ℕ}
+    (hlt : ∀ c < n, c ∈ T) (hn : n ∉ T) :
+    mex T = n := by
+  apply le_antisymm
+  · exact Nat.find_min' (Infinite.exists_notMem_finset T) hn
+  · by_contra h
+    push Not at h
+    exact mex_not_mem T (hlt _ h)
+
+/-- The mex of `{0}` is `1`. -/
+theorem mex_singleton_zero : mex ({0} : Finset ℕ) = 1 := by
+  apply mex_eq_of
+  · intro c hc
+    interval_cases c
+    simp
+  · simp
+
 /-- Grundy value of a finite normal-play building-game position. -/
 noncomputable def Grundy (Valid : Finset α -> Prop) (S : Finset α) : ℕ :=
   mex ((LegalExtensions Valid S).attach.image
