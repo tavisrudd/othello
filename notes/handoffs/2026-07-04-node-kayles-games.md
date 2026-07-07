@@ -51,7 +51,8 @@ rename Lean files to match older prose names.
   `initial_isP_of_obstruction_count_P_cases` and `initial_win_of_obstruction_count_N_cases`;
 - SumFree rank-count interface:
   [`../../lean/Sumfree/RankCounts.lean`](../../lean/Sumfree/RankCounts.lean), with
-  `HasTwoRank`, `HasThreeRank`, `initial_isP_of_rank_count_P_cases`, and
+  full kernel finsets `OrderTwoKernelElements`, `OrderThreeKernelElements`, card conversions to the
+  nonzero obstruction finsets, `HasTwoRank`, `HasThreeRank`, `initial_isP_of_rank_count_P_cases`, and
   `initial_win_of_rank_count_N_cases`, plus the `r3 <= 1` iff wrappers
   `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one` and
   `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;

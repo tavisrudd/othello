@@ -14,6 +14,54 @@ namespace Game
 
 variable {G : Type*} [AddCommGroup G] [Fintype G] [DecidableEq G]
 
+/-- The full order-two kernel, including zero. -/
+noncomputable def OrderTwoKernelElements : Finset G :=
+  Finset.univ.filter fun v => v + v = 0
+
+theorem mem_orderTwoKernelElements {v : G} :
+    v ∈ OrderTwoKernelElements (G := G) ↔ v + v = 0 := by
+  classical
+  simp [OrderTwoKernelElements]
+
+/-- The full order-three obstruction kernel, including zero. -/
+noncomputable def OrderThreeKernelElements : Finset G :=
+  Finset.univ.filter fun v => v + v = -v
+
+theorem mem_orderThreeKernelElements {v : G} :
+    v ∈ OrderThreeKernelElements (G := G) ↔ v + v = -v := by
+  classical
+  simp [OrderThreeKernelElements]
+
+theorem orderTwoKernelElements_eq_insert_zero_nonzeroOrderTwoElements :
+    OrderTwoKernelElements (G := G) = insert 0 (NonzeroOrderTwoElements (G := G)) := by
+  ext x
+  by_cases hx0 : x = 0
+  · subst x
+    simp [OrderTwoKernelElements]
+  · simp [OrderTwoKernelElements, NonzeroOrderTwoElements, hx0]
+
+theorem orderThreeKernelElements_eq_insert_zero_nonzeroOrderThreeElements :
+    OrderThreeKernelElements (G := G) = insert 0 (NonzeroOrderThreeElements (G := G)) := by
+  ext x
+  by_cases hx0 : x = 0
+  · subst x
+    simp [OrderThreeKernelElements]
+  · simp [OrderThreeKernelElements, NonzeroOrderThreeElements, hx0]
+
+theorem orderTwoKernelElements_card :
+    (OrderTwoKernelElements (G := G)).card =
+      (NonzeroOrderTwoElements (G := G)).card + 1 := by
+  rw [orderTwoKernelElements_eq_insert_zero_nonzeroOrderTwoElements,
+    Finset.card_insert_of_notMem]
+  simp [NonzeroOrderTwoElements]
+
+theorem orderThreeKernelElements_card :
+    (OrderThreeKernelElements (G := G)).card =
+      (NonzeroOrderThreeElements (G := G)).card + 1 := by
+  rw [orderThreeKernelElements_eq_insert_zero_nonzeroOrderThreeElements,
+    Finset.card_insert_of_notMem]
+  simp [NonzeroOrderThreeElements]
+
 /--
 `HasTwoRank G s` is the obstruction-count interface for saying that the
 2-torsion has `F_2`-rank `s`: the full order-two kernel has size `2^s`, so
@@ -21,7 +69,7 @@ the nonzero obstruction set has size `2^s - 1`.
 -/
 def HasTwoRank (G : Type*) [AddCommGroup G] [Fintype G] [DecidableEq G] (s : ℕ) :
     Prop :=
-  (NonzeroOrderTwoElements (G := G)).card + 1 = 2 ^ s
+  (OrderTwoKernelElements (G := G)).card = 2 ^ s
 
 /--
 `HasThreeRank G r` is the obstruction-count interface for saying that the
@@ -30,18 +78,20 @@ size `3^r`, so the nonzero obstruction set has size `3^r - 1`.
 -/
 def HasThreeRank (G : Type*) [AddCommGroup G] [Fintype G] [DecidableEq G] (r : ℕ) :
     Prop :=
-  (NonzeroOrderThreeElements (G := G)).card + 1 = 3 ^ r
+  (OrderThreeKernelElements (G := G)).card = 3 ^ r
 
 theorem nonzeroOrderTwo_card_eq_zero_of_hasTwoRank_zero
     (h : HasTwoRank G 0) :
     (NonzeroOrderTwoElements (G := G)).card = 0 := by
   unfold HasTwoRank at h
+  rw [orderTwoKernelElements_card] at h
   omega
 
 theorem nonzeroOrderTwo_card_eq_one_of_hasTwoRank_one
     (h : HasTwoRank G 1) :
     (NonzeroOrderTwoElements (G := G)).card = 1 := by
   unfold HasTwoRank at h
+  rw [orderTwoKernelElements_card] at h
   norm_num at h
   omega
 
@@ -49,6 +99,7 @@ theorem nonzeroOrderTwo_card_ge_two_of_hasTwoRank_ge_two {s : ℕ}
     (h : HasTwoRank G s) (hs : 2 ≤ s) :
     2 ≤ (NonzeroOrderTwoElements (G := G)).card := by
   unfold HasTwoRank at h
+  rw [orderTwoKernelElements_card] at h
   have hpow : 4 ≤ 2 ^ s := by
     have hpow := Nat.pow_le_pow_right (by decide : 0 < 2) hs
     simpa using hpow
@@ -58,12 +109,14 @@ theorem nonzeroOrderThree_card_eq_zero_of_hasThreeRank_zero
     (h : HasThreeRank G 0) :
     (NonzeroOrderThreeElements (G := G)).card = 0 := by
   unfold HasThreeRank at h
+  rw [orderThreeKernelElements_card] at h
   omega
 
 theorem nonzeroOrderThree_card_eq_two_of_hasThreeRank_one
     (h : HasThreeRank G 1) :
     (NonzeroOrderThreeElements (G := G)).card = 2 := by
   unfold HasThreeRank at h
+  rw [orderThreeKernelElements_card] at h
   norm_num at h
   omega
 
