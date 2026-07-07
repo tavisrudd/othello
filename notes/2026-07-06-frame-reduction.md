@@ -141,6 +141,14 @@ Combining the reduction with the parity-defect structure
 > `PG(2,q)=P` ⟺ the frame is P ⟺ **every size-3 grid position has a P size-4 child** ⟺ every
 > 3-cell partial-permutation cap extends to a size-4 P-position.
 
+(Quantifier note, F3 audit 2026-07-07: frame-P needs only the frame's *children* — 3-cell
+positions containing `{(0,0),(1,1)}` — but these exhaust all 3-cell positions up to symmetry:
+G is transitive on legal 2-cell grid positions (translate one cell to `(0,0)`, scale the other
+to `(1,1)` — the scalings exist because a legal pair shares no row/col), so every 3-cell class
+contains a frame child. The "every size-3 grid position" quantifier is therefore exact, and the
+equivalence also survives the terminal edge case: a maximal 3-cell position would have escape 0
+and be P, flipping the frame to N — both sides of the crux go false together.)
+
 The frame is P because its (odd, size-3) children are all N, which holds as long as the
 parity-defect region does not reach grid-size 3 — empirically min-dev-size is 4..6 and *grows*
 with `q`. A defective size-4 position is an **even-`N`** one: a position from which the mover
