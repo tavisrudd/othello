@@ -52,7 +52,8 @@ rename Lean files to match older prose names.
 - SumFree rank-count interface:
   [`../../lean/Sumfree/RankCounts.lean`](../../lean/Sumfree/RankCounts.lean), with
   full kernel finsets `OrderTwoKernelElements`, `OrderThreeKernelElements`, card conversions to the
-  nonzero obstruction finsets, `HasTwoRank`, `HasThreeRank`, `initial_isP_of_rank_count_P_cases`, and
+  nonzero obstruction finsets, `2 • x = 0` / `3 • x = 0` membership bridges, `HasTwoRank`,
+  `HasThreeRank`, `initial_isP_of_rank_count_P_cases`, and
   `initial_win_of_rank_count_N_cases`, plus the `r3 <= 1` iff wrappers
   `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one` and
   `initial_win_iff_rank_count_N_cases_of_threeRank_le_one`;

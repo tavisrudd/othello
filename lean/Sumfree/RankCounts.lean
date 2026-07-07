@@ -23,6 +23,11 @@ theorem mem_orderTwoKernelElements {v : G} :
   classical
   simp [OrderTwoKernelElements]
 
+theorem mem_orderTwoKernelElements_iff_two_nsmul {v : G} :
+    v ∈ OrderTwoKernelElements (G := G) ↔ (2 : ℕ) • v = 0 := by
+  rw [mem_orderTwoKernelElements]
+  norm_num [two_nsmul]
+
 /-- The full order-three obstruction kernel, including zero. -/
 noncomputable def OrderThreeKernelElements : Finset G :=
   Finset.univ.filter fun v => v + v = -v
@@ -31,6 +36,19 @@ theorem mem_orderThreeKernelElements {v : G} :
     v ∈ OrderThreeKernelElements (G := G) ↔ v + v = -v := by
   classical
   simp [OrderThreeKernelElements]
+
+theorem mem_orderThreeKernelElements_iff_three_nsmul {v : G} :
+    v ∈ OrderThreeKernelElements (G := G) ↔ (3 : ℕ) • v = 0 := by
+  rw [mem_orderThreeKernelElements]
+  constructor
+  · intro h
+    rw [three_nsmul]
+    rw [h]
+    simp
+  · intro h
+    rw [three_nsmul] at h
+    have h' := congrArg (fun z => z + -v) h
+    simpa [add_assoc, add_comm, add_left_comm] using h'
 
 theorem orderTwoKernelElements_eq_insert_zero_nonzeroOrderTwoElements :
     OrderTwoKernelElements (G := G) = insert 0 (NonzeroOrderTwoElements (G := G)) := by

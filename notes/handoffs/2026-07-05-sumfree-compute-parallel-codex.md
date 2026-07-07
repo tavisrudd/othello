@@ -63,7 +63,9 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_win_of_obstruction_count_N_cases`;
 - rank-count interface in [`../../lean/Sumfree/RankCounts.lean`](../../lean/Sumfree/RankCounts.lean):
   full kernel finsets `OrderTwoKernelElements`, `OrderThreeKernelElements`, card conversions
-  `orderTwoKernelElements_card` and `orderThreeKernelElements_card`, rank predicates
+  `orderTwoKernelElements_card` and `orderThreeKernelElements_card`, torsion-membership bridges
+  `mem_orderTwoKernelElements_iff_two_nsmul` and `mem_orderThreeKernelElements_iff_three_nsmul`,
+  rank predicates
   `HasTwoRank`, `HasThreeRank`,
   `initial_isP_of_rank_count_P_cases`, `initial_win_of_rank_count_N_cases`,
   `initial_isP_iff_rank_count_P_cases_of_threeRank_le_one`, and
