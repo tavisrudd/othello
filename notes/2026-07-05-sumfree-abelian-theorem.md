@@ -270,6 +270,10 @@ already proven, the socle reduction leaves exactly:
 So the socle reduction now has **both endpoints as theorems** (`F₃ᵇ=N` and `Z₂×Z₃ᵇ=P`); the
 irreducible open core is **only the socle-reduction proof itself.**
 
+**Lean endpoint status (2026-07-07).** The two socle endpoint game theorems are now formalized:
+`Sumfree.Game.f3_initial_win` in [`../lean/Sumfree/Game.lean`](../lean/Sumfree/Game.lean) and
+`Sumfree.Z2F3Game.initial_isP` in [`../lean/Sumfree/Z2F3Game.lean`](../lean/Sumfree/Z2F3Game.lean).
+
 ### ★★ THEOREM — `F₃ⁿ = N` (first player wins) for all `n`, by move-then-mirror
 
 **Lean status (2026-07-07).** The local mirror-legality kernel is formalized as

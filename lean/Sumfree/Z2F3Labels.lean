@@ -388,6 +388,35 @@ theorem PairCompleted.mirrorInvariant
   dsimp [PairCompleted] at h
   exact h.2.2.2.2
 
+theorem PairCompleted.labelAnchor
+    {a : V} {D : Set V} {eps : V -> ZMod 2} {y : V} {ell : ZMod 2}
+    (hy : LabelLegal D eps y ell)
+    (hanchor : LabelAnchor a D eps)
+    (h : PairCompleted a D eps y ell) :
+    LabelAnchor a
+      (insert (MirrorSlot a y) (insert y D))
+      (Function.update (Function.update eps y ell) (MirrorSlot a y) (1 - ell)) := by
+  rcases hanchor with ⟨h0D, haD, heps0, hepsa, ha0⟩
+  have hy0 : y ≠ 0 := by
+    intro hy0
+    exact hy.1 (by simpa [hy0] using h0D)
+  have hya : y ≠ a := by
+    intro hya
+    exact hy.1 (by simpa [hya] using haD)
+  have hstar0 : MirrorSlot a y ≠ 0 := h.reply_ne_zero
+  have hstara : MirrorSlot a y ≠ a := by
+    intro hstara
+    exact h.reply_not_mem_old (by simpa [hstara] using haD)
+  refine ⟨?_, ?_, ?_, ?_, ha0⟩
+  · exact Or.inr (Or.inr h0D)
+  · exact Or.inr (Or.inr haD)
+  · rw [Function.update_of_ne (Ne.symm hstar0)]
+    rw [Function.update_of_ne (Ne.symm hy0)]
+    exact heps0
+  · rw [Function.update_of_ne (Ne.symm hstara)]
+    rw [Function.update_of_ne (Ne.symm hya)]
+    exact hepsa
+
 /--
 Pair-completion lemma for `Z2 x F3^b`.
 

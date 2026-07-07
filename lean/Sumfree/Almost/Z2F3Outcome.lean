@@ -1,39 +1,38 @@
-import Sumfree.Z2F3Labels
+import Sumfree.Z2F3Game
 
 /-!
-# Almost target: `Z_2 x F_3^b`
+# `ZMod 2 × F_3^b` outcome theorem
 
-The labelled pair-completion lemma is now formalized in `Sumfree.Z2F3Labels`.
-This file keeps the remaining global game theorem separate until the game
-semantics and the `s_2 = 1` reduction are formalized.
+The former placeholder target is now backed by the finite-game theorem
+`Sumfree.Z2F3Game.initial_isP`.
 -/
 
 namespace Sumfree
 namespace Almost
 
-/-- Placeholder interface for the future `Z_2 x F_3^b` game semantics. -/
-structure Z2F3OutcomeModel (V : Type*) where
-  Position : Type*
-  empty : Position
-  afterOrderTwoMove : Position
-  IsP : Position -> Prop
-  IsN : Position -> Prop
+variable {V : Type*} [AddCommGroup V] [Fintype V] [DecidableEq V]
 
-/--
-Target statement for the theorem currently proved only in prose:
-`empty` is a P-position in `Z_2 x F_3^b`.
--/
-def Z2F3EmptyTarget {V : Type*} [AddCommGroup V]
-    (model : Z2F3OutcomeModel V) : Prop :=
-  model.IsP model.empty
+/-- Concrete statement: the order-two singleton is N after choosing any nonzero anchor. -/
+def Z2F3ResidualStatement [Nontrivial V] : Prop :=
+  (∀ z : V, z + z + z = 0) ->
+    ∃ a : V, a ≠ 0 ∧
+      Z2F3Game.Win ({LabelledPoint 0 1} : Finset (Z2V V))
 
-/--
-Intermediate target used by the prose proof: after the order-two move, the
-mover can reach and maintain the labelled mirror invariant.
--/
-def Z2F3ResidualTarget {V : Type*} [AddCommGroup V]
-    (model : Z2F3OutcomeModel V) : Prop :=
-  model.IsN model.afterOrderTwoMove
+/-- Concrete statement: the empty `ZMod 2 × V` game is P. -/
+def Z2F3EmptyStatement [Nontrivial V] : Prop :=
+  (∀ z : V, z + z + z = 0) ->
+    Z2F3Game.IsP (∅ : Finset (Z2V V))
+
+theorem z2f3ResidualStatement_proved [Nontrivial V] :
+    Z2F3ResidualStatement (V := V) := by
+  intro hchar3
+  obtain ⟨a, ha0⟩ := exists_ne (0 : V)
+  exact ⟨a, ha0, Z2F3Game.afterOrderTwo_win hchar3 ha0⟩
+
+theorem z2f3EmptyStatement_proved [Nontrivial V] :
+    Z2F3EmptyStatement (V := V) := by
+  intro hchar3
+  exact Z2F3Game.initial_isP hchar3
 
 end Almost
 end Sumfree
