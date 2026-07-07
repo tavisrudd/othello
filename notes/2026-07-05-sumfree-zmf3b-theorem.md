@@ -84,8 +84,11 @@ encoding bridge to the actual group game is formalized in
 `labelLegal_of_legal_labelledPoint_of_anchor`, and the base-position lemmas
 `baseStarValid`, `baseLabelAnchor`, `baseLabelMirrorInvariant`, `baseLabelledSet_mem_iff`. Thus an
 ordinary legal opponent move in the encoded anchored position is now known to be exactly a legal
-labelled move. The global `{m}`-is-N / empty-is-P game theorem is not yet formalized; its statement
-target is isolated in [`../lean/Sumfree/Almost/Z2F3Outcome.lean`](../lean/Sumfree/Almost/Z2F3Outcome.lean).
+labelled move. The shared finite-game certificate lemmas now live in
+[`../lean/CapGame/BuildGame.lean`](../lean/CapGame/BuildGame.lean): `win_iff_exists_isP_child`,
+`isP_iff_all_children_win`, `PairReplyBook`, `PCert`, and `NCert`. The global `{m}`-is-N /
+empty-is-P game theorem is not yet formalized; its statement target is isolated in
+[`../lean/Sumfree/Almost/Z2F3Outcome.lean`](../lean/Sumfree/Almost/Z2F3Outcome.lean).
 
 > **Lemma.** Let `D` be `M`-symmetric and `(★)`-valid with `{0↦1, a↦0} ⊆ D`. Let `(y, ℓ)` be a legal
 > move (`y ∉ D`, and `D ∪ {y↦ℓ}` is `(★)`-valid). Then the mirror reply `(y*, 1−ℓ)`, `y* = a−y`, is a

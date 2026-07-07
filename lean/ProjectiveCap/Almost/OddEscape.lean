@@ -5,8 +5,9 @@ import ProjectiveCap.GridGame
 # Almost target: odd projective-plane escape theorem
 
 This file isolates the central open/proof-search target from the stable grid
-vocabulary.  It is a statement stub only: `IsP` is still an external game-value
-predicate.
+vocabulary.  The legacy `OddEscapeStatement` permits an external P-position
+predicate, while `OddEscapeGameStatement` is tied to the formal residual game in
+`ProjectiveCap.GridGame`.
 -/
 
 namespace ProjectiveCap
@@ -35,6 +36,12 @@ This is still a target statement, not a theorem.
 -/
 def OddEscapeGameStatement : Prop :=
   GridGame.OddEscapeStatement (K := K)
+
+theorem oddEscapeGameStatement_iff_escapeExtensions_nonempty :
+    OddEscapeGameStatement (K := K) ↔
+      ∀ S : Finset (GridPoint K),
+        S.card = 3 -> GridCap S -> (GridGame.EscapeExtensions (K := K) S).Nonempty :=
+  GridGame.oddEscapeStatement_iff_escapeExtensions_nonempty
 
 end Almost
 end ProjectiveCap

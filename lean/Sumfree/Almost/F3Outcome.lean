@@ -1,48 +1,37 @@
-import Sumfree.MirrorLemmas
+import Sumfree.Game
 
 /-!
-# Almost target: the `F_3^n` outcome theorem
+# `F_3^n` outcome theorem
 
-This file intentionally contains no theorem claim or trusted declaration.  It names the
-global game-outcome target that should eventually be proved from the local
-kernel `f3_affine_mirror_legal`, once the impartial sum-free game semantics are
-formalized.
+The former target in this file is now proved for any finite nontrivial
+exponent-three additive commutative group by `Sumfree.Game.f3_initial_win`.
+This module keeps stable cross-reference names for the prose notes.
 -/
 
 namespace Sumfree
 namespace Almost
 
-/--
-Minimal placeholder for a future sum-free game model.
+open Sumfree.Game
 
-The current formalization proves local legality of the affine mirror reply; it
-does not yet define game positions, P/N values, or strategy soundness.
--/
-structure OutcomeModel (G : Type*) where
-  Position : Type*
-  empty : Position
-  afterOpening : G -> Position
-  IsP : Position -> Prop
-  IsN : Position -> Prop
+variable {V : Type*} [AddCommGroup V] [Fintype V] [DecidableEq V]
 
-/--
-Target statement for the future global `F_3^n = N` theorem.
+/-- Concrete post-opening theorem statement for the exponent-three sum-free game. -/
+def F3PostOpeningStatement : Prop :=
+  (∀ z : V, z + z + z = 0) -> ∀ ⦃o : V⦄, o ≠ 0 -> IsP ({o} : Finset V)
 
-This is a statement stub only: the concrete `OutcomeModel` should later be
-replaced by the actual finite-game semantics.
--/
-def F3OutcomeTarget {V : Type*} [AddCommGroup V] (model : OutcomeModel V) : Prop :=
-  model.IsN model.empty
+/-- Concrete root-outcome theorem statement for the exponent-three sum-free game. -/
+def F3OutcomeStatement [Nontrivial V] : Prop :=
+  (∀ z : V, z + z + z = 0) -> Win (∅ : Finset V)
 
-/--
-Target statement for the post-opening mirror strategy.
+theorem f3PostOpeningStatement_proved :
+    F3PostOpeningStatement (V := V) := by
+  intro hchar3 o ho0
+  exact f3_postOpening_isP hchar3 ho0
 
-The intended proof input is `f3_affine_mirror_legal`; the missing part is the
-generic theorem that a legal reply-preserving mirror strategy proves `N`.
--/
-def F3PostOpeningMirrorTarget {V : Type*} [AddCommGroup V]
-    (model : OutcomeModel V) : Prop :=
-  ∀ ⦃o : V⦄, o ≠ 0 -> model.IsP (model.afterOpening o)
+theorem f3OutcomeStatement_proved [Nontrivial V] :
+    F3OutcomeStatement (V := V) := by
+  intro hchar3
+  exact f3_initial_win hchar3
 
 end Almost
 end Sumfree

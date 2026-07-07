@@ -36,8 +36,13 @@ normal-play "add one legal point" kernel is in
 [`../../lean/CapGame/Affine.lean`](../../lean/CapGame/Affine.lean). The projective cap game is in
 [`../../lean/ProjectiveCap/Projective.lean`](../../lean/ProjectiveCap/Projective.lean), and the
 residual grid game is in
-[`../../lean/ProjectiveCap/GridGame.lean`](../../lean/ProjectiveCap/GridGame.lean). Stable theorem
-targets that are not yet proved in Lean are named in
+[`../../lean/ProjectiveCap/GridGame.lean`](../../lean/ProjectiveCap/GridGame.lean). The game-valued
+escape/bad split is formalized there as `EscapeExtensions`, `BadExtensions`,
+`legalExtensions_card_eq_escape_add_bad`, and
+`oddEscapeStatement_iff_escapeExtensions_nonempty`. The normalized residual seed facts are in
+[`../../lean/ProjectiveCap/GridSeed.lean`](../../lean/ProjectiveCap/GridSeed.lean):
+`StandardResidualSeed`, `standardResidualSeed_card`, and `standardResidualSeed_gridCap`. Stable
+theorem targets that are not yet proved in Lean are named in
 [`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), and the
 odd-plane escape target is isolated in
 [`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).

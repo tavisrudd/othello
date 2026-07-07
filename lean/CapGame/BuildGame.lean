@@ -81,6 +81,59 @@ theorem win_of_move_to_isP {Valid : Finset α -> Prop} {S : Finset α} {x : α}
   rw [win_iff_exists_move]
   exact ⟨x, hx, hchild⟩
 
+/-- N-position iff there is a legal move to a P-position. -/
+theorem win_iff_exists_isP_child {Valid : Finset α -> Prop} {S : Finset α} :
+    Win Valid S ↔ ∃ x : α, Move Valid S x ∧ IsP Valid (insert x S) := by
+  rw [win_iff_exists_move]
+  rfl
+
+/-- P-position iff every legal child is an N-position. -/
+theorem isP_iff_all_children_win {Valid : Finset α -> Prop} {S : Finset α} :
+    IsP Valid S ↔ ∀ x : α, Move Valid S x -> Win Valid (insert x S) := by
+  constructor
+  · intro hP x hxmove
+    by_contra hchild
+    exact hP (win_of_move_to_isP hxmove hchild)
+  · intro hall hwin
+    rcases win_iff_exists_isP_child.mp hwin with ⟨x, hxmove, hxP⟩
+    exact hxP (hall x hxmove)
+
+/--
+A one-position P-certificate: every legal move has a legal reply to a
+P-grandchild.
+-/
+def PairReplyBook (Valid : Finset α -> Prop) (S : Finset α) : Prop :=
+  ∀ x : α, Move Valid S x ->
+    ∃ y : α, Move Valid (insert x S) y ∧ IsP Valid (insert y (insert x S))
+
+/-- A one-position reply book proves that the current position is P. -/
+theorem isP_of_pairReplyBook {Valid : Finset α -> Prop} {S : Finset α}
+    (hbook : PairReplyBook Valid S) : IsP Valid S := by
+  rw [isP_iff_all_children_win]
+  intro x hxmove
+  rcases hbook x hxmove with ⟨y, hymove, hyP⟩
+  exact win_of_move_to_isP hymove hyP
+
+/-- Reusable N-certificate: one legal move to a P-position. -/
+structure NCert (Valid : Finset α -> Prop) (S : Finset α) where
+  move : α
+  legal : Move Valid S move
+  childP : IsP Valid (insert move S)
+
+/-- Reusable P-certificate: a reply book from the current position. -/
+structure PCert (Valid : Finset α -> Prop) (S : Finset α) where
+  reply : PairReplyBook Valid S
+
+/-- P-certificates are sound. -/
+theorem pcert_sound {Valid : Finset α -> Prop} {S : Finset α}
+    (c : PCert Valid S) : IsP Valid S :=
+  isP_of_pairReplyBook c.reply
+
+/-- N-certificates are sound. -/
+theorem ncert_sound {Valid : Finset α -> Prop} {S : Finset α}
+    (c : NCert Valid S) : Win Valid S :=
+  win_of_move_to_isP c.legal c.childP
+
 /--
 A reusable second-player strategy criterion.
 

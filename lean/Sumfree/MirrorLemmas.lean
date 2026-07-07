@@ -489,23 +489,46 @@ def sigmaF3 (o y : V) : V :=
 def SigmaInvariant (o : V) (A : Set V) : Prop :=
   forall {x : V}, x ∈ A ↔ sigmaF3 o x ∈ A
 
-private lemma add_self_eq_neg_of_char3
+lemma char3_add_self_eq_neg
     (hchar3 : forall z : V, z + z + z = 0) (z : V) :
     z + z = -z := by
   have h := hchar3 z
   have h' := congrArg (fun t => t + -z) h
   simpa [add_assoc, add_comm, add_left_comm] using h'
 
-private lemma sigmaF3_involutive (o y : V) :
+theorem sigmaF3_involutive (o y : V) :
     sigmaF3 o (sigmaF3 o y) = y := by
   unfold sigmaF3
   abel
+
+theorem sigmaInvariant_insert_pair {A : Set V} {o y : V}
+    (hA : SigmaInvariant o A) :
+    SigmaInvariant o (insert (sigmaF3 o y) (insert y A)) := by
+  have hinvol : ∀ t : V, sigmaF3 o (sigmaF3 o t) = t :=
+    sigmaF3_involutive o
+  have hforward :
+      ∀ {z : V}, z ∈ insert (sigmaF3 o y) (insert y A) ->
+        sigmaF3 o z ∈ insert (sigmaF3 o y) (insert y A) := by
+    intro z hz
+    rcases hz with hzSig | hzRest
+    · rw [hzSig, hinvol y]
+      exact Or.inr (Or.inl rfl)
+    · rcases hzRest with hzY | hzA
+      · rw [hzY]
+        exact Or.inl rfl
+      · exact Or.inr (Or.inr ((hA (x := z)).mp hzA))
+  intro z
+  constructor
+  · exact hforward
+  · intro hz
+    have h := hforward (z := sigmaF3 o z) hz
+    simpa [hinvol z] using h
 
 private lemma sigmaF3_fixed_eq_center
     (hchar3 : forall z : V, z + z + z = 0) {o y : V}
     (h : sigmaF3 o y = y) : y = o := by
   unfold sigmaF3 at h
-  have hy : y + y = -y := add_self_eq_neg_of_char3 hchar3 y
+  have hy : y + y = -y := char3_add_self_eq_neg hchar3 y
   have h' : -o = y + y := by
     calc
       -o = (-o - y) + y := by abel
@@ -517,7 +540,7 @@ private lemma sigmaF3_fixed_eq_center
 private lemma neg_add_neg_eq_self_of_char3'
     (hchar3 : forall z : V, z + z + z = 0) (z : V) :
     -z + -z = z := by
-  simpa using add_self_eq_neg_of_char3 hchar3 (-z)
+  simpa using char3_add_self_eq_neg hchar3 (-z)
 
 private lemma sigmaF3_add_self
     (hchar3 : forall z : V, z + z + z = 0) (o y : V) :
@@ -621,18 +644,18 @@ private lemma arg_add_arg_eq_sigma_old_of_arg_add_old_eq_sigma
       _ = -y + (-o - y) := by rw [h]
       _ = -o - y - y := by abel
   calc
-    y + y = -y := add_self_eq_neg_of_char3 hchar3 y
+    y + y = -y := char3_add_self_eq_neg hchar3 y
     _ = -o - d := by
       rw [hd]
       calc
-        -y = y + y := (add_self_eq_neg_of_char3 hchar3 y).symm
+        -y = y + y := (char3_add_self_eq_neg hchar3 y).symm
         _ = -o - (-o - y - y) := by abel
 
 private lemma base_eq_zero_of_arg_add_arg_eq_sigma
     (hchar3 : forall z : V, z + z + z = 0) {o y : V}
     (h : y + y = sigmaF3 o y) :
     o = 0 := by
-  have hy : y + y = -y := add_self_eq_neg_of_char3 hchar3 y
+  have hy : y + y = -y := char3_add_self_eq_neg hchar3 y
   have hs : -y = sigmaF3 o y := by simpa [hy] using h
   unfold sigmaF3 at hs
   have h' := congrArg (fun t => t + y) hs
