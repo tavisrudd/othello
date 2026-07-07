@@ -48,15 +48,20 @@ rename Lean files to match older prose names.
   `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd` and the even, `3 ∤ n` N cases via
   `initial_win_of_even_of_not_three_dvd`, plus `initial_win_of_three_mul_odd` for `n = 3*k`, `k` odd
   and `initial_isP_of_six_mul` for `n = 6*k`, with arbitrary-`n` wrappers `initial_isP_of_six_dvd`
-  and `initial_win_of_eq_three_mul_odd`;
+  and `initial_win_of_eq_three_mul_odd`, residue wrappers
+  `initial_isP_of_mod_six_eq_zero`, `initial_isP_of_mod_six_eq_one`,
+  `initial_isP_of_mod_six_eq_five`, `initial_win_of_mod_six_eq_two`,
+  `initial_win_of_mod_six_eq_three`, and `initial_win_of_mod_six_eq_four`, and
+  combined branch statements `initial_isP_of_mod_six_zero_or_one_or_five` and
+  `initial_win_of_mod_six_two_or_three_or_four`;
 - Queens coordinate/game bridge targets:
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a polished top-level iff
-over an arbitrary `n % 6`; the full finite-abelian rank/cardinality bookkeeping needed for the full
-`r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the projective odd-plane escape theorem;
-and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** the optional cyclic `Z_n` mod-6 biconditional
+packaging as a single iff over `n % 6`; the full finite-abelian rank/cardinality bookkeeping needed
+for the full `r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the projective odd-plane
+escape theorem; and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

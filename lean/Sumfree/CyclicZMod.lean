@@ -6,8 +6,9 @@ import Mathlib.Tactic
 # Cyclic `ZMod n` sum-free game bridges
 
 This file records concrete cyclic consequences of the abstract mirror theorems
-in `Sumfree.Game`.  It is intentionally partial: the full mod-6 theorem still
-needs the order-three extra-reply cases.
+in `Sumfree.Game`.  The hard proofs are stated in the normal forms `3*k` and
+`6*k`; the final wrappers expose the cyclic branches by the residue of `n`
+modulo `6`.
 -/
 
 namespace Sumfree
@@ -676,6 +677,115 @@ theorem initial_win_of_eq_three_mul_odd {n k : ℕ} [NeZero n]
     Game.Win (∅ : Finset (ZMod n)) := by
   subst n
   exact initial_win_of_three_mul_odd (k := k) hk
+
+private theorem odd_of_mod_six_eq_one {n : ℕ} (h : n % 6 = 1) : Odd n := by
+  refine ⟨3 * (n / 6), ?_⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem odd_of_mod_six_eq_five {n : ℕ} (h : n % 6 = 5) : Odd n := by
+  refine ⟨3 * (n / 6) + 2, ?_⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem even_of_mod_six_eq_two {n : ℕ} (h : n % 6 = 2) : Even n := by
+  refine ⟨3 * (n / 6) + 1, ?_⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem even_of_mod_six_eq_four {n : ℕ} (h : n % 6 = 4) : Even n := by
+  refine ⟨3 * (n / 6) + 2, ?_⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem not_three_dvd_of_mod_six_eq_one {n : ℕ} (h : n % 6 = 1) :
+    ¬ 3 ∣ n := by
+  intro h3
+  rcases h3 with ⟨a, ha⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem not_three_dvd_of_mod_six_eq_two {n : ℕ} (h : n % 6 = 2) :
+    ¬ 3 ∣ n := by
+  intro h3
+  rcases h3 with ⟨a, ha⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem not_three_dvd_of_mod_six_eq_four {n : ℕ} (h : n % 6 = 4) :
+    ¬ 3 ∣ n := by
+  intro h3
+  rcases h3 with ⟨a, ha⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem not_three_dvd_of_mod_six_eq_five {n : ℕ} (h : n % 6 = 5) :
+    ¬ 3 ∣ n := by
+  intro h3
+  rcases h3 with ⟨a, ha⟩
+  have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+  omega
+
+private theorem eq_three_mul_odd_of_mod_six_eq_three {n : ℕ} (h : n % 6 = 3) :
+    ∃ k, n = 3 * k ∧ Odd k := by
+  refine ⟨2 * (n / 6) + 1, ?_, ?_⟩
+  · have hn : n % 6 + 6 * (n / 6) = n := Nat.mod_add_div n 6
+    omega
+  · refine ⟨n / 6, ?_⟩
+    omega
+
+/-- Residue wrapper for the cyclic `n ≡ 0 (mod 6)` P branch. -/
+theorem initial_isP_of_mod_six_eq_zero {n : ℕ} [NeZero n] (h : n % 6 = 0) :
+    Game.IsP (∅ : Finset (ZMod n)) :=
+  initial_isP_of_six_dvd (n := n) ((Nat.dvd_iff_mod_eq_zero).2 h)
+
+/-- Residue wrapper for the cyclic `n ≡ 1 (mod 6)` P branch. -/
+theorem initial_isP_of_mod_six_eq_one {n : ℕ} [NeZero n] (h : n % 6 = 1) :
+    Game.IsP (∅ : Finset (ZMod n)) :=
+  initial_isP_of_odd_of_not_three_dvd
+    (n := n) (odd_of_mod_six_eq_one h) (not_three_dvd_of_mod_six_eq_one h)
+
+/-- Residue wrapper for the cyclic `n ≡ 5 (mod 6)` P branch. -/
+theorem initial_isP_of_mod_six_eq_five {n : ℕ} [NeZero n] (h : n % 6 = 5) :
+    Game.IsP (∅ : Finset (ZMod n)) :=
+  initial_isP_of_odd_of_not_three_dvd
+    (n := n) (odd_of_mod_six_eq_five h) (not_three_dvd_of_mod_six_eq_five h)
+
+/-- Residue wrapper for the cyclic `n ≡ 2 (mod 6)` N branch. -/
+theorem initial_win_of_mod_six_eq_two {n : ℕ} [NeZero n] (h : n % 6 = 2) :
+    Game.Win (∅ : Finset (ZMod n)) :=
+  initial_win_of_even_of_not_three_dvd
+    (n := n) (even_of_mod_six_eq_two h) (not_three_dvd_of_mod_six_eq_two h)
+
+/-- Residue wrapper for the cyclic `n ≡ 3 (mod 6)` N branch. -/
+theorem initial_win_of_mod_six_eq_three {n : ℕ} [NeZero n] (h : n % 6 = 3) :
+    Game.Win (∅ : Finset (ZMod n)) := by
+  rcases eq_three_mul_odd_of_mod_six_eq_three h with ⟨k, hn, hk⟩
+  exact initial_win_of_eq_three_mul_odd (n := n) (k := k) hn hk
+
+/-- Residue wrapper for the cyclic `n ≡ 4 (mod 6)` N branch. -/
+theorem initial_win_of_mod_six_eq_four {n : ℕ} [NeZero n] (h : n % 6 = 4) :
+    Game.Win (∅ : Finset (ZMod n)) :=
+  initial_win_of_even_of_not_three_dvd
+    (n := n) (even_of_mod_six_eq_four h) (not_three_dvd_of_mod_six_eq_four h)
+
+/-- Combined P-side statement of the cyclic mod-6 theorem. -/
+theorem initial_isP_of_mod_six_zero_or_one_or_five {n : ℕ} [NeZero n]
+    (h : n % 6 = 0 ∨ n % 6 = 1 ∨ n % 6 = 5) :
+    Game.IsP (∅ : Finset (ZMod n)) := by
+  rcases h with h0 | h1 | h5
+  · exact initial_isP_of_mod_six_eq_zero (n := n) h0
+  · exact initial_isP_of_mod_six_eq_one (n := n) h1
+  · exact initial_isP_of_mod_six_eq_five (n := n) h5
+
+/-- Combined N-side statement of the cyclic mod-6 theorem. -/
+theorem initial_win_of_mod_six_two_or_three_or_four {n : ℕ} [NeZero n]
+    (h : n % 6 = 2 ∨ n % 6 = 3 ∨ n % 6 = 4) :
+    Game.Win (∅ : Finset (ZMod n)) := by
+  rcases h with h2 | h3 | h4
+  · exact initial_win_of_mod_six_eq_two (n := n) h2
+  · exact initial_win_of_mod_six_eq_three (n := n) h3
+  · exact initial_win_of_mod_six_eq_four (n := n) h4
 
 end CyclicZMod
 end Sumfree
