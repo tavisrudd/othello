@@ -3,7 +3,7 @@ import Mathlib.Data.Set.Basic
 import Mathlib.Tactic
 
 /-!
-Local mirror lemmas for the sum-free achievement game.
+Local mirror lemmas for the normal-play sum-free avoidance game.
 
 These are the first formalization targets from the sum-free notes. Most of the
 mirror lemmas below are kernel-complete; the remaining affine `F₃` theorem is
