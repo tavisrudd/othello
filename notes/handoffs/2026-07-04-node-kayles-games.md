@@ -28,7 +28,8 @@ rename Lean files to match older prose names.
   [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean),
   [`../../lean/Sumfree/Z2F3Bridge.lean`](../../lean/Sumfree/Z2F3Bridge.lean),
   [`../../lean/Sumfree/Z2F3Game.lean`](../../lean/Sumfree/Z2F3Game.lean), and wrappers under
-  [`../../lean/Sumfree/Almost/`](../../lean/Sumfree/Almost/);
+  [`../../lean/Sumfree/Almost/`](../../lean/Sumfree/Almost/); the labelled `PairCompleted` bundle
+  explicitly records the dead-slot avoidance path and both anchor exceptions for the mirror reply;
 - abstract SumFree mirror theorem layer in [`../../lean/Sumfree/Game.lean`](../../lean/Sumfree/Game.lean):
   no-obstruction negation mirror, spare-order-two P theorem, order-two singleton reduction, and
   order-two/no-other-negation-obstruction N theorem, plus finite obstruction wrappers

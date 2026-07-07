@@ -65,8 +65,11 @@ The Lean layer is narrower than this compute log. Current build check:
   `initial_isP_iff_mod_six_zero_or_one_or_five` and
   `initial_win_iff_mod_six_two_or_three_or_four`;
 - labelled `ZMod 2 x F_3^b` residual proof:
-  `deadSlot_not_labelLegal`, `PairCompleted`, and `pair_completion` in
-  [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean);
+  `deadSlot_not_labelLegal`, `avoidsDeadSlot_of_labelLegal`,
+  `LabelLegal.move_ne_zero_of_anchor`, `LabelLegal.move_ne_anchor_of_anchor`, the explicit
+  `PairCompleted` bundle with `reply_ne_move`, `reply_not_mem_old`, `reply_ne_zero`,
+  `reply_ne_anchor`, `reply_not_mem_after_move`, `legal`, and `mirrorInvariant`, and
+  `pair_completion` in [`../../lean/Sumfree/Z2F3Labels.lean`](../../lean/Sumfree/Z2F3Labels.lean);
 - labelled-to-group bridge:
   [`../../lean/Sumfree/Z2F3Bridge.lean`](../../lean/Sumfree/Z2F3Bridge.lean);
 - full `ZMod 2 x F_3^b` game theorem:

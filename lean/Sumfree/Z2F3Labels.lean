@@ -36,6 +36,13 @@ def LabelMirrorInvariant (a : V) (D : Set V) (eps : V -> ZMod 2) : Prop :=
 def LabelLegal (D : Set V) (eps : V -> ZMod 2) (y : V) (ell : ZMod 2) : Prop :=
   y ∉ D ∧ StarValid (insert y D) (Function.update eps y ell)
 
+theorem LabelLegal.move_ne_of_mem
+    {D : Set V} {eps : V -> ZMod 2} {y z : V} {ell : ZMod 2}
+    (hy : LabelLegal D eps y ell) (hz : z ∈ D) :
+    y ≠ z := by
+  intro hyz
+  exact hy.1 (by simpa [hyz] using hz)
+
 /-- The anchored base pair `{0 ↦ 1, a ↦ 0}` used by the `Z2 x F3^b` residual proof. -/
 def LabelAnchor (a : V) (D : Set V) (eps : V -> ZMod 2) : Prop :=
   0 ∈ D ∧ a ∈ D ∧ eps 0 = 1 ∧ eps a = 0 ∧ a ≠ 0
@@ -328,12 +335,24 @@ theorem avoidsDeadSlot_of_labelLegal
   intro hydead
   exact deadSlot_not_labelLegal hchar3 hanchor (hydead ▸ hy)
 
+theorem LabelLegal.move_ne_zero_of_anchor
+    {D : Set V} {eps : V -> ZMod 2} {a y : V} {ell : ZMod 2}
+    (hy : LabelLegal D eps y ell) (hanchor : LabelAnchor a D eps) :
+    y ≠ 0 :=
+  LabelLegal.move_ne_of_mem hy hanchor.1
+
+theorem LabelLegal.move_ne_anchor_of_anchor
+    {D : Set V} {eps : V -> ZMod 2} {a y : V} {ell : ZMod 2}
+    (hy : LabelLegal D eps y ell) (hanchor : LabelAnchor a D eps) :
+    y ≠ a :=
+  LabelLegal.move_ne_of_mem hy hanchor.2.1
+
 /--
 The explicit conclusion of pair-completion.
 
 Besides the reply's legality, this records the review-critical side conditions:
 the mirror slot is not the just-played slot, not in the old domain, not the
-anchor slot `0`, and the mirror invariant is restored after the reply.
+anchor slots `0` and `a`, and the mirror invariant is restored after the reply.
 -/
 def PairCompleted (a : V) (D : Set V) (eps : V -> ZMod 2) (y : V) (ell : ZMod 2) :
     Prop :=
@@ -344,6 +363,7 @@ def PairCompleted (a : V) (D : Set V) (eps : V -> ZMod 2) (y : V) (ell : ZMod 2)
   ystar ≠ y ∧
     ystar ∉ D ∧
     ystar ≠ 0 ∧
+    ystar ≠ a ∧
     LabelLegal (insert y D) epsY ystar (1 - ell) ∧
     LabelMirrorInvariant a D' eps'
 
@@ -368,6 +388,13 @@ theorem PairCompleted.reply_ne_zero
   dsimp [PairCompleted] at h
   exact h.2.2.1
 
+theorem PairCompleted.reply_ne_anchor
+    {a : V} {D : Set V} {eps : V -> ZMod 2} {y : V} {ell : ZMod 2}
+    (h : PairCompleted a D eps y ell) :
+    MirrorSlot a y ≠ a := by
+  dsimp [PairCompleted] at h
+  exact h.2.2.2.1
+
 theorem PairCompleted.legal
     {a : V} {D : Set V} {eps : V -> ZMod 2} {y : V} {ell : ZMod 2}
     (h : PairCompleted a D eps y ell) :
@@ -377,7 +404,13 @@ theorem PairCompleted.legal
       (MirrorSlot a y)
       (1 - ell) := by
   dsimp [PairCompleted] at h
-  exact h.2.2.2.1
+  exact h.2.2.2.2.1
+
+theorem PairCompleted.reply_not_mem_after_move
+    {a : V} {D : Set V} {eps : V -> ZMod 2} {y : V} {ell : ZMod 2}
+    (h : PairCompleted a D eps y ell) :
+    MirrorSlot a y ∉ insert y D :=
+  (PairCompleted.legal h).1
 
 theorem PairCompleted.mirrorInvariant
     {a : V} {D : Set V} {eps : V -> ZMod 2} {y : V} {ell : ZMod 2}
@@ -386,7 +419,7 @@ theorem PairCompleted.mirrorInvariant
       (insert (MirrorSlot a y) (insert y D))
       (Function.update (Function.update eps y ell) (MirrorSlot a y) (1 - ell)) := by
   dsimp [PairCompleted] at h
-  exact h.2.2.2.2
+  exact h.2.2.2.2.2
 
 theorem PairCompleted.labelAnchor
     {a : V} {D : Set V} {eps : V -> ZMod 2} {y : V} {ell : ZMod 2}
@@ -398,15 +431,11 @@ theorem PairCompleted.labelAnchor
       (Function.update (Function.update eps y ell) (MirrorSlot a y) (1 - ell)) := by
   rcases hanchor with ⟨h0D, haD, heps0, hepsa, ha0⟩
   have hy0 : y ≠ 0 := by
-    intro hy0
-    exact hy.1 (by simpa [hy0] using h0D)
+    exact LabelLegal.move_ne_zero_of_anchor hy ⟨h0D, haD, heps0, hepsa, ha0⟩
   have hya : y ≠ a := by
-    intro hya
-    exact hy.1 (by simpa [hya] using haD)
+    exact LabelLegal.move_ne_anchor_of_anchor hy ⟨h0D, haD, heps0, hepsa, ha0⟩
   have hstar0 : MirrorSlot a y ≠ 0 := h.reply_ne_zero
-  have hstara : MirrorSlot a y ≠ a := by
-    intro hstara
-    exact h.reply_not_mem_old (by simpa [hstara] using haD)
+  have hstara : MirrorSlot a y ≠ a := h.reply_ne_anchor
   refine ⟨?_, ?_, ?_, ?_, ha0⟩
   · exact Or.inr (Or.inr h0D)
   · exact Or.inr (Or.inr haD)
@@ -456,9 +485,11 @@ theorem pair_completion
     intro h0
     have hya : y = a := eq_arg_of_MirrorSlot_eq_zero (by simpa [ystar] using h0)
     exact hy_notD (by rw [hya]; exact haD)
+  have hreply_ne_anchor : ystar ≠ a := by
+    intro hstara
+    exact hreply_notD (by simpa [ystar, hstara] using haD)
   have hy_ne_zero : y ≠ 0 := by
-    intro hy0
-    exact hy_notD (by rw [hy0]; exact h0D)
+    exact LabelLegal.move_ne_zero_of_anchor hy hanchor
   have hDins {t : V} (ht : t ∈ D) : t ∈ insert y D := Or.inr ht
   have hYins {t : V} (ht : t = y) : t ∈ insert y D := by
     rw [ht]
@@ -703,6 +734,6 @@ theorem pair_completion
       · have hlabel := hMirrorLabel hvD
         simpa [eps', eps'_old hmvD, eps'_old hvD] using hlabel
   dsimp [PairCompleted]
-  exact ⟨hreply_ne, hreply_notD, hreply_ne_zero, hlegal, hmirrorFinal⟩
+  exact ⟨hreply_ne, hreply_notD, hreply_ne_zero, hreply_ne_anchor, hlegal, hmirrorFinal⟩
 
 end Sumfree
