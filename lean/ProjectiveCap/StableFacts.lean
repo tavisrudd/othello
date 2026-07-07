@@ -1,4 +1,4 @@
-import ProjectiveCap.Grid
+import ProjectiveCap.GridGame
 import Mathlib.Data.Fintype.Basic
 import Mathlib.Data.Fintype.Card
 import Mathlib.Data.Fintype.Prod
@@ -21,6 +21,18 @@ variable {K : Type*} [Field K] [Fintype K] [DecidableEq K]
 noncomputable def LegalGridExtensions (S : Finset (GridPoint K)) : Finset (GridPoint K) := by
   classical
   exact Finset.univ.filter fun p => p ∉ S ∧ GridCap (insert p S)
+
+theorem legalGridExtensions_eq_gridGame (S : Finset (GridPoint K)) :
+    LegalGridExtensions (K := K) S = GridGame.LegalExtensions (K := K) S := by
+  classical
+  ext p
+  simp [LegalGridExtensions, GridGame.LegalExtensions,
+    FiniteBuildGame.LegalExtensions, FiniteBuildGame.Move]
+
+theorem mem_legalGridExtensions {S : Finset (GridPoint K)} {p : GridPoint K} :
+    p ∈ LegalGridExtensions (K := K) S ↔ p ∉ S ∧ GridCap (K := K) (insert p S) := by
+  classical
+  simp [LegalGridExtensions]
 
 /--
 Target statement for the total size-three extension lemma:

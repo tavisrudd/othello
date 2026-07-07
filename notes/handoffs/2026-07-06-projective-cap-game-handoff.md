@@ -47,7 +47,9 @@ counting prerequisites are in
 `UsedRows`, `UsedCols`, `FreeFreeCells`, `PairLine`, `PairLineBlockedBy`,
 `card_usedRows_of_card_three`, and `card_usedCols_of_card_three`. Stable theorem targets that are
 not yet proved in Lean are named in
-[`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), and the
+[`../../lean/ProjectiveCap/StableFacts.lean`](../../lean/ProjectiveCap/StableFacts.lean), whose
+`legalGridExtensions_eq_gridGame` theorem ties the old stable extension set to the real grid-game
+extension set. The
 odd-plane escape target is isolated in
 [`../../lean/ProjectiveCap/Almost/OddEscape.lean`](../../lean/ProjectiveCap/Almost/OddEscape.lean).
 The game-valued residual target is `ProjectiveCap.Almost.OddEscapeGameStatement`. The old
