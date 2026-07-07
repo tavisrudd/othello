@@ -93,6 +93,14 @@ so it is also a sharper falsification target: a class with all `q−4` conic ext
    cross-ratios, `χ(B)`; no separation.)
 4. **Off-conic escape parity**: "extP+intP even" (⟹ `escape ≡ onP mod 2`) holds q ≤ 11 but
    fails at q=13 (3 classes with 37 off-conic escapes).
+5. **Completion-count potential function**: count the maximal caps containing each size-4
+   position, split by parity (odd/even completions — the COUNT version of the session-5
+   boundary characterization, untested until now). At q=11 the on-conic values obey a clean
+   majority law — P ⟺ #even-completions > #odd-completions (N always (odd,even)=(24,16); P
+   ∈ {(2,28),(9,20),(15,27)}) — but at q=13 the law is violated by **102 of 108** on-conic
+   S₄'s (odd completions dominate numerically, e.g. (197,144), yet every one is P). The raw
+   completion-parity census does not capture the steering strategy once odd maximal caps
+   proliferate. (Scratchpad `completions.py` / `comp_on.py`.)
 
 ## 4. Validation
 
