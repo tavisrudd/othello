@@ -3,6 +3,7 @@ import Sumfree.Game
 import Sumfree.RankCounts
 import Sumfree.RankEquiv
 import Sumfree.RankProducts
+import Sumfree.RankPi
 import Sumfree.CyclicZMod
 import Sumfree.CyclicRanks
 import Sumfree.Z2F3Labels

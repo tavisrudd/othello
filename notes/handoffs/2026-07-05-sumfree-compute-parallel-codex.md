@@ -79,6 +79,10 @@ The Lean layer is narrower than this compute log. Current build check:
   [`../../lean/Sumfree/RankProducts.lean`](../../lean/Sumfree/RankProducts.lean):
   `orderTwoKernelElements_prod`, `orderThreeKernelElements_prod`,
   `hasTwoRank_prod`, `hasThreeRank_prod`, and `hasRanks_prod`;
+- finite dependent-product rules for rank predicates in
+  [`../../lean/Sumfree/RankPi.lean`](../../lean/Sumfree/RankPi.lean):
+  `orderTwoKernelElements_pi`, `orderThreeKernelElements_pi`, `hasTwoRank_pi`,
+  `hasThreeRank_pi`, and `hasRanks_pi`;
 - cyclic `ZMod n` bridge in normal-form branches in
   [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean):
   `initial_isP_of_odd_of_not_three_dvd` proves the odd, `3 ∤ n` P cases and
