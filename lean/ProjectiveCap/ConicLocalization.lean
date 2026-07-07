@@ -261,6 +261,48 @@ theorem card_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
   rw [Finset.card_image_of_injective _ (hyperbolaParamPoint_injective (K := K) rho A B)]
   exact card_nonzeroParams (K := K)
 
+omit [DecidableEq K] in
+theorem rowSparse_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
+    RowSparse (K := K) (HyperbolaCells (K := K) rho A B) := by
+  intro p q hp hq hrow
+  have hpOn : OnHyperbola (K := K) rho A B p := mem_hyperbolaCells.mp hp
+  have hqOn : OnHyperbola (K := K) rho A B q := mem_hyperbolaCells.mp hq
+  have hprow := onHyperbola_eq_hyperbolaParamPoint (K := K) hB hpOn
+  have hqrow := onHyperbola_eq_hyperbolaParamPoint (K := K) hB hqOn
+  have hparam : p.1 - rho = q.1 - rho := by rw [hrow]
+  rw [hprow, hqrow, hparam]
+
+omit [DecidableEq K] in
+theorem colSparse_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
+    ColSparse (K := K) (HyperbolaCells (K := K) rho A B) := by
+  intro p q hp hq hcol
+  have hpOn : OnHyperbola (K := K) rho A B p := mem_hyperbolaCells.mp hp
+  have hqOn : OnHyperbola (K := K) rho A B q := mem_hyperbolaCells.mp hq
+  have hpne : p.1 - rho ≠ 0 := by
+    intro hz
+    exact onHyperbola_first_ne_rho (K := K) hB hpOn (sub_eq_zero.mp hz)
+  have hqne : q.1 - rho ≠ 0 := by
+    intro hz
+    exact onHyperbola_first_ne_rho (K := K) hB hqOn (sub_eq_zero.mp hz)
+  have hpParam := onHyperbola_eq_hyperbolaParamPoint (K := K) hB hpOn
+  have hqParam := onHyperbola_eq_hyperbolaParamPoint (K := K) hB hqOn
+  have hdiv : B / (p.1 - rho) = B / (q.1 - rho) := by
+    have hcol' := hcol
+    rw [hpParam, hqParam] at hcol'
+    simpa [hyperbolaParamPoint] using hcol'
+  have hparam : p.1 - rho = q.1 - rho := by
+    have hmul : B * (p.1 - rho)⁻¹ = B * (q.1 - rho)⁻¹ := by
+      simpa [div_eq_mul_inv] using hdiv
+    have hinv : (p.1 - rho)⁻¹ = (q.1 - rho)⁻¹ :=
+      mul_left_cancel₀ hB hmul
+    exact inv_injective hinv
+  rw [hpParam, hqParam, hparam]
+
+omit [DecidableEq K] in
+theorem partialPermutation_hyperbolaCells {rho A B : K} (hB : B ≠ 0) :
+    PartialPermutation (K := K) (HyperbolaCells (K := K) rho A B) :=
+  ⟨rowSparse_hyperbolaCells (K := K) hB, colSparse_hyperbolaCells (K := K) hB⟩
+
 /--
 The translated-coordinate map
 `(t, s) |-> ((u / B) * s, (B / u) * t)`, transported back to grid
