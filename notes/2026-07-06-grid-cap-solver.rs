@@ -811,6 +811,229 @@ fn solve_escape(q: usize) {
     println!("      min-escape representative S3 (cells) = {:?}", rep);
 }
 
+// ---- FEAT mode: route (B) per-class / per-extension conic-feature dump ----
+// Open-math plan 2026-07-07 route (B): hunt a finer counting invariant on the escape/bad data.
+// The principled first feature is Segre-shaped: through the projective 5-arc (2 burned direction
+// points + S3) there is a UNIQUE conic; since it passes through both direction points (1:0:0)
+// and (0:1:0), its affine part is the graph of the Moebius map through the 3 cells,
+//   F(r,c) = rc + eps*r + zeta*c + gamma = 0
+// (delta=1 normalization; delta=0 would make S3 collinear, excluded by the cap property).
+// Conics = the (q+1)-arcs (Segre, q odd) = the EVEN maximal grid caps (q-1 affine cells), so
+// "steer to the conic" is the natural even-completion strategy and on/off-conic position is the
+// natural refinement of the total lemma's count.  Features per legal extension x:
+//   on  = x on the conic;
+//   ext = x external (exactly 2 tangents of the conic pass through x);
+//   int = x internal (0 tangents).                       (q odd => 0/2 dichotomy off the conic)
+// Emits machine-readable lines for offline regression:
+//   X q=<q> cls=<i> x=<r>,<c> val=<P|N> pos=<on|ext|int>
+//   CLS q=<q> cls=<i> S3=... escape=.. bad=.. onP/onN/extP/extN/intP/intN=..  legal_on=..
+// plus per-q sanity checks (conic has q-1 affine cells, functional per row/col; every off-S3
+// conic cell is a LEGAL extension, i.e. legal_on = q-4; tangent counts in {0,2}).
+fn solve_feat(q: usize) {
+    if q % 2 == 0 {
+        eprintln!("feat mode: odd q only (conic interior/exterior needs q odd)");
+        return;
+    }
+    let b = Board::new(q);
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    // phase 1: full expansion => every reachable class memoized P/N
+    let mut occ: Vec<u16> = Vec::new();
+    let root_n = s.g(&mut occ, &empty, &empty);
+
+    // phase 2: canonical size-3 classes
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    {
+        let mut visited: HashSet<u128> = HashSet::new();
+        let mut occ3: Vec<u16> = Vec::new();
+        enumerate(&b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+    }
+    let gf = &b.gf;
+    let mut sane = true;
+    for (ci, (occ0, chosen, forbidden)) in frontier.iter().enumerate() {
+        let cells: Vec<(usize, usize)> =
+            occ0.iter().map(|&z| (z as usize / q, z as usize % q)).collect();
+        // conic fit: for each S3 cell,  r*c + eps*r + zeta*c + gamma = 0  — 3x3 linear system in
+        // (eps, zeta, gamma); its determinant is the collinearity det of the 3 cells (nonzero,
+        // cap property). Gaussian elimination over GF(q).
+        let mut m: [[usize; 4]; 3] = [[0; 4]; 3];
+        for i in 0..3 {
+            let (r, c) = cells[i];
+            m[i] = [r, c, 1, gf.neg[gf.m(r, c)] as usize];
+        }
+        for col in 0..3 {
+            let piv = (col..3).find(|&i| m[i][col] != 0).expect("singular conic fit (S3 collinear?)");
+            m.swap(col, piv);
+            let inv = gf.inv[m[col][col]] as usize;
+            for j in col..4 {
+                m[col][j] = gf.m(inv, m[col][j]);
+            }
+            for i in 0..3 {
+                if i != col && m[i][col] != 0 {
+                    let f = m[i][col];
+                    for j in col..4 {
+                        m[i][j] = gf.sub(m[i][j], gf.m(f, m[col][j]));
+                    }
+                }
+            }
+        }
+        let (eps, zeta, gamma) = (m[0][3], m[1][3], m[2][3]);
+        let fval =
+            |r: usize, c: usize| gf.a(gf.a(gf.m(r, c), gf.m(eps, r)), gf.a(gf.m(zeta, c), gamma));
+        // affine conic cells + sanity (q-1 cells, functional per row and per col)
+        let mut conic_cells: Vec<(usize, usize)> = Vec::new();
+        for r in 0..q {
+            for c in 0..q {
+                if fval(r, c) == 0 {
+                    conic_cells.push((r, c));
+                }
+            }
+        }
+        let mut rows_seen = vec![0u8; q];
+        let mut cols_seen = vec![0u8; q];
+        for &(r, c) in &conic_cells {
+            rows_seen[r] += 1;
+            cols_seen[c] += 1;
+        }
+        if conic_cells.len() != q - 1
+            || rows_seen.iter().any(|&x| x > 1)
+            || cols_seen.iter().any(|&x| x > 1)
+        {
+            println!(
+                "!! q={} cls={} conic sanity FAIL: {} affine cells (expected {})",
+                q,
+                ci,
+                conic_cells.len(),
+                q - 1
+            );
+            sane = false;
+        }
+        // tangent count through affine v: #conic points P with B(P,v)=0 (polar/tangent at P).
+        // B(P,v) = p_r v_c + p_c v_r + eps(p_r+v_r) + zeta(p_c+v_c) + 2 gamma   (P,v affine), and
+        // for the two infinite conic points: B((1:0:0),v) = v_c + eps, B((0:1:0),v) = v_r + zeta.
+        let two_gamma = gf.a(gamma, gamma);
+        let tangents = |vr: usize, vc: usize| -> usize {
+            let mut t = 0usize;
+            if gf.a(vc, eps) == 0 {
+                t += 1;
+            }
+            if gf.a(vr, zeta) == 0 {
+                t += 1;
+            }
+            for &(pr, pc) in &conic_cells {
+                let bl = gf.a(
+                    gf.a(gf.a(gf.m(pr, vc), gf.m(pc, vr)), gf.m(eps, gf.a(pr, vr))),
+                    gf.a(gf.m(zeta, gf.a(pc, vc)), two_gamma),
+                );
+                if bl == 0 {
+                    t += 1;
+                }
+            }
+            t
+        };
+        // per-extension loop (as in escape mode) + feature classification
+        let mut avail = [0u64; MAXW];
+        for i in 0..MAXW {
+            avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+        }
+        let (mut on_p, mut on_n, mut ext_p, mut ext_n, mut int_p, mut int_n) = (0, 0, 0, 0, 0, 0);
+        let mut anom = 0usize; // off-conic tangent count not in {0,2}
+        let mut occ4 = occ0.clone();
+        for w in 0..MAXW {
+            let mut bits = avail[w];
+            while bits != 0 {
+                let tz = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                let z = w * 64 + tz;
+                let mut nchosen = *chosen;
+                set_bit(&mut nchosen, z);
+                let mut nforb = *forbidden;
+                mask_or(&mut nforb, &b.rc_mask[z]);
+                for &x in occ0.iter() {
+                    mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+                }
+                occ4.push(z as u16);
+                let key = b.canon(&occ4);
+                let is_n = match s.memo.get(&key) {
+                    Some(&v) => v,
+                    None => s.g(&mut occ4, &nchosen, &nforb),
+                };
+                occ4.pop();
+                let (xr, xc) = (z / q, z % q);
+                let pos = if fval(xr, xc) == 0 {
+                    if is_n {
+                        on_n += 1;
+                    } else {
+                        on_p += 1;
+                    }
+                    "on"
+                } else {
+                    match tangents(xr, xc) {
+                        2 => {
+                            if is_n {
+                                ext_n += 1;
+                            } else {
+                                ext_p += 1;
+                            }
+                            "ext"
+                        }
+                        0 => {
+                            if is_n {
+                                int_n += 1;
+                            } else {
+                                int_p += 1;
+                            }
+                            "int"
+                        }
+                        t => {
+                            anom += 1;
+                            println!("!! q={} cls={} x={},{} tangents={} (expected 0/2)", q, ci, xr, xc, t);
+                            sane = false;
+                            "anom"
+                        }
+                    }
+                };
+                println!(
+                    "X q={} cls={} x={},{} val={} pos={}",
+                    q,
+                    ci,
+                    xr,
+                    xc,
+                    if is_n { "N" } else { "P" },
+                    pos
+                );
+            }
+        }
+        let escape = on_p + ext_p + int_p;
+        let bad = on_n + ext_n + int_n + anom; // anom counted nowhere else; must be 0
+        let legal_on = on_p + on_n;
+        if legal_on != q - 4 {
+            println!("!! q={} cls={} legal_on={} (expected q-4={})", q, ci, legal_on, q - 4);
+            sane = false;
+        }
+        println!(
+            "CLS q={} cls={} S3={:?} escape={} bad={} onP={} onN={} extP={} extN={} intP={} intN={}",
+            q, ci, cells, escape, bad, on_p, on_n, ext_p, ext_n, int_p, int_n
+        );
+    }
+    println!(
+        "FEAT-SUMMARY q={} root={} size3-classes={} sanity={}",
+        q,
+        if root_n { "N (COUNTEREXAMPLE!)" } else { "P" },
+        frontier.len(),
+        if sane { "OK" } else { "FAIL" }
+    );
+}
+
 // ---- BOUNDARY mode: test "size-4 N  <=>  embeds in an odd maximal cap" at larger q ----
 // The boundary characterization (validated q<=9, 2026-07-06-boundary-char-verify.py) says a
 // size-4 grid position's GAME value is a purely STATIC geometric property: N iff it extends to
@@ -1717,6 +1940,13 @@ fn main() {
         for a in &args[2..] {
             let q: usize = a.parse().expect("q must be an integer");
             solve_escape(q);
+        }
+        return;
+    }
+    if args[1] == "feat" {
+        for a in &args[2..] {
+            let q: usize = a.parse().expect("q must be an integer");
+            solve_feat(q);
         }
         return;
     }

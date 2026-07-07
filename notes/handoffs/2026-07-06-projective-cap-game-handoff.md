@@ -796,6 +796,28 @@ route (B) finer counting / potential-function is now the main bet, (C) per-q cer
 unaffected.** Artifacts: `resym`(v0..v4)/`breaks`/`checkpos` modes in
 `2026-07-06-grid-cap-solver.rs`.
 
+**2026-07-07 (session 8) — ★ route (B) first strike: the CONIC LOCALIZATION — the escape crux
+has an on-conic witness in ALL computed data.** Full writeup
+[`2026-07-07-conic-localization-onconic-escape.md`](../2026-07-07-conic-localization-onconic-escape.md).
+Added a `feat` mode to the Rust grid solver (per size-3 class × legal extension: game value ×
+conic position on/external/internal). Two results:
+- **Conic localization lemma (proven, all q):** the projective 5-arc (2 burned directions +
+  S₃) lies on a unique conic — affinely the Möbius-graph hyperbola `(r−ρ)(c−A)=B` — and ALL
+  `q−4` of its non-S₃ cells are legal extensions (machine-checked every class q≤19); the conic
+  is an even maximal grid cap (its center `(ρ,A)` is blocked by every antipodal secant pair).
+  Refines the total lemma: `total = (q−4) + off-conic`.
+- **(ON), empirical q=5..19:** every size-3 class has `onP ≥ 1` — a P size-4 extension ON its
+  conic. Sharper crux than (ESC) (implies it via the frame reduction); the q=17 min-escape=5
+  classes have exactly `onP=1` — the surviving witness is on the conic. The kernel is now
+  1-dimensional (4th point on the conic parameter line mod the `{0,∞}`-stabilizer).
+- **Dead ends closed:** "on-conic ⟹ P" (true q=5,7,9,13,19(!); fails q=11,17); the
+  product-point law `t₄ = tᵢtⱼ/tₖ` (= the ψ_u-symmetrizable completions — every conic
+  reflection `t↦u/t` IS a grid automorphism, new substrate lemma — but existence fails 4/21
+  classes at q=17); any quadratic-character law on the conic (q=13 all-P vs q=17 1-of-13 is
+  character-incompatible); off-conic escape parity (fails q=13).
+- **Route (D) note:** per-S₃ subtree solves (private memo) could push the (ON)/escape table to
+  q=23 without the walled global arena — size it AFTER the G(17) nimber run frees the box.
+
 **Open-math plan written**: [`2026-07-07-projcap-open-math-plan.md`](../2026-07-07-projcap-open-math-plan.md)
 — settled-results table, the open kernel (ESC) with its known proof constraints, attack routes
 (A adaptive-invariant / B finer counting / C per-q Lean certificates / D falsification / E m≥3)

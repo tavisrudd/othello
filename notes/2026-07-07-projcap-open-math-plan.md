@@ -62,6 +62,20 @@ features on the existing q = 11..19 data; test whether `bad` restricted to each 
 has an invariant parity/weight. Any such lemma slots into `EscapeParity.lean` alongside the
 mod-2 version.
 
+**PROGRESS (2026-07-07, session 8 — the CONIC LOCALIZATION):** full writeup
+[`2026-07-07-conic-localization-onconic-escape.md`](2026-07-07-conic-localization-onconic-escape.md).
+The principled per-class feature is the **unique conic through the projective 5-arc** (= the
+Möbius graph `(r−ρ)(c−A)=B` through the 3 cells). Proven: all `q−4` of its non-`S₃` cells are
+LEGAL extensions (refines the total lemma; the conic is itself an even maximal grid cap).
+Empirical on ALL classes q=5..19: **(ON) `onP ≥ 1`** — the escape crux always has a witness ON
+the conic (q=17 min-escape classes: the single surviving conic witness). (ON) ⟹ (ESC); the
+open kernel is now **1-dimensional** (the conic parameter line). Dead ends closed: "on-conic ⟹
+P" (fails q=11,17 though TRUE at q=5,7,9,13,19), product-point/symmetric-completion law (the
+`t₄=tᵢtⱼ/tₖ` extensions = the ψ_u-symmetrizable S₄'s; existence fails at 4/21 q=17 classes),
+any quadratic-character law on the conic (q=13 all-P vs q=17 1-of-13 is incompatible with any
+fixed character formula), off-conic escape parity (fails q=13). Tool: `feat` mode in
+`2026-07-06-grid-cap-solver.rs`.
+
 ### (C) Per-q Lean certificates — guaranteed formal value
 The computed ladder `q = 11..19` can be made machine-checked without new mathematics: for each
 canonical size-3 class, emit a witness escape cell plus a P-certificate of the size-4 child
@@ -106,10 +120,16 @@ from the F_2^{m+1} sum-free solver. Blocked on the planar theorem; do not start 
 ## 5. Recommended next session
 
 ~~Math: start (A)-1/2 (the resym-mode experiment)~~ **DONE 2026-07-07 — negative; (A) closed.**
-Math: route (B) — per-class regression of `escape`/`bad` against arc-geometric features on the
-q = 11..19 data; per-pair-line-trace parity/weight invariants. The session-7 witness break
-(q=11, S = {(0,0),(1,1),(2,3),(3,2)}, x = (4,9), winning replies {(5,4),(5,6),(5,10),(8,6),
-(9,10)}) is a concrete test case any candidate invariant must explain. Route (C) per-q Lean
-certificates is the parallel guaranteed-value track.
+~~Math: route (B) — per-class regression of `escape`/`bad` against arc-geometric features.~~
+**DONE 2026-07-07 session 8 — the CONIC LOCALIZATION + (ON)** (see the PROGRESS block under
+route (B)): the crux witness is on the unique conic through the 5-arc in all computed data; the
+kernel is now 1-dimensional. Next math: attack **(ON)** on the conic parameter line — the
+6-point configuration `{0,∞,t₁,t₂,t₃,t₄}` on `P¹` mod the `{0,∞}`-stabilizer; any candidate
+must explain q=13 (all q−4 conic extensions P) vs q=17 (classes with exactly 1 of 13) without
+a fixed character formula (ruled out). Route (C) per-q Lean certificates is the parallel
+guaranteed-value track; the conic localization lemma is itself a new Lean-shaped target next to
+`ExtensionCount.lean`. Route (D) falsification got cheaper: per-S₃ subtree solves could push
+the (ON)/escape table to q=23 without the global arena (blocked on the box until the G(17)
+nimber run frees RAM).
 Lean: WP-1 (frame⇄grid bridge), then WP-2 (q-even theorem) — both are closed-form formalization
 tasks with no open-math risk.
