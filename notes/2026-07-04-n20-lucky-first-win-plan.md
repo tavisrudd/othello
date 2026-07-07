@@ -35,6 +35,10 @@ central-child targets are:
 
 The theorem `Queens.firstPlayerWins_of_rootChildIsP` records the exact game mapping: proving the
 root child is a P-position proves the full board is an N-position for that root.
+The coordinate bridge is also now Lean-checked: `Queens.row_index`, `Queens.col_index`,
+`Queens.index_inj`, and `Queens.attacks_index_iff` connect flattened indices to board coordinates;
+`Queens.row_J10`, `Queens.col_J10`, and `Queens.root_not_mem_centralChildLive` check the named
+central-child setup.
 
 ## Structural decomposition
 

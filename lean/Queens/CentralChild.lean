@@ -19,9 +19,25 @@ def I9 : Fin (18 * 18) :=
 def J10 : Fin (20 * 20) :=
   index 20 9 9 (by decide) (by decide)
 
+@[simp] theorem row_I9 : row 18 I9 = 8 := by
+  simp [I9]
+
+@[simp] theorem col_I9 : col 18 I9 = 8 := by
+  simp [I9]
+
+@[simp] theorem row_J10 : row 20 J10 = 9 := by
+  simp [J10]
+
+@[simp] theorem col_J10 : col 20 J10 = 9 := by
+  simp [J10]
+
 /-- Live set after a fixed root move. -/
 def centralChildLive (n : ℕ) (root : Fin (n * n)) : Finset (Fin (n * n)) :=
   NodeKayles.child (queenGraph n) Finset.univ root
+
+@[simp] theorem root_not_mem_centralChildLive (n : ℕ) (root : Fin (n * n)) :
+    root ∉ centralChildLive n root := by
+  simp [centralChildLive, NodeKayles.child]
 
 /-- The root-child P-position target for a concrete first move. -/
 def RootChildIsP (n : ℕ) (root : Fin (n * n)) : Prop :=

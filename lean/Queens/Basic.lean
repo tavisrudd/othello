@@ -93,4 +93,38 @@ def indexOf {n : ℕ} (s : Square n) : Fin (n * n) :=
 def index (n r c : ℕ) (hr : r < n) (hc : c < n) : Fin (n * n) :=
   indexOf (n := n) (⟨r, hr⟩, ⟨c, hc⟩)
 
+@[simp] theorem row_index {n r c : ℕ} (hr : r < n) (hc : c < n) :
+    row n (index n r c hr hc) = r := by
+  have hn : 0 < n := Nat.lt_of_le_of_lt (Nat.zero_le r) hr
+  simp [row, index, indexOf, Nat.mul_comm r n, Nat.mul_add_div hn,
+    Nat.div_eq_of_lt hc]
+
+@[simp] theorem col_index {n r c : ℕ} (hr : r < n) (hc : c < n) :
+    col n (index n r c hr hc) = c := by
+  simp [col, index, indexOf, Nat.mul_comm r n, Nat.mod_eq_of_lt hc]
+
+theorem index_inj {n r₁ c₁ r₂ c₂ : ℕ}
+    {hr₁ : r₁ < n} {hc₁ : c₁ < n} {hr₂ : r₂ < n} {hc₂ : c₂ < n} :
+    index n r₁ c₁ hr₁ hc₁ = index n r₂ c₂ hr₂ hc₂ ↔ r₁ = r₂ ∧ c₁ = c₂ := by
+  constructor
+  · intro h
+    constructor
+    · have hrow := congrArg (row n) h
+      simpa using hrow
+    · have hcol := congrArg (col n) h
+      simpa using hcol
+  · rintro ⟨rfl, rfl⟩
+    apply Fin.ext
+    simp [index, indexOf]
+
+theorem attacks_index_iff {n r₁ c₁ r₂ c₂ : ℕ}
+    {hr₁ : r₁ < n} {hc₁ : c₁ < n} {hr₂ : r₂ < n} {hc₂ : c₂ < n} :
+    Attacks n (index n r₁ c₁ hr₁ hc₁) (index n r₂ c₂ hr₂ hc₂) ↔
+      ¬ (r₁ = r₂ ∧ c₁ = c₂) ∧
+        (r₁ = r₂ ∨
+         c₁ = c₂ ∨
+         r₁ + c₂ = r₂ + c₁ ∨
+         r₁ + c₁ = r₂ + c₂) := by
+  simp [Attacks, index_inj]
+
 end Queens
