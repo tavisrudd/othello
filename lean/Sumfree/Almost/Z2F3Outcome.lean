@@ -15,7 +15,7 @@ variable {V : Type*} [AddCommGroup V] [Fintype V] [DecidableEq V]
 /-- Concrete statement: the order-two singleton is N after choosing any nonzero anchor. -/
 def Z2F3ResidualStatement [Nontrivial V] : Prop :=
   (∀ z : V, z + z + z = 0) ->
-    ∃ a : V, a ≠ 0 ∧
+    ∀ ⦃a : V⦄, a ≠ 0 ->
       Z2F3Game.Win ({LabelledPoint 0 1} : Finset (Z2V V))
 
 /-- Concrete statement: the empty `ZMod 2 × V` game is P. -/
@@ -25,9 +25,8 @@ def Z2F3EmptyStatement [Nontrivial V] : Prop :=
 
 theorem z2f3ResidualStatement_proved [Nontrivial V] :
     Z2F3ResidualStatement (V := V) := by
-  intro hchar3
-  obtain ⟨a, ha0⟩ := exists_ne (0 : V)
-  exact ⟨a, ha0, Z2F3Game.afterOrderTwo_win hchar3 ha0⟩
+  intro hchar3 a ha0
+  exact Z2F3Game.afterOrderTwo_win hchar3 ha0
 
 theorem z2f3EmptyStatement_proved [Nontrivial V] :
     Z2F3EmptyStatement (V := V) := by

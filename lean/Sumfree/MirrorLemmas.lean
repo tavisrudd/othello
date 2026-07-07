@@ -5,10 +5,8 @@ import Mathlib.Tactic
 /-!
 Local mirror lemmas for the normal-play sum-free avoidance game.
 
-These are the first formalization targets from the sum-free notes. Most of the
-mirror lemmas below are kernel-complete; the remaining affine `F₃` theorem is
-being split into small reviewable obligations before the final case split is
-closed.
+These are the first formalization targets from the sum-free notes. The local
+negation, translation, and affine `F₃` mirror lemmas below are kernel-complete.
 -/
 
 namespace Sumfree

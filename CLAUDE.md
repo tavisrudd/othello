@@ -7,6 +7,16 @@ Queens solver (`rust/`). Active work is in `rust/`; the latest milestone is
 ## Current WIP
 **DO NOT add details/history here. Pointers only** (details live in the handoff/proposal).
 
+### Codex WIP
+
+**Lean proof program (2026-07-07):** current proof context is in
+[named-expert personas](notes/2026-07-07-named-expert-personas-context.md). Recent Lean checkpoints:
+`Sumfree.Game.f3_initial_win`, `Sumfree.Z2F3Game.initial_isP`, projective residual
+`GridGame`/`GridCounting` scaffolding, and Queens coordinate/game-mapping lemmas. Remaining live
+game proofs: projective odd-plane `OddEscapeGameStatement` and Queens `N20J10LuckyTarget`.
+
+### Claude WIP
+
 **★ Queens n=18 — SOLVED: FIRST PLAYER WINS** (witness opening **I9**). [n=18 umbrella](notes/handoffs/2026-06-23-queens-n18-umbrella.md)
 — two independent getK-evaluator configs (`dense_k=17` W17 / `dense_k=20` W18–20) agree on verdict + winning move +
 the 15-move PV at different node counts (258 B / 114 B); corroborated by a clean int-sizing audit, an independent-oracle
@@ -249,6 +259,13 @@ residual is memory/CPI; −7% nodes cancels +7% cycles/node). Revive for the *ov
 **Parked (negative):** branch `chunk3-depth-preferred-tt` — depth-preferred TT replacement, measured 3× worse; off main. Might be able to improve and fix.
 
 **`go`** (or `@notes/handoffs/<name>.md go`) at session start = read that handoff and resume from its Progress / next steps.
+
+## Lean
+
+Top-level Lean proof work lives under [`lean/`](lean/). Before doing nontrivial proof work, load the
+named-expert umbrella [`notes/2026-07-07-named-expert-personas-context.md`](notes/2026-07-07-named-expert-personas-context.md)
+and the relevant dossier under [`notes/expert-personas/`](notes/expert-personas/). The umbrella gives
+the loading order for Sumfree, ProjectiveCap, and Queens/NodeKayles proof sessions.
 
 ## Intent-based mode (opt-in)
 
