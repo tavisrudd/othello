@@ -475,6 +475,57 @@ path, exact canon) before anyone says "counterexample."
 **Unlocks:** P3's data spine; the (ON)/route-(B) go/no-go re-rank; item 11's census shares
 the same runs.
 
+### E5. Item 13 — the verified small-geometry database (rank #5)
+
+**Why #5:** second-best compounding item after 12, and the two reinforce each other — but it
+ranks below 12 because its adoption story is harder (databases win by content volume and
+maintenance, not by a position paper) and its seed artifacts are one step further out (items
+2/4/11 must exist first). What lifts it above the remaining bankers is asymmetric upside at
+banker-like floor: even if NOBODY else ever contributes, v0 is still "our verified censuses,
+queryable, citable" — the floor is item 11's value plus infrastructure credit.
+
+**The wedge that makes it viable for a small team:** do NOT build LMFDB. Build one schema +
+one validator: every row is (object, canonical form, generation trace, checker verdict), and
+the DATABASE ACCEPTS ONLY ROWS ITS CHECKER VALIDATES. That inversion — the DB as a checker
+with storage, rather than tables with provenance notes — is the novel claim, it is exactly
+our C8/item-2 machinery productized, and it scales by letting OTHERS submit certified rows
+rather than by us computing everything. v0 content: our affine cap spectra (11), permutation-
+arcs (Part II 4), the arc cross-check (C4), sum-free censuses (4). One static site + a
+downloadable validator is enough; no service infrastructure.
+
+**Kill risks:** (i) *maintenance gravity* — the classic infrastructure trap; capped by the
+static-site + validator shape (no uptime obligation) and by the standing rule that the DB
+never blocks a paper (papers cite frozen snapshots). (ii) *Community indifference* — floor
+case above; the O1 paywalled-gaps experience suggests real demand, but do not staff beyond
+v0 until an external group asks for write access or cites a snapshot. (iii) *Verification
+theater* — a checker that validates trivialities; the mutation-gate discipline (C11's) applies
+to the DB validator too.
+
+### E6. Item 1 (Part III) — torus/modular no-three-in-line (rank #6)
+
+**Why #6:** the best ratio of certainty to novelty on the list — ~70% odds, and unlike the
+bankers it opens genuinely uncharted territory (composite n, where the known results are
+scattered single-n papers). It is the natural FIRST beyond-CGT move because it is a port,
+not a build: grid-cap solver + Z_n line masks + the shrunken canon group, all machinery with
+audited soundness arguments (F3) that transfer because the invariance proofs never used
+field-ness — only the group action.
+
+**The mathematical hook that makes it more than a census:** composite n forces the CRT
+decomposition Z_n ≅ Z_p^a × Z_q^b into view — lines through composite moduli behave
+differently per factor, and the maximum no-3-collinear sets should reflect the factor
+structure (the prime case = our caps; prime powers ≠ primes; mixed moduli new). The
+deliverable ladder: exact values + classifications for a swath of composite n (data, ~90%),
+CRT-structure lemmas the data forces (~60%), a product/lifting theorem if one is there
+(upside). Plus OEIS sequences either way.
+
+**Kill risks:** (i) *prior-art surprise* — the Misiak–Stępień line plus scattered notes must
+be swept BEFORE claiming any value is new (nofil rule; assign the search to the same session
+that writes the spec). (ii) *combinatorial explosion at mixed moduli* — cap n by measured
+class counts, publish the swath that finishes; a partial table of exact values is still the
+best table in existence. (iii) Definitional forks (lines vs geodesics vs 3-term APs on the
+torus) — pick the AP/modular-line convention the literature uses, state it in the note's
+first section, and add the convention-equivalence check to the validation gates.
+
 ### Sequencing recommendation
 
 Month 1: P0, P1, C1, WP-1/WP-2 (+ C5 in idle cycles). Month 2: P2 (post-G(17)), C2, item 4,
