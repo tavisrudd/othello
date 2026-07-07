@@ -170,6 +170,22 @@ month-1 items are moving.
    most one target, go/no-go in one scouting session. **Odds: ~30–40% conditional on scoping;
    do not commit blind.**
 
+7. **First Lean-verified weak solution of a classic solved game (Qubic).** The C9/C11
+   reply-book checker IS a game-solution certificate format; pointing it at a famous solved
+   game is the high-visibility payoff. Qubic is the right first target — Patashnik's 1980
+   solution is literally a strategy book + coverage check (the n20 plan's prior-art anchor),
+   the game is impartial-adjacent but mainstream-recognizable, and a modern re-solve to emit
+   our certificate format is small compute (PN search on this box). "Machine-checked: the
+   first player wins 4×4×4 tic-tac-toe" is an ITP-paper headline with popular reach. **Odds:
+   ~45–55% once C11's checker exists; near-zero marginal tooling.**
+8. **Queens-graph domination open values (scouting).** γ(Q_n) and its diagonal/independent
+   variants still have open exact values in published tables (Ostergård–Weakley lineage);
+   our queens bitboard + canonicalization + exact-search stack is purpose-built for it, and
+   any closed value is a citable unit with recreational-math visibility. Same protocol as
+   item 6: one scouting session against the current tables, pick at most one value, go/no-go.
+   Adjacent same-shape alternative if scouting fails: exact Davenport constants for specific
+   small abelian groups (sum-free machinery reuse). **Odds: ~35–45% conditional on scoping.**
+
 ### Part III refusals (same rule as Part II)
 
 Max cap in AG(7,3) (search space beyond any single box; heavily attempted), hyperovals in
