@@ -750,6 +750,36 @@ SKELETONIZED.** All in `lean/` (full `lake build` green; axioms = the standard t
   projectivization (PGL transitivity on points/pairs/triangles/frames) is the next Lean work
   package; the game-theoretic half is done.
 
+**2026-07-07 (session 6 cont.) — ★ the GEOMETRY HALF of the frame reduction is FORMALIZED: the
+Lean frame reduction is now UNCONDITIONAL for rank-3 spaces.**
+`ProjectiveCap/PlaneTransitivity.lean` (built on mathlib's `Projectivization`
+Basic/Independence/Subspace API):
+- **Collinearity bridge**: `collinear_iff_dependent` / `not_collinear_iff_independent` — our
+  set-based `IsCollinear` triple predicate ⟺ mathlib `Dependent`/`Independent` of the point
+  triple (forward via `finrank` monotonicity into the witness subspace; backward constructing
+  the spanned line, two-secants handled by `linearIndependent_finSnoc`).
+- **`mapEquiv`**: the point permutation induced by `g : V ≃ₗ[K] V`, with cap transport
+  (`cap_map_mapEquiv`) — the `hValid` hypothesis of `CapTransitiveStatement` — plus point-image
+  helpers (`mapEquiv_mk_eq_mk`, `mapEquiv_eq_of_rep_eq`).
+- **Transitivity `k = 1..4`** (`capTransitiveStatement_one/two/three/four`, `finrank K V = 3`):
+  k ≤ 3 by extending independent rep tuples to bases (`exists_cons_li`) and `Basis.equiv`;
+  k = 4 via the classical **frame normal form** (`quad_normal_form`: scaled reps of a 4-cap's
+  first three points form a basis whose coordinate sum represents the fourth; all three
+  coordinates nonzero by the cap property).
+- **Extendability** (`cap_extendable`): caps of size ≤ 3 always extend — sizes 0/1/2 by basis
+  extension, size 3 by the coordinate-sum frame completion (`li_with_sum12/13/23`,
+  `cap_quad_of_independent`).
+- **`exists_frame`** + the headline **`initialPStatement_iff_isP_frame_of_finrank`**: for ANY
+  rank-3 `V` (any field), `InitialPStatement ↔ IsP (frame)` with no remaining hypotheses beyond
+  `finrank K V = 3`. Axioms: the standard three, no `sorry`. Full `lake build` green.
+
+**Open-math plan written**: [`2026-07-07-projcap-open-math-plan.md`](../2026-07-07-projcap-open-math-plan.md)
+— settled-results table, the open kernel (ESC) with its known proof constraints, attack routes
+(A adaptive-invariant / B finer counting / C per-q Lean certificates / D falsification / E m≥3)
+with concrete next actions, and the Lean work-package queue (WP-1 frame⇄grid bridge, WP-2 q-even
+theorem in Lean, WP-3 certificate checker, WP-4 PGL packaging). Recommended next session: math =
+route (A) resym experiment; Lean = WP-1 then WP-2.
+
 **Next:** (3'') mirror CLOSED, naive parity CLOSED (odd maximal caps), brute-force falsification
 CLOSED at q=19 (memory wall), single-involution re-closed from the frame,
 adaptive direct-pairing closed at q≥11. **Escape margin is ERRATIC (session 5): min-escape swings

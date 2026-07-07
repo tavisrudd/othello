@@ -1,6 +1,7 @@
 import CapGame.BuildGame
 import CapGame.Affine
 import ProjectiveCap.Projective
+import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.Grid
 import ProjectiveCap.GridSeed
 import ProjectiveCap.GridGame
