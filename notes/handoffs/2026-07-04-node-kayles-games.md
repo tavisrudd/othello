@@ -36,14 +36,17 @@ rename Lean files to match older prose names.
   `initial_isP_of_no_nonzero_orderTwo_or_three`,
   `initial_win_of_unique_orderTwo_no_nonzero_orderThree`, and
   `initial_isP_of_two_nonzero_orderTwo`);
+- partial cyclic `ZMod n` bridge:
+  [`../../lean/Sumfree/CyclicZMod.lean`](../../lean/Sumfree/CyclicZMod.lean), including the odd,
+  `3 ∤ n` P cases via `initial_isP_of_odd_of_not_three_dvd`;
 - Queens coordinate/game bridge targets:
   [`../../lean/Queens/Basic.lean`](../../lean/Queens/Basic.lean) and
   [`../../lean/Queens/CentralChild.lean`](../../lean/Queens/CentralChild.lean).
 
-**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level theorem; the
-full finite-abelian rank/cardinality bookkeeping and Lemma-4/order-three-extra argument needed for the
-full `r3 <= 1` abelian theorem; the affine cap all-`q` theorem; the projective odd-plane escape
-theorem; and the Queens `N20J10LuckyTarget`.
+**Still text/computation only, not Lean theorems:** cyclic `Z_n` mod-6 as a top-level iff theorem; the
+even cyclic P case and N residues that need the order-three extra-reply/Lemma-4 argument; the full
+finite-abelian rank/cardinality bookkeeping needed for the full `r3 <= 1` abelian theorem; the affine
+cap all-`q` theorem; the projective odd-plane escape theorem; and the Queens `N20J10LuckyTarget`.
 
 ## ▶ RESUME HERE — the SOCLE REDUCTION is FALSE (updated 2026-07-05, session `2bf7abb3`)
 

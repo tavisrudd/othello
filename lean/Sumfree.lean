@@ -1,5 +1,6 @@
 import Sumfree.MirrorLemmas
 import Sumfree.Game
+import Sumfree.CyclicZMod
 import Sumfree.Z2F3Labels
 import Sumfree.Z2F3Bridge
 import Sumfree.Z2F3Game
