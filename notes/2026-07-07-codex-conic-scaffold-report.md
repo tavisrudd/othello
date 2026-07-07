@@ -91,6 +91,7 @@ not_collinear_hyperbolaParamPoint
 affineCap_hyperbolaCells
 gridCap_hyperbolaCells
 gridCap_hyperbolaCells_and_card
+onConicLegalExtensionCountStatement
 psi
 psi_involutive
 psi_onHyperbola_iff
@@ -127,6 +128,8 @@ The following are sorry-free Lean theorems:
   point in each row and column.
 - `gridCap_hyperbolaCells_and_card`: for `B != 0`, the hyperbola cell set is a residual
   `GridCap` and has cardinality `Fintype.card K - 1`.
+- `onConicLegalExtensionCountStatement`: every non-seed hyperbola cell is a legal extension of
+  the fitted size-three seed, and there are exactly `Fintype.card K - 4` such cells.
 - `psi_involutive`: if `B != 0` and `u != 0`, then `psi rho A B u` is involutive.
 - `psi_onHyperbola_iff`: under the same nonzero hypotheses, `psi_u` preserves the hyperbola.
 - `psi_hyperbolaParamPoint`: on parametrized conic points, `psi_u` acts as `t |-> u / t`.
@@ -145,8 +148,6 @@ The following are statement-level targets:
 - `UniqueConicThroughFiveArcStatement`: unique nondegenerate conic through the size-three grid
   seed plus burned directions, encoded in the normalized burned-direction chart.
 - `HyperbolaNormalFormStatement`: unique `(rho, A, B)` with `B != 0` fitting the size-three seed.
-- `OnConicLegalExtensionCountStatement`: every non-seed hyperbola cell is a legal extension and
-  there are exactly `q - 4` of them.
 - `OddHyperbolaMaximalStatement`: in odd characteristic, the hyperbola cell set is a maximal grid
   cap of size `q - 1`.
 - `OnConicEscapeStatement`: the empirical ON target, tied to the formal residual grid-game

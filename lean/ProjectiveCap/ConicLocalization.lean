@@ -360,6 +360,38 @@ theorem gridCap_hyperbolaCells_and_card {rho A B : K} (hB : B ≠ 0) :
     have hle : 1 ≤ Fintype.card K := Nat.succ_le_of_lt hcard_pos
     norm_num [Nat.cast_sub hle]⟩
 
+theorem onConicLegalExtensionCountStatement :
+    OnConicLegalExtensionCountStatement (K := K) := by
+  intro S rho A B hcard hS hB hfit
+  constructor
+  · intro p hpCell hpnot
+    rw [GridGame.mem_legalExtensions]
+    refine ⟨hpnot, ?_⟩
+    exact gridCap_mono (K := K) (T := HyperbolaCells (K := K) rho A B) (by
+      intro x hx
+      rcases Finset.mem_insert.mp hx with rfl | hxS
+      · exact hpCell
+      · exact mem_hyperbolaCells.mpr (hfit x hxS)) (gridCap_hyperbolaCells (K := K) hB)
+  · let H := HyperbolaCells (K := K) rho A B
+    have hsubset : S ⊆ H := by
+      intro p hp
+      exact mem_hyperbolaCells.mpr (hfit p hp)
+    have hfilter :
+        (H.filter fun p => p ∉ S) = H \ S := by
+      ext p
+      simp
+    have hcardNat : (H \ S).card = (Fintype.card K - 1) - 3 := by
+      rw [Finset.card_sdiff_of_subset hsubset, card_hyperbolaCells (K := K) hB, hcard]
+    have hSle : S.card ≤ H.card := Finset.card_le_card hsubset
+    have hqge4 : 4 ≤ Fintype.card K := by
+      rw [card_hyperbolaCells (K := K) hB, hcard] at hSle
+      omega
+    rw [hfilter, hcardNat]
+    have hle1 : 1 ≤ Fintype.card K := by omega
+    have hle3 : 3 ≤ Fintype.card K - 1 := by omega
+    norm_num [Nat.cast_sub hle1, Nat.cast_sub hle3]
+    ring
+
 /--
 The translated-coordinate map
 `(t, s) |-> ((u / B) * s, (B / u) * t)`, transported back to grid
