@@ -5,7 +5,7 @@ Date: 2026-07-06.
 ## Status table — PG(2,q) value + proof state
 
 **KEEP THIS TABLE UP TO DATE** — update it in the same commit as any session block / review
-that changes a cell (last updated 2026-07-08, post-C20 review).
+that changes a cell (last updated 2026-07-08, C22 q=11 assembly).
 
 | q                | Value | Computational evidence                                        | Lean proof status                                                                                     | Remaining gap                                                    |
 |------------------|-------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
@@ -14,17 +14,17 @@ that changes a cell (last updated 2026-07-08, post-C20 review).
 | 5                | **P** | exhaustive solve                                              | **★ PROVEN by mechanism** — `initialPStatement_of_card_eq_five_finrank`, clean axioms                  | none — closed                                                     |
 | 7                | **P** | exhaustive solve                                              | **★ PROVEN by mechanism** — `initialPStatement_of_card_eq_seven_finrank`                               | none — closed                                                     |
 | 9                | P     | exhaustive solve (~1s; non-prime, char 3)                     | none                                                                                                     | open; noted reducible to a ≤15-point warm-up certificate          |
-| 11               | P     | solver + esc campaign                                         | **cert book validity kernel-checked** (C19: all anchored classes, `CertData/Q11.lean`, clean axioms)   | **C22** — transport + `represents` assembly ⇒ unconditional PG(2,11) |
+| 11               | **P** | solver + esc campaign                                         | **★ PROVEN by certificate assembly** — `CertData/Q11Assembly.initialPStatement_finrank`, clean axioms | none — closed                                                     |
 | 13               | P     | solver (all on-conic buckets P)                               | cert generator works; single-file elaboration blows the 30-min gate                                     | per-class file split (C22 optional), then assembly                |
 | 17               | P     | esc campaign (gate discharged, C3); S4 buckets mixed 5P/5N    | none                                                                                                     | cert book unbuilt; mixed buckets make it the hard column          |
 | 19               | P     | esc campaign                                                  | none                                                                                                     | cert book unbuilt                                                 |
 | 23               | **?** | not computed (CPython OOM'd; Rust sizing probe = C21, queued) | none                                                                                                     | the live falsification watch — any esc class at 0 kills the conjecture |
 | all odd q        | conj. P | no counterexample through q=19                              | frame reduction + odd-escape composition are unconditional rank-3 theorems; the per-q escape input is what's missing | a uniform mechanism — post-C20 that means strategy-level (second-intrusion lemma in defect form), not a snapshot law |
 
-Scoreboard reading: **closed** — all even q, plus odd q=5, 7. **One assembly step away** —
-q=11 (C22 is exactly that step). **Certificate-route feasible but ungated** — q=13 (file
-split), q=9 and q=3 (small, unqueued). **Compute-only** — q=17, 19. **Frontier** — q=23
-sizing (C21) and the uniform odd-q mechanism (post-C20: strategies, not snapshot invariants).
+Scoreboard reading: **closed** — all even q, plus odd q=5, 7, 11. **Certificate-route feasible
+but ungated** — q=13 (file split), q=9 and q=3 (small, unqueued). **Compute-only** — q=17, 19.
+**Frontier** — q=23 sizing (C21) and the uniform odd-q mechanism (post-C20: strategies, not
+snapshot invariants).
 
 ## Target
 
@@ -1136,6 +1136,19 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    q=13; what survives is the zone-2 endgame law (a legitimate small-zone lemma) and the
    second-intrusion lemma in defect form, now with C20's labeled data to steer it (the
    per-state `ord(σ_xσ_x')` field sits unanalyzed in the states jsonl).
+17. **C22 LANDED (Codex, 2026-07-08) — PG(2,11) is now UNCONDITIONAL in Lean.**
+   New generated assembly `lean/ProjectiveCap/CertData/Q11Assembly.lean` imports the 72 checked
+   anchored q=11 class books and closes the remaining transport/represents gap.  The selector
+   maps anchored third cells `(a,b)` with `a,b ∈ {2..10}`, `a ≠ b`, to `class0..class71`;
+   invalid anchored cells are discharged by direct row/column/diagonal contradiction lemmas
+   instead of a full `GridCap` decision procedure.  The generic bridge extracts a three-point
+   set via `Finset.card_eq_three`, applies `anchorAxisAffine`, proves the image is
+   `{(0,0),(1,1),x}`, selects the corresponding valid class, and packages
+   `GridOddEscapeTransportBookCertificate`.  Payoff theorem:
+   `ProjectiveCap.Certificate.CertData.Q11.initialPStatement_finrank`.  Validation:
+   `nix develop --command lake build ProjectiveCap.CertData.Q11Assembly` PASS; Q11 data build
+   took 1518s on first import, cached assembly rebuild 35s.  Axiom gate:
+   `[propext, Classical.choice, Quot.sound]` only.  q=13 splitting not attempted.
 
 ## Handoff Summary
 
