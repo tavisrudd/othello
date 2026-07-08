@@ -286,6 +286,26 @@ theorem hyperbolaFits_card_three_B_ne_zero {S : Finset (GridPoint K)} {rho A B :
     · have hcol : a.2 = b.2 := by rw [haCol, hbCol]
       exact hab (hS.1.2 (by simp) (by simp) hcol)
 
+omit [Fintype K] in
+theorem exists_hyperbolaNormalForm {S : Finset (GridPoint K)}
+    (hcard : S.card = 3) (hS : GridCap (K := K) S) :
+    ∃ rho A B : K,
+      B ≠ 0 ∧ HyperbolaFits (K := K) S rho A B := by
+  obtain ⟨a, b, c, hab, hac, hbc, rfl⟩ := Finset.card_eq_three.mp hcard
+  let rho := hyperbolaRhoOfTriple (K := K) a b c
+  let A := hyperbolaAOfTriple (K := K) a b c
+  let B := hyperbolaBOfTriple (K := K) a b c
+  have hden : hyperbolaDenom (K := K) a b c ≠ 0 :=
+    hyperbolaDenom_ne_zero_of_gridCap_triple (K := K) hS hab hac hbc
+  have hfit :
+      HyperbolaFits (K := K) ({a, b, c} : Finset (GridPoint K)) rho A B := by
+    simpa [rho, A, B] using hyperbolaFits_triple (K := K) hden
+  have hcardTriple : ({a, b, c} : Finset (GridPoint K)).card = 3 := by
+    simp [hab, hac, hbc]
+  have hB : B ≠ 0 :=
+    hyperbolaFits_card_three_B_ne_zero (K := K) hcardTriple hS hfit
+  exact ⟨rho, A, B, hB, hfit⟩
+
 omit [Fintype K] [DecidableEq K] in
 theorem hyperbolaConic_nondegenerate {rho A B : K} (hB : B ≠ 0) :
     (hyperbolaConic (K := K) rho A B).Nondegenerate := by
