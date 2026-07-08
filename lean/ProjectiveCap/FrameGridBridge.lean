@@ -696,6 +696,74 @@ theorem gridMove_to_projectiveMove [Fintype K] [DecidableEq K]
       projectiveCap_of_gridCap (K := K) hpmove.2
     simpa [insert_affine_fixed_union_image (K := K) (S := S) p] using hcap
 
+/-- The fixed-prefix full projective game has the same normal-play value as
+the residual grid game.  The proof uses `projectiveMove_exists_gridMove` to
+show that the full board has no legal non-affine continuations after the two
+coordinate directions have been played. -/
+theorem win_fixedDirections_iff_grid [Fintype K] [DecidableEq K]
+    [Fintype (Point K (PlaneVec K))]
+    (S : Finset (GridPoint K)) :
+    FiniteBuildGame.Win (Cap K (PlaneVec K))
+        (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) ↔
+      GridGame.Win (K := K) S := by
+  change FiniteBuildGame.Win (Cap K (PlaneVec K))
+        (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) ↔
+      FiniteBuildGame.Win (GridCap (K := K)) S
+  rw [FiniteBuildGame.win_iff_exists_move, FiniteBuildGame.win_iff_exists_move]
+  constructor
+  · rintro ⟨x, hxmove, hxlose⟩
+    rcases projectiveMove_exists_gridMove (K := K) (S := S) hxmove with
+      ⟨p, hxaff, hpmove⟩
+    refine ⟨p, hpmove, ?_⟩
+    intro hgridWin
+    subst x
+    exact hxlose (by
+      simpa [insert_affine_fixed_union_image (K := K) (S := S) p] using
+        (win_fixedDirections_iff_grid (insert p S)).mpr hgridWin)
+  · rintro ⟨p, hpmove, hpLose⟩
+    refine ⟨affinePoint (K := K) p, gridMove_to_projectiveMove (K := K) hpmove, ?_⟩
+    intro hprojWin
+    apply hpLose
+    exact (win_fixedDirections_iff_grid (insert p S)).mp (by
+      simpa [insert_affine_fixed_union_image (K := K) (S := S) p] using hprojWin)
+termination_by Fintype.card (GridPoint K) - S.card
+decreasing_by
+  · classical
+    have hp : p ∉ S := hpmove.1
+    have hcard : (insert p S).card = S.card + 1 :=
+      Finset.card_insert_of_notMem hp
+    have hlt : S.card < Fintype.card (GridPoint K) := by
+      have hsubset : S ⊆ (Finset.univ : Finset (GridPoint K)) := by
+        intro y _
+        exact Finset.mem_univ y
+      have hproper : S ⊂ (Finset.univ : Finset (GridPoint K)) :=
+        (Finset.ssubset_iff_of_subset hsubset).mpr ⟨p, Finset.mem_univ p, hp⟩
+      simpa using Finset.card_lt_card hproper
+    rw [hcard]
+    omega
+  · classical
+    have hp : p ∉ S := hpmove.1
+    have hcard : (insert p S).card = S.card + 1 :=
+      Finset.card_insert_of_notMem hp
+    have hlt : S.card < Fintype.card (GridPoint K) := by
+      have hsubset : S ⊆ (Finset.univ : Finset (GridPoint K)) := by
+        intro y _
+        exact Finset.mem_univ y
+      have hproper : S ⊂ (Finset.univ : Finset (GridPoint K)) :=
+        (Finset.ssubset_iff_of_subset hsubset).mpr ⟨p, Finset.mem_univ p, hp⟩
+      simpa using Finset.card_lt_card hproper
+    rw [hcard]
+    omega
+
+/-- P-position form of `win_fixedDirections_iff_grid`. -/
+theorem isP_fixedDirections_iff_grid [Fintype K] [DecidableEq K]
+    [Fintype (Point K (PlaneVec K))]
+    (S : Finset (GridPoint K)) :
+    FiniteBuildGame.IsP (Cap K (PlaneVec K))
+        (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) ↔
+      GridGame.IsP (K := K) S :=
+  not_congr (win_fixedDirections_iff_grid S)
+
 /--
 Concrete coordinate bridge for WP-1: the projective cap condition with the two
 direction points adjoined is exactly the residual grid cap condition.
