@@ -1133,6 +1133,62 @@ theorem psi_gridSymmetry {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0) :
     GridSymmetry (K := K) (psi (K := K) rho A B u) :=
   ⟨psi_bijective (K := K) hB hu, gridCap_image_psi_iff (K := K) hB hu⟩
 
+theorem psi_mem_onConicBadExtensions_of_seed_image
+    {S : Finset (GridPoint K)} {rho A B u : K}
+    (hB : B ≠ 0) (hu : u ≠ 0)
+    (hSimage : S.image (psi (K := K) rho A B u) = S)
+    {p : GridPoint K}
+    (hp : p ∈ OnConicBadExtensions (K := K) S rho A B) :
+    psi (K := K) rho A B u p ∈ OnConicBadExtensions (K := K) S rho A B := by
+  rcases (mem_onConicBadExtensions (K := K)).mp hp with ⟨hpLegalOn, hpBad⟩
+  rcases (mem_onConicLegalExtensions (K := K)).mp hpLegalOn with ⟨hpOn, hpLegal⟩
+  rw [mem_onConicBadExtensions, mem_onConicLegalExtensions]
+  refine ⟨⟨(psi_onHyperbola_iff (K := K) hB hu p).mpr hpOn, ?_⟩, ?_⟩
+  · rw [GridGame.mem_legalExtensions] at hpLegal ⊢
+    refine ⟨?_, ?_⟩
+    · intro hpsiS
+      have hpImage : p ∈ S.image (psi (K := K) rho A B u) := by
+        refine Finset.mem_image.mpr ⟨psi (K := K) rho A B u p, hpsiS, ?_⟩
+        exact psi_involutive (K := K) hB hu p
+      exact hpLegal.1 (by simpa [hSimage] using hpImage)
+    · have hcapImage :
+          GridCap (K := K)
+            ((insert p S).image (psi (K := K) rho A B u)) :=
+        gridCap_image_psi (K := K) (rho := rho) (A := A) hB hu hpLegal.2
+      have himage :
+          (insert p S).image (psi (K := K) rho A B u) =
+            insert (psi (K := K) rho A B u p) S := by
+        simp [Finset.image_insert, hSimage]
+      simpa [himage] using hcapImage
+  · intro hP
+    apply hpBad
+    have hPimage :
+        GridGame.IsP (K := K)
+          ((insert p S).image (psi (K := K) rho A B u)) := by
+      have himage :
+          (insert p S).image (psi (K := K) rho A B u) =
+            insert (psi (K := K) rho A B u p) S := by
+        simp [Finset.image_insert, hSimage]
+      simpa [himage] using hP
+    exact (gridSymmetry_isP_image (K := K)
+      (psi_gridSymmetry (K := K) hB hu) (insert p S)).mp hPimage
+
+theorem even_onConicBadExtensions_of_psi_pairing
+    {S : Finset (GridPoint K)} {rho A B u : K}
+    (hB : B ≠ 0) (hu : u ≠ 0)
+    (hSimage : S.image (psi (K := K) rho A B u) = S)
+    (hfpf : ∀ p : GridPoint K,
+      p ∈ OnConicBadExtensions (K := K) S rho A B ->
+        psi (K := K) rho A B u p ≠ p) :
+    Even (OnConicBadExtensions (K := K) S rho A B).card :=
+  even_card_of_involutive_fpf_on_finset
+    (OnConicBadExtensions (K := K) S rho A B)
+    (psi (K := K) rho A B u)
+    (fun _ hp => psi_mem_onConicBadExtensions_of_seed_image
+      (K := K) hB hu hSimage hp)
+    (fun p _hp => psi_involutive (K := K) hB hu p)
+    hfpf
+
 /--
 Packaged statement: each `psi_u` is a grid-symmetry involution preserving the
 hyperbola and acting on the conic parameter by `t |-> u / t`.
