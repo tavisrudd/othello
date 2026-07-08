@@ -1,6 +1,7 @@
 import ProjectiveCap.GridCounting
 import ProjectiveCap.GridGame
 import ProjectiveCap.Almost.OddEscape
+import Mathlib.GroupTheory.Perm.Cycle.Type
 import Mathlib.Tactic
 
 /-!
@@ -19,6 +20,47 @@ namespace ProjectiveCap
 namespace ConicLocalization
 
 variable {K : Type*} [Field K] [Fintype K] [DecidableEq K]
+
+section FinsetPairing
+
+variable {α : Type*} [DecidableEq α]
+
+/-- A finite set preserved by a fixed-point-free involution has even cardinality. -/
+theorem even_card_of_involutive_fpf_on_finset
+    (s : Finset α) (f : α -> α)
+    (hmem : ∀ x : α, x ∈ s -> f x ∈ s)
+    (hinv : ∀ x : α, x ∈ s -> f (f x) = x)
+    (hfpf : ∀ x : α, x ∈ s -> f x ≠ x) :
+    Even s.card := by
+  classical
+  let e : Equiv.Perm {x : α // x ∈ s} := {
+    toFun := fun x => ⟨f x.1, hmem x.1 x.2⟩
+    invFun := fun x => ⟨f x.1, hmem x.1 x.2⟩
+    left_inv := by
+      intro x
+      apply Subtype.ext
+      exact hinv x.1 x.2
+    right_inv := by
+      intro x
+      apply Subtype.ext
+      exact hinv x.1 x.2 }
+  have he2 : e ^ 2 = 1 := by
+    ext x
+    exact hinv x.1 x.2
+  have hsupport : e.support = Finset.univ := by
+    ext x
+    simp only [Finset.mem_univ, iff_true]
+    rw [Equiv.Perm.mem_support]
+    change (⟨f x.1, hmem x.1 x.2⟩ : {x : α // x ∈ s}) ≠ x
+    intro hx
+    exact hfpf x.1 x.2 (congrArg Subtype.val hx)
+  have hdiv : 2 ∣ e.support.card :=
+    Equiv.Perm.two_dvd_card_support he2
+  rw [hsupport, Finset.card_univ, Fintype.card_coe] at hdiv
+  rw [even_iff_two_dvd]
+  exact hdiv
+
+end FinsetPairing
 
 /-! ## Hyperbola normal form -/
 
