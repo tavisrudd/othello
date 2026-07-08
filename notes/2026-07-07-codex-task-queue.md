@@ -478,6 +478,45 @@ remains for unconditional PG(2,11) is exactly C19's deferred item 4:
 
 Report file: `notes/2026-07-08-codex-transport-assembly.md`.
 
+## C23. TEXT visualizations of winning cap-game lines, odd q (study artifact for the strategy hunt)
+
+No cap-game line visualizations exist anywhere in the repo (queens has them; projcap has
+none). Post-C20 the odd-q proof hunt is STRATEGY-level (response schemes, not snapshot
+invariants) — so we want to *look at* optimal play. Text only: markdown with fenced
+unicode/ASCII board diagrams (greppable, diffable, terminal-renderable). No HTML/SVG.
+
+1. **Line extraction.** Reuse the exhaustive solver (`2026-07-05-proj-cap-fast.py`) and the
+   C20 census machinery (`2026-07-08-intrusion-census.py`: legality, σ_x, spectrum, zone).
+   Extract optimal (win-preserving) lines to terminal:
+   (a) **The second-player defense from the empty board**, q ∈ {3, 5, 7, 9, 11}: for each
+   first move up to symmetry (frame reduction makes this a short list), one optimal P-side
+   reply line to the terminal maximal cap. This is the "defense book" we have never seen.
+   (b) **q=11 N-bucket S4 winning-intrusion lines** (win only by intruding, session 11):
+   the full line from the intrusion to terminal.
+   (c) **q=17 winning intrusions**: one line per N bucket from the C20 representatives
+   (feat logs + labeled data in `notes/data/`; the 28 winning first moves are in the jsonl).
+2. **Rendering spec (per ply).** The anchored affine grid (q×q + the infinity row), one
+   diagram per ply or per move-pair: conic cells `·`, first player's stones odd move
+   numbers, second player's even, cells dead (kill-scars / cap-blocked) `x`, current
+   intruder-zone cells marked. Alongside each diagram print the NK snapshot: defect
+   spectrum, defXOR, zone size/parity, zone NK Grundy — so the picture and the C20 feature
+   vocabulary can be read against each other.
+3. **The analytical questions to eyeball (state observations, no proof burden):**
+   (a) does the P-side defense visibly PAIR cells (mirror/involution structure — the thing
+   every landed proof in this project used)? Same pairing across q or per-q ad hoc?
+   (b) in the multi-intruder defense (q=11/17), what does the defense do to the zone —
+   does it steer zone size back to the O(1) endgame regime where the session-11 laws hold?
+   (c) do winning intrusion lines share a recognizable shape across buckets/q (tangency
+   structure, σ-scar geometry)?
+4. **Gates:** every printed line re-checked move-by-move by an independent legality checker
+   (determinant-based, not the solver's own); terminal position verified maximal (no legal
+   extension); line values must match the known verdicts (initial P for all q here; the
+   S4-rooted lines must match the C20/C15 bucket labels).
+5. Deliverables: the markdown study document + the committed generator script
+   (deterministic, seeded choices documented). Budget: 4h wall, single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-08-codex-winline-viz.md`.
+
 ## Standing
 
 ~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane
