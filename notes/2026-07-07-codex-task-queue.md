@@ -182,7 +182,7 @@ Do not start C11 from the current P0a data.
 
 Report file: `notes/2026-07-07-codex-cert-extractor-report.md`.
 
-## C12. Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1) [IN PROGRESS 2026-07-07 — Opus delegate; do NOT duplicate]
+## C12. Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1) [REPORTED 2026-07-07 (opus delegate)]
 
 Context: the odd-side Lean compositions are done and conditional only on
 `OddEscapeGameStatement`/`OnConicEscapeStatement` (see `lean/ProjectiveCap/PlaneOutcome.lean`;
