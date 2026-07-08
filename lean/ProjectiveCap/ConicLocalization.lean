@@ -1295,6 +1295,15 @@ theorem even_onConicBadExtensions_of_psi_seed_image_no_fixed_bad_param
 Conditional `psi_u` parity criterion for the on-conic bad children.  This is
 not the global odd-plane theorem; it records the exact obligations for the
 restricted conic-reflection route.
+
+WARNING (route status): FALSE for generic seeds.  The seed-invariance
+condition `S.image (psi rho A B u) = S` makes `t ↦ u/t` an involution
+permuting the seed's three conic parameters; an involution on a 3-set has a
+fixed point, forcing `tᵢ² = tⱼ·tₖ` for some labelling.  Generic seeds have no
+such `u`, and the symmetric-completion route is closed as a dead end
+(`notes/2026-07-07-conic-localization-onconic-escape.md` §3.2).  Keep this as
+machinery for the special seed family only; do not proof-search the universal
+statement.
 -/
 def OnConicPsiPairingCriterion : Prop :=
   ∀ S : Finset (GridPoint K), ∀ rho A B : K,
@@ -1353,6 +1362,11 @@ def OnConicEscapeStatement : Prop :=
 Parity reduction for the on-conic escape target.  For odd `q`, it is enough to
 show that the on-conic bad children are paired, hence even, for the normal-form
 conic of each size-three seed.
+
+WARNING (route status): the `hbad` hypothesis is empirically FALSE at
+`q = 11` (classes with even on-conic escape counts in the `feat` data,
+`notes/2026-07-07-conic-localization-onconic-escape.md` §2).  Per-`q` use
+only; the live universal target is `OnConicEscapeStatement` itself.
 -/
 theorem onConicEscapeStatement_of_forall_even_onConic_bad
     (hq : Odd (Fintype.card K))

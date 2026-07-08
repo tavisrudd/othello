@@ -58,7 +58,13 @@ theorem initialPStatement_of_even_card_finrank
     (K := K) (V := V) (two_eq_zero_of_even_card (K := K) hcard) hrank
 
 /-- The residual bad-parity criterion implies the full projective-plane outcome
-in any odd-cardinality rank-three model. -/
+in any odd-cardinality rank-three model.
+
+WARNING (route status): the `hbad` hypothesis is known to be FALSE as a
+universal statement — grid-wide bad-evenness holds only for `q ≤ 9` and fails
+from `q = 11` on (`notes/2026-07-07-projcap-open-math-plan.md` §1).  This
+composition is usable only for per-`q` instantiations with small `q`; do not
+attempt to discharge `hbad` for general odd `q`. -/
 theorem initialPStatement_of_forall_even_bad_finrank
     (hq : Odd (Fintype.card K))
     (hbad : ∀ S : Finset (GridPoint K), S.card = 3 -> GridCap (K := K) S ->
@@ -86,7 +92,13 @@ theorem initialPStatement_of_onConicEscapeStatement_finrank
     (oddEscapeStatement_of_onConicEscapeStatement (K := K) hON) hrank
 
 /-- The on-conic bad-even reduction implies the full projective-plane outcome
-in any odd-cardinality rank-three model. -/
+in any odd-cardinality rank-three model.
+
+WARNING (route status): the `hbad` hypothesis is empirically FALSE at
+`q = 11`.  The on-conic legal count is `q − 4` (odd for odd `q`), so even
+on-conic bad is equivalent to odd on-conic escape count — and the `feat` data
+(`notes/2026-07-07-conic-localization-onconic-escape.md` §2) has `q = 11`
+classes with even on-conic escape counts.  Per-`q` use only. -/
 theorem initialPStatement_of_forall_even_onConic_bad_finrank
     (hq : Odd (Fintype.card K))
     (hbad : ∀ S : Finset (GridPoint K), ∀ rho A B : K,
@@ -103,7 +115,15 @@ theorem initialPStatement_of_forall_even_onConic_bad_finrank
       (K := K) hq hbad) hrank
 
 /-- The restricted `psi_u` pairing criterion implies the full projective-plane
-outcome in any odd-cardinality rank-three model. -/
+outcome in any odd-cardinality rank-three model.
+
+WARNING (route status): `OnConicPsiPairingCriterion` is FALSE for generic
+seeds.  `S.image (psi rho A B u) = S` forces the involution `t ↦ u/t` to
+permute the seed's three conic parameters, and an involution on a 3-set fixes
+a point, so the seed must satisfy `tᵢ² = tⱼ·tₖ` — a special family, and the
+corresponding symmetric-completion route is closed
+(`notes/2026-07-07-conic-localization-onconic-escape.md` §3.2).  The live
+universal target is `OnConicEscapeStatement` alone. -/
 theorem initialPStatement_of_psiPairingCriterion_finrank
     (hq : Odd (Fintype.card K))
     (hpair : OnConicPsiPairingCriterion (K := K))

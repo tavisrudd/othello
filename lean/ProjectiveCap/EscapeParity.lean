@@ -49,7 +49,11 @@ theorem escapeExtensions_nonempty_of_even_bad (hq : Odd (Fintype.card K))
   exact Finset.card_pos.mp hoddE.pos
 
 /-- The odd escape game target follows from the all-positions bad-parity
-hypothesis.  This is the formal statement of the notes' parity route. -/
+hypothesis.  This is the formal statement of the notes' parity route.
+
+WARNING (route status): the `hbad` hypothesis holds for `q ≤ 9` but is FALSE
+from `q = 11` on (`notes/2026-07-07-projcap-open-math-plan.md` §1) — bad
+counts go odd on a majority of classes by `q = 17`.  Per-`q` use only. -/
 theorem oddEscapeGameStatement_of_forall_even_bad (hq : Odd (Fintype.card K))
     (hbad : ∀ S : Finset (GridPoint K), S.card = 3 -> GridCap (K := K) S ->
       Even (GridGame.BadExtensions (K := K) S).card) :
