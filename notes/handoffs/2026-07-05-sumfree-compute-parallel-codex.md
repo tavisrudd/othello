@@ -310,6 +310,19 @@ PROGRESS; p=11 Lemma A/B direct solve confirmed COMPUTE-INFEASIBLE.**
   fixed-tiny evicts (bounded `tt`, correct outcome, ~2× re-exp); race-clean fixed+parallel. **To do p=11
   later:** ONE probe at a time, `SUMFREE_TT_GB=16 -j 0` — bounded RAM, ~9× parallel, the ~15-25 GB working set
   is close to the arena so eviction/re-exp stays low. (Running both concurrently is what OOM'd.)
+- **`Z3³×Z5` background solve — TERMINATED without a verdict, cause unconfirmed.** Ran ~1 day on the old
+  (pre-fixed-arena) binary, reached 106,025,946 nodes / 98,830,595 memo (rss steadily 4.7 GB, no OOM pressure —
+  16-20 GB stayed free the whole run) before the process disappeared between two 15-min heartbeats with no
+  panic/error/OOM trace in the log or in available kernel logs (`dmesg` unreadable in this session). Not killed
+  by this session. Diagnostic signal up to that point: the nodes:memo ratio held flat at ~1.07× for the last
+  ~4 hours (no growing transposition reuse) and the node rate was flat at ~3.4M/hr (no deceleration) — i.e. no
+  convergence signature had appeared by 106M nodes. For scale, the p=11 Lemma A/B probes on the *smaller*
+  `Z3²×Z11` (`|G|=99`) were abandoned at 188-197M nodes with the same zero-convergence signature and ruled
+  compute-infeasible; `Z3³×Z5` (`|G|=135`) was on track to reach that same checkpoint in about another day with
+  no more reason to expect a verdict there. Working read: likely the same brute-force-infeasible bucket as
+  p=11, discovered slower because the fixed arena kept memory bounded instead of OOMing. **Next-session choice:**
+  relaunch with the newer fixed-arena binary (bounded, safe, but same convergence outlook) vs. drop the
+  brute-force route for `Z3³×Z5` and lean on Codex's induction-on-r analytic lever instead.
 
 ---
 
