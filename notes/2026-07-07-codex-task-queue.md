@@ -377,7 +377,7 @@ the kernel evaluates the checker — no typeclass search, no new axioms).
 
 Report file: `notes/2026-07-07-codex-certcheck-reflection.md`.
 
-## C20. Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i)) [REPORTED 2026-07-08]
+## C20. Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i)) [REPORTED 2026-07-08; REVIEWED 2026-07-08 — SOUND]
 
 C18's null (reviewed, sound) killed shallow laws over STATIC features of the 6-subset. The
 surviving hypothesis (session-9 §6 of `2026-07-07-onconic-intrusion-calculus.md`) is that the
@@ -423,6 +423,17 @@ law lives in the game-labeled intruder census, which C18 never computed. Build i
 5. Budget: hard 8h wall; single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-08-codex-intrusion-census.md`.
+
+**Review (Fable, 2026-07-08): SOUND — the joint-snapshot necessity law is dead beyond q=11.**
+All reported numbers reproduce from the raw states jsonl (violations 468 @ q13 / 3455 @ q17,
+every table, the first counterexample verbatim). The review added the gate the amendment
+removed: re-running the census script at q=11 against `/tmp/codex-feat11-c15.out` reproduces
+Fable's session-11 ground truth exactly (0 necessity violations; slice zoneG=0 ⟺ P), so the
+new defect/zone feature code is cross-validated and the q=13 counterexample stands. Findings
+beyond the report + program consequences: projcap handoff session-block item 16. The
+ord(σ_xσ_x') census (question 3b, deprioritized by the second amendment) was never analyzed,
+but the per-state `order` field IS in `/tmp/c20-q13-q17-states.jsonl` (tmpfs; regenerable
+in ~67s via the report's Main-run command).
 
 ## C21. q=23 esc single-class sizing probe (route D; C18 phase-2 leftover)
 

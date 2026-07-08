@@ -1089,6 +1089,29 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    `GridOddEscapeBookCertificate.represents`) — until C22 lands, `OddEscapeGameStatement
    (ZMod 11)` and the unconditional PG(2,11) payoff remain UNASSEMBLED; the rules-only book
    validity (all 72 anchored q=11 classes) is done.
+16. **C20 REVIEWED (commit `38d177b`) — SOUND; the joint-snapshot necessity law is DEAD beyond
+   q=11.** Report (`2026-07-08-codex-intrusion-census.md`) checks out: every number reproduces
+   from the raw states jsonl (violations 468 @ q13 / 3455 @ q17, all slice tables, the first
+   counterexample verbatim); the q=9 gate and the C15/C5 bucket-label gate both held. The review
+   closed the one un-gated hole — the second amendment said "don't redo q=11", which removed the
+   only cross-implementation check on the NEW defect/zone feature code — by re-running the
+   census script at q=11 (1s): it reproduces Fable's session-11 ground truth exactly (0
+   necessity violations across all 4 buckets; slice zoneG=0 ⟺ P purely), so the q=13
+   counterexample is trustworthy. **Review findings beyond the report:** (a) **the q=11 laws
+   were a small-zone endgame artifact** — max zone size is 2 at q=11 vs 10 (q=13) / 38 (q=17);
+   the snapshot decides only while the intruder zone is an O(1) endgame, and stops the moment
+   it grows. (b) At q=13 the (defXOR=0, zone-even) slice IS purely classified by zone NK
+   Grundy ({0,3}→P, {1,2}→N; zoneG=3 carries only 2 samples) — the report undersold this as
+   "almost decisive" — but every zoneG class is mixed at q=17, so no zoneG law survives either.
+   (c) Zero "bad" components across all 56,497 reply states ⇒ Lemma VI's path/cycle taxonomy
+   holds wholesale at q=13/17 — a fresh confirmation of the spectrum law at scale. (d) Positive
+   structural datum: q=17 N-buckets win ONLY by intruding (28/28 winning first moves are
+   intrusions, 0 conic) — extends the q=11 multi-intruder-defense picture (300/300) up a
+   column. **Consequence for the Fable lane: the item-14 queued "prove the necessity law
+   (joint-snapshot lemma)" target is MOOT as a general-q statement** — the law is false at
+   q=13; what survives is the zone-2 endgame law (a legitimate small-zone lemma) and the
+   second-intrusion lemma in defect form, now with C20's labeled data to steer it (the
+   per-state `ord(σ_xσ_x')` field sits unanalyzed in the states jsonl).
 
 ## Handoff Summary
 
