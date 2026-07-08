@@ -53,6 +53,33 @@ theorem card_nonzeroParams :
 def HyperbolaFits (S : Finset (GridPoint K)) (rho A B : K) : Prop :=
   ∀ p : GridPoint K, p ∈ S -> OnHyperbola (K := K) rho A B p
 
+/-- The determinant of the two-by-two linear system for the hyperbola center. -/
+def hyperbolaDenom (a b c : GridPoint K) : K :=
+  (b.2 - a.2) * (c.1 - a.1) - (c.2 - a.2) * (b.1 - a.1)
+
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaDenom_ne_zero_of_not_collinear {a b c : GridPoint K}
+    (hnot : ¬ Collinear (K := K) a b c) :
+    hyperbolaDenom (K := K) a b c ≠ 0 := by
+  intro hden
+  apply hnot
+  have heq :
+      (b.2 - a.2) * (c.1 - a.1) =
+        (c.2 - a.2) * (b.1 - a.1) := sub_eq_zero.mp hden
+  unfold Collinear
+  calc
+    (b.1 - a.1) * (c.2 - a.2) =
+        (c.2 - a.2) * (b.1 - a.1) := by ring
+    _ = (b.2 - a.2) * (c.1 - a.1) := heq.symm
+
+omit [Fintype K] in
+theorem hyperbolaDenom_ne_zero_of_gridCap_triple {a b c : GridPoint K}
+    (hS : GridCap (K := K) ({a, b, c} : Finset (GridPoint K)))
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    hyperbolaDenom (K := K) a b c ≠ 0 :=
+  hyperbolaDenom_ne_zero_of_not_collinear (K := K)
+    (hS.2 (by simp) (by simp) (by simp) hab hac hbc)
+
 /--
 Conics through the two burned directions, normalized so the `r*c`
 coefficient is `1`.  The affine equation is
