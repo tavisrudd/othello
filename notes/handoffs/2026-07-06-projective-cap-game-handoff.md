@@ -938,13 +938,28 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    no-intrusion obligation collapses to the size-four seed alone — this is the q = 7 kernel
    shrinker). First odd-order projective plane theorem in Lean; PG(2,5) previously known only
    by exhaustive computation.
-   **q = 7 status:** the kernel there is genuinely finite-geometric (all 15 on-conic S₄'s have
-   zero legal off-conic cells — needs the tangency bound or a decidable check). Routes:
-   (a) σ_x involution calculus (Lemma III synthetic — the right long-term route, also unlocks
-   q ≥ 9 analysis); (b) kernel `decide` via computable twins of the classical defs + the
-   antitone reduction (∼343·15·49 GridCap checks; plumbing-heavy, speed uncertain);
-   (c) `native_decide` (fast but breaks the project's clean axiom profile — TRUST decision =
-   user's). Parked pending user call on (c) vs (a).
+   ~~**q = 7 status:** parked pending route choice.~~ **USER CHOSE (a); DONE same session.**
+5. **★ THE ORDER-SEVEN PLANE, PROVEN — the σ_x secant-involution kernel formalized**
+   (`initialPStatement_of_card_eq_seven_finrank`, axioms clean, commit `ae1a346`). The
+   synthetic argument, entirely in grid language with no P¹ machinery and NO computation:
+   for a putative legal off-conic intruder `x = (ρ+u, A+v)` of an on-conic S₄, the secant
+   map `σ(t) = B(t−u)/(tv−B)` (the parameter of the second intersection of line x·p_t with
+   the conic) satisfies — all by row/col/cap legality + off-conic `uv ≠ B`:
+   σ(t) ≠ 0 (row), σ(t) ∉ T∖{t} (secants), σ(t) ≠ B/v (off-conic makes this algebraic),
+   σ injective (det = B(uv−B) ≠ 0), denominators tv−B ≠ 0 (col). So non-fixed played params
+   inject into K*∖(T∪{B/v}) — at q=7 that has ONE element (v≠0) ⇒ ≥3 of the 4 played params
+   are fixed points of σ; but fixed points satisfy vt²−2Bt+Bu=0 and 3 distinct roots force
+   v = 0 (pair-subtraction), contradiction; v=0 case: σ affine with the unique fixed point
+   u/2 vs ≥2 forced — needs 2B ≠ 0 (odd card). Lemma names:
+   `collinear_hyperbolaParamPoint_of_secant` (the secant criterion),
+   `offConic_not_legal_of_card_eq_seven` (the kernel),
+   `noIntrusionAboveFourStatement_of_card_eq_seven`. The σ_x fixed-point/injectivity
+   micro-lemmas are the seed vocabulary for the general intrusion calculus (Lemma III) —
+   the q ≥ 9 analysis reuses them with |K*∖(T∪{B/v})| = q−6 free landings.
+   **Both computed-only odd planes PG(2,5) and PG(2,7) are now Lean theorems by mechanism;
+   next odd-plane formal targets need the multi-intruder theory (q=9 warm-up: intruders
+   confined to pairwise tangent-intersections, then M = 0 — note §3) or route-C
+   certificates (q = 11..19).**
 
 ## Handoff Summary
 
