@@ -179,5 +179,23 @@ theorem initialPStatement_of_card_eq_seven_finrank
     (noIntrusionAboveFourStatement_of_card_eq_seven (K := K) hcard)
     hrank
 
+/--
+**The projective plane of order nine, reduced to the intruder kernel.**
+CONDITIONAL: the one remaining input is `IntruderTerminalReplyStatement` —
+every legal intruder above an on-conic size-four position has a legal reply
+ending the game (exhaustively machine-verified at `q = 9`, C13; open in
+Lean).  Everything else — conic children via the free-endgame theorem at the
+exact top-gap threshold `2·5 = q + 1`, the escape composition, the rank-three
+transport — is discharged.
+-/
+theorem initialPStatement_of_intruderTerminalReply_finrank
+    (hcard : Fintype.card K = 9)
+    (hterm : IntruderTerminalReplyStatement (K := K))
+    (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) :=
+  initialPStatement_of_onConicEscapeStatement_finrank (K := K) (V := V)
+    (onConicEscapeStatement_of_intruderTerminalReply (K := K) hcard hterm)
+    hrank
+
 end ConicLocalization
 end ProjectiveCap

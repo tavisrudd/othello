@@ -526,6 +526,114 @@ theorem noIntrusionAboveFourStatement_of_card_eq_seven
     (fun x hx => offConic_not_legal_of_card_eq_seven (K := K)
       hcard hB hS4 hSsub hx)
 
+/-! ## The order-nine reduction
+
+At `q = 9` an on-conic size-four position admits genuine intruders, but its
+CONIC children have size five and `2·5 = 10 = q + 1` — they clear the top gap
+exactly, so the free-endgame theorem values them (three conic cells left, odd,
+hence N).  The only remaining obligation is the intruder branch, isolated
+below as `IntruderTerminalReplyStatement`: every legal intruder admits a legal
+reply whose grandchild is terminal.  C13's exhaustive q=9 census
+(`notes/2026-07-07-codex-q9-intrusion-probe.md`) verifies this with the
+sharpest possible structure: the reply is unique and forced.
+-/
+
+/--
+The order-nine intruder kernel: from any on-conic size-four position, every
+legal off-conic move has a legal reply that ends the game.
+
+WARNING (route status): per-`q` target, aimed at `Fintype.card K = 9` —
+machine-verified exhaustively there (C13: all 240 intruders across all 70
+on-conic size-four positions have exactly one legal reply, always terminal;
+census type `(τ_x, τ_played) = (2,2)` only).  NOT expected for `q ≥ 11`,
+where intruded residuals deepen.  Open in Lean: discharge via the tangency
+algebra of the secant involution, or via the route-C certificate checker.
+-/
+def IntruderTerminalReplyStatement : Prop :=
+  ∀ rho A B : K, B ≠ 0 ->
+    ∀ S : Finset (GridPoint K), S.card = 4 ->
+      S ⊆ HyperbolaCells (K := K) rho A B ->
+      ∀ x : GridPoint K, x ∈ GridGame.LegalExtensions (K := K) S ->
+        x ∉ HyperbolaCells (K := K) rho A B ->
+          ∃ y : GridPoint K,
+            y ∈ GridGame.LegalExtensions (K := K) (insert x S) ∧
+              GridGame.LegalExtensions (K := K) (insert y (insert x S)) = ∅
+
+/-- At `q = 9`, the intruder kernel makes every on-conic size-four position a
+P-position: conic children clear the top gap (size five, `10 = q + 1`) and
+land on odd remainder, intruder children lose to the terminal reply. -/
+theorem isP_of_card_four_of_intruderTerminalReply
+    (hcard : Fintype.card K = 9)
+    (hterm : IntruderTerminalReplyStatement (K := K))
+    {rho A B : K} (hB : B ≠ 0) {S : Finset (GridPoint K)}
+    (hS4 : S.card = 4) (hSsub : S ⊆ HyperbolaCells (K := K) rho A B) :
+    GridGame.IsP (K := K) S := by
+  have h2 : (2 : K) ≠ 0 :=
+    two_ne_zero_of_odd_card (K := K) (by rw [hcard]; exact ⟨4, rfl⟩)
+  rw [GridGame.isP_iff_all_children_win]
+  intro x hxmove
+  by_cases hxC : x ∈ HyperbolaCells (K := K) rho A B
+  · -- conic child: size five clears the top gap, odd remainder, so N
+    have hchild5 : (insert x S).card = 5 := by
+      rw [Finset.card_insert_of_notMem hxmove.1, hS4]
+    have hsub5 : insert x S ⊆ HyperbolaCells (K := K) rho A B :=
+      Finset.insert_subset hxC hSsub
+    have hbig5 : Fintype.card K + 1 ≤ 2 * (insert x S).card := by
+      rw [hchild5]
+      omega
+    have hiff := isP_iff_even_card_sdiff_of_add_one_le_two_mul_card
+      (K := K) h2 hB hsub5 hbig5
+    have hsd : (HyperbolaCells (K := K) rho A B \ insert x S).card = 3 := by
+      rw [Finset.card_sdiff_of_subset hsub5, card_hyperbolaCells (K := K) hB,
+        hcard, hchild5]
+    rw [hsd] at hiff
+    have hodd : ¬ Even 3 := by decide
+    exact of_not_not (fun hP => hodd (hiff.mp hP))
+  · -- intruder child: the kernel's terminal reply wins for the responder
+    have hxLegal : x ∈ GridGame.LegalExtensions (K := K) S :=
+      GridGame.mem_legalExtensions.mpr ⟨hxmove.1, hxmove.2⟩
+    obtain ⟨y, hyLegal, hyTerm⟩ :=
+      hterm rho A B hB S hS4 hSsub x hxLegal hxC
+    have hyMove : GridGame.Move (K := K) (insert x S) y :=
+      GridGame.mem_legalExtensions.mp hyLegal
+    have hgrandP : GridGame.IsP (K := K) (insert y (insert x S)) := by
+      refine FiniteBuildGame.isP_of_no_moves (fun z hz => ?_)
+      have hmem : z ∈ GridGame.LegalExtensions (K := K)
+          (insert y (insert x S)) :=
+        GridGame.mem_legalExtensions.mpr ⟨hz.1, hz.2⟩
+      rw [hyTerm] at hmem
+      exact absurd hmem (Finset.notMem_empty z)
+    exact FiniteBuildGame.win_of_move_to_isP hyMove hgrandP
+
+/-- The order-nine escape route: the intruder kernel yields the on-conic
+escape statement over any field of cardinality nine. -/
+theorem onConicEscapeStatement_of_intruderTerminalReply
+    (hcard : Fintype.card K = 9)
+    (hterm : IntruderTerminalReplyStatement (K := K)) :
+    OnConicEscapeStatement (K := K) := by
+  intro S hcard3 hS
+  obtain ⟨rho, A, B, hB, hfit⟩ :=
+    exists_hyperbolaNormalForm (K := K) hcard3 hS
+  have hSsub : S ⊆ HyperbolaCells (K := K) rho A B := fun p hp =>
+    mem_hyperbolaCells.mpr (hfit p hp)
+  have hpos : 0 < (HyperbolaCells (K := K) rho A B \ S).card := by
+    rw [Finset.card_sdiff_of_subset hSsub, card_hyperbolaCells (K := K) hB,
+      hcard, hcard3]
+    omega
+  obtain ⟨p, hp⟩ := Finset.card_pos.mp hpos
+  rcases Finset.mem_sdiff.mp hp with ⟨hpC, hpS⟩
+  have hS4card : (insert p S).card = 4 := by
+    rw [Finset.card_insert_of_notMem hpS, hcard3]
+  have hS4sub : insert p S ⊆ HyperbolaCells (K := K) rho A B :=
+    Finset.insert_subset hpC hSsub
+  have hP : GridGame.IsP (K := K) (insert p S) :=
+    isP_of_card_four_of_intruderTerminalReply (K := K)
+      hcard hterm hB hS4card hS4sub
+  have hpLegal : p ∈ GridGame.LegalExtensions (K := K) S :=
+    freeConic_mem_legalExtensions (K := K) hB hSsub hpC hpS
+  exact ⟨rho, A, B, p, hB, hfit,
+    mem_onConicLegalExtensions.mpr ⟨mem_hyperbolaCells.mp hpC, hpLegal⟩, hP⟩
+
 /-- Theorem IV, game half: the per-`q` no-intrusion kernel yields the on-conic
 escape statement for odd `q` — every size-three seed's conic completions are
 all escapes. -/
