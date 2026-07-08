@@ -1069,8 +1069,13 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    (d) **q=11 full-game census**: N-valued on-conic S₄ win ONLY by intruding (300/300);
    self-polar-answer (H1) and conic-answer (H2) defense mechanisms both REFUTED — the
    defense is inherently multi-intruder. C20 amended: defect-spectrum + restricted-Grundy
-   features, "defect-XOR decides?" is the lead hypothesis. Fable next: last-defect endgame
-   lemma; second-intrusion lemma in defect form after C20's data.
+   features, "defect-XOR decides?" is the lead hypothesis. **ADDENDUM (same session): the
+   q=11 Fermi spot-test landed two laws** — necessity `P ⇒ defXOR = 0 ∧ zone even`
+   (381/381) and the empty-conic zone-2 endgame law (P ⟺ the two zone cells don't
+   conflict, 328/328): the sampled two-intruder layer is COMPLETELY decided by the joint
+   NK snapshot (conic defect-XOR + zone conflict graph). C20 re-amended: test the
+   necessity law at q=13/17 first; q=11 is done. Fable next: prove the necessity law
+   (joint-snapshot lemma); second-intrusion lemma in defect form after C20's data.
 
 ## Handoff Summary
 
