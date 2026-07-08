@@ -411,6 +411,22 @@ theorem standardResidualSeed_isP_of_charTwo (h2 : (2 : K) = 0) :
   isP_of_diagMirrorGood (K := K) h2 (standardResidualSeed_diagMirrorGood (K := K) h2)
 
 /--
+If every legal size-three residual position has a P child, then the normalized
+size-two residual seed is a P-position.
+-/
+theorem standardResidualSeed_isP_of_oddEscapeStatement
+    (hOdd : GridGame.OddEscapeStatement (K := K)) :
+    GridGame.IsP (K := K) (StandardResidualSeed (K := K)) := by
+  rw [GridGame.isP_iff_all_children_win]
+  intro x hxmove
+  have hcard : (insert x (StandardResidualSeed (K := K))).card = 3 := by
+    rw [Finset.card_insert_of_notMem hxmove.1, standardResidualSeed_card]
+  rcases hOdd (insert x (StandardResidualSeed (K := K))) hcard hxmove.2 with
+    ⟨p, hpLegal, hpP⟩
+  exact FiniteBuildGame.win_of_move_to_isP
+    (Valid := GridCap (K := K)) (GridGame.mem_legalExtensions.mp hpLegal) hpP
+
+/--
 Composition of WP-1 and WP-2: in the standard coordinate projective plane over
 characteristic two, the normalized two-direction frame with residual seed
 `{(0,0), (1,1)}` is a P-position for the fixed-prefix residual game.
@@ -450,6 +466,25 @@ theorem coordinateFullProjectiveFrame_isP_of_charTwo
     (standardResidualSeed_isP_of_charTwo (K := K) h2)
 
 /--
+Full-projective coordinate frame bridge from the residual seed value: after the
+two coordinate directions and the normalized residual seed are played, the
+ordinary projective cap game has the same P-value as the residual grid seed.
+-/
+theorem coordinateFullProjectiveFrame_isP_of_standardResidualSeed_isP
+    [DecidableEq (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    [Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    (hSeed : GridGame.IsP (K := K) (StandardResidualSeed (K := K))) :
+    FiniteBuildGame.IsP
+      (Projective.Cap K (Projective.FrameGridBridge.Coordinate.PlaneVec K))
+      (Projective.FrameGridBridge.Coordinate.fixedDirections (K := K) ∪
+        (StandardResidualSeed (K := K)).map
+          (Projective.FrameGridBridge.Coordinate.affineEmbedding (K := K))) := by
+  exact (Projective.FrameGridBridge.Coordinate.isP_fixedDirections_iff_grid
+    (S := StandardResidualSeed (K := K))).mpr hSeed
+
+/--
 Characteristic-two coordinate projective-cap theorem: in the standard
 coordinate projective plane, the empty full projective game is a P-position.
 -/
@@ -487,6 +522,57 @@ theorem coordinateInitialPStatement_of_charTwo
     hrank hFcap hFcard).mpr hFP)
 
 /--
+Coordinate projective-cap theorem from the residual seed value.  This is the
+shared final bridge used by both the characteristic-two mirror theorem and the
+odd escape kernel.
+-/
+theorem coordinateInitialPStatement_of_standardResidualSeed_isP
+    [DecidableEq (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    [Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    (hSeed : GridGame.IsP (K := K) (StandardResidualSeed (K := K))) :
+    Projective.InitialPStatement
+      (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) := by
+  let F : Finset (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K)) :=
+    Projective.FrameGridBridge.Coordinate.fixedDirections (K := K) ∪
+      (StandardResidualSeed (K := K)).map
+        (Projective.FrameGridBridge.Coordinate.affineEmbedding (K := K))
+  have hFcap :
+      Projective.Cap K (Projective.FrameGridBridge.Coordinate.PlaneVec K) F := by
+    dsimp [F]
+    exact Projective.FrameGridBridge.Coordinate.projectiveCap_of_gridCap
+      (K := K) (standardResidualSeed_gridCap (K := K))
+  have hFcard : F.card = 4 := by
+    dsimp [F]
+    rw [Projective.FrameGridBridge.Coordinate.fixed_union_affine_image_card,
+      standardResidualSeed_card]
+  have hFP :
+      FiniteBuildGame.IsP
+        (Projective.Cap K (Projective.FrameGridBridge.Coordinate.PlaneVec K)) F := by
+    dsimp [F]
+    exact coordinateFullProjectiveFrame_isP_of_standardResidualSeed_isP
+      (K := K) hSeed
+  have hrank : Module.finrank K (Projective.FrameGridBridge.Coordinate.PlaneVec K) = 3 := by
+    rw [Module.finrank_fintype_fun_eq_card, Fintype.card_fin]
+  exact ((Projective.initialPStatement_iff_isP_frame_of_finrank
+    (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K)
+    hrank hFcap hFcard).mpr hFP)
+
+/-- Coordinate projective-cap theorem from the odd escape kernel. -/
+theorem coordinateInitialPStatement_of_oddEscapeStatement
+    [DecidableEq (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    [Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    (hOdd : GridGame.OddEscapeStatement (K := K)) :
+    Projective.InitialPStatement
+      (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) :=
+  coordinateInitialPStatement_of_standardResidualSeed_isP
+    (K := K) (standardResidualSeed_isP_of_oddEscapeStatement (K := K) hOdd)
+
+/--
 Characteristic-two projective-plane theorem in any rank-three model: the empty
 projective cap game is a P-position.
 -/
@@ -513,6 +599,45 @@ theorem initialPStatement_of_charTwo_finrank
       Projective.InitialPStatement
         (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) :=
     coordinateInitialPStatement_of_charTwo (K := K) h2
+  have htransport :
+      FiniteBuildGame.IsP (Projective.Cap K V)
+        ((∅ : Finset (Projective.Point K
+          (Projective.FrameGridBridge.Coordinate.PlaneVec K))).map
+            (Projective.mapLinearEquiv e).toEmbedding) :=
+    (Projective.isP_mapLinearEquiv (K := K)
+      (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) (W := V)
+      e (∅ : Finset (Projective.Point K
+        (Projective.FrameGridBridge.Coordinate.PlaneVec K)))).mpr hcoord
+  simpa [Projective.InitialPStatement] using htransport
+
+/--
+If the residual odd-escape kernel holds over `K`, then the projective cap game
+is P in any rank-three model over `K`.
+-/
+theorem initialPStatement_of_oddEscapeStatement_finrank
+    {V : Type*} [AddCommGroup V] [Module K V]
+    [Fintype (Projective.Point K V)] [DecidableEq (Projective.Point K V)]
+    (hOdd : GridGame.OddEscapeStatement (K := K))
+    (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) := by
+  classical
+  letI : Module.Finite K V := Module.finite_of_finrank_pos (by
+    rw [hrank]
+    norm_num)
+  letI : Module.Finite K (Projective.FrameGridBridge.Coordinate.PlaneVec K) :=
+    Module.finite_of_finrank_pos (by
+      rw [Module.finrank_fintype_fun_eq_card, Fintype.card_fin]
+      norm_num)
+  let e : Projective.FrameGridBridge.Coordinate.PlaneVec K ≃ₗ[K] V :=
+    LinearEquiv.ofFinrankEq _ _ (by
+      rw [Module.finrank_fintype_fun_eq_card, Fintype.card_fin, hrank])
+  letI : Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K)) :=
+    Fintype.ofEquiv (Projective.Point K V) (Projective.mapLinearEquiv e).symm
+  have hcoord :
+      Projective.InitialPStatement
+        (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) :=
+    coordinateInitialPStatement_of_oddEscapeStatement (K := K) hOdd
   have htransport :
       FiniteBuildGame.IsP (Projective.Cap K V)
         ((∅ : Finset (Projective.Point K
