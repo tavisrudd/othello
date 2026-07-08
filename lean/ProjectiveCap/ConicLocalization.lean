@@ -988,9 +988,36 @@ theorem eq_param_mul_of_psi_fixed_onHyperbola {rho A B u : K}
     hyperbolaParamPoint_injective (K := K) rho A B hparamPoint
   have hmul :
       (u / (p.1 - rho)) * (p.1 - rho) =
-        (p.1 - rho) * (p.1 - rho) := by
+      (p.1 - rho) * (p.1 - rho) := by
     rw [hparam]
   simpa [div_eq_mul_inv, ht] using hmul
+
+omit [Fintype K] [DecidableEq K] in
+theorem psi_fixed_onHyperbola_iff_param_mul {rho A B u : K}
+    (hB : B ≠ 0) (hu : u ≠ 0) {p : GridPoint K}
+    (hp : OnHyperbola (K := K) rho A B p) :
+    psi (K := K) rho A B u p = p ↔
+      u = (p.1 - rho) * (p.1 - rho) := by
+  constructor
+  · exact eq_param_mul_of_psi_fixed_onHyperbola (K := K) hB hu hp
+  · intro huEq
+    have ht : p.1 - rho ≠ 0 := by
+      intro hz
+      exact onHyperbola_first_ne_rho (K := K) hB hp (sub_eq_zero.mp hz)
+    have hpParam := onHyperbola_eq_hyperbolaParamPoint (K := K) hB hp
+    calc
+      psi (K := K) rho A B u p =
+          psi (K := K) rho A B u
+            (hyperbolaParamPoint rho A B (p.1 - rho)) := by
+            rw [← hpParam]
+      _ = hyperbolaParamPoint rho A B (u / (p.1 - rho)) :=
+            psi_hyperbolaParamPoint (K := K) hB hu ht
+      _ = hyperbolaParamPoint rho A B (p.1 - rho) := by
+            have hdiv : u / (p.1 - rho) = p.1 - rho := by
+              rw [huEq]
+              field_simp [ht]
+            rw [hdiv]
+      _ = p := hpParam.symm
 
 omit [Fintype K] [DecidableEq K] in
 theorem psi_ne_self_of_onHyperbola_of_param_mul_ne {rho A B u : K}
