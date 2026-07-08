@@ -164,6 +164,82 @@ decreasing_by
   rw [hcardy, hcardx]
   omega
 
+/-! ## Reply-book DAG certificates -/
+
+/--
+One row of a parsed reply book: at the current node, if the mover plays
+`mover`, the responder plays `reply` and the certificate continues at `child`.
+
+The native certificate files store the same triple as an `R` record, with the
+child represented by a node id.  The Lean scaffold keeps the child position
+itself so the semantic checker can state the game-rule obligations directly.
+-/
+structure ReplyBookRow (α : Type*) where
+  mover : α
+  reply : α
+  child : Finset α
+
+/--
+A parsed reply-book DAG, abstracting over the concrete file node ids.
+
+`Node` is the set of certified P-nodes and `Row S r` says that row `r` occurs
+at node `S`.  This is intentionally semantic rather than parser-specific: a
+future parser/checker only has to prove `ValidFor`.
+-/
+structure ReplyBookDAG (α : Type*) where
+  root : Finset α
+  Node : Finset α -> Prop
+  Row : Finset α -> ReplyBookRow α -> Prop
+
+namespace ReplyBookDAG
+
+/--
+Rules-only validity of a reply-book DAG for a finite building game.
+
+This mirrors the native `certcheck` obligations: root is a node; every certified
+node is valid; and every legal mover move from a node has a legal reply row
+whose child is exactly the two-move extension and is again a certified node.
+Terminal nodes satisfy the step obligation vacuously because they have no legal
+mover move.
+-/
+def ValidFor (Valid : Finset α -> Prop) (book : ReplyBookDAG α) : Prop :=
+  book.Node book.root ∧
+    (∀ ⦃S : Finset α⦄, book.Node S -> Valid S) ∧
+      ∀ ⦃S : Finset α⦄, book.Node S -> ∀ x : α, Move Valid S x ->
+        ∃ row : ReplyBookRow α,
+          book.Row S row ∧
+            row.mover = x ∧
+              Move Valid (insert x S) row.reply ∧
+                row.child = insert row.reply (insert x S) ∧
+                  book.Node row.child
+
+/-- A valid reply-book DAG proves that its root is a P-position. -/
+theorem isP_root {Valid : Finset α -> Prop} {book : ReplyBookDAG α}
+    (hbook : book.ValidFor Valid) : IsP Valid book.root := by
+  rcases hbook with ⟨hroot, _hvalid, hstep⟩
+  refine isP_of_replyStrategy (Valid := Valid) (Good := book.Node) ?_ book.root hroot
+  intro S hS x hxmove
+  rcases hstep hS x hxmove with ⟨row, _hrow, _hmover, hreply, hchild, hchildNode⟩
+  refine ⟨row.reply, hreply, ?_⟩
+  simpa [hchild] using hchildNode
+
+end ReplyBookDAG
+
+/--
+A reusable P-certificate backed by a reply-book DAG rather than by an already
+semantic `PairReplyBook`.
+-/
+structure PCertDAG (Valid : Finset α -> Prop) (S : Finset α) where
+  book : ReplyBookDAG α
+  root_eq : book.root = S
+  valid : book.ValidFor Valid
+
+/-- DAG P-certificates are sound. -/
+theorem pcertDAG_sound {Valid : Finset α -> Prop} {S : Finset α}
+    (c : PCertDAG Valid S) : IsP Valid S := by
+  rw [← c.root_eq]
+  exact c.book.isP_root c.valid
+
 /-! ## Generic Grundy values -/
 
 /-- Minimal excludant of a finite set of natural numbers. -/
