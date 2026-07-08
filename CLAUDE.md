@@ -32,7 +32,7 @@ Jenrich (arXiv:1312.5135). Code on branch `queens-n18` (worktree `/home/tavis/sr
 that's the *nimber* sequence to n=13; our n=18 result is a win/loss OUTCOME, and an even first-player win even
 contradicts A344227's conjectured even→0 pattern. A real contribution needs the full nimber n=14..18 —
 **n=14..17 DONE: G = 0, 1, 0, 2 via the heap-sum `queens nimber` engine
-([handoff](notes/handoffs/2026-07-01-queens-nimber-a344227.md)); G(17)=2 VERIFIED 2026-07-07 (breaks the odd→1 pattern); G(18) remains. Box note 2026-07-07: a sum-free z5 run occupies the box — keep side compute small-memory single-core until it finishes.** See the umbrella's
+([handoff](notes/handoffs/2026-07-01-queens-nimber-a344227.md)); G(17)=2 VERIFIED 2026-07-07 (breaks the odd→1 pattern); G(18) remains. Box note 2026-07-07 (updated): the z5 run was KILLED 2026-07-07 with no verdict (answered-by-analogy-to-p=11; datapoint in the sumfree-compute handoff) — the small-compute-only constraint is lifted.** See the umbrella's
 2026-06-28 OEIS note + its 2026-07-01 update.) **`go`.**
 
 **Node-Kayles open-problem exploration (2026-07-04):** umbrella/entry point =

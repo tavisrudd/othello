@@ -871,6 +871,25 @@ tool is a standalone Python script). Verifier self-validated on the mod-6 theore
 (adaptive safe-class) the `--6` structural facts — the win is adaptive, backbone-less, obstruction on the
 `⟨socle-line⟩` fibers; (c) do NOT re-run mirror/pairing (closed 3 ways) or the `p=11` brute solve (OOMs).
 
+**2026-07-07 — `Z3³×Z5` brute run KILLED at ~28h: answered-by-analogy-to-p=11, compute-infeasible
+bucket.** The `./sumfree 3,3,3,5 --par-ply 10` run was stopped deliberately (user-approved) after
+100,635s with **no verdict and no visible ceiling**. Final counters (full log:
+[`../2026-07-06-z3cubed-z5.log`](../2026-07-06-z3cubed-z5.log)): **nodes = 106,025,946, memo =
+98,830,595**, RSS fixed 4,712 MB. Kill rationale, from a ~4h sampling window before the decision:
+- **Redundancy ratio flat at ~1.07×** (1.0704 → 1.0716 → 1.0721 → 1.0715 across 84.7k→99.0k s) —
+  just the parallel fork's re-expansion tax (matches the earlier-measured ~1.1× at par-ply=10), not
+  transposition reuse forming; ~93% of every new node was still a first-time canonical position.
+- **Growth rate flat** (~944 nodes/s, ~3.4M/h) with no deceleration; a P-proof gets no early α-β
+  cutoff, so no structural slowdown before actual exhaustion.
+- **Precedent:** the p=11 Lemma A/B probes on `Z3²×Z11` (|G|=99, smaller group) ran to 188M/197M
+  canonical nodes with zero convergence and were declared compute-infeasible; z5 (|G|=135, larger
+  |Aut|) would have hit that checkpoint in ~1 more day with no more reason to converge.
+**Consequence:** the `r=3` outcome datapoint stays OPEN by brute force — deciding between the two
+laws (alternation ⇒ N vs monotone-resource ⇒ "N iff r=1" ⇒ P) shifts entirely to **Tactic 2,
+induction on `r`** (Codex lane), which never needed the brute verdict. Do not relaunch this run
+as-is; a verdict needs either the induction proof or a qualitatively tighter canonical key, not more
+hours. Box freed (~4.7 GB + all cores) — the small-compute-only constraint on side work is lifted.
+
 **Handoff Note — session `2026-07-06--4` (`b54507bd-cf0d-4ead-83c8-227b2f0cfacc`), `mi`.** New files (mine only):
 `../2026-07-06-r32-residual-mirror.py` (validated mirror verifier + rank/search modes), the `★ UPDATE` banner in
 `../2026-07-06-sumfree-proof-tactics-litsearch.md`, this `--6` handoff block + the revised RESUME-HERE. **Left
