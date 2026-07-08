@@ -130,6 +130,52 @@ def HyperbolaNormalFormStatement : Prop :=
             HyperbolaFits (K := K) S rho' A' B' ->
               rho' = rho ∧ A' = A ∧ B' = B
 
+omit [Fintype K] in
+theorem hyperbolaFits_card_three_B_ne_zero {S : Finset (GridPoint K)} {rho A B : K}
+    (hcard : S.card = 3) (hS : GridCap (K := K) S)
+    (hfit : HyperbolaFits (K := K) S rho A B) :
+    B ≠ 0 := by
+  intro hB0
+  obtain ⟨a, b, c, hab, hac, hbc, rfl⟩ := Finset.card_eq_three.mp hcard
+  have haOn : OnHyperbola (K := K) rho A B a := hfit a (by simp)
+  have hbOn : OnHyperbola (K := K) rho A B b := hfit b (by simp)
+  have hcOn : OnHyperbola (K := K) rho A B c := hfit c (by simp)
+  have ha : a.1 = rho ∨ a.2 = A := by
+    unfold OnHyperbola at haOn
+    rw [hB0] at haOn
+    rcases mul_eq_zero.mp haOn with hrow | hcol
+    · exact Or.inl (sub_eq_zero.mp hrow)
+    · exact Or.inr (sub_eq_zero.mp hcol)
+  have hb : b.1 = rho ∨ b.2 = A := by
+    unfold OnHyperbola at hbOn
+    rw [hB0] at hbOn
+    rcases mul_eq_zero.mp hbOn with hrow | hcol
+    · exact Or.inl (sub_eq_zero.mp hrow)
+    · exact Or.inr (sub_eq_zero.mp hcol)
+  have hc : c.1 = rho ∨ c.2 = A := by
+    unfold OnHyperbola at hcOn
+    rw [hB0] at hcOn
+    rcases mul_eq_zero.mp hcOn with hrow | hcol
+    · exact Or.inl (sub_eq_zero.mp hrow)
+    · exact Or.inr (sub_eq_zero.mp hcol)
+  rcases ha with haRow | haCol
+  · rcases hb with hbRow | hbCol
+    · have hrow : a.1 = b.1 := by rw [haRow, hbRow]
+      exact hab (hS.1.1 (by simp) (by simp) hrow)
+    · rcases hc with hcRow | hcCol
+      · have hrow : a.1 = c.1 := by rw [haRow, hcRow]
+        exact hac (hS.1.1 (by simp) (by simp) hrow)
+      · have hcol : b.2 = c.2 := by rw [hbCol, hcCol]
+        exact hbc (hS.1.2 (by simp) (by simp) hcol)
+  · rcases hb with hbRow | hbCol
+    · rcases hc with hcRow | hcCol
+      · have hrow : b.1 = c.1 := by rw [hbRow, hcRow]
+        exact hbc (hS.1.1 (by simp) (by simp) hrow)
+      · have hcol : a.2 = c.2 := by rw [haCol, hcCol]
+        exact hac (hS.1.2 (by simp) (by simp) hcol)
+    · have hcol : a.2 = b.2 := by rw [haCol, hbCol]
+      exact hab (hS.1.2 (by simp) (by simp) hcol)
+
 omit [Fintype K] [DecidableEq K] in
 theorem hyperbolaConic_nondegenerate {rho A B : K} (hB : B ≠ 0) :
     (hyperbolaConic (K := K) rho A B).Nondegenerate := by
