@@ -313,7 +313,7 @@ positions via `gridSymmetry_isP_image` transport. Task:
 
 Report file: `notes/2026-07-07-codex-anchored-cert-report.md`.
 
-## C18. ML feature attribution on the on-conic value moduli (GATED on C15's report)
+## C18. ML feature attribution on the on-conic value moduli (GATED on C15's report) [REPORTED 2026-07-08]
 
 Do NOT start until `notes/2026-07-07-codex-pgl2-orbit-census-q11-19.md` exists — its per-q
 orbit-bucket tables ARE the training data. Purpose: a disciplined, interpretable-models pass
