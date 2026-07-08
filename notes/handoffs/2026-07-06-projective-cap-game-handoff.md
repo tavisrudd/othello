@@ -5,7 +5,7 @@ Date: 2026-07-06.
 ## Status table — PG(2,q) value + proof state
 
 **KEEP THIS TABLE UP TO DATE** — update it in the same commit as any session block / review
-that changes a cell (last updated 2026-07-08, C29–C32 queued).
+that changes a cell (last updated 2026-07-08, C32 v2 design deepening).
 
 | q                | Value | Computational evidence                                        | Lean proof status                                                                                     | Remaining gap                                                    |
 |------------------|-------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
@@ -19,7 +19,7 @@ that changes a cell (last updated 2026-07-08, C29–C32 queued).
 | 17               | P     | esc campaign (gate discharged, C3); S4 buckets mixed 5P/5N    | none                                                                                                     | cert book queued (C30, route-C phase 5); mixed buckets make it the hard *mechanism* column |
 | 19               | P     | esc campaign                                                  | none                                                                                                     | cert book queued (C30)                                            |
 | 23               | **?** | not computed (C21: esc class 0 aborted at the 200M-memo cap, >36 min — campaign blocked; S₄-rooted bucket census = C29) | none                                                                                                     | the live falsification watch — any esc class at 0 kills the conjecture |
-| all odd q        | conj. P | no counterexample through q=19                              | frame reduction + odd-escape composition are unconditional rank-3 theorems; the per-q escape input is what's missing | a uniform mechanism — post-C20 that means strategy-level (second-intrusion lemma in defect form), not a snapshot law |
+| all odd q        | conj. P | no counterexample through q=19                              | frame reduction + odd-escape composition are unconditional rank-3 theorems; the per-q escape input is what's missing | a uniform mechanism — post-C20 that means strategy-level: second-intrusion lemma in defect form, plus the untried composite-mirror plane variant (C32 v2 step 1, design note 2026-07-08) |
 
 Scoreboard reading: **closed** — all even q, plus odd q=5, 7, 11. **Certificate-route feasible
 but ungated** — q=13 (file split; staged build = C30 step 1), q=9 and q=3 (small; q=3 optional
@@ -270,7 +270,7 @@ free-large / trace variants).
   second replies are game-equivalent** (identical Grundy). This kills the "classify winning second
   replies" deliverable — they are all the same value. Orbit branching starts only at cap size >
   `m+2`.
-- **q=2 column should now be a Lean theorem, not a compute import.** `PG(m,2)` cap game is the
+- **q=2 column is now a Lean theorem, not a compute import.** `PG(m,2)` cap game is the
   `F_2^{m+1}` sum-free/nofil game on nonzero vectors. The right proof is the existing sum-free
   spare-order-two translation mirror, not a linear projective involution: after P1 plays `a`,
   choose `b ≠ a`, set `c = a+b`; the third point `c` on the line `{a,b,c}` is self-blocked, and
@@ -280,6 +280,12 @@ free-large / trace variants).
   `PG(m,2) ≃ F_2^{m+1} \ {0}`. Target statement:
   `Projective.InitialPStatement (K := ZMod 2) (V := V)` from `2 ≤ Module.finrank (ZMod 2) V`
   (`PG(n,2)` for `n ≥ 1`). Rank `1`/`PG(0,2)` is correctly excluded: it has one point and is N.
+  **Lean status (2026-07-08): DONE** in
+  [`../../lean/ProjectiveCap/Binary.lean`](../../lean/ProjectiveCap/Binary.lean), with
+  `Projective.initialPStatement_binary_of_finrank_ge_two` and
+  `Projective.initialPStatement_binary_of_projectiveDim_ge_one`.  The proof bridge uses
+  `binaryPointEquivNonzero`, `binary_nonzeroValid_iff_cap`, and
+  `Sumfree.Game.nonzero_initial_isP_zmod2_of_finrank_ge_two`.
 - Literature guard: Clark--Mancini--Van Hook's accessible abstract is about partizan misere
   tic-tac-toe / avoidance on projective binary Steiner triple systems, where players own colored
   points and the first monochromatic block loses. That is not our impartial shared nofil game.
@@ -290,9 +296,8 @@ free-large / trace variants).
 
 ### R6. Reprioritized sequence
 
-0. Formalize `PG(n,2)` for every `n ≥ 1` via the binary projective-to-sum-free bridge and the
-   existing spare-order-two translation mirror. This supersedes the old compute-import plan for
-   the q=2 column.
+0. ~~Formalize `PG(n,2)` for every `n ≥ 1` via the binary projective-to-sum-free bridge and the
+   existing spare-order-two translation mirror.~~ **DONE 2026-07-08**; theorem names above.
 1. Solve `PG(2,q)` for `q=3,5,7,8,9` exactly — falsification test for the q-odd case.
 2. Write the q-even planar lemma (R3) + verify on `PG(2,{2,4,8})`.
 3. Attack the q-odd kernel (R4): handle the center move / the two burned-direction lines.
@@ -1261,13 +1266,39 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    vector dim odd) ⇒ single-map mirrors dead, but a hyperplane `H ≅ PG(2m−1,q)` carries the
    C25 elliptic involution and the complement is affine — so composite/adaptive mirrors are
    the natural shape, with C27's mirror-chord condition as the exact coupling obstruction
-   (affine translation chords pass through the direction point `[v] ∈ H`). Deliverable = a
+   (affine mirror chords each carry one direction point of `H`). Deliverable = a
    stuck-free strategy simulation over ALL P1 play (the q-even planar verification pattern):
    any stuck-free candidate is a theorem candidate for all even dimensions at odd q — which
    would leave PLANES as literally the only open boards; failures yield the `Obs` histogram
    one dimension up. Deferred from the same scan: NK pairing-lemma cross-pollination on the
    union-matching residual — overlaps C28 and targets the restricted Grundy (not the
    undecided zone part); revisit after C28 + C31 report.
+20. **C32 DEEPENED to v2 (Fable, 2026-07-08) — the composite mirror's shape is FORCED, and
+   the plane variant is genuinely untried.** Full analysis in
+   [`2026-07-08-evendim-composite-mirror-design.md`](../2026-07-08-evendim-composite-mirror-design.md).
+   Corrections + derivations: (a) the v1 candidate "translation `τ_v` on the affine part" was
+   an ERROR — translations have order p, not 2, for odd q; moreover NO fpf affine involution
+   of the odd-count affine part exists at all (any affine involution has a `q^{dim U₊}`-point
+   fixed subspace), so the affine component is forced to point-reflection `σ_c` (midpoint-
+   seeded, center self-blocks) or reflection towers. (b) Poison structure: a selected `h ∈ H`
+   poisons the pencil line through `c` in direction `h` (a chord meets `H` once, so
+   ρ-invariance cannot double it); but P2's ρ-discipline makes `S ∩ H` ρ-invariant, so
+   poisoned pencils come in ρ-PAIRS — the **double-pencil-burn** exception rule (answer the
+   first `h`-pencil entry in the `ρh`-pencil; both lines die whole: even, σ-invariant
+   removal) is the candidate patch. (c) H-internal soundness = C25 restricted to `H` (H-pair
+   chords stay in `H`). (d) What remains is a finite list of LOCAL escape-like obligations
+   (exception-cell existence chief among them) — the same reduction shape route C used, now
+   for the strategy itself. (e) **The plane transfer is untried**: the 2026-07-05 σ_c failure
+   was post-frame-reduction (burned opening pair + partial-permutation constraints); this
+   composite never burns an opening pair, and `|S ∩ ℓ| ≤ 2` caps the poison at two pencils —
+   one plane obligation (ℓ-reply existence) already falls to a max-cap counting argument.
+   C32 v2 reordered: plane q=9/11/13 FIRST (ground truth + mandatory diff against the grid
+   findings), then PG(4,3). Unlock ladder: PG(4,3) stuck-free ⇒ all even dims odd q modulo
+   local obligations (with C25 + even-q: everything but planes); plane stuck-free at q=11/13
+   ⇒ candidate uniform odd-plane mechanism ⇒ the full conjecture; failure ⇒ the failing
+   obligation becomes a better-posed open kernel than "find a mechanism". Lean distance is
+   short in every branch (C27 step lemma + C25 ρ + formalized midpoint trick + C19 cert tech
+   for exception tables).
 
 ## Handoff Summary
 

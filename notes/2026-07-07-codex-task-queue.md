@@ -525,7 +525,7 @@ proof-side context loads per [named-expert personas](2026-07-07-named-expert-per
 projective status lives in `handoffs/2026-07-06-projective-cap-game-handoff.md` (session-10
 block: order-5 and order-7 planes proven, dead-hypothesis routes guarded).
 
-## C24. Binary projective nofil theorem in Lean: `PG(n,2)=P` for every `n ≥ 1`
+## C24. Binary projective nofil theorem in Lean: `PG(n,2)=P` for every `n ≥ 1` [REPORTED 2026-07-08]
 
 Goal: close the whole q=2 projective column by proof, not computation.
 
@@ -560,6 +560,13 @@ Prior-art guard: Clark--Mancini--Van Hook study a different game according to th
 abstract: partizan colored misere tic-tac-toe / avoidance, first player to complete a
 monochromatic block loses. Verify the full paper before writing novelty language, but do not
 cite it as covering impartial nofil.
+
+Report: [`2026-07-08-codex-binary-projective-lean.md`](2026-07-08-codex-binary-projective-lean.md).
+Lean status: **DONE** in `ProjectiveCap/Binary.lean`. Main theorem names:
+`Projective.initialPStatement_binary_of_finrank_ge_two` and
+`Projective.initialPStatement_binary_of_projectiveDim_ge_one`; support bridge:
+`binaryPointEquivNonzero`, `binary_nonzeroValid_iff_cap`, and
+`Sumfree.Game.nonzero_initial_isP_zmod2_of_finrank_ge_two`.
 
 ## C25. Elliptic-involution theorem in Lean: `PG(2m−1,q)=P` for odd `q` [REPORTED 2026-07-08]
 
@@ -798,39 +805,56 @@ deliverable.
 
 Report file: `notes/2026-07-08-codex-zone-steering-census.md`.
 
-## C32. Even-dimensional composite mirror — stuck-free probe on PG(4,3)
+## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
-Context: with `PG(2m−1,q)` closed (C25) and planes the declared kernel, the even dimensions
-`PG(2m,q)`, m ≥ 2, odd q are open cells no plan touches. They have odd point count (burn-a-move,
-like planes) and NO fpf collineation involution (vector dim odd — R0), so a single-map mirror
-is dead. But unlike planes they contain a huge structured mirror: an elliptic involution `ρ` on
-a hyperplane `H ≅ PG(2m−1,q)` pairs H entirely, leaving the complement `AG(2m,q)` (even count)
-to an affine-style pairing. The coupling obstruction is exactly C27's mirror-chord condition
-made concrete: an affine translation chord in direction `v` passes through the direction point
-`[v] ∈ H`, so composites fail (only?) where the regions couple. If ANY composite verifies
-stuck-free, that is a theorem candidate for ALL even dimensions at odd q — which would leave
-planes as literally the only open boards. A failure's obstruction histogram is the C28 `Obs`
-methodology one dimension up. Cheap compute either way.
+**READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**
+— the v2 design analysis. It corrects the v1 spec (translations are NOT involutions for odd
+q — order p; the affine component is FORCED to be point-reflection/tower shape since no fpf
+affine involution exists on the odd-count affine part), derives the poison structure (a
+selected `h ∈ H` poisons the pencil line through the center `c` in direction `h`; ρ-invariance
+of `S ∩ H` makes poisoned pencils come in ρ-pairs), and specifies the **double-pencil-burn
+exception rule** (first entry into the `h`-pencil is answered in the `ρh`-pencil; both lines
+die whole — even, σ-invariant removal). H-internal soundness is C25 restricted to H. What
+remains open is a finite list of LOCAL escape-like obligations (design note §4), chiefly
+exception-cell existence — the probe measures exactly those.
 
-1. **Harness:** PG(4,3) (121 points, max cap 20) legality + a deterministic-P2 strategy
-   simulator verifying stuck-freeness against ALL P1 play (the exact pattern that sealed the
-   q-even planar theorem: 0 illegal replies over the reachable tree). Memoize on reachable
-   positions (post-reply positions are pairing-invariant ⇒ keyed by chosen pairs + parity);
-   **sizing gate:** abort + report if reachable distinct positions exceed ~10⁸ or wall
-   exceeds 2h per candidate — partial verification is NOT a proof, say so plainly.
-2. **Candidate composites to enumerate (document each precisely):** (i) static `ρ` on H +
-   translation `τ_v` on the affine part, all choices of nonsquare class for `ρ` and direction
-   `v` up to symmetry — expected failure channel: P1 selects `[v]`; (ii) `v` chosen
-   adaptively after P1's opening (the burn move protects `[v]` or makes it dead); (iii) an
-   affine move-then-mirror on the complement (the affine odd-q self-blocking-midpoint trick)
-   composed with `ρ` on H. Add better candidates if the failures suggest them — record all.
-3. **Report per candidate:** stuck-free verdict; if failed, the obstruction histogram by type
-   (cross-region chord through `[v]`, in-H chord, affine chord through a selected affine
-   point, invariance break at the opening) + the minimal failing line verbatim; if ANY
-   candidate is stuck-free, the full strategy spec + the proof-kernel sketch in the
-   C27 pair-extension vocabulary (do NOT start Lean — that would be its own task).
-4. Cross-checks: point/line counts of PG(4,3) against closed forms; the cap checker against
-   an independent rank-based collinearity test; `ρ` verified fpf + involutive by enumeration.
-5. Budget: hard 8h wall, single-core, ≤ 8 GB.
+Context: with `PG(2m−1,q)` closed (C25) and even q closed, the open boards are the odd-q even
+dimensions: planes AND `PG(2m,q)`, m ≥ 2 (the latter in no plan before this). Both have odd
+point count and no fpf collineation involution (R0), so the composite (elliptic `ρ` on a
+hyperplane `H` + adaptive point reflection `σ_c` on the affine complement + double-burn
+exceptions) is the natural — and per the design note, essentially forced — mirror shape. The
+**plane variant is genuinely untried**: the 2026-07-05 σ_c failure was post-frame-reduction
+(burned opening pair, partial-permutation row/col constraints); this composite never burns an
+opening pair (P2 seeds `c` with its own reply, midpoint trick) and `|S ∩ ℓ| ≤ 2` caps the
+poison at two pencils. If ANY candidate verifies stuck-free at PG(4,3), that is a theorem
+candidate for ALL even dimensions at odd q; if the plane variant verifies at q = 11/13, it is
+a candidate uniform odd-plane mechanism. A failure's obstruction histogram is the C28 `Obs`
+methodology in the sharper pencil vocabulary. Cheap compute either way.
+
+1. **Plane first (q = 9, 11, 13):** implement the composite as a P2 POLICY (bulk mirror +
+   seed rule + ℓ-reply rule + double-burn exceptions + adaptive `ℓ`/`c`/`h'` choices — design
+   note §7), verify stuck-freeness against ALL P1 play. Ground truth is known (all P), so a
+   failure is an exact counterexample trace. **Mandatory reporting: the diff against
+   `2026-07-05-qodd-central-symmetry-findings.md`** — what the grid σ_c patch lacked that
+   this has, and whether the failure (if any) is the same mechanism.
+2. **Then PG(4,3)** (121 points, max cap 20): same policy with `ρ` = C25's elliptic involution
+   on `H ≅ PG(3,3)`, verified fpf + involutive by enumeration. Memoize on reachable
+   positions; **sizing gate:** abort + report if reachable distinct positions exceed ~10⁸ or
+   wall exceeds 2h per candidate — partial verification is NOT a proof, say so plainly.
+3. **Candidate family (document each precisely):** (i) point-reflection composite +
+   double-burn (primary); (ii) reflection towers (design note §1 — per-level confined chord
+   directions, per-level self-blocking); (iii) variations of the adaptive choices and
+   exception-cell selection heuristics. Add better candidates if the failures suggest them —
+   record all.
+4. **Report per candidate:** stuck-free verdict; obligation failures (design note §4) as
+   first-class outcomes with the obstruction histogram by type (poisoned-pencil entry with no
+   legal exception cell, ℓ/H-reply nonexistence, seed failure, in-H chord, invariance break)
+   + the minimal failing line verbatim; if ANY candidate is stuck-free, the full strategy
+   spec + the proof-kernel sketch in the C27 pair-extension vocabulary (do NOT start Lean —
+   that would be its own task).
+5. Cross-checks: point/line counts against closed forms; the cap checker against an
+   independent rank-based collinearity test; plane runs cross-checked against the solved
+   ladder values.
+6. Budget: hard 8h wall, single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-08-codex-evendim-composite-mirror.md`.
