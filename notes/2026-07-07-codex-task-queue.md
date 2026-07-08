@@ -392,6 +392,14 @@ law lives in the game-labeled intruder census, which C18 never computed. Build i
    parity, kill-set size. For each N-valued intruded child (mover-after-x wins), classify the
    winning replies: conic cell vs second intruder `x'`; for second-intruder winning replies
    record `ord(σ_x σ_{x'})` and its divisor class vs q−1 / q+1.
+   **AMENDED 2026-07-08 (session 11, `2026-07-08-nk-involution-residual.md`): also compute,
+   per reply state, the Node-Kayles DEFECT SPECTRUM** — the component path-length multiset of
+   the union-matching graph on live conic params (free even cycles are Grundy-0, droppable),
+   and the restricted-Grundy XOR (Dawson A002187 path values over the spectrum). Reference
+   implementation: `spectrum`/`dawson_tables` in `2026-07-08-nk-involution-check.py`
+   (machine-validated NK1–NK3). The upgraded question (a): does (defect-XOR, intruder-zone
+   size/parity) decide the full-game value of the reply state? This is the leading
+   hypothesis — test it FIRST.
 3. **The discriminating questions (report tables + verdicts, null is a valid deliverable):**
    (a) does `(τ_x, τ_played, M parity)` alone decide P/N of `S₄+x` within a bucket? across
    buckets? across q? (b) if not, does the `ord(σ_x σ_{x'})` census decide it? (c) do the

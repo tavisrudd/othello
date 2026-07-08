@@ -76,6 +76,18 @@ any quadratic-character law on the conic (q=13 all-P vs q=17 1-of-13 is incompat
 fixed character formula), off-conic escape parity (fails q=13). Tool: `feat` mode in
 `2026-07-06-grid-cap-solver.rs`.
 
+**PROGRESS (2026-07-08, session 11 — ★ NODE-KAYLES REFRAMING):** full writeup
+[`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md). The
+conic-restricted residual with intruder set X IS Node-Kayles on the union of |X| involution
+matchings (kill-set law, machine-exact); two-intruder components are dihedral-orbit cycles
+`C_{2d}`, `d = ord(σ_x σ_{x'})` | q±1 (or p); and **every even cycle is Grundy-0**, so the
+value reduces to Dawson path-XOR over the O(1)-per-intruder defect skeleton — the candidate
+mechanism behind the erratic Θ(q²) near-cancellation, and why static 6-subset dictionaries
+(C18: null, reviewed) had to fail. q=11 census: N-valued on-conic S₄ win ONLY by intruding;
+self-polar-answer and conic-answer defenses both refuted (the defense is inherently
+multi-intruder). Next: C20 (Codex) tests "defect-XOR decides"; Fable lane = last-defect
+endgame lemma, then the second-intrusion lemma in defect form.
+
 ### (C) Per-q Lean certificates — guaranteed formal value
 The computed ladder `q = 11..19` can be made machine-checked without new mathematics: for each
 canonical size-3 class, emit a witness escape cell plus a P-certificate of the size-4 child

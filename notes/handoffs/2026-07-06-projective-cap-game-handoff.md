@@ -1053,6 +1053,24 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    (esc mode's q=17/19 gate is DISCHARGED per C3, and the box is now free — queens G(17) done,
    sum-free z5 terminated). Fable lane pivots to attack option (ii): the second-intrusion answer
    lemma.
+14. **★ SESSION 11 (Fable, 2026-07-08) — THE CONIC RESIDUAL IS NODE-KAYLES; the cycle bulk
+   is Grundy-DEAD.** Full writeup [`2026-07-08-nk-involution-residual.md`](../2026-07-08-nk-involution-residual.md),
+   verifier `2026-07-08-nk-involution-check.py` (ALL OK, q=11 exhaustive + q=13 sampled).
+   (a) **Kill-set law** (Lemma V): playing a conic cell kills exactly its σ_x-images, one per
+   intruder ⇒ conic-restricted play = Node-Kayles on a static union of |X| matchings — the
+   cap-game residual joins the project's Node-Kayles program. (b) **Spectrum law** (Lemma VI):
+   two-intruder components on P¹ = free-orbit cycles C_{2d}, d = ord(σ_xσ_{x'}) ∈
+   divisors(q±1) ∪ {p}, + the xx'-secant K₂ + tangency-ended paths. (c) **★ Cycle deadness**
+   (Cor. VII): G(C_even) = 0 ALWAYS (Dawson zeros are even; DP-verified to 400) ⇒ the Θ(q)
+   cycle bulk cancels exactly and the restricted value = Dawson path-XOR of the O(1)-per-
+   intruder DEFECT SKELETON (tangency paths, secant pair, kill-scars) — a mechanism-level
+   candidate for the observed erratic near-cancellation, and the reason static 6-subset
+   feature dictionaries (C18) had to fail. Grundy equality machine-checked exactly (NK3).
+   (d) **q=11 full-game census**: N-valued on-conic S₄ win ONLY by intruding (300/300);
+   self-polar-answer (H1) and conic-answer (H2) defense mechanisms both REFUTED — the
+   defense is inherently multi-intruder. C20 amended: defect-spectrum + restricted-Grundy
+   features, "defect-XOR decides?" is the lead hypothesis. Fable next: last-defect endgame
+   lemma; second-intrusion lemma in defect form after C20's data.
 
 ## Handoff Summary
 
