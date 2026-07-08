@@ -313,6 +313,40 @@ positions via `gridSymmetry_isP_image` transport. Task:
 
 Report file: `notes/2026-07-07-codex-anchored-cert-report.md`.
 
+## C18. ML feature attribution on the on-conic value moduli (GATED on C15's report)
+
+Do NOT start until `notes/2026-07-07-codex-pgl2-orbit-census-q11-19.md` exists — its per-q
+orbit-bucket tables ARE the training data. Purpose: a disciplined, interpretable-models pass
+over the (ON) value function to generate a falsifiable cross-q law candidate for the
+two-plus-intruder residual (session-9 §6). This is the knot-theory template: train → attribute
+→ extract candidate invariant → hand it to the proof lane. **Total compute budget: hard 8h
+wall; phase 1 should be well under 1h.**
+
+Phase 1 (the deliverable):
+1. Build one table: every PGL-orbit bucket of on-conic S₄ 6-subsets `{∞,0,t₁..t₄}` for
+   q ∈ {11,13,17,19} (from C15 + the C5 q=17 data), label = game value.
+2. Feature dictionary — MUST include arithmetic-of-q features, not just configuration
+   features (the character-law falsification in `2026-07-07-conic-localization-onconic-escape.md`
+   §3.3 says configuration-only formulas are dead): cross-ratio invariants of the 6-subset;
+   quadratic-character vector; tangency data; and the §6 order-theoretic features —
+   `ord(σ σ')` in PGL(2,q) for canonical involution pairs fixing 2-subsets of the 6 points,
+   gcd/divisibility of those orders against q−1 and q+1, internal/external type counts.
+3. Models: decision trees (depth ≤ 3), sparse logistic/L1, small symbolic regression over the
+   dictionary. **Protocol: fit on q ∈ {11,13}, test on {17,19} — NEVER fit on all four.**
+   Also report the reverse split. Any candidate must correctly place the q=17 min-escape
+   classes (onP=1) and the q ∈ {13,19} all-P columns.
+4. Report: the table (verbatim), feature rankings, every candidate law with its held-out
+   accuracy, and explicit falsifications. A null result ("no small law separates") is a
+   valid deliverable — report it plainly.
+
+Phase 2 (OPTIONAL, only inside the remaining budget): witness/reply priority heuristic from
+the phase-1 features, then ONE q=23 size-3 class per-class escape probe with a 1h wall cap;
+extrapolate total q=23 cost from that single class and STOP — report the projection, do not
+run the campaign. If the single-class probe exceeds its 1h cap, kill it and report where it
+was (this is itself the sizing datum).
+
+Report file: `notes/2026-07-07-codex-ml-moduli-attribution.md`.
+
 ## Standing
 
 ~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane
