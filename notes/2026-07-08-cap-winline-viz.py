@@ -315,6 +315,7 @@ class ResidualGridGame:
 
         return g((1 << n) - 1)
 
+    @lru_cache(maxsize=None)
     def state_features(self, mask: int) -> dict[str, object]:
         legal = self.legal_mask(mask)
         live = frozenset(t for t, c in self.conic_cell.items() if legal & (1 << c))
@@ -331,24 +332,37 @@ class ResidualGridGame:
         }
 
 
-def choose_winning_move(game: ResidualGridGame, mask: int, prefer_intruder: bool = False) -> int:
+def winning_moves(game: ResidualGridGame, mask: int, prefer_intruder: bool = False,
+                  only_intruder: bool = False) -> list[int]:
     legal = [c for _bit, c in game.iter_bits(game.legal_mask(mask))]
     if prefer_intruder:
         legal.sort(key=lambda c: (game.is_conic_cell(c), c))
-    for c in legal:
-        if not game.value(mask | (1 << c)):
-            return c
-    raise RuntimeError(f"no winning move from q={game.q} mask={mask:x}")
+    return [
+        c for c in legal
+        if (not only_intruder or not game.is_conic_cell(c))
+        and not game.value(mask | (1 << c))
+    ]
 
 
-def extend_from_p_position(game: ResidualGridGame, mask: int) -> list[Move]:
+def choose_winning_move(game: ResidualGridGame, mask: int, prefer_intruder: bool = False,
+                        only_intruder: bool = False, choice: int = 0) -> int:
+    wins = winning_moves(game, mask, prefer_intruder=prefer_intruder, only_intruder=only_intruder)
+    if not wins:
+        raise RuntimeError(f"no winning move from q={game.q} mask={mask:x}")
+    return wins[choice % len(wins)]
+
+
+def extend_from_p_position(game: ResidualGridGame, mask: int,
+                           opp_choices: tuple[int, ...] = ()) -> list[Move]:
     assert not game.value(mask)
     moves: list[Move] = []
+    step = 0
     while True:
         legal = [c for _bit, c in game.iter_bits(game.legal_mask(mask))]
         if not legal:
             return moves
-        opp = legal[0]
+        pick = opp_choices[step] if step < len(opp_choices) else 0
+        opp = legal[pick % len(legal)]
         assert game.value(mask | (1 << opp))
         moves.append(Move(opp, "opp"))
         mask |= 1 << opp
@@ -356,9 +370,10 @@ def extend_from_p_position(game: ResidualGridGame, mask: int) -> list[Move]:
         moves.append(Move(reply, "reply"))
         mask |= 1 << reply
         assert not game.value(mask)
+        step += 1
 
 
-def defense_line(game: ResidualGridGame) -> Line:
+def defense_line(game: ResidualGridGame, variant: int = 0) -> Line:
     assert not game.value(0)
     first = 0
     mask = 1 << first
@@ -366,14 +381,18 @@ def defense_line(game: ResidualGridGame) -> Line:
     reply = choose_winning_move(game, mask)
     moves.append(Move(reply, "reply"))
     mask |= 1 << reply
-    moves.extend(extend_from_p_position(game, mask))
+    moves.extend(extend_from_p_position(game, mask, (variant,)))
+    ident = f"defense-q{game.q}" if variant == 0 else f"defense-q{game.q}-v{variant + 1}"
+    note = "Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry."
+    if variant:
+        note += f" Variant {variant + 1} chooses opponent branch index {variant} at the next P-position."
     return Line(
-        ident=f"defense-q{game.q}",
+        ident=ident,
         q=game.q,
         seed_mask=0,
         moves=moves,
         start_value="P",
-        note="Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry.",
+        note=note,
     )
 
 
@@ -381,23 +400,31 @@ def bucket_t4(bucket) -> tuple[int, ...]:
     return tuple(sorted(x for x in bucket.sample_six if x not in (INF, ZERO)))
 
 
-def intrusion_line(game: ResidualGridGame, bucket, ident: str) -> Line:
+def intrusion_line(game: ResidualGridGame, bucket, ident: str, variant: int = 0) -> Line:
     t4 = bucket_t4(bucket)
     seed = game.conic_mask_from_t4(t4)
     assert game.value(seed), (game.q, bucket)
-    first = choose_winning_move(game, seed, prefer_intruder=True)
+    first = choose_winning_move(
+        game, seed, prefer_intruder=True, only_intruder=True, choice=variant
+    )
     if game.is_conic_cell(first):
         raise RuntimeError(f"{ident}: selected winning move is conic, not intrusion")
     mask = seed | (1 << first)
     moves = [Move(first, "win-intrusion")]
     moves.extend(extend_from_p_position(game, mask))
+    note = (
+        f"N on-conic bucket, sample_six={bucket.sample_six}, "
+        f"size={bucket.size}, cls={bucket.sample_cls}."
+    )
+    if variant:
+        note += f" Variant {variant + 1} chooses winning intrusion index {variant}."
     return Line(
         ident=ident,
         q=game.q,
         seed_mask=seed,
         moves=moves,
         start_value="N",
-        note=f"N on-conic bucket, sample_six={bucket.sample_six}, size={bucket.size}, cls={bucket.sample_cls}.",
+        note=note,
     )
 
 
@@ -529,15 +556,21 @@ def emit_markdown(lines: list[Line], validations: dict[str, dict[str, object]],
         f"{line.ident}: `{games[line.q].cell_name(line.moves[0].cell)}`"
         for line in n_lines
     ]
+    defense_counts = Counter(line.q for line in defense)
+    intrusion_counts = Counter(line.q for line in n_lines)
     out.extend([
         "",
         "## First Observations",
         "",
+        f"- This sample has {len(defense)} residual-defense lines "
+        f"({dict(sorted(defense_counts.items()))}) and {len(n_lines)} N-bucket intrusion lines "
+        f"({dict(sorted(intrusion_counts.items()))}).",
         "- In every normalized residual defense line, the reply to `(0,0)` is `(1,1)`. "
-        "For q >= 7 the next displayed reply is the row/column swap `(2,3) -> (3,2)`; "
-        "q=5 is the small-board exception in this deterministic lexicographic line.",
-        "- The q=9 and q=11 residual defenses both terminate after six affine plies, "
-        "so the displayed defense is still a short pairing/repair pattern rather than a long search tail.",
+        "The canonical q >= 7 lines then show the row/column swap `(2,3) -> (3,2)`; "
+        "the added variants deliberately branch away at that next P-position.",
+        "- The canonical q=9 and q=11 residual defenses terminate after six affine plies, "
+        "while the variants expose nearby shorter/longer endings such as q7-v2 at four plies "
+        "and q9-v2/q9-v3 at eight.",
         "- The N-bucket wins are visibly intrusion-led: "
         + ", ".join(first_intrusions) + ".",
         "- All displayed q=17 N-bucket lines finish at projective size 11 after five plies from the S4 root. "
@@ -567,6 +600,8 @@ def main() -> int:
     ap.add_argument("--feat11", default="notes/data/codex-feat11-c15.out")
     ap.add_argument("--feat17", default="notes/data/codex-feat17.out")
     ap.add_argument("--defense-qs", default="3,5,7,9,11")
+    ap.add_argument("--defense-variants", type=int, default=3)
+    ap.add_argument("--intrusion-variants", type=int, default=3)
     args = ap.parse_args()
 
     repo = Path(__file__).resolve().parents[1]
@@ -592,15 +627,30 @@ def main() -> int:
 
     lines: list[Line] = []
     for q in [int(x) for x in args.defense_qs.split(",") if x]:
-        lines.append(defense_line(game(q)))
+        seen = set()
+        for variant in range(args.defense_variants):
+            line = defense_line(game(q), variant)
+            sig = (line.seed_mask, tuple(mv.cell for mv in line.moves))
+            if sig in seen:
+                continue
+            seen.add(sig)
+            lines.append(line)
 
     q11_n = [b for b in buckets if b.q == 11 and b.label == "N"]
     for i, b in enumerate(q11_n, 1):
-        lines.append(intrusion_line(game(11), b, f"q11-N-bucket-{i}"))
+        seed = game(11).conic_mask_from_t4(bucket_t4(b))
+        wins = winning_moves(game(11), seed, prefer_intruder=True, only_intruder=True)
+        for variant in range(min(args.intrusion_variants, len(wins))):
+            ident = f"q11-N-bucket-{i}" if variant == 0 else f"q11-N-bucket-{i}-v{variant + 1}"
+            lines.append(intrusion_line(game(11), b, ident, variant))
 
     q17_n = [b for b in buckets if b.q == 17 and b.label == "N"]
     for i, b in enumerate(q17_n, 1):
-        lines.append(intrusion_line(game(17), b, f"q17-N-bucket-{i}"))
+        seed = game(17).conic_mask_from_t4(bucket_t4(b))
+        wins = winning_moves(game(17), seed, prefer_intruder=True, only_intruder=True)
+        for variant in range(min(args.intrusion_variants, len(wins))):
+            ident = f"q17-N-bucket-{i}" if variant == 0 else f"q17-N-bucket-{i}-v{variant + 1}"
+            lines.append(intrusion_line(game(17), b, ident, variant))
 
     validations = {line.ident: validate_line(game(line.q), line) for line in lines}
     out_path.write_text(emit_markdown(lines, validations, games), encoding="utf-8")

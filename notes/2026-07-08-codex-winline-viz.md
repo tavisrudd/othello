@@ -12,21 +12,41 @@ Validation gate: every move was replayed by a determinant-based cap checker, eve
 |---|---:|---|---:|---:|---|
 | `defense-q3` | 3 | P | 2 | 4 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. |
 | `defense-q5` | 5 | P | 4 | 6 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. |
+| `defense-q5-v2` | 5 | P | 4 | 6 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position. |
+| `defense-q5-v3` | 5 | P | 4 | 6 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position. |
 | `defense-q7` | 7 | P | 6 | 8 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. |
+| `defense-q7-v2` | 7 | P | 4 | 6 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position. |
+| `defense-q7-v3` | 7 | P | 6 | 8 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position. |
 | `defense-q9` | 9 | P | 6 | 8 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. |
+| `defense-q9-v2` | 9 | P | 8 | 10 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position. |
+| `defense-q9-v3` | 9 | P | 8 | 10 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position. |
 | `defense-q11` | 11 | P | 6 | 8 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. |
+| `defense-q11-v2` | 11 | P | 6 | 8 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position. |
+| `defense-q11-v3` | 11 | P | 6 | 8 | Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position. |
 | `q11-N-bucket-1` | 11 | N | 3 | 9 | N on-conic bucket, sample_six=(0, 7, 8, 9, 10, 'inf'), size=22, cls=0. |
+| `q11-N-bucket-1-v2` | 11 | N | 3 | 9 | N on-conic bucket, sample_six=(0, 7, 8, 9, 10, 'inf'), size=22, cls=0. Variant 2 chooses winning intrusion index 1. |
+| `q11-N-bucket-1-v3` | 11 | N | 3 | 9 | N on-conic bucket, sample_six=(0, 7, 8, 9, 10, 'inf'), size=22, cls=0. Variant 3 chooses winning intrusion index 2. |
 | `q17-N-bucket-1` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 4, 13, 14, 15, 'inf'), size=36, cls=0. |
+| `q17-N-bucket-1-v2` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 4, 13, 14, 15, 'inf'), size=36, cls=0. Variant 2 chooses winning intrusion index 1. |
+| `q17-N-bucket-1-v3` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 4, 13, 14, 15, 'inf'), size=36, cls=0. Variant 3 chooses winning intrusion index 2. |
 | `q17-N-bucket-2` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 2, 13, 14, 15, 'inf'), size=36, cls=0. |
+| `q17-N-bucket-2-v2` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 2, 13, 14, 15, 'inf'), size=36, cls=0. Variant 2 chooses winning intrusion index 1. |
+| `q17-N-bucket-2-v3` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 2, 13, 14, 15, 'inf'), size=36, cls=0. Variant 3 chooses winning intrusion index 2. |
 | `q17-N-bucket-3` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 6, 13, 14, 15, 'inf'), size=72, cls=0. |
+| `q17-N-bucket-3-v2` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 6, 13, 14, 15, 'inf'), size=72, cls=0. Variant 2 chooses winning intrusion index 1. |
+| `q17-N-bucket-3-v3` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 6, 13, 14, 15, 'inf'), size=72, cls=0. Variant 3 chooses winning intrusion index 2. |
 | `q17-N-bucket-4` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 1, 13, 14, 15, 'inf'), size=36, cls=0. |
+| `q17-N-bucket-4-v2` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 1, 13, 14, 15, 'inf'), size=36, cls=0. Variant 2 chooses winning intrusion index 1. |
+| `q17-N-bucket-4-v3` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 1, 13, 14, 15, 'inf'), size=36, cls=0. Variant 3 chooses winning intrusion index 2. |
 | `q17-N-bucket-5` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 3, 4, 5, 9, 'inf'), size=36, cls=2. |
+| `q17-N-bucket-5-v2` | 17 | N | 5 | 11 | N on-conic bucket, sample_six=(0, 3, 4, 5, 9, 'inf'), size=36, cls=2. Variant 2 chooses winning intrusion index 1. |
 
 ## First Observations
 
-- In every normalized residual defense line, the reply to `(0,0)` is `(1,1)`. For q >= 7 the next displayed reply is the row/column swap `(2,3) -> (3,2)`; q=5 is the small-board exception in this deterministic lexicographic line.
-- The q=9 and q=11 residual defenses both terminate after six affine plies, so the displayed defense is still a short pairing/repair pattern rather than a long search tail.
-- The N-bucket wins are visibly intrusion-led: q11-N-bucket-1: `(1,0)`, q17-N-bucket-1: `(2,1)`, q17-N-bucket-2: `(0,1)`, q17-N-bucket-3: `(2,6)`, q17-N-bucket-4: `(0,6)`, q17-N-bucket-5: `(8,8)`.
+- This sample has 13 residual-defense lines ({3: 1, 5: 3, 7: 3, 9: 3, 11: 3}) and 17 N-bucket intrusion lines ({11: 3, 17: 14}).
+- In every normalized residual defense line, the reply to `(0,0)` is `(1,1)`. The canonical q >= 7 lines then show the row/column swap `(2,3) -> (3,2)`; the added variants deliberately branch away at that next P-position.
+- The canonical q=9 and q=11 residual defenses terminate after six affine plies, while the variants expose nearby shorter/longer endings such as q7-v2 at four plies and q9-v2/q9-v3 at eight.
+- The N-bucket wins are visibly intrusion-led: q11-N-bucket-1: `(1,0)`, q11-N-bucket-1-v2: `(2,0)`, q11-N-bucket-1-v3: `(4,9)`, q17-N-bucket-1: `(2,1)`, q17-N-bucket-1-v2: `(6,5)`, q17-N-bucket-1-v3: `(6,15)`, q17-N-bucket-2: `(0,1)`, q17-N-bucket-2-v2: `(1,0)`, q17-N-bucket-2-v3: `(1,15)`, q17-N-bucket-3: `(2,6)`, q17-N-bucket-3-v2: `(7,14)`, q17-N-bucket-3-v3: `(8,1)`, q17-N-bucket-4: `(0,6)`, q17-N-bucket-4-v2: `(10,13)`, q17-N-bucket-4-v3: `(16,2)`, q17-N-bucket-5: `(8,8)`, q17-N-bucket-5-v2: `(11,15)`.
 - All displayed q=17 N-bucket lines finish at projective size 11 after five plies from the S4 root. The diagrams make the zone collapse easy to inspect against the C20 `defXOR` and zone-Grundy snapshots.
 
 ## Lines
@@ -104,6 +124,96 @@ infinity: row-dir=F col-dir=F     q=5
   4:   x   x   x   x   x
 ```
 
+### defense-q5-v2
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,4)` | N |
+| 4 | `reply` | `(4,2)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=21 edges=68 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=5
+       0   1   2   3   4
+  0:   z   z   z   z   z
+  1:   z   ·   z   z   z
+  2:   z   z   z   ·   z
+  3:   z   z   ·   z   z
+  4:   z   z   z   z   ·
+```
+after ply 2: value=P; spectrum=(('path', 2),); defXOR=1; zone=4 edges=5 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=5
+       0   1   2   3   4
+  0:   1   x   x   x   x
+  1:   x   2   x   x   x
+  2:   x   x   x   ·   z
+  3:   x   x   ·   x   z
+  4:   x   x   z   z   x
+```
+after ply 4: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=5
+       0   1   2   3   4
+  0:   1   x   x   x   x
+  1:   x   2   x   x   x
+  2:   x   x   x   x   3
+  3:   x   x   x   x   x
+  4:   x   x   4   x   x
+```
+
+### defense-q5-v3
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(3,2)` | N |
+| 4 | `reply` | `(4,3)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=21 edges=68 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=5
+       0   1   2   3   4
+  0:   z   z   z   z   z
+  1:   z   ·   z   z   z
+  2:   z   z   z   ·   z
+  3:   z   z   ·   z   z
+  4:   z   z   z   z   ·
+```
+after ply 2: value=P; spectrum=(('path', 2),); defXOR=1; zone=4 edges=5 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=5
+       0   1   2   3   4
+  0:   1   x   x   x   x
+  1:   x   2   x   x   x
+  2:   x   x   x   ·   z
+  3:   x   x   ·   x   z
+  4:   x   x   z   z   x
+```
+after ply 4: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=5
+       0   1   2   3   4
+  0:   1   x   x   x   x
+  1:   x   2   x   x   x
+  2:   x   x   x   x   x
+  3:   x   x   3   x   x
+  4:   x   x   x   4   x
+```
+
 ### defense-q7
 
 Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry.
@@ -168,6 +278,123 @@ infinity: row-dir=F col-dir=F     q=7
   4:   x   x   x   x   x   x   x
   5:   x   x   x   x   x   x   5
   6:   x   x   x   x   x   6   x
+```
+
+### defense-q7-v2
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,4)` | N |
+| 4 | `reply` | `(3,2)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=43 edges=222 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   z   z   z   z   z   z   z
+  1:   z   ·   z   z   z   z   z
+  2:   z   z   z   z   ·   z   z
+  3:   z   z   z   z   z   ·   z
+  4:   z   z   ·   z   z   z   z
+  5:   z   z   z   ·   z   z   z
+  6:   z   z   z   z   z   z   ·
+```
+after ply 2: value=P; spectrum=(('path', 2), ('path', 2)); defXOR=0; zone=16 edges=74 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   1   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x
+  2:   x   x   x   z   ·   z   z
+  3:   x   x   z   x   z   ·   z
+  4:   x   x   ·   z   x   z   z
+  5:   x   x   z   ·   z   x   z
+  6:   x   x   z   z   z   z   x
+```
+after ply 4: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   1   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x
+  2:   x   x   x   x   3   x   x
+  3:   x   x   4   x   x   x   x
+  4:   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x
+```
+
+### defense-q7-v3
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,5)` | N |
+| 4 | `reply` | `(3,6)` | P |
+| 5 | `opp` | `(4,2)` | N |
+| 6 | `reply` | `(6,4)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=43 edges=222 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   z   z   z   z   z   z   z
+  1:   z   ·   z   z   z   z   z
+  2:   z   z   z   z   ·   z   z
+  3:   z   z   z   z   z   ·   z
+  4:   z   z   ·   z   z   z   z
+  5:   z   z   z   ·   z   z   z
+  6:   z   z   z   z   z   z   ·
+```
+after ply 2: value=P; spectrum=(('path', 2), ('path', 2)); defXOR=0; zone=16 edges=74 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   1   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x
+  2:   x   x   x   z   ·   z   z
+  3:   x   x   z   x   z   ·   z
+  4:   x   x   ·   z   x   z   z
+  5:   x   x   z   ·   z   x   z
+  6:   x   x   z   z   z   z   x
+```
+after ply 4: value=P; spectrum=(('path', 1),); defXOR=1; zone=1 edges=0 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   1   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x
+  2:   x   x   x   x   x   3   x
+  3:   x   x   x   x   x   x   4
+  4:   x   x   ·   x   x   x   x
+  5:   x   x   x   x   x   x   x
+  6:   x   x   x   x   z   x   x
+```
+after ply 6: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=7
+       0   1   2   3   4   5   6
+  0:   1   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x
+  2:   x   x   x   x   x   3   x
+  3:   x   x   x   x   x   x   4
+  4:   x   x   5   x   x   x   x
+  5:   x   x   x   x   x   x   x
+  6:   x   x   x   x   6   x   x
 ```
 
 ### defense-q9
@@ -242,6 +469,188 @@ infinity: row-dir=F col-dir=F     q=9
   6:   x   x   x   x   x   6   x   x   x
   7:   x   x   x   x   x   x   x   x   x
   8:   x   x   x   x   x   x   x   x   x
+```
+
+### defense-q9-v2
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,4)` | N |
+| 4 | `reply` | `(3,5)` | P |
+| 5 | `opp` | `(4,8)` | N |
+| 6 | `reply` | `(5,6)` | P |
+| 7 | `opp` | `(6,2)` | N |
+| 8 | `reply` | `(8,7)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=73 edges=520 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   z   z   z   z   z   z   z   z   z
+  1:   z   ·   z   z   z   z   z   z   z
+  2:   z   z   ·   z   z   z   z   z   z
+  3:   z   z   z   z   z   z   ·   z   z
+  4:   z   z   z   z   z   ·   z   z   z
+  5:   z   z   z   z   ·   z   z   z   z
+  6:   z   z   z   ·   z   z   z   z   z
+  7:   z   z   z   z   z   z   z   z   ·
+  8:   z   z   z   z   z   z   z   ·   z
+```
+after ply 2: value=P; spectrum=(('path', 2), ('path', 2), ('path', 2)); defXOR=1; zone=36 edges=303 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   z   z   z   z   z   z
+  3:   x   x   z   x   z   z   ·   z   z
+  4:   x   x   z   z   x   ·   z   z   z
+  5:   x   x   z   z   ·   x   z   z   z
+  6:   x   x   z   ·   z   z   x   z   z
+  7:   x   x   z   z   z   z   z   x   ·
+  8:   x   x   z   z   z   z   z   ·   x
+```
+after ply 4: value=P; spectrum=(('path', 2),); defXOR=1; zone=6 edges=11 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   x   3   x   x   x   x
+  3:   x   x   x   x   x   4   x   x   x
+  4:   x   x   x   x   x   x   x   x   z
+  5:   x   x   x   x   x   x   z   z   x
+  6:   x   x   z   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   z   x   ·
+  8:   x   x   z   x   x   x   x   ·   x
+```
+after ply 6: value=P; spectrum=(('path', 1),); defXOR=1; zone=1 edges=0 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   x   3   x   x   x   x
+  3:   x   x   x   x   x   4   x   x   x
+  4:   x   x   x   x   x   x   x   x   5
+  5:   x   x   x   x   x   x   6   x   x
+  6:   x   x   z   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   ·   x
+```
+after ply 8: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   x   3   x   x   x   x
+  3:   x   x   x   x   x   4   x   x   x
+  4:   x   x   x   x   x   x   x   x   5
+  5:   x   x   x   x   x   x   6   x   x
+  6:   x   x   7   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   8   x
+```
+
+### defense-q9-v3
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,5)` | N |
+| 4 | `reply` | `(3,7)` | P |
+| 5 | `opp` | `(4,6)` | N |
+| 6 | `reply` | `(6,3)` | P |
+| 7 | `opp` | `(7,4)` | N |
+| 8 | `reply` | `(8,2)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=73 edges=520 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   z   z   z   z   z   z   z   z   z
+  1:   z   ·   z   z   z   z   z   z   z
+  2:   z   z   ·   z   z   z   z   z   z
+  3:   z   z   z   z   z   z   ·   z   z
+  4:   z   z   z   z   z   ·   z   z   z
+  5:   z   z   z   z   ·   z   z   z   z
+  6:   z   z   z   ·   z   z   z   z   z
+  7:   z   z   z   z   z   z   z   z   ·
+  8:   z   z   z   z   z   z   z   ·   z
+```
+after ply 2: value=P; spectrum=(('path', 2), ('path', 2), ('path', 2)); defXOR=1; zone=36 edges=303 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   z   z   z   z   z   z
+  3:   x   x   z   x   z   z   ·   z   z
+  4:   x   x   z   z   x   ·   z   z   z
+  5:   x   x   z   z   ·   x   z   z   z
+  6:   x   x   z   ·   z   z   x   z   z
+  7:   x   x   z   z   z   z   z   x   ·
+  8:   x   x   z   z   z   z   z   ·   x
+```
+after ply 4: value=P; spectrum=(('path', 1),); defXOR=1; zone=7 edges=16 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   3   x   x   x
+  3:   x   x   x   x   x   x   x   4   x
+  4:   x   x   x   x   x   x   z   x   z
+  5:   x   x   x   z   x   x   x   x   z
+  6:   x   x   x   ·   x   x   x   x   x
+  7:   x   x   z   x   z   x   x   x   x
+  8:   x   x   z   x   x   x   x   x   x
+```
+after ply 6: value=P; spectrum=(); defXOR=0; zone=2 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   3   x   x   x
+  3:   x   x   x   x   x   x   x   4   x
+  4:   x   x   x   x   x   x   5   x   x
+  5:   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   6   x   x   x   x   x
+  7:   x   x   x   x   z   x   x   x   x
+  8:   x   x   z   x   x   x   x   x   x
+```
+after ply 8: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=9
+       0   1   2   3   4   5   6   7   8
+  0:   1   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   3   x   x   x
+  3:   x   x   x   x   x   x   x   4   x
+  4:   x   x   x   x   x   x   5   x   x
+  5:   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   6   x   x   x   x   x
+  7:   x   x   x   x   7   x   x   x   x
+  8:   x   x   8   x   x   x   x   x   x
 ```
 
 ### defense-q11
@@ -326,6 +735,170 @@ infinity: row-dir=F col-dir=F     q=11
  10:   x   x   x   x   x   x   x   x   x   x   x
 ```
 
+### defense-q11-v2
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 2 chooses opponent branch index 1 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,4)` | N |
+| 4 | `reply` | `(4,2)` | P |
+| 5 | `opp` | `(3,5)` | N |
+| 6 | `reply` | `(5,3)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=111 edges=1010 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   z   z   z   z   z   z   z   z   z   z   z
+  1:   z   ·   z   z   z   z   z   z   z   z   z
+  2:   z   z   z   z   z   z   ·   z   z   z   z
+  3:   z   z   z   z   ·   z   z   z   z   z   z
+  4:   z   z   z   ·   z   z   z   z   z   z   z
+  5:   z   z   z   z   z   z   z   z   z   ·   z
+  6:   z   z   ·   z   z   z   z   z   z   z   z
+  7:   z   z   z   z   z   z   z   z   ·   z   z
+  8:   z   z   z   z   z   z   z   ·   z   z   z
+  9:   z   z   z   z   z   ·   z   z   z   z   z
+ 10:   z   z   z   z   z   z   z   z   z   z   ·
+```
+after ply 2: value=P; spectrum=(('path', 2), ('path', 2), ('path', 2), ('path', 2)); defXOR=0; zone=64 edges=788 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   1   x   x   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   z   z   z   ·   z   z   z   z
+  3:   x   x   z   x   ·   z   z   z   z   z   z
+  4:   x   x   z   ·   x   z   z   z   z   z   z
+  5:   x   x   z   z   z   x   z   z   z   ·   z
+  6:   x   x   ·   z   z   z   x   z   z   z   z
+  7:   x   x   z   z   z   z   z   x   ·   z   z
+  8:   x   x   z   z   z   z   z   ·   x   z   z
+  9:   x   x   z   z   z   ·   z   z   z   x   z
+ 10:   x   x   z   z   z   z   z   z   z   z   x
+```
+after ply 4: value=P; spectrum=(('path', 1), ('path', 1)); defXOR=0; zone=16 edges=83 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   1   x   x   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   3   x   x   x   x   x   x
+  3:   x   x   x   x   x   z   x   x   z   x   z
+  4:   x   x   4   x   x   x   x   x   x   x   x
+  5:   x   x   x   z   x   x   x   z   x   ·   x
+  6:   x   x   x   x   x   x   x   z   z   z   x
+  7:   x   x   x   x   x   z   z   x   x   x   x
+  8:   x   x   x   z   x   x   z   x   x   x   z
+  9:   x   x   x   x   x   ·   z   x   x   x   x
+ 10:   x   x   x   z   x   x   x   x   z   x   x
+```
+after ply 6: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   1   x   x   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   3   x   x   x   x   x   x
+  3:   x   x   x   x   x   5   x   x   x   x   x
+  4:   x   x   4   x   x   x   x   x   x   x   x
+  5:   x   x   x   6   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### defense-q11-v3
+
+Residual empty-grid defense; first move fixed to (0,0) by axis-affine symmetry. Variant 3 chooses opponent branch index 2 at the next P-position.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `opp` | `(0,0)` | N |
+| 2 | `reply` | `(1,1)` | P |
+| 3 | `opp` | `(2,5)` | N |
+| 4 | `reply` | `(4,6)` | P |
+| 5 | `opp` | `(3,4)` | N |
+| 6 | `reply` | `(5,9)` | P |
+
+initial: value=P; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=111 edges=1010 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   z   z   z   z   z   z   z   z   z   z   z
+  1:   z   ·   z   z   z   z   z   z   z   z   z
+  2:   z   z   z   z   z   z   ·   z   z   z   z
+  3:   z   z   z   z   ·   z   z   z   z   z   z
+  4:   z   z   z   ·   z   z   z   z   z   z   z
+  5:   z   z   z   z   z   z   z   z   z   ·   z
+  6:   z   z   ·   z   z   z   z   z   z   z   z
+  7:   z   z   z   z   z   z   z   z   ·   z   z
+  8:   z   z   z   z   z   z   z   ·   z   z   z
+  9:   z   z   z   z   z   ·   z   z   z   z   z
+ 10:   z   z   z   z   z   z   z   z   z   z   ·
+```
+after ply 2: value=P; spectrum=(('path', 2), ('path', 2), ('path', 2), ('path', 2)); defXOR=0; zone=64 edges=788 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   1   x   x   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   z   z   z   ·   z   z   z   z
+  3:   x   x   z   x   ·   z   z   z   z   z   z
+  4:   x   x   z   ·   x   z   z   z   z   z   z
+  5:   x   x   z   z   z   x   z   z   z   ·   z
+  6:   x   x   ·   z   z   z   x   z   z   z   z
+  7:   x   x   z   z   z   z   z   x   ·   z   z
+  8:   x   x   z   z   z   z   z   ·   x   z   z
+  9:   x   x   z   z   z   ·   z   z   z   x   z
+ 10:   x   x   z   z   z   z   z   z   z   z   x
+```
+after ply 4: value=P; spectrum=(('path', 1), ('path', 2)); defXOR=0; zone=19 edges=119 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   1   x   x   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   3   x   x   x   x   x
+  3:   x   x   x   x   ·   x   x   z   x   x   x
+  4:   x   x   x   x   x   x   4   x   x   x   x
+  5:   x   x   x   z   x   x   x   x   z   ·   z
+  6:   x   x   x   z   x   x   x   x   z   x   x
+  7:   x   x   x   x   z   x   x   x   ·   z   z
+  8:   x   x   z   z   z   x   x   x   x   x   z
+  9:   x   x   z   x   z   x   x   x   x   x   z
+ 10:   x   x   z   x   x   x   x   z   z   x   x
+```
+after ply 6: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   1   x   x   x   x   x   x   x   x   x   x
+  1:   x   2   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   3   x   x   x   x   x
+  3:   x   x   x   x   5   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   4   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   6   x
+  6:   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x
+```
+
 ### q11-N-bucket-1
 
 N on-conic bucket, sample_six=(0, 7, 8, 9, 10, 'inf'), size=22, cls=0.
@@ -382,6 +955,130 @@ infinity: row-dir=F col-dir=F     q=11
   4:   x   x   x   x   x   x   x   x   x   x   x
   5:   x   x   x   x   x   x   3   x   x   x   x
   6:   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   S   x   x
+  8:   x   x   x   x   x   x   x   S   x   x   x
+  9:   x   x   x   x   x   S   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   S
+```
+
+### q11-N-bucket-1-v2
+
+N on-conic bucket, sample_six=(0, 7, 8, 9, 10, 'inf'), size=22, cls=0. Variant 2 chooses winning intrusion index 1.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(2,0)` | P |
+| 2 | `opp` | `(0,9)` | N |
+| 3 | `reply` | `(3,2)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=14 edges=56 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   z   x   x   z   x   x   x   x   x   z   x
+  1:   z   ·   x   x   x   x   x   x   x   x   x
+  2:   z   x   x   x   z   x   ·   x   x   x   x
+  3:   z   x   z   x   ·   x   x   x   x   x   x
+  4:   x   x   x   ·   x   x   x   x   x   z   x
+  5:   x   z   x   x   z   x   z   x   x   ·   x
+  6:   x   x   ·   z   x   x   z   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   S   x   x
+  8:   x   x   x   x   x   x   x   S   x   x   x
+  9:   x   x   x   x   x   S   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   S
+```
+after ply 2: value=N; spectrum=(); defXOR=0; zone=2 edges=1 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   x   x   x   x   x   x   x   x   x   2   x
+  1:   x   x   x   x   x   x   x   x   x   x   x
+  2:   1   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   z   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   z   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   S   x   x
+  8:   x   x   x   x   x   x   x   S   x   x   x
+  9:   x   x   x   x   x   S   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   S
+```
+after ply 3: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   x   x   x   x   x   x   x   x   x   2   x
+  1:   x   x   x   x   x   x   x   x   x   x   x
+  2:   1   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   3   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   S   x   x
+  8:   x   x   x   x   x   x   x   S   x   x   x
+  9:   x   x   x   x   x   S   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   S
+```
+
+### q11-N-bucket-1-v3
+
+N on-conic bucket, sample_six=(0, 7, 8, 9, 10, 'inf'), size=22, cls=0. Variant 3 chooses winning intrusion index 2.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(4,9)` | P |
+| 2 | `opp` | `(1,0)` | N |
+| 3 | `reply` | `(6,6)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=14 edges=56 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   z   x   x   z   x   x   x   x   x   z   x
+  1:   z   ·   x   x   x   x   x   x   x   x   x
+  2:   z   x   x   x   z   x   ·   x   x   x   x
+  3:   z   x   z   x   ·   x   x   x   x   x   x
+  4:   x   x   x   ·   x   x   x   x   x   z   x
+  5:   x   z   x   x   z   x   z   x   x   ·   x
+  6:   x   x   ·   z   x   x   z   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   S   x   x
+  8:   x   x   x   x   x   x   x   S   x   x   x
+  9:   x   x   x   x   x   S   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   S
+```
+after ply 2: value=N; spectrum=(); defXOR=0; zone=1 edges=0 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   x   x   x   x   x   x   x   x   x   x   x
+  1:   2   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   1   x
+  5:   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   z   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   S   x   x
+  8:   x   x   x   x   x   x   x   S   x   x   x
+  9:   x   x   x   x   x   S   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   S
+```
+after ply 3: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=11
+       0   1   2   3   4   5   6   7   8   9  10
+  0:   x   x   x   x   x   x   x   x   x   x   x
+  1:   2   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   1   x
+  5:   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   3   x   x   x   x
   7:   x   x   x   x   x   x   x   x   S   x   x
   8:   x   x   x   x   x   x   x   S   x   x   x
   9:   x   x   x   x   x   S   x   x   x   x   x
@@ -486,6 +1183,216 @@ infinity: row-dir=F col-dir=F     q=17
   9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   3   x
  10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-1-v2
+
+N on-conic bucket, sample_six=(0, 4, 13, 14, 15, 'inf'), size=36, cls=0. Variant 2 chooses winning intrusion index 1.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(6,5)` | P |
+| 2 | `opp` | `(0,6)` | N |
+| 3 | `reply` | `(2,9)` | P |
+| 4 | `opp` | `(1,1)` | N |
+| 5 | `reply` | `(5,7)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1748 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   z   x   z   x   z   z   x   x   z   z   x   x   x   z   x   z
+  1:   x   ·   x   z   x   x   z   z   x   z   z   x   z   x   x   z   x
+  2:   x   z   z   z   x   z   z   z   x   ·   x   x   x   x   z   x   x
+  3:   z   x   x   x   x   z   ·   z   x   z   x   x   z   x   x   x   z
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   z   z   z   z   x   x   x   ·   x   z   z   x   x   x   z   z   x
+  6:   z   x   z   ·   x   z   x   x   x   x   z   x   z   x   z   z   x
+  7:   z   z   z   z   x   ·   z   x   x   x   x   x   z   x   z   x   z
+  8:   z   z   x   x   x   x   z   z   x   x   z   x   x   x   z   ·   z
+  9:   z   z   ·   x   x   z   z   z   x   x   x   x   x   x   z   z   z
+ 10:   x   x   z   z   x   x   x   x   x   z   z   x   ·   x   z   x   z
+ 11:   x   z   z   x   x   z   x   x   x   z   z   x   z   x   ·   x   x
+ 12:   x   z   x   z   x   x   z   z   x   z   ·   x   z   x   x   z   z
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   z   x   z   z   x   x   x   z   x   z   x   x   z   x   x   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1)); defXOR=1; zone=25 edges=183 G=5
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   x   x   x   x   x   2   x   x   x   x   x   x   x   x   x   x
+  1:   x   ·   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   z   x   x   x   x   x   ·   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   z   x   x   z   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   z   x   x   x   ·   x   x   x   x   x   x   z   z   x
+  6:   x   x   x   x   x   1   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   z   x   x   x   x   x   x   x   x   z   x   x   x   x
+  8:   x   z   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x
+  9:   z   z   x   x   x   x   x   x   x   x   x   x   x   x   x   z   z
+ 10:   x   x   x   z   x   x   x   x   x   z   x   x   x   x   z   x   z
+ 11:   x   x   x   x   x   x   x   x   x   z   z   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   z   x   x   x   x   x   x   x   x   z   x   x   z   x
+```
+after ply 4: value=N; spectrum=(('path', 1),); defXOR=1; zone=2 edges=1 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   x   x   x   x   x   2   x   x   x   x   x   x   x   x   x   x
+  1:   x   4   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   x   x   x   x   ·   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   1   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   z   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   x   x   x   x   x   2   x   x   x   x   x   x   x   x   x   x
+  1:   x   4   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   x   x   x   x   5   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   1   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-1-v3
+
+N on-conic bucket, sample_six=(0, 4, 13, 14, 15, 'inf'), size=36, cls=0. Variant 3 chooses winning intrusion index 2.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(6,15)` | P |
+| 2 | `opp` | `(0,3)` | N |
+| 3 | `reply` | `(5,0)` | P |
+| 4 | `opp` | `(1,12)` | N |
+| 5 | `reply` | `(11,9)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1748 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   z   x   z   x   z   z   x   x   z   z   x   x   x   z   x   z
+  1:   x   ·   x   z   x   x   z   z   x   z   z   x   z   x   x   z   x
+  2:   x   z   z   z   x   z   z   z   x   ·   x   x   x   x   z   x   x
+  3:   z   x   x   x   x   z   ·   z   x   z   x   x   z   x   x   x   z
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   z   z   z   z   x   x   x   ·   x   z   z   x   x   x   z   z   x
+  6:   z   x   z   ·   x   z   x   x   x   x   z   x   z   x   z   z   x
+  7:   z   z   z   z   x   ·   z   x   x   x   x   x   z   x   z   x   z
+  8:   z   z   x   x   x   x   z   z   x   x   z   x   x   x   z   ·   z
+  9:   z   z   ·   x   x   z   z   z   x   x   x   x   x   x   z   z   z
+ 10:   x   x   z   z   x   x   x   x   x   z   z   x   ·   x   z   x   z
+ 11:   x   z   z   x   x   z   x   x   x   z   z   x   z   x   ·   x   x
+ 12:   x   z   x   z   x   x   z   z   x   z   ·   x   z   x   x   z   z
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   z   x   z   z   x   x   x   z   x   z   x   x   z   x   x   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 1), ('path', 2)); defXOR=0; zone=25 edges=177 G=5
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   x   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x   x   x
+  2:   x   z   z   x   x   z   z   x   x   x   x   x   x   x   x   x   x
+  3:   z   x   x   x   x   z   x   z   x   x   x   x   x   x   x   x   z
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   z   x   x   x   x   x   x   x   x   z   z   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+  7:   x   x   z   x   x   ·   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z
+  9:   x   x   ·   x   x   x   x   x   x   x   x   x   x   x   z   x   z
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x
+ 11:   x   x   x   x   x   x   x   x   x   z   z   x   x   x   ·   x   x
+ 12:   x   z   x   x   x   x   z   x   x   z   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   z   x   x   x   x   z   x   x   x   x   z   x   x   x   x
+```
+after ply 4: value=N; spectrum=(); defXOR=0; zone=1 edges=0 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   x   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   x   4   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   3   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   x   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   x   4   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   3   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   5   x   x   x   x   x   x   x
  12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
  14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
@@ -598,6 +1505,216 @@ infinity: row-dir=F col-dir=F     q=17
  16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
 ```
 
+### q17-N-bucket-2-v2
+
+N on-conic bucket, sample_six=(0, 2, 13, 14, 15, 'inf'), size=36, cls=0. Variant 2 chooses winning intrusion index 1.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(1,0)` | P |
+| 2 | `opp` | `(0,1)` | N |
+| 3 | `reply` | `(8,15)` | P |
+| 4 | `opp` | `(4,6)` | N |
+| 5 | `reply` | `(9,2)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1748 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   z   x   x   x   z   z   z   x   x   z   x   x   x   z   x   z
+  1:   z   ·   z   z   x   x   x   z   x   x   z   x   z   x   x   z   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   z   x   x   z   x   x   ·   x   x   x   x   x   x   z   z   z   z
+  4:   z   x   z   x   x   x   z   x   x   x   z   x   z   ·   z   x   z
+  5:   z   x   z   x   x   x   z   ·   x   x   z   x   z   z   x   z   x
+  6:   z   x   z   ·   x   z   x   x   x   x   x   x   z   z   z   z   z
+  7:   z   z   z   z   x   ·   x   x   x   x   z   x   z   x   z   x   x
+  8:   z   z   x   x   x   z   z   z   x   x   x   x   x   z   x   ·   z
+  9:   z   z   ·   z   x   z   z   z   x   x   x   x   x   x   z   x   z
+ 10:   x   z   z   z   x   z   x   z   x   x   x   x   ·   z   z   x   x
+ 11:   x   z   x   x   x   z   z   x   x   x   z   x   z   z   ·   z   z
+ 12:   x   z   x   x   x   x   x   z   x   x   ·   x   z   z   x   z   z
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   z   z   z   x   x   z   z   x   x   x   x   z   z   z   x   ·
+```
+after ply 2: value=N; spectrum=(('path', 1), ('path', 1), ('path', 3)); defXOR=2; zone=23 edges=138 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x
+  4:   x   x   z   x   x   x   z   x   x   x   x   x   z   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x
+  6:   x   x   z   ·   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   ·   x   x   x   x   z   x   x   x   z   x   x
+  8:   x   x   x   x   x   z   z   x   x   x   x   x   x   z   x   ·   x
+  9:   x   x   ·   x   x   x   z   x   x   x   x   x   x   x   x   x   z
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   ·   x   z   x   x
+ 11:   x   x   x   x   x   x   z   x   x   x   z   x   z   x   x   x   z
+ 12:   x   x   x   x   x   x   x   z   x   x   x   x   x   z   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   z   x   x   x   z   x   x   x   x   z   x   x   x   x
+```
+after ply 4: value=N; spectrum=(('path', 1),); defXOR=1; zone=1 edges=0 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   4   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   3   x
+  9:   x   x   ·   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   4   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   3   x
+  9:   x   x   5   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-2-v3
+
+N on-conic bucket, sample_six=(0, 2, 13, 14, 15, 'inf'), size=36, cls=0. Variant 3 chooses winning intrusion index 2.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(1,15)` | P |
+| 2 | `opp` | `(0,1)` | N |
+| 3 | `reply` | `(5,12)` | P |
+| 4 | `opp` | `(4,2)` | N |
+| 5 | `reply` | `(10,3)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1748 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   z   x   x   x   z   z   z   x   x   z   x   x   x   z   x   z
+  1:   z   ·   z   z   x   x   x   z   x   x   z   x   z   x   x   z   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   z   x   x   z   x   x   ·   x   x   x   x   x   x   z   z   z   z
+  4:   z   x   z   x   x   x   z   x   x   x   z   x   z   ·   z   x   z
+  5:   z   x   z   x   x   x   z   ·   x   x   z   x   z   z   x   z   x
+  6:   z   x   z   ·   x   z   x   x   x   x   x   x   z   z   z   z   z
+  7:   z   z   z   z   x   ·   x   x   x   x   z   x   z   x   z   x   x
+  8:   z   z   x   x   x   z   z   z   x   x   x   x   x   z   x   ·   z
+  9:   z   z   ·   z   x   z   z   z   x   x   x   x   x   x   z   x   z
+ 10:   x   z   z   z   x   z   x   z   x   x   x   x   ·   z   z   x   x
+ 11:   x   z   x   x   x   z   z   x   x   x   z   x   z   z   ·   z   z
+ 12:   x   z   x   x   x   x   x   z   x   x   ·   x   z   z   x   z   z
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   z   z   z   x   x   z   z   x   x   x   x   z   z   z   x   ·
+```
+after ply 2: value=N; spectrum=(('path', 3),); defXOR=2; zone=27 edges=202 G=5
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   ·   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   z   x   x   x   x   x   x   x   z   x   z   ·   x   x   x
+  5:   x   x   x   x   x   x   z   x   x   x   x   x   z   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   z   z   x   x   z
+  7:   x   x   x   z   x   ·   x   x   x   x   z   x   x   x   x   x   x
+  8:   z   x   x   x   x   x   z   x   x   x   x   x   x   z   x   x   x
+  9:   z   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x   z
+ 10:   x   x   x   z   x   x   x   x   x   x   x   x   x   x   z   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   z   z   x   x   z
+ 12:   x   x   x   x   x   x   x   z   x   x   x   x   x   z   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   z   z   x   x   x   z   x   x   x   x   z   x   x   x   x
+```
+after ply 4: value=N; spectrum=(('path', 1),); defXOR=1; zone=5 edges=9 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   4   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   3   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   ·   x   x   x   x   x   x   x   x   x   x   x
+  8:   z   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   z   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   z   x   x   x   x   x   x   x   x   x   x   z   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+  2:   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   4   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   3   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   5   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
 ### q17-N-bucket-3
 
 N on-conic bucket, sample_six=(0, 6, 13, 14, 15, 'inf'), size=72, cls=0.
@@ -693,6 +1810,216 @@ infinity: row-dir=F col-dir=F     q=17
   6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
   7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   5
   8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-3-v2
+
+N on-conic bucket, sample_six=(0, 6, 13, 14, 15, 'inf'), size=72, cls=0. Variant 2 chooses winning intrusion index 1.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(7,14)` | P |
+| 2 | `opp` | `(0,1)` | N |
+| 3 | `reply` | `(2,2)` | P |
+| 4 | `opp` | `(1,0)` | N |
+| 5 | `reply` | `(4,5)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=94 edges=1786 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   z   z   x   x   x   z   z   x   x   z   z   x   x   z   x   x   z
+  1:   z   ·   z   x   x   x   z   z   x   z   z   x   x   z   x   x   x
+  2:   x   z   z   x   x   z   z   z   x   ·   z   x   x   x   x   z   x
+  3:   x   x   x   x   x   x   ·   x   x   z   x   x   z   z   z   z   z
+  4:   x   x   z   x   x   z   z   x   x   x   x   x   z   ·   z   z   z
+  5:   z   z   x   x   x   x   z   ·   x   z   x   x   z   z   z   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   z   z   z   x   x   ·   z   z   x   x   z   x   z   x   z   x   z
+  8:   z   z   z   x   x   x   x   z   x   z   z   x   x   x   z   ·   z
+  9:   z   x   ·   x   x   z   x   z   x   x   x   x   z   x   z   z   x
+ 10:   x   z   z   x   x   z   x   x   x   x   z   x   ·   z   z   x   z
+ 11:   x   z   x   x   x   z   z   x   x   z   z   x   z   z   ·   z   z
+ 12:   x   z   x   x   x   z   z   z   x   x   ·   x   x   z   x   z   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   z   x   x   x   x   x   z   z   x   z   x   x   z   x   z   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1)); defXOR=1; zone=26 edges=201 G=5
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   z   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   z   x   x   x   z   z   x   ·   x   x   x   x   x   z   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   z   z   x   x   x
+  4:   x   x   x   x   x   z   x   x   x   x   x   x   x   ·   x   x   x
+  5:   z   x   x   x   x   x   x   x   x   x   x   x   z   z   x   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x   x
+  8:   z   x   z   x   x   x   x   x   x   x   z   x   x   x   x   x   x
+  9:   z   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   ·   x   x   x   x
+ 11:   x   x   x   x   x   x   z   x   x   z   z   x   z   x   x   z   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x   z   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   z   x   x   x   x   x   x   z   x   z   x   x   x   x   x   x   x
+```
+after ply 4: value=N; spectrum=(('path', 1),); defXOR=1; zone=2 edges=1 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   4   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   3   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   ·   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   x   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   4   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   3   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   5   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-3-v3
+
+N on-conic bucket, sample_six=(0, 6, 13, 14, 15, 'inf'), size=72, cls=0. Variant 3 chooses winning intrusion index 2.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(8,1)` | P |
+| 2 | `opp` | `(0,0)` | N |
+| 3 | `reply` | `(1,6)` | P |
+| 4 | `opp` | `(2,5)` | N |
+| 5 | `reply` | `(3,9)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=94 edges=1786 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   z   z   x   x   x   z   z   x   x   z   z   x   x   z   x   x   z
+  1:   z   ·   z   x   x   x   z   z   x   z   z   x   x   z   x   x   x
+  2:   x   z   z   x   x   z   z   z   x   ·   z   x   x   x   x   z   x
+  3:   x   x   x   x   x   x   ·   x   x   z   x   x   z   z   z   z   z
+  4:   x   x   z   x   x   z   z   x   x   x   x   x   z   ·   z   z   z
+  5:   z   z   x   x   x   x   z   ·   x   z   x   x   z   z   z   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   z   z   z   x   x   ·   z   z   x   x   z   x   z   x   z   x   z
+  8:   z   z   z   x   x   x   x   z   x   z   z   x   x   x   z   ·   z
+  9:   z   x   ·   x   x   z   x   z   x   x   x   x   z   x   z   z   x
+ 10:   x   z   z   x   x   z   x   x   x   x   z   x   ·   z   z   x   z
+ 11:   x   z   x   x   x   z   z   x   x   z   z   x   z   z   ·   z   z
+ 12:   x   z   x   x   x   z   z   z   x   x   ·   x   x   z   x   z   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   z   x   x   x   x   x   z   z   x   z   x   x   z   x   z   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 1),); defXOR=1; zone=29 edges=242 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   z   x   x   x   z   x   x   x   x   x   x
+  2:   x   x   z   x   x   z   z   x   x   x   z   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   z   x   x   z   x   x   x   z
+  4:   x   x   x   x   x   x   z   x   x   x   x   x   z   x   x   z   z
+  5:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x   x   z
+  8:   x   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   z   x   x   x   x   z   x   x   x   x
+ 10:   x   x   z   x   x   x   x   x   x   x   x   x   ·   z   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   z   z   x   x   x   x   x   z
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x   z   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   z   z   x   x   x   x   z   x   z   x   x
+```
+after ply 4: value=N; spectrum=(); defXOR=0; zone=3 edges=3 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   3   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   4   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   z   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   3   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   4   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   5   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
   9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
@@ -808,6 +2135,216 @@ infinity: row-dir=F col-dir=F     q=17
  16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
 ```
 
+### q17-N-bucket-4-v2
+
+N on-conic bucket, sample_six=(0, 1, 13, 14, 15, 'inf'), size=36, cls=0. Variant 2 chooses winning intrusion index 1.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(10,13)` | P |
+| 2 | `opp` | `(0,0)` | N |
+| 3 | `reply` | `(8,10)` | P |
+| 4 | `opp` | `(2,5)` | N |
+| 5 | `reply` | `(12,9)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1744 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   z   x   x   z   x   x   z   z   x   x   z   x   x   z   z   x   z
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   z   x   z   z   x   z   z   x   x   ·   x   x   x   x   x   z   x
+  3:   z   x   x   z   x   z   ·   z   x   z   x   x   z   x   z   z   z
+  4:   z   x   x   x   x   z   x   x   x   x   z   x   z   ·   z   z   z
+  5:   z   x   x   x   x   x   z   ·   x   z   z   x   z   z   z   z   x
+  6:   z   x   z   ·   x   z   x   x   x   z   z   x   x   z   x   x   z
+  7:   z   x   z   x   x   ·   z   z   x   x   z   x   z   x   z   x   z
+  8:   z   x   z   x   x   z   z   x   x   x   z   x   x   x   z   ·   z
+  9:   z   x   ·   x   x   x   z   z   x   x   x   x   z   x   z   x   z
+ 10:   x   x   z   z   x   z   x   z   x   z   z   x   ·   z   x   x   x
+ 11:   x   x   z   x   x   z   x   x   x   z   x   x   x   z   ·   z   z
+ 12:   x   x   x   z   x   z   z   z   x   z   ·   x   z   z   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   z   z   x   x   x   z   x   x   x   x   z   z   z   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 3),); defXOR=2; zone=25 edges=173 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   z   x   x   x   x   z   x   x   x   z
+  4:   x   x   x   x   x   x   x   x   x   x   z   x   x   x   x   z   x
+  5:   x   x   x   x   x   x   z   x   x   z   x   x   x   x   x   x   x
+  6:   x   x   x   ·   x   z   x   x   x   z   x   x   x   x   x   x   z
+  7:   x   x   z   x   x   x   x   x   x   x   x   x   z   x   x   x   x
+  8:   x   x   x   x   x   z   z   x   x   x   z   x   x   x   x   x   x
+  9:   x   x   ·   x   x   x   x   z   x   x   x   x   z   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x   x   x
+ 11:   x   x   z   x   x   x   x   x   x   z   x   x   x   x   ·   z   x
+ 12:   x   x   x   x   x   x   z   x   x   z   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   z   z   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 4: value=N; spectrum=(('path', 1),); defXOR=1; zone=4 edges=5 G=2
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   4   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x
+  6:   x   x   x   ·   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   z   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   4   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   5   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-4-v3
+
+N on-conic bucket, sample_six=(0, 1, 13, 14, 15, 'inf'), size=36, cls=0. Variant 3 chooses winning intrusion index 2.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(16,2)` | P |
+| 2 | `opp` | `(0,0)` | N |
+| 3 | `reply` | `(3,9)` | P |
+| 4 | `opp` | `(4,14)` | N |
+| 5 | `reply` | `(9,12)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1744 G=3
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   z   x   x   z   x   x   z   z   x   x   z   x   x   z   z   x   z
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   z   x   z   z   x   z   z   x   x   ·   x   x   x   x   x   z   x
+  3:   z   x   x   z   x   z   ·   z   x   z   x   x   z   x   z   z   z
+  4:   z   x   x   x   x   z   x   x   x   x   z   x   z   ·   z   z   z
+  5:   z   x   x   x   x   x   z   ·   x   z   z   x   z   z   z   z   x
+  6:   z   x   z   ·   x   z   x   x   x   z   z   x   x   z   x   x   z
+  7:   z   x   z   x   x   ·   z   z   x   x   z   x   z   x   z   x   z
+  8:   z   x   z   x   x   z   z   x   x   x   z   x   x   x   z   ·   z
+  9:   z   x   ·   x   x   x   z   z   x   x   x   x   z   x   z   x   z
+ 10:   x   x   z   z   x   z   x   z   x   z   z   x   ·   z   x   x   x
+ 11:   x   x   z   x   x   z   x   x   x   z   x   x   x   z   ·   z   z
+ 12:   x   x   x   z   x   z   z   z   x   z   ·   x   z   z   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   z   z   x   x   x   z   x   x   x   x   z   z   z   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 1), ('path', 1)); defXOR=0; zone=28 edges=224 G=5
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   z   x   z   z   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   z   x   z   x   x   x   x   x   z   z
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   z   x   z   z   z
+  5:   x   x   x   x   x   x   z   x   x   x   x   x   x   z   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   z
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x   x   z
+  8:   x   x   x   x   x   z   x   x   x   x   z   x   x   x   z   ·   x
+  9:   x   x   x   x   x   x   z   z   x   x   x   x   z   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   z   x   x   x   z   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   ·   x   x
+ 12:   x   x   x   x   x   x   z   x   x   x   x   x   x   z   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 4: value=N; spectrum=(); defXOR=0; zone=1 edges=0 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   4   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   4   x   x
+  5:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  9:   x   x   x   x   x   x   x   x   x   x   x   x   5   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x
+ 16:   x   x   1   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
 ### q17-N-bucket-5
 
 N on-conic bucket, sample_six=(0, 3, 4, 5, 9, 'inf'), size=36, cls=2.
@@ -910,5 +2447,110 @@ infinity: row-dir=F col-dir=F     q=17
  13:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  14:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  15:   x   5   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+```
+
+### q17-N-bucket-5-v2
+
+N on-conic bucket, sample_six=(0, 3, 4, 5, 9, 'inf'), size=36, cls=2. Variant 2 chooses winning intrusion index 1.
+
+| ply | role | cell | value after |
+|---:|---|---|---|
+| 1 | `win-intrusion` | `(11,15)` | P |
+| 2 | `opp` | `(0,0)` | N |
+| 3 | `reply` | `(1,11)` | P |
+| 4 | `opp` | `(2,9)` | N |
+| 5 | `reply` | `(8,12)` | P |
+
+initial: value=N; spectrum=(('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1), ('path', 1)); defXOR=0; zone=93 edges=1742 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   z   z   x   x   z   z   x   x   x   x   z   z   z   x   z   x   z
+  1:   z   ·   x   z   z   x   x   x   z   x   z   z   x   x   x   z   z
+  2:   z   x   x   z   z   z   x   x   x   ·   z   z   z   x   x   x   x
+  3:   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x
+  6:   z   x   x   ·   x   z   x   x   z   z   x   z   x   x   z   z   x
+  7:   x   z   x   x   z   ·   x   x   x   x   z   z   x   x   z   z   z
+  8:   x   z   x   z   z   z   x   x   z   z   z   x   z   x   x   ·   x
+  9:   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   z   x   x   z   x   x   x   x   z   z   x   x   ·   x   z   z   z
+ 11:   z   x   x   z   z   x   x   x   x   z   x   x   x   x   ·   z   z
+ 12:   x   x   x   z   z   z   x   x   z   x   ·   x   z   x   z   z   x
+ 13:   x   z   x   z   ·   x   x   x   x   z   x   x   z   x   x   z   z
+ 14:   x   z   x   x   x   z   x   x   x   z   x   ·   z   x   z   x   z
+ 15:   z   z   x   x   z   x   x   x   ·   z   z   z   x   x   z   x   x
+ 16:   z   z   x   x   x   z   x   x   z   x   z   z   x   x   z   z   ·
+```
+after ply 2: value=N; spectrum=(('path', 4),); defXOR=0; zone=23 edges=149 G=4
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   z   x   x   x   x   x   x   z   z   x   x   x   x   x
+  2:   x   x   x   x   x   z   x   x   x   ·   x   z   x   x   x   x   x
+  3:   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x
+  7:   x   z   x   x   x   ·   x   x   x   x   x   x   x   x   x   x   z
+  8:   x   x   x   z   x   z   x   x   z   x   z   x   z   x   x   x   x
+  9:   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   ·   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+ 12:   x   x   x   z   x   x   x   x   x   x   x   x   z   x   x   x   x
+ 13:   x   x   x   z   x   x   x   x   x   x   x   x   x   x   x   x   z
+ 14:   x   z   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x
+ 15:   x   z   x   x   x   x   x   x   ·   x   z   x   x   x   z   x   x
+ 16:   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x   x
+```
+after ply 4: value=N; spectrum=(('path', 1),); defXOR=1; zone=3 edges=3 G=1
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   4   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   z   x   x   x   x
+  9:   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   ·   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   z   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 16:   x   x   x   x   x   x   x   x   z   x   x   x   x   x   x   x   x
+```
+after ply 5: value=P; spectrum=(); defXOR=0; zone=0 edges=0 G=0
+
+```text
+infinity: row-dir=F col-dir=F     q=17
+       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  0:   2   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  1:   x   x   x   x   x   x   x   x   x   x   x   3   x   x   x   x   x
+  2:   x   x   x   x   x   x   x   x   x   4   x   x   x   x   x   x   x
+  3:   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x   x
+  4:   x   x   x   x   x   x   x   x   x   x   x   x   x   S   x   x   x
+  5:   x   x   x   x   x   x   x   S   x   x   x   x   x   x   x   x   x
+  6:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  7:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+  8:   x   x   x   x   x   x   x   x   x   x   x   x   5   x   x   x   x
+  9:   x   x   S   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 10:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 11:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   1   x
+ 12:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 13:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 14:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
+ 15:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
  16:   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x   x
 ```
