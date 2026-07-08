@@ -377,7 +377,7 @@ the kernel evaluates the checker — no typeclass search, no new axioms).
 
 Report file: `notes/2026-07-07-codex-certcheck-reflection.md`.
 
-## C20. Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i))
+## C20. Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i)) [REPORTED 2026-07-08]
 
 C18's null (reviewed, sound) killed shallow laws over STATIC features of the 6-subset. The
 surviving hypothesis (session-9 §6 of `2026-07-07-onconic-intrusion-calculus.md`) is that the
