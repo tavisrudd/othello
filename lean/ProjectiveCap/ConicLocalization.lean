@@ -963,6 +963,26 @@ theorem psi_hyperbolaParamPoint {rho A B u t : K}
   · field_simp [hB, hu, ht]
 
 omit [Fintype K] [DecidableEq K] in
+theorem psi_hyperbolaParamPoint_fixed_iff_param_mul {rho A B u t : K}
+    (hB : B ≠ 0) (hu : u ≠ 0) (ht : t ≠ 0) :
+    psi (K := K) rho A B u (hyperbolaParamPoint rho A B t) =
+        hyperbolaParamPoint rho A B t ↔
+      u = t * t := by
+  rw [psi_hyperbolaParamPoint (K := K) hB hu ht]
+  constructor
+  · intro hpoint
+    have hparam : u / t = t :=
+      hyperbolaParamPoint_injective (K := K) rho A B hpoint
+    have hmul : (u / t) * t = t * t := by
+      rw [hparam]
+    simpa [div_eq_mul_inv, ht] using hmul
+  · intro huEq
+    have hparam : u / t = t := by
+      rw [huEq]
+      field_simp [ht]
+    rw [hparam]
+
+omit [Fintype K] [DecidableEq K] in
 theorem eq_param_mul_of_psi_fixed_onHyperbola {rho A B u : K}
     (hB : B ≠ 0) (hu : u ≠ 0) {p : GridPoint K}
     (hp : OnHyperbola (K := K) rho A B p)
