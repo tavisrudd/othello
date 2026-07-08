@@ -178,6 +178,7 @@ structure ReplyBookRow (α : Type*) where
   mover : α
   reply : α
   child : Finset α
+deriving DecidableEq
 
 /--
 A parsed reply-book DAG, abstracting over the concrete file node ids.
@@ -212,6 +213,44 @@ def ValidFor (Valid : Finset α -> Prop) (book : ReplyBookDAG α) : Prop :=
               Move Valid (insert x S) row.reply ∧
                 row.child = insert row.reply (insert x S) ∧
                   book.Node row.child
+
+/--
+Build semantic validity for a generated finite-support reply book.
+
+The hypotheses are intentionally bounded by the emitted `nodes`, legal
+extensions, and emitted `rows`, so generated data files can discharge them with
+kernel `decide` without enumerating every finite position or every possible row.
+-/
+theorem validFor_of_finiteRows {Valid : Finset α -> Prop}
+    {root : Finset α} {nodes : Finset (Finset α)}
+    {rows : Finset (Finset α × ReplyBookRow α)}
+    (hroot : root ∈ nodes)
+    (hvalid : ∀ S ∈ nodes, Valid S)
+    (hstep : ∀ S ∈ nodes, ∀ x ∈ (Finset.univ : Finset α), Move Valid S x ->
+      ∃ entry ∈ rows,
+        entry.1 = S ∧
+          entry.2.mover = x ∧
+            Move Valid (insert x S) entry.2.reply ∧
+              entry.2.child = insert entry.2.reply (insert x S) ∧
+                entry.2.child ∈ nodes) :
+    ({ root := root
+       Node := fun S => S ∈ nodes
+       Row := fun S row => (S, row) ∈ rows } : ReplyBookDAG α).ValidFor Valid := by
+  refine ⟨hroot, ?_, ?_⟩
+  · intro S hS
+    exact hvalid S hS
+  · intro S hS x hxmove
+    rcases hstep S hS x (Finset.mem_univ x) hxmove with
+      ⟨entry, hentry, hentryS, hmover, hreply, hchild, hchildNode⟩
+    refine ⟨entry.2, ?_, hmover, hreply, hchild, hchildNode⟩
+    change (S, entry.2) ∈ rows
+    have hpair : (S, entry.2) = entry := by
+      cases entry with
+      | mk S0 row =>
+          simp at hentryS ⊢
+          exact hentryS.symm
+    rw [hpair]
+    exact hentry
 
 /-- A valid reply-book DAG proves that its root is a P-position. -/
 theorem isP_root {Valid : Finset α -> Prop} {book : ReplyBookDAG α}

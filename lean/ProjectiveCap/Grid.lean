@@ -1,4 +1,6 @@
 import Mathlib.Algebra.Field.Basic
+import Mathlib.Data.Fintype.Basic
+import Mathlib.Data.Fintype.Prod
 import Mathlib.Data.Finset.Basic
 
 /-!
@@ -45,6 +47,68 @@ def AffineCap (S : Finset (GridPoint K)) : Prop :=
 /-- Legal residual positions after the projective opening pair. -/
 def GridCap (S : Finset (GridPoint K)) : Prop :=
   PartialPermutation S ∧ AffineCap S
+
+instance instDecidableCollinear {K : Type*} [Field K] [DecidableEq K] (p q r : GridPoint K) :
+    Decidable (Collinear (K := K) p q r) := by
+  unfold Collinear
+  infer_instance
+
+instance instDecidableRowSparse {K : Type*} [Field K] [Fintype K] [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    Decidable (RowSparse (K := K) S) :=
+  decidable_of_iff
+    (∀ p ∈ (Finset.univ : Finset (GridPoint K)),
+      ∀ q ∈ (Finset.univ : Finset (GridPoint K)), p ∈ S -> q ∈ S -> p.1 = q.1 -> p = q)
+    (by
+      constructor
+      · intro h p q hp hq hrow
+        exact h p (Finset.mem_univ p) q (Finset.mem_univ q) hp hq hrow
+      · intro h p _hpU q _hqU hp hq hrow
+        exact h hp hq hrow)
+
+instance instDecidableColSparse {K : Type*} [Field K] [Fintype K] [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    Decidable (ColSparse (K := K) S) :=
+  decidable_of_iff
+    (∀ p ∈ (Finset.univ : Finset (GridPoint K)),
+      ∀ q ∈ (Finset.univ : Finset (GridPoint K)), p ∈ S -> q ∈ S -> p.2 = q.2 -> p = q)
+    (by
+      constructor
+      · intro h p q hp hq hcol
+        exact h p (Finset.mem_univ p) q (Finset.mem_univ q) hp hq hcol
+      · intro h p _hpU q _hqU hp hq hcol
+        exact h hp hq hcol)
+
+set_option checkBinderAnnotations false in
+instance instDecidablePartialPermutation {K : Type*} [Field K] [Fintype K] [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    Decidable (PartialPermutation (K := K) S) := by
+  unfold PartialPermutation
+  infer_instance
+
+instance instDecidableAffineCap {K : Type*} [Field K] [Fintype K] [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    Decidable (AffineCap (K := K) S) :=
+  decidable_of_iff
+    (∀ a ∈ (Finset.univ : Finset (GridPoint K)),
+      ∀ b ∈ (Finset.univ : Finset (GridPoint K)),
+      ∀ c ∈ (Finset.univ : Finset (GridPoint K)),
+      a ∈ S -> b ∈ S -> c ∈ S ->
+        a ≠ b -> a ≠ c -> b ≠ c -> ¬ Collinear (K := K) a b c)
+    (by
+      constructor
+      · intro h a b c ha hb hc hab hac hbc
+        exact h a (Finset.mem_univ a) b (Finset.mem_univ b) c (Finset.mem_univ c)
+          ha hb hc hab hac hbc
+      · intro h a _haU b _hbU c _hcU ha hb hc hab hac hbc
+        exact h ha hb hc hab hac hbc)
+
+set_option checkBinderAnnotations false in
+instance instDecidableGridCap {K : Type*} [Field K] [Fintype K] [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    Decidable (GridCap (K := K) S) := by
+  unfold GridCap
+  infer_instance
 
 omit [Field K] in
 theorem rowSparse_mono {S T : Finset (GridPoint K)}

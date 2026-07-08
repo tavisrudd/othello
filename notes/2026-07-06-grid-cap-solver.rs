@@ -36,7 +36,7 @@
 //   breaks   q   -- exact cross-check: for every P1 break from the frame, #replies / #true-P
 //                   replies / #P-replies that are symmetric (nontrivial stabilizer).
 //   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
-//   cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]
+//   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
 //                   one exists, else off, recorded), and the FULL P-reply-book (responder strategy
@@ -2391,23 +2391,62 @@ fn build_book(b: &Board, s: &mut Solver, root_cells: &[u16], cap: usize) -> Opti
     Some(book)
 }
 
-// cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]
-fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
-    let b = Board::new(q);
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum CertFamily {
+    Canonical,
+    Anchored,
+}
+
+fn cert_frontier_canonical(b: &Board) -> Vec<(Vec<u16>, Mask, Mask)> {
     let empty = [0u64; MAXW];
-    // canonical size-3 classes (same enumerate/order as escape/esc modes -> stable class indices)
     let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
-    {
-        let mut visited: HashSet<u128> = HashSet::new();
-        let mut occ3: Vec<u16> = Vec::new();
-        enumerate(&b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+    let mut visited: HashSet<u128> = HashSet::new();
+    let mut occ3: Vec<u16> = Vec::new();
+    enumerate(b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+    frontier
+}
+
+fn cert_frontier_anchored(b: &Board, q: usize) -> Vec<(Vec<u16>, Mask, Mask)> {
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    let anchor0 = 0u16; // (0,0)
+    let anchor1 = (q + 1) as u16; // (1,1)
+    for r in 0..q {
+        for c in 0..q {
+            let z = (r * q + c) as u16;
+            let mut occ = vec![anchor0, anchor1, z];
+            occ.sort_unstable();
+            if !is_legal_position(b, &occ) {
+                continue;
+            }
+            let (chosen, forbidden) = masks_of(b, &occ);
+            frontier.push((occ, chosen, forbidden));
+        }
     }
+    frontier
+}
+
+// cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
+fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize, family: CertFamily) {
+    let b = Board::new(q);
+    let frontier: Vec<(Vec<u16>, Mask, Mask)> = match family {
+        CertFamily::Canonical => cert_frontier_canonical(&b),
+        CertFamily::Anchored => cert_frontier_anchored(&b, q),
+    };
     let ncls = frontier.len();
     let total_expected = (q * q + 21).wrapping_sub(9 * q); // q^2 - 9q + 21 (total lemma)
     std::fs::create_dir_all(outdir).expect("create cert output dir");
-    let path = format!("{}/gridcap-q{}.cert", outdir, q);
+    let suffix = match family {
+        CertFamily::Canonical => "",
+        CertFamily::Anchored => "-anchored",
+    };
+    let family_label = match family {
+        CertFamily::Canonical => "canonical",
+        CertFamily::Anchored => "anchored",
+    };
+    let path = format!("{}/gridcap-q{}{}.cert", outdir, q, suffix);
     let mut w = BufWriter::new(std::fs::File::create(&path).expect("create cert file"));
     writeln!(w, "# gridcap-escape-certificate v1").unwrap();
+    writeln!(w, "# family {}", family_label).unwrap();
     writeln!(w, "q {}", q).unwrap();
     if is_prime(q) {
         writeln!(w, "field prime").unwrap();
@@ -2437,7 +2476,7 @@ fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
 
     for &ci in &selected {
         if ci >= ncls {
-            eprintln!("cert: class index {} out of range ({} classes)", ci, ncls);
+        eprintln!("cert: class index {} out of range ({} {} classes)", ci, ncls, family_label);
             continue;
         }
         let (occ0, chosen, forbidden) = &frontier[ci];
@@ -2542,8 +2581,8 @@ fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
                 )
                 .unwrap();
                 eprintln!(
-                    "  [cert q={} {:6.1}s] class {} CAPPED (book > {} nodes)",
-                    q, start.elapsed().as_secs_f64(), ci, bookcap
+                    "  [cert {} q={} {:6.1}s] class {} CAPPED (book > {} nodes)",
+                    family_label, q, start.elapsed().as_secs_f64(), ci, bookcap
                 );
             }
             Some(bk) => {
@@ -2581,8 +2620,8 @@ fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
                     }
                 }
                 eprintln!(
-                    "  [cert q={} {:6.1}s] class {}/{}: escape={} witness=({},{}) onconic={} book nodes={} rows={} terms={}",
-                    q, start.elapsed().as_secs_f64(), ci, ncls - 1, escape, wr, wc, onc, nnodes, nrows, nterm
+                    "  [cert {} q={} {:6.1}s] class {}/{}: escape={} witness=({},{}) onconic={} book nodes={} rows={} terms={}",
+                    family_label, q, start.elapsed().as_secs_f64(), ci, ncls - 1, escape, wr, wc, onc, nnodes, nrows, nterm
                 );
             }
         }
@@ -2604,9 +2643,9 @@ fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
         let outcome = if root_n { "N (COUNTEREXAMPLE!)" } else { "P" };
         let parity_ok = even_esc == 0;
         println!(
-            "q={:>3}  root={}  size3-classes={}  total(q^2-9q+21)={}  min-escape={}  max-escape={}  \
+            "q={:>3}  family={}  root={}  size3-classes={}  total(q^2-9q+21)={}  min-escape={}  max-escape={}  \
              bad-odd(even-escape) classes={}/{}  parity-proof={}",
-            q, outcome, ncls, total_expected,
+            q, family_label, outcome, ncls, total_expected,
             if min_esc == usize::MAX { 0 } else { min_esc }, max_esc,
             even_esc, ncls, if parity_ok { "HOLDS (all bad even)" } else { "BREAKS" },
         );
@@ -2617,8 +2656,8 @@ fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
         );
     } else {
         println!(
-            "q={:>3}  cert PARTIAL classes={} on-conic={} off-conic={} capped-books={}  [{:.1}s]",
-            q, selected.len(), onc_yes, onc_no, capped, start.elapsed().as_secs_f64()
+            "q={:>3}  family={}  cert PARTIAL classes={} on-conic={} off-conic={} capped-books={}  [{:.1}s]",
+            q, family_label, selected.len(), onc_yes, onc_no, capped, start.elapsed().as_secs_f64()
         );
     }
     println!("wrote {}", path);
@@ -2898,13 +2937,16 @@ fn main() {
         return;
     }
     if args[1] == "cert" {
-        // cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]
+        // cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
         let mut outdir = "certs".to_string();
         let mut bookcap: usize = usize::MAX;
+        let mut family = CertFamily::Canonical;
         let mut positional: Vec<usize> = Vec::new();
         let mut it = args[2..].iter();
         while let Some(a) = it.next() {
-            if a == "--out" {
+            if a == "--anchored" {
+                family = CertFamily::Anchored;
+            } else if a == "--out" {
                 outdir = it.next().expect("--out needs a value").clone();
             } else if let Some(rest) = a.strip_prefix("--out=") {
                 outdir = rest.to_string();
@@ -2916,9 +2958,9 @@ fn main() {
                 positional.push(a.parse().expect("q / class-index must be an integer"));
             }
         }
-        let q = *positional.first().expect("cert mode needs q: cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]");
+        let q = *positional.first().expect("cert mode needs q: cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]");
         let filter: Vec<usize> = positional[1..].to_vec();
-        solve_cert(q, &filter, &outdir, bookcap);
+        solve_cert(q, &filter, &outdir, bookcap, family);
         return;
     }
     if args[1] == "certcheck" {

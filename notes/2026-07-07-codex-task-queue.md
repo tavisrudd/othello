@@ -283,7 +283,7 @@ that survives the known q=5-exception structure is progress — report what brea
 
 Report file: `notes/2026-07-07-codex-sumfree-induction-r.md`.
 
-## C17. Anchored certificate family — the constructive `represents` bridge (route C, phase 2)
+## C17. Anchored certificate family — the constructive `represents` bridge (route C, phase 2) [REPORTED 2026-07-08]
 
 C14's scaffold is sound and its one open gap is the `GridOddEscapeBookCertificate.represents`
 selector (canonical-class → every position). Fable's design decision: **replace full-canon
