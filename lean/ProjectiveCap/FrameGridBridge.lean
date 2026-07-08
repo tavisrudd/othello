@@ -372,6 +372,14 @@ theorem colDirection_mem_fixedDirections :
     colDirection (K := K) ∈ fixedDirections (K := K) := by
   simp [fixedDirections]
 
+theorem insert_affine_fixed_union_image [DecidableEq K] {S : Finset (GridPoint K)}
+    (p : GridPoint K) :
+    insert (affinePoint (K := K) p)
+        (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) =
+      fixedDirections (K := K) ∪ (insert p S).map (affineEmbedding (K := K)) := by
+  ext x
+  simp [Finset.map_insert, affineEmbedding]
+
 omit [DecidableEq (Point K (PlaneVec K))] in
 theorem affinePoint_mem_map {S : Finset (GridPoint K)} {p : GridPoint K} (hp : p ∈ S) :
     affinePoint (K := K) p ∈ S.map (affineEmbedding (K := K)) := by
@@ -617,6 +625,76 @@ theorem projectiveCap_of_gridCap [DecidableEq K] {S : Finset (GridPoint K)}
           exact hbc (by simp [h])
         exact not_collinear_affine_affine_affine (K := K) hS
           hpa hpb hpc hpapb hpapc hpbpc hcol
+
+/-- After the two coordinate directions are fixed, every legal full-projective
+move is represented by a fresh affine-grid move. -/
+theorem projectiveMove_exists_gridMove [Fintype K] [DecidableEq K]
+    {S : Finset (GridPoint K)} {x : Point K (PlaneVec K)}
+    (hxmove : FiniteBuildGame.Move (Cap K (PlaneVec K))
+      (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) x) :
+    ∃ p : GridPoint K, x = affinePoint (K := K) p ∧ GridGame.Move (K := K) S p := by
+  rcases point_eq_affine_or_collinear_row_col (K := K) x with ⟨p, hxaff⟩ | hline
+  · subst x
+    have hpnot : p ∉ S := by
+      intro hp
+      exact hxmove.1 (Finset.mem_union_right _
+        (affinePoint_mem_map (K := K) hp))
+    have hcap :
+        Cap K (PlaneVec K)
+          (fixedDirections (K := K) ∪ (insert p S).map (affineEmbedding (K := K))) := by
+      simpa [insert_affine_fixed_union_image (K := K) (S := S) p] using hxmove.2
+    have hgrid : GridCap (K := K) (insert p S) :=
+      gridCap_of_projectiveCap (K := K) hcap
+    exact ⟨p, rfl, ⟨hpnot, hgrid⟩⟩
+  · exfalso
+    have hrowOld :
+        rowDirection (K := K) ∈
+          fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+      Finset.mem_union_left _ (rowDirection_mem_fixedDirections (K := K))
+    have hcolOld :
+        colDirection (K := K) ∈
+          fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)) :=
+      Finset.mem_union_left _ (colDirection_mem_fixedDirections (K := K))
+    have hrowMem :
+        rowDirection (K := K) ∈
+          insert x (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) :=
+      Finset.mem_insert_of_mem hrowOld
+    have hcolMem :
+        colDirection (K := K) ∈
+          insert x (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) :=
+      Finset.mem_insert_of_mem hcolOld
+    have hxMem :
+        x ∈ insert x (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))) :=
+      Finset.mem_insert_self _ _
+    have hx_ne_row : x ≠ rowDirection (K := K) := by
+      intro h
+      exact hxmove.1 (h ▸ hrowOld)
+    have hx_ne_col : x ≠ colDirection (K := K) := by
+      intro h
+      exact hxmove.1 (h ▸ hcolOld)
+    exact hxmove.2 hrowMem hcolMem hxMem
+      (rowDirection_ne_colDirection (K := K))
+      (Ne.symm hx_ne_row) (Ne.symm hx_ne_col) hline
+
+/-- Every legal residual-grid move gives the corresponding legal full-projective
+move from the fixed coordinate-direction prefix. -/
+theorem gridMove_to_projectiveMove [Fintype K] [DecidableEq K]
+    {S : Finset (GridPoint K)} {p : GridPoint K}
+    (hpmove : GridGame.Move (K := K) S p) :
+    FiniteBuildGame.Move (Cap K (PlaneVec K))
+      (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K)))
+      (affinePoint (K := K) p) := by
+  constructor
+  · intro hpold
+    rcases mem_fixed_union_image_cases (K := K) hpold with hrow | hcol | ⟨q, hq, hpq⟩
+    · exact affinePoint_ne_rowDirection (K := K) p hrow
+    · exact affinePoint_ne_colDirection (K := K) p hcol
+    · exact hpmove.1 (((affinePoint_injective (K := K)) hpq).symm ▸ hq)
+  · have hcap :
+        Cap K (PlaneVec K)
+          (fixedDirections (K := K) ∪ (insert p S).map (affineEmbedding (K := K))) :=
+      projectiveCap_of_gridCap (K := K) hpmove.2
+    simpa [insert_affine_fixed_union_image (K := K) (S := S) p] using hcap
 
 /--
 Concrete coordinate bridge for WP-1: the projective cap condition with the two
