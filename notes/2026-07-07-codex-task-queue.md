@@ -347,7 +347,7 @@ was (this is itself the sizing datum).
 
 Report file: `notes/2026-07-07-codex-ml-moduli-attribution.md`.
 
-## C19. Verified boolean book-checker + reflection (route C, phase 3 — the C17 fix)
+## C19. Verified boolean book-checker + reflection (route C, phase 3 — the C17 fix) [REPORTED 2026-07-08]
 
 C17's STOP diagnosis is confirmed and the fix direction it proposed is approved: do NOT raise
 `maxRecDepth`, do NOT use `native_decide`. Build the reflection route — a computable `Bool`

@@ -52,7 +52,6 @@ theorem mem_freeFreeCells {S : Finset (GridPoint K)} {p : GridPoint K} :
       p.1 ∉ UsedRows (K := K) S ∧ p.2 ∉ UsedCols (K := K) S := by
   simp [FreeFreeCells]
 
-omit [DecidableEq K] in
 theorem mem_pairLine {a b p : GridPoint K} :
     p ∈ PairLine (K := K) a b ↔ Collinear (K := K) a b p := by
   classical

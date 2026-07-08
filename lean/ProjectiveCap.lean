@@ -15,4 +15,5 @@ import ProjectiveCap.IntrusionCalculus
 import ProjectiveCap.EscapeParity
 import ProjectiveCap.Almost.OddEscape
 import ProjectiveCap.Certificate
+import ProjectiveCap.CertCheck
 import ProjectiveCap.PlaneOutcome

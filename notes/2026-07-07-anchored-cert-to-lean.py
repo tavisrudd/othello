@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Generate Lean GridClassCert data from an anchored gridcap certificate.
 
-This is a prototype generator for C17.  It targets prime-field anchored certs
-and emits one `GridClassCert (ZMod q)` term plus one `by decide` validity proof
-per class.
+This is the C19 reflection-route generator.  It targets prime-field anchored
+certs and emits list-backed `CertCheck.ClassData (ZMod q)` terms plus one
+`by decide` proof per class for the Boolean checker.
 """
 
 from __future__ import annotations
@@ -93,14 +93,24 @@ def lean_finset(elems: list[str], typ: str) -> str:
     return "({" + ", ".join(elems) + f"}} : Finset ({typ}))"
 
 
+def lean_list(elems: list[str], typ: str) -> str:
+    if not elems:
+        return f"([] : List ({typ}))"
+    return "([" + ", ".join(elems) + f"] : List ({typ}))"
+
+
 def class_prefix(ci: int) -> str:
     return f"class{ci}"
+
+
+def chunks(xs: list[tuple[int, int]], size: int) -> list[list[tuple[int, int]]]:
+    return [xs[i:i + size] for i in range(0, len(xs), size)]
 
 
 def generate(q: int, classes: list[ClassRec]) -> str:
     ns = f"Q{q}"
     lines: list[str] = []
-    lines.append("import ProjectiveCap.Certificate")
+    lines.append("import ProjectiveCap.CertCheck")
     lines.append("")
     lines.append("namespace ProjectiveCap")
     lines.append("namespace Certificate")
@@ -114,52 +124,138 @@ def generate(q: int, classes: list[ClassRec]) -> str:
     lines.append("")
     lines.append("def pt (r c : Nat) : P := ((r : K), (c : K))")
     lines.append("")
+    cells = [(r, c) for r in range(q) for c in range(q)]
+    cell_chunks = chunks(cells, 11)
+    for idx, chunk in enumerate(cell_chunks):
+        lines.append(f"def allCellsChunk{idx} : List P :=")
+        lines.append(f"  {lean_list([lean_point(c) for c in chunk], 'P')}")
+    lines.append("def allCellChunks : List (List P) :=")
+    lines.append(f"  {lean_list([f'allCellsChunk{idx}' for idx in range(len(cell_chunks))], 'List P')}")
+    lines.append("def allCells : List P :=")
+    lines.append("  allCellChunks.flatten")
+    lines.append("theorem allCells_mem (x : GridPoint K) : x ∈ allCells := by")
+    lines.append("  rcases x with ⟨r, c⟩")
+    lines.append("  fin_cases r <;> fin_cases c <;> decide")
+    lines.append("")
     for rec in classes:
         pfx = class_prefix(rec.ci)
-        lines.append(f"def {pfx}_s3 : Finset P :=")
-        lines.append(f"  {lean_finset([lean_point(c) for c in rec.s3], 'P')}")
+        witness_term = f"({lean_point(rec.witness)})"
+        lines.append(f"def {pfx}_s3 : List P :=")
+        lines.append(f"  {lean_list([lean_point(c) for c in rec.s3], 'P')}")
         for nid in sorted(rec.nodes):
-            lines.append(f"def {pfx}_node{nid} : Finset P :=")
-            lines.append(f"  {lean_finset([lean_point(c) for c in rec.nodes[nid]], 'P')}")
+            lines.append(f"def {pfx}_node{nid} : List P :=")
+            lines.append(f"  {lean_list([lean_point(c) for c in rec.nodes[nid]], 'P')}")
         node_names = [f"{pfx}_node{nid}" for nid in sorted(rec.nodes)]
-        lines.append(f"def {pfx}_nodes : Finset (Finset P) :=")
-        lines.append(f"  {lean_finset(node_names, 'Finset P')}")
+        lines.append(f"def {pfx}_nodes : List (List P) :=")
+        lines.append(f"  {lean_list(node_names, 'List P')}")
         row_names = []
         for ridx, (nid, mover, reply, cid) in enumerate(rec.rows):
             rname = f"{pfx}_row{ridx}"
-            row_names.append(f"({pfx}_node{nid}, {rname})")
-            lines.append(f"def {rname} : FiniteBuildGame.ReplyBookRow P where")
+            row_names.append(rname)
+            lines.append(f"def {rname} : CertCheck.RowData K where")
+            lines.append(f"  node := {pfx}_node{nid}")
             lines.append(f"  mover := {lean_point(mover)}")
             lines.append(f"  reply := {lean_point(reply)}")
             lines.append(f"  child := {pfx}_node{cid}")
-        row_type = "Prod (Finset P) (FiniteBuildGame.ReplyBookRow P)"
-        lines.append(f"def {pfx}_rows : Finset ({row_type}) :=")
-        lines.append(f"  {lean_finset(row_names, row_type)}")
-        lines.append(f"def {pfx}_book : FiniteBuildGame.ReplyBookDAG P where")
+        lines.append(f"def {pfx}_rows : List (CertCheck.RowData K) :=")
+        lines.append(f"  {lean_list(row_names, 'CertCheck.RowData K')}")
+        lines.append(f"def {pfx}_book : CertCheck.BookData K where")
+        lines.append("  cells := allCells")
         lines.append(f"  root := {pfx}_node0")
-        lines.append(f"  Node := fun S => Membership.mem S {pfx}_nodes")
-        lines.append(f"  Row := fun S row => Membership.mem (S, row) {pfx}_rows")
-        lines.append(f"def {pfx} : GridClassCert K where")
+        lines.append(f"  nodes := {pfx}_nodes")
+        lines.append(f"  rows := {pfx}_rows")
+        lines.append(f"theorem {pfx}_book_cells_eq : {pfx}_book.cells = allCells := by")
+        lines.append("  rfl")
+        lines.append(f"theorem {pfx}_book_nodes_eq : {pfx}_book.nodes = {pfx}_nodes := by")
+        lines.append("  rfl")
+        lines.append(f"def {pfx}_data : CertCheck.ClassData K where")
         lines.append(f"  classIndex := {rec.ci}")
         lines.append(f"  sizeThree := {pfx}_s3")
         lines.append(f"  witness := {lean_point(rec.witness)}")
         lines.append(f"  book := {pfx}_book")
-        lines.append(f"theorem {pfx}_book_valid : {pfx}_book.ValidFor (GridCap (K := K)) := by")
-        lines.append(f"  unfold {pfx}_book")
+        lines.append(f"def {pfx} : GridClassCert K :=")
+        lines.append(f"  {pfx}_data.toCert")
+        lines.append(f"theorem {pfx}_size_check :")
+        lines.append(f"    decide ({pfx}_s3.toFinset.card = 3) = true := by")
+        lines.append("  rfl")
+        lines.append(f"theorem {pfx}_s3_cap_check :")
+        lines.append(f"    CertCheck.checkCap (K := K) {pfx}_s3 = true := by")
+        lines.append("  rfl")
+        lines.append(f"theorem {pfx}_witness_check :")
+        lines.append(f"    CertCheck.checkMove (K := K) {pfx}_s3 {witness_term} = true := by")
+        lines.append("  rfl")
+        lines.append(f"theorem {pfx}_root_eq_check :")
+        lines.append(
+            f"    decide ({pfx}_book.root.toFinset = insert {witness_term} {pfx}_s3.toFinset) = true := by"
+        )
+        lines.append("  rfl")
+        lines.append(f"theorem {pfx}_root_check :")
+        lines.append(f"    CertCheck.BookData.checkRoot (K := K) {pfx}_book = true := by")
+        lines.append("  rfl")
+        node_cap_names = []
+        for nid in sorted(rec.nodes):
+            ncap_name = f"{pfx}_node{nid}_cap_check"
+            node_cap_names.append(ncap_name)
+            lines.append(f"theorem {ncap_name} :")
+            lines.append(f"    CertCheck.checkCap (K := K) {pfx}_node{nid} = true := by")
+            lines.append("  rfl")
+        lines.append(f"theorem {pfx}_nodes_check :")
+        lines.append(f"    CertCheck.BookData.checkNodes (K := K) {pfx}_book = true := by")
+        node_simp_terms = ", ".join(
+            ["CertCheck.BookData.checkNodes", f"{pfx}_book_nodes_eq", f"{pfx}_nodes"]
+            + node_cap_names
+        )
+        lines.append(f"  simp [{node_simp_terms}]")
+        step_names = []
+        for nid in sorted(rec.nodes):
+            cname = f"{pfx}_step{nid}_chunks_check"
+            lines.append(f"theorem {cname} :")
+            lines.append(
+                f"    CertCheck.BookData.checkNodeStepChunks (K := K) {pfx}_book {pfx}_node{nid} allCellChunks = true := by"
+            )
+            lines.append("  rfl")
+            sname = f"{pfx}_step{nid}_check"
+            step_names.append(sname)
+            lines.append(f"theorem {sname} :")
+            lines.append(
+                f"    CertCheck.BookData.checkNodeStep (K := K) {pfx}_book {pfx}_node{nid} = true := by"
+            )
+            lines.append("  unfold CertCheck.BookData.checkNodeStep")
+            lines.append(f"  rw [{pfx}_book_cells_eq]")
+            lines.append("  unfold allCells")
+            lines.append(f"  exact CertCheck.BookData.checkNodeStepOn_of_chunks (K := K) {cname}")
+        lines.append(f"theorem {pfx}_steps_check :")
+        lines.append(f"    CertCheck.BookData.checkSteps (K := K) {pfx}_book = true := by")
+        simp_terms = ", ".join(
+            ["CertCheck.BookData.checkSteps", f"{pfx}_book_nodes_eq", f"{pfx}_nodes"]
+            + step_names
+        )
+        lines.append(f"  simp [{simp_terms}]")
+        lines.append(f"theorem {pfx}_book_valid :")
+        lines.append(f"    {pfx}_book.toDAG.ValidFor (GridCap (K := K)) := by")
+        lines.append(f"  have hcells : ∀ x : GridPoint K, x ∈ {pfx}_book.cells := by")
+        lines.append("    intro x")
+        lines.append(f"    rw [{pfx}_book_cells_eq]")
+        lines.append("    exact allCells_mem x")
+        lines.append("  unfold CertCheck.BookData.toDAG")
         lines.append("  exact FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows")
         lines.append("    (Valid := GridCap (K := K))")
-        lines.append(f"    (root := {pfx}_node0)")
-        lines.append(f"    (nodes := {pfx}_nodes)")
-        lines.append(f"    (rows := {pfx}_rows)")
-        lines.append("    (by decide)")
-        lines.append("    (by decide)")
-        lines.append("    (by decide)")
+        lines.append(f"    (root := {pfx}_book.root.toFinset)")
+        lines.append(f"    (nodes := {pfx}_book.nodesFinset)")
+        lines.append(f"    (rows := {pfx}_book.rowsFinset)")
+        lines.append(f"    (CertCheck.BookData.checkRoot_sound (K := K) {pfx}_root_check)")
+        lines.append(f"    (CertCheck.BookData.checkNodes_sound (K := K) {pfx}_nodes_check)")
+        lines.append(f"    (CertCheck.BookData.checkSteps_sound (K := K) hcells {pfx}_steps_check)")
         lines.append(f"theorem {pfx}_valid : {pfx}.Valid := by")
-        lines.append(f"  unfold GridClassCert.Valid {pfx}")
-        lines.append("  exact And.intro (by decide) (And.intro (by decide)")
-        lines.append("    (And.intro (by")
-        lines.append("      exact GridGame.mem_legalExtensions.mpr (by decide))")
-        lines.append(f"      (And.intro (by decide) {pfx}_book_valid)))")
+        lines.append(f"  unfold {pfx} CertCheck.ClassData.toCert GridClassCert.Valid")
+        lines.append("  refine ⟨?_, ?_, ?_, ?_, ?_⟩")
+        lines.append(f"  · exact of_decide_eq_true {pfx}_size_check")
+        lines.append(f"  · exact CertCheck.checkCap_sound (K := K) {pfx}_s3_cap_check")
+        lines.append(
+            f"  · exact GridGame.mem_legalExtensions.mpr (CertCheck.checkMove_sound (K := K) {pfx}_witness_check)"
+        )
+        lines.append(f"  · exact of_decide_eq_true {pfx}_root_eq_check")
+        lines.append(f"  · exact {pfx}_book_valid")
         lines.append("")
     lines.append("end " + ns)
     lines.append("end CertData")
