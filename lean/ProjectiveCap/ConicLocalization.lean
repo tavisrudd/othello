@@ -426,6 +426,12 @@ theorem uniqueConicThroughFiveArcStatement_of_hyperbolaNormalFormStatement
     rcases huniq D.rho D.A D.B hDnondeg hDfitHyper with ⟨hrho, hA, hB'⟩
     exact burnedDirectionConic_eq_hyperbolaConic_of_params (K := K) D hrho hA hB'
 
+omit [Fintype K] in
+theorem uniqueConicThroughFiveArcStatement :
+    UniqueConicThroughFiveArcStatement (K := K) :=
+  uniqueConicThroughFiveArcStatement_of_hyperbolaNormalFormStatement
+    (K := K) (hyperbolaNormalFormStatement (K := K))
+
 /-- Legal on-conic extensions of `S`, relative to a chosen hyperbola model. -/
 noncomputable def OnConicLegalExtensions
     (S : Finset (GridPoint K)) (rho A B : K) : Finset (GridPoint K) := by
