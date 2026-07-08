@@ -179,6 +179,38 @@ Do not start C11 from the current P0a data.
 
 Report file: `notes/2026-07-07-codex-cert-extractor-report.md`.
 
+## C12. Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1)
+
+Context: the odd-side Lean compositions are done and conditional only on
+`OddEscapeGameStatement`/`OnConicEscapeStatement` (see `lean/ProjectiveCap/PlaneOutcome.lean`;
+the parity/pairing hypotheses are marked FALSE-universally in-file — do not proof-search them).
+Route C of `2026-07-07-projcap-open-math-plan.md` turns the computed ladder into formal per-q
+theorems via certificates. Your C3 gate PASSED (esc mode validated q=17/q=19 per-class), so the
+class-private subtree machinery is the trusted substrate; C8 validated the canon at the needed
+scale; C5's PGL(2,17) collapse (273 on-conic children → 10 orbit buckets, value-constant) says
+orbit-level books compress well.
+
+Task — add a `cert` mode to `notes/2026-07-06-grid-cap-solver.rs` (single-core, ≤1 GB, q ≤ 13
+first; q=17/19 only if the private-memo peak allows — C3 measured q=19 peak ~32.3M entries):
+1. Per canonical size-3 class of GF(q): emit the class representative `S₃`, one witness escape
+   cell `p` (prefer an ON-conic witness when one exists — record on/off), and a **P-certificate
+   of `insert p S₃`**: a reply book mapping every legal move `x` from the size-4 position to a
+   reply `y` such that the book is closed and terminals are even (the shape
+   `FiniteBuildGame.PairReplyBook` / `PCert` expects — see `lean/CapGame/BuildGame.lean`; depth
+   is bounded by max cap size, so a DAG book with explicit terminal parity rows is fine).
+2. Output format: line-oriented plain text, one file per q (`notes/certs/gridcap-q<q>.cert`),
+   self-describing header (q, class count, field poly for q=9), cells as `r,c` integers. Keep it
+   trivially parseable — a Lean elaborator will consume it (WP-3); no serde, no JSON nesting.
+3. Validate: an independent `certcheck` mode that re-verifies every book row against the game
+   rules ONLY (no game values): legality of moves/replies, closure, terminal parity. Then
+   cross-check per-class witness escape counts against the `esc`/`escape` histograms.
+4. Report: format spec, per-q class/book/row counts, certcheck output verbatim, wall/RSS.
+
+Do NOT start the Lean checker side (WP-3) — Fable is scoping it; the deliverable here is the
+emitter + self-check + format spec for the checker to target.
+
+Report file: `notes/2026-07-07-codex-cert-emitter-report.md`.
+
 ## Standing (unchanged)
 
 WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per

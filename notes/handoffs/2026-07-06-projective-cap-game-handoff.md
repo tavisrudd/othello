@@ -897,6 +897,37 @@ DEAD.** Live routes, priority order:
 - (0) import q=2 column beyond PG(4,2) from the F_2^{m+1} sum-free solver.
 - (4) canonical solver for PG(5,2)/larger + the `m ≥ 3` decomposition probe.
 
+**2026-07-07 (session 10, Fable) — Lean residual-gap triage + intrusion calculus formalized
+(game half).** Reviewed the full `lean/ProjectiveCap` state after Codex's WP-1/WP-2/C2 pass:
+q-even is an UNCONDITIONAL theorem (`PlaneOutcome.initialPStatement_of_even_card_finrank` —
+even `|K|` + rank 3 ⇒ `InitialPStatement`, no residual hypotheses); q-odd composes to rank-3
+outcome from any of four residual hypotheses, of which THREE are false as universal statements
+(grid-wide bad-parity: fails q ≥ 11; on-conic bad-parity: fails at q = 11, even-onP classes in
+the feat table; ψ-pairing criterion: seed-invariance forces `tᵢ² = tⱼtₖ`, generic seeds have no
+such `u`) — only `OnConicEscapeStatement` (= (ON)) is the live universal gap. Landed:
+1. **Doc-guards** on all dead-hypothesis routes (`PlaneOutcome`/`ConicLocalization`/
+   `EscapeParity` — "per-q use only, do not proof-search"), commit `a13f41d`.
+2. **`ProjectiveCap/IntrusionCalculus.lean` (new, sorry-free)** — the session-9 intrusion
+   calculus's game-theoretic layer: `freeConic_mem_legalExtensions` (Lemma II: every unplayed
+   conic cell legal while play stays on the conic), `legalExtensions_eq_sdiff_of_conicOnlyAbove`,
+   **`isP_iff_even_card_sdiff_of_conicOnlyAbove` (the bare-counter theorem: no intrusion above ⇒
+   value = parity of unplayed conic cells, strong induction on the deficiency)**,
+   `isP_of_card_four_of_conicOnlyAbove` (odd q: on-conic S₄ + no intrusion ⇒ P),
+   `onConicEscapeStatement_of_noIntrusionAboveFour` (Theorem IV game half), and the rank-3
+   composition `initialPStatement_of_noIntrusionAboveFour_finrank`. The one remaining input is
+   `NoIntrusionAboveFourStatement` — Theorem IV's finite-geometry kernel (tangency bound), TRUE
+   for q = 5, 7 / FALSE from q = 11 (per-q target, warned in-file). Proving it at GF(5)/GF(7)
+   makes q = 5, 7 the first odd planes proven in Lean by mechanism rather than enumeration.
+3. **Codex C12 queued** (task-queue note): Rust `cert` mode — per-class witness escape cell +
+   P-reply-book emitter + independent `certcheck`, format targeting
+   `FiniteBuildGame.PairReplyBook`/`PCert` (route C, phase 1). C3's esc-gate PASS + C8's canon
+   validation are the substrate; C5's PGL(2,17) orbit collapse (273 → 10 value-constant buckets)
+   is the compression signal for orbit-level books.
+Codex queue C1–C10 all reported; C11 correctly NO-GO. Next: (i) Codex C12 emitter → WP-3 Lean
+checker → per-q `OddEscapeGameStatement` for the computed ladder; (ii) formalize the
+no-intrusion kernel for GF(5)/GF(7); (iii) math frontier stays session-9 §6 (two-plus-intruder
+residual, `ord(σ_x σ_x')` census vs feat values, second-intrusion answer lemma).
+
 ## Handoff Summary
 
 The affine cap game is solved because affine space has exactly the mirrors needed. The projective
