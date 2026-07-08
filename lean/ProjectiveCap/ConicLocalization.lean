@@ -1033,6 +1033,35 @@ def GridSymmetry (f : GridPoint K -> GridPoint K) : Prop :=
     ∀ S : Finset (GridPoint K),
       GridCap (K := K) (S.image f) ↔ GridCap (K := K) S
 
+theorem gridSymmetry_isP_image {f : GridPoint K -> GridPoint K}
+    (hf : GridSymmetry (K := K) f) (S : Finset (GridPoint K)) :
+    GridGame.IsP (K := K) (S.image f) ↔ GridGame.IsP (K := K) S := by
+  classical
+  let e : GridPoint K ≃ GridPoint K := Equiv.ofBijective f hf.1
+  have hmap : ∀ T : Finset (GridPoint K), T.map e.toEmbedding = T.image f := by
+    intro T
+    ext y
+    rw [Finset.mem_map_equiv, Finset.mem_image]
+    constructor
+    · intro hy
+      refine ⟨e.symm y, hy, ?_⟩
+      exact e.apply_symm_apply y
+    · rintro ⟨x, hx, hxy⟩
+      have hex : e x = y := by
+        simpa [e] using hxy
+      have hxey : e.symm y = x := by
+        rw [← hex, Equiv.symm_apply_apply]
+      simpa [hxey] using hx
+  have hValid : ∀ T : Finset (GridPoint K),
+      GridCap (K := K) (T.map e.toEmbedding) ↔ GridCap (K := K) T := by
+    intro T
+    rw [hmap T]
+    exact hf.2 T
+  change FiniteBuildGame.IsP (GridCap (K := K)) (S.image f) ↔
+    FiniteBuildGame.IsP (GridCap (K := K)) S
+  rw [← hmap S]
+  exact FiniteBuildGame.isP_equiv e hValid S
+
 omit [Fintype K] in
 theorem rowSparse_image_psi {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
     {S : Finset (GridPoint K)} (hS : GridCap (K := K) S) :
