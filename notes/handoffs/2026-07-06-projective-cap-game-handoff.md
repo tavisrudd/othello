@@ -979,8 +979,18 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    the largest book ~29.6K nodes (q=19; 85 MB file, 565s wall). **Every witness at every q
    is ON-conic** — cert-grade corroboration of (ON) including the q=17 min-escape classes.
    Checker adversarially validated (tampered certs FAIL correctly). WP-3 (Lean checker,
-   Codex C14) is now unblocked. NOTE: `notes/certs/` (~96 MB total) + the solver diff are
-   uncommitted — user call on whether the big cert files go into git.
+   Codex C14) is now unblocked. Cert files = REGEN ON DEMAND (user decision): `notes/certs/`
+   gitignored, the `cert`/`certcheck` solver modes committed (`14c73cf`) so regeneration is
+   durable (~10 min for the whole ladder).
+8. **C13 REPORTED (Codex) — the q=9 intrusion mechanism is maximally rigid**
+   (`2026-07-07-codex-q9-intrusion-probe.md`): exhaustive over all 70 on-conic S₄'s of a
+   normalized conic (2 PGL(2,9) classes). Census = ONLY `(τ_x, τ_played) = (2,2)` intruders
+   (Lemma III(4) sharp), every intrusion kills the whole remaining conic, and **every
+   intruded child has exactly ONE legal reply, which is terminal** — P2's answer is a unique
+   forced second intrusion ending the game. Conic first moves are answered on the conic
+   (parity). So every on-conic S₄ at q=9 is P with residual depth 1 — the q=9 Lean proof
+   shape is now pinned: (a) the free-endgame theorem for conic moves, (b) the
+   `(2,2)`-tangency algebra + unique-terminal-reply lemma for intruders.
 
 ## Handoff Summary
 
