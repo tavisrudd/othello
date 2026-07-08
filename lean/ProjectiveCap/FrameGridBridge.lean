@@ -372,6 +372,10 @@ theorem colDirection_mem_fixedDirections :
     colDirection (K := K) ∈ fixedDirections (K := K) := by
   simp [fixedDirections]
 
+theorem fixedDirections_card :
+    (fixedDirections (K := K)).card = 2 := by
+  simp [fixedDirections, rowDirection_ne_colDirection]
+
 theorem insert_affine_fixed_union_image [DecidableEq K] {S : Finset (GridPoint K)}
     (p : GridPoint K) :
     insert (affinePoint (K := K) p)
@@ -398,6 +402,29 @@ theorem mem_fixed_union_image_cases [DecidableEq K] {S : Finset (GridPoint K)}
     · exact Or.inr (Or.inl hcol)
   · rcases Finset.mem_map.mp himage with ⟨p, hp, hpx⟩
     exact Or.inr (Or.inr ⟨p, hp, hpx.symm⟩)
+
+theorem fixedDirections_disjoint_affineImage [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    Disjoint (fixedDirections (K := K)) (S.map (affineEmbedding (K := K))) := by
+  rw [Finset.disjoint_left]
+  intro x hxFixed hxImage
+  have hfixed : x = rowDirection (K := K) ∨ x = colDirection (K := K) := by
+    simpa [fixedDirections] using hxFixed
+  rcases Finset.mem_map.mp hxImage with ⟨p, _hp, hpx⟩
+  rcases hfixed with hrow | hcol
+  · have hpRow : affinePoint (K := K) p = rowDirection (K := K) := by
+      simpa [affineEmbedding] using hpx.trans hrow
+    exact affinePoint_ne_rowDirection (K := K) p hpRow
+  · have hpCol : affinePoint (K := K) p = colDirection (K := K) := by
+      simpa [affineEmbedding] using hpx.trans hcol
+    exact affinePoint_ne_colDirection (K := K) p hpCol
+
+theorem fixed_union_affine_image_card [DecidableEq K]
+    (S : Finset (GridPoint K)) :
+    (fixedDirections (K := K) ∪ S.map (affineEmbedding (K := K))).card =
+      2 + S.card := by
+  rw [Finset.card_union_of_disjoint (fixedDirections_disjoint_affineImage (K := K) S),
+    fixedDirections_card (K := K), Finset.card_map]
 
 omit [DecidableEq (Point K (PlaneVec K))] in
 theorem projectiveCollinear_congr_set {a b c a' b' c' : Point K (PlaneVec K)}

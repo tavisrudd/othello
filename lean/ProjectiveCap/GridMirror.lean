@@ -449,6 +449,43 @@ theorem coordinateFullProjectiveFrame_isP_of_charTwo
     (S := StandardResidualSeed (K := K))).mpr
     (standardResidualSeed_isP_of_charTwo (K := K) h2)
 
+/--
+Characteristic-two coordinate projective-cap theorem: in the standard
+coordinate projective plane, the empty full projective game is a P-position.
+-/
+theorem coordinateInitialPStatement_of_charTwo
+    [DecidableEq (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    [Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    (h2 : (2 : K) = 0) :
+    Projective.InitialPStatement
+      (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) := by
+  let F : Finset (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K)) :=
+    Projective.FrameGridBridge.Coordinate.fixedDirections (K := K) ∪
+      (StandardResidualSeed (K := K)).map
+        (Projective.FrameGridBridge.Coordinate.affineEmbedding (K := K))
+  have hFcap :
+      Projective.Cap K (Projective.FrameGridBridge.Coordinate.PlaneVec K) F := by
+    dsimp [F]
+    exact Projective.FrameGridBridge.Coordinate.projectiveCap_of_gridCap
+      (K := K) (standardResidualSeed_gridCap (K := K))
+  have hFcard : F.card = 4 := by
+    dsimp [F]
+    rw [Projective.FrameGridBridge.Coordinate.fixed_union_affine_image_card,
+      standardResidualSeed_card]
+  have hFP :
+      FiniteBuildGame.IsP
+        (Projective.Cap K (Projective.FrameGridBridge.Coordinate.PlaneVec K)) F := by
+    dsimp [F]
+    exact coordinateFullProjectiveFrame_isP_of_charTwo (K := K) h2
+  have hrank : Module.finrank K (Projective.FrameGridBridge.Coordinate.PlaneVec K) = 3 := by
+    rw [Module.finrank_fintype_fun_eq_card, Fintype.card_fin]
+  exact ((Projective.initialPStatement_iff_isP_frame_of_finrank
+    (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K)
+    hrank hFcap hFcard).mpr hFP)
+
 end Game
 
 end GridMirror
