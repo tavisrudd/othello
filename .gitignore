@@ -6,3 +6,6 @@ __pycache__/
 *.so
 othello/_bitboard.c
 othello/_search.c
+
+# grid-cap escape certificates: regen on demand (cert mode in notes/2026-07-06-grid-cap-solver.rs)
+notes/certs/

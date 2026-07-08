@@ -36,6 +36,21 @@
 //   breaks   q   -- exact cross-check: for every P1 break from the frame, #replies / #true-P
 //                   replies / #P-replies that are symmetric (nontrivial stabilizer).
 //   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
+//   cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]
+//                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
+//                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
+//                   one exists, else off, recorded), and the FULL P-reply-book (responder strategy
+//                   DAG) of the size-4 P-position insert p S3 — matching FiniteBuildGame.PairReplyBook
+//                   / PCert (lean/CapGame/BuildGame.lean).  Writes <dir>/gridcap-q<q>.cert (default
+//                   dir "certs"), line-oriented plain text, self-describing header, cells as r,c.
+//                   Also prints the escape histogram (cross-check vs escape/esc).  Private per-class
+//                   value memo (dropped per class), single-threaded.  `--bookcap` caps a class's book
+//                   node count (marks it CAPPED, skips its book).
+//   certcheck <q> <file>
+//                -- INDEPENDENT re-verification of a .cert file using GAME RULES ONLY (no game
+//                   values): witness position = S3+p legal cap; per book node, move/reply legality,
+//                   closure (every legal move covered by exactly one reply row), child = P+x+y,
+//                   terminal parity (no legal move + even size); onconic flag vs conic geometry.
 //
 // Build:  rustc -O -C target-cpu=native 2026-07-06-grid-cap-solver.rs -o /tmp/gridcap
 // Falsification watch: if `outcome` ever prints N (first-player win), PG(2,q) has a
@@ -44,6 +59,7 @@
 use std::collections::{HashMap, HashSet};
 use std::env;
 use std::hash::{BuildHasherDefault, Hasher};
+use std::io::{BufWriter, Write};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::thread;
@@ -2188,6 +2204,647 @@ fn solve(q: usize, full: bool) {
     }
 }
 
+// ---- CERT mode: per-size-3-class escape certificate emitter (route C, phase 1) ----
+// (2026-07-07 codex task queue C12.)  For each canonical size-3 class S3, emit:
+//   * the class representative S3 (3 cells),
+//   * one witness escape cell p (a P size-4 child of S3; prefer an ON-conic p, record on/off),
+//   * a full P-reply-book of the size-4 P-position S4 = insert p S3: the responder's winning
+//     strategy as a DAG over ACTUAL positions.  Every book node is an even P-position; for each
+//     node, every legal mover move x is answered by a reply y whose grandchild P+x+y is again a
+//     book node (a P-position), down to even terminals (maximal caps, no legal move).
+// This is exactly the shape of FiniteBuildGame.PairReplyBook / PCert in lean/CapGame/BuildGame.lean:
+// isP_of_replyStrategy with Good = "position is a book node" discharges IsP for S4 (terminals
+// satisfy the reply obligation vacuously; sizes strictly grow => well-founded), and the recursive
+// PairReplyBook/PCert reading is covered by the explicit per-node rows + terminal parity lines.
+// Game values (needed only to PICK the P replies + count escapes) use a PRIVATE per-class canon memo
+// dropped after the class (esc-mode substrate); the emitted book + certcheck use game RULES only.
+
+// reconstruct (chosen, forbidden) masks from a cell set (game RULES: partial-permutation + affine
+// cap).  Order-independent: chosen = the cells; forbidden = union of rc_mask over cells + line_mask
+// over unordered pairs (line_mask is symmetric).  avail = all & !chosen & !forbidden = legal moves.
+fn masks_of(b: &Board, cells: &[u16]) -> (Mask, Mask) {
+    let mut chosen = [0u64; MAXW];
+    let mut forb = [0u64; MAXW];
+    for &c in cells {
+        set_bit(&mut chosen, c as usize);
+    }
+    for i in 0..cells.len() {
+        let ci = cells[i] as usize;
+        mask_or(&mut forb, &b.rc_mask[ci]);
+        for j in (i + 1)..cells.len() {
+            let cj = cells[j] as usize;
+            mask_or(&mut forb, &b.line_mask[ci * b.n + cj]);
+        }
+    }
+    (chosen, forb)
+}
+
+// legal moves (ascending cell index) from a position given its masks.
+fn avail_cells(b: &Board, chosen: &Mask, forb: &Mask) -> Vec<u16> {
+    let mut out = Vec::new();
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forb[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            out.push((w * 64 + tz) as u16);
+        }
+    }
+    out
+}
+
+// is `cells` a legal grid position (partial-permutation affine cap)?  Adds cells in the given order
+// and checks each is available given the earlier ones (a set property, so order is irrelevant).
+fn is_legal_position(b: &Board, cells: &[u16]) -> bool {
+    let mut cur: Vec<u16> = Vec::new();
+    for &c in cells {
+        let cu = c as usize;
+        if cu >= b.n {
+            return false;
+        }
+        let (chosen, forb) = masks_of(b, &cur);
+        if (chosen[cu >> 6] & (1u64 << (cu & 63))) != 0 {
+            return false; // duplicate cell
+        }
+        if (forb[cu >> 6] & (1u64 << (cu & 63))) != 0 {
+            return false; // shares a row/col or completes a collinear triple
+        }
+        cur.push(c);
+    }
+    true
+}
+
+// fit the unique conic through S3 (+ the two burned direction points): F(r,c)=rc+eps*r+zeta*c+gamma,
+// on-conic <=> F==0.  Same Gaussian elimination as feat mode (odd q; all cert q are odd).
+fn fit_conic(b: &Board, cells: &[(usize, usize)]) -> (usize, usize, usize) {
+    let gf = &b.gf;
+    let mut m: [[usize; 4]; 3] = [[0; 4]; 3];
+    for i in 0..3 {
+        let (r, c) = cells[i];
+        m[i] = [r, c, 1, gf.neg[gf.m(r, c)] as usize];
+    }
+    for col in 0..3 {
+        let piv = (col..3).find(|&i| m[i][col] != 0).expect("singular conic fit (S3 collinear?)");
+        m.swap(col, piv);
+        let inv = gf.inv[m[col][col]] as usize;
+        for j in col..4 {
+            m[col][j] = gf.m(inv, m[col][j]);
+        }
+        for i in 0..3 {
+            if i != col && m[i][col] != 0 {
+                let f = m[i][col];
+                for j in col..4 {
+                    m[i][j] = gf.sub(m[i][j], gf.m(f, m[col][j]));
+                }
+            }
+        }
+    }
+    (m[0][3], m[1][3], m[2][3])
+}
+
+fn fmt_cells(cells: &[(usize, usize)]) -> String {
+    cells.iter().map(|&(r, c)| format!("{},{}", r, c)).collect::<Vec<_>>().join(" ")
+}
+
+impl<'a> Solver<'a> {
+    // game value of an arbitrary legal position given as a cell list (early-break; canon-memoized).
+    fn value_cells(&mut self, cells: &[u16]) -> bool {
+        let (chosen, forb) = masks_of(self.b, cells);
+        let mut occ = cells.to_vec();
+        self.g(&mut occ, &chosen, &forb)
+    }
+}
+
+// the responder P-certificate as a DAG over actual positions.
+struct CertBook {
+    cells: Vec<Vec<u16>>,             // node id -> sorted cell list (an even P-position)
+    rows: Vec<Vec<(u16, u16, u32)>>,  // node id -> [(mover move, reply, child node id)]
+    terminal: Vec<bool>,             // node id -> no legal move (even maximal cap)
+    index: HashMap<Vec<u16>, u32>,    // sorted cells -> node id
+}
+impl CertBook {
+    fn new() -> CertBook {
+        CertBook { cells: Vec::new(), rows: Vec::new(), terminal: Vec::new(), index: HashMap::new() }
+    }
+    fn get_or_add(&mut self, cells: Vec<u16>) -> (u32, bool) {
+        if let Some(&id) = self.index.get(&cells) {
+            return (id, false);
+        }
+        let id = self.cells.len() as u32;
+        self.index.insert(cells.clone(), id);
+        self.cells.push(cells);
+        self.rows.push(Vec::new());
+        self.terminal.push(false);
+        (id, true)
+    }
+}
+
+// build the responder strategy DAG from a size-4 P-position `root_cells`.  Every node processed is a
+// P-position: it enumerates ALL mover moves x (closure), answers each with the lowest reply y whose
+// grandchild is a P-position (exists because a P-position's children are all N), and recurses on that
+// P grandchild.  Terminal = a P-node with no legal move.  Returns None if node count exceeds `cap`.
+fn build_book(b: &Board, s: &mut Solver, root_cells: &[u16], cap: usize) -> Option<CertBook> {
+    let mut book = CertBook::new();
+    let mut root = root_cells.to_vec();
+    root.sort_unstable();
+    let (root_id, _) = book.get_or_add(root);
+    let mut stack: Vec<u32> = vec![root_id];
+    while let Some(id) = stack.pop() {
+        if book.cells.len() > cap {
+            return None;
+        }
+        let cells = book.cells[id as usize].clone();
+        let (chosen, forb) = masks_of(b, &cells);
+        let moves = avail_cells(b, &chosen, &forb);
+        if moves.is_empty() {
+            book.terminal[id as usize] = true; // even maximal cap (all book nodes are even)
+            continue;
+        }
+        for x in moves {
+            let mut px = cells.clone();
+            px.push(x);
+            px.sort_unstable();
+            let (chx, fx) = masks_of(b, &px);
+            let ys = avail_cells(b, &chx, &fx);
+            let mut reply: Option<(u16, Vec<u16>)> = None;
+            for y in ys {
+                let mut pxy = px.clone();
+                pxy.push(y);
+                pxy.sort_unstable();
+                if !s.value_cells(&pxy) {
+                    reply = Some((y, pxy)); // P grandchild = a valid reply
+                    break;
+                }
+            }
+            let (y, pxy) = reply
+                .expect("P-position node has a mover move with no P-reply (root was not P?)");
+            let (cid, isnew) = book.get_or_add(pxy);
+            book.rows[id as usize].push((x, y, cid));
+            if isnew {
+                stack.push(cid);
+                if book.cells.len() > cap {
+                    return None;
+                }
+            }
+        }
+    }
+    Some(book)
+}
+
+// cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]
+fn solve_cert(q: usize, filter: &[usize], outdir: &str, bookcap: usize) {
+    let b = Board::new(q);
+    let empty = [0u64; MAXW];
+    // canonical size-3 classes (same enumerate/order as escape/esc modes -> stable class indices)
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    {
+        let mut visited: HashSet<u128> = HashSet::new();
+        let mut occ3: Vec<u16> = Vec::new();
+        enumerate(&b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+    }
+    let ncls = frontier.len();
+    let total_expected = (q * q + 21).wrapping_sub(9 * q); // q^2 - 9q + 21 (total lemma)
+    std::fs::create_dir_all(outdir).expect("create cert output dir");
+    let path = format!("{}/gridcap-q{}.cert", outdir, q);
+    let mut w = BufWriter::new(std::fs::File::create(&path).expect("create cert file"));
+    writeln!(w, "# gridcap-escape-certificate v1").unwrap();
+    writeln!(w, "q {}", q).unwrap();
+    if is_prime(q) {
+        writeln!(w, "field prime").unwrap();
+    } else {
+        let (p, poly) = irred(q);
+        let coeffs: Vec<String> = poly.iter().map(|c| c.to_string()).collect();
+        // poly coeffs are [c0..c_{k-1}, 1] (monic) over F_p; e.g. q=9 -> "1 0 1" = x^2+1 over F_3
+        writeln!(w, "field GF{} base {} poly {}", q, p, coeffs.join(" ")).unwrap();
+    }
+    writeln!(w, "classes {}", ncls).unwrap();
+    writeln!(w, "total {}", total_expected).unwrap();
+    writeln!(w, "# grammar (one record per line; tokens space-separated; cells are r,c 0-based):").unwrap();
+    writeln!(w, "#   CLASS <ci> s3 r,c r,c r,c escape <e> witness <r,c|none> onconic <0|1|-> book <ok|capped|none> nodes <N> rows <R> terms <T>").unwrap();
+    writeln!(w, "#   N <ci> <nid> r,c ...              node <nid> of class <ci> = even P-position (sorted cells); node 0 = witness position S3+p").unwrap();
+    writeln!(w, "#   R <ci> <nid> <mr,mc> <yr,yc> <cid>  from node <nid>: mover move (mr,mc), reply (yr,yc) -> child node <cid> = this node + {{move,reply}}").unwrap();
+    writeln!(w, "#   T <ci> <nid>                       node <nid> is terminal (no legal move; even size)").unwrap();
+
+    let selected: Vec<usize> = if filter.is_empty() { (0..ncls).collect() } else { filter.to_vec() };
+    let mut hist: std::collections::BTreeMap<usize, u64> = std::collections::BTreeMap::new();
+    let mut onc_yes = 0u64;
+    let mut onc_no = 0u64;
+    let mut capped = 0u64;
+    let mut min_esc = usize::MAX;
+    let mut max_esc = 0usize;
+    let mut even_esc = 0u64;
+    let start = Instant::now();
+
+    for &ci in &selected {
+        if ci >= ncls {
+            eprintln!("cert: class index {} out of range ({} classes)", ci, ncls);
+            continue;
+        }
+        let (occ0, chosen, forbidden) = &frontier[ci];
+        let s3_cells: Vec<(usize, usize)> =
+            occ0.iter().map(|&z| (z as usize / q, z as usize % q)).collect();
+        // private per-class value memo (dropped at loop end), early-break value function
+        let mut solver = Solver {
+            b: &b,
+            memo: FnvMap::default(),
+            full: false,
+            min_dev: usize::MAX,
+            odd_max: 0,
+            odd_max_min: usize::MAX,
+            dev_even_n: 0,
+            dev_odd_p: 0,
+        };
+        let (eps, zeta, gamma) = fit_conic(&b, &s3_cells);
+        let gf = &b.gf;
+        let on_conic = |z: usize| -> bool {
+            let (r, c) = (z / q, z % q);
+            gf.a(gf.a(gf.m(r, c), gf.m(eps, r)), gf.a(gf.m(zeta, c), gamma)) == 0
+        };
+        // value every legal size-4 child -> escape count + witness candidates (prefer on-conic P)
+        let mut avail = [0u64; MAXW];
+        for i in 0..MAXW {
+            avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+        }
+        let mut n_tot = 0usize;
+        let mut n_p = 0usize;
+        let mut wit_on: Option<u16> = None;
+        let mut wit_off: Option<u16> = None;
+        for wi in 0..MAXW {
+            let mut bits = avail[wi];
+            while bits != 0 {
+                let tz = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                let z = wi * 64 + tz;
+                n_tot += 1;
+                let mut child = occ0.clone();
+                child.push(z as u16);
+                child.sort_unstable();
+                if !solver.value_cells(&child) {
+                    n_p += 1; // P child = an escape
+                    if on_conic(z) {
+                        if wit_on.is_none() {
+                            wit_on = Some(z as u16);
+                        }
+                    } else if wit_off.is_none() {
+                        wit_off = Some(z as u16);
+                    }
+                }
+            }
+        }
+        let escape = n_p;
+        if escape < min_esc {
+            min_esc = escape;
+        }
+        if escape > max_esc {
+            max_esc = escape;
+        }
+        if escape % 2 == 0 {
+            even_esc += 1;
+        }
+        *hist.entry(escape).or_insert(0) += 1;
+        if n_tot != total_expected {
+            eprintln!("cert q={} cls={}: total {} != q^2-9q+21 {} (!!)", q, ci, n_tot, total_expected);
+        }
+
+        let (witness, onc) = match (wit_on, wit_off) {
+            (Some(z), _) => (z, true),
+            (None, Some(z)) => (z, false),
+            (None, None) => {
+                eprintln!("cert q={} cls={}: escape=0 (no P size-4 child) — (ESC) FAILS here!", q, ci);
+                writeln!(
+                    w,
+                    "CLASS {} s3 {} escape 0 witness none onconic - book none nodes 0 rows 0 terms 0",
+                    ci,
+                    fmt_cells(&s3_cells)
+                )
+                .unwrap();
+                continue;
+            }
+        };
+        if onc {
+            onc_yes += 1;
+        } else {
+            onc_no += 1;
+        }
+        let (wr, wc) = (witness as usize / q, witness as usize % q);
+
+        // build the reply book from S4 = S3 + witness (reusing the warmed private value memo)
+        let mut root = occ0.clone();
+        root.push(witness);
+        root.sort_unstable();
+        match build_book(&b, &mut solver, &root, bookcap) {
+            None => {
+                capped += 1;
+                writeln!(
+                    w,
+                    "CLASS {} s3 {} escape {} witness {},{} onconic {} book capped nodes 0 rows 0 terms 0",
+                    ci, fmt_cells(&s3_cells), escape, wr, wc, if onc { 1 } else { 0 }
+                )
+                .unwrap();
+                eprintln!(
+                    "  [cert q={} {:6.1}s] class {} CAPPED (book > {} nodes)",
+                    q, start.elapsed().as_secs_f64(), ci, bookcap
+                );
+            }
+            Some(bk) => {
+                let nnodes = bk.cells.len();
+                let nrows: usize = bk.rows.iter().map(|r| r.len()).sum();
+                let nterm = bk.terminal.iter().filter(|&&t| t).count();
+                writeln!(
+                    w,
+                    "CLASS {} s3 {} escape {} witness {},{} onconic {} book ok nodes {} rows {} terms {}",
+                    ci, fmt_cells(&s3_cells), escape, wr, wc, if onc { 1 } else { 0 }, nnodes, nrows, nterm
+                )
+                .unwrap();
+                for (nid, cells) in bk.cells.iter().enumerate() {
+                    let cs: Vec<String> = cells
+                        .iter()
+                        .map(|&z| format!("{},{}", z as usize / q, z as usize % q))
+                        .collect();
+                    writeln!(w, "N {} {} {}", ci, nid, cs.join(" ")).unwrap();
+                }
+                for nid in 0..bk.cells.len() {
+                    if bk.terminal[nid] {
+                        writeln!(w, "T {} {}", ci, nid).unwrap();
+                    } else {
+                        for &(x, y, cid) in &bk.rows[nid] {
+                            writeln!(
+                                w,
+                                "R {} {} {},{} {},{} {}",
+                                ci, nid,
+                                x as usize / q, x as usize % q,
+                                y as usize / q, y as usize % q,
+                                cid
+                            )
+                            .unwrap();
+                        }
+                    }
+                }
+                eprintln!(
+                    "  [cert q={} {:6.1}s] class {}/{}: escape={} witness=({},{}) onconic={} book nodes={} rows={} terms={}",
+                    q, start.elapsed().as_secs_f64(), ci, ncls - 1, escape, wr, wc, onc, nnodes, nrows, nterm
+                );
+            }
+        }
+        w.flush().ok();
+    }
+
+    let hs: Vec<String> = hist.iter().map(|(k, v)| format!("{}:{}", k, v)).collect();
+    writeln!(
+        w,
+        "# END classes={} onconic-witness={} offconic-witness={} capped-books={}",
+        selected.len(), onc_yes, onc_no, capped
+    )
+    .unwrap();
+    w.flush().unwrap();
+
+    // escape summary to stdout (cross-check vs escape/esc mode: same summary+histogram format).
+    if filter.is_empty() {
+        let root_n = min_esc == 0;
+        let outcome = if root_n { "N (COUNTEREXAMPLE!)" } else { "P" };
+        let parity_ok = even_esc == 0;
+        println!(
+            "q={:>3}  root={}  size3-classes={}  total(q^2-9q+21)={}  min-escape={}  max-escape={}  \
+             bad-odd(even-escape) classes={}/{}  parity-proof={}",
+            q, outcome, ncls, total_expected,
+            if min_esc == usize::MAX { 0 } else { min_esc }, max_esc,
+            even_esc, ncls, if parity_ok { "HOLDS (all bad even)" } else { "BREAKS" },
+        );
+        println!("      escape-histogram (escape:classes) = {}", hs.join(" "));
+        println!(
+            "      cert witnesses: on-conic={} off-conic={} capped-books={}  [{:.1}s]",
+            onc_yes, onc_no, capped, start.elapsed().as_secs_f64()
+        );
+    } else {
+        println!(
+            "q={:>3}  cert PARTIAL classes={} on-conic={} off-conic={} capped-books={}  [{:.1}s]",
+            q, selected.len(), onc_yes, onc_no, capped, start.elapsed().as_secs_f64()
+        );
+    }
+    println!("wrote {}", path);
+}
+
+// ---- CERTCHECK mode: independent rules-only re-verification of a .cert file ----
+struct NodeTab {
+    cells: HashMap<u32, Vec<u16>>,
+    rows: HashMap<u32, Vec<(u16, u16, u32)>>,
+    terms: HashSet<u32>,
+}
+struct ClassData {
+    ci: usize,
+    s3: Vec<u16>,
+    witness: Option<u16>,
+    onconic: Option<bool>,
+    status: String,
+    decl_nodes: usize,
+    decl_rows: usize,
+    decl_terms: usize,
+    tab: NodeTab,
+}
+
+fn parse_cell(tok: &str, q: usize) -> u16 {
+    let (r, c) = tok.split_once(',').expect("bad cell token (want r,c)");
+    let r: usize = r.parse().expect("bad row");
+    let c: usize = c.parse().expect("bad col");
+    (r * q + c) as u16
+}
+
+// verify one `book ok` class against GAME RULES ONLY.  Returns (nodes,rows,terms) or an error reason.
+#[allow(clippy::too_many_arguments)]
+fn verify_class(b: &Board, q: usize, cd: &ClassData) -> Result<(usize, usize, usize), String> {
+    let ci = cd.ci;
+    let witness = cd.witness.ok_or_else(|| format!("class {}: book ok but no witness", ci))?;
+    // node 0 must be the witness position S3 + p, and a legal 4-cap
+    let mut root: Vec<u16> = cd.s3.to_vec();
+    root.push(witness);
+    root.sort_unstable();
+    let node0 = cd.tab.cells.get(&0).ok_or_else(|| format!("class {}: missing node 0", ci))?;
+    if *node0 != root {
+        return Err(format!("class {}: node0 {:?} != sorted(S3+witness) {:?}", ci, node0, root));
+    }
+    if !is_legal_position(b, &root) {
+        return Err(format!("class {}: witness position is not a legal cap", ci));
+    }
+    // onconic flag vs conic geometry (rules/geometry, not game values)
+    if let Some(oc) = cd.onconic {
+        let s3c: Vec<(usize, usize)> = cd.s3.iter().map(|&z| (z as usize / q, z as usize % q)).collect();
+        let (eps, zeta, gamma) = fit_conic(b, &s3c);
+        let (wr, wc) = (witness as usize / q, witness as usize % q);
+        let onc = b.gf.a(b.gf.a(b.gf.m(wr, wc), b.gf.m(eps, wr)), b.gf.a(b.gf.m(zeta, wc), gamma)) == 0;
+        if onc != oc {
+            return Err(format!("class {}: onconic flag {} != geometry {}", ci, oc, onc));
+        }
+    }
+    let mut nnodes = 0usize;
+    let mut nrows = 0usize;
+    let mut nterm = 0usize;
+    for (&nid, cells) in cd.tab.cells.iter() {
+        nnodes += 1;
+        if cells.len() % 2 != 0 {
+            return Err(format!("class {} node {}: odd size {}", ci, nid, cells.len()));
+        }
+        let (chosen, forb) = masks_of(b, cells);
+        let avail = avail_cells(b, &chosen, &forb);
+        let is_term = cd.tab.terms.contains(&nid);
+        let node_rows = cd.tab.rows.get(&nid).cloned().unwrap_or_default();
+        if is_term {
+            nterm += 1;
+            if !avail.is_empty() {
+                return Err(format!("class {} node {}: TERM but has {} legal moves", ci, nid, avail.len()));
+            }
+            if !node_rows.is_empty() {
+                return Err(format!("class {} node {}: TERM but has reply rows", ci, nid));
+            }
+        } else {
+            if avail.is_empty() {
+                return Err(format!("class {} node {}: no legal moves but not marked TERM", ci, nid));
+            }
+            // closure: the rows' mover moves == the legal moves exactly (each once, none missing/extra)
+            let mut rx: Vec<u16> = node_rows.iter().map(|&(x, _, _)| x).collect();
+            rx.sort_unstable();
+            let mut av = avail.clone();
+            av.sort_unstable();
+            if rx != av {
+                return Err(format!(
+                    "class {} node {}: reply-book moves {:?} != legal moves {:?} (closure)",
+                    ci, nid, rx, av
+                ));
+            }
+            for &(x, y, cid) in &node_rows {
+                nrows += 1;
+                let mut px = cells.clone();
+                px.push(x);
+                px.sort_unstable();
+                let (chx, fx) = masks_of(b, &px);
+                let yu = y as usize;
+                if (chx[yu >> 6] & (1u64 << (yu & 63))) != 0 || (fx[yu >> 6] & (1u64 << (yu & 63))) != 0 {
+                    return Err(format!("class {} node {}: reply {} illegal after move {}", ci, nid, y, x));
+                }
+                let mut pxy = px.clone();
+                pxy.push(y);
+                pxy.sort_unstable();
+                let child = cd
+                    .tab
+                    .cells
+                    .get(&cid)
+                    .ok_or_else(|| format!("class {} node {}: child node {} undefined", ci, nid, cid))?;
+                if *child != pxy {
+                    return Err(format!(
+                        "class {} node {}: child {} = {:?} != P+move+reply {:?}",
+                        ci, nid, cid, child, pxy
+                    ));
+                }
+                if child.len() != cells.len() + 2 {
+                    return Err(format!("class {} node {}: child size {} != {}", ci, nid, child.len(), cells.len() + 2));
+                }
+            }
+        }
+    }
+    if nnodes != cd.decl_nodes || nrows != cd.decl_rows || nterm != cd.decl_terms {
+        return Err(format!(
+            "class {}: declared (nodes {} rows {} terms {}) != actual (nodes {} rows {} terms {})",
+            ci, cd.decl_nodes, cd.decl_rows, cd.decl_terms, nnodes, nrows, nterm
+        ));
+    }
+    Ok((nnodes, nrows, nterm))
+}
+
+fn check_cert(q_expect: usize, path: &str) {
+    let text = std::fs::read_to_string(path).expect("read cert file");
+    let mut q: usize = 0;
+    let mut declared_classes = 0usize;
+    let mut classes: Vec<ClassData> = Vec::new();
+    for line in text.lines() {
+        let line = line.trim();
+        if line.is_empty() || line.starts_with('#') {
+            continue;
+        }
+        let tok: Vec<&str> = line.split_whitespace().collect();
+        match tok[0] {
+            "q" => q = tok[1].parse().expect("q"),
+            "field" | "total" => {}
+            "classes" => declared_classes = tok[1].parse().expect("classes"),
+            "CLASS" => {
+                // CLASS ci s3 c c c escape e witness w onconic oc book status nodes N rows R terms T
+                let ci: usize = tok[1].parse().expect("CLASS ci");
+                assert_eq!(tok[2], "s3", "CLASS layout");
+                let s3 = vec![parse_cell(tok[3], q), parse_cell(tok[4], q), parse_cell(tok[5], q)];
+                assert_eq!(tok[8], "witness", "CLASS layout");
+                let witness = if tok[9] == "none" { None } else { Some(parse_cell(tok[9], q)) };
+                let onconic = match tok[11] {
+                    "1" => Some(true),
+                    "0" => Some(false),
+                    _ => None,
+                };
+                let status = tok[13].to_string();
+                let decl_nodes: usize = tok[15].parse().expect("nodes");
+                let decl_rows: usize = tok[17].parse().expect("rows");
+                let decl_terms: usize = tok[19].parse().expect("terms");
+                classes.push(ClassData {
+                    ci, s3, witness, onconic, status, decl_nodes, decl_rows, decl_terms,
+                    tab: NodeTab { cells: HashMap::new(), rows: HashMap::new(), terms: HashSet::new() },
+                });
+            }
+            "N" => {
+                let nid: u32 = tok[2].parse().expect("N nid");
+                let mut cs: Vec<u16> = tok[3..].iter().map(|t| parse_cell(t, q)).collect();
+                cs.sort_unstable();
+                classes.last_mut().expect("N before CLASS").tab.cells.insert(nid, cs);
+            }
+            "R" => {
+                let nid: u32 = tok[2].parse().expect("R nid");
+                let x = parse_cell(tok[3], q);
+                let y = parse_cell(tok[4], q);
+                let cid: u32 = tok[5].parse().expect("R cid");
+                classes.last_mut().expect("R before CLASS").tab.rows.entry(nid).or_default().push((x, y, cid));
+            }
+            "T" => {
+                let nid: u32 = tok[2].parse().expect("T nid");
+                classes.last_mut().expect("T before CLASS").tab.terms.insert(nid);
+            }
+            other => eprintln!("certcheck: ignoring unknown line kind '{}'", other),
+        }
+    }
+    if q_expect != 0 && q != q_expect {
+        println!("certcheck RESULT: FAIL — header q={} != requested q={}", q, q_expect);
+        return;
+    }
+    let b = Board::new(q);
+    let mut n_pass = 0usize;
+    let mut n_fail = 0usize;
+    let mut n_skip = 0usize;
+    let mut tot_nodes = 0usize;
+    let mut tot_rows = 0usize;
+    let mut tot_terms = 0usize;
+    let mut fails: Vec<String> = Vec::new();
+    for cd in &classes {
+        if cd.status != "ok" {
+            n_skip += 1; // capped / none: no book to verify
+            continue;
+        }
+        match verify_class(&b, q, cd) {
+            Ok((nn, nr, nt)) => {
+                n_pass += 1;
+                tot_nodes += nn;
+                tot_rows += nr;
+                tot_terms += nt;
+            }
+            Err(e) => {
+                n_fail += 1;
+                fails.push(e);
+            }
+        }
+    }
+    println!(
+        "certcheck q={} file={}  classes(parsed)={} declared={}  PASS={} FAIL={} SKIP(capped/none)={}  nodes={} rows={} terms={}",
+        q, path, classes.len(), declared_classes, n_pass, n_fail, n_skip, tot_nodes, tot_rows, tot_terms
+    );
+    for f in &fails {
+        println!("  FAIL: {}", f);
+    }
+    println!("certcheck RESULT: {}", if n_fail == 0 { "PASS" } else { "FAIL" });
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 3 {
@@ -2238,6 +2895,37 @@ fn main() {
             let q: usize = a.parse().expect("q must be an integer");
             solve_feat(q);
         }
+        return;
+    }
+    if args[1] == "cert" {
+        // cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]
+        let mut outdir = "certs".to_string();
+        let mut bookcap: usize = usize::MAX;
+        let mut positional: Vec<usize> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--out" {
+                outdir = it.next().expect("--out needs a value").clone();
+            } else if let Some(rest) = a.strip_prefix("--out=") {
+                outdir = rest.to_string();
+            } else if a == "--bookcap" {
+                bookcap = it.next().expect("--bookcap needs a value").parse().expect("--bookcap int");
+            } else if let Some(rest) = a.strip_prefix("--bookcap=") {
+                bookcap = rest.parse().expect("--bookcap int");
+            } else {
+                positional.push(a.parse().expect("q / class-index must be an integer"));
+            }
+        }
+        let q = *positional.first().expect("cert mode needs q: cert <q> [--out <dir>] [--bookcap <nodes>] [class-index...]");
+        let filter: Vec<usize> = positional[1..].to_vec();
+        solve_cert(q, &filter, &outdir, bookcap);
+        return;
+    }
+    if args[1] == "certcheck" {
+        // certcheck <q> <file>   (q cross-checked against the file header)
+        let q: usize = args[2].parse().expect("certcheck needs q: certcheck <q> <file>");
+        let file = args.get(3).expect("certcheck needs a file: certcheck <q> <file>");
+        check_cert(q, file);
         return;
     }
     if args[1] == "resym" {
