@@ -1001,6 +1001,21 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    (`isP_of_card_four_of_intruderTerminalReply` → `onConicEscapeStatement_of_...`).
    Kernel discharge routes: the σ_x tangency algebra (both roots of `vt²−2Bt+Bu = 0`
    played + the explicit `y`), or the C14 certificate checker (the q=9 cert is 33 nodes).
+10. **C14 REVIEWED — sound scaffold; C17 queued with the constructive bridge design.**
+   C14 (`lean/ProjectiveCap/Certificate.lean` + `ReplyBookDAG` in `CapGame/BuildGame.lean`,
+   builds clean, no sorries) proves the full semantic chain: `ReplyBookDAG.ValidFor →
+   isP_root` (via `isP_of_replyStrategy`), `GridClassCert.Valid → escape at S₃`, and the
+   assembled `GridOddEscapeBookCertificate → Almost.OddEscapeGameStatement (ZMod p)`. Its
+   one open gap is the `represents` selector (class rep → every position). **Fable design
+   (C17): anchor normalization kills the gap constructively** — every size-3 cap's first two
+   cells anchor to `{(0,0),(1,1)}` by an explicit translation+axis-scaling grid symmetry
+   (partial-permutation guarantees the scalings are nonzero), so a book family indexed by
+   the anchored THIRD cell (≈(q−2)(q−3) classes, ~70 at q=11) covers all positions by
+   construction; `gridSymmetry_isP_image` (already proven) transports the escape back. No
+   orbit-coverage enumeration ever enters Lean. C17 = anchored emitter + Lean-data generator
+   prototype (q=5/7 elaboration-cost gate, kernel `decide` only) + transport lemma scaffold.
+   Elaboration cost of per-obligation `decide` over `ZMod q` is the identified risk — the
+   q=5/7 prototype is the go/no-go datum for unconditional PG(2,11) in Lean.
 
 ## Handoff Summary
 

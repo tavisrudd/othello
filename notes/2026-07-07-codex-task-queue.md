@@ -283,6 +283,36 @@ that survives the known q=5-exception structure is progress — report what brea
 
 Report file: `notes/2026-07-07-codex-sumfree-induction-r.md`.
 
+## C17. Anchored certificate family — the constructive `represents` bridge (route C, phase 2)
+
+C14's scaffold is sound and its one open gap is the `GridOddEscapeBookCertificate.represents`
+selector (canonical-class → every position). Fable's design decision: **replace full-canon
+orbits by ANCHOR NORMALIZATION, which makes coverage true by construction** — no orbit
+enumeration proof ever needed. Every size-3 grid cap `{p₁,p₂,p₃}` has `p₁,p₂` in distinct
+rows AND columns (partial permutation), so the affine map
+`φ(r,c) = ((r−r₁)·(r₂−r₁)⁻¹, (c−c₁)·(c₂−c₁)⁻¹)` — a translation composed with two axis
+scalings, each a `GridSymmetry` in the proven `psi_gridSymmetry` sense — sends `p₁ ↦ (0,0)`,
+`p₂ ↦ (1,1)`. So a book family indexed by the THIRD cell of anchored positions
+`{(0,0),(1,1),(r,c)}` (~(q−2)(q−3) minus collinear/attacking, ≈ 70 at q=11) covers all
+positions via `gridSymmetry_isP_image` transport. Task:
+1. **Emitter**: add `cert --anchored <q>` to `notes/2026-07-06-grid-cap-solver.rs` — same
+   book format, one CLASS per legal anchored S₃ (third-cell-indexed), certcheck must pass.
+   Also print the anchored-class count per q (5,7,11,13 — skip 9/GF(9) for now).
+2. **Lean data generator**: a script (any language) translating an anchored `.cert` into
+   `lean/ProjectiveCap/CertData/Q<q>.lean` — `GridClassCert (ZMod q)` terms + `Valid` proofs.
+   Validity obligations are small decidable props over `ZMod q`; try `by decide` per
+   obligation first (NO `native_decide` — project trust policy). PROTOTYPE ON q=5 THEN q=7
+   ONLY and measure elaboration wall time; report the per-class cost so Fable can go/no-go
+   q=11. If kernel `decide` is too slow, report where it chokes (Move quantifier? AffineCap?)
+   and STOP — do not brute-force.
+3. (Statement-level, optional) The anchor-transport lemmas in Lean:
+   `gridSymmetry` for translations/axis-scalings + the legality/IsP transport that turns an
+   anchored family into `GridOddEscapeBookCertificate.represents`. Follow the
+   `psi_gridSymmetry` proof shape in `ConicLocalization.lean`; statement-level is fine,
+   proofs welcome.
+
+Report file: `notes/2026-07-07-codex-anchored-cert-report.md`.
+
 ## Standing
 
 ~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane
