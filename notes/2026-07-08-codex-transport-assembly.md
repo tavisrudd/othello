@@ -68,4 +68,6 @@ procedure over `ZMod 11`.
 
 ## Remaining
 
-PG(2,11) is closed over `ZMod 11`.  Optional q=13 splitting was not attempted.
+PG(2,11) is closed over `ZMod 11`.  Follow-up on 2026-07-08: the same route now closes
+PG(2,13) over `ZMod 13` via split generated data in `ProjectiveCap.CertData.Q13Assembly`;
+the payoff theorem is `ProjectiveCap.Certificate.CertData.Q13.initialPStatement_finrank`.

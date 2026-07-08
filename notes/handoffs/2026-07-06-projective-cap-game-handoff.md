@@ -5,7 +5,7 @@ Date: 2026-07-06.
 ## Status table — PG(2,q) value + proof state
 
 **KEEP THIS TABLE UP TO DATE** — update it in the same commit as any session block / review
-that changes a cell (last updated 2026-07-08, C32 v2 design deepening).
+that changes a cell (last updated 2026-07-08, q13 certificate assembly).
 
 | q                | Value | Computational evidence                                        | Lean proof status                                                                                     | Remaining gap                                                    |
 |------------------|-------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
@@ -15,15 +15,15 @@ that changes a cell (last updated 2026-07-08, C32 v2 design deepening).
 | 7                | **P** | exhaustive solve                                              | **★ PROVEN by mechanism** — `initialPStatement_of_card_eq_seven_finrank`                               | none — closed                                                     |
 | 9                | P     | exhaustive solve (~1s; non-prime, char 3)                     | none                                                                                                     | open; noted reducible to a ≤15-point warm-up certificate          |
 | 11               | **P** | solver + esc campaign                                         | **★ PROVEN by certificate assembly** — `CertData/Q11Assembly.initialPStatement_finrank`, clean axioms | none — closed                                                     |
-| 13               | P     | solver (all on-conic buckets P)                               | cert generator works; single-file elaboration blows the 30-min gate                                     | per-class file split (C22 optional), then assembly                |
+| 13               | **P** | solver (all on-conic buckets P)                               | **★ PROVEN by certificate assembly** — `CertData/Q13Assembly.initialPStatement_finrank`, clean axioms | none — closed                                                     |
 | 17               | P     | esc campaign (gate discharged, C3); S4 buckets mixed 5P/5N    | none                                                                                                     | cert book queued (C30, route-C phase 5); mixed buckets make it the hard *mechanism* column |
 | 19               | P     | esc campaign                                                  | none                                                                                                     | cert book queued (C30)                                            |
 | 23               | **?** | not computed (C21: esc class 0 aborted at the 200M-memo cap, >36 min — campaign blocked; S₄-rooted bucket census = C29) | none                                                                                                     | the live falsification watch — any esc class at 0 kills the conjecture |
 | all odd q        | conj. P | no counterexample through q=19                              | frame reduction + odd-escape composition are unconditional rank-3 theorems; the per-q escape input is what's missing | a uniform mechanism — post-C20 that means strategy-level: second-intrusion lemma in defect form, plus the untried composite-mirror plane variant (C32 v2 step 1, design note 2026-07-08) |
 
-Scoreboard reading: **closed** — all even q, plus odd q=5, 7, 11. **Certificate-route feasible
-but ungated** — q=13 (file split; staged build = C30 step 1), q=9 and q=3 (small; q=3 optional
-in C30). **Compute-only** — q=17, 19 (route-C books queued, C30). **Frontier** — q=23 (esc
+Scoreboard reading: **closed** — all even q, plus odd q=5, 7, 11, 13. **Certificate-route feasible
+but ungated** — q=9 and q=3 (small; q=3 optional in C30). **Compute-only** — q=17, 19
+(route-C books queued, C30; use the q=13 split layout as template). **Frontier** — q=23 (esc
 campaign blocked per C21; inverted bucket census + the q≡2-mod-3 mixed-column law = C29), the
 uniform odd-q mechanism (post-C20: strategies, not snapshot invariants; zone-steering ceiling
 = C31), and — off this planes table — the even dimensions `PG(2m,q)`, m ≥ 2, odd q: the only
@@ -142,9 +142,11 @@ model with `Module.finrank K V = 2 * n` and `0 < n`, which is the checked Lean f
 
 Novelty guard: the ingredients (pairing strategies and elliptic projective involutions) are
 classical, but the literature pass recorded in
-[`../2026-07-07-nofil-connection.md`](../2026-07-07-nofil-connection.md) found no indexed prior
-occurrence of this theorem for Nofil / impartial cap avoidance on projective spaces. Public wording
-should claim a new application/theorem in this game, not a new mirror method.
+[`../2026-07-07-nofil-connection.md`](../2026-07-07-nofil-connection.md) and the C26 audit
+[`../2026-07-08-codex-projective-nofil-novelty-audit.md`](../2026-07-08-codex-projective-nofil-novelty-audit.md)
+found no indexed prior occurrence of this theorem for Nofil / impartial cap avoidance on
+projective spaces. Public wording should claim a new application/theorem in this game, not a new
+mirror method.
 
 Reusable mirror lemma to formalize: the correct residual version is stronger than "legal moves are
 `σ`-invariant." For a `σ`-invariant cap `S`, P2 may mirror a legal move `x` by `σx` only if the
@@ -1238,7 +1240,21 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    `ProjectiveCap.Certificate.CertData.Q11.initialPStatement_finrank`.  Validation:
    `nix develop --command lake build ProjectiveCap.CertData.Q11Assembly` PASS; Q11 data build
    took 1518s on first import, cached assembly rebuild 35s.  Axiom gate:
-   `[propext, Classical.choice, Quot.sound]` only.  q=13 splitting not attempted.
+   `[propext, Classical.choice, Quot.sound]` only.
+
+   **Q13 ADDENDUM (same route, Codex 2026-07-08) — PG(2,13) is now UNCONDITIONAL in Lean.**
+   Generated split certificate data `lean/ProjectiveCap/CertData/Q13/` has `Base.lean` plus
+   `Class0.lean` through `Class109.lean`, with import aggregator `Q13.lean` and payoff module
+   `Q13Assembly.lean` from `notes/2026-07-08-q13-split-to-lean.py`.  The same transport assembly
+   closes `ProjectiveCap.Certificate.CertData.Q13.initialPStatement_finrank`.  Validation:
+   byte-identical regeneration into `/tmp/q13-regen`; no `sorry`/`admit`/`native_decide`/
+   `maxRecDepth`/new `axiom`/`unsafe` in the q13 path; `nix_lake_build_each
+   ProjectiveCap.CertData.Q13.Base ProjectiveCap.CertData.Q13.Class{0..109}
+   ProjectiveCap.CertData.Q13 ProjectiveCap.CertData.Q13Assembly` PASS.  Per-class files stayed
+   far under the 30-min gate (observed range about 2.5-3.8 min/class); final axiom gate:
+   `[propext, Classical.choice, Quot.sound]` only.  Operational note: the naive raw aggregate
+   build previously OOM-killed unrelated session processes; future generated-cert builds must use
+   the OOM-tagged staged wrapper recorded in `CLAUDE.md`.
 
 18. **Queue additions from the day-review gap scan (Fable, 2026-07-08): C29 + C30.** Reviewing
    the post-5pm cascade surfaced two attacks planned nowhere. (a) **Mixed-column mod-3 law
@@ -1251,8 +1267,8 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    canonicalization, then one S₄-rooted solve per bucket — bypasses C21's aborted
    size-3-rooted esc solves) at q = 23/25/29/31, predictions mixed/all-P/mixed/all-P; any
    miss refutes. (b) **C30 = route-C phase 5:** q=17/19 certificate books — every
-   feasibility gate already measured (C3 memo peak, C19 splitting, C22 transport);
-   prerequisite = the staged Q13 build (generated, unbuilt, naive-aggregate OOM hazard).
+   feasibility gate already measured (C3 memo peak, C19 splitting, C22/Q13 transport);
+   q=13's staged split build is now landed and is the template.
    Payoff = the whole computed prime ladder ≤ 19 unconditional. Status table updated in the
    same edit.
 19. **Second queue batch from the gap scan (Fable, 2026-07-08): C31 + C32.** (a) **C31 =

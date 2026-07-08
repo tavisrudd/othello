@@ -272,6 +272,16 @@ named-expert umbrella [`notes/2026-07-07-named-expert-personas-context.md`](note
 and the relevant dossier under [`notes/expert-personas/`](notes/expert-personas/). The umbrella gives
 the loading order for Sumfree, ProjectiveCap, and Queens/NodeKayles proof sessions.
 
+**Lean build/OOM hygiene:** generated certificate builds can fan out many heavyweight `lean`
+workers. Do not run a raw full aggregate like `nix develop --command lake build
+ProjectiveCap.CertData.Q13Assembly` on the 26 GB box: on 2026-07-08 that shape triggered
+global OOM and killed unrelated session processes. Interactive bash has OOM-sacrifice wrappers
+in `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash` for `lake`/`lean`/`leanc` and
+`nix develop --command lake|lean|leanc`; if bypassing the shell, prefix with
+`choom -n 1000 --`. For generated split certs, build leaves/classes first and the aggregate
+last with `nix_lake_build_each ...`; this Lake has no `-j`/`--jobs`, and a lone aggregate
+target can still fan out its missing import closure.
+
 ## Intent-based mode (opt-in)
 
 Default is collaborative: discuss approach, surface options, await approval. Activate

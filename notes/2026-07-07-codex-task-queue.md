@@ -472,9 +472,9 @@ remains for unconditional PG(2,11) is exactly C19's deferred item 4:
    `initialPStatement_of_oddEscapeStatement_finrank` (unconditional PG(2,11)).
 3. **Axiom gate:** `#print axioms` on the final PG(2,11) theorem must show only
    `[propext, Classical.choice, Quot.sound]` — include it verbatim in the report.
-4. OPTIONAL (only if 1–3 land comfortably): the q=13 generator split (per-class files or
-   finer chunking) — measure, report projected wall, STOP before any single file exceeds
-   the 30-min gate.
+4. DONE 2026-07-08: the q=13 generator split + staged build landed.  Per-class files built
+   far under the 30-min gate and the final theorem is
+   `ProjectiveCap.Certificate.CertData.Q13.initialPStatement_finrank`.
 
 Report file: `notes/2026-07-08-codex-transport-assembly.md`.
 
@@ -609,7 +609,7 @@ Lean status: `lean/CapGame/Mirror.lean`, `lean/ProjectiveCap/Mirror.lean`, and
 
 This supersedes the old false handoff claim that projective spaces never have fpf involutions.
 
-## C26. Bibliography-grade novelty audit for projective Nofil/cap theorem
+## C26. Bibliography-grade novelty audit for projective Nofil/cap theorem [REPORTED 2026-07-08]
 
 Goal: validate public wording for the claim that the odd-dimensional projective cap theorem is new
 in the Nofil / impartial hypergraph-avoidance context.
@@ -636,6 +636,11 @@ Task:
    "proved here", "standard ingredient", and "adjacent colored/positional-game prior art."
 
 Report file: `notes/2026-07-08-codex-projective-nofil-novelty-audit.md`.
+
+Status: report written. Recommended public wording is conservative: HHS owns the Nofil ruleset
+and STS prior art; colored finite-geometry tic-tac-toe is adjacent but different; the apparently
+new content is the projective-family outcome theorem in this impartial shared cap/Nofil game,
+using standard projective involutions/pairing ingredients.
 
 ## C27. Correct residual mirror lemma for cap games [REPORTED 2026-07-08]
 
@@ -755,12 +760,11 @@ mechanism. Payoff: the whole computed prime ladder ≤ 19 becomes unconditional 
 Expected anchored class counts: (q−2)(q−3) = 210 at q=17, 272 at q=19 (matches 72/110 at
 q=11/13).
 
-1. **Prerequisite — the q=13 staged build:** the split Q13 cert data + assembly are generated
-   (`2026-07-08-q13-split-to-lean.py`, working tree) but UNBUILT, and the naive aggregate
-   build OOM'd the box (CLAUDE.md 2026-07-08 note). If no build transcript/commit exists when
-   you start, land it first with `nix_lake_build_each` (class leaves first, aggregate last)
-   and capture the axiom gate verbatim. Its per-class-file layout is the template for
-   q=17/19 scale.
+1. **Prerequisite — the q=13 staged build: DONE 2026-07-08.**  The split Q13 cert data +
+   assembly (`2026-07-08-q13-split-to-lean.py`) built with `nix_lake_build_each` (class leaves
+   first, aggregate last), and the final axiom gate is `[propext, Classical.choice,
+   Quot.sound]`.  Its per-class-file layout is the template for q=17/19 scale.  Keep the
+   CLAUDE.md OOM note: the naive aggregate build OOM'd the box.
 2. Emit anchored books for q=17 and q=19 (`cert --anchored`); certcheck PASS mandatory;
    cross-check per-class witness escape counts against the esc histograms.
 3. Generate per-class Lean files from the start (generalize the q=13 splitter). Measure
