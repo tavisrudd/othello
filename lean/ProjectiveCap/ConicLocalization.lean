@@ -120,6 +120,15 @@ theorem hyperbolaTriple_linear_c {a b c : GridPoint K}
   ring
 
 omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_pair_linear {rho A B : K} {p q : GridPoint K}
+    (hp : OnHyperbola (K := K) rho A B p)
+    (hq : OnHyperbola (K := K) rho A B q) :
+    rho * (q.2 - p.2) + A * (q.1 - p.1) =
+      q.1 * q.2 - p.1 * p.2 := by
+  unfold OnHyperbola at hp hq
+  linear_combination hp - hq
+
+omit [Fintype K] [DecidableEq K] in
 theorem onHyperbola_hyperbolaOfTriple_a (a b c : GridPoint K) :
     OnHyperbola (K := K)
       (hyperbolaRhoOfTriple (K := K) a b c)
