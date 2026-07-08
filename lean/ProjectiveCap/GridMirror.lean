@@ -429,6 +429,26 @@ theorem coordinateProjectiveFrame_isP_of_charTwo
       (Projective.FrameGridBridge.Coordinate.coordinateBridge (K := K))).mpr
       (standardResidualSeed_isP_of_charTwo (K := K) h2)
 
+/--
+Full-projective version of the characteristic-two coordinate frame theorem:
+after the two coordinate directions and the normalized residual seed are played,
+the ordinary projective cap game is a P-position.
+-/
+theorem coordinateFullProjectiveFrame_isP_of_charTwo
+    [DecidableEq (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    [Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K))]
+    (h2 : (2 : K) = 0) :
+    FiniteBuildGame.IsP
+      (Projective.Cap K (Projective.FrameGridBridge.Coordinate.PlaneVec K))
+      (Projective.FrameGridBridge.Coordinate.fixedDirections (K := K) ∪
+        (StandardResidualSeed (K := K)).map
+          (Projective.FrameGridBridge.Coordinate.affineEmbedding (K := K))) := by
+  exact (Projective.FrameGridBridge.Coordinate.isP_fixedDirections_iff_grid
+    (S := StandardResidualSeed (K := K))).mpr
+    (standardResidualSeed_isP_of_charTwo (K := K) h2)
+
 end Game
 
 end GridMirror
