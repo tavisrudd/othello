@@ -148,5 +148,21 @@ theorem initialPStatement_of_noIntrusionAboveFour_finrank
     (K := K) (V := V)
     (onConicEscapeStatement_of_noIntrusionAboveFour (K := K) hq hno) hrank
 
+/--
+**The projective plane of order five.**  The cap game on any rank-three model
+over a field of cardinality five is a second-player win — the first
+odd-order projective plane proven by mechanism (the intrusion-calculus bare
+counter through the order-five no-intrusion kernel) rather than by
+enumeration.
+-/
+theorem initialPStatement_of_card_eq_five_finrank
+    (hcard : Fintype.card K = 5)
+    (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) :=
+  initialPStatement_of_noIntrusionAboveFour_finrank (K := K) (V := V)
+    (by rw [hcard]; exact ⟨2, rfl⟩)
+    (noIntrusionAboveFourStatement_of_card_eq_five (K := K) hcard)
+    hrank
+
 end ConicLocalization
 end ProjectiveCap

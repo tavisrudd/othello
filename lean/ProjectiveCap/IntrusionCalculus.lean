@@ -132,6 +132,22 @@ theorem isP_iff_even_card_sdiff_of_conicOnlyAbove
           hnotEven ((hchild x hxmem).mp h)
         exact of_not_not hxNotP
 
+/-- No-intrusion propagates upward: if every legal extension of `S` itself
+lies on the conic, the same holds above every intermediate on-conic `T`,
+because legality is antitone in the position.  This collapses the
+no-intrusion obligation to the size-four seed alone. -/
+theorem conicOnlyAbove_of_forall_legal_mem
+    {rho A B : K} {S : Finset (GridPoint K)}
+    (h : ∀ x : GridPoint K, x ∈ GridGame.LegalExtensions (K := K) S ->
+      x ∈ HyperbolaCells (K := K) rho A B) :
+    ConicOnlyAbove (K := K) rho A B S := by
+  intro T hST _hTC x hx
+  rw [GridGame.mem_legalExtensions] at hx
+  refine h x ?_
+  rw [GridGame.mem_legalExtensions]
+  exact ⟨fun hxS => hx.1 (hST hxS),
+    gridCap_mono (Finset.insert_subset_insert x hST) hx.2⟩
+
 /--
 Geometric no-intrusion kernel: above every on-conic size-four position, no
 off-conic cell is ever legal.  This is Theorem IV's finite-geometry input
@@ -161,6 +177,45 @@ theorem isP_of_card_four_of_conicOnlyAbove
     Finset.card_sdiff_of_subset hS, card_hyperbolaCells (K := K) hB, hcard]
   obtain ⟨k, hk⟩ := hq
   exact ⟨k - 2, by omega⟩
+
+/-- A field of odd cardinality has `2 ≠ 0`: the shift `x ↦ x + 1` would
+otherwise be a fixed-point-free involution pairing up the whole field. -/
+theorem two_ne_zero_of_odd_card (hq : Odd (Fintype.card K)) : (2 : K) ≠ 0 := by
+  intro h2
+  have heven : Even (Finset.univ : Finset K).card :=
+    even_card_of_involutive_fpf_on_finset (Finset.univ : Finset K)
+      (fun x => x + 1)
+      (fun x _ => Finset.mem_univ _)
+      (fun x _ => by rw [add_assoc, one_add_one_eq_two, h2, add_zero])
+      (fun x _ hfix => by
+        have h0 : x + 1 = x + 0 := by rw [add_zero]; exact hfix
+        exact one_ne_zero (add_left_cancel h0))
+  rw [Finset.card_univ] at heven
+  exact (Nat.not_even_iff_odd.mpr hq) heven
+
+/--
+**The order-five no-intrusion kernel (Theorem IV, `q = 5` case).**  Over a
+field of cardinality five the conic has `q − 1 = 4` affine cells, so an
+on-conic size-four position IS the whole affine conic — which is a maximal
+grid cap in odd characteristic.  No intruder is ever legal, with no case
+analysis at all.
+-/
+theorem noIntrusionAboveFourStatement_of_card_eq_five
+    (hcard : Fintype.card K = 5) :
+    NoIntrusionAboveFourStatement (K := K) := by
+  intro rho A B hB S hS4 hSsub T hST hTC x hx
+  exfalso
+  have h2 : (2 : K) ≠ 0 :=
+    two_ne_zero_of_odd_card (K := K) (by rw [hcard]; exact ⟨2, rfl⟩)
+  have hCcard : (HyperbolaCells (K := K) rho A B).card = 4 := by
+    rw [card_hyperbolaCells (K := K) hB, hcard]
+  have hSC : S = HyperbolaCells (K := K) rho A B :=
+    Finset.eq_of_subset_of_card_le hSsub (le_of_eq (hCcard.trans hS4.symm))
+  have hTeq : T = HyperbolaCells (K := K) rho A B :=
+    subset_antisymm hTC (hSC ▸ hST)
+  rw [GridGame.mem_legalExtensions, hTeq] at hx
+  exact (maximalGridCap_hyperbolaCells_of_two_ne_zero (K := K) h2 hB).2
+    x hx.1 hx.2
 
 /-- Theorem IV, game half: the per-`q` no-intrusion kernel yields the on-conic
 escape statement for odd `q` — every size-three seed's conic completions are
