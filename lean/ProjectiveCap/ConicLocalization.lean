@@ -129,6 +129,35 @@ theorem onHyperbola_pair_linear {rho A B : K} {p q : GridPoint K}
   linear_combination hp - hq
 
 omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaCenter_eq_of_linear {a b c : GridPoint K} {rho A : K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0)
+    (hb : rho * (b.2 - a.2) + A * (b.1 - a.1) =
+      b.1 * b.2 - a.1 * a.2)
+    (hc : rho * (c.2 - a.2) + A * (c.1 - a.1) =
+      c.1 * c.2 - a.1 * a.2) :
+    rho = hyperbolaRhoOfTriple (K := K) a b c ∧
+      A = hyperbolaAOfTriple (K := K) a b c := by
+  have hrho_mul :
+      rho * hyperbolaDenom (K := K) a b c =
+        (b.1 * b.2 - a.1 * a.2) * (c.1 - a.1) -
+          (c.1 * c.2 - a.1 * a.2) * (b.1 - a.1) := by
+    unfold hyperbolaDenom
+    linear_combination hb * (c.1 - a.1) - hc * (b.1 - a.1)
+  have hA_mul :
+      A * hyperbolaDenom (K := K) a b c =
+        (b.2 - a.2) * (c.1 * c.2 - a.1 * a.2) -
+          (c.2 - a.2) * (b.1 * b.2 - a.1 * a.2) := by
+    unfold hyperbolaDenom
+    linear_combination hc * (b.2 - a.2) - hb * (c.2 - a.2)
+  constructor
+  · unfold hyperbolaRhoOfTriple
+    field_simp [hden]
+    exact hrho_mul
+  · unfold hyperbolaAOfTriple
+    field_simp [hden]
+    simpa [mul_comm, mul_left_comm, mul_assoc] using hA_mul
+
+omit [Fintype K] [DecidableEq K] in
 theorem onHyperbola_hyperbolaOfTriple_a (a b c : GridPoint K) :
     OnHyperbola (K := K)
       (hyperbolaRhoOfTriple (K := K) a b c)
