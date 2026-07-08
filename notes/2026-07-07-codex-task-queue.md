@@ -436,7 +436,7 @@ but the per-state `order` field IS in the states jsonl — durable copy
 `notes/data/c20-q13-q17-states.jsonl.gz` (feat-log inputs also in `notes/data/`;
 regenerable in ~67s via the report's Main-run command).
 
-## C21. q=23 esc single-class sizing probe (route D; C18 phase-2 leftover)
+## C21. q=23 esc single-class sizing probe (route D; C18 phase-2 leftover) [REPORTED 2026-07-08]
 
 The esc-mode q=17/q=19 validation gate is DISCHARGED (C3) and the box is free (queens G(17)
 done; sum-free z5 terminated). Size the q=23 campaign — do NOT run it.
