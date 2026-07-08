@@ -1,4 +1,5 @@
 import ProjectiveCap.ConicLocalization
+import ProjectiveCap.IntrusionCalculus
 import ProjectiveCap.EscapeParity
 import ProjectiveCap.GridMirror
 
@@ -133,6 +134,19 @@ theorem initialPStatement_of_psiPairingCriterion_finrank
     (K := K) (V := V)
     (onConicEscapeStatement_of_psiPairingCriterion
       (K := K) hq hpair) hrank
+
+/-- The per-`q` no-intrusion kernel implies the full projective-plane outcome
+in any odd-cardinality rank-three model.  The kernel is TRUE for `q = 5, 7`
+(Theorem IV of the intrusion note) and FALSE from `q = 11` on — per-`q` use
+only; see `NoIntrusionAboveFourStatement`. -/
+theorem initialPStatement_of_noIntrusionAboveFour_finrank
+    (hq : Odd (Fintype.card K))
+    (hno : NoIntrusionAboveFourStatement (K := K))
+    (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) :=
+  initialPStatement_of_onConicEscapeStatement_finrank
+    (K := K) (V := V)
+    (onConicEscapeStatement_of_noIntrusionAboveFour (K := K) hq hno) hrank
 
 end ConicLocalization
 end ProjectiveCap

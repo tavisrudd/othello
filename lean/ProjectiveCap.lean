@@ -11,6 +11,7 @@ import ProjectiveCap.GridCounting
 import ProjectiveCap.StableFacts
 import ProjectiveCap.ExtensionCount
 import ProjectiveCap.ConicLocalization
+import ProjectiveCap.IntrusionCalculus
 import ProjectiveCap.EscapeParity
 import ProjectiveCap.Almost.OddEscape
 import ProjectiveCap.PlaneOutcome
