@@ -923,10 +923,28 @@ such `u`) — only `OnConicEscapeStatement` (= (ON)) is the live universal gap. 
    `FiniteBuildGame.PairReplyBook`/`PCert` (route C, phase 1). C3's esc-gate PASS + C8's canon
    validation are the substrate; C5's PGL(2,17) orbit collapse (273 → 10 value-constant buckets)
    is the compression signal for orbit-level books.
-Codex queue C1–C10 all reported; C11 correctly NO-GO. Next: (i) Codex C12 emitter → WP-3 Lean
-checker → per-q `OddEscapeGameStatement` for the computed ladder; (ii) formalize the
-no-intrusion kernel for GF(5)/GF(7); (iii) math frontier stays session-9 §6 (two-plus-intruder
-residual, `ord(σ_x σ_x')` census vs feat values, second-intrusion answer lemma).
+Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus sub-agent
+(Codex out of tokens); z5 killed (datapoint in the sumfree-compute handoff), box freed.
+4. **★ THE ORDER-FIVE PLANE, PROVEN IN LEAN BY MECHANISM**
+   (`PlaneOutcome.initialPStatement_of_card_eq_five_finrank`, axioms = `[propext,
+   Classical.choice, Quot.sound]`, no `native_decide`): `Fintype.card K = 5` + rank 3 ⇒
+   `InitialPStatement`. The q = 5 no-intrusion kernel turned out to need NO computation:
+   `|S₄| = 4 = q − 1` forces the on-conic S₄ to be the whole affine conic
+   (`Finset.eq_of_subset_of_card_le`), which is a MAXIMAL grid cap in odd characteristic
+   (`maximalGridCap_hyperbolaCells_of_two_ne_zero`, already proven) — so no intruder is ever
+   legal, vacuously (`noIntrusionAboveFourStatement_of_card_eq_five`). Helpers added:
+   `two_ne_zero_of_odd_card` (shift `x ↦ x+1` fpf-involution pairing) and
+   `conicOnlyAbove_of_forall_legal_mem` (legality is antitone in the position ⇒ the
+   no-intrusion obligation collapses to the size-four seed alone — this is the q = 7 kernel
+   shrinker). First odd-order projective plane theorem in Lean; PG(2,5) previously known only
+   by exhaustive computation.
+   **q = 7 status:** the kernel there is genuinely finite-geometric (all 15 on-conic S₄'s have
+   zero legal off-conic cells — needs the tangency bound or a decidable check). Routes:
+   (a) σ_x involution calculus (Lemma III synthetic — the right long-term route, also unlocks
+   q ≥ 9 analysis); (b) kernel `decide` via computable twins of the classical defs + the
+   antitone reduction (∼343·15·49 GridCap checks; plumbing-heavy, speed uncertain);
+   (c) `native_decide` (fast but breaks the project's clean axiom profile — TRUST decision =
+   user's). Parked pending user call on (c) vs (a).
 
 ## Handoff Summary
 
