@@ -960,6 +960,27 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    next odd-plane formal targets need the multi-intruder theory (q=9 warm-up: intruders
    confined to pairwise tangent-intersections, then M = 0 — note §3) or route-C
    certificates (q = 11..19).**
+6. **★ THE TOP-GAP THEOREM — the kernel generalized to ALL odd q** (commit `20b5411`,
+   axioms clean): the q=7 secant argument run with symbolic cardinality is
+   `offConic_not_legal_of_add_one_le_two_mul_card` — once an on-conic position holds more
+   than half the conic (`q + 1 ≤ 2·|S|`), NO off-conic cell is ever legal (Lemma III(4) in
+   full generality; the only extra ingredients were `|S| ≤ q−1` and `|S|+1 ≤ q−1` fed to the
+   pigeonhole). Corollaries: `conicOnlyAbove_of_add_one_le_two_mul_card` (supersets keep the
+   bound) and **`isP_iff_even_card_sdiff_of_add_one_le_two_mul_card` — the FREE-ENDGAME
+   theorem: past half-conic, the game value is exactly the parity of the unplayed conic
+   cells, for every odd plane**. The q=7 kernel is now a one-line corollary (`8 ≤ 2·4`).
+   This is the first general-q piece of the intrusion calculus in Lean — the q=9 design and
+   the multi-intruder theory sit on it (intrusions only exist in the window
+   `4 ≤ |S| < (q+1)/2`).
+7. **C12 DELIVERED (Opus delegate) — the full certificate ladder q = 5..19, certcheck PASS
+   at every q** (`2026-07-07-codex-cert-emitter-report.md`): `cert`/`certcheck` modes added
+   (additive; existing modes byte-identical), per-class witness + P-reply-book DAGs matching
+   the `FiniteBuildGame.PairReplyBook`/`PCert` shape via `isP_of_replyStrategy`, dedup keeps
+   the largest book ~29.6K nodes (q=19; 85 MB file, 565s wall). **Every witness at every q
+   is ON-conic** — cert-grade corroboration of (ON) including the q=17 min-escape classes.
+   Checker adversarially validated (tampered certs FAIL correctly). WP-3 (Lean checker,
+   Codex C14) is now unblocked. NOTE: `notes/certs/` (~96 MB total) + the solver diff are
+   uncommitted — user call on whether the big cert files go into git.
 
 ## Handoff Summary
 
