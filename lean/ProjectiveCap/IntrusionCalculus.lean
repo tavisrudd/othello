@@ -244,21 +244,24 @@ theorem collinear_hyperbolaParamPoint_of_secant
   linear_combination t * hsec - s * hsec
 
 /--
-**The order-seven no-intrusion kernel (Theorem IV, `q = 7` case).**  Over a
-field of cardinality seven, no off-conic cell is ever a legal extension of an
-on-conic size-four position: the secant involution of a putative intruder
-would need at least three fixed points among the played parameters, but its
-fixed-point equation is a nondegenerate quadratic.
+**The top-gap theorem (general odd `q`).**  Once an on-conic position holds
+more than half the conic — `q + 1 ≤ 2·|S|` — no off-conic cell is ever a
+legal extension.  The secant involution `σ(t) = B(t − u)/(tv − B)` of a
+putative intruder maps the played parameters injectively into themselves
+(fixed tangency points) or into the unblocked complement, which is too small;
+so σ needs at least three fixed points, but its fixed-point equation
+`vt² − 2Bt + Bu = 0` is a nondegenerate quadratic.  This is Lemma III(4) of
+the intrusion note in full generality; `q = 5, 7` (where every on-conic
+size-four position qualifies) are corollaries.
 -/
-theorem offConic_not_legal_of_card_eq_seven
-    (hcard : Fintype.card K = 7)
+theorem offConic_not_legal_of_add_one_le_two_mul_card
+    (h2 : (2 : K) ≠ 0)
     {rho A B : K} (hB : B ≠ 0) {S : Finset (GridPoint K)}
-    (hS4 : S.card = 4) (hSsub : S ⊆ HyperbolaCells (K := K) rho A B)
+    (hSsub : S ⊆ HyperbolaCells (K := K) rho A B)
+    (hbig : Fintype.card K + 1 ≤ 2 * S.card)
     {x : GridPoint K} (hx : x ∈ GridGame.LegalExtensions (K := K) S) :
     x ∈ HyperbolaCells (K := K) rho A B := by
   by_contra hxC
-  have h2 : (2 : K) ≠ 0 :=
-    two_ne_zero_of_odd_card (K := K) (by rw [hcard]; exact ⟨3, rfl⟩)
   rw [GridGame.mem_legalExtensions] at hx
   obtain ⟨hxS, hcap⟩ := hx
   obtain ⟨⟨hrow, hcol⟩, haff⟩ := hcap
@@ -282,8 +285,8 @@ theorem offConic_not_legal_of_card_eq_seven
       exact onHyperbola_first_ne_rho (K := K) hB hpOn (sub_eq_zero.mp hz)
     · rw [← onHyperbola_eq_hyperbolaParamPoint (K := K) hB hpOn]
       exact hp
-  have hTcard : T.card = 4 := by
-    rw [hT, Finset.card_image_of_injOn, hS4]
+  have hTcard : T.card = S.card := by
+    rw [hT, Finset.card_image_of_injOn]
     intro p hp q hq hpq
     exact rowSparse_hyperbolaCells (K := K) hB (hSsub hp) (hSsub hq)
       (sub_left_inj.mp hpq)
@@ -358,11 +361,14 @@ theorem offConic_not_legal_of_card_eq_seven
     T.filter (fun t => ¬ B * (t - u) / (t * v - B) = t) with hN
   set F : Finset K :=
     T.filter (fun t => B * (t - u) / (t * v - B) = t) with hF
-  have hFN : F.card + N.card = 4 := by
+  have hFN : F.card + N.card = S.card := by
     rw [hF, hN, ← hTcard]
     exact Finset.card_filter_add_card_filter_not (s := T) _
-  have hKstar : ((Finset.univ : Finset K).erase 0).card = 6 := by
-    rw [Finset.card_erase_of_mem (Finset.mem_univ 0), Finset.card_univ, hcard]
+  have hKstar : ((Finset.univ : Finset K).erase 0).card = Fintype.card K - 1 := by
+    rw [Finset.card_erase_of_mem (Finset.mem_univ 0), Finset.card_univ]
+  have hSle : S.card ≤ Fintype.card K - 1 := by
+    have hle := Finset.card_le_card hSsub
+    rwa [card_hyperbolaCells (K := K) hB] at hle
   -- count the landing zone in the two column-geometry cases
   rcases eq_or_ne v 0 with hv0 | hvne
   · -- x in the conic's center row: σ is affine, one fixed point
@@ -376,16 +382,17 @@ theorem offConic_not_legal_of_card_eq_seven
       rcases eq_or_ne (B * (t - u) / (t * v - B)) t with heq | hne
       · exact htnf heq
       · exact hσ_ne_mem t htT _ hσT hne rfl
-    have hNle : N.card ≤ 2 := by
+    have hNle : N.card ≤ Fintype.card K - 1 - S.card := by
       have hsub : T ⊆ (Finset.univ : Finset K).erase 0 := by
         intro t htT
         exact Finset.mem_erase.mpr ⟨(hcell t htT).1, Finset.mem_univ _⟩
-      have hcards : (((Finset.univ : Finset K).erase 0) \ T).card = 2 := by
+      have hcards : (((Finset.univ : Finset K).erase 0) \ T).card =
+          Fintype.card K - 1 - S.card := by
         rw [Finset.card_sdiff_of_subset hsub, hKstar, hTcard]
       calc N.card ≤ (((Finset.univ : Finset K).erase 0) \ T).card :=
             Finset.card_le_card_of_injOn _ hmaps (fun s hs t ht h =>
               hσ_inj s (Finset.mem_filter.mp hs).1 t (Finset.mem_filter.mp ht).1 h)
-        _ = 2 := hcards
+        _ = Fintype.card K - 1 - S.card := hcards
     have hF2 : 1 < F.card := by omega
     obtain ⟨t₁, ht₁, t₂, ht₂, h12⟩ := Finset.one_lt_card.mp hF2
     have e₁ := hfix t₁ (Finset.mem_filter.mp ht₁).1 (Finset.mem_filter.mp ht₁).2
@@ -419,21 +426,25 @@ theorem offConic_not_legal_of_card_eq_seven
       · rcases eq_or_ne (B * (t - u) / (t * v - B)) t with heq | hne
         · exact htnf heq
         · exact hσ_ne_mem t htT _ hσT hne rfl
-    have hNle : N.card ≤ 1 := by
-      have hsub : insert (B / v) T ⊆ (Finset.univ : Finset K).erase 0 := by
-        intro t htT
-        rcases Finset.mem_insert.mp htT with rfl | hmem
-        · exact Finset.mem_erase.mpr ⟨hBv0, Finset.mem_univ _⟩
-        · exact Finset.mem_erase.mpr ⟨(hcell t hmem).1, Finset.mem_univ _⟩
+    have hsub : insert (B / v) T ⊆ (Finset.univ : Finset K).erase 0 := by
+      intro t htT
+      rcases Finset.mem_insert.mp htT with rfl | hmem
+      · exact Finset.mem_erase.mpr ⟨hBv0, Finset.mem_univ _⟩
+      · exact Finset.mem_erase.mpr ⟨(hcell t hmem).1, Finset.mem_univ _⟩
+    have hsubcard : S.card + 1 ≤ Fintype.card K - 1 := by
+      have hle := Finset.card_le_card hsub
+      rwa [Finset.card_insert_of_notMem hBvT, hTcard, hKstar] at hle
+    have hNle : N.card ≤ Fintype.card K - 1 - (S.card + 1) := by
       have hcards :
-          (((Finset.univ : Finset K).erase 0) \ insert (B / v) T).card = 1 := by
+          (((Finset.univ : Finset K).erase 0) \ insert (B / v) T).card =
+            Fintype.card K - 1 - (S.card + 1) := by
         rw [Finset.card_sdiff_of_subset hsub, hKstar,
           Finset.card_insert_of_notMem hBvT, hTcard]
       calc N.card
           ≤ (((Finset.univ : Finset K).erase 0) \ insert (B / v) T).card :=
             Finset.card_le_card_of_injOn _ hmaps (fun s hs t ht h =>
               hσ_inj s (Finset.mem_filter.mp hs).1 t (Finset.mem_filter.mp ht).1 h)
-        _ = 1 := hcards
+        _ = Fintype.card K - 1 - (S.card + 1) := hcards
     have hF3 : 2 < F.card := by omega
     obtain ⟨t₁, t₂, t₃, ht₁, ht₂, ht₃, h12, h13, h23⟩ :=
       Finset.two_lt_card_iff.mp hF3
@@ -456,6 +467,51 @@ theorem offConic_not_legal_of_card_eq_seven
     rcases mul_eq_zero.mp hz with h0 | h0
     · exact hvne h0
     · exact h23 (sub_eq_zero.mp h0)
+
+/-- Past the top gap, no intrusion is available at any point of the rest of
+the game: supersets hold even more of the conic. -/
+theorem conicOnlyAbove_of_add_one_le_two_mul_card
+    (h2 : (2 : K) ≠ 0)
+    {rho A B : K} (hB : B ≠ 0) {S : Finset (GridPoint K)}
+    (_hSsub : S ⊆ HyperbolaCells (K := K) rho A B)
+    (hbig : Fintype.card K + 1 ≤ 2 * S.card) :
+    ConicOnlyAbove (K := K) rho A B S := by
+  intro T hST hTC x hx
+  refine offConic_not_legal_of_add_one_le_two_mul_card (K := K) h2 hB hTC ?_ hx
+  calc Fintype.card K + 1 ≤ 2 * S.card := hbig
+    _ ≤ 2 * T.card := by
+        have := Finset.card_le_card hST
+        omega
+
+/--
+**The free-endgame theorem (general odd `q`).**  Once an on-conic position
+holds more than half the conic, the rest of the game is a bare counter: its
+value is exactly the parity of the unplayed conic cells.  This is the
+formalized dividend of Lemmas II + III(4) of the intrusion note, for every
+odd plane.
+-/
+theorem isP_iff_even_card_sdiff_of_add_one_le_two_mul_card
+    (h2 : (2 : K) ≠ 0)
+    {rho A B : K} (hB : B ≠ 0) {S : Finset (GridPoint K)}
+    (hSsub : S ⊆ HyperbolaCells (K := K) rho A B)
+    (hbig : Fintype.card K + 1 ≤ 2 * S.card) :
+    (GridGame.IsP (K := K) S ↔
+      Even ((HyperbolaCells (K := K) rho A B \ S).card)) :=
+  isP_iff_even_card_sdiff_of_conicOnlyAbove (K := K) hB
+    (conicOnlyAbove_of_add_one_le_two_mul_card (K := K) h2 hB hSsub hbig)
+    hSsub
+
+/-- The order-seven no-intrusion kernel: at `q = 7` every on-conic size-four
+position already clears the top gap (`8 ≤ 2·4`). -/
+theorem offConic_not_legal_of_card_eq_seven
+    (hcard : Fintype.card K = 7)
+    {rho A B : K} (hB : B ≠ 0) {S : Finset (GridPoint K)}
+    (hS4 : S.card = 4) (hSsub : S ⊆ HyperbolaCells (K := K) rho A B)
+    {x : GridPoint K} (hx : x ∈ GridGame.LegalExtensions (K := K) S) :
+    x ∈ HyperbolaCells (K := K) rho A B :=
+  offConic_not_legal_of_add_one_le_two_mul_card (K := K)
+    (two_ne_zero_of_odd_card (K := K) (by rw [hcard]; exact ⟨3, rfl⟩))
+    hB hSsub (by omega) hx
 
 /--
 **The order-seven no-intrusion kernel, packaged.**  Combined with the
