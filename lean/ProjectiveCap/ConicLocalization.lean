@@ -1148,6 +1148,253 @@ theorem gridSymmetry_isP_image {f : GridPoint K -> GridPoint K}
   rw [← hmap S]
   exact FiniteBuildGame.isP_equiv e hValid S
 
+/-! ## Axis-affine grid symmetries -/
+
+/--
+Independent affine changes of the row and column coordinates.  These are the
+normalization symmetries used to anchor a legal ordered pair at `(0,0)` and
+`(1,1)`.
+-/
+def axisAffine (rowScale rowShift colScale colShift : K) (p : GridPoint K) :
+    GridPoint K :=
+  (rowScale * p.1 + rowShift, colScale * p.2 + colShift)
+
+omit [Fintype K] [DecidableEq K] in
+theorem axisAffine_bijective {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (hcol : colScale ≠ 0) :
+    Function.Bijective (axisAffine (K := K) rowScale rowShift colScale colShift) := by
+  constructor
+  · intro p q hpq
+    have hrowEq :
+        rowScale * p.1 + rowShift = rowScale * q.1 + rowShift :=
+      congrArg Prod.fst hpq
+    have hcolEq :
+        colScale * p.2 + colShift = colScale * q.2 + colShift :=
+      congrArg Prod.snd hpq
+    have hrowMul : rowScale * p.1 = rowScale * q.1 := by
+      exact (add_right_injective rowShift) (by
+        simpa [add_comm] using hrowEq)
+    have hcolMul : colScale * p.2 = colScale * q.2 := by
+      exact (add_right_injective colShift) (by
+        simpa [add_comm] using hcolEq)
+    ext
+    · exact mul_left_cancel₀ hrow hrowMul
+    · exact mul_left_cancel₀ hcol hcolMul
+  · intro y
+    refine ⟨(rowScale⁻¹ * (y.1 - rowShift), colScale⁻¹ * (y.2 - colShift)), ?_⟩
+    ext <;> simp [axisAffine]
+    · field_simp [hrow]
+      ring
+    · field_simp [hcol]
+      ring
+
+omit [Fintype K] [DecidableEq K] in
+theorem axisAffine_first_eq_iff {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (p q : GridPoint K) :
+    (axisAffine (K := K) rowScale rowShift colScale colShift p).1 =
+        (axisAffine (K := K) rowScale rowShift colScale colShift q).1 ↔
+      p.1 = q.1 := by
+  constructor
+  · intro h
+    have hmul : rowScale * p.1 = rowScale * q.1 := by
+      exact (add_right_injective rowShift) (by
+        simpa [axisAffine, add_comm] using h)
+    exact mul_left_cancel₀ hrow hmul
+  · intro h
+    simp [axisAffine, h]
+
+omit [Fintype K] [DecidableEq K] in
+theorem axisAffine_second_eq_iff {rowScale rowShift colScale colShift : K}
+    (hcol : colScale ≠ 0) (p q : GridPoint K) :
+    (axisAffine (K := K) rowScale rowShift colScale colShift p).2 =
+        (axisAffine (K := K) rowScale rowShift colScale colShift q).2 ↔
+      p.2 = q.2 := by
+  constructor
+  · intro h
+    have hmul : colScale * p.2 = colScale * q.2 := by
+      exact (add_right_injective colShift) (by
+        simpa [axisAffine, add_comm] using h)
+    exact mul_left_cancel₀ hcol hmul
+  · intro h
+    simp [axisAffine, h]
+
+omit [Fintype K] [DecidableEq K] in
+theorem collinear_axisAffine_iff {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (hcol : colScale ≠ 0) (p q r : GridPoint K) :
+    Collinear (K := K)
+        (axisAffine (K := K) rowScale rowShift colScale colShift p)
+        (axisAffine (K := K) rowScale rowShift colScale colShift q)
+        (axisAffine (K := K) rowScale rowShift colScale colShift r) ↔
+      Collinear (K := K) p q r := by
+  have hscale :
+      Collinear (K := K)
+          (axisAffine (K := K) rowScale rowShift colScale colShift p)
+          (axisAffine (K := K) rowScale rowShift colScale colShift q)
+          (axisAffine (K := K) rowScale rowShift colScale colShift r) ↔
+        rowScale * colScale * ((q.1 - p.1) * (r.2 - p.2)) =
+          rowScale * colScale * ((q.2 - p.2) * (r.1 - p.1)) := by
+    unfold Collinear axisAffine
+    ring_nf
+  rw [hscale]
+  constructor
+  · intro h
+    exact mul_left_cancel₀ (mul_ne_zero hrow hcol) h
+  · intro h
+    exact congrArg (fun t => rowScale * colScale * t) h
+
+omit [Fintype K] in
+theorem rowSparse_image_axisAffine {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    RowSparse (K := K)
+      (S.image (axisAffine (K := K) rowScale rowShift colScale colShift)) := by
+  intro p q hp hq hrowEq
+  rcases Finset.mem_image.mp hp with ⟨p0, hp0, rfl⟩
+  rcases Finset.mem_image.mp hq with ⟨q0, hq0, rfl⟩
+  have hrow0 : p0.1 = q0.1 :=
+    (axisAffine_first_eq_iff (K := K) (rowShift := rowShift)
+      (colScale := colScale) (colShift := colShift) hrow p0 q0).mp hrowEq
+  have hpq : p0 = q0 := hS.1.1 hp0 hq0 hrow0
+  rw [hpq]
+
+omit [Fintype K] in
+theorem colSparse_image_axisAffine {rowScale rowShift colScale colShift : K}
+    (hcol : colScale ≠ 0) {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    ColSparse (K := K)
+      (S.image (axisAffine (K := K) rowScale rowShift colScale colShift)) := by
+  intro p q hp hq hcolEq
+  rcases Finset.mem_image.mp hp with ⟨p0, hp0, rfl⟩
+  rcases Finset.mem_image.mp hq with ⟨q0, hq0, rfl⟩
+  have hcol0 : p0.2 = q0.2 :=
+    (axisAffine_second_eq_iff (K := K) (rowScale := rowScale) (rowShift := rowShift)
+      (colShift := colShift) hcol p0 q0).mp hcolEq
+  have hpq : p0 = q0 := hS.1.2 hp0 hq0 hcol0
+  rw [hpq]
+
+omit [Fintype K] in
+theorem affineCap_image_axisAffine {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (hcol : colScale ≠ 0) {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    AffineCap (K := K)
+      (S.image (axisAffine (K := K) rowScale rowShift colScale colShift)) := by
+  intro a b c ha hb hc hab hac hbc hcoll
+  rcases Finset.mem_image.mp ha with ⟨a0, ha0, rfl⟩
+  rcases Finset.mem_image.mp hb with ⟨b0, hb0, rfl⟩
+  rcases Finset.mem_image.mp hc with ⟨c0, hc0, rfl⟩
+  have hab0 : a0 ≠ b0 := fun h => hab (by rw [h])
+  have hac0 : a0 ≠ c0 := fun h => hac (by rw [h])
+  have hbc0 : b0 ≠ c0 := fun h => hbc (by rw [h])
+  exact hS.2 ha0 hb0 hc0 hab0 hac0 hbc0
+    ((collinear_axisAffine_iff (K := K) hrow hcol a0 b0 c0).mp hcoll)
+
+omit [Fintype K] in
+theorem gridCap_image_axisAffine {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (hcol : colScale ≠ 0) {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    GridCap (K := K)
+      (S.image (axisAffine (K := K) rowScale rowShift colScale colShift)) :=
+  ⟨⟨rowSparse_image_axisAffine (K := K) (rowShift := rowShift)
+      (colScale := colScale) (colShift := colShift) hrow hS,
+    colSparse_image_axisAffine (K := K) (rowScale := rowScale)
+      (rowShift := rowShift) (colShift := colShift) hcol hS⟩,
+    affineCap_image_axisAffine (K := K) hrow hcol hS⟩
+
+omit [Fintype K] in
+theorem gridCap_image_axisAffine_iff {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (hcol : colScale ≠ 0)
+    (S : Finset (GridPoint K)) :
+    GridCap (K := K)
+        (S.image (axisAffine (K := K) rowScale rowShift colScale colShift)) ↔
+      GridCap (K := K) S := by
+  constructor
+  · intro hSimage
+    let f := axisAffine (K := K) rowScale rowShift colScale colShift
+    let g := axisAffine (K := K) rowScale⁻¹ (-rowScale⁻¹ * rowShift)
+      colScale⁻¹ (-colScale⁻¹ * colShift)
+    have hgrow : rowScale⁻¹ ≠ 0 := inv_ne_zero hrow
+    have hgcol : colScale⁻¹ ≠ 0 := inv_ne_zero hcol
+    have hgf : Function.LeftInverse g f := by
+      intro p
+      ext <;> simp [f, g, axisAffine]
+      · field_simp [hrow]
+        ring
+      · field_simp [hcol]
+        ring
+    have hpre :
+        GridCap (K := K) ((S.image f).image g) :=
+      gridCap_image_axisAffine (K := K) (rowShift := -rowScale⁻¹ * rowShift)
+        (colScale := colScale⁻¹) (colShift := -colScale⁻¹ * colShift)
+        hgrow hgcol hSimage
+    have himage : (S.image f).image g = S := by
+      ext x
+      constructor
+      · intro hx
+        rcases Finset.mem_image.mp hx with ⟨y, hy, rfl⟩
+        rcases Finset.mem_image.mp hy with ⟨z, hz, rfl⟩
+        simpa [hgf z] using hz
+      · intro hx
+        exact Finset.mem_image.mpr
+          ⟨f x, Finset.mem_image.mpr ⟨x, hx, rfl⟩, hgf x⟩
+    simpa [himage] using hpre
+  · exact gridCap_image_axisAffine (K := K) hrow hcol
+
+omit [Fintype K] in
+theorem axisAffine_gridSymmetry {rowScale rowShift colScale colShift : K}
+    (hrow : rowScale ≠ 0) (hcol : colScale ≠ 0) :
+    GridSymmetry (K := K)
+      (axisAffine (K := K) rowScale rowShift colScale colShift) :=
+  ⟨axisAffine_bijective (K := K) hrow hcol,
+    gridCap_image_axisAffine_iff (K := K) hrow hcol⟩
+
+/-- The axis-affine map that sends `p` to `(0,0)` and `q` to `(1,1)`. -/
+def anchorAxisAffine (p q : GridPoint K) : GridPoint K -> GridPoint K :=
+  axisAffine (K := K) (q.1 - p.1)⁻¹ (-(q.1 - p.1)⁻¹ * p.1)
+    (q.2 - p.2)⁻¹ (-(q.2 - p.2)⁻¹ * p.2)
+
+omit [Fintype K] in
+theorem anchorAxisAffine_gridSymmetry {p q : GridPoint K}
+    (hrow : q.1 - p.1 ≠ 0) (hcol : q.2 - p.2 ≠ 0) :
+    GridSymmetry (K := K) (anchorAxisAffine (K := K) p q) :=
+  axisAffine_gridSymmetry (K := K) (rowShift := -(q.1 - p.1)⁻¹ * p.1)
+    (colScale := (q.2 - p.2)⁻¹) (colShift := -(q.2 - p.2)⁻¹ * p.2)
+    (inv_ne_zero hrow) (inv_ne_zero hcol)
+
+omit [Fintype K] [DecidableEq K] in
+theorem anchorAxisAffine_left (p q : GridPoint K) :
+    anchorAxisAffine (K := K) p q p = (0, 0) := by
+  ext <;> simp [anchorAxisAffine, axisAffine]
+
+omit [Fintype K] [DecidableEq K] in
+theorem anchorAxisAffine_right {p q : GridPoint K}
+    (hrow : q.1 - p.1 ≠ 0) (hcol : q.2 - p.2 ≠ 0) :
+    anchorAxisAffine (K := K) p q q = (1, 1) := by
+  ext <;> simp [anchorAxisAffine, axisAffine]
+  · field_simp [hrow]
+    ring
+  · field_simp [hcol]
+    ring
+
+omit [Fintype K] [DecidableEq K] in
+theorem gridCap_row_ne_of_ne {S : Finset (GridPoint K)} (hS : GridCap (K := K) S)
+    {p q : GridPoint K} (hp : p ∈ S) (hq : q ∈ S) (hpq : p ≠ q) :
+    q.1 - p.1 ≠ 0 := by
+  intro hzero
+  apply hpq
+  have hrow : p.1 = q.1 := by
+    exact (sub_eq_zero.mp hzero).symm
+  exact hS.1.1 hp hq hrow
+
+omit [Fintype K] [DecidableEq K] in
+theorem gridCap_col_ne_of_ne {S : Finset (GridPoint K)} (hS : GridCap (K := K) S)
+    {p q : GridPoint K} (hp : p ∈ S) (hq : q ∈ S) (hpq : p ≠ q) :
+    q.2 - p.2 ≠ 0 := by
+  intro hzero
+  apply hpq
+  have hcol : p.2 = q.2 := by
+    exact (sub_eq_zero.mp hzero).symm
+  exact hS.1.2 hp hq hcol
+
 omit [Fintype K] in
 theorem rowSparse_image_psi {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0)
     {S : Finset (GridPoint K)} (hS : GridCap (K := K) S) :
