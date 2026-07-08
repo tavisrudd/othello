@@ -157,6 +157,25 @@ theorem hyperbolaCenter_eq_of_linear {a b c : GridPoint K} {rho A : K}
     field_simp [hden]
     simpa [mul_comm, mul_left_comm, mul_assoc] using hA_mul
 
+omit [Fintype K] in
+theorem hyperbolaParams_eq_of_fits_triple {a b c : GridPoint K} {rho A B : K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0)
+    (hfit : HyperbolaFits (K := K) ({a, b, c} : Finset (GridPoint K)) rho A B) :
+    rho = hyperbolaRhoOfTriple (K := K) a b c ∧
+      A = hyperbolaAOfTriple (K := K) a b c ∧
+      B = hyperbolaBOfTriple (K := K) a b c := by
+  have ha : OnHyperbola (K := K) rho A B a := hfit a (by simp)
+  have hb : OnHyperbola (K := K) rho A B b := hfit b (by simp)
+  have hc : OnHyperbola (K := K) rho A B c := hfit c (by simp)
+  have hlinb := onHyperbola_pair_linear (K := K) ha hb
+  have hlinc := onHyperbola_pair_linear (K := K) ha hc
+  rcases hyperbolaCenter_eq_of_linear (K := K) hden hlinb hlinc with ⟨hrho, hA⟩
+  refine ⟨hrho, hA, ?_⟩
+  unfold OnHyperbola at ha
+  unfold hyperbolaBOfTriple
+  rw [← hrho, ← hA]
+  exact ha.symm
+
 omit [Fintype K] [DecidableEq K] in
 theorem onHyperbola_hyperbolaOfTriple_a (a b c : GridPoint K) :
     OnHyperbola (K := K)
@@ -343,6 +362,28 @@ theorem exists_hyperbolaNormalForm {S : Finset (GridPoint K)}
   have hB : B ≠ 0 :=
     hyperbolaFits_card_three_B_ne_zero (K := K) hcardTriple hS hfit
   exact ⟨rho, A, B, hB, hfit⟩
+
+omit [Fintype K] in
+theorem hyperbolaNormalFormStatement :
+    HyperbolaNormalFormStatement (K := K) := by
+  intro S hcard hS
+  obtain ⟨a, b, c, hab, hac, hbc, rfl⟩ := Finset.card_eq_three.mp hcard
+  let rho := hyperbolaRhoOfTriple (K := K) a b c
+  let A := hyperbolaAOfTriple (K := K) a b c
+  let B := hyperbolaBOfTriple (K := K) a b c
+  have hden : hyperbolaDenom (K := K) a b c ≠ 0 :=
+    hyperbolaDenom_ne_zero_of_gridCap_triple (K := K) hS hab hac hbc
+  have hfit :
+      HyperbolaFits (K := K) ({a, b, c} : Finset (GridPoint K)) rho A B := by
+    simpa [rho, A, B] using hyperbolaFits_triple (K := K) hden
+  have hcardTriple : ({a, b, c} : Finset (GridPoint K)).card = 3 := by
+    simp [hab, hac, hbc]
+  have hB : B ≠ 0 :=
+    hyperbolaFits_card_three_B_ne_zero (K := K) hcardTriple hS hfit
+  refine ⟨rho, A, B, hB, hfit, ?_⟩
+  intro rho' A' B' _hB' hfit'
+  simpa [rho, A, B] using
+    hyperbolaParams_eq_of_fits_triple (K := K) hden hfit'
 
 omit [Fintype K] [DecidableEq K] in
 theorem hyperbolaConic_nondegenerate {rho A B : K} (hB : B ≠ 0) :
