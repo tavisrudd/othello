@@ -59,8 +59,11 @@ Added end of Fable session 2 (~19:00). Target: [n=20 lucky-first-win plan](2026-
 **Box status (user-corrected 2026-07-07 evening): the queens G(17) run is DONE — G(17) = 2
 VERIFIED** (recorded in the nimber handoff; G(18) remains). But the **sum-free z5 run
 (`z3cubed-z5` lineage) is still running** and owns part of the box, so the ≤1 GB single-core
-sub constraint HOLDS for both remaining windows. Record the G(17) revalidation config/log
-pointer in the nimber handoff when its pane is read back.
+sub constraint HOLDS for both remaining windows. ~~Record the G(17) revalidation config/log
+pointer in the nimber handoff when its pane is read back.~~ **DONE 2026-07-08**: the run is
+recorded in claude session `08073bd4` (`asg +show 08073bd4`); pointer + verbatim round log
+now in the nimber handoff. (Also stale by 2026-07-08: the z5 run was terminated without a
+verdict — see the sumfree handoff — so the box constraint is lifted.)
 
 ### Window 2 (next 5hr)
 
