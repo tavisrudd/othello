@@ -524,3 +524,246 @@ theorem is unconditional: `PlaneOutcome.initialPStatement_of_even_card_finrank`)
 proof-side context loads per [named-expert personas](2026-07-07-named-expert-personas-context.md);
 projective status lives in `handoffs/2026-07-06-projective-cap-game-handoff.md` (session-10
 block: order-5 and order-7 planes proven, dead-hypothesis routes guarded).
+
+## C24. Binary projective nofil theorem in Lean: `PG(n,2)=P` for every `n ≥ 1`
+
+Goal: close the whole q=2 projective column by proof, not computation.
+
+Target theorem:
+
+```lean
+Projective.InitialPStatement (K := ZMod 2) (V := V)
+```
+
+from `[AddCommGroup V] [Module (ZMod 2) V] [Fintype V] [DecidableEq V]` and
+`2 ≤ Module.finrank (ZMod 2) V`.  This is `PG(n,2)` for projective dimension
+`n ≥ 1`; rank 1 / `PG(0,2)` is correctly excluded.
+
+Proof route:
+
+1. Prove the binary projective bridge: `Projectivization (ZMod 2) V` is equivalent to
+   `{v : V // v ≠ 0}` via `p ↦ p.rep`; each projective point has a unique nonzero vector
+   representative because `(ZMod 2)ˣ` is trivial.
+2. Prove the validity bridge: projective caps over `ZMod 2` correspond to sum-free subsets
+   of the nonzero vector model, since binary projective lines are exactly
+   `{x, y, x + y}`.
+3. Transport the game through the bridge. Reuse the already-proved sum-free theorem:
+   `Sumfree.Game.initial_isP_of_at_least_two_nonzero_orderTwo` (or the rank wrapper
+   `initial_isP_of_rank_count_P_cases`) supplies the strategy. Informal strategy: after
+   P1 plays `a`, P2 chooses `b ≠ a`; `a+b` is blocked, and translation by `a+b` pairs the
+   remaining live nonzero vectors. This is a non-linear board pairing, not a linear
+   projective collineation.
+4. Add a small nofil-facing corollary/note: the impartial shared nofil game on the projective
+   binary STS family `STS(2^{n+1}-1)` is P for all `n ≥ 1`.
+
+Prior-art guard: Clark--Mancini--Van Hook study a different game according to the accessible
+abstract: partizan colored misere tic-tac-toe / avoidance, first player to complete a
+monochromatic block loses. Verify the full paper before writing novelty language, but do not
+cite it as covering impartial nofil.
+
+## C25. Elliptic-involution theorem in Lean: `PG(2m−1,q)=P` for odd `q` [REPORTED 2026-07-08]
+
+Goal: formalize the new closed projective family.
+
+Semi-formal proof kernel: [`2026-07-08-projective-mirror-proof-kernels.md`](2026-07-08-projective-mirror-proof-kernels.md)
+§2-§3.
+
+Target theorem shape:
+
+```lean
+Projective.InitialPStatement (K := K) (V := V)
+```
+
+from `[Field K] [Fintype K] [DecidableEq K]`, `Odd (Fintype.card K)`, and
+`Even (Module.finrank K V)` with positive even rank (`2 ≤ Module.finrank K V`), equivalently
+`PG(2m−1,q)` for odd `q`.
+
+Proof route:
+
+1. **DONE 2026-07-08.** Add a reusable finite-building-game mirror theorem: if an involutive board equivalence `σ`
+   preserves validity, has no fixed points, and the hypergraph legality condition is collineation-like
+   as in projective caps, then the empty position is P. For projective caps the direct lemma should
+   say: for any `σ`-invariant cap `S`, if `x` is legal then `σ x` is legal after `x`.
+2. **DONE 2026-07-08.** Prove the projective cap mirror lemma for any fixed-point-free involutive collineation:
+   lines through old-old pairs pull back under `σ`; the only extra case `x, σx, z` is killed by
+   `σ`-invariance because `z, σz` are an old pair on the same invariant line.
+3. **COORDINATE MODEL DONE 2026-07-08.** Construct the nonsplit involution. Pick a nonsquare `d ∈ K`; on `Fin 2 × Fin m → K` use block
+   matrix `A(e_i)=f_i`, `A(f_i)=d e_i`, so `A²=dI`. The induced projective map has order 2 and no
+   fixed points because a fixed point would give an eigenvalue `λ` with `λ²=d`.
+4. **DONE 2026-07-08.** Transport from the coordinate even-rank model to an arbitrary `V` by `LinearEquiv.ofFinrankEq`.
+
+Lean status: `lean/CapGame/Mirror.lean`, `lean/ProjectiveCap/Mirror.lean`, and
+`lean/ProjectiveCap/EllipticMirror.lean` now check.  Important theorem names:
+`Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution`,
+`Projective.initialPStatement_of_linearEquiv_sq_scalar_nonsquare`,
+`Projective.initialPStatement_ellipticBlock_of_nonsquare`, and
+`Projective.initialPStatement_of_odd_card_finrank_eq_two_mul`.  Verification details are in
+[`2026-07-08-codex-residual-mirror-lemma.md`](2026-07-08-codex-residual-mirror-lemma.md).
+
+This supersedes the old false handoff claim that projective spaces never have fpf involutions.
+
+## C26. Bibliography-grade novelty audit for projective Nofil/cap theorem
+
+Goal: validate public wording for the claim that the odd-dimensional projective cap theorem is new
+in the Nofil / impartial hypergraph-avoidance context.
+
+Current conservative position, recorded in
+[`2026-07-07-nofil-connection.md`](2026-07-07-nofil-connection.md): Nofil as a hypergraph game,
+pairing strategies, and elliptic projective involutions are all prior art. What appears new is the
+application to the 3-uniform collinearity-triple hypergraph of `PG(d,q)` for `q > 2`, especially
+the theorem `PG(2m−1,q)=P` for odd `q` by a fixed-point-free projective collineation and
+whole-board mirror.
+
+Task:
+
+1. Search MathSciNet/Zentralblatt/Google Scholar/arXiv for exact and variant phrases:
+   `Nofil projective space`, `Nofil PG`, `projective cap game`, `cap avoidance game`,
+   `impartial misere tic-tac-toe finite geometry`, `Notakto finite geometry`,
+   `fixed-point-free involution projective game`, and `Steiner triple system Nofil projective`.
+2. Retrieve/verify Clark--Mancini--Van Hook if accessible. Classify precisely whether it is
+   partizan colored avoidance, impartial shared avoidance, or both; record whether it contains
+   any theorem implying `PG(n,2)` nofil/cap is P.
+3. Check HHS 2022 and the 2025 HHS follow-up for any projective-space family theorem beyond
+   STS(7)/STS(9), vertex-transitivity `G ∈ {0,1}`, and graph-embedding/hardness.
+4. Produce a citable wording recommendation with three tiers:
+   "proved here", "standard ingredient", and "adjacent colored/positional-game prior art."
+
+Report file: `notes/2026-07-08-codex-projective-nofil-novelty-audit.md`.
+
+## C27. Correct residual mirror lemma for cap games [REPORTED 2026-07-08]
+
+Goal: formalize the reusable mirror principle in the form that is actually sound for cap/Nofil
+positions.
+
+Semi-formal proof kernel: [`2026-07-08-projective-mirror-proof-kernels.md`](2026-07-08-projective-mirror-proof-kernels.md)
+§1 and §6.
+
+Adopted statement shape:
+
+- `σ` is an involutive board equivalence preserving validity/collinearity.
+- `S` is a valid position and `σ`-invariant.
+- For every legal move `x` from `S`, `σ x ≠ x`, `σ x ∉ S`, and the **two-move extension**
+  `S ∪ {x, σ x}` is valid.
+- Then `S` is a P-position by replying to `x` with `σ x`.
+
+Important non-statement: do **not** prove or use the weaker claim "legal moves are σ-invariant and
+σ has no fixed legal point." That misses the mirror-chord obstruction: a selected point can lie on
+the line `xσx`, making the reply illegal after `x` even though `σx` was legal before `x`.
+
+Use cases:
+
+1. Whole-board fixed-point-free collineation lemma for C25, where the chord obstruction is killed
+   by `σ`-invariance: if `z ∈ S` lies on `xσx`, then `σz ∈ S` lies on the same line, so `x` was
+   already illegal.
+2. Characteristic-2 residual translation mirrors, where the chosen translation direction avoids
+   the two burned directions and therefore `x,τx` never form a burned pair.
+3. Any future fixed-locus-complement residual, but only after separately proving the pair-extension
+   condition. "Fixed locus dead" alone is not a certificate.
+
+Report file: `notes/2026-07-08-codex-residual-mirror-lemma.md`.
+
+## C28. MirrorStep/MirrorClosed census and certificate-compression probe
+
+Goal: measure whether the corrected residual mirror lemma is useful in the computed odd-plane
+ladder, and prepare a terminal certificate rule for future Lean books.
+
+Definitions:
+
+- `MirrorStepGood(S,τ)`: `τ` is an involutive automorphism of the residual game, `S` is
+  `τ`-invariant, and every legal move `x` satisfies `τx ≠ x`, `τx ∉ S`, and
+  `S ∪ {x,τx}` is valid.
+- `MirrorClosed(S,τ)`: every mirror-pair follower above `S` satisfies `MirrorStepGood`; this is the
+  terminal P-certificate condition.
+- `Obs_τ(S)`: legal moves `x` for which the mirror reply fails the pair-extension test. Geometric
+  meaning: the mirror chord `xτx` hits selected/problem structure.
+
+Task:
+
+1. Add a diagnostic mode to the grid solver or a small standalone script that, for a residual
+   position `S`, enumerates all residual-game involutions already supported by `all_autos` and
+   reports whether any are one-step `MirrorStepGood`; if not, report the minimum `|Obs_τ(S)|` and
+   the obstruction type histogram (burned row/col chord, ordinary collinear chord through selected
+   point, fixed legal point). If `MirrorStepGood` holds, continue through mirror-pair followers to
+   test `MirrorClosed`.
+2. Run it on:
+   - all canonical size-4 P escape witnesses for q=11 and q=13;
+   - all P leaves/subtrees visited by the q=11 certificate book if cheap;
+   - a sample of q=17 min-escape classes.
+3. Report how many P followers can be closed immediately by a `MirrorClosed` certificate and how
+   deep into the reply tree mirror leaves begin to appear.
+4. If the hit rate is nontrivial, sketch the certificate format extension: a `PCert` leaf carrying
+   `(τ, proof/check of MirrorClosed(S,τ))` instead of an explicit reply subtree.
+
+Non-goal: do not restart the fixed-involution proof route for odd planes. This is certificate
+compression and obstruction measurement only.
+
+Report file: `notes/2026-07-08-codex-mirrorgood-census.md`.
+
+## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31
+
+Context: C18's null killed bucket-level laws over static features, but it never isolated the
+COLUMN-level existence question "does q admit any N-valued on-conic bucket at all". On that
+coarser question the data is clean: among unconfined-intruder columns (q ≥ 11), the mixed
+columns are exactly `q ≡ 2 (mod 3)` — q = 11, 17 mixed; q = 13, 19 all-P (C15/C20 tables).
+Arithmetic meaning: `3 | q+1` ⟺ order-3 elements of PGL(2,q) are elliptic (fixed-point-free
+on P¹) ⟺ order-3 products `σ_x σ_x'` sit in free C₆ cycles of the Lemma-VI spectrum
+(Grundy-dead by Cor. VII); for `3 | q−1` they are split (two fixed points on P¹) and surface
+as tangency-ended path defects carrying nonzero Dawson values. Four data points = a
+conjecture generator, nothing more; the predictions are the content: q=23 mixed, q=25 all-P,
+q=29 mixed, q=31 all-P. char-3 columns (q=9, 27) are their own regime (q=9 is all-P by
+intruder confinement, C13). Any miss REFUTES the law — report verbatim either way; a
+refutation is a full-value deliverable.
+
+1. **Mechanism check on EXISTING data first (no game compute):** the per-state `ord(σ_xσ_x')`
+   field in `notes/data/c20-q13-q17-states.jsonl.gz` is unanalyzed (C20 review, handoff item
+   16). q=17 has elliptic order-3 products (3 | 18), q=13 split (3 | 12). Tabulate ord=3
+   occurrences × spectrum component type (free C₆ cycle vs tangency-ended path) ×
+   reply-state P/N, per q. Report the table regardless of what the census finds.
+2. **Invert the census pipeline so new q are cheap:** bucket FIRST (enumerate on-conic S₄
+   parameter 6-subsets up to PGL(2,q) — pure group theory, no solves; C15 recipe), then solve
+   ONE representative per bucket (S₄-rooted private-memo solve — orders of magnitude smaller
+   than C21's size-3-rooted esc solves; do NOT rerun those). Solve 2–3 extra members of any
+   N bucket found, so Lemma I keeps taking falsification pressure instead of being assumed.
+3. **Gate before any new q:** rerun the inverted pipeline at q=17 and confirm bucket count
+   (10) and labels (5 P / 5 N) byte-identical to the C15/C20 tables.
+4. **Sizing gate at q=23:** one S₄-rooted solve under a 30-min wall cap; if exceeded, kill it
+   and report where it was — that IS the sizing datum; stop the census.
+5. Then q = 25, 29, 31 in that order within budget (GF(25) uses the C6-fixed irred entries;
+   the `GF::new` self-check must pass); q=27 optional, flagged as char-3 regime.
+6. Report: per-q bucket tables verbatim, the column-law verdict per q, the ord=3 mechanism
+   table, and — if any column refutes — the counterexample bucket + representative verbatim.
+
+Budget: hard 8h wall, single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-08-codex-mod3-column-law.md`.
+
+## C30. Route C phase 5 — certificate books for q = 17 and q = 19
+
+Context: the status-table gap "cert book unbuilt" for q=17/19 is pure engineering now — every
+feasibility gate is measured: the emitter's private-memo peak fits (C3: q=19 ≈ 32.3M entries),
+every q=17 class has escapes (min-escape histogram 5:3 10:12 11:6), C19's reflected checker +
+obligation splitting beat the elaboration wall, and C22's transport assembly generalizes over
+prime q. Mixed buckets are irrelevant here — books certify size-3 escapes, not the uniform
+mechanism. Payoff: the whole computed prime ladder ≤ 19 becomes unconditional in Lean.
+Expected anchored class counts: (q−2)(q−3) = 210 at q=17, 272 at q=19 (matches 72/110 at
+q=11/13).
+
+1. **Prerequisite — the q=13 staged build:** the split Q13 cert data + assembly are generated
+   (`2026-07-08-q13-split-to-lean.py`, working tree) but UNBUILT, and the naive aggregate
+   build OOM'd the box (CLAUDE.md 2026-07-08 note). If no build transcript/commit exists when
+   you start, land it first with `nix_lake_build_each` (class leaves first, aggregate last)
+   and capture the axiom gate verbatim. Its per-class-file layout is the template for
+   q=17/19 scale.
+2. Emit anchored books for q=17 and q=19 (`cert --anchored`); certcheck PASS mandatory;
+   cross-check per-class witness escape counts against the esc histograms.
+3. Generate per-class Lean files from the start (generalize the q=13 splitter). Measure
+   per-class elaboration on the first ~5 classes and extrapolate; STOP and report if any
+   single file projects past the 30-min gate or a per-q total projects past ~10 h — the full
+   build at that scale is a user launch decision.
+4. Assembly per q: `OddEscapeGameStatement (ZMod 17)` / `(ZMod 19)` →
+   `initialPStatement_finrank`; `#print axioms` verbatim, must be
+   `[propext, Classical.choice, Quot.sound]` only.
+5. Optional if trivial: q=3 (closes the last small prime row). q=9 stays OUT OF SCOPE here
+   (GF(9) ≠ `ZMod`; the intruder terminal-reply kernel `218b1ac` is the better lane for it).
+
+Report file: `notes/2026-07-08-codex-route-c-phase5.md`.

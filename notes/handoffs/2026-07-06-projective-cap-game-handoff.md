@@ -5,7 +5,7 @@ Date: 2026-07-06.
 ## Status table — PG(2,q) value + proof state
 
 **KEEP THIS TABLE UP TO DATE** — update it in the same commit as any session block / review
-that changes a cell (last updated 2026-07-08, C22 q=11 assembly).
+that changes a cell (last updated 2026-07-08, C29/C30 queued).
 
 | q                | Value | Computational evidence                                        | Lean proof status                                                                                     | Remaining gap                                                    |
 |------------------|-------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
@@ -16,15 +16,16 @@ that changes a cell (last updated 2026-07-08, C22 q=11 assembly).
 | 9                | P     | exhaustive solve (~1s; non-prime, char 3)                     | none                                                                                                     | open; noted reducible to a ≤15-point warm-up certificate          |
 | 11               | **P** | solver + esc campaign                                         | **★ PROVEN by certificate assembly** — `CertData/Q11Assembly.initialPStatement_finrank`, clean axioms | none — closed                                                     |
 | 13               | P     | solver (all on-conic buckets P)                               | cert generator works; single-file elaboration blows the 30-min gate                                     | per-class file split (C22 optional), then assembly                |
-| 17               | P     | esc campaign (gate discharged, C3); S4 buckets mixed 5P/5N    | none                                                                                                     | cert book unbuilt; mixed buckets make it the hard column          |
-| 19               | P     | esc campaign                                                  | none                                                                                                     | cert book unbuilt                                                 |
-| 23               | **?** | not computed (CPython OOM'd; Rust sizing probe = C21, queued) | none                                                                                                     | the live falsification watch — any esc class at 0 kills the conjecture |
+| 17               | P     | esc campaign (gate discharged, C3); S4 buckets mixed 5P/5N    | none                                                                                                     | cert book queued (C30, route-C phase 5); mixed buckets make it the hard *mechanism* column |
+| 19               | P     | esc campaign                                                  | none                                                                                                     | cert book queued (C30)                                            |
+| 23               | **?** | not computed (C21: esc class 0 aborted at the 200M-memo cap, >36 min — campaign blocked; S₄-rooted bucket census = C29) | none                                                                                                     | the live falsification watch — any esc class at 0 kills the conjecture |
 | all odd q        | conj. P | no counterexample through q=19                              | frame reduction + odd-escape composition are unconditional rank-3 theorems; the per-q escape input is what's missing | a uniform mechanism — post-C20 that means strategy-level (second-intrusion lemma in defect form), not a snapshot law |
 
 Scoreboard reading: **closed** — all even q, plus odd q=5, 7, 11. **Certificate-route feasible
-but ungated** — q=13 (file split), q=9 and q=3 (small, unqueued). **Compute-only** — q=17, 19.
-**Frontier** — q=23 sizing (C21) and the uniform odd-q mechanism (post-C20: strategies, not
-snapshot invariants).
+but ungated** — q=13 (file split; staged build = C30 step 1), q=9 and q=3 (small; q=3 optional
+in C30). **Compute-only** — q=17, 19 (route-C books queued, C30). **Frontier** — q=23 (esc
+campaign blocked per C21; inverted bucket census + the q≡2-mod-3 mixed-column law = C29) and
+the uniform odd-q mechanism (post-C20: strategies, not snapshot invariants).
 
 ## Target
 
@@ -44,9 +45,11 @@ This is the natural sequel to the proven affine theorem:
 
 > `AG(n,q)` cap achievement game is P for all `n >= 1` and prime powers `q`.
 
-The affine proof does **not** transfer directly. In projective space there are no translations, board
+The affine proof does **not** transfer directly. Projective spaces have no translations, board
 parity varies, and the affine odd-`q` self-blocking midpoint trick has no obvious projective
-replacement.
+replacement. However, one large projective subfamily is now closed: for odd `q`, every
+odd-dimensional projective space `PG(2m−1,q)` has a fixed-point-free nonsplit/elliptic involution,
+and the ordinary mirror strategy proves it is P (R0 below).
 
 ## Review Corrections (2026-07-05)
 
@@ -101,19 +104,63 @@ with axioms `[propext, Classical.choice, Quot.sound]` only. The old
 `ProjectiveCap/Affine.lean` and `ProjectiveCap/BuildGame.lean` files are compatibility imports only;
 new affine work should use the `CapGame` namespace.
 
-### R0. Structural fact — projective space has NO fixed-point-free collineation involution
+### R0. Structural fact — fixed-point-free projective involutions exist exactly in the nonsplit odd case
 
-For **every** `(m,q)`. Odd char: an involution in `PGL(m+1,q)` splits into `±1` eigenspaces, each a
-nonempty fixed subspace. Even char: an involution is unipotent `1+N`, `N^2=0`, with nonempty fixed
-space `ker N`. Either way the fixed locus is nonempty. This is the clean reason affine is easy and
-projective is hard: affine has translations (fpf) as a whole-board mirror; projective has none. So a
-whole-board pairing NEVER exists here — every case must burn opening moves and mirror on a residual.
+**Correction (2026-07-08):** the earlier "no projective fpf involution" statement was false.
+In odd characteristic, a projective involution can be:
+
+- **split:** represented after scaling by `A² = I`, hence with `±1` eigenspaces and fixed
+  projective subspaces;
+- **nonsplit / elliptic:** represented by `A² = d I` for a nonsquare `d ∈ F_q^*`. Then `A` has no
+  `F_q`-eigenvector, so it is fixed-point-free on projective points. This requires the vector
+  dimension to be even.
+
+Consequently, for every odd `q` and every `m ≥ 1`, `PG(2m−1,q)` is **P** by a whole-board mirror.
+Choose a nonsquare `d` and decompose the `2m`-dimensional vector space into `m` planes with basis
+`e_i,f_i`; define `A e_i = f_i`, `A f_i = d e_i`. Then `A² = dI`, so the induced collineation
+`σ([v]) = [Av]` is an involution in `PGL` and has no fixed point. Since `σ` is a collineation, it
+preserves caps. If a cap `S` is `σ`-invariant and P1 legally plays `x`, then `σx ∉ S∪{x}`; adding
+`σx` is legal. Otherwise a line through `σx` and two old points maps under `σ⁻¹` to a line through
+`x` and two old points, contradicting legality of `x`; and a line through `x,σx,z` with `z∈S`
+would, by `σ`-invariance, also contain `σz∈S`, so `x` was already blocked by the old pair
+`{z,σz}`. Thus P2 mirrors forever and P1 is the first player with no move.
+
+Lean status (2026-07-08): the reusable mirror kernel is now checked in
+[`../../lean/CapGame/Mirror.lean`](../../lean/CapGame/Mirror.lean) and
+[`../../lean/ProjectiveCap/Mirror.lean`](../../lean/ProjectiveCap/Mirror.lean).  The key wrappers
+are `Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution` and
+`Projective.initialPStatement_of_linearEquiv_sq_scalar_nonsquare`.  The coordinate elliptic theorem
+is checked in
+[`../../lean/ProjectiveCap/EllipticMirror.lean`](../../lean/ProjectiveCap/EllipticMirror.lean):
+`Projective.initialPStatement_ellipticBlock_of_odd_card` proves the theorem in the standard model
+`V = ι -> K × K` from `Odd (Fintype.card K)`, using `FiniteField.exists_nonsquare`.
+`Projective.initialPStatement_of_odd_card_finrank_eq_two_mul` transports this to any finite-rank
+model with `Module.finrank K V = 2 * n` and `0 < n`, which is the checked Lean form of
+`PG(2n-1,q)`.
+
+Novelty guard: the ingredients (pairing strategies and elliptic projective involutions) are
+classical, but the literature pass recorded in
+[`../2026-07-07-nofil-connection.md`](../2026-07-07-nofil-connection.md) found no indexed prior
+occurrence of this theorem for Nofil / impartial cap avoidance on projective spaces. Public wording
+should claim a new application/theorem in this game, not a new mirror method.
+
+Reusable mirror lemma to formalize: the correct residual version is stronger than "legal moves are
+`σ`-invariant." For a `σ`-invariant cap `S`, P2 may mirror a legal move `x` by `σx` only if the
+two-move extension `S ∪ {x, σx}` is still a cap. Equivalently, beyond old-old-pair legality, no
+selected point of `S` may lie on the mirror chord `xσx`. The weak condition "`σx` is legal from
+`S` and `σ` has no fixed legal point" misses exactly this chord obstruction.
+
+In even characteristic, projective involutions are unipotent (`1+N`, `N²=0`) with nonempty fixed
+space, so there is no analogous whole-board projective involution mirror. The hard residual
+odd-plane work remains `PG(2,q)` for odd `q`, whose vector dimension is `3` and admits no nonsplit
+elliptic involution.
 
 ### R1. Parity, stated once
 
 `|PG(m,q)| = 1 + q + ... + q^m` is **even iff (q odd and m odd)**, odd otherwise. In particular
 **every `PG(2,q)` is odd** (`q^2+q+1 = q(q+1)+1`), so the plane always burns a move regardless of q's
-parity. Even the even-board cases (e.g. `PG(3,3)`, 40 points) get no free pairing, by R0.
+parity. The even-board odd-`q` cases `PG(2m−1,q)` are now exactly the elliptic-involution mirror
+family of R0.
 
 ### R2. The residual after the opening line is a CONSTRAINED affine game, not `AG(2,q)`
 
@@ -164,6 +211,22 @@ Closing either failure set is the theorem. This is far more tractable than "invo
 subspaces." Because it might genuinely FAIL, treat `PG(2,{5,7,9})` as a falsification test, not a
 confirmation.
 
+Mirror-lemma guard (2026-07-08): "the fixed locus is dead" is not by itself enough. Selected fixed
+points, burned directions, or other problem-set points can still sit on mirror chords `xσ(x)` and
+make the reply illegal. A residual/fixed-locus complement theorem is valid only after checking the
+pair-extension condition `S ∪ {x,σx}` is a cap for every legal `x`. The `σ_c` failure above is the
+minimal example: the center can be dead, but the two burned-direction mirror chords still hit the
+selected opening directions.
+
+Adopted salvage from the fixed-locus idea: use mirrors as **terminal certificates and diagnostics**.
+For a candidate involution `σ`, define `MirrorStepGood(S,σ)` by the pair-extension condition for
+one position and `MirrorClosed(S,σ)` by requiring that condition for every mirror-pair follower.
+Define `Obs_σ(S)` as the legal moves whose mirror reply fails because the mirror chord hits
+selected/problem structure. `Obs_σ(T)=∅` for every mirror follower `T` gives a P certificate;
+small/nonempty `Obs_σ(S)` is a useful defect skeleton, not a proof. This should feed certificate
+compression and free-endgame lemmas, while the uniform odd-plane proof remains on the
+conic/Node-Kayles defect lane.
+
 **UPDATE 2026-07-05 — central symmetry route ATTACKED and found INSUFFICIENT (evidence):** full
 analysis in `2026-07-05-qodd-central-symmetry-findings.md`. Grid reformulation (residual = q×q
 partial-permutation-matrix + cap; each row/col holds ≤1 cell ever). Among collineation involutions
@@ -205,15 +268,29 @@ free-large / trace variants).
   second replies are game-equivalent** (identical Grundy). This kills the "classify winning second
   replies" deliverable — they are all the same value. Orbit branching starts only at cap size >
   `m+2`.
-- **q=2 column is free:** `PG(m,2)` cap game ≡ `F_2^{m+1}` sum-free game. `PG(4,2)=F_2^5`. **Import
-  from the existing sum-free solver**, don't re-derive.
-- q=2, `m≥3` caveat: a linear involution `1+N` in `GL(k,2)` has fixed space `dim ≥ k/2` — too big to
-  block from one opening pair, so `PG(m,2)` `m≥3` needs a non-linear or non-pairing strategy. This is
-  the hard q=2 frontier.
+- **q=2 column should now be a Lean theorem, not a compute import.** `PG(m,2)` cap game is the
+  `F_2^{m+1}` sum-free/nofil game on nonzero vectors. The right proof is the existing sum-free
+  spare-order-two translation mirror, not a linear projective involution: after P1 plays `a`,
+  choose `b ≠ a`, set `c = a+b`; the third point `c` on the line `{a,b,c}` is self-blocked, and
+  translation by `c` pairs the remaining live vectors. In Lean this should factor through
+  `Sumfree.Game.initial_isP_of_at_least_two_nonzero_orderTwo` /
+  `initial_isP_of_rank_count_P_cases` plus the binary projective bridge
+  `PG(m,2) ≃ F_2^{m+1} \ {0}`. Target statement:
+  `Projective.InitialPStatement (K := ZMod 2) (V := V)` from `2 ≤ Module.finrank (ZMod 2) V`
+  (`PG(n,2)` for `n ≥ 1`). Rank `1`/`PG(0,2)` is correctly excluded: it has one point and is N.
+- Literature guard: Clark--Mancini--Van Hook's accessible abstract is about partizan misere
+  tic-tac-toe / avoidance on projective binary Steiner triple systems, where players own colored
+  points and the first monochromatic block loses. That is not our impartial shared nofil game.
+  Verify the full paper before citing, but do not treat it as covering the theorem above. More
+  broadly, current search supports novelty only in the conservative sense: the fixed-point-free
+  elliptic involution proof appears new for Nofil / impartial cap avoidance on projective spaces,
+  while the mirror pattern and projective involutions themselves are standard.
 
 ### R6. Reprioritized sequence
 
-0. Import `PG(m,2)` outcomes from the `F_2^{m+1}` sum-free solver (free data).
+0. Formalize `PG(n,2)` for every `n ≥ 1` via the binary projective-to-sum-free bridge and the
+   existing spare-order-two translation mirror. This supersedes the old compute-import plan for
+   the q=2 column.
 1. Solve `PG(2,q)` for `q=3,5,7,8,9` exactly — falsification test for the q-odd case.
 2. Write the q-even planar lemma (R3) + verify on `PG(2,{2,4,8})`.
 3. Attack the q-odd kernel (R4): handle the center move / the two burned-direction lines.
@@ -242,7 +319,13 @@ Read these notes before doing new work:
    - These are graph Node-Kayles statements, not directly hypergraph-cap statements, but the proof
      patterns are the reusable part.
 
-4. `2026-07-04-proj-cap.py`
+4. `2026-07-08-projective-mirror-proof-kernels.md`
+   - Semi-formal theorem/proof kernels for the corrected pair-extension mirror lemma, the
+     fixed-point-free projective collineation lemma, the odd-dimensional elliptic involution theorem,
+     the binary projective theorem, and the central-inversion endgame condition.
+   - Read this before formalizing C25/C27 or before using "fixed locus dead" as a mirror certificate.
+
+5. `2026-07-04-proj-cap.py`
    - First brute projective-cap probe.
    - Practical cleanup needed before reuse: it imports `gf`, but the local finite-field helper is
      currently named `2026-07-04-gf.py`.
@@ -1149,6 +1232,22 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    `nix develop --command lake build ProjectiveCap.CertData.Q11Assembly` PASS; Q11 data build
    took 1518s on first import, cached assembly rebuild 35s.  Axiom gate:
    `[propext, Classical.choice, Quot.sound]` only.  q=13 splitting not attempted.
+
+18. **Queue additions from the day-review gap scan (Fable, 2026-07-08): C29 + C30.** Reviewing
+   the post-5pm cascade surfaced two attacks planned nowhere. (a) **Mixed-column mod-3 law
+   candidate (C29):** among unconfined-intruder columns q ≥ 11, N-valued on-conic buckets
+   exist exactly at `q ≡ 2 (mod 3)` (11, 17 mixed vs 13, 19 all-P) ⟺ `3 | q+1` ⟺ order-3
+   PGL(2,q) elements are elliptic ⟺ order-3 `σ_xσ_x'` products land in Grundy-dead C₆ cycles
+   rather than tangency-path defects. This is a COLUMN-level existence law C18's bucket-level
+   null never tested. C29 = the ord-field mechanism table on the existing C20 states data
+   (flagged unanalyzed in item 16) + an INVERTED census (bucket first by PGL 6-subset
+   canonicalization, then one S₄-rooted solve per bucket — bypasses C21's aborted
+   size-3-rooted esc solves) at q = 23/25/29/31, predictions mixed/all-P/mixed/all-P; any
+   miss refutes. (b) **C30 = route-C phase 5:** q=17/19 certificate books — every
+   feasibility gate already measured (C3 memo peak, C19 splitting, C22 transport);
+   prerequisite = the staged Q13 build (generated, unbuilt, naive-aggregate OOM hazard).
+   Payoff = the whole computed prime ladder ≤ 19 unconditional. Status table updated in the
+   same edit.
 
 ## Handoff Summary
 
