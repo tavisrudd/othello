@@ -1076,6 +1076,19 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    NK snapshot (conic defect-XOR + zone conflict graph). C20 re-amended: test the
    necessity law at q=13/17 first; q=11 is done. Fable next: prove the necessity law
    (joint-snapshot lemma); second-intrusion lemma in defect form after C20's data.
+15. **C19 REVIEWED (commit `cac2875`) — the reflection route WORKS; q=5/7/11 book validity
+   is kernel-checked.** `lean/ProjectiveCap/CertCheck.lean` (Bool checker + soundness chain
+   `checkBook_sound → GridClassCert.Valid`) + generated `CertData/Q{5,7,11}.lean`; the C17
+   maxRecDepth wall was beaten by SPLITTING the reflected obligations (per-node step checks
+   chunked over cell lists) — no `maxRecDepth`, no `native_decide`, no sorries. Independently
+   verified in review: `lake build` clean, Q5/Q7 rebuilt (2.4s/8.8s), and `#print axioms` on
+   generated `class*_valid` = exactly `[propext, Classical.choice, Quot.sound]`. Q11 accepted
+   on the report's byte-compare evidence (~25 min elaboration, just under the 30-min gate —
+   q=13 needs per-class file splitting, deferred). **Open half → C22:** the transport lemmas
+   (anchor-normalization grid symmetries + assembly into
+   `GridOddEscapeBookCertificate.represents`) — until C22 lands, `OddEscapeGameStatement
+   (ZMod 11)` and the unconditional PG(2,11) payoff remain UNASSEMBLED; the rules-only book
+   validity (all 72 anchored q=11 classes) is done.
 
 ## Handoff Summary
 

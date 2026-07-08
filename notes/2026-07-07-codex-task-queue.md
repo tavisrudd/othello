@@ -443,6 +443,29 @@ done; sum-free z5 terminated). Size the q=23 campaign — do NOT run it.
 
 Report file: `notes/2026-07-08-codex-esc23-sizing.md`.
 
+## C22. Transport lemmas + represents assembly (route C, phase 4 — the C19 open half)
+
+C19 is reviewed and sound (commit `cac2875`; axiom profile verified clean in review). What
+remains for unconditional PG(2,11) is exactly C19's deferred item 4:
+
+1. **Anchor-normalization grid symmetries:** every legal size-3 grid cap maps to its
+   anchored form (first two cells ↦ `{(0,0),(1,1)}`) by an explicit translation + axis
+   scalings composite; formalize these as grid-game symmetries (the `psi_gridSymmetry`
+   proof shape; `gridSymmetry_isP_image` is already proven) with the partial-permutation
+   argument that the scalings are nonzero.
+2. **`represents` assembly:** the anchored family (the Q11 `CertData` classes) covers every
+   size-3 position via 1's transport — discharge
+   `GridOddEscapeBookCertificate.represents`, then assemble
+   `OddEscapeGameStatement (ZMod 11)` and the payoff theorem via
+   `initialPStatement_of_oddEscapeStatement_finrank` (unconditional PG(2,11)).
+3. **Axiom gate:** `#print axioms` on the final PG(2,11) theorem must show only
+   `[propext, Classical.choice, Quot.sound]` — include it verbatim in the report.
+4. OPTIONAL (only if 1–3 land comfortably): the q=13 generator split (per-class files or
+   finer chunking) — measure, report projected wall, STOP before any single file exceeds
+   the 30-min gate.
+
+Report file: `notes/2026-07-08-codex-transport-assembly.md`.
+
 ## Standing
 
 ~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane
