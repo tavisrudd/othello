@@ -1,0 +1,35 @@
+q=9 GF(9) intrusion probe
+field=F3[i]/(i^2+1), PGL2 permutations=720
+raw normalized on-conic S4 configs=70
+full PGL(2,9) S4 classes=2
+global legal first moves (conic,intruder) histogram={(4, 0): 10, (4, 4): 60}
+global legal intruders per S4 histogram={0: 10, 4: 60}
+global intrusion types (tau_x,tau_played)={(2, 2): 240}
+all S4 P=True
+all intruded children N=True
+all intruded children have a terminal P2 reply=True
+failures=0
+
+classes:
+CLASS 1 rep={0,1,2,i,1+i,2+i} raw=10
+  first_moves={(4, 0): 10}
+  intruder_counts={0: 10}
+  intrusion_hist={}
+  child_outcomes={}
+  child_reply_counts={}
+  winning_reply_counts={}
+  terminal_win_reply_counts={}
+  conic_first_reply_counts={3: 40}
+  off_first_reply_counts={}
+  residual max_depth=0 max_branch=0 max_states_per_child=0
+CLASS 2 rep={0,1,2,i,1+i,2i} raw=60
+  first_moves={(4, 4): 60}
+  intruder_counts={4: 60}
+  intrusion_hist={(2, 2): 240}
+  child_outcomes={'N': 240}
+  child_reply_counts={1: 240}
+  winning_reply_counts={1: 240}
+  terminal_win_reply_counts={1: 240}
+  conic_first_reply_counts={3: 240}
+  off_first_reply_counts={1: 240}
+  residual max_depth=1 max_branch=1 max_states_per_child=2

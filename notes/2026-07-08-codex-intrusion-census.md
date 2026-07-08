@@ -34,6 +34,11 @@ This kills the joint snapshot hypothesis in its stated necessary form.
 - Per-reply-state feature rows: `/tmp/c20-q13-q17-states.jsonl` (56,497 rows, 22 MB)
 - q=9 gate output: `/tmp/c20-q9-gate.out`
 
+**Durable copies (review, 2026-07-08):** the `/tmp` paths above are tmpfs; git-tracked copies
+live in `notes/data/` — `c20-q13-q17.json`, `c20-q13-q17-states.jsonl.gz` (gzip -9, byte-identical
+on roundtrip), `c20-q9-gate.out`, plus the feat-log INPUTS the script parses
+(`codex-feat{11,13,17,19*}-*.out`), so the census is regenerable from the repo alone.
+
 ## Gates
 
 q = 9 gate reproduced exactly by:

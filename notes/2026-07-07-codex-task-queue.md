@@ -432,8 +432,9 @@ Fable's session-11 ground truth exactly (0 necessity violations; slice zoneG=0 �
 new defect/zone feature code is cross-validated and the q=13 counterexample stands. Findings
 beyond the report + program consequences: projcap handoff session-block item 16. The
 ord(σ_xσ_x') census (question 3b, deprioritized by the second amendment) was never analyzed,
-but the per-state `order` field IS in `/tmp/c20-q13-q17-states.jsonl` (tmpfs; regenerable
-in ~67s via the report's Main-run command).
+but the per-state `order` field IS in the states jsonl — durable copy
+`notes/data/c20-q13-q17-states.jsonl.gz` (feat-log inputs also in `notes/data/`;
+regenerable in ~67s via the report's Main-run command).
 
 ## C21. q=23 esc single-class sizing probe (route D; C18 phase-2 leftover)
 
