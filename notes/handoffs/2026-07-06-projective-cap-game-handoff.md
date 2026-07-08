@@ -991,6 +991,16 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    (parity). So every on-conic S₄ at q=9 is P with residual depth 1 — the q=9 Lean proof
    shape is now pinned: (a) the free-endgame theorem for conic moves, (b) the
    `(2,2)`-tangency algebra + unique-terminal-reply lemma for intruders.
+9. **THE ORDER-NINE REDUCTION LANDED IN LEAN** (commit `218b1ac`, axioms clean):
+   `initialPStatement_of_intruderTerminalReply_finrank` — PG(2,9) = P **conditional on
+   exactly one isolated kernel**, `IntruderTerminalReplyStatement` (every legal intruder
+   above an on-conic S₄ has a legal reply ending the game — C13's exhaustively verified
+   fact). All game theory is discharged: conic children are size 5 and clear the top gap
+   EXACTLY (`2·5 = 10 = q+1`) landing on odd remainder ⇒ N via the free-endgame theorem;
+   intruder children lose to the kernel's terminal reply
+   (`isP_of_card_four_of_intruderTerminalReply` → `onConicEscapeStatement_of_...`).
+   Kernel discharge routes: the σ_x tangency algebra (both roots of `vt²−2Bt+Bu = 0`
+   played + the explicit `y`), or the C14 certificate checker (the q=9 cert is 33 nodes).
 
 ## Handoff Summary
 
