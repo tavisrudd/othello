@@ -1016,6 +1016,14 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    prototype (q=5/7 elaboration-cost gate, kernel `decide` only) + transport lemma scaffold.
    Elaboration cost of per-obligation `decide` over `ZMod q` is the identified risk — the
    q=5/7 prototype is the go/no-go datum for unconditional PG(2,11) in Lean.
+11. **C15 REPORTED — Lemma I survives every prime odd q; the moduli collapse is large and
+   value-pure.** (`2026-07-07-codex-pgl2-orbit-census-q11-19.md`): raw on-conic children →
+   full-PGL(2,q) orbit buckets = 56→4 (q=11), 108→5 (q=13), 273→10 (q=17, C5), 405→13
+   (q=19); **zero mixed-value buckets anywhere**. Uniformization holds on all tested data;
+   32 labeled buckets total now exist across the four odd q — exactly the C18 training
+   table. C18's gate is OPEN (fit {11,13} / test {17,19}; order-theoretic dictionary).
+   N-valued buckets exist only at q = 11 and 17 — whatever the cross-q law is, it must
+   flip on those two columns.
 
 ## Handoff Summary
 
