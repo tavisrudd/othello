@@ -963,6 +963,45 @@ theorem psi_hyperbolaParamPoint {rho A B u t : K}
   · field_simp [hB, hu, ht]
 
 omit [Fintype K] [DecidableEq K] in
+theorem eq_param_mul_of_psi_fixed_onHyperbola {rho A B u : K}
+    (hB : B ≠ 0) (hu : u ≠ 0) {p : GridPoint K}
+    (hp : OnHyperbola (K := K) rho A B p)
+    (hfix : psi (K := K) rho A B u p = p) :
+    u = (p.1 - rho) * (p.1 - rho) := by
+  have ht : p.1 - rho ≠ 0 := by
+    intro hz
+    exact onHyperbola_first_ne_rho (K := K) hB hp (sub_eq_zero.mp hz)
+  have hpParam := onHyperbola_eq_hyperbolaParamPoint (K := K) hB hp
+  have hparamPoint :
+      hyperbolaParamPoint rho A B (u / (p.1 - rho)) =
+        hyperbolaParamPoint rho A B (p.1 - rho) := by
+    calc
+      hyperbolaParamPoint rho A B (u / (p.1 - rho))
+          = psi (K := K) rho A B u
+              (hyperbolaParamPoint rho A B (p.1 - rho)) := by
+            exact (psi_hyperbolaParamPoint (K := K) hB hu ht).symm
+      _ = psi (K := K) rho A B u p := by rw [← hpParam]
+      _ = p := hfix
+      _ = hyperbolaParamPoint rho A B (p.1 - rho) := hpParam
+  have hparam :
+      u / (p.1 - rho) = p.1 - rho :=
+    hyperbolaParamPoint_injective (K := K) rho A B hparamPoint
+  have hmul :
+      (u / (p.1 - rho)) * (p.1 - rho) =
+        (p.1 - rho) * (p.1 - rho) := by
+    rw [hparam]
+  simpa [div_eq_mul_inv, ht] using hmul
+
+omit [Fintype K] [DecidableEq K] in
+theorem psi_ne_self_of_onHyperbola_of_param_mul_ne {rho A B u : K}
+    (hB : B ≠ 0) (hu : u ≠ 0) {p : GridPoint K}
+    (hp : OnHyperbola (K := K) rho A B p)
+    (hparam : (p.1 - rho) * (p.1 - rho) ≠ u) :
+    psi (K := K) rho A B u p ≠ p := by
+  intro hfix
+  exact hparam (eq_param_mul_of_psi_fixed_onHyperbola (K := K) hB hu hp hfix).symm
+
+omit [Fintype K] [DecidableEq K] in
 theorem psi_bijective {rho A B u : K} (hB : B ≠ 0) (hu : u ≠ 0) :
     Function.Bijective (psi (K := K) rho A B u) :=
   (psi_involutive (K := K) hB hu).bijective
@@ -1189,6 +1228,40 @@ theorem even_onConicBadExtensions_of_psi_pairing
     (fun p _hp => psi_involutive (K := K) hB hu p)
     hfpf
 
+theorem even_onConicBadExtensions_of_psi_seed_image_no_fixed_bad_param
+    {S : Finset (GridPoint K)} {rho A B u : K}
+    (hB : B ≠ 0) (hu : u ≠ 0)
+    (hSimage : S.image (psi (K := K) rho A B u) = S)
+    (hfixed : ∀ p : GridPoint K,
+      p ∈ OnConicBadExtensions (K := K) S rho A B ->
+        (p.1 - rho) * (p.1 - rho) ≠ u) :
+    Even (OnConicBadExtensions (K := K) S rho A B).card :=
+  even_onConicBadExtensions_of_psi_pairing
+    (K := K) hB hu hSimage (fun p hp => by
+      have hpOn : OnHyperbola (K := K) rho A B p :=
+        (mem_onConicLegalExtensions (K := K)).mp
+          ((mem_onConicBadExtensions (K := K)).mp hp).1 |>.1
+      exact psi_ne_self_of_onHyperbola_of_param_mul_ne
+        (K := K) hB hu hpOn (hfixed p hp))
+
+/--
+Conditional `psi_u` parity criterion for the on-conic bad children.  This is
+not the global odd-plane theorem; it records the exact obligations for the
+restricted conic-reflection route.
+-/
+def OnConicPsiPairingCriterion : Prop :=
+  ∀ S : Finset (GridPoint K), ∀ rho A B : K,
+    S.card = 3 ->
+    GridCap (K := K) S ->
+    B ≠ 0 ->
+    HyperbolaFits (K := K) S rho A B ->
+      ∃ u : K,
+        u ≠ 0 ∧
+          S.image (psi (K := K) rho A B u) = S ∧
+          ∀ p : GridPoint K,
+            p ∈ OnConicBadExtensions (K := K) S rho A B ->
+              (p.1 - rho) * (p.1 - rho) ≠ u
+
 /--
 Packaged statement: each `psi_u` is a grid-symmetry involution preserving the
 hyperbola and acting on the conic parameter by `t |-> u / t`.
@@ -1250,6 +1323,17 @@ theorem onConicEscapeStatement_of_forall_even_onConic_bad
     ⟨p, hp⟩
   rcases (mem_onConicEscapeExtensions (K := K)).mp hp with ⟨hpLegal, hpP⟩
   exact ⟨rho, A, B, p, hB, hfit, hpLegal, hpP⟩
+
+theorem onConicEscapeStatement_of_psiPairingCriterion
+    (hq : Odd (Fintype.card K))
+    (hpair : OnConicPsiPairingCriterion (K := K)) :
+    OnConicEscapeStatement (K := K) :=
+  onConicEscapeStatement_of_forall_even_onConic_bad
+    (K := K) hq (fun S rho A B hcard hS hB hfit => by
+      rcases hpair S rho A B hcard hS hB hfit with
+        ⟨u, hu, hSimage, hfixed⟩
+      exact even_onConicBadExtensions_of_psi_seed_image_no_fixed_bad_param
+        (K := K) hB hu hSimage hfixed)
 
 /-- The on-conic refinement immediately implies the ordinary odd escape target. -/
 theorem oddEscapeStatement_of_onConicEscapeStatement
