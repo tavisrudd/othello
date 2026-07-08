@@ -486,6 +486,44 @@ theorem coordinateInitialPStatement_of_charTwo
     (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K)
     hrank hFcap hFcard).mpr hFP)
 
+/--
+Characteristic-two projective-plane theorem in any rank-three model: the empty
+projective cap game is a P-position.
+-/
+theorem initialPStatement_of_charTwo_finrank
+    {V : Type*} [AddCommGroup V] [Module K V]
+    [Fintype (Projective.Point K V)] [DecidableEq (Projective.Point K V)]
+    (h2 : (2 : K) = 0) (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) := by
+  classical
+  letI : Module.Finite K V := Module.finite_of_finrank_pos (by
+    rw [hrank]
+    norm_num)
+  letI : Module.Finite K (Projective.FrameGridBridge.Coordinate.PlaneVec K) :=
+    Module.finite_of_finrank_pos (by
+      rw [Module.finrank_fintype_fun_eq_card, Fintype.card_fin]
+      norm_num)
+  let e : Projective.FrameGridBridge.Coordinate.PlaneVec K ≃ₗ[K] V :=
+    LinearEquiv.ofFinrankEq _ _ (by
+      rw [Module.finrank_fintype_fun_eq_card, Fintype.card_fin, hrank])
+  letI : Fintype (Projective.Point K
+      (Projective.FrameGridBridge.Coordinate.PlaneVec K)) :=
+    Fintype.ofEquiv (Projective.Point K V) (Projective.mapLinearEquiv e).symm
+  have hcoord :
+      Projective.InitialPStatement
+        (K := K) (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) :=
+    coordinateInitialPStatement_of_charTwo (K := K) h2
+  have htransport :
+      FiniteBuildGame.IsP (Projective.Cap K V)
+        ((∅ : Finset (Projective.Point K
+          (Projective.FrameGridBridge.Coordinate.PlaneVec K))).map
+            (Projective.mapLinearEquiv e).toEmbedding) :=
+    (Projective.isP_mapLinearEquiv (K := K)
+      (V := Projective.FrameGridBridge.Coordinate.PlaneVec K) (W := V)
+      e (∅ : Finset (Projective.Point K
+        (Projective.FrameGridBridge.Coordinate.PlaneVec K)))).mpr hcoord
+  simpa [Projective.InitialPStatement] using htransport
+
 end Game
 
 end GridMirror

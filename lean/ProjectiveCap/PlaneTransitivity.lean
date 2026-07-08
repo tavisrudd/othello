@@ -208,6 +208,122 @@ theorem not_collinear_iff_independent {a b c : Point K V} :
     ¬ Collinear K V a b c ↔ Independent ![a, b, c] := by
   rw [collinear_iff_dependent, ← independent_iff_not_dependent]
 
+/-! ## Projective transport along linear equivalences -/
+
+section LinearEquivTransport
+
+variable {W : Type*} [AddCommGroup W] [Module K W]
+
+/-- The equivalence of projective points induced by a linear equivalence of
+the underlying vector spaces. -/
+def mapLinearEquiv (g : V ≃ₗ[K] W) : Point K V ≃ Point K W where
+  toFun := Projectivization.map (g : V →ₗ[K] W) g.injective
+  invFun := Projectivization.map (g.symm : W →ₗ[K] V) g.symm.injective
+  left_inv p := by
+    induction p using Projectivization.ind with | h v hv =>
+    rw [Projectivization.map_mk, Projectivization.map_mk]
+    simp
+  right_inv p := by
+    induction p using Projectivization.ind with | h v hv =>
+    rw [Projectivization.map_mk, Projectivization.map_mk]
+    simp
+
+theorem mapLinearEquiv_mk (g : V ≃ₗ[K] W) {v : V} (hv : v ≠ 0) :
+    mapLinearEquiv g (Projectivization.mk K v hv) =
+      Projectivization.mk K (g v) (by simp [hv]) := by
+  simp [mapLinearEquiv, Projectivization.map_mk]
+
+@[simp] theorem mapLinearEquiv_symm_eq (g : V ≃ₗ[K] W) :
+    (mapLinearEquiv g).symm = mapLinearEquiv g.symm :=
+  rfl
+
+@[simp] theorem mapLinearEquiv_symm_apply (g : V ≃ₗ[K] W) (p : Point K V) :
+    mapLinearEquiv g.symm (mapLinearEquiv g p) = p := by
+  exact (mapLinearEquiv g).symm_apply_apply p
+
+@[simp] theorem mapLinearEquiv_apply_symm (g : V ≃ₗ[K] W) (p : Point K W) :
+    mapLinearEquiv g (mapLinearEquiv g.symm p) = p := by
+  exact (mapLinearEquiv g).apply_symm_apply p
+
+theorem independent_triple_mapLinearEquiv (g : V ≃ₗ[K] W) {a b c : Point K V}
+    (h : Independent ![a, b, c]) :
+    Independent ![mapLinearEquiv g a, mapLinearEquiv g b, mapLinearEquiv g c] := by
+  have hli : LinearIndependent K ![a.rep, b.rep, c.rep] := independent_triple_iff.mp h
+  have hgli : LinearIndependent K ![g a.rep, g b.rep, g c.rep] := by
+    have h2 := hli.map' (g : V →ₗ[K] W) g.ker
+    have hcomp : (g : V →ₗ[K] W) ∘ ![a.rep, b.rep, c.rep] =
+        ![g a.rep, g b.rep, g c.rep] := by
+      ext i
+      fin_cases i <;> rfl
+    rwa [hcomp] at h2
+  have hpts := independent_triple_of_li
+    (by simpa using (Projectivization.rep_nonzero a))
+    (by simpa using (Projectivization.rep_nonzero b))
+    (by simpa using (Projectivization.rep_nonzero c)) hgli
+  have hconv : ∀ p : Point K V, mapLinearEquiv g p = Projectivization.mk K (g p.rep)
+      (by simp [Projectivization.rep_nonzero p]) := by
+    intro p
+    conv_lhs => rw [← Projectivization.mk_rep p]
+    rw [mapLinearEquiv_mk]
+  rw [hconv a, hconv b, hconv c]
+  exact hpts
+
+theorem collinear_mapLinearEquiv (g : V ≃ₗ[K] W) {a b c : Point K V} :
+    Collinear K W (mapLinearEquiv g a) (mapLinearEquiv g b) (mapLinearEquiv g c) ↔
+      Collinear K V a b c := by
+  rw [← not_iff_not, not_collinear_iff_independent, not_collinear_iff_independent]
+  constructor
+  · intro h
+    have h2 := independent_triple_mapLinearEquiv g.symm h
+    simpa using h2
+  · exact independent_triple_mapLinearEquiv g
+
+/-- A projective cap maps to a projective cap under a linear equivalence. -/
+theorem cap_image_mapLinearEquiv [DecidableEq (Point K V)] [DecidableEq (Point K W)]
+    (g : V ≃ₗ[K] W) {S : Finset (Point K V)} (hS : Cap K V S) :
+    Cap K W (S.map (mapLinearEquiv g).toEmbedding) := by
+  intro a b c ha hb hc hab hac hbc hcol
+  rw [Finset.mem_map_equiv] at ha hb hc
+  exact hS ha hb hc
+    (fun h => hab (by rw [← Equiv.apply_symm_apply (mapLinearEquiv g) a,
+      ← Equiv.apply_symm_apply (mapLinearEquiv g) b, h]))
+    (fun h => hac (by rw [← Equiv.apply_symm_apply (mapLinearEquiv g) a,
+      ← Equiv.apply_symm_apply (mapLinearEquiv g) c, h]))
+    (fun h => hbc (by rw [← Equiv.apply_symm_apply (mapLinearEquiv g) b,
+      ← Equiv.apply_symm_apply (mapLinearEquiv g) c, h]))
+    (by
+      have hcol' :
+          Collinear K W
+            (mapLinearEquiv g ((mapLinearEquiv g).symm a))
+            (mapLinearEquiv g ((mapLinearEquiv g).symm b))
+            (mapLinearEquiv g ((mapLinearEquiv g).symm c)) := by
+        simpa using hcol
+      exact (collinear_mapLinearEquiv g).mp hcol')
+
+theorem cap_map_mapLinearEquiv [DecidableEq (Point K V)] [DecidableEq (Point K W)]
+    (g : V ≃ₗ[K] W) (S : Finset (Point K V)) :
+    Cap K W (S.map (mapLinearEquiv g).toEmbedding) ↔ Cap K V S := by
+  constructor
+  · intro hS
+    have hback := cap_image_mapLinearEquiv (K := K) (V := W) (W := V) g.symm hS
+    have htwice :
+        (S.map (mapLinearEquiv g).toEmbedding).map
+          (mapLinearEquiv g.symm).toEmbedding = S := by
+      ext p
+      simp [Finset.mem_map_equiv]
+    rwa [htwice] at hback
+  · exact cap_image_mapLinearEquiv g
+
+theorem isP_mapLinearEquiv [Fintype (Point K V)] [DecidableEq (Point K V)]
+    [Fintype (Point K W)] [DecidableEq (Point K W)]
+    (g : V ≃ₗ[K] W) (S : Finset (Point K V)) :
+    FiniteBuildGame.IsP (Cap K W) (S.map (mapLinearEquiv g).toEmbedding) ↔
+      FiniteBuildGame.IsP (Cap K V) S :=
+  FiniteBuildGame.isP_equiv (mapLinearEquiv g)
+    (fun U => cap_map_mapLinearEquiv g U) S
+
+end LinearEquivTransport
+
 /-! ## The point permutation induced by a linear automorphism -/
 
 /-- The permutation of projective points induced by a linear automorphism. -/
