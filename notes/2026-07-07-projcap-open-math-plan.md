@@ -8,6 +8,8 @@ routes with concrete next actions, so a fresh session can pick any route cold.
 
 | Result | Math status | Lean status |
 |---|---|---|
+| `PG(2m−1,q)` for odd `q` | **proven** by fixed-point-free nonsplit/elliptic projective involution; whole-board mirror | **DONE** (`ProjectiveCap/EllipticMirror.lean`: `initialPStatement_of_odd_card_finrank_eq_two_mul`) |
+| `PG(n,2)` for `n ≥ 1` | **proven** by binary projective-to-nonzero-vector bridge plus the spare order-two sum-free mirror | **DONE** (`ProjectiveCap/Binary.lean`: `initialPStatement_binary_of_projectiveDim_ge_one`; rank form `initialPStatement_binary_of_finrank_ge_two`) |
 | `PG(1,q)` trivial P; `PG(2,q)` q even = P (translation mirror on the residual) | proven (`2026-07-05-qeven-plane-theorem.md`) | not yet (see WP-2 below) |
 | Frame reduction: `PG(2,q)=P ⟺ one frame position is P` | proven (`2026-07-06-frame-reduction.md`) | **DONE** — game half (`FiniteBuildGame.isP_empty_iff_isP_of_frame_chain`) + rank-3 geometry half (`ProjectiveCap/PlaneTransitivity.lean`: `CapTransitiveStatement 1..4`, `cap_extendable`, `exists_frame`, `initialPStatement_iff_isP_frame_of_finrank`) |
 | Total lemma: every size-3 grid cap has exactly `q²−9q+21` legal extensions | proven all q | **DONE** (`ProjectiveCap/ExtensionCount.lean`) |
@@ -19,7 +21,8 @@ routes with concrete next actions, so a fresh session can pick any route cold.
 
 ## 2. The open kernel, precisely
 
-For odd `q ≥ 11` (parity settles smaller q):
+For odd `q ≥ 11` in the projective plane `PG(2,q)` (the odd-dimensional spaces
+`PG(2m−1,q)` are closed by the elliptic-involution mirror):
 
 > **(ESC)** Every legal size-3 residual grid position `S₃` (3-cell partial-permutation affine cap
 > in `F_q × F_q`) has at least one legal size-4 extension that is a P-position of the residual
@@ -31,6 +34,11 @@ given q is equivalent to `PG(2,q) = P`. Known constraints on any proof of (ESC):
 - It cannot be a fixed-involution mirror (all closed), cannot be naive parity (`bad` odd on a
   majority of classes by q=17), cannot be an area bound (`bad = 152` of `total = 157` at q=17),
   and cannot route through static arc-embedding (boundary characterization false from q=11).
+- Residual mirror lemmas remain useful only in the **pair-extension** form: for a `τ`-invariant
+  cap `S`, every legal move `x` to be mirrored must satisfy that `S ∪ {x, τx}` is a cap. It is
+  not enough that `τx` is legal from `S` or that fixed legal points are absent; selected/problem-set
+  points on mirror chords `xτx` are exactly the poison mechanism that killed the central-symmetry
+  and antidiagonal plane mirrors.
 - **It cannot maintain ANY symmetry invariant (added 2026-07-07):** no play-closed family of
   positions with nontrivial stabilizer exists for q = 11, 13, 17
   (`2026-07-07-resym-symmetric-family-dead.md`) — the winning strategy passes through
@@ -52,7 +60,7 @@ Witness at q=11, verified by the exact solver: from the transpose-symmetric P-po
 trivial stabilizer. The depth-1 "relaxed adaptive succeeds" was one-step-only; staying symmetric
 is impossible from size 6. **No symmetry-shaped invariant can carry the uniform proof.** Route
 (B) inherits "main proof bet" status; any strategy lemma will be certificate/potential-function
-shaped, not `MirrorGood`-shaped.
+shaped, not closed-mirror-shaped.
 
 ### (B) Finer counting invariant — the main proof bet (was second; (A) closed 2026-07-07)
 The total lemma's proof splits `total` as `(q−3)² − 3(q−4)` with per-pair-line traces of exact
@@ -88,6 +96,27 @@ self-polar-answer and conic-answer defenses both refuted (the defense is inheren
 multi-intruder). Next: C20 (Codex) tests "defect-XOR decides"; Fable lane = last-defect
 endgame lemma, then the second-intrusion lemma in defect form.
 
+**SUPPORT LANE (2026-07-08 — MirrorStep/MirrorClosed diagnostics/certificates):** keep mirrors as a
+terminal-certificate and obstruction-diagnostic tool, not as the main proof route. Define
+`MirrorStepGood(S,τ)` by the pair-extension condition: every legal `x` from `S` satisfies
+`S ∪ {x,τx}` valid and `τx ≠ x`. Define `MirrorClosed(S,τ)` by requiring `MirrorStepGood` for
+every mirror-pair follower above `S`; this is the actual P certificate. Define the mirror-chord obstruction set
+`Obs_τ(S) = {x legal from S | S ∪ {x,τx} is invalid}`; geometrically these are the legal moves
+whose mirror chord hits selected/problem structure. This is the right way to salvage the
+fixed-locus discussion: "fixed locus dead" is useful only after `Obs_τ(T)=∅` for every mirror
+follower `T`. Immediate uses:
+(i) compress per-q Lean certificates by ending subtrees at `MirrorClosed` leaves; (ii) measure how
+often computed P-followers are near-mirror positions; (iii) formulate a central-inversion endgame
+lemma in the odd plane only after the two burned-direction mirror-chord fibers are neutralized.
+Semi-formal proof kernels are in
+[`2026-07-08-projective-mirror-proof-kernels.md`](2026-07-08-projective-mirror-proof-kernels.md).
+
+**C28 diagnostic result (2026-07-08):** the new `mir` mode in
+`2026-07-06-grid-cap-solver.rs` found zero `MirrorStepGood` hits at the size-4 escape layer:
+q=11 all P escape children, q=13 all P escape children, and the q=17 min-escape sample all failed
+before recursive closure.  Mirrors should remain available as deep terminal leaves/diagnostics,
+but do not plan on size-4 certificate compression.
+
 ### (C) Per-q Lean certificates — guaranteed formal value
 The computed ladder `q = 11..19` can be made machine-checked without new mathematics: for each
 canonical size-3 class, emit a witness escape cell plus a P-certificate of the size-4 child
@@ -95,7 +124,9 @@ canonical size-3 class, emit a witness escape cell plus a P-certificate of the s
 fast). `FiniteBuildGame.NCert`/`PCert`/`PairReplyBook` already exist as the target format; orbit
 transport uses `win_map`. Deliverable: `OddEscapeGameStatement (K := GF(q))` as a theorem for
 each computed q. This also forces the certificate format a general proof would instantiate.
-(Emission side: a `cert` mode in `2026-07-06-grid-cap-solver.rs`.)
+(Emission side: a `cert` mode in `2026-07-06-grid-cap-solver.rs`.) Add `MirrorClosed` as a
+terminal leaf rule once C27 exists; do not expand a subtree that has a checked closed mirror
+certificate.
 
 ### (D) Falsification continuation — opportunistic
 q = 23 needs a > 17 GB arena or a tighter canonical key. Watch **min-escape**, not min-dev-size:
@@ -119,10 +150,10 @@ from the F_2^{m+1} sum-free solver. Blocked on the planar theorem; do not start 
   `initialPStatement_iff_isP_frame_of_finrank` to give
   `InitialPStatement ↔ (grid escape statement)`. This is the largest remaining structural gap.
 - **WP-2 q-even theorem in Lean.** Char-2 translation mirror on the grid residual: `τ_v`,
-  `v` off both burned directions, is an fpf cap-preserving involution; the `MirrorGood` /
-  `isP_of_replyStrategy` machinery from `CapGame/Affine.lean` transfers nearly verbatim to
-  `GridGame`. With WP-1 this yields formal `PG(2,q) = P` for q even — the first full projective
-  outcome theorem in Lean.
+  `v` off both burned directions, is an fpf cap-preserving involution; the
+  `FiniteBuildGame.MirrorStepGood` / `isP_of_closedMirror` machinery transfers to `GridGame`.
+  With WP-1 this yields formal `PG(2,q) = P` for q even — the first full projective outcome theorem
+  in Lean.
 - **WP-3 Certificate checker for (C).** `NCert`/`PCert` instantiation at `GF(q)` + a small
   elaborator-friendly certificate format emitted by the Rust solver.
 - **WP-4 PGL packaging (optional polish).** `mapEquiv` currently packages `V ≃ₗ[K] V`; a

@@ -208,6 +208,49 @@ theorem not_collinear_iff_independent {a b c : Point K V} :
     ¬ Collinear K V a b c ↔ Independent ![a, b, c] := by
   rw [collinear_iff_dependent, ← independent_iff_not_dependent]
 
+theorem rep_mem_span_pair_of_collinear {a b c : Point K V} (hab : a ≠ b)
+    (hcol : Collinear K V a b c) :
+    c.rep ∈ Submodule.span K {a.rep, b.rep} := by
+  have hpair : LinearIndependent K ![a.rep, b.rep] :=
+    linearIndependent_pair_iff_ne.mpr hab
+  have hdep : ¬ LinearIndependent K ![a.rep, b.rep, c.rep] := by
+    intro hli
+    exact (dependent_iff_not_independent.mp ((collinear_iff_dependent (K := K) (V := V)).mp hcol))
+      (independent_triple_iff.mpr hli)
+  by_contra hcnot
+  apply hdep
+  have hsnoc : ![a.rep, b.rep, c.rep] = Fin.snoc ![a.rep, b.rep] c.rep := by
+    ext i
+    fin_cases i <;> simp [Fin.snoc]
+  rw [hsnoc, linearIndependent_finSnoc]
+  refine ⟨hpair, ?_⟩
+  rwa [Matrix.range_cons_cons_empty]
+
+theorem collinear_of_collinear_pair {a b c d : Point K V} (hab : a ≠ b)
+    (hc : Collinear K V a b c) (hd : Collinear K V a b d) :
+    Collinear K V a c d := by
+  have hpair : LinearIndependent K ![a.rep, b.rep] :=
+    linearIndependent_pair_iff_ne.mpr hab
+  have hcspan : c.rep ∈ Submodule.span K {a.rep, b.rep} :=
+    rep_mem_span_pair_of_collinear (K := K) (V := V) hab hc
+  have hdspan : d.rep ∈ Submodule.span K {a.rep, b.rep} :=
+    rep_mem_span_pair_of_collinear (K := K) (V := V) hab hd
+  refine ⟨(Submodule.span K {a.rep, b.rep}).projectivization, ?_, ?_, ?_⟩
+  · rw [Subspace.submodule.apply_symm_apply]
+    exact Module.Finite.span_of_finite _ (Set.toFinite _)
+  · rw [Subspace.submodule.apply_symm_apply]
+    have h2 := finrank_span_eq_card hpair
+    rw [Matrix.range_cons_cons_empty] at h2
+    simp only [Fintype.card_fin] at h2
+    omega
+  · intro p hp
+    rw [SetLike.mem_coe]
+    apply mem_projectivization_of_rep_mem
+    rcases hp with rfl | rfl | rfl
+    · exact Submodule.mem_span_of_mem (by simp)
+    · exact hcspan
+    · exact hdspan
+
 /-! ## Projective transport along linear equivalences -/
 
 section LinearEquivTransport

@@ -51,12 +51,18 @@
 //                   values): witness position = S3+p legal cap; per book node, move/reply legality,
 //                   closure (every legal move covered by exactly one reply row), child = P+x+y,
 //                   terminal parity (no legal move + even size); onconic flag vs conic geometry.
+//   mir <q> [--all-escapes] [--summary-only] [--closedcap <nodes>] [class-index...]
+//                -- C28 MirrorStep/MirrorClosed diagnostic.  For each canonical size-3 class,
+//                   find P size-4 escape child(ren), then test whether any involutive grid
+//                   automorphism gives a valid pair-extension mirror step, and whether that mirror
+//                   recursively closes.  Default tests the first P escape per class; --all-escapes
+//                   tests every P escape child; --summary-only suppresses per-position MIR lines.
 //
 // Build:  rustc -O -C target-cpu=native 2026-07-06-grid-cap-solver.rs -o /tmp/gridcap
 // Falsification watch: if `outcome` ever prints N (first-player win), PG(2,q) has a
 // counterexample; if `defect`'s min-deviating-size approaches 0/1, the root is about to flip.
 
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::env;
 use std::hash::{BuildHasherDefault, Hasher};
 use std::io::{BufWriter, Write};
@@ -2306,6 +2312,333 @@ fn fmt_cells(cells: &[(usize, usize)]) -> String {
     cells.iter().map(|&(r, c)| format!("{},{}", r, c)).collect::<Vec<_>>().join(" ")
 }
 
+fn fmt_cell_indices(b: &Board, cells: &[u16]) -> String {
+    cells
+        .iter()
+        .map(|&x| {
+            let xu = x as usize;
+            format!("{},{}", xu / b.q, xu % b.q)
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+fn inv_kind_name(k: usize) -> &'static str {
+    match k {
+        0 => "central",
+        1 => "swap",
+        2 => "translation",
+        3 => "frob",
+        4 => "reflection",
+        5 => "auto",
+        _ => "unknown",
+    }
+}
+
+#[derive(Clone, Copy, Default)]
+struct MirrorObs {
+    fixed: usize,
+    selected: usize,
+    rc: usize,
+    chord: usize,
+}
+
+impl MirrorObs {
+    fn total(&self) -> usize {
+        self.fixed + self.selected + self.rc + self.chord
+    }
+}
+
+#[derive(Clone, Copy)]
+struct MirrorStepReport {
+    invariant: bool,
+    obs: MirrorObs,
+}
+
+impl MirrorStepReport {
+    fn good(&self) -> bool {
+        self.invariant && self.obs.total() == 0
+    }
+}
+
+fn mirror_step_report(b: &Board, inv: &Involution, cells: &[u16]) -> MirrorStepReport {
+    let (chosen, forb) = masks_of(b, cells);
+    let mut invariant = true;
+    for &c in cells {
+        let im = inv.perm[c as usize] as usize;
+        if chosen[im >> 6] & (1u64 << (im & 63)) == 0 {
+            invariant = false;
+            break;
+        }
+    }
+    if !invariant {
+        return MirrorStepReport { invariant: false, obs: MirrorObs::default() };
+    }
+
+    let moves = avail_cells(b, &chosen, &forb);
+    let mut obs = MirrorObs::default();
+    for x16 in moves {
+        let x = x16 as usize;
+        let y = inv.perm[x] as usize;
+        if y == x {
+            obs.fixed += 1;
+            continue;
+        }
+        if chosen[y >> 6] & (1u64 << (y & 63)) != 0 {
+            obs.selected += 1;
+            continue;
+        }
+
+        let mut chosen_t = chosen;
+        set_bit(&mut chosen_t, x);
+        let mut forb_t = forb;
+        mask_or(&mut forb_t, &b.rc_mask[x]);
+        for &o in cells {
+            mask_or(&mut forb_t, &b.line_mask[o as usize * b.n + x]);
+        }
+        if chosen_t[y >> 6] & (1u64 << (y & 63)) == 0
+            && forb_t[y >> 6] & (1u64 << (y & 63)) == 0
+        {
+            continue;
+        }
+        if x / b.q == y / b.q || x % b.q == y % b.q {
+            obs.rc += 1;
+        } else {
+            obs.chord += 1;
+        }
+    }
+    MirrorStepReport { invariant: true, obs }
+}
+
+enum MirrorClosedStatus {
+    Yes { nodes: usize },
+    No { nodes: usize },
+    Cap { nodes: usize },
+}
+
+fn mirror_closed_rec(
+    b: &Board,
+    inv: &Involution,
+    cells: &[u16],
+    cap: usize,
+    seen: &mut HashSet<Vec<u16>>,
+    nodes: &mut usize,
+) -> MirrorClosedStatus {
+    let mut key = cells.to_vec();
+    key.sort_unstable();
+    if !seen.insert(key) {
+        return MirrorClosedStatus::Yes { nodes: *nodes };
+    }
+    *nodes += 1;
+    if *nodes > cap {
+        return MirrorClosedStatus::Cap { nodes: *nodes };
+    }
+
+    let step = mirror_step_report(b, inv, cells);
+    if !step.good() {
+        return MirrorClosedStatus::No { nodes: *nodes };
+    }
+    let (chosen, forb) = masks_of(b, cells);
+    let moves = avail_cells(b, &chosen, &forb);
+    for x16 in moves {
+        let y16 = inv.perm[x16 as usize];
+        let mut next = cells.to_vec();
+        next.push(x16);
+        next.push(y16);
+        next.sort_unstable();
+        match mirror_closed_rec(b, inv, &next, cap, seen, nodes) {
+            MirrorClosedStatus::Yes { .. } => {}
+            other => return other,
+        }
+    }
+    MirrorClosedStatus::Yes { nodes: *nodes }
+}
+
+fn mirror_closed_status(b: &Board, inv: &Involution, cells: &[u16], cap: usize) -> MirrorClosedStatus {
+    let mut seen: HashSet<Vec<u16>> = HashSet::new();
+    let mut nodes = 0usize;
+    mirror_closed_rec(b, inv, cells, cap, &mut seen, &mut nodes)
+}
+
+fn solve_mir(q: usize, filter: &[usize], all_escapes: bool, summary_only: bool, closed_cap: usize) {
+    let start = Instant::now();
+    let b = Board::new(q);
+    let invs = all_involutions(&b);
+
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+    let empty = [0u64; MAXW];
+    let mut visited: HashSet<u128> = HashSet::new();
+    let mut occ3: Vec<u16> = Vec::new();
+    enumerate(&b, 3, &mut occ3, &empty, &empty, &mut visited, &mut frontier);
+
+    let class_filter: HashSet<usize> = filter.iter().copied().collect();
+    let selected: Vec<usize> = if filter.is_empty() {
+        (0..frontier.len()).collect()
+    } else {
+        filter.iter().copied().filter(|&i| i < frontier.len()).collect()
+    };
+
+    let mut positions = 0usize;
+    let mut one_step_hits = 0usize;
+    let mut closed_yes = 0usize;
+    let mut closed_no = 0usize;
+    let mut closed_capped = 0usize;
+    let mut no_step = 0usize;
+    let mut no_invariant = 0usize;
+    let mut min_obs_hist: BTreeMap<usize, usize> = BTreeMap::new();
+
+    for ci in selected {
+        let (s3, chosen3, forb3) = &frontier[ci];
+        let mut solver = Solver {
+            b: &b,
+            memo: FnvMap::default(),
+            full: false,
+            min_dev: usize::MAX,
+            odd_max: 0,
+            odd_max_min: usize::MAX,
+            dev_even_n: 0,
+            dev_odd_p: 0,
+        };
+        let moves = avail_cells(&b, chosen3, forb3);
+        let mut pchildren: Vec<Vec<u16>> = Vec::new();
+        for z in moves {
+            let mut child = s3.clone();
+            child.push(z);
+            child.sort_unstable();
+            if !solver.value_cells(&child) {
+                pchildren.push(child);
+                if !all_escapes {
+                    break;
+                }
+            }
+        }
+
+        for (ei, child) in pchildren.iter().enumerate() {
+            positions += 1;
+            let mut invariant_invs = 0usize;
+            let mut best_obs: Option<(MirrorObs, usize)> = None;
+            let mut best_step_kind: Option<usize> = None;
+            let mut best_closed: Option<MirrorClosedStatus> = None;
+
+            for inv in &invs {
+                let rep = mirror_step_report(&b, inv, child);
+                if !rep.invariant {
+                    continue;
+                }
+                invariant_invs += 1;
+                let total = rep.obs.total();
+                if best_obs.map_or(true, |(obs, _)| total < obs.total()) {
+                    best_obs = Some((rep.obs, inv.kind));
+                }
+                if rep.good() {
+                    if best_step_kind.is_none() {
+                        best_step_kind = Some(inv.kind);
+                    }
+                    let status = mirror_closed_status(&b, inv, child, closed_cap);
+                    match status {
+                        MirrorClosedStatus::Yes { .. } => {
+                            best_closed = Some(status);
+                            break;
+                        }
+                        MirrorClosedStatus::Cap { .. } => {
+                            if !matches!(best_closed, Some(MirrorClosedStatus::Cap { .. })) {
+                                best_closed = Some(status);
+                            }
+                        }
+                        MirrorClosedStatus::No { .. } => {
+                            if best_closed.is_none() {
+                                best_closed = Some(status);
+                            }
+                        }
+                    }
+                }
+            }
+
+            let one_step = best_step_kind.is_some();
+            if one_step {
+                one_step_hits += 1;
+            } else if invariant_invs == 0 {
+                no_invariant += 1;
+            } else {
+                no_step += 1;
+            }
+
+            let (closed_label, closed_nodes) = match best_closed {
+                Some(MirrorClosedStatus::Yes { nodes }) => {
+                    closed_yes += 1;
+                    ("yes", nodes)
+                }
+                Some(MirrorClosedStatus::Cap { nodes }) => {
+                    closed_capped += 1;
+                    ("cap", nodes)
+                }
+                Some(MirrorClosedStatus::No { nodes }) => {
+                    closed_no += 1;
+                    ("no", nodes)
+                }
+                None => ("-", 0),
+            };
+
+            let (obs, kind) = best_obs.unwrap_or((MirrorObs::default(), usize::MAX));
+            if invariant_invs > 0 {
+                *min_obs_hist.entry(obs.total()).or_insert(0) += 1;
+            }
+            if !summary_only {
+                println!(
+                    "MIR q={} cls={} esc={} S4={} invariant_invs={} one_step={} closed={} nodes={} kind={} min_obs={} obs_fixed={} obs_selected={} obs_rc={} obs_chord={}",
+                    q,
+                    ci,
+                    ei,
+                    fmt_cell_indices(&b, child),
+                    invariant_invs,
+                    if one_step { 1 } else { 0 },
+                    closed_label,
+                    closed_nodes,
+                    if one_step {
+                        inv_kind_name(best_step_kind.unwrap())
+                    } else if invariant_invs > 0 {
+                        inv_kind_name(kind)
+                    } else {
+                        "none"
+                    },
+                    if invariant_invs > 0 { obs.total().to_string() } else { "NA".to_string() },
+                    obs.fixed,
+                    obs.selected,
+                    obs.rc,
+                    obs.chord
+                );
+            }
+        }
+
+        if !class_filter.is_empty() && !class_filter.contains(&ci) {
+            continue;
+        }
+    }
+
+    let hist = min_obs_hist
+        .iter()
+        .map(|(k, v)| format!("{}:{}", k, v))
+        .collect::<Vec<_>>()
+        .join(" ");
+    println!(
+        "mir q={} classes={} positions={} invs={} all_escapes={} closedcap={} one_step={} closed_yes={} closed_cap={} closed_no={} no_step={} no_invariant={} min_obs_hist={} [{:.1}s]",
+        q,
+        frontier.len(),
+        positions,
+        invs.len(),
+        if all_escapes { 1 } else { 0 },
+        closed_cap,
+        one_step_hits,
+        closed_yes,
+        closed_capped,
+        closed_no,
+        no_step,
+        no_invariant,
+        hist,
+        start.elapsed().as_secs_f64()
+    );
+}
+
 impl<'a> Solver<'a> {
     // game value of an arbitrary legal position given as a cell list (early-break; canon-memoized).
     fn value_cells(&mut self, cells: &[u16]) -> bool {
@@ -2968,6 +3301,35 @@ fn main() {
         let q: usize = args[2].parse().expect("certcheck needs q: certcheck <q> <file>");
         let file = args.get(3).expect("certcheck needs a file: certcheck <q> <file>");
         check_cert(q, file);
+        return;
+    }
+    if args[1] == "mir" {
+        // mir <q> [--all-escapes] [--summary-only] [--closedcap <nodes>] [class-index...]
+        let mut all_escapes = false;
+        let mut summary_only = false;
+        let mut closed_cap: usize = 20_000;
+        let mut positional: Vec<usize> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--all-escapes" {
+                all_escapes = true;
+            } else if a == "--summary-only" {
+                summary_only = true;
+            } else if a == "--closedcap" {
+                closed_cap = it
+                    .next()
+                    .expect("--closedcap needs a value")
+                    .parse()
+                    .expect("--closedcap int");
+            } else if let Some(rest) = a.strip_prefix("--closedcap=") {
+                closed_cap = rest.parse().expect("--closedcap int");
+            } else {
+                positional.push(a.parse().expect("q / class-index must be an integer"));
+            }
+        }
+        let q = *positional.first().expect("mir mode needs q: mir <q> [--all-escapes] [--summary-only] [--closedcap <nodes>] [class-index...]");
+        let filter: Vec<usize> = positional[1..].to_vec();
+        solve_mir(q, &filter, all_escapes, summary_only, closed_cap);
         return;
     }
     if args[1] == "resym" {

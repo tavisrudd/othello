@@ -1,6 +1,10 @@
 import CapGame.BuildGame
 import CapGame.Affine
+import CapGame.Mirror
 import ProjectiveCap.Projective
+import ProjectiveCap.Mirror
+import ProjectiveCap.EllipticMirror
+import ProjectiveCap.Binary
 import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.Grid
 import ProjectiveCap.GridSeed

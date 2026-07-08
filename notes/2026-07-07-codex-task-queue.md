@@ -674,7 +674,7 @@ Use cases:
 
 Report file: `notes/2026-07-08-codex-residual-mirror-lemma.md`.
 
-## C28. MirrorStep/MirrorClosed census and certificate-compression probe
+## C28. MirrorStep/MirrorClosed census and certificate-compression probe [REPORTED 2026-07-08]
 
 Goal: measure whether the corrected residual mirror lemma is useful in the computed odd-plane
 ladder, and prepare a terminal certificate rule for future Lean books.
@@ -710,6 +710,11 @@ Non-goal: do not restart the fixed-involution proof route for odd planes. This i
 compression and obstruction measurement only.
 
 Report file: `notes/2026-07-08-codex-mirrorgood-census.md`.
+
+Status: diagnostic mode `mir` added to `2026-07-06-grid-cap-solver.rs`.  Size-4 escape-layer
+probe was negative: q=11 all P escape children, q=13 all P escape children, and q=17 min-escape
+sample all had zero `MirrorStepGood` hits.  Keep `MirrorClosed` as a formal/deep-leaf tool, not as
+an immediate size-4 certificate compressor.
 
 ## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31
 

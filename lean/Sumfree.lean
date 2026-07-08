@@ -1,5 +1,6 @@
 import Sumfree.MirrorLemmas
 import Sumfree.Game
+import Sumfree.Nonzero
 import Sumfree.Grundy
 import Sumfree.RankCounts
 import Sumfree.RankEquiv
