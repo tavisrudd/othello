@@ -5,7 +5,7 @@ Date: 2026-07-06.
 ## Status table — PG(2,q) value + proof state
 
 **KEEP THIS TABLE UP TO DATE** — update it in the same commit as any session block / review
-that changes a cell (last updated 2026-07-08, C29/C30 queued).
+that changes a cell (last updated 2026-07-08, C29–C32 queued).
 
 | q                | Value | Computational evidence                                        | Lean proof status                                                                                     | Remaining gap                                                    |
 |------------------|-------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
@@ -24,8 +24,10 @@ that changes a cell (last updated 2026-07-08, C29/C30 queued).
 Scoreboard reading: **closed** — all even q, plus odd q=5, 7, 11. **Certificate-route feasible
 but ungated** — q=13 (file split; staged build = C30 step 1), q=9 and q=3 (small; q=3 optional
 in C30). **Compute-only** — q=17, 19 (route-C books queued, C30). **Frontier** — q=23 (esc
-campaign blocked per C21; inverted bucket census + the q≡2-mod-3 mixed-column law = C29) and
-the uniform odd-q mechanism (post-C20: strategies, not snapshot invariants).
+campaign blocked per C21; inverted bucket census + the q≡2-mod-3 mixed-column law = C29), the
+uniform odd-q mechanism (post-C20: strategies, not snapshot invariants; zone-steering ceiling
+= C31), and — off this planes table — the even dimensions `PG(2m,q)`, m ≥ 2, odd q: the only
+other open boards, now probed by the composite-mirror stuck-free harness (C32).
 
 ## Target
 
@@ -1248,6 +1250,24 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    prerequisite = the staged Q13 build (generated, unbuilt, naive-aggregate OOM hazard).
    Payoff = the whole computed prime ladder ≤ 19 unconditional. Status table updated in the
    same edit.
+19. **Second queue batch from the gap scan (Fable, 2026-07-08): C31 + C32.** (a) **C31 =
+   zone-steering ceiling census:** the C20 review's surviving proof shape ("P2 steers the
+   zone back to the O(1) regime where the endgame laws hold") made precise as a recursive
+   minimax quantity `Z(S)` over the C20 P reply-states at q=13/17 — either a small uniform
+   bound B (⇒ proof shape = steering lemma + small-zone endgame law as terminal certificate)
+   or a verbatim counterexample that kills the picture. (b) **C32 = even-dimensional
+   composite mirror, PG(4,3) stuck-free probe:** `PG(2m,q)` m ≥ 2 odd q are the only open
+   boards besides planes and appeared in no plan. Odd point count + no fpf involution (R0,
+   vector dim odd) ⇒ single-map mirrors dead, but a hyperplane `H ≅ PG(2m−1,q)` carries the
+   C25 elliptic involution and the complement is affine — so composite/adaptive mirrors are
+   the natural shape, with C27's mirror-chord condition as the exact coupling obstruction
+   (affine translation chords pass through the direction point `[v] ∈ H`). Deliverable = a
+   stuck-free strategy simulation over ALL P1 play (the q-even planar verification pattern):
+   any stuck-free candidate is a theorem candidate for all even dimensions at odd q — which
+   would leave PLANES as literally the only open boards; failures yield the `Obs` histogram
+   one dimension up. Deferred from the same scan: NK pairing-lemma cross-pollination on the
+   union-matching residual — overlaps C28 and targets the restricted Grundy (not the
+   undecided zone part); revisit after C28 + C31 report.
 
 ## Handoff Summary
 

@@ -767,3 +767,70 @@ q=11/13).
    (GF(9) ≠ `ZMod`; the intruder terminal-reply kernel `218b1ac` is the better lane for it).
 
 Report file: `notes/2026-07-08-codex-route-c-phase5.md`.
+
+## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise)
+
+Context: the C20 review's structural reading is that the session-11 snapshot laws hold exactly
+while the intruder zone is an O(1) endgame (max zone 2 at q=11 vs 10 at q=13 / 38 at q=17), and
+C23 §3(b) asks "does the defense steer the zone back to the small regime?" as an eyeball
+question only. Make it a machine-checked quantity. If P2 can *hold* the zone below a small
+uniform bound, the proof shape becomes "steering lemma + the small-zone endgame law as
+terminal certificate" — the only role the dead snapshot laws validly play. If no bound
+exists, that kills the steering picture before proof effort goes in. Either verdict is the
+deliverable.
+
+1. **The right object is recursive, not one-ply:** define the steering ceiling
+   `Z(S)` for a P-state `S` = 0 if the mover is stuck, else
+   `max over opponent moves m of min over winning (P) replies r of max(zone(S+m+r), Z(S+m+r))`
+   — the zone size P2 can guarantee never exceeding from `S` under optimal steering. A
+   one-ply census can mislead (small now, forced large later); subtrees above size-6 states
+   are shallow, so the full recursion is affordable.
+2. **Data:** the C20 reply states (`notes/data/c20-q13-q17-states.jsonl.gz`, regenerable
+   ~67s), q=13 first, then q=17. Compute `Z(S)` for every P reply-state; solves are
+   private-memo, size ≥ 6-rooted (much smaller than the C20 size-5 solves).
+3. **Gates:** child P/N labels must reproduce the C20 parent labels where they overlap;
+   spot-check ≥ 10 `Z` values by an independent hand-rolled minimax on the smallest states.
+4. **Report:** the distribution of `Z` over P reply-states per q (verbatim table); the law
+   candidate `Z ≤ B` with the smallest B that holds, or the counterexample state where every
+   winning reply blows the zone (verbatim, with its defect spectrum + zone features); zone
+   trajectories along one optimal line per bucket, cross-referenced against the C23 diagrams.
+5. Budget: hard 8h wall, single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-08-codex-zone-steering-census.md`.
+
+## C32. Even-dimensional composite mirror — stuck-free probe on PG(4,3)
+
+Context: with `PG(2m−1,q)` closed (C25) and planes the declared kernel, the even dimensions
+`PG(2m,q)`, m ≥ 2, odd q are open cells no plan touches. They have odd point count (burn-a-move,
+like planes) and NO fpf collineation involution (vector dim odd — R0), so a single-map mirror
+is dead. But unlike planes they contain a huge structured mirror: an elliptic involution `ρ` on
+a hyperplane `H ≅ PG(2m−1,q)` pairs H entirely, leaving the complement `AG(2m,q)` (even count)
+to an affine-style pairing. The coupling obstruction is exactly C27's mirror-chord condition
+made concrete: an affine translation chord in direction `v` passes through the direction point
+`[v] ∈ H`, so composites fail (only?) where the regions couple. If ANY composite verifies
+stuck-free, that is a theorem candidate for ALL even dimensions at odd q — which would leave
+planes as literally the only open boards. A failure's obstruction histogram is the C28 `Obs`
+methodology one dimension up. Cheap compute either way.
+
+1. **Harness:** PG(4,3) (121 points, max cap 20) legality + a deterministic-P2 strategy
+   simulator verifying stuck-freeness against ALL P1 play (the exact pattern that sealed the
+   q-even planar theorem: 0 illegal replies over the reachable tree). Memoize on reachable
+   positions (post-reply positions are pairing-invariant ⇒ keyed by chosen pairs + parity);
+   **sizing gate:** abort + report if reachable distinct positions exceed ~10⁸ or wall
+   exceeds 2h per candidate — partial verification is NOT a proof, say so plainly.
+2. **Candidate composites to enumerate (document each precisely):** (i) static `ρ` on H +
+   translation `τ_v` on the affine part, all choices of nonsquare class for `ρ` and direction
+   `v` up to symmetry — expected failure channel: P1 selects `[v]`; (ii) `v` chosen
+   adaptively after P1's opening (the burn move protects `[v]` or makes it dead); (iii) an
+   affine move-then-mirror on the complement (the affine odd-q self-blocking-midpoint trick)
+   composed with `ρ` on H. Add better candidates if the failures suggest them — record all.
+3. **Report per candidate:** stuck-free verdict; if failed, the obstruction histogram by type
+   (cross-region chord through `[v]`, in-H chord, affine chord through a selected affine
+   point, invariance break at the opening) + the minimal failing line verbatim; if ANY
+   candidate is stuck-free, the full strategy spec + the proof-kernel sketch in the
+   C27 pair-extension vocabulary (do NOT start Lean — that would be its own task).
+4. Cross-checks: point/line counts of PG(4,3) against closed forms; the cap checker against
+   an independent rank-based collinearity test; `ρ` verified fpf + involutive by enumeration.
+5. Budget: hard 8h wall, single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-08-codex-evendim-composite-mirror.md`.
