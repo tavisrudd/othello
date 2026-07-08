@@ -1,4 +1,5 @@
 import ProjectiveCap.ConicLocalization
+import ProjectiveCap.EscapeParity
 import ProjectiveCap.GridMirror
 
 /-!
@@ -11,6 +12,23 @@ explicit.
 -/
 
 namespace ProjectiveCap
+
+variable {K V : Type*} [Field K] [Fintype K] [DecidableEq K]
+variable [AddCommGroup V] [Module K V]
+variable [Fintype (Projective.Point K V)] [DecidableEq (Projective.Point K V)]
+
+/-- The residual bad-parity criterion implies the full projective-plane outcome
+in any odd-cardinality rank-three model. -/
+theorem initialPStatement_of_forall_even_bad_finrank
+    (hq : Odd (Fintype.card K))
+    (hbad : ∀ S : Finset (GridPoint K), S.card = 3 -> GridCap (K := K) S ->
+      Even (GridGame.BadExtensions (K := K) S).card)
+    (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) :=
+  GridMirror.initialPStatement_of_oddEscapeStatement_finrank
+    (K := K) (V := V)
+    (oddEscapeGameStatement_of_forall_even_bad (K := K) hq hbad) hrank
+
 namespace ConicLocalization
 
 variable {K V : Type*} [Field K] [Fintype K] [DecidableEq K]
