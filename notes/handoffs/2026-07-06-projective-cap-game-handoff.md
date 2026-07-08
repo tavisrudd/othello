@@ -2,6 +2,30 @@
 
 Date: 2026-07-06.
 
+## Status table — PG(2,q) value + proof state
+
+**KEEP THIS TABLE UP TO DATE** — update it in the same commit as any session block / review
+that changes a cell (last updated 2026-07-08, post-C20 review).
+
+| q                | Value | Computational evidence                                        | Lean proof status                                                                                     | Remaining gap                                                    |
+|------------------|-------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| even (2, 4, 8, …)| **P** | not needed (verified q=4,8 anyway)                            | **★ UNCONDITIONAL, all even q** — `initialPStatement_of_even_card_finrank` / char-2 translation mirror | none — closed                                                     |
+| 3                | P     | exhaustive solve                                              | none                                                                                                     | unproven; likely trivial (tiny board), just never queued          |
+| 5                | **P** | exhaustive solve                                              | **★ PROVEN by mechanism** — `initialPStatement_of_card_eq_five_finrank`, clean axioms                  | none — closed                                                     |
+| 7                | **P** | exhaustive solve                                              | **★ PROVEN by mechanism** — `initialPStatement_of_card_eq_seven_finrank`                               | none — closed                                                     |
+| 9                | P     | exhaustive solve (~1s; non-prime, char 3)                     | none                                                                                                     | open; noted reducible to a ≤15-point warm-up certificate          |
+| 11               | P     | solver + esc campaign                                         | **cert book validity kernel-checked** (C19: all anchored classes, `CertData/Q11.lean`, clean axioms)   | **C22** — transport + `represents` assembly ⇒ unconditional PG(2,11) |
+| 13               | P     | solver (all on-conic buckets P)                               | cert generator works; single-file elaboration blows the 30-min gate                                     | per-class file split (C22 optional), then assembly                |
+| 17               | P     | esc campaign (gate discharged, C3); S4 buckets mixed 5P/5N    | none                                                                                                     | cert book unbuilt; mixed buckets make it the hard column          |
+| 19               | P     | esc campaign                                                  | none                                                                                                     | cert book unbuilt                                                 |
+| 23               | **?** | not computed (CPython OOM'd; Rust sizing probe = C21, queued) | none                                                                                                     | the live falsification watch — any esc class at 0 kills the conjecture |
+| all odd q        | conj. P | no counterexample through q=19                              | frame reduction + odd-escape composition are unconditional rank-3 theorems; the per-q escape input is what's missing | a uniform mechanism — post-C20 that means strategy-level (second-intrusion lemma in defect form), not a snapshot law |
+
+Scoreboard reading: **closed** — all even q, plus odd q=5, 7. **One assembly step away** —
+q=11 (C22 is exactly that step). **Certificate-route feasible but ungated** — q=13 (file
+split), q=9 and q=3 (small, unqueued). **Compute-only** — q=17, 19. **Frontier** — q=23
+sizing (C21) and the uniform odd-q mechanism (post-C20: strategies, not snapshot invariants).
+
 ## Target
 
 Study the normal-play impartial game on finite projective space `PG(m,q)`.
