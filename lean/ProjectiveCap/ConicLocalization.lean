@@ -57,6 +57,23 @@ def HyperbolaFits (S : Finset (GridPoint K)) (rho A B : K) : Prop :=
 def hyperbolaDenom (a b c : GridPoint K) : K :=
   (b.2 - a.2) * (c.1 - a.1) - (c.2 - a.2) * (b.1 - a.1)
 
+/-- Cramer-rule row-center parameter for the hyperbola through an ordered triple. -/
+def hyperbolaRhoOfTriple (a b c : GridPoint K) : K :=
+  ((b.1 * b.2 - a.1 * a.2) * (c.1 - a.1) -
+      (c.1 * c.2 - a.1 * a.2) * (b.1 - a.1)) /
+    hyperbolaDenom (K := K) a b c
+
+/-- Cramer-rule column-center parameter for the hyperbola through an ordered triple. -/
+def hyperbolaAOfTriple (a b c : GridPoint K) : K :=
+  ((b.2 - a.2) * (c.1 * c.2 - a.1 * a.2) -
+      (c.2 - a.2) * (b.1 * b.2 - a.1 * a.2)) /
+    hyperbolaDenom (K := K) a b c
+
+/-- Product parameter for the hyperbola through an ordered triple. -/
+def hyperbolaBOfTriple (a b c : GridPoint K) : K :=
+  (a.1 - hyperbolaRhoOfTriple (K := K) a b c) *
+    (a.2 - hyperbolaAOfTriple (K := K) a b c)
+
 omit [Fintype K] [DecidableEq K] in
 theorem hyperbolaDenom_ne_zero_of_not_collinear {a b c : GridPoint K}
     (hnot : ¬ Collinear (K := K) a b c) :
@@ -79,6 +96,72 @@ theorem hyperbolaDenom_ne_zero_of_gridCap_triple {a b c : GridPoint K}
     hyperbolaDenom (K := K) a b c ≠ 0 :=
   hyperbolaDenom_ne_zero_of_not_collinear (K := K)
     (hS.2 (by simp) (by simp) (by simp) hab hac hbc)
+
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaTriple_linear_b {a b c : GridPoint K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0) :
+    hyperbolaRhoOfTriple (K := K) a b c * (b.2 - a.2) +
+        hyperbolaAOfTriple (K := K) a b c * (b.1 - a.1) =
+      b.1 * b.2 - a.1 * a.2 := by
+  unfold hyperbolaRhoOfTriple hyperbolaAOfTriple
+  field_simp [hden]
+  unfold hyperbolaDenom
+  ring
+
+omit [Fintype K] [DecidableEq K] in
+theorem hyperbolaTriple_linear_c {a b c : GridPoint K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0) :
+    hyperbolaRhoOfTriple (K := K) a b c * (c.2 - a.2) +
+        hyperbolaAOfTriple (K := K) a b c * (c.1 - a.1) =
+      c.1 * c.2 - a.1 * a.2 := by
+  unfold hyperbolaRhoOfTriple hyperbolaAOfTriple
+  field_simp [hden]
+  unfold hyperbolaDenom
+  ring
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_hyperbolaOfTriple_a (a b c : GridPoint K) :
+    OnHyperbola (K := K)
+      (hyperbolaRhoOfTriple (K := K) a b c)
+      (hyperbolaAOfTriple (K := K) a b c)
+      (hyperbolaBOfTriple (K := K) a b c) a := by
+  simp [OnHyperbola, hyperbolaBOfTriple]
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_hyperbolaOfTriple_b {a b c : GridPoint K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0) :
+    OnHyperbola (K := K)
+      (hyperbolaRhoOfTriple (K := K) a b c)
+      (hyperbolaAOfTriple (K := K) a b c)
+      (hyperbolaBOfTriple (K := K) a b c) b := by
+  unfold OnHyperbola hyperbolaBOfTriple
+  have hlin := hyperbolaTriple_linear_b (K := K) hden
+  linear_combination -hlin
+
+omit [Fintype K] [DecidableEq K] in
+theorem onHyperbola_hyperbolaOfTriple_c {a b c : GridPoint K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0) :
+    OnHyperbola (K := K)
+      (hyperbolaRhoOfTriple (K := K) a b c)
+      (hyperbolaAOfTriple (K := K) a b c)
+      (hyperbolaBOfTriple (K := K) a b c) c := by
+  unfold OnHyperbola hyperbolaBOfTriple
+  have hlin := hyperbolaTriple_linear_c (K := K) hden
+  linear_combination -hlin
+
+omit [Fintype K] in
+theorem hyperbolaFits_triple {a b c : GridPoint K}
+    (hden : hyperbolaDenom (K := K) a b c ≠ 0) :
+    HyperbolaFits (K := K) ({a, b, c} : Finset (GridPoint K))
+      (hyperbolaRhoOfTriple (K := K) a b c)
+      (hyperbolaAOfTriple (K := K) a b c)
+      (hyperbolaBOfTriple (K := K) a b c) := by
+  intro p hp
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hp
+  rcases hp with rfl | rfl | rfl
+  · exact onHyperbola_hyperbolaOfTriple_a (K := K) _ _ _
+  · exact onHyperbola_hyperbolaOfTriple_b (K := K) hden
+  · exact onHyperbola_hyperbolaOfTriple_c (K := K) hden
 
 /--
 Conics through the two burned directions, normalized so the `r*c`
