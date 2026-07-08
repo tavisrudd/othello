@@ -447,6 +447,47 @@ theorem mem_onConicLegalExtensions
   classical
   simp [OnConicLegalExtensions, mem_hyperbolaCells]
 
+/-- On-conic legal children that are P-positions. -/
+noncomputable def OnConicEscapeExtensions
+    (S : Finset (GridPoint K)) (rho A B : K) : Finset (GridPoint K) := by
+  classical
+  exact (OnConicLegalExtensions (K := K) S rho A B).filter fun p =>
+    GridGame.IsP (K := K) (insert p S)
+
+/-- On-conic legal children that are N-positions. -/
+noncomputable def OnConicBadExtensions
+    (S : Finset (GridPoint K)) (rho A B : K) : Finset (GridPoint K) := by
+  classical
+  exact (OnConicLegalExtensions (K := K) S rho A B).filter fun p =>
+    ¬ GridGame.IsP (K := K) (insert p S)
+
+theorem mem_onConicEscapeExtensions
+    {S : Finset (GridPoint K)} {rho A B : K} {p : GridPoint K} :
+    p ∈ OnConicEscapeExtensions (K := K) S rho A B ↔
+      p ∈ OnConicLegalExtensions (K := K) S rho A B ∧
+        GridGame.IsP (K := K) (insert p S) := by
+  classical
+  simp [OnConicEscapeExtensions]
+
+theorem mem_onConicBadExtensions
+    {S : Finset (GridPoint K)} {rho A B : K} {p : GridPoint K} :
+    p ∈ OnConicBadExtensions (K := K) S rho A B ↔
+      p ∈ OnConicLegalExtensions (K := K) S rho A B ∧
+        ¬ GridGame.IsP (K := K) (insert p S) := by
+  classical
+  simp [OnConicBadExtensions]
+
+theorem onConicLegalExtensions_card_eq_escape_add_bad
+    (S : Finset (GridPoint K)) (rho A B : K) :
+    (OnConicLegalExtensions (K := K) S rho A B).card =
+      (OnConicEscapeExtensions (K := K) S rho A B).card +
+        (OnConicBadExtensions (K := K) S rho A B).card := by
+  classical
+  unfold OnConicEscapeExtensions OnConicBadExtensions
+  exact (Finset.card_filter_add_card_filter_not
+    (s := OnConicLegalExtensions (K := K) S rho A B)
+    (p := fun p => GridGame.IsP (K := K) (insert p S))).symm
+
 /--
 Packaged statement: every non-seed cell on the size-three seed's conic is legal,
 and there are exactly `q - 4` such legal on-conic extensions.
@@ -693,6 +734,63 @@ theorem onConicLegalExtensionCountStatement :
     have hle3 : 3 ≤ Fintype.card K - 1 := by omega
     norm_num [Nat.cast_sub hle1, Nat.cast_sub hle3]
     ring
+
+theorem onConicLegalExtensions_eq_filter_notMem
+    {S : Finset (GridPoint K)} {rho A B : K}
+    (hcard : S.card = 3) (hS : GridCap (K := K) S)
+    (hB : B ≠ 0) (hfit : HyperbolaFits (K := K) S rho A B) :
+    OnConicLegalExtensions (K := K) S rho A B =
+      (HyperbolaCells (K := K) rho A B).filter fun p => p ∉ S := by
+  classical
+  ext p
+  rw [mem_onConicLegalExtensions, Finset.mem_filter, mem_hyperbolaCells]
+  constructor
+  · rintro ⟨hpOn, hpLegal⟩
+    exact ⟨hpOn, (GridGame.mem_legalExtensions.mp hpLegal).1⟩
+  · rintro ⟨hpOn, hpnot⟩
+    exact ⟨hpOn,
+      (onConicLegalExtensionCountStatement (K := K) S rho A B
+        hcard hS hB hfit).1 p (mem_hyperbolaCells.mpr hpOn) hpnot⟩
+
+theorem card_onConicLegalExtensions
+    {S : Finset (GridPoint K)} {rho A B : K}
+    (hcard : S.card = 3) (hS : GridCap (K := K) S)
+    (hB : B ≠ 0) (hfit : HyperbolaFits (K := K) S rho A B) :
+    ((OnConicLegalExtensions (K := K) S rho A B).card : Int) =
+      (Fintype.card K : Int) - 4 := by
+  rw [onConicLegalExtensions_eq_filter_notMem
+    (K := K) hcard hS hB hfit]
+  exact (onConicLegalExtensionCountStatement (K := K) S rho A B
+    hcard hS hB hfit).2
+
+theorem odd_card_onConicLegalExtensions
+    (hq : Odd (Fintype.card K))
+    {S : Finset (GridPoint K)} {rho A B : K}
+    (hcard : S.card = 3) (hS : GridCap (K := K) S)
+    (hB : B ≠ 0) (hfit : HyperbolaFits (K := K) S rho A B) :
+    Odd (OnConicLegalExtensions (K := K) S rho A B).card := by
+  obtain ⟨k, hk⟩ := hq
+  rw [← Int.odd_coe_nat, card_onConicLegalExtensions (K := K) hcard hS hB hfit]
+  refine ⟨(k : Int) - 2, ?_⟩
+  have hkz : (Fintype.card K : Int) = 2 * (k : Int) + 1 := by exact_mod_cast hk
+  rw [hkz]
+  ring
+
+theorem onConicEscapeExtensions_nonempty_of_even_bad
+    (hq : Odd (Fintype.card K))
+    {S : Finset (GridPoint K)} {rho A B : K}
+    (hcard : S.card = 3) (hS : GridCap (K := K) S)
+    (hB : B ≠ 0) (hfit : HyperbolaFits (K := K) S rho A B)
+    (hbad : Even (OnConicBadExtensions (K := K) S rho A B).card) :
+    (OnConicEscapeExtensions (K := K) S rho A B).Nonempty := by
+  have hodd := odd_card_onConicLegalExtensions (K := K) hq hcard hS hB hfit
+  rw [onConicLegalExtensions_card_eq_escape_add_bad] at hodd
+  have hoddEscape : Odd (OnConicEscapeExtensions (K := K) S rho A B).card := by
+    rcases Nat.even_or_odd (OnConicEscapeExtensions (K := K) S rho A B).card
+        with he | ho
+    · exact absurd hodd (Nat.not_odd_iff_even.mpr (he.add hbad))
+    · exact ho
+  exact Finset.card_pos.mp hoddEscape.pos
 
 omit [Fintype K] [DecidableEq K] in
 theorem hyperbola_center_secant_collinear {rho A B t : K} (ht : t ≠ 0) :
@@ -1003,6 +1101,28 @@ def OnConicEscapeStatement : Prop :=
           HyperbolaFits (K := K) S rho A B ∧
           p ∈ OnConicLegalExtensions (K := K) S rho A B ∧
           GridGame.IsP (K := K) (insert p S)
+
+/--
+Parity reduction for the on-conic escape target.  For odd `q`, it is enough to
+show that the on-conic bad children are paired, hence even, for the normal-form
+conic of each size-three seed.
+-/
+theorem onConicEscapeStatement_of_forall_even_onConic_bad
+    (hq : Odd (Fintype.card K))
+    (hbad : ∀ S : Finset (GridPoint K), ∀ rho A B : K,
+      S.card = 3 ->
+      GridCap (K := K) S ->
+      B ≠ 0 ->
+      HyperbolaFits (K := K) S rho A B ->
+        Even (OnConicBadExtensions (K := K) S rho A B).card) :
+    OnConicEscapeStatement (K := K) := by
+  intro S hcard hS
+  rcases exists_hyperbolaNormalForm (K := K) hcard hS with ⟨rho, A, B, hB, hfit⟩
+  rcases onConicEscapeExtensions_nonempty_of_even_bad
+      (K := K) hq hcard hS hB hfit (hbad S rho A B hcard hS hB hfit) with
+    ⟨p, hp⟩
+  rcases (mem_onConicEscapeExtensions (K := K)).mp hp with ⟨hpLegal, hpP⟩
+  exact ⟨rho, A, B, p, hB, hfit, hpLegal, hpP⟩
 
 /-- The on-conic refinement immediately implies the ordinary odd escape target. -/
 theorem oddEscapeStatement_of_onConicEscapeStatement
