@@ -3,8 +3,11 @@
 Protocol: each task lists a **report file**. Codex does the work, writes findings to the report
 file (create it; plain markdown; include verbatim commands/outputs for any machine check), and
 leaves the queue entry below marked `[REPORTED <date>]`. Fable reads the report files at day-end
-wrap. Do not edit other WIP notes; do not touch the queens tmux panes; box is RAM-constrained
-(G(17) run) — keep any compute ≤1 GB, single-core.
+wrap. Do not edit other WIP notes; do not touch the queens tmux panes.
+
+**Box update 2026-07-07 evening:** the z5 run was killed and G(17) is done — the RAM/core
+constraint is LIFTED. Compute up to ~8 GB / multi-core is fine; still no q ≥ 23 grid-cap
+campaigns and no n=20 queens runs without an explicit gate.
 
 ## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
@@ -179,7 +182,7 @@ Do not start C11 from the current P0a data.
 
 Report file: `notes/2026-07-07-codex-cert-extractor-report.md`.
 
-## C12. Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1)
+## C12. Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1) [IN PROGRESS 2026-07-07 — Opus delegate; do NOT duplicate]
 
 Context: the odd-side Lean compositions are done and conditional only on
 `OddEscapeGameStatement`/`OnConicEscapeStatement` (see `lean/ProjectiveCap/PlaneOutcome.lean`;
@@ -211,7 +214,79 @@ emitter + self-check + format spec for the checker to target.
 
 Report file: `notes/2026-07-07-codex-cert-emitter-report.md`.
 
-## Standing (unchanged)
+## C13. q=9 intrusion-structure probe (the next odd-plane Lean target)
 
-WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem) per
-[named-expert personas](2026-07-07-named-expert-personas-context.md).
+Context: PG(2,5) and PG(2,7) are now Lean theorems via the intrusion calculus
+(`lean/ProjectiveCap/IntrusionCalculus.lean`, commits `96746ab`/`ae1a346`): at q ≤ 7 no
+off-conic intruder is ever legal above an on-conic S₄. At q = 9 intruders EXIST but the
+intrusion note (§3 of `2026-07-07-onconic-intrusion-calculus.md`) predicts they are confined:
+Lemma III(4) with c=6 gives `τ_x ≤ 2·τ_played − 2`, so only external points with BOTH
+tangencies at played points can intrude, they lie on pairwise intersections of played tangent
+lines, and after any such intrusion `M = 0` (the conic is dead) — the residual is a tiny
+intruder-only game. Machine-check this structure exhaustively at q = 9 to pin the Lean proof
+design (feat data already says every on-conic S₄ is P at q=9).
+
+Task (Python or a private solver build; GF(9) tables exist in `2026-07-06-grid-cap-solver.rs`;
+small compute):
+1. For every conic (or one per symmetry class, state which) and every legal on-conic size-4
+   position: enumerate ALL legal off-conic intruders x; record `(τ_x, τ_played)`; confirm the
+   census matches the bound (no `(0,·)` or `(2,0/1)` types), and that each intruder kills the
+   whole surviving conic (verify the exact kill-set σ_x(played) as in the note's verifier
+   `2026-07-07-onconic-intrusion-check.py` — reuse/extend it if convenient).
+2. For each intruded child, solve the residual game EXACTLY (it should be intruder-only and
+   shallow): report max residual depth, max branching, and the outcome pattern; confirm every
+   on-conic S₄ is P and identify WHY (does P2 always have a mirror/second intrusion reply, or
+   does the intruder zone die immediately?).
+3. Tabulate: #on-conic S₄ classes, #legal intruders per class, residual game sizes. The
+   deliverable is the structure table a Lean `noIntrusionAboveFour`-style q=9 statement (or its
+   replacement — the kernel is NOT no-intrusion at q=9) would need.
+
+Report file: `notes/2026-07-07-codex-q9-intrusion-probe.md`.
+
+## C14. WP-3 Lean certificate checker scaffold (GATED on C12's report existing)
+
+Do NOT start until `notes/2026-07-07-codex-cert-emitter-report.md` exists (an Opus delegate is
+building the emitter). Then: statement-level Lean scaffold for the route-C checker consuming
+the C12 cert format — target `FiniteBuildGame.PairReplyBook`/`PCert` in
+`lean/CapGame/BuildGame.lean`. Concretely: (1) a Lean datatype mirroring the C12 file format
+(class rep, witness cell, reply-book rows); (2) a checker statement
+`bookValid → GridGame.IsP (insert p S₃)` and the per-class assembly toward
+`Almost.OddEscapeGameStatement (K := ZMod p)` for prime q (skip GF(9) in the scaffold; note
+what it needs); (3) if cheap, an end-to-end q=5 instantiation attempt (the q=5 book is tiny) —
+but statement-level for the rest is fine. Match the C2/C9 report style: names, proved vs
+stated vs deferred, build transcript.
+
+Report file: `notes/2026-07-07-codex-wp3-checker-scaffold.md`.
+
+## C15. PGL(2,q) orbit-collapse census at q = 11, 13, 19 (extends C5)
+
+Rerun your C5 methodology at q = 11, 13, 19: regenerate feat data, reconstruct each on-conic
+S₄'s 6-point parameter set, bucket by PGL(2,q)-canonical form, check value-constancy per
+bucket, and report raw-children → orbit-bucket collapse ratios per q. Purpose: (i) more
+falsification pressure on Lemma I (any mixed-value bucket REFUTES it — report verbatim and
+stop); (ii) the collapse ratio decides whether route-C certificate books (C12/C14) should be
+emitted per-orbit instead of per-class (C5 saw 273 → 10 at q=17). Same guardrails as C5.
+
+Report file: `notes/2026-07-07-codex-pgl2-orbit-census-q11-19.md`.
+
+## C16. Sum-free Tactic 2 — induction on `r` (activated by the z5 kill)
+
+The `Z3³×Z5` brute run was killed 2026-07-07 with no verdict (flat 1.07× redundancy at 106M
+nodes — same compute-infeasible bucket as p=11; datapoint + rationale in
+`handoffs/2026-07-05-sumfree-compute-parallel-codex.md`). The `r = 3` outcome now rests
+entirely on your Tactic 2 lane: the monotone-resource law **"`Z3^r × Z_p` is N iff r = 1"**
+(the proven r=1→r=2 mechanism: each extra `F₃` factor hands Bob one more `O₃` pair). Work the
+induction step r → r+1 directly (the handoff's `--6` block has the structural facts: the win
+is adaptive, backbone-less, obstruction on the `⟨socle-line⟩` fibers). Do NOT relaunch any
+brute-force solve. Partial results welcome: even a clean statement of the induction invariant
+that survives the known q=5-exception structure is progress — report what breaks if it breaks.
+
+Report file: `notes/2026-07-07-codex-sumfree-induction-r.md`.
+
+## Standing
+
+~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane
+theorem is unconditional: `PlaneOutcome.initialPStatement_of_even_card_finrank`). Current
+proof-side context loads per [named-expert personas](2026-07-07-named-expert-personas-context.md);
+projective status lives in `handoffs/2026-07-06-projective-cap-game-handoff.md` (session-10
+block: order-5 and order-7 planes proven, dead-hypothesis routes guarded).
