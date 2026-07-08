@@ -347,6 +347,36 @@ was (this is itself the sizing datum).
 
 Report file: `notes/2026-07-07-codex-ml-moduli-attribution.md`.
 
+## C19. Verified boolean book-checker + reflection (route C, phase 3 — the C17 fix)
+
+C17's STOP diagnosis is confirmed and the fix direction it proposed is approved: do NOT raise
+`maxRecDepth`, do NOT use `native_decide`. Build the reflection route — a computable `Bool`
+checker over concrete list data + a soundness theorem into C14's semantic layer, so per-class
+validity proofs become `by decide` on `checker data = true` (ONE `Decidable Eq Bool` instance;
+the kernel evaluates the checker — no typeclass search, no new axioms).
+
+1. **Lean checker** (new file, e.g. `lean/ProjectiveCap/CertCheck.lean`): concrete cert data
+   as `List`-based structures over `ZMod p` cells; `checkCap : List (GridPoint K) → Bool`
+   (pairwise distinct rows/cols + no collinear triple), `checkMove`, and per-node closure by
+   enumerating all q² cells (a `List.all` over the cell grid: if legal from the node, a row
+   must match). Reflection theorems: `checkCap l = true → GridCap l.toFinset`, up to
+   `checkBook c = true → GridClassCert.Valid c` (route through C17's
+   `validFor_of_finiteRows` bridge). Soundness direction only (`= true → Prop`) is enough —
+   no completeness needed.
+2. **Generator v2**: update `notes/2026-07-07-anchored-cert-to-lean.py` to emit the list
+   data + one-line `by decide` proofs per class into `lean/ProjectiveCap/CertData/Q<q>.lean`.
+3. **Elaboration ladder with measurement**: q=5, then 7, then 11. Report per-q kernel-eval
+   wall time. STOP if q=11 projects past ~30 min single file (split per-class files is an
+   acceptable mitigation — report either way). q=13 only if q=11 is comfortable.
+4. **Transport lemmas** (C17 part 3, still open): the anchor-normalization grid symmetries
+   (translation + axis scalings, `psi_gridSymmetry` proof shape) and the
+   legality/IsP transport assembling an anchored family into
+   `GridOddEscapeBookCertificate.represents`. Statement-level minimum; proofs welcome.
+   With 1–4 done, `OddEscapeGameStatement (ZMod 11)` — hence unconditional PG(2,11) via
+   `initialPStatement_of_oddEscapeStatement_finrank` — is the assembly payoff.
+
+Report file: `notes/2026-07-07-codex-certcheck-reflection.md`.
+
 ## Standing
 
 ~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane

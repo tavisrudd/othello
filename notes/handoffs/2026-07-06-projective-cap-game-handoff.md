@@ -1024,6 +1024,17 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    table. C18's gate is OPEN (fit {11,13} / test {17,19}; order-theoretic dictionary).
    N-valued buckets exist only at q = 11 and 17 — whatever the cross-q law is, it must
    flip on those two columns.
+12. **C17 REPORTED (commit `dce7aed`) — anchored family works end-to-end natively; the Lean
+   data route STOPPED exactly at the designed gate.** Anchored emitter + certcheck PASS for
+   q = 5/7/11/13 (6/20/72/110 classes, every witness on-conic, canonical mode regression
+   clean); `GridCap`/`AffineCap` Lean decidability landed, plus a `validFor_of_finiteRows`
+   bridge. The q=5 `by decide` prototype FAILED in elaborator instance synthesis
+   (maxRecDepth on the monolithic ∀∃ closure Decidable — NOT kernel arithmetic, NOT the
+   book data). Codex's proposed fix = the reflection route; approved and queued as **C19**:
+   computable Bool checker over list data + soundness reflection into the C14 layer, per-class
+   proofs become `by decide` on `checker = true` (single Bool instance, kernel evaluation,
+   axiom profile unchanged) + the anchor-transport lemmas. Assembly payoff when C19 lands:
+   `OddEscapeGameStatement (ZMod 11)` ⇒ **unconditional PG(2,11)**.
 
 ## Handoff Summary
 
