@@ -1035,6 +1035,24 @@ Codex queue C1–C10 all reported; C11 correctly NO-GO. C12 delegated to an Opus
    proofs become `by decide` on `checker = true` (single Bool instance, kernel evaluation,
    axiom profile unchanged) + the anchor-transport lemmas. Assembly payoff when C19 lands:
    `OddEscapeGameStatement (ZMod 11)` ⇒ **unconditional PG(2,11)**.
+13. **C18 REVIEWED — NULL LAW, and the null is trustworthy + informative.** Report
+   (`2026-07-07-codex-ml-moduli-attribution.md`) checks out: bucket table = C15's census
+   exactly (4/5/10/13 = 32 buckets; q=17 splits 5 N / 5 P; q=11 1 N / 3 P; q=13, q=19 all-P),
+   baselines arithmetically consistent (forward majority 8/9 train, 18/23 test), the mandated
+   fit-{11,13}/test-{17,19} protocol was honored, pure-stdlib + sklearn agree, and no candidate
+   beats the all-P majority held-out. **What died:** every shallow law over STATIC features of
+   the 6-subset — configuration, q-arithmetic, cross-ratio, quadratic-character, AND the §6
+   order-theoretic features (ord of products of involutions fixing 2-subsets of the six played
+   points). **What did NOT die:** the intrusion-residual reading of session-9 §6. C18's ord
+   features are involutions anchored on the *played* points; the calculus says the law lives in
+   the census of *legal intruders* `x` (τ_x, τ_played, M-parity) and the second-intruder orbit
+   structure `ord(σ_x σ_{x'})` — a game-labeled census C18 never computed. Strongest attribution
+   (involution product orders) points the same way. Follow-ups queued: **C20** = winning-intrusion
+   census at q = 11/13/17 (attack option (i) of the intrusion calculus, = C18's "richer structural
+   features" made precise); **C21** = the q=23 single-class esc sizing probe C18's phase 2 skipped
+   (esc mode's q=17/19 gate is DISCHARGED per C3, and the box is now free — queens G(17) done,
+   sum-free z5 terminated). Fable lane pivots to attack option (ii): the second-intrusion answer
+   lemma.
 
 ## Handoff Summary
 

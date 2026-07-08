@@ -377,6 +377,54 @@ the kernel evaluates the checker — no typeclass search, no new axioms).
 
 Report file: `notes/2026-07-07-codex-certcheck-reflection.md`.
 
+## C20. Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i))
+
+C18's null (reviewed, sound) killed shallow laws over STATIC features of the 6-subset. The
+surviving hypothesis (session-9 §6 of `2026-07-07-onconic-intrusion-calculus.md`) is that the
+law lives in the game-labeled intruder census, which C18 never computed. Build it.
+
+1. **Data:** for q ∈ {11, 13, 17} (q=19 optional if cheap), for one representative on-conic S₄
+   per full-PGL orbit bucket (the C15 32-bucket table): enumerate ALL legal off-conic intruders
+   `x`, and label each with the exact value of `S₄ + x` (P/N) by a private-memo subtree solve
+   (pattern: the C13 q=9 probe / esc-mode `esc_g`; size-5 starts are small — the q=17 full
+   size-3-class solves ran ~30s/class).
+2. **Features per intruder:** `(τ_x, τ_played)` type, internal/external, `M = (q−11+τ_x)/2`
+   parity, kill-set size. For each N-valued intruded child (mover-after-x wins), classify the
+   winning replies: conic cell vs second intruder `x'`; for second-intruder winning replies
+   record `ord(σ_x σ_{x'})` and its divisor class vs q−1 / q+1.
+3. **The discriminating questions (report tables + verdicts, null is a valid deliverable):**
+   (a) does `(τ_x, τ_played, M parity)` alone decide P/N of `S₄+x` within a bucket? across
+   buckets? across q? (b) if not, does the `ord(σ_x σ_{x'})` census decide it? (c) do the
+   N-buckets of q = 11/17 differ from the P-buckets in their winning-intrusion profile in any
+   way visible to these features? Per Lemma III(3), M-parity is position-independent given
+   type — so (a) failing WITHIN a type is itself a sharp negative worth reporting verbatim.
+4. **Gates before any q ≥ 11 report:** (i) reproduce the C13 q=9 census exactly (only
+   `(τ_x, τ_played) = (2,2)` intruders; every intruded child has exactly one legal reply,
+   terminal); (ii) per-bucket onP counts derived from your labels must match the C15/C5 feat
+   data byte-for-byte where they overlap.
+5. Budget: hard 8h wall; single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-08-codex-intrusion-census.md`.
+
+## C21. q=23 esc single-class sizing probe (route D; C18 phase-2 leftover)
+
+The esc-mode q=17/q=19 validation gate is DISCHARGED (C3) and the box is free (queens G(17)
+done; sum-free z5 terminated). Size the q=23 campaign — do NOT run it.
+
+1. Build the committed solver (`rustc -O -C target-cpu=native 2026-07-06-grid-cap-solver.rs`),
+   report the q=23 canonical size-3 class count (enumeration is cheap).
+2. Run `esc 23 --cap 200000000 0` (class 0 only) under a **1h wall cap**. If it completes,
+   run further classes within the same hour. Report per-class escape/bad/peak-memo/wall
+   verbatim, or where it died (cap vs timeout) — either outcome is the sizing datum.
+3. Extrapolate the full q=23 per-class campaign cost (classes × per-class wall, peak memory)
+   and STOP. The campaign itself is a user launch decision. Note in the report whether the
+   extrapolated peak-memo fits the box without the global arena.
+4. Motivation to carry in the report: a q=23 column adds a potentially MIXED-value training
+   column for the moduli law hunt (mixed exists only at q = 11, 17 so far), and min-escape at
+   q=23 is the live falsification watch (any class at 0 falsifies the conjecture).
+
+Report file: `notes/2026-07-08-codex-esc23-sizing.md`.
+
 ## Standing
 
 ~~WP-1 (frame⇄grid bridge) then WP-2 (q-even theorem)~~ — **both DONE** (the q-even plane
