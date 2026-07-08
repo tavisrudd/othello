@@ -164,5 +164,20 @@ theorem initialPStatement_of_card_eq_five_finrank
     (noIntrusionAboveFourStatement_of_card_eq_five (K := K) hcard)
     hrank
 
+/--
+**The projective plane of order seven.**  The cap game on any rank-three
+model over a field of cardinality seven is a second-player win, by the
+intrusion-calculus bare counter through the order-seven secant-involution
+kernel.
+-/
+theorem initialPStatement_of_card_eq_seven_finrank
+    (hcard : Fintype.card K = 7)
+    (hrank : Module.finrank K V = 3) :
+    Projective.InitialPStatement (K := K) (V := V) :=
+  initialPStatement_of_noIntrusionAboveFour_finrank (K := K) (V := V)
+    (by rw [hcard]; exact ⟨3, rfl⟩)
+    (noIntrusionAboveFourStatement_of_card_eq_seven (K := K) hcard)
+    hrank
+
 end ConicLocalization
 end ProjectiveCap
