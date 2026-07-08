@@ -400,6 +400,16 @@ law lives in the game-labeled intruder census, which C18 never computed. Build i
    (machine-validated NK1–NK3). The upgraded question (a): does (defect-XOR, intruder-zone
    size/parity) decide the full-game value of the reply state? This is the leading
    hypothesis — test it FIRST.
+   **SECOND AMENDMENT (session-11 addendum, q=11 spot-test done by Fable — do not redo
+   q=11; extend to q=13, 17):** the necessity law `P ⇒ defXOR = 0 ∧ zone even` held
+   381/381 at q=11, and the residual mixed bucket was fully explained by the zone conflict
+   graph (empty-conic zone-2 endgame, 328/328). Your primary deliverables become:
+   (a′) test the necessity law at q = 13 and 17 (any violation verbatim — it kills the
+   joint-snapshot hypothesis); (b′) in the (defXOR=0, zone-even) bucket at q = 13/17 —
+   where the conic will NOT be empty — hunt the discriminator among: zone conflict-graph
+   NK value, zone size, conic path spectrum × zone coupling. Features to emit per state:
+   defect spectrum, defXOR, zone size, zone conflict-edge count, zone conflict-graph NK
+   Grundy (zones are small; exact NK on the snapshot is affordable).
 3. **The discriminating questions (report tables + verdicts, null is a valid deliverable):**
    (a) does `(τ_x, τ_played, M parity)` alone decide P/N of `S₄+x` within a bucket? across
    buckets? across q? (b) if not, does the `ord(σ_x σ_{x'})` census decide it? (c) do the

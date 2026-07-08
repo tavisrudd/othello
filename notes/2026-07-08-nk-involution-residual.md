@@ -114,6 +114,34 @@ measure):
    here must come from geometry: intruder zones shrink quadratically and legal `d` values
    are pinned to the `q ± 1` divisor lattice.
 
+## 5a. ADDENDUM (same session): q=11 spot-test of the defect-XOR hypothesis — a clean
+## one-directional law + an exact endgame law
+
+Before handing the census to C20, the lead hypothesis was Fermi-tested at q=11 over 861
+two-intruder positions (all 330 S₄ × first-12 legal intruder pairs each; sample is
+pair-order-biased but S₄-exhaustive). Results:
+
+1. **Necessity law — 381/381 pure:** every P-position in the sample has defect-XOR = 0 AND
+   even intruder zone. Contrapositive: `defXOR ≠ 0 ∨ |zone| odd ⇒ N` with zero exceptions.
+   (Bucket table: (0,even) = 156 N + 324 P mixed; (0,odd), (≠0,even), (≠0,odd) = all N.)
+2. **The mixed bucket collapses to the endgame:** every sampled (defXOR=0, zone-even) state
+   had EMPTY live conic and exactly 2 zone cells — at q=11's two-intruder layer the conic
+   is already wiped there, and the value sits entirely in the zone.
+3. **Exact endgame law — 328/328:** with conic empty and zone = {u, v}: the position is P
+   ⟺ u, v are non-conflicting (neither dies when the other is played, i.e. not collinear
+   with any played point) — 2 independent moves = P; a conflicting pair = 1 effective
+   move = N.
+
+So the sampled two-intruder layer at q=11 is COMPLETELY decided by the Node-Kayles data of
+the current kill structure: (conic defect-XOR, zone parity, zone conflict graph). The
+upgraded hypothesis for C20 ("joint snapshot"): the full-game value is a function of the
+joint Node-Kayles snapshot — conic spectrum + zone conflict graph — with the necessity law
+`P ⇒ defXOR = 0 ∧ zone even` as the load-bearing testable piece at q = 13, 17 (where zones
+are larger and the conic survives two intrusions; q=11's empty-conic collapse will NOT
+persist, so the mixed-bucket discriminator must generalize the zone-conflict term).
+Caveats recorded: c=6 layer only, q=11 only, pair sample biased to lexicographically early
+intruders.
+
 ## 6. Next steps
 
 - **C20 (Codex, queued + amended):** the game-labeled census now including defect-spectrum
