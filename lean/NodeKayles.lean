@@ -3,3 +3,4 @@
 import NodeKayles.Basic
 import NodeKayles.Grundy
 import NodeKayles.Certificate
+import NodeKayles.ConflictGameEquiv

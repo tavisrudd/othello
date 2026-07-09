@@ -149,3 +149,40 @@ Build completed successfully (2990 jobs).
 Both targets build green with no warnings (all unused section variables `omit`-ted, no linter
 errors). Add-only imports: `CapGame.GraphMirror` in `lean/CapGame.lean`,
 `ProjectiveCap.CapCMirror` in `lean/ProjectiveCap.lean`.
+
+## Node-Kayles double-encoding gap — CLOSED
+
+The two repo encodings of the capacity-1 game are now proven to compute the same normal-play
+value, in the new file `lean/NodeKayles/ConflictGameEquiv.lean` (add-only import in
+`lean/NodeKayles.lean`).
+
+- **`NodeKayles.indepGame_isP_iff`** (Main):
+  `FiniteBuildGame.IsP (ConflictGraph.IndepValid (conflictAdj G)) (∅ : Finset (Fin k)) ↔ NodeKayles.IsP G Finset.univ`
+  — the independent-set-building game (empty start) is P iff the vertex-deletion Node-Kayles
+  game (all vertices live) is P.
+- **`NodeKayles.bridge`** (the engine): for every valid built position `S`,
+  `FiniteBuildGame.Win (ConflictGraph.IndepValid (conflictAdj G)) S ↔ NodeKayles.win G (liveSet G S)`.
+
+Proof: track the **live set** `liveSet G S = univ \ ⋃_{u∈S} N[u]` of a built independent set;
+a move-bijection (`move_iff_liveSet`: legal build moves = live vertices) and a child
+correspondence (`liveSet_child`: `liveSet G (insert x S) = liveSet G S \ N[x]`) let a strong
+induction on `(liveSet G S).card` match the two `Win`/`win` recursions ply-for-ply. Main is
+the `S = ∅` instance via `liveSet G ∅ = univ`.
+
+### `#print axioms` output (verbatim)
+
+```
+'NodeKayles.bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NodeKayles.indepGame_isP_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+### Build transcript
+
+```
+$ nix develop --command lake build NodeKayles.ConflictGameEquiv
+ℹ [8620/8620] Built NodeKayles.ConflictGameEquiv (22s)
+Build completed successfully (8620 jobs).
+```
+
+No `sorry` / `native_decide` / new axioms; no linter errors (only `{k : ℕ}` as a section
+variable, used in every signature, so no `omit` needed).
