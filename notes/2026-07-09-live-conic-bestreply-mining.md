@@ -370,6 +370,39 @@ This does not yet explain why the P witness is P, but it gives a sharper next mi
 whether a bounded-density/full-row-column reservoir condition is enough to guarantee a local
 pairing or matching response.
 
+Full q=23 bucket sweep with the expanded zone fields:
+
+```text
+bucket representatives: 22
+first moves tested: 5734
+selected P witnesses: 5734
+candidate tries: 6437 = 5734 P + 703 N
+tries before hit: 1:5146, 2:490, 3:81, 4:17
+
+selected P witnesses:
+  zone_rows = zone_cols = 17 always
+  zone_comp = zone_other = 1 always
+  zone_nk_known = 0 always
+  zone_v range: 100..120, avg 111.06
+  zone_density_milli range: 412..429, avg 421.17
+  zone_degmin range: 30..44
+  zone_degmax range: 47..61
+  zone_odd: 3025 even-size zones, 2709 odd-size zones
+```
+
+So the robust all-bucket fact is the reservoir support, not the root-only density cutoff.  The root
+sample had no selected P witness above density 424, but other buckets do.  The all-bucket ML/tree
+summaries put most coarse zone signal in `zone_e`, `zone_degavg_milli`, `zone_density_milli`, and
+the zone size fields, with only modest predictive power.  The proof-relevant takeaway remains:
+
+```text
+after zero-xor steering, the off-conic zone is one large dense component
+that still projects onto every unused row and every unused column.
+```
+
+This is a better theorem target than direct full-zone Grundy computation or a fixed density
+threshold.
+
 ## Next Checks
 
 1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,

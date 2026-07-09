@@ -431,11 +431,12 @@ Recently reported:
   this off-conic legal-zone conflict graph is already one dense component (`zone_v = 100..117`,
   `zone_nk_known = 0`), so the next attack should look for geometric compression or pairing
   certificates rather than direct full-zone Grundy computation.  The expanded probe shows
-  `zone_rows = zone_cols = 17` throughout the q=23 root selected witnesses, i.e. the off-conic zone
-  still hits every unused row and column after the six selected cells.  In the root `try10` sample,
-  selected P witnesses also avoid the over-dense zone cases (`zone_density_milli` tops out at 424,
-  while the only 425/426 rows are pre-hit N candidates).  This makes a reservoir/Hall-style lemma a
-  plausible next target.
+  `zone_rows = zone_cols = 17` throughout all q=23 selected witnesses, i.e. the off-conic zone still
+  hits every unused row and column after the six selected cells.  Full-bucket expanded sweep:
+  5,734 selected P witnesses, all within four zero-xor candidates, with `zone_v = 100..120`,
+  `zone_comp = zone_other = 1`, and `zone_nk_known = 0`.  The root-only density cutoff did not
+  generalize, so the plausible next theorem is a reservoir/Hall-style or pairing lemma, not a
+  direct full-zone Grundy computation or simple density threshold.
 
 Good Lean side targets:
 
@@ -450,6 +451,13 @@ The game is Nofil / impartial hypergraph avoidance in the sense of Huggan--Hunte
 the geometry gives a Steiner triple system (`AG(n,3)`, `PG(n,2)`).  For `q > 2`, projective lines
 have more than three points, so our projective game is Nofil on the **collinearity-triple
 hypergraph**, not on the projective line design.
+
+A useful broader superclass for importing ideas from non-attacking queens is **line-capacity
+avoidance**: points plus distinguished line families plus capacities `|S ∩ L| <= c(L)`.  Queens is
+the capacity-1, four-direction affine-grid case; affine/projective cap is the capacity-2,
+all-line finite-geometry case.  This justifies transferring reservoir, symmetry, and conflict-graph
+heuristics while keeping the key distinction clear: queens is pairwise graph independence, while
+cap/Nofil is triple-avoidance whose legal moves depend on pairs already selected.
 
 Novelty guard:
 
