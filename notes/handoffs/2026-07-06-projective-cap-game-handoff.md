@@ -40,8 +40,9 @@ uniform odd-plane mechanism at the size-4 escape layer.
 
 C29 also killed the clean residue-class explanation for mixed on-conic columns: `q = 23` is
 all-P at the bucket layer even though `23 == 2 mod 3`.  Treat arithmetic/order features as
-diagnostics, not as the main classifier.  The next uniform-proof pressure point is C31's recursive
-zone-steering ceiling.
+diagnostics, not as the main classifier.  C31 and its follow-up point to a sharper uniform-proof
+pressure point: one-pair descent from large raw intruder zones back to the small `Z <= 2`
+steering family.
 
 ## Status Table — PG(2,q)
 
@@ -255,6 +256,9 @@ Current structural picture:
 - C31 supports the recursive steering route: among C20 P reply-states, the raw off-conic zone
   reaches 10 at q=13 and 38 at q=17, but the optimal recursive steering ceiling is only 2 at q=13
   and 9 at q=17.
+- The C31 follow-up sharpens this further.  For every tested C20 P reply-state and every legal
+  opponent move, a score-optimal winning reply lands in a grandchild with `Z <= 2`.  At q=17 the
+  remaining cost is immediate zone, at most 9, rather than persistent recursive complexity.
 
 Useful references:
 
@@ -272,11 +276,11 @@ or second-intrusion repair
 or zone steering to a small-zone endgame
 ```
 
-Current proof target after C31:
+Current proof target after C31 and the one-pair descent check:
 
 ```text
-bounded-zone steering lemma
-+ bounded-zone terminal/endgame law
+small-zone base law for Z <= 2
++ one-pair descent / repair lemma from the C20 P reply-state regime
 => on-conic escape theorem
 ```
 
@@ -345,20 +349,22 @@ task list.  Current high-value items:
 
 - **C30:** route-C certificate books for q=17 and q=19.
 - **C32:** even-dimensional composite mirror / PG(4,3) and plane variant probe.
-- **Steering follow-up:** turn C31's `Z <= 9` evidence into a bounded-zone lemma/terminal
-  certificate schema.
+- **Steering follow-up:** mine the one-pair descent replies from the C31 follow-up into a geometric
+  repair lemma and a small-zone `Z <= 2` base-law/certificate schema.
 
 Recently reported:
 
 - **C29:** mixed-column mod-3 law refuted; q=23 has 22/22 on-conic buckets P.
 - **C31:** recursive zone-steering census supports the route; max steering ceiling is 2 at q=13
   and 9 at q=17.
+- **C31 follow-up:** every tested q=13/q=17 C20 P reply-state can answer each opponent move with a
+  winning reply whose grandchild has `Z <= 2`; q=17 high ceilings are immediate-zone costs.
 
 Good Lean side targets:
 
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
-- formal bounded-zone / second-intrusion lemmas using C31's steering-ceiling data.
+- formal one-pair descent / second-intrusion lemmas using the C31 steering data.
 
 ## Literature / Framing
 

@@ -827,6 +827,12 @@ to 10 and 38 respectively.  Independent outcome+Z recursion spot-checked 10 stat
 alive; the next math target is to state/prove the bounded-zone family rather than hunt another
 static feature law.
 
+Follow-up 2026-07-09: `notes/2026-07-09-codex-zone-descent-target.md` sharpens this.  For every
+tested C20 P reply-state at q=13/q=17 and every legal opponent move, a score-optimal winning reply
+lands in a grandchild with `Z <= 2`.  At q=17 the `max Z = 9` ceiling is an immediate-zone cost, not
+persistent recursion.  The proof target should be a one-pair descent/repair lemma plus a small-zone
+`Z <= 2` base law.
+
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
 **READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**
