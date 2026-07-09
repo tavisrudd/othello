@@ -62,10 +62,11 @@ the most plausible one lives. Four additions:
 
 **Amendment (Fable, 2026-07-09 third pass — publishable-constraint additions):**
 
-- **C45** — defect-skeleton realizability theorem and **C46** — t-ply depletion inequality
-  ladder: both join **Tier C** (proof/writing track, independent of the compute lanes, provable
-  with in-hand machinery; they strengthen D3 and publish constraints on the conjecture
-  independent of its resolution).
+- **C45** — game-valued defect-skeleton refinement and **C46** — t-ply depletion inequality
+  ladder: both join **Tier C** (proof/writing track, independent of the compute lanes). 2026-07-09
+  literature correction: the raw two-involution/conic-arc spectrum overlaps Coolsaet-Sticker, so
+  C45 is publishable only as a Grundy/dynamic-reply refinement; C46 should use those finite-geometry
+  excess bounds as a possible finite endgame component.
 - **C47** — minimal-counterexample constraint package: **Tier D**, gated on C42's report (its
   dichotomy row consumes the census lemma).
 
@@ -1497,40 +1498,55 @@ informative new number for the (ON) route, independent of the Baer watch.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
 
-## C45. Defect-skeleton realizability theorem — classify the conic endgame spectra
+## C45. Game-valued defect-skeleton refinement — beyond classical conic-arc spectra
 
 **READ FIRST:** [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
 (the Lemma-VI spectrum machinery, NK1–NK3), the C29 order dichotomy
 ([`2026-07-08-codex-mod3-column-law.md`](2026-07-08-codex-mod3-column-law.md) §mechanism), and the
 E1 preamble [`2026-07-09-E1-capacity-degradation-preamble.md`](2026-07-09-E1-capacity-degradation-preamble.md).
+Also read Coolsaet-Sticker, *Arcs with Large Conical Subsets*
+([EJC 17 (2010), #R112](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v17i1r112/pdf/)),
+especially the orbital-index graph `Γ(C,U)`, excess-two classifications, and type-I excess bound;
+for `k ≥ 3`, read Tranchida, *Triples of involutions in PGL(2,q) and their incidence geometries*
+([arXiv:2411.10299](https://arxiv.org/abs/2411.10299)).
 
 Context: D3 states the *reduction* — conic-restricted play after intrusions is Node-Kayles on a
-union of Möbius involution matchings — but nothing in the plan proves **which matching-unions are
-geometrically realizable**. That classification is pure group theory: for two involutions
-`σ, σ' ∈ PGL(2,q)`, the product is a rotation whose order divides `q−1` (split) or `q+1`
-(elliptic), the pair generates a dihedral subgroup, and the union graph's components are forced —
-cycles of length `2·ord(σσ')` on regular orbits, defect paths ending at fixed points (tangency
-data). Several mined facts (even cycles Grundy-0 and the bulk cancellation; the `3 | q±1`
-split-vs-elliptic law; tangency-ended path defects) become *corollaries* of one clean theorem.
-This is a standalone publishable unit — "the endgame spectrum of the odd-plane cap game" — and
-strengthens D3 rather than competing with it.
+union of Möbius involution matchings. The raw finite-geometry classification of those matching
+unions is **not new enough to carry C45 as originally written**: Coolsaet-Sticker already identify
+off-conic points with trace-zero involutions in `PGL(2,q)`, introduce the same conic graph on
+orbital indices, analyze unions of two supplementary-point/involution matchings through cyclic
+normal forms, and classify several large-conical-subset small-excess arcs. A publishable C45 must
+therefore be the game layer that is absent from that literature: Grundy consequences of the
+spectra, dynamic legality/reply closure, and compatibility constraints between successive
+involution graphs produced by an actual play history.
 
-1. **The k=2 theorem, prose + proof:** exact classification of realizable component spectra
-   (path/cycle/isolate multisets) for unions of two intruder-induced involution matchings on
-   `P¹(F_q)`, via the dihedral analysis. State the realizability *constraints* explicitly (cycle
-   lengths, path-end tangency conditions, count bounds vs `q±1` divisor classes). Include the
-   geometric side condition: which involutions actually arise from legal off-conic intruders
-   (tangent/secant structure), not just abstract PGL involutions — if the geometric family is a
-   proper subset, characterize it or report the gap.
-2. **k ≥ 3 partial:** counting inequalities on the joint spectrum (no full classification
-   expected — say what is open).
-3. **Machine gate:** every defect spectrum observed in the C20/C31 data
+1. **Literature extraction first:** write the precise overlap table: Coolsaet-Sticker result /
+   notation / what our `nk-involution-residual` note had rediscovered / what remains game-specific.
+   Do not claim the two-involution spectrum classification as new unless the report isolates a
+   genuinely different game-valued statement.
+2. **k=2 game theorem:** use the classical cyclic normal form as input, then prove the Node-Kayles
+   layer: even-cycle Grundy-0 cancellation, Dawson-path defect values, split/elliptic order effects
+   on the *nimber*, and which spectra can be dropped from a live game state without changing the
+   residual Grundy value. This is the main novelty target.
+3. **Dynamic reply closure:** characterize when a legal reply intruder preserves, refines, or
+   destroys the previous involution-graph decomposition. The object is an ordered game history, not
+   an arbitrary supplementary set `U`: record the compatibility conditions between successive
+   `Γ(C,U_t)` graphs and the live conic subset after each move.
+4. **k ≥ 3 partial with prior art:** use Tranchida's triples-of-involutions geometry as the
+   required reference point for three-intruder skeletons (strongly non-self-polar triangles,
+   tangent-triangle cases, generated subgroup constraints). Counting inequalities are fine, but
+   label them as game-history constraints and explicitly separate them from known incidence-geometry
+   classification.
+5. **Machine gate:** every defect spectrum observed in the C20/C31 data
    (`notes/data/c20-*-states.jsonl.gz`) must satisfy the k=2 constraints where applicable; any
-   violation means an error in the theorem or the miner — report verbatim and stop.
-4. **Corollary section:** even-cycle Grundy-0 cancellation as theorem; the split/elliptic order
-   dichotomy; the Dawson-path defect vocabulary formally grounded.
-5. Optional: Lean statement scaffold for the k=2 classification (statement-level; the dihedral
-   machinery may exist in Mathlib).
+   violation means an error in the theorem, the prior-art translation, or the miner — report
+   verbatim and stop. Add a second gate for dynamic closure: sampled winning replies must satisfy
+   the stated transition constraints.
+6. **Publishability verdict:** the report must end with "prior-art overlap / new game-valued
+   content / remaining risk." If the only completed result is the classical spectrum classification,
+   mark C45 as not independently publishable.
+7. Optional: Lean statement scaffold for the game-valued k=2 consequences (not the classical
+   dihedral classification alone).
 
 Budget: proof/writing task; machine part is validation against existing data only, 2h.
 Report file: `notes/2026-07-09-codex-defect-spectrum-theorem.md`.
@@ -1548,22 +1564,33 @@ row/column + secant incidence counting to depth `t`: an explicit `c(t)` with
 `live_on ≥ q − c(t)` after any `t` further plies. Each `t` is an inequality delimiting where a
 counterexample can live; the inverse function `T(q)` — the minimum number of plies any trap needs
 to empty the conic — is a publishable constraint on the conjecture independent of its resolution.
+New literature input: Coolsaet-Sticker's cyclic normal form and large-conical-subset excess bounds
+may supply the finite endgame component of Good. Once the played/on-conic occupancy is in their
+large-conical-subset range, the off-conic skeleton is no longer arbitrary; in type-I large arcs,
+for example, excess is bounded by 4 and the excess-4 case has a sharp congruence/form.
 
 1. **The ladder, with proof:** define the play window precisely (root layer, whose moves count as
    plies, on- vs off-conic move effects on live cells), derive the recurrence for `c(t)` (each new
    cell kills at most a bounded number of live conic cells via its secants/tangents through played
    structure — count it exactly), and give the closed form or sharp recurrence. Semi-formal proof
    note at Lean-statement granularity; flag any step that is play-order-dependent.
-2. **Sharpness:** mine the exact q=17/19/23 dumps for positions at or near the bound per `t`
+2. **Finite-endgame branch from conical-arc theory:** translate Coolsaet-Sticker's thresholds
+   (`(q+1)/2`, `(q+3)/2` conic points, internal/external/mixed supplementary points, excess) into
+   the cap-game state variables. State exactly when their excess bounds apply to a played-position
+   arc, and enumerate the bounded off-conic skeletons left in that regime. If the game state falls
+   outside their hypotheses, say where and keep the ladder as the fallback.
+3. **Sharpness:** mine the exact q=17/19/23 dumps for positions at or near the bound per `t`
    (existing data; no new campaigns). Report the gap between the bound and the observed worst
    case — a large gap means the counting is loose and says where.
-3. **The corollary table:** per q ∈ {11..31}, the minimal `t` at which conic-emptying is not
+4. **The corollary table:** per q ∈ {11..31}, the minimal `t` at which conic-emptying is not
    excluded (`T(q)`), presented as the constraint "a counterexample at q must sustain a live conic
    for ≥ T(q) plies." Feed the falsification map §3 regime table (two-ply row becomes the `t=2`
    instance).
-4. **Consistency gates:** `c(2)` must reproduce the two-ply lemma's constants exactly; the q=17
+5. **Consistency gates:** `c(2)` must reproduce the two-ply lemma's constants exactly; the q=17
    empty-conic witnesses (score-9 repairs) must sit consistently with the ladder (they empty the
-   conic at a ply depth the ladder permits).
+   conic at a ply depth the ladder permits). The finite-endgame branch must also match every
+   sampled high-conic-occupancy state in the q=17/19/23 data: any unbounded-looking off-conic
+   skeleton in the claimed range is a translation error or a counterexample to the branch.
 
 Budget: proof task + 2h mining validation, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-depletion-ladder.md`.
