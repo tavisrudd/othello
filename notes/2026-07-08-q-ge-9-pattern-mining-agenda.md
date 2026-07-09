@@ -45,10 +45,12 @@ Done:
   those are exemplars, not a systematic distribution.
 - The S4 query shell reports `STATE ply=...`, legal count, child values, and replies for selected
   states.
+- `s4mine` now emits non-interactive root-child rows, optional root-reply rows, and deduplicated
+  ply summaries from a raw or compact S4 dump.
 
 Not done:
 
-- no systematic distribution by ply from an S4 root;
+- no cross-q run of the new `s4mine` ply summaries;
 - no cross-q table of value/feature transitions at each even P-reply ply;
 - no census of terminal distance, legal-count decay, live-conic count, or guard availability by
   ply;
@@ -201,15 +203,22 @@ Do not lead with these unless a new table gives a reason:
 
 ## Concrete Tooling Follow-Up
 
-The existing S4 dump/query tooling is enough for interactive checks.  For pattern mining, add a
-non-interactive S4 batch mode that reads a root and emits CSV/JSONL rows for:
+The existing S4 dump/query tooling is enough for interactive checks.  `s4mine` now provides a
+first non-interactive batch mode over one root and emits tagged text rows for:
 
 ```text
-state rows by ply
 root-child rows
-reply rows for selected moves
-best-repair rows if the full value is known
+reply rows for selected root moves
+state rows by ply, optionally expanded with --state-rows
+deduplicated ply summaries
 ```
+
+Remaining feature extensions:
+
+- live-conic counts;
+- defect spectrum / defxor / zone Grundy rows;
+- best-repair rows if the full value is known;
+- CSV/JSONL output once the tagged text fields settle.
 
 Implementation constraints:
 
@@ -218,4 +227,3 @@ Implementation constraints:
 - keep raw dumps as the exact source of truth for certificate-adjacent claims;
 - use compact archives only for exploratory scanning, then confirm surprises against raw or direct
   solve.
-

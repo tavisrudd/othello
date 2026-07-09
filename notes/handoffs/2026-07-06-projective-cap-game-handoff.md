@@ -360,9 +360,10 @@ Important modes:
 - `resym`: symmetric-family closure test; route closed but mode is useful for regression.
 - `boundary`: old odd-maximal-cap embedding test; route closed from q=11.
 - `par`, `outcome`, `defect`: broader exact solver modes.
-- `s4dump`, `s4freeze`, `s4query`: exact raw mmap memo dumps, compact BuRR-style archives, and
-  runtime line-protocol queries for S4-rooted pattern mining.  See the manual above before using
-  compact archives for anything beyond exploratory mining.
+- `s4dump`, `s4freeze`, `s4query`, `s4mine`: exact raw mmap memo dumps, compact BuRR-style
+  archives, runtime line-protocol queries, and non-interactive root-child/reply/ply-summary rows
+  for S4-rooted pattern mining.  See the manual above before using compact archives for anything
+  beyond exploratory mining.
 
 Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
@@ -399,6 +400,9 @@ Recently reported:
   [`../2026-07-08-q-ge-9-pattern-mining-agenda.md`](../2026-07-08-q-ge-9-pattern-mining-agenda.md).
   It identifies q=17 score-9 guards, q=13/17/19 one-pair descent, q=23 bucket-level mining, q=25
   partial-dump mining, and systematic ply-depth rows as the next useful structure checks.
+- **S4 ply-depth tooling:** `s4mine` now supplies the first non-interactive ply-summary layer over
+  raw/BuRR S4 dumps.  It reports unknowns explicitly, so capped q=25 runs remain usable for
+  geometry/branching without pretending to know child values.
 
 Good Lean side targets:
 

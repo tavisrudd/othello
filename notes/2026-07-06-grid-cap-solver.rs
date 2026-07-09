@@ -54,6 +54,11 @@
 //   s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
 //                -- line-protocol runtime query shell over a dumped S4 memo/archive. Commands:
 //                   state, moves, play r,c, pop, replies r,c, bench <iters>, help, quit.
+//   s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
+//          [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
+//          [--max-reply-moves <n>] [--max-states <n>]
+//                -- non-interactive S4 pattern-mining rows: root child census, optional root
+//                   reply rows, and deduped ply summaries through the requested depth.
 //   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
@@ -2573,6 +2578,380 @@ fn geometry_label_for_root(b: &Board, t4: &[usize], z: usize) -> &'static str {
     }
 }
 
+fn value_label(v: Option<bool>) -> &'static str {
+    v.map_or("unknown", |is_n| if is_n { "N" } else { "P" })
+}
+
+#[derive(Clone, Copy)]
+enum S4MineReplyFilter {
+    None,
+    All,
+    P,
+    N,
+    Unknown,
+}
+
+impl S4MineReplyFilter {
+    fn parse(s: &str) -> S4MineReplyFilter {
+        match s {
+            "none" => S4MineReplyFilter::None,
+            "all" => S4MineReplyFilter::All,
+            "p" | "P" => S4MineReplyFilter::P,
+            "n" | "N" => S4MineReplyFilter::N,
+            "unknown" | "unk" => S4MineReplyFilter::Unknown,
+            _ => panic!("--replies must be one of none, all, p, n, unknown"),
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            S4MineReplyFilter::None => "none",
+            S4MineReplyFilter::All => "all",
+            S4MineReplyFilter::P => "p",
+            S4MineReplyFilter::N => "n",
+            S4MineReplyFilter::Unknown => "unknown",
+        }
+    }
+
+    fn matches(self, v: Option<bool>) -> bool {
+        match self {
+            S4MineReplyFilter::None => false,
+            S4MineReplyFilter::All => true,
+            S4MineReplyFilter::P => v == Some(false),
+            S4MineReplyFilter::N => v == Some(true),
+            S4MineReplyFilter::Unknown => v.is_none(),
+        }
+    }
+}
+
+#[derive(Default, Clone)]
+struct S4MineCounts {
+    root: usize,
+    on: usize,
+    ext: usize,
+    int_: usize,
+    off: usize,
+    anom: usize,
+}
+
+impl S4MineCounts {
+    fn add_geom(&mut self, geom: &str) {
+        match geom {
+            "root" => self.root += 1,
+            "on" => self.on += 1,
+            "ext" => self.ext += 1,
+            "int" => self.int_ += 1,
+            "off" => self.off += 1,
+            _ => self.anom += 1,
+        }
+    }
+
+    fn fmt(&self, prefix: &str) -> String {
+        format!(
+            "{}root={} {}on={} {}ext={} {}int={} {}off={} {}anom={}",
+            prefix, self.root, prefix, self.on, prefix, self.ext, prefix, self.int_, prefix, self.off, prefix, self.anom
+        )
+    }
+}
+
+#[derive(Default, Clone)]
+struct S4MineValues {
+    p: usize,
+    n: usize,
+    unknown: usize,
+}
+
+impl S4MineValues {
+    fn add_value(&mut self, v: Option<bool>) {
+        match v {
+            Some(false) => self.p += 1,
+            Some(true) => self.n += 1,
+            None => self.unknown += 1,
+        }
+    }
+
+    fn fmt(&self, prefix: &str) -> String {
+        format!("{}P={} {}N={} {}unknown={}", prefix, self.p, prefix, self.n, prefix, self.unknown)
+    }
+}
+
+struct S4MineChild {
+    z: u16,
+    occ: Vec<u16>,
+    chosen: Mask,
+    forbidden: Mask,
+    key: u128,
+    value: Option<bool>,
+    geom: &'static str,
+}
+
+fn collect_s4_children(
+    b: &Board,
+    t4: &[usize],
+    store: &QueryStore,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Vec<S4MineChild> {
+    let moves = avail_cells(b, chosen, forbidden);
+    let mut out = Vec::with_capacity(moves.len());
+    for z in moves {
+        let (child_occ, child_chosen, child_forbidden) =
+            push_cell_state(b, occ, chosen, forbidden, z as usize).unwrap();
+        let key = b.canon(&child_occ);
+        let value = store.get(key);
+        let geom = geometry_label_for_root(b, t4, z as usize);
+        out.push(S4MineChild {
+            z,
+            occ: child_occ,
+            chosen: child_chosen,
+            forbidden: child_forbidden,
+            key,
+            value,
+            geom,
+        });
+    }
+    out
+}
+
+#[derive(Default)]
+struct S4PlyStats {
+    states: usize,
+    values: S4MineValues,
+    terminals: usize,
+    legal_sum: usize,
+    legal_min: usize,
+    legal_max: usize,
+    legal_geom: S4MineCounts,
+    child_values: S4MineValues,
+}
+
+impl S4PlyStats {
+    fn add_state(
+        &mut self,
+        b: &Board,
+        t4: &[usize],
+        store: &QueryStore,
+        occ: &[u16],
+        chosen: &Mask,
+        forbidden: &Mask,
+    ) -> (Vec<S4MineChild>, S4MineCounts, S4MineValues) {
+        let val = query_value(store, b, occ);
+        self.values.add_value(val);
+        let children = collect_s4_children(b, t4, store, occ, chosen, forbidden);
+        if children.is_empty() {
+            self.terminals += 1;
+        }
+        if self.states == 0 || children.len() < self.legal_min {
+            self.legal_min = children.len();
+        }
+        if children.len() > self.legal_max {
+            self.legal_max = children.len();
+        }
+        self.states += 1;
+        self.legal_sum += children.len();
+        let mut geom = S4MineCounts::default();
+        let mut child_values = S4MineValues::default();
+        for child in &children {
+            geom.add_geom(child.geom);
+            self.legal_geom.add_geom(child.geom);
+            child_values.add_value(child.value);
+            self.child_values.add_value(child.value);
+        }
+        (children, geom, child_values)
+    }
+}
+
+fn print_s4_ply_stats(ply: usize, stats: &S4PlyStats) {
+    let avg = if stats.states == 0 {
+        0.0
+    } else {
+        stats.legal_sum as f64 / stats.states as f64
+    };
+    println!(
+        "PLY ply={} states={} {} terminals={} legal_min={} legal_max={} legal_avg={:.3} {} {}",
+        ply,
+        stats.states,
+        stats.values.fmt("value_"),
+        stats.terminals,
+        stats.legal_min,
+        stats.legal_max,
+        avg,
+        stats.legal_geom.fmt("legal_"),
+        stats.child_values.fmt("child_")
+    );
+}
+
+fn print_s4_root_moves_and_replies(
+    b: &Board,
+    t4: &[usize],
+    store: &QueryStore,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+    reply_filter: S4MineReplyFilter,
+    max_reply_moves: usize,
+) {
+    let children = collect_s4_children(b, t4, store, occ, chosen, forbidden);
+    let mut known = 0usize;
+    let mut root_geom = S4MineCounts::default();
+    let mut root_values = S4MineValues::default();
+    let mut reply_move_count = 0usize;
+    for child in &children {
+        if child.value.is_some() {
+            known += 1;
+        }
+        root_geom.add_geom(child.geom);
+        root_values.add_value(child.value);
+        let replies = collect_s4_children(b, t4, store, &child.occ, &child.chosen, &child.forbidden);
+        println!(
+            "ROOTMOVE r={} c={} geom={} value={} replies={}",
+            child.z as usize / b.q,
+            child.z as usize % b.q,
+            child.geom,
+            value_label(child.value),
+            replies.len()
+        );
+        if reply_filter.matches(child.value) && reply_move_count < max_reply_moves {
+            reply_move_count += 1;
+            let mut reply_values = S4MineValues::default();
+            let mut reply_geom = S4MineCounts::default();
+            for reply in &replies {
+                reply_geom.add_geom(reply.geom);
+                reply_values.add_value(reply.value);
+                println!(
+                    "REPLY x={},{} xgeom={} xvalue={} y={},{} ygeom={} value={}",
+                    child.z as usize / b.q,
+                    child.z as usize % b.q,
+                    child.geom,
+                    value_label(child.value),
+                    reply.z as usize / b.q,
+                    reply.z as usize % b.q,
+                    reply.geom,
+                    value_label(reply.value)
+                );
+            }
+            println!(
+                "REPLYSUM x={},{} replies={} {} {}",
+                child.z as usize / b.q,
+                child.z as usize % b.q,
+                replies.len(),
+                reply_geom.fmt("reply_"),
+                reply_values.fmt("reply_child_")
+            );
+        }
+    }
+    println!(
+        "ROOTSUMMARY moves={} known={} {} {} reply-filter={} reply-moves-emitted={}",
+        children.len(),
+        known,
+        root_geom.fmt("move_"),
+        root_values.fmt("child_"),
+        reply_filter.label(),
+        reply_move_count
+    );
+}
+
+fn solve_s4_mine(
+    q: usize,
+    t4: &[usize],
+    store: QueryStore,
+    depth: usize,
+    state_rows: bool,
+    reply_filter: S4MineReplyFilter,
+    max_reply_moves: usize,
+    max_states: usize,
+) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    if !store_matches_root(&store, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4mine: dump root mismatch; requested q={} t4={:?}, store={}",
+            q,
+            t4,
+            store.describe()
+        );
+        std::process::exit(2);
+    }
+    println!(
+        "S4MINE q={} t4={:?} cells={:?} store={} depth={} state-rows={} max-states={} reply-filter={} max-reply-moves={}",
+        q,
+        t4,
+        cells,
+        store.describe(),
+        depth,
+        state_rows,
+        max_states,
+        reply_filter.label(),
+        if max_reply_moves == usize::MAX { "none".to_string() } else { max_reply_moves.to_string() }
+    );
+    print_s4_root_moves_and_replies(
+        &b,
+        t4,
+        &store,
+        &root_occ,
+        &root_chosen,
+        &root_forbidden,
+        reply_filter,
+        max_reply_moves,
+    );
+
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = vec![(root_occ, root_chosen, root_forbidden)];
+    let mut seen: HashSet<u128> = HashSet::new();
+    seen.insert(root_key);
+    let mut truncated = false;
+    for rel_depth in 0..=depth {
+        let mut stats = S4PlyStats::default();
+        let mut next: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+        for (occ, chosen, forbidden) in frontier.iter() {
+            let key = b.canon(occ);
+            let val = query_value(&store, &b, occ);
+            let (children, geom, child_values) = stats.add_state(&b, t4, &store, occ, chosen, forbidden);
+            if state_rows {
+                println!(
+                    "STATE ply={} key={:032x} cells={} legal={} value={} {} {}",
+                    occ.len(),
+                    key,
+                    fmt_cell_indices(&b, occ),
+                    children.len(),
+                    value_label(val),
+                    geom.fmt("legal_"),
+                    child_values.fmt("child_")
+                );
+            }
+            if rel_depth < depth && !truncated {
+                for child in children {
+                    if seen.insert(child.key) {
+                        if seen.len() > max_states {
+                            truncated = true;
+                            println!(
+                                "TRUNCATED at-ply={} seen={} max-states={}",
+                                child.occ.len(),
+                                seen.len(),
+                                max_states
+                            );
+                            break;
+                        }
+                        next.push((child.occ, child.chosen, child.forbidden));
+                    }
+                }
+            }
+            if truncated {
+                break;
+            }
+        }
+        print_s4_ply_stats(frontier.first().map_or(4 + rel_depth, |st| st.0.len()), &stats);
+        if rel_depth == depth || truncated {
+            break;
+        }
+        frontier = next;
+    }
+    println!("S4MINE-DONE seen-states={} truncated={}", seen.len(), truncated);
+}
+
 fn solve_s4_query(q: usize, t4: &[usize], store: QueryStore) {
     let b = Board::new(q);
     let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
@@ -5059,6 +5438,87 @@ fn main() {
             .get(1)
             .expect("s4freeze mode needs burr-file: s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <x>]");
         solve_s4_freeze(raw, burr, fp_bits, load);
+        return;
+    }
+    if args[1] == "s4mine" {
+        // s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
+        //        [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
+        //        [--max-reply-moves <n>] [--max-states <n>]
+        let mut raw_path: Option<String> = None;
+        let mut burr_path: Option<String> = None;
+        let mut depth = 2usize;
+        let mut state_rows = false;
+        let mut reply_filter = S4MineReplyFilter::None;
+        let mut max_reply_moves = usize::MAX;
+        let mut max_states = 100_000usize;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--raw" {
+                raw_path = Some(it.next().expect("--raw needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--raw=") {
+                raw_path = Some(rest.to_string());
+            } else if a == "--burr" {
+                burr_path = Some(it.next().expect("--burr needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--burr=") {
+                burr_path = Some(rest.to_string());
+            } else if a == "--depth" {
+                depth = it.next().expect("--depth needs a value").parse().expect("--depth int");
+            } else if let Some(rest) = a.strip_prefix("--depth=") {
+                depth = rest.parse().expect("--depth int");
+            } else if a == "--state-rows" {
+                state_rows = true;
+            } else if a == "--replies" {
+                reply_filter = S4MineReplyFilter::parse(it.next().expect("--replies needs a value"));
+            } else if let Some(rest) = a.strip_prefix("--replies=") {
+                reply_filter = S4MineReplyFilter::parse(rest);
+            } else if a == "--max-reply-moves" {
+                max_reply_moves = it
+                    .next()
+                    .expect("--max-reply-moves needs a value")
+                    .parse()
+                    .expect("--max-reply-moves int");
+            } else if let Some(rest) = a.strip_prefix("--max-reply-moves=") {
+                max_reply_moves = rest.parse().expect("--max-reply-moves int");
+            } else if a == "--max-states" {
+                max_states = it.next().expect("--max-states needs a value").parse().expect("--max-states int");
+            } else if let Some(rest) = a.strip_prefix("--max-states=") {
+                max_states = rest.parse().expect("--max-states int");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4mine mode needs q: s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4mine mode needs t values: s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)"),
+        );
+        let store = match (raw_path, burr_path) {
+            (Some(path), None) => match RawMemoMmap::open(&path) {
+                Ok(raw) => QueryStore::Raw(raw),
+                Err(e) => {
+                    eprintln!("s4mine: failed to open raw memo {}: {}", path, e);
+                    std::process::exit(2);
+                }
+            },
+            (None, Some(path)) => match MappedBurrArchive::open(&path) {
+                Ok(burr) => QueryStore::Burr(burr),
+                Err(e) => {
+                    eprintln!("s4mine: failed to open burr archive {}: {}", path, e);
+                    std::process::exit(2);
+                }
+            },
+            _ => {
+                eprintln!("s4mine needs exactly one of --raw or --burr");
+                std::process::exit(2);
+            }
+        };
+        solve_s4_mine(q, &t4, store, depth, state_rows, reply_filter, max_reply_moves, max_states);
         return;
     }
     if args[1] == "s4query" {

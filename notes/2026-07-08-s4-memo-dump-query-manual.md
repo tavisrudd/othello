@@ -1,6 +1,6 @@
 # S4 Memo Dump / Query Manual
 
-This manual covers the Rust `s4dump`, `s4freeze`, and `s4query` modes in
+This manual covers the Rust `s4dump`, `s4freeze`, `s4query`, and `s4mine` modes in
 [`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These modes are for targeted
 pattern mining around normalized on-conic S4 roots in the residual `PG(2,q)` grid game.
 
@@ -208,23 +208,64 @@ anom  unexpected tangent count
 `value=unknown` means the queried canonical key is not in the dump/archive.  This is expected for
 partial capped q=25 dumps.
 
+### `s4mine`
+
+```bash
+/tmp/gridcap-s4 s4mine <q> <t1,t2,t3,t4> --raw <raw-file> \
+  [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>] \
+  [--max-reply-moves <n>] [--max-states <n>]
+
+/tmp/gridcap-s4 s4mine <q> <t1,t2,t3,t4> --burr <burr-file> ...
+```
+
+`s4mine` is the non-interactive batch layer.  It emits:
+
+- `ROOTMOVE` rows for every legal root child, with geometry, known value, and reply count;
+- `ROOTSUMMARY` aggregate counts by geometry and known value;
+- `PLY` rows for deduplicated reachable states through `--depth`, grouped by absolute ply;
+- optional `STATE` rows for each deduplicated state with `--state-rows`;
+- optional `REPLY` / `REPLYSUM` rows for root moves selected by `--replies`.
+
+Default settings:
+
+```text
+--depth 2
+--replies none
+--max-states 100000
+```
+
+Useful examples:
+
+```bash
+/tmp/gridcap-s4 s4mine 17 1,2,3,4 --raw /tmp/s4-q17.raw --depth 2
+```
+
+```bash
+/tmp/gridcap-s4 s4mine 17 1,2,3,4 --raw /tmp/s4-q17.raw \
+  --depth 1 --state-rows --replies n --max-reply-moves 1
+```
+
+The reply filter is applied to the value of the root child after the opponent's move.  For a
+P-valued S4 root, legal first moves should be N-valued children, so `--replies n` is usually the
+first root-reply sample to inspect.
+
 ## Pattern-Mining Recipes
 
 The current q>=9 mining priorities are summarized in
 [`2026-07-08-q-ge-9-pattern-mining-agenda.md`](2026-07-08-q-ge-9-pattern-mining-agenda.md).  In
-particular, we have not yet done a systematic ply-by-ply structural census; the query shell can
-inspect individual plies, but a batch row emitter is the next useful layer.
+particular, `s4mine` now gives a first systematic ply-by-ply structure pass over an S4 dump.  It
+does not yet compute live-conic counts, defect spectra, or best-repair scores; those remain feature
+extensions for the next miner layer.
 
 ### Root Child Census
 
 Use this to classify known first intrusions from a partial or complete root dump:
 
 ```bash
-printf 'moves\nquit\n' \
-  | /tmp/gridcap-s4 s4query 25 1,2,3,5 --raw /path/q25.raw
+/tmp/gridcap-s4 s4mine 25 1,2,3,5 --raw /path/q25.raw --depth 0
 ```
 
-Aggregate the `MOVE` rows by `geom` and `value`:
+Use the `ROOTMOVE` rows, or just the aggregate `ROOTSUMMARY` row:
 
 ```text
 geom  known P  known N  unknown
@@ -242,6 +283,13 @@ For each interesting intrusion `x`, run:
 ```bash
 printf 'replies 0,0\nquit\n' \
   | /tmp/gridcap-s4 s4query 25 1,2,3,5 --raw /path/q25.raw
+```
+
+For a batch root-level reply sample, use:
+
+```bash
+/tmp/gridcap-s4 s4mine 17 1,2,3,4 --raw /path/q17.raw \
+  --depth 1 --replies n --max-reply-moves 1
 ```
 
 Look for:
@@ -339,6 +387,34 @@ diff -u /tmp/s4-manual-q17.raw.value-rows /tmp/s4-manual-q17.burr.value-rows
 ```
 
 The diff should be empty.  In the validation run, both files had 164 deterministic value rows.
+
+Raw and compact mining agreement:
+
+```bash
+/tmp/gridcap-s4 s4mine 17 1,2,3,4 --raw /tmp/s4-manual-q17.raw \
+  --depth 2 --max-states 20000 > /tmp/s4-manual-q17.raw.mine
+
+/tmp/gridcap-s4 s4mine 17 1,2,3,4 --burr /tmp/s4-manual-q17.burr \
+  --depth 2 --max-states 20000 > /tmp/s4-manual-q17.burr.mine
+
+grep -E '^(ROOTMOVE|ROOTSUMMARY|PLY|TRUNCATED|S4MINE-DONE)' \
+  /tmp/s4-manual-q17.raw.mine > /tmp/s4-manual-q17.raw.mine.rows
+grep -E '^(ROOTMOVE|ROOTSUMMARY|PLY|TRUNCATED|S4MINE-DONE)' \
+  /tmp/s4-manual-q17.burr.mine > /tmp/s4-manual-q17.burr.mine.rows
+diff -u /tmp/s4-manual-q17.raw.mine.rows /tmp/s4-manual-q17.burr.mine.rows
+```
+
+The diff should be empty.  In the validation run, the q=17 summary rows included:
+
+```text
+ROOTSUMMARY moves=104 known=104 move_on=12 move_ext=56 move_int=36 child_P=0 child_N=104 child_unknown=0
+PLY ply=4 states=1 value_P=1 value_N=0 value_unknown=0 legal_avg=104.000 child_N=104 child_unknown=0
+PLY ply=5 states=104 value_N=104 legal_min=57 legal_max=65 legal_avg=60.423 child_P=180 child_N=2506 child_unknown=3598
+PLY ply=6 states=3109 value_P=90 value_N=1230 value_unknown=1789 legal_min=22 legal_max=37 legal_avg=29.585 child_unknown=66762
+```
+
+The unknowns at deeper plies are expected: an `OK` early-break S4 dump proves the root value, but it
+is not a full reachable-state database.
 
 Root mismatch guard:
 
@@ -441,6 +517,25 @@ compact mmap query: about 3.0M probes/s
 
 The raw table is faster for this workload; compact archives are mainly a disk-footprint lever.
 
+A small 100K-entry q=25 smoke dump of the hard `[1,2,3,5]` root validates the partial-coverage
+semantics:
+
+```bash
+/tmp/gridcap-s4 s4dump 25 1,2,3,5 --cap 100000 --out /tmp/s4mine-q25-100k.raw
+/tmp/gridcap-s4 s4mine 25 1,2,3,5 --raw /tmp/s4mine-q25-100k.raw --depth 1
+```
+
+Core output:
+
+```text
+S4DUMP ... status=ABORTED value=- records=100003
+ROOTSUMMARY moves=330 known=0 move_on=20 move_ext=172 move_int=138 child_unknown=330
+PLY ply=4 states=1 value_unknown=1 legal_avg=330.000 child_unknown=330
+PLY ply=5 states=330 value_unknown=330 legal_min=235 legal_max=245 legal_avg=240.539 child_unknown=79378
+```
+
+This is still useful geometry/branching data, but it gives no child values at that cap.
+
 ## Perf / Tiger-Style Notes
 
 The dump/query tools are cold infrastructure around the existing solver:
@@ -450,6 +545,8 @@ The dump/query tools are cold infrastructure around the existing solver:
 - mmap unsafe blocks are isolated in `MmapFile` and document their invariants;
 - query benchmark child positions are precomputed once before timing;
 - remaining query cost is mostly `Board::canon`.
+- `s4mine` deduplicates BFS states by canonical key and reports unknowns instead of treating missing
+  store entries as values.
 
 Sampled profiles:
 

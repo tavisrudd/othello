@@ -253,11 +253,13 @@ Manual: [`2026-07-08-s4-memo-dump-query-manual.md`](2026-07-08-s4-memo-dump-quer
 s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
 s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
 s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
+s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>) [--depth <plies>]
 ```
 
 `s4dump` writes an exact sorted mmap-friendly table of `(u128 canonical key, P/N value)` records.
 `s4freeze` converts that table into a compact BuRR-style ribbon archive using folded 64-bit keys
-plus membership fingerprints.  `s4query` is a line-protocol shell with:
+plus membership fingerprints.  `s4query` is a line-protocol shell; `s4mine` is the non-interactive
+root-child/reply/ply-summary emitter for batch pattern mining.  `s4query` has:
 
 ```text
 state
