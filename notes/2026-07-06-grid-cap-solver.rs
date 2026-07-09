@@ -2827,6 +2827,213 @@ fn s4_conic_graph_feature_string(
     )
 }
 
+fn s4_small_nk_grundy(adj: &[u64], state_cap: usize) -> Option<u8> {
+    fn rec(mask: u64, adj: &[u64], memo: &mut HashMap<u64, u8>, state_cap: usize) -> Option<u8> {
+        if mask == 0 {
+            return Some(0);
+        }
+        if let Some(&g) = memo.get(&mask) {
+            return Some(g);
+        }
+        if memo.len() >= state_cap {
+            return None;
+        }
+        let mut seen = 0u64;
+        let mut bits = mask;
+        while bits != 0 {
+            let bit = bits & bits.wrapping_neg();
+            let i = bit.trailing_zeros() as usize;
+            let child = mask & !(bit | adj[i]);
+            let g = rec(child, adj, memo, state_cap)?;
+            if g < 64 {
+                seen |= 1u64 << g;
+            }
+            bits ^= bit;
+        }
+        let mex = (!seen).trailing_zeros() as u8;
+        memo.insert(mask, mex);
+        Some(mex)
+    }
+
+    let n = adj.len();
+    if n > 24 {
+        return None;
+    }
+    let mut memo = HashMap::new();
+    rec((1u64 << n) - 1, adj, &mut memo, state_cap)
+}
+
+fn s4_zone_graph_feature_string(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> String {
+    let mut zone = Vec::new();
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            if !is_on_root_conic(b, z) {
+                zone.push(z);
+            }
+        }
+    }
+
+    let n = zone.len();
+    let mut adj = vec![Vec::<usize>::new(); n];
+    let mut edges = 0usize;
+    for i in 0..n {
+        let mut kill = b.rc_mask[zone[i]];
+        for &x16 in occ {
+            mask_or(&mut kill, &b.line_mask[x16 as usize * b.n + zone[i]]);
+        }
+        for j in (i + 1)..n {
+            if bit_is_set(&kill, zone[j]) {
+                adj[i].push(j);
+                adj[j].push(i);
+                edges += 1;
+            }
+        }
+    }
+
+    let mut seen = vec![false; n];
+    let mut stack = Vec::with_capacity(n);
+    let mut comp_sizes = Vec::new();
+    let mut path_sizes = Vec::new();
+    let mut cycle_sizes = Vec::new();
+    let mut other_sizes = Vec::new();
+    let mut iso = 0usize;
+    let mut paths = 0usize;
+    let mut cycles = 0usize;
+    let mut other = 0usize;
+    let mut odd = 0usize;
+    let mut max_comp = 0usize;
+    let mut degmax = 0usize;
+    let mut deg1 = 0usize;
+    let mut nk_known = true;
+    let mut nk_xor = 0u8;
+    let mut nk_path_xor = 0u8;
+    let mut nk_cycle_xor = 0u8;
+
+    for start in 0..n {
+        if seen[start] {
+            continue;
+        }
+        seen[start] = true;
+        stack.clear();
+        stack.push(start);
+        let mut comp = Vec::new();
+        while let Some(v) = stack.pop() {
+            comp.push(v);
+            for &w in &adj[v] {
+                if !seen[w] {
+                    seen[w] = true;
+                    stack.push(w);
+                }
+            }
+        }
+
+        let size = comp.len();
+        max_comp = max_comp.max(size);
+        if size % 2 == 1 {
+            odd += 1;
+        }
+        let mut degree_sum = 0usize;
+        let mut all_deg_le_two = true;
+        for &v in &comp {
+            let degree = adj[v].len();
+            degmax = degmax.max(degree);
+            if degree == 1 {
+                deg1 += 1;
+            }
+            degree_sum += degree;
+            if degree > 2 {
+                all_deg_le_two = false;
+            }
+        }
+        let comp_edges = degree_sum / 2;
+        if size == 1 && comp_edges == 0 {
+            iso += 1;
+            path_sizes.push(size);
+            nk_path_xor ^= b.nk_path[size];
+            nk_xor ^= b.nk_path[size];
+        } else if all_deg_le_two && comp_edges + 1 == size {
+            paths += 1;
+            path_sizes.push(size);
+            if size <= MAXQ {
+                nk_path_xor ^= b.nk_path[size];
+                nk_xor ^= b.nk_path[size];
+            } else {
+                nk_known = false;
+            }
+        } else if all_deg_le_two && comp_edges == size {
+            cycles += 1;
+            cycle_sizes.push(size);
+            if size <= MAXQ {
+                nk_cycle_xor ^= b.nk_cycle[size];
+                nk_xor ^= b.nk_cycle[size];
+            } else {
+                nk_known = false;
+            }
+        } else {
+            other += 1;
+            other_sizes.push(size);
+            if size <= 24 {
+                let mut idx_of = HashMap::new();
+                for (i, &v) in comp.iter().enumerate() {
+                    idx_of.insert(v, i);
+                }
+                let mut local = vec![0u64; size];
+                for (i, &v) in comp.iter().enumerate() {
+                    for &w in &adj[v] {
+                        if let Some(&j) = idx_of.get(&w) {
+                            local[i] |= 1u64 << j;
+                        }
+                    }
+                }
+                if let Some(g) = s4_small_nk_grundy(&local, 200_000) {
+                    nk_xor ^= g;
+                } else {
+                    nk_known = false;
+                }
+            } else {
+                nk_known = false;
+            }
+        }
+        comp_sizes.push(size);
+    }
+
+    let size_text = s4_component_size_text(&mut comp_sizes);
+    let path_size_text = s4_component_size_text(&mut path_sizes);
+    let cycle_size_text = s4_component_size_text(&mut cycle_sizes);
+    let other_size_text = s4_component_size_text(&mut other_sizes);
+    format!(
+        "zone_v={} zone_e={} zone_comp={} zone_iso={} zone_path={} zone_cycle={} zone_other={} zone_odd={} zone_max={} zone_degmax={} zone_deg1={} zone_nk_known={} zone_nk_xor={} zone_nk_path_xor={} zone_nk_cycle_xor={} zone_sizes={} zone_path_sizes={} zone_cycle_sizes={} zone_other_sizes={}",
+        n,
+        edges,
+        comp_sizes.len(),
+        iso,
+        paths,
+        cycles,
+        other,
+        odd,
+        max_comp,
+        degmax,
+        deg1,
+        if nk_known { 1 } else { 0 },
+        nk_xor,
+        nk_path_xor,
+        nk_cycle_xor,
+        size_text,
+        path_size_text,
+        cycle_size_text,
+        other_size_text
+    )
+}
+
 fn s4_conic_nk_xor_only(
     b: &Board,
     occ: &[u16],
@@ -3535,8 +3742,9 @@ fn solve_s4_xor_mine(
             let mut occ_solve = cand.occ.clone();
             let value = s4_g(&b, &mut memo, cap, &mut occ_solve, &cand.chosen, &cand.forbidden);
             let graph = s4_conic_graph_feature_string(&b, &cand.occ, &cand.chosen, &cand.forbidden);
+            let zone = s4_zone_graph_feature_string(&b, &cand.occ, &cand.chosen, &cand.forbidden);
             println!(
-                "XORTRY x={},{} xgeom={} y={},{} ygeom={} value={} live_on={} memo={} {}",
+                "XORTRY x={},{} xgeom={} y={},{} ygeom={} value={} live_on={} memo={} {} {}",
                 x as usize / q,
                 x as usize % q,
                 xgeom,
@@ -3546,7 +3754,8 @@ fn solve_s4_xor_mine(
                 value_label(value),
                 cand.live_on,
                 memo.len(),
-                graph
+                graph,
+                zone
             );
             match value {
                 Some(false) => {

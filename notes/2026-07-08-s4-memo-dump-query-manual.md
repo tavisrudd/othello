@@ -315,6 +315,14 @@ Important fields:
 - `XORRESULT`: per-first-move result, including `hit`, `no-hit`, `no-candidates`, or `aborted`.
 - `S4XORMINE-DONE`: aggregate hit counts and final memo size.
 
+`XORTRY` rows include the same `conic_*` live-conic graph summary used by `s4mine`, plus a
+`zone_*` summary of the legal off-conic conflict graph after the candidate reply.  Here `zone_v`
+is the number of legal off-conic moves, `zone_e` counts pairs of such moves that cannot both be
+played, and `zone_comp` / `zone_max` / `zone_degmax` describe the conflict graph.  `zone_nk_known=1`
+means the row's `zone_nk_xor` was computed exactly from path/cycle tables and small exact
+components; `zone_nk_known=0` means at least one large or hard component remained, so
+`zone_nk_xor` is only the known partial xor and should not be used as the full zone value.
+
 The cap is global to the run because the mode shares one S4 memo across candidate solves.
 
 ### `s4bucketlist`

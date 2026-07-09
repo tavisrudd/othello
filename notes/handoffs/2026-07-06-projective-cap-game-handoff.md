@@ -427,7 +427,10 @@ Recently reported:
   representatives.  Across 5,734 first moves, every one has a P-valued reply with live-conic
   Node-Kayles xor 0; the witness always appears within the first four zero-xor candidates sorted by
   `live_on`.  The witnesses are positive-live (`live_on >= 4`), so the next proof target is the
-  off-conic zone coupled to a conic-zero residual.
+  off-conic zone coupled to a conic-zero residual.  First zone probe on the q=23 root shows that
+  this off-conic legal-zone conflict graph is already one dense component (`zone_v = 100..117`,
+  `zone_nk_known = 0`), so the next attack should look for geometric compression or pairing
+  certificates rather than direct full-zone Grundy computation.
 
 Good Lean side targets:
 

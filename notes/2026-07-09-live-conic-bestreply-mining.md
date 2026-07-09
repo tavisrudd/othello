@@ -266,10 +266,44 @@ It also warns against a finite tiny-spectrum story.  The observed component-size
 already at q=23, so the next theorem should probably use general path/cycle Node-Kayles structure
 rather than enumerate a short list of graph shapes.
 
+## Off-Conic Zone Probe
+
+I added `zone_*` fields to `s4xormine` `XORTRY` rows.  The zone is the legal off-conic move set
+after a candidate reply; two zone vertices are adjacent when playing one immediately kills the
+other.  Exact `zone_nk_xor` is emitted only when the component structure is small enough to certify
+locally; otherwise `zone_nk_known=0`.
+
+First q=23 root sample:
+
+```text
+target/gridcap-bestreply s4xormine 23 1,2,3,4 \
+  --target-xor 0 --max-tries 1 --cap 50000000
+```
+
+Result:
+
+```text
+XORTRY rows: 260
+values: P=242, N=18
+zone_comp: always 1
+zone_other: always 1
+zone_v range: 100..117
+zone_e common range: about 2,200..2,850
+zone_degmax range: 47..57
+zone_nk_known: always 0
+```
+
+So the off-conic zone after zero-xor candidates is already one large dense component at q=23.  A
+direct exact Node-Kayles-zone lemma is not the next easy layer.  The useful next question is whether
+this dense component has a low-dimensional geometric description or a robust pairing/matching
+certificate once the live conic xor has been steered to zero.
+
 ## Next Checks
 
-1. Separate conic graph value from off-conic zone value.
-2. Mine the off-conic legal zone after the q=23 zero-xor witnesses: size, graph Grundy, and whether
-   it is itself zero or has a bounded repair family.
+1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,
+   row/column support, line-family support, automorphism stabilizers, and whether a pairing/matching
+   certificate exists.
+2. Separate conic graph value from off-conic zone value without trying to compute full zone Grundy
+   directly.
 3. Prove the matching-union graph lemma cleanly in paper/Lean terms.
 4. For q=25, build targeted witness dumps rather than broad partial roots.
