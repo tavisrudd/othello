@@ -399,6 +399,10 @@ Recently reported:
   26.3M memo entries, while the first full-PGL canonical bucket representative `[1,2,3,5]` exceeds
   the 100M memo cap.  GF(25) feature mining needs a dedicated prime-power path before broad runs.
   The S4 dump/query manual records the current q=25 partial-dump query workflow and perf profile.
+  New `s4xormine --start/--limit` chunking makes q=25 targeted steering feasible in slices:
+  `[1,2,3,4]` processed root moves 0..107 with 107 hits before a 50M cap abort, then root moves
+  108..167 with 60/60 hits.  All selected q=25 witnesses in these chunks have full unused
+  row/column support (`zone_rows = zone_cols = 19`).
 - **q>=9 pattern-mining sweep:** the current prioritized mining agenda is
   [`../2026-07-08-q-ge-9-pattern-mining-agenda.md`](../2026-07-08-q-ge-9-pattern-mining-agenda.md).
   It identifies q=17 score-9 guards, q=13/17/19 one-pair descent, q=23 bucket-level mining, q=25
@@ -449,6 +453,10 @@ Good Lean side targets:
 - S4 two-ply conic-depletion incidence lemma in the normalized grid model.
 - Six-cell off-conic reservoir lemma: every unused row/column has at least `q - 22` legal
   off-conic cells, hence full support for `q >= 23`.
+- Capacity-mirror obstruction lemma for line-capacity games: a mirror reply can fail only on
+  slack-1 mirror-pair lines; use this to state exactly why affine/projective mirrors diverge.
+- Residual-capacity decomposition: saturated lines kill points, slack-1 lines create graph
+  conflicts, slack-2 lines are the remaining genuine cap/Nofil constraints.
 - formal one-pair descent / second-intrusion lemmas using the C31 steering data.
 
 ## Literature / Framing
@@ -465,11 +473,46 @@ all-line finite-geometry case.  This justifies transferring reservoir, symmetry,
 heuristics while keeping the key distinction clear: queens is pairwise graph independence, while
 cap/Nofil is triple-avoidance whose legal moves depend on pairs already selected.
 
+Position this conservatively in CGT: line-capacity games are not a new ambient game class.  Given
+lines `L` and capacities `c(L)`, replace each line by the forbidden hyperedges
+`T subset L` with `|T| = c(L)+1`; this is Sieben-style impartial hypergraph
+building-avoidance.  The capacity-1 case is Node-Kayles on the conflict graph, and the legal
+positions are also a simplicial complex / strong-placement-game legal complex.  Our contribution is
+the structured incidence-geometric subtheory: residual slacks, mirror obstructions, fixed-locus
+blocking, capacity collapse to conflict graphs, and the resulting affine/projective/queen mechanisms.
+
+Adopted proof vocabulary from this framing:
+
+- **Capacity-mirror obstruction:** if `S` is mirror-invariant and a legal move `x` has mirror
+  partner `sigma x`, then the mirror reply fails exactly on lines containing both `x` and
+  `sigma x` whose residual capacity is already `1`.  For cap games this means a mirror-pair line
+  already contains one old selected point.  This is the invariant version of the C27 mirror-chord
+  obstruction.
+- **Fixed-locus caution:** fixed points must be illegal, but that alone is not enough.  The way a
+  fixed locus is blocked must not leave slack-1 mirror-pair lines everywhere.  In projective planes,
+  selecting a center can ruin homology-style mirrors because many `x, sigma x` chords pass through
+  it.
+- **Residual-capacity decomposition:** after a partial cap, old secants are capacity-0 blockers,
+  lines through one old point are capacity-1 graph conflicts among future moves, and lines through
+  no old point are the remaining capacity-2/triple constraints.  The desired free-endgame theorem
+  should be stated as a collapse into the capacity-1 conflict-graph regime, not as a projective-only
+  artifact.
+- **Line-load/slack counting:** use the incidence matrix viewpoint to prove reservoir lemmas and
+  finite-field existence statements.  The six-cell `q - 22` row/column reservoir bound is the first
+  clean example.
+
+Do not prioritize a full capacity-`c` research branch or a broad Lean `LineCapacityGame`
+abstraction yet.  First extract the three reusable lemmas above in paper/notes form and formalize
+only the pieces that remove duplication in the current cap proof.
+
 Novelty guard:
 
-- Nofil, pairing strategies, and projective involutions are prior art.
+- Do not claim a new general class of impartial games.  Claim a structured finite-incidence
+  subfamily of known hypergraph building-avoidance / legal-complex frameworks.
+- Nofil, Node-Kayles, pairing strategies, and projective involutions are prior art.
 - The apparently new contribution is the projective-family outcome theorem in this shared
-  impartial game.
+  impartial game, plus the line-capacity mirror/slack analysis tying the projective cap and queens
+  mechanisms together.
 - Colored finite-geometry tic-tac-toe / avoidance is adjacent but not the same game.
 
 References:
