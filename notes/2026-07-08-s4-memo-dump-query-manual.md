@@ -210,6 +210,11 @@ partial capped q=25 dumps.
 
 ## Pattern-Mining Recipes
 
+The current q>=9 mining priorities are summarized in
+[`2026-07-08-q-ge-9-pattern-mining-agenda.md`](2026-07-08-q-ge-9-pattern-mining-agenda.md).  In
+particular, we have not yet done a systematic ply-by-ply structural census; the query shell can
+inspect individual plies, but a batch row emitter is the next useful layer.
+
 ### Root Child Census
 
 Use this to classify known first intrusions from a partial or complete root dump:

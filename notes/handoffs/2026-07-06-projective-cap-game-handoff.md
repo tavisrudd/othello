@@ -395,6 +395,10 @@ Recently reported:
   26.3M memo entries, while the first full-PGL canonical bucket representative `[1,2,3,5]` exceeds
   the 100M memo cap.  GF(25) feature mining needs a dedicated prime-power path before broad runs.
   The S4 dump/query manual records the current q=25 partial-dump query workflow and perf profile.
+- **q>=9 pattern-mining sweep:** the current prioritized mining agenda is
+  [`../2026-07-08-q-ge-9-pattern-mining-agenda.md`](../2026-07-08-q-ge-9-pattern-mining-agenda.md).
+  It identifies q=17 score-9 guards, q=13/17/19 one-pair descent, q=23 bucket-level mining, q=25
+  partial-dump mining, and systematic ply-depth rows as the next useful structure checks.
 
 Good Lean side targets:
 
