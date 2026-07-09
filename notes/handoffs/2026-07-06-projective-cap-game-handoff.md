@@ -104,11 +104,16 @@ Status: **closed** for odd projective dimension over odd finite fields.
 ### Even Projective Dimension Over Odd Fields
 
 These are not closed in general.  The plane case `PG(2,q)` is the main open kernel.  Higher even
-dimensions `PG(2m,q)`, `m >= 2`, odd `q`, are being probed by C32's composite-mirror idea.  If C32
-works, planes may become literally the only open family; if it fails, its obstruction data should
-feed the same mirror-chord/defect vocabulary as the plane.
+dimensions `PG(2m,q)`, `m >= 2`, odd `q`, remain open.  C32 refuted the primary point-reflection
+composite-mirror idea in the plane and found an immediate fixed-`rho` seed obstruction in PG(4,3);
+future even-dimensional work needs a new non-primary design.
 
 ## Odd-Plane Kernel
+
+For the falsification-mode taxonomy and the proof-by-elimination scaffold over this kernel (the
+"conjecture false ⟺ a trapped size-3 exists" framing, the intruder-regime elimination table, and
+which failure modes are eliminable vs the irreducible open core), see
+[`../2026-07-09-odd-plane-falsification-map.md`](../2026-07-09-odd-plane-falsification-map.md).
 
 ### Frame Reduction
 
@@ -207,6 +212,11 @@ Do not restart these as proof routes unless new evidence changes the premise.
   q=11 all P escape children, q=13 all P escape children, and q=17 min-escape children.
 - **Mixed-column mod-3 law:** C29 refuted it at q=23.  The prediction was mixed because
   `23 == 2 mod 3`; the bucket-first full-PGL on-conic census found all 22 q=23 buckets P.
+- **Primary composite mirror for odd-q even dimensions / planes:** C32 refuted the simple
+  point-reflection + double-pencil-burn candidate.  In planes, q=9/11/13 have no stuck-free
+  affine seed even with adaptive infinity replies and exception cells.  In PG(4,3), fixed
+  elliptic `rho` fails immediately at the seed obligation for every affine seed.  Reflection
+  towers or non-fixed-H variants would be new designs, not continuations of this primary route.
 
 ## Mirrors: Correct Role
 
@@ -376,9 +386,11 @@ Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as 
 task list.  Current high-value items:
 
 - **C30:** route-C certificate books for q=17 and q=19.
-- **C32:** even-dimensional composite mirror / PG(4,3) and plane variant probe.
-- **Steering follow-up:** turn the repair-mining data into a geometric repair-intruder lemma and
-  a small-zone `Z <= 2` / empty-conic base-law certificate schema.
+- **Maintenance follow-up:** from q=23 zero-xor followers, test/prove preservability of
+  live-conic xor zero after one further coupled off-conic move, then identify the termination
+  invariant.
+- **Small-zone follow-up:** turn the repair-mining data into a geometric repair-intruder lemma
+  and a small-zone `Z <= 2` / empty-conic base-law certificate schema.
 
 Recently reported:
 
@@ -431,28 +443,68 @@ Recently reported:
   representatives.  Across 5,734 first moves, every one has a P-valued reply with live-conic
   Node-Kayles xor 0; the witness always appears within the first four zero-xor candidates sorted by
   `live_on`.  The witnesses are positive-live (`live_on >= 4`), so the next proof target is the
-  off-conic zone coupled to a conic-zero residual.  First zone probe on the q=23 root shows that
+  maintenance of conic-xor zero under coupled off-conic intruder play.  First zone probe on the q=23 root shows that
   this off-conic legal-zone conflict graph is already one dense component (`zone_v = 100..117`,
-  `zone_nk_known = 0`), so the next attack should look for geometric compression or pairing
-  certificates rather than direct full-zone Grundy computation.  The expanded probe shows
+  `zone_nk_known = 0`), so the next attack should look for geometric re-steering invariants rather
+  than direct full-zone Grundy computation.  The expanded probe shows
   `zone_rows = zone_cols = 17` throughout all q=23 selected witnesses, i.e. the off-conic zone still
   hits every unused row and column after the six selected cells.  Full-bucket expanded sweep:
   5,734 selected P witnesses, all within four zero-xor candidates, with `zone_v = 100..120`,
   `zone_comp = zone_other = 1`, and `zone_nk_known = 0`.  The root-only density cutoff did not
-  generalize, so the plausible next theorem is a reservoir/Hall-style or pairing lemma, not a
-  direct full-zone Grundy computation or simple density threshold.  The row/column support itself
-  now has a clean proof target: for any legal six-cell grid position, each unused row loses at most
-  six selected columns, fifteen pair-lines, and one root-conic cell, so it contains at least
-  `q - 22` legal off-conic cells; same for columns.  Hence full unused row/column support is
-  automatic for `q >= 23`.
+  generalize, and Fable's line-capacity review kills the reservoir->Hall/pairing target: the
+  row-bound gives min degree `q - 22`, while a counting-only balanced matching lever needs
+  `q >= 38`.  Use the reservoir instead as a base-layer move-availability lemma for re-steering.
+  For a legal `k`-cell grid position in the normalized conic graph model, each unused row/column
+  has at least `q - k - binom(k,2) - 1` legal off-conic cells; at `k=6` this is `q - 22`, giving
+  full unused row/column support for `q >= 23`, but the same loose bound is already vacuous at
+  `k=7` when `q=23`.
+- **q=23 one-pair maintenance:** bucket representative `1,3,4,9` has now been checked through one
+  further coupled off-conic move/reply pair.  The naive first zero-xor P follower is not always
+  maintainable, but an existential selector succeeds for all 259 first moves in the bucket.  Its
+  accepted followers cover 28,646/28,646 off-conic obligations with P-valued zero-xor replies;
+  94.718% of those replies descend to `live_on <= 2`.  This is one bucket only and does not prove
+  termination; 1,513 accepted replies retain `live_on = 3..6`.
+- **C32 composite mirror probe:** primary point-reflection composite is closed negative.  q=3/5/7
+  plane variants are stuck-free, but q=9/11/13 fail for every affine seed; q=9 fails after a
+  double-pencil exception breaks later bulk reflection, while q=11/q=13 fail by infinity-reply
+  exhaustion after reflected affine play.  PG(4,3) with fixed elliptic `rho` fails the seed
+  obligation for all 80 affine seeds.  Report:
+  [`../2026-07-08-codex-evendim-composite-mirror.md`](../2026-07-08-codex-evendim-composite-mirror.md).
+- **C33 line-capacity follow-up:** Fable's review redirected the q>=23 zone plan.  The
+  reservoir->Hall/pairing route is dead below q=38 and should not be pursued at the frontier.
+  Zero-xor steering is now a live-conic-xor maintenance problem: prove preservability of a
+  re-zeroing reply after coupled off-conic intruder moves, then prove termination in P2's favour.
+  The six-cell `q - 22` row/column support lemma is only a base-layer move-availability fact.
+  Report: [`../2026-07-09-codex-line-capacity-followup.md`](../2026-07-09-codex-line-capacity-followup.md).
+
+Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
+C32 plane and PG(4,3) primary checks above, wrote the report, and marked C32 reported in the queue.
+Next active queue item is C30 unless the proof lane pivots to the steering/base-law agenda or to a
+new, non-primary even-dimensional mirror design.
+
+Handoff note 2026-07-09 / Codex C33: applied Fable's line-capacity corrections to this handoff and
+the live-conic notes, re-parsed the existing full q=23 `s4xormine` logs as a first-ply
+preservability check (`5734/5734` zero-xor P hits; selected `zone_rows = zone_cols = 17`; no new
+solves), and marked C33 reported.  Next proof/mining target in this lane is the one-more-zone-move
+maintenance check from q=23 zero-xor followers.
+
+Handoff note 2026-07-09 / Codex C33 one-pair follow-up: extended `s4xormine` with exact maintenance
+rows and an existential `--require-maintenance` selector.  The first selected zero-xor P follower
+has 3/108 exact failures, refuting the naive selection rule.  A complete 26-chunk census of q=23
+bucket `1,3,4,9` found maintainable zero-xor P followers for all 259 first moves, covering
+28,646/28,646 selected off-conic obligations with no unknown/cap status and a 22,575,285-entry
+maximum chunk memo.  Next: pressure the rule on other buckets and isolate the 1,513 accepted
+`live_on = 3..6` residuals; true game-nimber coupling remains the separate C35 measurement.
 
 Good Lean side targets:
 
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
 - S4 two-ply conic-depletion incidence lemma in the normalized grid model.
-- Six-cell off-conic reservoir lemma: every unused row/column has at least `q - 22` legal
-  off-conic cells, hence full support for `q >= 23`.
+- Incidence/load reservoir lemma in the normalized grid model: a legal `k`-cell position leaves
+  at least `q - k - binom(k,2) - 1` legal off-conic cells in each unused row/column.  Use the
+  six-cell `q - 22` instance as base-layer move availability for q>=23 re-steering, not as a
+  Hall/matching or recursive-zone certificate.
 - Capacity-mirror obstruction lemma for line-capacity games: a mirror reply can fail only on
   slack-1 mirror-pair lines; use this to state exactly why affine/projective mirrors diverge.
 - Residual-capacity decomposition: saturated lines kill points, slack-1 lines create graph
@@ -479,7 +531,8 @@ lines `L` and capacities `c(L)`, replace each line by the forbidden hyperedges
 building-avoidance.  The capacity-1 case is Node-Kayles on the conflict graph, and the legal
 positions are also a simplicial complex / strong-placement-game legal complex.  Our contribution is
 the structured incidence-geometric subtheory: residual slacks, mirror obstructions, fixed-locus
-blocking, capacity collapse to conflict graphs, and the resulting affine/projective/queen mechanisms.
+blocking, local capacity collapse to conflict graphs, and the resulting affine/projective/queen
+mechanisms.
 
 Adopted proof vocabulary from this framing:
 
@@ -494,12 +547,15 @@ Adopted proof vocabulary from this framing:
   it.
 - **Residual-capacity decomposition:** after a partial cap, old secants are capacity-0 blockers,
   lines through one old point are capacity-1 graph conflicts among future moves, and lines through
-  no old point are the remaining capacity-2/triple constraints.  The desired free-endgame theorem
-  should be stated as a collapse into the capacity-1 conflict-graph regime, not as a projective-only
-  artifact.
+  no old point are the remaining capacity-2/triple constraints.  Any collapse into a
+  capacity-1/Node-Kayles conflict graph must be local to a residual subboard such as the live conic;
+  a whole-board collapse is impossible in odd affine planes.  To block every affine line requires a
+  blocking set of size at least `2q - 1`, while an odd-q cap has size at most `q + 1`, so genuine
+  capacity-2 lines permanently survive.
 - **Line-load/slack counting:** use the incidence matrix viewpoint to prove reservoir lemmas and
-  finite-field existence statements.  The six-cell `q - 22` row/column reservoir bound is the first
-  clean example.
+  finite-field existence statements.  The normalized row/column bound
+  `q - k - binom(k,2) - 1` is the first clean example; its six-cell `q - 22` instance is a
+  base-layer move-availability fact for q>=23.
 
 Do not prioritize a full capacity-`c` research branch or a broad Lean `LineCapacityGame`
 abstraction yet.  First extract the three reusable lemmas above in paper/notes form and formalize

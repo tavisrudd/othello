@@ -9,6 +9,36 @@ wrap. Do not edit other WIP notes; do not touch the queens tmux panes.
 constraint is LIFTED. Compute up to ~8 GB / multi-core is fine; still no q ≥ 23 grid-cap
 campaigns and no n=20 queens runs without an explicit gate.
 
+## Priority ordering (Fable, 2026-07-09)
+
+C-numbers are IDs, not priority — use this ranking. It reflects the line-capacity review and the
+S4-query exploratory pass. Three tracks run in **parallel** (exploratory math+query / engineering /
+writing); items within a track are ordered, and across tracks pull whatever is unblocked. Key
+dependencies: C37 is cheap insurance that de-risks every result that trusts computed values (run it
+early); C33 reframes the steering lane, so do it before more steering effort; C35 (nimber oracle)
+is the biggest build and sharpens C38 — start it in parallel because it is long.
+
+- **Tier A — do first (cheap, de-risking / corrective):**
+  1. **C37** — shared-key agreement. Half-day; a scaled soundness check on `canon()` and hardens
+     the D4 verification story. Insurance before trusting anything downstream.
+  2. **C33** — act on the line-capacity review. Cheap; corrects framing that currently misdirects
+     the zone hunt and reframes the steering lane.
+- **Tier B — high-value, start next / in parallel:**
+  3. **C36** — cross-q combinatorial-type value alignment. Free (existing P/N oracle); localizes
+     the entire uniform-theorem obstruction to a finite list. The single most proof-relevant query.
+  4. **C35** — nimber (Grundy) oracle. Biggest build, highest leverage; the instrument that turns
+     the conic⊕zone coupling from *assumed* into *measured*. Start the build in parallel.
+- **Tier C — ongoing independent tracks (unblocked, parallel):**
+  5. **C30** — route-C cert books q=17/19 (engineering; D4 ladder → unconditional PG(2,17/19)).
+  6. **C34** — D1 outcome-classes manuscript skeleton (writing; flag-planting paper).
+- **Tier D — after Tier B reshapes the picture:**
+  7. **C38** — tablebase strategy distillation (forced-move skeleton; richer once C35 lands).
+  8. **Steering follow-up** — repair-intruder existence lemma + small-`Z`/empty-conic base law
+     (the proof lane; reframed by C33, informed by C36/C38).
+- **Tier E — opportunistic bonus:**
+  9. **C39** — remoteness/suspense dynamic monovariant.
+  10. **C40** — oracle-driven winline generation (feeds C23 viz).
+
 ## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
 Context: `2026-07-04-sumfree-game-theorem.md` Lemma 4 (negation mirror with fixed extras) is
@@ -862,7 +892,7 @@ q=25 probe `[1,2,3,4]` is P at about 26.3M private memo entries, while the first
 canonical bucket representative `[1,2,3,5]` exceeds the 100M memo cap.  GF(25) broad mining needs
 a dedicated prime-power path.
 
-## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
+## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2) [REPORTED 2026-07-09]
 
 **READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**
 — the v2 design analysis. It corrects the v1 spec (translations are NOT involutions for odd
@@ -915,3 +945,287 @@ methodology in the sharper pencil vocabulary. Cheap compute either way.
 6. Budget: hard 8h wall, single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-08-codex-evendim-composite-mirror.md`.
+
+Status: primary point-reflection composite closed negative.  The plane policy was tested at
+q=9/11/13 over all affine seed replies, with P2 existential choice of adaptive infinity reply
+and double-pencil exception cells; no seed is stuck-free.  q=9 fails after an infinity pair and
+double-pencil exception because a later bulk reflection is illegal; q=11/q=13 fail by
+infinity-reply exhaustion after three reflected affine pairs.  The small cases q=3/5/7 still
+pass.  The PG(4,3) fixed-elliptic-rho primary variant fails the seed obligation immediately for
+all 80 affine seeds: P1 plays `rho^{-1}` of the seed direction, forcing P2's dead seed direction
+as the rho reply.  Reflection towers / non-fixed-H variants remain untested new designs, not
+continuations of the primary candidate.
+
+## C33. Act on Fable's line-capacity review — correct the framing, redirect the zone hunt [REPORTED 2026-07-09]
+
+**READ FIRST: [`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md)**
+— Fable's critique of the line-capacity framing (`3863eca`), the six-cell reservoir lemma
+(`6699059`), and the q=23 zero-xor/zone steering mining. Read the whole note before touching
+anything; the six items are load-bearing and some contradict the current stated next targets.
+
+This task is **planning + corrective action, not a pre-baked recipe.** The review names the
+gaps; you decide the concrete steps, sequence, and any machine checks, and record that plan in
+the report file before executing. Do not re-litigate the review's math (the matching threshold
+`q ≥ 38`, the AG(2,q) blocking-set bound `2q−1`, and the conic/zone coupling are checked); build
+on it.
+
+Non-negotiable framing corrections (apply to the handoff + notes, in a commit that cites this
+review):
+
+1. **Kill the "reservoir → Hall/matching certificate in the zone" target** as currently stated
+   (review §1): counting gives min-degree `q−22`, and a matching via the min-degree≥n/2 lever
+   needs `q ≥ 38`, so it is dead at q=23/25/29/31/37 — the entire frontier. Remove or downgrade
+   the matching phrasing in
+   [`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md)
+   (Next-Check #1/#3, §Off-Conic Zone Probe) and the handoff's Near-Term Queue reservoir bullet.
+2. **Restate the zone plan as a conic-xor MAINTENANCE strategy, not a disjunctive sum** (review
+   §2/§3): document explicitly that an off-conic zone move is itself a conic intruder, so
+   `conic_xor ⊕ zone_value` is not the game value and "conic-xor 0" is not preserved by zone
+   play. Reframe the reservoir as the **move-availability lemma** underwriting re-steering, and
+   name the two real obligations: (a) *preservability* — a re-zeroing move always exists; (b)
+   *termination in P2's favour* — a Nim-value invariant, not an SDR. Flag that a raw
+   "pairing-in-the-zone" target is the object C28 already refuted, so keep the two distinct.
+3. **Scope the "collapse to capacity-1" claim** (review §5): add the AG(2,q) blocking-set
+   obstruction (`min blocking set = 2q−1` > cap size `≤ q+1`, so a whole-board collapse is
+   impossible and capacity-2 lines always survive) next to the residual-capacity decomposition
+   in the handoff framing. State it positively — it is why the cap game stays strictly harder
+   than its Node-Kayles shadow.
+4. **Restate the reservoir lemma generally and correctly** (review §4/§6): the general
+   `k`-cell bound `q − k − C(k,2) − 1` (note it is vacuous by `k=7` at q=23 — a base-layer fact,
+   not a recursion); the incidence-matrix line-load form so column/diagonal/conic reservoirs
+   fall out uniformly; the Möbius/hyperbola normal form (≤1 conic point per row) as an explicit
+   hypothesis; and drop the "sharp boundary" phrasing (it is the loose bound's vacuity threshold,
+   not a real support failure).
+
+Then plan and (where cheap and reversible) take the corrective mining/proof actions the redirect
+implies — e.g. whatever machine check most directly pressures the *preservability* obligation
+(does a legal off-conic intruder with the required parity always exist from a q=23 zero-xor
+state, across the full bucket sweep, not just the sampled roots?), or a clean paper/Lean
+statement of the maintenance invariant. Size any q=25/q≥23 solve first; no new campaigns without
+a gate. If a correction turns out to be wrong on closer reading, say so verbatim in the report —
+a refutation of one of Fable's six items is a full-value deliverable.
+
+Report file: `notes/2026-07-09-codex-line-capacity-followup.md`.
+
+## C34. Assemble the D1 outcome-classes manuscript skeleton (the flag-planting paper)
+
+**READ FIRST:** [`2026-07-09-stepping-stone-deliverables-proposal.md`](2026-07-09-stepping-stone-deliverables-proposal.md)
+(D1 + the umbrella framing and novelty guards), the C26 novelty audit
+[`2026-07-08-codex-projective-nofil-novelty-audit.md`](2026-07-08-codex-projective-nofil-novelty-audit.md),
+[`2026-07-07-nofil-connection.md`](2026-07-07-nofil-connection.md), the program map
+[`handoffs/2026-07-06-projective-cap-game-handoff.md`](handoffs/2026-07-06-projective-cap-game-handoff.md),
+and the falsification-mode / proof-by-elimination map
+[`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md) (source for
+the §why-a-conjecture / what-would-falsify bridge and the "conjecture false ⟺ trapped size-3"
+framing in item 3's spine).
+
+Goal: a **manuscript skeleton** for D1 — "Outcome classes of the Nofil/cap achievement game on
+finite geometries" — assembled from what is already proven. This is a writing/assembly task, no
+game compute and no new proofs. The output is a scaffold a human (or a later Lean/writing task)
+fills in, not a finished paper. Deliverable is a self-describing markdown draft with every claim
+tagged by evidence status.
+
+1. **Inventory the proven results, verbatim.** For each of the four closed families
+   (`AG(n,q)` P; `PG(n,2)` P; `PG(2m−1,q)` P for odd `q`; `PG(2,q)` P for even `q`), pull the
+   **exact Lean theorem statement and name** from the source files (handoff §Closed Higher-
+   Dimensional Families lists the names: `initialPStatement_binary_of_finrank_ge_two`,
+   `initialPStatement_of_odd_card_finrank_eq_two_mul`,
+   `initialPStatement_of_even_card_finrank`, the affine theorem, etc.). Do not paraphrase the
+   statements — quote them and cite file + theorem name. Where a family is proven on paper but not
+   Lean, say so.
+2. **Build the evidence table for the odd-plane conjecture.** Reproduce the handoff's Status
+   Table — PG(2,q) (value, proof state, remaining gap per `q` through 23/25), as the paper's
+   "computational evidence" figure. Tag each row [LEAN] / [COMPUTED] / [CONDITIONAL] exactly as
+   the handoff has it; do not upgrade any status.
+3. **Write the section skeleton** (headers + one-paragraph intent + claim stubs, NOT full proofs).
+   Suggested spine, adjust as the material dictates:
+   - Abstract + intro carrying the two umbrella hooks (cap-set cousin; exact outcome classes for
+     infinite families are the unusual thing) and the Segre's-theorem engine framing.
+   - Preliminaries: the impartial Nofil/cap game, normal play, the line-capacity umbrella
+     (capacity-1 queens vs capacity-2 cap), Sprague–Grundy setup.
+   - Four theorem sections, each: statement (quoted), proof-mechanism sketch (mirror/involution/
+     translation), pointer to the Lean theorem.
+   - The odd-plane conjecture + evidence table + the conic-localization reduction as the "why this
+     is tractable, not mysterious" bridge (forward-reference D3).
+   - Related work + the tiered novelty positioning (proved here / standard ingredient / adjacent
+     colored-avoidance prior art), lifted from C26.
+   - The normal-play-vs-misère caveat.
+4. **Bibliography stub.** One entry per external anchor the framing leans on, each with a
+   one-line "used for" note: Segre 1955 (ovals are conics, odd `q`); Croot–Lev–Pach /
+   Ellenberg–Gijswijt 2016 (cap-set max size — cousin problem); Schaefer 1978 (Node-Kayles
+   PSPACE-complete); HHS (Nofil ruleset + STS prior art); Guy / A002187 (Dawson's chess, octal
+   games — for the D3 forward-reference); the pairing-strategy / Beck / Harary achievement-game
+   line; Clark–Mancini–Van Hook (adjacent partizan colored avoidance). **Do not invent citation
+   details you cannot verify** — mark any unverified reference `[VERIFY]` rather than fabricating
+   page/volume data; the C26 audit and nofil-connection note have the checked ones.
+5. **Readiness audit (the report's core).** Per section, a one-line status: ready-to-expand /
+   needs-a-proof-written / needs-a-decision-from-user (e.g. how much odd-plane evidence to
+   include, whether D4's verified ladder ships inside D1 or as a companion). End with a short
+   "gaps before submission" list. A section that is *not* ready is a first-class finding — say so
+   plainly, do not paper over it.
+
+Guardrails: assembly + quotation only — write no new proofs and prove nothing; never upgrade a
+[COMPUTED]/[CONDITIONAL] result to [PROVEN]; no fabricated citations; keep the umbrella/novelty
+wording conservative per C26 (structured finite-incidence subfamily, not a new game class).
+
+Deliverable: the skeleton draft at `notes/2026-07-09-d1-outcome-classes-manuscript.md`.
+Report file: `notes/2026-07-09-codex-d1-manuscript-skeleton.md` (the readiness audit + gaps list +
+what was quoted vs stubbed vs flagged `[VERIFY]`).
+
+## C35. Nimber (Grundy) oracle — make the S4 dump measure the conic⊕zone coupling
+
+**READ FIRST:** the S4 manual [`2026-07-08-s4-memo-dump-query-manual.md`](2026-07-08-s4-memo-dump-query-manual.md)
+and Fable's review §2 [`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md).
+
+Context: the whole conic program reasons in **Grundy values** — `conic_nk_xor`, Dawson path
+values, "even cycles are Grundy-0, the bulk cancels." But the solver and every dump store only
+P/N (nimber `== 0` vs `≠ 0`). So the graph-derived `conic_nk_xor` has **never been checked against
+the position's true Grundy value**, and the conic⊕zone disjunctive-sum decomposition the steering
+plan leans on (challenged by the review: off-conic zone moves *are* conic intruders) has never been
+measured. Make the dump a nimber oracle and measure the gap. This is the instrument for the
+coupling question — the one thing the current tool cannot answer.
+
+1. **Extend the S4-local solver to compute exact Grundy values** (`mex` over children's Grundy)
+   instead of the mover-wins boolean. This loses the boolean short-circuit (all children must be
+   evaluated), so it is slower and the memo is larger — **size it first**: an exact q=17 root, wall
+   + record count vs the P/N dump, extrapolate, gate by cap/wall. Bound nimbers (store `u8`, assert
+   `< 64` or report the true max observed).
+2. **New dump format version** (bump magic/version; value encoding = nimber byte; P/N derivable as
+   `nimber == 0`; keep every header guard). **Validation gate:** on shared canonical keys, `nimber
+   == 0 ⟺ P` in the existing P/N dump — must be 100% before any measurement.
+3. **Measurement pass (the deliverable):** over a corpus of S5/S6 states, tabulate the true Grundy
+   value against the predicted `conic_nk_xor`; report the distribution of
+   `true_g XOR predicted_conic_xor` — the *coupling residual*. Where the zone Grundy is also
+   computable, test `g(pos) == g_conic XOR g_zone` and report the agreement rate and, on mismatch,
+   the structure of the discrepancy.
+4. **Report:** solver-extension cost, max nimber observed, the coupling-residual distribution, and
+   a verdict on whether the game decomposes as a conic⊕zone sum at the S5/S6 layer. A "does not
+   decompose" verdict with the residual structure is a full-value deliverable — it is exactly what
+   the review predicts and what redirects the zone proof to a maintenance argument.
+
+Guardrails: shallow layer only (S5/S6); validate `nimber==0` against P/N dumps before measuring;
+nimber dumps are bigger — do not launch a large-`q` Grundy dump without the sizing gate.
+Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-nimber-oracle.md`.
+
+## C36. Cross-q combinatorial-type value alignment — localize the uniform-theorem obstruction
+
+Context: S4 roots are conic-normalized (`r·c = 1`) and canonically keyed, so a reachable state has
+a **q-independent combinatorial type**. Running the same query across the q=17/19/23 exact dumps and
+finding the types whose value is *not q-constant* isolates the entire difficulty of the uniform
+odd-plane theorem to a finite list; the complementary outcome (q-constant on every shared type) is
+strong evidence a uniform type→value law exists. Free — uses the existing P/N oracle; regenerate the
+q=17/19/23 exact S4 dumps as needed (per-root, shallow, cheap).
+
+1. **Define the type precisely, in the report:** a q-independent signature of an S5/S6 state — the
+   conic-graph iso-type (path/cycle/isolate size multiset + intruder-incidence pattern), a coarse
+   q-independent zone signature (row/col support, bucketed degree profile), ply, and geometry
+   counts. State it explicitly and reproducibly; it is a hash of geometric *shape*, NOT the
+   field-specific canon key.
+2. **Self-consistency gate FIRST (mandatory):** within a single q, every state of a given type must
+   share a value. If not, the type is too coarse — report the collision verbatim and refine, or
+   report that refinement fails. Cross-q claims are void until this passes.
+3. **Alignment:** for types with a KNOWN value (skip unknowns) in ≥ 2 of {q=17,19,23}, tabulate
+   `value(type, q)`. Deliverable: the list of **types with non-constant value across q** (the
+   obstruction set) with representatives; or, if none, the count of shared types that are q-constant.
+4. **Report the verdict either way.** A non-constant type is the most proof-relevant object this
+   program can currently produce; a fully q-constant shared table is strong uniform-proof evidence
+   and directly feeds D3.
+
+Guardrails: known values only; the self-consistency gate is non-negotiable; the type definition
+must be stated so a reader can reproduce it. Budget: hard 8h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-cross-q-type-alignment.md`.
+
+## C37. Cross-root shared-key agreement — scaled soundness check + state-complexity number
+
+Context: distinct S4 roots' exact dumps **overlap** — positions reachable from both canonicalize to
+the same key. Agreement on shared keys is a test of `canon()` soundness (the C8 concern that the
+128-bit fingerprint could silently merge distinct positions) across *millions* of positions, not
+just small-`q` class counts; the overlap size is the symmetry-quotiented shared-core state count.
+Cheap, uses existing raw dumps, and hardens the D4 verification story.
+
+1. **Add a raw-dump intersection check** — a small Rust mode (e.g. `s4isect`) reading two or more
+   raw files, or a script consuming the documented raw format. **RAW dumps only** — compact
+   archives have membership false positives by design (manual §Raw Versus Compact). For every
+   shared canonical key across a pair, assert equal value; collect all disagreements.
+2. **Run it** across the q=23 bucket dumps (the 22 roots) and the q=19 buckets. Sanity guard: dumps
+   for different q / GF encodings must share **zero** keys (root-mismatch + GF-hash headers should
+   already prevent cross-q mixing). **Any P-vs-N disagreement on a shared key is a MAJOR finding**
+   (solver bug or canon collision) — report it verbatim and STOP for triage; do NOT "fix."
+3. **Report** pairwise + union overlap sizes → the shared-core state count modulo symmetry, and the
+   agreement result. Clean agreement across the full shared corpus is the concrete verification
+   statement D1/D4 can cite ("N million position values cross-validated via the shared canonical
+   key, zero disagreements").
+
+Guardrails: RAW only; document the exact key/value byte layout read; treat any disagreement as
+stop-and-report, never as something to patch. Budget: 4h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-shared-key-agreement.md`.
+
+## C38. Tablebase strategy distillation — the forced-move skeleton corpus-wide
+
+Context: the `replies`/query DAG exposes the full winning-strategy graph. Corpus-wide, the mover
+nodes with a **unique** winning move are *forced* — the skeleton any strategy-level proof, and the
+maintenance strategy from the C33 reframe, must reproduce. C31's repair-geometry did this by hand on
+the q=17 score-9 slice; do it over the whole exact dump. Uses the P/N oracle (free); richer once C35
+nimbers exist.
+
+1. **Enumerate winning moves per node.** State the parity convention explicitly: at a mover-wins
+   (`N`) node the winning moves are the children with value `P`. Over an exact dump, for every
+   reached `N` node count `|winning moves|` — the *strategy freedom*.
+2. **Forced set:** nodes with exactly one winning move. Characterize them — ply, geometry, conic
+   graph type, zone signature, and whether the forced move is on-conic / intruder / conic-emptying
+   (reuse the C31 repair-geometry vocabulary). These pin the invariant.
+3. **Freedom distribution** across the corpus: where it is 1 (forced) vs large (free). A simple
+   selection rule can exist only where the freedom is structured.
+4. **Report** the forced-node characterization + the freedom distribution, and cross-reference the
+   C31 score-9 guard intruders — are they a subset of the corpus-wide forced set? A clean
+   characterization of the forced skeleton is the target.
+
+Guardrails: exact dumps only (partial dumps mislabel `unknown` children as non-winning — restrict to
+fully-known subtrees, or treat any `unknown` child as disqualifying the node from the forced count
+and report how many nodes that excludes). Budget: hard 8h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-tablebase-distillation.md`.
+
+## C39. Remoteness/suspense — a dynamic monovariant (C18's null was static-only)
+
+Context: C18 killed shallow laws over **static** features of the position. Remoteness (Conway) is a
+**dynamic** quantity — how fast the winner can force / the loser delay — and has never been computed
+here. Compute it over the S4 subtree from the value oracle and hunt for a monovariant P2 controls.
+
+1. **Compute remoteness** via the tree walk + values: remoteness 0 at a terminal; at an `N` node
+   `1 + min` over `P`-children remoteness (winner hastens); at a `P` node `1 + max` over `N`-children
+   remoteness (loser delays). A small walk/solver addition.
+2. **Probe** on the q=13/17 exact dumps: tabulate remoteness by ply/geometry; check whether P2's
+   optimal replies control remoteness parity or keep it bounded, and whether remoteness correlates
+   with the C31 zone-size / defXOR features that the static pass missed.
+3. **Report** the remoteness distribution and a verdict on a dynamic monovariant. A null is a valid
+   deliverable — it rules out the dynamic-potential hypothesis cleanly.
+
+Guardrails: exact dumps; exploratory — cap depth. Budget: 4h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-remoteness-probe.md`.
+
+## C40. Oracle-driven winline generation (feeds C23)
+
+Context: C23 (winline viz) needs optimal lines to terminal and planned a separate solve. The
+`s4query` `play`/`pop` stack + value oracle already walks optimal lines by lookup — use it to drive
+the S4-rooted lines instead of a separate solver. This is an enabler/amendment to C23, not a new
+research direction.
+
+1. A small mode/script that, given a dump and root, emits one optimal (win-preserving) line to
+   terminal by querying values along `play`/`pop` — a winning child at each mover node, a
+   value-preserving reply at each defender node — with the per-ply NK snapshot fields (defect
+   spectrum, defXOR, zone size/parity) alongside.
+2. Feed C23's rendering spec; this replaces C23 §1's separate-solve step **for S4-rooted lines
+   only** — the empty-board defense lines (C23 §1(a)) still need their own solve, out of scope here.
+
+Guardrails: exact dumps; the independent legality + terminal-maximality checks from C23 §4 still
+apply to every emitted line. Budget: 3h wall, single-core, ≤ 8 GB.
+Report file: append a `## C40 oracle-driven lines` section to
+`notes/2026-07-08-codex-winline-viz.md`.
+
+Status: corrections applied to the handoff, `2026-07-09-live-conic-bestreply-mining.md`, and
+`2026-07-09-live-conic-steering-plan.md`.  The reservoir/Hall/pairing target is killed as a proof
+route below q=38; zero-xor steering is now framed as a conic-xor maintenance strategy with
+preservability and termination obligations; the reservoir is a base-layer move-availability lemma;
+and whole-board capacity-1 collapse is scoped out by the AG(2,q) blocking-set obstruction.  Existing
+q=23 all-bucket `s4xormine` logs were re-parsed only as a cheap first-ply preservability check
+(5734/5734 hits, selected `zone_rows = zone_cols = 17`, no new solves).
