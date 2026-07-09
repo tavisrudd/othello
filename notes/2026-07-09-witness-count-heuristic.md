@@ -274,3 +274,11 @@ reason"; the (ON) route is safe-but-tight with a genuine **B4a** warning at `q=1
 (ON) argument must bound the on-conic **variance / depletion** (the same `live_on ≥ q−19` object as
 the `q≥23` row), not the mean.
 ```
+
+---
+
+Follow-up queued 2026-07-09 (Fable second pass): **C42** tests the factorization of the §6
+concentration into type-determinism (C36's stabilizer-type gate) × class-uniform type census —
+the census half is a value-free incidence-geometry statement, and the observed dispersion-0
+columns suggest an exact identity rather than mere `O(√q)` equidistribution. See the codex task
+queue entry for the verdict logic.

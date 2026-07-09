@@ -53,12 +53,30 @@ The expected large-q structure is:
 ```text
 even conic matching/cycle bulk
 + bounded defect family
-+ small off-conic zone
++ coupled off-conic intruder reservoir
 ```
 
 Even-cycle bulk should cancel.  The value should live in the bounded defect
-skeleton and in the remaining off-conic zone.  This is the positive-live
-replacement for the q=17/q=19 empty-conic repair picture.
+skeleton and in the way off-conic intruder moves change the live conic graph.
+This is the positive-live replacement for the q=17/q=19 empty-conic repair
+picture.
+
+Important correction: the live conic and off-conic zone are not a disjunctive
+sum.  A legal off-conic zone move is itself another conic intruder, so it adds
+matching edges to the live-conic graph and can delete live conic vertices.  The
+target is therefore a maintenance invariant:
+
+```text
+after P2 replies, live-conic Node-Kayles xor is 0
+```
+
+with two obligations:
+
+- **preservability:** after each coupled opponent move, some legal reply restores the xor;
+- **termination:** maintaining the xor leaves P2, not P1, with the final move.
+
+The row/column reservoir is a move-availability lemma for preservability.  It
+is not a Hall/matching certificate for an independent zone game.
 
 Candidate theorem shape:
 
@@ -68,7 +86,7 @@ grandchild residual is:
 
   even conic bulk
   + one of finitely many defect skeletons
-  + a small-zone certificate leaf.
+  + a re-steering reservoir for future intrusions.
 ```
 
 ## Tooling To Add
@@ -141,8 +159,8 @@ Priority:
   extraction says the bucket is structurally needed;
 - classify first moves by `on/ext/int`, known value, and live-conic residual
   graph after the best P reply;
-- look for a bounded set of residual graph/zone skeletons rather than a
-  coordinate rule.
+- look for the geometry that makes xor re-steering preservable rather than a
+  coordinate rule or a static zone matching.
 
 ### q = 25
 
@@ -197,3 +215,7 @@ be different for q>=23.
 7. Semi-formalize the S4 two-ply depletion lemma in Lean or paper notes.
 8. Generalize the depletion count to more intruder layers if the residual graph
    miner shows a stable bounded-defect family.
+9. One-pair q=23 maintenance probe: done for bucket representative `1,3,4,9`.  All 259 first
+   moves have an existentially chosen zero-xor P follower with complete zero-xor P replies to its
+   off-conic zone.  The naive first-P follower rule is false, and cross-bucket coverage plus
+   termination remain open.  See `2026-07-09-live-conic-bestreply-mining.md`.

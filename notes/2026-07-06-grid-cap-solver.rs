@@ -58,9 +58,14 @@
 //                -- line-protocol runtime query shell over a dumped S4 memo/archive. Commands:
 //                   state, moves, play r,c, pop, replies r,c, bench <iters>, help, quit.
 //   s4xormine <q> t1,t2,t3,t4 [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
-//                [--start <root-move-index>] [--limit <n>]
+//                [--start <root-move-index>] [--limit <n>] [--maintain]
+//                [--require-maintenance]
+//                [--maintain-max-tries <n>] [--maintain-start <zone-move-index>]
+//                [--maintain-limit <n>] [--maintain-summary-only]
 //                -- targeted S4-local solver: for each first move, try legal replies whose live
 //                   conic graph has the requested Node-Kayles xor, stopping at the first solved P.
+//                   With --maintain, play each requested off-conic move from that P follower and
+//                   search for a P reply that restores the requested conic xor.
 //   s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
 //          [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
 //          [--max-reply-moves <n>] [--best-replies] [--max-best-replies <n>]
@@ -3145,7 +3150,22 @@ fn s4_conic_nk_xor_only(
         } else if all_deg_le_two && comp_edges == size {
             nk_xor ^= b.nk_cycle[size];
         } else {
-            return None;
+            let mut index = vec![usize::MAX; n];
+            for (i, &v) in comp.iter().enumerate() {
+                index[v] = i;
+            }
+            let mut local = vec![0u64; size];
+            for (i, &v) in comp.iter().enumerate() {
+                let mut bits = adj[v];
+                while bits != 0 {
+                    let w = bits.trailing_zeros() as usize;
+                    bits &= bits - 1;
+                    if index[w] != usize::MAX {
+                        local[i] |= 1u64 << index[w];
+                    }
+                }
+            }
+            nk_xor ^= s4_small_nk_grundy(&local, 200_000)?;
         }
     }
     Some(nk_xor)
@@ -3273,6 +3293,31 @@ struct S4XorCandidate {
     occ: Vec<u16>,
     chosen: Mask,
     forbidden: Mask,
+}
+
+#[derive(Default)]
+struct S4MaintainCounts {
+    followers: usize,
+    moves: usize,
+    hits: usize,
+    no_candidates: usize,
+    no_hits: usize,
+    try_limited: usize,
+    xor_unknown: usize,
+    aborted: usize,
+}
+
+impl S4MaintainCounts {
+    fn add(&mut self, other: &S4MaintainCounts) {
+        self.followers += other.followers;
+        self.moves += other.moves;
+        self.hits += other.hits;
+        self.no_candidates += other.no_candidates;
+        self.no_hits += other.no_hits;
+        self.try_limited += other.try_limited;
+        self.xor_unknown += other.xor_unknown;
+        self.aborted += other.aborted;
+    }
 }
 
 fn s4_geom_rank(geom: &str) -> usize {
@@ -3702,6 +3747,210 @@ fn solve_s4_mine(
     println!("S4MINE-DONE seen-states={} truncated={}", seen.len(), truncated);
 }
 
+fn probe_s4_xor_maintenance(
+    b: &Board,
+    t4: &[usize],
+    memo: &mut FnvMap<u128, bool>,
+    cap: usize,
+    target_xor: u8,
+    max_tries: usize,
+    verbose_tries: bool,
+    start_index: usize,
+    limit: usize,
+    x: u16,
+    y: &S4XorCandidate,
+) -> S4MaintainCounts {
+    let mut counts = S4MaintainCounts { followers: 1, ..S4MaintainCounts::default() };
+    let zone_moves: Vec<u16> = avail_cells(b, &y.chosen, &y.forbidden)
+        .into_iter()
+        .filter(|&z| !is_on_root_conic(b, z as usize))
+        .collect();
+    let total_zone_moves = zone_moves.len();
+    let end_index = start_index.saturating_add(limit).min(total_zone_moves);
+    println!(
+        "MAINTFOLLOW x={},{} y={},{} target-xor={} zone-moves={} start={} end={}",
+        x as usize / b.q,
+        x as usize % b.q,
+        y.z as usize / b.q,
+        y.z as usize % b.q,
+        target_xor,
+        total_zone_moves,
+        start_index,
+        end_index
+    );
+    for (zone_index, z) in zone_moves.into_iter().enumerate() {
+        if zone_index < start_index {
+            continue;
+        }
+        if zone_index >= end_index {
+            break;
+        }
+        counts.moves += 1;
+        let (z_occ, z_chosen, z_forbidden) =
+            push_cell_state(b, &y.occ, &y.chosen, &y.forbidden, z as usize).unwrap();
+        let zgeom = geometry_label_for_root(b, t4, z as usize);
+        let zvalue = memo.get(&b.canon(&z_occ)).copied();
+        let mut candidates = Vec::new();
+        let mut xor_unknown = 0usize;
+        for w in avail_cells(b, &z_chosen, &z_forbidden) {
+            let (w_occ, w_chosen, w_forbidden) =
+                push_cell_state(b, &z_occ, &z_chosen, &z_forbidden, w as usize).unwrap();
+            match s4_conic_nk_xor_only(b, &w_occ, &w_chosen, &w_forbidden) {
+                Some(g) if g == target_xor => {
+                    candidates.push(S4XorCandidate {
+                        z: w,
+                        geom: geometry_label_for_root(b, t4, w as usize),
+                        live_on: live_on_root_conic(b, &w_chosen, &w_forbidden),
+                        occ: w_occ,
+                        chosen: w_chosen,
+                        forbidden: w_forbidden,
+                    });
+                }
+                Some(_) => {}
+                None => xor_unknown += 1,
+            }
+        }
+        counts.xor_unknown += xor_unknown;
+        candidates.sort_by_key(|cand| {
+            (
+                cand.live_on,
+                s4_geom_rank(cand.geom),
+                cand.z as usize / b.q,
+                cand.z as usize % b.q,
+            )
+        });
+        println!(
+            "MAINTMOVE zone_index={} x={},{} y={},{} z={},{} zgeom={} zvalue={} candidates={} xor-unknown={}",
+            zone_index,
+            x as usize / b.q,
+            x as usize % b.q,
+            y.z as usize / b.q,
+            y.z as usize % b.q,
+            z as usize / b.q,
+            z as usize % b.q,
+            zgeom,
+            value_label(zvalue),
+            candidates.len(),
+            xor_unknown
+        );
+        if candidates.is_empty() {
+            counts.no_candidates += 1;
+            println!(
+                "MAINTRESULT zone_index={} z={},{} status=no-candidates candidates=0 tried=0 memo={}",
+                zone_index,
+                z as usize / b.q,
+                z as usize % b.q,
+                memo.len()
+            );
+            continue;
+        }
+        let mut tried = 0usize;
+        let mut hit = false;
+        for cand in candidates.iter().take(max_tries) {
+            tried += 1;
+            let mut occ_solve = cand.occ.clone();
+            let value = s4_g(b, memo, cap, &mut occ_solve, &cand.chosen, &cand.forbidden);
+            if verbose_tries {
+                println!(
+                    "MAINTTRY zone_index={} z={},{} zgeom={} w={},{} wgeom={} value={} live_on={} memo={} {}",
+                    zone_index,
+                    z as usize / b.q,
+                    z as usize % b.q,
+                    zgeom,
+                    cand.z as usize / b.q,
+                    cand.z as usize % b.q,
+                    cand.geom,
+                    value_label(value),
+                    cand.live_on,
+                    memo.len(),
+                    s4_conic_graph_feature_string(b, &cand.occ, &cand.chosen, &cand.forbidden)
+                );
+            }
+            match value {
+                Some(false) => {
+                    counts.hits += 1;
+                    hit = true;
+                    println!(
+                        "MAINTRESULT zone_index={} z={},{} status=hit candidates={} tried={} w={},{} wgeom={} live_on={} memo={}",
+                        zone_index,
+                        z as usize / b.q,
+                        z as usize % b.q,
+                        candidates.len(),
+                        tried,
+                        cand.z as usize / b.q,
+                        cand.z as usize % b.q,
+                        cand.geom,
+                        cand.live_on,
+                        memo.len()
+                    );
+                    break;
+                }
+                Some(true) => {}
+                None => {
+                    counts.aborted += 1;
+                    println!(
+                        "MAINTRESULT zone_index={} z={},{} status=aborted candidates={} tried={} memo={}",
+                        zone_index,
+                        z as usize / b.q,
+                        z as usize % b.q,
+                        candidates.len(),
+                        tried,
+                        memo.len()
+                    );
+                    break;
+                }
+            }
+        }
+        if counts.aborted != 0 {
+            break;
+        }
+        if !hit {
+            if tried < candidates.len() {
+                counts.try_limited += 1;
+                println!(
+                    "MAINTRESULT zone_index={} z={},{} status=try-limit candidates={} tried={} memo={}",
+                    zone_index,
+                    z as usize / b.q,
+                    z as usize % b.q,
+                    candidates.len(),
+                    tried,
+                    memo.len()
+                );
+            } else {
+                counts.no_hits += 1;
+                println!(
+                    "MAINTRESULT zone_index={} z={},{} status=no-hit candidates={} tried={} memo={}",
+                    zone_index,
+                    z as usize / b.q,
+                    z as usize % b.q,
+                    candidates.len(),
+                    tried,
+                    memo.len()
+                );
+            }
+        }
+    }
+    println!(
+        "MAINTFOLLOW-DONE x={},{} y={},{} moves={} zone-start={} zone-end={} zone-total={} hits={} no-candidates={} no-hit={} try-limited={} xor-unknown={} aborted={} memo={}",
+        x as usize / b.q,
+        x as usize % b.q,
+        y.z as usize / b.q,
+        y.z as usize % b.q,
+        counts.moves,
+        start_index,
+        end_index,
+        total_zone_moves,
+        counts.hits,
+        counts.no_candidates,
+        counts.no_hits,
+        counts.try_limited,
+        counts.xor_unknown,
+        counts.aborted,
+        memo.len()
+    );
+    counts
+}
+
 fn solve_s4_xor_mine(
     q: usize,
     t4: &[usize],
@@ -3710,12 +3959,18 @@ fn solve_s4_xor_mine(
     max_tries: usize,
     start_index: usize,
     limit: usize,
+    maintain: bool,
+    require_maintenance: bool,
+    maintain_max_tries: usize,
+    maintain_verbose_tries: bool,
+    maintain_start: usize,
+    maintain_limit: usize,
 ) {
     let b = Board::new(q);
     let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
     let mut memo: FnvMap<u128, bool> = FnvMap::default();
     println!(
-        "S4XORMINE q={} t4={:?} cells={:?} target-xor={} cap={} max-tries={} start={} limit={}",
+        "S4XORMINE q={} t4={:?} cells={:?} target-xor={} cap={} max-tries={} start={} limit={} maintain={} require-maintenance={} maintain-max-tries={} maintain-summary-only={} maintain-start={} maintain-limit={}",
         q,
         t4,
         cells,
@@ -3723,7 +3978,13 @@ fn solve_s4_xor_mine(
         cap,
         if max_tries == usize::MAX { "none".to_string() } else { max_tries.to_string() },
         start_index,
-        if limit == usize::MAX { "none".to_string() } else { limit.to_string() }
+        if limit == usize::MAX { "none".to_string() } else { limit.to_string() },
+        if maintain { 1 } else { 0 },
+        if require_maintenance { 1 } else { 0 },
+        if maintain_max_tries == usize::MAX { "none".to_string() } else { maintain_max_tries.to_string() },
+        if maintain_verbose_tries { 0 } else { 1 },
+        maintain_start,
+        if maintain_limit == usize::MAX { "none".to_string() } else { maintain_limit.to_string() }
     );
     let first_moves = avail_cells(&b, &root_chosen, &root_forbidden);
     let total_root_moves = first_moves.len();
@@ -3733,6 +3994,7 @@ fn solve_s4_xor_mine(
     let mut no_candidates = 0usize;
     let mut no_hits = 0usize;
     let mut aborted = false;
+    let mut maintain_counts = S4MaintainCounts::default();
     for (root_index, x) in first_moves.into_iter().enumerate() {
         if root_index < start_index {
             continue;
@@ -3812,22 +4074,63 @@ fn solve_s4_xor_mine(
             );
             match value {
                 Some(false) => {
-                    hits += 1;
-                    hit = true;
-                    println!(
-                        "XORRESULT x={},{} xgeom={} status=hit candidates={} tried={} y={},{} ygeom={} live_on={} memo={}",
-                        x as usize / q,
-                        x as usize % q,
-                        xgeom,
-                        candidates.len(),
-                        tried,
-                        cand.z as usize / q,
-                        cand.z as usize % q,
-                        cand.geom,
-                        cand.live_on,
-                        memo.len()
-                    );
-                    break;
+                    let mut maintenance_ok = true;
+                    if maintain {
+                        let counts = probe_s4_xor_maintenance(
+                            &b,
+                            t4,
+                            &mut memo,
+                            cap,
+                            target_xor,
+                            maintain_max_tries,
+                            maintain_verbose_tries,
+                            maintain_start,
+                            maintain_limit,
+                            x,
+                            cand,
+                        );
+                        aborted |= counts.aborted != 0;
+                        maintenance_ok = counts.moves == counts.hits
+                            && counts.no_candidates == 0
+                            && counts.no_hits == 0
+                            && counts.try_limited == 0
+                            && counts.xor_unknown == 0
+                            && counts.aborted == 0;
+                        maintain_counts.add(&counts);
+                    }
+                    if aborted {
+                        break;
+                    }
+                    if require_maintenance && !maintenance_ok {
+                        println!(
+                            "XORMAINT x={},{} xgeom={} y={},{} ygeom={} status=failed tried={} memo={}",
+                            x as usize / q,
+                            x as usize % q,
+                            xgeom,
+                            cand.z as usize / q,
+                            cand.z as usize % q,
+                            cand.geom,
+                            tried,
+                            memo.len()
+                        );
+                    } else {
+                        hits += 1;
+                        hit = true;
+                        println!(
+                            "XORRESULT x={},{} xgeom={} status=hit candidates={} tried={} y={},{} ygeom={} live_on={} memo={}",
+                            x as usize / q,
+                            x as usize % q,
+                            xgeom,
+                            candidates.len(),
+                            tried,
+                            cand.z as usize / q,
+                            cand.z as usize % q,
+                            cand.geom,
+                            cand.live_on,
+                            memo.len()
+                        );
+                        break;
+                    }
                 }
                 Some(true) => {}
                 None => {
@@ -3862,7 +4165,7 @@ fn solve_s4_xor_mine(
         }
     }
     println!(
-        "S4XORMINE-DONE moves={} root-start={} root-end={} root-total={} hits={} no-candidates={} no-hit={} aborted={} memo={}",
+        "S4XORMINE-DONE moves={} root-start={} root-end={} root-total={} hits={} no-candidates={} no-hit={} aborted={} memo={} maintain-followers={} maintain-moves={} maintain-hits={} maintain-no-candidates={} maintain-no-hit={} maintain-try-limited={} maintain-xor-unknown={} maintain-aborted={}",
         total_moves,
         start_index,
         end_index,
@@ -3871,7 +4174,15 @@ fn solve_s4_xor_mine(
         no_candidates,
         no_hits,
         aborted,
-        memo.len()
+        memo.len(),
+        maintain_counts.followers,
+        maintain_counts.moves,
+        maintain_counts.hits,
+        maintain_counts.no_candidates,
+        maintain_counts.no_hits,
+        maintain_counts.try_limited,
+        maintain_counts.xor_unknown,
+        maintain_counts.aborted
     );
 }
 
@@ -6375,12 +6686,21 @@ fn main() {
     }
     if args[1] == "s4xormine" {
         // s4xormine <q> t1,t2,t3,t4 [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
-        //        [--start <root-move-index>] [--limit <n>]
+        //        [--start <root-move-index>] [--limit <n>] [--maintain]
+        //        [--require-maintenance]
+        //        [--maintain-max-tries <n>] [--maintain-start <zone-move-index>]
+        //        [--maintain-limit <n>] [--maintain-summary-only]
         let mut target_xor = 0u8;
         let mut cap: usize = 20_000_000;
         let mut max_tries = usize::MAX;
         let mut start_index = 0usize;
         let mut limit = usize::MAX;
+        let mut maintain = false;
+        let mut require_maintenance = false;
+        let mut maintain_max_tries = 10usize;
+        let mut maintain_verbose_tries = true;
+        let mut maintain_start = 0usize;
+        let mut maintain_limit = usize::MAX;
         let mut positional: Vec<String> = Vec::new();
         let mut it = args[2..].iter();
         while let Some(a) = it.next() {
@@ -6404,6 +6724,25 @@ fn main() {
                 limit = it.next().expect("--limit needs a value").parse().expect("--limit int");
             } else if let Some(rest) = a.strip_prefix("--limit=") {
                 limit = rest.parse().expect("--limit int");
+            } else if a == "--maintain" {
+                maintain = true;
+            } else if a == "--require-maintenance" {
+                maintain = true;
+                require_maintenance = true;
+            } else if a == "--maintain-max-tries" {
+                maintain_max_tries = it.next().expect("--maintain-max-tries needs a value").parse().expect("--maintain-max-tries int");
+            } else if let Some(rest) = a.strip_prefix("--maintain-max-tries=") {
+                maintain_max_tries = rest.parse().expect("--maintain-max-tries int");
+            } else if a == "--maintain-summary-only" {
+                maintain_verbose_tries = false;
+            } else if a == "--maintain-start" {
+                maintain_start = it.next().expect("--maintain-start needs a value").parse().expect("--maintain-start int");
+            } else if let Some(rest) = a.strip_prefix("--maintain-start=") {
+                maintain_start = rest.parse().expect("--maintain-start int");
+            } else if a == "--maintain-limit" {
+                maintain_limit = it.next().expect("--maintain-limit needs a value").parse().expect("--maintain-limit int");
+            } else if let Some(rest) = a.strip_prefix("--maintain-limit=") {
+                maintain_limit = rest.parse().expect("--maintain-limit int");
             } else {
                 positional.push(a.clone());
             }
@@ -6418,7 +6757,25 @@ fn main() {
                 .get(1)
                 .expect("s4xormine mode needs t values: s4xormine <q> t1,t2,t3,t4"),
         );
-        solve_s4_xor_mine(q, &t4, target_xor, cap, max_tries, start_index, limit);
+        assert!(
+            !require_maintenance || (maintain_start == 0 && maintain_limit == usize::MAX),
+            "--require-maintenance needs the complete zone layer (no maintenance slicing)"
+        );
+        solve_s4_xor_mine(
+            q,
+            &t4,
+            target_xor,
+            cap,
+            max_tries,
+            start_index,
+            limit,
+            maintain,
+            require_maintenance,
+            maintain_max_tries,
+            maintain_verbose_tries,
+            maintain_start,
+            maintain_limit,
+        );
         return;
     }
     if args[1] == "s4mine" {

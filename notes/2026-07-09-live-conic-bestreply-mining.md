@@ -259,12 +259,16 @@ This pass supports a sharper q>=23 proof target:
 positive-live S4 reply
 -> live conic graph is a union of paths, cycles, and isolates
 -> choose a reply with live-conic Node-Kayles xor 0
--> remaining proof obligation is the off-conic zone and its coupling to the conic.
+-> maintain conic-xor zero through coupled off-conic intruder play.
 ```
 
-It also warns against a finite tiny-spectrum story.  The observed component-size spectra are varied
-already at q=23, so the next theorem should probably use general path/cycle Node-Kayles structure
-rather than enumerate a short list of graph shapes.
+This is a maintenance target, not a disjunctive-sum decomposition.  An off-conic zone move is
+itself a conic intruder: it adds another partial matching to the live-conic graph and deletes conic
+vertices through its chords.  Therefore there is no game split of the form
+`conic_xor xor zone_value`, and `conic_xor = 0` is not an invariant unless P2 can keep re-zeroing
+it after P1's coupled moves.  The observed component-size spectra are varied already at q=23, so
+the next theorem should use general path/cycle Node-Kayles structure plus a re-steering rule rather
+than enumerate a short list of graph shapes.
 
 ## Off-Conic Zone Probe
 
@@ -295,8 +299,10 @@ zone_nk_known: always 0
 
 So the off-conic zone after zero-xor candidates is already one large dense component at q=23.  A
 direct exact Node-Kayles-zone lemma is not the next easy layer.  The useful next question is whether
-this dense component has a low-dimensional geometric description or a robust pairing/matching
-certificate once the live conic xor has been steered to zero.
+this dense component has a low-dimensional geometric description that supports re-zeroing the live
+conic after future off-conic intrusions.  A raw zone pairing/matching target is the wrong object:
+the zone does not decouple from the conic, and a static pairing strategy is the kind of mirror
+certificate C28 already failed to find one layer up.
 
 I also extended `rust/scripts/s4_ml_mine.py` to parse `XORTRY` rows and to keep a filtered
 `xortry-zone-features.tsv` table for rows with real `zone_*` fields.  On the same q=23 root
@@ -324,9 +330,12 @@ zone_rows = zone_cols = 17 for all 260 candidates
 
 This is exactly the number of unused rows/columns after the six selected grid cells.  So in this
 sample, the line constraints carve a dense conflict graph but do not remove any entire unused row or
-column from the off-conic zone.  That points to a reservoir/Hall-style direction: after zero-xor
-steering, prove that the off-conic legal zone still projects onto all unused rows and columns, then
-look for a robust pairing or matching certificate inside that reservoir.
+column from the off-conic zone.  This points to a move-availability use of the reservoir: after
+zero-xor steering, prove that the off-conic legal zone still projects onto all unused rows and
+columns, so P2 has fresh intruder material for re-steering.  It does not by itself point to a Hall
+or matching certificate.  The counting lower bound below gives per-row degree `q - 22`, while a
+balanced bipartite perfect-matching lever would need `q - 22 >= (q - 6)/2`, i.e. `q >= 38`, so it
+does not cover q=23/25/29/31/37.
 
 The q=23 first-candidate value signal remains shallow:
 
@@ -367,8 +376,8 @@ the first P witness appears within three candidates.
 ```
 
 This does not yet explain why the P witness is P, but it gives a sharper next mining question:
-whether a bounded-density/full-row-column reservoir condition is enough to guarantee a local
-pairing or matching response.
+which geometric features of the full-row/full-column reservoir make a re-zeroing move available
+after the next coupled off-conic intrusion.
 
 Full q=23 bucket sweep with the expanded zone fields:
 
@@ -401,35 +410,102 @@ that still projects onto every unused row and every unused column.
 ```
 
 This is a better theorem target than direct full-zone Grundy computation or a fixed density
-threshold.
+threshold, but it is still only a base-layer availability statement.  It should not be read as
+evidence for a zone matching theorem.
 
 There is also a simple incidence proof of the row/column reservoir fact, independent of the mined
-zero-xor witness choice.  Let `S` be any legal six-cell grid position.  Because of the row/column
-rules, the six selected cells occupy six distinct rows and six distinct columns.  In any unused row
-`R`, an off-conic legal cell can be killed only by:
+zero-xor witness choice.  In general, let `S` be any legal `k`-cell grid position in the normalized
+residual model, and let `R` be an unused row.  A candidate off-conic cell in `R` can be killed only
+by:
 
-- one of the six selected columns;
-- one of the `binom(6,2) = 15` affine lines through pairs of selected cells, each meeting `R` in at
+- one of the `k` selected columns;
+- one of the `binom(k,2)` affine lines through pairs of selected cells, each meeting `R` in at
   most one point because no pair lies in row `R`;
 - the one root-conic cell in `R`, if it exists, because the zone excludes on-conic cells.
 
 Thus every unused row contains at least
 
 ```text
-q - 6 - 15 - 1 = q - 22
+q - k - binom(k,2) - 1
 ```
 
-legal off-conic cells.  The same argument applies to unused columns.  Therefore for every `q >= 23`
-and every legal six-cell position, the off-conic zone projects onto every unused row and every
-unused column.  The q=23 mined invariant `zone_rows = zone_cols = 17` is exactly the sharp boundary
-case of this lemma, since `23 - 6 = 17` unused rows/columns.
+legal off-conic cells.  The same argument applies to unused columns.  For the six-cell S4-reply
+layer this becomes `q - 6 - 15 - 1 = q - 22`, so for every `q >= 23` and every legal six-cell
+position, the off-conic zone projects onto every unused row and every unused column.
+
+The `-1` conic term uses the normalized Möbius/hyperbola form of the root conic: it is the graph
+of a bijection in the residual grid, so it has at most one cell in each row and column.  A general
+projective conic can meet a line twice; the graph hypothesis is part of this row/column instance.
+
+The incidence-matrix form is the reusable lemma: legal cells in a target line `T` are at least
+`|T|` minus the number of capacity-saturated lines that cross `T` at would-be legal cells, minus
+any explicitly excluded structured cells such as the root conic.  The row and column bounds are
+instances of that line-load count.
+
+At q=23, `k=6` is the last nonvacuous layer of this loose bound: at `k=7`, `23 - 7 - 21 - 1 < 0`.
+So the six-cell reservoir is a base-layer availability fact, not a recursion engine.  The phrase
+"sharp boundary" should not be used for the game: it is only the vacuity threshold of this loose
+bound, not evidence that support fails below q=23.
+
+## One-Pair Maintenance Probe: q=23 Bucket 0
+
+The follow-up probe extends `s4xormine` by one coupled off-conic move/reply pair.  It uses exact
+whole-position P/N solves for candidate replies and exact Node-Kayles xor for the live-conic graph.
+It does not identify that graph xor with the true game nimber.
+
+The naive selection rule fails immediately.  For bucket representative `1,3,4,9` and first move
+`x=(0,0)`, the first zero-xor P follower is `y=(7,21)`.  Three of its 108 legal off-conic moves
+have no P-valued zero-xor reply after every such reply is solved:
+
+```text
+z=(11,16): 20 candidates, 0 P
+z=(15,16): 22 candidates, 0 P
+z=(16,11): 29 candidates, 0 P
+```
+
+Thus `P-valued + conic xor 0` does not automatically imply preservability.  Preservability must be
+part of P2's witness selection.
+
+The strategy-level search continues past such followers.  For the same `x`, the fourth P-valued
+zero-xor follower tested, `y=(17,10)`, has a P-valued zero-xor reply for all 102 legal off-conic
+moves.  A complete chunked census over all 259 first moves of this bucket then gives:
+
+```text
+chunks=26 root_moves=259 summary_moves=259 summary_hits=259 accepted=259 missing_indices=0 duplicate_indices=0 bad_chunks=0
+candidate_followers=2714 failed_followers=2455 all_maint_moves=296933 all_maint_hits=288835 all_maint_no_hit=8098 no_candidates=0 try_limited=0 xor_unknown=0 aborted=0 max_memo=22575285
+selected_zone_moves=28646 selected_zone_hits=28646 selected_no_hit=0 selected_unknown=0 selected_zone_range=101..116
+```
+
+Every first move in this bucket therefore has at least one zero-xor P follower with complete
+one-pair maintenance coverage.  This is existential and selective: 2,455 other zero-xor P
+followers failed at least one maintenance obligation before the 259 accepted followers were
+found.  The accepted first replies required up to 61 sorted candidates.
+
+The selected six-cell followers have positive live conic:
+
+```text
+live_on 4:9 5:12 6:106 7:42 8:54 9:12 10:24
+```
+
+After the next off-conic move and selected maintenance reply, the residual is much smaller:
+
+```text
+live_on 0:14205 2:12928 3:1314 4:181 5:6 6:12
+```
+
+So 27,133 of 28,646 accepted maintenance replies (94.718%) land at `live_on <= 2`; the remaining
+1,513 obligations retain 3--6 live conic cells.  This is strong one-pair descent evidence, but not
+a termination proof and not yet an all-bucket q=23 result.
+
+The exact logs are under `rust/s4-dumps/2026-07-09/q23-maint-bucket00-summary/`, with the first
+chunk at `rust/s4-dumps/2026-07-09/xormine-q23-maint-required-summary-idx00-rootmoves000-009.txt`.
 
 ## Next Checks
 
-1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,
-   row/column support, line-family support, automorphism stabilizers, and whether a pairing/matching
-   certificate exists.
-2. Separate conic graph value from off-conic zone value without trying to compute full zone Grundy
-   directly.
-3. Prove the matching-union graph lemma cleanly in paper/Lean terms.
+1. Mine preservability of the maintenance invariant: after a q=23 zero-xor witness and one further
+   legal off-conic move, test whether the bucket-0 existential selector extends to other PGL
+   buckets; do not use the refuted first-P-witness rule.
+2. Track zone geometry as move availability for re-steering: row/column support, line-family
+   support, and stabilizers, without treating it as a decoupled zone game.
+3. Prove the conic matching-union graph lemma cleanly in paper/Lean terms.
 4. For q=25, build targeted witness dumps rather than broad partial roots.

@@ -39,6 +39,22 @@ is the biggest build and sharpens C38 — start it in parallel because it is lon
   9. **C39** — remoteness/suspense dynamic monovariant.
   10. **C40** — oracle-driven winline generation (feeds C23 viz).
 
+**Amendment (Fable, 2026-07-09 second pass — counterexample-readiness additions.)** The frontier
+re-review found the plans pressure the conjecture-true direction hard (steering, maintenance,
+certificates) but are thin on being *ready for a counterexample* — certifying one, and probing where
+the most plausible one lives. Four additions:
+
+- **C41** — trap ⇒ N converse in Lean. Joins **Tier B, before C34**: it gates D1's central
+  "conjecture false ⟺ trapped size-3" phrasing, and the expected proof route is within existing
+  machinery (cheap).
+- **C42** — type-census factorization of the witness-count concentration. Joins **Tier B,
+  immediately after C36** — same data and signatures; C36's verdict decides which half of the
+  factorization survives.
+- **C43** — PG(4,3) exact-solve sizing. Joins **Tier C**: independent compute lane; either verdict
+  fills D1's even-dimensional section, which currently has zero direct outcome evidence.
+- **C44** — GF(25) prime-power path + q=25 Baer bucket census. Joins **Tier C after C43**: the
+  falsification map's top A4 watch, previously orphaned with no task ID.
+
 ## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
 Context: `2026-07-04-sumfree-game-theorem.md` Lemma 4 (negation mirror with fixed extras) is
@@ -1068,6 +1084,14 @@ Guardrails: assembly + quotation only — write no new proofs and prove nothing;
 [COMPUTED]/[CONDITIONAL] result to [PROVEN]; no fabricated citations; keep the umbrella/novelty
 wording conservative per C26 (structured finite-incidence subfamily, not a new game class).
 
+**Amendment (Fable, 2026-07-09 second pass):** (i) state the falsification equivalence
+ONE-directionally — "escape everywhere ⇒ P" is Lean-proven; the converse "trapped size-3 ⇒ N" is
+C41 and unproven — do not write "conjecture false ⟺ trapped size-3 exists" as a certified
+equivalence until C41 lands (cite it as expected/queued). (ii) The open set is larger than the
+odd-plane row: `PG(2m,q)`, `m ≥ 2`, odd `q` is open with **no direct outcome evidence at all**
+(C32 was a policy probe, not a solve; C43 sizes PG(4,3)) — the status/evidence table and the
+section skeleton must state that hole plainly, not silently scope to planes.
+
 Deliverable: the skeleton draft at `notes/2026-07-09-d1-outcome-classes-manuscript.md`.
 Report file: `notes/2026-07-09-codex-d1-manuscript-skeleton.md` (the readiness audit + gaps list +
 what was quoted vs stubbed vs flagged `[VERIFY]`).
@@ -1107,7 +1131,7 @@ Guardrails: shallow layer only (S5/S6); validate `nimber==0` against P/N dumps b
 nimber dumps are bigger — do not launch a large-`q` Grundy dump without the sizing gate.
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-nimber-oracle.md`.
 
-## C36. Cross-q combinatorial-type value alignment — localize the uniform-theorem obstruction
+## C36. Cross-q combinatorial-type value alignment — localize the uniform-theorem obstruction [REPORTED 2026-07-09]
 
 Context: S4 roots are conic-normalized (`r·c = 1`) and canonically keyed, so a reachable state has
 a **q-independent combinatorial type**. Running the same query across the q=17/19/23 exact dumps and
@@ -1135,7 +1159,12 @@ Guardrails: known values only; the self-consistency gate is non-negotiable; the 
 must be stated so a reader can reproduce it. Budget: hard 8h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-cross-q-type-alignment.md`.
 
-## C37. Cross-root shared-key agreement — scaled soundness check + state-complexity number
+Status: reported 2026-07-09.  The q-blind coarse shape failed self-consistency with one q=19
+mixed-value collision.  A strict normalized-coordinate type passed self-consistency and found 1,364
+shared S5/S6 types across at least two of q=17/19/23, with 281 nonconstant value rows.  Full table:
+`rust/s4-dumps/2026-07-09/c36-analysis/nonconstant-strict-types.tsv`.
+
+## C37. Cross-root shared-key agreement — scaled soundness check + state-complexity number [REPORTED 2026-07-09]
 
 Context: distinct S4 roots' exact dumps **overlap** — positions reachable from both canonicalize to
 the same key. Agreement on shared keys is a test of `canon()` soundness (the C8 concern that the
@@ -1229,3 +1258,164 @@ preservability and termination obligations; the reservoir is a base-layer move-a
 and whole-board capacity-1 collapse is scoped out by the AG(2,q) blocking-set obstruction.  Existing
 q=23 all-bucket `s4xormine` logs were re-parsed only as a cheap first-ply preservability check
 (5734/5734 hits, selected `zone_rows = zone_cols = 17`, no new solves).
+
+## C41. Lean-certify the trapped ⇒ N converse (close the falsification equivalence)
+
+**READ FIRST:** [`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md)
+§1 — it names this gap precisely. Only the elimination direction is Lean-proven (escape everywhere
+⇒ root P: `OddEscapeGameStatement` → `initialPStatement_of_oddEscapeStatement_finrank`). The
+converse — a trapped size-3 residual position (all `q²−9q+21` size-4 children N) implies `PG(2,q)`
+is N — is stated informally in the handoff ("root P is equivalent to the escape condition") but is
+**not in Lean**. It gates two things: (i) D1/C34's central framing "conjecture false ⟺ a trapped
+size-3 exists" cannot be published as an equivalence without it; (ii) if the falsification watch
+(C44, A4 squares) ever finds a computational trap, it is not a *certified* counterexample until
+this transport exists.
+
+Expected proof route (verify, don't trust — this is a sketch, not a checked argument):
+
+1. A trapped position has all children N, hence is a P-position (`q²−9q+21 > 0` ensures it is
+   nonterminal, so the trap is a value failure, not a stalled position).
+2. The trapped residual size-3 corresponds to a projective 5-cap (opening pair + 3 cells; the
+   row/column constraints are exactly caps through the two opening points). Any 4 of its 5 points
+   form a frame; PGL is transitive on frames, so a collineation carries the trap to a child of THE
+   standard frame position.
+3. Game values are collineation-invariant (transport machinery exists), so the standard frame has
+   a P-valued child ⇒ the frame position is N ⇒ root is N via the proven chain
+   `initialPStatement_iff_isP_frame_of_finrank`.
+
+Task:
+
+1. Write the informal proof kernel first (one note section): the exact quantifier/parity
+   structure, where frame-transitivity, extendability, and value transport are each used, and any
+   gap in the sketch above — if the route needs a hypothesis the sketch missed, that is a
+   full-value finding (it changes D1's phrasing) — report it verbatim and stop before Lean work.
+2. Lean: state and prove the converse, targeting the iff
+   `InitialPStatement ↔ OddEscapeGameStatement` (or the missing direction as a standalone
+   theorem). Reuse `PlaneTransitivity.lean` (frame reduction, transitivity),
+   `ExtensionCount.lean`, and the existing value-transport lemmas. Statement-level minimum if the
+   proof stalls; report exactly which obligation blocks.
+3. Axiom gate on anything proved: `#print axioms` verbatim, must be
+   `[propext, Classical.choice, Quot.sound]` only.
+4. Update obligation: on success, the falsification map §1 and the D1 skeleton may state the
+   equivalence bidirectionally — note this in the report; do not edit those docs beyond a pointer
+   unless trivial.
+
+Budget: proof task; machine work is nil. Report file: `notes/2026-07-09-codex-trap-converse.md`.
+
+## C42. Type-census uniformity — factorize the witness-count concentration (fuses C36 with §6)
+
+**READ FIRST:** [`2026-07-09-witness-count-heuristic.md`](2026-07-09-witness-count-heuristic.md)
+§6 and the falsification map §6, plus the signature definitions in
+`rust/scripts/onconic_child_type_alignment.py` (currently untracked — commit it or pin its
+signature definitions verbatim in the report; reproducibility of the signature is the whole game).
+
+Context: the single most structured unexplained regularity in the data is that the **on-conic
+P-count per size-3 class is a near-point-mass at fixed q** (dispersion literally 0 at
+`q = 5,7,9,13,19`; `≤ 0.4` at 11/17). This concentration is the only thing protecting the (ON)
+route at the `q=17` knife edge, and §6 leaves it as "protected by concentration, not for a
+reason." Hypothesis to test — the concentration **factorizes**:
+
+```text
+value = f(q-independent stabilizer type)         [type-determinism — the game half, C36's test]
+   ×  type-census of a class ≈ class-independent [census uniformity — the geometry half, NO game values]
+⇒ per-class on-conic P-count = Σ over P-types of the census  ≈ class-independent  [the observed point mass]
+```
+
+The geometry half is a pure incidence-geometry counting statement (character sums / orbit counting
+over the conic parameter line) — and the observed dispersion-0 suggests an **exact identity**, not
+just Weil `O(√q)` equidistribution. If it holds, §6's "class-stability lemma + anchor lower bound"
+target stops being phenomenological and becomes provable-by-counting plus C36's finite obstruction
+list. Scope note: the §6 warning that character sums attack "the right quantity with an empirically
+false main term" is about the *mean over q* (macroscopic depletion); fixed-q *class dispersion* is
+the part equidistribution can legitimately own — keep the two separate in the report.
+
+1. **Census table:** from the existing feat data (`q = 5..19`, regenerable), compute for every
+   size-3 class the type-census vector — the count of on-conic children per stabilizer-type
+   signature (grouping (B) of the alignment script; report grouping (A)/full-PGL as a comparison
+   column only, flagged with the B3 caveat). Report per-q: the census vector dispersion across
+   classes (exact-identity? zero? small?), for the full vector AND for its projection onto P-types.
+2. **Verdict logic:** (i) census uniform + C36 type-determinism holds ⇒ the factorization is
+   real — state the census identity as a precise value-free conjecture (the Lean/paper target) and
+   attempt at least a semi-formal counting proof at one small q. (ii) census NOT uniform but
+   P-count still concentrated ⇒ the concentration lives in cancellation across types — report the
+   compensating structure verbatim (this would be the more surprising finding). (iii) C36's
+   self-consistency gate fails (value not type-determined) ⇒ report which refinement of the
+   signature restores determinism, or that none does.
+3. **Cross-report with C36** (same data, same signatures): do not duplicate its solves; this task
+   is census-only and needs no new game values. Note C36 has since reported (2026-07-09): the
+   strict normalized-coordinate type passes within-q self-consistency (the game half needed here),
+   while 281 shared types are non-q-constant — that cross-q obstruction is C36's object, not
+   this task's; C42's factorization is a fixed-q statement and stands either way.
+4. Any single class pair with materially different census vectors at a dispersion-0 q is a
+   contradiction with the P-count point mass under factorization — report it verbatim.
+
+Budget: 4h wall, single-core, ≤ 8 GB (feat regeneration only).
+Report file: `notes/2026-07-09-codex-type-census-uniformity.md`.
+
+## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum
+
+Context: D1's outcome-classification table has an entire family with **zero direct outcome
+evidence**: `PG(2m,q)`, `m ≥ 2`, odd `q`. PG(3,3) is odd projective dimension (closed by C25);
+PG(4,2) is q=2 (closed by C24); C32 was a *policy* probe (is one candidate mirror stuck-free),
+not a solve. We do not currently have computational grounds even for *conjecturing* PG(4,3)'s
+value. One verdict here reshapes both D1's even-dimensional section and the post-C32 design hunt;
+an N verdict would be the program's first N geometry — seismic, stop-and-report.
+
+Board: PG(4,3) = 121 points, max cap 20 (known), |PGL(5,3)| ≈ 2.4e11 — symmetry is enormous, the
+question is whether canonicalization makes the reachable class space tractable.
+
+1. **Sizing first, verdict second.** Extend the exhaustive projective solver
+   (`2026-07-05-proj-cap-fast.py` solved PG(3,3)/PG(4,2); port to Rust only if the probe says the
+   space is borderline) with: memoization on a canonical form under a practical symmetry subgroup
+   (document which — full PGL(5,3) canonicalization per node may be too slow; a cheap invariant +
+   fingerprint layer per the grid solver's `canon()` pattern is acceptable for sizing, flagged as
+   unsound-for-proof), a hard memo cap, and depth/width telemetry.
+2. **Probe:** capped run (2h wall, ≤ 8 GB). Report the growth curve (distinct classes per ply),
+   where it dies or completes, and an extrapolated full-solve cost. An HLL-style distinct-state
+   estimate (the queens `count` pattern) is a valid substitute for an exact memo count.
+3. **Reduction option:** if raw sizing is hopeless, report what a rank-5 frame-reduction analog
+   buys (transitivity up to frames = 6 points in general position prunes the first plies only) and
+   whether an opening-structure residual (the rank-3 trick that created the grid game) has a
+   rank-5 analog worth designing. Analysis only — no new solver build beyond the probe.
+4. **If (and only if) the extrapolation says the full solve fits comfortably** (≤ 8h, ≤ 8 GB):
+   run it. Verdict + node/class counts + wall verbatim. A completed verdict must be cross-checked:
+   re-run with a different move ordering or symmetry subgroup and confirm the same value. If N:
+   stop-and-report, do not chase follow-ups.
+5. Launching anything past 8h is a user decision — report the sizing and stop.
+
+Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-pg43-sizing.md`.
+
+## C44. GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
+
+Context: the falsification map names square `q` (Baer subplanes — extra dense collinearity) the
+**top falsification watch** (A4), the (ON) layer sits at a knife edge (§6), and q=25 is also where
+the field-arithmetic bugs have lived (C6) — yet q=25 work exists only as ad hoc probes
+(`[1,2,3,4]` P at ~26.3M memo entries; `[1,2,3,5]` blew the 100M cap) and a prose aside ("needs a
+dedicated prime-power path"). Make it a task. q=49 is explicitly out of scope; q=27 is char-3, a
+different regime, also out of scope.
+
+1. **The prime-power path:** whatever the S4 dump/query/mining stack needs to treat GF(25)
+   first-class — canonical keying over the GF(25) encoding, the GF-hash header guards, and the
+   `GF::new` zero-divisor/inverse self-check passing (C6). Document the field representation
+   verbatim in the report. No broad runs until the path's small-q regression passes: rerun one
+   q=9 or q=13 known case through the same code path, byte-identical to the prime-path output.
+2. **Bucket enumeration (group theory, no solves):** on-conic S4 parameter 6-subsets up to the
+   canonical group at q=25. **Decide and document the group**: PGL(2,25) vs PΓL(2,25) — the
+   Frobenius `x ↦ x⁵` exists here, unlike at prime q; using PΓL shrinks the bucket count but the
+   B3 orbit-invariance caveat applies to BOTH (the sound residual grouping is the burned-pair
+   stabilizer; state the census as conditional exactly as the q=23 census is, and emit the
+   stabilizer-refined signature alongside per the C36/C42 vocabulary).
+3. **Representative solves:** S4-rooted private-memo solves per bucket, 30-min wall gate per
+   representative, chunked `s4xormine` machinery where applicable. Any representative exceeding
+   the gate: kill, record as the sizing datum, move on — partial coverage honestly labeled beats
+   a stalled census. Solve 2–3 extra members of any N bucket found (Lemma-I falsification
+   pressure, per the C29 protocol).
+4. **The falsification read:** any N bucket at q=25 — the first square order past the confined
+   regime — is a MAJOR finding: report verbatim, stop, do not "fix". All-P is also a full
+   deliverable: it retires the sharpest A4 instance short of q=49 and adds the first square-order
+   column to the cross-q alignment (C36) corpora.
+5. Optional, gated: if the feat-layer (per-size-3-class on-conic witness counts) is affordable at
+   q=25 under an hour-scale gate, add the q=25 rows to the witness-count heuristic layers (the §6
+   knife-edge extrapolation currently ends at q=19). If not affordable, say so — do not force it.
+
+Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.

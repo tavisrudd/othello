@@ -108,6 +108,11 @@ dimensions `PG(2m,q)`, `m >= 2`, odd `q`, remain open.  C32 refuted the primary 
 composite-mirror idea in the plane and found an immediate fixed-`rho` seed obstruction in PG(4,3);
 future even-dimensional work needs a new non-primary design.
 
+**Evidence vacuum:** no even-dimensional odd-`q` board has ever been exactly *solved* — C32 was a
+policy probe, not a solve, and PG(3,3)/PG(4,2) belong to closed families.  We have no computational
+grounds even for conjecturing PG(4,3)'s value.  **C43** sizes an exact PG(4,3) solve; either
+verdict fills this hole, and an N verdict would be the program's first N geometry.
+
 ## Odd-Plane Kernel
 
 For the falsification-mode taxonomy and the proof-by-elimination scaffold over this kernel (the
@@ -175,6 +180,12 @@ every legal size-3 residual grid position has at least one P-valued size-4 child
 Formal target:
 
 - `ProjectiveCap.Almost.OddEscapeGameStatement`
+
+**Caveat: only the elimination direction is Lean-proven** (escape everywhere ⇒ root P, via
+`initialPStatement_of_oddEscapeStatement_finrank`).  The converse — a trapped size-3 ⇒ root N —
+is unproven; certifying it (expected route: any 4 of the trap's 5 projective points form a frame,
+frame transitivity + value transport) is **C41**.  Until it lands, do not publish the equivalence
+as bidirectional, and a computationally-found trap is not a certified counterexample.
 
 ### Conic Localization
 
@@ -391,6 +402,12 @@ task list.  Current high-value items:
   invariant.
 - **Small-zone follow-up:** turn the repair-mining data into a geometric repair-intruder lemma
   and a small-zone `Z <= 2` / empty-conic base-law certificate schema.
+- **Counterexample-readiness additions (Fable, 2026-07-09 second pass):** **C41** trap ⇒ N
+  converse in Lean (gates D1's equivalence phrasing); **C42** type-census factorization of the
+  witness-count concentration (fuses C36 with the heuristic's §6); **C43** PG(4,3) exact-solve
+  sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer bucket census
+  (the A4 falsification watch, previously without a task ID).  Tier placement is in the queue's
+  priority-ordering amendment.
 
 Recently reported:
 
@@ -481,6 +498,12 @@ Recently reported:
   q=23 has 217,478,689 unique raw keys across 22 roots with 18,319,494 shared keys; every shared
   key has equal P/N value, and the q=19-vs-q=23 cross-q guard has zero shared keys.  Report:
   [`../2026-07-09-codex-shared-key-agreement.md`](../2026-07-09-codex-shared-key-agreement.md).
+- **C36 cross-q type alignment:** depth-2 S4 mining over exact q=17/q=19/q=23 bucket dumps found
+  that the intended q-blind coarse shape is still too coarse (one q=19 within-type P/N collision).
+  A strict normalized-coordinate type passes self-consistency and has 1,364 shared S5/S6 types
+  across at least two q columns, with 281 nonconstant values.  The obstruction is mostly S6 and is
+  now tabulated in `rust/s4-dumps/2026-07-09/c36-analysis/nonconstant-strict-types.tsv`.  Report:
+  [`../2026-07-09-codex-cross-q-type-alignment.md`](../2026-07-09-codex-cross-q-type-alignment.md).
 
 Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
 C32 plane and PG(4,3) primary checks above, wrote the report, and marked C32 reported in the queue.
@@ -507,11 +530,21 @@ shared-key agreement checks.  q=19 all-bucket: 1,725,015 total records, 1,531,02
 155,219 shared keys, zero disagreement keys.  q=23 all-bucket: 241,627,613 total records,
 217,478,689 unique keys, 18,319,494 shared keys, zero disagreement keys.  q=19 union versus q=23
 union has zero shared keys.  Full pairwise logs are in `rust/s4-dumps/2026-07-09/c37-*.txt`.
-Next queue item by Fable's priority is C36 unless the session deliberately starts the larger C35
-nimber-oracle build or the C30 cert-book engineering lane.
+At that point the next queue item by Fable's priority was C36.
+
+Handoff note 2026-07-09 / Codex C36: added `rust/scripts/projcap_cross_q_type_alignment.py`,
+generated missing q=17 exact S4 bucket dumps under `rust/s4-dumps/2026-07-09/c36-q17-raw/`, mined
+45 exact q=17/q=19/q=23 bucket roots to depth 2 under `rust/s4-dumps/2026-07-09/c36-logs/`, and
+wrote the C36 report.  Coarse conic-defect + zone shape has one self-consistency collision; strict
+normalized-coordinate type has zero self-consistency collisions, 1,364 shared S5/S6 types, and 281
+nonconstant cross-q value rows.  Next queue item by Fable's priority is C35 unless the session
+chooses the C30 cert-book engineering lane or C34 writing lane.
 
 Good Lean side targets:
 
+- The trap ⇒ N converse (**C41**): close `InitialPStatement ↔ OddEscapeGameStatement` via
+  every-5-cap-contains-a-frame + frame transitivity + value transport — certifies the
+  falsification equivalence D1 leads with.
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
 - S4 two-ply conic-depletion incidence lemma in the normalized grid model.

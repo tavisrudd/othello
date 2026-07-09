@@ -29,7 +29,7 @@ The **converse — a found trap ⇒ `PG(2,q)` is N — is *not* currently in Lea
 frame-transitivity transport of the trap onto a seed-containing size-3). Consequence for the
 program: eliminating every trap **proves** the conjecture (the direction the scaffold below stands
 on), but a computationally-found trap is not yet a *certified* counterexample until that transport is
-discharged.
+discharged (queued: **C41**).
 
 Two facts fix the shape of any counterexample:
 
@@ -125,14 +125,16 @@ the warning that snapshot invariants over-promise here.
 
 - **Eliminated unconditionally:** `q=5,7,11,13` (Lean); the `q ≤ 7` and `q = 9` regime shapes.
 - **Eliminated modulo solver:** `q=9,17,19` (`q=3` trivial) — B1/B6 are the residual risks, hardened by C37.
-- **Finite-checkable, not class-closing:** A2 per-`q`; A4 squares (`q=25,49`) — the top falsification watch.
+- **Finite-checkable, not class-closing:** A2 per-`q`; A4 squares (`q=25,49`) — the top falsification watch (queued: **C44** for q=25).
 - **Conditional, discharge before citing:** B3 (`q=23` orbit bridge) — C36 is the test.
 - **Irreducible open core:** A3 (eventual failure). It is a *truth*-mode, distinct from — not equal
   to — the *route*-modes B4b/B4c (termination + coupling); they share instruments, not a definition.
   No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
   *predicts* on it — currently no main-layer counterexample signal, but erratic, so A3 stays open. A
-  uniform `Z`-bound (or a coupling-residual law from C35), plus the class-stability lower-bound §6
-  points to, is what would close it.
+  uniform `Z`-bound (or a coupling-residual law from C35) would close it; the finite-type route to
+  the class-stability lower-bound (§6) is now **closed negative** (C42), so the on-conic
+  concentration must be attacked through the arc-depletion arithmetic (A5), not a `q`-uniform type
+  census.
 
 Net: falsity has exactly one shape (trapped size-3), the easy proof routes are provably dead, and the
 only closure is a `q`-uniform shape-elimination — concretely the preservability/termination pair plus
@@ -168,3 +170,18 @@ across classes at fixed `q`) plus an **anchor lower-bound** (some class `≥ C+1
 `q=17` sits exactly at that edge (on-conic max `= 3 = C+1`, `C ≈ 2`). Bounding a *mean* (a
 character-sum / Weil estimate) attacks the right quantity with an empirically false main term — the
 depletion is macroscopic (`≈ 0.21·(q−4)` at `q=17`), not an `O(√q)` defect.
+
+The factorization attack on this concentration (queued as **C42**) has now been RUN — the
+on-conic-child type-alignment test
+([`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)).
+Verdict: **the cross-`q` half is refuted.** *Within* a fixed `q`, value IS a function of the exact
+stabilizer orbit (self-consistency 0 violations, reproducing the C5/C15 PGL buckets), so the
+concentration is genuinely type-determined at each `q`. But the type→value map is **not
+`q`-independent**: 119 integral configuration types flip value across `q`, and the flip is perfectly
+systematic — **N at an arc-depleted order, P everywhere else** (all flips at the depleted `q=11,17`;
+zero at the full `q=13,19`; minimal witness `{∞,0,−4,−3,−2,1}`). So the point mass is
+**arc-depletion (arithmetic)-driven, not a `q`-uniform type function**: the finite type→value table
+does not exist, the finite-type route to a uniform (ON) bound is **closed negative**, and even
+granting the full-PGL bridge a `q=17` solve cannot predict `q=19/23`. The uniform (ON) argument must
+engage the arc-depletion arithmetic — i.e. this route merges into **A5** (the complete-arc
+spectrum), not a combinatorial type census.

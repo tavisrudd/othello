@@ -301,7 +301,10 @@ first root-reply sample to inspect.
 ```bash
 /tmp/gridcap-s4 s4xormine <q> <t1,t2,t3,t4> \
   [--target-xor <g>] [--cap <slots>] [--max-tries <n>] \
-  [--start <root-move-index>] [--limit <n>]
+  [--start <root-move-index>] [--limit <n>] \
+  [--maintain | --require-maintenance] \
+  [--maintain-max-tries <n>] [--maintain-start <zone-move-index>] \
+  [--maintain-limit <n>] [--maintain-summary-only]
 ```
 
 `s4xormine` is a targeted solver, not a dump query.  For each legal first move from the S4 root, it
@@ -331,6 +334,28 @@ small exact components; `zone_nk_known=0` means at least one large or hard compo
 `zone_nk_xor` is only the known partial xor and should not be used as the full zone value.
 
 The cap is global to the run because the mode shares one S4 memo across candidate solves.
+
+`--maintain` extends the diagnostic by one opponent/reply pair.  After the first P-valued
+target-xor reply is selected, it enumerates legal off-conic moves from that follower and searches
+for P-valued replies that restore the target conic xor.  `--maintain-start` and
+`--maintain-limit` slice that off-conic layer for sizing.  The output rows are:
+
+- `MAINTFOLLOW`: the selected six-cell follower and its off-conic zone range;
+- `MAINTMOVE`: one legal off-conic move and the number of exact target-xor reply candidates;
+- `MAINTTRY`: a solved candidate reply, unless `--maintain-summary-only` suppresses these rows;
+- `MAINTRESULT`: `hit`, exact `no-hit`, `no-candidates`, `try-limit`, or `aborted`;
+- `MAINTFOLLOW-DONE`: the per-follower exact counters.
+
+`--require-maintenance` is the strategy-level selector.  It implies `--maintain`, requires the
+complete off-conic layer, rejects a P-valued target-xor follower if any off-conic move lacks a
+P-valued target-xor reply, and continues to later first-reply candidates.  The run reports an
+`XORRESULT status=hit` only after finding a follower with complete maintenance coverage.
+
+At the maintenance layer the live-conic graph can have degree greater than two.  For q=23 the
+mode computes its exact Node-Kayles Grundy value component-by-component with the bounded small-graph
+solver; a reply whose graph exceeds that solver's state cap is counted as `xor-unknown`, never as a
+non-target reply.  This is the Grundy value of the live-conic obstruction graph only, not the true
+Grundy value of the coupled grid-cap position.
 
 ### `s4bucketlist`
 
