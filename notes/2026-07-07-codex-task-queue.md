@@ -1583,12 +1583,25 @@ section (or stands alone) and is valuable *whichever way* the conjecture resolve
 Budget: writing/proof assembly, 6h; no new solves.
 Report file: `notes/2026-07-09-codex-counterexample-package.md`.
 
-## C48. Mirror-theorem harvest on classical varieties — new P families at lemma-application cost [CLAIMED — Claude/Opus 2026-07-09]
+## C48. Mirror-theorem harvest on classical varieties — new P families at lemma-application cost [REPORTED 2026-07-09 (Claude/Opus) — Lean landed]
 
-**Claimed by Claude/Opus 2026-07-09** — in progress this session (board classification + machine
-gates first, then the C27 pair-extension obligation, then Lean instantiation per surviving family).
-Report will land in `notes/2026-07-09-codex-mirror-harvest.md`. Codex: do not double-work this
-entry while the claim stands.
+**Reported by Claude/Opus 2026-07-09.** Report: `notes/2026-07-09-codex-mirror-harvest.md`;
+generator `rust/scripts/projcap_mirror_harvest.py`; **Lean `lean/ProjectiveCap/HyperbolicQuadricMirror.lean`
+(builds clean, axioms `[propext, Classical.choice, Quot.sound]`).** All steps done: board
+classification, machine gates, C27 obligation, negatives, and the Lean instantiation. The general
+proposition `initialSubCapP_of_fpf_collinearity_preserving` (fpf collinearity-preserving involution
+preserving a sub-board ⇒ P) + the harvested family `initialSubCapP_blockQuadric_of_odd_card`
+(`Q⁺(2m−1,q)=P`, odd q). Headline: **new family `Q⁺(2m−1,q) = P` for
+every odd q and every m ≥ 2** via the C25 elliptic block mirror `(a,b)↦(d·b,a)` (a factor-`d`
+similarity of `Σaᵢbᵢ`, so it preserves the quadric; already Lean-proven fpf + collinearity-
+preserving), machine-verified at Q⁺(3,3/5/7), Q⁺(5,3). Boundary dichotomy: **odd ambient
+dimension is necessary but not sufficient** — the isometry group must also carry an fpf
+involution. Negatives (mirror fails; outcome may still be P): elliptic quadrics `Q⁻(2m−1,q)`
+(anisotropic block), parabolic `Q(2m,q)` and Hermitian curves `H(2,q²)` (even ambient dim ⇒
+rational fixed point; unital blocking), Hermitian surfaces `H(3,q²)` (unitary involutions all
+have isotropic eigenspaces). Trivial rows flagged: ovoids `Q⁻(3,q)` = free-placement parity;
+`H(2,4) = AG(2,3)`. Codex: do not double-work; the open Lean step is
+`ProjectiveCap/HyperbolicQuadricMirror.lean`.
 
 Context: the Lean theorem
 `Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution` is **generic**:

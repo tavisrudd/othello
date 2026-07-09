@@ -113,6 +113,40 @@ policy probe, not a solve, and PG(3,3)/PG(4,2) belong to closed families.  We ha
 grounds even for conjecturing PG(4,3)'s value.  **C43** sizes an exact PG(4,3) solve; either
 verdict fills this hole, and an N verdict would be the program's first N geometry.
 
+### Classical Varieties (C48 mirror harvest)
+
+The generic fpf-involution mirror lemma is not tied to full projective space; it applies to any
+classical variety whose cap game runs on ambient lines.  C48 harvested it (report
+[`../2026-07-09-codex-mirror-harvest.md`](../2026-07-09-codex-mirror-harvest.md); generator
+`rust/scripts/projcap_mirror_harvest.py`; each board built honestly from its defining form, so
+intersection patterns and point counts are verified, not trusted).
+
+- **New family — hyperbolic quadric `Q⁺(2m−1,q)` is P for every odd `q`, every `m ≥ 2`.**  The
+  C25 elliptic block map `(aᵢ,bᵢ) ↦ (d·bᵢ, aᵢ)`, `d` nonsquare, is a factor-`d` similarity of
+  the hyperbolic form `Σ aᵢbᵢ`, so it preserves the quadric while staying fpf and
+  collinearity-preserving (already Lean-proven in `EllipticMirror.lean`).  Machine-verified:
+  Q⁺(3,3/5/7) (full C27 pair-extension over every σ-invariant cap + exhaustive solve), Q⁺(5,3)
+  (involution + sampled).  `Q⁺(3,q)` is exactly the `(q+1)×(q+1)` capacity-2 rook grid (E1
+  vocabulary) and has a second proof by translation mirror `(i,j) ↦ (i+h, j+h)`.
+- **Boundary dichotomy for the negatives:** *odd ambient dimension is necessary but not
+  sufficient* — the isometry group must also contain an fpf involution.  Mirror-method
+  negatives (outcome may still be P by other means): elliptic quadrics `Q⁻(2m−1,q)`
+  (anisotropic block blocks the similarity; `O⁻` has no fpf involution), parabolic `Q(2m,q)`
+  and Hermitian curves `H(2,q²)` (even ambient dim ⇒ rational fixed point; unital is a blocking
+  set), Hermitian surfaces `H(3,q²)` (unitary involutions all have isotropic eigenspaces since
+  Hermitian forms are isotropic in dim ≥ 2).  `H(2,9)`/`H(3,4)` compute P regardless, so these
+  are *method* boundaries not outcome flips; `Q(4,q)` parabolic is the first open outcome here.
+- **Trivial rows flagged:** ovoids `Q⁻(3,q)` are free placement (P by `q²+1`-even parity);
+  `H(2,4) = AG(2,3)` (P by the affine theorem, odd point count, not a mirror family).
+- **Lean landed:** [`../../lean/ProjectiveCap/HyperbolicQuadricMirror.lean`](../../lean/ProjectiveCap/HyperbolicQuadricMirror.lean)
+  (imported from `ProjectiveCap.lean`; builds clean; axiom profile `[propext, Classical.choice,
+  Quot.sound]`).  The general proposition is `initialSubCapP_of_fpf_collinearity_preserving`
+  (an fpf collinearity-preserving involution preserving a sub-board `Q ⇒ IsP (SubCap Q) ∅` —
+  the cap step reuses `mirrorStepGood_of_collinearity_preserving` verbatim, only `Q x → Q (σ x)`
+  is new).  The harvested family is `initialSubCapP_blockQuadric_of_odd_card` (`Q⁺(2m−1,q) = P`,
+  odd q), via `blockForm_ellipticBlock` (the factor-`δ` similarity) + `onBlockQuadric_map`.
+  Disjoint from the C41/C50 files.
+
 ## Odd-Plane Kernel
 
 For the falsification-mode taxonomy and the proof-by-elimination scaffold over this kernel (the
@@ -616,6 +650,23 @@ counterexample once its residual game facts are certified.  Verified with
 `nix develop --command lake build ProjectiveCap.TrapConverse ProjectiveCap`; axiom gate is exactly
 `[propext, Classical.choice, Quot.sound]`.  C48 is currently claimed by Opus; next Codex lanes are
 C38/C39 mining with C35 nimbers, C30 certificate engineering, or C43/C44 compute sizing.
+
+Handoff note 2026-07-09 / Claude(Opus) C48: mirror-theorem harvest on classical varieties, all
+steps done incl. Lean.  Added `rust/scripts/projcap_mirror_harvest.py` (honest form construction of
+each board, exhaustive cap solves, involution + C27 pair-extension gates), wrote
+`notes/2026-07-09-codex-mirror-harvest.md`, and landed
+`lean/ProjectiveCap/HyperbolicQuadricMirror.lean` (imported from `ProjectiveCap.lean`; built via
+`nix develop --command lake build ProjectiveCap.HyperbolicQuadricMirror`; axioms
+`[propext, Classical.choice, Quot.sound]`).  New family: **`Q⁺(2m−1,q) = P` for every odd q, every
+m ≥ 2** (`initialSubCapP_blockQuadric_of_odd_card`) via the C25 elliptic block mirror, which is a
+factor-`δ` similarity of `Σaᵢbᵢ`.  General reusable proposition:
+`initialSubCapP_of_fpf_collinearity_preserving` (fpf collinearity-preserving involution preserving a
+sub-board ⇒ that cap/Nofil sub-board game is P; cap step reuses
+`mirrorStepGood_of_collinearity_preserving` verbatim, only `Q x → Q (σ x)` is new).  Negatives
+(mirror fails; outcome may still be P): `Q⁻(2m−1,q)`, `Q(2m,q)`, `H(2,q²)`, `H(3,q²)` — the
+isometry group carries no fpf involution (machine witnesses + arguments in the report).  Trivial
+rows: ovoids `Q⁻(3,q)` (free placement), `H(2,4)=AG(2,3)`.  See the Classical-Varieties subsection
+under Closed Higher-Dimensional Families.  Next Codex/Claude lanes unchanged.
 
 Good Lean side targets:
 
