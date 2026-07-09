@@ -476,6 +476,11 @@ Recently reported:
   re-zeroing reply after coupled off-conic intruder moves, then prove termination in P2's favour.
   The six-cell `q - 22` row/column support lemma is only a base-layer move-availability fact.
   Report: [`../2026-07-09-codex-line-capacity-followup.md`](../2026-07-09-codex-line-capacity-followup.md).
+- **C37 shared-key agreement:** raw S4 dump intersections now cross-validate the exact q=19 and
+  q=23 bucket corpora.  q=19 has 1,531,020 unique raw keys across 13 roots with 155,219 shared keys;
+  q=23 has 217,478,689 unique raw keys across 22 roots with 18,319,494 shared keys; every shared
+  key has equal P/N value, and the q=19-vs-q=23 cross-q guard has zero shared keys.  Report:
+  [`../2026-07-09-codex-shared-key-agreement.md`](../2026-07-09-codex-shared-key-agreement.md).
 
 Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
 C32 plane and PG(4,3) primary checks above, wrote the report, and marked C32 reported in the queue.
@@ -495,6 +500,15 @@ bucket `1,3,4,9` found maintainable zero-xor P followers for all 259 first moves
 28,646/28,646 selected off-conic obligations with no unknown/cap status and a 22,575,285-entry
 maximum chunk memo.  Next: pressure the rule on other buckets and isolate the 1,513 accepted
 `live_on = 3..6` residuals; true game-nimber coupling remains the separate C35 measurement.
+
+Handoff note 2026-07-09 / Codex C37: added `rust/scripts/s4_raw_isect.py`, generated the missing 20
+q=23 exact raw S4 bucket dumps under `rust/s4-dumps/2026-07-09/c37-q23-raw/`, and ran raw-only
+shared-key agreement checks.  q=19 all-bucket: 1,725,015 total records, 1,531,020 unique keys,
+155,219 shared keys, zero disagreement keys.  q=23 all-bucket: 241,627,613 total records,
+217,478,689 unique keys, 18,319,494 shared keys, zero disagreement keys.  q=19 union versus q=23
+union has zero shared keys.  Full pairwise logs are in `rust/s4-dumps/2026-07-09/c37-*.txt`.
+Next queue item by Fable's priority is C36 unless the session deliberately starts the larger C35
+nimber-oracle build or the C30 cert-book engineering lane.
 
 Good Lean side targets:
 
@@ -558,8 +572,21 @@ Adopted proof vocabulary from this framing:
   base-layer move-availability fact for q>=23.
 
 Do not prioritize a full capacity-`c` research branch or a broad Lean `LineCapacityGame`
-abstraction yet.  First extract the three reusable lemmas above in paper/notes form and formalize
-only the pieces that remove duplication in the current cap proof.
+abstraction yet.  The 2026-07-09 vet
+([`../2026-07-09-line-capacity-framing-vet-extensions.md`](../2026-07-09-line-capacity-framing-vet-extensions.md))
+sharpens what is real: the theorem-level content is **two** capacity-general facts, not four tools.
+The **capacity-mirror obstruction** is a genuine capacity-independent, load-bearing lemma (its value
+is entirely at `c >= 2`; the `c = 1` instance is folklore the queens mirror proofs already use
+unnamed).  The **residual-capacity decomposition** is real but capacity-specific — load-bearing
+precisely as conic-localization's frame.  **Fixed-locus caution** and **line-load/slack counting**
+are guidance / standard incidence counting, not named tools — keep them as prose, drop them as
+lemmas.  The transfer is **one-directional (queens -> cap)**, and not all heuristics carry: the
+reservoir -> Hall/matching transfer is dead at the cap frontier (`q < 38`).  The highest-value
+extension is **E1, the *structured* capacity-degradation proposition** — the cap residual becomes a
+mixed-capacity game whose live conic collapses to Möbius-involution matchings (degree `<= 2` ->
+Dawson's chess) and can never complete globally (blocking-set bound); the bare collapse
+`Nofil = Node-Kayles` is HHS-published, so only the *structured* form is claimable, as D3's formal
+preamble.
 
 Novelty guard:
 
@@ -570,11 +597,19 @@ Novelty guard:
   impartial game, plus the line-capacity mirror/slack analysis tying the projective cap and queens
   mechanisms together.
 - Colored finite-geometry tic-tac-toe / avoidance is adjacent but not the same game.
+- Abstract wording: say "structured *subfamily*," not "framework"; qualify the `c = 1` case with the
+  grid's geometric line families — bare capacity-1 is coextensive with all of Node-Kayles.
+- The bare hypergraph-collapse-to-graph fact (`Nofil = Node-Kayles` on a saturated residual) is HHS
+  prior art; only the *structured* collapse is a claimable contribution.
+- Additional adjacent prior art to cite (verify each): Sieben's impartial-hypergraph-game taxonomy;
+  the general-position achievement game on graphs; impartial avoidance on convex geometries;
+  Arc-Kayles generalizations.
 
 References:
 
 - [`../2026-07-07-nofil-connection.md`](../2026-07-07-nofil-connection.md)
 - [`../2026-07-08-codex-projective-nofil-novelty-audit.md`](../2026-07-08-codex-projective-nofil-novelty-audit.md)
+- [`../2026-07-09-line-capacity-framing-vet-extensions.md`](../2026-07-09-line-capacity-framing-vet-extensions.md)
 
 ## Archive
 
