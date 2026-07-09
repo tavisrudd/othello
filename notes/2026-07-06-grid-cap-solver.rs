@@ -40,6 +40,10 @@
 //                -- sizing probe for one normalized on-conic S4 root
 //                   {(t,1/t): t in {t1,t2,t3,t4}} using the GF(q) backend.
 //                   Reports P/N, private-memo size, and wall time; works for prime powers.
+//   s4buckets <q> [--cap <slots>] [--start <idx>] [--limit <n>] [--out <file>]
+//                -- Rust-native bucket-label sweep: enumerate normalized on-conic S4
+//                   six-sets {inf,0,t1,t2,t3,t4} modulo full PGL(2,q), then solve
+//                   one representative per bucket with `s4`.
 //   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
@@ -68,6 +72,7 @@
 
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::env;
+use std::fs::File;
 use std::hash::{BuildHasherDefault, Hasher};
 use std::io::{BufWriter, Write};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -76,6 +81,8 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 const MAXW: usize = 16; // supports N = q*q <= 1024, i.e. q <= 32
+const MAXQ: usize = 32;
+const MAXP1: usize = MAXQ + 1; // P^1(F_q), including infinity
 type Mask = [u64; MAXW];
 
 #[inline]
@@ -1187,49 +1194,337 @@ fn s4_g(
     Some(false)
 }
 
-fn solve_s4(q: usize, t4: &[usize], cap: usize) {
+struct S4Eval {
+    status: &'static str,
+    label: Option<&'static str>,
+    peak_memo: usize,
+    elapsed: f64,
+    cells: [(usize, usize); 4],
+}
+
+fn eval_s4_on_board(b: &Board, t4: &[usize], cap: usize) -> S4Eval {
     assert!(t4.len() == 4, "s4 mode needs exactly four t values");
-    let b = Board::new(q);
+    let q = b.q;
     let mut seen = HashSet::new();
     let empty = [0u64; MAXW];
     let mut chosen = empty;
     let mut forbidden = empty;
     let mut occ: Vec<u16> = Vec::new();
-    let mut cells = Vec::new();
-    for &t in t4 {
+    let mut cells = [(0usize, 0usize); 4];
+    for (i, &t) in t4.iter().enumerate() {
         assert!(t > 0 && t < q, "t={} is not a nonzero GF({}) element encoding", t, q);
         assert!(seen.insert(t), "duplicate t value {}", t);
         let c = b.gf.inv[t] as usize;
         let z = t * q + c;
-        cells.push((t, c));
-        add_cell_checked(&b, z, &mut occ, &mut chosen, &mut forbidden);
+        cells[i] = (t, c);
+        add_cell_checked(b, z, &mut occ, &mut chosen, &mut forbidden);
     }
     let mut memo: FnvMap<u128, bool> = FnvMap::default();
     let start = Instant::now();
     let mut occ_solve = occ.clone();
-    let value = s4_g(&b, &mut memo, cap, &mut occ_solve, &chosen, &forbidden);
+    let value = s4_g(b, &mut memo, cap, &mut occ_solve, &chosen, &forbidden);
     let elapsed = start.elapsed().as_secs_f64();
     match value {
-        Some(is_n) => println!(
+        Some(is_n) => S4Eval {
+            status: "OK",
+            label: Some(if is_n { "N" } else { "P" }),
+            peak_memo: memo.len(),
+            elapsed,
+            cells,
+        },
+        None => S4Eval {
+            status: "ABORTED",
+            label: None,
+            peak_memo: memo.len(),
+            elapsed,
+            cells,
+        },
+    }
+}
+
+fn eval_s4(q: usize, t4: &[usize], cap: usize) -> S4Eval {
+    let b = Board::new(q);
+    eval_s4_on_board(&b, t4, cap)
+}
+
+fn solve_s4(q: usize, t4: &[usize], cap: usize) {
+    let ev = eval_s4(q, t4, cap);
+    match ev.label {
+        Some(label) => println!(
             "S4 q={} t4={:?} cells={:?} value={} peak-memo={} cap={} elapsed={:.3}",
             q,
             t4,
-            cells,
-            if is_n { "N" } else { "P" },
-            memo.len(),
+            ev.cells,
+            label,
+            ev.peak_memo,
             if cap == usize::MAX { "none".to_string() } else { cap.to_string() },
-            elapsed
+            ev.elapsed
         ),
         None => println!(
             "S4 q={} t4={:?} cells={:?} status=ABORTED peak-memo={} cap={} elapsed={:.3}",
             q,
             t4,
-            cells,
-            memo.len(),
+            ev.cells,
+            ev.peak_memo,
             cap,
-            elapsed
+            ev.elapsed
         ),
     }
+}
+
+struct PglPerm {
+    img: [u16; MAXP1],
+}
+
+#[derive(Clone)]
+struct S4Bucket {
+    idx: usize,
+    canon: [u16; 6],
+    size: usize,
+    rep: [usize; 4],
+}
+
+fn pgl2_perms(gf: &GF) -> Vec<PglPerm> {
+    let q = gf.q;
+    assert!(q <= MAXQ, "PGL(2,q) permutation table supports q <= {}", MAXQ);
+    let inf = q as u16;
+    let mut seen: HashSet<[u16; 4]> = HashSet::new();
+    let mut out: Vec<PglPerm> = Vec::new();
+    for a in 0..q {
+        for bb in 0..q {
+            for c in 0..q {
+                for d in 0..q {
+                    let det = gf.sub(gf.m(a, d), gf.m(bb, c));
+                    if det == 0 {
+                        continue;
+                    }
+                    let entries = [a, bb, c, d];
+                    let first = entries.iter().copied().find(|&x| x != 0).unwrap();
+                    let scale = gf.inv[first] as usize;
+                    let norm = [
+                        gf.m(a, scale) as u16,
+                        gf.m(bb, scale) as u16,
+                        gf.m(c, scale) as u16,
+                        gf.m(d, scale) as u16,
+                    ];
+                    if !seen.insert(norm) {
+                        continue;
+                    }
+
+                    let mut img = [0u16; MAXP1];
+                    for x in 0..=q {
+                        img[x] = if x == q {
+                            if c == 0 {
+                                inf
+                            } else {
+                                gf.m(a, gf.inv[c] as usize) as u16
+                            }
+                        } else {
+                            let den = gf.a(gf.m(c, x), d);
+                            if den == 0 {
+                                inf
+                            } else {
+                                let num = gf.a(gf.m(a, x), bb);
+                                gf.m(num, gf.inv[den] as usize) as u16
+                            }
+                        };
+                    }
+                    out.push(PglPerm { img });
+                }
+            }
+        }
+    }
+    let expected = q * (q * q - 1);
+    assert!(
+        out.len() == expected,
+        "PGL(2,{}) size mismatch: got {}, expected {}",
+        q,
+        out.len(),
+        expected
+    );
+    out
+}
+
+fn canon_six(mut six: [u16; 6], perms: &[PglPerm]) -> [u16; 6] {
+    six.sort_unstable();
+    let mut best = six;
+    let mut image = [0u16; 6];
+    for p in perms {
+        for i in 0..6 {
+            image[i] = p.img[six[i] as usize];
+        }
+        image.sort_unstable();
+        if image < best {
+            best = image;
+        }
+    }
+    best
+}
+
+fn choose4(n: usize) -> usize {
+    if n < 4 {
+        0
+    } else {
+        n * (n - 1) * (n - 2) * (n - 3) / 24
+    }
+}
+
+fn enumerate_s4_buckets(q: usize) -> Vec<S4Bucket> {
+    assert!(q >= 5, "s4buckets needs at least four nonzero finite parameters");
+    let gf = GF::new(q);
+    let perms = pgl2_perms(&gf);
+    let inf = q as u16;
+    let mut buckets: BTreeMap<[u16; 6], (usize, [usize; 4])> = BTreeMap::new();
+    for a in 1..q {
+        for bb in (a + 1)..q {
+            for c in (bb + 1)..q {
+                for d in (c + 1)..q {
+                    let six = [0, a as u16, bb as u16, c as u16, d as u16, inf];
+                    let key = canon_six(six, &perms);
+                    let entry = buckets.entry(key).or_insert((0, [a, bb, c, d]));
+                    entry.0 += 1;
+                }
+            }
+        }
+    }
+    buckets
+        .into_iter()
+        .enumerate()
+        .map(|(idx, (canon, (size, rep)))| S4Bucket { idx, canon, size, rep })
+        .collect()
+}
+
+fn fmt_cap(cap: usize) -> String {
+    if cap == usize::MAX {
+        "none".to_string()
+    } else {
+        cap.to_string()
+    }
+}
+
+fn fmt_u16_array6(a: &[u16; 6]) -> String {
+    format!("[{},{},{},{},{},{}]", a[0], a[1], a[2], a[3], a[4], a[5])
+}
+
+fn fmt_usize_array4(a: &[usize; 4]) -> String {
+    format!("[{},{},{},{}]", a[0], a[1], a[2], a[3])
+}
+
+fn fmt_cells4(a: &[(usize, usize); 4]) -> String {
+    format!(
+        "[{},{};{},{};{},{};{},{}]",
+        a[0].0, a[0].1, a[1].0, a[1].1, a[2].0, a[2].1, a[3].0, a[3].1
+    )
+}
+
+fn bucket_size_hist(buckets: &[S4Bucket]) -> String {
+    let mut hist: BTreeMap<usize, usize> = BTreeMap::new();
+    for b in buckets {
+        *hist.entry(b.size).or_insert(0) += 1;
+    }
+    hist.iter()
+        .map(|(size, count)| format!("{}:{}", size, count))
+        .collect::<Vec<_>>()
+        .join(",")
+}
+
+fn solve_s4_buckets(q: usize, cap: usize, start_idx: usize, limit: Option<usize>, out_path: Option<&str>) {
+    let total_start = Instant::now();
+    let enum_start = Instant::now();
+    let buckets = enumerate_s4_buckets(q);
+    println!(
+        "S4BUCKETS q={} raw={} pgl={} buckets={} size-hist={} enum-elapsed={:.3}",
+        q,
+        choose4(q - 1),
+        q * (q * q - 1),
+        buckets.len(),
+        bucket_size_hist(&buckets),
+        enum_start.elapsed().as_secs_f64()
+    );
+
+    let mut writer = out_path.map(|path| {
+        let mut w = BufWriter::new(File::create(path).expect("create s4buckets output file"));
+        writeln!(
+            w,
+            "# gridcap-s4buckets v1 q={} cap={} start={} limit={}",
+            q,
+            fmt_cap(cap),
+            start_idx,
+            limit.map_or_else(|| "none".to_string(), |x| x.to_string())
+        )
+        .unwrap();
+        w
+    });
+
+    if limit == Some(0) || start_idx >= buckets.len() {
+        println!(
+            "S4BUCKET-SUMMARY q={} run=0 okP=0 okN=0 aborted=0 elapsed={:.3}",
+            q,
+            total_start.elapsed().as_secs_f64()
+        );
+        return;
+    }
+
+    let board = Board::new(q);
+    let mut run = 0usize;
+    let mut ok_p = 0usize;
+    let mut ok_n = 0usize;
+    let mut aborted = 0usize;
+    for bucket in buckets.iter().filter(|b| b.idx >= start_idx) {
+        if let Some(max_run) = limit {
+            if run >= max_run {
+                break;
+            }
+        }
+        run += 1;
+        println!(
+            "S4BUCKET-RUN q={} idx={} canon={} size={} rep={} cap={}",
+            q,
+            bucket.idx,
+            fmt_u16_array6(&bucket.canon),
+            bucket.size,
+            fmt_usize_array4(&bucket.rep),
+            fmt_cap(cap)
+        );
+        let ev = eval_s4_on_board(&board, &bucket.rep, cap);
+        match ev.label {
+            Some("P") => ok_p += 1,
+            Some("N") => ok_n += 1,
+            Some(other) => panic!("unexpected s4 label {}", other),
+            None => aborted += 1,
+        }
+        let line = format!(
+            "BUCKET q={} idx={} canon={} size={} rep={} status={} value={} cells={} peak-memo={} cap={} elapsed={:.3}",
+            q,
+            bucket.idx,
+            fmt_u16_array6(&bucket.canon),
+            bucket.size,
+            fmt_usize_array4(&bucket.rep),
+            ev.status,
+            ev.label.unwrap_or("-"),
+            fmt_cells4(&ev.cells),
+            ev.peak_memo,
+            fmt_cap(cap),
+            ev.elapsed
+        );
+        println!("{}", line);
+        if let Some(w) = writer.as_mut() {
+            writeln!(w, "{}", line).unwrap();
+            w.flush().unwrap();
+        }
+        if ev.label.is_none() {
+            break;
+        }
+    }
+    println!(
+        "S4BUCKET-SUMMARY q={} run={} okP={} okN={} aborted={} elapsed={:.3}",
+        q,
+        run,
+        ok_p,
+        ok_n,
+        aborted,
+        total_start.elapsed().as_secs_f64()
+    );
 }
 
 // ---- FEAT mode: route (B) per-class / per-extension conic-feature dump ----
@@ -3422,6 +3717,41 @@ fn main() {
             .expect("s4 mode needs t values: s4 <q> t1,t2,t3,t4 [--cap <slots>]");
         let t4 = parse_t4(t4_arg);
         solve_s4(q, &t4, cap);
+        return;
+    }
+    if args[1] == "s4buckets" {
+        // s4buckets <q> [--cap <slots>] [--start <idx>] [--limit <n>] [--out <file>]
+        let mut cap: usize = usize::MAX;
+        let mut start_idx = 0usize;
+        let mut limit: Option<usize> = None;
+        let mut out_path: Option<String> = None;
+        let mut positional: Vec<usize> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--cap" {
+                cap = it.next().expect("--cap needs a value").parse().expect("--cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap int");
+            } else if a == "--start" {
+                start_idx = it.next().expect("--start needs a value").parse().expect("--start int");
+            } else if let Some(rest) = a.strip_prefix("--start=") {
+                start_idx = rest.parse().expect("--start int");
+            } else if a == "--limit" {
+                limit = Some(it.next().expect("--limit needs a value").parse().expect("--limit int"));
+            } else if let Some(rest) = a.strip_prefix("--limit=") {
+                limit = Some(rest.parse().expect("--limit int"));
+            } else if a == "--out" {
+                out_path = Some(it.next().expect("--out needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--out=") {
+                out_path = Some(rest.to_string());
+            } else {
+                positional.push(a.parse().expect("q must be an integer"));
+            }
+        }
+        let q = *positional.first().expect(
+            "s4buckets mode needs q: s4buckets <q> [--cap <slots>] [--start <idx>] [--limit <n>] [--out <file>]",
+        );
+        solve_s4_buckets(q, cap, start_idx, limit, out_path.as_deref());
         return;
     }
     if args[1] == "cert" {

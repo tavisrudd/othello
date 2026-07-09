@@ -1,0 +1,2 @@
+# gridcap-s4buckets v1 q=25 cap=100000000 start=0 limit=1
+BUCKET q=25 idx=0 canon=[0,1,2,3,4,5] size=720 rep=[1,2,3,5] status=ABORTED value=- cells=[1,1;2,3;3,2;5,15] peak-memo=100000000 cap=100000000 elapsed=479.172

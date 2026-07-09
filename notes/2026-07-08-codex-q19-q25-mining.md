@@ -44,6 +44,7 @@ Durable outputs:
 notes/data/c20-q19.json
 notes/data/c20-q19-states.jsonl.gz
 notes/data/c31-q19.json
+notes/data/c20-q25-s4buckets-rust.txt
 ```
 
 The uncompressed q=19 state rows were 65 MB in `/tmp`; only the 2.4 MB gzip copy is kept in
@@ -133,9 +134,10 @@ I added a narrow Rust `s4` sizing mode to `notes/2026-07-06-grid-cap-solver.rs`:
 
 ```text
 s4 <q> t1,t2,t3,t4 [--cap <slots>]
+s4buckets <q> [--cap <slots>] [--start <idx>] [--limit <n>] [--out <file>]
 ```
 
-It solves the normalized on-conic root
+The first mode solves one normalized on-conic root
 
 ```text
 {(t, 1/t) : t in {t1,t2,t3,t4}}
@@ -143,6 +145,15 @@ It solves the normalized on-conic root
 
 using the existing GF(q) backend and private canonical memo.  This is mainly for prime-power
 sizing, especially q=25, where the Python C20 miner is prime-field only.
+
+The second mode is a Rust-native full-PGL bucket-label driver.  It enumerates normalized six-sets
+
+```text
+{inf, 0, t1, t2, t3, t4} / PGL(2,q)
+```
+
+and then solves one `s4` representative per bucket.  This keeps the bucket enumeration and GF(q)
+support in Rust; it does not port the feature-row miner.
 
 Sanity check:
 
@@ -192,20 +203,51 @@ Output:
 S4 q=25 t4=[1, 2, 3, 4] cells=[(1, 1), (2, 3), (3, 2), (4, 4)] value=P peak-memo=26305294 cap=50000000 elapsed=120.199
 ```
 
+Rust-native q=25 full-PGL bucket enumeration:
+
+```bash
+/tmp/gridcap-s4 s4buckets 25 --limit 0
+```
+
+Output:
+
+```text
+S4BUCKETS q=25 raw=10626 pgl=15600 buckets=28 size-hist=6:1,120:3,180:5,360:12,720:7 enum-elapsed=4.395
+S4BUCKET-SUMMARY q=25 run=0 okP=0 okN=0 aborted=0 elapsed=4.395
+```
+
+The first canonical bucket is much harder than the ad hoc `(1,2,3,4)` representative above:
+
+```bash
+/tmp/gridcap-s4 s4buckets 25 --limit 1 --cap 100000000 \
+  --out notes/data/c20-q25-s4buckets-rust.txt
+```
+
+Output:
+
+```text
+S4BUCKET-RUN q=25 idx=0 canon=[0,1,2,3,4,5] size=720 rep=[1,2,3,5] cap=100000000
+BUCKET q=25 idx=0 canon=[0,1,2,3,4,5] size=720 rep=[1,2,3,5] status=ABORTED value=- cells=[1,1;2,3;3,2;5,15] peak-memo=100000000 cap=100000000 elapsed=479.172
+S4BUCKET-SUMMARY q=25 run=1 okP=0 okN=0 aborted=1 elapsed=483.760
+```
+
 Interpretation:
 
 - q=23 bucket-label solves are feasible but memory-heavy.  The earlier bucket-first Python sweep
   found all 22 q=23 buckets P.
 - q=25 first S4 representative is also P, so no new counterexample signal appears there.
-- q=25 is feasible for bucket-label sizing one representative at a time, but full C20-style
-  feature mining needs a GF(25)-aware miner.  The current Python miner handles only prime fields.
+- q=25 is not yet feasible as a broad bucket-label sweep with the current early-break HashMap
+  engine: the first full-PGL canonical bucket alone exceeds 100M memo entries.
+- Full q=25 feature mining still needs a GF(25)-aware miner.  The current Python miner handles
+  only prime fields.
 
 ## Rust or Go Rewrite?
 
 Do not start with a full rewrite.  The fastest safe path is:
 
 1. Keep the bucket-parallel Python C20 miner for prime q.
-2. Add Rust modes for prime-power bucket enumeration and S4-rooted labels where Python lacks GF(q).
+2. Use the Rust `s4buckets` mode for prime-power bucket enumeration and S4-rooted labels where
+   Python lacks GF(q).
 3. Only port the full feature miner to Rust if q=23/q=25 feature extraction, not label solving,
    becomes the bottleneck.
 
