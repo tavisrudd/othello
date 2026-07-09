@@ -716,7 +716,7 @@ probe was negative: q=11 all P escape children, q=13 all P escape children, and 
 sample all had zero `MirrorStepGood` hits.  Keep `MirrorClosed` as a formal/deep-leaf tool, not as
 an immediate size-4 certificate compressor.
 
-## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31 [REPORTED 2026-07-09]
+## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31 [REPORTED 2026-07-08]
 
 Context: C18's null killed bucket-level laws over static features, but it never isolated the
 COLUMN-level existence question "does q admit any N-valued on-conic bucket at all". On that
@@ -790,7 +790,7 @@ q=11/13).
 
 Report file: `notes/2026-07-08-codex-route-c-phase5.md`.
 
-## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-09]
+## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
 
 Context: the C20 review's structural reading is that the session-11 snapshot laws hold exactly
 while the intruder zone is an O(1) endgame (max zone 2 at q=11 vs 10 at q=13 / 38 at q=17), and
@@ -827,16 +827,22 @@ to 10 and 38 respectively.  Independent outcome+Z recursion spot-checked 10 stat
 alive; the next math target is to state/prove the bounded-zone family rather than hunt another
 static feature law.
 
-Follow-up 2026-07-09: `notes/2026-07-09-codex-zone-descent-target.md` sharpens this.  For every
+Follow-up 2026-07-08: `notes/2026-07-08-codex-zone-descent-target.md` sharpens this.  For every
 tested C20 P reply-state at q=13/q=17 and every legal opponent move, a score-optimal winning reply
 lands in a grandchild with `Z <= 2`.  At q=17 the `max Z = 9` ceiling is an immediate-zone cost, not
 persistent recursion.  The proof target should be a one-pair descent/repair lemma plus a small-zone
 `Z <= 2` base law.
 
-Repair-mining follow-up 2026-07-09: `notes/2026-07-09-codex-zone-descent-repair-mining.md` and
-`notes/2026-07-09-zone-descent-miner.py` show that q=17's score-9 repairs are all intruder ->
+Repair-mining follow-up 2026-07-08: `notes/2026-07-08-codex-zone-descent-repair-mining.md` and
+`notes/2026-07-08-zone-descent-miner.py` show that q=17's score-9 repairs are all intruder ->
 intruder replies that empty the conic residual and leave `defxor = 0`, zone Grundy 0.  The next
 math target should be a repair-intruder existence lemma plus the empty-conic/small-Z base law.
+
+Geometry follow-up 2026-07-08: `notes/2026-07-08-codex-zone-repair-geometry.md` and
+`notes/2026-07-08-zone-repair-geometry.py` sharpen the worst case: every q=17 score-9 repair has
+one live conic parameter before the reply, and the selected reply is the unique legal internal
+intruder that kills that last live parameter and leaves a clean P-valued empty-conic state.  No
+single line-type/product-order rule explains the repair.
 
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 

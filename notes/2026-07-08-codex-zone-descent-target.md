@@ -1,6 +1,6 @@
 # C31 follow-up: one-pair zone-descent target
 
-Date: 2026-07-09.
+Date: 2026-07-08.
 
 ## Result
 
@@ -39,7 +39,7 @@ Command:
 env PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
 import importlib.util, sys, collections
 from pathlib import Path
-p=Path('notes/2026-07-09-zone-steering-census.py')
+p=Path('notes/2026-07-08-zone-steering-census.py')
 spec=importlib.util.spec_from_file_location('c31', p); c31=importlib.util.module_from_spec(spec); sys.modules[spec.name]=c31; spec.loader.exec_module(c31)
 c20=c31.load_c20_module()
 for q in [13,17]:

@@ -1,6 +1,6 @@
 # C29 report: mixed-column mod-3 law
 
-Date: 2026-07-09.
+Date: 2026-07-08.
 
 ## Result
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mine C31 one-pair descent replies.
 
-This is a follow-up diagnostic for notes/2026-07-09-codex-zone-descent-target.md.
+This is a follow-up diagnostic for notes/2026-07-08-codex-zone-descent-target.md.
 It reconstructs the C20 P reply-states, then for every legal opponent move finds the
 score-optimal winning replies used by the C31 steering recursion.
 """
@@ -19,7 +19,7 @@ from typing import Any
 
 
 def load_c31_module():
-    path = Path(__file__).with_name("2026-07-09-zone-steering-census.py")
+    path = Path(__file__).with_name("2026-07-08-zone-steering-census.py")
     spec = importlib.util.spec_from_file_location("c31_zone_steering", path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot import {path}")

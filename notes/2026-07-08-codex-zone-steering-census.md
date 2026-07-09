@@ -1,6 +1,6 @@
 # C31 report: recursive zone-steering ceiling
 
-Date: 2026-07-09.
+Date: 2026-07-08.
 
 ## Result
 
@@ -40,7 +40,7 @@ steering lemma -> bounded-zone terminal/endgame law -> on-conic escape theorem
 Added:
 
 ```text
-notes/2026-07-09-zone-steering-census.py
+notes/2026-07-08-zone-steering-census.py
 ```
 
 The script imports the existing C20 prime-field engine from
@@ -56,28 +56,28 @@ not call `game.value` or the fast `Steering.z`; it computes outcome and `Z` toge
 Small validation:
 
 ```bash
-env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-09-zone-steering-census.py \
+env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-08-zone-steering-census.py \
   --qs 13 --limit 20 --spotcheck 5
 ```
 
 Full q = 13:
 
 ```bash
-env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-09-zone-steering-census.py \
+env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-08-zone-steering-census.py \
   --qs 13 --spotcheck 10 --json-out /tmp/c31-q13-v2.json
 ```
 
 Full q = 17:
 
 ```bash
-env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-09-zone-steering-census.py \
+env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-08-zone-steering-census.py \
   --qs 17 --spotcheck 0 --json-out /tmp/c31-q17-v2.json
 ```
 
 Independent q = 17 spot check:
 
 ```bash
-timeout 1800s env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-09-zone-steering-census.py \
+timeout 1800s env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-08-zone-steering-census.py \
   --qs 17 --limit 10 --spotcheck 10 --json-out /tmp/c31-q17-spot.json
 ```
 

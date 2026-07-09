@@ -1,6 +1,6 @@
 # C31 follow-up: repair-move mining
 
-Date: 2026-07-09.
+Date: 2026-07-08.
 
 ## Result
 
@@ -24,7 +24,7 @@ and leaves a small-Z / zero-Grundy off-conic zone game.
 Added:
 
 ```text
-notes/2026-07-09-zone-descent-miner.py
+notes/2026-07-08-zone-descent-miner.py
 ```
 
 The script imports the C31 steering engine and C20 grid/intrusion features.  For every C20 P
@@ -46,12 +46,12 @@ and records:
 Commands:
 
 ```bash
-env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-09-zone-descent-miner.py \
+env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-08-zone-descent-miner.py \
   --qs 13 --high 7 --top 8 --json-out /tmp/c31-zone-descent-miner-q13.json
 ```
 
 ```bash
-env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-09-zone-descent-miner.py \
+env PYTHONDONTWRITEBYTECODE=1 python3 notes/2026-07-08-zone-descent-miner.py \
   --qs 17 --high 7 --top 12 --json-out /tmp/c31-zone-descent-miner-q17.json
 ```
 
