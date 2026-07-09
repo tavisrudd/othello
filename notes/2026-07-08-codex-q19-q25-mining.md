@@ -235,7 +235,9 @@ Interpretation:
 
 - q=23 bucket-label solves are feasible but memory-heavy.  The earlier bucket-first Python sweep
   found all 22 q=23 buckets P.
-- q=25 first S4 representative is also P, so no new counterexample signal appears there.
+- q=25's ad hoc S4 probe `[1,2,3,4]` is P, so that probe gives no counterexample signal.
+- q=25's first full-PGL canonical bucket representative `[1,2,3,5]` is still unsolved by the
+  current engine at the 100M memo cap.
 - q=25 is not yet feasible as a broad bucket-label sweep with the current early-break HashMap
   engine: the first full-PGL canonical bucket alone exceeds 100M memo entries.
 - Full q=25 feature mining still needs a GF(25)-aware miner.  The current Python miner handles
@@ -244,6 +246,8 @@ Interpretation:
 ## Runtime Query / Dump Path
 
 The Rust solver now also has a runtime-query path around a solved or partially solved S4 memo:
+
+Manual: [`2026-07-08-s4-memo-dump-query-manual.md`](2026-07-08-s4-memo-dump-query-manual.md).
 
 ```text
 s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
@@ -272,9 +276,12 @@ fixed metadata before records/layers.  Raw and compact files record:
 format version
 header length
 canonicalizer id
+GF table hash
 root kind
 q
 normalized t4 root parameters
+root affine cells
+root canonical key
 MAXW
 value encoding
 key format
@@ -291,7 +298,7 @@ Smoke validation on q=17:
 s4dump 17 1,2,3,4 --cap 1000000
   records=64728, root value P
 s4freeze ... --fp-bits 32 --load 0.90
-  keys=64728, layers=2, bits/key=36.799, file=297968 bytes
+  keys=64728, fold-collisions=0, layers=2, bits/key=36.799, file=297968 bytes
 s4query raw and burr
   root legal moves=104, raw/burr agree, all first moves known N
 ```
@@ -313,6 +320,7 @@ s4dump q=25 t4=[1,2,3,5] --cap 2000000
 
 s4freeze raw -> burr --fp-bits 48 --load 0.90
   keys=2000001
+  fold-collisions=0
   layers=2
   bits/key=54.451
   file=13,612,976 bytes

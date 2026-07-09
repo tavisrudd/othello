@@ -339,6 +339,8 @@ nix develop --command lake build ProjectiveCap.CertData.Q13Assembly
 Main solver:
 
 - [`../2026-07-06-grid-cap-solver.rs`](../2026-07-06-grid-cap-solver.rs)
+- Manual for the S4 memo dump / compact archive / runtime query tooling:
+  [`../2026-07-08-s4-memo-dump-query-manual.md`](../2026-07-08-s4-memo-dump-query-manual.md)
 
 Build from `rust/`:
 
@@ -358,6 +360,9 @@ Important modes:
 - `resym`: symmetric-family closure test; route closed but mode is useful for regression.
 - `boundary`: old odd-maximal-cap embedding test; route closed from q=11.
 - `par`, `outcome`, `defect`: broader exact solver modes.
+- `s4dump`, `s4freeze`, `s4query`: exact raw mmap memo dumps, compact BuRR-style archives, and
+  runtime line-protocol queries for S4-rooted pattern mining.  See the manual above before using
+  compact archives for anything beyond exploratory mining.
 
 Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
@@ -386,9 +391,10 @@ Recently reported:
 - **Repair follow-up checks:** score-9 is a two-orbit finite-certificate target; polarity does not
   explain the guard, and empty-conic alone does not imply zone Grundy 0.
 - **q=19/q25 mining:** q=19 C20 and steering data are durable in `notes/data/`; q=19 has
-  `max Z = 16`.  A Rust `s4` sizing mode shows q=25's first normalized representative is P but
-  already needs about 26.3M memo entries, so GF(25) feature mining needs a dedicated prime-power
-  path before broad runs.
+  `max Z = 16`.  A Rust `s4` sizing mode shows the ad hoc q=25 probe `[1,2,3,4]` is P at about
+  26.3M memo entries, while the first full-PGL canonical bucket representative `[1,2,3,5]` exceeds
+  the 100M memo cap.  GF(25) feature mining needs a dedicated prime-power path before broad runs.
+  The S4 dump/query manual records the current q=25 partial-dump query workflow and perf profile.
 
 Good Lean side targets:
 

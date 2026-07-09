@@ -856,8 +856,11 @@ pipeline.  The C20 miner now supports bucket-level `--jobs`; q=19 has 13/13 P bu
 legal first intrusions are N-valued, and recursive steering over 63,479 unique P reply states gives
 `max Z = 16` with raw zones up to 57.  Durable data: `notes/data/c20-q19.json`,
 `notes/data/c20-q19-states.jsonl.gz`, and `notes/data/c31-q19.json`.  The same report adds a Rust
-`s4` sizing mode; q=25's first normalized representative is P but takes about 26.3M private memo
-entries, so GF(25) broad mining needs a dedicated prime-power path.
+`s4` sizing mode plus S4 dump/query tooling (manual:
+[`2026-07-08-s4-memo-dump-query-manual.md`](2026-07-08-s4-memo-dump-query-manual.md)).  The ad hoc
+q=25 probe `[1,2,3,4]` is P at about 26.3M private memo entries, while the first full-PGL
+canonical bucket representative `[1,2,3,5]` exceeds the 100M memo cap.  GF(25) broad mining needs
+a dedicated prime-power path.
 
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
