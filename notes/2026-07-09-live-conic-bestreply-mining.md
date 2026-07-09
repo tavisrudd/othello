@@ -210,6 +210,47 @@ has a P-valued reply whose live-conic Node-Kayles xor is already 0.  The replies
 positive-live, with `live_on >= 4`, matching the two-ply depletion lower bound rather than
 empty-conic repair.
 
+Full q=23 bucket sweep:
+
+```text
+bucket representatives: 22
+first moves tested: 5734
+zero-xor P hits: 5734
+no candidates: 0
+no hits: 0
+aborts: 0
+maximum target-xor candidates tried before hit: 4
+
+candidate solve values:
+  P: 5734
+  N: 703
+
+hit live_on distribution:
+  4:1049
+  5:2613
+  6:1637
+  7:39
+  10:396
+
+hit geometry:
+  ext -> int: 2188
+  int -> int: 1760
+  ext -> ext: 716
+  int -> ext: 674
+  on  -> ext: 396
+```
+
+This turns the q=23 layer into a concrete candidate theorem:
+
+```text
+For every full-PGL on-conic S4 bucket at q=23 and every legal first move,
+there is a reply whose whole follower is P and whose live-conic
+Node-Kayles xor is 0.
+```
+
+The striking extra regularity is that the witness always appears among the first four zero-xor
+candidates when sorted by `live_on` and geometry rank.
+
 ## Import
 
 This pass supports a sharper q>=23 proof target:
@@ -231,7 +272,4 @@ rather than enumerate a short list of graph shapes.
 2. Mine the off-conic legal zone after the q=23 zero-xor witnesses: size, graph Grundy, and whether
    it is itself zero or has a bounded repair family.
 3. Prove the matching-union graph lemma cleanly in paper/Lean terms.
-4. Test the zero-xor steering mode on more q=23 bucket representatives before attempting q=25.
-5. For q=23, run more exact bucket representatives only if the two current samples fail a proposed
-   graph/zone law.
-6. For q=25, build targeted witness dumps rather than broad partial roots.
+4. For q=25, build targeted witness dumps rather than broad partial roots.

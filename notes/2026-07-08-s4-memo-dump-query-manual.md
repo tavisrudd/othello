@@ -1,8 +1,9 @@
 # S4 Memo Dump / Query Manual
 
-This manual covers the Rust `s4dump`, `s4freeze`, `s4query`, `s4mine`, and `s4xormine` modes in
-[`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These modes are for targeted
-pattern mining around normalized on-conic S4 roots in the residual `PG(2,q)` grid game.
+This manual covers the Rust `s4dump`, `s4freeze`, `s4query`, `s4mine`, `s4xormine`, and
+`s4bucketlist` modes in [`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These
+modes are for targeted pattern mining around normalized on-conic S4 roots in the residual
+`PG(2,q)` grid game.
 
 ## Build
 
@@ -315,6 +316,16 @@ Important fields:
 - `S4XORMINE-DONE`: aggregate hit counts and final memo size.
 
 The cap is global to the run because the mode shares one S4 memo across candidate solves.
+
+### `s4bucketlist`
+
+```bash
+/tmp/gridcap-s4 s4bucketlist <q>
+```
+
+Lists the normalized on-conic S4 full-`PGL(2,q)` bucket representatives without solving them.  This
+is useful for feeding targeted modes such as `s4xormine` without launching a full `s4buckets`
+solve.
 
 ## Pattern-Mining Recipes
 

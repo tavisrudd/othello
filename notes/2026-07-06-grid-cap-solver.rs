@@ -40,6 +40,9 @@
 //                -- sizing probe for one normalized on-conic S4 root
 //                   {(t,1/t): t in {t1,t2,t3,t4}} using the GF(q) backend.
 //                   Reports P/N, private-memo size, and wall time; works for prime powers.
+//   s4bucketlist <q>
+//                -- enumerate normalized on-conic S4 full-PGL bucket representatives without
+//                   solving them.
 //   s4buckets <q> [--cap <slots>] [--start <idx>] [--limit <n>] [--out <file>]
 //                -- Rust-native bucket-label sweep: enumerate normalized on-conic S4
 //                   six-sets {inf,0,t1,t2,t3,t4} modulo full PGL(2,q), then solve
@@ -1596,6 +1599,30 @@ fn bucket_size_hist(buckets: &[S4Bucket]) -> String {
         .map(|(size, count)| format!("{}:{}", size, count))
         .collect::<Vec<_>>()
         .join(",")
+}
+
+fn solve_s4_bucket_list(q: usize) {
+    let enum_start = Instant::now();
+    let buckets = enumerate_s4_buckets(q);
+    println!(
+        "S4BUCKETLIST q={} raw={} pgl={} buckets={} size-hist={} enum-elapsed={:.3}",
+        q,
+        choose4(q - 1),
+        q * (q * q - 1),
+        buckets.len(),
+        bucket_size_hist(&buckets),
+        enum_start.elapsed().as_secs_f64()
+    );
+    for bucket in buckets {
+        println!(
+            "BUCKETREP q={} idx={} canon={} size={} rep={}",
+            q,
+            bucket.idx,
+            fmt_u16_array6(&bucket.canon),
+            bucket.size,
+            fmt_usize_array4(&bucket.rep)
+        );
+    }
 }
 
 fn solve_s4_buckets(q: usize, cap: usize, start_idx: usize, limit: Option<usize>, out_path: Option<&str>) {
@@ -5973,6 +6000,16 @@ fn main() {
             .expect("s4 mode needs t values: s4 <q> t1,t2,t3,t4 [--cap <slots>]");
         let t4 = parse_t4(t4_arg);
         solve_s4(q, &t4, cap);
+        return;
+    }
+    if args[1] == "s4bucketlist" {
+        // s4bucketlist <q>
+        let q: usize = args
+            .get(2)
+            .expect("s4bucketlist mode needs q: s4bucketlist <q>")
+            .parse()
+            .expect("q must be an integer");
+        solve_s4_bucket_list(q);
         return;
     }
     if args[1] == "s4buckets" {

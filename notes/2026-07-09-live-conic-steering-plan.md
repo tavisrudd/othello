@@ -190,8 +190,8 @@ be different for q>=23.
    `REPLY`, and optional `STATE` rows.
 3. Run the new rows against the existing exact q=23 dumps.  First results:
    [`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md).
-4. Add targeted zero-xor candidate solving.  Done: both exact q=23 samples have a zero-conic-xor
-   P reply for every first move.
+4. Add targeted zero-xor candidate solving.  Done: the full q=23 S4 bucket layer has a
+   zero-conic-xor P reply for every first move.
 5. Run the same rows against q=19 to keep a solved comparison column.
 6. Use q=25 partial dumps only for coverage-aware shape comparison.
 7. Semi-formalize the S4 two-ply depletion lemma in Lean or paper notes.
