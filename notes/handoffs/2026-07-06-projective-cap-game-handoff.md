@@ -403,11 +403,13 @@ task list.  Current high-value items:
 - **Small-zone follow-up:** turn the repair-mining data into a geometric repair-intruder lemma
   and a small-zone `Z <= 2` / empty-conic base-law certificate schema.
 - **Counterexample-readiness additions (Fable, 2026-07-09 second pass):** **C41** trap ⇒ N
-  converse in Lean (gates D1's equivalence phrasing); **C42** type-census factorization of the
-  witness-count concentration (fuses C36 with the heuristic's §6); **C43** PG(4,3) exact-solve
-  sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer bucket census
-  (the A4 falsification watch, previously without a task ID).  Tier placement is in the queue's
-  priority-ordering amendment.
+  converse in Lean (gates D1's equivalence phrasing); **C42** fixed-q census propagation
+  (rescoped same day after the on-conic child type-alignment verdict — the q-independent
+  dictionary half is refuted, the fixed-q class-stability half survives); **C43** PG(4,3)
+  exact-solve sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer
+  bucket census (the A4 falsification watch, previously without a task ID; q=25's depletion
+  status is now the key covariate, and it carries the q=23 direct-B3-discharge rider).  Tier
+  placement is in the queue's priority-ordering amendment.
 
 Recently reported:
 
@@ -504,6 +506,16 @@ Recently reported:
   across at least two q columns, with 281 nonconstant values.  The obstruction is mostly S6 and is
   now tabulated in `rust/s4-dumps/2026-07-09/c36-analysis/nonconstant-strict-types.tsv`.  Report:
   [`../2026-07-09-codex-cross-q-type-alignment.md`](../2026-07-09-codex-cross-q-type-alignment.md).
+- **On-conic child type alignment (size-3→size-4 layer):** within-q value-constancy on exact
+  orbits PASSES with zero violations for both the burned-pair stabilizer and full PGL at q ≤ 19
+  (reproducing the C5/C15 buckets), but the q-independent finite-type collapse is **refuted**:
+  119 shared integral configurations flip value across q, systematically — N exactly at the
+  arc-depleted orders q ∈ {11,17}, P at the full orders 13/19.  The on-conic concentration is
+  q-driven (arc abundance), not type-driven; no finite type→value table exists, and even granting
+  the full-PGL bridge a solved q gives no cross-q prediction.  C42 is rescoped to the fixed-q
+  census/propagation half; the anchor half of the uniform (ON) bound merges into arc-depletion
+  arithmetic (falsification-map A5).  Report:
+  [`../2026-07-09-onconic-child-type-alignment.md`](../2026-07-09-onconic-child-type-alignment.md).
 
 Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
 C32 plane and PG(4,3) primary checks above, wrote the report, and marked C32 reported in the queue.

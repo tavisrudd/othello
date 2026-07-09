@@ -277,8 +277,12 @@ the `q≥23` row), not the mean.
 
 ---
 
-Follow-up queued 2026-07-09 (Fable second pass): **C42** tests the factorization of the §6
-concentration into type-determinism (C36's stabilizer-type gate) × class-uniform type census —
-the census half is a value-free incidence-geometry statement, and the observed dispersion-0
-columns suggest an exact identity rather than mere `O(√q)` equidistribution. See the codex task
-queue entry for the verdict logic.
+Follow-up queued 2026-07-09 (Fable second pass; updated same day after the alignment test): the
+factorization of the §6 concentration was half-adjudicated by
+[`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md) —
+within-q type-determinism CONFIRMED (exact orbits, both the stabilizer and full PGL, zero
+violations), but the q-independent type→value dictionary REFUTED (119 integral configurations flip
+value, N exactly at the arc-depleted `q ∈ {11,17}`). **C42** is rescoped to the surviving fixed-q
+half: census propagation — the class-stability constant `C` as a value-free geometry quantity —
+while the anchor half of the uniform (ON) bound merges into the arc-depletion arithmetic (A5).
+See the codex queue entry for the verdict logic.

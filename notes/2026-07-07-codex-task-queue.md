@@ -47,9 +47,11 @@ the most plausible one lives. Four additions:
 - **C41** — trap ⇒ N converse in Lean. Joins **Tier B, before C34**: it gates D1's central
   "conjecture false ⟺ trapped size-3" phrasing, and the expected proof route is within existing
   machinery (cheap).
-- **C42** — type-census factorization of the witness-count concentration. Joins **Tier B,
-  immediately after C36** — same data and signatures; C36's verdict decides which half of the
-  factorization survives.
+- **C42** — fixed-q census propagation. Joins **Tier B, immediately after C36**. Rescoped
+  2026-07-09 after the on-conic child type-alignment report: within-q type-determinism CONFIRMED,
+  q-independent type→value dictionary REFUTED (flips exactly at the arc-depleted q ∈ {11,17}) —
+  the surviving task is the fixed-q census/class-stability measurement; the anchor half merges
+  into arc-depletion arithmetic (A5).
 - **C43** — PG(4,3) exact-solve sizing. Joins **Tier C**: independent compute lane; either verdict
   fills D1's even-dimensional section, which currently has zero direct outcome evidence.
 - **C44** — GF(25) prime-power path + q=25 Baer bucket census. Joins **Tier C after C43**: the
@@ -1302,54 +1304,56 @@ Task:
 
 Budget: proof task; machine work is nil. Report file: `notes/2026-07-09-codex-trap-converse.md`.
 
-## C42. Type-census uniformity — factorize the witness-count concentration (fuses C36 with §6)
+## C42. Fixed-q census propagation — the rescoped surviving half of the concentration factorization
 
-**READ FIRST:** [`2026-07-09-witness-count-heuristic.md`](2026-07-09-witness-count-heuristic.md)
-§6 and the falsification map §6, plus the signature definitions in
-`rust/scripts/onconic_child_type_alignment.py` (currently untracked — commit it or pin its
-signature definitions verbatim in the report; reproducibility of the signature is the whole game).
+**READ FIRST:** [`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)
+— it adjudicated this task's original premise, half each way, before the task ran — then
+[`2026-07-09-witness-count-heuristic.md`](2026-07-09-witness-count-heuristic.md) §6 and the
+falsification map §5–§6.
 
-Context: the single most structured unexplained regularity in the data is that the **on-conic
-P-count per size-3 class is a near-point-mass at fixed q** (dispersion literally 0 at
-`q = 5,7,9,13,19`; `≤ 0.4` at 11/17). This concentration is the only thing protecting the (ON)
-route at the `q=17` knife edge, and §6 leaves it as "protected by concentration, not for a
-reason." Hypothesis to test — the concentration **factorizes**:
+**Rescope (2026-07-09, post-alignment-report).** The original hypothesis was
+`value = f(q-independent type)` × `class-uniform type census` ⇒ the observed P-count point mass.
+The alignment test settled the first factor:
 
-```text
-value = f(q-independent stabilizer type)         [type-determinism — the game half, C36's test]
-   ×  type-census of a class ≈ class-independent [census uniformity — the geometry half, NO game values]
-⇒ per-class on-conic P-count = Σ over P-types of the census  ≈ class-independent  [the observed point mass]
-```
+- **Within-q type-determinism: CONFIRMED.** Exact-orbit self-consistency passes with zero
+  violations for BOTH the burned-pair stabilizer and full PGL at q = 5..19 (report §4).
+- **q-independence: REFUTED.** 119 shared integral configurations flip value across q, perfectly
+  systematically — N exactly at the arc-depleted orders q ∈ {11,17}, P elsewhere. No finite
+  q-uniform type→value table exists; the falsification map §5/§6 records that route as closed
+  negative, and the *anchor* half of the uniform (ON) bound merges into the arc-depletion
+  arithmetic (A5). Character signatures also fail within-q (report §4) — work with exact orbits
+  only, not character invariants.
 
-The geometry half is a pure incidence-geometry counting statement (character sums / orbit counting
-over the conic parameter line) — and the observed dispersion-0 suggests an **exact identity**, not
-just Weil `O(√q)` equidistribution. If it holds, §6's "class-stability lemma + anchor lower bound"
-target stops being phenomenological and becomes provable-by-counting plus C36's finite obstruction
-list. Scope note: the §6 warning that character sums attack "the right quantity with an empirically
-false main term" is about the *mean over q* (macroscopic depletion); fixed-q *class dispersion* is
-the part equidistribution can legitimately own — keep the two separate in the report.
+What survives — and is this task — is the **propagation half, a fixed-q statement the report
+explicitly left untouched** (its §6: class stability "may still hold at fixed q"): how does each
+size-3 class distribute its q−4 on-conic children over the exact stabilizer orbits, and how much
+can that census vary class-to-class? The onP histograms already bound the answer away from perfect
+uniformity at the depleted orders (q=11 has classes at 2 and 5; q=17 at 1 and 3), so the target is
+the **bounded-variation** form — the heuristic §6's class-stability constant `C` — as a value-free
+geometry quantity. Division of labor for the uniform (ON) bound after the alignment verdict:
+depletion arithmetic (A5) must supply the *anchor* (enough P-orbits exist at every q); census
+propagation must supply the *stability* (every class reaches them, up to `C`). This task measures
+the second.
 
-1. **Census table:** from the existing feat data (`q = 5..19`, regenerable), compute for every
-   size-3 class the type-census vector — the count of on-conic children per stabilizer-type
-   signature (grouping (B) of the alignment script; report grouping (A)/full-PGL as a comparison
-   column only, flagged with the B3 caveat). Report per-q: the census vector dispersion across
-   classes (exact-identity? zero? small?), for the full vector AND for its projection onto P-types.
-2. **Verdict logic:** (i) census uniform + C36 type-determinism holds ⇒ the factorization is
-   real — state the census identity as a precise value-free conjecture (the Lean/paper target) and
-   attempt at least a semi-formal counting proof at one small q. (ii) census NOT uniform but
-   P-count still concentrated ⇒ the concentration lives in cancellation across types — report the
-   compensating structure verbatim (this would be the more surprising finding). (iii) C36's
-   self-consistency gate fails (value not type-determined) ⇒ report which refinement of the
-   signature restores determinism, or that none does.
-3. **Cross-report with C36** (same data, same signatures): do not duplicate its solves; this task
-   is census-only and needs no new game values. Note C36 has since reported (2026-07-09): the
-   strict normalized-coordinate type passes within-q self-consistency (the game half needed here),
-   while 281 shared types are non-q-constant — that cross-q obstruction is C36's object, not
-   this task's; C42's factorization is a fixed-q statement and stands either way.
-4. Any single class pair with materially different census vectors at a dispersion-0 q is a
-   contradiction with the P-count point mass under factorization — report it verbatim.
+1. **Census table:** from the on-disk feat censuses (`notes/data/codex-feat{5,7,11,13,17,19}.out`,
+   no new solves), for each q and each size-3 class: the census vector = count of on-conic
+   children per exact stabilizer orbit (alignment-script machinery — reuse it; commit it if still
+   untracked). Report per q the census variation across classes: the full vector (measurable
+   value-blind at the all-P orders q=13,19 — the clean pure-geometry test) and its projection onto
+   that q's P-orbits (the class-stability constant `C` at the depleted orders q=11,17).
+2. **Localize the variation:** at q=11/17, which orbits absorb the class-to-class difference
+   (2 vs 5; 1 vs 3)? Is the differing sub-census geometrically characterizable? A clean
+   characterization is the lemma candidate; scattered variation is a reportable negative.
+3. **Verdict logic:** (i) full-vector census uniform at q=13/19 and bounded-variation at q=11/17 ⇒
+   state the census identity/bound as a precise value-free conjecture and attempt a counting proof
+   at one small q, noting whether the proof structure is q-generic. (ii) census wildly non-uniform
+   even at the all-P orders ⇒ the propagation half is dead too — report verbatim; the (ON) route
+   then rests entirely on A5 arithmetic.
+4. **Gates:** your census's P-orbit projections must reproduce the alignment report's onP
+   histograms byte-for-byte (`q=11 {2:2, 5:6}`, `q=17 {1:3, 3:18}`, etc.); orbit machinery must
+   match the report's §2 method.
 
-Budget: 4h wall, single-core, ≤ 8 GB (feat regeneration only).
+Budget: 4h wall, single-core, ≤ 8 GB (no new solves).
 Report file: `notes/2026-07-09-codex-type-census-uniformity.md`.
 
 ## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum
@@ -1392,7 +1396,11 @@ Context: the falsification map names square `q` (Baer subplanes — extra dense 
 the field-arithmetic bugs have lived (C6) — yet q=25 work exists only as ad hoc probes
 (`[1,2,3,4]` P at ~26.3M memo entries; `[1,2,3,5]` blew the 100M cap) and a prose aside ("needs a
 dedicated prime-power path"). Make it a task. q=49 is explicitly out of scope; q=27 is char-3, a
-different regime, also out of scope.
+different regime, also out of scope. The on-conic child type-alignment verdict
+([`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md))
+raises the stakes: on-conic values flip N exactly at the **arc-depleted** orders (11, 17), so
+q=25's depletion status — depleted like 11/17 or full like 13/19 — is now the single most
+informative new number for the (ON) route, independent of the Baer watch.
 
 1. **The prime-power path:** whatever the S4 dump/query/mining stack needs to treat GF(25)
    first-class — canonical keying over the GF(25) encoding, the GF-hash header guards, and the
@@ -1417,5 +1425,11 @@ different regime, also out of scope.
 5. Optional, gated: if the feat-layer (per-size-3-class on-conic witness counts) is affordable at
    q=25 under an hour-scale gate, add the q=25 rows to the witness-count heuristic layers (the §6
    knife-edge extrapolation currently ends at q=19). If not affordable, say so — do not force it.
+6. Optional rider (distinct q, shares the S4 machinery — fold in here or into C35, whichever runs
+   first): the **direct B3 discharge at q=23** the alignment report §7 flags as still untested —
+   solve a second *stabilizer-inequivalent* representative inside 2–3 full-PGL q=23 buckets and
+   check value equality with the bucket representative. Cheap per solve (30-min gate each). Any
+   inequality is a MAJOR finding (it breaks the bucket bridge and downgrades the q=23 column) —
+   report verbatim and stop.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.

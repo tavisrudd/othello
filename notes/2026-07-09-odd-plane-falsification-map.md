@@ -126,19 +126,25 @@ the warning that snapshot invariants over-promise here.
 - **Eliminated unconditionally:** `q=5,7,11,13` (Lean); the `q ≤ 7` and `q = 9` regime shapes.
 - **Eliminated modulo solver:** `q=9,17,19` (`q=3` trivial) — B1/B6 are the residual risks, hardened by C37.
 - **Finite-checkable, not class-closing:** A2 per-`q`; A4 squares (`q=25,49`) — the top falsification watch (queued: **C44** for q=25).
-- **Conditional, discharge before citing:** B3 (`q=23` orbit bridge) — C36 is the test.
+- **Conditional, discharge before citing:** B3 (`q=23` orbit bridge) — C36 is the test; the
+  *direct* discharge (a second stabilizer-inequivalent representative per q=23 bucket, alignment
+  report §7) is queued as the C44 rider.
 - **Irreducible open core:** A3 (eventual failure). It is a *truth*-mode, distinct from — not equal
   to — the *route*-modes B4b/B4c (termination + coupling); they share instruments, not a definition.
   No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
   *predicts* on it — currently no main-layer counterexample signal, but erratic, so A3 stays open. A
   uniform `Z`-bound (or a coupling-residual law from C35) would close it; the finite-type route to
-  the class-stability lower-bound (§6) is now **closed negative** (C42), so the on-conic
+  the class-stability lower-bound (§6) is now **closed negative** (the type-alignment test; **C42** is rescoped to the fixed-`q`
+  census/propagation half, which the test explicitly left untouched), so the on-conic
   concentration must be attacked through the arc-depletion arithmetic (A5), not a `q`-uniform type
   census.
 
 Net: falsity has exactly one shape (trapped size-3), the easy proof routes are provably dead, and the
 only closure is a `q`-uniform shape-elimination — concretely the preservability/termination pair plus
-C36's finite-type collapse.
+the finite obstruction *lists* (C36's cross-`q` nonconstant types; the alignment test's
+depletion-flip set): the finite-type *collapse* is refuted, the localization survives, and the
+on-conic anchor must come from arc-depletion arithmetic (A5) with C42's census propagation
+carrying it to every class.
 
 ## 6. The A3 test: witness-count heuristic
 
