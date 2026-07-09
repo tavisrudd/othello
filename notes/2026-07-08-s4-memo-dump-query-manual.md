@@ -213,7 +213,8 @@ partial capped q=25 dumps.
 ```bash
 /tmp/gridcap-s4 s4mine <q> <t1,t2,t3,t4> --raw <raw-file> \
   [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>] \
-  [--max-reply-moves <n>] [--max-states <n>]
+  [--max-reply-moves <n>] [--best-replies] [--max-best-replies <n>] \
+  [--max-states <n>]
 
 /tmp/gridcap-s4 s4mine <q> <t1,t2,t3,t4> --burr <burr-file> ...
 ```
@@ -225,6 +226,8 @@ partial capped q=25 dumps.
 - `PLY` rows for deduplicated reachable states through `--depth`, grouped by absolute ply;
 - optional `STATE` rows for each deduplicated state with `--state-rows`;
 - optional `REPLY` / `REPLYSUM` rows for root moves selected by `--replies`.
+- optional `BESTREPLYSUM` / `BESTREPLY` rows with `--best-replies`, reporting known P-valued
+  reply witnesses from the dump and their live-conic counts.
 
 The root is normalized so the conic is `r*c = 1`.  Rows now include conic occupancy fields:
 
@@ -236,6 +239,31 @@ dead_on=<affine conic cells neither selected nor legal>
 
 `PLY` rows aggregate those as min/max/average fields.  `REPLYSUM` also reports
 `live_on_zero`, the number of emitted replies that empty the live conic.
+
+`BESTREPLY` rows are intentionally value-oracle rows, not optimality certificates.  In exact
+early-break dumps, they usually expose the first known P witness found by the solver.  In capped
+partial dumps, missing replies remain `unknown`, so `known_p_live_on_min` means "minimum among
+known P replies in this dump," not "minimum over the game tree."
+
+`BESTREPLY`, `REPLY`, and optional `STATE` rows also include live-conic graph fields:
+
+```text
+conic_v       live affine-conic vertices
+conic_e       chord-obstruction edges among those vertices
+conic_comp    connected components
+conic_iso     isolated components
+conic_path    path components
+conic_cycle   cycle components
+conic_other   components that are not paths/cycles/isolates
+conic_odd     odd-size components
+conic_max     largest component size
+conic_degmax  maximum graph degree
+conic_off     selected off-conic intruders generating the graph
+conic_sizes   comma-separated component sizes, descending
+```
+
+The current graph uses live affine-conic points as vertices and adds an edge when a selected
+off-conic point lies on the chord between two live conic points.
 
 Default settings:
 

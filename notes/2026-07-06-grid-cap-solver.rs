@@ -56,10 +56,11 @@
 //                   state, moves, play r,c, pop, replies r,c, bench <iters>, help, quit.
 //   s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
 //          [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
-//          [--max-reply-moves <n>] [--max-states <n>]
+//          [--max-reply-moves <n>] [--best-replies] [--max-best-replies <n>]
+//          [--max-states <n>]
 //                -- non-interactive S4 pattern-mining rows: root child census, optional root
-//                   reply rows, live-conic counts, and deduped ply summaries through the
-//                   requested depth.
+//                   reply rows, best known P-reply rows, live-conic counts, and deduped ply
+//                   summaries through the requested depth.
 //   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
@@ -2611,6 +2612,132 @@ fn s4_conic_feature_string(b: &Board, occ: &[u16], live_on: usize) -> String {
     format!("sel_on={} live_on={} dead_on={}", sel_on, live_on, dead_on)
 }
 
+fn s4_conic_feature_counts(b: &Board, occ: &[u16], live_on: usize) -> (usize, usize, usize) {
+    let sel_on = selected_on_root_conic(b, occ);
+    let total_on = b.q.saturating_sub(1);
+    let dead_on = total_on.saturating_sub(sel_on + live_on);
+    (sel_on, live_on, dead_on)
+}
+
+fn s4_conic_graph_feature_string(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> String {
+    let mut live = Vec::with_capacity(b.q.saturating_sub(1));
+    for t in 1..b.q {
+        let z = t * b.q + b.gf.inv[t] as usize;
+        if !bit_is_set(chosen, z) && !bit_is_set(forbidden, z) {
+            live.push(z);
+        }
+    }
+    let n = live.len();
+    let mut adj = vec![0u64; n];
+    let mut edges = 0usize;
+    let mut off_selected = 0usize;
+    for &x16 in occ {
+        let x = x16 as usize;
+        if is_on_root_conic(b, x) {
+            continue;
+        }
+        off_selected += 1;
+        for i in 0..n {
+            let line = &b.line_mask[x * b.n + live[i]];
+            for j in (i + 1)..n {
+                if bit_is_set(line, live[j]) && (adj[i] & (1u64 << j)) == 0 {
+                    adj[i] |= 1u64 << j;
+                    adj[j] |= 1u64 << i;
+                    edges += 1;
+                }
+            }
+        }
+    }
+
+    let mut seen = vec![false; n];
+    let mut stack = Vec::with_capacity(n);
+    let mut comp_sizes = Vec::new();
+    let mut iso = 0usize;
+    let mut paths = 0usize;
+    let mut cycles = 0usize;
+    let mut other = 0usize;
+    let mut odd = 0usize;
+    let mut max_comp = 0usize;
+    let mut degmax = 0usize;
+    for start in 0..n {
+        if seen[start] {
+            continue;
+        }
+        seen[start] = true;
+        stack.clear();
+        stack.push(start);
+        let mut comp = Vec::new();
+        while let Some(v) = stack.pop() {
+            comp.push(v);
+            let mut bits = adj[v];
+            while bits != 0 {
+                let w = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                if !seen[w] {
+                    seen[w] = true;
+                    stack.push(w);
+                }
+            }
+        }
+        let size = comp.len();
+        max_comp = max_comp.max(size);
+        if size % 2 == 1 {
+            odd += 1;
+        }
+        let mut degree_sum = 0usize;
+        let mut all_deg_le_two = true;
+        for &v in &comp {
+            let degree = adj[v].count_ones() as usize;
+            degmax = degmax.max(degree);
+            degree_sum += degree;
+            if degree > 2 {
+                all_deg_le_two = false;
+            }
+        }
+        let comp_edges = degree_sum / 2;
+        if size == 1 && comp_edges == 0 {
+            iso += 1;
+        } else if all_deg_le_two && comp_edges + 1 == size {
+            paths += 1;
+        } else if all_deg_le_two && comp_edges == size {
+            cycles += 1;
+        } else {
+            other += 1;
+        }
+        comp_sizes.push(size);
+    }
+    comp_sizes.sort_unstable_by(|a, b| b.cmp(a));
+    let size_text = if comp_sizes.is_empty() {
+        "-".to_string()
+    } else {
+        comp_sizes
+            .iter()
+            .map(|x| x.to_string())
+            .collect::<Vec<_>>()
+            .join(",")
+    };
+    format!(
+        "conic_v={} conic_e={} conic_comp={} conic_iso={} conic_path={} conic_cycle={} conic_other={} conic_odd={} conic_max={} conic_degmax={} conic_off={} conic_sizes={}",
+        n,
+        edges,
+        comp_sizes.len(),
+        iso,
+        paths,
+        cycles,
+        other,
+        odd,
+        max_comp,
+        degmax,
+        off_selected,
+        size_text
+    )
+}
+
 fn value_label(v: Option<bool>) -> &'static str {
     v.map_or("unknown", |is_n| if is_n { "N" } else { "P" })
 }
@@ -2716,6 +2843,25 @@ struct S4MineChild {
     key: u128,
     value: Option<bool>,
     geom: &'static str,
+}
+
+#[derive(Clone)]
+struct S4MineBestReply {
+    reply_index: usize,
+    live_on: usize,
+    sel_on: usize,
+    dead_on: usize,
+}
+
+fn s4_geom_rank(geom: &str) -> usize {
+    match geom {
+        "on" => 0,
+        "int" => 1,
+        "ext" => 2,
+        "off" => 3,
+        "root" => 4,
+        _ => 5,
+    }
 }
 
 fn collect_s4_children(
@@ -2881,6 +3027,8 @@ fn print_s4_root_moves_and_replies(
     forbidden: &Mask,
     reply_filter: S4MineReplyFilter,
     max_reply_moves: usize,
+    best_replies: bool,
+    max_best_replies: usize,
 ) {
     let children = collect_s4_children(b, t4, store, occ, chosen, forbidden);
     let mut known = 0usize;
@@ -2904,6 +3052,77 @@ fn print_s4_root_moves_and_replies(
             replies.len(),
             s4_conic_feature_string(b, &child.occ, child_live_on)
         );
+        if best_replies {
+            let mut reply_values = S4MineValues::default();
+            let mut reply_geom = S4MineCounts::default();
+            let mut p_live_on_min = usize::MAX;
+            let mut p_live_on_max = 0usize;
+            let mut best: Vec<S4MineBestReply> = Vec::new();
+            for (reply_index, reply) in replies.iter().enumerate() {
+                reply_geom.add_geom(reply.geom);
+                reply_values.add_value(reply.value);
+                let reply_live_on = live_on_root_conic(b, &reply.chosen, &reply.forbidden);
+                if reply.value == Some(false) {
+                    let (sel_on, live_on, dead_on) =
+                        s4_conic_feature_counts(b, &reply.occ, reply_live_on);
+                    p_live_on_min = p_live_on_min.min(live_on);
+                    p_live_on_max = p_live_on_max.max(live_on);
+                    best.push(S4MineBestReply { reply_index, live_on, sel_on, dead_on });
+                }
+            }
+            best.sort_by_key(|cand| {
+                let reply = &replies[cand.reply_index];
+                (
+                    cand.live_on,
+                    s4_geom_rank(reply.geom),
+                    reply.z as usize / b.q,
+                    reply.z as usize % b.q,
+                )
+            });
+            println!(
+                "BESTREPLYSUM x={},{} xgeom={} xvalue={} replies={} {} {} known_p_live_on_min={} known_p_live_on_max={} best_rows={}",
+                child.z as usize / b.q,
+                child.z as usize % b.q,
+                child.geom,
+                value_label(child.value),
+                replies.len(),
+                reply_geom.fmt("reply_"),
+                reply_values.fmt("reply_child_"),
+                if best.is_empty() { 0 } else { p_live_on_min },
+                if best.is_empty() { 0 } else { p_live_on_max },
+                best.len().min(max_best_replies)
+            );
+            for (rank, cand) in best.iter().take(max_best_replies).enumerate() {
+                let reply = &replies[cand.reply_index];
+                let reply_children =
+                    collect_s4_children(b, t4, store, &reply.occ, &reply.chosen, &reply.forbidden);
+                let mut legal_geom = S4MineCounts::default();
+                let mut child_values = S4MineValues::default();
+                for grandchild in &reply_children {
+                    legal_geom.add_geom(grandchild.geom);
+                    child_values.add_value(grandchild.value);
+                }
+                println!(
+                    "BESTREPLY x={},{} xgeom={} xvalue={} rank={} y={},{} ygeom={} value={} sel_on={} live_on={} dead_on={} legal={} {} {} {}",
+                    child.z as usize / b.q,
+                    child.z as usize % b.q,
+                    child.geom,
+                    value_label(child.value),
+                    rank,
+                    reply.z as usize / b.q,
+                    reply.z as usize % b.q,
+                    reply.geom,
+                    value_label(reply.value),
+                    cand.sel_on,
+                    cand.live_on,
+                    cand.dead_on,
+                    reply_children.len(),
+                    legal_geom.fmt("legal_"),
+                    child_values.fmt("child_"),
+                    s4_conic_graph_feature_string(b, &reply.occ, &reply.chosen, &reply.forbidden)
+                );
+            }
+        }
         if reply_filter.matches(child.value) && reply_move_count < max_reply_moves {
             reply_move_count += 1;
             let mut reply_values = S4MineValues::default();
@@ -2917,7 +3136,7 @@ fn print_s4_root_moves_and_replies(
                     live_on_zero += 1;
                 }
                 println!(
-                    "REPLY x={},{} xgeom={} xvalue={} y={},{} ygeom={} value={} {}",
+                    "REPLY x={},{} xgeom={} xvalue={} y={},{} ygeom={} value={} {} {}",
                     child.z as usize / b.q,
                     child.z as usize % b.q,
                     child.geom,
@@ -2926,7 +3145,8 @@ fn print_s4_root_moves_and_replies(
                     reply.z as usize % b.q,
                     reply.geom,
                     value_label(reply.value),
-                    s4_conic_feature_string(b, &reply.occ, reply_live_on)
+                    s4_conic_feature_string(b, &reply.occ, reply_live_on),
+                    s4_conic_graph_feature_string(b, &reply.occ, &reply.chosen, &reply.forbidden)
                 );
             }
             println!(
@@ -2959,6 +3179,8 @@ fn solve_s4_mine(
     state_rows: bool,
     reply_filter: S4MineReplyFilter,
     max_reply_moves: usize,
+    best_replies: bool,
+    max_best_replies: usize,
     max_states: usize,
 ) {
     let b = Board::new(q);
@@ -2976,7 +3198,7 @@ fn solve_s4_mine(
         std::process::exit(2);
     }
     println!(
-        "S4MINE q={} t4={:?} cells={:?} store={} depth={} state-rows={} max-states={} reply-filter={} max-reply-moves={}",
+        "S4MINE q={} t4={:?} cells={:?} store={} depth={} state-rows={} max-states={} reply-filter={} max-reply-moves={} best-replies={} max-best-replies={}",
         q,
         t4,
         cells,
@@ -2985,7 +3207,9 @@ fn solve_s4_mine(
         state_rows,
         max_states,
         reply_filter.label(),
-        if max_reply_moves == usize::MAX { "none".to_string() } else { max_reply_moves.to_string() }
+        if max_reply_moves == usize::MAX { "none".to_string() } else { max_reply_moves.to_string() },
+        best_replies,
+        max_best_replies
     );
     print_s4_root_moves_and_replies(
         &b,
@@ -2996,6 +3220,8 @@ fn solve_s4_mine(
         &root_forbidden,
         reply_filter,
         max_reply_moves,
+        best_replies,
+        max_best_replies,
     );
 
     let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = vec![(root_occ, root_chosen, root_forbidden)];
@@ -3012,7 +3238,7 @@ fn solve_s4_mine(
             if state_rows {
                 let live_on = geom.on;
                 println!(
-                    "STATE ply={} key={:032x} cells={} legal={} value={} {} {} {}",
+                    "STATE ply={} key={:032x} cells={} legal={} value={} {} {} {} {}",
                     occ.len(),
                     key,
                     fmt_cell_indices(&b, occ),
@@ -3020,7 +3246,8 @@ fn solve_s4_mine(
                     value_label(val),
                     geom.fmt("legal_"),
                     child_values.fmt("child_"),
-                    s4_conic_feature_string(&b, occ, live_on)
+                    s4_conic_feature_string(&b, occ, live_on),
+                    s4_conic_graph_feature_string(&b, occ, chosen, forbidden)
                 );
             }
             if rel_depth < depth && !truncated {
@@ -5544,13 +5771,16 @@ fn main() {
     if args[1] == "s4mine" {
         // s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
         //        [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
-        //        [--max-reply-moves <n>] [--max-states <n>]
+        //        [--max-reply-moves <n>] [--best-replies] [--max-best-replies <n>]
+        //        [--max-states <n>]
         let mut raw_path: Option<String> = None;
         let mut burr_path: Option<String> = None;
         let mut depth = 2usize;
         let mut state_rows = false;
         let mut reply_filter = S4MineReplyFilter::None;
         let mut max_reply_moves = usize::MAX;
+        let mut best_replies = false;
+        let mut max_best_replies = 1usize;
         let mut max_states = 100_000usize;
         let mut positional: Vec<String> = Vec::new();
         let mut it = args[2..].iter();
@@ -5581,6 +5811,16 @@ fn main() {
                     .expect("--max-reply-moves int");
             } else if let Some(rest) = a.strip_prefix("--max-reply-moves=") {
                 max_reply_moves = rest.parse().expect("--max-reply-moves int");
+            } else if a == "--best-replies" {
+                best_replies = true;
+            } else if a == "--max-best-replies" {
+                max_best_replies = it
+                    .next()
+                    .expect("--max-best-replies needs a value")
+                    .parse()
+                    .expect("--max-best-replies int");
+            } else if let Some(rest) = a.strip_prefix("--max-best-replies=") {
+                max_best_replies = rest.parse().expect("--max-best-replies int");
             } else if a == "--max-states" {
                 max_states = it.next().expect("--max-states needs a value").parse().expect("--max-states int");
             } else if let Some(rest) = a.strip_prefix("--max-states=") {
@@ -5619,7 +5859,18 @@ fn main() {
                 std::process::exit(2);
             }
         };
-        solve_s4_mine(q, &t4, store, depth, state_rows, reply_filter, max_reply_moves, max_states);
+        solve_s4_mine(
+            q,
+            &t4,
+            store,
+            depth,
+            state_rows,
+            reply_filter,
+            max_reply_moves,
+            best_replies,
+            max_best_replies,
+            max_states,
+        );
         return;
     }
     if args[1] == "s4query" {

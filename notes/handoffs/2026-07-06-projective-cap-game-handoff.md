@@ -413,6 +413,15 @@ Recently reported:
   Consequence: q=17/q=19 are the empty-conic boundary cases, while q>=23 cannot empty the live
   conic at this layer and needs positive-live-conic steering.  Semi-formal proof note:
   [`../2026-07-08-s4-two-ply-conic-depletion.md`](../2026-07-08-s4-two-ply-conic-depletion.md).
+- **Live-conic steering plan for q>=23:** the next mining target is value-aware best-reply rows and
+  live-conic residual graph features, with q=23 as the exact large-prime column and q=25 as a
+  coverage-aware prime-power shape test.  Plan:
+  [`../2026-07-09-live-conic-steering-plan.md`](../2026-07-09-live-conic-steering-plan.md).
+- **First live-conic best-reply pass:** all q=19 exact buckets and two q=23 exact samples have a
+  known P reply for every first move.  q=23 witnesses leave positive conic residuals
+  `live_on = 6..12`; all known q=19/q=23/q=25 witness conic graphs are path/cycle/isolate unions
+  with `conic_other = 0`.  Mining note:
+  [`../2026-07-09-live-conic-bestreply-mining.md`](../2026-07-09-live-conic-bestreply-mining.md).
 
 Good Lean side targets:
 

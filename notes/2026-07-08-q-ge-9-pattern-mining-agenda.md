@@ -92,6 +92,10 @@ The generated check is `rust/s4-dumps/2026-07-08/ml/conic-bound-report.txt`; it 
 
 Semi-formal proof note:
 [`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md).
+Follow-up large-q steering plan:
+[`2026-07-09-live-conic-steering-plan.md`](2026-07-09-live-conic-steering-plan.md).
+First best-reply mining pass:
+[`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md).
 
 This is proof-shaped, not just statistical.  At the S4 root there are `q - 5` live affine-conic
 cells.  A first off-conic move can kill at most six of them: its row, its column, and at most one
