@@ -268,6 +268,9 @@ Current structural picture:
   that last live parameter and leaves a clean P-valued empty-conic state.  The same repair intruder
   answers both score-9 opponent moves from a state and is already legal/internal before those moves.
   Product order/line type alone does not characterize it.
+- Follow-up checks: the internal conic-emptying rule is perfect for the q=17 score-9 stratum but
+  fails as a global score<=8 repair rule; the natural polarity identities are false; the 14 score-9
+  states collapse to two `PGL(2,17)` orbits even after adding the guard and worst moves.
 
 Useful references:
 
@@ -373,6 +376,8 @@ Recently reported:
 - **Repair geometry mining:** score-9 q=17 repairs are state-level guard intruders: the same
   already-legal internal clean conic-killer answers both worst opponent moves; no single
   line-type/product-order rule explains them.
+- **Repair follow-up checks:** score-9 is a two-orbit finite-certificate target; polarity does not
+  explain the guard, and empty-conic alone does not imply zone Grundy 0.
 
 Good Lean side targets:
 

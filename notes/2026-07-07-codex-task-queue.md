@@ -845,6 +845,12 @@ intruder that kills that last live parameter and leaves a clean P-valued empty-c
 same guard intruder answers both score-9 opponent moves from a state and is already legal/internal
 before those moves.  No single line-type/product-order rule explains the repair.
 
+Follow-up checks: replacing the argmin by "legal internal conic-emptying P reply" works for all
+28 score-9 transitions but fails outside that stratum.  The polarity guesses are false
+(guard-on-live-polar, guard-as-chord-pole, and live-as-opponent-tangency are all 0/28).  The 14
+score-9 states form only two conic-preserving `PGL(2,17)` orbits, even after adding the guard and
+the two worst opponent moves, so this layer is a finite-certificate target.
+
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
 **READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**

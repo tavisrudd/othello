@@ -204,3 +204,133 @@ on-conic escape into C20 P reply-state regime
 
 This is still empirical and only covers q = 13 and q = 17 C20 states.  It should not be stated as a
 theorem yet.  But it gives a much more concrete proof object than a generic bounded-zone law.
+
+## Follow-up Rule Checks
+
+Fable suggested turning the mined repair pattern into an explicit rule and checking it in place of
+the argmin reply.  I tested the rule:
+
+```text
+reply with a legal internal intruder that empties the conic and returns to a P-state
+```
+
+Result: this rule is perfect for the q = 17 score-9 stratum, but it is not a global replacement for
+the steering argmin.
+
+q = 17 stratification by optimal score, formatted as
+
+```text
+(optimal score, any internal conic-emptying reply,
+ any such reply is P, any such P reply has Z <= 2, any such P reply is clean): count
+```
+
+High-score rows:
+
+```text
+score 7:
+  (7, True, False, False, False): 38
+  (7, True, True,  True,  False): 11
+  (7, True, True,  True,  True):  10
+
+score 8:
+  (8, False, False, False, False): 12
+  (8, True,  False, False, False): 50
+  (8, True,  True,  True,  True):   6
+
+score 9:
+  (9, True,  True,  True,  True):  28
+```
+
+So "internal conic-emptying" is exactly the wrong level of generality for the whole repair problem:
+too strong for score 7/8, exactly right for score 9.
+
+The proposed base law
+
+```text
+empty conic => zone Grundy 0
+```
+
+is false as a broad statement.  Empty-conic P reply-states with nonzero zone Grundy already occur:
+
+```text
+q = 13: zone Grundy 1,2,3 examples occur among empty-conic P states.
+q = 17: zone Grundy 1,2,3,5,6 examples occur among empty-conic P states.
+```
+
+The high-cost clean stratum is narrower and remains valid:
+
+```text
+score-9 selected empty-conic grandchildren at q = 17:
+  (score=9, zoneG=0, zone=9, Z=2): 28
+```
+
+Thus the right base statement is not "empty conic."  It is closer to:
+
+```text
+empty conic + controlled zone graph, especially zoneG=0 in the high-cost repair leaves
+```
+
+The sigma bridge is also precise.  An intruder `r` kills the last live conic parameter `u` exactly
+when
+
+```text
+u = sigma_r(s)
+```
+
+for some already played conic parameter `s`.  Internality of `r` alone does not kill `u`; it only
+says `sigma_r` has no fixed conic parameters.  The score-9 guard is special because it is internal
+and sends a played conic parameter to whichever one of the two possible last-live parameters the
+opponent leaves.
+
+## Polarity And Finite-Certificate Checks
+
+The natural polarity guesses do not explain the guard in the normalized conic model `XY = Z^2`.
+For all 28 score-9 transitions:
+
+```text
+guard lies on polar of the live point:        0/28
+opponent lies on polar of the live point:     0/28
+guard lies on polar of the opponent:          0/28
+guard is pole of live-witness chord:          0/28
+live point is a tangency of the opponent:     0/28
+```
+
+The opponent moves do have the expected type:
+
+```text
+opponent is external with one played tangency and one unplayed tangency: 28/28
+```
+
+but the unplayed tangency is not the last live parameter.  So the score-9 geometry is not the
+one-sentence polarity identity we hoped for.
+
+The finite-certificate opportunity is real.  Under the conic-preserving `PGL(2,17)` action:
+
+```text
+14 score-9 starting states collapse to 2 orbits, with sizes 12 and 2.
+Including the guard still gives 2 orbits.
+Including the guard and the two worst opponent moves still gives 2 orbits.
+```
+
+Representatives:
+
+```text
+Orbit 1, size 12:
+  canon=(0,1,2,3,6,14)
+  t4=[3,4,5,8]
+  first intruder x=(9,3), reply y=(11,4)
+  guard=(1,8)
+  worst moves=(2,5), (7,16)
+  live parameters after those moves: 16, 2
+
+Orbit 2, size 2:
+  canon=(0,1,2,3,4,inf)
+  t4=[13,14,15,16]
+  first intruder x=(3,7), reply y=(9,14)
+  guard=(6,12)
+  worst moves=(5,2), (7,0)
+  live parameters after those moves: 10, 1
+```
+
+This means the score-9 layer can plausibly be closed by a tiny finite certificate with two
+projective representatives, leaving the uniform proof effort to focus on the score <= 8 bulk.

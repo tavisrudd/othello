@@ -210,3 +210,51 @@ The computation does not yet explain how to construct `r` from field data.  The 
 mining question is whether the unique internal clean repair can be expressed by a small algebraic
 condition on the last live conic parameter, the current intruder set, and the six played conic
 parameters.
+
+## Polarity Check
+
+The obvious polarity identities do not explain the guard.  In the normalized conic model
+`XY = Z^2`, the polar of `(A,B,C)` is
+
+```text
+B X + A Y - 2 C Z = 0.
+```
+
+Across all 28 score-9 transitions:
+
+```text
+guard on polar of live point:       0/28
+guard is pole of live-witness chord: 0/28
+opponent on polar of live point:    0/28
+live point is opponent tangency:    0/28
+```
+
+The opponent is always external with exactly one played tangency and one unplayed tangency, but the
+unplayed tangency is not the last live conic parameter.
+
+## Two-Orbit Certificate
+
+The 14 score-9 starting states collapse to two orbits under the conic-preserving `PGL(2,17)` action:
+
+```text
+state orbits:                    2, sizes 12 and 2
+state + guard orbits:            2, sizes 12 and 2
+state + guard + worst moves:     2, sizes 12 and 2
+```
+
+Representatives:
+
+```text
+Orbit 1:
+  canon=(0,1,2,3,6,14), t4=[3,4,5,8]
+  x=(9,3), y=(11,4), guard=(1,8)
+  worst moves=(2,5), (7,16), leaving live parameters 16 and 2
+
+Orbit 2:
+  canon=(0,1,2,3,4,inf), t4=[13,14,15,16]
+  x=(3,7), y=(9,14), guard=(6,12)
+  worst moves=(5,2), (7,0), leaving live parameters 10 and 1
+```
+
+This makes the score-9 layer a good candidate for a tiny finite certificate rather than a uniform
+polarity lemma.
