@@ -2870,6 +2870,8 @@ fn s4_zone_graph_feature_string(
     forbidden: &Mask,
 ) -> String {
     let mut zone = Vec::new();
+    let mut row_counts = vec![0usize; b.q];
+    let mut col_counts = vec![0usize; b.q];
     for w in 0..MAXW {
         let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
         while bits != 0 {
@@ -2877,6 +2879,8 @@ fn s4_zone_graph_feature_string(
             bits &= bits - 1;
             let z = w * 64 + tz;
             if !is_on_root_conic(b, z) {
+                row_counts[z / b.q] += 1;
+                col_counts[z % b.q] += 1;
                 zone.push(z);
             }
         }
@@ -2912,6 +2916,8 @@ fn s4_zone_graph_feature_string(
     let mut odd = 0usize;
     let mut max_comp = 0usize;
     let mut degmax = 0usize;
+    let mut degmin = if n == 0 { 0usize } else { usize::MAX };
+    let mut degree_total = 0usize;
     let mut deg1 = 0usize;
     let mut nk_known = true;
     let mut nk_xor = 0u8;
@@ -2946,6 +2952,8 @@ fn s4_zone_graph_feature_string(
         for &v in &comp {
             let degree = adj[v].len();
             degmax = degmax.max(degree);
+            degmin = degmin.min(degree);
+            degree_total += degree;
             if degree == 1 {
                 deg1 += 1;
             }
@@ -3010,10 +3018,37 @@ fn s4_zone_graph_feature_string(
     let path_size_text = s4_component_size_text(&mut path_sizes);
     let cycle_size_text = s4_component_size_text(&mut cycle_sizes);
     let other_size_text = s4_component_size_text(&mut other_sizes);
+    let mut row_sizes: Vec<usize> = row_counts.iter().copied().filter(|&x| x != 0).collect();
+    let mut col_sizes: Vec<usize> = col_counts.iter().copied().filter(|&x| x != 0).collect();
+    let zone_rows = row_sizes.len();
+    let zone_cols = col_sizes.len();
+    let zone_row_min = row_sizes.iter().copied().min().unwrap_or(0);
+    let zone_row_max = row_sizes.iter().copied().max().unwrap_or(0);
+    let zone_col_min = col_sizes.iter().copied().min().unwrap_or(0);
+    let zone_col_max = col_sizes.iter().copied().max().unwrap_or(0);
+    let zone_row_odd = row_sizes.iter().filter(|&&x| x % 2 == 1).count();
+    let zone_col_odd = col_sizes.iter().filter(|&&x| x % 2 == 1).count();
+    let row_size_text = s4_component_size_text(&mut row_sizes);
+    let col_size_text = s4_component_size_text(&mut col_sizes);
+    let density_milli = if n <= 1 {
+        0usize
+    } else {
+        (2000usize * edges + n * (n - 1) / 2) / (n * (n - 1))
+    };
+    let degavg_milli = if n == 0 { 0usize } else { (1000usize * degree_total + n / 2) / n };
     format!(
-        "zone_v={} zone_e={} zone_comp={} zone_iso={} zone_path={} zone_cycle={} zone_other={} zone_odd={} zone_max={} zone_degmax={} zone_deg1={} zone_nk_known={} zone_nk_xor={} zone_nk_path_xor={} zone_nk_cycle_xor={} zone_sizes={} zone_path_sizes={} zone_cycle_sizes={} zone_other_sizes={}",
+        "zone_v={} zone_e={} zone_density_milli={} zone_rows={} zone_cols={} zone_row_min={} zone_row_max={} zone_col_min={} zone_col_max={} zone_row_odd={} zone_col_odd={} zone_comp={} zone_iso={} zone_path={} zone_cycle={} zone_other={} zone_odd={} zone_max={} zone_degmin={} zone_degmax={} zone_degavg_milli={} zone_deg1={} zone_nk_known={} zone_nk_xor={} zone_nk_path_xor={} zone_nk_cycle_xor={} zone_sizes={} zone_row_sizes={} zone_col_sizes={} zone_path_sizes={} zone_cycle_sizes={} zone_other_sizes={}",
         n,
         edges,
+        density_milli,
+        zone_rows,
+        zone_cols,
+        zone_row_min,
+        zone_row_max,
+        zone_col_min,
+        zone_col_max,
+        zone_row_odd,
+        zone_col_odd,
         comp_sizes.len(),
         iso,
         paths,
@@ -3021,13 +3056,17 @@ fn s4_zone_graph_feature_string(
         other,
         odd,
         max_comp,
+        degmin,
         degmax,
+        degavg_milli,
         deg1,
         if nk_known { 1 } else { 0 },
         nk_xor,
         nk_path_xor,
         nk_cycle_xor,
         size_text,
+        row_size_text,
+        col_size_text,
         path_size_text,
         cycle_size_text,
         other_size_text

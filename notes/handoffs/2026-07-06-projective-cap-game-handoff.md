@@ -430,7 +430,10 @@ Recently reported:
   off-conic zone coupled to a conic-zero residual.  First zone probe on the q=23 root shows that
   this off-conic legal-zone conflict graph is already one dense component (`zone_v = 100..117`,
   `zone_nk_known = 0`), so the next attack should look for geometric compression or pairing
-  certificates rather than direct full-zone Grundy computation.
+  certificates rather than direct full-zone Grundy computation.  The expanded probe shows
+  `zone_rows = zone_cols = 17` throughout the q=23 root sample, i.e. the off-conic zone still hits
+  every unused row and column after the six selected cells; this makes a reservoir/Hall-style lemma
+  a plausible next target.
 
 Good Lean side targets:
 

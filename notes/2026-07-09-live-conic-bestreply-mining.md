@@ -314,6 +314,29 @@ This is signal, but not a theorem candidate by itself.  It suggests a parity/den
 the dense off-conic zone, while confirming that coarse zone statistics do not explain the P-valued
 zero-xor witness selection cleanly.
 
+I then added row/column support and degree-density fields (`zone_rows`, `zone_cols`,
+`zone_density_milli`, row/column min/max/odd counts, `zone_degmin`, `zone_degavg_milli`) and reran
+the same q=23 root sample.  The main structural fact:
+
+```text
+zone_rows = zone_cols = 17 for all 260 candidates
+```
+
+This is exactly the number of unused rows/columns after the six selected grid cells.  So in this
+sample, the line constraints carve a dense conflict graph but do not remove any entire unused row or
+column from the off-conic zone.  That points to a reservoir/Hall-style direction: after zero-xor
+steering, prove that the off-conic legal zone still projects onto all unused rows and columns, then
+look for a robust pairing or matching certificate inside that reservoir.
+
+The q=23 first-candidate value signal remains shallow:
+
+```text
+zone_density_milli range: 412..426
+N average density: 423.3
+P average density: 421.0
+zone_density_milli >= 424 is N-heavy in this sample, but not decisive
+```
+
 ## Next Checks
 
 1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,
