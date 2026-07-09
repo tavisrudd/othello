@@ -1,0 +1,3 @@
+X q=5 cls=0 x=3,4 val=P pos=on
+CLS q=5 cls=0 S3=[(0, 0), (1, 1), (2, 3)] escape=1 bad=0 onP=1 onN=0 extP=0 extN=0 intP=0 intN=0
+FEAT-SUMMARY q=5 root=P size3-classes=1 sanity=OK

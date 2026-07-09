@@ -15,16 +15,21 @@ Program map: [`handoffs/2026-07-06-projective-cap-game-handoff.md`](handoffs/202
 
 **Conjecture.** For every odd prime power `q`, `PG(2,q)` is P.
 
-By the proven reduction (frame reduction `initialPStatement_iff_isP_frame_of_finrank` + escape crux
-`SizeThreeExtensionCountStatement` / `OddEscapeGameStatement`):
+The **elimination direction is Lean-proven**: escape everywhere ⇒ `PG(2,q)` is P
+(`OddEscapeGameStatement` → `initialPStatement_of_oddEscapeStatement_finrank`, via the frame
+reduction `initialPStatement_iff_isP_frame_of_finrank` and the extension count
+`SizeThreeExtensionCountStatement`). Its contrapositive is what a falsification lives in:
 
 ```text
-PG(2,q) is P  ⟺  every legal size-3 residual grid position "escapes"
-                 (has at least one P-valued size-4 child).
+every legal size-3 residual "escapes" (has a P-valued size-4 child)   ⇒   PG(2,q) is P   [Lean-proven]
+PG(2,q) is N   ⇒   a trapped size-3 exists (all q²−9q+21 size-4 children N)              [contrapositive]
 ```
 
-Equivalently, the conjecture is **false at `q`** iff there is a **trapped size-3 position**: a legal
-3-cell residual cap all of whose size-4 children are N.
+The **converse — a found trap ⇒ `PG(2,q)` is N — is *not* currently in Lean** (it needs a
+frame-transitivity transport of the trap onto a seed-containing size-3). Consequence for the
+program: eliminating every trap **proves** the conjecture (the direction the scaffold below stands
+on), but a computationally-found trap is not yet a *certified* counterexample until that transport is
+discharged.
 
 Two facts fix the shape of any counterexample:
 
@@ -60,17 +65,21 @@ child (depletion bounds:
 |---------------|------------------------------------------------------------|-------------------------------------------|
 | `q ≤ 7`       | no legal intruder ⇒ pure conic endgame                     | yes — Lean (IntrusionCalculus, `q=5,7`)   |
 | `q = 9`       | intruders confined, each kills the whole conic             | yes — computed (C13); Lean kernel open    |
-| `11 ≤ q ≤ 19` | unconfined; conic **can** be emptied (`live_on` reaches 0) | computed P; not uniform                   |
-| `q ≥ 23`      | unconfined; conic **cannot** be emptied at the S4-layer    | open — needs positive-live-conic steering |
+| `11 ≤ q ≤ 19` | unconfined; `live_on` can reach 0 (witnessed at `q=17`)   | computed P; not uniform                   |
+| `q ≥ 23`      | unconfined; conic cannot be emptied at the S4-reply layer  | open — needs positive-live-conic steering |
 
-The `q ≥ 23` row is forced by `live_on ≥ q − 19 > 0`: empty-conic base laws that closed `q ≤ 19`
-**provably cannot exist** for `q ≥ 23`. That is why the frontier proof must be a *maintenance*
-argument on a positive live conic, with two obligations (review
+The `q ≥ 23` row reflects the two-ply bound `live_on ≥ q − 19 > 0`: at the S4-reply layer the conic
+cannot be emptied for `q ≥ 23`, so a *two-ply* empty-conic argument does not extend past `q = 19`
+(deeper emptying is not excluded, and `q ≤ 19` was not itself *closed* by an empty-conic law —
+q=11/13 are certificates, q=17/19 computed; the empty-conic law is the proposed q=17-mined target).
+That is why the frontier proof must be a *maintenance* argument on a positive live conic, with two
+obligations (review
 [`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md) §2):
 
-1. **Preservability** — a re-zeroing off-conic intruder always exists. Underwritten as a base-layer
-   fact by the reservoir bound `q − k − C(k,2) − 1` (vacuous by `k = 7` at `q = 23`, so a base fact,
-   not a recursion).
+1. **Preservability** — a re-zeroing off-conic intruder always exists. The reservoir bound
+   `q − k − C(k,2) − 1` (vacuous by `k = 7` at `q = 23`) underwrites only the *availability* of a
+   legal off-conic cell, and only at `k ≤ 6`; that the available cell actually *re-zeroes* the parity
+   is mining-supported, not yet underwritten. A base fact, not a recursion.
 2. **Termination in P2's favour** — a Nim-value invariant, not an SDR and not a zone matching (the
    matching route is dead below `q ≥ 38`; the static pairing route is the object C28 refuted).
 
@@ -80,28 +89,31 @@ argument on a positive live conic, with two obligations (review
 
 | #  | Mode                                                        | Eliminable?                                                                 |
 |----|------------------------------------------------------------|----------------------------------------------------------------------------|
-| A1 | sporadic trap at a small computed `q`                      | yes — `q=5,7,11,13` Lean-unconditional; `q=3,9,17,19` computed (mod solver) |
+| A1 | sporadic trap at a small computed `q`                      | yes — `q=5,7,11,13` Lean-unconditional; `q=9,17,19` computed (mod solver); `q=3` trivial (no legal size-3 in AG(2,3)) |
 | A2 | trap at a specific uncomputed `q` (25, 29, 31, …)          | per-`q` only, by computing it — never class-closing                         |
-| A3 | **eventual failure** (holds small `q`, fails large `q`)    | **no — the central risk; uniform argument only.** Signal: `Z = 2,9,16`     |
-| A4 | arithmetic sub-family, esp. **prime-power `q` (Baer)**     | partly — mod-3 refuted as predictor (C29); `q=25,27,49` under-tested        |
+| A3 | **eventual failure** (holds small `q`, fails large `q`)    | **no — the central risk; uniform argument only.** Signals: `Z = 2,9,16`; §6 heuristic — no main-layer counterexample signal, but erratic (no monotone bound) |
+| A4 | arithmetic sub-family, esp. **square `q` (Baer subplanes)** | partly — mod-3 refuted as predictor (C29); `q=25,49` under-tested (`q=27` is char-3, separate) |
 | A5 | complete-arc-size spectrum forces odd terminals            | not by arc-counting (area/parity refuted); needs the game-value argument    |
 
 A3 is the mode that most deserves a uniform bound: the recursive steering ceiling `Z` grows
 (`2 → 9 → 16` at `q = 13,17,19`) even as the raw zone collapses hugely into it. Bounded `Z` keeps the
 "steering + bounded-zone terminal law" shape alive; unbounded `Z` kills that route (not necessarily
-the conjecture). A4-prime-powers is the highest-value **falsification watch**: `q = p^{2k}` carries
-Baer subplanes (extra dense collinearity), it is the least-computed lane, and it is where the GF
-field-arithmetic bugs have lived.
+the conjecture). A4-squares is the highest-value **falsification watch**: a square order `q = p^{2k}`
+carries a Baer subplane (extra dense collinearity) — `q = 9` is the smallest and is already
+computed-P (reassuring), leaving `q = 25, 49` as the untested squares, the least-computed lane and
+where the GF field-arithmetic bugs have lived. `q = 27 = 3³` is not square (no Baer) and belongs to
+the char-3 regime, not here.
 
 ### B. The math is true but our belief/route is invalid ("invalidated")
 
 | #  | Mode                                                        | Status                                                                       |
 |----|------------------------------------------------------------|------------------------------------------------------------------------------|
 | B1 | solver bug → wrong P/N on COMPUTED rows (`canon()` collide) | eliminable — C8 at `q=11/13`, C37 scaled shared-key check, certcheck; Lean rows immune |
-| B2 | a false link in the reduction chain                        | mostly Lean-proven; watch the escape ⇒ root-P direction + 5-arc non-degeneracy |
+| B2 | a false link in the reduction chain                        | escape ⇒ root-P is *proven* and 5-arc non-degeneracy is a Lean theorem (`uniqueConicThroughFiveArc…`); the real watch is the §1 converse (trapped ⇒ N) transport, still unproven |
 | B3 | `q=23` **orbit-invariance bridge** unsound                 | not eliminated — residual symmetry ⊊ full `PGL(2,q)`; C36 self-consistency gate tests it |
 | B4 | the intended route can't close it even if true             | on-conic route (B4a), termination (B4b), coupling non-decomposition (B4c, C35 measures it), static-pairing dead (B4d) |
 | B5 | normal-play vs misère inversion / ruleset conflation       | eliminated in practice (cross-engine tests + Lean pin the ruleset)           |
+| B6 | **spec mismatch** — Lean's endpoint definitions formalize a subtly different game than intended | Lean cannot self-certify this; B5 and A1's "Lean rows immune" use Lean as the oracle, so it is circular if the spec is off. Mitigated by `q=5,7` Lean-vs-computed agreement + a raw-bitmask legality spotcheck, not eliminated |
 
 B3 is the one to discharge before `q=23` is cited as anything but conditional evidence: solving one
 bucket representative certifies the whole bucket **only if** value is constant on the conic's
@@ -112,14 +124,47 @@ the warning that snapshot invariants over-promise here.
 ## 5. Verdict
 
 - **Eliminated unconditionally:** `q=5,7,11,13` (Lean); the `q ≤ 7` and `q = 9` regime shapes.
-- **Eliminated modulo solver:** `q=3,9,17,19` — B1 is the residual risk, hardened by C37.
-- **Finite-checkable, not class-closing:** A2 per-`q`; A4 prime-powers (`q=25,27,49`) — the top
-  falsification watch.
+- **Eliminated modulo solver:** `q=9,17,19` (`q=3` trivial) — B1/B6 are the residual risks, hardened by C37.
+- **Finite-checkable, not class-closing:** A2 per-`q`; A4 squares (`q=25,49`) — the top falsification watch.
 - **Conditional, discharge before citing:** B3 (`q=23` orbit bridge) — C36 is the test.
-- **Irreducible open core, no computation touches it:** A3 (eventual failure) ≡ B4b/B4c (termination
-  + coupling of the maintenance strategy). The growing `Z` is the single empirical signal pointing at
-  it, and a uniform `Z`-bound (or a coupling-residual law from C35) is what would close it.
+- **Irreducible open core:** A3 (eventual failure). It is a *truth*-mode, distinct from — not equal
+  to — the *route*-modes B4b/B4c (termination + coupling); they share instruments, not a definition.
+  No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
+  *predicts* on it — currently no main-layer counterexample signal, but erratic, so A3 stays open. A
+  uniform `Z`-bound (or a coupling-residual law from C35), plus the class-stability lower-bound §6
+  points to, is what would close it.
 
 Net: falsity has exactly one shape (trapped size-3), the easy proof routes are provably dead, and the
 only closure is a `q`-uniform shape-elimination — concretely the preservability/termination pair plus
 C36's finite-type collapse.
+
+## 6. The A3 test: witness-count heuristic
+
+First-moment (Tao-style) test of A3. Model each size-3 class's P-child count as `Poisson(mu(q))`;
+with `N_canon(q)` classes the expected trapped count is `N_canon·exp(−mu)`, so escape survives as
+long as `mu(q) > ln N_canon(q)`. Measured over `q = 5,7,9,11,13,17,19` (feat-mode full census,
+[`2026-07-09-witness-count-heuristic.md`](2026-07-09-witness-count-heuristic.md)), on two layers —
+TOTAL P-children (main conjecture) and ON-conic P-children (the (ON)/D3 route):
+
+- **TOTAL** clears the line at every `q` (margin `+1.0` at the degenerate single-class `q=5`, `+5.9`
+  at `q=7`, then `≥ +6.5` for `q ≥ 9`, tightest interior at `q=17`; Poisson-null
+  `E0_total ≤ 2.7e-3` for `q ≥ 7`). No trend toward a trap — not a counterexample signal.
+- **ON** dips *below* the line at `q=17` (`mu_on = 2.71 < ln N_canon = 3.05`, margin `−0.33`,
+  `E0_on = 1.39`): the first moment predicts ≈1.4 trapped on-conic classes, yet the observed
+  minimum is `m_on = 1` (the "one on-conic witness" knife edge). It survives only because the
+  on-conic count is a near-point-mass (dispersion `≤ 0.4 ≪ 1`), i.e. protected by **concentration,
+  not by a growing mean**.
+
+Both `mu` are erratic (`R² ≈ 0.48` for any linear/log fit; the dips are **value-depletion** — fewer
+P-valued among the `q−4` legal on-conic cells at `q = 11, 17` — not loss of legal cells, so this is
+distinct from the `live_on` legal-cell bound), so the heuristic yields **no monotone margin** and
+does not by itself discharge A3. Reading: the main conjecture is safe over the computed range but not
+"safe for a reason"; the (ON) route is safe-but-tight with a genuine **B4a** warning at `q=17`.
+
+The counts are deterministic — there is no randomness, so neither *moment* is the proof target. The
+on-conic P-count is nearly a **function of `q`** (point masses, dispersion `≤ 0.4`). The uniform (ON)
+target is therefore a **class-stability lemma** (the P-count varies by `≤` a small constant `C`
+across classes at fixed `q`) plus an **anchor lower-bound** (some class `≥ C+1`), giving min `≥ 1`;
+`q=17` sits exactly at that edge (on-conic max `= 3 = C+1`, `C ≈ 2`). Bounding a *mean* (a
+character-sum / Weil estimate) attacks the right quantity with an empirically false main term — the
+depletion is macroscopic (`≈ 0.21·(q−4)` at `q=17`), not an `O(√q)` defect.
