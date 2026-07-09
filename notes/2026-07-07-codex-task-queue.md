@@ -833,6 +833,11 @@ lands in a grandchild with `Z <= 2`.  At q=17 the `max Z = 9` ceiling is an imme
 persistent recursion.  The proof target should be a one-pair descent/repair lemma plus a small-zone
 `Z <= 2` base law.
 
+Repair-mining follow-up 2026-07-09: `notes/2026-07-09-codex-zone-descent-repair-mining.md` and
+`notes/2026-07-09-zone-descent-miner.py` show that q=17's score-9 repairs are all intruder ->
+intruder replies that empty the conic residual and leave `defxor = 0`, zone Grundy 0.  The next
+math target should be a repair-intruder existence lemma plus the empty-conic/small-Z base law.
+
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
 **READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**

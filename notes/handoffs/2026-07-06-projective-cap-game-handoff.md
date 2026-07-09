@@ -259,6 +259,10 @@ Current structural picture:
 - The C31 follow-up sharpens this further.  For every tested C20 P reply-state and every legal
   opponent move, a score-optimal winning reply lands in a grandchild with `Z <= 2`.  At q=17 the
   remaining cost is immediate zone, at most 9, rather than persistent recursive complexity.
+- Repair-move mining of the same data shows the expensive q=17 descents are mostly
+  intruder-for-intruder repairs.  All score-9 repairs empty the conic residual and leave
+  `defxor = 0` with zone Grundy 0, so the proof target should be a repair-intruder existence
+  lemma plus a small-Z / empty-conic base law.
 
 Useful references:
 
@@ -349,8 +353,8 @@ task list.  Current high-value items:
 
 - **C30:** route-C certificate books for q=17 and q=19.
 - **C32:** even-dimensional composite mirror / PG(4,3) and plane variant probe.
-- **Steering follow-up:** mine the one-pair descent replies from the C31 follow-up into a geometric
-  repair lemma and a small-zone `Z <= 2` base-law/certificate schema.
+- **Steering follow-up:** turn the repair-mining data into a geometric repair-intruder lemma and
+  a small-zone `Z <= 2` / empty-conic base-law certificate schema.
 
 Recently reported:
 
@@ -359,6 +363,8 @@ Recently reported:
   and 9 at q=17.
 - **C31 follow-up:** every tested q=13/q=17 C20 P reply-state can answer each opponent move with a
   winning reply whose grandchild has `Z <= 2`; q=17 high ceilings are immediate-zone costs.
+- **C31 repair mining:** score-9 q=17 repairs are all intruder -> intruder, conic-emptying,
+  `defxor = 0`, zone-Grundy-0 moves.
 
 Good Lean side targets:
 
