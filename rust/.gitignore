@@ -10,3 +10,6 @@
 
 # perf analysis scratch output (generated)
 /.perf-analysis/
+
+# Projective cap S4 memo dumps / BuRR archives (large, generated; rebuildable).
+/s4-dumps/

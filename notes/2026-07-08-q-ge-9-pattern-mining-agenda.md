@@ -226,6 +226,8 @@ Implemented 2026-07-08:
   normalized conic `r*c = 1`;
 - `PLY` rows aggregate those conic fields as min/max/average;
 - `REPLYSUM` includes `live_on_zero`, which directly flags root replies that empty the live conic.
+- large query cache documented in `2026-07-08-s4-large-dump-cache.md`: all q=19 exact bucket
+  dumps, two exact q=23 roots, and two larger q=25 partial dumps.
 
 First live-conic observation, q=17 root `[1,2,3,4]`:
 
