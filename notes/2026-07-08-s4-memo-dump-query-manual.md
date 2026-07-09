@@ -1,9 +1,9 @@
 # S4 Memo Dump / Query Manual
 
-This manual covers the Rust `s4dump`, `s4freeze`, `s4query`, `s4mine`, `s4xormine`, and
-`s4bucketlist` modes in [`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These
-modes are for targeted pattern mining around normalized on-conic S4 roots in the residual
-`PG(2,q)` grid game.
+This manual covers the Rust `s4dump`, `s4gdump`, `s4gcheck`, `s4gmeasure`, `s4freeze`, `s4query`,
+`s4mine`, `s4xormine`, and `s4bucketlist` modes in
+[`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These modes are for targeted
+pattern mining around normalized on-conic S4 roots in the residual `PG(2,q)` grid game.
 
 ## Build
 
@@ -35,10 +35,11 @@ and represents the affine grid cells:
 {(t, 1/t) : t in {t1,t2,t3,t4}}
 ```
 
-`s4dump` runs the existing recursive solver from that root and dumps the canonical memo entries it
-has solved before completion or cap abort.  A dump is therefore a partial or complete value oracle
-for states reachable and solved during that search, not a complete database for every state at that
-ply.
+`s4dump` runs the existing early-break recursive solver from that root and dumps the canonical memo
+entries it has solved before completion or cap abort.  A dump is therefore a partial or complete
+P/N value oracle for states reachable and solved during that search, not a complete database for
+every state at that ply.  `s4gdump` runs the all-children Grundy solver from the same root and
+dumps exact `u8` nimbers for the states it solves; P/N is derivable as `grundy == 0`.
 
 The parser sorts the four `t` values, so `1,2,3,4` and `4,3,2,1` denote the same root.
 
@@ -46,7 +47,7 @@ The parser sorts the four `t` values, so `1,2,3,4` and `4,3,2,1` denote the same
 
 There are two restore formats.
 
-Raw dump:
+Raw P/N dump:
 
 ```text
 exact sorted mmap table
@@ -54,8 +55,16 @@ key = u128 Board::canon key
 value = bool, false=P and true=N
 ```
 
+Raw Grundy dump:
+
+```text
+exact sorted mmap table
+key = u128 Board::canon key
+value = u8 Grundy value, with values asserted < 64
+```
+
 Use raw dumps for validation and anything certificate-adjacent.  Raw lookup is exact relative to
-the solver's canonical key.
+the solver's canonical key.  The compact archive path is currently P/N-only.
 
 Compact archive:
 
@@ -135,6 +144,29 @@ Important fields:
   a run can write slightly more records than `--cap` because the recursive solver checks the cap
   before expansion and inserts solved parents afterward.
 - `value`: root value if solved, otherwise `-`.
+
+### `s4gdump`, `s4gcheck`, `s4gmeasure`
+
+```bash
+/tmp/gridcap-s4 s4gdump <q> <t1,t2,t3,t4> --out <grundy-raw-file> [--cap <slots>]
+/tmp/gridcap-s4 s4gcheck <q> <t1,t2,t3,t4> --grundy <grundy-raw-file> --raw <pn-raw-file>
+/tmp/gridcap-s4 s4gmeasure <q> <t1,t2,t3,t4> --grundy <grundy-raw-file> \
+  [--depth <plies>] [--state-rows] [--max-states <n>]
+```
+
+`s4gdump` computes exact normal-play Grundy values by mex over every legal child, so it is slower
+and usually larger than `s4dump`, which short-circuits once it finds a P child.  The raw Grundy
+format has its own magic/version and stores the root Grundy byte plus max observed Grundy in the
+header; every record is still an exact sorted canonical key.
+
+`s4gcheck` is the validation gate: on shared canonical keys with an existing P/N dump, it checks
+`grundy == 0` iff the old dump says P.
+
+`s4gmeasure` traverses deduplicated states from the S4 root through the requested depth and emits
+`GPLY` rows for S5/S6 states.  `residual_hist` is the distribution of
+`true_grundy XOR conic_nk_xor`.  `zone_residual_hist` is the distribution of
+`true_grundy XOR conic_nk_xor XOR zone_nk_xor` on rows where the off-conic zone graph's exact
+Node-Kayles Grundy value is small enough to compute.
 
 ### `s4freeze`
 

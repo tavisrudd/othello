@@ -21,3 +21,4 @@ import ProjectiveCap.Almost.OddEscape
 import ProjectiveCap.Certificate
 import ProjectiveCap.CertCheck
 import ProjectiveCap.PlaneOutcome
+import ProjectiveCap.TrapConverse

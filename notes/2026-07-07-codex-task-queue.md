@@ -44,18 +44,46 @@ re-review found the plans pressure the conjecture-true direction hard (steering,
 certificates) but are thin on being *ready for a counterexample* — certifying one, and probing where
 the most plausible one lives. Four additions:
 
-- **C41** — trap ⇒ N converse in Lean. Joins **Tier B, before C34**: it gates D1's central
-  "conjecture false ⟺ trapped size-3" phrasing, and the expected proof route is within existing
-  machinery (cheap).
+- **C41** — trap ⇒ N converse in Lean. Joined **Tier B, before C34** and is now **REPORTED
+  2026-07-09**: D1 may use the certified "conjecture false ⟺ trapped size-3" framing modulo the
+  usual Lean/spec-match caveat.
 - **C42** — fixed-q census propagation. Joins **Tier B, immediately after C36**. Rescoped
   2026-07-09 after the on-conic child type-alignment report: within-q type-determinism CONFIRMED,
   q-independent type→value dictionary REFUTED (flips exactly at the arc-depleted q ∈ {11,17}) —
   the surviving task is the fixed-q census/class-stability measurement; the anchor half merges
-  into arc-depletion arithmetic (A5).
+  into arc-depletion arithmetic (A5). **Reported NEGATIVE same day:** the census is non-uniform
+  even at the all-P orders (12/12 and 27/27 distinct vectors at q=13/q=19); no propagation
+  mechanism exists, and the (ON) uniform route rests entirely on A5.
 - **C43** — PG(4,3) exact-solve sizing. Joins **Tier C**: independent compute lane; either verdict
   fills D1's even-dimensional section, which currently has zero direct outcome evidence.
 - **C44** — GF(25) prime-power path + q=25 Baer bucket census. Joins **Tier C after C43**: the
   falsification map's top A4 watch, previously orphaned with no task ID.
+
+**Amendment (Fable, 2026-07-09 third pass — publishable-constraint additions):**
+
+- **C45** — defect-skeleton realizability theorem and **C46** — t-ply depletion inequality
+  ladder: both join **Tier C** (proof/writing track, independent of the compute lanes, provable
+  with in-hand machinery; they strengthen D3 and publish constraints on the conjecture
+  independent of its resolution).
+- **C47** — minimal-counterexample constraint package: **Tier D**, gated on C42's report (its
+  dichotomy row consumes the census lemma).
+
+**Amendment (Fable, 2026-07-09 fourth pass — adjacent-publishable additions + C35 consequences):**
+C35 has REPORTED: the conic⊕zone disjunctive-sum hypothesis is empirically false at S5/S6 (even
+where the zone Grundy is fully computable at q=13, `g = g_conic XOR g_zone` fails on most rows;
+q=17's computable subset agrees). Consequences: the zone lane is definitively the maintenance
+argument; any termination invariant must be a *coupled* quantity, never a naive component xor;
+and **C38 is now unblocked** with true-nimber data (its "richer once C35 lands" condition is
+met) — C38/C39 are the instruments most likely to surface the coupled invariant. New tasks, in
+priority order:
+
+- **C48** — mirror-theorem harvest on classical varieties: **Tier C, top** — the cheapest
+  theorem-per-effort in the program right now (the generic fpf-involution lemma is already
+  Lean-proven; the work is classical-groups bookkeeping plus small-board machine gates).
+- **C50** — kernel-checked Grundy certificate format (machine-verified game-value sequences):
+  **Tier D** — newly enabled by C35's oracle; pairs with the C30 engineering lane.
+- **C49** — Node-Kayles nimber tables for other chess pieces: **Tier E** — opportunistic, queens
+  box idle time only.
 
 ## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
@@ -1086,10 +1114,10 @@ Guardrails: assembly + quotation only — write no new proofs and prove nothing;
 [COMPUTED]/[CONDITIONAL] result to [PROVEN]; no fabricated citations; keep the umbrella/novelty
 wording conservative per C26 (structured finite-incidence subfamily, not a new game class).
 
-**Amendment (Fable, 2026-07-09 second pass):** (i) state the falsification equivalence
-ONE-directionally — "escape everywhere ⇒ P" is Lean-proven; the converse "trapped size-3 ⇒ N" is
-C41 and unproven — do not write "conjecture false ⟺ trapped size-3 exists" as a certified
-equivalence until C41 lands (cite it as expected/queued). (ii) The open set is larger than the
+**Amendment (Fable, 2026-07-09 second pass; updated after C41):** (i) C41 has now landed, so state
+the falsification equivalence bidirectionally using
+`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`; keep the usual
+Lean/spec-match caveat. (ii) The open set is larger than the
 odd-plane row: `PG(2m,q)`, `m ≥ 2`, odd `q` is open with **no direct outcome evidence at all**
 (C32 was a policy probe, not a solve; C43 sizes PG(4,3)) — the status/evidence table and the
 section skeleton must state that hole plainly, not silently scope to planes.
@@ -1098,7 +1126,7 @@ Deliverable: the skeleton draft at `notes/2026-07-09-d1-outcome-classes-manuscri
 Report file: `notes/2026-07-09-codex-d1-manuscript-skeleton.md` (the readiness audit + gaps list +
 what was quoted vs stubbed vs flagged `[VERIFY]`).
 
-## C35. Nimber (Grundy) oracle — make the S4 dump measure the conic⊕zone coupling
+## C35. Nimber (Grundy) oracle — make the S4 dump measure the conic⊕zone coupling [REPORTED 2026-07-09]
 
 **READ FIRST:** the S4 manual [`2026-07-08-s4-memo-dump-query-manual.md`](2026-07-08-s4-memo-dump-query-manual.md)
 and Fable's review §2 [`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md).
@@ -1261,17 +1289,13 @@ and whole-board capacity-1 collapse is scoped out by the AG(2,q) blocking-set ob
 q=23 all-bucket `s4xormine` logs were re-parsed only as a cheap first-ply preservability check
 (5734/5734 hits, selected `zone_rows = zone_cols = 17`, no new solves).
 
-## C41. Lean-certify the trapped ⇒ N converse (close the falsification equivalence)
+## C41. Lean-certify the trapped ⇒ N converse (close the falsification equivalence) [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md)
-§1 — it names this gap precisely. Only the elimination direction is Lean-proven (escape everywhere
-⇒ root P: `OddEscapeGameStatement` → `initialPStatement_of_oddEscapeStatement_finrank`). The
-converse — a trapped size-3 residual position (all `q²−9q+21` size-4 children N) implies `PG(2,q)`
-is N — is stated informally in the handoff ("root P is equivalent to the escape condition") but is
-**not in Lean**. It gates two things: (i) D1/C34's central framing "conjecture false ⟺ a trapped
-size-3 exists" cannot be published as an equivalence without it; (ii) if the falsification watch
-(C44, A4 squares) ever finds a computational trap, it is not a *certified* counterexample until
-this transport exists.
+§1 — it names this gap precisely. Only the elimination direction was Lean-proven before C41
+(`OddEscapeGameStatement` → `initialPStatement_of_oddEscapeStatement_finrank`). C41 now supplies
+the converse: a trapped size-3 residual position (all `q²−9q+21` size-4 children N) implies
+`PG(2,q)` is N. The task record below is kept as the original proof request plus the result status.
 
 Expected proof route (verify, don't trust — this is a sketch, not a checked argument):
 
@@ -1304,7 +1328,12 @@ Task:
 
 Budget: proof task; machine work is nil. Report file: `notes/2026-07-09-codex-trap-converse.md`.
 
-## C42. Fixed-q census propagation — the rescoped surviving half of the concentration factorization
+Status: **PROVED in Lean** (2026-07-09). Added `ProjectiveCap.TrapConverse` and proved
+`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`, closing the missing
+converse. Axiom gate is exactly `[propext, Classical.choice, Quot.sound]`. D1/falsification
+phrasing may now use the bidirectional equivalence, modulo the existing Lean spec-match caveat.
+
+## C42. Fixed-q census propagation — the rescoped surviving half of the concentration factorization [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)
 — it adjudicated this task's original premise, half each way, before the task ran — then
@@ -1355,6 +1384,16 @@ the second.
 
 Budget: 4h wall, single-core, ≤ 8 GB (no new solves).
 Report file: `notes/2026-07-09-codex-type-census-uniformity.md`.
+
+Status: **NEGATIVE** (2026-07-09). The value-blind stabilizer census is non-uniform even at the
+all-P orders: every size-3 class has a distinct full census vector (12/12 at q=13, 27/27 at
+q=19), so the uniform onP counts there come from every observed orbit being P-valued, not from
+uniform geometry. At the depleted orders the onP variation (q=11: 2..5, q=17: 1..3) is scattered
+across all P-valued stabilizer orbits (10/10 at q=11, 21/21 at q=17) with no clean sub-census
+characterization. Per verdict logic (ii): the propagation half of the factorization is dead, and
+the uniform (ON) route now rests entirely on A5 depletion arithmetic. The class-stability
+constant remains an empirical fact with no census mechanism behind it. C47's dichotomy row takes
+its negative branch.
 
 ## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum
 
@@ -1433,3 +1472,217 @@ informative new number for the (ON) route, independent of the Baer watch.
    report verbatim and stop.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
+
+## C45. Defect-skeleton realizability theorem — classify the conic endgame spectra
+
+**READ FIRST:** [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
+(the Lemma-VI spectrum machinery, NK1–NK3), the C29 order dichotomy
+([`2026-07-08-codex-mod3-column-law.md`](2026-07-08-codex-mod3-column-law.md) §mechanism), and the
+E1 preamble [`2026-07-09-E1-capacity-degradation-preamble.md`](2026-07-09-E1-capacity-degradation-preamble.md).
+
+Context: D3 states the *reduction* — conic-restricted play after intrusions is Node-Kayles on a
+union of Möbius involution matchings — but nothing in the plan proves **which matching-unions are
+geometrically realizable**. That classification is pure group theory: for two involutions
+`σ, σ' ∈ PGL(2,q)`, the product is a rotation whose order divides `q−1` (split) or `q+1`
+(elliptic), the pair generates a dihedral subgroup, and the union graph's components are forced —
+cycles of length `2·ord(σσ')` on regular orbits, defect paths ending at fixed points (tangency
+data). Several mined facts (even cycles Grundy-0 and the bulk cancellation; the `3 | q±1`
+split-vs-elliptic law; tangency-ended path defects) become *corollaries* of one clean theorem.
+This is a standalone publishable unit — "the endgame spectrum of the odd-plane cap game" — and
+strengthens D3 rather than competing with it.
+
+1. **The k=2 theorem, prose + proof:** exact classification of realizable component spectra
+   (path/cycle/isolate multisets) for unions of two intruder-induced involution matchings on
+   `P¹(F_q)`, via the dihedral analysis. State the realizability *constraints* explicitly (cycle
+   lengths, path-end tangency conditions, count bounds vs `q±1` divisor classes). Include the
+   geometric side condition: which involutions actually arise from legal off-conic intruders
+   (tangent/secant structure), not just abstract PGL involutions — if the geometric family is a
+   proper subset, characterize it or report the gap.
+2. **k ≥ 3 partial:** counting inequalities on the joint spectrum (no full classification
+   expected — say what is open).
+3. **Machine gate:** every defect spectrum observed in the C20/C31 data
+   (`notes/data/c20-*-states.jsonl.gz`) must satisfy the k=2 constraints where applicable; any
+   violation means an error in the theorem or the miner — report verbatim and stop.
+4. **Corollary section:** even-cycle Grundy-0 cancellation as theorem; the split/elliptic order
+   dichotomy; the Dawson-path defect vocabulary formally grounded.
+5. Optional: Lean statement scaffold for the k=2 classification (statement-level; the dihedral
+   machinery may exist in Mathlib).
+
+Budget: proof/writing task; machine part is validation against existing data only, 2h.
+Report file: `notes/2026-07-09-codex-defect-spectrum-theorem.md`.
+
+## C46. t-ply conic-depletion inequality ladder — where a trap can live
+
+**READ FIRST:** [`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md)
+(the two-ply bounds `off/off ≥ max(0,q−19)`, `off/on ≥ max(0,q−13)`, `on/on = q−7` and their
+incidence-counting proofs) and the falsification map §3 (the `q ≥ 23` regime row is the two-ply
+instance of this ladder).
+
+Context: the alignment verdict made arc depletion THE load-bearing quantity for the (ON) route,
+and the two-ply bound is currently the only proven depletion constraint. Generalize the same
+row/column + secant incidence counting to depth `t`: an explicit `c(t)` with
+`live_on ≥ q − c(t)` after any `t` further plies. Each `t` is an inequality delimiting where a
+counterexample can live; the inverse function `T(q)` — the minimum number of plies any trap needs
+to empty the conic — is a publishable constraint on the conjecture independent of its resolution.
+
+1. **The ladder, with proof:** define the play window precisely (root layer, whose moves count as
+   plies, on- vs off-conic move effects on live cells), derive the recurrence for `c(t)` (each new
+   cell kills at most a bounded number of live conic cells via its secants/tangents through played
+   structure — count it exactly), and give the closed form or sharp recurrence. Semi-formal proof
+   note at Lean-statement granularity; flag any step that is play-order-dependent.
+2. **Sharpness:** mine the exact q=17/19/23 dumps for positions at or near the bound per `t`
+   (existing data; no new campaigns). Report the gap between the bound and the observed worst
+   case — a large gap means the counting is loose and says where.
+3. **The corollary table:** per q ∈ {11..31}, the minimal `t` at which conic-emptying is not
+   excluded (`T(q)`), presented as the constraint "a counterexample at q must sustain a live conic
+   for ≥ T(q) plies." Feed the falsification map §3 regime table (two-ply row becomes the `t=2`
+   instance).
+4. **Consistency gates:** `c(2)` must reproduce the two-ply lemma's constants exactly; the q=17
+   empty-conic witnesses (score-9 repairs) must sit consistently with the ladder (they empty the
+   conic at a ply depth the ladder permits).
+
+Budget: proof task + 2h mining validation, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-depletion-ladder.md`.
+
+## C47. Minimal-counterexample constraint package (gate DISCHARGED 2026-07-09 — C42 reported)
+
+The C42 gate is satisfied: `notes/2026-07-09-codex-type-census-uniformity.md` exists and is
+**negative**, so row 3 below takes its negative branch — state "no propagation constraint
+available" and ship the package on rows 1–2 and 4–6. **READ FIRST:** the falsification map
+(the taxonomy this packages into theorems), C42's report, and the C45/C46 reports if available
+(their results are two of the package's rows).
+
+Context: the odd-perfect-number / Fermat move — publish "any counterexample to the odd-plane
+conjecture must satisfy ..." as a theorem package, with each row proven and its evidence tier
+stated. This is the publishable face of counterexample-readiness; it feeds D1's conjecture
+section (or stands alone) and is valuable *whichever way* the conjecture resolves.
+
+1. **Row: q lower bound.** "Any counterexample has q ≥ <frontier>" — assembled from the
+   Lean-unconditional rows (q=5,7,11,13 + C30's q=17/19 when landed) and the computed rows with
+   their solver-trust caveats stated exactly (C37/C8 as the verification citations; B3
+   conditionality for q=23 until the C44 rider lands). Never upgrade a tier.
+2. **Row: total on-conic depletion.** A trapped class has ALL children N, in particular its q−4
+   on-conic children — so at a counterexample q, that class's on-conic P-count is 0. Two-line
+   proof; write it.
+3. **Row: the all-or-nothing dichotomy (conditional — cite C42's lemma).** If the census
+   propagation lemma holds with class-stability constant C, one totally-depleted class forces
+   `mu_on(q) ≤ C` globally: counterexamples are all-or-nothing at the conic layer. State
+   conditionally with the exact dependency; if C42 reported negative, this row becomes "no
+   propagation constraint available" — say so plainly.
+4. **Row: ply-depth constraint.** C46's `T(q)`: the trap must sustain a live conic for ≥ T(q)
+   plies (cite the ladder; restate the t=2 instance unconditionally if C46 has not landed).
+5. **Row: game-length.** Optimal play lasts ≥ m(2,q) moves (smallest complete arc); cite the
+   known m(2,q) lower bounds (verify the exact constant — `[VERIFY]` tag if unsourced, never
+   fabricate) for the Ω(√q) corollary. One paragraph.
+6. **Appendix: the sequences.** Tabulate dep(q), Z(q), mu_on(q), N_canon(q) over the computed
+   range as OEIS-candidate data. Preparing the tables is in scope; any actual OEIS submission is
+   a user decision — do not submit.
+7. Deliverable: a self-contained theorem-package note (`notes/2026-07-09-minimal-counterexample-constraints.md`)
+   with every row tagged [LEAN]/[PROVEN-PROSE]/[COMPUTED]/[CONDITIONAL], D1-ready.
+
+Budget: writing/proof assembly, 6h; no new solves.
+Report file: `notes/2026-07-09-codex-counterexample-package.md`.
+
+## C48. Mirror-theorem harvest on classical varieties — new P families at lemma-application cost [CLAIMED — Claude/Opus 2026-07-09]
+
+**Claimed by Claude/Opus 2026-07-09** — in progress this session (board classification + machine
+gates first, then the C27 pair-extension obligation, then Lean instantiation per surviving family).
+Report will land in `notes/2026-07-09-codex-mirror-harvest.md`. Codex: do not double-work this
+entry while the claim stands.
+
+Context: the Lean theorem
+`Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution` is **generic**:
+point set + ambient-collinearity legality + a fixed-point-free collineation involution preserving
+the point set ⇒ empty position P. C25 instantiated it once (`PG(2m−1,q)`). Nothing restricts it to
+full projective space: any classical variety whose cap game runs on ambient lines is a candidate
+board, and the C27 chord-kill argument carries verbatim there (chords are ambient lines). Each
+success is a new infinite-family outcome theorem at roughly lemma-application cost; each principled
+failure maps the mirror method's boundary. Feeds D1 directly.
+
+0. **Classify the boards first (the load-bearing subtlety).** The cap game on a variety is
+   nontrivial only if some ambient lines carry ≥ 3 variety points. Elliptic quadrics and ovoids
+   have every line meeting in ≤ 2 points ⇒ the game is FREE placement and the outcome is bare
+   point-count parity (`q²+1` even for odd q ⇒ P trivially) — record these as trivial parity rows,
+   flagged as such, no novelty claimed. The nontrivial boards are the ones carrying **generators
+   or long secants**: hyperbolic quadrics `Q⁺(3,q)` (two rulings of generators — note the board is
+   then a `(q+1)×(q+1)` grid whose ≥3-point lines are exactly rows/columns, i.e. a capacity-2
+   rook-lines game, directly in the E1 line-capacity vocabulary), parabolic `Q(4,q)`, the
+   `Q±(5,q)` family, Hermitian curves `H(2,q²)` (secants carry q+1 points), Hermitian surfaces
+   `H(3,q²)` (generators). Verify each intersection pattern from the standard references before
+   trusting it.
+1. **Candidate involutions per nontrivial board.** Primary concrete candidate to verify first:
+   on `Q⁺(3,q)` with q odd, the ruling-preserving shift by `((q+1)/2, (q+1)/2)` in the natural
+   `Z_{q+1} × Z_{q+1}` coordinates looks fpf with mirror pairs never sharing a row/column (so the
+   C27 pair-extension obligation may hold outright) — verify the sketch, do not trust it. For
+   Hermitian boards: involutions in the unitary group, fpf on the variety's points (eigenvalue
+   argument à la C25). Document every candidate precisely.
+2. **Machine gates before believing any mirror:** exhaustively solve the smallest instances
+   (`Q⁺(3,3)`: 16 points; `H(2,4)`: 9 points; `H(2,9)`: 28 points — all tiny) and confirm the
+   claimed P outcomes; a stuck-free policy check against all P1 play for one small q per family
+   (the C32 methodology). Any mismatch kills the candidate — report verbatim.
+3. **The C27 obligation is not optional:** for each candidate, prove the pair-extension condition
+   (`S ∪ {x, σx}` valid), not the weak fixed-point-free-only form — the mirror-chord obstruction
+   is exactly what C27 corrected. Where σ-invariance kills the chord case, say so explicitly.
+4. **Lean:** instantiate the generic lemma per successful family (the C25 pattern: coordinate
+   model + transport). Statement-level minimum; proofs expected cheap where the informal argument
+   is clean.
+5. **Negatives are deliverables:** a family where every candidate involution has fixed points on
+   the variety (or an odd point count blocks parity) is a boundary datum for D1 — record it with
+   the obstruction.
+
+Budget: math + small compute; 8h wall, single-core, ≤ 8 GB (solves are tiny).
+Report file: `notes/2026-07-09-codex-mirror-harvest.md`.
+
+## C50. Kernel-checked Grundy certificates — machine-verified game-value sequences (post-C35)
+
+Context: C35's oracle now produces exact nimbers (`s4gdump`/`s4gcheck`/`s4gmeasure`), and the C19
+reflection route kernel-checks P/N reply books. Bridging them — a **nimber certificate** format
+with a reflected Lean checker — would let computed Grundy values ship as kernel-checked theorems.
+Applied to sequence data (the D6 queens nimbers / A344227 extension rows, the cap-game ladder),
+this is a methods contribution with an unusual hook: OEIS game-value entries are essentially never
+formally verified, and we have both the oracle and the checker infrastructure.
+
+1. **Format design.** A Grundy book row for claimed value `g` needs: (i) a witness move to a
+   child of each value `0..g−1`, (ii) the *no-child-has-value-g* obligation — the expensive
+   direction, discharged recursively via the children's books (depth is bounded by the game
+   length). Design the list-based format in the C12/C19 lineage (self-describing header,
+   line-oriented, trivially parseable); an emitter mode from the C35 Grundy dumps; and an
+   independent `certcheck`-style rules-only validator.
+2. **Lean checker, soundness direction only:** `checkGrundyBook data = true → grundy pos = g`,
+   reflected to `by decide` per the C19 discipline (no `native_decide`; axiom gate
+   `[propext, Classical.choice, Quot.sound]` verbatim in the report).
+3. **End-to-end prototype on ONE tiny instance** (grid-cap q=5, or queens n ≤ 6): emit, check,
+   elaborate; measure kernel-eval wall time and extrapolate before any scale-up. STOP and report
+   if the recursive no-child obligation blows up the book size — a measured infeasibility verdict
+   with the growth curve is a full-value deliverable.
+4. **Scope guard:** the methods note / OEIS-facing write-up is a follow-on, not this task; no
+   OEIS submission (user decision). This task is format + checker + prototype + cost measurement.
+
+Budget: hard 8h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-grundy-cert-format.md`.
+
+## C49. Node-Kayles nimber tables for other chess pieces (D6 siblings, queens box idle time)
+
+Context: D6 extends the queens nimber sequence (OEIS A344227, known to n=13). The same solver
+discipline applied to other pieces yields cheap OEIS-able siblings and more capacity-1 anchors for
+the line-capacity umbrella. Note the built-in triviality trap: **rooks are forced-length** (every
+maximal non-attacking rook placement on n×n has exactly n rooks, so the game is bare parity) —
+that is the sanity base case, not a contribution. Kings, knights, and bishops have
+variable-length maximal placements and are the real targets.
+
+1. **Literature/OEIS check per piece FIRST** (a solved piece is a skip): search Node-Kayles /
+   placement-game / nim-value results for kings, knights, bishops; check OEIS for existing
+   game-value sequences (counting sequences exist for all pieces — those are not ours). Report
+   what exists with citations; no fabricated references.
+2. **Solver adaptation:** per-piece attack masks in the queens machinery (kings/knights are
+   local — a different pruning regime; document what changes). **Validation gate per piece:** the
+   `solver_lineage_agrees` pattern — exact match against an independent naive solver on all
+   n ≤ 6 (or ≤ 8 where cheap) before any table is reported.
+3. **Compute outcomes + nimbers** per piece as far as an 8h/8 GB budget reaches; tables verbatim,
+   with the per-n wall/memo telemetry so the next session can extend.
+4. **OEIS preparation only** — b-file-ready tables and sequence descriptions; any actual
+   submission is a user decision. Do not preempt cap-program compute; follow the queens tmux
+   discipline if the big box is used.
+
+Budget: hard 8h wall, single-core, ≤ 8 GB per piece; opportunistic scheduling.
+Report file: `notes/2026-07-09-codex-piece-nimber-tables.md`.

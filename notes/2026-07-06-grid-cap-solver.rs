@@ -50,6 +50,14 @@
 //   s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
 //                -- solve one S4 root and dump the solved canonical memo as an exact sorted
 //                   mmap-friendly raw table: (u128 canonical key, 1-bit P/N value).
+//   s4gdump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
+//                -- solve one S4 root with exact Grundy mex values and dump
+//                   (u128 canonical key, u8 Grundy value).  This evaluates all children, so it is
+//                   slower/larger than the P/N early-break dump.
+//   s4gcheck <q> t1,t2,t3,t4 --grundy <grundy-raw> --raw <pn-raw>
+//                -- validate a Grundy dump against an existing P/N dump on shared canonical keys.
+//   s4gmeasure <q> t1,t2,t3,t4 --grundy <grundy-raw> [--depth <plies>]
+//                -- compare true S5/S6 Grundy values against live-conic and zone NK shadows.
 //   s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
 //                -- freeze a raw S4 dump into a compact BuRR-style ribbon archive for runtime
 //                   queries. Uses 64-bit folded keys plus membership fingerprints; raw remains
@@ -1388,6 +1396,55 @@ fn s4_g(
     Some(false)
 }
 
+fn s4_grundy(
+    b: &Board,
+    memo: &mut FnvMap<u128, u8>,
+    cap: usize,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+    max_grundy: &mut u8,
+) -> Option<u8> {
+    let key = b.canon(occ);
+    if let Some(&v) = memo.get(&key) {
+        return Some(v);
+    }
+    if memo.len() >= cap {
+        return None;
+    }
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+    }
+    let mut seen = 0u64;
+    for w in 0..MAXW {
+        let mut bits = avail[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            let mut nchosen = *chosen;
+            set_bit(&mut nchosen, z);
+            let mut nforb = *forbidden;
+            mask_or(&mut nforb, &b.rc_mask[z]);
+            for &x in occ.iter() {
+                mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+            }
+            occ.push(z as u16);
+            let child = s4_grundy(b, memo, cap, occ, &nchosen, &nforb, max_grundy);
+            occ.pop();
+            let g = child?;
+            assert!(g < 64, "S4 Grundy value {} exceeds the u64 mex mask bound", g);
+            seen |= 1u64 << g;
+        }
+    }
+    let mex = (!seen).trailing_zeros() as u8;
+    assert!(mex < 64, "S4 Grundy mex {} exceeds the report/storage bound", mex);
+    *max_grundy = (*max_grundy).max(mex);
+    memo.insert(key, mex);
+    Some(mex)
+}
+
 struct S4Eval {
     status: &'static str,
     label: Option<&'static str>,
@@ -1734,12 +1791,15 @@ const S4_CANON_ID: u64 = 0x5347_4341_4e4f_4e01; // "SGCANON" v1: Board::canon in
 const S4_FOLD_ID: u64 = 0x5347_464f_4c44_0001; // fold_key64 v1.
 const S4_ROOT_KIND_ONCONIC_INV: u16 = 1;
 const S4_VALUE_BOOL_PN: u8 = 1; // raw bool: false=P, true=N.
+const S4_VALUE_GRUNDY_U8: u8 = 2; // raw u8: exact normal-play Grundy value.
 const S4_KEY_U128_CANON: u8 = 1;
 const S4_KEY_U64_FOLDED_CANON: u8 = 2;
 const RAW_MEMO_MAGIC: [u8; 8] = *b"GCAPRAW3";
 const RAW_MEMO_VERSION: u32 = 3;
 const RAW_MEMO_HEADER: usize = 128;
 const RAW_MEMO_RECORD: usize = 24;
+const GRUNDY_MEMO_MAGIC: [u8; 8] = *b"GCAPGRD1";
+const GRUNDY_MEMO_VERSION: u32 = 1;
 
 fn read_u16_le(bytes: &[u8], off: usize) -> u16 {
     u16::from_le_bytes(bytes[off..off + 2].try_into().unwrap())
@@ -1789,8 +1849,12 @@ fn raw_record_key(bytes: &[u8], idx: usize) -> u128 {
 }
 
 fn raw_record_value(bytes: &[u8], idx: usize) -> bool {
+    raw_record_value_byte(bytes, idx) != 0
+}
+
+fn raw_record_value_byte(bytes: &[u8], idx: usize) -> u8 {
     let off = RAW_MEMO_HEADER + idx * RAW_MEMO_RECORD;
-    bytes[off + 16] != 0
+    bytes[off + 16]
 }
 
 fn fold_key64(key: u128) -> u64 {
@@ -1809,6 +1873,20 @@ struct RawMemoMmap {
     cap: u64,
     n_records: usize,
     status: u8,
+}
+
+struct RawGrundyMemoMmap {
+    mmap: MmapFile,
+    q: usize,
+    t4: [usize; 4],
+    gf_hash: u64,
+    root_key: u128,
+    root_cells: [u16; 4],
+    cap: u64,
+    n_records: usize,
+    status: u8,
+    root_grundy: Option<u8>,
+    max_grundy: u8,
 }
 
 impl RawMemoMmap {
@@ -1956,6 +2034,213 @@ impl RawMemoMmap {
     }
 }
 
+impl RawGrundyMemoMmap {
+    fn open(path: &str) -> io::Result<RawGrundyMemoMmap> {
+        let mmap = MmapFile::open(path)?;
+        let bytes = mmap.bytes();
+        if bytes.len() < RAW_MEMO_HEADER || bytes[0..8] != GRUNDY_MEMO_MAGIC {
+            return Err(io::Error::new(io::ErrorKind::InvalidData, "bad Grundy raw memo magic"));
+        }
+        let version = read_u32_le(bytes, 8);
+        if version != GRUNDY_MEMO_VERSION {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo version {version}"),
+            ));
+        }
+        let header_len = read_u32_le(bytes, 12) as usize;
+        if header_len != RAW_MEMO_HEADER {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo header length {header_len}, expected {RAW_MEMO_HEADER}"),
+            ));
+        }
+        let canon_id = read_u64_le(bytes, 16);
+        if canon_id != S4_CANON_ID {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo canon id {canon_id:#x}, expected {S4_CANON_ID:#x}"),
+            ));
+        }
+        let root_kind = read_u16_le(bytes, 28);
+        if root_kind != S4_ROOT_KIND_ONCONIC_INV {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo root kind {root_kind}, expected {S4_ROOT_KIND_ONCONIC_INV}"),
+            ));
+        }
+        let maxw = read_u16_le(bytes, 30) as usize;
+        if maxw != MAXW {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo MAXW {maxw}, this build {MAXW}"),
+            ));
+        }
+        let record_len = read_u32_le(bytes, 56) as usize;
+        if record_len != RAW_MEMO_RECORD {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo record length {record_len}, expected {RAW_MEMO_RECORD}"),
+            ));
+        }
+        if bytes[61] != S4_VALUE_GRUNDY_U8 {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!(
+                    "Grundy raw memo value encoding {}, expected {}",
+                    bytes[61],
+                    S4_VALUE_GRUNDY_U8
+                ),
+            ));
+        }
+        if bytes[62] != S4_KEY_U128_CANON {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo key format {}, expected {}", bytes[62], S4_KEY_U128_CANON),
+            ));
+        }
+        if bytes[60] > 2 {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo status byte {}", bytes[60]),
+            ));
+        }
+        if bytes[63] != 0 {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo flags byte {}", bytes[63]),
+            ));
+        }
+        let gf_hash = read_u64_le(bytes, 64);
+        let root_key = (read_u64_le(bytes, 72) as u128) | ((read_u64_le(bytes, 80) as u128) << 64);
+        let root_cells = [
+            read_u16_le(bytes, 88),
+            read_u16_le(bytes, 90),
+            read_u16_le(bytes, 92),
+            read_u16_le(bytes, 94),
+        ];
+        let root_grundy_byte = bytes[96];
+        let max_grundy = bytes[97];
+        if max_grundy >= 64 {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo max Grundy {max_grundy}, expected < 64"),
+            ));
+        }
+        let n_records = read_u64_le(bytes, 48) as usize;
+        let expected = RAW_MEMO_HEADER + n_records * RAW_MEMO_RECORD;
+        if bytes.len() != expected {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo size {} bytes, expected {expected}", bytes.len()),
+            ));
+        }
+        let q = read_u32_le(bytes, 24) as usize;
+        let t4 = [
+            read_u16_le(bytes, 32) as usize,
+            read_u16_le(bytes, 34) as usize,
+            read_u16_le(bytes, 36) as usize,
+            read_u16_le(bytes, 38) as usize,
+        ];
+        let cap = read_u64_le(bytes, 40);
+        let status = bytes[60];
+        let root_grundy = if status == 0 { None } else { Some(root_grundy_byte) };
+        if root_grundy.is_some_and(|g| g >= 64) {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo root Grundy {root_grundy_byte}, expected < 64"),
+            ));
+        }
+        if bytes[98..RAW_MEMO_HEADER].iter().any(|&b| b != 0) {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                "Grundy raw memo nonzero header padding",
+            ));
+        }
+        let mut prev: Option<u128> = None;
+        let mut observed_max = 0u8;
+        for i in 0..n_records {
+            let key = raw_record_key(bytes, i);
+            if let Some(p) = prev {
+                if key <= p {
+                    return Err(io::Error::new(
+                        io::ErrorKind::InvalidData,
+                        format!("Grundy raw memo keys not strictly sorted at record {}", i),
+                    ));
+                }
+            }
+            prev = Some(key);
+            let value = raw_record_value_byte(bytes, i);
+            if value >= 64 {
+                return Err(io::Error::new(
+                    io::ErrorKind::InvalidData,
+                    format!("Grundy raw memo value byte {} at record {}", value, i),
+                ));
+            }
+            observed_max = observed_max.max(value);
+            let off = RAW_MEMO_HEADER + i * RAW_MEMO_RECORD;
+            if bytes[off + 17..off + RAW_MEMO_RECORD].iter().any(|&b| b != 0) {
+                return Err(io::Error::new(
+                    io::ErrorKind::InvalidData,
+                    format!("Grundy raw memo nonzero record padding at record {}", i),
+                ));
+            }
+        }
+        if observed_max != max_grundy {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Grundy raw memo max {max_grundy}, observed {observed_max}"),
+            ));
+        }
+        Ok(RawGrundyMemoMmap {
+            mmap,
+            q,
+            t4,
+            gf_hash,
+            root_key,
+            root_cells,
+            cap,
+            n_records,
+            status,
+            root_grundy,
+            max_grundy,
+        })
+    }
+
+    fn get(&self, key: u128) -> Option<u8> {
+        let bytes = self.mmap.bytes();
+        let mut lo = 0usize;
+        let mut hi = self.n_records;
+        while lo < hi {
+            let mid = (lo + hi) >> 1;
+            let k = raw_record_key(bytes, mid);
+            if k < key {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        if lo < self.n_records && raw_record_key(bytes, lo) == key {
+            Some(raw_record_value_byte(bytes, lo))
+        } else {
+            None
+        }
+    }
+
+    fn describe(&self) -> String {
+        format!(
+            "grundy-raw q={} t4={:?} records={} cap={} root-grundy={} root-value={} max-grundy={}",
+            self.q,
+            self.t4,
+            self.n_records,
+            if self.cap == u64::MAX { "none".to_string() } else { self.cap.to_string() },
+            self.root_grundy.map_or("-".to_string(), |g| g.to_string()),
+            status_code_label(self.status),
+            self.max_grundy
+        )
+    }
+}
+
 fn write_raw_memo(
     path: &str,
     q: usize,
@@ -2007,6 +2292,66 @@ fn write_raw_memo(
     Ok(rows.len())
 }
 
+fn write_raw_grundy_memo(
+    path: &str,
+    q: usize,
+    t4: &[usize],
+    gf_hash: u64,
+    root_key: u128,
+    root_cells: &[u16; 4],
+    cap: usize,
+    root_grundy: Option<u8>,
+    max_grundy: u8,
+    memo: FnvMap<u128, u8>,
+) -> io::Result<usize> {
+    let mut rows: Vec<(u128, u8)> = memo.into_iter().collect();
+    rows.sort_unstable_by_key(|&(key, _)| key);
+    assert!(max_grundy < 64, "S4 Grundy max {} exceeds storage bound", max_grundy);
+    assert!(
+        rows.iter().all(|&(_, value)| value < 64),
+        "S4 Grundy dump contains a value >= 64"
+    );
+
+    let tmp = format!("{path}.tmp");
+    let mut w = BufWriter::new(File::create(&tmp)?);
+    w.write_all(&GRUNDY_MEMO_MAGIC)?;
+    write_u32_le(&mut w, GRUNDY_MEMO_VERSION)?;
+    write_u32_le(&mut w, RAW_MEMO_HEADER as u32)?;
+    write_u64_le(&mut w, S4_CANON_ID)?;
+    write_u32_le(&mut w, q as u32)?;
+    write_u16_le(&mut w, S4_ROOT_KIND_ONCONIC_INV)?;
+    write_u16_le(&mut w, MAXW as u16)?;
+    for i in 0..4 {
+        write_u16_le(&mut w, t4[i] as u16)?;
+    }
+    write_u64_le(&mut w, if cap == usize::MAX { u64::MAX } else { cap as u64 })?;
+    write_u64_le(&mut w, rows.len() as u64)?;
+    write_u32_le(&mut w, RAW_MEMO_RECORD as u32)?;
+    let label = root_grundy.map(|g| if g == 0 { "P" } else { "N" });
+    w.write_all(&[s4_status_code(label)])?;
+    w.write_all(&[S4_VALUE_GRUNDY_U8])?;
+    w.write_all(&[S4_KEY_U128_CANON])?;
+    w.write_all(&[0u8])?; // flags
+    write_u64_le(&mut w, gf_hash)?;
+    write_u64_le(&mut w, root_key as u64)?;
+    write_u64_le(&mut w, (root_key >> 64) as u64)?;
+    for &cell in root_cells {
+        write_u16_le(&mut w, cell)?;
+    }
+    w.write_all(&[root_grundy.unwrap_or(0)])?;
+    w.write_all(&[max_grundy])?;
+    w.write_all(&[0u8; RAW_MEMO_HEADER - 98])?;
+    for (key, value) in rows.iter() {
+        write_u64_le(&mut w, *key as u64)?;
+        write_u64_le(&mut w, (*key >> 64) as u64)?;
+        w.write_all(&[*value])?;
+        w.write_all(&[0u8; 7])?;
+    }
+    w.flush()?;
+    std::fs::rename(tmp, path)?;
+    Ok(rows.len())
+}
+
 fn solve_s4_dump(q: usize, t4: &[usize], cap: usize, out_path: &str) {
     let b = Board::new(q);
     let (occ, chosen, forbidden, cells) = build_s4_root(&b, t4);
@@ -2038,6 +2383,52 @@ fn solve_s4_dump(q: usize, t4: &[usize], cap: usize, out_path: &str) {
         out_path
     );
     assert_eq!(peak, n_records, "raw dump lost memo entries");
+}
+
+fn solve_s4_grundy_dump(q: usize, t4: &[usize], cap: usize, out_path: &str) {
+    let b = Board::new(q);
+    let (occ, chosen, forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [occ[0], occ[1], occ[2], occ[3]];
+    let root_key = b.canon(&occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let mut memo: FnvMap<u128, u8> = FnvMap::default();
+    let mut max_grundy = 0u8;
+    let start = Instant::now();
+    let mut occ_solve = occ.clone();
+    let root_grundy =
+        s4_grundy(&b, &mut memo, cap, &mut occ_solve, &chosen, &forbidden, &mut max_grundy);
+    let solve_elapsed = start.elapsed().as_secs_f64();
+    let peak = memo.len();
+    let dump_start = Instant::now();
+    let n_records = write_raw_grundy_memo(
+        out_path,
+        q,
+        t4,
+        gf_hash,
+        root_key,
+        &root_cells,
+        cap,
+        root_grundy,
+        max_grundy,
+        memo,
+    )
+    .expect("write raw Grundy memo");
+    println!(
+        "S4GDUMP q={} t4={:?} cells={:?} status={} root-grundy={} value={} records={} cap={} max-grundy={} solve-elapsed={:.3} dump-elapsed={:.3} out={}",
+        q,
+        t4,
+        cells,
+        if root_grundy.is_some() { "OK" } else { "ABORTED" },
+        root_grundy.map_or("-".to_string(), |g| g.to_string()),
+        root_grundy.map_or("-", |g| if g == 0 { "P" } else { "N" }),
+        n_records,
+        fmt_cap(cap),
+        max_grundy,
+        solve_elapsed,
+        dump_start.elapsed().as_secs_f64(),
+        out_path
+    );
+    assert_eq!(peak, n_records, "raw Grundy dump lost memo entries");
 }
 
 const RIBBON_W: usize = 64;
@@ -2567,13 +2958,7 @@ fn store_matches_root(
     root_cells: &[u16; 4],
 ) -> bool {
     match store {
-        QueryStore::Raw(raw) => {
-            raw.q == q
-                && raw.t4 == t4
-                && raw.gf_hash == gf_hash
-                && raw.root_key == root_key
-                && &raw.root_cells == root_cells
-        }
+        QueryStore::Raw(raw) => raw_memo_matches_root(raw, q, t4, gf_hash, root_key, root_cells),
         QueryStore::Burr(burr) => {
             burr.q == q
                 && burr.t4 == t4
@@ -2582,6 +2967,36 @@ fn store_matches_root(
                 && &burr.root_cells == root_cells
         }
     }
+}
+
+fn raw_memo_matches_root(
+    raw: &RawMemoMmap,
+    q: usize,
+    t4: &[usize],
+    gf_hash: u64,
+    root_key: u128,
+    root_cells: &[u16; 4],
+) -> bool {
+    raw.q == q
+        && raw.t4 == t4
+        && raw.gf_hash == gf_hash
+        && raw.root_key == root_key
+        && &raw.root_cells == root_cells
+}
+
+fn raw_grundy_memo_matches_root(
+    raw: &RawGrundyMemoMmap,
+    q: usize,
+    t4: &[usize],
+    gf_hash: u64,
+    root_key: u128,
+    root_cells: &[u16; 4],
+) -> bool {
+    raw.q == q
+        && raw.t4 == t4
+        && raw.gf_hash == gf_hash
+        && raw.root_key == root_key
+        && &raw.root_cells == root_cells
 }
 
 fn parse_cell_arg(s: &str) -> Option<(usize, usize)> {
@@ -3077,6 +3492,106 @@ fn s4_zone_graph_feature_string(
         cycle_size_text,
         other_size_text
     )
+}
+
+fn s4_zone_nk_xor_only(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<u8> {
+    let mut zone = Vec::new();
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            if !is_on_root_conic(b, z) {
+                zone.push(z);
+            }
+        }
+    }
+
+    let n = zone.len();
+    let mut adj = vec![Vec::<usize>::new(); n];
+    for i in 0..n {
+        let mut kill = b.rc_mask[zone[i]];
+        for &x16 in occ {
+            mask_or(&mut kill, &b.line_mask[x16 as usize * b.n + zone[i]]);
+        }
+        for j in (i + 1)..n {
+            if bit_is_set(&kill, zone[j]) {
+                adj[i].push(j);
+                adj[j].push(i);
+            }
+        }
+    }
+
+    let mut seen = vec![false; n];
+    let mut stack = Vec::with_capacity(n);
+    let mut nk_xor = 0u8;
+    for start in 0..n {
+        if seen[start] {
+            continue;
+        }
+        seen[start] = true;
+        stack.clear();
+        stack.push(start);
+        let mut comp = Vec::new();
+        while let Some(v) = stack.pop() {
+            comp.push(v);
+            for &w in &adj[v] {
+                if !seen[w] {
+                    seen[w] = true;
+                    stack.push(w);
+                }
+            }
+        }
+        let size = comp.len();
+        let mut degree_sum = 0usize;
+        let mut all_deg_le_two = true;
+        for &v in &comp {
+            let degree = adj[v].len();
+            degree_sum += degree;
+            if degree > 2 {
+                all_deg_le_two = false;
+            }
+        }
+        let comp_edges = degree_sum / 2;
+        if size == 1 && comp_edges == 0 {
+            nk_xor ^= b.nk_path[size];
+        } else if all_deg_le_two && comp_edges + 1 == size {
+            if size <= MAXQ {
+                nk_xor ^= b.nk_path[size];
+            } else {
+                return None;
+            }
+        } else if all_deg_le_two && comp_edges == size {
+            if size <= MAXQ {
+                nk_xor ^= b.nk_cycle[size];
+            } else {
+                return None;
+            }
+        } else if size <= 24 {
+            let mut idx_of = HashMap::new();
+            for (i, &v) in comp.iter().enumerate() {
+                idx_of.insert(v, i);
+            }
+            let mut local = vec![0u64; size];
+            for (i, &v) in comp.iter().enumerate() {
+                for &w in &adj[v] {
+                    if let Some(&j) = idx_of.get(&w) {
+                        local[i] |= 1u64 << j;
+                    }
+                }
+            }
+            nk_xor ^= s4_small_nk_grundy(&local, 200_000)?;
+        } else {
+            return None;
+        }
+    }
+    Some(nk_xor)
 }
 
 fn s4_conic_nk_xor_only(
@@ -4184,6 +4699,279 @@ fn solve_s4_xor_mine(
         maintain_counts.xor_unknown,
         maintain_counts.aborted
     );
+}
+
+fn s4_hist_text(hist: &BTreeMap<u8, usize>) -> String {
+    if hist.is_empty() {
+        "-".to_string()
+    } else {
+        hist.iter()
+            .map(|(k, v)| format!("{}:{}", k, v))
+            .collect::<Vec<_>>()
+            .join(",")
+    }
+}
+
+#[derive(Default)]
+struct S4GrundyMeasureStats {
+    states: usize,
+    known: usize,
+    missing: usize,
+    conic_known: usize,
+    conic_unknown: usize,
+    zone_known: usize,
+    zone_unknown: usize,
+    zone_sum_match: usize,
+    zone_sum_mismatch: usize,
+    true_hist: BTreeMap<u8, usize>,
+    conic_hist: BTreeMap<u8, usize>,
+    conic_residual_hist: BTreeMap<u8, usize>,
+    zone_sum_residual_hist: BTreeMap<u8, usize>,
+}
+
+impl S4GrundyMeasureStats {
+    fn add(&mut self, true_g: Option<u8>, conic_g: Option<u8>, zone_g: Option<u8>) {
+        self.states += 1;
+        let Some(g) = true_g else {
+            self.missing += 1;
+            return;
+        };
+        self.known += 1;
+        *self.true_hist.entry(g).or_insert(0) += 1;
+        match conic_g {
+            Some(cg) => {
+                self.conic_known += 1;
+                *self.conic_hist.entry(cg).or_insert(0) += 1;
+                *self.conic_residual_hist.entry(g ^ cg).or_insert(0) += 1;
+                match zone_g {
+                    Some(zg) => {
+                        self.zone_known += 1;
+                        let residual = g ^ cg ^ zg;
+                        *self.zone_sum_residual_hist.entry(residual).or_insert(0) += 1;
+                        if residual == 0 {
+                            self.zone_sum_match += 1;
+                        } else {
+                            self.zone_sum_mismatch += 1;
+                        }
+                    }
+                    None => self.zone_unknown += 1,
+                }
+            }
+            None => {
+                self.conic_unknown += 1;
+                if zone_g.is_none() {
+                    self.zone_unknown += 1;
+                }
+            }
+        }
+    }
+
+    fn print(&self, ply: usize) {
+        println!(
+            "GPLY ply={} states={} known={} missing={} true_hist={} conic_known={} conic_unknown={} conic_hist={} residual_hist={} zone_known={} zone_unknown={} zone_sum_match={} zone_sum_mismatch={} zone_residual_hist={}",
+            ply,
+            self.states,
+            self.known,
+            self.missing,
+            s4_hist_text(&self.true_hist),
+            self.conic_known,
+            self.conic_unknown,
+            s4_hist_text(&self.conic_hist),
+            s4_hist_text(&self.conic_residual_hist),
+            self.zone_known,
+            self.zone_unknown,
+            self.zone_sum_match,
+            self.zone_sum_mismatch,
+            s4_hist_text(&self.zone_sum_residual_hist)
+        );
+    }
+}
+
+fn solve_s4_grundy_check(q: usize, t4: &[usize], grundy_path: &str, pn_path: &str) {
+    let b = Board::new(q);
+    let (root_occ, _, _, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    let pn = RawMemoMmap::open(pn_path).expect("open P/N raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4gcheck: Grundy dump root mismatch; requested q={} t4={:?}, dump={}",
+            q,
+            t4,
+            grundy.describe()
+        );
+        std::process::exit(2);
+    }
+    if !raw_memo_matches_root(&pn, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4gcheck: P/N dump root mismatch; requested q={} t4={:?}, pn-records={}",
+            q,
+            t4,
+            pn.n_records
+        );
+        std::process::exit(2);
+    }
+
+    let pn_bytes = pn.mmap.bytes();
+    let g_bytes = grundy.mmap.bytes();
+    let mut i = 0usize;
+    let mut j = 0usize;
+    let mut shared = 0usize;
+    let mut pn_only = 0usize;
+    let mut grundy_only = 0usize;
+    let mut mismatches = 0usize;
+    let mut first_bad = String::new();
+    while i < pn.n_records && j < grundy.n_records {
+        let pk = raw_record_key(pn_bytes, i);
+        let gk = raw_record_key(g_bytes, j);
+        if pk == gk {
+            shared += 1;
+            let pn_is_p = !raw_record_value(pn_bytes, i);
+            let g = raw_record_value_byte(g_bytes, j);
+            let grundy_is_p = g == 0;
+            if pn_is_p != grundy_is_p {
+                mismatches += 1;
+                if first_bad.is_empty() {
+                    first_bad = format!("key={:032x} pn_is_p={} grundy={}", pk, pn_is_p, g);
+                }
+            }
+            i += 1;
+            j += 1;
+        } else if pk < gk {
+            pn_only += 1;
+            i += 1;
+        } else {
+            grundy_only += 1;
+            j += 1;
+        }
+    }
+    pn_only += pn.n_records - i;
+    grundy_only += grundy.n_records - j;
+    println!(
+        "S4GCHECK q={} t4={:?} cells={:?} pn-records={} grundy-records={} shared={} pn-only={} grundy-only={} mismatches={} max-grundy={} verdict={}{}",
+        q,
+        t4,
+        cells,
+        pn.n_records,
+        grundy.n_records,
+        shared,
+        pn_only,
+        grundy_only,
+        mismatches,
+        grundy.max_grundy,
+        if mismatches == 0 { "PASS" } else { "FAIL" },
+        if first_bad.is_empty() { String::new() } else { format!(" first-bad={}", first_bad) }
+    );
+}
+
+fn solve_s4_grundy_measure(
+    q: usize,
+    t4: &[usize],
+    grundy_path: &str,
+    depth: usize,
+    state_rows: bool,
+    max_states: usize,
+) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4gmeasure: Grundy dump root mismatch; requested q={} t4={:?}, dump={}",
+            q,
+            t4,
+            grundy.describe()
+        );
+        std::process::exit(2);
+    }
+    println!(
+        "S4GMEASURE q={} t4={:?} cells={:?} store={} depth={} state-rows={} max-states={}",
+        q,
+        t4,
+        cells,
+        grundy.describe(),
+        depth,
+        state_rows,
+        max_states
+    );
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = vec![(root_occ, root_chosen, root_forbidden)];
+    let mut seen: HashSet<u128> = HashSet::new();
+    seen.insert(root_key);
+    let mut truncated = false;
+    for rel_depth in 0..=depth {
+        let mut stats = S4GrundyMeasureStats::default();
+        let ply = frontier.first().map_or(4 + rel_depth, |st| st.0.len());
+        let mut next: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+        for (occ, chosen, forbidden) in frontier.iter() {
+            let key = b.canon(occ);
+            if occ.len() >= 5 {
+                let true_g = grundy.get(key);
+                let conic_g = s4_conic_nk_xor_only(&b, occ, chosen, forbidden);
+                let zone_g = s4_zone_nk_xor_only(&b, occ, chosen, forbidden);
+                stats.add(true_g, conic_g, zone_g);
+                if state_rows {
+                    let residual = match (true_g, conic_g) {
+                        (Some(g), Some(cg)) => (g ^ cg).to_string(),
+                        _ => "-".to_string(),
+                    };
+                    let zone_residual = match (true_g, conic_g, zone_g) {
+                        (Some(g), Some(cg), Some(zg)) => (g ^ cg ^ zg).to_string(),
+                        _ => "-".to_string(),
+                    };
+                    println!(
+                        "GSTATE ply={} key={:032x} cells={} true_g={} conic_g={} residual={} zone_g={} zone_residual={} legal={} {} {}",
+                        occ.len(),
+                        key,
+                        fmt_cell_indices(&b, occ),
+                        true_g.map_or("-".to_string(), |g| g.to_string()),
+                        conic_g.map_or("-".to_string(), |g| g.to_string()),
+                        residual,
+                        zone_g.map_or("-".to_string(), |g| g.to_string()),
+                        zone_residual,
+                        avail_cells(&b, chosen, forbidden).len(),
+                        s4_conic_graph_feature_string(&b, occ, chosen, forbidden),
+                        s4_zone_graph_feature_string(&b, occ, chosen, forbidden)
+                    );
+                }
+            }
+            if rel_depth < depth && !truncated {
+                for z in avail_cells(&b, chosen, forbidden) {
+                    let (child_occ, child_chosen, child_forbidden) =
+                        push_cell_state(&b, occ, chosen, forbidden, z as usize).unwrap();
+                    let child_key = b.canon(&child_occ);
+                    if seen.insert(child_key) {
+                        if seen.len() > max_states {
+                            truncated = true;
+                            println!(
+                                "GTRUNCATED at-ply={} seen={} max-states={}",
+                                child_occ.len(),
+                                seen.len(),
+                                max_states
+                            );
+                            break;
+                        }
+                        next.push((child_occ, child_chosen, child_forbidden));
+                    }
+                }
+            }
+            if truncated {
+                break;
+            }
+        }
+        if stats.states != 0 {
+            stats.print(ply);
+        }
+        if rel_depth == depth || truncated {
+            break;
+        }
+        frontier = next;
+    }
+    println!("S4GMEASURE-DONE seen-states={} truncated={}", seen.len(), truncated);
 }
 
 fn solve_s4_query(q: usize, t4: &[usize], store: QueryStore) {
@@ -6654,6 +7442,123 @@ fn main() {
         );
         let out = out_path.expect("s4dump needs --out <file>");
         solve_s4_dump(q, &t4, cap, &out);
+        return;
+    }
+    if args[1] == "s4gdump" {
+        // s4gdump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
+        let mut cap: usize = usize::MAX;
+        let mut out_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--cap" {
+                cap = it.next().expect("--cap needs a value").parse().expect("--cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap int");
+            } else if a == "--out" {
+                out_path = Some(it.next().expect("--out needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--out=") {
+                out_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4gdump mode needs q: s4gdump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4gdump mode needs t values: s4gdump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]"),
+        );
+        let out = out_path.expect("s4gdump needs --out <file>");
+        solve_s4_grundy_dump(q, &t4, cap, &out);
+        return;
+    }
+    if args[1] == "s4gcheck" {
+        // s4gcheck <q> t1,t2,t3,t4 --grundy <grundy-raw> --raw <pn-raw>
+        let mut grundy_path: Option<String> = None;
+        let mut raw_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else if a == "--raw" {
+                raw_path = Some(it.next().expect("--raw needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--raw=") {
+                raw_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4gcheck mode needs q: s4gcheck <q> t1,t2,t3,t4 --grundy <file> --raw <file>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4gcheck mode needs t values: s4gcheck <q> t1,t2,t3,t4 --grundy <file> --raw <file>"),
+        );
+        solve_s4_grundy_check(
+            q,
+            &t4,
+            &grundy_path.expect("s4gcheck needs --grundy <file>"),
+            &raw_path.expect("s4gcheck needs --raw <file>"),
+        );
+        return;
+    }
+    if args[1] == "s4gmeasure" {
+        // s4gmeasure <q> t1,t2,t3,t4 --grundy <grundy-raw> [--depth <plies>] [--state-rows] [--max-states <n>]
+        let mut grundy_path: Option<String> = None;
+        let mut depth = 2usize;
+        let mut state_rows = false;
+        let mut max_states = 100_000usize;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else if a == "--depth" {
+                depth = it.next().expect("--depth needs a value").parse().expect("--depth int");
+            } else if let Some(rest) = a.strip_prefix("--depth=") {
+                depth = rest.parse().expect("--depth int");
+            } else if a == "--state-rows" {
+                state_rows = true;
+            } else if a == "--max-states" {
+                max_states = it.next().expect("--max-states needs a value").parse().expect("--max-states int");
+            } else if let Some(rest) = a.strip_prefix("--max-states=") {
+                max_states = rest.parse().expect("--max-states int");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4gmeasure mode needs q: s4gmeasure <q> t1,t2,t3,t4 --grundy <file>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4gmeasure mode needs t values: s4gmeasure <q> t1,t2,t3,t4 --grundy <file>"),
+        );
+        solve_s4_grundy_measure(
+            q,
+            &t4,
+            &grundy_path.expect("s4gmeasure needs --grundy <file>"),
+            depth,
+            state_rows,
+            max_states,
+        );
         return;
     }
     if args[1] == "s4freeze" {

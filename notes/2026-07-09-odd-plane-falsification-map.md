@@ -15,21 +15,20 @@ Program map: [`handoffs/2026-07-06-projective-cap-game-handoff.md`](handoffs/202
 
 **Conjecture.** For every odd prime power `q`, `PG(2,q)` is P.
 
-The **elimination direction is Lean-proven**: escape everywhere ⇒ `PG(2,q)` is P
-(`OddEscapeGameStatement` → `initialPStatement_of_oddEscapeStatement_finrank`, via the frame
-reduction `initialPStatement_iff_isP_frame_of_finrank` and the extension count
-`SizeThreeExtensionCountStatement`). Its contrapositive is what a falsification lives in:
+The **escape reduction is now Lean-proven bidirectionally**: escape everywhere ⇔ `PG(2,q)` is P
+(`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`; the forward direction is
+`GridMirror.initialPStatement_of_oddEscapeStatement_finrank`, and C41 supplies the trap converse via
+frame transitivity and value transport). Its contrapositive is exactly what a falsification lives in:
 
 ```text
-every legal size-3 residual "escapes" (has a P-valued size-4 child)   ⇒   PG(2,q) is P   [Lean-proven]
-PG(2,q) is N   ⇒   a trapped size-3 exists (all q²−9q+21 size-4 children N)              [contrapositive]
+every legal size-3 residual "escapes" (has a P-valued size-4 child)   ⇔   PG(2,q) is P   [Lean-proven]
+PG(2,q) is N   ⇔   a trapped size-3 exists (all q²−9q+21 size-4 children N)              [contrapositive]
 ```
 
-The **converse — a found trap ⇒ `PG(2,q)` is N — is *not* currently in Lean** (it needs a
-frame-transitivity transport of the trap onto a seed-containing size-3). Consequence for the
-program: eliminating every trap **proves** the conjecture (the direction the scaffold below stands
-on), but a computationally-found trap is not yet a *certified* counterexample until that transport is
-discharged (queued: **C41**).
+Consequence for the program: eliminating every trap proves the conjecture, and a computationally
+found trap is a certified projective counterexample once its residual game facts are trusted by the
+same solver/certificate tier. The remaining meta-risk is the usual Lean/spec-match issue (B6), not
+the frame-transport link.
 
 Two facts fix the shape of any counterexample:
 
@@ -59,7 +58,8 @@ which failure modes below are eliminable at all:
 The difficulty is entirely in the `q ≥ 11` unconfined-intruder regime, and `q ≥ 23` is a distinct
 sub-regime. The clean elimination axis is the local intruder structure above an on-conic size-4
 child (depletion bounds:
-[`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md)).
+[`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md); the t-ply
+ladder generalization and the resulting trap ply-depth constraint `T(q)` are queued as **C46**).
 
 | Regime        | Intruder structure above on-conic S4                       | Trap eliminated?                          |
 |---------------|------------------------------------------------------------|-------------------------------------------|
@@ -109,9 +109,9 @@ the char-3 regime, not here.
 | #  | Mode                                                        | Status                                                                       |
 |----|------------------------------------------------------------|------------------------------------------------------------------------------|
 | B1 | solver bug → wrong P/N on COMPUTED rows (`canon()` collide) | eliminable — C8 at `q=11/13`, C37 scaled shared-key check, certcheck; Lean rows immune |
-| B2 | a false link in the reduction chain                        | escape ⇒ root-P is *proven* and 5-arc non-degeneracy is a Lean theorem (`uniqueConicThroughFiveArc…`); the real watch is the §1 converse (trapped ⇒ N) transport, still unproven |
+| B2 | a false link in the reduction chain                        | escape ⇔ root-P is now Lean-proven by C41 (`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`), and 5-arc non-degeneracy is a Lean theorem (`uniqueConicThroughFiveArc…`); the remaining watch is spec-match B6, not the reduction link |
 | B3 | `q=23` **orbit-invariance bridge** unsound                 | not eliminated — residual symmetry ⊊ full `PGL(2,q)`; C36 self-consistency gate tests it |
-| B4 | the intended route can't close it even if true             | on-conic route (B4a), termination (B4b), coupling non-decomposition (B4c, C35 measures it), static-pairing dead (B4d) |
+| B4 | the intended route can't close it even if true             | on-conic route (B4a), termination (B4b), coupling non-decomposition (B4c, **measured by C35: confirmed** — no conic⊕zone sum at S5/S6, `g = g_conic XOR g_zone` fails on most rows even where zone Grundy is fully computable), static-pairing dead (B4d) |
 | B5 | normal-play vs misère inversion / ruleset conflation       | eliminated in practice (cross-engine tests + Lean pin the ruleset)           |
 | B6 | **spec mismatch** — Lean's endpoint definitions formalize a subtly different game than intended | Lean cannot self-certify this; B5 and A1's "Lean rows immune" use Lean as the oracle, so it is circular if the spec is off. Mitigated by `q=5,7` Lean-vs-computed agreement + a raw-bitmask legality spotcheck, not eliminated |
 
@@ -134,8 +134,9 @@ the warning that snapshot invariants over-promise here.
   No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
   *predicts* on it — currently no main-layer counterexample signal, but erratic, so A3 stays open. A
   uniform `Z`-bound (or a coupling-residual law from C35) would close it; the finite-type route to
-  the class-stability lower-bound (§6) is now **closed negative** (the type-alignment test; **C42** is rescoped to the fixed-`q`
-  census/propagation half, which the test explicitly left untouched), so the on-conic
+  the class-stability lower-bound (§6) is now **closed negative** (the type-alignment test; **C42**'s fixed-`q` census half then also reported
+  **negative** — every size-3 class has a distinct census vector even at the all-P orders, so no
+  propagation mechanism exists either), so the on-conic
   concentration must be attacked through the arc-depletion arithmetic (A5), not a `q`-uniform type
   census.
 

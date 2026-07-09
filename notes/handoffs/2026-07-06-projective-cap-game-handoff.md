@@ -181,11 +181,11 @@ Formal target:
 
 - `ProjectiveCap.Almost.OddEscapeGameStatement`
 
-**Caveat: only the elimination direction is Lean-proven** (escape everywhere ⇒ root P, via
-`initialPStatement_of_oddEscapeStatement_finrank`).  The converse — a trapped size-3 ⇒ root N —
-is unproven; certifying it (expected route: any 4 of the trap's 5 projective points form a frame,
-frame transitivity + value transport) is **C41**.  Until it lands, do not publish the equivalence
-as bidirectional, and a computationally-found trap is not a certified counterexample.
+**Lean status:** the equivalence is now proved bidirectionally by
+`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank` (C41, 2026-07-09).  The
+converse uses a trapped residual P-position, the frame-grid bridge, four-frame transitivity, and
+value transport to produce a P-valued child of the standard frame.  The remaining caveat is the
+usual Lean/spec-match issue, not the frame-transport link.
 
 ### Conic Localization
 
@@ -403,13 +403,29 @@ task list.  Current high-value items:
 - **Small-zone follow-up:** turn the repair-mining data into a geometric repair-intruder lemma
   and a small-zone `Z <= 2` / empty-conic base-law certificate schema.
 - **Counterexample-readiness additions (Fable, 2026-07-09 second pass):** **C41** trap ⇒ N
-  converse in Lean (gates D1's equivalence phrasing); **C42** fixed-q census propagation
-  (rescoped same day after the on-conic child type-alignment verdict — the q-independent
-  dictionary half is refuted, the fixed-q class-stability half survives); **C43** PG(4,3)
+  converse in Lean (reported/proved; D1 may use the equivalence); **C42** fixed-q census propagation
+  (rescoped same day after the on-conic child type-alignment verdict, then reported **NEGATIVE**
+  — no census mechanism; see Recently reported); **C43** PG(4,3)
   exact-solve sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer
   bucket census (the A4 falsification watch, previously without a task ID; q=25's depletion
   status is now the key covariate, and it carries the q=23 direct-B3-discharge rider).  Tier
   placement is in the queue's priority-ordering amendment.
+- **Publishable-constraint additions (Fable, 2026-07-09 third pass):** **C45** defect-skeleton
+  realizability theorem (dihedral classification of the conic endgame spectra; makes the mined
+  even-cycle cancellation and split/elliptic order-dichotomy facts corollaries of one theorem);
+  **C46** t-ply conic-depletion inequality ladder (`live_on >= q - c(t)` and the trap ply-depth
+  constraint `T(q)`); **C47** minimal-counterexample constraint package (odd-perfect-number-style
+  theorem list, gated on C42 — gate since DISCHARGED, C42 negative, so its dichotomy row takes
+  the negative branch).  All three publish constraints on the conjecture independent of its
+  resolution.
+- **Adjacent-publishable additions (Fable, 2026-07-09 fourth pass):** **C48** mirror-theorem
+  harvest on classical varieties (the generic fpf-involution Lean lemma applied to hyperbolic
+  quadrics / Hermitian curves and surfaces — new P families at lemma-application cost, with the
+  trivial-parity boards flagged); **C50** kernel-checked Grundy certificate format (machine-
+  verified game-value sequences, newly enabled by C35's nimber oracle); **C49** Node-Kayles
+  nimber tables for kings/knights/bishops (D6 siblings, queens box idle time; rooks are
+  forced-length parity, the sanity base case).  Priority order C48 > C50 > C49; C35's
+  non-decomposition verdict also unblocks C38 with true-nimber data.
 
 Recently reported:
 
@@ -506,6 +522,21 @@ Recently reported:
   across at least two q columns, with 281 nonconstant values.  The obstruction is mostly S6 and is
   now tabulated in `rust/s4-dumps/2026-07-09/c36-analysis/nonconstant-strict-types.tsv`.  Report:
   [`../2026-07-09-codex-cross-q-type-alignment.md`](../2026-07-09-codex-cross-q-type-alignment.md).
+- **C41 trap converse:** added `ProjectiveCap.TrapConverse` and proved
+  `GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`, closing the missing
+  trapped-size-3 ⇒ root-N direction.  The proof uses the arbitrary-position frame-grid bridge,
+  four-cap transitivity, and `FiniteBuildGame.isP_map`; build and axiom gate pass with only
+  `[propext, Classical.choice, Quot.sound]`.  Report:
+  [`../2026-07-09-codex-trap-converse.md`](../2026-07-09-codex-trap-converse.md).
+- **C35 Grundy oracle / coupling residual:** `s4gdump` now emits exact `u8` Grundy raw dumps,
+  `s4gcheck` validates `g=0` against existing P/N raw dumps on shared canonical keys, and
+  `s4gmeasure` compares true S5/S6 nimbers with conic and zone Node-Kayles shadows.  Validation
+  passed with zero mismatches at q=9/13/17/19.  q=17 root sizing: P/N `64,728` records and `0.18s`
+  versus Grundy `186,466` records, `0.84s`, max Grundy `6`; q=19 root Grundy is `2,691,979`
+  records in `17.01s`, max Grundy `6`.  The decomposition verdict is negative: conic xor alone
+  misses most S6 states, and even where the zone Grundy is computable (`q=13` all sampled states,
+  `q=17` subset), `g != g_conic XOR g_zone` on most rows.  Report:
+  [`../2026-07-09-codex-nimber-oracle.md`](../2026-07-09-codex-nimber-oracle.md).
 - **On-conic child type alignment (size-3→size-4 layer):** within-q value-constancy on exact
   orbits PASSES with zero violations for both the burned-pair stabilizer and full PGL at q ≤ 19
   (reproducing the C5/C15 buckets), but the q-independent finite-type collapse is **refuted**:
@@ -516,6 +547,14 @@ Recently reported:
   census/propagation half; the anchor half of the uniform (ON) bound merges into arc-depletion
   arithmetic (falsification-map A5).  Report:
   [`../2026-07-09-onconic-child-type-alignment.md`](../2026-07-09-onconic-child-type-alignment.md).
+- **C42 fixed-q census propagation:** the surviving value-free propagation half is also closed
+  negative.  Using the same exact stabilizer-orbit machinery over the on-disk feat censuses, every
+  all-P q=13/q=19 size-3 class has a distinct full stabilizer-orbit census vector (`12/12` and
+  `27/27` distinct vectors).  The onP point masses at those orders are therefore not caused by
+  uniform geometry; they hold because every visible stabilizer orbit is P-valued.  At q=11 and
+  q=17 the P-count variation is small (`2..5`, `1..3`) but scattered across all P-valued
+  stabilizer orbits (`10/10`, `21/21`), with no clean sub-census characterization.  Report:
+  [`../2026-07-09-codex-type-census-uniformity.md`](../2026-07-09-codex-type-census-uniformity.md).
 
 Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
 C32 plane and PG(4,3) primary checks above, wrote the report, and marked C32 reported in the queue.
@@ -549,14 +588,37 @@ generated missing q=17 exact S4 bucket dumps under `rust/s4-dumps/2026-07-09/c36
 45 exact q=17/q=19/q=23 bucket roots to depth 2 under `rust/s4-dumps/2026-07-09/c36-logs/`, and
 wrote the C36 report.  Coarse conic-defect + zone shape has one self-consistency collision; strict
 normalized-coordinate type has zero self-consistency collisions, 1,364 shared S5/S6 types, and 281
-nonconstant cross-q value rows.  Next queue item by Fable's priority is C35 unless the session
-chooses the C30 cert-book engineering lane or C34 writing lane.
+nonconstant cross-q value rows.
+
+Handoff note 2026-07-09 / Codex C35: added exact S4 Grundy dump/check/measure modes to
+`notes/2026-07-06-grid-cap-solver.rs`, updated the S4 manual, generated q=9/q=13/q=17/q=19 Grundy
+raw roots under `rust/s4-dumps/2026-07-09/c35/`, and wrote
+`notes/2026-07-09-codex-nimber-oracle.md`.  The q=17 sizing gate is safe (`186,466` Grundy records,
+`0.84s`, `27 MB RSS`, max Grundy `6`; P/N baseline `64,728` records, `0.18s`).  Shared-key
+validation has zero P/N mismatches.  The conic⊕zone disjunctive-sum hypothesis is empirically
+false at S5/S6: even with fully computable q=13 zone Grundies, `g = g_conic XOR g_zone` fails on
+most rows.  This note's original next-step pointer to C41/C42 is now superseded: both have reported.
+
+Handoff note 2026-07-09 / Codex C42: added
+`rust/scripts/onconic_census_propagation.py`, generated fixed-q census TSVs under
+`rust/s4-dumps/2026-07-09/c42-census/`, and wrote
+`notes/2026-07-09-codex-type-census-uniformity.md`.  The P-orbit projection reproduces the
+alignment/witness onP histograms exactly, but the full value-free stabilizer census is maximally
+non-uniform at the all-P orders (`q=13`: `12/12` distinct vectors; `q=19`: `27/27`).  C42 therefore
+closes the fixed-q propagation half negative; the uniform (ON) route now has to engage the
+q-dependent arc-depletion arithmetic directly.
+
+Handoff note 2026-07-09 / Codex C41: added `lean/ProjectiveCap/TrapConverse.lean`, imported it from
+`lean/ProjectiveCap.lean`, and wrote `notes/2026-07-09-codex-trap-converse.md`.  The new theorem
+`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank` proves the rank-three
+escape/root-P equivalence both ways; a found residual trap is now a Lean-certified projective
+counterexample once its residual game facts are certified.  Verified with
+`nix develop --command lake build ProjectiveCap.TrapConverse ProjectiveCap`; axiom gate is exactly
+`[propext, Classical.choice, Quot.sound]`.  C48 is currently claimed by Opus; next Codex lanes are
+C38/C39 mining with C35 nimbers, C30 certificate engineering, or C43/C44 compute sizing.
 
 Good Lean side targets:
 
-- The trap ⇒ N converse (**C41**): close `InitialPStatement ↔ OddEscapeGameStatement` via
-  every-5-cap-contains-a-frame + frame transitivity + value transport — certifies the
-  falsification equivalence D1 leads with.
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
 - S4 two-ply conic-depletion incidence lemma in the normalized grid model.
