@@ -268,6 +268,36 @@ particular, `s4mine` now gives a first systematic ply-by-ply structure pass over
 including selected/live/dead conic counts.  It does not yet compute defect spectra or best-repair
 scores; those remain feature extensions for the next miner layer.
 
+For ML-style exploratory summaries over a cache of `s4mine` logs, use:
+
+```bash
+UV_CACHE_DIR=rust/.uv-cache uv run rust/scripts/s4_ml_mine.py \
+  --cache-dir rust/s4-dumps/2026-07-08
+```
+
+From `rust/`, the shorter form is:
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run scripts/s4_ml_mine.py --cache-dir s4-dumps/2026-07-08
+```
+
+The script writes feature TSVs, PCA projections, shallow decision-tree reports, joint geometry
+summaries, and `ml/conic-bound-report.txt`.  Direct target labels are excluded from the feature
+matrices; labels are retained only in projection/summary files for inspection.  Treat this output
+as invariant discovery, not proof evidence.
+
+Current conic-depletion report:
+
+```text
+off/off lower bound: max(0, q - 19)
+off/on lower bound:  max(0, q - 13)
+on/on lower bound:   max(0, q - 7)
+```
+
+Across the cached q=9,11,13,17,19,23,25 S4 root samples, all q/geometry groups meet that bound.
+This gives a proof target for the incidence layer and explains why q>=23 root replies cannot empty
+the live affine conic.
+
 ### Root Child Census
 
 Use this to classify known first intrusions from a partial or complete root dump:

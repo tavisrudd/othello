@@ -364,6 +364,9 @@ Important modes:
   archives, runtime line-protocol queries, and non-interactive root-child/reply/ply-summary rows
   for S4-rooted pattern mining.  See the manual above before using compact archives for anything
   beyond exploratory mining.
+- `rust/scripts/s4_ml_mine.py`: uv-backed parser/ML-style summarizer for `s4mine` logs.  It emits
+  feature TSVs, PCA/tree reports, joint geometry summaries, and the current conic-depletion bound
+  report under `rust/s4-dumps/<date>/ml/`.
 
 Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
@@ -403,11 +406,18 @@ Recently reported:
 - **S4 ply-depth tooling:** `s4mine` now supplies the first non-interactive ply-summary layer over
   raw/BuRR S4 dumps.  It reports unknowns explicitly, so capped q=25 runs remain usable for
   geometry/branching without pretending to know child values.
+- **S4 conic-depletion lemma candidate:** the ML/joint-summary pass over q=9,11,13,17,19,23,25
+  root samples found the two-ply lower bounds
+  `off/off >= max(0,q-19)`, `off/on >= max(0,q-13)`, and `on/on = q-7` for live affine-conic
+  cells after an S4 root reply.  This is proof-shaped by row/column plus secant incidence counting.
+  Consequence: q=17/q=19 are the empty-conic boundary cases, while q>=23 cannot empty the live
+  conic at this layer and needs positive-live-conic steering.
 
 Good Lean side targets:
 
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
+- S4 two-ply conic-depletion incidence lemma in the normalized grid model.
 - formal one-pair descent / second-intrusion lemmas using the C31 steering data.
 
 ## Literature / Framing

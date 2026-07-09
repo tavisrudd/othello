@@ -13,3 +13,6 @@
 
 # Projective cap S4 memo dumps / BuRR archives (large, generated; rebuildable).
 /s4-dumps/
+
+# Workspace-local uv cache for ad hoc ML scripts.
+/.uv-cache/

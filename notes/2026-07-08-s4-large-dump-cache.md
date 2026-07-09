@@ -12,6 +12,9 @@ field order.
 
 ## Cached Dumps
 
+- `q=9`, `q=11`, `q=13`, `q=17`: small normalized root samples for `rep=1,2,3,4`, raw only.
+  These are regression/mining samples, not full bucket coverage.  Note: the q=11 sample root is
+  `N`, so use it for geometry checks rather than as a P-valued follower example.
 - `q=19`: all 13 full-`PGL(2,19)` S4 bucket representatives, exact, with raw and BuRR files.
 - `q=23`: two exact roots:
   - `rep=1,2,3,4`, raw 288 MiB, BuRR 69 MiB;
@@ -63,3 +66,35 @@ q=23 exact roots and all q=25 bucket representatives checked structurally have n
 root-reply layer.  This suggests "empty the conic" is a small/medium-q repair feature, not the
 large-q bulk mechanism by itself.
 
+## ML / Joint-Summary Pass
+
+The cache also has parsed exploratory reports under:
+
+```text
+rust/s4-dumps/2026-07-08/ml/
+```
+
+Regenerate from `rust/` with:
+
+```text
+UV_CACHE_DIR=.uv-cache uv run scripts/s4_ml_mine.py --cache-dir s4-dumps/2026-07-08
+```
+
+Important generated files:
+
+- `reply-features.tsv`, `state-features.tsv`: parsed `s4mine` rows.
+- `reply-geom-joint-summary.tsv`, `state-shape-joint-summary.tsv`: joint geometry/count tables.
+- `reply-geom-classifiers.txt`, `state-shape-classifiers.txt`: shallow tree reports for
+  hypothesis generation.
+- `conic-bound-report.txt` / `.tsv`: two-ply conic-depletion check.
+
+The conic-bound report currently checks q=9,11,13,17,19,23,25 root samples and has zero failures:
+
+```text
+off/off lower bound: max(0, q - 19)
+off/on lower bound:  max(0, q - 13)
+on/on lower bound:   max(0, q - 7)
+```
+
+This is the best proof-facing import from the ML pass so far.  It turns the observed absence of
+q>=23 conic-emptying root replies into a concrete incidence-count lemma target.

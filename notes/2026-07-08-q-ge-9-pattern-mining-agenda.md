@@ -47,6 +47,9 @@ Done:
   states.
 - `s4mine` now emits non-interactive root-child rows, optional root-reply rows, and deduplicated
   ply summaries from a raw or compact S4 dump.
+- `rust/scripts/s4_ml_mine.py` parses the current S4 mining logs into feature TSVs, PCA/tree
+  reports, joint geometry summaries, and a conic-depletion bound report.  Its outputs are
+  exploratory invariant-discovery aids, not proof certificates.
 
 Not done:
 
@@ -71,6 +74,45 @@ terminal distance if cheaply known
 
 For partial q=25 dumps, the same report should include known/unknown counts so we do not mistake
 memo coverage for game structure.
+
+## New Proof Target: Two-Ply Conic Depletion
+
+The S4 ML/joint-summary pass surfaced a simple incidence-count law that is worth proving directly.
+For a normalized S4 root on the affine conic `r*c = 1`, the mined root-reply rows for
+`q = 9, 11, 13, 17, 19, 23, 25` all satisfy:
+
+```text
+two off-conic moves:      live_on >= max(0, q - 19)
+one off + one on-conic:   live_on >= max(0, q - 13)
+two on-conic moves:       live_on =  q - 7
+```
+
+The generated check is `rust/s4-dumps/2026-07-08/ml/conic-bound-report.txt`; it currently has
+54 geometry groups and zero failures.
+
+This is proof-shaped, not just statistical.  At the S4 root there are `q - 5` live affine-conic
+cells.  A first off-conic move can kill at most six of them: its row, its column, and at most one
+new conic point on each line through the four selected conic points.  A second off-conic move can
+kill at most eight more: row, column, four lines through the original conic points, and at most two
+conic points on the line through the first off-conic move.  An on-conic move selects one live conic
+cell and, when paired with an off-conic move, can kill at most one further conic cell on that secant.
+
+Immediate implications:
+
+- q=17 and q=19 are exactly the boundary where two off-conic moves can empty the live affine conic.
+- For q>=23, an S4 root reply cannot empty the live conic; the large-q route must use
+  positive-live-conic steering rather than a clean empty-conic base case at this layer.
+- The q=17/q=19 empty-conic repair strata should be treated as boundary/small-q layers, not as the
+  expected bulk mechanism.
+
+Lean/proof target:
+
+```text
+S4 two-ply conic depletion lemma:
+  after a legal two-move extension of a normalized S4 root,
+  live_on is bounded below by max(0, q-19), max(0, q-13), or q-7
+  according to whether the two new moves are off/off, off/on, or on/on.
+```
 
 ## Priority Mining Regions
 
