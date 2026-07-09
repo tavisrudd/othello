@@ -286,3 +286,10 @@ value, N exactly at the arc-depleted `q ∈ {11,17}`). **C42** is rescoped to th
 half: census propagation — the class-stability constant `C` as a value-free geometry quantity —
 while the anchor half of the uniform (ON) bound merges into the arc-depletion arithmetic (A5).
 See the codex queue entry for the verdict logic.
+
+C42 reported **NEGATIVE** (2026-07-09, `2026-07-09-codex-type-census-uniformity.md`): the
+value-blind stabilizer census is non-uniform even at the all-P orders (every class a distinct
+vector — 12/12 at q=13, 27/27 at q=19), and the depleted-order onP variation is scattered across
+all P-valued orbits. Both halves of the factorization are now closed; the §6 class-stability
+constant is an empirical fact with no census mechanism, and the uniform (ON) lower bound rests
+entirely on arc-depletion arithmetic (A5).
