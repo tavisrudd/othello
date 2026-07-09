@@ -403,6 +403,27 @@ that still projects onto every unused row and every unused column.
 This is a better theorem target than direct full-zone Grundy computation or a fixed density
 threshold.
 
+There is also a simple incidence proof of the row/column reservoir fact, independent of the mined
+zero-xor witness choice.  Let `S` be any legal six-cell grid position.  Because of the row/column
+rules, the six selected cells occupy six distinct rows and six distinct columns.  In any unused row
+`R`, an off-conic legal cell can be killed only by:
+
+- one of the six selected columns;
+- one of the `binom(6,2) = 15` affine lines through pairs of selected cells, each meeting `R` in at
+  most one point because no pair lies in row `R`;
+- the one root-conic cell in `R`, if it exists, because the zone excludes on-conic cells.
+
+Thus every unused row contains at least
+
+```text
+q - 6 - 15 - 1 = q - 22
+```
+
+legal off-conic cells.  The same argument applies to unused columns.  Therefore for every `q >= 23`
+and every legal six-cell position, the off-conic zone projects onto every unused row and every
+unused column.  The q=23 mined invariant `zone_rows = zone_cols = 17` is exactly the sharp boundary
+case of this lemma, since `23 - 6 = 17` unused rows/columns.
+
 ## Next Checks
 
 1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,

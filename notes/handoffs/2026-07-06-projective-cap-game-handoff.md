@@ -436,13 +436,19 @@ Recently reported:
   5,734 selected P witnesses, all within four zero-xor candidates, with `zone_v = 100..120`,
   `zone_comp = zone_other = 1`, and `zone_nk_known = 0`.  The root-only density cutoff did not
   generalize, so the plausible next theorem is a reservoir/Hall-style or pairing lemma, not a
-  direct full-zone Grundy computation or simple density threshold.
+  direct full-zone Grundy computation or simple density threshold.  The row/column support itself
+  now has a clean proof target: for any legal six-cell grid position, each unused row loses at most
+  six selected columns, fifteen pair-lines, and one root-conic cell, so it contains at least
+  `q - 22` legal off-conic cells; same for columns.  Hence full unused row/column support is
+  automatic for `q >= 23`.
 
 Good Lean side targets:
 
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
 - S4 two-ply conic-depletion incidence lemma in the normalized grid model.
+- Six-cell off-conic reservoir lemma: every unused row/column has at least `q - 22` legal
+  off-conic cells, hence full support for `q >= 23`.
 - formal one-pair descent / second-intrusion lemmas using the C31 steering data.
 
 ## Literature / Framing
