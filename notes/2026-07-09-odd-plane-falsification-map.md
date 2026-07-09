@@ -66,22 +66,24 @@ ladder generalization and the resulting trap ply-depth constraint `T(q)` are que
 | `q ≤ 7`       | no legal intruder ⇒ pure conic endgame                     | yes — Lean (IntrusionCalculus, `q=5,7`)   |
 | `q = 9`       | intruders confined, each kills the whole conic             | yes — computed (C13); Lean kernel open    |
 | `11 ≤ q ≤ 19` | unconfined; `live_on` can reach 0 (witnessed at `q=17`)   | computed P; not uniform                   |
-| `q ≥ 23`      | unconfined; conic cannot be emptied at the S4-reply layer  | open — needs positive-live-conic steering |
+| `q ≥ 23`      | unconfined; conic cannot be emptied at the S4-reply layer  | q=23 computed modulo solver; uniform proof open — needs positive-live-conic steering |
 
 The `q ≥ 23` row reflects the two-ply bound `live_on ≥ q − 19 > 0`: at the S4-reply layer the conic
 cannot be emptied for `q ≥ 23`, so a *two-ply* empty-conic argument does not extend past `q = 19`
 (deeper emptying is not excluded, and `q ≤ 19` was not itself *closed* by an empty-conic law —
 q=11/13 are certificates, q=17/19 computed; the empty-conic law is the proposed q=17-mined target).
-That is why the frontier proof must be a *maintenance* argument on a positive live conic, with two
-obligations (review
-[`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md) §2):
+That is why the frontier proof must be a positive-live `Good`-closure argument in the sense of
+`FiniteBuildGame.isP_of_replyStrategy`, not a separate "preserve plus terminate" track.  The
+obligation is:
 
-1. **Preservability** — a re-zeroing off-conic intruder always exists. The reservoir bound
-   `q − k − C(k,2) − 1` (vacuous by `k = 7` at `q = 23`) underwrites only the *availability* of a
-   legal off-conic cell, and only at `k ≤ 6`; that the available cell actually *re-zeroes* the parity
-   is mining-supported, not yet underwritten. A base fact, not a recursion.
-2. **Termination in P2's favour** — a Nim-value invariant, not an SDR and not a zone matching (the
-   matching route is dead below `q ≥ 38`; the static pairing route is the object C28 refuted).
+```text
+Good S and opponent plays legal x
+    => some legal reply y has Good (S+x+y).
+```
+
+The reservoir bound `q − k − C(k,2) − 1` (vacuous by `k = 7` at `q = 23`) underwrites only the
+*availability* of legal off-conic cells in base layers; it does not by itself prove that an
+available cell returns to `Good`.  That closure is the missing mining/proof target.
 
 ## 4. The two categories of failure
 
@@ -111,7 +113,7 @@ the char-3 regime, not here.
 | B1 | solver bug → wrong P/N on COMPUTED rows (`canon()` collide) | eliminable — C8 at `q=11/13`, C37 scaled shared-key check, certcheck; Lean rows immune |
 | B2 | a false link in the reduction chain                        | escape ⇔ root-P is now Lean-proven by C41 (`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`), and 5-arc non-degeneracy is a Lean theorem (`uniqueConicThroughFiveArc…`); the remaining watch is spec-match B6, not the reduction link |
 | B3 | `q=23` **orbit-invariance bridge** unsound                 | eliminated at prose level by Lemma I/full-PGL conic-projectivity transport; Lean formalization queued as C53 |
-| B4 | the intended route can't close it even if true             | on-conic route (B4a), termination (B4b), coupling non-decomposition (B4c, **measured by C35: confirmed** — no conic⊕zone sum at S5/S6, `g = g_conic XOR g_zone` fails on most rows even where zone Grundy is fully computable), static-pairing dead (B4d) |
+| B4 | the intended route can't close it even if true             | on-conic route (B4a), missing positive-live `Good` closure (B4b), coupling non-decomposition (B4c, **measured by C35: confirmed** — no conic⊕zone sum at S5/S6, `g = g_conic XOR g_zone` fails on most rows even where zone Grundy is fully computable), static-pairing dead (B4d) |
 | B5 | normal-play vs misère inversion / ruleset conflation       | eliminated in practice (cross-engine tests + Lean pin the ruleset)           |
 | B6 | **spec mismatch** — Lean's endpoint definitions formalize a subtly different game than intended | Lean cannot self-certify this; B5 and A1's "Lean rows immune" use Lean as the oracle, so it is circular if the spec is off. Mitigated by `q=5,7` Lean-vs-computed agreement + a raw-bitmask legality spotcheck, not eliminated |
 
@@ -131,7 +133,7 @@ is to formalize this bridge in Lean (C53) and to certify the 22 computed bucket 
   argument and queued for Lean formalization as C53; q=23 may be cited as a computed row modulo the
   ordinary solver/certificate trust chain, with C54 assigned to strengthen that certificate tier.
 - **Irreducible open core:** A3 (eventual failure). It is a *truth*-mode, distinct from — not equal
-  to — the *route*-modes B4b/B4c (termination + coupling); they share instruments, not a definition.
+  to — the *route*-modes B4b/B4c (`Good` closure + coupling); they share instruments, not a definition.
   No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
   *predicts* on it — currently no main-layer counterexample signal, but erratic, so A3 stays open. A
   uniform `Z`-bound (or a coupling-residual law from C35) would close it; the finite-type route to
@@ -142,11 +144,11 @@ is to formalize this bridge in Lean (C53) and to certify the 22 computed bucket 
   census.
 
 Net: falsity has exactly one shape (trapped size-3), the easy proof routes are provably dead, and the
-only closure is a `q`-uniform shape-elimination — concretely the preservability/termination pair plus
-the finite obstruction *lists* (C36's cross-`q` nonconstant types; the alignment test's
-depletion-flip set): the finite-type *collapse* is refuted, the localization survives, and the
-on-conic anchor must come from arc-depletion arithmetic (A5) with C42's census propagation
-carrying it to every class.
+only closure is a `q`-uniform shape-elimination — concretely a positive-live `Good`-closure lemma
+plus finite obstruction lists (C36's cross-`q` nonconstant types; the alignment test's
+depletion-flip set). The finite-type *collapse* is refuted, C42 supplies no propagation mechanism,
+the localization survives, and the on-conic anchor must come from arc-depletion arithmetic (A5) or
+another direct closure argument.
 
 ## 6. The A3 test: witness-count heuristic
 

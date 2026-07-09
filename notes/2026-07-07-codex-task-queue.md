@@ -1046,12 +1046,13 @@ review):
    the matching phrasing in
    [`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md)
    (Next-Check #1/#3, §Off-Conic Zone Probe) and the handoff's Near-Term Queue reservoir bullet.
-2. **Restate the zone plan as a conic-xor MAINTENANCE strategy, not a disjunctive sum** (review
-   §2/§3): document explicitly that an off-conic zone move is itself a conic intruder, so
-   `conic_xor ⊕ zone_value` is not the game value and "conic-xor 0" is not preserved by zone
-   play. Reframe the reservoir as the **move-availability lemma** underwriting re-steering, and
-   name the two real obligations: (a) *preservability* — a re-zeroing move always exists; (b)
-   *termination in P2's favour* — a Nim-value invariant, not an SDR. Flag that a raw
+2. **Restate the zone plan as a single `Good`-closure strategy, not a disjunctive sum** (review
+   §2/§3 plus the later steering-proof correction): document explicitly that an off-conic zone
+   move is itself a conic intruder, so `conic_xor ⊕ zone_value` is not the game value and
+   "conic-xor 0" is not preserved by zone play. Reframe the reservoir as the
+   **move-availability lemma** inside the `FiniteBuildGame.isP_of_replyStrategy` obligation:
+   exhibit `Good` such that every legal move from `S ∈ Good` has some legal reply returning to
+   `Good`. Termination is already supplied by that finite placement-game theorem. Flag that a raw
    "pairing-in-the-zone" target is the object C28 already refuted, so keep the two distinct.
 3. **Scope the "collapse to capacity-1" claim** (review §5): add the AG(2,q) blocking-set
    obstruction (`min blocking set = 2q−1` > cap size `≤ q+1`, so a whole-board collapse is
@@ -1064,14 +1065,20 @@ review):
    fall out uniformly; the Möbius/hyperbola normal form (≤1 conic point per row) as an explicit
    hypothesis; and drop the "sharp boundary" phrasing (it is the loose bound's vacuity threshold,
    not a real support failure).
+5. **Test association-scheme response counts before generic reservoir bounds:** Hollmann--Xiang's
+   `PGL(2,q)` conic-stabilizer association schemes give cross-ratio orbitals and intersection
+   numbers.  Use the failed q=23 closure obligations as the first test: if candidate reply
+   relations have positive exact intersection counts, this is a plausible proof-directed
+   alternative to coarse `q − O(1)` row/column availability.
 
 Then plan and (where cheap and reversible) take the corrective mining/proof actions the redirect
-implies — e.g. whatever machine check most directly pressures the *preservability* obligation
-(does a legal off-conic intruder with the required parity always exist from a q=23 zero-xor
-state, across the full bucket sweep, not just the sampled roots?), or a clean paper/Lean
-statement of the maintenance invariant. Size any q=25/q≥23 solve first; no new campaigns without
-a gate. If a correction turns out to be wrong on closer reading, say so verbatim in the report —
-a refutation of one of Fable's six items is a full-value deliverable.
+implies — e.g. whatever machine check most directly pressures the all-move `Good` closure
+obligation (from every candidate-good q=23 zero-xor state, does each legal opponent move have a
+legal reply returning to the candidate `Good`, across the full bucket sweep, not just the sampled
+roots?), an association-scheme classifier for the failed q=23 obligations, or a clean paper/Lean
+statement of that closure invariant. Size any q=25/q≥23 solve first; no new campaigns without a
+gate. If a correction turns out to be wrong on closer reading, say so verbatim in the report — a
+refutation of one of Fable's six items is a full-value deliverable.
 
 Report file: `notes/2026-07-09-codex-line-capacity-followup.md`.
 
@@ -1312,10 +1319,11 @@ Report file: append a `## C40 oracle-driven lines` section to
 
 Status: corrections applied to the handoff, `2026-07-09-live-conic-bestreply-mining.md`, and
 `2026-07-09-live-conic-steering-plan.md`.  The reservoir/Hall/pairing target is killed as a proof
-route below q=38; zero-xor steering is now framed as a conic-xor maintenance strategy with
-preservability and termination obligations; the reservoir is a base-layer move-availability lemma;
-and whole-board capacity-1 collapse is scoped out by the AG(2,q) blocking-set obstruction.  Existing
-q=23 all-bucket `s4xormine` logs were re-parsed only as a cheap first-ply preservability check
+route below q=38; zero-xor steering is now framed as a candidate component of a single
+`FiniteBuildGame.isP_of_replyStrategy` `Good`-closure invariant; the reservoir is a base-layer
+move-availability lemma; and whole-board capacity-1 collapse is scoped out by the AG(2,q)
+blocking-set obstruction.  Existing
+q=23 all-bucket `s4xormine` logs were re-parsed only as a cheap first-ply closure-availability check
 (5734/5734 hits, selected `zone_rows = zone_cols = 17`, no new solves).
 
 ## C41. Lean-certify the trapped ⇒ N converse (close the falsification equivalence) [REPORTED 2026-07-09]
@@ -1511,14 +1519,16 @@ for `k ≥ 3`, read Tranchida, *Triples of involutions in PGL(2,q) and their inc
 ([arXiv:2411.10299](https://arxiv.org/abs/2411.10299)).
 
 Context: D3 states the *reduction* — conic-restricted play after intrusions is Node-Kayles on a
-union of Möbius involution matchings. The raw finite-geometry classification of those matching
-unions is **not new enough to carry C45 as originally written**: Coolsaet-Sticker already identify
-off-conic points with trace-zero involutions in `PGL(2,q)`, introduce the same conic graph on
-orbital indices, analyze unions of two supplementary-point/involution matchings through cyclic
-normal forms, and classify several large-conical-subset small-excess arcs. A publishable C45 must
-therefore be the game layer that is absent from that literature: Grundy consequences of the
-spectra, dynamic legality/reply closure, and compatibility constraints between successive
-involution graphs produced by an actual play history.
+union of Möbius involution matchings. Only the two-intruder layer is forced to be a
+path/cycle/isolate graph; with `k` intruders the maximum degree is `k`, so Dawson/path-cycle XOR is
+not the recursive invariant. The raw finite-geometry classification of those matching unions is
+**not new enough to carry C45 as originally written**: Coolsaet-Sticker already identify off-conic
+points with trace-zero involutions in `PGL(2,q)`, introduce the same conic graph on orbital indices,
+analyze unions of two supplementary-point/involution matchings through cyclic normal forms, and
+classify several large-conical-subset small-excess arcs. A publishable C45 must therefore be the
+game layer that is absent from that literature: Grundy consequences of the two-intruder spectra,
+dynamic legality/reply closure for higher-degree matching-union graphs, and compatibility
+constraints between successive involution graphs produced by an actual play history.
 
 1. **Literature extraction first:** write the precise overlap table: Coolsaet-Sticker result /
    notation / what our `nk-involution-residual` note had rediscovered / what remains game-specific.

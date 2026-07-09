@@ -9,13 +9,21 @@ finished, submittable artifact** × its value — not interestingness alone.
 
 This overlay records post-agenda gate status without rewriting Fable's ranked memo.
 
+**Operational-frontier warning (2026-07-09):** this agenda is now historical.  It remains useful for
+portfolio priorities, but do not use it as the current frontier.  Later notes record that q=23 is a
+computed row modulo the ordinary solver/certificate trust chain, C42's type-propagation route
+failed, and the general binary projective-space item is no longer open in the way stated below.
+Use `2026-07-09-odd-plane-falsification-map.md` and `2026-07-07-codex-task-queue.md` for current
+operational work.
+
 - **Label warning:** Track-C labels below are agenda-local. They are not the same namespace as
   `2026-07-07-codex-task-queue.md` (`C1..C11`).
-- **q=23 escape table is C3-unblocked but compute-gated.** Codex queue C8 is reported
+- **Historical/stale: q=23 escape table was C3-unblocked but compute-gated.** Codex queue C8 is reported
   (exact-canon check passed), and the C3 q=17/q=19 private-memo runs passed their gate; see
   `2026-07-07-codex-esc-gate-report.md` plus the persisted full logs
   `2026-07-07-escape-q17-full.log` and `2026-07-07-escape-q19-full.log`. Do not launch q=23 until
-  the box policy/user timing allows a heavy run.
+  the box policy/user timing allows a heavy run.  Superseded 2026-07-09: q=23 is now treated as a
+  computed row modulo solver/certificate trust, with certificate strengthening tracked separately.
 - **GF(49) hygiene can start.** Codex queue C6 is no longer blocked by a live q=19 process; the
   old-binary run is auditable through the persisted logs above. Keep any GF(49) verification runs
   light until the sum-free z5 run frees the box.
@@ -79,19 +87,21 @@ This overlay records post-agenda gate status without rewriting Fable's ranked me
   — breaks odd→1, strengthening the paper). UNBLOCKED; G(18) is a judgment call (see C3). OEIS A344227 extension
   goes with it (user submits).
 - **P3. Projective cap partial-results paper**: q-even theorem, frame reduction, total lemma,
-  conic localization, dead-end map, ladder to q=19, PSPACE motivation via nofil. Assemble AFTER
-  C1 (q=23 data) and the F3 audit verdict. This is publishable WITHOUT the odd-q theorem —
-  do not hold it hostage to the open kernel.
+  conic localization, dead-end map, computed ladder, PSPACE motivation via nofil. Superseded
+  2026-07-09: q=23 is now part of the computed-row status modulo solver/certificate trust; use the
+  current falsification map rather than waiting on agenda-local C1. This is publishable WITHOUT the
+  odd-q theorem — do not hold it hostage to the open kernel.
 - **P0 (immediate, user):** OEIS sum-free submission — draft is ready, nofil reference added.
 
 ### Track C: compute (Opus; box gates everything on the G(17) run finishing)
 
-- **C1. q=23 (ON)/escape table** via the `esc` subtree mode (spec in the day plan; validated at
-  q=17/19). THE falsification frontier: if any class hits escape=0 the conjecture is false and
-  the program pivots to characterizing the counterexample. Extend to q=25, 27 as memory allows.
-- **C2. STS(63) = `F₂⁶` sum-free = nofil on PG(5,2)** — the smallest open case of the
-  2-transitive-STS conjecture (Part II, #2). Needs the canonical-solver treatment (naive memo
-  blew 1.3 GB); the grid-cap arena pattern ports. One clean new data point with a paper hook.
+- **C1. q=23 (ON)/escape table [STALE]** was originally the falsification frontier via the `esc`
+  subtree mode. Superseded 2026-07-09: q=23 is now a computed row modulo solver/certificate trust;
+  do not use this item to launch new q=23 work. The current per-`q` watch is q=25/square orders,
+  and the proof-side frontier is positive-live `Good` closure.
+- **C2. STS(63) = `F₂⁶` sum-free = nofil on PG(5,2) [STALE]** was originally framed as the
+  smallest open 2-transitive-STS projective-binary case. Superseded 2026-07-09: general binary
+  projective spaces are no longer an operational open frontier in this program.
 - **C3. G(18) queens nimber**: expensive (weeks-scale risk). Decide with the user after G(17)
   lands; P2 does not require it.
 - **C4. Arc-census cross-check**: with O1's tables, verify our odd-maximal-cap counts against
@@ -139,12 +149,12 @@ few months of part-time effort".
    small orders (C5 tooling), hunt the mirror, prove the family theorem. This would give nofil
    its second/third infinite determined families and attack their published mod-6 question on
    the structured side. **Odds: ~60%. Best new-work bet outside the repo's own program.**
-2. **Complete "nofil on 2-transitive STS".** The 2-transitive STS are exactly AG(n,3) and
-   PG(n,2) (classical classification). Affine column: done (our theorem). Projective column:
-   P for m ≤ 4 (ours), open beyond; pairing is genuinely obstructed (char-2 involutions have
-   huge fixed spaces). C2 closes m=5 computationally (~90%); the all-m theorem is a real open
-   problem with a beautiful endpoint statement. **Odds on the theorem: ~25–30%; on the m=5
-   data point: ~90%.**
+2. **Complete "nofil on 2-transitive STS" [STALE as an operational target].** The 2-transitive STS
+   are exactly AG(n,3) and PG(n,2) (classical classification). Affine column: done (our theorem).
+   The paragraph below originally treated the projective binary column as open beyond small `m`.
+   Superseded 2026-07-09: general binary projective spaces are no longer an operational open
+   frontier in the current program; keep this item only as historical evidence of why the
+   2-transitive-STS framing mattered.
 3. **A344227 completion (queens nimbers through 17/18)** — already ours; compute-gated.
    **Odds: G(17) DONE (= 2, verified 2026-07-07), G(18) ~50% on this box.**
 4. **The "no-3-collinear permutation" objects from our own program.** Our odd maximal grid caps
@@ -498,41 +508,15 @@ instance; the methodology section seeds item 9 (JOSS) and item 14's case-study c
 
 ### E4. C1 — the q=23 escape table (rank #4)
 
-**Why #4 despite being "just compute":** it is the only item on the list with a live
-possibility of CHANGING WHAT IS TRUE for the whole program, in either direction, and the
-2026-07-06 correction made that possibility real. The old reading ("min-escape relaxes as q
-grows") died: min-escape is erratic — 1, 7, 13, 13, 46, then **5 at q=17 with bad = 152 of
-157**. The crux is a near-cancellation, not a comfortable margin. q=23 is the next
-uncomputed rung where the cancellation could complete. Every session spent on route-(B)
-invariants or Lean certificates is working ON a conjecture that q=23 could simply refute —
-which is why the falsification data outranks all of Track K at current odds.
+**STALE 2026-07-09:** this section predates the later q=23 computed-row status and should not be
+used as the operational frontier.  The current falsification watch has moved to q=25/square orders
+and to the positive-live `Good`-closure proof route.
 
-**Both outcomes are wins, asymmetrically:**
-- *escape = 0 at some class:* PG(2,23) is N — the conjecture is FALSE, the program pivots to
-  characterizing the counterexample, and that paper (a first-player win in a projective cap
-  game, against the parity heuristic and the q ≤ 19 data) is the best publication the program
-  could produce. Everything else on the list re-ranks the same day.
-- *min-escape ≥ 1:* the ladder extends, the erratic-margin data sharpens (does the q=17 crash
-  recur? deepen?), P3 gains its strongest table, and the odd-complete-arc-abundance coupling
-  gets a real test (O1's census gives the arc counts to correlate against).
-
-**Execution state (all gates in place):** the `esc` private-memo mode exists precisely for
-this (the q=19 global-arena wall), C3 is finishing its q=17/q=19 exact-match validation gate
-now, and the mode's class-index filter makes the campaign resumable class-by-class under the
-box's memory ceiling. Remaining unknowns: per-class peak memo at q=23 (C3's report gives the
-q=19 scaling datum; extrapolate before committing the box) and wall-clock (campaign-sized,
-fine to spread across days as the z5 run allows).
-
-**Kill risks:** (i) *memory* — a q=23 class blows the `--cap`; mitigation is built in (abort
-+ report + resume), and a handful of walled classes still yields a partial table with the
-min over solved classes as a conditional bound — report it as PARTIAL, never as the verdict.
-(ii) *Silent wrongness* — the F3 audit + C8 exact-canon check exist for exactly this run;
-run C8's q=17 witness recheck BEFORE trusting a q=23 surprise in either direction. A q=23
-escape=0 claim goes through independent re-verification of that single class (fresh code
-path, exact canon) before anyone says "counterexample."
-
-**Unlocks:** P3's data spine; the (ON)/route-(B) go/no-go re-rank; item 11's census shares
-the same runs.
+**Historical reason it ranked highly:** before the later q=23 computation, the erratic q=17/q=19
+escape margins made q=23 the next decisive finite check. That check is no longer the operating
+frontier. The surviving value of this section is methodological: finite checks need explicit
+solver/certificate trust boundaries, resumable class filters, and independent re-verification for
+any surprising row. Reuse those standards for q=25 and later square-order watches.
 
 ### E5. Item 13 — the verified small-geometry database (rank #5)
 

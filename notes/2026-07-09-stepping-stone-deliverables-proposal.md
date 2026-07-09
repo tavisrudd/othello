@@ -73,11 +73,16 @@ projective-family outcome theorems in the impartial shared game, via standard in
 ingredients. Venue: INTEGERS (the CGT home), or *Electronic J. Combin.* / *Discrete Math.*
 
 **Framing hook & connections.**
-- **Segre's theorem is load-bearing and beautiful to cite.** The whole odd-plane reduction leans
-  on: a 5-arc determines a unique conic, and for odd `q` every oval *is* a conic (Segre 1955).
-  Opening with "our proof mechanism is powered by Segre's theorem" instantly makes the paper
-  legible to the finite-geometry audience — it says the game inherits the deepest classical fact
-  about odd-order planes.
+- **Conic uniqueness, not Segre, is the localization step.** The whole odd-plane reduction leans
+  on the elementary finite-geometry fact that a five-arc determines a unique conic.  Segre's oval
+  theorem is adjacent background for odd-order planes, but it is not what performs this
+  localization step.  Do not sell the proof mechanism as "powered by Segre" unless a later
+  argument truly uses the oval-is-conic theorem.
+- **Legal complexes / strong placement games are the right CGT frame.** The legal positions form
+  an impartial strong placement game legal complex; residual positions should be described using
+  the link language from Faridi--Huntemann--Nowakowski, *Simplicial Complexes are Game Complexes*
+  (EJC 2019), and Huntemann, *Game Values of Strong Placement Games* (arXiv:1908.10182). This is
+  more precise than treating the game only as generic hypergraph avoidance.
 - **Cap-set cousin** (meta-hook 1): position `AG(n,3)` P as "the game whose board is the cap-set
   problem's board." That single sentence buys the additive-combinatorics reader.
 - **The even/odd split mirrors a genuine geometric dichotomy.** `PG(2,q)` even is P by a
@@ -115,35 +120,39 @@ games").
 ### D3 — The conic-localization reduction theorem (~65%)
 
 **Claim.** After frame reduction the odd-plane game becomes a residual `q×q` grid game; localizing
-to the unique conic through the residual 5-arc, conic-restricted play after intrusions is
-**Node-Kayles on a union of involution matchings** — hence a disjoint union of paths, cycles, and
-isolated vertices (every vertex has degree ≤ 2). Supporting exact fact: every size-3 residual
-position has exactly `q² − 9q + 21` legal size-4 extensions.
+to the unique conic through the residual 5-arc, each off-conic intruder contributes one Möbius
+involution matching on the live conic, and conic-restricted play is Node-Kayles on the resulting
+union graph.  At the first S4 response layer there are at most two such intruders, so that layer is
+a disjoint union of paths, cycles, and isolated vertices.  Deeper maintenance layers have `k`
+intruders and maximum degree `k`; the path/cycle description is not the recursive invariant.
+Supporting exact fact: every size-3 residual position has exactly `q² − 9q + 21` legal size-4
+extensions.
 
 **Publishable unit.** A structural-reduction paper, *independent of the final outcome*. This is the
 highest-value "on the way" unit because it is the scaffold the uniform proof would stand on, and it
 reframes the conjecture from mystery to *tractable*.
 
 **Framing hook & connections.**
-- **The endgame is Dawson's chess.** Node-Kayles on a path is exactly Dawson's chess (octal game
-  `0.137`), whose nim-sequence is the classical eventually-periodic A002187 (Guy). So the sentence
-  writes itself: *"the odd-plane cap endgame, localized to the conic, is a disjoint sum of Dawson's
-  chess (paths) and Node-Kayles cycles."* That plants a 70-year-old octal game inside a
-  finite-geometry problem — a genuinely surprising bridge and the paper's best single line. The
-  "even cycles are Grundy-0, the bulk cancels" phenomenon is then the standard octal-game
-  cancellation, not an ad hoc observation.
+- **The first response layer contains Dawson's chess.** Node-Kayles on a path is exactly Dawson's
+  chess (octal game `0.137`), whose nim-sequence is the classical eventually-periodic A002187
+  (Guy). Thus the two-intruder layer of the odd-plane cap game, localized to the conic, is a
+  disjoint sum of Dawson paths and Node-Kayles cycles.  That is a useful structural foothold and
+  explains the current zero-XOR data, but once a third intruder is present the graph can have
+  degree three and Dawson/path-cycle XOR no longer describes the recursive state.
 - **The involutions are Möbius involutions of `P¹(F_q)`.** Each off-conic intruder induces an
   order-2 element of `PGL(2,q)` acting on the conic parameter line. This ties the game's dynamics
   to the sharply-3-transitive action of `PGL(2,q)` and cross-ratio invariants — the
   order-of-`σσ'` census (C29's `3 | q±1` split-vs-elliptic dichotomy) is literally the
   representation-theoretic content surfacing in the game values. Good hook for the group-theory /
-  finite-geometry reader.
+  finite-geometry reader.  Hollmann--Xiang's conic-stabilizer association schemes are relevant
+  published machinery to test for the orbital/cross-ratio relations and intersection numbers.
 - **"Localization" is a familiar move** in finite geometry (reduce a plane problem to a
   conic/quadric); framing our reduction as a *game-theoretic* localization makes it feel native to
   that field.
 - **Node-Kayles is PSPACE-complete in general** (Schaefer 1978) — so exhibiting a natural family
-  where it collapses to *tractable, classically-solved* graph classes (paths/cycles) is itself the
-  interesting tension: the geometry buys you structure the general game does not have.
+  whose first response layer collapses to tractable, classically-solved graph classes
+  (paths/cycles), while deeper layers become bounded-degree unions of Möbius matchings, is the
+  interesting tension: the geometry buys structure, but not a permanent path/cycle reduction.
 
 ### D4 — Machine-verified per-`q` ladder + Lean formalization (~75%)
 
@@ -248,10 +257,10 @@ D6 (queens nimbers) ──► line-capacity umbrella section of D1  (capacity-1 
 
 - Do **not** claim a new general class of impartial games. Claim a structured finite-incidence
   subfamily of known hypergraph building-avoidance / legal-complex frameworks.
-- Nofil, Node-Kayles, pairing strategies, Möbius/elliptic involutions, Segre's theorem, and the
-  cap-set objects are all prior art — the new content is the *outcome theorems* for these infinite
-  geometric families and the slack-1 mirror obstruction that ties the capacity-1 (queens) and
-  capacity-2 (cap) mechanisms together.
+- Nofil, impartial strong placement games and legal complexes, Node-Kayles, pairing strategies,
+  Möbius/elliptic involutions, Segre's theorem, and the cap-set objects are all prior art — the
+  new content is the *outcome theorems* for these infinite geometric families and the slack-1
+  mirror obstruction that ties the capacity-1 (queens) and capacity-2 (cap) mechanisms together.
 - Colored finite-geometry tic-tac-toe / avoidance (Clark–Mancini–Van Hook) is adjacent but a
   different (partizan) game — cite as adjacent, never as covering our impartial results.
 - These are **normal-play** results. The misère versions (misère quotients, Plambeck–Siegel) are a

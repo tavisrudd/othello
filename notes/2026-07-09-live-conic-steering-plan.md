@@ -48,35 +48,52 @@ An off-conic intruder induces an involution, or partial matching, on the conic
 parameter line.  After one or more intrusions, conic-restricted play resembles
 Node-Kayles on a union of these matchings.
 
+Important scope correction: a union of matchings is a path/cycle/isolate graph
+only at the two-intruder layer.  With `k` intruders the conic graph has maximum
+degree `k`.  The first S4 response layer has at most two intruders, so the
+current zero-xor first-response work may use the path/cycle description; deeper
+maintenance layers already include degree-three and degree-four graphs.
+
 The expected large-q structure is:
 
 ```text
-even conic matching/cycle bulk
+bounded-degree conic matching-union bulk
 + bounded defect family
 + coupled off-conic intruder reservoir
 ```
 
-Even-cycle bulk should cancel.  The value should live in the bounded defect
-skeleton and in the way off-conic intruder moves change the live conic graph.
-This is the positive-live replacement for the q=17/q=19 empty-conic repair
-picture.
+At the first two-intruder layer, Dawson path values and cycle values are useful
+features.  They cannot be the recursive invariant.  The recursive target has to
+be a `Good` closure predicate over bounded-degree matching-union signatures,
+defects, and legal reply availability.  This is the positive-live replacement
+for the q=17/q=19 empty-conic repair picture.
 
 Important correction: the live conic and off-conic zone are not a disjunctive
 sum.  A legal off-conic zone move is itself another conic intruder, so it adds
 matching edges to the live-conic graph and can delete live conic vertices.  The
-target is therefore a maintenance invariant:
+proof target is therefore not a separate "preserve the invariant plus prove
+termination" track.  The reusable Lean theorem already has the right shape:
+`FiniteBuildGame.isP_of_replyStrategy` in `lean/CapGame/BuildGame.lean`.
 
 ```text
-after P2 replies, live-conic Node-Kayles xor is 0
+Good S and opponent plays legal x
+    => some legal reply y has Good (S + x + y)
 ```
 
-with two obligations:
+Termination is supplied by the finite placement-game recursion in that theorem.
+The missing lemma is the recursive controllable-predecessor closure of a
+well-chosen `Good` predicate under all move types.
 
-- **preservability:** after each coupled opponent move, some legal reply restores the xor;
-- **termination:** maintaining the xor leaves P2, not P1, with the final move.
+So "live-conic Node-Kayles xor is 0" should be treated as one possible component
+of `Good`, not as a standalone game decomposition.  A useful `Good` predicate
+will likely combine:
 
-The row/column reservoir is a move-availability lemma for preservability.  It
-is not a Hall/matching certificate for an independent zone game.
+- live conic residual signature/orbit data;
+- off-conic intruder and reservoir signature/orbit data;
+- a bounded defect skeleton.
+
+The row/column reservoir is a move-availability lemma inside the closure proof.
+It is not a Hall/matching certificate for an independent zone game.
 
 Candidate theorem shape:
 
@@ -90,6 +107,51 @@ grandchild residual is:
 ```
 
 ## Tooling To Add
+
+### CEGIS Invariant Synthesis
+
+Use the exact tables proof-directionally: search for a small group-invariant
+union of signature/orbit cells that can serve as `Good`.
+
+Loop:
+
+```text
+seed candidate Good from P-valued steering followers
+check the controllable-predecessor closure:
+  for every S in Good
+  for every legal opponent move x of every move type
+  find at least one legal reply y with S+x+y in Good
+if closure fails, emit the counterexample (S, x) and the best rejected replies
+refine the signature/orbit partition or Good cells
+```
+
+Use q=17 and q=19 as counterexample-rich refinement columns, then freeze the
+candidate and validate it at q=23.  Remoteness, suspense, PCA/tree thresholds,
+and static classifiers are diagnostics only; they should not displace the
+closure check as the main search objective.
+
+### Association-Scheme Response Counts
+
+Before investing further in generic reservoir lower bounds such as `q - 22`,
+test the conic-stabilizer association-scheme route on the q=23 closure failures.
+Hollmann--Xiang, *Association schemes from the action of PGL(2,q) fixing a
+nonsingular conic in PG(2,q)* (arXiv:math/0503573), develop the relevant
+PGL(2,q) orbitals/coherent configuration and describe its relations by
+cross-ratio.
+
+For each failed closure obligation `(S, x)` from the q=23 one-pair probe:
+
+```text
+encode selected intruders and candidate replies as conic-stabilizer orbital data
+record the cross-ratio relation type(s) between x, y, and the live conic data
+compute observed counts of legal y with S+x+y in candidate Good
+compare with the association-scheme intersection numbers for those relations
+```
+
+If the relation counts explain the q=23 failures and successes, they become a
+plausible exact-count supplement to coarse row/column reservoir counting: a
+future proof might show that a response relation has positive intersection
+number, not merely that some row contains `q - O(1)` legal cells.
 
 ### Best-Reply Rows
 
@@ -122,14 +184,18 @@ Add conic-residual graph features for the live conic parameters:
 component count
 component sizes
 path/cycle/isolated counts when identifiable
+degree histogram and small-component canonical type
 odd component count
 maximum component size
 small-component Grundy xor when cheap
 number of intruder-generated matchings used
 ```
 
-These rows are the bridge from mined correlation to a possible Node-Kayles
-lemma.
+For rows with at most two intruders, path/cycle fields have their literal
+Dawson/cycle meaning.  For deeper rows, keep general graph features and exact
+small-component Node-Kayles values; do not compress the state to path/cycle XOR.
+These rows are the bridge from mined correlation to a possible bounded-degree
+matching-union lemma.
 
 ### Targeted Witness Extractor
 
@@ -141,12 +207,21 @@ for each root bucket
   for each legal first move x
     search replies y until a P-valued witness is found
     log the best conic/zone/defect features seen
+    log whether the follower lands in the current candidate Good cell
+    if no Good reply exists, emit the closure counterexample
 ```
 
 This should use existing exact memo dumps when available and mark unknowns
 explicitly when a capped dump lacks the needed key.
 
 ## q >= 23 Plan
+
+### q = 17 and q = 19
+
+Use q=17 and q=19 as exact CEGIS refinement columns, not as the expected
+large-q mechanism.  Their boundary empty-conic repairs are useful because they
+produce sharp counterexamples to over-small `Good` candidates.  Keep a candidate
+only if it survives all legal move types in these exact tables.
 
 ### q = 23
 
@@ -159,8 +234,10 @@ Priority:
   extraction says the bucket is structurally needed;
 - classify first moves by `on/ext/int`, known value, and live-conic residual
   graph after the best P reply;
-- look for the geometry that makes xor re-steering preservable rather than a
-  coordinate rule or a static zone matching.
+- validate the frozen q=17/q=19 candidate `Good` by the same all-move closure
+  check;
+- look for the geometry that makes controllable-predecessor closure true rather
+  than a coordinate rule or a static zone matching.
 
 ### q = 25
 
@@ -194,10 +271,15 @@ be different for q>=23.
 ## What Not To Do
 
 - Do not keep trying to make `live_on = 0` the S4 reply mechanism for q>=23.
+- Do not maintain a separate termination track for steering once the target is
+  `FiniteBuildGame.isP_of_replyStrategy`; termination is already part of that
+  finite-game theorem.
 - Do not restart broad q=25 full-bucket sweeps before targeted witness mining
   says which bucket family matters.
 - Do not treat PCA/tree thresholds as proof candidates.  Use them to propose
   geometric invariants, then test those invariants directly.
+- Do not prioritize remoteness or static classifier mining over the direct
+  controllable-predecessor closure check.
 - Do not treat q=17/q=19 empty-conic repairs as the expected large-q bulk
   mechanism; they are boundary cases at this layer.
 
@@ -210,12 +292,22 @@ be different for q>=23.
    [`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md).
 4. Add targeted zero-xor candidate solving.  Done: the full q=23 S4 bucket layer has a
    zero-conic-xor P reply for every first move.
-5. Run the same rows against q=19 to keep a solved comparison column.
-6. Use q=25 partial dumps only for coverage-aware shape comparison.
-7. Semi-formalize the S4 two-ply depletion lemma in Lean or paper notes.
-8. Generalize the depletion count to more intruder layers if the residual graph
+5. Build candidate `Good` cells as a small group-invariant union of exact-table
+   signature/orbit cells, using q=17 and q=19 for counterexamples.
+6. Add a CEGIS closure checker: given candidate `Good`, enumerate every legal
+   opponent move type and search for a legal reply whose follower is still in
+   `Good`; emit `(S, x)` counterexamples and rejected-reply summaries.
+7. Add an association-scheme counting probe for the q=23 failed closure
+   obligations: classify candidate replies by PGL(2,q) conic-stabilizer
+   orbitals/cross-ratio relations and compare observed survivor counts with the
+   Hollmann--Xiang intersection-number predictions.
+8. Freeze the smallest q=17/q=19 survivor and validate it unchanged on the exact
+   q=23 dumps.
+9. Use q=25 partial dumps only for coverage-aware shape comparison.
+10. Semi-formalize the S4 two-ply depletion lemma in Lean or paper notes.
+11. Generalize the depletion count to more intruder layers if the residual graph
    miner shows a stable bounded-defect family.
-9. One-pair q=23 maintenance probe: done for bucket representative `1,3,4,9`.  All 259 first
+12. One-pair q=23 maintenance probe: done for bucket representative `1,3,4,9`.  All 259 first
    moves have an existentially chosen zero-xor P follower with complete zero-xor P replies to its
    off-conic zone.  The naive first-P follower rule is false, and cross-bucket coverage plus
-   termination remain open.  See `2026-07-09-live-conic-bestreply-mining.md`.
+   all-move `Good` closure remain open.  See `2026-07-09-live-conic-bestreply-mining.md`.

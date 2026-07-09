@@ -257,9 +257,11 @@ This pass supports a sharper q>=23 proof target:
 
 ```text
 positive-live S4 reply
--> live conic graph is a union of paths, cycles, and isolates
--> choose a reply with live-conic Node-Kayles xor 0
--> maintain conic-xor zero through coupled off-conic intruder play.
+-> at the first response layer, the live conic graph has at most two intruder
+   matchings, hence paths/cycles/isolates
+-> choose a first reply with live-conic Node-Kayles xor 0
+-> search for a recursive Good predicate over later bounded-degree
+   matching-union graphs, not over Dawson/path-cycle XOR alone.
 ```
 
 This is a maintenance target, not a disjunctive-sum decomposition.  An off-conic zone move is
@@ -267,8 +269,10 @@ itself a conic intruder: it adds another partial matching to the live-conic grap
 vertices through its chords.  Therefore there is no game split of the form
 `conic_xor xor zone_value`, and `conic_xor = 0` is not an invariant unless P2 can keep re-zeroing
 it after P1's coupled moves.  The observed component-size spectra are varied already at q=23, so
-the next theorem should use general path/cycle Node-Kayles structure plus a re-steering rule rather
-than enumerate a short list of graph shapes.
+the next theorem should use all-move closure of a `Good` predicate over matching-union signatures
+rather than enumerate a short list of graph shapes.  Path/cycle/Dawson features are valid for the
+two-intruder first-response layer; after further intruders, degree three and degree four conic
+graphs already occur.
 
 ## Off-Conic Zone Probe
 
@@ -413,6 +417,18 @@ This is a better theorem target than direct full-zone Grundy computation or a fi
 threshold, but it is still only a base-layer availability statement.  It should not be read as
 evidence for a zone matching theorem.
 
+There is a plausible sharper route beyond this coarse reservoir layer.  The conic stabilizer acts
+as `PGL(2,q)`, and Hollmann--Xiang's association schemes for the action fixing a nonsingular conic
+describe the relevant orbitals by cross-ratio.  The test is whether candidate replies can be
+classified by conic-stabilizer orbital relation so that intersection numbers count how many replies
+land back in the candidate `Good` relation.
+
+The best first test set is not a generic row sample but the q=23 failed closure data below: the
+2,455 failed zero-xor P followers and the 8,098 no-hit maintenance obligations are exactly the
+counterexamples a useful response-relation count should explain.  If the association-scheme counts
+separate the accepted followers from these failures, they may become a proof candidate; if not, the
+generic `q - 22` reservoir bound remains only a weak base-layer availability lemma.
+
 There is also a simple incidence proof of the row/column reservoir fact, independent of the mined
 zero-xor witness choice.  In general, let `S` be any legal `k`-cell grid position in the normalized
 residual model, and let `R` be an unused row.  A candidate off-conic cell in `R` can be killed only
@@ -451,7 +467,9 @@ bound, not evidence that support fails below q=23.
 
 The follow-up probe extends `s4xormine` by one coupled off-conic move/reply pair.  It uses exact
 whole-position P/N solves for candidate replies and exact Node-Kayles xor for the live-conic graph.
-It does not identify that graph xor with the true game nimber.
+It does not identify that graph xor with the true game nimber.  After this extra move/reply pair,
+the live-conic graph may have three or four intruder matchings, so any graph xor here is for the
+general bounded-degree conic graph, not Dawson/path-cycle XOR.
 
 The naive selection rule fails immediately.  For bucket representative `1,3,4,9` and first move
 `x=(0,0)`, the first zero-xor P follower is `y=(7,21)`.  Three of its 108 legal off-conic moves
@@ -463,8 +481,8 @@ z=(15,16): 22 candidates, 0 P
 z=(16,11): 29 candidates, 0 P
 ```
 
-Thus `P-valued + conic xor 0` does not automatically imply preservability.  Preservability must be
-part of P2's witness selection.
+Thus `P-valued + conic xor 0` does not automatically imply `Good` closure.  Closure under all
+legal next moves must be part of P2's witness selection.
 
 The strategy-level search continues past such followers.  For the same `x`, the fourth P-valued
 zero-xor follower tested, `y=(17,10)`, has a P-valued zero-xor reply for all 102 legal off-conic
@@ -502,10 +520,16 @@ chunk at `rust/s4-dumps/2026-07-09/xormine-q23-maint-required-summary-idx00-root
 
 ## Next Checks
 
-1. Mine preservability of the maintenance invariant: after a q=23 zero-xor witness and one further
-   legal off-conic move, test whether the bucket-0 existential selector extends to other PGL
-   buckets; do not use the refuted first-P-witness rule.
-2. Track zone geometry as move availability for re-steering: row/column support, line-family
+1. Mine all-move `Good` closure: after a q=23 zero-xor witness and one further legal off-conic
+   move, test whether the bucket-0 existential selector extends to other PGL buckets; do not use
+   the refuted first-P-witness rule, and do not assume Dawson/path-cycle XOR remains a recursive
+   invariant.
+2. Add an association-scheme response-count probe on the failed q=23 closure cases: classify
+   `(S, x, y)` by conic-stabilizer orbitals/cross-ratio relations and compare observed legal
+   `Good` replies with Hollmann--Xiang intersection numbers before investing in more generic
+   `q - 22` reservoir bounds.
+3. Track zone geometry as move availability for re-steering: row/column support, line-family
    support, and stabilizers, without treating it as a decoupled zone game.
-3. Prove the conic matching-union graph lemma cleanly in paper/Lean terms.
-4. For q=25, build targeted witness dumps rather than broad partial roots.
+4. Prove the conic matching-union graph lemma cleanly in paper/Lean terms, with the
+   path/cycle/isolate corollary explicitly restricted to at most two intruders.
+5. For q=25, build targeted witness dumps rather than broad partial roots.

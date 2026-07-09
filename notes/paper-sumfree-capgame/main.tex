@@ -87,7 +87,10 @@ lemma directed at the open projective analogue.
 An impartial \emph{achievement game} on a hypergraph is played by two players who alternately
 choose previously unchosen vertices; a vertex is a legal move only while the set of chosen
 vertices, together with the new vertex, remains free of any hyperedge. Under normal play the
-last player able to move wins. Huggan, Huntemann, and Stevens~\cite{huggan2022nofil} study this
+last player able to move wins. Equivalently, the legal positions form the legal complex of an
+impartial strong placement game, and residual positions are links in that
+complex~\cite{faridi2019gamecomplexes,huntemann2019strongplacement}. Huggan, Huntemann, and
+Stevens~\cite{huggan2022nofil} study this
 game on the block hypergraph of a Steiner triple system under the name \emph{Nofil} (``Next One
 to FIll is the Loser'': a move that would complete a block of already-chosen points is illegal).
 They show, among other things, that deciding the outcome of Nofil positions on Steiner triple
@@ -252,13 +255,13 @@ mirror for $\AG(2,3),\AG(2,5),\AG(2,7),\AG(3,3)$ and the translation mirror for 
 match: $\STS(7)$ (the Fano plane $=\PG(2,2)$) has nim-value $0$, agreeing with the $\mathbb{F}_2$
 sum-free result, and the unique $\STS(9)=\AG(2,3)$ has nim-value $0$, agreeing with the affine
 theorem---both as computed in~\cite{huggan2022nofil}. For the projective column, the
-$\mathbb{F}_2$ sum-free game equals the cap game on $\PG(m,2)=\STS(2^{m+1}-1)$ and was computed to
-be a second-player win ($\Grundy=0$) for $m \leq 4$ (orders $7,15,31$); $m=5$ (order $63$,
-$\STS(63)$) is open. By contrast the generic Nofil data are irregular---for example $\STS(13)$ has
+$\mathbb{F}_2$ sum-free game equals the cap game on $\PG(m,2)=\STS(2^{m+1}-1)$ and is covered by
+the characteristic-$2$ projective theorem. By contrast the generic Nofil data are irregular---for
+example $\STS(13)$ has
 nim-value $1$, most $\STS(15)$ and $\STS(21)$ have nim-value $0$ with values up to $3$ occurring,
 and $\STS(25)$ shows mixed values---so the uniform $P$ on our infinite families is special rather
 than generic.
-% SOURCE: STS(7),STS(9) matches; PG(m,2) value 0 for m<=4 / order 63 open; generic STS calibration
+% SOURCE: STS(7),STS(9) matches; PG(m,2) characteristic-2 projective theorem; generic STS calibration
 % (STS 13/15/21/25) -- notes/2026-07-07-nofil-connection.md (generic figures from Huggan-Huntemann-Stevens).
 
 % ===========================================================================
@@ -276,7 +279,10 @@ the associated point-deletion / graph-embedding machinery. Our results live in t
 % DRAFT -- SUBJECT TO LEAD-AUTHOR REVISION
 \paragraph{Impartial games on hypergraphs and groups.} Sieben's impartial hypergraph
 games~\cite{sieben2023hypergraph} give the general achievement/building-game framework; our games
-are the achievement game on specific $3$-uniform hypergraphs. A closely related active line is the
+are the achievement game on specific $3$-uniform hypergraphs. The same positions are legal
+complexes of impartial strong placement games, so link-of-a-face language gives the clean
+description of residual games~\cite{faridi2019gamecomplexes,huntemann2019strongplacement}. A
+closely related active line is the
 impartial \emph{group generation} achievement games of Benesh, Ernst, and
 Sieben~\cite{benesh2016symmetric,benesh2018nilpotent}, where the winning condition is generating the
 group rather than staying sum-free or cap---a framework relative with a different objective.
@@ -315,10 +321,11 @@ nim-value sequences have been tabulated for several graph families~\cite{wong202
     $\PG(m,q)$ has no translations and the board size $(q^{m+1}-1)/(q-1)$ has no uniform parity, so
     neither mirror drops out. Section~\ref{sec:conic-localization} is a partial step; a general
     certificate is open.
-  \item \textbf{The smallest open projective column entry.} Is $\PG(5,2)=\STS(63)$, equivalently the
-    $\mathbb{F}_2^6$ sum-free game, a second-player win? This is the smallest open case of the
-    conjecture that $\PG(m,2)$ is always $P$, and a concrete Nofil target.
-    % SOURCE: STS(63)/m=5 as the concrete open target, notes/2026-07-07-nofil-connection.md.
+  \item \textbf{Even-dimensional odd projective spaces.} The binary projective column is no longer
+    the open edge: $\PG(m,2)$ is covered by the characteristic-$2$ projective theorem.  The
+    remaining higher-dimensional projective gap starts with even projective dimensions over odd
+    fields, such as $\PG(4,3)$ and its analogues.
+    % SOURCE: corrected projective-gap status, notes/2026-07-09-stepping-stone-deliverables-proposal.md.
   \item \textbf{The abelian generalization of the sum-free law.} The mod-$6$ law is the cyclic case
     of a criterion for the sum-free game on any finite abelian group, proved when the Sylow-$3$
     subgroup is cyclic or the $2$-rank is at least $2$; the slice with $2$-rank $\leq 1$ and $3$-rank
