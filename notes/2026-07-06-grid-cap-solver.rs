@@ -378,6 +378,34 @@ fn gf_table_hash(gf: &GF) -> u64 {
     h
 }
 
+fn node_kayles_tables() -> ([u8; MAXQ + 1], [u8; MAXQ + 1]) {
+    let mut path = [0u8; MAXQ + 1];
+    let mut cycle = [0u8; MAXQ + 1];
+    for n in 1..=MAXQ {
+        let mut seen = [false; 64];
+        for i in 0..n {
+            let left = i.saturating_sub(1);
+            let right = n.saturating_sub(i + 2);
+            let g = (path[left] ^ path[right]) as usize;
+            seen[g] = true;
+        }
+        let mut mex = 0usize;
+        while seen[mex] {
+            mex += 1;
+        }
+        path[n] = mex as u8;
+    }
+    for n in 1..=MAXQ {
+        if n < 3 {
+            cycle[n] = path[n];
+            continue;
+        }
+        let g = path[n - 3] as usize;
+        cycle[n] = if g == 0 { 1 } else { 0 };
+    }
+    (path, cycle)
+}
+
 struct Board {
     gf: GF,
     q: usize,
@@ -386,6 +414,8 @@ struct Board {
     line_mask: Vec<Mask>,   // [x*N + z] = all cells on affine line through x and z
     all: Mask,
     cellh: Vec<(u64, u64)>, // per-cell (h1,h2) for order-independent set hashing in canon
+    nk_path: [u8; MAXQ + 1],
+    nk_cycle: [u8; MAXQ + 1],
 }
 
 impl Board {
@@ -454,7 +484,8 @@ impl Board {
             let h2 = y ^ (y >> 29);
             *h = (h1, h2);
         }
-        Board { gf, q, n, rc_mask, line_mask, all, cellh }
+        let (nk_path, nk_cycle) = node_kayles_tables();
+        Board { gf, q, n, rc_mask, line_mask, all, cellh, nk_path, nk_cycle }
     }
 
     // Canonical fingerprint = MIN over all anchor images of an ORDER-INDEPENDENT set hash.
@@ -2619,6 +2650,15 @@ fn s4_conic_feature_counts(b: &Board, occ: &[u16], live_on: usize) -> (usize, us
     (sel_on, live_on, dead_on)
 }
 
+fn s4_component_size_text(xs: &mut Vec<usize>) -> String {
+    xs.sort_unstable_by(|a, b| b.cmp(a));
+    if xs.is_empty() {
+        "-".to_string()
+    } else {
+        xs.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",")
+    }
+}
+
 fn s4_conic_graph_feature_string(
     b: &Board,
     occ: &[u16],
@@ -2657,6 +2697,9 @@ fn s4_conic_graph_feature_string(
     let mut seen = vec![false; n];
     let mut stack = Vec::with_capacity(n);
     let mut comp_sizes = Vec::new();
+    let mut path_sizes = Vec::new();
+    let mut cycle_sizes = Vec::new();
+    let mut other_sizes = Vec::new();
     let mut iso = 0usize;
     let mut paths = 0usize;
     let mut cycles = 0usize;
@@ -2664,6 +2707,10 @@ fn s4_conic_graph_feature_string(
     let mut odd = 0usize;
     let mut max_comp = 0usize;
     let mut degmax = 0usize;
+    let mut nk_known = true;
+    let mut nk_xor = 0u8;
+    let mut nk_path_xor = 0u8;
+    let mut nk_cycle_xor = 0u8;
     for start in 0..n {
         if seen[start] {
             continue;
@@ -2702,27 +2749,32 @@ fn s4_conic_graph_feature_string(
         let comp_edges = degree_sum / 2;
         if size == 1 && comp_edges == 0 {
             iso += 1;
+            path_sizes.push(size);
+            nk_path_xor ^= b.nk_path[size];
+            nk_xor ^= b.nk_path[size];
         } else if all_deg_le_two && comp_edges + 1 == size {
             paths += 1;
+            path_sizes.push(size);
+            nk_path_xor ^= b.nk_path[size];
+            nk_xor ^= b.nk_path[size];
         } else if all_deg_le_two && comp_edges == size {
             cycles += 1;
+            cycle_sizes.push(size);
+            nk_cycle_xor ^= b.nk_cycle[size];
+            nk_xor ^= b.nk_cycle[size];
         } else {
             other += 1;
+            other_sizes.push(size);
+            nk_known = false;
         }
         comp_sizes.push(size);
     }
-    comp_sizes.sort_unstable_by(|a, b| b.cmp(a));
-    let size_text = if comp_sizes.is_empty() {
-        "-".to_string()
-    } else {
-        comp_sizes
-            .iter()
-            .map(|x| x.to_string())
-            .collect::<Vec<_>>()
-            .join(",")
-    };
+    let size_text = s4_component_size_text(&mut comp_sizes);
+    let path_size_text = s4_component_size_text(&mut path_sizes);
+    let cycle_size_text = s4_component_size_text(&mut cycle_sizes);
+    let other_size_text = s4_component_size_text(&mut other_sizes);
     format!(
-        "conic_v={} conic_e={} conic_comp={} conic_iso={} conic_path={} conic_cycle={} conic_other={} conic_odd={} conic_max={} conic_degmax={} conic_off={} conic_sizes={}",
+        "conic_v={} conic_e={} conic_comp={} conic_iso={} conic_path={} conic_cycle={} conic_other={} conic_odd={} conic_max={} conic_degmax={} conic_off={} conic_nk_known={} conic_nk_xor={} conic_nk_path_xor={} conic_nk_cycle_xor={} conic_sizes={} conic_path_sizes={} conic_cycle_sizes={} conic_other_sizes={}",
         n,
         edges,
         comp_sizes.len(),
@@ -2734,7 +2786,14 @@ fn s4_conic_graph_feature_string(
         max_comp,
         degmax,
         off_selected,
-        size_text
+        if nk_known { 1 } else { 0 },
+        nk_xor,
+        nk_path_xor,
+        nk_cycle_xor,
+        size_text,
+        path_size_text,
+        cycle_size_text,
+        other_size_text
     )
 }
 

@@ -186,8 +186,8 @@ be different for q>=23.
 ## Immediate Next Actions
 
 1. Add value-aware `BESTREPLY` rows to `s4mine`.  Done in the first tooling pass.
-2. Add live-conic residual graph spectrum fields.  Done for `BESTREPLY`, `REPLY`, and optional
-   `STATE` rows.
+2. Add live-conic residual graph spectrum and Node-Kayles Grundy fields.  Done for `BESTREPLY`,
+   `REPLY`, and optional `STATE` rows.
 3. Run the new rows against the existing exact q=23 dumps.  First results:
    [`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md).
 4. Run the same rows against q=19 to keep a solved comparison column.

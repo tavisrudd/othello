@@ -259,7 +259,14 @@ conic_odd     odd-size components
 conic_max     largest component size
 conic_degmax  maximum graph degree
 conic_off     selected off-conic intruders generating the graph
+conic_nk_known  1 when every component is a path/cycle/isolate
+conic_nk_xor    Node-Kayles Grundy xor over known conic components
+conic_nk_path_xor    path/isolate contribution to that xor
+conic_nk_cycle_xor   cycle contribution to that xor
 conic_sizes   comma-separated component sizes, descending
+conic_path_sizes   path and isolated component sizes, descending
+conic_cycle_sizes  cycle component sizes, descending
+conic_other_sizes  non-path/cycle component sizes, descending
 ```
 
 The current graph uses live affine-conic points as vertices and adds an edge when a selected

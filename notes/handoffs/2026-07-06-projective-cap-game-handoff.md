@@ -420,7 +420,8 @@ Recently reported:
 - **First live-conic best-reply pass:** all q=19 exact buckets and two q=23 exact samples have a
   known P reply for every first move.  q=23 witnesses leave positive conic residuals
   `live_on = 6..12`; all known q=19/q=23/q=25 witness conic graphs are path/cycle/isolate unions
-  with `conic_other = 0`.  Mining note:
+  with `conic_other = 0`.  Added conic-only Node-Kayles summaries show cycle xor is always 0 in
+  these rows; the remaining conic residue is path/isolate xor.  Mining note:
   [`../2026-07-09-live-conic-bestreply-mining.md`](../2026-07-09-live-conic-bestreply-mining.md).
 
 Good Lean side targets:

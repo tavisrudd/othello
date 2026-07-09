@@ -71,6 +71,12 @@ conic_other = 0 for all 1929 witnesses
 conic_off   = 1 for 188 witnesses, 2 for 1741 witnesses
 conic_cycle = 1 for 10 witnesses, 0 otherwise
 conic_degmax <= 2 throughout
+
+conic_nk_xor distribution:
+  0:721 1:486 2:418 3:304
+conic_nk_cycle_xor = 0 throughout
+observed cycle sizes:
+  4, 6, 10
 ```
 
 So the known q=19 witness layer is entirely path/cycle/isolate structure on the live conic.
@@ -107,6 +113,12 @@ conic_other = 0 for all 521 witnesses
 conic_off   = 1 for 36 witnesses, 2 for 485 witnesses
 conic_cycle = 1 for 25 witnesses, 0 otherwise
 conic_degmax <= 2 throughout
+
+conic_nk_xor distribution:
+  0:191 1:121 2:96 3:113
+conic_nk_cycle_xor = 0 throughout
+observed cycle sizes:
+  4, 6, 8
 ```
 
 This is the first concrete q>=23 positive-live steering signal: every first move in both exact
@@ -130,10 +142,33 @@ Among known q=25 witnesses:
 ```text
 conic_other = 0
 conic_degmax <= 2
+conic_nk_xor distribution:
+  0:35 1:48 2:1 3:8
+conic_nk_cycle_xor = 0 throughout
+observed cycle sizes:
+  4,4
 ```
 
 This is compatible with the q=19/q=23 path/cycle/isolate picture, but it is not a value-coverage
 result.
+
+## Semi-Formal Graph Lemma
+
+The path/cycle/isolate result should not need a finite certificate.
+
+Fix an off-conic point `u`.  For a conic point `a`, the line `ua` meets the conic in `a` and at
+most one other point `sigma_u(a)`.  If the line is tangent, this is a fixed/tangent case rather
+than an edge between two distinct live conic vertices.  Thus `u` induces a partial matching on the
+live conic parameters.
+
+At the S4 first-reply layer there are at most two selected off-conic intruders, so the live conic
+graph induced by all selected off-conic points is a union of at most two matchings.  Hence every
+live conic vertex has degree at most 2, and every component is a path, a cycle, or an isolated
+vertex.
+
+This explains `conic_other = 0` and `conic_degmax <= 2` uniformly.  It does not by itself prove the
+observed cycle-Grundy cancellation; that requires controlling which cycle lengths occur, or proving
+they can be ignored/paired in the full residual game.
 
 ## Import
 
@@ -142,8 +177,8 @@ This pass supports a sharper q>=23 proof target:
 ```text
 positive-live S4 reply
 -> live conic graph is a union of paths, cycles, and isolates
--> even-cycle bulk cancels
--> remaining path/isolate/zone skeleton is steerable or certificate-small.
+-> observed cycle bulk has Node-Kayles xor 0
+-> remaining path/isolate xor plus off-conic zone is steerable or certificate-small.
 ```
 
 It also warns against a finite tiny-spectrum story.  The observed component-size spectra are varied
@@ -152,10 +187,10 @@ rather than enumerate a short list of graph shapes.
 
 ## Next Checks
 
-1. Add path/cycle Grundy summaries for the live conic graph.
-2. Separate conic graph value from off-conic zone value.
-3. For q=23, run more exact bucket representatives only if the two current samples fail a proposed
+1. Separate conic graph value from off-conic zone value.
+2. Mine whether winning replies can always make `conic_nk_xor = 0`, or whether nonzero conic xor
+   is balanced by a small off-conic-zone residue.
+3. Prove the matching-union graph lemma cleanly in paper/Lean terms.
+4. For q=23, run more exact bucket representatives only if the two current samples fail a proposed
    graph/zone law.
-4. For q=25, build targeted witness dumps rather than broad partial roots.
-5. Try to prove directly that two off-conic intruders always induce a degree-2 conic graph, hence
-   a disjoint union of paths and cycles.  This should be a short geometric lemma.
+5. For q=25, build targeted witness dumps rather than broad partial roots.
