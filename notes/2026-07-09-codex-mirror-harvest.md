@@ -204,6 +204,16 @@ Follow-up Lean options (not needed for the theorem): a bespoke `Fin m → K × K
 instance to drop the `[Fintype (Point ...)]` hypothesis; and stating the negatives' obstruction
 (no fpf involution) as a Lean lemma is possible but low-value.
 
+## Follow-ups
+
+- **Boundary theorem + extension scopes:** [`2026-07-09-mirror-method-boundary.md`](2026-07-09-mirror-method-boundary.md)
+  — the "mirror-provable ⟺ hyperbolic (split) quadratic form" boundary (#5, parabolic + Hermitian
+  rigorously excluded, elliptic strongly evidenced), plus scopes for polar-space Nofil (#3) and
+  Segre/product varieties (#4).
+- **Mirror unification (in progress):** one engine, several instances (sum-free negation /
+  projective elliptic / hyperbolic-quadric / conflict-graph Cayley / capacity-c) — report will land
+  at `2026-07-09-mirror-unification.md`.
+
 ## Reproduce
 
 ```
