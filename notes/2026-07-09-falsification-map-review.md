@@ -138,16 +138,15 @@ Everything numerical was verified (see §0). Corrections and cautions:
   equates a truth-mode with route-modes. They are not equivalent — they share the missing
   uniform instrument. Say "A3 is attacked by the same uniform argument that would discharge
   B4b/B4c," not "≡".
-- **B3 (orbit-invariance bridge): CORRECT, and it can be sharpened.** The residual game's
-  symmetry on the conic parameter line is the stabilizer of the burned pair {0, ∞} — the maps
-  `t ↦ at` and `t ↦ a/t`, order `2(q−1)` — versus `|PGL(2,q)| = q(q²−1)`. Value-constancy on
-  orbits is a theorem **for the stabilizer** (those are game automorphisms); it is **not** a
-  theorem for full PGL(2,q), so a full-PGL bucket merges ~`(q²+q)/2`-fold more positions than
-  invariance licenses. Empirics cut both ways: at q=17 the full-PGL buckets were value-constant
-  where the full solve exists (C5: 273 → 10 buckets), but at q=23 exactly one representative per
-  bucket was solved — constancy is untested precisely where it is load-bearing. C36's
-  self-consistency gate is a related but indirect test; the direct discharge is solving a
-  second, stabilizer-inequivalent representative per q=23 bucket. B3 correctly stays open.
+- **B3 (orbit-invariance bridge): SUPERSEDED by later review.** This paragraph originally
+  downgraded the full-PGL grouping to the burned-pair stabilizer.  That was too conservative:
+  Lemma I in `2026-07-07-onconic-intrusion-calculus.md` already proves the relevant bridge.  The
+  on-conic S4 follower is determined by the unordered six played points on the conic, including the
+  two burned/pre-played points; those points have no residual labels.  Therefore a conic-stabilizing
+  projectivity induced by full `PGL(2,q)` transports the follower game.  The correct follow-up is
+  Lean formalization of the symmetric-square `PGL(2,q) -> PGL(3,q)` extension (C53), plus
+  rules-only certification of the 22 q=23 bucket labels (C54), not solving second
+  stabilizer-inequivalent q=23 representatives.
 - **Category-error claim (§2): correct** as stated; the map properly allows computation to close
   finite sub-ranges while only a q-uniform shape argument closes the conjecture.
 - **Regime table / eliminated labels**: accurate modulo M3/M7 and the "witnessed only at q=17"
@@ -264,8 +263,9 @@ itself. Within the heuristic vocabulary, both sides hold half the truth:
   Lean theorem (M2).
 - **Mislabeled:** q=3 as "computed (mod solver)" — it is vacuously Lean-eliminable (M7); q=27
   under the Baer rationale (M6).
-- **Wrongly-closed:** none found. A3 and B3 correctly stay open; B4d's death (C27/C28) and the
-  non-decomposition B4c are correctly recorded.
+- **Wrongly-closed:** none found in this review's original scope.  Later correction: B3 should not
+  stay open; the full-PGL bridge is valid and now queued for formalization.  A3 remains open; B4d's
+  death (C27/C28) and the non-decomposition B4c are correctly recorded.
 
 ## 5. Bottom line (deliverable 5)
 
@@ -289,8 +289,8 @@ key each on-conic child by the stabilizer-orbit type of its 6-point parameter co
 (S3 ∪ {child} ∪ {0,∞} on the conic parameter line) and test whether P/N is a function of that
 type within and across q. If it is, the under-dispersion is *explained*, the on-conic witness
 count becomes a computable invariant, and the uniform (ON) lower bound turns into a finite-type
-problem — the same shape as the C36 gate, one layer down, at zero compute cost. (Runner-up: the
-B3 discharge — solve one stabilizer-inequivalent second representative per q=23 bucket — which
-must land before q=23 is cited as more than conditional evidence.)
+problem — the same shape as the C36 gate, one layer down, at zero compute cost.  Later correction:
+the runner-up B3-discharge by duplicate q=23 representatives is obsolete; C53 formalizes the
+full-PGL bridge and C54 certifies the q=23 bucket labels instead.
 
 — Fable

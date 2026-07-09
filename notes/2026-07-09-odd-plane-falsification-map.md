@@ -110,25 +110,26 @@ the char-3 regime, not here.
 |----|------------------------------------------------------------|------------------------------------------------------------------------------|
 | B1 | solver bug → wrong P/N on COMPUTED rows (`canon()` collide) | eliminable — C8 at `q=11/13`, C37 scaled shared-key check, certcheck; Lean rows immune |
 | B2 | a false link in the reduction chain                        | escape ⇔ root-P is now Lean-proven by C41 (`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`), and 5-arc non-degeneracy is a Lean theorem (`uniqueConicThroughFiveArc…`); the remaining watch is spec-match B6, not the reduction link |
-| B3 | `q=23` **orbit-invariance bridge** unsound                 | not eliminated — residual symmetry ⊊ full `PGL(2,q)`; C36 self-consistency gate tests it |
+| B3 | `q=23` **orbit-invariance bridge** unsound                 | eliminated at prose level by Lemma I/full-PGL conic-projectivity transport; Lean formalization queued as C53 |
 | B4 | the intended route can't close it even if true             | on-conic route (B4a), termination (B4b), coupling non-decomposition (B4c, **measured by C35: confirmed** — no conic⊕zone sum at S5/S6, `g = g_conic XOR g_zone` fails on most rows even where zone Grundy is fully computable), static-pairing dead (B4d) |
 | B5 | normal-play vs misère inversion / ruleset conflation       | eliminated in practice (cross-engine tests + Lean pin the ruleset)           |
 | B6 | **spec mismatch** — Lean's endpoint definitions formalize a subtly different game than intended | Lean cannot self-certify this; B5 and A1's "Lean rows immune" use Lean as the oracle, so it is circular if the spec is off. Mitigated by `q=5,7` Lean-vs-computed agreement + a raw-bitmask legality spotcheck, not eliminated |
 
-B3 is the one to discharge before `q=23` is cited as anything but conditional evidence: solving one
-bucket representative certifies the whole bucket **only if** value is constant on the conic's
-`PGL(2,q)` orbit, and the residual game's actual symmetry group is the stabilizer of the burned
-structure, which is smaller. The joint-snapshot necessity law already failed beyond `q=11`, which is
-the warning that snapshot invariants over-promise here.
+The former B3 concern is no longer a reason to downgrade `q=23`.  The key correction is that an
+on-conic S4 follower is determined by the unordered six played projective points on the conic; the
+two burned/pre-played points are selected points, not residual labels.  A conic-stabilizing
+projectivity induced by full `PGL(2,q)` therefore transports the entire follower game.  What remains
+is to formalize this bridge in Lean (C53) and to certify the 22 computed bucket labels themselves
+(C54), not to solve duplicate stabilizer representatives.
 
 ## 5. Verdict
 
 - **Eliminated unconditionally:** `q=5,7,11,13` (Lean); the `q ≤ 7` and `q = 9` regime shapes.
 - **Eliminated modulo solver:** `q=9,17,19` (`q=3` trivial) — B1/B6 are the residual risks, hardened by C37.
 - **Finite-checkable, not class-closing:** A2 per-`q`; A4 squares (`q=25,49`) — the top falsification watch (queued: **C44** for q=25).
-- **Conditional, discharge before citing:** B3 (`q=23` orbit bridge) — C36 is the test; the
-  *direct* discharge (a second stabilizer-inequivalent representative per q=23 bucket, alignment
-  report §7) is queued as the C44 rider.
+- **Former conditional now removed:** B3 (`q=23` orbit bridge) is settled by the full-PGL bridge
+  argument and queued for Lean formalization as C53; q=23 may be cited as a computed row modulo the
+  ordinary solver/certificate trust chain, with C54 assigned to strengthen that certificate tier.
 - **Irreducible open core:** A3 (eventual failure). It is a *truth*-mode, distinct from — not equal
   to — the *route*-modes B4b/B4c (termination + coupling); they share instruments, not a definition.
   No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
@@ -188,7 +189,7 @@ concentration is genuinely type-determined at each `q`. But the type→value map
 systematic — **N at an arc-depleted order, P everywhere else** (all flips at the depleted `q=11,17`;
 zero at the full `q=13,19`; minimal witness `{∞,0,−4,−3,−2,1}`). So the point mass is
 **arc-depletion (arithmetic)-driven, not a `q`-uniform type function**: the finite type→value table
-does not exist, the finite-type route to a uniform (ON) bound is **closed negative**, and even
-granting the full-PGL bridge a `q=17` solve cannot predict `q=19/23`. The uniform (ON) argument must
+does not exist, the finite-type route to a uniform (ON) bound is **closed negative**, and the
+full-PGL bridge is only a fixed-q transport: a `q=17` solve cannot predict `q=19/23`. The uniform (ON) argument must
 engage the arc-depletion arithmetic — i.e. this route merges into **A5** (the complete-arc
 spectrum), not a combinatorial type census.

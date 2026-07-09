@@ -210,7 +210,9 @@ DRIVER_DONE elapsed=2698.3
 - The bucket-first route is viable at q=23: one representative per full-PGL six-set bucket is much
   cheaper than the old size-3-rooted `esc` run.
 - q=23 is not a falsification frontier for the on-conic bucket mechanism.  It is all-P at this
-  layer.
+  layer.  With the full-PGL conic-projectivity bridge accepted/formalized, the 22 all-P buckets
+  establish the computed q=23 on-conic escape result without a duplicate-representative orbit caveat;
+  the separate certification task is now to rules-check the 22 P labels themselves.
 - The mixed-column mod-3 law should be dropped.  The next useful law has to explain:
   `q=11` mixed, `q=13` all-P, `q=17` mixed, `q=19` all-P, `q=23` all-P.
 - A plausible replacement direction is not a residue class of q alone, but a finer defect/zone

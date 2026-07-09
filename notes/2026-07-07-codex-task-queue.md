@@ -33,10 +33,11 @@ is the biggest build and sharpens C38 — start it in parallel because it is lon
   6. **C34** — D1 outcome-classes manuscript skeleton (writing; flag-planting paper).
 - **Tier D — after Tier B reshapes the picture:**
   7. **C38** — tablebase strategy distillation (forced-move skeleton; richer once C35 lands).
+     **Reported 2026-07-09.**
   8. **Steering follow-up** — repair-intruder existence lemma + small-`Z`/empty-conic base law
      (the proof lane; reframed by C33, informed by C36/C38).
 - **Tier E — opportunistic bonus:**
-  9. **C39** — remoteness/suspense dynamic monovariant.
+  9. **C39** — remoteness/suspense dynamic monovariant. **Reported 2026-07-09.**
   10. **C40** — oracle-driven winline generation (feeds C23 viz).
 
 **Amendment (Fable, 2026-07-09 second pass — counterexample-readiness additions.)** The frontier
@@ -84,6 +85,26 @@ priority order:
   **Tier D** — newly enabled by C35's oracle; pairs with the C30 engineering lane.
 - **C49** — Node-Kayles nimber tables for other chess pieces: **Tier E** — opportunistic, queens
   box idle time only.
+
+**Amendment (2026-07-09 fifth pass — full-PGL bridge correction):** the later downgrade from
+full `PGL(2,q)` buckets to burned-pair-stabilizer buckets was unnecessary.  Lemma I of
+[`2026-07-07-onconic-intrusion-calculus.md`](2026-07-07-onconic-intrusion-calculus.md) already gives
+the right game-theoretic object: an on-conic S4 state is the unordered six-point cap on the conic,
+including the two pre-played/burned points, and the original burned pair has no residual role.
+Therefore a conic-stabilizing projectivity induced by full `PGL(2,q)` transports the whole follower
+game.  Consequences:
+
+- **C53** — formalize the full-PGL orbit bridge and update the q=23 computed status.  This is
+  proof/coordination work and should run before any duplicate stabilizer-representative solve.
+- **C54** — certify the q=23 bucket labels themselves with a rules-only dump/book checker.  This
+  is the computed-value trust work; it should reuse the 22 C29/C37 bucket roots, not compute
+  duplicate representatives.
+- The C44 optional "direct B3 discharge at q=23" is dropped; do not spend compute on second
+  stabilizer-inequivalent representatives merely to test the bridge.
+- C29's 22 all-P full-`PGL(2,23)` buckets establish the computed q=23 on-conic/escape result
+  without an orbit caveat.  The remaining q=23 caveats are the normal computed-result trust chain
+  (solver/canon/certificate/Lean formalization), not B3; C54 is the queue item for that trust
+  chain.
 
 ## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
@@ -1219,7 +1240,7 @@ Guardrails: RAW only; document the exact key/value byte layout read; treat any d
 stop-and-report, never as something to patch. Budget: 4h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-shared-key-agreement.md`.
 
-## C38. Tablebase strategy distillation — the forced-move skeleton corpus-wide
+## C38. Tablebase strategy distillation — the forced-move skeleton corpus-wide [REPORTED 2026-07-09]
 
 Context: the `replies`/query DAG exposes the full winning-strategy graph. Corpus-wide, the mover
 nodes with a **unique** winning move are *forced* — the skeleton any strategy-level proof, and the
@@ -1244,7 +1265,7 @@ fully-known subtrees, or treat any `unknown` child as disqualifying the node fro
 and report how many nodes that excludes). Budget: hard 8h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-tablebase-distillation.md`.
 
-## C39. Remoteness/suspense — a dynamic monovariant (C18's null was static-only)
+## C39. Remoteness/suspense — a dynamic monovariant (C18's null was static-only) [REPORTED 2026-07-09]
 
 Context: C18 killed shallow laws over **static** features of the position. Remoteness (Conway) is a
 **dynamic** quantity — how fast the winner can force / the loser delay — and has never been computed
@@ -1261,6 +1282,13 @@ here. Compute it over the S4 subtree from the value oracle and hunt for a monova
 
 Guardrails: exact dumps; exploratory — cap depth. Budget: 4h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-remoteness-probe.md`.
+
+Status: implemented native `s4gremote` and reported.  q=13 root, q=17 full-PGL bucket corpus, the
+two q=17 score-9 representatives, and optional q=19 root all traversed exactly
+(`seen == records`, no missing states/children).  q=17 full corpus has max remoteness 10, but only
+105 / 1,537,648 states attain it; parity is the expected normal-play tautology (`P` even, `N`
+odd).  `defxor` and zone size stratify average suspense but do not decide value or remoteness.
+Verdict: useful diagnostic, not a standalone dynamic monovariant.
 
 ## C40. Oracle-driven winline generation (feeds C23)
 
@@ -1447,11 +1475,11 @@ informative new number for the (ON) route, independent of the Baer watch.
    verbatim in the report. No broad runs until the path's small-q regression passes: rerun one
    q=9 or q=13 known case through the same code path, byte-identical to the prime-path output.
 2. **Bucket enumeration (group theory, no solves):** on-conic S4 parameter 6-subsets up to the
-   canonical group at q=25. **Decide and document the group**: PGL(2,25) vs PΓL(2,25) — the
-   Frobenius `x ↦ x⁵` exists here, unlike at prime q; using PΓL shrinks the bucket count but the
-   B3 orbit-invariance caveat applies to BOTH (the sound residual grouping is the burned-pair
-   stabilizer; state the census as conditional exactly as the q=23 census is, and emit the
-   stabilizer-refined signature alongside per the C36/C42 vocabulary).
+   canonical group at q=25. **Default to PGL(2,25)**: by the full-PGL bridge, these buckets are
+   game-value sound once C53's formal statement/proof is in place.  If using PΓL(2,25) to shrink
+   the bucket count, document the extra semilinear/Frobenius transport obligation separately; do
+   not conflate it with the now-closed full-PGL bridge.  Emit the stabilizer-refined signature only
+   as a diagnostic/refinement, not as the soundness boundary.
 3. **Representative solves:** S4-rooted private-memo solves per bucket, 30-min wall gate per
    representative, chunked `s4xormine` machinery where applicable. Any representative exceeding
    the gate: kill, record as the sizing datum, move on — partial coverage honestly labeled beats
@@ -1464,12 +1492,8 @@ informative new number for the (ON) route, independent of the Baer watch.
 5. Optional, gated: if the feat-layer (per-size-3-class on-conic witness counts) is affordable at
    q=25 under an hour-scale gate, add the q=25 rows to the witness-count heuristic layers (the §6
    knife-edge extrapolation currently ends at q=19). If not affordable, say so — do not force it.
-6. Optional rider (distinct q, shares the S4 machinery — fold in here or into C35, whichever runs
-   first): the **direct B3 discharge at q=23** the alignment report §7 flags as still untested —
-   solve a second *stabilizer-inequivalent* representative inside 2–3 full-PGL q=23 buckets and
-   check value equality with the bucket representative. Cheap per solve (30-min gate each). Any
-   inequality is a MAJOR finding (it breaks the bucket bridge and downgrades the q=23 column) —
-   report verbatim and stop.
+6. Former optional rider dropped: do **not** run duplicate stabilizer-representative q=23 solves
+   as a B3 discharge.  The bridge is geometric/proof-side; C53 is the right work item.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
 
@@ -1559,8 +1583,9 @@ section (or stands alone) and is valuable *whichever way* the conjecture resolve
 
 1. **Row: q lower bound.** "Any counterexample has q ≥ <frontier>" — assembled from the
    Lean-unconditional rows (q=5,7,11,13 + C30's q=17/19 when landed) and the computed rows with
-   their solver-trust caveats stated exactly (C37/C8 as the verification citations; B3
-   conditionality for q=23 until the C44 rider lands). Never upgrade a tier.
+   their solver-trust caveats stated exactly (C37/C8 as the verification citations).  For q=23,
+   cite C29 plus the full-PGL bridge/C53 rather than a B3 conditionality rider. Never upgrade a
+   tier.
 2. **Row: total on-conic depletion.** A trapped class has ALL children N, in particular its q−4
    on-conic children — so at a counterexample q, that class's on-conic P-count is 0. Two-line
    proof; write it.
@@ -1699,3 +1724,124 @@ variable-length maximal placements and are the real targets.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB per piece; opportunistic scheduling.
 Report file: `notes/2026-07-09-codex-piece-nimber-tables.md`.
+
+## C51. Polar-space Nofil — symplectic W(2n−1,q) and beyond (mirror harvest #3) [handed off by Claude/Opus 2026-07-09]
+
+Continuation of the C48 mirror harvest. **Full scope + math is in
+`notes/2026-07-09-mirror-method-boundary.md` §"#3 — Scope: polar-space Nofil"** — read it first;
+this entry is just the queue pointer.
+
+Idea: invert figure/ground. Instead of a variety being the board with ambient lines as
+constraints, take the *whole* `PG(2n−1,q)` as the board and let the constraint lines be the
+totally-isotropic lines of a polar space (a position is legal iff no 3 selected points lie on a
+common isotropic line). Cleanest first target is **symplectic `W(2n−1,q)`**: every point is
+isotropic, so the board is all of `PG(2n−1,q)` (odd projective dimension), and the C25 elliptic
+fpf involution already lives there — it applies iff it is a *symplectic similitude* of the chosen
+alternating form (same similarity trick as C48; verify).
+
+Deliverables: (1) machine gate — build `W(3,q)` for `q=3,5` (isotropic-line hypergraph),
+exhaustively solve the cap game, test the elliptic involution's fpf + isotropic-line-preservation +
+C27 pair-extension; then `W(5,3)` mirror-only. (2) Lean: a `FiniteBuildGame` over `Point K V` with
+`Valid := no 3 on a common isotropic line`, or reuse the new conflict-hypergraph mirror lemma
+`CapGame/GraphMirror.lean` / the C48 proposition `initialSubCapP_of_fpf_collinearity_preserving`.
+Watch: the #5 boundary (`notes/2026-07-09-mirror-method-boundary.md`) likely recurs at the group
+level for unitary/orthogonal polar spaces (anisotropic-core obstructions). Machine gates tiny;
+single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-polar-space-nofil.md`.
+
+## C52. Segre / product-variety Nofil (mirror harvest #4) [handed off by Claude/Opus 2026-07-09]
+
+Continuation of the C48 mirror harvest. **Full scope + math is in
+`notes/2026-07-09-mirror-method-boundary.md` §"#4 — Scope: Segre / product varieties"** — read it
+first; this entry is just the queue pointer.
+
+Idea: `Q⁺(3,q)` *is* the Segre `PG(1,q)×PG(1,q) ↪ PG(3,q)` (the `(q+1)×(q+1)` grid). Generalize the
+board to `PG(a,q)×PG(2m−1,q)` (Segre embedding); its ≥3-point ambient lines are the two rulings (a
+grid of subspaces), and the mirror is `σ = id × (elliptic fpf involution on the odd factor)` —
+fpf overall (fpf in one coordinate), ruling-preserving, with the C27 pair-extension reducing to the
+single-factor argument. Grassmannians via Plücker are the next step (`Gr(2,4)` = Klein quadric =
+`Q⁺(5,q)` already covered; higher `Gr(k,n)` needs the fpf-on-`k`-subspaces check).
+
+Deliverables: (1) machine gate — build `PG(1,3)×PG(1,3)` (= `Q⁺(3,3)` sanity), then
+`PG(1,3)×PG(3,3)` and `PG(2,3)×PG(1,3)`; confirm the ruling hypergraph, solve small, test
+`id × elliptic`. (2) Lean: a `SubCap`-style product board reusing the C48 proposition once the
+product involution's collinearity + ruling preservation is shown. Watch: need one odd-dim factor;
+products of two even-dim factors likely fail per the #5 boundary. Single-core, ≤ 8 GB. Report file:
+`notes/2026-07-09-codex-segre-product-nofil.md`.
+
+## C53. Full-PGL on-conic orbit bridge + q=23 computed-status cleanup
+
+Context: a review caught that the full-PGL orbit bridge was already proved in prose, not merely
+empirically supported.  In an on-conic S4 state, the actual played projective position is the
+unordered six-point cap on the conic: the four grid cells plus the two pre-played/burned points.
+The burned pair has no further game-theoretic role.  Thus any conic-stabilizing projectivity
+carrying one six-set to another carries the whole follower game.  The later restriction to the
+burned-pair stabilizer in
+[`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md) was a
+sound-but-unnecessary downgrade.
+
+Proof target:
+
+1. **Formal symmetric-square bridge.**  In Lean, construct the standard `Sym²` extension of a
+   projective line transformation to a projective plane transformation preserving the Veronese
+   conic.  In coordinates, a `PGL(2,K)` matrix acting on `[u:v]` induces the linear map on
+   quadratic coordinates `[u²:uv:v²]`; show it sends the conic to itself and realizes the original
+   Möbius action on conic parameters.  Scope can be odd finite fields first if characteristic-2
+   bookkeeping gets in the way.
+2. **Game transport.**  Package the induced projectivity as a validity-preserving equivalence of
+   projective cap follower games and apply the existing transport theorem
+   `FiniteBuildGame.isP_map` / `win_equiv` (`lean/CapGame/BuildGame.lean`).  Deliver theorem
+   statement: if two on-conic S4 states have full-`PGL(2,q)`-equivalent six-point parameter sets,
+   then their residual game values agree.
+3. **q=23 status handoff.**  Combine the theorem with C29's all-22 full-`PGL(2,23)` bucket
+   labels to state the computed q=23 on-conic escape result without the orbit caveat.  This does
+   not make q=23 Lean-unconditional unless the 22 computed P roots are themselves converted to
+   kernel-checked/rules-checked certificates; state that trust tier exactly and hand off the value
+   certification to C54.
+4. **Doc cleanup.**  Remove/patch B3-open language in the handoff, falsification map, alignment
+   report, and any queue item that asks for duplicate stabilizer-representative solves.  Keep the
+   negative cross-q type-alignment conclusion: full-PGL transport is a fixed-q compression only and
+   gives no q-to-q prediction.
+
+Non-goals: no new q=23 solves; no second representatives solely for bridge testing; no q=25 census
+unless C44 is separately launched.
+
+Report file: `notes/2026-07-09-codex-full-pgl-bridge.md`.
+
+## C54. Certify the q=23 full-PGL bucket labels
+
+Context: after C53, the 22 full-`PGL(2,23)` on-conic bucket representatives cover every q=23
+on-conic S4 child.  C29 solved all 22 representatives as P, and C37 generated exact raw q=23 bucket
+dumps with large shared-key agreement and zero disagreements.  The remaining issue is not another
+orbit test; it is certifying the computed P labels themselves at the strongest feasible machine
+trust tier.
+
+Task:
+
+1. **Inventory existing artifacts.**  List the 22 q=23 bucket roots, their C29 labels, and the
+   corresponding raw dumps from `rust/s4-dumps/2026-07-08/` and
+   `rust/s4-dumps/2026-07-09/c37-q23-raw/`.  Confirm every dump header is root-matched,
+   `status=OK`, `value=P`, and that C37's q=23 shared-key agreement is zero-disagreement.
+2. **Choose the certificate substrate by sizing, not guesswork.**  Options:
+   - P/N dump consistency checker: verify minimax equations for every recorded state by enumerating
+     legal children and checking their canonical keys/values in the raw dump.  Missing nonterminal
+     children are certificate failures.
+   - Grundy dump route: run `s4gdump` on one representative first; if the all-children Grundy table
+     fits, `g = mex(children)` gives a stronger certificate and can be checked by the same rules-only
+     traversal.
+   - Explicit P reply books only if smaller than the raw/minimax certificate.
+3. **Implement or reuse a rules-only checker.**  It may trust the canonical key as the state
+   identifier, but not the solver recursion.  It must independently enumerate legal moves from each
+   decoded/reconstructable state or from a dump-supported state traversal; for P/N, check
+   `P ↔ all children N` and `N ↔ some child P`; for Grundy, check exact mex.  Any missing child,
+   illegal child, header mismatch, or value inconsistency is a hard FAIL.
+4. **Run the q=23 bucket suite if the first-bucket sizing fits.**  Report per-bucket records,
+   wall/RSS, checker result, and aggregate coverage.  If full checking does not fit, report the
+   blocker and the extrapolated certificate cost; do not silently downgrade.
+5. **Compose the result statement.**  With C53 + successful C54, the q=23 row is
+   "computed and rules-certified at the S4 bucket layer"; it is still not a Lean theorem for
+   `Projective.InitialPStatement` unless/until a Lean checker consumes the certificates.
+
+Non-goals: no duplicate stabilizer representatives; no q=25 work; no new q=23 size-3-rooted `esc`
+campaign.
+
+Report file: `notes/2026-07-09-codex-q23-bucket-certification.md`.

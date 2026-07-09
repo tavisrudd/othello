@@ -19,7 +19,10 @@ Closed or structurally understood:
 - `PG(2,q)` is P for all even `q`.
 - Odd projective planes are proved in Lean for `q = 5, 7, 11, 13`; `q = 3, 9, 17, 19` are
   computed P but not all Lean-closed.  `q = 23` now has a bucket-first on-conic computation:
-  all 22 full-`PGL(2,23)` on-conic buckets are P, conditional on the orbit-invariance bridge.
+  all 22 full-`PGL(2,23)` on-conic buckets are P.  By the full-PGL conic-projectivity bridge
+  (Lemma I of the intrusion-calculus note; Lean formalization queued as C53), this establishes the
+  computed q=23 on-conic/escape result without the former orbit caveat.  C54 is the remaining
+  rules-only certificate task for the 22 computed bucket labels.
   `q = 25` has a first GF(25) S4-rooted sizing probe: the normalized representative
   `{1,2,3,4}` is P, using about 26.3M private memo entries with early break.  This is not a full
   q=25 bucket census.
@@ -60,7 +63,7 @@ steering family.
 | 13 | **P** | Lean certificate assembly: `CertData.Q13.initialPStatement_finrank` | none |
 | 17 | P | `esc` campaign; mixed on-conic buckets; min-escape histogram `5:3 10:12 11:6` | C30 certificate book / no uniform proof |
 | 19 | P | `esc` campaign; all low-level escapes | C30 certificate book / no uniform proof |
-| 23 | P? | C29 bucket-first full-`PGL(2,23)` on-conic census: all 22 buckets P; old size-3-rooted `esc` class 0 exceeded the 200M memo cap | no Lean theorem; formal orbit bridge/certificate route still open |
+| 23 | P | C29 bucket-first full-`PGL(2,23)` on-conic census: all 22 buckets P; full-PGL bridge removes the former orbit caveat; old size-3-rooted `esc` class 0 exceeded the 200M memo cap | computed only; C53 formalizes the bridge; C54 certifies the 22 bucket labels |
 | all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
 
 ## Closed Higher-Dimensional Families
@@ -230,7 +233,8 @@ Key facts:
 
 - the `q-4` remaining on-conic cells are all legal extensions;
 - all computed escapes through `q=19` have an on-conic P witness;
-- C29's q=23 bucket-first census found all 22 full-`PGL(2,23)` on-conic buckets P;
+- C29's q=23 bucket-first census found all 22 full-`PGL(2,23)` on-conic buckets P, which by the
+  full-PGL bridge gives the computed q=23 on-conic escape result;
 - the q=17 min-escape classes have exactly one on-conic P witness.
 
 Current sharper target:
@@ -442,8 +446,9 @@ task list.  Current high-value items:
   — no census mechanism; see Recently reported); **C43** PG(4,3)
   exact-solve sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer
   bucket census (the A4 falsification watch, previously without a task ID; q=25's depletion
-  status is now the key covariate, and it carries the q=23 direct-B3-discharge rider).  Tier
-  placement is in the queue's priority-ordering amendment.
+  status is now the key covariate).  The former q=23 direct-B3-discharge rider is superseded by
+  **C53** (formal full-PGL bridge) and **C54** (q=23 bucket-label certification).  Tier placement is
+  in the queue's priority-ordering amendment.
 - **Publishable-constraint additions (Fable, 2026-07-09 third pass):** **C45** defect-skeleton
   realizability theorem (dihedral classification of the conic endgame spectra; makes the mined
   even-cycle cancellation and split/elliptic order-dichotomy facts corollaries of one theorem);
@@ -571,13 +576,22 @@ Recently reported:
   misses most S6 states, and even where the zone Grundy is computable (`q=13` all sampled states,
   `q=17` subset), `g != g_conic XOR g_zone` on most rows.  Report:
   [`../2026-07-09-codex-nimber-oracle.md`](../2026-07-09-codex-nimber-oracle.md).
+- **C38 forced-skeleton distillation:** added `s4gdistill`, an exact raw-Grundy traversal that
+  counts winning children at every N node and emits forced-node rows.  Exactness passed with
+  `seen == records` and zero missing child values on q=9/q=13 roots, all 10 q=17 full-PGL bucket
+  roots, the two q=17 score-9 representative roots, and the q=19 `1,2,3,4` root.  Forced nodes are
+  common but not universal: q=17 full bucket corpus has `487,302 / 1,074,873` N nodes forced
+  (45.34%); q=19 root has `815,846 / 1,908,007` (42.76%).  q=17 forced nodes concentrate at plies
+  7-9 (97.91%), and the two C31 score-9 guard intruders appear as unique conic-emptying internal
+  forced replies in the representative roots.  Report:
+  [`../2026-07-09-codex-tablebase-distillation.md`](../2026-07-09-codex-tablebase-distillation.md).
 - **On-conic child type alignment (size-3→size-4 layer):** within-q value-constancy on exact
   orbits PASSES with zero violations for both the burned-pair stabilizer and full PGL at q ≤ 19
   (reproducing the C5/C15 buckets), but the q-independent finite-type collapse is **refuted**:
   119 shared integral configurations flip value across q, systematically — N exactly at the
   arc-depleted orders q ∈ {11,17}, P at the full orders 13/19.  The on-conic concentration is
-  q-driven (arc abundance), not type-driven; no finite type→value table exists, and even granting
-  the full-PGL bridge a solved q gives no cross-q prediction.  C42 is rescoped to the fixed-q
+  q-driven (arc abundance), not type-driven; no finite type→value table exists.  Full-PGL transport
+  is fixed-q only: a solved q gives no cross-q prediction.  C42 is rescoped to the fixed-q
   census/propagation half; the anchor half of the uniform (ON) bound merges into arc-depletion
   arithmetic (falsification-map A5).  Report:
   [`../2026-07-09-onconic-child-type-alignment.md`](../2026-07-09-onconic-child-type-alignment.md).
@@ -649,7 +663,29 @@ escape/root-P equivalence both ways; a found residual trap is now a Lean-certifi
 counterexample once its residual game facts are certified.  Verified with
 `nix develop --command lake build ProjectiveCap.TrapConverse ProjectiveCap`; axiom gate is exactly
 `[propext, Classical.choice, Quot.sound]`.  C48 is currently claimed by Opus; next Codex lanes are
-C38/C39 mining with C35 nimbers, C30 certificate engineering, or C43/C44 compute sizing.
+C30 certificate engineering, C43/C44 compute sizing, C50 kernel-checked Grundy certificates, or a
+selector-specific split over the C38/C39 S4 artifacts.
+
+Handoff note 2026-07-09 / Codex C38: added native `s4gdistill` to
+`notes/2026-07-06-grid-cap-solver.rs`, updated the S4 manual, generated q=17 exact Grundy dumps
+for all 10 full-PGL bucket roots plus the two C31 score-9 representatives, and wrote
+`notes/2026-07-09-codex-tablebase-distillation.md`.  Exact forced-skeleton traversal passed with
+zero missing states/children on q=9/q=13, the q=17 corpus, and q=19 root.  Main numbers:
+q=17 full buckets `487,302 / 1,074,873` N nodes forced; q=19 root
+`815,846 / 1,908,007`; q=17 forced nodes are 97.91% at plies 7-9.  C39 below completes the
+remoteness/suspense follow-up; remaining mining is a selector-specific split over the
+`c38-forced/*.forced.rows` / `c39-remoteness/*.remote.out` artifacts.  C50 and C30 remain
+independent engineering/proof lanes.
+
+Handoff note 2026-07-09 / Codex C39: added native `s4gremote` to
+`notes/2026-07-06-grid-cap-solver.rs`, updated the S4 manual, ran it exactly on q=13 root, all 10
+q=17 full-PGL S4 bucket roots, the two q=17 score-9 representatives, and optional q=19 root, and
+wrote `notes/2026-07-09-codex-remoteness-probe.md`.  Main result: q=17 full corpus has max
+remoteness 10, but only `19,710 / 1,537,648` states have remoteness at least 4 and only 105 attain
+10.  Remoteness parity is the expected normal-play tautology (`P` even, `N` odd).  C31-style
+`defxor` and zone size stratify average suspense but do not decide value or remoteness.  Verdict:
+useful diagnostic, not a standalone dynamic monovariant; next mining should be selector-specific or
+return to C30/C43/C44/C50.
 
 Handoff note 2026-07-09 / Claude(Opus) C48: mirror-theorem harvest on classical varieties, all
 steps done incl. Lean.  Added `rust/scripts/projcap_mirror_harvest.py` (honest form construction of

@@ -11,12 +11,20 @@ stabilizer-orbit type of its 6-point conic-parameter configuration**, and that t
 **q-independent**. If true, the on-conic witness count becomes a computable invariant and the
 uniform (ON) lower bound collapses to a finite-type problem.
 
-**Verdict: FALSE.** The value is *not* a q-independent function of the type — for the sound
-stabilizer grouping *or* the full-PGL bridge grouping. The obstruction set is large (119 shared
+**Verdict: FALSE.** The value is *not* a q-independent function of the type — for the stabilizer
+refinement *or* the full-PGL grouping. The obstruction set is large (119 shared
 rational configurations whose value is not q-constant) and perfectly systematic: a fixed rational
 6-point configuration is **P except at the arc-depleted orders q ∈ {11, 17}, where it flips to N**.
 The concentration (point mass) is real but is **q-driven (arc abundance), not type-driven**. The
 finite-type collapse the reviewer hoped for does not exist.
+
+**Correction after review (same day):** this report's original "UNPROVEN B3" framing for the
+full-PGL grouping was too conservative.  Lemma I in
+[`2026-07-07-onconic-intrusion-calculus.md`](2026-07-07-onconic-intrusion-calculus.md) already gives
+the bridge: an on-conic state is determined by the unordered six played conic points, including the
+two burned/pre-played points, and any conic-stabilizing projectivity transports the follower game.
+The burned-pair stabilizer remains a useful finer diagnostic, but it is not the soundness boundary.
+The Lean formalization is now queued as C53.  The negative cross-q conclusion below is unchanged.
 
 ## 1. The object and the two group choices
 
@@ -36,12 +44,12 @@ label in the feat census.
 
 Two groups act on the parameter line:
 
-- **Full PGL(2,q)** — order `q(q²−1)`. The UNPROVEN B3 bridge; what C5/C15 used. Roles are *not*
-  distinguished (value would be a function of the abstract 6-set PGL-orbit).
+- **Full PGL(2,q)** — order `q(q²−1)`. This is the correct fixed-q transport grouping by Lemma I:
+  roles are *not* distinguished, and the value is a function of the abstract 6-set PGL orbit.
 - **Burned-pair stabilizer** — the subgroup fixing `{0, inf}` setwise: `t ↦ a·t` and `t ↦ a/t`,
-  order `2(q−1)`. The SOUND group: these are the actual residual-game automorphisms (no bridge
-  assumed). Roles *are* distinguished: `{0,inf}` interchangeable, `{t1,t2,t3}` interchangeable,
-  `t4` (child) distinguished.
+  order `2(q−1)`. This is a finer diagnostic/refinement: `{0,inf}` interchangeable,
+  `{t1,t2,t3}` interchangeable, `t4` (child) distinguished.  It is no longer the required
+  soundness fallback.
 
 ## 2. Method and the three type notions
 
@@ -162,30 +170,27 @@ counterexample to the pattern).
   q-dependent arc-depletion (which orders deplete, and by how much), exactly the number-theoretically
   irregular quantity the erratic-margin and witness-count notes already isolate.
 
-## 7. Stabilizer-vs-PGL contrast (B3 relevance)
+## 7. Stabilizer-vs-PGL contrast
 
-- **Within q**, both the full-PGL and the stabilizer grouping are value-constant on orbits (§4;
-  PGL matches C5/C15). So this test finds no new within-q evidence against B3: the full-PGL bucket
-  bridge is still empirically sound at q ≤ 19 (its independent risk remains that it is untested on a
-  *second stabilizer-inequivalent representative* at q = 23, the direct B3 discharge).
+- **Within q**, both the full-PGL and the stabilizer grouping are value-constant on exact orbits
+  (§4; PGL matches C5/C15).  After the review correction, this is expected for full PGL by the
+  conic-projectivity bridge; it is still a useful regression test for the orbit reconstruction code.
 - **Across q**, *neither* grouping yields value-constancy. The same PGL-rational-type and the same
-  stabilizer-rational-type both flip N↔P between depleted and non-depleted q. So even granting the
-  unproven full-PGL bridge, one obtains **no cross-q leverage**: a solved q=17 bucket does not
-  predict the value of the corresponding rational configuration at q=19 or q=23. The bridge is a
-  *within-q* compression only; it does not, and after this test cannot be argued to, deliver the
-  q-uniform finite-type collapse. B3's within-q transport question is unaffected and stays open; the
-  stronger "finite-type problem" reframing is closed **negative**.
+  stabilizer-rational-type both flip N↔P between depleted and non-depleted q.  Thus the full-PGL
+  bridge is a fixed-q compression only: it certifies one representative per orbit at a given q, but
+  it does not let a solved q=17 bucket predict q=19 or q=23.  The stronger q-uniform finite-type
+  reframing is closed **negative**.
 
 ## 8. Scope / gaps
 
 - Covered: the six prime orders q ∈ {5, 7, 11, 13, 17, 19} (852 on-conic children, the full on-disk
-  census). The value-splitting orders are 11 and 17; the rest are all-P on the conic.
+  feat census). The value-splitting orders are 11 and 17; the rest are all-P on the conic.
 - **q = 9 is a documented gap.** GF(9) is not a prime field: its conic parameters are GF(9) elements
   (the S3 "cells" are GF(9) indices, not integers), so the integer-based cross-q identification does
   not extend to it without a separate GF(9) reconstruction. q=9 is all-P on the conic, so it can only
   add aligned-P or new obstructions; it cannot overturn the negative verdict, which already stands on
-  the q=11 vs q=13 and q=17 vs q=13/19 splits. q ≥ 23 is out of scope (memo-capped) per the standing
-  guard.
+  the q=11 vs q=13 and q=17 vs q=13/19 splits. q=23 is not part of this feat-layer cross-q corpus;
+  C29 separately solved all 22 full-PGL q=23 buckets P.
 
 ## 9. Reproduce
 

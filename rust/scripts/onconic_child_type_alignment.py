@@ -13,12 +13,12 @@ from the feat `X ... val= pos=on` line (no re-solve).
 It then canonicalizes each configuration two ways and builds a q-INDEPENDENT
 type signature, to test whether the P/N value is a function of type:
 
-  (A) full PGL(2,q)   -- the UNPROVEN B3 bridge grouping (what C5/C15 used).
+  (A) full PGL(2,q)   -- the fixed-q transport grouping (what C5/C15 used).
       Roles are NOT distinguished (value = function of the abstract 6-set orbit).
-  (B) burned-pair stabilizer -- the SOUND grouping.  Subgroup fixing {0,inf}
-      setwise: t -> a*t and t -> a/t, order 2(q-1).  Roles ARE distinguished
-      (burned pair {0,inf} interchangeable; S3 points interchangeable; child
-      distinguished), because those are the actual residual-game symmetries.
+  (B) burned-pair stabilizer -- a finer diagnostic/refinement.  Subgroup fixing
+      {0,inf} setwise: t -> a*t and t -> a/t, order 2(q-1).  Roles ARE
+      distinguished (burned pair {0,inf} interchangeable; S3 points
+      interchangeable; child distinguished).
 
 q-independent signatures (finite alphabet, computed identically in every field):
   * ratio-character vector (stabilizer): chi(t4/ti) and chi(ti/tj) among S3.
