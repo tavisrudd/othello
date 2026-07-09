@@ -48,8 +48,10 @@ Done:
 - `s4mine` now emits non-interactive root-child rows, optional root-reply rows, and deduplicated
   ply summaries from a raw or compact S4 dump.
 - `rust/scripts/s4_ml_mine.py` parses the current S4 mining logs into feature TSVs, PCA/tree
-  reports, joint geometry summaries, and a conic-depletion bound report.  Its outputs are
-  exploratory invariant-discovery aids, not proof certificates.
+  reports, joint geometry summaries, and a conic-depletion bound report.  It handles both `s4mine`
+  rows and targeted `s4xormine` `XORTRY` rows, with a filtered `xortry-zone-features.tsv` table for
+  rows that actually contain `zone_*` fields.  Its outputs are exploratory invariant-discovery aids,
+  not proof certificates.
 
 Not done:
 

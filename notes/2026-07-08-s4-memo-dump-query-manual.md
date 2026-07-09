@@ -343,7 +343,7 @@ particular, `s4mine` now gives a first systematic ply-by-ply structure pass over
 including selected/live/dead conic counts.  It does not yet compute defect spectra or best-repair
 scores; those remain feature extensions for the next miner layer.
 
-For ML-style exploratory summaries over a cache of `s4mine` logs, use:
+For ML-style exploratory summaries over a cache of `s4mine` / `s4xormine` logs, use:
 
 ```bash
 UV_CACHE_DIR=rust/.uv-cache uv run rust/scripts/s4_ml_mine.py \
@@ -357,9 +357,11 @@ UV_CACHE_DIR=.uv-cache uv run scripts/s4_ml_mine.py --cache-dir s4-dumps/2026-07
 ```
 
 The script writes feature TSVs, PCA projections, shallow decision-tree reports, joint geometry
-summaries, and `ml/conic-bound-report.txt`.  Direct target labels are excluded from the feature
-matrices; labels are retained only in projection/summary files for inspection.  Treat this output
-as invariant discovery, not proof evidence.
+summaries, and `ml/conic-bound-report.txt`.  It now emits `xortry-features.tsv` for targeted
+`s4xormine` rows and `xortry-zone-features.tsv` for the subset of rows that actually contain
+`zone_*` fields.  Direct target labels are excluded from the feature matrices; labels are retained
+only in projection/summary files for inspection.  Treat this output as invariant discovery, not
+proof evidence.
 
 Current conic-depletion report:
 

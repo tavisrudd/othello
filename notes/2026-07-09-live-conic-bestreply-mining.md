@@ -298,6 +298,22 @@ direct exact Node-Kayles-zone lemma is not the next easy layer.  The useful next
 this dense component has a low-dimensional geometric description or a robust pairing/matching
 certificate once the live conic xor has been steered to zero.
 
+I also extended `rust/scripts/s4_ml_mine.py` to parse `XORTRY` rows and to keep a filtered
+`xortry-zone-features.tsv` table for rows with real `zone_*` fields.  On the same q=23 root
+`max-tries=1` sample:
+
+```text
+xortry_zone_rows: 260
+zone-only PCA: PC1 is almost entirely zone size/edge density; PC2 is zone_odd; PC3 is zone_degmax
+zone-only forest for N/P: strongest fields are zone_e, zone_v/zone_max, zone_degmax, zone_odd
+zone_odd=0: 144 P, 4 N
+zone_odd=1: 98 P, 14 N
+```
+
+This is signal, but not a theorem candidate by itself.  It suggests a parity/density residue inside
+the dense off-conic zone, while confirming that coarse zone statistics do not explain the P-valued
+zero-xor witness selection cleanly.
+
 ## Next Checks
 
 1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,

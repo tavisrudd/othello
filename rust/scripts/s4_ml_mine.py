@@ -62,6 +62,7 @@ STATE_CHILD_COLUMNS = {
     "child_N_frac",
     "child_unknown_frac",
 }
+XORTRY_TARGET_COLUMNS = {"live0", "value_known", "value_P", "value_N"}
 
 
 def parse_kv(line: str) -> dict[str, str]:
@@ -85,15 +86,41 @@ def as_int(v: object, default: int = 0) -> int:
         return default
 
 
-def load_rows(cache_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+def mining_log_paths(cache_dir: Path) -> list[Path]:
     logs = cache_dir / "logs"
+    paths: set[Path] = set()
+    if logs.exists():
+        paths.update(logs.glob("mine-*.out"))
+        paths.update(logs.glob("xormine-*.out"))
+        paths.update(logs.glob("xormine-*.txt"))
+    paths.update(cache_dir.glob("xormine-*.txt"))
+    paths.update(cache_dir.glob("xormine-*.out"))
+    return sorted(paths)
+
+
+def root_id_from_source(source: str) -> str:
+    root_id = source.removeprefix("mine-").removeprefix("xormine-")
+    return re.sub(r"\.(replies|depth[0-9]+)\.out$|\.out$|\.txt$", "", root_id)
+
+
+def add_numeric_kv(row: dict[str, object], kv: dict[str, str], skip: set[str]) -> None:
+    for key, value in kv.items():
+        if key in skip:
+            continue
+        if re.fullmatch(r"-?[0-9]+", value):
+            row[key] = int(value)
+        else:
+            row[key] = value
+
+
+def load_rows(cache_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     reply_rows: list[dict[str, object]] = []
     state_rows: list[dict[str, object]] = []
+    xortry_rows: list[dict[str, object]] = []
 
-    for path in sorted(logs.glob("mine-*.out")):
+    for path in mining_log_paths(cache_dir):
         source = path.name
-        root_id = source.removeprefix("mine-")
-        root_id = re.sub(r"\.(replies|depth[0-9]+)\.out$", "", root_id)
+        root_id = root_id_from_source(source)
         q_from_name = None
         m = re.search(r"q([0-9]+)", source)
         if m:
@@ -103,6 +130,13 @@ def load_rows(cache_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
         header_t4 = ""
         for line in path.read_text().splitlines():
             if line.startswith("S4MINE "):
+                kv = parse_kv(line)
+                header_q = as_int(kv.get("q"), q_from_name or 0)
+                tm = re.search(r"t4=\[([^\]]+)\]", line)
+                if tm:
+                    header_t4 = tm.group(1).replace(" ", "")
+                continue
+            if line.startswith("S4XORMINE "):
                 kv = parse_kv(line)
                 header_q = as_int(kv.get("q"), q_from_name or 0)
                 tm = re.search(r"t4=\[([^\]]+)\]", line)
@@ -177,8 +211,39 @@ def load_rows(cache_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
                 row["value_P"] = int(row["value"] == "P")
                 row["value_N"] = int(row["value"] == "N")
                 state_rows.append(row)
+            elif line.startswith("XORTRY "):
+                kv = parse_kv(line)
+                x_r, x_c = parse_cell(kv.get("x", ""))
+                y_r, y_c = parse_cell(kv.get("y", ""))
+                row = {
+                    "source": source,
+                    "root": root_id,
+                    "q": header_q,
+                    "t4": header_t4,
+                    "x_r": x_r,
+                    "x_c": x_c,
+                    "y_r": y_r,
+                    "y_c": y_c,
+                    "xgeom": kv.get("xgeom", ""),
+                    "ygeom": kv.get("ygeom", ""),
+                    "value": kv.get("value", ""),
+                }
+                add_numeric_kv(row, kv, {"x", "y", "xgeom", "ygeom", "value"})
+                row["has_zone"] = int("zone_v" in kv)
+                q = as_int(row["q"])
+                if q and "live_on" in row:
+                    row["live_on_frac"] = as_int(row["live_on"]) / max(q - 1, 1)
+                if q and "conic_v" in row:
+                    row["conic_v_frac"] = as_int(row["conic_v"]) / max(q - 1, 1)
+                if q and "zone_v" in row:
+                    row["zone_v_frac"] = as_int(row["zone_v"]) / max(q * q, 1)
+                row["live0"] = int(as_int(row.get("live_on")) == 0)
+                row["value_known"] = int(row["value"] in {"P", "N"})
+                row["value_P"] = int(row["value"] == "P")
+                row["value_N"] = int(row["value"] == "N")
+                xortry_rows.append(row)
 
-    return pd.DataFrame(reply_rows), pd.DataFrame(state_rows)
+    return pd.DataFrame(reply_rows), pd.DataFrame(state_rows), pd.DataFrame(xortry_rows)
 
 
 def numeric_feature_frame(df: pd.DataFrame, categorical: list[str], exclude: set[str]) -> pd.DataFrame:
@@ -433,7 +498,9 @@ def value_count_string(part: pd.DataFrame) -> str:
 def numeric_stats(part: pd.DataFrame, col: str, prefix: str, row: dict[str, object]) -> None:
     if col not in part:
         return
-    series = part[col]
+    series = pd.to_numeric(part[col], errors="coerce").dropna()
+    if series.empty:
+        return
     row[f"{prefix}_min"] = int(series.min())
     row[f"{prefix}_max"] = int(series.max())
     row[f"{prefix}_avg"] = float(series.mean())
@@ -546,11 +613,18 @@ def main() -> None:
     out_dir = args.out_dir or (args.cache_dir / "ml")
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    replies, states = load_rows(args.cache_dir)
+    replies, states, xortries = load_rows(args.cache_dir)
+    if "has_zone" in xortries:
+        zone_xortries = xortries[xortries["has_zone"] == 1].copy()
+    else:
+        zone_xortries = pd.DataFrame()
     replies.to_csv(out_dir / "reply-features.tsv", sep="\t", index=False)
     states.to_csv(out_dir / "state-features.tsv", sep="\t", index=False)
+    xortries.to_csv(out_dir / "xortry-features.tsv", sep="\t", index=False)
+    zone_xortries.to_csv(out_dir / "xortry-zone-features.tsv", sep="\t", index=False)
     grouped_summary(replies, "reply", out_dir)
     grouped_summary(states, "state", out_dir)
+    grouped_summary(xortries, "xortry", out_dir)
     conic_bound_report(replies, out_dir)
     joint_summary(
         replies,
@@ -573,6 +647,20 @@ def main() -> None:
         ["q", "ply", "sel_on", "live_on"],
         ["legal", "legal_on", "legal_ext", "legal_int", "dead_on"],
     )
+    joint_summary(
+        xortries,
+        "xortry-geom-value",
+        out_dir,
+        ["q", "xgeom", "ygeom", "value"],
+        ["live_on", "conic_v", "conic_e", "conic_comp", "zone_v", "zone_e", "zone_max", "zone_degmax"],
+    )
+    joint_summary(
+        zone_xortries,
+        "xortry-zone",
+        out_dir,
+        ["q", "zone_nk_known", "zone_comp", "zone_other"],
+        ["live_on", "zone_v", "zone_e", "zone_max", "zone_degmax"],
+    )
     target_group_report(
         replies,
         "reply",
@@ -586,6 +674,25 @@ def main() -> None:
         out_dir,
         ["live0", "value_known", "value_P", "value_N"],
         ["q", "ply", "legal_on", "legal_ext", "legal_int", "sel_on", "live_on", "dead_on"],
+    )
+    target_group_report(
+        zone_xortries,
+        "xortry-zone",
+        out_dir,
+        ["live0", "value_known", "value_P", "value_N"],
+        [
+            "q",
+            "xgeom",
+            "ygeom",
+            "live_on",
+            "conic_nk_xor",
+            "conic_comp",
+            "zone_v",
+            "zone_comp",
+            "zone_odd",
+            "zone_degmax",
+            "zone_nk_known",
+        ],
     )
 
     feature_sets = [
@@ -609,6 +716,45 @@ def main() -> None:
             states,
             numeric_feature_frame(states, [], TARGET_COLUMNS),
         ),
+        (
+            "xortry-conic-zone",
+            zone_xortries,
+            numeric_feature_frame(zone_xortries, ["xgeom", "ygeom"], XORTRY_TARGET_COLUMNS),
+        ),
+        (
+            "xortry-zone-only",
+            zone_xortries,
+            numeric_feature_frame(
+                zone_xortries,
+                [],
+                XORTRY_TARGET_COLUMNS
+                | {
+                    "x_r",
+                    "x_c",
+                    "y_r",
+                    "y_c",
+                    "memo",
+                    "live_on",
+                    "live_on_frac",
+                    "conic_v",
+                    "conic_v_frac",
+                    "conic_e",
+                    "conic_comp",
+                    "conic_iso",
+                    "conic_path",
+                    "conic_cycle",
+                    "conic_other",
+                    "conic_odd",
+                    "conic_max",
+                    "conic_degmax",
+                    "conic_off",
+                    "conic_nk_known",
+                    "conic_nk_xor",
+                    "conic_nk_path_xor",
+                    "conic_nk_cycle_xor",
+                },
+            ),
+        ),
     ]
 
     for name, df, X in feature_sets:
@@ -630,6 +776,8 @@ def main() -> None:
         f.write(f"cache_dir={args.cache_dir}\n")
         f.write(f"reply_rows={len(replies)}\n")
         f.write(f"state_rows={len(states)}\n")
+        f.write(f"xortry_rows={len(xortries)}\n")
+        f.write(f"xortry_zone_rows={len(zone_xortries)}\n")
         f.write("Feature matrices exclude direct target-label columns; projection TSVs keep labels for inspection.\n")
         f.write("Feature sets:\n")
         for name, _df, X in feature_sets:
