@@ -841,8 +841,9 @@ math target should be a repair-intruder existence lemma plus the empty-conic/sma
 Geometry follow-up 2026-07-08: `notes/2026-07-08-codex-zone-repair-geometry.md` and
 `notes/2026-07-08-zone-repair-geometry.py` sharpen the worst case: every q=17 score-9 repair has
 one live conic parameter before the reply, and the selected reply is the unique legal internal
-intruder that kills that last live parameter and leaves a clean P-valued empty-conic state.  No
-single line-type/product-order rule explains the repair.
+intruder that kills that last live parameter and leaves a clean P-valued empty-conic state.  The
+same guard intruder answers both score-9 opponent moves from a state and is already legal/internal
+before those moves.  No single line-type/product-order rule explains the repair.
 
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 

@@ -10,6 +10,7 @@ For every score-9 repair transition in the q = 17 sample:
 
 - the opponent move is an external intruder with exactly one played tangency;
 - the repair is an internal intruder with no played tangencies;
+- the repair is already a legal internal intruder in the pre-opponent P-state;
 - exactly one conic parameter is live before the repair;
 - the repair kills that last live conic parameter;
 - the repaired state is clean: empty conic residual, `defxor = 0`, zone Grundy 0;
@@ -120,6 +121,31 @@ conic-killing
 
 and that is the optimal repair.
 
+There is an even stronger state-level pattern.  The 28 score-9 transitions come from 14 starting
+states:
+
+```text
+states with score-9 transitions: 14
+score-9 opponent moves per state: exactly 2
+distinct score-9 repairs per state: exactly 1
+repair was already legal before the opponent move: 14/14
+repair was already internal before the opponent move: 14/14
+```
+
+So the worst-case repair may be selectable before the opponent move.  In each score-9 state there
+is a distinguished internal "guard" intruder `r`; the two worst opponent moves leave two different
+single live conic parameters, and the same `r` kills whichever one remains.
+
+Repair-cell frequency in the normalized q = 17 representatives:
+
+```text
+(6,12): 4 states
+(1,8):  3 states
+(10,14): 3 states
+(12,11): 3 states
+(1,6):  1 state
+```
+
 The killed conic parameter is not always killed through the same played point.  Among the 28
 score-9 kills, the played conic witness is:
 
@@ -163,9 +189,9 @@ Again, product order alone is not the repair rule.
 The next useful theorem target should be local and geometric:
 
 ```text
-Last-live-conic repair lemma:
-    In the high-cost regime, after the opponent move leaves a single live conic parameter u,
-    there is a unique legal internal intruder r such that:
+Guard-intruder repair lemma:
+    In the high-cost regime, before the opponent move there is a legal internal guard intruder r
+    such that whenever a worst opponent move leaves a single live conic parameter u:
       sigma_r sends some played conic parameter to u,
       the conic becomes empty,
       the resulting off-conic zone has Grundy value 0,

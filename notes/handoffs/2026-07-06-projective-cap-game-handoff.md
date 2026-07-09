@@ -265,8 +265,9 @@ Current structural picture:
   lemma plus a small-Z / empty-conic base law.
 - Geometry mining sharpens the worst case: every score-9 repair has one live conic parameter
   before the reply, and the selected reply is the unique legal internal intruder that both kills
-  that last live parameter and leaves a clean P-valued empty-conic state.  Product order/line type
-  alone does not characterize it.
+  that last live parameter and leaves a clean P-valued empty-conic state.  The same repair intruder
+  answers both score-9 opponent moves from a state and is already legal/internal before those moves.
+  Product order/line type alone does not characterize it.
 
 Useful references:
 
@@ -369,8 +370,9 @@ Recently reported:
   winning reply whose grandchild has `Z <= 2`; q=17 high ceilings are immediate-zone costs.
 - **C31 repair mining:** score-9 q=17 repairs are all intruder -> intruder, conic-emptying,
   `defxor = 0`, zone-Grundy-0 moves.
-- **Repair geometry mining:** score-9 q=17 repairs are unique internal clean conic-killers among
-  the legal intruder candidates; no single line-type or product-order rule explains them.
+- **Repair geometry mining:** score-9 q=17 repairs are state-level guard intruders: the same
+  already-legal internal clean conic-killer answers both worst opponent moves; no single
+  line-type/product-order rule explains them.
 
 Good Lean side targets:
 
