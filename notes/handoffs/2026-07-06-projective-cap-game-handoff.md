@@ -252,6 +252,9 @@ Current structural picture:
 - C29 says the next law is unlikely to be a residue class of `q` alone: q=11 and q=17 are mixed,
   q=13, q=19, and q=23 are all-P at the on-conic bucket layer.  Use order/spectrum features to
   describe intruder dynamics, but prioritize recursive steering/repair statements.
+- C31 supports the recursive steering route: among C20 P reply-states, the raw off-conic zone
+  reaches 10 at q=13 and 38 at q=17, but the optimal recursive steering ceiling is only 2 at q=13
+  and 9 at q=17.
 
 Useful references:
 
@@ -267,6 +270,14 @@ on-conic move
 or controlled first intrusion
 or second-intrusion repair
 or zone steering to a small-zone endgame
+```
+
+Current proof target after C31:
+
+```text
+bounded-zone steering lemma
++ bounded-zone terminal/endgame law
+=> on-conic escape theorem
 ```
 
 ## Current Lean Map
@@ -332,21 +343,22 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C31:** zone-steering ceiling census; now the top proof-direction task after C29 refuted the
-  residue-class law.
 - **C30:** route-C certificate books for q=17 and q=19.
 - **C32:** even-dimensional composite mirror / PG(4,3) and plane variant probe.
+- **Steering follow-up:** turn C31's `Z <= 9` evidence into a bounded-zone lemma/terminal
+  certificate schema.
 
 Recently reported:
 
 - **C29:** mixed-column mod-3 law refuted; q=23 has 22/22 on-conic buckets P.
+- **C31:** recursive zone-steering census supports the route; max steering ceiling is 2 at q=13
+  and 9 at q=17.
 
 Good Lean side targets:
 
 - q=9 terminal-reply kernel or certificate assembly.
 - q=17/q=19 certificate route after C30 generation.
-- formal small-zone / second-intrusion lemmas only after C31/C20-style data identifies a stable
-  statement.
+- formal bounded-zone / second-intrusion lemmas using C31's steering-ceiling data.
 
 ## Literature / Framing
 

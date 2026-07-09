@@ -790,7 +790,7 @@ q=11/13).
 
 Report file: `notes/2026-07-08-codex-route-c-phase5.md`.
 
-## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise)
+## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-09]
 
 Context: the C20 review's structural reading is that the session-11 snapshot laws hold exactly
 while the intruder zone is an O(1) endgame (max zone 2 at q=11 vs 10 at q=13 / 38 at q=17), and
@@ -819,6 +819,13 @@ deliverable.
 5. Budget: hard 8h wall, single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-08-codex-zone-steering-census.md`.
+
+Status: positive for the steering route through q=17.  Reconstructed C20 P reply-states gave
+recursive ceilings `max Z = 2` at q=13 and `max Z = 9` at q=17, despite initial off-conic zones up
+to 10 and 38 respectively.  Independent outcome+Z recursion spot-checked 10 states at q=13 and
+10 states at q=17.  This keeps the dynamic "steering lemma + bounded-zone terminal law" proof shape
+alive; the next math target is to state/prove the bounded-zone family rather than hunt another
+static feature law.
 
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
