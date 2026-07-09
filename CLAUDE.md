@@ -259,3 +259,8 @@ of this. End each session with the handoff's Progress updated + a dated Handoff 
 (session id, commits, what landed, measurements, next steps). Ship doc updates in the same
 commit as (or back-to-back with) the code they describe — don't leave docs uncommitted
 across a session boundary.
+
+When a handoff is complete or superseded, move it to `notes/handoffs/done/` (from
+`rust/`: `../notes/handoffs/done/`). Add a short header near the top before moving it
+that states the final status, e.g. completed, superseded, closed negative, or archived
+for history, and points to any replacement current handoff if one exists.
