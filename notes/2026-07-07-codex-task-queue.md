@@ -716,7 +716,7 @@ probe was negative: q=11 all P escape children, q=13 all P escape children, and 
 sample all had zero `MirrorStepGood` hits.  Keep `MirrorClosed` as a formal/deep-leaf tool, not as
 an immediate size-4 certificate compressor.
 
-## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31
+## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31 [REPORTED 2026-07-09]
 
 Context: C18's null killed bucket-level laws over static features, but it never isolated the
 COLUMN-level existence question "does q admit any N-valued on-conic bucket at all". On that
@@ -753,6 +753,12 @@ refutation is a full-value deliverable.
 Budget: hard 8h wall, single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-08-codex-mod3-column-law.md`.
+
+Status: the mod-3 column law was refuted at q=23.  The bucket-first pipeline validated q=17
+against C15/C20 (10 buckets, 5 P / 5 N), then solved all 22 full-PGL on-conic q=23 buckets; every
+bucket was P.  q=23 is therefore not a mixed-column case despite `23 == 2 mod 3`.  The report stops
+there rather than spending time on q=25/29/31; the next proof-direction task is C31 zone steering,
+not further residue-class speculation.
 
 ## C30. Route C phase 5 — certificate books for q = 17 and q = 19
 

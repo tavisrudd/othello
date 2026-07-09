@@ -18,7 +18,8 @@ Closed or structurally understood:
 - `PG(2m-1,q)` is P for every odd `q`, by a fixed-point-free elliptic projective involution.
 - `PG(2,q)` is P for all even `q`.
 - Odd projective planes are proved in Lean for `q = 5, 7, 11, 13`; `q = 3, 9, 17, 19` are
-  computed P but not all Lean-closed.
+  computed P but not all Lean-closed.  `q = 23` now has a bucket-first on-conic computation:
+  all 22 full-`PGL(2,23)` on-conic buckets are P, conditional on the orbit-invariance bridge.
 
 Main remaining mathematical problem:
 
@@ -37,6 +38,11 @@ frame reduction
 Mirrors remain useful proof infrastructure and diagnostics, but C27/C28 show they are not the
 uniform odd-plane mechanism at the size-4 escape layer.
 
+C29 also killed the clean residue-class explanation for mixed on-conic columns: `q = 23` is
+all-P at the bucket layer even though `23 == 2 mod 3`.  Treat arithmetic/order features as
+diagnostics, not as the main classifier.  The next uniform-proof pressure point is C31's recursive
+zone-steering ceiling.
+
 ## Status Table — PG(2,q)
 
 | q | Value | Evidence / proof state | Remaining gap |
@@ -50,8 +56,8 @@ uniform odd-plane mechanism at the size-4 escape layer.
 | 13 | **P** | Lean certificate assembly: `CertData.Q13.initialPStatement_finrank` | none |
 | 17 | P | `esc` campaign; mixed on-conic buckets; min-escape histogram `5:3 10:12 11:6` | C30 certificate book / no uniform proof |
 | 19 | P | `esc` campaign; all low-level escapes | C30 certificate book / no uniform proof |
-| 23 | ? | size-3-rooted `esc` class 0 exceeded the 200M memo cap; bucket-first C29 planned | live falsification frontier |
-| all odd q | conjectural P | no counterexample through `q=19` | strategy-level proof: defect/second-intrusion, not snapshot invariant |
+| 23 | P? | C29 bucket-first full-`PGL(2,23)` on-conic census: all 22 buckets P; old size-3-rooted `esc` class 0 exceeded the 200M memo cap | no Lean theorem; formal orbit bridge/certificate route still open |
+| all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
 
 ## Closed Higher-Dimensional Families
 
@@ -170,6 +176,7 @@ Key facts:
 
 - the `q-4` remaining on-conic cells are all legal extensions;
 - all computed escapes through `q=19` have an on-conic P witness;
+- C29's q=23 bucket-first census found all 22 full-`PGL(2,23)` on-conic buckets P;
 - the q=17 min-escape classes have exactly one on-conic P witness.
 
 Current sharper target:
@@ -194,6 +201,8 @@ Do not restart these as proof routes unless new evidence changes the premise.
 - **Weak fixed-locus mirror principle:** false without the pair-extension condition.
 - **Size-4 mirror certificate compression:** C28/`mir` found zero `MirrorStepGood` hits among:
   q=11 all P escape children, q=13 all P escape children, and q=17 min-escape children.
+- **Mixed-column mod-3 law:** C29 refuted it at q=23.  The prediction was mixed because
+  `23 == 2 mod 3`; the bucket-first full-PGL on-conic census found all 22 q=23 buckets P.
 
 ## Mirrors: Correct Role
 
@@ -240,6 +249,9 @@ Current structural picture:
 - Two-intruder components are even cycles plus small defect skeletons.
 - Even cycles are Grundy-0, so the large bulk cancels.
 - The value lives in Dawson-path-like defect skeletons and in the live off-conic zone.
+- C29 says the next law is unlikely to be a residue class of `q` alone: q=11 and q=17 are mixed,
+  q=13, q=19, and q=23 are all-P at the on-conic bucket layer.  Use order/spectrum features to
+  describe intruder dynamics, but prioritize recursive steering/repair statements.
 
 Useful references:
 
@@ -303,7 +315,8 @@ rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/g
 Important modes:
 
 - `escape q`: size-3 escape histogram using shared memo.
-- `esc q [--cap N] [class...]`: private-memo per-class escape solve; use for q=23 sizing.
+- `esc q [--cap N] [class...]`: private-memo per-class escape solve.  Historical q=23
+  size-3-rooted sizing hit the cap; prefer bucket-first S4-rooted probes for q >= 23.
 - `feat q`: conic/on-off/internal feature dump.
 - `cert q [--anchored]`: emit certificate books.
 - `certcheck q file`: independent rules-only certificate check.
@@ -319,10 +332,14 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C29:** mixed-column mod-3 law and bucket-first q=23/25/29/31 census.
+- **C31:** zone-steering ceiling census; now the top proof-direction task after C29 refuted the
+  residue-class law.
 - **C30:** route-C certificate books for q=17 and q=19.
-- **C31:** zone-steering ceiling census.
 - **C32:** even-dimensional composite mirror / PG(4,3) and plane variant probe.
+
+Recently reported:
+
+- **C29:** mixed-column mod-3 law refuted; q=23 has 22/22 on-conic buckets P.
 
 Good Lean side targets:
 
