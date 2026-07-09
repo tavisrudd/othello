@@ -90,6 +90,9 @@ two on-conic moves:       live_on =  q - 7
 The generated check is `rust/s4-dumps/2026-07-08/ml/conic-bound-report.txt`; it currently has
 54 geometry groups and zero failures.
 
+Semi-formal proof note:
+[`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md).
+
 This is proof-shaped, not just statistical.  At the S4 root there are `q - 5` live affine-conic
 cells.  A first off-conic move can kill at most six of them: its row, its column, and at most one
 new conic point on each line through the four selected conic points.  A second off-conic move can

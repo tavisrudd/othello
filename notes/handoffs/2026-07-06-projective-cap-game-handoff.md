@@ -411,7 +411,8 @@ Recently reported:
   `off/off >= max(0,q-19)`, `off/on >= max(0,q-13)`, and `on/on = q-7` for live affine-conic
   cells after an S4 root reply.  This is proof-shaped by row/column plus secant incidence counting.
   Consequence: q=17/q=19 are the empty-conic boundary cases, while q>=23 cannot empty the live
-  conic at this layer and needs positive-live-conic steering.
+  conic at this layer and needs positive-live-conic steering.  Semi-formal proof note:
+  [`../2026-07-08-s4-two-ply-conic-depletion.md`](../2026-07-08-s4-two-ply-conic-depletion.md).
 
 Good Lean side targets:
 

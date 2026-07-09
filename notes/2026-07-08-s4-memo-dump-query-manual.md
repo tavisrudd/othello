@@ -296,7 +296,9 @@ on/on lower bound:   max(0, q - 7)
 
 Across the cached q=9,11,13,17,19,23,25 S4 root samples, all q/geometry groups meet that bound.
 This gives a proof target for the incidence layer and explains why q>=23 root replies cannot empty
-the live affine conic.
+the live affine conic.  See
+[`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md) for the
+semi-formal proof sketch.
 
 ### Root Child Census
 

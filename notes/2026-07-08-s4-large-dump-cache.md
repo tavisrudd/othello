@@ -97,4 +97,5 @@ on/on lower bound:   max(0, q - 7)
 ```
 
 This is the best proof-facing import from the ML pass so far.  It turns the observed absence of
-q>=23 conic-emptying root replies into a concrete incidence-count lemma target.
+q>=23 conic-emptying root replies into a concrete incidence-count lemma target.  Semi-formal proof
+note: [`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md).
