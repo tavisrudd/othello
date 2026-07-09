@@ -44,6 +44,16 @@
 //                -- Rust-native bucket-label sweep: enumerate normalized on-conic S4
 //                   six-sets {inf,0,t1,t2,t3,t4} modulo full PGL(2,q), then solve
 //                   one representative per bucket with `s4`.
+//   s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
+//                -- solve one S4 root and dump the solved canonical memo as an exact sorted
+//                   mmap-friendly raw table: (u128 canonical key, 1-bit P/N value).
+//   s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
+//                -- freeze a raw S4 dump into a compact BuRR-style ribbon archive for runtime
+//                   queries. Uses 64-bit folded keys plus membership fingerprints; raw remains
+//                   the exact source of truth.
+//   s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
+//                -- line-protocol runtime query shell over a dumped S4 memo/archive. Commands:
+//                   state, moves, play r,c, pop, replies r,c, bench <iters>, help, quit.
 //   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
@@ -71,10 +81,13 @@
 // counterexample; if `defect`'s min-deviating-size approaches 0/1, the root is about to flip.
 
 use std::collections::{BTreeMap, HashMap, HashSet};
+use std::convert::TryInto;
 use std::env;
+use std::ffi::c_void;
 use std::fs::File;
 use std::hash::{BuildHasherDefault, Hasher};
-use std::io::{BufWriter, Write};
+use std::io::{self, BufRead, BufWriter, Write};
+use std::os::unix::io::AsRawFd;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::thread;
@@ -94,6 +107,85 @@ fn mask_or(a: &mut Mask, b: &Mask) {
 #[inline]
 fn set_bit(a: &mut Mask, idx: usize) {
     a[idx >> 6] |= 1u64 << (idx & 63);
+}
+
+#[inline]
+fn bit_is_set(a: &Mask, idx: usize) -> bool {
+    (a[idx >> 6] & (1u64 << (idx & 63))) != 0
+}
+
+#[inline]
+fn mix64(mut x: u64) -> u64 {
+    x ^= x >> 30;
+    x = x.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    x ^= x >> 27;
+    x = x.wrapping_mul(0x94d0_49bb_1331_11eb);
+    x ^ (x >> 31)
+}
+
+#[inline]
+fn fastrange(h: u64, n: u64) -> u64 {
+    ((h as u128).wrapping_mul(n as u128) >> 64) as u64
+}
+
+const PROT_READ: i32 = 1;
+const MAP_PRIVATE: i32 = 2;
+const MADV_RANDOM: i32 = 1;
+const MAP_FAILED: *mut c_void = !0usize as *mut c_void;
+
+unsafe extern "C" {
+    fn mmap(
+        addr: *mut c_void,
+        len: usize,
+        prot: i32,
+        flags: i32,
+        fd: i32,
+        offset: isize,
+    ) -> *mut c_void;
+    fn munmap(addr: *mut c_void, len: usize) -> i32;
+    fn madvise(addr: *mut c_void, len: usize, advice: i32) -> i32;
+}
+
+struct MmapFile {
+    ptr: *const u8,
+    len: usize,
+    _file: File,
+}
+
+impl MmapFile {
+    fn open(path: &str) -> io::Result<MmapFile> {
+        let file = File::open(path)?;
+        let len = file.metadata()?.len() as usize;
+        if len == 0 {
+            return Err(io::Error::new(io::ErrorKind::InvalidData, "cannot mmap empty file"));
+        }
+        // SAFETY: `file` is kept alive inside `MmapFile`, `len` is the current file length, and the
+        // mapping is read-only/private. All later reads are bounds-checked through slices over this len.
+        let ptr = unsafe { mmap(std::ptr::null_mut(), len, PROT_READ, MAP_PRIVATE, file.as_raw_fd(), 0) };
+        if ptr == MAP_FAILED {
+            return Err(io::Error::last_os_error());
+        }
+        // SAFETY: advisory only over the successfully-created mapping range.
+        unsafe {
+            let _ = madvise(ptr, len, MADV_RANDOM);
+        }
+        Ok(MmapFile { ptr: ptr as *const u8, len, _file: file })
+    }
+
+    fn bytes(&self) -> &[u8] {
+        // SAFETY: `ptr,len` come from a live read-only mapping and `Drop` unmaps only after `self`
+        // is no longer usable.
+        unsafe { std::slice::from_raw_parts(self.ptr, self.len) }
+    }
+}
+
+impl Drop for MmapFile {
+    fn drop(&mut self) {
+        // SAFETY: this unmaps the exact range returned by `mmap` once, when the owner drops.
+        unsafe {
+            let _ = munmap(self.ptr as *mut c_void, self.len);
+        }
+    }
 }
 
 // ---- fast passthrough hasher for u128 fingerprint keys ----
@@ -1144,6 +1236,45 @@ fn parse_t4(spec: &str) -> Vec<usize> {
         .collect()
 }
 
+fn build_s4_root(b: &Board, t4: &[usize]) -> (Vec<u16>, Mask, Mask, [(usize, usize); 4]) {
+    assert!(t4.len() == 4, "s4 mode needs exactly four t values");
+    let q = b.q;
+    let mut seen = HashSet::new();
+    let empty = [0u64; MAXW];
+    let mut chosen = empty;
+    let mut forbidden = empty;
+    let mut occ: Vec<u16> = Vec::new();
+    let mut cells = [(0usize, 0usize); 4];
+    for (i, &t) in t4.iter().enumerate() {
+        assert!(t > 0 && t < q, "t={} is not a nonzero GF({}) element encoding", t, q);
+        assert!(seen.insert(t), "duplicate t value {}", t);
+        let c = b.gf.inv[t] as usize;
+        let z = t * q + c;
+        cells[i] = (t, c);
+        add_cell_checked(b, z, &mut occ, &mut chosen, &mut forbidden);
+    }
+    (occ, chosen, forbidden, cells)
+}
+
+fn add_move_if_legal(
+    b: &Board,
+    z: usize,
+    occ: &mut Vec<u16>,
+    chosen: &mut Mask,
+    forbidden: &mut Mask,
+) -> bool {
+    if z >= b.n || bit_is_set(chosen, z) || bit_is_set(forbidden, z) {
+        return false;
+    }
+    for &x in occ.iter() {
+        mask_or(forbidden, &b.line_mask[x as usize * b.n + z]);
+    }
+    mask_or(forbidden, &b.rc_mask[z]);
+    set_bit(chosen, z);
+    occ.push(z as u16);
+    true
+}
+
 // s4 <q> t1,t2,t3,t4 [--cap <slots>]
 fn s4_g(
     b: &Board,
@@ -1203,22 +1334,7 @@ struct S4Eval {
 }
 
 fn eval_s4_on_board(b: &Board, t4: &[usize], cap: usize) -> S4Eval {
-    assert!(t4.len() == 4, "s4 mode needs exactly four t values");
-    let q = b.q;
-    let mut seen = HashSet::new();
-    let empty = [0u64; MAXW];
-    let mut chosen = empty;
-    let mut forbidden = empty;
-    let mut occ: Vec<u16> = Vec::new();
-    let mut cells = [(0usize, 0usize); 4];
-    for (i, &t) in t4.iter().enumerate() {
-        assert!(t > 0 && t < q, "t={} is not a nonzero GF({}) element encoding", t, q);
-        assert!(seen.insert(t), "duplicate t value {}", t);
-        let c = b.gf.inv[t] as usize;
-        let z = t * q + c;
-        cells[i] = (t, c);
-        add_cell_checked(b, z, &mut occ, &mut chosen, &mut forbidden);
-    }
+    let (occ, chosen, forbidden, cells) = build_s4_root(b, t4);
     let mut memo: FnvMap<u128, bool> = FnvMap::default();
     let start = Instant::now();
     let mut occ_solve = occ.clone();
@@ -1524,6 +1640,966 @@ fn solve_s4_buckets(q: usize, cap: usize, start_idx: usize, limit: Option<usize>
         ok_n,
         aborted,
         total_start.elapsed().as_secs_f64()
+    );
+}
+
+const S4_CANON_ID: u64 = 0x5347_4341_4e4f_4e01; // "SGCANON" v1: Board::canon in this file.
+const S4_FOLD_ID: u64 = 0x5347_464f_4c44_0001; // fold_key64 v1.
+const S4_ROOT_KIND_ONCONIC_INV: u16 = 1;
+const S4_VALUE_BOOL_PN: u8 = 1; // raw bool: false=P, true=N.
+const S4_KEY_U128_CANON: u8 = 1;
+const S4_KEY_U64_FOLDED_CANON: u8 = 2;
+const RAW_MEMO_MAGIC: [u8; 8] = *b"GCAPRAW2";
+const RAW_MEMO_VERSION: u32 = 2;
+const RAW_MEMO_HEADER: usize = 128;
+const RAW_MEMO_RECORD: usize = 24;
+
+fn read_u16_le(bytes: &[u8], off: usize) -> u16 {
+    u16::from_le_bytes(bytes[off..off + 2].try_into().unwrap())
+}
+
+fn read_u32_le(bytes: &[u8], off: usize) -> u32 {
+    u32::from_le_bytes(bytes[off..off + 4].try_into().unwrap())
+}
+
+fn read_u64_le(bytes: &[u8], off: usize) -> u64 {
+    u64::from_le_bytes(bytes[off..off + 8].try_into().unwrap())
+}
+
+fn write_u16_le<W: Write>(w: &mut W, x: u16) -> io::Result<()> {
+    w.write_all(&x.to_le_bytes())
+}
+
+fn write_u32_le<W: Write>(w: &mut W, x: u32) -> io::Result<()> {
+    w.write_all(&x.to_le_bytes())
+}
+
+fn write_u64_le<W: Write>(w: &mut W, x: u64) -> io::Result<()> {
+    w.write_all(&x.to_le_bytes())
+}
+
+fn s4_status_code(label: Option<&'static str>) -> u8 {
+    match label {
+        Some("P") => 1,
+        Some("N") => 2,
+        _ => 0,
+    }
+}
+
+fn status_code_label(code: u8) -> &'static str {
+    match code {
+        1 => "P",
+        2 => "N",
+        _ => "-",
+    }
+}
+
+fn raw_record_key(bytes: &[u8], idx: usize) -> u128 {
+    let off = RAW_MEMO_HEADER + idx * RAW_MEMO_RECORD;
+    let lo = read_u64_le(bytes, off) as u128;
+    let hi = read_u64_le(bytes, off + 8) as u128;
+    lo | (hi << 64)
+}
+
+fn raw_record_value(bytes: &[u8], idx: usize) -> bool {
+    let off = RAW_MEMO_HEADER + idx * RAW_MEMO_RECORD;
+    bytes[off + 16] != 0
+}
+
+fn fold_key64(key: u128) -> u64 {
+    let lo = key as u64;
+    let hi = (key >> 64) as u64;
+    mix64(lo ^ hi.rotate_left(17))
+}
+
+struct RawMemoMmap {
+    mmap: MmapFile,
+    q: usize,
+    t4: [usize; 4],
+    cap: u64,
+    n_records: usize,
+    status: u8,
+}
+
+impl RawMemoMmap {
+    fn open(path: &str) -> io::Result<RawMemoMmap> {
+        let mmap = MmapFile::open(path)?;
+        let bytes = mmap.bytes();
+        if bytes.len() < RAW_MEMO_HEADER || bytes[0..8] != RAW_MEMO_MAGIC {
+            return Err(io::Error::new(io::ErrorKind::InvalidData, "bad raw memo magic"));
+        }
+        let version = read_u32_le(bytes, 8);
+        if version != RAW_MEMO_VERSION {
+            return Err(io::Error::new(io::ErrorKind::InvalidData, format!("raw memo version {version}")));
+        }
+        let header_len = read_u32_le(bytes, 12) as usize;
+        if header_len != RAW_MEMO_HEADER {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo header length {header_len}, expected {RAW_MEMO_HEADER}"),
+            ));
+        }
+        let canon_id = read_u64_le(bytes, 16);
+        if canon_id != S4_CANON_ID {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo canon id {canon_id:#x}, expected {S4_CANON_ID:#x}"),
+            ));
+        }
+        let root_kind = read_u16_le(bytes, 28);
+        if root_kind != S4_ROOT_KIND_ONCONIC_INV {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo root kind {root_kind}, expected {S4_ROOT_KIND_ONCONIC_INV}"),
+            ));
+        }
+        let maxw = read_u16_le(bytes, 30) as usize;
+        if maxw != MAXW {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo MAXW {maxw}, this build {MAXW}"),
+            ));
+        }
+        let record_len = read_u32_le(bytes, 56) as usize;
+        if record_len != RAW_MEMO_RECORD {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo record length {record_len}, expected {RAW_MEMO_RECORD}"),
+            ));
+        }
+        if bytes[61] != S4_VALUE_BOOL_PN {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo value encoding {}, expected {}", bytes[61], S4_VALUE_BOOL_PN),
+            ));
+        }
+        if bytes[62] != S4_KEY_U128_CANON {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo key format {}, expected {}", bytes[62], S4_KEY_U128_CANON),
+            ));
+        }
+        let n_records = read_u64_le(bytes, 48) as usize;
+        let expected = RAW_MEMO_HEADER + n_records * RAW_MEMO_RECORD;
+        if bytes.len() != expected {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("raw memo size {} bytes, expected {expected}", bytes.len()),
+            ));
+        }
+        let q = read_u32_le(bytes, 24) as usize;
+        let t4 = [
+            read_u16_le(bytes, 32) as usize,
+            read_u16_le(bytes, 34) as usize,
+            read_u16_le(bytes, 36) as usize,
+            read_u16_le(bytes, 38) as usize,
+        ];
+        let cap = read_u64_le(bytes, 40);
+        let status = bytes[60];
+        Ok(RawMemoMmap { mmap, q, t4, cap, n_records, status })
+    }
+
+    fn get(&self, key: u128) -> Option<bool> {
+        let bytes = self.mmap.bytes();
+        let mut lo = 0usize;
+        let mut hi = self.n_records;
+        while lo < hi {
+            let mid = (lo + hi) >> 1;
+            let k = raw_record_key(bytes, mid);
+            if k < key {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        if lo < self.n_records && raw_record_key(bytes, lo) == key {
+            Some(raw_record_value(bytes, lo))
+        } else {
+            None
+        }
+    }
+}
+
+fn write_raw_memo(
+    path: &str,
+    q: usize,
+    t4: &[usize],
+    cap: usize,
+    label: Option<&'static str>,
+    memo: FnvMap<u128, bool>,
+) -> io::Result<usize> {
+    let mut rows: Vec<(u128, bool)> = memo.into_iter().collect();
+    rows.sort_unstable_by_key(|&(key, _)| key);
+
+    let tmp = format!("{path}.tmp");
+    let mut w = BufWriter::new(File::create(&tmp)?);
+    w.write_all(&RAW_MEMO_MAGIC)?;
+    write_u32_le(&mut w, RAW_MEMO_VERSION)?;
+    write_u32_le(&mut w, RAW_MEMO_HEADER as u32)?;
+    write_u64_le(&mut w, S4_CANON_ID)?;
+    write_u32_le(&mut w, q as u32)?;
+    write_u16_le(&mut w, S4_ROOT_KIND_ONCONIC_INV)?;
+    write_u16_le(&mut w, MAXW as u16)?;
+    for i in 0..4 {
+        write_u16_le(&mut w, t4[i] as u16)?;
+    }
+    write_u64_le(&mut w, if cap == usize::MAX { u64::MAX } else { cap as u64 })?;
+    write_u64_le(&mut w, rows.len() as u64)?;
+    write_u32_le(&mut w, RAW_MEMO_RECORD as u32)?;
+    w.write_all(&[s4_status_code(label)])?;
+    w.write_all(&[S4_VALUE_BOOL_PN])?;
+    w.write_all(&[S4_KEY_U128_CANON])?;
+    w.write_all(&[0u8])?; // flags
+    w.write_all(&[0u8; RAW_MEMO_HEADER - 64])?;
+    for (key, value) in rows.iter() {
+        write_u64_le(&mut w, *key as u64)?;
+        write_u64_le(&mut w, (*key >> 64) as u64)?;
+        w.write_all(&[*value as u8])?;
+        w.write_all(&[0u8; 7])?;
+    }
+    w.flush()?;
+    std::fs::rename(tmp, path)?;
+    Ok(rows.len())
+}
+
+fn solve_s4_dump(q: usize, t4: &[usize], cap: usize, out_path: &str) {
+    let b = Board::new(q);
+    let (occ, chosen, forbidden, cells) = build_s4_root(&b, t4);
+    let mut memo: FnvMap<u128, bool> = FnvMap::default();
+    let start = Instant::now();
+    let mut occ_solve = occ.clone();
+    let value = s4_g(&b, &mut memo, cap, &mut occ_solve, &chosen, &forbidden);
+    let solve_elapsed = start.elapsed().as_secs_f64();
+    let label = value.map(|is_n| if is_n { "N" } else { "P" });
+    let peak = memo.len();
+    let dump_start = Instant::now();
+    let n_records = write_raw_memo(out_path, q, t4, cap, label, memo).expect("write raw memo");
+    println!(
+        "S4DUMP q={} t4={:?} cells={:?} status={} value={} records={} cap={} solve-elapsed={:.3} dump-elapsed={:.3} out={}",
+        q,
+        t4,
+        cells,
+        if label.is_some() { "OK" } else { "ABORTED" },
+        label.unwrap_or("-"),
+        n_records,
+        fmt_cap(cap),
+        solve_elapsed,
+        dump_start.elapsed().as_secs_f64(),
+        out_path
+    );
+    assert_eq!(peak, n_records, "raw dump lost memo entries");
+}
+
+const RIBBON_W: usize = 64;
+const BURR_MAGIC: [u8; 8] = *b"GCAPBUR2";
+const BURR_VERSION: u32 = 2;
+const BURR_HEADER: usize = 128;
+
+#[inline]
+fn rmask(r: u32) -> u64 {
+    if r >= 64 {
+        u64::MAX
+    } else {
+        (1u64 << r) - 1
+    }
+}
+
+#[inline]
+fn write_packed(z: &mut [u64], r: u32, i: usize, val: u64) {
+    let v = val & rmask(r);
+    let bit = i as u64 * r as u64;
+    let w = (bit >> 6) as usize;
+    let off = (bit & 63) as u32;
+    z[w] |= v << off;
+    if off + r > 64 {
+        z[w + 1] |= v >> (64 - off);
+    }
+}
+
+#[inline]
+fn ribbon_band(seed: u64, key: u64, m: u64) -> (usize, u64) {
+    let h_start = mix64(key.wrapping_add(seed));
+    let h_coeff = mix64(key ^ seed ^ 0x9e37_79b9_7f4a_7c15);
+    (fastrange(h_start, m) as usize, h_coeff | 1)
+}
+
+enum RibbonInsert {
+    Ok,
+    Bumped,
+}
+
+struct S4Ribbon {
+    seed: u64,
+    m: u64,
+    r: u32,
+    cols: u64,
+    z: Vec<u64>,
+}
+
+impl S4Ribbon {
+    fn insert(seed: u64, m: u64, coeff: &mut [u64], rhs: &mut [u64], key: u64, val: u64) -> RibbonInsert {
+        let (start, c0) = ribbon_band(seed, key, m);
+        let mut i = start;
+        let mut co = c0;
+        let mut v = val;
+        loop {
+            if co == 0 {
+                return if v == 0 { RibbonInsert::Ok } else { RibbonInsert::Bumped };
+            }
+            let tz = co.trailing_zeros() as usize;
+            i += tz;
+            co >>= tz;
+            if i >= m as usize {
+                return RibbonInsert::Bumped;
+            }
+            if coeff[i] == 0 {
+                coeff[i] = co;
+                rhs[i] = v;
+                return RibbonInsert::Ok;
+            }
+            co ^= coeff[i];
+            v ^= rhs[i];
+        }
+    }
+
+    fn build(seed: u64, m: u64, r: u32, pairs: &[(u64, u64)]) -> (S4Ribbon, Vec<(u64, u64)>) {
+        let cols = m as usize + RIBBON_W;
+        let mut coeff = vec![0u64; cols];
+        let mut rhs = vec![0u64; cols];
+        let vmask = rmask(r);
+        let mut bumped = Vec::new();
+        for &(key, val) in pairs {
+            if let RibbonInsert::Bumped = Self::insert(seed, m, &mut coeff, &mut rhs, key, val & vmask) {
+                bumped.push((key, val));
+            }
+        }
+
+        let mut zfull = vec![0u64; cols];
+        for i in (0..cols).rev() {
+            let c = coeff[i];
+            if c == 0 {
+                continue;
+            }
+            let mut acc = rhs[i];
+            let mut hi = c & !1u64;
+            while hi != 0 {
+                let k = hi.trailing_zeros() as usize;
+                acc ^= zfull[i + k];
+                hi &= hi - 1;
+            }
+            zfull[i] = acc;
+        }
+
+        let words = (cols as u64 * r as u64).div_ceil(64) as usize + 1;
+        let mut z = vec![0u64; words];
+        for (i, &v) in zfull.iter().enumerate() {
+            write_packed(&mut z, r, i, v);
+        }
+        (S4Ribbon { seed, m, r, cols: cols as u64, z }, bumped)
+    }
+
+    fn bits(&self) -> u64 {
+        self.cols * self.r as u64
+    }
+}
+
+#[inline]
+fn burr_fingerprint(key: u64, fp_bits: u32) -> u64 {
+    if fp_bits == 0 {
+        return 0;
+    }
+    mix64(key ^ 0xd6e8_feb8_6659_fd93) & rmask(fp_bits)
+}
+
+struct S4BurrArchive {
+    val_bits: u32,
+    fp_bits: u32,
+    q: usize,
+    t4: [usize; 4],
+    source_status: u8,
+    source_cap: u64,
+    raw_records: u64,
+    load: f64,
+    n_keys: u64,
+    layers: Vec<S4Ribbon>,
+}
+
+impl S4BurrArchive {
+    fn build(
+        pairs: &[(u64, u64)],
+        raw: &RawMemoMmap,
+        val_bits: u32,
+        fp_bits: u32,
+        load: f64,
+    ) -> S4BurrArchive {
+        assert!(val_bits + fp_bits <= 64, "archive row width must fit u64");
+        assert!((0.1..1.0).contains(&load), "load must be in (0.1, 1.0)");
+        let r = val_bits + fp_bits;
+        let vmask = rmask(val_bits);
+        let mut remaining: Vec<(u64, u64)> = pairs
+            .iter()
+            .map(|&(k, v)| (k, (burr_fingerprint(k, fp_bits) << val_bits) | (v & vmask)))
+            .collect();
+        let n_keys = remaining.len() as u64;
+        let mut layers = Vec::new();
+        let mut seed = 0x5dee_ce66_d3b7_1a2f_u64;
+        while !remaining.is_empty() {
+            let m = (((remaining.len() as f64) / load).ceil() as u64)
+                .max(remaining.len() as u64 + 2 * RIBBON_W as u64);
+            let (ribbon, bumped) = S4Ribbon::build(seed, m, r, &remaining);
+            if bumped.len() == remaining.len() {
+                seed = mix64(seed);
+                continue;
+            }
+            layers.push(ribbon);
+            remaining = bumped;
+            seed = mix64(seed);
+            assert!(layers.len() < 64, "ribbon cascade exceeded 64 layers");
+        }
+        S4BurrArchive {
+            val_bits,
+            fp_bits,
+            q: raw.q,
+            t4: raw.t4,
+            source_status: raw.status,
+            source_cap: raw.cap,
+            raw_records: raw.n_records as u64,
+            load,
+            n_keys,
+            layers,
+        }
+    }
+
+    fn bits(&self) -> u64 {
+        self.layers.iter().map(S4Ribbon::bits).sum()
+    }
+
+    fn write_to(&self, path: &str) -> io::Result<()> {
+        let tmp = format!("{path}.tmp");
+        let mut w = BufWriter::new(File::create(&tmp)?);
+        w.write_all(&BURR_MAGIC)?;
+        write_u32_le(&mut w, BURR_VERSION)?;
+        write_u32_le(&mut w, BURR_HEADER as u32)?;
+        write_u64_le(&mut w, S4_CANON_ID)?;
+        write_u64_le(&mut w, S4_FOLD_ID)?;
+        write_u64_le(&mut w, self.n_keys)?;
+        write_u64_le(&mut w, self.raw_records)?;
+        write_u32_le(&mut w, self.q as u32)?;
+        write_u16_le(&mut w, S4_ROOT_KIND_ONCONIC_INV)?;
+        write_u16_le(&mut w, MAXW as u16)?;
+        for &t in &self.t4 {
+            write_u16_le(&mut w, t as u16)?;
+        }
+        write_u64_le(&mut w, self.source_cap)?;
+        write_u32_le(&mut w, self.val_bits)?;
+        write_u32_le(&mut w, self.fp_bits)?;
+        w.write_all(&[S4_KEY_U64_FOLDED_CANON])?;
+        w.write_all(&[S4_VALUE_BOOL_PN])?;
+        w.write_all(&[self.source_status])?;
+        w.write_all(&[0u8])?; // flags
+        write_u32_le(&mut w, (self.load * 1_000_000.0).round() as u32)?;
+        write_u64_le(&mut w, self.layers.len() as u64)?;
+        w.write_all(&[0u8; BURR_HEADER - 96])?;
+        for layer in &self.layers {
+            write_u64_le(&mut w, layer.seed)?;
+            write_u64_le(&mut w, layer.m)?;
+            write_u64_le(&mut w, layer.cols)?;
+            write_u32_le(&mut w, layer.r)?;
+            write_u64_le(&mut w, layer.z.len() as u64)?;
+            for &word in &layer.z {
+                write_u64_le(&mut w, word)?;
+            }
+        }
+        w.flush()?;
+        std::fs::rename(tmp, path)?;
+        Ok(())
+    }
+}
+
+struct MappedRibbon {
+    seed: u64,
+    m: u64,
+    r: u32,
+    z_off: usize,
+}
+
+struct MappedBurrArchive {
+    mmap: MmapFile,
+    val_bits: u32,
+    fp_bits: u32,
+    q: usize,
+    t4: [usize; 4],
+    source_status: u8,
+    raw_records: u64,
+    n_keys: u64,
+    layers: Vec<MappedRibbon>,
+}
+
+impl MappedBurrArchive {
+    fn open(path: &str) -> io::Result<MappedBurrArchive> {
+        let mmap = MmapFile::open(path)?;
+        let bytes = mmap.bytes();
+        if bytes.len() < BURR_HEADER || bytes[0..8] != BURR_MAGIC {
+            return Err(io::Error::new(io::ErrorKind::InvalidData, "bad s4 burr magic"));
+        }
+        let version = read_u32_le(bytes, 8);
+        if version != BURR_VERSION {
+            return Err(io::Error::new(io::ErrorKind::InvalidData, format!("s4 burr version {version}")));
+        }
+        let header_len = read_u32_le(bytes, 12) as usize;
+        if header_len != BURR_HEADER {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr header length {header_len}, expected {BURR_HEADER}"),
+            ));
+        }
+        let canon_id = read_u64_le(bytes, 16);
+        if canon_id != S4_CANON_ID {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr canon id {canon_id:#x}, expected {S4_CANON_ID:#x}"),
+            ));
+        }
+        let fold_id = read_u64_le(bytes, 24);
+        if fold_id != S4_FOLD_ID {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr fold id {fold_id:#x}, expected {S4_FOLD_ID:#x}"),
+            ));
+        }
+        let n_keys = read_u64_le(bytes, 32);
+        let raw_records = read_u64_le(bytes, 40);
+        let q = read_u32_le(bytes, 48) as usize;
+        let root_kind = read_u16_le(bytes, 52);
+        if root_kind != S4_ROOT_KIND_ONCONIC_INV {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr root kind {root_kind}, expected {S4_ROOT_KIND_ONCONIC_INV}"),
+            ));
+        }
+        let maxw = read_u16_le(bytes, 54) as usize;
+        if maxw != MAXW {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr MAXW {maxw}, this build {MAXW}"),
+            ));
+        }
+        let t4 = [
+            read_u16_le(bytes, 56) as usize,
+            read_u16_le(bytes, 58) as usize,
+            read_u16_le(bytes, 60) as usize,
+            read_u16_le(bytes, 62) as usize,
+        ];
+        let val_bits = read_u32_le(bytes, 72);
+        let fp_bits = read_u32_le(bytes, 76);
+        if bytes[80] != S4_KEY_U64_FOLDED_CANON {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr key format {}, expected {}", bytes[80], S4_KEY_U64_FOLDED_CANON),
+            ));
+        }
+        if bytes[81] != S4_VALUE_BOOL_PN {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr value encoding {}, expected {}", bytes[81], S4_VALUE_BOOL_PN),
+            ));
+        }
+        let source_status = bytes[82];
+        let n_layers = read_u64_le(bytes, 88) as usize;
+        let mut off = BURR_HEADER;
+        let mut layers = Vec::with_capacity(n_layers);
+        for _ in 0..n_layers {
+            if off + 36 > bytes.len() {
+                return Err(io::Error::new(io::ErrorKind::InvalidData, "truncated s4 burr layer header"));
+            }
+            let seed = read_u64_le(bytes, off);
+            let m = read_u64_le(bytes, off + 8);
+            let _cols = read_u64_le(bytes, off + 16);
+            let r = read_u32_le(bytes, off + 24);
+            let z_len = read_u64_le(bytes, off + 28) as usize;
+            off += 36;
+            let z_bytes = z_len
+                .checked_mul(8)
+                .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "s4 burr z length overflow"))?;
+            if off + z_bytes > bytes.len() {
+                return Err(io::Error::new(io::ErrorKind::InvalidData, "truncated s4 burr z data"));
+            }
+            layers.push(MappedRibbon { seed, m, r, z_off: off });
+            off += z_bytes;
+        }
+        if off != bytes.len() {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("s4 burr trailing bytes: {} != {}", bytes.len(), off),
+            ));
+        }
+        Ok(MappedBurrArchive {
+            mmap,
+            val_bits,
+            fp_bits,
+            q,
+            t4,
+            source_status,
+            raw_records,
+            n_keys,
+            layers,
+        })
+    }
+
+    fn word_at(&self, byte_off: usize, idx: usize) -> u64 {
+        read_u64_le(self.mmap.bytes(), byte_off + idx * 8)
+    }
+
+    fn read_packed_layer(&self, layer: &MappedRibbon, i: usize) -> u64 {
+        let bit = i as u64 * layer.r as u64;
+        let w = (bit >> 6) as usize;
+        let off = (bit & 63) as u32;
+        let lo = self.word_at(layer.z_off, w) >> off;
+        let hi = if off + layer.r > 64 {
+            self.word_at(layer.z_off, w + 1) << (64 - off)
+        } else {
+            0
+        };
+        (lo | hi) & rmask(layer.r)
+    }
+
+    fn layer_get(&self, layer: &MappedRibbon, key: u64) -> u64 {
+        let (start, coeff) = ribbon_band(layer.seed, key, layer.m);
+        let mut acc = 0u64;
+        let mut bits = coeff;
+        while bits != 0 {
+            let k = bits.trailing_zeros() as usize;
+            acc ^= self.read_packed_layer(layer, start + k);
+            bits &= bits - 1;
+        }
+        acc & rmask(layer.r)
+    }
+
+    fn get64(&self, key: u64) -> Option<u64> {
+        let want = burr_fingerprint(key, self.fp_bits);
+        let vmask = rmask(self.val_bits);
+        for layer in &self.layers {
+            let row = self.layer_get(layer, key);
+            if (row >> self.val_bits) == want {
+                return Some(row & vmask);
+            }
+        }
+        None
+    }
+}
+
+enum QueryStore {
+    Raw(RawMemoMmap),
+    Burr(MappedBurrArchive),
+}
+
+impl QueryStore {
+    fn get(&self, key: u128) -> Option<bool> {
+        match self {
+            QueryStore::Raw(raw) => raw.get(key),
+            QueryStore::Burr(burr) => burr.get64(fold_key64(key)).map(|v| v != 0),
+        }
+    }
+
+    fn describe(&self) -> String {
+        match self {
+            QueryStore::Raw(raw) => format!(
+                "raw q={} t4={:?} records={} cap={} root-value={}",
+                raw.q,
+                raw.t4,
+                raw.n_records,
+                if raw.cap == u64::MAX { "none".to_string() } else { raw.cap.to_string() },
+                status_code_label(raw.status)
+            ),
+            QueryStore::Burr(burr) => format!(
+                "burr q={} t4={:?} raw-records={} keys={} layers={} value-bits={} fp-bits={} source-root-value={}",
+                burr.q,
+                burr.t4,
+                burr.raw_records,
+                burr.n_keys,
+                burr.layers.len(),
+                burr.val_bits,
+                burr.fp_bits,
+                status_code_label(burr.source_status)
+            ),
+        }
+    }
+}
+
+fn store_matches_root(store: &QueryStore, q: usize, t4: &[usize]) -> bool {
+    match store {
+        QueryStore::Raw(raw) => raw.q == q && raw.t4 == t4,
+        QueryStore::Burr(burr) => burr.q == q && burr.t4 == t4,
+    }
+}
+
+fn parse_cell_arg(s: &str) -> Option<(usize, usize)> {
+    let (r, c) = s.split_once(',')?;
+    Some((r.parse().ok()?, c.parse().ok()?))
+}
+
+fn push_cell_state(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+    z: usize,
+) -> Option<(Vec<u16>, Mask, Mask)> {
+    let mut nocc = occ.to_vec();
+    let mut nchosen = *chosen;
+    let mut nforb = *forbidden;
+    if add_move_if_legal(b, z, &mut nocc, &mut nchosen, &mut nforb) {
+        Some((nocc, nchosen, nforb))
+    } else {
+        None
+    }
+}
+
+fn query_value(store: &QueryStore, b: &Board, occ: &[u16]) -> Option<bool> {
+    store.get(b.canon(occ))
+}
+
+fn geometry_label_for_root(b: &Board, t4: &[usize], z: usize) -> &'static str {
+    let q = b.q;
+    let gf = &b.gf;
+    let (r, c) = (z / q, z % q);
+    for &t in t4 {
+        if r == t && c == b.gf.inv[t] as usize {
+            return "root";
+        }
+    }
+    if r != 0 && c == gf.inv[r] as usize {
+        return "on";
+    }
+    if q % 2 == 0 {
+        return "off";
+    }
+    let two = gf.a(1, 1);
+    let mut tangents = 0usize;
+    if c == 0 {
+        tangents += 1;
+    }
+    if r == 0 {
+        tangents += 1;
+    }
+    for pr in 1..q {
+        let pc = gf.inv[pr] as usize;
+        let bl = gf.sub(gf.a(gf.m(pr, c), gf.m(pc, r)), two);
+        if bl == 0 {
+            tangents += 1;
+        }
+    }
+    match tangents {
+        2 => "ext",
+        0 => "int",
+        _ => "anom",
+    }
+}
+
+fn solve_s4_query(q: usize, t4: &[usize], store: QueryStore) {
+    if !store_matches_root(&store, q, t4) {
+        eprintln!(
+            "s4query: dump root mismatch; requested q={} t4={:?}, store={}",
+            q,
+            t4,
+            store.describe()
+        );
+        std::process::exit(2);
+    }
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let mut stack: Vec<(Vec<u16>, Mask, Mask)> = vec![(root_occ, root_chosen, root_forbidden)];
+    println!("S4QUERY q={} t4={:?} cells={:?} store={}", q, t4, cells, store.describe());
+    println!("S4QUERY commands: state | moves | play r,c | pop | replies r,c | bench <iters> | help | quit");
+    let stdin = io::stdin();
+    for line in stdin.lock().lines() {
+        let line = line.expect("read stdin");
+        let mut parts = line.split_whitespace();
+        let cmd = match parts.next() {
+            Some(c) => c,
+            None => continue,
+        };
+        let top = stack.last().unwrap().clone();
+        let (occ, chosen, forbidden) = (&top.0, &top.1, &top.2);
+        match cmd {
+            "quit" | "exit" => break,
+            "help" => {
+                println!("HELP state | moves | play r,c | pop | replies r,c | bench <iters> | quit");
+            }
+            "state" => {
+                let val = query_value(&store, &b, occ);
+                let moves = avail_cells(&b, chosen, forbidden);
+                println!(
+                    "STATE ply={} cells={} legal={} value={}",
+                    occ.len(),
+                    fmt_cell_indices(&b, occ),
+                    moves.len(),
+                    val.map_or("unknown", |v| if v { "N" } else { "P" })
+                );
+            }
+            "moves" => {
+                let moves = avail_cells(&b, chosen, forbidden);
+                let start = Instant::now();
+                let mut known = 0usize;
+                for z in moves {
+                    let child = push_cell_state(&b, occ, chosen, forbidden, z as usize).unwrap();
+                    let val = query_value(&store, &b, &child.0);
+                    if val.is_some() {
+                        known += 1;
+                    }
+                    println!(
+                        "MOVE r={} c={} geom={} value={}",
+                        z as usize / q,
+                        z as usize % q,
+                        geometry_label_for_root(&b, t4, z as usize),
+                        val.map_or("unknown", |v| if v { "N" } else { "P" })
+                    );
+                }
+                println!("MOVES known={} elapsed={:.6}", known, start.elapsed().as_secs_f64());
+            }
+            "play" => {
+                let arg = parts.next().unwrap_or("");
+                let (r, c) = parse_cell_arg(arg).unwrap_or_else(|| {
+                    eprintln!("ERR play expects r,c");
+                    (usize::MAX, usize::MAX)
+                });
+                if r == usize::MAX || r >= q || c >= q {
+                    println!("ERR illegal cell syntax/range");
+                    continue;
+                }
+                let z = r * q + c;
+                match push_cell_state(&b, occ, chosen, forbidden, z) {
+                    Some(st) => {
+                        stack.push(st);
+                        println!("OK ply={}", stack.last().unwrap().0.len());
+                    }
+                    None => println!("ERR illegal"),
+                }
+            }
+            "pop" => {
+                if stack.len() > 1 {
+                    stack.pop();
+                    println!("OK ply={}", stack.last().unwrap().0.len());
+                } else {
+                    println!("ERR at-root");
+                }
+            }
+            "replies" => {
+                let arg = parts.next().unwrap_or("");
+                let (r, c) = parse_cell_arg(arg).unwrap_or_else(|| {
+                    eprintln!("ERR replies expects r,c");
+                    (usize::MAX, usize::MAX)
+                });
+                if r == usize::MAX || r >= q || c >= q {
+                    println!("ERR illegal cell syntax/range");
+                    continue;
+                }
+                let x = r * q + c;
+                let Some(after_x) = push_cell_state(&b, occ, chosen, forbidden, x) else {
+                    println!("ERR illegal-x");
+                    continue;
+                };
+                let ys = avail_cells(&b, &after_x.1, &after_x.2);
+                let start = Instant::now();
+                let mut known = 0usize;
+                for y in ys {
+                    let child = push_cell_state(&b, &after_x.0, &after_x.1, &after_x.2, y as usize).unwrap();
+                    let val = query_value(&store, &b, &child.0);
+                    if val.is_some() {
+                        known += 1;
+                    }
+                    println!(
+                        "REPLY x={},{} y={},{} ygeom={} value={}",
+                        r,
+                        c,
+                        y as usize / q,
+                        y as usize % q,
+                        geometry_label_for_root(&b, t4, y as usize),
+                        val.map_or("unknown", |v| if v { "N" } else { "P" })
+                    );
+                }
+                println!("REPLIES known={} elapsed={:.6}", known, start.elapsed().as_secs_f64());
+            }
+            "bench" => {
+                let iters: usize = parts.next().and_then(|s| s.parse().ok()).unwrap_or(1000);
+                let moves = avail_cells(&b, chosen, forbidden);
+                let children: Vec<Vec<u16>> = moves
+                    .iter()
+                    .map(|&z| push_cell_state(&b, occ, chosen, forbidden, z as usize).unwrap().0)
+                    .collect();
+                let mut probes = 0usize;
+                let mut hits = 0usize;
+                let start = Instant::now();
+                for _ in 0..iters {
+                    for child in &children {
+                        if query_value(&store, &b, child).is_some() {
+                            hits += 1;
+                        }
+                        probes += 1;
+                    }
+                }
+                let elapsed = start.elapsed().as_secs_f64();
+                println!(
+                    "BENCH iters={} probes={} hits={} elapsed={:.6} probes-per-sec={:.3}",
+                    iters,
+                    probes,
+                    hits,
+                    elapsed,
+                    probes as f64 / elapsed.max(1e-9)
+                );
+            }
+            _ => println!("ERR unknown-command {}", cmd),
+        }
+    }
+}
+
+fn solve_s4_freeze(raw_path: &str, burr_path: &str, fp_bits: u32, load: f64) {
+    let raw = RawMemoMmap::open(raw_path).expect("open raw memo");
+    let bytes = raw.mmap.bytes();
+    let mut pairs: Vec<(u64, u64)> = Vec::with_capacity(raw.n_records);
+    for i in 0..raw.n_records {
+        pairs.push((fold_key64(raw_record_key(bytes, i)), raw_record_value(bytes, i) as u64));
+    }
+    pairs.sort_unstable_by_key(|&(key, _)| key);
+    let mut dedup: Vec<(u64, u64)> = Vec::with_capacity(pairs.len());
+    let mut same_value_dups = 0usize;
+    let mut conflicting_dups = 0usize;
+    for (key, value) in pairs {
+        if let Some(last) = dedup.last_mut() {
+            if last.0 == key {
+                if last.1 == value {
+                    same_value_dups += 1;
+                } else {
+                    conflicting_dups += 1;
+                }
+                continue;
+            }
+        }
+        dedup.push((key, value));
+    }
+    assert!(
+        conflicting_dups == 0,
+        "folded-key collisions with conflicting values: {}",
+        conflicting_dups
+    );
+    let start = Instant::now();
+    let archive = S4BurrArchive::build(&dedup, &raw, 1, fp_bits, load);
+    let build_elapsed = start.elapsed().as_secs_f64();
+    archive.write_to(burr_path).expect("write s4 burr archive");
+    let bytes_written = std::fs::metadata(burr_path).map(|m| m.len()).unwrap_or(0);
+    println!(
+        "S4FREEZE raw={} out={} records={} keys={} same-value-dups={} fp-bits={} load={:.3} layers={} bits/key={:.3} file-bytes={} build-elapsed={:.3}",
+        raw_path,
+        burr_path,
+        raw.n_records,
+        dedup.len(),
+        same_value_dups,
+        fp_bits,
+        load,
+        archive.layers.len(),
+        if archive.n_keys == 0 { 0.0 } else { archive.bits() as f64 / archive.n_keys as f64 },
+        bytes_written,
+        build_elapsed
     );
 }
 
@@ -3752,6 +4828,104 @@ fn main() {
             "s4buckets mode needs q: s4buckets <q> [--cap <slots>] [--start <idx>] [--limit <n>] [--out <file>]",
         );
         solve_s4_buckets(q, cap, start_idx, limit, out_path.as_deref());
+        return;
+    }
+    if args[1] == "s4dump" {
+        // s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]
+        let mut cap: usize = usize::MAX;
+        let mut out_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--cap" {
+                cap = it.next().expect("--cap needs a value").parse().expect("--cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap int");
+            } else if a == "--out" {
+                out_path = Some(it.next().expect("--out needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--out=") {
+                out_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4dump mode needs q: s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4dump mode needs t values: s4dump <q> t1,t2,t3,t4 --out <file> [--cap <slots>]"),
+        );
+        let out = out_path.expect("s4dump needs --out <file>");
+        solve_s4_dump(q, &t4, cap, &out);
+        return;
+    }
+    if args[1] == "s4freeze" {
+        // s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
+        let mut fp_bits = 48u32;
+        let mut load = 0.90f64;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--fp-bits" {
+                fp_bits = it.next().expect("--fp-bits needs a value").parse().expect("--fp-bits int");
+            } else if let Some(rest) = a.strip_prefix("--fp-bits=") {
+                fp_bits = rest.parse().expect("--fp-bits int");
+            } else if a == "--load" {
+                load = it.next().expect("--load needs a value").parse().expect("--load float");
+            } else if let Some(rest) = a.strip_prefix("--load=") {
+                load = rest.parse().expect("--load float");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let raw = positional
+            .first()
+            .expect("s4freeze mode needs raw-file: s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <x>]");
+        let burr = positional
+            .get(1)
+            .expect("s4freeze mode needs burr-file: s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <x>]");
+        solve_s4_freeze(raw, burr, fp_bits, load);
+        return;
+    }
+    if args[1] == "s4query" {
+        // s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
+        let mut raw_path: Option<String> = None;
+        let mut burr_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--raw" {
+                raw_path = Some(it.next().expect("--raw needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--raw=") {
+                raw_path = Some(rest.to_string());
+            } else if a == "--burr" {
+                burr_path = Some(it.next().expect("--burr needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--burr=") {
+                burr_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4query mode needs q: s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4query mode needs t values: s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)"),
+        );
+        let store = match (raw_path, burr_path) {
+            (Some(path), None) => QueryStore::Raw(RawMemoMmap::open(&path).expect("open raw s4 memo")),
+            (None, Some(path)) => QueryStore::Burr(MappedBurrArchive::open(&path).expect("open s4 burr archive")),
+            _ => panic!("s4query needs exactly one of --raw or --burr"),
+        };
+        solve_s4_query(q, &t4, store);
         return;
     }
     if args[1] == "cert" {
