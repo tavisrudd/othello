@@ -227,6 +227,19 @@ Implemented 2026-07-08:
 - `PLY` rows aggregate those conic fields as min/max/average;
 - `REPLYSUM` includes `live_on_zero`, which directly flags root replies that empty the live conic.
 
+First live-conic observation, q=17 root `[1,2,3,4]`:
+
+- `PLY` depth 2 from the S4 root has 20 canonical states with `live_on=0`: 1 known `P`, 7 known
+  `N`, and 12 unknown in the current early-break dump;
+- all 20 have `sel_on=4` and `dead_on=12`, so this stratum empties the conic without selecting an
+  additional conic point;
+- across all 6,284 root-reply rows there are 40 conic-emptying replies, spread across 26 first
+  moves;
+- conic-emptying replies are never on-conic in this root: zero-reply breakdown is `P/int=2`,
+  `N/ext=7`, `N/int=7`, `unknown/ext=9`, `unknown/int=15`;
+- the two known `P` zero-conic replies are the internal pair
+  `x=(6,11), y=(8,5)` and `x=(8,5), y=(6,11)`.
+
 Implementation constraints:
 
 - compute each canonical child key once per state;
