@@ -58,7 +58,8 @@
 //          [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
 //          [--max-reply-moves <n>] [--max-states <n>]
 //                -- non-interactive S4 pattern-mining rows: root child census, optional root
-//                   reply rows, and deduped ply summaries through the requested depth.
+//                   reply rows, live-conic counts, and deduped ply summaries through the
+//                   requested depth.
 //   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
@@ -2578,6 +2579,38 @@ fn geometry_label_for_root(b: &Board, t4: &[usize], z: usize) -> &'static str {
     }
 }
 
+fn is_on_root_conic(b: &Board, z: usize) -> bool {
+    let r = z / b.q;
+    let c = z % b.q;
+    r != 0 && c == b.gf.inv[r] as usize
+}
+
+fn selected_on_root_conic(b: &Board, occ: &[u16]) -> usize {
+    occ.iter().filter(|&&z| is_on_root_conic(b, z as usize)).count()
+}
+
+fn live_on_root_conic(b: &Board, chosen: &Mask, forbidden: &Mask) -> usize {
+    let mut live = 0usize;
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            if is_on_root_conic(b, w * 64 + tz) {
+                live += 1;
+            }
+        }
+    }
+    live
+}
+
+fn s4_conic_feature_string(b: &Board, occ: &[u16], live_on: usize) -> String {
+    let sel_on = selected_on_root_conic(b, occ);
+    let total_on = b.q.saturating_sub(1);
+    let dead_on = total_on.saturating_sub(sel_on + live_on);
+    format!("sel_on={} live_on={} dead_on={}", sel_on, live_on, dead_on)
+}
+
 fn value_label(v: Option<bool>) -> &'static str {
     v.map_or("unknown", |is_n| if is_n { "N" } else { "P" })
 }
@@ -2724,6 +2757,15 @@ struct S4PlyStats {
     legal_max: usize,
     legal_geom: S4MineCounts,
     child_values: S4MineValues,
+    sel_on_sum: usize,
+    sel_on_min: usize,
+    sel_on_max: usize,
+    live_on_sum: usize,
+    live_on_min: usize,
+    live_on_max: usize,
+    dead_on_sum: usize,
+    dead_on_min: usize,
+    dead_on_max: usize,
 }
 
 impl S4PlyStats {
@@ -2758,6 +2800,30 @@ impl S4PlyStats {
             child_values.add_value(child.value);
             self.child_values.add_value(child.value);
         }
+        let sel_on = selected_on_root_conic(b, occ);
+        let live_on = geom.on;
+        let dead_on = b.q.saturating_sub(1).saturating_sub(sel_on + live_on);
+        if self.states == 1 || sel_on < self.sel_on_min {
+            self.sel_on_min = sel_on;
+        }
+        if sel_on > self.sel_on_max {
+            self.sel_on_max = sel_on;
+        }
+        if self.states == 1 || live_on < self.live_on_min {
+            self.live_on_min = live_on;
+        }
+        if live_on > self.live_on_max {
+            self.live_on_max = live_on;
+        }
+        if self.states == 1 || dead_on < self.dead_on_min {
+            self.dead_on_min = dead_on;
+        }
+        if dead_on > self.dead_on_max {
+            self.dead_on_max = dead_on;
+        }
+        self.sel_on_sum += sel_on;
+        self.live_on_sum += live_on;
+        self.dead_on_sum += dead_on;
         (children, geom, child_values)
     }
 }
@@ -2768,8 +2834,23 @@ fn print_s4_ply_stats(ply: usize, stats: &S4PlyStats) {
     } else {
         stats.legal_sum as f64 / stats.states as f64
     };
+    let sel_on_avg = if stats.states == 0 {
+        0.0
+    } else {
+        stats.sel_on_sum as f64 / stats.states as f64
+    };
+    let live_on_avg = if stats.states == 0 {
+        0.0
+    } else {
+        stats.live_on_sum as f64 / stats.states as f64
+    };
+    let dead_on_avg = if stats.states == 0 {
+        0.0
+    } else {
+        stats.dead_on_sum as f64 / stats.states as f64
+    };
     println!(
-        "PLY ply={} states={} {} terminals={} legal_min={} legal_max={} legal_avg={:.3} {} {}",
+        "PLY ply={} states={} {} terminals={} legal_min={} legal_max={} legal_avg={:.3} {} {} sel_on_min={} sel_on_max={} sel_on_avg={:.3} live_on_min={} live_on_max={} live_on_avg={:.3} dead_on_min={} dead_on_max={} dead_on_avg={:.3}",
         ply,
         stats.states,
         stats.values.fmt("value_"),
@@ -2778,7 +2859,16 @@ fn print_s4_ply_stats(ply: usize, stats: &S4PlyStats) {
         stats.legal_max,
         avg,
         stats.legal_geom.fmt("legal_"),
-        stats.child_values.fmt("child_")
+        stats.child_values.fmt("child_"),
+        stats.sel_on_min,
+        stats.sel_on_max,
+        sel_on_avg,
+        stats.live_on_min,
+        stats.live_on_max,
+        live_on_avg,
+        stats.dead_on_min,
+        stats.dead_on_max,
+        dead_on_avg
     );
 }
 
@@ -2804,23 +2894,30 @@ fn print_s4_root_moves_and_replies(
         root_geom.add_geom(child.geom);
         root_values.add_value(child.value);
         let replies = collect_s4_children(b, t4, store, &child.occ, &child.chosen, &child.forbidden);
+        let child_live_on = live_on_root_conic(b, &child.chosen, &child.forbidden);
         println!(
-            "ROOTMOVE r={} c={} geom={} value={} replies={}",
+            "ROOTMOVE r={} c={} geom={} value={} replies={} {}",
             child.z as usize / b.q,
             child.z as usize % b.q,
             child.geom,
             value_label(child.value),
-            replies.len()
+            replies.len(),
+            s4_conic_feature_string(b, &child.occ, child_live_on)
         );
         if reply_filter.matches(child.value) && reply_move_count < max_reply_moves {
             reply_move_count += 1;
             let mut reply_values = S4MineValues::default();
             let mut reply_geom = S4MineCounts::default();
+            let mut live_on_zero = 0usize;
             for reply in &replies {
                 reply_geom.add_geom(reply.geom);
                 reply_values.add_value(reply.value);
+                let reply_live_on = live_on_root_conic(b, &reply.chosen, &reply.forbidden);
+                if reply_live_on == 0 {
+                    live_on_zero += 1;
+                }
                 println!(
-                    "REPLY x={},{} xgeom={} xvalue={} y={},{} ygeom={} value={}",
+                    "REPLY x={},{} xgeom={} xvalue={} y={},{} ygeom={} value={} {}",
                     child.z as usize / b.q,
                     child.z as usize % b.q,
                     child.geom,
@@ -2828,16 +2925,18 @@ fn print_s4_root_moves_and_replies(
                     reply.z as usize / b.q,
                     reply.z as usize % b.q,
                     reply.geom,
-                    value_label(reply.value)
+                    value_label(reply.value),
+                    s4_conic_feature_string(b, &reply.occ, reply_live_on)
                 );
             }
             println!(
-                "REPLYSUM x={},{} replies={} {} {}",
+                "REPLYSUM x={},{} replies={} {} {} live_on_zero={}",
                 child.z as usize / b.q,
                 child.z as usize % b.q,
                 replies.len(),
                 reply_geom.fmt("reply_"),
-                reply_values.fmt("reply_child_")
+                reply_values.fmt("reply_child_"),
+                live_on_zero
             );
         }
     }
@@ -2911,15 +3010,17 @@ fn solve_s4_mine(
             let val = query_value(&store, &b, occ);
             let (children, geom, child_values) = stats.add_state(&b, t4, &store, occ, chosen, forbidden);
             if state_rows {
+                let live_on = geom.on;
                 println!(
-                    "STATE ply={} key={:032x} cells={} legal={} value={} {} {}",
+                    "STATE ply={} key={:032x} cells={} legal={} value={} {} {} {}",
                     occ.len(),
                     key,
                     fmt_cell_indices(&b, occ),
                     children.len(),
                     value_label(val),
                     geom.fmt("legal_"),
-                    child_values.fmt("child_")
+                    child_values.fmt("child_"),
+                    s4_conic_feature_string(&b, occ, live_on)
                 );
             }
             if rel_depth < depth && !truncated {

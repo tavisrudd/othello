@@ -226,6 +226,17 @@ partial capped q=25 dumps.
 - optional `STATE` rows for each deduplicated state with `--state-rows`;
 - optional `REPLY` / `REPLYSUM` rows for root moves selected by `--replies`.
 
+The root is normalized so the conic is `r*c = 1`.  Rows now include conic occupancy fields:
+
+```text
+sel_on=<selected affine conic cells>
+live_on=<currently legal affine conic cells>
+dead_on=<affine conic cells neither selected nor legal>
+```
+
+`PLY` rows aggregate those as min/max/average fields.  `REPLYSUM` also reports
+`live_on_zero`, the number of emitted replies that empty the live conic.
+
 Default settings:
 
 ```text
@@ -253,9 +264,9 @@ first root-reply sample to inspect.
 
 The current q>=9 mining priorities are summarized in
 [`2026-07-08-q-ge-9-pattern-mining-agenda.md`](2026-07-08-q-ge-9-pattern-mining-agenda.md).  In
-particular, `s4mine` now gives a first systematic ply-by-ply structure pass over an S4 dump.  It
-does not yet compute live-conic counts, defect spectra, or best-repair scores; those remain feature
-extensions for the next miner layer.
+particular, `s4mine` now gives a first systematic ply-by-ply structure pass over an S4 dump,
+including selected/live/dead conic counts.  It does not yet compute defect spectra or best-repair
+scores; those remain feature extensions for the next miner layer.
 
 ### Root Child Census
 
@@ -296,11 +307,8 @@ Look for:
 
 - internal `P` replies;
 - replies that are legal for multiple worst moves;
-- replies that empty the live conic;
+- replies that empty the live conic (`live_on=0` on `REPLY`, or `live_on_zero>0` on `REPLYSUM`);
 - mismatch between raw and compact results.
-
-The current query shell reports `on/ext/int`; live-conic counts are a natural next batch-miner
-extension.
 
 ### Interactive Walk
 

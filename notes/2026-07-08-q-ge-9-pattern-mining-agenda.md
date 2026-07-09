@@ -215,10 +215,17 @@ deduplicated ply summaries
 
 Remaining feature extensions:
 
-- live-conic counts;
+- defect/zone interaction with live-conic counts;
 - defect spectrum / defxor / zone Grundy rows;
 - best-repair rows if the full value is known;
 - CSV/JSONL output once the tagged text fields settle.
+
+Implemented 2026-07-08:
+
+- `ROOTMOVE`, `REPLY`, and `STATE` rows include `sel_on`, `live_on`, and `dead_on` for the
+  normalized conic `r*c = 1`;
+- `PLY` rows aggregate those conic fields as min/max/average;
+- `REPLYSUM` includes `live_on_zero`, which directly flags root replies that empty the live conic.
 
 Implementation constraints:
 
