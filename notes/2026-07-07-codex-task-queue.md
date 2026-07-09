@@ -1762,7 +1762,19 @@ variable-length maximal placements and are the real targets.
 Budget: hard 8h wall, single-core, ≤ 8 GB per piece; opportunistic scheduling.
 Report file: `notes/2026-07-09-codex-piece-nimber-tables.md`.
 
-## C51. Polar-space Nofil — symplectic W(2n−1,q) and beyond (mirror harvest #3) [handed off by Claude/Opus 2026-07-09]
+## C51. Polar-space Nofil — symplectic W(2n−1,q) and beyond (mirror harvest #3) [handed off by Claude/Opus 2026-07-09] [REPORTED 2026-07-09 (Claude/Opus) — Lean engine landed]
+
+**Reported by Claude/Opus 2026-07-09.** Report: `notes/2026-07-09-codex-polar-space-nofil.md`;
+generator `rust/scripts/polar_space_nofil.py`; **Lean `lean/ProjectiveCap/PolarSegreMirror.lean`
+(builds clean, axioms `[propext, Classical.choice, Quot.sound]`).** Headline: **new family
+`W(2n−1,q) = P` for every odd `q` and `n ≥ 2`** — the elliptic block map `(a,b)↦(δb,a)` is a
+symplectic *similitude* (scales the alternating form by `−δ`), hence fpf + isotropic-line-preserving.
+Machine gates: `W(3,3)` (=GQ(3,3), C27 pair-extension over ALL 22572 σ-invariant caps PASS ⇒ P),
+`W(3,5)` (=GQ(5,5)), `W(5,3)`. Lean deliverable = the reusable capacity-2 **near-linear mirror
+engine** `FiniteBuildGame.initialCapC2P_of_nearLinear_mirror` (the "conflict-hypergraph mirror
+lemma" §#3 asked for, at c=2) + the fully-proven `GridRook.gridRook_isP` instantiation (shared with
+C52). The concrete symplectic-form instantiation is the remaining geometric obligation (near-linearity
+from projective line uniqueness; isotropic-line-preservation is the machine-verified similitude).
 
 Continuation of the C48 mirror harvest. **Full scope + math is in
 `notes/2026-07-09-mirror-method-boundary.md` §"#3 — Scope: polar-space Nofil"** — read it first;
@@ -1785,7 +1797,18 @@ Watch: the #5 boundary (`notes/2026-07-09-mirror-method-boundary.md`) likely rec
 level for unitary/orthogonal polar spaces (anisotropic-core obstructions). Machine gates tiny;
 single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-polar-space-nofil.md`.
 
-## C52. Segre / product-variety Nofil (mirror harvest #4) [handed off by Claude/Opus 2026-07-09]
+## C52. Segre / product-variety Nofil (mirror harvest #4) [handed off by Claude/Opus 2026-07-09] [REPORTED 2026-07-09 (Claude/Opus) — Lean base family landed]
+
+**Reported by Claude/Opus 2026-07-09.** Report: `notes/2026-07-09-codex-segre-product-nofil.md`;
+generator `rust/scripts/segre_product_nofil.py`; **Lean `lean/ProjectiveCap/PolarSegreMirror.lean`
+(builds clean, axioms `[propext, Classical.choice, Quot.sound]`).** Headline: **`PG(a,q)×PG(2m−1,q) = P`
+for odd `q`** via `σ = id × (elliptic fpf involution on the odd factor)` — fpf + ruling-preserving.
+Machine gates: `PG(1,3)²` (=`Q⁺(3,3)`, full BFS + exhaustive solve = P), `PG(2,3)×PG(1,3)` (C27 over
+ALL 117963 caps PASS), `PG(1,3)×PG(3,3)` (sampled PASS). Boundary (#5): a product of two even-dim
+factors admits no `id×(fpf)` mirror (needs one odd factor). Lean: the base family `Q⁺(3,q)=PG(1,q)²`
+is **unconditionally proven** as `GridRook.gridRook_isP` (capacity-2 rook-lines game on `A × ZMod 2t`,
+column-shift mirror), reusing the shared `initialCapC2P_of_nearLinear_mirror` engine; the general
+higher-factor product reduces to the same engine (remaining obligation, statement-level).
 
 Continuation of the C48 mirror harvest. **Full scope + math is in
 `notes/2026-07-09-mirror-method-boundary.md` §"#4 — Scope: Segre / product varieties"** — read it
