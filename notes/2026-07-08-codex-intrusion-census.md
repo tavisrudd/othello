@@ -191,10 +191,33 @@ Hypothesis reviewer: q = 13 falsifies the stated necessity law immediately, so d
 discriminator hunting is diagnostic only.  At q = 17, both zone Grundy and zone size are
 strongly mixed even inside the defXOR-zero/zone-even slice.
 
-Scope reviewer: q = 11 was intentionally not rerun, per the C20 amendment.  q = 19 was not
-run; q = 13 already supplies counterexamples and q = 17 supplies the mixed-bucket failure
-mode.
+Scope reviewer: q = 11 was intentionally not rerun, per the C20 amendment.  At the time of this
+report, q = 19 had not been run; q = 13 already supplied counterexamples and q = 17 supplied the
+mixed-bucket failure mode.  A later q = 19 extension is recorded in
+`2026-07-08-codex-q19-q25-mining.md`.
 
 ## Next
 
 C21 is next in the queue: q=23 esc single-class sizing probe.
+
+## Addendum: q = 19 Extension
+
+The q = 19 extension was run later on 2026-07-08 using the same C20 feature code plus bucket-level
+parallelism.  Summary:
+
+```text
+full-PGL on-conic buckets: 13
+bucket labels: P=13, N=0
+legal first intruders across representatives: 1747
+intruded child values: N=1747, P=0
+P reply states: 119566
+necessity-law violations: 96674
+max zone size: 57
+```
+
+Durable outputs:
+
+```text
+notes/data/c20-q19.json
+notes/data/c20-q19-states.jsonl.gz
+```

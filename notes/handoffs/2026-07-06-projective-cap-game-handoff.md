@@ -20,6 +20,9 @@ Closed or structurally understood:
 - Odd projective planes are proved in Lean for `q = 5, 7, 11, 13`; `q = 3, 9, 17, 19` are
   computed P but not all Lean-closed.  `q = 23` now has a bucket-first on-conic computation:
   all 22 full-`PGL(2,23)` on-conic buckets are P, conditional on the orbit-invariance bridge.
+  `q = 25` has a first GF(25) S4-rooted sizing probe: the normalized representative
+  `{1,2,3,4}` is P, using about 26.3M private memo entries with early break.  This is not a full
+  q=25 bucket census.
 
 Main remaining mathematical problem:
 
@@ -259,6 +262,10 @@ Current structural picture:
 - The C31 follow-up sharpens this further.  For every tested C20 P reply-state and every legal
   opponent move, a score-optimal winning reply lands in a grandchild with `Z <= 2`.  At q=17 the
   remaining cost is immediate zone, at most 9, rather than persistent recursive complexity.
+- q=19 extends the same dynamic picture at larger scale: all 13 on-conic buckets are P, every legal
+  first intrusion from the bucket representatives is N-valued, and recursive steering over 63,479
+  unique P reply states has `max Z = 16` despite raw zones up to 57.  The bound is growing, but
+  the steering route remains alive.
 - Repair-move mining of the same data shows the expensive q=17 descents are mostly
   intruder-for-intruder repairs.  All score-9 repairs empty the conic residual and leave
   `defxor = 0` with zone Grundy 0, so the proof target should be a repair-intruder existence
@@ -378,6 +385,10 @@ Recently reported:
   line-type/product-order rule explains them.
 - **Repair follow-up checks:** score-9 is a two-orbit finite-certificate target; polarity does not
   explain the guard, and empty-conic alone does not imply zone Grundy 0.
+- **q=19/q25 mining:** q=19 C20 and steering data are durable in `notes/data/`; q=19 has
+  `max Z = 16`.  A Rust `s4` sizing mode shows q=25's first normalized representative is P but
+  already needs about 26.3M memo entries, so GF(25) feature mining needs a dedicated prime-power
+  path before broad runs.
 
 Good Lean side targets:
 

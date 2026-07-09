@@ -36,6 +36,10 @@
 //   breaks   q   -- exact cross-check: for every P1 break from the frame, #replies / #true-P
 //                   replies / #P-replies that are symmetric (nontrivial stabilizer).
 //   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
+//   s4 <q> t1,t2,t3,t4 [--cap <slots>]
+//                -- sizing probe for one normalized on-conic S4 root
+//                   {(t,1/t): t in {t1,t2,t3,t4}} using the GF(q) backend.
+//                   Reports P/N, private-memo size, and wall time; works for prime powers.
 //   cert <q> [--anchored] [--out <dir>] [--bookcap <nodes>] [class-index...]
 //                -- route-C phase-1 escape CERTIFICATE emitter (2026-07-07 codex task queue C12).
 //                   Per canonical size-3 class: emit S3, one witness escape cell p (ON-conic when
@@ -1100,6 +1104,131 @@ fn solve_esc(q: usize, filter: &[usize], cap: usize) {
         if !hs.is_empty() {
             println!("      escape-histogram (escape:classes) = {}", hs.join(" "));
         }
+    }
+}
+
+fn add_cell_checked(b: &Board, z: usize, occ: &mut Vec<u16>, chosen: &mut Mask, forbidden: &mut Mask) {
+    assert!(
+        chosen[z >> 6] & (1u64 << (z & 63)) == 0,
+        "duplicate cell in root: ({},{})",
+        z / b.q,
+        z % b.q
+    );
+    assert!(
+        forbidden[z >> 6] & (1u64 << (z & 63)) == 0,
+        "illegal root cell: ({},{}) is already forbidden by the previous cells",
+        z / b.q,
+        z % b.q
+    );
+    for &x in occ.iter() {
+        mask_or(forbidden, &b.line_mask[x as usize * b.n + z]);
+    }
+    mask_or(forbidden, &b.rc_mask[z]);
+    set_bit(chosen, z);
+    occ.push(z as u16);
+}
+
+fn parse_t4(spec: &str) -> Vec<usize> {
+    let parts: Vec<&str> = spec.split(',').filter(|s| !s.is_empty()).collect();
+    assert!(parts.len() == 4, "s4 mode needs exactly four comma-separated t values");
+    parts
+        .iter()
+        .map(|s| s.parse::<usize>().expect("t values must be integers"))
+        .collect()
+}
+
+// s4 <q> t1,t2,t3,t4 [--cap <slots>]
+fn s4_g(
+    b: &Board,
+    memo: &mut FnvMap<u128, bool>,
+    cap: usize,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<bool> {
+    let key = b.canon(occ);
+    if let Some(&v) = memo.get(&key) {
+        return Some(v);
+    }
+    if memo.len() >= cap {
+        return None;
+    }
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+    }
+    for w in 0..MAXW {
+        let mut bits = avail[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            let mut nchosen = *chosen;
+            set_bit(&mut nchosen, z);
+            let mut nforb = *forbidden;
+            mask_or(&mut nforb, &b.rc_mask[z]);
+            for &x in occ.iter() {
+                mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+            }
+            occ.push(z as u16);
+            let child = s4_g(b, memo, cap, occ, &nchosen, &nforb);
+            occ.pop();
+            match child {
+                None => return None,
+                Some(false) => {
+                    memo.insert(key, true);
+                    return Some(true);
+                }
+                Some(true) => {}
+            }
+        }
+    }
+    memo.insert(key, false);
+    Some(false)
+}
+
+fn solve_s4(q: usize, t4: &[usize], cap: usize) {
+    assert!(t4.len() == 4, "s4 mode needs exactly four t values");
+    let b = Board::new(q);
+    let mut seen = HashSet::new();
+    let empty = [0u64; MAXW];
+    let mut chosen = empty;
+    let mut forbidden = empty;
+    let mut occ: Vec<u16> = Vec::new();
+    let mut cells = Vec::new();
+    for &t in t4 {
+        assert!(t > 0 && t < q, "t={} is not a nonzero GF({}) element encoding", t, q);
+        assert!(seen.insert(t), "duplicate t value {}", t);
+        let c = b.gf.inv[t] as usize;
+        let z = t * q + c;
+        cells.push((t, c));
+        add_cell_checked(&b, z, &mut occ, &mut chosen, &mut forbidden);
+    }
+    let mut memo: FnvMap<u128, bool> = FnvMap::default();
+    let start = Instant::now();
+    let mut occ_solve = occ.clone();
+    let value = s4_g(&b, &mut memo, cap, &mut occ_solve, &chosen, &forbidden);
+    let elapsed = start.elapsed().as_secs_f64();
+    match value {
+        Some(is_n) => println!(
+            "S4 q={} t4={:?} cells={:?} value={} peak-memo={} cap={} elapsed={:.3}",
+            q,
+            t4,
+            cells,
+            if is_n { "N" } else { "P" },
+            memo.len(),
+            if cap == usize::MAX { "none".to_string() } else { cap.to_string() },
+            elapsed
+        ),
+        None => println!(
+            "S4 q={} t4={:?} cells={:?} status=ABORTED peak-memo={} cap={} elapsed={:.3}",
+            q,
+            t4,
+            cells,
+            memo.len(),
+            cap,
+            elapsed
+        ),
     }
 }
 
@@ -3267,6 +3396,32 @@ fn main() {
             let q: usize = a.parse().expect("q must be an integer");
             solve_feat(q);
         }
+        return;
+    }
+    if args[1] == "s4" {
+        // s4 <q> t1,t2,t3,t4 [--cap <slots>]
+        let mut cap: usize = usize::MAX;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--cap" {
+                cap = it.next().expect("--cap needs a value").parse().expect("--cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap int");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4 mode needs q: s4 <q> t1,t2,t3,t4 [--cap <slots>]")
+            .parse()
+            .expect("q must be an integer");
+        let t4_arg = positional
+            .get(1)
+            .expect("s4 mode needs t values: s4 <q> t1,t2,t3,t4 [--cap <slots>]");
+        let t4 = parse_t4(t4_arg);
+        solve_s4(q, &t4, cap);
         return;
     }
     if args[1] == "cert" {

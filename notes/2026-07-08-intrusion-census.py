@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import io
 import itertools as it
 import json
 import re
@@ -17,6 +18,7 @@ import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 from functools import lru_cache
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 
 INF = "inf"
@@ -592,6 +594,14 @@ def analyze_bucket(game: PrimeGridGame, bucket: Bucket, state_out=None) -> Bucke
     )
 
 
+def analyze_bucket_worker(idx_bucket_emit: tuple[int, Bucket, bool]) -> tuple[int, BucketResult, str]:
+    idx, bucket, emit_states = idx_bucket_emit
+    game = PrimeGridGame(bucket.q)
+    state_buf = io.StringIO() if emit_states else None
+    res = analyze_bucket(game, bucket, state_out=state_buf)
+    return idx, res, state_buf.getvalue() if state_buf is not None else ""
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("logs", nargs="+")
@@ -599,6 +609,7 @@ def main() -> int:
     ap.add_argument("--limit-buckets", type=int, default=None)
     ap.add_argument("--json-out")
     ap.add_argument("--states-jsonl")
+    ap.add_argument("--jobs", type=int, default=1)
     args = ap.parse_args()
 
     want_q = {int(x) for x in args.qs.split(",") if x}
@@ -610,29 +621,57 @@ def main() -> int:
     labels = Counter((b.q, b.label) for b in buckets)
     print(f"bucket counts by q={dict(sorted(by_q.items()))} labels={dict(sorted(labels.items()))}")
 
-    games: dict[int, PrimeGridGame] = {}
-    results = []
-    state_out = open(args.states_jsonl, "w", encoding="utf-8") if args.states_jsonl else None
-    try:
-        for idx, bucket in enumerate(buckets, 1):
-            game = games.setdefault(bucket.q, PrimeGridGame(bucket.q))
-            print(
-                f"BUCKET {idx}/{len(buckets)} q={bucket.q} label={bucket.label} "
-                f"size={bucket.size} canon={bucket.canon} sample_six={bucket.sample_six}",
-                flush=True,
-            )
-            res = analyze_bucket(game, bucket, state_out=state_out)
-            results.append(res)
-            print(
-                f"  done {res.seconds:.2f}s intruders={res.intruders} values={res.intruder_values} "
-                f"P_reply_states={res.p_reply_states} necessity_violations={res.necessity_violation_count} "
-                f"max_zone={res.max_zone_size}",
-                flush=True,
-            )
-            print(f"  zero_even_by_zoneg={res.zero_even_value_by_zoneg}", flush=True)
-    finally:
-        if state_out is not None:
-            state_out.close()
+    if args.jobs <= 1:
+        games: dict[int, PrimeGridGame] = {}
+        results = []
+        state_out = open(args.states_jsonl, "w", encoding="utf-8") if args.states_jsonl else None
+        try:
+            for idx, bucket in enumerate(buckets, 1):
+                game = games.setdefault(bucket.q, PrimeGridGame(bucket.q))
+                print(
+                    f"BUCKET {idx}/{len(buckets)} q={bucket.q} label={bucket.label} "
+                    f"size={bucket.size} canon={bucket.canon} sample_six={bucket.sample_six}",
+                    flush=True,
+                )
+                res = analyze_bucket(game, bucket, state_out=state_out)
+                results.append(res)
+                print(
+                    f"  done {res.seconds:.2f}s intruders={res.intruders} values={res.intruder_values} "
+                    f"P_reply_states={res.p_reply_states} necessity_violations={res.necessity_violation_count} "
+                    f"max_zone={res.max_zone_size}",
+                    flush=True,
+                )
+                print(f"  zero_even_by_zoneg={res.zero_even_value_by_zoneg}", flush=True)
+        finally:
+            if state_out is not None:
+                state_out.close()
+                print(f"wrote {args.states_jsonl}")
+    else:
+        print(f"parallel jobs={args.jobs}", flush=True)
+        results_by_idx: dict[int, BucketResult] = {}
+        state_text_by_idx: dict[int, str] = {}
+        jobs = [(idx, bucket, bool(args.states_jsonl)) for idx, bucket in enumerate(buckets, 1)]
+        with ProcessPoolExecutor(max_workers=args.jobs) as pool:
+            futs = {pool.submit(analyze_bucket_worker, job): job for job in jobs}
+            for fut in as_completed(futs):
+                idx, bucket, _emit = futs[fut]
+                res_idx, res, state_text = fut.result()
+                assert idx == res_idx
+                results_by_idx[idx] = res
+                state_text_by_idx[idx] = state_text
+                print(
+                    f"BUCKET {idx}/{len(buckets)} done {res.seconds:.2f}s q={bucket.q} "
+                    f"label={bucket.label} intruders={res.intruders} values={res.intruder_values} "
+                    f"P_reply_states={res.p_reply_states} necessity_violations={res.necessity_violation_count} "
+                    f"max_zone={res.max_zone_size}",
+                    flush=True,
+                )
+                print(f"  zero_even_by_zoneg={res.zero_even_value_by_zoneg}", flush=True)
+        results = [results_by_idx[idx] for idx in range(1, len(buckets) + 1)]
+        if args.states_jsonl:
+            with open(args.states_jsonl, "w", encoding="utf-8") as f:
+                for idx in range(1, len(buckets) + 1):
+                    f.write(state_text_by_idx[idx])
             print(f"wrote {args.states_jsonl}")
 
     total_viol = sum(r.necessity_violation_count for r in results)

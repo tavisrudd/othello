@@ -851,6 +851,14 @@ Follow-up checks: replacing the argmin by "legal internal conic-emptying P reply
 score-9 states form only two conic-preserving `PGL(2,17)` orbits, even after adding the guard and
 the two worst opponent moves, so this layer is a finite-certificate target.
 
+q=19 extension 2026-07-08: `notes/2026-07-08-codex-q19-q25-mining.md` extends the C20/C31
+pipeline.  The C20 miner now supports bucket-level `--jobs`; q=19 has 13/13 P buckets, all 1747
+legal first intrusions are N-valued, and recursive steering over 63,479 unique P reply states gives
+`max Z = 16` with raw zones up to 57.  Durable data: `notes/data/c20-q19.json`,
+`notes/data/c20-q19-states.jsonl.gz`, and `notes/data/c31-q19.json`.  The same report adds a Rust
+`s4` sizing mode; q=25's first normalized representative is P but takes about 26.3M private memo
+entries, so GF(25) broad mining needs a dedicated prime-power path.
+
 ## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2)
 
 **READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**

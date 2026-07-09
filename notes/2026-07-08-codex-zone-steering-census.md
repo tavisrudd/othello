@@ -220,3 +220,48 @@ The obvious caution is that `B=9` is empirical and only tested on q = 13,17 C20 
 may grow for larger q.  Still, the large drop from initial zone 38 to ceiling 9 at q = 17 is strong
 evidence that zone steering is real enough to formalize at least as a finite terminal certificate
 schema.
+
+## Addendum: q = 19
+
+The q = 19 steering extension was run later on 2026-07-08 from
+`notes/data/c20-q19-states.jsonl.gz`.
+
+Summary:
+
+```text
+unique P reply states: 63479
+raw initial zone range: 34..57
+max recursive steering ceiling Z: 16
+runtime: 440.5 seconds
+```
+
+The steering ceiling distribution was:
+
+```text
+Z=5: 13
+Z=6: 132
+Z=7: 1921
+Z=8: 12378
+Z=9: 22192
+Z=10: 15874
+Z=11: 6987
+Z=12: 2878
+Z=13: 825
+Z=14: 220
+Z=15: 46
+Z=16: 13
+```
+
+This extends the dynamic steering evidence, but confirms that the empirical ceiling is growing:
+
+```text
+q=13: max Z = 2
+q=17: max Z = 9
+q=19: max Z = 16
+```
+
+Durable output:
+
+```text
+notes/data/c31-q19.json
+```

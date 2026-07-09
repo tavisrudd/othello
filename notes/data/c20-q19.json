@@ -1,0 +1,5421 @@
+[
+  {
+    "canon": "(0, 1, 2, 3, 11, 'inf')",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 132
+    },
+    "intruders": 132,
+    "kill_size_values": {
+      "4": {
+        "N": 6
+      },
+      "5": {
+        "N": 48
+      },
+      "6": {
+        "N": 78
+      }
+    },
+    "max_zone_size": 55,
+    "n_child_reply_counts": {
+      "89": 6,
+      "90": 12,
+      "91": 30,
+      "92": 24,
+      "93": 36,
+      "95": 24
+    },
+    "necessity_violation_count": 7764,
+    "necessity_violations": [
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          1
+        ],
+        "y_kind": "conic",
+        "zone_edges": 517,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          2
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 587,
+        "zone_grundy": 7,
+        "zone_size": 48
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 605,
+        "zone_grundy": 1,
+        "zone_size": 49
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 519,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            6
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          5
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 478,
+        "zone_grundy": 3,
+        "zone_size": 43
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          7
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 599,
+        "zone_grundy": 7,
+        "zone_size": 49
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          8
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 605,
+        "zone_grundy": 1,
+        "zone_size": 49
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          13
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 543,
+        "zone_grundy": 4,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 548,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 496,
+        "zone_grundy": 1,
+        "zone_size": 45
+      }
+    ],
+    "p_reply_states": 10068,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 73.59473752975464,
+    "size": 6,
+    "t4": [
+      13,
+      15,
+      16,
+      17
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 60
+      },
+      "(2, 0, 1)": {
+        "N": 18
+      },
+      "(2, 1, 1)": {
+        "N": 48
+      },
+      "(2, 2, 1)": {
+        "N": 6
+      }
+    },
+    "win_reply_kind": {
+      "conic": 864,
+      "intruder": 9204
+    },
+    "win_reply_order": {
+      "10": 1524,
+      "18": 804,
+      "19": 336,
+      "2": 522,
+      "20": 2772,
+      "3": 240,
+      "4": 576,
+      "5": 1590,
+      "6": 240,
+      "9": 600
+    },
+    "zero_even_value_by_zone_size": {
+      "36": {
+        "P": 12
+      },
+      "38": {
+        "P": 66
+      },
+      "40": {
+        "N": 12,
+        "P": 108
+      },
+      "42": {
+        "N": 24,
+        "P": 318
+      },
+      "44": {
+        "P": 438
+      },
+      "46": {
+        "N": 60,
+        "P": 564
+      },
+      "48": {
+        "N": 96,
+        "P": 414
+      },
+      "50": {
+        "N": 84,
+        "P": 300
+      },
+      "52": {
+        "N": 60,
+        "P": 72
+      },
+      "54": {
+        "P": 12
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 12,
+        "P": 264
+      },
+      "1": {
+        "P": 240
+      },
+      "2": {
+        "N": 12
+      },
+      "3": {
+        "N": 288,
+        "P": 1284
+      },
+      "4": {
+        "N": 24,
+        "P": 168
+      },
+      "6": {
+        "P": 72
+      },
+      "7": {
+        "P": 228
+      },
+      "8": {
+        "P": 48
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 'inf')",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 134
+    },
+    "intruders": 134,
+    "kill_size_values": {
+      "4": {
+        "N": 8
+      },
+      "5": {
+        "N": 44
+      },
+      "6": {
+        "N": 82
+      }
+    },
+    "max_zone_size": 57,
+    "n_child_reply_counts": {
+      "90": 4,
+      "91": 14,
+      "92": 16,
+      "93": 36,
+      "94": 24,
+      "95": 28,
+      "96": 12
+    },
+    "necessity_violation_count": 7512,
+    "necessity_violations": [
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          2
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 594,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          3
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 423,
+        "zone_grundy": 3,
+        "zone_size": 41
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 562,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            6
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          10
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 498,
+        "zone_grundy": 7,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          15
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 483,
+        "zone_grundy": 7,
+        "zone_size": 44
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 515,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          8
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 538,
+        "zone_grundy": 3,
+        "zone_size": 46
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 523,
+        "zone_grundy": 3,
+        "zone_size": 46
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          2
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 510,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          7
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 551,
+        "zone_grundy": 3,
+        "zone_size": 46
+      }
+    ],
+    "p_reply_states": 9454,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 79.80870270729065,
+    "size": 18,
+    "t4": [
+      15,
+      16,
+      17,
+      18
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 58
+      },
+      "(2, 0, 1)": {
+        "N": 24
+      },
+      "(2, 1, 1)": {
+        "N": 44
+      },
+      "(2, 2, 1)": {
+        "N": 8
+      }
+    },
+    "win_reply_kind": {
+      "conic": 900,
+      "intruder": 8554
+    },
+    "win_reply_order": {
+      "10": 1272,
+      "18": 688,
+      "19": 392,
+      "2": 482,
+      "20": 2656,
+      "3": 208,
+      "4": 616,
+      "5": 1410,
+      "6": 216,
+      "9": 614
+    },
+    "zero_even_value_by_zone_size": {
+      "34": {
+        "P": 2
+      },
+      "36": {
+        "P": 2
+      },
+      "38": {
+        "P": 14
+      },
+      "40": {
+        "P": 84
+      },
+      "42": {
+        "N": 16,
+        "P": 156
+      },
+      "44": {
+        "N": 104,
+        "P": 320
+      },
+      "46": {
+        "N": 116,
+        "P": 450
+      },
+      "48": {
+        "N": 144,
+        "P": 474
+      },
+      "50": {
+        "N": 56,
+        "P": 298
+      },
+      "52": {
+        "N": 28,
+        "P": 120
+      },
+      "54": {
+        "P": 8
+      },
+      "56": {
+        "N": 8,
+        "P": 14
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 8,
+        "P": 102
+      },
+      "1": {
+        "N": 20,
+        "P": 168
+      },
+      "2": {
+        "P": 4
+      },
+      "3": {
+        "N": 304,
+        "P": 1118
+      },
+      "4": {
+        "N": 72,
+        "P": 226
+      },
+      "6": {
+        "N": 16,
+        "P": 92
+      },
+      "7": {
+        "N": 52,
+        "P": 208
+      },
+      "8": {
+        "P": 24
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 11)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 136
+    },
+    "intruders": 136,
+    "kill_size_values": {
+      "4": {
+        "N": 9
+      },
+      "5": {
+        "N": 42
+      },
+      "6": {
+        "N": 85
+      }
+    },
+    "max_zone_size": 57,
+    "n_child_reply_counts": {
+      "90": 1,
+      "91": 8,
+      "92": 14,
+      "93": 17,
+      "94": 21,
+      "95": 29,
+      "96": 22,
+      "97": 21,
+      "98": 2,
+      "99": 1
+    },
+    "necessity_violation_count": 7724,
+    "necessity_violations": [
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          2
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 568,
+        "zone_grundy": 1,
+        "zone_size": 47
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          8
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 561,
+        "zone_grundy": 4,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          10
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 551,
+        "zone_grundy": 4,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          13
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 570,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          5
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 564,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          7
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 598,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "cycle",
+            6
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          8
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 594,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          11
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 400,
+        "zone_grundy": 3,
+        "zone_size": 41
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          3
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 498,
+        "zone_grundy": 3,
+        "zone_size": 44
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          7
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 544,
+        "zone_grundy": 3,
+        "zone_size": 46
+      }
+    ],
+    "p_reply_states": 9271,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 83.33015275001526,
+    "size": 74,
+    "t4": [
+      5,
+      15,
+      16,
+      17
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 61
+      },
+      "(2, 0, 1)": {
+        "N": 24
+      },
+      "(2, 1, 1)": {
+        "N": 42
+      },
+      "(2, 2, 1)": {
+        "N": 9
+      }
+    },
+    "win_reply_kind": {
+      "conic": 905,
+      "intruder": 8366
+    },
+    "win_reply_order": {
+      "10": 1342,
+      "18": 674,
+      "19": 344,
+      "2": 434,
+      "20": 2498,
+      "3": 204,
+      "4": 668,
+      "5": 1316,
+      "6": 222,
+      "9": 664
+    },
+    "zero_even_value_by_zone_size": {
+      "34": {
+        "P": 1
+      },
+      "36": {
+        "P": 2
+      },
+      "38": {
+        "P": 6
+      },
+      "40": {
+        "N": 8,
+        "P": 22
+      },
+      "42": {
+        "N": 36,
+        "P": 61
+      },
+      "44": {
+        "N": 67,
+        "P": 216
+      },
+      "46": {
+        "N": 123,
+        "P": 392
+      },
+      "48": {
+        "N": 159,
+        "P": 417
+      },
+      "50": {
+        "N": 116,
+        "P": 276
+      },
+      "52": {
+        "N": 50,
+        "P": 126
+      },
+      "54": {
+        "N": 16,
+        "P": 20
+      },
+      "56": {
+        "P": 8
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 6,
+        "P": 27
+      },
+      "1": {
+        "N": 60,
+        "P": 126
+      },
+      "2": {
+        "P": 2
+      },
+      "3": {
+        "N": 360,
+        "P": 1016
+      },
+      "4": {
+        "N": 75,
+        "P": 177
+      },
+      "6": {
+        "N": 20,
+        "P": 50
+      },
+      "7": {
+        "N": 54,
+        "P": 147
+      },
+      "8": {
+        "P": 2
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 5)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 133
+    },
+    "intruders": 133,
+    "kill_size_values": {
+      "4": {
+        "N": 15
+      },
+      "5": {
+        "N": 30
+      },
+      "6": {
+        "N": 88
+      }
+    },
+    "max_zone_size": 56,
+    "n_child_reply_counts": {
+      "89": 12,
+      "90": 9,
+      "91": 6,
+      "92": 24,
+      "93": 42,
+      "94": 21,
+      "95": 6,
+      "96": 12,
+      "98": 1
+    },
+    "necessity_violation_count": 7365,
+    "necessity_violations": [
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 577,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 439,
+        "zone_grundy": 3,
+        "zone_size": 42
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          5
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 651,
+        "zone_grundy": 3,
+        "zone_size": 50
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          11
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 584,
+        "zone_grundy": 4,
+        "zone_size": 48
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 569,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          9
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 624,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            7
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 494,
+        "zone_grundy": 3,
+        "zone_size": 44
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          18
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 580,
+        "zone_grundy": 4,
+        "zone_size": 48
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "cycle",
+            6
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 587,
+        "zone_grundy": 6,
+        "zone_size": 48
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 596,
+        "zone_grundy": 3,
+        "zone_size": 48
+      }
+    ],
+    "p_reply_states": 9011,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 75.33052444458008,
+    "size": 12,
+    "t4": [
+      10,
+      11,
+      13,
+      14
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 51
+      },
+      "(2, 0, 1)": {
+        "N": 37
+      },
+      "(2, 1, 1)": {
+        "N": 30
+      },
+      "(2, 2, 1)": {
+        "N": 15
+      }
+    },
+    "win_reply_kind": {
+      "conic": 869,
+      "intruder": 8142
+    },
+    "win_reply_order": {
+      "10": 1326,
+      "18": 648,
+      "19": 462,
+      "2": 342,
+      "20": 2376,
+      "3": 258,
+      "4": 552,
+      "5": 1224,
+      "6": 204,
+      "9": 750
+    },
+    "zero_even_value_by_zone_size": {
+      "38": {
+        "P": 6
+      },
+      "40": {
+        "N": 12,
+        "P": 48
+      },
+      "42": {
+        "N": 72,
+        "P": 183
+      },
+      "44": {
+        "N": 159,
+        "P": 279
+      },
+      "46": {
+        "N": 138,
+        "P": 525
+      },
+      "48": {
+        "N": 87,
+        "P": 311
+      },
+      "50": {
+        "N": 54,
+        "P": 252
+      },
+      "52": {
+        "N": 36,
+        "P": 42
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 12,
+        "P": 105
+      },
+      "1": {
+        "N": 60,
+        "P": 72
+      },
+      "2": {
+        "P": 9
+      },
+      "3": {
+        "N": 330,
+        "P": 1040
+      },
+      "4": {
+        "N": 72,
+        "P": 168
+      },
+      "6": {
+        "N": 24,
+        "P": 114
+      },
+      "7": {
+        "N": 60,
+        "P": 138
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 6)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 135
+    },
+    "intruders": 135,
+    "kill_size_values": {
+      "4": {
+        "N": 9
+      },
+      "5": {
+        "N": 40
+      },
+      "6": {
+        "N": 86
+      }
+    },
+    "max_zone_size": 55,
+    "n_child_reply_counts": {
+      "90": 2,
+      "91": 12,
+      "92": 12,
+      "93": 14,
+      "94": 48,
+      "95": 22,
+      "96": 16,
+      "97": 2,
+      "98": 7
+    },
+    "necessity_violation_count": 7084,
+    "necessity_violations": [
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          1,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 520,
+        "zone_grundy": 7,
+        "zone_size": 45
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "cycle",
+            4
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          1,
+          15
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 423,
+        "zone_grundy": 6,
+        "zone_size": 41
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          1,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 479,
+        "zone_grundy": 3,
+        "zone_size": 43
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 712,
+        "zone_grundy": 1,
+        "zone_size": 52
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          2,
+          7
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 567,
+        "zone_grundy": 0,
+        "zone_size": 47
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          2,
+          10
+        ],
+        "y_kind": "conic",
+        "zone_edges": 478,
+        "zone_grundy": 3,
+        "zone_size": 43
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          2,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 662,
+        "zone_grundy": 3,
+        "zone_size": 50
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          2,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 527,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          3,
+          0
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 543,
+        "zone_grundy": 0,
+        "zone_size": 46
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          3,
+          3
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 518,
+        "zone_grundy": 3,
+        "zone_size": 45
+      }
+    ],
+    "p_reply_states": 8720,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 83.14508390426636,
+    "size": 34,
+    "t4": [
+      4,
+      15,
+      16,
+      17
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 58
+      },
+      "(2, 0, 1)": {
+        "N": 28
+      },
+      "(2, 1, 1)": {
+        "N": 40
+      },
+      "(2, 2, 1)": {
+        "N": 9
+      }
+    },
+    "win_reply_kind": {
+      "conic": 822,
+      "intruder": 7898
+    },
+    "win_reply_order": {
+      "10": 1214,
+      "18": 632,
+      "19": 388,
+      "2": 422,
+      "20": 2380,
+      "3": 192,
+      "4": 620,
+      "5": 1270,
+      "6": 200,
+      "9": 580
+    },
+    "zero_even_value_by_zone_size": {
+      "34": {
+        "P": 2
+      },
+      "36": {
+        "P": 2
+      },
+      "38": {
+        "N": 2,
+        "P": 6
+      },
+      "40": {
+        "N": 6,
+        "P": 22
+      },
+      "42": {
+        "N": 24,
+        "P": 104
+      },
+      "44": {
+        "N": 114,
+        "P": 242
+      },
+      "46": {
+        "N": 128,
+        "P": 390
+      },
+      "48": {
+        "N": 202,
+        "P": 426
+      },
+      "50": {
+        "N": 132,
+        "P": 304
+      },
+      "52": {
+        "N": 44,
+        "P": 114
+      },
+      "54": {
+        "P": 24
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 8,
+        "P": 48
+      },
+      "1": {
+        "N": 68,
+        "P": 194
+      },
+      "2": {
+        "N": 4,
+        "P": 4
+      },
+      "3": {
+        "N": 358,
+        "P": 900
+      },
+      "4": {
+        "N": 124,
+        "P": 256
+      },
+      "6": {
+        "N": 22,
+        "P": 60
+      },
+      "7": {
+        "N": 68,
+        "P": 174
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 7)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 135
+    },
+    "intruders": 135,
+    "kill_size_values": {
+      "4": {
+        "N": 11
+      },
+      "5": {
+        "N": 34
+      },
+      "6": {
+        "N": 90
+      }
+    },
+    "max_zone_size": 56,
+    "n_child_reply_counts": {
+      "100": 1,
+      "90": 4,
+      "91": 12,
+      "92": 12,
+      "93": 28,
+      "94": 22,
+      "95": 28,
+      "96": 17,
+      "97": 8,
+      "98": 3
+    },
+    "necessity_violation_count": 7410,
+    "necessity_violations": [
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          10
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 534,
+        "zone_grundy": 4,
+        "zone_size": 46
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          18
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 560,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 472,
+        "zone_grundy": 3,
+        "zone_size": 43
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          9
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 568,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          18
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 650,
+        "zone_grundy": 1,
+        "zone_size": 51
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 641,
+        "zone_grundy": 1,
+        "zone_size": 50
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            7
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          9
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 595,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 556,
+        "zone_grundy": 4,
+        "zone_size": 47
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 479,
+        "zone_grundy": 1,
+        "zone_size": 44
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 565,
+        "zone_grundy": 3,
+        "zone_size": 47
+      }
+    ],
+    "p_reply_states": 9123,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 81.24439239501953,
+    "size": 32,
+    "t4": [
+      10,
+      11,
+      12,
+      16
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 59
+      },
+      "(2, 0, 1)": {
+        "N": 31
+      },
+      "(2, 1, 1)": {
+        "N": 34
+      },
+      "(2, 2, 1)": {
+        "N": 11
+      }
+    },
+    "win_reply_kind": {
+      "conic": 837,
+      "intruder": 8286
+    },
+    "win_reply_order": {
+      "10": 1338,
+      "18": 596,
+      "19": 436,
+      "2": 372,
+      "20": 2564,
+      "3": 238,
+      "4": 652,
+      "5": 1250,
+      "6": 232,
+      "9": 608
+    },
+    "zero_even_value_by_zone_size": {
+      "38": {
+        "P": 1
+      },
+      "40": {
+        "N": 16,
+        "P": 17
+      },
+      "42": {
+        "N": 60,
+        "P": 88
+      },
+      "44": {
+        "N": 133,
+        "P": 272
+      },
+      "46": {
+        "N": 168,
+        "P": 416
+      },
+      "48": {
+        "N": 156,
+        "P": 425
+      },
+      "50": {
+        "N": 126,
+        "P": 300
+      },
+      "52": {
+        "N": 10,
+        "P": 138
+      },
+      "54": {
+        "N": 12,
+        "P": 52
+      },
+      "56": {
+        "P": 4
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 14,
+        "P": 40
+      },
+      "1": {
+        "N": 42,
+        "P": 130
+      },
+      "2": {
+        "N": 2,
+        "P": 10
+      },
+      "3": {
+        "N": 454,
+        "P": 1084
+      },
+      "4": {
+        "N": 61,
+        "P": 193
+      },
+      "6": {
+        "N": 28,
+        "P": 82
+      },
+      "7": {
+        "N": 76,
+        "P": 174
+      },
+      "8": {
+        "N": 4
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 8)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 135
+    },
+    "intruders": 135,
+    "kill_size_values": {
+      "4": {
+        "N": 13
+      },
+      "5": {
+        "N": 36
+      },
+      "6": {
+        "N": 86
+      }
+    },
+    "max_zone_size": 56,
+    "n_child_reply_counts": {
+      "90": 2,
+      "91": 6,
+      "92": 23,
+      "93": 24,
+      "94": 28,
+      "95": 24,
+      "96": 18,
+      "97": 6,
+      "98": 4
+    },
+    "necessity_violation_count": 7476,
+    "necessity_violations": [
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          5
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 519,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          9
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 551,
+        "zone_grundy": 3,
+        "zone_size": 46
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          10
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 514,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 493,
+        "zone_grundy": 7,
+        "zone_size": 44
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          9
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 510,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          11
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 452,
+        "zone_grundy": 3,
+        "zone_size": 42
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 649,
+        "zone_grundy": 3,
+        "zone_size": 50
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          13
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 563,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 439,
+        "zone_grundy": 3,
+        "zone_size": 42
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 560,
+        "zone_grundy": 4,
+        "zone_size": 47
+      }
+    ],
+    "p_reply_states": 9174,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 80.53258848190308,
+    "size": 40,
+    "t4": [
+      10,
+      11,
+      12,
+      18
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 58
+      },
+      "(2, 0, 1)": {
+        "N": 28
+      },
+      "(2, 1, 1)": {
+        "N": 36
+      },
+      "(2, 2, 1)": {
+        "N": 13
+      }
+    },
+    "win_reply_kind": {
+      "conic": 862,
+      "intruder": 8312
+    },
+    "win_reply_order": {
+      "10": 1282,
+      "18": 628,
+      "19": 404,
+      "2": 458,
+      "20": 2520,
+      "3": 200,
+      "4": 648,
+      "5": 1228,
+      "6": 212,
+      "9": 732
+    },
+    "zero_even_value_by_zone_size": {
+      "34": {
+        "P": 2
+      },
+      "36": {
+        "P": 6
+      },
+      "38": {
+        "P": 4
+      },
+      "40": {
+        "N": 8,
+        "P": 34
+      },
+      "42": {
+        "N": 50,
+        "P": 90
+      },
+      "44": {
+        "N": 104,
+        "P": 248
+      },
+      "46": {
+        "N": 132,
+        "P": 434
+      },
+      "48": {
+        "N": 170,
+        "P": 460
+      },
+      "50": {
+        "N": 78,
+        "P": 286
+      },
+      "52": {
+        "N": 34,
+        "P": 98
+      },
+      "54": {
+        "N": 6,
+        "P": 34
+      },
+      "56": {
+        "N": 4,
+        "P": 2
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 10,
+        "P": 62
+      },
+      "1": {
+        "N": 66,
+        "P": 84
+      },
+      "2": {
+        "P": 8
+      },
+      "3": {
+        "N": 362,
+        "P": 1110
+      },
+      "4": {
+        "N": 70,
+        "P": 206
+      },
+      "6": {
+        "N": 28,
+        "P": 60
+      },
+      "7": {
+        "N": 48,
+        "P": 154
+      },
+      "8": {
+        "N": 2,
+        "P": 14
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 4, 9)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 136
+    },
+    "intruders": 136,
+    "kill_size_values": {
+      "4": {
+        "N": 11
+      },
+      "5": {
+        "N": 40
+      },
+      "6": {
+        "N": 85
+      }
+    },
+    "max_zone_size": 57,
+    "n_child_reply_counts": {
+      "88": 1,
+      "91": 4,
+      "92": 13,
+      "93": 20,
+      "94": 25,
+      "95": 29,
+      "96": 24,
+      "97": 15,
+      "98": 5
+    },
+    "necessity_violation_count": 7418,
+    "necessity_violations": [
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          3
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 521,
+        "zone_grundy": 7,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          7
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 486,
+        "zone_grundy": 3,
+        "zone_size": 44
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          8
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 519,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          13
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 577,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            7
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 592,
+        "zone_grundy": 6,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 513,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          10
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 523,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 613,
+        "zone_grundy": 1,
+        "zone_size": 49
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 484,
+        "zone_grundy": 3,
+        "zone_size": 44
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          3
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 606,
+        "zone_grundy": 1,
+        "zone_size": 49
+      }
+    ],
+    "p_reply_states": 9029,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 83.32145285606384,
+    "size": 76,
+    "t4": [
+      1,
+      15,
+      16,
+      17
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 57
+      },
+      "(2, 0, 1)": {
+        "N": 28
+      },
+      "(2, 1, 1)": {
+        "N": 40
+      },
+      "(2, 2, 1)": {
+        "N": 11
+      }
+    },
+    "win_reply_kind": {
+      "conic": 841,
+      "intruder": 8188
+    },
+    "win_reply_order": {
+      "10": 1318,
+      "18": 640,
+      "19": 418,
+      "2": 450,
+      "20": 2426,
+      "3": 222,
+      "4": 588,
+      "5": 1288,
+      "6": 216,
+      "9": 622
+    },
+    "zero_even_value_by_zone_size": {
+      "36": {
+        "P": 2
+      },
+      "38": {
+        "P": 3
+      },
+      "40": {
+        "N": 12,
+        "P": 21
+      },
+      "42": {
+        "N": 32,
+        "P": 69
+      },
+      "44": {
+        "N": 92,
+        "P": 228
+      },
+      "46": {
+        "N": 170,
+        "P": 388
+      },
+      "48": {
+        "N": 165,
+        "P": 398
+      },
+      "50": {
+        "N": 122,
+        "P": 334
+      },
+      "52": {
+        "N": 44,
+        "P": 124
+      },
+      "54": {
+        "N": 14,
+        "P": 36
+      },
+      "56": {
+        "N": 2,
+        "P": 8
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 10,
+        "P": 26
+      },
+      "1": {
+        "N": 58,
+        "P": 146
+      },
+      "2": {
+        "P": 3
+      },
+      "3": {
+        "N": 407,
+        "P": 1064
+      },
+      "4": {
+        "N": 88,
+        "P": 190
+      },
+      "6": {
+        "N": 30,
+        "P": 48
+      },
+      "7": {
+        "N": 60,
+        "P": 132
+      },
+      "8": {
+        "P": 2
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 6, 10)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 135
+    },
+    "intruders": 135,
+    "kill_size_values": {
+      "4": {
+        "N": 7
+      },
+      "5": {
+        "N": 42
+      },
+      "6": {
+        "N": 86
+      }
+    },
+    "max_zone_size": 56,
+    "n_child_reply_counts": {
+      "87": 2,
+      "90": 5,
+      "91": 10,
+      "92": 13,
+      "93": 28,
+      "94": 26,
+      "95": 14,
+      "96": 23,
+      "97": 10,
+      "98": 4
+    },
+    "necessity_violation_count": 7361,
+    "necessity_violations": [
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            7
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          13
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 747,
+        "zone_grundy": 3,
+        "zone_size": 53
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          15
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 585,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 601,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          8
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 661,
+        "zone_grundy": 4,
+        "zone_size": 51
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          11
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 619,
+        "zone_grundy": 0,
+        "zone_size": 49
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            7
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 747,
+        "zone_grundy": 3,
+        "zone_size": 53
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 598,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          3
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 583,
+        "zone_grundy": 0,
+        "zone_size": 47
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 508,
+        "zone_grundy": 7,
+        "zone_size": 45
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 524,
+        "zone_grundy": 4,
+        "zone_size": 46
+      }
+    ],
+    "p_reply_states": 8988,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 81.450448513031,
+    "size": 32,
+    "t4": [
+      8,
+      15,
+      16,
+      17
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 63
+      },
+      "(2, 0, 1)": {
+        "N": 23
+      },
+      "(2, 1, 1)": {
+        "N": 42
+      },
+      "(2, 2, 1)": {
+        "N": 7
+      }
+    },
+    "win_reply_kind": {
+      "conic": 884,
+      "intruder": 8104
+    },
+    "win_reply_order": {
+      "10": 1240,
+      "18": 680,
+      "19": 350,
+      "2": 464,
+      "20": 2488,
+      "3": 204,
+      "4": 624,
+      "5": 1284,
+      "6": 196,
+      "9": 574
+    },
+    "zero_even_value_by_zone_size": {
+      "36": {
+        "P": 3
+      },
+      "38": {
+        "P": 10
+      },
+      "40": {
+        "N": 2,
+        "P": 29
+      },
+      "42": {
+        "N": 42,
+        "P": 91
+      },
+      "44": {
+        "N": 120,
+        "P": 259
+      },
+      "46": {
+        "N": 145,
+        "P": 459
+      },
+      "48": {
+        "N": 172,
+        "P": 354
+      },
+      "50": {
+        "N": 126,
+        "P": 292
+      },
+      "52": {
+        "N": 36,
+        "P": 104
+      },
+      "54": {
+        "N": 8,
+        "P": 26
+      },
+      "56": {
+        "N": 4
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 4,
+        "P": 35
+      },
+      "1": {
+        "N": 70,
+        "P": 172
+      },
+      "2": {
+        "P": 1
+      },
+      "3": {
+        "N": 412,
+        "P": 976
+      },
+      "4": {
+        "N": 79,
+        "P": 179
+      },
+      "6": {
+        "N": 22,
+        "P": 56
+      },
+      "7": {
+        "N": 68,
+        "P": 196
+      },
+      "8": {
+        "P": 12
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 6, 16)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 134
+    },
+    "intruders": 134,
+    "kill_size_values": {
+      "4": {
+        "N": 12
+      },
+      "5": {
+        "N": 36
+      },
+      "6": {
+        "N": 86
+      }
+    },
+    "max_zone_size": 57,
+    "n_child_reply_counts": {
+      "89": 2,
+      "90": 4,
+      "91": 16,
+      "92": 16,
+      "93": 32,
+      "94": 24,
+      "95": 26,
+      "96": 8,
+      "97": 6
+    },
+    "necessity_violation_count": 7440,
+    "necessity_violations": [
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 636,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          17
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 738,
+        "zone_grundy": 7,
+        "zone_size": 53
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          18
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 545,
+        "zone_grundy": 6,
+        "zone_size": 46
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 569,
+        "zone_grundy": 7,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 648,
+        "zone_grundy": 7,
+        "zone_size": 50
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          10
+        ],
+        "y_kind": "conic",
+        "zone_edges": 427,
+        "zone_grundy": 7,
+        "zone_size": 41
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          15
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 661,
+        "zone_grundy": 7,
+        "zone_size": 51
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 467,
+        "zone_grundy": 3,
+        "zone_size": 43
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 573,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          6
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 574,
+        "zone_grundy": 3,
+        "zone_size": 47
+      }
+    ],
+    "p_reply_states": 9314,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 78.93274879455566,
+    "size": 19,
+    "t4": [
+      4,
+      10,
+      11,
+      12
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 62
+      },
+      "(2, 0, 1)": {
+        "N": 24
+      },
+      "(2, 1, 1)": {
+        "N": 36
+      },
+      "(2, 2, 1)": {
+        "N": 12
+      }
+    },
+    "win_reply_kind": {
+      "conic": 920,
+      "intruder": 8394
+    },
+    "win_reply_order": {
+      "10": 1372,
+      "18": 676,
+      "19": 316,
+      "2": 490,
+      "20": 2516,
+      "3": 196,
+      "4": 680,
+      "5": 1230,
+      "6": 216,
+      "9": 702
+    },
+    "zero_even_value_by_zone_size": {
+      "36": {
+        "P": 10
+      },
+      "38": {
+        "P": 22
+      },
+      "40": {
+        "N": 28,
+        "P": 46
+      },
+      "42": {
+        "N": 36,
+        "P": 148
+      },
+      "44": {
+        "N": 76,
+        "P": 298
+      },
+      "46": {
+        "N": 144,
+        "P": 498
+      },
+      "48": {
+        "N": 168,
+        "P": 392
+      },
+      "50": {
+        "N": 76,
+        "P": 334
+      },
+      "52": {
+        "N": 40,
+        "P": 100
+      },
+      "54": {
+        "N": 8,
+        "P": 18
+      },
+      "56": {
+        "P": 8
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 16,
+        "P": 136
+      },
+      "1": {
+        "N": 44,
+        "P": 128
+      },
+      "2": {
+        "P": 6
+      },
+      "3": {
+        "N": 372,
+        "P": 1134
+      },
+      "4": {
+        "N": 56,
+        "P": 272
+      },
+      "6": {
+        "N": 8,
+        "P": 48
+      },
+      "7": {
+        "N": 80,
+        "P": 146
+      },
+      "8": {
+        "P": 4
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 6, 7)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 133
+    },
+    "intruders": 133,
+    "kill_size_values": {
+      "4": {
+        "N": 9
+      },
+      "5": {
+        "N": 36
+      },
+      "6": {
+        "N": 88
+      }
+    },
+    "max_zone_size": 54,
+    "n_child_reply_counts": {
+      "88": 6,
+      "89": 6,
+      "90": 9,
+      "92": 21,
+      "93": 42,
+      "94": 30,
+      "95": 6,
+      "96": 12,
+      "98": 1
+    },
+    "necessity_violation_count": 6942,
+    "necessity_violations": [
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 627,
+        "zone_grundy": 7,
+        "zone_size": 49
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 595,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          5
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 510,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 528,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          13
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 561,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 448,
+        "zone_grundy": 0,
+        "zone_size": 42
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          6
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 576,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          11
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 604,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          3,
+          15
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 605,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          1
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 588,
+        "zone_grundy": 3,
+        "zone_size": 48
+      }
+    ],
+    "p_reply_states": 8948,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 75.1207287311554,
+    "size": 10,
+    "t4": [
+      6,
+      10,
+      11,
+      12
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 60
+      },
+      "(2, 0, 1)": {
+        "N": 28
+      },
+      "(2, 1, 1)": {
+        "N": 36
+      },
+      "(2, 2, 1)": {
+        "N": 9
+      }
+    },
+    "win_reply_kind": {
+      "conic": 836,
+      "intruder": 8112
+    },
+    "win_reply_order": {
+      "10": 1242,
+      "18": 732,
+      "19": 384,
+      "2": 462,
+      "20": 2424,
+      "3": 210,
+      "4": 588,
+      "5": 1254,
+      "6": 156,
+      "9": 660
+    },
+    "zero_even_value_by_zone_size": {
+      "38": {
+        "N": 6,
+        "P": 12
+      },
+      "40": {
+        "P": 36
+      },
+      "42": {
+        "N": 54,
+        "P": 162
+      },
+      "44": {
+        "N": 126,
+        "P": 444
+      },
+      "46": {
+        "N": 126,
+        "P": 570
+      },
+      "48": {
+        "N": 78,
+        "P": 404
+      },
+      "50": {
+        "N": 78,
+        "P": 312
+      },
+      "52": {
+        "N": 24,
+        "P": 60
+      },
+      "54": {
+        "P": 6
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 30,
+        "P": 138
+      },
+      "1": {
+        "N": 12,
+        "P": 174
+      },
+      "2": {
+        "P": 12
+      },
+      "3": {
+        "N": 336,
+        "P": 1244
+      },
+      "4": {
+        "N": 60,
+        "P": 180
+      },
+      "6": {
+        "N": 6,
+        "P": 84
+      },
+      "7": {
+        "N": 48,
+        "P": 174
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 6, 8)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 135
+    },
+    "intruders": 135,
+    "kill_size_values": {
+      "4": {
+        "N": 7
+      },
+      "5": {
+        "N": 42
+      },
+      "6": {
+        "N": 86
+      }
+    },
+    "max_zone_size": 56,
+    "n_child_reply_counts": {
+      "89": 2,
+      "90": 5,
+      "91": 6,
+      "92": 22,
+      "93": 22,
+      "94": 30,
+      "95": 16,
+      "96": 16,
+      "97": 10,
+      "98": 6
+    },
+    "necessity_violation_count": 7470,
+    "necessity_violations": [
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          1,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 519,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "cycle",
+            4
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          1,
+          15
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 507,
+        "zone_grundy": 1,
+        "zone_size": 45
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          1,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 506,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          3,
+          0
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 556,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          3,
+          4
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 595,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            3
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          4,
+          0
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 583,
+        "zone_grundy": 4,
+        "zone_size": 48
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          4,
+          5
+        ],
+        "y_kind": "conic",
+        "zone_edges": 478,
+        "zone_grundy": 3,
+        "zone_size": 43
+      },
+      {
+        "defxor": 3,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          4,
+          11
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 614,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          4,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 688,
+        "zone_grundy": 4,
+        "zone_size": 52
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            4
+          ]
+        ],
+        "x": [
+          0,
+          2
+        ],
+        "y": [
+          4,
+          16
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 497,
+        "zone_grundy": 3,
+        "zone_size": 44
+      }
+    ],
+    "p_reply_states": 9110,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 80.3209900856018,
+    "size": 32,
+    "t4": [
+      2,
+      15,
+      16,
+      17
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 62
+      },
+      "(2, 0, 1)": {
+        "N": 24
+      },
+      "(2, 1, 1)": {
+        "N": 42
+      },
+      "(2, 2, 1)": {
+        "N": 7
+      }
+    },
+    "win_reply_kind": {
+      "conic": 836,
+      "intruder": 8274
+    },
+    "win_reply_order": {
+      "10": 1278,
+      "18": 608,
+      "19": 372,
+      "2": 454,
+      "20": 2656,
+      "3": 172,
+      "4": 620,
+      "5": 1302,
+      "6": 180,
+      "9": 632
+    },
+    "zero_even_value_by_zone_size": {
+      "38": {
+        "P": 14
+      },
+      "40": {
+        "N": 12,
+        "P": 24
+      },
+      "42": {
+        "N": 32,
+        "P": 98
+      },
+      "44": {
+        "N": 110,
+        "P": 286
+      },
+      "46": {
+        "N": 172,
+        "P": 404
+      },
+      "48": {
+        "N": 134,
+        "P": 394
+      },
+      "50": {
+        "N": 82,
+        "P": 270
+      },
+      "52": {
+        "N": 32,
+        "P": 120
+      },
+      "54": {
+        "N": 8,
+        "P": 30
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 10,
+        "P": 60
+      },
+      "1": {
+        "N": 52,
+        "P": 162
+      },
+      "3": {
+        "N": 376,
+        "P": 1026
+      },
+      "4": {
+        "N": 74,
+        "P": 180
+      },
+      "6": {
+        "N": 24,
+        "P": 42
+      },
+      "7": {
+        "N": 46,
+        "P": 170
+      }
+    }
+  },
+  {
+    "canon": "(0, 1, 2, 3, 6, 9)",
+    "computed_label": "P",
+    "feat_label": "P",
+    "intruder_values": {
+      "N": 134
+    },
+    "intruders": 134,
+    "kill_size_values": {
+      "4": {
+        "N": 12
+      },
+      "5": {
+        "N": 40
+      },
+      "6": {
+        "N": 82
+      }
+    },
+    "max_zone_size": 57,
+    "n_child_reply_counts": {
+      "89": 2,
+      "91": 12,
+      "92": 36,
+      "93": 24,
+      "94": 20,
+      "95": 28,
+      "96": 8,
+      "97": 2,
+      "99": 2
+    },
+    "necessity_violation_count": 7708,
+    "necessity_violations": [
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          6
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 627,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          9
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 556,
+        "zone_grundy": 3,
+        "zone_size": 47
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            3
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          1,
+          10
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 624,
+        "zone_grundy": 3,
+        "zone_size": 49
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          5
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 535,
+        "zone_grundy": 4,
+        "zone_size": 46
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            6
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          6
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 493,
+        "zone_grundy": 3,
+        "zone_size": 44
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          10
+        ],
+        "y_kind": "conic",
+        "zone_edges": 517,
+        "zone_grundy": 3,
+        "zone_size": 45
+      },
+      {
+        "defxor": 1,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            1
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 590,
+        "zone_grundy": 3,
+        "zone_size": 48
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          2,
+          18
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 565,
+        "zone_grundy": 7,
+        "zone_size": 47
+      },
+      {
+        "defxor": 0,
+        "spectrum": [
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ],
+          [
+            "path",
+            2
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          5
+        ],
+        "y_kind": "conic",
+        "zone_edges": 427,
+        "zone_grundy": 7,
+        "zone_size": 41
+      },
+      {
+        "defxor": 2,
+        "spectrum": [
+          [
+            "path",
+            1
+          ],
+          [
+            "path",
+            5
+          ]
+        ],
+        "x": [
+          0,
+          0
+        ],
+        "y": [
+          4,
+          12
+        ],
+        "y_kind": "intruder",
+        "zone_edges": 568,
+        "zone_grundy": 3,
+        "zone_size": 47
+      }
+    ],
+    "p_reply_states": 9356,
+    "q": 19,
+    "s4_win_move_kind": {},
+    "seconds": 67.98665571212769,
+    "size": 20,
+    "t4": [
+      3,
+      10,
+      11,
+      12
+    ],
+    "type_values": {
+      "(0, 0, 0)": {
+        "N": 58
+      },
+      "(2, 0, 1)": {
+        "N": 24
+      },
+      "(2, 1, 1)": {
+        "N": 40
+      },
+      "(2, 2, 1)": {
+        "N": 12
+      }
+    },
+    "win_reply_kind": {
+      "conic": 698,
+      "intruder": 8658
+    },
+    "win_reply_order": {
+      "10": 1432,
+      "18": 700,
+      "19": 372,
+      "2": 390,
+      "20": 2504,
+      "3": 260,
+      "4": 672,
+      "5": 1362,
+      "6": 236,
+      "9": 730
+    },
+    "zero_even_value_by_zone_size": {
+      "34": {
+        "P": 6
+      },
+      "36": {
+        "P": 8
+      },
+      "38": {
+        "P": 18
+      },
+      "40": {
+        "N": 12,
+        "P": 34
+      },
+      "42": {
+        "N": 28,
+        "P": 98
+      },
+      "44": {
+        "N": 100,
+        "P": 376
+      },
+      "46": {
+        "N": 182,
+        "P": 390
+      },
+      "48": {
+        "N": 168,
+        "P": 380
+      },
+      "50": {
+        "N": 88,
+        "P": 192
+      },
+      "52": {
+        "N": 32,
+        "P": 116
+      },
+      "54": {
+        "N": 12,
+        "P": 22
+      },
+      "56": {
+        "P": 8
+      }
+    },
+    "zero_even_value_by_zoneg": {
+      "0": {
+        "N": 8,
+        "P": 126
+      },
+      "1": {
+        "N": 72,
+        "P": 152
+      },
+      "2": {
+        "P": 10
+      },
+      "3": {
+        "N": 394,
+        "P": 1084
+      },
+      "4": {
+        "N": 64,
+        "P": 128
+      },
+      "6": {
+        "N": 36,
+        "P": 36
+      },
+      "7": {
+        "N": 48,
+        "P": 104
+      },
+      "8": {
+        "P": 8
+      }
+    }
+  }
+]
