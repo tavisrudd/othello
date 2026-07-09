@@ -4,7 +4,7 @@ Date created: 2026-07-06.  Refactored current-state handoff: 2026-07-08.
 
 The previous long handoff, including the full chronological session log and superseded planning
 notes, was moved intact to
-[`../done/2026-07-08-projective-cap-game-handoff-archive.md`](../done/2026-07-08-projective-cap-game-handoff-archive.md).
+[`done/2026-07-08-projective-cap-game-handoff-archive.md`](done/2026-07-08-projective-cap-game-handoff-archive.md).
 Use this file as the canonical current map.
 
 ## Current Takeaway
@@ -354,7 +354,7 @@ References:
 
 Historical play-by-play and superseded planning are archived here:
 
-- [`../done/2026-07-08-projective-cap-game-handoff-archive.md`](../done/2026-07-08-projective-cap-game-handoff-archive.md)
+- [`done/2026-07-08-projective-cap-game-handoff-archive.md`](done/2026-07-08-projective-cap-game-handoff-archive.md)
 
 That archive includes:
 
