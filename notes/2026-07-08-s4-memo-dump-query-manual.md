@@ -300,13 +300,18 @@ first root-reply sample to inspect.
 
 ```bash
 /tmp/gridcap-s4 s4xormine <q> <t1,t2,t3,t4> \
-  [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
+  [--target-xor <g>] [--cap <slots>] [--max-tries <n>] \
+  [--start <root-move-index>] [--limit <n>]
 ```
 
 `s4xormine` is a targeted solver, not a dump query.  For each legal first move from the S4 root, it
 enumerates legal replies whose live-conic graph has the requested Node-Kayles xor, sorts them by
 `live_on`, and solves candidates with the S4-local recursive solver until it finds a P reply or
 exhausts `--max-tries`.
+
+For large fields such as q=25, use `--start` and `--limit` to split the first-move layer into
+chunks.  The memo is per process, so chunking avoids one global memo reaching the cap before later
+root moves are reached.
 
 Important fields:
 

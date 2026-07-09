@@ -58,6 +58,7 @@
 //                -- line-protocol runtime query shell over a dumped S4 memo/archive. Commands:
 //                   state, moves, play r,c, pop, replies r,c, bench <iters>, help, quit.
 //   s4xormine <q> t1,t2,t3,t4 [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
+//                [--start <root-move-index>] [--limit <n>]
 //                -- targeted S4-local solver: for each first move, try legal replies whose live
 //                   conic graph has the requested Node-Kayles xor, stopping at the first solved P.
 //   s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
@@ -3707,26 +3708,38 @@ fn solve_s4_xor_mine(
     target_xor: u8,
     cap: usize,
     max_tries: usize,
+    start_index: usize,
+    limit: usize,
 ) {
     let b = Board::new(q);
     let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
     let mut memo: FnvMap<u128, bool> = FnvMap::default();
     println!(
-        "S4XORMINE q={} t4={:?} cells={:?} target-xor={} cap={} max-tries={}",
+        "S4XORMINE q={} t4={:?} cells={:?} target-xor={} cap={} max-tries={} start={} limit={}",
         q,
         t4,
         cells,
         target_xor,
         cap,
-        if max_tries == usize::MAX { "none".to_string() } else { max_tries.to_string() }
+        if max_tries == usize::MAX { "none".to_string() } else { max_tries.to_string() },
+        start_index,
+        if limit == usize::MAX { "none".to_string() } else { limit.to_string() }
     );
     let first_moves = avail_cells(&b, &root_chosen, &root_forbidden);
+    let total_root_moves = first_moves.len();
+    let end_index = start_index.saturating_add(limit).min(total_root_moves);
     let mut total_moves = 0usize;
     let mut hits = 0usize;
     let mut no_candidates = 0usize;
     let mut no_hits = 0usize;
     let mut aborted = false;
-    for x in first_moves {
+    for (root_index, x) in first_moves.into_iter().enumerate() {
+        if root_index < start_index {
+            continue;
+        }
+        if root_index >= end_index {
+            break;
+        }
         total_moves += 1;
         let (x_occ, x_chosen, x_forbidden) =
             push_cell_state(&b, &root_occ, &root_chosen, &root_forbidden, x as usize).unwrap();
@@ -3757,7 +3770,8 @@ fn solve_s4_xor_mine(
             )
         });
         println!(
-            "XORMOVE x={},{} xgeom={} candidates={}",
+            "XORMOVE root_index={} x={},{} xgeom={} candidates={}",
+            root_index,
             x as usize / q,
             x as usize % q,
             xgeom,
@@ -3848,8 +3862,11 @@ fn solve_s4_xor_mine(
         }
     }
     println!(
-        "S4XORMINE-DONE moves={} hits={} no-candidates={} no-hit={} aborted={} memo={}",
+        "S4XORMINE-DONE moves={} root-start={} root-end={} root-total={} hits={} no-candidates={} no-hit={} aborted={} memo={}",
         total_moves,
+        start_index,
+        end_index,
+        total_root_moves,
         hits,
         no_candidates,
         no_hits,
@@ -6358,9 +6375,12 @@ fn main() {
     }
     if args[1] == "s4xormine" {
         // s4xormine <q> t1,t2,t3,t4 [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
+        //        [--start <root-move-index>] [--limit <n>]
         let mut target_xor = 0u8;
         let mut cap: usize = 20_000_000;
         let mut max_tries = usize::MAX;
+        let mut start_index = 0usize;
+        let mut limit = usize::MAX;
         let mut positional: Vec<String> = Vec::new();
         let mut it = args[2..].iter();
         while let Some(a) = it.next() {
@@ -6376,6 +6396,14 @@ fn main() {
                 max_tries = it.next().expect("--max-tries needs a value").parse().expect("--max-tries int");
             } else if let Some(rest) = a.strip_prefix("--max-tries=") {
                 max_tries = rest.parse().expect("--max-tries int");
+            } else if a == "--start" {
+                start_index = it.next().expect("--start needs a value").parse().expect("--start int");
+            } else if let Some(rest) = a.strip_prefix("--start=") {
+                start_index = rest.parse().expect("--start int");
+            } else if a == "--limit" {
+                limit = it.next().expect("--limit needs a value").parse().expect("--limit int");
+            } else if let Some(rest) = a.strip_prefix("--limit=") {
+                limit = rest.parse().expect("--limit int");
             } else {
                 positional.push(a.clone());
             }
@@ -6390,7 +6418,7 @@ fn main() {
                 .get(1)
                 .expect("s4xormine mode needs t values: s4xormine <q> t1,t2,t3,t4"),
         );
-        solve_s4_xor_mine(q, &t4, target_xor, cap, max_tries);
+        solve_s4_xor_mine(q, &t4, target_xor, cap, max_tries, start_index, limit);
         return;
     }
     if args[1] == "s4mine" {
