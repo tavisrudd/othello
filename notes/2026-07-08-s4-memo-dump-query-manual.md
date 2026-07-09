@@ -1,6 +1,6 @@
 # S4 Memo Dump / Query Manual
 
-This manual covers the Rust `s4dump`, `s4freeze`, `s4query`, and `s4mine` modes in
+This manual covers the Rust `s4dump`, `s4freeze`, `s4query`, `s4mine`, and `s4xormine` modes in
 [`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These modes are for targeted
 pattern mining around normalized on-conic S4 roots in the residual `PG(2,q)` grid game.
 
@@ -294,6 +294,27 @@ Useful examples:
 The reply filter is applied to the value of the root child after the opponent's move.  For a
 P-valued S4 root, legal first moves should be N-valued children, so `--replies n` is usually the
 first root-reply sample to inspect.
+
+### `s4xormine`
+
+```bash
+/tmp/gridcap-s4 s4xormine <q> <t1,t2,t3,t4> \
+  [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
+```
+
+`s4xormine` is a targeted solver, not a dump query.  For each legal first move from the S4 root, it
+enumerates legal replies whose live-conic graph has the requested Node-Kayles xor, sorts them by
+`live_on`, and solves candidates with the S4-local recursive solver until it finds a P reply or
+exhausts `--max-tries`.
+
+Important fields:
+
+- `XORMOVE`: first move and number of target-xor reply candidates.
+- `XORTRY`: one solved candidate reply.
+- `XORRESULT`: per-first-move result, including `hit`, `no-hit`, `no-candidates`, or `aborted`.
+- `S4XORMINE-DONE`: aggregate hit counts and final memo size.
+
+The cap is global to the run because the mode shares one S4 memo across candidate solves.
 
 ## Pattern-Mining Recipes
 

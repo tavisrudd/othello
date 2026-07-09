@@ -423,6 +423,10 @@ Recently reported:
   with `conic_other = 0`.  Added conic-only Node-Kayles summaries show cycle xor is always 0 in
   these rows; the remaining conic residue is path/isolate xor.  Mining note:
   [`../2026-07-09-live-conic-bestreply-mining.md`](../2026-07-09-live-conic-bestreply-mining.md).
+- **q=23 zero-xor steering:** new `s4xormine` targeted solving shows both exact q=23 samples
+  (`1,2,3,4` and `1,2,5,6`) have a P-valued reply with live-conic Node-Kayles xor 0 for every
+  first move.  The witnesses are positive-live (`live_on >= 4`), so the next proof target is the
+  off-conic zone coupled to a conic-zero residual.
 
 Good Lean side targets:
 

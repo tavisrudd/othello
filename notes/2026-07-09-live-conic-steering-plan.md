@@ -190,8 +190,10 @@ be different for q>=23.
    `REPLY`, and optional `STATE` rows.
 3. Run the new rows against the existing exact q=23 dumps.  First results:
    [`2026-07-09-live-conic-bestreply-mining.md`](2026-07-09-live-conic-bestreply-mining.md).
-4. Run the same rows against q=19 to keep a solved comparison column.
-5. Use q=25 partial dumps only for coverage-aware shape comparison.
-6. Semi-formalize the S4 two-ply depletion lemma in Lean or paper notes.
-7. Generalize the depletion count to more intruder layers if the residual graph
+4. Add targeted zero-xor candidate solving.  Done: both exact q=23 samples have a zero-conic-xor
+   P reply for every first move.
+5. Run the same rows against q=19 to keep a solved comparison column.
+6. Use q=25 partial dumps only for coverage-aware shape comparison.
+7. Semi-formalize the S4 two-ply depletion lemma in Lean or paper notes.
+8. Generalize the depletion count to more intruder layers if the residual graph
    miner shows a stable bounded-defect family.

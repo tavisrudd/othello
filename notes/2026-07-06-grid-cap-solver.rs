@@ -54,6 +54,9 @@
 //   s4query <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
 //                -- line-protocol runtime query shell over a dumped S4 memo/archive. Commands:
 //                   state, moves, play r,c, pop, replies r,c, bench <iters>, help, quit.
+//   s4xormine <q> t1,t2,t3,t4 [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
+//                -- targeted S4-local solver: for each first move, try legal replies whose live
+//                   conic graph has the requested Node-Kayles xor, stopping at the first solved P.
 //   s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
 //          [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
 //          [--max-reply-moves <n>] [--best-replies] [--max-best-replies <n>]
@@ -2797,6 +2800,83 @@ fn s4_conic_graph_feature_string(
     )
 }
 
+fn s4_conic_nk_xor_only(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<u8> {
+    let mut live = Vec::with_capacity(b.q.saturating_sub(1));
+    for t in 1..b.q {
+        let z = t * b.q + b.gf.inv[t] as usize;
+        if !bit_is_set(chosen, z) && !bit_is_set(forbidden, z) {
+            live.push(z);
+        }
+    }
+    let n = live.len();
+    let mut adj = vec![0u64; n];
+    for &x16 in occ {
+        let x = x16 as usize;
+        if is_on_root_conic(b, x) {
+            continue;
+        }
+        for i in 0..n {
+            let line = &b.line_mask[x * b.n + live[i]];
+            for j in (i + 1)..n {
+                if bit_is_set(line, live[j]) {
+                    adj[i] |= 1u64 << j;
+                    adj[j] |= 1u64 << i;
+                }
+            }
+        }
+    }
+    let mut seen = vec![false; n];
+    let mut stack = Vec::with_capacity(n);
+    let mut nk_xor = 0u8;
+    for start in 0..n {
+        if seen[start] {
+            continue;
+        }
+        seen[start] = true;
+        stack.clear();
+        stack.push(start);
+        let mut comp = Vec::new();
+        while let Some(v) = stack.pop() {
+            comp.push(v);
+            let mut bits = adj[v];
+            while bits != 0 {
+                let w = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                if !seen[w] {
+                    seen[w] = true;
+                    stack.push(w);
+                }
+            }
+        }
+        let size = comp.len();
+        let mut degree_sum = 0usize;
+        let mut all_deg_le_two = true;
+        for &v in &comp {
+            let degree = adj[v].count_ones() as usize;
+            degree_sum += degree;
+            if degree > 2 {
+                all_deg_le_two = false;
+            }
+        }
+        let comp_edges = degree_sum / 2;
+        if size == 1 && comp_edges == 0 {
+            nk_xor ^= b.nk_path[size];
+        } else if all_deg_le_two && comp_edges + 1 == size {
+            nk_xor ^= b.nk_path[size];
+        } else if all_deg_le_two && comp_edges == size {
+            nk_xor ^= b.nk_cycle[size];
+        } else {
+            return None;
+        }
+    }
+    Some(nk_xor)
+}
+
 fn value_label(v: Option<bool>) -> &'static str {
     v.map_or("unknown", |is_n| if is_n { "N" } else { "P" })
 }
@@ -2910,6 +2990,15 @@ struct S4MineBestReply {
     live_on: usize,
     sel_on: usize,
     dead_on: usize,
+}
+
+struct S4XorCandidate {
+    z: u16,
+    geom: &'static str,
+    live_on: usize,
+    occ: Vec<u16>,
+    chosen: Mask,
+    forbidden: Mask,
 }
 
 fn s4_geom_rank(geom: &str) -> usize {
@@ -3337,6 +3426,161 @@ fn solve_s4_mine(
         frontier = next;
     }
     println!("S4MINE-DONE seen-states={} truncated={}", seen.len(), truncated);
+}
+
+fn solve_s4_xor_mine(
+    q: usize,
+    t4: &[usize],
+    target_xor: u8,
+    cap: usize,
+    max_tries: usize,
+) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let mut memo: FnvMap<u128, bool> = FnvMap::default();
+    println!(
+        "S4XORMINE q={} t4={:?} cells={:?} target-xor={} cap={} max-tries={}",
+        q,
+        t4,
+        cells,
+        target_xor,
+        cap,
+        if max_tries == usize::MAX { "none".to_string() } else { max_tries.to_string() }
+    );
+    let first_moves = avail_cells(&b, &root_chosen, &root_forbidden);
+    let mut total_moves = 0usize;
+    let mut hits = 0usize;
+    let mut no_candidates = 0usize;
+    let mut no_hits = 0usize;
+    let mut aborted = false;
+    for x in first_moves {
+        total_moves += 1;
+        let (x_occ, x_chosen, x_forbidden) =
+            push_cell_state(&b, &root_occ, &root_chosen, &root_forbidden, x as usize).unwrap();
+        let xgeom = geometry_label_for_root(&b, t4, x as usize);
+        let replies = avail_cells(&b, &x_chosen, &x_forbidden);
+        let mut candidates = Vec::new();
+        for y in replies {
+            let (y_occ, y_chosen, y_forbidden) =
+                push_cell_state(&b, &x_occ, &x_chosen, &x_forbidden, y as usize).unwrap();
+            if s4_conic_nk_xor_only(&b, &y_occ, &y_chosen, &y_forbidden) == Some(target_xor) {
+                let live_on = live_on_root_conic(&b, &y_chosen, &y_forbidden);
+                candidates.push(S4XorCandidate {
+                    z: y,
+                    geom: geometry_label_for_root(&b, t4, y as usize),
+                    live_on,
+                    occ: y_occ,
+                    chosen: y_chosen,
+                    forbidden: y_forbidden,
+                });
+            }
+        }
+        candidates.sort_by_key(|cand| {
+            (
+                cand.live_on,
+                s4_geom_rank(cand.geom),
+                cand.z as usize / q,
+                cand.z as usize % q,
+            )
+        });
+        println!(
+            "XORMOVE x={},{} xgeom={} candidates={}",
+            x as usize / q,
+            x as usize % q,
+            xgeom,
+            candidates.len()
+        );
+        if candidates.is_empty() {
+            no_candidates += 1;
+            println!(
+                "XORRESULT x={},{} xgeom={} status=no-candidates candidates=0 tried=0 memo={}",
+                x as usize / q,
+                x as usize % q,
+                xgeom,
+                memo.len()
+            );
+            continue;
+        }
+        let mut tried = 0usize;
+        let mut hit = false;
+        for cand in candidates.iter().take(max_tries) {
+            tried += 1;
+            let mut occ_solve = cand.occ.clone();
+            let value = s4_g(&b, &mut memo, cap, &mut occ_solve, &cand.chosen, &cand.forbidden);
+            let graph = s4_conic_graph_feature_string(&b, &cand.occ, &cand.chosen, &cand.forbidden);
+            println!(
+                "XORTRY x={},{} xgeom={} y={},{} ygeom={} value={} live_on={} memo={} {}",
+                x as usize / q,
+                x as usize % q,
+                xgeom,
+                cand.z as usize / q,
+                cand.z as usize % q,
+                cand.geom,
+                value_label(value),
+                cand.live_on,
+                memo.len(),
+                graph
+            );
+            match value {
+                Some(false) => {
+                    hits += 1;
+                    hit = true;
+                    println!(
+                        "XORRESULT x={},{} xgeom={} status=hit candidates={} tried={} y={},{} ygeom={} live_on={} memo={}",
+                        x as usize / q,
+                        x as usize % q,
+                        xgeom,
+                        candidates.len(),
+                        tried,
+                        cand.z as usize / q,
+                        cand.z as usize % q,
+                        cand.geom,
+                        cand.live_on,
+                        memo.len()
+                    );
+                    break;
+                }
+                Some(true) => {}
+                None => {
+                    aborted = true;
+                    println!(
+                        "XORRESULT x={},{} xgeom={} status=aborted candidates={} tried={} memo={}",
+                        x as usize / q,
+                        x as usize % q,
+                        xgeom,
+                        candidates.len(),
+                        tried,
+                        memo.len()
+                    );
+                    break;
+                }
+            }
+        }
+        if aborted {
+            break;
+        }
+        if !hit {
+            no_hits += 1;
+            println!(
+                "XORRESULT x={},{} xgeom={} status=no-hit candidates={} tried={} memo={}",
+                x as usize / q,
+                x as usize % q,
+                xgeom,
+                candidates.len(),
+                tried,
+                memo.len()
+            );
+        }
+    }
+    println!(
+        "S4XORMINE-DONE moves={} hits={} no-candidates={} no-hit={} aborted={} memo={}",
+        total_moves,
+        hits,
+        no_candidates,
+        no_hits,
+        aborted,
+        memo.len()
+    );
 }
 
 fn solve_s4_query(q: usize, t4: &[usize], store: QueryStore) {
@@ -5825,6 +6069,43 @@ fn main() {
             .get(1)
             .expect("s4freeze mode needs burr-file: s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <x>]");
         solve_s4_freeze(raw, burr, fp_bits, load);
+        return;
+    }
+    if args[1] == "s4xormine" {
+        // s4xormine <q> t1,t2,t3,t4 [--target-xor <g>] [--cap <slots>] [--max-tries <n>]
+        let mut target_xor = 0u8;
+        let mut cap: usize = 20_000_000;
+        let mut max_tries = usize::MAX;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--target-xor" {
+                target_xor = it.next().expect("--target-xor needs a value").parse().expect("--target-xor int");
+            } else if let Some(rest) = a.strip_prefix("--target-xor=") {
+                target_xor = rest.parse().expect("--target-xor int");
+            } else if a == "--cap" {
+                cap = it.next().expect("--cap needs a value").parse().expect("--cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap int");
+            } else if a == "--max-tries" {
+                max_tries = it.next().expect("--max-tries needs a value").parse().expect("--max-tries int");
+            } else if let Some(rest) = a.strip_prefix("--max-tries=") {
+                max_tries = rest.parse().expect("--max-tries int");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4xormine mode needs q: s4xormine <q> t1,t2,t3,t4")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4xormine mode needs t values: s4xormine <q> t1,t2,t3,t4"),
+        );
+        solve_s4_xor_mine(q, &t4, target_xor, cap, max_tries);
         return;
     }
     if args[1] == "s4mine" {

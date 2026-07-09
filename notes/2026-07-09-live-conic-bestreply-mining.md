@@ -170,6 +170,46 @@ This explains `conic_other = 0` and `conic_degmax <= 2` uniformly.  It does not 
 observed cycle-Grundy cancellation; that requires controlling which cycle lengths occur, or proving
 they can be ignored/paired in the full residual game.
 
+## Targeted Zero-Xor Steering
+
+The dump-only `BESTREPLY` rows sort known P replies by smallest `live_on`, so they do not answer
+whether conic xor zero can be selected.  A new `s4xormine` mode tries replies whose live-conic graph
+has a requested Node-Kayles xor and solves those candidates on demand with the S4-local solver.
+
+Command shape:
+
+```bash
+target/gridcap-bestreply s4xormine <q> <t1,t2,t3,t4> \
+  --target-xor 0 --cap 50000000 --max-tries 10
+```
+
+q=23 exact sample results:
+
+```text
+root 1,2,3,4:
+  first moves: 260
+  zero-xor P hits: 260
+  no candidates: 0
+  max target-xor candidates tried before hit: 3
+  memo entries: 21,645,006
+  hit live_on distribution:
+    4:68 5:120 6:52 7:2 10:18
+
+bucket 1,2,5,6:
+  first moves: 261
+  zero-xor P hits: 261
+  no candidates: 0
+  max target-xor candidates tried before hit: 4
+  memo entries: 22,135,889
+  hit live_on distribution:
+    4:38 5:132 6:68 7:5 10:18
+```
+
+This is much stronger than the first dump-only pass.  For both exact q=23 samples, every first move
+has a P-valued reply whose live-conic Node-Kayles xor is already 0.  The replies are still
+positive-live, with `live_on >= 4`, matching the two-ply depletion lower bound rather than
+empty-conic repair.
+
 ## Import
 
 This pass supports a sharper q>=23 proof target:
@@ -177,8 +217,8 @@ This pass supports a sharper q>=23 proof target:
 ```text
 positive-live S4 reply
 -> live conic graph is a union of paths, cycles, and isolates
--> observed cycle bulk has Node-Kayles xor 0
--> remaining path/isolate xor plus off-conic zone is steerable or certificate-small.
+-> choose a reply with live-conic Node-Kayles xor 0
+-> remaining proof obligation is the off-conic zone and its coupling to the conic.
 ```
 
 It also warns against a finite tiny-spectrum story.  The observed component-size spectra are varied
@@ -188,9 +228,10 @@ rather than enumerate a short list of graph shapes.
 ## Next Checks
 
 1. Separate conic graph value from off-conic zone value.
-2. Mine whether winning replies can always make `conic_nk_xor = 0`, or whether nonzero conic xor
-   is balanced by a small off-conic-zone residue.
+2. Mine the off-conic legal zone after the q=23 zero-xor witnesses: size, graph Grundy, and whether
+   it is itself zero or has a bounded repair family.
 3. Prove the matching-union graph lemma cleanly in paper/Lean terms.
-4. For q=23, run more exact bucket representatives only if the two current samples fail a proposed
+4. Test the zero-xor steering mode on more q=23 bucket representatives before attempting q=25.
+5. For q=23, run more exact bucket representatives only if the two current samples fail a proposed
    graph/zone law.
-5. For q=25, build targeted witness dumps rather than broad partial roots.
+6. For q=25, build targeted witness dumps rather than broad partial roots.
