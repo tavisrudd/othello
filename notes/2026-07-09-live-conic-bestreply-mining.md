@@ -337,6 +337,39 @@ P average density: 421.0
 zone_density_milli >= 424 is N-heavy in this sample, but not decisive
 ```
 
+Rerunning the q=23 root with `--max-tries 10` and the expanded zone fields gives the selected
+zero-xor witnesses rather than just the first zero-xor candidate:
+
+```text
+XORTRY rows: 281
+candidate values: P=260, N=21
+hits: 260 / 260
+tries before hit: 1:242, 2:15, 3:3
+
+selected P witnesses:
+  zone_rows = zone_cols = 17 always
+  zone_v range: 100..117
+  zone_density_milli range: 412..424
+  zone_odd: 153 even-size zones, 107 odd-size zones
+
+pre-hit N candidates:
+  all are off-conic first moves, almost all have internal replies
+  zone_density_milli range: 420..426
+  zone_density_milli 425/426 occurs only among N candidates in this run
+  zone_odd=1 for 17/21 N candidates
+```
+
+Thus one concrete steering heuristic for q=23 root is:
+
+```text
+among zero-xor candidates, avoid the over-dense off-conic zones;
+the first P witness appears within three candidates.
+```
+
+This does not yet explain why the P witness is P, but it gives a sharper next mining question:
+whether a bounded-density/full-row-column reservoir condition is enough to guarantee a local
+pairing or matching response.
+
 ## Next Checks
 
 1. Mine invariants of the dense off-conic zone after q=23 zero-xor witnesses: degree profile,
