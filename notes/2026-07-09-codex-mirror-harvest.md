@@ -210,9 +210,14 @@ instance to drop the `[Fintype (Point ...)]` hypothesis; and stating the negativ
   — the "mirror-provable ⟺ hyperbolic (split) quadratic form" boundary (#5, parabolic + Hermitian
   rigorously excluded, elliptic strongly evidenced), plus scopes for polar-space Nofil (#3) and
   Segre/product varieties (#4).
-- **Mirror unification (in progress):** one engine, several instances (sum-free negation /
-  projective elliptic / hyperbolic-quadric / conflict-graph Cayley / capacity-c) — report will land
-  at `2026-07-09-mirror-unification.md`.
+- **Mirror unification (landed):** [`2026-07-09-mirror-unification.md`](2026-07-09-mirror-unification.md)
+  — one engine, several instances (sum-free negation / projective elliptic / hyperbolic-quadric /
+  conflict-graph Cayley). Lean: `CapGame/GraphMirror.lean`, `ProjectiveCap/CapCMirror.lean`.
+  **Correction:** the capacity-`c` "free lift" is **false for `c ≥ 3`** — the mirror is NOT
+  capacity-blind. The chord discharge secretly uses `c = 2` (a σ-pair fills a line to exactly
+  capacity 2); at `c ≥ 3` the opponent plays a third point on a σ-invariant line and the forced
+  reply `σx` completes 4 collinear → illegal, so the pairing is genuinely stuck. The general
+  capacity-`c` mirror theorem is proven with the chord kept explicit; the lift holds only at `c = 2`.
 
 ## Reproduce
 
