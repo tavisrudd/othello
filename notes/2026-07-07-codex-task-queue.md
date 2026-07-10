@@ -1570,7 +1570,7 @@ constraints between successive involution graphs produced by an actual play hist
 Budget: proof/writing task; machine part is validation against existing data only, 2h.
 Report file: `notes/2026-07-09-codex-defect-spectrum-theorem.md`.
 
-## C46. t-ply conic-depletion inequality ladder — where a trap can live
+## C46. t-ply conic-depletion inequality ladder — where a trap can live [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md)
 (the two-ply bounds `off/off ≥ max(0,q−19)`, `off/on ≥ max(0,q−13)`, `on/on = q−7` and their
@@ -1614,7 +1614,7 @@ for example, excess is bounded by 4 and the excess-4 case has a sharp congruence
 Budget: proof task + 2h mining validation, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-depletion-ladder.md`.
 
-## C47. Minimal-counterexample constraint package (gate DISCHARGED 2026-07-09 — C42 reported)
+## C47. Minimal-counterexample constraint package (gate DISCHARGED 2026-07-09 — C42 reported) [REPORTED 2026-07-09]
 
 The C42 gate is satisfied: `notes/2026-07-09-codex-type-census-uniformity.md` exists and is
 **negative**, so row 3 below takes its negative branch — state "no propagation constraint

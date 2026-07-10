@@ -57,20 +57,22 @@ which failure modes below are eliminable at all:
 
 The difficulty is entirely in the `q ≥ 11` unconfined-intruder regime, and `q ≥ 23` is a distinct
 sub-regime. The clean elimination axis is the local intruder structure above an on-conic size-4
-child (depletion bounds:
-[`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md); the t-ply
-ladder generalization and the resulting trap ply-depth constraint `T(q)` are queued as **C46**).
+child.  C46 extends the old two-ply depletion bound to
+`live_on >= max(0,q-(t^2+5t+5))` after `t` further plies, with inverse threshold
+`T(q)=ceil((sqrt(4q+5)-5)/2)`
+([C46 report](2026-07-09-codex-depletion-ladder.md)).
 
 | Regime        | Intruder structure above on-conic S4                       | Trap eliminated?                          |
 |---------------|------------------------------------------------------------|-------------------------------------------|
 | `q ≤ 7`       | no legal intruder ⇒ pure conic endgame                     | yes — Lean (IntrusionCalculus, `q=5,7`)   |
 | `q = 9`       | intruders confined, each kills the whole conic             | yes — computed (C13); Lean kernel open    |
 | `11 ≤ q ≤ 19` | unconfined; `live_on` can reach 0 (witnessed at `q=17`)   | computed P; not uniform                   |
-| `q ≥ 23`      | unconfined; conic cannot be emptied at the S4-reply layer  | q=23 computed modulo solver; uniform proof open — needs positive-live-conic steering |
+| `q ≥ 23`      | unconfined; conic stays live for every depth `t<T(q)` (`T(23)=3`, asymptotically `sqrt(q)+O(1)`) | q=23 computed modulo solver; uniform proof open — needs positive-live-conic steering |
 
-The `q ≥ 23` row reflects the two-ply bound `live_on ≥ q − 19 > 0`: at the S4-reply layer the conic
-cannot be emptied for `q ≥ 23`, so a *two-ply* empty-conic argument does not extend past `q = 19`
-(deeper emptying is not excluded, and `q ≤ 19` was not itself *closed* by an empty-conic law —
+The `q ≥ 23` row includes the old two-ply bound `live_on ≥ q − 19 > 0` as the `t=2` instance.
+More generally, conic-emptying is excluded at every depth `t<T(q)`; it is not asserted to occur at
+`T(q)`.  Thus a *two-ply* empty-conic argument does not extend past `q = 19`
+(later emptying is not excluded, and `q ≤ 19` was not itself *closed* by an empty-conic law —
 q=11/13 are certificates, q=17/19 computed; the empty-conic law is the proposed q=17-mined target).
 That is why the frontier proof must be a positive-live `Good`-closure argument in the sense of
 `FiniteBuildGame.isP_of_replyStrategy`, not a separate "preserve plus terminate" track.  The
