@@ -558,6 +558,25 @@ task list.  Current high-value items:
   Consequence: the missing potential must be alternation-anchored (amortized/ledger form);
   rho-greedy added to C62's library with an `s4rho` traversal prerequisite (rho is
   tree-defined — a mining selector, not the S11 geometric selector).
+- **Codex-assessment adjustments (Fable eleventh pass, 2026-07-10):** Codex 5.6 Max's program
+  assessment was cross-checked against the reports and adopted with one reframe.  New tasks:
+  **C70** exact reservoir-slack collision charge (untruncate `Psi`'s `max(0,·)` reservoir term
+  into the exact blocker/secant/conic-point collision multiplicity + a move-pair Δ formula —
+  satisfies the C63 reopen condition and is the best candidate explanation of the q=17/q=19
+  selector splits); **C71** three-involution transition theorem (the first structurally
+  unclassified intruder layer; success = derive `Psi`'s `6·components − 4·intruders`
+  coefficients); **C72** PGL permutation-module / Johnson-scheme decomposition of `f_q` (A5-lane
+  **concentration instrument** for the §6 link-sum near-point-mass — not a reopened Cluster-1
+  config-dictionary hunt; flip/control discipline with q=13/19 controls mandatory).  Framing
+  shifts: (i) the **C61 successor is existential** — characterize the algebraic set of admissible
+  `Psi`-decreasing replies and prove it nonempty (= the S11 geometric-selector lemma; C61's six
+  forced conflicts kill q-blind lookup, not a q-varying realization of one finite-field formula;
+  no more deterministic argmin variants), and (ii) **C44's q=25 census outcomes are
+  pre-registered** against the (ON)-vs-conjecture bifurcation (a zero-witness class kills (ON)
+  only — pivot to off-conic escape structure; a cheap off-conic escape-margin rider at q=11/17
+  is queued in the C44 entry to quantify that fallback before q=25 forces the question).
+  Priority among new work: C70 > C71 ≥ C72, consistent with C65's amortized-potential-primary
+  verdict; the running q=25 census stays the decisive compute datum.
 
 Recently reported:
 

@@ -98,6 +98,28 @@ open-core / amortized-potential lane (Cluster 2) and A5 itself.
    coverage falls, with a minimal failure already at a q=13 ply-4 root.  Close as local positive /
    uniform negative; do not broaden the selector search from this result. Report:
    `2026-07-10-codex-q19-psi-selector-hard-surface.md`.
+   **Successor framing (Fable eleventh pass, 2026-07-10):** retire deterministic-selector variants —
+   do not queue another argmin rule.  The successor target is **existential and q-varying**:
+   characterize the algebraic set of admissible `Psi`-decreasing replies and prove it nonempty —
+   i.e. the proof-shape census's S11 geometric-selector lemma (failure of the top-k candidates
+   forces ≥ c independent incidence coincidences), which C61's six forced conflicts *support*
+   rather than refute (they kill q-blind lookup, not a q-varying realization of one finite-field
+   formula).  C62's existence pass already holds on all 2,622,214 q=19 obligations including the
+   12 hard rows.  Operational first step = the census's cheap kill-test: a fixed top-k rule
+   (k ≤ 4, e.g. zero-xor candidates in `live_on`-sorted order) over the existing q=19/q=23
+   maintenance artifacts, recording the incidence description of every candidate failure — the
+   failure-rigidity data the compression ledger needs.  See C70 (the exact collision charge) for
+   the coordinate this selector should descend.
+8. **C70 (NEW 2026-07-10, eleventh pass — top of Cluster 2 among unstarted)** — exact
+   reservoir-slack collision charge: untruncate `Psi`'s `max(0, q−k−C(k,2)−1)` reservoir term into
+   the exact blocker/secant/conic-point collision multiplicity, derive the move-pair `ΔPsi`
+   formula, replay against the C63 corpora.  Satisfies the C63 reopen condition ("a genuinely new
+   proof-admissible coordinate independent of values/Z/depth") and is the best candidate
+   explanation of the q=17/q=19 selector splits.  Spec §C70 below.
+9. **C71 (NEW 2026-07-10)** — three-involution transition theorem: how the third intruder
+   matching changes defect components and coupling charge, from the geometry of the three
+   centers.  Success criterion = derive `Psi`'s `6·components − 4·intruders` coefficients.  Spec
+   §C71 below.
 
 **A5 lane — arc-depletion arithmetic (now the sole live (ON) mechanism route).**  With the
 config-mechanism sweep complete (static C55/C64/C69 + dynamic Correction 3, all negative), A5 is the
@@ -130,6 +152,12 @@ exist, so the dichotomy data is untouched).
   admits a special (P) completion.** Report:
   [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md); script
   `rust/scripts/c68b_nbucket_density.py`.
+- **C72 (NEW 2026-07-10, eleventh pass)** — PGL permutation-module / Johnson-scheme decomposition
+  of the on-conic value function `f_q`.  A **concentration instrument** for the link-sum
+  near-point-mass (`onP(A) = Σ_{x∉A} f_q(A∪{x})`, dispersion ≤ 0.4 — the §6 class-stability
+  target), NOT a fourth config→value dictionary; Cluster 1 stays closed.  Flip/control discipline;
+  q=13/19 controls mandatory beside q=11/17 (both prior near-hits were q=11 artifacts).  Spec
+  §C72 below.
 
 **Independent lanes (parallel; pull when unblocked):**
 
@@ -138,7 +166,10 @@ exist, so the dichotomy data is untouched).
   explicit ~10 h user-launch gate; do not launch it implicitly.
 - **C43 [REPORTED 2026-07-09 — `PG(4,3) = P`]** / **C44** — the former
   even-dimensional evidence vacuum is closed by the first direct P datum; q=25 census remains an
-  active compute lane.  C43's optional follow-up is strategy extraction, not another sizing run.
+  active compute lane (**full `--log2 29` census RUNNING as of 2026-07-10**; 3/28 buckets already
+  certified P; outcome branches now pre-registered against the (ON)-vs-conjecture bifurcation —
+  see the C44 entry, item 7).  C43's optional follow-up is strategy extraction, not another
+  sizing run.
 - **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
   (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
   pairwise non-isomorphic (distinct complete-arc spectra), so the odd-plane P-property is invariant
@@ -1725,8 +1756,9 @@ Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-code
 
 ## C44. GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
 
-**[SIZED + ARENA TOOL BUILT 2026-07-10 (Claude); 2/28 buckets P; full census pending a
-low-contention window.]** Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
+**[SIZED + ARENA TOOL BUILT 2026-07-10 (Claude); 3/28 buckets P (0, 1, 2 — bucket 2 via chunked
+`s4xormine`); full `--log2 29` census RUNNING as of 2026-07-10 (`s4arena 25 --all --start 2`).]**
+Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
 GF(25) path in place (`irred(25)=x²+3` over F₅, nonsquare; self-check ok; MAXW ok) and **28
 full-PGL(2,25) on-conic buckets** enumerated (~4 s). The wall was RAM: FnvMap labeling (33 B/slot,
 rehashes) blows 8 GB on the generic buckets. **Fixed by building `s4arena`** (commit `60c87fb`) — S4
@@ -1775,6 +1807,21 @@ informative new number for the (ON) route, independent of the Baer watch.
    knife-edge extrapolation currently ends at q=19). If not affordable, say so — do not force it.
 6. Former optional rider dropped: do **not** run duplicate stabilizer-representative q=23 solves
    as a B3 discharge.  The bridge is geometric/proof-side; C53 is the right work item.
+7. **(ON)-bifurcation pre-registration (Fable eleventh pass, 2026-07-10) — read the outcome
+   against the (ON)-vs-conjecture split, fixed BEFORE the census completes:**
+   - (i) N *buckets* at q=25 are expected if q=25 is arc-depleted (q=11/17 both have them) and are
+     not by themselves a falsification of anything — they answer the depletion-status question.
+   - (ii) a size-3 class with ZERO on-conic P completions (min-witness 0, `maxonN(25) = 21`)
+     kills the **(ON) route only**, not the conjecture — the plane can still be P via off-conic
+     escapes (at q=17's knife-edge class the root keeps 5 total escapes, 4 off-conic).  The
+     pre-registered response is a pivot to off-conic escape structure, not a program failure.
+   - (iii) a genuinely trapped size-3 (ALL `q²−9q+21` children N, on- and off-conic) is the
+     conjecture counterexample — item 4's verbatim-report-and-stop rule applies.
+   - **Fallback-quantification rider (cheap, existing dumps, run before or alongside the census):**
+     per-class OFF-conic escape counts at q=11/17 (total minus on-conic from the feat dumps — the
+     c68 machinery already computes the on-conic side), reporting the worst-class off-conic margin
+     at the depleted orders.  This puts the (ii)-pivot's safety margin on record before q=25
+     forces the question.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
 
@@ -2422,6 +2469,10 @@ families only; general finite-state reply families are unmined territory.
 
 Report file: `notes/2026-07-09-codex-reply-automaton.md`.
 
+**[REPORTED 2026-07-10 — NEGATIVE for the tested quotient; see the top-of-queue item 7 for the
+successor framing (eleventh pass): existential/q-varying selector lemma (S11), no further
+deterministic argmin variants.]**
+
 ## C62. Inverted selector search scored by exact character sums (sweep T1) [REPORTED 2026-07-10]
 
 **READ FIRST:** the T1 spec in
@@ -2687,3 +2738,107 @@ integral data* — exactly the degree of freedom the cross-q flips demand.
 
 Budget: hours–day, existing data + small compute, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-envelope-invariants.md`.
+
+## C70. Exact reservoir-slack collision charge — untruncate Psi's incidence term (eleventh pass)
+
+**READ FIRST:** [`2026-07-09-codex-potential-lp-dual.md`](2026-07-09-codex-potential-lp-dual.md)
+(the `Psi` definition, the q=19 Correction-2 replay, the Correction-3 route audit) and
+`2026-07-10-codex-q19-psi-selector-hard-surface.md` (the 12-row hard surface).
+
+Origin: Codex 5.6 Max program assessment (2026-07-10), adopted by Fable after cross-check.  The
+current reservoir term is `R(S) = zone_v(S) − (q−k)·max(0, q−k−C(k,2)−1)` — an ML-flavored
+truncated surplus.  Rowwise, before the truncation, it is a genuine **incidence quantity**: the
+collision surplus among used-column blockers, the `C(k,2)` secant traces, and the conic point —
+i.e. the multiplicity excess where several nominal blockers land in the same cell.  The `max(0,·)`
+may be hiding exactly the q-sensitive incidence identity responsible for the q=17/q=19 selector
+conflicts.  This is the one proposal that upgrades the program's strongest positive (`Psi`'s
+full-corpus strict descent) from empirical toward provable, on the lane C65 declared primary.
+
+1. **Exact charge:** derive the untruncated per-row/per-cell collision-multiplicity formula
+   (blockers × secant traces × conic point), and prove its relation to the current `R(S)`
+   (`R = max(0, exact)` rowwise, or document where they diverge).
+2. **Move-pair Δ formula:** an exact algebraic expression for the change in collision energy
+   under one (opponent, reply) pair, as a function of the incidence geometry of the two cells —
+   no game values, no `Z`, no truncation.
+3. **Replay:** substitute the exact charge for the truncated slack in `Psi` (refit the four
+   weights if needed — this satisfies C63's reopen condition: a genuinely new proof-admissible
+   coordinate) and replay the full C63 corpora: q=13 (3,144), q=17 (1,052,204), q=19 fixed-selector
+   (2,622,214).  Report failures verbatim.
+4. **The split-case test:** check whether the 12 q=19 fixed-C31 `Psi` failures and the six C61
+   forced q=17/q=19 conflicts become explicable (or vanish) under the exact charge — i.e. whether
+   the truncation was the missing order-sensitive interface coordinate C61 asked for.
+5. **Averaging question (the proof shape):** whether averaging `ΔPsi_exact` over an algebraically
+   defined reply family forces some `ΔPsi_exact < 0` — the existential bridge to C61's successor
+   framing (top-of-queue item 7) and S11's failure-rigidity ledger.
+
+Budget: hours–day, existing dumps + scripts (`s4potential`/`s4potentialprobe`,
+`c63-potential-lp.py`), single-core, ≤ 8 GB.
+Report file: `notes/2026-07-10-codex-c70-collision-charge.md`.
+
+## C71. Three-involution transition theorem — the first unclassified intruder layer (eleventh pass)
+
+**READ FIRST:** [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
+(Lemma VI, the one/two-intruder classification), the C45 report (defect-skeleton realizability),
+and the C63 `Psi` definition.
+
+Origin: Codex 5.6 Max assessment (2026-07-10).  The program understands one intruder (a single
+involution matching on the conic) and two (paths + even cycles; even cycles have Grundy 0, so only
+Dawson-path defects matter).  **Three or more intruders** — a dynamically growing union of
+matchings coupled to the off-conic zone — is the first structurally unclassified layer, and it is
+where the maintenance obligations live.  A history-aware transition theorem beats another global
+classifier: it would *explain* `Psi`'s `6·defect_components − 4·selected_intruders` terms instead
+of refitting them.
+
+1. **Statement target:** given two involution matchings with known defect skeleton (paths/cycles)
+   and a third involution with center/axis in known position relative to the first two centers,
+   determine exactly how the defect-component count, path spectrum, and conic/zone coupling
+   transform.  Use the geometry of the three centers (collinear vs triangle; the center-triangle's
+   polar relation to the conic) as the case split.
+2. **Mine first:** extract every 2→3-intruder transition from the existing exact q=13/17/19 S4
+   Grundy dumps with the C63 feature extractor; tabulate observed (before-skeleton, center
+   geometry) → (after-skeleton) and check the map is a function of the geometric data.
+3. **Prove the observed table** as a finite-case lemma (Lemma-VI style), or report the exact
+   residual dependence if it is not a function of the tested coordinates (that failure names the
+   missing history coordinate — equally a deliverable).
+4. **Coefficient check:** verify whether the proven transition rule reproduces `Psi`'s 6/−4
+   weighting (each new component worth ~6 slack units, each intruder costing ~4) — if yes, `Psi`'s
+   descent on 3+-intruder states reduces to the transition theorem plus the C70 charge.
+
+Budget: day-scale; mining from existing dumps, proof by finite case analysis; single-core, ≤ 8 GB.
+Report file: `notes/2026-07-10-codex-c71-third-intruder.md`.
+
+## C72. PGL permutation-module / Johnson-scheme decomposition of f_q (A5 lane, eleventh pass)
+
+**READ FIRST:** the §6 witness-count heuristic in
+[`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md) (the
+near-point-mass + class-stability framing), the C42 negative
+([`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)), and
+the Cluster-1 closure note at the top of this queue.
+
+Origin: Codex 5.6 Max assessment (2026-07-10).  **Scope guard: this is a concentration
+instrument, NOT a fourth config→value dictionary — Cluster 1 stays closed.**  In the full-PGL
+conic model let `f_q(B) = 1` iff the six-point on-conic S4 state `B` is P.  For a five-set `A`,
+`onP(A) = Σ_{x∉A} f_q(A∪{x})`, and (ON) says the inclusion operator `W₅,₆ f_q` is entrywise
+positive.  The §6 data says `onP` is a near-point-mass (dispersion ≤ 0.4) — C42 showed geometric
+*census vectors* vary maximally, but nobody has tested whether the *value function itself* has a
+harmonic/design identity forcing the link sums to be nearly constant.  That targets the §6
+class-stability lemma directly without predicting individual P/N labels (which is what C55/C64/C69
+failed at and what this task must NOT attempt).
+
+1. **Build `f_q`** on 6-subsets of the conic from the existing exact bucket labels at
+   q = 11, 13, 17, 19 (all computed; the C53 bridge makes bucket labels total on 6-subsets).
+2. **Decompose:** project `f_q` onto the eigenspaces of the Johnson scheme `J(q+1, 6)` (the
+   `S_{q+1}` module structure) and onto the PGL(2,q) permutation-module components; report the
+   spectral mass per component, per q.
+3. **Verdict discipline:** flip/control comparison across the depleted {11,17} vs full {13,19}
+   orders is mandatory — a spectral signature present only at q=11 is presumed a small-field
+   artifact until it survives q=17 (the C64/C69 lesson).
+4. **Reads:** mass concentrated in low components ⇒ a design-like identity forces near-constant
+   link sums — name the identity and hand it to the A5 lane as the anchor mechanism for
+   `maxonN(q) ≤ q−5`.  Substantial high-component mass ⇒ no harmonic identity exists and the
+   concentration must come from the arc-depletion arithmetic alone — a full negative deliverable
+   that closes this angle cleanly.
+
+Budget: hours–day; existing labels + linear algebra (the 6-subset space at q=19 is C(20,6) =
+38,760 — tiny); single-core, ≤ 8 GB.
+Report file: `notes/2026-07-10-codex-c72-fq-decomposition.md`.
