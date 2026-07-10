@@ -25,7 +25,9 @@ The durable conclusions are:
 6. `[PROVEN-PROSE]` every play terminates in a complete arc and therefore has length at least
    `floor(b2(q))+1 = Omega(sqrt(q))`, with a direct secant-cover proof and the verified
    Alabdullah--Hirschfeld reference.
-7. The appendix defines `dep(q)` explicitly as worst-class on-conic depletion and tabulates it
+7. `[PROVEN-PROSE + citation]` C59 now bounds the other end of the terminal band: every terminal
+   is the full conic or is at most the exact applicable Ball--Lavrauw/Voloch integer bound `B(q)`.
+8. The appendix defines `dep(q)` explicitly as worst-class on-conic depletion and tabulates it
    with the partial steering statistic `Z(q)`, `mu_on(q)`, and `N_canon(q)`.  No OEIS submission
    was made.
 

@@ -5350,6 +5350,9 @@ struct S4PnCheckStats {
     p_nodes: usize,
     n_nodes: usize,
     terminal_nodes: usize,
+    // (projective arc size, contained in the completed S4 root conic) -> nodes.
+    // The projective size includes the two burned direction points.
+    terminal_profile: BTreeMap<(usize, bool), usize>,
     terminal_n: usize,
     p_has_p_child: usize,
     n_without_p_child: usize,
@@ -5464,6 +5467,12 @@ fn s4_pn_check_state(
 
     if legal == 0 {
         stats.terminal_nodes += 1;
+        let projective_size = occ.len() + 2;
+        let conic_contained = selected_on_root_conic(b, occ) == occ.len();
+        *stats
+            .terminal_profile
+            .entry((projective_size, conic_contained))
+            .or_insert(0) += 1;
         if is_n {
             stats.terminal_n += 1;
             stats.bad(format!("terminal row is N: key={key:032x}"));
@@ -5519,8 +5528,16 @@ fn solve_s4_pn_check(q: usize, t4: &[usize], raw_path: &str) {
         stats.bad(format!("raw table has {unseen} unreachable/unvalidated records"));
     }
     let failures = stats.failures(unseen);
+    let terminal_profile = stats
+        .terminal_profile
+        .iter()
+        .map(|(&(size, conic), &count)| {
+            format!("{}{}:{}", size, if conic { 'c' } else { 'o' }, count)
+        })
+        .collect::<Vec<_>>()
+        .join(",");
     println!(
-        "S4PNCHECK q={} t4={:?} cells={:?} root={} records={} seen={} unseen={} p-nodes={} n-nodes={} terminal={} edges={} present-edges={} omitted-n-edges={} missing-p-edges={} terminal-n={} p-has-p-child={} n-without-p-child={} max-ply={} failures={} verdict={} elapsed={:.3}{}",
+        "S4PNCHECK q={} t4={:?} cells={:?} root={} records={} seen={} unseen={} p-nodes={} n-nodes={} terminal={} terminal-profile={} edges={} present-edges={} omitted-n-edges={} missing-p-edges={} terminal-n={} p-has-p-child={} n-without-p-child={} max-ply={} failures={} verdict={} elapsed={:.3}{}",
         q,
         t4,
         cells,
@@ -5531,6 +5548,7 @@ fn solve_s4_pn_check(q: usize, t4: &[usize], raw_path: &str) {
         stats.p_nodes,
         stats.n_nodes,
         stats.terminal_nodes,
+        terminal_profile,
         stats.edges,
         stats.present_edges,
         stats.omitted_n_edges,

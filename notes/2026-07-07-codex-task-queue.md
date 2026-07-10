@@ -91,7 +91,14 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
 - **C30** — generated-checker refactor → q17/q19 Lean assembly (engineering, long-running).
 - **C43** / **C44** — PG(4,3) exact-solve sizing / GF(25) path + q=25 census (compute lanes).
 - **C58** — order-9 non-Desarguesian planes (compute lane; falsification-map payoff).
-- **C59** — arc-stability constraint import (literature + small mining; anytime).
+- **C59 [REPORTED 2026-07-10 — POSITIVE import]** — exact arc-to-conic terminal bounds.  Every
+  terminal is the full conic (`q+1`) or is at most the strongest applicable integer
+  Ball–Lavrauw/Voloch bound `B(q)`; the exact formula is retained by arithmetic type.  Existing
+  solved S4 DAGs pass the required terminal-profile gate at q=11,13,17,19, and sourced spectra pass
+  at q=23,27,29.  Kestenband gives a non-conic arc at odd-square q; completing it gives a non-conic
+  complete arc in a bounded interval, not a sourced exact terminal size.  Extends C46/C47; not a
+  `Good`-closure or a value theorem. Report:
+  [`2026-07-10-codex-arc-stability-import.md`](2026-07-10-codex-arc-stability-import.md).
 - **C50** — kernel-checked Grundy certificates (engineering).
 
 **Opportunistic / diagnostics:** C57 (zone quasi-randomness), C60 (Singer-model probe), C49
@@ -2250,7 +2257,7 @@ eventual uniform proof to use less algebraic structure than conic localization c
 Budget: hard 8h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-order9-planes.md`.
 
-## C59. Arc-stability constraint import — second-largest complete arc bounds into the trap/endgame package
+## C59. Arc-stability constraint import — second-largest complete arc bounds into the trap/endgame package [REPORTED 2026-07-10]
 
 Context: sweep item (seventh-pass amendment).  Segre-type stability for odd q says every complete
 arc not contained in a conic has size at most `q − c√q` (Voloch for odd q; Ball for prime q —

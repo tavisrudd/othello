@@ -157,6 +157,44 @@ Selected numerical lower bounds are:
 | 29 | 8.366 | 9 |
 | 31 | 8.616 | 9 |
 
+### 6. Large terminals are the full conic
+
+**[PROVEN-PROSE + primary-source transcription]** C59 imports the exact verified
+Ball--Lavrauw/Voloch arc-to-conic thresholds.  Let `B(q)` be the strongest applicable integer
+upper bound for a non-conic arc (also capped by Segre's `q`).  Every terminal position has
+projective size
+
+```text
+k = q+1 (the full conic), or k <= B(q).
+```
+
+Indeed, a terminal is a complete arc by Section 5.  Above the applicable threshold it is contained
+in a conic; a proper subset of a conic is extendable by a missing conic point, so a complete arc
+contained in a conic is the full conic.  For prime `q`, Ball--Lavrauw Theorem 3 gives
+
+```text
+B(q) <= ceil(q - sqrt(q) + 7/2) - 1.
+```
+
+For odd square `q=p^(2h)`, their Theorem 2 gives
+
+```text
+B(q) <= ceil(q - sqrt(q) + sqrt(q)/p + 3) - 1.
+```
+
+For odd non-square `q`, Voloch's strict threshold gives
+
+```text
+B(q) <= min(q, floor(q - (1/4)sqrt(pq) + (29/16)p - 1)).
+```
+
+This combines with Sections 4--5 as follows: C46 keeps a conic cell live at every depth `t<T(q)`;
+the eventual terminal has size at least `floor(b2(q))+1`; and C59 says it is either no larger than
+`B(q)` or is exactly the conic.  This constrains the early and terminal layers but supplies no
+winning reply or P/N-value closure.  At odd square orders, Kestenband's verified construction gives
+a non-conic arc of size `q-sqrt(q)+1`; completing it produces some non-conic complete arc between
+that size and `B(q)`, not necessarily a complete arc at the construction size itself.
+
 ## Data appendix: candidate sequences, not submissions
 
 To make `dep(q)` unambiguous and integer-valued, this table uses the **worst-class on-conic

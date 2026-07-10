@@ -547,6 +547,17 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C59 (2026-07-10) — POSITIVE import, exact large-terminal bounds.**  Imported the verified
+  Segre/Voloch/Ball–Lavrauw thresholds from `2026-07-07-relatedwork-o4.md`.  Every residual-game
+  terminal is a complete arc, hence is either the full conic (`q+1`) or has size at most the exact
+  arithmetic-type bound `B(q)` in the report.  Existing solved S4 DAGs pass the terminal-profile
+  gate at q=11,13,17,19; sourced complete-arc spectra pass independently at q=23,27,29.  Kestenband
+  supplies a non-conic arc at odd-square q; a maximal extension supplies some non-conic complete arc
+  in the proved interval, but the import does not identify its exact size or make it the sole large
+  terminal.  Combined with C46/C47, this constrains early depletion, minimum terminal length, and
+  the top terminal band.  It is **not** a `Good`-closure or a game-value theorem.  Script
+  `rust/scripts/c59_arc_stability_check.py`.  Report:
+  [`../2026-07-10-codex-arc-stability-import.md`](../2026-07-10-codex-arc-stability-import.md).
 - **C55 (2026-07-10, Claude) — NEGATIVE, the arc-depleted dichotomy has no group-side mechanism.**
   H-side-switch tested on both instruments the task names.  Abstract C18 involution-product
   dictionary: no net directional side-switch (flip net ≈ 0, ≤ control; shared-lattice `d` switch at
@@ -1101,6 +1112,16 @@ candidate family is needed; however, none is tie-safe on all 12.  `psi_min` is s
 coordinate (start with the embedded zone-conflict orbit), not a broader selector search.  Report:
 `notes/2026-07-10-codex-q19-psi-selector-hard-surface.md`; analyzer:
 `rust/scripts/c61_q19_hard_surface.py`.
+
+2026-07-10 C59: ran the arc-stability import lane independently of the Cluster-2/C61 work. Added
+`rust/scripts/c59_arc_stability_check.py` and
+`notes/2026-07-10-codex-arc-stability-import.md`; marked C59 REPORTED in the queue and added the
+Recently-reported bullet above.  Deliverable: every residual-game terminal is the full conic or is
+at most the exact applicable integer arc-to-conic bound `B(q)`.  The required existing-data gate
+passes at q=11,13,17,19, and the sourced spectra agree at q=23,27,29.  The C47 package now contains
+the terminal-band row.  Kestenband is recorded at its verified strength: existence of a non-conic
+arc, whose maximal extension lies in an explicit interval; no exact second-largest value at q=25 or
+q=31 is inferred.  The result is a terminal constraint, not a `Good`-closure or a value theorem.
 
 ## Archive
 
