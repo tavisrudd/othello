@@ -601,6 +601,29 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C74 (2026-07-10, Codex round 2; verified by Fable) — the L(A) algebra is completely solved;
+  the stabilizer-capacity route is closed with proof; q=25 is forced into a sharp dichotomy.**
+  [`../2026-07-10-codex-c74-capacity-family.md`](../2026-07-10-codex-c74-capacity-family.md).
+  Three proved theorems: (i) **line-pencil** — normalizing `L(A)`'s endpoints to `(0,∞)`, the
+  secant's off-conic cells are the involution pencil `τ_a(t)=a/t` with the illegal cells exactly
+  the pair products `P2(U)` of the other four frame points, giving `nlegal = q − d`,
+  `d ∈ {4,5,6}` (so C73's max-incidence extremum = minimal pair-product collision, field-uniform
+  incl. GF(25)); (ii) **supply ledger** — the round-1 fifteen involutions land `3/1/0` per
+  `d=4/5/6` line, so `L(A)` maximizes the local share of the 15-unit supply; (iii) **tie
+  theorem** — `d=4` maximizers biject with the involutions of `Stab(A)` (0,1,3,5; zero ⇒ fifteen
+  tied `d=5` lines), retro-explaining every C73 tie count (q=11 knife-edge = D10 ⇒ 5 tied lines;
+  q=17 = 21× unique).  Fable re-ran the verification: supply=15 on all 68 classes, min/tie
+  histograms verbatim, fan matrices regress to round-1 `M_11`/`M_17` exactly.  **Stabilizer
+  barrier:** legal pencil centers are provably non-stabilizing, and any
+  automorphism-of-completion family has supply ≤ 838 = O(1) — so the Ω(q) capacity route via
+  stabilizers is dead by theorem, and the program's sharpest open lemma is now one-dimensional
+  and explicit: `IsP(A∪{w})` or some legal pencil center `z_a` (`a ∉ P2(U)`) gives
+  `IsP(A∪{z_a})` — a one-intruder N-absorption statement on the Lemma-V/VI classified layer,
+  with the q=11 knife-edge's mixed 4P/2N pencil as the mandatory base case.  **Label-blind q=25
+  matrix:** 8 five-set orbits; with the census's 7 disclosed P buckets, the sole open row is
+  `R7 = {10:6, 14:3, 16:6, 17:6}`, so **min-witness(25) = 0 or ≥ 3** — the `2 → 1` knife-edge
+  slide cannot continue gently; the pivot is bucket 14, and the "non-depleted ∧ L-fails" cell is
+  logically impossible.  Scripts `rust/scripts/c74_line_pencil.py`, `c74_fan_orbits.py`.
 - **C73 (2026-07-10, Claude/Opus) — value-blind secant selector: POSITIVE; failure gate 2
   REFUTED.**  `L(A)` = the **maximum-legal-incidence** frame-point/on-conic candidate secant —
   computed from S3 + conic + legality only, no P/N input — carries a P escape on **68/68**

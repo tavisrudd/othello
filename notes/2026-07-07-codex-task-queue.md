@@ -205,10 +205,34 @@ exist, so the dichotomy data is untouched).
   recovers the P witness (pivot NOT witness-anchored at q=17).  Recursion lemma tested (existence),
   not proved (game-value reduction needs the tree).  Pre-registered q=25 out-of-sample test on
   record.  Report: [`2026-07-10-codex-c73-secant-packet.md`](2026-07-10-codex-c73-secant-packet.md).
-- **C74 (NEW 2026-07-10, twelfth pass)** — growing fan-incidence capacity family: upgrade the
-  15-involution capacity lemma to an `Ω(q)` algebraic incidence family with an independent upper
-  bound on what an N fan can absorb.  Mandatory for uniformity, not optional: the constant 15
-  saturates at q=19 and the next depleted order has q−4 ≥ 21.  Spec §C74 below.
+- **C74 [REPORTED 2026-07-10 (Codex round 2; verified by Fable) — structure PROVED, stabilizer
+  gate CLOSED with proof, recursion target sharpened]** —
+  [`2026-07-10-codex-c74-capacity-family.md`](2026-07-10-codex-c74-capacity-family.md).
+  **Line-pencil theorem [PROVED]:** normalize `L(A)`'s endpoints `(F,w) → (0,∞)`; the off-conic
+  cells of the secant are the involution pencil `τ_a(t) = a/t`, the illegal ones exactly
+  `a ∈ P2(U)` (pair products of the other four frame points), so `nlegal = q − d(F,w)` with
+  `d = |P2(U)| ∈ {4,5,6}` — `L(A)` is exactly the minimizer of pair-product collisions.
+  **Supply ledger [PROVED]:** the round-1 fifteen involutions distribute `h(4)=3, h(5)=1,
+  h(6)=0` per line — `L(A)` maximizes the local share of the 15-unit supply.  **Tie theorem
+  [PROVED]:** `d=4` lines biject with the involutions of `Stab(A)` (count 0,1,3,5; zero ⇒
+  exactly fifteen tied `d=5` lines) — retro-explains every C73 tie count incl. the q=11
+  knife-edge (D10 ⇒ five tied lines) and q=17's 21/21 uniqueness.  Verified by Fable:
+  `c74_line_pencil.py` gives supply=15 on all 68 classes, min/tie hists match the report
+  verbatim, and the fan matrices regress to round-1's `M_11`/`M_17` exactly.  **Stabilizer
+  barrier [PROVED]:** every legal pencil center is NON-stabilizing (stabilizing centers are
+  exactly the illegal `P2(U)` cells), and ANY family counting automorphisms of one-point
+  completions has total supply ≤ 838, O(1) in q — the Ω(q)-via-stabilizers gate is unreachable.
+  **C74's residue = a game-value N-absorption bound for the explicit one-intruder pencil**
+  (report §5: prove `IsP(A∪{w})` or `∃ a ∈ F_q^* \ P2(U): IsP(A∪{z_a})` — one-intruder states
+  with explicit `τ_a`, i.e. the Lemma-V/VI classified matching layer coupled to the zone; the
+  q=11 knife-edge's mixed 4P/2N pencil pattern is the mandatory base obstruction).
+  **Label-blind q=25 matrix [COMPUTED-EXACT, verified]:** 8 five-set orbits; with the census's
+  disclosed `f_0..f_6 = P`, rows 0–6 already have ≥ 4 witnesses and the sole open row is
+  `R7 = {10:6, 14:3, 16:6, 17:6}` ⇒ **min-witness(25) = 0 or ≥ 3 — the `2 → 1` slide cannot
+  continue gently.**  Pivot = bucket 14: `f_14=P` ⇒ ON passes at R7; `f_14=N` with one of
+  10/16/17 P ⇒ ON survives but `L`'s ON form fails and its ESC form is the decisive independent
+  test; all four N ⇒ ON refuted at q=25.  The "non-depleted ∧ L-fails" cell is logically
+  impossible.  Original spec §C74 below (its stabilizer-family gate is superseded as above).
 
 **Independent lanes (parallel; pull when unblocked):**
 
@@ -2963,7 +2987,7 @@ Budget: hours; existing data + small algebra, single-core, ≤ 2 GB.  This task 
 whichever way q=25 lands: it is the structure question for the C44 item-7 branch-(ii) pivot.
 Report file: `notes/2026-07-10-codex-c73-secant-packet.md`.
 
-## C74. Growing fan-incidence capacity family — the Ω(q) upgrade of the 15-involution lemma (twelfth pass)
+## C74. Growing fan-incidence capacity family — the Ω(q) upgrade of the 15-involution lemma (twelfth pass) [REPORTED 2026-07-10 — round 2: line-pencil/tie theorems PROVED, stabilizer gate CLOSED (≤838 bound), residue = one-intruder pencil N-absorption; see top-of-queue bullet + report]
 
 **READ FIRST:**
 [`2026-07-10-codex-odd-plane-round1-report.md`](2026-07-10-codex-odd-plane-round1-report.md) §1
