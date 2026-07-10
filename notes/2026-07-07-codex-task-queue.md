@@ -858,7 +858,7 @@ bucket was P.  q=23 is therefore not a mixed-column case despite `23 == 2 mod 3`
 there rather than spending time on q=25/29/31; the next proof-direction task is C31 zone steering,
 not further residue-class speculation.
 
-## C30. Route C phase 5 — certificate books for q = 17 and q = 19
+## C30. Route C phase 5 — certificate books for q = 17 and q = 19 [REPORTED 2026-07-10 — certcheck PASS; Lean gate STOP]
 
 Context: the status-table gap "cert book unbuilt" for q=17/19 is pure engineering now — every
 feasibility gate is measured: the emitter's private-memo peak fits (C3: q=19 ≈ 32.3M entries),
@@ -887,6 +887,15 @@ q=11/13).
    (GF(9) ≠ `ZMod`; the intruder terminal-reply kernel `218b1ac` is the better lane for it).
 
 Report file: `notes/2026-07-08-codex-route-c-phase5.md`.
+
+Status: anchored certificate emission and independent `certcheck` both PASS for q=17 and q=19.
+q=17 has 210 anchored classes, all on-conic witnesses, no capped books, escape histogram
+`5:30 10:120 11:60`; q=19 has 272 anchored classes, all on-conic witnesses, no capped books,
+escape histogram `211:272`.  The existing q=13 split Lean generator does **not** scale as-is:
+q17 `Class0.lean` ran 31:23, reached 11.9 GB RSS, then failed at
+`class0_nodeChunks_check` with `maxRecDepth` in the aggregate `simp` over hundreds of chunk
+lemmas.  No q17/q19 generated Lean data was committed; next work is a generated-checker refactor,
+not a brute-force full build.
 
 ## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
 
@@ -1828,7 +1837,20 @@ product involution's collinearity + ruling preservation is shown. Watch: need on
 products of two even-dim factors likely fail per the #5 boundary. Single-core, ≤ 8 GB. Report file:
 `notes/2026-07-09-codex-segre-product-nofil.md`.
 
-## C53. Full-PGL on-conic orbit bridge + q=23 computed-status cleanup
+## C53. Full-PGL on-conic orbit bridge + q=23 computed-status cleanup [DONE 2026-07-09 — Claude; parts 1–4]
+
+**Claim note (Claude, 2026-07-09):** **all four parts done.** Parts 1–2 (the Lean bridge)
+verified and landed in `lean/ProjectiveCap/Sym2ConicBridge.lean` — Sym²/Veronese construction,
+conic preservation + Möbius realization, and the composition capstone `onconic_value_bridge`
+proving PGL-orbit ⟹ equal on-conic value (`lake build` green, axiom-clean, imported into
+`ProjectiveCap.lean`, kept general over characteristic; `veronesePoint` injectivity also
+proved). An adversarial persona review caught and I fixed a design-gap (first-draft deliverable
+was generic collineation-invariance). Parts 3–4 (q=23 status write-up + B3-open doc cleanup)
+landed in the handoff, falsification map, and alignment report — negative cross-q conclusion
+preserved. Downstream is C54 (bucket-label certification), not C53. Full write-up + verification
+log: `notes/2026-07-09-codex-full-pgl-bridge.md`. (C53 code + docs landed in commits
+`7f7c6c9` / `6475a5b`; this queue entry is committed alongside an unrelated C30 status edit
+that was already in the working tree.)
 
 Context: a review caught that the full-PGL orbit bridge was already proved in prose, not merely
 empirically supported.  In an on-conic S4 state, the actual played projective position is the
