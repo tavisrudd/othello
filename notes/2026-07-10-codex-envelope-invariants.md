@@ -40,6 +40,35 @@ none is constant-within-{11,17}/{13,19} and differs-across while separating flip
 only constant feature (`max selected-secants through a point = 5` for every config at every order) is
 constant *everywhere*, so it differs across nothing.
 
+### Residual-partition contingency tables (verbatim)
+
+```text
+-- feature: occupied incidence bins --
+   flip    depleted dist={9: 36, 10: 64, 11: 11}  full dist={9: 51, 10: 46, 11: 14}
+   control depleted dist={11: 18, 10: 10, 9: 19}  full dist={11: 10, 10: 30, 9: 7}  => VIABLE=False
+-- feature: max selected-secants through a point --
+   flip    depleted dist={5: 111}  full dist={5: 111}
+   control depleted dist={5: 47}  full dist={5: 47}  => VIABLE=False
+-- feature: # points on >=3 selected secants --
+   flip    depleted dist={4: 39, 5: 56, 3: 10, 6: 6}  full dist={4: 46, 5: 36, 3: 13, 6: 11, 7: 4, 8: 1}
+   control depleted dist={5: 7, 6: 15, 7: 13, 8: 4, 4: 6, 3: 2}  full dist={5: 25, 6: 4, 7: 5, 8: 2, 4: 10, 3: 1}  => VIABLE=False
+-- feature: triple-point count parity --
+   flip    depleted dist={0: 45, 1: 66}  full dist={0: 58, 1: 53}
+   control depleted dist={1: 22, 0: 25}  full dist={1: 31, 0: 16}  => VIABLE=False
+-- feature: triple-point count mod 3 --
+   flip    depleted dist={1: 39, 2: 56, 0: 16}  full dist={1: 50, 2: 37, 0: 24}
+   control depleted dist={2: 11, 0: 17, 1: 19}  full dist={2: 27, 0: 5, 1: 15}  => VIABLE=False
+-- feature: chi_q(triple-point count) --
+   flip    depleted dist={1: 44, -1: 67}  full dist={1: 89, -1: 22}
+   control depleted dist={-1: 37, 1: 10}  full dist={1: 31, -1: 16}  => VIABLE=False
+-- feature: secant-hit defect (#hit-15q) --
+   flip    depleted dist={-56: 39, -55: 56, -57: 10, -54: 6}  full dist={-56: 46, -55: 36, -57: 13, -54: 11, -53: 4, -52: 1}
+   control depleted dist={-55: 7, -54: 15, -53: 13, -52: 4, -56: 6, -57: 2}  full dist={-55: 25, -54: 4, -53: 5, -52: 2, -56: 10, -57: 1}  => VIABLE=False
+-- feature: chi_q(secant-hit count) --
+   flip    depleted dist={-1: 49, 1: 57, 0: 5}  full dist={1: 55, -1: 43, 0: 13}
+   control depleted dist={1: 23, -1: 24}  full dist={-1: 18, 1: 27, 0: 2}  => VIABLE=False
+```
+
 ## Part B — genus-2 hyperelliptic arithmetic of the 6 branch points
 
 The derived curve is `y² = f(x)`, `f = ∏(x − r)` over the finite branch params `{0,t1,t2,t3,t4}`
@@ -50,8 +79,37 @@ line, not a count of `χ(t_i − t_j)`).
 
 **Every pooled q-comparable feature of `a2` is null** (`sign`, `a2==0`, `|a2|`, parity, mod 3, mod 4,
 `χ_q(a2)`, and the point-count analogues): none is constant-within-side and differs-across while
-sparing controls.  (`a2 mod 4 = 0` and both parities are constant *everywhere* — genus-2 point count
-is odd here — so they differ across nothing.)
+sparing controls.  (`a2 mod 4 = 0` and both parities are constant *everywhere* — the projective
+genus-2 point count is even here — so they differ across nothing.)
+
+### Pooled branch-curve contingency tables (verbatim)
+
+```text
+-- feature: sign(a2) --
+   flip    depleted dist={-1: 40, 0: 35, 1: 36}  full dist={-1: 31, 1: 33, 0: 47}
+   control depleted dist={-1: 13, 1: 5, 0: 29}   full dist={0: 34, 1: 3, -1: 10}  => VIABLE=False
+-- feature: a2==0 --
+   flip    depleted dist={False: 76, True: 35}  full dist={False: 64, True: 47}
+   control depleted dist={False: 18, True: 29}  full dist={True: 34, False: 13}  => VIABLE=False
+-- feature: abs(a2) --
+   flip    depleted dist={4: 76, 0: 35}  full dist={4: 52, 8: 12, 0: 47}
+   control depleted dist={4: 18, 0: 29}  full dist={0: 34, 8: 4, 4: 9}  => VIABLE=False
+-- feature: a2 squared --
+   flip    depleted dist={16: 76, 0: 35}  full dist={16: 52, 64: 12, 0: 47}
+   control depleted dist={16: 18, 0: 29}  full dist={0: 34, 64: 4, 16: 9}  => VIABLE=False
+-- feature: a2 parity / a2 mod 4 / #C(F_q) parity --
+   flip    depleted dist={0: 111}  full dist={0: 111}
+   control depleted dist={0: 47}  full dist={0: 47}  => VIABLE=False (all three)
+-- feature: a2 mod 3 --
+   flip    depleted dist={2: 40, 0: 35, 1: 36}  full dist={2: 37, 0: 47, 1: 27}
+   control depleted dist={2: 13, 1: 5, 0: 29}  full dist={0: 34, 2: 8, 1: 5}  => VIABLE=False
+-- feature: chi_q(a2), zero->0 --
+   flip    depleted dist={1: 76, 0: 35}  full dist={-1: 33, 0: 47, 1: 31}
+   control depleted dist={1: 12, 0: 29, -1: 6}  full dist={0: 34, -1: 5, 1: 8}  => VIABLE=False
+-- feature: #C(F_q) mod 3 --
+   flip    depleted dist={2: 40, 0: 35, 1: 36}  full dist={1: 37, 2: 47, 0: 27}
+   control depleted dist={2: 13, 1: 5, 0: 29}  full dist={2: 34, 1: 8, 0: 5}  => VIABLE=False
+```
 
 ### The near-hit, and why it is a q=11 small-field artifact
 
@@ -113,6 +171,23 @@ For each config the elementary-symmetric integers of the branch points (`e2`, `e
 All fail the verdict discipline — none is constant-within-side and differs-across while sparing
 controls.  (`χ_q(vandermonde_sq) = +1` wherever nonzero, as expected of a square — a correctness
 check, non-discriminating.)
+
+### Resultant contingency tables (verbatim)
+
+```text
+-- feature: chi_q(e2) --
+   flip    depleted dist={1: 59, -1: 49, 0: 3}  full dist={-1: 49, 1: 58, 0: 4}
+   control depleted dist={-1: 16, 1: 24, 0: 7}  full dist={1: 21, -1: 22, 0: 4}  => VIABLE=False
+-- feature: chi_q(e4) --
+   flip    depleted dist={-1: 62, 1: 49}  full dist={1: 52, -1: 59}
+   control depleted dist={-1: 18, 1: 29}  full dist={-1: 21, 1: 26}  => VIABLE=False
+-- feature: chi_q(sum_sq) --
+   flip    depleted dist={1: 45, -1: 62, 0: 4}  full dist={-1: 53, 1: 55, 0: 3}
+   control depleted dist={1: 20, -1: 22, 0: 5}  full dist={-1: 27, 1: 17, 0: 3}  => VIABLE=False
+-- feature: chi_q(vandermonde_sq) --
+   flip    depleted dist={1: 111}  full dist={1: 111}
+   control depleted dist={1: 47}  full dist={1: 47}  => VIABLE=False
+```
 
 ## Interpretation
 

@@ -20,7 +20,7 @@ points {inf,0,t1,t2,t3,t4}:
 
     y^2 = f(x),   f(x) = prod over finite params {0,t1,t2,t3,t4} of (x - r)
 
-whose F_q point count N2 = q + a2, a2 = sum_x chi(f(x)), varies with q for FIXED
+whose F_q point count N2 = q + 1 + a2, a2 = sum_x chi(f(x)), varies with q for FIXED
 integral params -- exactly the degree of freedom C18's static 6-point character
 dictionary lacked (a2 is a global character sum over the whole line, not a count of
 chi(t_i - t_j)).  Part C tests chi_q of derived integer resultants (Igusa-flavored).
@@ -408,8 +408,8 @@ def main():
               "emit q=23/q=25 prediction.")
     else:
         print("  NEGATIVE: no tested envelope/derived-curve feature separates the flip along the")
-        print("  {11,17} vs {13,19} dichotomy while sparing controls.  All three dichotomy")
-        print("  tested mechanism families (C55 group / C64 extremal / C69 algebraic) are dead;")
+        print("  {11,17} vs {13,19} dichotomy while sparing controls.  All three tested")
+        print("  dichotomy mechanism families (C55 group / C64 extremal / C69 algebraic) are dead;")
         print("  the (ON) uniform route rests on the q-dependent A5 arc-depletion arithmetic")
         print("  with no configuration-level mechanism.")
     return 0
