@@ -1091,6 +1091,17 @@ replay was due because the table already conflicts.  Scope is precise: this refu
 q-blind quotient, not every finite-state strategy.  Next refinement should add an order-sensitive
 zone/interface orbit at those six pairs while retaining C63's `Psi` as the charge.
 
+2026-07-10 C61/C63 q=19 hard-surface follow-up (Codex): extended `s4selectors --fail-out` to
+separate existential family coverage from deterministic tie safety and replayed the frozen q=19
+Grundy table.  The 12 fixed-C31 `Psi` failures at the single ply-4 parent all have an internal P
+override with the same signature (`live_on=6`, three defect components, nonzero conic xor,
+`Delta Psi=-42..-41`).  Seven simple families contain such an override in all 12, so no new
+candidate family is needed; however, none is tie-safe on all 12.  `psi_min` is safe on 8 and
+`zero_xor_live_min` on the complementary 4.  The remaining exact target is one geometric tie
+coordinate (start with the embedded zone-conflict orbit), not a broader selector search.  Report:
+`notes/2026-07-10-codex-q19-psi-selector-hard-surface.md`; analyzer:
+`rust/scripts/c61_q19_hard_surface.py`.
+
 ## Archive
 
 Historical play-by-play and superseded planning are archived here:

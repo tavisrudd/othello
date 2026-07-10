@@ -6480,7 +6480,7 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
     let mut baseline_psi = 0usize;
     let mut fail_writer = fail_out.map(|path| {
         let mut w = BufWriter::new(File::create(path).expect("create selector failure TSV"));
-        writeln!(w, "q\tt4\tparent_key\tparent_ply\topponent\txgeom\tparent_psi\tbaseline_psi\trho_p_hit\trho_psi_hit\tbest_p_rank\tmin_rho\tselected\tbest_p").expect("write selector failure header");
+        writeln!(w, "q\tt4\tparent_key\tparent_ply\topponent\txgeom\tparent_psi\tbaseline_psi\trho_p_hit\trho_psi_hit\tbest_p_rank\tmin_rho\tselected\tbest_p\tbest_psi_p\tcovering_families\tsafe_families").expect("write selector failure header");
         w
     });
     for i in 0..states.len() {
@@ -6549,8 +6549,8 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                 ("rho2_defect", s4_rho_top_levels_by_key(&replies, 2, |r| Some(r.features.defect_components))),
                 ("rho2_zero_live", s4_rho_top_levels_by_key(&replies, 2, |r| r.features.xor_zero.then_some(r.features.live_on))),
             ];
-            for (name, selected) in selections {
-                stats.get_mut(name).unwrap().add(&selected, &replies);
+            for (name, selected) in &selections {
+                stats.get_mut(name).unwrap().add(selected, &replies);
             }
             let mut rho_order: Vec<usize> = (0..replies.len()).collect();
             rho_order.sort_by(|&a, &bidx| {
@@ -6612,9 +6612,51 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                         )
                     })
                     .unwrap_or_default();
+                let best_psi_p_text = replies
+                    .iter()
+                    .filter(|r| r.g == 0 && r.delta_psi < 0)
+                    .min_by_key(|r| (r.features.psi, r.features.live_on, r.z))
+                    .map(|r| {
+                        format!(
+                            "{},{}:rho{:.17}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:chi{}:polar{}",
+                            r.z as usize / q,
+                            r.z as usize % q,
+                            r.rho,
+                            r.delta_psi,
+                            r.geom,
+                            r.features.live_on,
+                            r.features.defect_components,
+                            r.features.xor_zero as u8,
+                            r.features.psi,
+                            r.rect_char,
+                            r.polar_internal as u8
+                        )
+                    })
+                    .unwrap_or_default();
+                let covering_families = selections
+                    .iter()
+                    .filter(|(_, selected)| {
+                        selected
+                            .iter()
+                            .any(|&j| replies[j].g == 0 && replies[j].delta_psi < 0)
+                    })
+                    .map(|(name, _)| *name)
+                    .collect::<Vec<_>>()
+                    .join(",");
+                let safe_families = selections
+                    .iter()
+                    .filter(|(_, selected)| {
+                        !selected.is_empty()
+                            && selected
+                                .iter()
+                                .all(|&j| replies[j].g == 0 && replies[j].delta_psi < 0)
+                    })
+                    .map(|(name, _)| *name)
+                    .collect::<Vec<_>>()
+                    .join(",");
                 writeln!(
                     fail_writer.as_mut().unwrap(),
-                    "{}\t{}\t{:032x}\t{}\t{},{}\t{}\t{}\t{}\t{}\t{}\t{}\t{:.17}\t{}\t{}",
+                    "{}\t{}\t{:032x}\t{}\t{},{}\t{}\t{}\t{}\t{}\t{}\t{}\t{:.17}\t{}\t{}\t{}\t{}\t{}",
                     q,
                     t4.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
                     b.canon(&occ),
@@ -6629,7 +6671,10 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                     best_p_rank,
                     min_rho,
                     selected_text,
-                    best_p_text
+                    best_p_text,
+                    best_psi_p_text,
+                    covering_families,
+                    safe_families
                 )
                 .expect("write selector failure row");
             }

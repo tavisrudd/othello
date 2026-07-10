@@ -79,7 +79,12 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
    full C36-style normalized-coordinate refinement in the genuinely forced-reply corpus (each node
    has exactly one P child).  The tested q-blind lookup table therefore fails before adversarial
    replay.  The six pairs localize the needed order-sensitive interface refinement; `Psi` remains
-   the charge target.
+   the charge target.  **q=19 hard-surface follow-up (2026-07-10):** the 12 fixed-C31 `Psi`
+   failures at the single ply-4 parent all admit the same internal repair signature
+   (`live=6`, three defect components, nonzero xor, `Delta Psi=-42..-41`). Seven simple families
+   cover all 12 existentially, but none is tie-safe on all 12 (`psi_min` safe on 8,
+   `zero_xor_live_min` on the complementary 4); the remaining task is a tie coordinate, not a new
+   candidate family. Report: `2026-07-10-codex-q19-psi-selector-hard-surface.md`.
 
 **Independent lanes (parallel; pull when unblocked):**
 
