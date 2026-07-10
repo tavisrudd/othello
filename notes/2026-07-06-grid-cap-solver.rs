@@ -62,6 +62,18 @@
 //                   each N node, and exact reachability coverage of every raw record.
 //   s4gmeasure <q> t1,t2,t3,t4 --grundy <grundy-raw> [--depth <plies>]
 //                -- compare true S5/S6 Grundy values against live-conic and zone NK shadows.
+//   s4gdistill <q> t1,t2,t3,t4 --grundy <grundy-raw> [--forced-out <file>]
+//                -- exact forced-move skeleton over a raw Grundy dump: at every N node,
+//                   count winning children (child Grundy 0), histogram strategy freedom,
+//                   and optionally emit rows for uniquely forced winning moves.
+//   s4gremote <q> t1,t2,t3,t4 --grundy <grundy-raw>
+//                -- exact remoteness/suspense pass over a raw Grundy dump: terminal=0,
+//                   N nodes choose min-remoteness P children, P nodes choose max-remoteness N
+//                   children; emits ply/value/optimal-geometry/zone/defXOR summaries.
+//   s4potential <q> t1,t2,t3,t4 --grundy <grundy-raw> --out <tsv>
+//                -- extract exact P-state -> selected P-reply transitions for C63.  The selector
+//                   minimizes C31's max(zone, child-Z), and every row contains before/after v1
+//                   potential features plus the exact post-repair Z/depth fields.
 //   s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
 //                -- freeze a raw S4 dump into a compact BuRR-style ribbon archive for runtime
 //                   queries. Uses 64-bit folded keys plus membership fingerprints; raw remains
@@ -78,6 +90,10 @@
 //                   conic graph has the requested Node-Kayles xor, stopping at the first solved P.
 //                   With --maintain, play each requested off-conic move from that P follower and
 //                   search for a P reply that restores the requested conic xor.
+//   s4zcensus <q> <s4xormine-log>... [--cap <slots>] [--start <idx>] [--limit <n>]
+//                [--out <file>] [--raw <exact-pn-dump>]
+//                -- compute C31's exact recursive steering ceiling Z on every selected P follower
+//                   (`XORRESULT status=hit`) in one or more logs, sharing native outcome/Z caches.
 //   s4mine <q> t1,t2,t3,t4 (--raw <file> | --burr <file>)
 //          [--depth <plies>] [--state-rows] [--replies <none|all|p|n|unknown>]
 //          [--max-reply-moves <n>] [--best-replies] [--max-best-replies <n>]
@@ -111,8 +127,8 @@
 // Falsification watch: if `outcome` ever prints N (first-player win), PG(2,q) has a
 // counterexample; if `defect`'s min-deviating-size approaches 0/1, the root is about to flip.
 
-use std::collections::{BTreeMap, HashMap, HashSet};
-use std::convert::TryInto;
+use std::collections::{BTreeMap, HashMap, HashSet, VecDeque};
+use std::convert::{TryFrom, TryInto};
 use std::env;
 use std::ffi::c_void;
 use std::fs::File;
@@ -4709,6 +4725,442 @@ fn solve_s4_xor_mine(
     );
 }
 
+#[derive(Clone)]
+struct S4ZSeed {
+    source: String,
+    t4: Vec<usize>,
+    x: u16,
+    y: u16,
+}
+
+#[derive(Clone)]
+struct S4ZExtreme {
+    seed: S4ZSeed,
+    occ: Vec<u16>,
+    chosen: Mask,
+    forbidden: Mask,
+    z: u16,
+}
+
+fn parse_s4_log_t4(line: &str) -> Option<Vec<usize>> {
+    let rest = line.strip_prefix("S4XORMINE ")?;
+    let start = rest.find("t4=[")? + 4;
+    let end = rest[start..].find(']')? + start;
+    let values: Vec<usize> = rest[start..end]
+        .split(',')
+        .map(|s| s.trim().parse::<usize>().ok())
+        .collect::<Option<Vec<_>>>()?;
+    (values.len() == 4).then_some(values)
+}
+
+fn parse_s4_log_cell(line: &str, name: &str, q: usize) -> Option<u16> {
+    let prefix = format!("{}=", name);
+    let token = line.split_whitespace().find_map(|s| s.strip_prefix(&prefix))?;
+    let (r, c) = parse_cell_arg(token)?;
+    (r < q && c < q).then_some((r * q + c) as u16)
+}
+
+fn parse_s4_z_seeds(q: usize, paths: &[String]) -> Vec<S4ZSeed> {
+    let mut seeds = Vec::new();
+    for path in paths {
+        let text = std::fs::read_to_string(path).unwrap_or_else(|e| panic!("read {}: {}", path, e));
+        let t4 = text
+            .lines()
+            .find_map(parse_s4_log_t4)
+            .unwrap_or_else(|| panic!("{} has no S4XORMINE header", path));
+        for line in text.lines() {
+            if !line.starts_with("XORRESULT ") || !line.contains(" status=hit ") {
+                continue;
+            }
+            let x = parse_s4_log_cell(line, "x", q)
+                .unwrap_or_else(|| panic!("bad x cell in {}: {}", path, line));
+            let y = parse_s4_log_cell(line, "y", q)
+                .unwrap_or_else(|| panic!("bad y cell in {}: {}", path, line));
+            seeds.push(S4ZSeed { source: path.clone(), t4: t4.clone(), x, y });
+        }
+    }
+    seeds.sort_by(|a, b| {
+        (&a.source, &a.t4, a.x, a.y).cmp(&(&b.source, &b.t4, b.x, b.y))
+    });
+    seeds
+}
+
+// C31's recursive steering ceiling on a P state:
+//   Z(S) = max_m min_{P replies r} max(zone(S+m+r), Z(S+m+r)).
+// The bool outcome memo and this Z memo are canonical; move choices are deliberately not cached,
+// because a canonical key can be reached in a different coordinate orientation.
+fn s4_g_with_store(
+    b: &Board,
+    known: Option<&QueryStore>,
+    known_hits: &mut usize,
+    memo: &mut FnvMap<u128, bool>,
+    cap: usize,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<bool> {
+    let key = b.canon(occ);
+    if let Some(&v) = memo.get(&key) {
+        return Some(v);
+    }
+    if let Some(v) = known.and_then(|store| store.get(key)) {
+        *known_hits += 1;
+        return Some(v);
+    }
+    if memo.len() >= cap {
+        return None;
+    }
+    let moves = avail_cells(b, chosen, forbidden);
+    for z in moves {
+        let mut nchosen = *chosen;
+        set_bit(&mut nchosen, z as usize);
+        let mut nforbidden = *forbidden;
+        mask_or(&mut nforbidden, &b.rc_mask[z as usize]);
+        for &x in occ.iter() {
+            mask_or(&mut nforbidden, &b.line_mask[x as usize * b.n + z as usize]);
+        }
+        occ.push(z);
+        let child = s4_g_with_store(
+            b, known, known_hits, memo, cap, occ, &nchosen, &nforbidden,
+        );
+        occ.pop();
+        match child {
+            None => return None,
+            Some(false) => {
+                memo.insert(key, true);
+                return Some(true);
+            }
+            Some(true) => {}
+        }
+    }
+    memo.insert(key, false);
+    Some(false)
+}
+
+fn s4_z(
+    b: &Board,
+    known: Option<&QueryStore>,
+    known_hits: &mut usize,
+    outcome: &mut FnvMap<u128, bool>,
+    z_memo: &mut FnvMap<u128, u16>,
+    cap: usize,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<u16> {
+    let key = b.canon(occ);
+    if let Some(&z) = z_memo.get(&key) {
+        return Some(z);
+    }
+    let moves = avail_cells(b, chosen, forbidden);
+    if moves.is_empty() {
+        z_memo.insert(key, 0);
+        return Some(0);
+    }
+    let mut worst = 0usize;
+    for m in moves {
+        let (m_occ, m_chosen, m_forbidden) =
+            push_cell_state(b, occ, chosen, forbidden, m as usize).unwrap();
+        let mut best: Option<usize> = None;
+        for r in avail_cells(b, &m_chosen, &m_forbidden) {
+            let (r_occ, r_chosen, r_forbidden) =
+                push_cell_state(b, &m_occ, &m_chosen, &m_forbidden, r as usize).unwrap();
+            let mut solve_occ = r_occ.clone();
+            let is_n = s4_g_with_store(
+                b, known, known_hits, outcome, cap, &mut solve_occ, &r_chosen, &r_forbidden,
+            )?;
+            if is_n {
+                continue;
+            }
+            let child_z = s4_z(
+                b, known, known_hits, outcome, z_memo, cap, &r_occ, &r_chosen, &r_forbidden,
+            )?;
+            let score = (child_z as usize).max(s4_zone_support_lite(b, &r_chosen, &r_forbidden).zone_v);
+            best = Some(best.map_or(score, |old| old.min(score)));
+        }
+        let best = best.expect("child of a P state has no P reply");
+        worst = worst.max(best);
+    }
+    assert!(worst <= u16::MAX as usize, "steering ceiling exceeds u16");
+    z_memo.insert(key, worst as u16);
+    Some(worst as u16)
+}
+
+// Recompute one locally oriented optimal choice using the canonical value caches.
+// Outer None means the cap was hit; inner None means terminal.
+fn s4_z_choice(
+    b: &Board,
+    known: Option<&QueryStore>,
+    known_hits: &mut usize,
+    outcome: &mut FnvMap<u128, bool>,
+    z_memo: &mut FnvMap<u128, u16>,
+    cap: usize,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<Option<(u16, u16, usize, u16)>> {
+    let moves = avail_cells(b, chosen, forbidden);
+    if moves.is_empty() {
+        return Some(None);
+    }
+    let mut worst: Option<(usize, u16, u16, usize, u16)> = None;
+    for m in moves {
+        let (m_occ, m_chosen, m_forbidden) =
+            push_cell_state(b, occ, chosen, forbidden, m as usize).unwrap();
+        let mut best: Option<(usize, u16, usize, u16)> = None;
+        for r in avail_cells(b, &m_chosen, &m_forbidden) {
+            let (r_occ, r_chosen, r_forbidden) =
+                push_cell_state(b, &m_occ, &m_chosen, &m_forbidden, r as usize).unwrap();
+            let mut solve_occ = r_occ.clone();
+            let is_n = s4_g_with_store(
+                b, known, known_hits, outcome, cap, &mut solve_occ, &r_chosen, &r_forbidden,
+            )?;
+            if is_n {
+                continue;
+            }
+            let child_z = s4_z(
+                b, known, known_hits, outcome, z_memo, cap, &r_occ, &r_chosen, &r_forbidden,
+            )?;
+            let zone = s4_zone_support_lite(b, &r_chosen, &r_forbidden).zone_v;
+            let score = zone.max(child_z as usize);
+            let candidate = (score, r, zone, child_z);
+            if best.as_ref().map_or(true, |old| candidate < *old) {
+                best = Some(candidate);
+            }
+        }
+        let (score, r, zone, child_z) = best.expect("child of a P state has no P reply");
+        let candidate = (score, m, r, zone, child_z);
+        if worst.as_ref().map_or(true, |old| candidate.0 > old.0 || (candidate.0 == old.0 && candidate < *old)) {
+            worst = Some(candidate);
+        }
+    }
+    let (_score, m, r, zone, child_z) = worst.unwrap();
+    Some(Some((m, r, zone, child_z)))
+}
+
+fn s4_z_trace(
+    b: &Board,
+    known: Option<&QueryStore>,
+    known_hits: &mut usize,
+    outcome: &mut FnvMap<u128, bool>,
+    z_memo: &mut FnvMap<u128, u16>,
+    cap: usize,
+    mut occ: Vec<u16>,
+    mut chosen: Mask,
+    mut forbidden: Mask,
+) -> Option<String> {
+    let mut rows = Vec::new();
+    for _ in 0..32 {
+        let Some((m, r, zone, child_z)) = s4_z_choice(
+            b, known, known_hits, outcome, z_memo, cap, &occ, &chosen, &forbidden,
+        )? else {
+            rows.push("terminal".to_string());
+            return Some(rows.join(";"));
+        };
+        rows.push(format!(
+            "{},{}>{},{}:zone={}:nextZ={}",
+            m as usize / b.q,
+            m as usize % b.q,
+            r as usize / b.q,
+            r as usize % b.q,
+            zone,
+            child_z
+        ));
+        let (m_occ, m_chosen, m_forbidden) =
+            push_cell_state(b, &occ, &chosen, &forbidden, m as usize).unwrap();
+        let (r_occ, r_chosen, r_forbidden) =
+            push_cell_state(b, &m_occ, &m_chosen, &m_forbidden, r as usize).unwrap();
+        occ = r_occ;
+        chosen = r_chosen;
+        forbidden = r_forbidden;
+    }
+    Some(rows.join(";"))
+}
+
+fn emit_s4_z_row(out: &mut Option<BufWriter<File>>, row: &str) {
+    if let Some(w) = out.as_mut() {
+        writeln!(w, "{}", row).expect("write s4zcensus output");
+    } else {
+        println!("{}", row);
+    }
+}
+
+fn solve_s4_z_census(
+    q: usize,
+    paths: &[String],
+    cap: usize,
+    start_index: usize,
+    limit: usize,
+    out_path: Option<&str>,
+    raw_path: Option<&str>,
+) {
+    let b = Board::new(q);
+    let seeds = parse_s4_z_seeds(q, paths);
+    let end_index = start_index.saturating_add(limit).min(seeds.len());
+    let mut out = out_path.map(|path| BufWriter::new(File::create(path).expect("create s4zcensus output")));
+    let mut outcome: FnvMap<u128, bool> = FnvMap::default();
+    let mut z_memo: FnvMap<u128, u16> = FnvMap::default();
+    let known = raw_path.map(|path| QueryStore::Raw(RawMemoMmap::open(path).expect("open s4zcensus raw memo")));
+    let mut known_hits = 0usize;
+    let mut seen = HashSet::new();
+    let mut hist: BTreeMap<u16, usize> = BTreeMap::new();
+    let mut zone_hist: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut processed = 0usize;
+    let mut duplicates = 0usize;
+    let mut bad_labels = 0usize;
+    let mut aborted = 0usize;
+    let mut extrema: Vec<S4ZExtreme> = Vec::new();
+    let mut max_z: Option<u16> = None;
+    let started = Instant::now();
+    println!(
+        "S4ZCENSUS q={} logs={} seeds={} start={} end={} cap={} out={} known={}",
+        q,
+        paths.len(),
+        seeds.len(),
+        start_index,
+        end_index,
+        cap,
+        out_path.unwrap_or("-"),
+        known.as_ref().map_or_else(|| "-".to_string(), QueryStore::describe)
+    );
+    for (seed_index, seed) in seeds.iter().enumerate().take(end_index).skip(start_index) {
+        let (root_occ, root_chosen, root_forbidden, _cells) = build_s4_root(&b, &seed.t4);
+        let Some((x_occ, x_chosen, x_forbidden)) =
+            push_cell_state(&b, &root_occ, &root_chosen, &root_forbidden, seed.x as usize)
+        else {
+            panic!("illegal x in {}", seed.source);
+        };
+        let Some((occ, chosen, forbidden)) =
+            push_cell_state(&b, &x_occ, &x_chosen, &x_forbidden, seed.y as usize)
+        else {
+            panic!("illegal y in {}", seed.source);
+        };
+        let key = b.canon(&occ);
+        if !seen.insert(key) {
+            duplicates += 1;
+            continue;
+        }
+        let mut solve_occ = occ.clone();
+        match s4_g_with_store(
+            &b, known.as_ref(), &mut known_hits, &mut outcome, cap, &mut solve_occ, &chosen, &forbidden,
+        ) {
+            Some(false) => {}
+            Some(true) => {
+                bad_labels += 1;
+                emit_s4_z_row(&mut out, &format!("S4ZSTATE seed={} status=BAD-N source={} t4={:?} cells={}", seed_index, seed.source, seed.t4, fmt_cell_indices(&b, &occ)));
+                continue;
+            }
+            None => {
+                aborted += 1;
+                emit_s4_z_row(&mut out, &format!("S4ZSTATE seed={} status=ABORTED source={} t4={:?} cells={} outcome-memo={} z-memo={}", seed_index, seed.source, seed.t4, fmt_cell_indices(&b, &occ), outcome.len(), z_memo.len()));
+                break;
+            }
+        }
+        let Some(z) = s4_z(
+            &b, known.as_ref(), &mut known_hits, &mut outcome, &mut z_memo, cap, &occ, &chosen, &forbidden,
+        ) else {
+            aborted += 1;
+            emit_s4_z_row(&mut out, &format!("S4ZSTATE seed={} status=ABORTED source={} t4={:?} cells={} outcome-memo={} z-memo={}", seed_index, seed.source, seed.t4, fmt_cell_indices(&b, &occ), outcome.len(), z_memo.len()));
+            break;
+        };
+        processed += 1;
+        *hist.entry(z).or_insert(0) += 1;
+        let zone = s4_zone_support_lite(&b, &chosen, &forbidden).zone_v;
+        *zone_hist.entry(zone).or_insert(0) += 1;
+        let live_on = live_on_root_conic(&b, &chosen, &forbidden);
+        let row = format!(
+            "S4ZSTATE seed={} status=OK source={} t4={:?} key={:032x} x={},{} y={},{} Z={} zone_v={} live_on={} cells={} {} {}",
+            seed_index,
+            seed.source,
+            seed.t4,
+            key,
+            seed.x as usize / q,
+            seed.x as usize % q,
+            seed.y as usize / q,
+            seed.y as usize % q,
+            z,
+            zone,
+            live_on,
+            fmt_cell_indices(&b, &occ),
+            s4_conic_graph_feature_string(&b, &occ, &chosen, &forbidden),
+            s4_zone_support_feature_string(&b, &chosen, &forbidden)
+        );
+        emit_s4_z_row(&mut out, &row);
+        if max_z.map_or(true, |m| z > m) {
+            max_z = Some(z);
+            extrema.clear();
+        }
+        if max_z == Some(z) {
+            extrema.push(S4ZExtreme { seed: seed.clone(), occ, chosen, forbidden, z });
+        }
+        if processed % 25 == 0 {
+            println!(
+                "S4ZPROGRESS processed={} unique={} seeds={}/{} max-z={} outcome-memo={} z-memo={} elapsed={:.3}",
+                processed,
+                seen.len(),
+                seed_index + 1,
+                end_index,
+                max_z.unwrap_or(0),
+                outcome.len(),
+                z_memo.len(),
+                started.elapsed().as_secs_f64()
+            );
+        }
+    }
+    for (rank, ex) in extrema.iter().enumerate() {
+        let trace = s4_z_trace(
+            &b,
+            known.as_ref(),
+            &mut known_hits,
+            &mut outcome,
+            &mut z_memo,
+            cap,
+            ex.occ.clone(),
+            ex.chosen,
+            ex.forbidden,
+        ).unwrap_or_else(|| "ABORTED".to_string());
+        emit_s4_z_row(&mut out, &format!(
+            "S4ZEXTREME rank={} source={} t4={:?} x={},{} y={},{} Z={} cells={} trace={}",
+            rank,
+            ex.seed.source,
+            ex.seed.t4,
+            ex.seed.x as usize / q,
+            ex.seed.x as usize % q,
+            ex.seed.y as usize / q,
+            ex.seed.y as usize % q,
+            ex.z,
+            fmt_cell_indices(&b, &ex.occ),
+            trace
+        ));
+    }
+    let hist_text = hist.iter().map(|(z, n)| format!("{}:{}", z, n)).collect::<Vec<_>>().join(",");
+    let zone_min = zone_hist.keys().next().copied().unwrap_or(0);
+    let zone_max = zone_hist.keys().next_back().copied().unwrap_or(0);
+    let summary = format!(
+        "S4ZCENSUS-DONE q={} logs={} seeds={} start={} end={} processed={} unique={} duplicates={} bad-labels={} aborted={} max-z={} z-hist={} zone-range={}..{} known-hits={} outcome-memo={} z-memo={} elapsed={:.3}",
+        q,
+        paths.len(),
+        seeds.len(),
+        start_index,
+        end_index,
+        processed,
+        seen.len(),
+        duplicates,
+        bad_labels,
+        aborted,
+        max_z.map_or("-".to_string(), |z| z.to_string()),
+        if hist_text.is_empty() { "-" } else { &hist_text },
+        zone_min,
+        zone_max,
+        known_hits,
+        outcome.len(),
+        z_memo.len(),
+        started.elapsed().as_secs_f64()
+    );
+    emit_s4_z_row(&mut out, &summary);
+    println!("{}", summary);
+}
+
 fn s4_hist_text(hist: &BTreeMap<u8, usize>) -> String {
     if hist.is_empty() {
         "-".to_string()
@@ -5193,6 +5645,1075 @@ fn solve_s4_grundy_measure(
         frontier = next;
     }
     println!("S4GMEASURE-DONE seen-states={} truncated={}", seen.len(), truncated);
+}
+
+#[derive(Clone, Copy, Default)]
+struct S4ZoneSupportLite {
+    zone_v: usize,
+    zone_rows: usize,
+    zone_cols: usize,
+    zone_row_odd: usize,
+    zone_col_odd: usize,
+    zone_row_max: usize,
+    zone_col_max: usize,
+}
+
+fn s4_zone_support_lite(b: &Board, chosen: &Mask, forbidden: &Mask) -> S4ZoneSupportLite {
+    let mut zone_v = 0usize;
+    let mut row_counts = vec![0usize; b.q];
+    let mut col_counts = vec![0usize; b.q];
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            if !is_on_root_conic(b, z) {
+                zone_v += 1;
+                row_counts[z / b.q] += 1;
+                col_counts[z % b.q] += 1;
+            }
+        }
+    }
+    let row_sizes: Vec<usize> = row_counts.iter().copied().filter(|&x| x != 0).collect();
+    let col_sizes: Vec<usize> = col_counts.iter().copied().filter(|&x| x != 0).collect();
+    S4ZoneSupportLite {
+        zone_v,
+        zone_rows: row_sizes.len(),
+        zone_cols: col_sizes.len(),
+        zone_row_odd: row_sizes.iter().filter(|&&x| x % 2 == 1).count(),
+        zone_col_odd: col_sizes.iter().filter(|&&x| x % 2 == 1).count(),
+        zone_row_max: row_sizes.iter().copied().max().unwrap_or(0),
+        zone_col_max: col_sizes.iter().copied().max().unwrap_or(0),
+    }
+}
+
+fn s4_zone_support_feature_string(b: &Board, chosen: &Mask, forbidden: &Mask) -> String {
+    let mut zone_v = 0usize;
+    let mut row_counts = vec![0usize; b.q];
+    let mut col_counts = vec![0usize; b.q];
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            if !is_on_root_conic(b, z) {
+                zone_v += 1;
+                row_counts[z / b.q] += 1;
+                col_counts[z % b.q] += 1;
+            }
+        }
+    }
+    let mut row_sizes: Vec<usize> = row_counts.iter().copied().filter(|&x| x != 0).collect();
+    let mut col_sizes: Vec<usize> = col_counts.iter().copied().filter(|&x| x != 0).collect();
+    let zone_rows = row_sizes.len();
+    let zone_cols = col_sizes.len();
+    let zone_row_min = row_sizes.iter().copied().min().unwrap_or(0);
+    let zone_row_max = row_sizes.iter().copied().max().unwrap_or(0);
+    let zone_col_min = col_sizes.iter().copied().min().unwrap_or(0);
+    let zone_col_max = col_sizes.iter().copied().max().unwrap_or(0);
+    let zone_row_odd = row_sizes.iter().filter(|&&x| x % 2 == 1).count();
+    let zone_col_odd = col_sizes.iter().filter(|&&x| x % 2 == 1).count();
+    let zone_row_sizes = s4_component_size_text(&mut row_sizes);
+    let zone_col_sizes = s4_component_size_text(&mut col_sizes);
+    format!(
+        "zone_v={} zone_rows={} zone_cols={} zone_row_min={} zone_row_max={} zone_col_min={} zone_col_max={} zone_row_odd={} zone_col_odd={} zone_row_sizes={} zone_col_sizes={}",
+        zone_v,
+        zone_rows,
+        zone_cols,
+        zone_row_min,
+        zone_row_max,
+        zone_col_min,
+        zone_col_max,
+        zone_row_odd,
+        zone_col_odd,
+        zone_row_sizes,
+        zone_col_sizes
+    )
+}
+
+fn inc_count<K: Ord>(m: &mut BTreeMap<K, usize>, k: K) {
+    *m.entry(k).or_insert(0) += 1;
+}
+
+fn solve_s4_grundy_distill(q: usize, t4: &[usize], grundy_path: &str, forced_out: Option<&str>) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4gdistill: Grundy dump root mismatch; requested q={} t4={:?}, dump={}",
+            q,
+            t4,
+            grundy.describe()
+        );
+        std::process::exit(2);
+    }
+    if grundy.root_grundy.is_none() {
+        eprintln!("s4gdistill: aborted Grundy dump is not exact enough: {}", grundy.describe());
+        std::process::exit(2);
+    }
+
+    let mut forced_writer: Option<BufWriter<File>> = forced_out.map(|path| {
+        let mut w = BufWriter::new(File::create(path).expect("create forced output"));
+        writeln!(
+            w,
+            "kind q t4 ply key g legal winning x xgeom child_g live_on_before live_on_after conic_emptying sel_on dead_on cells child_cells conic_features zone_support"
+        )
+        .expect("write forced header");
+        w
+    });
+
+    println!(
+        "S4GDISTILL q={} t4={:?} cells={:?} store={} forced-out={}",
+        q,
+        t4,
+        cells,
+        grundy.describe(),
+        forced_out.unwrap_or("-")
+    );
+
+    let start = Instant::now();
+    let mut frontier: VecDeque<(Vec<u16>, Mask, Mask)> = VecDeque::new();
+    frontier.push_back((root_occ, root_chosen, root_forbidden));
+    let mut seen: HashSet<u128> = HashSet::new();
+    seen.insert(root_key);
+
+    let mut missing_states = 0usize;
+    let mut missing_children = 0usize;
+    let mut p_nodes = 0usize;
+    let mut n_nodes = 0usize;
+    let mut forced_nodes = 0usize;
+    let mut terminal_nodes = 0usize;
+    let mut max_ply = 0usize;
+    let mut freedom_hist: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut forced_by_ply: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut forced_by_geom: BTreeMap<&'static str, usize> = BTreeMap::new();
+    let mut forced_by_live: BTreeMap<(usize, usize, &'static str), usize> = BTreeMap::new();
+    let mut ply_states: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut ply_n: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut ply_forced: BTreeMap<usize, usize> = BTreeMap::new();
+
+    while let Some((occ, chosen, forbidden)) = frontier.pop_front() {
+        let key = b.canon(&occ);
+        let ply = occ.len();
+        max_ply = max_ply.max(ply);
+        inc_count(&mut ply_states, ply);
+        let Some(g) = grundy.get(key) else {
+            missing_states += 1;
+            continue;
+        };
+        if g == 0 {
+            p_nodes += 1;
+        } else {
+            n_nodes += 1;
+            inc_count(&mut ply_n, ply);
+        }
+
+        let mut legal = 0usize;
+        let mut winning = 0usize;
+        let mut forced_z = 0u16;
+        let mut forced_occ: Vec<u16> = Vec::new();
+        let mut forced_chosen = [0u64; MAXW];
+        let mut forced_forbidden = [0u64; MAXW];
+        let mut forced_g = 0u8;
+        let mut forced_geom = "anom";
+
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            legal += 1;
+            let (child_occ, child_chosen, child_forbidden) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            let child_key = b.canon(&child_occ);
+            let child_g = grundy.get(child_key);
+            if let Some(cg) = child_g {
+                if seen.insert(child_key) {
+                    frontier.push_back((child_occ.clone(), child_chosen, child_forbidden));
+                }
+                if g > 0 && cg == 0 {
+                    winning += 1;
+                    forced_z = z;
+                    forced_occ = child_occ;
+                    forced_chosen = child_chosen;
+                    forced_forbidden = child_forbidden;
+                    forced_g = cg;
+                    forced_geom = geometry_label_for_root(&b, t4, z as usize);
+                }
+            } else {
+                missing_children += 1;
+            }
+        }
+
+        if legal == 0 {
+            terminal_nodes += 1;
+        }
+        if g > 0 {
+            inc_count(&mut freedom_hist, winning);
+            if winning == 1 {
+                forced_nodes += 1;
+                inc_count(&mut forced_by_ply, ply);
+                inc_count(&mut forced_by_geom, forced_geom);
+                inc_count(&mut ply_forced, ply);
+                let live_on_before = live_on_root_conic(&b, &chosen, &forbidden);
+                let live_on_after = live_on_root_conic(&b, &forced_chosen, &forced_forbidden);
+                inc_count(&mut forced_by_live, (live_on_before, live_on_after, forced_geom));
+                if let Some(w) = forced_writer.as_mut() {
+                    let sel_on = selected_on_root_conic(&b, &occ);
+                    let dead_on = q.saturating_sub(1).saturating_sub(sel_on + live_on_before);
+                    let conic_emptying = live_on_before > 0 && live_on_after == 0;
+                    let cells_text = fmt_cell_indices(&b, &occ).replace(' ', ";");
+                    let child_cells_text = fmt_cell_indices(&b, &forced_occ).replace(' ', ";");
+                    writeln!(
+                        w,
+                        "FORCED q={} t4={} ply={} key={:032x} g={} legal={} winning=1 x={},{} xgeom={} child_g={} live_on_before={} live_on_after={} conic_emptying={} sel_on={} dead_on={} cells={} child_cells={} {} {}",
+                        q,
+                        t4.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                        ply,
+                        key,
+                        g,
+                        legal,
+                        forced_z as usize / q,
+                        forced_z as usize % q,
+                        forced_geom,
+                        forced_g,
+                        live_on_before,
+                        live_on_after,
+                        if conic_emptying { 1 } else { 0 },
+                        sel_on,
+                        dead_on,
+                        cells_text,
+                        child_cells_text,
+                        s4_conic_graph_feature_string(&b, &occ, &chosen, &forbidden),
+                        s4_zone_support_feature_string(&b, &chosen, &forbidden)
+                    )
+                    .expect("write forced row");
+                }
+            }
+        }
+    }
+
+    if let Some(w) = forced_writer.as_mut() {
+        w.flush().expect("flush forced output");
+    }
+
+    for (winning_moves, nodes) in &freedom_hist {
+        println!(
+            "S4GDFREEDOM q={} t4={:?} winning_moves={} nodes={}",
+            q, t4, winning_moves, nodes
+        );
+    }
+    for (ply, nodes) in &forced_by_ply {
+        println!("S4GDFORCEDPLY q={} t4={:?} ply={} nodes={}", q, t4, ply, nodes);
+    }
+    for (geom, nodes) in &forced_by_geom {
+        println!("S4GDFORCEDGEOM q={} t4={:?} geom={} nodes={}", q, t4, geom, nodes);
+    }
+    for ((before, after, geom), nodes) in &forced_by_live {
+        println!(
+            "S4GDFORCEDLIVE q={} t4={:?} live_on_before={} live_on_after={} geom={} nodes={}",
+            q, t4, before, after, geom, nodes
+        );
+    }
+    for (ply, states) in &ply_states {
+        println!(
+            "S4GDPLY q={} t4={:?} ply={} states={} n_nodes={} forced={}",
+            q,
+            t4,
+            ply,
+            states,
+            ply_n.get(ply).copied().unwrap_or(0),
+            ply_forced.get(ply).copied().unwrap_or(0)
+        );
+    }
+    println!(
+        "S4GDDONE q={} t4={:?} records={} seen={} missing_states={} missing_children={} p_nodes={} n_nodes={} forced_nodes={} terminal_nodes={} max_ply={} elapsed={:.3}",
+        q,
+        t4,
+        grundy.n_records,
+        seen.len(),
+        missing_states,
+        missing_children,
+        p_nodes,
+        n_nodes,
+        forced_nodes,
+        terminal_nodes,
+        max_ply,
+        start.elapsed().as_secs_f64()
+    );
+}
+
+const S4_POTENTIAL_FEATURES: [&str; 17] = [
+    "conic_xor",
+    "conic_xor_zero",
+    "live_on",
+    "zone_v",
+    "zone_parity",
+    "reservoir_slack_total",
+    "reservoir_slack_min",
+    "defect_components",
+    "defect_paths",
+    "defect_odd_components",
+    "defect_max_path",
+    "defect_path_sum_sq",
+    "interface_intruders",
+    "interface_endpoints",
+    "interface_isolates",
+    "z_ceiling",
+    "descent_depth",
+];
+
+#[derive(Clone)]
+struct S4PotentialNode {
+    occ: Vec<u16>,
+    chosen: Mask,
+    forbidden: Mask,
+    key: u128,
+    g: u8,
+}
+
+fn s4_named_usize(fields: &str, name: &str) -> usize {
+    let prefix = format!("{}=", name);
+    fields
+        .split_whitespace()
+        .find_map(|field| field.strip_prefix(&prefix))
+        .unwrap_or_else(|| panic!("missing {} in {}", name, fields))
+        .parse()
+        .unwrap_or_else(|_| panic!("bad {} in {}", name, fields))
+}
+
+fn s4_named_sizes(fields: &str, name: &str) -> Vec<usize> {
+    let prefix = format!("{}=", name);
+    let value = fields
+        .split_whitespace()
+        .find_map(|field| field.strip_prefix(&prefix))
+        .unwrap_or_else(|| panic!("missing {} in {}", name, fields));
+    if value == "-" {
+        Vec::new()
+    } else {
+        value
+            .split(',')
+            .map(|x| x.parse().unwrap_or_else(|_| panic!("bad {} in {}", name, fields)))
+            .collect()
+    }
+}
+
+fn s4_potential_features(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+    z: u16,
+    depth: u16,
+) -> [i64; 17] {
+    let conic = s4_conic_graph_feature_string(b, occ, chosen, forbidden);
+    let zone = s4_zone_support_feature_string(b, chosen, forbidden);
+    let conic_xor = s4_conic_nk_xor_only(b, occ, chosen, forbidden)
+        .expect("q<=25 live-conic components must have exact NK xor") as usize;
+    let live_on = live_on_root_conic(b, chosen, forbidden);
+    let zone_v = s4_named_usize(&zone, "zone_v");
+    let zone_row_min = s4_named_usize(&zone, "zone_row_min");
+    let zone_col_min = s4_named_usize(&zone, "zone_col_min");
+    let k = occ.len();
+    let per_line_floor = b
+        .q
+        .saturating_sub(k + k.saturating_mul(k.saturating_sub(1)) / 2 + 1);
+    let unused_lines = b.q.saturating_sub(k);
+    let reservoir_floor = unused_lines.saturating_mul(per_line_floor);
+    let min_support = zone_row_min.min(zone_col_min);
+    let path_sizes = s4_named_sizes(&conic, "conic_path_sizes");
+    let path_sum_sq: usize = path_sizes.iter().map(|x| x * x).sum();
+    let defect_paths = s4_named_usize(&conic, "conic_path")
+        + s4_named_usize(&conic, "conic_iso");
+    let interface_endpoints = 2 * s4_named_usize(&conic, "conic_path")
+        + s4_named_usize(&conic, "conic_iso");
+    [
+        conic_xor as i64,
+        (conic_xor == 0) as i64,
+        live_on as i64,
+        zone_v as i64,
+        (zone_v % 2) as i64,
+        zone_v.saturating_sub(reservoir_floor) as i64,
+        min_support.saturating_sub(per_line_floor) as i64,
+        s4_named_usize(&conic, "conic_comp") as i64,
+        defect_paths as i64,
+        s4_named_usize(&conic, "conic_odd") as i64,
+        path_sizes.iter().copied().max().unwrap_or(0) as i64,
+        path_sum_sq as i64,
+        s4_named_usize(&conic, "conic_off") as i64,
+        interface_endpoints as i64,
+        s4_named_usize(&conic, "conic_iso") as i64,
+        z as i64,
+        depth as i64,
+    ]
+}
+
+fn s4_write_potential_feature_header(w: &mut BufWriter<File>, prefix: &str) {
+    for name in S4_POTENTIAL_FEATURES {
+        write!(w, "\t{}_{}", prefix, name).expect("write potential header");
+    }
+}
+
+fn s4_write_potential_features(w: &mut BufWriter<File>, xs: &[i64; 17]) {
+    for x in xs {
+        write!(w, "\t{}", x).expect("write potential feature");
+    }
+}
+
+fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4potential: Grundy dump root mismatch; requested q={} t4={:?}, dump={}",
+            q,
+            t4,
+            grundy.describe()
+        );
+        std::process::exit(2);
+    }
+    if grundy.root_grundy != Some(0) {
+        eprintln!("s4potential: exact P-root Grundy dump required: {}", grundy.describe());
+        std::process::exit(2);
+    }
+
+    let started = Instant::now();
+    let mut nodes = Vec::<S4PotentialNode>::with_capacity(grundy.n_records);
+    let mut index = HashMap::<u128, usize>::with_capacity(grundy.n_records);
+    let mut frontier = VecDeque::new();
+    frontier.push_back((root_occ, root_chosen, root_forbidden));
+    while let Some((occ, chosen, forbidden)) = frontier.pop_front() {
+        let key = b.canon(&occ);
+        if index.contains_key(&key) {
+            continue;
+        }
+        let g = grundy.get(key).expect("reachable state missing from exact Grundy dump");
+        let node_index = nodes.len();
+        index.insert(key, node_index);
+        nodes.push(S4PotentialNode { occ: occ.clone(), chosen, forbidden, key, g });
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            let (child_occ, child_chosen, child_forbidden) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            if !index.contains_key(&b.canon(&child_occ)) {
+                frontier.push_back((child_occ, child_chosen, child_forbidden));
+            }
+        }
+    }
+    if nodes.len() != grundy.n_records {
+        eprintln!(
+            "s4potential: reachability mismatch seen={} records={}",
+            nodes.len(),
+            grundy.n_records
+        );
+        std::process::exit(2);
+    }
+
+    let mut order: Vec<usize> = (0..nodes.len()).collect();
+    order.sort_unstable_by_key(|&i| std::cmp::Reverse(nodes[i].occ.len()));
+    let mut z_value = vec![0u16; nodes.len()];
+    let mut descent_depth = vec![0u16; nodes.len()];
+    let mut p_nodes = 0usize;
+    let mut terminals = 0usize;
+    for &i in &order {
+        let node = &nodes[i];
+        if node.g != 0 {
+            continue;
+        }
+        p_nodes += 1;
+        let moves = avail_cells(&b, &node.chosen, &node.forbidden);
+        if moves.is_empty() {
+            terminals += 1;
+            continue;
+        }
+        let mut worst_score = 0usize;
+        let mut worst_depth = 0usize;
+        for m in moves {
+            let (m_occ, m_chosen, m_forbidden) =
+                push_cell_state(&b, &node.occ, &node.chosen, &node.forbidden, m as usize).unwrap();
+            let m_g = grundy.get(b.canon(&m_occ)).expect("P child missing from exact dump");
+            assert!(m_g != 0, "a P node has a P child");
+            let mut best: Option<(usize, u16, usize)> = None;
+            for r in avail_cells(&b, &m_chosen, &m_forbidden) {
+                let (r_occ, r_chosen, r_forbidden) =
+                    push_cell_state(&b, &m_occ, &m_chosen, &m_forbidden, r as usize).unwrap();
+                let r_key = b.canon(&r_occ);
+                if grundy.get(r_key) != Some(0) {
+                    continue;
+                }
+                let &ri = index.get(&r_key).expect("P reply missing from reachable index");
+                let zone_v = s4_zone_support_lite(&b, &r_chosen, &r_forbidden).zone_v;
+                let score = zone_v.max(z_value[ri] as usize);
+                let candidate = (score, r, ri);
+                if best.as_ref().map_or(true, |old| candidate < *old) {
+                    best = Some(candidate);
+                }
+            }
+            let (score, _r, ri) = best.expect("child of exact P state has no P reply");
+            worst_score = worst_score.max(score);
+            worst_depth = worst_depth.max(1 + descent_depth[ri] as usize);
+        }
+        z_value[i] = u16::try_from(worst_score).expect("Z exceeds u16");
+        descent_depth[i] = u16::try_from(worst_depth).expect("descent depth exceeds u16");
+    }
+
+    let mut w = BufWriter::new(File::create(out_path).expect("create s4potential TSV"));
+    write!(
+        w,
+        "q\tt4\tparent_key\tparent_ply\topponent\treply\tchild_key\tchild_ply\tchild_zone\tchild_z\tselector_score\tparent_cells\tchild_cells"
+    )
+    .expect("write potential header");
+    s4_write_potential_feature_header(&mut w, "parent");
+    s4_write_potential_feature_header(&mut w, "child");
+    writeln!(w).expect("write potential header newline");
+
+    let t4_text = t4.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",");
+    let mut obligations = 0usize;
+    let mut missing = 0usize;
+    for (i, node) in nodes.iter().enumerate() {
+        if node.g != 0 {
+            continue;
+        }
+        let parent_features = s4_potential_features(
+            &b,
+            &node.occ,
+            &node.chosen,
+            &node.forbidden,
+            z_value[i],
+            descent_depth[i],
+        );
+        for m in avail_cells(&b, &node.chosen, &node.forbidden) {
+            let (m_occ, m_chosen, m_forbidden) =
+                push_cell_state(&b, &node.occ, &node.chosen, &node.forbidden, m as usize).unwrap();
+            let mut best: Option<(usize, u16, usize, Vec<u16>, Mask, Mask)> = None;
+            for r in avail_cells(&b, &m_chosen, &m_forbidden) {
+                let (r_occ, r_chosen, r_forbidden) =
+                    push_cell_state(&b, &m_occ, &m_chosen, &m_forbidden, r as usize).unwrap();
+                let r_key = b.canon(&r_occ);
+                if grundy.get(r_key) != Some(0) {
+                    continue;
+                }
+                let Some(&ri) = index.get(&r_key) else {
+                    missing += 1;
+                    continue;
+                };
+                let child_zone = s4_zone_support_lite(&b, &r_chosen, &r_forbidden).zone_v;
+                let score = child_zone.max(z_value[ri] as usize);
+                let candidate = (score, r, ri, r_occ, r_chosen, r_forbidden);
+                if best.as_ref().map_or(true, |old| (candidate.0, candidate.1, candidate.2) < (old.0, old.1, old.2)) {
+                    best = Some(candidate);
+                }
+            }
+            let (score, r, ri, r_occ, r_chosen, r_forbidden) =
+                best.expect("child of exact P state has no selected P reply");
+            let child = &nodes[ri];
+            let child_zone = s4_zone_support_lite(&b, &r_chosen, &r_forbidden).zone_v;
+            let child_features = s4_potential_features(
+                &b,
+                &r_occ,
+                &r_chosen,
+                &r_forbidden,
+                z_value[ri],
+                descent_depth[ri],
+            );
+            write!(
+                w,
+                "{}\t{}\t{:032x}\t{}\t{},{}\t{},{}\t{:032x}\t{}\t{}\t{}\t{}\t{}\t{}",
+                q,
+                t4_text,
+                node.key,
+                node.occ.len(),
+                m as usize / q,
+                m as usize % q,
+                r as usize / q,
+                r as usize % q,
+                child.key,
+                child.occ.len(),
+                child_zone,
+                z_value[ri],
+                score,
+                fmt_cell_indices(&b, &node.occ).replace(' ', ";"),
+                fmt_cell_indices(&b, &r_occ).replace(' ', ";")
+            )
+            .expect("write potential row");
+            s4_write_potential_features(&mut w, &parent_features);
+            s4_write_potential_features(&mut w, &child_features);
+            writeln!(w).expect("write potential row newline");
+            obligations += 1;
+        }
+    }
+    w.flush().expect("flush s4potential TSV");
+    println!(
+        "S4POTENTIAL-DONE q={} t4={:?} cells={:?} records={} p_nodes={} terminals={} obligations={} missing={} root_Z={} root_depth={} out={} elapsed={:.3}",
+        q,
+        t4,
+        cells,
+        nodes.len(),
+        p_nodes,
+        terminals,
+        obligations,
+        missing,
+        z_value[0],
+        descent_depth[0],
+        out_path,
+        started.elapsed().as_secs_f64()
+    );
+    if missing != 0 {
+        std::process::exit(1);
+    }
+}
+
+#[derive(Clone)]
+struct S4RemoteChild {
+    key: u128,
+    g: u8,
+    geom: &'static str,
+}
+
+struct S4RemoteNode {
+    ply: usize,
+    g: u8,
+    legal: usize,
+    live_on: usize,
+    zone: S4ZoneSupportLite,
+    defxor: Option<u8>,
+    children: Vec<S4RemoteChild>,
+}
+
+#[derive(Clone, Copy)]
+struct S4RemoteAgg {
+    nodes: usize,
+    p_nodes: usize,
+    n_nodes: usize,
+    terminals: usize,
+    rem_sum: usize,
+    rem_min: usize,
+    rem_max: usize,
+    rem_even: usize,
+    rem_odd: usize,
+}
+
+impl Default for S4RemoteAgg {
+    fn default() -> S4RemoteAgg {
+        S4RemoteAgg {
+            nodes: 0,
+            p_nodes: 0,
+            n_nodes: 0,
+            terminals: 0,
+            rem_sum: 0,
+            rem_min: usize::MAX,
+            rem_max: 0,
+            rem_even: 0,
+            rem_odd: 0,
+        }
+    }
+}
+
+impl S4RemoteAgg {
+    fn add(&mut self, g: u8, legal: usize, rem: usize) {
+        self.nodes += 1;
+        if g == 0 {
+            self.p_nodes += 1;
+        } else {
+            self.n_nodes += 1;
+        }
+        if legal == 0 {
+            self.terminals += 1;
+        }
+        self.rem_sum += rem;
+        self.rem_min = self.rem_min.min(rem);
+        self.rem_max = self.rem_max.max(rem);
+        if rem % 2 == 0 {
+            self.rem_even += 1;
+        } else {
+            self.rem_odd += 1;
+        }
+    }
+
+    fn fields(&self) -> String {
+        let rem_min = if self.nodes == 0 { 0 } else { self.rem_min };
+        let avg_milli = if self.nodes == 0 {
+            0
+        } else {
+            (1000usize * self.rem_sum + self.nodes / 2) / self.nodes
+        };
+        format!(
+            "states={} p_nodes={} n_nodes={} terminals={} rem_min={} rem_max={} rem_avg_milli={} rem_even={} rem_odd={}",
+            self.nodes,
+            self.p_nodes,
+            self.n_nodes,
+            self.terminals,
+            rem_min,
+            self.rem_max,
+            avg_milli,
+            self.rem_even,
+            self.rem_odd
+        )
+    }
+}
+
+fn s4_remote_node(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+    g: u8,
+) -> S4RemoteNode {
+    S4RemoteNode {
+        ply: occ.len(),
+        g,
+        legal: 0,
+        live_on: live_on_root_conic(b, chosen, forbidden),
+        zone: s4_zone_support_lite(b, chosen, forbidden),
+        defxor: s4_conic_nk_xor_only(b, occ, chosen, forbidden),
+        children: Vec::new(),
+    }
+}
+
+fn opt_u8_text(v: Option<u8>) -> String {
+    v.map_or("-".to_string(), |x| x.to_string())
+}
+
+fn grundy_value_text(g: u8) -> &'static str {
+    if g == 0 { "P" } else { "N" }
+}
+
+fn solve_s4_grundy_remote(q: usize, t4: &[usize], grundy_path: &str) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4gremote: Grundy dump root mismatch; requested q={} t4={:?}, dump={}",
+            q,
+            t4,
+            grundy.describe()
+        );
+        std::process::exit(2);
+    }
+    let Some(root_g) = grundy.root_grundy else {
+        eprintln!("s4gremote: aborted Grundy dump is not exact enough: {}", grundy.describe());
+        std::process::exit(2);
+    };
+
+    println!(
+        "S4GREMOTE q={} t4={:?} cells={:?} store={}",
+        q,
+        t4,
+        cells,
+        grundy.describe()
+    );
+
+    let start = Instant::now();
+    let mut nodes = Vec::<S4RemoteNode>::new();
+    let mut index_of: FnvMap<u128, usize> = FnvMap::default();
+    nodes.push(s4_remote_node(&b, &root_occ, &root_chosen, &root_forbidden, root_g));
+    index_of.insert(root_key, 0);
+    let mut frontier: VecDeque<(usize, Vec<u16>, Mask, Mask)> = VecDeque::new();
+    frontier.push_back((0, root_occ, root_chosen, root_forbidden));
+
+    let mut missing_states = 0usize;
+    let mut missing_children = 0usize;
+    let mut max_ply = 0usize;
+
+    while let Some((idx, occ, chosen, forbidden)) = frontier.pop_front() {
+        let key = b.canon(&occ);
+        if grundy.get(key).is_none() {
+            missing_states += 1;
+            continue;
+        }
+        max_ply = max_ply.max(occ.len());
+        let mut legal = 0usize;
+        let mut children = Vec::<S4RemoteChild>::new();
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            legal += 1;
+            let (child_occ, child_chosen, child_forbidden) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            let child_key = b.canon(&child_occ);
+            let Some(child_g) = grundy.get(child_key) else {
+                missing_children += 1;
+                continue;
+            };
+            if !index_of.contains_key(&child_key) {
+                let child_idx = nodes.len();
+                nodes.push(s4_remote_node(
+                    &b,
+                    &child_occ,
+                    &child_chosen,
+                    &child_forbidden,
+                    child_g,
+                ));
+                index_of.insert(child_key, child_idx);
+                frontier.push_back((child_idx, child_occ, child_chosen, child_forbidden));
+            }
+            children.push(S4RemoteChild {
+                key: child_key,
+                g: child_g,
+                geom: geometry_label_for_root(&b, t4, z as usize),
+            });
+        }
+        nodes[idx].legal = legal;
+        nodes[idx].children = children;
+    }
+    let collect_elapsed = start.elapsed().as_secs_f64();
+
+    let mut order: Vec<usize> = (0..nodes.len()).collect();
+    order.sort_unstable_by_key(|&i| std::cmp::Reverse(nodes[i].ply));
+    let mut remote = vec![usize::MAX; nodes.len()];
+    let mut bad_n_no_p = 0usize;
+    let mut bad_p_no_n = 0usize;
+    for idx in order {
+        let node = &nodes[idx];
+        if node.children.is_empty() {
+            remote[idx] = 0;
+        } else if node.g > 0 {
+            let mut best = usize::MAX;
+            for child in &node.children {
+                if child.g == 0 {
+                    let child_idx = *index_of.get(&child.key).expect("child key indexed");
+                    best = best.min(remote[child_idx]);
+                }
+            }
+            if best == usize::MAX {
+                bad_n_no_p += 1;
+            } else {
+                remote[idx] = best + 1;
+            }
+        } else {
+            let mut best = 0usize;
+            let mut any = false;
+            for child in &node.children {
+                if child.g != 0 {
+                    let child_idx = *index_of.get(&child.key).expect("child key indexed");
+                    best = best.max(remote[child_idx]);
+                    any = true;
+                }
+            }
+            if any {
+                remote[idx] = best + 1;
+            } else {
+                bad_p_no_n += 1;
+                remote[idx] = 0;
+            }
+        }
+    }
+
+    let mut all_stats = S4RemoteAgg::default();
+    let mut value_stats: BTreeMap<&'static str, S4RemoteAgg> = BTreeMap::new();
+    let mut ply_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut live_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_v_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_rows_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_cols_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_row_max_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_col_max_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_row_odd_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut zone_col_odd_stats: BTreeMap<usize, S4RemoteAgg> = BTreeMap::new();
+    let mut defxor_stats: BTreeMap<Option<u8>, S4RemoteAgg> = BTreeMap::new();
+    let mut residual_stats: BTreeMap<Option<u8>, S4RemoteAgg> = BTreeMap::new();
+    let mut rem_hist: BTreeMap<(&'static str, usize), usize> = BTreeMap::new();
+    let mut opt_edge_geom: BTreeMap<(&'static str, &'static str), usize> = BTreeMap::new();
+    let mut opt_node_geom: BTreeMap<(&'static str, &'static str), usize> = BTreeMap::new();
+    let mut opt_edge_ply_geom: BTreeMap<(&'static str, usize, &'static str), usize> = BTreeMap::new();
+    let mut opt_tie_hist: BTreeMap<(&'static str, usize), usize> = BTreeMap::new();
+    let mut remote_missing = 0usize;
+
+    for (idx, node) in nodes.iter().enumerate() {
+        let rem = remote[idx];
+        if rem == usize::MAX {
+            remote_missing += 1;
+            continue;
+        }
+        all_stats.add(node.g, node.legal, rem);
+        value_stats.entry(grundy_value_text(node.g)).or_default().add(node.g, node.legal, rem);
+        ply_stats.entry(node.ply).or_default().add(node.g, node.legal, rem);
+        live_stats.entry(node.live_on).or_default().add(node.g, node.legal, rem);
+        zone_v_stats.entry(node.zone.zone_v).or_default().add(node.g, node.legal, rem);
+        zone_rows_stats.entry(node.zone.zone_rows).or_default().add(node.g, node.legal, rem);
+        zone_cols_stats.entry(node.zone.zone_cols).or_default().add(node.g, node.legal, rem);
+        zone_row_max_stats.entry(node.zone.zone_row_max).or_default().add(node.g, node.legal, rem);
+        zone_col_max_stats.entry(node.zone.zone_col_max).or_default().add(node.g, node.legal, rem);
+        zone_row_odd_stats.entry(node.zone.zone_row_odd).or_default().add(node.g, node.legal, rem);
+        zone_col_odd_stats.entry(node.zone.zone_col_odd).or_default().add(node.g, node.legal, rem);
+        defxor_stats.entry(node.defxor).or_default().add(node.g, node.legal, rem);
+        residual_stats
+            .entry(node.defxor.map(|d| node.g ^ d))
+            .or_default()
+            .add(node.g, node.legal, rem);
+        inc_count(&mut rem_hist, ("ALL", rem));
+        inc_count(&mut rem_hist, (grundy_value_text(node.g), rem));
+
+        if node.children.is_empty() {
+            continue;
+        }
+        let from = grundy_value_text(node.g);
+        let mut opt_rem = if node.g == 0 { 0usize } else { usize::MAX };
+        let mut any = false;
+        for child in &node.children {
+            if (node.g > 0 && child.g == 0) || (node.g == 0 && child.g != 0) {
+                let child_idx = *index_of.get(&child.key).expect("child key indexed");
+                let child_rem = remote[child_idx];
+                if child_rem == usize::MAX {
+                    continue;
+                }
+                if node.g > 0 {
+                    opt_rem = opt_rem.min(child_rem);
+                } else {
+                    opt_rem = opt_rem.max(child_rem);
+                }
+                any = true;
+            }
+        }
+        if !any {
+            continue;
+        }
+        let mut opt_edges = 0usize;
+        let mut geoms_seen: Vec<&'static str> = Vec::new();
+        for child in &node.children {
+            if (node.g > 0 && child.g == 0) || (node.g == 0 && child.g != 0) {
+                let child_idx = *index_of.get(&child.key).expect("child key indexed");
+                if remote[child_idx] == opt_rem {
+                    opt_edges += 1;
+                    inc_count(&mut opt_edge_geom, (from, child.geom));
+                    inc_count(&mut opt_edge_ply_geom, (from, node.ply, child.geom));
+                    if !geoms_seen.contains(&child.geom) {
+                        geoms_seen.push(child.geom);
+                        inc_count(&mut opt_node_geom, (from, child.geom));
+                    }
+                }
+            }
+        }
+        inc_count(&mut opt_tie_hist, (from, opt_edges));
+    }
+
+    for ((value, rem), nodes_at_rem) in &rem_hist {
+        println!(
+            "S4GRHIST q={} t4={:?} value={} rem={} nodes={}",
+            q, t4, value, rem, nodes_at_rem
+        );
+    }
+    for (value, stats) in &value_stats {
+        println!("S4GRVALUE q={} t4={:?} value={} {}", q, t4, value, stats.fields());
+    }
+    for (ply, stats) in &ply_stats {
+        println!("S4GRPLY q={} t4={:?} ply={} {}", q, t4, ply, stats.fields());
+    }
+    for (live_on, stats) in &live_stats {
+        println!("S4GRLIVE q={} t4={:?} live_on={} {}", q, t4, live_on, stats.fields());
+    }
+    for (zone_v, stats) in &zone_v_stats {
+        println!("S4GRZONE q={} t4={:?} zone_v={} {}", q, t4, zone_v, stats.fields());
+    }
+    for (zone_rows, stats) in &zone_rows_stats {
+        println!("S4GRZONEROWS q={} t4={:?} zone_rows={} {}", q, t4, zone_rows, stats.fields());
+    }
+    for (zone_cols, stats) in &zone_cols_stats {
+        println!("S4GRZONECOLS q={} t4={:?} zone_cols={} {}", q, t4, zone_cols, stats.fields());
+    }
+    for (zone_row_max, stats) in &zone_row_max_stats {
+        println!(
+            "S4GRZONEROWMAX q={} t4={:?} zone_row_max={} {}",
+            q,
+            t4,
+            zone_row_max,
+            stats.fields()
+        );
+    }
+    for (zone_col_max, stats) in &zone_col_max_stats {
+        println!(
+            "S4GRZONECOLMAX q={} t4={:?} zone_col_max={} {}",
+            q,
+            t4,
+            zone_col_max,
+            stats.fields()
+        );
+    }
+    for (zone_row_odd, stats) in &zone_row_odd_stats {
+        println!(
+            "S4GRZONEROWODD q={} t4={:?} zone_row_odd={} {}",
+            q,
+            t4,
+            zone_row_odd,
+            stats.fields()
+        );
+    }
+    for (zone_col_odd, stats) in &zone_col_odd_stats {
+        println!(
+            "S4GRZONECOLODD q={} t4={:?} zone_col_odd={} {}",
+            q,
+            t4,
+            zone_col_odd,
+            stats.fields()
+        );
+    }
+    for (defxor, stats) in &defxor_stats {
+        println!(
+            "S4GRDEFXOR q={} t4={:?} defxor={} {}",
+            q,
+            t4,
+            opt_u8_text(*defxor),
+            stats.fields()
+        );
+    }
+    for (residual, stats) in &residual_stats {
+        println!(
+            "S4GRRESIDUAL q={} t4={:?} residual={} {}",
+            q,
+            t4,
+            opt_u8_text(*residual),
+            stats.fields()
+        );
+    }
+    for ((from, geom), edges) in &opt_edge_geom {
+        let nodes_with_geom = opt_node_geom.get(&(*from, *geom)).copied().unwrap_or(0);
+        println!(
+            "S4GROPT q={} t4={:?} from={} geom={} nodes={} edges={}",
+            q, t4, from, geom, nodes_with_geom, edges
+        );
+    }
+    for ((from, ply, geom), edges) in &opt_edge_ply_geom {
+        println!(
+            "S4GROPTPLY q={} t4={:?} from={} ply={} geom={} edges={}",
+            q, t4, from, ply, geom, edges
+        );
+    }
+    for ((from, ties), nodes_with_ties) in &opt_tie_hist {
+        println!(
+            "S4GROPTTIES q={} t4={:?} from={} optimal_children={} nodes={}",
+            q, t4, from, ties, nodes_with_ties
+        );
+    }
+
+    println!(
+        "S4GRDONE q={} t4={:?} records={} seen={} missing_states={} missing_children={} remote_missing={} p_nodes={} n_nodes={} terminal_nodes={} max_ply={} max_rem={} root_g={} root_value={} root_rem={} bad_n_no_p={} bad_p_no_n={} collect_elapsed={:.3} elapsed={:.3}",
+        q,
+        t4,
+        grundy.n_records,
+        nodes.len(),
+        missing_states,
+        missing_children,
+        remote_missing,
+        all_stats.p_nodes,
+        all_stats.n_nodes,
+        all_stats.terminals,
+        max_ply,
+        all_stats.rem_max,
+        root_g,
+        grundy_value_text(root_g),
+        remote[0],
+        bad_n_no_p,
+        bad_p_no_n,
+        collect_elapsed,
+        start.elapsed().as_secs_f64()
+    );
 }
 
 fn solve_s4_query(q: usize, t4: &[usize], store: QueryStore) {
@@ -7809,6 +9330,107 @@ fn main() {
         );
         return;
     }
+    if args[1] == "s4gdistill" {
+        // s4gdistill <q> t1,t2,t3,t4 --grundy <grundy-raw> [--forced-out <file>]
+        let mut grundy_path: Option<String> = None;
+        let mut forced_out: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else if a == "--forced-out" {
+                forced_out = Some(it.next().expect("--forced-out needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--forced-out=") {
+                forced_out = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4gdistill mode needs q: s4gdistill <q> t1,t2,t3,t4 --grundy <file>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4gdistill mode needs t values: s4gdistill <q> t1,t2,t3,t4 --grundy <file>"),
+        );
+        solve_s4_grundy_distill(
+            q,
+            &t4,
+            &grundy_path.expect("s4gdistill needs --grundy <file>"),
+            forced_out.as_deref(),
+        );
+        return;
+    }
+    if args[1] == "s4potential" {
+        // s4potential <q> t1,t2,t3,t4 --grundy <grundy-raw> --out <tsv>
+        let mut grundy_path: Option<String> = None;
+        let mut out_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else if a == "--out" {
+                out_path = Some(it.next().expect("--out needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--out=") {
+                out_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4potential mode needs q: s4potential <q> t1,t2,t3,t4 --grundy <file> --out <tsv>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4potential mode needs t values: s4potential <q> t1,t2,t3,t4 --grundy <file> --out <tsv>"),
+        );
+        solve_s4_potential(
+            q,
+            &t4,
+            &grundy_path.expect("s4potential needs --grundy <file>"),
+            &out_path.expect("s4potential needs --out <tsv>"),
+        );
+        return;
+    }
+    if args[1] == "s4gremote" {
+        // s4gremote <q> t1,t2,t3,t4 --grundy <grundy-raw>
+        let mut grundy_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4gremote mode needs q: s4gremote <q> t1,t2,t3,t4 --grundy <file>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4gremote mode needs t values: s4gremote <q> t1,t2,t3,t4 --grundy <file>"),
+        );
+        solve_s4_grundy_remote(q, &t4, &grundy_path.expect("s4gremote needs --grundy <file>"));
+        return;
+    }
     if args[1] == "s4freeze" {
         // s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
         let mut fp_bits = 48u32;
@@ -7835,6 +9457,51 @@ fn main() {
             .get(1)
             .expect("s4freeze mode needs burr-file: s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <x>]");
         solve_s4_freeze(raw, burr, fp_bits, load);
+        return;
+    }
+    if args[1] == "s4zcensus" {
+        // s4zcensus <q> <s4xormine-log>... [--cap <slots>] [--start <idx>]
+        //        [--limit <n>] [--out <file>] [--raw <exact-pn-dump>]
+        let mut cap = 20_000_000usize;
+        let mut start_index = 0usize;
+        let mut limit = usize::MAX;
+        let mut out_path: Option<String> = None;
+        let mut raw_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--cap" {
+                cap = it.next().expect("--cap needs a value").parse().expect("--cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = rest.parse().expect("--cap int");
+            } else if a == "--start" {
+                start_index = it.next().expect("--start needs a value").parse().expect("--start int");
+            } else if let Some(rest) = a.strip_prefix("--start=") {
+                start_index = rest.parse().expect("--start int");
+            } else if a == "--limit" {
+                limit = it.next().expect("--limit needs a value").parse().expect("--limit int");
+            } else if let Some(rest) = a.strip_prefix("--limit=") {
+                limit = rest.parse().expect("--limit int");
+            } else if a == "--out" {
+                out_path = Some(it.next().expect("--out needs a path").clone());
+            } else if let Some(rest) = a.strip_prefix("--out=") {
+                out_path = Some(rest.to_string());
+            } else if a == "--raw" {
+                raw_path = Some(it.next().expect("--raw needs a path").clone());
+            } else if let Some(rest) = a.strip_prefix("--raw=") {
+                raw_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4zcensus needs q and at least one log")
+            .parse()
+            .expect("q must be an integer");
+        let paths = &positional[1..];
+        assert!(!paths.is_empty(), "s4zcensus needs at least one s4xormine log");
+        solve_s4_z_census(q, paths, cap, start_index, limit, out_path.as_deref(), raw_path.as_deref());
         return;
     }
     if args[1] == "s4xormine" {
