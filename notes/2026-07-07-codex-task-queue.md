@@ -69,9 +69,12 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
 **Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
 (tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
 
-5. **C63 [REPORTED 2026-07-10]** — potential LP-fit + infeasibility dual — now leads the cluster; its v1 feature
-   span should include post-repair descent depth (the C65 extrema drop `Z=40 → 7 → 0`, so the
-   potential must charge transient spikes against later descent).
+5. **C63 [REPORTED 2026-07-10; ROUTE AUDITED 2026-07-10]** — potential LP-fit + infeasibility
+   dual.  Post-repair descent depth was already included in v1 and returned the exact but
+   proof-circular solution `Phi=descent_depth`; the proof-admissible output is still `Psi`.
+   Post-C61 audit rules out amortizing an immediately N-valued geometric reply over a later pair.
+   Do not refit until a value-blind selector maintains the candidate Good class or a genuinely new
+   proof-admissible coordinate is supplied.
 6. **C62 [REPORTED 2026-07-10]** — selector-library scoring (hours, no new solves — run alongside C63; a scoring hit
    doubles as a C63 feature).
 7. **C61 [REPORTED 2026-07-10 — NEGATIVE for tested quotient]** — finite-state reply automaton.

@@ -297,3 +297,38 @@ to prove `Delta Psi < 0` for is C61's reply automaton, and its hard surface is p
 (one canonical ply-4 parent, on-conic opponent moves).  C61 must override the C31 tie-break there,
 and the existence pass guarantees a legal `Psi`-decreasing target to override toward.  Artifacts:
 `rust/scripts/c63-q19-replay.py`, `s4-dumps/2026-07-10/c63-q19/q19-root-1234.transitions.tsv`.
+
+## Correction-3 — post-C61 route audit: no second “depth v1” is due
+
+The queue's post-C65 reminder said that C63 v1 should include post-repair descent depth.  This
+experiment is already Round 1 above: the extractor computes `descent_depth` bottom-up from the
+exact selected strategy, and the LP returns
+
+```text
+Phi_v1(S) = descent_depth(S).
+```
+
+It passes q=13 fit/holdout and frozen q=17 exactly because the coordinate encodes the selected
+strategy's future.  The report already classifies it correctly as proof-circular.  Re-running or
+rebranding that model would not be a new amortized invariant.
+
+The C61 conflict-ray follow-up also closes the tempting “allow one bad pair, recover on the next”
+interpretation.  Its geometric rule `zero_live_ray_lex_max` repairs all twelve q=19 tie rows, but
+full replay has an exact q=13 root counterexample:
+
+```text
+parent key 05f7f1b9445d65074a4fd95e5f4e3462, opponent (5,8)
+selected (7,3):  Grundy 1
+available tied (11,3): Grundy 0
+```
+
+The rule chooses the N-position `(7,3)`.  No potential drop over a later pair can make that a
+winning reply strategy: after P2 moves to an exact N-position, P1 has a winning continuation and
+need not cooperate with the proposed recovery line.  This is exactly the one-pair closure premise
+in Lean's already-proved `FiniteBuildGame.isP_of_replyStrategy`.
+
+Therefore C63 is not awaiting another fit over `descent_depth`, nor a two-pair amortization of an
+immediately losing selector.  Its durable output remains the proof-admissible charge `Psi`; the
+blocked obligation is a value-blind one-pair reply theorem.  Reopen the LP only when a new
+geometric selector maintains the candidate Good class, or when a genuinely new proof-admissible
+state coordinate is proposed independently of exact values, `Z`, and selected-strategy depth.

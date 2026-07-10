@@ -1123,6 +1123,14 @@ Verdict: **local positive / uniform negative**.  The tie surface is closed, but 
 q-blind winning selector or `Good`-closure; no broader feature search follows from it.  Details and
 reproduction are appended to `notes/2026-07-10-codex-q19-psi-selector-hard-surface.md`.
 
+2026-07-10 C63 post-C61 route audit (Codex): the suggested “v1 with post-repair descent depth” was
+already executed in C63 Round 1 and returned the proof-circular exact-strategy coordinate
+`Phi=descent_depth`.  No repeat LP is due.  Two-pair amortization also cannot rescue the new ray
+selector: its minimal q=13 root failure moves immediately to an exact N-position, so the adversary
+wins before any later recovery line.  Keep `Psi` as the proof-admissible charge, but reopen C63 only
+after a value-blind selector maintains the candidate Good class or a genuinely new non-oracle
+coordinate appears.  The correction is appended to `2026-07-09-codex-potential-lp-dual.md`.
+
 2026-07-10 C59: ran the arc-stability import lane independently of the Cluster-2/C61 work. Added
 `rust/scripts/c59_arc_stability_check.py` and
 `notes/2026-07-10-codex-arc-stability-import.md`; marked C59 REPORTED in the queue and added the
