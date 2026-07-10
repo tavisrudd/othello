@@ -552,6 +552,23 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C68 (2026-07-10, Claude) — D(q) depletion-fraction sequence; first A5 measurement.**  Exact
+  `D(q)` = max over size-3 classes of the on-conic N-fraction (q=5..19 from feat dumps, q=23 from
+  the C54 bucket labels).  Result: **`D(q) = 0` at every non-arc-depleted order** (5,7,9,13,19,23;
+  every on-conic child P, min-witness = q−4) and **`D(q) > 0` exactly at the arc-depleted `{11,17}`**
+  (`D(11)=5/7≈0.714`, `D(17)=12/13≈0.923` — corrects the E2 `≈0.79` guess).  The knife edge
+  **sharpens** along the depleted subsequence rather than relaxing: min-witness (min on-conic P
+  escapes) `2 → 1`, safety margin `(q−4)−maxonN` `2 → 1`; "recovery" to q−4 happens only at the
+  non-depleted orders (trivially, maxonN=0 there).  Consequences: (i) the strong E2 form
+  "`D(q) ≤ 1−c` bounded away from 1" is **not supported** — the two depleted points climb toward 1;
+  (ii) the (ON) route only needs **min-witness ≥ 1**, so the proof-usable A5 anchor is
+  **`maxonN(q) ≤ q−5`** (no size-3 class has all q−4 on-conic children N), not a bounded fraction;
+  (iii) at q=17 the depletion is class-wide (every class has onN ≥ 10, best class onP=3), so even the
+  least-depleted class is worse than q=11's worst.  The conjecture is safe throughout (root has 5
+  total escapes at the q=17 knife edge, 4 off-conic); it is the (ON) *route's* on-conic margin that
+  is thin.  Decisive missing datum: `D` at the next depleted order (>23) — routes into C44
+  (GF(25)/q=25 census).  Script `rust/scripts/c68_depletion_fraction.py`; report:
+  [`../2026-07-09-codex-depletion-fraction.md`](../2026-07-09-codex-depletion-fraction.md).
 - **C50 (2026-07-10) — tiny kernel prototype PASS; literal scaling NO-GO.** Added a complete
   mex certificate contract, standalone rules-only emitter/checker, and reflected Lean checker.
   The generated 3×3 queens book proves `grundy (queenGraph 3) univ = 2` from 10 nodes/25 edges;

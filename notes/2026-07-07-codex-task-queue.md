@@ -108,10 +108,17 @@ oval/complete-arc incidence level, which C58's all-P order-9 result *strengthens
 disturbs (the depleted orders {11,17} are primes, where the non-Desarguesian planes do not even
 exist, so the dichotomy data is untouched).
 
-- **C68 (PROMOTED to active 2026-07-10; gate discharged)** — the depletion-fraction extremal
-  sequence `D(q)` (sweep E2): the concrete "which orders deplete, by how much" arithmetic the (ON)
-  route now engages directly.  First concrete A5 task; hours-cheap, single-core, ≤ 8 GB, existing
-  S4 dumps on disk.  Section spec below.
+- **C68 [REPORTED 2026-07-10 (Claude)]** — the depletion-fraction extremal sequence `D(q)`
+  (sweep E2).  Exact result: `D(q) = 0` at every non-arc-depleted order (5,7,9,13,19,23;
+  min-witness = q−4) and `D(q) > 0` **exactly** at `{11,17}` (`5/7`, `12/13`).  The knife edge
+  **sharpens** along the depleted subsequence (min-witness `2 → 1`, margin `2 → 1`); it recovers only
+  at non-depleted orders.  So "`D(q)` bounded away from 1" is **not** supported — but the (ON) route
+  only needs **min-witness ≥ 1**, i.e. the A5 target `maxonN(q) ≤ q−5` (no size-3 class has all q−4
+  on-conic children N).  Decisive missing datum: `D` at the next depleted order (>23) → routes into
+  C44 (GF(25)/q=25 census).  Report:
+  [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md); script
+  `rust/scripts/c68_depletion_fraction.py`.  **A5 lane now has one reported measurement; the live
+  (ON) levers are Cluster 2 (open core) + the A5 arithmetic proof of `maxonN(q) ≤ q−5`.**
 
 **Independent lanes (parallel; pull when unblocked):**
 
@@ -146,7 +153,8 @@ exist, so the dichotomy data is untouched).
 (coupling-defect spectroscopy).
 
 **C66/C67/C68 triage gate DISCHARGED 2026-07-10** (all of C61–C65 REPORTED): C68 promoted to the A5
-lane above; C66/C67 stay un-gated but opportunistic (pull as diagnostics, no priority).
+lane and now **REPORTED 2026-07-10**; C66/C67 stay un-gated but opportunistic (pull as diagnostics,
+no priority).
 
 ---
 
@@ -2561,7 +2569,23 @@ deliverable.  Budget: hours (existing `c35/` dumps + Lemma-V σ data); single-co
 
 Report file: `notes/2026-07-09-codex-coupling-defect.md`.
 
-## C68. The depletion-fraction extremal sequence D(q) (sweep E2) [PROMOTED TO ACTIVE 2026-07-10 — first concrete A5 task]
+## C68. The depletion-fraction extremal sequence D(q) (sweep E2) [REPORTED 2026-07-10 (Claude)]
+
+**Report: [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md).**
+Exact `D(q)` (q=5..19 feat dumps, q=23 bucket labels): `D(q) = 0` at every non-arc-depleted order
+(5,7,9,13,19,23; min-witness = q−4, full) and `D(q) > 0` **exactly** at the arc-depleted `{11,17}`
+(`D(11)=5/7≈0.714`, `D(17)=12/13≈0.923` — corrects the E2 `≈0.79` guess). The knife edge **sharpens**
+along the depleted subsequence, it does not relax: min-witness `2 → 1`, safety margin `(q−4)−maxonN`
+`2 → 1`; "recovery" happens only at non-depleted orders (trivially, `maxonN=0`). So the strong E2
+form "`D(q)≤1−c` bounded away from 1" is **not supported** (two depleted points climb toward 1). The
+proof-usable anchor is min-witness, not D: the A5 target is **`maxonN(q) ≤ q−5` (min-witness ≥ 1) at
+every arc-depleted order** — no size-3 class has all q−4 on-conic children N. Named quantity for A5:
+`maxonN(q)` (a class-level extremal count, not a per-config invariant, so it does not re-open the
+C55/C64/C69 config-invariant search). Decisive missing datum: `D` at the next depleted order (>23),
+i.e. the C44 GF(25)/q=25 census. Script `rust/scripts/c68_depletion_fraction.py`.
+
+---
+Original spec below.
 
 **READ FIRST:** the E2 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2.
