@@ -76,6 +76,11 @@
 //                   potential features plus the exact post-repair Z/depth fields.
 //   s4potentialprobe <q> t1,t2,t3,t4 [r,c ...]
 //                -- print the geometric C63 feature vector of one locally specified state.
+//   s4potentialprobecells <q> r1,c1 r2,c2 r3,c3 [r4,c4 ...]
+//                -- same C63 feature vector, but from EXPLICIT on-conic board cells (e.g. straight
+//                   out of the feat corpus): fits the conic through the first three cells and
+//                   transports it to xy=1 internally, so no external param translation is trusted
+//                   (avoids the s4potentialprobe param-convention risk).  Psi is PGL-invariant.
 //   s4selectors <q> t1,t2,t3,t4 --grundy <grundy-raw>
 //                -- exact C62 selector scoring on every P->N reply obligation: rho-greedy,
 //                   C63-Psi, live/defect/internal/polar/quadratic-character geometric families.
@@ -6103,6 +6108,69 @@ fn s4_candidate_psi(features: &[i64; 17]) -> i64 {
     features[5] + 6 * features[7] - 4 * features[12] - 2 * features[1]
 }
 
+// Probe C63's potential Psi on an on-conic position given by EXPLICIT board cells,
+// avoiding the param-convention risk: the caller passes the actual (r,c) cells (e.g.
+// straight out of the feat corpus), and the solver reconstructs the conic through them
+// and transports it onto the root hyperbola xy=1 itself, so no external param
+// translation is trusted.  The Psi features are all defined relative to the root conic
+// (is_on_root_conic / the xy=1 enumeration); since Psi is PGL-invariant and the
+// transport is an affine grid symmetry, Psi(transported) == Psi(input).
+//
+// Conic fit `rc + A r + B c + C = 0` == `(r+B)(c+A) = AB-C =: D`, so the affine map
+//   (r,c) |-> (r+B, (c+A)*D^-1)
+// sends the fitted conic to xy=1 (D != 0 required; D == 0 means the arc is degenerate).
+// The first three cells must lie on the conic (used for the fit); every input cell is
+// asserted to land on xy=1 after transport, so an off-conic input fails loudly.
+fn solve_s4_potential_probe_cells(q: usize, cells: &[(usize, usize)]) {
+    let b = Board::new(q);
+    assert!(cells.len() >= 3, "s4potentialprobecells needs >= 3 on-conic cells to fit the conic");
+    for &(r, c) in cells {
+        assert!(r < q && c < q, "probe cell out of range: {},{}", r, c);
+    }
+    let (ca, cb, cc) = fit_conic(&b, &cells[..3]);
+    let d = b.gf.sub(b.gf.m(ca, cb), cc);
+    assert!(d != 0, "degenerate conic (D = AB - C = 0); arc does not transport to xy=1");
+    let inv_d = b.gf.inv[d] as usize;
+    let mut occ: Vec<u16> = Vec::new();
+    let empty = [0u64; MAXW];
+    let mut chosen = empty;
+    let mut forbidden = empty;
+    let mut params: Vec<usize> = Vec::with_capacity(cells.len());
+    for &(r, c) in cells {
+        let tr = b.gf.a(r, cb); // r + B
+        let tc = b.gf.m(b.gf.a(c, ca), inv_d); // (c + A) * D^-1
+        let z = tr * q + tc;
+        assert!(
+            is_on_root_conic(&b, z),
+            "cell {},{} does not lie on the fitted conic (transported to {},{}, off xy=1)",
+            r,
+            c,
+            tr,
+            tc
+        );
+        let (next_occ, next_chosen, next_forbidden) =
+            push_cell_state(&b, &occ, &chosen, &forbidden, z)
+                .unwrap_or_else(|| panic!("transported cell {},{} illegal after {}", tr, tc, fmt_cell_indices(&b, &occ)));
+        occ = next_occ;
+        chosen = next_chosen;
+        forbidden = next_forbidden;
+        params.push(tr);
+    }
+    let features = s4_potential_features(&b, &occ, &chosen, &forbidden, 0, 0);
+    params.sort_unstable();
+    print!(
+        "S4POTENTIALPROBECELLS q={} in_cells={} params={:?} ply={}",
+        q,
+        fmt_cells(cells),
+        params,
+        occ.len()
+    );
+    for (name, value) in S4_POTENTIAL_FEATURES.iter().zip(features) {
+        print!(" {}={}", name, value);
+    }
+    println!(" c63_candidate={}", s4_candidate_psi(&features));
+}
+
 #[derive(Default)]
 struct S4SelectorStats {
     obligations: usize,
@@ -9903,6 +9971,22 @@ fn main() {
             .expect("q must be an integer");
         let t4 = parse_t4(args.get(3).expect("s4potentialprobe needs t values"));
         solve_s4_potential_probe(q, &t4, &args[4..]);
+        return;
+    }
+    if args[1] == "s4potentialprobecells" {
+        // s4potentialprobecells <q> r1,c1 r2,c2 r3,c3 [r4,c4 ...]
+        // Psi probe from EXPLICIT on-conic board cells (see solve_s4_potential_probe_cells):
+        // fits + transports the conic to xy=1 internally, so no param convention is trusted.
+        let q: usize = args
+            .get(2)
+            .expect("s4potentialprobecells needs q")
+            .parse()
+            .expect("q must be an integer");
+        let cells: Vec<(usize, usize)> = args[3..]
+            .iter()
+            .map(|a| parse_cell_arg(a).unwrap_or_else(|| panic!("bad probe cell {}", a)))
+            .collect();
+        solve_s4_potential_probe_cells(q, &cells);
         return;
     }
     if args[1] == "s4selectors" {

@@ -1044,11 +1044,31 @@ discipline.  The only near-hit (`a2=0` for all N-flip configs at q=11; `(0,−4,
 distinct NPNP double-flips) is a q=11 small-field artifact that dissolves at q=17 — the identical
 failure shape as C64's count-parity near-hit, and a recurring lesson: q=11 is the smallest
 arc-depleted order and its two/three-valued invariants land on the value "by luck," then disperse as
-q grows.  **All three configuration-level dichotomy mechanisms (C55/C64/C69) are now dead.**  The
-arc-depleted dichotomy has no config→value dictionary; the (ON) uniform lower bound must engage the
-q-dependent A5 arc-depletion arithmetic directly.  Cluster 1 is closed at the config-mechanism
-level; no fourth candidate is queued.  The live (ON) levers are Cluster 2 (open-core /
-amortized-potential, Codex) and A5.
+q grows.  **All three configuration-level dichotomy mechanism candidates (C55/C64/C69) returned
+NEGATIVE on the tested families.**  Record this as "no *static* config→value dictionary **found**
+among the tested families; mechanism search DE-PRIORITIZED in favor of A5" — *not* "no dictionary
+exists."  Two scope limits keep it a "not found": (i) every discriminator was tested only at
+q ∈ {11, 17} vs {13, 19}, so an invariant that separates only at a larger arc-depleted order would
+have been invisible; (ii) both near-hits were q=11 small-field artifacts that dissolved at q=17,
+which validates the discipline but exposes how thin the two-order corpus is.  All three tested
+*static* invariants; the untested angle is a *dynamic* discriminator — and Ψ (the C63 amortized
+potential) postdates all three, so per "levers compound" it is worth a flip/control trajectory probe
+before A5 starts cold.  The (ON) uniform lower bound now engages the q-dependent **A5 arc-depletion
+arithmetic** directly; note A5 *is* still the dictionary question, answered q-dependently rather than
+by a config-side invariant.  **Re-entry condition:** reopen Cluster-1 mechanism hunting only if A5
+names a concrete quantity to test as a config invariant, a larger arc-depleted order (q ≥ 23) widens
+the corpus, or a Ψ-trajectory discriminator separates flip from control.  No fourth static candidate
+is queued.  The live (ON) levers are Cluster 2 (open-core / amortized-potential, Codex) and A5.
+
+2026-07-10 C61 (Codex): finite-state reply-automaton quotient reported **NEGATIVE for the tested
+state alphabet** (`notes/2026-07-09-codex-reply-automaton.md`; analyzer
+`rust/scripts/c61_reply_automaton.py`).  Over the exact forced skeleton (q=9/13, all ten q=17
+full-PGL roots, q=19 `[1,2,3,4]`), six q=17/q=19 conflicts remain even after full C36-style
+normalized-coordinate refinement; every row is a genuinely forced node.  One pair switches from a
+conic-emptying internal reply at q=17 to a non-emptying external reply at q=19.  No adversarial
+replay was due because the table already conflicts.  Scope is precise: this refutes the tested
+q-blind quotient, not every finite-state strategy.  Next refinement should add an order-sensitive
+zone/interface orbit at those six pairs while retaining C63's `Psi` as the charge.
 
 ## Archive
 

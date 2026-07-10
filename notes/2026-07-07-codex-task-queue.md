@@ -23,8 +23,10 @@ tasks.  Two proof-lane clusters lead, then the independent lanes.
   small-Z retained as the post-repair terminal layer.
 
 **Cluster 1 — the arc-depleted-orders dichotomy (the (ON) route's load-bearing unknown).
-Both direct mechanism candidates are now REPORTED NEGATIVE (2026-07-10, Claude); the surviving
-lever is the algebraic-geometry side, C69 (promoted S1):**
+All three static mechanism candidates (C55 group / C64 extremal / C69 algebraic) are now REPORTED
+NEGATIVE (2026-07-10, Claude) — no static config→value dictionary *found*, so the mechanism search
+is DE-PRIORITIZED in favor of A5 (see the Cluster-1 status note below for scope limits and the
+re-entry condition; this is "not found," not "impossible"):**
 
 2. **C55 [REPORTED 2026-07-10 — NEGATIVE]** — d-lattice side-switch (group-side mechanism
    candidate).  No differential between the 119 flipping configs and matched controls on either
@@ -41,14 +43,28 @@ lever is the algebraic-geometry side, C69 (promoted S1):**
    hyperelliptic arithmetic (trace `a2`), residual tangent/secant partition, and χ of Igusa-flavored
    resultants all fail the flip/control discipline.  The near-hit (`a2=0` for all N-flip configs at
    q=11) is a q=11 small-field artifact that dissolves at q=17.  **All three configuration-level
-   dichotomy mechanisms (C55 group / C64 extremal / C69 algebraic) are now dead.**
+   dichotomy mechanism candidates (C55 group / C64 extremal / C69 algebraic) returned NEGATIVE on
+   the tested families.**
 
-**Cluster-1 status (2026-07-10): CLOSED at the configuration-mechanism level.** The arc-depleted
-dichotomy has no group-side, extremal-side, or algebraic-side config→value mechanism.  The (ON)
-uniform route must engage the q-dependent **A5 arc-depletion arithmetic** directly (which orders
-deplete, by how much) — there is no configuration-level dictionary to discharge it.  No fourth
-mechanism candidate is queued; the live (ON) levers are the open-core / amortized-potential lane
-(Cluster 2) and A5 itself.
+**Cluster-1 status (2026-07-10): mechanism search DE-PRIORITIZED in favor of A5, not closed as
+impossible.** No *static* config→value dictionary was **found** among the tested group-side,
+extremal-side, or algebraic-side families; the search is de-prioritized, not proven empty.  Two
+scope limits are on record and keep this a "not found," not a "does not exist": (i) every
+discriminator was tested only at q ∈ {11, 17} (the two arc-depleted orders) against {13, 19}, so an
+invariant that only separates at a *larger* arc-depleted order would have been invisible; (ii) both
+near-hits (C64 count-parity, C69 `a2=0`) were q=11 small-field artifacts that dissolved at q=17 —
+which validates the flip/control discipline but also shows how thin the two-order corpus is.  All
+three candidates tested *static* invariants of the 6-point configuration; the surviving untested
+angle is a *dynamic* discriminator (see Cluster 2's Ψ — the C63 amortized potential postdates all
+three candidates, per the "levers compound" rule).  **Pivot, not dead end:** the (ON) uniform route
+now engages the q-dependent **A5 arc-depletion arithmetic** directly (which orders deplete, by how
+much).  Note A5 *is* still the dictionary question — just answered q-dependently rather than by a
+config-side invariant; if A5 surfaces a specific quantity, re-open the mechanism search to test it
+as a config invariant.  **Re-entry condition:** reopen Cluster-1 mechanism hunting only if (a) A5
+arithmetic names a concrete quantity to test as a config invariant, (b) a larger arc-depleted order
+(q ≥ 23) becomes available to widen the two-order corpus, or (c) a *dynamic* discriminator (Ψ
+trajectory) separates flip from control.  No fourth static candidate is queued; the live (ON) levers
+are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
 
 **Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
 (tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
@@ -58,9 +74,12 @@ mechanism candidate is queued; the live (ON) levers are the open-core / amortize
    potential must charge transient spikes against later descent).
 6. **C62 [REPORTED 2026-07-10]** — selector-library scoring (hours, no new solves — run alongside C63; a scoring hit
    doubles as a C63 feature).
-7. **C61** — finite-state reply automaton (days; the falsifiable form of the open core).  Its
-   state alphabet must tolerate transient `Z ≈ 40` repair spikes — the same bounded-interface
-   caveat the proof-shape census flags for the S10 discharging shape.
+7. **C61 [REPORTED 2026-07-10 — NEGATIVE for tested quotient]** — finite-state reply automaton.
+   The coarse defect/interface/zone table has many conflicts; six q=17/q=19 conflicts survive the
+   full C36-style normalized-coordinate refinement in the genuinely forced-reply corpus (each node
+   has exactly one P child).  The tested q-blind lookup table therefore fails before adversarial
+   replay.  The six pairs localize the needed order-sensitive interface refinement; `Psi` remains
+   the charge target.
 
 **Independent lanes (parallel; pull when unblocked):**
 
