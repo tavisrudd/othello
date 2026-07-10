@@ -70,7 +70,17 @@ mirror/slack analysis is new.
 - **Odd planes, per-`q`:** `q=5,7` P by a **mechanism** theorem (not enumeration); `q=11,13` P by
   **kernel-checked certificate assembly** — all four Lean-closed. `q=3,9,17,19,23` computed P (q=23
   via the 22-bucket full-`PGL(2,23)` on-conic census + the full-PGL bridge), not yet Lean-closed;
-  `q=25` partial S4-rooted probe only.
+  `q=25` full-census RUNNING (9/28 full-PGL buckets labeled, all P so far).  All four projective
+  planes of **order 9** (PG(2,9), Hall, dual Hall, Hughes) computed P — the P-property is
+  Desargues-independent at order 9.  The q=17 **(ON)** statement is now *proved from bucket
+  stabilizers* (the capacity lemma: 15 pointed-pairing involutions vs N-capacity `q−4 = 13`).
+- **The L(A) structure theorems (2026-07-10, proved):** every frame-point/on-conic candidate
+  secant, endpoints normalized to `(0,∞)`, has legal cells = the involution pencil `τ_a(t) = a/t`
+  minus the pair products `P2(U)` of the other four frame points — `nlegal = q − d`,
+  `d ∈ {4,5,6}`, all odd prime powers; the round-1 fifteen involutions distribute `3/1/0` per
+  `d = 4/5/6` line; the `d=4` maximizers biject with the involutions of `Stab(A)` (tie counts
+  `1,3,5` or `15`, exactly as observed); `fiber(B) = 30(q−1)/|Stab(B)|` for every on-conic
+  bucket; any completion-automorphism capacity family has supply ≤ 838 = O(1) in q.
 - **Classical-variety harvest (C48/C51/C52)** — new P-families from the generic fpf-involution
   mirror: hyperbolic quadric **`Q⁺(2m−1,q)`**, symplectic polar space **`W(2n−1,q)`**, and Segre
   products **`PG(a,q)×PG(2m−1,q)`**, all P for odd `q`. *(Lean: `HyperbolicQuadricMirror`,
@@ -118,7 +128,18 @@ mirror-certificate compression (zero hits); mixed-column mod-3 law (C29 refuted 
 composite mirror (C32, PG(4,3) fails the seed obligation); **conic ⊕ zone Grundy decomposition —
 C35 empirically FALSE** (the obstruction is a *coupled* invariant, not a disjunctive sum);
 reservoir → Hall/matching transfer (dead below q=38); finite type → value table for on-conic
-children (119 shared configs flip value across q).
+children (119 shared configs flip value across q); static config→value mechanisms — group-side
+(C55), completion-poset (C64), envelope/algebraic (C69), and the dynamic Ψ-trajectory
+discriminator — all refuted; q-blind finite-state reply lookup (C61, six forced q=17/19
+conflicts) and every deterministic argmin selector tested; typicality/genericity and
+protocol-smoothing proofs (closed by theorem); harmonic/design identity for the on-conic value
+function (C72 — spectral mass migrates to the TOP Johnson components as q grows); the reservoir
+truncation as a hidden discriminator (C70 — it masks a deterministic `(q,ply)` drift,
+reply-invariant by proof); PGL center-triangle invariants for the third-intruder transition
+(C71 — the missing coordinate is the labelled live-cell embedding); stabilizer-specialness ⇒ P
+and ALL completion-automorphism capacity families (≤ 838 supply); product-point secant
+selectors; the kill-set-sorted top-k ≤ 4 reply rule (exact at the q=19 root, 11 exact failures
+at q=23 → discharge + explicit exceptions, not another argmin).
 
 **Queens:** SG component decomposition for n=16 (tail 97–100% single-component); modular/twin
 reduction (0% at pc≥13); DFS tail parallelization (transposition-saturated); K=17 dense (negative;
@@ -154,17 +175,35 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
 
 - Equivalence **`PG(2,q)=P ⟺ OddEscapeStatement`** proved **both directions** in Lean
   (`TrapConverse`) — a found residual trap is now a Lean-certifiable projective counterexample.
-- Sharpest target: **(ON)** every size-3 residual has a P-valued **on-conic** size-4 child (verified
-  through q=19; q=23 all-P on-conic bucket census).
-- For **q ≥ 23** the live conic cannot be emptied at the two-ply layer, so the target is
-  **live-conic xor-zero maintenance**: every first move has a P-reply with conic Node-Kayles xor 0
-  (within the first four zero-xor candidates); one bucket (`1,3,4,9`) is verified maintainable through
-  one further coupled move (28,646/28,646 obligations). Termination not proved.
+- **(ON)** — every size-3 residual has a P-valued **on-conic** size-4 child — verified through
+  q=23 but **sharply branched at q=25**: the label-blind fan matrix (8 five-frame orbits) forces
+  `min-witness(25) ∈ {0, ≥3}` (sole open row `R7 = {10:6, 14:3, 16:6, 17:6}`, pivot bucket 14),
+  so q=25 either refutes (ON) or rebounds the `2 → 1` knife edge.  q=17's instance is proved
+  (capacity lemma); the constant-15 supply provably gives nothing at q ≥ 19.
+- **NEW route (L) / (L_forall)** — the max-incidence secant `L(A)` carries a P child on **68/68**
+  computed classes (value-blind; q=17 null base 49% → 100%), and where `L(A)` is tied the common
+  point of the tied lines is P **10/10** (post-hoc, frozen q=25 prediction: Veronese `(1:15:9)`).
+  (L_forall) implies the conjecture, is independent of (ON), and survives min-witness 0.  **The
+  sharpest open lemma is now the one-intruder pencil N-absorption statement:** `IsP(A∪{w})` or
+  some legal pencil center `z_a` (`a ∈ F_q^* \ P2(U)`) gives a P one-intruder state — explicit
+  `τ_a` matching on the Lemma-V/VI classified layer, coupled to the zone; the q=11 knife-edge's
+  mixed 4P/2N pencil is the mandatory base case.
+- **Amortized ledger:** `Ψ = reservoir + 6·components − 4·intruders − 2·[xor=0]` descends on every
+  exact selected transition (q=13/17 full; q=19 existence-complete, 12 relocatable tie rows);
+  `dΨ = [6·dC − 4] + [dReservoir − 2·dXor0]` exactly, and the only reply-varying quantities in
+  either half are **kill-set incidences** (`|K_u ∪ K_v| = −Δzone_v`; `D(z)=∅ ⇒ dC ≤ 0` proved).
+  The selector program's surviving form is **generic discharge + explicit exception classes**
+  (the q=23 residual is 7 rigid incidence classes), not bounded argmin rules.
+- For **q ≥ 23** the live conic cannot be emptied at the two-ply layer (depletion ladder
+  `live_on ≥ q − (t²+5t+5)`); one bucket (`1,3,4,9`) verified xor-zero-maintainable through one
+  further coupled move (28,646/28,646 obligations). Termination not proved.
 - **Even-dimensional odd-`q` (`PG(2m,q)`, m≥2) now has its first direct outcome:** C43 exactly
   solved **`PG(4,3) = P`** in 3.7 s / 25,258 orbit-canon memo states, with independent
   move-order/canonicalization cross-checks.  The uniform family remains open, and no second board
   in it has been solved.
-- Prize calibrated ~20–25%, de-risked into the D-items (§8).
+- Prize recalibrated 2026-07-10: eventual uniform proof ~35–45% (upper half contingent on the
+  q=25 unblind — buckets 10/14/16/17 + the frozen concurrence point), up from ~20–25%; de-risked
+  into the D-items (§8).
 
 **Queens:** exact **G(18)** (the nimber; outcome already settled). ~300–500B nodes, ~1.5–2 days per
 ascending-`k` round, **no checkpoint/resume**; policy is `k=1` first (~55% one-shot). Further out:
@@ -200,7 +239,12 @@ grid-cap engine and host of the **S4 memo-dump / query / mining toolchain**: `s4
 conjecture-miner, not a player; a genuinely fresh CGT move), `s4query` (line-protocol shell:
 `state`/`moves`/`play`/`pop`/`replies`), `s4mine`/`s4xormine` (feature + targeted Node-Kayles-xor
 reply miners), `s4gcheck`/`s4gmeasure`/`s4gdistill`/`s4gremote` (Grundy validation, strategy-freedom,
-remoteness), `s4bucketlist`. Plus `escape`/`esc`/`feat`/`cert`/`certcheck`/`mir`/`resym`.
+remoteness), `s4bucketlist`, **`s4arena`** (16-byte-arena bucket labeling — the q=25 census
+engine), `s4potential`/`s4potentialprobe` (Ψ obligation extraction/replay), `s4triple`
+(2→3-intruder transition miner). Plus `escape`/`esc`/`feat`/`cert`/`certcheck`/`mir`/`resym`.
+Analysis scripts `rust/scripts/c6x–c74 + r2_*`: the Ψ LP fit, reply-automaton quotients, f_q
+spectral decomposition, line-pencil/fan-orbit/concurrence verifiers, off-conic margins, kill-set
+top-k replay.
 
 **Sum-free solvers:** Rust (`sumfree.rs` cyclic Grundy; `capset2/5.rs` u128/256-bit AGL-canonical),
 Go (`sumfree.go` full-`Aut(G)` negamax; `sumfree_par.go` sharded-parallel + pairing verifier;
@@ -271,11 +315,13 @@ outcome indicator, Paley-game sequence, A316632 extension.
   proposal, task queue, day-plans, line-capacity vets); **Codex** = execution (compute campaigns, ML
   attribution, Lean scaffolds, `[REPORTED]` per-task notes); **Claude/Opus** = a subset incl. the
   C48/C51/C52 mirror harvest + Lean landings, C53.
-- **Task queue** (`notes/2026-07-07-codex-task-queue.md`): C1–C28 largely closed; the C29–C54 band
-  drives the frontier. C43 has reported `PG(4,3) = P`; its follow-up is strategy extraction, while
-  open high-value compute includes **C44**
-  (q=25 census), **C45–C47** (defect-skeleton / depletion-ladder / minimal-CE constraints), **C50**
-  (kernel-checked Grundy certs), **C54** (q=23 bucket-label certification).
+- **Task queue** (`notes/2026-07-07-codex-task-queue.md`): C1–C28 largely closed; the **C29–C74**
+  band drives the frontier.  2026-07-10 landed C70–C74 (five parallel Opus sub-tasks + the Codex
+  round-1/round-2 theorem-frontier reports, all independently verified before adoption).  Open
+  high-value items: the **one-intruder pencil lemma** (the sharpest proof target), the **q=25
+  targeted unblind** (buckets 10/14/16/17 + the frozen `(1:15:9)` concurrence point, census
+  running), the **7-class q=23 exception analysis** (discharge + exceptions form), C30 (q17/q19
+  Lean assembly, gated), C54 follow-ons.
 - **Named-expert-personas system:** dossiers on real mathematicians (`notes/expert-personas/`) loaded
   as *proof-context lenses* before nontrivial Lean work — Lean-CGT maintainer, finite-group game
   theorist, mirror-strategy skeptic, Mathlib projective geometer, finite-arc specialist,

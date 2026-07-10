@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-09** — four working weeks, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-10** — four-plus working weeks, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
 
 The arc in one line: **Othello engine → Queens solver + open problem → CGT theory pivot →
@@ -60,6 +60,39 @@ projective-cap program**, with Lean formalization ramping alongside from week 2 
   decomposition proven FALSE** (C35), redirecting the kernel to a coupled maintenance invariant;
   tablebase distillation / remoteness / type-census diagnostics (C36–C42); the Node-Kayles
   double-encoding gap **CLOSED** in Lean; and the deliverables proposal + line-capacity novelty vet.
+
+## Week 5 — Jul 10 · Rounds 1–2: the L(A) route emerges
+
+- **Codex program assessment adopted (morning):** the (ON)-vs-conjecture bifurcation
+  pre-registered into C44; C70–C72 queued; the C61 successor reframed *existential*
+  (admissible-reply set over incidence data, no more deterministic argmin rules).
+- **Four parallel Opus sub-tasks:** the C44 off-conic rider (worst-class fallback margin `8 → 4`,
+  co-depletes with the on-conic layer at q=17); **C70** (exact collision charge
+  `M = E + delta0col` proved — the Ψ truncation hides a deterministic `(q,ply)` drift, not a
+  reply discriminator); **C71** (the 2→3-intruder transition is NOT center-geometric; the missing
+  coordinate is the labelled live-cell embedding; `dΨ = [6·dC−4] + [dReservoir−2·dXor0]` exactly;
+  `D(z)=∅ ⇒ dC ≤ 0` proved); **C72** (no harmonic identity for `f_q`; exact gift
+  `f_q ⊥ V₁⊕V₂⊕V₃`).  Synthesis: the only reply-varying quantities in `dΨ` are **kill-set
+  incidences** — three independent tasks converged on the same coordinate.
+- **Codex round 1 (verified before adoption):** the involutive-completion lemma (15 constructions
+  per five-frame); `fiber(B) = 30(q−1)/|Stab(B)|`; the **q=17 (ON) statement PROVED from bucket
+  stabilizers** (capacity 15 > q−4 = 13) — the first structural explanation of the knife edge;
+  stabilizer-specialness ⇒ P refuted; the q=17 **secant packet** found (all five P escapes of
+  each knife-edge class on one line through the on-conic witness).
+- **C73 (Opus):** the packet made value-blind — `L(A)` = the max-legal-incidence secant carries a
+  P escape **68/68** across q=11–19 (q=17 null base 49% → 100%); witness-anchoring refuted;
+  label-blind q=25 test pre-registered.
+- **Codex round 2 (verified):** the `L(A)` algebra completely solved — the involution pencil
+  `τ_a(t) = a/t` minus the pair products `P2(U)`, `nlegal = q − d`, with the tie theorem via
+  `Stab(A)` involutions retro-explaining every observed tie; the stabilizer-capacity route closed
+  by the ≤ 838 counting bound; the kill-set top-k ≤ 4 rule refuted at q=23 (11 exact failures in
+  7 rigid classes → **generic discharge + explicit exceptions** becomes the selector program's
+  form); the tied-line **concurrence point** P 10/10; the label-blind q=25 fan matrix forcing
+  **`min-witness(25) = 0 or ≥ 3`** (pivot bucket 14; Veronese point `(1:15:9)` frozen as
+  predicted P).  Route **(L_forall)** named; the sharpest open lemma is now the **one-intruder
+  pencil N-absorption statement**.
+- **q=25 census** (8 GB `s4arena`, hours-scale) running throughout: 9/28 buckets labeled, all P.
+  Prize recalibrated ~35–45% eventual, upper half riding on the q=25 unblind.
 
 ---
 
