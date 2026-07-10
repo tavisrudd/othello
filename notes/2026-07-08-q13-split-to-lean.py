@@ -50,6 +50,13 @@ def invalid_kind(a: int, b: int) -> str:
     raise ValueError(f"unexpected invalid anchored cell {(a, b)}")
 
 
+NODE_CHUNK_GROUP_SIZE = 32
+NODE_CHUNK_SIZE = 10
+STEPDATA_CHUNK_SIZE = 1
+STEPDATA_CHUNK_GROUP_SIZE = NODE_CHUNK_GROUP_SIZE * NODE_CHUNK_SIZE
+STEPDATA_SUBGROUP_SIZE = NODE_CHUNK_SIZE
+
+
 def emit_base(q: int, anchor_gen) -> str:
     cells = [(r, c) for r in range(q) for c in range(q)]
     cell_chunks = anchor_gen.chunks(cells, 11)
@@ -111,21 +118,32 @@ def emit_class(q: int, rec, anchor_gen) -> str:
         lines.append(f"def {pfx}_node{nid} : List P :=")
         lines.append(f"  {anchor_gen.lean_list([anchor_gen.lean_point(c) for c in rec.nodes[nid]], 'P')}")
     node_names = [f"{pfx}_node{nid}" for nid in sorted(rec.nodes)]
-    node_chunks = anchor_gen.chunks(node_names, 10)
+    node_chunks = anchor_gen.chunks(node_names, NODE_CHUNK_SIZE)
     node_chunk_names = []
     for idx, chunk in enumerate(node_chunks):
         cname = f"{pfx}_nodeChunk{idx}"
         node_chunk_names.append(cname)
         lines.append(f"def {cname} : List (List P) :=")
         lines.append(f"  {anchor_gen.lean_list(chunk, 'List P')}")
+    node_chunk_groups = anchor_gen.chunks(node_chunk_names, NODE_CHUNK_GROUP_SIZE)
+    node_chunk_group_names = []
+    for idx, chunk in enumerate(node_chunk_groups):
+        cname = f"{pfx}_nodeChunkGroup{idx}"
+        node_chunk_group_names.append(cname)
+        lines.append(f"def {cname} : List (List (List P)) :=")
+        lines.append(f"  {anchor_gen.lean_list(chunk, 'List (List P)')}")
+    lines.append(f"def {pfx}_nodeChunkGroups : List (List (List (List P))) :=")
+    lines.append(f"  {anchor_gen.lean_list(node_chunk_group_names, 'List (List (List P))')}")
     lines.append(f"def {pfx}_nodeChunks : List (List (List P)) :=")
-    lines.append(f"  {anchor_gen.lean_list(node_chunk_names, 'List (List P)')}")
+    lines.append(f"  {pfx}_nodeChunkGroups.flatten")
     lines.append(f"def {pfx}_nodes : List (List P) :=")
     lines.append(f"  {pfx}_nodeChunks.flatten")
     row_names = []
+    rows_by_node = {nid: [] for nid in sorted(rec.nodes)}
     for ridx, (nid, mover, reply, cid) in enumerate(rec.rows):
         rname = f"{pfx}_row{ridx}"
         row_names.append(rname)
+        rows_by_node[nid].append(rname)
         lines.append(f"def {rname} : CertCheck.RowData K where")
         lines.append(f"  node := {pfx}_node{nid}")
         lines.append(f"  mover := {anchor_gen.lean_point(mover)}")
@@ -149,6 +167,10 @@ def emit_class(q: int, rec, anchor_gen) -> str:
     lines.append(f"  rows := {pfx}_rows")
     lines.append(f"theorem {pfx}_nodeChunks_flatten : {pfx}_nodeChunks.flatten = {pfx}_book.nodes := by")
     lines.append("  rfl")
+    lines.append(
+        f"theorem {pfx}_nodeChunkGroups_flatten : {pfx}_nodeChunkGroups.flatten.flatten = {pfx}_book.nodes := by"
+    )
+    lines.append("  rfl")
     lines.append(f"theorem {pfx}_rowChunks_flatten : {pfx}_rowChunks.flatten = {pfx}_book.rows := by")
     lines.append("  rfl")
     lines.append(f"theorem {pfx}_cellChunks_flatten : allCellChunks.flatten = {pfx}_book.cells := by")
@@ -163,7 +185,7 @@ def emit_class(q: int, rec, anchor_gen) -> str:
     lines.append(f"  witness := {anchor_gen.lean_point(rec.witness)}")
     lines.append(f"  book := {pfx}_book")
     lines.append(f"def {pfx} : GridClassCert K :=")
-    lines.append(f"  {pfx}_data.toCert")
+    lines.append(f"  {pfx}_data.toLooseCert")
     lines.append(f"theorem {pfx}_size_check :")
     lines.append(f"    decide ({pfx}_s3.toFinset.card = 3) = true := by")
     lines.append("  rfl")
@@ -208,78 +230,178 @@ def emit_class(q: int, rec, anchor_gen) -> str:
             + [f"{pfx}_node{nid}_cap_check" for nid in chunk_node_ids]
         )
         lines.append(f"  simp only [CertCheck.allShort, {simp_terms}, reduceIte]")
+    node_chunk_group_check_names = []
+    for idx, chunk in enumerate(node_chunk_groups):
+        cname = f"{pfx}_nodeChunkGroup{idx}_check"
+        node_chunk_group_check_names.append(cname)
+        lines.append(f"theorem {cname} :")
+        lines.append(
+            f"    CertCheck.BookData.checkNodesChunks (K := K) {pfx}_book {pfx}_nodeChunkGroup{idx} = true := by"
+        )
+        simp_terms = ", ".join(
+            ["CertCheck.BookData.checkNodesChunks", f"{pfx}_nodeChunkGroup{idx}"]
+            + [f"{name}_check" for name in chunk]
+        )
+        lines.append(f"  simp only [CertCheck.allShort, {simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_nodeChunkGroups_check :")
+    lines.append(
+        f"    CertCheck.allShort (fun chunks => CertCheck.BookData.checkNodesChunks (K := K) {pfx}_book chunks) {pfx}_nodeChunkGroups = true := by"
+    )
+    node_group_simp_terms = ", ".join(
+        ["CertCheck.allShort", f"{pfx}_nodeChunkGroups"] + node_chunk_group_check_names
+    )
+    lines.append(f"  simp only [{node_group_simp_terms}, reduceIte]")
     lines.append(f"theorem {pfx}_nodeChunks_check :")
     lines.append(
         f"    CertCheck.BookData.checkNodesChunks (K := K) {pfx}_book {pfx}_nodeChunks = true := by"
     )
-    node_chunk_simp_terms = ", ".join(
-        ["CertCheck.BookData.checkNodesChunks", f"{pfx}_nodeChunks"] + node_chunk_check_names
+    lines.append(f"  unfold CertCheck.BookData.checkNodesChunks {pfx}_nodeChunks")
+    lines.append("  exact CertCheck.allShort_flatten_true")
+    lines.append(
+        f"    (fun nodes => CertCheck.allShort (fun S => CertCheck.checkCap (K := K) S) nodes) {pfx}_nodeChunkGroups_check"
     )
-    lines.append(f"  simp only [CertCheck.allShort, {node_chunk_simp_terms}, reduceIte]")
     lines.append(f"theorem {pfx}_nodes_check :")
     lines.append(f"    CertCheck.BookData.checkNodes (K := K) {pfx}_book = true := by")
     lines.append(
         f"  exact CertCheck.BookData.checkNodes_of_chunks (K := K) {pfx}_nodeChunks_flatten {pfx}_nodeChunks_check"
     )
-    step_names = []
+    step_data_names = []
     for nid in sorted(rec.nodes):
-        cname = f"{pfx}_step{nid}_all_chunks_check"
+        local_rows_name = f"{pfx}_node{nid}_rows"
+        lines.append(f"def {local_rows_name} : List (CertCheck.RowData K) :=")
+        lines.append(
+            f"  {anchor_gen.lean_list(rows_by_node[nid], 'CertCheck.RowData K')}"
+        )
+        step_data_name = f"{pfx}_stepData{nid}"
+        step_data_names.append(step_data_name)
+        lines.append(f"def {step_data_name} : CertCheck.StepData K where")
+        lines.append(f"  node := {pfx}_node{nid}")
+        lines.append(f"  rows := {local_rows_name}")
+    step_data_chunks = anchor_gen.chunks(step_data_names, STEPDATA_CHUNK_SIZE)
+    step_data_chunk_names = []
+    for idx, chunk in enumerate(step_data_chunks):
+        cname = f"{pfx}_stepDataChunk{idx}"
+        step_data_chunk_names.append(cname)
+        lines.append(f"def {cname} : List (CertCheck.StepData K) :=")
+        lines.append(f"  {anchor_gen.lean_list(chunk, 'CertCheck.StepData K')}")
+    step_data_chunk_groups = anchor_gen.chunks(step_data_chunk_names, STEPDATA_CHUNK_GROUP_SIZE)
+    step_data_chunk_group_names = []
+    for idx, chunk in enumerate(step_data_chunk_groups):
+        cname = f"{pfx}_stepDataChunkGroup{idx}"
+        step_data_chunk_group_names.append(cname)
+        lines.append(f"def {cname} : List (List (CertCheck.StepData K)) :=")
+        lines.append(f"  {anchor_gen.lean_list(chunk, 'List (CertCheck.StepData K)')}")
+    lines.append(f"def {pfx}_stepDataChunkGroups : List (List (List (CertCheck.StepData K))) :=")
+    lines.append(
+        f"  {anchor_gen.lean_list(step_data_chunk_group_names, 'List (List (CertCheck.StepData K))')}"
+    )
+    lines.append(f"def {pfx}_stepDataChunks : List (List (CertCheck.StepData K)) :=")
+    lines.append(f"  {pfx}_stepDataChunkGroups.flatten")
+    lines.append(f"def {pfx}_stepDataList : List (CertCheck.StepData K) :=")
+    lines.append(f"  {pfx}_stepDataChunks.flatten")
+    lines.append(f"theorem {pfx}_stepDataChunks_flatten :")
+    lines.append(f"    {pfx}_stepDataChunks.flatten = {pfx}_stepDataList := by")
+    lines.append("  rfl")
+    if len(step_data_chunk_groups) != len(node_chunk_groups):
+        raise ValueError(
+            f"class {rec.ci}: step-data groups and node groups are not aligned"
+        )
+    step_data_chunk_group_node_check_names = []
+    for idx in range(len(step_data_chunk_groups)):
+        cname = f"{pfx}_stepDataChunkGroup{idx}_nodes_check"
+        step_data_chunk_group_node_check_names.append(cname)
         lines.append(f"theorem {cname} :")
         lines.append(
-            f"    CertCheck.BookData.checkNodeStepChunksWithAll (K := K) {pfx}_book {pfx}_nodeChunks {pfx}_rowChunks {pfx}_node{nid} allCellChunks = true := by"
+            f"    CertCheck.BookData.checkStepDataNodeChunks (K := K) {pfx}_stepDataChunkGroup{idx} {pfx}_nodeChunkGroup{idx} = true := by"
         )
         lines.append("  rfl")
-        sname = f"{pfx}_step{nid}_check"
-        step_names.append(sname)
-        lines.append(f"theorem {sname} :")
-        lines.append(
-            f"    CertCheck.BookData.checkNodeStep (K := K) {pfx}_book {pfx}_node{nid} = true := by"
-        )
-        lines.append(
-            f"  exact CertCheck.BookData.checkNodeStep_of_all_chunks (K := K) {pfx}_nodeChunks_flatten {pfx}_rowChunks_flatten {pfx}_cellChunks_flatten {cname}"
-        )
-    step_chunk_check_names = []
-    for idx, chunk in enumerate(node_chunks):
-        cname = f"{pfx}_stepChunk{idx}_check"
-        step_chunk_check_names.append(cname)
+    lines.append(f"theorem {pfx}_stepData_nodes_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepDataNodeChunkGroups (K := K) {pfx}_stepDataChunkGroups {pfx}_nodeChunkGroups = true := by"
+    )
+    step_data_nodes_simp_terms = ", ".join(
+        [
+            "CertCheck.BookData.checkStepDataNodeChunkGroups",
+            f"{pfx}_stepDataChunkGroups",
+            f"{pfx}_nodeChunkGroups",
+            "Bool.true_and",
+        ]
+        + step_data_chunk_group_node_check_names
+    )
+    lines.append(f"  simp only [{step_data_nodes_simp_terms}]")
+    lines.append(f"theorem {pfx}_stepData_nodes_eq :")
+    lines.append(
+        f"    {pfx}_stepDataList.map CertCheck.StepData.node = {pfx}_book.nodes := by"
+    )
+    lines.append(
+        f"  simpa [{pfx}_stepDataList, {pfx}_stepDataChunks, {pfx}_book, {pfx}_nodes, {pfx}_nodeChunks]"
+    )
+    lines.append(
+        f"    using CertCheck.BookData.checkStepDataNodeChunkGroups_sound {pfx}_stepData_nodes_check"
+    )
+    step_data_chunk_check_names = []
+    for idx, _chunk in enumerate(step_data_chunks):
+        cname = f"{pfx}_stepDataChunk{idx}_check"
+        step_data_chunk_check_names.append(cname)
         lines.append(f"theorem {cname} :")
         lines.append(
-            f"    CertCheck.allShort (fun S => CertCheck.BookData.checkNodeStep (K := K) {pfx}_book S) {pfx}_nodeChunk{idx} = true := by"
+            f"    CertCheck.BookData.checkStepDataList (K := K) {pfx}_book {pfx}_nodeChunks allCellChunks {pfx}_stepDataChunk{idx} = true := by"
         )
-        chunk_node_ids = [name.removeprefix(f"{pfx}_node") for name in chunk]
+        lines.append("  rfl")
+    step_data_chunk_group_check_names = []
+    for idx, chunk in enumerate(step_data_chunk_groups):
+        cname = f"{pfx}_stepDataChunkGroup{idx}_check"
+        step_data_chunk_group_check_names.append(cname)
+        lines.append(f"theorem {cname} :")
+        lines.append(
+            f"    CertCheck.BookData.checkStepDataChunks (K := K) {pfx}_book {pfx}_nodeChunks allCellChunks {pfx}_stepDataChunkGroup{idx} = true := by"
+        )
         simp_terms = ", ".join(
-            [f"{pfx}_nodeChunk{idx}"]
-            + [f"{pfx}_step{nid}_check" for nid in chunk_node_ids]
+            ["CertCheck.BookData.checkStepDataChunks", f"{pfx}_stepDataChunkGroup{idx}"]
+            + [f"{name}_check" for name in chunk]
         )
         lines.append(f"  simp only [CertCheck.allShort, {simp_terms}, reduceIte]")
-    lines.append(f"theorem {pfx}_stepChunks_check :")
-    lines.append(f"    CertCheck.BookData.checkStepsChunks (K := K) {pfx}_book {pfx}_nodeChunks = true := by")
-    step_chunk_simp_terms = ", ".join(
-        ["CertCheck.BookData.checkStepsChunks", f"{pfx}_nodeChunks"] + step_chunk_check_names
-    )
-    lines.append(f"  simp only [CertCheck.allShort, {step_chunk_simp_terms}, reduceIte]")
-    lines.append(f"theorem {pfx}_steps_check :")
-    lines.append(f"    CertCheck.BookData.checkSteps (K := K) {pfx}_book = true := by")
+    lines.append(f"theorem {pfx}_stepDataChunkGroups_check :")
     lines.append(
-        f"  exact CertCheck.BookData.checkSteps_of_chunks (K := K) {pfx}_nodeChunks_flatten {pfx}_stepChunks_check"
+        f"    CertCheck.allShort (fun chunks => CertCheck.BookData.checkStepDataChunks (K := K) {pfx}_book {pfx}_nodeChunks allCellChunks chunks) {pfx}_stepDataChunkGroups = true := by"
+    )
+    step_data_group_simp_terms = ", ".join(
+        ["CertCheck.allShort", f"{pfx}_stepDataChunkGroups"] + step_data_chunk_group_check_names
+    )
+    lines.append(f"  simp only [{step_data_group_simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_stepDataChunks_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepDataChunks (K := K) {pfx}_book {pfx}_nodeChunks allCellChunks {pfx}_stepDataChunks = true := by"
+    )
+    lines.append(f"  unfold CertCheck.BookData.checkStepDataChunks {pfx}_stepDataChunks")
+    lines.append("  exact CertCheck.allShort_flatten_true")
+    lines.append(
+        f"    (fun steps => CertCheck.BookData.checkStepDataList (K := K) {pfx}_book {pfx}_nodeChunks allCellChunks steps) {pfx}_stepDataChunkGroups_check"
+    )
+    lines.append(f"theorem {pfx}_stepDataList_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepDataList (K := K) {pfx}_book {pfx}_nodeChunks allCellChunks {pfx}_stepDataList = true := by"
+    )
+    lines.append(f"  unfold {pfx}_stepDataList")
+    lines.append(
+        f"  exact CertCheck.BookData.checkStepDataList_of_chunks (K := K) {pfx}_stepDataChunks_check"
     )
     lines.append(f"theorem {pfx}_book_valid :")
-    lines.append(f"    {pfx}_book.toDAG.ValidFor (GridCap (K := K)) := by")
+    lines.append(f"    {pfx}_book.toLooseDAG.ValidFor (GridCap (K := K)) := by")
     lines.append(f"  have hcells : ∀ x : GridPoint K, x ∈ {pfx}_book.cells := by")
     lines.append("    intro x")
     lines.append(f"    rw [{pfx}_book_cells_eq]")
     lines.append("    exact allCells_mem x")
-    lines.append("  unfold CertCheck.BookData.toDAG")
-    lines.append("  exact FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows")
-    lines.append("    (Valid := GridCap (K := K))")
-    lines.append(f"    (root := {pfx}_book.root.toFinset)")
-    lines.append(f"    (nodes := {pfx}_book.nodesFinset)")
-    lines.append(f"    (rows := {pfx}_book.rowsFinset)")
+    lines.append("  exact CertCheck.BookData.validForLoose_of_stepData (K := K)")
     lines.append(f"    {pfx}_root_mem")
-    lines.append(f"    (CertCheck.BookData.checkNodes_sound (K := K) {pfx}_nodes_check)")
-    lines.append(f"    (CertCheck.BookData.checkSteps_sound (K := K) hcells {pfx}_steps_check)")
+    lines.append(f"    {pfx}_nodes_check")
+    lines.append("    hcells")
+    lines.append(f"    {pfx}_nodeChunks_flatten")
+    lines.append(f"    {pfx}_cellChunks_flatten")
+    lines.append(f"    {pfx}_stepData_nodes_eq")
+    lines.append(f"    {pfx}_stepDataList_check")
     lines.append(f"theorem {pfx}_valid : {pfx}.Valid := by")
-    lines.append(f"  unfold {pfx} CertCheck.ClassData.toCert GridClassCert.Valid")
+    lines.append(f"  unfold {pfx} CertCheck.ClassData.toLooseCert GridClassCert.Valid")
     lines.append("  refine ⟨?_, ?_, ?_, ?_, ?_⟩")
     lines.append(f"  · exact of_decide_eq_true {pfx}_size_check")
     lines.append(f"  · exact CertCheck.checkCap_sound (K := K) {pfx}_s3_cap_check")
@@ -297,6 +419,527 @@ def emit_class(q: int, rec, anchor_gen) -> str:
         "",
     ])
     return "\n".join(lines)
+
+
+def class_split_layout(rec, anchor_gen):
+    pfx = class_prefix(rec.ci)
+    node_ids = sorted(rec.nodes)
+    node_pos = {nid: idx for idx, nid in enumerate(node_ids)}
+    node_names = [f"{pfx}_node{nid}" for nid in node_ids]
+    node_chunks = anchor_gen.chunks(node_names, NODE_CHUNK_SIZE)
+    node_chunk_names = [f"{pfx}_nodeChunk{idx}" for idx in range(len(node_chunks))]
+    node_chunk_groups = anchor_gen.chunks(node_chunk_names, NODE_CHUNK_GROUP_SIZE)
+    node_chunk_group_names = [
+        f"{pfx}_nodeChunkGroup{idx}" for idx in range(len(node_chunk_groups))
+    ]
+
+    row_names = []
+    rows_by_node = {nid: [] for nid in node_ids}
+    row_refs_by_node = {nid: [] for nid in node_ids}
+    row_child_ref = {}
+    group_span = NODE_CHUNK_GROUP_SIZE * NODE_CHUNK_SIZE
+    for ridx, (nid, _mover, _reply, _cid) in enumerate(rec.rows):
+        rname = f"{pfx}_row{ridx}"
+        refname = f"{pfx}_rowRef{ridx}"
+        row_names.append(rname)
+        rows_by_node[nid].append(rname)
+        row_refs_by_node[nid].append(refname)
+        child_pos = node_pos[_cid]
+        row_child_ref[rname] = (
+            child_pos // group_span,
+            (child_pos % group_span) // NODE_CHUNK_SIZE,
+            child_pos % NODE_CHUNK_SIZE,
+        )
+    row_chunks = anchor_gen.chunks(row_names, 4)
+    row_chunk_names = [f"{pfx}_rowChunk{idx}" for idx in range(len(row_chunks))]
+
+    step_data_names = [f"{pfx}_stepData{nid}" for nid in node_ids]
+    step_data_chunks = anchor_gen.chunks(step_data_names, STEPDATA_CHUNK_SIZE)
+    step_data_chunk_names = [
+        f"{pfx}_stepDataChunk{idx}" for idx in range(len(step_data_chunks))
+    ]
+    step_data_chunk_groups = anchor_gen.chunks(
+        step_data_chunk_names, STEPDATA_CHUNK_GROUP_SIZE
+    )
+    step_data_chunk_group_names = [
+        f"{pfx}_stepDataChunkGroup{idx}"
+        for idx in range(len(step_data_chunk_groups))
+    ]
+    if len(step_data_chunk_groups) != len(node_chunk_groups):
+        raise ValueError(
+            f"class {rec.ci}: step-data groups and node groups are not aligned"
+        )
+    return {
+        "node_ids": node_ids,
+        "node_pos": node_pos,
+        "node_names": node_names,
+        "node_chunks": node_chunks,
+        "node_chunk_names": node_chunk_names,
+        "node_chunk_groups": node_chunk_groups,
+        "node_chunk_group_names": node_chunk_group_names,
+        "row_names": row_names,
+        "rows_by_node": rows_by_node,
+        "row_refs_by_node": row_refs_by_node,
+        "row_child_ref": row_child_ref,
+        "row_chunks": row_chunks,
+        "row_chunk_names": row_chunk_names,
+        "step_data_names": step_data_names,
+        "step_data_chunks": step_data_chunks,
+        "step_data_chunk_names": step_data_chunk_names,
+        "step_data_chunk_groups": step_data_chunk_groups,
+        "step_data_chunk_group_names": step_data_chunk_group_names,
+    }
+
+
+def emit_class_base(q: int, rec, anchor_gen, layout) -> str:
+    ns = f"Q{q}"
+    pfx = class_prefix(rec.ci)
+    witness_term = f"({anchor_gen.lean_point(rec.witness)})"
+    node_chunks = layout["node_chunks"]
+    node_chunk_groups = layout["node_chunk_groups"]
+    node_chunk_names = layout["node_chunk_names"]
+    node_chunk_group_names = layout["node_chunk_group_names"]
+    row_chunks = layout["row_chunks"]
+    row_chunk_names = layout["row_chunk_names"]
+
+    lines: list[str] = [
+        f"import ProjectiveCap.CertData.{ns}.Base",
+        "",
+        "namespace ProjectiveCap",
+        "namespace Certificate",
+        "namespace CertData",
+        f"namespace {ns}",
+        "",
+    ]
+    lines.append(f"def {pfx}_s3 : List P :=")
+    lines.append(f"  {anchor_gen.lean_list([anchor_gen.lean_point(c) for c in rec.s3], 'P')}")
+    for nid in layout["node_ids"]:
+        lines.append(f"def {pfx}_node{nid} : List P :=")
+        lines.append(f"  {anchor_gen.lean_list([anchor_gen.lean_point(c) for c in rec.nodes[nid]], 'P')}")
+    for idx, chunk in enumerate(node_chunks):
+        lines.append(f"def {pfx}_nodeChunk{idx} : List (List P) :=")
+        lines.append(f"  {anchor_gen.lean_list(chunk, 'List P')}")
+    for idx, chunk in enumerate(node_chunk_groups):
+        lines.append(f"def {pfx}_nodeChunkGroup{idx} : List (List (List P)) :=")
+        lines.append(f"  {anchor_gen.lean_list(chunk, 'List (List P)')}")
+    lines.append(f"def {pfx}_nodeChunkGroups : List (List (List (List P))) :=")
+    lines.append(f"  {anchor_gen.lean_list(node_chunk_group_names, 'List (List (List P))')}")
+    lines.append(f"def {pfx}_nodeChunks : List (List (List P)) :=")
+    lines.append(f"  {pfx}_nodeChunkGroups.flatten")
+    lines.append(f"def {pfx}_nodes : List (List P) :=")
+    lines.append(f"  {pfx}_nodeChunks.flatten")
+
+    for ridx, (nid, mover, reply, cid) in enumerate(rec.rows):
+        rname = f"{pfx}_row{ridx}"
+        lines.append(f"def {rname} : CertCheck.RowData K where")
+        lines.append(f"  node := {pfx}_node{nid}")
+        lines.append(f"  mover := {anchor_gen.lean_point(mover)}")
+        lines.append(f"  reply := {anchor_gen.lean_point(reply)}")
+        lines.append(f"  child := {pfx}_node{cid}")
+    for idx, chunk in enumerate(row_chunks):
+        lines.append(f"def {pfx}_rowChunk{idx} : List (CertCheck.RowData K) :=")
+        lines.append(f"  {anchor_gen.lean_list(chunk, 'CertCheck.RowData K')}")
+    lines.append(f"def {pfx}_rowChunks : List (List (CertCheck.RowData K)) :=")
+    lines.append(f"  {anchor_gen.lean_list(row_chunk_names, 'List (CertCheck.RowData K)')}")
+    lines.append(f"def {pfx}_rows : List (CertCheck.RowData K) :=")
+    lines.append(f"  {pfx}_rowChunks.flatten")
+    lines.append(f"def {pfx}_book : CertCheck.BookData K where")
+    lines.append("  cells := allCells")
+    lines.append(f"  root := {pfx}_node0")
+    lines.append(f"  nodes := {pfx}_nodes")
+    lines.append(f"  rows := {pfx}_rows")
+    lines.append(f"theorem {pfx}_nodeChunks_flatten : {pfx}_nodeChunks.flatten = {pfx}_book.nodes := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_rowChunks_flatten : {pfx}_rowChunks.flatten = {pfx}_book.rows := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_cellChunks_flatten : allCellChunks.flatten = {pfx}_book.cells := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_book_cells_eq : {pfx}_book.cells = allCells := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_book_nodes_eq : {pfx}_book.nodes = {pfx}_nodes := by")
+    lines.append("  rfl")
+    lines.append(f"def {pfx}_data : CertCheck.ClassData K where")
+    lines.append(f"  classIndex := {rec.ci}")
+    lines.append(f"  sizeThree := {pfx}_s3")
+    lines.append(f"  witness := {anchor_gen.lean_point(rec.witness)}")
+    lines.append(f"  book := {pfx}_book")
+    lines.append(f"def {pfx} : GridClassCert K :=")
+    lines.append(f"  {pfx}_data.toLooseCert")
+    lines.append(f"theorem {pfx}_size_check :")
+    lines.append(f"    decide ({pfx}_s3.toFinset.card = 3) = true := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_s3_cap_check :")
+    lines.append(f"    CertCheck.checkCap (K := K) {pfx}_s3 = true := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_witness_check :")
+    lines.append(f"    CertCheck.checkMove (K := K) {pfx}_s3 {witness_term} = true := by")
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_root_eq_check :")
+    lines.append(
+        f"    decide ({pfx}_book.root.toFinset = insert {witness_term} {pfx}_s3.toFinset) = true := by"
+    )
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_root_node_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkNodeMemberChunks (K := K) {pfx}_book.root.toFinset {pfx}_nodeChunks = true := by"
+    )
+    lines.append("  rfl")
+    lines.append(f"theorem {pfx}_root_mem : {pfx}_book.root.toFinset ∈ {pfx}_book.nodesFinset := by")
+    lines.append(
+        f"  exact CertCheck.BookData.checkNodeMember_of_chunks (K := K) {pfx}_nodeChunks_flatten {pfx}_root_node_check"
+    )
+
+    for nid in layout["node_ids"]:
+        lines.append(f"theorem {pfx}_node{nid}_cap_check :")
+        lines.append(f"    CertCheck.checkCap (K := K) {pfx}_node{nid} = true := by")
+        lines.append("  rfl")
+    for idx, chunk in enumerate(node_chunks):
+        lines.append(f"theorem {pfx}_nodeChunk{idx}_check :")
+        lines.append(
+            f"    CertCheck.allShort (fun S => CertCheck.checkCap (K := K) S) {pfx}_nodeChunk{idx} = true := by"
+        )
+        chunk_node_ids = [name.removeprefix(f"{pfx}_node") for name in chunk]
+        simp_terms = ", ".join(
+            [f"{pfx}_nodeChunk{idx}"]
+            + [f"{pfx}_node{nid}_cap_check" for nid in chunk_node_ids]
+        )
+        lines.append(f"  simp only [CertCheck.allShort, {simp_terms}, reduceIte]")
+    node_chunk_group_check_names = []
+    for idx, chunk in enumerate(node_chunk_groups):
+        cname = f"{pfx}_nodeChunkGroup{idx}_check"
+        node_chunk_group_check_names.append(cname)
+        lines.append(f"theorem {cname} :")
+        lines.append(
+            f"    CertCheck.BookData.checkNodesChunks (K := K) {pfx}_book {pfx}_nodeChunkGroup{idx} = true := by"
+        )
+        simp_terms = ", ".join(
+            ["CertCheck.BookData.checkNodesChunks", f"{pfx}_nodeChunkGroup{idx}"]
+            + [f"{name}_check" for name in chunk]
+        )
+        lines.append(f"  simp only [CertCheck.allShort, {simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_nodeChunkGroups_check :")
+    lines.append(
+        f"    CertCheck.allShort (fun chunks => CertCheck.BookData.checkNodesChunks (K := K) {pfx}_book chunks) {pfx}_nodeChunkGroups = true := by"
+    )
+    node_group_simp_terms = ", ".join(
+        ["CertCheck.allShort", f"{pfx}_nodeChunkGroups"] + node_chunk_group_check_names
+    )
+    lines.append(f"  simp only [{node_group_simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_nodeChunks_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkNodesChunks (K := K) {pfx}_book {pfx}_nodeChunks = true := by"
+    )
+    lines.append(f"  unfold CertCheck.BookData.checkNodesChunks {pfx}_nodeChunks")
+    lines.append("  exact CertCheck.allShort_flatten_true")
+    lines.append(
+        f"    (fun nodes => CertCheck.allShort (fun S => CertCheck.checkCap (K := K) S) nodes) {pfx}_nodeChunkGroups_check"
+    )
+    lines.append(f"theorem {pfx}_nodes_check :")
+    lines.append(f"    CertCheck.BookData.checkNodes (K := K) {pfx}_book = true := by")
+    lines.append(
+        f"  exact CertCheck.BookData.checkNodes_of_chunks (K := K) {pfx}_nodeChunks_flatten {pfx}_nodeChunks_check"
+    )
+    lines.extend([
+        "",
+        f"end {ns}",
+        "end CertData",
+        "end Certificate",
+        "end ProjectiveCap",
+        "",
+    ])
+    return "\n".join(lines)
+
+
+def emit_class_step_group(q: int, rec, anchor_gen, layout, group_idx: int) -> str:
+    ns = f"Q{q}"
+    pfx = class_prefix(rec.ci)
+    chunk_names = layout["step_data_chunk_groups"][group_idx]
+    chunk_indices = [
+        int(name.removeprefix(f"{pfx}_stepDataChunk")) for name in chunk_names
+    ]
+    group_nids: list[int] = []
+    for chunk_idx in chunk_indices:
+        for step_name in layout["step_data_chunks"][chunk_idx]:
+            group_nids.append(int(step_name.removeprefix(f"{pfx}_stepData")))
+
+    lines: list[str] = [
+        f"import ProjectiveCap.CertData.{ns}.Class{rec.ci}Base",
+        "",
+        "namespace ProjectiveCap",
+        "namespace Certificate",
+        "namespace CertData",
+        f"namespace {ns}",
+        "",
+    ]
+    for nid in group_nids:
+        local_rows_name = f"{pfx}_node{nid}_rows"
+        for rname in layout["rows_by_node"][nid]:
+            ridx = rname.removeprefix(f"{pfx}_row")
+            refname = f"{pfx}_rowRef{ridx}"
+            child_group, child_chunk, child_slot = layout["row_child_ref"][rname]
+            lines.append(f"def {refname} : CertCheck.RowRefData K where")
+            lines.append(f"  row := {rname}")
+            lines.append(f"  childGroup := {child_group}")
+            lines.append(f"  childChunk := {child_chunk}")
+            lines.append(f"  childSlot := {child_slot}")
+        lines.append(f"def {local_rows_name} : List (CertCheck.RowRefData K) :=")
+        lines.append(
+            f"  {anchor_gen.lean_list(layout['row_refs_by_node'][nid], 'CertCheck.RowRefData K')}"
+        )
+        step_data_name = f"{pfx}_stepData{nid}"
+        lines.append(f"def {step_data_name} : CertCheck.StepRefData K where")
+        lines.append(f"  node := {pfx}_node{nid}")
+        lines.append(f"  rows := {local_rows_name}")
+    for chunk_idx in chunk_indices:
+        lines.append(f"def {pfx}_stepDataChunk{chunk_idx} : List (CertCheck.StepRefData K) :=")
+        lines.append(
+            f"  {anchor_gen.lean_list(layout['step_data_chunks'][chunk_idx], 'CertCheck.StepRefData K')}"
+        )
+
+    subgroup_chunks = anchor_gen.chunks(chunk_names, STEPDATA_SUBGROUP_SIZE)
+    subgroup_names = []
+    subgroup_node_group_terms = []
+    subgroup_node_check_names = []
+    for sub_idx, subgroup in enumerate(subgroup_chunks):
+        sub_name = f"{pfx}_stepDataChunkGroup{group_idx}_subgroup{sub_idx}"
+        subgroup_names.append(sub_name)
+        first_chunk_idx = int(subgroup[0].removeprefix(f"{pfx}_stepDataChunk"))
+        node_chunk_idx = first_chunk_idx // NODE_CHUNK_SIZE
+        node_group_term = f"([{pfx}_nodeChunk{node_chunk_idx}] : List (List (List P)))"
+        subgroup_node_group_terms.append(node_group_term)
+        lines.append(f"def {sub_name} : List (List (CertCheck.StepRefData K)) :=")
+        lines.append(
+            f"  {anchor_gen.lean_list(subgroup, 'List (CertCheck.StepRefData K)')}"
+        )
+        cname = f"{sub_name}_nodes_check"
+        subgroup_node_check_names.append(cname)
+        lines.append(f"theorem {cname} :")
+        lines.append(
+            f"    CertCheck.BookData.checkStepRefDataNodeChunks (K := K) {sub_name} {node_group_term} = true := by"
+        )
+        lines.append("  rfl")
+    lines.append(
+        f"def {pfx}_stepDataChunkGroup{group_idx}_subgroups : List (List (List (CertCheck.StepRefData K))) :="
+    )
+    lines.append(
+        f"  {anchor_gen.lean_list(subgroup_names, 'List (List (CertCheck.StepRefData K))')}"
+    )
+    lines.append(
+        f"def {pfx}_nodeChunkGroup{group_idx}_subgroups : List (List (List (List P))) :="
+    )
+    lines.append(
+        f"  {anchor_gen.lean_list(subgroup_node_group_terms, 'List (List (List P))')}"
+    )
+    lines.append(f"def {pfx}_stepDataChunkGroup{group_idx} : List (List (CertCheck.StepRefData K)) :=")
+    lines.append(f"  {pfx}_stepDataChunkGroup{group_idx}_subgroups.flatten")
+    lines.append(f"theorem {pfx}_stepDataChunkGroup{group_idx}_nodeSubgroups_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepRefDataNodeChunkGroups (K := K) {pfx}_stepDataChunkGroup{group_idx}_subgroups {pfx}_nodeChunkGroup{group_idx}_subgroups = true := by"
+    )
+    node_subgroups_simp_terms = ", ".join(
+        [
+            "CertCheck.BookData.checkStepRefDataNodeChunkGroups",
+            f"{pfx}_stepDataChunkGroup{group_idx}_subgroups",
+            f"{pfx}_nodeChunkGroup{group_idx}_subgroups",
+            "Bool.and_true",
+        ]
+        + subgroup_node_check_names
+    )
+    lines.append(f"  simp only [{node_subgroups_simp_terms}]")
+    lines.append(f"theorem {pfx}_stepDataChunkGroup{group_idx}_nodes_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepRefDataNodeChunks (K := K) {pfx}_stepDataChunkGroup{group_idx} {pfx}_nodeChunkGroup{group_idx} = true := by"
+    )
+    lines.append("  exact CertCheck.BookData.checkStepRefDataNodeChunks_of_groups (K := K)")
+    lines.append(
+        f"    (show {pfx}_stepDataChunkGroup{group_idx}_subgroups.flatten = {pfx}_stepDataChunkGroup{group_idx} by rfl)"
+    )
+    lines.append(
+        f"    (show {pfx}_nodeChunkGroup{group_idx}_subgroups.flatten = {pfx}_nodeChunkGroup{group_idx} by rfl)"
+    )
+    lines.append(f"    {pfx}_stepDataChunkGroup{group_idx}_nodeSubgroups_check")
+    chunk_check_names = []
+    for chunk_idx in chunk_indices:
+        cname = f"{pfx}_stepDataChunk{chunk_idx}_check"
+        chunk_check_names.append(cname)
+        lines.append(f"theorem {cname} :")
+        lines.append(
+            f"    CertCheck.BookData.checkStepRefDataList (K := K) {pfx}_nodeChunkGroups allCellChunks {pfx}_stepDataChunk{chunk_idx} = true := by"
+        )
+        lines.append("  rfl")
+    subgroup_check_names = []
+    for sub_idx, subgroup in enumerate(subgroup_chunks):
+        sub_name = f"{pfx}_stepDataChunkGroup{group_idx}_subgroup{sub_idx}"
+        cname = f"{sub_name}_check"
+        subgroup_check_names.append(cname)
+        lines.append(f"theorem {cname} :")
+        lines.append(
+            f"    CertCheck.BookData.checkStepRefDataChunks (K := K) {pfx}_nodeChunkGroups allCellChunks {sub_name} = true := by"
+        )
+        simp_terms = ", ".join(
+            ["CertCheck.BookData.checkStepRefDataChunks", sub_name]
+            + [f"{name}_check" for name in subgroup]
+        )
+        lines.append(f"  simp only [CertCheck.allShort, {simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_stepDataChunkGroup{group_idx}_subgroups_check :")
+    lines.append(
+        f"    CertCheck.allShort (fun chunks => CertCheck.BookData.checkStepRefDataChunks (K := K) {pfx}_nodeChunkGroups allCellChunks chunks) {pfx}_stepDataChunkGroup{group_idx}_subgroups = true := by"
+    )
+    subgroups_simp_terms = ", ".join(
+        ["CertCheck.allShort", f"{pfx}_stepDataChunkGroup{group_idx}_subgroups"]
+        + subgroup_check_names
+    )
+    lines.append(f"  simp only [{subgroups_simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_stepDataChunkGroup{group_idx}_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepRefDataChunks (K := K) {pfx}_nodeChunkGroups allCellChunks {pfx}_stepDataChunkGroup{group_idx} = true := by"
+    )
+    lines.append(f"  unfold CertCheck.BookData.checkStepRefDataChunks {pfx}_stepDataChunkGroup{group_idx}")
+    lines.append("  exact CertCheck.allShort_flatten_true")
+    lines.append(
+        f"    (fun steps => CertCheck.BookData.checkStepRefDataList (K := K) {pfx}_nodeChunkGroups allCellChunks steps) {pfx}_stepDataChunkGroup{group_idx}_subgroups_check"
+    )
+    lines.extend([
+        "",
+        f"end {ns}",
+        "end CertData",
+        "end Certificate",
+        "end ProjectiveCap",
+        "",
+    ])
+    return "\n".join(lines)
+
+
+def emit_class_top(q: int, rec, anchor_gen, layout) -> str:
+    ns = f"Q{q}"
+    pfx = class_prefix(rec.ci)
+    group_names = layout["step_data_chunk_group_names"]
+    imports = [f"import ProjectiveCap.CertData.{ns}.Class{rec.ci}Base"]
+    imports.extend(
+        f"import ProjectiveCap.CertData.{ns}.Class{rec.ci}StepGroup{idx}"
+        for idx in range(len(group_names))
+    )
+    lines: list[str] = [
+        *imports,
+        "",
+        "namespace ProjectiveCap",
+        "namespace Certificate",
+        "namespace CertData",
+        f"namespace {ns}",
+        "",
+    ]
+    lines.append(f"def {pfx}_stepDataChunkGroups : List (List (List (CertCheck.StepRefData K))) :=")
+    lines.append(
+        f"  {anchor_gen.lean_list(group_names, 'List (List (CertCheck.StepRefData K))')}"
+    )
+    lines.append(f"def {pfx}_stepDataChunks : List (List (CertCheck.StepRefData K)) :=")
+    lines.append(f"  {pfx}_stepDataChunkGroups.flatten")
+    lines.append(f"def {pfx}_stepDataList : List (CertCheck.StepRefData K) :=")
+    lines.append(f"  {pfx}_stepDataChunks.flatten")
+    lines.append(f"theorem {pfx}_stepDataChunks_flatten :")
+    lines.append(f"    {pfx}_stepDataChunks.flatten = {pfx}_stepDataList := by")
+    lines.append("  rfl")
+    group_node_checks = [
+        f"{pfx}_stepDataChunkGroup{idx}_nodes_check" for idx in range(len(group_names))
+    ]
+    lines.append(f"theorem {pfx}_stepData_nodes_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepRefDataNodeChunkGroups (K := K) {pfx}_stepDataChunkGroups {pfx}_nodeChunkGroups = true := by"
+    )
+    step_data_nodes_simp_terms = ", ".join(
+        [
+            "CertCheck.BookData.checkStepRefDataNodeChunkGroups",
+            f"{pfx}_stepDataChunkGroups",
+            f"{pfx}_nodeChunkGroups",
+            "Bool.true_and",
+        ]
+        + group_node_checks
+    )
+    lines.append(f"  simp only [{step_data_nodes_simp_terms}]")
+    lines.append(f"theorem {pfx}_stepData_nodes_eq :")
+    lines.append(
+        f"    {pfx}_stepDataList.map CertCheck.StepRefData.node = {pfx}_book.nodes := by"
+    )
+    lines.append(
+        f"  simpa [{pfx}_stepDataList, {pfx}_stepDataChunks, {pfx}_book, {pfx}_nodes, {pfx}_nodeChunks]"
+    )
+    lines.append(
+        f"    using CertCheck.BookData.checkStepRefDataNodeChunkGroups_sound {pfx}_stepData_nodes_check"
+    )
+    group_checks = [
+        f"{pfx}_stepDataChunkGroup{idx}_check" for idx in range(len(group_names))
+    ]
+    lines.append(f"theorem {pfx}_stepDataChunkGroups_check :")
+    lines.append(
+        f"    CertCheck.allShort (fun chunks => CertCheck.BookData.checkStepRefDataChunks (K := K) {pfx}_nodeChunkGroups allCellChunks chunks) {pfx}_stepDataChunkGroups = true := by"
+    )
+    step_data_group_simp_terms = ", ".join(
+        ["CertCheck.allShort", f"{pfx}_stepDataChunkGroups"] + group_checks
+    )
+    lines.append(f"  simp only [{step_data_group_simp_terms}, reduceIte]")
+    lines.append(f"theorem {pfx}_stepDataChunks_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepRefDataChunks (K := K) {pfx}_nodeChunkGroups allCellChunks {pfx}_stepDataChunks = true := by"
+    )
+    lines.append(f"  unfold CertCheck.BookData.checkStepRefDataChunks {pfx}_stepDataChunks")
+    lines.append("  exact CertCheck.allShort_flatten_true")
+    lines.append(
+        f"    (fun steps => CertCheck.BookData.checkStepRefDataList (K := K) {pfx}_nodeChunkGroups allCellChunks steps) {pfx}_stepDataChunkGroups_check"
+    )
+    lines.append(f"theorem {pfx}_stepDataList_check :")
+    lines.append(
+        f"    CertCheck.BookData.checkStepRefDataList (K := K) {pfx}_nodeChunkGroups allCellChunks {pfx}_stepDataList = true := by"
+    )
+    lines.append(f"  unfold {pfx}_stepDataList")
+    lines.append(
+        f"  exact CertCheck.BookData.checkStepRefDataList_of_chunks (K := K) {pfx}_stepDataChunks_check"
+    )
+    lines.append(f"theorem {pfx}_book_valid :")
+    lines.append(f"    {pfx}_book.toLooseDAG.ValidFor (GridCap (K := K)) := by")
+    lines.append(f"  have hcells : ∀ x : GridPoint K, x ∈ {pfx}_book.cells := by")
+    lines.append("    intro x")
+    lines.append(f"    rw [{pfx}_book_cells_eq]")
+    lines.append("    exact allCells_mem x")
+    lines.append("  exact CertCheck.BookData.validForLoose_of_stepRefData (K := K)")
+    lines.append(f"    {pfx}_root_mem")
+    lines.append(f"    {pfx}_nodes_check")
+    lines.append("    hcells")
+    lines.append(f"    (by simpa [{pfx}_nodeChunks] using {pfx}_nodeChunks_flatten)")
+    lines.append(f"    {pfx}_cellChunks_flatten")
+    lines.append(f"    {pfx}_stepData_nodes_eq")
+    lines.append(f"    {pfx}_stepDataList_check")
+    lines.append(f"theorem {pfx}_valid : {pfx}.Valid := by")
+    lines.append(f"  unfold {pfx} CertCheck.ClassData.toLooseCert GridClassCert.Valid")
+    lines.append("  refine ⟨?_, ?_, ?_, ?_, ?_⟩")
+    lines.append(f"  · exact of_decide_eq_true {pfx}_size_check")
+    lines.append(f"  · exact CertCheck.checkCap_sound (K := K) {pfx}_s3_cap_check")
+    lines.append(
+        f"  · exact GridGame.mem_legalExtensions.mpr (CertCheck.checkMove_sound (K := K) {pfx}_witness_check)"
+    )
+    lines.append(f"  · exact of_decide_eq_true {pfx}_root_eq_check")
+    lines.append(f"  · exact {pfx}_book_valid")
+    lines.extend([
+        "",
+        f"end {ns}",
+        "end CertData",
+        "end Certificate",
+        "end ProjectiveCap",
+        "",
+    ])
+    return "\n".join(lines)
+
+
+def emit_class_files(q: int, rec, anchor_gen) -> dict[str, str]:
+    layout = class_split_layout(rec, anchor_gen)
+    files = {
+        f"Class{rec.ci}Base.lean": emit_class_base(q, rec, anchor_gen, layout),
+        f"Class{rec.ci}.lean": emit_class_top(q, rec, anchor_gen, layout),
+    }
+    for idx in range(len(layout["step_data_chunk_group_names"])):
+        files[f"Class{rec.ci}StepGroup{idx}.lean"] = emit_class_step_group(
+            q, rec, anchor_gen, layout, idx
+        )
+    return files
 
 
 def emit_aggregator(q: int, classes) -> str:
@@ -535,7 +1178,8 @@ def main() -> int:
     split_dir.mkdir(parents=True, exist_ok=True)
     (split_dir / "Base.lean").write_text(emit_base(q, anchor_gen), encoding="utf-8")
     for rec in classes:
-        (split_dir / f"Class{rec.ci}.lean").write_text(emit_class(q, rec, anchor_gen), encoding="utf-8")
+        for rel, text in emit_class_files(q, rec, anchor_gen).items():
+            (split_dir / rel).write_text(text, encoding="utf-8")
     (out_root / f"{ns}.lean").write_text(emit_aggregator(q, classes), encoding="utf-8")
     (out_root / f"{ns}Assembly.lean").write_text(emit_assembly(q, classes, anchor_gen), encoding="utf-8")
     print(f"wrote split {ns}: classes={len(classes)} dir={split_dir}")

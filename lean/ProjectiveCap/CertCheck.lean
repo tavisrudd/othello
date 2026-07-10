@@ -256,6 +256,23 @@ def toEntry (r : RowData K) : Finset (GridPoint K) × ReplyBookRow (GridPoint K)
 
 end RowData
 
+/-- Local reply rows for one book node.  This is a generated-checker convenience:
+the semantic DAG can use a permissive row predicate once each local row is checked
+to have the right mover, legal reply, and certified child node. -/
+structure StepData (K : Type*) where
+  node : List (GridPoint K)
+  rows : List (RowData K)
+
+structure RowRefData (K : Type*) where
+  row : RowData K
+  childGroup : Nat
+  childChunk : Nat
+  childSlot : Nat
+
+structure StepRefData (K : Type*) where
+  node : List (GridPoint K)
+  rows : List (RowRefData K)
+
 /-- Concrete reply-book data emitted by the generator. -/
 structure BookData (K : Type*) where
   cells : List (GridPoint K)
@@ -276,6 +293,11 @@ def toDAG (b : BookData K) : ReplyBookDAG (GridPoint K) where
   root := b.root.toFinset
   Node := fun S => S ∈ b.nodesFinset
   Row := fun S row => (S, row) ∈ b.rowsFinset
+
+def toLooseDAG (b : BookData K) : ReplyBookDAG (GridPoint K) where
+  root := b.root.toFinset
+  Node := fun S => S ∈ b.nodesFinset
+  Row := fun _ _ => True
 
 def checkCells (b : BookData K) : Bool :=
   decide (∀ x ∈ (Finset.univ : Finset (GridPoint K)), x ∈ b.cells)
@@ -377,6 +399,134 @@ def checkNodeStepChunksWithAll (b : BookData K)
     (S : List (GridPoint K)) (cellChunks : List (List (GridPoint K))) : Bool :=
   allShort (fun cells =>
     checkNodeStepOnWithChunks (K := K) b nodeChunks rowChunks S cells) cellChunks
+
+def checkNodeCellWithLocalRows (b : BookData K)
+    (nodeChunks : List (List (List (GridPoint K)))) (S : List (GridPoint K))
+    (rows : List (RowData K)) (x : GridPoint K) : Bool :=
+  if checkMove (K := K) S x then
+    checkRowOnWithNodes (K := K) b nodeChunks S x rows
+  else
+    true
+
+def checkNodeStepOnWithLocalRows (b : BookData K)
+    (nodeChunks : List (List (List (GridPoint K)))) (S : List (GridPoint K))
+    (rows : List (RowData K)) (cells : List (GridPoint K)) : Bool :=
+  allShort (fun x => checkNodeCellWithLocalRows (K := K) b nodeChunks S rows x) cells
+
+def checkNodeStepChunksWithLocalRows (b : BookData K)
+    (nodeChunks : List (List (List (GridPoint K)))) (S : List (GridPoint K))
+    (rows : List (RowData K)) (cellChunks : List (List (GridPoint K))) : Bool :=
+  allShort (fun cells =>
+    checkNodeStepOnWithLocalRows (K := K) b nodeChunks S rows cells) cellChunks
+
+def checkStepData (b : BookData K) (nodeChunks : List (List (List (GridPoint K))))
+    (cellChunks : List (List (GridPoint K))) (d : StepData K) : Bool :=
+  checkNodeStepChunksWithLocalRows (K := K) b nodeChunks d.node d.rows cellChunks
+
+def checkStepDataList (b : BookData K) (nodeChunks : List (List (List (GridPoint K))))
+    (cellChunks : List (List (GridPoint K))) (steps : List (StepData K)) : Bool :=
+  allShort (fun d => checkStepData (K := K) b nodeChunks cellChunks d) steps
+
+def checkStepDataChunks (b : BookData K) (nodeChunks : List (List (List (GridPoint K))))
+    (cellChunks : List (List (GridPoint K))) (chunks : List (List (StepData K))) : Bool :=
+  allShort (fun steps => checkStepDataList (K := K) b nodeChunks cellChunks steps) chunks
+
+def checkStepDataNodes : List (StepData K) -> List (List (GridPoint K)) -> Bool
+  | [], [] => true
+  | d :: ds, node :: nodes =>
+      decide (d.node = node) && checkStepDataNodes ds nodes
+  | _, _ => false
+
+def checkStepDataNodeChunks
+    (stepChunks : List (List (StepData K))) (nodeChunks : List (List (List (GridPoint K)))) :
+    Bool :=
+  checkStepDataNodes (K := K) stepChunks.flatten nodeChunks.flatten
+
+def checkStepDataNodeChunkGroups :
+    List (List (List (StepData K))) -> List (List (List (List (GridPoint K)))) -> Bool
+  | [], [] => true
+  | stepChunks :: stepGroups, nodeChunks :: nodeGroups =>
+      checkStepDataNodeChunks (K := K) stepChunks nodeChunks &&
+        checkStepDataNodeChunkGroups stepGroups nodeGroups
+  | _, _ => false
+
+def childAt (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (g c i : Nat) : Option (List (GridPoint K)) := do
+  let chunks <- nodeChunkGroups[g]?
+  let nodes <- chunks[c]?
+  nodes[i]?
+
+def checkRowRefMatch (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (S : List (GridPoint K)) (x : GridPoint K) (rr : RowRefData K) : Bool :=
+  let r := rr.row
+  decide
+    (r.node.toFinset = S.toFinset ∧
+      r.mover = x ∧
+        r.reply ∉ insert x S.toFinset ∧
+          checkCap (K := K) r.child = true ∧
+          r.child.toFinset = insert r.reply (insert x S.toFinset)) &&
+    decide
+      (childAt (K := K) nodeChunkGroups rr.childGroup rr.childChunk rr.childSlot =
+        some r.child)
+
+def checkRowRefOn (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (S : List (GridPoint K)) (x : GridPoint K) (rows : List (RowRefData K)) : Bool :=
+  anyShort (fun rr => checkRowRefMatch (K := K) nodeChunkGroups S x rr) rows
+
+def checkNodeCellWithLocalRowRefs
+    (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (S : List (GridPoint K)) (rows : List (RowRefData K)) (x : GridPoint K) : Bool :=
+  if checkMove (K := K) S x then
+    checkRowRefOn (K := K) nodeChunkGroups S x rows
+  else
+    true
+
+def checkNodeStepOnWithLocalRowRefs
+    (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (S : List (GridPoint K)) (rows : List (RowRefData K))
+    (cells : List (GridPoint K)) : Bool :=
+  allShort (fun x =>
+    checkNodeCellWithLocalRowRefs (K := K) nodeChunkGroups S rows x) cells
+
+def checkNodeStepChunksWithLocalRowRefs
+    (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (S : List (GridPoint K)) (rows : List (RowRefData K))
+    (cellChunks : List (List (GridPoint K))) : Bool :=
+  allShort (fun cells =>
+    checkNodeStepOnWithLocalRowRefs (K := K) nodeChunkGroups S rows cells) cellChunks
+
+def checkStepRefData (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (cellChunks : List (List (GridPoint K))) (d : StepRefData K) : Bool :=
+  checkNodeStepChunksWithLocalRowRefs (K := K) nodeChunkGroups d.node d.rows cellChunks
+
+def checkStepRefDataList (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (cellChunks : List (List (GridPoint K))) (steps : List (StepRefData K)) : Bool :=
+  allShort (fun d => checkStepRefData (K := K) nodeChunkGroups cellChunks d) steps
+
+def checkStepRefDataChunks (nodeChunkGroups : List (List (List (List (GridPoint K)))))
+    (cellChunks : List (List (GridPoint K)))
+    (chunks : List (List (StepRefData K))) : Bool :=
+  allShort (fun steps =>
+    checkStepRefDataList (K := K) nodeChunkGroups cellChunks steps) chunks
+
+def checkStepRefDataNodes : List (StepRefData K) -> List (List (GridPoint K)) -> Bool
+  | [], [] => true
+  | d :: ds, node :: nodes =>
+      decide (d.node = node) && checkStepRefDataNodes ds nodes
+  | _, _ => false
+
+def checkStepRefDataNodeChunks
+    (stepChunks : List (List (StepRefData K)))
+    (nodeChunks : List (List (List (GridPoint K)))) : Bool :=
+  checkStepRefDataNodes (K := K) stepChunks.flatten nodeChunks.flatten
+
+def checkStepRefDataNodeChunkGroups :
+    List (List (List (StepRefData K))) -> List (List (List (List (GridPoint K)))) -> Bool
+  | [], [] => true
+  | stepChunks :: stepGroups, nodeChunks :: nodeGroups =>
+      checkStepRefDataNodeChunks (K := K) stepChunks nodeChunks &&
+        checkStepRefDataNodeChunkGroups stepGroups nodeGroups
+  | _, _ => false
 
 def checkNodeStep (b : BookData K) (S : List (GridPoint K)) : Bool :=
   checkNodeStepOn (K := K) b S b.cells
@@ -537,6 +687,453 @@ theorem checkNodeStep_of_all_chunks {b : BookData K} {S : List (GridPoint K)}
   rw [List.all_eq_true] at h ⊢
   intro cells hmem
   exact checkNodeStepOn_of_all_chunks (K := K) hnodes hrows (h cells hmem)
+
+omit [Fintype K] in
+theorem checkRowOnWithNodes_sound {b : BookData K}
+    {nodeChunks : List (List (List (GridPoint K)))} {S : List (GridPoint K)}
+    {x : GridPoint K} {rows : List (RowData K)}
+    (hnodes : nodeChunks.flatten = b.nodes)
+    (h : checkRowOnWithNodes (K := K) b nodeChunks S x rows = true) :
+    ∃ row : ReplyBookRow (GridPoint K),
+      row.mover = x ∧
+        Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) row.reply ∧
+          row.child = insert row.reply (insert x S.toFinset) ∧
+            row.child ∈ b.nodesFinset := by
+  unfold checkRowOnWithNodes at h
+  simp only [anyShort_eq_any] at h
+  rcases List.any_eq_true.mp h with ⟨r, _hr, hrmatch⟩
+  unfold checkRowMatchWithNodes at hrmatch
+  rw [Bool.and_eq_true] at hrmatch
+  rcases hrmatch with ⟨hfront, hchildNode⟩
+  have hfrontProp :
+      r.node.toFinset = S.toFinset ∧
+        r.mover = x ∧
+          r.reply ∉ insert x S.toFinset ∧
+            checkCap (K := K) r.child = true ∧
+            r.child.toFinset = insert r.reply (insert x S.toFinset) :=
+    of_decide_eq_true hfront
+  rcases hfrontProp with ⟨_hnodeEq, hmover, hfresh, hcap, hchildEq⟩
+  have hnode : r.child.toFinset ∈ b.nodesFinset :=
+    checkNodeMember_of_chunks (K := K) hnodes hchildNode
+  refine ⟨r.toBookRow, hmover, ?_, ?_, hnode⟩
+  · show Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) r.reply
+    refine ⟨hfresh, ?_⟩
+    simpa [hchildEq] using checkCap_sound (K := K) hcap
+  · show r.child.toFinset = insert r.reply (insert x S.toFinset)
+    exact hchildEq
+
+omit [Fintype K] in
+theorem checkNodeStepOnWithLocalRows_sound {b : BookData K}
+    {nodeChunks : List (List (List (GridPoint K)))} {S : List (GridPoint K)}
+    {rows : List (RowData K)} {cells : List (GridPoint K)}
+    (hnodes : nodeChunks.flatten = b.nodes)
+    (h : checkNodeStepOnWithLocalRows (K := K) b nodeChunks S rows cells = true) :
+    ∀ x ∈ cells, Move (α := GridPoint K) (GridCap (K := K)) S.toFinset x ->
+      ∃ row : ReplyBookRow (GridPoint K),
+        row.mover = x ∧
+          Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) row.reply ∧
+            row.child = insert row.reply (insert x S.toFinset) ∧
+              row.child ∈ b.nodesFinset := by
+  unfold checkNodeStepOnWithLocalRows at h
+  simp only [allShort_eq_all] at h
+  intro x hxmem hxmove
+  have hxcheck :
+      checkNodeCellWithLocalRows (K := K) b nodeChunks S rows x = true :=
+    (List.all_eq_true.mp h) x hxmem
+  unfold checkNodeCellWithLocalRows at hxcheck
+  have hmoveBool : checkMove (K := K) S x = true := checkMove_true (K := K) hxmove
+  rw [hmoveBool] at hxcheck
+  exact checkRowOnWithNodes_sound (K := K) hnodes hxcheck
+
+omit [Fintype K] in
+theorem checkStepData_sound {b : BookData K}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    {cellChunks : List (List (GridPoint K))} {d : StepData K}
+    (hnodes : nodeChunks.flatten = b.nodes)
+    (hcells : cellChunks.flatten = b.cells)
+    (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
+    (h : checkStepData (K := K) b nodeChunks cellChunks d = true) :
+    ∀ x : GridPoint K,
+      Move (α := GridPoint K) (GridCap (K := K)) d.node.toFinset x ->
+        ∃ row : ReplyBookRow (GridPoint K),
+          row.mover = x ∧
+            Move (α := GridPoint K) (GridCap (K := K)) (insert x d.node.toFinset)
+              row.reply ∧
+              row.child = insert row.reply (insert x d.node.toFinset) ∧
+                row.child ∈ b.nodesFinset := by
+  intro x hxmove
+  have hxmem : x ∈ cellChunks.flatten := by
+    rw [hcells]
+    exact hcellsAll x
+  unfold checkStepData checkNodeStepChunksWithLocalRows at h
+  have hflat :
+      checkNodeStepOnWithLocalRows (K := K) b nodeChunks d.node d.rows
+        cellChunks.flatten = true :=
+    allShort_flatten_true
+      (fun x => checkNodeCellWithLocalRows (K := K) b nodeChunks d.node d.rows x) h
+  exact checkNodeStepOnWithLocalRows_sound (K := K) hnodes hflat x hxmem hxmove
+
+omit [Fintype K] in
+theorem checkStepDataList_sound {b : BookData K}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    {cellChunks : List (List (GridPoint K))} {steps : List (StepData K)}
+    (hnodes : nodeChunks.flatten = b.nodes)
+    (hcells : cellChunks.flatten = b.cells)
+    (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
+    (hcover : steps.map StepData.node = b.nodes)
+    (h : checkStepDataList (K := K) b nodeChunks cellChunks steps = true) :
+    ∀ S ∈ b.nodesFinset, ∀ x : GridPoint K,
+      Move (α := GridPoint K) (GridCap (K := K)) S x ->
+        ∃ row : ReplyBookRow (GridPoint K),
+          row.mover = x ∧
+            Move (α := GridPoint K) (GridCap (K := K)) (insert x S) row.reply ∧
+              row.child = insert row.reply (insert x S) ∧
+                row.child ∈ b.nodesFinset := by
+  unfold checkStepDataList at h
+  simp only [allShort_eq_all] at h
+  intro S hS x hxmove
+  have hSList : S ∈ b.nodes.map List.toFinset := by
+    unfold nodesFinset at hS
+    exact List.mem_toFinset.mp hS
+  rcases List.mem_map.mp hSList with ⟨xs, hxs, hxsS⟩
+  have hxsMap : xs ∈ steps.map StepData.node := by
+    rw [hcover]
+    exact hxs
+  rcases List.mem_map.mp hxsMap with ⟨d, hd, hdnode⟩
+  have hdcheck : checkStepData (K := K) b nodeChunks cellChunks d = true :=
+    (List.all_eq_true.mp h) d hd
+  have hdS : d.node.toFinset = S := by
+    rw [hdnode, hxsS]
+  have hxmove' :
+      Move (α := GridPoint K) (GridCap (K := K)) d.node.toFinset x := by
+    simpa [hdS] using hxmove
+  rcases checkStepData_sound (K := K) hnodes hcells hcellsAll hdcheck x hxmove' with
+    ⟨row, hmover, hreply, hchild, hchildNode⟩
+  refine ⟨row, hmover, ?_, ?_, hchildNode⟩
+  · simpa [hdS] using hreply
+  · simpa [hdS] using hchild
+
+omit [Fintype K] in
+theorem checkStepDataList_of_chunks {b : BookData K}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    {cellChunks : List (List (GridPoint K))} {chunks : List (List (StepData K))}
+    (h : checkStepDataChunks (K := K) b nodeChunks cellChunks chunks = true) :
+    checkStepDataList (K := K) b nodeChunks cellChunks chunks.flatten = true := by
+  unfold checkStepDataChunks checkStepDataList at *
+  exact allShort_flatten_true
+    (fun d => checkStepData (K := K) b nodeChunks cellChunks d) h
+
+omit [Field K] [Fintype K] in
+theorem checkStepDataNodes_sound :
+    ∀ {steps : List (StepData K)} {nodes : List (List (GridPoint K))},
+      checkStepDataNodes (K := K) steps nodes = true ->
+        steps.map StepData.node = nodes
+  | [], [], _h => rfl
+  | [], _node :: _nodes, h => by
+      simp [checkStepDataNodes] at h
+  | _d :: _ds, [], h => by
+      simp [checkStepDataNodes] at h
+  | d :: ds, node :: nodes, h => by
+      unfold checkStepDataNodes at h
+      rw [Bool.and_eq_true] at h
+      rcases h with ⟨hd, htail⟩
+      have hdnode : d.node = node := of_decide_eq_true hd
+      have htailEq : ds.map StepData.node = nodes :=
+        checkStepDataNodes_sound htail
+      simp [hdnode, htailEq]
+
+omit [Field K] [Fintype K] in
+theorem checkStepDataNodeChunks_sound
+    {stepChunks : List (List (StepData K))}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    (h : checkStepDataNodeChunks (K := K) stepChunks nodeChunks = true) :
+    stepChunks.flatten.map StepData.node = nodeChunks.flatten := by
+  unfold checkStepDataNodeChunks at h
+  exact checkStepDataNodes_sound h
+
+omit [Field K] [Fintype K] in
+theorem checkStepDataNodeChunkGroups_sound :
+    ∀ {stepGroups : List (List (List (StepData K)))}
+      {nodeGroups : List (List (List (List (GridPoint K))))},
+      checkStepDataNodeChunkGroups (K := K) stepGroups nodeGroups = true ->
+        stepGroups.flatten.flatten.map StepData.node = nodeGroups.flatten.flatten
+  | [], [], _h => rfl
+  | [], _nodeChunks :: _nodeGroups, h => by
+      simp [checkStepDataNodeChunkGroups] at h
+  | _stepChunks :: _stepGroups, [], h => by
+      simp [checkStepDataNodeChunkGroups] at h
+  | stepChunks :: stepGroups, nodeChunks :: nodeGroups, h => by
+      unfold checkStepDataNodeChunkGroups at h
+      rw [Bool.and_eq_true] at h
+      rcases h with ⟨hhead, htail⟩
+      have hheadEq :
+          stepChunks.flatten.map StepData.node = nodeChunks.flatten :=
+        checkStepDataNodeChunks_sound hhead
+      have htailEq :
+          stepGroups.flatten.flatten.map StepData.node = nodeGroups.flatten.flatten :=
+        checkStepDataNodeChunkGroups_sound htail
+      simp [List.map_append, hheadEq, htailEq]
+
+omit [Field K] [Fintype K] in
+theorem childAt_mem_nodesFinset {b : BookData K}
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {g c i : Nat} {child : List (GridPoint K)}
+    (hflat : nodeChunkGroups.flatten.flatten = b.nodes)
+    (h : childAt (K := K) nodeChunkGroups g c i = some child) :
+    child.toFinset ∈ b.nodesFinset := by
+  unfold childAt at h
+  cases hg : nodeChunkGroups[g]? with
+  | none =>
+      simp [hg] at h
+  | some chunks =>
+      cases hc : chunks[c]? with
+      | none =>
+          simp [hg, hc] at h
+      | some nodes =>
+          cases hi : nodes[i]? with
+          | none =>
+              simp [hg, hc, hi] at h
+          | some got =>
+              simp [hg, hc, hi] at h
+              have hgot : got = child := by
+                simpa using h
+              have hgmem : chunks ∈ nodeChunkGroups := List.mem_of_getElem? hg
+              have hcmem : nodes ∈ chunks := List.mem_of_getElem? hc
+              have himem : got ∈ nodes := List.mem_of_getElem? hi
+              have hchildMem : child ∈ nodeChunkGroups.flatten.flatten := by
+                rw [← hgot]
+                have hnodesMem : nodes ∈ nodeChunkGroups.flatten :=
+                  List.mem_flatten.mpr ⟨chunks, hgmem, hcmem⟩
+                exact List.mem_flatten.mpr
+                  ⟨nodes, hnodesMem, himem⟩
+              unfold nodesFinset
+              rw [List.mem_toFinset]
+              exact List.mem_map.mpr ⟨child, by simpa [hflat] using hchildMem, rfl⟩
+
+omit [Fintype K] in
+theorem checkRowRefOn_sound {b : BookData K}
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {S : List (GridPoint K)} {x : GridPoint K} {rows : List (RowRefData K)}
+    (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (h : checkRowRefOn (K := K) nodeChunkGroups S x rows = true) :
+    ∃ row : ReplyBookRow (GridPoint K),
+      row.mover = x ∧
+        Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) row.reply ∧
+          row.child = insert row.reply (insert x S.toFinset) ∧
+            row.child ∈ b.nodesFinset := by
+  unfold checkRowRefOn at h
+  simp only [anyShort_eq_any] at h
+  rcases List.any_eq_true.mp h with ⟨rr, _hrr, hrmatch⟩
+  unfold checkRowRefMatch at hrmatch
+  rw [Bool.and_eq_true] at hrmatch
+  rcases hrmatch with ⟨hfront, href⟩
+  let r := rr.row
+  have hfrontProp :
+      r.node.toFinset = S.toFinset ∧
+        r.mover = x ∧
+          r.reply ∉ insert x S.toFinset ∧
+            checkCap (K := K) r.child = true ∧
+            r.child.toFinset = insert r.reply (insert x S.toFinset) := by
+    exact of_decide_eq_true hfront
+  have hrefProp :
+      childAt (K := K) nodeChunkGroups rr.childGroup rr.childChunk rr.childSlot =
+        some r.child := by
+    exact of_decide_eq_true href
+  rcases hfrontProp with ⟨_hnodeEq, hmover, hfresh, hcap, hchildEq⟩
+  have hnode : r.child.toFinset ∈ b.nodesFinset :=
+    childAt_mem_nodesFinset (K := K) hgroups hrefProp
+  refine ⟨r.toBookRow, hmover, ?_, ?_, hnode⟩
+  · show Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) r.reply
+    refine ⟨hfresh, ?_⟩
+    simpa [hchildEq] using checkCap_sound (K := K) hcap
+  · show r.child.toFinset = insert r.reply (insert x S.toFinset)
+    exact hchildEq
+
+omit [Fintype K] in
+theorem checkNodeStepOnWithLocalRowRefs_sound {b : BookData K}
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {S : List (GridPoint K)} {rows : List (RowRefData K)}
+    {cells : List (GridPoint K)}
+    (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (h : checkNodeStepOnWithLocalRowRefs (K := K) nodeChunkGroups S rows cells = true) :
+    ∀ x ∈ cells, Move (α := GridPoint K) (GridCap (K := K)) S.toFinset x ->
+      ∃ row : ReplyBookRow (GridPoint K),
+        row.mover = x ∧
+          Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) row.reply ∧
+            row.child = insert row.reply (insert x S.toFinset) ∧
+              row.child ∈ b.nodesFinset := by
+  unfold checkNodeStepOnWithLocalRowRefs at h
+  simp only [allShort_eq_all] at h
+  intro x hxmem hxmove
+  have hxcheck :
+      checkNodeCellWithLocalRowRefs (K := K) nodeChunkGroups S rows x = true :=
+    (List.all_eq_true.mp h) x hxmem
+  unfold checkNodeCellWithLocalRowRefs at hxcheck
+  have hmoveBool : checkMove (K := K) S x = true := checkMove_true (K := K) hxmove
+  rw [hmoveBool] at hxcheck
+  exact checkRowRefOn_sound (K := K) hgroups hxcheck
+
+omit [Fintype K] in
+theorem checkStepRefData_sound {b : BookData K}
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {cellChunks : List (List (GridPoint K))} {d : StepRefData K}
+    (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hcells : cellChunks.flatten = b.cells)
+    (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
+    (h : checkStepRefData (K := K) nodeChunkGroups cellChunks d = true) :
+    ∀ x : GridPoint K,
+      Move (α := GridPoint K) (GridCap (K := K)) d.node.toFinset x ->
+        ∃ row : ReplyBookRow (GridPoint K),
+          row.mover = x ∧
+            Move (α := GridPoint K) (GridCap (K := K)) (insert x d.node.toFinset)
+              row.reply ∧
+              row.child = insert row.reply (insert x d.node.toFinset) ∧
+                row.child ∈ b.nodesFinset := by
+  intro x hxmove
+  have hxmem : x ∈ cellChunks.flatten := by
+    rw [hcells]
+    exact hcellsAll x
+  unfold checkStepRefData checkNodeStepChunksWithLocalRowRefs at h
+  have hflat :
+      checkNodeStepOnWithLocalRowRefs (K := K) nodeChunkGroups d.node d.rows
+        cellChunks.flatten = true :=
+    allShort_flatten_true
+      (fun x => checkNodeCellWithLocalRowRefs (K := K) nodeChunkGroups d.node d.rows x) h
+  exact checkNodeStepOnWithLocalRowRefs_sound (K := K) hgroups hflat x hxmem hxmove
+
+omit [Fintype K] in
+theorem checkStepRefDataList_sound {b : BookData K}
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {cellChunks : List (List (GridPoint K))} {steps : List (StepRefData K)}
+    (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hcells : cellChunks.flatten = b.cells)
+    (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
+    (hcover : steps.map StepRefData.node = b.nodes)
+    (h : checkStepRefDataList (K := K) nodeChunkGroups cellChunks steps = true) :
+    ∀ S ∈ b.nodesFinset, ∀ x : GridPoint K,
+      Move (α := GridPoint K) (GridCap (K := K)) S x ->
+        ∃ row : ReplyBookRow (GridPoint K),
+          row.mover = x ∧
+            Move (α := GridPoint K) (GridCap (K := K)) (insert x S) row.reply ∧
+              row.child = insert row.reply (insert x S) ∧
+                row.child ∈ b.nodesFinset := by
+  unfold checkStepRefDataList at h
+  simp only [allShort_eq_all] at h
+  intro S hS x hxmove
+  have hSList : S ∈ b.nodes.map List.toFinset := by
+    unfold nodesFinset at hS
+    exact List.mem_toFinset.mp hS
+  rcases List.mem_map.mp hSList with ⟨xs, hxs, hxsS⟩
+  have hxsMap : xs ∈ steps.map StepRefData.node := by
+    rw [hcover]
+    exact hxs
+  rcases List.mem_map.mp hxsMap with ⟨d, hd, hdnode⟩
+  have hdcheck : checkStepRefData (K := K) nodeChunkGroups cellChunks d = true :=
+    (List.all_eq_true.mp h) d hd
+  have hdS : d.node.toFinset = S := by
+    rw [hdnode, hxsS]
+  have hxmove' :
+      Move (α := GridPoint K) (GridCap (K := K)) d.node.toFinset x := by
+    simpa [hdS] using hxmove
+  rcases checkStepRefData_sound (K := K) hgroups hcells hcellsAll hdcheck x hxmove' with
+    ⟨row, hmover, hreply, hchild, hchildNode⟩
+  refine ⟨row, hmover, ?_, ?_, hchildNode⟩
+  · simpa [hdS] using hreply
+  · simpa [hdS] using hchild
+
+omit [Fintype K] in
+theorem checkStepRefDataList_of_chunks
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {cellChunks : List (List (GridPoint K))} {chunks : List (List (StepRefData K))}
+    (h : checkStepRefDataChunks (K := K) nodeChunkGroups cellChunks chunks = true) :
+    checkStepRefDataList (K := K) nodeChunkGroups cellChunks chunks.flatten = true := by
+  unfold checkStepRefDataChunks checkStepRefDataList at *
+  exact allShort_flatten_true
+    (fun d => checkStepRefData (K := K) nodeChunkGroups cellChunks d) h
+
+omit [Field K] [Fintype K] in
+theorem checkStepRefDataNodes_sound :
+    ∀ {steps : List (StepRefData K)} {nodes : List (List (GridPoint K))},
+      checkStepRefDataNodes (K := K) steps nodes = true ->
+        steps.map StepRefData.node = nodes
+  | [], [], _h => rfl
+  | [], _node :: _nodes, h => by
+      simp [checkStepRefDataNodes] at h
+  | _d :: _ds, [], h => by
+      simp [checkStepRefDataNodes] at h
+  | d :: ds, node :: nodes, h => by
+      unfold checkStepRefDataNodes at h
+      rw [Bool.and_eq_true] at h
+      rcases h with ⟨hd, htail⟩
+      have hdnode : d.node = node := of_decide_eq_true hd
+      have htailEq : ds.map StepRefData.node = nodes :=
+        checkStepRefDataNodes_sound htail
+      simp [hdnode, htailEq]
+
+omit [Field K] [Fintype K] in
+theorem checkStepRefDataNodeChunks_sound
+    {stepChunks : List (List (StepRefData K))}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    (h : checkStepRefDataNodeChunks (K := K) stepChunks nodeChunks = true) :
+    stepChunks.flatten.map StepRefData.node = nodeChunks.flatten := by
+  unfold checkStepRefDataNodeChunks at h
+  exact checkStepRefDataNodes_sound h
+
+omit [Field K] [Fintype K] in
+theorem checkStepRefDataNodes_complete :
+    ∀ {steps : List (StepRefData K)} {nodes : List (List (GridPoint K))},
+      steps.map StepRefData.node = nodes ->
+        checkStepRefDataNodes (K := K) steps nodes = true
+  | [], [], _h => rfl
+  | [], _node :: _nodes, h => by
+      simp at h
+  | _d :: _ds, [], h => by
+      simp at h
+  | d :: ds, node :: nodes, h => by
+      simp only [List.map_cons, List.cons.injEq] at h
+      rcases h with ⟨hnode, htail⟩
+      unfold checkStepRefDataNodes
+      simp [hnode, checkStepRefDataNodes_complete htail]
+
+omit [Field K] [Fintype K] in
+theorem checkStepRefDataNodeChunkGroups_sound :
+    ∀ {stepGroups : List (List (List (StepRefData K)))}
+      {nodeGroups : List (List (List (List (GridPoint K))))},
+      checkStepRefDataNodeChunkGroups (K := K) stepGroups nodeGroups = true ->
+        stepGroups.flatten.flatten.map StepRefData.node = nodeGroups.flatten.flatten
+  | [], [], _h => rfl
+  | [], _nodeChunks :: _nodeGroups, h => by
+      simp [checkStepRefDataNodeChunkGroups] at h
+  | _stepChunks :: _stepGroups, [], h => by
+      simp [checkStepRefDataNodeChunkGroups] at h
+  | stepChunks :: stepGroups, nodeChunks :: nodeGroups, h => by
+      unfold checkStepRefDataNodeChunkGroups at h
+      rw [Bool.and_eq_true] at h
+      rcases h with ⟨hhead, htail⟩
+      have hheadEq :
+          stepChunks.flatten.map StepRefData.node = nodeChunks.flatten :=
+        checkStepRefDataNodeChunks_sound hhead
+      have htailEq :
+          stepGroups.flatten.flatten.map StepRefData.node = nodeGroups.flatten.flatten :=
+        checkStepRefDataNodeChunkGroups_sound htail
+      simp [List.map_append, hheadEq, htailEq]
+
+omit [Field K] [Fintype K] in
+theorem checkStepRefDataNodeChunks_of_groups
+    {stepGroups : List (List (List (StepRefData K)))}
+    {nodeGroups : List (List (List (List (GridPoint K))))}
+    {stepChunks : List (List (StepRefData K))}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    (hstep : stepGroups.flatten = stepChunks)
+    (hnode : nodeGroups.flatten = nodeChunks)
+    (h : checkStepRefDataNodeChunkGroups (K := K) stepGroups nodeGroups = true) :
+    checkStepRefDataNodeChunks (K := K) stepChunks nodeChunks = true := by
+  unfold checkStepRefDataNodeChunks
+  have hEq :
+      stepGroups.flatten.flatten.map StepRefData.node = nodeGroups.flatten.flatten :=
+    checkStepRefDataNodeChunkGroups_sound h
+  exact checkStepRefDataNodes_complete (K := K) (by
+    simpa [← hstep, ← hnode] using hEq)
 
 def checkNodeStepOld (b : BookData K) (S : List (GridPoint K)) : Bool :=
   allShort
@@ -701,6 +1298,50 @@ theorem checkBook_sound {b : BookData K} (h : checkBook (K := K) b = true) :
     (checkNodes_sound (K := K) hnodes)
     (checkSteps_sound (K := K) hcells' hsteps)
 
+omit [Fintype K] in
+theorem validForLoose_of_stepData {b : BookData K}
+    {nodeChunks : List (List (List (GridPoint K)))}
+    {cellChunks : List (List (GridPoint K))} {steps : List (StepData K)}
+    (hroot : b.root.toFinset ∈ b.nodesFinset)
+    (hnodesCheck : checkNodes (K := K) b = true)
+    (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
+    (hnodes : nodeChunks.flatten = b.nodes)
+    (hcells : cellChunks.flatten = b.cells)
+    (hcover : steps.map StepData.node = b.nodes)
+    (hsteps : checkStepDataList (K := K) b nodeChunks cellChunks steps = true) :
+    b.toLooseDAG.ValidFor (GridCap (K := K)) := by
+  unfold toLooseDAG
+  refine ⟨hroot, ?_, ?_⟩
+  · intro S hS
+    exact checkNodes_sound (K := K) hnodesCheck S hS
+  · intro S hS x hxmove
+    rcases checkStepDataList_sound (K := K) hnodes hcells hcellsAll hcover hsteps
+        S hS x hxmove with
+      ⟨row, hmover, hreply, hchild, hchildNode⟩
+    exact ⟨row, trivial, hmover, hreply, hchild, hchildNode⟩
+
+omit [Fintype K] in
+theorem validForLoose_of_stepRefData {b : BookData K}
+    {nodeChunkGroups : List (List (List (List (GridPoint K))))}
+    {cellChunks : List (List (GridPoint K))} {steps : List (StepRefData K)}
+    (hroot : b.root.toFinset ∈ b.nodesFinset)
+    (hnodesCheck : checkNodes (K := K) b = true)
+    (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
+    (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hcells : cellChunks.flatten = b.cells)
+    (hcover : steps.map StepRefData.node = b.nodes)
+    (hsteps : checkStepRefDataList (K := K) nodeChunkGroups cellChunks steps = true) :
+    b.toLooseDAG.ValidFor (GridCap (K := K)) := by
+  unfold toLooseDAG
+  refine ⟨hroot, ?_, ?_⟩
+  · intro S hS
+    exact checkNodes_sound (K := K) hnodesCheck S hS
+  · intro S hS x hxmove
+    rcases checkStepRefDataList_sound (K := K) hgroups hcells hcellsAll hcover hsteps
+        S hS x hxmove with
+      ⟨row, hmover, hreply, hchild, hchildNode⟩
+    exact ⟨row, trivial, hmover, hreply, hchild, hchildNode⟩
+
 end BookData
 
 /-- Concrete class certificate data emitted by the parser/generator. -/
@@ -717,6 +1358,12 @@ def toCert (c : ClassData K) : GridClassCert K where
   sizeThree := c.sizeThree.toFinset
   witness := c.witness
   book := c.book.toDAG
+
+def toLooseCert (c : ClassData K) : GridClassCert K where
+  classIndex := c.classIndex
+  sizeThree := c.sizeThree.toFinset
+  witness := c.witness
+  book := c.book.toLooseDAG
 
 def checkClass (c : ClassData K) : Bool :=
   decide (c.sizeThree.toFinset.card = 3) &&

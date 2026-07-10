@@ -66,8 +66,8 @@ steering family.
 | 9 | P | exhaustive solve; q=9 intrusion terminal-reply kernel isolated | Lean kernel/certificate still open |
 | 11 | **P** | Lean certificate assembly: `CertData.Q11.initialPStatement_finrank` | none |
 | 13 | **P** | Lean certificate assembly: `CertData.Q13.initialPStatement_finrank` | none |
-| 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps) | Lean generated-data path needs refactor (`Class0` maxRecDepth after 31m); no uniform proof |
-| 19 | P | `esc` campaign; C30 anchored cert book emitted and rules-checked PASS (`272/272`, all on-conic, no caps) | Lean generated-data path gated behind q17 refactor; no uniform proof |
+| 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps); q17/Class0 split Lean prototype now compiles | full q17 Lean data/assembly not committed; no uniform proof |
+| 19 | P | `esc` campaign; C30 anchored cert book emitted and rules-checked PASS (`272/272`, all on-conic, no caps) | full q19 Lean data/assembly not committed; no uniform proof |
 | 23 | P | C29: all 22 full-`PGL(2,23)` on-conic buckets P; C54: all 22 early-break proof DAGs rules-checked (`241,627,613/241,627,613` records, zero failures); C53 full-PGL bridge is Lean-verified | computed and rules-certified at the S4 bucket layer; Lean certificate consumer/fixed-q assembly still open |
 | all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
 
@@ -440,9 +440,10 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS, but
-  the q=13 split Lean generator does not scale as-is; refactor the generated aggregate chunk
-  checks before attempting q17/q19 Lean data.
+- **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
+  generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
+  step-group leaves, and `Class0`); next is a deliberate full q17 generated-data build, then q19
+  sizing/user launch.
 - **Maintenance follow-up:** from q=23 zero-xor followers, test/prove preservability of
   live-conic xor zero after one further coupled off-conic move, then identify the termination
   invariant.
@@ -660,9 +661,9 @@ Recently reported:
 - **C30 certificate books:** anchored books are generated and independently rules-checked for
   q=17 and q=19.  q=17: `210/210` PASS, histogram `5:30 10:120 11:60`, all on-conic witnesses,
   no capped books, 111 MB cert.  q=19: `272/272` PASS, histogram `211:272`, all on-conic
-  witnesses, no capped books, 863 MB cert.  Lean is not closed: q17 generated `Class0.lean`
-  failed after 31:23 and 11.9 GB RSS at `class0_nodeChunks_check` (`maxRecDepth` in an aggregate
-  `simp` over chunk lemmas).  Report:
+  witnesses, no capped books, 863 MB cert.  The original q17 monolithic generated `Class0.lean`
+  failed after 31:23 and 11.9 GB RSS, but the refactored split sample now compiles q17/Class0
+  through its top module.  Report:
   [`../2026-07-08-codex-route-c-phase5.md`](../2026-07-08-codex-route-c-phase5.md).
 
 Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
@@ -776,6 +777,15 @@ compiled, but q17 `Class0.lean` failed after `31:23.21`, peak RSS `11,914,984 KB
 `class0_nodeChunks_check` with `maxRecDepth` in the aggregate chunk `simp`.  No q17/q19 Lean data
 was committed.  Next C30 step is to refactor the generated checker proof shape before attempting
 q17/q19 Lean assembly; otherwise move to C43/C44/C50 or the steering-proof lanes.
+
+Handoff note 2026-07-10 / Codex C30 Lean split: refactored `ProjectiveCap.CertCheck` and
+`notes/2026-07-08-q13-split-to-lean.py` so generated certs use indexed child references
+(`RowRefData`/`StepRefData`), one-node semantic step chunks, 10-node subgroup aggregation, and
+separate `ClassNBase` / `ClassNStepGroupM` / `ClassN` modules.  Flat q17/Class0 validation under
+`/tmp/c30-flat-q17-v9` passed: `Base.lean`, `Class0Base.lean`, all 15 `Class0StepGroup*.lean`
+leaves, and the top `Class0.lean` compile with `choom -n 1000 -- lean`; no q17/q19 generated Lean
+data was committed.  Next C30 step is full q17 split generation/build with leaves first and
+aggregate last; q19 remains a sizing/user-launch decision after q17 is clean.
 
 Handoff note 2026-07-09 / Codex C54: added `s4pncheck`, documented its early-break reply-book
 contract, and ran the complete 22-root q=23 suite with `scripts/s4-c54-check-suite.sh`.  Every one

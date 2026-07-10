@@ -967,7 +967,7 @@ bucket was P.  q=23 is therefore not a mixed-column case despite `23 == 2 mod 3`
 there rather than spending time on q=25/29/31; the next proof-direction task is C31 zone steering,
 not further residue-class speculation.
 
-## C30. Route C phase 5 — certificate books for q = 17 and q = 19 [REPORTED 2026-07-10 — certcheck PASS; Lean gate STOP]
+## C30. Route C phase 5 — certificate books for q = 17 and q = 19 [REPORTED 2026-07-10 — certcheck PASS; q17/Class0 split Lean PASS]
 
 Context: the status-table gap "cert book unbuilt" for q=17/19 is pure engineering now — every
 feasibility gate is measured: the emitter's private-memo peak fits (C3: q=19 ≈ 32.3M entries),
@@ -1000,11 +1000,11 @@ Report file: `notes/2026-07-08-codex-route-c-phase5.md`.
 Status: anchored certificate emission and independent `certcheck` both PASS for q=17 and q=19.
 q=17 has 210 anchored classes, all on-conic witnesses, no capped books, escape histogram
 `5:30 10:120 11:60`; q=19 has 272 anchored classes, all on-conic witnesses, no capped books,
-escape histogram `211:272`.  The existing q=13 split Lean generator does **not** scale as-is:
-q17 `Class0.lean` ran 31:23, reached 11.9 GB RSS, then failed at
-`class0_nodeChunks_check` with `maxRecDepth` in the aggregate `simp` over hundreds of chunk
-lemmas.  No q17/q19 generated Lean data was committed; next work is a generated-checker refactor,
-not a brute-force full build.
+escape histogram `211:272`.  The original q17 monolithic generated `Class0.lean` failed at
+`class0_nodeChunks_check`, but the generated-checker refactor now validates q17/Class0 as split
+Lean modules: `Base`, `Class0Base`, 15 `Class0StepGroup*` leaves, and top `Class0` compile in the
+flat harness.  No q17/q19 generated Lean data was committed; next work is full q17 split
+generation/build, leaves first and aggregate last, with q19 sizing after q17 is clean.
 
 ## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
 
