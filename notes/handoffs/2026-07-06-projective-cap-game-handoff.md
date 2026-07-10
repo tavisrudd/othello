@@ -567,9 +567,21 @@ Recently reported:
   game tree, not any coarse terminal (maximal-arc) summary.  Script
   `rust/scripts/c64_completion_poset.py`.  Report:
   [`../2026-07-09-codex-completion-poset.md`](../2026-07-09-codex-completion-poset.md).
-  **Consequence (C55 + C64 both negative):** the two direct dichotomy mechanisms are dead; **S1
-  (Segre-style envelope invariants) is promoted as C69** — the algebraic-geometry-side candidate
-  and the only Cluster-1 lever still standing.
+  **Consequence (C55 + C64 both negative):** S1 was promoted as C69 (now also NEGATIVE — see next).
+- **C69 (promoted S1) (2026-07-10, Claude) — NEGATIVE; Cluster 1 closed at the config-mechanism
+  level.**  The algebraic-geometry-side candidate.  Tangent envelope provably non-discriminating
+  (`0/1716` concurrent tangent triples; dual conic always q+1 points; all chords secant).  The
+  arithmetic candidates — genus-2 hyperelliptic trace `a2 = Σχ(f(x))` of the 6 branch points, the
+  residual tangent/secant partition, χ of Igusa-flavored resultants — all fail the flip/control
+  discipline.  Near-hit: `a2=0` for all 11 N-flip configs at q=11 and `(0,−4,0,−4)` for the two
+  distinct NPNP double-flips — a q=11 small-field artifact that dissolves at q=17 (N-flips spread
+  over `a2∈{−4,0,4}`) and is not sufficient (9 P-controls share `a2=0` at q=11).  Same shape as
+  C64's count-parity near-hit.  Script `rust/scripts/c69_envelope.py`.  Report:
+  [`../2026-07-10-codex-envelope-invariants.md`](../2026-07-10-codex-envelope-invariants.md).
+  **Program consequence: all three configuration-level dichotomy mechanisms (C55 group / C64
+  extremal / C69 algebraic) are dead.**  The arc-depleted dichotomy has no config→value dictionary;
+  the (ON) uniform route must engage the q-dependent A5 arc-depletion arithmetic directly.  No
+  fourth mechanism candidate is queued.
 - **C62:** exact selector scoring makes rho-greedy the clear mining order but refutes it as a law:
   `3,144/3,144` q=13 P hits, `1,051,553/1,052,204` q=17, and
   `2,610,869/2,622,214` in the q=19 `[1,2,3,4]` root. Every exact obligation still has some P
@@ -1023,6 +1035,20 @@ positive); **S1 (Segre envelope invariants) is promoted as C69** — the algebra
 candidate is now the only Cluster-1 lever standing.  Next Cluster-1 move: C69, which must explain
 *why the same integral configuration changes value across q* (the degree of freedom C55's static
 group data and C64's terminal-layer data both lacked).
+
+2026-07-10 C69 / S1 (Claude): ran the promoted algebraic-geometry mechanism and it is also
+**NEGATIVE** — added `rust/scripts/c69_envelope.py`, commit `8ac7e60`.  The tangent envelope is
+provably non-discriminating; the genus-2 hyperelliptic trace `a2` of the 6 branch points, the
+residual tangent/secant partition, and χ of Igusa-flavored resultants all fail the flip/control
+discipline.  The only near-hit (`a2=0` for all N-flip configs at q=11; `(0,−4,0,−4)` for the two
+distinct NPNP double-flips) is a q=11 small-field artifact that dissolves at q=17 — the identical
+failure shape as C64's count-parity near-hit, and a recurring lesson: q=11 is the smallest
+arc-depleted order and its two/three-valued invariants land on the value "by luck," then disperse as
+q grows.  **All three configuration-level dichotomy mechanisms (C55/C64/C69) are now dead.**  The
+arc-depleted dichotomy has no config→value dictionary; the (ON) uniform lower bound must engage the
+q-dependent A5 arc-depletion arithmetic directly.  Cluster 1 is closed at the config-mechanism
+level; no fourth candidate is queued.  The live (ON) levers are Cluster 2 (open-core /
+amortized-potential, Codex) and A5.
 
 ## Archive
 

@@ -36,8 +36,19 @@ lever is the algebraic-geometry side, C69 (promoted S1):**
    every order, so the value lives in the full tree, not the terminal maximal-arc layer.
 4. **C56** — group-indexed type alignment.  GATED on a C55 positive → **C55 NEGATIVE, so C56 stays
    closed-gated; do not start.**
-5. **C69 (promoted S1)** — envelope invariants (algebraic-geometry-side mechanism).  **PROMOTED**
-   per the C55+C64 both-negative condition; now the leading Cluster-1 open item.
+5. **C69 (promoted S1) [REPORTED 2026-07-10 — NEGATIVE]** — envelope invariants
+   (algebraic-geometry-side mechanism).  Tangent envelope provably non-discriminating; the genus-2
+   hyperelliptic arithmetic (trace `a2`), residual tangent/secant partition, and χ of Igusa-flavored
+   resultants all fail the flip/control discipline.  The near-hit (`a2=0` for all N-flip configs at
+   q=11) is a q=11 small-field artifact that dissolves at q=17.  **All three configuration-level
+   dichotomy mechanisms (C55 group / C64 extremal / C69 algebraic) are now dead.**
+
+**Cluster-1 status (2026-07-10): CLOSED at the configuration-mechanism level.** The arc-depleted
+dichotomy has no group-side, extremal-side, or algebraic-side config→value mechanism.  The (ON)
+uniform route must engage the q-dependent **A5 arc-depletion arithmetic** directly (which orders
+deplete, by how much) — there is no configuration-level dictionary to discharge it.  No fourth
+mechanism candidate is queued; the live (ON) levers are the open-core / amortized-potential lane
+(Cluster 2) and A5 itself.
 
 **Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
 (tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
@@ -2488,7 +2499,18 @@ hours; single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-09-codex-depletion-fraction.md`.
 
-## C69. Envelope invariants for the flipping configurations (sweep S1 — PROMOTED 2026-07-10)
+## C69. Envelope invariants for the flipping configurations (sweep S1 — PROMOTED 2026-07-10) [REPORTED 2026-07-10 — NEGATIVE]
+
+**Report: [`2026-07-10-codex-envelope-invariants.md`](2026-07-10-codex-envelope-invariants.md).**
+NEGATIVE.  Part A confirms the tangent envelope is non-discriminating (`0/1716` concurrent tangent
+triples; dual conic always q+1 points; all chords secant → all poles external).  The arithmetic
+candidates — genus-2 hyperelliptic trace `a2 = Σχ(f(x))` of the 6 branch points, the residual
+tangent/secant partition, χ of Igusa-flavored resultants — all fail the flip/control verdict
+discipline.  Near-hit: `a2=0` for all 11 N-flip configs at q=11 and `(0,−4,0,−4)` for the two
+(distinct) NPNP double-flips — but it is a q=11 small-field artifact (`|a2|≤4√11`; observed
+`{−4,0,4}`) that does NOT hold at q=17 (N-flips spread over `a2∈{−4,0,4}`) and is not sufficient (9
+P-controls also have `a2=0` at q=11).  Same failure shape as C64's count-parity near-hit.  **All
+three dichotomy mechanisms dead; S1 spent; (ON) rests on A5 arithmetic.**  No q=23/25 prediction.
 
 **PROMOTED** because C55 (group-side) and C64 (extremal-side) are both REPORTED NEGATIVE — S1 is
 the remaining, algebraic-geometry-side mechanism candidate for the arc-depleted-orders dichotomy,
