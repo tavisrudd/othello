@@ -82,9 +82,13 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
    the charge target.  **q=19 hard-surface follow-up (2026-07-10):** the 12 fixed-C31 `Psi`
    failures at the single ply-4 parent all admit the same internal repair signature
    (`live=6`, three defect components, nonzero xor, `Delta Psi=-42..-41`). Seven simple families
-   cover all 12 existentially, but none is tie-safe on all 12 (`psi_min` safe on 8,
-   `zero_xor_live_min` on the complementary 4); the remaining task is a tie coordinate, not a new
-   candidate family. Report: `2026-07-10-codex-q19-psi-selector-hard-surface.md`.
+   cover all 12 existentially, but none of the original families is tie-safe on all 12 (`psi_min`
+   safe on 8, `zero_xor_live_min` on the complementary 4).  **Tie-coordinate resolution:** the
+   sorted local zone-conflict-ray profile closes all 12 with `zero_live_ray_lex_max`, but full replay
+   at q=13/17/19 is uniform-negative: deterministic purity rises sharply while existential P-hit
+   coverage falls, with a minimal failure already at a q=13 ply-4 root.  Close as local positive /
+   uniform negative; do not broaden the selector search from this result. Report:
+   `2026-07-10-codex-q19-psi-selector-hard-surface.md`.
 
 **Independent lanes (parallel; pull when unblocked):**
 

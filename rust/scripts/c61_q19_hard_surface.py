@@ -25,6 +25,7 @@ def reply_field(text: str, name: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("tsv")
+    parser.add_argument("--regression-tsv")
     args = parser.parse_args()
 
     with open(args.tsv, newline="") as handle:
@@ -65,6 +66,32 @@ def main() -> None:
         "  cover_counts="
         + ",".join(f"{name}:{count}" for name, count in sorted(cover_counts.items()))
     )
+
+    if args.regression_tsv:
+        with open(args.regression_tsv, newline="") as handle:
+            regression_rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        def has_p(text: str) -> bool:
+            return any(":g0:" in item for item in text.split(";") if item)
+
+        regressions = [
+            row
+            for row in regression_rows
+            if has_p(row["zero_live_selected"])
+            and not has_p(row["zero_ray_max_selected"])
+        ]
+        min_ply = min(map(lambda row: int(row["parent_ply"]), regressions))
+        first = min(
+            (row for row in regressions if int(row["parent_ply"]) == min_ply),
+            key=lambda row: tuple(map(int, row["opponent"].split(","))),
+        )
+        print(
+            "C61-RAY-REGRESSION "
+            f"q={first['q']} rows={len(regressions)} min_parent_ply={min_ply} "
+            f"parent={first['parent_key']} opponent={first['opponent']}"
+        )
+        print("  zero_live_selected=" + first["zero_live_selected"])
+        print("  zero_ray_max_selected=" + first["zero_ray_max_selected"])
 
 
 if __name__ == "__main__":

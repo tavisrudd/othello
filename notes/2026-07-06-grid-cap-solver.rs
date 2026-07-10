@@ -6272,6 +6272,7 @@ struct S4SelectorReply {
     geom: &'static str,
     polar_internal: bool,
     rect_char: i8,
+    zone_conflict_rays: Vec<u16>,
 }
 
 #[derive(Clone, Copy, Default)]
@@ -6387,6 +6388,38 @@ fn s4_argmin_rho(replies: &[S4SelectorReply]) -> Vec<usize> {
         .collect()
 }
 
+// Candidate's rooted local signature in the live off-conic zone-conflict graph.
+// The rays are the row, column, and the line through each already-selected point;
+// legality makes these rays disjoint away from the candidate.  Sorting forgets
+// arbitrary selected-point labels while retaining the exact local incidence profile.
+fn s4_zone_conflict_rays(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+    z: usize,
+) -> Vec<u16> {
+    let mut rays = vec![0u16; occ.len() + 2];
+    for y in avail_cells(b, chosen, forbidden) {
+        let y = y as usize;
+        if y == z || is_on_root_conic(b, y) {
+            continue;
+        }
+        if y / b.q == z / b.q {
+            rays[0] += 1;
+        } else if y % b.q == z % b.q {
+            rays[1] += 1;
+        } else if let Some(i) = occ
+            .iter()
+            .position(|&x| bit_is_set(&b.line_mask[x as usize * b.n + z], y))
+        {
+            rays[i + 2] += 1;
+        }
+    }
+    rays.sort_unstable();
+    rays
+}
+
 fn s4_rho_top_levels_by_key<K: Ord, F: Fn(&S4SelectorReply) -> Option<K>>(
     replies: &[S4SelectorReply],
     levels: usize,
@@ -6397,6 +6430,37 @@ fn s4_rho_top_levels_by_key<K: Ord, F: Fn(&S4SelectorReply) -> Option<K>>(
     rhos.dedup_by(|a, b| (*a - *b).abs() <= 1e-13);
     let threshold = rhos[levels.saturating_sub(1).min(rhos.len() - 1)];
     s4_argmin_by_key(replies, |r| (r.rho <= threshold + 1e-13).then(|| key(r)).flatten())
+}
+
+fn s4_selector_reply_set_text(
+    q: usize,
+    selected: &[usize],
+    replies: &[S4SelectorReply],
+) -> String {
+    selected
+        .iter()
+        .map(|&j| {
+            let r = &replies[j];
+            format!(
+                "{},{}:g{}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:rays{}",
+                r.z as usize / q,
+                r.z as usize % q,
+                r.g,
+                r.delta_psi,
+                r.geom,
+                r.features.live_on,
+                r.features.defect_components,
+                r.features.xor_zero as u8,
+                r.features.psi,
+                r.zone_conflict_rays
+                    .iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<_>>()
+                    .join(",")
+            )
+        })
+        .collect::<Vec<_>>()
+        .join(";")
 }
 
 fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Option<&str>) {
@@ -6490,6 +6554,10 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
         "rho3_live",
         "rho2_defect",
         "rho2_zero_live",
+        "psi_ray_lex_min",
+        "psi_ray_lex_max",
+        "zero_live_ray_lex_min",
+        "zero_live_ray_lex_max",
     ];
     let mut stats: BTreeMap<&str, S4SelectorStats> =
         families.iter().map(|&name| (name, S4SelectorStats::default())).collect();
@@ -6498,7 +6566,7 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
     let mut baseline_psi = 0usize;
     let mut fail_writer = fail_out.map(|path| {
         let mut w = BufWriter::new(File::create(path).expect("create selector failure TSV"));
-        writeln!(w, "q\tt4\tparent_key\tparent_ply\topponent\txgeom\tparent_psi\tbaseline_psi\trho_p_hit\trho_psi_hit\tbest_p_rank\tmin_rho\tselected\tbest_p\tbest_psi_p\tcovering_families\tsafe_families").expect("write selector failure header");
+        writeln!(w, "q\tt4\tparent_key\tparent_ply\topponent\txgeom\tparent_psi\tbaseline_psi\trho_p_hit\trho_psi_hit\tbest_p_rank\tmin_rho\tselected\tbest_p\tbest_psi_p\tcovering_families\tsafe_families\tzero_live_selected\tzero_ray_max_selected\troot_replies").expect("write selector failure header");
         w
     });
     for i in 0..states.len() {
@@ -6538,6 +6606,13 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                     geom,
                     polar_internal: geom == "int" && polar_value == 0,
                     rect_char: s4_quadratic_character(&b.gf, rectangle),
+                    zone_conflict_rays: s4_zone_conflict_rays(
+                        &b,
+                        &x_occ,
+                        &x_chosen,
+                        &x_forbidden,
+                        z as usize,
+                    ),
                 });
             }
             if replies.iter().any(|r| r.g == 0) {
@@ -6566,6 +6641,10 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                 ("rho3_live", s4_rho_top_levels_by_key(&replies, 3, |r| Some(r.features.live_on))),
                 ("rho2_defect", s4_rho_top_levels_by_key(&replies, 2, |r| Some(r.features.defect_components))),
                 ("rho2_zero_live", s4_rho_top_levels_by_key(&replies, 2, |r| r.features.xor_zero.then_some(r.features.live_on))),
+                ("psi_ray_lex_min", s4_argmin_by_key(&replies, |r| Some((r.features.psi, r.zone_conflict_rays.clone())))),
+                ("psi_ray_lex_max", s4_argmin_by_key(&replies, |r| Some((r.features.psi, std::cmp::Reverse(r.zone_conflict_rays.clone()))))),
+                ("zero_live_ray_lex_min", s4_argmin_by_key(&replies, |r| r.features.xor_zero.then_some((r.features.live_on, r.zone_conflict_rays.clone())))),
+                ("zero_live_ray_lex_max", s4_argmin_by_key(&replies, |r| r.features.xor_zero.then_some((r.features.live_on, std::cmp::Reverse(r.zone_conflict_rays.clone()))))),
             ];
             for (name, selected) in &selections {
                 stats.get_mut(name).unwrap().add(selected, &replies);
@@ -6582,7 +6661,22 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
             }
             let rho_p_hit = rho_selected.iter().any(|&j| replies[j].g == 0);
             let rho_psi_hit = rho_selected.iter().any(|&j| replies[j].g == 0 && replies[j].delta_psi < 0);
-            if (!has_psi_reply || !rho_p_hit || !rho_psi_hit) && fail_writer.is_some() {
+            let zero_live_selected = &selections
+                .iter()
+                .find(|(name, _)| *name == "zero_xor_live_min")
+                .unwrap()
+                .1;
+            let zero_ray_max_selected = &selections
+                .iter()
+                .find(|(name, _)| *name == "zero_live_ray_lex_max")
+                .unwrap()
+                .1;
+            let zero_live_p_hit = zero_live_selected.iter().any(|&j| replies[j].g == 0);
+            let zero_ray_max_p_hit = zero_ray_max_selected.iter().any(|&j| replies[j].g == 0);
+            let ray_regression = zero_live_p_hit && !zero_ray_max_p_hit;
+            if (!has_psi_reply || !rho_p_hit || !rho_psi_hit || ray_regression)
+                && fail_writer.is_some()
+            {
                 let selected_text = rho_selected
                     .iter()
                     .map(|&j| {
@@ -6672,9 +6766,40 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                     .map(|(name, _)| *name)
                     .collect::<Vec<_>>()
                     .join(",");
+                let root_replies = if occ.len() == root_occ.len() {
+                    replies
+                        .iter()
+                        .map(|r| {
+                            format!(
+                                "{},{}:g{}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:rays{}",
+                                r.z as usize / q,
+                                r.z as usize % q,
+                                r.g,
+                                r.delta_psi,
+                                r.geom,
+                                r.features.live_on,
+                                r.features.defect_components,
+                                r.features.xor_zero as u8,
+                                r.features.psi,
+                                r.zone_conflict_rays
+                                    .iter()
+                                    .map(|x| x.to_string())
+                                    .collect::<Vec<_>>()
+                                    .join(",")
+                            )
+                        })
+                        .collect::<Vec<_>>()
+                        .join(";")
+                } else {
+                    String::new()
+                };
+                let zero_live_selected_text =
+                    s4_selector_reply_set_text(q, zero_live_selected, &replies);
+                let zero_ray_max_selected_text =
+                    s4_selector_reply_set_text(q, zero_ray_max_selected, &replies);
                 writeln!(
                     fail_writer.as_mut().unwrap(),
-                    "{}\t{}\t{:032x}\t{}\t{},{}\t{}\t{}\t{}\t{}\t{}\t{}\t{:.17}\t{}\t{}\t{}\t{}\t{}",
+                    "{}\t{}\t{:032x}\t{}\t{},{}\t{}\t{}\t{}\t{}\t{}\t{}\t{:.17}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
                     q,
                     t4.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
                     b.canon(&occ),
@@ -6692,7 +6817,10 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                     best_p_text,
                     best_psi_p_text,
                     covering_families,
-                    safe_families
+                    safe_families,
+                    zero_live_selected_text,
+                    zero_ray_max_selected_text,
+                    root_replies
                 )
                 .expect("write selector failure row");
             }

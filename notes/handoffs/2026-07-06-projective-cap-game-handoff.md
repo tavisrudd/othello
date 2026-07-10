@@ -1113,6 +1113,16 @@ coordinate (start with the embedded zone-conflict orbit), not a broader selector
 `notes/2026-07-10-codex-q19-psi-selector-hard-surface.md`; analyzer:
 `rust/scripts/c61_q19_hard_surface.py`.
 
+2026-07-10 C61 tie-coordinate resolution (Codex): the candidate's sorted local conflict-ray
+profile in the live off-conic zone graph supplies the missing q=19 coordinate.
+`zero_live_ray_lex_max` is deterministically safe on all 12 hard rows (first tested family to pass).
+Full exact replay prevents promotion: across five q=13 roots, ten q=17 roots, and the q=19
+`[1,2,3,4]` DAG it increases `all_psi` substantially but decreases `p_hit`; the first counterexample
+is already a q=13 ply-4 root where lexicographic maximization selects an N reply over a P reply.
+Verdict: **local positive / uniform negative**.  The tie surface is closed, but this is not a
+q-blind winning selector or `Good`-closure; no broader feature search follows from it.  Details and
+reproduction are appended to `notes/2026-07-10-codex-q19-psi-selector-hard-surface.md`.
+
 2026-07-10 C59: ran the arc-stability import lane independently of the Cluster-2/C61 work. Added
 `rust/scripts/c59_arc_stability_check.py` and
 `notes/2026-07-10-codex-arc-stability-import.md`; marked C59 REPORTED in the queue and added the

@@ -70,3 +70,78 @@ zone-conflict orbit of the candidate reply.  The gate is exact and small: it mus
 `psi_min` or `zero_xor_live_min` safe without consulting Grundy value.  If no such coordinate
 separates the tied candidates, retain the result as a localized impossibility surface rather than
 expanding the global selector library.
+
+## Addendum — the conflict-ray tie coordinate closes q=19 locally, but fails uniformly
+
+The requested one-coordinate test is complete.  For a candidate reply `z`, form its rooted local
+profile in the live off-conic zone-conflict graph after the opponent move:
+
+```text
+R(z) = sorted numbers of live off-conic cells on
+       z's row, z's column, and the line from z through each selected point.
+```
+
+Legality makes these rays disjoint away from `z`.  Sorting removes the arbitrary order of the
+selected points while retaining the candidate's exact local incidence profile.  The coordinate is
+geometric and is computed before consulting the Grundy table.
+
+Refine `zero_xor_live_min` lexicographically by **maximizing `R(z)`** after its existing
+`(xor_zero, live_on)` gate.  In the solver this family is `zero_live_ray_lex_max`.
+
+### Local result: PASS on all twelve q=19 obligations
+
+```text
+C61-Q19-HARD parent=0b7a91f6b96e82780d0fe4202f22b126 rows=12
+  safe_all=zero_live_ray_lex_max
+  safe_counts=... zero_live_ray_lex_max:12 ...
+```
+
+Every candidate remaining after the refined tie rule is P and Psi-decreasing.  This is the first
+deterministic geometric selector tested here that is safe on all twelve hard rows.  The opposite
+orientation (`zero_live_ray_lex_min`) is safe on only 8/12, so the orientation is substantive.
+
+### Full cross-order replay: NEGATIVE as a uniform winning selector
+
+The same fixed rule was replayed on all five q=13 roots, all ten q=17 full-PGL roots, and the exact
+q=19 `[1,2,3,4]` DAG.  `p_hit` means at least one tied selected reply is P; `all_psi` means every
+selected reply is P and Psi-decreasing.
+
+| q / corpus | obligations | family | `p_hit` | `all_psi` | tied |
+|---|---:|---|---:|---:|---:|
+| q=13, five roots | 3,144 | `zero_xor_live_min` | 3,107 | 2,968 | 1,854 |
+| | | `zero_live_ray_lex_max` | 3,017 | 3,003 | 1,542 |
+| q=17, ten roots | 1,052,204 | `zero_xor_live_min` | 1,043,299 | 846,108 | 617,380 |
+| | | `zero_live_ray_lex_max` | 1,006,912 | 983,912 | 379,698 |
+| q=19, root `1,2,3,4` | 2,622,214 | `zero_xor_live_min` | 2,577,643 | 1,922,618 | 1,851,909 |
+| | | `zero_live_ray_lex_max` | 2,408,348 | 2,347,278 | 1,052,862 |
+
+The refinement greatly improves deterministic purity (`all_psi`) and removes many ties, but it
+reduces existential coverage (`p_hit`).  It is therefore a useful local discriminator, not a
+winning selector or a `Good`-closure.
+
+The failure is already present at the q=13 root, so no deeper-state explanation can rescue the
+uniform rule.  For root key `05f7f1b9445d65074a4fd95e5f4e3462` and opponent `(5,8)`, the coarse
+minimum contains both
+
+```text
+(7,3):  g=1, R=[0,0,1,1,2,2,2]
+(11,3): g=0, R=[0,0,0,0,2,2,2].
+```
+
+Lexicographic maximization uniquely chooses the N reply `(7,3)`.  This is a minimal ply-4
+counterexample to promoting the q=19 repair into a q-blind selector.
+
+### Consequence
+
+Close this exact successor as **local positive / uniform negative**.  The zone-conflict embedding
+was the missing coordinate on the twelve-row q=19 surface, but one fixed monotone orientation of it
+does not extend across orders.  A further global feature search is not licensed by this result;
+the next proof attempt needs an order-sensitive realization rule or a different invariant, as the
+six strict C61 q=17/q=19 collisions already suggested.
+
+Reproduce the local and minimal-regression summaries:
+
+```bash
+python3 rust/scripts/c61_q19_hard_surface.py \
+  /tmp/c61-q19-rays.tsv --regression-tsv /tmp/c61-q13-ray-regress.tsv
+```
