@@ -116,10 +116,10 @@ open-core / amortized-potential lane (Cluster 2) and A5 itself.
    formula, replay against the C63 corpora.  Satisfies the C63 reopen condition ("a genuinely new
    proof-admissible coordinate independent of values/Z/depth") and is the best candidate
    explanation of the q=17/q=19 selector splits.  Spec §C70 below.
-9. **C71 (NEW 2026-07-10)** — three-involution transition theorem: how the third intruder
-   matching changes defect components and coupling charge, from the geometry of the three
-   centers.  Success criterion = derive `Psi`'s `6·components − 4·intruders` coefficients.  Spec
-   §C71 below.
+9. **C71 [REPORTED 2026-07-10]** — three-involution transition theorem.  Verdict: the third
+   intruder's after-skeleton is NOT a function of center-triangle geometry (labelled-embedding
+   coordinate missing); coefficient check positive (`dPsi = dReservoir + 6·dC − 4 − 2·dXor0`
+   exactly).  See §C71 below and `2026-07-10-codex-c71-third-intruder.md`.
 
 **A5 lane — arc-depletion arithmetic (now the sole live (ON) mechanism route).**  With the
 config-mechanism sweep complete (static C55/C64/C69 + dynamic Correction 3, all negative), A5 is the
@@ -152,12 +152,50 @@ exist, so the dichotomy data is untouched).
   admits a special (P) completion.** Report:
   [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md); script
   `rust/scripts/c68b_nbucket_density.py`.
-- **C72 (NEW 2026-07-10, eleventh pass)** — PGL permutation-module / Johnson-scheme decomposition
-  of the on-conic value function `f_q`.  A **concentration instrument** for the link-sum
-  near-point-mass (`onP(A) = Σ_{x∉A} f_q(A∪{x})`, dispersion ≤ 0.4 — the §6 class-stability
-  target), NOT a fourth config→value dictionary; Cluster 1 stays closed.  Flip/control discipline;
-  q=13/19 controls mandatory beside q=11/17 (both prior near-hits were q=11 artifacts).  Spec
-  §C72 below.
+- **C72 [REPORTED 2026-07-10 — NEGATIVE (read b), with a partial-identity gift]** — PGL
+  permutation-module / Johnson-scheme decomposition of the on-conic value function `f_q`.  A
+  **concentration instrument** for the link-sum near-point-mass (`onP(A) = Σ_{x∉A} f_q(A∪{x})`,
+  dispersion ≤ 0.4 — the §6 class-stability target), NOT a fourth config→value dictionary; Cluster 1
+  stays closed.  Result: **no harmonic identity forces near-constant link sums.** At the depleted
+  orders `f_q`'s spectral mass sits in the *top* Johnson components (j ≥ 4) and migrates UP with q —
+  top component `V_6` share `0.079` (q=11) → `0.726` (q=17); `V_0` share `= 1 − ν(q)` collapses
+  `0.64 → 0.21`.  Flip/control fails for any low-component reading (q=11 signature dissolves at q=17,
+  the C64/C69 lesson).  The concentration of `onP` is an artifact of the link operator `W_{5,6}`
+  discarding the dominant (link-invisible) `V_6` mass, not of `f_q` being low-degree — spectral
+  corroboration of C42.  **Partial gift for A5:** PGL 3-transitivity gives the exact q-uniform
+  identity `f_q ⊥ V_1 ⊕ V_2 ⊕ V_3` (kills the three highest-leverage `onP`-variance terms), reducing
+  the class-stability lemma to bounding the `V_4 ⊕ V_5` mass — but that mass is arithmetic
+  (arc-depletion), so A5 still owns the anchor `maxonN(q) ≤ q−5`.  q=13/19 controls (all-P, trivially
+  100% `V_0`).  Report:
+  [`2026-07-10-codex-c72-fq-decomposition.md`](2026-07-10-codex-c72-fq-decomposition.md); script
+  `rust/scripts/c72_fq_decomposition.py`.  Spec §C72 below.
+- **Codex round-1 theorem frontier (2026-07-10; reviewed + independently verified by Fable):**
+  [`2026-07-10-codex-odd-plane-round1-report.md`](2026-07-10-codex-odd-plane-round1-report.md) —
+  PROVED: the involutive-completion lemma (≥2 of 3 pairings per distinguished point; 15
+  constructions per five-frame); the fiber–stabilizer identity `fiber(B) = 30(q−1)/|Stab(B)|`
+  (small fiber = large stabilizer, exact and uniform — reproduces the committed q=25 histogram
+  6/120/180/360/720; the size-6 bucket is the Baer subline `P¹(F₅)`, stab `PGL(2,5)`); and a
+  **capacity proof of the q=17 (ON) statement from bucket stabilizers** (15 > q−4 = 13; N buckets
+  ≤ C2) — the first structural explanation of the knife edge.  No traction at q=11 (the V4
+  N-bucket absorbs exactly 3×5 = 15 — the XHIST saturates it) and none at q ≥ 19 (q−4 ≥ 15), so
+  it is explanation, not leverage, until the family grows.  REFUTED: stabilizer-specialness ⇒ P
+  (the q=11 N bucket `{∞,0,1,2,3,4}` has V4; the value-blind involutive selector misses every P
+  child on the q=11 extremal row) — this **breaks the C68b "P = rare/special" lead as an
+  implication**; special may not be defined via stabilizers.  FOUND (post-hoc, labeled as such):
+  the q=17 **secant packet** — exactly the three knife-edge classes have all five P escapes on
+  ONE line, the secant through the unique on-conic witness (no other q=17 class, none at q=11),
+  which explains the C44 rider's co-depletion finding: the off-conic pivot layer at q=17 is
+  parasitic on the on-conic witness.  Its two recommended routes are queued as **C73/C74**
+  (twelfth pass):
+- **C73 (NEW 2026-07-10, twelfth pass — run FIRST of the pair)** — value-blind secant-packet
+  theorem: derive the frame-point/on-conic-candidate secants algebraically and seek a value-blind
+  formula `L(A)` selecting the q=17 extremal packet, plus a local recursion lemma giving a P
+  point on `L(A)`.  Stays meaningful whichever way q=25 lands — it is the structure question for
+  the pre-registered off-conic pivot (C44 item 7 branch (ii)).  Spec §C73 below.
+- **C74 (NEW 2026-07-10, twelfth pass)** — growing fan-incidence capacity family: upgrade the
+  15-involution capacity lemma to an `Ω(q)` algebraic incidence family with an independent upper
+  bound on what an N fan can absorb.  Mandatory for uniformity, not optional: the constant 15
+  saturates at q=19 and the next depleted order has q−4 ≥ 21.  Spec §C74 below.
 
 **Independent lanes (parallel; pull when unblocked):**
 
@@ -2780,7 +2818,20 @@ Budget: hours–day, existing dumps + scripts (`s4potential`/`s4potentialprobe`,
 `c63-potential-lp.py`), single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c70-collision-charge.md`.
 
-## C71. Three-involution transition theorem — the first unclassified intruder layer (eleventh pass)
+## C71. Three-involution transition theorem — the first unclassified intruder layer (eleventh pass) [REPORTED 2026-07-10]
+
+**Reported:** [`2026-07-10-codex-c71-third-intruder.md`](2026-07-10-codex-c71-third-intruder.md).
+Verdict (3b, exact residual dependence): the after-skeleton is **NOT a function** of the
+center-triangle geometry (collinear, pairwise PGL orders, line/polar types) — up to 12–13
+distinct after-shapes share one geometric key, 94% of q=19 2→3 transitions live in a violating
+key class, and the miss grows with q.  Missing coordinate = the **labelled embedding** of the
+live conic cells vs `sigma_z` and its kill-lines (per-cell incidence, not a PGL invariant),
+confirming the C45 §4 warning.  Coefficient check positive: `dPsi = dReservoir + 6·dC − 4 −
+2·dXor0` exactly, so the transition reproduces `Psi`'s 6/−4 weighting by construction; single-move
+`Psi`-nonincrease holds to 99.998% (26 q=19 exceptions = one orbit `P[5]→P[1,1,1]`, equilateral
+external `d=5` triangle).  `Psi`-descent reduces to a `dC` rule (needs the labelled coordinate)
+plus the C70 reservoir charge; proved gate `D(z)=∅ ⇒ dC ≤ 0`.  New tool: `s4triple` mode in the
+solver + `rust/scripts/c71_transition_analysis.py`.
 
 **READ FIRST:** [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
 (Lemma VI, the one/two-intruder classification), the C45 report (defect-skeleton realizability),
@@ -2812,7 +2863,7 @@ of refitting them.
 Budget: day-scale; mining from existing dumps, proof by finite case analysis; single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c71-third-intruder.md`.
 
-## C72. PGL permutation-module / Johnson-scheme decomposition of f_q (A5 lane, eleventh pass)
+## C72. PGL permutation-module / Johnson-scheme decomposition of f_q (A5 lane, eleventh pass) [REPORTED 2026-07-10 — NEGATIVE (read b)]
 
 **READ FIRST:** the §6 witness-count heuristic in
 [`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md) (the
@@ -2847,3 +2898,80 @@ failed at and what this task must NOT attempt).
 Budget: hours–day; existing labels + linear algebra (the 6-subset space at q=19 is C(20,6) =
 38,760 — tiny); single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c72-fq-decomposition.md`.
+
+## C73. Value-blind secant-packet theorem — the off-conic escape structure at the knife edge (twelfth pass)
+
+**READ FIRST:**
+[`2026-07-10-codex-odd-plane-round1-report.md`](2026-07-10-codex-odd-plane-round1-report.md) §4
+(the secant packet + the adversarial controls) and §6 Route 1 (your spec's origin);
+[`2026-07-10-offconic-escape-margin.md`](2026-07-10-offconic-escape-margin.md) (the C44 rider —
+co-depletion at q=17); the C44 entry item 7 (the (ON)-bifurcation pre-registration this task
+serves).  Rescued scripts: `rust/scripts/escape_lines.py` (the packet finder),
+`rust/scripts/a5_incidence.py`, `rust/scripts/a5_stab.py`.
+
+The computed fact (verified twice, independently): at q=17, exactly the three knife-edge classes
+(onP=1, escape=5) have ALL five P children collinear — the line is the secant joining the unique
+on-conic P extension to one of the five conic-frame points, and its four other legal points are
+exactly the four off-conic P escapes.  No other q=17 class and no q=11 class has all-P-collinear.
+This was recognized post-hoc from P labels; the task is to make it a theorem-grade, value-blind
+statement.
+
+1. **Candidate-secant algebra:** derive, for a normalized five-frame `A`, the full family of
+   frame-point/on-conic-candidate secants as explicit algebraic objects (no P/N data).  Build the
+   complete candidate-secant incidence table at q=11 and q=17 with q=13/19 controls.
+2. **Value-blind selector:** seek a projective formula `L(A)` — defined from the frame's
+   incidence/arithmetic data only — that selects the observed packet line at the three q=17
+   extremal classes.  Test every candidate on all 21 q=17 classes + all 8 q=11 classes before
+   reading values (predeclare, then unblind — the round-1 report's own falsification protocol).
+3. **Local recursion lemma:** for the selected line, state and test the propagation claim that
+   some legal point of `L(A)` is P (chord-value propagation; the packet's 4 off-conic P cells are
+   one move deeper into the zone — what does the game value of a secant cell reduce to?).
+4. **Success gate:** a value-blind `L(A)` + a local recursion lemma implying a P child on `L(A)`.
+   **Failure gates:** an exact q=11/q=17 fan where every candidate formula selects no P child; or
+   a proof that selecting the observed secant requires knowing the unique P on-conic child (that
+   outcome would confirm the pivot layer is irreducibly witness-anchored — report it plainly, it
+   sharpens the C44 branch-(ii) risk).
+5. **q=25 hook:** when the running census lands, test the winning formula (or the failure
+   verdict) on the first depleted q=25 fan before reading its labels — the pre-registered
+   out-of-sample test.
+
+Budget: hours; existing data + small algebra, single-core, ≤ 2 GB.  This task stays meaningful
+whichever way q=25 lands: it is the structure question for the C44 item-7 branch-(ii) pivot.
+Report file: `notes/2026-07-10-codex-c73-secant-packet.md`.
+
+## C74. Growing fan-incidence capacity family — the Ω(q) upgrade of the 15-involution lemma (twelfth pass)
+
+**READ FIRST:**
+[`2026-07-10-codex-odd-plane-round1-report.md`](2026-07-10-codex-odd-plane-round1-report.md) §1
+(Lemmas A–C — the involutive-completion construction, the fiber–stabilizer identity, the q=17
+capacity proof) and §6 Route 2 (your spec's origin); the C68/C68b reports (what the anchor
+`maxonN(q) ≤ q−5` needs).  Rescued scripts as in C73.
+
+The proven base: 15 pointed-pairing involutions per five-frame, `Σ_x r_A(x) = 15`,
+`r_A(x) ≤ #involutions in Stab(A∪{x})`; at q=17 this PROVES the (ON) statement (N stabilizers
+≤ C2 ⇒ capacity 13 < 15).  The proven limits: at q=11 the V4 N-bucket absorbs exactly 15 (XHIST
+saturation), and for q ≥ 19 the constant 15 ≤ q−4 gives nothing.  The next depleted order has
+q−4 ≥ 21, so **growth in the construction family is mandatory for uniformity**.
+
+1. **Family search:** replace the 15 pairing involutions by a q-growing algebraic incidence
+   family (candidates: all involutions with center in a definable locus; higher-order cyclic
+   stabilizer elements per the C5-bucket evidence at q=11; conic-polarity-derived pairings).  For
+   each candidate define the weight `W_q(A)` = total incidence supply and derive its exact count
+   (genus-0 exactness — quadratic-character sums, no Weil loss).
+2. **Tactical-decomposition identity:** derive the incidence identity of the family against the
+   six-set stabilizer strata (the fiber–stabilizer identity is the proven prototype), giving an
+   upper bound on the weight an N fan can absorb per stabilizer type.
+3. **Success gate:** `W_q(A) = Ω(q)` uniform lower bound + an independently stated N-absorption
+   upper bound that is `o(W_q)` at the depleted orders.  **Failure gates:** the q=11 V4 or q=17
+   C2 N-buckets saturate every proposed weight; or every definable family stays `O(1)` — then
+   terminate this as fixed-small-q structure and say so (the capacity lemma remains a q ≤ 17
+   explanation).
+4. **Adversarial half:** use the genus-two automorphism classification (Gutierrez–Shaska, the
+   round-1 §3 import) + the exact q=11/q=17 orbit matrices (`M_11`, `M_17`) to adversarially test
+   every proposed "special" class — the q=11 forced C5 bucket and q=17 forced order-24 bucket
+   must BOTH be covered by any candidate family (the round-1 registry's kill-test), and
+   stabilizer-specialness ⇒ P is already refuted, so the family must earn its P-values through
+   the capacity count, never by assumption.
+
+Budget: hours–day; algebra + existing data, single-core, ≤ 2 GB.
+Report file: `notes/2026-07-10-codex-c74-capacity-family.md`.

@@ -577,9 +577,50 @@ task list.  Current high-value items:
   is queued in the C44 entry to quantify that fallback before q=25 forces the question).
   Priority among new work: C70 > C71 ≥ C72, consistent with C65's amortized-potential-primary
   verdict; the running q=25 census stays the decisive compute datum.
+- **Codex round-1 theorem frontier + Fable review (twelfth pass, 2026-07-10):**
+  [`../2026-07-10-codex-odd-plane-round1-report.md`](../2026-07-10-codex-odd-plane-round1-report.md),
+  independently verified (XHIST reproduced from a from-scratch implementation; the fiber identity
+  reproduces the committed q=25 bucket histogram 6/120/180/360/720 exactly — the size-6 bucket is
+  the Baer subline `P¹(F₅)` with stabilizer `PGL(2,5)`; the secant packet rerun from the rescued
+  scripts and cross-matched against the C44 rider's distribution).  PROVED: involutive-completion
+  lemma (15 constructions per five-frame, ≥2 of 3 pairings per distinguished point always
+  defined); `fiber(B) = 30(q−1)/|Stab(B)|`; and the **q=17 (ON) statement from bucket
+  stabilizers** (capacity 15 > q−4 = 13, N stabilizers ≤ C2) — the first structural explanation
+  of the knife edge, with its limits equally proven (q=11's V4 N-bucket absorbs exactly 15; the
+  constant gives nothing for q ≥ 19).  REFUTED: stabilizer-specialness ⇒ P (q=11 N bucket has V4)
+  — the C68b "P = rare/special" lead survives only as a correlation, not an implication.  FOUND
+  (post-hoc): the q=17 **secant packet** — the three knife-edge classes' five P escapes are one
+  line through the unique on-conic witness, so the off-conic pivot layer at q=17 is *parasitic on
+  the witness it would replace*, sharpening the rider's co-depletion warning.  Queued **C73**
+  (value-blind `L(A)` secant theorem — the pivot's structure question, meaningful whichever way
+  q=25 lands) and **C74** (`Ω(q)` capacity family — mandatory for uniformity, 15 saturates at
+  q=19).  Scripts rescued from `/tmp` into `rust/scripts/` (`a5_incidence.py`, `a5_stab.py`,
+  `escape_lines.py`); Tranchida involution-triples dictionary (arXiv:2411.10299) + the fiber
+  identity forwarded mid-run to the C71/C72 agents.  One report defect: its "no active solver
+  process observed" is wrong — the q=25 census was and is running (sandboxed process view).
 
 Recently reported:
 
+- **C72 (2026-07-10, Claude/Opus) — f_q Johnson-scheme decomposition: NEGATIVE (read b), with an
+  exact identity as a by-product.**  No harmonic/design identity forces near-constant link sums:
+  at the depleted orders `f_q`'s spectral mass sits in the TOP Johnson components and migrates up
+  with q (`V_6` share 0.079 → 0.726 from q=11 to q=17; `V_0` share `= 1 − ν(q)`), so any
+  low-component reading is a q=11 artifact (flip/control fail, the C64/C69 lesson).  The observed
+  `onP` near-point-mass is the link operator `W₅,₆` *discarding* the dominant link-invisible
+  `V_6` mass, not `f_q` being low-degree — spectral corroboration of C42.  **Gift:** PGL
+  3-transitivity gives the exact q-uniform identity `f_q ⊥ V_1 ⊕ V_2 ⊕ V_3`, reducing the §6
+  class-stability question to bounding the `V_4 ⊕ V_5` mass (which is arithmetic — A5 keeps the
+  anchor).  Report:
+  [`../2026-07-10-codex-c72-fq-decomposition.md`](../2026-07-10-codex-c72-fq-decomposition.md);
+  script `rust/scripts/c72_fq_decomposition.py`.
+- **C44 item-7 rider (2026-07-10, Claude/Opus) — off-conic escape margin: modest, trending
+  adverse, co-depletes at q=17.**  Worst-class off-conic escapes `8 → 4` across the depleted
+  orders; at q=17 the three knife-edge on-conic classes (onP=1) are exactly the three worst
+  off-conic classes (off=4 — nearly the whole 5-escape total), where q=11 anti-aligns (knife-edge
+  class has off=16).  The round-1 secant packet explains the q=17 alignment: all five escapes are
+  one secant through the on-conic witness.  Report:
+  [`../2026-07-10-offconic-escape-margin.md`](../2026-07-10-offconic-escape-margin.md); script
+  `rust/scripts/c44_offconic_escape_margin.py`.
 - **C68 follow-on (2026-07-10, Claude) — N-bucket density ν(q); the min-witness suppression is
   marginal.**  Exact on-conic S4 bucket census (`s4arena --all`, q=5..19). `ν(q)` (state-weighted
   N-fraction) `= 0` off the depleted orders, `0.357` (q=11), `0.791` (q=17) — positive and
