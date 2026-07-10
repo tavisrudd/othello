@@ -1426,6 +1426,62 @@ fn s4_g(
     Some(false)
 }
 
+// Arena-backed twin of `s4_g` for the memory-tight square orders (q=25 Baer census).
+// Same early-break P/N recursion, but the transposition table is a single fixed-size open-
+// addressing `Shard` (16-byte u128 slots, packed value bit) instead of the growable
+// `FnvMap<u128,bool>` (33 bytes/slot at pow2 capacity). Halves slot RAM AND never rehashes,
+// so a big bucket runs under a fixed pre-allocated arena with no ~2x rehash spike. `cap` is the
+// abort threshold on live entries; the caller sizes the physical arena to keep the peak load
+// factor sane (Shard has no fullness guard — see solve_s4_arena's assert).
+fn s4_g_arena(
+    b: &Board,
+    memo: &mut Shard,
+    cap: usize,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> Option<bool> {
+    let key = b.canon(occ);
+    if let Some(v) = memo.get(key) {
+        return Some(v);
+    }
+    if memo.len >= cap {
+        return None;
+    }
+    let mut avail = [0u64; MAXW];
+    for i in 0..MAXW {
+        avail[i] = b.all[i] & !chosen[i] & !forbidden[i];
+    }
+    for w in 0..MAXW {
+        let mut bits = avail[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            let mut nchosen = *chosen;
+            set_bit(&mut nchosen, z);
+            let mut nforb = *forbidden;
+            mask_or(&mut nforb, &b.rc_mask[z]);
+            for &x in occ.iter() {
+                mask_or(&mut nforb, &b.line_mask[x as usize * b.n + z]);
+            }
+            occ.push(z as u16);
+            let child = s4_g_arena(b, memo, cap, occ, &nchosen, &nforb);
+            occ.pop();
+            match child {
+                None => return None,
+                Some(false) => {
+                    memo.insert(key, true);
+                    return Some(true);
+                }
+                Some(true) => {}
+            }
+        }
+    }
+    memo.insert(key, false);
+    Some(false)
+}
+
 fn s4_grundy(
     b: &Board,
     memo: &mut FnvMap<u128, u8>,
@@ -1511,6 +1567,102 @@ fn eval_s4_on_board(b: &Board, t4: &[usize], cap: usize) -> S4Eval {
 fn eval_s4(q: usize, t4: &[usize], cap: usize) -> S4Eval {
     let b = Board::new(q);
     eval_s4_on_board(&b, t4, cap)
+}
+
+// Arena-backed twin of `eval_s4_on_board`. `arena_log2` = log2 of the physical Shard slot count
+// (16 bytes/slot; lazily faulted, so an unused arena costs ~no RSS). `cap` = abort threshold on
+// live entries; must stay well under the physical capacity (asserted at the call site).
+fn eval_s4_on_board_arena(b: &Board, t4: &[usize], cap: usize, arena_log2: usize) -> S4Eval {
+    let (occ, chosen, forbidden, cells) = build_s4_root(b, t4);
+    let mut memo = Shard::new(1usize << arena_log2);
+    let start = Instant::now();
+    let mut occ_solve = occ.clone();
+    let value = s4_g_arena(b, &mut memo, cap, &mut occ_solve, &chosen, &forbidden);
+    let elapsed = start.elapsed().as_secs_f64();
+    match value {
+        Some(is_n) => S4Eval {
+            status: "OK",
+            label: Some(if is_n { "N" } else { "P" }),
+            peak_memo: memo.len,
+            elapsed,
+            cells,
+        },
+        None => S4Eval {
+            status: "ABORTED",
+            label: None,
+            peak_memo: memo.len,
+            elapsed,
+            cells,
+        },
+    }
+}
+
+// Arena-backed S4 labeling: single bucket rep, or `--all` full-PGL census (one arena per bucket,
+// reclaimed between buckets). Built for the memory-tight q=25 Baer census (C44) where the FnvMap
+// path blows the 8 GB gate. `arena_log2=29` => 2^29 slots = 8 GiB virtual (lazily faulted).
+fn solve_s4_arena(
+    q: usize,
+    rep: Option<Vec<usize>>,
+    cap: usize,
+    arena_log2: usize,
+    start_idx: usize,
+    limit: Option<usize>,
+) {
+    let physical = 1usize << arena_log2;
+    // Shard has no fullness guard: keep the peak live-entry load factor <= 7/8 so open-addressing
+    // probing stays bounded (cap is the abort threshold; len peaks at exactly cap).
+    assert!(
+        cap.saturating_mul(8) <= physical.saturating_mul(7),
+        "s4arena: cap {} too high for arena 2^{}={} slots (need cap <= 7/8*physical = {})",
+        cap,
+        arena_log2,
+        physical,
+        physical / 8 * 7
+    );
+    let board = Board::new(q);
+    if let Some(t4) = rep {
+        let ev = eval_s4_on_board_arena(&board, &t4, cap, arena_log2);
+        println!(
+            "S4ARENA q={} t4={:?} cells={:?} status={} value={} peak-memo={} cap={} arena-log2={} elapsed={:.3}",
+            q, t4, ev.cells, ev.status, ev.label.unwrap_or("-"), ev.peak_memo, cap, arena_log2, ev.elapsed
+        );
+        return;
+    }
+    let buckets = enumerate_s4_buckets(q);
+    println!(
+        "S4ARENA-CENSUS q={} buckets={} arena-log2={} cap={} start={} limit={}",
+        q,
+        buckets.len(),
+        arena_log2,
+        cap,
+        start_idx,
+        limit.map_or_else(|| "none".to_string(), |x| x.to_string())
+    );
+    let mut run = 0usize;
+    let (mut ok_p, mut ok_n, mut aborted) = (0usize, 0usize, 0usize);
+    for bucket in buckets.iter().filter(|b| b.idx >= start_idx) {
+        if let Some(max_run) = limit {
+            if run >= max_run {
+                break;
+            }
+        }
+        run += 1;
+        let ev = eval_s4_on_board_arena(&board, &bucket.rep, cap, arena_log2);
+        match ev.label {
+            Some("P") => ok_p += 1,
+            Some("N") => ok_n += 1,
+            Some(other) => panic!("unexpected s4 label {}", other),
+            None => aborted += 1,
+        }
+        println!(
+            "S4ARENA-BUCKET q={} idx={} size={} rep={:?} status={} value={} peak-memo={} elapsed={:.3}",
+            q, bucket.idx, bucket.size, bucket.rep, ev.status, ev.label.unwrap_or("-"), ev.peak_memo, ev.elapsed
+        );
+    }
+    println!(
+        "S4ARENA-SUMMARY q={} run={} okP={} okN={} aborted={}",
+        q, run, ok_p, ok_n, aborted
+    );
 }
 
 fn solve_s4(q: usize, t4: &[usize], cap: usize) {
@@ -9892,6 +10044,57 @@ fn main() {
             .expect("s4 mode needs t values: s4 <q> t1,t2,t3,t4 [--cap <slots>]");
         let t4 = parse_t4(t4_arg);
         solve_s4(q, &t4, cap);
+        return;
+    }
+    if args[1] == "s4arena" {
+        // s4arena <q> [<t1,t2,t3,t4> | --all] [--cap <slots>] [--log2 <L>] [--start <idx>] [--limit <n>]
+        // Arena-backed labeling (16-byte slots, fixed pre-alloc, no rehash). --log2 default 29 = 8 GiB.
+        let mut cap: Option<usize> = None;
+        let mut arena_log2: usize = 29;
+        let mut start_idx = 0usize;
+        let mut limit: Option<usize> = None;
+        let mut all = false;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--all" {
+                all = true;
+            } else if a == "--cap" {
+                cap = Some(it.next().expect("--cap needs a value").parse().expect("--cap int"));
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                cap = Some(rest.parse().expect("--cap int"));
+            } else if a == "--log2" {
+                arena_log2 = it.next().expect("--log2 needs a value").parse().expect("--log2 int");
+            } else if let Some(rest) = a.strip_prefix("--log2=") {
+                arena_log2 = rest.parse().expect("--log2 int");
+            } else if a == "--start" {
+                start_idx = it.next().expect("--start needs a value").parse().expect("--start int");
+            } else if let Some(rest) = a.strip_prefix("--start=") {
+                start_idx = rest.parse().expect("--start int");
+            } else if a == "--limit" {
+                limit = Some(it.next().expect("--limit needs a value").parse().expect("--limit int"));
+            } else if let Some(rest) = a.strip_prefix("--limit=") {
+                limit = Some(rest.parse().expect("--limit int"));
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4arena mode needs q: s4arena <q> [<t4>|--all] [--cap C] [--log2 L] [--start S] [--limit N]")
+            .parse()
+            .expect("q must be an integer");
+        let cap = cap.unwrap_or((1usize << arena_log2) / 10 * 8);
+        let rep = if all {
+            None
+        } else {
+            Some(parse_t4(
+                positional
+                    .get(1)
+                    .expect("s4arena needs t4 (e.g. 1,2,3,5) or --all"),
+            ))
+        };
+        solve_s4_arena(q, rep, cap, arena_log2, start_idx, limit);
         return;
     }
     if args[1] == "s4bucketlist" {
