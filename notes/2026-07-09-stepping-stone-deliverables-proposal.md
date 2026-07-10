@@ -61,11 +61,13 @@ can be pitched to whichever of those audiences it most naturally serves.
 `n ≥ 1`; `PG(2m−1,q)` is P for all odd `q`; `PG(2,q)` is P for all even `q`. The odd-plane case is
 a conjecture backed by the computed ladder (P through `q = 23`).
 
-**Caveats (2026-07-09 second pass).** (i) The open set is larger than the odd-plane row:
-`PG(2m,q)`, `m ≥ 2`, odd `q` is open with *no direct outcome evidence at all* — C32 was a policy
-probe, not a solve; C43 sizes PG(4,3). D1 must state that hole plainly, not silently scope to
-planes. (ii) The "conjecture false ⟺ trapped size-3" framing is one-directional until C41
-certifies the converse — cite it as queued, not proven.
+**Caveats (updated 2026-07-10).** (i) The open set is larger than the odd-plane row:
+the uniform family `PG(2m,q)`, `m ≥ 2`, odd `q` remains open, but it is no longer an evidence
+vacuum—C43 exactly solved the first case, **`PG(4,3) = P`**.  C32 was only a negative policy probe;
+D1 must state both the computed P datum and the remaining family-wide hole, not silently scope to
+planes. (ii) C41 has since Lean-certified the bidirectional equivalence
+`PG(2,q) is N ⟺ a trapped residual size-3 exists`, subject to the usual specification-match
+caveat; it is no longer merely a queued converse.
 
 **Publishable unit.** One coherent outcome-classification paper. The C26 audit already fixed the
 novelty wording: HHS own the Nofil ruleset and STS prior art; the *new* content is the

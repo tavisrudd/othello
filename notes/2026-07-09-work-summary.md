@@ -160,9 +160,10 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
   **live-conic xor-zero maintenance**: every first move has a P-reply with conic Node-Kayles xor 0
   (within the first four zero-xor candidates); one bucket (`1,3,4,9`) is verified maintainable through
   one further coupled move (28,646/28,646 obligations). Termination not proved.
-- **Even-dimensional odd-`q` (`PG(2m,q)`, m≥2) is an evidence vacuum** — no such board has ever been
-  exactly solved. **C43** sizes an exact `PG(4,3)` solve; an N verdict would be the program's first N
-  geometry.
+- **Even-dimensional odd-`q` (`PG(2m,q)`, m≥2) now has its first direct outcome:** C43 exactly
+  solved **`PG(4,3) = P`** in 3.7 s / 25,258 orbit-canon memo states, with independent
+  move-order/canonicalization cross-checks.  The uniform family remains open, and no second board
+  in it has been solved.
 - Prize calibrated ~20–25%, de-risked into the D-items (§8).
 
 **Queens:** exact **G(18)** (the nimber; outcome already settled). ~300–500B nodes, ~1.5–2 days per
@@ -271,7 +272,8 @@ outcome indicator, Paley-game sequence, A316632 extension.
   attribution, Lean scaffolds, `[REPORTED]` per-task notes); **Claude/Opus** = a subset incl. the
   C48/C51/C52 mirror harvest + Lean landings, C53.
 - **Task queue** (`notes/2026-07-07-codex-task-queue.md`): C1–C28 largely closed; the C29–C54 band
-  drives the frontier. Open high-value: **C34** (D1 manuscript), **C43** (PG(4,3) sizing), **C44**
+  drives the frontier. C43 has reported `PG(4,3) = P`; its follow-up is strategy extraction, while
+  open high-value compute includes **C44**
   (q=25 census), **C45–C47** (defect-skeleton / depletion-ladder / minimal-CE constraints), **C50**
   (kernel-checked Grundy certs), **C54** (q=23 bucket-label certification).
 - **Named-expert-personas system:** dossiers on real mathematicians (`notes/expert-personas/`) loaded

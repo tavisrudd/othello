@@ -1,4 +1,4 @@
-# C43 — PG(4,3) exact-solve sizing (the even-dimensional evidence vacuum)
+# C43 — PG(4,3) exact-solve sizing (closing the former even-dimensional evidence vacuum)
 
 Author: Claude/Opus, 2026-07-09. Status: **SOLVED — PG(4,3) = P (second-player win).**
 
@@ -25,7 +25,7 @@ nodes, never flips a verdict. Details and the sizing that led here follow.
 
 Task: `notes/2026-07-07-codex-task-queue.md` §C43. Size an exact cap-game solve of
 **PG(4,3)** — the smallest instance of the family `PG(2m,q)`, `m ≥ 2`, odd `q`, which
-has **zero direct outcome evidence**. Sizing first; a verdict only if the extrapolation
+had **zero direct outcome evidence before this task**. Sizing first; a verdict only if the extrapolation
 says a full solve fits comfortably. An **N** verdict would be the program's first N
 geometry (seismic — stop and report).
 
@@ -109,8 +109,9 @@ orbit-canon negamax solves the calibration ladder to the known outcomes with tin
 trees (alpha-beta + canon collapse): **PG(2,3)=P (5 nodes), PG(2,5)=P (7), PG(2,7)=P (9),
 PG(3,3)=P (10 nodes vs 55,909 raw caps)**. The small node counts are expected — those are
 all closed P families (odd projective dim / small planes) with mirror/pairing strategies, so
-the proof tree is shallow. PG(4,3) is even-dimensional with **no** known strategy, so its
-proof tree is the open question the solve now answers directly.
+the proof tree is shallow. Before this solve, PG(4,3) was even-dimensional with **no known
+winning strategy or outcome**, so its proof tree was the open question answered directly here.
+The solved memo now contains a strategy, but no closed-form mechanism has yet been extracted.
 
 ### PG(4,3) exact orbit growth (Rust BFS)
 

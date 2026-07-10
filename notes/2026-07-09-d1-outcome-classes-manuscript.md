@@ -38,7 +38,9 @@ class of games.
 the conjecture through order 23 at different trust tiers.  **[LEAN]** In rank three the conjecture
 is equivalent to a residual escape statement: a counterexample exists exactly when some legal
 size-three residual position has only N-valued size-four children.  **[CONDITIONAL]** The uniform
-odd-order plane theorem remains open, as do all higher even projective dimensions over odd fields.
+odd-order plane theorem remains open, as do the uniform higher-even-dimensional families over odd
+fields.  **[COMPUTED]** The smallest board in the latter family has now been solved exactly:
+`PG(4,3)` is P.
 
 ## 1. Introduction
 
@@ -83,10 +85,12 @@ and fixed-point-free involution mirrors close the four families, while projectiv
 order have an odd number of points and resist a fixed-point-free projective involution.  The paper
 should use this contrast as organization, not imply that parity alone proves any open case.
 
-**Open-family warning [CONDITIONAL].** The open set is larger than the odd-plane row:
-`PG(2m,q)`, `m >= 2`, over odd fields is open, and there is currently no direct exact-outcome
-evidence even for `PG(4,3)`.  The C32 computation tested and rejected one composite-mirror policy;
-it did not solve the board.
+**Open-family warning [CONDITIONAL + COMPUTED].** The open set is larger than the odd-plane row:
+the uniform family `PG(2m,q)`, `m >= 2`, over odd fields remains open.  C43 supplies the first
+direct exact-outcome evidence, `PG(4,3) = P` (25,258 orbit-canon memo states, independently
+cross-checked).  C32 tested and rejected one composite-mirror policy on the same board; that
+method-negative must not be confused with C43's P outcome.  No second board in this open family
+has been solved.
 
 ## 2. Preliminaries
 
@@ -326,8 +330,11 @@ oval theorem itself performs this reduction.
 ### 7.5 The higher even-dimensional hole
 
 **Open problem [CONDITIONAL].** For odd `q`, the outcomes of `PG(2m,q)` with `m >= 2` remain open.
-There is no direct solved-board evidence.  Place this immediately after the plane table so the
-paper does not imply that the four theorems classify all projective dimensions.
+**[COMPUTED]** `PG(4,3) = P`, the first and currently only direct solved-board evidence in this
+family; the exact orbit-canon solve used 25,258 memo states and passed independent move-order and
+canonicalization cross-checks.  Place this immediately after the plane table so the paper records
+both the positive first datum and the fact that the four uniform theorems do not classify all
+projective dimensions.
 
 ## 8. Related work and novelty positioning
 

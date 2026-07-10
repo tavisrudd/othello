@@ -17,6 +17,9 @@ Closed or structurally understood:
 - `PG(n,2)` is P for every projective dimension `n >= 1`.
 - `PG(2m-1,q)` is P for every odd `q`, by a fixed-point-free elliptic projective involution.
 - `PG(2,q)` is P for all even `q`.
+- `PG(4,3)` is computed P, the first direct outcome in the still-open higher-even-dimensional,
+  odd-field family; the exact C43 orbit-canon solve and independent cross-checks used 25,258 memo
+  states.
 - Odd projective planes are proved in Lean for `q = 5, 7, 11, 13`; `q = 3, 9, 17, 19` are
   computed P but not all Lean-closed.  `q = 23` now has a bucket-first on-conic computation:
   all 22 full-`PGL(2,23)` on-conic buckets are P.  By the full-PGL conic-projectivity bridge
@@ -116,10 +119,14 @@ dimensions `PG(2m,q)`, `m >= 2`, odd `q`, remain open.  C32 refuted the primary 
 composite-mirror idea in the plane and found an immediate fixed-`rho` seed obstruction in PG(4,3);
 future even-dimensional work needs a new non-primary design.
 
-**Evidence vacuum:** no even-dimensional odd-`q` board has ever been exactly *solved* — C32 was a
-policy probe, not a solve, and PG(3,3)/PG(4,2) belong to closed families.  We have no computational
-grounds even for conjecturing PG(4,3)'s value.  **C43** sizes an exact PG(4,3) solve; either
-verdict fills this hole, and an N verdict would be the program's first N geometry.
+**First direct evidence:** C43 exactly solved `PG(4,3) = P`, the first even-dimensional odd-`q`
+board outcome.  The compiled orbit-canon solver used 25,258 memo states and 3.7 seconds; forward
+and reverse move orders plus an independent canonicalization all agree on P.  This removes the
+former evidence vacuum and supports the broader all-P conjecture, but it does not close the family:
+`PG(4,5)`, `PG(6,3)`, and every uniform strategy theorem remain open.  The immediate structural
+follow-up is to extract the `PG(4,3)` second-player strategy and test it for a recognizable
+non-primary mechanism.  Report:
+[`../2026-07-09-codex-pg43-sizing.md`](../2026-07-09-codex-pg43-sizing.md).
 
 ### Classical Varieties (C48 mirror harvest)
 
@@ -454,8 +461,8 @@ task list.  Current high-value items:
 - **Counterexample-readiness additions (Fable, 2026-07-09 second pass):** **C41** trap ⇒ N
   converse in Lean (reported/proved; D1 may use the equivalence); **C42** fixed-q census propagation
   (rescoped same day after the on-conic child type-alignment verdict, then reported **NEGATIVE**
-  — no census mechanism; see Recently reported); **C43** PG(4,3)
-  exact-solve sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer
+  — no census mechanism; see Recently reported); **C43** exact-solved `PG(4,3) = P`, closing the
+  former even-dimensional evidence vacuum but not the uniform family; **C44** GF(25) path + q=25 Baer
   bucket census (the A4 falsification watch, previously without a task ID; q=25's depletion
   status is now the key covariate).  The former q=23 direct-B3-discharge rider is superseded by
   **C53** (full-PGL bridge — parts 1–2 now a verified Lean theorem, `Sym2Bridge`) and **C54**
@@ -1217,6 +1224,12 @@ an exact P-valued reply, with zero no-candidate/no-hit/abort rows across a disjo
 Thus bucket 2 is P by the root game equation and C53 full-PGL transport. Together with Claude's
 arena labels for buckets 0 and 1, q25 now has at least 3/28 buckets labeled, all P. Details and
 verbatim boundary summaries are in `2026-07-09-codex-q25-baer-census.md`.
+
+2026-07-10 PG(4,3) documentation sync (Codex): propagated C43's exact **`PG(4,3) = P`** result
+through the canonical handoff, D1 manuscript skeleton, repo work summary, stepping-stone proposal,
+task queue, and the C32/C43 reports.  Current wording now distinguishes the failed C32 mirror
+policy from the P board outcome, records the 25,258-state independently cross-checked solve, and
+keeps the higher-even-dimensional odd-field family correctly open beyond this first datum.
 
 ## Archive
 

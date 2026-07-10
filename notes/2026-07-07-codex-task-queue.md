@@ -136,7 +136,9 @@ exist, so the dichotomy data is untouched).
 - **C30** — generated-checker refactor → q17/q19 Lean assembly (engineering, long-running).
   The v5 full q17 canonical build now projects above 21.5 h sequential, tripping the task's
   explicit ~10 h user-launch gate; do not launch it implicitly.
-- **C43** / **C44** — PG(4,3) exact-solve sizing / GF(25) path + q=25 census (compute lanes).
+- **C43 [REPORTED 2026-07-09 — `PG(4,3) = P`]** / **C44** — the former
+  even-dimensional evidence vacuum is closed by the first direct P datum; q=25 census remains an
+  active compute lane.  C43's optional follow-up is strategy extraction, not another sizing run.
 - **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
   (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
   pairwise non-isomorphic (distinct complete-arc spectra), so the odd-plane P-property is invariant
@@ -217,8 +219,8 @@ the most plausible one lives. Four additions:
   into arc-depletion arithmetic (A5). **Reported NEGATIVE same day:** the census is non-uniform
   even at the all-P orders (12/12 and 27/27 distinct vectors at q=13/q=19); no propagation
   mechanism exists, and the (ON) uniform route rests entirely on A5.
-- **C43** — PG(4,3) exact-solve sizing. Joins **Tier C**: independent compute lane; either verdict
-  fills D1's even-dimensional section, which currently has zero direct outcome evidence.
+- **C43 [REPORTED 2026-07-09 — `PG(4,3) = P`]** — joined **Tier C** as the independent compute
+  lane and supplied D1's first direct even-dimensional odd-`q` outcome.
 - **C44** — GF(25) prime-power path + q=25 Baer bucket census. Joins **Tier C after C43**: the
   falsification map's top A4 watch, previously orphaned with no task ID.
 
@@ -1392,9 +1394,10 @@ wording conservative per C26 (structured finite-incidence subfamily, not a new g
 the falsification equivalence bidirectionally using
 `GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`; keep the usual
 Lean/spec-match caveat. (ii) The open set is larger than the
-odd-plane row: `PG(2m,q)`, `m ≥ 2`, odd `q` is open with **no direct outcome evidence at all**
-(C32 was a policy probe, not a solve; C43 sizes PG(4,3)) — the status/evidence table and the
-section skeleton must state that hole plainly, not silently scope to planes.
+odd-plane row: the uniform family `PG(2m,q)`, `m ≥ 2`, odd `q` remains open, while C43 now gives
+the first direct datum, **`PG(4,3) = P`** (C32 was a policy probe, not a solve) — the
+status/evidence table and section skeleton must state both facts plainly, not silently scope to
+planes.
 
 Deliverable: the skeleton draft at `notes/2026-07-09-d1-outcome-classes-manuscript.md`.
 Report file: `notes/2026-07-09-codex-d1-manuscript-skeleton.md` (the readiness audit + gaps list +
@@ -1677,7 +1680,7 @@ the uniform (ON) route now rests entirely on A5 depletion arithmetic. The class-
 constant remains an empirical fact with no census mechanism behind it. C47's dichotomy row takes
 its negative branch.
 
-## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum [REPORTED 2026-07-09 — Claude/Opus — **PG(4,3) = P**]
+## C43. PG(4,3) exact-solve sizing — the former even-dimensional evidence vacuum [REPORTED 2026-07-09 — Claude/Opus — **PG(4,3) = P**]
 
 **Result: PG(4,3) = P (second-player win).** The sizing showed the raw state space is
 ~10¹³ (infeasible) but the PGL(5,3)-orbit space is only low-tens-of-thousands, so an exact
@@ -1690,12 +1693,11 @@ independent IR canon. Report: [`2026-07-09-codex-pg43-sizing.md`](2026-07-09-cod
 Next: extract the PG(4,3) winning 2nd-player strategy for the pairing-hunt; PG(4,5)/PG(6,3)
 need a wider-than-128-bit board word first (781/1093 points).
 
-Context: D1's outcome-classification table has an entire family with **zero direct outcome
-evidence**: `PG(2m,q)`, `m ≥ 2`, odd `q`. PG(3,3) is odd projective dimension (closed by C25);
-PG(4,2) is q=2 (closed by C24); C32 was a *policy* probe (is one candidate mirror stuck-free),
-not a solve. We do not currently have computational grounds even for *conjecturing* PG(4,3)'s
-value. One verdict here reshapes both D1's even-dimensional section and the post-C32 design hunt;
-an N verdict would be the program's first N geometry — seismic, stop-and-report.
+Historical task context: at task creation, D1's outcome-classification table had an entire family
+with **zero direct outcome evidence**: `PG(2m,q)`, `m ≥ 2`, odd `q`. PG(3,3) is odd projective
+dimension (closed by C25); PG(4,2) is q=2 (closed by C24); and C32 was a *policy* probe, not a
+solve.  The completed C43 solve above replaced that vacuum with the first direct datum,
+`PG(4,3) = P`; the uniform family remains open.
 
 Board: PG(4,3) = 121 points, max cap 20 (known), |PGL(5,3)| ≈ 2.4e11 — symmetry is enormous, the
 question is whether canonicalization makes the reachable class space tractable.

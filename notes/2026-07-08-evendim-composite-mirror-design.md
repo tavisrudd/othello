@@ -1,5 +1,9 @@
 # Even-dimensional composite mirror — design analysis (Fable, 2026-07-08)
 
+**Status update (2026-07-10):** this is the pre-probe design record, not current outcome status.
+C32 later refuted the primary fixed-`rho` policy on `PG(4,3)`, while the independent C43 exact
+orbit-canon solve established **`PG(4,3) = P`**.  The policy failed; the board did not.
+
 Deepening of queue task C32 before Codex builds the probe. Corrects an error in the C32 v1
 spec, derives the forced shape of any composite mirror for `PG(2m,q)` (odd q), identifies the
 exact obstruction structure and a candidate exception scheme, and shows the scheme transfers

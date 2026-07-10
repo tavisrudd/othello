@@ -4,6 +4,10 @@ Date: 2026-07-09
 
 ## Verdict
 
+**Outcome-status clarification (2026-07-10):** this report is negative only for the tested
+composite-mirror policy.  C43 subsequently solved the board itself exactly and found
+**`PG(4,3) = P`**.
+
 The primary point-reflection composite mirror is **not stuck-free** in the plane variant at
 `q = 9, 11, 13`, even allowing P2 existential choice of:
 
