@@ -212,6 +212,24 @@ theorem checkCap_complete {xs : List (GridPoint K)}
 def checkMove (S : List (GridPoint K)) (x : GridPoint K) : Bool :=
   decide (x ∉ S.toFinset) && checkCap (K := K) (x :: S)
 
+def checkMoveRowColPair (x p : GridPoint K) : Bool :=
+  decide (p.1 ≠ x.1 ∧ p.2 ≠ x.2)
+
+def checkMoveAffinePair (x a b : GridPoint K) : Bool :=
+  decide (a = b ∨ ¬ Collinear (K := K) x a b)
+
+def checkMoveAffinePairs (x : GridPoint K) : List (GridPoint K) -> Bool
+  | [] => true
+  | a :: rest =>
+      allShort (fun b => checkMoveAffinePair (K := K) x a b) rest &&
+        checkMoveAffinePairs x rest
+
+/-- Executable one-move legality check optimized for an already-certified cap node. -/
+def checkMoveFast (S : List (GridPoint K)) (x : GridPoint K) : Bool :=
+  decide (x ∉ S.toFinset) &&
+    allShort (fun p => checkMoveRowColPair (K := K) x p) S &&
+      checkMoveAffinePairs (K := K) x S
+
 omit [Fintype K] in
 theorem checkMove_true {S : List (GridPoint K)} {x : GridPoint K}
     (h : Move (GridCap (K := K)) S.toFinset x) :
@@ -224,6 +242,83 @@ theorem checkMove_true {S : List (GridPoint K)} {x : GridPoint K}
     have hcap : GridCap (K := K) (x :: S).toFinset := by
       simpa [hchild] using h.2
     checkCap_complete (K := K) hcap⟩
+
+omit [Fintype K] in
+theorem checkMoveAffinePairs_true {S : List (GridPoint K)} {x : GridPoint K}
+    (h : Move (GridCap (K := K)) S.toFinset x) :
+    checkMoveAffinePairs (K := K) x S = true := by
+  induction S with
+  | nil =>
+      rfl
+  | cons a rest ih =>
+      unfold checkMoveAffinePairs
+      rw [Bool.and_eq_true]
+      refine ⟨?_, ?_⟩
+      · simp only [allShort_eq_all, List.all_eq_true]
+        intro b hb
+        unfold checkMoveAffinePair
+        exact decide_eq_true (by
+          by_cases hab : a = b
+          · exact Or.inl hab
+          · refine Or.inr ?_
+            intro hcol
+            have haFin : a ∈ (a :: rest).toFinset := by simp
+            have hbFin : b ∈ (a :: rest).toFinset :=
+              List.mem_toFinset.mpr (List.mem_cons_of_mem a hb)
+            have hxIns : x ∈ insert x (a :: rest).toFinset :=
+              Finset.mem_insert_self x (a :: rest).toFinset
+            have haIns : a ∈ insert x (a :: rest).toFinset :=
+              Finset.mem_insert_of_mem haFin
+            have hbIns : b ∈ insert x (a :: rest).toFinset :=
+              Finset.mem_insert_of_mem hbFin
+            have hxa : x ≠ a := by
+              intro hxa
+              exact h.1 (by simp [hxa])
+            have hxb : x ≠ b := by
+              intro hxb
+              exact h.1 (by simpa [hxb] using hbFin)
+            exact h.2.2 hxIns haIns hbIns hxa hxb hab hcol)
+      · have hrest : Move (GridCap (K := K)) rest.toFinset x := by
+          refine ⟨?_, ?_⟩
+          · intro hxrest
+            exact h.1 (List.mem_toFinset.mpr
+              (List.mem_cons_of_mem a (List.mem_toFinset.mp hxrest)))
+          · exact gridCap_mono (K := K) (T := insert x (a :: rest).toFinset)
+              (by
+                intro y hy
+                rw [Finset.mem_insert] at hy ⊢
+                rcases hy with hy | hy
+                · exact Or.inl hy
+                · exact Or.inr (List.mem_toFinset.mpr
+                    (List.mem_cons_of_mem a (List.mem_toFinset.mp hy))))
+              h.2
+        exact ih hrest
+
+omit [Fintype K] in
+theorem checkMoveFast_true {S : List (GridPoint K)} {x : GridPoint K}
+    (h : Move (GridCap (K := K)) S.toFinset x) :
+  checkMoveFast (K := K) S x = true := by
+  unfold checkMoveFast
+  rw [Bool.and_eq_true]
+  refine ⟨?_, ?_⟩
+  · rw [Bool.and_eq_true]
+    refine ⟨decide_eq_true h.1, ?_⟩
+    simp only [allShort_eq_all, List.all_eq_true]
+    intro p hp
+    unfold checkMoveRowColPair
+    exact decide_eq_true (by
+      have hpFin : p ∈ S.toFinset := List.mem_toFinset.mpr hp
+      have hpIns : p ∈ insert x S.toFinset := Finset.mem_insert_of_mem hpFin
+      have hxIns : x ∈ insert x S.toFinset := Finset.mem_insert_self x S.toFinset
+      have hpx : p ≠ x := by
+        intro hpx
+        exact h.1 (by simpa [hpx] using hpFin)
+      constructor
+      · intro hrowEq
+        exact hpx (h.2.1.1 hpIns hxIns hrowEq)
+      · intro hcolEq
+        exact hpx (h.2.1.2 hpIns hxIns hcolEq))
+  · exact checkMoveAffinePairs_true (K := K) h
 
 omit [Fintype K] in
 theorem checkMove_sound {S : List (GridPoint K)} {x : GridPoint K}
@@ -403,7 +498,7 @@ def checkNodeStepChunksWithAll (b : BookData K)
 def checkNodeCellWithLocalRows (b : BookData K)
     (nodeChunks : List (List (List (GridPoint K)))) (S : List (GridPoint K))
     (rows : List (RowData K)) (x : GridPoint K) : Bool :=
-  if checkMove (K := K) S x then
+  if checkMoveFast (K := K) S x then
     checkRowOnWithNodes (K := K) b nodeChunks S x rows
   else
     true
@@ -460,10 +555,8 @@ def checkRowRefMatch (nodeChunkGroups : List (List (List (List (GridPoint K)))))
     (S : List (GridPoint K)) (x : GridPoint K) (rr : RowRefData K) : Bool :=
   let r := rr.row
   decide
-    (r.node.toFinset = S.toFinset ∧
-      r.mover = x ∧
+    (r.mover = x ∧
         r.reply ∉ insert x S.toFinset ∧
-          checkCap (K := K) r.child = true ∧
           r.child.toFinset = insert r.reply (insert x S.toFinset)) &&
     decide
       (childAt (K := K) nodeChunkGroups rr.childGroup rr.childChunk rr.childSlot =
@@ -476,7 +569,7 @@ def checkRowRefOn (nodeChunkGroups : List (List (List (List (GridPoint K)))))
 def checkNodeCellWithLocalRowRefs
     (nodeChunkGroups : List (List (List (List (GridPoint K)))))
     (S : List (GridPoint K)) (rows : List (RowRefData K)) (x : GridPoint K) : Bool :=
-  if checkMove (K := K) S x then
+  if checkMoveFast (K := K) S x then
     checkRowRefOn (K := K) nodeChunkGroups S x rows
   else
     true
@@ -741,7 +834,7 @@ theorem checkNodeStepOnWithLocalRows_sound {b : BookData K}
       checkNodeCellWithLocalRows (K := K) b nodeChunks S rows x = true :=
     (List.all_eq_true.mp h) x hxmem
   unfold checkNodeCellWithLocalRows at hxcheck
-  have hmoveBool : checkMove (K := K) S x = true := checkMove_true (K := K) hxmove
+  have hmoveBool : checkMoveFast (K := K) S x = true := checkMoveFast_true (K := K) hxmove
   rw [hmoveBool] at hxcheck
   exact checkRowOnWithNodes_sound (K := K) hnodes hxcheck
 
@@ -911,10 +1004,24 @@ theorem childAt_mem_nodesFinset {b : BookData K}
               exact List.mem_map.mpr ⟨child, by simpa [hflat] using hchildMem, rfl⟩
 
 omit [Fintype K] in
+theorem checkNodes_sound_of_bool {b : BookData K} (h : checkNodes (K := K) b = true) :
+    ∀ S ∈ b.nodesFinset, GridCap (K := K) S := by
+  unfold checkNodes at h
+  simp only [allShort_eq_all] at h
+  intro S hS
+  unfold nodesFinset at hS
+  have hSList : S ∈ b.nodes.map List.toFinset := List.mem_toFinset.mp hS
+  rcases List.mem_map.mp hSList with ⟨xs, hxs, hxsS⟩
+  have hxcheck : checkCap (K := K) xs = true :=
+    (List.all_eq_true.mp h) xs hxs
+  simpa [hxsS] using checkCap_sound (K := K) hxcheck
+
+omit [Fintype K] in
 theorem checkRowRefOn_sound {b : BookData K}
     {nodeChunkGroups : List (List (List (List (GridPoint K))))}
     {S : List (GridPoint K)} {x : GridPoint K} {rows : List (RowRefData K)}
     (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hnodesCheck : checkNodes (K := K) b = true)
     (h : checkRowRefOn (K := K) nodeChunkGroups S x rows = true) :
     ∃ row : ReplyBookRow (GridPoint K),
       row.mover = x ∧
@@ -929,23 +1036,23 @@ theorem checkRowRefOn_sound {b : BookData K}
   rcases hrmatch with ⟨hfront, href⟩
   let r := rr.row
   have hfrontProp :
-      r.node.toFinset = S.toFinset ∧
-        r.mover = x ∧
+      r.mover = x ∧
           r.reply ∉ insert x S.toFinset ∧
-            checkCap (K := K) r.child = true ∧
             r.child.toFinset = insert r.reply (insert x S.toFinset) := by
     exact of_decide_eq_true hfront
   have hrefProp :
       childAt (K := K) nodeChunkGroups rr.childGroup rr.childChunk rr.childSlot =
         some r.child := by
     exact of_decide_eq_true href
-  rcases hfrontProp with ⟨_hnodeEq, hmover, hfresh, hcap, hchildEq⟩
+  rcases hfrontProp with ⟨hmover, hfresh, hchildEq⟩
   have hnode : r.child.toFinset ∈ b.nodesFinset :=
     childAt_mem_nodesFinset (K := K) hgroups hrefProp
+  have hchildCap : GridCap (K := K) r.child.toFinset :=
+    checkNodes_sound_of_bool (K := K) hnodesCheck r.child.toFinset hnode
   refine ⟨r.toBookRow, hmover, ?_, ?_, hnode⟩
   · show Move (α := GridPoint K) (GridCap (K := K)) (insert x S.toFinset) r.reply
     refine ⟨hfresh, ?_⟩
-    simpa [hchildEq] using checkCap_sound (K := K) hcap
+    simpa [hchildEq] using hchildCap
   · show r.child.toFinset = insert r.reply (insert x S.toFinset)
     exact hchildEq
 
@@ -955,6 +1062,7 @@ theorem checkNodeStepOnWithLocalRowRefs_sound {b : BookData K}
     {S : List (GridPoint K)} {rows : List (RowRefData K)}
     {cells : List (GridPoint K)}
     (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hnodesCheck : checkNodes (K := K) b = true)
     (h : checkNodeStepOnWithLocalRowRefs (K := K) nodeChunkGroups S rows cells = true) :
     ∀ x ∈ cells, Move (α := GridPoint K) (GridCap (K := K)) S.toFinset x ->
       ∃ row : ReplyBookRow (GridPoint K),
@@ -969,15 +1077,16 @@ theorem checkNodeStepOnWithLocalRowRefs_sound {b : BookData K}
       checkNodeCellWithLocalRowRefs (K := K) nodeChunkGroups S rows x = true :=
     (List.all_eq_true.mp h) x hxmem
   unfold checkNodeCellWithLocalRowRefs at hxcheck
-  have hmoveBool : checkMove (K := K) S x = true := checkMove_true (K := K) hxmove
+  have hmoveBool : checkMoveFast (K := K) S x = true := checkMoveFast_true (K := K) hxmove
   rw [hmoveBool] at hxcheck
-  exact checkRowRefOn_sound (K := K) hgroups hxcheck
+  exact checkRowRefOn_sound (K := K) hgroups hnodesCheck hxcheck
 
 omit [Fintype K] in
 theorem checkStepRefData_sound {b : BookData K}
     {nodeChunkGroups : List (List (List (List (GridPoint K))))}
     {cellChunks : List (List (GridPoint K))} {d : StepRefData K}
     (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hnodesCheck : checkNodes (K := K) b = true)
     (hcells : cellChunks.flatten = b.cells)
     (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
     (h : checkStepRefData (K := K) nodeChunkGroups cellChunks d = true) :
@@ -999,13 +1108,14 @@ theorem checkStepRefData_sound {b : BookData K}
         cellChunks.flatten = true :=
     allShort_flatten_true
       (fun x => checkNodeCellWithLocalRowRefs (K := K) nodeChunkGroups d.node d.rows x) h
-  exact checkNodeStepOnWithLocalRowRefs_sound (K := K) hgroups hflat x hxmem hxmove
+  exact checkNodeStepOnWithLocalRowRefs_sound (K := K) hgroups hnodesCheck hflat x hxmem hxmove
 
 omit [Fintype K] in
 theorem checkStepRefDataList_sound {b : BookData K}
     {nodeChunkGroups : List (List (List (List (GridPoint K))))}
     {cellChunks : List (List (GridPoint K))} {steps : List (StepRefData K)}
     (hgroups : nodeChunkGroups.flatten.flatten = b.nodes)
+    (hnodesCheck : checkNodes (K := K) b = true)
     (hcells : cellChunks.flatten = b.cells)
     (hcellsAll : ∀ x : GridPoint K, x ∈ b.cells)
     (hcover : steps.map StepRefData.node = b.nodes)
@@ -1035,7 +1145,7 @@ theorem checkStepRefDataList_sound {b : BookData K}
   have hxmove' :
       Move (α := GridPoint K) (GridCap (K := K)) d.node.toFinset x := by
     simpa [hdS] using hxmove
-  rcases checkStepRefData_sound (K := K) hgroups hcells hcellsAll hdcheck x hxmove' with
+  rcases checkStepRefData_sound (K := K) hgroups hnodesCheck hcells hcellsAll hdcheck x hxmove' with
     ⟨row, hmover, hreply, hchild, hchildNode⟩
   refine ⟨row, hmover, ?_, ?_, hchildNode⟩
   · simpa [hdS] using hreply
@@ -1337,7 +1447,7 @@ theorem validForLoose_of_stepRefData {b : BookData K}
   · intro S hS
     exact checkNodes_sound (K := K) hnodesCheck S hS
   · intro S hS x hxmove
-    rcases checkStepRefDataList_sound (K := K) hgroups hcells hcellsAll hcover hsteps
+    rcases checkStepRefDataList_sound (K := K) hgroups hnodesCheck hcells hcellsAll hcover hsteps
         S hS x hxmove with
       ⟨row, hmover, hreply, hchild, hchildNode⟩
     exact ⟨row, trivial, hmover, hreply, hchild, hchildNode⟩

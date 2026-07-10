@@ -192,3 +192,82 @@ leaves before the top module.  No q17/q19 generated Lean data was committed in
 this pass.  Next gate: generate/build all q17 split classes with the same
 leaf-first discipline; q19 remains a sizing/user-launch decision after q17 is
 clean.
+
+## 2026-07-10 Continuation: Canonical Transport + Base Split
+
+The anchored route is still too large as a full Lean build.  After the local
+checker optimizations, the representative q17 leaf improved but did not become
+cheap enough to justify 210 anchored classes:
+
+```text
+Class0StepGroup14 original rfl shape:        6:54.67 wall, 7,862,716 KB RSS
+Class0StepGroup14 after checkMoveFast:       4:15.05 wall, 5,910,740 KB RSS
+after removing child cap recomputation:      3:15.97 wall, 4,818,748 KB RSS
+after unordered old-pair move check:         3:04.79 wall, 4,550,544 KB RSS
+native_decide experiment:                    0:25.79 wall, but adds a native axiom; rejected
+```
+
+So the next lever is canonical transport rather than anchored brute force.  A
+canonical q17 certificate book was emitted and independently checked:
+
+```text
+/run/current-system/sw/bin/time -v target/gridcap-c30 cert 17 --out /tmp/c30-certs-canon
+
+q=17 canonical classes=21
+escape histogram 5:3 10:12 11:6
+wrote /tmp/c30-certs-canon/gridcap-q17.cert
+Elapsed 0:40.10, max RSS 148,732 KB
+
+/run/current-system/sw/bin/time -v target/gridcap-c30 certcheck 17 /tmp/c30-certs-canon/gridcap-q17.cert
+
+classes(parsed)=21 declared=21 PASS=21 FAIL=0 nodes=100526 rows=232221 terms=54879
+certcheck RESULT: PASS
+```
+
+Lean support added:
+
+- `ConicLocalization.coordSwap` plus `coordSwap_gridSymmetry`, and a generic
+  `gridSymmetry_comp`.
+- `q13-split-to-lean.py --assembly-mode canonical`, which brute-forces, for
+  every anchored third cell, a canonical class plus an explicit axis-affine or
+  coord-swap+axis-affine grid symmetry.
+- The generated canonical assembly proves finite image equalities with
+  kernel-clean `decide` and composes the canonical symmetry after the existing
+  `anchorAxisAffine` normalization.
+
+Fast assembly proof gate:
+
+```text
+generated /tmp/c30-lean-q17-canon-v4/ProjectiveCap/CertData/Q17Assembly.lean
+stubbed Q17 class-validity module + real transport assembly: PASS in 21.8s
+axioms shown by the stub check:
+[propext, Classical.choice, Quot.sound, class0_valid, ..., class20_valid]
+```
+
+The remaining barrier moved from assembly to `ClassNBase`: it still owned all
+per-node cap proofs.  A real `Class0Base` compile against the canonical data was
+stopped after it was clearly nonviable as a base file:
+
+```text
+Class0Base before node-check split: stopped at 18:16.32, max RSS 7,392,816 KB
+```
+
+The generator now emits `ClassNNodeGroupM.lean` leaves, so `ClassNBase` contains
+only data and light root facts, while the class top imports both node-check
+leaves and step-check leaves.  Real q17/Class0 timings after that split:
+
+```text
+Base.lean                         PASS 0:09.34
+Class0Base.lean                   PASS 0:53.89, max RSS 4,996,576 KB
+Class0NodeGroup0.lean             PASS 0:43.63, max RSS 2,612,708 KB
+Class0StepGroup14.lean            PASS 2:57.48, max RSS 4,868,828 KB
+ProjectiveCap.ConicLocalization   PASS
+ProjectiveCap.CertCheck           PASS
+```
+
+No full q17 canonical Lean data was committed.  The next clean gate is a
+leaf-first build of all 21 canonical q17 classes using the v5 split layout
+(`Base`, every `ClassNBase`, every `ClassNNodeGroup*`, every
+`ClassNStepGroup*`, then `ClassN`, `Q17`, and `Q17Assembly`).  If q17 completes
+with the expected axiom profile `[propext, Classical.choice, Quot.sound]`, q19
+should be regenerated as canonical rather than anchored and sized the same way.

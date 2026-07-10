@@ -66,7 +66,7 @@ steering family.
 | 9 | P | exhaustive solve; q=9 intrusion terminal-reply kernel isolated | Lean kernel/certificate still open |
 | 11 | **P** | Lean certificate assembly: `CertData.Q11.initialPStatement_finrank` | none |
 | 13 | **P** | Lean certificate assembly: `CertData.Q13.initialPStatement_finrank` | none |
-| 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps); q17/Class0 split Lean prototype now compiles | full q17 Lean data/assembly not committed; no uniform proof |
+| 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps); canonical q17 cert book emitted and rules-checked PASS (`21/21`, `100,526` nodes); generated canonical transport assembly stub-checks; v5 split removes the `ClassNBase` node-check barrier | full q17 canonical Lean build not yet run/committed; no uniform proof |
 | 19 | P | `esc` campaign; C30 anchored cert book emitted and rules-checked PASS (`272/272`, all on-conic, no caps) | full q19 Lean data/assembly not committed; no uniform proof |
 | 23 | P | C29: all 22 full-`PGL(2,23)` on-conic buckets P; C54: all 22 early-break proof DAGs rules-checked (`241,627,613/241,627,613` records, zero failures); C53 full-PGL bridge is Lean-verified | computed and rules-certified at the S4 bucket layer; Lean certificate consumer/fixed-q assembly still open |
 | all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
@@ -517,9 +517,41 @@ task list.  Current high-value items:
   consolidated **CURRENT TOP OF QUEUE** snapshot (ninth pass) that supersedes the amendment
   trail for ordering: C65 first, then the dichotomy cluster (C55/C64→C56) and the open-core
   cluster (C62/C63/C61), with the independent lanes (C30, C43/C44, C58, C59, C50) in parallel.
+- **Brainstorm-frame runs (Fable delegates, 2026-07-09/10):**
+  (1) [proof-shape census](../2026-07-09-frame-proof-shape-census.md) — survivors: S10
+  discharging/unavoidable-set (STRONG; forced lemma = finite steering alphabet; its
+  bounded-interface risk is exactly what C65 arbitrates), S11 entropy compression (MEDIUM;
+  forced lemma = geometric selector, feeds C62), S9 KSS fixed-point (long shot; verified that
+  no published outcome⇔topology bridge exists).  Its proposed "C61" task name collides with
+  the queued C61 and substantially overlaps it — merge at triage, do not double-queue.
+  (2) [genericity test](../2026-07-10-frame-genericity-test.md) — verdict **STRUCTURAL**:
+  PG(2,5)/PG(2,7) are P against 400/400 generic-N matched random boards; P-frequency
+  *oscillates in density bands* (the q=9 agreement is band coincidence); a soft/typicality
+  proof is ruled out, conic localization is not disposable scaffolding, and C58's evidential
+  asymmetry sharpens (order-9 all-P weak, any N doubly informative).  The band discovery also
+  warns the Es1 random-sub-board spinoff to measure full retention curves.
+  (3) [random-turn/Richman values](../2026-07-10-frame-random-turn-values.md) — the
+  protocol-perturbation hope is closed **by theorem**: for impartial normal play, every
+  symmetric move-selection protocol is information-free (fair random-turn ≡ 1/2, p-biased ≡ p,
+  continuous Richman ≡ 1/2; proved in the report; discrete bidding closed by
+  Kant–Larsson–Rai–Upasany EJC 2024), machine-verified on 18.7M positions; PSSW transfer is
+  exactly zero (partisan win-set theory).  Salvage: the random-*play* annealed value rho
+  contradicts truth at the empty board exactly at q=11 (the first arc-depleted order), and
+  **rho-greedy found a winning move at 100% of all 11.8M N-positions across every board**
+  while failing (~0.5–0.7%) on random-board controls — a structural selector-candidate law.
+  Consequence: the missing potential must be alternation-anchored (amortized/ledger form);
+  rho-greedy added to C62's library with an `s4rho` traversal prerequisite (rho is
+  tree-defined — a mining selector, not the S11 geometric selector).
 
 Recently reported:
 
+- **C65:** native recursive steering census gives the honest full-C31 q=23 interval
+  `40 <= Z(23) <= 136`.  The complete `[1,2,3,8]` selected corpus has exact max 40; the complete
+  maintenance-approved `[1,3,4,9]` corpus has exact max 36; 20 other bucket screens max at 36..39.
+  The Z=40 extremum is an immediate repair cost from zone 119 (`live_on=6`, defect spectrum
+  `4,1,1`) and descends to child Z=7, then 0.  Route verdict: make the amortized-potential lane
+  primary and retain small-Z as its post-repair terminal layer.  Report:
+  [`../2026-07-09-codex-z23-measurement.md`](../2026-07-09-codex-z23-measurement.md).
 - **C54:** all 22 q=23 full-PGL S4 bucket dumps pass independent rules-only proof-DAG checking:
   `241,627,613/241,627,613` records reached, `988,106,416` legal edges enumerated, zero failures.
   With C53, q=23 is computed and rules-certified at the S4 bucket layer; Lean assembly remains.
@@ -795,6 +827,15 @@ wall was `4,077.68s`, peak RSS `371,836 KB`.  Report:
 [`../2026-07-09-codex-q23-bucket-certification.md`](../2026-07-09-codex-q23-bucket-certification.md).
 Next independent lanes are C43/C44/C50 or the C30 generated-checker refactor.
 
+Handoff note 2026-07-09 / Codex C65: added native `s4zcensus` to the grid-cap solver and its S4
+manual, measured the complete q=23 `[1,2,3,8]` selected corpus and complete `[1,3,4,9]`
+maintenance-approved corpus, screened 25 seeds in each other bucket, and independently reproduced
+the Z=40 extremum with the original Python C31 recursion.  The full-C31 result is deliberately an
+interval, `40..136`, because all P replies were not value-enumerated.  The extremum pays immediate
+zone 40 but has child Z=7.  Next open-core route is C63 amortized-potential LP/dual (C62 remains the
+cheap selector-library precursor); the bounded small-Z route is now terminal-layer support rather
+than the primary invariant.
+
 Good Lean side targets:
 
 - q=9 terminal-reply kernel or certificate assembly.
@@ -895,6 +936,19 @@ References:
 - [`../2026-07-07-nofil-connection.md`](../2026-07-07-nofil-connection.md)
 - [`../2026-07-08-codex-projective-nofil-novelty-audit.md`](../2026-07-08-codex-projective-nofil-novelty-audit.md)
 - [`../2026-07-09-line-capacity-framing-vet-extensions.md`](../2026-07-09-line-capacity-framing-vet-extensions.md)
+
+## Handoff Notes
+
+2026-07-10 C30 continuation (Codex): anchored q17 Lean closure is no longer the preferred route.
+The checker optimizations cut the representative leaf from ~6:55 to ~3:00 but not enough for
+210 anchored classes.  Generated/checked canonical q17 instead (`21/21` classes, `100,526` nodes,
+`232,221` rows), added Lean coordinate-swap/grid-symmetry composition support, and extended the
+split generator with `--assembly-mode canonical`.  The generated canonical assembly stub-checks in
+21.8s.  The remaining barrier was `ClassNBase`; moving node-cap proofs into
+`ClassNNodeGroup*` leaves made real q17/Class0 timings viable: `Class0Base` 0:53.89,
+`Class0NodeGroup0` 0:43.63, `Class0StepGroup14` 2:57.48.  Next: run a leaf-first full q17
+canonical build from the v5 split (`Base`, all `Class*Base`, all node/step leaves, class tops,
+`Q17`, `Q17Assembly`) and check the final axiom profile.
 
 ## Archive
 

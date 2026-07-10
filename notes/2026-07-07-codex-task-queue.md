@@ -16,10 +16,11 @@ campaigns and no n=20 queens runs without an explicit gate.
 The amendment trail below is history/context; THIS list is the operative ordering for open
 tasks.  Two proof-lane clusters lead, then the independent lanes.
 
-**Do first (route-deciding measurement):**
+**Completed route-deciding measurement:**
 
-1. **C65** — `Z(23)` + extremal steering states.  Hours; arbitrates the small-`Z` base-law
-   route vs the amortized-potential route before anything else in the open core spends effort.
+- **C65 [REPORTED 2026-07-09]** — exact witness `Z=40`, full-C31 interval `40..136`;
+  immediate repair cost 40 descends to child Z=7.  Route verdict: amortized potential primary,
+  small-Z retained as the post-repair terminal layer.
 
 **Cluster 1 — the arc-depleted-orders dichotomy (the (ON) route's load-bearing unknown):**
 
@@ -29,11 +30,17 @@ tasks.  Two proof-lane clusters lead, then the independent lanes.
    (If C55 AND C64 both report negative: promote sweep S1 envelope invariants, per the C64
    entry.)
 
-**Cluster 2 — the open core (Good-closure / maintenance / termination):**
+**Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
+(tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
 
-5. **C62** — selector-library scoring (hours, no new solves — cheap, do early).
-6. **C63** — potential LP-fit + infeasibility dual.
-7. **C61** — finite-state reply automaton (days; the falsifiable form of the open core).
+5. **C63** — potential LP-fit + infeasibility dual — now leads the cluster; its v1 feature
+   span should include post-repair descent depth (the C65 extrema drop `Z=40 → 7 → 0`, so the
+   potential must charge transient spikes against later descent).
+6. **C62** — selector-library scoring (hours, no new solves — run alongside C63; a scoring hit
+   doubles as a C63 feature).
+7. **C61** — finite-state reply automaton (days; the falsifiable form of the open core).  Its
+   state alphabet must tolerate transient `Z ≈ 40` repair spikes — the same bounded-interface
+   caveat the proof-shape census flags for the S10 discharging shape.
 
 **Independent lanes (parallel; pull when unblocked):**
 
@@ -1001,10 +1008,14 @@ Status: anchored certificate emission and independent `certcheck` both PASS for 
 q=17 has 210 anchored classes, all on-conic witnesses, no capped books, escape histogram
 `5:30 10:120 11:60`; q=19 has 272 anchored classes, all on-conic witnesses, no capped books,
 escape histogram `211:272`.  The original q17 monolithic generated `Class0.lean` failed at
-`class0_nodeChunks_check`, but the generated-checker refactor now validates q17/Class0 as split
-Lean modules: `Base`, `Class0Base`, 15 `Class0StepGroup*` leaves, and top `Class0` compile in the
-flat harness.  No q17/q19 generated Lean data was committed; next work is full q17 split
-generation/build, leaves first and aggregate last, with q19 sizing after q17 is clean.
+`class0_nodeChunks_check`.  The first split checker validated q17/Class0, but the full anchored
+route remained too slow.  The current route is canonical transport: q17 canonical has 21 classes
+and `certcheck` PASS (`100,526` nodes, `232,221` rows); generated canonical assembly compiles
+against a stub in 21.8s, using explicit axis-affine / coord-swap transport.  The v5 split moves
+node-cap checks out of `ClassNBase` into `ClassNNodeGroup*` leaves; real q17/Class0 timings:
+`Class0Base` PASS 0:53.89 (down from an aborted 18:16), `Class0NodeGroup0` PASS 0:43.63,
+`Class0StepGroup14` PASS 2:57.48.  No q17/q19 generated Lean data was committed; next work is a
+leaf-first full q17 canonical build, then q19 canonical sizing after q17 is clean.
 
 ## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
 
@@ -1550,7 +1561,18 @@ the uniform (ON) route now rests entirely on A5 depletion arithmetic. The class-
 constant remains an empirical fact with no census mechanism behind it. C47's dichotomy row takes
 its negative branch.
 
-## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum [CLAIMED 2026-07-09 — Claude/Opus]
+## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum [REPORTED 2026-07-09 — Claude/Opus — **PG(4,3) = P**]
+
+**Result: PG(4,3) = P (second-player win).** The sizing showed the raw state space is
+~10¹³ (infeasible) but the PGL(5,3)-orbit space is only low-tens-of-thousands, so an exact
+orbit-canon solve is feasible. Built a compiled Rust orbit-canon solver
+(`notes/2026-07-09-pg43-solver.rs`); it solves PG(4,3) in 3.7 s / 25,258 states. First
+even-dimensional odd-q outcome (was a total evidence vacuum) — it is **P**, consistent with
+the all-P conjecture, not the seismic N. Cross-checked: calibration ladder (PG(2,3/5/7)=P,
+PG(3,3)=P, matching the raw Python solver), forward+reverse move orderings both P,
+independent IR canon. Report: [`2026-07-09-codex-pg43-sizing.md`](2026-07-09-codex-pg43-sizing.md).
+Next: extract the PG(4,3) winning 2nd-player strategy for the pairing-hunt; PG(4,5)/PG(6,3)
+need a wider-than-128-bit board word first (781/1093 points).
 
 Context: D1's outcome-classification table has an entire family with **zero direct outcome
 evidence**: `PG(2m,q)`, `m ≥ 2`, odd `q`. PG(3,3) is odd projective dimension (closed by C25);
@@ -2270,6 +2292,15 @@ buckets, the q=19 steering rows, the q=17 score-9 guards.
    obligations where its selected cell is one of the verified maintainable zero-xor P replies.
    Report the full per-family per-q table; partial hits (a family that covers a clean sub-regime)
    are findings, not failures.
+   **Fifth family (added 2026-07-10 from the random-turn frame,
+   [`2026-07-10-frame-random-turn-values.md`](2026-07-10-frame-random-turn-values.md)):
+   rho-greedy** — argmin child rho, where rho is the random-play annealed win probability.
+   It found a winning move at 100% of all 11.8M N-positions on every solved board (q ≤ 11
+   plane/grid) while failing on random-board controls, so the law is structural.  Prerequisite:
+   an `s4rho` full-expansion traversal (same visit set/cost as C35 `s4gdump`) to score it on the
+   q=17/19 obligations.  Caveat carried verbatim: rho is tree-defined, not incidence-defined —
+   a *mining* selector whose hits still need a geometric characterization before the
+   exact-character-sum lane can consume them.
 2. Any family scoring near-perfect on a definable regime: state its selector as a precise
    geometric predicate and hand the existence step to the exact-character-sum lane (no solve
    needed — the count is exact at genus 0).
@@ -2330,7 +2361,7 @@ reserve as the third.
 
 Report file: `notes/2026-07-09-codex-completion-poset.md`.
 
-## C65. Pin down Z(23): steering-ceiling growth + extremal configurations (sweep E1)
+## C65. Pin down Z(23): steering-ceiling growth + extremal configurations (sweep E1) [REPORTED 2026-07-09]
 
 **READ FIRST:** the E1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2, and the
@@ -2354,6 +2385,14 @@ amortized-potential route BEFORE either consumes more proof effort.
 4. Budget: hours to a day of solver time within existing caps; single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-09-codex-z23-measurement.md`.
+
+Status: native `s4zcensus` gives the honest full-C31 interval `40 <= Z(23) <= 136`.  The
+`[1,2,3,8]` selected bucket is complete (225 canonical states, exact max 40); the fully
+maintenance-approved `[1,3,4,9]` bucket is complete (124 canonical states, exact max 36); the
+other 20 buckets have exact 25-seed screens with maxima 36..39.  The Z=40 extremum starts with
+zone 119, `live_on=6`, defect spectrum `4,1,1`, and its worst line descends `40/7 -> 7/0 -> 0/0`.
+Independent Python C31 recursion reproduces Z=40.  The small-uniform-Z route is deprioritized in
+favor of C63's amortized-potential form, with small-Z as the terminal layer.
 
 ## C66. Grid-terminal spectrum — complete caps under row/column capacities (sweep S2) [QUEUED FOR LATER — post-C61–C65 triage]
 

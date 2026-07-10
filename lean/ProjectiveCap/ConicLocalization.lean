@@ -1148,6 +1148,130 @@ theorem gridSymmetry_isP_image {f : GridPoint K -> GridPoint K}
   rw [← hmap S]
   exact FiniteBuildGame.isP_equiv e hValid S
 
+omit [Fintype K] in
+theorem gridSymmetry_comp {f g : GridPoint K -> GridPoint K}
+    (hf : GridSymmetry (K := K) f) (hg : GridSymmetry (K := K) g) :
+    GridSymmetry (K := K) (fun p => g (f p)) := by
+  classical
+  constructor
+  · exact hg.1.comp hf.1
+  · intro S
+    have himage : S.image (fun p => g (f p)) = (S.image f).image g := by
+      ext y
+      constructor
+      · intro hy
+        rcases Finset.mem_image.mp hy with ⟨x, hx, rfl⟩
+        exact Finset.mem_image.mpr ⟨f x, Finset.mem_image.mpr ⟨x, hx, rfl⟩, rfl⟩
+      · intro hy
+        rcases Finset.mem_image.mp hy with ⟨z, hz, rfl⟩
+        rcases Finset.mem_image.mp hz with ⟨x, hx, rfl⟩
+        exact Finset.mem_image.mpr ⟨x, hx, rfl⟩
+    rw [himage]
+    exact (hg.2 (S.image f)).trans (hf.2 S)
+
+/-! ## Coordinate-swap grid symmetry -/
+
+def coordSwap (p : GridPoint K) : GridPoint K :=
+  (p.2, p.1)
+
+omit [Field K] [Fintype K] [DecidableEq K] in
+theorem coordSwap_bijective :
+    Function.Bijective (coordSwap (K := K)) := by
+  constructor
+  · intro p q hpq
+    ext
+    · exact congrArg (fun z : GridPoint K => z.2) hpq
+    · exact congrArg (fun z : GridPoint K => z.1) hpq
+  · intro y
+    exact ⟨coordSwap (K := K) y, by ext <;> rfl⟩
+
+omit [Field K] [Fintype K] [DecidableEq K] in
+theorem coordSwap_involutive (p : GridPoint K) :
+    coordSwap (K := K) (coordSwap (K := K) p) = p := by
+  ext <;> rfl
+
+omit [Fintype K] [DecidableEq K] in
+theorem collinear_coordSwap_iff (p q r : GridPoint K) :
+    Collinear (K := K) (coordSwap (K := K) p) (coordSwap (K := K) q)
+        (coordSwap (K := K) r) ↔
+      Collinear (K := K) p q r := by
+  unfold Collinear coordSwap
+  constructor <;> intro h <;> exact h.symm
+
+omit [Fintype K] in
+theorem rowSparse_image_coordSwap {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    RowSparse (K := K) (S.image (coordSwap (K := K))) := by
+  intro p q hp hq hrowEq
+  rcases Finset.mem_image.mp hp with ⟨p0, hp0, rfl⟩
+  rcases Finset.mem_image.mp hq with ⟨q0, hq0, rfl⟩
+  have hcol : p0.2 = q0.2 := hrowEq
+  have hpq : p0 = q0 := hS.1.2 hp0 hq0 hcol
+  rw [hpq]
+
+omit [Fintype K] in
+theorem colSparse_image_coordSwap {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    ColSparse (K := K) (S.image (coordSwap (K := K))) := by
+  intro p q hp hq hcolEq
+  rcases Finset.mem_image.mp hp with ⟨p0, hp0, rfl⟩
+  rcases Finset.mem_image.mp hq with ⟨q0, hq0, rfl⟩
+  have hrow : p0.1 = q0.1 := hcolEq
+  have hpq : p0 = q0 := hS.1.1 hp0 hq0 hrow
+  rw [hpq]
+
+omit [Fintype K] in
+theorem affineCap_image_coordSwap {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    AffineCap (K := K) (S.image (coordSwap (K := K))) := by
+  intro a b c ha hb hc hab hac hbc hcoll
+  rcases Finset.mem_image.mp ha with ⟨a0, ha0, rfl⟩
+  rcases Finset.mem_image.mp hb with ⟨b0, hb0, rfl⟩
+  rcases Finset.mem_image.mp hc with ⟨c0, hc0, rfl⟩
+  have hab0 : a0 ≠ b0 := fun h => hab (by rw [h])
+  have hac0 : a0 ≠ c0 := fun h => hac (by rw [h])
+  have hbc0 : b0 ≠ c0 := fun h => hbc (by rw [h])
+  exact hS.2 ha0 hb0 hc0 hab0 hac0 hbc0
+    ((collinear_coordSwap_iff (K := K) a0 b0 c0).mp hcoll)
+
+omit [Fintype K] in
+theorem gridCap_image_coordSwap {S : Finset (GridPoint K)}
+    (hS : GridCap (K := K) S) :
+    GridCap (K := K) (S.image (coordSwap (K := K))) :=
+  ⟨⟨rowSparse_image_coordSwap (K := K) hS,
+    colSparse_image_coordSwap (K := K) hS⟩,
+    affineCap_image_coordSwap (K := K) hS⟩
+
+omit [Fintype K] in
+theorem gridCap_image_coordSwap_iff (S : Finset (GridPoint K)) :
+    GridCap (K := K) (S.image (coordSwap (K := K))) ↔
+      GridCap (K := K) S := by
+  constructor
+  · intro hSimage
+    have hpre :
+        GridCap (K := K) ((S.image (coordSwap (K := K))).image (coordSwap (K := K))) :=
+      gridCap_image_coordSwap (K := K) hSimage
+    have himage : (S.image (coordSwap (K := K))).image (coordSwap (K := K)) = S := by
+      ext x
+      constructor
+      · intro hx
+        rcases Finset.mem_image.mp hx with ⟨y, hy, rfl⟩
+        rcases Finset.mem_image.mp hy with ⟨z, hz, rfl⟩
+        simpa [coordSwap_involutive (K := K) z] using hz
+      · intro hx
+        exact Finset.mem_image.mpr
+          ⟨coordSwap (K := K) x,
+            Finset.mem_image.mpr ⟨x, hx, rfl⟩,
+            coordSwap_involutive (K := K) x⟩
+    simpa [himage] using hpre
+  · exact gridCap_image_coordSwap (K := K)
+
+omit [Fintype K] in
+theorem coordSwap_gridSymmetry :
+    GridSymmetry (K := K) (coordSwap (K := K)) :=
+  ⟨coordSwap_bijective (K := K),
+    gridCap_image_coordSwap_iff (K := K)⟩
+
 /-! ## Axis-affine grid symmetries -/
 
 /--

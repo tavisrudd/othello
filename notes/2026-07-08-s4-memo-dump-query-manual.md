@@ -1,7 +1,7 @@
 # S4 Memo Dump / Query Manual
 
-This manual covers the Rust `s4dump`, `s4gdump`, `s4gcheck`, `s4gmeasure`, `s4freeze`, `s4query`,
-`s4mine`, `s4xormine`, and `s4bucketlist` modes in
+This manual covers the Rust `s4dump`, `s4gdump`, `s4gcheck`, `s4pncheck`, `s4gmeasure`, `s4gdistill`,
+`s4gremote`, `s4freeze`, `s4query`, `s4mine`, `s4xormine`, and `s4bucketlist` modes in
 [`2026-07-06-grid-cap-solver.rs`](2026-07-06-grid-cap-solver.rs).  These modes are for targeted
 pattern mining around normalized on-conic S4 roots in the residual `PG(2,q)` grid game.
 
@@ -145,7 +145,7 @@ Important fields:
   before expansion and inserts solved parents afterward.
 - `value`: root value if solved, otherwise `-`.
 
-### `s4gdump`, `s4gcheck`, `s4gmeasure`
+### `s4gdump`, `s4gcheck`, `s4pncheck`, `s4gmeasure`, `s4gdistill`, `s4gremote`
 
 ```bash
 /tmp/gridcap-s4 s4gdump <q> <t1,t2,t3,t4> --out <grundy-raw-file> [--cap <slots>]
@@ -153,6 +153,9 @@ Important fields:
 /tmp/gridcap-s4 s4pncheck <q> <t1,t2,t3,t4> --raw <pn-raw-file>
 /tmp/gridcap-s4 s4gmeasure <q> <t1,t2,t3,t4> --grundy <grundy-raw-file> \
   [--depth <plies>] [--state-rows] [--max-states <n>]
+/tmp/gridcap-s4 s4gdistill <q> <t1,t2,t3,t4> --grundy <grundy-raw-file> \
+  [--forced-out <rows-file>]
+/tmp/gridcap-s4 s4gremote <q> <t1,t2,t3,t4> --grundy <grundy-raw-file>
 ```
 
 `s4gdump` computes exact normal-play Grundy values by mex over every legal child, so it is slower
@@ -177,6 +180,25 @@ key as the state identifier.
 `true_grundy XOR conic_nk_xor`.  `zone_residual_hist` is the distribution of
 `true_grundy XOR conic_nk_xor XOR zone_nk_xor` on rows where the off-conic zone graph's exact
 Node-Kayles Grundy value is small enough to compute.
+
+`s4gdistill` traverses the entire exact S4 Grundy dump and counts the winning children of every
+`N` node.  Convention: a node is `N` iff its true Grundy value is nonzero, and its winning moves
+are exactly children whose true Grundy value is zero.  It emits `S4GDFREEDOM` rows
+(`winning_moves=<k> nodes=<n>`), `S4GDFORCED*` summaries for nodes with exactly one winning move,
+`S4GDPLY` ply summaries, and a final `S4GDDONE` exactness row.  `seen` must equal `records`, and
+`missing_states=missing_children=0`; otherwise the dump is not a complete substrate for forced
+counts.  With `--forced-out`, it writes one line per forced node with the forced move, live-conic
+counts before/after the move, conic graph features, and a cheap off-conic zone support signature.
+Use this for C38-style strategy-freedom mining; use `s4gmeasure` for true-Grundy versus conic/zone
+shadow measurements.
+
+`s4gremote` computes exact remoteness on the same reachable canonical graph.  Terminal states have
+remoteness 0; `N` nodes use `1 + min` over `P` children; `P` nodes use `1 + max` over `N`
+children.  It emits `S4GRHIST`, `S4GRVALUE`, `S4GRPLY`, `S4GRLIVE`, `S4GRZONE`, `S4GRDEFXOR`,
+`S4GRRESIDUAL`, `S4GROPT*`, and final `S4GRDONE` rows.  Here `defxor` is the exact live-conic
+Node-Kayles xor used in the C31 defect-spectrum vocabulary, and `residual` is
+`true_grundy XOR defxor`.  As with `s4gdistill`, `seen` must equal `records`, with
+`missing_states=missing_children=remote_missing=0`, before treating the summaries as exact.
 
 ### `s4freeze`
 
@@ -398,6 +420,36 @@ mode computes its exact Node-Kayles Grundy value component-by-component with the
 solver; a reply whose graph exceeds that solver's state cap is counted as `xor-unknown`, never as a
 non-target reply.  This is the Grundy value of the live-conic obstruction graph only, not the true
 Grundy value of the coupled grid-cap position.
+
+### `s4zcensus`
+
+```bash
+/tmp/gridcap-s4 s4zcensus <q> <s4xormine-log>... \
+  [--cap <slots>] [--start <seed-index>] [--limit <n>] \
+  [--out <file>] [--raw <exact-pn-dump>]
+```
+
+`s4zcensus` parses the selected P followers from `XORRESULT status=hit` rows and computes C31's
+recursive steering ceiling exactly:
+
+```text
+Z(S) = max over opponent moves m
+       min over P-valued replies r
+       max(off-conic-zone(S+m+r), Z(S+m+r)).
+```
+
+It reconstructs every logged state from the `S4XORMINE` header plus `x,y`, independently resolves
+the state as P, canonical-deduplicates equal followers, and shares native outcome and Z memos across
+the requested slice.  `S4ZSTATE` rows carry the initial zone, live-conic count, conic component
+spectrum, and row/column support.  `S4ZEXTREME` emits an optimal worst-case trajectory; the stored
+Z values are canonical but choices are recomputed in the local coordinate orientation.  The final
+`S4ZCENSUS-DONE` line reports coverage, duplicates, aborts, the Z histogram, and memo sizes.
+
+`--raw` consults an exact P/N dump before solving missing values.  This is correctness-preserving
+but not necessarily faster: q=23's binary-search mmap access was slower than the native shared
+memo in the C65 A/B.  Use `--start`/`--limit` for resumable slices when the outcome memo reaches the
+cap.  A completed slice has `aborted=0`; never merge a capped prefix without recording its stopping
+seed and coverage.
 
 ### `s4bucketlist`
 
