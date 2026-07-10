@@ -554,6 +554,22 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C68 follow-on (2026-07-10, Claude) — N-bucket density ν(q); the min-witness suppression is
+  marginal.**  Exact on-conic S4 bucket census (`s4arena --all`, q=5..19). `ν(q)` (state-weighted
+  N-fraction) `= 0` off the depleted orders, `0.357` (q=11), `0.791` (q=17) — positive and
+  ~doubling; #N-buckets `1 → 5`.  **Key:** a random null (`E[fully-N classes] = ncls·ν^(q−4)`) gives
+  `0.006` at q=11 but **`1.000` at q=17** vs 0 observed — so min-witness ≥ 1 at q=17 holds by
+  essentially the exact margin a random model expects it to fail by; the trend (ν doubling) is
+  adverse.  A5 must bound the extremal size-3 class-type against a rising N-density, not lean on "no
+  fully-N class through q=19."  Structure: onP is bimodal (few PGL class-types; min-witness =
+  extremal-type count), and value separates cleanly by bucket fiber size (P = rare/special
+  completions, N = generic) → **A5 lead: every 5-point frame `{∞,0,t1,t2,t3}` admits a special (P)
+  completion.**  Tooling: built + validated `s4arena` (arena-backed S4 labeling, commit `60c87fb`);
+  q=25 bucket 0 certified P (213.5M positions); an 8 GB `--log2 29` q=25 census is running to settle
+  q=25's depletion status.  Report:
+  [`../2026-07-10-codex-a5-nbucket-density.md`](../2026-07-10-codex-a5-nbucket-density.md);
+  scripts `c68b_nbucket_density.py`; q=25 census sizing in
+  [`../2026-07-09-codex-q25-baer-census.md`](../2026-07-09-codex-q25-baer-census.md).
 - **C68 (2026-07-10, Claude) — D(q) depletion-fraction sequence; first A5 measurement.**  Exact
   `D(q)` = max over size-3 classes of the on-conic N-fraction (q=5..19 from feat dumps, q=23 from
   the C54 bucket labels).  Result: **`D(q) = 0` at every non-arc-depleted order** (5,7,9,13,19,23;
