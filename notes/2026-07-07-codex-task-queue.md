@@ -123,6 +123,8 @@ exist, so the dichotomy data is untouched).
 **Independent lanes (parallel; pull when unblocked):**
 
 - **C30** — generated-checker refactor → q17/q19 Lean assembly (engineering, long-running).
+  The v5 full q17 canonical build now projects above 21.5 h sequential, tripping the task's
+  explicit ~10 h user-launch gate; do not launch it implicitly.
 - **C43** / **C44** — PG(4,3) exact-solve sizing / GF(25) path + q=25 census (compute lanes).
 - **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
   (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
@@ -1114,8 +1116,11 @@ and `certcheck` PASS (`100,526` nodes, `232,221` rows); generated canonical asse
 against a stub in 21.8s, using explicit axis-affine / coord-swap transport.  The v5 split moves
 node-cap checks out of `ClassNBase` into `ClassNNodeGroup*` leaves; real q17/Class0 timings:
 `Class0Base` PASS 0:53.89 (down from an aborted 18:16), `Class0NodeGroup0` PASS 0:43.63,
-`Class0StepGroup14` PASS 2:57.48.  No q17/q19 generated Lean data was committed; next work is a
-leaf-first full q17 canonical build, then q19 canonical sizing after q17 is clean.
+`Class0StepGroup14` PASS 2:57.48.  No q17/q19 generated Lean data was committed. Fresh
+representative timings plus the complete 326-node-leaf/326-step-leaf census project the sequential
+q17 build above 21.5 h, so the explicit ~10 h stop gate is now tripped. Next work requires a user
+launch decision for that roughly day-long build (or another checker/build-shape reduction); q19
+sizing remains after q17 is clean.
 
 ## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
 
@@ -1706,6 +1711,23 @@ question is whether canonicalization makes the reachable class space tractable.
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-pg43-sizing.md`.
 
 ## C44. GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
+
+**[SIZED 2026-07-10 (Claude) — full census NOT run; needs a RAM/machinery gate.]**
+Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
+Ready & cheap: GF(25) path in place (`irred(25)=x²+3` over F₅, nonsquare; self-check passes; MAXW ok;
+`s4 25 1,2,3,4`=P at 26.3M memo reproduces the handoff) and **28 full-PGL(2,25) on-conic buckets**
+enumerated (~4 s; ~19 of 28 are generic size ≥360). The wall: bucket labeling (`eval_s4`/`s4dump`)
+uses a 33-byte/slot `FnvMap`; the generic bucket 0 `[1,2,3,5]` has **>112M distinct positions** (prior
+run aborted at 100M/479s; this probe hit the 128M-cap plateau at 4.38 GB with no verdict) ⇒ needs a
+256M-cap table (~8.4 GB, ~12.7 GB rehash peak) — **over the 8 GB gate**. q=25's on-conic trees are
+~10× the q=23 primes (>100M vs 6–14M positions/bucket — the Baer density showing up as game-tree
+blowup). Depletion needs **all 28** labeled (aborts give no verdict; N is not reliably cheap). Unblock
+options (pick one, it's a real gated run): **(a)** re-gate RAM to ~14–16 GB (box has 26 GB), serial
+per-bucket with cache drops, ~2–5 h wall; **(b)** route S4-rooted labeling through the 16-byte arena
+`Memo` + huge pages (halves RAM, likely fits 8 GB) — durable fix; **(c)** cheap partial, no depletion
+answer. **Import:** q=25 is the next chance at a *third* depleted point to test whether the C68 margin
+keeps collapsing `2 → 1 → 0?` (min-witness → 0 would refute conic localization as the mechanism, not
+the conjecture). Full census remaining below.
 
 Context: the falsification map names square `q` (Baer subplanes — extra dense collinearity) the
 **top falsification watch** (A4), the (ON) layer sits at a knife edge (§6), and q=25 is also where
