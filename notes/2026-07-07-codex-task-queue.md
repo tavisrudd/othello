@@ -54,17 +54,23 @@ discriminator was tested only at q ∈ {11, 17} (the two arc-depleted orders) ag
 invariant that only separates at a *larger* arc-depleted order would have been invisible; (ii) both
 near-hits (C64 count-parity, C69 `a2=0`) were q=11 small-field artifacts that dissolved at q=17 —
 which validates the flip/control discipline but also shows how thin the two-order corpus is.  All
-three candidates tested *static* invariants of the 6-point configuration; the surviving untested
-angle is a *dynamic* discriminator (see Cluster 2's Ψ — the C63 amortized potential postdates all
-three candidates, per the "levers compound" rule).  **Pivot, not dead end:** the (ON) uniform route
+three candidates tested *static* invariants of the 6-point configuration; the one remaining angle
+was a *dynamic* discriminator (Cluster 2's Ψ — the C63 amortized potential postdated all three
+candidates, per the "levers compound" rule), now **tested NEGATIVE** (Correction 3, see the
+re-entry condition below).  **Pivot, not dead end:** the (ON) uniform route
 now engages the q-dependent **A5 arc-depletion arithmetic** directly (which orders deplete, by how
 much).  Note A5 *is* still the dictionary question — just answered q-dependently rather than by a
 config-side invariant; if A5 surfaces a specific quantity, re-open the mechanism search to test it
 as a config invariant.  **Re-entry condition:** reopen Cluster-1 mechanism hunting only if (a) A5
-arithmetic names a concrete quantity to test as a config invariant, (b) a larger arc-depleted order
-(q ≥ 23) becomes available to widen the two-order corpus, or (c) a *dynamic* discriminator (Ψ
-trajectory) separates flip from control.  No fourth static candidate is queued; the live (ON) levers
-are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
+arithmetic names a concrete quantity to test as a config invariant, or (b) a larger arc-depleted
+order (q ≥ 23) becomes available to widen the two-order corpus.  ~~(c) a *dynamic* discriminator (Ψ
+trajectory) separates flip from control~~ — **TESTED 2026-07-10, NEGATIVE** (Fable steering
+Correction 3, [`2026-07-10-psi-dynamic-flip-probe.md`](2026-07-10-psi-dynamic-flip-probe.md)):
+coupled Ψ features (defect/intruders/xor) are identical flip vs control at every order; the only
+separation is the within-order reservoir/zone-size term C55 already saw, not a cross-q mechanism.
+**The mechanism sweep is now complete on both fronts — static (C55/C64/C69) and dynamic
+(Correction 3) all negative.**  No fourth static candidate is queued; the live (ON) levers are the
+open-core / amortized-potential lane (Cluster 2) and A5 itself.
 
 **Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
 (tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
@@ -92,6 +98,20 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
    coverage falls, with a minimal failure already at a q=13 ply-4 root.  Close as local positive /
    uniform negative; do not broaden the selector search from this result. Report:
    `2026-07-10-codex-q19-psi-selector-hard-surface.md`.
+
+**A5 lane — arc-depletion arithmetic (now the sole live (ON) mechanism route).**  With the
+config-mechanism sweep complete (static C55/C64/C69 + dynamic Correction 3, all negative), A5 is the
+only surviving (ON) mechanism angle — and until now it carried no task ID.  Complementary to the
+open core, not competing: even a resolved 12-state hard surface still needs A5's anchor, so do NOT
+elevate A5 above Cluster 2; C68 is cheap enough to just run alongside.  Note A5 is stated at the
+oval/complete-arc incidence level, which C58's all-P order-9 result *strengthens* rather than
+disturbs (the depleted orders {11,17} are primes, where the non-Desarguesian planes do not even
+exist, so the dichotomy data is untouched).
+
+- **C68 (PROMOTED to active 2026-07-10; gate discharged)** — the depletion-fraction extremal
+  sequence `D(q)` (sweep E2): the concrete "which orders deplete, by how much" arithmetic the (ON)
+  route now engages directly.  First concrete A5 task; hours-cheap, single-core, ≤ 8 GB, existing
+  S4 dumps on disk.  Section spec below.
 
 **Independent lanes (parallel; pull when unblocked):**
 
@@ -122,10 +142,11 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
   `2026-07-09-codex-grundy-cert-format.md`.
 
 **Opportunistic / diagnostics:** C57 (zone quasi-randomness), C60 (Singer-model probe), C49
-(piece nimber tables), C23/C40 (viz lanes).
+(piece nimber tables), C23/C40 (viz lanes), **C66** (grid-terminal spectrum), **C67**
+(coupling-defect spectroscopy).
 
-**Queued for later (post-C61–C65 triage; do not start before that triage):** C66
-(grid-terminal spectrum), C67 (coupling-defect spectroscopy), C68 (D(q) sequence).
+**C66/C67/C68 triage gate DISCHARGED 2026-07-10** (all of C61–C65 REPORTED): C68 promoted to the A5
+lane above; C66/C67 stay un-gated but opportunistic (pull as diagnostics, no priority).
 
 ---
 
@@ -2506,7 +2527,7 @@ zone 119, `live_on=6`, defect spectrum `4,1,1`, and its worst line descends `40/
 Independent Python C31 recursion reproduces Z=40.  The small-uniform-Z route is deprioritized in
 favor of C63's amortized-potential form, with small-Z as the terminal layer.
 
-## C66. Grid-terminal spectrum — complete caps under row/column capacities (sweep S2) [QUEUED FOR LATER — post-C61–C65 triage]
+## C66. Grid-terminal spectrum — complete caps under row/column capacities (sweep S2) [GATE DISCHARGED 2026-07-10 — opportunistic diagnostic, no priority]
 
 **READ FIRST:** the S2 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §5.
@@ -2525,7 +2546,7 @@ termination invariant for the maintenance lane has to land in.
 
 Report file: `notes/2026-07-09-codex-grid-terminal-spectrum.md`.
 
-## C67. Coupling-defect spectroscopy: δ = g ⊕ g_conic ⊕ g_zone (sweep Co1) [QUEUED FOR LATER — post-C61–C65 triage]
+## C67. Coupling-defect spectroscopy: δ = g ⊕ g_conic ⊕ g_zone (sweep Co1) [GATE DISCHARGED 2026-07-10 — opportunistic diagnostic, no priority]
 
 **READ FIRST:** the Co1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §3.
@@ -2540,10 +2561,16 @@ deliverable.  Budget: hours (existing `c35/` dumps + Lemma-V σ data); single-co
 
 Report file: `notes/2026-07-09-codex-coupling-defect.md`.
 
-## C68. The depletion-fraction extremal sequence D(q) (sweep E2) [QUEUED FOR LATER — post-C61–C65 triage]
+## C68. The depletion-fraction extremal sequence D(q) (sweep E2) [PROMOTED TO ACTIVE 2026-07-10 — first concrete A5 task]
 
 **READ FIRST:** the E2 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2.
+
+**Now active (gate discharged; see the A5 lane at top of queue):** with all config-mechanism
+candidates dead (static C55/C64/C69 + dynamic Correction 3), A5 arc-depletion arithmetic is the
+sole live (ON) mechanism route, and `D(q)` is its first concrete quantity.  If C68 names a specific
+quantity, that also re-opens the Cluster-1 mechanism search under re-entry condition (a) — test it
+as a config invariant.
 
 Name and compute the function: `D(q)` = max over size-3 classes of the N-fraction among
 on-conic children, plus the min-witness count per q.  Exact for q = 5..19 from feat dumps, q=23

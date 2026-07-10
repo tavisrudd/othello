@@ -149,10 +149,22 @@ holds across the entire order-9 family — Desarguesian and all three non-Desarg
   structure that conic localization leans on.  Concretely for the proof program: a uniform odd-plane
   argument that routes through conic localization is using Desargues-specific *scaffolding*; the
   underlying mechanism must survive its removal (the non-Desarguesian planes have no conics-through-
-  five-points in the Desarguesian sense, yet are P).  This sharpens the genericity-test note's read
-  that "conic localization is not disposable scaffolding" — it is not disposable *as a computed
-  route at Desarguesian q*, but the order-9 evidence says the *outcome* it computes is not
-  Desargues-dependent.
+  five-points in the Desarguesian sense, yet are P).
+- **Reconciliation with the genericity-frame STRUCTURAL verdict (they bracket, not conflict).**
+  The genericity test concluded "conic localization is *not* disposable scaffolding"; C58 says it
+  *is* Desargues-specific scaffolding.  These sandwich the mechanism rather than contradict: the
+  genericity bands rule out the *generic-hypergraph* level (a soft/typicality proof is dead), and
+  C58 rules out the *Desargues-specific* level (the outcome survives loss of Desargues) — so the
+  load-bearing layer is neither, it is exactly what all four order-9 planes *share*: the
+  **oval / complete-arc incidence structure**.  Conic localization is not disposable *as a computed
+  route at Desarguesian q* (genericity), but the *outcome* it computes is not Desargues-dependent
+  (C58).  Two consequences:
+  - **A5 is strengthened, not disturbed.**  A5 arc-depletion is stated at exactly that
+    oval/complete-arc level; and the two arc-depleted orders `{11,17}` are *primes*, where the
+    non-Desarguesian order-9 planes do not even exist, so the dichotomy corpus is untouched.
+  - **Soft steer for the open core (Ψ geometrization, Correction 2):** where a choice exists, prefer
+    oval/arc-level coordinates over conic-equation-specific ones, so the eventual Good-closure lemma
+    survives this C58 constraint.
 - **The value is a coarse invariant.**  Four pairwise-non-isomorphic planes share the value; the
   Hall/dual-Hall duality (a genuinely non-self-dual pair) yields equal outcomes.  So the game value
   alone will not distinguish planes — the finer invariants (complete-arc spectra) do.

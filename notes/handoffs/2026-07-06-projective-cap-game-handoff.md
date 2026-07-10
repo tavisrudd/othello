@@ -531,7 +531,12 @@ task list.  Current high-value items:
   *oscillates in density bands* (the q=9 agreement is band coincidence); a soft/typicality
   proof is ruled out, conic localization is not disposable scaffolding, and C58's evidential
   asymmetry sharpens (order-9 all-P weak, any N doubly informative).  The band discovery also
-  warns the Es1 random-sub-board spinoff to measure full retention curves.
+  warns the Es1 random-sub-board spinoff to measure full retention curves.  **C58 has since
+  REPORTED all-P** (2026-07-10): the two verdicts *bracket* the mechanism rather than conflict —
+  genericity rules out the generic-hypergraph level, C58 rules out the Desargues-specific level, so
+  the load-bearing layer is the oval/complete-arc structure all four order-9 planes share.  This
+  strengthens A5 (stated at that level; the depleted orders 11/17 are primes with no
+  non-Desarguesian planes) and softly steers Ψ geometrization toward arc-level coordinates.
   (3) [random-turn/Richman values](../2026-07-10-frame-random-turn-values.md) — the
   protocol-perturbation hope is closed **by theorem**: for impartial normal play, every
   symmetric move-selection protocol is information-free (fair random-turn ≡ 1/2, p-biased ≡ p,
