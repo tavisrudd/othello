@@ -2,11 +2,11 @@
 
 **Date**: 2026-07-02
 **Scope**: THEORY-ONLY. No solver runs, no builds. Read-only research + this note.
-**Author context**: written while G(17) is being computed on the box (heap-sum engine).
+**Author context**: A344227 is known through n=17 — `G(17) = 2`, computed on the box (heap-sum engine). `G(18)`'s exact value is still open.
 
 This note formalizes the open conjectures around A344227, sweeps the literature, offers a
 rigorous structural theory of the even/odd split (with proof status marked precisely),
-predicts G(17)/G(18), and lists cheap deferred experiments to discriminate the hypotheses.
+records `G(17) = 2`, predicts the still-open `G(18)`, and lists cheap deferred experiments to discriminate the remaining hypotheses.
 
 ---
 
@@ -17,14 +17,15 @@ A344227 = Sprague-Grundy (nimber) values `G(n)` of Node-Kayles on the n×n queen
 
 | n    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
 |------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|
-| G(n) | 0 | 1 | 1 | 2 | 1 | 3 | 1 | 2 | 3 | 1 | 0  | 1  | 0  | 1  | 0  | 1  | 0  | ?  | ≠0 |
+| G(n) | 0 | 1 | 1 | 2 | 1 | 3 | 1 | 2 | 3 | 1 | 0  | 1  | 0  | 1  | 0  | 1  | 0  | 2  | ≠0 |
 
 - **n=0..13**: the OEIS-listed terms `0,1,1,2,1,3,1,2,3,1,0,1,0,1` (verified against the
   `InnovativeInventor/node-kayles` repo output this session; that repo — Max Fan — is the
   computation behind the sequence and reached n=13, flagging n=10..13 `0,1,0,1` as new).
 - **n=14,15,16**: `G = 0, 1, 0` — NEW, this project (heap-sum engine, 2026-07-01), multi-config
   validated; independently equal to the production win/loss verdicts.
-- **n=17**: computing now; expected `1`.
+- **n=17**: `G = 2` — **verified** (heap-sum engine: k=0 WIN, k=1 WIN, k=2 LOSS). First odd value
+  `> 1` since G(7)=2; refutes the conjectured odd→1 continuation.
 - **n=18**: `G ≠ 0` — this project's n=18 FIRST-player win (witness opening **I9 = (8,8)**,
   square 152; multi-config, 2026-06). The exact nimber value is open.
 
@@ -93,8 +94,7 @@ four central lines" (odd n). `G` = Grundy value; `P` = `G=0`.
 ### (c) Is G(n) bounded? (all known ≤ 3)
 
 - **Formal candidates, strongest first**:
-  - **C1 (aggressive, cleanest, falsifiable today-ish)**: `G(n) ∈ {0,1}` for all `n ≥ 9`.
-    Survives iff `G(18) = 1`. FALSIFIED if `G(18) ≥ 2`.
+  - **C1 (aggressive)**: `G(n) ∈ {0,1}` for all `n ≥ 9` — **FALSE**: `G(17) = 2`.
   - **C2 (conservative)**: `G(n) ≤ 3` for all n. Matches every known term (max 3 at n=5, n=8).
   - **C3 (weakest)**: `G(n)` is bounded.
 - **Proof status**: all three are **CONJECTURE**. Crucial literature caveat (§2): Node-Kayles
@@ -115,9 +115,10 @@ four central lines" (odd n). `G` = Grundy value; `P` = `G=0`.
 3. **PROVEN (Theorem 3)**: for even n, second player's mirror strategy wins against any
    diagonal-free first-player line ⟹ a first-player win requires a diagonal move; the winning
    n=18 line realizes this on move 1 (I9 on the main diagonal).
-4. **CONJECTURE (unified, the crisp bet)**: `G(n) ∈ {0,1}` for `n ≥ 9`, with `G(odd)=1` always
-   and `G(even) = 0` except at a sparse "diagonal-breakthrough" set of even n (n=18 the first),
-   where it is still `1`. One number decides it: `G(18)`.
+4. **REFUTED by `G(17) = 2`**: the "unified crisp bet" that `G(n) ∈ {0,1}` for `n ≥ 9` with
+   `G(odd) = 1` always. `G(17) = 2` breaks both the `{0,1}` bound and the odd→1 rule at once. What
+   survives is C2 (`G(n) ≤ 3`); whether the even values stay `0` except at a sparse
+   "diagonal-breakthrough" set (n=18 the first) is still open, with `G(18)` the next probe.
 
 ---
 
@@ -181,7 +182,7 @@ Legend: **[V]** = verified this session against a primary/secondary source I rea
 ### 2.3 What the literature does NOT give us
 
 No published theory predicts A344227's values, its parity pattern, or a bound. The even→0/odd→1
-pattern is a *conjecture attached to the OEIS entry*, not a theorem anywhere. So the project's
+pattern is a *conjecture attached to the OEIS entry*, not a theorem anywhere — and this project's own `G(17) = 2` refutes its odd half. So the project's
 n=14..18 results are genuinely at the frontier, and the theory in §3 is, to my knowledge, new.
 
 ---
@@ -292,15 +293,14 @@ not say *when* one becomes winning. A plausibility argument:
 
 ## 4. Predictions (falsifiable, with confidence + operational guidance)
 
-### 4.1 G(17) — lands today
+### 4.1 G(17) = 2 (computed)
 
-- **Prediction: `G(17) = 1`.** Confidence **~88%**.
-- **Reasoning**: odd ⟹ `G ≥ 1` (proven). Odd n≥9 has been `1` at n=9,11,13,15 (stable, no drift).
-  The heap-sum engine should show `k=0` WIN + `k=1` LOSS. Main alternative: `G(17) ∈ {2,3}` if the
-  odd→1 pattern breaks the way even→0 broke at 18 (~11%); `G(17) ≥ 4` would be a shock (~1%, never
-  observed any value >3).
-- **Falsification**: any k≥2 LOSS round refutes the odd→1 conjecture and would be as significant
-  as the n=18 even-breakage.
+- **Value**: `G(17) = 2` (heap-sum engine: k=0 WIN, k=1 WIN, k=2 LOSS) — the first odd value `> 1`
+  since G(7) = 2, and the first odd-side failure of the `G(odd) = 1` rule.
+- **Why odd→1 broke here**: odd ⟹ `G ≥ 1` is proven, and odd n = 9,11,13,15 were all `1`, but that
+  was empirical, not a theorem — it broke the same way even→0 broke at n = 18. `G(17) = 2` stays
+  within the observed range `≤ 3` (C2), so the boundedness question is untouched; only the `{0,1}`
+  bound and the odd→1 rule fall.
 
 ### 4.2 G(18) — the pending multi-day computation
 
@@ -396,8 +396,8 @@ background session; none requires the 17 GB production TT.
 `ρ`=180° is the only useful pairing symmetry (§3.2); odd n ⟹ `G ≥ 1` via center-then-mirror
 (Lemma 2); for even n the outcome is decided entirely by the long-diagonal moves and a
 first-player win requires a diagonal move (Theorem 3) — corroborated by n=18's I9=(8,8) sitting
-on the main diagonal. **Conjecture (unproven)**: odd n ⟹ `G = 1` exactly for n≥9; the specific
-n=18 threshold (why not n≤16); `G(n) ∈ {0,1}` for n≥9 (falsified iff `G(18)≥2`); `G(n) ≤ 3` /
-`G` bounded (with the standing caveat that Node-Kayles Grundy values are unbounded in general, so
-no bound is inherited). **Predictions**: `G(17)=1` (~88%); `G(18)=1` (~55%, else 2 ~30% / 3 ~12%);
+on the main diagonal. **Refuted by `G(17) = 2`**: odd n ⟹ `G = 1`, and `G(n) ∈ {0,1}` for n≥9.
+**Conjecture (unproven, surviving)**: `G(n) ≤ 3` / `G` bounded (standing caveat: Node-Kayles Grundy
+values are unbounded in general, so no bound is inherited); the specific n=18 threshold (why the
+even breakthrough is at n=18, not n≤16). **Prediction**: `G(18)=1` (~55%, else 2 ~30% / 3 ~12%);
 run the pending `G(18)` computation at `k=1` first.

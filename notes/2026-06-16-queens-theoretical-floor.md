@@ -1,5 +1,13 @@
 # Non-Attacking Queens — theoretical floor (n=16) + n=18 feasibility, on this box
 
+> ⚠️ **[2026-07-09 update — partially superseded]** The "current best wall" below (2502 s, §1) is
+> obsolete: the production default now solves n=16 in **≈13.43 s**, *below* this doc's estimated
+> compute floor. Read the numeric floor here as a historical per-strategy target, not a bound —
+> per CLAUDE.md no run figure is a hard limit, and the "floor was a mis-measured / untried lever"
+> post-mortem is [`2026-06-24-reflections.md`](2026-06-24-reflections.md). The n=18 feasibility
+> framing (§8) is also overtaken: **n=18 is solved — first-player win, opening I9 = (8,8)**.
+> Current state: [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md).
+
 **Date**: 2026-06-16
 **Scope**: A first-principles (Musk-style "engineering-physics") estimate of how fast the
 *optimal* solver could run n=16 Non-Attacking Queens on this machine, assuming the hardware is

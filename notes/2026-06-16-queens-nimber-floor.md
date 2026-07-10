@@ -1,5 +1,14 @@
 # Non-Attacking Queens — the nimber (Sprague-Grundy) floor, and making n=14 nimber feasible
 
+> ⚠️ **[2026-07-09 update — stale on method]** The central lever of this doc — disjoint-sum
+> **decomposition** collapsing the n=14 nimber to "seconds" — did not pan out. Component
+> decomposition was closed negative on 2026-07-02: the pc ≥ 9 tail is 97–100 % a single connected
+> component, so the nim-sum XOR never fires. The n=14–17 nimbers were instead computed by the
+> **heap-sum engine** — G(14)=0, G(15)=1, G(16)=0, **G(17)=2** (verified; G(17)=2 breaks the
+> conjectured odd→1 pattern). Also: the "49.3M" distinct used here is the *D4* count; the
+> iso-merged distinct is ≈29.2M. Current state:
+> [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md).
+
 **Date**: 2026-06-16
 **Scope**: A first-principles ("engineering-physics") floor for computing the *full Sprague-Grundy
 nimber* of n=14 Non-Attacking Queens on this box — why plain mex is infeasible, and why one
