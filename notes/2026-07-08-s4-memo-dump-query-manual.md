@@ -150,6 +150,7 @@ Important fields:
 ```bash
 /tmp/gridcap-s4 s4gdump <q> <t1,t2,t3,t4> --out <grundy-raw-file> [--cap <slots>]
 /tmp/gridcap-s4 s4gcheck <q> <t1,t2,t3,t4> --grundy <grundy-raw-file> --raw <pn-raw-file>
+/tmp/gridcap-s4 s4pncheck <q> <t1,t2,t3,t4> --raw <pn-raw-file>
 /tmp/gridcap-s4 s4gmeasure <q> <t1,t2,t3,t4> --grundy <grundy-raw-file> \
   [--depth <plies>] [--state-rows] [--max-states <n>]
 ```
@@ -161,6 +162,15 @@ header; every record is still an exact sorted canonical key.
 
 `s4gcheck` is the validation gate: on shared canonical keys with an existing P/N dump, it checks
 `grundy == 0` iff the old dump says P.
+
+`s4pncheck` is the rules-only certificate gate for an exact early-break P/N dump. It rebuilds the
+board and every legal move from the declared root without calling the minimax solver. For every P
+row, every legal child must be present and labelled N. For every N row, at least one present child
+must be labelled P; other N-row children may be absent because `s4dump` stops at the first P
+witness. Every present child is recursively checked and every raw record must be reached. Header,
+root, field hash, canonicalizer, ordering, value, and padding failures are rejected by raw restore.
+Thus a PASS checks the complete early-break proof DAG while trusting only the documented canonical
+key as the state identifier.
 
 `s4gmeasure` traverses deduplicated states from the S4 root through the requested depth and emits
 `GPLY` rows for S5/S6 states.  `residual_hist` is the distribution of

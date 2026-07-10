@@ -97,7 +97,8 @@ game.  Consequences:
 
 - **C53** — formalize the full-PGL orbit bridge and update the q=23 computed status.  This is
   proof/coordination work and should run before any duplicate stabilizer-representative solve.
-- **C54** — certify the q=23 bucket labels themselves with a rules-only dump/book checker.  This
+- **C54** (**reported PASS 2026-07-09**) — certify the q=23 bucket labels themselves with a
+  rules-only dump/book checker.  This
   is the computed-value trust work; it should reuse the 22 C29/C37 bucket roots, not compute
   duplicate representatives.
 - The C44 optional "direct B3 discharge at q=23" is dropped; do not spend compute on second
@@ -1889,7 +1890,7 @@ unless C44 is separately launched.
 
 Report file: `notes/2026-07-09-codex-full-pgl-bridge.md`.
 
-## C54. Certify the q=23 full-PGL bucket labels
+## C54. Certify the q=23 full-PGL bucket labels [REPORTED 2026-07-09]
 
 Context: after C53, the 22 full-`PGL(2,23)` on-conic bucket representatives cover every q=23
 on-conic S4 child.  C29 solved all 22 representatives as P, and C37 generated exact raw q=23 bucket

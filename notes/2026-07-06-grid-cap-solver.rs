@@ -56,6 +56,10 @@
 //                   slower/larger than the P/N early-break dump.
 //   s4gcheck <q> t1,t2,t3,t4 --grundy <grundy-raw> --raw <pn-raw>
 //                -- validate a Grundy dump against an existing P/N dump on shared canonical keys.
+//   s4pncheck <q> t1,t2,t3,t4 --raw <pn-raw>
+//                -- rules-only validation of an early-break P/N proof DAG: rebuild legal moves;
+//                   require every child of P nodes to be present and N, one present P witness for
+//                   each N node, and exact reachability coverage of every raw record.
 //   s4gmeasure <q> t1,t2,t3,t4 --grundy <grundy-raw> [--depth <plies>]
 //                -- compare true S5/S6 Grundy values against live-conic and zone NK shadows.
 //   s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
@@ -2014,6 +2018,10 @@ impl RawMemoMmap {
     }
 
     fn get(&self, key: u128) -> Option<bool> {
+        self.find(key).map(|(_, value)| value)
+    }
+
+    fn find(&self, key: u128) -> Option<(usize, bool)> {
         let bytes = self.mmap.bytes();
         let mut lo = 0usize;
         let mut hi = self.n_records;
@@ -2027,7 +2035,7 @@ impl RawMemoMmap {
             }
         }
         if lo < self.n_records && raw_record_key(bytes, lo) == key {
-            Some(raw_record_value(bytes, lo))
+            Some((lo, raw_record_value(bytes, lo)))
         } else {
             None
         }
@@ -4866,6 +4874,219 @@ fn solve_s4_grundy_check(q: usize, t4: &[usize], grundy_path: &str, pn_path: &st
     );
 }
 
+#[derive(Default)]
+struct S4PnCheckStats {
+    seen: usize,
+    edges: usize,
+    present_edges: usize,
+    omitted_n_edges: usize,
+    missing_p_edges: usize,
+    p_nodes: usize,
+    n_nodes: usize,
+    terminal_nodes: usize,
+    terminal_n: usize,
+    p_has_p_child: usize,
+    n_without_p_child: usize,
+    max_ply: usize,
+    first_bad: String,
+}
+
+impl S4PnCheckStats {
+    fn bad(&mut self, message: String) {
+        if self.first_bad.is_empty() {
+            self.first_bad = message;
+        }
+    }
+
+    fn failures(&self, unseen: usize) -> usize {
+        self.missing_p_edges
+            + self.terminal_n
+            + self.p_has_p_child
+            + self.n_without_p_child
+            + unseen
+    }
+}
+
+fn s4_pn_check_state(
+    b: &Board,
+    raw: &RawMemoMmap,
+    occ: &mut Vec<u16>,
+    chosen: &Mask,
+    forbidden: &Mask,
+    seen: &mut [u64],
+    stats: &mut S4PnCheckStats,
+) {
+    let key = b.canon(occ);
+    let Some((idx, is_n)) = raw.find(key) else {
+        stats.bad(format!("reached state missing from raw table: key={key:032x}"));
+        stats.missing_p_edges += 1;
+        return;
+    };
+    let seen_bit = 1u64 << (idx & 63);
+    if seen[idx >> 6] & seen_bit != 0 {
+        return;
+    }
+    seen[idx >> 6] |= seen_bit;
+    stats.seen += 1;
+    stats.max_ply = stats.max_ply.max(occ.len());
+    if is_n {
+        stats.n_nodes += 1;
+    } else {
+        stats.p_nodes += 1;
+    }
+
+    let mut legal = 0usize;
+    let mut present_p_child = false;
+    for w in 0..MAXW {
+        let mut bits = b.all[w] & !chosen[w] & !forbidden[w];
+        while bits != 0 {
+            let tz = bits.trailing_zeros() as usize;
+            bits &= bits - 1;
+            let z = w * 64 + tz;
+            legal += 1;
+            stats.edges += 1;
+
+            let mut child_chosen = *chosen;
+            set_bit(&mut child_chosen, z);
+            let mut child_forbidden = *forbidden;
+            mask_or(&mut child_forbidden, &b.rc_mask[z]);
+            for &x in occ.iter() {
+                mask_or(&mut child_forbidden, &b.line_mask[x as usize * b.n + z]);
+            }
+            occ.push(z as u16);
+            let child_key = b.canon(occ);
+            match raw.find(child_key) {
+                Some((_, child_is_n)) => {
+                    stats.present_edges += 1;
+                    if !child_is_n {
+                        present_p_child = true;
+                        if !is_n {
+                            stats.p_has_p_child += 1;
+                            stats.bad(format!(
+                                "P row has P child: parent={key:032x} child={child_key:032x} move={},{}",
+                                z / b.q,
+                                z % b.q
+                            ));
+                        }
+                    }
+                    s4_pn_check_state(
+                        b,
+                        raw,
+                        occ,
+                        &child_chosen,
+                        &child_forbidden,
+                        seen,
+                        stats,
+                    );
+                }
+                None if is_n => {
+                    // Early-break N rows need one P witness, not all legal children.
+                    stats.omitted_n_edges += 1;
+                }
+                None => {
+                    stats.missing_p_edges += 1;
+                    stats.bad(format!(
+                        "P row is missing legal child: parent={key:032x} child={child_key:032x} move={},{}",
+                        z / b.q,
+                        z % b.q
+                    ));
+                }
+            }
+            occ.pop();
+        }
+    }
+
+    if legal == 0 {
+        stats.terminal_nodes += 1;
+        if is_n {
+            stats.terminal_n += 1;
+            stats.bad(format!("terminal row is N: key={key:032x}"));
+        }
+    } else if is_n && !present_p_child {
+        stats.n_without_p_child += 1;
+        stats.bad(format!("N row has no recorded P child: key={key:032x} legal={legal}"));
+    }
+}
+
+fn solve_s4_pn_check(q: usize, t4: &[usize], raw_path: &str) {
+    let b = Board::new(q);
+    let (mut root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let raw = RawMemoMmap::open(raw_path).expect("open P/N raw memo");
+    if !raw_memo_matches_root(&raw, q, t4, gf_hash, root_key, &root_cells) {
+        eprintln!(
+            "s4pncheck: P/N dump root mismatch; requested q={} t4={:?}, dump-q={} dump-t4={:?} records={}",
+            q, t4, raw.q, raw.t4, raw.n_records
+        );
+        std::process::exit(2);
+    }
+    if raw.status == 0 {
+        eprintln!("s4pncheck: aborted P/N dump cannot certify a root");
+        std::process::exit(2);
+    }
+    let root_value = raw.find(root_key).map(|(_, value)| value);
+    if root_value != Some(raw.status == 2) {
+        eprintln!(
+            "s4pncheck: root record/status mismatch: header={} record={}",
+            status_code_label(raw.status),
+            root_value.map_or("missing", |v| if v { "N" } else { "P" })
+        );
+        std::process::exit(2);
+    }
+
+    let start = Instant::now();
+    let mut seen = vec![0u64; raw.n_records.div_ceil(64)];
+    let mut stats = S4PnCheckStats::default();
+    s4_pn_check_state(
+        &b,
+        &raw,
+        &mut root_occ,
+        &root_chosen,
+        &root_forbidden,
+        &mut seen,
+        &mut stats,
+    );
+    let unseen = raw.n_records.saturating_sub(stats.seen);
+    if unseen != 0 {
+        stats.bad(format!("raw table has {unseen} unreachable/unvalidated records"));
+    }
+    let failures = stats.failures(unseen);
+    println!(
+        "S4PNCHECK q={} t4={:?} cells={:?} root={} records={} seen={} unseen={} p-nodes={} n-nodes={} terminal={} edges={} present-edges={} omitted-n-edges={} missing-p-edges={} terminal-n={} p-has-p-child={} n-without-p-child={} max-ply={} failures={} verdict={} elapsed={:.3}{}",
+        q,
+        t4,
+        cells,
+        status_code_label(raw.status),
+        raw.n_records,
+        stats.seen,
+        unseen,
+        stats.p_nodes,
+        stats.n_nodes,
+        stats.terminal_nodes,
+        stats.edges,
+        stats.present_edges,
+        stats.omitted_n_edges,
+        stats.missing_p_edges,
+        stats.terminal_n,
+        stats.p_has_p_child,
+        stats.n_without_p_child,
+        stats.max_ply,
+        failures,
+        if failures == 0 { "PASS" } else { "FAIL" },
+        start.elapsed().as_secs_f64(),
+        if stats.first_bad.is_empty() {
+            String::new()
+        } else {
+            format!(" first-bad={}", stats.first_bad)
+        }
+    );
+    if failures != 0 {
+        std::process::exit(1);
+    }
+}
+
 fn solve_s4_grundy_measure(
     q: usize,
     t4: &[usize],
@@ -7512,6 +7733,33 @@ fn main() {
             &grundy_path.expect("s4gcheck needs --grundy <file>"),
             &raw_path.expect("s4gcheck needs --raw <file>"),
         );
+        return;
+    }
+    if args[1] == "s4pncheck" {
+        // s4pncheck <q> t1,t2,t3,t4 --raw <pn-raw>
+        let mut raw_path: Option<String> = None;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--raw" {
+                raw_path = Some(it.next().expect("--raw needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--raw=") {
+                raw_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4pncheck mode needs q: s4pncheck <q> t1,t2,t3,t4 --raw <file>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4pncheck mode needs t values: s4pncheck <q> t1,t2,t3,t4 --raw <file>"),
+        );
+        solve_s4_pn_check(q, &t4, &raw_path.expect("s4pncheck needs --raw <file>"));
         return;
     }
     if args[1] == "s4gmeasure" {

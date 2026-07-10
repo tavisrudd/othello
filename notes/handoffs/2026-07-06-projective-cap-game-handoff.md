@@ -23,10 +23,11 @@ Closed or structurally understood:
   (Lemma I of the intrusion-calculus note; **now a verified Lean theorem** —
   `ProjectiveCap.Sym2Bridge.onconic_value_bridge`, C53 parts 1–2, see
   [C53 report](../2026-07-09-codex-full-pgl-bridge.md)), this establishes the computed q=23
-  on-conic/escape result without the former orbit caveat.  Trust tier: the bridge is a Lean
-  theorem, but the 22 bucket labels it consumes are solver output, not kernel-checked — so q=23
-  is **computed + orbit-reduced, not Lean-unconditional**.  C54 is the remaining rules-only
-  certificate task for the 22 computed bucket labels.
+  on-conic/escape result without the former orbit caveat.  C54 has now independently checked the
+  early-break proof DAG for all `241,627,613` raw records across the 22 buckets, with exact
+  reachability and zero game-equation failures.  Trust tier: q=23 is **computed and
+  rules-certified at the S4 bucket layer, not Lean-unconditional**; a Lean certificate consumer
+  and fixed-q assembly are still needed for `Projective.InitialPStatement`.
   `q = 25` has a first GF(25) S4-rooted sizing probe: the normalized representative
   `{1,2,3,4}` is P, using about 26.3M private memo entries with early break.  This is not a full
   q=25 bucket census.
@@ -67,7 +68,7 @@ steering family.
 | 13 | **P** | Lean certificate assembly: `CertData.Q13.initialPStatement_finrank` | none |
 | 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps) | Lean generated-data path needs refactor (`Class0` maxRecDepth after 31m); no uniform proof |
 | 19 | P | `esc` campaign; C30 anchored cert book emitted and rules-checked PASS (`272/272`, all on-conic, no caps) | Lean generated-data path gated behind q17 refactor; no uniform proof |
-| 23 | P | C29 bucket-first full-`PGL(2,23)` on-conic census: all 22 buckets P; full-PGL bridge removes the former orbit caveat; old size-3-rooted `esc` class 0 exceeded the 200M memo cap | computed only; C53 bridge is now a verified Lean theorem (`Sym2Bridge.onconic_value_bridge`); C54 still needed to certify the 22 bucket labels |
+| 23 | P | C29: all 22 full-`PGL(2,23)` on-conic buckets P; C54: all 22 early-break proof DAGs rules-checked (`241,627,613/241,627,613` records, zero failures); C53 full-PGL bridge is Lean-verified | computed and rules-certified at the S4 bucket layer; Lean certificate consumer/fixed-q assembly still open |
 | all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
 
 ## Closed Higher-Dimensional Families
@@ -423,8 +424,9 @@ Important modes:
 - `resym`: symmetric-family closure test; route closed but mode is useful for regression.
 - `boundary`: old odd-maximal-cap embedding test; route closed from q=11.
 - `par`, `outcome`, `defect`: broader exact solver modes.
-- `s4dump`, `s4freeze`, `s4query`, `s4mine`: exact raw mmap memo dumps, compact BuRR-style
-  archives, runtime line-protocol queries, and non-interactive root-child/reply/ply-summary rows
+- `s4dump`, `s4pncheck`, `s4freeze`, `s4query`, `s4mine`: exact raw mmap memo dumps, independent
+  rules-only early-break proof-DAG checking, compact BuRR-style archives, runtime line-protocol
+  queries, and non-interactive root-child/reply/ply-summary rows
   for S4-rooted pattern mining.  See the manual above before using compact archives for anything
   beyond exploratory mining.
 - `rust/scripts/s4_ml_mine.py`: uv-backed parser/ML-style summarizer for `s4mine` logs.  It emits
@@ -454,7 +456,7 @@ task list.  Current high-value items:
   bucket census (the A4 falsification watch, previously without a task ID; q=25's depletion
   status is now the key covariate).  The former q=23 direct-B3-discharge rider is superseded by
   **C53** (full-PGL bridge — parts 1–2 now a verified Lean theorem, `Sym2Bridge`) and **C54**
-  (q=23 bucket-label certification, still open).  Tier placement is in the queue's
+  (q=23 bucket-label certification, now reported PASS).  Tier placement is in the queue's
   priority-ordering amendment.
 - **Publishable-constraint additions (Fable, 2026-07-09 third pass):** **C45** defect-skeleton
   realizability theorem (dihedral classification of the conic endgame spectra; makes the mined
@@ -475,6 +477,9 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C54:** all 22 q=23 full-PGL S4 bucket dumps pass independent rules-only proof-DAG checking:
+  `241,627,613/241,627,613` records reached, `988,106,416` legal edges enumerated, zero failures.
+  With C53, q=23 is computed and rules-certified at the S4 bucket layer; Lean assembly remains.
 - **C29:** mixed-column mod-3 law refuted; q=23 has 22/22 on-conic buckets P.
 - **C31:** recursive zone-steering census supports the route; max steering ceiling is 2 at q=13
   and 9 at q=17.
@@ -729,6 +734,14 @@ compiled, but q17 `Class0.lean` failed after `31:23.21`, peak RSS `11,914,984 KB
 `class0_nodeChunks_check` with `maxRecDepth` in the aggregate chunk `simp`.  No q17/q19 Lean data
 was committed.  Next C30 step is to refactor the generated checker proof shape before attempting
 q17/q19 Lean assembly; otherwise move to C43/C44/C50 or the steering-proof lanes.
+
+Handoff note 2026-07-09 / Codex C54: added `s4pncheck`, documented its early-break reply-book
+contract, and ran the complete 22-root q=23 suite with `scripts/s4-c54-check-suite.sh`.  Every one
+of the `241,627,613` raw records was reached and checked; all 22 P roots passed with zero missing
+P-row children, bad terminal labels, value-equation failures, or unreachable records.  Aggregate
+wall was `4,077.68s`, peak RSS `371,836 KB`.  Report:
+[`../2026-07-09-codex-q23-bucket-certification.md`](../2026-07-09-codex-q23-bucket-certification.md).
+Next independent lanes are C43/C44/C50 or the C30 generated-checker refactor.
 
 Good Lean side targets:
 
