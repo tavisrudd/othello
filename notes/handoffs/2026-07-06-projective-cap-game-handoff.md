@@ -1060,6 +1060,27 @@ names a concrete quantity to test as a config invariant, a larger arc-depleted o
 the corpus, or a Ψ-trajectory discriminator separates flip from control.  No fourth static candidate
 is queued.  The live (ON) levers are Cluster 2 (open-core / amortized-potential, Codex) and A5.
 
+2026-07-10 Fable steering corrections applied (Claude): the day's Fable-model review of the 07:00–09:00
+work returned three corrections (proceed on all lanes, no re-route); all three applied.
+(1) **Softened the Cluster-1 close** in this handoff + the task queue — "no *static* config→value
+dictionary *found*, mechanism search DE-PRIORITIZED for A5," not "does not exist"; added the two
+scope limits (tested only q ∈ {11,17} vs {13,19}; both near-hits were q=11 artifacts) and an explicit
+re-entry condition.  (2) **Held-out q=19 Ψ replay** (Fable's overfit gate) — froze the q13+q17-fit
+integer Ψ and replayed it against the exact q=19 root under the *fixed C31 selector* (`s4potential`),
+not C62's existence quantifier: **2,622,202/2,622,214 strict decreases, 12 failures**, all the same
+single canonical ply-4 parent = exactly C62's 12 rho/ΔΨ split cases.  Verdict: Ψ is *not* overfit
+(existence transfers — C62 already showed every q19 obligation has a ΔΨ<0 P reply), but the raw C31
+selector does not transfer; geometrize Ψ, but the selector to prove ΔΨ<0 for is C61's automaton, and
+its hard surface is these 12 (write-up appended to `2026-07-09-codex-potential-lp-dual.md`;
+`rust/scripts/c63-q19-replay.py`).  (3) **Ψ dynamic flip/control probe** — added the convention-safe
+solver mode `s4potentialprobecells` (fits+transports the conic from explicit cells; commit `4a32a80`)
+and `rust/scripts/c69_psi_flip_probe.py`; **NEGATIVE** — Ψ's coupled features (defect/intruders/xor)
+are identical flip vs control at every order, the only separations are the reservoir/zone *size* term
+at the depleted order where controls are P and flips are N (the within-order N-vs-P value correlate
+C55 already saw, not a cross-q mechanism), nothing survives on the value-neutral jump or at q_full,
+and the 11/13 pair shows nothing.  The negative extends to the dynamic ledger; hardens A5-only
+(`notes/2026-07-10-psi-dynamic-flip-probe.md`).
+
 2026-07-10 C61 (Codex): finite-state reply-automaton quotient reported **NEGATIVE for the tested
 state alphabet** (`notes/2026-07-09-codex-reply-automaton.md`; analyzer
 `rust/scripts/c61_reply_automaton.py`).  Over the exact forced skeleton (q=9/13, all ten q=17

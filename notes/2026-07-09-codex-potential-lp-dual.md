@@ -252,3 +252,48 @@ uniform invariant: its present strategy witnesses are tablebase/Z-defined, and o
 q=23 line has been replayed.  The immediate falsification test is to score C62's geometric selector
 families by `Delta Psi < 0`; a selector that covers every obligation would turn this empirical
 Lyapunov function into the missing proof-shaped Good-closure lemma.
+
+## Correction-2 (Fable steering, 2026-07-10, Claude): held-out q=19 fixed-selector replay
+
+Fable's overfit gate: `Psi` was fit on q=13+q=17 only, and the program already has one transfer
+burn on record (the q=13-only fit threw 71 q=17 failures).  Before geometrizing, replay the FROZEN
+integer `Psi` against the exact q=19 root under the EXACT C63 protocol — the *fixed* C31 selector
+(`s4potential`), not C62's weaker "some P reply decreases Psi" existence quantifier.
+
+Command (solver rebuilt to `rust/target/gridcap-c63`):
+
+```bash
+./target/gridcap-c63 s4potential 19 1,2,3,4 \
+  --grundy s4-dumps/2026-07-09/c35/q19-root-1234.grundy.raw \
+  --out s4-dumps/2026-07-10/c63-q19/q19-root-1234.transitions.tsv
+python3 scripts/c63-q19-replay.py s4-dumps/2026-07-10/c63-q19/q19-root-1234.transitions.tsv
+```
+
+Result:
+
+```text
+C63-Q19-REPLAY rows=2622214 strict_decreases=2622202 failures=12 delta_range=[-124,12]
+  worst failure: dPsi=12 parent_key=0b7a91f6b96e82780d0fe4202f22b126 parent_ply=4 opponent=7,11 reply=13,3
+```
+
+**12 failures / 2,622,214** — NOT the clean 0 that q=13/q=17 gave.  All 12 are the SAME single
+canonical ply-4 parent (`0b7a91f6b96e…`); every one raises `Psi` from 96 to 104/106/108
+(`dPsi ∈ {8,10,12}`).  These are exactly the 12 rho/`Delta Psi` split cases C62 already flagged
+("12 q=19 ply-4 obligations, all on-conic opponent moves from the same canonical parent, where the
+minimum-rho reply is P but raises Psi").
+
+Interpretation — two things transfer differently at q=19:
+
+- **Existence transfers (Psi is not overfit):** C62's pass already showed all 2,622,214 q=19
+  obligations, *including* these 12, have *some* exact P reply with `Delta Psi < 0`.  The fitted
+  weights still admit a descending reply everywhere.
+- **The fixed C31 selector does NOT transfer:** on the 12 transitions out of that one ply-4 parent,
+  the C31 tie-break (minimize `max(child zone, child Z)`, then cell) picks a reply that *raises*
+  `Psi`, even though a descending P reply exists.
+
+**Gate outcome:** proceed to geometrize `Psi` (existence is solid held-out), but do **not**
+geometrize the raw C31 oracle selector — its `Psi`-descent fails on the split cases.  The selector
+to prove `Delta Psi < 0` for is C61's reply automaton, and its hard surface is precisely these 12
+(one canonical ply-4 parent, on-conic opponent moves).  C61 must override the C31 tie-break there,
+and the existence pass guarantees a legal `Psi`-decreasing target to override toward.  Artifacts:
+`rust/scripts/c63-q19-replay.py`, `s4-dumps/2026-07-10/c63-q19/q19-root-1234.transitions.tsv`.
