@@ -70,7 +70,8 @@ mirror/slack analysis is new.
 - **Odd planes, per-`q`:** `q=5,7` P by a **mechanism** theorem (not enumeration); `q=11,13` P by
   **kernel-checked certificate assembly** — all four Lean-closed. `q=3,9,17,19,23` computed P (q=23
   via the 22-bucket full-`PGL(2,23)` on-conic census + the full-PGL bridge), not yet Lean-closed;
-  `q=25` full-census RUNNING (9/28 full-PGL buckets labeled, all P so far).  All four projective
+  `q=25` full-census RUNNING (all buckets labeled so far P; the R7-decider `f_10 = P` already
+  resolves **`min-witness(25) ≥ 4`** — the knife edge rebounds at the first square order).  All four projective
   planes of **order 9** (PG(2,9), Hall, dual Hall, Hughes) computed P — the P-property is
   Desargues-independent at order 9.  The q=17 **(ON)** statement is now *proved from bucket
   stabilizers* (the capacity lemma: 15 pointed-pairing involutions vs N-capacity `q−4 = 13`).
@@ -176,10 +177,11 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
 - Equivalence **`PG(2,q)=P ⟺ OddEscapeStatement`** proved **both directions** in Lean
   (`TrapConverse`) — a found residual trap is now a Lean-certifiable projective counterexample.
 - **(ON)** — every size-3 residual has a P-valued **on-conic** size-4 child — verified through
-  q=23 but **sharply branched at q=25**: the label-blind fan matrix (8 five-frame orbits) forces
-  `min-witness(25) ∈ {0, ≥3}` (sole open row `R7 = {10:6, 14:3, 16:6, 17:6}`, pivot bucket 14),
-  so q=25 either refutes (ON) or rebounds the `2 → 1` knife edge.  q=17's instance is proved
-  (capacity lemma); the constant-15 supply provably gives nothing at q ≥ 19.
+  q=23; the q=25 branch (label-blind fan matrix forced `min-witness(25) ∈ {0, ≥3}`) **RESOLVED
+  upward mid-census**: the R7-decider `f_10 = P` gives `min-witness(25) ≥ 4`, so the `2 → 1`
+  knife-edge slide rebounds at the first square order and (ON) survives q=25.  q=17's instance
+  is proved (capacity lemma); the constant-15 supply provably gives nothing at q ≥ 19; the open
+  A5 arithmetic question is now which orders beyond {11,17} deplete at all.
 - **NEW route (L) / (L_forall)** — the max-incidence secant `L(A)` carries a P child on **68/68**
   computed classes (value-blind; q=17 null base 49% → 100%), and where `L(A)` is tied the common
   point of the tied lines is P **10/10** (post-hoc, frozen q=25 prediction: Veronese `(1:15:9)`).

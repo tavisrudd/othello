@@ -170,6 +170,12 @@ exist, so the dichotomy data is untouched).
   admits a special (P) completion.** Report:
   [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md); script
   `rust/scripts/c68b_nbucket_density.py`.
+  **q=25 resolution (2026-07-10):** the R7-decider `f_10 = P` gives **`min-witness(25) ≥ 4`** —
+  the min-witness slide `2 → 1` REBOUNDS at the first square order, and `ν(25)` is tracking
+  toward 0 (census 11/28, all P — including the size-720 generics where q=17-style depletion
+  strikes first).  The A5 anchor `maxonN(q) ≤ q−5` holds at q=25 with margin; the A4/Baer square
+  watch is weakening; the open A5 arithmetic question shifts to **which orders beyond {11,17}
+  deplete at all** (next candidates among q = 29, 31, …).
 - **C72 [REPORTED 2026-07-10 — NEGATIVE (read b), with a partial-identity gift]** — PGL
   permutation-module / Johnson-scheme decomposition of the on-conic value function `f_q`.  A
   **concentration instrument** for the link-sum near-point-mass (`onP(A) = Σ_{x∉A} f_q(A∪{x})`,
@@ -241,6 +247,8 @@ exist, so the dichotomy data is untouched).
   10/16/17 P ⇒ ON survives but `L`'s ON form fails and its ESC form is the decisive independent
   test; all four N ⇒ ON refuted at q=25.  The "non-depleted ∧ L-fails" cell is logically
   impossible.  Original spec §C74 below (its stabilizer-family gate is superseded as above).
+  **Dichotomy RESOLVED (2026-07-10, mid-census): `f_10 = P` ⇒ `min-witness(25) ≥ 4` — the
+  rebound branch.  (ON) survives q=25; buckets 14/16/17 now refine only `L`'s ON form.**
 - **Codex round-2 umbrella report (2026-07-10; verified by Fable):**
   [`2026-07-10-codex-odd-plane-round2-report.md`](2026-07-10-codex-odd-plane-round2-report.md) —
   beyond the C74 results above: (i) the **R2-2 kill-set top-k refutation** (recorded at the item-7
@@ -266,10 +274,15 @@ exist, so the dichotomy data is untouched).
   explicit ~10 h user-launch gate; do not launch it implicitly.
 - **C43 [REPORTED 2026-07-09 — `PG(4,3) = P`]** / **C44** — the former
   even-dimensional evidence vacuum is closed by the first direct P datum; q=25 census remains an
-  active compute lane (**full `--log2 29` census RUNNING as of 2026-07-10**; 3/28 buckets already
-  certified P; outcome branches now pre-registered against the (ON)-vs-conjecture bifurcation —
-  see the C44 entry, item 7).  C43's optional follow-up is strategy extraction, not another
-  sizing run.
+  active compute lane (**full `--log2 29` census RUNNING**; 11/28 buckets labeled, ALL P; outcome
+  branches pre-registered against the (ON)-vs-conjecture bifurcation — see the C44 entry, item 7).
+  **R7-decider RESOLVED (2026-07-10, mid-census):** `f_10 = P` (size-720 generic, 223.8M
+  positions) ⇒ `R7 ≥ 6` ⇒ **`min-witness(25) ≥ 4`** — the C74 dichotomy lands on the REBOUND
+  branch: the `2 → 1` knife-edge slide breaks upward at the first square order and **(ON)
+  survives q=25**.  Remaining census payload: `ν(25)` (tracking toward 0 — non-depleted) and
+  buckets 14/16/17 (refine `L`'s ON form only, per the C74 §6 tree); the concurrence point
+  `(1:15:9)` is a post-census targeted off-conic solve (C73 §7 step 0).  C43's optional
+  follow-up is strategy extraction, not another sizing run.
 - **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
   (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
   pairwise non-isomorphic (distinct complete-arc spectra), so the odd-plane P-property is invariant

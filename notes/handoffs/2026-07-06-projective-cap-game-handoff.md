@@ -601,6 +601,18 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **q=25 R7-decider (2026-07-10, mid-census) — `f_10 = P` ⇒ `min-witness(25) ≥ 4`: the knife
+  edge REBOUNDS at the first square order; (ON) survives q=25.**  Bucket 10 (rep `[1,2,6,8]`,
+  size-720 generic, 223.8M positions) labeled P by the running census, resolving the C74
+  dichotomy (`0 or ≥3`) on the rebound branch: `R7 = 6f_10 + 3f_14 + 6f_16 + 6f_17 ≥ 6`, and
+  with the disclosed row bounds the global minimum sits at the R4–R6 floor of 4.  The C68
+  min-witness slide `2 → 1` does NOT continue; the A5 anchor `maxonN(q) ≤ q−5` holds at q=25
+  with margin; the A4/Baer falsification watch weakens.  Census 11/28, ALL P (including the
+  size-720 generics where q=17-style depletion strikes first) — `ν(25)` tracking toward 0
+  (non-depleted).  Remaining: buckets 14/16/17 refine `L`'s ON form per the C74 §6 tree ("non-
+  depleted ∧ L-fails" is logically impossible, so an all-P tail sends the `L` stress-test null);
+  the concurrence point `(1:15:9)` is a post-census targeted off-conic solve.  With the rebound,
+  the open A5 arithmetic question shifts to which orders beyond {11,17} deplete at all.
 - **Codex round-2 umbrella (2026-07-10; verified by Fable) — kill-set top-k refuted at q=23;
   tied-line concurrence found; (L_forall) named.**
   [`../2026-07-10-codex-odd-plane-round2-report.md`](../2026-07-10-codex-odd-plane-round2-report.md).
