@@ -1091,7 +1091,7 @@ refutation of one of Fable's six items is a full-value deliverable.
 
 Report file: `notes/2026-07-09-codex-line-capacity-followup.md`.
 
-## C34. Assemble the D1 outcome-classes manuscript skeleton (the flag-planting paper)
+## C34. Assemble the D1 outcome-classes manuscript skeleton (the flag-planting paper) [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-09-stepping-stone-deliverables-proposal.md`](2026-07-09-stepping-stone-deliverables-proposal.md)
 (D1 + the umbrella framing and novelty guards), the C26 novelty audit
