@@ -1,11 +1,23 @@
 # C44 — GF(25) prime-power path + q=25 on-conic bucket census
 
-## Status: SIZING PASS (2026-07-10, Claude). Full census NOT run — it does not fit the 8h/8GB gate.
+## Status: SIZED + arena tool built (2026-07-10, Claude). Census now gate-feasible; full run pending a low-contention window.
 
-This is the C44 sizing pass requested as the C68 follow-on. The GF(25) path and bucket enumeration
-are ready; the per-bucket **labeling** census exceeds the stated 8 GB gate on the current solver
-path. Verdict + unblock options below; **the full census needs an explicit RAM/machinery gate
-decision before it runs.**
+This is the C44 sizing pass (C68 follow-on). Outcome: the GF(25) path + bucket enumeration are ready;
+the FnvMap labeling path blows the 8 GB gate, **so I built + validated the arena labeling path (option
+(b), committed `60c87fb`) which resolves it** — and used it to certify the hardest bucket. Current
+state:
+
+- **2 of 28 q=25 on-conic buckets labeled, both P** (via the new `s4arena` path):
+  - bucket 1 `[1,2,3,4]` (degenerate size-6 orbit): **P**, 26.3M positions, ~120 s.
+  - bucket 0 `[1,2,3,5]` (generic size-720 orbit, the FnvMap path's wall): **P**,
+    **213,512,095 positions**, 1089 s (18.2 min) in a 4 GB arena. No N — no falsification here.
+- **The census is now feasible at ~6 h / 8 GB** with `s4arena --all` (bucket 0 ≈ 18 min × ~19 generic
+  buckets + fast small ones). It needs `--log2 29` (8 GB) because bucket 0's 213.5M nearly maxed the
+  4 GB / 214M-cap arena; larger buckets will exceed it.
+- **Not yet run in full** because the box is contended (rust-analyzer + a second claude + codex active,
+  ~4–12 GB headroom fluctuating) and a hash table faults ~all its arena pages immediately (arena RSS ≈
+  arena size, ~8 GB), so a ~6 h 8 GB run risks the OOM line the CLAUDE.md flags. **Decision needed:**
+  run now (box permitting, monitored) or in a low-contention window.
 
 ### Why q=25's depletion status matters (the import, before any RAM logistics)
 
@@ -91,25 +103,40 @@ N root is certified by fully expanding one P child, whose subtree can itself be 
 positions). The ~19 generic buckets are each bucket-0-class (> 8 GB, ~10–16+ min). **The full census
 does not fit the C44 8h/8GB gate as written.**
 
-## Unblock options (pick one — this is a real gated run, needs a decision)
+## Unblock — option (b) chosen and BUILT
 
-- **(a) Re-gate RAM to ~14–16 GB** (the box has 26 GB). Run the 28 representatives **serially** with
-  `echo 3 > drop_caches` between buckets; a generic ~200M-entry bucket is ~16 min / ~8–13 GB peak.
-  Estimated total wall ~2–5 h (dominated by the ~19 generic buckets; the size-6/120/180 buckets are
-  cheap). Straightforward, no new code; just exceeds the current 8 GB per-task limit.
-- **(b) Engineering first: route S4-rooted labeling through the 16-byte arena `Memo`** (+ huge pages),
-  the handoff's documented answer to q≥23/q=25 memory pressure (BuRR/compact archive). Halves slot RAM
-  (16 vs 33 B) ⇒ a 256M-position bucket ≈ 4 GB, likely bringing the generic buckets back under 8 GB and
-  keeping the original gate. Costs solver work up front; buys a gate-compliant census.
-- **(c) Cheap partial now, no depletion answer.** Label the affordable buckets (the size-6 bucket and
-  any others that terminate under a modest cap) inside 8 GB; mark the generic buckets "needs re-gate."
-  Honest partial coverage, but it **cannot** decide depletion — any single uncertified generic bucket
-  could be the N one.
+**Option (b) is done: `s4arena` (commit `60c87fb`) routes S4-rooted labeling through the 16-byte
+`Shard` arena** (fixed pre-alloc, no rehash), the durable fix. Validated byte-identical to the FnvMap
+path — same P/N label AND same distinct-class count, both matching C54's independent record counts:
+q=9 P/16, q=11 N/42, q=13 P/553 (+ full census 5/5 P), q=17 P/64728, q=25 `[1,2,3,4]` P/26,305,294. It
+already certified the FnvMap path's wall (bucket 0, 213.5M positions) inside a 4 GB arena.
 
-**Recommendation:** option (a) is the fastest path to the actual number if the RAM gate is raised
-(the box is idle enough — 13 GB free during this pass); option (b) is the durable fix if q=25 will be
-revisited (feat-layer per-class witness counts, C36 cross-q corpus, future square orders). Either way
-this is a "real run, size-then-gate" decision, not an inside-gate task — hence stopping at sizing.
+Remaining: the census is now a **~6 h / 8 GB `--log2 29` run** — gate-compliant on RAM but multi-hour,
+so it is a "size-then-gate" decision (per intent-based mode) rather than inside-gate. Run it in a
+low-contention window (or monitored, box permitting). The old FnvMap-only options — (a) re-gate RAM to
+~14–16 GB, (c) cheap partial — are superseded by (b) and kept below only for history.
+
+<details><summary>superseded FnvMap-only options</summary>
+
+- (a) Re-gate RAM to ~14–16 GB and run the 28 reps serially with cache-drops (~2–5 h). No new code but
+  over the 8 GB limit.
+- (c) Cheap partial: label only the buckets that terminate under a modest FnvMap cap; cannot decide
+  depletion (an uncertified generic bucket could be the N one).
+
+</details>
+
+## Reproduction (arena path)
+
+```bash
+cd rust
+rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-arena
+./target/gridcap-arena s4arena 25 1,2,3,5 --log2 28   # bucket 0: P, 213.5M positions, ~18 min, 4 GB
+./target/gridcap-arena s4arena 25 --all --log2 29      # full 28-bucket census (~6 h, 8 GB) — the run
+./target/gridcap-arena s4arena 13 --all --log2 24      # smoke: q=13 census, 5/5 P (fast)
+```
+
+`--all` streams one `S4ARENA-BUCKET` line per bucket, so any N appears immediately (falsification watch)
+and the run is resumable with `--start <idx>`.
 
 ## Consequence for C68 / the (ON) route
 

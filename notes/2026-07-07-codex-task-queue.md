@@ -1712,22 +1712,19 @@ Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-code
 
 ## C44. GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
 
-**[SIZED 2026-07-10 (Claude) — full census NOT run; needs a RAM/machinery gate.]**
-Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
-Ready & cheap: GF(25) path in place (`irred(25)=x²+3` over F₅, nonsquare; self-check passes; MAXW ok;
-`s4 25 1,2,3,4`=P at 26.3M memo reproduces the handoff) and **28 full-PGL(2,25) on-conic buckets**
-enumerated (~4 s; ~19 of 28 are generic size ≥360). The wall: bucket labeling (`eval_s4`/`s4dump`)
-uses a 33-byte/slot `FnvMap`; the generic bucket 0 `[1,2,3,5]` has **>112M distinct positions** (prior
-run aborted at 100M/479s; this probe hit the 128M-cap plateau at 4.38 GB with no verdict) ⇒ needs a
-256M-cap table (~8.4 GB, ~12.7 GB rehash peak) — **over the 8 GB gate**. q=25's on-conic trees are
-~10× the q=23 primes (>100M vs 6–14M positions/bucket — the Baer density showing up as game-tree
-blowup). Depletion needs **all 28** labeled (aborts give no verdict; N is not reliably cheap). Unblock
-options (pick one, it's a real gated run): **(a)** re-gate RAM to ~14–16 GB (box has 26 GB), serial
-per-bucket with cache drops, ~2–5 h wall; **(b)** route S4-rooted labeling through the 16-byte arena
-`Memo` + huge pages (halves RAM, likely fits 8 GB) — durable fix; **(c)** cheap partial, no depletion
-answer. **Import:** q=25 is the next chance at a *third* depleted point to test whether the C68 margin
-keeps collapsing `2 → 1 → 0?` (min-witness → 0 would refute conic localization as the mechanism, not
-the conjecture). Full census remaining below.
+**[SIZED + ARENA TOOL BUILT 2026-07-10 (Claude); 2/28 buckets P; full census pending a
+low-contention window.]** Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
+GF(25) path in place (`irred(25)=x²+3` over F₅, nonsquare; self-check ok; MAXW ok) and **28
+full-PGL(2,25) on-conic buckets** enumerated (~4 s). The wall was RAM: FnvMap labeling (33 B/slot,
+rehashes) blows 8 GB on the generic buckets. **Fixed by building `s4arena`** (commit `60c87fb`) — S4
+labeling on the 16-byte `Shard` arena (fixed pre-alloc, no rehash), validated byte-identical to FnvMap
+(labels + distinct-class counts match C54). Results so far, both **P**: bucket 1 `[1,2,3,4]` (26.3M),
+bucket 0 `[1,2,3,5]` (**213.5M positions**, 18 min, 4 GB — the bucket FnvMap couldn't finish). Census
+is now a **~6 h / 8 GB `--log2 29` run** (`s4arena 25 --all`); gate-compliant on RAM but multi-hour +
+box is contended, so it's a size-then-gate decision — run in a low-contention window (streams per
+bucket, resumable via `--start`, any N shows immediately = falsification). **Import:** q=25 is the
+third depleted-point test of C68's margin `2 → 1 → 0?` (min-witness → 0 would refute conic
+localization as the mechanism, not the conjecture). Full census + original spec remaining below.
 
 Context: the falsification map names square `q` (Baer subplanes — extra dense collinearity) the
 **top falsification watch** (A4), the (ON) layer sits at a knife edge (§6), and q=25 is also where
