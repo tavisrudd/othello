@@ -88,7 +88,8 @@ This is what makes `veronesePoint` well defined on projective points. -/
 theorem veronese_smul (c : K) (v : Line K) :
     veronese (c • v) = c ^ 2 • veronese v := by
   funext i
-  fin_cases i <;> simp [veronese, Pi.smul_apply, mul_pow] <;> ring
+  fin_cases i <;> simp [veronese, Pi.smul_apply, mul_pow]
+  all_goals ring
 
 /-- The Veronese image of a nonzero vector is nonzero (uses that `K` has no zero
 divisors). -/
