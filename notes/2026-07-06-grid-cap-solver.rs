@@ -74,6 +74,11 @@
 //                -- extract exact P-state -> selected P-reply transitions for C63.  The selector
 //                   minimizes C31's max(zone, child-Z), and every row contains before/after v1
 //                   potential features plus the exact post-repair Z/depth fields.
+//   s4potentialprobe <q> t1,t2,t3,t4 [r,c ...]
+//                -- print the geometric C63 feature vector of one locally specified state.
+//   s4selectors <q> t1,t2,t3,t4 --grundy <grundy-raw>
+//                -- exact C62 selector scoring on every P->N reply obligation: rho-greedy,
+//                   C63-Psi, live/defect/internal/polar/quadratic-character geometric families.
 //   s4freeze <raw-file> <burr-file> [--fp-bits <bits>] [--load <0.1..1.0>]
 //                -- freeze a raw S4 dump into a compact BuRR-style ribbon archive for runtime
 //                   queries. Uses 64-bit folded keys plus membership fingerprints; raw remains
@@ -2232,6 +2237,10 @@ impl RawGrundyMemoMmap {
     }
 
     fn get(&self, key: u128) -> Option<u8> {
+        self.find(key).map(|(_, value)| value)
+    }
+
+    fn find(&self, key: u128) -> Option<(usize, u8)> {
         let bytes = self.mmap.bytes();
         let mut lo = 0usize;
         let mut hi = self.n_records;
@@ -2245,7 +2254,7 @@ impl RawGrundyMemoMmap {
             }
         }
         if lo < self.n_records && raw_record_key(bytes, lo) == key {
-            Some(raw_record_value_byte(bytes, lo))
+            Some((lo, raw_record_value_byte(bytes, lo)))
         } else {
             None
         }
@@ -6062,6 +6071,523 @@ fn s4_write_potential_features(w: &mut BufWriter<File>, xs: &[i64; 17]) {
     }
 }
 
+fn solve_s4_potential_probe(q: usize, t4: &[usize], moves: &[String]) {
+    let b = Board::new(q);
+    let (mut occ, mut chosen, mut forbidden, _cells) = build_s4_root(&b, t4);
+    for arg in moves {
+        let (r, c) = parse_cell_arg(arg).unwrap_or_else(|| panic!("bad probe cell {}", arg));
+        assert!(r < q && c < q, "probe cell out of range: {}", arg);
+        let (next_occ, next_chosen, next_forbidden) =
+            push_cell_state(&b, &occ, &chosen, &forbidden, r * q + c)
+                .unwrap_or_else(|| panic!("illegal probe cell {} after {}", arg, fmt_cell_indices(&b, &occ)));
+        occ = next_occ;
+        chosen = next_chosen;
+        forbidden = next_forbidden;
+    }
+    let features = s4_potential_features(&b, &occ, &chosen, &forbidden, 0, 0);
+    print!(
+        "S4POTENTIALPROBE q={} t4={:?} ply={} cells={}",
+        q,
+        t4,
+        occ.len(),
+        fmt_cell_indices(&b, &occ)
+    );
+    for (name, value) in S4_POTENTIAL_FEATURES.iter().zip(features) {
+        print!(" {}={}", name, value);
+    }
+    let candidate = features[5] + 6 * features[7] - 4 * features[12] - 2 * features[1];
+    println!(" c63_candidate={}", candidate);
+}
+
+fn s4_candidate_psi(features: &[i64; 17]) -> i64 {
+    features[5] + 6 * features[7] - 4 * features[12] - 2 * features[1]
+}
+
+#[derive(Default)]
+struct S4SelectorStats {
+    obligations: usize,
+    defined: usize,
+    p_hit: usize,
+    psi_hit: usize,
+    zero_hit: usize,
+    all_p: usize,
+    all_psi: usize,
+    tied: usize,
+    selected_sum: usize,
+    p_rank_hist: BTreeMap<usize, usize>,
+}
+
+impl S4SelectorStats {
+    fn add(&mut self, selected: &[usize], replies: &[S4SelectorReply]) {
+        self.obligations += 1;
+        if selected.is_empty() {
+            return;
+        }
+        self.defined += 1;
+        self.selected_sum += selected.len();
+        if selected.len() > 1 {
+            self.tied += 1;
+        }
+        let is_p = |i: usize| replies[i].g == 0;
+        let is_psi = |i: usize| is_p(i) && replies[i].delta_psi < 0;
+        let is_zero = |i: usize| is_p(i) && replies[i].features.xor_zero;
+        if selected.iter().copied().any(is_p) {
+            self.p_hit += 1;
+        }
+        if selected.iter().copied().any(is_psi) {
+            self.psi_hit += 1;
+        }
+        if selected.iter().copied().any(is_zero) {
+            self.zero_hit += 1;
+        }
+        if selected.iter().copied().all(is_p) {
+            self.all_p += 1;
+        }
+        if selected.iter().copied().all(is_psi) {
+            self.all_psi += 1;
+        }
+    }
+
+    fn print(&self, q: usize, t4: &[usize], family: &str) {
+        let avg_selected_milli = if self.defined == 0 {
+            0
+        } else {
+            (1000 * self.selected_sum + self.defined / 2) / self.defined
+        };
+        println!(
+            "S4SELECT q={} t4={:?} family={} obligations={} defined={} p_hit={} psi_hit={} zero_hit={} all_p={} all_psi={} tied={} selected_avg_milli={} p_rank_hist={}",
+            q,
+            t4,
+            family,
+            self.obligations,
+            self.defined,
+            self.p_hit,
+            self.psi_hit,
+            self.zero_hit,
+            self.all_p,
+            self.all_psi,
+            self.tied,
+            avg_selected_milli,
+            self.p_rank_hist
+                .iter()
+                .map(|(rank, count)| format!("{}:{}", rank, count))
+                .collect::<Vec<_>>()
+                .join(",")
+        );
+    }
+}
+
+struct S4SelectorReply {
+    z: u16,
+    g: u8,
+    rho: f64,
+    features: S4SelectorFeatures,
+    delta_psi: i64,
+    geom: &'static str,
+    polar_internal: bool,
+    rect_char: i8,
+}
+
+#[derive(Clone, Copy, Default)]
+struct S4SelectorFeatures {
+    xor_zero: bool,
+    live_on: u16,
+    defect_components: u16,
+    psi: i32,
+}
+
+#[derive(Clone, Copy, Default)]
+struct S4SelectorState {
+    parent: u32,
+    z: u16,
+    len: u8,
+    seen: bool,
+}
+
+fn s4_selector_occ(
+    states: &[S4SelectorState],
+    root_index: usize,
+    root_occ: &[u16],
+    mut i: usize,
+) -> Vec<u16> {
+    if i == root_index {
+        return root_occ.to_vec();
+    }
+    let mut suffix = Vec::with_capacity(states[i].len as usize - root_occ.len());
+    while i != root_index {
+        let state = states[i];
+        suffix.push(state.z);
+        i = state.parent as usize;
+    }
+    suffix.reverse();
+    let mut occ = root_occ.to_vec();
+    occ.extend(suffix);
+    occ
+}
+
+fn s4_selector_features(
+    b: &Board,
+    occ: &[u16],
+    chosen: &Mask,
+    forbidden: &Mask,
+) -> S4SelectorFeatures {
+    let full = s4_potential_features(b, occ, chosen, forbidden, 0, 0);
+    S4SelectorFeatures {
+        xor_zero: full[1] == 1,
+        live_on: full[2] as u16,
+        defect_components: full[7] as u16,
+        psi: s4_candidate_psi(&full) as i32,
+    }
+}
+
+fn s4_masks_from_occ(b: &Board, occ: &[u16]) -> (Mask, Mask) {
+    let mut chosen = [0u64; MAXW];
+    let mut forbidden = [0u64; MAXW];
+    for (i, &z16) in occ.iter().enumerate() {
+        let z = z16 as usize;
+        set_bit(&mut chosen, z);
+        mask_or(&mut forbidden, &b.rc_mask[z]);
+        for &x16 in &occ[..i] {
+            mask_or(&mut forbidden, &b.line_mask[x16 as usize * b.n + z]);
+        }
+    }
+    (chosen, forbidden)
+}
+
+fn s4_quadratic_character(gf: &GF, x: usize) -> i8 {
+    if x == 0 {
+        return 0;
+    }
+    let mut value = 1usize;
+    for _ in 0..((gf.q - 1) / 2) {
+        value = gf.m(value, x);
+    }
+    if value == 1 { 1 } else { -1 }
+}
+
+fn s4_argmin_by_key<K: Ord, F: Fn(&S4SelectorReply) -> Option<K>>(
+    replies: &[S4SelectorReply],
+    key: F,
+) -> Vec<usize> {
+    let mut best_key: Option<K> = None;
+    let mut selected = Vec::new();
+    for (i, reply) in replies.iter().enumerate() {
+        let Some(k) = key(reply) else {
+            continue;
+        };
+        match best_key.as_ref() {
+            None => {
+                best_key = Some(k);
+                selected.push(i);
+            }
+            Some(old) if k < *old => {
+                best_key = Some(k);
+                selected.clear();
+                selected.push(i);
+            }
+            Some(old) if k == *old => selected.push(i),
+            Some(_) => {}
+        }
+    }
+    selected
+}
+
+fn s4_argmin_rho(replies: &[S4SelectorReply]) -> Vec<usize> {
+    let best = replies.iter().map(|r| r.rho).fold(f64::INFINITY, f64::min);
+    replies
+        .iter()
+        .enumerate()
+        .filter_map(|(i, r)| ((r.rho - best).abs() <= 1e-13).then_some(i))
+        .collect()
+}
+
+fn s4_rho_top_levels_by_key<K: Ord, F: Fn(&S4SelectorReply) -> Option<K>>(
+    replies: &[S4SelectorReply],
+    levels: usize,
+    key: F,
+) -> Vec<usize> {
+    let mut rhos: Vec<f64> = replies.iter().map(|r| r.rho).collect();
+    rhos.sort_by(f64::total_cmp);
+    rhos.dedup_by(|a, b| (*a - *b).abs() <= 1e-13);
+    let threshold = rhos[levels.saturating_sub(1).min(rhos.len() - 1)];
+    s4_argmin_by_key(replies, |r| (r.rho <= threshold + 1e-13).then(|| key(r)).flatten())
+}
+
+fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Option<&str>) {
+    let b = Board::new(q);
+    let (root_occ, _root_chosen, _root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells)
+        || grundy.root_grundy.is_none()
+    {
+        eprintln!("s4selectors: exact matching Grundy dump required: {}", grundy.describe());
+        std::process::exit(2);
+    }
+    let started = Instant::now();
+    let root_index = grundy.find(root_key).expect("root missing from exact Grundy dump").0;
+    let mut states = vec![S4SelectorState::default(); grundy.n_records];
+    states[root_index] = S4SelectorState {
+        parent: u32::MAX,
+        z: 0,
+        len: root_occ.len() as u8,
+        seen: true,
+    };
+    let mut frontier = VecDeque::new();
+    frontier.push_back(root_index);
+    let mut seen = 0usize;
+    while let Some(i) = frontier.pop_front() {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        let key = b.canon(&occ);
+        assert_eq!(grundy.find(key).unwrap().0, i, "raw-index reconstruction mismatch");
+        seen += 1;
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            let (child_occ, _, _) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            let child_i = grundy
+                .find(b.canon(&child_occ))
+                .expect("reachable child missing from exact Grundy dump")
+                .0;
+            if !states[child_i].seen {
+                states[child_i] = S4SelectorState {
+                    parent: u32::try_from(i).expect("selector state index exceeds u32"),
+                    z,
+                    len: child_occ.len() as u8,
+                    seen: true,
+                };
+                frontier.push_back(child_i);
+            }
+        }
+    }
+    if seen != grundy.n_records {
+        eprintln!("s4selectors: reachability mismatch {} != {}", seen, grundy.n_records);
+        std::process::exit(2);
+    }
+    let mut order: Vec<usize> = (0..states.len()).collect();
+    order.sort_unstable_by_key(|&i| std::cmp::Reverse(states[i].len));
+    let mut rho = vec![0f64; states.len()];
+    for &i in &order {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        let moves = avail_cells(&b, &chosen, &forbidden);
+        if moves.is_empty() {
+            continue;
+        }
+        let mut sum = 0f64;
+        for z in &moves {
+            let (child_occ, _, _) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, *z as usize).unwrap();
+            let child_i = grundy.find(b.canon(&child_occ)).unwrap().0;
+            sum += 1.0 - rho[child_i];
+        }
+        rho[i] = sum / moves.len() as f64;
+    }
+
+    let families = [
+        "rho_greedy",
+        "psi_min",
+        "live_min",
+        "defect_components_min",
+        "zero_xor_live_min",
+        "internal_live_min",
+        "guard_killer",
+        "polar_internal",
+        "rect_char_pos_live_min",
+        "rect_char_neg_live_min",
+        "rho2_psi",
+        "rho3_psi",
+        "rho4_psi",
+        "rho2_live",
+        "rho3_live",
+        "rho2_defect",
+        "rho2_zero_live",
+    ];
+    let mut stats: BTreeMap<&str, S4SelectorStats> =
+        families.iter().map(|&name| (name, S4SelectorStats::default())).collect();
+    let mut obligations = 0usize;
+    let mut baseline_p = 0usize;
+    let mut baseline_psi = 0usize;
+    let mut fail_writer = fail_out.map(|path| {
+        let mut w = BufWriter::new(File::create(path).expect("create selector failure TSV"));
+        writeln!(w, "q\tt4\tparent_key\tparent_ply\topponent\txgeom\tparent_psi\tbaseline_psi\trho_p_hit\trho_psi_hit\tbest_p_rank\tmin_rho\tselected\tbest_p").expect("write selector failure header");
+        w
+    });
+    for i in 0..states.len() {
+        let g = raw_record_value_byte(grundy.mmap.bytes(), i);
+        if g != 0 {
+            continue;
+        }
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        let parent_psi = s4_selector_features(&b, &occ, &chosen, &forbidden).psi;
+        for x in avail_cells(&b, &chosen, &forbidden) {
+            obligations += 1;
+            let (x_occ, x_chosen, x_forbidden) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, x as usize).unwrap();
+            let mut replies = Vec::new();
+            let xr = x as usize / q;
+            let xc = x as usize % q;
+            for z in avail_cells(&b, &x_chosen, &x_forbidden) {
+                let (r_occ, r_chosen, r_forbidden) =
+                    push_cell_state(&b, &x_occ, &x_chosen, &x_forbidden, z as usize).unwrap();
+                let ri = grundy.find(b.canon(&r_occ)).unwrap().0;
+                let features = s4_selector_features(&b, &r_occ, &r_chosen, &r_forbidden);
+                let geom = geometry_label_for_root(&b, t4, z as usize);
+                let rr = z as usize / q;
+                let rc = z as usize % q;
+                let polar_value = b.gf.sub(
+                    b.gf.a(b.gf.m(xc, rr), b.gf.m(xr, rc)),
+                    b.gf.a(1, 1),
+                );
+                let rectangle = b.gf.m(b.gf.sub(xr, rr), b.gf.sub(xc, rc));
+                replies.push(S4SelectorReply {
+                    z,
+                    g: raw_record_value_byte(grundy.mmap.bytes(), ri),
+                    rho: rho[ri],
+                    features,
+                    delta_psi: (features.psi - parent_psi) as i64,
+                    geom,
+                    polar_internal: geom == "int" && polar_value == 0,
+                    rect_char: s4_quadratic_character(&b.gf, rectangle),
+                });
+            }
+            if replies.iter().any(|r| r.g == 0) {
+                baseline_p += 1;
+            }
+            let has_psi_reply = replies.iter().any(|r| r.g == 0 && r.delta_psi < 0);
+            if has_psi_reply {
+                baseline_psi += 1;
+            }
+            let rho_selected = s4_argmin_rho(&replies);
+            let selections = [
+                ("rho_greedy", rho_selected.clone()),
+                ("psi_min", s4_argmin_by_key(&replies, |r| Some(r.features.psi))),
+                ("live_min", s4_argmin_by_key(&replies, |r| Some(r.features.live_on))),
+                ("defect_components_min", s4_argmin_by_key(&replies, |r| Some(r.features.defect_components))),
+                ("zero_xor_live_min", s4_argmin_by_key(&replies, |r| r.features.xor_zero.then_some(r.features.live_on))),
+                ("internal_live_min", s4_argmin_by_key(&replies, |r| (r.geom == "int").then_some(r.features.live_on))),
+                ("guard_killer", s4_argmin_by_key(&replies, |r| (r.geom == "int").then_some((r.features.live_on, r.features.defect_components)))),
+                ("polar_internal", s4_argmin_by_key(&replies, |r| r.polar_internal.then_some(0i64))),
+                ("rect_char_pos_live_min", s4_argmin_by_key(&replies, |r| (r.rect_char == 1).then_some(r.features.live_on))),
+                ("rect_char_neg_live_min", s4_argmin_by_key(&replies, |r| (r.rect_char == -1).then_some(r.features.live_on))),
+                ("rho2_psi", s4_rho_top_levels_by_key(&replies, 2, |r| Some(r.features.psi))),
+                ("rho3_psi", s4_rho_top_levels_by_key(&replies, 3, |r| Some(r.features.psi))),
+                ("rho4_psi", s4_rho_top_levels_by_key(&replies, 4, |r| Some(r.features.psi))),
+                ("rho2_live", s4_rho_top_levels_by_key(&replies, 2, |r| Some(r.features.live_on))),
+                ("rho3_live", s4_rho_top_levels_by_key(&replies, 3, |r| Some(r.features.live_on))),
+                ("rho2_defect", s4_rho_top_levels_by_key(&replies, 2, |r| Some(r.features.defect_components))),
+                ("rho2_zero_live", s4_rho_top_levels_by_key(&replies, 2, |r| r.features.xor_zero.then_some(r.features.live_on))),
+            ];
+            for (name, selected) in selections {
+                stats.get_mut(name).unwrap().add(&selected, &replies);
+            }
+            let mut rho_order: Vec<usize> = (0..replies.len()).collect();
+            rho_order.sort_by(|&a, &bidx| {
+                replies[a]
+                    .rho
+                    .total_cmp(&replies[bidx].rho)
+                    .then_with(|| replies[a].z.cmp(&replies[bidx].z))
+            });
+            if let Some(rank) = rho_order.iter().position(|&j| replies[j].g == 0) {
+                *stats.get_mut("rho_greedy").unwrap().p_rank_hist.entry(rank + 1).or_insert(0) += 1;
+            }
+            let rho_p_hit = rho_selected.iter().any(|&j| replies[j].g == 0);
+            let rho_psi_hit = rho_selected.iter().any(|&j| replies[j].g == 0 && replies[j].delta_psi < 0);
+            if (!has_psi_reply || !rho_p_hit || !rho_psi_hit) && fail_writer.is_some() {
+                let selected_text = rho_selected
+                    .iter()
+                    .map(|&j| {
+                        let r = &replies[j];
+                        format!(
+                            "{},{}:g{}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:chi{}:polar{}",
+                            r.z as usize / q,
+                            r.z as usize % q,
+                            r.g,
+                            r.delta_psi,
+                            r.geom,
+                            r.features.live_on,
+                            r.features.defect_components,
+                            r.features.xor_zero as u8,
+                            r.features.psi,
+                            r.rect_char,
+                            r.polar_internal as u8
+                        )
+                    })
+                    .collect::<Vec<_>>()
+                    .join(";");
+                let best_p_rank = rho_order
+                    .iter()
+                    .position(|&j| replies[j].g == 0)
+                    .map_or(0, |rank| rank + 1);
+                let min_rho = rho_selected.first().map_or(f64::NAN, |&j| replies[j].rho);
+                let best_p_text = rho_order
+                    .iter()
+                    .find(|&&j| replies[j].g == 0)
+                    .map(|&j| {
+                        let r = &replies[j];
+                        format!(
+                            "{},{}:rho{:.17}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:chi{}:polar{}",
+                            r.z as usize / q,
+                            r.z as usize % q,
+                            r.rho,
+                            r.delta_psi,
+                            r.geom,
+                            r.features.live_on,
+                            r.features.defect_components,
+                            r.features.xor_zero as u8,
+                            r.features.psi,
+                            r.rect_char,
+                            r.polar_internal as u8
+                        )
+                    })
+                    .unwrap_or_default();
+                writeln!(
+                    fail_writer.as_mut().unwrap(),
+                    "{}\t{}\t{:032x}\t{}\t{},{}\t{}\t{}\t{}\t{}\t{}\t{}\t{:.17}\t{}\t{}",
+                    q,
+                    t4.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                    b.canon(&occ),
+                    occ.len(),
+                    x as usize / q,
+                    x as usize % q,
+                    geometry_label_for_root(&b, t4, x as usize),
+                    parent_psi,
+                    has_psi_reply as u8,
+                    rho_p_hit as u8,
+                    rho_psi_hit as u8,
+                    best_p_rank,
+                    min_rho,
+                    selected_text,
+                    best_p_text
+                )
+                .expect("write selector failure row");
+            }
+        }
+    }
+    if let Some(w) = fail_writer.as_mut() {
+        w.flush().expect("flush selector failure TSV");
+    }
+    println!(
+        "S4SELECTORS q={} t4={:?} cells={:?} store={} records={} obligations={} baseline_p={} baseline_psi={} rho_root={:.12}",
+        q,
+        t4,
+        cells,
+        grundy.describe(),
+        states.len(),
+        obligations,
+        baseline_p,
+        baseline_psi,
+        rho[root_index]
+    );
+    for name in families {
+        stats[name].print(q, t4, name);
+    }
+    println!("S4SELECTORS-DONE q={} t4={:?} fail_out={} elapsed={:.3}", q, t4, fail_out.unwrap_or("-"), started.elapsed().as_secs_f64());
+}
+
 fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str) {
     let b = Board::new(q);
     let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
@@ -6078,8 +6604,8 @@ fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str)
         );
         std::process::exit(2);
     }
-    if grundy.root_grundy != Some(0) {
-        eprintln!("s4potential: exact P-root Grundy dump required: {}", grundy.describe());
+    if grundy.root_grundy.is_none() {
+        eprintln!("s4potential: exact Grundy dump required: {}", grundy.describe());
         std::process::exit(2);
     }
 
@@ -6249,7 +6775,7 @@ fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str)
     }
     w.flush().expect("flush s4potential TSV");
     println!(
-        "S4POTENTIAL-DONE q={} t4={:?} cells={:?} records={} p_nodes={} terminals={} obligations={} missing={} root_Z={} root_depth={} out={} elapsed={:.3}",
+        "S4POTENTIAL-DONE q={} t4={:?} cells={:?} records={} p_nodes={} terminals={} obligations={} missing={} root_g={} root_Z={} root_depth={} out={} elapsed={:.3}",
         q,
         t4,
         cells,
@@ -6258,8 +6784,9 @@ fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str)
         terminals,
         obligations,
         missing,
-        z_value[0],
-        descent_depth[0],
+        nodes[0].g,
+        if nodes[0].g == 0 { z_value[0].to_string() } else { "-".to_string() },
+        if nodes[0].g == 0 { descent_depth[0].to_string() } else { "-".to_string() },
         out_path,
         started.elapsed().as_secs_f64()
     );
@@ -9364,6 +9891,50 @@ fn main() {
             &t4,
             &grundy_path.expect("s4gdistill needs --grundy <file>"),
             forced_out.as_deref(),
+        );
+        return;
+    }
+    if args[1] == "s4potentialprobe" {
+        // s4potentialprobe <q> t1,t2,t3,t4 [r,c ...]
+        let q: usize = args
+            .get(2)
+            .expect("s4potentialprobe needs q")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(args.get(3).expect("s4potentialprobe needs t values"));
+        solve_s4_potential_probe(q, &t4, &args[4..]);
+        return;
+    }
+    if args[1] == "s4selectors" {
+        // s4selectors <q> t1,t2,t3,t4 --grundy <grundy-raw> [--fail-out <tsv>]
+        let mut grundy_path: Option<String> = None;
+        let mut fail_out: Option<String> = None;
+        let mut positional = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else if a == "--fail-out" {
+                fail_out = Some(it.next().expect("--fail-out needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--fail-out=") {
+                fail_out = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4selectors needs q")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(positional.get(1).expect("s4selectors needs t values"));
+        solve_s4_selectors(
+            q,
+            &t4,
+            &grundy_path.expect("s4selectors needs --grundy <file>"),
+            fail_out.as_deref(),
         );
         return;
     }

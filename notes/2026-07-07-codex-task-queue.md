@@ -33,10 +33,10 @@ tasks.  Two proof-lane clusters lead, then the independent lanes.
 **Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
 (tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
 
-5. **C63** — potential LP-fit + infeasibility dual — now leads the cluster; its v1 feature
+5. **C63 [REPORTED 2026-07-10]** — potential LP-fit + infeasibility dual — now leads the cluster; its v1 feature
    span should include post-repair descent depth (the C65 extrema drop `Z=40 → 7 → 0`, so the
    potential must charge transient spikes against later descent).
-6. **C62** — selector-library scoring (hours, no new solves — run alongside C63; a scoring hit
+6. **C62 [REPORTED 2026-07-10]** — selector-library scoring (hours, no new solves — run alongside C63; a scoring hit
    doubles as a C63 feature).
 7. **C61** — finite-state reply automaton (days; the falsifiable form of the open core).  Its
    state alphabet must tolerate transient `Z ≈ 40` repair spikes — the same bounded-interface
@@ -2274,7 +2274,7 @@ families only; general finite-state reply families are unmined territory.
 
 Report file: `notes/2026-07-09-codex-reply-automaton.md`.
 
-## C62. Inverted selector search scored by exact character sums (sweep T1)
+## C62. Inverted selector search scored by exact character sums (sweep T1) [REPORTED 2026-07-10]
 
 **READ FIRST:** the T1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §1, and the
@@ -2311,7 +2311,14 @@ buckets, the q=19 steering rows, the q=17 score-9 guards.
 
 Report file: `notes/2026-07-09-codex-selector-library-scoring.md`.
 
-## C63. LP-fit the amortized potential; read the infeasibility dual (sweep L1)
+Status: no geometric selector theorem, but a sharp positive/negative split. Exact rho-greedy is
+perfect on all 3,144 q=13 obligations, then misses 651/1,052,204 at q=17 and 11,345/2,622,214
+in the q=19 `[1,2,3,4]` root; the failures are concentrated at early reply plies. Every exact
+obligation nevertheless has some P reply with `Delta Psi < 0`, extending C63 through that q=19
+root. Existing q=23 zero-xor/live witnesses decrease Psi on 5,487/5,734 rows. Route the rho
+failure corpus and Psi charge to C61; no exact-character-sum handoff is justified.
+
+## C63. LP-fit the amortized potential; read the infeasibility dual (sweep L1) [REPORTED 2026-07-10]
 
 **READ FIRST:** the L1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §6, and the
@@ -2336,6 +2343,14 @@ class.
 5. Budget: a day; single-core, ≤ 8 GB (LP solver via any standard library; document which).
 
 Report file: `notes/2026-07-09-codex-potential-lp-dual.md`.
+
+Status: positive candidate, no infeasibility dual.  Exact selected-strategy extraction over all
+five q=13 and ten q=17 buckets found the integer ledger
+`Psi = reservoir_slack + 6*defect_components - 4*selected_intruders - 2*[conic_xor=0]`.
+It strictly decreases on all 3,144 q=13 and 1,052,204 q=17 verified P-to-P reply transitions
+(ranges `-70..-9` and `-92..-4`) and on C65's q=23 extremal line (`110 -> 30 -> -19 -> -34`).
+Held-out replay passes, but the replies are still exact-value/Z-selected: promote Psi as C62's
+selector scoring target and C61's charge, not yet as a uniform proved invariant.
 
 ## C64. Completion-poset correlate of the arc-depleted dichotomy (sweep E3) — run beside C55
 

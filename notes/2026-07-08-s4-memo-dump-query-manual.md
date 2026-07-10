@@ -200,6 +200,46 @@ Node-Kayles xor used in the C31 defect-spectrum vocabulary, and `residual` is
 `true_grundy XOR defxor`.  As with `s4gdistill`, `seen` must equal `records`, with
 `missing_states=missing_children=remote_missing=0`, before treating the summaries as exact.
 
+`s4potential` extracts the exact alternating P-state strategy transitions used by C63:
+
+```bash
+/tmp/gridcap-s4 s4potential 17 1,2,3,4 \
+  --grundy /tmp/q17-1234.grundy.raw --out /tmp/q17-1234.transitions.tsv
+```
+
+For every reachable Grundy-zero state and every legal opponent move, it chooses one verified
+Grundy-zero reply by minimizing C31's `(max(child zone, child Z), reply cell)` tuple.  The TSV
+contains the parent and reply-state vectors for conic xor, live conic, off-conic reservoir,
+defect-path summaries, interface summaries, exact recursive `Z`, and selected-strategy descent
+depth.  `S4POTENTIAL-DONE` must have `missing=0` and `records` equal the raw dump record count.
+The selected strategy is fixed before LP fitting; the TSV is therefore replay data rather than an
+optimizer-chosen reply book.
+
+For a locally specified feature check without a dump, use:
+
+```bash
+/tmp/gridcap-s4 s4potentialprobe 23 1,2,3,8 13,4 9,19 10,15 0,7
+```
+
+This prints the same geometric vector with tablebase-only `z_ceiling=descent_depth=0`; it also
+prints C63's integer candidate `reservoir_slack_total + 6*defect_components
+- 4*interface_intruders - 2*[conic_xor=0]`.
+
+`s4selectors` performs C62's exact full-expansion selector scoring over a raw Grundy dump:
+
+```bash
+/tmp/gridcap-s4 s4selectors 17 1,2,3,4 \
+  --grundy /tmp/q17-1234.grundy.raw --fail-out /tmp/q17-rho-fail.tsv
+```
+
+It reconstructs every reachable raw record and computes the random-turn value bottom-up as
+`rho(terminal)=0` and `rho(S)=mean_m(1-rho(S+m))`. For every P parent and legal opponent move it
+scores rho-greedy, Psi/live/defect minima, zero-xor, internal/polar/rectangle-character families,
+and rho-top-K hybrids against exact Grundy-zero replies and `Delta Psi < 0`. `p_hit` is
+existential within the selected tie set; `all_p` requires every selected tie to be P. The failure
+TSV records every rho value miss or Psi-descent miss. Treat the output as exact only when the
+reachability check equals the dump's record count.
+
 ### `s4freeze`
 
 ```bash

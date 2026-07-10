@@ -545,6 +545,21 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C62:** exact selector scoring makes rho-greedy the clear mining order but refutes it as a law:
+  `3,144/3,144` q=13 P hits, `1,051,553/1,052,204` q=17, and
+  `2,610,869/2,622,214` in the q=19 `[1,2,3,4]` root. Every exact obligation still has some P
+  reply with `Delta Psi < 0`, including the q=19 root. The existing 5,734 q=23 zero-xor/live P
+  witnesses decrease Psi 95.692% of the time. Polar and character families do not define a clean
+  regime; route the localized rho failures and Psi charge to C61. Report:
+  [`../2026-07-09-codex-selector-library-scoring.md`](../2026-07-09-codex-selector-library-scoring.md).
+- **C63:** exact LP extraction over all q=13/q=17 full-PGL S4 buckets found the integer
+  selected-strategy ledger
+  `Psi = reservoir_slack + 6*defect_components - 4*selected_intruders - 2*[conic_xor=0]`.
+  It strictly decreases on all 3,144 q=13 and 1,052,204 q=17 verified P-to-P reply transitions
+  and on C65's q=23 extremal line (`110 -> 30 -> -19 -> -34`).  Held-out replay passes.  Scope:
+  the current replies are exact-value/Z-selected, so Psi is the C62 selector-scoring and C61
+  charging target, not yet a uniform proved invariant.  Report:
+  [`../2026-07-09-codex-potential-lp-dual.md`](../2026-07-09-codex-potential-lp-dual.md).
 - **C65:** native recursive steering census gives the honest full-C31 q=23 interval
   `40 <= Z(23) <= 136`.  The complete `[1,2,3,8]` selected corpus has exact max 40; the complete
   maintenance-approved `[1,3,4,9]` corpus has exact max 36; 20 other bucket screens max at 36..39.
@@ -938,6 +953,24 @@ References:
 - [`../2026-07-09-line-capacity-framing-vet-extensions.md`](../2026-07-09-line-capacity-framing-vet-extensions.md)
 
 ## Handoff Notes
+
+2026-07-10 C62 (Codex): added exact `s4selectors` full-expansion traversal, bottom-up random-play
+rho, 17 selector families/hybrids, exact P/Delta-Psi tie scoring, and rho failure TSVs. Pure rho is
+perfect at q=13 but has 651 q=17 and 11,345 q=19-root value misses, mostly at plies 4--6; no
+geometric family improves it or merits a character-sum handoff. Selector-independent decreasing-Psi
+existence passes every q=13/q=17 obligation and all 2,622,214 obligations in the exact q=19 root.
+The existing q=23 witness logs give 5,487/5,734 strict Psi decreases, but cannot score exact rho
+without a full Grundy dump. Next open-core task: C61 on the localized rho failure automaton.
+
+2026-07-10 C63 (Codex): added exact `s4potential` transition extraction and
+`s4potentialprobe`, fitted the declared feature span with SciPy/HiGHS, rejected the circular v1
+depth-only solution, and obtained the four-term integer Psi candidate above.  Full exact integer
+replay has zero failures at q=13/q=17; the q=13-only geometric fit had 71 q=17 transfer failures,
+which drove the cross-column refit.  No infeasibility dual was needed, but the script implements
+the sparse Farkas certificate path.  Solver checkpoint including the prior C65/C38/C39 diagnostics
+was committed as `fd8dc1e`; C63 report/script/manual/queue updates remain the session's follow-up
+change.  Next open-core move: score C62 selector families by `Delta Psi < 0`, then use Psi as C61's
+state charge if a geometric selector covers every obligation.
 
 2026-07-10 C30 continuation (Codex): anchored q17 Lean closure is no longer the preferred route.
 The checker optimizations cut the representative leaf from ~6:55 to ~3:00 but not enough for
