@@ -119,6 +119,17 @@ exist, so the dichotomy data is untouched).
   [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md); script
   `rust/scripts/c68_depletion_fraction.py`.  **A5 lane now has one reported measurement; the live
   (ON) levers are Cluster 2 (open core) + the A5 arithmetic proof of `maxonN(q) ≤ q−5`.**
+- **C68 follow-on — N-bucket density `ν(q)` [2026-07-10 (Claude)]** — bucket-level image of `D(q)`.
+  Exact on-conic bucket census (`s4arena --all`): **`ν(q)`** (state-weighted N-fraction) `= 0` off
+  {11,17}, `0.357` (q=11), `0.791` (q=17) — positive & ~doubling; #N-buckets `1 → 5`. Null model
+  `E[fully-N classes] = ncls·ν^(q−4)`: `0.006` (q=11) but **`1.000` (q=17)** vs 0 observed, so
+  **min-witness ≥ 1 is a MARGINAL suppression at q=17**, at the random-failure threshold, trend
+  adverse — A5 must actually bound the extremal class-type, not lean on "no fully-N class through
+  q=19." onP is bimodal (few PGL class-types; min-witness = extremal-type count); value separates
+  cleanly by bucket fiber size (P = rare/special, N = generic) → **A5 lead: every 5-point frame
+  admits a special (P) completion.** Report:
+  [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md); script
+  `rust/scripts/c68b_nbucket_density.py`.
 
 **Independent lanes (parallel; pull when unblocked):**
 
