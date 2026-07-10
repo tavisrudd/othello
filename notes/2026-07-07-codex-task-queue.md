@@ -110,12 +110,22 @@ open-core / amortized-potential lane (Cluster 2) and A5 itself.
    maintenance artifacts, recording the incidence description of every candidate failure — the
    failure-rigidity data the compression ledger needs.  See C70 (the exact collision charge) for
    the coordinate this selector should descend.
-8. **C70 (NEW 2026-07-10, eleventh pass — top of Cluster 2 among unstarted)** — exact
-   reservoir-slack collision charge: untruncate `Psi`'s `max(0, q−k−C(k,2)−1)` reservoir term into
-   the exact blocker/secant/conic-point collision multiplicity, derive the move-pair `ΔPsi`
-   formula, replay against the C63 corpora.  Satisfies the C63 reopen condition ("a genuinely new
-   proof-admissible coordinate independent of values/Z/depth") and is the best candidate
-   explanation of the q=17/q=19 selector splits.  Spec §C70 below.
+8. **C70 [REPORTED 2026-07-10 — items 1–2 POSITIVE (exact formulas), items 3–5 NEGATIVE]** —
+   exact reservoir-slack collision charge.  The exact per-cell collision multiplicity
+   `M = E + delta0col` is derived and machine-verified (935,702 states, 0 exceptions), with
+   `R_code = max(0, M − g(q,k))` and `g(q,k) = max(0,(q−k)(C(k,2)+1+k−q))` **deterministic in
+   (q, ply)** — the truncation was masking a forced collision *drift*, not a q-sensitive reply
+   discriminator.  Move-pair form `ΔM = −|K_u ∪ K_v| − [F(k+2)−F(k)]`: the only move-dependent
+   part is the kill-set union `|K_u ∪ K_v| = −Δzone_v`.  Consequences: `M` is `zone_v` + a ply
+   potential (C63 already excluded that as trivially monotone); it provably cannot vary across
+   replies at a fixed obligation, so the q=19 hard surface only relocates under refit (12 → 10,
+   four new parents) and the C61 successor is NOT advanced.  Do not promote `Psi_exact`; keep
+   truncated `Psi`.  **Convergence with C71:** the only reply-varying quantities left in either
+   half of `dPsi` are kill-set incidences (`|K_u ∪ K_v|` here; the `D(z)` gate for `dC` in C71)
+   — the existential selector lemma (item 7 successor framing) should be stated over kill-set
+   incidence data.  Report:
+   [`2026-07-10-codex-c70-collision-charge.md`](2026-07-10-codex-c70-collision-charge.md);
+   script `rust/scripts/c70_collision_charge.py`.
 9. **C71 [REPORTED 2026-07-10]** — three-involution transition theorem.  Verdict: the third
    intruder's after-skeleton is NOT a function of center-triangle geometry (labelled-embedding
    coordinate missing); coefficient check positive (`dPsi = dReservoir + 6·dC − 4 − 2·dXor0`
@@ -2782,7 +2792,7 @@ integral data* — exactly the degree of freedom the cross-q flips demand.
 Budget: hours–day, existing data + small compute, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-envelope-invariants.md`.
 
-## C70. Exact reservoir-slack collision charge — untruncate Psi's incidence term (eleventh pass)
+## C70. Exact reservoir-slack collision charge — untruncate Psi's incidence term (eleventh pass) [REPORTED 2026-07-10]
 
 **READ FIRST:** [`2026-07-09-codex-potential-lp-dual.md`](2026-07-09-codex-potential-lp-dual.md)
 (the `Psi` definition, the q=19 Correction-2 replay, the Correction-3 route audit) and

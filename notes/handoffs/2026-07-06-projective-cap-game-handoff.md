@@ -601,6 +601,20 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C70 (2026-07-10, Claude/Opus) — exact collision charge: formulas PROVED, but the truncation
+  was hiding a deterministic drift, not a discriminator.**  The untruncated collision
+  multiplicity is exact and machine-verified (`M = E + delta0col`, 935,702 states, 0 exceptions;
+  `R_code = max(0, M − g(q,k))` with `g` deterministic in (q, ply)), and the move-pair form is
+  `ΔM = −|K_u ∪ K_v| − [F(k+2)−F(k)]` — but `M` is `zone_v` plus a ply potential, provably
+  invariant across replies at a fixed obligation, so it cannot advance the C61 successor: naive
+  substitution is catastrophic, refit only relocates the q=19 hard surface (12 → 10, four new
+  parents), and reply-family averaging inherits from the truncated charge plus a constant.
+  Verdict: do not promote `Psi_exact`; keep truncated `Psi`.  **Synthesis with C71:** across
+  both halves of `dPsi` the only reply-varying quantities are now kill-set incidences
+  (`|K_u ∪ K_v| = −Δzone_v` in the reservoir half; C71's `D(z)` gate for `dC` in the structural
+  half) — the existential selector lemma should be stated over kill-set incidence data.  Report:
+  [`../2026-07-10-codex-c70-collision-charge.md`](../2026-07-10-codex-c70-collision-charge.md);
+  script `rust/scripts/c70_collision_charge.py`.
 - **C71 (2026-07-10, Claude/Opus) — three-involution transition: NOT a function of center
   geometry (missing coordinate named); `Psi` coefficient check POSITIVE.**  Every 2→3-intruder
   transition mined exactly from the q=13/17/19 Grundy dumps (1,167 / 153,266 / 1,063,392 rows;
