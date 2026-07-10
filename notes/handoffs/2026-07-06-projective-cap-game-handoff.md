@@ -480,8 +480,10 @@ task list.  Current high-value items:
   dichotomy: the flip pairs 11/13 and 17/19 share a divisor lattice across opposite
   split/elliptic sides, so by Lemma VI the same configuration's defect skeleton genuinely
   differs across the pair; paired-contrast test on the 119 flipping configurations, with a
-  falsifiable q=23/q=25 prediction if positive); **C56** group-indexed cross-q type alignment
-  (the C36 retry, gated on a C55 positive); **C57** zone conflict-graph quasi-randomness probe
+  falsifiable q=23/q=25 prediction if positive) — **REPORTED 2026-07-10 NEGATIVE** (with C64; see
+  Recently reported); **C56** group-indexed cross-q type alignment
+  (the C36 retry, gated on a C55 positive — **stays closed-gated, C55 negative**); **C57** zone
+  conflict-graph quasi-randomness probe
   (either verdict turns the zone-mining negatives into one structural statement); **C58**
   cap game on the four order-9 projective planes (order vs Desarguesian structure — the one
   spinoff-bridges item with a direct claim on the main program; spec in
@@ -545,6 +547,29 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C55 (2026-07-10, Claude) — NEGATIVE, the arc-depleted dichotomy has no group-side mechanism.**
+  H-side-switch tested on both instruments the task names.  Abstract C18 involution-product
+  dictionary: no net directional side-switch (flip net ≈ 0, ≤ control; shared-lattice `d` switch at
+  the same rate flip vs control).  Actual legal-intruder secant skeleton (Lemma VI): the split-share
+  rise depleted→full is a generic q-effect, identical for flip and control (17/19: +0.044 vs +0.041
+  over 100 vs 30 configs), and the within-order test reverses the prediction (q=11 N children secant
+  share 0.029 > P's 0.015).  Minimal-witness solve: secant share smooth/monotone in q, no discrete
+  signature at the N,P,N,P flips.  No q=23/25 prediction (mechanism dead).  Scripts
+  `rust/scripts/c55_side_switch.py`, `c55_intruder_skeleton.py`.  Report:
+  [`../2026-07-09-codex-d-lattice-side-switch.md`](../2026-07-09-codex-d-lattice-side-switch.md).
+- **C64 (2026-07-10, Claude) — NEGATIVE, the dichotomy has no extremal-side mechanism.**  Full/exact
+  completion enumeration (q=11/13 all configs, q=17/19 seeded 40+30 sample, no truncation; validated
+  by independent brute-force `is_arc`/`is_maximal`).  No completion-spectrum property (min size,
+  count parity, move parity, size-parity availability) is constant-within-{11,17}/{13,19} and
+  differs-across while separating flip from control.  The 11/13 count-parity near-miss is a
+  small-field artifact (all 11 flips share one spectrum at q=11) that collapses at 17/19.  Structural
+  reason: `has_odd = has_even = True` for every config at every order, so the value lives in the full
+  game tree, not any coarse terminal (maximal-arc) summary.  Script
+  `rust/scripts/c64_completion_poset.py`.  Report:
+  [`../2026-07-09-codex-completion-poset.md`](../2026-07-09-codex-completion-poset.md).
+  **Consequence (C55 + C64 both negative):** the two direct dichotomy mechanisms are dead; **S1
+  (Segre-style envelope invariants) is promoted as C69** — the algebraic-geometry-side candidate
+  and the only Cluster-1 lever still standing.
 - **C62:** exact selector scoring makes rho-greedy the clear mining order but refutes it as a law:
   `3,144/3,144` q=13 P hits, `1,051,553/1,052,204` q=17, and
   `2,610,869/2,622,214` in the q=19 `[1,2,3,4]` root. Every exact obligation still has some P
@@ -982,6 +1007,22 @@ split generator with `--assembly-mode canonical`.  The generated canonical assem
 `Class0NodeGroup0` 0:43.63, `Class0StepGroup14` 2:57.48.  Next: run a leaf-first full q17
 canonical build from the v5 split (`Base`, all `Class*Base`, all node/step leaves, class tops,
 `Q17`, `Q17Assembly`) and check the final axiom profile.
+
+2026-07-10 C55 + C64 (Claude): closed both direct mechanism candidates for the arc-depleted-orders
+dichotomy — the load-bearing unknown of the (ON) route — **both NEGATIVE**, run in parallel while
+Codex held Cluster 2 (C62/C63).  C55 (group-side, d-lattice side-switch): added
+`rust/scripts/c55_side_switch.py` + `c55_intruder_skeleton.py`; H-side-switch shows no differential
+between the 119 flipping configs and matched controls on either the abstract C18 involution-product
+dictionary or the actual legal-intruder secant skeleton, and the within-order test reverses the
+prediction (q=11 N children carry MORE secants than P).  C64 (extremal-side, completion poset,
+delegated + verified): added `rust/scripts/c64_completion_poset.py`; no completion-spectrum property
+satisfies the constant-within/differ-across discipline while separating flip from control, and
+`has_odd=has_even=True` universally means the value lives in the full tree, not the terminal layer.
+Commits `9d2f796` (C55), `185c7a4` (C64).  **Consequence:** C56 stays closed-gated (needed a C55
+positive); **S1 (Segre envelope invariants) is promoted as C69** — the algebraic-geometry-side
+candidate is now the only Cluster-1 lever standing.  Next Cluster-1 move: C69, which must explain
+*why the same integral configuration changes value across q* (the degree of freedom C55's static
+group data and C64's terminal-layer data both lacked).
 
 ## Archive
 

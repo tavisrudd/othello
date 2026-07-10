@@ -22,13 +22,22 @@ tasks.  Two proof-lane clusters lead, then the independent lanes.
   immediate repair cost 40 descends to child Z=7.  Route verdict: amortized potential primary,
   small-Z retained as the post-repair terminal layer.
 
-**Cluster 1 — the arc-depleted-orders dichotomy (the (ON) route's load-bearing unknown):**
+**Cluster 1 — the arc-depleted-orders dichotomy (the (ON) route's load-bearing unknown).
+Both direct mechanism candidates are now REPORTED NEGATIVE (2026-07-10, Claude); the surviving
+lever is the algebraic-geometry side, C69 (promoted S1):**
 
-2. **C55** — d-lattice side-switch (group-side mechanism candidate).
-3. **C64** — completion poset (extremal-side mechanism candidate; run beside C55).
-4. **C56** — group-indexed type alignment.  GATED on a C55 positive.
-   (If C55 AND C64 both report negative: promote sweep S1 envelope invariants, per the C64
-   entry.)
+2. **C55 [REPORTED 2026-07-10 — NEGATIVE]** — d-lattice side-switch (group-side mechanism
+   candidate).  No differential between the 119 flipping configs and matched controls on either
+   instrument (abstract C18 involution-product dictionary; actual legal-intruder secant skeleton);
+   the within-order test reverses the prediction (q=11 N children carry MORE secants than P).
+3. **C64 [REPORTED 2026-07-10 — NEGATIVE]** — completion poset (extremal-side mechanism candidate;
+   run beside C55).  No completion-spectrum property is constant-within-{11,17}/{13,19} and
+   differs-across while separating flip from control; `has_odd=has_even=True` for every config at
+   every order, so the value lives in the full tree, not the terminal maximal-arc layer.
+4. **C56** — group-indexed type alignment.  GATED on a C55 positive → **C55 NEGATIVE, so C56 stays
+   closed-gated; do not start.**
+5. **C69 (promoted S1)** — envelope invariants (algebraic-geometry-side mechanism).  **PROMOTED**
+   per the C55+C64 both-negative condition; now the leading Cluster-1 open item.
 
 **Cluster 2 — the open core (Good-closure / maintenance / termination).  Post-C65 emphasis
 (tenth pass): the amortized-potential lane is PRIMARY per C65's route verdict:**
@@ -2067,7 +2076,17 @@ reachability of every raw record.  Full suite: `241,627,613 / 241,627,613` recor
 RSS.  With C53, q=23 is now "computed and rules-certified at the S4 bucket layer"; it remains short
 of a Lean `Projective.InitialPStatement` until a Lean checker/assembly consumes the certificates.
 
-## C55. d-lattice side-switch diagnostic — a mechanism candidate for the arc-depleted-order dichotomy
+## C55. d-lattice side-switch diagnostic — a mechanism candidate for the arc-depleted-order dichotomy [REPORTED 2026-07-10 — NEGATIVE]
+
+**Report: [`2026-07-09-codex-d-lattice-side-switch.md`](2026-07-09-codex-d-lattice-side-switch.md).**
+NEGATIVE on both instruments the task names.  Abstract C18 involution-product dictionary: no net
+directional side-switch (flip net ≈ 0, ≤ control); shared-lattice `d` values switch side at the
+same rate for flip and control.  Actual legal-intruder secant skeleton (Lemma VI): the split-share
+rise depleted→full is a generic q-effect, identical for flip and control (17/19: +0.044 vs +0.041,
+100 vs 30 configs), and the within-order test reverses the prediction (q=11 N children secant share
+0.029 > P's 0.015).  Minimal-witness solve: secant share is smooth/monotone in q with no discrete
+signature at the N,P,N,P flips.  No q=23/25 flip prediction emitted (mechanism dead).  C56 stays
+closed-gated; S1 (→ C69) promoted with the C64 negative.
 
 **READ FIRST:** [`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)
 (the 119 shared integral configurations that flip value across q — N exactly at q ∈ {11,17}, P at
@@ -2352,7 +2371,17 @@ It strictly decreases on all 3,144 q=13 and 1,052,204 q=17 verified P-to-P reply
 Held-out replay passes, but the replies are still exact-value/Z-selected: promote Psi as C62's
 selector scoring target and C61's charge, not yet as a uniform proved invariant.
 
-## C64. Completion-poset correlate of the arc-depleted dichotomy (sweep E3) — run beside C55
+## C64. Completion-poset correlate of the arc-depleted dichotomy (sweep E3) — run beside C55 [REPORTED 2026-07-10 — NEGATIVE]
+
+**Report: [`2026-07-09-codex-completion-poset.md`](2026-07-09-codex-completion-poset.md).**
+NEGATIVE.  Full/exact completion enumeration (q=11/13 all configs, q=17/19 seeded 40+30 sample, no
+truncation; cross-validated by independent brute-force `is_arc`/`is_maximal`).  No completion-spectrum
+property (min size, count parity, move parity, size-parity availability) is constant-within-{11,17}
+and within-{13,19} and differs-across while separating flip from control.  The 11/13 count-parity
+near-miss is a small-field artifact (all 11 flips share one spectrum at q=11) that collapses at
+17/19.  Structural reason: `has_odd=has_even=True` for every config at every order, so the value
+lives in the full game tree, not any coarse terminal (maximal-arc) summary.  With C55 negative →
+promote S1 (added as C69 below).
 
 **READ FIRST:** the E3 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2, and the
@@ -2458,3 +2487,41 @@ target becomes "D(q) bounded," a statement the A5 arithmetic could plausibly del
 hours; single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-09-codex-depletion-fraction.md`.
+
+## C69. Envelope invariants for the flipping configurations (sweep S1 — PROMOTED 2026-07-10)
+
+**PROMOTED** because C55 (group-side) and C64 (extremal-side) are both REPORTED NEGATIVE — S1 is
+the remaining, algebraic-geometry-side mechanism candidate for the arc-depleted-orders dichotomy,
+and the only Cluster-1 lever still standing.
+
+**READ FIRST:** the S1 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §5 (Segre), and
+the two negative reports it must not re-tread —
+[`2026-07-09-codex-d-lattice-side-switch.md`](2026-07-09-codex-d-lattice-side-switch.md) (C55) and
+[`2026-07-09-codex-completion-poset.md`](2026-07-09-codex-completion-poset.md) (C64).  Reuse the
+119-config corpus + gate machinery in `rust/scripts/c55_side_switch.py` (`load_corpus`,
+`value_table`, `gate`, `cohorts`) and the conic model in `rust/scripts/c55_intruder_skeleton.py`
+(`Conic`) — the corpus, cohorts, and the exact 119 flip / matched-control split are already built
+and gate-verified there.
+
+Segre's lemma of tangents: for `q` odd the tangents of a conic-arc envelope a conic.  Each flipping
+configuration is six points ON a conic, so the derived object is the residual tangent/secant
+partition it induces on the off-conic points, and the envelope of the six tangents (does it envelope
+a second conic; with/without rational points; its point count / the quadratic character of a
+resultant).  Unlike C18's dead static 6-subset dictionary (cross-ratios/characters/orders of the
+six points), the envelope is a *derived curve whose `F_q`-arithmetic varies with q for fixed
+integral data* — exactly the degree of freedom the cross-q flips demand.
+
+1. Compute candidate envelope invariants for all 119 flipping configs (and the matched controls,
+   for the same paired discipline C55/C64 used) at q = 11, 13, 17, 19.
+2. **Verdict discipline (same as C55/C64):** a mechanism must be constant within {11,17}, constant
+   within {13,19}, differ across, AND separate flip from control.  Report contingency tables
+   verbatim; null is a valid deliverable.
+3. **If NEGATIVE:** all three dichotomy mechanism candidates (group/extremal/algebraic) are dead;
+   the (ON) uniform route then rests entirely on the q-dependent A5 arc-depletion arithmetic with
+   no configuration-level mechanism — state that plainly, it is a sharp program result.
+4. **If positive:** emit the q=23/q=25 flip prediction (`23+1 = 25−1 = 24`) for the C44 census to
+   test, the falsifiable payoff C55 would have produced.
+
+Budget: hours–day, existing data + small compute, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-10-codex-envelope-invariants.md`.
