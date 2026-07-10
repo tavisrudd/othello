@@ -474,6 +474,48 @@ task list.  Current high-value items:
   nimber tables for kings/knights/bishops (D6 siblings, queens box idle time; rooks are
   forced-length parity, the sanity base case).  Priority order C48 > C50 > C49; C35's
   non-decomposition verdict also unblocks C38 with true-nimber data.
+- **Dual/isomorphism assessment additions (Fable, 2026-07-09 sixth pass):** **C55** d-lattice
+  side-switch diagnostic (Tier B top — a mechanism candidate for the arc-depleted-orders
+  dichotomy: the flip pairs 11/13 and 17/19 share a divisor lattice across opposite
+  split/elliptic sides, so by Lemma VI the same configuration's defect skeleton genuinely
+  differs across the pair; paired-contrast test on the 119 flipping configurations, with a
+  falsifiable q=23/q=25 prediction if positive); **C56** group-indexed cross-q type alignment
+  (the C36 retry, gated on a C55 positive); **C57** zone conflict-graph quasi-randomness probe
+  (either verdict turns the zone-mining negatives into one structural statement); **C58**
+  cap game on the four order-9 projective planes (order vs Desarguesian structure — the one
+  spinoff-bridges item with a direct claim on the main program; spec in
+  [`2026-07-09-spinoff-bridges-duals-isomorphisms.md`](2026-07-09-spinoff-bridges-duals-isomorphisms.md)).
+  Outward-facing spinoffs (code-extension games, SET/sum-free games, games-on-groups, matroid
+  and design capacity games) stay in that note, not the queue; the Opus literature/priority
+  check on them has REPORTED (revised order F, A, B, C, E, D; D folded into A, E rescoped;
+  report: [`../2026-07-09-spinoff-bridges-litcheck.md`](../2026-07-09-spinoff-bridges-litcheck.md)).
+- **Broader-sweep additions (Fable, 2026-07-09 seventh pass):** a second category sweep
+  (list + spinoff-value table in the spinoff-bridges note §New Candidate Mappings) added
+  main-problem tasks per Fable's call: **C59** arc-stability constraint import (Voloch/Ball
+  second-largest-complete-arc bounds ⇒ large terminals are conic-contained by theorem; extends
+  C46/C47) and **C60** Singer-model circulant probe (the plane as a cyclic difference-set
+  board; bounded diagnostic).  Igusa invariants noted in C56 as candidate canonical cross-q
+  coordinates; an amortized-potential method note added for the steering/termination lane.
+  The sweep's spinoff-only items (no-three-in-line game, Sidon-set games, quantum caps,
+  misère siblings, placement complexes, etc.) are in the spinoff note; the second-pass Opus lit
+  check on them has REPORTED (same report file; proceed: no-three-in-line, Singer/Sidon,
+  quantum caps, positional comparisons; notable import: arXiv:2404.05305 already applies
+  hypergraph containers to our collinearity hypergraph).
+- **Mathematician-lens sweep (Fable delegate, 2026-07-09):**
+  [`../2026-07-09-mathematician-lens-sweep.md`](../2026-07-09-mathematician-lens-sweep.md) —
+  six lenses (Tao/Erdős/Conway/Alon/Segre/Lovász), constraint-checked attacks with kill-tests,
+  deduped against C55–C60 and the spinoff sweeps.  Top shortlist: Conway reply-automaton over
+  (defect spectrum, interface, zone summary) as the falsifiable form of the Good-closure lemma;
+  Tao inverted selector search scored on the q=19/q=23 zero-xor corpora; Lovász LP/dual fitting
+  of the amortized potential (infeasibility dual = machine-readable impossibility lemma); Erdős
+  completion-poset mechanism for the q∈{11,17} flips + the Z(23) measurement.  **Top-5 queued
+  2026-07-09 (eighth pass): C61 reply automaton, C62 selector-library scoring, C63 potential
+  LP/dual, C64 completion poset (beside C55), C65 Z(23) measurement (Tier A — run first).**
+  Near-misses queued for later as **C66/C67/C68** (grid-terminal spectrum, coupling-defect
+  spectroscopy, D(q) sequence — gated on post-C61–C65 triage).  The queue now opens with a
+  consolidated **CURRENT TOP OF QUEUE** snapshot (ninth pass) that supersedes the amendment
+  trail for ordering: C65 first, then the dichotomy cluster (C55/C64→C56) and the open-core
+  cluster (C62/C63/C61), with the independent lanes (C30, C43/C44, C58, C59, C50) in parallel.
 
 Recently reported:
 

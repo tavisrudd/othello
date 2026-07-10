@@ -11,6 +11,48 @@ campaigns and no n=20 queens runs without an explicit gate.
 
 ## Priority ordering (Fable, 2026-07-09)
 
+### CURRENT TOP OF QUEUE (2026-07-09, ninth pass — consolidated; START HERE)
+
+The amendment trail below is history/context; THIS list is the operative ordering for open
+tasks.  Two proof-lane clusters lead, then the independent lanes.
+
+**Do first (route-deciding measurement):**
+
+1. **C65** — `Z(23)` + extremal steering states.  Hours; arbitrates the small-`Z` base-law
+   route vs the amortized-potential route before anything else in the open core spends effort.
+
+**Cluster 1 — the arc-depleted-orders dichotomy (the (ON) route's load-bearing unknown):**
+
+2. **C55** — d-lattice side-switch (group-side mechanism candidate).
+3. **C64** — completion poset (extremal-side mechanism candidate; run beside C55).
+4. **C56** — group-indexed type alignment.  GATED on a C55 positive.
+   (If C55 AND C64 both report negative: promote sweep S1 envelope invariants, per the C64
+   entry.)
+
+**Cluster 2 — the open core (Good-closure / maintenance / termination):**
+
+5. **C62** — selector-library scoring (hours, no new solves — cheap, do early).
+6. **C63** — potential LP-fit + infeasibility dual.
+7. **C61** — finite-state reply automaton (days; the falsifiable form of the open core).
+
+**Independent lanes (parallel; pull when unblocked):**
+
+- **C30** — generated-checker refactor → q17/q19 Lean assembly (engineering, long-running).
+- **C43** / **C44** — PG(4,3) exact-solve sizing / GF(25) path + q=25 census (compute lanes).
+- **C58** — order-9 non-Desarguesian planes (compute lane; falsification-map payoff).
+- **C59** — arc-stability constraint import (literature + small mining; anytime).
+- **C50** — kernel-checked Grundy certificates (engineering).
+
+**Opportunistic / diagnostics:** C57 (zone quasi-randomness), C60 (Singer-model probe), C49
+(piece nimber tables), C23/C40 (viz lanes).
+
+**Queued for later (post-C61–C65 triage; do not start before that triage):** C66
+(grid-terminal spectrum), C67 (coupling-defect spectroscopy), C68 (D(q) sequence).
+
+---
+
+### Original ranking + amendment trail (history/context)
+
 C-numbers are IDs, not priority — use this ranking. It reflects the line-capacity review and the
 S4-query exploratory pass. Three tracks run in **parallel** (exploratory math+query / engineering /
 writing); items within a track are ordered, and across tracks pull whatever is unblocked. Key
@@ -107,6 +149,72 @@ game.  Consequences:
   without an orbit caveat.  The remaining q=23 caveats are the normal computed-result trust chain
   (solver/canon/certificate/Lean formalization), not B3; C54 is the queue item for that trust
   chain.
+
+**Amendment (Fable, 2026-07-09 sixth pass — dual/isomorphism assessment additions):** a
+dual-plane / tractable-category assessment over the open-kernel lanes concluded: blanket
+dualization is a no-op (self-dual board; a correlation can never be a reply map), but the
+intrusion calculus is the conic model of `PGL(2,q)` half-translated, and finishing that
+translation yields cheap, sharp diagnostics. New tasks, in priority order:
+
+- **C55** — d-lattice side-switch diagnostic on the cross-q flipping configurations: joins
+  **Tier B, top** (cheapest proof-relevant query in the queue; a candidate *mechanism* for the
+  arc-depleted-orders dichotomy, which is now the load-bearing unknown of the (ON) route).
+- **C56** — group-indexed cross-q type alignment (the C36 retry): **Tier B, gated on a C55
+  positive**.
+- **C57** — zone conflict-graph quasi-randomness probe: **Tier D** (diagnostic; either verdict
+  converts the string of zone-mining negatives into one structural statement).
+- **C58** — order-9 non-Desarguesian plane solves: **Tier C** (independent compute lane beside
+  C43/C44; the one item from the spinoff-bridges note with a direct claim on the main program —
+  it tests whether the odd-plane conjecture is about order or about Desarguesian structure).
+- Method note for the steering lane (no task ID): every object in the conic residual is
+  genus 0, so quadratic-character counts of candidate selector cells are **exact** — no
+  Weil-type loss, no `q ≥ q₀` gap. Once mining pins down a *geometric* selector rule for the
+  zero-xor maintenance reply, its existence step is exact counting at all q simultaneously.
+  Record this in the steering follow-up when it activates; the blocker remains that the mined
+  repair witnesses are value-defined, not yet geometrically definable.  Second method note
+  (seventh pass): treat the missing termination monovariant as an **amortized potential** in
+  the online-algorithms sense — a charged mix of conic xor, reservoir slack, and zone size —
+  not a single conserved quantity; every snapshot-conserved candidate has died, which is
+  consistent with the invariant being amortized rather than exact.
+
+**Amendment (Fable, 2026-07-09 seventh pass — broader-sweep additions for the main problem):**
+a second category sweep (list + spinoff-value table in
+[`handoffs/2026-07-09-spinoff-bridges-duals-isomorphisms.md`](handoffs/2026-07-09-spinoff-bridges-duals-isomorphisms.md)
+§New Candidate Mappings) assessed further mappings on both axes.  Main-problem items queued per
+Fable's call:
+
+- **C59** — arc-stability constraint import: **Tier C** (proven extremal input — Voloch/Ball
+  second-largest-complete-arc bounds make large terminals conic-contained by theorem; extends
+  the reported C46/C47 packages with new rows; the sweep's strongest main-lane item).
+- **C60** — Singer-model circulant probe: **Tier E** (cheap bounded diagnostic; the plane as a
+  cyclic difference-set board, transfer test for the program's circulant Node-Kayles
+  machinery).
+- Igusa invariants are folded into **C56** as candidate canonical type coordinates (see the
+  amended entry).  Spinoff-only sweep items (no-three-in-line, Sidon games, quantum caps,
+  misère, placement complexes, etc.) stay in the spinoff-bridges note pending lit checks.
+
+**Amendment (Fable, 2026-07-09 eighth pass — mathematician-lens shortlist):** the six-lens
+ideation sweep ([`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md))
+produced a top-5 shortlist, queued per Fable's call.  Read the sweep note's full attack spec
+before starting any of these — the queue entries below are operational pointers plus gates.
+Placement:
+
+- **C65** — `Z(23)` measurement + extremal steering states (sweep E1): **Tier A** — the
+  cheapest route-deciding measurement in the program; it arbitrates the small-`Z` base-law
+  route vs the amortized-potential route and should run before more steering proof effort.
+- **C61** — finite-state reply automaton (sweep Co3): **Tier B** — the falsifiable form of the
+  open Good-closure core.
+- **C62** — inverted selector search via exact character sums (sweep T1): **Tier B** — attacks
+  the maintenance lane's named blocker from the algebraic side.
+- **C63** — LP-fit the amortized potential, read the dual (sweep L1): **Tier B** — either
+  output advances the open core (candidate invariant, or a machine-readable impossibility
+  lemma).
+- **C64** — completion-poset correlate of the arc-depleted dichotomy (sweep E3): **Tier B,
+  beside C55** — the extremal-side mechanism candidate, complementary to C55's group-side one
+  (and S1's envelope invariants remain the third, unqueued, candidate if both miss).
+- Near-misses now queued for later (ninth pass): **C66** grid-terminal spectrum, **C67**
+  coupling-defect spectroscopy, **C68** `D(q)` extremal sequence — do not start before the
+  post-C61–C65 triage.
 
 ## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
@@ -1442,7 +1550,7 @@ the uniform (ON) route now rests entirely on A5 depletion arithmetic. The class-
 constant remains an empirical fact with no census mechanism behind it. C47's dichotomy row takes
 its negative branch.
 
-## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum
+## C43. PG(4,3) exact-solve sizing — the even-dimensional evidence vacuum [CLAIMED 2026-07-09 — Claude/Opus]
 
 Context: D1's outcome-classification table has an entire family with **zero direct outcome
 evidence**: `PG(2m,q)`, `m ≥ 2`, odd `q`. PG(3,3) is odd projective dimension (closed by C25);
@@ -1928,3 +2036,371 @@ Non-goals: no duplicate stabilizer representatives; no q=25 work; no new q=23 si
 campaign.
 
 Report file: `notes/2026-07-09-codex-q23-bucket-certification.md`.
+
+Status: **PASS, all 22 buckets rules-certified at the S4 layer.**  Added native `s4pncheck`, which
+rebuilds every legal move without calling minimax and checks the early-break reply-book equations
+(P: all children present N; N: a present P witness), terminal values, root/header guards, and exact
+reachability of every raw record.  Full suite: `241,627,613 / 241,627,613` records seen,
+`988,106,416` legal edges enumerated, zero failures, `4,077.68s` aggregate wall, `371,836 KB` max
+RSS.  With C53, q=23 is now "computed and rules-certified at the S4 bucket layer"; it remains short
+of a Lean `Projective.InitialPStatement` until a Lean checker/assembly consumes the certificates.
+
+## C55. d-lattice side-switch diagnostic — a mechanism candidate for the arc-depleted-order dichotomy
+
+**READ FIRST:** [`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)
+(the 119 shared integral configurations that flip value across q — N exactly at q ∈ {11,17}, P at
+{13,19}), Lemma VI of [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
+(two-intruder spectrum: the `xx'`-secant `K₂` is PRESENT iff `d = ord(σ_x σ_{x'})` divides `q−1`
+(split) and ABSENT iff `d | q+1` (elliptic)), and the C18 feature dictionary
+([`2026-07-07-codex-ml-moduli-attribution.md`](2026-07-07-codex-ml-moduli-attribution.md)) whose
+order-theoretic feature code is reusable.
+
+Context: the alignment verdict made the arc-depleted-orders dichotomy the load-bearing unknown of
+the (ON) route, with no mechanism. Observation (Fable, 2026-07-09): the flip pairs share a divisor
+lattice across opposite sides — `11+1 = 13−1 = 12` and `17+1 = 19−1 = 18`. So the SAME product
+order `d` in the shared lattice is realizable at both orders of a pair but on opposite
+split/elliptic sides, and by Lemma VI the defect skeleton of the "same" configuration then
+genuinely differs (secant `K₂` and tangency-path structure swap). **Hypothesis (H-side-switch):**
+the 119 cross-q value flips are mediated by shared-lattice `d` values realized split at 13/19 and
+elliptic at 11/17. Note C18's null does NOT cover this: C18 fit static laws on bucket values
+pooled across q; this is a *paired contrast* on matched configurations, which C18 never tested.
+
+1. **Feature extraction on the matched pairs.** For each of the 119 flipping configurations (and
+   a matched control sample of non-flipping shared configurations), at both orders of its pair:
+   compute the order-theoretic profile — `ord(σ σ')` for the canonical involution pairs of the
+   6-subset (C18's dictionary) and, where the alignment data exposes them, the `d` values of
+   actual legal intruder pairs in the S4 follower — with each `d` tagged by divisor class
+   (`d | q−1` / `d | q+1` / `d = p`).
+2. **The paired test.** Do flipping configurations carry shared-lattice `d` values (divisors of 12
+   for the 11/13 pair, of 18 for 17/19) whose side switches across the pair, significantly more
+   than controls? Report the full contingency tables verbatim; no significance theater — the
+   counts speak.
+3. **Skeleton-level verification on a sample.** For a sample of flipping configurations, compute
+   the actual NK defect spectra of the relevant follower states at both orders (spectrum code in
+   `2026-07-08-nk-involution-check.py`) and confirm the skeleton differs exactly by the predicted
+   `K₂`/path swap. Any spectrum NOT differing where the value flips is a counterexample to the
+   mechanism — report verbatim.
+4. **Prediction if positive:** q=23/q=25 share 24 the same way (`23+1 = 25−1`). Emit the list of
+   configurations H-side-switch predicts to flip between q=23 and q=25 — a falsifiable prediction
+   the C44 census can test directly. If negative: state plainly that the mechanism is dead and the
+   A5 arc-depletion arithmetic remains without a candidate — a valid deliverable.
+5. **Gates:** feature code must reproduce the known C15/C5 bucket labels where it overlaps them;
+   the 119-configuration list must match the alignment report's exactly.
+
+Budget: existing data + small compute, single-core, ≤ 4h.
+Report file: `notes/2026-07-09-codex-d-lattice-side-switch.md`.
+
+## C56. Group-indexed cross-q type alignment (the C36 retry) [GATED on a C55 positive]
+
+Do NOT start until C55 reports positive. Context: C36's strict normalized-coordinate types pass
+within-q self-consistency but have 281 nonconstant cross-q value rows — unsurprising, since
+coordinate types carry no cross-q transport. The conic model says the residual actually depends on
+group-theoretic data: which `d` values occur, on which side (`d | q−1` split / `d | q+1` elliptic /
+`d = p` parabolic), the tangency/fixed-point data, and where kill-scars land on the dihedral
+orbits.
+
+1. **Type definition:** re-index the C36 corpus (exact q=17/q=19/q=23 depth-2 bucket dumps,
+   `rust/s4-dumps/2026-07-09/c36-logs/`) by the group-model type: the multiset of
+   (d, side, tangency count, scar placement class) over the state's involution structure. Document
+   the type function precisely enough to be re-implemented.  Candidate canonical coordinates for
+   the underlying 6-subset (seventh-pass addition): **Igusa invariants** of the associated binary
+   sextic — unordered 6-subsets of `P¹(F_q)` mod `PGL(2,q)` are genus-2 moduli points, and Igusa
+   invariants are the standard q-comparable labels for exactly these configurations; use them if
+   the hand-rolled type function gets unwieldy (document small-characteristic handling — clean
+   for char ∤ 30).
+2. **Self-consistency within q** (any within-q collision kills the type — report verbatim, stop).
+3. **Cross-q constancy:** the H-side-switch prediction is that value flips concentrate exactly on
+   types whose side tag differs across q while the rest of the type matches — i.e. the correct
+   cross-q key is (d, side, ...), not (d, ...). Compare against C36's 281 nonconstant strict rows:
+   how many become constant under the group index, and how many are explained as side-switches?
+4. **Deliverable:** the same shared-type/nonconstant-row tables as C36 so the two reports are
+   directly comparable, plus a verdict on whether a q-independent (group-type → value) dictionary
+   survives where the coordinate dictionary failed.
+
+Budget: existing dumps only, single-core, ≤ 4h.
+Report file: `notes/2026-07-09-codex-group-indexed-alignment.md`.
+
+## C57. Zone conflict-graph quasi-randomness probe — one structural statement for the zone negatives
+
+Context: the off-conic zone resists everything — one dense component at q=23
+(`zone_v = 100..120`, `zone_nk_known = 0`), no clean sub-census (C42 negative), no decomposition
+(C35: `g ≠ g_conic XOR g_zone`), remoteness/defxor stratify but do not decide (C39). Hypothesis:
+the zone conflict graph is **quasi-random** (Paley-like — conflict edges are collinearity
+conditions with quadratic-character flavor), which would *explain* the negatives structurally: no
+exact zone-Grundy law is mineable from a pseudo-random graph, so steering/maintenance is the only
+lane. Either verdict is a deliverable: quasi-random converts the negatives into one statement;
+NOT quasi-random means the deviations from pseudo-randomness are exactly the mineable features.
+
+1. **Sample zone conflict graphs** from existing q=13/17/19/23 state data (C20 states jsonl,
+   `s4mine`/`s4xormine` rows — no new campaigns): extract vertex/edge sets at a range of zone
+   sizes, from the small q=13 zones up to the dense q=23 components.
+2. **Quasi-randomness battery** per graph: edge density p; degree spread vs np; codegree
+   concentration; 4-cycle count vs the p⁴·n⁴/8 pseudo-random benchmark; second adjacency
+   eigenvalue |λ₂| vs the O(√(pn)) pseudo-random scale. Compare each statistic against (i) a
+   Paley graph of matched order, (ii) G(n,p) samples of matched density.
+3. **Structured-deviation hunt:** wherever a statistic deviates, localize it (are the deviating
+   vertex pairs geometrically special — same row/column, tangency-related, polar pairs?). Deviating
+   substructure = the feature list for the next zone-mining pass.
+4. **Verdict:** quasi-random / structured, with the evidence table, and the program consequence
+   stated plainly (retire exact-zone-law mining, or here is the feature list).
+
+Budget: existing data only, single-core, ≤ 4h.
+Report file: `notes/2026-07-09-codex-zone-quasirandomness.md`.
+
+## C58. Cap game on the four projective planes of order 9 — order vs Desarguesian structure
+
+**Full spec:** item F of
+[`handoffs/2026-07-09-spinoff-bridges-duals-isomorphisms.md`](handoffs/2026-07-09-spinoff-bridges-duals-isomorphisms.md)
+— read it first; this entry is the queue pointer plus the gates.
+
+Context: non-Desarguesian planes are not self-dual in general (Hall vs dual Hall), so there the
+cap game and its dual genuinely differ and the outcome becomes a candidate invariant of the
+*plane*, not the order. Order 9 is the smallest non-Desarguesian order and is solver-feasible
+(91 points; PG(2,9) already exhaustively solved P). Inward payoff either way: any N verdict proves
+the odd-plane conjecture is about Desarguesian structure rather than order (a falsification-map
+constraint — stop-and-report, per the C43 protocol for a first N geometry); all-P pressures the
+eventual uniform proof to use less algebraic structure than conic localization currently does.
+
+1. Incidence-structure input mode (solver or standalone; the boards are tiny — 91 points,
+   91 lines).
+2. Construct all four order-9 planes (PG(2,9), Hall, dual Hall, Hughes); verify the plane axioms
+   and parameters machine-side before any solve (the C48 honest-construction discipline).
+3. Calibration gate: the PG(2,9) incidence-input solve must reproduce the known P verdict before
+   the other three run.
+4. Exact-solve all four; note Hall vs dual Hall is the duality comparison, Hughes is self-dual.
+5. Report: outcome table + per-plane node/class counts; cross-link the verdict into the
+   falsification map and the main handoff.
+
+Budget: hard 8h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-order9-planes.md`.
+
+## C59. Arc-stability constraint import — second-largest complete arc bounds into the trap/endgame package
+
+Context: sweep item (seventh-pass amendment).  Segre-type stability for odd q says every complete
+arc not contained in a conic has size at most `q − c√q` (Voloch for odd q; Ball for prime q —
+the exact statements and constants MUST be verified from the literature, `[VERIFY]` until cited;
+Hirschfeld–Storme surveys are the index).  Terminal positions of the projective game are complete
+caps, so every sufficiently large terminal is conic-contained **by theorem**, independent of our
+conic-localization construction.  This adds proven extremal rows to the reported C46/C47
+packages.
+
+1. **Literature verification first:** exact statements of the second-largest complete arc bound
+   `m′(2,q)` for odd q, with per-claim citations.  No fabricated constants; anything unverifiable
+   stays `[VERIFY]` and is excluded from the theorem rows.
+2. **Game translation:** (a) any terminal position of size above the bound lies on a conic
+   (projective board); (b) the residual-grid version — state exactly how the burned pair and
+   row/column capacities modify the statement, and what does NOT carry; (c) combine with C46's
+   depletion ladder / `T(q)` and the C47 game-length row (`m(2,q)` lower bound) into the sharpest
+   clean corollary about where a trap's terminal positions can live.
+3. **Machine sanity:** against solved data only (q = 11..19 dumps; no new campaigns): confirm
+   every observed complete cap above the bound is conic-contained; any violation is a
+   translation error or a major finding — report verbatim and stop.
+4. **Deliverable:** an amendment note to the C47 constraint package with the new rows tagged
+   `[PROVEN-PROSE + citation]`, plus falsification-map cross-links.
+
+Budget: literature + ≤ 2h mining validation, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-arc-stability-import.md`.
+
+## C60. Singer-model circulant probe — the plane as a cyclic difference-set board
+
+Context: sweep item (seventh-pass amendment).  Under the Singer cycle, PG(2,q) points are
+`Z_{q²+q+1}` and lines are the translates of a perfect planar difference set `D`; the cap game
+becomes a cyclic avoidance game ("no 3 selected residues in any translate of D").  The program
+owns circulant Node-Kayles machinery (the queens/NK interval-octal thread); nobody has looked at
+the cap game in this model.  Note the Singer group has odd order — no involutions, so mirror
+methods do NOT transfer; the interest is the cyclic/arithmetic structure itself.
+
+1. **Build the model** for q = 5..13: construct the planar difference set from the field model,
+   and verify the incidence structure is isomorphic to the coordinatized plane machine-side
+   before trusting anything.
+2. **Bounded diagnostics (fixed feature list, declared up front):** orbit structure of caps under
+   the cyclic group; difference-spectrum features of P vs N positions (which residue differences
+   appear); whether any interval/octal-pattern feature from the circulant Node-Kayles laws
+   correlates with value at the capacity-2 level.
+3. **Report positives AND the null plainly** — this is a probe, not an open-ended mining lane; a
+   clean null closes the sweep item.
+4. **Spinoff-facing rider (small):** define the Sidon-set building game on `Z_n` precisely
+   (capacity-1 on difference lines), exhaustively solve tiny n as an existence proof for the
+   spinoff note, and stop — no campaign.
+
+Budget: ≤ 4h wall, single-core, ≤ 8 GB.
+Report file: `notes/2026-07-09-codex-singer-model-probe.md`.
+
+## C61. Finite-state reply automaton over defect/interface/zone states (sweep Co3)
+
+**READ FIRST:** the Co3 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §3, the NK
+involution note (state vocabulary), and the C36 strict-type machinery (coordinate vocabulary).
+
+The open Good-closure lemma recast as a falsifiable finite object: quotient the mined
+winning-reply data by (defect-skeleton spectrum type, interface type, zone summary type) and test
+whether one finite automaton over those states generates a winning reply at q = 13, 17, 19, and
+(chunked) 23 — the SAME automaton at every q.  Guard: `resym` killed play-closed *symmetric*
+families only; general finite-state reply families are unmined territory.
+
+1. **State quotient:** build it from the C38 forced-skeleton rows + steering witness rows
+   (existing artifacts).  Document the state map precisely; report state counts per q.
+2. **Conflict census:** same state, contradictory required replies — within q and across q.
+   Zero conflicts ⇒ the automaton exists on the sampled data; report it as an explicit table.
+   Conflicts ⇒ report the minimal conflicting state pairs verbatim — that is the theorem-grade
+   localization of where any finite-state uniform strategy must fail, equally a deliverable.
+3. **Adversarial replay gate:** a conflict-free automaton must then be replayed against the
+   exact solver as adversary at q = 13 and 17 (full), q = 19 (sampled) — the automaton's reply
+   must be winning at every visited state, verified by the solver's values, not by the mining
+   labels.
+4. Budget: days-scale, but all from existing artifacts + replay runs; single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-reply-automaton.md`.
+
+## C62. Inverted selector search scored by exact character sums (sweep T1)
+
+**READ FIRST:** the T1 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §1, and the
+sixth-pass method note (genus-0 exactness lever).
+
+Invert the maintenance-witness search: enumerate a library of algebraically natural selector
+families up front (the sweep names four starters: polar-line internal intruders — kept as a
+control, the polarity identities already failed; tangent-parameter bracketing of the surviving
+defect path; live_on-minimizing cells under a quadratic-character sign condition on the
+cross-ratio with the burned directions; the generalized q=17 score-9 conic-killer pattern) and
+score EACH family against the mined witness corpora: the q=23 zero-xor rows across all 22
+buckets, the q=19 steering rows, the q=17 score-9 guards.
+
+1. Scoring script over existing `s4xormine`/steering TSVs: per family, the fraction of
+   obligations where its selected cell is one of the verified maintainable zero-xor P replies.
+   Report the full per-family per-q table; partial hits (a family that covers a clean sub-regime)
+   are findings, not failures.
+2. Any family scoring near-perfect on a definable regime: state its selector as a precise
+   geometric predicate and hand the existence step to the exact-character-sum lane (no solve
+   needed — the count is exact at genus 0).
+3. Null result (no family beats chance) is a valid deliverable: it sharpens the "value-defined
+   witnesses" blocker into "not explicable by this library," and the library + scores become the
+   baseline for the next round.
+4. Budget: hours; no new solves.  Single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-selector-library-scoring.md`.
+
+## C63. LP-fit the amortized potential; read the infeasibility dual (sweep L1)
+
+**READ FIRST:** the L1 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §6, and the
+seventh-pass amortized-potential method note.
+
+Operationalize the amortized-potential hunt: over exact transition data (C35 Grundy dumps +
+steering rows), pose LP feasibility — find feature weights such that P2's verified replies never
+increase the potential, every P1 option from a Good state fails to break it, and terminal Good
+states are winning.  On infeasibility, READ THE DUAL: the dual certificate names the exact
+transition combinations defeating every potential in the feature span — the next feature to add,
+or (with small dual support) a machine-readable impossibility lemma for the whole invariant
+class.
+
+1. Feature span v1 (declare before solving): conic xor, live_on, zone size/parity, reservoir
+   slack, defect path-length multiset summaries, interface counts (σ-images of played cells on
+   surviving paths).  Document the transition-extraction exactly.
+2. q=13 full data first (small LP); q=17 second.  Report: feasible weights verbatim, or the dual
+   support verbatim + its game-theoretic reading.
+3. Iterate LP-fit / dual-read / feature-extend at most twice within budget; report each round.
+4. Feasible-potential gate: any found potential must be validated by replay against exact values
+   on held-out states (not the fitting set) before being called a candidate invariant.
+5. Budget: a day; single-core, ≤ 8 GB (LP solver via any standard library; document which).
+
+Report file: `notes/2026-07-09-codex-potential-lp-dual.md`.
+
+## C64. Completion-poset correlate of the arc-depleted dichotomy (sweep E3) — run beside C55
+
+**READ FIRST:** the E3 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2, and the
+C55 entry (the group-side mechanism this complements; same 119-configuration corpus, same
+control-sample discipline).
+
+For each of the 119 flipping configurations (plus matched non-flipping controls), enumerate the
+poset of complete arcs CONTAINING it at each order of its pair, and test whether the flip tracks
+a completion-spectrum property: existence of a short completion, parity of the number of maximal
+completions, or minimum completion size crossing a threshold.  This is the extremal-side
+mechanism candidate; C55 is the group side; Segre-style envelope invariants (sweep S1) stay in
+reserve as the third.
+
+1. Exhaustive completion enumeration at q = 11 and 13 for all 119 configurations + controls
+   (small search: feat machinery + a branch over remaining cells); sampled at q = 17/19.
+2. A mechanism must be constant within {11,17} and within {13,19} and differ across — same
+   verdict discipline as C55; report contingency tables verbatim either way.
+3. If BOTH C55 and C64 report negative, promote sweep S1 (envelope invariants) to the queue as
+   the remaining candidate.
+4. Budget: a day; single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-completion-poset.md`.
+
+## C65. Pin down Z(23): steering-ceiling growth + extremal configurations (sweep E1)
+
+**READ FIRST:** the E1 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2, and the
+C31/C33 steering data trail in the handoff.
+
+The recursive steering ceiling is the program's most route-deciding unnamed function:
+`Z(13) = 2`, `Z(17) = 9`, `Z(19) = 16`, `Z(23) = ?`.  Three data points fit anything; the next
+value + the extremal witnesses arbitrate between the small-`Z` base-law route and the
+amortized-potential route BEFORE either consumes more proof effort.
+
+1. Extract the steering ceiling over the existing q=23 chunked `s4xormine`/maintenance corpora
+   (bucket `1,3,4,9` is fully censused; the other 21 have first-ply data); targeted chunk runs
+   where coverage is thin, within existing caps — no new campaigns beyond that.
+2. Report `Z(23)` (or an interval with the coverage caveat stated exactly), the fitted growth
+   shapes (bounded / `O(√q)` / linear) with the caveat that four points still underdetermine,
+   and — the Erdős half — the extremal steering states attaining the ceiling, with their
+   geometric anatomy (zone volume, live_on, defect spectrum): do the extremal witnesses look
+   forced by geometry (`Θ(q)` zone volume) or like small-q accidents?
+3. Route verdict paragraph: what the number says for base-law vs amortized-potential, stated
+   plainly.
+4. Budget: hours to a day of solver time within existing caps; single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-z23-measurement.md`.
+
+## C66. Grid-terminal spectrum — complete caps under row/column capacities (sweep S2) [QUEUED FOR LATER — post-C61–C65 triage]
+
+**READ FIRST:** the S2 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §5.
+
+The game's terminal positions in the residual model are complete caps of the grid game — maximal
+legal positions under caps + row/column capacities.  Not the classical complete-arc spectrum
+(the capacities are new); nobody has computed it; it is the terminal stratification any
+termination invariant for the maintenance lane has to land in.
+
+1. Exhaustive maximal-position enumeration for q ≤ 13; sampled q = 17.  Sizes, structure (how
+   much is conic-contained — the C59 import says large ones are; what do SMALL grid-complete
+   caps look like), stabilizers.
+2. Consistency gate: the first stratum must reproduce the NK note §5a endgame law (empty conic
+   + 2-cell zone) where applicable.
+3. Budget: a day; single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-grid-terminal-spectrum.md`.
+
+## C67. Coupling-defect spectroscopy: δ = g ⊕ g_conic ⊕ g_zone (sweep Co1) [QUEUED FOR LATER — post-C61–C65 triage]
+
+**READ FIRST:** the Co1 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §3.
+
+C35 measured the death of the disjunctive sum; this studies the failure.  Define
+`δ(S) = g ⊕ g_conic ⊕ g_zone` on every S5/S6 state in the C35 Grundy dumps and test whether δ
+is a function of the conic–zone INTERFACE alone (which σ-images of played cells land on which
+surviving defect paths), by exact collision counting.  If δ factors through a small interface,
+the coupled invariant the queue calls for has a candidate form `g_conic ⊕ g_zone ⊕ δ(interface)`;
+if δ needs the whole state, that is a real lower bound on invariant complexity — either way a
+deliverable.  Budget: hours (existing `c35/` dumps + Lemma-V σ data); single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-coupling-defect.md`.
+
+## C68. The depletion-fraction extremal sequence D(q) (sweep E2) [QUEUED FOR LATER — post-C61–C65 triage]
+
+**READ FIRST:** the E2 spec in
+[`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2.
+
+Name and compute the function: `D(q)` = max over size-3 classes of the N-fraction among
+on-conic children, plus the min-witness count per q.  Exact for q = 5..19 from feat dumps, q=23
+from bucket labels; report the worst-class trajectory and histogram tails, not the mean (the §6
+heuristic did the mean).  Guard: distinct from the dead `bad = o(q²)` area bound — this is a
+bounded-away-from-1 class-level fraction, which the q=17 data does not refute.  If min-witness
+count recovers after the q=17 dip, the knife edge is a small-q accident and the (ON) anchor
+target becomes "D(q) bounded," a statement the A5 arithmetic could plausibly deliver.  Budget:
+hours; single-core, ≤ 8 GB.
+
+Report file: `notes/2026-07-09-codex-depletion-fraction.md`.
