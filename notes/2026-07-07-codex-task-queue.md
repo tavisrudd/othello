@@ -1515,7 +1515,7 @@ informative new number for the (ON) route, independent of the Baer watch.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
 
-## C45. Game-valued defect-skeleton refinement — beyond classical conic-arc spectra
+## C45. Game-valued defect-skeleton refinement — beyond classical conic-arc spectra [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
 (the Lemma-VI spectrum machinery, NK1–NK3), the C29 order dichotomy
