@@ -6,7 +6,7 @@ import ProjectiveCap.Mirror
 import ProjectiveCap.EllipticMirror
 import ProjectiveCap.HyperbolicQuadricMirror
 import ProjectiveCap.CapCMirror
-import ProjectiveCap.PolarSegreMirror
+import ProjectiveCap.NearLinearMirror
 import ProjectiveCap.Binary
 import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.Grid

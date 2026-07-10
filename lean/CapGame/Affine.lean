@@ -478,21 +478,5 @@ theorem initialP_fin (n : ℕ) [Fintype K] [DecidableEq K] (hn : 0 < n) :
 
 end Game
 
-section ClassicalCapSet
-
-variable {W : Type*} [AddCommGroup W]
-
-/-- Three-term arithmetic progression with `b` as midpoint. -/
-def ThreeAP (a b c : W) : Prop :=
-  a + c = b + b
-
-/-- Classical cap-set predicate, useful over vector spaces of characteristic `3`. -/
-def APFree (S : Finset W) : Prop :=
-  ∀ ⦃a b c : W⦄,
-    a ∈ S -> b ∈ S -> c ∈ S ->
-      a ≠ b -> a ≠ c -> b ≠ c -> ¬ ThreeAP a b c
-
-end ClassicalCapSet
-
 end Affine
 end CapGame

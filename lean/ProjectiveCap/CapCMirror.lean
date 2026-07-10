@@ -201,7 +201,7 @@ against silent drift between the two encodings.
 
 Deliberately a **leaf**: the maintained cap proofs do *not* route through it, and the
 ordinary cap `IsP` result is *not* re-derived through the near-linear engine
-`FiniteBuildGame.initialCapC2P_of_nearLinear_mirror` (`ProjectiveCap.PolarSegreMirror`).
+`FiniteBuildGame.initialCapC2P_of_nearLinear_mirror` (`ProjectiveCap.NearLinearMirror`).
 Such routing is *possible* — near-linearity of `IsCollinear` is already
 `Projective.collinear_of_collinear_pair` (`ProjectiveCap.PlaneTransitivity`),
 downward-closure is `Projectivization.isCollinear_subset`, and this lemma converts the

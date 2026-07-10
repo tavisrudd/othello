@@ -255,6 +255,56 @@ theorem initialPStatement_of_fixedPointFree_collinearity_preserving_involution
       mirrorStepGood_of_collinearity_preserving
         (K := K) (V := V) σ hσ hfixed hcol hInv)
 
+omit [Fintype (Point K V)] [DecidableEq (Point K V)] in
+/-- A linear automorphism squaring to a nonzero scalar `δ` induces an involution on
+projective points: applying `mapEquiv g` twice is the identity. -/
+theorem mapEquiv_sq_scalar_involutive (g : V ≃ₗ[K] V) (δ : K)
+    (hg : ∀ v : V, g (g v) = δ • v) (hδ : δ ≠ 0) :
+    ∀ x : Point K V, mapEquiv g (mapEquiv g x) = x := by
+  intro x
+  induction x using Projectivization.ind with | h v hv =>
+    have hgg_ne : g (g v) ≠ 0 := by simp [hv]
+    have hto_scalar :
+        Projectivization.mk K (g (g v)) hgg_ne =
+          Projectivization.mk K (δ • v) (smul_ne_zero hδ hv) :=
+      (Projectivization.mk_eq_mk_iff' K (g (g v)) (δ • v)
+        hgg_ne (smul_ne_zero hδ hv)).mpr ⟨1, by simp [hg v]⟩
+    have hscalar_id :
+        Projectivization.mk K (δ • v) (smul_ne_zero hδ hv) =
+          Projectivization.mk K v hv :=
+      (Projectivization.mk_eq_mk_iff' K (δ • v) v (smul_ne_zero hδ hv) hv).mpr
+        ⟨δ, rfl⟩
+    calc
+      mapEquiv g (mapEquiv g (Projectivization.mk K v hv)) =
+          Projectivization.mk K (g (g v)) hgg_ne := by
+        rw [mapEquiv_mk, mapEquiv_mk]
+      _ = Projectivization.mk K (δ • v) (smul_ne_zero hδ hv) := hto_scalar
+      _ = Projectivization.mk K v hv := hscalar_id
+
+omit [Fintype (Point K V)] [DecidableEq (Point K V)] in
+/-- A linear automorphism squaring to a nonsquare scalar induces a fixed-point-free
+map on projective points. -/
+theorem mapEquiv_sq_scalar_fixedpointfree (g : V ≃ₗ[K] V) (δ : K)
+    (hg : ∀ v : V, g (g v) = δ • v) (hnonsquare : ¬ IsSquare δ) :
+    ∀ x : Point K V, mapEquiv g x ≠ x := by
+  intro x hfix
+  induction x using Projectivization.ind with | h v hv =>
+    have hmap :
+        Projectivization.mk K (g v) (by simp [hv]) =
+          Projectivization.mk K v hv := by
+      simpa [mapEquiv_mk] using hfix
+    obtain ⟨lam, hlam⟩ :=
+      (Projectivization.mk_eq_mk_iff' K (g v) v (by simp [hv]) hv).mp hmap
+    have hscalar : δ • v = (lam * lam) • v := by
+      calc
+        δ • v = g (g v) := (hg v).symm
+        _ = g (lam • v) := by rw [hlam]
+        _ = lam • g v := by simp
+        _ = lam • (lam • v) := by rw [hlam]
+        _ = (lam * lam) • v := by rw [mul_smul]
+    have hδeq : δ = lam * lam := smul_left_injective K hv hscalar
+    exact hnonsquare ⟨lam, hδeq⟩
+
 /--
 Linear-algebra bridge for elliptic projective mirrors.
 
@@ -271,45 +321,10 @@ theorem initialPStatement_of_linearEquiv_sq_scalar_nonsquare
   have hδ : δ ≠ 0 := by
     intro hδ0
     exact hnonsquare (by simp [hδ0])
-  have hσ : ∀ x : Point K V, σ (σ x) = x := by
-    intro x
-    induction x using Projectivization.ind with | h v hv =>
-      have hgg_ne : g (g v) ≠ 0 := by simp [hv]
-      have hto_scalar :
-          Projectivization.mk K (g (g v)) hgg_ne =
-            Projectivization.mk K (δ • v) (smul_ne_zero hδ hv) :=
-        (Projectivization.mk_eq_mk_iff' K (g (g v)) (δ • v)
-          hgg_ne (smul_ne_zero hδ hv)).mpr ⟨1, by simp [hg v]⟩
-      have hscalar_id :
-          Projectivization.mk K (δ • v) (smul_ne_zero hδ hv) =
-            Projectivization.mk K v hv :=
-        (Projectivization.mk_eq_mk_iff' K (δ • v) v (smul_ne_zero hδ hv) hv).mpr
-          ⟨δ, rfl⟩
-      calc
-        σ (σ (Projectivization.mk K v hv)) =
-            Projectivization.mk K (g (g v)) hgg_ne := by
-          dsimp [σ]
-          rw [mapEquiv_mk, mapEquiv_mk]
-        _ = Projectivization.mk K (δ • v) (smul_ne_zero hδ hv) := hto_scalar
-        _ = Projectivization.mk K v hv := hscalar_id
-  have hfixed : ∀ x : Point K V, σ x ≠ x := by
-    intro x hfix
-    induction x using Projectivization.ind with | h v hv =>
-      have hmap :
-          Projectivization.mk K (g v) (by simp [hv]) =
-            Projectivization.mk K v hv := by
-        simpa [σ, mapEquiv_mk] using hfix
-      obtain ⟨lam, hlam⟩ :=
-        (Projectivization.mk_eq_mk_iff' K (g v) v (by simp [hv]) hv).mp hmap
-      have hscalar : δ • v = (lam * lam) • v := by
-        calc
-          δ • v = g (g v) := (hg v).symm
-          _ = g (lam • v) := by rw [hlam]
-          _ = lam • g v := by simp
-          _ = lam • (lam • v) := by rw [hlam]
-          _ = (lam * lam) • v := by rw [mul_smul]
-      have hδeq : δ = lam * lam := smul_left_injective K hv hscalar
-      exact hnonsquare ⟨lam, hδeq⟩
+  have hσ : ∀ x : Point K V, σ (σ x) = x :=
+    mapEquiv_sq_scalar_involutive g δ hg hδ
+  have hfixed : ∀ x : Point K V, σ x ≠ x :=
+    mapEquiv_sq_scalar_fixedpointfree g δ hg hnonsquare
   have hcol : ∀ {a b c : Point K V},
       Collinear K V (σ a) (σ b) (σ c) ↔ Collinear K V a b c := by
     intro a b c
