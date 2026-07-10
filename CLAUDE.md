@@ -70,10 +70,12 @@ existing CLAUDE.md rule or the handoff's plan; recommendation lopsided ≥80/20 
 decision inputs visible in the conversation; no load-bearing downstream (the next step
 doesn't change shape by which option is picked).
 
-**Still ask, even with the flag on:** architecture / design choices that lock in future
-work; **any revert, git-state change, or `git push`** (the global git rules stay
-ask-first regardless of mode); new scope or a pivot off the handoff's lever sequence; a
-real n=16 run (hours-to-days — size with HLL first); anything that would change a
+**Git permission:** ordinary forward commits are allowed without asking, as are local
+fast-forward-only branch updates/merges into `main`. **Still ask, even with the flag on:**
+architecture / design choices that lock in future work; any revert, history rewrite,
+destructive git operation, non-fast-forward branch change, or `git push`; new scope or a
+pivot off the handoff's lever sequence; a real n=16 run (hours-to-days — size with HLL first);
+anything that would change a
 CLAUDE.md rule or a validation gate.
 
 ## Short Commands
