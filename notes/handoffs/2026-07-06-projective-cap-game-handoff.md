@@ -442,8 +442,10 @@ task list.  Current high-value items:
 
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
-  step-group leaves, and `Class0`); next is a deliberate full q17 generated-data build, then q19
-  sizing/user launch.
+  step-group leaves, and `Class0`). The full v5 tree has 326 node leaves + 326 step leaves;
+  representative real timings project above 21.5 h sequential, tripping C30's explicit ~10 h
+  user-launch gate. Next is an explicit launch decision or another build-shape reduction, then
+  q19 sizing only after q17 is clean.
 - **Maintenance follow-up:** from q=23 zero-xor followers, test/prove preservability of
   live-conic xor zero after one further coupled off-conic move, then identify the termination
   invariant.
@@ -1184,6 +1186,21 @@ passes at q=11,13,17,19, and the sourced spectra agree at q=23,27,29.  The C47 p
 the terminal-band row.  Kestenband is recorded at its verified strength: existence of a non-conic
 arc, whose maximal extension lies in an explicit interval; no exact second-largest value at q=25 or
 q=31 is inferred.  The result is a terminal constraint, not a `Good`-closure or a value theorem.
+
+2026-07-10 C30 full-build sizing gate (Codex): counted 326 node-check and 326 step-check leaves in
+the v5 q17 canonical tree and compiled two fresh representative node leaves (`0:55.51` and
+`0:56.18`, about 2.6 GB RSS each). Together with the real representative step-leaf timing
+(`2:57.48`, 4.87 GB RSS) and class-base timing (`0:53.89`), the sequential build projects above
+21.5 hours before class tops/assembly. This exceeds C30's explicit ~10 h per-q stop gate, so the
+full build was not launched. No repository Lean data was written; next action is an explicit user
+launch decision or a further checker/build-shape reduction.
+
+2026-07-10 C44 bucket-2 cross-check (Codex): the 4 GB `s4arena` run filled at 214,748,361 entries
+on q25 bucket 2 `[1,2,6,17]`, but chunked `s4xormine` closed it: all 329/329 legal first moves have
+an exact P-valued reply, with zero no-candidate/no-hit/abort rows across a disjoint interval cover.
+Thus bucket 2 is P by the root game equation and C53 full-PGL transport. Together with Claude's
+arena labels for buckets 0 and 1, q25 now has at least 3/28 buckets labeled, all P. Details and
+verbatim boundary summaries are in `2026-07-09-codex-q25-baer-census.md`.
 
 ## Archive
 

@@ -7,10 +7,13 @@ the FnvMap labeling path blows the 8 GB gate, **so I built + validated the arena
 (b), committed `60c87fb`) which resolves it** — and used it to certify the hardest bucket. Current
 state:
 
-- **2 of 28 q=25 on-conic buckets labeled, both P** (via the new `s4arena` path):
+- **3 of 28 q=25 on-conic buckets labeled, all P** (two via `s4arena`, one via the exact
+  chunked-reply path):
   - bucket 1 `[1,2,3,4]` (degenerate size-6 orbit): **P**, 26.3M positions, ~120 s.
   - bucket 0 `[1,2,3,5]` (generic size-720 orbit, the FnvMap path's wall): **P**,
     **213,512,095 positions**, 1089 s (18.2 min) in a 4 GB arena. No N — no falsification here.
+  - bucket 2 `[1,2,6,17]` (size-360 orbit): **P** by 329/329 exact `s4xormine` reply
+    obligations after the 4 GB arena filled at 214,748,361 positions; details below.
 - **The census is now feasible at ~6 h / 8 GB** with `s4arena --all` (bucket 0 ≈ 18 min × ~19 generic
   buckets + fast small ones). It needs `--log2 29` (8 GB) because bucket 0's 213.5M nearly maxed the
   4 GB / 214M-cap arena; larger buckets will exceed it.
@@ -157,3 +160,45 @@ cd rust
 
 Binary `rust/target/gridcap` built from `notes/2026-07-06-grid-cap-solver.rs`
 (`rustc -O -C target-cpu=native`). RSS sampled from `/proc/<pid>/status` (no `/usr/bin/time` on box).
+
+## Independent chunked certification: bucket 2 is P (2026-07-10, Codex)
+
+The 4 GB arena continuation independently reached its fixed capacity on bucket 2
+(`[1,2,6,17]`) without a root label:
+
+```text
+S4ARENA-BUCKET q=25 idx=2 size=360 rep=[1, 2, 6, 17] status=ABORTED value=- peak-memo=214748361 elapsed=1096.130
+```
+
+The chunked `s4xormine` route nevertheless certifies this representative **P**. For every one of
+the root's 329 legal moves, it found and exactly solved a P-valued reply. The slices partitioned
+the root-move indices as `[0,10), [10,40), ..., [280,310), [310,329)`; the combined result is:
+
+```text
+root moves covered exactly once: 329/329
+XORRESULT rows:                 329
+status=hit:                     329
+no-candidates/no-hit/aborted:  0
+largest per-slice memo:         41,358,450
+largest measured RSS:          3,296,104 KB
+```
+
+Representative command shape (the first slice used `--limit 10`, the middle slices 30):
+
+```bash
+target/gridcap-c44 s4xormine 25 1,2,6,17 \
+  --cap 50000000 --start 10 --limit 30
+```
+
+Verbatim boundary summaries:
+
+```text
+S4XORMINE-DONE moves=10 root-start=0 root-end=10 root-total=329 hits=10 no-candidates=0 no-hit=0 aborted=false memo=13064597
+S4XORMINE-DONE moves=30 root-start=280 root-end=310 root-total=329 hits=30 no-candidates=0 no-hit=0 aborted=false memo=40627911
+S4XORMINE-DONE moves=19 root-start=310 root-end=329 root-total=329 hits=19 no-candidates=0 no-hit=0 aborted=false memo=24756426
+```
+
+This is a complete root P certificate at the same computed-oracle trust tier as the other S4
+labels: every legal child is N because it has an exact P child. By the C53 full-PGL bridge, bucket
+2 is therefore P. Current labeled total is at least **3/28, all P** (buckets 0, 1, 2); no q=25 N
+bucket has appeared.

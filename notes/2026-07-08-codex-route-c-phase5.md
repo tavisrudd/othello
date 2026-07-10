@@ -271,3 +271,35 @@ leaf-first build of all 21 canonical q17 classes using the v5 split layout
 `ClassNStepGroup*`, then `ClassN`, `Q17`, and `Q17Assembly`).  If q17 completes
 with the expected axiom profile `[propext, Classical.choice, Quot.sound]`, q19
 should be regenerated as canonical rather than anchored and sized the same way.
+
+## 2026-07-10 Full-build projection gate
+
+The v5 generated tree contains 326 node-check leaves and 326 step-check leaves
+across the 21 canonical classes. Two additional real Class0 node leaves compiled
+cleanly and reproduced the earlier resource envelope:
+
+```text
+Class0NodeGroup10  PASS 0:55.51, max RSS 2,623,204 KB
+Class0NodeGroup11  PASS 0:56.18, max RSS 2,694,688 KB
+```
+
+The earlier real `Class0StepGroup14` timing (2:57.48, 4,868,828 KB) is
+representative rather than an oversized outlier: its generated source is 0.324 MB,
+versus 0.313 MB mean over all 326 step leaves. Likewise the fresh node leaves are
+representative (0.049 MB each versus 0.048 MB mean). A source-size-weighted
+projection is therefore approximately:
+
+```text
+node leaves: 326 * 0:56       = 5.1 h
+step leaves: 326 * 2:57.48   = 16.1 h
+class bases: 21 * 0:53.89    = 0.3 h
+class tops + Q17 assembly:   additional
+projected total:             > 21.5 h, sequential
+```
+
+This trips C30's explicit per-q `~10 h` stop gate. The all-leaf build was not
+launched. The generated sources and the five successfully built real modules
+remain under `/tmp/c30-lean-q17-canon-v5` and `/tmp/c30-q17-real-build`; no
+repository Lean data was written. Next action is an explicit user decision to
+launch the roughly day-long q17 build (or a further checker/build-shape reduction),
+not an automatic continuation to q19.
