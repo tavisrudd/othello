@@ -25,3 +25,4 @@ import ProjectiveCap.Certificate
 import ProjectiveCap.CertCheck
 import ProjectiveCap.PlaneOutcome
 import ProjectiveCap.TrapConverse
+import ProjectiveCap.Sym2ConicBridge

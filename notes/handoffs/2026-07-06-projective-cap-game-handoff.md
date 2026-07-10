@@ -20,9 +20,13 @@ Closed or structurally understood:
 - Odd projective planes are proved in Lean for `q = 5, 7, 11, 13`; `q = 3, 9, 17, 19` are
   computed P but not all Lean-closed.  `q = 23` now has a bucket-first on-conic computation:
   all 22 full-`PGL(2,23)` on-conic buckets are P.  By the full-PGL conic-projectivity bridge
-  (Lemma I of the intrusion-calculus note; Lean formalization queued as C53), this establishes the
-  computed q=23 on-conic/escape result without the former orbit caveat.  C54 is the remaining
-  rules-only certificate task for the 22 computed bucket labels.
+  (Lemma I of the intrusion-calculus note; **now a verified Lean theorem** —
+  `ProjectiveCap.Sym2Bridge.onconic_value_bridge`, C53 parts 1–2, see
+  [C53 report](../2026-07-09-codex-full-pgl-bridge.md)), this establishes the computed q=23
+  on-conic/escape result without the former orbit caveat.  Trust tier: the bridge is a Lean
+  theorem, but the 22 bucket labels it consumes are solver output, not kernel-checked — so q=23
+  is **computed + orbit-reduced, not Lean-unconditional**.  C54 is the remaining rules-only
+  certificate task for the 22 computed bucket labels.
   `q = 25` has a first GF(25) S4-rooted sizing probe: the normalized representative
   `{1,2,3,4}` is P, using about 26.3M private memo entries with early break.  This is not a full
   q=25 bucket census.
@@ -61,9 +65,9 @@ steering family.
 | 9 | P | exhaustive solve; q=9 intrusion terminal-reply kernel isolated | Lean kernel/certificate still open |
 | 11 | **P** | Lean certificate assembly: `CertData.Q11.initialPStatement_finrank` | none |
 | 13 | **P** | Lean certificate assembly: `CertData.Q13.initialPStatement_finrank` | none |
-| 17 | P | `esc` campaign; mixed on-conic buckets; min-escape histogram `5:3 10:12 11:6` | C30 certificate book / no uniform proof |
-| 19 | P | `esc` campaign; all low-level escapes | C30 certificate book / no uniform proof |
-| 23 | P | C29 bucket-first full-`PGL(2,23)` on-conic census: all 22 buckets P; full-PGL bridge removes the former orbit caveat; old size-3-rooted `esc` class 0 exceeded the 200M memo cap | computed only; C53 formalizes the bridge; C54 certifies the 22 bucket labels |
+| 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps) | Lean generated-data path needs refactor (`Class0` maxRecDepth after 31m); no uniform proof |
+| 19 | P | `esc` campaign; C30 anchored cert book emitted and rules-checked PASS (`272/272`, all on-conic, no caps) | Lean generated-data path gated behind q17 refactor; no uniform proof |
+| 23 | P | C29 bucket-first full-`PGL(2,23)` on-conic census: all 22 buckets P; full-PGL bridge removes the former orbit caveat; old size-3-rooted `esc` class 0 exceeded the 200M memo cap | computed only; C53 bridge is now a verified Lean theorem (`Sym2Bridge.onconic_value_bridge`); C54 still needed to certify the 22 bucket labels |
 | all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
 
 ## Closed Higher-Dimensional Families
@@ -434,7 +438,9 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C30:** route-C certificate books for q=17 and q=19.
+- **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS, but
+  the q=13 split Lean generator does not scale as-is; refactor the generated aggregate chunk
+  checks before attempting q17/q19 Lean data.
 - **Maintenance follow-up:** from q=23 zero-xor followers, test/prove preservability of
   live-conic xor zero after one further coupled off-conic move, then identify the termination
   invariant.
@@ -447,8 +453,9 @@ task list.  Current high-value items:
   exact-solve sizing (the even-dimensional evidence vacuum); **C44** GF(25) path + q=25 Baer
   bucket census (the A4 falsification watch, previously without a task ID; q=25's depletion
   status is now the key covariate).  The former q=23 direct-B3-discharge rider is superseded by
-  **C53** (formal full-PGL bridge) and **C54** (q=23 bucket-label certification).  Tier placement is
-  in the queue's priority-ordering amendment.
+  **C53** (full-PGL bridge — parts 1–2 now a verified Lean theorem, `Sym2Bridge`) and **C54**
+  (q=23 bucket-label certification, still open).  Tier placement is in the queue's
+  priority-ordering amendment.
 - **Publishable-constraint additions (Fable, 2026-07-09 third pass):** **C45** defect-skeleton
   realizability theorem (dihedral classification of the conic endgame spectra; makes the mined
   even-cycle cancellation and split/elliptic order-dichotomy facts corollaries of one theorem);
@@ -603,6 +610,13 @@ Recently reported:
   q=17 the P-count variation is small (`2..5`, `1..3`) but scattered across all P-valued
   stabilizer orbits (`10/10`, `21/21`), with no clean sub-census characterization.  Report:
   [`../2026-07-09-codex-type-census-uniformity.md`](../2026-07-09-codex-type-census-uniformity.md).
+- **C30 certificate books:** anchored books are generated and independently rules-checked for
+  q=17 and q=19.  q=17: `210/210` PASS, histogram `5:30 10:120 11:60`, all on-conic witnesses,
+  no capped books, 111 MB cert.  q=19: `272/272` PASS, histogram `211:272`, all on-conic
+  witnesses, no capped books, 863 MB cert.  Lean is not closed: q17 generated `Class0.lean`
+  failed after 31:23 and 11.9 GB RSS at `class0_nodeChunks_check` (`maxRecDepth` in an aggregate
+  `simp` over chunk lemmas).  Report:
+  [`../2026-07-08-codex-route-c-phase5.md`](../2026-07-08-codex-route-c-phase5.md).
 
 Handoff note 2026-07-09 / Codex: added `rust/scripts/projcap_composite_mirror_probe.py`, ran the
 C32 plane and PG(4,3) primary checks above, wrote the report, and marked C32 reported in the queue.
@@ -703,6 +717,18 @@ sub-board ⇒ that cap/Nofil sub-board game is P; cap step reuses
 isometry group carries no fpf involution (machine witnesses + arguments in the report).  Trivial
 rows: ovoids `Q⁻(3,q)` (free placement), `H(2,4)=AG(2,3)`.  See the Classical-Varieties subsection
 under Closed Higher-Dimensional Families.  Next Codex/Claude lanes unchanged.
+
+Handoff note 2026-07-10 / Codex C30: emitted anchored q=17 and q=19 Route-C certificate books under
+`/tmp/c30-certs/` with `target/gridcap-c30`, then ran independent `certcheck`.  q=17:
+`210/210` PASS, `1,009,758` nodes, `2,345,728` rows, escape histogram `5:30 10:120 11:60`, all
+on-conic witnesses, no caps; anchored histogram is exactly 10x the canonical `5:3 10:12 11:6`.
+q=19: `272/272` PASS, `7,601,462` nodes, `15,354,851` rows, escape histogram `211:272`, all
+on-conic witnesses, no caps; full emission took `1:38:13`, peak RSS `867,612 KB`, and certcheck
+took `0:09.76`, peak RSS `1,835,428 KB`.  Lean sample generation stayed in `/tmp`: q17 Base
+compiled, but q17 `Class0.lean` failed after `31:23.21`, peak RSS `11,914,984 KB`, at
+`class0_nodeChunks_check` with `maxRecDepth` in the aggregate chunk `simp`.  No q17/q19 Lean data
+was committed.  Next C30 step is to refactor the generated checker proof shape before attempting
+q17/q19 Lean assembly; otherwise move to C43/C44/C50 or the steering-proof lanes.
 
 Good Lean side targets:
 

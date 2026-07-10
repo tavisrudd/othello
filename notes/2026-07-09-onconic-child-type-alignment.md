@@ -24,7 +24,11 @@ full-PGL grouping was too conservative.  Lemma I in
 the bridge: an on-conic state is determined by the unordered six played conic points, including the
 two burned/pre-played points, and any conic-stabilizing projectivity transports the follower game.
 The burned-pair stabilizer remains a useful finer diagnostic, but it is not the soundness boundary.
-The Lean formalization is now queued as C53.  The negative cross-q conclusion below is unchanged.
+The Lean formalization landed as **C53 parts 1–2** — a verified theorem
+(`ProjectiveCap.Sym2Bridge.onconic_value_bridge`; see
+[`2026-07-09-codex-full-pgl-bridge.md`](2026-07-09-codex-full-pgl-bridge.md)).  The negative
+cross-q conclusion below is unchanged: full-PGL transport is a **fixed-q compression only**, so a
+solved q gives no q-to-q prediction.
 
 ## 1. The object and the two group choices
 

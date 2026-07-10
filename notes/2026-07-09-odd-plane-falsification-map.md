@@ -112,7 +112,7 @@ the char-3 regime, not here.
 |----|------------------------------------------------------------|------------------------------------------------------------------------------|
 | B1 | solver bug → wrong P/N on COMPUTED rows (`canon()` collide) | eliminable — C8 at `q=11/13`, C37 scaled shared-key check, certcheck; Lean rows immune |
 | B2 | a false link in the reduction chain                        | escape ⇔ root-P is now Lean-proven by C41 (`GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank`), and 5-arc non-degeneracy is a Lean theorem (`uniqueConicThroughFiveArc…`); the remaining watch is spec-match B6, not the reduction link |
-| B3 | `q=23` **orbit-invariance bridge** unsound                 | eliminated at prose level by Lemma I/full-PGL conic-projectivity transport; Lean formalization queued as C53 |
+| B3 | `q=23` **orbit-invariance bridge** unsound                 | eliminated — Lemma I/full-PGL conic-projectivity transport is **now a verified Lean theorem** (`ProjectiveCap.Sym2Bridge.onconic_value_bridge`, C53 parts 1–2; see `2026-07-09-codex-full-pgl-bridge.md`) |
 | B4 | the intended route can't close it even if true             | on-conic route (B4a), missing positive-live `Good` closure (B4b), coupling non-decomposition (B4c, **measured by C35: confirmed** — no conic⊕zone sum at S5/S6, `g = g_conic XOR g_zone` fails on most rows even where zone Grundy is fully computable), static-pairing dead (B4d) |
 | B5 | normal-play vs misère inversion / ruleset conflation       | eliminated in practice (cross-engine tests + Lean pin the ruleset)           |
 | B6 | **spec mismatch** — Lean's endpoint definitions formalize a subtly different game than intended | Lean cannot self-certify this; B5 and A1's "Lean rows immune" use Lean as the oracle, so it is circular if the spec is off. Mitigated by `q=5,7` Lean-vs-computed agreement + a raw-bitmask legality spotcheck, not eliminated |
@@ -120,9 +120,10 @@ the char-3 regime, not here.
 The former B3 concern is no longer a reason to downgrade `q=23`.  The key correction is that an
 on-conic S4 follower is determined by the unordered six played projective points on the conic; the
 two burned/pre-played points are selected points, not residual labels.  A conic-stabilizing
-projectivity induced by full `PGL(2,q)` therefore transports the entire follower game.  What remains
-is to formalize this bridge in Lean (C53) and to certify the 22 computed bucket labels themselves
-(C54), not to solve duplicate stabilizer representatives.
+projectivity induced by full `PGL(2,q)` therefore transports the entire follower game.  This bridge
+is **now a verified Lean theorem** (C53 parts 1–2, `Sym2Bridge.onconic_value_bridge`); what remains
+is to certify the 22 computed bucket labels themselves (C54), not to solve duplicate stabilizer
+representatives.
 
 ## 5. Verdict
 
@@ -130,8 +131,9 @@ is to formalize this bridge in Lean (C53) and to certify the 22 computed bucket 
 - **Eliminated modulo solver:** `q=9,17,19` (`q=3` trivial) — B1/B6 are the residual risks, hardened by C37.
 - **Finite-checkable, not class-closing:** A2 per-`q`; A4 squares (`q=25,49`) — the top falsification watch (queued: **C44** for q=25).
 - **Former conditional now removed:** B3 (`q=23` orbit bridge) is settled by the full-PGL bridge
-  argument and queued for Lean formalization as C53; q=23 may be cited as a computed row modulo the
-  ordinary solver/certificate trust chain, with C54 assigned to strengthen that certificate tier.
+  argument, **now a verified Lean theorem** (C53 parts 1–2); q=23 may be cited as a computed row
+  modulo the ordinary solver/certificate trust chain, with C54 assigned to strengthen that
+  certificate tier.
 - **Irreducible open core:** A3 (eventual failure). It is a *truth*-mode, distinct from — not equal
   to — the *route*-modes B4b/B4c (`Good` closure + coupling); they share instruments, not a definition.
   No per-`q` computation eliminates A3; the §6 witness-count heuristic is the one instrument that
