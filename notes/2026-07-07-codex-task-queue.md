@@ -115,7 +115,11 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
   complete arc in a bounded interval, not a sourced exact terminal size.  Extends C46/C47; not a
   `Good`-closure or a value theorem. Report:
   [`2026-07-10-codex-arc-stability-import.md`](2026-07-10-codex-arc-stability-import.md).
-- **C50** — kernel-checked Grundy certificates (engineering).
+- **C50 [REPORTED 2026-07-10 — tiny PASS / literal-scale NO-GO]** — reflected Grundy-book
+  semantics and 3×3 queens prototype landed in Lean (`grundy=2`, standard axiom gate). n=4
+  passes; n=5 hits the default 200k-heartbeat limit at only 308 nodes. Replace linear literal
+  lookup with an indexed/chunked checker before building a C35 adapter. Report:
+  `2026-07-09-codex-grundy-cert-format.md`.
 
 **Opportunistic / diagnostics:** C57 (zone quasi-randomness), C60 (Singer-model probe), C49
 (piece nimber tables), C23/C40 (viz lanes).
@@ -1915,7 +1919,7 @@ failure maps the mirror method's boundary. Feeds D1 directly.
 Budget: math + small compute; 8h wall, single-core, ≤ 8 GB (solves are tiny).
 Report file: `notes/2026-07-09-codex-mirror-harvest.md`.
 
-## C50. Kernel-checked Grundy certificates — machine-verified game-value sequences (post-C35)
+## C50. Kernel-checked Grundy certificates — machine-verified game-value sequences (post-C35) [REPORTED 2026-07-10 — tiny PASS / literal-scale NO-GO]
 
 Context: C35's oracle now produces exact nimbers (`s4gdump`/`s4gcheck`/`s4gmeasure`), and the C19
 reflection route kernel-checks P/N reply books. Bridging them — a **nimber certificate** format

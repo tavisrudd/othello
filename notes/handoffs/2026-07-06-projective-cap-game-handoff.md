@@ -547,6 +547,14 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C50 (2026-07-10) — tiny kernel prototype PASS; literal scaling NO-GO.** Added a complete
+  mex certificate contract, standalone rules-only emitter/checker, and reflected Lean checker.
+  The generated 3×3 queens book proves `grundy (queenGraph 3) univ = 2` from 10 nodes/25 edges;
+  exact axioms `[propext, Classical.choice, Quot.sound]`. Growth is small on disk through n=6,
+  but literal Lean reflection is the bottleneck: n=4 (50 nodes) takes 12.89 s / 4.27 GB RSS and
+  n=5 (308 nodes) hits the default 200k-heartbeat limit. Per the stop gate, no C35 adapter was
+  built; use indexed or chunked lookup before scale-up. Report:
+  [`../2026-07-09-codex-grundy-cert-format.md`](../2026-07-09-codex-grundy-cert-format.md).
 - **C58 (2026-07-10, Claude) — all-P, order vs Desarguesian structure resolved.**  Exact-solved the
   cap game on all four projective planes of order 9 — `PG(2,9)`, Hall, dual Hall, Hughes — via a new
   standalone incidence-input solver (`rust/scripts/c58_cap_solve.rs`; the coordinatized grid solver
