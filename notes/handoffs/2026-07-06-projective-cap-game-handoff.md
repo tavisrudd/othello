@@ -601,6 +601,26 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C73 (2026-07-10, Claude/Opus) — value-blind secant selector: POSITIVE; failure gate 2
+  REFUTED.**  `L(A)` = the **maximum-legal-incidence** frame-point/on-conic candidate secant —
+  computed from S3 + conic + legality only, no P/N input — carries a P escape on **68/68**
+  size-3 classes across q = 11, 13, 17, 19 (plus q=5,7), with unique argmax 21/21 at q=17 and
+  the packet recovered 3/3 at the extremal classes.  Null control at the discriminating
+  depleted order q=17: a random candidate secant carries a P escape 49% of the time (on-conic P
+  21%) vs L1's 100%/100%.  The on-conic point of `L(A)` is itself P at 21/21 (q=17), 12/12,
+  27/27 — failing only at the two q=11 knife-edge tie classes (5-way tie, N conic point, the
+  off-conic P's still on the line; the round-1 §1D pattern).  Predeclared-then-unblinded with
+  negatives recorded: all product-point selectors (L2/L3/L4) fail — the incidence extremum, not
+  product-point membership, is load-bearing.  **Consequence: the off-conic pivot layer is NOT
+  irreducibly witness-anchored at q=17** — pure incidence recovers the witness value-blind — so
+  the C44 branch-(ii)/co-depletion risk is *reduced* (residual worry: the q=11 knife-edge tie
+  signature may recur at larger depleted orders).  Un-closed step: the local recursion lemma is
+  tested (existence, 0 failures), not proved — the game-value reduction needs the tree.
+  **Pre-registered q=25 test recorded** (label-blind: freeze `L(A)` per class via
+  `c73_characterize.py 25`, then unblind; ESC form predicted TRUE, ON form predicted fragile
+  exactly at the extremal class).  Report:
+  [`../2026-07-10-codex-c73-secant-packet.md`](../2026-07-10-codex-c73-secant-packet.md);
+  scripts `rust/scripts/c73_*.py`.
 - **C70 (2026-07-10, Claude/Opus) — exact collision charge: formulas PROVED, but the truncation
   was hiding a deterministic drift, not a discriminator.**  The untruncated collision
   multiplicity is exact and machine-verified (`M = E + delta0col`, 935,702 states, 0 exceptions;

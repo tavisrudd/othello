@@ -197,11 +197,14 @@ exist, so the dichotomy data is untouched).
   which explains the C44 rider's co-depletion finding: the off-conic pivot layer at q=17 is
   parasitic on the on-conic witness.  Its two recommended routes are queued as **C73/C74**
   (twelfth pass):
-- **C73 (NEW 2026-07-10, twelfth pass — run FIRST of the pair)** — value-blind secant-packet
-  theorem: derive the frame-point/on-conic-candidate secants algebraically and seek a value-blind
-  formula `L(A)` selecting the q=17 extremal packet, plus a local recursion lemma giving a P
-  point on `L(A)`.  Stays meaningful whichever way q=25 lands — it is the structure question for
-  the pre-registered off-conic pivot (C44 item 7 branch (ii)).  Spec §C73 below.
+- **C73 [REPORTED 2026-07-10 — POSITIVE]** — value-blind secant-packet theorem.  `L(A)` =
+  max-legal-incidence frame-point/on-conic candidate secant is a value-blind selector that uniquely
+  reproduces the q=17 packet (3/3 extremal) and whose line carries a P escape in all 68 classes at
+  q∈{11,13,17,19} (0 failures; q=17 base rate 49% → 100%, so meaningful).  On-conic form 21/21 at
+  q=17 but 6/8 at q=11 (misses the 2 knife-edge classes).  **Failure gate 2 refuted** — incidence
+  recovers the P witness (pivot NOT witness-anchored at q=17).  Recursion lemma tested (existence),
+  not proved (game-value reduction needs the tree).  Pre-registered q=25 out-of-sample test on
+  record.  Report: [`2026-07-10-codex-c73-secant-packet.md`](2026-07-10-codex-c73-secant-packet.md).
 - **C74 (NEW 2026-07-10, twelfth pass)** — growing fan-incidence capacity family: upgrade the
   15-involution capacity lemma to an `Ω(q)` algebraic incidence family with an independent upper
   bound on what an N fan can absorb.  Mandatory for uniformity, not optional: the constant 15
@@ -2909,7 +2912,18 @@ Budget: hours–day; existing labels + linear algebra (the 6-subset space at q=1
 38,760 — tiny); single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c72-fq-decomposition.md`.
 
-## C73. Value-blind secant-packet theorem — the off-conic escape structure at the knife edge (twelfth pass)
+## C73. Value-blind secant-packet theorem — the off-conic escape structure at the knife edge (twelfth pass) [REPORTED 2026-07-10 — POSITIVE (value-blind L(A) survives; recursion-existence 68/68; failure-gate-2 refuted)]
+
+**Verdict:** the value-blind selector `L(A)` = the maximum-legal-incidence frame-point/on-conic
+candidate secant SURVIVES: it uniquely reproduces the packet at all 3 q=17 extremal classes and
+its selected line carries a P escape in every one of the 68 classes at q∈{11,13,17,19} (0
+failures; meaningful — q=17 base rate is 49%).  The stronger on-conic form ("L(A)'s conic point is
+P") is q=17-clean (21/21) but misses at the 2 q=11 knife-edge classes (cls 4,7).  **Failure gate 2
+does NOT fire** — incidence recovers the P witness, so the pivot layer is NOT irreducibly
+witness-anchored at q=17 (this REDUCES the C44 branch-(ii) risk).  Open: the propagation is tested
+(existence), not proved (the game-value reduction needs the tree, not in feat dumps).  Report:
+[`2026-07-10-codex-c73-secant-packet.md`](2026-07-10-codex-c73-secant-packet.md); scripts
+`rust/scripts/c73_*.py`.
 
 **READ FIRST:**
 [`2026-07-10-codex-odd-plane-round1-report.md`](2026-07-10-codex-odd-plane-round1-report.md) §4
