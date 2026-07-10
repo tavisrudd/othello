@@ -97,7 +97,16 @@ are the open-core / amortized-potential lane (Cluster 2) and A5 itself.
 
 - **C30** — generated-checker refactor → q17/q19 Lean assembly (engineering, long-running).
 - **C43** / **C44** — PG(4,3) exact-solve sizing / GF(25) path + q=25 census (compute lanes).
-- **C58** — order-9 non-Desarguesian planes (compute lane; falsification-map payoff).
+- **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
+  (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
+  pairwise non-isomorphic (distinct complete-arc spectra), so the odd-plane P-property is invariant
+  across the order-9 family — Desarguesian and non-Desarguesian alike.  No N geometry (no
+  falsification, no "conjecture is about Desarguesian structure" verdict); the payoff is the reverse
+  constraint: the P-property is Desargues-independent at order 9, so conic localization is
+  Desargues-specific *scaffolding* rather than the load-bearing mechanism.  Value does not separate
+  Hall from its (non-isomorphic) dual.  Standalone incidence-input solver built (the coordinatized
+  grid solver cannot represent non-Desarguesian planes); PG(2,9) calibration reproduces the known P.
+  Report: [`2026-07-09-codex-order9-planes.md`](2026-07-09-codex-order9-planes.md).
 - **C59 [REPORTED 2026-07-10 — POSITIVE import]** — exact arc-to-conic terminal bounds.  Every
   terminal is the full conic (`q+1`) or is at most the strongest applicable integer
   Ball–Lavrauw/Voloch bound `B(q)`; the exact formula is retained by arithmetic type.  Existing
@@ -2238,6 +2247,12 @@ Budget: existing data only, single-core, ≤ 4h.
 Report file: `notes/2026-07-09-codex-zone-quasirandomness.md`.
 
 ## C58. Cap game on the four projective planes of order 9 — order vs Desarguesian structure
+
+**[REPORTED 2026-07-10 — all-P (Claude)].** All four order-9 planes (PG(2,9), Hall, dual Hall,
+Hughes) are P; pairwise non-isomorphic (distinct complete-arc spectra).  All-P branch: no N
+geometry; the P-property is Desargues-independent at order 9 (conic localization is
+Desargues-specific scaffolding).  Report:
+[`2026-07-09-codex-order9-planes.md`](2026-07-09-codex-order9-planes.md).
 
 **Full spec:** item F of
 [`handoffs/2026-07-09-spinoff-bridges-duals-isomorphisms.md`](handoffs/2026-07-09-spinoff-bridges-duals-isomorphisms.md)

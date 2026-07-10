@@ -547,6 +547,20 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C58 (2026-07-10, Claude) — all-P, order vs Desarguesian structure resolved.**  Exact-solved the
+  cap game on all four projective planes of order 9 — `PG(2,9)`, Hall, dual Hall, Hughes — via a new
+  standalone incidence-input solver (`rust/scripts/c58_cap_solve.rs`; the coordinatized grid solver
+  cannot represent non-Desarguesian planes).  Planes built + verified in
+  `rust/scripts/c58_order9_planes.py` (axioms + Desargues counterexample search; Hall from a
+  reversed-regulus spread, Hughes from Dembowski's near-field construction cross-checked byte-for-
+  byte against the published GEM-database incidence table).  **All four are P** (first-player loss);
+  the four are pairwise non-isomorphic (distinct complete-arc spectra — PG(2,9) has the Segre
+  `9⁵−9² = 58968` conics as its only ovals).  PG(2,9) incidence-input calibration reproduces the
+  known P.  No N geometry: not a counterexample and not the "conjecture is about Desarguesian
+  structure" verdict; instead the reverse constraint — the odd-plane P-property is
+  **Desargues-independent at order 9**, so conic localization is Desargues-specific scaffolding, not
+  the load-bearing mechanism.  Game value does not separate Hall from its (non-isomorphic) dual.
+  Report: [`../2026-07-09-codex-order9-planes.md`](../2026-07-09-codex-order9-planes.md).
 - **C59 (2026-07-10) — POSITIVE import, exact large-terminal bounds.**  Imported the verified
   Segre/Voloch/Ball–Lavrauw thresholds from `2026-07-07-relatedwork-o4.md`.  Every residual-game
   terminal is a complete arc, hence is either the full conic (`q+1`) or has size at most the exact

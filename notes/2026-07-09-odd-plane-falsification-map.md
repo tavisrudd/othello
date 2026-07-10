@@ -108,6 +108,19 @@ computed-P (reassuring), leaving `q = 25, 49` as the untested squares, the least
 where the GF field-arithmetic bugs have lived. `q = 27 = 3³` is not square (no Baer) and belongs to
 the char-3 regime, not here.
 
+**C58 (order vs Desarguesian structure) — RESOLVED all-P (2026-07-10).** A distinct falsification
+axis from A1–A5: is the P-property an *order* phenomenon or a *Desarguesian-structure* one?  Order 9
+is the smallest non-Desarguesian order and has exactly four planes.  The cap game was exact-solved
+on all four (PG(2,9), Hall, dual Hall, Hughes — pairwise non-isomorphic, distinct complete-arc
+spectra) via a standalone incidence-input solver: **all four are P.**  An N on any non-Desarguesian
+plane would have proved the conjecture is about Desarguesian structure (the doubly-informative
+branch, per the genericity test); it did not appear.  The all-P branch instead *removes Desargues as
+the mechanism*: the P-property is invariant across the four order-9 geometries, so the eventual
+uniform argument's Desargues-specific machinery (conic localization) is scaffolding, not the load-
+bearing cause.  This strengthens the A4-square reassurance at `q=9` (now all four planes, not just
+the Desarguesian one) but is weak positive evidence overall (per §6/the genericity bands).  Report:
+[`2026-07-09-codex-order9-planes.md`](2026-07-09-codex-order9-planes.md).
+
 ### B. The math is true but our belief/route is invalid ("invalidated")
 
 | #  | Mode                                                        | Status                                                                       |
