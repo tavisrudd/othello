@@ -60,6 +60,7 @@ namespace FiniteBuildGame
 
 variable {α : Type*} [Fintype α] [DecidableEq α]
 
+omit [Fintype α] in
 /--
 Capacity-2 chord discharge from near-linearity.
 
@@ -82,7 +83,7 @@ theorem capC2Chord_of_nearLinear {Coll : Finset α -> Prop}
           x ∈ L -> σ x ∈ L -> Coll L -> L.card ≤ 2 := by
   intro S _hval hInv x hmove L hLsub hxL hσxL hLcoll
   by_contra hcard
-  push_neg at hcard  -- hcard : 2 < L.card
+  push Not at hcard  -- hcard : 2 < L.card
   have hxσx : x ≠ σ x := (hfixed x).symm
   -- extract a third point z ∈ L, distinct from x and σ x, so z ∈ S
   have hcard2 : ({x, σ x} : Finset α).card = 2 := by
@@ -192,14 +193,17 @@ def rookColl (L : Finset (A × ZMod (2 * t))) : Prop :=
 def shift : A × ZMod (2 * t) ≃ A × ZMod (2 * t) :=
   (Equiv.refl A).prodCongr (Equiv.addRight (t : ZMod (2 * t)))
 
+omit [Fintype A] [DecidableEq A] [NeZero (2 * t)] in
 @[simp] theorem shift_apply (p : A × ZMod (2 * t)) :
     shift p = (p.1, p.2 + (t : ZMod (2 * t))) := rfl
 
+omit [NeZero (2 * t)] in
 theorem two_t_cast_zero : ((t : ZMod (2 * t)) + (t : ZMod (2 * t))) = 0 := by
   have : ((2 * t : ℕ) : ZMod (2 * t)) = 0 := ZMod.natCast_self (2 * t)
   push_cast at this
   linear_combination this
 
+omit [Fintype A] [DecidableEq A] [NeZero (2 * t)] in
 theorem shift_involutive (p : A × ZMod (2 * t)) : shift (shift p) = p := by
   simp only [shift_apply]
   ext
@@ -207,12 +211,14 @@ theorem shift_involutive (p : A × ZMod (2 * t)) : shift (shift p) = p := by
   · show p.2 + (t : ZMod (2 * t)) + (t : ZMod (2 * t)) = p.2
     rw [add_assoc, two_t_cast_zero, add_zero]
 
+omit [NeZero (2 * t)] in
 theorem t_cast_ne_zero (ht : 0 < t) : (t : ZMod (2 * t)) ≠ 0 := by
   rw [Ne, CharP.cast_eq_zero_iff (ZMod (2 * t)) (2 * t) t]
   intro hdvd
   have hle := Nat.le_of_dvd ht hdvd
   omega
 
+omit [Fintype A] [DecidableEq A] [NeZero (2 * t)] in
 theorem shift_fixed (ht : 0 < t) (p : A × ZMod (2 * t)) : shift p ≠ p := by
   intro h
   have hcol : p.2 + (t : ZMod (2 * t)) = p.2 := by
@@ -221,6 +227,7 @@ theorem shift_fixed (ht : 0 < t) (p : A × ZMod (2 * t)) : shift p ≠ p := by
   have hcol0 : p.2 + (t : ZMod (2 * t)) = p.2 + 0 := by rw [add_zero]; exact hcol
   exact t_cast_ne_zero ht (add_left_cancel hcol0)
 
+omit [Fintype A] [DecidableEq A] [NeZero (2 * t)] in
 /-- The rook-collinearity predicate is downward closed. -/
 theorem rookColl_down {L L' : Finset (A × ZMod (2 * t))}
     (hsub : L ⊆ L') (h : rookColl L') : rookColl L := by
@@ -228,6 +235,7 @@ theorem rookColl_down {L L' : Finset (A × ZMod (2 * t))}
   · exact Or.inl ⟨i, fun p hp => hi p (hsub hp)⟩
   · exact Or.inr ⟨j, fun p hp => hj p (hsub hp)⟩
 
+omit [Fintype A] [DecidableEq A] [NeZero (2 * t)] in
 /-- The column shift preserves rook-collinearity. -/
 theorem rookColl_map (L : Finset (A × ZMod (2 * t))) :
     rookColl (L.map (shift (A := A) (t := t)).toEmbedding) ↔ rookColl L := by
@@ -248,6 +256,7 @@ theorem rookColl_map (L : Finset (A × ZMod (2 * t))) :
       rcases Finset.mem_map.mp hp with ⟨q, hq, rfl⟩
       simp only [Equiv.coe_toEmbedding, shift_apply]; rw [hj q hq]
 
+omit [Fintype A] [NeZero (2 * t)] in
 /-- Near-linearity of the rook grid: two distinct cells force any collinear set
 through them to be all-row or all-column, and that carries to `{a,z,w}`. -/
 theorem rookColl_linear {a b z w : A × ZMod (2 * t)} (hab : a ≠ b)
