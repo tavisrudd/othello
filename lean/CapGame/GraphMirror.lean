@@ -27,8 +27,9 @@ Cayley-graph instance, where the chord condition becomes a single membership tes
 formalisation (`NodeKayles/Basic.lean`) using the *vertex-deletion* encoding
 `Graph.win` (a mover deletes `{v} ∪ N(v)`).  The `IndepValid` game here is the
 *independent-set-building* encoding; the two compute the same normal-play value,
-but this file does **not** prove them equal — bridging the two encodings is a
-separate game-equivalence proof, deferred as follow-up.
+but this file does **not** prove them equal — that bridge is
+`NodeKayles.ConflictGameEquiv` (`indepGame_isP_iff`), a separate game-equivalence
+proof.
 -/
 
 namespace ConflictGraph
@@ -133,9 +134,11 @@ theorem initialIndepP_of_fpf_adjPreserving_involution (adj : α -> α -> Prop)
 
 /-! ## Cayley-graph instance
 
-For a finite group `G` and a symmetric connection set `S : Finset G` (with `1 ∉ S`
-for irreflexivity), the Cayley conflict `x ~ y := x⁻¹ * y ∈ S` is symmetric and
-irreflexive.  An order-two element `g` gives the left-translation involution
+For a finite group `G` and a symmetric connection set `S : Finset G`, the Cayley
+conflict `x ~ y := x⁻¹ * y ∈ S` is symmetric.  (`1 ∉ S` would make it irreflexive,
+but the P-theorems below never need irreflexivity — `IndepValid`'s `x ≠ y` guard
+already discounts self-loops — so it is not assumed; `cayleyAdj_irrefl` records it.)
+An order-two element `g` gives the left-translation involution
 `σ x = g * x`, which is fixed-point-free and preserves the Cayley adjacency.  The
 chord condition becomes `x⁻¹ * (g * x) ∉ S` — the whole conjugacy class of `g`
 avoids `S`; for a commutative group this collapses to the single test `g ∉ S`.

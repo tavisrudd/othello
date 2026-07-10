@@ -15,7 +15,9 @@ namespace Almost
 
 variable {K : Type*} [Field K] [Fintype K] [DecidableEq K]
 
-/-- Placeholder for the future residual-game P-position predicate. -/
+/-- The abstract P-position predicate parameter for the *legacy* `OddEscapeStatement`
+below (which permits an external P-predicate).  The concrete residual game is
+`GridGame.IsP`; the game-tied target is `OddEscapeGameStatement`. -/
 abbrev GridPPosition (K : Type*) [Field K] [Fintype K] [DecidableEq K] :=
   Finset (GridPoint K) -> Prop
 

@@ -6,7 +6,8 @@ import ProjectiveCap.Projective
 
 The projective cap game forbids `3` collinear points.  Its capacity-`c`
 generalisation forbids `c + 1` collinear points ("no line carries more than `c`
-chosen points"); the standard `Cap` is the `c = 2` case.  This file records how
+chosen points"); the standard `Cap` is the `c = 2` case (proved below as
+`capC2_iff_cap`).  This file records how
 far the shared normal-play mirror engine (`FiniteBuildGame.isP_of_invariant_mirror`)
 reaches for the capacity-`c` game — and, more usefully, the sharp point where it
 stops.
@@ -189,6 +190,66 @@ predicate; the ordinary cap game is the `c = 2` case.
 def CapC (c : ℕ) (S : Finset (Point K V)) : Prop :=
   FiniteBuildGame.CapCValid
     (fun L => Projectivization.IsCollinear (↑L : Set (Point K V))) c S
+
+omit [Fintype (Point K V)] in
+/--
+Faithfulness: the geometric capacity-2 game **is** the ordinary projective cap game.
+`CapC 2 S` (no 3-point collinear subset) holds iff `Cap K V S` (no collinear distinct
+triple).  This substantiates the "the ordinary cap game is the `c = 2` case" remark in
+the file header, turning it from an asserted claim into a checked theorem and guarding
+against silent drift between the two encodings.
+
+Deliberately a **leaf**: the maintained cap proofs do *not* route through it, and the
+ordinary cap `IsP` result is *not* re-derived through the near-linear engine
+`FiniteBuildGame.initialCapC2P_of_nearLinear_mirror` (`ProjectiveCap.PolarSegreMirror`).
+Such routing is *possible* — near-linearity of `IsCollinear` is already
+`Projective.collinear_of_collinear_pair` (`ProjectiveCap.PlaneTransitivity`),
+downward-closure is `Projectivization.isCollinear_subset`, and this lemma converts the
+`CapC 2` endpoint back to `Cap` — but it is intentionally NOT wired up.  The maintained
+path `ProjectiveCap.Projective.mirrorStepGood_of_collinearity_preserving`
+(`ProjectiveCap.Mirror`) needs only the triple-level collinearity hypothesis, is
+load-bearing for the `SubCap` quadric and elliptic whole-board results, and stays the
+simplest, most-exercised route for the flagship P-theorems (PG(2,5), PG(2,7), PG(n,2)).
+Keeping this lemma disjoint avoids a second parallel mirror path and any coupling of
+those results to the newer engine.
+-/
+theorem capC2_iff_cap {S : Finset (Point K V)} :
+    CapC 2 S ↔ Cap K V S := by
+  constructor
+  · intro hCapC a b c ha hb hc hab hac hbc hcol
+    have hsub : ({a, b, c} : Finset (Point K V)) ⊆ S := by
+      intro x hx
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+      rcases hx with rfl | rfl | rfl
+      · exact ha
+      · exact hb
+      · exact hc
+    have hcoll :
+        Projectivization.IsCollinear
+          (↑({a, b, c} : Finset (Point K V)) : Set (Point K V)) := by
+      have hcoe :
+          (↑({a, b, c} : Finset (Point K V)) : Set (Point K V)) =
+            ({a, b, c} : Set (Point K V)) := by
+        simp only [Finset.coe_insert, Finset.coe_singleton]
+      rw [hcoe]
+      exact hcol
+    have hle : ({a, b, c} : Finset (Point K V)).card ≤ 2 := hCapC hsub hcoll
+    have hcard : ({a, b, c} : Finset (Point K V)).card = 3 := by
+      simp [hab, hac, hbc]
+    omega
+  · intro hCap L hLsub hLcoll
+    by_contra hcard
+    push Not at hcard
+    obtain ⟨a, b, c, ha, hb, hc, hab, hac, hbc⟩ := Finset.two_lt_card_iff.mp hcard
+    have hsub : ({a, b, c} : Set (Point K V)) ⊆ (↑L : Set (Point K V)) := by
+      intro x hx
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
+      rcases hx with rfl | rfl | rfl
+      · exact Finset.mem_coe.mpr ha
+      · exact Finset.mem_coe.mpr hb
+      · exact Finset.mem_coe.mpr hc
+    exact hCap (hLsub ha) (hLsub hb) (hLsub hc) hab hac hbc
+      (Projectivization.isCollinear_subset _ _ hsub hLcoll)
 
 /--
 Geometric capacity-`c` mirror theorem (chord explicit).

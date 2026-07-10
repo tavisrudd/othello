@@ -1,12 +1,14 @@
 import ProjectiveCap.CapCMirror
 
 /-!
-# Polar-space and Segre-product Nofil mirrors (C51 / C52 harvest #3, #4)
+# Capacity-2 near-linear mirror engine, with the rook-grid (`Q⁺(3,q)`) instance
 
-Two further reaches of the fixed-point-free mirror method, continuing the C48
-harvest (`ProjectiveCap.HyperbolicQuadricMirror`).  Both are **capacity-2 line
-games** whose legality is *not* full ambient collinearity, so the C48 sub-board
-lemma does not apply directly; they share one engine.
+A capacity-2 specialisation of the fixed-point-free mirror method, continuing the
+C48 harvest (`ProjectiveCap.HyperbolicQuadricMirror`).  This file provides the
+abstract *near-linear* c = 2 engine and its one concrete Lean instance, the
+rook-lines grid game.  It is the intended engine for the C51 (symplectic polar
+space) and C52 (Segre product) Nofil programs — see the scope note below for what
+is and is not formalised here.
 
 ## The engine — capacity-2 near-linear mirror
 
@@ -19,33 +21,39 @@ as `initialCapC2P_of_nearLinear_mirror`: for an abstract downward-closed
 
   `a ≠ b → Coll {a,b,z} → Coll {a,b,w} → Coll {a,z,w}`,
 
-a fixed-point-free `Coll`-preserving involution gives a second-player win.  This
-is the shared game-theoretic heart of:
+a fixed-point-free `Coll`-preserving involution gives a second-player win.  This is
+the intended shared heart of every capacity-2 near-linear Nofil game.
 
-* the ordinary projective cap game (`Coll = ambient collinearity`, C48/C25),
-* **C51 symplectic Nofil** `W(2n−1,q)`: board = all of `PG(2n−1,q)`, `Coll` =
-  "on a common *totally-isotropic* line" of an alternating form.  The C25 elliptic
-  block map `(a,b)↦(δ b,a)` is a *symplectic similitude* (it scales the form by
-  `−δ`), hence maps isotropic lines to isotropic lines, is fpf (`δ` nonsquare),
-  and near-linearity is inherited from ambient projective geometry.  Machine-
-  verified: `W(3,3)` (GQ(3,3), pair-extension over all 22572 σ-invariant caps
-  PASS ⇒ P), `W(3,5)` (GQ(5,5)), `W(5,3)`.  See
-  `notes/2026-07-09-codex-polar-space-nofil.md`.
-* **C52 Segre / product Nofil** `PG(a,q)×PG(b,q)`: board = the grid of points,
-  `Coll` = "on a common ruling line".  The mirror `σ = id × (elliptic fpf
-  involution on the odd factor)` is fpf and ruling-preserving.  Machine-verified:
-  `PG(1,3)²` (=`Q⁺(3,3)`), `PG(2,3)×PG(1,3)`, `PG(1,3)×PG(3,3)`.  See
-  `notes/2026-07-09-codex-segre-product-nofil.md`.
-
-## The concrete instantiation in this file
+## What is formalised here (Lean-proven)
 
 `GridRook.gridRook_isP`: the capacity-2 rook-lines game on `A × ZMod (2t)` (rows
 `A` arbitrary finite, `2t` columns) is P, via the column-shift mirror
-`(i,j) ↦ (i, j+t)`.  Taking `A = ZMod (q+1)` and `2t = q+1` this **is**
-`Q⁺(3,q) = PG(1,q)×PG(1,q)` for odd `q` (the C48 grid model), so C52's base
-family is Lean-proven.  The symplectic `W` game and the general higher-factor
-Segre game reduce to the same engine once their (geometric) `Coll` predicate is
-built in mathlib; the reduction is documented at the end of the file.
+`(i,j) ↦ (i, j+t)`.  With `A = ZMod (q+1)`, `2t = q+1`, odd `q`, this abstract rook
+grid *models* the C52 base family `Q⁺(3,q) = PG(1,q)×PG(1,q)` — but that
+identification is standard finite geometry and is **not** itself formalised (there
+is no Lean bridge from the projective `Point`/quadric types to `A × ZMod (2t)`, and
+no `q`-specialisation is instantiated).
+
+## Not formalised here — external evidence and future work
+
+The C51/C52 targets this engine is meant for have **no Lean content**.  The
+"machine-verified" cases below are external Python/Nofil enumerations of specific
+small `(n,q)`, strictly weaker than an all-`q` theorem, recorded in the cited
+notes:
+
+* **C51 symplectic Nofil** `W(2n−1,q)`: `Coll` = "on a common totally-isotropic
+  line" of an alternating form; the elliptic block map `(a,b)↦(δ b,a)` is
+  (conjecturally) a symplectic similitude scaling the form by `−δ`.  No alternating
+  form or isotropic-line predicate is defined in Lean.  Machine-verified (Python):
+  `W(3,3)`, `W(3,5)`, `W(5,3)` — see `notes/2026-07-09-codex-polar-space-nofil.md`.
+* **C52 Segre / product Nofil** `PG(a,q)×PG(b,q)` (beyond the rook grid above):
+  `Coll` = "on a common ruling line"; mirror `σ = id × (elliptic fpf involution on
+  the odd factor)`.  No general Segre board is defined in Lean.  Machine-verified
+  (Python): `PG(1,3)²`, `PG(2,3)×PG(1,3)`, `PG(1,3)×PG(3,3)` — see
+  `notes/2026-07-09-codex-segre-product-nofil.md`.
+
+Wiring either family into `initialCapC2P_of_nearLinear_mirror` requires first
+building its geometric `Coll` predicate in mathlib and proving it near-linear.
 -/
 
 namespace FiniteBuildGame
@@ -142,8 +150,10 @@ Capacity-2 near-linear mirror theorem.
 
 A fixed-point-free involution `σ` preserving a downward-closed near-linear
 collinearity predicate `Coll` gives a second-player win from the empty
-capacity-2 position.  Instantiated by the projective cap game, the symplectic
-isotropic-line game (C51), and the Segre ruling game (C52).
+capacity-2 position.  The one Lean instantiation is `GridRook.gridRook_isP` (the
+rook-lines grid, C52 base family); the projective cap game and the symplectic (C51)
+and general Segre (C52) instances are intended but not yet wired in Lean (see the
+file header).
 -/
 theorem initialCapC2P_of_nearLinear_mirror {Coll : Finset α -> Prop}
     (σ : α ≃ α) (hσ : ∀ x : α, σ (σ x) = x) (hfixed : ∀ x : α, σ x ≠ x)
@@ -160,10 +170,11 @@ end FiniteBuildGame
 /-!
 ## Concrete instantiation: the capacity-2 rook-lines game (C52 base family)
 
-`Q⁺(3,q) = PG(1,q) × PG(1,q)` is the `(q+1)×(q+1)` grid whose ≥3-point lines are
-exactly the rows and columns — the capacity-2 rook-lines game.  We prove the
-general version (`A` rows, `2t` columns) P via the column-shift mirror, then read
-off `Q⁺(3,q)` for odd `q`.
+As a partial linear space, `Q⁺(3,q) = PG(1,q) × PG(1,q)` is the `(q+1)×(q+1)` grid
+whose ≥3-point lines are exactly the rows and columns — the capacity-2 rook-lines
+game.  We prove the general version (`A` rows, `2t` columns) P via the column-shift
+mirror; with `A = ZMod (q+1)`, `2t = q+1`, odd `q`, this is the `Q⁺(3,q)` base
+family (the quadric identification is standard finite geometry, not formalised here).
 -/
 
 namespace GridRook

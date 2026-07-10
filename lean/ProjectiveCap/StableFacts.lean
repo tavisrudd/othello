@@ -47,10 +47,12 @@ def SizeThreeExtensionCountStatement (K : Type*) [Field K] [Fintype K] [Decidabl
       (Fintype.card K : Int) ^ 2 - 9 * (Fintype.card K : Int) + 21
 
 /--
-Placeholder interface for the frame-reduction theorem.
+Abstract interface for the frame-reduction theorem, kept as a generic `Prop` target.
 
-The actual projective-plane position type and frame extraction still need to be
-formalized.
+Superseded for the concrete projective plane by
+`ProjectiveCap.Projective.initialPStatement_iff_isP_frame_of_finrank`
+(`ProjectiveCap.PlaneTransitivity`), which formalises the position type and frame
+extraction directly; this interface is retained only as abstract scaffolding.
 -/
 structure FrameReductionInterface where
   Position : Type*

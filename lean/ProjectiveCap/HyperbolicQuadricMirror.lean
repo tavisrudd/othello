@@ -40,7 +40,10 @@ variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 variable [Fintype (Point K V)] [DecidableEq (Point K V)]
 
 /-- The cap game restricted to the sub-board `{p | Q p}`: a position is valid
-iff it is an ambient cap and every selected point satisfies `Q`. -/
+iff it is an ambient cap and every selected point satisfies `Q`.  For a quadric `Q`
+this ambient-collinearity legality *is* the generator-line game: a projective line
+not contained in the quadric meets it in at most two points, so any three collinear
+points on the quadric lie on a generator. -/
 def SubCap (Q : Point K V -> Prop) (S : Finset (Point K V)) : Prop :=
   Cap K V S ∧ ∀ p ∈ S, Q p
 

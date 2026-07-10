@@ -180,6 +180,12 @@ omit [DecidableEq (Projective.Point K (PlaneVec K))]
 /--
 The rank-three projective cap game is P exactly when the residual odd-escape
 kernel holds.
+
+The equivalence carries content on the odd planes `PG(2,q)` with `q ≥ 5`: for
+`q = 3` (like the char-2 planes) there is no size-three grid cap — `PG(2,3)` has no
+5-cap — so `OddEscapeStatement` is vacuously true and both sides degenerate soundly
+to "the empty game is P" (discharged by terminal-seed vacuity, not by the escape
+kernel).
 -/
 theorem initialPStatement_iff_oddEscapeStatement_finrank
     {V : Type*} [AddCommGroup V] [Module K V]
