@@ -1,0 +1,5 @@
+S4ARENA-BUCKET q=11 idx=0 size=75 rep=[1, 2, 3, 4] status=OK value=N peak-memo=42 elapsed=0.000
+S4ARENA-BUCKET q=11 idx=1 size=60 rep=[1, 2, 3, 5] status=OK value=P peak-memo=77 elapsed=0.000
+S4ARENA-BUCKET q=11 idx=2 size=50 rep=[1, 2, 3, 6] status=OK value=P peak-memo=41 elapsed=0.000
+S4ARENA-BUCKET q=11 idx=3 size=25 rep=[1, 2, 3, 7] status=OK value=P peak-memo=36 elapsed=0.000
+S4ARENA-SUMMARY q=11 run=4 okP=3 okN=1 aborted=0
