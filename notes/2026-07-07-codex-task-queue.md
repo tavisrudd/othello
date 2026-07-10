@@ -110,6 +110,14 @@ open-core / amortized-potential lane (Cluster 2) and A5 itself.
    maintenance artifacts, recording the incidence description of every candidate failure — the
    failure-rigidity data the compression ledger needs.  See C70 (the exact collision charge) for
    the coordinate this selector should descend.
+   **Kill-test outcome (Codex round 2, 2026-07-10):** the predeclared kill-set-sorted top-k rule
+   (k ≤ 4) is exact at the q=19 root (k=4: 148/148) but **REFUTED at q=23** — 11 exact
+   all-N-top-four failures among 1,091 maintenance obligations (first P replies at ranks
+   6/10/13/27; the decisive class has three isolated live conic vertices where the only known P
+   reply deletes all three).  Neither D-empty-first nor min-|K| is a uniform bounded selector.
+   The residual is rigid (7 incidence classes; 8/11 under one follower) → the route is
+   **generic discharge + explicit exception classes**, NOT another bounded argmin.  See the
+   round-2 umbrella bullet below; script `rust/scripts/r2_killset_topk.py`.
 8. **C70 [REPORTED 2026-07-10 — items 1–2 POSITIVE (exact formulas), items 3–5 NEGATIVE]** —
    exact reservoir-slack collision charge.  The exact per-cell collision multiplicity
    `M = E + delta0col` is derived and machine-verified (935,702 states, 0 exceptions), with
@@ -233,6 +241,23 @@ exist, so the dichotomy data is untouched).
   10/16/17 P ⇒ ON survives but `L`'s ON form fails and its ESC form is the decisive independent
   test; all four N ⇒ ON refuted at q=25.  The "non-depleted ∧ L-fails" cell is logically
   impossible.  Original spec §C74 below (its stabilizer-family gate is superseded as above).
+- **Codex round-2 umbrella report (2026-07-10; verified by Fable):**
+  [`2026-07-10-codex-odd-plane-round2-report.md`](2026-07-10-codex-odd-plane-round2-report.md) —
+  beyond the C74 results above: (i) the **R2-2 kill-set top-k refutation** (recorded at the item-7
+  successor framing above); (ii) **tied-line concurrence** [post-hoc value correlation, NOT
+  promoted]: the tied `d=4` max-incidence lines of a class concur at ONE value-blind legal
+  off-conic point, and that common point is exact **P in 10/10** labeled tie families — including
+  both q=11 knife-edge classes (common points `(4,5)`, `(9,3)`), which closes C73's ON-form gap
+  at the *selector-existence* layer without resurrecting symmetry ⇒ P; frozen out-of-sample
+  prediction: q=25 R7's three max lines concur at the Veronese point `(1:15:9)`, **predicted P**
+  before its label exists (verified concurrent + legal, label-blind); (iii) **(L_forall)** named:
+  "every maximum-incidence candidate secant carries a P child" — the strong C73-tested form
+  (68/68), implies the conjecture, logically independent of (ON), and the more robust localized
+  anchor given the q=25 0-or-≥3 dichotomy.  **Recommended round 3:** the legal involution-pencil
+  lemma (high proof effort — value-blind Good class over `a ∈ F_q^* \ P2(U)` with labelled
+  second-intruder kill maps); the q=25 targeted unblind (buckets 10/14/16/17 + the `(1:15:9)`
+  point, before any broader q=25 work); the 7-class q=23 exception analysis (discharge +
+  exceptions form).  Scripts `rust/scripts/c74_concurrence.py`, `r2_killset_topk.py`.
 
 **Independent lanes (parallel; pull when unblocked):**
 

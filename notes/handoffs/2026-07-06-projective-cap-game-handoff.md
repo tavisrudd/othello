@@ -601,6 +601,23 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **Codex round-2 umbrella (2026-07-10; verified by Fable) — kill-set top-k refuted at q=23;
+  tied-line concurrence found; (L_forall) named.**
+  [`../2026-07-10-codex-odd-plane-round2-report.md`](../2026-07-10-codex-odd-plane-round2-report.md).
+  (i) The predeclared kill-set-sorted top-k (k ≤ 4) reply rule is exact at the q=19 root (148/148
+  at k=4) but has **11 exact all-N-top-four failures** among 1,091 q=23 maintenance obligations
+  (first P replies at ranks 6/10/13/27; the decisive class needs a reply deleting all three
+  isolated live vertices) — neither `D=∅`-first nor min-|K| is a uniform bounded selector; the
+  rigid residual (7 incidence classes, 8/11 under one follower) routes the selector program to
+  **generic discharge + explicit exception classes**.  (ii) The tied `d=4` max lines of a class
+  **concur at one value-blind legal off-conic point, exact P in 10/10** labeled tie families —
+  incl. both q=11 knife-edge classes, closing C73's ON-form gap at the selector-existence layer;
+  post-hoc, not promoted; frozen q=25 prediction: R7's common Veronese point `(1:15:9)` is P.
+  (iii) **(L_forall)** ("every max-incidence line carries a P child") named as the robust
+  localized anchor — implies the conjecture, independent of (ON), survives min-witness 0.
+  Fable re-ran both scripts: concurrence 10/10 verbatim; kill-set failure ranks/classes verbatim.
+  Recommended round 3: the involution-pencil lemma, the q=25 targeted unblind (buckets
+  10/14/16/17 + `(1:15:9)`), the 7-class exception analysis.
 - **C74 (2026-07-10, Codex round 2; verified by Fable) — the L(A) algebra is completely solved;
   the stabilizer-capacity route is closed with proof; q=25 is forced into a sharp dichotomy.**
   [`../2026-07-10-codex-c74-capacity-family.md`](../2026-07-10-codex-c74-capacity-family.md).
