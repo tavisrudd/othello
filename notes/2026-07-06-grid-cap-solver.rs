@@ -7206,6 +7206,363 @@ fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str)
     }
 }
 
+// ---- C71: three-involution transition mining -------------------------------
+//
+// An off-conic point (r,c) induces the trace-zero Mobius involution sigma on the
+// root conic xy=1.  A conic point (t, 1/t) and (r,c) are collinear with the second
+// conic intersection (t', 1/t') where t' = (r - t)/(1 - c t); the chord through
+// params t,t' is x + t t' y = t + t', and (r,c) lies on it iff r + (t t') c = t + t'.
+// Hence sigma has PGL(2,q) matrix [[-1, r],[-c, 1]] (trace -1+1 = 0 => order 2).
+// The order of sigma_x sigma_y in PGL(2,q) is the pairwise datum d that Lemma VI
+// pins the two-intruder cycle length to (cycles have length exactly 2d).
+fn s4_sigma_matrix(gf: &GF, r: usize, c: usize) -> [usize; 4] {
+    [gf.neg[1] as usize, r, gf.neg[c] as usize, 1]
+}
+
+fn s4_mat_mul(gf: &GF, a: &[usize; 4], b: &[usize; 4]) -> [usize; 4] {
+    [
+        gf.a(gf.m(a[0], b[0]), gf.m(a[1], b[2])),
+        gf.a(gf.m(a[0], b[1]), gf.m(a[1], b[3])),
+        gf.a(gf.m(a[2], b[0]), gf.m(a[3], b[2])),
+        gf.a(gf.m(a[2], b[1]), gf.m(a[3], b[3])),
+    ]
+}
+
+fn s4_mat_is_scalar(m: &[usize; 4]) -> bool {
+    m[1] == 0 && m[2] == 0 && m[0] == m[3] && m[0] != 0
+}
+
+// Order of sigma_x sigma_y in PGL(2,q); 0 signals a bug (never happens for q<=32).
+fn s4_pgl_product_order(gf: &GF, x: (usize, usize), y: (usize, usize)) -> usize {
+    let mx = s4_sigma_matrix(gf, x.0, x.1);
+    let my = s4_sigma_matrix(gf, y.0, y.1);
+    let p = s4_mat_mul(gf, &mx, &my);
+    let mut cur = p;
+    for k in 1..=(gf.q + 2) {
+        if s4_mat_is_scalar(&cur) {
+            return k;
+        }
+        cur = s4_mat_mul(gf, &cur, &p);
+    }
+    0
+}
+
+// #conic points on the affine line through two cells (0 external, 1 tangent-dir,
+// 2 secant in the affine chart).  Projective secants through an asymptotic
+// direction show as affine count 1; the product order d is the robust invariant
+// (d | q-1 split/secant, d | q+1 elliptic/external, d = p parabolic/tangent).
+fn s4_line_conic_count(b: &Board, x: usize, y: usize) -> usize {
+    let line = &b.line_mask[x * b.n + y];
+    let mut count = 0usize;
+    for t in 1..b.q {
+        let z = t * b.q + b.gf.inv[t] as usize;
+        if bit_is_set(line, z) {
+            count += 1;
+        }
+    }
+    count
+}
+
+// Compact abstract shape of a conic Node-Kayles graph from its feature string:
+// path-size multiset (isolates are size-1 paths), cycle-size multiset, other-size
+// multiset, plus the component/live/xor summary.  Two states with identical shape
+// strings have isomorphic (as multiset-of-shapes) live-conic graphs.
+fn s4_shape_desc(feat: &str) -> String {
+    let paths = feat
+        .split_whitespace()
+        .find_map(|f| f.strip_prefix("conic_path_sizes="))
+        .unwrap_or("-");
+    let cycles = feat
+        .split_whitespace()
+        .find_map(|f| f.strip_prefix("conic_cycle_sizes="))
+        .unwrap_or("-");
+    let others = feat
+        .split_whitespace()
+        .find_map(|f| f.strip_prefix("conic_other_sizes="))
+        .unwrap_or("-");
+    let comp = s4_named_usize(feat, "conic_comp");
+    let live = s4_named_usize(feat, "conic_v");
+    let xor = s4_named_usize(feat, "conic_nk_xor");
+    let known = s4_named_usize(feat, "conic_nk_known");
+    format!(
+        "P[{}]C[{}]O[{}]comp{}live{}xor{}k{}",
+        paths, cycles, others, comp, live, xor, known
+    )
+}
+
+fn solve_s4_triple(q: usize, t4: &[usize], grundy_path: &str, rows_out: Option<&str>, row_cap: usize) {
+    let b = Board::new(q);
+    let (root_occ, _rc, _rf, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells)
+        || grundy.root_grundy.is_none()
+    {
+        eprintln!("s4triple: exact matching Grundy dump required: {}", grundy.describe());
+        std::process::exit(2);
+    }
+    let started = Instant::now();
+    let root_index = grundy.find(root_key).expect("root missing from exact Grundy dump").0;
+    let mut states = vec![S4SelectorState::default(); grundy.n_records];
+    states[root_index] = S4SelectorState { parent: u32::MAX, z: 0, len: root_occ.len() as u8, seen: true };
+    let mut frontier = VecDeque::new();
+    frontier.push_back(root_index);
+    let mut seen = 0usize;
+    while let Some(i) = frontier.pop_front() {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        seen += 1;
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            let (child_occ, _, _) = push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            let child_i = grundy
+                .find(b.canon(&child_occ))
+                .expect("reachable child missing from exact Grundy dump")
+                .0;
+            if !states[child_i].seen {
+                states[child_i] = S4SelectorState {
+                    parent: u32::try_from(i).expect("state index exceeds u32"),
+                    z,
+                    len: child_occ.len() as u8,
+                    seen: true,
+                };
+                frontier.push_back(child_i);
+            }
+        }
+    }
+    if seen != grundy.n_records {
+        eprintln!("s4triple: reachability mismatch {} != {}", seen, grundy.n_records);
+        std::process::exit(2);
+    }
+
+    // Function-test keyed maps at three geometric resolutions.
+    //   K1 = before-shape + (collinear vs triangle) + #conjugate-pairs (d==2 count)
+    //   K2 = K1 refined by the sorted order-triple {d_xy,d_xz,d_yz}
+    //   K3 = K2 refined by the sorted line-type triple (#conic pts on each side)
+    // For each key we record the histogram of resulting after-shapes; a key that
+    // maps to >1 distinct after-shape is a function violation (residual dependence).
+    let mut k1: HashMap<String, HashMap<String, u64>> = HashMap::new();
+    let mut k2: HashMap<String, HashMap<String, u64>> = HashMap::new();
+    let mut k3: HashMap<String, HashMap<String, (u64, String)>> = HashMap::new();
+
+    let mut total_trans = 0usize;
+    let mut cyc_law_ok = 0usize;
+    let mut cyc_law_bad = 0usize;
+    let mut psi_up_rows: Vec<String> = Vec::new(); // the rare dPsi>0 single-move transitions
+    // coefficient-check accumulators
+    let mut dc_hist: BTreeMap<i64, u64> = BTreeMap::new();
+    let mut dres_by_dc: BTreeMap<i64, (i64, i64, u64)> = BTreeMap::new(); // dC -> (sum dRes, sum dPsi, n)
+    let mut dpsi_hist: BTreeMap<i64, u64> = BTreeMap::new();
+    let mut skel_le_zero = 0usize; // transitions with 6*dC - 4 <= 0
+    let mut psi_le_zero = 0usize;
+
+    let mut rows_writer = rows_out.map(|p| {
+        let mut w = BufWriter::new(File::create(p).expect("create s4triple rows TSV"));
+        writeln!(w, "q\tparent_key\tparent_ply\tparent_g\tchild_g\tx\ty\tz\txgeom\tygeom\tzgeom\tcollinear\td_xy\td_xz\td_yz\tlt_xy\tlt_xz\tlt_yz\tbefore_shape\tafter_shape\tdC\tdReservoir\tdPsi").expect("hdr");
+        w
+    });
+    let mut rows_written = 0usize;
+
+    for i in 0..states.len() {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        // count + collect off-conic (intruder) cells
+        let mut intr: Vec<u16> = Vec::new();
+        for &zc in &occ {
+            if !is_on_root_conic(&b, zc as usize) {
+                intr.push(zc);
+            }
+        }
+        if intr.len() != 2 {
+            continue;
+        }
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        let parent_feat_str = s4_conic_graph_feature_string(&b, &occ, &chosen, &forbidden);
+        let before_shape = s4_shape_desc(&parent_feat_str);
+        let parent_full = s4_potential_features(&b, &occ, &chosen, &forbidden, 0, 0);
+        let parent_comp = parent_full[7];
+        let parent_res = parent_full[5];
+        let parent_g = raw_record_value_byte(grundy.mmap.bytes(), i);
+        let x = intr[0] as usize;
+        let y = intr[1] as usize;
+        let xg = geometry_label_for_root(&b, t4, x);
+        let yg = geometry_label_for_root(&b, t4, y);
+        let d_xy = s4_pgl_product_order(&b.gf, (x / q, x % q), (y / q, y % q));
+        let lt_xy = s4_line_conic_count(&b, x, y);
+        // Lemma-VI cross-check: every parent (2-intruder) cycle has length 2*d_xy.
+        {
+            let cyc = parent_feat_str
+                .split_whitespace()
+                .find_map(|f| f.strip_prefix("conic_cycle_sizes="))
+                .unwrap_or("-");
+            if cyc != "-" {
+                for tok in cyc.split(',') {
+                    let len: usize = tok.parse().unwrap_or(0);
+                    if len == 2 * d_xy {
+                        cyc_law_ok += 1;
+                    } else {
+                        cyc_law_bad += 1;
+                    }
+                }
+            }
+        }
+        for m in avail_cells(&b, &chosen, &forbidden) {
+            let mi = m as usize;
+            if is_on_root_conic(&b, mi) {
+                continue; // only off-conic moves add a third intruder
+            }
+            let (c_occ, c_chosen, c_forbidden) =
+                push_cell_state(&b, &occ, &chosen, &forbidden, mi).unwrap();
+            let child_i = grundy.find(b.canon(&c_occ)).expect("child missing").0;
+            let child_g = raw_record_value_byte(grundy.mmap.bytes(), child_i);
+            let child_feat_str = s4_conic_graph_feature_string(&b, &c_occ, &c_chosen, &c_forbidden);
+            let after_shape = s4_shape_desc(&child_feat_str);
+            let child_full = s4_potential_features(&b, &c_occ, &c_chosen, &c_forbidden, 0, 0);
+            let child_comp = child_full[7];
+            let child_res = child_full[5];
+            let parent_psi = s4_candidate_psi(&parent_full);
+            let child_psi = s4_candidate_psi(&child_full);
+
+            let z = mi;
+            let zg = geometry_label_for_root(&b, t4, z);
+            let d_xz = s4_pgl_product_order(&b.gf, (x / q, x % q), (z / q, z % q));
+            let d_yz = s4_pgl_product_order(&b.gf, (y / q, y % q), (z / q, z % q));
+            let lt_xz = s4_line_conic_count(&b, x, z);
+            let lt_yz = s4_line_conic_count(&b, y, z);
+            let collinear = bit_is_set(&b.line_mask[x * b.n + y], z);
+            let mut dsort = [d_xy, d_xz, d_yz];
+            dsort.sort_unstable();
+            let mut ltsort = [lt_xy, lt_xz, lt_yz];
+            ltsort.sort_unstable();
+            let conj = (d_xy == 2) as usize + (d_xz == 2) as usize + (d_yz == 2) as usize;
+
+            let k1_key = format!("{}|col{}|conj{}", before_shape, collinear as u8, conj);
+            let k2_key = format!("{}|d{:?}", k1_key, dsort);
+            let k3_key = format!("{}|lt{:?}", k2_key, ltsort);
+
+            *k1.entry(k1_key).or_default().entry(after_shape.clone()).or_insert(0) += 1;
+            *k2.entry(k2_key).or_default().entry(after_shape.clone()).or_insert(0) += 1;
+
+            let dc = child_comp - parent_comp;
+            let dres = child_res - parent_res;
+            let dpsi = child_psi - parent_psi;
+
+            let row = format!(
+                "{}\t{:032x}\t{}\t{}\t{}\t{},{}\t{},{}\t{},{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
+                q, b.canon(&occ), occ.len(), parent_g, child_g,
+                x / q, x % q, y / q, y % q, z / q, z % q,
+                xg, yg, zg,
+                collinear as u8, d_xy, d_xz, d_yz, lt_xy, lt_xz, lt_yz,
+                before_shape, after_shape, dc, dres, dpsi
+            );
+            {
+                let entry = k3.entry(k3_key).or_default();
+                match entry.get_mut(&after_shape) {
+                    Some((cnt, _)) => *cnt += 1,
+                    None => {
+                        entry.insert(after_shape.clone(), (1, row.clone()));
+                    }
+                }
+            }
+
+            *dc_hist.entry(dc).or_insert(0) += 1;
+            let e = dres_by_dc.entry(dc).or_insert((0, 0, 0));
+            e.0 += dres;
+            e.1 += dpsi;
+            e.2 += 1;
+            *dpsi_hist.entry(dpsi).or_insert(0) += 1;
+            if 6 * dc - 4 <= 0 {
+                skel_le_zero += 1;
+            }
+            if dpsi <= 0 {
+                psi_le_zero += 1;
+            } else if psi_up_rows.len() < 200 {
+                psi_up_rows.push(row.clone());
+            }
+            total_trans += 1;
+
+            if let Some(w) = rows_writer.as_mut() {
+                if rows_written < row_cap {
+                    writeln!(w, "{}", row).expect("write row");
+                    rows_written += 1;
+                }
+            }
+        }
+    }
+    if let Some(w) = rows_writer.as_mut() {
+        w.flush().expect("flush rows");
+    }
+
+    let count_violations = |m: &HashMap<String, HashMap<String, u64>>| -> (usize, usize, u64) {
+        let mut keys = 0usize;
+        let mut viol = 0usize;
+        let mut viol_trans = 0u64;
+        for h in m.values() {
+            keys += 1;
+            if h.len() > 1 {
+                viol += 1;
+                viol_trans += h.values().sum::<u64>();
+            }
+        }
+        (keys, viol, viol_trans)
+    };
+    let (k1_keys, k1_viol, k1_vt) = count_violations(&k1);
+    let (k2_keys, k2_viol, k2_vt) = count_violations(&k2);
+    // k3 has a different value type; count directly.
+    let mut k3_keys = 0usize;
+    let mut k3_viol = 0usize;
+    let mut k3_vt = 0u64;
+    for h in k3.values() {
+        k3_keys += 1;
+        if h.len() > 1 {
+            k3_viol += 1;
+            k3_vt += h.values().map(|(c, _)| *c).sum::<u64>();
+        }
+    }
+
+    println!(
+        "S4TRIPLE q={} t4={:?} cells={:?} records={} transitions={} cyc_law_ok={} cyc_law_bad={}",
+        q, t4, cells, grundy.n_records, total_trans, cyc_law_ok, cyc_law_bad
+    );
+    println!(
+        "S4TRIPLE-KEYS K1 keys={} violations={} viol_trans={} | K2 keys={} violations={} viol_trans={} | K3 keys={} violations={} viol_trans={}",
+        k1_keys, k1_viol, k1_vt, k2_keys, k2_viol, k2_vt, k3_keys, k3_viol, k3_vt
+    );
+    print!("S4TRIPLE-DC");
+    for (dc, n) in &dc_hist {
+        print!(" {}:{}", dc, n);
+    }
+    println!();
+    print!("S4TRIPLE-DC-MEANS");
+    for (dc, (sres, spsi, n)) in &dres_by_dc {
+        print!(
+            " dC={}:n={},meanDres={:.3},meanDpsi={:.3}",
+            dc, n, *sres as f64 / *n as f64, *spsi as f64 / *n as f64
+        );
+    }
+    println!();
+    println!(
+        "S4TRIPLE-COEF skel_le_zero={}/{} psi_le_zero={}/{}",
+        skel_le_zero, total_trans, psi_le_zero, total_trans
+    );
+    for r in &psi_up_rows {
+        println!("S4TRIPLE-PSIUP {}", r);
+    }
+    // Emit up to 8 K3 violation witnesses (identical geometric key, different after-shape).
+    let mut shown = 0usize;
+    for (key, h) in &k3 {
+        if h.len() > 1 && shown < 8 {
+            println!("S4TRIPLE-VIOL key={}", key);
+            for (after, (cnt, ex)) in h {
+                println!("  after={} count={} example_row={}", after, cnt, ex);
+            }
+            shown += 1;
+        }
+    }
+    println!("S4TRIPLE-DONE q={} t4={:?} rows_out={} rows_written={} elapsed={:.3}",
+        q, t4, rows_out.unwrap_or("-"), rows_written, started.elapsed().as_secs_f64());
+}
+
 #[derive(Clone)]
 struct S4RemoteChild {
     key: u128,
@@ -10450,6 +10807,51 @@ fn main() {
             &t4,
             &grundy_path.expect("s4potential needs --grundy <file>"),
             &out_path.expect("s4potential needs --out <tsv>"),
+        );
+        return;
+    }
+    if args[1] == "s4triple" {
+        // s4triple <q> t1,t2,t3,t4 --grundy <grundy-raw> [--rows <tsv>] [--cap N]
+        // Mine every 2->3-intruder off-conic transition; test whether the after-skeleton
+        // is a function of (before-shape, three-center geometry) and run the C63 coefficient check.
+        let mut grundy_path: Option<String> = None;
+        let mut rows_out: Option<String> = None;
+        let mut row_cap: usize = 200_000;
+        let mut positional: Vec<String> = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else if a == "--rows" {
+                rows_out = Some(it.next().expect("--rows needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--rows=") {
+                rows_out = Some(rest.to_string());
+            } else if a == "--cap" {
+                row_cap = it.next().expect("--cap needs a value").parse().expect("cap int");
+            } else if let Some(rest) = a.strip_prefix("--cap=") {
+                row_cap = rest.parse().expect("cap int");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4triple mode needs q: s4triple <q> t1,t2,t3,t4 --grundy <file>")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(
+            positional
+                .get(1)
+                .expect("s4triple mode needs t values: s4triple <q> t1,t2,t3,t4 --grundy <file>"),
+        );
+        solve_s4_triple(
+            q,
+            &t4,
+            &grundy_path.expect("s4triple needs --grundy <file>"),
+            rows_out.as_deref(),
+            row_cap,
         );
         return;
     }

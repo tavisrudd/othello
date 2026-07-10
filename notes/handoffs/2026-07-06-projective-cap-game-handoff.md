@@ -601,6 +601,25 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **C71 (2026-07-10, Claude/Opus) — three-involution transition: NOT a function of center
+  geometry (missing coordinate named); `Psi` coefficient check POSITIVE.**  Every 2→3-intruder
+  transition mined exactly from the q=13/17/19 Grundy dumps (1,167 / 153,266 / 1,063,392 rows;
+  new `s4triple` solver mode).  The map (before-skeleton, center-triangle geometry) →
+  after-skeleton is **not a function** even at the finest PGL-invariant key (violating fraction
+  28% → 89% → 94%, growing with q; single-key fan-out up to 12) — the center-triangle-invariant
+  search is measured futile; the missing coordinate is the **labelled embedding of the live
+  conic cells** against `sigma_z` and z's kill-lines (confirms the C45 §4 prediction, now with
+  reproducible witnesses).  Positive half: `dPsi = [6·dC − 4] + [dReservoir − 2·dXor0]` exactly —
+  the structural part of every 2→3 move is `6·dC − 4` by construction, so `Psi`-descent on
+  3+-intruder states reduces to a `dC` rule (needs the labelled coordinate) **plus the C70
+  reservoir charge**.  Single-move `Psi`-nonincrease: 100% (q=13, q=17), 99.9976% (q=19) — all
+  26 exceptions one PGL orbit (`P[5] → P[1,1,1]`, equilateral all-external d=5 center triangle;
+  opponent moves, not reply failures — the C71 analogue of C63's 12 q=19 tie rows).  Proved
+  gate: `D(z) = ∅ ⇒ dC ≤ 0` (adding a matching only merges; component creation is gated by the
+  kill-set) — the lever for C70/C61 replies: keep the kill-set off the live-path interior.
+  Tranchida (arXiv:2411.10299, forwarded mid-run) supplied the center dictionary.  Report:
+  [`../2026-07-10-codex-c71-third-intruder.md`](../2026-07-10-codex-c71-third-intruder.md);
+  analyzer `rust/scripts/c71_transition_analysis.py`.
 - **C72 (2026-07-10, Claude/Opus) — f_q Johnson-scheme decomposition: NEGATIVE (read b), with an
   exact identity as a by-product.**  No harmonic/design identity forces near-constant link sums:
   at the depleted orders `f_q`'s spectral mass sits in the TOP Johnson components and migrates up
