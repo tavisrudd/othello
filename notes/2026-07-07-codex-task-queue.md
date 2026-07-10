@@ -1817,11 +1817,16 @@ informative new number for the (ON) route, independent of the Baer watch.
      pre-registered response is a pivot to off-conic escape structure, not a program failure.
    - (iii) a genuinely trapped size-3 (ALL `q²−9q+21` children N, on- and off-conic) is the
      conjecture counterexample — item 4's verbatim-report-and-stop rule applies.
-   - **Fallback-quantification rider (cheap, existing dumps, run before or alongside the census):**
-     per-class OFF-conic escape counts at q=11/17 (total minus on-conic from the feat dumps — the
-     c68 machinery already computes the on-conic side), reporting the worst-class off-conic margin
-     at the depleted orders.  This puts the (ii)-pivot's safety margin on record before q=25
-     forces the question.
+   - **Fallback-quantification rider [REPORTED 2026-07-10 (Claude/Opus)]:** per-class OFF-conic
+     escape counts computed at q=5..19
+     ([`2026-07-10-offconic-escape-margin.md`](2026-07-10-offconic-escape-margin.md); script
+     `rust/scripts/c44_offconic_escape_margin.py`).  Worst-class off-conic margin `8 → 4` across
+     the depleted orders {11,17} — nonzero (the (ii)-pivot layer exists) but **modest and trending
+     adverse**, and at q=17 the two layers **co-deplete**: the three knife-edge on-conic classes
+     (onP=1) are exactly the three worst off-conic classes (off=4; the spec's 5-total/4-off-conic
+     knife-edge datum verified).  At q=11 they anti-align (knife-edge class has off=16).  If the
+     q=17 alignment persists, the first min-witness-0 class at a larger depleted order is also the
+     most off-conic-thin — the adverse case for the pivot.  q=25 extends both trends.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
 
