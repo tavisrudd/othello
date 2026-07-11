@@ -277,6 +277,14 @@ that discharges the transfer interface's finite fields from it:
    minimum parity-check supports through the erased coordinate) and supply a matroid instance
    discharging "no surviving trace ⟺ independent". Both wait on more of the code layer.
 4. Phase 1 step 4: uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`.
+5. **Distance-lower-bound tool** ~~(core landed)~~ — `FiniteGeom/EvalCode.lean`:
+   `card_eval_zero_le_natDegree` (a nonzero deg-`<k` poly vanishes at `≤ k-1` distinct points),
+   the Reed–Solomon code `rsCode pts k`, and `rsCode_minDist_ge : n-(k-1) ≤ d(RS_k)`, all via the
+   new general `le_minDist` helper in `Code.lean`. This is the *lower*-bound direction Singleton
+   doesn't give — the tool the real min-distance claims (q=9, q=3^h) turn on. **Remaining capstone:**
+   RS-is-MDS equality (`IsMDS (rsCode pts k)` for `k ≤ n`), needing `finrank (rsCode) = k` via
+   `evalPi`'s injectivity on `degreeLT k` (`Submodule.equivMapOfInjective`) + `finrank (degreeLT 𝔽 k)
+   = k` (`degreeLTEquiv`), combined with `singleton_bound`.
 
 ### Handoff Note — 2026-07-11 (session: lean-formalization Phase 0/1)
 
@@ -406,3 +414,25 @@ that discharges the transfer interface's finite fields from it:
 - Doc-hygiene note: per the CLAUDE.md live/companion split added this session, §7's dated
   Handoff Notes should migrate to a companion `-archive.md` at end-of-session; deferred (kept
   inline for now to match the file's current structure).
+
+### Handoff Note — 2026-07-11 (cont.: distance lower-bound tool — Reed–Solomon)
+
+- Landed the **distance-lower-bound direction** (Singleton is only an upper bound): new
+  `FiniteGeom/EvalCode.lean` + the general `le_minDist` helper in `Code.lean`.
+  - `le_minDist` (dual of `minDist_le_hammingNorm`): a uniform per-nonzero-codeword weight
+    lower bound `m` transfers to `m ≤ d(C)` for nontrivial `C`. Reusable "hard direction".
+  - `card_eval_zero_le_natDegree`: a nonzero degree-`<k` polynomial vanishes at `≤ deg p < k`
+    of the `n` distinct evaluation points (vanishing points inject into the roots). The one
+    classical fact the whole lane rests on.
+  - `evalPi` (the `𝔽`-linear evaluation map via `Polynomial.leval`), the Reed–Solomon code
+    `rsCode pts k = map evalPi (degreeLT 𝔽 k)`, `rsCode_hammingNorm_ge`
+    (`n-(k-1) ≤ wt` per nonzero codeword), and `rsCode_minDist_ge : n-(k-1) ≤ d(RS_k)` for
+    `1 ≤ k, 1 ≤ n` (nontriviality witnessed by the all-ones evaluation of the constant `1`).
+- This is general-in-`q` infrastructure feeding both blocked theorems (the q=9 seed's real
+  dual-distance lower bound and the q=3^h family's `d = q-1`) — the min-distance *lower* bounds
+  those turn on, which `singleton_bound` (upper) cannot supply.
+- Remaining capstone (queued as next-step 5): RS-is-MDS equality — `finrank (rsCode) = k` (via
+  `evalPi` injective on `degreeLT k` + `degreeLTEquiv`) closes `d = n-k+1` against Singleton.
+- Build green (`lake build FiniteGeom RepairCodes`), no warnings; `#print axioms` on
+  `le_minDist` / `card_eval_zero_le_natDegree` / `rsCode_hammingNorm_ge` / `rsCode_minDist_ge`
+  = `[propext, Classical.choice, Quot.sound]`. Ninth commit.

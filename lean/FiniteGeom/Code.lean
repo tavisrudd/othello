@@ -75,6 +75,19 @@ theorem minDist_le_hammingNorm {C : Submodule 𝔽 (Fin n → 𝔽)} {c : Fin n 
     (hc : c ∈ C) (hne : c ≠ 0) : minDist C ≤ hammingNorm c :=
   Nat.sInf_le ⟨c, hc, hne, rfl⟩
 
+/-- Dual of `minDist_le_hammingNorm`: a uniform weight lower bound on every nonzero codeword
+transfers to a lower bound on `d(C)`, provided the code is nontrivial (`sInf ∅ = 0` makes the
+`⊥` case fail, so the hypothesis is genuinely needed). The reusable "hard direction" for
+proving a code meets a distance bound (e.g. Reed–Solomon in `FiniteGeom.EvalCode`). -/
+theorem le_minDist {C : Submodule 𝔽 (Fin n → 𝔽)} {m : ℕ} (hC : C ≠ ⊥)
+    (h : ∀ c ∈ C, c ≠ 0 → m ≤ hammingNorm c) : m ≤ minDist C := by
+  obtain ⟨c₀, hc₀C, hc₀⟩ := (Submodule.ne_bot_iff C).mp hC
+  have hne : {w | ∃ c ∈ C, c ≠ 0 ∧ hammingNorm c = w}.Nonempty :=
+    ⟨hammingNorm c₀, c₀, hc₀C, hc₀, rfl⟩
+  obtain ⟨cd, hcdC, hcd0, hcdw⟩ := Nat.sInf_mem hne
+  calc m ≤ hammingNorm cd := h cd hcdC hcd0
+    _ = minDist C := hcdw
+
 /-- Dual distance `d(C⊥)`: the minimum distance of the dual code. -/
 noncomputable def dualDist (C : Submodule 𝔽 (Fin n → 𝔽)) : ℕ := minDist (dualCode C)
 
