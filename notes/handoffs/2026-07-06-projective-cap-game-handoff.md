@@ -72,7 +72,8 @@ steering family.
 | 17 | P | `esc` campaign; mixed on-conic buckets; C30 anchored cert book emitted and rules-checked PASS (`210/210`, all on-conic, no caps); canonical q17 cert book emitted and rules-checked PASS (`21/21`, `100,526` nodes); generated canonical transport assembly stub-checks; v5 split removes the `ClassNBase` node-check barrier | full q17 canonical Lean build not yet run/committed; no uniform proof |
 | 19 | P | `esc` campaign; C30 anchored cert book emitted and rules-checked PASS (`272/272`, all on-conic, no caps) | full q19 Lean data/assembly not committed; no uniform proof |
 | 23 | P | C29: all 22 full-`PGL(2,23)` on-conic buckets P; C54: all 22 early-break proof DAGs rules-checked (`241,627,613/241,627,613` records, zero failures); C53 full-PGL bridge is Lean-verified | computed and rules-certified at the S4 bucket layer; Lean certificate consumer/fixed-q assembly still open |
-| all odd q | conjectural P | no counterexample through `q=19`; q=23 has all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
+| 25 | (ON)-route evidence only | C68/C44 (2026-07-10): all 28 full-`PGL(2,25)` on-conic S4 buckets P (0 N, 0 aborted; `s4arena` census, ~6.67h/8GB) — `D(25)=0`, min-witness=q−4=21 (full), `ν(25)=0`, not arc-depleted | S4-rooted on-conic escape layer only, not a full-plane solve; no `PG(2,25)` root value claimed; no bucket-DAG rules-check yet (no C54-style pass) |
+| all odd q | conjectural P | no counterexample through `q=19`; q=23/q=25 have all-P on-conic bucket evidence | strategy-level proof: defect/zone-steering/second-intrusion, not snapshot invariant |
 
 ## Closed Higher-Dimensional Families
 
@@ -601,6 +602,21 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **q=25 on-conic census COMPLETE (2026-07-10, Claude) — all 28 buckets P; not arc-depleted.**
+  Supersedes the mid-census entry below with the final result: the `s4arena --all --log2 29` run
+  finished all 26 remaining buckets (2–27), **28/28 P, 0 N, 0 aborted**, ~6.67 h summed bucket wall
+  time (largest bucket 257.2M positions, idx 3 `[1,2,5,11]`).  `D(25)=0`, `min-witness(25)=q−4=21`
+  (full, not just `≥4`), `ν(25)=0`.  The R7 row is fully resolved: `f_10=f_14=f_16=f_17=P`
+  (`R7=21`, all-P) — cross-validates the C74 dichotomy analysis below independently.  q=25 joins the
+  non-depleted set `{5,7,9,13,19,23,25}`; the C68 `2 → 1 → ?` slide across `{11,17}` rebounds fully
+  rather than continuing toward 0.  Per C74 §6, with the census complete and all-P, "non-depleted ∧
+  L-fails" is confirmed logically impossible — the concurrence-point ESC test (C73 §7 step 0) is
+  left un-run as moot (would need new coordinate-translation tooling for zero decision value at this
+  order); L's stress test now waits for the next genuinely depleted order past q=17.  Reports:
+  [`../2026-07-09-codex-q25-baer-census.md`](../2026-07-09-codex-q25-baer-census.md),
+  [`../2026-07-09-codex-depletion-fraction.md`](../2026-07-09-codex-depletion-fraction.md) (q=25
+  row added), [`../2026-07-10-codex-a5-nbucket-density.md`](../2026-07-10-codex-a5-nbucket-density.md)
+  (`ν(25)=0` added).  Data: `notes/data/c68b-onconic-buckets-q25.txt` (28 rows).
 - **q=25 R7-decider (2026-07-10, mid-census) — `f_10 = P` ⇒ `min-witness(25) ≥ 4`: the knife
   edge REBOUNDS at the first square order; (ON) survives q=25.**  Bucket 10 (rep `[1,2,6,8]`,
   size-720 generic, 223.8M positions) labeled P by the running census, resolving the C74
