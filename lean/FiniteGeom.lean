@@ -11,4 +11,5 @@ import FiniteGeom.Hypergraph
 import FiniteGeom.Code
 import FiniteGeom.EvalCode
 import FiniteGeom.EvalCodeInstance
+import FiniteGeom.MomentCurve
 import FiniteGeom.Completion
