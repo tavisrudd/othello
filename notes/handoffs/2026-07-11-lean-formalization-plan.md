@@ -183,9 +183,13 @@ Two new `[[lean_lib]]` targets wired into `lakefile.toml` (`defaultTargets` too)
   - `FiniteGeom/Hypergraph.lean`: the minimal `Finset`-of-`Finset` hypergraph layer (§3).
     `IsMatching`/`IsTransversal`, matching number `matchingNumber` (`ν`, `sSup` of matching
     sizes), transversal number `transversalNumber` (`τ`, `sInf` of transversal sizes), the
-    pointwise `matching_card_le_transversal_card` (König injection: each matched edge hit by a
-    distinct cover vertex), and `nu_le_tau : ν ≤ τ`. This is the baseline the `(ν,τ)`
-    distribution claims and the `δ_x = τ` invariant (Phase 1 step 2 / `CompletionCore`) build on.
+    pointwise weak-duality injection `matching_card_le_transversal_card` (each matched edge hit
+    by a distinct cover vertex), and `nu_le_tau : ν ≤ τ`. The definitions are pinned by
+    `card_le_matchingNumber` / `transversalNumber_le_card` (upper/lower bound + attainment) and
+    exercised on a concrete one-edge hypergraph (`ν = τ = 1`). Baseline for the `(ν,τ)`
+    distribution claims and the `δ_x = τ` invariant (Phase 1 step 2 / `CompletionCore`).
+    Framing note: this is *weak duality* (the elementary `ν ≤ τ`), **not** König's equality
+    `ν = τ` (bipartite-only, not claimed).
 
   Kept minimal per decision 1 (abstract-first); the concrete `𝔽_q` generator-matrix /
   dual-distance code layer is **not built yet** and is the next `FiniteGeom` job.
@@ -198,16 +202,29 @@ Two new `[[lean_lib]]` targets wired into `lakefile.toml` (`defaultTargets` too)
   - `transfer_single_block` (Part B, budget `< 2·d(I⊥)`): at most one nonzero block — the "no
     new cross-block repair supports" content.
   - `transfer_lemma`: combined.
-- **`RepairCodes/Q9Seed.lean`** — decision-1 non-vacuity guard: a concrete two-block witness
-  `q9SeedToy` (one nonzero weight-4 inner-dual block, one zero block) discharging every
-  `ConcatDualWord` field, with an `example` applying `transfer_lemma` to a *nontrivial*
-  single-block verdict (card = 1). Docstring records the **real `q = 9` obligation** (inner
-  `C₀ = [10,4,6]_9`, `dI = 4`, `dO ≥ 5`, `s = 4`, `(ν,τ)` distribution) as the tracked follow-up,
-  blocked on the concrete `FiniteGeom` code layer + trace-form nondegeneracy.
+- **`RepairCodes/Q9Seed.lean`** — decision-1 non-vacuity guard: a concrete two-block **consistency
+  witness** `q9SeedToy` (one nonzero weight-4 inner-dual block, one zero block) discharging every
+  `ConcatDualWord` field, with an `example` applying `transfer_lemma` to a single-block verdict
+  witnessed by an actual nonzero block (card = 1). Docstring records the **real `q = 9` obligation**
+  (inner `C₀ = [10,4,6]_9`, `dI = 4`, `dO ≥ 5`, `s = 4`, `(ν,τ)` distribution) as the tracked
+  follow-up, blocked on the concrete `FiniteGeom` code layer + trace-form nondegeneracy — and is
+  explicit that the witness establishes only interface *consistency/inhabitation*, not the real
+  discharge, and cannot (by design) exercise `transfer_blockwise`'s `exfalso` branch.
+
+**Referee-hardening (framing + hypothesis surface):** the transfer lemma is framed as the finite
+*counting corollary* the sweep flags as candidate-new; the classical trace-representation /
+Chen–Ling–Xing dual-decomposition step is **not** claimed as ours — it enters as named
+`ConcatDualWord` fields, and the theorems are stated as holding "in the model `ConcatDualWord`",
+conditional on instantiation. Hypothesis surface tightened: `hpos` replaced by the
+manifestly-true `innerDual_zero` (`0 ∈ I⊥`) + `blockWt_eq_zero` (Hamming weight zero iff zero
+vector), from which the weight-≥1 fact is derived. "No imported analytic input" is stated
+precisely (the Sauermann / Ellenberg–Gijswijt asymptotics are simply not used by this finite
+lemma; they are not silently assumed).
 
 **Audit gate (passes):** `#print axioms` on `transfer_lemma`, `transfer_blockwise`,
-`transfer_single_block`, `nu_le_tau`, `matching_card_le_transversal_card`, and the `FiniteGeom`
-weight lemmas = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.
+`transfer_single_block`, `q9SeedToy`, `nu_le_tau`, `matching_card_le_transversal_card`,
+`card_le_matchingNumber`, `transversalNumber_le_card`, and the `FiniteGeom` weight lemmas =
+`[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.
 `lake build FiniteGeom RepairCodes` clean, no warnings.
 
 **Next steps (in order):**
@@ -239,3 +256,23 @@ weight lemmas = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`,
   (generator matrix / dual distance over `𝔽_q`) is still the outstanding Phase-0 job and the
   blocker for the real `q = 9` discharge and `δ_x = τ`.
 - Second commit this session.
+
+### Handoff Note — 2026-07-11 (cont.: referee-hardening pass)
+
+- Passed the whole slice through an adversarial-referee lens for both math and framing:
+  - **Framing (names/docs/comments):** removed overclaims. The transfer lemma is now framed as
+    the finite counting corollary (the sweep's candidate-new content), with the classical
+    trace/Chen–Ling–Xing input explicitly *assumed* via named fields and the theorems stated as
+    holding "in the model `ConcatDualWord`" (conditional on instantiation). Fixed the hypergraph
+    lemma's "König-type" label → "weak duality" (ν ≤ τ is elementary; König's ν = τ is
+    bipartite-only and not claimed). Q9Seed reframed as a *consistency witness*, not a discharge.
+  - **Hypothesis surface:** replaced `hpos` with the manifestly-true `innerDual_zero` +
+    `blockWt_eq_zero`, so every `ConcatDualWord` field is a self-evident property of the real
+    object (a referee can check faithfulness field-by-field) rather than a compound assumption.
+  - **Cheap de-risks landed:** `card_le_matchingNumber` / `transversalNumber_le_card` pin
+    `ν`/`τ` to their intended extremal meanings (upper/lower bound + attainment, proved via the
+    correctly-oriented `le_csSup`/`Nat.sInf_le`, which by construction catches a def swap); plus a
+    concrete one-edge-hypergraph `example` proving `ν = τ = 1` end-to-end.
+- Known honest gap (documented, not hidden): the only numeric hypergraph instance has `ν = τ`;
+  a `τ > ν` instance is deferred to the code-derived repair hypergraph (needs the code layer).
+- Build green, all headline results + the witness `#print axioms`-clean. Third commit this session.

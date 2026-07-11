@@ -11,13 +11,20 @@ hypergraph is its edge set `H : Finset (Finset V)` — in the LRC application th
 edges are the recovery/repair sets of a coordinate. We define the matching
 number `ν(H)` (largest set of pairwise-disjoint recovery sets = disjoint
 availability) and the transversal number `τ(H)` (smallest hitting set =
-adversarial cover), and prove the König-type inequality `ν ≤ τ`.
+adversarial cover), and prove the elementary weak-duality bound `ν ≤ τ`.
 
-The strict gap `τ > ν` on a positive fraction of coordinates is the whole point
-of the repair-hypergraph transfer (`RepairCodes` §1.4) and the `δ_x = τ`
+This is the *easy* direction only — `ν ≤ τ` holds for every hypergraph. It is
+**not** König's theorem, whose equality `ν = τ` needs bipartiteness and is not
+claimed here. The definitions are pinned by `card_le_matchingNumber` /
+`transversalNumber_le_card` (each is the intended extremal value, upper/lower
+bound + attained), and exercised on a concrete hypergraph in the examples below.
+
+The strict gap `τ > ν` on a positive fraction of coordinates is the point of the
+repair-hypergraph transfer (`RepairCodes` §1.4) and the `δ_x = τ`
 completion-distance invariant shared into `CompletionCore` (Phase 1 step 2);
-`ν ≤ τ` is the baseline those build on. Self-contained combinatorics — no field
-or code structure appears here.
+`ν ≤ τ` is the baseline those build on. A code-derived `τ > ν` instance waits on
+the concrete `FiniteGeom` code layer. Self-contained combinatorics — no field or
+code structure appears here.
 -/
 
 namespace FiniteGeom
@@ -36,9 +43,11 @@ def IsTransversal (H : Finset (Finset V)) (T : Finset V) : Prop :=
   ∀ ⦃e⦄, e ∈ H → (T ∩ e).Nonempty
 
 omit [Fintype V] in
-/-- **König-type inequality, pointwise.** Any matching is no larger than any
-transversal: each matched edge is hit by the cover, and matched edges being
-pairwise disjoint, distinct edges are hit by distinct cover vertices. -/
+/-- **Weak duality, pointwise.** Any matching is no larger than any transversal
+(the elementary `ν ≤ τ` direction — *not* König's equality, which needs
+bipartiteness and is not claimed): each matched edge is hit by the cover, and
+matched edges being pairwise disjoint, distinct edges are hit by distinct cover
+vertices. -/
 theorem matching_card_le_transversal_card {H M : Finset (Finset V)} {T : Finset V}
     (hM : IsMatching H M) (hT : IsTransversal H T) : M.card ≤ T.card := by
   classical
@@ -74,6 +83,22 @@ open scoped Classical in
 noncomputable def transversalNumber (H : Finset (Finset V)) : ℕ :=
   sInf {n | ∃ T, IsTransversal H T ∧ T.card = n}
 
+omit [Fintype V] [DecidableEq V] in
+/-- `ν(H)` is an upper bound on every matching size: `ν` is the *sup*. Together
+with attainment (`Nat.sSup_mem`) this pins `matchingNumber` to the intended
+"largest matching size". -/
+theorem card_le_matchingNumber {H M : Finset (Finset V)} (hM : IsMatching H M) :
+    M.card ≤ matchingNumber H :=
+  le_csSup ⟨H.card, by rintro n ⟨M', hM', rfl⟩; exact card_le_card hM'.1⟩ ⟨M, hM, rfl⟩
+
+omit [Fintype V] in
+/-- `τ(H)` is a lower bound on every transversal size: `τ` is the *inf*. Together
+with attainment (`Nat.sInf_mem`) this pins `transversalNumber` to the intended
+"smallest transversal size". -/
+theorem transversalNumber_le_card {H : Finset (Finset V)} {T : Finset V}
+    (hT : IsTransversal H T) : transversalNumber H ≤ T.card :=
+  Nat.sInf_le ⟨T, hT, rfl⟩
+
 /-- **`ν(H) ≤ τ(H)`.** The matching number never exceeds the transversal number
 (assuming every edge is nonempty, so that a transversal exists). -/
 theorem nu_le_tau (H : Finset (Finset V)) (hne : ∀ e ∈ H, e.Nonempty) :
@@ -92,5 +117,34 @@ theorem nu_le_tau (H : Finset (Finset V)) (hne : ∀ e ∈ H, e.Nonempty) :
       = M.card := hMcard.symm
     _ ≤ T.card := matching_card_le_transversal_card hM hT
     _ = sInf {n | ∃ T, IsTransversal H T ∧ T.card = n} := hTcard
+
+/-- Concrete exercise of the whole API: the one-edge hypergraph `{{0,1}}` on
+`Fin 2` has `ν = τ = 1`. Drives `IsMatching` / `IsTransversal`, the definition
+pins (`card_le_matchingNumber`, `transversalNumber_le_card`), and `nu_le_tau`
+end-to-end, catching a `sSup`/`sInf` swap or off-by-one in the definitions. -/
+example :
+    matchingNumber ({{0, 1}} : Finset (Finset (Fin 2))) = 1 ∧
+      transversalNumber ({{0, 1}} : Finset (Finset (Fin 2))) = 1 := by
+  have hM : IsMatching ({{0, 1}} : Finset (Finset (Fin 2))) {{0, 1}} := by
+    refine ⟨subset_refl _, ?_⟩
+    intro a ha b hb hab
+    rw [mem_singleton] at ha hb
+    exact absurd (ha.trans hb.symm) hab
+  have hT : IsTransversal ({{0, 1}} : Finset (Finset (Fin 2))) {0} := by
+    intro e he
+    rw [mem_singleton] at he
+    subst he
+    exact ⟨0, by decide⟩
+  have hne : ∀ e ∈ ({{0, 1}} : Finset (Finset (Fin 2))), e.Nonempty := by
+    intro e he
+    rw [mem_singleton] at he
+    subst he
+    exact ⟨0, by decide⟩
+  have h1 : (1 : ℕ) ≤ matchingNumber ({{0, 1}} : Finset (Finset (Fin 2))) := by
+    simpa using card_le_matchingNumber hM
+  have h2 : transversalNumber ({{0, 1}} : Finset (Finset (Fin 2))) ≤ 1 := by
+    simpa using transversalNumber_le_card hT
+  have h3 := nu_le_tau ({{0, 1}} : Finset (Finset (Fin 2))) hne
+  exact ⟨by omega, by omega⟩
 
 end FiniteGeom
