@@ -177,12 +177,13 @@ exist, so the dichotomy data is untouched).
   (P) completion.** Report:
   [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md); script
   `rust/scripts/c68b_nbucket_density.py`.
-  **q=25 resolution (2026-07-10):** the R7-decider `f_10 = P` gives **`min-witness(25) ≥ 4`** —
-  the min-witness slide `2 → 1` REBOUNDS at the first square order, and `ν(25)` is tracking
-  toward 0 (census 11/28, all P — including the size-720 generics where q=17-style depletion
-  strikes first).  The A5 anchor `maxonN(q) ≤ q−5` holds at q=25 with margin; the A4/Baer square
-  watch is weakening; the open A5 arithmetic question shifts to **which orders beyond {11,17}
-  deplete at all** (next candidates among q = 29, 31, …).
+  **q=25 resolution (2026-07-10, census COMPLETE):** the full `s4arena --all` census closed all
+  28 on-conic buckets **28/28 P** ⇒ **`ν(25)=0`, `min-witness(25)=q−4=21` (full)** — the R7-decider
+  `f_10=P` (min-witness ≥ 4) is subsumed by the full-P result; the min-witness slide `2 → 1`
+  REBOUNDS fully at the first square order (not merely arrested), and q=25 joins the non-depleted
+  set `{5,7,9,13,19,23,25}`.  The A5 anchor `maxonN(q) ≤ q−5` holds at q=25 with margin; the
+  A4/Baer square watch is retired short of q=49; the open A5 arithmetic question shifts to **which
+  orders beyond {11,17} deplete at all** (next candidates among q = 29, 31, …).
 - **C72 [REPORTED 2026-07-10 — NEGATIVE (read b), with a partial-identity gift]** — PGL
   permutation-module / Johnson-scheme decomposition of the on-conic value function `f_q`.  A
   **concentration instrument** for the link-sum near-point-mass (`onP(A) = Σ_{x∉A} f_q(A∪{x})`,
@@ -224,8 +225,13 @@ exist, so the dichotomy data is untouched).
   q∈{11,13,17,19} (0 failures; q=17 base rate 49% → 100%, so meaningful).  On-conic form 21/21 at
   q=17 but 6/8 at q=11 (misses the 2 knife-edge classes).  **Failure gate 2 refuted** — incidence
   recovers the P witness (pivot NOT witness-anchored at q=17).  Recursion lemma tested (existence),
-  not proved (game-value reduction needs the tree).  Pre-registered q=25 out-of-sample test on
-  record.  Report: [`2026-07-10-codex-c73-secant-packet.md`](2026-07-10-codex-c73-secant-packet.md).
+  not proved (game-value reduction needs the tree).  **q=25 out-of-sample test CLOSED BY CENSUS
+  (2026-07-10):** the on-conic census is all-P (28/28), so there is no extremal N class at q=25 —
+  the ON form is vacuously safe (its predicted fragility had no class to fail on) and the ESC-form
+  concurrence solve is decision-moot (per C74 §6, "non-depleted ∧ L-fails" is logically
+  impossible).  Sole un-scored residual: the round-2 `(1:15:9)` off-conic concurrence point (not
+  covered by the on-conic census) — optional selector-existence datum, no longer decision-bearing.
+  Report: [`2026-07-10-codex-c73-secant-packet.md`](2026-07-10-codex-c73-secant-packet.md).
 - **C74 [REPORTED 2026-07-10 (Codex round 2; verified by Fable) — structure PROVED, stabilizer
   gate CLOSED with proof, recursion target sharpened]** —
   [`2026-07-10-codex-c74-capacity-family.md`](2026-07-10-codex-c74-capacity-family.md).
@@ -254,8 +260,10 @@ exist, so the dichotomy data is untouched).
   10/16/17 P ⇒ ON survives but `L`'s ON form fails and its ESC form is the decisive independent
   test; all four N ⇒ ON refuted at q=25.  The "non-depleted ∧ L-fails" cell is logically
   impossible.  Original spec §C74 below (its stabilizer-family gate is superseded as above).
-  **Dichotomy RESOLVED (2026-07-10, mid-census): `f_10 = P` ⇒ `min-witness(25) ≥ 4` — the
-  rebound branch.  (ON) survives q=25; buckets 14/16/17 now refine only `L`'s ON form.**
+  **Dichotomy RESOLVED — CENSUS COMPLETE (2026-07-10): `f_10=f_14=f_16=f_17=P` ⇒ `R7=21`, so
+  `min-witness(25)=q−4=21` (full), NOT merely ≥4 — the full rebound branch.  (ON) survives q=25;
+  every R7 bucket is P, so `L`'s ON form has no extremal class to fail on (vacuously safe).  The
+  off-conic `(1:15:9)` concurrence point remains an optional, decision-moot scoring datum.**
 - **Codex round-2 umbrella report (2026-07-10; verified by Fable):**
   [`2026-07-10-codex-odd-plane-round2-report.md`](2026-07-10-codex-odd-plane-round2-report.md) —
   beyond the C74 results above: (i) the **R2-2 kill-set top-k refutation** (recorded at the item-7
@@ -268,28 +276,32 @@ exist, so the dichotomy data is untouched).
   before its label exists (verified concurrent + legal, label-blind); (iii) **(L_forall)** named:
   "every maximum-incidence candidate secant carries a P child" — the strong C73-tested form
   (68/68), implies the conjecture, logically independent of (ON), and the more robust localized
-  anchor given the q=25 0-or-≥3 dichotomy.  **Recommended round 3:** the legal involution-pencil
-  lemma (high proof effort — value-blind Good class over `a ∈ F_q^* \ P2(U)` with labelled
-  second-intruder kill maps); the q=25 targeted unblind (buckets 10/14/16/17 + the `(1:15:9)`
-  point, before any broader q=25 work); the 7-class q=23 exception analysis (discharge +
-  exceptions form).  Scripts `rust/scripts/c74_concurrence.py`, `r2_killset_topk.py`.
+  anchor given the q=25 0-or-≥3 dichotomy — now resolved to the rebound branch (census all-P).
+  **Census update (2026-07-10):** buckets 10/14/16/17 are all P (R7=21 all-P), so the on-conic
+  half of the q=25 targeted unblind is closed; the only un-scored piece is the off-conic
+  concurrence point `(1:15:9)` (predicted P, verified concurrent+legal label-blind — its game
+  value is not settled by the on-conic census).  **Recommended round 3:** the legal
+  involution-pencil lemma (high proof effort — value-blind Good class over `a ∈ F_q^* \ P2(U)`
+  with labelled second-intruder kill maps); the optional `(1:15:9)` off-conic scoring (selector-
+  existence datum only, decision-moot); the 7-class q=23 exception analysis (discharge + exceptions
+  form).  Scripts `rust/scripts/c74_concurrence.py`, `r2_killset_topk.py`.
 
 **Independent lanes (parallel; pull when unblocked):**
 
 - **C30** — generated-checker refactor → q17/q19 Lean assembly (engineering, long-running).
   The v5 full q17 canonical build now projects above 21.5 h sequential, tripping the task's
   explicit ~10 h user-launch gate; do not launch it implicitly.
-- **C43 [REPORTED 2026-07-09 — `PG(4,3) = P`]** / **C44** — the former
-  even-dimensional evidence vacuum is closed by the first direct P datum; q=25 census remains an
-  active compute lane (**full `--log2 29` census RUNNING**; 11/28 buckets labeled, ALL P; outcome
-  branches pre-registered against the (ON)-vs-conjecture bifurcation — see the C44 entry, item 7).
-  **R7-decider RESOLVED (2026-07-10, mid-census):** `f_10 = P` (size-720 generic, 223.8M
-  positions) ⇒ `R7 ≥ 6` ⇒ **`min-witness(25) ≥ 4`** — the C74 dichotomy lands on the REBOUND
-  branch: the `2 → 1` knife-edge slide breaks upward at the first square order and **(ON)
-  survives q=25**.  Remaining census payload: `ν(25)` (tracking toward 0 — non-depleted) and
-  buckets 14/16/17 (refine `L`'s ON form only, per the C74 §6 tree); the concurrence point
-  `(1:15:9)` is a post-census targeted off-conic solve (C73 §7 step 0).  C43's optional
-  follow-up is strategy extraction, not another sizing run.
+- **C43 [REPORTED 2026-07-09 — `PG(4,3) = P`]** / **C44 [REPORTED 2026-07-10 — q=25 census
+  COMPLETE, 28/28 P, not depleted]** — the former even-dimensional evidence vacuum is closed by
+  the first direct P datum; the q=25 on-conic census is **DONE** (`s4arena --all --log2 29`, all
+  28 full-`PGL(2,25)` buckets P, 0 N, 0 aborted, ~6.67 h / 8 GB).  **`D(25)=0`,
+  `min-witness(25)=q−4=21` (full), `ν(25)=0`** — the C74 dichotomy landed on the REBOUND branch:
+  the `2 → 1` knife-edge slide across `{11,17}` rebounds fully at the first square order and
+  **(ON) survives q=25**; q=25 joins the non-depleted set `{5,7,9,13,19,23,25}`.  No open census
+  payload remains (`ν(25)`, buckets 14/16/17 all resolved P; the off-conic `(1:15:9)` concurrence
+  point is an optional post-census scoring datum, decision-moot per C74 §6).  C43's optional
+  follow-up is strategy extraction, not another sizing run.  **Next A5/compute lane: the
+  next-depleted-order hunt (q=29, 31) — gated; size before any run.**
 - **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
   (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
   pairwise non-isomorphic (distinct complete-arc spectra), so the odd-plane P-property is invariant
@@ -3025,9 +3037,10 @@ statement.
    a proof that selecting the observed secant requires knowing the unique P on-conic child (that
    outcome would confirm the pivot layer is irreducibly witness-anchored — report it plainly, it
    sharpens the C44 branch-(ii) risk).
-5. **q=25 hook:** when the running census lands, test the winning formula (or the failure
-   verdict) on the first depleted q=25 fan before reading its labels — the pre-registered
-   out-of-sample test.
+5. **q=25 hook [CLOSED BY CENSUS 2026-07-10]:** the census landed all-P (28/28), so there is no
+   depleted q=25 fan to test the formula against — the pre-registered out-of-sample test is moot
+   (ON form vacuously safe; no extremal N class).  The only un-scored piece is the off-conic
+   `(1:15:9)` concurrence point (optional, decision-moot).
 
 Budget: hours; existing data + small algebra, single-core, ≤ 2 GB.  This task stays meaningful
 whichever way q=25 lands: it is the structure question for the C44 item-7 branch-(ii) pivot.

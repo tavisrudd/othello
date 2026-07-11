@@ -684,9 +684,12 @@ Recently reported:
   the C44 branch-(ii)/co-depletion risk is *reduced* (residual worry: the q=11 knife-edge tie
   signature may recur at larger depleted orders).  Un-closed step: the local recursion lemma is
   tested (existence, 0 failures), not proved — the game-value reduction needs the tree.
-  **Pre-registered q=25 test recorded** (label-blind: freeze `L(A)` per class via
-  `c73_characterize.py 25`, then unblind; ESC form predicted TRUE, ON form predicted fragile
-  exactly at the extremal class).  Report:
+  **q=25 pre-registration CLOSED BY CENSUS (2026-07-10):** the on-conic census is all-P (28/28),
+  so q=25 has no extremal N class — the ON form is vacuously safe (predicted fragility had nothing
+  to fail on) and the ESC-form solve is decision-moot (C74 §6: "non-depleted ∧ L-fails" is
+  logically impossible).  Sole un-scored residual: the off-conic `(1:15:9)` concurrence point
+  (not covered by the on-conic census) — optional selector-existence datum, no longer
+  decision-bearing.  Report:
   [`../2026-07-10-codex-c73-secant-packet.md`](../2026-07-10-codex-c73-secant-packet.md);
   scripts `rust/scripts/c73_*.py`.
 - **C70 (2026-07-10, Claude/Opus) — exact collision charge: formulas PROVED, but the truncation
@@ -753,8 +756,9 @@ Recently reported:
   extremal-type count), and value separates cleanly by bucket fiber size (P = rare/special
   completions, N = generic) → **A5 lead: every 5-point frame `{∞,0,t1,t2,t3}` admits a special (P)
   completion.**  Tooling: built + validated `s4arena` (arena-backed S4 labeling, commit `60c87fb`);
-  q=25 bucket 0 certified P (213.5M positions); an 8 GB `--log2 29` q=25 census is running to settle
-  q=25's depletion status.  Report:
+  q=25 bucket 0 certified P (213.5M positions); the 8 GB `--log2 29` q=25 census is **COMPLETE
+  (2026-07-10): 28/28 buckets P, `ν(25)=0`, not depleted** — the ν-doubling trend does NOT continue
+  past q=17 (breaks at the first square order).  Report:
   [`../2026-07-10-codex-a5-nbucket-density.md`](../2026-07-10-codex-a5-nbucket-density.md);
   scripts `c68b_nbucket_density.py`; q=25 census sizing in
   [`../2026-07-09-codex-q25-baer-census.md`](../2026-07-09-codex-q25-baer-census.md).
