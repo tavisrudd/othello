@@ -669,68 +669,20 @@ References:
 
 ## Handoff Notes
 
-2026-07-11 C77 (Claude, lane C / Cluster-2): **the amortized-bank "debt growth" is a reservoir
-bookkeeping artifact, not the game getting harder — and the fix is a clean uniform lemma.** Two new
-solve-free instruments (`s4ledger --pv`, `s4spike` in `notes/2026-07-06-grid-cap-solver.rs`). (1) The
-minimax bank debt is a *single first-intrusion spike* (Ψ rises only at ply5, monotone after); the
-first probe's "flat 22 through q19" was an artifact of q17/q19 being the only orders whose Ψ-envelope
-peaks at the first intrusion — the raw envelope actually grows (22/22/65/71/≥98/≥142 across
-q17/19/23/25/27/29). (2) The growth is *entirely* the C63 `reservoir_slack` term `f5 = zone_v −
-reservoir_floor`, whose loose Hall floor `(q−k)(q−k−C(k,2)−1)` melts to 0 with depth and releases raw
-support into Ψ. Capping `f5` by the move budget `(q+1)−k` cuts the debt ~10×; dropping reservoir
-entirely (`6·defect − 4·intruders − 2·[xor]`) gives **debt 0** through the checked depth. (3) Why:
-`max_defect_excess = 0` at every order — `defect_components ≤ defect_root = q−5` for every reachable
-state, so `DROP ≤ 6·defect_root = DROP_root + 2`. **Reshaped lever:** drop the reservoir summand; the
-concrete on-box, reservoir/Hall-free sublemma is `defect_components ≤ q−5` for all reachable residual
-states. **Two crux caveats:** DROP is not a per-edge Lyapunov (defect-recovery jumps grow 8→34 but
-stay below root), and a peak-bound is **not yet a P-certificate** (the real remaining crux). **Cheap
-cross-lane lead:** both live lanes now hit the same `q−5` (A5 `maxonN ≤ q−5`; `defect_root = q−5`) —
-check whether they are one object before more probes. Report:
-[`../2026-07-11-c77-ledger-spike-structure.md`](../2026-07-11-c77-ledger-spike-structure.md) (§6–8);
-first probe [`../2026-07-11-c77-ledger-bank-probe.md`](../2026-07-11-c77-ledger-bank-probe.md).
+Dated session/finding notes live in the companion archive (append-only), **not here** — this live doc
+is the current-state map only; load-bearing residue is condensed in the Near-Term Queue digest above
+and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, newest first, in
+[`done/2026-07-08-projective-cap-game-handoff-archive.md`](done/2026-07-08-projective-cap-game-handoff-archive.md):
 
-2026-07-11 C75 (Claude, lane C / Cluster-2, Codex asleep): **the value-blind reply selector is
-impossible in the program feature space** — a structural explanation of Codex's C61/C62/C63
-"every selector family is uniform-negative" wall. Reusing the on-disk exact Grundy dumps (no
-re-solve), dumped every legal reply's full value-blind feature vector + Grundy label at the hard
-root-frame obligations of the q=13/17/19 root DAGs and asked whether any function of the features
-picks a winning reply everywhere. **19 of 108 hard obligations contain a winning (P, ΔΨ<0) reply and
-a losing (N) reply that are byte-identical on all 17 features** {geom, live, comp, xor_zero, Ψ, ΔΨ,
-χ, polar, ray-profile} — a superset of every coordinate the selector families use. Verified witness
-(q=13, opp `11,0`): P `6,6`(g0) and N `12,3`(g2) identical on every feature. Consequences: (i) the
-wall is feature-*completeness*, not coordinate-choice — no selector (linear or nonlinear) over these
-invariants wins; (ii) an **order-sensitive** rule does not escape it (every twin is within a single
-q); (iii) the feature map is Stab-invariant but not orbit-injective (collapses a P-orbit onto an
-N-orbit); (iv) the deficit **grows with q** (6% → 7% → 39%), so it is structural and worsening, the
-opposite of the C64/C69 small-field near-hits. **Named next step:** any winning selector needs a
-strictly finer PGL-invariant coordinate; the 19 witness pairs are the concrete design target. This
-also re-weights the (ON) route toward the **amortized/ledger** potential (a bank tolerating ΔΨ≥0),
-since a pointwise winning selector over the present invariants is ruled out. A correctness fix was
-load-bearing: the stock `root_replies` dump omitted χ/polar (naive check reported 82 false twins;
-true count 19 with them added), so the solver's `root_replies` emitter was patched to carry them.
-Report: [`../2026-07-11-c75-value-blind-selector-impossibility.md`](../2026-07-11-c75-value-blind-selector-impossibility.md);
-script `rust/scripts/c75_linear_selector_lp.py`; solver `gridcap-c75`.
-
-2026-07-11 arc-depletion-arithmetic probe (Claude, lane A, delegated + verified): tested whether an
-arc-theoretic invariant of `PG(2,q)` characterizes the depleted set `{11,17}` (C68's open margin
-question). **No arc invariant fits** — `m'(2,q)` (Ball–Lavrauw arXiv:1705.10940) and every natural
-transform of it flag a *different* set ({7,9,11,13}, {9,13,17}, or {9,11}), never {11,17}; consistent
-with the value living in the game tree (C55/C64/C69 negatives). The only rule fitting all nine tested
-orders (incl. the load-bearing undepleted q=23/25) is purely arithmetic and mechanism-free: **q is a
-twin-lower prime with q−2 composite** (q, q+2 prime; q−2 composite) — the minimal repair of the
-failed mod-6 rule. **Prediction: q=29 DEPLETED** (twin (29,31)); q=31, q=47 undepleted. Cheapest
-positive test is q=29 — the census the program already wants (settles C68's min-witness margin
-2→1→?). But q=29 alone cannot separate twin-primality from a "≡5 mod 6 window-interior" null; only a
-**non-twin ≡5 mod 6 prime (q=47/53)** does (twin-rule says undepleted, residue says depleted).
-Flagged suspect: twin-primality has no known link to PG(2,q) arc/oval structure — a 2-point
-correlate, presented as falsifiable, not a proven mechanism. Report:
-[`../2026-07-11-arc-depletion-arithmetic-probe.md`](../2026-07-11-arc-depletion-arithmetic-probe.md).
-
-The 2026-07-10 Codex/Claude session handoff notes (C30 build-sizing, C44 bucket cross-check, the
-C55/C64/C69 config-mechanism closes, the C61/C62/C63 selector iteration, the Fable steering
-corrections, and the PG(4,3) documentation-sync note) are settled session history; their
-load-bearing residue is condensed in the Near-Term Queue digest above, and the full notes are in the
-[archive](done/2026-07-08-projective-cap-game-handoff-archive.md).
+- C77 — amortized-bank "debt growth" is a reservoir bookkeeping artifact; the conic ledger
+  `6·defect − 4·intruders − 2·[xor]` has debt 0, reducing to the sublemma `defect_components ≤ q−5`;
+  P-certificate is the remaining crux; `q−5` cross-lane lead with A5.
+- C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
+  amortized/ledger potential).
+- arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits
+  (flagged suspect, falsifiable at q=47/53).
+- 2026-07-10 Codex/Claude notes (C30 build-sizing, C44 bucket cross-check, C55/C64/C69
+  config-mechanism closes, C61/C62/C63 selector iteration, Fable steering corrections, PG(4,3) doc sync).
 
 ## Archive
 
