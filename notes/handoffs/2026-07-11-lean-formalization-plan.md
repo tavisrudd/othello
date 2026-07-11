@@ -1,8 +1,9 @@
 # Lean formalization plan — the -10 / -11 PROVED corpus
 
 **Date**: 2026-07-11
-**Status**: PLAN APPROVED (`yc` under `mi`, 2026-07-11); the three decisions in §5 are resolved.
-Execution deferred to a fresh session — no `lean/` folder created yet. Resume at Phase 0/1.
+**Status**: IN PROGRESS. Plan approved (`yc` under `mi`, 2026-07-11); the three §5 decisions
+are resolved. **Phase 0 MVP + Phase 1 step 1 (transfer lemma) landed** — see §7 Progress.
+Resume at Phase 1 step 2 (`δ_x = τ`) after the concrete `FiniteGeom` `𝔽_q` code layer.
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
 [baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
 [completion-core-rigidity](../2026-07-10-completion-core-rigidity-upgrades.md),
@@ -168,3 +169,54 @@ Backing scripts (COMPUTED-EXACT sources for the `[CERT]` items) are tracked unde
 [`notes/scripts/2026-07-11-coding-mds-sweep/`](../scripts/2026-07-11-coding-mds-sweep/) with frozen
 hashes; each `[CERT]` Lean cert should regenerate from the corresponding script and be checked by a
 rules-only validator, mirroring `ProjectiveCap/CertData/`.
+
+## 7. Progress
+
+### Phase 0 + Phase 1 step 1 — landed (`lean/`, 2026-07-11)
+
+Two new `[[lean_lib]]` targets wired into `lakefile.toml` (`defaultTargets` too):
+
+- **`FiniteGeom`** (shared base) — `FiniteGeom/Weight.lean`: the q-ary weight-counting
+  arithmetic the transfer argument stands on. `card_filter_le_sum` (#nonzero coords ≤ total
+  weight) and `mul_card_filter_le_sum` (`d · #coords ≤ total weight`). Pure `Finset`/`ℕ`, no
+  code/field structure — the piece `CompletionCore` will also cite for `δ_x = τ`. Kept minimal
+  per decision 1 (abstract-first); the concrete `𝔽_q` generator-matrix / dual-distance layer is
+  **not built yet** and is the next `FiniteGeom` job.
+- **`RepairCodes`** — `RepairCodes/Transfer.lean`: the **concatenation transfer lemma (§1.4)**,
+  the crux self-contained novelty. Stated over an abstract-first interface `ConcatDualWord`
+  (decision 1): the deep structural inputs — trace-representation faithfulness (`hbeta`),
+  `β ∈ O⊥` (`houter`), inner dual distance (`hdist`) — are **named fields**, visible in the
+  signature, zero global axioms (decision 3, preferred form). Proved:
+  - `transfer_blockwise` (Part A): every block of a `< d(O⊥)`-weight dual word lies in `I⊥`.
+  - `transfer_single_block` (Part B, budget `< 2·d(I⊥)`): at most one nonzero block — the "no
+    new cross-block repair supports" content.
+  - `transfer_lemma`: combined.
+- **`RepairCodes/Q9Seed.lean`** — decision-1 non-vacuity guard: a concrete two-block witness
+  `q9SeedToy` (one nonzero weight-4 inner-dual block, one zero block) discharging every
+  `ConcatDualWord` field, with an `example` applying `transfer_lemma` to a *nontrivial*
+  single-block verdict (card = 1). Docstring records the **real `q = 9` obligation** (inner
+  `C₀ = [10,4,6]_9`, `dI = 4`, `dO ≥ 5`, `s = 4`, `(ν,τ)` distribution) as the tracked follow-up,
+  blocked on the concrete `FiniteGeom` code layer + trace-form nondegeneracy.
+
+**Audit gate (passes):** `#print axioms` on `transfer_lemma`, `transfer_blockwise`,
+`transfer_single_block`, and both `FiniteGeom` lemmas = `[propext, Classical.choice, Quot.sound]`
+only — no `sorryAx`, no `native_decide`. `lake build FiniteGeom RepairCodes` clean, no warnings.
+
+**Next steps (in order):**
+1. Concrete `FiniteGeom` code layer: generator matrix over `𝔽_q`, dual code, min/dual distance
+   (`Mathlib.LinearAlgebra` + `CodingTheory`), so `ConcatDualWord` can be instantiated for real.
+2. Discharge the **real `q = 9` seed** against it (retire the toy witness's role) — needs the
+   trace-form nondegeneracy (`Algebra.trace` / `traceForm_nondegenerate`) for `hbeta` and the
+   Chen–Ling–Xing dual decomposition for `houter`.
+3. Phase 1 step 2: `δ_x = τ(𝓑_x)` completion-distance invariant (shared into `CompletionCore`).
+4. Phase 1 step 4: uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`.
+
+### Handoff Note — 2026-07-11 (session: lean-formalization Phase 0/1)
+
+- Landed the FiniteGeom weight base + the RepairCodes concatenation transfer lemma as one thin
+  vertical slice (the plan's recommended first move), abstract-first with the analytic/structural
+  inputs as explicit hypotheses. Build green, axioms clean.
+- No concrete code layer yet — the transfer lemma is currently discharged only by the toy witness;
+  the real `q = 9` instance is the immediate next commitment (blocks the "not vacuous in the
+  intended sense" story, though the interface *is* proven inhabited).
+- Commit: this session (FiniteGeom/RepairCodes libs + lakefile wiring + this handoff update).

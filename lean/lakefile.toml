@@ -1,5 +1,5 @@
 name = "NodeKayles"
-defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens"]
+defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes"]
 
 # mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
 # Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
@@ -26,3 +26,10 @@ name = "ProjectiveCap"
 
 [[lean_lib]]
 name = "Queens"
+
+# Coding/MDS formalization program (notes/handoffs/2026-07-11-lean-formalization-plan.md).
+[[lean_lib]]
+name = "FiniteGeom"
+
+[[lean_lib]]
+name = "RepairCodes"
