@@ -48,15 +48,22 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
   separation, not selection — formally re-routing (ON) to the **amortized/ledger** potential. Report:
   [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
   scripts `rust/scripts/c76_invariant_hunt.py`, `c76_directional_search.py`, `c77_augmented_selector.py`.
-- **C77 [OPEN — first probe REPORTED 2026-07-11; bank is numerically alive]** — amortized/ledger
-  potential: realize Ψ as a bank tolerating local ΔΨ≥0 against a global budget. **New `s4ledger` solver
-  mode measures the minimax peak-Ψ debt on the root DAG: 0 (q13) / 22 (q17) / 22 (q19) — bounded and
-  flat while Ψ_root grows (60/84/96).** So a fixed-capacity bank (~22) absorbs the opponent's forced
-  Ψ-rise through q=19; every scalar-among-P selector hits the optimal ceiling. Next: more orders
-  (q11/23/25), off-root obligations, frame-aware selector, and turn the flat debt into a repay lemma.
-  Probe: [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md); mode `s4ledger`
-  in `notes/2026-07-06-grid-cap-solver.rs`. Origin:
-  [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md).
+- **C77 [OPEN — two probes REPORTED 2026-07-11; "flat bank" REFUTED past q=19, gated to settle]** —
+  amortized/ledger potential: realize Ψ as a bank tolerating local ΔΨ≥0 against a global budget.
+  **Probe 1 (`s4ledger`) measured minimax peak-Ψ debt on the root DAG: 0/22/22 (q13/17/19) — looked
+  bounded/flat. Probe 2 (`--pv` + solve-free `s4spike`) corrects this:** the debt is a *single
+  first-intrusion spike* (Ψ rises only at ply5, monotone-decreasing after), and that spike IS bounded
+  (22–26 through q=31, exact lower bound). **But the raw Ψ-envelope peak migrates deeper (ply5→6→7+)
+  and climbs ~linearly from q=23 on — height above root 22/22/65/71/≥98/≥142 (q17/19/23/25/27/29).**
+  The "flat 22" was an artifact of q17/q19 being the only orders whose envelope peaks at the *first*
+  intrusion. A q-independent bank capacity is now in doubt. The true q≥23 debt lies between the exact
+  ply5 lower bound (~24) and the growing raw envelope; settling it needs the P-restricted root solve
+  (q23 ≈ 25 GB — OOMs this box; gated to a ≥32 GB box; q25 ≈ 370 GB infeasible). Next: pivot the lemma
+  to a **ply5-hold sublemma** (defender's P-restriction keeps the reachable peak at the first
+  intrusion) OR provision a ≥32 GB box for the single q23 root-`1,2,3,4` solve. Probes:
+  [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
+  [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md); modes
+  `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:
   [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md),

@@ -7036,7 +7036,73 @@ struct LedgerSelector {
     key: fn(psi: i32, live: u16, defect: u16, xor_zero: bool) -> Option<(i64, i64, i64)>,
 }
 
-fn solve_s4_ledger(q: usize, t4: &[usize], grundy_path: &str) {
+// C77 shallow spike probe: the full-DAG ledger (solve_s4_ledger) established that the
+// minimax bank_opt equals the *global* Psi-max, and that this max is attained at the
+// first intrusion (size root+1).  So debt = max(0, maxPsi(size root+1) - Psi_root) with NO
+// game solve, computable for gated orders (q>=23) that the full census cannot reach.  This
+// mode BFS-enumerates the root's shallow descendants (default depth 2: sizes 5,6) and
+// reports per-ply max Psi + the argmax first-intrusion cell.  It does NOT restrict to
+// P-reachable states, so per-ply max over all states is an UPPER bound on the reachable
+// peak past ply 5 -- exact at ply 5 (opponent moves freely), an over-estimate deeper.
+fn solve_s4_spike(q: usize, t4: &[usize], depth: usize) {
+    let b = Board::new(q);
+    let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
+    let started = Instant::now();
+    let root_psi = s4_selector_features(&b, &root_occ, &root_chosen, &root_forbidden).psi as i64;
+    let base = root_occ.len();
+    // per-ply: max psi, argmax first-intrusion cell (recorded at ply base+1)
+    let mut per_len_max = vec![i64::MIN; base + depth + 1];
+    let mut per_len_cnt = vec![0usize; base + depth + 1];
+    let mut best5_cell: Option<u16> = None;
+    let mut seen: std::collections::HashSet<u128> = std::collections::HashSet::new();
+    // frontier holds (occ, chosen, forbidden)
+    let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = vec![(root_occ.clone(), root_chosen, root_forbidden)];
+    seen.insert(b.canon(&root_occ));
+    per_len_max[base] = root_psi;
+    per_len_cnt[base] = 1;
+    for _step in 0..depth {
+        let mut next: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
+        for (occ, chosen, forbidden) in &frontier {
+            for z in avail_cells(&b, chosen, forbidden) {
+                let Some((cocc, cchosen, cforb)) = push_cell_state(&b, occ, chosen, forbidden, z as usize) else { continue };
+                let key = b.canon(&cocc);
+                if !seen.insert(key) {
+                    continue;
+                }
+                let l = cocc.len();
+                let f = s4_selector_features(&b, &cocc, &cchosen, &cforb);
+                if (f.psi as i64) > per_len_max[l] {
+                    per_len_max[l] = f.psi as i64;
+                    if l == base + 1 {
+                        best5_cell = Some(z);
+                    }
+                }
+                per_len_cnt[l] += 1;
+                next.push((cocc, cchosen, cforb));
+            }
+        }
+        frontier = next;
+    }
+    let spike5 = per_len_max[base + 1];
+    let debt = (spike5 - root_psi).max(0);
+    let cellstr = best5_cell
+        .map(|z| format!("({},{})", z as usize / q, z as usize % q))
+        .unwrap_or_else(|| "none".to_string());
+    println!(
+        "S4SPIKE q={} t4={:?} cells={:?} psi_root={} ply5_max={} debt_ply5={} argmax_intrusion={}",
+        q, t4, cells, root_psi, spike5, debt, cellstr,
+    );
+    print!("  psi_max_by_ply:");
+    for l in base..=(base + depth) {
+        if per_len_cnt[l] > 0 {
+            print!(" {}:{}({})", l, per_len_max[l], per_len_cnt[l]);
+        }
+    }
+    println!();
+    println!("S4SPIKE-DONE q={} elapsed={:.3}", q, started.elapsed().as_secs_f64());
+}
+
+fn solve_s4_ledger(q: usize, t4: &[usize], grundy_path: &str, want_pv: bool) {
     let b = Board::new(q);
     let (root_occ, _root_chosen, _root_forbidden, cells) = build_s4_root(&b, t4);
     let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
@@ -7127,6 +7193,8 @@ fn solve_s4_ledger(q: usize, t4: &[usize], grundy_path: &str) {
     order.sort_unstable_by_key(|&i| std::cmp::Reverse(states[i].len));
     // bank_opt + one bank per selector
     let mut bank_opt = vec![0i64; n];
+    // opt_child[i] = the child on the optimal-bank principal variation (-1 = terminal/self-peak)
+    let mut opt_child = vec![-1i64; n];
     let mut bank_sel: Vec<Vec<i64>> = selectors.iter().map(|_| vec![0i64; n]).collect();
     for &i in &order {
         let pi = psi[i] as i64;
@@ -7134,14 +7202,21 @@ fn solve_s4_ledger(q: usize, t4: &[usize], grundy_path: &str) {
             // opponent (adversary) maximizes over ALL children; every child is N.
             let mut acc_opt = pi;
             let mut acc_sel = vec![pi; selectors.len()];
+            let mut best_c: i64 = -1;
+            let mut best_c_bank = i64::MIN;
             for &c in &children[i] {
                 let c = c as usize;
                 acc_opt = acc_opt.max(bank_opt[c]);
+                if bank_opt[c] > best_c_bank {
+                    best_c_bank = bank_opt[c];
+                    best_c = c as i64;
+                }
                 for (s, _) in selectors.iter().enumerate() {
                     acc_sel[s] = acc_sel[s].max(bank_sel[s][c]);
                 }
             }
             bank_opt[i] = acc_opt;
+            opt_child[i] = best_c;
             for (s, _) in selectors.iter().enumerate() {
                 bank_sel[s][i] = acc_sel[s];
             }
@@ -7157,10 +7232,16 @@ fn solve_s4_ledger(q: usize, t4: &[usize], grundy_path: &str) {
                 continue;
             }
             let mut best_opt = i64::MAX;
+            let mut best_c: i64 = -1;
             for &c in &pkids {
-                best_opt = best_opt.min(pi.max(bank_opt[c]));
+                let v = pi.max(bank_opt[c]);
+                if v < best_opt {
+                    best_opt = v;
+                    best_c = c as i64;
+                }
             }
             bank_opt[i] = best_opt;
+            opt_child[i] = best_c;
             for (s, sel) in selectors.iter().enumerate() {
                 // deterministic value-blind pick: min key, tie-break by z (state z)
                 let mut best_c: Option<usize> = None;
@@ -7201,11 +7282,67 @@ bank_opt={} bank_opt_debt={} store={}",
     let psi_max = psi.iter().copied().max().unwrap_or(0);
     let psi_min = psi.iter().copied().min().unwrap_or(0);
     println!("  psi_range=[{},{}]  (bank_opt is the minimax peak over correct play)", psi_min, psi_max);
+    // per-ply Psi-max: tests whether the global Psi-max sits at the first intrusion (len=root+1)
+    // and decreases monotonically afterward (=> debt = maxPsi(first-intrusion) - Psi_root).
+    let max_len = states.iter().map(|s| s.len).max().unwrap_or(0);
+    let mut per_len_max = vec![i64::MIN; (max_len as usize) + 1];
+    let mut per_len_cnt = vec![0usize; (max_len as usize) + 1];
+    for i in 0..n {
+        let l = states[i].len as usize;
+        per_len_max[l] = per_len_max[l].max(psi[i] as i64);
+        per_len_cnt[l] += 1;
+    }
+    print!("  psi_max_by_ply:");
+    for l in (root_occ.len())..=(max_len as usize) {
+        if per_len_cnt[l] > 0 {
+            print!(" {}:{}", l, per_len_max[l]);
+        }
+    }
+    println!();
     for (s, sel) in selectors.iter().enumerate() {
         let v = bank_sel[s][root_index];
         let tag = if v >= BANK_LOSE { "LOSES (picks a losing line)".to_string() }
                   else { format!("bank={} debt={}", v, v - psi_root) };
         println!("  selector {:>18}: {}", sel.name, tag);
+    }
+    if want_pv {
+        // Walk the optimal-bank principal variation from the root; the peak Psi state
+        // on this line realizes bank_opt.  Print ply, added cell, features, value.
+        println!("  PV (optimal-bank line; * = peak-Psi state):");
+        let mut i = root_index as i64;
+        let mut peak_psi = i64::MIN;
+        let mut pv: Vec<usize> = Vec::new();
+        while i >= 0 {
+            let idx = i as usize;
+            pv.push(idx);
+            peak_psi = peak_psi.max(psi[idx] as i64);
+            i = opt_child[idx];
+        }
+        let mut prev_occ: Option<Vec<u16>> = None;
+        for &idx in &pv {
+            let occ = s4_selector_occ(&states, root_index, &root_occ, idx);
+            // the move into this state = cell present here but not in the PV predecessor
+            let moved = prev_occ.as_ref().and_then(|p| {
+                occ.iter().copied().find(|c| !p.contains(c))
+            });
+            let cellstr = match moved {
+                Some(c) => format!("({:>2},{:>2})", c as usize / q, c as usize % q),
+                None => "  (root) ".to_string(),
+            };
+            let mark = if psi[idx] as i64 == peak_psi { " *PEAK*" } else { "" };
+            println!(
+                "    ply={:<2} +cell={} psi={:>4} live={:>3} defect={:>2} xor0={} turn={}{}",
+                states[idx].len,
+                cellstr,
+                psi[idx],
+                live[idx],
+                defect[idx],
+                if xor0[idx] { 1 } else { 0 },
+                if is_p[idx] { "P(opp-to-move)" } else { "N(we-to-move)" },
+                mark,
+            );
+            prev_occ = Some(occ);
+        }
     }
     println!("S4LEDGER-DONE q={} t4={:?} elapsed={:.3}", q, t4, started.elapsed().as_secs_f64());
 }
@@ -10984,9 +11121,29 @@ fn main() {
         );
         return;
     }
+    if args[1] == "s4spike" {
+        // s4spike <q> t1,t2,t3,t4 [--depth D]   (no Grundy dump; shallow Psi-max probe)
+        let mut depth = 2usize;
+        let mut positional = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--depth" {
+                depth = it.next().expect("--depth needs a value").parse().expect("--depth int");
+            } else if let Some(rest) = a.strip_prefix("--depth=") {
+                depth = rest.parse().expect("--depth int");
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional.first().expect("s4spike needs q").parse().expect("q must be an integer");
+        let t4 = parse_t4(positional.get(1).expect("s4spike needs t values"));
+        solve_s4_spike(q, &t4, depth);
+        return;
+    }
     if args[1] == "s4ledger" {
-        // s4ledger <q> t1,t2,t3,t4 --grundy <grundy-raw>
+        // s4ledger <q> t1,t2,t3,t4 --grundy <grundy-raw> [--pv]
         let mut grundy_path: Option<String> = None;
+        let mut want_pv = false;
         let mut positional = Vec::new();
         let mut it = args[2..].iter();
         while let Some(a) = it.next() {
@@ -10994,6 +11151,8 @@ fn main() {
                 grundy_path = Some(it.next().expect("--grundy needs a value").clone());
             } else if let Some(rest) = a.strip_prefix("--grundy=") {
                 grundy_path = Some(rest.to_string());
+            } else if a == "--pv" {
+                want_pv = true;
             } else {
                 positional.push(a.clone());
             }
@@ -11004,7 +11163,7 @@ fn main() {
             .parse()
             .expect("q must be an integer");
         let t4 = parse_t4(positional.get(1).expect("s4ledger needs t values"));
-        solve_s4_ledger(q, &t4, &grundy_path.expect("s4ledger needs --grundy <file>"));
+        solve_s4_ledger(q, &t4, &grundy_path.expect("s4ledger needs --grundy <file>"), want_pv);
         return;
     }
     if args[1] == "s4potential" {
