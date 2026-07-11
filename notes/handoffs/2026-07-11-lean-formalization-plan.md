@@ -362,3 +362,21 @@ that discharges the transfer interface's finite fields from it:
 - With the `τ > ν` witness (strictness) and now `τ ≤ p·ν` (the uniform upper bound), the `ν`/`τ`
   layer carries both the qualitative gap and the quantitative envelope the asymptotics need.
 - Build green, no warnings, axioms clean (`[propext, Classical.choice, Quot.sound]`). Sixth commit.
+
+### Handoff Note — 2026-07-11 (cont.: dual-of-generator characterization + adversarial review)
+
+- Landed the **parity-check characterization** in `Code.lean`: `mem_dualCode_rowCode`
+  (`y ∈ (rowCode G)⊥ ↔ ∀ i, Gᵢ ⬝ᵥ y = 0`, load-bearing `←` via "orthogonal-to-`y` is a
+  submodule containing the rows ⇒ contains their span") and `mem_dualCode_rowCode_iff_mulVec`
+  (matrix form `↔ G.mulVec y = 0`). This is the computational route from a concrete generator
+  matrix to its dual code — the actual path to instantiating real inner codes for the q=9 discharge.
+- **Adversarial review of the whole session's corpus** (definitional-faithfulness / vacuity lens,
+  since kernel-checking already guarantees soundness): no soundness or overclaim defects.
+  `completionDistance_eq_transversalNumber` is genuinely `min(hitting set ⊆ C) = τ` with the
+  matroid step folded into the definition (documented, not proved — abstract-first);
+  `ofInnerCode` sets `dI := dualDist I` (real dual distance, not faked) so the hard lower bound
+  stays correctly deferred. One actionable gap: the code layer had **no pinned concrete value**
+  (unlike the ν/τ layer's worked examples). Closed it with a non-vacuity witness over `𝔽₅`
+  (`G = [1 1]`: `(1,4)` is in the dual, `(1,1)` is not), exercising
+  `mem_dualCode_rowCode_iff_mulVec` end-to-end via `decide`.
+- Build green, no warnings, all new results `#print axioms`-clean. Seventh commit.

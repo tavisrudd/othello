@@ -2,6 +2,7 @@ import Mathlib.InformationTheory.Hamming
 import Mathlib.Data.Matrix.Mul
 import Mathlib.LinearAlgebra.Span.Basic
 import Mathlib.Order.Lattice.Nat
+import Mathlib.Algebra.Field.ZMod
 
 /-!
 # Linear codes over `𝔽_q`: dual code and minimum / dual distance (shared `FiniteGeom` base)
@@ -82,5 +83,58 @@ omit [DecidableEq 𝔽] in
 theorem row_mem_rowCode (G : Matrix (Fin k) (Fin n) 𝔽) (i : Fin k) :
     G i ∈ rowCode G :=
   Submodule.subset_span ⟨i, rfl⟩
+
+omit [DecidableEq 𝔽] in
+/-- **Parity-check characterization of the dual.** A vector lies in the dual of `G`'s row code
+iff it is orthogonal to every row. `←` is the load-bearing direction: orthogonality to the
+generating rows propagates to their whole span, because "orthogonal to `y`" is itself a submodule
+(closed under `0`, `+`, `•`) containing the rows, hence containing `rowCode G = span rows`. -/
+theorem mem_dualCode_rowCode {G : Matrix (Fin k) (Fin n) 𝔽} {y : Fin n → 𝔽} :
+    y ∈ dualCode (rowCode G) ↔ ∀ i, G i ⬝ᵥ y = 0 := by
+  rw [mem_dualCode]
+  constructor
+  · intro hy i
+    exact hy (G i) (row_mem_rowCode G i)
+  · intro h x hx
+    -- the set of vectors orthogonal to `y` is a submodule; it contains the rows, so the span.
+    let Ky : Submodule 𝔽 (Fin n → 𝔽) :=
+      { carrier := {z | z ⬝ᵥ y = 0}
+        zero_mem' := zero_dotProduct y
+        add_mem' := fun {a b} ha hb => by
+          simp only [Set.mem_setOf_eq] at ha hb ⊢
+          rw [add_dotProduct, ha, hb, add_zero]
+        smul_mem' := fun c {a} ha => by
+          simp only [Set.mem_setOf_eq] at ha ⊢
+          rw [smul_dotProduct, ha, smul_zero] }
+    have hle : rowCode G ≤ Ky := by
+      apply Submodule.span_le.mpr
+      rintro z ⟨i, rfl⟩
+      exact h i
+    exact hle hx
+
+omit [DecidableEq 𝔽] in
+/-- The same characterization in matrix form: `y ∈ (rowCode G)⊥ ↔ G y = 0`. This is the
+computational route to a concrete code's dual — solving the linear system `G y = 0`. -/
+theorem mem_dualCode_rowCode_iff_mulVec {G : Matrix (Fin k) (Fin n) 𝔽} {y : Fin n → 𝔽} :
+    y ∈ dualCode (rowCode G) ↔ G.mulVec y = 0 := by
+  rw [mem_dualCode_rowCode]
+  constructor
+  · intro h; funext i; exact h i
+  · intro h i; exact congrFun h i
+
+local instance : Fact (Nat.Prime 5) := ⟨by decide⟩
+
+/-- Non-vacuity check for the code layer over a genuine finite field `𝔽₅`. For the generator
+`G = [1 1]`, the parity vector `(1,4)` lies in the dual of `rowCode G` (since `1 + 4 = 0` in
+`𝔽₅`), while `(1,1)` does not (`1 + 1 = 2 ≠ 0`). Exercises `mem_dualCode_rowCode_iff_mulVec`
+end-to-end on a concrete `𝔽_q`, pinning that `dualCode`/`rowCode` are not degenerate (the
+code-layer analogue of the `ν = τ` / `τ > ν` hypergraph examples). -/
+example :
+    (![1, 4] : Fin 2 → ZMod 5) ∈
+        dualCode (rowCode (![![1, 1]] : Matrix (Fin 1) (Fin 2) (ZMod 5))) ∧
+      (![1, 1] : Fin 2 → ZMod 5) ∉
+        dualCode (rowCode (![![1, 1]] : Matrix (Fin 1) (Fin 2) (ZMod 5))) := by
+  rw [mem_dualCode_rowCode_iff_mulVec, mem_dualCode_rowCode_iff_mulVec]
+  decide
 
 end FiniteGeom
