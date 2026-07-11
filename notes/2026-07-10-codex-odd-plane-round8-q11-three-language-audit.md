@@ -136,6 +136,16 @@ if and only if the six projective columns lie on a conic.
 
 ### Collision results [COMPUTED-EXACT]
 
+The label-free replay is:
+
+```sh
+python3 scripts/r8_q11_flagged_mds_gate.py
+```
+
+It checks the arc conditions, all Schur ranks, the finite and infinite conic
+extensions, all 28 six-punctures after each compatible pair, and ends with
+`SUMMARY all_assertions=PASS`.
+
 The unflagged six-column Schur data agree:
 
 ```text
