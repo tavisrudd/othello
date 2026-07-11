@@ -114,6 +114,15 @@ def main():
         "worst": None, "min_witness": 19, "min_wit_row": None, "rows": None,
         "note": "from C54: all 22 full-PGL on-conic S4 buckets P (bucket layer, not size-3 census)",
     }
+    # q=25 from the full s4arena --all census (2026-07-10): all 28 full-PGL(2,25) on-conic S4
+    # buckets are P (0 N, 0 aborted; ~6.67h/8GB compute). Same consequence as q=23.
+    q25 = {
+        "q": 25, "root": "P", "classes": None,
+        "on_total_q_minus_4": 21, "on_totals_observed": [21],
+        "n_classes_with_onN": 0, "Dq": Fraction(0),
+        "worst": None, "min_witness": 21, "min_wit_row": None, "rows": None,
+        "note": "from s4arena census: all 28 full-PGL(2,25) on-conic S4 buckets P (bucket layer)",
+    }
 
     print("=" * 78)
     print("C68  D(q) depletion-fraction extremal sequence")
@@ -127,11 +136,13 @@ def main():
         print(f"{s['q']:>3} {s['root']:>4} {s['classes']:>5} {s['on_total_q_minus_4']:>4} "
               f"{str(s['on_totals_observed']):>10} {s['n_classes_with_onN']:>11} "
               f"{frac_str(s['Dq']):>16} {str(w[1])+'/'+str(w[2]):>14} {s['min_witness']:>11}")
-    # q=23 line
+    # q=23, q=25 lines (bucket-layer results, no size-3-class breakdown available)
     print(f"{23:>3} {'P':>4} {'—':>5} {19:>4} {str([19]):>10} {0:>11} "
           f"{'0/19=0.0000':>16} {'19/0':>14} {19:>11}")
+    print(f"{25:>3} {'P':>4} {'—':>5} {21:>4} {str([21]):>10} {0:>11} "
+          f"{'0/21=0.0000':>16} {'21/0':>14} {21:>11}")
     print()
-    print("(q=23: bucket layer — all on-conic S4 P, so onN=0 for every size-3 class.)")
+    print("(q=23,25: bucket layer — all on-conic S4 P, so onN=0 for every size-3 class.)")
     print()
 
     for s in results:
@@ -162,6 +173,7 @@ def main():
     for s in results:
         print(f"  q={s['q']:>2}  D={float(s['Dq']):.4f}  min_wit={s['min_witness']}")
     print(f"  q=23  D=0.0000  min_wit=19  (bucket layer)")
+    print(f"  q=25  D=0.0000  min_wit=21  (bucket layer, full s4arena census)")
 
 
 if __name__ == "__main__":

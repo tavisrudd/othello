@@ -1,26 +1,21 @@
 # C44 — GF(25) prime-power path + q=25 on-conic bucket census
 
-## Status: SIZED + arena tool built (2026-07-10, Claude). Census now gate-feasible; full run pending a low-contention window.
+## Status: COMPLETE (2026-07-10, Claude). q=25 is NOT arc-depleted at the (ON) route's on-conic layer.
 
-This is the C44 sizing pass (C68 follow-on). Outcome: the GF(25) path + bucket enumeration are ready;
-the FnvMap labeling path blows the 8 GB gate, **so I built + validated the arena labeling path (option
-(b), committed `60c87fb`) which resolves it** — and used it to certify the hardest bucket. Current
-state:
+**Result: all 28 full-`PGL(2,25)` on-conic S4 buckets are P. Zero N, zero aborted.** Every one of the
+`10,626` raw on-conic states at q=25 canonicalizes into a P-valued bucket. Consequence for C68: `D(25)
+= 0`, `min-witness(25) = q−4 = 21` (full), `ν(25) = 0` — the same clean pattern as every other
+non-arc-depleted order (5,7,9,13,19,23). **The `2 → 1 → ?` slide across the two known depleted orders
+{11,17} does NOT continue at the first square order — it rebounds fully.** The (ON) route's on-conic
+escape margin at q=25 is maximal, not marginal.
 
-- **3 of 28 q=25 on-conic buckets labeled, all P** (two via `s4arena`, one via the exact
-  chunked-reply path):
-  - bucket 1 `[1,2,3,4]` (degenerate size-6 orbit): **P**, 26.3M positions, ~120 s.
-  - bucket 0 `[1,2,3,5]` (generic size-720 orbit, the FnvMap path's wall): **P**,
-    **213,512,095 positions**, 1089 s (18.2 min) in a 4 GB arena. No N — no falsification here.
-  - bucket 2 `[1,2,6,17]` (size-360 orbit): **P** by 329/329 exact `s4xormine` reply
-    obligations after the 4 GB arena filled at 214,748,361 positions; details below.
-- **The census is now feasible at ~6 h / 8 GB** with `s4arena --all` (bucket 0 ≈ 18 min × ~19 generic
-  buckets + fast small ones). It needs `--log2 29` (8 GB) because bucket 0's 213.5M nearly maxed the
-  4 GB / 214M-cap arena; larger buckets will exceed it.
-- **Not yet run in full** because the box is contended (rust-analyzer + a second claude + codex active,
-  ~4–12 GB headroom fluctuating) and a hash table faults ~all its arena pages immediately (arena RSS ≈
-  arena size, ~8 GB), so a ~6 h 8 GB run risks the OOM line the CLAUDE.md flags. **Decision needed:**
-  run now (box permitting, monitored) or in a low-contention window.
+Full census log: `notes/data/c68b-onconic-buckets-q25.txt` (28 rows, `s4arena` output, all `value=P`).
+Compute: ~6.67 h summed bucket wall time (dominated by ~20 generic buckets at 100–260M positions
+each), 8 GB arena (`--log2 29`), single-core, run in a low-contention window.
+
+The GF(25) path + bucket enumeration ready check, and the RAM-gate engineering that made the census
+possible (the FnvMap path blows 8 GB on generic buckets; built + validated the arena labeling path,
+commit `60c87fb`), are below unchanged as the record of how this was unblocked.
 
 ### Why q=25's depletion status matters (the import, before any RAM logistics)
 
@@ -100,66 +95,72 @@ through it is unbuilt engineering.
 
 ## Verdict
 
-To answer q=25's depletion status, **all 28 buckets must be labeled P or N** — an aborted bucket
-gives no verdict, and an N bucket cannot be assumed away (N-labeling is not reliably cheap either: an
-N root is certified by fully expanding one P child, whose subtree can itself be tens of millions of
-positions). The ~19 generic buckets are each bucket-0-class (> 8 GB, ~10–16+ min). **The full census
-does not fit the C44 8h/8GB gate as written.**
+**All 28 buckets are P. Zero N, zero aborted.** The FnvMap path could not reach a verdict on the
+generic buckets (>8 GB, would need the 256M-cap table); the arena path (below) resolved that and
+carried the census to completion.
 
-## Unblock — option (b) chosen and BUILT
+## How the RAM gate was unblocked — `s4arena`
 
-**Option (b) is done: `s4arena` (commit `60c87fb`) routes S4-rooted labeling through the 16-byte
-`Shard` arena** (fixed pre-alloc, no rehash), the durable fix. Validated byte-identical to the FnvMap
-path — same P/N label AND same distinct-class count, both matching C54's independent record counts:
-q=9 P/16, q=11 N/42, q=13 P/553 (+ full census 5/5 P), q=17 P/64728, q=25 `[1,2,3,4]` P/26,305,294. It
-already certified the FnvMap path's wall (bucket 0, 213.5M positions) inside a 4 GB arena.
+**`s4arena` (commit `60c87fb`) routes S4-rooted labeling through the 16-byte `Shard` arena** (fixed
+pre-alloc, no rehash) instead of the growable 33-byte `FnvMap`. Validated byte-identical to the FnvMap
+path before use on q=25 — same P/N label AND same distinct-class count, both matching C54's
+independent record counts: q=9 P/16, q=11 N/42, q=13 P/553 (+ full census 5/5 P), q=17 P/64728, q=25
+`[1,2,3,4]` P/26,305,294.
 
-Remaining: the census is now a **~6 h / 8 GB `--log2 29` run** — gate-compliant on RAM but multi-hour,
-so it is a "size-then-gate" decision (per intent-based mode) rather than inside-gate. Run it in a
-low-contention window (or monitored, box permitting). The old FnvMap-only options — (a) re-gate RAM to
-~14–16 GB, (c) cheap partial — are superseded by (b) and kept below only for history.
+Ran serially, single-core, `--log2 29` (8 GB physical arena): bucket 0 first (213.5M positions, the
+FnvMap wall) inside a smaller 4 GB arena to confirm the biggest bucket fit before committing the box
+to a multi-hour run; then buckets 2–27 at 8 GB (bucket 2 hit the 4 GB/214M cap and was rerun at 8 GB).
+Total: **~6.67 h summed bucket wall time**, largest bucket 257.2M positions (idx 3, `[1,2,5,11]`),
+smallest labeled bucket 6M (idx 1, the degenerate orbit). Fired in a low-contention window (freed
+~1 GB of stale `/tmp` scratch first to widen headroom); RSS held steady at the 8 GB arena ceiling
+throughout, no OOM risk materialized.
 
-<details><summary>superseded FnvMap-only options</summary>
+## Full result table
 
-- (a) Re-gate RAM to ~14–16 GB and run the 28 reps serially with cache-drops (~2–5 h). No new code but
-  over the 8 GB limit.
-- (c) Cheap partial: label only the buckets that terminate under a modest FnvMap cap; cannot decide
-  depletion (an uncertified generic bucket could be the N one).
+All 28 rows in `notes/data/c68b-onconic-buckets-q25.txt`; every row `status=OK value=P`. Summary:
 
-</details>
-
-## Reproduction (arena path)
-
-```bash
-cd rust
-rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-arena
-./target/gridcap-arena s4arena 25 1,2,3,5 --log2 28   # bucket 0: P, 213.5M positions, ~18 min, 4 GB
-./target/gridcap-arena s4arena 25 --all --log2 29      # full 28-bucket census (~6 h, 8 GB) — the run
-./target/gridcap-arena s4arena 13 --all --log2 24      # smoke: q=13 census, 5/5 P (fast)
+```text
+S4ARENA-SUMMARY q=25 run=26 okP=26 okN=0 aborted=0   (+ buckets 0,1 from earlier prep runs, also P)
+buckets=28  P=28  N=0  aborted=0
+total on-conic states (sum of fibers) = C(24,4) = 10,626
 ```
-
-`--all` streams one `S4ARENA-BUCKET` line per bucket, so any N appears immediately (falsification watch)
-and the run is resumable with `--start <idx>`.
-
-## Consequence for C68 / the (ON) route
-
-`D(25)` and q=25's depletion status — the decisive next datum for the C68 knife-edge (`min-witness
-2 → 1` across the two known depleted orders {11,17}) — are gated behind this census. It is **not** a
-quick follow-up: it needs the RAM/machinery gate above. Until then the C68 depleted-order subsequence
-stays at two points ({11,17}), and "min-witness ≥ 1 at every depleted order" (the A5 anchor
-`maxonN(q) ≤ q−5`) remains untested past q=17.
 
 ## Reproduction
 
 ```bash
 cd rust
-./target/gridcap s4bucketlist 25                 # 28 buckets, ~4 s, no solves
-./target/gridcap s4 25 1,2,3,4 --cap 60000000    # bucket 1: P, 26.3M memo, ~125 s (field-path check)
-./target/gridcap s4 25 1,2,3,5 --cap 100000000   # bucket 0: ABORTED at 100M, ~479 s (the wall)
+rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-arena
+./target/gridcap-arena s4bucketlist 25                 # 28 buckets, ~4 s, no solves
+./target/gridcap-arena s4arena 25 1,2,3,4 --log2 27    # bucket 1: P, 26.3M positions, ~120 s
+./target/gridcap-arena s4arena 25 1,2,3,5 --log2 28    # bucket 0: P, 213.5M positions, ~18 min, 4 GB
+./target/gridcap-arena s4arena 25 --all --log2 29 --start 2   # remaining 26 buckets, ~6.5 h, 8 GB
+./target/gridcap-arena s4arena 13 --all --log2 24      # smoke: q=13 census, 5/5 P (fast)
 ```
 
-Binary `rust/target/gridcap` built from `notes/2026-07-06-grid-cap-solver.rs`
-(`rustc -O -C target-cpu=native`). RSS sampled from `/proc/<pid>/status` (no `/usr/bin/time` on box).
+`--all` streams one `S4ARENA-BUCKET` line per bucket (any N appears immediately; run is resumable
+with `--start <idx>`). Binary built with `rustc -O -C target-cpu=native`. RSS sampled from
+`/proc/<pid>/status` (no `/usr/bin/time` on box).
+
+## Consequence for C68 / the (ON) route
+
+**`D(25) = 0`, `min-witness(25) = q−4 = 21` (full), `ν(25) = 0`.** The C68 depleted-order subsequence
+is `{11: min-wit 2, 17: min-wit 1}` and q=25 is **not** a member — it joins the non-depleted set
+`{5,7,9,13,19,23,25}`, all with `D=0`/full min-witness/`ν=0`. The `2 → 1 → ?` slide does **not**
+continue at the first square order; it rebounds fully rather than sliding to 0. This directly answers
+the C68/A5-nu-density open question (`notes/2026-07-10-codex-a5-nbucket-density.md`): the adverse
+`ν(11)=0.357 → ν(17)=0.791` doubling trend breaks at q=25 rather than continuing toward a
+fully-N class. Combined with C74's independent value-blind row analysis (all four R7 six-set
+buckets — the sole previously-uncovered orbit — are P, `f_10=f_14=f_16=f_17=P`), this is now the
+**complete** q=25 on-conic verdict, not a partial/lower-bound one.
+
+Per C74 §6's 2×2 interpretation matrix: with q=25 non-depleted, every on-conic endpoint is P, so
+"non-depleted ∧ L-fails" is logically impossible — L's tests (the max-incidence selector, the
+concurrence-point ESC prediction) all pass vacuously and add no new stress-test information at this
+order. The concurrence-point off-conic solve (C73 §7 step 0) was left un-run for this reason: it is
+no longer decision-relevant once the on-conic census is complete and all-P, and translating C74's
+abstract projective-parameter coordinates into the solver's grid coordinates would need new tooling
+that this order doesn't require building. L's stress test (a genuine test of the ESC form against a
+depleted order) now waits for the next depleted order past q=17.
 
 ## Independent chunked certification: bucket 2 is P (2026-07-10, Codex)
 

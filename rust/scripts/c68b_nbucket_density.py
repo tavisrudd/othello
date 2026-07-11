@@ -37,6 +37,11 @@ C68_ONP_TYPES = {
     19: {15: 27},
 }
 
+# q=25: bucket-layer only (no per-size-3-class feat dump run). All 28 full-PGL buckets are P
+# (2026-07-10 s4arena census), so every size-3 class has onN=0, onP=q-4=21 uniformly; the exact
+# class count is not needed since nu=0 forces the null model to 0 regardless of ncls.
+Q25_BUCKET_ONLY = True
+
 
 def parse_buckets(q):
     f = DATA / f"c68b-onconic-buckets-q{q}.txt"
@@ -80,6 +85,17 @@ def main():
         onp_str = ",".join(f"{v}x{onp[v]}" for v in sorted(onp))  # onP value x #classes
         print(f"{q:>3} {nb:>7} {nP:>3} {nN:>3} {total:>8} {nconf:>9} {nu:>7.3f} "
               f"{ncls:>5} {onp_str:>12} {min_wit:>7} {null_fullyN:>13.3f} {obs_fullyN:>10}")
+    # q=25: bucket-layer only (2026-07-10 full s4arena census, 28/28 P, 0 N).
+    q, rows25 = 25, parse_buckets(25)
+    nb25 = len(rows25)
+    nP25 = sum(1 for r in rows25 if r["val"] == "P")
+    nN25 = sum(1 for r in rows25 if r["val"] == "N")
+    total25 = sum(r["size"] for r in rows25)
+    nconf25 = sum(r["size"] for r in rows25 if r["val"] == "N")
+    nu25 = nconf25 / total25 if total25 else 0.0
+    seq.append((25, nu25, 21, 0.0))
+    print(f"{25:>3} {nb25:>7} {nP25:>3} {nN25:>3} {total25:>8} {nconf25:>9} {nu25:>7.3f} "
+          f"{'—':>5} {'21x?':>12} {21:>7} {0.0:>13.3f} {0:>10}  (bucket-layer only)")
     print()
     print("nu(q) sequence (orbit-weighted N-bucket density):")
     for q, nu, mw, nf in seq:
