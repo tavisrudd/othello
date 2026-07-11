@@ -88,12 +88,19 @@ locality`; `Chen Ling Xing asymptotically good LRC concatenation dual distance f
   (Blokh–Zyablov/Zinoviev) concatenation which "inherits the locality." Uses a count of disjoint
   repair sets `ρ`; never the complete hypergraph or `τ`.
 
-**Still `[VERIFY]` (low-risk):** Güneri–Ling–Özkaya ([arXiv:2007.16029](https://arxiv.org/abs/2007.16029))
-full text — landing page only reached; it is QC-structure/trace-representation, not LRC, so low
-collision risk, but the dual-decomposition step should be read to pin the exact reference the sweep
-§1.4 attributes to "Chen–Ling–Xing" (the operative concatenation-LRC dual work located this session
-is Liu–Ma–Wu–Xing 2208.04484 + Ma–Xing; the "Chen–Ling–Xing" citation needs its exact source nailed
-or corrected).
+**[CHECKED — non-colliding, `[VERIFY]` closed] Güneri–Ling–Özkaya, *Quasi-Cyclic Codes*
+([arXiv:2007.16029](https://arxiv.org/abs/2007.16029)):** a QC-codes **survey chapter** — CRT /
+concatenated decomposition of QC codes, algebraic structure, trace representation. Full-text scan
+finds **no** "locally repairable / locality / availability / repair set / block confinement /
+hypergraph"; "Chen" occurs only as a 1969 QC-codes reference, **not** "Chen–Ling–Xing." It is general
+dual/trace-decomposition background, not the N1 result.
+
+**Action item — sweep §1.4 citation correction.** The attribution "Chen–Ling–Xing's dual
+decomposition of a concatenated code" is **not locatable in public search** (Google/Semantic Scholar/
+arXiv). The dual-decomposition machinery the sweep actually leans on is the classical CRT / trace
+decomposition (Güneri–Ling–Özkaya survey; Blokh–Zyablov/Zinoviev/Forney generalized concatenation).
+Before manuscript: pin the exact "Chen–Ling–Xing" source via MathSciNet, or replace the citation with
+the CRT/trace-decomposition + generalized-concatenation references.
 
 **Verdict: none-found for the crux, with a named adjacent genre.** Concatenation-preserves-*locality*
 is classical (Forney; Blokh–Zyablov/Zinoviev generalized concatenation; Theorem 3.1 of 2208.04484),
@@ -202,20 +209,37 @@ diligence: MathSciNet forward-citation sweep of 2208.04484 + Ma–Xing, and pin/
 "Chen–Ling–Xing" attribution (read Güneri–Ling–Özkaya [2007.16029] full text).
 
 **N2 gate — RESULT (2026-07-11): non-colliding.** BDMP [1909.00207] read in full — orbit incidence
-counts + covering density, no transversal/`τ`. The counts-vs-transversals gap holds; N2's all-symbol
-`τ>ν` and the twisted-cubic-axis hitting-set spectrum are unlocated.
+counts + covering density, no transversal/`τ`. Forward-sweep found a *large* active twisted-cubic
+orbit/incidence-matrix program (Davydov–Marcugini–Pambianco et al.:
+[2604.14628](https://arxiv.org/abs/2604.14628) points/planes/lines incidence matrices `q=2,3,4`;
+[2209.04910](https://arxiv.org/abs/2209.04910) + [2401.00333](https://arxiv.org/abs/2401.00333)
+external-line class `O_6`) — **all orbit classification + incidence counts, none computing the
+repair-hitting-set `τ`.** The counts-vs-transversals gap holds; N2's all-symbol `τ>ν` and the
+twisted-cubic-axis hitting-set spectrum are unlocated.
 
 **N3 gate — RESULT (2026-07-11): non-colliding, thinnest lane.** Li–Heng [2204.11208] read in full —
 minimum linear locality only, no `τ`/availability/zero-sum link. Code + zero-sum NMDS characterization
 + NMDS↔optimal-LRC all prior art; only the exact `τ = q − Z_p` evaluation and the `τ/ν → p` extremal
 reading survive.
 
-**All three lanes cleared this pass; no collision found.** Remaining diligence is confirmatory, not
-blocking:
-1. MathSciNet forward-citation sweep of 2208.04484 (N1) + a MathSciNet/zbMATH check that no one has
-   computed the twisted-cubic external-orbit `τ` (N2).
-2. Güneri–Ling–Özkaya [2007.16029] full text — close the last N1 `[VERIFY]` + pin/correct the sweep
-   §1.4 "Chen–Ling–Xing" citation.
+**All three lanes cleared; no collision found. Confirmatory sweeps done 2026-07-11:**
+1. **N1 forward-citation neighborhood of 2208.04484** (journal version IEEE IT 2023; Jin–Ma–Xing,
+   Ma–Xing elliptic, Huang–Zhao hyperelliptic, Tamo–Barg repair schemes, elliptic-availability
+   2605.06182) — all locality/availability curve constructions; **none** preserves the complete
+   repair hypergraph under an outer dual-distance gate. Crux still unlocated.
+2. **N2 twisted-cubic incidence-matrix program** (Davydov et al. 2604.14628 / 2209.04910 / 2401.00333
+   + BDMP) — thoroughly computes orbits/incidence *counts*; `τ` unlocated.
+3. **N1 `[VERIFY]` closed** — Güneri–Ling–Özkaya [2007.16029] read (QC survey, no LRC content);
+   sweep §1.4 "Chen–Ling–Xing" citation flagged for pin-or-correct (see N1 action item).
+
+**Residual (auth-gated, non-blocking):** a definitive MathSciNet/zbMATH forward-citation run (public
+web + Semantic Scholar approximated it here) and pinning the "Chen–Ling–Xing" reference. First
+full prior-art pass is otherwise **complete and clean**; the sweep §1 novelty claim stands.
+
+**Recommended next non-audit move:** the reads pointed *outward* to N2's open target — no one has the
+twisted-cubic external-orbit `τ` spectrum. That is the completion-core §6.5 [OPEN] item and the
+natural first new theorem: enumerate `ρ(x)=τ{B∈binom(C_3(q),3): x∈⟨B⟩}` per `PGL(2,q)` orbit for
+`q=5,7,11` (holding out `13,17,19`), against the now-cited incidence-matrix program.
 
 **Do not fund** a broad code-parameter-table search: the `[n,k,d]` parameters are prior art (N3), so
 this lane does **not** target MinT/codetables entries — the contribution is the repair-invariant
