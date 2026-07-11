@@ -669,6 +669,26 @@ References:
 
 ## Handoff Notes
 
+2026-07-11 C77 (Claude, lane C / Cluster-2): **the amortized-bank "debt growth" is a reservoir
+bookkeeping artifact, not the game getting harder — and the fix is a clean uniform lemma.** Two new
+solve-free instruments (`s4ledger --pv`, `s4spike` in `notes/2026-07-06-grid-cap-solver.rs`). (1) The
+minimax bank debt is a *single first-intrusion spike* (Ψ rises only at ply5, monotone after); the
+first probe's "flat 22 through q19" was an artifact of q17/q19 being the only orders whose Ψ-envelope
+peaks at the first intrusion — the raw envelope actually grows (22/22/65/71/≥98/≥142 across
+q17/19/23/25/27/29). (2) The growth is *entirely* the C63 `reservoir_slack` term `f5 = zone_v −
+reservoir_floor`, whose loose Hall floor `(q−k)(q−k−C(k,2)−1)` melts to 0 with depth and releases raw
+support into Ψ. Capping `f5` by the move budget `(q+1)−k` cuts the debt ~10×; dropping reservoir
+entirely (`6·defect − 4·intruders − 2·[xor]`) gives **debt 0** through the checked depth. (3) Why:
+`max_defect_excess = 0` at every order — `defect_components ≤ defect_root = q−5` for every reachable
+state, so `DROP ≤ 6·defect_root = DROP_root + 2`. **Reshaped lever:** drop the reservoir summand; the
+concrete on-box, reservoir/Hall-free sublemma is `defect_components ≤ q−5` for all reachable residual
+states. **Two crux caveats:** DROP is not a per-edge Lyapunov (defect-recovery jumps grow 8→34 but
+stay below root), and a peak-bound is **not yet a P-certificate** (the real remaining crux). **Cheap
+cross-lane lead:** both live lanes now hit the same `q−5` (A5 `maxonN ≤ q−5`; `defect_root = q−5`) —
+check whether they are one object before more probes. Report:
+[`../2026-07-11-c77-ledger-spike-structure.md`](../2026-07-11-c77-ledger-spike-structure.md) (§6–8);
+first probe [`../2026-07-11-c77-ledger-bank-probe.md`](../2026-07-11-c77-ledger-bank-probe.md).
+
 2026-07-11 C75 (Claude, lane C / Cluster-2, Codex asleep): **the value-blind reply selector is
 impossible in the program feature space** — a structural explanation of Codex's C61/C62/C63
 "every selector family is uniform-negative" wall. Reusing the on-disk exact Grundy dumps (no
