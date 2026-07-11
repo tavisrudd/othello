@@ -48,13 +48,15 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
   separation, not selection — formally re-routing (ON) to the **amortized/ledger** potential. Report:
   [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
   scripts `rust/scripts/c76_invariant_hunt.py`, `c76_directional_search.py`, `c77_augmented_selector.py`.
-- **C77 [OPEN]** — amortized/ledger potential: realize Ψ as a bank tolerating local ΔΨ≥0 against a
-  global budget, selecting on the C76 frame-aware orbit (not a scalar). The residual hard twin + the
-  direction-MIXED near-twins are the charge-carrying positions where a pointwise rule provably fails.
-  Sole surviving Cluster-2 lever after C75 (pointwise impossible) + C76 (separation ≠ selection, no
-  uniform linear selector). Origin:
+- **C77 [OPEN — first probe REPORTED 2026-07-11; bank is numerically alive]** — amortized/ledger
+  potential: realize Ψ as a bank tolerating local ΔΨ≥0 against a global budget. **New `s4ledger` solver
+  mode measures the minimax peak-Ψ debt on the root DAG: 0 (q13) / 22 (q17) / 22 (q19) — bounded and
+  flat while Ψ_root grows (60/84/96).** So a fixed-capacity bank (~22) absorbs the opponent's forced
+  Ψ-rise through q=19; every scalar-among-P selector hits the optimal ceiling. Next: more orders
+  (q11/23/25), off-root obligations, frame-aware selector, and turn the flat debt into a repay lemma.
+  Probe: [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md); mode `s4ledger`
+  in `notes/2026-07-06-grid-cap-solver.rs`. Origin:
   [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md).
-  Report target: TBD.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:
   [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md),

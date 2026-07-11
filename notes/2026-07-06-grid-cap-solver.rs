@@ -7001,6 +7001,215 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
     println!("S4SELECTORS-DONE q={} t4={:?} fail_out={} elapsed={:.3}", q, t4, fail_out.unwrap_or("-"), started.elapsed().as_secs_f64());
 }
 
+// ---------------------------------------------------------------------------
+// C77 amortized-ledger probe: the minimax "bank" ceiling.
+//
+// The (ON) reply strategy needs the second player, at every P-position (g0,
+// opponent to move), to answer each opponent move with a P-reply (g0) and keep a
+// bounded *bank*.  We take the C63 potential Psi as the ledger and ask, over the
+// exact P-restricted game DAG:
+//
+//   bank(state) = minimax peak Psi from `state` to the end, inclusive of Psi(state),
+//                 where at an N-position (g!=0, WE move) we MINIMIZE over P-children
+//                 (g0) and at a P-position (g0, OPPONENT moves) the adversary
+//                 MAXIMIZES over all children.
+//
+// bank(root) with the min taken exactly is the OPTIMAL (value-aware) bank ceiling:
+// the smallest peak Psi any correct second-player strategy can guarantee.  For a
+// fixed value-blind-among-P selector we replace the exact min at N-positions by the
+// selector's pick among the P-children, giving that selector's guaranteed ceiling.
+// A bank that stays flat (== psi_root) means Psi never rises above the root under
+// that play; a growing gap is the debt the amortized argument must repay.
+//
+// Value-blind here means blind to the Grundy label EXCEPT for the P-restriction
+// (the existential selector is allowed to know which children are P); the *choice*
+// among P-children uses only geometric features.  Frame-aware selectors are a
+// follow-up (the profile computation lives in the Python C76/C77 scripts); this
+// mode ships the optimal ceiling + the scalar-among-P selectors as the baseline.
+const BANK_LOSE: i64 = i64::MAX / 4;
+
+struct LedgerSelector {
+    name: &'static str,
+    // key over a P-child's (psi, live, defect, xor_zero); smaller key = preferred.
+    // Returns None to exclude a child (never excludes a P-child in the scalar set,
+    // but kept general for gated families).
+    key: fn(psi: i32, live: u16, defect: u16, xor_zero: bool) -> Option<(i64, i64, i64)>,
+}
+
+fn solve_s4_ledger(q: usize, t4: &[usize], grundy_path: &str) {
+    let b = Board::new(q);
+    let (root_occ, _root_chosen, _root_forbidden, cells) = build_s4_root(&b, t4);
+    let root_cells = [root_occ[0], root_occ[1], root_occ[2], root_occ[3]];
+    let root_key = b.canon(&root_occ);
+    let gf_hash = gf_table_hash(&b.gf);
+    let grundy = RawGrundyMemoMmap::open(grundy_path).expect("open Grundy raw memo");
+    if !raw_grundy_memo_matches_root(&grundy, q, t4, gf_hash, root_key, &root_cells)
+        || grundy.root_grundy.is_none()
+    {
+        eprintln!("s4ledger: exact matching Grundy dump required: {}", grundy.describe());
+        std::process::exit(2);
+    }
+    let started = Instant::now();
+    let root_index = grundy.find(root_key).expect("root missing from exact Grundy dump").0;
+
+    // --- reconstruct the DAG spine (parent/z/len) exactly as s4selectors does ---
+    let mut states = vec![S4SelectorState::default(); grundy.n_records];
+    states[root_index] = S4SelectorState { parent: u32::MAX, z: 0, len: root_occ.len() as u8, seen: true };
+    let mut frontier = VecDeque::new();
+    frontier.push_back(root_index);
+    let mut seen = 0usize;
+    while let Some(i) = frontier.pop_front() {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        seen += 1;
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            let (child_occ, _, _) = push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            let child_i = grundy.find(b.canon(&child_occ)).unwrap().0;
+            if !states[child_i].seen {
+                states[child_i] = S4SelectorState {
+                    parent: u32::try_from(i).expect("selector state index exceeds u32"),
+                    z,
+                    len: child_occ.len() as u8,
+                    seen: true,
+                };
+                frontier.push_back(child_i);
+            }
+        }
+    }
+    if seen != grundy.n_records {
+        eprintln!("s4ledger: reachability mismatch {} != {}", seen, grundy.n_records);
+        std::process::exit(2);
+    }
+
+    // --- per-state features (psi/live/defect/xor) and Grundy byte ---
+    let n = states.len();
+    let mut psi = vec![0i32; n];
+    let mut live = vec![0u16; n];
+    let mut defect = vec![0u16; n];
+    let mut xor0 = vec![false; n];
+    let mut is_p = vec![false; n];
+    for i in 0..n {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        let f = s4_selector_features(&b, &occ, &chosen, &forbidden);
+        psi[i] = f.psi;
+        live[i] = f.live_on;
+        defect[i] = f.defect_components;
+        xor0[i] = f.xor_zero;
+        is_p[i] = raw_record_value_byte(grundy.mmap.bytes(), i) == 0;
+    }
+
+    // --- children lists (true game children via canon) ---
+    let mut children: Vec<Vec<u32>> = vec![Vec::new(); n];
+    for i in 0..n {
+        let occ = s4_selector_occ(&states, root_index, &root_occ, i);
+        let (chosen, forbidden) = s4_masks_from_occ(&b, &occ);
+        for z in avail_cells(&b, &chosen, &forbidden) {
+            let (child_occ, _, _) = push_cell_state(&b, &occ, &chosen, &forbidden, z as usize).unwrap();
+            let ci = grundy.find(b.canon(&child_occ)).unwrap().0 as u32;
+            children[i].push(ci);
+        }
+    }
+
+    let selectors = [
+        LedgerSelector { name: "psi_min", key: |psi, _l, _d, _x| Some((psi as i64, 0, 0)) },
+        LedgerSelector { name: "live_min", key: |_p, l, _d, _x| Some((l as i64, 0, 0)) },
+        LedgerSelector { name: "defect_min", key: |_p, _l, d, _x| Some((d as i64, 0, 0)) },
+        LedgerSelector {
+            name: "zero_xor_live_min",
+            key: |_p, l, _d, x| Some((if x { 0 } else { 1 }, l as i64, 0)),
+        },
+        LedgerSelector { name: "psi_live_min", key: |psi, l, _d, _x| Some((psi as i64, l as i64, 0)) },
+    ];
+
+    // --- DP bottom-up (children have larger len) ---
+    let mut order: Vec<usize> = (0..n).collect();
+    order.sort_unstable_by_key(|&i| std::cmp::Reverse(states[i].len));
+    // bank_opt + one bank per selector
+    let mut bank_opt = vec![0i64; n];
+    let mut bank_sel: Vec<Vec<i64>> = selectors.iter().map(|_| vec![0i64; n]).collect();
+    for &i in &order {
+        let pi = psi[i] as i64;
+        if is_p[i] {
+            // opponent (adversary) maximizes over ALL children; every child is N.
+            let mut acc_opt = pi;
+            let mut acc_sel = vec![pi; selectors.len()];
+            for &c in &children[i] {
+                let c = c as usize;
+                acc_opt = acc_opt.max(bank_opt[c]);
+                for (s, _) in selectors.iter().enumerate() {
+                    acc_sel[s] = acc_sel[s].max(bank_sel[s][c]);
+                }
+            }
+            bank_opt[i] = acc_opt;
+            for (s, _) in selectors.iter().enumerate() {
+                bank_sel[s][i] = acc_sel[s];
+            }
+        } else {
+            // WE move; restrict to P-children (g0). Optimal = min; selector = its pick.
+            let pkids: Vec<usize> =
+                children[i].iter().map(|&c| c as usize).filter(|&c| is_p[c]).collect();
+            if pkids.is_empty() {
+                bank_opt[i] = BANK_LOSE;
+                for (s, _) in selectors.iter().enumerate() {
+                    bank_sel[s][i] = BANK_LOSE;
+                }
+                continue;
+            }
+            let mut best_opt = i64::MAX;
+            for &c in &pkids {
+                best_opt = best_opt.min(pi.max(bank_opt[c]));
+            }
+            bank_opt[i] = best_opt;
+            for (s, sel) in selectors.iter().enumerate() {
+                // deterministic value-blind pick: min key, tie-break by z (state z)
+                let mut best_c: Option<usize> = None;
+                let mut best_key: Option<(i64, i64, i64)> = None;
+                for &c in &pkids {
+                    let Some(k) = (sel.key)(psi[c], live[c], defect[c], xor0[c]) else { continue };
+                    let better = match best_key {
+                        None => true,
+                        Some(bk) => (k, states[c].z) < (bk, states[best_c.unwrap()].z),
+                    };
+                    if better {
+                        best_key = Some(k);
+                        best_c = Some(c);
+                    }
+                }
+                let c = best_c.expect("selector must pick a P-child when one exists");
+                bank_sel[s][i] = pi.max(bank_sel[s][c]);
+            }
+        }
+    }
+
+    let psi_root = psi[root_index] as i64;
+    println!(
+        "S4LEDGER q={} t4={:?} cells={:?} states={} P={} N={} psi_root={} \
+bank_opt={} bank_opt_debt={} store={}",
+        q,
+        t4,
+        cells,
+        n,
+        is_p.iter().filter(|&&p| p).count(),
+        is_p.iter().filter(|&&p| !p).count(),
+        psi_root,
+        bank_opt[root_index],
+        bank_opt[root_index] - psi_root,
+        grundy.describe(),
+    );
+    // global Psi range for context
+    let psi_max = psi.iter().copied().max().unwrap_or(0);
+    let psi_min = psi.iter().copied().min().unwrap_or(0);
+    println!("  psi_range=[{},{}]  (bank_opt is the minimax peak over correct play)", psi_min, psi_max);
+    for (s, sel) in selectors.iter().enumerate() {
+        let v = bank_sel[s][root_index];
+        let tag = if v >= BANK_LOSE { "LOSES (picks a losing line)".to_string() }
+                  else { format!("bank={} debt={}", v, v - psi_root) };
+        println!("  selector {:>18}: {}", sel.name, tag);
+    }
+    println!("S4LEDGER-DONE q={} t4={:?} elapsed={:.3}", q, t4, started.elapsed().as_secs_f64());
+}
+
 fn solve_s4_potential(q: usize, t4: &[usize], grundy_path: &str, out_path: &str) {
     let b = Board::new(q);
     let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
@@ -10773,6 +10982,29 @@ fn main() {
             &grundy_path.expect("s4selectors needs --grundy <file>"),
             fail_out.as_deref(),
         );
+        return;
+    }
+    if args[1] == "s4ledger" {
+        // s4ledger <q> t1,t2,t3,t4 --grundy <grundy-raw>
+        let mut grundy_path: Option<String> = None;
+        let mut positional = Vec::new();
+        let mut it = args[2..].iter();
+        while let Some(a) = it.next() {
+            if a == "--grundy" {
+                grundy_path = Some(it.next().expect("--grundy needs a value").clone());
+            } else if let Some(rest) = a.strip_prefix("--grundy=") {
+                grundy_path = Some(rest.to_string());
+            } else {
+                positional.push(a.clone());
+            }
+        }
+        let q: usize = positional
+            .first()
+            .expect("s4ledger needs q")
+            .parse()
+            .expect("q must be an integer");
+        let t4 = parse_t4(positional.get(1).expect("s4ledger needs t values"));
+        solve_s4_ledger(q, &t4, &grundy_path.expect("s4ledger needs --grundy <file>"));
         return;
     }
     if args[1] == "s4potential" {
