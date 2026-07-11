@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""C74 — is there a value-blind *multi-feature linear* reply selector? (lane C / Cluster-2)
+"""C75 — is there a value-blind *multi-feature linear* reply selector? (lane C / Cluster-2)
 
 Codex's C61/C63 hard-surface work tested selector families ONE hand-picked scalar
 coordinate at a time (live_min, zero_xor_live_min, zero_live_ray_lex_max, ...), each
@@ -29,7 +29,7 @@ Two decisive tests:
       machine-readable impossibility for the linear class with this target rule.
 
 Usage:
-  uv run --with scipy --with numpy python3 scripts/c74_linear_selector_lp.py \
+  uv run --with scipy --with numpy python3 scripts/c75_linear_selector_lp.py \
       q13=<tsv> q17=<tsv> q19=<tsv>
 """
 import sys, re

@@ -19,8 +19,8 @@ Rules:
 
 - **ProjectiveCap / Lean proof program:** start with
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
-  [codex task queue](notes/2026-07-07-codex-task-queue.md) for the active task IDs
-  (`C29`-`C32` as of 2026-07-08).
+  [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
+  for the active task IDs.
 - **Named-expert / proof context:** load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) before
   nontrivial Lean work.
@@ -252,17 +252,28 @@ Plus:
   standing preferences only; do not stash session findings, data, interpretations,
   decisions, or queues there (they get hidden + duplicate the handoff).
 
-## Handoffs
+## Handoffs & doc discipline
 
-`notes/handoffs/YYYY-MM-DD-<slug>.md`, one file per work stream — the **single source of
-truth** for all project work (findings, measurements, interpretations, decisions, next-step
-queues). They are git-tracked and visible; the invisible auto-memory is NOT a place for any
-of this. End each session with the handoff's Progress updated + a dated Handoff Note
-(session id, commits, what landed, measurements, next steps). Ship doc updates in the same
-commit as (or back-to-back with) the code they describe — don't leave docs uncommitted
-across a session boundary.
+All work lives in git-visible docs, never auto-memory. Two kinds, strictly split:
 
-When a handoff is complete or superseded, move it to `notes/handoffs/done/` (from
-`rust/`: `../notes/handoffs/done/`). Add a short header near the top before moving it
-that states the final status, e.g. completed, superseded, closed negative, or archived
-for history, and points to any replacement current handoff if one exists.
+- **Live docs** (loaded each session — keep crisp): the active handoff
+  `notes/handoffs/YYYY-MM-DD-<slug>.md`, the task queue
+  `notes/2026-07-07-codex-task-queue.md`, and `## Current WIP` above. Hold ONLY the
+  current-state map: goal, status tables, work streams, open frontiers, the open queue, and
+  **one-line pointers to closed paths** (verdict + link). No logs, dated play-by-play,
+  narratives, amendment trails, or superseded plans.
+- **Companion docs** (append-only history): each live doc pairs with an `-archive.md`
+  (handoffs under `notes/handoffs/done/`). Dated session notes, superseded plans,
+  closed-negative writeups, amendment trails go here; a single finding is its own
+  `notes/YYYY-MM-DD-<slug>.md`. Live + companion = the source of truth: live is the map,
+  companion is the log.
+
+**Task IDs.** One global monotonic `CNN` sequence across Codex and Claude; the queue is the
+registry, its `CURRENT TOP OF QUEUE` the live view. New ID = `max(CNN in queue + handoff +
+notes/) + 1`, entered as a one-line queue row at allocation. Never reuse or renumber a
+reported ID; on a collision, renumber the newer/less-referenced one (e.g. C74→C75, 2026-07-11).
+
+**End of session.** (1) Update the live map (tables, frontiers, queue); prune any log that
+crept in. (2) Append the dated session note to the companion, not the live doc. (3) Move
+newly-settled sections to the companion under a dated status header. (4) Commit docs with the
+code they describe. Move a finished handoff to `notes/handoffs/done/`.

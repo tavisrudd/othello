@@ -1,9 +1,9 @@
-# C74 — the value-blind reply selector is impossible in the program feature space
+# C75 — the value-blind reply selector is impossible in the program feature space
 
 **2026-07-11 (Claude, lane C / Cluster-2, Codex asleep).** A structural impossibility result
 that explains and sharpens Codex's C61/C62/C63 "every selector family is uniform-negative" wall.
 
-Script: `rust/scripts/c74_linear_selector_lp.py`. Solver: `gridcap-c74` (built from
+Script: `rust/scripts/c75_linear_selector_lp.py`. Solver: `gridcap-c75` (built from
 `notes/2026-07-06-grid-cap-solver.rs` after the `root_replies` per-reply dump was extended to
 carry `chi`/`polar` — see Provenance). No re-solve: reuses the on-disk exact Grundy dumps
 `s4-dumps/2026-07-09/c35/q{13,17,19}-root-1234.grundy.raw`.
@@ -21,7 +21,7 @@ some other root.
 Codex tested these families **one hand-picked scalar coordinate at a time**. The untested question
 is whether the failure is a *coordinate-choice* problem (some better function of the features works)
 or a *feature-completeness* problem (the features themselves cannot separate winning from losing
-replies). C74 settles this.
+replies). C75 settles this.
 
 ## Method
 
@@ -86,7 +86,7 @@ feature-twin forces the constraint `⟨w, 0⟩ ≥ 1`.
 
 **Necessary next step (named, with a design target).** Any value-blind winning selector must
 introduce a genuinely new PGL-invariant coordinate that distinguishes these feature-twins. The 19
-witness pairs (`rust/s4-dumps/2026-07-11/c74/q{13,17,19}-detail2.tsv`, filter by the collision
+witness pairs (`rust/s4-dumps/2026-07-11/c75/q{13,17,19}-detail2.tsv`, filter by the collision
 signatures the script prints) are the minimal, concrete separation target: find the geometric
 difference between `6,6` and `12,3` after opponent `11,0` at the q=13 root that the current
 invariants miss. This also re-weights the program toward the amortized/ledger form of the potential
@@ -104,7 +104,7 @@ now ruled out.
   the global twin density over all plies is unmeasured (a cheap follow-up: dump replies at all
   fail-out obligations).
 - **Orthogonal to the A5 anchor.** A5 selects *which root escape child* to certify (works,
-  value-blind). C74 is about *deep reply selection inside* the certificate; the two are different
+  value-blind). C75 is about *deep reply selection inside* the certificate; the two are different
   layers and do not conflict.
 
 ## Provenance / reproduction
@@ -116,15 +116,15 @@ only against the complete emitted space.
 
 ```bash
 # solver patched at notes/2026-07-06-grid-cap-solver.rs root_replies emitter (+chi,+polar)
-rustc -O -C target-cpu=native notes/2026-07-06-grid-cap-solver.rs -o rust/target/gridcap-c74
+rustc -O -C target-cpu=native notes/2026-07-06-grid-cap-solver.rs -o rust/target/gridcap-c75
 cd rust
 for q in 13 17 19; do
-  ./target/gridcap-c74 s4selectors $q 1,2,3,4 \
+  ./target/gridcap-c75 s4selectors $q 1,2,3,4 \
     --grundy s4-dumps/2026-07-09/c35/q${q}-root-1234.grundy.raw \
-    --fail-out s4-dumps/2026-07-11/c74/q${q}-detail2.tsv
+    --fail-out s4-dumps/2026-07-11/c75/q${q}-detail2.tsv
 done
-uv run --with scipy --with numpy python3 scripts/c74_linear_selector_lp.py \
-  q13=s4-dumps/2026-07-11/c74/q13-detail2.tsv \
-  q17=s4-dumps/2026-07-11/c74/q17-detail2.tsv \
-  q19=s4-dumps/2026-07-11/c74/q19-detail2.tsv
+uv run --with scipy --with numpy python3 scripts/c75_linear_selector_lp.py \
+  q13=s4-dumps/2026-07-11/c75/q13-detail2.tsv \
+  q17=s4-dumps/2026-07-11/c75/q17-detail2.tsv \
+  q19=s4-dumps/2026-07-11/c75/q19-detail2.tsv
 ```
