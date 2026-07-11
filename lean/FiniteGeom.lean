@@ -9,3 +9,4 @@
 import FiniteGeom.Weight
 import FiniteGeom.Hypergraph
 import FiniteGeom.Code
+import FiniteGeom.Completion

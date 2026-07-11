@@ -3,8 +3,9 @@
 **Date**: 2026-07-11
 **Status**: IN PROGRESS. Plan approved (`yc` under `mi`, 2026-07-11); the three §5 decisions
 are resolved. **Phase 0 MVP + Phase 1 step 1 (transfer lemma) + the concrete `FiniteGeom`
-`𝔽_q` code layer landed** — see §7 Progress. Resume at Phase 1 step 2 (`δ_x = τ`); the real
-`q = 9` discharge (trace-form nondegeneracy + Chen–Ling–Xing) remains the tracked next-step 2.
+`𝔽_q` code layer + Phase 1 step 2 (`δ_x = τ`, abstract identity) landed** — see §7 Progress.
+Two open leads: the real `q = 9` discharge (trace-form nondegeneracy + Chen–Ling–Xing; tracked
+next-step 2) and identifying the concrete repair hypergraph `𝓑_x` on the code layer (next-step 3).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
 [baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
 [completion-core-rigidity](../2026-07-10-completion-core-rigidity-upgrades.md),
@@ -267,9 +268,11 @@ that discharges the transfer interface's finite fields from it:
    residual fields `beta`/`hbeta`/`houter` — needs the
    trace-form nondegeneracy (`Algebra.trace` / `traceForm_nondegenerate`) for `hbeta` and the
    Chen–Ling–Xing dual decomposition for `houter`.
-3. Phase 1 step 2: `δ_x = τ(𝓑_x)` completion-distance invariant (shared into `CompletionCore`).
-   The `τ` side now exists (`FiniteGeom.transversalNumber`); the remaining work is defining `δ_x`
-   (completion distance) on the code layer and identifying the repair hypergraph `𝓑_x`.
+3. ~~Phase 1 step 2: `δ_x = τ(𝓗_C(x))` completion-distance invariant~~ **(abstract identity
+   landed)** — `FiniteGeom/Completion.lean` `completionDistance_eq_transversalNumber`. Remaining:
+   identify the concrete repair hypergraph `𝓑_x = 𝓗_C(x)` on the code layer (its edges are the
+   minimum parity-check supports through the erased coordinate) and supply a matroid instance
+   discharging "no surviving trace ⟺ independent". Both wait on more of the code layer.
 4. Phase 1 step 4: uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`.
 
 ### Handoff Note — 2026-07-11 (session: lean-formalization Phase 0/1)
@@ -326,3 +329,23 @@ that discharges the transfer interface's finite fields from it:
 - MDS/Singleton intentionally deferred (not cited by the slice). Build green, no warnings, all
   new results `#print axioms`-clean (`[propext, Classical.choice, Quot.sound]`). Fourth commit
   this session.
+
+### Handoff Note — 2026-07-11 (cont.: δ_x = τ invariant + the τ > ν witness)
+
+- Landed **Phase 1 step 2's abstract identity**: `FiniteGeom/Completion.lean`
+  `completionDistance_eq_transversalNumber` — completion-core Prop 2.2's `δ_x(C) = τ(𝓗_C(x))`,
+  the finite content, shared into the base so `RepairCodes` and `CompletionCore` cite one proof.
+  Abstract-first: the matroid content ("`(C∖D)∪{x}` independent ⟺ no circuit survives, and every
+  relevant circuit passes through `x`") is folded into the *definition* of the deletion predicate
+  (a trace `A` dies iff the deletion meets it), faithful to the paper's own proof, so the theorem
+  is a pure hypergraph identity `min deletion = τ` with no imported input. `≥ τ`: a witnessing
+  deletion is a transversal; `≤ τ`: intersect a minimum transversal with `C` (legitimate since
+  every edge already lies in `C`). Reuses `transversalNumber`/`transversalNumber_le_card`.
+- Closed the **documented `τ > ν` gap**: the triangle hypergraph `{{0,1},{1,2},{0,2}}` on `Fin 3`
+  (pairwise-intersecting edges) added to `Hypergraph.lean` with a full `ν = 1 ∧ τ = 2` proof, so
+  weak duality `ν ≤ τ` is shown *strict* in general (the prior only numeric instance had `ν = τ`).
+  `ν ≤ 1` from "matching edges are pairwise disjoint but distinct triangle edges intersect";
+  `τ ≥ 2` from "no single vertex meets all three edges" (small `decide`). A *code-derived* `τ > ν`
+  is still the remaining goal. `decide` used only on 3-edge/`Fin 3`-subset checks — no
+  `native_decide`; axioms stay `[propext, Classical.choice, Quot.sound]`.
+- Build green, no warnings, all new results `#print axioms`-clean. Fifth commit this session.

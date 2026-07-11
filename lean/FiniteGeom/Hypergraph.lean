@@ -22,9 +22,11 @@ bound + attained), and exercised on a concrete hypergraph in the examples below.
 The strict gap `τ > ν` on a positive fraction of coordinates is the point of the
 repair-hypergraph transfer (`RepairCodes` §1.4) and the `δ_x = τ`
 completion-distance invariant shared into `CompletionCore` (Phase 1 step 2);
-`ν ≤ τ` is the baseline those build on. A code-derived `τ > ν` instance waits on
-the concrete `FiniteGeom` code layer. Self-contained combinatorics — no field or
-code structure appears here.
+`ν ≤ τ` is the baseline those build on. The strictness is real: the triangle
+hypergraph example below exhibits `ν = 1 < 2 = τ` (so `ν ≤ τ` cannot be
+strengthened to equality). A *code-derived* `τ > ν` instance — the LRC repair
+hypergraph of a real coordinate — still waits on the concrete `FiniteGeom` code
+layer. Self-contained combinatorics — no field or code structure appears here.
 -/
 
 namespace FiniteGeom
@@ -145,6 +147,46 @@ example :
   have h2 : transversalNumber ({{0, 1}} : Finset (Finset (Fin 2))) ≤ 1 := by
     simpa using transversalNumber_le_card hT
   have h3 := nu_le_tau ({{0, 1}} : Finset (Finset (Fin 2))) hne
+  exact ⟨by omega, by omega⟩
+
+/-- The triangle hypergraph `{{0,1},{1,2},{0,2}}` on `Fin 3`: three pairwise-intersecting
+edges. It witnesses the strict gap `ν = 1 < 2 = τ`, so weak duality `ν ≤ τ` is *not* an
+equality in general (contrast the one-edge example above, where `ν = τ`). This is the
+combinatorial demonstration of the `τ > ν` phenomenon the repair-hypergraph transfer exploits;
+a code-derived instance is the remaining goal (docstring). -/
+example :
+    matchingNumber ({{0, 1}, {1, 2}, {0, 2}} : Finset (Finset (Fin 3))) = 1 ∧
+      transversalNumber ({{0, 1}, {1, 2}, {0, 2}} : Finset (Finset (Fin 3))) = 2 := by
+  classical
+  set H : Finset (Finset (Fin 3)) := {{0, 1}, {1, 2}, {0, 2}} with hH
+  -- distinct edges of the triangle always share a vertex (never disjoint).
+  have hint : ∀ a ∈ H, ∀ b ∈ H, a ≠ b → ¬ Disjoint a b := by decide
+  -- ν ≥ 1 via a single-edge matching; ν ≤ 1 because a matching's edges are pairwise disjoint.
+  have hMone : IsMatching H {{0, 1}} := by
+    refine ⟨by decide, ?_⟩
+    intro a ha b hb hab
+    rw [mem_singleton] at ha hb
+    exact absurd (ha.trans hb.symm) hab
+  have hnu_ge : 1 ≤ matchingNumber H := by simpa using card_le_matchingNumber hMone
+  have hnu_le : matchingNumber H ≤ 1 := by
+    unfold matchingNumber
+    refine csSup_le ⟨0, ∅, ⟨empty_subset _, by intro a ha; simp at ha⟩, card_empty⟩ ?_
+    rintro n ⟨M, hM, rfl⟩
+    rw [Finset.card_le_one]
+    intro a ha b hb
+    by_contra hab
+    exact hint a (hM.1 ha) b (hM.1 hb) hab (hM.2 ha hb hab)
+  -- τ ≤ 2 via the cover {0,1}; τ ≥ 2 because no single vertex meets all three edges.
+  have hTtwo : IsTransversal H ({0, 1} : Finset (Fin 3)) := by
+    intro e he; fin_cases he <;> decide
+  have htau_le : transversalNumber H ≤ 2 := by
+    simpa using transversalNumber_le_card hTtwo
+  have hTne : ({n | ∃ T, IsTransversal H T ∧ T.card = n} : Set ℕ).Nonempty :=
+    ⟨2, {0, 1}, hTtwo, by decide⟩
+  have htau_ge : 2 ≤ transversalNumber H := by
+    have hlb : ∀ T : Finset (Fin 3), (∀ e ∈ H, (T ∩ e).Nonempty) → 2 ≤ T.card := by decide
+    unfold transversalNumber
+    exact le_csInf hTne (by rintro n ⟨T, hT, rfl⟩; exact hlb T fun e he => hT he)
   exact ⟨by omega, by omega⟩
 
 end FiniteGeom
