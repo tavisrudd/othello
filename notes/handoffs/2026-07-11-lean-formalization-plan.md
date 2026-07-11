@@ -1,8 +1,8 @@
 # Lean formalization plan — the -10 / -11 PROVED corpus
 
 **Date**: 2026-07-11
-**Status**: PLAN — awaiting approval before any `lean/` folder is created (architecture: folder
-layout locks in future work).
+**Status**: PLAN APPROVED (`yc` under `mi`, 2026-07-11); the three decisions in §5 are resolved.
+Execution deferred to a fresh session — no `lean/` folder created yet. Resume at Phase 0/1.
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
 [baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
 [completion-core-rigidity](../2026-07-10-completion-core-rigidity-upgrades.md),
@@ -45,8 +45,8 @@ The corpus is not uniform; forcing everything to "real proof" is the wrong call.
 - **CERT** — a generated certificate + independent rules-only checker, the `CertData/` pattern, for
   the `COMPUTED-EXACT` single-`q` data (the `q=9` seed `(ν,τ)` table, the `q=5,7,11` orbit spectrum,
   the `s=7` Frobenius counterexample). These are *checked*, not `native_decide`d.
-- **IMPORT** — state as an `axiom`/hypothesis with a literature citation; do **not** attempt to
-  prove. Everything the docs already tag `[LITERATURE-IMPORTED]` plus the deep analytic inputs.
+- **IMPORT** — a cited external result we do not re-prove. Handled with the **most rigorous
+  review-ready discipline** (decision 3, below), not a loose `axiom`.
 
 **IMPORT list (axiomatize, cite, never prove):**
 
@@ -62,8 +62,9 @@ The corpus is not uniform; forcing everything to "real proof" is the wrong call.
 
 The asymptotic conclusions (`τ/ν → p`, asymptotically-good fixed-alphabet families) then become
 **conditional Lean theorems**: Lean proves the *reduction* (finite seed + transfer lemma ⇒ family
-with the invariant distribution), taking the analytic bounds as hypotheses. That is the honest and
-achievable boundary — the finite content is ours, the analytic content is imported.
+with the invariant distribution), taking the analytic bounds as inputs. The finite content is ours,
+the analytic content is imported — and §5 decision 3 fixes exactly *how* imported, so a reviewer can
+audit the boundary line by line.
 
 ## 3. mathlib gap analysis (what `FiniteGeom` must build)
 
@@ -131,17 +132,36 @@ a finite statement).
 the crux novelty, is self-contained (no imported analytic input), and validates the `FiniteGeom`
 code/hypergraph layer against a real theorem before the other three libraries commit to it.
 
-**Risks / open calls (need a decision):**
-- **Code layer depth.** Building even a minimal MDS/dual-distance layer in Lean is real work; mathlib
-  won't carry it. Alternative: state `RepairCodes` over an abstract `[LinearCode]` typeclass with the
-  needed axioms, deferring the concrete `𝔽_q` instantiation. *Recommendation:* abstract typeclass
-  first (fast path to the transfer lemma), concrete NRC/twisted-cubic instance later.
-- **CERT vs PROVE for single-`q` tables.** The `CertData/Q13` precedent says generated-cert +
-  rules-checker. Confirm we hold that bar (no `native_decide`) for the `q=9`/`q=11` data.
-- **Conditional-theorem framing.** Get sign-off that "Lean proves the reduction, imports the analytic
-  bound as an axiom" is the accepted boundary for the asymptotic claims — it is the only feasible one.
-- **Effort.** This is a multi-session program. Phase 1 alone (FiniteGeom MVP + transfer lemma +
-  `δ_x=τ`) is the right first commitment; the rest is sequenced behind it.
+**Decisions (resolved 2026-07-11, `yc` under `mi`):**
+
+1. **Code layer — abstract-first.** State `RepairCodes` over an abstract `[LinearCode 𝔽 …]`
+   typeclass carrying only the properties the transfer lemma cites (dual code, dual distance,
+   bounded-weight dual supports). Reach the transfer lemma fast against the abstract interface; the
+   concrete `𝔽_q` NRC / twisted-cubic instance comes later. **Required follow-through (review-ready
+   guard):** the abstract layer is not done until it is *discharged by at least one concrete instance*
+   (the `q=9` seed), else the theorem is vacuous — track the instance as part of Phase 1, not "later".
+
+2. **Single-`q` tables — CERT, no `native_decide`.** Hold the `CertData/Q13` bar: generated
+   certificate + independent rules-only checker, `#print axioms` clean. Confirmed.
+
+3. **Imported results — most rigorous review-ready boundary.** In priority order:
+   - **Prove, don't import, whenever feasible.** The *elementary* inputs — Vandermonde independence,
+     the zero-sum circuit identity, the `p`-uniform `τ ≤ pν` bound, the Singleton-LRC bound — are
+     finite/algebraic and get **PROVE**d, not axiomatized. Only genuinely deep external theorems stay
+     imported.
+   - **Prefer explicit hypotheses over axioms.** Where an imported bound can be a *named argument* of
+     the theorem (e.g. `(hSauermann : Z p q ≤ …) → …`), do that — the dependency then lives in the
+     signature, visible to any reader, with **zero** global axioms introduced.
+   - **Quarantine the irreducible ones.** Results that must be standing facts go in a single
+     `Imported.lean` per library as `axiom`s whose statements are **copied verbatim from the cited
+     paper** (theorem number + arXiv/DOI in the docstring), nothing else in that file.
+   - **Audit gate.** Every headline theorem carries a `#print axioms` check (as TRUST.md already does):
+     an unconditional theorem shows `[propext, Classical.choice, Quot.sound]` only; a conditional one
+     shows *exactly* the quarantined imports it rests on and no others. That set is the reviewable
+     boundary between "ours" and "imported".
+
+**Effort.** Multi-session program. Phase 1 (FiniteGeom MVP + transfer lemma + `δ_x=τ` + the `q=9`
+discharging instance) is the first commitment; the rest sequences behind it. Starting fresh session.
 
 ## 6. Provenance
 Backing scripts (COMPUTED-EXACT sources for the `[CERT]` items) are tracked under
