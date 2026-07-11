@@ -1,0 +1,150 @@
+# Lean formalization plan — the -10 / -11 PROVED corpus
+
+**Date**: 2026-07-11
+**Status**: PLAN — awaiting approval before any `lean/` folder is created (architecture: folder
+layout locks in future work).
+**Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
+[baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
+[completion-core-rigidity](../2026-07-10-completion-core-rigidity-upgrades.md),
+[continuation-graph-rigidity](../2026-07-10-continuation-graph-rigidity-upgrades.md),
+[coding/MDS cross-field sweep](../2026-07-11-codex-coding-mds-cross-field-sweep.md), and the
+Lean-proved portfolio cards ([key cards](../2026-07-11-projective-cap-portfolio-key-cards.md)).
+**Not in scope**: `[OPEN]`, `[SPECULATIVE]`, `[TRANSLATION]`, and applied/ML directions — those
+are not theorems yet.
+
+## 1. Layout decision (per the "new folders, same top-level `lean/`" steer)
+
+`lean/` today holds five `[[lean_lib]]` targets (`NodeKayles`, `Sumfree`, `CapGame`,
+`ProjectiveCap`, `Queens`), each an `X.lean` root importing an `X/` module dir; generated
+certificates live under `ProjectiveCap/CertData/`. New work follows the same shape.
+
+| New library | Covers | Source doc |
+|---|---|---|
+| `RepairCodes` | LRC repair hypergraph `(ν,τ)`, twisted-cubic–axis + Roth–Lempel seeds, bounded-repair transfer, seed-and-lift, `δ_x=τ` completion distance | sweep §1, §3 |
+| `CompletionCore` | completion core, deletion/insertion distance, secant resilience, relative multiple saturation, the §4 example families | completion-core-upgrades |
+| `ContinuationRigidity` | `M_(0,5)` four-map reduct, frame-graph semilinear rigidity (Thm 7.4), continuation-complex reconstruction (Thm 8.2–8.4), rook-graph / tangent-trace recovery | continuation-upgrades |
+| `BaerExtension` | Galois/Baer-invariant arc pair-extension (Thm 3.1), fixed-subgeometry extension (Thm 6.1), Galois-rank section formula (Thm 7.1) | baer-upgrades |
+| `FiniteGeom` (shared base) | `PG(n,q)`, linear codes / MDS / dual distance, hypergraph `ν`/`τ`, `PGL(2,q)` + symmetric-cube action, twisted cubic / NRC — the infrastructure the four libs share | all |
+
+**Fits existing Lean (no new folder):** the odd-plane cap-game bidirectional reduction (card K1) and
+the proof-carrying methodology (K18) are already `ProjectiveCap` (`Grid`, `GridGame`,
+`FrameGridBridge`, `TrapConverse`, `Certificate`, `CertCheck`). New game-value `[PROVED]` items go
+there; the `A5` frame/incidence work already has `rust/scripts/a5_*` companions.
+
+`RepairCodes` is deliberately first and standalone (the juiciest lane, and the one with no existing
+Lean) — it needs only the linear-code + hypergraph parts of `FiniteGeom`, not the projective-rigidity
+machinery.
+
+## 2. Three trust tiers — decide per theorem BEFORE writing it
+
+The corpus is not uniform; forcing everything to "real proof" is the wrong call. Tag each item:
+
+- **PROVE** — machine-check with no `sorry`, axioms clean (`propext`/`Classical.choice`/`Quot.sound`
+  only, no `native_decide`), matching the current `NodeKayles`/`ProjectiveCap` bar. For the finite,
+  elementary, general-in-`q` statements.
+- **CERT** — a generated certificate + independent rules-only checker, the `CertData/` pattern, for
+  the `COMPUTED-EXACT` single-`q` data (the `q=9` seed `(ν,τ)` table, the `q=5,7,11` orbit spectrum,
+  the `s=7` Frobenius counterexample). These are *checked*, not `native_decide`d.
+- **IMPORT** — state as an `axiom`/hypothesis with a literature citation; do **not** attempt to
+  prove. Everything the docs already tag `[LITERATURE-IMPORTED]` plus the deep analytic inputs.
+
+**IMPORT list (axiomatize, cite, never prove):**
+
+| Imported theorem | Feeds | Cite |
+|---|---|---|
+| Sauermann `Z_p(𝔽_q)=o(p^h)` | `τ/ν → p` | arXiv:1904.09560 |
+| Ellenberg–Gijswijt cap-set `Z_3=o(3^h)` | `τ/ν → 3` | Annals 2017 |
+| Dias da Silva–Hamidoune restricted sumset | prime-NRC `δ_x` (§3) | classical |
+| Han–Fan NMDS ⟺ zero-sum characterization | code/circuit prior art (§1.3) | IEEE IT 2023 |
+| Garcia–Stichtenoth optimal tower | explicit outer / asymptotically-good | classical |
+| classical MDS/GRS + Singleton-LRC bound | §1 parameters | GHSY arXiv:1106.3625 |
+| BDMP twisted-cubic orbit sizes | orbit cross-check (`RepairCodes`/§6.5) | arXiv:1909.00207 |
+
+The asymptotic conclusions (`τ/ν → p`, asymptotically-good fixed-alphabet families) then become
+**conditional Lean theorems**: Lean proves the *reduction* (finite seed + transfer lemma ⇒ family
+with the invariant distribution), taking the analytic bounds as hypotheses. That is the honest and
+achievable boundary — the finite content is ours, the analytic content is imported.
+
+## 3. mathlib gap analysis (what `FiniteGeom` must build)
+
+mathlib pinned at v4.32-rc1; minimal-footprint preferred (per TRUST.md, `SetTheory/Game` is gone →
+self-contained).
+
+| Need | mathlib status | action |
+|---|---|---|
+| `𝔽_q`, Frobenius | `GaloisField`, `ZMod`, `frobenius` — present | reuse |
+| `PG(n,q)` | `Projectivization` — partial | thin wrapper |
+| linear code, dual, min distance, MDS | `CodingTheory` has Hamming/`Code`; MDS/dual-distance/generator-matrix — **thin/absent** | **build** a small generator-matrix + dual-distance layer |
+| hypergraph transversal `τ` / matching `ν` | `SimpleGraph` matching partial; hypergraph `τ`/fractional — absent | **build** minimal `Finset`-of-`Finset` `ν`/`τ` |
+| `PGL(2,q)`, symmetric cube | `GeneralLinearGroup`, `MulAction` present; `Sym^3` — absent | **build** the degree-3 rep (the Python `sym3_matrix` is the spec) |
+| twisted cubic / NRC | absent | **build** on the code layer |
+| zero-sum-free / cap sets | absent (and IMPORT-tier) | axiom only |
+
+`FiniteGeom` is the critical-path dependency and the main cost. Keep it lean: build only the code +
+hypergraph + `PGL`-action pieces the four libraries actually cite.
+
+## 4. Dependency-ordered phases
+
+```
+FiniteGeom (codes + hypergraph τ/ν)  ── critical path
+        │
+        ├── RepairCodes      (needs codes + hypergraph + Sym^3)      ← FIRST vertical slice
+        ├── CompletionCore   (needs codes + hypergraph; shares δ_x=τ with RepairCodes)
+        ├── ContinuationRigidity (needs PG + Sym^3 + graph automorphisms)
+        └── BaerExtension    (needs PG + Frobenius + subspace arrangements)
+```
+
+**Phase 0 — `FiniteGeom` MVP.** Generator matrix over `𝔽_q`, dual code, minimum/dual distance,
+`Finset`-hypergraph with `ν` (max matching) and `τ` (min transversal). Just enough to *state*
+`RepairCodes` Theorem 1.1.
+
+**Phase 1 — `RepairCodes` vertical slice (recommended first deliverable).** In order:
+1. `[PROVE]` transfer lemma (§1.4): inner `d(I⊥)=r+1`, outer `d(O⊥)≥r+2` ⇒ every `q`-weight-`≤r+1`
+   dual word is confined to one inner block ⇒ the complete radius-`r` repair hypergraph transfers.
+   Clean dual-weight/trace argument — the crux novelty, and it proves in Lean without any imported
+   analytic input. **This is the single highest-value Lean target in the whole corpus.**
+2. `[PROVE]` `δ_x = τ(𝓑_x)` completion-distance invariant (§3 / completion-core Prop 2.2, 2.4).
+3. `[CERT]` the `q=9` full-orbit seed: `C_orb=[19,4,8]_9`, the three `(ν,τ)=(4,7),(6,12),(7,13)`
+   rows, `minimal_circuits=[(3,120),(4,84)]`, all-symbol locality ≤3 — generated from
+   `q9_pgl_orbit_seed.py`, checked by a rules-only validator (not `native_decide`).
+4. `[PROVE]` uniform `q=3^h` theorem (§1.5.1): `C(S_q)=[2q+1,4,q-1]_q`, all-symbol `τ>ν`.
+5. `[PROVE, conditional]` seed-and-lift (§1.4/§1.5): seed + transfer + IMPORTed outer family ⇒
+   asymptotically-good fixed-alphabet family with the same invariant distribution.
+
+**Phase 2 — `CompletionCore`.** completion core closure (Prop 1.1), sharp deletion radius (Thm 2.1),
+relative multiple saturation (Prop 5.3), the §4 example families (each `[CERT]` or short `[PROVE]`).
+Shares `δ_x=τ` with Phase 1 — build it once in `FiniteGeom`, cite from both.
+
+**Phase 3 — `ContinuationRigidity`.** Minimal nonfaces (Prop 8.1) → two-point complex reconstructs
+the plane (Thm 8.2) → frame-graph semilinear rigidity `S_4`+Frobenius (Thm 7.4, via Lemmas 7.2/7.3)
+→ full continuation-complex reconstruction (Thm 8.4). Fixed small-`q` rigidity checks are `[CERT]`;
+the general theorems `[PROVE]`. Heaviest lane (graph-automorphism + moduli reduct).
+
+**Phase 4 — `BaerExtension`.** Pair-extension theorem (Thm 3.1) and its corollaries (3.2–3.4),
+fixed-subgeometry extension (Thm 6.1), Galois-rank section formula (Thm 7.1). Depends on Frobenius
++ subspace-arrangement counting; the `sqrt` lower bound (Cor 3.4) needs care (real-valued bound over
+a finite statement).
+
+## 5. Recommended first move + risks
+
+**First move:** Phase 0 MVP + Phase 1 step 1 (the transfer lemma) as one thin vertical slice — it is
+the crux novelty, is self-contained (no imported analytic input), and validates the `FiniteGeom`
+code/hypergraph layer against a real theorem before the other three libraries commit to it.
+
+**Risks / open calls (need a decision):**
+- **Code layer depth.** Building even a minimal MDS/dual-distance layer in Lean is real work; mathlib
+  won't carry it. Alternative: state `RepairCodes` over an abstract `[LinearCode]` typeclass with the
+  needed axioms, deferring the concrete `𝔽_q` instantiation. *Recommendation:* abstract typeclass
+  first (fast path to the transfer lemma), concrete NRC/twisted-cubic instance later.
+- **CERT vs PROVE for single-`q` tables.** The `CertData/Q13` precedent says generated-cert +
+  rules-checker. Confirm we hold that bar (no `native_decide`) for the `q=9`/`q=11` data.
+- **Conditional-theorem framing.** Get sign-off that "Lean proves the reduction, imports the analytic
+  bound as an axiom" is the accepted boundary for the asymptotic claims — it is the only feasible one.
+- **Effort.** This is a multi-session program. Phase 1 alone (FiniteGeom MVP + transfer lemma +
+  `δ_x=τ`) is the right first commitment; the rest is sequenced behind it.
+
+## 6. Provenance
+Backing scripts (COMPUTED-EXACT sources for the `[CERT]` items) are tracked under
+[`notes/scripts/2026-07-11-coding-mds-sweep/`](../scripts/2026-07-11-coding-mds-sweep/) with frozen
+hashes; each `[CERT]` Lean cert should regenerate from the corresponding script and be checked by a
+rules-only validator, mirroring `ProjectiveCap/CertData/`.
