@@ -277,14 +277,15 @@ that discharges the transfer interface's finite fields from it:
    minimum parity-check supports through the erased coordinate) and supply a matroid instance
    discharging "no surviving trace ⟺ independent". Both wait on more of the code layer.
 4. Phase 1 step 4: uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`.
-5. **Distance-lower-bound tool** ~~(core landed)~~ — `FiniteGeom/EvalCode.lean`:
+5. **Distance-lower-bound tool + Reed–Solomon MDS** ~~(landed)~~ — `FiniteGeom/EvalCode.lean`:
    `card_eval_zero_le_natDegree` (a nonzero deg-`<k` poly vanishes at `≤ k-1` distinct points),
-   the Reed–Solomon code `rsCode pts k`, and `rsCode_minDist_ge : n-(k-1) ≤ d(RS_k)`, all via the
-   new general `le_minDist` helper in `Code.lean`. This is the *lower*-bound direction Singleton
-   doesn't give — the tool the real min-distance claims (q=9, q=3^h) turn on. **Remaining capstone:**
-   RS-is-MDS equality (`IsMDS (rsCode pts k)` for `k ≤ n`), needing `finrank (rsCode) = k` via
-   `evalPi`'s injectivity on `degreeLT k` (`Submodule.equivMapOfInjective`) + `finrank (degreeLT 𝔽 k)
-   = k` (`degreeLTEquiv`), combined with `singleton_bound`.
+   the Reed–Solomon code `rsCode pts k`, `rsCode_minDist_ge : n-(k-1) ≤ d(RS_k)` (via the new
+   general `le_minDist` helper in `Code.lean`), `finrank_rsCode : finrank = k` (`k ≤ n`, via
+   `evalPi` injective on `degreeLT k` + `degreeLTEquiv`), and `rsCode_isMDS` (`1 ≤ k ≤ n` ⇒
+   `IsMDS`, combining the lower bound with `singleton_bound`). This is the *lower*-bound
+   direction Singleton doesn't give — the tool the real min-distance claims (q=9, q=3^h) turn on.
+   **Next application:** instantiate for a concrete field to feed the q=9 seed / build the
+   NMDS-shaped codes the sweep flags (RS is the MDS baseline; the seeds are one-below).
 
 ### Handoff Note — 2026-07-11 (session: lean-formalization Phase 0/1)
 
@@ -436,3 +437,17 @@ that discharges the transfer interface's finite fields from it:
 - Build green (`lake build FiniteGeom RepairCodes`), no warnings; `#print axioms` on
   `le_minDist` / `card_eval_zero_le_natDegree` / `rsCode_hammingNorm_ge` / `rsCode_minDist_ge`
   = `[propext, Classical.choice, Quot.sound]`. Ninth commit.
+
+### Handoff Note — 2026-07-11 (cont.: Reed–Solomon-is-MDS capstone)
+
+- Closed next-step 5's capstone: **`rsCode_isMDS`** — Reed–Solomon codes meet Singleton with
+  equality (`d + k = n + 1`) for `1 ≤ k ≤ n`. Route: `finrank_rsCode : finrank (rsCode) = k`
+  (evaluation is injective on `degreeLT k` since a nonzero deg-`<k` poly can't vanish at all
+  `n ≥ k` points; `rsCode` is then the injective image of `degreeLT k`, finrank `k` via
+  `degreeLTEquiv` + rank-nullity `LinearMap.finrank_range_of_inj`), then `singleton_bound`
+  (upper) meets `rsCode_minDist_ge` (lower) ⇒ `d = n-k+1`.
+- Now the layer has BOTH Singleton directions unified in a worked family: `singleton_bound`
+  (general upper), `rsCode_minDist_ge` (RS lower), and their equality `rsCode_isMDS`. This is
+  the MDS baseline the sweep's near-MDS seeds sit one below.
+- Build green, no warnings; `#print axioms finrank_rsCode` / `rsCode_isMDS`
+  = `[propext, Classical.choice, Quot.sound]`. Tenth commit.

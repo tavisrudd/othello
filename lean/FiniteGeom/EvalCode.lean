@@ -112,4 +112,50 @@ theorem rsCode_minDist_ge {pts : Fin n → 𝔽} (hpts : Function.Injective pts)
   · intro c hc hcne
     exact rsCode_hammingNorm_ge hpts hc hcne
 
+/-- **Dimension of a Reed–Solomon code.** For `k ≤ n` distinct points, `RS_k(pts)` has
+dimension `k`: evaluation is injective on degree-`< k` polynomials (a nonzero such polynomial
+cannot vanish at all `n ≥ k` points), so `RS_k` is the injective image of `degreeLT 𝔽 k`, whose
+dimension is `k`. -/
+theorem finrank_rsCode {pts : Fin n → 𝔽} (hpts : Function.Injective pts) {k : ℕ} (hk : k ≤ n) :
+    Module.finrank 𝔽 (rsCode pts k) = k := by
+  haveI : Module.Finite 𝔽 (degreeLT 𝔽 k) := Module.Finite.equiv (degreeLTEquiv 𝔽 k).symm
+  set g : degreeLT 𝔽 k →ₗ[𝔽] (Fin n → 𝔽) := (evalPi pts).comp (degreeLT 𝔽 k).subtype with hg
+  have hginj : Function.Injective g := by
+    rw [← LinearMap.ker_eq_bot, Submodule.eq_bot_iff]
+    intro x hx
+    rw [LinearMap.mem_ker] at hx
+    by_contra hxne
+    have hval : (x : 𝔽[X]) ≠ 0 := fun h => hxne (Submodule.coe_eq_zero.mp h)
+    have hdeg : (x : 𝔽[X]).natDegree < k :=
+      (natDegree_lt_iff_degree_lt hval).mpr ((mem_degreeLT).mp x.2)
+    have hall : ∀ i, (x : 𝔽[X]).eval (pts i) = 0 := fun i => by
+      have := congrFun hx i
+      simpa [hg, LinearMap.comp_apply, evalPi_apply] using this
+    have hcard : #(univ.filter fun i => (x : 𝔽[X]).eval (pts i) = 0) = n := by
+      rw [Finset.filter_true_of_mem (fun i _ => hall i), Finset.card_univ, Fintype.card_fin]
+    have hle := card_eval_zero_le_natDegree hval hpts
+    rw [hcard] at hle
+    omega
+  have hrange : LinearMap.range g = rsCode pts k := by
+    unfold rsCode
+    rw [hg, LinearMap.range_comp, Submodule.range_subtype]
+  calc Module.finrank 𝔽 (rsCode pts k)
+      = Module.finrank 𝔽 (LinearMap.range g) := by rw [hrange]
+    _ = Module.finrank 𝔽 (degreeLT 𝔽 k) := LinearMap.finrank_range_of_inj hginj
+    _ = Module.finrank 𝔽 (Fin k → 𝔽) := (degreeLTEquiv 𝔽 k).finrank_eq
+    _ = k := by rw [Module.finrank_pi, Fintype.card_fin]
+
+/-- **Reed–Solomon codes are MDS.** For `1 ≤ k ≤ n` distinct points, `RS_k(pts)` meets the
+Singleton bound with equality: `d + k = n + 1`. The lower bound `n-(k-1) ≤ d`
+(`rsCode_minDist_ge`) and the Singleton upper bound `d + k ≤ n + 1` (`singleton_bound`, using
+`finrank_rsCode`) pin `d = n - k + 1`. -/
+theorem rsCode_isMDS {pts : Fin n → 𝔽} (hpts : Function.Injective pts) {k : ℕ}
+    (hk1 : 1 ≤ k) (hkn : k ≤ n) : IsMDS (rsCode pts k) := by
+  unfold IsMDS
+  rw [finrank_rsCode hpts hkn]
+  have hlow := rsCode_minDist_ge hpts hk1 (by omega : 1 ≤ n)
+  have hup := singleton_bound (rsCode pts k)
+  rw [finrank_rsCode hpts hkn] at hup
+  omega
+
 end FiniteGeom
