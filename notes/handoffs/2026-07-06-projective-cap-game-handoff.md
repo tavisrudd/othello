@@ -602,6 +602,23 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **A5 anchor (2026-07-10, Claude) — the most-symmetric on-conic completion is P; a value-blind
+  (ON) witness that survives the q=11 exception L1 failed on.**  On-conic child values are
+  Stab(frame)-invariant (full-PGL bridge), so the `q−4` children split into Stab-orbits.
+  **Measured (all classes, q=11/13/17/19): the smallest Stab(frame)-orbit is P — 8/8, 12/12, 21/21,
+  27/27; no frame-fixed on-conic point is ever N (0 N-singletons).**  At depleted orders the smallest
+  orbit is always unique: q=17 knife-edge (onP=1) → the P child IS the frame-fixed singleton `Px1`
+  (`Nx4·Nx4·Nx4·Px1`); q=11 knife-edge (onP=2, `|Stab|=D10`) → P = the size-2 orbit, N = the size-5
+  orbit — **exactly where C73's L1 picks an N conic point and fails, this anchor does not.**  So
+  A5's (ON) target gets a single uniform value-blind existence witness with **no separate exception
+  layer** at the selector level (min-witness ≥ |smallest orbit| ≥ 1).  Sharpens C68b's "P =
+  rare/special" into "special = smallest orbit = most symmetric completion."  **Caveats:** measured
+  not proved (4 primes); the game-value lemma (why the most-symmetric completion is P) is the open
+  A5 proof target; NOT the round-1-refuted "stabilizer-specialness ⇒ P" (that was the 6-point bucket
+  V4 selector — a different object; the q=11 8/8 here is direct evidence this exact statement is not
+  the refuted one).  Report:
+  [`../2026-07-10-a5-symmetric-completion-anchor.md`](../2026-07-10-a5-symmetric-completion-anchor.md);
+  script `rust/scripts/a5_exception_orbits.py`.
 - **q=29 census SIZING (2026-07-10, Claude) — the next-depleted-order hunt is a real, gated
   campaign; no cheap shortcut exists.**  With q=25 non-depleted, the observed depleted set is still
   just `{11,17}` and the depletion reports confirm **no residue predicts it** (mod 3 killed by C29;
