@@ -3,6 +3,11 @@ import Mathlib.Data.Matrix.Mul
 import Mathlib.LinearAlgebra.Span.Basic
 import Mathlib.Order.Lattice.Nat
 import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Module.Equiv.Basic
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+import Mathlib.Data.Fintype.Card
 
 /-!
 # Linear codes over `𝔽_q`: dual code and minimum / dual distance (shared `FiniteGeom` base)
@@ -29,7 +34,11 @@ the transfer-lemma interface; see `RepairCodes.CodeInstance`. The residual deep 
 (trace-representation faithfulness, Chen–Ling–Xing dual decomposition) are *not* here — they
 stay explicit hypotheses (plan §5 decision 3).
 
-MDS / Singleton is not built (not cited by the transfer slice); it is a later `FiniteGeom` job.
+* `singleton_bound` — the classical Singleton bound `d(C) + k ≤ n + 1` (a `PROVE`-tier
+  finite/algebraic input the plan flags prove-don't-import, §5 decision 3), with `IsMDS`
+  the equality case. Proved by the standard puncturing argument: restricting codewords to
+  the complement of any `d-1` coordinates is injective on `C` (two codewords agreeing there
+  differ on `≤ d-1 < d` coordinates, forcing equality), so `k = dim C ≤ n - (d-1)`.
 -/
 
 namespace FiniteGeom
@@ -121,6 +130,76 @@ theorem mem_dualCode_rowCode_iff_mulVec {G : Matrix (Fin k) (Fin n) 𝔽} {y : F
   constructor
   · intro h; funext i; exact h i
   · intro h i; exact congrFun h i
+
+/-- **Singleton bound.** For a linear `[n, k]_q` code `C`, `d(C) + k ≤ n + 1`. One of the
+elementary, general-in-`q` bounds the plan marks *prove-don't-import* (§5 decision 3): no
+imported input, pure finite linear algebra.
+
+Proof (standard puncturing): if `d = minDist C = 0` the code is trivial (`k ≤ n` suffices);
+otherwise pick any coordinate set `S` with `|S| = d - 1` and restrict codewords to `Sᶜ`. That
+restriction is injective on `C` — two codewords agreeing on `Sᶜ` differ only on `S`, a support
+of size `≤ d - 1 < d`, so their difference (a codeword) has weight below the minimum distance
+and must vanish. Hence `k = dim C ≤ dim (Sᶜ → 𝔽) = n - (d - 1)`, i.e. `d + k ≤ n + 1`. -/
+theorem singleton_bound (C : Submodule 𝔽 (Fin n → 𝔽)) :
+    minDist C + Module.finrank 𝔽 C ≤ n + 1 := by
+  rcases Nat.eq_zero_or_pos (minDist C) with hd0 | hd_pos
+  · -- trivial code: `d = 0`, and `dim C ≤ n`.
+    have hle : Module.finrank 𝔽 C ≤ n := by
+      have h := Submodule.finrank_le C
+      rwa [Module.finrank_pi, Fintype.card_fin] at h
+    omega
+  · -- `d ≥ 1`. The weight set is nonempty (else `sInf = 0`), so `d` is attained.
+    set d := minDist C with hd
+    have hne : {w | ∃ c ∈ C, c ≠ 0 ∧ hammingNorm c = w}.Nonempty := by
+      by_contra h
+      rw [Set.not_nonempty_iff_eq_empty] at h
+      have : minDist C = 0 := by unfold minDist; rw [h]; exact Nat.sInf_empty
+      omega
+    obtain ⟨cd, hcdC, hcd0, -⟩ := Nat.sInf_mem hne
+    -- `d ≤ n` from the weight of the attaining codeword.
+    have hd_le : d ≤ n := by
+      refine le_trans (minDist_le_hammingNorm hcdC hcd0) ?_
+      calc hammingNorm cd ≤ Fintype.card (Fin n) := hammingNorm_le_card_fintype
+        _ = n := Fintype.card_fin n
+    -- a coordinate set of size `d - 1`.
+    obtain ⟨S, -, hScard⟩ :=
+      Finset.exists_subset_card_eq (s := (Finset.univ : Finset (Fin n))) (n := d - 1)
+        (by rw [Finset.card_univ, Fintype.card_fin]; omega)
+    -- restriction of codewords to the complement `Sᶜ`.
+    let r : (Fin n → 𝔽) →ₗ[𝔽] (↥Sᶜ → 𝔽) := LinearMap.funLeft 𝔽 𝔽 (fun j : ↥Sᶜ => (j : Fin n))
+    let rC := r ∘ₗ C.subtype
+    have hInj : Function.Injective rC := by
+      intro a b hab
+      apply Subtype.ext
+      by_contra hab'
+      have hzC : (a : Fin n → 𝔽) - (b : Fin n → 𝔽) ∈ C := C.sub_mem a.2 b.2
+      have hzne : (a : Fin n → 𝔽) - (b : Fin n → 𝔽) ≠ 0 := fun h => hab' (sub_eq_zero.mp h)
+      -- the difference is supported on `S`, so its weight is `≤ |S| = d - 1`.
+      have hsupp : hammingNorm ((a : Fin n → 𝔽) - (b : Fin n → 𝔽)) ≤ S.card := by
+        unfold hammingNorm
+        apply Finset.card_le_card
+        intro i hi
+        simp only [Finset.mem_filter, Finset.mem_univ, true_and, Pi.sub_apply] at hi
+        by_contra hiS
+        have hiSc : i ∈ Sᶜ := Finset.mem_compl.mpr hiS
+        have key := congrFun hab ⟨i, hiSc⟩
+        simp only [rC, r, LinearMap.comp_apply, LinearMap.funLeft_apply,
+          Submodule.subtype_apply] at key
+        exact hi (by rw [key, sub_self])
+      have hge := minDist_le_hammingNorm hzC hzne
+      rw [hScard] at hsupp
+      rw [← hd] at hge
+      omega
+    -- injective ⇒ `dim C ≤ dim (Sᶜ → 𝔽) = n - (d - 1)`.
+    have hfr : Module.finrank 𝔽 C ≤ Module.finrank 𝔽 (↥Sᶜ → 𝔽) :=
+      LinearMap.finrank_le_finrank_of_injective hInj
+    rw [Module.finrank_pi, Fintype.card_coe, Finset.card_compl, Fintype.card_fin, hScard] at hfr
+    omega
+
+/-- A **maximum-distance-separable (MDS)** code: one meeting the Singleton bound with equality,
+`d(C) + k = n + 1`. (A code one below — `d + k = n` — is *near-MDS*; e.g. the `q = 9` seed
+inner code `[10,4,6]_9` has `6 + 4 = 10 = n`, one under the Singleton value `11`.) -/
+def IsMDS (C : Submodule 𝔽 (Fin n → 𝔽)) : Prop := minDist C + Module.finrank 𝔽 C = n + 1
 
 local instance : Fact (Nat.Prime 5) := ⟨by decide⟩
 

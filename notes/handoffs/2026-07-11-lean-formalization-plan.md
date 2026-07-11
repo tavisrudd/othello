@@ -263,6 +263,9 @@ that discharges the transfer interface's finite fields from it:
 **Next steps (in order):**
 1. ~~Concrete `FiniteGeom` code layer~~ **(landed)** — `dualCode` / `minDist` / `dualDist` /
    `rowCode` in `FiniteGeom/Code.lean`; interface bridge `ofInnerCode` in `CodeInstance.lean`.
+   Now also carries the **Singleton bound** `d + k ≤ n + 1` (`singleton_bound`) + `IsMDS`
+   (the §5-decision-3 prove-don't-import Singleton-LRC item; pins the seed `[10,4,6]_9` as
+   near-MDS, `d+k = n`).
 2. Discharge the **real `q = 9` seed** via `ofInnerCode` (retire the toy witness's role): supply
    the inner code `I` (`C₀ = [10,4,6]_9`) as a concrete `rowCode`/`Submodule` and the three
    residual fields `beta`/`hbeta`/`houter` — needs the
@@ -380,3 +383,26 @@ that discharges the transfer interface's finite fields from it:
   (`G = [1 1]`: `(1,4)` is in the dual, `(1,1)` is not), exercising
   `mem_dualCode_rowCode_iff_mulVec` end-to-end via `decide`.
 - Build green, no warnings, all new results `#print axioms`-clean. Seventh commit.
+
+### Handoff Note — 2026-07-11 (cont.: Singleton bound + MDS predicate)
+
+- Landed `singleton_bound` (`d(C) + k ≤ n + 1`) and `IsMDS` in `Code.lean` — the elementary
+  general-in-`q` bound §5 decision 3 marks **prove-don't-import** (the Singleton-LRC input), no
+  imported content. Standard puncturing proof: restricting codewords to the complement of any
+  `d-1` coordinates (`LinearMap.funLeft` to `↥Sᶜ → 𝔽`) is injective on `C` (two codewords
+  agreeing there differ on `≤ d-1 < d` coords, so their difference is a sub-minimum-weight
+  codeword and vanishes), hence `k = dim C ≤ dim(Sᶜ → 𝔽) = n-(d-1)`. Trivial-code branch
+  (`d=0`) handled by `dim C ≤ n`.
+- This is the code layer's most-standard previously-missing bound; it also lets the docs *state*
+  the seed `[10,4,6]_9` is near-MDS (`d+k = 10 = n`, one under the Singleton value `11`) rather
+  than assert it. Distance *lower* bounds (the hard content of the q=9 / q=3^h theorems) are a
+  separate lever — Singleton is an upper bound and does not discharge them.
+- Chose this over the two open next-steps deliberately: both (q=9 discharge, q=3^h) are blocked
+  on deep/specific constructions (trace-form nondegeneracy + Chen–Ling–Xing for q=9; a
+  general min-distance lower bound for q=3^h), whereas Singleton is a self-contained,
+  high-certainty, in-scope infrastructure win.
+- Build green (`lake build FiniteGeom RepairCodes`), no warnings, `#print axioms singleton_bound`
+  = `[propext, Classical.choice, Quot.sound]`. Eighth commit.
+- Doc-hygiene note: per the CLAUDE.md live/companion split added this session, §7's dated
+  Handoff Notes should migrate to a companion `-archive.md` at end-of-session; deferred (kept
+  inline for now to match the file's current structure).
