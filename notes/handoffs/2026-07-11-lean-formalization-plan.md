@@ -190,6 +190,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/EvalCode.lean` | Reed–Solomon: `card_eval_zero_le_natDegree`, `evalPi`, `rsCode`, `rsCode_minDist_ge` (`n-(k-1)≤d`), `finrank_rsCode` (`=k`), `rsCode_isMDS` (RS codes are MDS) |
 | `FiniteGeom/EvalCodeInstance.lean` | concrete MDS discharge of the eval-code layer: RS `[7,3,5]₇` over `ZMod 7` (`rsCode_zmod7_isMDS`/`_minDist`) and RS `[3,2,2]₉` over the target `GaloisField 3 2 = 𝔽₉` on subfield points (`rsCode_gf9_isMDS`/`_minDist`, injectivity via `algebraMap`) — exercises `rsCode_isMDS` on a real non-prime field |
 | `FiniteGeom/MomentCurve.lean` | moment-curve / NRC general position via Vandermonde: `momentCurve`, `momentCurve_linearIndependent` (distinct params ⇒ independent, general `n`), `twistedCubic_linearIndependent` (`n=4`, no four coplanar), `twistedCubic_span` (four distinct cubic points span `𝔽⁴`) — the self-contained `dim=4` / "≤3 cubic points per plane" core of the `q=3^h` distance theorem |
+| `FiniteGeom/ColumnCode.lean` | projective systems as codes: `columnCode` (code of a point system `P : Fin n → 𝔽^k`), `sectionCount`, weight↔section identity, `le_columnCode_minDist` (all sections `≤ s` ⇒ `n-s ≤ d`), `columnCode_minDist_le` (attained section ⇒ `d ≤ n-s`), `columnCode_minDist_eq` (`d = n − max section`), `finrank_columnCode` (`dim = k` when points span) — the geometric-distance bridge for the whole geometric-code lane |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode` — fills `ConcatDualWord`'s finite fields from the code layer, zero extra assumptions; residual = `beta`/`hbeta`/`houter` (the imported trace / Chen–Ling–Xing content) |
@@ -210,19 +211,25 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
    concrete side): its edges are the minimum parity-check supports through the erased coordinate;
    supply a matroid instance discharging "no surviving trace ⟺ independent". Also lands a
    code-derived `τ > ν` (currently only the abstract triangle witness has it).
-3. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`. Vandermonde core
-   **landed** (`FiniteGeom/MomentCurve.lean`: `dim=4` + no-four-cubic-points-coplanar). Remaining
-   for the distance `d = q-1`: the projective "max plane section `= q+2`" bound — the axis line
-   `L_q` (`X₀=X₃=0`) as columns, a plane containing `L_q` meets the cubic in `≤1` point via
-   char-3 Frobenius bijectivity of `t↦t³`, and the `d = n - maxsection` packaging on the code
-   layer. The subsequent `τ>ν` repair analysis pulls in the cap number `Z_3(q)` (imported).
+3. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`. Two of three legs
+   **landed**: `dim=4` (`FiniteGeom/MomentCurve.lean` `twistedCubic_span` + `ColumnCode`
+   `finrank_columnCode`) and the geometric-distance bridge `d = n − max section`
+   (`FiniteGeom/ColumnCode.lean` `columnCode_minDist_eq`). Remaining leg: the **geometry input**
+   `max plane section of S_q = q+2` — build the point system `S_q = T_q ∪ L_q` (twisted cubic +
+   axis line `X₀=X₃=0`) as `P : Fin (2q+1) → 𝔽^4`, then bound `sectionCount`: a plane ∌ `L_q`
+   meets `T_q` in `≤3` (from `twistedCubic_linearIndependent`) and `L_q` in `≤1`; a plane ⊇ `L_q`
+   meets `T_q` in `≤1` via char-3 Frobenius bijectivity of `t↦t³`, giving `≤ q+2`, attained.
+   Feed that into `columnCode_minDist_eq`. The later `τ>ν` repair analysis pulls in the cap
+   number `Z_3(q)` (imported).
 4. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
 
 **Landed 2026-07-11:** (a) the eval-code stepping stone — RS instances over `ZMod 7` and the
 target `GaloisField 3 2 = 𝔽₉` (`FiniteGeom/EvalCodeInstance.lean`), discharging the eval-code MDS
 layer's non-vacuity on a real non-prime field and retiring the "instantiate RS over a concrete
 `GaloisField`" on-ramp (does **not** touch the below-MDS `[10,4,6]₉` seed of step 1); (b) the
-Vandermonde general-position core of the `q=3^h` family (`FiniteGeom/MomentCurve.lean`). Both
+Vandermonde general-position core of the `q=3^h` family (`FiniteGeom/MomentCurve.lean`); (c) the
+projective-systems→codes distance bridge `d = n − max hyperplane section` plus `dim = k`
+(`FiniteGeom/ColumnCode.lean`), reusable across the whole geometric-code lane. All
 `#print axioms`-clean.
 
 The session-by-session narrative of how the §7 corpus landed (per-slice writeups, referee-hardening,
