@@ -1,6 +1,7 @@
 import Mathlib.LinearAlgebra.Vandermonde
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import FiniteGeom.EvalCode
 
 /-!
 # The moment curve / normal rational curve: general position via Vandermonde (`FiniteGeom`)
@@ -70,5 +71,60 @@ theorem twistedCubic_span {v : Fin 4 → 𝔽} (hv : Function.Injective v) :
     rw [Module.finrank_pi, Fintype.card_fin]
   have hb := (basisOfLinearIndependentOfCardEqFinrank hli hcard).span_eq
   rwa [coe_basisOfLinearIndependentOfCardEqFinrank] at hb
+
+/-! ### Hyperplane sections of the moment curve
+
+A hyperplane `a^⊥` (`a : 𝔽^n` nonzero, viewed as a linear form) meets the moment curve in at most
+`n - 1` points: pairing `a` with `momentCurve n t` is the evaluation at `t` of the coefficient
+polynomial `∑ⱼ aⱼ Xʲ` (degree `< n`, nonzero when `a ≠ 0`), which has at most `n - 1` roots. For
+`n = 4` this is the sharp "a plane meets the twisted cubic in `≤ 3` points" bound — the `T_q` half
+of the `q = 3^h` max-section computation (`sectionCount` of the cubic block). Reuses
+`FiniteGeom.card_eval_zero_le_natDegree`. -/
+
+open Polynomial Matrix Finset
+
+/-- The coefficient polynomial `∑ⱼ aⱼ Xʲ` of a linear form `a : 𝔽^n`. Pairing `a` with a
+moment-curve point is evaluating this polynomial (`formPoly_eval`). -/
+noncomputable def formPoly (a : Fin n → 𝔽) : 𝔽[X] := ∑ j : Fin n, C (a j) * X ^ (j : ℕ)
+
+theorem formPoly_eval (a : Fin n → 𝔽) (t : 𝔽) :
+    (formPoly a).eval t = momentCurve n t ⬝ᵥ a := by
+  simp only [formPoly, dotProduct, momentCurve_apply, eval_finsetSum, eval_mul, eval_C, eval_pow,
+    eval_X]
+  exact Finset.sum_congr rfl fun j _ => mul_comm _ _
+
+theorem formPoly_coeff (a : Fin n → 𝔽) (i : Fin n) : (formPoly a).coeff (i : ℕ) = a i := by
+  simp only [formPoly, finsetSum_coeff, coeff_C_mul, coeff_X_pow]
+  rw [Finset.sum_eq_single i]
+  · rw [if_pos rfl, mul_one]
+  · intro j _ hji; rw [if_neg (fun h => hji (Fin.ext h.symm)), mul_zero]
+  · intro h; exact absurd (Finset.mem_univ i) h
+
+theorem formPoly_ne_zero {a : Fin n → 𝔽} (ha : a ≠ 0) : formPoly a ≠ 0 := by
+  intro h
+  refine ha (funext fun i => ?_)
+  rw [← formPoly_coeff a i, h, coeff_zero, Pi.zero_apply]
+
+theorem formPoly_natDegree_le (a : Fin n → 𝔽) : (formPoly a).natDegree ≤ n - 1 := by
+  unfold formPoly
+  apply natDegree_sum_le_of_forall_le
+  intro j _
+  calc (C (a j) * X ^ (j : ℕ)).natDegree
+      ≤ (X ^ (j : ℕ) : 𝔽[X]).natDegree := natDegree_C_mul_le _ _
+    _ = (j : ℕ) := natDegree_X_pow _
+    _ ≤ n - 1 := Nat.le_sub_one_of_lt j.isLt
+
+/-- **Hyperplane section of the moment curve.** A nonzero linear form `a` vanishes on at most
+`n - 1` moment-curve points among any set of distinct parameters `pts` — equivalently, no
+hyperplane of `PG(n-1, q)` meets the normal rational curve in more than `n - 1` points. For
+`n = 4`: any plane meets the twisted cubic in `≤ 3` points. -/
+theorem momentCurve_section_le [DecidableEq 𝔽] {m : ℕ} {a : Fin n → 𝔽} (ha : a ≠ 0)
+    {pts : Fin m → 𝔽} (hpts : Function.Injective pts) :
+    #(Finset.univ.filter fun i => momentCurve n (pts i) ⬝ᵥ a = 0) ≤ n - 1 := by
+  have hfilter : (Finset.univ.filter fun i => momentCurve n (pts i) ⬝ᵥ a = 0)
+      = (Finset.univ.filter fun i => (formPoly a).eval (pts i) = 0) :=
+    Finset.filter_congr fun i _ => by rw [formPoly_eval]
+  rw [hfilter]
+  exact le_trans (card_eval_zero_le_natDegree (formPoly_ne_zero ha) hpts) (formPoly_natDegree_le a)
 
 end FiniteGeom
