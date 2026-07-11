@@ -119,12 +119,33 @@ closed-point) bookkeeping** and the clean `E > 0 ∧ s(s-1)/2 > M` trigger.
 - Group-invariant-arc completeness analyses — Korchmáros–Indaco, Giulietti–Korchmáros (above), and the
   envelope/algebraic-curve approach (Giulietti *Envelopes of `k`-arcs*; Cossidente–Korchmáros *algebraic
   envelope of a complete arc*). **Check:** do any count *conjugate-pair* / Galois-orbit extensions as
-  opposed to single-point extensions? `[VERIFY — not opened in full this session]`
+  opposed to single-point extensions? **[CHECKED — non-colliding] (Giulietti–Korchmáros
+  arXiv:1108.0358 opened in full via ar5iv; Korchmáros–Indaco `PSL(2,7)` reached via abstract /
+  Semantic Scholar only — `[VERIFY]` on its full text, but same genre).** These papers **construct** a
+  specific group-invariant orbit (a 90-arc for `A₆`, a 42-arc for `PSL(2,7)`) and verify
+  **completeness case-by-case** by MAGMA/resultant collinearity checks (Thm 1.1 + Prop 3.1 list the
+  finitely-many exceptional `q` where the orbit is not a 90-arc). They state **no general
+  conjugate-pair / Galois-orbit *extension criterion*** (no orbit-valued continuation count) and **no
+  `c·√q` invariant-arc lower bound.** So they neither soften Thm 3.1 (no competing extension
+  criterion) nor reinforce the Lunelli–Sce collision (no independent invariant-arc completeness
+  bound). **Confirmatory: neither threatens the surviving verdict.**
 - Abatangelo–Korchmáros-style conic-in-Baer arc work (*Conics in Baer subplanes*
   [arXiv:1906.03296](https://arxiv.org/abs/1906.03296)) — `𝔽_s`-conics inside `PG(2,s²)` and their
   intersection pattern with the Baer subplane, the exact geometric setting of the fixed locus here.
-  **Check:** whether the fixed-vs-conjugate secant dictionary (Prop 1.1) is already drawn there.
-  `[VERIFY]`
+  **Check:** whether the fixed-vs-conjugate secant dictionary (Prop 1.1) is already drawn there, and
+  whether it pre-empts the §5 Frobenius-marked mixed-cover arrangement result. **[CHECKED —
+  non-colliding] (opened in full via ar5iv).** The paper is a **Bruck–Bose representation** result:
+  a conic in a tangent Baer subplane of `PG(2,s²)` corresponds in `PG(4,s)` to a normal rational
+  curve meeting the transversal lines of the regular spread (main thm); Thm 2.12 gives the
+  ℓ∞-Baer-pencil dichotomy (meets the tangent Baer subplane in a non-degenerate conic through `T̄`
+  **or** in two lines). It **does** carry a conjugate-point-w.r.t.-Baer notion and uses Frobenius
+  `x↦x^q` to mark spread transversals — genuinely adjacent to Prop 1.1's fixed-vs-conjugate language.
+  **But it does NOT state the §5 result:** no Frobenius-marked arrangement of *fixed secants* forming
+  a **mixed (line-and-point) cover of the Baer subplane**, no legal-extension count, no `(ε,h)`
+  marked-Baer statistic. Its subject is *representing individual conics* (and their quartic-extension
+  meeting with ℓ∞), not counting arc extensions or covering the Baer subplane by a secant
+  arrangement. **§5 is not pre-empted; Prop 1.1's dictionary is in adjacent air but not drawn as §5's
+  arrangement/cover statement.**
 
 **Searches run:** `arc conic subfield PG(2,q^2) Frobenius fixed points extension complete arc Baer
 conic`; `group invariant complete arc PG(2,q) collineation transitive Korchmaros Giulietti lower
@@ -138,8 +159,13 @@ as the arithmetic split/nonsplit-secant distinction — genuinely a cleaner *pac
 single-point completeness literature. But Theorem 3.1 itself is an elementary union/pigeonhole count;
 its citability rests on the *framing* ("orbit-valued extension criterion"), not on a hard inequality.
 This matches the note's own §10 table ("elegant but elementary counting"). **Verdict: SURVIVES as a
-clean criterion; frame as a packaging/definition contribution, not a hard theorem.** Two `[VERIFY]`
-items (group-invariant completeness papers, Conics-in-Baer) remain the residual diligence.
+clean criterion; frame as a packaging/definition contribution, not a hard theorem.** The two former
+`[VERIFY]` items are now **[CHECKED — non-colliding]** (see the located-adjacent-art bullets above):
+Giulietti–Korchmáros `A₆`-invariant arcs (arXiv:1108.0358) is case-by-case construction with no
+orbit-valued extension criterion and no `√q` bound; *Conics in Baer subplanes* (arXiv:1906.03296) is
+a Bruck–Bose conic-representation result that does not state the §5 Frobenius-marked mixed-cover
+arrangement. Neither counts Galois-orbit (vs single-point) extensions. Residual `[VERIFY]`: only the
+full text of Korchmáros–Indaco `PSL(2,7)` 42-arcs (abstract reached; same construction genre).
 
 ### N3 — §5 Frobenius-marking-essential (`(ε,h)` marked-Baer statistic) *(medium-LOW risk; sharp negative)*
 
@@ -246,11 +272,13 @@ note's §2 gate 3: exhibit orbit-saturated invariant arcs at `(√2+o(1))·s`, O
 constant using that `M` arises from one arc.** Until then, N1 must be written as "the classical trivial
 bound extends to equivariant completeness," not as a headline constant.
 
-**N2 gate — RESULT: none-found; survives as packaging.** No prior conjugate-pair / orbit-valued
-extension criterion located. Elementary counting, so citability is in the orbit-unit framing. Residual
-`[VERIFY]`: full-text of the Korchmáros–Indaco / Giulietti–Korchmáros invariant-arc-completeness papers
-and *Conics in Baer subplanes* (1906.03296) — to confirm none already counts Galois-orbit (not
-single-point) extensions.
+**N2 gate — RESULT: none-found; survives as packaging. Residual `[VERIFY]`s now CLEARED.** No prior
+conjugate-pair / orbit-valued extension criterion located. Elementary counting, so citability is in
+the orbit-unit framing. The two residual `[VERIFY]` items are now **[CHECKED — non-colliding]**:
+Giulietti–Korchmáros `A₆`-invariant arcs (arXiv:1108.0358, opened) and *Conics in Baer subplanes*
+(arXiv:1906.03296, opened) — neither counts Galois-orbit (vs single-point) extensions, and
+Conics-in-Baer does not pre-empt §5. Only Korchmáros–Indaco `PSL(2,7)` full text is still unopened
+(abstract confirms same case-by-case construction genre).
 
 **N3 gate — RESULT: non-colliding but expected.** Char poly is a matroid invariant (Athanasiadis /
 Björner–Ekedahl finite-field method), so "marking essential, orbit does not determine count" is nearly
@@ -299,11 +327,17 @@ plausible specialist short note (as the upgrade note §10 already judges) — bu
 demoted from "headline constant" to "the Lunelli–Sce bound under a weaker maximality hypothesis," and
 Theorem 3.1 (the orbit-valued criterion) carried as the actual headline.
 
-**Default-to-collision items I could NOT fully rule out (flag for the specialist):** (i) that some
-group-invariant-arc paper (Korchmáros school) already records a conjugate-pair / Galois-orbit extension
-count — `[VERIFY]`, two papers unopened; (ii) that *Conics in Baer subplanes* already draws the
-fixed-vs-conjugate secant dictionary of Prop 1.1 — `[VERIFY]`. Both are N2-adjacent; neither threatens
-the (already-softened) N1 crux.
+**Default-to-collision items — now CLEARED (2026-07-11 external pass 2):** (i) whether some
+group-invariant-arc paper (Korchmáros school) already records a conjugate-pair / Galois-orbit
+extension count — **CHECKED non-colliding** via Giulietti–Korchmáros arXiv:1108.0358 (opened): it is
+case-by-case orbit *construction* + completeness checking, no orbit-valued extension criterion, no
+`√q` bound (Korchmáros–Indaco `PSL(2,7)` full text still `[VERIFY]` but same genre by abstract); (ii)
+whether *Conics in Baer subplanes* (arXiv:1906.03296, opened) already draws Prop 1.1's fixed-vs-
+conjugate secant dictionary or the §5 arrangement — **CHECKED non-colliding**: it is a Bruck–Bose
+conic-representation result, adjacent in language but stating neither the §5 mixed-cover arrangement
+nor the `(ε,h)` statistic. Both N2-adjacent items are cleared; neither threatens the (already-
+softened) N1 crux, and neither softens the lane further. **Baer verdict stands: N1 soften (Lunelli–
+Sce collision holds), N2/§5 survive as packaging/rigidity, no new softening.**
 
 ### Searches run (this session, logged for auditability)
 1. `complete arc PG(2,q) lower bound size sqrt(2q) trivial bound finite geometry`
@@ -317,7 +351,10 @@ the (already-softened) N1 crux.
 
 Full text opened: Ball–Lavrauw arcs survey ([arXiv:1908.10772](https://arxiv.org/abs/1908.10772))
 via pdftotext (confirmed Lunelli–Sce as classical ref [41], complete-arc extendability thresholds
-§Thms 50–51). `[VERIFY]` (not opened this session): Korchmáros–Indaco `PSL(2,7)` 42-arcs;
-Giulietti–Korchmáros `A₆`-invariant arcs (1108.0358); *Conics in Baer subplanes* (1906.03296);
-Athanasiadis (1996) and Björner–Ekedahl (math/9612217) full texts (method confirmed via search
-abstracts, standardness not in dispute).
+§Thms 50–51). **External pass 2 (2026-07-11) opened in full via ar5iv:** Giulietti–Korchmáros
+`A₆`-invariant arcs ([arXiv:1108.0358](https://arxiv.org/abs/1108.0358)) — case-by-case construction,
+no orbit-valued extension criterion, no `√q` bound; *Conics in Baer subplanes*
+([arXiv:1906.03296](https://arxiv.org/abs/1906.03296)) — Bruck–Bose conic representation, does not
+pre-empt §5. Both **[CHECKED — non-colliding].** Still `[VERIFY]` (not opened): Korchmáros–Indaco
+`PSL(2,7)` 42-arcs (abstract only; same construction genre); Athanasiadis (1996) and Björner–Ekedahl
+(math/9612217) full texts (method confirmed via search abstracts, standardness not in dispute).

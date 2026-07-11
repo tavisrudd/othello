@@ -151,9 +151,38 @@ secants embedding unique`; `Beutelspacher Metsch embedding finite linear spaces 
 long lines`; `reconstruct projective plane from simplicial complex independent sets cap
 collinearity`.
 
-**Full-text verdict: [VERIFY throughout] — partial-overlap / genre-collision on the *engine*,
-none-found on the arc-specific step.** No candidate was opened in full text (all paywalled), but
-abstracts are decisive on scope:
+**Full-text verdict: [VERIFY on full text — but the decisive kill question is now RESOLVED from
+abstracts/parameters] — partial-overlap / genre-collision on the *engine*, none-found on the
+arc-specific step; the arc-recovery kill is NOT triggered.** Drake–Sané and the Metsch chapter
+were NOT opened in genuine full text this session (both paywalled; no open copy located — see the
+per-item logs below and Housekeeping). But the retrieved abstracts + the exact parameter arithmetic
+settle the one decisive question the gate turns on:
+
+- **[VERIFY — full text not opened; decisive question RESOLVED] Drake–Sané / Mullin–Vanstone,
+  "pseudo-complement of a **quadrilateral**."** Confirmed via multiple independent search hits
+  (ScienceDirect abstract text, Mullin–Vanstone NYAS abstract): the object is a *linear space*
+  (`(n+1)`-regular, `n²−3n+3` points, `n²+n−3` lines, ≥3 lines of size `n−1`), and the theorem is
+  "for `n > 23` it embeds in a **unique** projective plane of order `n`." The deleted configuration
+  is a **quadrilateral = 4 LINES**: the `n²−3n+3` point count is exactly `PG(2,n)` minus the
+  `4(n+1)−6 = 4n−2` points on four general-position lines (6 vertices of multiplicity 2). This is a
+  **low-multiplicity line arrangement**, categorically NOT an arc's secant arrangement (`C(k,2)`
+  lines, `k` points of multiplicity `k−1`; for `k=4` that is **6** secants, not 4 lines). And the
+  theorem **recovers the deleted LINES by unique embedding of a linear space** — there is no
+  arc, no distinguished-point set, and **no degree/multiplicity recovery of a distinguished point
+  set** (the arc-recovery step (8.4) `deg_D(P)=k−1 ⇒ P∈K`). **Kill test NOT met:** Drake–Sané
+  embeds a linear space and restores lines; it does not recover an arc-like distinguished point set
+  from a secant-arrangement complement.
+- **[VERIFY — full text not opened] Metsch, *Linear Spaces with Few Lines* (LNM 1490) uniqueness
+  chapter / Beutelspacher–Metsch.** No open copy located (Springer paywalled; Google Books preview
+  exposes only the index term "pseudo-complement", no substantive page text). Search-confirmed as
+  the **general linear-space → projective-plane embedding-uniqueness engine** (cf. Metsch, "A remark
+  on the uniqueness of embeddings of linear spaces into desarguesian projective planes", J. Combin.
+  Des. 3 (1995) 293–297). Same category as Drake–Sané: it embeds a linear space and restores
+  *lines*; nothing located states an arc/secant-arrangement input or a degree-based recovery of a
+  distinguished point set. The gate is *not* fully discharged without the full text, but the located
+  evidence points away from a kill.
+
+Supporting genre observations (unchanged from the first pass, abstracts decisive on scope):
 
 - The completion **engine** (Thm 8.3: arrangement-complement → unique plane by Deza cliques) is
   **not new as a phenomenon.** Complements of `r`-line arrangements embedding uniquely is exactly
@@ -189,8 +218,15 @@ uniqueness chapter and the pseudo-complement-of-quadrilateral paper are read in 
 arrangement** specifically, or (ii) recovering the *deleted configuration's distinguished point set*
 (here, the arc) from an arrangement complement, or (iii) a general "complement of a `≤r`-line
 arrangement embeds uniquely" theorem subsuming the secant-arrangement profile with the arc-recovery
-corollary. Drake–Sané and the Metsch uniqueness chapter are the highest-probability full-text kills;
-read those before any first-of-kind claim.
+corollary. Drake–Sané and the Metsch uniqueness chapter were the highest-probability full-text kills;
+**neither open copy could be located this session (both paywalled), but their abstracts/parameters
+resolve the decisive test against a kill:** Drake–Sané deletes a **quadrilateral (4 lines)** and
+embeds a *linear space* uniquely (restoring lines) — it neither takes an arc's secant arrangement as
+input nor recovers a distinguished point set by degree (test (ii) fails); Metsch is the general
+linear-space embedding-uniqueness *engine*, same category. The gate is therefore **not full-text
+discharged**, but the strongest candidate kill (test (ii), arc-point recovery) is **not exhibited by
+the located evidence**. Residual: a MathSciNet full-text read of Drake–Sané / Metsch remains the only
+way to *close* (vs. resolve-by-abstract) the gate before a first-of-kind claim.
 
 ---
 
@@ -287,7 +323,7 @@ is the mildest arrangement-complement case).
 | Claim | Piece | Risk (post-audit) | External verdict |
 |---|---|---|---|
 | **N1** | Thm 7.4 frame-graph semilinear rigidity (`M_{0,5}` four-map reduct) | LOW-MEDIUM | **Survives.** Bruno–Mella (opened) is biregular-over-`C` via forgetful maps, provably not about `F_q`-set permutations; GPZ is a different graph. Non-implication confirmed. |
-| **N2** | Thm 8.4 / 8.3 full-complex reconstruction | **HIGH (open)** | **Soften.** Engine collides with the complement / pseudo-complement genre (Batten, Mullin, Drake–Sané, Günaltılı–Olgun, Beutelspacher–Metsch). Only the secant-arrangement-of-an-arc + arc-recovery (8.4) + intrinsic-complex framing is unlocated — and not yet full-text-cleared. |
+| **N2** | Thm 8.4 / 8.3 full-complex reconstruction | **HIGH → MEDIUM-HIGH (kill test resolved, gate not full-text-closed)** | **Soften, but survives.** Engine collides with the complement / pseudo-complement genre (Batten, Mullin, Drake–Sané, Günaltılı–Olgun, Beutelspacher–Metsch). The decisive kill test — does the genre recover a *distinguished point set (an arc)* from a secant arrangement by degree — is **NOT met**: Drake–Sané deletes a **quadrilateral (4 lines)**, embeds a linear space uniquely (restores *lines*), never recovers arc points by degree; Metsch is the general embedding engine, same category. So the secant-arrangement-of-an-arc + arc-recovery (8.4) + intrinsic-complex framing is **unlocated and un-killed** — resolved from abstracts, not yet full-text-closed (no open copy of Drake–Sané/Metsch found). |
 | **N3** | Lemma 4.1 clique bound `k(k−2)+1` | LOW-MEDIUM | Non-colliding domain sharpening of Deza; low citability. |
 | **N4** | Thm 6.2 rook graph | LOW | Elementary scope result; no novelty claim to collide. |
 | **N5** | Thm 8.2 two-point complex | MEDIUM | Partial-overlap; classical affine-reconstruction, value is the graph-vs-complex contrast. |
@@ -310,23 +346,44 @@ as the *arc-specific chain* (secant-arrangement complement + degree-based arc re
 full-faithfulness on `(Π,K)`), a refinement in the Bruck–Metsch–Batten neighborhood, not a new
 completion paradigm.
 
-**The single decisive remaining gate.** A **full-text read of the two paywalled `r=4` pieces —
+**The single decisive remaining gate — now RESOLVED against a kill (from abstracts), not yet
+full-text-closed.** The gate was a **full-text read of the two paywalled `r=4`/engine pieces —
 Drake–Sané *Embedding of finite pseudo-complements of quadrilaterals* and Metsch's uniqueness
-chapter (Beutelspacher–Metsch II) — plus a MathSciNet forward-citation sweep for "complement of an
-arc / secant arrangement."** If either already reconstructs the deleted configuration's
-distinguished points (the arc) from an arrangement complement, N2's surviving increment collapses to
-"new Deza-clique proof of a known genre," and the lane rests entirely on N1. Until that gate is
-cleared, N2's residual novelty is **plausible-but-unverified** and should carry the `[VERIFY]` flag
-in any manuscript. N1 is clear now.
+chapter (LNM 1490 / Beutelspacher–Metsch) — for whether either reconstructs the deleted
+configuration's distinguished points (the arc) from an arrangement complement.** No open copy of
+either could be located this session (both paywalled: ScienceDirect and Springer both 403 to fetch;
+the Metsch Google Books preview shows only the index term, no page text). **But the retrieved
+abstracts + the exact parameter arithmetic answer the decisive question without the full text:**
+Drake–Sané / Mullin–Vanstone delete a **quadrilateral = 4 lines** (the `n²−3n+3` point count is
+`PG(2,n)` minus the four general lines) and prove a **unique embedding of a linear space** — they
+restore *lines*, take no arc/secant-arrangement input, and perform **no degree-based recovery of a
+distinguished point set**. The `k`-arc secant arrangement (`C(k,2)` lines, `k` points of
+multiplicity `k−1`; **6** lines at `k=4`, not 4) and the arc-recovery step (8.4) have **no analogue
+in the located genre**. So **N2's surviving increment does NOT collapse:** the kill (arc-point
+recovery from an arrangement complement) is not exhibited. The lane keeps its N1 headline *and* the
+narrow, un-killed N2 arc-chain. Residual diligence (does not change the verdict, only *closes* vs.
+*resolves* the gate): a MathSciNet full-text read of Drake–Sané / Metsch + forward-citation sweep for
+"complement of an arc / secant arrangement." Until then the N2 arc-chain is **plausible and
+un-killed** — carry it with a `[VERIFY]` on the full text, not with a suspected collision. N1 is
+clear now.
 
 ## House-keeping
 
 - `[CHECKED]` (full text this session): Bruno–Mella arXiv:1006.0987 only.
 - `[VERIFY]` (abstract/secondary only — paywalled or PDF-unparsed): GPZ (JLMS), Deza (JCTB),
-  Naik–Rao–Shrikhande–Singhi (EJC), Batten (JAustMS), Mullin (Ann. NYAS), Drake–Sané (JSPI),
-  Günaltılı–Olgun (J. Geom.), Beutelspacher–Metsch I/II (Discrete Math.), Bruck (Pacific J. Math.).
-  Clearing the two `r=4` items is the N2 gate.
-- This is a first external pass; a definitive MathSciNet/zbMATH forward-citation run (auth-gated) is
-  the residual diligence for both headlines.
+  Naik–Rao–Shrikhande–Singhi (EJC), Batten (JAustMS), Mullin–Vanstone (Ann. NYAS), Drake–Sané (JSPI),
+  Günaltılı–Olgun (J. Geom.), Beutelspacher–Metsch I/II (Discrete Math.), Metsch LNM 1490 (Springer),
+  Bruck (Pacific J. Math.).
+- **N2 gate update (2026-07-11 external pass 2):** the two decisive `r=4`/engine items (Drake–Sané,
+  Metsch LNM 1490) still have **no locatable open full text** — searched Google/Google Scholar,
+  ScienceDirect (403), Springer + Google Books preview (index term only, no page text), Semantic
+  Scholar, ResearchGate (403), the ring-geometry history survey arXiv:2003.02881 (Hjelmslev-only,
+  no embedding content), zbMATH (403). **But the decisive kill question is resolved from the
+  abstracts/parameters:** Drake–Sané / Mullin–Vanstone delete a **quadrilateral (4 lines)** and prove
+  a *unique linear-space embedding* (restore lines) — no arc, no secant arrangement, no degree-based
+  distinguished-point recovery; Metsch is the general embedding engine, same category. **Kill NOT
+  triggered; N2's arc-chain survives.** The gate is resolved-by-abstract, not full-text-closed.
+- This remains a first external pass; a definitive MathSciNet/zbMATH forward-citation run (auth-gated)
+  + full text of Drake–Sané/Metsch is the residual diligence to *close* (vs. resolve) the N2 gate.
 </content>
 </invoke>
