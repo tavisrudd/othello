@@ -88,6 +88,24 @@ the natural first attempt. Splitting off a thin formalization paper now would we
 
 This is the strongest genuinely external spinout created by Rounds 6–7.
 
+**Follow-up:** the completion-core component has since been upgraded to an
+exact deletion-distance and circuit-transversal framework, with sharp
+applications and a separate publication roadmap. See
+[Completion-core rigidity: robustness, transversals, and new settings](2026-07-10-completion-core-rigidity-upgrades.md).
+
+The Baer-equivariant component has likewise been upgraded from a fixed
+eight-arc bound to an arbitrary-profile mixed-cover theorem, a quantitative
+conjugate-pair extension theorem, and prime-degree/Galois-rank extensions.
+See [Baer-equivariant arc extension: orbit completions, mixed covers, and
+Galois rank](2026-07-10-baer-equivariant-extension-upgrades.md).
+
+The continuation-graph component now has an exact partial-linear-space
+support theorem, intrinsic tangent-trace and centre recovery at explicit
+large-order thresholds, low-cardinality obstruction families, and two
+precise standalone-paper gates. See [Continuation-graph rigidity: embedded
+recovery, intrinsic traces, and semilinear
+extension](2026-07-10-continuation-graph-rigidity-upgrades.md).
+
 ### Theorem A — continuation-graph rigidity
 
 Let `K` be a k-arc in a projective plane of order q. Let `V_K` be the points extending `K` to a
