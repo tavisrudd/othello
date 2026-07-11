@@ -301,7 +301,10 @@ exist, so the dichotomy data is untouched).
   payload remains (`ν(25)`, buckets 14/16/17 all resolved P; the off-conic `(1:15:9)` concurrence
   point is an optional post-census scoring datum, decision-moot per C74 §6).  C43's optional
   follow-up is strategy extraction, not another sizing run.  **Next A5/compute lane: the
-  next-depleted-order hunt (q=29, 31) — gated; size before any run.**
+  next-depleted-order hunt (q=29, 31) — SIZED 2026-07-10 (Claude): q=29 = 42 buckets, largest
+  ~460–540M positions ⇒ ~16 GB / ~15–25 h single-core, over the 8 GB & 8 h q=25 budget; no residue
+  predicts depletion, so the census is the only direct test.  Requires an explicit user gate — see
+  the handoff's q=29 sizing entry.**
 - **C58 [REPORTED 2026-07-10 — all-P (Claude)]** — cap game on all four order-9 planes
   (`PG(2,9)`, Hall, dual Hall, Hughes).  All four are **P** (first-player loss); the four planes are
   pairwise non-isomorphic (distinct complete-arc spectra), so the odd-plane P-property is invariant

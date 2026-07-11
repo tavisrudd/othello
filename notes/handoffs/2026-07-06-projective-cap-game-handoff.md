@@ -602,6 +602,23 @@ task list.  Current high-value items:
 
 Recently reported:
 
+- **q=29 census SIZING (2026-07-10, Claude) — the next-depleted-order hunt is a real, gated
+  campaign; no cheap shortcut exists.**  With q=25 non-depleted, the observed depleted set is still
+  just `{11,17}` and the depletion reports confirm **no residue predicts it** (mod 3 killed by C29;
+  mod 6 fails — 5,23,25 ≡ 5 mod 6 are non-depleted, 11,17 ≡ 5 mod 6 deplete), and the arc-census
+  gives arc *size* spectra, not a game-depletion predictor.  So extending the depleted subsequence
+  past q=17 requires either the A5 arithmetic proof (non-gated research) or a direct q=29 census.
+  Sizing (`gridcap-arena s4bucketlist 29`, pure group theory, seconds): **42 on-conic buckets**
+  (vs 28 at q=25); fiber histogram `35¹ 70¹ 140³ 210⁵ 420¹⁹ 840¹³` — the **13 fiber-840 buckets are
+  the generic (small-Stab) big-tree cases**, like q=25's size-720 generics.  Total on-conic states
+  `C(28,4)=20,475` (1.93× q=25's `C(24,4)=10,626`).  Extrapolating the largest bucket's distinct
+  positions from q=25's 257.2M as q⁴–q⁵: **~460–540M** ⇒ **~16 GB RAM (`--log2 30`) for the biggest
+  generics — over the current ~8 GB working budget** (needs a 16 GB arena or `s4xormine` per-bucket
+  splitting).  Projected **total wall ~15–25 h single-core** (vs q=25's 6.67 h), dominated by the 13
+  fiber-840 generics.  Verdict: exceeds both the 8 GB RAM and the 8 h wall that C44 used for q=25 —
+  an **explicit user gate is required**; the run is decision-informative either way (depleted extends
+  the subsequence past {11,17}; non-depleted keeps {11,17} the entire corpus and pushes weight onto
+  the A5 arithmetic proof).  Bucket list: `notes/data/c44-q29-onconic-buckets-sizing.txt` (42 rows).
 - **q=25 on-conic census COMPLETE (2026-07-10, Claude) — all 28 buckets P; not arc-depleted.**
   Supersedes the mid-census entry below with the final result: the `s4arena --all --log2 29` run
   finished all 26 remaining buckets (2–27), **28/28 P, 0 N, 0 aborted**, ~6.67 h summed bucket wall
