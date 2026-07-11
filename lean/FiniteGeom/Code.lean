@@ -45,7 +45,7 @@ namespace FiniteGeom
 
 open Finset Matrix
 
-variable {n k : ℕ} {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
+variable {n k : ℕ} {ι : Type*} [Fintype ι] {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
 
 /-- The dual code `C⊥`: vectors orthogonal to every codeword under the standard bilinear
 form `x ⬝ᵥ y = ∑ᵢ xᵢ yᵢ`. A `Submodule` because orthogonality is preserved by `0`, `+`, `•`. -/
@@ -65,13 +65,13 @@ theorem mem_dualCode {C : Submodule 𝔽 (Fin n → 𝔽)} {y : Fin n → 𝔽} 
 /-- Minimum distance `d(C)`: the least Hamming weight of a nonzero codeword. `sInf` of the
 empty set is `0`, so a code with no nonzero word (the trivial code) has `minDist = 0` — the
 convention that makes `minDist_le_hammingNorm` unconditional. -/
-noncomputable def minDist (C : Submodule 𝔽 (Fin n → 𝔽)) : ℕ :=
+noncomputable def minDist (C : Submodule 𝔽 (ι → 𝔽)) : ℕ :=
   sInf {w | ∃ c ∈ C, c ≠ 0 ∧ hammingNorm c = w}
 
 /-- `d(C)` is a lower bound on the weight of every nonzero codeword — the defining extremal
 property (mirrors `transversalNumber_le_card` in the hypergraph layer: `minDist` is the *inf*,
 so it is `≤` any attained weight). This is the field `ConcatDualWord.hdist` consumes. -/
-theorem minDist_le_hammingNorm {C : Submodule 𝔽 (Fin n → 𝔽)} {c : Fin n → 𝔽}
+theorem minDist_le_hammingNorm {C : Submodule 𝔽 (ι → 𝔽)} {c : ι → 𝔽}
     (hc : c ∈ C) (hne : c ≠ 0) : minDist C ≤ hammingNorm c :=
   Nat.sInf_le ⟨c, hc, hne, rfl⟩
 
@@ -79,7 +79,7 @@ theorem minDist_le_hammingNorm {C : Submodule 𝔽 (Fin n → 𝔽)} {c : Fin n 
 transfers to a lower bound on `d(C)`, provided the code is nontrivial (`sInf ∅ = 0` makes the
 `⊥` case fail, so the hypothesis is genuinely needed). The reusable "hard direction" for
 proving a code meets a distance bound (e.g. Reed–Solomon in `FiniteGeom.EvalCode`). -/
-theorem le_minDist {C : Submodule 𝔽 (Fin n → 𝔽)} {m : ℕ} (hC : C ≠ ⊥)
+theorem le_minDist {C : Submodule 𝔽 (ι → 𝔽)} {m : ℕ} (hC : C ≠ ⊥)
     (h : ∀ c ∈ C, c ≠ 0 → m ≤ hammingNorm c) : m ≤ minDist C := by
   obtain ⟨c₀, hc₀C, hc₀⟩ := (Submodule.ne_bot_iff C).mp hC
   have hne : {w | ∃ c ∈ C, c ≠ 0 ∧ hammingNorm c = w}.Nonempty :=
