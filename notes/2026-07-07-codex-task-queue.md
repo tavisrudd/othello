@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C76.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C77.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -23,7 +23,10 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
 
 1. **Cluster 2 — the open core** (amortized/ledger potential Ψ + existential q-varying selector).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
-   the lane itself is open. C75 explains the selector wall; **C76** is the named follow-on.
+   the lane itself is open. C75 explains the selector wall; C76 answered the invariant prong
+   (frame-relative characters split all 48 twins 48/48, but no monotone scalar ⇒ separation not
+   selection) and **narrows Cluster 2 to the amortized/ledger bank tolerating ΔΨ≥0** — the sole
+   surviving lever, needing a new ID.
 2. **A5 lane — arc-depletion arithmetic.** Sole surviving (ON) mechanism route. Open: prove
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
@@ -35,10 +38,22 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C76 [OPEN]** — invariant hunt / amortized-ledger follow-on to C75. Find a strictly finer
-  PGL-invariant coordinate that separates the 19 value-blind feature-twins (the concrete design target
-  in the C75 report), and/or realize the amortized/ledger potential as a bank tolerating ΔΨ≥0. Origin:
-  C75 [`2026-07-11-c75-value-blind-selector-impossibility.md`](2026-07-11-c75-value-blind-selector-impossibility.md).
+- **C76 [REPORTED 2026-07-11 — invariant prong answered; ledger is the surviving lever]** —
+  frame-relative characters (polar-at-frame, frame-chord, frame×tangent cross-ratio profiles) **split
+  all 48 C75 P/N twins (48/48 orbit-injective)**: the finer coordinate C75 named exists and is exactly
+  the frame-awareness the (x,z)-local selector space omitted. **But no scalar reduction is monotone**
+  (best directional scalar splits 12/48; the 39/48 and 38/48 separators are direction-MIXED), so it
+  buys separation not selection — the residual obstruction is dynamical, formally re-routing (ON) to
+  the **amortized/ledger** potential. Report:
+  [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
+  scripts `rust/scripts/c76_invariant_hunt.py`, `rust/scripts/c76_directional_search.py`. **Open
+  follow-on (needs a new ID):** realize Ψ as a bank tolerating ΔΨ≥0, selecting on the frame-aware
+  orbit; the 48 separated twins are the charge-carrying positions.
+- **C77 [OPEN]** — amortized/ledger potential: realize Ψ as a bank tolerating local ΔΨ≥0 against a
+  global budget, selecting on the C76 frame-aware orbit (not a scalar). The 48 C76-separated twins are
+  the charge-carrying positions where a pointwise rule provably fails. Sole surviving Cluster-2 lever
+  after C75 (pointwise impossible) + C76 (separation ≠ selection). Origin:
+  [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md).
   Report target: TBD.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:
@@ -65,6 +80,11 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
 
 **Reported this pass:**
 
+- **C76 [REPORTED 2026-07-11]** — frame-relative characters restore orbit-injectivity on the 48 C75
+  twins (48/48) but yield no monotone selector; invariant prong answered, ledger is the surviving
+  lever. Report:
+  [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
+  scripts `rust/scripts/c76_invariant_hunt.py`, `rust/scripts/c76_directional_search.py`.
 - **C75 [REPORTED 2026-07-11]** — value-blind reply-selector impossibility. 19 of 108 hard obligations
   hold a P and an N reply that are byte-identical on all 17 program features → the wall is
   feature-completeness, not coordinate choice, and the deficit grows with q (6% → 7% → 39%). Names the
