@@ -236,10 +236,22 @@ reading survive.
 web + Semantic Scholar approximated it here) and pinning the "Chen–Ling–Xing" reference. First
 full prior-art pass is otherwise **complete and clean**; the sweep §1 novelty claim stands.
 
-**Recommended next non-audit move:** the reads pointed *outward* to N2's open target — no one has the
-twisted-cubic external-orbit `τ` spectrum. That is the completion-core §6.5 [OPEN] item and the
-natural first new theorem: enumerate `ρ(x)=τ{B∈binom(C_3(q),3): x∈⟨B⟩}` per `PGL(2,q)` orbit for
-`q=5,7,11` (holding out `13,17,19`), against the now-cited incidence-matrix program.
+**Next non-audit move — STARTED (2026-07-11, COMPUTED-EXACT).** The reads pointed *outward* to N2's
+open target (completion-core §6.5 [OPEN]): no one has the twisted-cubic external-orbit `τ` spectrum.
+First computation done — `scripts/2026-07-11-coding-mds-sweep/twisted_cubic_orbit_spectrum.py`
+enumerates `ρ(x)=τ{B∈binom(C_3(q),3): x∈⟨B⟩}` per `PGL(2,q)` orbit (symmetric-cube action) for
+`q=5,7,11`:
+
+| q | external orbits | ρ(=τ) spectrum | note |
+|---:|---|---|---|
+| 5 | M2,M3,M4,M5 (sizes 30,20,60,40) | `{1,2}` | each `(𝒩,ν,ρ)` cell = one orbit |
+| 7 | M2,M3,M4,M5 (56,56,112,168) | `{3}` (uniform) | `M2=M3=56` size-degenerate (unique to q=7) |
+| 11 | M2,M3,M4,M5 (132,220,660,440) | `{5,6}` | M2,M4→5; M3,M5→6 |
+
+Every orbit size matches BDMP Thm 2.2(B)(ii); `cell_equals_orbit=True` at all three `q` (the
+`(𝒩,ν,ρ)` grouping already resolves the geometric orbits). Held out: `q=13,17,19`. **Open theorem
+target:** a closed `ρ`-per-orbit formula in `q` (and separation by `q mod 3`), the completion-core
+§6.5 deliverable — the `q=7` uniform-`ρ=3` vs `q=5,11` split is the phenomenon to explain.
 
 **Do not fund** a broad code-parameter-table search: the `[n,k,d]` parameters are prior art (N3), so
 this lane does **not** target MinT/codetables entries — the contribution is the repair-invariant
