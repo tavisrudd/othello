@@ -625,9 +625,16 @@ Recently reported:
   existential-selector / amortized-potential lane; a proof must not lean on a point-stab involution;
   q=29 (gated) is the only remaining predictive test.  **Caveats:** measured not proved (only {11,17}
   discriminate); NOT the round-1-refuted bucket-level "specialness ⇒ P" (different object — the q=11
-  8/8 confirms it).  Report:
+  8/8 confirms it).  **(a′) cert-structure probe (`a5_cert_structure.py` on the C12 reply-book
+  certs):** the emitted P-certificate is **adaptive, never a pairing** — pure-fn / fpf-involution /
+  node-0-matching all False at EVERY class both orders (sink replies absorb many moves), corroborating
+  the mechanism refutation from the winning strategy itself (steers the proof to the amortized route,
+  not a mirror).  **Knife-edge signature:** the smallest-orbit/extremal child's book is ~2× more
+  concentrated (node-0 distinct replies 21–25 vs 39–54 generic, fan-in 13–14 vs 5–11) — the forced P
+  child has the tightest reply structure, a handle for the C61 forced-reply-automaton lane at the
+  extremal classes.  Report:
   [`../2026-07-10-a5-symmetric-completion-anchor.md`](../2026-07-10-a5-symmetric-completion-anchor.md);
-  script `rust/scripts/a5_exception_orbits.py`.
+  scripts `rust/scripts/a5_exception_orbits.py`, `rust/scripts/a5_cert_structure.py`.
 - **q=29 census SIZING (2026-07-10, Claude) — the next-depleted-order hunt is a real, gated
   campaign; no cheap shortcut exists.**  With q=25 non-depleted, the observed depleted set is still
   just `{11,17}` and the depletion reports confirm **no residue predicts it** (mod 3 killed by C29;

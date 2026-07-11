@@ -111,6 +111,29 @@ value lives in the full game tree, not the terminal layer.
   inversion above shows *why* the refuted "specialness ⇒ P" implication fails, and warns against any
   Lean statement that reads P-ness off the stabilizer.
 
+## (a′) The P-certificate is adaptive, not a pairing — and the knife-edge strategy is concentrated
+
+Probing the committed reply-book certs (`notes/certs/gridcap-q{11,17}.cert`, C12) via
+`rust/scripts/a5_cert_structure.py`. For every class at both depleted orders:
+
+- **pure-pairing = False, fpf-involution = False, node-0-matching = False** — the emitted winning
+  strategy is *never* a fixed involution on live cells: replies depend on the node (not the move
+  alone), node-0 (move,reply) pairs are not a matching, and a few "sink" replies absorb many moves
+  (e.g. q=11 cls 4 node 0: reply `4,2` answers ~7 distinct moves). So the certificate corroborates
+  the (b) mechanism refutation **from the actual strategy** — P-ness is amortized/adaptive, not a
+  mirror. (Caveat: this is the *emitted* cert, not a proof that *no* pairing strategy exists; but the
+  natural symmetry-based pairings — point-stabilizer (b) and live-board fixed involution (here) — are
+  both refuted, steering the proof to the amortized route.)
+- **Knife-edge signature (quantified):** at the smallest-orbit/knife-edge classes the reply book is
+  measurably *more concentrated* than generic classes — distinct node-0 replies **21–25 vs 39–54**,
+  max fan-in **13–14 vs 5–11**, i.e. ~2× the reply-reuse per legal move. The rare, forced on-conic P
+  child (onP=1 at q=17, the smallest orbit) has a **tighter, more-forced reply structure** — a
+  candidate handle for the C61 forced-reply-automaton lane *specifically at the extremal classes*.
+
+This aligns the A5 selector with the program's amortized-potential route: the anchor names the child;
+its certificate is adaptive; the concentration signature says the extremal child is where the reply
+structure is most nearly forced (most amenable to a finite-state / bounded-selector description).
+
 ## Open next steps (reshaped after the mechanism refutation)
 
 The point-stabilizer-mirror proof route is dead, so the anchor does **not** shortcut the open
