@@ -612,11 +612,20 @@ Recently reported:
   orbit — **exactly where C73's L1 picks an N conic point and fails, this anchor does not.**  So
   A5's (ON) target gets a single uniform value-blind existence witness with **no separate exception
   layer** at the selector level (min-witness ≥ |smallest orbit| ≥ 1).  Sharpens C68b's "P =
-  rare/special" into "special = smallest orbit = most symmetric completion."  **Caveats:** measured
-  not proved (4 primes); the game-value lemma (why the most-symmetric completion is P) is the open
-  A5 proof target; NOT the round-1-refuted "stabilizer-specialness ⇒ P" (that was the 6-point bucket
-  V4 selector — a different object; the q=11 8/8 here is direct evidence this exact statement is not
-  the refuted one).  Report:
+  rare/special" into "special = smallest orbit = largest point-stabilizer = most symmetric completion."
+  **Dominates C73's L1:** L1's on-conic pick lies in the smallest orbit wherever L1 works (q=17 21/21,
+  q=13 12/12, q=5/7), and their ONLY genuine disagreements are exactly q=11 cls 4/7 (L1's failures) —
+  the anchor is L1's fix, a strict generalization.  **But the obvious proof mechanism is REFUTED:**
+  "P ⟺ point-stabilizer has a mirror involution" is *inverted* across the depleted orders — at q=17
+  the P singleton's point-stab (order 4) has an involution; at q=11 the P orbit's point-stab is order
+  5 (odd, none) and the N children carry the involution.  So P-ness is NOT static-symmetric (same
+  flip/control failure that killed C64/C69, here on the mechanism); the anchor is a value-blind
+  *selector* that tells the Cluster-2 reply-strategy machinery WHICH on-conic child to certify, not a
+  symmetry *proof* of P.  **Reshaped A5:** feed the smallest-orbit child to the C61-successor
+  existential-selector / amortized-potential lane; a proof must not lean on a point-stab involution;
+  q=29 (gated) is the only remaining predictive test.  **Caveats:** measured not proved (only {11,17}
+  discriminate); NOT the round-1-refuted bucket-level "specialness ⇒ P" (different object — the q=11
+  8/8 confirms it).  Report:
   [`../2026-07-10-a5-symmetric-completion-anchor.md`](../2026-07-10-a5-symmetric-completion-anchor.md);
   script `rust/scripts/a5_exception_orbits.py`.
 - **q=29 census SIZING (2026-07-10, Claude) — the next-depleted-order hunt is a real, gated

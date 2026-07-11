@@ -13,16 +13,24 @@ Lean theorem `ProjectiveCap.Sym2Bridge.onconic_value_bridge`). So the P/N labels
 on-conic children are constant on orbits of `Stab(frame) ≤ PGL(2,q)` acting on the child
 parameters `w ∈ F_q^* \ {t1,t2,t3}`. The orbit structure is **pure group theory** — value-blind.
 
-## Result (measured, all classes, q ∈ {11,13,17,19})
+## Result (measured, all classes, q ∈ {5,7,11,13,17,19})
 
 For every size-3 class, order the on-conic children into Stab-orbits by size:
 
 | q  | classes | smallest-orbit-all-P | smallest-orbit-unique | frame-fixed-point-is-N |
 |----|---------|----------------------|------------------------|------------------------|
+|  5 |    1    |         1/1          |          1/1           |          0/1           |
+|  7 |    3    |         3/3          |          3/3           |          0/3           |
 | 11 |    8    |         8/8          |          8/8           |          0/8           |
 | 13 |   12    |        12/12         |         12/12          |         0/12           |
 | 17 |   21    |        21/21         |         21/21          |         0/21           |
 | 19 |   27    |        27/27         |     17/27 (rest all-P) |         0/27           |
+
+q=5,7,13,19 are non-depleted (onP = q−4, every child P) so they only confirm consistency; the
+**discriminating tests are the two depleted orders {11,17}**, and both pass with a nontrivial
+selection (the anchor picks the rare P out of a majority-N child set). This is the full extent of
+available solved per-child data — a third discriminating point requires the gated q=29 census
+(q=23/25 were bucket-first, no per-child feat dump).
 
 **Anchor (value-blind form):** the smallest Stab(frame)-orbit of on-conic children is P.
 Equivalently — since a singleton orbit is a frame-fixed on-conic point — *whenever the frame
@@ -47,37 +55,75 @@ unambiguous exactly where it must decide:
 - It is a **single, uniform, value-blind existence witness** for an on-conic P child that holds at
   every tested order **including** the q=11 D10 exception — so A5's (ON) target no longer needs a
   separate exception layer at the selector-existence level. L1 needed a q=11 exception; this does not.
-- It gives the C68b "P = rare/special" lead a precise mechanism: **special = smallest Stab-orbit =
-  most symmetric completion.** Candidate proof mechanism (unproven): the most-symmetric completion
-  has the largest point-automorphism group, giving the second player the richest pairing/mirror
-  structure — consistent with the program's fixed-point-free-involution theme, but it is a game-value
-  claim, not yet a theorem.
+- It gives the C68b "P = rare/special" lead a precise, value-blind form: **special = smallest
+  Stab-orbit = largest point-stabilizer = most symmetric completion.** (Orbit size = |Stab|/|point-stab|,
+  so "smallest orbit" and "largest point-stabilizer" are the same statement.)
+
+## The anchor strictly dominates C73's L1 (cross-check)
+
+For every class, is L1's max-incidence on-conic pick inside the smallest Stab-orbit?
+
+| q  | L1-pick-in-smallest-orbit | disagreements |
+|----|---------------------------|---------------|
+|  5 |            1/1            | —             |
+|  7 |            3/3            | —             |
+| 11 |            6/8            | **exactly cls 4, 7** (the knife-edge where L1 fails) |
+| 13 |          12/12           | —             |
+| 17 |          21/21           | —             |
+| 19 |          25/27           | all-P noise (L1 picks a different **P** orbit, never an N one) |
+
+So the anchor and L1 are the **same selector wherever L1 works**, and their only genuine
+disagreements are the exact q=11 classes where L1 picks an N conic point and fails. The smallest-orbit
+anchor is L1's fix — a strict generalization, not an independent coincidence.
+
+## Mechanism: the point-stabilizer mirror is REFUTED (inverted across the depleted orders)
+
+The natural proof route — "the most-symmetric completion is P because its point-stabilizer contains
+a fixed-point-free mirror involution" — is **false**. Point-stabilizer of the P vs N orbits at the
+knife-edge classes (`(orbit size, |point-stab|, contains an involution?)`):
+
+| order            | P orbit        | N orbit(s)          |
+|------------------|----------------|---------------------|
+| q=17 (cls 2/17/19) | (1, 4, **True**)  | (4, 1, False) ×3    |
+| q=11 (cls 4/7)     | (2, 5, **False**) | (5, 2, **True**)    |
+
+At q=17 the P child's point-stabilizer has an involution; at q=11 it does **not** (order 5, odd —
+the two P points are the fixed points of the order-5 element of the D10 frame stabilizer), and there
+it is the **N** children that carry the involution. So "P ⟺ point-stab has a mirror involution" is
+**exactly inverted between q=11 and q=17** — the same flip/control failure mode (q=11 small-field
+signature dissolving at q=17) that killed the C64/C69 config-invariants, here striking the *mechanism*
+rather than an invariant. The only q-uniform statement is the value-blind orbit-size one; **P-ness is
+not explained by a static point-stabilizer symmetry.** This is consistent with C64's finding that the
+value lives in the full game tree, not the terminal layer.
 
 ## Caveats / what is NOT proven (skeptic pass)
 
-- **Measured, not proved**, and only at the four primes with committed feat dumps (q=11,13,17,19).
-  q=25 is all-P (trivially consistent); q=5,7 non-depleted; q=9 is GF(9), skipped (script is
-  prime-field). This is a **new, cleaner anchor conjecture**, stronger than L1, not a proof.
+- **Measured, not proved.** Discriminating tests are only the two depleted primes {11,17}; the rest
+  are non-depleted (all-P, trivially consistent). q=9 is GF(9), skipped (script is prime-field).
+  A **new, cleaner anchor conjecture**, stronger than L1 — not a proof.
+- **The obvious mechanism is refuted** (§ above): P-ness is not a point-stabilizer mirror involution
+  (inverted q=11 ↔ q=17). So the anchor is a value-blind *selector*, not a *proof* of P.
 - **Not contradicted by round-1's refutation of "stabilizer-specialness ⇒ P"** — that refutation is
   at the *6-point bucket* level (the q=11 N bucket `{∞,0,1,2,3,4}` carries a V4 and defeats the
   *involutive-completion* selector). This anchor is a different object: the *size-3 frame*
-  stabilizer acting on *child completions*, with the *smallest orbit* (not "has nontrivial stab")
-  as the selector. The two are not the same statement; the empirical q=11 8/8 here is direct
-  evidence this exact statement is not the refuted one. Still — the overlap in vocabulary is a
-  warning: state the exact object in any Lean form.
-- The game-value reduction (why the smallest-orbit completion is P) is the open lemma; the
-  most-symmetric completion is a *candidate* P-witness, not a proven mirror. Do not claim P from
-  symmetry without the pairing certificate (mirror-strategy-skeptic persona).
+  stabilizer acting on *child completions*, with the *smallest orbit* as the selector. The empirical
+  q=11 8/8 is direct evidence this exact statement is not the refuted one — but the mechanism
+  inversion above shows *why* the refuted "specialness ⇒ P" implication fails, and warns against any
+  Lean statement that reads P-ness off the stabilizer.
 
-## Open next steps
+## Open next steps (reshaped after the mechanism refutation)
 
-1. **Extend the measurement** — confirm the anchor at the next order with solved on-conic data,
-   and (decisively) at the next *depleted* order if a q=29 census is gated and run.
-2. **Prove the game-value lemma** — "the smallest Stab(frame)-orbit completion is P" — via the
-   point-stabilizer pairing structure (the size-2 D10 orbit at q=11 cls 4/7 has point-stabilizer
-   order 5; the q=17 singletons have the full order-4 frame stabilizer). This is the A5 proof
-   target that would close (ON) uniformly.
-3. **Reconcile with L1 / C73** — the smallest-orbit anchor and L1 agree everywhere except the q=11
-   knife-edge; characterize the L1 tie (D10 ⇒ 5 tied lines) against the D10 orbit split to see
-   whether L1's failure is *exactly* "the incidence extremum tracks a large orbit, not the small
-   one."
+The point-stabilizer-mirror proof route is dead, so the anchor does **not** shortcut the open
+Good-closure/strategy problem via static symmetry. What it does give:
+
+1. **A value-blind selector for the (ON) obligation** — "certify the smallest-Stab-orbit on-conic
+   child." This tells the Cluster-2 open-core / reply-strategy machinery *which* on-conic child to
+   build the P-certificate for at every class, replacing L1 (and covering the q=11 exception L1
+   missed). Hand this to the C61-successor existential-selector lemma as the target child.
+2. **The proof of P-ness stays a strategy problem, not a symmetry problem** — the amortized-potential
+   / reply-book route (Cluster 2), now aimed at the smallest-orbit child specifically. The mechanism
+   inversion is itself a constraint: any correct P-argument must NOT rely on a point-stabilizer
+   involution (q=11 has none on the P orbit).
+3. **A third discriminating order (q=29, gated)** remains the only way to test the anchor's
+   *predictive* power beyond {11,17}; the mechanism refutation makes this more important, since we
+   no longer have a structural reason to trust extrapolation.

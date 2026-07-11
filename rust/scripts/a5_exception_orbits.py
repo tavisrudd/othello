@@ -29,6 +29,16 @@ def mobius_all(q):
                     out.append((a, b, c, d))
     return out
 
+def act2_is_id(m, q):
+    """Is m an involution (m*m = identity in PGL)?"""
+    a, b, c, d = m
+    aa = (a * a + b * c) % q
+    bb = (a * b + b * d) % q
+    cc = (c * a + d * c) % q
+    dd = (c * b + d * d) % q
+    # m^2 == scalar * I  <=>  bb==cc==0 and aa==dd
+    return bb == 0 and cc == 0 and aa == dd
+
 def act(m, x, q):
     a, b, c, d = m
     if x == 'oo':
@@ -55,6 +65,8 @@ def run(q):
     assert len(G) == q * (q * q - 1)
     print(f'==== q={q}  (|PGL|={len(G)}) ====')
     anchors = []
+    l1s = []
+    mech = []
     for c in sorted(recs):
         rec = recs[c]
         frame = frame_params(rec)
@@ -85,6 +97,32 @@ def run(q):
             v = vals.pop() if len(vals) == 1 else '/'.join(sorted(vals))
             orb_desc.append(f'{v}x{len(orb)}')
         onP = rec['onP']
+        # point-stabilizer of a representative of each orbit: order + has-involution?
+        def point_stab(w):
+            return [m for m in stab if act(m, w, q) == w]
+        def has_invol(H):
+            return any(m != (1, 0, 0, 1) and act2_is_id(m, q) for m in H)
+        # mechanism probe: for the P orbit(s) and N orbit(s), does the point-stab contain an involution?
+        p_orbits = [orb for orb in orbits if {value_of_w(rec, w) for w in orb} == {'P'}]
+        n_orbits = [orb for orb in orbits if {value_of_w(rec, w) for w in orb} == {'N'}]
+        def orbit_probe(orb):
+            H = point_stab(orb[0]); return (len(orb), len(H), has_invol(H))
+        p_probe = [orbit_probe(o) for o in sorted(p_orbits, key=len)]
+        n_probe = [orbit_probe(o) for o in sorted(n_orbits, key=len)]
+        mech.append((c, p_probe, n_probe))
+        # L1 (C73 max-incidence secant) on-conic pick: the w of the max-nlegal candidate secant
+        cand = rec['cand']
+        mx = max(d['nlegal'] for d in cand.values())
+        l1_ws = {w for (F, w), d in cand.items() if d['nlegal'] == mx}   # tied picks
+        # which orbit does each on-conic child belong to?
+        w_orbit = {}
+        for oi, orb in enumerate(orbits):
+            for w in orb:
+                w_orbit[w] = oi
+        min_orbit_idx = min(range(len(orbits)), key=lambda i: len(orbits[i]))
+        l1_in_smallest = any(w_orbit.get(w) == min_orbit_idx for w in l1_ws)
+        l1_all_smallest = all(w_orbit.get(w) == min_orbit_idx for w in l1_ws)
+        l1s.append((c, l1_in_smallest, l1_all_smallest))
         # verdict tests for the A5 anchor "smallest Stab-orbit is P"
         sized = sorted(((len(orb), {value_of_w(rec, w) for w in orb}) for orb in orbits))
         min_sz = sized[0][0]
@@ -101,8 +139,20 @@ def run(q):
     sp = sum(1 for _, s, _, _ in anchors if s)
     su = sum(1 for _, _, u, _ in anchors if u)
     nsing = sum(1 for _, _, _, n in anchors if n)
+    l1_any = sum(1 for _, a, _ in l1s if a)
+    l1_all = sum(1 for _, _, a in l1s if a)
     print(f'  VERDICT q={q}: smallest-orbit-all-P {sp}/{nclass};  '
           f'smallest-orbit-unique {su}/{nclass};  N-singleton(frame-fixed-N) classes {nsing}')
+    print(f'  L1-vs-anchor q={q}: L1-pick-hits-smallest-orbit {l1_any}/{nclass};  '
+          f'all-L1-ties-in-smallest {l1_all}/{nclass}  '
+          f'(disagreements = classes where L1 misses the anchor orbit)')
+    # mechanism probe on the knife-edge (min-witness) classes only: does the P orbit's
+    # point-stabilizer contain a mirror involution?  fmt: (orbit_size, point_stab_order, has_invol)
+    KE = {11: (4, 7), 17: (2, 17, 19)}.get(q, ())
+    for c, p_probe, n_probe in mech:
+        if c in KE:
+            print(f'    MECH q={q} cls {c} (knife-edge): P-orbits(sz,|pt-stab|,invol?)={p_probe}  '
+                  f'N-orbits={n_probe}')
 
 if __name__ == '__main__':
     for q in ([int(a) for a in sys.argv[1:]] or [11, 13, 17, 19]):
