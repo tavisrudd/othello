@@ -675,8 +675,9 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
 [`done/2026-07-08-projective-cap-game-handoff-archive.md`](done/2026-07-08-projective-cap-game-handoff-archive.md):
 
 - C77 — amortized-bank "debt growth" is a reservoir bookkeeping artifact; the conic ledger
-  `6·defect − 4·intruders − 2·[xor]` has debt 0, reducing to the sublemma `defect_components ≤ q−5`;
-  P-certificate is the remaining crux; `q−5` cross-lane lead with A5.
+  `6·defect − 4·intruders − 2·[xor]` is now proved root-peak-bounded at all depths for every odd q.
+  Its `q−5` is not A5's `maxonN≤q−5`: the former is value-blind live-vertex cardinality, the latter
+  is exactly the game-value escape claim. A game-semantic P-certificate remains the open crux.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

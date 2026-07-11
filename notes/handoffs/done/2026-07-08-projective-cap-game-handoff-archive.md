@@ -2254,3 +2254,20 @@ But q=29 alone cannot separate twin-primality from a "≡5 mod 6 window-interior
 twin-primality has no known link to PG(2,q) arc/oval structure — a 2-point correlate, presented as
 falsifiable, not a proven mechanism. Report:
 [`../../2026-07-11-arc-depletion-arithmetic-probe.md`](../../2026-07-11-arc-depletion-arithmetic-probe.md).
+
+## 2026-07-11 C77 (Codex) — all-depth DROP peak proof; A5 cross-lane identification negative
+
+Closed C77's pending on-box sublemma without a solve.  For any descendant `S` of a four-on-conic
+root, `defect_components(S)` is at most the number of live conic vertices, hence at most `q−5`.
+If an off-conic intruder exists, DROP's `−4·intruders` charge puts the value below the root; if none
+exists and `S` is proper, another on-conic selection leaves at most `q−6` components.  At the root,
+the `q−5` isolated vertices have xor zero because q is odd.  Therefore
+`DROP(S) ≤ 6(q−5)−2 = DROP(root)` for every depth and odd q.  The q23 solve is not needed to settle
+DROP debt zero.
+
+The apparent A5 coincidence does not collapse the lanes.  `maxonN` is a class-extremal count of
+game-value-N children; `defect_components` is a value-blind graph count on one chosen S4 root and is
+always `q−5` at that root.  The only correspondence chooses a P child first, which assumes exactly
+the desired (ON) conclusion.  C77's remaining residue is therefore game-semantic: a peak bound is
+not a P-certificate.  Full proof and controls are appended in
+[`../../2026-07-11-c77-ledger-spike-structure.md`](../../2026-07-11-c77-ledger-spike-structure.md) §9.

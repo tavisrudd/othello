@@ -3104,3 +3104,13 @@ q−4 ≥ 21, so **growth in the construction family is mandatory for uniformity
 
 Budget: hours–day; algebra + existing data, single-core, ≤ 2 GB.
 Report file: `notes/2026-07-10-codex-c74-capacity-family.md`.
+
+## 2026-07-11 C77 Codex increment — peak lemma closed, certificate residue retained
+
+The reservoir-free DROP ledger satisfies the exact all-depth bound
+`DROP(S) ≤ 6(q−5)−2 = DROP(root)` for every descendant of an on-conic S4 root in odd order: component
+count is at most live-conic vertex count; an intruder pays `−4`; without intruders, any proper
+descendant has removed another conic vertex; the root's even number `q−5` of isolates has xor zero.
+The proposed A5 identification is negative because `maxonN` uses P/N game labels while
+`defect_components` is value-blind and fixed at `q−5` at every such root.  C77 now leaves only the
+game-semantic P-certificate/reply-closure problem, not a bank-capacity or peak-bound problem.

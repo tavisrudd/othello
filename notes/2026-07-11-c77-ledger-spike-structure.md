@@ -189,3 +189,52 @@ for q in 13 17 19 23 25 27 29; do ./target/gridcap-ledger s4spike $q 1,2,3,4 --d
 # principal variation + per-ply Ψ-max on a solved order:
 ./target/gridcap-ledger s4ledger 19 1,2,3,4 --grundy s4-dumps/2026-07-09/c35/q19-root-1234.grundy.raw --pv
 ```
+
+## 9. Codex follow-up: the DROP peak bound is an all-depth theorem; the A5 `q−5` is not the same object
+
+The remaining peak-bound sublemma in §8 does not require another solve.  Let `S` be any descendant
+of an on-conic size-4 root in odd order `q`, let `c(S)` be `defect_components`, let `i(S)` be the
+number of selected off-conic intruders, and let `z(S)=[conic_xor(S)=0]`.  Then
+
+```text
+DROP(S) = 6c(S) - 4i(S) - 2z(S) <= 6(q-5)-2 = DROP(root).
+```
+
+Proof.  The affine conic has `q−1` points and the root selects four, so every descendant has at most
+`q−5` live conic vertices.  A graph has at most as many connected components as vertices, hence
+`c(S) <= q−5`.
+
+- If `i(S) >= 1`, then `DROP(S) <= 6(q−5)-4`.
+- If `i(S)=0` and `S` is a proper descendant, every post-root selected point is on the conic, so at
+  least one further conic vertex has been removed: `c(S) <= q−6` and
+  `DROP(S) <= 6(q−6)`.
+- At the root, the `q−5` live vertices are isolated.  Since `q` is odd, `q−5` is even, so their
+  Node-Kayles xor is zero.  Thus `DROP(root)=6(q−5)-2`.
+
+This proves the raw-envelope peak bound at **all depths and all odd orders** (for any legal
+four-on-conic root), closing the empirical `max_defect_excess` extrapolation.  The q=23 gated solve
+is no longer needed to establish full-depth DROP debt zero; it could only test whether DROP has any
+additional game-value/certificate content.
+
+The A5 cross-lane identification is **negative**.  `maxonN(q)` counts N-valued alternatives among
+the `q−4` on-conic children of a size-3 class and then maximizes over classes.  In contrast,
+`defect_components(S)` counts connected components in the value-blind chord-obstruction graph on
+the live conic of one chosen size-4 root.  At a root it is always `q−5`, independently of all P/N
+labels.  Existing controls make the mismatch explicit:
+
+```text
+q=13: maxonN=0,  defect_root=8
+q=17: maxonN=12, defect_root=12
+q=19: maxonN=0,  defect_root=14
+```
+
+There is only a tautological conditional correspondence: if one already chooses a P-valued
+on-conic child, its `q−5` sibling completions are the root's live conic vertices, so at most `q−5`
+of the original `q−4` children can be N.  But existence of that P child is exactly (ON), equivalently
+the A5 target `maxonN <= q−5`.  Therefore the ledger component bound neither proves nor weakens the
+A5 arithmetic lemma.
+
+**C77 residue.**  The bank/peak question is closed: after deleting the spurious reservoir summand,
+DROP has zero root-relative debt uniformly.  The surviving issue is the one already flagged in §6:
+a peak-bounded value-blind statistic is not a P-certificate.  Any continuation must add a genuine
+game-semantic invariant or reply-book closure; more DROP-envelope computation cannot close (ON).

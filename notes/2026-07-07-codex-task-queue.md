@@ -17,16 +17,17 @@ still require an explicit user gate.
 
 The (ON) odd-plane kernel — "every legal size-3 residual position has a P-valued on-conic size-4
 child" — is the active mathematics. The config→value **mechanism sweep is closed-negative** (Cluster 1),
-so the two live proof lanes are **A5 arc-depletion arithmetic** and the **Cluster-2 amortized/ledger
-potential**. C75 (2026-07-11) proved the pointwise value-blind selector impossible in the current
-feature space, re-weighting Cluster 2 toward the amortized bank and naming the invariant hunt (C76).
+so the two live proof lanes are **A5 arc-depletion arithmetic** and the **Cluster-2 game-semantic
+ledger/certificate**. C75/C76 close the current pointwise selector/invariant spaces; C77 closes the
+pure geometric bank bound but shows that game-semantic certificate content is still missing.
 
-1. **Cluster 2 — the open core** (amortized/ledger potential Ψ + existential q-varying selector).
+1. **Cluster 2 — the open core** (game-semantic ledger/certificate + existential q-varying selector).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
    the lane itself is open. C75 explains the selector wall; C76 answered the invariant prong
    (frame-relative characters cut collisions 48→1 but leave a residual hard twin, no monotone scalar,
-   and no uniform linear selector ⇒ separation not selection) and **narrows Cluster 2 to the C77
-   amortized/ledger bank tolerating ΔΨ≥0** — the sole surviving lever.
+   and no uniform linear selector ⇒ separation not selection). C77 now proves the reservoir-free
+   DROP ledger is uniformly peak-bounded, but also shows that this geometric bound has no game-value
+   content by itself; the sole surviving lever is a **game-semantic ledger/reply-book closure**.
 2. **A5 lane — arc-depletion arithmetic.** Sole surviving (ON) mechanism route. Open: prove
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
@@ -45,38 +46,21 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
   the augmented space is NOT orbit-injective** (1 residual hard twin, q=17 axis points P `11,0`/N
   `16,0`), **no scalar reduction is monotone** (39/48 and 38/48 separators are direction-MIXED), and
   **no uniform linear selector exists** (C77-selector-test LP infeasible over d=37). So it buys
-  separation, not selection — formally re-routing (ON) to the **amortized/ledger** potential. Report:
+  separation, not selection — routing (ON) to a **game-semantic ledger/reply-book closure**. Report:
   [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
   scripts `rust/scripts/c76_invariant_hunt.py`, `c76_directional_search.py`, `c77_augmented_selector.py`.
-- **C77 [OPEN — two probes REPORTED 2026-07-11; "flat bank" REFUTED past q=19, gated to settle]** —
-  amortized/ledger potential: realize Ψ as a bank tolerating local ΔΨ≥0 against a global budget.
-  **Probe 1 (`s4ledger`) measured minimax peak-Ψ debt on the root DAG: 0/22/22 (q13/17/19) — looked
-  bounded/flat. Probe 2 (`--pv` + solve-free `s4spike`) corrects this:** the debt is a *single
-  first-intrusion spike* (Ψ rises only at ply5, monotone-decreasing after), and that spike IS bounded
-  (22–26 through q=31, exact lower bound). **But the raw Ψ-envelope peak migrates deeper (ply5→6→7+)
-  and climbs ~linearly from q=23 on — height above root 22/22/65/71/≥98/≥142 (q17/19/23/25/27/29).**
-  The "flat 22" was an artifact of q17/q19 being the only orders whose envelope peaks at the *first*
-  intrusion. A q-independent bank capacity is now in doubt. The true q≥23 debt lies between the exact
-  ply5 lower bound (~24) and the growing raw envelope; settling it needs the P-restricted root solve
-  (q23 ≈ 25 GB — OOMs this box; gated to a ≥32 GB box; q25 ≈ 370 GB infeasible). **Probe 3 (reservoir
-  credit) localizes the growth to ONE term and largely removes it:** the debt is entirely the C63
-  `reservoir_slack` summand `f5 = zone_v − reservoir_floor`, whose loose Hall floor
-  `(q−k)(q−k−C(k,2)−1)` is large at the root and melts to 0 with depth, releasing raw support into Ψ.
-  Capping it by the remaining move budget `(q+1)−k` (cap bound |S|≤q+1) cuts the debt ~10× (65/71/70 →
-  1/11/7 at q23/25/29); **dropping reservoir entirely — the pure conic ledger `6·defect − 4·intruders
-  − 2·[xor]` — gives debt 0** (its max never exceeds the root, where defect is maximal), verified to
-  ply 10 (q17/19) / ply 7 (q23–27) on the raw envelope (⇒ holds for any P-restricted defense). Caveats:
-  not a per-edge Lyapunov (ΔDROP jumps grow 8→34, but stay below root); a peak-bound is not yet a P
-  certificate. **Next (on-box, no gated solve):** prove `max reachable (6·defect − 4·intruders − 2·[xor])
-  ≤ 6·defect_root − 2` — a defect/intruder combinatorics lemma on the conic, no reservoir/no Hall — as
-  the concrete ply5-hold sublemma; the gated q23 solve is now only for full-depth DROP debt-0 + the P
-  certificate (**the real crux — a peak-bounded potential is not yet a P-certificate**). **Cheap
-  cross-lane check first:** both live lanes now point at the same constant `q−5` (A5 target
-  `maxonN(q) ≤ q−5`; here `defect_root = q−5` exactly). If `maxonN` and `defect_components` are the same
-  object (or one bounds the other), A5 and Cluster-2 collapse to one lemma — verify before more probes.
-  Probes:
+- **C77 [REPORTED 2026-07-11 — DROP peak theorem proved; game-semantic certificate residue OPEN]** —
+  C63's growing Ψ debt is entirely the loose `reservoir_slack` term. After deleting it, the pure
+  conic ledger `DROP = 6·defect − 4·intruders − 2·[xor=0]` satisfies the **all-depth theorem**
+  `DROP(S) ≤ DROP(root)=6(q−5)−2` for every odd q: an intruder pays `−4`; without intruders a proper
+  descendant has at most `q−6` live conic vertices; the root's `q−5` isolates have xor zero. The q23
+  solve is no longer needed for bank capacity or full-depth DROP debt. The `q−5` cross-lane check is
+  **negative**: A5's `maxonN` is a class-extremal P/N count, while `defect_components` is a
+  value-blind graph count fixed at `q−5` at the root; identifying them assumes the desired P witness.
+  **Open residue:** a peak bound is not a P-certificate. Add genuine game-semantic/reply-book closure;
+  do not spend more compute on the DROP envelope. Reports:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
-  [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–7); modes
+  [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–9); modes
   `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:
