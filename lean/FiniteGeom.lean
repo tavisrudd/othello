@@ -7,3 +7,4 @@
 -- cite are built. Right now that is the q-ary weight-counting layer used by the
 -- concatenation transfer lemma.
 import FiniteGeom.Weight
+import FiniteGeom.Hypergraph

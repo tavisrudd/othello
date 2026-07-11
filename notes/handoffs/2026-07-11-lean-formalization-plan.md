@@ -176,12 +176,19 @@ rules-only validator, mirroring `ProjectiveCap/CertData/`.
 
 Two new `[[lean_lib]]` targets wired into `lakefile.toml` (`defaultTargets` too):
 
-- **`FiniteGeom`** (shared base) — `FiniteGeom/Weight.lean`: the q-ary weight-counting
-  arithmetic the transfer argument stands on. `card_filter_le_sum` (#nonzero coords ≤ total
-  weight) and `mul_card_filter_le_sum` (`d · #coords ≤ total weight`). Pure `Finset`/`ℕ`, no
-  code/field structure — the piece `CompletionCore` will also cite for `δ_x = τ`. Kept minimal
-  per decision 1 (abstract-first); the concrete `𝔽_q` generator-matrix / dual-distance layer is
-  **not built yet** and is the next `FiniteGeom` job.
+- **`FiniteGeom`** (shared base) — two self-contained modules:
+  - `FiniteGeom/Weight.lean`: the q-ary weight-counting arithmetic the transfer argument stands
+    on. `card_filter_le_sum` (#nonzero coords ≤ total weight) and `mul_card_filter_le_sum`
+    (`d · #coords ≤ total weight`). Pure `Finset`/`ℕ`.
+  - `FiniteGeom/Hypergraph.lean`: the minimal `Finset`-of-`Finset` hypergraph layer (§3).
+    `IsMatching`/`IsTransversal`, matching number `matchingNumber` (`ν`, `sSup` of matching
+    sizes), transversal number `transversalNumber` (`τ`, `sInf` of transversal sizes), the
+    pointwise `matching_card_le_transversal_card` (König injection: each matched edge hit by a
+    distinct cover vertex), and `nu_le_tau : ν ≤ τ`. This is the baseline the `(ν,τ)`
+    distribution claims and the `δ_x = τ` invariant (Phase 1 step 2 / `CompletionCore`) build on.
+
+  Kept minimal per decision 1 (abstract-first); the concrete `𝔽_q` generator-matrix /
+  dual-distance code layer is **not built yet** and is the next `FiniteGeom` job.
 - **`RepairCodes`** — `RepairCodes/Transfer.lean`: the **concatenation transfer lemma (§1.4)**,
   the crux self-contained novelty. Stated over an abstract-first interface `ConcatDualWord`
   (decision 1): the deep structural inputs — trace-representation faithfulness (`hbeta`),
@@ -199,8 +206,9 @@ Two new `[[lean_lib]]` targets wired into `lakefile.toml` (`defaultTargets` too)
   blocked on the concrete `FiniteGeom` code layer + trace-form nondegeneracy.
 
 **Audit gate (passes):** `#print axioms` on `transfer_lemma`, `transfer_blockwise`,
-`transfer_single_block`, and both `FiniteGeom` lemmas = `[propext, Classical.choice, Quot.sound]`
-only — no `sorryAx`, no `native_decide`. `lake build FiniteGeom RepairCodes` clean, no warnings.
+`transfer_single_block`, `nu_le_tau`, `matching_card_le_transversal_card`, and the `FiniteGeom`
+weight lemmas = `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.
+`lake build FiniteGeom RepairCodes` clean, no warnings.
 
 **Next steps (in order):**
 1. Concrete `FiniteGeom` code layer: generator matrix over `𝔽_q`, dual code, min/dual distance
@@ -209,6 +217,8 @@ only — no `sorryAx`, no `native_decide`. `lake build FiniteGeom RepairCodes` c
    trace-form nondegeneracy (`Algebra.trace` / `traceForm_nondegenerate`) for `hbeta` and the
    Chen–Ling–Xing dual decomposition for `houter`.
 3. Phase 1 step 2: `δ_x = τ(𝓑_x)` completion-distance invariant (shared into `CompletionCore`).
+   The `τ` side now exists (`FiniteGeom.transversalNumber`); the remaining work is defining `δ_x`
+   (completion distance) on the code layer and identifying the repair hypergraph `𝓑_x`.
 4. Phase 1 step 4: uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`.
 
 ### Handoff Note — 2026-07-11 (session: lean-formalization Phase 0/1)
@@ -220,3 +230,12 @@ only — no `sorryAx`, no `native_decide`. `lake build FiniteGeom RepairCodes` c
   the real `q = 9` instance is the immediate next commitment (blocks the "not vacuous in the
   intended sense" story, though the interface *is* proven inhabited).
 - Commit: this session (FiniteGeom/RepairCodes libs + lakefile wiring + this handoff update).
+
+### Handoff Note — 2026-07-11 (cont.: FiniteGeom hypergraph layer)
+
+- Added `FiniteGeom/Hypergraph.lean`: the `Finset`-hypergraph `ν`/`τ` half of Phase 0 (§3),
+  with `nu_le_tau` proved via a König-style matching→cover injection. Self-contained, axioms
+  clean. This completes the *combinatorial* half of the `FiniteGeom` MVP; the *algebraic* half
+  (generator matrix / dual distance over `𝔽_q`) is still the outstanding Phase-0 job and the
+  blocker for the real `q = 9` discharge and `δ_x = τ`.
+- Second commit this session.
