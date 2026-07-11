@@ -6923,7 +6923,7 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                         .iter()
                         .map(|r| {
                             format!(
-                                "{},{}:g{}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:rays{}",
+                                "{},{}:g{}:dpsi{}:{}:live{}:comp{}:xor0{}:psi{}:chi{}:polar{}:rays{}",
                                 r.z as usize / q,
                                 r.z as usize % q,
                                 r.g,
@@ -6933,6 +6933,8 @@ fn solve_s4_selectors(q: usize, t4: &[usize], grundy_path: &str, fail_out: Optio
                                 r.features.defect_components,
                                 r.features.xor_zero as u8,
                                 r.features.psi,
+                                r.rect_char,
+                                r.polar_internal as u8,
                                 r.zone_conflict_rays
                                     .iter()
                                     .map(|x| x.to_string())

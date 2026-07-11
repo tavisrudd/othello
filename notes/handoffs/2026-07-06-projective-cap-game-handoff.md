@@ -1306,6 +1306,43 @@ References:
 
 ## Handoff Notes
 
+2026-07-11 C74 (Claude, lane C / Cluster-2, Codex asleep): **the value-blind reply selector is
+impossible in the program feature space** — a structural explanation of Codex's C61/C62/C63
+"every selector family is uniform-negative" wall. Reusing the on-disk exact Grundy dumps (no
+re-solve), dumped every legal reply's full value-blind feature vector + Grundy label at the hard
+root-frame obligations of the q=13/17/19 root DAGs and asked whether any function of the features
+picks a winning reply everywhere. **19 of 108 hard obligations contain a winning (P, ΔΨ<0) reply and
+a losing (N) reply that are byte-identical on all 17 features** {geom, live, comp, xor_zero, Ψ, ΔΨ,
+χ, polar, ray-profile} — a superset of every coordinate the selector families use. Verified witness
+(q=13, opp `11,0`): P `6,6`(g0) and N `12,3`(g2) identical on every feature. Consequences: (i) the
+wall is feature-*completeness*, not coordinate-choice — no selector (linear or nonlinear) over these
+invariants wins; (ii) an **order-sensitive** rule does not escape it (every twin is within a single
+q); (iii) the feature map is Stab-invariant but not orbit-injective (collapses a P-orbit onto an
+N-orbit); (iv) the deficit **grows with q** (6% → 7% → 39%), so it is structural and worsening, the
+opposite of the C64/C69 small-field near-hits. **Named next step:** any winning selector needs a
+strictly finer PGL-invariant coordinate; the 19 witness pairs are the concrete design target. This
+also re-weights the (ON) route toward the **amortized/ledger** potential (a bank tolerating ΔΨ≥0),
+since a pointwise winning selector over the present invariants is ruled out. A correctness fix was
+load-bearing: the stock `root_replies` dump omitted χ/polar (naive check reported 82 false twins;
+true count 19 with them added), so the solver's `root_replies` emitter was patched to carry them.
+Report: [`../2026-07-11-c74-value-blind-selector-impossibility.md`](../2026-07-11-c74-value-blind-selector-impossibility.md);
+script `rust/scripts/c74_linear_selector_lp.py`; solver `gridcap-c74`.
+
+2026-07-11 arc-depletion-arithmetic probe (Claude, lane A, delegated + verified): tested whether an
+arc-theoretic invariant of `PG(2,q)` characterizes the depleted set `{11,17}` (C68's open margin
+question). **No arc invariant fits** — `m'(2,q)` (Ball–Lavrauw arXiv:1705.10940) and every natural
+transform of it flag a *different* set ({7,9,11,13}, {9,13,17}, or {9,11}), never {11,17}; consistent
+with the value living in the game tree (C55/C64/C69 negatives). The only rule fitting all nine tested
+orders (incl. the load-bearing undepleted q=23/25) is purely arithmetic and mechanism-free: **q is a
+twin-lower prime with q−2 composite** (q, q+2 prime; q−2 composite) — the minimal repair of the
+failed mod-6 rule. **Prediction: q=29 DEPLETED** (twin (29,31)); q=31, q=47 undepleted. Cheapest
+positive test is q=29 — the census the program already wants (settles C68's min-witness margin
+2→1→?). But q=29 alone cannot separate twin-primality from a "≡5 mod 6 window-interior" null; only a
+**non-twin ≡5 mod 6 prime (q=47/53)** does (twin-rule says undepleted, residue says depleted).
+Flagged suspect: twin-primality has no known link to PG(2,q) arc/oval structure — a 2-point
+correlate, presented as falsifiable, not a proven mechanism. Report:
+[`../2026-07-11-arc-depletion-arithmetic-probe.md`](../2026-07-11-arc-depletion-arithmetic-probe.md).
+
 2026-07-10 C62 (Codex): added exact `s4selectors` full-expansion traversal, bottom-up random-play
 rho, 17 selector families/hybrids, exact P/Delta-Psi tie scoring, and rho failure TSVs. Pure rho is
 perfect at q=13 but has 651 q=17 and 11,345 q=19-root value misses, mostly at plies 4--6; no
