@@ -188,6 +188,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/Hypergraph.lean` | `Finset`-hypergraph `ν`/`τ`: `nu_le_tau` (weak duality), `transversalNumber_le_mul_matchingNumber` (`τ ≤ p·ν`), `card_le_matchingNumber` / `transversalNumber_le_card` attainment pins, worked `ν=τ=1` + triangle `ν=1,τ=2` (strict) witnesses |
 | `FiniteGeom/Code.lean` | linear codes over `𝔽_q`: `dualCode` / `minDist` / `dualDist` (+ `_le_hammingNorm` pins), parity-check char. `mem_dualCode_rowCode(_iff_mulVec)`, `singleton_bound` (`d+k≤n+1`) + `IsMDS`, `le_minDist` (lower-bound lifter), `𝔽₅` non-vacuity witness |
 | `FiniteGeom/EvalCode.lean` | Reed–Solomon: `card_eval_zero_le_natDegree`, `evalPi`, `rsCode`, `rsCode_minDist_ge` (`n-(k-1)≤d`), `finrank_rsCode` (`=k`), `rsCode_isMDS` (RS codes are MDS) |
+| `FiniteGeom/EvalCodeInstance.lean` | concrete MDS discharge of the eval-code layer: RS `[7,3,5]₇` over `ZMod 7` (`rsCode_zmod7_isMDS`/`_minDist`) and RS `[3,2,2]₉` over the target `GaloisField 3 2 = 𝔽₉` on subfield points (`rsCode_gf9_isMDS`/`_minDist`, injectivity via `algebraMap`) — exercises `rsCode_isMDS` on a real non-prime field |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode` — fills `ConcatDualWord`'s finite fields from the code layer, zero extra assumptions; residual = `beta`/`hbeta`/`houter` (the imported trace / Chen–Ling–Xing content) |
@@ -211,10 +212,13 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 3. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q` — needs its concrete
    generator + a bespoke distance argument (RS gives the MDS baseline, but this family sits far
    below MDS, so `rsCode_minDist_ge` doesn't apply directly).
-4. **Stepping stone:** instantiate the RS / eval-code layer over a concrete `GaloisField` (e.g.
-   `𝔽_9`) — exercises `rsCode_isMDS` on a real field and is the on-ramp toward the NMDS-shaped
-   seeds the sweep flags.
-5. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
+4. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
+
+**Landed 2026-07-11:** the eval-code stepping stone — RS instances over `ZMod 7` and the target
+`GaloisField 3 2 = 𝔽₉` (`FiniteGeom/EvalCodeInstance.lean`, all `#print axioms`-clean). This
+discharges the eval-code MDS layer's non-vacuity on a real non-prime field, retiring the
+"instantiate RS over a concrete `GaloisField`" on-ramp. It does **not** touch the `[10,4,6]₉`
+NMDS seed (step 1) — that family sits below MDS, so `rsCode_isMDS` does not reach it.
 
 The session-by-session narrative of how the §7 corpus landed (per-slice writeups, referee-hardening,
 the ten dated notes) is in the
