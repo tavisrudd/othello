@@ -7080,6 +7080,10 @@ fn solve_s4_spike(q: usize, t4: &[usize], depth: usize) {
     // per-EDGE max delta (child - parent) per variant; <=0 everywhere == monotone potential.
     // Monotone on the raw envelope (all legal moves) => monotone on any P-restricted subset.
     let (mut dmax_orig, mut dmax_cap, mut dmax_drop) = (i64::MIN, i64::MIN, i64::MIN);
+    // does raw defect_components ever exceed its root value? (distinguishes defect<=root proof
+    // from one needing the -4*intruder charge)
+    let defect_root = root_fv[7];
+    let mut max_defect_excess = 0i64;
     for _step in 0..depth {
         let mut next: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
         for (occ, chosen, forbidden) in &frontier {
@@ -7094,6 +7098,7 @@ fn solve_s4_spike(q: usize, t4: &[usize], depth: usize) {
                 dmax_orig = dmax_orig.max(o - po);
                 dmax_cap = dmax_cap.max(c - pc);
                 dmax_drop = dmax_drop.max(d - pd);
+                max_defect_excess = max_defect_excess.max(fv[7] - defect_root);
                 let key = b.canon(&cocc);
                 if !seen.insert(key) {
                     continue;
@@ -7133,6 +7138,10 @@ fn solve_s4_spike(q: usize, t4: &[usize], depth: usize) {
     println!(
         "  max_edge_delta (<=0 == monotone potential):  ORIG={}  CAP={}  DROP={}",
         dmax_orig, dmax_cap, dmax_drop,
+    );
+    println!(
+        "  defect_root={}  max_defect_excess={}  (>0 == defect can exceed root; needs intruder charge)",
+        defect_root, max_defect_excess,
     );
     for (tag, mx) in [("orig", &max_orig), ("cap ", &max_cap), ("drop", &max_drop)] {
         print!("  {}_max_by_ply:", tag);

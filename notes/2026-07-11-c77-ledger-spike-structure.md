@@ -157,6 +157,26 @@ it is entirely the loose-reservoir melt, not the game getting harder.  The lever
 - The gated q23 root solve is now only needed to (a) confirm DROP debt 0 at full depth and (b) check
   DROP certifies P — not to rescue a growing bank.
 
+## 8. The lemma is nearly immediate: defect is maximized at the root
+
+`s4spike` reports `max_defect_excess = max_S (defect(S) − defect_root)`.  **It is 0 at every order**
+(q17/19/23/25/27), and `defect_root = q − 5` exactly (12/14/18/20/22).  So `defect_components(S) ≤
+defect_root` for *every* reachable state — the live conic is maximally fragmented at the frame, and no
+move ever nets more components than the root.  (The +34 per-edge ΔDROP jumps were defect *recovering*
+toward the root ceiling, never past it.)  This collapses the peak bound:
+
+```
+DROP(S) = 6·defect(S) − 4·intruders(S) − 2·[xor(S)=0]
+        ≤ 6·defect_root                      (defect ≤ defect_root; intruders,[xor] ≥ 0)
+        = DROP_root + 2.
+```
+
+Empirically the +2 is never realized (DROP debt = 0), because `defect = defect_root` occurs only at
+the frame itself (intruders = 0, xor = 1).  **Remaining to prove (pure conic combinatorics, on-box):**
+`defect_components ≤ q − 5` for all reachable residual states — i.e. an intrusion or on-conic
+completion can only merge/kill live-conic components, never net-create above the frame count.  That is
+the whole ply5-hold / bounded-bank sublemma, reservoir- and Hall-free.
+
 ## Reproduction
 
 ```bash
