@@ -148,26 +148,33 @@ oval/complete-arc incidence level, which C58's all-P order-9 result *strengthens
 disturbs (the depleted orders {11,17} are primes, where the non-Desarguesian planes do not even
 exist, so the dichotomy data is untouched).
 
-- **C68 [REPORTED 2026-07-10 (Claude)]** — the depletion-fraction extremal sequence `D(q)`
-  (sweep E2).  Exact result: `D(q) = 0` at every non-arc-depleted order (5,7,9,13,19,23;
-  min-witness = q−4) and `D(q) > 0` **exactly** at `{11,17}` (`5/7`, `12/13`).  The knife edge
-  **sharpens** along the depleted subsequence (min-witness `2 → 1`, margin `2 → 1`); it recovers only
-  at non-depleted orders.  So "`D(q)` bounded away from 1" is **not** supported — but the (ON) route
-  only needs **min-witness ≥ 1**, i.e. the A5 target `maxonN(q) ≤ q−5` (no size-3 class has all q−4
-  on-conic children N).  Decisive missing datum: `D` at the next depleted order (>23) → routes into
-  C44 (GF(25)/q=25 census).  Report:
+- **C68 [REPORTED 2026-07-10 (Claude); q=25 UPDATE 2026-07-10]** — the depletion-fraction extremal
+  sequence `D(q)` (sweep E2).  Exact result: `D(q) = 0` at every non-arc-depleted order
+  (5,7,9,13,19,23,**25**; min-witness = q−4) and `D(q) > 0` **exactly** at `{11,17}` (`5/7`, `12/13`).
+  The knife edge **sharpens** along the depleted subsequence (min-witness `2 → 1`, margin `2 → 1`);
+  it recovers only at non-depleted orders.  So "`D(q)` bounded away from 1" is **not** supported — but
+  the (ON) route only needs **min-witness ≥ 1**, i.e. the A5 target `maxonN(q) ≤ q−5` (no size-3
+  class has all q−4 on-conic children N).  **Decisive missing datum resolved (2026-07-10, C44's
+  q=25 census): `D(25)=0`, `min-witness(25)=q−4=21` (full) — the `2 → 1 → ?` slide does NOT continue
+  at the first square order; it rebounds fully.**  Report:
   [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md); script
-  `rust/scripts/c68_depletion_fraction.py`.  **A5 lane now has one reported measurement; the live
-  (ON) levers are Cluster 2 (open core) + the A5 arithmetic proof of `maxonN(q) ≤ q−5`.**
-- **C68 follow-on — N-bucket density `ν(q)` [2026-07-10 (Claude)]** — bucket-level image of `D(q)`.
-  Exact on-conic bucket census (`s4arena --all`): **`ν(q)`** (state-weighted N-fraction) `= 0` off
-  {11,17}, `0.357` (q=11), `0.791` (q=17) — positive & ~doubling; #N-buckets `1 → 5`. Null model
+  `rust/scripts/c68_depletion_fraction.py`.  **A5 lane: the min-witness bound holds at every tested
+  order through q=25; the open task is now the A5 arithmetic proof of `maxonN(q) ≤ q−5` for all
+  depleted q, and finding a genuinely depleted order beyond {11,17} to extend L's stress test
+  (C74 §6 — q=25 was non-depleted so "non-depleted ∧ L-fails" was vacuously impossible there).**
+- **C68 follow-on — N-bucket density `ν(q)` [2026-07-10 (Claude); q=25 UPDATE 2026-07-10]** —
+  bucket-level image of `D(q)`. Exact on-conic bucket census (`s4arena --all`): **`ν(q)`**
+  (state-weighted N-fraction) `= 0` off {11,17,**25**}, `0.357` (q=11), `0.791` (q=17) — positive &
+  ~doubling across the two depleted orders; #N-buckets `1 → 5`. Null model
   `E[fully-N classes] = ncls·ν^(q−4)`: `0.006` (q=11) but **`1.000` (q=17)** vs 0 observed, so
-  **min-witness ≥ 1 is a MARGINAL suppression at q=17**, at the random-failure threshold, trend
-  adverse — A5 must actually bound the extremal class-type, not lean on "no fully-N class through
-  q=19." onP is bimodal (few PGL class-types; min-witness = extremal-type count); value separates
-  cleanly by bucket fiber size (P = rare/special, N = generic) → **A5 lead: every 5-point frame
-  admits a special (P) completion.** Report:
+  **min-witness ≥ 1 is a MARGINAL suppression at q=17**, at the random-failure threshold. **The trend
+  DOES NOT continue past q=17: `ν(25)=0` (28/28 on-conic buckets P, 2026-07-10) — the doubling breaks
+  at the first square order rather than pushing min-witness to 0.** A5 should still bound the extremal
+  class-type where it matters ({11,17}), not lean on q=25 as further evidence of an adverse trend —
+  q=25's contribution is a clean non-depleted point, same shape as {13,19,23}. onP is bimodal (few PGL
+  class-types; min-witness = extremal-type count); value separates cleanly by bucket fiber size (P =
+  rare/special, N = generic) at the depleted orders → **A5 lead: every 5-point frame admits a special
+  (P) completion.** Report:
   [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md); script
   `rust/scripts/c68b_nbucket_density.py`.
   **q=25 resolution (2026-07-10):** the R7-decider `f_10 = P` gives **`min-witness(25) ≥ 4`** —
@@ -1869,20 +1876,21 @@ Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-code
 
 ## C44. GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
 
-**[SIZED + ARENA TOOL BUILT 2026-07-10 (Claude); 3/28 buckets P (0, 1, 2 — bucket 2 via chunked
-`s4xormine`); full `--log2 29` census RUNNING as of 2026-07-10 (`s4arena 25 --all --start 2`).]**
+**[REPORTED 2026-07-10 (Claude) — COMPLETE: all 28 buckets P, q=25 is NOT depleted.]**
 Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
-GF(25) path in place (`irred(25)=x²+3` over F₅, nonsquare; self-check ok; MAXW ok) and **28
-full-PGL(2,25) on-conic buckets** enumerated (~4 s). The wall was RAM: FnvMap labeling (33 B/slot,
-rehashes) blows 8 GB on the generic buckets. **Fixed by building `s4arena`** (commit `60c87fb`) — S4
-labeling on the 16-byte `Shard` arena (fixed pre-alloc, no rehash), validated byte-identical to FnvMap
-(labels + distinct-class counts match C54). Results so far, both **P**: bucket 1 `[1,2,3,4]` (26.3M),
-bucket 0 `[1,2,3,5]` (**213.5M positions**, 18 min, 4 GB — the bucket FnvMap couldn't finish). Census
-is now a **~6 h / 8 GB `--log2 29` run** (`s4arena 25 --all`); gate-compliant on RAM but multi-hour +
-box is contended, so it's a size-then-gate decision — run in a low-contention window (streams per
-bucket, resumable via `--start`, any N shows immediately = falsification). **Import:** q=25 is the
-third depleted-point test of C68's margin `2 → 1 → 0?` (min-witness → 0 would refute conic
-localization as the mechanism, not the conjecture). Full census + original spec remaining below.
+GF(25) path in place (`irred(25)=x²+3` over F₅, nonsquare; self-check ok; MAXW ok); **28
+full-PGL(2,25) on-conic buckets** enumerated. RAM wall (FnvMap 33 B/slot, rehashes, blows 8 GB on
+generic buckets) fixed by building **`s4arena`** (commit `60c87fb`) — S4 labeling on the 16-byte
+`Shard` arena (fixed pre-alloc, no rehash), validated byte-identical to FnvMap (labels + distinct-class
+counts match C54). Full census ran `s4arena 25 --all --log2 29` (8 GB): **28/28 P, 0 N, 0 aborted**,
+~6.67 h summed bucket wall time (largest bucket 257.2M positions). **`D(25)=0`, `min-witness(25)=q−4=21`
+(full), `ν(25)=0`** — q=25 joins the non-depleted set `{5,7,9,13,19,23,25}`; the C68 `2 → 1 → ?` slide
+across `{11,17}` does **not** continue at the first square order, it rebounds fully. Cross-validated by
+C74's independent value-blind row-7 analysis (the sole previously-uncovered orbit: `f_10=f_14=f_16=f_17
+=P`, `R7=21` all-P). Concurrence-point ESC test (C73 §7 step 0) left un-run — moot per C74 §6 once the
+on-conic census is complete and all-P ("non-depleted ∧ L-fails" is logically impossible); L's stress
+test now waits for the next genuinely depleted order. Full census results + original spec remaining
+below.
 
 Context: the falsification map names square `q` (Baer subplanes — extra dense collinearity) the
 **top falsification watch** (A4), the (ON) layer sits at a knife edge (§6), and q=25 is also where
