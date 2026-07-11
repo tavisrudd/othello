@@ -3114,3 +3114,14 @@ descendant has removed another conic vertex; the root's even number `q−5` of i
 The proposed A5 identification is negative because `maxonN` uses P/N game labels while
 `defect_components` is value-blind and fixed at `q−5` at every such root.  C77 now leaves only the
 game-semantic P-certificate/reply-closure problem, not a bank-capacity or peak-bound problem.
+
+## 2026-07-11 C77 continuation — pencil absorption target and q=11 reply graphs
+
+The generic game-semantic reply quotient remains blocked by C61's exact q17/q19 forced conflicts.
+C77 therefore merges with C74's explicit one-intruder pencil. Exact maximum-pencil data at
+q=11/13/17/19 satisfies `#N off-conic centers ≤ q−8`, tight at q=17. Since C74 proves `d≤5`, this
+would leave at least `7−d≥2` P centers and prove odd escape directly if uniform. Static character
+and order signatures of the pencil parameter fail across depleted orders, so they do not supply the
+proof. At the q=11 knife edge, all 32 distinct P centers have exact winning-reply graphs with perfect
+matchings; the graphs collapse to four isomorphism types with multiplicities 10/2/10/10. Report:
+[`2026-07-11-c77-game-semantic-reply-graphs.md`](2026-07-11-c77-game-semantic-reply-graphs.md).

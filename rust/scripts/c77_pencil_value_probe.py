@@ -1,0 +1,199 @@
+#!/usr/bin/env python3
+"""C77 continuation: game-value structure on C74's one-intruder pencil.
+
+For every maximum-capacity C74 line (minimum product-collision count d), recover
+the involution parameter a of each legal off-conic center z_a.  The recovery is
+geometric: after sending the distinguished endpoints (F,w) to (0,infinity),
+every chord through z_a pairs t with a/t, so transformed chord products agree.
+
+The feature battery is deliberately value-blind and scale-invariant:
+  * quadratic character of a;
+  * character multiset of a-b over the forbidden product set B=P2(U);
+  * multiplicative-order multiset of the ratios a/b, b in B.
+
+Only after those features are built are exact P/N labels joined.  The report
+focuses on the mandatory q=11 knife-edge pencils (4P/2N off-conic centers) and
+uses all q=11/13/17/19 maximum lines as adversarial controls.
+"""
+from collections import Counter, defaultdict
+from itertools import combinations
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+from c73_secant_algebra import (  # noqa: E402
+    DATA,
+    PRIME_FILES,
+    analyze,
+    inv,
+    parse,
+    secant_line_pred,
+)
+from c74_line_pencil import INF, line_product_data, mobius_zero_inf  # noqa: E402
+
+
+KNIFE = {11: {4, 7}, 17: {2, 17, 19}}
+
+
+def chi(x, q):
+    x %= q
+    if x == 0:
+        return 0
+    return 1 if pow(x, (q - 1) // 2, q) == 1 else -1
+
+
+def mul_order(x, q):
+    x %= q
+    assert x
+    y = 1
+    for d in range(1, q):
+        y = y * x % q
+        if y == 1:
+            return d
+    raise AssertionError((q, x))
+
+
+def chord_contains(rec, t, u, cell):
+    """Whether the affine cell lies on the conic chord through P1 params t,u."""
+    q, rho, A, B = rec["q"], rec["rho"], rec["A"], rec["B"]
+    if t == INF:
+        t, u = u, t
+    if t == 0 and u == INF:
+        return False  # the burned line at infinity has no affine cell
+    if t == 0:
+        pred = secant_line_pred(q, rho, A, B, u, "0")
+    elif u == INF:
+        pred = secant_line_pred(q, rho, A, B, t, "oo")
+    else:
+        pred = secant_line_pred(q, rho, A, B, t, u)
+    return pred(cell)
+
+
+def center_parameter(rec, key, cell):
+    """Recover a in tau_a(t)=a/t from any non-endpoint chords through cell."""
+    q = rec["q"]
+    F, w = key
+    F0 = 0 if F == "0" else F
+    points = list(range(q)) + [INF]
+    products = set()
+    witnesses = 0
+    for t, u in combinations(points, 2):
+        if t in (F0, w) or u in (F0, w):
+            continue
+        if not chord_contains(rec, t, u, cell):
+            continue
+        mt = mobius_zero_inf(t, F0, w, q)
+        mu = mobius_zero_inf(u, F0, w, q)
+        assert mt not in (0, INF) and mu not in (0, INF)
+        products.add(mt * mu % q)
+        witnesses += 1
+    assert witnesses > 0 and len(products) == 1, (q, rec["cls"], key, cell, products)
+    return products.pop()
+
+
+def features(a, forbidden, q):
+    gaps = tuple(sorted(chi(a - b, q) for b in forbidden))
+    orders = tuple(sorted(mul_order(a * inv(b, q), q) for b in forbidden))
+    return {
+        "chi": (chi(a, q),),
+        "gap": gaps,
+        "chi_gap": (chi(a, q), gaps),
+        "orders": orders,
+        "all": (chi(a, q), gaps, orders),
+    }
+
+
+def rows_for(q):
+    recs = analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))
+    rows = []
+    pencils = []
+    for cls, rec in sorted(recs.items()):
+        ds = {key: line_product_data(rec, key)[2] for key in rec["cand"]}
+        dmin = min(ds.values())
+        for key in sorted((key for key, d in ds.items() if d == dmin), key=str):
+            _U, products, d = line_product_data(rec, key)
+            forbidden = tuple(sorted(products))
+            pencil = []
+            for cell, value, pos in rec["cand"][key]["hit"]:
+                if pos == "on":
+                    continue
+                a = center_parameter(rec, key, cell)
+                assert a not in products
+                row = {
+                    "q": q,
+                    "cls": cls,
+                    "key": key,
+                    "d": d,
+                    "cell": cell,
+                    "a": a,
+                    "value": value,
+                    "features": features(a, forbidden, q),
+                }
+                rows.append(row)
+                pencil.append(row)
+            pencils.append((q, cls, key, d, pencil))
+    return rows, pencils
+
+
+def score_feature(name, pencils):
+    """Score a selector as: choose every center with a globally P-pure feature value."""
+    labels = defaultdict(set)
+    for *_head, pencil in pencils:
+        for row in pencil:
+            labels[row["features"][name]].add(row["value"])
+    pure_p = {f for f, values in labels.items() if values == {"P"}}
+    covered = sum(any(row["features"][name] in pure_p for row in pencil)
+                  for *_head, pencil in pencils)
+    mixed = sum(values == {"P", "N"} for values in labels.values())
+    return len(pure_p), mixed, covered, len(pencils)
+
+
+def main():
+    qs = [int(x) for x in sys.argv[1:]] or [11, 13, 17, 19]
+    all_pencils = []
+    for q in qs:
+        rows, pencils = rows_for(q)
+        all_pencils.extend(pencils)
+        hist = Counter((r["value"] for r in rows))
+        print(f"SUMMARY q={q} pencils={len(pencils)} centers={len(rows)} values={dict(hist)}")
+        pencil_hist = Counter(
+            (d,
+             sum(r["value"] == "P" for r in pencil),
+             sum(r["value"] == "N" for r in pencil))
+            for _q, _cls, _key, d, pencil in pencils
+        )
+        max_n = max(sum(r["value"] == "N" for r in pencil)
+                    for *_head, pencil in pencils)
+        min_p = min(sum(r["value"] == "P" for r in pencil)
+                    for *_head, pencil in pencils)
+        print(f"PENCIL-HIST q={q} rows={dict(sorted(pencil_hist.items()))} "
+              f"maxN={max_n} minP={min_p}")
+        if q >= 11:
+            print(f"ABSORB q={q} maxN={max_n} bound=q-8={q-8} "
+                  f"holds={int(max_n <= q-8)}")
+            assert max_n <= q - 8
+        for q0, cls, key, d, pencil in pencils:
+            if cls not in KNIFE.get(q, set()):
+                continue
+            vals = Counter(r["value"] for r in pencil)
+            detail = " ".join(
+                f"a={r['a']}:{r['value']}:chi={r['features']['chi'][0]}:"
+                f"gap={','.join(map(str, r['features']['gap']))}:"
+                f"ord={','.join(map(str, r['features']['orders']))}"
+                for r in sorted(pencil, key=lambda x: x["a"])
+            )
+            print(f"KNIFE q={q0} cls={cls} key={key} d={d} values={dict(vals)} {detail}")
+
+    for scope, pencils in (
+        ("all", all_pencils),
+        ("depleted", [p for p in all_pencils if p[0] in (11, 17)]),
+        ("q11-knife", [p for p in all_pencils if p[0] == 11 and p[1] in KNIFE[11]]),
+    ):
+        for name in ("chi", "gap", "chi_gap", "orders", "all"):
+            pure, mixed, covered, total = score_feature(name, pencils)
+            print(f"SCORE scope={scope} feature={name} pureP={pure} mixed={mixed} "
+                  f"covered={covered}/{total}")
+
+
+if __name__ == "__main__":
+    main()

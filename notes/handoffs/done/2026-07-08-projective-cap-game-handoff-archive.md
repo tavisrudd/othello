@@ -2271,3 +2271,19 @@ always `q−5` at that root.  The only correspondence chooses a P child first, w
 the desired (ON) conclusion.  C77's remaining residue is therefore game-semantic: a peak bound is
 not a P-certificate.  Full proof and controls are appended in
 [`../../2026-07-11-c77-ledger-spike-structure.md`](../../2026-07-11-c77-ledger-spike-structure.md) §9.
+
+## 2026-07-11 C77 continuation (Codex) — game semantics localizes to C74 pencil absorption
+
+After closing the value-blind DROP peak bound, tested the actual game-semantic residue. C61's generic
+reply quotient stays blocked, and simple quadratic-character/order signatures of the C74 pencil
+parameter fail across q=11/q=17. The positive result is an exact absorption target: every maximum
+pencil at q=11/13/17/19 has at most `q−8` N-valued legal off-conic centers, with equality at q=17.
+C74's `d≤5` then leaves at least two P centers, so a uniform proof would establish odd escape
+directly rather than (ON).
+
+The mandatory q=11 knife-edge base also compresses cleanly. Across its ten tied pencils there are
+32 distinct P centers; every exact winning-reply graph has a perfect matching, and the 32 graphs have
+only four isomorphism types (multiplicities 10/2/10/10). This is a four-type first-reply certificate,
+not yet a uniform theorem: its edges use exact P/N values and matched followers still need recursive
+books. New durable scripts and full audit:
+[`../../2026-07-11-c77-game-semantic-reply-graphs.md`](../../2026-07-11-c77-game-semantic-reply-graphs.md).

@@ -15,38 +15,40 @@ still require an explicit user gate.
 
 ## CURRENT TOP OF QUEUE (updated 2026-07-11)
 
-The (ON) odd-plane kernel — "every legal size-3 residual position has a P-valued on-conic size-4
-child" — is the active mathematics. The config→value **mechanism sweep is closed-negative** (Cluster 1),
-so the two live proof lanes are **A5 arc-depletion arithmetic** and the **Cluster-2 game-semantic
-ledger/certificate**. C75/C76 close the current pointwise selector/invariant spaces; C77 closes the
-pure geometric bank bound but shows that game-semantic certificate content is still missing.
+The odd-plane escape kernel — "every legal size-3 residual position has a P-valued size-4 child" —
+is the active mathematics; (ON), requiring that child on the conic, is the stronger A5 route. The
+config→value **mechanism sweep is closed-negative** (Cluster 1), so the two live proof lanes are
+**A5 arc-depletion arithmetic** and the **C74/C77 one-intruder N-absorption theorem**. C75/C76 close
+the current pointwise selector/invariant spaces; C77 closes the pure geometric bank and identifies
+the game-semantic residue with C74's explicit pencil.
 
-1. **Cluster 2 — the open core** (game-semantic ledger/certificate + existential q-varying selector).
+1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
    the lane itself is open. C75 explains the selector wall; C76 answered the invariant prong
    (frame-relative characters cut collisions 48→1 but leave a residual hard twin, no monotone scalar,
    and no uniform linear selector ⇒ separation not selection). C77 now proves the reservoir-free
    DROP ledger is uniformly peak-bounded, but also shows that this geometric bound has no game-value
-   content by itself; the sole surviving lever is a **game-semantic ledger/reply-book closure**.
+   content by itself. Its continuation finds the exact computed target **`Ncenters≤q−8`** on every
+   maximum C74 pencil through q=19 (tight q=17); since `d≤5`, this leaves at least two P off-conic
+   centers and would prove odd escape directly. The q=11 knife-edge base compresses to four exact
+   perfect-matching reply-graph types. This is now the named game-semantic lever.
 2. **A5 lane — arc-depletion arithmetic.** Sole surviving (ON) mechanism route. Open: prove
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
-3. **C74 residue** — a game-value N-absorption bound for the explicit one-intruder pencil (report §5);
-   the q=11 knife-edge 4P/2N pencil pattern is the base obstruction.
-4. **Independent lanes** — C30 (q17/q19 Lean cert assembly, long-running, gated) pulls in parallel.
+3. **Independent lanes** — C30 (q17/q19 Lean cert assembly, long-running, gated) pulls in parallel.
 
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C76 [REPORTED 2026-07-11 — invariant prong answered; ledger is the surviving lever]** —
+- **C76 [REPORTED 2026-07-11 — invariant prong answered]** —
   frame-relative characters (polar-at-frame, frame-chord, frame×tangent cross-ratio profiles) — the
   frame-awareness the (x,z)-local selector space omitted — cut the C75 collisions **48→1**: they split
   47/48 enumerated twins (polar+chord) and separate the winner/loser classes almost everywhere. **But
   the augmented space is NOT orbit-injective** (1 residual hard twin, q=17 axis points P `11,0`/N
   `16,0`), **no scalar reduction is monotone** (39/48 and 38/48 separators are direction-MIXED), and
   **no uniform linear selector exists** (C77-selector-test LP infeasible over d=37). So it buys
-  separation, not selection — routing (ON) to a **game-semantic ledger/reply-book closure**. Report:
+  separation, not selection — routing the escape proof to a **game-semantic reply closure**. Report:
   [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
   scripts `rust/scripts/c76_invariant_hunt.py`, `c76_directional_search.py`, `c77_augmented_selector.py`.
 - **C77 [REPORTED 2026-07-11 — DROP peak theorem proved; game-semantic certificate residue OPEN]** —
@@ -57,18 +59,23 @@ pure geometric bank bound but shows that game-semantic certificate content is st
   solve is no longer needed for bank capacity or full-depth DROP debt. The `q−5` cross-lane check is
   **negative**: A5's `maxonN` is a class-extremal P/N count, while `defect_components` is a
   value-blind graph count fixed at `q−5` at the root; identifying them assumes the desired P witness.
-  **Open residue:** a peak bound is not a P-certificate. Add genuine game-semantic/reply-book closure;
-  do not spend more compute on the DROP envelope. Reports:
+  **Continuation:** the game-semantic residue is exactly C74's maximum-pencil absorption problem.
+  Exact data gives `Ncenters≤q−8` at q=11/13/17/19 (tight q=17), while simple character/order
+  selectors fail across q. All 32 distinct P centers in the q=11 knife-edge pencils have perfect
+  winning-reply matchings in only four graph isomorphism types. **Open:** prove the N-absorption
+  bound or a recursive reply closure; do not spend more compute on the DROP envelope. Reports:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
   [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–9); modes
-  `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`.
+  `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`;
+  [`2026-07-11-c77-game-semantic-reply-graphs.md`](2026-07-11-c77-game-semantic-reply-graphs.md),
+  scripts `rust/scripts/c77_pencil_value_probe.py`, `c77_intruder_reply_graph.py`.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:
   [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md),
   [`2026-07-10-codex-a5-nbucket-density.md`](2026-07-10-codex-a5-nbucket-density.md),
   [`2026-07-10-a5-symmetric-completion-anchor.md`](2026-07-10-a5-symmetric-completion-anchor.md).
-- **C74 residue** — one-intruder pencil N-absorption bound (see archived C74 body §5;
-  [`2026-07-10-codex-c74-capacity-family.md`](2026-07-10-codex-c74-capacity-family.md)).
+- **C74 residue (now the C77 game-semantic continuation)** — prove `Ncenters≤q−8` on a maximum
+  one-intruder pencil, or an equivalent recursive reply closure. See C74 §5 and the C77 report above.
 
 **Independent / engineering:**
 
