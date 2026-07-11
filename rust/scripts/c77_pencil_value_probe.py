@@ -103,6 +103,30 @@ def features(a, forbidden, q):
     }
 
 
+def legal_after(q, root, z):
+    if any(z[0] == x[0] or z[1] == x[1] for x in root):
+        return False
+    return all(((b[0] - a[0]) * (z[1] - a[1])
+                - (b[1] - a[1]) * (z[0] - a[0])) % q != 0
+               for a, b in combinations(root, 2))
+
+
+def root_support(rec, cell):
+    """Value-blind live-conic/off-conic support after selecting one S4 center."""
+    q = rec["q"]
+    root = rec["S3"] + [cell]
+    live_on = zone_v = 0
+    for z in ((r, c) for r in range(q) for c in range(q)):
+        if not legal_after(q, root, z):
+            continue
+        on = ((z[0] - rec["rho"]) * (z[1] - rec["A"]) - rec["B"]) % q == 0
+        if on:
+            live_on += 1
+        else:
+            zone_v += 1
+    return live_on, zone_v
+
+
 def rows_for(q):
     recs = analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))
     rows = []
@@ -129,10 +153,41 @@ def rows_for(q):
                     "value": value,
                     "features": features(a, forbidden, q),
                 }
+                row["live_on"], row["zone_v"] = root_support(rec, cell)
                 rows.append(row)
                 pencil.append(row)
             pencils.append((q, cls, key, d, pencil))
     return rows, pencils
+
+
+def all_line_lowzone_control(q):
+    """Adversarial control: score Low4 on every candidate secant, not only maximum ones."""
+    recs = analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))
+    totals = Counter()
+    failures = Counter()
+    examples = []
+    for cls, rec in recs.items():
+        ds = {key: line_product_data(rec, key)[2] for key in rec["cand"]}
+        dmin = min(ds.values())
+        for key, datum in rec["cand"].items():
+            centers = []
+            for cell, value, pos in datum["hit"]:
+                if pos == "on":
+                    continue
+                _live_on, zone_v = root_support(rec, cell)
+                centers.append((zone_v, value))
+            if not centers:
+                continue
+            threshold = sorted(z for z, _value in centers)[min(3, len(centers) - 1)]
+            packet = [(z, value) for z, value in centers if z <= threshold]
+            tag = "max" if ds[key] == dmin else "other"
+            totals[(tag, ds[key])] += 1
+            pcount = sum(value == "P" for _z, value in packet)
+            if pcount < min(3, len(centers)):
+                failures[(tag, ds[key])] += 1
+                if len(examples) < 6:
+                    examples.append((cls, key, ds[key], len(packet), pcount))
+    return totals, failures, examples
 
 
 def score_feature(name, pencils):
@@ -172,6 +227,22 @@ def main():
             print(f"ABSORB q={q} maxN={max_n} bound=q-8={q-8} "
                   f"holds={int(max_n <= q-8)}")
             assert max_n <= q - 8
+        lowzone = Counter()
+        lowzone_fail = []
+        for q0, cls, key, d, pencil in pencils:
+            threshold = sorted(r["zone_v"] for r in pencil)[min(3, len(pencil) - 1)]
+            packet = [r for r in pencil if r["zone_v"] <= threshold]
+            score = (len(packet),
+                     sum(r["value"] == "P" for r in packet),
+                     sum(r["value"] == "N" for r in packet))
+            lowzone[score] += 1
+            if score[1] < min(3, len(pencil)):
+                lowzone_fail.append((cls, key, score))
+        print(f"LOWZONE q={q} packet(size,P,N)={dict(sorted(lowzone.items()))} "
+              f"threeP-failures={len(lowzone_fail)} examples={lowzone_fail[:4]}")
+        totals, failures, examples = all_line_lowzone_control(q)
+        print(f"ALLLINES q={q} totals={dict(sorted(totals.items()))} "
+              f"threeP-failures={dict(sorted(failures.items()))} examples={examples}")
         for q0, cls, key, d, pencil in pencils:
             if cls not in KNIFE.get(q, set()):
                 continue

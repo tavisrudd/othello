@@ -36,6 +36,7 @@
 //   breaks   q   -- exact cross-check: for every P1 break from the frame, #replies / #true-P
 //                   replies / #P-replies that are symmetric (nontrivial stabilizer).
 //   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
+//   fanmoves q r,c r,c r,c -- exact size-4 value + P-child table over one size-3 fan.
 //   s4 <q> t1,t2,t3,t4 [--cap <slots>]
 //                -- sizing probe for one normalized on-conic S4 root
 //                   {(t,1/t): t in {t1,t2,t3,t4}} using the GF(q) backend.
@@ -77,10 +78,10 @@
 //   s4potentialprobe <q> t1,t2,t3,t4 [r,c ...]
 //                -- print the geometric C63 feature vector of one locally specified state.
 //   s4potentialprobecells <q> r1,c1 r2,c2 r3,c3 [r4,c4 ...]
-//                -- same C63 feature vector, but from EXPLICIT on-conic board cells (e.g. straight
-//                   out of the feat corpus): fits the conic through the first three cells and
-//                   transports it to xy=1 internally, so no external param translation is trusted
-//                   (avoids the s4potentialprobe param-convention risk).  Psi is PGL-invariant.
+//                -- same C63 feature vector from EXPLICIT board cells: fits the conic through the
+//                   first three on-conic cells; later cells may be on-conic or off-conic intruders.
+//                   Transports everything to xy=1 internally, so no external param translation is
+//                   trusted (avoids the s4potentialprobe param-convention risk). Psi is PGL-invariant.
 //   s4selectors <q> t1,t2,t3,t4 --grundy <grundy-raw>
 //                -- exact C62 selector scoring on every P->N reply obligation: rho-greedy,
 //                   C63-Psi, live/defect/internal/polar/quadratic-character geometric families.
@@ -6289,8 +6290,8 @@ fn s4_candidate_psi(features: &[i64; 17]) -> i64 {
 // Conic fit `rc + A r + B c + C = 0` == `(r+B)(c+A) = AB-C =: D`, so the affine map
 //   (r,c) |-> (r+B, (c+A)*D^-1)
 // sends the fitted conic to xy=1 (D != 0 required; D == 0 means the arc is degenerate).
-// The first three cells must lie on the conic (used for the fit); every input cell is
-// asserted to land on xy=1 after transport, so an off-conic input fails loudly.
+// The first three cells must lie on the conic (used for the fit); later cells may be off-conic
+// intruders and are transported by the same grid symmetry.
 fn solve_s4_potential_probe_cells(q: usize, cells: &[(usize, usize)]) {
     let b = Board::new(q);
     assert!(cells.len() >= 3, "s4potentialprobecells needs >= 3 on-conic cells to fit the conic");
@@ -6306,25 +6307,29 @@ fn solve_s4_potential_probe_cells(q: usize, cells: &[(usize, usize)]) {
     let mut chosen = empty;
     let mut forbidden = empty;
     let mut params: Vec<usize> = Vec::with_capacity(cells.len());
-    for &(r, c) in cells {
+    for (i, &(r, c)) in cells.iter().enumerate() {
         let tr = b.gf.a(r, cb); // r + B
         let tc = b.gf.m(b.gf.a(c, ca), inv_d); // (c + A) * D^-1
         let z = tr * q + tc;
-        assert!(
-            is_on_root_conic(&b, z),
-            "cell {},{} does not lie on the fitted conic (transported to {},{}, off xy=1)",
-            r,
-            c,
-            tr,
-            tc
-        );
+        if i < 3 {
+            assert!(
+                is_on_root_conic(&b, z),
+                "fit cell {},{} transported to {},{}, off xy=1",
+                r,
+                c,
+                tr,
+                tc
+            );
+        }
         let (next_occ, next_chosen, next_forbidden) =
             push_cell_state(&b, &occ, &chosen, &forbidden, z)
                 .unwrap_or_else(|| panic!("transported cell {},{} illegal after {}", tr, tc, fmt_cell_indices(&b, &occ)));
         occ = next_occ;
         chosen = next_chosen;
         forbidden = next_forbidden;
-        params.push(tr);
+        if is_on_root_conic(&b, z) {
+            params.push(tr);
+        }
     }
     let features = s4_potential_features(&b, &occ, &chosen, &forbidden, 0, 0);
     params.sort_unstable();
@@ -9596,6 +9601,86 @@ fn solve_checkpos(q: usize, scells: &[(usize, usize)], bx: (usize, usize)) {
     println!("      total={}  P={}  symmetric-P={}", n_tot, n_p, n_symp);
 }
 
+// ---- FANMOVES mode: exact one-ply game semantics over every child of one S3 fan ----
+// Solves the full grid game once, then reports for each legal size-4 extension z whether S3+z is
+// P/N and which legal size-5 moves x are P.  This avoids rebuilding CHECKPOS once per x and is the
+// C77/C74 diagnostic for how N-valued one-intruder pencil centers escape.
+fn solve_fanmoves(q: usize, s3: &[(usize, usize)]) {
+    assert!(s3.len() == 3, "fanmoves needs exactly three S3 cells");
+    let b = Board::new(q);
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    let mut root = Vec::new();
+    s.g(&mut root, &empty, &empty);
+
+    let mut occ3 = Vec::new();
+    let mut chosen3 = empty;
+    let mut forbidden3 = empty;
+    for &(r, c) in s3 {
+        let z = r * q + c;
+        let (occ, chosen, forbidden) = push_cell_state(&b, &occ3, &chosen3, &forbidden3, z)
+            .unwrap_or_else(|| panic!("illegal S3 cell ({},{})", r, c));
+        occ3 = occ;
+        chosen3 = chosen;
+        forbidden3 = forbidden;
+    }
+
+    println!("FANMOVES q={} S3={:?}", q, s3);
+    let mut extensions = 0usize;
+    let mut n_roots = 0usize;
+    let mut min_p_children = usize::MAX;
+    for z in avail_cells(&b, &chosen3, &forbidden3) {
+        let (occ4, chosen4, forbidden4) =
+            push_cell_state(&b, &occ3, &chosen3, &forbidden3, z as usize).unwrap();
+        let key4 = b.canon(&occ4);
+        let is_n = *s.memo.get(&key4).expect("full solve omitted size-4 child");
+        let mut pchildren = Vec::new();
+        let mut legal = 0usize;
+        for x in avail_cells(&b, &chosen4, &forbidden4) {
+            legal += 1;
+            let (mut occ5, chosen5, forbidden5) =
+                push_cell_state(&b, &occ4, &chosen4, &forbidden4, x as usize).unwrap();
+            let key5 = b.canon(&occ5);
+            let child_n = match s.memo.get(&key5) {
+                Some(&v) => v,
+                None => s.g(&mut occ5, &chosen5, &forbidden5),
+            };
+            if !child_n {
+                pchildren.push(format!("{},{}", x as usize / q, x as usize % q));
+            }
+        }
+        extensions += 1;
+        if is_n {
+            n_roots += 1;
+            min_p_children = min_p_children.min(pchildren.len());
+        }
+        println!(
+            "FANMOVE z={},{} value={} legal={} pchildren={} P={}",
+            z as usize / q,
+            z as usize % q,
+            if is_n { "N" } else { "P" },
+            legal,
+            pchildren.len(),
+            if pchildren.is_empty() { "-".to_string() } else { pchildren.join(";") }
+        );
+    }
+    println!(
+        "FANMOVES-DONE extensions={} n_roots={} min_p_children_of_N={}",
+        extensions,
+        n_roots,
+        if n_roots == 0 { 0 } else { min_p_children }
+    );
+}
+
 fn solve_resym(q: usize, variant: usize) {
     let b = Board::new(q);
     let t0 = Instant::now();
@@ -11749,6 +11834,19 @@ fn main() {
             }
         }
         solve_checkpos(q, &cells, bx.expect("break cell after /"));
+        return;
+    }
+    if args[1] == "fanmoves" {
+        // fanmoves <q> r,c r,c r,c
+        let q: usize = args[2].parse().expect("q must be an integer");
+        let cells: Vec<(usize, usize)> = args[3..]
+            .iter()
+            .map(|a| {
+                let (r, c) = a.split_once(',').expect("cell must be r,c");
+                (r.parse().unwrap(), c.parse().unwrap())
+            })
+            .collect();
+        solve_fanmoves(q, &cells);
         return;
     }
     if args[1] == "breaks" {

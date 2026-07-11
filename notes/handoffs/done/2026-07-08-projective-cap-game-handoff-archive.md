@@ -2287,3 +2287,17 @@ only four isomorphism types (multiplicities 10/2/10/10). This is a four-type fir
 not yet a uniform theorem: its edges use exact P/N values and matched followers still need recursive
 books. New durable scripts and full audit:
 [`../../2026-07-11-c77-game-semantic-reply-graphs.md`](../../2026-07-11-c77-game-semantic-reply-graphs.md).
+
+## 2026-07-11 C77 continuation (Codex) — Low4 isolates the pencil absorption signal
+
+The C74/C77 N-absorption target now has a concrete value-blind candidate family. On a maximum
+(`min d`) pencil, order legal centers by the remaining off-conic support `zone_v` and include the
+entire tie through the fourth center. Every `Low4` packet through q19 contains at least three P
+centers. This is highly specific: q11 non-maximum lines fail 264/264, q17 non-maximum lines fail
+1332/1344. The unique minimum-zone selector itself fails on six q13 and six q17 maximum pencils, so
+the usable statement is set-valued, not pointwise.
+
+Added solver mode `fanmoves` to solve an S3 fan once and list every S4 root's P children, plus
+off-conic support in `s4potentialprobecells`. Tight q17 N centers have 4–16 P children, excluding a
+unique forced-move mechanism. The open theorem is now: prove the maximum-pencil `Low4` packet
+contains P (observed ≥3), which implies `Ncenters≤q−8` and hence odd escape.

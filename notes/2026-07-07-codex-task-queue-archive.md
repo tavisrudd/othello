@@ -3125,3 +3125,15 @@ and order signatures of the pencil parameter fail across depleted orders, so the
 proof. At the q=11 knife edge, all 32 distinct P centers have exact winning-reply graphs with perfect
 matchings; the graphs collapse to four isomorphism types with multiplicities 10/2/10/10. Report:
 [`2026-07-11-c77-game-semantic-reply-graphs.md`](2026-07-11-c77-game-semantic-reply-graphs.md).
+
+## 2026-07-11 C77 continuation — maximum-pencil Low4 packet
+
+Refined the empirical `Ncenters≤q−8` bound to a value-blind two-stage construction. Choose a C74
+maximum pencil (`d` minimal), then retain every center whose remaining legal off-conic support is at
+most the fourth order statistic (ties included). Every such `Low4` packet at q=11/13/17/19 contains
+at least three P centers. The control is sharp: at q=17, 1332/1344 non-maximum lines fail the same
+test; at q=11 every non-maximum line fails. A point selector is still impossible—the unique
+minimum-zone center is N on six q13 and six q17 maximum pencils—so the theorem must remain
+set-valued. Added `fanmoves` to emit exact one-ply values over a whole S3 fan in one solve; tight q17
+N centers have 4–16 P children, ruling out a unique forced-escape explanation. Full tables and
+scope audit are appended to the C77 game-semantic report.

@@ -679,7 +679,10 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   Its `q−5` is not A5's `maxonN≤q−5`: the former is value-blind live-vertex cardinality, the latter
   is exactly the game-value escape claim. The game-semantic continuation merges with C74: maximum
   pencils satisfy computed `Ncenters≤q−8` through q=19 (tight q=17), and the q=11 knife-edge P
-  centers have four exact perfect-matching reply-graph types. Proving that absorption bound is open.
+  centers have four exact perfect-matching reply-graph types. A value-blind two-stage packet now
+  isolates the signal: choose the maximum (`min d`) line, then all centers through the fourth-lowest
+  off-conic support; every packet has ≥3 P centers, while q17 non-maximum controls fail 1332/1344.
+  Proving this `Low4` packet/absorption theorem is open.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

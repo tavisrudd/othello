@@ -99,6 +99,59 @@ N-absorption or recursive reply-book closure from the one-intruder geometry.
 - **Closed:** more DROP-envelope computation; generic C61/C75/C76 feature refinement; a uniform
   character/order selector on `a`.
 
+## Follow-up: a value-blind two-stage packet isolates the absorption signal
+
+The raw bound `Ncenters<=q-8` now has a concrete candidate mechanism.  For a maximum pencil `L`,
+let `zone_v(z)` be the number of legal **off-conic** moves remaining after selecting its center `z`.
+Let `Low4(L)` contain every center whose `zone_v` is at most the fourth order statistic (include the
+whole tie at the boundary).  Both stages are value-blind:
+
+```text
+choose L by minimum product-collision d (maximum legal capacity);
+choose Low4(L) by minimum remaining off-conic support.
+```
+
+Exact scores on every maximum pencil:
+
+| q | `(packet size, P, N) : pencils` |
+|---:|---|
+| 11 | `(5,4,1):6`, `(6,4,2):10` |
+| 13 | `(4,4,0):12`, `(5,3,2):6` |
+| 17 | `(4,4,0):3`, `(5,3,2):6`, `(7,4,3):6`, `(7,5,2):6` |
+| 19 | all packet members P |
+
+Thus every `Low4(L)` contains at least three P centers, exactly the strength needed for
+`Ncenters<=q-8` when `d=4` (and stronger when `d=5`).  At the six tight q=17 pencils the packet is
+`5=3P+2N`; the remaining seven centers are N.
+
+The non-maximum-line control shows this is not a generic small-q correlation:
+
+| q | non-maximum candidate lines | Low4 failures (`<3 P`) |
+|---:|---:|---:|
+| 11 | 264 | **264** |
+| 13 | 522 | 78 |
+| 17 | 1,344 | **1,332** |
+| 19 | 1,844 | 0 (all size-4 positions are P at this order) |
+
+So maximum capacity and low-zone selection are both load-bearing.  Pointwise minimization is false:
+the unique minimum-zone center is N on six q=13 and six q=17 maximum pencils.  The candidate theorem
+must be set-valued (`Low4` contains P), not a deterministic minimum selector.
+
+This remains computed, not proved.  It is nevertheless a substantially narrower proof target than
+unqualified N-absorption: derive the maximum-pencil geometry of `zone_v`, then prove that the tied
+fourth-order packet cannot be entirely N (observed strength: at least three P).
+
+The new solver mode
+
+```text
+fanmoves q r,c r,c r,c
+```
+
+solves one size-3 fan once and emits the exact P children of every size-4 extension.  On a tight
+q=17 pencil, its nine N centers have 4–16 P children each; hence the mechanism is not a unique or
+forced one-ply escape.  `s4potentialprobecells` was also generalized so cells after the three conic
+fit points may be off-conic intruders.
+
 ## Reproduction
 
 ```bash
@@ -106,6 +159,8 @@ cd rust
 python3 -m py_compile scripts/c77_pencil_value_probe.py scripts/c77_intruder_reply_graph.py
 python3 scripts/c77_pencil_value_probe.py 11 13 17 19
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
+rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
+target/gridcap-c77 fanmoves 17 0,0 1,1 2,3
 ```
 
 The reply-graph pass uses `checkpos`, which fully solves every q=11 root/break pair and reports exact
