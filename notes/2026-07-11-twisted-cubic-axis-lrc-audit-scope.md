@@ -58,18 +58,56 @@ dual/trace-decomposition machinery the proof uses is standard.
 - Chen–Ling–Xing dual decomposition of concatenated codes (cited in sweep §1.4 as subsuming the
   trace-algebra input) — **obtain exact reference + full text** `[VERIFY]`.
 
-**Searches run this session:** `concatenated locally repairable code dual distance preserve repair
-sets locality outer code`; `concatenated code preserve all bounded weight dual codewords single
-inner block outer dual distance availability`; `Chen Ling Xing dual code concatenated code trace
-decomposition locality`.
+**Searches run:** `concatenated locally repairable code dual distance preserve repair sets locality
+outer code`; `concatenated code preserve all bounded weight dual codewords single inner block outer
+dual distance availability`; `Chen Ling Xing dual code concatenated code trace decomposition
+locality`; `Chen Ling Xing asymptotically good LRC concatenation dual distance function field`.
 
-**Verdict so far: partial-overlap, crux unlocated.** Preservation of *locality* and of *disjoint
-availability* under concatenation is established; preservation of the **entire bounded-weight repair
-hypergraph** (hence exact adversarial `τ`) was not surfaced. This is the load-bearing seam.
+**Full-text pass run 2026-07-11 (four candidate-collision papers):**
 
-**Kill condition.** Any paper stating that concatenation under an outer dual-distance gate preserves
-*all* bounded-size repair supports (not just locality/availability) collapses N1 to an application of
-known machinery.
+- **[CHECKED — non-colliding] Liu–Ma–Wu–Xing, *Good LRCs via Propagation Rules*
+  ([arXiv:2208.04484](https://arxiv.org/abs/2208.04484)) — the sharpest near-miss.** It *names the
+  repair-hypergraph object*: `R_C(r) := {supp(c) : c ∈ C⊥, |supp(c)| ≤ r+1}`, with the same
+  dual-code recovery-set characterization the sweep uses (Lemma 2.2, "R is a recovery set at i iff
+  ∃ c ∈ C⊥ with i ∈ supp(c) ⊆ R", attributed to [12, Lemma 5]) and Cor. 2.3 (locality `r` ⟺
+  `[n] = ∪ R_C(r)`). **But** its concatenation Theorem 3.1 preserves *only locality*: "Cconc has
+  locality r due to the fact that the inner code Cin has locality r." No outer dual-distance gate;
+  no claim that the *complete* `R_C(r)` transfers block-for-block; the only "block" reasoning is a
+  min-distance column count. **This is the anchor prior art to cite for both the dual-support object
+  and concatenation-preserves-locality — and precisely the paper N1 improves on.**
+- **[CHECKED — non-colliding] *Introducing locality in generalized AG codes*
+  ([arXiv:2403.00430](https://arxiv.org/abs/2403.00430)):** preserves only the locality parameter
+  `r` (Prop. 2, each symbol in one inner code with its own locality bound); no availability, no `τ`,
+  no dual-block confinement.
+- **[CHECKED — non-colliding] Ma–Xing, *Constructive asymptotic bounds of LRCs via function fields*
+  ([arXiv:1908.01471](https://arxiv.org/abs/1908.01471)):** asymptotic locality-`r` bound via
+  function-field local expansion; no availability/`τ`, no concatenation-block-confinement theorem.
+- **[CHECKED — non-colliding] Song–Cai–Yuen et al., *Bounds and Constructions of Codes with Multiple
+  Localities* ([arXiv:1601.02763](https://arxiv.org/abs/1601.02763)):** "multiple localities" =
+  *heterogeneous* locality (different coordinates carry different `r_i`), built by generalized
+  (Blokh–Zyablov/Zinoviev) concatenation which "inherits the locality." Uses a count of disjoint
+  repair sets `ρ`; never the complete hypergraph or `τ`.
+
+**Still `[VERIFY]` (low-risk):** Güneri–Ling–Özkaya ([arXiv:2007.16029](https://arxiv.org/abs/2007.16029))
+full text — landing page only reached; it is QC-structure/trace-representation, not LRC, so low
+collision risk, but the dual-decomposition step should be read to pin the exact reference the sweep
+§1.4 attributes to "Chen–Ling–Xing" (the operative concatenation-LRC dual work located this session
+is Liu–Ma–Wu–Xing 2208.04484 + Ma–Xing; the "Chen–Ling–Xing" citation needs its exact source nailed
+or corrected).
+
+**Verdict: none-found for the crux, with a named adjacent genre.** Concatenation-preserves-*locality*
+is classical (Forney; Blokh–Zyablov/Zinoviev generalized concatenation; Theorem 3.1 of 2208.04484),
+and the bounded-weight dual-support object `R_C(r)` is already in print — but no located work
+preserves the **entire** `R_C(r)` (hence exact adversarial `τ` and the full `(ν,τ)` profile) under an
+outer dual-distance gate `d(O⊥) ≥ r+2`. The N1 crux survives this pass. **Novelty risk downgraded
+HIGH → MEDIUM** (crux clear, but the object and the concatenation-locality half are prior art, so the
+lemma must be framed as strengthening 2208.04484-style preservation from locality to the whole
+hypergraph).
+
+**Kill condition (still open, now narrower).** Any paper stating that concatenation under an outer
+dual-distance condition preserves *all* bounded-size repair supports (not just locality or a chosen
+disjoint family) collapses N1. The four highest-probability candidates are cleared; a MathSciNet
+forward-citation sweep of 2208.04484 and Ma–Xing is the remaining diligence.
 
 ### N2 — Explicit all-symbol `τ>ν` geometric seed *(medium risk)*
 
@@ -132,18 +170,22 @@ prior exact `τ` for this Roth–Lempel puncture.
 
 **Audit order = risk order: N1, then N2, then N3.** N1 is the crux — if the complete-hypergraph
 transfer is already in the concatenated-LRC literature, the headline drops from "new transfer lemma"
-to "new seed lifted by known machinery," which changes what the paper claims. N2 and N3 are each
-"new exact computation on a classical object" and survive as contributions even if N1 softens.
+to "new seed lifted by known machinery." N2 and N3 are each "new exact computation on a classical
+object" and survive as contributions even if N1 softens.
 
-**Single decisive gate:** a MathSciNet/zbMATH + full-text pass on the four N1 candidate-collision
-papers (Güneri–Ling–Özkaya; generalized-AG-locality; multiple-localities; Chen–Ling–Xing),
-answering one yes/no — *does any of them preserve the complete bounded-size repair hypergraph, or
-only locality/availability?* Everything else in the audit is bounded by that answer.
+**N1 gate — RESULT (2026-07-11 full-text pass): crux clears, risk HIGH → MEDIUM.** The four
+highest-probability candidate-collision papers were read (see N1 above); all preserve only locality
+(or a chosen disjoint family), none preserves the complete bounded-size repair hypergraph via an
+outer dual-distance gate. Liu–Ma–Wu–Xing (2208.04484) is the anchor to cite — it already names the
+`R_C(r)` dual-support object and does concatenation-preserves-locality, so N1 must be framed as
+*strengthening* that from locality to the whole hypergraph, not as a fresh idea. Remaining N1
+diligence: MathSciNet forward-citation sweep of 2208.04484 + Ma–Xing, and pin/correct the sweep §1.4
+"Chen–Ling–Xing" attribution (read Güneri–Ling–Özkaya [2007.16029] full text).
 
-**Reads queued (full text, in order):**
-1. Chen–Ling–Xing dual decomposition (exact ref TBD) + Güneri–Ling–Özkaya [2007.16029] — N1 crux.
-2. Bartoli–Davydov–Marcugini–Pambianco [1909.00207] — N2 sharpest near-miss (counts vs transversals).
-3. Han–Fan (IEEE IT 2023) Lemma 6 — N3, confirm the circuit classification boundary already CLOSED.
+**Reads queued next (full text, in order):**
+1. Bartoli–Davydov–Marcugini–Pambianco [1909.00207] — N2 sharpest near-miss (counts vs transversals).
+2. Han–Fan (IEEE IT 2023) Lemma 6 — N3, confirm the circuit classification boundary already CLOSED.
+3. Güneri–Ling–Özkaya [2007.16029] — close the last N1 `[VERIFY]` + fix the §1.4 citation.
 
 **Do not fund** a broad code-parameter-table search: the `[n,k,d]` parameters are prior art (N3), so
 this lane does **not** target MinT/codetables entries — the contribution is the repair-invariant
