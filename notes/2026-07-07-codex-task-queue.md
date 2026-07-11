@@ -70,7 +70,11 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
   certificate. **Next (on-box, no gated solve):** prove `max reachable (6·defect − 4·intruders − 2·[xor])
   ≤ 6·defect_root − 2` — a defect/intruder combinatorics lemma on the conic, no reservoir/no Hall — as
   the concrete ply5-hold sublemma; the gated q23 solve is now only for full-depth DROP debt-0 + the P
-  certificate. Probes:
+  certificate (**the real crux — a peak-bounded potential is not yet a P-certificate**). **Cheap
+  cross-lane check first:** both live lanes now point at the same constant `q−5` (A5 target
+  `maxonN(q) ≤ q−5`; here `defect_root = q−5` exactly). If `maxonN` and `defect_components` are the same
+  object (or one bounds the other), A5 and Cluster-2 collapse to one lemma — verify before more probes.
+  Probes:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
   [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–7); modes
   `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`.
