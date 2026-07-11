@@ -132,9 +132,16 @@ is the **complete repair hypergraph per coordinate type** and the all-symbol `τ
   point/plane representation **counts**. Sweep §2 and the completion-core note both flag: counts
   ≠ transversals. **This is the sharpest near-miss to read in full.** `[VERIFY]`
 
-**Verdict so far: none-found for the τ-side, partial-overlap on geometry.** The `ν`/availability
-literature on geometric LRCs is active; the `τ` (adversarial hitting-set) of *this* `2q+1`-point
-system, and all-symbol `τ>ν`, are unlocated.
+**Full-text pass (2026-07-11): BDMP [1909.00207] CHECKED — non-colliding.** It computes the
+twisted-cubic point–plane **incidence counts** per `PGL(2,q)`-orbit (five point-orbits × five
+plane-orbits → 25 submatrices `I_ij`) and **multiple-covering / saturating-set density** (`(3,μ)`-MCF
+codes). Term scan of the full text finds **no** "transversal / hitting / matching / availability /
+repair / locality / locally repairable." Exactly the counts-vs-transversals gap the completion-core
+note §6.5 flagged: counts per orbit are computed, the hitting-set `τ` is not.
+
+**Verdict: none-found for the τ-side, partial-overlap on geometry.** The `ν`/availability/covering
+literature on the twisted cubic is covered (BDMP + multiple-covering corpus); the `τ` (adversarial
+hitting-set) of *this* `2q+1`-point system, and all-symbol `τ>ν`, are unlocated.
 
 **Kill condition.** Any computation of the bounded-repair hitting set (or an equivalent all-symbol
 fault-tolerance-vs-availability separation) for the twisted-cubic–axis code, or for a system a
@@ -158,8 +165,20 @@ USENIX ATC'18 / ACM ToS, [DOI:10.1145/3381832](https://dl.acm.org/doi/10.1145/33
 fault tolerance vs locality, the systems-facing framing of the same tension. **Check:** whether any
 LRC line connects repair-tolerance to zero-sum-free / cap-set bounds. None surfaced.
 
-**Verdict so far: partial-overlap.** Code + circuits + `τ` definition all prior art; the additive
-evaluation and the "attains the universal cover/matching ratio" statement are unlocated.
+**Full-text pass (2026-07-11): Li–Heng [2204.11208] CHECKED — non-colliding.** It computes the
+**minimum linear locality** of NMDS codes and their duals (Lemma 21/22, Thm 23, off Tan–Fan–Ding–Zhou
+[arXiv:2102.…]) — a single locality figure per code, with one repair set `R_i`. Term scan finds **no**
+"tolerance / transversal / hitting / availability / disjoint / (r,δ) / zero-sum / cap set / additive"
+(the "tolerance parameters" in the search snippet was a summarizer gloss, not in the paper). And the
+Han–Fan zero-sum NMDS characterization ("`RL_{k,0}(S)` NMDS ⟺ `S` has a `k`-zero-sum subset") is
+confirmed prior art, as sweep §1.3 already ruled.
+
+**Verdict: partial-overlap.** The code, its zero-sum NMDS characterization (Han–Fan), the
+NMDS↔optimal-LRC-via-minimum-linear-locality connection (Li–Heng, Tan–Fan–Ding–Zhou), and the `τ`
+metric definition (Pamies-Juarez et al.) are all prior art. The narrow candidate-new layer — exact
+additive-combinatorial `τ = q − Z_p(𝔽_q)` and the asymptotic `τ/ν → p` attaining the universal
+`p`-uniform ceiling via Sauermann / Ellenberg–Gijswijt — survives, but it is the thinnest of the three
+lanes.
 
 **Kill condition.** Any prior connection of LRC repair-tolerance to `Z_p`/cap-set asymptotics, or a
 prior exact `τ` for this Roth–Lempel puncture.
@@ -182,10 +201,21 @@ outer dual-distance gate. Liu–Ma–Wu–Xing (2208.04484) is the anchor to cit
 diligence: MathSciNet forward-citation sweep of 2208.04484 + Ma–Xing, and pin/correct the sweep §1.4
 "Chen–Ling–Xing" attribution (read Güneri–Ling–Özkaya [2007.16029] full text).
 
-**Reads queued next (full text, in order):**
-1. Bartoli–Davydov–Marcugini–Pambianco [1909.00207] — N2 sharpest near-miss (counts vs transversals).
-2. Han–Fan (IEEE IT 2023) Lemma 6 — N3, confirm the circuit classification boundary already CLOSED.
-3. Güneri–Ling–Özkaya [2007.16029] — close the last N1 `[VERIFY]` + fix the §1.4 citation.
+**N2 gate — RESULT (2026-07-11): non-colliding.** BDMP [1909.00207] read in full — orbit incidence
+counts + covering density, no transversal/`τ`. The counts-vs-transversals gap holds; N2's all-symbol
+`τ>ν` and the twisted-cubic-axis hitting-set spectrum are unlocated.
+
+**N3 gate — RESULT (2026-07-11): non-colliding, thinnest lane.** Li–Heng [2204.11208] read in full —
+minimum linear locality only, no `τ`/availability/zero-sum link. Code + zero-sum NMDS characterization
++ NMDS↔optimal-LRC all prior art; only the exact `τ = q − Z_p` evaluation and the `τ/ν → p` extremal
+reading survive.
+
+**All three lanes cleared this pass; no collision found.** Remaining diligence is confirmatory, not
+blocking:
+1. MathSciNet forward-citation sweep of 2208.04484 (N1) + a MathSciNet/zbMATH check that no one has
+   computed the twisted-cubic external-orbit `τ` (N2).
+2. Güneri–Ling–Özkaya [2007.16029] full text — close the last N1 `[VERIFY]` + pin/correct the sweep
+   §1.4 "Chen–Ling–Xing" citation.
 
 **Do not fund** a broad code-parameter-table search: the `[n,k,d]` parameters are prior art (N3), so
 this lane does **not** target MinT/codetables entries — the contribution is the repair-invariant
