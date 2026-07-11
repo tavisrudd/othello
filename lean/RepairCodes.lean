@@ -8,3 +8,4 @@
 -- `q = 3^h` theorem, and the seed-and-lift corollary.
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed
+import RepairCodes.CodeInstance

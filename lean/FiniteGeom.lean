@@ -8,3 +8,4 @@
 -- concatenation transfer lemma.
 import FiniteGeom.Weight
 import FiniteGeom.Hypergraph
+import FiniteGeom.Code
