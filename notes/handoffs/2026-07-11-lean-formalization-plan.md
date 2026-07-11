@@ -2,10 +2,12 @@
 
 **Date**: 2026-07-11
 **Status**: IN PROGRESS. Plan approved (`yc` under `mi`, 2026-07-11); the three §5 decisions
-are resolved. **Phase 0 MVP + Phase 1 step 1 (transfer lemma) + the concrete `FiniteGeom`
-`𝔽_q` code layer + Phase 1 step 2 (`δ_x = τ`, abstract identity) landed** — see §7 Progress.
-Two open leads: the real `q = 9` discharge (trace-form nondegeneracy + Chen–Ling–Xing; tracked
-next-step 2) and identifying the concrete repair hypergraph `𝓑_x` on the code layer (next-step 3).
+are resolved. **Phase 0 `FiniteGeom` MVP is complete** (weight + hypergraph `ν`/`τ` +
+linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1's transfer lemma +
+`δ_x = τ` identity landed** — see §7 for the current status table. Open leads: the real `q = 9`
+discharge (trace-form nondegeneracy + Chen–Ling–Xing) and the concrete repair hypergraph `𝓑_x`
+on the code layer. Session-by-session narrative lives in the
+[archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
 [baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
 [completion-core-rigidity](../2026-07-10-completion-core-rigidity-upgrades.md),
@@ -164,7 +166,7 @@ code/hypergraph layer against a real theorem before the other three libraries co
      boundary between "ours" and "imported".
 
 **Effort.** Multi-session program. Phase 1 (FiniteGeom MVP + transfer lemma + `δ_x=τ` + the `q=9`
-discharging instance) is the first commitment; the rest sequences behind it. Starting fresh session.
+discharging instance) is the first commitment; the rest sequences behind it.
 
 ## 6. Provenance
 Backing scripts (COMPUTED-EXACT sources for the `[CERT]` items) are tracked under
@@ -172,282 +174,48 @@ Backing scripts (COMPUTED-EXACT sources for the `[CERT]` items) are tracked unde
 hashes; each `[CERT]` Lean cert should regenerate from the corresponding script and be checked by a
 rules-only validator, mirroring `ProjectiveCap/CertData/`.
 
-## 7. Progress
+## 7. Current state
 
-### Phase 0 + Phase 1 step 1 — landed (`lean/`, 2026-07-11)
+Two `[[lean_lib]]` targets (`FiniteGeom`, `RepairCodes`) are wired into `lakefile.toml` and
+`defaultTargets`. Everything below is `#print axioms`-clean
+(`[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`);
+`lake build FiniteGeom RepairCodes` is green with no warnings. Abstract-first (decision 1):
+deep/imported inputs enter as named hypotheses, never global axioms (decision 3).
 
-Two new `[[lean_lib]]` targets wired into `lakefile.toml` (`defaultTargets` too):
+| Module | Landed content |
+|---|---|
+| `FiniteGeom/Weight.lean` | q-ary weight counting: `card_filter_le_sum`, `mul_card_filter_le_sum` |
+| `FiniteGeom/Hypergraph.lean` | `Finset`-hypergraph `ν`/`τ`: `nu_le_tau` (weak duality), `transversalNumber_le_mul_matchingNumber` (`τ ≤ p·ν`), `card_le_matchingNumber` / `transversalNumber_le_card` attainment pins, worked `ν=τ=1` + triangle `ν=1,τ=2` (strict) witnesses |
+| `FiniteGeom/Code.lean` | linear codes over `𝔽_q`: `dualCode` / `minDist` / `dualDist` (+ `_le_hammingNorm` pins), parity-check char. `mem_dualCode_rowCode(_iff_mulVec)`, `singleton_bound` (`d+k≤n+1`) + `IsMDS`, `le_minDist` (lower-bound lifter), `𝔽₅` non-vacuity witness |
+| `FiniteGeom/EvalCode.lean` | Reed–Solomon: `card_eval_zero_le_natDegree`, `evalPi`, `rsCode`, `rsCode_minDist_ge` (`n-(k-1)≤d`), `finrank_rsCode` (`=k`), `rsCode_isMDS` (RS codes are MDS) |
+| `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
+| `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
+| `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode` — fills `ConcatDualWord`'s finite fields from the code layer, zero extra assumptions; residual = `beta`/`hbeta`/`houter` (the imported trace / Chen–Ling–Xing content) |
+| `RepairCodes/Q9Seed.lean` | `q9SeedToy` consistency witness (interface *inhabitation* only — not the real discharge) |
 
-- **`FiniteGeom`** (shared base) — two self-contained modules:
-  - `FiniteGeom/Weight.lean`: the q-ary weight-counting arithmetic the transfer argument stands
-    on. `card_filter_le_sum` (#nonzero coords ≤ total weight) and `mul_card_filter_le_sum`
-    (`d · #coords ≤ total weight`). Pure `Finset`/`ℕ`.
-  - `FiniteGeom/Hypergraph.lean`: the minimal `Finset`-of-`Finset` hypergraph layer (§3).
-    `IsMatching`/`IsTransversal`, matching number `matchingNumber` (`ν`, `sSup` of matching
-    sizes), transversal number `transversalNumber` (`τ`, `sInf` of transversal sizes), the
-    pointwise weak-duality injection `matching_card_le_transversal_card` (each matched edge hit
-    by a distinct cover vertex), and `nu_le_tau : ν ≤ τ`. The definitions are pinned by
-    `card_le_matchingNumber` / `transversalNumber_le_card` (upper/lower bound + attainment) and
-    exercised on a concrete one-edge hypergraph (`ν = τ = 1`). Baseline for the `(ν,τ)`
-    distribution claims and the `δ_x = τ` invariant (Phase 1 step 2 / `CompletionCore`).
-    Framing note: this is *weak duality* (the elementary `ν ≤ τ`), **not** König's equality
-    `ν = τ` (bipartite-only, not claimed).
+Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
+`rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
+near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 
-  Kept minimal per decision 1 (abstract-first); the concrete `𝔽_q` generator-matrix /
-  dual-distance code layer is **not built yet** and is the next `FiniteGeom` job.
-- **`RepairCodes`** — `RepairCodes/Transfer.lean`: the **concatenation transfer lemma (§1.4)**,
-  the crux self-contained novelty. Stated over an abstract-first interface `ConcatDualWord`
-  (decision 1): the deep structural inputs — trace-representation faithfulness (`hbeta`),
-  `β ∈ O⊥` (`houter`), inner dual distance (`hdist`) — are **named fields**, visible in the
-  signature, zero global axioms (decision 3, preferred form). Proved:
-  - `transfer_blockwise` (Part A): every block of a `< d(O⊥)`-weight dual word lies in `I⊥`.
-  - `transfer_single_block` (Part B, budget `< 2·d(I⊥)`): at most one nonzero block — the "no
-    new cross-block repair supports" content.
-  - `transfer_lemma`: combined.
-- **`RepairCodes/Q9Seed.lean`** — decision-1 non-vacuity guard: a concrete two-block **consistency
-  witness** `q9SeedToy` (one nonzero weight-4 inner-dual block, one zero block) discharging every
-  `ConcatDualWord` field, with an `example` applying `transfer_lemma` to a single-block verdict
-  witnessed by an actual nonzero block (card = 1). Docstring records the **real `q = 9` obligation**
-  (inner `C₀ = [10,4,6]_9`, `dI = 4`, `dO ≥ 5`, `s = 4`, `(ν,τ)` distribution) as the tracked
-  follow-up, blocked on the concrete `FiniteGeom` code layer + trace-form nondegeneracy — and is
-  explicit that the witness establishes only interface *consistency/inhabitation*, not the real
-  discharge, and cannot (by design) exercise `transfer_blockwise`'s `exfalso` branch.
+### Open next steps (in order)
 
-**Referee-hardening (framing + hypothesis surface):** the transfer lemma is framed as the finite
-*counting corollary* the sweep flags as candidate-new; the classical trace-representation /
-Chen–Ling–Xing dual-decomposition step is **not** claimed as ours — it enters as named
-`ConcatDualWord` fields, and the theorems are stated as holding "in the model `ConcatDualWord`",
-conditional on instantiation. Hypothesis surface tightened: `hpos` replaced by the
-manifestly-true `innerDual_zero` (`0 ∈ I⊥`) + `blockWt_eq_zero` (Hamming weight zero iff zero
-vector), from which the weight-≥1 fact is derived. "No imported analytic input" is stated
-precisely (the Sauermann / Ellenberg–Gijswijt asymptotics are simply not used by this finite
-lemma; they are not silently assumed).
-
-**Audit gate (passes):** `#print axioms` on `transfer_lemma`, `transfer_blockwise`,
-`transfer_single_block`, `q9SeedToy`, `nu_le_tau`, `matching_card_le_transversal_card`,
-`card_le_matchingNumber`, `transversalNumber_le_card`, and the `FiniteGeom` weight lemmas =
-`[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no `native_decide`.
-`lake build FiniteGeom RepairCodes` clean, no warnings.
-
-### Phase 0 code layer + interface bridge — landed (`lean/`, 2026-07-11, cont.)
-
-The **algebraic half** of the `FiniteGeom` MVP (the outstanding Phase-0 blocker), plus a bridge
-that discharges the transfer interface's finite fields from it:
-
-- **`FiniteGeom/Code.lean`** — linear codes as `𝔽_q`-`Submodule`s of `Fin n → 𝔽`. mathlib at
-  this pin ships `hammingNorm` (`InformationTheory/Hamming`) but **no** `Code`/dual/MDS layer,
-  so this is built on `Submodule` + `Matrix.dotProduct` + `hammingNorm`:
-  - `dualCode C` — orthogonal complement under `x ⬝ᵥ y = ∑ xᵢyᵢ`, packaged as a `Submodule`
-    (`mem_dualCode` the membership iff);
-  - `minDist C` — least Hamming weight of a nonzero codeword (`sInf`, so `0` on the trivial
-    code), pinned as a lower bound by `minDist_le_hammingNorm` (mirrors how `τ` was pinned by
-    `transversalNumber_le_card`);
-  - `dualDist C = minDist (dualCode C)`, with `dualDist_le_hammingNorm` — a nonzero dual word
-    has weight `≥ d(C⊥)`, **exactly the shape of `ConcatDualWord.hdist`**;
-  - `rowCode G` — code generated by a generator matrix's rows (`row_mem_rowCode`).
-  MDS/Singleton deliberately not built (not cited by the transfer slice) — later `FiniteGeom` job.
-- **`RepairCodes/CodeInstance.lean`** — `ofInnerCode`: builds a `ConcatDualWord` from a concrete
-  inner code `I` over `𝔽_q`, filling `innerDual` (`∈ dualCode I`), `blockWt` (`hammingNorm`),
-  `dI` (`dualDist I`), and their defining fields (`innerDual_zero`, `blockWt_eq_zero`, `hdist`)
-  **from the code layer, zero extra assumptions**. The residual hypotheses are exactly the deep
-  imported content — `beta` + trace faithfulness `hbeta` + outer bound `houter`. This draws the
-  "ours vs imported" boundary (§5 decision 3) at the *type level*: `transfer_ofInnerCode` fires
-  the transfer lemma against any real inner code once those three are supplied. Code-backed
-  replacement for `Q9Seed`'s toy witness.
-
-**Audit gate (passes):** `#print axioms` on `dualCode`, `mem_dualCode`, `minDist_le_hammingNorm`,
-`dualDist_le_hammingNorm`, `row_mem_rowCode`, `ofInnerCode`, `transfer_ofInnerCode` =
-`[propext, Classical.choice, Quot.sound]` only (some fewer) — no `sorryAx`, no `native_decide`.
-`lake build FiniteGeom RepairCodes` clean, no warnings.
-
-**Next steps (in order):**
-1. ~~Concrete `FiniteGeom` code layer~~ **(landed)** — `dualCode` / `minDist` / `dualDist` /
-   `rowCode` in `FiniteGeom/Code.lean`; interface bridge `ofInnerCode` in `CodeInstance.lean`.
-   Now also carries the **Singleton bound** `d + k ≤ n + 1` (`singleton_bound`) + `IsMDS`
-   (the §5-decision-3 prove-don't-import Singleton-LRC item; pins the seed `[10,4,6]_9` as
-   near-MDS, `d+k = n`).
-2. Discharge the **real `q = 9` seed** via `ofInnerCode` (retire the toy witness's role): supply
+1. **Discharge the real `q = 9` seed** via `ofInnerCode` (retire the toy witness's role): supply
    the inner code `I` (`C₀ = [10,4,6]_9`) as a concrete `rowCode`/`Submodule` and the three
-   residual fields `beta`/`hbeta`/`houter` — needs the
-   trace-form nondegeneracy (`Algebra.trace` / `traceForm_nondegenerate`) for `hbeta` and the
-   Chen–Ling–Xing dual decomposition for `houter`.
-3. ~~Phase 1 step 2: `δ_x = τ(𝓗_C(x))` completion-distance invariant~~ **(abstract identity
-   landed)** — `FiniteGeom/Completion.lean` `completionDistance_eq_transversalNumber`. Remaining:
-   identify the concrete repair hypergraph `𝓑_x = 𝓗_C(x)` on the code layer (its edges are the
-   minimum parity-check supports through the erased coordinate) and supply a matroid instance
-   discharging "no surviving trace ⟺ independent". Both wait on more of the code layer.
-4. Phase 1 step 4: uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`.
-5. **Distance-lower-bound tool + Reed–Solomon MDS** ~~(landed)~~ — `FiniteGeom/EvalCode.lean`:
-   `card_eval_zero_le_natDegree` (a nonzero deg-`<k` poly vanishes at `≤ k-1` distinct points),
-   the Reed–Solomon code `rsCode pts k`, `rsCode_minDist_ge : n-(k-1) ≤ d(RS_k)` (via the new
-   general `le_minDist` helper in `Code.lean`), `finrank_rsCode : finrank = k` (`k ≤ n`, via
-   `evalPi` injective on `degreeLT k` + `degreeLTEquiv`), and `rsCode_isMDS` (`1 ≤ k ≤ n` ⇒
-   `IsMDS`, combining the lower bound with `singleton_bound`). This is the *lower*-bound
-   direction Singleton doesn't give — the tool the real min-distance claims (q=9, q=3^h) turn on.
-   **Next application:** instantiate for a concrete field to feed the q=9 seed / build the
-   NMDS-shaped codes the sweep flags (RS is the MDS baseline; the seeds are one-below).
+   residual fields `beta`/`hbeta`/`houter` — needs trace-form nondegeneracy
+   (`Algebra.trace` / `traceForm_nondegenerate`) for `hbeta` and the Chen–Ling–Xing dual
+   decomposition for `houter`. Blocks the "not vacuous in the intended sense" story.
+2. **Concrete repair hypergraph `𝓑_x = 𝓗_C(x)`** on the code layer (completes Phase 1 step 2's
+   concrete side): its edges are the minimum parity-check supports through the erased coordinate;
+   supply a matroid instance discharging "no surviving trace ⟺ independent". Also lands a
+   code-derived `τ > ν` (currently only the abstract triangle witness has it).
+3. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q` — needs its concrete
+   generator + a bespoke distance argument (RS gives the MDS baseline, but this family sits far
+   below MDS, so `rsCode_minDist_ge` doesn't apply directly).
+4. **Stepping stone:** instantiate the RS / eval-code layer over a concrete `GaloisField` (e.g.
+   `𝔽_9`) — exercises `rsCode_isMDS` on a real field and is the on-ramp toward the NMDS-shaped
+   seeds the sweep flags.
+5. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
 
-### Handoff Note — 2026-07-11 (session: lean-formalization Phase 0/1)
-
-- Landed the FiniteGeom weight base + the RepairCodes concatenation transfer lemma as one thin
-  vertical slice (the plan's recommended first move), abstract-first with the analytic/structural
-  inputs as explicit hypotheses. Build green, axioms clean.
-- No concrete code layer yet — the transfer lemma is currently discharged only by the toy witness;
-  the real `q = 9` instance is the immediate next commitment (blocks the "not vacuous in the
-  intended sense" story, though the interface *is* proven inhabited).
-- Commit: this session (FiniteGeom/RepairCodes libs + lakefile wiring + this handoff update).
-
-### Handoff Note — 2026-07-11 (cont.: FiniteGeom hypergraph layer)
-
-- Added `FiniteGeom/Hypergraph.lean`: the `Finset`-hypergraph `ν`/`τ` half of Phase 0 (§3),
-  with `nu_le_tau` proved via a König-style matching→cover injection. Self-contained, axioms
-  clean. This completes the *combinatorial* half of the `FiniteGeom` MVP; the *algebraic* half
-  (generator matrix / dual distance over `𝔽_q`) is still the outstanding Phase-0 job and the
-  blocker for the real `q = 9` discharge and `δ_x = τ`.
-- Second commit this session.
-
-### Handoff Note — 2026-07-11 (cont.: referee-hardening pass)
-
-- Passed the whole slice through an adversarial-referee lens for both math and framing:
-  - **Framing (names/docs/comments):** removed overclaims. The transfer lemma is now framed as
-    the finite counting corollary (the sweep's candidate-new content), with the classical
-    trace/Chen–Ling–Xing input explicitly *assumed* via named fields and the theorems stated as
-    holding "in the model `ConcatDualWord`" (conditional on instantiation). Fixed the hypergraph
-    lemma's "König-type" label → "weak duality" (ν ≤ τ is elementary; König's ν = τ is
-    bipartite-only and not claimed). Q9Seed reframed as a *consistency witness*, not a discharge.
-  - **Hypothesis surface:** replaced `hpos` with the manifestly-true `innerDual_zero` +
-    `blockWt_eq_zero`, so every `ConcatDualWord` field is a self-evident property of the real
-    object (a referee can check faithfulness field-by-field) rather than a compound assumption.
-  - **Cheap de-risks landed:** `card_le_matchingNumber` / `transversalNumber_le_card` pin
-    `ν`/`τ` to their intended extremal meanings (upper/lower bound + attainment, proved via the
-    correctly-oriented `le_csSup`/`Nat.sInf_le`, which by construction catches a def swap); plus a
-    concrete one-edge-hypergraph `example` proving `ν = τ = 1` end-to-end.
-- Known gap (documented, not hidden): the only numeric hypergraph instance has `ν = τ`;
-  a `τ > ν` instance is deferred to the code-derived repair hypergraph (needs the code layer).
-- Build green, all headline results + the witness `#print axioms`-clean. Third commit this session.
-
-### Handoff Note — 2026-07-11 (cont.: concrete code layer + interface bridge)
-
-- Built the algebraic half of the `FiniteGeom` MVP — the Phase-0 blocker for the real `q = 9`
-  discharge: `FiniteGeom/Code.lean` (`dualCode`, `minDist`/`minDist_le_hammingNorm`, `dualDist`/
-  `dualDist_le_hammingNorm`, `rowCode`) on `Submodule` + `Matrix.dotProduct` + `hammingNorm`
-  (mathlib at this pin has no `Code`/dual/MDS layer, only `hammingNorm`).
-- Bridged it to the transfer interface: `RepairCodes/CodeInstance.lean` `ofInnerCode` fills the
-  finite `ConcatDualWord` fields from the code layer with zero extra assumptions, leaving exactly
-  `beta`/`hbeta`/`houter` (the trace / Chen–Ling–Xing inputs) as the residual hypotheses —
-  making the §5-decision-3 "ours vs imported" boundary a type-level fact. `transfer_ofInnerCode`
-  fires the transfer lemma against any real inner code. This retires the toy witness as the
-  *only* discharge path; the real `q = 9` instance (next-step 2) now reduces to three fields.
-- MDS/Singleton intentionally deferred (not cited by the slice). Build green, no warnings, all
-  new results `#print axioms`-clean (`[propext, Classical.choice, Quot.sound]`). Fourth commit
-  this session.
-
-### Handoff Note — 2026-07-11 (cont.: δ_x = τ invariant + the τ > ν witness)
-
-- Landed **Phase 1 step 2's abstract identity**: `FiniteGeom/Completion.lean`
-  `completionDistance_eq_transversalNumber` — completion-core Prop 2.2's `δ_x(C) = τ(𝓗_C(x))`,
-  the finite content, shared into the base so `RepairCodes` and `CompletionCore` cite one proof.
-  Abstract-first: the matroid content ("`(C∖D)∪{x}` independent ⟺ no circuit survives, and every
-  relevant circuit passes through `x`") is folded into the *definition* of the deletion predicate
-  (a trace `A` dies iff the deletion meets it), faithful to the paper's own proof, so the theorem
-  is a pure hypergraph identity `min deletion = τ` with no imported input. `≥ τ`: a witnessing
-  deletion is a transversal; `≤ τ`: intersect a minimum transversal with `C` (legitimate since
-  every edge already lies in `C`). Reuses `transversalNumber`/`transversalNumber_le_card`.
-- Closed the **documented `τ > ν` gap**: the triangle hypergraph `{{0,1},{1,2},{0,2}}` on `Fin 3`
-  (pairwise-intersecting edges) added to `Hypergraph.lean` with a full `ν = 1 ∧ τ = 2` proof, so
-  weak duality `ν ≤ τ` is shown *strict* in general (the prior only numeric instance had `ν = τ`).
-  `ν ≤ 1` from "matching edges are pairwise disjoint but distinct triangle edges intersect";
-  `τ ≥ 2` from "no single vertex meets all three edges" (small `decide`). A *code-derived* `τ > ν`
-  is still the remaining goal. `decide` used only on 3-edge/`Fin 3`-subset checks — no
-  `native_decide`; axioms stay `[propext, Classical.choice, Quot.sound]`.
-- Build green, no warnings, all new results `#print axioms`-clean. Fifth commit this session.
-
-### Handoff Note — 2026-07-11 (cont.: p-uniform τ ≤ p·ν bound)
-
-- Landed `transversalNumber_le_mul_matchingNumber` in `Hypergraph.lean`: for a hypergraph whose
-  edges are nonempty with `≤ p` vertices, `τ(H) ≤ p·ν(H)`. This is one of the elementary bounds
-  §5 decision 3 marks **prove-don't-import** — the finite structural counterpart to the imported
-  Sauermann/Ellenberg–Gijswijt asymptotic `τ/ν → p` (the import supplies the matching lower bound;
-  this supplies the `p·ν` upper bound). Classic proof: the vertex set of a *maximum* matching is a
-  transversal (a missed edge would extend the matching, contradicting maximality) with `≤ p`
-  vertices per matched edge. Reuses the `ν`/`τ` attainment machinery already in the file.
-- With the `τ > ν` witness (strictness) and now `τ ≤ p·ν` (the uniform upper bound), the `ν`/`τ`
-  layer carries both the qualitative gap and the quantitative envelope the asymptotics need.
-- Build green, no warnings, axioms clean (`[propext, Classical.choice, Quot.sound]`). Sixth commit.
-
-### Handoff Note — 2026-07-11 (cont.: dual-of-generator characterization + adversarial review)
-
-- Landed the **parity-check characterization** in `Code.lean`: `mem_dualCode_rowCode`
-  (`y ∈ (rowCode G)⊥ ↔ ∀ i, Gᵢ ⬝ᵥ y = 0`, load-bearing `←` via "orthogonal-to-`y` is a
-  submodule containing the rows ⇒ contains their span") and `mem_dualCode_rowCode_iff_mulVec`
-  (matrix form `↔ G.mulVec y = 0`). This is the computational route from a concrete generator
-  matrix to its dual code — the actual path to instantiating real inner codes for the q=9 discharge.
-- **Adversarial review of the whole session's corpus** (definitional-faithfulness / vacuity lens,
-  since kernel-checking already guarantees soundness): no soundness or overclaim defects.
-  `completionDistance_eq_transversalNumber` is genuinely `min(hitting set ⊆ C) = τ` with the
-  matroid step folded into the definition (documented, not proved — abstract-first);
-  `ofInnerCode` sets `dI := dualDist I` (real dual distance, not faked) so the hard lower bound
-  stays correctly deferred. One actionable gap: the code layer had **no pinned concrete value**
-  (unlike the ν/τ layer's worked examples). Closed it with a non-vacuity witness over `𝔽₅`
-  (`G = [1 1]`: `(1,4)` is in the dual, `(1,1)` is not), exercising
-  `mem_dualCode_rowCode_iff_mulVec` end-to-end via `decide`.
-- Build green, no warnings, all new results `#print axioms`-clean. Seventh commit.
-
-### Handoff Note — 2026-07-11 (cont.: Singleton bound + MDS predicate)
-
-- Landed `singleton_bound` (`d(C) + k ≤ n + 1`) and `IsMDS` in `Code.lean` — the elementary
-  general-in-`q` bound §5 decision 3 marks **prove-don't-import** (the Singleton-LRC input), no
-  imported content. Standard puncturing proof: restricting codewords to the complement of any
-  `d-1` coordinates (`LinearMap.funLeft` to `↥Sᶜ → 𝔽`) is injective on `C` (two codewords
-  agreeing there differ on `≤ d-1 < d` coords, so their difference is a sub-minimum-weight
-  codeword and vanishes), hence `k = dim C ≤ dim(Sᶜ → 𝔽) = n-(d-1)`. Trivial-code branch
-  (`d=0`) handled by `dim C ≤ n`.
-- This is the code layer's most-standard previously-missing bound; it also lets the docs *state*
-  the seed `[10,4,6]_9` is near-MDS (`d+k = 10 = n`, one under the Singleton value `11`) rather
-  than assert it. Distance *lower* bounds (the hard content of the q=9 / q=3^h theorems) are a
-  separate lever — Singleton is an upper bound and does not discharge them.
-- Chose this over the two open next-steps deliberately: both (q=9 discharge, q=3^h) are blocked
-  on deep/specific constructions (trace-form nondegeneracy + Chen–Ling–Xing for q=9; a
-  general min-distance lower bound for q=3^h), whereas Singleton is a self-contained,
-  high-certainty, in-scope infrastructure win.
-- Build green (`lake build FiniteGeom RepairCodes`), no warnings, `#print axioms singleton_bound`
-  = `[propext, Classical.choice, Quot.sound]`. Eighth commit.
-- Doc-hygiene note: per the CLAUDE.md live/companion split added this session, §7's dated
-  Handoff Notes should migrate to a companion `-archive.md` at end-of-session; deferred (kept
-  inline for now to match the file's current structure).
-
-### Handoff Note — 2026-07-11 (cont.: distance lower-bound tool — Reed–Solomon)
-
-- Landed the **distance-lower-bound direction** (Singleton is only an upper bound): new
-  `FiniteGeom/EvalCode.lean` + the general `le_minDist` helper in `Code.lean`.
-  - `le_minDist` (dual of `minDist_le_hammingNorm`): a uniform per-nonzero-codeword weight
-    lower bound `m` transfers to `m ≤ d(C)` for nontrivial `C`. Reusable "hard direction".
-  - `card_eval_zero_le_natDegree`: a nonzero degree-`<k` polynomial vanishes at `≤ deg p < k`
-    of the `n` distinct evaluation points (vanishing points inject into the roots). The one
-    classical fact the whole lane rests on.
-  - `evalPi` (the `𝔽`-linear evaluation map via `Polynomial.leval`), the Reed–Solomon code
-    `rsCode pts k = map evalPi (degreeLT 𝔽 k)`, `rsCode_hammingNorm_ge`
-    (`n-(k-1) ≤ wt` per nonzero codeword), and `rsCode_minDist_ge : n-(k-1) ≤ d(RS_k)` for
-    `1 ≤ k, 1 ≤ n` (nontriviality witnessed by the all-ones evaluation of the constant `1`).
-- This is general-in-`q` infrastructure feeding both blocked theorems (the q=9 seed's real
-  dual-distance lower bound and the q=3^h family's `d = q-1`) — the min-distance *lower* bounds
-  those turn on, which `singleton_bound` (upper) cannot supply.
-- Remaining capstone (queued as next-step 5): RS-is-MDS equality — `finrank (rsCode) = k` (via
-  `evalPi` injective on `degreeLT k` + `degreeLTEquiv`) closes `d = n-k+1` against Singleton.
-- Build green (`lake build FiniteGeom RepairCodes`), no warnings; `#print axioms` on
-  `le_minDist` / `card_eval_zero_le_natDegree` / `rsCode_hammingNorm_ge` / `rsCode_minDist_ge`
-  = `[propext, Classical.choice, Quot.sound]`. Ninth commit.
-
-### Handoff Note — 2026-07-11 (cont.: Reed–Solomon-is-MDS capstone)
-
-- Closed next-step 5's capstone: **`rsCode_isMDS`** — Reed–Solomon codes meet Singleton with
-  equality (`d + k = n + 1`) for `1 ≤ k ≤ n`. Route: `finrank_rsCode : finrank (rsCode) = k`
-  (evaluation is injective on `degreeLT k` since a nonzero deg-`<k` poly can't vanish at all
-  `n ≥ k` points; `rsCode` is then the injective image of `degreeLT k`, finrank `k` via
-  `degreeLTEquiv` + rank-nullity `LinearMap.finrank_range_of_inj`), then `singleton_bound`
-  (upper) meets `rsCode_minDist_ge` (lower) ⇒ `d = n-k+1`.
-- Now the layer has BOTH Singleton directions unified in a worked family: `singleton_bound`
-  (general upper), `rsCode_minDist_ge` (RS lower), and their equality `rsCode_isMDS`. This is
-  the MDS baseline the sweep's near-MDS seeds sit one below.
-- Build green, no warnings; `#print axioms finrank_rsCode` / `rsCode_isMDS`
-  = `[propext, Classical.choice, Quot.sound]`. Tenth commit.
+The session-by-session narrative of how the §7 corpus landed (per-slice writeups, referee-hardening,
+the ten dated notes) is in the
+[archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
