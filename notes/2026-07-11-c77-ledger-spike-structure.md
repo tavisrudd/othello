@@ -99,13 +99,73 @@ different repay mechanism.
 still gated and off the current box. Recommend provisioning a ≥32 GB box for that single solve if the
 bank lever is to be kept alive; otherwise pivot Cluster-2 to the ply5-hold sublemma.
 
+## 6. Analytical credit — the reservoir term is the *entire* debt engine
+
+`s4spike` now computes three reservoir accountings sharing the bounded terms
+`6·defect − 4·intruders − 2·[xor0]`:
+
+- **orig** `= f5 + rest` — the C63 Ψ. `f5 = zone_v − reservoir_floor`, and
+  `reservoir_floor = (q−k)·max(0, q−k−C(k,2)−1)` is a loose Hall floor that is large near the
+  root and **saturates to 0 with depth**, so `f5` melts up to the raw support `zone_v` (~O(q)).
+- **cap** `= min(f5, (q+1)−k) + rest` — the analytical credit: usable reservoir ≤ remaining move
+  budget (cap bound |S| ≤ q+1), which is monotone non-increasing in k.
+- **drop** `= 0 + rest` — reservoir removed entirely (pure conic/intruder ledger).
+
+**Result (raw envelope, `debt = max reachable − root`):**
+
+| q  | ORIG debt | CAP debt | DROP debt |
+|---:|----------:|---------:|----------:|
+| 13 | 0  | 0  | 0 |
+| 17 | 22 | 0  | 0 |
+| 19 | 22 | 0  | 0 |
+| 23 | 65 | 1  | 0 |
+| 25 | 71 | 11 | 0 |
+| 27 | 67→98* | 3  | 0 |
+| 29 | 70 | 7  | 0 |
+
+(*ORIG grows with probe depth; 98 at depth 3.)  **The reservoir term carries the whole growing
+debt.**  Crediting the phantom (CAP) cuts it ~10× to ≤ 11; removing it (DROP) zeroes it — the pure
+conic ledger's *max* never exceeds its root value.  DROP's per-ply max is cleanly monotone-decreasing
+at every order (q19: 82→78→70→66→58→54→46 through ply 10; q27: 130→126→118→114).
+
+**Two honest caveats:**
+
+1. **Not a per-edge Lyapunov function.** Per *edge*, DROP still has positive jumps that grow with q
+   (`max ΔDROP` = 8/16/20/34 at q17/19/23/27) — a single intrusion can fragment the live conic and
+   spike `6·defect` locally.  The *debt* stays ≈ 0 only because those spikes never exceed the **root**,
+   where the conic is maximally live (defect is largest at the frame).  So the provable statement is
+   `max reachable DROP ≤ DROP_root`, a peak bound, not `ΔDROP ≤ 0`.  Because this is measured on the
+   **raw** envelope (all legal moves), it transfers to any P-restricted defense for free — but it is
+   verified only to the probed depth (ply 10 at q17/q19, ply 7 at q23–q27); the growing per-edge jumps
+   mean full-depth q ≥ 23 still needs the gated root solve or a monotone-defect lemma.
+2. **A bound is not a certificate.** DROP debt 0 makes the *bank* nearly free; it does not by itself
+   prove the escape is P.  DROP must still certify the outcome (positive-when-P / escape-correlated).
+   The C75 impossibility was about *selecting* a move; a peak-bounded potential is a different object
+   and is not refuted by it.
+
+## 7. Reading for the lever (updated)
+
+C77's original worry — "bank capacity grows with q" — is now **localized and analytically explained**:
+it is entirely the loose-reservoir melt, not the game getting harder.  The lever's shape changes:
+
+- **Drop the reservoir summand.** The conic ledger `6·defect − 4·intruders − 2·[xor]` has a
+  q-independent bank (debt 0 through the checked range) because it is peak-bounded by the root.
+- **Lemma target (on-box, no gated solve):** `max reachable (6·defect − 4·intruders − 2·[xor]) ≤
+  6·defect_root − 2` — a defect/intruder combinatorics statement on the conic graph, with **no
+  reservoir and no Hall/matching** (which the framing vet already declared dead here).  This is the
+  concrete ply5-hold / bounded-bank sublemma.
+- The gated q23 root solve is now only needed to (a) confirm DROP debt 0 at full depth and (b) check
+  DROP certifies P — not to rescue a growing bank.
+
 ## Reproduction
 
 ```bash
 cd rust
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-ledger
-# solve-free spike probe (any prime-power q):
-for q in 17 19 23 25 27 29 31; do ./target/gridcap-ledger s4spike $q 1,2,3,4 --depth 3; done
+# three reservoir accountings + per-edge monotonicity, solve-free, any prime-power q:
+for q in 13 17 19 23 25 27 29; do ./target/gridcap-ledger s4spike $q 1,2,3,4 --depth 3; done
+# deep check on the small orders (whole shallow tree):
+./target/gridcap-ledger s4spike 19 1,2,3,4 --depth 6
 # principal variation + per-ply Ψ-max on a solved order:
 ./target/gridcap-ledger s4ledger 19 1,2,3,4 --grundy s4-dumps/2026-07-09/c35/q19-root-1234.grundy.raw --pv
 ```

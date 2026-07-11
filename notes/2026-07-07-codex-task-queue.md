@@ -58,11 +58,21 @@ feature space, re-weighting Cluster 2 toward the amortized bank and naming the i
   The "flat 22" was an artifact of q17/q19 being the only orders whose envelope peaks at the *first*
   intrusion. A q-independent bank capacity is now in doubt. The true q≥23 debt lies between the exact
   ply5 lower bound (~24) and the growing raw envelope; settling it needs the P-restricted root solve
-  (q23 ≈ 25 GB — OOMs this box; gated to a ≥32 GB box; q25 ≈ 370 GB infeasible). Next: pivot the lemma
-  to a **ply5-hold sublemma** (defender's P-restriction keeps the reachable peak at the first
-  intrusion) OR provision a ≥32 GB box for the single q23 root-`1,2,3,4` solve. Probes:
+  (q23 ≈ 25 GB — OOMs this box; gated to a ≥32 GB box; q25 ≈ 370 GB infeasible). **Probe 3 (reservoir
+  credit) localizes the growth to ONE term and largely removes it:** the debt is entirely the C63
+  `reservoir_slack` summand `f5 = zone_v − reservoir_floor`, whose loose Hall floor
+  `(q−k)(q−k−C(k,2)−1)` is large at the root and melts to 0 with depth, releasing raw support into Ψ.
+  Capping it by the remaining move budget `(q+1)−k` (cap bound |S|≤q+1) cuts the debt ~10× (65/71/70 →
+  1/11/7 at q23/25/29); **dropping reservoir entirely — the pure conic ledger `6·defect − 4·intruders
+  − 2·[xor]` — gives debt 0** (its max never exceeds the root, where defect is maximal), verified to
+  ply 10 (q17/19) / ply 7 (q23–27) on the raw envelope (⇒ holds for any P-restricted defense). Caveats:
+  not a per-edge Lyapunov (ΔDROP jumps grow 8→34, but stay below root); a peak-bound is not yet a P
+  certificate. **Next (on-box, no gated solve):** prove `max reachable (6·defect − 4·intruders − 2·[xor])
+  ≤ 6·defect_root − 2` — a defect/intruder combinatorics lemma on the conic, no reservoir/no Hall — as
+  the concrete ply5-hold sublemma; the gated q23 solve is now only for full-depth DROP debt-0 + the P
+  certificate. Probes:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
-  [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md); modes
+  [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–7); modes
   `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:

@@ -7044,61 +7044,105 @@ struct LedgerSelector {
 // reports per-ply max Psi + the argmax first-intrusion cell.  It does NOT restrict to
 // P-reachable states, so per-ply max over all states is an UPPER bound on the reachable
 // peak past ply 5 -- exact at ply 5 (opponent moves freely), an over-estimate deeper.
+// Three reservoir accountings, all sharing the bounded terms 6*defect - 4*intruders - 2*[xor0]:
+//   orig : f5 + rest            (C63 Psi; f5 = zone_v - loose_floor, melts to zone_v at depth)
+//   cap  : min(f5, (q+1)-k) + rest   (credit the phantom: reservoir <= remaining move budget)
+//   drop : 0  + rest            (reservoir dropped entirely -- the pure conic/intruder ledger)
+// psi_variants returns (orig, cap, drop) for a full feature vector at ply k=occ.len().
+fn s4_psi_variants(fv: &[i64; 17], q: usize, k: usize) -> (i64, i64, i64) {
+    let rest = 6 * fv[7] - 4 * fv[12] - 2 * fv[1];
+    let f5 = fv[5];
+    let rem = ((q + 1) as i64 - k as i64).max(0);
+    (f5 + rest, f5.min(rem) + rest, rest)
+}
+
 fn solve_s4_spike(q: usize, t4: &[usize], depth: usize) {
     let b = Board::new(q);
     let (root_occ, root_chosen, root_forbidden, cells) = build_s4_root(&b, t4);
     let started = Instant::now();
-    let root_psi = s4_selector_features(&b, &root_occ, &root_chosen, &root_forbidden).psi as i64;
     let base = root_occ.len();
-    // per-ply: max psi, argmax first-intrusion cell (recorded at ply base+1)
-    let mut per_len_max = vec![i64::MIN; base + depth + 1];
-    let mut per_len_cnt = vec![0usize; base + depth + 1];
+    let root_fv = s4_potential_features(&b, &root_occ, &root_chosen, &root_forbidden, 0, 0);
+    let (root_orig, root_cap, root_drop) = s4_psi_variants(&root_fv, q, base);
+    // per-ply max for each of the 3 variants
+    let nlen = base + depth + 1;
+    let mut max_orig = vec![i64::MIN; nlen];
+    let mut max_cap = vec![i64::MIN; nlen];
+    let mut max_drop = vec![i64::MIN; nlen];
+    let mut per_len_cnt = vec![0usize; nlen];
     let mut best5_cell: Option<u16> = None;
     let mut seen: std::collections::HashSet<u128> = std::collections::HashSet::new();
-    // frontier holds (occ, chosen, forbidden)
     let mut frontier: Vec<(Vec<u16>, Mask, Mask)> = vec![(root_occ.clone(), root_chosen, root_forbidden)];
     seen.insert(b.canon(&root_occ));
-    per_len_max[base] = root_psi;
+    max_orig[base] = root_orig;
+    max_cap[base] = root_cap;
+    max_drop[base] = root_drop;
     per_len_cnt[base] = 1;
+    // per-EDGE max delta (child - parent) per variant; <=0 everywhere == monotone potential.
+    // Monotone on the raw envelope (all legal moves) => monotone on any P-restricted subset.
+    let (mut dmax_orig, mut dmax_cap, mut dmax_drop) = (i64::MIN, i64::MIN, i64::MIN);
     for _step in 0..depth {
         let mut next: Vec<(Vec<u16>, Mask, Mask)> = Vec::new();
         for (occ, chosen, forbidden) in &frontier {
+            let pfv = s4_potential_features(&b, occ, chosen, forbidden, 0, 0);
+            let (po, pc, pd) = s4_psi_variants(&pfv, q, occ.len());
             for z in avail_cells(&b, chosen, forbidden) {
                 let Some((cocc, cchosen, cforb)) = push_cell_state(&b, occ, chosen, forbidden, z as usize) else { continue };
+                let l = cocc.len();
+                let fv = s4_potential_features(&b, &cocc, &cchosen, &cforb, 0, 0);
+                let (o, c, d) = s4_psi_variants(&fv, q, l);
+                // edge deltas are over ALL legal moves (dedup would hide some edges)
+                dmax_orig = dmax_orig.max(o - po);
+                dmax_cap = dmax_cap.max(c - pc);
+                dmax_drop = dmax_drop.max(d - pd);
                 let key = b.canon(&cocc);
                 if !seen.insert(key) {
                     continue;
                 }
-                let l = cocc.len();
-                let f = s4_selector_features(&b, &cocc, &cchosen, &cforb);
-                if (f.psi as i64) > per_len_max[l] {
-                    per_len_max[l] = f.psi as i64;
+                if o > max_orig[l] {
+                    max_orig[l] = o;
                     if l == base + 1 {
                         best5_cell = Some(z);
                     }
                 }
+                max_cap[l] = max_cap[l].max(c);
+                max_drop[l] = max_drop[l].max(d);
                 per_len_cnt[l] += 1;
                 next.push((cocc, cchosen, cforb));
             }
         }
         frontier = next;
     }
-    let spike5 = per_len_max[base + 1];
-    let debt = (spike5 - root_psi).max(0);
+    // debt of a variant = max(0, max over ply>=base of maxVariant - rootVariant)
+    let debt_of = |mx: &[i64], root: i64| -> i64 {
+        let peak = mx.iter().copied().filter(|&v| v > i64::MIN).max().unwrap_or(root);
+        (peak - root).max(0)
+    };
     let cellstr = best5_cell
         .map(|z| format!("({},{})", z as usize / q, z as usize % q))
         .unwrap_or_else(|| "none".to_string());
     println!(
-        "S4SPIKE q={} t4={:?} cells={:?} psi_root={} ply5_max={} debt_ply5={} argmax_intrusion={}",
-        q, t4, cells, root_psi, spike5, debt, cellstr,
+        "S4SPIKE q={} t4={:?} cells={:?} argmax_intrusion={}",
+        q, t4, cells, cellstr,
     );
-    print!("  psi_max_by_ply:");
-    for l in base..=(base + depth) {
-        if per_len_cnt[l] > 0 {
-            print!(" {}:{}({})", l, per_len_max[l], per_len_cnt[l]);
+    println!(
+        "  ORIG root={} debt={}   CAP root={} debt={}   DROP root={} debt={}",
+        root_orig, debt_of(&max_orig, root_orig),
+        root_cap, debt_of(&max_cap, root_cap),
+        root_drop, debt_of(&max_drop, root_drop),
+    );
+    println!(
+        "  max_edge_delta (<=0 == monotone potential):  ORIG={}  CAP={}  DROP={}",
+        dmax_orig, dmax_cap, dmax_drop,
+    );
+    for (tag, mx) in [("orig", &max_orig), ("cap ", &max_cap), ("drop", &max_drop)] {
+        print!("  {}_max_by_ply:", tag);
+        for l in base..=(base + depth) {
+            if per_len_cnt[l] > 0 {
+                print!(" {}:{}", l, mx[l]);
+            }
         }
+        println!();
     }
-    println!();
     println!("S4SPIKE-DONE q={} elapsed={:.3}", q, started.elapsed().as_secs_f64());
 }
 
