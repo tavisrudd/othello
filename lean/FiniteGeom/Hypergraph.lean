@@ -120,6 +120,53 @@ theorem nu_le_tau (H : Finset (Finset V)) (hne : ∀ e ∈ H, e.Nonempty) :
     _ ≤ T.card := matching_card_le_transversal_card hM hT
     _ = sInf {n | ∃ T, IsTransversal H T ∧ T.card = n} := hTcard
 
+omit [Fintype V] in
+/-- **`p`-uniform transversal bound: `τ(H) ≤ p · ν(H)`** when every edge is nonempty with at
+most `p` vertices. This is the finite structural counterpart to the imported asymptotic
+`τ/ν → p` (plan §5 decision 3: the elementary bounds are *proved*, not axiomatized). Proof: the
+vertex set of a **maximum** matching `M` is a transversal — any edge meeting none of `M`'s edges
+would extend `M`, contradicting maximality — and it has at most `p` vertices per matched edge, so
+`τ ≤ |⋃M| ≤ p·|M| = p·ν`. -/
+theorem transversalNumber_le_mul_matchingNumber (H : Finset (Finset V)) (p : ℕ)
+    (hne : ∀ e ∈ H, e.Nonempty) (hp : ∀ e ∈ H, e.card ≤ p) :
+    transversalNumber H ≤ p * matchingNumber H := by
+  classical
+  have hAne : ({n | ∃ M, IsMatching H M ∧ M.card = n} : Set ℕ).Nonempty :=
+    ⟨0, ∅, ⟨empty_subset H, fun a ha => by simp at ha⟩, card_empty⟩
+  have hAbdd : BddAbove {n | ∃ M, IsMatching H M ∧ M.card = n} :=
+    ⟨H.card, fun n hn => by obtain ⟨M, hM, rfl⟩ := hn; exact card_le_card hM.1⟩
+  obtain ⟨M, hM, hMcard⟩ := Nat.sSup_mem hAne hAbdd
+  have hMν : matchingNumber H = M.card := by unfold matchingNumber; exact hMcard.symm
+  -- the vertex set of the maximum matching is a transversal.
+  have hT : IsTransversal H (M.biUnion id) := by
+    intro e he
+    by_contra hcon
+    rw [Finset.not_nonempty_iff_eq_empty] at hcon
+    have hdisjTe : Disjoint (M.biUnion id) e := Finset.disjoint_iff_inter_eq_empty.mpr hcon
+    have heM : e ∉ M := by
+      intro heM
+      obtain ⟨v, hv⟩ := hne e he
+      exact (Finset.disjoint_left.mp hdisjTe ((Finset.subset_biUnion_of_mem id heM) hv)) hv
+    have hM' : IsMatching H (insert e M) := by
+      refine ⟨Finset.insert_subset he hM.1, ?_⟩
+      intro a ha b hb hab
+      rw [Finset.mem_insert] at ha hb
+      rcases ha with rfl | ha <;> rcases hb with rfl | hb
+      · exact absurd rfl hab
+      · exact hdisjTe.symm.mono_right (Finset.subset_biUnion_of_mem id hb)
+      · exact (hdisjTe.symm.mono_right (Finset.subset_biUnion_of_mem id ha)).symm
+      · exact hM.2 ha hb hab
+    have hle := card_le_matchingNumber hM'
+    rw [hMν, Finset.card_insert_of_notMem heM] at hle
+    omega
+  calc transversalNumber H
+      ≤ (M.biUnion id).card := transversalNumber_le_card hT
+    _ ≤ ∑ _f ∈ M, p :=
+        le_trans Finset.card_biUnion_le
+          (Finset.sum_le_sum (fun f hf => by simp only [id_eq]; exact hp f (hM.1 hf)))
+    _ = M.card * p := by rw [Finset.sum_const, smul_eq_mul]
+    _ = p * matchingNumber H := by rw [hMν, Nat.mul_comm]
+
 /-- Concrete exercise of the whole API: the one-edge hypergraph `{{0,1}}` on
 `Fin 2` has `ν = τ = 1`. Drives `IsMatching` / `IsTransversal`, the definition
 pins (`card_le_matchingNumber`, `transversalNumber_le_card`), and `nu_le_tau`

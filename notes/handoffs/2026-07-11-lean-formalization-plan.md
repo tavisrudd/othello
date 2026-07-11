@@ -349,3 +349,16 @@ that discharges the transfer interface's finite fields from it:
   is still the remaining goal. `decide` used only on 3-edge/`Fin 3`-subset checks — no
   `native_decide`; axioms stay `[propext, Classical.choice, Quot.sound]`.
 - Build green, no warnings, all new results `#print axioms`-clean. Fifth commit this session.
+
+### Handoff Note — 2026-07-11 (cont.: p-uniform τ ≤ p·ν bound)
+
+- Landed `transversalNumber_le_mul_matchingNumber` in `Hypergraph.lean`: for a hypergraph whose
+  edges are nonempty with `≤ p` vertices, `τ(H) ≤ p·ν(H)`. This is one of the elementary bounds
+  §5 decision 3 marks **prove-don't-import** — the finite structural counterpart to the imported
+  Sauermann/Ellenberg–Gijswijt asymptotic `τ/ν → p` (the import supplies the matching lower bound;
+  this supplies the `p·ν` upper bound). Classic proof: the vertex set of a *maximum* matching is a
+  transversal (a missed edge would extend the matching, contradicting maximality) with `≤ p`
+  vertices per matched edge. Reuses the `ν`/`τ` attainment machinery already in the file.
+- With the `τ > ν` witness (strictness) and now `τ ≤ p·ν` (the uniform upper bound), the `ν`/`τ`
+  layer carries both the qualitative gap and the quantitative envelope the asymptotics need.
+- Build green, no warnings, axioms clean (`[propext, Classical.choice, Quot.sound]`). Sixth commit.
