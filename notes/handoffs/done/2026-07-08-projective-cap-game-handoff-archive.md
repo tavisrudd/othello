@@ -2508,5 +2508,12 @@ only the implicit S5 parallel classes and quotient-multiplicity spectrum makes i
 `192/192`. The q11 audit remains `24/24` (there the empty post-reply load pattern already selects).
 The construction is exact and field-label-free but has 182 forced contextual types, so it is a
 case-split coordinate system rather than a uniform scalar rule. q13 has no degree-one balanced-root
-obligations. A q19 all-root prerequisite scan was stopped after its terminal session failed to
-return; no q19 conclusion is claimed.
+obligations. The first q19 attempts exposed the real cost: `replygraphs` solves the entire empty
+game independent of the requested roots. Added a descendant-only mode that solves and memoizes only
+the requested S6 followers; it exactly reproduces q11/q17 full-solver profiles. The resulting
+exhaustive q19 audit covers all 85 balanced root orbits: none has a degree-one obligation, and their
+minimum winning degrees range from 43 to 55. At q13 all 12 balanced root orbits have minimum degree
+exactly 2. Hence forced replies track the depleted q11/q17 orders in the available corpus. A
+stabilizer audit rules out the obvious explanation: all minimum-degree q11/q13/q17 S5 states have
+trivial grid stabilizer, and q13 degrees are not uniformly even. A single targeted q23 root did not
+finish within three minutes and was stopped, so no q23 leaf claim is made.

@@ -37,6 +37,7 @@
 //                   replies / #P-replies that are symmetric (nontrivial stabilizer).
 //   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
 //   replygraphs q r,c ... / r,c ... -- solve once; exact reply-degree profiles for several roots.
+//   replygraphs-targeted q r,c ...   -- same profiles, solving only requested S6 descendants.
 //   fanmoves q r,c r,c r,c -- exact size-4 value + P-child table over one size-3 fan.
 //   s4 <q> t1,t2,t3,t4 [--cap <slots>]
 //                -- sizing probe for one normalized on-conic S4 root
@@ -9604,9 +9605,14 @@ fn solve_checkpos(q: usize, scells: &[(usize, usize)], bx: (usize, usize)) {
 
 // ---- REPLYGRAPHS mode: exact first-reply profiles for several roots, one full solve ----
 // replygraphs <q> r,c ... / r,c ... [/ ...] [--pairs]
+// replygraphs-targeted has the same syntax but solves only descendants of the requested S6 pairs.
 // Each group is one root.  Solving the empty game once makes q=17 profiling practical: CHECKPOS
-// otherwise repeats the same full solve independently for every break x.
-fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usize)>]) {
+// otherwise repeats the same full solve independently for every break x.  Descendant-only mode is
+// intended for larger q where the empty-board prefix dominates and only a few roots are requested.
+fn solve_replygraphs<const EMIT_PAIRS: bool, const TARGETED: bool>(
+    q: usize,
+    roots: &[Vec<(usize, usize)>],
+) {
     let b = Board::new(q);
     let mut s = Solver {
         b: &b,
@@ -9620,7 +9626,9 @@ fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usiz
     };
     let empty = [0u64; MAXW];
     let mut occ0: Vec<u16> = Vec::new();
-    s.g(&mut occ0, &empty, &empty);
+    if !TARGETED {
+        s.g(&mut occ0, &empty, &empty);
+    }
     for (root_index, scells) in roots.iter().enumerate() {
         let mut chosen = empty;
         let mut forb = empty;
@@ -9637,7 +9645,10 @@ fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usiz
             occ.push(z as u16);
         }
         let root_key = b.canon(&occ);
-        let root_n = *s.memo.get(&root_key).expect("full solve omitted root");
+        let root_n = s.memo.get(&root_key).copied();
+        if !TARGETED {
+            assert!(root_n.is_some(), "full solve omitted root");
+        }
         let mut avail = [0u64; MAXW];
         for i in 0..MAXW {
             avail[i] = b.all[i] & !chosen[i] & !forb[i];
@@ -9675,15 +9686,21 @@ fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usiz
                         let mut occ_u = occ_t.clone();
                         occ_u.push(y as u16);
                         let key = b.canon(&occ_u);
-                        let pair_is_p = !*s.memo.get(&key).expect("full solve omitted grandchild");
-                        if EMIT_PAIRS {
-                            let mut chosen_u = chosen_t;
+                        let mut chosen_u = chosen_t;
+                        let mut forb_u = forb_t;
+                        if TARGETED || EMIT_PAIRS {
                             set_bit(&mut chosen_u, y);
-                            let mut forb_u = forb_t;
                             mask_or(&mut forb_u, &b.rc_mask[y]);
                             for &o in occ_t.iter() {
                                 mask_or(&mut forb_u, &b.line_mask[o as usize * b.n + y]);
                             }
+                        }
+                        let pair_is_p = if TARGETED {
+                            !s.g(&mut occ_u, &chosen_u, &forb_u)
+                        } else {
+                            !*s.memo.get(&key).expect("full solve omitted grandchild")
+                        };
+                        if EMIT_PAIRS {
                             let residual_live: usize = (0..MAXW)
                                 .map(|i| (b.all[i] & !chosen_u[i] & !forb_u[i]).count_ones() as usize)
                                 .sum();
@@ -9719,7 +9736,7 @@ fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usiz
             "REPLYGRAPHS q={} root={:?} value={} vertices={} legal-edges={} winning-edges={} losing-edges={} winning-degrees={:?} losing-degrees={:?}",
             q,
             scells,
-            if root_n { "N" } else { "P" },
+            root_n.map_or("?", |is_n| if is_n { "N" } else { "P" }),
             vertices,
             directed_legal / 2,
             directed_winning / 2,
@@ -11968,8 +11985,9 @@ fn main() {
         solve_checkpos(q, &cells, bx.expect("break cell after /"));
         return;
     }
-    if args[1] == "replygraphs" {
-        // replygraphs <q> r,c ... / r,c ... [/ ...] [--pairs]
+    if args[1] == "replygraphs" || args[1] == "replygraphs-targeted" {
+        // replygraphs[-targeted] <q> r,c ... / r,c ... [/ ...] [--pairs]
+        let targeted = args[1] == "replygraphs-targeted";
         let q: usize = args[2].parse().expect("q must be an integer");
         let mut roots: Vec<Vec<(usize, usize)>> = vec![Vec::new()];
         let mut emit_pairs = false;
@@ -11987,10 +12005,14 @@ fn main() {
             roots.last_mut().unwrap().push((r.parse().unwrap(), c.parse().unwrap()));
         }
         assert!(!roots.last().unwrap().is_empty(), "empty final root group");
-        if emit_pairs {
-            solve_replygraphs::<true>(q, &roots);
+        if emit_pairs && targeted {
+            solve_replygraphs::<true, true>(q, &roots);
+        } else if emit_pairs {
+            solve_replygraphs::<true, false>(q, &roots);
+        } else if targeted {
+            solve_replygraphs::<false, true>(q, &roots);
         } else {
-            solve_replygraphs::<false>(q, &roots);
+            solve_replygraphs::<false, false>(q, &roots);
         }
         return;
     }

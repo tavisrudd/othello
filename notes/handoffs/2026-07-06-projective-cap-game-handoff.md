@@ -716,6 +716,10 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   parallel/quotient spectrum this is locally unique and globally P-pure `192/192` (q11 `24/24`).
   It is still contextual (182 forced types), so the proof-shaped residue is an algebraic incidence
   case split rather than a static selector table.
+  A descendant-only exact solver closes the scope through q19: all q13 balanced orbits have minimum
+  winning degree 2 and all 85 q19 orbits have minimum 43–55, so leaves occur only at depleted
+  q11/q17. For any P root minimum degree is automatically at least one; forced replies are exactly
+  equality cases in that bound.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

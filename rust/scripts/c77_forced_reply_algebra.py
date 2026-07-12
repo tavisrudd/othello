@@ -117,6 +117,37 @@ def base_parallelism_incidence(q, s5):
         left * pow(right, -1, q) % q
         for left in finite_nonzero for right in finite_nonzero if left != right
     )
+
+
+def apply_grid_transform(q, transform, point):
+    swap, a, b, d, e = transform
+    r, c = point
+    if swap:
+        r, c = c, r
+    return ((a * r + b) % q, (d * c + e) % q)
+
+
+def grid_stabilizer(q, points):
+    """Full independent-affine/swap stabilizer of a labelled-grid cap set."""
+    target = set(points)
+    target_rows = [point[0] for point in points]
+    target_cols = [point[1] for point in points]
+    stabilizer = set()
+    for swap in (False, True):
+        source = tuple((c, r) if swap else (r, c) for r, c in points)
+        p0, p1 = source[:2]
+        row_den_inv = pow((p1[0] - p0[0]) % q, -1, q)
+        col_den_inv = pow((p1[1] - p0[1]) % q, -1, q)
+        for row0, row1 in permutations(target_rows, 2):
+            a = (row1 - row0) * row_den_inv % q
+            b = (row0 - a * p0[0]) % q
+            for col0, col1 in permutations(target_cols, 2):
+                d = (col1 - col0) * col_den_inv % q
+                e = (col0 - d * p0[1]) % q
+                transform = (swap, a, b, d, e)
+                if {apply_grid_transform(q, transform, point) for point in points} == target:
+                    stabilizer.add(transform)
+    return tuple(stabilizer)
     quotient_profile = tuple(sorted(Counter(quotient_counts.values()).items()))
     return (
         tuple(sorted(tuple(edges) for edges in by_direction.values())),
@@ -730,6 +761,8 @@ def main():
     ap.add_argument("--mirrors", action="store_true")
     ap.add_argument("--controls", action="store_true")
     ap.add_argument("--all-roots", action="store_true")
+    ap.add_argument("--coarse-representatives", action="store_true")
+    ap.add_argument("--targeted", action="store_true")
     ap.add_argument("--reduced-only", action="store_true")
     ap.add_argument("--no-subset-search", action="store_true")
     ap.add_argument("--collision-details", action="store_true")
@@ -750,13 +783,27 @@ def main():
     ap.add_argument("--relative-congruence", action="store_true")
     ap.add_argument("--transition-ledger", action="store_true")
     ap.add_argument("--transition-controls", action="store_true")
+    ap.add_argument("--minimum-reply-symmetry", action="store_true")
     args = ap.parse_args()
     q = args.q
-    if q != 17 and not args.all_roots:
-        ap.error("--q other than 17 requires --all-roots")
+    if q != 17 and not (args.all_roots or args.coarse_representatives):
+        ap.error("--q other than 17 requires --all-roots or --coarse-representatives")
     roots = tuple(canon for canon, _hist in mirror_run(q, root_orbits=True)) \
-        if args.all_roots else ROOTS
-    command = [args.solver, "replygraphs", str(q)]
+        if (args.all_roots or args.coarse_representatives) else ROOTS
+    if not roots:
+        print(f"BALANCED-ROOTS-NONE q={q}")
+        return
+    if args.coarse_representatives:
+        by_coarse_signature = {}
+        for root in roots:
+            by_coarse_signature.setdefault(residual_signature(q, root), root)
+        roots = tuple(by_coarse_signature.values())
+        print(f"COARSE-REPRESENTATIVES q={q} roots={len(roots)}")
+    command = [
+        args.solver,
+        "replygraphs-targeted" if args.targeted else "replygraphs",
+        str(q),
+    ]
     for i, root in enumerate(roots):
         if i:
             command.append("/")
@@ -765,11 +812,49 @@ def main():
         command.append("--pairs")
     output = subprocess.run(command, check=True, text=True, capture_output=True).stdout
     records = parse_forced(output)
+    if args.minimum_reply_symmetry:
+        if not args.controls:
+            ap.error("--minimum-reply-symmetry requires --controls")
+        by_move_values = {}
+        for root_index, move, reply, value, _live in parse_pairs(output):
+            by_move_values.setdefault((root_index, move), []).append((reply, value))
+        winning_counts = {
+            key: sum(value == "P" for _reply, value in rows)
+            for key, rows in by_move_values.items()
+        }
+        minimum = min(winning_counts.values())
+        minimum_rows = [key for key, count in winning_counts.items() if count == minimum]
+        paired = 0
+        trivial_stabilizers = 0
+        for root_index, move in minimum_rows:
+            winners = [
+                reply for reply, value in by_move_values[(root_index, move)] if value == "P"
+            ]
+            s5 = roots[root_index] + (move,)
+            stabilizer = grid_stabilizer(q, s5)
+            trivial_stabilizers += len(stabilizer) == 1
+            if len(winners) == 2 and any(
+                    apply_grid_transform(q, transform, winners[0]) == winners[1]
+                    for transform in stabilizer):
+                paired += 1
+        print("MINIMUM-REPLY-SYMMETRY "
+              f"q={q} minimum={minimum} states={len(minimum_rows)} "
+              f"paired={paired} trivial-stabilizers={trivial_stabilizers}")
     if q == 17:
         expected_forced_roots = 20 if args.all_roots else 5
         assert len(records) == expected_forced_roots, records
-    else:
-        assert records, f"q={q} has no degree-one balanced-root obligations"
+    elif not records:
+        if args.details:
+            print(output, end="")
+        minimum_degrees = [
+            int(match.group(1))
+            for match in re.finditer(r"winning-degrees=\{(\d+):", output)
+        ]
+        assert len(minimum_degrees) == len(roots), (len(minimum_degrees), len(roots))
+        print(f"FORCED-NONE q={q} roots={len(roots)} "
+              f"minimum-winning-degree={min(minimum_degrees)} "
+              f"maximum-of-minimum={max(minimum_degrees)}")
+        return
     root_indices = {root: i for i, root in enumerate(roots)}
     filter_redei_fn = relative_redei_simple_signature if args.relative_redei_simple else (
         relative_redei_signature if args.relative_redei_residual else (

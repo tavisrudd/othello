@@ -120,6 +120,12 @@ the game-semantic residue with C74's explicit pencil.
   sole twin. With the implicit S5 parallel/quotient spectrum prepended, this is locally unique and
   globally P-pure `192/192` (q11 `24/24`). It remains a contextual separation certificate with 182
   forced types, so the proof target is an algebraic incidence case split, not a static dictionary.
+  The exact leaf scope is now closed through q19: every q13 balanced-root orbit has minimum winning
+  degree 2, while all 85 q19 orbits have minimum 43–55; only depleted q11/q17 contain degree-one
+  obligations. A P root always gives minimum degree at least 1, so forced obligations are precisely
+  equality cases (leaves) in this automatic reply-existence bound. All minimum-degree q11/q13/q17
+  S5 states have trivial grid stabilizer, and q13 degrees can be odd, excluding symmetry and parity
+  as explanations for the nondepleted degree-two upgrade.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
