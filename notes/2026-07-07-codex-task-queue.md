@@ -56,8 +56,10 @@ the game-semantic residue with C74's explicit pencil.
   q11/q17 hard triples noncommuting); a five-ray quadratic-character core is locally exact but has
   no extremal selector; maximum-pencil moment/character quotients either collide or become a fully
   marked fingerprint. The positive structural model is the q17 score-9 packet: four primitive
-  split/nonsplit candidates, exactly one clean/P repair in all 28 transitions. Continue with
-  algebraic clean-packet existence plus descent, not arithmetic P/N classification. Report:
+  split/nonsplit candidates, with the unique maximum-zone-edge candidate clean/P in all 28
+  transitions. Its zone is one 9-vertex graph; `ProjectiveCap.PrimitiveZoneBase` now Lean-checks its
+  Grundy-zero value. The rule fails below score 9, so continue with algebraic packet existence plus
+  a new generic descent, not arithmetic P/N classification. Report:
   [`2026-07-11-c79-number-theoretic-forcing.md`](2026-07-11-c79-number-theoretic-forcing.md).
 
 - **C76 [REPORTED 2026-07-11 — invariant prong answered]** —

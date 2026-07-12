@@ -724,8 +724,9 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   by noncommuting q11/q17 repair triples, and character/Jacobi pencil classifiers still hit the
   fingerprint wall. The live arithmetic target is instead a counted algebraic packet with a
   structural P certificate: at q17 score 9, every transition has four primitive split/nonsplit
-  candidates and exactly one clean/P repair. Generalize that packet-plus-descent shape; use
-  Frobenius/subfield descent for the characteristic-5/7 branches.
+  candidates and the unique maximum-edge zone is clean/P. That zone is one 9-vertex graph whose
+  Grundy-zero value is now Lean-checked. The rule fails below score 9; generalize the packet-plus-
+  descent shape with a new generic packet, and use Frobenius/subfield descent for characteristic 5/7.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

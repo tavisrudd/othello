@@ -250,6 +250,21 @@ and P; it covers 1,333 of 2,353 intruder transitions.  Thus maximal cyclic actio
 structural base certificate and a plausible character/primitive-element counting target, but not
 the all-q descent law.
 
+The score-9 packet now has a complete two-stage form.  All four primitive candidates are internal
+and all four kill the last live conic parameter, so tangency and conic killing do not choose the
+guard.  Their nine-vertex zone edge counts are `0,1,13,23` on 24 rows and `0,9,15,23` on four rows.
+The unique maximum-edge candidate is the unique clean/P reply in all 28 transitions.  Its zone is
+always one exact graph isomorphism type: 9 vertices, 23 edges, degree sequence
+`(3,4,4,4,5,5,7,7,7)`, 21 triangles, canonical adjacency code `64399145184`.  The graph has only 20
+reachable Node-Kayles live sets.  `ProjectiveCap.PrimitiveZoneBase` contains a reflected Grundy book
+and proves its Grundy value is zero with kernel `decide`; the Lean target builds with only the
+standard `propext`, `Classical.choice`, and `Quot.sound` axioms.
+
+This rule does not extend by simple fallback.  Maximum zone edges over all intruder candidates is P
+on only 18/59 score-7 and 32/68 score-8 transitions; full-order/edge and numeric-order/edge
+lexicographic rules are no better.  The primitive maximum-edge theorem is therefore a finished
+finite q17 base lemma, not the generic descent.
+
 ### Maximum-pencil arithmetic: classifier route closed
 
 On each C74 pencil, tested normalized ratios `b/a`, Rédei-polynomial coefficient characters,
@@ -314,4 +329,6 @@ python3 scripts/c77_forced_reply_algebra.py --q 17 \
 python3 scripts/c79_primitive_repair.py --q 13 --high 0
 python3 scripts/c79_primitive_repair.py --q 17 --high 7
 python3 scripts/c79_pencil_arithmetic.py 11 13 17 19
+cd ../lean
+choom -n 1000 -- nix develop --command lake build ProjectiveCap.PrimitiveZoneBase
 ```

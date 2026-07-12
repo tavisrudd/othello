@@ -2537,3 +2537,13 @@ packet is only partial at scores 7/8. At q13, whenever an order `q-1`, `q`, or `
 candidate exists, every such candidate is clean/P, but the packet does not exist on all transitions.
 The final-proof target is now an arithmetic strategy matching: bounded algebraic repair packet,
 number-theoretic nonemptiness, structural P/descent lemma, then finite small-q and subfield bases.
+
+## 2026-07-11 C79 continuation (Codex) — primitive zone base Lean-checked
+
+Refined the q17 score-9 packet. All four primitive candidates are internal and kill the last conic
+point; the unique clean/P candidate is instead the unique maximum-edge nine-vertex zone (23 edges,
+versus `0,1,13` or `0,9,15` for the decoys). All 28 clean zones are one exact graph isomorphism
+type with degree sequence `(3,4,4,4,5,5,7,7,7)` and 21 triangles. A 20-row reflected Grundy book in
+`ProjectiveCap.PrimitiveZoneBase` proves this graph has Node-Kayles Grundy zero using kernel
+`decide`; the Lean build passes with only standard axioms. Max-edge/full-order combinations fail on
+most score-7/8 transitions, so this is a closed finite q17 base lemma rather than the generic descent.
