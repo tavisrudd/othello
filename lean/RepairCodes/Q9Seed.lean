@@ -1,5 +1,6 @@
 import RepairCodes.CodeInstance
 import FiniteGeom.MomentCurve
+import FiniteGeom.ColumnCode
 import Mathlib.FieldTheory.Finite.GaloisField
 import Mathlib.LinearAlgebra.Matrix.ToLin
 
@@ -29,10 +30,11 @@ the generator rows are independent, yielding an explicit encoder equivalence
 `𝔽₉⁴ ≃ₗ[𝔽₉] C₀`.  Consequently `blockFunctional_eq_zero_iff` discharges coefficient
 faithfulness for this actual code without trace coordinates.
 
-This file also proves the exact dual distance `d(C₀⊥)=4`: every sub-four column family is
-independent, while the columns at `0,1,-1` and `e₂` form a weight-four circuit. Still open here
-are `d(C₀)=6`, the complete repair hypergraph, and the Chen–Ling–Xing assertion that the vector
-of block functionals is outer-dual. The latter remains an explicit hypothesis of
+This file proves the full `[10,4,6]₉` parameters and exact dual distance `d(C₀⊥)=4`.
+Every sub-four column family is independent, while the columns at `0,1,-1` and `e₂` form a
+weight-four circuit. The primal distance comes from the maximum four-point hyperplane section,
+attained by `T³-T`. Still open here are the complete repair hypergraph and the Chen–Ling–Xing
+assertion that the vector of block functionals is outer-dual. The latter remains a hypothesis of
 `transfer_ofInnerCodeFunctional`; it is the sole imported boundary of the blockwise transfer step.
 -/
 
@@ -73,6 +75,29 @@ noncomputable def q9SeedGenerator : Matrix (Fin 4) (Fin 10) GF9 :=
 /-- The concrete inner code `C₀`, not a toy model. -/
 noncomputable def q9InnerCode : Submodule GF9 (Fin 10 → GF9) :=
   rowCode q9SeedGenerator
+
+/-- Evaluating the point system against a message is right multiplication by the generator
+matrix. The apparent order reversal in the dot product disappears over the commutative field. -/
+theorem q9PointEval_eq_encoder (a : Fin 4 → GF9) :
+    pointEval q9SeedColumn a = q9SeedGenerator.vecMulLinear a := by
+  funext j
+  simp only [pointEval, Matrix.vecMulLinear_apply, Matrix.vecMul, dotProduct, q9SeedGenerator]
+  apply Finset.sum_congr rfl
+  intro i _
+  exact mul_comm _ _
+
+/-- The row-space presentation used by `RepairCodes` is the same code as the projective-system
+`columnCode` presentation used by the hyperplane-section distance bridge. -/
+theorem q9InnerCode_eq_columnCode : q9InnerCode = columnCode q9SeedColumn := by
+  have hrow : q9InnerCode = LinearMap.range q9SeedGenerator.vecMulLinear := by
+    change Submodule.span GF9 (Set.range q9SeedGenerator.row) =
+      LinearMap.range q9SeedGenerator.vecMulLinear
+    exact (range_vecMulLinear q9SeedGenerator).symm
+  have hmap : q9SeedGenerator.vecMulLinear = (Matrix.of q9SeedColumn).mulVecLin := by
+    apply LinearMap.ext
+    intro a
+    exact (q9PointEval_eq_encoder a).symm.trans (pointEval_eq_mulVecLin _ _)
+  rw [hrow, columnCode, hmap]
 
 /-- Embed the first four finite-coordinate positions into the ten seed coordinates. -/
 def q9FirstFour (j : Fin 4) : Fin 10 := ⟨j, by omega⟩
@@ -243,6 +268,46 @@ theorem q9SeedColumn_finiteIndex (t : GF9) :
   funext i
   simp [q9SeedColumn, q9FiniteIndex]
 
+/-- Every hyperplane meets the ten-point seed system in at most four points: at most three of the
+nine finite twisted-cubic points, plus the distinguished axis point. -/
+theorem q9Seed_sectionCount_le (a : Fin 4 → GF9) (ha : a ≠ 0) :
+    sectionCount q9SeedColumn a ≤ 4 := by
+  let Z : Finset (Fin 10) := univ.filter fun j => q9SeedColumn j ⬝ᵥ a = 0
+  let Zf : Finset (Fin 10) := Z.erase q9Axis
+  let R : Finset (Fin 9) := univ.filter fun j => momentCurve 4 (gf9ParamEquiv j) ⬝ᵥ a = 0
+  have hR : R.card ≤ 3 := by
+    simpa only [R] using
+      (momentCurve_section_le (n := 4) (m := 9) ha gf9ParamEquiv.injective)
+  have hZfR : Zf.card ≤ R.card := by
+    let f : Zf → R := fun j => by
+      have hjZ : (j : Fin 10) ∈ Z := (Finset.mem_erase.mp j.property).2
+      have hjne : (j : Fin 10) ≠ q9Axis := (Finset.mem_erase.mp j.property).1
+      have hjlt : ((j : Fin 10) : ℕ) < 9 := by
+        have hjne9 : ((j : Fin 10) : ℕ) ≠ 9 := by
+          intro h
+          apply hjne
+          exact Fin.ext h
+        omega
+      refine ⟨⟨(j : Fin 10), hjlt⟩, ?_⟩
+      have hz : q9SeedColumn (j : Fin 10) ⬝ᵥ a = 0 := by simpa [Z] using hjZ
+      simpa [R, q9SeedColumn, hjlt] using hz
+    have hf : Function.Injective f := by
+      intro i j hij
+      apply Subtype.ext
+      apply Fin.ext
+      exact congrArg (fun x : R => (((x : Fin 9) : ℕ))) hij
+    have hc := Fintype.card_le_of_injective f hf
+    simpa only [Fintype.card_coe] using hc
+  have hZZf : Z.card ≤ Zf.card + 1 := by
+    dsimp only [Zf]
+    by_cases hax : q9Axis ∈ Z
+    · rw [Finset.card_erase_of_mem hax]
+      omega
+    · rw [Finset.erase_eq_of_notMem hax]
+      omega
+  change Z.card ≤ 4
+  omega
+
 /-- The four columns at parameters `0,1,-1` together with the axis column sum to zero.  This is
 the characteristic-three circuit underlying the distinguished coordinate's locality three. -/
 theorem q9Seed_four_column_relation :
@@ -341,6 +406,76 @@ theorem q9InnerCode_finrank : Module.finrank GF9 q9InnerCode = 4 := by
   have h := LinearEquiv.finrank_eq q9SeedEncoder
   rw [Module.finrank_pi, Fintype.card_fin] at h
   omega
+
+/-- Coefficient vector of `T³-T`; its hyperplane contains the three finite points
+`t=0,1,-1` and the axis point `e₂`. -/
+def q9DistanceForm : Fin 4 → GF9 := ![0, -1, 0, 1]
+
+theorem q9DistanceForm_ne_zero : q9DistanceForm ≠ 0 := by
+  intro h
+  have hi : (1 : GF9) = 0 := by
+    calc
+      1 = q9DistanceForm (3 : Fin 4) := rfl
+      _ = 0 := congrFun h (3 : Fin 4)
+  exact one_ne_zero hi
+
+theorem q9DistanceForm_pointEval_ne_zero : pointEval q9SeedColumn q9DistanceForm ≠ 0 := by
+  intro h
+  have henc : q9SeedGenerator.vecMulLinear q9DistanceForm = 0 := by
+    rw [← q9PointEval_eq_encoder]
+    exact h
+  apply q9DistanceForm_ne_zero
+  apply q9SeedEncoder_injective
+  simpa using henc
+
+/-- The `T³-T` hyperplane attains the maximum four-point section. -/
+theorem q9DistanceForm_sectionCount : sectionCount q9SeedColumn q9DistanceForm = 4 := by
+  have hsub : q9DualWitnessSupport ⊆
+      (univ.filter fun j => q9SeedColumn j ⬝ᵥ q9DistanceForm = 0) := by
+    intro j hj
+    simp only [q9DualWitnessSupport, Finset.mem_insert, Finset.mem_singleton] at hj
+    rcases hj with h | h | h | h
+    · subst j
+      simp [q9DistanceForm, dotProduct, momentCurve, Fin.sum_univ_four]
+    · subst j
+      simp [q9DistanceForm, dotProduct, momentCurve, Fin.sum_univ_four]
+    · subst j
+      simp [q9DistanceForm, dotProduct, momentCurve, Fin.sum_univ_four]
+      ring
+    · subst j
+      norm_num [q9SeedColumn, q9Axis, q9DistanceForm, dotProduct, Fin.sum_univ_four]
+      rfl
+  have hlo : 4 ≤ sectionCount q9SeedColumn q9DistanceForm := by
+    calc
+      4 = q9DualWitnessSupport.card := q9DualWitnessSupport_card.symm
+      _ ≤ (univ.filter fun j => q9SeedColumn j ⬝ᵥ q9DistanceForm = 0).card :=
+        Finset.card_le_card hsub
+      _ = sectionCount q9SeedColumn q9DistanceForm := rfl
+  have hhi := q9Seed_sectionCount_le q9DistanceForm q9DistanceForm_ne_zero
+  omega
+
+/-- **Exact primal distance of the q=9 inner seed:** `d(C₀)=6`.  The maximum hyperplane section
+has four of the ten generator points, so the projective-system distance bridge gives `10-4=6`. -/
+theorem q9InnerCode_minDist : minDist q9InnerCode = 6 := by
+  rw [q9InnerCode_eq_columnCode]
+  have hsec : ∀ a, pointEval q9SeedColumn a ≠ 0 → sectionCount q9SeedColumn a ≤ 4 := by
+    intro a ha
+    apply q9Seed_sectionCount_le a
+    intro ha0
+    apply ha
+    subst a
+    funext j
+    simp [pointEval]
+  have h := columnCode_minDist_eq q9DistanceForm_pointEval_ne_zero
+    q9DistanceForm_sectionCount hsec
+  norm_num at h ⊢
+  exact h
+
+/-- The concrete seed has the advertised `[10,4,6]₉` parameters and dual distance four. -/
+theorem q9InnerCode_parameters :
+    Module.finrank GF9 q9InnerCode = 4 ∧ minDist q9InnerCode = 6 ∧
+      dualDist q9InnerCode = 4 :=
+  ⟨q9InnerCode_finrank, q9InnerCode_minDist, q9InnerCode_dualDist⟩
 
 /-- The bounded-weight transfer lemma instantiated with the actual `𝔽₉` inner seed and its
 encoder.  Coefficient faithfulness is no longer a hypothesis: the only structural input is the

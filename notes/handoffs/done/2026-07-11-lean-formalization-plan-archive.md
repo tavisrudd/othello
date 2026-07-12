@@ -319,3 +319,24 @@ that discharges the transfer interface's finite fields from it:
   `#print axioms` on the two shared lemmas, the small-column theorem, witness membership, exact
   dual distance, and specialized transfer theorem returned exactly
   `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (q=9 exact primal distance)
+
+- Identified the two concrete presentations of the seed:
+  `q9InnerCode_eq_columnCode : rowCode q9SeedGenerator = columnCode q9SeedColumn`.
+  The bridge is the transpose identity between right multiplication by the generator and point
+  evaluation against its columns, proved as `q9PointEval_eq_encoder`.
+- Proved `q9Seed_sectionCount_le`: every hyperplane meets the ten generator points in at most
+  four positions. Removing `e₂`, the remaining zero positions inject into the zero set of a
+  nonzero degree-at-most-three polynomial on the nine distinct `𝔽₉` parameters, bounded by
+  `momentCurve_section_le`; the axis contributes at most one further point.
+- Defined `q9DistanceForm = (0,-1,0,1)`, the coefficient vector of `T³-T`. Its point evaluation
+  is nonzero by injectivity of the seed encoder, and its section contains the three finite points
+  `0,1,-1` plus `e₂`. The universal upper bound makes this an exact four-point maximum section.
+- Applied `columnCode_minDist_eq` to obtain `q9InnerCode_minDist : d(C₀)=10-4=6` and packaged
+  the final statement as `q9InnerCode_parameters`: dimension four, minimum distance six, dual
+  distance four. The real inner seed is now fully `[10,4,6]₉`; only the imported outer-dual
+  decomposition remains for the intended concatenation transfer theorem.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on the presentation bridge, section upper/attainment theorems, exact minimum
+  distance, and parameter package returned exactly `[propext, Classical.choice, Quot.sound]`.
