@@ -2,6 +2,7 @@ import CapGame.BuildGame
 import CapGame.Affine
 import CapGame.Mirror
 import ProjectiveCap.Projective
+import ProjectiveCap.CompleteCapLowerBound
 import ProjectiveCap.Mirror
 import ProjectiveCap.EllipticMirror
 import ProjectiveCap.HyperbolicQuadricMirror

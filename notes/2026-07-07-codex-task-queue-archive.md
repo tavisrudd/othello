@@ -3280,3 +3280,13 @@ At q11, none of the 32 balanced roots admits a root-safe involution from the ful
 automorphism group (including coordinate swap). Fixed-point-free alone gives N-root false positives
 whose response pairs are illegal. Balanced P-purity therefore cannot be a fixed affine mirror
 strategy; continue with adaptive/non-affine replies or a decomposition theorem.
+
+## 2026-07-11 C78 — `PG(4,5)` complete-cap quick deliverable
+
+Formalized the universal finite pair-cover counting kernel and its 781-point/four-per-secant
+consequence `t₂(4,5) ≥ 21`; mathlib's projectivization cardinality theorem checks that `PG(4,5)` has
+781 points. Added a 13-word exact `PGL(5,5)` orbit probe. It reproduces the independent Python
+counts through size 5 and closes size 6, giving `[1,1,1,1,2,4,10]`; no complete-cap orbit occurs in
+the expanded layers. A wall-safe size-7 run stops at 120.023 s, locating the immediate bottleneck in
+exact frame canonicalization rather than board representation or early orbit count. Full report:
+`notes/2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`.

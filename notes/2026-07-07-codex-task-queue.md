@@ -126,10 +126,6 @@ the game-semantic residue with C74's explicit pencil.
 
 **Independent / engineering:**
 
-- **C78 [OPEN]** — `PG(4,5)` complete-cap quick deliverable: formalize the universal secant-cover
-  lower bound and its `t₂(4,5) ≥ 21` specialization; add a bounded wide-bitset `PGL(5,5)` orbit-growth
-  probe and report measured early-layer sizing. Report:
-  [`2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`](2026-07-11-c78-pg45-complete-cap-quick-deliverable.md).
 - **C30 [REPORTED 2026-07-10 — certcheck PASS; open engineering tail]** — generated-checker refactor →
   q17/q19 Lean assembly. The v5 full q17 canonical build projects above 21.5 h sequential, tripping the
   task's ~10 h user-launch gate; do not launch implicitly. Next = an explicit launch decision or a
@@ -145,6 +141,11 @@ the game-semantic residue with C74's explicit pencil.
 
 **Reported this pass:**
 
+- **C78 [REPORTED 2026-07-11]** — Lean-checked the universal pair/secant-cover bound and the
+  `PG(4,5)` numerical consequence `t₂(4,5) ≥ 21`; the exact wide-bitset `PGL(5,5)` census has orbit
+  curve `[1,1,1,1,2,4,10]` through size 6, while a wall-safe size-7 run cuts off at 120.023 s.
+  Representation is solved for the probe; exact canonicalization is the measured next lever.
+  Report: [`2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`](2026-07-11-c78-pg45-complete-cap-quick-deliverable.md).
 - **C76 [REPORTED 2026-07-11]** — frame-relative characters cut the C75 collisions 48→1 but leave a
   residual hard twin and no uniform selector (linear LP infeasible); invariant prong answered, ledger
   is the surviving lever. Report:
