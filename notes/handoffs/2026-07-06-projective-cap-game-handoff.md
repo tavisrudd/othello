@@ -448,15 +448,24 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C84 — conic-involution Schreier catalogue (PRIMARY, 2026-07-12).** The conic bulk is the
-  induced Schreier graph of `H_S = ⟨σ_x⟩ ≤ PGL(2,q)`; its Node-Kayles value is set by the subgroup
-  type. Proven + independently verified (field geometry, q=11–19): two-centre full decomposition;
-  self-polar `V₄`→`K₄`s; `D₈`→`M₈⊔K₂`; `S₄` four-class mod-8 table; orbit-template theorem; `A₄`
-  excluded. The escape crux (size-3 → size-4) is `H_S` on ≤3 involutions — this small-subgroup
-  regime. Open levers: the `D₁₂/D₁₆/A₅` rows; the **`Schreier + (ON)`** synthesis (conic-only value
-  = full value iff (ON)); and the gating measurement — classify the escape-crux states by `H_S`.
-  Notes: [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
-  [program integration](../2026-07-12-conic-involution-residual-graphs.md).
+- **C84 — conic-involution Schreier catalogue → abundance-first (PRIMARY, 2026-07-12).** The conic
+  bulk is the induced Schreier graph of `H_S = ⟨σ_x⟩ ≤ PGL(2,q)`; its Node-Kayles value is set by
+  the subgroup type. Proven + independently verified (field geometry, q=11–19): two-centre full
+  decomposition; self-polar `V₄`→`K₄`s; `D₈`→`M₈⊔K₂`; `S₄` classes; orbit-template theorem; `A₄`
+  excluded. **Gating measurement done:** the escape crux (size-3 → size-4) leaves the small-subgroup
+  regime immediately (V₄/D₈ have no subgroup-preserving 4th move; S₄ admits ≤3 but no legal 5th), so
+  the children are generic (full PSL/PGL) — the catalogue is a **boundary evaluator, not a forcing
+  engine**. **Reprioritized to abundance-first** (Codex+Claude, 2026-07-12): S₄-rooted escaping 4th
+  centres are conic-only-P at density `≈0.13` (min over classes, q=11–23, verified two ways; q=7 the
+  lone dip, no dip at depleted {11,17}); the target is a provable `#{y : 𝒢=0} ≥ c·q²`. **Pairing/mirror
+  mechanism ruled out** (fpf-involution residual automorphism covers only a minority) — the bound
+  must be Grundy-arithmetic. Ranking: (1) prove positive-density P (S₄ then all triple types);
+  (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
+  complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) drain minimax
+  fallback. Corrections folded: order 24 ≠ S₄ (D₂₄ occurs at `12|q²−1`, separate by element-order
+  profile). Notes: [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
+  [program integration](../2026-07-12-conic-involution-residual-graphs.md); scripts
+  `s4_escape_probe.py`, `s4_abundance_check.py`, `pairing_witness.py`.
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —

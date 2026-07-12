@@ -15,18 +15,22 @@ still require an explicit user gate.
 
 ## CURRENT TOP OF QUEUE (updated 2026-07-12)
 
-**PRIMARY LANE (2026-07-12): conic-involution Schreier graphs — C84.** The conic bulk is the
-induced Schreier graph of `H_S = ⟨σ_x : x∈S⟩ ≤ PGL(2,q)`, so its Node-Kayles value is set by the
-subgroup type of `H_S`. This gives exact values: two centres fully soluble (paths + uniform
-`2r`-cycles); self-polar `V₄` → `K₄`-unions; `D₈` → `M₈ ⊔ K₂`; `S₄` four-class table — all
+**PRIMARY LANE (2026-07-12): conic-involution Schreier graphs → abundance-first — C84.** The conic
+bulk is the induced Schreier graph of `H_S = ⟨σ_x : x∈S⟩ ≤ PGL(2,q)`, so its Node-Kayles value is
+set by the subgroup type of `H_S`. Exact values: two centres fully soluble (paths + uniform
+`2r`-cycles); self-polar `V₄` → `K₄`-unions; `D₈` → `M₈ ⊔ K₂`; `S₄` classes — all
 congruence-periodic via the orbit-template theorem; `A₄` cannot occur. Independently verified from
-field geometry at q=11–19 (`c80_schreier_verify.py`, `12/12` on the S₄ mod-8 flip). The odd-plane
-escape crux is size-3 → size-4, i.e. `H_S` on ≤3 involutions — exactly this small-subgroup regime.
-**Pursue first.** Notes:
+field geometry at q=11–19. **Gating measurement done:** the escape crux (size-3 → size-4) leaves
+the small-subgroup regime immediately (children generic, full PSL/PGL) — the catalogue is a
+**boundary evaluator, not a forcing engine**. **Reprioritized to abundance-first:** S₄-rooted
+escaping 4th centres are conic-only-P at density `≈0.13` (min over classes, q=11–23; verified two
+ways); target `#{y : 𝒢=0} ≥ c·q²`. Pairing/mirror mechanism ruled out (minority coverage) ⇒ the
+bound must be Grundy-arithmetic. **Pursue first.** Notes:
 [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
-[program integration](2026-07-12-conic-involution-residual-graphs.md). Open levers: the
-`D₁₂/D₁₆/A₅` catalogue rows; **`Schreier + (ON)`** synthesis (conic-only value = full value iff
-(ON)); and the gating measurement — classify the actual escape-crux states by `H_S`.
+[program integration](2026-07-12-conic-involution-residual-graphs.md). Ranking: (1) prove
+positive-density P (S₄ then all triple types); (2) transfer to (ON) — needs a separate exchange
+lemma (abundance is off-conic); (3) sealing = complete-arc/saturating-set, not blocking-set/Baer;
+(4) drain minimax fallback. Correction: order 24 ≠ S₄ (D₂₄ at `12|q²−1`, separate by profile).
 
 The odd-plane escape kernel — "every legal size-3 residual position has a P-valued size-4 child" —
 is the active mathematics; (ON), requiring that child on the conic, is the stronger A5 route. The
@@ -67,18 +71,26 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C84 [ACTIVE 2026-07-12 — PRIMARY] — conic-involution Schreier catalogue.** Bulk = induced
-  Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified: two-centre
-  full decomposition; `V₄`→`K₄`s (Cor 3.2 mod-8); `D₈`→`M₈⊔K₂` (Thm 4.2 mod-8); `S₄` four-class
-  table; orbit-template theorem; `A₄` excluded. Independent field-geometry verification `12/12`
-  on the S₄ flip at q=11–19. **Open:** (1) `D₁₂/D₁₆/A₅` catalogue rows via the orbit-template
-  theorem; (2) the **`Schreier + (ON)`** synthesis — conic-only Grundy = full escape value iff
-  (ON); (3) **gating measurement** — classify the actual escape-crux (size-3 residual) states by
-  `H_S` (what fraction dihedral/small-polyhedral vs generic); pairs with C80(a); (4) the minimax
-  potential tracking live vertices + live coloured edges (§5 drain bound → C80(b)). Notes:
+- **C84 [ACTIVE 2026-07-12 — PRIMARY, abundance-first] — conic-involution Schreier catalogue.**
+  Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:
+  two-centre full decomposition; `V₄`→`K₄`s (Cor 3.2 mod-8); `D₈`→`M₈⊔K₂` (Thm 4.2 mod-8); `S₄`
+  classes; orbit-template theorem; `A₄` excluded. Independent field-geometry verification at
+  q=11–19. **Gating measurement done:** escape crux (size-3 → size-4) leaves the small-subgroup
+  regime immediately — children generic (full PSL/PGL), so the catalogue is a boundary evaluator,
+  not a forcing engine. **Open (reprioritized):** (1) **prove positive-density P** — S₄-rooted
+  escaping 4th centres are conic-only-P at density `≈0.13` (min over classes, q=11–23, verified two
+  ways; q=7 lone dip; no dip at depleted {11,17}); target `#{y : 𝒢=0} ≥ c·q²`; pairing/mirror
+  mechanism ruled out (fpf-involution residual auto covers only a minority) ⇒ the bound must be
+  Grundy-arithmetic (decomposition + Weil/character-sum equidistribution the live candidate); then
+  uniform over all triple types; (2) **transfer to (ON)** — abundance is off-conic conic-only-P, so
+  an exchange/transfer lemma is required to get an on-conic P child; (3) **sealing** =
+  complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) minimax potential
+  tracking live vertices + live coloured edges (§5 drain bound → C80(b)). Correction: order 24 ≠ S₄
+  (D₂₄ occurs at `12|q²−1`, separate by element-order profile). Notes:
   [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
   [program integration](2026-07-12-conic-involution-residual-graphs.md); scripts
-  `c80_schreier_verify.py` (field), `three_centre_probe.py`, `schreier_templates.py`.
+  `c80_schreier_verify.py` (field), `s4_escape_probe.py`, `s4_abundance_check.py`,
+  `pairing_witness.py`, `three_centre_probe.py`, `schreier_templates.py`.
 
 - **C79 [REPORTED 2026-07-12 — arithmetic coordinates + bulk-gap spec delivered; continuation →
   C80/C81/C82]** — number-theoretic forcing architecture for the full odd-q

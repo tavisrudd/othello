@@ -1,225 +1,354 @@
 # Conic-involution Schreier graphs
 
-**Date:** 2026-07-12
-**Scope:** odd prime powers unless restricted to primes; characteristic ≠ 2, 3 for the
-polyhedral rows (char 3 action is wild).
+**Date:** 2026-07-12  
+**Status:** downstream replacement for the overclaimed “linear-involution drain lemma”  
+**Scope:** odd prime powers unless explicitly restricted to primes
 
-Full mathematical writeup of the conic bulk as a Schreier graph. Program integration and the
-odd-plane-escape framing (drain resource, `Schreier + (ON)` synthesis, escape-crux use) are in
-the companion [conic-involution residual graphs](2026-07-12-conic-involution-residual-graphs.md);
-the bisimulation-quotient measurement is [C83](2026-07-12-c83-bisimulation-quotient.md).
+## 1. Result worth keeping
 
-Independent verification: every value theorem below (V₄, D₈, and the S₄ four-class table) is
-reproduced at q = 11, 13, 17, 19 by `rust/scripts/c80_schreier_verify.py`, which builds the
-residual from this repo's `PrimeGridGame` field geometry — a different conic normalization,
-sigma derivation, and centre domain from the standalone enumerator. See §6.
+The useful object behind the conic bulk is a Schreier graph, not a new drain lemma.
 
-## 1. The object
+Let
 
-Let `C = {[t²:t:1] : t ∈ F_q} ∪ {[1:0:0]}` be the conic `XZ = Y²`, identified with `P¹(q)`. An
-off-conic point `x = [a:b:c]` induces the projection involution
-```
-σ_x(t) = (bt − a)/(ct − b),   A_x = [[b, −a],[c, −b]],   A_x² = (b² − ac) I,
-```
-so `σ_x` is a non-identity involution exactly when `x ∉ C`. For selected centres `S`, the
-coloured multigraph with edges `t — σ_x(t)` (`x ∈ S`) is the Schreier multigraph of
-`H_S = ⟨σ_x : x ∈ S⟩ ≤ PGL(2,q)` on `P¹(q)`. The live conic graph is the simple induced graph
-after removing the saturated set — conic points on a line through two selected centres:
-```
-D(S) = ⋃_{{x,y}⊂S} Fix(σ_x σ_y).
-```
-(`σ_x σ_y(t) = t ⟺ σ_x(t) = σ_y(t) ⟺ x,y both lie on line `t·partner` or on the tangent at
-`t` ⟺ `t ∈ xy`.) Conic-only play is Node-Kayles on
-`Sch(H_S, P¹(q), {σ_x})[P¹(q) \ D(S)]` (loops removed, coincident coloured edges merged).
+\[
+C=\{[t^2:t:1]:t\in\mathbf F_q\}\cup\{[1:0:0]\}
+\]
+
+be the conic \(XZ=Y^2\), identified with \(\mathbf P^1(q)\). An off-conic point
+\(x=[a:b:c]\) induces the projection involution
+
+\[
+\sigma_x(t)=\frac{bt-a}{ct-b},\qquad
+A_x=\begin{pmatrix}b&-a\\c&-b\end{pmatrix}.
+\]
+
+Here the formula has its usual projective interpretation at poles and infinity. Since
+
+\[
+A_x^2=(b^2-ac)I,
+\]
+
+\(\sigma_x\) is a nonidentity involution exactly when \(x\notin C\).
+
+For selected centres \(S\), the coloured multigraph with edges
+\(t\mathbin{-}\sigma_x(t)\), \(x\in S\), is the Schreier multigraph of
+
+\[
+H_S=\langle \sigma_x:x\in S\rangle\leq PGL(2,q)
+\]
+
+on \(\mathbf P^1(q)\). The actual live conic graph is the simple induced graph left after
+removing the conic points lying on lines containing two selected centres. Conic-only play
+is Node Kayles on this induced Schreier graph.
+
+There is an exact group-theoretic description of the initial saturated set:
+
+\[
+D(S)=\bigcup_{\{x,y\}\subset S}\operatorname{Fix}(\sigma_x\sigma_y).
+\]
+
+Indeed, \(\sigma_x\sigma_y(t)=t\) exactly when
+\(\sigma_x(t)=\sigma_y(t)\). This says either that \(x,y\) lie on the secant joining
+\(t\) to their common partner, or that they both lie on the tangent at \(t\). In either
+case \(t\in xy\), and the converse is immediate. Thus the residual graph can be written
+compactly as
+
+\[
+\operatorname{Sch}\!\left(H_S,\mathbf P^1(q),\{\sigma_x:x\in S\}\right)
+\left[\mathbf P^1(q)\setminus D(S)\right],
+\]
+
+with loops removed and coincident coloured edges merged.
+
+This reframing supplies two nontrivial exact results: a complete two-centre decomposition
+and a three-centre Klein-four family with closed-form P/N values.
 
 ## 2. Two centres: uniform alternating components
 
-Let `x ≠ y`, `g = σ_x σ_y`, `r = |g|`.
+Let \(x\ne y\), put \(g=\sigma_x\sigma_y\), and let \(r=|g|\). Before saturated points
+are removed, the union of the two involution matchings has maximum degree two. Its
+components are paths, alternating cycles, isolated fixed points, and possibly one doubled
+edge.
 
-**Theorem 2.1.** After removing the conic points on line `xy`: (1) the residual two-colour
-graph is simple; (2) it has at most two path components; (3) every cycle has length `2r`.
+### Theorem 2.1
 
-*Proof.* `C ∩ xy` is a common fixed point of `σ_x, σ_y` (tangent) or the endpoints of their
-unique shared edge (secant) — the saturated degeneracies. Each remaining component has degree
-≤2 and is properly two-edge-coloured; path endpoints are fixed points of one involution, and
-each involution has ≤2 fixed points, so ≤4 endpoints and ≤2 paths. Two successive coloured
-edges apply `g` or `g⁻¹`, and every orbit of a non-identity element of `PGL(2,q)` has length
-`|g|` (split/unipotent/nonsplit normal forms), so cycles have length `2r`. ∎
+After removing the conic points on the line \(xy\):
 
-**Corollary 2.2.** With `P_n` = Node-Kayles path Grundy (`P_m = 0` for `m ≤ 0`),
-`P_n = mex_{1≤i≤n}{P_{i−2} ⊕ P_{n−i−1}}`, and `C_n = mex{P_{n−3}} = 1` if `P_{n−3}=0` else 0.
-The two-centre residual value is the xor of ≤2 path values and the parity of the identical
-`2r`-cycles — no bulk search.
+1. the residual two-colour graph is simple;
+2. it has at most two path components;
+3. every cycle has the same length \(2r\).
 
-## 3. Self-polar triangles: only K₄'s
+#### Proof
 
-The conic polarity has form `B(x,y) = af + cd − 2be`, and `tr(A_x A_y) = −B(x,y)`; since
-`A_x A_y + A_y A_x = tr(A_x A_y) I` for traceless 2×2 matrices, polar-conjugate centres give
-projectively commuting involutions.
+A point of \(C\cap xy\) is either a common fixed point of \(\sigma_x,\sigma_y\), when
+\(xy\) is tangent, or one endpoint of their unique shared edge, when \(xy\) is secant.
+These are precisely the degeneracies removed by saturation.
 
-**Theorem 3.1.** If `x,y,z` form a self-polar triangle then `{1,σ_x,σ_y,σ_z} ≅ V₄` with
-`σ_x σ_y = σ_z`. If exactly `s` of the three involutions are split, the saturated set has size
-`2s` and the live conic graph is `((q+1−2s)/4) · K₄`, so `𝒢 = (q+1−2s)/4 (mod 2)`.
+Every remaining component has degree at most two and is properly two-edge-coloured. Its
+path endpoints must be fixed points of one of the two involutions. Each involution has at
+most two fixed points, so there are at most four endpoints and hence at most two paths.
 
-*Proof.* Pairwise polarity gives `tr(A_x A_y)=0` ⇒ commuting involutions ⇒ Klein four. Side
-`xy` is the polar of `z`, meeting `C` in `Fix(σ_z)`, so saturation removes all three
-involutions' fixed points (pairwise disjoint in odd char). `V₄` acts freely on the rest, every
-orbit has 4 points, and the three involutions give the three perfect matchings of `K₄`. A move
-in `K₄` deletes the whole component, so `𝒢(K₄)=1` and disjoint sums are parity. ∎
+Following two successive coloured edges applies \(g\) or \(g^{-1}\). Apart from the fixed
+points already removed, every orbit of a nonidentity element of \(PGL(2,q)\) has length
+\(|g|\): this is immediate in the split, unipotent, and nonsplit normal forms. An
+alternating cycle therefore has length \(2r\). ∎
 
-**Corollary 3.2** (mod-8 P condition for the self-polar family):
+### Corollary 2.2: exact conic-only value
 
-| q mod 4 | s | #K₄ | P exactly when |
+Let \(P_n\) be the Node-Kayles Grundy value of a path on \(n\) vertices, with \(P_m=0\)
+for \(m\leq0\). Then
+
+\[
+P_n=\operatorname{mex}_{1\leq i\leq n}
+\left\{P_{i-2}\mathbin{\oplus}P_{n-i-1}\right\}.
+\]
+
+For a cycle on \(n\) vertices,
+
+\[
+C_n=\operatorname{mex}\{P_{n-3}\}
+=
+\begin{cases}
+1,&P_{n-3}=0,\\
+0,&P_{n-3}\ne0.
+\end{cases}
+\]
+
+Consequently the complete two-centre residual value is the xor of at most two path values
+and the parity contribution of the identical \(2r\)-cycles. No bulk search is needed.
+
+## 3. Three centres: self-polar triangles give only \(K_4\)'s
+
+The conic polarity has bilinear form
+
+\[
+B(x,y)=a f+c d-2be
+\]
+
+for \(x=[a:b:c]\) and \(y=[d:e:f]\). Direct calculation gives
+
+\[
+\operatorname{tr}(A_xA_y)=-B(x,y).
+\]
+
+For traceless \(2\times2\) matrices,
+
+\[
+A_xA_y+A_yA_x=\operatorname{tr}(A_xA_y)I.
+\]
+
+Thus polar-conjugate centres give projectively commuting involutions.
+
+### Theorem 3.1
+
+Suppose \(x,y,z\) form a self-polar triangle: each vertex is the pole of the opposite
+side. Then
+
+\[
+\{1,\sigma_x,\sigma_y,\sigma_z\}\cong V_4,
+\qquad
+\sigma_x\sigma_y=\sigma_z
+\]
+
+after relabelling. If exactly \(s\) of these three involutions are split, the saturated
+set on the conic has size \(2s\), and the live conic graph is
+
+\[
+\frac{q+1-2s}{4}K_4.
+\]
+
+Its Grundy value is therefore
+
+\[
+\mathcal G=\frac{q+1-2s}{4}\pmod 2.
+\]
+
+#### Proof
+
+Pairwise polarity gives \(\operatorname{tr}(A_xA_y)=0\), so the corresponding
+involutions commute projectively. Their products give the third nonidentity element of a
+Klein four group.
+
+The side \(xy\) is the polar of \(z\). Its intersections with \(C\) are exactly the fixed
+points of \(\sigma_z\), and similarly cyclically. Hence saturation removes the fixed
+points of all three involutions. In odd characteristic their fixed-point sets are pairwise
+disjoint. The Klein four action on the remaining points is free, so every orbit has four
+points. On such an orbit, the three involutions supply the three perfect matchings of
+\(K_4\). Finally, a move in \(K_4\) deletes the whole component, so \(\mathcal G(K_4)=1\)
+and disjoint sums reduce to parity. ∎
+
+### Corollary 3.2: explicit P families
+
+The possible values of \(s\) and the conic-only P condition are:
+
+| \(q\bmod4\) | \(s\) | number of \(K_4\)'s | P exactly when |
 |---|---:|---:|---|
-| 1 | 1 | (q−1)/4 | q ≡ 1 (mod 8) |
-| 1 | 3 | (q−5)/4 | q ≡ 5 (mod 8) |
-| 3 | 0 | (q+1)/4 | q ≡ 7 (mod 8) |
-| 3 | 2 | (q−3)/4 | q ≡ 3 (mod 8) |
+| 1 | 1 | \((q-1)/4\) | \(q\equiv1\pmod8\) |
+| 1 | 3 | \((q-5)/4\) | \(q\equiv5\pmod8\) |
+| 3 | 0 | \((q+1)/4\) | \(q\equiv7\pmod8\) |
+| 3 | 2 | \((q-3)/4\) | \(q\equiv3\pmod8\) |
 
-Orthogonal-basis counting: `|PGL(2,q)|/24` self-polar triangles of the `s ∈ {0,3}` type,
-`|PGL(2,q)|/8` of the other — large explicit families, not coincidences. (Conic-only value
-only; off-conic continuations can change the full-position value.)
+Orthogonal-basis counting gives \(|PGL(2,q)|/24\) self-polar triangles of the \(s=0\)
+or \(s=3\) type, and \(|PGL(2,q)|/8\) of the other type. Thus these are large, explicit
+families of reachable residual positions, not isolated coincidences.
 
-## 4. Subgroup classification
+This is an exact value theorem only for the conic-only residual. Additional legal
+off-conic moves can change the value of the full cap-game position.
+
+## 4. General triples: subgroup classification is the next lever
 
 For three centres the pre-saturation graph is the Schreier graph of a three-involution
-subgroup of `PGL(2,q)`; use the finite-subgroup classification, not arbitrary subcubic graphs.
-Exhaustive prime-`q` profiles `(h,m):n` (`n` subgroups of order `h`, each from `m` legal
-triples):
+subgroup of \(PGL(2,q)\). This suggests using the finite-subgroup classification of
+\(PGL(2,q)\), rather than treating the residual as an arbitrary subcubic graph.
 
-| q | profiles (h,m):n |
+For prime \(q\), exhaustive enumeration gives the following generated-subgroup profiles.
+An entry \((h,m):n\) means that \(n\) distinct subgroups of order \(h\) occur, and each is
+generated by \(m\) legal unordered centre triples.
+
+| \(q\) | profiles \((h,m):n\) |
 |---:|---|
-| 3 | (4,1):4, (8,4):3, (24,52):1 |
-| 5 | (4,1):20, (8,4):15, (12,12):10, (24,52):5, (60,380):1, (120,1140):1 |
-| 7 | (4,1):56, (8,4):42, (12,12):28, (16,16):21, (24,52):14, (168,392):1, (336,14392):1 |
+| 3 | \((4,1):4\), \((8,4):3\), \((24,52):1\) |
+| 5 | \((4,1):20\), \((8,4):15\), \((12,12):10\), \((24,52):5\), \((60,380):1\), \((120,1140):1\) |
+| 7 | \((4,1):56\), \((8,4):42\), \((12,12):28\), \((16,16):21\), \((24,52):14\), \((168,392):1\), \((336,14392):1\) |
 
-**A₄ cannot occur** as `H_S`: all its involutions lie in its normal `V₄`, so three conic
-involutions in `A₄` generate only that `V₄`. The order-12 subgroups that occur are dihedral
-`D₁₂`.
+These orders are exactly the expected small dihedral/polyhedral subgroups and the large
+\(PSL/PGL\) cases. The self-polar theorem is the order-four row. The next tractable rows
+are dihedral groups, then \(A_4\) and \(S_4\); their Schreier orbits should yield a finite
+catalogue of residual component types and exact Grundy reductions.
 
-**Theorem 4.1** (order eight). A legal triple generating `H ≅ D₈` has residual conic graph
-`a·M₈ ⊔ b·K₂` (`M₈` = 8-vertex Möbius ladder), so `𝒢 = a + b (mod 2)`.
+**Order-24 caveat (\(q\ge 11\)).** The table stops at \(q=7\), where \(12\nmid q^2-1\) and the
+only order-24 subgroup is \(S_4\). For \(q\ge 11\) the order-24 row is **not** a single type: the
+dihedral \(D_{24}\) also occurs whenever \(12\mid q^2-1\) (so at \(q=11,13,\dots\)), and *order 24
+alone does not identify \(S_4\)*. Separate the two by element-order profile — \(S_4\) is
+\(\{1{:}1,2{:}9,3{:}8,4{:}6\}\), \(D_{24}\) is \(\{1{:}1,2{:}13,3{:}2,4{:}2,6{:}2,12{:}4\}\). The
+\(S_4\)-rooted escape catalogue (`s4_escape_probe.py`, `s4_abundance_check.py`) applies this
+profile guard, so its abundance rows are genuine-\(S_4\) (verified q=7–23).
 
-*Proof.* `D₈ = ⟨r,s : r⁴=s²=1, srs=r⁻¹⟩`; its involutions are `r²` and the four reflections.
-Three reflection matrices are projectively collinear (illegal triple), so a legal generating
-triple is `{r², s, rs}` up to automorphism. On a free orbit its Schreier graph is
-`Cay(D₈, {r², s, rs}) = M₈`; a non-free orbit's stabilizer is a cyclic 2-subgroup and, after
-deleting `Fix` of the three pairwise products `r²s, r³s, r`, leaves one edge. `M₈` is
-vertex-transitive and deleting `N[v]` leaves `P₄` (`𝒢(P₄)=0`), so `𝒢(M₈)=1=𝒢(K₂)`. ∎
+### Theorem 4.1: the order-eight row is also parity
 
-**Theorem 4.2** (order-eight arithmetic — proven via split/nonsplit torus normal forms; the
-mod-8 table follows from the square classes of `i` and `2` plus orbit counting):
+Suppose a legal centre triple generates \(H\cong D_8\). Its residual conic graph has the
+form
 
-| q mod 8 | (a, b, \|D\|) |
+\[
+aM_8\;\sqcup\;bK_2,
+\]
+
+where \(M_8\) is the 8-vertex Möbius ladder. Consequently
+
+\[
+\mathcal G=a+b\pmod2.
+\]
+
+#### Proof sketch
+
+Write \(D_8=\langle r,s:r^4=s^2=1,\ srs=r^{-1}\rangle\). The involutions are the
+central element \(r^2\) and the four reflections. Three reflection matrices lie in the
+same projective line in the traceless-matrix model, so they are not a legal centre triple.
+Hence, up to an automorphism of \(D_8\), a legal generating triple is
+
+\[
+\{r^2,s,rs\}.
+\]
+
+On every free orbit its Schreier graph is the Cayley graph
+\(\operatorname{Cay}(D_8,\{r^2,s,rs\})\), which is \(M_8\). For a nonfree orbit, an
+odd-characteristic point stabilizer contributes a cyclic 2-subgroup. The fixed points of
+the three pairwise products \(r^2s,r^3s,r\) are deleted by saturation. The only surviving
+part of a nonfree orbit is therefore one edge.
+
+The Möbius ladder is vertex-transitive, and deleting the closed neighbourhood of any
+vertex leaves \(P_4\). Since \(\mathcal G(P_4)=0\),
+\(\mathcal G(M_8)=1\); also \(\mathcal G(K_2)=1\). The disjoint sum is their xor. ∎
+
+The remaining arithmetic appears to have the following exact form.
+
+### Conjecture 4.2: arithmetic profile of the order-eight row
+
+| \(q\bmod8\) | possible \((a,b,|D|)\) |
 |---:|---|
-| 1 | ((q−1)/8, 0, 2) or ((q−9)/8, 2, 6) |
-| 3 | ((q−3)/8, 1, 2) |
-| 5 | ((q−5)/8, 1, 4) |
-| 7 | ((q+1)/8, 0, 0) or ((q−7)/8, 2, 4) |
+| 1 | \(((q-1)/8,0,2)\) or \(((q-9)/8,2,6)\) |
+| 3 | \(((q-3)/8,1,2)\) |
+| 5 | \(((q-5)/8,1,4)\) |
+| 7 | \(((q+1)/8,0,0)\) or \(((q-7)/8,2,4)\) |
 
-**S₄** (tame, char ≠ 2,3): four conjugacy classes of generating triples, indexed by the
-pairwise product orders, with conic-only Grundy:
+This has been exhaustively verified for prime \(q\leq17\). It should follow by sorting the
+order-four rotation and the two reflection products by split type, then applying
+orbit-stabilizer. Proving the table would turn Theorem 4.1 into an explicit P/N criterion
+for every odd prime power.
 
-| class | pair orders | Grundy value |
-|---|---|---|
-| A | 3,3,3 | 1 iff q ≡ 1,3 (mod 8) |
-| B | 3,4,4 | 1 iff q ≡ 1,3 (mod 8) |
-| C | 2,3,3 | 2 iff q ≡ 3,5 (mod 8) |
-| D | 2,3,4 | 1 iff q ≡ 1,3 (mod 8) |
+The unrestricted triple family becomes complicated quickly, but it is not behaving like a
+generic subcubic graph. Full enumeration gives:
 
-otherwise 0. The striking point: every **generic** 24-point `S₄` orbit has Grundy 0; only the
-exceptional octahedral orbits `S₄/C₄, S₄/C₃, S₄/C₂` contribute.
+| \(q\) | legal triples | P residuals | largest observed Grundy value |
+|---:|---:|---:|---:|
+| 3 | 68 | 3 | 1 |
+| 5 | 1,980 | 625 | 3 |
+| 7 | 16,408 | 6,258 | 4 |
+| 11 | 265,980 | 109,175 | 5 |
 
-**Orbit-template theorem** (unifies V₄, D₈, S₄; gives the route to `D₁₂, D₁₆, A₅`):
-```
-𝒢(R_T(Ω)) = ⊕_{[K]} (m_K mod 2) · 𝒢(R(H,K,T)),
-```
-reducing every fixed-subgroup position to a finite table indexed by point-stabilizer classes.
-For tame `PGL₂` subgroups the stabilizers are cyclic, so values across finite fields are
-congruence-periodic.
+These are counts of labelled centre triples, not graph isomorphism classes.
 
-Full labelled-triple enumeration (not iso classes): q=3 → 68 legal / 3 P / max 𝒢 1; q=5 → 1980
-/ 625 / 3; q=7 → 16408 / 6258 / 4; q=11 → 265980 / 109175 / 5. Generic triples generate all of
-`PGL(2,q)` (max Grundy grows), so this is not a full-game solution — the exact families are the
-small-subgroup rows.
+## 5. A strengthened drain bound
 
-## 5. Strengthened drain bound
+The exact closed-neighbourhood deletion identity is generic Node Kayles. The useful
+geometric quantitative statement is instead an edge lower bound.
 
-The closed-neighbourhood deletion identity is generic Node-Kayles; the geometric quantitative
-content is an edge lower bound. With `k` centres, `d` unavailable conic points `D`, and `f_x ≤ 2`
-fixed points of `σ_x` (matching size `(q+1−f_x)/2`), and distinct colours never sharing a live
-edge:
-```
-|E(G[C \ D])| ≥ Σ_{x∈S} max(0, (q+1−f_x)/2 − d),
-```
-so a live move exists with drain ≥ `1 + ⌈ (2/(q+1−d)) Σ_x max(0, (q+1−f_x)/2 − d) ⌉`. This is
-existence, not minimax; a viable potential must track live vertices **and** live coloured edges.
+Let \(S\) contain \(k\) selected centres, let \(D\subset C\) be the \(d\) unavailable
+conic points, and let \(f_x\leq2\) be the number of fixed points of \(\sigma_x\). The full
+matching of \(x\) has \((q+1-f_x)/2\) edges. Deleting \(d\) vertices destroys at most
+\(d\) of those edges. Since distinct colours cannot share a live edge,
 
-## 6. Independent verification (field geometry)
+\[
+|E(G[C\setminus D])|
+\geq
+\sum_{x\in S}
+\max\left(0,\frac{q+1-f_x}{2}-d\right).
+\]
 
-`rust/scripts/c80_schreier_verify.py` classifies `PrimeGridGame` off-conic centre-triples by
-`H_S`, builds the residual (remove `D(S)`, keep isolated live vertices), and computes
-per-component Node-Kayles Grundy — independent of the abstract-group template and the standalone
-`XZ=Y²` enumerator. Results:
+Hence a live conic move exists with drain at least
 
-- **V₄** (order 4): components are `K₄` (n4e6); Grundy = `#K₄` parity, matching Cor 3.2 at
-  q = 11, 13, 17, 19.
-- **D₈** (order 8): components `M₈`(n8e12) ⊔ `K₂`; matches Thm 4.2 including the q≡1 **mixed**
-  branch (both `(2,0,2)` Grundy-0 and `(1,2,6)` Grundy-1 present at q=17).
-- **S₄** (order 24): the four classes reproduce the §4 table **12/12** across q ≡ 1,3,5 — in
-  particular the flip A,B,D: 1 (q≡1,3) → 0 (q≡5,7), confirmed at q=13 vs q=11/17/19.
-- order-12 rows are `D₁₂` (mixed Grundy), consistent with A₄ excluded.
+\[
+1+\left\lceil
+\frac{2}{q+1-d}
+\sum_{x\in S}
+\max\left(0,\frac{q+1-f_x}{2}-d\right)
+\right\rceil.
+\]
 
-Nothing disagrees.
+This is still an existence bound, not a minimax theorem. A viable next potential should
+track both live vertices and live coloured edges so that an opponent cannot erase the
+average-degree gain cheaply.
 
-## 7. Escape and sealing: the catalogue evaluates boundaries, not a forcing engine
+## 6. Concrete next programme
 
-The small-subgroup families cannot be **maintained**. A `k`-centre state has
-`≥ q² − C(k,2)(q−1) − ι(H)` legal moves escaping `H`, so sealing needs `k ≳ √(2q)`. Concretely
-(verified, `rust/scripts/c84_escape_probe.py`, q=11,13,17): among the involution-centres of `H`,
-the maximum cap is **3 for V₄, 3 for D₈, 4 for S₄** (with **39** four-caps, no five-cap), so a
-`V₄`/`D₈` triple has **no** subgroup-preserving fourth move and an `S₄` triple survives **at most
-one**. (The order-24 row also contains dihedral `D₂₄` — 13 involutions, max-cap 3 — likewise
-unsustainable.) A rooted non-collinear triple has `≥ q(q−3)/24` inequivalent fourth-centre
-extensions under ambient conjugacy, so there is **no finite, field-independent conjugacy
-quotient**, and subgroup + deleted-point count + pair-product orders **fail** to determine the
-resulting nimber — the escaping state genuinely carries **two parameters**. Empirically escaping
-an `S₄` state jumps straight to the full `PSL/PGL` with varied conic-only values.
+1. **Larger dihedral triples.** Extend Theorem 4.1 to orders \(12,16,\ldots\), and express
+   their values through a finite family of Cayley components and truncated nonfree orbits.
+2. **Polyhedral triples.** Catalogue the \(A_4,S_4,A_5\) actions on \(\mathbf P^1(q)\),
+   including which saturated deletions occur and whether the remaining components have a
+   bounded set of rooted types.
+3. **Trace classifier.** Index triples by the scaling-invariant pair data
+   \(\operatorname{tr}(A_xA_y)^2/(\det A_x\det A_y)\) and the corresponding triple
+   invariant. Determine whether these invariants predict subgroup type and residual
+   Grundy value.
+4. **Minimax potential.** Combine live-vertex count with the coloured-edge lower bound;
+   test whether a player can force entry into one of the exact small-subgroup families.
+5. **Only then return to RSA/MDS analogies.** Neither presently contributes to the game
+   theorem.
 
-So the catalogue is an **exact boundary/leaf evaluator**, not a "force play into and keep it in a
-small subgroup" mechanism (that route is dead). This converges with the program's other negatives
-(C75 feature-completeness, C76 no-uniform-selector, C83 growing bisimulation quotient): the full
-escape value has no bounded static description. The escape must instead be closed by **abundance +
-(ON)** (count that a bounded-condition packet of the `≥ q²−O(kq)` escaping children is entirely
-winning — no selector; conic-only value = full value under (ON)) or by the **`Θ(√q)` sealing**
-argument, whose `q+√q+1` scale is the blocking-set / Baer threshold and may bridge to the A5
-arc-depletion lane (`{11,17}`). See companion [program integration](2026-07-12-conic-involution-residual-graphs.md).
+## 7. Reproduction
 
-### Remaining small-subgroup bookkeeping (de-prioritized)
-
-`D₁₂, D₁₆, A₅` rows via the orbit-template theorem, and the trace classifier
-`tr(A_x A_y)²/(det A_x det A_y)`, complete the boundary catalogue but are not the mechanism.
-RSA/MDS analogies contribute nothing to the game theorem.
-
-## 8. Reproduction and references
+The accompanying `three_centre_probe.py` works over odd prime fields. It enumerates legal
+centre triples, constructs the saturated residual graph, computes its Node-Kayles Grundy
+value, and optionally enumerates generated subgroups.
 
 ```bash
-# field-geometry cross-check (this repo)
-python3 scripts/c80_schreier_verify.py 11 13
-python3 scripts/c80_schreier_verify.py 13 17 19 --full-max 13 --sample 80000
-# escape / sealing negative results
-python3 scripts/c84_escape_probe.py 11 13 17          # max-cap 3/3/4; V4,D8 no 4th move; S4 <=1
-cd scripts && python3 s4_escape_probe.py 13           # internal 3,1,2,3; all escapes -> |PGL|; ambiguous>0
-# standalone enumerator + abstract subgroup templates
-python3 scripts/three_centre_probe.py 3 5 7 11
-python3 scripts/three_centre_probe.py --group-orders 3 5 7
-python3 scripts/schreier_templates.py 3 5 7 11 13 17 --s4
+python3 -m py_compile three_centre_probe.py
+python3 three_centre_probe.py 3 5 7 11
+python3 three_centre_probe.py --group-orders 3 5 7
 ```
 
-Prior art: Huggan–Huntemann–Stevens, *Nofil on Steiner Triple Systems*
-(arXiv:2103.13501) — the general Nofil → Node-Kayles reduction. Kobayashi, *On Structural
-Parameterizations of Node Kayles* (arXiv:2003.11775) — tractability targets for the residual
-graphs. A targeted search found no direct precedent for the conic-involution `PGL(2,q)` Schreier
-positions; the possible novelty is the fixed-point-deletion rule combined with the explicit
-Node-Kayles template classifications, not the classical ingredients individually.
-```
+The general Nofil-to-Node-Kayles reduction is prior art: M. A. Huggan, S. Huntemann, and
+B. Stevens, [“The combinatorial game Nofil played on Steiner Triple
+Systems”](https://arxiv.org/abs/2103.13501). Relevant algorithmic targets for the residual
+graphs include Y. Kobayashi, [“On Structural Parameterizations of Node
+Kayles”](https://arxiv.org/abs/2003.11775).
