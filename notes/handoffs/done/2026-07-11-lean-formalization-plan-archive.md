@@ -340,3 +340,26 @@ that discharges the transfer interface's finite fields from it:
 - Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
   `#print axioms` on the presentation bridge, section upper/attainment theorems, exact minimum
   distance, and parameter package returned exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (outer-dual step proved; citation boundary corrected)
+
+- Reopened the claimed final transfer dependency under the plan's strict import discipline. The
+  existing citation audit had already found that the “Chen–Ling–Xing dual decomposition of a
+  concatenated code” attribution was not locatable; a fresh primary-source search again found
+  Güneri–Ling–Özkaya's general QC trace/decomposition survey and adjacent generalized-QC work,
+  but no matching Chen–Ling–Xing theorem. No axiom was introduced.
+- Added `RepairCodes/OuterDual.lean`. For an outer base-field code `O ≤ (ι → V)`,
+  `functionalDual O ≤ (ι → V*)` is its annihilator under the summed evaluation pairing.
+  `IsOrthogonalToConcatenation I e O w` states blockwise orthogonality to the ordinary
+  concatenation, and `blockFunctional_mem_functionalDual` proves directly that the canonical block
+  coefficients lie in the functional outer dual. `HasFunctionalDualDistanceAtLeast O d` then gives
+  `blockFunctional_outerAlternative`, exactly the zero-or-weight-`≥d` input consumed by transfer.
+- Added `q9Inner_transfer_ofOuterCode`: for the real `[10,4,6]₉` seed, concatenation orthogonality,
+  functional outer-dual distance at least five, and total q-ary weight at most four imply every
+  block is inner-dual and at most one block is nonzero. Coefficient faithfulness, both numeric
+  gates, and outer-dual membership are all internal proofs; no trace-form or decomposition import
+  remains.
+- Corrected the live handoff, code documentation, and coding sweep. The sweep retains an explicit
+  dated correction because it overturns an already-committed attribution; the citation-audit note
+  remains the detailed evidence trail. The real q=9 block-local transfer path is closed; the
+  concrete repair hypergraph is now first in the open queue.

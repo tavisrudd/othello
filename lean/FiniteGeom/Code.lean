@@ -30,9 +30,9 @@ deliberately thin (mathlib at this pin ships `hammingNorm` but no `Code`/dual/MD
 
 `dualDist_le_hammingNorm` is exactly the shape of `ConcatDualWord.hdist` (a nonzero
 inner-dual block has weight `≥ d(I⊥)`), so this layer discharges the *algebraic* fields of
-the transfer-lemma interface; see `RepairCodes.CodeInstance`. The residual deep inputs
-(trace-representation faithfulness, Chen–Ling–Xing dual decomposition) are *not* here — they
-stay explicit hypotheses (plan §5 decision 3).
+the transfer-lemma interface; see `RepairCodes.CodeInstance`. Coefficient faithfulness and
+outer-dual membership are proved coordinate-free in `RepairCodes.CodeInstance` and
+`RepairCodes.OuterDual`.
 
 * `singleton_bound` — the classical Singleton bound `d(C) + k ≤ n + 1` (a `PROVE`-tier
   finite/algebraic input the plan flags prove-don't-import, §5 decision 3), with `IsMDS`

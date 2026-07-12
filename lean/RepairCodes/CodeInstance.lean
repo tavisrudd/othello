@@ -6,9 +6,8 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 # Discharging the transfer interface's *algebraic* fields from the code layer (`RepairCodes` Phase 1)
 
 Plan §5 decision 1 (abstract-first) is not finished until a concrete `𝔽_q` code discharges the
-`ConcatDualWord` fields that are *finite/algebraic* — as opposed to the two genuinely-imported
-structural inputs (trace-representation faithfulness and the Chen–Ling–Xing dual decomposition).
-This file draws that line explicitly with the constructor `ofInnerCode`.
+`ConcatDualWord` fields that are finite/algebraic. This file supplies the inner-code half with
+the constructor `ofInnerCode`; `RepairCodes.OuterDual` proves the outer-code half directly.
 
 Given a concrete inner code `I : Submodule 𝔽 (Fin m → 𝔽)` and its coordinate blocks
 `w : ι → (Fin m → 𝔽)`, `ofInnerCode` fills the interface's algebraic fields **from
@@ -25,10 +24,9 @@ functional `a ↦ ⟪e a, w⟫`.  Its vanishing is equivalent to `w ∈ I⊥`; t
 surjectivity of `e`, with no trace theorem.  A field-trace coefficient is merely coordinates for
 this dual functional after choosing a perfect trace pairing.
 
-Thus the only genuinely external input left by `ofInnerCodeFunctional` is `houter`: the
-Chen–Ling–Xing statement that the vector of block functionals is an outer-dual word.  This makes
-the review boundary narrower than the original trace-coordinate presentation while proving the
-same bounded-weight transfer statement.
+`ofInnerCodeFunctional` leaves `houter` as a named argument because this file does not yet carry
+an outer code. `RepairCodes.OuterDual` supplies it from concatenation orthogonality plus a declared
+functional-dual distance, with no trace-coordinate theorem or imported axiom.
 -/
 
 namespace RepairCodes
@@ -130,9 +128,9 @@ theorem transfer_ofInnerCode
     (∀ j, w j ∈ dualCode I) ∧ (univ.filter (fun j => w j ≠ 0)).card ≤ 1 :=
   transfer_lemma (ofInnerCode I w beta dO s hbeta houter htot hsO) hsI
 
-/-- Transfer with a concrete inner encoder and coordinate-free block coefficients.  This is the
-form used by the `q = 9` seed: Chen–Ling–Xing supplies `houter`, while coefficient faithfulness is
-now internal finite linear algebra. -/
+/-- Transfer with a concrete inner encoder and coordinate-free block coefficients. Coefficient
+faithfulness is internal finite linear algebra; `RepairCodes.OuterDual` supplies `houter` once an
+outer code and its functional-dual distance are present. -/
 theorem transfer_ofInnerCodeFunctional
     (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
     (w : ι → (Fin m → 𝔽)) (dO s : ℕ)

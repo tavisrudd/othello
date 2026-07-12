@@ -1,4 +1,4 @@
-import RepairCodes.CodeInstance
+import RepairCodes.OuterDual
 import FiniteGeom.MomentCurve
 import FiniteGeom.ColumnCode
 import Mathlib.FieldTheory.Finite.GaloisField
@@ -33,9 +33,9 @@ faithfulness for this actual code without trace coordinates.
 This file proves the full `[10,4,6]₉` parameters and exact dual distance `d(C₀⊥)=4`.
 Every sub-four column family is independent, while the columns at `0,1,-1` and `e₂` form a
 weight-four circuit. The primal distance comes from the maximum four-point hyperplane section,
-attained by `T³-T`. Still open here are the complete repair hypergraph and the Chen–Ling–Xing
-assertion that the vector of block functionals is outer-dual. The latter remains a hypothesis of
-`transfer_ofInnerCodeFunctional`; it is the sole imported boundary of the blockwise transfer step.
+attained by `T³-T`. `q9Inner_transfer_ofOuterCode` proves the outer-dual step directly in the
+functional alphabet, so no trace-decomposition import remains. The concrete repair hypergraph is
+the next open code-derived layer.
 -/
 
 namespace RepairCodes
@@ -503,6 +503,27 @@ theorem q9Inner_transfer_radiusFour {ι : Type*} [Fintype ι]
   apply q9Inner_transfer w 5 4 houter htot (by decide)
   rw [q9InnerCode_dualDist]
   decide
+
+/-- **Concrete q=9 transfer from an outer code.** If `w` annihilates the ordinary concatenation
+of an outer `𝔽₉`-linear code `O ≤ (ι → 𝔽₉⁴)` through `q9SeedEncoder`, and the coordinate-free
+functional dual of `O` has distance at least five, then every radius-four dual word is confined
+to one inner block. The outer-dual alternative is proved internally by
+`blockFunctional_outerAlternative`; no trace decomposition or imported axiom remains. -/
+theorem q9Inner_transfer_ofOuterCode {ι : Type*} [Fintype ι]
+    (O : Submodule GF9 (ι → (Fin 4 → GF9)))
+    (w : ι → (Fin 10 → GF9))
+    (horth : IsOrthogonalToConcatenation q9InnerCode q9SeedEncoder O w)
+    (hdist : HasFunctionalDualDistanceAtLeast O 5)
+    (htot : (∑ j, hammingNorm (w j)) ≤ 4) :
+    (∀ j, w j ∈ dualCode q9InnerCode) ∧
+      (univ.filter (fun j => w j ≠ 0)).card ≤ 1 := by
+  classical
+  have halt := blockFunctional_outerAlternative q9InnerCode q9SeedEncoder O w 5 horth hdist
+  apply q9Inner_transfer_radiusFour w
+  · rcases halt with hz | hw
+    · exact Or.inl hz
+    · exact Or.inr (by simpa only [functionalWeight] using hw)
+  · exact htot
 
 /-- Toy two-block consistency witness for `ConcatDualWord`: block `0` is a
 nonzero weight-`4` inner-dual word, block `1` is zero. Here

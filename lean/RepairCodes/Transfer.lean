@@ -4,11 +4,10 @@ import FiniteGeom.Weight
 # Concatenation transfer: the bounded-weight repair-hypergraph corollary (`RepairCodes` §1.4)
 
 Ordinary concatenation `C = O ∘ I` of an inner code `I` and an outer code `O`.
-The *classical* facts about such a concatenation — that each block functional of
-a dual word has a trace representation `a ↦ Tr(β_j a)`, and that orthogonality to
-`C` makes the coefficient vector `β` a word of `O⊥` (Chen–Ling–Xing's dual
-decomposition) — are **not** re-proved here. What *is* proved is the finite
-counting corollary the sweep flags as the candidate-new content
+This file proves the finite counting core over the structural interface `ConcatDualWord`.
+The coordinate-free facts that block coefficients are faithful and that concatenation
+orthogonality puts their vector in the outer dual are proved separately in
+`RepairCodes.CodeInstance` and `RepairCodes.OuterDual`. The counting corollary is
 ([`notes/2026-07-11-codex-coding-mds-cross-field-sweep.md`](../notes) §1.4):
 
 * under `wt_q(w) < d(O⊥)`, a dual word is **blockwise inner-dual** — every block
@@ -27,9 +26,9 @@ inputs the counting argument consumes — trace-representation faithfulness
 * the theorems are unconditional in the proof-theoretic sense — `#print axioms`
   shows only `propext` / `Classical.choice` / `Quot.sound`, no `sorryAx`;
 * but they are *conditional on the model*: they say nothing about a concrete code
-  until `ConcatDualWord` is instantiated for one. `RepairCodes.Q9Seed` now supplies
-  the real `𝔽₉` inner code, encoder equivalence, and exact dual distance four; the
-  outer-dual decomposition remains an explicit obligation there.
+  until `ConcatDualWord` is instantiated for one. `RepairCodes.Q9Seed` supplies
+  the real `𝔽₉` inner code and `q9Inner_transfer_ofOuterCode` discharges the model from
+  outer-code orthogonality and functional-dual distance.
 
 The analytic/asymptotic inputs (Sauermann, Ellenberg–Gijswijt) are *not* used by
 this finite lemma and do not appear.

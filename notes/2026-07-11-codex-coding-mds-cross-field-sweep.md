@@ -302,13 +302,19 @@ is block-local.  It follows that:
 - the remaining (9/10) have ((\nu,\tau)=(1,1)).
 
 Proof of the block-local claim: a dual block vector induces an 𝔽_9-linear
-functional on 𝔽_Q, uniquely of the form (a_i\mapsto
-\operatorname{Tr}(\beta_i a_i)).  A cross-block dual word yields
-(eta\in O_N^\perp).  Coordinate weight at most four implies that β has
+functional on the outer symbol space. Coordinate-free, the vector of these
+functionals annihilates the outer code by the definition of concatenation, so it belongs to the
+functional outer dual. Choosing a trace pairing identifies that dual alphabet with 𝔽_Q and
+recovers the familiar coefficients (a_i\mapsto
+\operatorname{Tr}(\beta_i a_i)). Coordinate weight at most four implies that β has
 outer support at most four, contradicting (d(O_N^\perp)\ge5), unless
 (eta=0).  Each block then annihilates the entire inner code and hence lies
 in (C_0^\perp), whose minimum weight is four.  Only one nonzero block can
 remain.
+
+**Citation correction (2026-07-12).** The earlier attribution of this membership step to a
+“Chen–Ling–Xing dual decomposition” was not locatable in the citation audit. The step is elementary
+and is now Lean-proved directly in `RepairCodes.OuterDual`; no imported decomposition is used.
 
 **[LITERATURE-IMPORTED / PROVED CONSEQUENCE]** Random linear outer codes over
 the fixed alphabet 𝔽_6561 may be chosen with rate, relative distance, and
@@ -322,9 +328,9 @@ their disjoint availability:
 \nu=3,\qquad \tau-1=4.
 \]
 
-This closes the two largest defects of the one-block construction.  Basic LRC
-concatenation is classical, and Chen–Ling–Xing's dual decomposition of a
-concatenated code subsumes the trace-algebra input.  The candidate new statement
+This closes the two largest defects of the one-block construction. Basic LRC
+concatenation and trace-coordinate representations are classical; the outer-dual membership
+needed here follows directly from the evaluation pairing. The candidate new statement
 is the bounded-weight recovery-hypergraph corollary and the resulting exact
 availability/tolerance transfer.
 
