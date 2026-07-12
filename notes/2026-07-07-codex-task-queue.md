@@ -8,30 +8,37 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C83.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C84.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
 
 ## CURRENT TOP OF QUEUE (updated 2026-07-12)
 
-**Session continuation (2026-07-12):** the C79 moment/edge-disjointness work is edited but not yet
-committed (live-doc wording corrected this pass). Next session: validate per the C79 note's
-Reproduction block (`py_compile` the four scripts; `c79_orbital_packet.py 11 13 17 19`;
-`c79_primitive_repair.py --q 17 --high 7`; the Lean base is already committed), then commit the C79
-bundle (note + queue + handoff + archive + the two `c79_*.py` scripts). Commit `CLAUDE.md` +
-`rust/AGENTS.md` (persona-loading scope) separately. Then start C80 (C83 paired).
+**PRIMARY LANE (2026-07-12): conic-involution Schreier graphs — C84.** The conic bulk is the
+induced Schreier graph of `H_S = ⟨σ_x : x∈S⟩ ≤ PGL(2,q)`, so its Node-Kayles value is set by the
+subgroup type of `H_S`. This gives exact values: two centres fully soluble (paths + uniform
+`2r`-cycles); self-polar `V₄` → `K₄`-unions; `D₈` → `M₈ ⊔ K₂`; `S₄` four-class table — all
+congruence-periodic via the orbit-template theorem; `A₄` cannot occur. Independently verified from
+field geometry at q=11–19 (`c80_schreier_verify.py`, `12/12` on the S₄ mod-8 flip). The odd-plane
+escape crux is size-3 → size-4, i.e. `H_S` on ≤3 involutions — exactly this small-subgroup regime.
+**Pursue first.** Notes:
+[Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
+[program integration](2026-07-12-conic-involution-residual-graphs.md). Open levers: the
+`D₁₂/D₁₆/A₅` catalogue rows; **`Schreier + (ON)`** synthesis (conic-only value = full value iff
+(ON)); and the gating measurement — classify the actual escape-crux states by `H_S`.
 
 The odd-plane escape kernel — "every legal size-3 residual position has a P-valued size-4 child" —
 is the active mathematics; (ON), requiring that child on the conic, is the stronger A5 route. The
-config→value **mechanism sweep is closed-negative** (Cluster 1), so the two live proof lanes are
-**A5 arc-depletion arithmetic** and the **C74/C77 one-intruder N-absorption theorem**. C75/C76 close
-the current pointwise selector/invariant spaces; C77 closes the pure geometric bank and identifies
-the game-semantic residue with C74's explicit pencil. C79's arithmetic pass delivers exact orbital
-coordinates and specifies the remaining gap as a game-valid bulk quotient; the active probes are
-**C80** (game-side exhaustion/abundance/descent) and **C81** (characteristic-5/7 subfield gate),
-with **C82** (orbital counting) gated on C80's packet, and **C83** (union-graph compression +
-bottom-up coarsest-congruence measurement) paired with C80.
+config→value **mechanism sweep is closed-negative** (Cluster 1). The remaining lanes: the Schreier
+catalogue (C84, above); **A5 arc-depletion arithmetic**; the **C74/C77 one-intruder N-absorption
+theorem**. C75/C76 close the pointwise selector/invariant spaces; C77 closes the pure geometric
+bank. C79's arithmetic pass specified the bulk gap; the game-side follow-ups **C80** (drain
+resource proven — `|live conic|` drops by `1+deg`; abundance/descent open), **C81** (char-5/7
+subfield gate), **C82** (orbital counting, gated) remain. **C83** raw-quotient measurement is done
+(coarsest bisimulation 29 at q=11 → 65 at q=13, growing; q=17 deferred, canon-bound): no finite
+raw-state automaton, but this is deprioritized (not superseded) behind the structural Schreier lane
+— tractability is a question of `G∪` structural width, not raw-quotient size.
 
 1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
@@ -59,6 +66,19 @@ bottom-up coarsest-congruence measurement) paired with C80.
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C84 [ACTIVE 2026-07-12 — PRIMARY] — conic-involution Schreier catalogue.** Bulk = induced
+  Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified: two-centre
+  full decomposition; `V₄`→`K₄`s (Cor 3.2 mod-8); `D₈`→`M₈⊔K₂` (Thm 4.2 mod-8); `S₄` four-class
+  table; orbit-template theorem; `A₄` excluded. Independent field-geometry verification `12/12`
+  on the S₄ flip at q=11–19. **Open:** (1) `D₁₂/D₁₆/A₅` catalogue rows via the orbit-template
+  theorem; (2) the **`Schreier + (ON)`** synthesis — conic-only Grundy = full escape value iff
+  (ON); (3) **gating measurement** — classify the actual escape-crux (size-3 residual) states by
+  `H_S` (what fraction dihedral/small-polyhedral vs generic); pairs with C80(a); (4) the minimax
+  potential tracking live vertices + live coloured edges (§5 drain bound → C80(b)). Notes:
+  [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
+  [program integration](2026-07-12-conic-involution-residual-graphs.md); scripts
+  `c80_schreier_verify.py` (field), `three_centre_probe.py`, `schreier_templates.py`.
 
 - **C79 [REPORTED 2026-07-12 — arithmetic coordinates + bulk-gap spec delivered; continuation →
   C80/C81/C82]** — number-theoretic forcing architecture for the full odd-q
@@ -90,8 +110,9 @@ bottom-up coarsest-congruence measurement) paired with C80.
   generic descent, not arithmetic P/N classification. Report:
   [`2026-07-11-c79-number-theoretic-forcing.md`](2026-07-11-c79-number-theoretic-forcing.md).
 
-- **C80 [ACTIVE 2026-07-12]** — game-side bulk-mechanism probe: exhaustion, abundance, descent
-  measure. Attack C79's spec ("compress many genuinely active, edge-disjoint matchings behind a
+- **C80 [ACTIVE 2026-07-12 — (c) drain proven+verified; (a) abundance / (b) descent open]** —
+  game-side bulk-mechanism probe: exhaustion, abundance, descent measure. Report:
+  [`2026-07-12-c80-bulk-exhaustion-probe.md`](2026-07-12-c80-bulk-exhaustion-probe.md). Attack C79's spec ("compress many genuinely active, edge-disjoint matchings behind a
   bounded interface") from the game side, where the program is asset-poor — not with more
   arithmetic. Closed mechanism families (do not re-enter): static signatures, global torus/mirror
   pairing (the torus-gate closure also closes classical mirror strategies for the bulk), literal
@@ -142,8 +163,12 @@ bottom-up coarsest-congruence measurement) paired with C80.
   H–X odd-q parameters with no consumer is a week-scale detour — hence the gate. Report target:
   `notes/2026-07-12-c82-orbital-counting.md`.
 
-- **C83 [ACTIVE 2026-07-12 — pairs with C80]** — bulk quotient measured bottom-up: union-graph
-  compression + coarsest value-respecting congruence. Two corollaries of the C79 edge-disjointness
+- **C83 [MEASURED 2026-07-12 — deprioritized behind C84, not superseded]** — coarsest
+  bisimulation of the residual game grows (29 at q=11 → 65 at q=13; q=17 deferred, canon-bound):
+  no finite raw-state automaton. Tractability is a `G∪` structural-width question (→ C84), not
+  raw-quotient size. Report:
+  [`2026-07-12-c83-bisimulation-quotient.md`](2026-07-12-c83-bisimulation-quotient.md). Original
+  bulk-quotient spec: union-graph compression + coarsest value-respecting congruence. Two corollaries of the C79 edge-disjointness
   lemma sharpen the bulk spec. **(1) Union-graph reframing.** On the live conic the k matchings
   union to a **simple** graph `G∪`, and (since no three conic points are collinear) any conic-only
   continuation is exactly Node-Kayles on `G∪` — per-intruder identity (edge colors) provably drops

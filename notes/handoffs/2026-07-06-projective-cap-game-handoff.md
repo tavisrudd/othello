@@ -448,21 +448,24 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C80/C81/C82 (allocated 2026-07-12, Fable strategic pass):** C79's arithmetic pass is reported;
-  the load-bearing gap is now specified — a game-valid bulk quotient absorbing many genuinely
-  active, edge-disjoint intruder matchings behind a bounded interface, and (per the torus-gate
-  closure) the mechanism must be dynamic (exhaustion/descent or amortized ledger), not a static
-  symmetry. Active: **C80** — game-side exhaustion/abundance/descent probe, tuned on nondepleted
-  orders q=13/19 with depleted q=11/17 reserved for the certificate layer; **C81** —
-  characteristic-5/7 Frobenius/subfield gate (step-6 de-risk, run early). Gated: **C82** — odd-q
-  orbital/Hollmann–Xiang counting, needs C80's packet first. **C83** (same day, pairs with C80) —
-  two edge-disjointness corollaries: the live-conic bulk is one **simple** union graph and
-  conic-only continuations are exactly Node-Kayles on it (per-intruder identity drops out of that
-  layer; packet conditions re-base from per-prior orbital relations, density `2^-k`, to bounded
-  watched-set incidences, density independent of k), plus the bottom-up measurement of whether a
-  game-valid quotient exists at all — coarsest Grundy-respecting congruence via partition
-  refinement on the exact q11/q13 residual DAGs. Moment lane capped as audit language.
-  Full specs in the [codex task queue](../2026-07-07-codex-task-queue.md).
+- **C84 — conic-involution Schreier catalogue (PRIMARY, 2026-07-12).** The conic bulk is the
+  induced Schreier graph of `H_S = ⟨σ_x⟩ ≤ PGL(2,q)`; its Node-Kayles value is set by the subgroup
+  type. Proven + independently verified (field geometry, q=11–19): two-centre full decomposition;
+  self-polar `V₄`→`K₄`s; `D₈`→`M₈⊔K₂`; `S₄` four-class mod-8 table; orbit-template theorem; `A₄`
+  excluded. The escape crux (size-3 → size-4) is `H_S` on ≤3 involutions — this small-subgroup
+  regime. Open levers: the `D₁₂/D₁₆/A₅` rows; the **`Schreier + (ON)`** synthesis (conic-only value
+  = full value iff (ON)); and the gating measurement — classify the escape-crux states by `H_S`.
+  Notes: [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
+  [program integration](../2026-07-12-conic-involution-residual-graphs.md).
+- **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
+  (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
+  [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —
+  characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang
+  counting, gated on C80's packet. **C83** — the coarsest-bisimulation measurement is done (29 at
+  q=11 → 65 at q=13, growing; q=17 deferred): no finite raw-state automaton, deprioritized (not
+  superseded) behind C84's structural route,
+  [report](../2026-07-12-c83-bisimulation-quotient.md). Full specs in the
+  [codex task queue](../2026-07-07-codex-task-queue.md).
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
   step-group leaves, and `Class0`). The full v5 tree has 326 node leaves + 326 step leaves;
