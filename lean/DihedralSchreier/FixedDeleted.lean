@@ -24,6 +24,24 @@ variable {k : ℕ} (T : InvolutionTriple k)
 def PairFixed (x : Fin k) : Prop :=
   ∃ i j : Fin 3, i < j ∧ T.act i (T.act j x) = x
 
+/-- For involutions, a pair product fixes `x` exactly when the two generators agree at
+`x`. This is the algebraic form of the common-projection-partner/secant condition. -/
+theorem pair_comp_fixed_iff_eq (i j : Fin 3) (x : Fin k) :
+    T.act i (T.act j x) = x ↔ T.act i x = T.act j x := by
+  constructor
+  · intro h
+    have h' := congrArg (T.act i) h
+    rw [T.involutive] at h'
+    exact h'.symm
+  · intro h
+    rw [← h, T.involutive]
+
+/-- The order chosen for an unordered pair in `PairFixed` does not affect its fixed set. -/
+theorem pair_comp_fixed_swap (i j : Fin 3) (x : Fin k) :
+    T.act i (T.act j x) = x ↔ T.act j (T.act i x) = x := by
+  rw [T.pair_comp_fixed_iff_eq, T.pair_comp_fixed_iff_eq]
+  exact eq_comm
+
 /-- The finite deleted set from equation (3.1). -/
 noncomputable def deleted : Finset (Fin k) :=
   by
@@ -75,7 +93,10 @@ noncomputable def graph : NodeKayles.Graph k := by
   simp [graph]
 
 /-- The Node-Kayles residual attached to the triple: use `T.graph` as the graph and
-`T.live` as the current live set. -/
+`T.live` as the current live set. `NodeKayles.win` recurses to
+`S \ closedNbhd (graph T) v`; because the subtraction starts from `S`, vertices outside
+`live T` are ignored. This is definitionally Node Kayles on the subgraph induced by
+`live T`, even though the API retains the full graph plus a live-set parameter. -/
 def residualWin : Prop :=
   NodeKayles.win (graph T) (live T)
 

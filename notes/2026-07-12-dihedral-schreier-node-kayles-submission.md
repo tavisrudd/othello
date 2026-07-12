@@ -9,16 +9,15 @@ capacity-two avoidance game in which selected off-conic points forbid the conic 
 lying on their pairwise joining lines. If subsequent play is restricted to the conic, the
 legal continuations form a Node-Kayles position.
 
-We prove that if three legal selected points induce a tame dihedral subgroup, including
-the Klein-four boundary case, then the residual graph is a disjoint union of
-fixed-point-deleted Schreier templates. Every transitive template is an empty graph, a
+First, for any finite involution-generated action, we prove an orbit-template reduction:
+the residual Grundy value is the xor of the transitive-template nimbers, weighted only by
+orbit-multiplicity parity. We then compute the entire table when three legal selected
+points induce a tame dihedral subgroup, including the Klein-four boundary case. Every
+transitive projective-line template is an empty graph, a
 complete graph \(K_4\), an ordinary ladder, a prism, or a Möbius ladder. This yields a
 complete Grundy-value classification, explicit split- and nonsplit-torus formulas,
 periodicity in \(q\), an exact one-half P-position density among admissible prime fields,
 and a converse realization theorem.
-
-As a structural corollary, the construction defines an additive invariant of finite
-\(G\)-sets that factors through the mod-two Burnside group.
 
 ## 1. Introduction
 
@@ -35,8 +34,9 @@ the conic-only residual is a fixed-point-deleted Schreier graph, and in the tame
 case its orbit templates and Grundy values can be classified completely. Tranchida does
 not consider this residual graph or its Node-Kayles value.
 
-We solve this construction completely when the generated subgroup is tame dihedral. The
-analysis is uniform in the field and has three components:
+The general result reduces the problem to a table of transitive-template nimbers
+\(t_K=\mathcal G(R(G,K,T))\). We compute this table completely when the generated subgroup
+is tame dihedral. The analysis is uniform in the field and has three components:
 
 1. a classification of legal dihedral involution triples;
 2. a classification of every transitive projective-line orbit template;
@@ -68,9 +68,9 @@ C:\ XZ=Y^2,
 \]
 and parameterize
 \[
-c(t)=[1:t:t^2],\qquad t\in\mathbf F_q,
+c(t)=[t^2:t:1],\qquad t\in\mathbf F_q,
 \]
-with \(c(\infty)=[0:0:1]\).
+with \(c(\infty)=[1:0:0]\).
 
 For an off-conic point \(x\), projection from \(x\) exchanges the two conic points on
 each secant through \(x\). Denote the resulting involution of \(C\) by \(\sigma_x\).
@@ -143,6 +143,13 @@ v=\sigma_x(u).
 \]
 Thus the newly unavailable conic points are precisely \(u\) and its graph neighbours. ∎
 
+The graph is static throughout this conic-only continuation. Indeed, a line through two
+selected conic points contains no third conic point, while a line through a newly selected
+conic point and an old off-conic point \(x\in S\) removes exactly its projection partner.
+Thus later moves only pass to induced subgraphs of the original \(R_S\); they do not add
+new edges. This is the point that makes the reduction genuine Node Kayles rather than a
+dynamically changing graph game.
+
 ## 3. Fixed-point-deleted Schreier graphs
 
 Let a finite group \(G\) act on a finite set \(\Omega\), and let \(T\) be a finite set of
@@ -153,6 +160,8 @@ D_T(\Omega)=
 \operatorname{Fix}_\Omega(\sigma\tau)
 \tag{3.1}
 \]
+where the unordered-pair notation is unambiguous because \(\tau\sigma=(\sigma\tau)^{-1}\)
+has the same fixed points as \(\sigma\tau\), and
 and
 \[
 R_T(\Omega)=
@@ -168,6 +177,8 @@ R(G,K,T)=R_T(G/K).
 \tag{3.3}
 \]
 
+### Theorem 3.1: orbit-template reduction
+
 If
 \[
 \Omega\cong\bigsqcup_{[K]}m_K(G/K),
@@ -182,7 +193,23 @@ then Sprague-Grundy additivity gives
 \tag{3.4}
 \]
 
-This is the orbit-template formula.
+### Proof
+
+Every generator preserves each \(G\)-orbit, so both the Schreier edges and the
+pair-product fixed points split orbit by orbit. Although \(D_T(\Omega)\) need not itself
+be \(G\)-stable when \(T\) is not closed under conjugation, every \(G\)-equivariant
+bijection commutes with every element of \(T\); it therefore transports \(D_T\) and the
+residual graph. Thus each orbit of type \(G/K\) contributes the well-defined template
+\(R(G,K,T)\). Grundy values xor over disjoint graph components, and two equal nimbers
+cancel, giving (3.4). ∎
+
+Consequently, once the finite table
+\[
+t_K=\mathcal G(R(G,K,T))
+\]
+is known, the ambient action enters only through the parity vector
+\((m_K\bmod2)_{[K]}\). The remainder of the paper computes these \(t_K\) for tame
+dihedral conic triples.
 
 ## 4. Legal dihedral triples
 
@@ -193,16 +220,23 @@ nonidentity elements.
 ### Theorem 4.1: the Klein-four boundary
 
 Let a legal tame conic-involution triple generate \(G\cong V_4\), and let \(s\) be the
-number of its three involutions having rational fixed points on \(C\). Then the dead set
-has size \(2s\), and the residual graph is
+number of its three involutions having rational fixed points on \(C\). The realizable
+split counts satisfy
 \[
-\frac{q+1-2s}{4}K_4.
+s\in\{1,3\}\quad(q\equiv1\pmod4),
+\qquad
+s\in\{0,2\}\quad(q\equiv3\pmod4).
 \tag{4.1}
 \]
-Consequently
+The dead set has size \(2s\), and the residual graph is
+\[
+\frac{q+1-2s}{4}K_4.
+\tag{4.2}
+\]
+Here a coefficient denotes a disjoint union of that many copies. Consequently
 \[
 \mathcal G(R_T)=\frac{q+1-2s}{4}\pmod2.
-\tag{4.2}
+\tag{4.3}
 \]
 
 ### Proof
@@ -213,11 +247,20 @@ stabilizer in \(PGL_2(q)\) is cyclic, so two distinct nonidentity elements of \(
 cannot fix the same conic point. Each split involution has two rational fixed points and
 each nonsplit involution has none, giving \(|D_T|=2s\).
 
+The split-count restriction is the usual parity law for a tame Klein four subgroup of
+\(PGL_2(q)\): the number of split nonidentity elements has parity opposite to
+\((q-1)/2\), giving exactly the alternatives in (4.1). Equivalently, the orbit equation
+\[
+q+1=2s+4f
+\]
+forces the same parity, and the standard split/nonsplit normal forms realize both listed
+values. In particular, divisibility of \(q+1-2s\) by four is automatic.
+
 The \(V_4\)-action on the live points is free: a nontrivial stabilizer would again contain
 one of the involutions whose fixed points were deleted. Every live orbit therefore has
 four points. On such an orbit the three involutions give the three perfect matchings of
 \(K_4\). Since one Node-Kayles move deletes a whole \(K_4\), each orbit has Grundy value
-one, and disjoint-union additivity gives (4.2). ∎
+one, and disjoint-union additivity gives (4.3). ∎
 
 No dihedral group whose rotation subgroup has odd order can arise from a legal generating
 involution triple: all of its involutions are reflections, and their centres are collinear
@@ -249,7 +292,7 @@ A legal generating involution triple must therefore contain \(z\) and two reflec
 After rechoosing the reflection generator and interchanging the reflections, it has the form
 \[
 T_d=\{z,s,sr^d\}.
-\tag{4.3}
+\tag{4.4}
 \]
 
 ### Proposition 4.2
@@ -257,7 +300,7 @@ T_d=\{z,s,sr^d\}.
 The triple \(T_d\) generates \(D_{4n}\) exactly when
 \[
 \gcd(d,n)=1.
-\tag{4.4}
+\tag{4.5}
 \]
 
 ### Proof
@@ -319,7 +362,9 @@ The two reflection generators alternate along the cosets of
 \gcd(d,2n)=1,
 \]
 so their edges form one \(4n\)-cycle. Multiplication by \(z=r^n\) joins opposite
-vertices, giving \(M_{4n}\).
+vertices: centrality of \(z\) makes this chord matching invariant under the reflection
+cycle, and after two reflection steps one advances by \(d\), so \(z\) advances by exactly
+half of that \(4n\)-cycle. This gives \(M_{4n}\).
 
 If \(d\) is even, then \(n\) is odd and
 \[
@@ -342,16 +387,26 @@ The graph is vertex-transitive. After a move at \(v\), the graph
 \[
 M_{4n}-N[v]
 \]
-is the opposite-end-pendant ladder on \(2n-3\) rungs: a ladder with one pendant vertex
-attached to one rail at the left end and one pendant vertex attached to the opposite rail
-at the right end. This is Brown et al.'s third ladder variation
-\({}_{-}L^-_{(2n-3)\times2}\), which their ladder theorem proves has Grundy value zero.
-Hence every
+is the opposite-end-pendant ladder on \(2n-3\) rungs. To see this explicitly, label
+\(M_{4n}\) by \(\mathbf Z/(4n)\), with cycle edges \(i\sim i+1\) and chords
+\(i\sim i+2n\), and take \(v=0\). Removing
+\(N[0]=\{0,1,2n,4n-1\}\) leaves the paired vertices
+\[
+2+i\longleftrightarrow 2n+2+i,
+\qquad 0\le i\le2n-4,
+\]
+as the \(2n-3\) rungs. The unpaired vertex \(2n-1\) is pendant at the right end of the
+first rail, while \(2n+1\) is pendant at the left end of the second rail. This is exactly
+Brown et al.'s third ladder variation \({}_{-}L^-_{(2n-3)\times2}\).
+
+Their ladder theorem states
+\(\mathcal G({}_{-}L^-_{k\times2})=0\) for every integer \(k\ge1\). Here
+\(k=2n-3\) is odd and at least one, including the boundary \(n=2\). Hence every
 option of \(M_{4n}\) has value zero, and
 \[
 \mathcal G(M_{4n})=\operatorname{mex}\{0\}=1.
 \]
-The boundary case \(n=2\) gives the same graph identification directly. ∎
+∎
 
 ### Theorem 5.3
 
@@ -361,7 +416,9 @@ For every \(m\ge3\),
 \tag{5.3}
 \]
 
-This is Brown et al.'s prism corollary.
+Brown et al.'s prism corollary states this for every \(m\ge3\), with no parity or residue
+restriction. In particular it applies to the only prisms used here, where \(m=2n\ge6\)
+and \(n\) is odd.
 
 ## 6. Point stabilizers in the tame projective action
 
@@ -389,8 +446,11 @@ subgroup is therefore injective on the point stabilizer, so the stabilizer is cy
 
 If the stabilizer contains a nonidentity rotation, the point is one of the two fixed
 points of the rotation torus over the splitting field and is therefore fixed by all of
-\(A\). Otherwise the stabilizer is generated by a reflection. Because the rotation order
-is even, the reflections form two conjugacy classes, represented by \(K_0\) and \(K_1\).
+\(A\). Thus an apparent intermediate rotation stabilizer \(\langle r^k\rangle\) immediately
+enlarges to \(A\). It cannot enlarge further inside \(D_{4n}\), since adjoining any
+reflection to \(A\) would make the stabilizer dihedral and hence noncyclic. Otherwise the
+stabilizer is generated by a reflection. Because the rotation order is even, the
+reflections form two conjugacy classes, represented by \(K_0\) and \(K_1\).
 ∎
 
 ### Proposition 6.2
@@ -435,7 +495,23 @@ solutions of
 \tag{7.2}
 \]
 
-### Theorem 7.1
+### Lemma 7.1: a double cover of a tree is untwisted
+
+Let a fixed-point-free involution \(z\) act on a graph \(X\). Suppose a \(z\)-invariant
+edge set \(E_0\) descends to a graph \(Y=X/\langle z\rangle\), with every edge of \(Y\)
+having exactly two \(z\)-paired lifts. If \(Y\) is a tree, then \((V(X),E_0)\) is the
+disjoint union of two copies of \(Y\), exchanged by \(z\). After adding every edge
+\(v\sim z(v)\), the result is \(Y\square K_2\).
+
+### Proof
+
+Choose a root of \(Y\) and one of its two lifts. Every vertex of a tree has a unique path
+from the root, so lifting that path selects a unique lift of every vertex and produces one
+copy of \(Y\). Applying \(z\) produces the other copy. There is no monodromy because the
+tree has no cycle. The added \(z\)-edges join the two lifts of each quotient vertex, which
+are exactly the \(K_2\)-fibres of the Cartesian product. ∎
+
+### Theorem 7.2
 
 For odd \(d\),
 \[
@@ -475,12 +551,11 @@ even, then \(n\) is odd. For even \(e\), neither congruence is solvable and the 
 quotient is \(P_n\); for odd \(e\), both are solvable and the live quotient is
 \(P_{n-2}\).
 
-Finally, the lift over any of these paths is untwisted: choose either lift of one endpoint
-and propagate it along the unique path. Edges above quotient path edges form two rails,
-exchanged by \(z\), and the \(z\)-edges form the rungs. A reflection above a suppressed
-endpoint loop either gives loops upstairs or duplicates its rung, neither of which changes
-the underlying simple graph. The three cases therefore give \(L_{n-1}\), \(L_n\), and
-\(L_{n-2}\), respectively. ∎
+The reflection edges above quotient path edges satisfy Lemma 7.1, and the \(z\)-edges are
+its fibre edges. A reflection above a suppressed endpoint loop either gives loops upstairs
+or duplicates its \(z\)-edge, neither of which changes the underlying simple graph. The
+three live quotients therefore lift to \(L_{n-1}\), \(L_n\), and \(L_{n-2}\),
+respectively. ∎
 
 Brown et al. prove
 \[
@@ -551,6 +626,22 @@ Then
 q+1=4nf+2\varepsilon+2n(a_0+a_1).
 \tag{8.4}
 \]
+
+The complete transitive-template table, including the Klein-four boundary, is therefore:
+
+| group and triple | stabilizer | residual template | Grundy value |
+|---|---:|---|---:|
+| \(V_4\), all three involutions | \(1\) | \(K_4\) | \(1\) |
+| \(V_4\), all three involutions | nontrivial cyclic | \(\varnothing\) | \(0\) |
+| \(D_{4n}\), odd \(d\) | \(1\) | \(M_{4n}\) | \(1\) |
+| \(D_{4n}\), even \(d\) | \(1\) | \(C_{2n}\square K_2\) | \(0\) |
+| \(D_{4n}\), any \(d\) | \(A\) | \(\varnothing\) | \(0\) |
+| \(D_{4n}\), odd \(d\) | \(K_e\) | \(L_{n-1}\) | \(1_{2\mid n}\) |
+| \(D_{4n}\), even \(d\), even \(e\) | \(K_e\) | \(L_n\) | \(1\) |
+| \(D_{4n}\), even \(d\), odd \(e\) | \(K_e\) | \(L_{n-2}\) | \(1\) |
+
+Thus the five graph families in the abstract are a corollary of one orbit-template table:
+the ambient projective line merely supplies its orbit multiplicities.
 
 ## 9. Closed finite-field formulas
 
@@ -667,6 +758,32 @@ For even \(d\),
 \tag{9.6}
 \]
 
+### Corollary 9.1: explicit P-position congruences
+
+In either torus family, write
+\[
+h=\frac{q-1}{2n}\quad\text{in the split case},
+\qquad
+h=\frac{q+1}{2n}\quad\text{in the nonsplit case}.
+\]
+Then the conic-only residual is P exactly under the following congruences:
+\[
+\boxed{
+\begin{array}{c|c}
+\text{triple type}&\text{P exactly when}\
+\hline
+d\text{ odd},\ n\text{ odd}&h\equiv1,2\pmod4\\
+d\text{ odd},\ n\text{ even}&h\equiv2,3\pmod4\\
+d\text{ even}\ (n\text{ odd})&h\equiv0,2\pmod4.
+\end{array}}
+\tag{9.7}
+\]
+
+### Proof
+
+In both torus families, \(\delta=1\) exactly when \(h\) is even. Substitution into
+(9.2)--(9.6), followed by the four cases \(h\bmod4\), gives the table. ∎
+
 For fixed \(n\), these formulas are periodic in \(q\) with period dividing \(8n\) within
 each torus family.
 
@@ -704,7 +821,7 @@ In the split-torus family \(6\mid q-1\), the second reflection class is split ex
 12\mid q-1.
 \]
 
-## 11. Additive mod-two Burnside invariant
+## 11. Burnside-group reformulation
 
 Fix a finite group \(G\) and a finite involution set \(T\), as in Section 3. Define
 \[
@@ -712,11 +829,11 @@ Fix a finite group \(G\) and a finite involution set \(T\), as in Section 3. Def
 \]
 for every finite \(G\)-set \(\Omega\).
 
-We are not aware of a previous use of a Grundy value as an additive Burnside-group
-invariant. The statement is not dihedral and does not assert compatibility with the
-multiplication in the Burnside ring.
+This is a convenient reformulation of Theorem 3.1, not an additional source of
+computational information: the additive group of \(A(G)\) is already free on the
+transitive \(G\)-sets, and no compatibility with Burnside-ring multiplication is asserted.
 
-### Theorem 11.1
+### Proposition 11.1
 
 The map \(\Phi_T\) is additive under disjoint union and extends uniquely to a homomorphism
 from the additive group underlying the Burnside ring:
@@ -803,22 +920,8 @@ h=\frac{q+1}{2n}
 in the nonsplit case. The four possibilities \(h\bmod4\) give four admissible reduced
 residue classes modulo \(8n\).
 
-For odd \(d\), the values for \(h\bmod4=0,1,2,3\) are
-\[
-\begin{array}{c|cccc}
-&0&1&2&3\\
-\hline
-n\text{ odd}&1&0&0&1\\
-n\text{ even}&1&1&0&0.
-\end{array}
-\tag{12.2}
-\]
-For even \(d\), necessarily \(n\) odd, they are
-\[
-0,1,0,1.
-\tag{12.3}
-\]
-Thus exactly two of the four classes are P. The prime number theorem for arithmetic
+Corollary 9.1 selects exactly two of these four classes in every triple type. The prime
+number theorem for arithmetic
 progressions, equivalently its standard Dirichlet-density consequence, gives the same
 Dirichlet density to each reduced residue class. Relative to primes in the chosen torus
 family, the four classes therefore each have density \(1/4\), proving the claim. ∎
@@ -884,6 +987,11 @@ The classification has a simple conceptual form:
 The fixed-point-deleted Schreier construction separates geometry from game theory. The
 abstract pair \((G,T)\) determines a finite table of transitive template nimbers; the
 ambient geometry determines only the parity vector of orbit multiplicities.
+
+The next subgroup in the usual polyhedral list, \(A_4\), cannot occur as a generated
+group here. Its only involutions are the three nonidentity elements of its normal Klein
+four subgroup, so any subgroup generated by involutions in \(A_4\) is contained in that
+\(V_4\), not all of \(A_4\).
 
 The unresolved problem beyond the dihedral case is to evaluate the corresponding regular
 templates for the polyhedral groups. That extension is not needed for the present

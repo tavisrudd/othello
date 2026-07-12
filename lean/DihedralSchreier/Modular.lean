@@ -106,7 +106,7 @@ theorem deleted_iff (d : ZMod (2 * n)) (hd : d ≠ 0) (e j : ZMod (2 * n)) :
     · exact Or.inr (Or.inl h)
 
 /-- Deletion is invariant under the central half-turn. Thus deleted vertices occur in
-the `z`-pairs used by the quotient-path proof of Theorem 7.1. -/
+the `z`-pairs used by the quotient-path proof of Theorem 7.2. -/
 theorem deleted_central_iff (d : ZMod (2 * n)) (hd : d ≠ 0)
     (e j : ZMod (2 * n)) : Deleted n e d (central n j) ↔ Deleted n e d j := by
   rw [deleted_iff d hd, deleted_iff d hd]
