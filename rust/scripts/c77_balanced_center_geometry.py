@@ -29,6 +29,8 @@ from c74_fan_orbits import (  # noqa: E402
 
 
 def preimage(F, y, zero, infinity):
+    if zero == 0 and infinity == F.q:
+        return y
     if y == 0:
         return zero
     if y == F.q:
@@ -90,14 +92,18 @@ def tangent_defect(F, A, e):
     return len(hits)
 
 
-def center_defects(F, A, e, w, a):
+def center_defect_vector(F, A, e, w, a):
     out = []
     for f in A:
         image = tau_image(F, a, f, e, w)
         assert image not in A or image == f
         out.append(tangent_defect(F, A, f) if image == f
                    else secant_defect(F, A, f, image))
-    return tuple(sorted(out))
+    return tuple(out)
+
+
+def center_defects(F, A, e, w, a):
+    return tuple(sorted(center_defect_vector(F, A, e, w, a)))
 
 
 def primary_products(F, A, e, w):
@@ -105,7 +111,7 @@ def primary_products(F, A, e, w):
     return {F.mul(x, y) for x, y in combinations(U, 2)}
 
 
-def run(q):
+def run(q, details=False):
     F = Field(q)
     group = pgl_matrices(F)
     rows, _owner, _sizes, _stabs = orbit_map(F, 5, group)
@@ -121,6 +127,7 @@ def run(q):
             forbidden = primary_products(F, A, e, w)
             matches = 0
             pencil_types = Counter()
+            balanced_parameters = []
             for a in range(1, q):
                 if a in forbidden:
                     continue
@@ -128,8 +135,17 @@ def run(q):
                 type_hist[defects] += 1
                 pencil_types[defects] += 1
                 matches += defects == target
+                if defects == target:
+                    balanced_parameters.append((a, center_defect_vector(F, A, e, w, a)))
             pencils += 1
             multiplicities[(dmin, matches)] += 1
+            if details:
+                U = tuple(sorted(normalize_pair(F, t, e, w) for t in A if t != e))
+                print(
+                    f"BALANCED-PENCIL q={q} row={row} A={A} e={e} w={w} "
+                    f"d={dmin} U={U} types={dict(sorted(pencil_types.items()))} "
+                    f"balanced={balanced_parameters}"
+                )
             if matches == 0:
                 six = set((*A, w))
                 six_stab = sum({act(F, g, x) for x in six} == six for g in group)
@@ -147,9 +163,72 @@ def run(q):
     return missing
 
 
+def run_d4_normal_forms(q):
+    """Test the d=4 normal form A={0,+-1,+-x}, (e,w)=(0,infinity)."""
+    F = Field(q)
+    zero, one = 0, 1
+    minus_one = F.neg(one)
+    failures = []
+    formula_mismatches = []
+    histogram = Counter()
+    for x in range(q):
+        if x in (zero, one, minus_one):
+            continue
+        A = (zero, one, minus_one, x, F.neg(x))
+        if len(set(A)) != 5:
+            continue
+        forbidden = primary_products(F, A, zero, q)
+        assert len(forbidden) == 4
+        target = (4, 5, 5, 6, 6)
+        types = Counter()
+        matches = []
+        for a in range(1, q):
+            if a in forbidden:
+                continue
+            defects = center_defects(F, A, zero, q, a)
+            types[defects] += 1
+            if defects == target:
+                matches.append(a)
+        def ratio(num, den):
+            return None if den == 0 else F.mul(num, F.inv(den))
+
+        three = F.add(one, F.add(one, one))
+        candidates = [
+            ratio(F.mul(x, F.sub(x, one)), F.add(one, F.mul(three, x))),
+            ratio(F.neg(F.mul(x, F.add(x, one))), F.sub(F.mul(three, x), one)),
+            ratio(F.neg(F.mul(x, F.sub(x, one))), F.add(x, three)),
+            ratio(F.mul(x, F.add(x, one)), F.sub(x, three)),
+        ]
+        common = ratio(
+            F.neg(F.mul(F.add(one, one), F.mul(x, x))),
+            F.add(one, F.mul(x, x)),
+        )
+        candidate_counts = Counter(a for a in candidates if a is not None)
+        predicted = sorted(
+            a for a, count in candidate_counts.items()
+            if count == 1 and a != common and a not in forbidden
+        )
+        if predicted != matches:
+            formula_mismatches.append((x, predicted, matches))
+        histogram[len(matches)] += 1
+        if not matches:
+            failures.append((x, tuple(sorted(forbidden)), dict(sorted(types.items()))))
+    print(
+        f"BALANCED-D4-NORMAL q={q} x-count={sum(histogram.values())} "
+        f"multiplicity={dict(sorted(histogram.items()))} failures={failures} "
+        f"formula-mismatches={formula_mismatches}"
+    )
+    return failures
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("q", type=int, nargs="*", default=[11, 13, 17, 19, 23, 25])
+    ap.add_argument("--details", action="store_true")
+    ap.add_argument("--normal-forms", action="store_true")
     args = ap.parse_args()
     for q in args.q:
-        run(q)
+        if args.normal_forms:
+            run_d4_normal_forms(q)
+        else:
+            run(q, args.details)

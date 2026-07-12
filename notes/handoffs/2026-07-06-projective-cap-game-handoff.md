@@ -686,9 +686,11 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   product-collision packet. Identical collision types can be P or N; proving this packet contains P
   is the remaining uniform game-semantic theorem. A sharper subtype `(d,5,5,6,6)` is P in all 760
   exact q11/13/17/19 occurrences and exists on every tested prime-field maximum pencil for q11–31,
-  but GF(25) exposes a Baer-subline branch: five pencils have only `(4,6,6,6,6)` centers. The refined
-  route is balanced-center P-purity/generic existence plus a separate subfield-endpoint lemma;
-  `Low4` remains the uniform fallback.
+  but extension fields expose two subfield branches. In the exact `d=4` normal form
+  `A={0,±1,±x}`, the four rational balanced candidates fail at characteristic-5 `x=±2` and
+  characteristic-7 `x∈{±2,±3}` (confirmed again in GF125/GF343). The refined route is the finite
+  rational equality case split, the `d=5` branch, balanced-center P-purity, and separate small-subfield
+  game lemmas; `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

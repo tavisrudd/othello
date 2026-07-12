@@ -223,26 +223,73 @@ center occurrences are P (32, 42, 72, and 614 respectively). This is strictly st
 than the scalar `K` score: the vector identifies a P-pure subtype in the available value data.
 
 The geometry-only orbit census, which reads no game labels, finds a balanced center on every maximum
-pencil at the tested prime orders q=11,13,17,19,23,29,31. It also finds the essential obstruction at
-GF(25). For the five-set `A={0,1,2,3,4}` and each of its five maximum pencils with endpoint
+pencil at the tested prime orders q=11,13,17,19,23,29,31. It also finds the first extension-field
+obstruction at GF(25). For the five-set `A={0,1,2,3,4}` and each of its five maximum pencils with endpoint
 `w=infinity`, every legal
 center has type `(4,6,6,6,6)`, so the balanced type does not exist. The six-set
 `A union {infinity}=P^1(F_5)` has PGL stabilizer 120: this is the embedded subfield/Baer-subline
 exception, not a game-value counterexample. (The existing q=25 census labels all on-conic buckets
 P, but supplies no uniform proof of that endpoint.)
 
-Consequently the honest theorem target is a disjunction, not unconditional balanced-center
+The first honest theorem target was therefore a disjunction, not unconditional balanced-center
 existence:
 
 1. in the generic branch, prove geometrically that a maximum pencil has a balanced center and prove
    game-semantically that every such center is P; or
-2. when the six frame points form a Baer/subfield subline, prove the pencil endpoint itself is P by
+2. in a subfield exceptional configuration, prove the pencil endpoint or another legal center P by
    a separate argument.
 
 `Low4` remains the uniform fallback while this split is unproved. The balanced-center claim should
 not yet be formalized in Lean: its original universal form is false, and its P-purity is presently a
 finite exact observation rather than a recursive game theorem. The stable five-spoke incidence
 identity (1)--(2) is suitable for later formalization once this branch theorem is settled.
+
+### Exact `d=4` normal form and the second subfield exception
+
+The GF(25) obstruction is not the whole exceptional branch. Every `d=4` pencil can be normalized to
+
+```text
+(e,w)=(0,infinity),    A={0,+-1,+-x},
+B=P2({+-1,+-x})={-1,-x^2,+-x}.
+```
+
+Write `tau_a(t)=a/t`; legal parameters are `a in F* \ B`. Factoring the three opposite-edge product
+equalities at the spoke `+1` and transporting by `t -> t/x` gives one common collision parameter
+
+```text
+c0 = -2x^2/(1+x^2)
+```
+
+and four side parameters
+
+```text
+c1 =  x(x-1)/(1+3x)       c2 = -x(x+1)/(3x-1)
+d1 = -x(x-1)/(x+3)        d2 =  x(x+1)/(x-3),
+```
+
+with a zero denominator interpreted as a missing parameter. The defects at `+1,-1` agree, as do
+those at `+x,-x`, because `t -> -t` preserves both A and `tau_a`. A legal parameter is balanced
+exactly when it occurs with multiplicity one in `[c1,c2,d1,d2]` and differs from `c0`. This is an
+exact rational selector lemma, not a value fit: `c0` collides on both opposite pairs; repeated side
+values create a double collision or collisions on both pairs; a singleton side value creates
+precisely `(4,5,5,6,6)`.
+
+The executable normal-form census verifies this formula with zero mismatches for every x in all
+tested fields: primes 7 through 101 and GF(9), GF(25), GF(27), GF(49), GF(121), GF(125), GF(343).
+It exposes two persistent failure families:
+
+```text
+characteristic 5: x=+-2
+characteristic 7: x in {+-2,+-3}.
+```
+
+The first is the embedded `P^1(F5)` six-set. The second is inherited from the separately solved q=7
+normal form: GF(49) and GF(343) still have no balanced center at those four prime-subfield values,
+even though their many extension-field legal parameters all have type `(4,6,6,6,6)`. Thus the
+earlier “Baer exception” wording was too narrow. The remaining geometric task is now finite and
+explicit: cross-multiply the equality/forbidden cases among `c0,c1,c2,d1,d2` to prove that these are
+the only empty-selector cases over every odd field, then formulate the two small-subfield game
+lemmas. The `d=5` maximum-pencil branch also remains to be proved geometrically.
 
 ## Reproduction
 
@@ -252,6 +299,7 @@ python3 -m py_compile scripts/c77_pencil_value_probe.py scripts/c77_intruder_rep
   scripts/c77_balanced_center_geometry.py
 python3 scripts/c77_pencil_value_probe.py 11 13 17 19
 python3 scripts/c77_balanced_center_geometry.py 11 13 17 19 23 25 29 31
+python3 scripts/c77_balanced_center_geometry.py --normal-forms 7 9 11 25 27 49 121 125 343
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3

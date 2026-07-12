@@ -3160,3 +3160,12 @@ embedded
 `P¹(F5)` have only `(4,6,6,6,6)` centers; the six-set stabilizer is 120. The next proof must therefore
 separate generic balanced-center existence/P-purity from a Baer-subline endpoint lemma, with Low4 as
 the still-uniform alternative.
+
+## 2026-07-11 C77 correction — the Baer branch is not unique
+
+Testing extension fields corrected the preceding interpretation. Every d=4 pencil has normal form
+`A={0,±1,±x}` and an exact four-rational-function balanced selector. Its singleton criterion matches
+the geometric defect computation for every x in all tested fields. Besides characteristic-5
+`x=±2` (the embedded `P¹(F5)`), characteristic-7 `x∈{±2,±3}` also has no balanced center and persists
+in GF(49)/GF(343). The generic route now needs a finite equality-case proof with these two explicit
+exceptions, plus the still-open d=5 geometry and game-semantic P-purity.

@@ -36,8 +36,10 @@ the game-semantic residue with C74's explicit pencil.
    base compresses to four exact perfect-matching reply-graph types. `Low4` is algebraic via the
    proved five-spoke formula `zone_v=q²−15q+34+Σδ_e−t`, with `δ_e∈{4,5,6}` and tangent count `t≤2`.
    A sharper balanced subtype `(d,5,5,6,6)` is P in all 760 exact occurrences and exists
-   geometrically on every tested prime-field pencil for q=11 through 31, but GF(25) gives the precise
-   Baer-subline exception: five maximum pencils have only `(4,6,6,6,6)` centers.
+   geometrically on every tested prime-field pencil for q=11 through 31. The exact `d=4` normal-form
+   selector reduces existence to five rational functions of x. Extension tests correct the earlier
+   unique-Baer guess: failures persist both at characteristic-5 `x=±2` and characteristic-7
+   `x∈{±2,±3}`; the latter reappears in GF(49)/GF(343) from the separately closed q=7 geometry.
 2. **A5 lane — arc-depletion arithmetic.** Sole surviving (ON) mechanism route. Open: prove
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
@@ -74,9 +76,12 @@ the game-semantic residue with C74's explicit pencil.
   `K=Σδ_e−t`; identical `(K,t)` types can be both P and N, so the missing lemma must compare packet
   games rather than classify one center. The balanced subtype `(d,5,5,6,6)` is P in all 760 exact
   q=11/13/17/19 occurrences and exists geometrically for tested prime q=11 through 31. Unconditional
-  existence is false: GF(25)'s embedded `P¹(F5)` gives five maximum pencils with only
-  `(4,6,6,6,6)` centers (six-set stabilizer 120). **Open:** prove balanced-center P-purity plus
-  generic existence and a separate Baer/subfield endpoint lemma, or prove the uniform `Low4`
+  existence is false. The exact `d=4` normal form `A={0,±1,±x}` gives four rational candidate
+  parameters whose singleton values are exactly the balanced centers. Tests through prime q=101 and
+  GF(9/25/27/49/121/125/343) isolate two inherited small-subfield failures: characteristic 5 at
+  `x=±2` and characteristic 7 at `x∈{±2,±3}`. **Open:** finish the finite rational equality case
+  split, prove the `d=5` geometric branch and balanced-center P-purity, and handle the two subfield
+  configurations separately, or prove the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
   [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–9); modes
@@ -93,7 +98,8 @@ the game-semantic residue with C74's explicit pencil.
   on a maximum (`min d`) one-intruder pencil, the fourth-order-statistic low-`zone_v` packet contains
   a P center (observed ≥3), implying `Ncenters≤q−8`. Geometrically this is the fourth-order packet
   of the five-spoke collision score `K=Σδ_e−t`. Sharper route: prove P-purity/existence of balanced
-  `(d,5,5,6,6)` centers in the generic branch and handle the GF(25)-style Baer endpoint separately.
+  `(d,5,5,6,6)` centers in the generic branch and handle the characteristic-5/7 subfield
+  configurations separately.
 
 **Independent / engineering:**
 

@@ -3,8 +3,8 @@
 
 Enumerates PGL matrices, five-set orbits, six-set orbits, and the link matrix
 M(A,B)=#{x notin A : A union {x} belongs to B}.  This is geometry only: it
-never reads or computes game values.  Supports prime q and q=25 using the
-project field F_5[u]/(u^2+3), with elements encoded a+5*b.
+never reads or computes game values.  Supports prime q and selected small
+prime powers; extension-field elements use base-p coefficient encoding.
 """
 import argparse
 from collections import Counter
@@ -15,32 +15,66 @@ import sys
 class Field:
     def __init__(self, q):
         self.q = q
-        self.p = 5 if q == 25 else q
-        if q != self.p and q != 25:
-            raise ValueError("supported: prime q or q=25")
+        extensions = {
+            9: (3, (1, 0, 1)),       # u^2 + 1
+            25: (5, (3, 0, 1)),      # u^2 + 3
+            27: (3, (1, 2, 0, 1)),   # u^3 + 2u + 1
+            49: (7, (1, 0, 1)),      # u^2 + 1
+            121: (11, (1, 0, 1)),    # u^2 + 1
+            125: (5, (1, 1, 0, 1)),  # u^3 + u + 1
+            343: (7, (1, 1, 0, 1)),  # u^3 + u + 1
+        }
+        if q in extensions:
+            self.p, self.modulus = extensions[q]
+            self.degree = len(self.modulus) - 1
+        else:
+            self.p = q
+            self.degree = 1
+            self.modulus = None
+            if any(q % d == 0 for d in range(2, int(q ** 0.5) + 1)):
+                raise ValueError("supported: prime q or selected small prime powers")
+
+    def digits(self, x):
+        out = []
+        for _ in range(self.degree):
+            out.append(x % self.p)
+            x //= self.p
+        return out
+
+    def encode(self, xs):
+        out = 0
+        for x in reversed(list(xs)):
+            out = out * self.p + x % self.p
+        return out
 
     def add(self, x, y):
-        if self.q != 25:
+        if self.degree == 1:
             return (x + y) % self.p
-        return ((x % 5 + y % 5) % 5
-                + 5 * (((x // 5) + (y // 5)) % 5))
+        return self.encode((a + b) % self.p
+                           for a, b in zip(self.digits(x), self.digits(y)))
 
     def neg(self, x):
-        if self.q != 25:
+        if self.degree == 1:
             return (-x) % self.p
-        return ((-x % 5) + 5 * (-(x // 5) % 5))
+        return self.encode(-a % self.p for a in self.digits(x))
 
     def sub(self, x, y):
         return self.add(x, self.neg(y))
 
     def mul(self, x, y):
-        if self.q != 25:
+        if self.degree == 1:
             return x * y % self.p
-        a, b = x % 5, x // 5
-        c, d = y % 5, y // 5
-        # u^2 = -3 = 2 (mod 5).
-        return ((a * c + 2 * b * d) % 5
-                + 5 * ((a * d + b * c) % 5))
+        xd, yd = self.digits(x), self.digits(y)
+        coeffs = [0] * (2 * self.degree - 1)
+        for i, a in enumerate(xd):
+            for j, b in enumerate(yd):
+                coeffs[i + j] = (coeffs[i + j] + a * b) % self.p
+        for k in range(len(coeffs) - 1, self.degree - 1, -1):
+            c = coeffs[k]
+            for j in range(self.degree):
+                idx = k - self.degree + j
+                coeffs[idx] = (coeffs[idx] - c * self.modulus[j]) % self.p
+        return self.encode(coeffs[:self.degree])
 
     def pow(self, x, n):
         out = 1

@@ -2327,3 +2327,14 @@ for q=11 through 31. GF(25) supplies the necessary exception: for `A={0,1,2,3,4}
 proof target splits into generic balanced-center existence/P-purity and a separate Baer/subfield
 endpoint lemma; Low4 remains the uniform fallback. No Lean formalization should precede settlement
 of that branch theorem, though the stable five-spoke incidence identity is ready later.
+
+## 2026-07-11 C77 correction (Codex) — exact d=4 selector and two subfield families
+
+The prior entry's unique-Baer interpretation was too narrow. Normalizing any d=4 pencil to
+`A={0,±1,±x}`, `(e,w)=(0,∞)` gives four explicit rational side-collision parameters. A legal
+parameter is balanced exactly when it is a singleton among those four and differs from the common
+two-pair collision parameter. This formula has zero mismatches over every x in primes through 101
+and GF(9/25/27/49/121/125/343). It finds two persistent empty-selector families: characteristic 5
+at `x=±2`, and characteristic 7 at `x∈{±2,±3}`. GF(125) and GF(343) confirm both are inherited
+prime-subfield configurations, the latter from the already separate q=7 geometry. The field-uniform
+equality case split and the d=5 branch remain open; no Lean formalization is warranted yet.
