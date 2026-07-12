@@ -274,6 +274,7 @@ def run_d5_normal_forms(q, details=False):
     ledger_violations = []
     nonmaximum_controls = Counter()
     pairing_identity_mismatches = []
+    pole_pattern_controls = Counter()
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -299,6 +300,10 @@ def run_d5_normal_forms(q, details=False):
                 if value1 != value2:
                     pairing_identity_mismatches.append((A, edge1, value1,
                                                         edge2, value2))
+            directed_values = {
+                (f, g): directed_collision_parameter(F, U, f, g)
+                for f in U for g in U if f != g
+            }
             if dmin != 5 or (0, q) not in keys:
                 degrees, _certs = collision_certificate_degrees(F, A)
                 legal_degrees = [degrees[a] for a in range(1, q)
@@ -317,6 +322,12 @@ def run_d5_normal_forms(q, details=False):
                                      sum(degrees[a] for a in forbidden) > 3,
                                      sum(d == 1 for d in legal_degrees) > 4,
                                      max(legal_degrees, default=0) > 2)] += 1
+                poles = tuple(sorted(edge for edge, value in directed_values.items()
+                                     if value is None))
+                if len(poles) >= 3:
+                    role = {1: "1", r: "r", s: "s", t: "t"}
+                    role_poles = tuple(sorted((role[f], role[g]) for f, g in poles))
+                    pole_pattern_controls[(role_poles, len(keys))] += 1
                 continue
             pencils += 1
             matches = []
@@ -378,7 +389,8 @@ def run_d5_normal_forms(q, details=False):
         f"failures={failures} formula-mismatches={formula_mismatches[:10]} "
         f"ledger-violations={ledger_violations[:10]} "
         f"pairing-identity-mismatches={pairing_identity_mismatches[:10]} "
-        f"nonmaximum-controls={dict(sorted(nonmaximum_controls.items()))}"
+        f"nonmaximum-controls={dict(sorted(nonmaximum_controls.items()))} "
+        f"pole-pattern-controls={dict(sorted(pole_pattern_controls.items()))}"
     )
     return failures
 

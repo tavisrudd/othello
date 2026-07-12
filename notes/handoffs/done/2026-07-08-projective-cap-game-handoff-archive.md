@@ -2357,3 +2357,13 @@ four equal pairs; only the four cross edges `1↔rs`, `r↔s` can be singleton l
 `n1≤4` uniformly. The d=5 obligation is down to three bounds: `T≥10`, forbidden weight `≤3`, and
 legal degree `≤2`. Primary-d5 nonmaximum controls violate at least one of exactly these three, so
 their algebraic proofs should construct the hidden d4 line from the forbidden pole/equality.
+
+## 2026-07-11 C77 continuation (Codex) — `T≥10` becomes fourteen pole cases
+
+Expanded the eight d=5 pole conditions explicitly. Paired-label poles remove two certificates and
+singleton poles remove one; each pole is a product collision on `(f,∞)`. Since two poles at one
+source give a d4 line immediately, a `T<10` counterexample must choose three distinct sources. The
+pairing graph permits only fourteen minimal patterns: eight pair+singleton, two disjoint-pair, and
+four singleton triples. All computed controls with three or more poles instead repeat a source and
+expose the reported d4 line. Direct substitution already closes one representative implication,
+`A=F=0 => B=0`; its `r↔s` mate is automatic, leaving twelve raw low-degree implications.

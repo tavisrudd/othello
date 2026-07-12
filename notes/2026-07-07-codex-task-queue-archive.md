@@ -3186,3 +3186,12 @@ The twelve directed d=5 certificates satisfy four exact identities forced by `1�
 and only four directed cross edges can be singletons, proving `n1≤4`. The remaining uniform ledger
 proof has three inequalities (`T≥10`, forbidden weight `≤3`, legal degree `≤2`); every nonmaximum
 primary-d5 control with a hidden d4 line violates at least one of exactly these three.
+
+## 2026-07-11 C77 continuation — explicit `T≥10` pole packet
+
+The four paired and four singleton certificate poles are now explicit low-degree polynomials in
+`r,s`. A pole is a product collision on `(f,∞)`; two at one source make that line d4. After the four
+label-pairing identities, only fourteen distinct-source patterns could give three or more poles:
+eight pair+singleton, two disjoint pairs, and four singleton triples. No such pattern survives in
+the controls; `A=F=0 => B=0` is proved directly and symmetry supplies its mate, leaving twelve raw
+finite implications for the uniform `T≥10` proof.

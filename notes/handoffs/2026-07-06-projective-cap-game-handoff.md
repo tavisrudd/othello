@@ -692,8 +692,9 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   rational equality case split, balanced-center P-purity, and separate small-subfield game lemmas.
   The d=5 geometry is now a twelve-certificate ledger: four exact label-pairing identities prove
   `n1≤4`, leaving only `T≥10`, forbidden weight `≤3`, and legal degree `≤2`; together they imply at
-  least two balanced centers. Nonmaximum controls violate exactly these remaining bounds. `Low4`
-  remains the uniform fallback.
+  least two balanced centers. Nonmaximum controls violate exactly these remaining bounds. The
+  `T≥10` proof is now a fourteen-case low-degree pole packet, with `A=F=0 => B=0` and its symmetric
+  mate closed, leaving twelve raw cases. `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

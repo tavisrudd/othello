@@ -352,6 +352,26 @@ least one of exactly these three bounds. Algebraically, the bounds say that at m
 paired labels has a pole, forbidden labels carry weight at most three, and distinct paired labels
 cannot merge; each forbidden equality should therefore construct the excluded d4 line directly.
 
+For `T>=10`, the pole packet is already explicit. Up to nonzero factors, the four paired-label pole
+conditions and four singleton pole conditions are
+
+```text
+A = s+rs-r-rs^2          E = r+s-2rs
+B = r+rs-s-r^2s          F = r+s-2
+C = s+rs-1-s^2           G = 1+rs-2s
+D = r+rs-1-r^2           H = 1+rs-2r.
+```
+
+`A,B,C,D` each remove two certificates (the corresponding paired edges); `E,F,G,H` remove one.
+A pole with source f is exactly a product collision on the candidate line `(f,infinity)`, so two
+poles with the same source immediately make that line d=4. Therefore a counterexample to `T>=10`
+would need at least three poles with distinct sources. The pairing graph leaves only fourteen
+minimal patterns to exclude: eight paired-pole plus disjoint-singleton cases, two pairs of disjoint
+paired poles, and four triples of singleton poles. Every tested primary-d5 control with at least
+three poles instead acquires a repeated source and its reported maximum line is d=4. For example,
+`A=F=0` forces `B=0`; the nominally disjoint pole pair creates two poles at source 1. The remaining
+twelve raw cases (after its `r<->s` mate) are the exact finite algebra packet for proving `T>=10`.
+
 ## Reproduction
 
 ```bash
