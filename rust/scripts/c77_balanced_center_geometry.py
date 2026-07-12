@@ -204,13 +204,14 @@ def run(q, details=False):
     return missing
 
 
-def run_d4_normal_forms(q):
+def run_d4_normal_forms(q, details=False):
     """Test the d=4 normal form A={0,+-1,+-x}, (e,w)=(0,infinity)."""
     F = Field(q)
     zero, one = 0, 1
     minus_one = F.neg(one)
     failures = []
     formula_mismatches = []
+    exception_classification_violations = []
     histogram = Counter()
     for x in range(q):
         if x in (zero, one, minus_one):
@@ -251,13 +252,25 @@ def run_d4_normal_forms(q):
         )
         if predicted != matches:
             formula_mismatches.append((x, predicted, matches))
+        if details:
+            print(
+                f"BALANCED-D4-X q={q} x={x} forbidden={sorted(forbidden)} "
+                f"candidates={candidates} common={common} balanced={matches}"
+            )
         histogram[len(matches)] += 1
+        exceptional_x = (
+            (F.p == 5 and x in {2, F.p - 2})
+            or (F.p == 7 and x in {2, 3, F.p - 2, F.p - 3})
+        )
+        if (not matches) != exceptional_x:
+            exception_classification_violations.append((x, exceptional_x, matches))
         if not matches:
             failures.append((x, tuple(sorted(forbidden)), dict(sorted(types.items()))))
     print(
         f"BALANCED-D4-NORMAL q={q} x-count={sum(histogram.values())} "
         f"multiplicity={dict(sorted(histogram.items()))} failures={failures} "
-        f"formula-mismatches={formula_mismatches}"
+        f"formula-mismatches={formula_mismatches} "
+        f"exception-classification-violations={exception_classification_violations}"
     )
     return failures
 
@@ -652,6 +665,6 @@ if __name__ == "__main__":
         if args.d5_normal_forms:
             run_d5_normal_forms(q, args.details)
         elif args.normal_forms:
-            run_d4_normal_forms(q)
+            run_d4_normal_forms(q, args.details)
         else:
             run(q, args.details)

@@ -79,17 +79,17 @@ the game-semantic residue with C74's explicit pencil.
   existence is false. The exact `d=4` normal form `A={0,±1,±x}` gives four rational candidate
   parameters whose singleton values are exactly the balanced centers. Tests through prime q=101 and
   GF(9/25/27/49/121/125/343) isolate two inherited small-subfield failures: characteristic 5 at
-  `x=±2` and characteristic 7 at `x∈{±2,±3}`. **Open:** finish the finite rational equality case
-  split and balanced-center P-purity, and handle the two subfield configurations separately. The
+  `x=±2` and characteristic 7 at `x∈{±2,±3}`. The rational equality split is now proved: these are
+  exactly the empty-selector cases over every odd field. **Open:** prove balanced-center P-purity
+  and handle the two subfield configurations separately. The
   `d=5` branch is reduced to a twelve-certificate ledger: balanced centers are exactly legal
   degree-two parameters. Four exact paired-label identities prove `n1≤4`, and a three-orbit pole
   argument proves `T≥10`, and three factored representative identities prove legal degree `≤2`.
   The forbidden-target audit is now complete: five excluded label/target orbits factor to primary
   contradictions; five singleton-pair orbits give four contradictions/templates and one genuine
   characteristic-3 weight-two family with no paired target. Thus `F≤3` and the full d5 geometric
-  theorem are proved: every maximum d5 pencil has at least two balanced centers.
-  Legal degree `≤2` is now proved: the three nonincident equality representatives factor to a forced
-  incident merge, the primary d4 form, or a distinctness contradiction.
+  theorem are proved: every maximum d5 pencil has at least two balanced centers. Hence the generic
+  balanced-center existence geometry is closed for both d4 and d5.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:

@@ -3265,3 +3265,11 @@ label/target audit and five-orbit singleton-pair audit prove the target table an
 weight-two family; it has no paired target and cannot accept a third singleton. All other pair orbits
 are d4/impossible or enter the incident template. Hence `F≤3`, and the d5 ledger proves at least two
 balanced centers on every maximum d5 pencil. The d5 geometry is closed.
+
+## 2026-07-11 C77 continuation — d4 equality split closed
+
+Factoring the six candidate-badness equations and auditing their intersections proves that the only
+d4 pencils without a balanced center are characteristic-5 `x=±2` and characteristic-7
+`x∈{±2,±3}`. Cross/common collisions otherwise leave two singleton candidates. With d5 already
+closed, generic balanced-center existence geometry is complete; the open content is P-purity plus
+the two small-prime-subfield game branches.

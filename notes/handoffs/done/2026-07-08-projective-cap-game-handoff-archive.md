@@ -2452,3 +2452,13 @@ singleton-pair orbits, four are d4/impossible or force the incident paired templ
 target; any third singleton enters a forbidden orbit. Together with the proved at-most-one-paired
 bound, this gives `F≤3`. The ledger identity then yields `n2≥2`, proving every maximum d5 pencil has
 at least two balanced centers. The d5 geometric branch is closed.
+
+## 2026-07-11 C77 continuation (Codex) — d4 generic selector theorem proved
+
+The four d4 rational candidates have only six badness equations: two unavailable-pair conditions,
+two internal-duplicate conditions, and two cross/common conditions. Their finite intersection audit
+shows the cross/common cases always leave two singleton candidates and that complete failure occurs
+only at characteristic-5 `x=±2` or characteristic-7 `x∈{±2,±3}`. The exception classifier has zero
+violations through GF343. Thus every d4 maximum pencil outside those explicit prime-subfield
+families has a balanced center. Together with the closed d5 ledger, generic balanced-center
+existence geometry is proved; P-purity and the two exceptional game branches remain.

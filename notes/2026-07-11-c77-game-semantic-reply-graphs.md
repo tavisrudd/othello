@@ -287,9 +287,29 @@ The first is the embedded `P^1(F5)` six-set. The second is inherited from the se
 normal form: GF(49) and GF(343) still have no balanced center at those four prime-subfield values,
 even though their many extension-field legal parameters all have type `(4,6,6,6,6)`. Thus the
 earlier “Baer exception” wording was too narrow. The remaining geometric task is now finite and
-explicit: cross-multiply the equality/forbidden cases among `c0,c1,c2,d1,d2` to prove that these are
-the only empty-selector cases over every odd field, then formulate the two small-subfield game
-lemmas. The `d=5` maximum-pencil branch also remains to be proved geometrically.
+explicit, and the cross-multiplication closes it. The only ways a side candidate can cease to be a
+balanced singleton are
+
+```text
+C-pair unavailable: 3x=+-1       C-pair duplicate: 3x^2+1=0
+D-pair unavailable: x=+-3        D-pair duplicate: x^2+3=0
+cross/common pairs:  x^2+-4x-1=0.
+```
+
+The other cross-pairings force `x=+-1`. A finite intersection audit shows that common cross-pairs
+always leave the other two candidates singleton; two duplicate pairs would force characteristic 2;
+and the only complete coverings are
+
+```text
+C unavailable + D unavailable  => characteristic 5, x=+-2;
+C unavailable + D duplicate    => characteristic 7, x=+-2;
+C duplicate + D unavailable    => characteristic 7, x=+-3.
+```
+
+Thus every d4 maximum pencil has a balanced center except exactly the two listed prime-subfield
+families. The exception classifier has zero violations in primes through 101 and
+GF(9/25/27/49/121/125/343). Generic balanced-center existence geometry is now proved for both d4
+and d5; only the characteristic-5/7 exceptional game lemmas and balanced-center P-purity remain.
 
 ### `d=5` collision-certificate ledger
 

@@ -690,13 +690,15 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   `A={0,±1,±x}`, the four rational balanced candidates fail at characteristic-5 `x=±2` and
   characteristic-7 `x∈{±2,±3}` (confirmed again in GF125/GF343). The refined route is the finite
   rational equality case split, balanced-center P-purity, and separate small-subfield game lemmas.
+  The d4 equality split is now proved: the displayed characteristic-5/7 families are exactly the
+  empty-selector cases over every odd field.
   The d=5 geometry is now a twelve-certificate ledger: four exact label-pairing identities prove
   `n1≤4`; a three-orbit pole argument proves `T≥10`; three factored merge identities prove legal
   degree `≤2`. The seven target orbits and five singleton-pair orbits are now fully factored,
   including the genuine characteristic-3 weight-two singleton family. This proves `F≤3`, hence at
-  least two balanced centers on every maximum d5 pencil. The d5 geometric branch is closed; d4's
-  generic equality split and characteristic-5/7 exceptions remain. `Low4` remains the uniform
-  fallback.
+  least two balanced centers on every maximum d5 pencil. Generic balanced-center existence is now
+  closed for d4 and d5; only the characteristic-5/7 exceptional game branches and P-purity remain.
+  `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits
