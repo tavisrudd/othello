@@ -11,8 +11,9 @@ Formalized without `sorry`:
   and completeness of each orbit under the full nonidentity generating set (the abstract
   `V₄ → K₄` core);
 - `KleinFourBridge.lean`: agreement between pair-product deletion and nontrivial-
-  stabilizer deletion for a realized `V₄` triple, and the resulting live-orbit
-  injectivity bridge;
+  stabilizer deletion for a realized `V₄` triple, a checked enumeration showing that the
+  three unordered products in the concrete `V₄` are exactly its nonidentity elements,
+  and the resulting live-orbit injectivity bridge;
 - `Modular.lean`: the three actions on `ZMod (2*n)`, their involution and pair-product
   identities, both deletion congruences from equation (7.2), and invariance of deletion
   under the central half-turn.

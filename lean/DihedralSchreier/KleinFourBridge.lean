@@ -15,6 +15,22 @@ namespace DihedralSchreier
 
 namespace KleinFourBridge
 
+/-- A concrete Klein four group, used to check the pair-product enumeration rather than
+leave it as an informal group-theory side condition. -/
+abbrev V4 := Multiplicative (ZMod 2 × ZMod 2)
+
+/-- The three nonidentity elements of the concrete Klein four group. -/
+def explicitLabel : Fin 3 → V4 :=
+  ![Multiplicative.ofAdd (1, 0),
+    Multiplicative.ofAdd (0, 1),
+    Multiplicative.ofAdd (1, 1)]
+
+/-- The three unordered products of distinct labelled involutions are exactly the three
+nonidentity elements of `V4`. -/
+theorem explicit_pairProducts : ∀ g : V4,
+    g ≠ 1 ↔ ∃ i j : Fin 3, i < j ∧ explicitLabel i * explicitLabel j = g := by
+  native_decide
+
 variable {G : Type*} [Group G] {k : ℕ} [MulAction G (Fin k)]
 
 /-- A labelled involution triple realized by three group elements whose unordered pair

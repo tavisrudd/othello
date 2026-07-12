@@ -19,6 +19,10 @@ complete Grundy-value classification, explicit split- and nonsplit-torus formula
 periodicity in \(q\), an exact one-half P-position density among admissible prime fields,
 and a converse realization theorem.
 
+All structural and fixed-field formulas hold for odd prime powers in the tame case. The
+density theorem and the infinite-realization corollary specialize to prime fields through
+primes in arithmetic progressions.
+
 ## 1. Introduction
 
 Node Kayles is the impartial game in which a move at a graph vertex deletes its closed
@@ -161,8 +165,13 @@ D_T(\Omega)=
 \tag{3.1}
 \]
 where the unordered-pair notation is unambiguous because \(\tau\sigma=(\sigma\tau)^{-1}\)
-has the same fixed points as \(\sigma\tau\), and
-and
+has the same fixed points as \(\sigma\tau\). Equivalently, for involutions,
+\[
+\sigma\tau(x)=x
+\quad\Longleftrightarrow\quad
+\sigma(x)=\tau(x),
+\]
+which is the common-projection-partner condition in Lemma 2.1. Define also
 \[
 R_T(\Omega)=
 \operatorname{Sch}(G,\Omega,T)
@@ -262,9 +271,26 @@ four points. On such an orbit the three involutions give the three perfect match
 \(K_4\). Since one Node-Kayles move deletes a whole \(K_4\), each orbit has Grundy value
 one, and disjoint-union additivity gives (4.3). ∎
 
+In the later graph notation this is the \(n=1\) boundary \(M_4=K_4\), while the
+reflection-stabilized template is \(L_0=\varnothing\). It is treated separately because
+the \(T_d\) parametrization and the pendant-ladder proof for \(n\ge2\) degenerate at
+\(n=1\).
+
+For any dihedral subgroup of \(PGL_2(q)\), regardless of the parity of its rotation order,
+all reflection centres lie on one projective line. Indeed, over the splitting field a
+dihedral normal form represents every reflection by a matrix proportional to
+\[
+\begin{pmatrix}
+0&\lambda\\
+1&0
+\end{pmatrix}.
+\]
+Its centre has coordinate \(b=0\). The line spanned by the reflection centres is Galois
+invariant and therefore descends to \(\mathbf F_q\).
+
 No dihedral group whose rotation subgroup has odd order can arise from a legal generating
 involution triple: all of its involutions are reflections, and their centres are collinear
-by the argument below. For the remainder of the classification, fix \(n\ge2\) and suppose
+by the preceding paragraph. For the remainder of the classification, fix \(n\ge2\) and suppose
 \[
 G\cong D_{4n}
 =
@@ -275,18 +301,8 @@ Put
 z=r^n.
 \]
 
-The noncentral involutions are the reflections \(sr^e\). In the conic model their centres
-lie on one projective line: in a dihedral normal form over the splitting field, reflection
-matrices are proportional to
-\[
-\begin{pmatrix}
-0&\lambda\\
-1&0
-\end{pmatrix},
-\]
-so their centre coordinates satisfy \(b=0\). This line is invariant under Galois and
-therefore descends to \(\mathbf F_q\). Hence three reflection centres are collinear and
-cannot be a legal selected triple.
+The noncentral involutions are the reflections \(sr^e\). Hence three noncentral
+involution centres are collinear and cannot be a legal selected triple.
 
 A legal generating involution triple must therefore contain \(z\) and two reflections.
 After rechoosing the reflection generator and interchanging the reflections, it has the form
@@ -401,7 +417,9 @@ Brown et al.'s third ladder variation \({}_{-}L^-_{(2n-3)\times2}\).
 
 Their ladder theorem states
 \(\mathcal G({}_{-}L^-_{k\times2})=0\) for every integer \(k\ge1\). Here
-\(k=2n-3\) is odd and at least one, including the boundary \(n=2\). Hence every
+\(k=2n-3\) is odd and at least one. Their \(k=1\) base graph is \(P_4\), with value zero,
+and \(k=3\) is already covered by the same theorem; thus the first two values arising
+here are included explicitly, not inferred from an eventual pattern. Hence every
 option of \(M_{4n}\) has value zero, and
 \[
 \mathcal G(M_{4n})=\operatorname{mex}\{0\}=1.
@@ -616,8 +634,12 @@ For even \(d\), necessarily \(n\) odd,
 
 The multiplicity \(b_A\) does not occur because its template is empty.
 
-For the natural action on \(\mathbf P^1(q)\), each exceptional class occurs at most once.
-Write its indicators as
+For the natural action on \(\mathbf P^1(q)\), each exceptional class occurs at most once,
+and the exceptional point sets are pairwise disjoint. Otherwise one point stabilizer
+would contain either two distinct reflections or a reflection and a nonidentity rotation,
+contradicting Proposition 6.1's cyclicity conclusion. (Here \(2n\ge4\), so the two
+reflection classes and the central rotation are genuinely distinct.) Write the orbit
+indicators as
 \[
 \varepsilon,a_0,a_1\in\{0,1\}.
 \]
@@ -784,6 +806,20 @@ d\text{ even}\ (n\text{ odd})&h\equiv0,2\pmod4.
 In both torus families, \(\delta=1\) exactly when \(h\) is even. Substitution into
 (9.2)--(9.6), followed by the four cases \(h\bmod4\), gives the table. ∎
 
+For the even-\(d\) triple this has the particularly geometric form
+\[
+\boxed{
+R_{T_d}\text{ is P}
+\quad\Longleftrightarrow\quad
+\text{both reflection classes are split}
+\quad\Longleftrightarrow\quad
+4n\mid q\mp1,
+}
+\tag{9.8}
+\]
+where the upper sign is the split-torus family and the lower sign the nonsplit-torus
+family.
+
 For fixed \(n\), these formulas are periodic in \(q\) with period dividing \(8n\) within
 each torus family.
 
@@ -918,7 +954,9 @@ in the split case and
 h=\frac{q+1}{2n}
 \]
 in the nonsplit case. The four possibilities \(h\bmod4\) give four admissible reduced
-residue classes modulo \(8n\).
+residue classes modulo \(8n\). Explicitly, the corresponding prime candidate is
+\(q=2nh\pm1\): it is odd, and any common divisor with \(n\) would divide \(\pm1\).
+Therefore \(\gcd(q,8n)=1\) for all four values of \(h\bmod4\).
 
 Corollary 9.1 selects exactly two of these four classes in every triple type. The prime
 number theorem for arithmetic
@@ -993,9 +1031,10 @@ group here. Its only involutions are the three nonidentity elements of its norma
 four subgroup, so any subgroup generated by involutions in \(A_4\) is contained in that
 \(V_4\), not all of \(A_4\).
 
-The unresolved problem beyond the dihedral case is to evaluate the corresponding regular
-templates for the polyhedral groups. That extension is not needed for the present
-classification.
+For the polyhedral groups, each regular template is a fixed finite Cayley graph and hence
+machine-computable. What remains beyond the present dihedral classification is a
+proof-quality catalogue across generating-triple classes, the nonregular coset templates,
+and the field-dependent orbit formulas. These extensions are not needed here.
 
 Even a complete polyhedral table would only round out the proper-small-subgroup boundary.
 Generic fourth moves in the motivating projective-cap game typically generate full
