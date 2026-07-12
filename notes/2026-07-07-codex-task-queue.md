@@ -80,8 +80,10 @@ the game-semantic residue with C74's explicit pencil.
   parameters whose singleton values are exactly the balanced centers. Tests through prime q=101 and
   GF(9/25/27/49/121/125/343) isolate two inherited small-subfield failures: characteristic 5 at
   `x=±2` and characteristic 7 at `x∈{±2,±3}`. The rational equality split is now proved: these are
-  exactly the empty-selector cases over every odd field. **Open:** prove balanced-center P-purity
-  and handle the two subfield configurations separately. The
+  exactly the empty-selector cases over every odd field. **Open:** prove the weaker sufficient
+  balanced-packet theorem (some balanced center is P), and handle the two subfield configurations
+  separately. Universal P-purity is deprioritized: individual forced states do not compress, while
+  q17 maximum-pencil packets have only four forms. The
   `d=5` branch is reduced to a twelve-certificate ledger: balanced centers are exactly legal
   degree-two parameters. Four exact paired-label identities prove `n1≤4`, and a three-orbit pole
   argument proves `T≥10`, and three factored representative identities prove legal degree `≤2`.

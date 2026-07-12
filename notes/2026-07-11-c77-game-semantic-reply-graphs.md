@@ -598,6 +598,24 @@ classifier: forced states have 1/2/3 repeated affine secant directions in counts
 have a four-subset on a burned-direction conic, versus 160/510 controls. Hence there is no common
 forced-state orbit or exclusive elementary incidence signature visible at this layer.
 
+### Corrected target: the balanced packet
+
+Universal P-purity is stronger than odd escape needs. The smaller sufficient target is: every
+generic maximum pencil has **some** P-valued balanced center. The packet census is much more
+compressed than the root census:
+
+```text
+q=11: 16*(0,1)
+q=13: 6*(0,2), 9*(0,1), 3*(1,1,2,2)
+q=17: 6*(0,1), 3*(2,2,3,3), 6*(0,2,4,5), 6*(1,3,4,5)
+```
+
+Balanced multiplicities are 2 at q=11, 2/4 at q=13 and q=17, and 2/3/4 at q=19. This packet
+theorem preserves all proved d4/d5 geometry while permitting sibling comparison; universal
+P-purity remains an exact-corpus observation, not the recommended proof interface. The
+characteristic-5/7 empty-balanced families still need separate game lemmas, and Low4 remains the
+fallback.
+
 ## Reproduction
 
 ```bash
