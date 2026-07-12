@@ -2433,3 +2433,11 @@ The paired-target table has two simultaneous-target orbits. Adjacent targets sub
 `(s-r)(1-r)(1-s)=0`, contradicting distinctness. Opposite targets subtract to
 `(s-1)²(r²-1)=0`, forcing `r=-1` and the primary `{±1,±s}` d4 form. Thus a maximum d5 pencil has at
 most one paired forbidden target. Two forbidden-weight subclaims remain.
+
+## 2026-07-11 C77 continuation (Codex) — singleton pair forces paired target
+
+All computed pairs of forbidden singleton targets are rectangle relabelings of
+`S1t=rt`, `Srs=st`. Their equations factor to `1+r=2rs` and `r(1+s)=2s`; elimination gives
+`(r-1)(3r+2)=0`, and substitution forces `P1r=rt`. Hence any compatible singleton pair enters the
+already-closed paired-plus-two-singletons d4 template. The remaining `F≤3` proof is only the finite
+exhaustiveness of the eight-entry target table and its compatible-pair list.

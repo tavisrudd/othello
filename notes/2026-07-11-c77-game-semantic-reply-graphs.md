@@ -437,6 +437,22 @@ so `E1-E3=(s-1)^2(r^2-1)`. Since `s!=1` and `r!=1`, simultaneous targets force `
 primary four-set `{+-1,+-s}` and hence d=4. Rectangle symmetry covers every pair of paired labels.
 Therefore at most one paired forbidden target can occur in a maximum d5 pencil.
 
+The singleton interaction also has one compatible orbit in the exact target table. Up to rectangle
+symmetry its representative is
+
+```text
+S1t=rt  =>  (1-r)(1+r-2rs)=0,
+Srs=st  =>  (1-s)(r(1+s)-2s)=0.
+```
+
+Distinctness gives `1+r=2rs` and `r(1+s)=2s`. Eliminating s yields
+`(r-1)(3r+2)=0`; the `r=1` branch is forbidden, and substituting the other relation into the paired
+equation gives `P1r=rt`. Thus the singleton pair forces the unique paired target and precisely the
+already-closed incident d4 template. Every observed pair of singleton targets is one of the four
+rectangle relabelings of this representative; no maximum form has two singleton targets. The last
+`F<=3` work is consequently the finite exhaustiveness check behind the target table: factor the
+nonlisted label-to-monomial equalities and incompatible singleton pairs to distinctness or primary d4.
+
 The legal-degree controls admit the same source-incidence reduction. Every legal degree-3 merge is
 one paired label plus an **incident** singleton: the singleton's source is one of the paired label's
 two sources, so two collisions lie on the same candidate line and make it d=4 immediately. Every

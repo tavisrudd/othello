@@ -3250,3 +3250,10 @@ d4 template; and no-pair configurations have at most three singleton targets.
 Factoring adjacent and opposite simultaneous paired-target equations proves that at most one paired
 label can be forbidden in a maximum d5 pencil: the adjacent case violates distinctness and the
 opposite case forces the primary `{±1,±s}` d4 form. The target-table proof now has two subclaims left.
+
+## 2026-07-11 C77 continuation — singleton-pair orbit closed
+
+The unique compatible singleton-pair representative factors to two linear relations whose
+elimination forces the corresponding paired forbidden target. It therefore lands in the already
+proved incident d4 template. Only the finite exhaustiveness of the forbidden target/pair table
+remains for `F≤3`.

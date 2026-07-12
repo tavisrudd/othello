@@ -285,6 +285,7 @@ def run_d5_normal_forms(q, details=False):
     control_forbidden_partitions = Counter()
     maximum_forbidden_assignments = Counter()
     forbidden_target_violations = []
+    singleton_pair_cases = Counter()
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -347,6 +348,19 @@ def run_d5_normal_forms(q, details=False):
                     if target not in allowed_forbidden_targets[name]:
                         forbidden_target_violations.append((A, name, target,
                                                             grouped_values))
+            singleton_assignments_all = tuple(sorted(
+                (name, forbidden_names_common[value])
+                for name, value in grouped_values.items()
+                if name.startswith("S") and value is not None and value in forbidden
+            ))
+            if len(singleton_assignments_all) >= 2:
+                paired_assignments_all = tuple(sorted(
+                    (name, forbidden_names_common[value])
+                    for name, value in grouped_values.items()
+                    if name.startswith("P") and value is not None and value in forbidden
+                ))
+                singleton_pair_cases[(singleton_assignments_all,
+                                      paired_assignments_all, dmin)] += 1
             representative_equalities = {
                 "pair-disjoint-single": ("P1r", "St1"),
                 "opposite-pairs": ("P1r", "Pr1"),
@@ -541,7 +555,8 @@ def run_d5_normal_forms(q, details=False):
         f"maximum-forbidden-partitions={dict(sorted(maximum_forbidden_partitions.items()))} "
         f"control-forbidden-partitions={dict(sorted(control_forbidden_partitions.items()))} "
         f"maximum-forbidden-assignments={dict(sorted(maximum_forbidden_assignments.items()))} "
-        f"forbidden-target-violations={forbidden_target_violations[:10]}"
+        f"forbidden-target-violations={forbidden_target_violations[:10]} "
+        f"singleton-pair-cases={dict(sorted(singleton_pair_cases.items()))}"
     )
     return failures
 
