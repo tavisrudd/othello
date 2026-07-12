@@ -58,8 +58,15 @@ the game-semantic residue with C74's explicit pencil.
   marked fingerprint. The positive structural model is the q17 score-9 packet: four primitive
   split/nonsplit candidates, with the unique maximum-zone-edge candidate clean/P in all 28
   transitions. Its zone is one 9-vertex graph; `ProjectiveCap.PrimitiveZoneBase` now Lean-checks its
-  Grundy-zero value. The rule fails below score 9, so continue with algebraic packet existence plus
-  a new generic descent, not arithmetic P/N classification. Report:
+  Grundy-zero value. Full conic-stabilizer orbital vectors expose a generic score-9 fiber: 24/28
+  clean repairs are the unique `(q+1,q+1,q+1)` primitive triple intersections, with four explicit
+  exceptional fibers. Hollmann--Xiang intersection numbers are therefore the next reply-counting
+  algebra (with odd-q formulas still to derive). The decisive structural prerequisite is a bounded
+  active-intruder frontier; then fused quadratic-character relations give an abundant two-variable
+  reply packet. The exact relation polynomial
+  `D_x(y)=(2-rv-cu)^2-4(rc-1)(uv-1)` simultaneously gives line-conic and split/nonsplit type and is
+  exhaustively convention-checked through q19. The rule fails below score 9, so continue with packet existence plus a new generic
+  descent, not arithmetic P/N classification. Report:
   [`2026-07-11-c79-number-theoretic-forcing.md`](2026-07-11-c79-number-theoretic-forcing.md).
 
 - **C76 [REPORTED 2026-07-11 — invariant prong answered]** —

@@ -2547,3 +2547,25 @@ type with degree sequence `(3,4,4,4,5,5,7,7,7)` and 21 triangles. A 20-row refle
 `ProjectiveCap.PrimitiveZoneBase` proves this graph has Node-Kayles Grundy zero using kernel
 `decide`; the Lean build passes with only standard axioms. Max-edge/full-order combinations fail on
 most score-7/8 transitions, so this is a closed finite q17 base lemma rather than the generic descent.
+
+## 2026-07-11 C79 continuation (Codex) — orbital reply fibers
+
+Tested the full product-order relation vector from each q17 score-9 primitive repair to the three
+prior intruders. On 24/28 transitions the clean repair is the unique `(18,18,18)` candidate. The
+remaining four are a single exceptional profile with clean vector `(9,9,16)` and decoys including
+`(9,9,18)`. This makes the conic-stabilizer cross-ratio coherent configuration a concrete counting
+tool: its intersection numbers count two-relation reply fibers, and bounded character sums can count
+higher intersections after legal exclusions. Pairwise orbital order still does not certify value;
+the intended theorem is packet nonemptiness plus a separate structural descent. Also ruled out a
+terminal-parity explanation of the Lean base: its maximal independent sets have sizes 2, 3, and 4.
+Hollmann--Xiang's explicit parameter calculation specializes to even characteristic, so the odd-q
+counts still need derivation. Fusing fine relations into quadratic-character/line-type conditions
+gives the right abundance mechanism when only boundedly many intruders are active. This isolates the
+new structural prerequisite: a bounded active-frontier lemma that retires or absorbs old intruder
+matchings; otherwise the number of simultaneous character conditions grows with play.
+
+Derived the exact odd-q orbital polynomial. Projection from `x=(r,c)` acts on the conic parameter as
+`(t-r)/(ct-1)`, so for `y=(u,v)` the product discriminant is
+`D=(2-rv-cu)^2-4(rc-1)(uv-1)`. Its zero/square/nonsquare class agrees with tangent/split/nonsplit
+line type and with product order in the q/q-1/q+1 branch. Exhaustive convention validation passed
+all 114,132 intruder pairs at q=11,13,17,19.

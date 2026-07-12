@@ -297,6 +297,100 @@ next number-theoretic work should derive a packet equation for a structurally P 
 counting/descent lemma for the balanced state family.  The score-9 four-candidate primitive packet
 is the first exact model of the desired theorem shape.
 
+### Orbital-intersection packet: positive counting gate, not yet a game lemma
+
+There is a more precise number-theoretic home for the repair packet. Polarity identifies an
+off-conic intruder with a non-tangent line of the conic. Hollmann--Xiang's coherent configuration
+for the conic-stabilizer action has relations described by cross-ratio; on either the secant or
+exterior type its intersection numbers count points in two prescribed orbital relations. Thus, for
+two current intruders `u,v`, a reply packet
+
+```text
+Y_{I,J}(u,v) = { y legal : rel(u,y) in I and rel(v,y) in J }
+```
+
+has an exact association-scheme count before the bounded legal-point exclusions. For three or more
+current intruders the analogous multiple intersection is not determined by pairwise labels alone,
+but remains a bounded system of cross-ratio equations or character conditions. This is exactly the
+place for a character-sum or primitive-element sieve: count the response fiber first, then prove its
+structural game effect separately.
+
+The primary-source scope matters: the coherent configuration and cross-ratio description apply in
+odd order, but Hollmann--Xiang derive their displayed intersection-parameter formulas only after
+specializing the rest of the calculation to even characteristic. We therefore get the correct
+orbital algebra, not an off-the-shelf odd-q numerical formula. Fine single relations have small
+two-relation intersections; the abundant packet should use a fusion of many relations, such as
+prescribed secant/exterior type or quadratic character of the product-involution discriminant.
+
+The q17 score-9 base supports this packet rather than a generic order classifier. Record the product
+orders from a candidate reply to all three prior intruders. On 24/28 transitions the clean repair is
+the unique candidate with vector `(18,18,18)`, i.e. nonsplit primitive order `q+1` in all three
+relations. The other four transitions are one explicit exceptional fiber: the clean vector is
+`(9,9,16)`, while decoys include `(9,9,18)`. Hence full orbital data isolates a generic primitive
+triple-intersection packet plus a small exceptional relation stratum, but pairwise orders are still
+not a universal P classifier. The maximum-zone-edge rule remains the exact finite-base selector.
+
+A concrete large-q gate is now: choose a union of orbital classes with a positive main-term
+intersection count at the two-intruder layer; subtract the bounded old-secant and played-point
+exclusions; prove that every survivor preserves a strategy class or decreases a defect; and treat
+vanishing/small intersection numbers as explicit cross-ratio exceptional fibers. The arithmetic counts a
+**relational fiber of replies**. It never declares an individual orbital class P.
+
+For a bounded active set of intruders, this existence step has the expected asymptotic shape. Each
+requested secant/exterior or split/nonsplit relation is a quadratic-character condition on a
+quadratic discriminant in the two coordinates of `y`. Expanding `r` such indicators gives a main
+term of order `q^2/2^r`, with lower-order character sums unless a product becomes a square; legality
+removes only the union of the boundedly many old secant lines. The square-product degeneracies are
+an explicit factor audit, not mysterious game exceptions.
+
+This exposes the real structural bottleneck more cleanly: `r` must stay bounded. The number of
+selected intruders grows during play, so a uniform proof needs an **active-frontier lemma** saying
+that only boundedly many old intruder matchings remain relevant to the reply/descent invariant; the
+rest must be retired, canceled, or absorbed into a certified bulk state. Without that lemma the
+character packet acquires linearly many simultaneous conditions and its density disappears. Thus
+the next game-semantic target is bounded active memory, after which odd-q packet nonemptiness is a
+standard finite-field count.
+
+#### Exact odd-q orbital discriminant
+
+The fused relation has a direct grid formula. Parametrize the conic `XY=Z^2` by
+`P(t)=(t^2:1:t)`, and write an affine intruder as `x=(r,c,1)`. The chord through `P(t),P(s)` has
+equation
+
+```text
+X + ts Y - (t+s) Z = 0.
+```
+
+Putting `x` on the chord and solving for `s` gives the projection involution
+
+```text
+sigma_x(t) = (t-r)/(ct-1),       M_x = [[1,-r],[c,-1]].
+```
+
+For `y=(u,v,1)`, therefore,
+
+```text
+tr(M_x M_y)  = 2-rv-cu,
+det(M_x M_y) = (rc-1)(uv-1),
+D_x(y)       = (2-rv-cu)^2 - 4(rc-1)(uv-1).                 (3)
+```
+
+The same polynomial is the discriminant obtained by intersecting the line `xy` with the conic.
+Consequently `D=0`, `chi(D)=+1`, and `chi(D)=-1` mean respectively tangent/unipotent,
+secant/split, and exterior/nonsplit. The product order is respectively `p` (for prime q), a divisor
+of `q-1`, or a divisor of `q+1`. This is an exact value-opaque relation coordinate over every odd
+field; no chosen conic labels remain in its square class.
+
+`scripts/c79_orbital_packet.py` exhaustively compares (3) with both geometric line intersection and
+the permutation-product order on every intruder pair at q=11,13,17,19: 114,132 pairs, zero
+mismatches. The algebra above is the proof; the census guards the coordinate conventions.
+
+### Terminal-parity shortcut: closed even for the finite base
+
+The canonical nine-vertex primitive zone has six maximal independent sets, of sizes `2,2,2,3,3,4`.
+Thus its Grundy-zero value is not explained by purity or common terminal parity. An all-q proof still
+needs a reply strategy/descent certificate.
+
 ## Strategy-matching viewpoint and adjacent literature
 
 A root-relative second-player strategy can be viewed as a rule matching every opponent-reachable
@@ -314,6 +408,10 @@ Adjacent work supports the language but does not transfer a theorem:
 - Balandraud's polynomial-method addition theorems illustrate a useful reverse-Nullstellensatz
   pattern: choose a Cartesian product on which all coefficient-formula terms vanish except one,
   forcing a solution: <https://arxiv.org/abs/1702.06419>.
+- Hollmann--Xiang describe the conic-stabilizer coherent configuration and its cross-ratio
+  relations/intersection numbers: <https://arxiv.org/abs/math/0503573>. This is the natural counting
+  algebra for intruder-reply fibers, but its displayed parameter calculation specializes to even
+  characteristic and it supplies no game-value theorem by itself.
 
 The final proof should therefore present an arithmetic **strategy matching** or descent kernel, not
 an arithmetic outcome formula for the entire cap complex.
@@ -322,13 +420,15 @@ an arithmetic outcome formula for the entire cap complex.
 
 ```bash
 python3 -m py_compile scripts/c77_forced_reply_algebra.py \
-  scripts/c79_primitive_repair.py scripts/c79_pencil_arithmetic.py
+  scripts/c79_primitive_repair.py scripts/c79_pencil_arithmetic.py \
+  scripts/c79_orbital_packet.py
 python3 scripts/c77_forced_reply_algebra.py --q 17 \
   --solver target/gridcap-c77-targeted --all-roots --targeted --controls \
   --transition-controls --torus-gate --no-subset-search
 python3 scripts/c79_primitive_repair.py --q 13 --high 0
 python3 scripts/c79_primitive_repair.py --q 17 --high 7
 python3 scripts/c79_pencil_arithmetic.py 11 13 17 19
+python3 scripts/c79_orbital_packet.py 11 13 17 19
 cd ../lean
 choom -n 1000 -- nix develop --command lake build ProjectiveCap.PrimitiveZoneBase
 ```

@@ -725,8 +725,15 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   fingerprint wall. The live arithmetic target is instead a counted algebraic packet with a
   structural P certificate: at q17 score 9, every transition has four primitive split/nonsplit
   candidates and the unique maximum-edge zone is clean/P. That zone is one 9-vertex graph whose
-  Grundy-zero value is now Lean-checked. The rule fails below score 9; generalize the packet-plus-
-  descent shape with a new generic packet, and use Frobenius/subfield descent for characteristic 5/7.
+  Grundy-zero value is now Lean-checked. In 24/28 rows it is also the unique reply in primitive
+  order-`q+1` orbital relation to all three prior intruders; four rows form an explicit exceptional
+  orbital fiber. Use conic-stabilizer cross-ratio intersection numbers to count a new generic reply
+  packet, then prove descent separately. The new structural gate is a bounded active-intruder
+  frontier; only after old matchings can be retired/canceled do fused character conditions retain a
+  positive-density reply fiber. The rule fails below score 9; use Frobenius/subfield descent for
+  characteristic 5/7. The exact odd-q orbital coordinate is
+  `D_x(y)=(2-rv-cu)^2-4(rc-1)(uv-1)`; its square class is simultaneously the line-conic type and
+  split/nonsplit product-involution type.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

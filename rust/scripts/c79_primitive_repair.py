@@ -58,6 +58,7 @@ def main() -> int:
     zone_profiles = Counter()
     edge_extrema = Counter()
     clean_graphs = Counter()
+    orbital_profiles = Counter()
     clean_value_failures = []
     primitive_clean_examples = []
     for mask, row in states:
@@ -109,9 +110,14 @@ def main() -> int:
                 params = geometry.played_params(game, child)
                 internal = geometry.tau(game, reply) == 0 \
                     and geometry.tau_played(game, reply, params) == 0
+                prior_orders = tuple(sorted(
+                    geometry.prod_order(game, intruder, reply)
+                    for intruder in geometry.intruders(game, child)
+                    if intruder != move
+                ))
                 packet.append((
                     reply, primitive, full_cyclic, clean, p_value, order, internal,
-                    kills_conic, zone_grundy, zone_edges, graph_signature,
+                    kills_conic, zone_grundy, zone_edges, graph_signature, prior_orders,
                 ))
             primitive = [entry for entry in packet if entry[1]]
             full_cyclic = [entry for entry in packet if entry[2]]
@@ -148,6 +154,13 @@ def main() -> int:
             for entry in primitive:
                 if entry[3]:
                     clean_graphs[(score, entry[10])] += 1
+            orbital_profiles[(
+                score,
+                tuple(sorted(
+                    (entry[5], entry[11], entry[9], entry[8], entry[3])
+                    for entry in primitive
+                )),
+            )] += 1
             for name, candidates in (
                     ("primitive", primitive), ("full-cyclic", full_cyclic),
                     ("all-intruder", packet)):
@@ -197,6 +210,8 @@ def main() -> int:
         print(f"PRIMITIVE-EDGE-EXTREMA key={key} count={count}")
     for key, count in sorted(clean_graphs.items()):
         print(f"PRIMITIVE-CLEAN-GRAPH key={key} count={count}")
+    for key, count in sorted(orbital_profiles.items()):
+        print(f"PRIMITIVE-ORBITAL-PROFILE key={key} count={count}")
     print(f"PRIMITIVE-REPAIR-EXAMPLES rows={primitive_clean_examples}")
     return 0
 
