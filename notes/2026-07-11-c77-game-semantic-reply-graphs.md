@@ -388,6 +388,22 @@ Thus the `F<=3` proof is reduced to one rational-equality orbit: normalize the c
 paired/singleton value, use its membership in `{r,s,rs,r^2s,rs^2}` plus the second singleton's
 membership, and construct the reported d4 line.
 
+The forbidden-monomial assignments sharpen this further. Up to rectangle relabeling, the unique raw
+template is
+
+```text
+C(1,r)=r^2s=C(1,rs),    C(r,s)=rs^2.
+```
+
+The first equality already supplies the contradiction: `C(1,r)` and `C(1,rs)` are two distinct
+opposite-edge product collisions on the same candidate line `(1,r^2s)`, hence that line has d=4.
+In every raw assignment, the coincident singleton shares its source with one of the two directed
+edges represented by the paired label, so the same argument applies after relabeling. Consequently
+the geometric contradiction for the observed template is proved. The only remaining `F<=3` step is
+the finite assignment-classification lemma: show from membership in the five-element forbidden set
+that any weight-four pattern must be one of these four relabelings (excluding two-pair and
+four-singleton alternatives).
+
 ## Reproduction
 
 ```bash

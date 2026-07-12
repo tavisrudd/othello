@@ -3209,3 +3209,10 @@ Every computed primary-d5 `F>3` control consists of one forbidden paired label p
 singletons, with the pair coincident with one singleton at a degree-three forbidden parameter. No
 other weight-four pattern occurs through GF49, and every instance exposes a hidden d4 line. This
 reduces `F≤3` to one rectangle-symmetry rational-equality orbit.
+
+## 2026-07-11 C77 continuation — forbidden template itself is d4
+
+The unique template resolves to `C(1,r)=r²s=C(1,rs)`, plus one second forbidden singleton. The two
+displayed certificates are distinct product collisions on the same line `(1,r²s)`, so the template
+directly contradicts dmin5. What remains is the finite assignment-classification lemma showing every
+weight-four forbidden pattern has this form up to rectangle symmetry.

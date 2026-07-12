@@ -277,6 +277,7 @@ def run_d5_normal_forms(q, details=False):
     pole_pattern_controls = Counter()
     forbidden_pattern_controls = Counter()
     forbidden_pattern_violations = []
+    forbidden_assignment_controls = Counter()
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -360,6 +361,18 @@ def run_d5_normal_forms(q, details=False):
                         forbidden_pattern_violations.append(
                             (A, forbidden_groups, grouped_values)
                         )
+                    forbidden_names = {
+                        r: "r",
+                        s: "s",
+                        t: "t",
+                        F.mul(r, t): "rt",
+                        F.mul(s, t): "st",
+                    }
+                    assignments = tuple(
+                        (name, forbidden_names[grouped_values[name]])
+                        for name in forbidden_groups
+                    )
+                    forbidden_assignment_controls[(assignments, len(keys))] += 1
                     if details:
                         print(
                             f"BALANCED-D5-FORBIDDEN-CONTROL q={q} A={A} "
@@ -431,7 +444,8 @@ def run_d5_normal_forms(q, details=False):
         f"nonmaximum-controls={dict(sorted(nonmaximum_controls.items()))} "
         f"pole-pattern-controls={dict(sorted(pole_pattern_controls.items()))} "
         f"forbidden-pattern-controls={dict(sorted(forbidden_pattern_controls.items()))} "
-        f"forbidden-pattern-violations={forbidden_pattern_violations[:10]}"
+        f"forbidden-pattern-violations={forbidden_pattern_violations[:10]} "
+        f"forbidden-assignment-controls={dict(sorted(forbidden_assignment_controls.items()))}"
     )
     return failures
 

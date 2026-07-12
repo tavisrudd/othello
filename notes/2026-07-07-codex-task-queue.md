@@ -86,7 +86,8 @@ the game-semantic residue with C74's explicit pencil.
   argument now proves `T≥10`. Only forbidden weight `≤3` and legal degree `≤2` remain; together they
   imply at least two balanced centers. Each fails only on nonmaximum controls hiding a d4 line.
   The `F>3` controls form one symmetry template: paired weight two plus two singletons, with the
-  paired label coincident with one singleton at a forbidden parameter.
+  paired label coincident with one singleton at a forbidden parameter. Its d4 contradiction is now
+  proved (two collisions share a source); only the finite forbidden-assignment classification remains.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:

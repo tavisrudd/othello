@@ -694,8 +694,9 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   `n1≤4`; a three-orbit pole argument proves `T≥10`. Only forbidden weight `≤3` and legal degree
   `≤2` remain, and together the four bounds imply at least two balanced centers. Nonmaximum controls
   violate exactly these ledger bounds. The `F>3` controls form one symmetry template: one paired
-  label plus two singletons are forbidden, and the pair coincides with one singleton. `Low4` remains
-  the uniform fallback.
+  label plus two singletons are forbidden, and the pair coincides with one singleton. That template
+  now directly gives two collisions on one line and hence d4; proving it exhausts all forbidden
+  assignments is the remaining `F≤3` step. `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

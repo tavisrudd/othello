@@ -2385,3 +2385,11 @@ and the other singleton hits a second forbidden value. There are no two-pair or 
 controls, and the template has zero violations through GF49. Every occurrence has a reported hidden
 d4 line. The uniform `F≤3` proof is therefore one rational-equality orbit rather than an open-ended
 weight classification.
+
+## 2026-07-11 C77 continuation (Codex) — forbidden template contradiction proved
+
+Resolving the actual forbidden monomials gives, up to rectangle symmetry,
+`C(1,r)=r²s=C(1,rs)` and `C(r,s)=rs²`. The coincident paired/singleton value therefore represents
+two distinct collisions with the same source on line `(1,r²s)`, proving that line d4 immediately.
+All four raw control assignments are relabelings of this pattern. The remaining `F≤3` content is
+only the finite classification excluding any other weight-four assignment.
