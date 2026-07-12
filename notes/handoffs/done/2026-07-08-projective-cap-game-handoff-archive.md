@@ -2426,3 +2426,10 @@ the resulting eight-entry table has zero violations over all primary-d5 forms th
 reduces `F≤3` to three claims: at most one paired target; a paired target plus two singletons forces
 the already-closed incident d4 template; and without a paired target at most three singleton targets
 hold. These are now direct rational cross-multiplications rather than an assignment search.
+
+## 2026-07-11 C77 continuation (Codex) — at most one paired forbidden target
+
+The paired-target table has two simultaneous-target orbits. Adjacent targets subtract to
+`(s-r)(1-r)(1-s)=0`, contradicting distinctness. Opposite targets subtract to
+`(s-1)²(r²-1)=0`, forcing `r=-1` and the primary `{±1,±s}` d4 form. Thus a maximum d5 pencil has at
+most one paired forbidden target. Two forbidden-weight subclaims remain.

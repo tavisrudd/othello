@@ -89,7 +89,8 @@ the game-semantic residue with C74's explicit pencil.
   paired label coincident with one singleton at a forbidden parameter. Its d4 contradiction is now
   proved (two collisions share a source). The forbidden assignment classification now has an exact
   eight-entry target table and three subclaims: at most one paired target, pair+two-singletons forces
-  the incident template, and without a pair at most three singleton targets.
+  the incident template, and without a pair at most three singleton targets. The first is now proved
+  by adjacent/opposite factorization; two subclaims remain.
   Legal degree `≤2` is now proved: the three nonincident equality representatives factor to a forced
   incident merge, the primary d4 form, or a distinctness contradiction.
   Alternatively prove

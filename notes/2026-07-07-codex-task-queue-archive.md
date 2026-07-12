@@ -3244,3 +3244,9 @@ The forbidden monomial for each of the four paired and four singleton labels is 
 explicit eight-entry table, with zero violations through GF49. The final `F≤3` classification splits
 into three bounded statements: at most one paired target; pair plus two singletons is the incident
 d4 template; and no-pair configurations have at most three singleton targets.
+
+## 2026-07-11 C77 continuation — paired forbidden targets bounded
+
+Factoring adjacent and opposite simultaneous paired-target equations proves that at most one paired
+label can be forbidden in a maximum d5 pencil: the adjacent case violates distinctness and the
+opposite case forces the primary `{±1,±s}` d4 form. The target-table proof now has two subclaims left.

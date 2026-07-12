@@ -418,6 +418,25 @@ target forces the already-proved incident coincidence/d4 template; and (iii) wit
 target, at most three singleton targets can hold. Directly cross-multiplying the eight entries in
 this table is the remaining route to `F<=3`.
 
+The first target-table subclaim is proved. Let `E1=0` encode the representative paired target
+`P1r=rt`. For the adjacent paired target `P1s=st`, subtraction of the two cross-multiplied equations
+gives
+
+```text
+E1-E2 = (s-r)(1-r)(1-s),
+```
+
+which is nonzero by distinctness. For the opposite paired target `Pr1=s`, the equations are
+
+```text
+E1 = (s^2-s+1)r^2 - 2sr + s,
+E3 = sr^2 - 2sr + (s^2-s+1),
+```
+
+so `E1-E3=(s-1)^2(r^2-1)`. Since `s!=1` and `r!=1`, simultaneous targets force `r=-1`, making the
+primary four-set `{+-1,+-s}` and hence d=4. Rectangle symmetry covers every pair of paired labels.
+Therefore at most one paired forbidden target can occur in a maximum d5 pencil.
+
 The legal-degree controls admit the same source-incidence reduction. Every legal degree-3 merge is
 one paired label plus an **incident** singleton: the singleton's source is one of the paired label's
 two sources, so two collisions lie on the same candidate line and make it d=4 immediately. Every

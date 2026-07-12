@@ -697,8 +697,8 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   label plus two singletons are forbidden, and the pair coincides with one singleton. That template
   now directly gives two collisions on one line and hence d4; proving it exhausts all forbidden
   assignments is the remaining `F≤3` step. All individual equalities lie in a rigid eight-entry
-  target table, reducing exhaustion to three small cross-multiplication claims. `Low4` remains the
-  uniform fallback.
+  target table. Adjacent/opposite factorization proves at most one paired target; two small
+  cross-multiplication claims remain. `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits
