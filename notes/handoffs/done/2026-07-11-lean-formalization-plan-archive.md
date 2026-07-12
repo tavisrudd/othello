@@ -264,3 +264,30 @@ that discharges the transfer interface's finite fields from it:
   the MDS baseline the sweep's near-MDS seeds sit one below.
 - Build green, no warnings; `#print axioms finrank_rsCode` / `rsCode_isMDS`
   = `[propext, Classical.choice, Quot.sound]`. Tenth commit.
+
+### Handoff Note — 2026-07-12 (q=9 inner-code discharge slice)
+
+- Narrowed the concatenation import boundary. `RepairCodes/CodeInstance.lean` now represents each
+  block coefficient canonically in the linear dual of the outer symbol space:
+  `blockFunctional I e w : Module.Dual 𝔽 V` for an encoder equivalence `e : V ≃ₗ[𝔽] I`.
+  `blockFunctional_eq_zero_iff` proves this functional is zero exactly when `w ∈ I⊥`, using only
+  surjectivity of `e`. Thus trace-form nondegeneracy is not needed for the transfer theorem;
+  field trace is one choice of coordinates for the already-faithful dual functional. New
+  `ofInnerCodeFunctional` / `transfer_ofInnerCodeFunctional` leave only the Chen–Ling–Xing
+  outer-dual alternative as the structural hypothesis.
+- Replaced the intended q=9 seed's placeholder-only state with real code infrastructure in
+  `RepairCodes/Q9Seed.lean`: `GF9 = GaloisField 3 2`, a bijective enumeration of its nine field
+  elements, the ten columns `{(1,t,t²,t³):t∈𝔽₉} ∪ {e₂}`, their generator matrix and row code.
+  Restriction to four finite columns is a transposed Vandermonde minor, proving row independence;
+  this yields `q9SeedEncoder : 𝔽₉⁴ ≃ₗ C₀` and `q9InnerCode_finrank : dim C₀ = 4`.
+  `q9Inner_transfer` specializes the bounded-weight theorem to this actual encoder, with
+  coefficient faithfulness fully discharged.
+- Remaining q=9 finite work is exact distance: prove `d(C₀⊥)=4` (needed to turn the radius-four
+  inequality into arithmetic) and `d(C₀)=6` (the full `[10,4,6]₉` theorem). The only external
+  transfer input left is the Chen–Ling–Xing outer-dual statement `houter`; the repair hypergraph
+  remains a separate concrete lane.
+- Validation: `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  Independent `#print axioms` audit of `blockFunctional_eq_zero_iff`,
+  `transfer_ofInnerCodeFunctional`, `q9SeedGenerator_rows_linearIndependent`,
+  `q9InnerCode_finrank`, and `q9Inner_transfer` returned exactly
+  `[propext, Classical.choice, Quot.sound]` for each.

@@ -3,9 +3,10 @@
 -- (see `notes/handoffs/2026-07-11-lean-formalization-plan.md`, Phase 1).
 --
 -- Phase 1, step 1 (landed): the concatenation transfer lemma over the
--- abstract-first `ConcatDualWord` interface, discharged by a concrete witness.
--- Still to come: the concrete `𝔽_q` NRC instance, `δ_x = τ`, the uniform
--- `q = 3^h` theorem, and the seed-and-lift corollary.
+-- abstract-first `ConcatDualWord` interface. The real `𝔽₉` inner generator,
+-- rank-four encoder, and coefficient faithfulness are landed; exact dual
+-- distance and the outer-dual decomposition remain. Still to come here: the
+-- concrete repair hypergraph, the uniform `q = 3^h` theorem, and seed-and-lift.
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed
 import RepairCodes.CodeInstance

@@ -1,5 +1,6 @@
 import RepairCodes.Transfer
 import FiniteGeom.Code
+import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!
 # Discharging the transfer interface's *algebraic* fields from the code layer (`RepairCodes` Phase 1)
@@ -18,21 +19,60 @@ Given a concrete inner code `I : Submodule 𝔽 (Fin m → 𝔽)` and its coordi
 * `dI := dualDist I`, and `hdist` from `dualDist_le_hammingNorm` (nonzero dual word ⇒ weight
   `≥ d(I⊥)`).
 
-What remains a *hypothesis* of `ofInnerCode` is exactly the residual deep content: the outer
-coefficient vector `beta`, its trace-representation faithfulness `hbeta`
-(`beta j = 0 ↔ w j ∈ I⊥`), and its outer dual-distance bound `houter` (`β ∈ O⊥`). So the real
-`q = 9` discharge (tracked in `RepairCodes.Q9Seed`) reduces precisely to supplying those three —
-`Algebra.trace` nondegeneracy for `hbeta`, Chen–Ling–Xing for `houter` — and nothing else. That
-is the reviewable boundary between "ours" and "imported" (plan §5 decision 3), now made concrete
-at the type level rather than asserted in prose.
+The coefficient can be represented canonically as an element of the linear dual of the outer
+symbol space.  Given an encoder equivalence `e : O ≃ₗ[𝔽] I`, `blockFunctional e w` is the
+functional `a ↦ ⟪e a, w⟫`.  Its vanishing is equivalent to `w ∈ I⊥`; this is proved below from
+surjectivity of `e`, with no trace theorem.  A field-trace coefficient is merely coordinates for
+this dual functional after choosing a perfect trace pairing.
+
+Thus the only genuinely external input left by `ofInnerCodeFunctional` is `houter`: the
+Chen–Ling–Xing statement that the vector of block functionals is an outer-dual word.  This makes
+the review boundary narrower than the original trace-coordinate presentation while proving the
+same bounded-weight transfer statement.
 -/
 
 namespace RepairCodes
 
 open Finset FiniteGeom
 
+noncomputable section
+
 variable {ι O : Type*} [Fintype ι] [Zero O] [DecidableEq O]
 variable {m : ℕ} {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
+
+/-! ### Canonical block coefficients in the linear dual -/
+
+variable {V : Type*} [AddCommGroup V] [Module 𝔽 V]
+
+local instance : DecidableEq (Module.Dual 𝔽 V) := Classical.decEq _
+
+/-- The functional induced on an outer symbol by pairing its encoded inner word with a block
+vector `w`.  This is the coordinate-free object whose trace-coordinate representative is usually
+called `β_j` in concatenation proofs. -/
+def blockFunctional (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : Fin m → 𝔽) : Module.Dual 𝔽 V where
+  toFun a := (e a : Fin m → 𝔽) ⬝ᵥ w
+  map_add' a b := by simp [add_dotProduct]
+  map_smul' c a := by simp [smul_dotProduct]
+
+omit [DecidableEq 𝔽] in
+/-- **Faithfulness of the canonical coefficient.** The block functional is zero exactly when
+the block annihilates the inner code.  The reverse implication evaluates dual membership on
+encoded words; the forward implication uses surjectivity of the encoder to reach every inner
+codeword.  No trace-form theorem or imported result enters. -/
+theorem blockFunctional_eq_zero_iff (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : Fin m → 𝔽) : blockFunctional I e w = 0 ↔ w ∈ dualCode I := by
+  constructor
+  · intro hzero
+    rw [mem_dualCode]
+    intro x hx
+    obtain ⟨a, ha⟩ := e.surjective ⟨x, hx⟩
+    have h := LinearMap.congr_fun hzero a
+    simpa [blockFunctional, ha] using h
+  · intro hw
+    apply LinearMap.ext
+    intro a
+    exact hw (e a) (e a).property
 
 /-- Build a `ConcatDualWord` from a concrete inner code `I` over `𝔽_q`, taking only the outer
 trace data (`beta`, `hbeta`, `houter`) and the weight budget (`s`, `htot`, `hsO`) as
@@ -61,6 +101,21 @@ noncomputable def ofInnerCode
   htot := htot
   hsO := hsO
 
+/-- Build the transfer model using the **canonical dual-functional coefficients** associated to
+an encoder equivalence `e : V ≃ₗ[𝔽] I`.  The coefficient-faithfulness field `hbeta` is discharged
+by `blockFunctional_eq_zero_iff`; only the outer-dual distance alternative remains a hypothesis. -/
+noncomputable def ofInnerCodeFunctional
+    (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : ι → (Fin m → 𝔽)) (dO s : ℕ)
+    (houter : (∀ j, blockFunctional I e (w j) = 0) ∨
+      dO ≤ (univ.filter (fun j => blockFunctional I e (w j) ≠ 0)).card)
+    (htot : (∑ j, hammingNorm (w j)) ≤ s)
+    (hsO : s < dO) :
+    ConcatDualWord ι (Fin m → 𝔽) (Module.Dual 𝔽 V) := by
+  classical
+  exact ofInnerCode I w (fun j => blockFunctional I e (w j)) dO s
+    (fun j => blockFunctional_eq_zero_iff I e (w j)) houter htot hsO
+
 /-- Instantiated against a real inner code, the transfer lemma still fires: under the two weight
 bounds, every block is inner-dual and at most one is nonzero. Only the outer trace inputs remain
 to be supplied for a specific code — this is the code-backed replacement for `Q9Seed`'s toy
@@ -75,4 +130,18 @@ theorem transfer_ofInnerCode
     (∀ j, w j ∈ dualCode I) ∧ (univ.filter (fun j => w j ≠ 0)).card ≤ 1 :=
   transfer_lemma (ofInnerCode I w beta dO s hbeta houter htot hsO) hsI
 
+/-- Transfer with a concrete inner encoder and coordinate-free block coefficients.  This is the
+form used by the `q = 9` seed: Chen–Ling–Xing supplies `houter`, while coefficient faithfulness is
+now internal finite linear algebra. -/
+theorem transfer_ofInnerCodeFunctional
+    (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : ι → (Fin m → 𝔽)) (dO s : ℕ)
+    (houter : (∀ j, blockFunctional I e (w j) = 0) ∨
+      dO ≤ (univ.filter (fun j => blockFunctional I e (w j) ≠ 0)).card)
+    (htot : (∑ j, hammingNorm (w j)) ≤ s)
+    (hsO : s < dO) (hsI : s < 2 * dualDist I) :
+    (∀ j, w j ∈ dualCode I) ∧ (univ.filter (fun j => w j ≠ 0)).card ≤ 1 :=
+  transfer_lemma (ofInnerCodeFunctional I e w dO s houter htot hsO) hsI
+
+end
 end RepairCodes

@@ -4,9 +4,10 @@
 **Status**: IN PROGRESS. Plan approved (`yc` under `mi`, 2026-07-11); the three §5 decisions
 are resolved. **Phase 0 `FiniteGeom` MVP is complete** (weight + hypergraph `ν`/`τ` +
 linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1's transfer lemma +
-`δ_x = τ` identity landed** — see §7 for the current status table. Open leads: the real `q = 9`
-discharge (trace-form nondegeneracy + Chen–Ling–Xing) and the concrete repair hypergraph `𝓑_x`
-on the code layer. Session-by-session narrative lives in the
+`δ_x = τ` identity landed** — see §7 for the current status table. The real `q = 9` inner code
+is now concrete (`𝔽₉` generator, rank four, encoder equivalence, coefficient faithfulness); open
+leads are its exact dual distance, the Chen–Ling–Xing outer-dual input, and the concrete repair
+hypergraph `𝓑_x` on the code layer. Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
 [baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
@@ -193,8 +194,8 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/ColumnCode.lean` | projective systems as codes over a general `Fintype` index `ι` (`columnCode` for a point system `P : ι → 𝔽^k`), `sectionCount`, weight↔section identity, `le_columnCode_minDist` (all sections `≤ s` ⇒ `card ι − s ≤ d`), `columnCode_minDist_le`, `columnCode_minDist_eq` (`d = card ι − max section`), `finrank_columnCode` (`dim = k` when points span) — the geometric-distance bridge for the whole geometric-code lane. (`minDist`/`le_minDist`/`minDist_le_hammingNorm` in `Code.lean` generalized `Fin n → ι`, backward-compatible, so the `S_q` point system can be indexed by the natural `𝔽 ⊕ 𝔽 ⊕ Unit`.) |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
-| `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode` — fills `ConcatDualWord`'s finite fields from the code layer, zero extra assumptions; residual = `beta`/`hbeta`/`houter` (the imported trace / Chen–Ling–Xing content) |
-| `RepairCodes/Q9Seed.lean` | `q9SeedToy` consistency witness (interface *inhabitation* only — not the real discharge) |
+| `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus the coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` now discharges coefficient faithfulness internally; field trace is only a coordinate presentation. Residual imported content = the outer-dual alternative `houter` (Chen–Ling–Xing). |
+| `RepairCodes/Q9Seed.lean` | real inner seed infrastructure: `GF9 = GaloisField 3 2`, the ten-column Roth–Lempel `q9SeedGenerator`, `q9InnerCode`, Vandermonde row independence, `q9SeedEncoder : 𝔽₉⁴ ≃ₗ C₀`, `finrank C₀ = 4`, and `q9Inner_transfer`; `q9SeedToy` remains only as the original interface-shape witness. |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -202,11 +203,13 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 
 ### Open next steps (in order)
 
-1. **Discharge the real `q = 9` seed** via `ofInnerCode` (retire the toy witness's role): supply
-   the inner code `I` (`C₀ = [10,4,6]_9`) as a concrete `rowCode`/`Submodule` and the three
-   residual fields `beta`/`hbeta`/`houter` — needs trace-form nondegeneracy
-   (`Algebra.trace` / `traceForm_nondegenerate`) for `hbeta` and the Chen–Ling–Xing dual
-   decomposition for `houter`. Blocks the "not vacuous in the intended sense" story.
+1. **Finish the real `q = 9` seed discharge.** The actual inner code
+   `C₀ = rowCode q9SeedGenerator` over `𝔽₉` is landed, with `finrank C₀ = 4`, an encoder
+   equivalence `𝔽₉⁴ ≃ₗ C₀`, and coefficient faithfulness proved coordinate-free by
+   `blockFunctional_eq_zero_iff`; trace-form nondegeneracy is no longer an obligation. Remaining:
+   prove `d(C₀⊥)=4` (and `d(C₀)=6` for the full `[10,4,6]₉` parameter theorem), then supply the
+   Chen–Ling–Xing outer-dual decomposition as the explicit `houter` input to `q9Inner_transfer`.
+   This retires the toy witness's role in the intended transfer theorem.
 2. **Concrete repair hypergraph `𝓑_x = 𝓗_C(x)`** on the code layer (completes Phase 1 step 2's
    concrete side): its edges are the minimum parity-check supports through the erased coordinate;
    supply a matroid instance discharging "no surviving trace ⟺ independent". Also lands a
