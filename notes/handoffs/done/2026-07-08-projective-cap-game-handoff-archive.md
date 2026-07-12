@@ -2560,12 +2560,75 @@ the intended theorem is packet nonemptiness plus a separate structural descent. 
 terminal-parity explanation of the Lean base: its maximal independent sets have sizes 2, 3, and 4.
 Hollmann--Xiang's explicit parameter calculation specializes to even characteristic, so the odd-q
 counts still need derivation. Fusing fine relations into quadratic-character/line-type conditions
-gives the right abundance mechanism when only boundedly many intruders are active. This isolates the
-new structural prerequisite: a bounded active-frontier lemma that retires or absorbs old intruder
-matchings; otherwise the number of simultaneous character conditions grows with play.
+gives the right abundance mechanism against boundedly many guards. Literal bounded activity is
+false in the large live-conic regime: two distinct involutions share at most one nonloop edge, that
+edge is dead once both centers are selected, and after `d` deleted vertices each retains at least
+`(q-1)/2-d` live edges. The structural prerequisite is
+therefore a bulk quotient that absorbs many genuinely active matchings.
 
 Derived the exact odd-q orbital polynomial. Projection from `x=(r,c)` acts on the conic parameter as
 `(t-r)/(ct-1)`, so for `y=(u,v)` the product discriminant is
 `D=(2-rv-cu)^2-4(rc-1)(uv-1)`. Its zero/square/nonsquare class agrees with tangent/split/nonsplit
 line type and with product order in the q/q-1/q+1 branch. Exhaustive convention validation passed
 all 114,132 intruder pairs at q=11,13,17,19.
+The same run found matching overlaps only 0 or 1. Any shared edge is killed by selecting both
+centers. Uniformly, `k` intruders with `d` dead conic vertices have live union-edge lower bound
+`k((q-1)/2-d)`, closing literal old-matching
+retirement while the conic bulk remains large.
+
+The edge coloring yields a group-algebra compression. For `B=sum_i P_{sigma_i}` on the conic,
+`tr(B^2)=k(q+1)+2 sum_{i<j} #Fix(sigma_i sigma_j)`, with the fixed count `0/1/2` given by the
+nonsquare/zero/square class of the orbital discriminant. Hence pairwise Rédei/orbital counts are
+precisely the second spectral moment, not independent classifier fields. On the 24 generic score-9
+rows minimum `tr(B^2)` ties the clean repair with one decoy at 74 (other candidates 78) and
+`tr(B^3)` breaks the tie exactly (clean 60 versus decoy 84); on the four exceptional rows no
+coordinatewise moment rule through `tr(B^4)` selects the clean reply, which keeps the maximum-edge
+zone base as the exact finite selector there.
+
+## 2026-07-12 strategic replan (Fable) — moment lane capped; C80–C82 allocated
+
+Reconciled the uncommitted C79 moment/edge-disjointness tree: corrected the live docs' provisional
+claim that minimum `tr(B^2)` selects the clean score-9 repair (it only ties clean with one decoy;
+`tr(B^3)` breaks the tie; no moment rule through `tr(B^4)` covers the four exceptional rows).
+
+Strategic reading of the C79 pass. The missing piece changed kind: with static signatures, global
+torus/mirror symmetry, literal old-matching retirement, and terminal parity all closed, the gap is
+now a mechanism spec — compress the value effect of many genuinely active, edge-disjoint matchings
+behind a bounded interface. The torus-gate closure also closes the classical global pairing/mirror
+escape for the bulk, so the mechanism must be dynamic (exhaustion/descent or amortized ledger), not
+a static symmetry. The arithmetic side now holds more assets (exact `D` coordinate, score-9 base
+template, `tr(B^2)` redundancy audit) than the game side can consume, so the next probes attack
+from the game side.
+
+Task-shaping principle adopted: tune the generic mechanism on nondepleted orders (q=13/19, plus
+q=23/25 corpora where usable) and treat depleted q=11/17 as certificate territory. The leaf
+obligations, the q17 unique-clean-candidate packets, and the selector wall all track exactly the
+depleted A5 census; at q13 every full-cyclic candidate is clean and P, and q19 minimum winning
+degrees are 43–55. The plausible final shape sharpens to: an abundance/counting theorem at
+nondepleted q (every member of a bounded-condition packet wins) plus finite certificates at
+`{11,17}` — generically, selection may never be needed at all.
+
+Allocated: C80 — game-side probe (abundance profile of winning replies; descent-measure/class
+preservation; the provable drain-rate lemma from partner-fiber distinctness — a live conic point's
+nonfixed partners `sigma_i(t)` are pairwise distinct because a shared value is a shared edge whose
+endpoints die once both centers are selected). C81 — characteristic-5/7 Frobenius/subfield gate,
+run early: an odds-moving result either way for the generic+certificates architecture. C82 — odd-q
+orbital/Hollmann–Xiang counting, gated on C80's packet to avoid deriving parameters with no
+consumer. Queue and handoff updated; validation and the C79 bundle commit left to the next session
+(instructions at the top of the queue).
+
+Addendum (same day): two corollaries of the edge-disjointness lemma were folded in as C83. On the
+live conic the union of the k matchings is a **simple** graph, and since no three conic points are
+collinear, a conic-only continuation is exactly Node-Kayles on that uncolored union — so
+per-intruder identity provably drops out of that layer, and the bulk problem restates as
+Node-Kayles under algebraic matching-augmentation on one evolving graph. Packet conditions can then
+be re-based from per-prior orbital relations (k conditions, density `2^-k` — the C79 obstruction)
+to incidences on a bounded watched subset of the union graph, which are bounded-codimension in the
+reply's two coordinates independent of k; the score-9 relations-to-all-priors shape is a
+low-live-conic artifact, not the generic template. Separately, the game-valid quotient that
+C79-note goal 2 asks for has a canonical computable form: the coarsest Grundy-respecting congruence
+of the exact residual DAG, computable by partition refinement at q11/q13. All prior quotient work
+was top-down (propose a signature, test collisions); the bottom-up minimal congruence directly
+measures whether any bounded quotient exists — small/stable across q means the theorem takes an
+automaton-with-arithmetic-guards shape, blow-up closes the quotient lane in favor of
+abundance/descent. Allocated as C83, paired with C80.

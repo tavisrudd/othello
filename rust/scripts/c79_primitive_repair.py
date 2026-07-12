@@ -38,6 +38,28 @@ def canonical_graph(adj):
     return min(candidates)
 
 
+def permutation_moments(game, intruders, max_power=4):
+    params = game.params
+    index = {param: i for i, param in enumerate(params)}
+    n = len(params)
+    operator = [[0] * n for _ in range(n)]
+    for intruder in intruders:
+        permutation = game.sigma_perm(intruder)
+        for source in params:
+            operator[index[permutation[source]]][index[source]] += 1
+
+    power = [row[:] for row in operator]
+    moments = []
+    for exponent in range(1, max_power + 1):
+        moments.append(sum(power[i][i] for i in range(n)))
+        if exponent != max_power:
+            power = [
+                [sum(power[i][k] * operator[k][j] for k in range(n)) for j in range(n)]
+                for i in range(n)
+            ]
+    return tuple(moments)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--q", type=int, default=17)
@@ -59,6 +81,7 @@ def main() -> int:
     edge_extrema = Counter()
     clean_graphs = Counter()
     orbital_profiles = Counter()
+    moment_profiles = Counter()
     clean_value_failures = []
     primitive_clean_examples = []
     for mask, row in states:
@@ -115,9 +138,12 @@ def main() -> int:
                     for intruder in geometry.intruders(game, child)
                     if intruder != move
                 ))
+                moments = permutation_moments(
+                    game, (*geometry.intruders(game, child), reply)
+                )
                 packet.append((
                     reply, primitive, full_cyclic, clean, p_value, order, internal,
-                    kills_conic, zone_grundy, zone_edges, graph_signature, prior_orders,
+                    kills_conic, zone_grundy, zone_edges, graph_signature, prior_orders, moments,
                 ))
             primitive = [entry for entry in packet if entry[1]]
             full_cyclic = [entry for entry in packet if entry[2]]
@@ -159,6 +185,12 @@ def main() -> int:
                 tuple(sorted(
                     (entry[5], entry[11], entry[9], entry[8], entry[3])
                     for entry in primitive
+                )),
+            )] += 1
+            moment_profiles[(
+                score,
+                tuple(sorted(
+                    (entry[12], entry[9], entry[8], entry[3]) for entry in primitive
                 )),
             )] += 1
             for name, candidates in (
@@ -212,6 +244,8 @@ def main() -> int:
         print(f"PRIMITIVE-CLEAN-GRAPH key={key} count={count}")
     for key, count in sorted(orbital_profiles.items()):
         print(f"PRIMITIVE-ORBITAL-PROFILE key={key} count={count}")
+    for key, count in sorted(moment_profiles.items()):
+        print(f"PRIMITIVE-MOMENT-PROFILE key={key} count={count}")
     print(f"PRIMITIVE-REPAIR-EXAMPLES rows={primitive_clean_examples}")
     return 0
 

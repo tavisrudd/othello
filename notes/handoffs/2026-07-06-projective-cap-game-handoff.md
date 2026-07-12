@@ -134,7 +134,7 @@ non-primary mechanism.  Report:
 The generic fpf-involution mirror lemma is not tied to full projective space; it applies to any
 classical variety whose cap game runs on ambient lines.  C48 harvested it (report
 [`../2026-07-09-codex-mirror-harvest.md`](../2026-07-09-codex-mirror-harvest.md); generator
-`rust/scripts/projcap_mirror_harvest.py`; each board built honestly from its defining form, so
+`rust/scripts/projcap_mirror_harvest.py`; each board built directly from its defining form, so
 intersection patterns and point counts are verified, not trusted).
 
 - **New family — hyperbolic quadric `Q⁺(2m−1,q)` is P for every odd `q`, every `m ≥ 2`.**  The
@@ -448,6 +448,21 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
+- **C80/C81/C82 (allocated 2026-07-12, Fable strategic pass):** C79's arithmetic pass is reported;
+  the load-bearing gap is now specified — a game-valid bulk quotient absorbing many genuinely
+  active, edge-disjoint intruder matchings behind a bounded interface, and (per the torus-gate
+  closure) the mechanism must be dynamic (exhaustion/descent or amortized ledger), not a static
+  symmetry. Active: **C80** — game-side exhaustion/abundance/descent probe, tuned on nondepleted
+  orders q=13/19 with depleted q=11/17 reserved for the certificate layer; **C81** —
+  characteristic-5/7 Frobenius/subfield gate (step-6 de-risk, run early). Gated: **C82** — odd-q
+  orbital/Hollmann–Xiang counting, needs C80's packet first. **C83** (same day, pairs with C80) —
+  two edge-disjointness corollaries: the live-conic bulk is one **simple** union graph and
+  conic-only continuations are exactly Node-Kayles on it (per-intruder identity drops out of that
+  layer; packet conditions re-base from per-prior orbital relations, density `2^-k`, to bounded
+  watched-set incidences, density independent of k), plus the bottom-up measurement of whether a
+  game-valid quotient exists at all — coarsest Grundy-respecting congruence via partition
+  refinement on the exact q11/q13 residual DAGs. Moment lane capped as audit language.
+  Full specs in the [codex task queue](../2026-07-07-codex-task-queue.md).
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
   step-group leaves, and `Class0`). The full v5 tree has 326 node leaves + 326 step leaves;
@@ -728,12 +743,17 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   Grundy-zero value is now Lean-checked. In 24/28 rows it is also the unique reply in primitive
   order-`q+1` orbital relation to all three prior intruders; four rows form an explicit exceptional
   orbital fiber. Use conic-stabilizer cross-ratio intersection numbers to count a new generic reply
-  packet, then prove descent separately. The new structural gate is a bounded active-intruder
-  frontier; only after old matchings can be retired/canceled do fused character conditions retain a
-  positive-density reply fiber. The rule fails below score 9; use Frobenius/subfield descent for
+  packet, then prove descent separately. Distinct old intruder involutions have disjoint live-conic
+  edge sets (their possible common chord is killed by the two selected centers) and cannot literally
+  be retired while the conic is large; the structural gate is a bulk
+  quotient absorbing many active matchings while the reply packet sees only bounded guards. The rule fails below score 9; use Frobenius/subfield descent for
   characteristic 5/7. The exact odd-q orbital coordinate is
   `D_x(y)=(2-rv-cu)^2-4(rc-1)(uv-1)`; its square class is simultaneously the line-conic type and
-  split/nonsplit product-involution type.
+  split/nonsplit product-involution type. Pairwise orbital/Rédei counts are exactly the second
+  spectral moment of `B=sum P_sigma`; this explains their redundancy. On the 24 generic score-9
+  rows minimum `tr(B^2)` ties the clean repair with one decoy and `tr(B^3)` breaks the tie; no
+  moment rule through `tr(B^4)` covers the four exceptional rows, so moments stay audit language
+  and the bulk mechanism moves to the game-side probes (C80–C82).
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

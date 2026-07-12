@@ -344,12 +344,28 @@ removes only the union of the boundedly many old secant lines. The square-produc
 an explicit factor audit, not mysterious game exceptions.
 
 This exposes the real structural bottleneck more cleanly: `r` must stay bounded. The number of
-selected intruders grows during play, so a uniform proof needs an **active-frontier lemma** saying
-that only boundedly many old intruder matchings remain relevant to the reply/descent invariant; the
-rest must be retired, canceled, or absorbed into a certified bulk state. Without that lemma the
-character packet acquires linearly many simultaneous conditions and its density disappears. Thus
-the next game-semantic target is bounded active memory, after which odd-q packet nonemptiness is a
-standard finite-field count.
+selected intruders grows during play, so the reply rule may impose orbital conditions only against
+the opponent and boundedly many guards. Old matchings must be absorbed into a certified **bulk
+quotient**, rather than appearing as separate character conditions. Without such a quotient the
+packet acquires linearly many simultaneous conditions and its density disappears.
+
+A literal bounded active frontier is impossible while much of the conic is live. Two distinct
+intruder involutions are distinct Möbius maps, hence agree on at most two conic parameters and share
+at most one nonloop matching edge. Moreover, a shared edge `{s,t}` means both selected intruders lie
+on the chord `st`; that makes `s,t` illegal. Distinct selected intruders therefore have **disjoint
+edge sets on the live conic**. Each involution has at least `(q-1)/2` nonloop edges on the full conic;
+deleting `d` conic vertices destroys at most `d` of its edges. Therefore every old intruder still has
+a live edge whenever `d < (q-1)/2`, and for `k` intruders their live union has the lower bound
+
+```text
+|E_live| >= k((q-1)/2-d).                                       (4)
+```
+
+So “retire old intruders” is closed as a literal graph-support mechanism in the large live-conic
+regime. The necessary lemma is stronger and more algebraic: compress or cancel the value effect of
+many genuinely present, live-edge-disjoint matchings while the reply packet controls only a bounded
+interface. The orbital verifier checks the overlap bound on all 114,132 pairs through q19; the
+Möbius agreement argument proves it uniformly.
 
 #### Exact odd-q orbital discriminant
 
@@ -383,7 +399,57 @@ field; no chosen conic labels remain in its square class.
 
 `scripts/c79_orbital_packet.py` exhaustively compares (3) with both geometric line intersection and
 the permutation-product order on every intruder pair at q=11,13,17,19: 114,132 pairs, zero
-mismatches. The algebra above is the proof; the census guards the coordinate conventions.
+mismatches. It also confirms that every distinct pair shares zero or one matching edge, never more.
+The algebra above is the proof; the census guards the coordinate conventions.
+
+#### Group-algebra bulk quotient and signature redundancy
+
+The live-edge coloring gives a candidate bulk object. On functions on the full conic parameter set,
+let `P_i` be the permutation matrix of the `i`th selected-intruder involution and put
+
+```text
+B = sum_i P_i.
+```
+
+This is the adjacency operator of the edge-colored conic multigraph before deleting played/dead
+vertices and suppressing tangency loops. Its moments are exact word counts in `PGL(2,q)`. In
+particular, for `k` intruders,
+
+```text
+tr(B)   = sum_i #Fix(sigma_i),
+tr(B^2) = k(q+1) + 2 sum_{i<j} #Fix(sigma_i sigma_j).            (5)
+```
+
+The last fixed-point count is `0,1,2` according as the orbital discriminant `D_ij` is nonsquare,
+zero, or square. Thus the pairwise Rédei/orbital class distribution is **exactly the second spectral
+moment**; combining both in a classifier double-counts the same information. Higher moments
+`tr(B^m)` count colored closed walks and depend on traces of longer involution words. They are the
+natural number-theoretic refinement of conic component/cycle signatures and a plausible language
+for absorbing many genuinely active matchings into one bulk state.
+
+The q17 score-9 split shows both the promise and the limit. On the 24 generic transitions the clean
+candidate and one decoy tie at `tr(B^2)=74`; `tr(B^3)` breaks the tie exactly, with clean `60` versus
+decoy `84`. The remaining candidates have second moment `78`. Thus the third word trace is genuinely
+new information beyond the Rédei/orbital pair distribution and isolates the generic clean fiber
+lexicographically by `(tr(B^2),tr(B^3))`.
+
+The four exceptional transitions remain structural. Their primitive candidates have
+
+```text
+(tr(B^2),tr(B^3),tr(B^4), zone_edges, clean)
+  (76,44,660,  9,false)   (76,44,692,15,false)
+  (80,50,696, 23,true)    (84,50,756, 0,false).
+```
+
+No coordinatewise extremum through the fourth moment selects the clean reply. A case-dependent
+moment rule could fit these two fibers, but would be another classifier. The net result is:
+third moments solve the generic orbital tie; the four-row exception still needs the maximum-edge
+zone base or a structural exceptional lemma.
+
+Spectral moments alone do not prove a Node-Kayles outcome. Their prospective proof role is to bound
+or normalize the bulk while a bounded interface carries the reply strategy. This is nevertheless a
+clean explanation of which existing signatures are redundant and which higher relationships are
+genuinely new.
 
 ### Terminal-parity shortcut: closed even for the finite base
 
@@ -432,3 +498,12 @@ python3 scripts/c79_orbital_packet.py 11 13 17 19
 cd ../lean
 choom -n 1000 -- nix develop --command lake build ProjectiveCap.PrimitiveZoneBase
 ```
+
+## Continuation (allocated 2026-07-12)
+
+The game-side continuation is **C80** (bulk exhaustion/abundance/descent probe on nondepleted
+orders), **C81** (characteristic-5/7 subfield gate), **C82** (odd-q orbital counting, gated on
+C80's packet), and **C83** (union-graph compression — the live-conic bulk is one simple graph and
+conic-only continuations are exactly Node-Kayles on it — plus the bottom-up coarsest-congruence
+measurement of quotient existence); specs in the
+[codex task queue](2026-07-07-codex-task-queue.md).

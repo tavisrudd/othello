@@ -47,12 +47,22 @@ def main() -> int:
         intruders = [cell for cell in range(q * q) if not game.is_conic_cell(cell)]
         perms = {cell: game.sigma_perm(cell) for cell in intruders}
         counts = Counter()
+        overlaps = Counter()
         failures = []
         for i, xcell in enumerate(intruders):
             x = game.cell_tuple(xcell)
             px = perms[xcell]
             for ycell in intruders[i + 1:]:
                 y = game.cell_tuple(ycell)
+                py = perms[ycell]
+                common_directed = sum(
+                    1 for t in game.params if px[t] == py[t] and px[t] != t
+                )
+                assert common_directed % 2 == 0
+                common_edges = common_directed // 2
+                overlaps[common_edges] += 1
+                if common_edges > 1:
+                    failures.append((x, y, "matching-overlap", common_edges))
                 dchar = chi(q, discriminant(q, x, y))
                 line_type = {0: -1, 1: 0, 2: 1}[len(
                     tuple(
@@ -62,7 +72,7 @@ def main() -> int:
                         )
                     )
                 )]
-                order = game.prod_order(px, perms[ycell])
+                order = game.prod_order(px, py)
                 order_ok = (
                     (dchar == 0 and order == q)
                     or (dchar == 1 and (q - 1) % order == 0)
@@ -73,7 +83,8 @@ def main() -> int:
                     failures.append((x, y, dchar, line_type, order))
         print(
             f"ORBITAL-DISCRIMINANT q={q} pairs={sum(counts.values())} "
-            f"failures={len(failures)} counts={dict(sorted(counts.items()))}"
+            f"failures={len(failures)} counts={dict(sorted(counts.items()))} "
+            f"matching_overlaps={dict(sorted(overlaps.items()))}"
         )
         if failures:
             print(f"ORBITAL-DISCRIMINANT-FIRST-FAILURE {failures[0]}")

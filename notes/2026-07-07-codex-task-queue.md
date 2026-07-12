@@ -8,19 +8,30 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C79.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C83.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
 
-## CURRENT TOP OF QUEUE (updated 2026-07-11)
+## CURRENT TOP OF QUEUE (updated 2026-07-12)
+
+**Session continuation (2026-07-12):** the C79 moment/edge-disjointness work is edited but not yet
+committed (live-doc wording corrected this pass). Next session: validate per the C79 note's
+Reproduction block (`py_compile` the four scripts; `c79_orbital_packet.py 11 13 17 19`;
+`c79_primitive_repair.py --q 17 --high 7`; the Lean base is already committed), then commit the C79
+bundle (note + queue + handoff + archive + the two `c79_*.py` scripts). Commit `CLAUDE.md` +
+`rust/AGENTS.md` (persona-loading scope) separately. Then start C80 (C83 paired).
 
 The odd-plane escape kernel — "every legal size-3 residual position has a P-valued size-4 child" —
 is the active mathematics; (ON), requiring that child on the conic, is the stronger A5 route. The
 config→value **mechanism sweep is closed-negative** (Cluster 1), so the two live proof lanes are
 **A5 arc-depletion arithmetic** and the **C74/C77 one-intruder N-absorption theorem**. C75/C76 close
 the current pointwise selector/invariant spaces; C77 closes the pure geometric bank and identifies
-the game-semantic residue with C74's explicit pencil.
+the game-semantic residue with C74's explicit pencil. C79's arithmetic pass delivers exact orbital
+coordinates and specifies the remaining gap as a game-valid bulk quotient; the active probes are
+**C80** (game-side exhaustion/abundance/descent) and **C81** (characteristic-5/7 subfield gate),
+with **C82** (orbital counting) gated on C80's packet, and **C83** (union-graph compression +
+bottom-up coarsest-congruence measurement) paired with C80.
 
 1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
@@ -49,7 +60,8 @@ the game-semantic residue with C74's explicit pencil.
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C79 [ACTIVE 2026-07-11]** — number-theoretic forcing architecture for the full odd-q
+- **C79 [REPORTED 2026-07-12 — arithmetic coordinates + bulk-gap spec delivered; continuation →
+  C80/C81/C82]** — number-theoretic forcing architecture for the full odd-q
   ProjectiveCap proof: test common-torus/dihedral reduction of conic involutions, character-sum or
   polynomial-count existence of repair packets, and Frobenius/subfield descent for the
   characteristic-5/7 exceptions. **First gates:** common-torus recursion is closed (all applicable
@@ -61,13 +73,100 @@ the game-semantic residue with C74's explicit pencil.
   Grundy-zero value. Full conic-stabilizer orbital vectors expose a generic score-9 fiber: 24/28
   clean repairs are the unique `(q+1,q+1,q+1)` primitive triple intersections, with four explicit
   exceptional fibers. Hollmann--Xiang intersection numbers are therefore the next reply-counting
-  algebra (with odd-q formulas still to derive). The decisive structural prerequisite is a bounded
-  active-intruder frontier; then fused quadratic-character relations give an abundant two-variable
-  reply packet. The exact relation polynomial
+  algebra (with odd-q formulas still to derive). Fused quadratic-character relations give an
+  abundant two-variable packet only against boundedly many guards. Literal retirement of old
+  intruders is impossible while more than half the conic is live: distinct involutions share at
+  most one full-conic edge, any such shared edge is dead once both centers are selected, and each
+  retains at least `(q-1)/2-d` live edges after `d` deleted vertices. The decisive
+  prerequisite is a bulk quotient absorbing many genuinely active matchings. The exact relation polynomial
   `D_x(y)=(2-rv-cu)^2-4(rc-1)(uv-1)` simultaneously gives line-conic and split/nonsplit type and is
-  exhaustively convention-checked through q19. The rule fails below score 9, so continue with packet existence plus a new generic
-  descent, not arithmetic P/N classification. Report:
+  exhaustively convention-checked through q19. For the bulk operator `B=sum P_sigma`, the full
+  orbital pair distribution is exactly `tr(B^2)` — a permanent redundancy audit for any proposed
+  classifier. On the 24 generic score-9 rows minimum `tr(B^2)` only ties the clean repair with one
+  decoy (74 vs 74, others 78); `tr(B^3)` breaks that tie (60 vs 84), and no coordinatewise moment
+  rule through `tr(B^4)` covers the four exceptional rows. **Moment lane capped:** moments are
+  bulk-audit/bounding language; further moment-selector search re-enters the closed
+  static-signature lane. The rule fails below score 9, so continue with packet existence plus a new
+  generic descent, not arithmetic P/N classification. Report:
   [`2026-07-11-c79-number-theoretic-forcing.md`](2026-07-11-c79-number-theoretic-forcing.md).
+
+- **C80 [ACTIVE 2026-07-12]** — game-side bulk-mechanism probe: exhaustion, abundance, descent
+  measure. Attack C79's spec ("compress many genuinely active, edge-disjoint matchings behind a
+  bounded interface") from the game side, where the program is asset-poor — not with more
+  arithmetic. Closed mechanism families (do not re-enter): static signatures, global torus/mirror
+  pairing (the torus-gate closure also closes classical mirror strategies for the bulk), literal
+  retirement, moment selectors. **Design rule:** tune the generic mechanism on **nondepleted**
+  orders (q=13/19, plus q=23/25 corpora where usable) and treat depleted q=11/17 as certificate
+  territory — leaf obligations and unique-clean-candidate packets track exactly the depleted A5
+  census (at q13 every full-cyclic candidate is clean and P; q19 minimum winning degrees are
+  43–55), so selection difficulty is plausibly a depleted-order artifact. Three sub-probes on the
+  exact balanced-root corpus:
+  **(a) Abundance profile.** Per (root R, opponent move x) at nondepleted q, compute the full
+  winning-reply fraction and test whether the winning set contains an entire bounded-condition
+  packet (e.g. all D-generic on-conic replies minus an explicit bad-fiber list). Target theorem
+  shape: at nondepleted q **every** packet member wins — existence by counting, no selector needed.
+  **(b) Descent / class preservation.** Test which lexicographic residual measures some winning
+  reply always strictly decreases — candidates from (conic defect type, |live conic|, live-edge
+  budget `k((q-1)/2-d)`, zone complexity) — and whether some winning reply re-enters the
+  balanced/normal-form class or a bounded defect list. Record the conic-killing shape: |live conic|
+  along optimal lines (all four score-9 base candidates kill the conic — is "drive the conic dead,
+  then play the zone base" the generic strategy?).
+  **(c) Drain-rate lemma (provable now).** For a live conic point t, the nonfixed partner points
+  `sigma_i(t)` over the k active intruders are pairwise distinct (a shared value is a shared edge,
+  whose endpoints die once both centers are selected — the C79 overlap lemma). So each conic
+  exchange deletes the full live partner fiber; derive the exact exchange inequality for the
+  live-edge budget and compare with corpus play lengths. This is the well-founded resource for the
+  two-ply lemma that never evaluates the bulk.
+  **Discipline:** any bulk compression proposed from (a)–(c) must pass the outcome-compatible
+  quotient gate (P/N collision check on q13/q17/q19) before theorem work. Also record per-state
+  winning-degree distributions as input to the Ψ/ledger lane — the fallback mechanism family if no
+  measure in (b) validates. **Gate out:** an empirically valid (packet, measure, class) triple
+  through q19 becomes C82's counting target. Report target:
+  `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
+
+- **C81 [OPEN — run early, independent of C80]** — characteristic-5/7 subfield gate (C79 note
+  probe #4, untested; step-6 de-risk). For the char-5 `x=±2` and char-7 `x∈{±2,±3}` configurations
+  over GF(25/49/125/343): classify legal moves as Frobenius-fixed vs nonfixed; test whether every
+  nonfixed move has a reply exiting the prime-subfield obstruction class; test even-degree
+  involution pairing as one branch and identify the odd-degree mechanism (odd-degree extensions
+  supply no Frobenius involution, so orbit pairing alone cannot close it). Bounded and load-bearing
+  for the final generic+certificates assembly: if subfield descent fails structurally the
+  architecture loses its exception handler — an odds-moving result either way. Report target:
+  `notes/2026-07-12-c81-subfield-descent-gate.md`.
+
+- **C82 [GATED on C80 — do not start first]** — orbital / Hollmann–Xiang counting for the C80
+  packet. Derive the odd-q two-relation intersection counts for the conic-stabilizer orbital
+  algebra (or directly as `chi(D)` character sums) only in service of the specific packet C80
+  outputs: main term, square-product degeneracy audit, explicit bad-fiber list, and a concrete
+  threshold `q0` with the below-threshold orders enumerated for the certificate layer. Deriving
+  H–X odd-q parameters with no consumer is a week-scale detour — hence the gate. Report target:
+  `notes/2026-07-12-c82-orbital-counting.md`.
+
+- **C83 [ACTIVE 2026-07-12 — pairs with C80]** — bulk quotient measured bottom-up: union-graph
+  compression + coarsest value-respecting congruence. Two corollaries of the C79 edge-disjointness
+  lemma sharpen the bulk spec. **(1) Union-graph reframing.** On the live conic the k matchings
+  union to a **simple** graph `G∪`, and (since no three conic points are collinear) any conic-only
+  continuation is exactly Node-Kayles on `G∪` — per-intruder identity (edge colors) provably drops
+  out of that layer; k re-enters only through intruder-move interleaving (off-conic supply,
+  fixed-point kills, the ≤2-per-line cap). The bulk problem restates as **Node-Kayles under
+  algebraic matching-augmentation** on one evolving graph. First candidate for the
+  outcome-compatible quotient gate: state ↦ (uncolored `G∪` up to iso, off-conic supply parity,
+  bounded bookkeeping) — P/N collision check on q13 first; collisions localize exactly which
+  geometric residue a true quotient must retain. **(2) Watched-set re-basing of packet
+  conditions.** Per-prior orbital relations impose k conditions (density `2^-k` — the C79
+  obstruction); a condition prescribing `σ_y` on a bounded watched subset `W` of `G∪` is
+  bounded-codimension in y's two coordinates **independent of k**. If the strategy needs only a
+  bounded watched region (exactly C80(a)'s abundance hypothesis), packet density survives every k.
+  Caveat recorded: the score-9 relations-to-all-priors shape arose with one live conic point left —
+  a low-live-conic artifact, not the generic template. **(3) Decisive measurement.** The canonical
+  object behind C79-note goal 2 ("quotient into component types preserving P/N") is computable
+  exactly on small q: run partition refinement (Grundy-labelled bisimulation) on the exact residual
+  DAG at q11/q13 (q17 descendant-only if it fits); report minimal-quotient class counts vs q and
+  reverse-engineered class invariants. Small/stable ⇒ the bulk quotient exists and the theorem
+  takes the octal-periodicity shape (automaton with arithmetic transition guards; C82 counts its
+  reply guards). Blow-up ⇒ close the quotient lane and concentrate C80 on abundance/descent. An
+  odds-moving dichotomy either way. Report target:
+  `notes/2026-07-12-c83-bisimulation-quotient.md`.
 
 - **C76 [REPORTED 2026-07-11 — invariant prong answered]** —
   frame-relative characters (polar-at-frame, frame-chord, frame×tangent cross-ratio profiles) — the
