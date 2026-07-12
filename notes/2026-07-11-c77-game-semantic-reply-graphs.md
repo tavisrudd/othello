@@ -638,6 +638,47 @@ aligned component incidence and commutator/fixed-point conjugacy data do not sup
 value-opaque classifier; combining them with the full signature only recovers the existing exact
 orbit fingerprint.
 
+### Mixed Rédei/residual classifier: exact contextual compression
+
+At the user's request the closed static search was reopened for mixed geometric and residual-game
+features. The exact Rédei class of an S6 follower is the 15-direction multiset, canonical under row/
+column scaling and coordinate swap. Alone it is only `108/192` globally P-pure at q17. Combined
+with the field-label-free involution quotient it becomes `192/192`, but has 181 signatures for 192
+forced obligations and is therefore nearly an orbit fingerprint.
+
+The value-opaque residual signature gives a better compression. Rédei plus the capacity-1 conflict
+graph / capacity-2 line-load signature is `192/192` with 90 forced types. Component ablation gives:
+
+```text
+Rédei + live cells                         162/192
+Rédei + conflict edges                    190/192
+Rédei + conflict degree histogram         192/192
+Rédei + component sizes                   162/192
+Rédei + untouched capacity-2 line loads   192/192
+Rédei + (live cells, conflict edges)       192/192
+```
+
+The full direction values are load-bearing globally: unique direction support plus `(live,edges)`
+falls to `113/192`, and repeated-direction support plus `(live,edges)` to `74/192`.
+
+In a proof the S5 state is already known, so ten of the fifteen Rédei directions and the absolute
+residual counts are redundant. Let `D_y` be the five directions introduced by reply `y`, canonical
+relative to the S5 direction multiset, and let `ΔL,ΔE` be changes in residual live vertices and
+conflict edges. Then `(D_y,ΔL,ΔE)` is locally and globally P-pure at q11 (`24/24`) and q17
+(`192/192`); `ΔL` is redundant, since `(D_y,ΔE)` remains `192/192`. Explicit base-direction
+multiplicities can also be omitted in a contextual proof, although dropping them from the global
+cross-context key lowers purity to `182/192`.
+
+`ΔE` admits a proof-local quantization. With exact `D_y`, each of `ΔE mod 3`, width-2 bins, and
+width-3 bins separates all 192 q17 forced obligations locally. Their context-free global purities
+are only 150, 190, and 189 respectively, so the S5 context is load-bearing. Sign and parity fail.
+No affine-linear mod-3 formula in the simple packet counts `(number of directions, reused moves,
+base multiplicity weight, added collisions, multiplicity-≥2 weight)` fits all forced rows. The
+remaining target is therefore an incidence lemma, not a scalar count identity. Structurally,
+`ΔE=-R_y+A_y`: `R_y` is the number of old conflict edges incident to the reply kill set and `A_y`
+the new conflicts created on the five lines through `y`. The known S5 degree data constrains `R_y`,
+and `D_y` constrains `A_y`.
+
 ### Corrected target: the balanced packet
 
 Universal P-purity is stronger than odd escape needs. The smaller sufficient target is: every

@@ -10,12 +10,14 @@ lemma, not a game-value certificate.
 
 from collections import Counter
 from functools import lru_cache
-from itertools import combinations, permutations
+from itertools import combinations, permutations, product
 import argparse
 import re
 import subprocess
 
-from c77_balanced_mirror_probe import root_safe_mirrors_for, run as mirror_run, transformations
+from c77_balanced_mirror_probe import (
+    residual_signature, root_safe_mirrors_for, run as mirror_run, transformations,
+)
 
 
 ROOTS = (
@@ -29,7 +31,8 @@ ROOTS = (
 
 LINE = re.compile(r"REPLYGRAPHS-FORCED q=(\d+) root=\[(.*?)\] pairs=\[(.*)\]")
 PAIR = re.compile(
-    r"REPLYGRAPHS-PAIR root-index=(\d+) x=(\d+),(\d+) y=(\d+),(\d+) value=([PN])"
+    r"REPLYGRAPHS-PAIR root-index=(\d+) x=(\d+),(\d+) y=(\d+),(\d+) "
+    r"value=([PN]) live=(\d+)"
 )
 POINT = re.compile(r"\((\d+), (\d+)\)")
 
@@ -101,6 +104,7 @@ def parse_pairs(output):
             (int(match.group(2)), int(match.group(3))),
             (int(match.group(4)), int(match.group(5))),
             match.group(6),
+            int(match.group(7)),
         ))
     return records
 
@@ -355,6 +359,168 @@ def group_relation_signature(root, move, reply, q):
     commutator_type = None if j_commutator is None else (
         j_commutator, quadratic_character(j_commutator - 4, q)
     )
+
+
+def segre_tangent_product(point, root, model, q):
+    d, e, k = model
+    r, c = (point[0] + e) % q, (point[1] + d) % q
+    product = r * c % q  # tangents at the two burned infinite conic points
+    for frame_point in root[:3]:
+        t = (frame_point[0] + e) % q
+        assert t != 0
+        tangent_value = (c * t + r * k * pow(t, -1, q) - 2 * k) % q
+        product = product * tangent_value % q
+    return product
+
+
+def normalize_projective(values, q):
+    pivot = next((value for value in values if value % q), None)
+    if pivot is None:
+        return tuple(0 for _value in values)
+    inverse = pow(pivot, -1, q)
+    return tuple(value * inverse % q for value in values)
+
+
+def segre_product_signature(root, move, reply, q):
+    model = conic_model(root, q)
+    products = tuple(
+        segre_tangent_product(point, root, model, q)
+        for point in (root[3], move, reply)
+    )
+    return normalize_projective(products, q) + tuple(
+        quadratic_character(value, q) for value in products
+    )
+
+
+def direction(a, b, q):
+    dr, dc = (b[0] - a[0]) % q, (b[1] - a[1]) % q
+    return q if dc == 0 else dr * pow(dc, -1, q) % q
+
+
+def invert_direction(value, q):
+    if value == 0:
+        return q
+    if value == q:
+        return 0
+    return pow(value, -1, q)
+
+
+def redei_direction_signature(root, move, reply, q):
+    points = root + (move, reply)
+    directions = [direction(a, b, q) for a, b in combinations(points, 2)]
+    candidates = []
+    for swap in (False, True):
+        base = [invert_direction(value, q) for value in directions] if swap else directions
+        for scale in range(1, q):
+            candidates.append(tuple(sorted(
+                value if value == q else value * scale % q for value in base
+            )))
+    return min(candidates)
+
+
+def redei_support_signature(root, move, reply, q):
+    points = root + (move, reply)
+    directions = set(direction(a, b, q) for a, b in combinations(points, 2))
+    candidates = []
+    for swap in (False, True):
+        base = [invert_direction(value, q) for value in directions] if swap else directions
+        for scale in range(1, q):
+            candidates.append(tuple(sorted(
+                value if value == q else value * scale % q for value in base
+            )))
+    return min(candidates)
+
+
+def redei_collision_signature(root, move, reply, q):
+    points = root + (move, reply)
+    counts = Counter(direction(a, b, q) for a, b in combinations(points, 2))
+    repeated = [(value, count) for value, count in counts.items() if count >= 2]
+    candidates = []
+    for swap in (False, True):
+        base = [(invert_direction(value, q), count) for value, count in repeated] \
+            if swap else repeated
+        for scale in range(1, q):
+            candidates.append(tuple(sorted(
+                (value if value == q else value * scale % q, count)
+                for value, count in base
+            )))
+    return min(candidates)
+
+
+def transform_direction(value, scale, swap, q):
+    value = invert_direction(value, q) if swap else value
+    return value if value == q else value * scale % q
+
+
+def relative_redei_signature(root, move, reply, q):
+    s5 = root + (move,)
+    base = [direction(a, b, q) for a, b in combinations(s5, 2)]
+    added = [direction(reply, point, q) for point in s5]
+    candidates = []
+    for swap in (False, True):
+        for scale in range(1, q):
+            base_t = tuple(sorted(transform_direction(value, scale, swap, q) for value in base))
+            added_t = [transform_direction(value, scale, swap, q) for value in added]
+            base_counts = Counter(base_t)
+            added_counts = Counter(added_t)
+            packet = tuple(sorted(
+                (value, base_counts[value], added_counts[value]) for value in added_counts
+            ))
+            candidates.append((base_t, packet))
+    return min(candidates)[1]
+
+
+def relative_redei_simple_signature(root, move, reply, q):
+    s5 = root + (move,)
+    base = [direction(a, b, q) for a, b in combinations(s5, 2)]
+    added = [direction(reply, point, q) for point in s5]
+    candidates = []
+    for swap in (False, True):
+        for scale in range(1, q):
+            base_t = tuple(sorted(transform_direction(value, scale, swap, q) for value in base))
+            added_t = [transform_direction(value, scale, swap, q) for value in added]
+            simple_packet = tuple(sorted(Counter(added_t).items()))
+            candidates.append((base_t, simple_packet))
+    return min(candidates)[1]
+
+
+def relative_packet_count_features(packet):
+    return (
+        len(packet),
+        sum(added for _value, base, added in packet if base > 0),
+        sum(base * added for _value, base, added in packet),
+        sum(added * (added - 1) // 2 for _value, _base, added in packet),
+        sum(added for _value, base, added in packet if base >= 2),
+    )
+
+
+COMBO_FAMILIES = (
+    "involution-equality",
+    "aligned-exact",
+    "aligned-equality",
+    "group-relations",
+    "segre-product",
+    "redei-directions",
+    "residual-live",
+)
+
+
+def combined_classifier_signature(root, move, reply, q):
+    reduced = reduced_involution_signature(root, move, reply, q)
+    aligned = aligned_involution_signature(root, move, reply, q)
+    return (
+        combinatorial_signature(reduced, q),
+        aligned,
+        aligned_combinatorial_signature(aligned, q),
+        group_relation_signature(root, move, reply, q),
+        segre_product_signature(root, move, reply, q),
+        redei_direction_signature(root, move, reply, q),
+    )
+
+
+@lru_cache(maxsize=None)
+def cached_residual_signature(q, follower):
+    return residual_signature(q, follower)
     x_on = conic_parameter(move, model, q)
     y_on = conic_parameter(reply, model, q)
     return (
@@ -384,6 +550,17 @@ def combinatorial_signature(signature, q):
     relation, center_x, center_y, quad = boundary
     quad_tag = None if quad is None else (
         "zero" if quad == 0 else "one" if quad == 1 else "inf" if quad == q else "other"
+    )
+    quad_counts = None if quad is None else tuple(
+        0 if profile is None else Counter(profile)[quad]
+        for profile in (relation, center_x, center_y)
+    )
+    return (
+        profile_shape(a), profile_shape(b), profile_shape(c),
+        joint_multiplicities(a, b, c),
+        profile_shape(relation), profile_shape(center_x), profile_shape(center_y),
+        joint_multiplicities(relation, center_x, center_y),
+        quad_tag, quad_counts,
     )
 
 
@@ -448,19 +625,6 @@ def overlap_scores(signature):
             if profile is not None
         ),
     }
-    quad_counts = None if quad is None else tuple(
-        0 if profile is None else Counter(profile)[quad]
-        for profile in (relation, center_x, center_y)
-    )
-    return (
-        profile_shape(a), profile_shape(b), profile_shape(c),
-        joint_multiplicities(a, b, c),
-        profile_shape(relation), profile_shape(center_x), profile_shape(center_y),
-        joint_multiplicities(relation, center_x, center_y),
-        quad_tag, quad_counts,
-    )
-
-
 def signature(root, move, reply, q):
     named = [(f"r{i}", projective(point)) for i, point in enumerate(root)]
     named += [("x", projective(move)), ("y", projective(reply)),
@@ -487,6 +651,16 @@ def main():
     ap.add_argument("--score-search", action="store_true")
     ap.add_argument("--aligned", action="store_true")
     ap.add_argument("--group-relations", action="store_true")
+    ap.add_argument("--segre", action="store_true")
+    ap.add_argument("--redei", action="store_true")
+    ap.add_argument("--classifier-combos", action="store_true")
+    ap.add_argument("--redei-residual", action="store_true")
+    ap.add_argument("--redei-residual-components", action="store_true")
+    ap.add_argument("--redei-support-residual", action="store_true")
+    ap.add_argument("--redei-collision-residual", action="store_true")
+    ap.add_argument("--relative-redei-residual", action="store_true")
+    ap.add_argument("--relative-redei-simple", action="store_true")
+    ap.add_argument("--relative-congruence", action="store_true")
     args = ap.parse_args()
     q = args.q
     if q != 17 and not args.all_roots:
@@ -507,6 +681,18 @@ def main():
         assert len(records) == expected_forced_roots, records
     else:
         assert records, f"q={q} has no degree-one balanced-root obligations"
+    root_indices = {root: i for i, root in enumerate(roots)}
+    filter_redei_fn = relative_redei_simple_signature if args.relative_redei_simple else (
+        relative_redei_signature if args.relative_redei_residual else (
+        redei_support_signature if args.redei_support_residual else (
+            redei_collision_signature if args.redei_collision_residual else redei_direction_signature
+        )
+        )
+    )
+    forced_redei = {
+        filter_redei_fn(root, move, reply, q)
+        for root, forced_pairs in records for move, reply in forced_pairs
+    }
 
     histogram = Counter()
     mirror_histogram = Counter()
@@ -531,13 +717,47 @@ def main():
         pairs = parse_pairs(output)
         by_move = {}
         global_by_signature = {}
-        for root_index, move, reply, value in pairs:
-            signature_fn = group_relation_signature if args.group_relations else (
+        for root_index, move, reply, value, residual_live in pairs:
+            signature_fn = combined_classifier_signature if args.classifier_combos else (
+                segre_product_signature if args.segre else (
+                redei_direction_signature if args.redei else (
+                    group_relation_signature if args.group_relations else (
                 aligned_involution_signature if args.aligned else (
                     reduced_involution_signature if args.reduced_only else involution_signature
                 )
+                    )
+                )
+                )
             )
             inv_signature = signature_fn(roots[root_index], move, reply, q)
+            if args.redei_residual or args.redei_residual_components:
+                redei = redei_direction_signature(roots[root_index], move, reply, q)
+                residual = cached_residual_signature(
+                    q, roots[root_index] + (move, reply)
+                ) if redei in forced_redei else None
+                inv_signature = (redei, residual) if not args.redei_residual_components else (
+                    (redei,) + (residual if residual is not None else (None,) * 5)
+                )
+            if args.redei_support_residual or args.redei_collision_residual:
+                redei = filter_redei_fn(roots[root_index], move, reply, q)
+                residual = cached_residual_signature(
+                    q, roots[root_index] + (move, reply)
+                ) if redei in forced_redei else None
+                inv_signature = (redei, None, None) if residual is None else (
+                    redei, residual[0], residual[1]
+                )
+            if args.relative_redei_residual or args.relative_redei_simple:
+                relative = filter_redei_fn(roots[root_index], move, reply, q)
+                if relative in forced_redei:
+                    before = cached_residual_signature(q, roots[root_index] + (move,))
+                    after = cached_residual_signature(q, roots[root_index] + (move, reply))
+                    inv_signature = (
+                        relative, after[0] - before[0], after[1] - before[1]
+                    )
+                else:
+                    inv_signature = (relative, None, None)
+            if args.classifier_combos:
+                inv_signature += (residual_live,)
             if args.combinatorial:
                 assert args.reduced_only or args.aligned
                 inv_signature = aligned_combinatorial_signature(inv_signature, q) \
@@ -550,7 +770,6 @@ def main():
         forced_targets = []
         forced_cases = []
         collision_hist = Counter()
-        root_indices = {root: i for i, root in enumerate(roots)}
         for root, forced_pairs in records:
             root_index = root_indices[root]
             for move, reply in forced_pairs:
@@ -617,6 +836,68 @@ def main():
             ablation_rows.append((omitted, pure))
         print(f"FORCED-INVOLUTION-REDUCTION prefixes={prefix_rows} "
               f"single-component-ablation={ablation_rows}")
+        if args.redei_residual_components:
+            rows = []
+            for component in range(1, 6):
+                values = {}
+                for inv_sig, labeled_rows in global_by_signature.items():
+                    reduced = (inv_sig[0], inv_sig[component])
+                    values.setdefault(reduced, []).extend(labeled_rows)
+                pure = sum(
+                    all(row[3] == "P" for row in values[(target[0], target[component])])
+                    for target in forced_targets
+                )
+                distinct = len({(target[0], target[component]) for target in forced_targets})
+                rows.append((component, pure, distinct))
+            print("REDEI-RESIDUAL-COMPONENTS "
+                  "fields={1:live,2:edges,3:degree-hist,4:components,5:triple-loads} "
+                  f"results={rows}")
+        if args.relative_redei_residual or args.relative_redei_simple:
+            quantizers = {
+                "sign": lambda value: (value > 0) - (value < 0),
+                **{f"mod{modulus}": (lambda value, m=modulus: value % m)
+                   for modulus in range(2, 13)},
+                **{f"bin{width}": (lambda value, w=width: value // w)
+                   for width in range(2, 11)},
+            }
+            quantized_rows = []
+            for name, quantize in quantizers.items():
+                values = {}
+                for inv_sig, labeled_rows in global_by_signature.items():
+                    reduced = (inv_sig[0], None if inv_sig[2] is None else quantize(inv_sig[2]))
+                    values.setdefault(reduced, []).extend(labeled_rows)
+                pure = sum(
+                    all(row[3] == "P" for row in values[
+                        (target[0], quantize(target[2]))
+                    ]) for target in forced_targets
+                )
+                distinct = len({(target[0], quantize(target[2])) for target in forced_targets})
+                local_unique = local_pure = 0
+                for target, candidate_rows in forced_cases:
+                    target_key = (target[0], quantize(target[2]))
+                    matches = [value for _reply, value, signature in candidate_rows
+                               if signature[2] is not None
+                               and (signature[0], quantize(signature[2])) == target_key]
+                    local_unique += len(matches) == 1
+                    local_pure += all(value == "P" for value in matches)
+                quantized_rows.append((name, pure, local_unique, local_pure, distinct))
+            print(f"RELATIVE-REDEI-QUANTIZED results={quantized_rows}")
+        if args.relative_congruence:
+            assert args.relative_redei_residual and not args.relative_redei_simple
+            hits = []
+            for coefficients in product(range(3), repeat=6):
+                if all(
+                    (coefficients[0] + sum(
+                        coefficient * feature for coefficient, feature in zip(
+                            coefficients[1:], relative_packet_count_features(target[0])
+                        )
+                    ) - target[2]) % 3 == 0
+                    for target in forced_targets
+                ):
+                    hits.append(coefficients)
+            print("RELATIVE-REDEI-CONGRUENCE features="
+                  "(1,n_dirs,reused_added,base_weight,added_pairs,base_ge2_added) "
+                  f"mod3-hits={hits[:20]} total={len(hits)}")
         if args.score_search:
             assert args.reduced_only and not args.combinatorial
             score_names = tuple(overlap_scores(forced_targets[0]))
@@ -654,6 +935,10 @@ def main():
             if minimal_subsets:
                 print(f"FORCED-INVOLUTION-MINIMAL width={len(minimal_subsets[0])} "
                       f"first-subsets={minimal_subsets}")
+                if args.classifier_combos:
+                    print("FORCED-CLASSIFIER-COMBO-NAMES subsets=" + repr([
+                        tuple(COMBO_FAMILIES[i] for i in subset) for subset in minimal_subsets
+                    ]))
             else:
                 print("FORCED-INVOLUTION-MINIMAL none")
 

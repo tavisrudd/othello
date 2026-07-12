@@ -111,6 +111,11 @@ the game-semantic residue with C74's explicit pencil.
   reply proof; do not continue static-signature mining. The two remaining exact relational
   candidates are also closed-negative at q17: canonical aligned `K5` component incidence reaches
   only `172/192` global purity, and projective order/commutator-Fricke type only `24/192`.
+  **Reopened mixed-feature hit:** full Rédei directions plus residual `(live, conflict-edge count)`
+  is `192/192` with 90 forced types. In proof-relative form only the five new reply directions
+  `D_y` and `ΔE` are needed; `(D_y,ΔE mod 3)` is locally exact `192/192` once S5 context is fixed.
+  No linear mod-3 formula in simple collision counts fits, so the new lemma target is the exact
+  incidence decomposition `ΔE=-R_y+A_y`, not another static dictionary.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:

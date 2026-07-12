@@ -708,6 +708,10 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   separate every forced q11/q17 reply from the full controls (`24/24`, `192/192`), but the
   q-independent multiplicity quotient and every simple extremal reduction fail; this supplies a
   coordinate system, not a selector, and closes further static-signature mining.
+  A user-requested mixed-feature reopening found a sharper contextual target: the five new reply
+  directions `D_y` plus residual conflict-edge change `ΔE` separate every forced q11/q17 reply;
+  at fixed S5 even `ΔE mod 3` suffices. The proof-shaped residue is to explain
+  `ΔE=-R_y+A_y` from the direction packet, not to classify full orbits.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

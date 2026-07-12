@@ -2484,3 +2484,14 @@ The invariant is retained as coordinates for a future algebraic reply proof; fur
 signature mining is closed in favor of recursive closure or the balanced-packet theorem. A final
 cross-component audit confirms the closure: canonical aligned `K5` action incidence is only
 `172/192` globally P-pure at q17, and the projective-order/commutator-Fricke quotient only `24/192`.
+
+## 2026-07-11 C77 continuation (Codex) — mixed Rédei/residual hit
+
+Reopened the classifier search at user request and found a substantially smaller mixed invariant.
+Full Rédei directions plus residual `(live, conflict edges)` is exact `192/192` at q17 with 90
+forced types; degree histogram or untouched-line loads also close it separately. In proof-relative
+form, ten old S5 directions and absolute counts disappear: the five new reply directions `D_y`
+plus `ΔE` remain exact. At fixed S5, `ΔE mod 3` or width-2/3 bins are already `192/192`; globally
+the context is necessary. No linear mod-3 formula in simple packet collision counts exists. The
+new algebraic target is the incidence identity `ΔE=-R_y+A_y`, with old-edge removal controlled by
+the known S5 conflict graph and new edges by the five reply lines.

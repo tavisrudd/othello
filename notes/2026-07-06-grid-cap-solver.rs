@@ -9677,14 +9677,25 @@ fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usiz
                         let key = b.canon(&occ_u);
                         let pair_is_p = !*s.memo.get(&key).expect("full solve omitted grandchild");
                         if EMIT_PAIRS {
+                            let mut chosen_u = chosen_t;
+                            set_bit(&mut chosen_u, y);
+                            let mut forb_u = forb_t;
+                            mask_or(&mut forb_u, &b.rc_mask[y]);
+                            for &o in occ_t.iter() {
+                                mask_or(&mut forb_u, &b.line_mask[o as usize * b.n + y]);
+                            }
+                            let residual_live: usize = (0..MAXW)
+                                .map(|i| (b.all[i] & !chosen_u[i] & !forb_u[i]).count_ones() as usize)
+                                .sum();
                             println!(
-                                "REPLYGRAPHS-PAIR root-index={} x={},{} y={},{} value={}",
+                                "REPLYGRAPHS-PAIR root-index={} x={},{} y={},{} value={} live={}",
                                 root_index,
                                 x / q,
                                 x % q,
                                 y / q,
                                 y % q,
                                 if pair_is_p { "P" } else { "N" },
+                                residual_live,
                             );
                         }
                         if pair_is_p {
