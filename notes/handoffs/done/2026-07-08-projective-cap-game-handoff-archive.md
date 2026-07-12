@@ -2348,3 +2348,12 @@ A legal center is balanced exactly at certificate degree two. Every form has 2--
 and obeys `T≥10`, forbidden certificate weight `F≤3`, `n1≤4`, and maximum legal degree two. Since
 `T-F=n1+2n2`, these four bounds force `n2≥2`. Proving the four bounded algebraic inequalities is now
 the complete d=5 geometric obligation.
+
+## 2026-07-11 C77 continuation (Codex) — one d=5 ledger bound proved
+
+Writing each certificate as a directed edge `f→g` exposes four exact quotient identities:
+`C(1,r)=C(s,rs)`, `C(1,s)=C(r,rs)`, and their two reversals. Eight certificates therefore occur in
+four equal pairs; only the four cross edges `1↔rs`, `r↔s` can be singleton labels. This proves
+`n1≤4` uniformly. The d=5 obligation is down to three bounds: `T≥10`, forbidden weight `≤3`, and
+legal degree `≤2`. Primary-d5 nonmaximum controls violate at least one of exactly these three, so
+their algebraic proofs should construct the hidden d4 line from the forbidden pole/equality.

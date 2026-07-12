@@ -3178,3 +3178,11 @@ so balanced centers are degree two. Across every tested maximum form through GF(
 ledger satisfies `T≥10`, forbidden weight `≤3`, `n1≤4`, and legal degree `≤2`; therefore
 `T-F=n1+2n2` forces `n2≥2`. The d=5 geometry is no longer an unstructured existence question: its
 remaining proof is precisely these four bounded field-algebra inequalities.
+
+## 2026-07-11 C77 continuation — paired labels prove `n1≤4`
+
+The twelve directed d=5 certificates satisfy four exact identities forced by `1·rs=r·s`:
+`C(1,r)=C(s,rs)`, `C(1,s)=C(r,rs)`, plus the two reversed identities. Hence eight labels are paired
+and only four directed cross edges can be singletons, proving `n1≤4`. The remaining uniform ledger
+proof has three inequalities (`T≥10`, forbidden weight `≤3`, legal degree `≤2`); every nonmaximum
+primary-d5 control with a hidden d4 line violates at least one of exactly these three.

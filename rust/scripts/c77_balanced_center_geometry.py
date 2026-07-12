@@ -147,6 +147,11 @@ def collision_certificate_degrees(F, A, primary=0):
     return degrees, by_parameter
 
 
+def directed_collision_parameter(F, U, f, g):
+    h, k = (x for x in U if x not in (f, g))
+    return collision_parameter(F, f, (0, g), (h, k))
+
+
 def run(q, details=False):
     F = Field(q)
     group = pgl_matrices(F)
@@ -257,7 +262,7 @@ def run_d4_normal_forms(q):
     return failures
 
 
-def run_d5_normal_forms(q):
+def run_d5_normal_forms(q, details=False):
     """Test maximum d=5 normal forms A={0,1,r,s,rs}."""
     F = Field(q)
     seen = set()
@@ -267,6 +272,8 @@ def run_d5_normal_forms(q):
     degree_hist = Counter()
     ledger_hist = Counter()
     ledger_violations = []
+    nonmaximum_controls = Counter()
+    pairing_identity_mismatches = []
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -278,7 +285,38 @@ def run_d5_normal_forms(q):
             if len(forbidden) != 5:
                 continue
             _hist, dmin, keys = line_pencil_summary(F, A)
+            t = F.mul(r, s)
+            U = (1, r, s, t)
+            paired_edges = (
+                ((1, r), (s, t)),
+                ((1, s), (r, t)),
+                ((r, 1), (t, s)),
+                ((s, 1), (t, r)),
+            )
+            for edge1, edge2 in paired_edges:
+                value1 = directed_collision_parameter(F, U, *edge1)
+                value2 = directed_collision_parameter(F, U, *edge2)
+                if value1 != value2:
+                    pairing_identity_mismatches.append((A, edge1, value1,
+                                                        edge2, value2))
             if dmin != 5 or (0, q) not in keys:
+                degrees, _certs = collision_certificate_degrees(F, A)
+                legal_degrees = [degrees[a] for a in range(1, q)
+                                 if a not in forbidden]
+                if details and sum(degrees.values()) < 10:
+                    directed = {
+                        (f, g): directed_collision_parameter(F, U, f, g)
+                        for f in U for g in U if f != g
+                    }
+                    print(
+                        f"BALANCED-D5-POLE-CONTROL q={q} A={A} dmin={dmin} "
+                        f"d4keys={keys} directed={directed}"
+                    )
+                nonmaximum_controls[(dmin,
+                                     sum(degrees.values()) < 10,
+                                     sum(degrees[a] for a in forbidden) > 3,
+                                     sum(d == 1 for d in legal_degrees) > 4,
+                                     max(legal_degrees, default=0) > 2)] += 1
                 continue
             pencils += 1
             matches = []
@@ -287,7 +325,7 @@ def run_d5_normal_forms(q):
                     continue
                 if center_defects(F, A, 0, q, a) == (5, 5, 5, 6, 6):
                     matches.append(a)
-            degrees, _certs = collision_certificate_degrees(F, A)
+            degrees, certs = collision_certificate_degrees(F, A)
             predicted = sorted(a for a, degree in degrees.items()
                                if degree == 2 and a not in forbidden)
             if predicted != matches:
@@ -303,23 +341,44 @@ def run_d5_normal_forms(q):
                          legal_positive.get(1, 0),
                          legal_positive.get(2, 0))] += 1
             forbidden_weight = sum(degrees[a] for a in forbidden)
+            degree_one_sources = Counter(
+                certs[a][0][0] for a in range(1, q)
+                if a not in forbidden and degrees[a] == 1
+            )
             max_legal_degree = max((degrees[a] for a in range(1, q)
                                     if a not in forbidden), default=0)
             if (sum(degrees.values()) < 10 or forbidden_weight > 3
-                    or legal_positive.get(1, 0) > 4 or max_legal_degree > 2):
+                    or legal_positive.get(1, 0) > 4 or max_legal_degree > 2
+                    or max(degree_one_sources.values(), default=0) > 1):
                 ledger_violations.append((A, sum(degrees.values()), forbidden_weight,
                                           legal_positive.get(1, 0),
-                                          max_legal_degree))
+                                          max_legal_degree,
+                                          dict(degree_one_sources)))
             multiplicities[len(matches)] += 1
             if not matches:
                 failures.append(A)
+            if details and len(matches) == 2:
+                compact_certs = {}
+                for a, rows in certs.items():
+                    compact_certs[a] = [
+                        (f, next(v for pair in (left, right) if 0 in pair
+                                 for v in pair if v != 0))
+                        for f, left, right in rows
+                    ]
+                print(
+                    f"BALANCED-D5-TIGHT q={q} A={A} forbidden={sorted(forbidden)} "
+                    f"matches={matches} degrees={dict(sorted(degrees.items()))} "
+                    f"edges={dict(sorted(compact_certs.items()))}"
+                )
     print(
         f"BALANCED-D5-NORMAL q={q} forms={pencils} "
         f"multiplicity={dict(sorted(multiplicities.items()))} "
         f"legal-certificate-degrees={dict(sorted(degree_hist.items()))} "
         f"ledger(total,forbidden,n1,n2)={dict(sorted(ledger_hist.items()))} "
         f"failures={failures} formula-mismatches={formula_mismatches[:10]} "
-        f"ledger-violations={ledger_violations[:10]}"
+        f"ledger-violations={ledger_violations[:10]} "
+        f"pairing-identity-mismatches={pairing_identity_mismatches[:10]} "
+        f"nonmaximum-controls={dict(sorted(nonmaximum_controls.items()))}"
     )
     return failures
 
@@ -333,7 +392,7 @@ if __name__ == "__main__":
     args = ap.parse_args()
     for q in args.q:
         if args.d5_normal_forms:
-            run_d5_normal_forms(q)
+            run_d5_normal_forms(q, args.details)
         elif args.normal_forms:
             run_d4_normal_forms(q)
         else:

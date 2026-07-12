@@ -690,8 +690,10 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   `A={0,±1,±x}`, the four rational balanced candidates fail at characteristic-5 `x=±2` and
   characteristic-7 `x∈{±2,±3}` (confirmed again in GF125/GF343). The refined route is the finite
   rational equality case split, balanced-center P-purity, and separate small-subfield game lemmas.
-  The d=5 geometry is now a twelve-certificate ledger: four bounded inequalities imply at least two
-  balanced centers and remain to be proved algebraically. `Low4` remains the uniform fallback.
+  The d=5 geometry is now a twelve-certificate ledger: four exact label-pairing identities prove
+  `n1≤4`, leaving only `T≥10`, forbidden weight `≤3`, and legal degree `≤2`; together they imply at
+  least two balanced centers. Nonmaximum controls violate exactly these remaining bounds. `Low4`
+  remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

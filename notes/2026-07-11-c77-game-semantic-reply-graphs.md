@@ -314,14 +314,26 @@ is maximum with `dmin=5`, no other spoke can have defect 4. Therefore the certif
 legal parameter is the number of its defect-5 nonprimary spokes, and a legal center is balanced
 exactly when its certificate degree is two.
 
+The twelve certificates are more structured than this raw count suggests. Label a certificate by
+the directed edge `f->g`, where `(0,g)` is the pair containing zero. With `t=rs`, direct substitution
+in the quotient proves four identities:
+
+```text
+C(1,r)=C(s,t),    C(1,s)=C(r,t),
+C(r,1)=C(t,s),    C(s,1)=C(t,r).
+```
+
+Thus eight directed edges occur in four equal pairs. Only `1->t`, `t->1`, `r->s`, and `s->r` are
+unpaired, so a legal degree-one label injects into these four edges and `n1<=4` is proved uniformly.
+
 The normal-form census has zero formula mismatches and no balanced failures over all maximum forms
 at q=19,23,25,27,29,31,37,49. It finds 2--4 balanced parameters per form. More importantly, every
-form satisfies the same four bounded ledger inequalities:
+form satisfies the same bounded ledger inequalities:
 
 ```text
 T = number of nonzero finite certificate incidences >= 10,
 F = certificate weight landing in the five forbidden parameters <= 3,
-n1 = number of legal degree-one parameters <= 4,
+n1 = number of legal degree-one parameters <= 4 (now proved by the four identities),
 every legal certificate degree <= 2.
 ```
 
@@ -331,10 +343,14 @@ Writing `n2` for legal degree-two parameters gives the exact count
 T-F = n1 + 2*n2.
 ```
 
-Hence the four inequalities imply `2*n2 >= 10-3-4=3`, so `n2>=2`: at least two balanced centers.
+Hence these inequalities imply `2*n2 >= 10-3-4=3`, so `n2>=2`: at least two balanced centers.
 This is now the entire `d=5` geometric proof obligation. The quotient formula and counting
-implication are proved; the four uniform inequalities are exhaustively checked in the listed fields
-but still need their field-algebraic proof.
+implication and `n1<=4` are proved. The three remaining uniform bounds `T>=10`, `F<=3`, and legal
+degree at most two are exhaustively checked in the listed fields but still need their field-algebraic
+proof. Nonmaximum controls sharpen the route: every primary-d5 form hiding a d4 line violates at
+least one of exactly these three bounds. Algebraically, the bounds say that at most one of the four
+paired labels has a pole, forbidden labels carry weight at most three, and distinct paired labels
+cannot merge; each forbidden equality should therefore construct the excluded d4 line directly.
 
 ## Reproduction
 
