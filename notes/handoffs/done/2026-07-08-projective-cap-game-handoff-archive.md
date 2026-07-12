@@ -2376,3 +2376,12 @@ Pair+singleton `A=F=0` forces `B=0`, repeating a source. Opposite paired poles `
 `E=F=G=0` force `rs=1`, then the forbidden equality `s=1`. These contradictions exhaust the pole
 packet and prove `T≥10` over every odd field. The d=5 ledger now has only two open inequalities:
 forbidden certificate weight at most three and legal degree at most two.
+
+## 2026-07-11 C77 continuation (Codex) — forbidden-weight template isolated
+
+All primary-d5 controls with `F>3` have exactly one rectangle-symmetry template: one paired label
+(weight two) and two singleton labels are forbidden; the paired label coincides with one singleton,
+and the other singleton hits a second forbidden value. There are no two-pair or four-singleton
+controls, and the template has zero violations through GF49. Every occurrence has a reported hidden
+d4 line. The uniform `F≤3` proof is therefore one rational-equality orbit rather than an open-ended
+weight classification.

@@ -378,6 +378,16 @@ on each of these three pattern classes, so three representatives suffice:
 This exhausts the fourteen cases and proves `T>=10` for every odd field. The controls agree: every
 `T<10` form exhibits the predicted repeated-source or primary-d4 obstruction.
 
+The `F<=3` controls also collapse to one rectangle-symmetry template. In every primary-d5 form with
+forbidden certificate weight four, exactly one paired label (weight two) and two singleton labels
+are forbidden. The paired label coincides with one singleton at the same forbidden parameter, giving
+forbidden degree three; the other singleton lands at a second forbidden parameter. No control has
+two forbidden paired labels or four forbidden singletons. This template has zero violations over
+q=19,23,25,27,29,31,37,49; when it occurs, the full pencil census always reports a hidden d4 line.
+Thus the `F<=3` proof is reduced to one rational-equality orbit: normalize the coincident
+paired/singleton value, use its membership in `{r,s,rs,r^2s,rs^2}` plus the second singleton's
+membership, and construct the reported d4 line.
+
 ## Reproduction
 
 ```bash

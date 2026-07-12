@@ -693,7 +693,9 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   The d=5 geometry is now a twelve-certificate ledger: four exact label-pairing identities prove
   `n1≤4`; a three-orbit pole argument proves `T≥10`. Only forbidden weight `≤3` and legal degree
   `≤2` remain, and together the four bounds imply at least two balanced centers. Nonmaximum controls
-  violate exactly these ledger bounds. `Low4` remains the uniform fallback.
+  violate exactly these ledger bounds. The `F>3` controls form one symmetry template: one paired
+  label plus two singletons are forbidden, and the pair coincides with one singleton. `Low4` remains
+  the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

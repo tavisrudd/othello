@@ -3202,3 +3202,10 @@ The fourteen possible distinct-source pole patterns form three rectangle-symmetr
 representatives close directly: `A=F=0 => B=0`; `A=C=0` forces the primary d4 form
 `{±1,±s}`; and `E=F=G=0` forces `rs=1` then `s=1`. Hence `T≥10` is proved uniformly. The d=5
 certificate ledger retains only forbidden weight `≤3` and legal degree `≤2`.
+
+## 2026-07-11 C77 continuation — forbidden-weight controls form one template
+
+Every computed primary-d5 `F>3` control consists of one forbidden paired label plus two forbidden
+singletons, with the pair coincident with one singleton at a degree-three forbidden parameter. No
+other weight-four pattern occurs through GF49, and every instance exposes a hidden d4 line. This
+reduces `F≤3` to one rectangle-symmetry rational-equality orbit.

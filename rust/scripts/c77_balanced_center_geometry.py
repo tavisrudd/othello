@@ -275,6 +275,8 @@ def run_d5_normal_forms(q, details=False):
     nonmaximum_controls = Counter()
     pairing_identity_mismatches = []
     pole_pattern_controls = Counter()
+    forbidden_pattern_controls = Counter()
+    forbidden_pattern_violations = []
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -304,6 +306,16 @@ def run_d5_normal_forms(q, details=False):
                 (f, g): directed_collision_parameter(F, U, f, g)
                 for f in U for g in U if f != g
             }
+            grouped_values = {
+                "P1r": directed_values[(1, r)],
+                "P1s": directed_values[(1, s)],
+                "Pr1": directed_values[(r, 1)],
+                "Ps1": directed_values[(s, 1)],
+                "S1t": directed_values[(1, t)],
+                "St1": directed_values[(t, 1)],
+                "Srs": directed_values[(r, s)],
+                "Ssr": directed_values[(s, r)],
+            }
             if dmin != 5 or (0, q) not in keys:
                 degrees, _certs = collision_certificate_degrees(F, A)
                 legal_degrees = [degrees[a] for a in range(1, q)
@@ -328,6 +340,33 @@ def run_d5_normal_forms(q, details=False):
                     role = {1: "1", r: "r", s: "s", t: "t"}
                     role_poles = tuple(sorted((role[f], role[g]) for f, g in poles))
                     pole_pattern_controls[(role_poles, len(keys))] += 1
+                forbidden_groups = tuple(sorted(
+                    name for name, value in grouped_values.items()
+                    if value is not None and value in forbidden
+                ))
+                forbidden_group_weight = sum(
+                    2 if name.startswith("P") else 1 for name in forbidden_groups
+                )
+                if forbidden_group_weight > 3:
+                    forbidden_pattern_controls[(forbidden_groups, len(keys))] += 1
+                    paired_names = [name for name in forbidden_groups
+                                    if name.startswith("P")]
+                    singleton_names = [name for name in forbidden_groups
+                                       if name.startswith("S")]
+                    if (len(paired_names) != 1 or len(singleton_names) != 2
+                            or not any(grouped_values[paired_names[0]]
+                                       == grouped_values[name]
+                                       for name in singleton_names)):
+                        forbidden_pattern_violations.append(
+                            (A, forbidden_groups, grouped_values)
+                        )
+                    if details:
+                        print(
+                            f"BALANCED-D5-FORBIDDEN-CONTROL q={q} A={A} "
+                            f"r={r} s={s} t={t} "
+                            f"forbidden={sorted(forbidden)} groups={forbidden_groups} "
+                            f"values={grouped_values} d4keys={keys}"
+                        )
                 continue
             pencils += 1
             matches = []
@@ -390,7 +429,9 @@ def run_d5_normal_forms(q, details=False):
         f"ledger-violations={ledger_violations[:10]} "
         f"pairing-identity-mismatches={pairing_identity_mismatches[:10]} "
         f"nonmaximum-controls={dict(sorted(nonmaximum_controls.items()))} "
-        f"pole-pattern-controls={dict(sorted(pole_pattern_controls.items()))}"
+        f"pole-pattern-controls={dict(sorted(pole_pattern_controls.items()))} "
+        f"forbidden-pattern-controls={dict(sorted(forbidden_pattern_controls.items()))} "
+        f"forbidden-pattern-violations={forbidden_pattern_violations[:10]}"
     )
     return failures
 

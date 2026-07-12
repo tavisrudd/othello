@@ -85,6 +85,8 @@ the game-semantic residue with C74's explicit pencil.
   degree-two parameters. Four exact paired-label identities prove `n1≤4`, and a three-orbit pole
   argument now proves `T≥10`. Only forbidden weight `≤3` and legal degree `≤2` remain; together they
   imply at least two balanced centers. Each fails only on nonmaximum controls hiding a d4 line.
+  The `F>3` controls form one symmetry template: paired weight two plus two singletons, with the
+  paired label coincident with one singleton at a forbidden parameter.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
@@ -105,7 +107,8 @@ the game-semantic residue with C74's explicit pencil.
   of the five-spoke collision score `K=Σδ_e−t`. Sharper route: prove P-purity/existence of balanced
   `(d,5,5,6,6)` centers in the generic branch and handle the characteristic-5/7 subfield
   configurations separately. For d=5, prove forbidden weight `≤3` and legal degree `≤2`; `n1≤4`
-  and `T≥10` are now proved and the four bounds force at least two balanced parameters.
+  and `T≥10` are now proved and the four bounds force at least two balanced parameters. The
+  forbidden-weight proof is reduced to the single paired-plus-two-singletons equality template.
 
 **Independent / engineering:**
 
