@@ -3137,3 +3137,15 @@ minimum-zone center is N on six q13 and six q17 maximum pencils—so the theorem
 set-valued. Added `fanmoves` to emit exact one-ply values over a whole S3 fan in one solve; tight q17
 N centers have 4–16 P children, ruling out a unique forced-escape explanation. Full tables and
 scope audit are appended to the C77 game-semantic report.
+
+## 2026-07-11 C77 continuation — exact five-spoke formula
+
+Proved the geometric half of `Low4`. The legal off-conic S4 extensions before choosing a center are
+`(q−5)^2`. If `s_e(z)` is the legal off-conic load (including z) on the spoke from z to frame point
+e, the five spokes are disjoint away from z, giving
+`zone_v=(q−5)^2+4−Σs_e`. A secant spoke has `s_e=q−1−d_e` by C74; a tangent spoke has
+`s_e=q−δ_e`, where `δ_e` is the number of distinct intersections with the six opposite-frame chords.
+Thus `zone_v=q²−15q+34+Σδ_e−t`, with every `δ_e∈{4,5,6}` and at most two tangent spokes. Checked
+exactly on 2,876 maximum-pencil centers through q19. The six tight q17 packets have layers
+`K=24:1P`, `K=26:2P+2N`, `K=28:7N`. Since identical `(K,t)` types elsewhere can be both P and N,
+the remaining Low4 lemma is game-semantic, not another scalar classification.

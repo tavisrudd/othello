@@ -127,6 +127,64 @@ def root_support(rec, cell):
     return live_on, zone_v
 
 
+def mobius_preimage(y, F, w, q):
+    """Inverse of mobius_zero_inf by exact P1 enumeration (tiny prime-field diagnostic)."""
+    if y == INF:
+        return w
+    for t in list(range(q)) + [INF]:
+        if t == w:
+            continue
+        if mobius_zero_inf(t, F, w, q) == y:
+            return t
+    raise AssertionError((q, F, w, y))
+
+
+def on_spoke(rec, e, center, cell):
+    """Whether an affine child cell lies on the line through center and frame point e."""
+    if e == 0:
+        return cell[0] == center[0]
+    if e == INF:
+        return cell[1] == center[1]
+    frame_cell = next(z for z in rec["S3"] if (z[0] - rec["rho"]) % rec["q"] == e)
+    return ((frame_cell[0] - center[0]) * (cell[1] - center[1])
+            - (frame_cell[1] - center[1]) * (cell[0] - center[0])) % rec["q"] == 0
+
+
+def spoke_loads(rec, key, a, center):
+    """Legal off-conic loads on the five center-to-frame spokes; secants cross-check C74 d."""
+    q = rec["q"]
+    F, w = key
+    F0 = 0 if F == "0" else F
+    frame = [0, INF] + rec["tframe"]
+    loads = []
+    defects = []
+    tangents = 0
+    for e in frame:
+        u = mobius_zero_inf(e, F0, w, q)
+        target = INF if u == 0 else a * inv(u, q) % q
+        image = mobius_preimage(target, F0, w, q)
+        assert image not in frame or image == e, (
+            q, rec["cls"], key, a, e, u, target, image, frame
+        )
+        load = sum(
+            pos != "on" and on_spoke(rec, e, center, cell)
+            for cell, _value, pos in rec["children"]
+        )
+        assert load >= 1  # the selected center itself
+        if image == e:
+            tangents += 1
+            defect = q - load
+            assert 4 <= defect <= 6, (q, rec["cls"], key, a, e, load, defect)
+        else:
+            ekey = "0" if e == 0 else e
+            _U, _products, d = line_product_data(rec, (ekey, image))
+            assert load == q - 1 - d, (q, rec["cls"], key, a, e, image, load, d)
+            defect = d
+        loads.append(load)
+        defects.append(defect)
+    return sum(loads), tuple(sorted(loads)), sum(defects), tuple(sorted(defects)), tangents
+
+
 def rows_for(q):
     recs = analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))
     rows = []
@@ -154,6 +212,15 @@ def rows_for(q):
                     "features": features(a, forbidden, q),
                 }
                 row["live_on"], row["zone_v"] = root_support(rec, cell)
+                (row["spoke_load"], row["spoke_loads"], row["spoke_defect"],
+                 row["spoke_defects"], row["spoke_tangents"]) = spoke_loads(rec, key, a, cell)
+                predicted_zone = (q - 5) ** 2 + 4 - row["spoke_load"]
+                collision_zone = q * q - 15 * q + 34 + row["spoke_defect"] - row["spoke_tangents"]
+                assert predicted_zone == collision_zone
+                assert row["zone_v"] == predicted_zone, (
+                    q, cls, key, cell, row["zone_v"], predicted_zone,
+                    row["spoke_loads"], row["spoke_tangents"]
+                )
                 rows.append(row)
                 pencil.append(row)
             pencils.append((q, cls, key, d, pencil))
@@ -223,6 +290,12 @@ def main():
                     for *_head, pencil in pencils)
         print(f"PENCIL-HIST q={q} rows={dict(sorted(pencil_hist.items()))} "
               f"maxN={max_n} minP={min_p}")
+        spoke_hist = Counter(
+            (r["spoke_defect"] - r["spoke_tangents"], r["spoke_tangents"], r["value"])
+            for r in rows
+        )
+        print(f"SPOKEFORMULA q={q} checked={len(rows)} offroot={(q-5)**2} "
+              f"score/tangents/value={dict(sorted(spoke_hist.items()))}")
         if q >= 11:
             print(f"ABSORB q={q} maxN={max_n} bound=q-8={q-8} "
                   f"holds={int(max_n <= q-8)}")
@@ -238,6 +311,20 @@ def main():
             lowzone[score] += 1
             if score[1] < min(3, len(pencil)):
                 lowzone_fail.append((cls, key, score))
+            if q == 17 and sum(r["value"] == "N" for r in pencil) == 9:
+                layers = Counter(
+                    (r["spoke_defect"] - r["spoke_tangents"],
+                     r["spoke_tangents"], r["value"])
+                    for r in pencil
+                )
+                expected = Counter({
+                    (24, 0, "P"): 1,
+                    (26, 0, "P"): 2,
+                    (26, 2, "N"): 2,
+                    (28, 0, "N"): 7,
+                })
+                assert layers == expected, (cls, key, layers)
+                print(f"TIGHT q=17 cls={cls} key={key} layers={dict(sorted(layers.items()))}")
         print(f"LOWZONE q={q} packet(size,P,N)={dict(sorted(lowzone.items()))} "
               f"threeP-failures={len(lowzone_fail)} examples={lowzone_fail[:4]}")
         totals, failures, examples = all_line_lowzone_control(q)

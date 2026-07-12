@@ -682,7 +682,9 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   centers have four exact perfect-matching reply-graph types. A value-blind two-stage packet now
   isolates the signal: choose the maximum (`min d`) line, then all centers through the fourth-lowest
   off-conic support; every packet has ≥3 P centers, while q17 non-maximum controls fail 1332/1344.
-  Proving this `Low4` packet/absorption theorem is open.
+  The support has the exact five-spoke formula `zone_v=q²−15q+34+Σδ_e−t`, so `Low4` is a bounded
+  product-collision packet. Identical collision types can be P or N; proving this packet contains P
+  is the remaining game-semantic theorem.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

@@ -33,7 +33,8 @@ the game-semantic residue with C74's explicit pencil.
    centers and would prove odd escape directly. The mechanism candidate is the value-blind two-stage
    packet `L=min d`, then `Low4(L)=` centers through the fourth-lowest off-conic support (ties kept):
    every packet has ≥3 P centers, while 1,332/1,344 non-maximum q17 lines fail. The q=11 knife-edge
-   base compresses to four exact perfect-matching reply-graph types.
+   base compresses to four exact perfect-matching reply-graph types. `Low4` is algebraic via the
+   proved five-spoke formula `zone_v=q²−15q+34+Σδ_e−t`, with `δ_e∈{4,5,6}` and tangent count `t≤2`.
 2. **A5 lane — arc-depletion arithmetic.** Sole surviving (ON) mechanism route. Open: prove
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
@@ -66,8 +67,10 @@ the game-semantic residue with C74's explicit pencil.
   selectors fail across q. The two-stage value-blind `Low4` packet contains ≥3 P centers on every
   maximum pencil; maximum-line selection is load-bearing by the non-maximum controls. All 32 distinct
   P centers in the q=11 knife-edge pencils have perfect winning-reply matchings in only four graph
-  isomorphism types. **Open:** prove the `Low4` packet theorem/N-absorption bound or a recursive reply
-  closure; do not spend more compute on the DROP envelope. Reports:
+  isomorphism types. The exact five-spoke formula makes `Low4` the fourth-order packet of
+  `K=Σδ_e−t`; identical `(K,t)` types can be both P and N, so the missing lemma must compare packet
+  games rather than classify one center. **Open:** prove the `Low4` packet theorem/N-absorption bound
+  or a recursive reply closure; do not spend more compute on the DROP envelope. Reports:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
   [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–9); modes
   `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`;
@@ -80,7 +83,8 @@ the game-semantic residue with C74's explicit pencil.
   [`2026-07-10-a5-symmetric-completion-anchor.md`](2026-07-10-a5-symmetric-completion-anchor.md).
 - **C74 residue (now the C77 game-semantic continuation)** — prove the two-stage packet theorem:
   on a maximum (`min d`) one-intruder pencil, the fourth-order-statistic low-`zone_v` packet contains
-  a P center (observed ≥3), implying `Ncenters≤q−8`; or prove an equivalent recursive reply closure.
+  a P center (observed ≥3), implying `Ncenters≤q−8`. Geometrically this is the fourth-order packet
+  of the five-spoke collision score `K=Σδ_e−t`; the open content is entirely game-semantic.
 
 **Independent / engineering:**
 

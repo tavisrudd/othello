@@ -152,6 +152,63 @@ q=17 pencil, its nine N centers have 4–16 P children each; hence the mechanism
 forced one-ply escape.  `s4potentialprobecells` was also generalized so cells after the three conic
 fit points may be off-conic intruders.
 
+### Exact five-spoke collision formula
+
+`zone_v` on the pencil has a closed incidence formula.  Before choosing a center, the legal
+off-conic size-4 extensions of the size-3 root number
+
+```text
+(q^2 - 9q + 21) - (q - 4) = (q - 5)^2.
+```
+
+Fix a legal center `z`.  For each of the five selected conic-frame points `e`, let `s_e(z)` be the
+number of legal off-conic extensions on the spoke `ze`, including `z`.  The five spokes meet only at
+`z`; after selecting `z`, each kills its other `s_e-1` off-conic points.  Therefore
+
+```text
+zone_v(z) = (q-5)^2 - 1 - sum_e (s_e(z)-1)
+          = (q-5)^2 + 4 - sum_e s_e(z).                 (1)
+```
+
+Each spoke has its own product-collision count:
+
+- if `ze` is a secant with second conic point `tau_a(e) != e`, C74 gives
+  `s_e = q-1-d_e`, where `d_e in {4,5,6}`;
+- if `ze` is tangent at `e`, let `delta_e` count the distinct intersections with the six chords
+  among the other four frame points; then `s_e=q-delta_e`, again `delta_e in {4,5,6}`.
+
+Writing `delta_e=d_e` on secants and letting `t(z)` count tangent spokes gives the uniform formula
+
+```text
+zone_v(z) = q^2 - 15q + 34 + sum_e delta_e(z) - t(z).   (2)
+```
+
+The script checks (1) and (2) exactly on all 2,876 maximum-pencil centers at q=11/13/17/19.  Thus
+`Low4` is equivalently the fourth-order packet for the finite five-term collision score
+
+```text
+K(z) = sum_e delta_e(z) - t(z),    delta_e in {4,5,6},  0 <= t <= 2.
+```
+
+At each of the six tight q=17 pencils the score layers are
+
+```text
+K=24: 1 P
+K=26: 2 non-tangent P + 2 tangent N
+K=28: 7 N
+```
+
+so `Low4={K<=26}` is exactly `3P+2N`.  This explains the packet geometrically but also exposes the
+remaining barrier: collision score and tangency do not determine value globally.  The corpus has
+both P and N at identical `(K,t)` (for example q=17 has both at `(24,0)` and `(28,0)`).  The open
+lemma is therefore genuinely game-semantic:
+
+> Among the centers with the four smallest five-spoke collision scores on a maximum C74 pencil,
+> at least one is P (observed strength: at least three).
+
+The geometry has now been reduced to a bounded collision vocabulary; the missing step must compare
+the recursive games of several packet centers, not classify one center by a scalar.
+
 ## Reproduction
 
 ```bash

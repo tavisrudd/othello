@@ -2301,3 +2301,17 @@ Added solver mode `fanmoves` to solve an S3 fan once and list every S4 root's P 
 off-conic support in `s4potentialprobecells`. Tight q17 N centers have 4–16 P children, excluding a
 unique forced-move mechanism. The open theorem is now: prove the maximum-pencil `Low4` packet
 contains P (observed ≥3), which implies `Ncenters≤q−8` and hence odd escape.
+
+## 2026-07-11 C77 continuation (Codex) — five-spoke collision reduction
+
+Derived the exact geometry behind `Low4`. The S3 root has `(q−5)^2` legal off-conic extensions.
+For a pencil center z, its five center-to-frame spokes are disjoint away from z, so their legal
+off-conic loads give `zone_v=(q−5)^2+4−Σs_e`. Secant loads are `q−1−d_e` by C74; tangent loads are
+`q−δ_e`, with `δ_e` the four-point chord-intersection count. Hence
+`zone_v=q²−15q+34+Σδ_e−t`, `δ_e∈{4,5,6}`, `t≤2`. The durable probe verifies both formulas on all
+2,876 maximum-pencil centers at q11/13/17/19.
+
+Consequently Low4 is purely the fourth-order packet of a bounded five-term collision score. At the
+six tight q17 pencils its layers are `24:1P`, `26:2P+2N`, `28:7N`. Equal score/tangency types can be
+both P and N elsewhere, so the remaining assertion that Low4 contains P cannot be another scalar
+classifier; it must relate the recursive games of multiple packet centers.
