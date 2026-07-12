@@ -17,35 +17,41 @@ facts fix the local structure (both specializations of standard Nofil/Node-Kayle
 selecting a live point removes its closed neighborhood (capacity-2 move), and two centres'
 matchings share ≤1 edge (no-3-collinear).
 
-## Why this reaches the escape crux
+## Role of the catalogue: exact boundary evaluators, not a forcing mechanism
 
-The odd-plane escape crux is the **size-3 residual → size-4 child** question, so it carries only
-**1–3 off-conic intruders** — exactly the small-`H_S` regime the Schreier catalogue solves:
+The odd-plane escape crux is the **size-3 residual → size-4 child** question. The size-3 *state*
+carries ≤3 off-conic intruders, so where its `H_S` is small the catalogue evaluates it exactly.
+But you cannot **stay** small: a `V₄` or `D₈` triple has **no** subgroup-preserving fourth move,
+and an `S₄` triple survives at most one, after which play jumps to the full `PSL/PGL`
+two-parameter family (verified, `c84_escape_probe.py`: V₄/D₈ → 0 preserving 4th moves, S₄ → ≤1,
+q=11,13,17). So the size-4 **children we actually need to evaluate are generic**, with varied
+conic-only values.
 
-- **≤2 intruders → dihedral → fully soluble** (Theorem 2.1: ≤2 paths + uniform `2r`-cycles,
-  closed Grundy). A large fraction of escape configurations should fall here.
-- **3 intruders → the V₄/D₈/S₄/D₁₂/… catalogue** with exact congruence-periodic values.
+**(Correction to the first commit of this note, 2026-07-12: it claimed the crux "lives in the
+tractable regime by construction" and that forcing "resolves favorably." That is wrong — the
+escape leaves the small-subgroup regime immediately. The catalogue gives exact leaf/boundary
+values, not a forcing mechanism; the surviving route is abundance + (ON) below, not staying
+small.)**
 
-Deep play generating all of `PGL(2,q)` is irrelevant to a size-4 escape; the crux lives in the
-tractable regime by construction. This is the sense in which the "can play be forced into
-small-subgroup configurations?" question resolves favorably **for the crux** even though it may
-fail for arbitrary deep positions.
+## The surviving route: abundance over the escape family + (ON)
 
-## The one real gap: conic-only vs full value = (ON)
+Since the size-4 children are generic (two-parameter, no finite quotient — the same wall as
+C75/C76/C83), the escape cannot be settled by *predicting* a child's value. It can still be
+settled by **counting**: a size-3 state has `≥ q² − O(kq)` legal children, and the mechanism to
+aim for is a q-uniform lower bound showing a **bounded-condition packet of them is entirely
+winning** — existence, no selector. This is C80(a) abundance, and it dovetails with the
+**(ON)** conjecture (some P child lies on the conic): conic-only Grundy = full value under (ON),
+so an abundance bound on conic-only-P escaping children would close the escape. `Schreier + (ON)`
+is then boundary evaluation + abundance, not a forcing engine.
 
-The Schreier theorems give exact values for the **conic-only** residual. The full escape value
-also has **off-conic** continuations, so conic-only Grundy ≠ full-position value in general.
-That gap is *precisely the (ON) conjecture* — "some P-valued size-4 child lies on the conic." If
-(ON) holds, the conic-only Schreier value **is** the escape value, and Theorem 2.1 + the
-three-centre catalogue become an escape engine. **`Schreier + (ON)`** is the synthesis to aim
-for; Schreier alone is an exact bulk sub-theory, not an escape theorem.
+## The √q-sealing bridge to A5 depletion
 
-## The gating measurement
-
-Classify the **actual escape-crux states** (balanced-root / size-3 residuals through q=19, the
-C79/C77 corpus) by their `H_S` subgroup type: what fraction sit in the dihedral (solved) and
-small-polyhedral (catalogued) regimes vs generic? This directly tests whether the Schreier
-engine reaches the crux, and is the next concrete probe (pairs with C80(a) abundance).
+The alternative to abundance is a **sealing** argument: preventing escape needs `Θ(√q)`
+pre-existing blockers of the off-conic supply. The `q + √q + 1` scale is the blocking-set / Baer
+subplane threshold, which plausibly ties the sealing problem to the program's **A5 arc-depletion**
+lane (odd-plane escape fails only at the depleted orders `{11,17}` through q=25, studied with a
+Baer census). If the minimal sealing set is Baer-shaped, the √q sealing problem and the depletion
+condition may be one obstruction — the open cross-lane question.
 
 ## The drain resource and a minimax potential
 
