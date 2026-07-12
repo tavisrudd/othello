@@ -3195,3 +3195,10 @@ label-pairing identities, only fourteen distinct-source patterns could give thre
 eight pair+singleton, two disjoint pairs, and four singleton triples. No such pattern survives in
 the controls; `A=F=0 => B=0` is proved directly and symmetry supplies its mate, leaving twelve raw
 finite implications for the uniform `T≥10` proof.
+
+## 2026-07-11 C77 continuation — pole packet closed
+
+The fourteen possible distinct-source pole patterns form three rectangle-symmetry orbits. Their
+representatives close directly: `A=F=0 => B=0`; `A=C=0` forces the primary d4 form
+`{±1,±s}`; and `E=F=G=0` forces `rs=1` then `s=1`. Hence `T≥10` is proved uniformly. The d=5
+certificate ledger retains only forbidden weight `≤3` and legal degree `≤2`.

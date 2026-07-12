@@ -82,10 +82,9 @@ the game-semantic residue with C74's explicit pencil.
   `x=±2` and characteristic 7 at `x∈{±2,±3}`. **Open:** finish the finite rational equality case
   split and balanced-center P-purity, and handle the two subfield configurations separately. The
   `d=5` branch is reduced to a twelve-certificate ledger: balanced centers are exactly legal
-  degree-two parameters. Four exact paired-label identities prove `n1≤4`; the three checked bounds
-  `T≥10`, forbidden weight `≤3`, and degree `≤2` then imply at least two and still need a uniform
-  algebraic proof. Each fails only on nonmaximum controls hiding a d4 line. `T≥10` is further reduced
-  to fourteen explicit low-degree pole implications; `A=F=0 => B=0` and its symmetric mate are closed.
+  degree-two parameters. Four exact paired-label identities prove `n1≤4`, and a three-orbit pole
+  argument now proves `T≥10`. Only forbidden weight `≤3` and legal degree `≤2` remain; together they
+  imply at least two balanced centers. Each fails only on nonmaximum controls hiding a d4 line.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
@@ -105,9 +104,8 @@ the game-semantic residue with C74's explicit pencil.
   a P center (observed ≥3), implying `Ncenters≤q−8`. Geometrically this is the fourth-order packet
   of the five-spoke collision score `K=Σδ_e−t`. Sharper route: prove P-purity/existence of balanced
   `(d,5,5,6,6)` centers in the generic branch and handle the characteristic-5/7 subfield
-  configurations separately. For d=5, prove the remaining three collision-ledger inequalities that
-  force at least two balanced parameters; `n1≤4` is closed by the four paired-label identities, and
-  `T≥10` is a fourteen-case pole packet (twelve raw cases remain after the first symmetric pair).
+  configurations separately. For d=5, prove forbidden weight `≤3` and legal degree `≤2`; `n1≤4`
+  and `T≥10` are now proved and the four bounds force at least two balanced parameters.
 
 **Independent / engineering:**
 

@@ -345,12 +345,11 @@ T-F = n1 + 2*n2.
 
 Hence these inequalities imply `2*n2 >= 10-3-4=3`, so `n2>=2`: at least two balanced centers.
 This is now the entire `d=5` geometric proof obligation. The quotient formula and counting
-implication and `n1<=4` are proved. The three remaining uniform bounds `T>=10`, `F<=3`, and legal
-degree at most two are exhaustively checked in the listed fields but still need their field-algebraic
-proof. Nonmaximum controls sharpen the route: every primary-d5 form hiding a d4 line violates at
-least one of exactly these three bounds. Algebraically, the bounds say that at most one of the four
-paired labels has a pole, forbidden labels carry weight at most three, and distinct paired labels
-cannot merge; each forbidden equality should therefore construct the excluded d4 line directly.
+implication and `n1<=4` are proved. The remaining uniform bounds are `F<=3` and legal degree at most
+two. Nonmaximum controls sharpen the route: every primary-d5 form hiding a d4 line violates at least
+one ledger bound. Algebraically, the open bounds say that forbidden labels carry weight at most
+three and distinct paired labels cannot merge; each forbidden equality should therefore construct
+the excluded d4 line directly.
 
 For `T>=10`, the pole packet is already explicit. Up to nonzero factors, the four paired-label pole
 conditions and four singleton pole conditions are
@@ -367,10 +366,17 @@ A pole with source f is exactly a product collision on the candidate line `(f,in
 poles with the same source immediately make that line d=4. Therefore a counterexample to `T>=10`
 would need at least three poles with distinct sources. The pairing graph leaves only fourteen
 minimal patterns to exclude: eight paired-pole plus disjoint-singleton cases, two pairs of disjoint
-paired poles, and four triples of singleton poles. Every tested primary-d5 control with at least
-three poles instead acquires a repeated source and its reported maximum line is d=4. For example,
-`A=F=0` forces `B=0`; the nominally disjoint pole pair creates two poles at source 1. The remaining
-twelve raw cases (after its `r<->s` mate) are the exact finite algebra packet for proving `T>=10`.
+paired poles, and four triples of singleton poles. Rectangle relabeling and rescaling act transitively
+on each of these three pattern classes, so three representatives suffice:
+
+1. `A=F=0` gives `B=0`, repeating source 1 and producing a d4 line.
+2. `A=C=0` gives `(1-r)(1+s^2)=0`; distinctness yields `s^2=-1`, then C gives `r=-1`.
+   Thus `U={+-1,+-s}` and the primary line itself has d=4.
+3. `E=F=G=0`: subtracting E from F gives `rs=1`, and then G gives `s=1`, contradicting
+   distinctness.
+
+This exhausts the fourteen cases and proves `T>=10` for every odd field. The controls agree: every
+`T<10` form exhibits the predicted repeated-source or primary-d4 obstruction.
 
 ## Reproduction
 

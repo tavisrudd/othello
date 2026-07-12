@@ -2367,3 +2367,12 @@ pairing graph permits only fourteen minimal patterns: eight pair+singleton, two 
 four singleton triples. All computed controls with three or more poles instead repeat a source and
 expose the reported d4 line. Direct substitution already closes one representative implication,
 `A=F=0 => B=0`; its `r↔s` mate is automatic, leaving twelve raw low-degree implications.
+
+## 2026-07-11 C77 continuation (Codex) — `T≥10` proved
+
+Rectangle symmetry reduces the fourteen distinct-source pole patterns to three representatives.
+Pair+singleton `A=F=0` forces `B=0`, repeating a source. Opposite paired poles `A=C=0` force
+`s²=-1`, then `r=-1`, so the primary four-set is `{±1,±s}` and already d4. Three singleton poles
+`E=F=G=0` force `rs=1`, then the forbidden equality `s=1`. These contradictions exhaust the pole
+packet and prove `T≥10` over every odd field. The d=5 ledger now has only two open inequalities:
+forbidden certificate weight at most three and legal degree at most two.
