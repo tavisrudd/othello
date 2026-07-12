@@ -119,3 +119,33 @@ Avoid:
 - Cite finite-plane tic-tac-toe only as adjacent colored/positional-game background.
 - Keep the novelty sentence qualified with "to our knowledge" until Clark--Mancini--Van Hook is
   fully retrieved and checked.
+
+## C84-era addendum (2026-07-12): novelty of the conic-involution Schreier catalogue
+
+The sections above predate the C84 Schreier work. Referee-grade triage of *that* machinery (Fable
+consult, 2026-07-12), skeptical:
+
+- **The one theorem a referee defends as new — the subgroup-type → value catalogue as a package.**
+  The dictionary "type of `H_S ≤ PGL(2,q)` ↦ reduced conic-only Grundy value," powered by the
+  conic↔Schreier identity, is a new object-specific structural result. This is *the* C84 paper;
+  everything else supports it.
+- **Name and lead with the latent lemma: the conic↔Schreier correspondence.** *"For a conic
+  `C ⊂ PG(2,q)`, q odd, each external point acts on `C ≅ P¹` by its tangent-pair involution;
+  conic-restricted Nofil on external set `S` = Node-Kayles on `Sch(⟨σ_x⟩ ↷ P¹)`."* Low depth,
+  high organizing value; not previously stated as a named correspondence with a value dictionary.
+- **The orbit-template periodicity "theorem" is known+known bookkeeping — do not oversell.**
+  Confirmed by proof inspection: V₄→⊔K₄ has value `#K₄ mod 2` with `#K₄=(q+1−2s)/4` (Dickson
+  split-type counting) and K₄ trivially Grundy 1; D₈→`aM₈⊔bK₂` has value `a+b mod 2` with the
+  counts from the q-mod-8 arithmetic and M₈/K₂ each a finite Grundy-1 computation. So the
+  periodicity = (Dickson congruence counts) ∘ (trivial finite piece-Grundy values). It is a real
+  theorem *only* if it survives the non-decomposable regime — which is exactly the S₄-escape/`q²`
+  regime where `R` does **not** decompose and there is no periodicity claim. Bill it as explicit
+  computation, confined to the decomposable small-subgroup residuals.
+- **Two-centre = paths + uniform `2r`-cycles / V₄ / D₈ closed forms:** known technique (classical
+  octal-game path/cycle Grundy) on a new object; the only content is the *geometric* identification
+  `r=|σ_xσ_y|`.
+- **Plane-case overlap confirmed and already handled:** `PG(2,2)=STS(7)` and `AG(2,3)=STS(9)` are
+  HHS data points (both nim-value 0), so those specific instances are **not** novel; HHS compute
+  only to order 15 (+samples) and prove no infinite family, so the `AG(n,q)`/`PG(n,2)`/`PG(2m−1,q)`
+  odd-q / `q>2` outcome theorems remain the genuine outcome-novelty. Method (mirror/fpf involution)
+  is folklore. This is exactly the conservative wording already adopted above.

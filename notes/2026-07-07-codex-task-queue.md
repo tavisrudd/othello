@@ -86,11 +86,18 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   an exchange/transfer lemma is required to get an on-conic P child; (3) **sealing** =
   complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) minimax potential
   tracking live vertices + live coloured edges (§5 drain bound → C80(b)). Correction: order 24 ≠ S₄
-  (D₂₄ occurs at `12|q²−1`, separate by element-order profile). Notes:
-  [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
+  (D₂₄ occurs at `12|q²−1`, separate by element-order profile). **Frontier sharpened (Fable,
+  2026-07-12):** density ≡ `{𝒢=0}` is a dim-2 CvdDM-definable set (equal strength); the open lemma
+  is one-sided — **one dim-2 constructible value-0 certificate** — as every known certificate is a
+  homography fixed locus = dim 1 = Θ(q); the Fricke coordinate determines value only vacuously
+  (near-injective). Near-term lever = existence not density. **Novelty:** conic↔Schreier
+  correspondence + value catalogue = the defensible new theorem; orbit-template periodicity =
+  known+known bookkeeping — [novelty audit](2026-07-08-codex-projective-nofil-novelty-audit.md).
+  Notes: [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
   [program integration](2026-07-12-conic-involution-residual-graphs.md); scripts
   `c80_schreier_verify.py` (field), `s4_escape_probe.py`, `s4_abundance_check.py`,
-  `pairing_witness.py`, `three_centre_probe.py`, `schreier_templates.py`.
+  `pairing_witness.py`, `exact_fricke.py`, `refined_signature.py`, `three_centre_probe.py`,
+  `schreier_templates.py`.
 
 - **C79 [REPORTED 2026-07-12 — arithmetic coordinates + bulk-gap spec delivered; continuation →
   C80/C81/C82]** — number-theoretic forcing architecture for the full odd-q

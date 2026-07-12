@@ -463,9 +463,21 @@ task list.  Current high-value items:
   (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
   complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) drain minimax
   fallback. Corrections folded: order 24 ≠ S₄ (D₂₄ occurs at `12|q²−1`, separate by element-order
-  profile). Notes: [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
+  profile). **Frontier sharpened (Fable consult, 2026-07-12):** density `#{y:𝒢=0}≥c·q²` ≡ `{𝒢=0}`
+  is a dimension-2 CvdDM-definable set (equal strength — can't assume one to prove the other); the
+  real open lemma is **one-sided — one dim-2 constructible value-0 certificate family** — since
+  every known certificate (catalogue/pairing) is a homography fixed locus = dim 1 = Θ(q); the exact
+  Fricke coordinate determines the value only *vacuously* (near-injective on generic classes, so `𝒢`
+  is just a conjugacy invariant). Near-term lever = **existence not density** (one P child avoiding
+  the induction's bad set, Θ(q)-achievable iff that set is O(1) curves — read off Lean
+  `OddEscapeGameStatement`). **Novelty:** the named conic↔Schreier correspondence + the subgroup-type
+  value catalogue are the defensible new theorem; the orbit-template periodicity is known+known
+  bookkeeping (Dickson counts ∘ trivial piece-Grundy) — see
+  [novelty audit C84 addendum](../2026-07-08-codex-projective-nofil-novelty-audit.md). Notes:
+  [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
   [program integration](../2026-07-12-conic-involution-residual-graphs.md); scripts
-  `s4_escape_probe.py`, `s4_abundance_check.py`, `pairing_witness.py`.
+  `s4_escape_probe.py`, `s4_abundance_check.py`, `pairing_witness.py`, `exact_fricke.py`,
+  `refined_signature.py`.
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —

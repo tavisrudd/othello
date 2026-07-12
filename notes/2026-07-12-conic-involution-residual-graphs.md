@@ -75,8 +75,8 @@ it has a fixed-point-free involutory automorphism with no `{v, τv}` edge (2nd p
 That sufficient condition covers only a **minority** of the P escape children and is unstable per
 class (q=11: 11/72 total, class B `0/17`; q=13: 37/116) — most P children are Grundy 0 for a
 non-pairing reason, so `pairing/τ` is not the density mechanism (same adaptive-not-symmetric wall
-as A5/C75). A provable positive-density bound must be **Grundy-arithmetic** — a bounded functional
-of `R`'s decomposition that hits 0 on a counted family — not a symmetry construction.
+as A5/C75). A provable positive-density bound cannot be a symmetry construction; the precise
+target is sharpened in **§The frontier** below.
 
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
 conic-only value 0; that does **not** by itself produce an **on-conic** P child. Closing the
@@ -89,6 +89,41 @@ conic-only-P escape to an on-conic P child. Abundance and (ON) are two problems,
 2. Determine whether that abundance transfers to (ON).
 3. Study relative complete arcs as the sealing alternative (below).
 4. Pursue the edge/drain minimax potential (below) if abundance fails.
+
+## The frontier, stated precisely
+
+Two refinements (Fable consult + Fricke test, 2026-07-12) fix what the density proof actually
+requires.
+
+**The value is a conjugacy invariant — no bounded quotient helps.** `𝒢(R_y)` factors through the
+character-variety coordinates of the 4-tuple `(σ₁,σ₂,σ₃,σ_y)`: the exact normalized Fricke traces
+(pair `tr(A_iA_j)²/∏det`, triple `tr(A_iA_jA_y)²/∏det`, quad) determine the value with **zero**
+ambiguity at q=11–19 — but *vacuously*, since on the generic S₄ classes the Fricke coordinate is
+near-injective (q=19 class D: 305 signatures for 305 children). This just restates that `𝒢` is a
+PGL-conjugacy invariant (fibers are `Stab(T)`-orbits). The coarse invariant (order + split-type)
+failed only because it is an *incomplete* orbit invariant. Net: no bounded *local* invariant of `y`
+gives a dimension reduction, so signature-equidistribution is dead. (Probes:
+`exact_fricke.py`, `refined_signature.py`.)
+
+**Density ≡ definability, at equal strength.** By Chatzidakis–van den Dries–Macintyre, a
+bounded-complexity, uniform-in-q definable subset of a variety over `F_q` has cardinality
+`c·q^d + O(q^{d−1/2})`. So "`{y : 𝒢=0}` is a dimension-2 CvdDM-definable set" **is** the density
+conjecture, at equal strength — one cannot be *assumed* to attack the other. The mex-recursion and
+C79's moment-cap are heuristic against definability, not a proof.
+
+**The real open lemma is one-sided.** Density does not need the full value-0 locus definable — only
+a definable **dimension-2 subset** of it: one full-dimensional constructible family of escape `y`
+carrying a uniform-in-q value-0 proof. Every certificate we have (catalogue decomposition; pairing
+homography) is a **homography fixed locus ⇒ divisor ⇒ dimension 1 ⇒ Θ(q)**; density needs dimension
+2. The local-invariant negatives do **not** rule out a *global* full-dimensional certificate — that
+gap, on the **graph** (not the character variety), is the frontier.
+
+**The only genuine q² lane** tolerating the unbounded-complexity predicate is spectral/probabilistic
+on the Schreier-graph family: Node-Kayles on "fixed S₄-gadget-blowup + one random near-perfect
+matching," P-probability → `c > 0` via expander mixing, plus an equidistribution transfer. Long lane.
+The near-term lever remains **existence, not density**: the escape lemma needs *one* P child avoiding
+the outer induction's bad set, which a Θ(q) certificate supplies **iff** that bad set is O(1) curves
+— open; read it off the Lean `OddEscapeGameStatement` / `GridGame.TrapConverse`.
 
 ## Sealing is a complete-arc / saturating-set problem (ranking item #3)
 
