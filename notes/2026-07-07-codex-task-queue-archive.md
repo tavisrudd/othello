@@ -3169,3 +3169,12 @@ the geometric defect computation for every x in all tested fields. Besides chara
 `x=±2` (the embedded `P¹(F5)`), characteristic-7 `x∈{±2,±3}` also has no balanced center and persists
 in GF(49)/GF(343). The generic route now needs a finite equality-case proof with these two explicit
 exceptions, plus the still-open d=5 geometry and game-semantic P-purity.
+
+## 2026-07-11 C77 continuation — d=5 reduces to four ledger bounds
+
+In normal form `A={0,1,r,s,rs}`, the twelve opposite-edge pairing certificates give explicit
+rational center parameters. Their legal parameter degree exactly counts nonprimary defect-5 spokes,
+so balanced centers are degree two. Across every tested maximum form through GF(49), the exact
+ledger satisfies `T≥10`, forbidden weight `≤3`, `n1≤4`, and legal degree `≤2`; therefore
+`T-F=n1+2n2` forces `n2≥2`. The d=5 geometry is no longer an unstructured existence question: its
+remaining proof is precisely these four bounded field-algebra inequalities.

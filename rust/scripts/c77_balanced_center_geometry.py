@@ -111,6 +111,42 @@ def primary_products(F, A, e, w):
     return {F.mul(x, y) for x, y in combinations(U, 2)}
 
 
+def three_pairings(xs):
+    a, b, c, d = xs
+    return (((a, b), (c, d)), ((a, c), (b, d)), ((a, d), (b, c)))
+
+
+def collision_parameter(F, f, left, right):
+    """Nontrivial tau_a parameter for one opposite-edge collision at f."""
+    p, q = left
+    r, s = right
+    alpha = F.mul(F.sub(p, f), F.sub(q, f))
+    beta = F.mul(F.sub(r, f), F.sub(s, f))
+    lead = F.sub(alpha, beta)
+    if lead == 0:
+        return None
+    constant = F.sub(F.mul(alpha, F.mul(r, s)),
+                     F.mul(beta, F.mul(p, q)))
+    # The quadratic in b=tau_a(f) has one root b=f.  Product of roots
+    # is constant/lead, so the other center parameter is a=f*b.
+    return F.mul(constant, F.inv(lead))
+
+
+def collision_certificate_degrees(F, A, primary=0):
+    degrees = Counter()
+    by_parameter = {}
+    for f in A:
+        if f == primary:
+            continue
+        others = tuple(x for x in A if x != f)
+        for left, right in three_pairings(others):
+            a = collision_parameter(F, f, left, right)
+            if a is not None and a != 0:
+                degrees[a] += 1
+                by_parameter.setdefault(a, []).append((f, left, right))
+    return degrees, by_parameter
+
+
 def run(q, details=False):
     F = Field(q)
     group = pgl_matrices(F)
@@ -221,14 +257,84 @@ def run_d4_normal_forms(q):
     return failures
 
 
+def run_d5_normal_forms(q):
+    """Test maximum d=5 normal forms A={0,1,r,s,rs}."""
+    F = Field(q)
+    seen = set()
+    pencils = 0
+    multiplicities = Counter()
+    formula_mismatches = []
+    degree_hist = Counter()
+    ledger_hist = Counter()
+    ledger_violations = []
+    failures = []
+    for r in range(1, q):
+        for s in range(1, q):
+            A = tuple(sorted((0, 1, r, s, F.mul(r, s))))
+            if len(set(A)) != 5 or A in seen:
+                continue
+            seen.add(A)
+            forbidden = primary_products(F, A, 0, q)
+            if len(forbidden) != 5:
+                continue
+            _hist, dmin, keys = line_pencil_summary(F, A)
+            if dmin != 5 or (0, q) not in keys:
+                continue
+            pencils += 1
+            matches = []
+            for a in range(1, q):
+                if a in forbidden:
+                    continue
+                if center_defects(F, A, 0, q, a) == (5, 5, 5, 6, 6):
+                    matches.append(a)
+            degrees, _certs = collision_certificate_degrees(F, A)
+            predicted = sorted(a for a, degree in degrees.items()
+                               if degree == 2 and a not in forbidden)
+            if predicted != matches:
+                formula_mismatches.append((A, predicted, matches,
+                                           dict(sorted(degrees.items()))))
+            degree_hist.update(degrees[a] for a in range(1, q) if a not in forbidden)
+            legal_positive = Counter(
+                degrees[a] for a in range(1, q)
+                if a not in forbidden and degrees[a] > 0
+            )
+            ledger_hist[(sum(degrees.values()),
+                         sum(degrees[a] for a in forbidden),
+                         legal_positive.get(1, 0),
+                         legal_positive.get(2, 0))] += 1
+            forbidden_weight = sum(degrees[a] for a in forbidden)
+            max_legal_degree = max((degrees[a] for a in range(1, q)
+                                    if a not in forbidden), default=0)
+            if (sum(degrees.values()) < 10 or forbidden_weight > 3
+                    or legal_positive.get(1, 0) > 4 or max_legal_degree > 2):
+                ledger_violations.append((A, sum(degrees.values()), forbidden_weight,
+                                          legal_positive.get(1, 0),
+                                          max_legal_degree))
+            multiplicities[len(matches)] += 1
+            if not matches:
+                failures.append(A)
+    print(
+        f"BALANCED-D5-NORMAL q={q} forms={pencils} "
+        f"multiplicity={dict(sorted(multiplicities.items()))} "
+        f"legal-certificate-degrees={dict(sorted(degree_hist.items()))} "
+        f"ledger(total,forbidden,n1,n2)={dict(sorted(ledger_hist.items()))} "
+        f"failures={failures} formula-mismatches={formula_mismatches[:10]} "
+        f"ledger-violations={ledger_violations[:10]}"
+    )
+    return failures
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("q", type=int, nargs="*", default=[11, 13, 17, 19, 23, 25])
     ap.add_argument("--details", action="store_true")
     ap.add_argument("--normal-forms", action="store_true")
+    ap.add_argument("--d5-normal-forms", action="store_true")
     args = ap.parse_args()
     for q in args.q:
-        if args.normal_forms:
+        if args.d5_normal_forms:
+            run_d5_normal_forms(q)
+        elif args.normal_forms:
             run_d4_normal_forms(q)
         else:
             run(q, args.details)

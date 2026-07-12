@@ -291,6 +291,51 @@ explicit: cross-multiply the equality/forbidden cases among `c0,c1,c2,d1,d2` to 
 the only empty-selector cases over every odd field, then formulate the two small-subfield game
 lemmas. The `d=5` maximum-pencil branch also remains to be proved geometrically.
 
+### `d=5` collision-certificate ledger
+
+The `d=5` branch has an equally small exact reduction. Normalize the unique primary product
+collision as
+
+```text
+A={0,1,r,s,rs},    (e,w)=(0,infinity),    1*(rs)=r*s.
+```
+
+For a nonprimary frame point f and a pairing `{p,q}|{u,v}` of the other four frame points, put
+
+```text
+alpha=(p-f)(q-f),    beta=(u-f)(v-f),
+a(f;pq|uv) = (alpha*u*v - beta*p*q)/(alpha-beta),
+```
+
+omitting a zero denominator or zero parameter. This follows by factoring the spoke product-equality
+quadratic in `tau_a(f)`: one root is the trivial endpoint f and the displayed quotient is the
+remaining center parameter. There are twelve such pointed-pairing certificates. Because the pencil
+is maximum with `dmin=5`, no other spoke can have defect 4. Therefore the certificate degree of a
+legal parameter is the number of its defect-5 nonprimary spokes, and a legal center is balanced
+exactly when its certificate degree is two.
+
+The normal-form census has zero formula mismatches and no balanced failures over all maximum forms
+at q=19,23,25,27,29,31,37,49. It finds 2--4 balanced parameters per form. More importantly, every
+form satisfies the same four bounded ledger inequalities:
+
+```text
+T = number of nonzero finite certificate incidences >= 10,
+F = certificate weight landing in the five forbidden parameters <= 3,
+n1 = number of legal degree-one parameters <= 4,
+every legal certificate degree <= 2.
+```
+
+Writing `n2` for legal degree-two parameters gives the exact count
+
+```text
+T-F = n1 + 2*n2.
+```
+
+Hence the four inequalities imply `2*n2 >= 10-3-4=3`, so `n2>=2`: at least two balanced centers.
+This is now the entire `d=5` geometric proof obligation. The quotient formula and counting
+implication are proved; the four uniform inequalities are exhaustively checked in the listed fields
+but still need their field-algebraic proof.
+
 ## Reproduction
 
 ```bash
@@ -300,6 +345,7 @@ python3 -m py_compile scripts/c77_pencil_value_probe.py scripts/c77_intruder_rep
 python3 scripts/c77_pencil_value_probe.py 11 13 17 19
 python3 scripts/c77_balanced_center_geometry.py 11 13 17 19 23 25 29 31
 python3 scripts/c77_balanced_center_geometry.py --normal-forms 7 9 11 25 27 49 121 125 343
+python3 scripts/c77_balanced_center_geometry.py --d5-normal-forms 19 25 27 31 49
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3

@@ -2338,3 +2338,13 @@ and GF(9/25/27/49/121/125/343). It finds two persistent empty-selector families:
 at `x=±2`, and characteristic 7 at `x∈{±2,±3}`. GF(125) and GF(343) confirm both are inherited
 prime-subfield configurations, the latter from the already separate q=7 geometry. The field-uniform
 equality case split and the d=5 branch remain open; no Lean formalization is warranted yet.
+
+## 2026-07-11 C77 continuation (Codex) — d=5 certificate ledger
+
+Normalized the unique d=5 product collision to `A={0,1,r,s,rs}` and factored every nonprimary
+spoke-collision equation. The resulting twelve explicit pairing certificates reproduce the exact
+balanced parameters with zero mismatches on all maximum forms tested at q19/23/25/27/29/31/37/49.
+A legal center is balanced exactly at certificate degree two. Every form has 2--4 such parameters
+and obeys `T≥10`, forbidden certificate weight `F≤3`, `n1≤4`, and maximum legal degree two. Since
+`T-F=n1+2n2`, these four bounds force `n2≥2`. Proving the four bounded algebraic inequalities is now
+the complete d=5 geometric obligation.

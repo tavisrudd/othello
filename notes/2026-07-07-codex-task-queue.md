@@ -80,8 +80,11 @@ the game-semantic residue with C74's explicit pencil.
   parameters whose singleton values are exactly the balanced centers. Tests through prime q=101 and
   GF(9/25/27/49/121/125/343) isolate two inherited small-subfield failures: characteristic 5 at
   `x=±2` and characteristic 7 at `x∈{±2,±3}`. **Open:** finish the finite rational equality case
-  split, prove the `d=5` geometric branch and balanced-center P-purity, and handle the two subfield
-  configurations separately, or prove the uniform `Low4`
+  split and balanced-center P-purity, and handle the two subfield configurations separately. The
+  `d=5` branch is reduced to a twelve-certificate ledger: balanced centers are exactly legal
+  degree-two parameters, and the four checked bounds `T≥10`, forbidden weight `≤3`, `n1≤4`, degree
+  `≤2` imply at least two; these bounds still need a uniform algebraic proof. Alternatively prove
+  the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
   [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–9); modes
@@ -99,7 +102,8 @@ the game-semantic residue with C74's explicit pencil.
   a P center (observed ≥3), implying `Ncenters≤q−8`. Geometrically this is the fourth-order packet
   of the five-spoke collision score `K=Σδ_e−t`. Sharper route: prove P-purity/existence of balanced
   `(d,5,5,6,6)` centers in the generic branch and handle the characteristic-5/7 subfield
-  configurations separately.
+  configurations separately. For d=5, prove the four bounded collision-ledger inequalities that
+  force at least two balanced parameters.
 
 **Independent / engineering:**
 
