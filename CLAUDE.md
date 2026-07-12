@@ -137,6 +137,12 @@ All work lives in git-visible docs, never auto-memory. Two kinds, strictly split
   `notes/YYYY-MM-DD-<slug>.md`. Live + companion = the source of truth: live is the map,
   companion is the log.
 
+**Write clean, not amended.** State conclusions in final form, as if written right the first
+time — no superseded claims, dead ends, or "what was wrong" trails. The correction trail lives
+only in the append-only companion/archive logs, or inline **when overturning an
+already-committed conclusion** (a deliberate note of what changed, to guard against slipping
+back). Not-yet-committed work is always rewritten clean.
+
 **Task IDs.** One global monotonic `CNN` sequence across Codex and Claude; the queue is the
 registry, its `CURRENT TOP OF QUEUE` the live view. New ID = `max(CNN in queue + handoff +
 notes/) + 1`, entered as a one-line queue row at allocation. Never reuse or renumber a
