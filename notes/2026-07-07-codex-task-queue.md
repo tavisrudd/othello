@@ -35,6 +35,9 @@ the game-semantic residue with C74's explicit pencil.
    every packet has ≥3 P centers, while 1,332/1,344 non-maximum q17 lines fail. The q=11 knife-edge
    base compresses to four exact perfect-matching reply-graph types. `Low4` is algebraic via the
    proved five-spoke formula `zone_v=q²−15q+34+Σδ_e−t`, with `δ_e∈{4,5,6}` and tangent count `t≤2`.
+   A sharper balanced subtype `(d,5,5,6,6)` is P in all 760 exact occurrences and exists
+   geometrically on every tested prime-field pencil for q=11 through 31, but GF(25) gives the precise
+   Baer-subline exception: five maximum pencils have only `(4,6,6,6,6)` centers.
 2. **A5 lane — arc-depletion arithmetic.** Sole surviving (ON) mechanism route. Open: prove
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
@@ -69,13 +72,18 @@ the game-semantic residue with C74's explicit pencil.
   P centers in the q=11 knife-edge pencils have perfect winning-reply matchings in only four graph
   isomorphism types. The exact five-spoke formula makes `Low4` the fourth-order packet of
   `K=Σδ_e−t`; identical `(K,t)` types can be both P and N, so the missing lemma must compare packet
-  games rather than classify one center. **Open:** prove the `Low4` packet theorem/N-absorption bound
-  or a recursive reply closure; do not spend more compute on the DROP envelope. Reports:
+  games rather than classify one center. The balanced subtype `(d,5,5,6,6)` is P in all 760 exact
+  q=11/13/17/19 occurrences and exists geometrically for tested prime q=11 through 31. Unconditional
+  existence is false: GF(25)'s embedded `P¹(F5)` gives five maximum pencils with only
+  `(4,6,6,6,6)` centers (six-set stabilizer 120). **Open:** prove balanced-center P-purity plus
+  generic existence and a separate Baer/subfield endpoint lemma, or prove the uniform `Low4`
+  packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
   [`2026-07-11-c77-ledger-bank-probe.md`](2026-07-11-c77-ledger-bank-probe.md),
   [`2026-07-11-c77-ledger-spike-structure.md`](2026-07-11-c77-ledger-spike-structure.md) (§6–9); modes
   `s4ledger`/`s4spike` in `notes/2026-07-06-grid-cap-solver.rs`;
   [`2026-07-11-c77-game-semantic-reply-graphs.md`](2026-07-11-c77-game-semantic-reply-graphs.md),
-  scripts `rust/scripts/c77_pencil_value_probe.py`, `c77_intruder_reply_graph.py`.
+  scripts `rust/scripts/c77_pencil_value_probe.py`, `c77_intruder_reply_graph.py`,
+  `c77_balanced_center_geometry.py`.
 - **A5 arithmetic proof** (open lane, no single ID) — `maxonN(q) ≤ q−5` for all arc-depleted q, plus
   the q=29 next-depleted-order census (gated compute). Anchor context:
   [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md),
@@ -84,7 +92,8 @@ the game-semantic residue with C74's explicit pencil.
 - **C74 residue (now the C77 game-semantic continuation)** — prove the two-stage packet theorem:
   on a maximum (`min d`) one-intruder pencil, the fourth-order-statistic low-`zone_v` packet contains
   a P center (observed ≥3), implying `Ncenters≤q−8`. Geometrically this is the fourth-order packet
-  of the five-spoke collision score `K=Σδ_e−t`; the open content is entirely game-semantic.
+  of the five-spoke collision score `K=Σδ_e−t`. Sharper route: prove P-purity/existence of balanced
+  `(d,5,5,6,6)` centers in the generic branch and handle the GF(25)-style Baer endpoint separately.
 
 **Independent / engineering:**
 

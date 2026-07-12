@@ -2315,3 +2315,15 @@ Consequently Low4 is purely the fourth-order packet of a bounded five-term colli
 six tight q17 pencils its layers are `24:1P`, `26:2P+2N`, `28:7N`. Equal score/tangency types can be
 both P and N elsewhere, so the remaining assertion that Low4 contains P cannot be another scalar
 classifier; it must relate the recursive games of multiple packet centers.
+
+## 2026-07-11 C77 continuation (Codex) — balanced subtype and Baer-subline exception
+
+The full spoke-defect vector isolates a sharper candidate: on a maximum pencil of primary collision
+count d, centers of sorted type `(d,5,5,6,6)` are P in all 760 exact q11/13/17/19 occurrences.
+A value-blind PGL orbit census finds this balanced type on every tested prime-field maximum pencil
+for q=11 through 31. GF(25) supplies the necessary exception: for `A={0,1,2,3,4}` and each endpoint
+`w=infinity`, all legal centers have type `(4,6,6,6,6)`. The six-set is the embedded
+`P¹(F5)` and has stabilizer 120. Thus unconditional balanced-center existence is false. The refined
+proof target splits into generic balanced-center existence/P-purity and a separate Baer/subfield
+endpoint lemma; Low4 remains the uniform fallback. No Lean formalization should precede settlement
+of that branch theorem, though the stable five-spoke incidence identity is ready later.

@@ -3149,3 +3149,14 @@ Thus `zone_v=q²−15q+34+Σδ_e−t`, with every `δ_e∈{4,5,6}` and at most t
 exactly on 2,876 maximum-pencil centers through q19. The six tight q17 packets have layers
 `K=24:1P`, `K=26:2P+2N`, `K=28:7N`. Since identical `(K,t)` types elsewhere can be both P and N,
 the remaining Low4 lemma is game-semantic, not another scalar classification.
+
+## 2026-07-11 C77 continuation — balanced vector and the subfield branch
+
+Refining the scalar score to the sorted five-spoke vector finds a P-pure empirical subtype:
+`(d,5,5,6,6)` accounts for 760/760 P occurrences in exact q11/13/17/19 maximum-pencil data. Pure
+geometry establishes its existence on every tested prime-field maximum pencil for q=11 through 31,
+but not uniformly over prime powers. In GF(25), the five pencils completing `A={0,1,2,3,4}` to the
+embedded
+`P¹(F5)` have only `(4,6,6,6,6)` centers; the six-set stabilizer is 120. The next proof must therefore
+separate generic balanced-center existence/P-purity from a Baer-subline endpoint lemma, with Low4 as
+the still-uniform alternative.

@@ -209,12 +209,49 @@ lemma is therefore genuinely game-semantic:
 The geometry has now been reduced to a bounded collision vocabulary; the missing step must compare
 the recursive games of several packet centers, not classify one center by a scalar.
 
+### Balanced-center refinement and the Baer exception
+
+The full five-spoke defect vector exposes a sharper value-blind candidate. If the primary maximum
+pencil has collision count `d`, call a legal center **balanced** when its sorted spoke defects are
+
+```text
+(d,5,5,6,6).
+```
+
+Every maximum pencil in the exact q=11/13/17/19 corpus has balanced centers, and all 760 recorded
+center occurrences are P (32, 42, 72, and 614 respectively). This is strictly stronger evidence
+than the scalar `K` score: the vector identifies a P-pure subtype in the available value data.
+
+The geometry-only orbit census, which reads no game labels, finds a balanced center on every maximum
+pencil at the tested prime orders q=11,13,17,19,23,29,31. It also finds the essential obstruction at
+GF(25). For the five-set `A={0,1,2,3,4}` and each of its five maximum pencils with endpoint
+`w=infinity`, every legal
+center has type `(4,6,6,6,6)`, so the balanced type does not exist. The six-set
+`A union {infinity}=P^1(F_5)` has PGL stabilizer 120: this is the embedded subfield/Baer-subline
+exception, not a game-value counterexample. (The existing q=25 census labels all on-conic buckets
+P, but supplies no uniform proof of that endpoint.)
+
+Consequently the honest theorem target is a disjunction, not unconditional balanced-center
+existence:
+
+1. in the generic branch, prove geometrically that a maximum pencil has a balanced center and prove
+   game-semantically that every such center is P; or
+2. when the six frame points form a Baer/subfield subline, prove the pencil endpoint itself is P by
+   a separate argument.
+
+`Low4` remains the uniform fallback while this split is unproved. The balanced-center claim should
+not yet be formalized in Lean: its original universal form is false, and its P-purity is presently a
+finite exact observation rather than a recursive game theorem. The stable five-spoke incidence
+identity (1)--(2) is suitable for later formalization once this branch theorem is settled.
+
 ## Reproduction
 
 ```bash
 cd rust
-python3 -m py_compile scripts/c77_pencil_value_probe.py scripts/c77_intruder_reply_graph.py
+python3 -m py_compile scripts/c77_pencil_value_probe.py scripts/c77_intruder_reply_graph.py \
+  scripts/c77_balanced_center_geometry.py
 python3 scripts/c77_pencil_value_probe.py 11 13 17 19
+python3 scripts/c77_balanced_center_geometry.py 11 13 17 19 23 25 29 31
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3

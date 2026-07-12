@@ -684,7 +684,11 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   off-conic support; every packet has ≥3 P centers, while q17 non-maximum controls fail 1332/1344.
   The support has the exact five-spoke formula `zone_v=q²−15q+34+Σδ_e−t`, so `Low4` is a bounded
   product-collision packet. Identical collision types can be P or N; proving this packet contains P
-  is the remaining game-semantic theorem.
+  is the remaining uniform game-semantic theorem. A sharper subtype `(d,5,5,6,6)` is P in all 760
+  exact q11/13/17/19 occurrences and exists on every tested prime-field maximum pencil for q11–31,
+  but GF(25) exposes a Baer-subline branch: five pencils have only `(4,6,6,6,6)` centers. The refined
+  route is balanced-center P-purity/generic existence plus a separate subfield-endpoint lemma;
+  `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

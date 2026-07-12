@@ -327,6 +327,17 @@ def main():
                 print(f"TIGHT q=17 cls={cls} key={key} layers={dict(sorted(layers.items()))}")
         print(f"LOWZONE q={q} packet(size,P,N)={dict(sorted(lowzone.items()))} "
               f"threeP-failures={len(lowzone_fail)} examples={lowzone_fail[:4]}")
+        balanced_hist = Counter()
+        balanced_values = Counter()
+        for _q0, _cls, _key, d, pencil in pencils:
+            target = tuple(sorted((d, 5, 5, 6, 6)))
+            matches = [r for r in pencil if r["spoke_defects"] == target]
+            balanced_hist[(d, len(matches))] += 1
+            balanced_values.update(r["value"] for r in matches)
+            if q >= 11:
+                assert matches and all(r["value"] == "P" for r in matches)
+        print(f"BALANCED-VALUE q={q} multiplicity={dict(sorted(balanced_hist.items()))} "
+              f"values={dict(sorted(balanced_values.items()))}")
         totals, failures, examples = all_line_lowzone_control(q)
         print(f"ALLLINES q={q} totals={dict(sorted(totals.items()))} "
               f"threeP-failures={dict(sorted(failures.items()))} examples={examples}")
