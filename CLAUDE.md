@@ -21,9 +21,11 @@ Rules:
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
   [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
   for the active task IDs.
-- **Named-expert / proof context:** load
-  [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) before
-  nontrivial Lean work.
+- **Named-expert context:** load
+  [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
+  developing or formalizing a nontrivial proof, or when requested. Do not load them for
+  status, routing, document review, relevance checks, literature comparison, or other
+  read-only discussion.
 
 ### Claude WIP
 
@@ -39,10 +41,10 @@ Rules:
 
 ## Lean
 
-Top-level Lean proof work lives under [`lean/`](lean/). Before doing nontrivial proof work, load the
-named-expert umbrella [`notes/2026-07-07-named-expert-personas-context.md`](notes/2026-07-07-named-expert-personas-context.md)
-and the relevant dossier under [`notes/expert-personas/`](notes/expert-personas/). The umbrella gives
-the loading order for Sumfree, ProjectiveCap, and Queens/NodeKayles proof sessions.
+Top-level Lean work lives under [`lean/`](lean/). Before developing or editing a nontrivial Lean
+proof, load the [named-expert umbrella](notes/2026-07-07-named-expert-personas-context.md) and relevant
+dossier under [`notes/expert-personas/`](notes/expert-personas/). Discussion or review alone does not
+trigger this.
 
 **Lean build/OOM hygiene:** generated certificate builds can fan out many heavyweight `lean`
 workers. Do not run a raw full aggregate like `nix develop --command lake build
