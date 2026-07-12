@@ -699,7 +699,10 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   least two balanced centers on every maximum d5 pencil. Generic balanced-center existence is now
   closed for d4 and d5; only the characteristic-5/7 exceptional game branches and P-purity remain.
   Simple affine mirroring is closed-negative at q11: none of 32 balanced roots has even a root-safe
-  affine involution, so P-purity needs adaptive/non-affine reply closure or decomposition.
+  affine involution. Full-grid orbit/residual audits also close finite-template and component
+  decomposition: balanced-orbit counts grow and every conflict graph is connected with surviving
+  triple constraints. The q11 base compresses to two winning-reply types and one universal 33-edge
+  losing-pair graph; general P-purity still needs adaptive algebraic reply closure.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C77.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C78.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -91,8 +91,12 @@ the game-semantic residue with C74's explicit pencil.
   theorem are proved: every maximum d5 pencil has at least two balanced centers. Hence the generic
   balanced-center existence geometry is closed for both d4 and d5.
   **P-purity probe:** simple affine mirroring is closed-negative—none of the 32 distinct balanced
-  q11 roots has even a root-safe affine involution. Continue with adaptive/non-affine reply closure
-  or decomposition, not a fixed affine pairing.
+  q11 roots has even a root-safe affine involution. Full-grid canonicalization gives 8/12/24/85
+  balanced orbits and 2/3/6/18 coarse residual types at q11/13/17/19; every capacity-1 graph is
+  connected and retains capacity-2 lines, closing finite-template and component-decomposition
+  routes. The q11 base itself compresses exactly: two winning-reply graphs, while all 32 roots share
+  one 33-edge losing-pair graph `3·(K2 join 2K2)`. Continue with adaptive algebraic reply closure,
+  not a fixed pairing.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
@@ -118,6 +122,10 @@ the game-semantic residue with C74's explicit pencil.
 
 **Independent / engineering:**
 
+- **C78 [OPEN]** — `PG(4,5)` complete-cap quick deliverable: formalize the universal secant-cover
+  lower bound and its `t₂(4,5) ≥ 21` specialization; add a bounded wide-bitset `PGL(5,5)` orbit-growth
+  probe and report measured early-layer sizing. Report:
+  [`2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`](2026-07-11-c78-pg45-complete-cap-quick-deliverable.md).
 - **C30 [REPORTED 2026-07-10 — certcheck PASS; open engineering tail]** — generated-checker refactor →
   q17/q19 Lean assembly. The v5 full q17 canonical build projects above 21.5 h sequential, tripping the
   task's ~10 h user-launch gate; do not launch implicitly. Next = an explicit launch decision or a

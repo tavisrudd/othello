@@ -47,6 +47,81 @@ def transformations(q):
                             yield transform
 
 
+def affine_normalize(x, x0, x1, q):
+    """The unique affine map taking x0 to 0 and x1 to 1 (prime q)."""
+    return (x - x0) * pow((x1 - x0) % q, -1, q) % q
+
+
+def canonical_root(q, root):
+    """Canonical S4 representative under the full prime-field grid group."""
+    forms = []
+    for swap in (False, True):
+        points = tuple((c, r) if swap else (r, c) for r, c in root)
+        for p0 in points:
+            for p1 in points:
+                if p0[0] == p1[0]:
+                    continue
+                for z0 in points:
+                    for z1 in points:
+                        if z0[1] == z1[1]:
+                            continue
+                        forms.append(tuple(sorted(
+                            (affine_normalize(r, p0[0], p1[0], q),
+                             affine_normalize(c, z0[1], z1[1], q))
+                            for r, c in points
+                        )))
+    return min(forms)
+
+
+def residual_signature(q, root):
+    """Coarse invariant of the capacity-1 graph and surviving triple lines."""
+    vertices = legal_moves(q, root)
+    adj = {z: set() for z in vertices}
+    for i, x in enumerate(vertices):
+        for y in vertices[i + 1:]:
+            pair_conflict = x[0] == y[0] or x[1] == y[1]
+            pair_conflict |= any(
+                ((x[0] - s[0]) * (y[1] - s[1])
+                 - (x[1] - s[1]) * (y[0] - s[0])) % q == 0
+                for s in root
+            )
+            if pair_conflict:
+                adj[x].add(y)
+                adj[y].add(x)
+
+    unseen = set(vertices)
+    components = []
+    while unseen:
+        todo = [unseen.pop()]
+        size = 0
+        while todo:
+            x = todo.pop()
+            size += 1
+            fresh = adj[x] & unseen
+            unseen -= fresh
+            todo.extend(fresh)
+        components.append(size)
+
+    # Horizontal/vertical lines already have residual capacity zero because of
+    # the two burned direction points.  The remaining slope lines with no root
+    # point retain capacity two and contribute genuine triple constraints.
+    triple_loads = []
+    for slope in range(1, q):
+        root_intercepts = {(c - slope * r) % q for r, c in root}
+        loads = Counter((c - slope * r) % q for r, c in vertices)
+        triple_loads.extend(
+            load for intercept, load in loads.items()
+            if intercept not in root_intercepts and load >= 3
+        )
+    return (
+        len(vertices),
+        sum(map(len, adj.values())) // 2,
+        tuple(sorted(Counter(map(len, adj.values())).items())),
+        tuple(sorted(components)),
+        tuple(sorted(Counter(triple_loads).items())),
+    )
+
+
 def root_safe_mirrors_for(q, root, transforms):
     root_set = set(root)
     legal = legal_moves(q, root)
@@ -64,7 +139,7 @@ def root_safe_mirrors_for(q, root, transforms):
     return out
 
 
-def run(q, details=False):
+def run(q, details=False, root_orbits=False, residual_signatures=False):
     recs = analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))
     rows, pencils = rows_for(q)
     del rows
@@ -76,6 +151,51 @@ def run(q, details=False):
             datum = roots.setdefault(key, {"value": row["value"], "balanced": False})
             assert datum["value"] == row["value"]
             datum["balanced"] |= row["spoke_defects"] == target
+
+    if root_orbits:
+        orbits = {}
+        for (cls, cell), datum in sorted(roots.items()):
+            root = tuple(recs[cls]["S3"] + [cell])
+            canon = canonical_root(q, root)
+            orbit = orbits.setdefault(canon, Counter())
+            orbit[(datum["balanced"], datum["value"])] += 1
+        balanced = [
+            (canon, hist) for canon, hist in orbits.items()
+            if any(flag for flag, _value in hist)
+        ]
+        print(
+            f"BALANCED-ROOT-ORBITS q={q} roots={len(roots)} "
+            f"orbits={len(orbits)} balanced-orbits={len(balanced)}"
+        )
+        for i, (canon, hist) in enumerate(sorted(balanced)):
+            print(f"BALANCED-ROOT-ORBIT q={q} i={i} hist={dict(hist)} canon={canon}")
+        return balanced
+
+    if residual_signatures:
+        signatures = Counter()
+        examples = {}
+        seen = set()
+        for (cls, cell), datum in sorted(roots.items()):
+            if not datum["balanced"]:
+                continue
+            root = tuple(recs[cls]["S3"] + [cell])
+            canon = canonical_root(q, root)
+            if canon in seen:
+                continue
+            seen.add(canon)
+            signature = residual_signature(q, root)
+            signatures[signature] += 1
+            examples.setdefault(signature, canon)
+        print(
+            f"BALANCED-RESIDUAL q={q} root-orbits={len(seen)} "
+            f"coarse-signatures={len(signatures)}"
+        )
+        for i, (signature, count) in enumerate(sorted(signatures.items())):
+            print(
+                f"BALANCED-RESIDUAL-SIGNATURE q={q} i={i} count={count} "
+                f"signature={signature} example={examples[signature]}"
+            )
+        return signatures
 
     transforms = list(transformations(q))
     hist = Counter()
@@ -109,6 +229,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("q", type=int, nargs="*", default=[11])
     ap.add_argument("--details", action="store_true")
+    ap.add_argument("--root-orbits", action="store_true")
+    ap.add_argument("--residual-signatures", action="store_true")
     args = ap.parse_args()
     for q in args.q:
-        run(q, args.details)
+        run(q, args.details, args.root_orbits, args.residual_signatures)

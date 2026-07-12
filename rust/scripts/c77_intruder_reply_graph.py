@@ -23,7 +23,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from c73_secant_algebra import DATA, PRIME_FILES, analyze, parse  # noqa: E402
-from c77_pencil_value_probe import KNIFE, rows_for  # noqa: E402
+from c77_pencil_value_probe import KNIFE, legal_after, rows_for  # noqa: E402
 
 
 REPLY = re.compile(r"y=\((\d+),(\d+)\)\s+P\s+<-- winning")
@@ -115,14 +115,35 @@ def isomorphic(graph1, graph2):
     return rec()
 
 
-def roots_for_class(q, cls):
+def graph_profile(graph):
+    vertices, adj = graph
+    unseen = set(vertices)
+    components = []
+    while unseen:
+        todo = [unseen.pop()]
+        size = 0
+        while todo:
+            x = todo.pop()
+            size += 1
+            fresh = adj[x] & unseen
+            unseen -= fresh
+            todo.extend(fresh)
+        components.append(size)
+    return {
+        "degrees": dict(sorted(Counter(map(lambda v: len(adj[v]), vertices)).items())),
+        "components": sorted(components),
+    }
+
+
+def roots_for_class(q, cls, balanced=False):
     rec = analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))[cls]
+    rows = rows_for(q)[0]
     centers = {
-        row["cell"]
-        for q0, c0, _key, _d, rows in rows_for(q)[1]
-        if q0 == q and c0 == cls
-        for row in rows
-        if row["value"] == "P"
+        row["cell"] for row in rows
+        if row["cls"] == cls and row["value"] == "P"
+        and (not balanced or row["spoke_defects"] == tuple(sorted(
+            (row["d"], 5, 5, 6, 6)
+        )))
     }
     return rec["S3"], sorted(centers)
 
@@ -130,14 +151,19 @@ def roots_for_class(q, cls):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--solver", default="target/gridcap-ledger")
+    ap.add_argument("--balanced", action="store_true")
     args = ap.parse_args()
     q = 11
     total = matched = 0
     min_degree = 10**9
     types = []
     type_counts = Counter()
-    for cls in sorted(KNIFE[q]):
-        s3, centers = roots_for_class(q, cls)
+    losing_types = []
+    losing_type_counts = Counter()
+    classes = sorted(analyze(q, parse(os.path.join(DATA, PRIME_FILES[q])))) \
+        if args.balanced else sorted(KNIFE[q])
+    for cls in classes:
+        s3, centers = roots_for_class(q, cls, args.balanced)
         for center in centers:
             root = tuple(s3 + [center])
             vertices = legal_moves(q, root)
@@ -156,6 +182,19 @@ def main():
                 type_index = len(types)
                 types.append(graph)
             type_counts[type_index] += 1
+            losing_adj = {v: set() for v in vertices}
+            for x, y in combinations(vertices, 2):
+                if legal_after(q, list(root) + [x], y) and y not in adj[x]:
+                    losing_adj[x].add(y)
+                    losing_adj[y].add(x)
+            losing_graph = (tuple(vertices), losing_adj)
+            losing_type = next(
+                (i for i, rep in enumerate(losing_types) if isomorphic(losing_graph, rep)), None
+            )
+            if losing_type is None:
+                losing_type = len(losing_types)
+                losing_types.append(losing_graph)
+            losing_type_counts[losing_type] += 1
             total += 1
             matched += matching is not None
             min_degree = min(min_degree, min(degrees))
@@ -164,14 +203,23 @@ def main():
                 f"REPLYGRAPH q={q} cls={cls} center={center[0]},{center[1]} "
                 f"vertices={len(vertices)} edges={sum(degrees)//2} "
                 f"mindeg={min(degrees)} maxdeg={max(degrees)} "
-                f"type={type_index} perfect={int(matching is not None)} matching={pairs}"
+                f"type={type_index} losing-type={losing_type} "
+                f"losing-edges={sum(map(len, losing_adj.values())) // 2} "
+                f"perfect={int(matching is not None)} matching={pairs}"
             )
     type_hist = []
     for i, rep in enumerate(types):
         vertices, adj = rep
-        type_hist.append((i, type_counts[i], len(vertices), sum(map(len, adj.values())) // 2))
+        type_hist.append((i, type_counts[i], len(vertices),
+                          sum(map(len, adj.values())) // 2, graph_profile(rep)))
+    losing_hist = []
+    for i, rep in enumerate(losing_types):
+        vertices, adj = rep
+        losing_hist.append((i, losing_type_counts[i], len(vertices),
+                            sum(map(len, adj.values())) // 2, graph_profile(rep)))
     print(f"REPLYGRAPH-DONE roots={total} perfect={matched} min-degree={min_degree} "
-          f"isomorphism-types={len(types)} representatives={type_hist}")
+          f"isomorphism-types={len(types)} representatives={type_hist} "
+          f"losing-isomorphism-types={len(losing_types)} losing-representatives={losing_hist}")
     assert matched == total
 
 

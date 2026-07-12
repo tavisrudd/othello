@@ -532,6 +532,41 @@ would still not alone prove a full-depth strategy, but its universal failure alr
 entire simple affine-mirror route. Balanced-center P-purity must use a non-affine/adaptive reply
 closure or a decomposition argument.
 
+### P-purity: full-orbit and residual-decomposition audit
+
+Balanced roots do not reduce to finitely many grid-symmetry templates. Canonicalization under the
+full prime-field grid group (independent affine row/column maps, with coordinate swap) gives
+`8,12,24,85` balanced S4 orbits at `q=11,13,17,19`. The corresponding coarse residual signatures
+(capacity-1 edge count/degree sequence plus surviving capacity-2 line loads) number `2,3,6,18`.
+Every capacity-1 conflict graph is connected, and every signature retains many lines of residual
+capacity two. Thus the whole residual game neither splits into graph components nor collapses to
+Node--Kayles. This is structural, not just a failed search: the old blocking-set obstruction is
+visible inside every audited balanced root. Also, the d5 balanced roots at q=19 have 147 legal
+moves, so even their root move sets cannot admit a fixed-point-free pairing.
+
+The exact q=11 base nevertheless compresses sharply when restricted to balanced roots. All 32
+distinct roots have 18 legal moves and their winning-reply graphs have only two isomorphism types,
+16 roots each:
+
+```text
+type 0: 15 edges, degrees 1^6 2^12, components 3 K2 + 2 C6
+type 1: 30 edges, degrees 2^6 4^12, connected
+```
+
+Both have perfect matchings. More strongly, after removing illegal response pairs, the graph of
+legal but N-valued pairs is the *same* 33-edge graph for all 32 roots: three copies of
+`K2 join (2 K2)` (each six-vertex component has degrees `3,3,3,3,5,5`). The two coarse root types
+have 105 versus 90 conflict edges, hence 48 versus 63 legal pairs; subtracting the common 33-edge
+N obstruction leaves exactly the 15 versus 30 winning edges above. This is a clean finite q=11
+reply certificate and a concrete non-affine base object.
+
+It does not remain a single tiny obstruction at q=13. Representatives of its three coarse balanced
+types have respectively 103/219, 79/237, and 82/234 winning/losing response edges; both graphs are
+connected and their degree profiles differ. Their winning minimum degree is two, so reply redundancy
+persists, but the universal 33-edge graph is a q=11 phenomenon. The surviving uniform route must
+therefore explain adaptive replies algebraically across a growing family; finite-template,
+fixed-affine-mirror, and component-decomposition proofs are all closed.
+
 ## Reproduction
 
 ```bash
@@ -543,7 +578,10 @@ python3 scripts/c77_balanced_center_geometry.py 11 13 17 19 23 25 29 31
 python3 scripts/c77_balanced_center_geometry.py --normal-forms 7 9 11 25 27 49 121 125 343
 python3 scripts/c77_balanced_center_geometry.py --d5-normal-forms 19 25 27 31 49
 python3 scripts/c77_balanced_mirror_probe.py 11
+python3 scripts/c77_balanced_mirror_probe.py --root-orbits 11 13 17 19
+python3 scripts/c77_balanced_mirror_probe.py --residual-signatures 11 13 17 19
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
+python3 scripts/c77_intruder_reply_graph.py --balanced --solver target/gridcap-ledger
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3
 ```
