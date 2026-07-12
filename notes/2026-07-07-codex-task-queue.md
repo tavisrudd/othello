@@ -96,7 +96,9 @@ the game-semantic residue with C74's explicit pencil.
   connected and retains capacity-2 lines, closing finite-template and component-decomposition
   routes. The q11 base itself compresses exactly: two winning-reply graphs, while all 32 roots share
   one 33-edge losing-pair graph `3·(K2 join 2K2)`. Continue with adaptive algebraic reply closure,
-  not a fixed pairing.
+  not a fixed pairing. Exact solve-once q17 profiles show five of six coarse types have degree-one
+  opponent moves (48 forced directions spanning 24 S6 grid-orbits), so the missing lemma must
+  explain forced replies; density/Hall and small response-template routes are not viable.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:

@@ -36,6 +36,7 @@
 //   breaks   q   -- exact cross-check: for every P1 break from the frame, #replies / #true-P
 //                   replies / #P-replies that are symmetric (nontrivial stabilizer).
 //   checkpos q r,c ... / rx,cx -- exact reply table (value + symmetry) for one position+break.
+//   replygraphs q r,c ... / r,c ... -- solve once; exact reply-degree profiles for several roots.
 //   fanmoves q r,c r,c r,c -- exact size-4 value + P-child table over one size-3 fan.
 //   s4 <q> t1,t2,t3,t4 [--cap <slots>]
 //                -- sizing probe for one normalized on-conic S4 root
@@ -9601,6 +9602,114 @@ fn solve_checkpos(q: usize, scells: &[(usize, usize)], bx: (usize, usize)) {
     println!("      total={}  P={}  symmetric-P={}", n_tot, n_p, n_symp);
 }
 
+// ---- REPLYGRAPHS mode: exact first-reply profiles for several roots, one full solve ----
+// replygraphs <q> r,c ... / r,c ... [/ ...]
+// Each group is one root.  Solving the empty game once makes q=17 profiling practical: CHECKPOS
+// otherwise repeats the same full solve independently for every break x.
+fn solve_replygraphs(q: usize, roots: &[Vec<(usize, usize)>]) {
+    let b = Board::new(q);
+    let mut s = Solver {
+        b: &b,
+        memo: FnvMap::default(),
+        full: true,
+        min_dev: usize::MAX,
+        odd_max: 0,
+        odd_max_min: usize::MAX,
+        dev_even_n: 0,
+        dev_odd_p: 0,
+    };
+    let empty = [0u64; MAXW];
+    let mut occ0: Vec<u16> = Vec::new();
+    s.g(&mut occ0, &empty, &empty);
+    for scells in roots {
+        let mut chosen = empty;
+        let mut forb = empty;
+        let mut occ: Vec<u16> = Vec::new();
+        for &(r, c) in scells {
+            let z = r * q + c;
+            assert!(chosen[z >> 6] & (1u64 << (z & 63)) == 0, "duplicate root cell");
+            assert!(forb[z >> 6] & (1u64 << (z & 63)) == 0, "illegal root {:?}", scells);
+            for &o in occ.iter() {
+                mask_or(&mut forb, &b.line_mask[o as usize * b.n + z]);
+            }
+            mask_or(&mut forb, &b.rc_mask[z]);
+            set_bit(&mut chosen, z);
+            occ.push(z as u16);
+        }
+        let root_key = b.canon(&occ);
+        let root_n = *s.memo.get(&root_key).expect("full solve omitted root");
+        let mut avail = [0u64; MAXW];
+        for i in 0..MAXW {
+            avail[i] = b.all[i] & !chosen[i] & !forb[i];
+        }
+        let vertices: usize = avail.iter().map(|x| x.count_ones() as usize).sum();
+        let mut winning_degrees: BTreeMap<usize, usize> = BTreeMap::new();
+        let mut losing_degrees: BTreeMap<usize, usize> = BTreeMap::new();
+        let mut forced_replies: Vec<((usize, usize), (usize, usize))> = Vec::new();
+        let (mut directed_legal, mut directed_winning) = (0usize, 0usize);
+        for w in 0..MAXW {
+            let mut xb = avail[w];
+            while xb != 0 {
+                let tz = xb.trailing_zeros() as usize;
+                xb &= xb - 1;
+                let x = w * 64 + tz;
+                let mut chosen_t = chosen;
+                set_bit(&mut chosen_t, x);
+                let mut forb_t = forb;
+                mask_or(&mut forb_t, &b.rc_mask[x]);
+                for &o in occ.iter() {
+                    mask_or(&mut forb_t, &b.line_mask[o as usize * b.n + x]);
+                }
+                let mut occ_t = occ.clone();
+                occ_t.push(x as u16);
+                let mut legal_x = 0usize;
+                let mut winning_x = 0usize;
+                let mut first_winning_y = 0usize;
+                for yw in 0..MAXW {
+                    let mut yb = b.all[yw] & !chosen_t[yw] & !forb_t[yw];
+                    while yb != 0 {
+                        let ytz = yb.trailing_zeros() as usize;
+                        yb &= yb - 1;
+                        let y = yw * 64 + ytz;
+                        legal_x += 1;
+                        let mut occ_u = occ_t.clone();
+                        occ_u.push(y as u16);
+                        let key = b.canon(&occ_u);
+                        if !*s.memo.get(&key).expect("full solve omitted grandchild") {
+                            winning_x += 1;
+                            first_winning_y = y;
+                        }
+                    }
+                }
+                directed_legal += legal_x;
+                directed_winning += winning_x;
+                *winning_degrees.entry(winning_x).or_insert(0) += 1;
+                *losing_degrees.entry(legal_x - winning_x).or_insert(0) += 1;
+                if winning_x == 1 {
+                    forced_replies.push(((x / q, x % q), (first_winning_y / q, first_winning_y % q)));
+                }
+            }
+        }
+        assert_eq!(directed_legal % 2, 0);
+        assert_eq!(directed_winning % 2, 0);
+        println!(
+            "REPLYGRAPHS q={} root={:?} value={} vertices={} legal-edges={} winning-edges={} losing-edges={} winning-degrees={:?} losing-degrees={:?}",
+            q,
+            scells,
+            if root_n { "N" } else { "P" },
+            vertices,
+            directed_legal / 2,
+            directed_winning / 2,
+            (directed_legal - directed_winning) / 2,
+            winning_degrees,
+            losing_degrees,
+        );
+        if !forced_replies.is_empty() {
+            println!("REPLYGRAPHS-FORCED q={} root={:?} pairs={:?}", q, scells, forced_replies);
+        }
+    }
+}
+
 // ---- FANMOVES mode: exact one-ply game semantics over every child of one S3 fan ----
 // Solves the full grid game once, then reports for each legal size-4 extension z whether S3+z is
 // P/N and which legal size-5 moves x are P.  This avoids rebuilding CHECKPOS once per x and is the
@@ -11834,6 +11943,23 @@ fn main() {
             }
         }
         solve_checkpos(q, &cells, bx.expect("break cell after /"));
+        return;
+    }
+    if args[1] == "replygraphs" {
+        // replygraphs <q> r,c ... / r,c ... [/ ...]
+        let q: usize = args[2].parse().expect("q must be an integer");
+        let mut roots: Vec<Vec<(usize, usize)>> = vec![Vec::new()];
+        for a in &args[3..] {
+            if a == "/" {
+                assert!(!roots.last().unwrap().is_empty(), "empty root group");
+                roots.push(Vec::new());
+                continue;
+            }
+            let (r, c) = a.split_once(',').expect("cell must be r,c");
+            roots.last_mut().unwrap().push((r.parse().unwrap(), c.parse().unwrap()));
+        }
+        assert!(!roots.last().unwrap().is_empty(), "empty final root group");
+        solve_replygraphs(q, &roots);
         return;
     }
     if args[1] == "fanmoves" {

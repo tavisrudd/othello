@@ -567,6 +567,28 @@ persists, but the universal 33-edge graph is a q=11 phenomenon. The surviving un
 therefore explain adaptive replies algebraically across a growing family; finite-template,
 fixed-affine-mirror, and component-decomposition proofs are all closed.
 
+The solve-once `replygraphs` mode gives the corresponding exact q=17 test without rerunning the
+full game for every opponent move. One representative of each of the six coarse balanced residual
+types gives:
+
+| type | legal pairs | winning pairs | minimum winning degree | degree-one moves |
+|---:|---:|---:|---:|---:|
+| 0 | 3042 | 234 | 1 | 12 |
+| 1 | 3033 | 204 | 1 | 12 |
+| 2 | 3030 | 267 | 1 | 6 |
+| 3 | 3030 | 222 | 1 | 6 |
+| 4 | 3030 | 138 | 1 | 12 |
+| 5 | 3030 | 222 | 2 | 0 |
+
+Thus the q=17 reply graphs are sparse and five of six types contain genuinely forced replies.
+Across the 48 directed degree-one cases, the resulting S6 sets occupy 24 different full-grid
+orbits (each occurs twice), so even the forced layer does not collapse to a small response-template
+library. This makes a density/Hall argument particularly implausible: the uniform theorem must
+produce the correct reply at vertices where there is only one. The fact that forced replies occur
+at the depleted q=11/q=17 orders, while the three sampled q=13 types have minimum degree two, also
+ties the C77 obstruction back to A5's depletion phenomenon rather than revealing an independent
+balanced-root symmetry.
+
 ## Reproduction
 
 ```bash
@@ -584,6 +606,7 @@ python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
 python3 scripts/c77_intruder_reply_graph.py --balanced --solver target/gridcap-ledger
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3
+target/gridcap-c77 replygraphs 17 0,0 1,1 2,3 3,4 / 0,0 1,1 2,3 12,13
 ```
 
 The reply-graph pass uses `checkpos`, which fully solves every q=11 root/break pair and reports exact
