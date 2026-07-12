@@ -54,6 +54,38 @@ theorem momentCurve_linearIndependent {v : Fin n → 𝔽} (hv : Function.Inject
   -- rows of `vandermonde v` are definitionally the moment-curve points at the `v i`.
   exact linearIndependent_rows_of_det_ne_zero hdet
 
+/-- **General-position form for a smaller family.** Any finite family of distinct moment-curve
+points in `𝔽ⁿ` is linearly independent when its cardinality is at most `n`.
+
+Reindex the family by `Fin (card ι)` and project `𝔽ⁿ` to its first `card ι` coordinates. The
+projected points form a square Vandermonde family, so they are independent by
+`momentCurve_linearIndependent`; independence of the images implies independence upstairs. -/
+theorem momentCurve_linearIndependent_of_card_le {ι : Type*} [Fintype ι]
+    {v : ι → 𝔽} (hv : Function.Injective v) (hcard : Fintype.card ι ≤ n) :
+    LinearIndependent 𝔽 (fun i => momentCurve n (v i)) := by
+  classical
+  let e : ι ≃ Fin (Fintype.card ι) := Fintype.equivFin ι
+  let inc : Fin (Fintype.card ι) → Fin n := Fin.castLE hcard
+  let restrict : (Fin n → 𝔽) →ₗ[𝔽] (Fin (Fintype.card ι) → 𝔽) :=
+    LinearMap.funLeft 𝔽 𝔽 inc
+  have hv' : Function.Injective (fun j : Fin (Fintype.card ι) => v (e.symm j)) :=
+    hv.comp e.symm.injective
+  have hsmall : LinearIndependent 𝔽
+      (fun j : Fin (Fintype.card ι) => momentCurve (Fintype.card ι) (v (e.symm j))) :=
+    momentCurve_linearIndependent hv'
+  have hrestricted : LinearIndependent 𝔽
+      (fun j : Fin (Fintype.card ι) => restrict (momentCurve n (v (e.symm j)))) := by
+    have heq : (fun j : Fin (Fintype.card ι) => restrict (momentCurve n (v (e.symm j)))) =
+        (fun j : Fin (Fintype.card ι) => momentCurve (Fintype.card ι) (v (e.symm j))) := by
+      funext j i
+      rfl
+    rw [heq]
+    exact hsmall
+  have hreindexed : LinearIndependent 𝔽
+      (fun j : Fin (Fintype.card ι) => momentCurve n (v (e.symm j))) :=
+    LinearIndependent.of_comp restrict hrestricted
+  simpa [e, Function.comp_def] using hreindexed.comp e e.injective
+
 /-- **Twisted cubic in general position** (`n = 4`): any four twisted-cubic points
 `(1, tᵢ, tᵢ², tᵢ³)` at distinct parameters are linearly independent — no four are coplanar. This
 is the dimension-`4` / "≤ 3 cubic points per plane" input of the `q = 3^h` distance theorem. -/

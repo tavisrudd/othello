@@ -144,6 +144,55 @@ theorem mem_dualCode_rowCode_iff_mulVec {G : Matrix (Fin k) (Fin n) 𝔽} {y : F
   · intro h; funext i; exact h i
   · intro h i; exact congrFun h i
 
+/-- **Dual-distance lower bound from small-column independence.** If every set of fewer than `d`
+generator columns is linearly independent, then every nonzero dual word has weight at least `d`.
+The explicit `hdual` hypothesis is necessary under this file's convention `minDist ⊥ = 0`:
+without a nonzero dual word, `dualDist` is zero rather than infinity.
+
+This is the standard generator-matrix characterization of dual distance, packaged in the direction
+needed by concrete projective systems. A dual word is a linear relation among the columns; after
+restricting that relation to its Hamming support, independence forces every coefficient to vanish. -/
+theorem le_dualDist_rowCode_of_column_independent (G : Matrix (Fin k) (Fin n) 𝔽) (d : ℕ)
+    (hdual : dualCode (rowCode G) ≠ ⊥)
+    (hcols : ∀ S : Finset (Fin n), S.card < d →
+      LinearIndependent 𝔽 (fun j : S => G.col j)) :
+    d ≤ dualDist (rowCode G) := by
+  apply le_minDist hdual
+  intro y hy hy0
+  by_contra hwt
+  have hmul : G.mulVec y = 0 := mem_dualCode_rowCode_iff_mulVec.mp hy
+  let S : Finset (Fin n) := univ.filter fun j => y j ≠ 0
+  have hScard : S.card < d := by
+    have : hammingNorm y < d := Nat.lt_of_not_ge hwt
+    simpa only [S, hammingNorm] using this
+  have hli := hcols S hScard
+  have hrel : ∑ j : S, y j • G.col j = 0 := by
+    funext i
+    simp only [Finset.sum_apply, Pi.zero_apply]
+    have hi := congrFun hmul i
+    simp only [Matrix.mulVec, dotProduct, Pi.zero_apply] at hi
+    calc
+      (∑ j : S, (y j • G.col j) i) = ∑ j ∈ S, y j * G i j := by
+        rw [← S.sum_attach]
+        rfl
+      _ = ∑ j, y j * G i j := by
+        apply Finset.sum_subset (subset_univ S)
+        intro j _ hjS
+        have hj0 : y j = 0 := by simpa [S] using hjS
+        simp [hj0]
+      _ = ∑ j, G i j * y j := by
+        apply Finset.sum_congr rfl
+        intro j _
+        exact mul_comm _ _
+      _ = 0 := hi
+  have hcoeff := (Fintype.linearIndependent_iff.mp hli) (fun j : S => y j) hrel
+  apply hy0
+  funext j
+  by_cases hj : y j = 0
+  · exact hj
+  · have hjS : j ∈ S := by simp [S, hj]
+    exact hcoeff ⟨j, hjS⟩
+
 /-- **Singleton bound.** For a linear `[n, k]_q` code `C`, `d(C) + k ≤ n + 1`. One of the
 elementary, general-in-`q` bounds the plan marks *prove-don't-import* (§5 decision 3): no
 imported input, pure finite linear algebra.

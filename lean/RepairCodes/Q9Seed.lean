@@ -29,10 +29,11 @@ the generator rows are independent, yielding an explicit encoder equivalence
 `𝔽₉⁴ ≃ₗ[𝔽₉] C₀`.  Consequently `blockFunctional_eq_zero_iff` discharges coefficient
 faithfulness for this actual code without trace coordinates.
 
-Still open here are the exact distance statements `d(C₀)=6`, `d(C₀⊥)=4`, the complete repair
-hypergraph, and the Chen–Ling–Xing assertion that the vector of block functionals is outer-dual.
-The latter remains an explicit hypothesis of `transfer_ofInnerCodeFunctional`; it is the sole
-imported boundary of the blockwise transfer step.
+This file also proves the exact dual distance `d(C₀⊥)=4`: every sub-four column family is
+independent, while the columns at `0,1,-1` and `e₂` form a weight-four circuit. Still open here
+are `d(C₀)=6`, the complete repair hypergraph, and the Chen–Ling–Xing assertion that the vector
+of block functionals is outer-dual. The latter remains an explicit hypothesis of
+`transfer_ofInnerCodeFunctional`; it is the sole imported boundary of the blockwise transfer step.
 -/
 
 namespace RepairCodes
@@ -76,6 +77,9 @@ noncomputable def q9InnerCode : Submodule GF9 (Fin 10 → GF9) :=
 /-- Embed the first four finite-coordinate positions into the ten seed coordinates. -/
 def q9FirstFour (j : Fin 4) : Fin 10 := ⟨j, by omega⟩
 
+/-- The distinguished tenth coordinate, whose generator column is `e₂`. -/
+def q9Axis : Fin 10 := ⟨9, by decide⟩
+
 /-- The four parameters used for the Vandermonde minor are distinct. -/
 theorem q9FirstFour_params_injective :
     Function.Injective (fun j : Fin 4 => gf9ParamEquiv ⟨j, by omega⟩) := by
@@ -108,6 +112,216 @@ theorem q9SeedGenerator_rows_linearIndependent :
   rw [heq]
   exact hrows
 
+/-- Any at-most-four family of finite (non-axis) seed columns is independent.  After rewriting
+those columns as moment-curve points, this is `momentCurve_linearIndependent_of_card_le`. -/
+theorem q9Seed_finite_columns_linearIndependent (S : Finset (Fin 10))
+    (hfinite : ∀ j ∈ S, (j : ℕ) < 9) (hcard : S.card ≤ 4) :
+    LinearIndependent GF9 (fun j : S => q9SeedColumn j) := by
+  let v : S → GF9 := fun j => gf9ParamEquiv ⟨j, hfinite j j.property⟩
+  have hv : Function.Injective v := by
+    intro i j hij
+    have hh : (⟨(i : Fin 10), hfinite i i.property⟩ : Fin 9) =
+        ⟨(j : Fin 10), hfinite j j.property⟩ := gf9ParamEquiv.injective hij
+    apply Subtype.ext
+    exact Fin.ext (congrArg (fun x : Fin 9 => (x : ℕ)) hh)
+  have hli := momentCurve_linearIndependent_of_card_le (n := 4) hv (by
+    simpa only [Fintype.card_coe] using hcard)
+  have heq : (fun j : S => q9SeedColumn j) = (fun j : S => momentCurve 4 (v j)) := by
+    funext j i
+    simp [q9SeedColumn, v, hfinite j j.property]
+  rw [heq]
+  exact hli
+
+/-- Every family of fewer than four columns of the q=9 seed generator is independent.  If the
+axis column is absent this is Vandermonde general position.  If it is present, projecting to the
+first two coordinates leaves at most two distinct points `(1,t)`; their coefficients vanish, and
+the `X²` coordinate then kills the remaining axis coefficient. -/
+theorem q9Seed_small_columns_linearIndependent (S : Finset (Fin 10)) (hcard : S.card < 4) :
+    LinearIndependent GF9 (fun j : S => q9SeedGenerator.col j) := by
+  have hcol : (fun j : S => q9SeedGenerator.col j) = (fun j : S => q9SeedColumn j) := by
+    rfl
+  rw [hcol]
+  by_cases haxis : q9Axis ∈ S
+  · let a : S := ⟨q9Axis, haxis⟩
+    let T : Finset S := univ.erase a
+    have hTfinite : ∀ j : T, ((j : S) : Fin 10).val < 9 := by
+      intro j
+      have hne : (j : S) ≠ a := (Finset.mem_erase.mp j.property).1
+      have hne9 : (((j : S) : Fin 10) : ℕ) ≠ 9 := by
+        intro hj
+        apply hne
+        apply Subtype.ext
+        exact Fin.ext hj
+      omega
+    have hTcard : Fintype.card T ≤ 2 := by
+      simp only [Fintype.card_coe]
+      dsimp only [T]
+      rw [Finset.card_erase_of_mem (Finset.mem_univ a), Finset.card_univ,
+        Fintype.card_coe]
+      omega
+    let v : T → GF9 := fun j => gf9ParamEquiv
+      ⟨(((j : T) : S) : Fin 10), hTfinite j⟩
+    have hv : Function.Injective v := by
+      intro i j hij
+      have hh := gf9ParamEquiv.injective hij
+      apply Subtype.ext
+      apply Subtype.ext
+      exact Fin.ext (congrArg (fun x : Fin 9 => (x : ℕ)) hh)
+    have hli : LinearIndependent GF9 (fun j : T => momentCurve 2 (v j)) :=
+      momentCurve_linearIndependent_of_card_le hv hTcard
+    rw [Fintype.linearIndependent_iff]
+    intro g hrel
+    let restrict : (Fin 4 → GF9) →ₗ[GF9] (Fin 2 → GF9) :=
+      LinearMap.funLeft GF9 GF9 (Fin.castLE (by decide))
+    have hproj : ∑ j : S, g j • restrict (q9SeedColumn j) = 0 := by
+      simpa using congrArg (fun z => restrict z) hrel
+    have haxis_zero : restrict (q9SeedColumn a) = 0 := by
+      funext i
+      simp [restrict, a, q9Axis, q9SeedColumn]
+      omega
+    have herase : ∑ j ∈ T, g j • restrict (q9SeedColumn j) = 0 := by
+      have h := hproj
+      rw [← Finset.sum_erase_add univ (fun j : S => g j • restrict (q9SeedColumn j))
+        (Finset.mem_univ a)] at h
+      simpa [T, haxis_zero] using h
+    have herase' : ∑ j : T, g j • restrict (q9SeedColumn j) = 0 := by
+      calc
+        (∑ j : T, g j • restrict (q9SeedColumn j)) =
+            ∑ j ∈ T, g j • restrict (q9SeedColumn j) := by
+          rw [← T.sum_attach]
+          rfl
+        _ = 0 := herase
+    have hcurve : ∑ j : T, g j • momentCurve 2 (v j) = 0 := by
+      convert herase' using 1
+      · apply Finset.sum_congr rfl
+        intro j _
+        congr 1
+        funext i
+        simp [restrict, q9SeedColumn, v, hTfinite j]
+    have hcoeffT := (Fintype.linearIndependent_iff.mp hli) (fun j : T => g j) hcurve
+    have hothers : ∀ j : S, j ≠ a → g j = 0 := by
+      intro j hj
+      have hjT : j ∈ T := by simp [T, hj]
+      exact hcoeffT ⟨j, hjT⟩
+    have hga : g a = 0 := by
+      have hi := congrFun hrel (2 : Fin 4)
+      simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at hi
+      rw [Fintype.sum_eq_single a (fun j hj => by simp [hothers j hj])] at hi
+      simpa [a, q9Axis, q9SeedColumn] using hi
+    intro j
+    by_cases hj : j = a
+    · simpa [hj] using hga
+    · exact hothers j hj
+  · apply q9Seed_finite_columns_linearIndependent S
+    · intro j hj
+      have hjne : j ≠ q9Axis := fun h => haxis (h ▸ hj)
+      have hjne9 : (j : ℕ) ≠ 9 := by
+        intro h
+        apply hjne
+        exact Fin.ext h
+      omega
+    · omega
+
+/-- Coordinate of the finite twisted-cubic point with parameter `t`. -/
+noncomputable def q9FiniteIndex (t : GF9) : Fin 10 :=
+  Fin.castLE (by decide) (gf9ParamEquiv.symm t)
+
+theorem q9FiniteIndex_injective : Function.Injective q9FiniteIndex := by
+  intro s t h
+  apply gf9ParamEquiv.symm.injective
+  exact Fin.ext (congrArg (fun j : Fin 10 => (j : ℕ)) h)
+
+theorem q9FiniteIndex_ne_axis (t : GF9) : q9FiniteIndex t ≠ q9Axis := by
+  intro h
+  have hv := congrArg (fun j : Fin 10 => (j : ℕ)) h
+  simp [q9FiniteIndex, q9Axis] at hv
+  exact (Nat.ne_of_lt (gf9ParamEquiv.symm t).isLt) hv
+
+@[simp]
+theorem q9SeedColumn_finiteIndex (t : GF9) :
+    q9SeedColumn (q9FiniteIndex t) = momentCurve 4 t := by
+  funext i
+  simp [q9SeedColumn, q9FiniteIndex]
+
+/-- The four columns at parameters `0,1,-1` together with the axis column sum to zero.  This is
+the characteristic-three circuit underlying the distinguished coordinate's locality three. -/
+theorem q9Seed_four_column_relation :
+    q9SeedColumn (q9FiniteIndex 0) + q9SeedColumn (q9FiniteIndex 1) +
+        q9SeedColumn (q9FiniteIndex (-1)) + q9SeedColumn q9Axis = 0 := by
+  simp only [q9SeedColumn_finiteIndex]
+  funext i
+  fin_cases i <;> norm_num [q9SeedColumn, q9Axis, momentCurve] <;>
+    linear_combination CharP.cast_eq_zero GF9 3
+
+theorem q9_one_ne_neg_one : (1 : GF9) ≠ -1 := by
+  intro h
+  have h2 : (2 : GF9) = 0 := by linear_combination h
+  have hdvd : 3 ∣ 2 := (CharP.cast_eq_zero_iff GF9 3 2).mp h2
+  norm_num at hdvd
+
+/-- Support of the explicit weight-four dual word. -/
+noncomputable def q9DualWitnessSupport : Finset (Fin 10) :=
+  {q9FiniteIndex 0, q9FiniteIndex 1, q9FiniteIndex (-1), q9Axis}
+
+/-- The indicator of the four-column circuit. -/
+noncomputable def q9DualWitness : Fin 10 → GF9 := fun j =>
+  if j ∈ q9DualWitnessSupport then 1 else 0
+
+theorem q9DualWitnessSupport_card : q9DualWitnessSupport.card = 4 := by
+  have h01 : (0 : GF9) ≠ 1 := zero_ne_one
+  have h0n : (0 : GF9) ≠ -1 := by norm_num
+  have h1n : (1 : GF9) ≠ -1 := q9_one_ne_neg_one
+  simp [q9DualWitnessSupport, q9FiniteIndex_ne_axis,
+    q9FiniteIndex_injective.ne h01, q9FiniteIndex_injective.ne h0n,
+    q9FiniteIndex_injective.ne h1n]
+
+theorem q9DualWitness_hammingNorm : hammingNorm q9DualWitness = 4 := by
+  unfold hammingNorm
+  have hfilter : (univ.filter fun j => q9DualWitness j ≠ 0) = q9DualWitnessSupport := by
+    ext j
+    simp [q9DualWitness]
+  rw [hfilter, q9DualWitnessSupport_card]
+
+/-- The explicit four-column relation is a nonzero word of `C₀⊥`. -/
+theorem q9DualWitness_mem : q9DualWitness ∈ dualCode q9InnerCode := by
+  rw [q9InnerCode, mem_dualCode_rowCode_iff_mulVec]
+  funext i
+  simp only [Matrix.mulVec, dotProduct, Pi.zero_apply]
+  calc
+    (∑ j, q9SeedGenerator i j * q9DualWitness j) =
+        ∑ j ∈ q9DualWitnessSupport, q9SeedGenerator i j := by
+      simp [q9DualWitness]
+    _ = (q9SeedColumn (q9FiniteIndex 0) + q9SeedColumn (q9FiniteIndex 1) +
+          q9SeedColumn (q9FiniteIndex (-1)) + q9SeedColumn q9Axis) i := by
+      have h01 : (0 : GF9) ≠ 1 := zero_ne_one
+      have h0n : (0 : GF9) ≠ -1 := by norm_num
+      have h1n : (1 : GF9) ≠ -1 := q9_one_ne_neg_one
+      simp [q9DualWitnessSupport, q9SeedGenerator, q9FiniteIndex_ne_axis,
+        q9FiniteIndex_injective.ne h01, q9FiniteIndex_injective.ne h0n,
+        q9FiniteIndex_injective.ne h1n, add_comm, add_left_comm, add_assoc]
+    _ = 0 := congrFun q9Seed_four_column_relation i
+
+theorem q9DualWitness_ne_zero : q9DualWitness ≠ 0 := by
+  intro h
+  have hw := q9DualWitness_hammingNorm
+  rw [h, hammingNorm_zero] at hw
+  omega
+
+/-- **Exact dual distance of the real inner seed:** `d(C₀⊥)=4`.  The lower bound is the
+small-column independence theorem; the upper bound is the explicit four-column circuit. -/
+theorem q9InnerCode_dualDist : dualDist q9InnerCode = 4 := by
+  have hdual : dualCode q9InnerCode ≠ ⊥ :=
+    (Submodule.ne_bot_iff (dualCode q9InnerCode)).mpr
+      ⟨q9DualWitness, q9DualWitness_mem, q9DualWitness_ne_zero⟩
+  have hlower : 4 ≤ dualDist q9InnerCode := by
+    simpa only [q9InnerCode] using
+      le_dualDist_rowCode_of_column_independent q9SeedGenerator 4 hdual
+        q9Seed_small_columns_linearIndependent
+  have hupper : dualDist q9InnerCode ≤ 4 := by
+    simpa only [q9DualWitness_hammingNorm] using
+      dualDist_le_hammingNorm q9DualWitness_mem q9DualWitness_ne_zero
+  omega
+
 /-- The seed encoder (right multiplication by the generator matrix) is injective. -/
 theorem q9SeedEncoder_injective : Function.Injective q9SeedGenerator.vecMulLinear := by
   simpa only [Matrix.coe_vecMulLinear] using
@@ -130,8 +344,7 @@ theorem q9InnerCode_finrank : Module.finrank GF9 q9InnerCode = 4 := by
 
 /-- The bounded-weight transfer lemma instantiated with the actual `𝔽₉` inner seed and its
 encoder.  Coefficient faithfulness is no longer a hypothesis: the only structural input is the
-outer-dual alternative for the vector of canonical block functionals.  The remaining `hsI`
-argument will become the arithmetic fact `4 < 2 * 4` once `d(C₀⊥)=4` is landed. -/
+outer-dual alternative for the vector of canonical block functionals. -/
 theorem q9Inner_transfer {ι : Type*} [Fintype ι]
     (w : ι → (Fin 10 → GF9)) (dO s : ℕ)
     (houter : (∀ j, blockFunctional q9InnerCode q9SeedEncoder (w j) = 0) ∨
@@ -141,6 +354,20 @@ theorem q9Inner_transfer {ι : Type*} [Fintype ι]
     (∀ j, w j ∈ dualCode q9InnerCode) ∧
       (univ.filter (fun j => w j ≠ 0)).card ≤ 1 :=
   transfer_ofInnerCodeFunctional q9InnerCode q9SeedEncoder w dO s houter htot hsO hsI
+
+/-- Radius-four transfer for the actual q=9 inner code with the intended outer dual-distance
+gate `d(O⊥) ≥ 5`. Both numeric inequalities are discharged (`4 < 5`, `4 < 2·4`); only the
+outer-dual decomposition and the word's weight budget remain hypotheses. -/
+theorem q9Inner_transfer_radiusFour {ι : Type*} [Fintype ι]
+    (w : ι → (Fin 10 → GF9))
+    (houter : (∀ j, blockFunctional q9InnerCode q9SeedEncoder (w j) = 0) ∨
+      5 ≤ (univ.filter (fun j => blockFunctional q9InnerCode q9SeedEncoder (w j) ≠ 0)).card)
+    (htot : (∑ j, hammingNorm (w j)) ≤ 4) :
+    (∀ j, w j ∈ dualCode q9InnerCode) ∧
+      (univ.filter (fun j => w j ≠ 0)).card ≤ 1 := by
+  apply q9Inner_transfer w 5 4 houter htot (by decide)
+  rw [q9InnerCode_dualDist]
+  decide
 
 /-- Toy two-block consistency witness for `ConcatDualWord`: block `0` is a
 nonzero weight-`4` inner-dual word, block `1` is zero. Here

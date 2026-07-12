@@ -291,3 +291,31 @@ that discharges the transfer interface's finite fields from it:
   `transfer_ofInnerCodeFunctional`, `q9SeedGenerator_rows_linearIndependent`,
   `q9InnerCode_finrank`, and `q9Inner_transfer` returned exactly
   `[propext, Classical.choice, Quot.sound]` for each.
+
+### Handoff Note — 2026-07-12 (q=9 exact dual distance)
+
+- Landed the reusable lower-bound criterion
+  `FiniteGeom.le_dualDist_rowCode_of_column_independent`: if every set of fewer than `d`
+  generator columns is independent and the dual code is nontrivial, then `d ≤ dualDist`.
+  The proof restricts a dual relation to its Hamming support and invokes finite-family linear
+  independence. The nontrivial-dual hypothesis is explicit because this code layer defines
+  `minDist ⊥ = 0` rather than infinity.
+- Generalized Vandermonde position to `momentCurve_linearIndependent_of_card_le`: any distinct
+  family of at most `n` points on the moment curve in `𝔽ⁿ` is independent. The proof reindexes by
+  `Fin (card ι)` and projects to the first `card ι` coordinates, where the square Vandermonde
+  theorem applies.
+- Proved every sub-four family of `q9SeedGenerator` columns independent. Finite-only families use
+  the generalized moment-curve theorem. For a family containing `e₂`, projection to the first two
+  coordinates gives at most two independent `(1,t)` points; their coefficients vanish, and the
+  `X²` coordinate then forces the axis coefficient to vanish.
+- Constructed the explicit characteristic-three circuit on the columns at parameters
+  `0,1,-1` plus `e₂`, packaged its indicator as `q9DualWitness`, and proved membership in `C₀⊥`,
+  Hamming weight four, and nonzeroness. The lower and upper bounds meet in
+  `q9InnerCode_dualDist : d(C₀⊥)=4`.
+- Added `q9Inner_transfer_radiusFour`: for a radius-four word and outer dual-distance gate five,
+  both numeric obligations are now internal arithmetic. Only the Chen–Ling–Xing outer-dual
+  alternative and the total-weight hypothesis remain arguments.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on the two shared lemmas, the small-column theorem, witness membership, exact
+  dual distance, and specialized transfer theorem returned exactly
+  `[propext, Classical.choice, Quot.sound]`.

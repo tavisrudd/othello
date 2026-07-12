@@ -6,8 +6,8 @@ are resolved. **Phase 0 `FiniteGeom` MVP is complete** (weight + hypergraph `ν`
 linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1's transfer lemma +
 `δ_x = τ` identity landed** — see §7 for the current status table. The real `q = 9` inner code
 is now concrete (`𝔽₉` generator, rank four, encoder equivalence, coefficient faithfulness); open
-leads are its exact dual distance, the Chen–Ling–Xing outer-dual input, and the concrete repair
-hypergraph `𝓑_x` on the code layer. Session-by-session narrative lives in the
+leads are its primal distance `d(C₀)=6`, the Chen–Ling–Xing outer-dual input, and the concrete
+repair hypergraph `𝓑_x` on the code layer. Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
 [baer-equivariant-extension](../2026-07-10-baer-equivariant-extension-upgrades.md),
@@ -187,15 +187,15 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 |---|---|
 | `FiniteGeom/Weight.lean` | q-ary weight counting: `card_filter_le_sum`, `mul_card_filter_le_sum` |
 | `FiniteGeom/Hypergraph.lean` | `Finset`-hypergraph `ν`/`τ`: `nu_le_tau` (weak duality), `transversalNumber_le_mul_matchingNumber` (`τ ≤ p·ν`), `card_le_matchingNumber` / `transversalNumber_le_card` attainment pins, worked `ν=τ=1` + triangle `ν=1,τ=2` (strict) witnesses |
-| `FiniteGeom/Code.lean` | linear codes over `𝔽_q`: `dualCode` / `minDist` / `dualDist` (+ `_le_hammingNorm` pins), parity-check char. `mem_dualCode_rowCode(_iff_mulVec)`, `singleton_bound` (`d+k≤n+1`) + `IsMDS`, `le_minDist` (lower-bound lifter), `𝔽₅` non-vacuity witness |
+| `FiniteGeom/Code.lean` | linear codes over `𝔽_q`: `dualCode` / `minDist` / `dualDist` (+ `_le_hammingNorm` pins), parity-check char. `mem_dualCode_rowCode(_iff_mulVec)`, `le_dualDist_rowCode_of_column_independent` (small independent column sets imply a dual-distance lower bound), `singleton_bound` (`d+k≤n+1`) + `IsMDS`, `le_minDist` (lower-bound lifter), `𝔽₅` non-vacuity witness |
 | `FiniteGeom/EvalCode.lean` | Reed–Solomon: `card_eval_zero_le_natDegree`, `evalPi`, `rsCode`, `rsCode_minDist_ge` (`n-(k-1)≤d`), `finrank_rsCode` (`=k`), `rsCode_isMDS` (RS codes are MDS) |
 | `FiniteGeom/EvalCodeInstance.lean` | concrete MDS discharge of the eval-code layer: RS `[7,3,5]₇` over `ZMod 7` (`rsCode_zmod7_isMDS`/`_minDist`) and RS `[3,2,2]₉` over the target `GaloisField 3 2 = 𝔽₉` on subfield points (`rsCode_gf9_isMDS`/`_minDist`, injectivity via `algebraMap`) — exercises `rsCode_isMDS` on a real non-prime field |
-| `FiniteGeom/MomentCurve.lean` | moment-curve / NRC general position via Vandermonde: `momentCurve`, `momentCurve_linearIndependent` (distinct params ⇒ independent, general `n`), `twistedCubic_linearIndependent` (`n=4`, no four coplanar), `twistedCubic_span` (four distinct cubic points span `𝔽⁴`); **hyperplane sections**: `formPoly` (coefficient polynomial of a linear form) + `momentCurve_section_le` (a nonzero form kills `≤ n-1` NRC points, via `card_eval_zero_le_natDegree`) — the sharp "plane meets twisted cubic in `≤3` points" `T_q` bound |
+| `FiniteGeom/MomentCurve.lean` | moment-curve / NRC general position via Vandermonde: `momentCurve`, `momentCurve_linearIndependent` (square family), `momentCurve_linearIndependent_of_card_le` (any distinct family of size `≤n`), `twistedCubic_linearIndependent` (`n=4`, no four coplanar), `twistedCubic_span` (four distinct cubic points span `𝔽⁴`); **hyperplane sections**: `formPoly` + `momentCurve_section_le` — the sharp "plane meets twisted cubic in `≤3` points" `T_q` bound |
 | `FiniteGeom/ColumnCode.lean` | projective systems as codes over a general `Fintype` index `ι` (`columnCode` for a point system `P : ι → 𝔽^k`), `sectionCount`, weight↔section identity, `le_columnCode_minDist` (all sections `≤ s` ⇒ `card ι − s ≤ d`), `columnCode_minDist_le`, `columnCode_minDist_eq` (`d = card ι − max section`), `finrank_columnCode` (`dim = k` when points span) — the geometric-distance bridge for the whole geometric-code lane. (`minDist`/`le_minDist`/`minDist_le_hammingNorm` in `Code.lean` generalized `Fin n → ι`, backward-compatible, so the `S_q` point system can be indexed by the natural `𝔽 ⊕ 𝔽 ⊕ Unit`.) |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus the coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` now discharges coefficient faithfulness internally; field trace is only a coordinate presentation. Residual imported content = the outer-dual alternative `houter` (Chen–Ling–Xing). |
-| `RepairCodes/Q9Seed.lean` | real inner seed infrastructure: `GF9 = GaloisField 3 2`, the ten-column Roth–Lempel `q9SeedGenerator`, `q9InnerCode`, Vandermonde row independence, `q9SeedEncoder : 𝔽₉⁴ ≃ₗ C₀`, `finrank C₀ = 4`, and `q9Inner_transfer`; `q9SeedToy` remains only as the original interface-shape witness. |
+| `RepairCodes/Q9Seed.lean` | real inner seed: `GF9`, the ten-column Roth–Lempel generator/code, Vandermonde row independence, `q9SeedEncoder : 𝔽₉⁴ ≃ₗ C₀`, `finrank C₀ = 4`; all sub-four column families independent, explicit `{0,1,-1,e₂}` weight-four dual word, hence `q9InnerCode_dualDist : d(C₀⊥)=4`; `q9Inner_transfer_radiusFour` discharges both numeric transfer gates. |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -205,11 +205,11 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 
 1. **Finish the real `q = 9` seed discharge.** The actual inner code
    `C₀ = rowCode q9SeedGenerator` over `𝔽₉` is landed, with `finrank C₀ = 4`, an encoder
-   equivalence `𝔽₉⁴ ≃ₗ C₀`, and coefficient faithfulness proved coordinate-free by
-   `blockFunctional_eq_zero_iff`; trace-form nondegeneracy is no longer an obligation. Remaining:
-   prove `d(C₀⊥)=4` (and `d(C₀)=6` for the full `[10,4,6]₉` parameter theorem), then supply the
-   Chen–Ling–Xing outer-dual decomposition as the explicit `houter` input to `q9Inner_transfer`.
-   This retires the toy witness's role in the intended transfer theorem.
+   equivalence `𝔽₉⁴ ≃ₗ C₀`, coefficient faithfulness, and exact `d(C₀⊥)=4`. The specialized
+   `q9Inner_transfer_radiusFour` now discharges `4<5` and `4<2d(C₀⊥)` internally. Remaining:
+   prove `d(C₀)=6` for the full `[10,4,6]₉` parameter theorem, then supply the Chen–Ling–Xing
+   outer-dual decomposition as the explicit `houter` input. This retires the toy witness's role
+   in the intended transfer theorem.
 2. **Concrete repair hypergraph `𝓑_x = 𝓗_C(x)`** on the code layer (completes Phase 1 step 2's
    concrete side): its edges are the minimum parity-check supports through the erased coordinate;
    supply a matroid instance discharging "no surviving trace ⟺ independent". Also lands a

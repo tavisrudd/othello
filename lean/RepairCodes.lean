@@ -4,8 +4,8 @@
 --
 -- Phase 1, step 1 (landed): the concatenation transfer lemma over the
 -- abstract-first `ConcatDualWord` interface. The real `𝔽₉` inner generator,
--- rank-four encoder, and coefficient faithfulness are landed; exact dual
--- distance and the outer-dual decomposition remain. Still to come here: the
+-- rank-four encoder, coefficient faithfulness, and exact dual distance four
+-- are landed; the outer-dual decomposition remains. Still to come here: the
 -- concrete repair hypergraph, the uniform `q = 3^h` theorem, and seed-and-lift.
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed

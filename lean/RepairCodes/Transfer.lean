@@ -28,8 +28,8 @@ inputs the counting argument consumes — trace-representation faithfulness
   shows only `propext` / `Classical.choice` / `Quot.sound`, no `sorryAx`;
 * but they are *conditional on the model*: they say nothing about a concrete code
   until `ConcatDualWord` is instantiated for one. `RepairCodes.Q9Seed` now supplies
-  the real `𝔽₉` inner code and encoder equivalence; its exact dual distance and the
-  outer-dual decomposition remain explicit obligations there.
+  the real `𝔽₉` inner code, encoder equivalence, and exact dual distance four; the
+  outer-dual decomposition remains an explicit obligation there.
 
 The analytic/asymptotic inputs (Sauermann, Ellenberg–Gijswijt) are *not* used by
 this finite lemma and do not appear.
