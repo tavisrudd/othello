@@ -7,7 +7,8 @@ linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1
 `δ_x = τ` identity landed** — see §7 for the current status table. The real `q = 9` inner code
 is now concrete with full `[10,4,6]₉` parameters, dual distance four, encoder equivalence, and
 coefficient faithfulness; outer-dual membership is proved directly from concatenation
-orthogonality. The concrete repair hypergraph `𝓑_x` is the next open code-layer lead.
+orthogonality. The concrete q9 repair hypergraph is now code-derived and 3-uniform; identifying
+it with the affine-line hypergraph and proving `ν=3, τ=5` is the next lead.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -194,10 +195,11 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/MomentCurve.lean` | moment-curve / NRC general position via Vandermonde: `momentCurve`, `momentCurve_linearIndependent` (square family), `momentCurve_linearIndependent_of_card_le` (any distinct family of size `≤n`), `twistedCubic_linearIndependent` (`n=4`, no four coplanar), `twistedCubic_span` (four distinct cubic points span `𝔽⁴`); **hyperplane sections**: `formPoly` + `momentCurve_section_le` — the sharp "plane meets twisted cubic in `≤3` points" `T_q` bound |
 | `FiniteGeom/ColumnCode.lean` | projective systems as codes over a general `Fintype` index `ι` (`columnCode` for a point system `P : ι → 𝔽^k`), `sectionCount`, weight↔section identity, `le_columnCode_minDist` (all sections `≤ s` ⇒ `card ι − s ≤ d`), `columnCode_minDist_le`, `columnCode_minDist_eq` (`d = card ι − max section`), `finrank_columnCode` (`dim = k` when points span) — the geometric-distance bridge for the whole geometric-code lane. (`minDist`/`le_minDist`/`minDist_le_hammingNorm` in `Code.lean` generalized `Fin n → ι`, backward-compatible, so the `S_q` point system can be indexed by the natural `𝔽 ⊕ 𝔽 ⊕ Unit`.) |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
+| `FiniteGeom/Repair.lean` | complete bounded-radius repair hypergraph from actual dual-word supports: `wordSupport`, `repairHypergraph`; `repair_edge_card_eq_of_dualDist` (`r+1≤d(C⊥)` forces every radius-`r` edge to have exactly `r` helpers) and edge nonemptiness. |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` discharges coefficient faithfulness internally; field trace is only an optional coordinate presentation. |
 | `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
-| `RepairCodes/Q9Seed.lean` | real inner seed: `GF9`, ten-column Roth–Lempel generator/code, row-code = column-code bridge; maximum hyperplane section four (upper bound `≤3` cubic + `≤1` axis, attained by `T³-T`), hence full `[10,4,6]₉`; all sub-four column families independent and explicit `{0,1,-1,e₂}` dual word, hence `d(C₀⊥)=4`; `q9Inner_transfer_ofOuterCode` derives block confinement from outer-code orthogonality + functional-dual distance five. |
+| `RepairCodes/Q9Seed.lean` | real inner seed: full `[10,4,6]₉`, `d(C₀⊥)=4`, and block-local transfer; concrete `q9AxisRepairHypergraph = repairHypergraph C₀ e₂ 3`, explicit `{0,1,-1}` helper edge from the weight-four dual witness, nonempty, and every edge has exactly three helpers. |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -209,10 +211,13 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 “Chen–Ling–Xing decomposition” attribution was unverified and unnecessary because `OuterDual.lean`
 proves the functional outer-dual membership directly (archive companion has the correction trail).
 
-1. **Concrete repair hypergraph `𝓑_x = 𝓗_C(x)`** on the code layer (completes Phase 1 step 2's
-   concrete side): its edges are the minimum parity-check supports through the erased coordinate;
-   supply a matroid instance discharging "no surviving trace ⟺ independent". Also lands a
-   code-derived `τ > ν` (currently only the abstract triangle witness has it).
+1. **Evaluate the concrete q9 repair hypergraph.** `q9AxisRepairHypergraph` is now defined from
+   all radius-three dual supports through `e₂`; it is nonempty and every edge has exactly three
+   helpers. Remaining: prove its edges are exactly the distinct zero-sum triples in `𝔽₉`, identify
+   those with affine lines in `AG(2,3)`, and derive `matchingNumber = 3`,
+   `transversalNumber = 5`. This lands the first code-derived `τ>ν` instance (the abstract
+   triangle remains only the generic strictness witness). The separate CompletionCore bridge from
+   surviving circuits to matroid independence remains in Phase 2.
 2. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`. Two of three legs
    **landed**: `dim=4` (`FiniteGeom/MomentCurve.lean` `twistedCubic_span` + `ColumnCode`
    `finrank_columnCode`) and the geometric-distance bridge `d = n − max section`

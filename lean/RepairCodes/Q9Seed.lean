@@ -1,6 +1,7 @@
 import RepairCodes.OuterDual
 import FiniteGeom.MomentCurve
 import FiniteGeom.ColumnCode
+import FiniteGeom.Repair
 import Mathlib.FieldTheory.Finite.GaloisField
 import Mathlib.LinearAlgebra.Matrix.ToLin
 
@@ -34,8 +35,9 @@ This file proves the full `[10,4,6]₉` parameters and exact dual distance `d(C�
 Every sub-four column family is independent, while the columns at `0,1,-1` and `e₂` form a
 weight-four circuit. The primal distance comes from the maximum four-point hyperplane section,
 attained by `T³-T`. `q9Inner_transfer_ofOuterCode` proves the outer-dual step directly in the
-functional alphabet, so no trace-decomposition import remains. The concrete repair hypergraph is
-the next open code-derived layer.
+functional alphabet, so no trace-decomposition import remains. The complete radius-three repair
+hypergraph at `e₂` is derived from actual dual supports and is nonempty with every edge of size
+three; identifying all its edges and proving `ν=3, τ=5` is the next combinatorial layer.
 -/
 
 namespace RepairCodes
@@ -347,6 +349,10 @@ theorem q9DualWitness_hammingNorm : hammingNorm q9DualWitness = 4 := by
     simp [q9DualWitness]
   rw [hfilter, q9DualWitnessSupport_card]
 
+theorem q9DualWitness_wordSupport : wordSupport q9DualWitness = q9DualWitnessSupport := by
+  ext j
+  simp [wordSupport, q9DualWitness]
+
 /-- The explicit four-column relation is a nonzero word of `C₀⊥`. -/
 theorem q9DualWitness_mem : q9DualWitness ∈ dualCode q9InnerCode := by
   rw [q9InnerCode, mem_dualCode_rowCode_iff_mulVec]
@@ -386,6 +392,52 @@ theorem q9InnerCode_dualDist : dualDist q9InnerCode = 4 := by
     simpa only [q9DualWitness_hammingNorm] using
       dualDist_le_hammingNorm q9DualWitness_mem q9DualWitness_ne_zero
   omega
+
+/-! ### The concrete repair hypergraph at the distinguished axis coordinate -/
+
+/-- Complete locality-three repair hypergraph of the real code `C₀` at `e₂`, derived from all
+dual-word supports of size at most four. -/
+noncomputable def q9AxisRepairHypergraph : Finset (Finset (Fin 10)) :=
+  repairHypergraph q9InnerCode q9Axis 3
+
+/-- Helper set of the explicit `{0,1,-1,e₂}` dual circuit. -/
+noncomputable def q9AxisHelpers : Finset (Fin 10) :=
+  (wordSupport q9DualWitness).erase q9Axis
+
+theorem q9Axis_mem_dualWitnessSupport : q9Axis ∈ wordSupport q9DualWitness := by
+  rw [q9DualWitness_wordSupport]
+  simp [q9DualWitnessSupport]
+
+theorem q9AxisHelpers_card : q9AxisHelpers.card = 3 := by
+  rw [q9AxisHelpers, Finset.card_erase_of_mem q9Axis_mem_dualWitnessSupport,
+    card_wordSupport, q9DualWitness_hammingNorm]
+
+/-- The explicit characteristic-three circuit is a genuine edge of the code-derived repair
+hypergraph, so this is not merely an abstract or combinatorial witness. -/
+theorem q9AxisHelpers_mem_repairHypergraph : q9AxisHelpers ∈ q9AxisRepairHypergraph := by
+  rw [q9AxisRepairHypergraph, mem_repairHypergraph]
+  refine ⟨?_, by rw [q9AxisHelpers_card], q9DualWitness, q9DualWitness_mem, ?_, ?_⟩
+  · intro j hj
+    have hj' := (Finset.mem_erase.mp hj)
+    exact Finset.mem_erase.mpr ⟨hj'.1, Finset.mem_univ _⟩
+  · exact mem_wordSupport.mp q9Axis_mem_dualWitnessSupport
+  · exact (Finset.insert_erase q9Axis_mem_dualWitnessSupport).symm
+
+/-- Every edge of the q=9 axis repair hypergraph has exactly three helpers, because
+`d(C₀⊥)=4`. -/
+theorem q9AxisRepair_edge_card {R : Finset (Fin 10)} (hR : R ∈ q9AxisRepairHypergraph) :
+    R.card = 3 := by
+  apply repair_edge_card_eq_of_dualDist (C := q9InnerCode) (x := q9Axis)
+    (r := 3) (R := R) (by rw [q9InnerCode_dualDist])
+  exact hR
+
+theorem q9AxisRepair_edge_nonempty {R : Finset (Fin 10)} (hR : R ∈ q9AxisRepairHypergraph) :
+    R.Nonempty := by
+  have hc := q9AxisRepair_edge_card hR
+  exact Finset.card_pos.mp (by omega)
+
+theorem q9AxisRepairHypergraph_nonempty : q9AxisRepairHypergraph.Nonempty :=
+  ⟨q9AxisHelpers, q9AxisHelpers_mem_repairHypergraph⟩
 
 /-- The seed encoder (right multiplication by the generator matrix) is injective. -/
 theorem q9SeedEncoder_injective : Function.Injective q9SeedGenerator.vecMulLinear := by

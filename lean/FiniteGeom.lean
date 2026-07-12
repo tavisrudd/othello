@@ -14,3 +14,4 @@ import FiniteGeom.EvalCodeInstance
 import FiniteGeom.MomentCurve
 import FiniteGeom.ColumnCode
 import FiniteGeom.Completion
+import FiniteGeom.Repair

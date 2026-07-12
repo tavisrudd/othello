@@ -199,8 +199,9 @@ example :
 /-- The triangle hypergraph `{{0,1},{1,2},{0,2}}` on `Fin 3`: three pairwise-intersecting
 edges. It witnesses the strict gap `ν = 1 < 2 = τ`, so weak duality `ν ≤ τ` is *not* an
 equality in general (contrast the one-edge example above, where `ν = τ`). This is the
-combinatorial demonstration of the `τ > ν` phenomenon the repair-hypergraph transfer exploits;
-a code-derived instance is the remaining goal (docstring). -/
+combinatorial demonstration of the `τ > ν` phenomenon the repair-hypergraph transfer exploits.
+`RepairCodes.Q9Seed` now supplies a code-derived repair hypergraph; its exact `ν=3, τ=5`
+evaluation is the remaining strict-gap goal. -/
 example :
     matchingNumber ({{0, 1}, {1, 2}, {0, 2}} : Finset (Finset (Fin 3))) = 1 ∧
       transversalNumber ({{0, 1}, {1, 2}, {0, 2}} : Finset (Finset (Fin 3))) = 2 := by

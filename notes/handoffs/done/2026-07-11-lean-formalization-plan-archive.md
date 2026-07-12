@@ -363,3 +363,25 @@ that discharges the transfer interface's finite fields from it:
   dated correction because it overturns an already-committed attribution; the citation-audit note
   remains the detailed evidence trail. The real q=9 block-local transfer path is closed; the
   concrete repair hypergraph is now first in the open queue.
+
+### Handoff Note — 2026-07-12 (code-derived q9 repair hypergraph)
+
+- Added `FiniteGeom/Repair.lean`, defining `wordSupport` and the complete bounded-radius
+  `repairHypergraph C x r`: helper sets `R ⊆ univ.erase x` with `|R|≤r` for which an actual dual
+  word is nonzero at `x` and has support exactly `{x}∪R`. This is all bounded dual supports, not a
+  selected family of declared repair groups.
+- Proved `repair_edge_card_eq_of_dualDist`: when `r+1≤d(C⊥)`, every radius-`r` edge has exactly
+  `r` helpers. The witness has weight `|R|+1`; dual distance supplies the lower bound and the
+  radius definition supplies the upper bound. Also proved edge nonemptiness for positive radius.
+- Instantiated the real seed at its distinguished axis coordinate:
+  `q9AxisRepairHypergraph = repairHypergraph q9InnerCode q9Axis 3`. The existing explicit
+  `{0,1,-1,e₂}` dual word gives the concrete helper edge `{0,1,-1}`; hence the hypergraph is
+  nonempty. Exact `d(C₀⊥)=4` makes every edge a three-helper minimum repair.
+- This closes the object-definition/non-vacuity part of the concrete repair lane. The remaining
+  theorem is now purely sharp: characterize all edges as distinct zero-sum triples in `𝔽₉`,
+  transport to affine lines of `AG(2,3)`, and prove `ν=3`, `τ=5`. The latter will be the first
+  code-derived strict `τ>ν` witness.
+- Validation: `nix develop --command lake build FiniteGeom RepairCodes` green with no Lean
+  warnings. `#print axioms` on the repair hypergraph definition, dual-distance cardinality lemma,
+  concrete edge membership/cardinality, and nonemptiness returned exactly
+  `[propext, Classical.choice, Quot.sound]`.

@@ -6,8 +6,9 @@
 -- abstract-first `ConcatDualWord` interface. The real `𝔽₉` inner generator,
 -- `[10,4,6]₉` parameters, coefficient faithfulness, and exact dual distance
 -- four are landed; outer-dual membership is proved directly from concatenation
--- orthogonality in `OuterDual`. Still to come here: the concrete repair hypergraph,
--- the uniform `q = 3^h` theorem, and seed-and-lift.
+-- orthogonality in `OuterDual`. The code-derived q9 axis repair hypergraph is
+-- landed; its exact ν/τ evaluation, the uniform `q = 3^h` theorem, and
+-- seed-and-lift remain.
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed
 import RepairCodes.CodeInstance
