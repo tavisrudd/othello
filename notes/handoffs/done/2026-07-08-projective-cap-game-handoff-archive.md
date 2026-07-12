@@ -2495,3 +2495,18 @@ plus `ΔE` remain exact. At fixed S5, `ΔE mod 3` or width-2/3 bins are already 
 the context is necessary. No linear mod-3 formula in simple packet collision counts exists. The
 new algebraic target is the incidence identity `ΔE=-R_y+A_y`, with old-edge removal controlled by
 the known S5 conflict graph and new edges by the five reply lines.
+
+## 2026-07-11 C77 continuation (Codex) — value-opaque transition classifier
+
+Expanded the transition audit from forced rows to every legal candidate reply. At q17 the residue
+histogram of reply-pencil loads selects 48/192 forced replies, `(R,A) mod 3` plus that histogram
+selects 120/192, and labelled incidence between the five reply rays and ten old S5 secants selects
+191/192. The sole P/N twin has no old-direction hits on either side. Its five-direction
+multiplicative quotient-set sizes are 12 (P) and 13 (N), closing the last collision. Thus
+`(load residues, old-secant incidence, quotient-set size)` is locally unique `192/192`; prepending
+only the implicit S5 parallel classes and quotient-multiplicity spectrum makes it globally P-pure
+`192/192`. The q11 audit remains `24/24` (there the empty post-reply load pattern already selects).
+The construction is exact and field-label-free but has 182 forced contextual types, so it is a
+case-split coordinate system rather than a uniform scalar rule. q13 has no degree-one balanced-root
+obligations. A q19 all-root prerequisite scan was stopped after its terminal session failed to
+return; no q19 conclusion is claimed.

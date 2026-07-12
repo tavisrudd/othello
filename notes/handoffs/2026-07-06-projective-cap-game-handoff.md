@@ -710,8 +710,12 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   coordinate system, not a selector, and closes further static-signature mining.
   A user-requested mixed-feature reopening found a sharper contextual target: the five new reply
   directions `D_y` plus residual conflict-edge change `ΔE` separate every forced q11/q17 reply;
-  at fixed S5 even `ΔE mod 3` suffices. The proof-shaped residue is to explain
-  `ΔE=-R_y+A_y` from the direction packet, not to classify full orbits.
+  at fixed S5 even `ΔE mod 3` suffices. The identity `ΔE=-R_y+A_y` now yields an exact
+  field-label-free form: reply-pencil load residues plus old-secant incidence miss one q17 twin,
+  and the multiplicative quotient-set size `kappa(y)` separates it. With the implicit S5
+  parallel/quotient spectrum this is locally unique and globally P-pure `192/192` (q11 `24/24`).
+  It is still contextual (182 forced types), so the proof-shaped residue is an algebraic incidence
+  case split rather than a static selector table.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

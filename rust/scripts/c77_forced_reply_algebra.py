@@ -18,6 +18,7 @@ import subprocess
 from c77_balanced_mirror_probe import (
     residual_signature, root_safe_mirrors_for, run as mirror_run, transformations,
 )
+from c77_intruder_reply_graph import legal_moves
 
 
 ROOTS = (
@@ -35,6 +36,92 @@ PAIR = re.compile(
     r"value=([PN]) live=(\d+)"
 )
 POINT = re.compile(r"\((\d+), (\d+)\)")
+
+
+def conflict_witnesses(q, root, a, b):
+    witnesses = []
+    if a[0] == b[0]:
+        witnesses.append("row")
+    if a[1] == b[1]:
+        witnesses.append("col")
+    for index, selected in enumerate(root):
+        if ((a[0] - selected[0]) * (b[1] - selected[1])
+                - (a[1] - selected[1]) * (b[0] - selected[0])) % q == 0:
+            witnesses.append(index)
+    return tuple(witnesses)
+
+
+def conflict_edges(q, root, vertices):
+    edges = set()
+    for a, b in combinations(vertices, 2):
+        witnesses = conflict_witnesses(q, root, a, b)
+        assert len(witnesses) <= 1, (root, a, b, witnesses)
+        if witnesses:
+            edges.add(frozenset((a, b)))
+    return edges
+
+
+@lru_cache(maxsize=None)
+def cached_conflict_state(q, root):
+    vertices = tuple(legal_moves(q, root))
+    return vertices, frozenset(conflict_edges(q, root, vertices))
+
+
+@lru_cache(maxsize=None)
+def transition_features(q, s5, reply):
+    vertices5, edges5_frozen = cached_conflict_state(q, s5)
+    edges5 = set(edges5_frozen)
+    killed = {reply}
+    killed.update(next(iter(edge - {reply})) for edge in edges5 if reply in edge)
+    vertices6, edges6_frozen = cached_conflict_state(q, s5 + (reply,))
+    assert set(vertices6) == set(vertices5) - killed
+    edges6 = set(edges6_frozen)
+    old_surviving = {edge for edge in edges5 if edge.isdisjoint(killed)}
+    assert old_surviving <= edges6
+    removed = len(edges5) - len(old_surviving)
+    added = len(edges6 - old_surviving)
+    loads = Counter(direction(reply, vertex, q) for vertex in vertices6)
+    added_formula = sum(load * (load - 1) // 2 for load in loads.values())
+    assert added_formula == added
+    load_pattern = tuple(sorted(Counter(load % 3 for load in loads.values()).items()))
+    return removed % 3, added % 3, (added - removed) % 3, load_pattern
+
+
+def relative_direction_relations(q, s5, reply):
+    """Field-label-free incidences between the five new rays and old secants."""
+    old_by_direction = {}
+    for i, j in combinations(range(len(s5)), 2):
+        old_by_direction.setdefault(direction(s5[i], s5[j], q), []).append((i, j))
+    incidences = tuple(
+        tuple(old_by_direction.get(direction(reply, point, q), ()))
+        for point in s5
+    )
+    indexed_loads = tuple(len(edges) for edges in incidences)
+    load_profile = tuple(sorted(indexed_loads))
+    reply_directions = [direction(reply, point, q) for point in s5]
+    finite_nonzero = [value for value in reply_directions if value not in (0, q)]
+    quotient_size = len({
+        left * pow(right, -1, q) % q
+        for left in finite_nonzero for right in finite_nonzero if left != right
+    })
+    return load_profile, indexed_loads, incidences, quotient_size
+
+
+def base_parallelism_incidence(q, s5):
+    """Parallel classes and a value-opaque ratio spectrum for the current S5."""
+    by_direction = {}
+    for i, j in combinations(range(len(s5)), 2):
+        by_direction.setdefault(direction(s5[i], s5[j], q), []).append((i, j))
+    finite_nonzero = [value for value in by_direction if value not in (0, q)]
+    quotient_counts = Counter(
+        left * pow(right, -1, q) % q
+        for left in finite_nonzero for right in finite_nonzero if left != right
+    )
+    quotient_profile = tuple(sorted(Counter(quotient_counts.values()).items()))
+    return (
+        tuple(sorted(tuple(edges) for edges in by_direction.values())),
+        len(quotient_counts), quotient_profile,
+    )
 
 
 def rank_mod(rows, q):
@@ -661,6 +748,8 @@ def main():
     ap.add_argument("--relative-redei-residual", action="store_true")
     ap.add_argument("--relative-redei-simple", action="store_true")
     ap.add_argument("--relative-congruence", action="store_true")
+    ap.add_argument("--transition-ledger", action="store_true")
+    ap.add_argument("--transition-controls", action="store_true")
     args = ap.parse_args()
     q = args.q
     if q != 17 and not args.all_roots:
@@ -712,6 +801,35 @@ def main():
     print(f"FORCED-CONIC-DONE directed={total} signatures={len(histogram)} "
           f"multiplicities={dict(sorted(Counter(histogram.values()).items()))} "
           f"mirror-counts={dict(sorted(mirror_histogram.items()))}")
+
+    if args.transition_ledger:
+        ledger_hist = Counter()
+        load_hist = Counter()
+        checked = 0
+        for root, forced_pairs in records:
+            for move, reply in forced_pairs:
+                s5 = root + (move,)
+                vertices5 = tuple(legal_moves(q, s5))
+                edges5 = conflict_edges(q, s5, vertices5)
+                killed = {reply}
+                killed.update(next(iter(edge - {reply})) for edge in edges5 if reply in edge)
+                vertices6 = tuple(legal_moves(q, s5 + (reply,)))
+                assert set(vertices6) == set(vertices5) - killed
+                old_surviving = {edge for edge in edges5 if edge.isdisjoint(killed)}
+                edges6 = conflict_edges(q, s5 + (reply,), vertices6)
+                assert old_surviving <= edges6
+                removed = len(edges5) - len(old_surviving)
+                added = edges6 - old_surviving
+                loads = Counter(direction(reply, vertex, q) for vertex in vertices6)
+                added_formula = sum(load * (load - 1) // 2 for load in loads.values())
+                assert added_formula == len(added)
+                delta_edges = len(edges6) - len(edges5)
+                assert delta_edges == -removed + added_formula
+                ledger_hist[(removed % 3, added_formula % 3, delta_edges % 3)] += 1
+                load_hist[tuple(sorted(Counter(load % 3 for load in loads.values()).items()))] += 1
+                checked += 1
+        print(f"TRANSITION-LEDGER checked={checked} mod3={dict(sorted(ledger_hist.items()))} "
+              f"line-load-mod3={dict(sorted(load_hist.items()))}")
 
     if args.controls:
         pairs = parse_pairs(output)
@@ -788,6 +906,91 @@ def main():
                           f"signature={target} matches={matches}")
         print(f"FORCED-INVOLUTION-DONE directed={forced_total} unique={forced_unique} "
               f"p-pure={forced_pure} collision-hist={dict(sorted(collision_hist.items()))}")
+        if args.transition_controls:
+            feature_names = (
+                "ra", "delta", "loads", "ra-loads", "delta-loads", "full",
+                "loads-hit-profile", "loads-indexed-hits", "loads-incidence",
+                "loads-incidence-quotients",
+                "context-loads-incidence-quotients",
+                "delta-hit-profile", "delta-indexed-hits", "delta-incidence",
+            )
+            feature_rows = {name: [] for name in feature_names}
+            global_features = {name: {} for name in feature_names}
+            strongest_failures = []
+            for root, forced_pairs in records:
+                root_index = root_indices[root]
+                for move, forced_reply in forced_pairs:
+                    candidates = by_move[(root_index, move)]
+                    context_parallelism = base_parallelism_incidence(q, root + (move,))
+                    computed = []
+                    for reply, value, _signature in candidates:
+                        removed, added, delta, loads = transition_features(
+                            q, root + (move,), reply
+                        )
+                        hit_profile, indexed_hits, incidence, quotient_size = \
+                            relative_direction_relations(q, root + (move,), reply)
+                        features = {
+                            "ra": (removed, added),
+                            "delta": delta,
+                            "loads": loads,
+                            "ra-loads": (removed, added, loads),
+                            "delta-loads": (delta, loads),
+                            "full": (removed, added, delta, loads),
+                            "loads-hit-profile": (loads, hit_profile),
+                            "loads-indexed-hits": (loads, indexed_hits),
+                            "loads-incidence": (loads, incidence),
+                            "loads-incidence-quotients": (
+                                loads, incidence, quotient_size,
+                            ),
+                            "context-loads-incidence-quotients": (
+                                context_parallelism, loads, incidence, quotient_size,
+                            ),
+                            "delta-hit-profile": (delta, hit_profile),
+                            "delta-indexed-hits": (delta, indexed_hits),
+                            "delta-incidence": (delta, incidence),
+                        }
+                        computed.append((reply, value, features))
+                        for name in feature_names:
+                            global_features[name].setdefault(features[name], []).append(value)
+                    forced_features = next(
+                        features for reply, _value, features in computed if reply == forced_reply
+                    )
+                    for name in feature_names:
+                        matches = [value for _reply, value, features in computed
+                                   if features[name] == forced_features[name]]
+                        feature_rows[name].append((
+                            len(matches) == 1,
+                            all(value == "P" for value in matches),
+                            forced_features[name],
+                        ))
+                    incidence_matches = [
+                        (reply, value, relative_redei_signature(root, move, reply, q))
+                        for reply, value, features in computed
+                        if features["loads-incidence"]
+                        == forced_features["loads-incidence"]
+                    ]
+                    if len(incidence_matches) != 1:
+                        strongest_failures.append((
+                            root_index, move, forced_reply,
+                            forced_features["loads-incidence"], incidence_matches,
+                        ))
+            results = {}
+            for name in feature_names:
+                rows = feature_rows[name]
+                global_pure = sum(
+                    all(value == "P" for value in global_features[name][feature])
+                    for _unique, _pure, feature in rows
+                )
+                results[name] = {
+                    "local_unique": sum(unique for unique, _pure, _feature in rows),
+                    "local_pure": sum(pure for _unique, pure, _feature in rows),
+                    "global_pure": global_pure,
+                    "forced_types": len({feature for _u, _p, feature in rows}),
+                }
+            print(f"TRANSITION-CONTROLS results={results}")
+            for name, result in results.items():
+                print(f"TRANSITION-CONTROL name={name} result={result}")
+            print(f"TRANSITION-INCIDENCE-FAILURES rows={strongest_failures}")
         local_signature_collisions = sum(
             1 for rows in by_move.values()
             for count in Counter(signature for _reply, _value, signature in rows).values()

@@ -114,8 +114,12 @@ the game-semantic residue with C74's explicit pencil.
   **Reopened mixed-feature hit:** full Rédei directions plus residual `(live, conflict-edge count)`
   is `192/192` with 90 forced types. In proof-relative form only the five new reply directions
   `D_y` and `ΔE` are needed; `(D_y,ΔE mod 3)` is locally exact `192/192` once S5 context is fixed.
-  No linear mod-3 formula in simple collision counts fits, so the new lemma target is the exact
-  incidence decomposition `ΔE=-R_y+A_y`, not another static dictionary.
+  No linear mod-3 formula in simple collision counts fits. The decomposition `ΔE=-R_y+A_y`
+  yields a field-label-free replacement: reply-pencil load residues plus labelled old-secant
+  incidence select `191/192`, and one multiplicative quotient-set cardinality `kappa(y)` closes the
+  sole twin. With the implicit S5 parallel/quotient spectrum prepended, this is locally unique and
+  globally P-pure `192/192` (q11 `24/24`). It remains a contextual separation certificate with 182
+  forced types, so the proof target is an algebraic incidence case split, not a static dictionary.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
