@@ -3216,3 +3216,17 @@ The unique template resolves to `C(1,r)=r²s=C(1,rs)`, plus one second forbidden
 displayed certificates are distinct product collisions on the same line `(1,r²s)`, so the template
 directly contradicts dmin5. What remains is the finite assignment-classification lemma showing every
 weight-four forbidden pattern has this form up to rectangle symmetry.
+
+## 2026-07-11 C77 continuation — legal-degree frontier is three equality orbits
+
+All legal degree-3/5 controls already contain two collision certificates sharing a source, hence a
+d4 line. The only patterns not closed by that immediate incidence argument are pair+disjoint
+singleton, opposite paired labels, and three singleton labels. None occurs through GF49; proving
+these three rectangle-symmetry orbits impossible gives the uniform legal-degree bound.
+
+## 2026-07-11 C77 continuation — degree orbits become three identities
+
+The pair+disjoint-singleton representative `C(1,r)=C(rs,1)` forces `C(1,s)` to the same value and
+therefore a d4 line at source 1. Opposite-pair and triple-singleton representatives never occur in a
+primary-d5 form. The remaining degree proof is precisely the three corresponding rational
+cross-multiplications.

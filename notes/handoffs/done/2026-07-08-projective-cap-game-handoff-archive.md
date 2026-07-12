@@ -2393,3 +2393,19 @@ Resolving the actual forbidden monomials gives, up to rectangle symmetry,
 two distinct collisions with the same source on line `(1,r²s)`, proving that line d4 immediately.
 All four raw control assignments are relabelings of this pattern. The remaining `F≤3` content is
 only the finite classification excluding any other weight-four assignment.
+
+## 2026-07-11 C77 continuation (Codex) — legal-degree merges reduce to three orbits
+
+Every computed legal degree-3 label is a paired label merged with an incident singleton, and every
+degree-5 label contains adjacent paired labels. In both cases two certificates share a source and
+make that candidate line d4 immediately. No control exhibits the three nonincident alternatives:
+pair+disjoint singleton, opposite paired labels, or three merged singletons. These are the three
+rectangle-symmetry equality orbits left for proving legal degree at most two.
+
+## 2026-07-11 C77 continuation (Codex) — three degree identities isolated
+
+Representatives for the nonincident merge orbits are now explicit. `C(1,r)=C(rs,1)` always forces
+`C(1,s)` to the same value, creating two collisions at source 1 and a d4 line. The opposite-pair
+equality `C(1,r)=C(r,1)` and triple-singleton equality
+`C(1,rs)=C(rs,1)=C(r,s)` never occur in any primary-d5 control. Zero implication failures through
+GF49 leave exactly these three cross-multiplications for the uniform legal-degree proof.

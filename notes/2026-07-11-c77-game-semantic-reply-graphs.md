@@ -404,6 +404,28 @@ the finite assignment-classification lemma: show from membership in the five-ele
 that any weight-four pattern must be one of these four relabelings (excluding two-pair and
 four-singleton alternatives).
 
+The legal-degree controls admit the same source-incidence reduction. Every legal degree-3 merge is
+one paired label plus an **incident** singleton: the singleton's source is one of the paired label's
+two sources, so two collisions lie on the same candidate line and make it d=4 immediately. Every
+degree-5 merge contains two adjacent paired labels (already sharing a source), plus a singleton, and
+is therefore d4 for the same reason. Across q=19,23,25,27,29,31,37,49 there is no legal merge of a
+paired label with a disjoint singleton, two opposite paired labels, or three singleton labels.
+Rectangle symmetry makes these the three remaining equality orbits. Proving that each is impossible
+under the primary-d5 hypotheses will establish legal certificate degree at most two.
+
+Choosing representatives sharpens those three cross-multiplications:
+
+```text
+pair + disjoint singleton: C(1,r)=C(rs,1)  =>  C(1,s) has the same value;
+opposite paired labels:    C(1,r)=C(r,1)   is incompatible with primary d=5;
+three singleton labels:    C(1,rs)=C(rs,1)=C(r,s) is incompatible with primary d=5.
+```
+
+The first implication turns the nominally nonincident merge into two paired labels sharing source 1,
+so line `(1,a)` is d4. It has zero implication failures across every tested primary-d5 form; the
+other two representative equalities never occur at all. Thus the legal-degree proof is now exactly
+these three rational identities/contradictions, not a search over merge patterns.
+
 ## Reproduction
 
 ```bash

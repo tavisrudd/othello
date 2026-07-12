@@ -278,6 +278,9 @@ def run_d5_normal_forms(q, details=False):
     forbidden_pattern_controls = Counter()
     forbidden_pattern_violations = []
     forbidden_assignment_controls = Counter()
+    degree_pattern_controls = Counter()
+    nonincident_equality_cases = Counter()
+    nonincident_implication_violations = []
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -317,6 +320,32 @@ def run_d5_normal_forms(q, details=False):
                 "Srs": directed_values[(r, s)],
                 "Ssr": directed_values[(s, r)],
             }
+            representative_equalities = {
+                "pair-disjoint-single": ("P1r", "St1"),
+                "opposite-pairs": ("P1r", "Pr1"),
+                "three-singletons": ("S1t", "St1", "Srs"),
+            }
+            for name, labels in representative_equalities.items():
+                values = [grouped_values[label] for label in labels]
+                if values[0] is not None and len(set(values)) == 1:
+                    nonincident_equality_cases[
+                        (name, dmin, values[0] in forbidden, len(keys))
+                    ] += 1
+                    if (name == "pair-disjoint-single"
+                            and grouped_values["P1s"] != values[0]):
+                        nonincident_implication_violations.append(
+                            (A, name, values[0], grouped_values)
+                        )
+                    if name in ("opposite-pairs", "three-singletons"):
+                        nonincident_implication_violations.append(
+                            (A, name, values[0], grouped_values)
+                        )
+                    if details:
+                        print(
+                            f"BALANCED-D5-NONINCIDENT q={q} kind={name} "
+                            f"r={r} s={s} t={t} value={values[0]} "
+                            f"forbidden={values[0] in forbidden} dmin={dmin} keys={keys}"
+                        )
             if dmin != 5 or (0, q) not in keys:
                 degrees, _certs = collision_certificate_degrees(F, A)
                 legal_degrees = [degrees[a] for a in range(1, q)
@@ -380,6 +409,18 @@ def run_d5_normal_forms(q, details=False):
                             f"forbidden={sorted(forbidden)} groups={forbidden_groups} "
                             f"values={grouped_values} d4keys={keys}"
                         )
+                legal_group_collisions = []
+                for a in range(1, q):
+                    if a in forbidden:
+                        continue
+                    names = tuple(sorted(
+                        name for name, value in grouped_values.items() if value == a
+                    ))
+                    weight = sum(2 if name.startswith("P") else 1 for name in names)
+                    if weight > 2:
+                        legal_group_collisions.append((names, weight))
+                for pattern in legal_group_collisions:
+                    degree_pattern_controls[(pattern, len(keys))] += 1
                 continue
             pencils += 1
             matches = []
@@ -445,7 +486,10 @@ def run_d5_normal_forms(q, details=False):
         f"pole-pattern-controls={dict(sorted(pole_pattern_controls.items()))} "
         f"forbidden-pattern-controls={dict(sorted(forbidden_pattern_controls.items()))} "
         f"forbidden-pattern-violations={forbidden_pattern_violations[:10]} "
-        f"forbidden-assignment-controls={dict(sorted(forbidden_assignment_controls.items()))}"
+        f"forbidden-assignment-controls={dict(sorted(forbidden_assignment_controls.items()))} "
+        f"degree-pattern-controls={dict(sorted(degree_pattern_controls.items()))} "
+        f"nonincident-equality-cases={dict(sorted(nonincident_equality_cases.items()))} "
+        f"nonincident-implication-violations={nonincident_implication_violations[:10]}"
     )
     return failures
 
