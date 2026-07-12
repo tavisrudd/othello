@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C78.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C79.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -48,6 +48,17 @@ the game-semantic residue with C74's explicit pencil.
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C79 [ACTIVE 2026-07-11]** — number-theoretic forcing architecture for the full odd-q
+  ProjectiveCap proof: test common-torus/dihedral reduction of conic involutions, character-sum or
+  polynomial-count existence of repair packets, and Frobenius/subfield descent for the
+  characteristic-5/7 exceptions. **First gates:** common-torus recursion is closed (all applicable
+  q11/q17 hard triples noncommuting); a five-ray quadratic-character core is locally exact but has
+  no extremal selector; maximum-pencil moment/character quotients either collide or become a fully
+  marked fingerprint. The positive structural model is the q17 score-9 packet: four primitive
+  split/nonsplit candidates, exactly one clean/P repair in all 28 transitions. Continue with
+  algebraic clean-packet existence plus descent, not arithmetic P/N classification. Report:
+  [`2026-07-11-c79-number-theoretic-forcing.md`](2026-07-11-c79-number-theoretic-forcing.md).
 
 - **C76 [REPORTED 2026-07-11 — invariant prong answered]** —
   frame-relative characters (polar-at-frame, frame-chord, frame×tangent cross-ratio profiles) — the
@@ -116,8 +127,8 @@ the game-semantic residue with C74's explicit pencil.
   `D_y` and `ΔE` are needed; `(D_y,ΔE mod 3)` is locally exact `192/192` once S5 context is fixed.
   No linear mod-3 formula in simple collision counts fits. The decomposition `ΔE=-R_y+A_y`
   yields a field-label-free replacement: reply-pencil load residues plus labelled old-secant
-  incidence select `191/192`, and one multiplicative quotient-set cardinality `kappa(y)` closes the
-  sole twin. With the implicit S5 parallel/quotient spectrum prepended, this is locally unique and
+  incidence select `191/192`, and the Boolean `Q3(y)` that some direction quotient occurs three
+  times closes the sole twin. With the implicit S5 parallel/quotient spectrum prepended, this is locally unique and
   globally P-pure `192/192` (q11 `24/24`). It remains a contextual separation certificate with 182
   forced types, so the proof target is an algebraic incidence case split, not a static dictionary.
   The exact leaf scope is now closed through q19: every q13 balanced-root orbit has minimum winning

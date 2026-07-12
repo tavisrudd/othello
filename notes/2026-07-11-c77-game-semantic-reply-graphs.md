@@ -702,17 +702,18 @@ record which of the ten labelled S5 secants (if any) is parallel to it; also rec
 histogram modulo 3 of the surviving loads on the reply pencil.  At q17 the load histogram alone
 selects `48/192` forced replies locally, adding `(R_y,A_y) mod 3` reaches `120/192`, and adding the
 old-secant incidence reaches `191/192`.  The sole collision has no old-direction hits on either
-candidate.  It is separated by the integer
+candidate.  The original separator was quotient-set size 12 (P) versus 13 (N), but the exact
+load-bearing relation is smaller:
 
 ```text
-kappa(y) = number of distinct d_i/d_j,
-           d_i,d_j nonzero finite directions from y to S5, d_i != d_j,
+Q3(y) = some nonzero quotient d_i/d_j occurs on at least three ordered ray pairs.
 ```
 
-which is 12 on the P reply and 13 on its N twin.  The resulting reply signature
-`(load residues, old-secant incidence, kappa)` is locally unique on every forced obligation:
-`24/24` at q11 and `192/192` at q17.  It uses only equality, multiplicity, and quotient-set
-cardinality, so it contains no canonical field labels.
+`Q3` is true on the P reply and false on its N twin.  Equivalently, three ordered pairs satisfy the
+same determinant cross-product identity.  The resulting reply signature
+`(load residues, old-secant incidence, Q3)` is locally unique on every forced obligation: `24/24`
+at q11 and `192/192` at q17.  It uses only equality and multiplicity, so it contains no canonical
+field labels.
 
 For a context-free audit, prepend the S5 data already present in a proof: its labelled parallel
 classes and the multiplicity histogram of its nonzero finite secant-direction quotient set.  This

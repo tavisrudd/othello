@@ -2502,8 +2502,9 @@ Expanded the transition audit from forced rows to every legal candidate reply. A
 histogram of reply-pencil loads selects 48/192 forced replies, `(R,A) mod 3` plus that histogram
 selects 120/192, and labelled incidence between the five reply rays and ten old S5 secants selects
 191/192. The sole P/N twin has no old-direction hits on either side. Its five-direction
-multiplicative quotient-set sizes are 12 (P) and 13 (N), closing the last collision. Thus
-`(load residues, old-secant incidence, quotient-set size)` is locally unique `192/192`; prepending
+multiplicative quotient-set sizes are 12 (P) and 13 (N). More minimally, some quotient occurs on
+three ordered ray pairs only for the P candidate. Thus `(load residues, old-secant incidence,
+triple-quotient Boolean)` is locally unique `192/192`; prepending
 only the implicit S5 parallel classes and quotient-multiplicity spectrum makes it globally P-pure
 `192/192`. The q11 audit remains `24/24` (there the empty post-reply load pattern already selects).
 The construction is exact and field-label-free but has 182 forced contextual types, so it is a
@@ -2517,3 +2518,22 @@ exactly 2. Hence forced replies track the depleted q11/q17 orders in the availab
 stabilizer audit rules out the obvious explanation: all minimum-degree q11/q13/q17 S5 states have
 trivial grid stabilizer, and q13 degrees are not uniformly even. A single targeted q23 root did not
 finish within three minutes and was stopped, so no q23 leaf claim is made.
+
+## 2026-07-11 C79 (Codex) — number-theoretic forcing first pass
+
+Broadened from C77 signatures to the full odd-q proof architecture. The common-torus recursion gate
+is decisively negative: all applicable q11/q17 hard involution triples have noncommuting rotations.
+A coordinate-invariant quadratic ray core—load residues, zero determinant count, half absolute
+character bias, a triple quotient-collision Boolean, and five-ray Vandermonde character—is locally
+exact `192/192` with 102 q17 forced types, but no extremal score selects more than `112/192`.
+Maximum-pencil Rédei coefficient characters, weighted Jacobi moments, and cyclotomic orders also
+collide at q17; restoring every endpoint/selected/burned mark gives 252 types for 252 rows, the
+fingerprint endpoint. Arithmetic center classification is therefore closed.
+
+The positive model is structural packet forcing. Every q17 score-9 transition has four candidate
+repairs whose involution product generates a maximal split/nonsplit torus (order 16 or 18), and
+exactly one is clean (empty conic, defect xor zero, zone Grundy zero), hence P. This primitive-clean
+packet is only partial at scores 7/8. At q13, whenever an order `q-1`, `q`, or `q+1` full-cyclic
+candidate exists, every such candidate is clean/P, but the packet does not exist on all transitions.
+The final-proof target is now an arithmetic strategy matching: bounded algebraic repair packet,
+number-theoretic nonemptiness, structural P/descent lemma, then finite small-q and subfield bases.

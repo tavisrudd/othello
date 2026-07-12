@@ -712,7 +712,7 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   directions `D_y` plus residual conflict-edge change `ΔE` separate every forced q11/q17 reply;
   at fixed S5 even `ΔE mod 3` suffices. The identity `ΔE=-R_y+A_y` now yields an exact
   field-label-free form: reply-pencil load residues plus old-secant incidence miss one q17 twin,
-  and the multiplicative quotient-set size `kappa(y)` separates it. With the implicit S5
+  and the Boolean triple-quotient collision `Q3(y)` separates it. With the implicit S5
   parallel/quotient spectrum this is locally unique and globally P-pure `192/192` (q11 `24/24`).
   It is still contextual (182 forced types), so the proof-shaped residue is an algebraic incidence
   case split rather than a static selector table.
@@ -720,6 +720,12 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   winning degree 2 and all 85 q19 orbits have minimum 43–55, so leaves occur only at depleted
   q11/q17. For any P root minimum degree is automatically at least one; forced replies are exactly
   equality cases in that bound.
+  C79 broadens the proof search to number-theoretic forcing. Global common-torus closure is refuted
+  by noncommuting q11/q17 repair triples, and character/Jacobi pencil classifiers still hit the
+  fingerprint wall. The live arithmetic target is instead a counted algebraic packet with a
+  structural P certificate: at q17 score 9, every transition has four primitive split/nonsplit
+  candidates and exactly one clean/P repair. Generalize that packet-plus-descent shape; use
+  Frobenius/subfield descent for the characteristic-5/7 branches.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

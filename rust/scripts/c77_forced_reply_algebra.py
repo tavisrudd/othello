@@ -100,11 +100,89 @@ def relative_direction_relations(q, s5, reply):
     load_profile = tuple(sorted(indexed_loads))
     reply_directions = [direction(reply, point, q) for point in s5]
     finite_nonzero = [value for value in reply_directions if value not in (0, q)]
-    quotient_size = len({
+    quotient_counts = Counter(
         left * pow(right, -1, q) % q
         for left in finite_nonzero for right in finite_nonzero if left != right
-    })
-    return load_profile, indexed_loads, incidences, quotient_size
+    )
+    quotient_size = len(quotient_counts)
+    quotient_max = max(quotient_counts.values(), default=0)
+    return load_profile, indexed_loads, incidences, quotient_size, quotient_max
+
+
+def projective_character_tag(value, q):
+    return "inf" if value == q else quadratic_character(value, q)
+
+
+def arithmetic_ray_features(q, s5, reply):
+    """Small coordinate-invariant character/energy summaries of the five reply rays."""
+    rays = tuple(((point[0] - reply[0]) % q, (point[1] - reply[1]) % q) for point in s5)
+    secants = tuple(
+        ((right[0] - left[0]) % q, (right[1] - left[1]) % q)
+        for left, right in combinations(s5, 2)
+    )
+
+    vandermonde = 1
+    for left, right in combinations(rays, 2):
+        determinant = det2(left, right, q)
+        assert determinant
+        vandermonde = vandermonde * determinant % q
+    vandermonde_character = quadratic_character(vandermonde, q)
+
+    ray_cross_ratios = Counter()
+    for a, b, c, d in combinations(rays, 4):
+        for x, y, z, w in ((a, b, c, d), (a, c, b, d), (a, d, b, c)):
+            ray_cross_ratios[projective_character_tag(
+                cross_ratio_projective(x, y, z, w, q), q
+            )] += 1
+    ray_cross_ratio_profile = tuple(sorted(ray_cross_ratios.items(), key=repr))
+
+    determinant_characters = Counter(
+        quadratic_character(det2(ray, secant, q), q)
+        for ray in rays for secant in secants
+    )
+    ray_secant_determinants = (
+        determinant_characters[0],
+        *sorted((determinant_characters[-1], determinant_characters[1])),
+    )
+    triangle = (
+        (s5[1][0] - s5[0][0]) % q, (s5[1][1] - s5[0][1]) % q,
+    ), (
+        (s5[2][0] - s5[0][0]) % q, (s5[2][1] - s5[0][1]) % q,
+    )
+    orientation_character = quadratic_character(det2(*triangle, q), q)
+    oriented_determinant_sum = orientation_character * (
+        determinant_characters[1] - determinant_characters[-1]
+    )
+
+    row_vandermonde = 1
+    col_vandermonde = 1
+    for left, right in combinations(s5, 2):
+        row_vandermonde = row_vandermonde * (right[0] - left[0]) % q
+        col_vandermonde = col_vandermonde * (right[1] - left[1]) % q
+    base_vandermonde_characters = (
+        quadratic_character(row_vandermonde, q),
+        quadratic_character(col_vandermonde, q),
+    )
+    relative_vandermonde = tuple(sorted(
+        vandermonde_character * character
+        for character in base_vandermonde_characters
+    ))
+
+    mixed_cross_ratios = Counter()
+    for ray_a, ray_b in combinations(rays, 2):
+        for secant_a, secant_b in combinations(secants, 2):
+            mixed_cross_ratios[projective_character_tag(
+                cross_ratio_projective(ray_a, ray_b, secant_a, secant_b, q), q
+            )] += 1
+    mixed_cross_ratio_profile = tuple(sorted(mixed_cross_ratios.items(), key=repr))
+    return (
+        vandermonde_character,
+        ray_cross_ratio_profile,
+        ray_secant_determinants,
+        mixed_cross_ratio_profile,
+        oriented_determinant_sum,
+        relative_vandermonde,
+    )
 
 
 def base_parallelism_incidence(q, s5):
@@ -116,6 +194,11 @@ def base_parallelism_incidence(q, s5):
     quotient_counts = Counter(
         left * pow(right, -1, q) % q
         for left in finite_nonzero for right in finite_nonzero if left != right
+    )
+    quotient_profile = tuple(sorted(Counter(quotient_counts.values()).items()))
+    return (
+        tuple(sorted(tuple(edges) for edges in by_direction.values())),
+        len(quotient_counts), quotient_profile,
     )
 
 
@@ -148,11 +231,6 @@ def grid_stabilizer(q, points):
                 if {apply_grid_transform(q, transform, point) for point in points} == target:
                     stabilizer.add(transform)
     return tuple(stabilizer)
-    quotient_profile = tuple(sorted(Counter(quotient_counts.values()).items()))
-    return (
-        tuple(sorted(tuple(edges) for edges in by_direction.values())),
-        len(quotient_counts), quotient_profile,
-    )
 
 
 def rank_mod(rows, q):
@@ -279,6 +357,29 @@ def matinv_projective(matrix, q):
     if matrix is None:
         return None
     return (matrix[3], -matrix[1] % q, -matrix[2] % q, matrix[0])
+
+
+def projectively_equal(a, b, q):
+    if a is None or b is None:
+        return False
+    pivot = next((i for i in range(4) if a[i] or b[i]), None)
+    if pivot is None or not a[pivot] or not b[pivot]:
+        return False
+    return all(a[i] * b[pivot] % q == b[i] * a[pivot] % q for i in range(4))
+
+
+def common_torus_gate(root, move, reply, q):
+    """Necessary commuting-rotation gate for three reflections in one torus normalizer."""
+    model = conic_model(root, q)
+    center = involution(root[3], model, q)
+    x = involution(move, model, q)
+    y = involution(reply, model, q)
+    if x is None or y is None:
+        return "boundary"
+    a = compose((center, x), q)
+    b = compose((center, y), q)
+    return "commuting" if projectively_equal(matmul(a, b, q), matmul(b, a, q), q) \
+        else "noncommuting"
 
 
 def pgl_order(matrix, q):
@@ -476,6 +577,13 @@ def group_relation_signature(root, move, reply, q):
     j_commutator = word_character((commutator,), q)
     commutator_type = None if j_commutator is None else (
         j_commutator, quadratic_character(j_commutator - 4, q)
+    )
+    x_on = conic_parameter(move, model, q)
+    y_on = conic_parameter(reply, model, q)
+    return (
+        pgl_order(a, q), pgl_order(b, q), pgl_order(c, q),
+        pgl_order(commutator, q), commutator_type,
+        boundary_profile(x_on, y_on, center, x, y, frame, q),
     )
 
 
@@ -784,6 +892,7 @@ def main():
     ap.add_argument("--transition-ledger", action="store_true")
     ap.add_argument("--transition-controls", action="store_true")
     ap.add_argument("--minimum-reply-symmetry", action="store_true")
+    ap.add_argument("--torus-gate", action="store_true")
     args = ap.parse_args()
     q = args.q
     if q != 17 and not (args.all_roots or args.coarse_representatives):
@@ -886,6 +995,18 @@ def main():
     print(f"FORCED-CONIC-DONE directed={total} signatures={len(histogram)} "
           f"multiplicities={dict(sorted(Counter(histogram.values()).items()))} "
           f"mirror-counts={dict(sorted(mirror_histogram.items()))}")
+
+    if args.torus_gate:
+        forced_gate = Counter()
+        for root, forced_pairs in records:
+            for move, reply in forced_pairs:
+                forced_gate[common_torus_gate(root, move, reply, q)] += 1
+        control_gate = Counter()
+        if args.controls:
+            for root_index, move, reply, value, _live in parse_pairs(output):
+                control_gate[(common_torus_gate(roots[root_index], move, reply, q), value)] += 1
+        print(f"TORUS-GATE forced={dict(sorted(forced_gate.items()))} "
+              f"controls={dict(sorted(control_gate.items()))}")
 
     if args.transition_ledger:
         ledger_hist = Counter()
@@ -996,12 +1117,33 @@ def main():
                 "ra", "delta", "loads", "ra-loads", "delta-loads", "full",
                 "loads-hit-profile", "loads-indexed-hits", "loads-incidence",
                 "loads-incidence-quotients",
+                "loads-incidence-quotient-max",
                 "context-loads-incidence-quotients",
+                "context-loads-incidence-quotient-max",
+                "loads-vandermonde", "loads-ray-cross-ratios",
+                "loads-ray-secant-characters", "loads-mixed-cross-ratios",
+                "loads-arithmetic-rays", "indexed-hits-arithmetic-rays",
+                "loads-ray-secant-vandermonde", "loads-ray-secant-ray-cross-ratios",
+                "loads-ray-secant-quotient-max", "loads-ray-secant-hit-profile",
+                "loads-ray-secant-indexed-hits",
+                "loads-ray-secant-quotient-vandermonde",
+                "loads-ray-secant-quotient-ray-cross-ratios",
+                "arithmetic-core", "arithmetic-core-bool",
+                "arithmetic-core-mod3", "arithmetic-core-mod4",
+                "arithmetic-core-mod5", "arithmetic-core-mod6",
+                "arithmetic-core-bin2", "arithmetic-core-bin3",
+                "arithmetic-core-bin4", "arithmetic-core-bin5",
+                "arithmetic-core-bin6",
+                "arithmetic-oriented-core", "arithmetic-oriented-core-mod3",
+                "arithmetic-oriented-core-mod5", "arithmetic-relative-vandermonde-core",
                 "delta-hit-profile", "delta-indexed-hits", "delta-incidence",
             )
             feature_rows = {name: [] for name in feature_names}
             global_features = {name: {} for name in feature_names}
             strongest_failures = []
+            arithmetic_component_hist = Counter()
+            arithmetic_mod5_failures = []
+            arithmetic_extrema = Counter()
             for root, forced_pairs in records:
                 root_index = root_indices[root]
                 for move, forced_reply in forced_pairs:
@@ -1012,8 +1154,12 @@ def main():
                         removed, added, delta, loads = transition_features(
                             q, root + (move,), reply
                         )
-                        hit_profile, indexed_hits, incidence, quotient_size = \
+                        hit_profile, indexed_hits, incidence, quotient_size, quotient_max = \
                             relative_direction_relations(q, root + (move,), reply)
+                        arithmetic_rays = arithmetic_ray_features(q, root + (move,), reply)
+                        determinant_zeros, determinant_low, determinant_high = arithmetic_rays[2]
+                        determinant_bias = determinant_high - determinant_low
+                        quotient_triple = quotient_max >= 3
                         features = {
                             "ra": (removed, added),
                             "delta": delta,
@@ -1027,8 +1173,101 @@ def main():
                             "loads-incidence-quotients": (
                                 loads, incidence, quotient_size,
                             ),
+                            "loads-incidence-quotient-max": (
+                                loads, incidence, quotient_max,
+                            ),
                             "context-loads-incidence-quotients": (
                                 context_parallelism, loads, incidence, quotient_size,
+                            ),
+                            "context-loads-incidence-quotient-max": (
+                                context_parallelism, loads, incidence, quotient_max,
+                            ),
+                            "loads-vandermonde": (loads, arithmetic_rays[0]),
+                            "loads-ray-cross-ratios": (loads, arithmetic_rays[1]),
+                            "loads-ray-secant-characters": (loads, arithmetic_rays[2]),
+                            "loads-mixed-cross-ratios": (loads, arithmetic_rays[3]),
+                            "loads-arithmetic-rays": (loads, arithmetic_rays),
+                            "indexed-hits-arithmetic-rays": (indexed_hits, arithmetic_rays),
+                            "loads-ray-secant-vandermonde": (
+                                loads, arithmetic_rays[2], arithmetic_rays[0],
+                            ),
+                            "loads-ray-secant-ray-cross-ratios": (
+                                loads, arithmetic_rays[2], arithmetic_rays[1],
+                            ),
+                            "loads-ray-secant-quotient-max": (
+                                loads, arithmetic_rays[2], quotient_max,
+                            ),
+                            "loads-ray-secant-hit-profile": (
+                                loads, arithmetic_rays[2], hit_profile,
+                            ),
+                            "loads-ray-secant-indexed-hits": (
+                                loads, arithmetic_rays[2], indexed_hits,
+                            ),
+                            "loads-ray-secant-quotient-vandermonde": (
+                                loads, arithmetic_rays[2], quotient_max, arithmetic_rays[0],
+                            ),
+                            "loads-ray-secant-quotient-ray-cross-ratios": (
+                                loads, arithmetic_rays[2], quotient_max, arithmetic_rays[1],
+                            ),
+                            "arithmetic-core": (
+                                loads, determinant_zeros, determinant_bias,
+                                quotient_max, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-bool": (
+                                loads, determinant_zeros, determinant_bias,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-mod3": (
+                                loads, determinant_zeros, determinant_bias % 3,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-mod4": (
+                                loads, determinant_zeros, determinant_bias % 4,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-mod5": (
+                                loads, determinant_zeros, determinant_bias % 5,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-mod6": (
+                                loads, determinant_zeros, determinant_bias % 6,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-bin2": (
+                                loads, determinant_zeros, determinant_bias // 2,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-bin3": (
+                                loads, determinant_zeros, determinant_bias // 3,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-bin4": (
+                                loads, determinant_zeros, determinant_bias // 4,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-bin5": (
+                                loads, determinant_zeros, determinant_bias // 5,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-core-bin6": (
+                                loads, determinant_zeros, determinant_bias // 6,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-oriented-core": (
+                                loads, determinant_zeros, arithmetic_rays[4],
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-oriented-core-mod3": (
+                                loads, determinant_zeros, arithmetic_rays[4] % 3,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-oriented-core-mod5": (
+                                loads, determinant_zeros, arithmetic_rays[4] % 5,
+                                quotient_triple, arithmetic_rays[0],
+                            ),
+                            "arithmetic-relative-vandermonde-core": (
+                                loads, determinant_zeros, determinant_bias // 2,
+                                quotient_triple, arithmetic_rays[5],
                             ),
                             "delta-hit-profile": (delta, hit_profile),
                             "delta-indexed-hits": (delta, indexed_hits),
@@ -1040,6 +1279,42 @@ def main():
                     forced_features = next(
                         features for reply, _value, features in computed if reply == forced_reply
                     )
+                    arithmetic_core = forced_features["arithmetic-core-bool"]
+                    arithmetic_component_hist[(
+                        arithmetic_core[1], arithmetic_core[2],
+                        arithmetic_core[3], arithmetic_core[4],
+                    )] += 1
+                    for scope in ("all", "same-loads"):
+                        scoped = computed if scope == "all" else [
+                            row for row in computed
+                            if row[2]["arithmetic-core-bool"][0] == arithmetic_core[0]
+                        ]
+                        metric_rows = []
+                        for candidate, _value, features in scoped:
+                            core = features["arithmetic-core-bool"]
+                            z, bias = core[1], core[2]
+                            oriented = features["arithmetic-oriented-core"][2]
+                            metrics = {
+                                "z": z,
+                                "bias": bias,
+                                "oriented": oriented,
+                                "z-bias": (z, bias),
+                                "bias-z": (bias, z),
+                            }
+                            for weight in range(-10, 11):
+                                metrics[f"bias+{weight}z"] = bias + weight * z
+                                metrics[f"oriented+{weight}z"] = oriented + weight * z
+                            metric_rows.append((candidate, metrics))
+                        for name in metric_rows[0][1]:
+                            target_value = next(
+                                metrics[name] for candidate, metrics in metric_rows
+                                if candidate == forced_reply
+                            )
+                            values = [metrics[name] for _candidate, metrics in metric_rows]
+                            if target_value == min(values) and values.count(target_value) == 1:
+                                arithmetic_extrema[(scope, name, "min")] += 1
+                            if target_value == max(values) and values.count(target_value) == 1:
+                                arithmetic_extrema[(scope, name, "max")] += 1
                     for name in feature_names:
                         matches = [value for _reply, value, features in computed
                                    if features[name] == forced_features[name]]
@@ -1059,6 +1334,17 @@ def main():
                             root_index, move, forced_reply,
                             forced_features["loads-incidence"], incidence_matches,
                         ))
+                    mod5_matches = [
+                        (reply, value, features["arithmetic-core-bool"])
+                        for reply, value, features in computed
+                        if features["arithmetic-core-mod5"]
+                        == forced_features["arithmetic-core-mod5"]
+                    ]
+                    if len(mod5_matches) != 1:
+                        arithmetic_mod5_failures.append((
+                            root_index, move, forced_reply,
+                            forced_features["arithmetic-core-mod5"], mod5_matches,
+                        ))
             results = {}
             for name in feature_names:
                 rows = feature_rows[name]
@@ -1076,6 +1362,11 @@ def main():
             for name, result in results.items():
                 print(f"TRANSITION-CONTROL name={name} result={result}")
             print(f"TRANSITION-INCIDENCE-FAILURES rows={strongest_failures}")
+            print("ARITHMETIC-CORE-COMPONENTS "
+                  f"hist={dict(sorted(arithmetic_component_hist.items()))}")
+            print(f"ARITHMETIC-MOD5-FAILURES rows={arithmetic_mod5_failures}")
+            print("ARITHMETIC-EXTREMA best="
+                  f"{sorted(arithmetic_extrema.items(), key=lambda row: (-row[1], row[0]))[:20]}")
         local_signature_collisions = sum(
             1 for rows in by_move.values()
             for count in Counter(signature for _reply, _value, signature in rows).values()
