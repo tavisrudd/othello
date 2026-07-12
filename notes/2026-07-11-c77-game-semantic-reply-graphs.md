@@ -589,6 +589,15 @@ at the depleted q=11/q=17 orders, while the three sampled q=13 types have minimu
 ties the C77 obstruction back to A5's depletion phenomenon rather than revealing an independent
 balanced-root symmetry.
 
+The forced S5 states are even less compressed: 48 directed obligations give 39 full-grid S5
+orbits. The nine repetitions are explained exactly by the root stabilizers—six pairs in type 0 and
+three pairs in type 2, the two forced types with an order-two stabilizer. No S5 orbit is shared by
+distinct coarse root representatives. Coarse geometry supplies only weak enrichment, not a
+classifier: forced states have 1/2/3 repeated affine secant directions in counts 14/25/9, versus
+181/211/82 among all 510 legal S5 children of the five forced-containing roots; 20/48 forced states
+have a four-subset on a burned-direction conic, versus 160/510 controls. Hence there is no common
+forced-state orbit or exclusive elementary incidence signature visible at this layer.
+
 ## Reproduction
 
 ```bash
