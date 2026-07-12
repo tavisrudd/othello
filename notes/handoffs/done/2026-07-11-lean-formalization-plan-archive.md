@@ -385,3 +385,24 @@ that discharges the transfer interface's finite fields from it:
   warnings. `#print axioms` on the repair hypergraph definition, dual-distance cardinality lemma,
   concrete edge membership/cardinality, and nonemptiness returned exactly
   `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (q9 repair edges are zero-sum triples)
+
+- Added `dual_word_column_relation`, turning row-code dual membership into an explicit linear
+  relation among generator columns. `FiniteGeom/Repair.lean` now packages this as
+  `repair_edge_columns_dependent` and, after an arbitrary square reindexing,
+  `repair_edge_reindexed_det_eq_zero`.
+- Computed the generalized Vandermonde determinant for three finite cubic columns with the axis
+  column `e₂`. For distinct parameters its determinant vanishes exactly when their sum is zero.
+  The proof expands only the single nonzero axis cofactor and reduces the resulting 3×3
+  determinant algebraically.
+- Added the finite-coordinate parameter map `q9IndexParam`. Every actual edge of
+  `q9AxisRepairHypergraph` can now be enumerated by `Fin 3`; its parameters are distinct and sum
+  to zero (`q9AxisRepair_edge_zeroSum`). This proves the forward half of the exact affine-line
+  characterization from the code definition, rather than from a declared combinatorial family.
+- Remaining in this lane: construct a full-support dual relation from each distinct zero-sum
+  triple (the converse), transport the resulting hypergraph to `AG(2,3)`, and prove
+  `matchingNumber=3`, `transversalNumber=5`.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on the column-relation and determinant bridges, determinant criterion, and q9
+  zero-sum theorem returned exactly `[propext, Classical.choice, Quot.sound]`.

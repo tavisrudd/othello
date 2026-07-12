@@ -144,6 +144,23 @@ theorem mem_dualCode_rowCode_iff_mulVec {G : Matrix (Fin k) (Fin n) 𝔽} {y : F
   · intro h; funext i; exact h i
   · intro h i; exact congrFun h i
 
+omit [DecidableEq 𝔽] in
+/-- A dual word of a row code is a linear relation among the generator columns. -/
+theorem dual_word_column_relation {G : Matrix (Fin k) (Fin n) 𝔽} {y : Fin n → 𝔽}
+    (hy : y ∈ dualCode (rowCode G)) :
+    ∑ j, y j • G.col j = 0 := by
+  have hmul : G.mulVec y = 0 := mem_dualCode_rowCode_iff_mulVec.mp hy
+  funext i
+  simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply]
+  have hi := congrFun hmul i
+  simp only [Matrix.mulVec, dotProduct, Pi.zero_apply] at hi
+  calc
+    (∑ j, y j * G i j) = ∑ j, G i j * y j := by
+      apply Finset.sum_congr rfl
+      intro j _
+      exact mul_comm _ _
+    _ = 0 := hi
+
 /-- **Dual-distance lower bound from small-column independence.** If every set of fewer than `d`
 generator columns is linearly independent, then every nonzero dual word has weight at least `d`.
 The explicit `hdual` hypothesis is necessary under this file's convention `minDist ⊥ = 0`:

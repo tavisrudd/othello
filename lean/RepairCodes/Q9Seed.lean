@@ -159,6 +159,49 @@ theorem q9Seed_finite_columns_linearIndependent (S : Finset (Fin 10))
   rw [heq]
   exact hli
 
+/-- Four-column matrix with three finite cubic points and the axis point `e₂`. -/
+def q9CircuitMatrix (v : Fin 3 → GF9) : Matrix (Fin 4) (Fin 4) GF9 :=
+  !![1, 1, 1, 0;
+     v 0, v 1, v 2, 0;
+     (v 0) ^ 2, (v 1) ^ 2, (v 2) ^ 2, 1;
+     (v 0) ^ 3, (v 1) ^ 3, (v 2) ^ 3, 0]
+
+/-- Generalized Vandermonde determinant for three cubic points plus `e₂`. Up to the displayed
+nonzero Vandermonde factor, the determinant is the sum of the three parameters. -/
+theorem q9CircuitMatrix_det (v : Fin 3 → GF9) :
+    (q9CircuitMatrix v).det =
+      -((v 1 - v 0) * (v 2 - v 0) * (v 2 - v 1) * (v 0 + v 1 + v 2)) := by
+  let M : Matrix (Fin 3) (Fin 3) GF9 :=
+    !![1, 1, 1;
+       v 0, v 1, v 2;
+       (v 0) ^ 3, (v 1) ^ 3, (v 2) ^ 3]
+  have hr0 : Fin.succAbove (2 : Fin 4) (0 : Fin 3) = 0 := by decide
+  have hr1 : Fin.succAbove (2 : Fin 4) (1 : Fin 3) = 1 := by decide
+  have hr2 : Fin.succAbove (2 : Fin 4) (2 : Fin 3) = 3 := by decide
+  have hc0 : Fin.succAbove (3 : Fin 4) (0 : Fin 3) = 0 := by decide
+  have hc1 : Fin.succAbove (3 : Fin 4) (1 : Fin 3) = 1 := by decide
+  have hc2 : Fin.succAbove (3 : Fin 4) (2 : Fin 3) = 2 := by decide
+  have hsub : (q9CircuitMatrix v).submatrix
+      (Fin.succAbove (2 : Fin 4)) (Fin.succAbove (3 : Fin 4)) = M := by
+    ext i j
+    fin_cases i <;> fin_cases j <;>
+      simp [q9CircuitMatrix, M, hr0, hr1, hr2, hc0, hc1, hc2]
+  rw [Matrix.det_succ_column (q9CircuitMatrix v) (3 : Fin 4)]
+  rw [Fin.sum_univ_four]
+  rw [hsub]
+  norm_num [q9CircuitMatrix]
+  rw [Matrix.det_fin_three M]
+  simp [M]
+  ring
+
+theorem q9CircuitMatrix_det_eq_zero_iff {v : Fin 3 → GF9} (hv : Function.Injective v) :
+    (q9CircuitMatrix v).det = 0 ↔ v 0 + v 1 + v 2 = 0 := by
+  rw [q9CircuitMatrix_det, neg_eq_zero, mul_eq_zero]
+  have h10 : v 1 - v 0 ≠ 0 := sub_ne_zero.mpr (hv.ne (by decide))
+  have h20 : v 2 - v 0 ≠ 0 := sub_ne_zero.mpr (hv.ne (by decide))
+  have h21 : v 2 - v 1 ≠ 0 := sub_ne_zero.mpr (hv.ne (by decide))
+  simp [h10, h20, h21]
+
 /-- Every family of fewer than four columns of the q=9 seed generator is independent.  If the
 axis column is absent this is Vandermonde general position.  If it is present, projecting to the
 first two coordinates leaves at most two distinct points `(1,t)`; their coefficients vanish, and
@@ -252,6 +295,19 @@ theorem q9Seed_small_columns_linearIndependent (S : Finset (Fin 10)) (hcard : S.
 /-- Coordinate of the finite twisted-cubic point with parameter `t`. -/
 noncomputable def q9FiniteIndex (t : GF9) : Fin 10 :=
   Fin.castLE (by decide) (gf9ParamEquiv.symm t)
+
+/-- Parameter attached to a seed coordinate. Its axis value is irrelevant; repair helper sets
+never contain the axis. -/
+noncomputable def q9IndexParam (j : Fin 10) : GF9 :=
+  if h : (j : ℕ) < 9 then gf9ParamEquiv ⟨j, h⟩ else 0
+
+theorem q9IndexParam_eq {j : Fin 10} (h : (j : ℕ) < 9) :
+    q9IndexParam j = gf9ParamEquiv ⟨j, h⟩ := by
+  simp [q9IndexParam, h]
+
+@[simp]
+theorem q9IndexParam_finiteIndex (t : GF9) : q9IndexParam (q9FiniteIndex t) = t := by
+  simp [q9IndexParam, q9FiniteIndex]
 
 theorem q9FiniteIndex_injective : Function.Injective q9FiniteIndex := by
   intro s t h
@@ -438,6 +494,96 @@ theorem q9AxisRepair_edge_nonempty {R : Finset (Fin 10)} (hR : R ∈ q9AxisRepai
 
 theorem q9AxisRepairHypergraph_nonempty : q9AxisRepairHypergraph.Nonempty :=
   ⟨q9AxisHelpers, q9AxisHelpers_mem_repairHypergraph⟩
+
+/-- Every axis repair edge, in any enumeration of its three helpers, has distinct parameters
+whose sum is zero. This is the algebraic-line characterization in the direction needed for the
+upper bounds on the repair hypergraph invariants. -/
+theorem q9AxisRepair_edge_zeroSum {R : Finset (Fin 10)}
+    (hR : R ∈ q9AxisRepairHypergraph) :
+    ∃ e : Fin 3 ≃ R, Function.Injective (fun i => q9IndexParam (e i)) ∧
+      q9IndexParam (e 0) + q9IndexParam (e 1) + q9IndexParam (e 2) = 0 := by
+  classical
+  have hc : R.card = 3 := q9AxisRepair_edge_card hR
+  have hmem := (mem_repairHypergraph.mp hR).1
+  have hxR : q9Axis ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hmem hx)).1 rfl
+  let er : Fin 3 ≃ R := (R.equivFinOfCardEq hc).symm
+  have hfinite (i : Fin 3) : (((er i : R) : Fin 10) : ℕ) < 9 := by
+    have hne : ((er i : R) : Fin 10) ≠ q9Axis := fun h => hxR (h ▸ (er i).property)
+    have hne9 : ((((er i : R) : Fin 10) : ℕ)) ≠ 9 := by
+      intro h
+      apply hne
+      exact Fin.ext h
+    omega
+  let v : Fin 3 → GF9 := fun i => q9IndexParam (er i)
+  have hv : Function.Injective v := by
+    intro i j hij
+    have hp : gf9ParamEquiv
+          ⟨((er i : R) : Fin 10), hfinite i⟩ =
+        gf9ParamEquiv ⟨((er j : R) : Fin 10), hfinite j⟩ := by
+      simpa [v, q9IndexParam_eq (hfinite i), q9IndexParam_eq (hfinite j)] using hij
+    have heq := gf9ParamEquiv.injective hp
+    apply er.injective
+    apply Subtype.ext
+    exact Fin.ext (congrArg (fun z : Fin 9 => (z : ℕ)) heq)
+  let f : Fin 4 → Fin 10 := Fin.lastCases q9Axis (fun i => er i)
+  have flast : f (Fin.last 3) = q9Axis := by rfl
+  have fcast (i : Fin 3) : f i.castSucc = er i := by simp [f]
+  have hfmem (j : Fin 4) : f j ∈ insert q9Axis R := by
+    cases j using Fin.lastCases with
+    | last =>
+        rw [flast]
+        exact Finset.mem_insert_self _ _
+    | cast i =>
+        rw [fcast]
+        exact Finset.mem_insert_of_mem (er i).property
+  have hfinj : Function.Injective f := by
+    intro i j hij
+    cases i using Fin.lastCases with
+    | last =>
+      cases j using Fin.lastCases with
+      | last => rfl
+      | cast j =>
+        change f (Fin.last 3) = f j.castSucc at hij
+        rw [flast, fcast] at hij
+        have heq : q9Axis = (er j : R) := hij
+        exact (hxR (heq ▸ (er j).property)).elim
+    | cast i =>
+      cases j using Fin.lastCases with
+      | last =>
+        change f i.castSucc = f (Fin.last 3) at hij
+        rw [fcast, flast] at hij
+        have heq : (er i : R) = q9Axis := hij
+        exact (hxR (heq ▸ (er i).property)).elim
+      | cast j =>
+        apply Fin.ext
+        have heq : er i = er j := Subtype.ext (by simpa [fcast] using hij)
+        exact congrArg (fun z : Fin 3 => z.castSucc.val) (er.injective heq)
+  let es : Fin 4 ≃ ↥(insert q9Axis R) := Equiv.ofBijective
+    (fun j => ⟨f j, hfmem j⟩) ((Fintype.bijective_iff_injective_and_card _).2 ⟨by
+      intro i j hij
+      exact hfinj (congrArg Subtype.val hij), by
+      rw [Fintype.card_fin, Fintype.card_coe]
+      rw [Finset.card_insert_of_notMem hxR, hc]⟩)
+  have hes (j : Fin 4) : (es j : Fin 10) = f j := rfl
+  have hdet : Matrix.det (fun i j => q9SeedGenerator i (es j)) = 0 := by
+    apply repair_edge_reindexed_det_eq_zero (G := q9SeedGenerator) hR es
+  have hmatrix : (fun i j => q9SeedGenerator i (es j)) = q9CircuitMatrix v := by
+    ext i j
+    cases j using Fin.lastCases with
+    | last =>
+        rw [hes, flast]
+        fin_cases i <;> simp [q9SeedGenerator, q9SeedColumn, q9Axis,
+          q9CircuitMatrix]
+    | cast j =>
+        rw [hes, fcast]
+        fin_cases j <;> fin_cases i <;>
+          simp [q9SeedGenerator, q9SeedColumn, q9CircuitMatrix,
+            v, q9IndexParam_eq, hfinite]
+  rw [hmatrix] at hdet
+  have hsum := (q9CircuitMatrix_det_eq_zero_iff hv).mp hdet
+  exact ⟨er, hv, hsum⟩
 
 /-- The seed encoder (right multiplication by the generator matrix) is injective. -/
 theorem q9SeedEncoder_injective : Function.Injective q9SeedGenerator.vecMulLinear := by

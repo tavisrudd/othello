@@ -74,4 +74,47 @@ theorem repair_edge_nonempty_of_dualDist {C : Submodule 𝔽 (Fin n → 𝔽)} {
   rw [h, Finset.card_empty] at hc
   omega
 
+/-- A repair edge of a row code gives a genuinely dependent family consisting of the target
+column and its helpers. The coefficients are the witnessing dual word restricted to its support. -/
+theorem repair_edge_columns_dependent {k : ℕ} {G : Matrix (Fin k) (Fin n) 𝔽}
+    {x : Fin n} {r : ℕ} {R : Finset (Fin n)}
+    (hR : R ∈ repairHypergraph (rowCode G) x r) :
+    ¬ LinearIndependent 𝔽 (fun j : ↥(insert x R) => G.col j) := by
+  obtain ⟨-, -, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
+  have hfull := dual_word_column_relation hy
+  have hrel : ∑ j : ↥(insert x R), y j • G.col j = 0 := by
+    calc
+      (∑ j : ↥(insert x R), y j • G.col j) = ∑ j ∈ insert x R, y j • G.col j := by
+        rw [← (insert x R).sum_attach]
+        rfl
+      _ = ∑ j, y j • G.col j := by
+        apply Finset.sum_subset (Finset.subset_univ _)
+        intro j _ hj
+        have hj0 : y j = 0 := by
+          have : j ∉ wordSupport y := by simpa only [hsupp] using hj
+          simpa only [mem_wordSupport, not_not] using this
+        simp [hj0]
+      _ = 0 := hfull
+  rw [Fintype.not_linearIndependent_iff]
+  refine ⟨(fun j : ↥(insert x R) => y j), hrel, ?_⟩
+  exact ⟨⟨x, Finset.mem_insert_self x R⟩, hyx⟩
+
+/-- Reindexing the target-and-helper columns of a repair edge as a square matrix gives zero
+determinant. This is the determinant form of `repair_edge_columns_dependent`. -/
+theorem repair_edge_reindexed_det_eq_zero {k : ℕ} {G : Matrix (Fin k) (Fin n) 𝔽}
+    {x : Fin n} {r : ℕ} {R : Finset (Fin n)}
+    (hR : R ∈ repairHypergraph (rowCode G) x r) (e : Fin k ≃ ↥(insert x R)) :
+    Matrix.det (fun i j => G i (e j)) = 0 := by
+  let A : Matrix (Fin k) (Fin k) 𝔽 := fun i j => G i (e j)
+  change A.det = 0
+  apply Matrix.det_eq_zero_of_not_linearIndependent_cols
+  intro hli
+  apply repair_edge_columns_dependent hR
+  have heq : (A.col ∘ e.symm) = fun j : ↥(insert x R) => G.col j := by
+    funext j
+    ext i
+    simp [A, Matrix.col]
+  rw [← heq]
+  exact hli.comp e.symm e.symm.injective
+
 end FiniteGeom
