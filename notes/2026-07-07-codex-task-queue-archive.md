@@ -3257,3 +3257,11 @@ The unique compatible singleton-pair representative factors to two linear relati
 elimination forces the corresponding paired forbidden target. It therefore lands in the already
 proved incident d4 template. Only the finite exhaustiveness of the forbidden target/pair table
 remains for `F≤3`.
+
+## 2026-07-11 C77 correction/closure — forbidden audit complete
+
+The earlier singleton-pair statement had one characteristic-3 exception. The complete seven-orbit
+label/target audit and five-orbit singleton-pair audit prove the target table and isolate that genuine
+weight-two family; it has no paired target and cannot accept a third singleton. All other pair orbits
+are d4/impossible or enter the incident template. Hence `F≤3`, and the d5 ledger proves at least two
+balanced centers on every maximum d5 pencil. The d5 geometry is closed.

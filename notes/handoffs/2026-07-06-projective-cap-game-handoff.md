@@ -692,15 +692,11 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   rational equality case split, balanced-center P-purity, and separate small-subfield game lemmas.
   The d=5 geometry is now a twelve-certificate ledger: four exact label-pairing identities prove
   `n1≤4`; a three-orbit pole argument proves `T≥10`; three factored merge identities prove legal
-  degree `≤2`. Only forbidden weight `≤3` remains, after which the four bounds imply at least two
-  balanced centers. The `F>3` controls form one symmetry template: one paired
-  label plus two singletons are forbidden, and the pair coincides with one singleton. That template
-  now directly gives two collisions on one line and hence d4; proving it exhausts all forbidden
-  assignments is the remaining `F≤3` step. All individual equalities lie in a rigid eight-entry
-  target table. Adjacent/opposite factorization proves at most one paired target, and the compatible
-  singleton-pair representative forces the unique paired target and incident d4 template. Only
-  target/pair exhaustiveness remains. `Low4`
-  remains the uniform fallback.
+  degree `≤2`. The seven target orbits and five singleton-pair orbits are now fully factored,
+  including the genuine characteristic-3 weight-two singleton family. This proves `F≤3`, hence at
+  least two balanced centers on every maximum d5 pencil. The d5 geometric branch is closed; d4's
+  generic equality split and characteristic-5/7 exceptions remain. `Low4` remains the uniform
+  fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

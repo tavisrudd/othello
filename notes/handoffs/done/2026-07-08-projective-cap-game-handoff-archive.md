@@ -2441,3 +2441,14 @@ All computed pairs of forbidden singleton targets are rectangle relabelings of
 `(r-1)(3r+2)=0`, and substitution forces `P1r=rt`. Hence any compatible singleton pair enters the
 already-closed paired-plus-two-singletons d4 template. The remaining `F≤3` proof is only the finite
 exhaustiveness of the eight-entry target table and its compatible-pair list.
+
+## 2026-07-11 C77 correction/closure (Codex) — characteristic 3 and `F≤3` proved
+
+The prior “every singleton pair forces a paired target” wording missed one genuine characteristic-3
+family. A complete rectangle-orbit audit fixes it. Five excluded label/target representatives factor
+to distinctness or an extra primary collision, proving the eight-entry target table. Of five allowed
+singleton-pair orbits, four are d4/impossible or force the incident paired template. The fifth,
+`S1t=rt` with `St1=r`, survives exactly in characteristic 3 with forbidden weight two and no paired
+target; any third singleton enters a forbidden orbit. Together with the proved at-most-one-paired
+bound, this gives `F≤3`. The ledger identity then yields `n2≥2`, proving every maximum d5 pencil has
+at least two balanced centers. The d5 geometric branch is closed.

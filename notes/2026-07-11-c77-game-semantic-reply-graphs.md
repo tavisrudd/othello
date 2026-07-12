@@ -411,12 +411,17 @@ singleton labels:  S1t -> {rt,st}    St1 -> {r,s}
                    Srs -> {s,st}     Ssr -> {r,rt}.
 ```
 
-There are zero target-table violations over every primary-d5 normal form tested through GF(49),
-including nonmaximum controls. The classification lemma is therefore down to three algebraic
-subclaims: (i) at most one paired target can hold; (ii) with a paired target, more than one singleton
-target forces the already-proved incident coincidence/d4 template; and (iii) without a paired
-target, at most three singleton targets can hold. Directly cross-multiplying the eight entries in
-this table is the remaining route to `F<=3`.
+The rectangle stabilizer has seven orbits on the forty label/target pairs: the two displayed allowed
+orbits and five excluded orbits. Representatives of the excluded orbits factor as
+
+```text
+P1r=r   => (s-r)(s-1)=0       P1r=s  => (r-s)(1-rs)=0
+P1r=rs  => r(s-1)^2=0         S1t=r  => -r(s-1)^2=0
+S1t=rs  => (1-r)(1-s)=0.
+```
+
+Each contradicts distinctness or creates an extra primary product collision. Thus the eight-entry
+target table is proved over every odd field.
 
 The first target-table subclaim is proved. Let `E1=0` encode the representative paired target
 `P1r=rt`. For the adjacent paired target `P1s=st`, subtraction of the two cross-multiplied equations
@@ -437,8 +442,9 @@ so `E1-E3=(s-1)^2(r^2-1)`. Since `s!=1` and `r!=1`, simultaneous targets force `
 primary four-set `{+-1,+-s}` and hence d=4. Rectangle symmetry covers every pair of paired labels.
 Therefore at most one paired forbidden target can occur in a maximum d5 pencil.
 
-The singleton interaction also has one compatible orbit in the exact target table. Up to rectangle
-symmetry its representative is
+The stabilizer has five orbits on pairs of allowed singleton targets. Four close as follows. Three
+force `r=-1`, `s=-1`, or `s=1`, hence primary d4/distinctness failure. The incident-template orbit
+has representative
 
 ```text
 S1t=rt  =>  (1-r)(1+r-2rs)=0,
@@ -448,10 +454,18 @@ Srs=st  =>  (1-s)(r(1+s)-2s)=0.
 Distinctness gives `1+r=2rs` and `r(1+s)=2s`. Eliminating s yields
 `(r-1)(3r+2)=0`; the `r=1` branch is forbidden, and substituting the other relation into the paired
 equation gives `P1r=rt`. Thus the singleton pair forces the unique paired target and precisely the
-already-closed incident d4 template. Every observed pair of singleton targets is one of the four
-rectangle relabelings of this representative; no maximum form has two singleton targets. The last
-`F<=3` work is consequently the finite exhaustiveness check behind the target table: factor the
-nonlisted label-to-monomial equalities and incompatible singleton pairs to distinctness or primary d4.
+already-closed incident d4 template.
+
+The fifth singleton-pair orbit is the characteristic-3 exception `S1t=rt`, `St1=r`. Its equations
+give `3(r-1)=0`: outside characteristic 3 it contradicts distinctness, while in characteristic 3 it
+is a genuine maximum-d5 family of forbidden weight two. Substitution into the four paired-target
+equations rules all paired targets out in that family. Any third singleton forms one of the other
+four pair orbits and is therefore d4/impossible.
+
+Consequently a maximum d5 pencil has at most one paired forbidden target (weight two); with one, it
+has at most one singleton target, and without one it has at most the characteristic-3 singleton
+pair. Hence `F<=3` uniformly. Combining `T>=10`, `F<=3`, `n1<=4`, and legal degree at most two in
+`T-F=n1+2n2` gives `n2>=2`. Every maximum d5 pencil therefore has at least two balanced centers.
 
 The legal-degree controls admit the same source-incidence reduction. Every legal degree-3 merge is
 one paired label plus an **incident** singleton: the singleton's source is one of the paired label's

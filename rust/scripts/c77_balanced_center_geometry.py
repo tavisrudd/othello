@@ -12,7 +12,7 @@ This is geometry only: no grid-game P/N labels are read.  Supports prime q and
 GF(25) through c74_fan_orbits.Field.
 """
 from collections import Counter
-from itertools import combinations
+from itertools import combinations, permutations
 import argparse
 import os
 import sys
@@ -561,13 +561,93 @@ def run_d5_normal_forms(q, details=False):
     return failures
 
 
+def forbidden_target_orbits():
+    vertices = ("1", "r", "s", "t")
+    matching = frozenset((frozenset(("1", "t")), frozenset(("r", "s"))))
+    group = []
+    for image in permutations(vertices):
+        g = dict(zip(vertices, image))
+        moved = frozenset(frozenset(g[x] for x in edge) for edge in matching)
+        if moved == matching:
+            group.append(g)
+    assert len(group) == 8
+    labels = {
+        "P1r": frozenset((("1", "r"), ("s", "t"))),
+        "P1s": frozenset((("1", "s"), ("r", "t"))),
+        "Pr1": frozenset((("r", "1"), ("t", "s"))),
+        "Ps1": frozenset((("s", "1"), ("t", "r"))),
+        "S1t": frozenset((("1", "t"),)),
+        "St1": frozenset((("t", "1"),)),
+        "Srs": frozenset((("r", "s"),)),
+        "Ssr": frozenset((("s", "r"),)),
+    }
+    label_owner = {edges: name for name, edges in labels.items()}
+    targets = {
+        "r": frozenset((frozenset(("1", "r")),)),
+        "s": frozenset((frozenset(("1", "s")),)),
+        "t": matching,
+        "rt": frozenset((frozenset(("r", "t")),)),
+        "st": frozenset((frozenset(("s", "t")),)),
+    }
+    target_owner = {edges: name for name, edges in targets.items()}
+
+    def move_label(g, name):
+        edges = frozenset((g[a], g[b]) for a, b in labels[name])
+        return label_owner[edges]
+
+    def move_target(g, name):
+        edges = frozenset(frozenset(g[x] for x in edge) for edge in targets[name])
+        return target_owner[edges]
+
+    universe = {(label, target) for label in labels for target in targets}
+    orbits = []
+    while universe:
+        item = min(universe)
+        orbit = {(move_label(g, item[0]), move_target(g, item[1])) for g in group}
+        orbits.append(tuple(sorted(orbit)))
+        universe.difference_update(orbit)
+    allowed = {
+        ("P1r", "rt"), ("P1s", "st"), ("Pr1", "s"), ("Ps1", "r"),
+        ("S1t", "rt"), ("S1t", "st"), ("St1", "r"), ("St1", "s"),
+        ("Srs", "s"), ("Srs", "st"), ("Ssr", "r"), ("Ssr", "rt"),
+    }
+    print(f"BALANCED-TARGET-ORBITS count={len(orbits)}")
+    for orbit in orbits:
+        print(f"BALANCED-TARGET-ORBIT allowed={set(orbit) <= allowed} items={orbit}")
+    singleton_allowed = {item for item in allowed if item[0].startswith("S")}
+    pair_universe = {
+        frozenset((a, b)) for a, b in combinations(singleton_allowed, 2)
+        if a[0] != b[0]
+    }
+    pair_orbits = []
+    while pair_universe:
+        pair = min(pair_universe, key=lambda x: tuple(sorted(x)))
+        orbit = {
+            frozenset((
+                (move_label(g, item[0]), move_target(g, item[1]))
+                for item in pair
+            ))
+            for g in group
+        }
+        pair_orbits.append(tuple(sorted((tuple(sorted(x)) for x in orbit))))
+        pair_universe.difference_update(orbit)
+    print(f"BALANCED-SINGLETON-PAIR-ORBITS count={len(pair_orbits)}")
+    for orbit in pair_orbits:
+        print(f"BALANCED-SINGLETON-PAIR-ORBIT items={orbit}")
+    return orbits
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("q", type=int, nargs="*", default=[11, 13, 17, 19, 23, 25])
     ap.add_argument("--details", action="store_true")
     ap.add_argument("--normal-forms", action="store_true")
     ap.add_argument("--d5-normal-forms", action="store_true")
+    ap.add_argument("--target-orbits", action="store_true")
     args = ap.parse_args()
+    if args.target_orbits:
+        forbidden_target_orbits()
+        sys.exit(0)
     for q in args.q:
         if args.d5_normal_forms:
             run_d5_normal_forms(q, args.details)
