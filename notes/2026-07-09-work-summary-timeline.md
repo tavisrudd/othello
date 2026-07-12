@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-10** — four-plus working weeks, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-11** — four-plus working weeks, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
 
 The arc in one line: **Othello engine → Queens solver + open problem → CGT theory pivot →
@@ -91,8 +91,43 @@ projective-cap program**, with Lean formalization ramping alongside from week 2 
   **`min-witness(25) = 0 or ≥ 3`** (pivot bucket 14; Veronese point `(1:15:9)` frozen as
   predicted P).  Route **(L_forall)** named; the sharpest open lemma is now the **one-intruder
   pencil N-absorption statement**.
-- **q=25 census** (8 GB `s4arena`, hours-scale) running throughout: 9/28 buckets labeled, all P.
-  Prize recalibrated ~35–45% eventual, upper half riding on the q=25 unblind.
+- **q=25 census** (8 GB arena, ~6.7 h) ran through Jul 10 and **completed all 28 on-conic buckets P**:
+  `min-witness(25) = 21` (full), q=25 **non-depleted**, so the knife-edge across the two depleted
+  orders `{11,17}` rebounds fully. Prize recalibrated ~35–45% eventual, upper half riding on this
+  now-resolved q=25 unblind.
+
+## Week 5 continues — Jul 10–11 · The geometric/coding spin-off portfolio
+
+Two strands run in parallel: the odd-plane kernel's selector program converges on the amortized
+ledger, and the cap machinery starts generating standalone finite-geometry and coding-theory
+deliverables (all about geometric *legality*, none proving game value — each carries an explicit
+game-boundary caveat).
+
+- **Selector program → ledger (C74–C77, Jul 10–11):** C74/C75 proved every *pointwise* value-blind
+  reply selector impossible in the program's feature space (the feature-completeness wall); C76's
+  frame-relative characters split all twin classes (collisions 48→1) but yielded no monotone selector;
+  C77 then proved the conic ledger `6·defect − 4·intruders − 2·[xor]` root-peak-bounded at all depths
+  for every odd `q` (the apparent "debt growth" was a reservoir artifact) and isolated the open
+  `Low4` packet/absorption theorem as the sharpest target. Alongside, the A5 anchor established the
+  value-blind smallest-`Stab`-orbit child as a no-exception (ON) witness (mechanism "P ⟺ point-stab
+  involution" refuted), and a q=29 census was sized as the gated next depleted-order test.
+- **Three extension/rigidity "upgrade" theorem reports (Jul 10):** Baer-equivariant arc extension
+  (the mixed-cover dictionary, the quantitative conjugate-pair extension theorem, and the `√2·s`
+  orbit-saturation bound); completion-core rigidity (the sharp deletion theorem, exact completion
+  distance `δ` for conics / hyperovals / maximal `d`-arcs / elliptic quadrics / GQ ovoids / spreads,
+  and the NRC zero-sum ↔ cap-set bridge); continuation-graph rigidity (four-frame semilinear rigidity
+  for `q ≥ 13` via the `M_{0,5}` reduct, plus full continuation-complex reconstruction of the plane).
+- **Coding/MDS cross-field sweep (Jul 11):** the characteristic-matched Roth–Lempel NMDS-LRC family,
+  the twisted-cubic–axis `τ > ν` all-symbol repair family (uniform over `q = 3^h ≥ 9`), and the
+  bounded-repair concatenation transfer lemma with Garcia–Stichtenoth outer codes; the Cheng–Murray
+  and mixed-alphabet routes closed. Every result tagged PROVED / COMPUTED-EXACT / LITERATURE-IMPORTED /
+  REFUTED, with replay scripts + sha256 hashes moved into a tracked location for rerun discipline.
+- **Portfolio key-card deck + applied-synthesis fanout (Jul 11):** twenty neutral key cards (K1–K20)
+  abstracting the proved/computed objects into a shared input deck; a root-authored pre-fanout
+  application synthesis ranking ~20 cross-domain directions (dependency-resilience analyzer, robust
+  experimental design, repair-code compiler, canonical-reconstruction engine, proof-carrying
+  finite-search platform); then a three-agent key-card fanout kept separate so the independent views
+  stay comparable.
 
 ---
 
