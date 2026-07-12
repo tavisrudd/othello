@@ -2462,3 +2462,12 @@ only at characteristic-5 `x=±2` or characteristic-7 `x∈{±2,±3}`. The except
 violations through GF343. Thus every d4 maximum pencil outside those explicit prime-subfield
 families has a balanced center. Together with the closed d5 ledger, generic balanced-center
 existence geometry is proved; P-purity and the two exceptional game branches remain.
+
+## 2026-07-11 C77 continuation (Codex) — affine P-purity mirror closed-negative
+
+Enumerated every independent affine row/column involution and coordinate-swapped variant at q11.
+None of the 32 distinct balanced roots has even the necessary root-safe mirror conditions: root
+stability, no fixed legal move, and legal initial response pair for every break. The weaker
+fixed-point-free test admitted eight exact N roots because their proposed pairs were illegal. Thus a
+fixed affine pairing cannot prove balanced-center P-purity; the surviving routes are adaptive or
+non-affine reply closure and residual-game decomposition.

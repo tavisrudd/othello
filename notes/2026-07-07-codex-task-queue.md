@@ -90,6 +90,9 @@ the game-semantic residue with C74's explicit pencil.
   characteristic-3 weight-two family with no paired target. Thus `F≤3` and the full d5 geometric
   theorem are proved: every maximum d5 pencil has at least two balanced centers. Hence the generic
   balanced-center existence geometry is closed for both d4 and d5.
+  **P-purity probe:** simple affine mirroring is closed-negative—none of the 32 distinct balanced
+  q11 roots has even a root-safe affine involution. Continue with adaptive/non-affine reply closure
+  or decomposition, not a fixed affine pairing.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:

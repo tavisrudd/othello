@@ -519,6 +519,19 @@ denominator equation factors as `(r+1)(s-1)^2=0`; hence `r=-1` and the primary f
 so `2(r+s-rs-1)=0`, equivalently `(r-1)(s-1)=0`, contradicting distinctness in odd characteristic.
 Thus legal certificate degree is at most two over every odd field.
 
+### P-purity: simple affine mirror route is closed
+
+The first full-game mechanism test is negative at the mandatory q=11 base. Independent affine
+row/column maps and their coordinate-swapped variants preserve the grid-cap game. The durable probe
+enumerates every involution in this group and asks for the necessary conditions of a simple mirror
+strategy: stabilize the S4 root, have no fixed legal move, and make every initial pair
+`root+x+g(x)` legal. None of the 32 distinct q=11 balanced roots has such a root-safe involution.
+The weaker fixed-point-free test did produce eight N-root false positives because some proposed
+response pairs were themselves illegal; this is why root-pair legality is load-bearing. Root safety
+would still not alone prove a full-depth strategy, but its universal failure already rules out the
+entire simple affine-mirror route. Balanced-center P-purity must use a non-affine/adaptive reply
+closure or a decomposition argument.
+
 ## Reproduction
 
 ```bash
@@ -529,6 +542,7 @@ python3 scripts/c77_pencil_value_probe.py 11 13 17 19
 python3 scripts/c77_balanced_center_geometry.py 11 13 17 19 23 25 29 31
 python3 scripts/c77_balanced_center_geometry.py --normal-forms 7 9 11 25 27 49 121 125 343
 python3 scripts/c77_balanced_center_geometry.py --d5-normal-forms 19 25 27 31 49
+python3 scripts/c77_balanced_mirror_probe.py 11
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3

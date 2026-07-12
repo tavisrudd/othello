@@ -698,6 +698,8 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   including the genuine characteristic-3 weight-two singleton family. This proves `F≤3`, hence at
   least two balanced centers on every maximum d5 pencil. Generic balanced-center existence is now
   closed for d4 and d5; only the characteristic-5/7 exceptional game branches and P-purity remain.
+  Simple affine mirroring is closed-negative at q11: none of 32 balanced roots has even a root-safe
+  affine involution, so P-purity needs adaptive/non-affine reply closure or decomposition.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

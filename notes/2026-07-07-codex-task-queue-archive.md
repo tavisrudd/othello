@@ -3273,3 +3273,10 @@ d4 pencils without a balanced center are characteristic-5 `x=±2` and characteri
 `x∈{±2,±3}`. Cross/common collisions otherwise leave two singleton candidates. With d5 already
 closed, generic balanced-center existence geometry is complete; the open content is P-purity plus
 the two small-prime-subfield game branches.
+
+## 2026-07-11 C77 continuation — simple affine mirror refuted
+
+At q11, none of the 32 balanced roots admits a root-safe involution from the full affine grid
+automorphism group (including coordinate swap). Fixed-point-free alone gives N-root false positives
+whose response pairs are illegal. Balanced P-purity therefore cannot be a fixed affine mirror
+strategy; continue with adaptive/non-affine replies or a decomposition theorem.
