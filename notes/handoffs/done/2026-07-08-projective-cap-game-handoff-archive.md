@@ -2409,3 +2409,12 @@ Representatives for the nonincident merge orbits are now explicit. `C(1,r)=C(rs,
 equality `C(1,r)=C(r,1)` and triple-singleton equality
 `C(1,rs)=C(rs,1)=C(r,s)` never occur in any primary-d5 control. Zero implication failures through
 GF49 leave exactly these three cross-multiplications for the uniform legal-degree proof.
+
+## 2026-07-11 C77 continuation (Codex) — legal degree at most two proved
+
+The three representative equalities factor completely. Pair+disjoint-singleton equality is
+`(s-1)K=0`, while equality of the two source-1 paired labels is `(r-s)K=0`; distinctness forces the
+latter and hence a d4 line. Opposite paired equality gives `(r+1)(s-1)²=0`, forcing the primary
+`{±1,±s}` d4 form. Equality of the first two singleton representatives gives
+`(r-1)(s-1)=0`. Thus no nonincident merge survives and every legal certificate degree is at most
+two over every odd field. Only forbidden weight `F≤3` remains in the d5 geometric ledger.

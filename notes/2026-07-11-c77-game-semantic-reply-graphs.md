@@ -345,11 +345,10 @@ T-F = n1 + 2*n2.
 
 Hence these inequalities imply `2*n2 >= 10-3-4=3`, so `n2>=2`: at least two balanced centers.
 This is now the entire `d=5` geometric proof obligation. The quotient formula and counting
-implication and `n1<=4` are proved. The remaining uniform bounds are `F<=3` and legal degree at most
-two. Nonmaximum controls sharpen the route: every primary-d5 form hiding a d4 line violates at least
-one ledger bound. Algebraically, the open bounds say that forbidden labels carry weight at most
-three and distinct paired labels cannot merge; each forbidden equality should therefore construct
-the excluded d4 line directly.
+implication, `n1<=4`, and legal degree at most two are proved. The sole remaining uniform bound is
+`F<=3`. Nonmaximum controls sharpen the route: every primary-d5 form hiding a d4 line violates at
+least one ledger bound. Algebraically, the open bound says that forbidden labels carry weight at
+most three; each forbidden equality should therefore construct the excluded d4 line directly.
 
 For `T>=10`, the pole packet is already explicit. Up to nonzero factors, the four paired-label pole
 conditions and four singleton pole conditions are
@@ -421,10 +420,20 @@ opposite paired labels:    C(1,r)=C(r,1)   is incompatible with primary d=5;
 three singleton labels:    C(1,rs)=C(rs,1)=C(r,s) is incompatible with primary d=5.
 ```
 
-The first implication turns the nominally nonincident merge into two paired labels sharing source 1,
-so line `(1,a)` is d4. It has zero implication failures across every tested primary-d5 form; the
-other two representative equalities never occur at all. Thus the legal-degree proof is now exactly
-these three rational identities/contradictions, not a search over merge patterns.
+The three identities close algebraically. For the first, cross-multiplication gives
+
+```text
+C(1,r)=C(rs,1)  iff  (s-1)K=0,
+C(1,r)=C(1,s)   iff  (r-s)K=0,
+K=r^2s^2-3rs+r+s.
+```
+
+Distinctness (`s!=1`, `r!=s`) therefore forces the second equality, putting two collisions at source
+1 and making line `(1,a)` d4. For opposite paired labels, their numerators differ by a sign, and the
+denominator equation factors as `(r+1)(s-1)^2=0`; hence `r=-1` and the primary four-set is
+`{+-1,+-s}`, already d4. Finally `C(1,rs)=C(rs,1)` makes the two singleton denominators negatives,
+so `2(r+s-rs-1)=0`, equivalently `(r-1)(s-1)=0`, contradicting distinctness in odd characteristic.
+Thus legal certificate degree is at most two over every odd field.
 
 ## Reproduction
 

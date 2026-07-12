@@ -691,14 +691,12 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   characteristic-7 `x∈{±2,±3}` (confirmed again in GF125/GF343). The refined route is the finite
   rational equality case split, balanced-center P-purity, and separate small-subfield game lemmas.
   The d=5 geometry is now a twelve-certificate ledger: four exact label-pairing identities prove
-  `n1≤4`; a three-orbit pole argument proves `T≥10`. Only forbidden weight `≤3` and legal degree
-  `≤2` remain, and together the four bounds imply at least two balanced centers. Nonmaximum controls
-  violate exactly these ledger bounds. The `F>3` controls form one symmetry template: one paired
+  `n1≤4`; a three-orbit pole argument proves `T≥10`; three factored merge identities prove legal
+  degree `≤2`. Only forbidden weight `≤3` remains, after which the four bounds imply at least two
+  balanced centers. The `F>3` controls form one symmetry template: one paired
   label plus two singletons are forbidden, and the pair coincides with one singleton. That template
   now directly gives two collisions on one line and hence d4; proving it exhausts all forbidden
-  assignments is the remaining `F≤3` step. The degree bound is reduced to three nonincident merge
-  orbits and now to one forced-third-label implication plus two impossible representative equalities;
-  all incident merges are immediately d4. `Low4` remains the uniform fallback.
+  assignments is the remaining `F≤3` step. `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).
 - arc-depletion arithmetic probe — no arc invariant fits `{11,17}`; only a twin-lower-prime rule fits

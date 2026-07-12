@@ -3230,3 +3230,10 @@ The pair+disjoint-singleton representative `C(1,r)=C(rs,1)` forces `C(1,s)` to t
 therefore a d4 line at source 1. Opposite-pair and triple-singleton representatives never occur in a
 primary-d5 form. The remaining degree proof is precisely the three corresponding rational
 cross-multiplications.
+
+## 2026-07-11 C77 continuation — legal degree bound proved
+
+Factoring the three representative cross-multiplications closes every nonincident merge: the first
+forces a second collision at the same source, the second forces the primary `{±1,±s}` d4 form, and
+the singleton equality forces `r=1` or `s=1`. Hence legal certificate degree is uniformly at most
+two. The d5 ledger now retains only forbidden certificate weight `F≤3`.

@@ -83,15 +83,13 @@ the game-semantic residue with C74's explicit pencil.
   split and balanced-center P-purity, and handle the two subfield configurations separately. The
   `d=5` branch is reduced to a twelve-certificate ledger: balanced centers are exactly legal
   degree-two parameters. Four exact paired-label identities prove `n1≤4`, and a three-orbit pole
-  argument now proves `T≥10`. Only forbidden weight `≤3` and legal degree `≤2` remain; together they
-  imply at least two balanced centers. Each fails only on nonmaximum controls hiding a d4 line.
+  argument now proves `T≥10`, and three factored representative identities prove legal degree `≤2`.
+  Only forbidden weight `≤3` remains; together the four bounds imply at least two balanced centers.
   The `F>3` controls form one symmetry template: paired weight two plus two singletons, with the
   paired label coincident with one singleton at a forbidden parameter. Its d4 contradiction is now
   proved (two collisions share a source); only the finite forbidden-assignment classification remains.
-  Legal degree `≤2` is likewise reduced to three nonincident equality orbits: pair+disjoint singleton,
-  opposite paired labels, and three singletons; all observed higher-degree merges are incident and
-  hence directly d4. Representatives further reduce to three cross-multiplications: the first forces
-  a second paired label at the same source, while the other two are incompatible with primary d5.
+  Legal degree `≤2` is now proved: the three nonincident equality representatives factor to a forced
+  incident merge, the primary d4 form, or a distinctness contradiction.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:
@@ -111,10 +109,9 @@ the game-semantic residue with C74's explicit pencil.
   a P center (observed ≥3), implying `Ncenters≤q−8`. Geometrically this is the fourth-order packet
   of the five-spoke collision score `K=Σδ_e−t`. Sharper route: prove P-purity/existence of balanced
   `(d,5,5,6,6)` centers in the generic branch and handle the characteristic-5/7 subfield
-  configurations separately. For d=5, prove forbidden weight `≤3` and legal degree `≤2`; `n1≤4`
-  and `T≥10` are now proved and the four bounds force at least two balanced parameters. The
+  configurations separately. For d=5, prove forbidden weight `≤3`; `n1≤4`, `T≥10`, and legal degree
+  `≤2` are now proved and the four bounds force at least two balanced parameters. The
   forbidden-weight proof is reduced to the single paired-plus-two-singletons equality template.
-  Legal degree is reduced to three explicit representative cross-multiplications.
 
 **Independent / engineering:**
 
