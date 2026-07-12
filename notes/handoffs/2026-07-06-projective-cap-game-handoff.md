@@ -470,10 +470,14 @@ task list.  Current high-value items:
   Fricke coordinate determines the value only *vacuously* (near-injective on generic classes, so `𝒢`
   is just a conjugacy invariant). Near-term lever = **existence not density** (one P child avoiding
   the induction's bad set, Θ(q)-achievable iff that set is O(1) curves — read off Lean
-  `OddEscapeGameStatement`). **Novelty:** the named conic↔Schreier correspondence + the subgroup-type
+  `OddEscapeGameStatement`). **Dihedral package:** the revised submission includes the self-polar
+  `V₄≅D₄` boundary, the full tame `D₄ₙ` template/formula classification, and an adversarially
+  checked uniform quotient-by-central-involution proof; its checked Lean spine is the standalone
+  `DihedralSchreier` library. **Novelty:** the named conic↔Schreier correspondence + the subgroup-type
   value catalogue are the defensible new theorem; the orbit-template periodicity is known+known
   bookkeeping (Dickson counts ∘ trivial piece-Grundy) — see
   [novelty audit C84 addendum](../2026-07-08-codex-projective-nofil-novelty-audit.md). Notes:
+  [dihedral submission](../2026-07-12-dihedral-schreier-node-kayles-submission.md),
   [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
   [program integration](../2026-07-12-conic-involution-residual-graphs.md); scripts
   `s4_escape_probe.py`, `s4_abundance_check.py`, `pairing_witness.py`, `exact_fricke.py`,

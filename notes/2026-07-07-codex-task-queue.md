@@ -92,7 +92,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   homography fixed locus = dim 1 = Θ(q); the Fricke coordinate determines value only vacuously
   (near-injective). Near-term lever = existence not density. **Novelty:** conic↔Schreier
   correspondence + value catalogue = the defensible new theorem; orbit-template periodicity =
-  known+known bookkeeping — [novelty audit](2026-07-08-codex-projective-nofil-novelty-audit.md).
+  known+known bookkeeping. The revised submission includes the `V₄≅D₄` boundary and the full tame
+  `D₄ₙ` classification; its finite combinatorial spine builds as the standalone Lean
+  `DihedralSchreier` library — [submission](2026-07-12-dihedral-schreier-node-kayles-submission.md),
+  [novelty audit](2026-07-08-codex-projective-nofil-novelty-audit.md).
   Notes: [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
   [program integration](2026-07-12-conic-involution-residual-graphs.md); scripts
   `c80_schreier_verify.py` (field), `s4_escape_probe.py`, `s4_abundance_check.py`,

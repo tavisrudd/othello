@@ -2632,3 +2632,26 @@ was top-down (propose a signature, test collisions); the bottom-up minimal congr
 measures whether any bounded quotient exists — small/stable across q means the theorem takes an
 automaton-with-arithmetic-guards shape, blow-up closes the quotient lane in favor of
 abundance/descent. Allocated as C83, paired with C80.
+
+## 2026-07-12 C84 dihedral submission revision and Lean spine (Codex)
+
+Checkpointed the original dihedral Schreier/Node-Kayles manuscript, then reviewed and rewrote it
+for submission. The principal corrections were: restrict the four-orbit formula to G-sets with the
+projective-action stabilizer types; split the tangent case in the pair-product lemma; replace the
+false reflection-cycle/parity-rail arguments by one quotient-by-central-involution proof; state the
+prime-density input as the prime number theorem for arithmetic progressions; and make the
+conic-only game scope explicit. Full-text checks confirmed that Brown et al. prove the exact ladder,
+opposite-end-pendant-ladder, and prism nimbers used, while Tranchida shares the involution/conic
+setup but not the fixed-deleted Node-Kayles classification. An adversarial sub-agent found no
+counterexample after the uniform quotient repair and supplied the remaining `n≥2`, Burnside-
+triple, stabilizer, and converse-scope corrections.
+
+Added the already-proved self-polar `V₄≅D₄` boundary to the paper: deletion removes the fixed points
+of all three nonidentity elements and every live free orbit induces `K₄`. Created the new Lean
+library `lean/DihedralSchreier/` with no `sorry`: it checks the generic fixed-point-deleted
+involution-triple/Node-Kayles construction, the abstract live-orbit completeness argument for the
+Klein-four boundary, and the modular `Z/(2n)` involution, pair-product, deletion-congruence, and
+central-pair invariance identities. The isolated `DihedralSchreier` Lake target builds successfully.
+The projective tangent bridge, quotient-path/ladder graph isomorphism, imported Brown nimber
+evaluations, finite-field orbit counts, and analytic density theorem remain outside this first
+formalization tranche and are listed explicitly in the library README.
