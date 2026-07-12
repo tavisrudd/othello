@@ -281,6 +281,10 @@ def run_d5_normal_forms(q, details=False):
     degree_pattern_controls = Counter()
     nonincident_equality_cases = Counter()
     nonincident_implication_violations = []
+    maximum_forbidden_partitions = Counter()
+    control_forbidden_partitions = Counter()
+    maximum_forbidden_assignments = Counter()
+    forbidden_target_violations = []
     failures = []
     for r in range(1, q):
         for s in range(1, q):
@@ -320,6 +324,29 @@ def run_d5_normal_forms(q, details=False):
                 "Srs": directed_values[(r, s)],
                 "Ssr": directed_values[(s, r)],
             }
+            forbidden_names_common = {
+                r: "r",
+                s: "s",
+                t: "t",
+                F.mul(r, t): "rt",
+                F.mul(s, t): "st",
+            }
+            allowed_forbidden_targets = {
+                "P1r": {"rt"},
+                "P1s": {"st"},
+                "Pr1": {"s"},
+                "Ps1": {"r"},
+                "S1t": {"rt", "st"},
+                "St1": {"r", "s"},
+                "Srs": {"s", "st"},
+                "Ssr": {"r", "rt"},
+            }
+            for name, value in grouped_values.items():
+                if value is not None and value in forbidden:
+                    target = forbidden_names_common[value]
+                    if target not in allowed_forbidden_targets[name]:
+                        forbidden_target_violations.append((A, name, target,
+                                                            grouped_values))
             representative_equalities = {
                 "pair-disjoint-single": ("P1r", "St1"),
                 "opposite-pairs": ("P1r", "Pr1"),
@@ -378,6 +405,10 @@ def run_d5_normal_forms(q, details=False):
                     2 if name.startswith("P") else 1 for name in forbidden_groups
                 )
                 if forbidden_group_weight > 3:
+                    control_forbidden_partitions[
+                        tuple(sorted((degrees[a] for a in forbidden if degrees[a]),
+                                     reverse=True))
+                    ] += 1
                     forbidden_pattern_controls[(forbidden_groups, len(keys))] += 1
                     paired_names = [name for name in forbidden_groups
                                     if name.startswith("P")]
@@ -445,6 +476,23 @@ def run_d5_normal_forms(q, details=False):
                          legal_positive.get(1, 0),
                          legal_positive.get(2, 0))] += 1
             forbidden_weight = sum(degrees[a] for a in forbidden)
+            forbidden_names = {
+                r: "r",
+                s: "s",
+                t: "t",
+                F.mul(r, t): "rt",
+                F.mul(s, t): "st",
+            }
+            maximum_assignments = tuple(sorted(
+                (name, forbidden_names[value])
+                for name, value in grouped_values.items()
+                if value is not None and value in forbidden
+            ))
+            maximum_forbidden_assignments[maximum_assignments] += 1
+            maximum_forbidden_partitions[
+                tuple(sorted((degrees[a] for a in forbidden if degrees[a]),
+                             reverse=True))
+            ] += 1
             degree_one_sources = Counter(
                 certs[a][0][0] for a in range(1, q)
                 if a not in forbidden and degrees[a] == 1
@@ -489,7 +537,11 @@ def run_d5_normal_forms(q, details=False):
         f"forbidden-assignment-controls={dict(sorted(forbidden_assignment_controls.items()))} "
         f"degree-pattern-controls={dict(sorted(degree_pattern_controls.items()))} "
         f"nonincident-equality-cases={dict(sorted(nonincident_equality_cases.items()))} "
-        f"nonincident-implication-violations={nonincident_implication_violations[:10]}"
+        f"nonincident-implication-violations={nonincident_implication_violations[:10]} "
+        f"maximum-forbidden-partitions={dict(sorted(maximum_forbidden_partitions.items()))} "
+        f"control-forbidden-partitions={dict(sorted(control_forbidden_partitions.items()))} "
+        f"maximum-forbidden-assignments={dict(sorted(maximum_forbidden_assignments.items()))} "
+        f"forbidden-target-violations={forbidden_target_violations[:10]}"
     )
     return failures
 

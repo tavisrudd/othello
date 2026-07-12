@@ -2418,3 +2418,11 @@ latter and hence a d4 line. Opposite paired equality gives `(r+1)(s-1)²=0`, for
 `{±1,±s}` d4 form. Equality of the first two singleton representatives gives
 `(r-1)(s-1)=0`. Thus no nonincident merge survives and every legal certificate degree is at most
 two over every odd field. Only forbidden weight `F≤3` remains in the d5 geometric ledger.
+
+## 2026-07-11 C77 continuation (Codex) — forbidden target table
+
+Every paired/singleton certificate label has only one or two possible forbidden monomial targets;
+the resulting eight-entry table has zero violations over all primary-d5 forms through GF49. It
+reduces `F≤3` to three claims: at most one paired target; a paired target plus two singletons forces
+the already-closed incident d4 template; and without a paired target at most three singleton targets
+hold. These are now direct rational cross-multiplications rather than an assignment search.

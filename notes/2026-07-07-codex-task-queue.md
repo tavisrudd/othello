@@ -87,7 +87,9 @@ the game-semantic residue with C74's explicit pencil.
   Only forbidden weight `≤3` remains; together the four bounds imply at least two balanced centers.
   The `F>3` controls form one symmetry template: paired weight two plus two singletons, with the
   paired label coincident with one singleton at a forbidden parameter. Its d4 contradiction is now
-  proved (two collisions share a source); only the finite forbidden-assignment classification remains.
+  proved (two collisions share a source). The forbidden assignment classification now has an exact
+  eight-entry target table and three subclaims: at most one paired target, pair+two-singletons forces
+  the incident template, and without a pair at most three singleton targets.
   Legal degree `≤2` is now proved: the three nonincident equality representatives factor to a forced
   incident merge, the primary d4 form, or a distinctness contradiction.
   Alternatively prove
@@ -112,6 +114,7 @@ the game-semantic residue with C74's explicit pencil.
   configurations separately. For d=5, prove forbidden weight `≤3`; `n1≤4`, `T≥10`, and legal degree
   `≤2` are now proved and the four bounds force at least two balanced parameters. The
   forbidden-weight proof is reduced to the single paired-plus-two-singletons equality template.
+  Its individual forbidden equalities are captured by the eight-entry target table.
 
 **Independent / engineering:**
 

@@ -3237,3 +3237,10 @@ Factoring the three representative cross-multiplications closes every noninciden
 forces a second collision at the same source, the second forces the primary `{±1,±s}` d4 form, and
 the singleton equality forces `r=1` or `s=1`. Hence legal certificate degree is uniformly at most
 two. The d5 ledger now retains only forbidden certificate weight `F≤3`.
+
+## 2026-07-11 C77 continuation — rigid forbidden target table
+
+The forbidden monomial for each of the four paired and four singleton labels is now restricted by an
+explicit eight-entry table, with zero violations through GF49. The final `F≤3` classification splits
+into three bounded statements: at most one paired target; pair plus two singletons is the incident
+d4 template; and no-pair configurations have at most three singleton targets.

@@ -403,6 +403,21 @@ the finite assignment-classification lemma: show from membership in the five-ele
 that any weight-four pattern must be one of these four relabelings (excluding two-pair and
 four-singleton alternatives).
 
+Resolving every individual label-to-forbidden-monomial equality yields a rigid target table:
+
+```text
+paired labels:     P1r -> rt,  P1s -> st,  Pr1 -> s,  Ps1 -> r
+singleton labels:  S1t -> {rt,st}    St1 -> {r,s}
+                   Srs -> {s,st}     Ssr -> {r,rt}.
+```
+
+There are zero target-table violations over every primary-d5 normal form tested through GF(49),
+including nonmaximum controls. The classification lemma is therefore down to three algebraic
+subclaims: (i) at most one paired target can hold; (ii) with a paired target, more than one singleton
+target forces the already-proved incident coincidence/d4 template; and (iii) without a paired
+target, at most three singleton targets can hold. Directly cross-multiplying the eight entries in
+this table is the remaining route to `F<=3`.
+
 The legal-degree controls admit the same source-incidence reduction. Every legal degree-3 merge is
 one paired label plus an **incident** singleton: the singleton's source is one of the paired label's
 two sources, so two collisions lie on the same candidate line and make it d=4 immediately. Every
