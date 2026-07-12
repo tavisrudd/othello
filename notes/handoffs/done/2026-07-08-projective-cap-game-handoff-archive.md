@@ -2655,3 +2655,27 @@ central-pair invariance identities. The isolated `DihedralSchreier` Lake target 
 The projective tangent bridge, quotient-path/ladder graph isomorphism, imported Brown nimber
 evaluations, finite-field orbit counts, and analytic density theorem remain outside this first
 formalization tranche and are listed explicitly in the library README.
+
+## 2026-07-12 C84 submission referee pass and polyhedral completion (Codex + Claude)
+
+The second referee/formalizer pass corrected the manuscript's coordinate convention: the matrix
+`[[b,-a],[c,-b]]` matches `c(t)=[t²:t:1]`, not the reversed parameterization. The corrected chord
+and projection formula is now Lean-checked in `DihedralSchreier.ConicCoordinates`. The paper now
+also states the realizable Klein-four split counts, gives the explicit Möbius-ladder option
+isomorphism and Brown boundary hypotheses, replaces the informal ladder lift by a tree double-cover
+lemma, makes static Node-Kayles play and orbitwise equivariance explicit, closes the intermediate
+rotation-stabilizer and exceptional-orbit distinctness gaps, proves the reduced residue classes in
+the density argument, separates prime-power structural scope from prime-field analytic scope, and
+boxes the direct P-position congruences. The Burnside paragraph is demoted to a formal additive
+reformulation. Lean now checks pair-product order independence, a concrete enumeration that the
+three `V₄` pair products are exactly its nonidentity elements, and the bridge from
+`FixedDeleted.PairFixed` to the abstract free-orbit core; its README explicitly disclaims all
+template nimbers, field counts, and density results.
+
+Exact regular-template computation completed the polyhedral free-orbit rows. All four `S₄`
+generating-triple classes have Grundy value zero. The five `A₅` classes by pair-product orders have
+values `(2,3,5)↦1`, `(2,5,5)↦1`, `(3,3,5)↦0`, `(3,5,5)↦0`, `(5,5,5)↦0`. Component decomposition and
+automorphism-canonical memoization made the 60-vertex graphs tractable; the symmetric girth-nine
+class used the extra color-permuting `S₃`. The submission appendix records the table, method, the
+non-generalizing A₅ commuting-pair observation, and the essential caveat that free `S₄` orbits do
+not evaluate the generic escape residual after growth to full `PSL/PGL`.

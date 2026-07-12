@@ -93,8 +93,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   (near-injective). Near-term lever = existence not density. **Novelty:** conic↔Schreier
   correspondence + value catalogue = the defensible new theorem; orbit-template periodicity =
   known+known bookkeeping. The revised submission includes the `V₄≅D₄` boundary and the full tame
-  `D₄ₙ` classification; its finite combinatorial spine builds as the standalone Lean
+  `D₄ₙ` classification; exact `S₄/A₅` computation now completes the free-orbit `t₁` row across
+  all realizable tame small-subgroup types. Its reduction layer builds as the standalone Lean
   `DihedralSchreier` library — [submission](2026-07-12-dihedral-schreier-node-kayles-submission.md),
+  [polyhedral regular-template nimbers](2026-07-12-polyhedral-nk-templates.md),
   [novelty audit](2026-07-08-codex-projective-nofil-novelty-audit.md).
   Notes: [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
   [program integration](2026-07-12-conic-involution-residual-graphs.md); scripts
