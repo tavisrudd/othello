@@ -102,7 +102,15 @@ the game-semantic residue with C74's explicit pencil.
   opponent moves (48 forced directions spanning 24 S6 grid-orbits), so the missing lemma must
   explain forced replies; density/Hall and small response-template routes are not viable. Their 39
   S5 orbits have no cross-root collisions—the nine repeats are exactly order-two root-stabilizer
-  pairs—so there is no common forced-state orbit family either.
+  pairs—so there is no common forced-state orbit family either. Exact marked conic-involution
+  coordinates now separate every degree-one reply on all balanced q11/q17 root orbits and are
+  globally P-pure over the full controls (`24/24` over 888 q11 pairs; `192/192` over 145,560 q17
+  pairs), once the on-conic boundary records the balanced-center action. This is separation, not
+  selection: the q-independent equality-pattern quotient falls to `160/192` at q17 and no natural
+  overlap scalar uniquely selects more than `28/192`. Use these as coordinates for an algebraic
+  reply proof; do not continue static-signature mining. The two remaining exact relational
+  candidates are also closed-negative at q17: canonical aligned `K5` component incidence reaches
+  only `172/192` global purity, and projective order/commutator-Fricke type only `24/192`.
   Alternatively prove
   the uniform `Low4`
   packet theorem/N-absorption bound; do not spend more compute on the DROP envelope. Reports:

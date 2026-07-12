@@ -9603,10 +9603,10 @@ fn solve_checkpos(q: usize, scells: &[(usize, usize)], bx: (usize, usize)) {
 }
 
 // ---- REPLYGRAPHS mode: exact first-reply profiles for several roots, one full solve ----
-// replygraphs <q> r,c ... / r,c ... [/ ...]
+// replygraphs <q> r,c ... / r,c ... [/ ...] [--pairs]
 // Each group is one root.  Solving the empty game once makes q=17 profiling practical: CHECKPOS
 // otherwise repeats the same full solve independently for every break x.
-fn solve_replygraphs(q: usize, roots: &[Vec<(usize, usize)>]) {
+fn solve_replygraphs<const EMIT_PAIRS: bool>(q: usize, roots: &[Vec<(usize, usize)>]) {
     let b = Board::new(q);
     let mut s = Solver {
         b: &b,
@@ -9621,7 +9621,7 @@ fn solve_replygraphs(q: usize, roots: &[Vec<(usize, usize)>]) {
     let empty = [0u64; MAXW];
     let mut occ0: Vec<u16> = Vec::new();
     s.g(&mut occ0, &empty, &empty);
-    for scells in roots {
+    for (root_index, scells) in roots.iter().enumerate() {
         let mut chosen = empty;
         let mut forb = empty;
         let mut occ: Vec<u16> = Vec::new();
@@ -9675,7 +9675,19 @@ fn solve_replygraphs(q: usize, roots: &[Vec<(usize, usize)>]) {
                         let mut occ_u = occ_t.clone();
                         occ_u.push(y as u16);
                         let key = b.canon(&occ_u);
-                        if !*s.memo.get(&key).expect("full solve omitted grandchild") {
+                        let pair_is_p = !*s.memo.get(&key).expect("full solve omitted grandchild");
+                        if EMIT_PAIRS {
+                            println!(
+                                "REPLYGRAPHS-PAIR root-index={} x={},{} y={},{} value={}",
+                                root_index,
+                                x / q,
+                                x % q,
+                                y / q,
+                                y % q,
+                                if pair_is_p { "P" } else { "N" },
+                            );
+                        }
+                        if pair_is_p {
                             winning_x += 1;
                             first_winning_y = y;
                         }
@@ -11946,10 +11958,15 @@ fn main() {
         return;
     }
     if args[1] == "replygraphs" {
-        // replygraphs <q> r,c ... / r,c ... [/ ...]
+        // replygraphs <q> r,c ... / r,c ... [/ ...] [--pairs]
         let q: usize = args[2].parse().expect("q must be an integer");
         let mut roots: Vec<Vec<(usize, usize)>> = vec![Vec::new()];
+        let mut emit_pairs = false;
         for a in &args[3..] {
+            if a == "--pairs" {
+                emit_pairs = true;
+                continue;
+            }
             if a == "/" {
                 assert!(!roots.last().unwrap().is_empty(), "empty root group");
                 roots.push(Vec::new());
@@ -11959,7 +11976,11 @@ fn main() {
             roots.last_mut().unwrap().push((r.parse().unwrap(), c.parse().unwrap()));
         }
         assert!(!roots.last().unwrap().is_empty(), "empty final root group");
-        solve_replygraphs(q, &roots);
+        if emit_pairs {
+            solve_replygraphs::<true>(q, &roots);
+        } else {
+            solve_replygraphs::<false>(q, &roots);
+        }
         return;
     }
     if args[1] == "fanmoves" {

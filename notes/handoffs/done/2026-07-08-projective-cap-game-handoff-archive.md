@@ -2471,3 +2471,16 @@ stability, no fixed legal move, and legal initial response pair for every break.
 fixed-point-free test admitted eight exact N roots because their proposed pairs were illegal. Thus a
 fixed affine pairing cannot prove balanced-center P-purity; the surviving routes are adaptive or
 non-affine reply closure and residual-game decomposition.
+
+## 2026-07-11 C77 continuation (Codex) — marked involutions separate but do not select
+
+Added exact pair emission to `replygraphs` and audited every degree-one reply on all balanced q11
+and q17 root orbits. Three marked conic-involution action profiles plus a center-relative boundary
+profile separate the forced reply locally and globally from every exact control: q11 `24/24` over
+888 directed pairs, q17 `192/192` over 145,560. The boundary center term is load-bearing for four
+q17 on-conic twins. This does not produce a uniform strategy: forgetting field labels drops q17
+purity to `160/192`, and no natural overlap/extremal scalar uniquely selects more than `28/192`.
+The invariant is retained as coordinates for a future algebraic reply proof; further static
+signature mining is closed in favor of recursive closure or the balanced-packet theorem. A final
+cross-component audit confirms the closure: canonical aligned `K5` action incidence is only
+`172/192` globally P-pure at q17, and the projective-order/commutator-Fricke quotient only `24/192`.

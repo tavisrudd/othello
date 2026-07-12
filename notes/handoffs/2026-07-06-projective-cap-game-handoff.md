@@ -704,7 +704,10 @@ and in the [codex task queue](../2026-07-07-codex-task-queue.md). Recent notes, 
   triple constraints. The q11 base compresses to two winning-reply types and one universal 33-edge
   losing-pair graph. At q17 five of six coarse balanced types have degree-one moves and the forced
   replies already span 24 S6 grid-orbits, so general P-purity needs a genuinely adaptive algebraic
-  reply law, not density or a small template library.
+  reply law, not density or a small template library. Exact marked conic-involution coordinates
+  separate every forced q11/q17 reply from the full controls (`24/24`, `192/192`), but the
+  q-independent multiplicity quotient and every simple extremal reduction fail; this supplies a
+  coordinate system, not a selector, and closes further static-signature mining.
   `Low4` remains the uniform fallback.
 - C75 — value-blind reply selector impossibility (feature-completeness wall; re-weights toward the
   amortized/ledger potential).

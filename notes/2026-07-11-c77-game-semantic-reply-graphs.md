@@ -598,6 +598,46 @@ classifier: forced states have 1/2/3 repeated affine secant directions in counts
 have a four-subset on a burned-direction conic, versus 160/510 controls. Hence there is no common
 forced-state orbit or exclusive elementary incidence signature visible at this layer.
 
+### Marked conic-involution audit: exact separation, no uniform selector
+
+Write the root conic as `(X+E)(Y+D)=k`. An off-conic point `z=(r,c)` induces the secant
+involution `m_z(t)=k(t-r)/(ct-k)` on its parameter line. For balanced center `c`, opponent `x`,
+and candidate reply `y`, use the sorted exact cross-ratio action profiles of `m_c m_x`, `m_c m_y`,
+and `m_x m_y` on the five root-conic points. On the boundary where `x` or `y` is on the conic,
+also record `(x,m_c(x))`, `(y,m_c(y))`, and `CR(x,y;m_c(x),m_c(y))` relative to the marked frame.
+Omitting this center term creates four exact q17 P/N twins: the same ordered on-conic pair is P
+under one balanced center and N under another.
+
+With the center term included, the signature is exact on both depleted orders:
+
+| q | balanced root orbits | directed legal pairs | degree-one obligations | locally unique | globally P-pure |
+|---:|---:|---:|---:|---:|---:|
+| 11 | 8 | 888 | 24 | 24/24 | 24/24 |
+| 17 | 24 | 145,560 | 192 | 192/192 | 192/192 |
+
+The q17 forced rows occupy 58 exact signatures (q11: 7). This is not a conic-incidence or mirror
+artifact: the 192 q17 rows have 93 six-point conic signatures, and none of the 192 forced S6
+followers has a root-safe affine involution.
+
+The selector test is negative. Forgetting field labels and retaining only equality/multiplicity
+patterns preserves q11 purity but drops q17 global purity to `160/192`; exact field values are
+load-bearing for 32 obligations. Natural q-independent scalar reductions (multiset overlaps, triple
+overlap, union size, profile energies, and center-boundary overlaps) do not select the reply: the
+best q17 unique extremum hits only `28/192` (q11: `6/24`). Thus the marked involution signature is
+a useful coordinate system for a future algebraic reply proof, but not a context-free classifier or
+constructive strategy. Further static-signature mining is deprioritized; the surviving targets are
+recursive reply closure and the balanced-packet theorem.
+
+The two natural cross-component closures are also negative at q17. Although
+`A=m_c m_x`, `B=m_c m_y`, and `C=m_x m_y=A^{-1}B`, retaining the complete aligned `K5` edge table
+of `(A,B,C)` action values (canonically modulo the `S2 x S3` frame relabeling) is globally P-pure on
+only `172/192` forced obligations (`184/192` locally). The independent group-theoretic quotient by
+the projective orders of `A,B,C,[A,B]` plus exact commutator Fricke type is much coarser: `24/192`
+globally and `104/192` locally. Both happen to be pure at q11, so q11 alone is misleading. Thus
+aligned component incidence and commutator/fixed-point conjugacy data do not supply the missing clean
+value-opaque classifier; combining them with the full signature only recovers the existing exact
+orbit fingerprint.
+
 ### Corrected target: the balanced packet
 
 Universal P-purity is stronger than odd escape needs. The smaller sufficient target is: every
@@ -631,6 +671,10 @@ python3 scripts/c77_balanced_mirror_probe.py --root-orbits 11 13 17 19
 python3 scripts/c77_balanced_mirror_probe.py --residual-signatures 11 13 17 19
 python3 scripts/c77_intruder_reply_graph.py --solver target/gridcap-ledger
 python3 scripts/c77_intruder_reply_graph.py --balanced --solver target/gridcap-ledger
+python3 scripts/c77_forced_reply_algebra.py --q 11 --solver target/gridcap-c77-pairs \
+  --controls --all-roots --reduced-only --score-search --no-subset-search
+python3 scripts/c77_forced_reply_algebra.py --q 17 --solver target/gridcap-c77-pairs \
+  --controls --all-roots --reduced-only --score-search --no-subset-search
 rustc -O -C target-cpu=native ../notes/2026-07-06-grid-cap-solver.rs -o target/gridcap-c77
 target/gridcap-c77 fanmoves 17 0,0 1,1 2,3
 target/gridcap-c77 replygraphs 17 0,0 1,1 2,3 3,4 / 0,0 1,1 2,3 12,13
