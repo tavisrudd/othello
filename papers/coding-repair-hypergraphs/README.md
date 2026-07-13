@@ -16,8 +16,9 @@ with at most three helpers. Its matching number `nu` measures disjoint availabil
 transversal number `tau` measures adversarial local-repair tolerance.
 
 The characteristic-three point system consisting of the affine twisted cubic and its full axis
-gives a `[2q+1,4,q-1]_q` code. Every coordinate satisfies `tau > nu` for `q >= 9`. At `q=9`, the
-three coordinate types have exact rows
+gives a `[2q+1,4,q-1]_q` code. Every cubic coordinate has the exact row
+`((q-1)/2,q-2)`; the axis rows are exact in terms of the affine cap number. Every coordinate
+satisfies `tau > nu` for `q >= 9`. At `q=9`, the three coordinate types have exact rows
 
 ```text
 (nu,tau) = (4,7), (6,12), (7,13).

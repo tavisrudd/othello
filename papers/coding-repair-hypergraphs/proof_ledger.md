@@ -26,7 +26,8 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | D1/P1 | Complete radius-`r` repair hypergraph; matching `nu`; transversal `tau`; `nu<=tau`; minimal-clutter invariance; exact edge size below dual distance | `KERNEL` | `FiniteGeom.repairHypergraph`, `minimalRepairHypergraph`; `matchingNumber`, `transversalNumber`, `nu_le_tau`, `matchingNumber_minimalHyperedges`, `transversalNumber_minimalHyperedges`, `repair_edge_card_eq_of_dualDist` | Definitions use actual dual-word supports, not selected recovery groups. Matching invariance assumes every edge is nonempty, exactly as stated in the paper. |
 | T1 | The axis--twisted-cubic code is `[2q+1,4,q-1]_q` in finite characteristic three | `KERNEL` | `FiniteGeom.axisTwistedCubic_code_parameters` | The paper's projective description uses the same displayed columns as Lean. |
 | T2 | Small circuits are axis triples or a unique three-cubic/one-axis completion; axis locality is exactly two and cubic locality exactly three | `KERNEL` | `twistedCubicTriple_isFourCircuit`, `twoCubicTwoAxis_linearIndependent`; `RepairCodes.mem_cubicRepairHypergraph_iff`, `mem_axisRepairHypergraph_two_iff`, `cubicRepair_threeCubic_not_mem`, `cubicRepair_oneCubic_twoAxis_not_mem`, `cubicRepair_threeAxis_not_mem`, `cubicCoordinate_exact_locality_three`, `axisCoordinate_exact_locality_two` | The circuit-to-repair bridge is also checked in `FiniteGeom.Repair`; the cited positive and exclusion declarations cover every size-at-most-four type. |
-| T3 | Uniform formulas/bounds and `tau_i>nu_i` for every coordinate when `q>=9` | `KERNEL` | `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `cubicRepair_matchingNumber_lower`, `cubicRepair_matchingNumber_le`, `cubicRepair_transversalNumber`, `axisTwistedCubic_allSymbol_tau_gt_nu` | `Z_3(q)` is defined semantically as the maximum zero-sum-free/cap size; the strict gap itself needs no external cap-set estimate. |
+| T3 | Uniform exact rows and `tau_i>nu_i` for every coordinate when `q>=9` | `KERNEL` | `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `cubicRepair_matchingNumber`, `cubicRepair_transversalNumber`, `axisTwistedCubic_allSymbol_tau_gt_nu` | Cubic coordinates have exact row `((q-1)/2,q-2)`. Axis rows use semantic `Z_3(q)`, the maximum zero-sum-free/cap size; the strict gap needs no external cap-set estimate. |
+| T3a / C104 | Shifted-inverse completion identity and a rainbow perfect matching on every cubic helper set | `KERNEL` | `twistedCubicTripleAxisIndex_eq_cubicRepairSumColor`, `cubicRepairSumColor_injective`, `FiniteGeom.units_addColor_matchingNumber_lower`, `cubicRepair_matchingNumber_ge_half`, `cubicRepair_matchingNumber` | The finite-field construction pairs consecutive powers of a multiplicative generator. The pairing pattern is classical-adjacent one-quotient-starter mathematics; novelty is not inferred from formalization. |
 | T4 | At `q=9`, exact rows `(4,7)`, `(6,12)`, `(7,13)`, with minimal-repair counts `28`, `36+8`, `36+12` | `KERNEL` | `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` | Coordinate multiplicities are `9`, `9`, and `1`. |
 | T4a | At `q=9`, the small-circuit support inventory is `120` axis triples and `84` completed cubic quadruples | `KERNEL` | `q9_smallCircuit_support_counts` | Counts distinct supports, not coefficient-scaled dual words. |
 | T4b | Every `q=9` coordinate satisfies `7*nu<=4*tau`, with equality at every cubic coordinate | `KERNEL` | `axisTwistedCubic_q9_ratio`, `axisTwistedCubic_q9_row_invariants` | The equality statement is the cubic row `(4,7)`. |
@@ -62,7 +63,6 @@ so that they cannot be mistaken for kernel-checked mathematics.
 
 | ID | Direction | Status | Exact present boundary |
 |---|---|---|---|
-| F1 / C104 | Determine the cubic-coordinate matching number for general `q=3^h` | `OPEN-MATH` | A shifted-inverse primitive-power construction is a proof sketch, not yet a theorem. Lean currently proves uniform lower/upper bounds and equality at `q=9`; see the [strengthening handoff](../../notes/handoffs/2026-07-13-repaircodes-strengthening-plan.md). |
 | F2 | Replace semantic `Z_3(q)` in the axis rows by further exact values or sharper explicit estimates | `OPEN-MATH` | The formulas in terms of `Z_3(q)` are exact and `Z_3(9)=4` is checked; further evaluation needs cap-set mathematics or a precisely quarantined source theorem. |
 | F3 / C105 | Prove uniform non-weakenability, or weaken, the concatenation transfer gates | `OPEN-MATH` | Lean proves sufficiency only. Two counterexample mechanisms are planned, but no checked boundary theorem, fixed-code necessity theorem, or global sharpness claim appears in the paper; see the [strengthening handoff](../../notes/handoffs/2026-07-13-repaircodes-strengthening-plan.md). |
 
@@ -77,8 +77,8 @@ an impressionistic reread.
   with `FiniteGeom.Repair` and `FiniteGeom.Hypergraph`.
 - [x] Seed parameters, coordinate multiplicities, exact localities, circuit types, repair counts,
   and all three `q=9` rows agree with the corresponding Lean declarations.
-- [x] Uniform axis formulas, cubic bounds, the `q>=9` range, and the distinction between exact
-  values and bounds agree with `AxisTwistedCubicInvariants.lean`.
+- [x] Uniform axis formulas, the exact cubic row `((q-1)/2,q-2)`, the `q>=9` range, and the
+  semantic `Z_3(q)` boundary agree with `AxisTwistedCubicInvariants.lean`.
 - [x] The transfer theorem is stated only as a sufficient result under
   `r+1 < 2*d(I^perp)` and functional-dual distance at least `r+2`; no sharpness or necessity claim
   remains.

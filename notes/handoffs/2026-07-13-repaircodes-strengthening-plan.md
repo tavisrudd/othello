@@ -1,7 +1,8 @@
 # RepairCodes paper-strengthening plan — C104/C105
 
 **Date**: 2026-07-13
-**Status**: PLANNED. Neither proposed strengthening is a theorem or a paper claim yet.
+**Status**: ACTIVE. C104 is complete and reported. C105 is next and is not yet a theorem or paper
+claim.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 
@@ -13,12 +14,12 @@ theorem, axiom audit, primary-source check, and adversarial review all pass.
 
 | Task | Proposed result | Current status | Permitted wording now |
 |---|---|---|---|
-| C104 | Every cubic coordinate has `ν=(q−1)/2`, hence exact row `((q−1)/2,q−2)` | `PROOF SKETCH`; algebraic construction identified, not checked | “candidate exact formula” |
+| C104 | Every cubic coordinate has `ν=(q−1)/2`, hence exact row `((q−1)/2,q−2)` | `REPORTED 2026-07-13`; all gates pass | Exact theorem; pairing itself is classical-adjacent, application is candidate novelty |
 | C105 | Neither numerical transfer gate can be weakened uniformly | `PROOF PLAN`; counterexample mechanisms identified, not checked | “planned boundary audit” |
 
-The existing paper remains complete without either result. C104 would replace a genuine general-`q`
-matching gap. C105 would establish best-possible uniform hypotheses, not necessity for each fixed
-inner/outer pair.
+C104 closes the former general-`q` matching gap and is now part of the paper. The paper remains
+complete if C105 fails. C105 would establish best-possible uniform hypotheses, not necessity for
+each fixed inner/outer pair.
 
 ## C104 — exact cubic-coordinate matching
 
@@ -34,10 +35,10 @@ matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3)
 Together with the existing `cubicRepair_transversalNumber`, this gives the exact cubic row
 `((q−1)/2,q−2)` for all `q=3^h`. The existing upper bound supplies the `≤` direction.
 
-### Mathematical reduction to verify
+### Checked proof
 
 For helpers `s,t≠x`, set `u=(s−x)⁻¹` and `v=(t−x)⁻¹`. In characteristic three, the completing axis
-point should be
+point is
 
 ```text
 ∞                         if u+v=0,
@@ -47,19 +48,19 @@ finite (-x + (u+v)⁻¹)     otherwise.
 Thus completion colors are equal exactly when `u+v` is equal. If `g` generates `Fˣ`, pair
 `g^(2i)` with `g^(2i+1)`. These pairs partition `Fˣ`, and their sums
 `(1+g)g^(2i)` are distinct (with the `q=3` singleton case handled separately). Mapping back through
-`s=x+u⁻¹` should produce a matching of `(q−1)/2` repair edges.
+`s=x+u⁻¹` produces a matching of `(q−1)/2` repair edges. The checked declarations are
+`FiniteGeom.units_addColor_matchingNumber_lower`,
+`twistedCubicTripleAxisIndex_eq_cubicRepairSumColor`,
+`cubicRepair_matchingNumber_ge_half`, and `cubicRepair_matchingNumber`.
 
 ### Falsification and proof gates
 
-1. Check the shifted-inverse color identity symbolically and on `q=3,9,27`; computations are
-   evidence only.
-2. Check all exceptional branches explicitly: `u+v=0`, `q=3`, target translation, distinctness,
-   and the normalized infinity-axis coordinate.
-3. Prove an abstract finite-field rainbow-pair lemma or construct the repair matching directly;
-   prefer the smallest reusable API that avoids exponent-index bookkeeping in the paper theorem.
-4. Prove the lower bound in Lean and combine it with `cubicRepair_matchingNumber_le`.
-5. Run `#print axioms`, the RepairCodes forbidden-token scan, the focused build, and the aggregate
-   OOM-safe `lake build RepairCodes` gate.
+1. `[DONE]` Exhaustive evidence at `q=3,9,27` checked every target/helper pair and the full matching.
+2. `[DONE]` Lean handles `u+v=0`, `q=3`, target translation, distinctness, and infinity explicitly.
+3. `[DONE]` `FiniteGeom.ExplicitRainbowMatching` isolates the reusable combinatorial core.
+4. `[DONE]` Lean combines the explicit lower bound with `cubicRepair_matchingNumber_le`.
+5. `[DONE]` The axiom audit, forbidden-token scan, focused build, aggregate OOM-safe
+   `lake build RepairCodes`, TeX/PDF build, and paper consistency pass all succeed.
 
 ### Novelty and literature gate
 
@@ -70,17 +71,19 @@ Search primary sources and citation chains in four distinct lanes:
 - twisted-cubic/axis circuit, incidence, coset-weight, and covering-code literature;
 - LRC availability/tolerance papers computing exact matching numbers of complete repair families.
 
-Record separately whether the power-pair construction is classical (likely) and whether its use to
-compute this code-derived repair invariant was located. Formal correctness must not be used as
-novelty evidence. Allowed final novelty language remains “candidate contribution; none found” unless
-the specialist gate justifies more.
+The construction lies in the classical neighborhood of finite-field half-set and constant-quotient
+one-quotient starters (Dinitz 1984; modern quotient-starter terminology in Alfaro--Rubio-Montiel--
+Vázquez-Ávila 2017). It is not always a starter and Lean needs only partition plus distinct sums.
+No checked twisted-cubic, repair-code, or LRC source was found that uses the shifted-inverse identity
+to compute this matching invariant. Permitted posture: pairing pattern prior/adjacent; code-derived
+application candidate contribution, none found. Formal correctness is not novelty evidence.
 
-### Paper landing if all gates pass
+### Paper landing
 
-- Replace the cubic bounds by the exact formula in the abstract, contributions, theorem, and proof.
-- Strengthen the all-symbol table/formulas without changing the q9 or asymptotic constants.
-- Update the proof ledger, adversarial novelty review, TRUST manifest, paper index, README, handoff,
-  and PDF in the same commit.
+- The abstract, contributions, cubic theorem/proof, prior-work posture, proof ledger, adversarial
+  novelty review, TRUST manifest, paper index, and README now state the exact formula.
+- The q9 rows and asymptotic constants are unchanged. The PDF is rebuilt from the synchronized
+  source.
 
 ## C105 — transfer-gate boundary theorem
 

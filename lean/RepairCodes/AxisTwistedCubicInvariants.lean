@@ -1,5 +1,6 @@
 import RepairCodes.AxisTwistedCubic
 import FiniteGeom.ZeroSumTriple
+import FiniteGeom.ExplicitRainbowMatching
 
 /-!
 # Extremal invariants of twisted-cubic–axis repair hypergraphs
@@ -1049,6 +1050,135 @@ theorem cubicRepair_matchingNumber_le [CharP 𝔽 3] (x : 𝔽) :
   have h := cubicRepair_matching_card_bound x hM
   omega
 
+/-- The shifted-inverse sum that controls the axis completion of two cubic helpers. -/
+noncomputable def cubicRepairShiftedSum (x s t : 𝔽) : 𝔽 :=
+  (s - x)⁻¹ + (t - x)⁻¹
+
+/-- The injective recoding of a shifted-inverse sum as an axis coordinate. -/
+noncomputable def cubicRepairSumColor (x w : 𝔽) : 𝔽 ⊕ Unit :=
+  if w = 0 then .inr Unit.unit else .inl (-x + w⁻¹)
+
+omit [Fintype 𝔽] in
+/-- In characteristic three, the normalized completing axis point depends only on the sum of the
+two shifted inverses. -/
+theorem twistedCubicTripleAxisIndex_eq_cubicRepairSumColor [CharP 𝔽 3]
+    (x s t : 𝔽) (hs : s ≠ x) (ht : t ≠ x) :
+    twistedCubicTripleAxisIndex ![x, s, t] =
+      cubicRepairSumColor x (cubicRepairShiftedSum x s t) := by
+  have hsx : s - x ≠ 0 := sub_ne_zero.mpr hs
+  have htx : t - x ≠ 0 := sub_ne_zero.mpr ht
+  have hthree : (3 : 𝔽) = 0 := by exact CharP.cast_eq_zero 𝔽 3
+  have hsum : x + s + t = (s - x) + (t - x) := by
+    linear_combination hthree * x
+  have hinvsum : cubicRepairShiftedSum x s t =
+      ((s - x) + (t - x)) / ((s - x) * (t - x)) := by
+    simp only [cubicRepairShiftedSum]
+    field_simp
+    ring
+  have hzero : x + s + t = 0 ↔ cubicRepairShiftedSum x s t = 0 := by
+    rw [hsum, hinvsum]
+    simp [hsx, htx]
+  rw [twistedCubicTripleAxisIndex, cubicRepairSumColor]
+  by_cases hz : x + s + t = 0
+  · rw [if_pos (by simpa using hz), if_pos (hzero.mp hz)]
+  · rw [if_neg (by simpa using hz), if_neg (mt hzero.mpr hz)]
+    apply congrArg Sum.inl
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+      Matrix.head_cons, Matrix.tail_cons, Fin.isValue]
+    have hab : (s - x) + (t - x) ≠ 0 := by
+      rw [← hsum]
+      exact hz
+    rw [hsum, hinvsum]
+    rw [inv_div]
+    field_simp [hab]
+    linear_combination (x * s + x * t - x ^ 2) * hthree
+
+omit [Fintype 𝔽] in
+/-- The sum-to-axis recoding is injective. -/
+theorem cubicRepairSumColor_injective (x : 𝔽) :
+    Function.Injective (cubicRepairSumColor x) := by
+  intro u v huv
+  by_cases hu : u = 0 <;> by_cases hv : v = 0
+  · simp [hu, hv]
+  · simp [cubicRepairSumColor, hu, hv] at huv
+  · simp [cubicRepairSumColor, hu, hv] at huv
+  · simp only [cubicRepairSumColor, hu, hv, ↓reduceIte, Sum.inl.injEq] at huv
+    have hinv : u⁻¹ = v⁻¹ := add_left_cancel huv
+    exact inv_injective hinv
+
+/-- The consecutive-power rainbow matching on shifted inverses embeds into the complete
+code-derived repair hypergraph at a cubic target. -/
+theorem cubicRepair_matchingNumber_ge_half [CharP 𝔽 3] (x : 𝔽) :
+    (Fintype.card 𝔽 - 1) / 2 ≤
+      matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3) := by
+  classical
+  let helper : 𝔽ˣ → 𝔽 := fun u => x + (u : 𝔽)⁻¹
+  have hhelper : Function.Injective helper := by
+    intro u v huv
+    have hinv : (u : 𝔽)⁻¹ = (v : 𝔽)⁻¹ := add_left_cancel huv
+    exact Units.ext (inv_injective hinv)
+  let e : (𝔽ˣ ⊕ 𝔽) ↪ AxisTwistedCubicIndex 𝔽 :=
+    ⟨fun z => match z with
+      | .inl u => .inl (helper u)
+      | .inr w => .inr (cubicRepairSumColor x w),
+    by
+      intro a b hab
+      cases a with
+      | inl u =>
+        cases b with
+        | inl v => exact congrArg Sum.inl (hhelper (Sum.inl.inj hab))
+        | inr w => simp at hab
+      | inr w =>
+        cases b with
+        | inl u => simp at hab
+        | inr z =>
+          exact congrArg Sum.inr (cubicRepairSumColor_injective x (Sum.inr.inj hab))⟩
+  let color : 𝔽ˣ → 𝔽ˣ → 𝔽 := fun u v => (u : 𝔽) + (v : 𝔽)
+  let H := augmentedColorHypergraph color
+  have hsub : embedHypergraph e H ⊆ axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+    intro E hE
+    obtain ⟨E₀, hE₀, rfl⟩ := Finset.mem_image.mp hE
+    obtain ⟨u, v, huv, rfl⟩ := mem_augmentedColorHypergraph.mp hE₀
+    have hux : helper u ≠ x := by
+      intro hu
+      have : (u : 𝔽)⁻¹ = 0 := add_left_cancel (hu.trans (add_zero x).symm)
+      exact inv_ne_zero (Units.ne_zero u) this
+    have hvx : helper v ≠ x := by
+      intro hv
+      have : (v : 𝔽)⁻¹ = 0 := add_left_cancel (hv.trans (add_zero x).symm)
+      exact inv_ne_zero (Units.ne_zero v) this
+    have huv' : helper u ≠ helper v := fun h => huv (hhelper h)
+    have hshift (w : 𝔽ˣ) : (helper w - x)⁻¹ = (w : 𝔽) := by
+      simp [helper]
+    have hcolorEq : twistedCubicTripleAxisIndex ![x, helper u, helper v] =
+        cubicRepairSumColor x (color u v) := by
+      rw [twistedCubicTripleAxisIndex_eq_cubicRepairSumColor x (helper u) (helper v) hux hvx]
+      congr 2
+      simp only [cubicRepairShiftedSum, color, hshift]
+    have hmap : ({Sum.inl u, Sum.inl v, Sum.inr (color u v)} :
+        Finset (𝔽ˣ ⊕ 𝔽)).map e =
+        {(.inl (helper u) : AxisTwistedCubicIndex 𝔽), .inl (helper v),
+          .inr (twistedCubicTripleAxisIndex ![x, helper u, helper v])} := by
+      ext z
+      cases z <;> simp [e, hcolorEq]
+    rw [hmap]
+    exact mem_cubicRepairHypergraph_iff.mpr
+      ⟨helper u, helper v, hux.symm, hvx.symm, huv', rfl⟩
+  calc
+    (Fintype.card 𝔽 - 1) / 2 = Fintype.card 𝔽ˣ / 2 := by
+      simp [← Nat.card_eq_fintype_card, Nat.card_units]
+    _ ≤ matchingNumber H := units_addColor_matchingNumber_lower
+    _ = matchingNumber (embedHypergraph e H) :=
+      (matchingNumber_embedHypergraph e H).symm
+    _ ≤ matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3) :=
+      matchingNumber_mono hsub
+
+/-- Every cubic coordinate has exact disjoint availability `(q-1)/2`. -/
+theorem cubicRepair_matchingNumber [CharP 𝔽 3] (x : 𝔽) :
+    matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3) =
+      (Fintype.card 𝔽 - 1) / 2 :=
+  le_antisymm (cubicRepair_matchingNumber_le x) (cubicRepair_matchingNumber_ge_half x)
+
 /-- The paper's maximal-rainbow-matching lower bound for cubic coordinates.  The graph vertices
 are the `q-1` cubic parameters other than the target; the unique axis completion is a row-proper
 edge color, so the abstract colored-complete-graph theorem gives `⌈(q-2)/3⌉ = q/3`. -/
@@ -1232,6 +1362,8 @@ theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
   | inr y => exact axisRepair_tau_gt_nu hq y
 
 #print axioms cubicRepair_matchingNumber_le
+#print axioms cubicRepair_matchingNumber
+#print axioms units_addColor_matchingNumber_lower
 #print axioms cubicRepair_matchingNumber_lower
 #print axioms cubicRepair_transversalNumber
 #print axioms cubicRepair_tau_gt_nu

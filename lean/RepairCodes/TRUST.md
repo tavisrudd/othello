@@ -20,8 +20,10 @@ The finite q=9 and uniform characteristic-three results are machine checked end 
 3. `RepairCodes.AxisTwistedCubic` constructs the row code, proves exact locality two/three,
    proves global dual distance three, and identifies the complete bounded-radius repair
    hypergraphs from actual dual supports.
-4. `RepairCodes.AxisTwistedCubicInvariants` proves the uniform matching/transversal formulas,
-   strict all-symbol `tau > nu`, and the exact cubic repair-edge count.
+4. `FiniteGeom.ExplicitRainbowMatching` proves the consecutive-power rainbow perfect matching
+   over every finite characteristic-three field. `RepairCodes.AxisTwistedCubicInvariants` proves
+   the shifted-inverse completion identity, the exact cubic row `((q-1)/2,q-2)`, the uniform axis
+   formulas, strict all-symbol `tau > nu`, and the exact cubic repair-edge count.
 5. `RepairCodes.Q9Uniform` proves the `[19,4,8]_9` row table
    `(nu,tau)=(4,7),(6,12),(7,13)` and the exact `28`, `36+8`, and `36+12` repair counts.
 6. `RepairCodes.Q9CircuitInventory` proves the exact `120`/`84` support inventory.
