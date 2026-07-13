@@ -200,7 +200,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` discharges coefficient faithfulness internally; field trace is only an optional coordinate presentation. |
 | `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
 | `RepairCodes/Q9Seed.lean` | real inner seed: full `[10,4,6]₉`, `d(C₀⊥)=4`, and block-local transfer; concrete 3-uniform `q9AxisRepairHypergraph`; generalized four-column determinant; exact edge characterization as the distinct zero-sum triples in `𝔽₉`. |
-| `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; constructive finite proof that the `AG(2,3)`/`𝔽₉` line hypergraph has `matchingNumber=3`, `transversalNumber=5` (no `native_decide`). |
+| `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; constructive proof that the `AG(2,3)`/`𝔽₉` line hypergraph has `matchingNumber=3`, `transversalNumber=5`; `q9FiniteEmbedding` maps every such triple to an actual repair edge (no `native_decide`). |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -216,8 +216,9 @@ proves the functional outer-dual membership directly (archive companion has the 
    all radius-three dual supports through `e₂`; it is nonempty, every edge has exactly three
    helpers, and its edges are exactly the distinct zero-sum triples in `𝔽₉`. The zero-sum triple
    hypergraph is transported to `AG(2,3)` and independently evaluated as `matchingNumber=3`,
-   `transversalNumber=5`. Remaining: transport those invariants along the injective
-   `q9FiniteIndex : 𝔽₉ ↪ Fin 10`; its complement is the isolated axis coordinate. This lands the
+   `transversalNumber=5`. The injective `q9FiniteIndex : 𝔽₉ ↪ Fin 10` is packaged and maps every
+   zero-sum triple to an actual repair edge. Remaining: push a maximum matching/cover forward and
+   pull an arbitrary cover back; the embedding's complement is the isolated axis coordinate. This lands the
    first code-derived `τ>ν` instance (the abstract
    triangle remains only the generic strictness witness). The separate CompletionCore bridge from
    surviving circuits to matroid independence remains in Phase 2.

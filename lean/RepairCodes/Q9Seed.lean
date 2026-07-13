@@ -309,6 +309,11 @@ theorem q9IndexParam_eq {j : Fin 10} (h : (j : ℕ) < 9) :
 theorem q9IndexParam_finiteIndex (t : GF9) : q9IndexParam (q9FiniteIndex t) = t := by
   simp [q9IndexParam, q9FiniteIndex]
 
+theorem q9FiniteIndex_indexParam {j : Fin 10} (h : (j : ℕ) < 9) :
+    q9FiniteIndex (q9IndexParam j) = j := by
+  apply Fin.ext
+  simp [q9FiniteIndex, q9IndexParam, h]
+
 theorem q9FiniteIndex_injective : Function.Injective q9FiniteIndex := by
   intro s t h
   apply gf9ParamEquiv.symm.injective

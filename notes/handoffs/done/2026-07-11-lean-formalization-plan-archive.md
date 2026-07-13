@@ -447,3 +447,18 @@ that discharges the transfer interface's finite fields from it:
   `#print axioms` on relabeling invariance, additive transport, the affine-plane computation,
   basis equivalence, and GF9 invariant theorem returned exactly
   `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (GF9 triples embed as q9 repair edges)
+
+- Added the inverse coordinate identity `q9FiniteIndex_indexParam` and packaged
+  `q9FiniteEmbedding : 𝔽₉ ↪ Fin 10`.
+- Proved `q9FiniteImage_mem_repair`: every edge of the GF9 zero-sum triple hypergraph maps to an
+  actual edge of `q9AxisRepairHypergraph`. The proof explicitly reindexes the mapped three-set,
+  transports its finite sum through the equivalence, and applies the exact converse theorem from
+  `Q9Seed`.
+- Remaining: map a maximum GF9 matching forward for `ν≥3`, use three-uniformity and the nine
+  finite coordinates for `ν≤3`, map a five-point GF9 transversal forward for `τ≤5`, and pull any
+  q9 transversal back along `q9FiniteEmbedding` for `τ≥5`.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on the coordinate inverse, embedding, and edge-image theorem returned exactly
+  `[propext, Classical.choice, Quot.sound]`.

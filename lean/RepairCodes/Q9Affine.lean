@@ -136,6 +136,46 @@ noncomputable def gf9AG23LinearEquiv : GF9 ≃ₗ[ZMod 3] AG23 :=
   (Module.finBasisOfFinrankEq (ZMod 3) GF9
     (GaloisField.finrank 3 (n := 2) (by decide))).equivFun
 
+/-- Embedding of the nine finite seed coordinates; its unique missing coordinate is the axis. -/
+noncomputable def q9FiniteEmbedding : GF9 ↪ Fin 10 :=
+  ⟨q9FiniteIndex, q9FiniteIndex_injective⟩
+
+/-- A zero-sum triple of field parameters maps to an actual axis repair edge. -/
+theorem q9FiniteImage_mem_repair {S : Finset GF9} (hS : S ∈ zeroSumTripleHypergraph GF9) :
+    S.map q9FiniteEmbedding ∈ q9AxisRepairHypergraph := by
+  have hScard : S.card = 3 := (mem_zeroSumTripleHypergraph.mp hS).1
+  have hSsum : ∑ x ∈ S, x = 0 := (mem_zeroSumTripleHypergraph.mp hS).2
+  let R : Finset (Fin 10) := S.map q9FiniteEmbedding
+  have hRcard : R.card = 3 := by simpa [R] using hScard
+  have hsub : R ⊆ Finset.univ.erase q9Axis := by
+    intro j hj
+    obtain ⟨t, -, rfl⟩ := Finset.mem_map.mp hj
+    exact Finset.mem_erase.mpr ⟨q9FiniteIndex_ne_axis t, Finset.mem_univ _⟩
+  let eS : Fin 3 ≃ S := (S.equivFinOfCardEq hScard).symm
+  let g : Fin 3 → R := fun i => ⟨q9FiniteIndex (eS i), by
+    exact Finset.mem_map.mpr ⟨eS i, (eS i).property, rfl⟩⟩
+  have hg : Function.Injective g := by
+    intro i j hij
+    apply eS.injective
+    apply Subtype.ext
+    exact q9FiniteIndex_injective (congrArg Subtype.val hij)
+  let er : Fin 3 ≃ R := Equiv.ofBijective g
+    ((Fintype.bijective_iff_injective_and_card _).2 ⟨hg, by
+      rw [Fintype.card_fin, Fintype.card_coe, hRcard]⟩)
+  have her (i : Fin 3) : (er i : Fin 10) = q9FiniteIndex (eS i) := rfl
+  have hsum : q9IndexParam (er 0) + q9IndexParam (er 1) + q9IndexParam (er 2) = 0 := by
+    simp only [her, q9IndexParam_finiteIndex]
+    have henum : (eS 0 : GF9) + eS 1 + eS 2 = ∑ i : Fin 3, (eS i : GF9) := by
+      rw [Fin.sum_univ_three]
+    rw [henum]
+    rw [Equiv.sum_comp eS]
+    calc
+      (∑ x : S, (x : GF9)) = ∑ x ∈ S, x := by
+        rw [← S.sum_attach]
+        rfl
+      _ = 0 := hSsum
+  exact q9AxisRepair_edge_of_zeroSum hsub hRcard er hsum
+
 /-- The zero-sum triple hypergraph of the additive group of `𝔽₉` already has the desired sharp
 invariants. The remaining code-facing step is to transport along `q9FiniteIndex` into the ten
 seed coordinates, where the axis is an isolated vertex. -/
