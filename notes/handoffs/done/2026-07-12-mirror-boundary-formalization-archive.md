@@ -134,3 +134,35 @@ closed-negative proof routes belong here.
   - `choom -n 1000 -- nix develop --command lake build ProjectiveCap` — PASS (`8659` jobs).
   - Scalar normalization, descended form, multiplier norm, and coordinate parabolic obstruction
     axioms: exactly `[propext, Classical.choice, Quot.sound]`.
+
+## 2026-07-12 — C87 stabilizer theorem imported conditionally
+
+- Added `ProjectiveCap/BaerQuadraticStabilizerAssumption.lean`, quarantining the standard
+  odd-characteristic theorem that an injective semilinear map preserving the zero locus of a
+  nondegenerate quadratic form in vector dimension at least three is a semisimilitude. The
+  characteristic and dimension hypotheses are explicit; omitting them would overstate the theorem
+  (an anisotropic binary zero locus does not determine a form).
+- Added `ProjectiveCap/BaerQuadraticStabilizer.lean`. It feeds the imported multiplier into the
+  already-proved scalar Hilbert-90 and quadratic descent chain, yielding the coordinate parabolic
+  fixed-point obstruction from zero-locus preservation. The module is imported by `ProjectiveCap`.
+- Trust status is deliberately conditional. `#print axioms` on the imported declaration and both
+  consequences reports the named stabilizer axiom in addition to
+  `[propext, Classical.choice, Quot.sound]`; C87 therefore remains active under the strict gate.
+- Cheap-discharge assessment: for the standard Witt form `d z² + Σ xᵢyᵢ`, coefficient rigidity
+  should be elementary. Totally singular coordinate subspaces remove pure terms; mixed isotropic
+  vectors remove off-diagonal coefficients; two-pair cancellations identify diagonal
+  coefficients and remove the `z`-mixed terms. The remaining cost is arbitrary-form transport:
+  the local Mathlib inventory has weighted-sum-of-squares diagonalization, but no located
+  parabolic Witt-basis/normal-form theorem. The two viable strict routes are therefore (a) prove
+  the standard-model coefficient lemma plus a Witt-normalization theorem, or (b) develop the
+  coordinate-free tangent-hyperplane/polarity argument.
+- Literature status: this is standard classical-polar-space geometry (the full ambient
+  collineation group of a nondegenerate quadric is the corresponding projective semisimilarity
+  group), not a theorem previously proved in the project prose. The prose had used `PΓO` as the
+  stabilizer notation without supplying the bridge.
+- Validation:
+  - `nix develop --command lake build ProjectiveCap.BaerQuadraticStabilizer` — PASS (`3006` jobs).
+  - `nix develop --command lake build ProjectiveCap` — PASS (`8661` jobs) after the final scope
+    tightening.
+  - Source contains the one intentional quarantined `axiom`; no `sorry` or `native_decide` was
+    introduced.

@@ -27,12 +27,14 @@ cap games over odd `q`:
 
 1. **Hyperbolic quadrics `Q⁺(2m−1,q)` admit an fpf mirror** (for every `m ≥ 2`).  → P.  *(C48,
    fully proven: the elliptic block similitude `(aᵢ,bᵢ)↦(δ·bᵢ,aᵢ)`, `δ` nonsquare.)*
-2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`): linear and coordinate-Baer fpf involutions are
-   excluded; the full semilinear exclusion remains open.**
-   *[FORMAL LINEAR CLASSIFICATION + FORMAL COORDINATE-BAER CASE]* Both linear branches are Lean-proved
+2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`): linear fpf involutions are excluded; the
+   coordinate-Baer zero-locus conclusion is axiom-backed and the strict full semilinear exclusion
+   remains open.**
+   *[FORMAL LINEAR CLASSIFICATION + CONDITIONAL COORDINATE-BAER CASE]* Both linear branches are Lean-proved
    in `ProjectiveCap.MirrorBoundary`: finite quadratic isotropy plus the scalar-square eigenspace
    decomposition excludes the split route, and determinant parity excludes the nonsplit route.
-   The semilinear Baer branch remains C87.
+   The coordinate conclusion is derived from a quarantined import of the standard theorem that a
+   nondegenerate quadric zero-locus stabilizer is a semisimilitude. Discharging that axiom remains C87.
 3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`): all modeled linear and Baer-semilinear
    representative branches are excluded.**
    *[FORMAL LINEAR + BAER-SEMILINEAR REPRESENTATIVE CLASSIFICATION]* `FiniteHermitian` and
@@ -61,9 +63,9 @@ space, extracts a fixed basis, and conjugates the map to coordinate relative Fro
 projective representative with `S²=cI`, it proves `c` Frobenius-fixed, descends `c` to the base
 field, and normalizes by finite-field norm surjectivity before applying the fixed-basis theorem.
 Every Hermitian form meets the resulting fixed Baer subgeometry. A descended quadratic form in
-dimension at least three does too. The remaining open Baer step is specific to parabolic boards:
-derive the semisimilitude equation from preservation of the projective zero locus. Once that
-equation is supplied, scalar normalization and quadratic-form descent are Lean-proved.
+dimension at least three does too. For parabolic boards, the semisimilitude equation from
+preservation of the projective zero locus is currently quarantined as an imported literature axiom;
+all scalar normalization and quadratic-form descent after that equation are Lean-proved.
 
 **Linear case (i)** splits on whether `c` is a square:
 
@@ -122,8 +124,8 @@ finite quadratic and Hermitian isotropy exclude their split routes, determinant 
 the parabolic nonsplit route, and norm-square reflection excludes the Hermitian nonsplit route.
 Completing rows 2–4 still requires:
 
-1. prove that a semilinear collineation preserving a nondegenerate parabolic projective zero locus
-   acts as a semisimilitude of its quadratic form. Multiplier norm-one, scalar Hilbert-90
+1. discharge the quarantined axiom that a semilinear collineation preserving a nondegenerate
+   parabolic projective zero locus acts as a semisimilitude of its quadratic form. Multiplier norm-one, scalar Hilbert-90
    normalization, base-field form descent, and the resulting fixed point are already Lean-proved;
 2. for `Q⁻`, the Witt/Scharlau-transfer classification below.
 
@@ -140,8 +142,9 @@ transfer lemma is the way.)  This is a clean, bounded lemma; it does not gate an
 
 This is the candidate "separating mirror obstructions from outcomes" classification of the
 harvest. The proved positive family is hyperbolic; parabolic and Hermitian exclusions are formal
-for linear collineations; the Hermitian Baer representative branch is formal, while parabolic form
-descent remains open, and the elliptic exclusion is conjectural. Its
+for linear collineations; the Hermitian Baer representative branch is formal, while the parabolic
+Baer conclusion is conditional on one quarantined stabilizer axiom, and the elliptic exclusion is
+conjectural. Its
 silence on these boards concerns the method, not the game values. Positioning stays conservative: the mechanism is the
 standard pairing/copycat ingredient; the contribution is the exact incidence-geometric boundary.
 

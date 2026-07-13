@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-12
 **Status:** IN PROGRESS
-**Tasks:** C85–C86 [REPORTED 2026-07-12]; C87 [ACTIVE, PARTIAL]; C88 [OPEN]
+**Tasks:** C85–C86 [REPORTED 2026-07-12]; C87 [ACTIVE, AXIOM-BACKED]; C88 [OPEN]
 
 ## Goal
 
@@ -21,8 +21,8 @@ the live execution map. Session history belongs in
 - A boundary row is Lean-proved only when its full classification chain is formalized and its
   printed axiom profile is limited to the accepted Mathlib foundations.
 - Prose classifications, computations, and imported paper claims do not satisfy the gate.
-- No `sorry`, `native_decide`, ad hoc axioms, or unproved bridge assumptions in the delivered Lean
-  source.
+- No `sorry` or `native_decide`. Imported literature theorems must be quarantined in an assumptions
+  module and every dependent result must remain explicitly outside the strict Lean-proved tier.
 - Method-negativity means only that no fixed-point-free mirror of the classified type exists; it
   does not determine the game's P/N outcome.
 
@@ -65,21 +65,24 @@ headlines to the proved scope:
 | every Hermitian board in vector dimension at least three meets every modeled Baer-semilinear projective involution | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
 | scalar Hilbert-90 normalization and fixed-value quadratic-form descent | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87 partial) |
 | coordinate-Frobenius quadratic semisimilitude fixes a quadric point in dimension at least three | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87 partial) |
+| odd-characteristic nondegenerate quadric zero-locus stabilizer gives a semisimilitude | `ProjectiveCap/BaerQuadraticStabilizerAssumption.lean` | Imported literature axiom; not strict Lean-proved |
+| coordinate-Frobenius zero-locus preservation rules out fixed-point-freeness | `ProjectiveCap/BaerQuadraticStabilizer.lean` | Conditional on the quarantined axiom |
 
-Current source audit: no `sorry` or `native_decide`; the relevant builds pass with axiom profile
-`[propext, Classical.choice, Quot.sound]`.
+Current source audit: no `sorry` or `native_decide`. The strict local lemmas retain axiom profile
+`[propext, Classical.choice, Quot.sound]`; the two new conditional parabolic theorems additionally
+depend on `exists_semisimilitudeMultiplier_of_preserves_zeroLocus`.
 
 ## Open work packages
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C87** | Finish the parabolic stabilizer bridge. General square-scalar Baer conjugacy, scalar semisimilitude normalization, fixed-value quadratic descent, and the full Hermitian Baer representative branch are formal. Remaining: prove that preserving a nondegenerate parabolic projective zero locus forces the required semisimilitude equation. | The coordinate semisimilitude obstruction is landed. Only zero-locus stabilizer → scalar multiple of the conjugated quadratic form remains real mathematics. | Closes the parabolic semilinear branch; the Hermitian representative branches are already complete. |
+| **C87** | Discharge the quarantined parabolic stabilizer axiom. General square-scalar Baer conjugacy, scalar semisimilitude normalization, fixed-value quadratic descent, and the full Hermitian Baer representative branch are formal; the final zero-locus route is now packaged conditionally. | The coordinate obstruction and axiom-backed consequence are landed. A strict proof still needs zero-locus rigidity, most cheaply in a standard Witt model, plus transport from an arbitrary parabolic form. | Removes the imported axiom and promotes the parabolic semilinear branch to strict Lean-proved; the Hermitian representative branches are already complete. |
 | **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
 
 ## Dependency and attack order
 
 C85–C86 are closed; their quadratic and Hermitian infrastructure is available to later tasks.
-Proceed with **C87** at the remaining parabolic zero-locus-stabilizer bridge. The general
+Proceed with **C87** by discharging the quarantined parabolic zero-locus-stabilizer axiom. The general
 semilinear normal form, fixed-subgeometry conjugacy, Hermitian intersection, scalar normalization,
 and coordinate quadratic-form descent are landed. Attempt C88 only after this bridge is complete.
 
@@ -103,12 +106,14 @@ For each closed task:
 
 Close the remaining blockers in this order:
 
-1. **Parabolic stabilizer bridge (C87).** Scalar Hilbert 90, multiplier norm-one, fixed-value form
-   descent, and the coordinate semisimilitude obstruction are now formal. Prove that a semilinear
-   collineation preserving a nondegenerate parabolic zero locus is a semisimilitude. The recommended
-   concrete proof is to put the form in a standard Witt basis and recover all coefficients from
-   isotropic test vectors, avoiding a large algebraic-geometry dependency. Then transport the
-   landed coordinate theorem through the general Baer conjugacy.
+1. **Parabolic stabilizer bridge (C87).** The literature theorem is quarantined as an axiom and its
+   conditional consequence is formal. The cheap local route is coefficient rigidity for the
+   standard Witt form `d z² + Σ xᵢyᵢ`: totally singular coordinate subspaces kill pure terms,
+   mixed isotropic test vectors kill off-diagonal and `z`-linear terms, and two-pair cancellations
+   equate the remaining diagonal coefficients. The expensive residue is transport: Mathlib has
+   weighted-squares diagonalization but no located parabolic Witt-normal-form theorem. Either prove
+   that normalization, or replace the coefficient route with a general polarity/tangent-hyperplane
+   argument. Do not promote the row while the imported axiom remains in its printed profile.
 2. **Elliptic `Q⁻` transfer (C88).** Do not build the Lean proof around the desired negative verdict
    before checking the classification. Put a nonsplit representative in the standard
    `2×2` block form for multiplication by `√c`, solve the symmetric-matrix similitude equation for
