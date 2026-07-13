@@ -1,7 +1,7 @@
 # Lean formalization plan — the -10 / -11 PROVED corpus
 
 **Date**: 2026-07-11
-**Status**: REPAIRCODES ASYMPTOTIC TRACK COMPLETE under the strict trust gate. The uniform axis–twisted-cubic code,
+**Status**: REPAIRCODES FORMALIZATION AND MANUSCRIPT TRACK COMPLETE under the strict trust gate. The uniform axis–twisted-cubic code,
 small-circuit classification, exact repair clutters and sharp invariants, q=9 `[19,4,8]₉` row and
 edge-count table, `120`/`84` support inventory, and conditional finite seed-and-lift theorem are
 Lean-proved. The full seed has global dual distance three; transfer uses the correct weaker gate
@@ -13,6 +13,11 @@ are Lean-proved.  The resulting unbounded q9 family has exact rate `2/19`, event
 distance at least `8/57`, and exact repair rows; its sole deep dependency is the quarantined
 Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
 review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
+The assembled 12-page manuscript, PDF, proof ledger, and adversarial novelty report are in
+[`papers/coding-repair-hypergraphs/`](../../papers/coding-repair-hypergraphs/). The internal
+novelty audit returns the repair-tolerance invariant to explicit prior art and retains only
+cautious candidate claims for the exact all-symbol `(ν,τ)` separation and complete-hypergraph
+transfer. An external specialist citation-chain review remains a submission preflight gate.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -228,17 +233,20 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 extension lift, concrete asymptotic family, strict trust audits, and source-ledger/registry
 synchronization are complete.
 
-1. **Paper assembly (C97):** create/update the full coding/LRC manuscript from the synchronized
-   source ledger, add the imported-theorem boundary verbatim, rebuild its PDF, and complete the
-   specialist novelty/citation audit.  This is editorial/literature work, not a math blocker.
-2. **Optional context only:** formalize the symmetric-cube PGL orbit description of the axis if a
+1. **External priority review:** a coding-theory specialist follows the cited repair-tolerance,
+   dual-support, and concatenation literature through MathSciNet/zbMATH/IEEE Xplore. This is a
+   submission-confidence gate, not a mathematics or formalization blocker; until then the paper
+   uses “candidate contribution” / “we did not locate.”
+2. **Public artifact:** extract the paper/Lean package and mint the public versioned DOI required
+   by the publication policy.
+3. **Optional context only:** formalize the symmetric-cube PGL orbit description of the axis if a
    later paper needs that provenance in its proof chain. It is not used by the code construction.
-3. Continue Phases 2–4 per §4 as separate tracks; they are not blockers for RepairCodes.
+4. Continue Phases 2–4 per §4 as separate tracks; they are not blockers for RepairCodes.
 
 ### Discovery track for final review
 
-Final classification after the strict trust audit; literature novelty remains unverified unless
-explicitly stated otherwise.
+Final classification after the strict trust and internal adversarial novelty audits. Candidate
+novelty remains subject to the external specialist gate unless explicitly stated otherwise.
 
 - **Proved strengthening:** the exact `[2q+1,4,q−1]_q` code-parameter theorem holds over every
   finite characteristic-three field, including `q=3`; the paper only needs `q≥9` for its uniform
@@ -277,8 +285,8 @@ explicitly stated otherwise.
   construction: primal and dual distances coincide, so one cited theorem supplies both gates.
 - **Possible application / novelty candidate:** the exact complete-hypergraph transfer can be
   reused for any inner seed whose repair statistics are known, including mixed-locality seeds.
-  Whether this formulation is new in concatenated-LRC literature still requires a specialist
-  citation-chain audit.
+  The internal none-found search survives, but categorical priority still requires the external
+  specialist citation-chain review.
 
 **Landed 2026-07-11:** (a) the eval-code stepping stone — RS instances over `ZMod 7` and the
 target `GaloisField 3 2 = 𝔽₉` (`FiniteGeom/EvalCodeInstance.lean`), discharging the eval-code MDS

@@ -36,7 +36,7 @@ The finite q=9 and uniform characteristic-three results are machine checked end 
     models, and derives the unbounded family with rate `2/19`, eventual relative distance at least
     `8/57`, and exact all-coordinate repair rows.
 
-The transfer theorem uses the sharp hypothesis `r+1 < 2*d(I^perp)`, not the stronger and false
+The transfer theorem uses the hypothesis `r+1 < 2*d(I^perp)`, not the stronger and false
 requirement `d(I^perp)=r+1`.  This matters here: the full axis–twisted-cubic code has global dual
 distance three because of its axis locality-two circuits, while radius-three transfer still follows
 from `4 < 2*3`.

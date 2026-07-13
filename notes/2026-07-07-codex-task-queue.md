@@ -178,11 +178,13 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   audits pass. Track in the
   [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C97 [OPEN — UNBLOCKED 2026-07-13] — assemble/synchronize the full Nofil coding paper.** The
-  RepairCodes formalization and adequacy gates are closed; the source ledger, trust boundary,
-  paper index, and planning registry are synchronized. Create/update the full manuscript and
-  package README, include the exact Stichtenoth import boundary, complete the specialist
-  novelty/citation audit, and build the paper PDF. Track the closed formalization gate in the
+- **C97 [REPORTED 2026-07-13] — full coding/LRC paper assembled and internally audited.**
+  `papers/coding-repair-hypergraphs/` contains the 12-page manuscript/PDF, proof ledger, and
+  adversarial novelty report. The Lean aggregate, strict token/axiom scan, bibliography, and PDF
+  build pass. The audit explicitly returns repair tolerance to prior art and narrows the surviving
+  candidate novelty to exact all-symbol `(ν,τ)` separation and complete-hypergraph transfer.
+  External specialist citation-chain review remains a submission preflight gate, not a
+  formalization or manuscript blocker. Track in the
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C98 [REPORTED 2026-07-12] — theorem-mining and novelty review.** The completed proof graph

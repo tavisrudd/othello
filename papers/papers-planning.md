@@ -31,7 +31,8 @@ A directory ≠ a paper. See the resolved decomposition next.
 4. **Equivariant extension + robust completion** (`equivariant-robust-completion`; canonical merge
    of `baer-equivariant-extension` and `completion-core-rigidity`).
 5. **Continuation-graph rigidity, N1 only** (`continuation-graph-rigidity`) — N2 demoted to remarks.
-6. **(Conditional) Coding / LRC** — promote only after the specialist prior-art audit passes.
+6. **(Conditional) Coding / LRC** — manuscript and internal adversarial audit complete; promote
+   after the external specialist citation-chain review.
 
 Plus the two `oeis-submissions/` entries (independent of the papers).
 
@@ -75,7 +76,7 @@ Ordered by formalization-to-full-trust distance:
 | 2 | Games flagship                    | Core P-theorems done; owes sum-free law, boundary negatives, capacity-2 sharpness, Scharlau/Witt lemma |
 | 3 | Dihedral (+ D₂ₘ)                  | Owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions                                |
 | 4 | Arcs                              | Owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement                  |
-| 5 | Coding / LRC (conditional)        | Lean largely done — gated on the prior-art audit, not formalization                                   |
+| 5 | Coding / LRC (conditional)        | Lean and manuscript complete; externally gated on specialist priority review, not formalization       |
 | 6 | Baer ⊕ completion                 | Development draft + exact quadratic Lean theorem; classical-radius citations and novelty audit pending |
 | 7 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
 
@@ -98,7 +99,7 @@ each *elementary*. Each abstract opens with the nontrivial lead:
 | Arcs         | The exact prescribed-hole defect identity + additive-3/2 refinement + verified values       | fine |
 | Baer⊕compl.  | Orbit-valued criterion + **exact** completion distances for the classical families          | δ=τ / the hypergraph frame are mechanism; the sharp values are the lead |
 | Continuation | The rigidity theorem: Aut(frame graph) = ambient semilinear group for q ≥ 13                | fine if N2 truly demoted |
-| Coding       | The explicit certified-parameter construction ([10,4,6]₉ seed + concrete-constant transfer)  | lead with the construction, not the transfer lemma |
+| Coding       | The `[19,4,8]₉` all-symbol repair seed + exact unbounded `GF(9)` row transfer                  | lead with the certified family, not the transfer mechanism alone |
 | A344227      | **G(17)=2 refutes the published eventual-alternation conjecture** (a refutation)             | frame exactly this way |
 
 - **Negatives that bound a published method are theorems; the rest are logbook.** The boundary
@@ -206,7 +207,7 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 | `nofil-finite-geometry-outcomes` | Q⁻ elliptic method-negative needs a Scharlau/Witt-transfer lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are prior art |
 | `baer` ⊕ `completion`            | √2·s = Lunelli–Sce (not new; headline is the orbit criterion + exact completion distances); Storme–Szőnyi / MathSciNet audit; no constant-novelty claims |
 | `continuation-graph-rigidity`    | N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané read (keep N2 out of the abstract) |
-| Coding / LRC                     | The hard audit — LRC/availability/concatenation is vast; the certified-explicit construction survives even where technique is standard |
+| Coding / LRC                     | Internal audit narrows novelty to exact all-symbol `(ν,τ)` separation and complete-hypergraph transfer; external specialist citation-chain review remains |
 
 ## Planning-source docs (in ../notes/, not symlinked into a paper dir)
 
@@ -232,12 +233,12 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 
 Post-review dispositions:
 
-- **Coding / LRC → Paper 6 ready for manuscript assembly.** `RepairCodes` now includes the
-  kernel-proved trace bridge and concrete degree-four lift, plus an unbounded q9 family of exact
-  rate `2/19`, eventual relative distance `≥8/57`, and exact all-coordinate repair rows.  The sole
-  deep boundary is Stichtenoth Theorem 1.6(ii), quarantined and visible in the headline axiom
-  report.  The strict formalization audit passes; assemble the `coding/` manuscript and perform the
-  specialist novelty/citation audit before submission.
+- **Coding / LRC → Paper 6 assembled and internally audited.** `coding-repair-hypergraphs/` contains
+  the manuscript, PDF, proof ledger, and adversarial novelty report. `RepairCodes` proves the trace
+  bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19`, eventual relative
+  distance `≥8/57`, and exact all-coordinate repair rows. The sole deep boundary is Stichtenoth
+  Theorem 1.6(ii), quarantined and visible in the headline axiom report. The remaining submission
+  gate is an external specialist citation-chain review, not formalization or manuscript assembly.
 - **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;
   audited first, never delaying arcs.
 - **Generalized D₂ₘ → folded into the dihedral paper** (not a separate paper). Its **Möbius-ladder /

@@ -25,6 +25,7 @@ dihedral bundles the D₂ₘ family, continuation is N1-only, coding is conditio
 | `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Source/staging view folded into canonical merged paper |
 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds) | Self-contained manuscript + verifier + strict-trust Lean formalization; near submission-ready — *related but separate* |
+| `coding-repair-hypergraphs` | Complete repair hypergraphs under concatenation: a twisted-cubic--axis family | Self-contained manuscript + proof/novelty ledgers + strict-trust Lean package; internal adversarial audit complete, external specialist priority check remains |
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base.
@@ -46,6 +47,9 @@ and share the `lean/FiniteGeom/` base.
 
 - **Complete LaTeX manuscript (+ PDF + verifier + Lean package):**
   `arcs_complete_outside_conic` — near submission-ready.
+- **Complete LaTeX manuscript (+ PDF + proof/novelty ledgers + Lean package):**
+  `coding-repair-hypergraphs` — internally audited; specialist citation-chain review remains a
+  submission preflight gate.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
@@ -90,8 +94,7 @@ Key computational results and proven lemmas/theorems, mapped to their paper and 
 `dihedral-schreier-node-kayles`; `arcs` = `arcs_complete_outside_conic`; `baer` and `completion` =
 `equivariant-robust-completion`; `continuation` =
 `continuation-graph-rigidity`; `queens-n18` = `non-formal-bloggy/queens-n18`; `oeis:*` =
-`oeis-submissions/*`; `coding` = the (unhomed) coding/LRC candidate (Lean `lean/RepairCodes/` +
-`lean/FiniteGeom/` base).
+`oeis-submissions/*`; `coding` = `coding-repair-hypergraphs`.
 
 **Proof-location key:** `lean <file>:<line> <ident>` = formalized, `sorry`-clean (paths under
 `lean/`); `paper §N` = proven in that manuscript; `note <file>` = proven in a research note
@@ -153,16 +156,16 @@ encodes result *type*; formalization status is in the proof-location column.
 | lem-nu-tau          | ν ≤ τ                                    | matching ≤ transversal (hypergraph base)           | completion (base)   | lean `FiniteGeom/Hypergraph.lean:53` `matching_card_le_transversal_card` |
 | thm-frame-rigidity  | Frame-graph semilinear rigidity (N1)     | Aut = ambient semilinear group, q ≥ 13             | continuation        | note (Thm 7.4) [plan] |
 | thm-complex-recon   | Continuation-complex reconstruction (N2) | recovers plane + secants + arc                     | continuation        | note (Thm 8.4) [plan; SOFTEN] |
-| lem-transfer        | Complete repair-hypergraph transfer      | exact blockwise preservation when `r+1<2d(I⊥)` and the outer functional-dual gate holds | coding (unhomed) | lean `RepairCodes/SeedLift.lean` `repairHypergraph_concatenatedCode_eq_embed` |
-| thm-gf9-seed10      | GF9 seed `[10,4,6]₉`                     | exact minimum distance 6 and dual distance 4       | coding (unhomed)    | lean `RepairCodes/Q9Seed.lean` `q9InnerCode_minDist`, `q9InnerCode_dualDist` |
-| thm-axis-uniform-code | Uniform axis–twisted-cubic code       | `[2q+1,4,q−1]₍q₎` in finite characteristic three  | coding (unhomed)    | lean `FiniteGeom/AxisTwistedCubic.lean` `axisTwistedCubic_code_parameters` |
-| thm-axis-q9-table   | Exact q9 all-symbol repair table         | `[19,4,8]₉`; rows `(ν,τ)=(4,7),(6,12),(7,13)`; repair counts `28`, `36+8`, `36+12` | coding (unhomed) | lean `RepairCodes/Q9Uniform.lean` `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` |
-| thm-axis-q9-circuits | Exact q9 small-circuit inventory       | 120 axis three-circuit supports and 84 completed cubic four-circuit supports | coding (unhomed) | lean `RepairCodes/Q9CircuitInventory.lean` `q9_smallCircuit_support_counts` |
-| thm-axis-uniform-repair | Uniform all-symbol separation       | exact axis formulas, cubic bounds, and `τ>ν` at every coordinate for `q≥9` | coding (unhomed) | lean `RepairCodes/AxisTwistedCubicInvariants.lean` `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `axisTwistedCubic_allSymbol_tau_gt_nu` |
-| thm-axis-q9-lift    | Conditional finite q9 seed-and-lift     | `[19N,4K,≥8D]₉`, locality 3, exact row transfer, `7ν≤4τ` under explicit outer hypotheses | coding (unhomed) | lean `RepairCodes/Q9SeedLift.lean` `q9UniformLiftCode_parameters`, `q9UniformLiftCode_repairHypergraph`, `q9UniformLiftCode_ratio` |
-| lem-axis-trace-bridge | Extension-field trace duality         | ordinary `GF(9⁴)` dual distance implies the restricted-scalar functional-dual gate with exact support | coding (unhomed) | lean `RepairCodes/TraceDual.lean` `hasFunctionalDualDistanceAtLeast_restrictScalars` |
-| thm-axis-q9-extension-lift | Degree-four outer-code lift     | actual restricted-scalar `[19N,4K,≥8D]₉` lift with exact complete repair-row transfer | coding (unhomed) | lean `RepairCodes/Q9ExtensionLift.lean` `q9ExtensionLiftCode_parameters`, `q9ExtensionLiftCode_row_invariants` |
-| thm-axis-q9-asymptotic | Fixed-alphabet asymptotic repair family | unbounded q9 family, exact rate `2/19`, eventual relative distance `≥8/57`, exact rows `(4,7),(6,12),(7,13)`; Lean-checked modulo Stichtenoth Thm 1.6(ii) | coding (unhomed) | lean `RepairCodes/Asymptotic.lean` `concrete_q9_uniform_repair_family`; import `RepairCodes/Imported.lean` |
+| lem-transfer        | Complete repair-hypergraph transfer      | exact blockwise preservation when `r+1<2d(I⊥)` and the outer functional-dual gate holds | coding | lean `RepairCodes/SeedLift.lean` `repairHypergraph_concatenatedCode_eq_embed` |
+| thm-gf9-seed10      | GF9 seed `[10,4,6]₉`                     | exact minimum distance 6 and dual distance 4       | coding    | lean `RepairCodes/Q9Seed.lean` `q9InnerCode_minDist`, `q9InnerCode_dualDist` |
+| thm-axis-uniform-code | Uniform axis–twisted-cubic code       | `[2q+1,4,q−1]₍q₎` in finite characteristic three  | coding    | lean `FiniteGeom/AxisTwistedCubic.lean` `axisTwistedCubic_code_parameters` |
+| thm-axis-q9-table   | Exact q9 all-symbol repair table         | `[19,4,8]₉`; rows `(ν,τ)=(4,7),(6,12),(7,13)`; repair counts `28`, `36+8`, `36+12` | coding | lean `RepairCodes/Q9Uniform.lean` `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` |
+| thm-axis-q9-circuits | Exact q9 small-circuit inventory       | 120 axis three-circuit supports and 84 completed cubic four-circuit supports | coding | lean `RepairCodes/Q9CircuitInventory.lean` `q9_smallCircuit_support_counts` |
+| thm-axis-uniform-repair | Uniform all-symbol separation       | exact axis formulas, cubic bounds, and `τ>ν` at every coordinate for `q≥9` | coding | lean `RepairCodes/AxisTwistedCubicInvariants.lean` `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `axisTwistedCubic_allSymbol_tau_gt_nu` |
+| thm-axis-q9-lift    | Conditional finite q9 seed-and-lift     | `[19N,4K,≥8D]₉`, locality 3, exact row transfer, `7ν≤4τ` under explicit outer hypotheses | coding | lean `RepairCodes/Q9SeedLift.lean` `q9UniformLiftCode_parameters`, `q9UniformLiftCode_repairHypergraph`, `q9UniformLiftCode_ratio` |
+| lem-axis-trace-bridge | Extension-field trace duality         | ordinary `GF(9⁴)` dual distance implies the restricted-scalar functional-dual gate with exact support | coding | lean `RepairCodes/TraceDual.lean` `hasFunctionalDualDistanceAtLeast_restrictScalars` |
+| thm-axis-q9-extension-lift | Degree-four outer-code lift     | actual restricted-scalar `[19N,4K,≥8D]₉` lift with exact complete repair-row transfer | coding | lean `RepairCodes/Q9ExtensionLift.lean` `q9ExtensionLiftCode_parameters`, `q9ExtensionLiftCode_row_invariants` |
+| thm-axis-q9-asymptotic | Fixed-alphabet asymptotic repair family | unbounded q9 family, exact rate `2/19`, eventual relative distance `≥8/57`, exact rows `(4,7),(6,12),(7,13)`; Lean-checked modulo Stichtenoth Thm 1.6(ii) | coding | lean `RepairCodes/Asymptotic.lean` `concrete_q9_uniform_repair_family`; import `RepairCodes/Imported.lean` |
 | lem-twisted-cubic   | Twisted-cubic / NRC independence         | moment-curve columns linearly independent          | coding/completion   | lean `FiniteGeom/MomentCurve.lean:92` `twistedCubic_linearIndependent` |
 | thm-singleton-mds   | Singleton bound / MDS                    | minDist + dim ≤ n + 1; `IsMDS` predicate           | coding (base)       | lean `FiniteGeom/Code.lean:222` `singleton_bound` |
 | comp-a344227        | A344227 a(14..17)                        | queens Node-Kayles nimbers 0, 1, 0, 2              | oeis:A344227        | solver `rust/src/queens/solver/nimber.rs` |

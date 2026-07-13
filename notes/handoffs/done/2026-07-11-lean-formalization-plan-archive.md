@@ -723,3 +723,25 @@ that discharges the transfer interface's finite fields from it:
   exactly the Stichtenoth import plus `propext`, `Classical.choice`, and `Quot.sound`; all finite and
   reduction theorems remain import-free.  C97 is unblocked for full manuscript assembly and the
   specialist novelty/citation audit.
+
+### Handoff Note — 2026-07-13 (C97 manuscript and internal novelty audit)
+
+- Assembled `papers/coding-repair-hypergraphs/`: a self-contained 12-page LaTeX manuscript/PDF,
+  bibliography, README, proof ledger, and claim-by-claim adversarial novelty report.
+- The literature attack found and corrected one real positioning error:
+  Pamies-Juarez--Hollmann--Oggier, Definition 3, explicitly defines the same minimum hitting-set
+  invariant as local repair tolerance. The paper now treats both that invariant and the broader
+  regenerating-set framework as prior art.
+- Added the closest current adjacent work: Gruica--Jany--Ravagnani on refined dual-support weight
+  distributions and Jin--Fu on concatenated binary LRCs. Neither checked source states the exact
+  coordinatewise `(ν,τ)` results or complete bounded repair-hypergraph transfer.
+- Removed the unsupported word “sharp” from the transfer hypothesis. Lean proves sufficiency of
+  `r+1<2*d(I⊥)`, not global necessity.
+- The surviving candidate novelty is narrow and explicitly qualified: exact all-symbol
+  matching/transversal separation for the twisted-cubic--axis family, and complete bounded
+  repair-hypergraph equality under the dual-distance gates. The asymptotic theorem is positioned
+  as their derived fixed-alphabet application, not as novelty for AG concatenation itself.
+- Tectonic rebuilt the PDF with no citation/reference/box warnings; `lake build RepairCodes`,
+  forbidden-token scan, and axiom audit pass. C97 is reported. An external coding-theory
+  citation-chain review remains a submission preflight gate, not a mathematics or formalization
+  blocker.
