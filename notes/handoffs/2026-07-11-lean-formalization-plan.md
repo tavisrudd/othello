@@ -254,7 +254,8 @@ These are deliberately excluded from the completed-paper claim ledger until a th
 
 1. **Exact cubic matching number for general `q=3^h`.** Lean proves uniform lower and upper
    bounds and the exact `q=9` value, but no closed general formula. Closing the gap needs new
-   finite-additive/combinatorial mathematics before formalization.
+   finite-additive/combinatorial mathematics before formalization. Active as **C104** in the
+   [RepairCodes strengthening handoff](2026-07-13-repaircodes-strengthening-plan.md).
 2. **Explicit cap-number input beyond semantic `Z_3(q)`.** The axis transversal formulas are exact
    in terms of the defined cap number, and `q=9` is evaluated. New exact values or useful uniform
    estimates for further fields would require cap-set results (proved or imported with the same
@@ -262,7 +263,8 @@ These are deliberately excluded from the completed-paper claim ledger until a th
 3. **Necessity or optimality of the transfer gates.** The current theorem proves sufficiency of
    `r+1<2*d(I⊥)` and functional-dual distance at least `r+2`. Any sharpness statement needs either
    counterexample families at the boundary or a genuinely weaker transfer theorem; none is
-   claimed in the paper.
+   claimed in the paper. Active as **C105** in the
+   [RepairCodes strengthening handoff](2026-07-13-repaircodes-strengthening-plan.md).
 
 ### Discovery track for final review
 

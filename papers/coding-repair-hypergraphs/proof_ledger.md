@@ -62,9 +62,9 @@ so that they cannot be mistaken for kernel-checked mathematics.
 
 | ID | Direction | Status | Exact present boundary |
 |---|---|---|---|
-| F1 | Determine the cubic-coordinate matching number for general `q=3^h` | `OPEN-MATH` | Lean proves uniform lower/upper bounds and equality at `q=9`; no general closed formula is claimed. |
+| F1 / C104 | Determine the cubic-coordinate matching number for general `q=3^h` | `OPEN-MATH` | A shifted-inverse primitive-power construction is a proof sketch, not yet a theorem. Lean currently proves uniform lower/upper bounds and equality at `q=9`; see the [strengthening handoff](../../notes/handoffs/2026-07-13-repaircodes-strengthening-plan.md). |
 | F2 | Replace semantic `Z_3(q)` in the axis rows by further exact values or sharper explicit estimates | `OPEN-MATH` | The formulas in terms of `Z_3(q)` are exact and `Z_3(9)=4` is checked; further evaluation needs cap-set mathematics or a precisely quarantined source theorem. |
-| F3 | Prove necessity/optimality, or weaken, the concatenation transfer gates | `OPEN-MATH` | Lean proves sufficiency only. No boundary counterexample, necessity theorem, or global sharpness claim appears in the paper. |
+| F3 / C105 | Prove uniform non-weakenability, or weaken, the concatenation transfer gates | `OPEN-MATH` | Lean proves sufficiency only. Two counterexample mechanisms are planned, but no checked boundary theorem, fixed-code necessity theorem, or global sharpness claim appears in the paper; see the [strengthening handoff](../../notes/handoffs/2026-07-13-repaircodes-strengthening-plan.md). |
 
 ## Consistency and release checklist
 

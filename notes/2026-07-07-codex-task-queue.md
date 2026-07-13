@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C103.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C105.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -74,12 +74,13 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    spinoff lane closed: the defect, conic, asymptotic, averaging, nucleus, and certified-example
    packages are Lean-proved under the strict trust gate. Final map:
    [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-6. **Applications second-order revisit — C99 [OPEN — ORDER-FIVE LEAN PROOF REQUIRED].** The
+6. **Applications second-order revisit — C99 [OPEN — `f=0,4` LEAN PROOFS REQUIRED].** The
    paper-wide adversarial audit demoted the generic blocker, weighted, symmetry, reliability,
    defining-set, and algorithmic constructions to established infrastructure. Exact collision
-   accounting is Lean-proved. The `s=5` profile arguments and external census are proof-search
-   evidence only; none is a theorem until Lean checks the missing geometry and finite coverage.
-   Kernel formalization of all order-five profiles is the next theorem lever.
+   accounting is Lean-proved. `Q25PairResult.f2_pair_extension` now proves the full exceptional
+   `(f,e)=(2,3)` existence statement; the external census size and minimum remain data only. The
+   `f=0,4` center/moment arguments are still proof-search evidence. Kernel formalization of those
+   remaining profiles is the next theorem lever.
    [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue),
    [proof ledger](2026-07-13-c99-baer-collision-strengthening.md),
    [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).
@@ -100,6 +101,8 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
     TVZ theorem is the sole quarantined import; Lean derives the concrete unbounded q9 family with
     rate `2/19`, every fixed eventual distance bound `c<39/190`, and a bundled exact coordinate
     partition/locality/row/threshold profile. Same review and handoff.
+11. **RepairCodes exact cubic matching — C104 [PLANNED].** Prove or falsify `ν_x=(q−1)/2` for every cubic coordinate over `q=3^h`, formalize the shifted-inverse rainbow matching, and complete an independent starter/rainbow-matching plus coding-geometry novelty search; track in the [strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
+12. **RepairCodes transfer-boundary theorem — C105 [PLANNED].** Prove kernel-checked counterexamples showing neither transfer gate can be weakened uniformly, with a separate concatenated-dual literature/novelty audit and strictly no fixed-code necessity claim; track in the [strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
 
 ## Open tasks
 
@@ -118,12 +121,15 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   family theorem is Lean-checked from exactly one cited import, Stichtenoth Theorem 1.6(ii).
   Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
-- **C99 [OPEN — ORDER-FIVE LEAN PROOF REQUIRED] — post-formalization second-order application
+- **C104 [PLANNED] — exact general cubic matching.** Prove/falsify the perfect shifted-inverse rainbow matching and run the finite-field starter/rainbow-matching and code-derived-repair novelty searches before changing the paper; track in the [RepairCodes strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
+
+- **C105 [PLANNED] — transfer-gate boundary examples.** Formalize uniform non-weakenability counterexamples for the inner and outer numerical gates, then audit prior concatenation/dual-distance sharpness results; track in the [RepairCodes strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
+
+- **C99 [OPEN — `f=0,4` LEAN PROOFS REQUIRED] — post-formalization second-order application
   revisit.** The subtraction-free linewise and aggregate collision identities are Lean-proved.
-  The exact accounting is Lean-proved. Cross-center/moment sketches for `f=0,4` and two external
-  enumerations for `f=2` are unproved evidence. The live lever is a complete kernel proof: formalize
-  the geometry and certify normalization/coverage in Lean. No order-five result enters the theorem
-  ledger before that gate. Track in the
+  The exact accounting and the full `f=2` pair-extension theorem are Lean-proved. Cross-center/
+  moment sketches for `f=0,4` remain unproved; the two external `f=2` enumerations support only the
+  unproved census/minimum claims. The live lever is complete kernel geometry for `f=0,4`. Track in the
   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue)
   [proof ledger](2026-07-13-c99-baer-collision-strengthening.md), and
   [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).
