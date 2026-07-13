@@ -309,8 +309,11 @@ C110's consumer review adds three proved tools worth testing only at matching pr
   but remains a rejection test rather than a response strategy.
 - `SyndromeGeometry.arc_union_iff_extension_hypergraph` gives the exact simultaneous-extension
   object: pair conflicts with the old position plus triple conflicts among new points. When the
-  legal locus is confined to a conic, the triple part vanishes and ordinary complete continuations
-  are exactly maximal independent sets of the pair-conflict graph. This is directly reusable for
+  legal locus is confined to a conic, the triple part vanishes and continuations maximal inside
+  that conic are exactly maximal independent sets of the pair-conflict graph. Ordinary
+  completeness requires the conic to be the full one-point extension locus; the generic theorem
+  `completeOutside_empty_of_maximalExtensionIn_full` states that extra gate, and q11 verifies it.
+  This is directly reusable for
   certifying sealed residual classifications and guards against incorrectly treating an arbitrary
   legal locus as a graph.
 - The q11 Clebsch seed is now classified beyond its P-value: its conic extension complex is the
@@ -318,6 +321,13 @@ C110's consumer review adds three proved tools worth testing only at matching pr
   complete nine-arc continuations; its six witness-coloured five-edge matchings partition the
   conflict graph and miss antipodal pairs. Review this as a finite base-case/template source for
   A5-anchor or small-residual certificates, not as evidence for a uniform odd-q descent law.
+- The same q11 conflict graph is being used in three ways across the portfolio: extension-set
+  enumeration here, continuation/reconstruction invariants, and Node--Kayles/pairing play. Review
+  the 12-point nonregular `A₅` action as a certified instance of the deferred polyhedral-template
+  program, and audit the common off-conic-point/conic-involution object before duplicating claims.
+- Completion distance, repair tolerance, and arc-insertion resilience share the obstruction-family
+  transversal invariant `δ=τ`. Before promoting a twisted-cubic "transversal spectrum" claim,
+  compare the completion and coding lanes so the same invariant is not independently headlined.
 
 The coding restatement of the defect theorem is conceptually useful but introduces no stronger
 dynamic inequality: leader counts are the same secant indices already tracked by C80/C84.

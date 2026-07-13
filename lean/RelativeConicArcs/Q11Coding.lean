@@ -1,5 +1,4 @@
-import RelativeConicArcs.CodingBridge
-import RelativeConicArcs.Q11Residual
+import RelativeConicArcs.Q11SemanticLeaders
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 /-!
@@ -21,105 +20,6 @@ private instance : Fact (Nat.Prime 11) := ⟨by decide⟩
 
 noncomputable local instance : Fintype (Conic.Point (ZMod 11)) := Fintype.ofFinite _
 noncomputable local instance : DecidableEq (Conic.Point (ZMod 11)) := Classical.decEq _
-
-/-- The witness vectors in list order. -/
-def witnessVec (i : Fin 6) : Vec (ZMod 11) :=
-  (q11Witness.get i).1
-
-/-- Canonical representatives of all 133 projective points: 121 affine-chart points, eleven
-points on the second chart, then the last point. -/
-def projectiveVec (i : Fin 133) : Vec (ZMod 11) :=
-  if _h₁ : i.1 < 121 then
-    ![1, ((i.1 / 11 : ℕ) : ZMod 11), ((i.1 % 11 : ℕ) : ZMod 11)]
-  else if _h₂ : i.1 < 132 then
-    ![0, 1, ((i.1 - 121 : ℕ) : ZMod 11)]
-  else ![0, 0, 1]
-
-/-- Unordered witness-index pairs. -/
-def witnessPairs : Finset (Fin 6 × Fin 6) :=
-  Finset.univ.filter fun e => e.1 < e.2
-
-/-- Raw secant index of a canonical projective representative. -/
-def rawPointIndex (x : Vec (ZMod 11)) : ℕ :=
-  (witnessPairs.filter fun e => Matrix.det ![x, witnessVec e.1, witnessVec e.2] = 0).card
-
-/-- The canonical projective directions of a fixed secant index. -/
-def directionsOfIndex (r : ℕ) : Finset (Fin 133) :=
-  Finset.univ.filter fun i => rawPointIndex (projectiveVec i) = r
-
-/-- Exact projective secant-index spectrum.  The six selected directions have index five; the
-twelve conic directions have index zero; all 115 other directions split as `90,15,10`. -/
-theorem secant_index_spectrum :
-    (directionsOfIndex 0).card = 12 ∧
-    (directionsOfIndex 1).card = 90 ∧
-    (directionsOfIndex 2).card = 15 ∧
-    (directionsOfIndex 3).card = 10 ∧
-    (directionsOfIndex 5).card = 6 := by
-  decide
-
-/-- The affine coset-distance distribution `(0,1,2,3)`, obtained from the certified projective
-spectrum by multiplying each nonzero direction by the ten nonzero field scalars.  The general
-leader/support bijection in `CodingBridge` supplies the affine semantics. -/
-theorem affine_coset_distance_distribution :
-    1 = 1 ∧
-    10 * (directionsOfIndex 5).card = 60 ∧
-    10 * ((directionsOfIndex 1).card + (directionsOfIndex 2).card +
-      (directionsOfIndex 3).card) = 1150 ∧
-    10 * (directionsOfIndex 0).card = 120 := by
-  have hs := secant_index_spectrum
-  omega
-
-/-- Distance-two affine cosets split by one, two, or three actual minimum-weight leaders. -/
-theorem distance_two_leader_distribution :
-    10 * (directionsOfIndex 1).card = 900 ∧
-    10 * (directionsOfIndex 2).card = 150 ∧
-    10 * (directionsOfIndex 3).card = 100 := by
-  have hs := secant_index_spectrum
-  omega
-
-/-- Every distinct witness triple is a basis of the syndrome space. -/
-theorem witness_distinct_triples_det :
-    ∀ i j k : Fin 6, i ≠ j → i ≠ k → j ≠ k →
-      Matrix.det ![witnessVec i, witnessVec j, witnessVec k] ≠ 0 := by
-  decide
-
-theorem witness_triple_independent (T : Finset (Fin 6)) (hT : T.card = 3) :
-    LinearIndependent (ZMod 11) (fun i : T => witnessVec i.1) := by
-  classical
-  let e : T ≃ Fin 3 := T.equivFinOfCardEq hT
-  have hdet : Matrix.det ![witnessVec (e.symm 0).1, witnessVec (e.symm 1).1,
-      witnessVec (e.symm 2).1] ≠ 0 := by
-    apply witness_distinct_triples_det
-    · intro h
-      have := e.symm.injective (Subtype.ext h)
-      exact (by decide : (0 : Fin 3) ≠ 1) this
-    · intro h
-      have := e.symm.injective (Subtype.ext h)
-      exact (by decide : (0 : Fin 3) ≠ 2) this
-    · intro h
-      have := e.symm.injective (Subtype.ext h)
-      exact (by decide : (1 : Fin 3) ≠ 2) this
-  have hli : LinearIndependent (ZMod 11)
-      ![witnessVec (e.symm 0).1, witnessVec (e.symm 1).1, witnessVec (e.symm 2).1] := by
-    simpa [Matrix.row] using Matrix.linearIndependent_rows_of_det_ne_zero hdet
-  have hli' : LinearIndependent (ZMod 11)
-      (fun n : Fin 3 => witnessVec (e.symm n).1) := by
-    convert hli using 1
-    funext n
-    fin_cases n <;> rfl
-  have hcomp := hli'.comp e e.injective
-  have hfam : ((fun n : Fin 3 => witnessVec (e.symm n).1) ∘ e) =
-      (fun i : T => witnessVec i.1) := by
-    funext i
-    rw [Function.comp_apply, e.symm_apply_apply]
-  rw [hfam] at hcomp
-  exact hcomp
-
-theorem witness_small_independent :
-    ∀ S : Finset (Fin 6), S.card ≤ 3 →
-      LinearIndependent (ZMod 11) (fun i : S => witnessVec i.1) :=
-  CodingBridge.small_independent_of_triple_independent witnessVec (by simp)
-    witness_triple_independent
 
 /-- The six columns span the three-dimensional syndrome space. -/
 theorem witness_columns_span :
@@ -243,8 +143,8 @@ def quadraticEvaluationMatrix : Matrix (Fin 6) (Fin 6) (ZMod 11) :=
 theorem quadraticEvaluation_det_ne_zero : quadraticEvaluationMatrix.det ≠ 0 := by
   decide
 
-/-- No nonzero homogeneous quadratic form vanishes on all six witness columns.  In particular,
-the associated `[6,3,4]₁₁` code is not projectively equivalent to a six-column conic/GRS system. -/
+/-- No nonzero homogeneous quadratic form vanishes on all six witness columns.  This is the
+formal no-conic premise used with the classical normal-rational-curve/GRS dictionary. -/
 theorem no_nonzero_quadratic_vanishing (c : Fin 6 → ZMod 11)
     (h : quadraticEvaluationMatrix *ᵥ c = 0) : c = 0 := by
   have hunit : IsUnit quadraticEvaluationMatrix.det :=
@@ -281,6 +181,58 @@ theorem maximal_extension_spectrum :
     (maximalIndependentSetsOfCard 3).card = 20 := by
   decide
 
+/-- Every residual set counted as maximal yields an ordinary complete projective arc, not merely
+a set maximal inside a preselected residual subset.  Relative completeness confines every new
+point to the conic, and the certified residual maximality then excludes those points as well. -/
+theorem maximal_independent_extension_complete {n : ℕ} {S : Finset (Fin 12)}
+    (hS : S ∈ maximalIndependentSetsOfCard n) :
+    CompleteOutside (L := Conic.Point (ZMod 11))
+      (pointSet q11Witness ∪ S.map conicEmbedding) ∅ := by
+  classical
+  let A := pointSet q11Witness
+  let E := Conic.standardConic (K := ZMod 11)
+  let T := S.map conicEmbedding
+  have hseed : CompleteOutside (L := Conic.Point (ZMod 11)) A E := by
+    simpa [A, E] using check_sound q11_check
+  have hSind : IndepValid Adj S := by
+    have hmem := (Finset.mem_filter.mp hS).1
+    exact (Finset.mem_filter.mp hmem).2
+  have hSmax : ∀ i ∈ (Finset.univ \ S), ¬IndepValid Adj (insert i S) :=
+    (Finset.mem_filter.mp hS).2
+  have hfull : ∀ x, x ∈ E ↔ x ∉ A ∧ Arc (L := Conic.Point (ZMod 11)) (insert x A) := by
+    intro x
+    change x ∈ Conic.standardConic (K := ZMod 11) ↔
+      x ∉ pointSet q11Witness ∧
+        Arc (L := Conic.Point (ZMod 11)) (insert x (pointSet q11Witness))
+    rw [← projective_distanceThreeDirections_eq_standardConic]
+    constructor
+    · intro hx
+      obtain ⟨hxA, hxCovered⟩ := mem_distanceThreeDirections.mp hx
+      exact ⟨hxA, (arc_insert_iff_not_covered hseed.1 hxA).mpr hxCovered⟩
+    · rintro ⟨hxA, hxArc⟩
+      exact mem_distanceThreeDirections.mpr
+        ⟨hxA, (arc_insert_iff_not_covered hseed.1 hxA).mp hxArc⟩
+  have hmax : MaximalExtensionIn (L := Conic.Point (ZMod 11)) A E T := by
+    refine ⟨?_, ?_, ?_⟩
+    · intro x hx
+      obtain ⟨i, _hi, rfl⟩ := Finset.mem_map.mp hx
+      exact conicPoint_mem_standardConic i
+    · apply (ProjectiveBridge.arc_iff_projectiveCap _).mpr
+      exact (parametrizedHoleValid_iff S).mpr hSind
+    · intro x hxE hxT hxArc
+      obtain ⟨i, hi⟩ := conicEmbedding_range x |>.mp (by simpa [E] using hxE)
+      have hiS : i ∉ S := by
+        intro hiS
+        apply hxT
+        exact Finset.mem_map.mpr ⟨i, hiS, hi⟩
+      have hbad := hSmax i (by simp [hiS])
+      apply hbad
+      apply (parametrizedHoleValid_iff (insert i S)).mp
+      apply (ProjectiveBridge.arc_iff_projectiveCap _).mp
+      simpa [A, T, hi, Finset.map_insert] using hxArc
+  simpa [A, E, T] using
+    completeOutside_empty_of_maximalExtensionIn_full (L := Conic.Point (ZMod 11)) hfull hmax
+
 /-- Chords contributed by one witness column, oriented by the parameter order. -/
 def witnessChordEdges (a : Fin 6) : Finset (Fin 12 × Fin 12) :=
   Finset.univ.filter fun e =>
@@ -312,6 +264,33 @@ theorem witness_chords_partition :
   · decide
   · intro a _ b _ hab
     change Disjoint (witnessChordEdges a) (witnessChordEdges b)
+    fin_cases a <;> fin_cases b <;> simp_all <;> decide
+
+/-- The antipodal edge missed by the witness-coloured near-perfect matching. -/
+def witnessMissingEdge : Fin 6 → Fin 12 × Fin 12 :=
+  ![(0, 9), (3, 4), (1, 7), (6, 10), (2, 11), (5, 8)]
+
+/-- Adjoin the unique missing antipodal edge to a witness-coloured matching. -/
+def completedWitnessChordEdges (a : Fin 6) : Finset (Fin 12 × Fin 12) :=
+  insert (witnessMissingEdge a) (witnessChordEdges a)
+
+/-- The six augmented colour classes are genuinely six distinct perfect matchings and form a
+one-factorization of the icosahedral conflict graph augmented by its six antipodal edges. -/
+theorem completed_witness_matchings_oneFactorization :
+    (∀ a : Fin 6,
+      (completedWitnessChordEdges a).card = 6 ∧
+        ∀ x : Fin 12,
+          ((completedWitnessChordEdges a).filter fun e => x = e.1 ∨ x = e.2).card = 1) ∧
+    (Finset.univ.image witnessMissingEdge).card = 6 ∧
+    (Finset.univ.biUnion completedWitnessChordEdges) =
+      residualEdges ∪ Finset.univ.image witnessMissingEdge ∧
+    ((Finset.univ : Finset (Fin 6)) : Set (Fin 6)).PairwiseDisjoint
+      completedWitnessChordEdges := by
+  refine ⟨?_, by decide, by decide, ?_⟩
+  · intro a
+    fin_cases a <;> decide
+  · intro a _ b _ hab
+    change Disjoint (completedWitnessChordEdges a) (completedWitnessChordEdges b)
     fin_cases a <;> fin_cases b <;> simp_all <;> decide
 
 end RelativeConicArcs.Examples.Q11Coding

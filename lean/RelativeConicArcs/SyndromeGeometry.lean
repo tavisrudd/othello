@@ -195,7 +195,7 @@ def MaximalPairExtensionIndependent (A E T : Finset P) : Prop :=
     ∀ x ∈ E, x ∉ T → ¬PairExtensionIndependent (L := L) A (insert x T)
 
 omit [Fintype P] [Fintype L] [DecidableEq L] [Configuration.ProjectivePlane P L] in
-/-- Under an arc-confined single-extension locus, ordinary complete superarcs containing the seed
+/-- Under an arc-confined single-extension locus, sets maximal among extensions drawn from `E`
 are exactly maximal independent sets of the residual pair-conflict graph. -/
 theorem maximalExtensionIn_iff_maximalPairExtensionIndependent {A E T : Finset P}
     (hA : Arc (L := L) A) (hE : Arc (L := L) E) (hdisj : Disjoint A E)
@@ -219,6 +219,33 @@ theorem maximalExtensionIn_iff_maximalPairExtensionIndependent {A E T : Finset P
     exact hmax x hxE hxT
       ((arc_union_iff_pairExtensionIndependent_of_arc_locus hA hE hdisj
         (by simp [Finset.insert_subset_iff, hxE, hTE]) hsingle).mp hxarc)
+
+omit [Fintype P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- If `E` is the full one-point extension locus of `A`, maximality inside `E` upgrades to
+ordinary completeness of the resulting arc. -/
+theorem completeOutside_empty_of_maximalExtensionIn_full {A E T : Finset P}
+    (hfull : ∀ x, x ∈ E ↔ x ∉ A ∧ Arc (L := L) (insert x A))
+    (hmax : MaximalExtensionIn (L := L) A E T) :
+    CompleteOutside (L := L) (A ∪ T) ∅ := by
+  refine ⟨hmax.2.1, by simp, ?_⟩
+  intro x hxAT _
+  by_contra hxCovered
+  have hxArc : Arc (L := L) (insert x (A ∪ T)) :=
+    (arc_insert_iff_not_covered hmax.2.1 hxAT).mpr hxCovered
+  have hxA : x ∉ A := fun hx => hxAT (Finset.mem_union_left T hx)
+  have hxArcA : Arc (L := L) (insert x A) := by
+    apply arc_mono (B := insert x (A ∪ T))
+    · intro y hy
+      rcases Finset.mem_insert.mp hy with hyx | hyA
+      · exact Finset.mem_insert.mpr (Or.inl hyx)
+      · exact Finset.mem_insert_of_mem (Finset.mem_union_left T hyA)
+    · exact hxArc
+  have hxE : x ∈ E := (hfull x).mpr ⟨hxA, hxArcA⟩
+  have hxT : x ∉ T := fun hx => hxAT (Finset.mem_union_right A hx)
+  exact hmax.2.2 x hxE hxT (by
+    have heq : A ∪ insert x T = insert x (A ∪ T) := by ext y; simp
+    rw [heq]
+    exact hxArc)
 
 /-- First secant moment in leader language. -/
 theorem first_weightTwoLeader_moment {A : Finset P} (hA : Arc (L := L) A) :

@@ -1,7 +1,7 @@
 # Handoff: relative-conic arcs — evaluation, coding, and icosahedral strengthening
 
 **Date:** 2026-07-13
-**Status:** ACTIVE — C107–C109 theorem packages and paper promotion complete; C110 shared aggregate gate only
+**Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun remains
 **Tasks:** C106–C110
 
 ## Goal
@@ -74,7 +74,8 @@ For a projective `k`-arc represented by the columns of a rank-three matrix `H_A`
 - simultaneous extensions are independent sets of the full pair/triple conflict hypergraph. If the
   single-extension locus is confined to an arc—in particular, to the prescribed conic here—the
   triple obstruction vanishes, so the extension poset is exactly the independence complex of the
-  pair-conflict graph and ordinary complete superarcs are its maximal independent sets.
+  pair-conflict graph. Maximality is initially relative to the allowed locus; it upgrades to
+  ordinary completeness when that locus is proved to be the full one-point extension set.
 
 Also restate the prescribed-hole defect identity in these semantics: `r_A(x)` is the number of
 weight-two leader supports for projective syndrome direction `x`, so the first and second index
@@ -102,8 +103,9 @@ For the certified six-arc already used by `Q11Residual.lean`, prove in one thin 
   independence polynomial `1+12t+36t²+20t³`, exactly six maximal two-extensions and twenty
   maximal three-extensions, and no four-extension.
 
-The non-GRS proof target is coordinate-free: quadratic evaluation on the six projective columns has
-rank six, so no conic contains the arc. Identify the seed in the manuscript with the classical
+The formal non-GRS premise is coordinate-free: quadratic evaluation on the six projective columns has
+rank six, so no conic contains the arc. The manuscript's projectively non-GRS conclusion must
+state its convention and cite the classical normal-rational-curve/GRS correspondence. Identify the seed in the manuscript with the classical
 Clebsch hexagon and its ten triple-secant Brianchon points with the known `A5`-fixed ten-arc, but do
 not make a new abstract `A5` isomorphism or full orbit formalization a completion dependency.
 
@@ -115,7 +117,7 @@ not make a new abstract `A5` isomorphism or full orbit formalization a completio
 | **C107 [REPORTED 2026-07-13; shared aggregate pending]** | Formalize T1 in `EvaluationDichotomy.lean`, including the dimension-sensitive avoidance count, then dual/Veronese closure. | Warning-free focused build, all mathematical targets, and axiom audit pass. The shared aggregate rerun remains deferred while the unrelated generated Q25 leaf sequence builds. |
 | **C108 [REPORTED 2026-07-13]** | Formalize the thin T2 semantic bridge and coding restatement of the prescribed-hole defect theorem in `SyndromeGeometry.lean` and `CodingBridge.lean`. | Arc, syndrome-distance and exact affine leader counts, confined distance-three locus, leader moments/defect, general conflict-hypergraph extensions, and the arc-confined graph/maximal-completion specialization are kernel-checked without importing this spinoff into existing consumers. |
 | **C109 [REPORTED 2026-07-13]** | Formalize T3 in downstream `Q11Coding.lean`. | Non-GRS `[6,3,4]₁₁` code, exact covering radius/deep-hole locus, syndrome/leader distributions, tangent-antipode matchings, and complete extension spectrum build under strict trust; no abstract `A5` library is required. |
-| **C110 [IN PROGRESS; SHARED AGGREGATE ONLY]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; the post-audit actual-leader bridge, final source checklist, focused rebuild, and axiom audit pass. Only the shared aggregate rerun remains. |
+| **C110 [IN PROGRESS; SHARED AGGREGATE ONLY]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; two hostile-review rounds, the post-audit actual-leader and affine-distance/conic bridges, final source checklist, focused rebuild, axiom audit, and PDF rebuild pass. Only the shared aggregate rerun remains. |
 
 ## Cheap refutation gates
 
@@ -237,9 +239,46 @@ specialist-quality citation chase.
   direction. Thus every refined nonzero affine-coset count is divisible by `q-1` and is determined
   entirely by the projective index spectrum. For q11 this explains the factor ten in both refined
   distributions; the observation is elementary/known and is used only as a structural bridge.
+- **Incidental statement-adequacy repair, now Lean-proved:** the affine ray map is a bijection from
+  133 projective directions times ten nonzero scalars onto all 1330 nonzero syndromes;
+  `mem_affineSyndromesOfDistance_iff` characterizes the counted sets by actual parity-check
+  distance. For distance two, `syndromeLeaderSupports_two_eq_raw` identifies the determinant
+  pairs with supports of actual coefficient words and `distance_two_leader_distribution` counts
+  the resulting semantic finsets. This closes the hostile-review gap in the original arithmetic
+  rescaling proof; it is a rigor upgrade, not a novelty claim.
+- **Incidental reusable maximality correction, now Lean-proved:**
+  `completeOutside_empty_of_maximalExtensionIn_full` separates maximality inside an allowed set
+  from ordinary completeness and supplies the latter exactly when the allowed set is the full
+  one-point extension locus. `maximal_independent_extension_complete` verifies that hypothesis for
+  every q11 maximal residual set, so all six eight-arcs and twenty nine-arcs are genuinely ordinary
+  complete arcs.
+- **Incidental prior-art collision:** the q11 condition that all witness secants miss the conic
+  places the coordinates in the classical complete-exterior-set literature; cite
+  Blokhuis--Seress--Wilbrink (1992) and keep that condition distinct from prescribed-hole
+  completeness.
+- **Incidental portfolio connection (not a new arcs-paper theorem):** the conic continuation
+  conflict graph is read as an independence complex here, as a reconstruction/symmetry object in
+  the continuation track, and as a Node--Kayles/pairing-game board in the game tracks. Graph
+  isomorphism therefore transports the extension polynomial and normal-play value; ambient
+  semilinear reconstruction would further identify these as projective invariants.
+- **Incidental portfolio connection (not yet instantiated across papers):** completion distance,
+  repair tolerance, and arc-insertion resilience are instances of the same obstruction-family
+  transversal invariant `δ=τ`. Audit twisted-cubic claims across the completion and coding
+  manuscripts before either uses "transversal spectrum" as a flagship novelty phrase.
+- **Incidental polyhedral-game instance:** the q11 icosahedron is the nonregular 12-point
+  `A₅` action on `P¹(11)`, providing a certified instance of the dihedral paper's deferred
+  polyhedral-action program. Cross-cite it there; do not enlarge this paper's theorem claims.
+- **Incidental common-object observation:** an off-conic point simultaneously determines its
+  secant index against an arc and the conic involution used by the dihedral/Schreier analysis.
+  This is the object-level bridge behind the otherwise technique-separated tracks and is a
+  candidate umbrella-survey remark, not a proved strengthening here.
 - **Incidental parked research direction:** degree-`d` Veronese features suggest MDS codes whose distance-three
   syndrome locus is confined to a prescribed algebraic variety. Do not enlarge C107–C110 without a
   separate theorem and novelty gate.
+- **Incidental statement-adequacy repair:** the affine code computation and the incidence-defined
+  conic locus are now joined by `affine_distanceThree_iff_mem_standardConic`, which states directly
+  that every nonzero affine syndrome has actual distance three exactly when its projective quotient
+  lies on the standard conic. This was the sole material gap found by the second hostile review.
 
 ## Trust, adversarial, and publication gate
 

@@ -43,6 +43,12 @@ mapping to it has Hamming weight at least `d`. -/
 def SyndromeDistanceAtLeast (v : ι → W) (s : W) (d : ℕ) : Prop :=
   ∀ c : ι → K, parityCheckMap (K := K) v c = s → d ≤ hammingWeight c
 
+/-- An affine syndrome has exact distance `d` when no lighter coefficient word maps to it and
+some word of weight exactly `d` does. -/
+def SyndromeDistanceExactly (v : ι → W) (s : W) (d : ℕ) : Prop :=
+  SyndromeDistanceAtLeast (K := K) v s d ∧
+    ∃ c : ι → K, parityCheckMap (K := K) v c = s ∧ hammingWeight c = d
+
 /-- A transparent exact-covering-radius-three predicate for a parity-check system: every affine
 syndrome has a representative of weight at most three, and some syndrome has no representative
 of smaller weight. -/
@@ -55,7 +61,8 @@ section FiniteSyndromes
 
 variable [Fintype K] [DecidableEq W]
 
-/-- The affine syndrome leaders of a specified weight. -/
+/-- All coefficient words of specified weight mapping to an affine syndrome.  They are
+minimum-weight leaders only when the syndrome is separately known to have that distance. -/
 def syndromeLeadersOfWeight (v : ι → W) (s : W) (d : ℕ) : Finset (ι → K) :=
   Finset.univ.filter fun c =>
     hammingWeight c = d ∧ parityCheckMap (K := K) v c = s
@@ -84,6 +91,142 @@ omit [DecidableEq ι] in
 @[simp] theorem mem_hammingSupport {c : ι → K} {i : ι} :
     i ∈ hammingSupport c ↔ c i ≠ 0 := by
   simp [hammingSupport]
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+theorem hammingSupport_smul_of_ne_zero (a : K) (ha : a ≠ 0) (c : ι → K) :
+    hammingSupport (a • c) = hammingSupport c := by
+  ext i
+  simp [mem_hammingSupport, ha]
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+theorem hammingWeight_smul_of_ne_zero (a : K) (ha : a ≠ 0) (c : ι → K) :
+    hammingWeight (a • c) = hammingWeight c := by
+  simp [hammingWeight, hammingSupport_smul_of_ne_zero a ha c]
+
+omit [DecidableEq K] [FiniteDimensional K W] [DecidableEq ι] in
+theorem parityCheckMap_smul (v : ι → W) (a : K) (c : ι → K) :
+    parityCheckMap (K := K) v (a • c) = a • parityCheckMap (K := K) v c := by
+  exact (parityCheckMap (K := K) v).map_smul a c
+
+section FiniteSyndromeScaling
+
+variable [Fintype K] [DecidableEq W]
+
+omit [FiniteDimensional K W] in
+/-- Multiplying a syndrome by a nonzero field scalar bijects its weight-`d` coefficient words.
+These words are minimum-weight leaders whenever the common syndrome distance is `d`. -/
+theorem card_syndromeLeadersOfWeight_smul_of_ne_zero (v : ι → W)
+    (s : W) (d : ℕ) (a : K) (ha : a ≠ 0) :
+    (syndromeLeadersOfWeight (K := K) v (a • s) d).card =
+      (syndromeLeadersOfWeight (K := K) v s d).card := by
+  let forward : {c // c ∈ syndromeLeadersOfWeight (K := K) v s d} →
+      {c // c ∈ syndromeLeadersOfWeight (K := K) v (a • s) d} := fun c =>
+    ⟨a • c.1, by
+      rw [mem_syndromeLeadersOfWeight]
+      have hc := mem_syndromeLeadersOfWeight.mp c.2
+      exact ⟨(hammingWeight_smul_of_ne_zero a ha c.1).trans hc.1,
+        by rw [parityCheckMap_smul, hc.2]⟩⟩
+  let backward : {c // c ∈ syndromeLeadersOfWeight (K := K) v (a • s) d} →
+      {c // c ∈ syndromeLeadersOfWeight (K := K) v s d} := fun c =>
+    ⟨a⁻¹ • c.1, by
+      rw [mem_syndromeLeadersOfWeight]
+      have hc := mem_syndromeLeadersOfWeight.mp c.2
+      refine ⟨(hammingWeight_smul_of_ne_zero a⁻¹ (inv_ne_zero ha) c.1).trans hc.1, ?_⟩
+      rw [parityCheckMap_smul, hc.2]
+      simp [ha]⟩
+  let e : {c // c ∈ syndromeLeadersOfWeight (K := K) v s d} ≃
+      {c // c ∈ syndromeLeadersOfWeight (K := K) v (a • s) d} :=
+    { toFun := forward
+      invFun := backward
+      left_inv := by
+        intro c
+        apply Subtype.ext
+        simp [forward, backward, ha]
+      right_inv := by
+        intro c
+        apply Subtype.ext
+        simp [forward, backward, ha] }
+  simpa only [Fintype.card_coe] using (Fintype.card_congr e).symm
+
+end FiniteSyndromeScaling
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+theorem syndromeDistanceAtLeast_smul_of_ne_zero (v : ι → W)
+    {s : W} {d : ℕ} (a : K) (ha : a ≠ 0)
+    (h : SyndromeDistanceAtLeast (K := K) v s d) :
+    SyndromeDistanceAtLeast (K := K) v (a • s) d := by
+  intro c hc
+  let c' : ι → K := a⁻¹ • c
+  have hc' : parityCheckMap (K := K) v c' = s := by
+    rw [parityCheckMap_smul, hc]
+    simp [ha]
+  have hweight : hammingWeight c' = hammingWeight c :=
+    hammingWeight_smul_of_ne_zero a⁻¹ (inv_ne_zero ha) c
+  rw [← hweight]
+  exact h c' hc'
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+theorem syndromeDistanceExactly_smul_of_ne_zero (v : ι → W)
+    {s : W} {d : ℕ} (a : K) (ha : a ≠ 0)
+    (h : SyndromeDistanceExactly (K := K) v s d) :
+    SyndromeDistanceExactly (K := K) v (a • s) d := by
+  refine ⟨syndromeDistanceAtLeast_smul_of_ne_zero v a ha h.1, ?_⟩
+  obtain ⟨c, hc, hweight⟩ := h.2
+  refine ⟨a • c, ?_, ?_⟩
+  · rw [parityCheckMap_smul, hc]
+  · exact (hammingWeight_smul_of_ne_zero a ha c).trans hweight
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+theorem SyndromeDistanceExactly.unique {v : ι → W} {s : W} {d e : ℕ}
+    (hd : SyndromeDistanceExactly (K := K) v s d)
+    (he : SyndromeDistanceExactly (K := K) v s e) : d = e := by
+  obtain ⟨cd, hcd, hwd⟩ := hd.2
+  obtain ⟨ce, hce, hwe⟩ := he.2
+  apply Nat.le_antisymm
+  · simpa [hwe] using hd.1 ce hce
+  · simpa [hwd] using he.1 cd hcd
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- A nonzero syndrome has distance at least one. -/
+theorem syndromeDistanceAtLeast_one_of_ne_zero (v : ι → W) {s : W} (hs : s ≠ 0) :
+    SyndromeDistanceAtLeast (K := K) v s 1 := by
+  intro c hc
+  by_contra hweight
+  have hzeroSupport : hammingSupport c = ∅ := by
+    apply Finset.card_eq_zero.mp
+    simpa [hammingWeight] using Nat.eq_zero_of_not_pos hweight
+  have hc0 : c = 0 := by
+    funext i
+    by_contra hi
+    have : i ∈ hammingSupport c := mem_hammingSupport.mpr hi
+    simp [hzeroSupport] at this
+  exact hs (by simpa [hc0] using hc.symm)
+
+omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- Avoidance of every one-column affine span forces syndrome distance at least two. -/
+theorem syndromeDistanceAtLeast_two_of_one_avoidance (v : ι → W)
+    (hcard : 1 ≤ Fintype.card ι) {s : W}
+    (havoid : ∀ i : ι, ∀ a : K, a • v i ≠ s) :
+    SyndromeDistanceAtLeast (K := K) v s 2 := by
+  classical
+  intro c hc
+  by_contra hweight
+  have hsupportCard : (hammingSupport c).card ≤ 1 := by
+    change ¬2 ≤ hammingWeight c at hweight
+    simpa [hammingWeight] using (Nat.le_of_lt_succ (Nat.lt_of_not_ge hweight))
+  obtain ⟨T, hsub, _hTuniv, hTcard⟩ := Finset.exists_subsuperset_card_eq
+    (Finset.subset_univ (hammingSupport c)) hsupportCard hcard
+  obtain ⟨i, rfl⟩ := Finset.card_eq_one.mp hTcard
+  have hsum : ∑ k, c k • v k = s := by
+    simpa [parityCheckMap, Fintype.linearCombination_apply] using hc
+  have hsumOne : ∑ k ∈ ({i} : Finset ι), c k • v k = s := by
+    rw [← hsum]
+    apply Finset.sum_subset (Finset.subset_univ _)
+    intro k _ hk
+    have hkSupport : k ∉ hammingSupport c := fun hk' => hk (hsub hk')
+    have hck : c k = 0 := not_ne_iff.mp (by simpa using hkSupport)
+    simp [hck]
+  exact havoid i (c i) (by simpa using hsumOne)
 
 omit [DecidableEq K] [FiniteDimensional K W] [DecidableEq ι] in
 theorem mem_parityCheckCode_iff (v : ι → W) (c : ι → K) :

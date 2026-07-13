@@ -22,10 +22,10 @@ spinoff.
 | projective syndrome geometry | distance-one/two/three trichotomy; exact weight-two support count; `completeOutside_iff_distanceThreeDirections_subset`; one-column and simultaneous extension theorems; maximal extension/graph-independence bridge; leader moment and defect restatements | proved in `SyndromeGeometry.lean`; the general simultaneous object includes pair and triple conflicts, while an arc-confined extension locus reduces exactly to the pair graph |
 | transparent coding bridge | `parityCheckCode`; `[n,n-3,4]` MDS parameter package; affine syndrome distance; actual-leader/support cardinality bijection through weight three; exact `choose(n,3)` weight-three leader count; covering-radius-three predicate; indexed projective arc/triple-independence equivalence | proved in `CodingBridge.lean` without an external coding API; codewords, supports, distance, and leaders are explicit finite functions; `card_syndromeLeadersOfWeight_eq_supports` makes the incidence count literally an affine coefficient-word count |
 | finite examples | `Examples.rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all four values exact |
-| q=16 projective classification | frame normalization; checked matrix transitions; `Q16QuadraticAvoidance.level8_quadraticAvoidance`; full-rank/forced-hit leaf rejection; `no_completeOutside_GF16_card_eight` | all 2633 normalized classes satisfy the stronger singular-or-nonsingular quadratic obstruction; global conic transport proves `rhoC_GF16 = 9` |
+| q=16 projective classification | `StepBook.coverage`; `StepBooksValid`; `classifiedAt_level8_of_frame`; frame normalization; checked matrix transitions; `Q16QuadraticAvoidance.level8_quadraticAvoidance`; full-rank/forced-hit leaf rejection; `no_completeOutside_GF16_card_eight` | every legal move is represented by a certified transition into the next list, and the books cover the current parent list exactly, so closure and exhaustiveness of the 4/61/454/2633 lists are kernel-checked; all 2633 normalized classes satisfy the stronger singular-or-nonsingular quadratic obstruction; global conic transport proves `rhoC_GF16 = 9` |
 | q=9 terminal game | `Q9Terminal.complete`, `legalExtensions_eq_empty`, `isP` | certified witness is an ordinary complete arc and actual terminal projective P-position |
 | q=11 residual game | residual graph theorems, `continuation_rawArc_iff`, `seed_isP` | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
-| q=11 code and extension spectrum | `witness_mds_columns`, `witness_code_minimum_distance_four`, `projective_distanceThreeDirections_eq_standardConic`, `witness_code_coveringRadius_three`, exact syndrome/leader spectra, `no_nonzero_quadratic_vanishing`, `extension_independence_spectrum`, `maximal_extension_spectrum`, chord matching/partition theorems | `Q11Coding.lean` proves a non-GRS `[6,3,4]₁₁` code of radius three, exact conic projective deep-hole locus, affine distribution `(1,60,1150,120)` and leader split `(900,150,100)` from the certified projective spectrum, the generic actual-leader/support bridge, and ten nonzero scalars per direction; it also proves the extension polynomial `1+12t+36t²+20t³`, all maximal-set counts, and the six-colour chord decomposition |
+| q=11 code and extension spectrum | `witness_mds_columns`, `witness_code_minimum_distance_four`, `projective_distanceThreeDirections_eq_standardConic`, `affine_distanceThree_iff_mem_standardConic`, `witness_code_coveringRadius_three`, `mem_affineSyndromesOfDistance_iff`, `affine_coset_distance_distribution`, `syndromeLeaderSupports_two_eq_raw`, `distance_two_leader_distribution`, `no_nonzero_quadratic_vanishing`, `extension_independence_spectrum`, `maximal_extension_spectrum`, `maximal_independent_extension_complete`, `completed_witness_matchings_oneFactorization` | Lean proves the `[6,3,4]₁₁` code/radius/deep-hole claims, including a direct theorem equating actual distance-three nonzero affine syndrome rays with the incidence-defined standard conic; `no_nonzero_quadratic_vanishing` proves the no-conic premise used with the classical NRC/GRS dictionary. The affine distribution and `(900,150,100)` split range over actual syndromes and actual finite coefficient words, with a proved ray bijection and support equality. Every counted maximal extension is ordinarily complete, and the six distinct antipodal additions give a checked one-factorization. |
 | q=25 quadratic pair extension | `Q25PairResult.f2_pair_extension` | every Frobenius-invariant eight-arc with exactly two fixed points has a fresh conjugate-pair extension; normalization, finite coverage, determinant checking, and projective semantics are Lean-checked |
 
 The four exact arithmetic thresholds are also explicit theorems:
@@ -99,8 +99,21 @@ b096305a809b062c274129c157d51a57d65e9aec0e44662370ec53c8c773110f  q11 Python out
 380cab47923cbfb3a9bfcc54ee89cf0eb79aa551d936d2e91cbb4949ae56477d  q11 C++ output
 ```
 
-These programs are adversarial provenance only. Every manuscript claim they exercise is also a
-Lean theorem reduced by the kernel.
+The exact replay protocol on the development host was:
+
+```text
+python3 check_evaluation_dichotomy.py > /var/tmp/arcs-evaluation.out
+python3 check_q11_structure.py > /var/tmp/arcs-q11-python.out
+g++ -std=c++20 -O2 check_q11_structure.cpp -o /var/tmp/check_q11_structure
+/var/tmp/check_q11_structure > /var/tmp/arcs-q11-cpp.out
+sha256sum /var/tmp/arcs-evaluation.out /var/tmp/arcs-q11-python.out /var/tmp/arcs-q11-cpp.out
+```
+
+The compiler was `g++ (GCC) 14.3.0`; `/var/tmp` is used because `/tmp` is tmpfs on this host.
+These programs are adversarial provenance only. The mathematical q11 claims used in the
+manuscript's proposition have corresponding Lean theorems, but the checkers' auxiliary
+group-generation, orbit-label, coordinate-invariance, and mutation diagnostics are not all
+separate Lean declarations and are not inputs to the proof.
 
 ## Exact q=16 classification provenance
 

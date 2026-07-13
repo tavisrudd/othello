@@ -76,9 +76,10 @@ ordinary-uncovered locus while avoiding the arc.  A supplementary verifier
 checks the witnesses, while a companion Lean formalization proves the theorem
 chain and kernel-checks the local classification, quadratic obstruction,
 projective reduction, and exact $q=16$ conclusion.  For the six-point
-$q=11$ witness it also proves a non-GRS $[6,3,4]_{11}$ MDS code of covering
-radius three, its exact coset and extension spectra, and its icosahedral
-simultaneous-extension complex.
+$q=11$ witness it certifies the no-conic premise which, by the classical
+normal-rational-curve dictionary, makes the associated $[6,3,4]_{11}$ MDS
+code projectively non-GRS; it also proves covering radius three, the exact
+coset and extension spectra, and the icosahedral simultaneous-extension complex.
 \end{abstract}
 
 \section{Introduction}
@@ -132,6 +133,16 @@ one-dimensional set that must be covered, rather than an exceptional set
 that may remain uncovered.  Here the selected arc is required to avoid the
 conic.
 
+There is also classical work on \emph{complete exterior sets} of a conic:
+sets of exterior points whose pairwise joins are exterior lines; see
+Blokhuis--Seress--Wilbrink~\cite{BlokhuisSeressWilbrink1992}.  This is a
+different condition from prescribed-hole completeness: it constrains how
+the selected points meet the conic, whereas Definition~\ref{def:relative}
+requires their secants to cover the complementary off-conic locus.  The
+$q=11$ witness below has all of its secants exterior to the conic, making
+this literature directly relevant even though the paper's completeness
+condition is different.
+
 The point index with respect to an arc, and the first two double-counting
 equations for its distribution, are classical; compare
 Hirschfeld~\cite[Chapter~9]{Hirschfeld1998} and Ball~\cite{Ball1997}.  The
@@ -154,6 +165,17 @@ used to control overlap have an exact remainder.  This produces:
 \item small finite-field results whose upper bounds are independently
       verifiable from explicit coordinates.
 \end{enumerate}
+
+Thus the classical scaffolding is the secant-index equations, the
+Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS dictionary, and standard
+saturating-set terminology.  The new claims isolated here are the
+prescribed-hole parameter, the exact remainder after the exceptional-set
+split (including its equality and stability consequences), and the use of
+the ordinary-uncovered locus as an evaluation obstruction.  The defect
+identity is deliberately an exact accounting theorem derived from the two
+classical moments; its content is the identified nonnegative remainder and
+the consequences obtained by retaining it, not a claim that the underlying
+moments are new.
 
 A targeted literature search across complete and saturating arcs,
 almost-complete conic subsets, prescribed-line coverage, arcs and quadrics,
@@ -380,6 +402,11 @@ columns span $\F_q^3$, and any four columns support a dependence.  Conversely,
 a projective parity-check system for a code with these parameters is a
 $k$-arc.  This correspondence and its coset-weight consequences are
 classical; see Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.
+We call such a code \emph{projectively GRS} when, after permuting and scaling
+columns and applying a projective coordinate change, its projective
+parity-check columns lie on a normal rational curve; in $\PG(2,q)$ this is a
+nonsingular conic.  This is the standard normal-rational-curve/GRS
+correspondence~\cite{StormeThas1991}.
 
 \begin{proposition}[Syndrome form of relative completeness]
 \label{prop:syndrome-dictionary}
@@ -418,6 +445,10 @@ as well~\cite{Kaipa2017}.
 
 Thus $r_A(x)$ is not merely an incidence index: it is the exact number of
 minimum weight-two leaders of every affine syndrome on direction $x$.
+All $q-1$ nonzero scalar multiples of a projective syndrome direction have
+the same distance and leader count: multiplication by the scalar bijects
+their coefficient words without changing Hamming support.  This is the
+normalization behind every projective-to-affine factor of $q-1$ below.
 The first moment counts leaders, the second counts collisions between
 distinct leader supports, and Theorem~\ref{thm:defect} is an exact
 leader-collision remainder identity after prescribed directions are removed.
@@ -857,6 +888,16 @@ projective scalar equalities, so the classification does not trust the
 canonical-labeling program.  The final count of $2633$ projective eight-arc
 classes independently reproduces Theorem~3.8.1 of
 Al-Seraji--Al-Ogali~\cite{AlSerajiAlOgali2018}; the count itself is not new.
+More specifically, each \texttt{StepBook.coverage} theorem says that every
+legal one-point extension of its parent is represented by a certified entry,
+and \texttt{StepBooksValid} says that the books cover the current parent list
+in exactly its listed order.  Every entry carries a checked projective
+equivalence to a member of the next list.  The theorem
+\texttt{classifiedAt\_level8\_of\_frame} composes those equalities, and the
+frame-reduction theorem transports an arbitrary eight-arc into a listed
+leaf.  Thus closure and exhaustiveness of the four class lists, not merely
+the arithmetic of each listed member, are kernel-checked; the C++ generator
+is not trusted for completeness.
 
 For $2630$ of the classified leaves, six points of $U(A)$ give an invertible
 $6\times6$ evaluation matrix, giving the first alternative of
@@ -975,15 +1016,23 @@ of the quadratic monomials
  X^2,\ XY,\ XZ,\ Y^2,\ YZ,\ Z^2
 \]
 is nonsingular, so no conic contains all six
-projective columns; hence the code is not projectively GRS.  Direct finite
+projective columns; by the preceding definition and the classical
+normal-rational-curve dictionary, the code is not projectively GRS.  The
+formal theorem checks the no-conic premise; it does not build coding-theory
+equivalences into the trusted kernel statement.  Direct finite
 arithmetic gives the secant-index spectrum
 \[
  0:12,\qquad 1:90,\qquad 2:15,\qquad 3:10,
 \]
 where index zero is precisely the conic.  Multiplying each nonzero
-projective direction by its ten affine scalars and applying
-Proposition~\ref{prop:syndrome-dictionary} gives the claimed coset counts
-and covering radius.
+projective direction by its ten affine scalars gives all nonzero affine
+syndromes bijectively.  In the companion formalization, membership in each
+counted set is equivalent to actual parity-check distance, and for every
+distance-two direction the determinant-zero witness pairs are proved equal
+to the supports of actual weight-two coefficient words.  Uniqueness on an
+independent support and scalar multiplication then give the claimed coset
+and leader counts, not merely rescaled incidence counts.  The index-zero
+directions give the covering radius.
 
 For simultaneous extensions, two conic columns conflict exactly when their
 chord contains a witness column.  No three conic columns are collinear, so
@@ -993,6 +1042,13 @@ displayed polynomial and maximal-set counts.  The same determinant table
 partitions the thirty conflict edges into the six stated matchings.  All
 these finite assertions are independently reproduced by the supplementary
 Python and C++ checkers and kernel-checked in the companion Lean module.
+Lean additionally proves that residual maximality upgrades to ordinary
+completeness: relative completeness confines every further point to the
+conic, and maximality excludes the remaining conic points.  It also checks
+that the six missing antipodal edges are distinct and that adjoining the
+appropriate edge to each colour class gives a six-edge perfect matching;
+the six augmented classes are pairwise edge-disjoint and partition the
+augmented graph.
 \end{proof}
 
 The six-set is a classical Clebsch hexagon with icosahedral $A_5$ symmetry;
@@ -1099,6 +1155,23 @@ The elementary theory leaves several concrete problems.
 Determine whether the uncovered-quadratic-rank obstruction used at $q=16$
 extends to other even orders or gives useful lower bounds on the size of a
 $\cC$-complete arc beyond the scalar defect inequality.
+\end{problem}
+
+\begin{problem}
+Develop the higher-dimensional analogue for caps complete outside a
+prescribed quadric in $\PG(n,q)$.  The evaluation-avoidance lemma already
+applies to arbitrary feature maps and every Veronese degree; the missing
+ingredients are the appropriate cap secant moments and useful examples in
+dimensions at least three.
+\end{problem}
+
+\begin{problem}
+Determine whether the exact defect remainder yields new lower bounds for
+arc-constrained saturating sets or the corresponding covering codes, and
+whether small-order scans beyond $q=11$ produce further recognizable
+extension complexes.  The evaluation formulation is also the elementary
+linear-algebraic interface used by polynomial-method arguments, but no
+slice-rank or cap-set consequence is asserted here.
 \end{problem}
 
 \begin{problem}
@@ -1211,11 +1284,17 @@ $\PG(2,q)$ and extendability of Reed--Solomon codes,
 101--115.
 \newblock doi:10.1134/S0032946018020011.
 
+\bibitem{BlokhuisSeressWilbrink1992}
+A.~Blokhuis, A.~Seress, and H.~A. Wilbrink,
+\newblock Characterization of complete exterior sets of conics,
+\newblock \emph{Combinatorica} \textbf{12}(2) (1992), 143--147.
+\newblock doi:10.1007/BF01204717.
+
 \bibitem{DavydovEtAl2021}
 A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
 \newblock On the weight distribution of the cosets of MDS codes,
-\newblock \emph{Advances in Mathematics of Communications}, advance
-publication (2021).
+\newblock \emph{Advances in Mathematics of Communications} \textbf{17}(5)
+(2023), 1115--1138.
 \newblock doi:10.3934/amc.2021042.
 
 \bibitem{Dye1991}
@@ -1272,6 +1351,14 @@ L.~Storme and H.~Van Maldeghem,
 \newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{69}
 (1995), 200--216.
 \newblock doi:10.1016/0097-3165(95)90051-9.
+
+\bibitem{StormeThas1991}
+L.~Storme and J.~A. Thas,
+\newblock Generalized Reed--Solomon codes and normal rational curves: an
+improvement of results by Seroussi and Roth,
+\newblock in \emph{Advances in Finite Geometries and Designs}, Oxford
+University Press, 1991, 369--389.
+\newblock doi:10.1093/oso/9780198535928.003.0031.
 
 \end{thebibliography}
 

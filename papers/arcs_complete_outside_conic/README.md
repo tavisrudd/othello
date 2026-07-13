@@ -45,7 +45,12 @@ eight-arc classes, six ordinarily uncovered points impose six independent quadra
 so no nonzero conic equation can contain the uncovered locus. In the remaining three rank-five
 classes, the forced quadratic equation also vanishes at a selected arc point, contradicting
 disjointness. Lean checks all local arithmetic and proves the normalization, classification, and
-conic-transport semantics; the C++ enumerator is reproducible provenance, not a trusted oracle.
+conic-transport semantics. In particular, each `StepBook.coverage` theorem proves that every legal
+extension of its parent occurs among certified entries, `StepBooksValid` proves that the books
+cover the current parent list exactly, `classifiedAt_level8_of_frame` composes the four layers,
+and frame reduction transports an arbitrary eight-arc to a listed leaf. Thus closure and
+exhaustiveness of the lists—not only the listed members—are kernel-checked; the C++ enumerator is
+reproducible provenance, not a trusted oracle.
 From this directory, reproduce the report and emitted Lean data with
 `g++ -O3 -std=c++20 search_rhoc16.cpp -o /var/tmp/search_rhoc16` followed by
 `/var/tmp/search_rhoc16 --emit-lean`; `/tmp` is tmpfs on the development host. The checked-in
@@ -55,10 +60,19 @@ stream from that run.
 **Small-order structural note.** The `q=11` witness has `I_C=0`, so all 15 of its secants are
 exterior to the conic. Its associated code is a projectively non-GRS `[6,3,4]₁₁` MDS code
 of covering radius three; the twelve conic directions are exactly its projective deep holes. The
-affine coset-distance distribution is `(1,60,1150,120)`, and the distance-two cosets have one,
-two, or three leaders in counts `(900,150,100)`. Simultaneous conic-column extensions form the
+affine coset-distance distribution is `(1,60,1150,120)`, and
+`affine_distanceThree_iff_mem_standardConic` identifies actual distance-three affine syndrome
+rays with the standard conic. The distance-two cosets have one,
+two, or three actual minimum-weight coefficient words in counts `(900,150,100)`. Lean proves the
+133-by-10 ray normalization is a bijection onto all nonzero affine syndromes, characterizes the
+counted sets by actual parity-check distance, and identifies determinant-zero pairs with actual
+word supports before counting. Simultaneous conic-column extensions form the
 icosahedron independence complex, with polynomial `1+12t+36t²+20t³`, six maximal
-two-extensions, and twenty maximal three-extensions. This six-set is a classical Clebsch hexagon;
+two-extensions, and twenty maximal three-extensions; a named theorem upgrades every such maximal
+set to an ordinary complete arc. The six near-perfect chord classes augment by six distinct
+antipodal edges to a certified one-factorization. This six-set is a classical Clebsch hexagon and
+its all-secants-exterior property overlaps the classical exterior-set setting of
+Blokhuis--Seress--Wilbrink (1992);
 the exact code/extension conjunction is presented as a checked synthesis, not a novelty claim.
 
 In the auxiliary cap-game reading, all twelve conic points are initially live and their antipodal
@@ -70,7 +84,8 @@ and the game statements are not used in the paper's bounds.
 
 **Novelty posture (self-stated):** the ordinary `PG(2,16)` count of 2633 eight-arc classes is
 known. The general evaluation lemma is elementary linear algebra, and quadrics containing arcs
-are classical. A targeted search did not locate the relative-completeness parameter or exact
+are classical. So are the secant-index moments, the Lunelli–Sce scale, the arc↔MDS/GRS dictionary,
+saturating-set theory, and complete exterior sets of conics. A targeted search did not locate the relative-completeness parameter or exact
 defect identity in this form, the use of the ordinary-uncovered locus as a quadratic obstruction,
 the exceptional `2630+3` rank profile, or the exact value `rho_C(16)=9`. These are bounded search
 findings, not priority certificates; the paper makes no unconditional novelty claim.

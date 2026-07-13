@@ -291,3 +291,62 @@ weights at most three, actual affine leaders map bijectively to the supports tha
 counts therefore follow from the kernel-checked projective secant spectrum and the ten nonzero
 scalars on each direction, exactly as in the manuscript proof. Focused builds of `CodingBridge`
 and `Q11Coding` pass warning-free after this strengthening.
+
+## 2026-07-13 — hostile-review repair round (supersedes the preceding affine-count adequacy verdict)
+
+An external hostile review against pre-strengthening base `c3fbe05` correctly found that the
+preceding support-bijection repair still did not connect the projective arithmetic to all affine
+syndromes: the public q11 distribution theorems merely multiplied projective counts by ten. That
+statement-adequacy verdict is overturned here.
+
+The repaired strict-trust chain now proves a coordinate normalization bijection
+`AffineRay ≃ {s : Vec (ZMod 11) // s ≠ 0}`, characterizes membership in
+`affineSyndromesOfDistance d` by actual `parityCheckMap` distance, and derives the affine counts
+structurally from the certified projective spectrum. For distance two, split kernel certificates
+prove a nonzero two-column presentation for every determinant-zero pair; the semantic theorem
+`syndromeLeaderSupports_two_eq_raw` identifies those pairs with supports of actual weight-two
+coefficient words. The generic leader/support bijection and the proved scalar-word bijection then
+yield the semantic `(900,150,100)` split. Large finite reductions were split into leaf modules and
+built sequentially; two attempted aggregate-style reductions were stopped when they approached
+the box's memory limit alongside the unrelated Q25 worker.
+
+The same review round repaired three other statement surfaces. The generic extension theorem now
+says exactly "maximal inside `E`"; `completeOutside_empty_of_maximalExtensionIn_full` supplies the
+ordinary-completeness upgrade only for the full one-point extension locus, and
+`maximal_independent_extension_complete` verifies that hypothesis for every q11 maximal set. The
+six antipodal additions are explicit and
+`completed_witness_matchings_oneFactorization` checks distinctness, perfect matching coverage,
+edge-disjointness, and partition. The no-quadratic Lean theorem is documented only as the formal
+no-conic premise; the projectively non-GRS conclusion is defined and sourced through the classical
+normal-rational-curve/GRS correspondence in the manuscript.
+
+The final hostile-review repair added the named theorem
+`affine_distanceThree_iff_mem_standardConic`: for every nonzero affine syndrome, actual
+parity-check distance three is equivalent to membership of its projective quotient in the standard
+conic. This closes the remaining gap between the semantic affine-distance computation and the
+separately proved incidence-defined deep-hole locus. A source-level recheck also corrected the q16
+description: `StepBook.coverage` covers every legal move by a certified transition, while
+`StepBooksValid` covers the parent list exactly; neither theorem is now inaccurately described as a
+literal equality between raw children and legal extensions.
+
+The repaired modules `Q11SemanticSynthesis`, `Q11SemanticDistribution`,
+`Q11SemanticLeaders`, and `Q11Coding` then built sequentially under `choom -n 1000`. The bridge
+and the other repaired q11 headline theorems print only Mathlib's accepted
+`[propext, Classical.choice, Quot.sound]` foundations. A focused source scan found no `sorry`,
+`admit`, `native_decide`, or paper-specific axiom. Tectonic rebuilt the synchronized PDF at SHA-256
+`f53a0180dceba632f727d125b32f0c730ec14c4649869889a79c0c2b7987c384`; the only diagnostic was
+the pre-existing harmless underfull bibliography line.
+
+A final bounded hostile re-review inspected the three new bridge theorem bodies and compared the
+revised q16 language with `Q16StepKernel.lean`. It found no remaining blocker, major, moderate, or
+minor defect in the repair set and confirmed that no conclusion is inferred merely from parallel
+cardinalities.
+
+The literature/claim pass added Blokhuis--Seress--Wilbrink (1992) for complete exterior sets,
+updated Davydov--Marcugini--Pambianco to the final 2023 journal record, and made the classical/new
+split explicit. The q16 explanation now names `StepBook.coverage`, `StepBooksValid`,
+`classifiedAt_level8_of_frame`, and frame reduction so a referee can see that list closure and
+exhaustiveness are kernel-checked rather than trusted to the generator. The independent checker
+protocol was replayed with GCC 14.3.0, `-std=c++20 -O2`, and disk-backed `/var/tmp`; all three
+frozen output hashes reproduced exactly. Auxiliary group/orbit/mutation diagnostics are now
+clearly outside the one-to-one Lean theorem manifest and outside the proof dependency.

@@ -46,7 +46,12 @@ The lower bounds for \(q=8,9,11\), and the preliminary lower bound eight at
 exhaustive projective classification of eight-arcs.  The source
 `search_rhoc16.cpp` reports 2633 frame-normalized classes.  Its Lean output
 does not trust canonical labels: each augmentation is checked by an explicit
-invertible projective matrix and pointwise scalar equalities.  At every leaf,
+invertible projective matrix and pointwise scalar equalities.  Each parent
+book has a `StepBook.coverage` theorem proving that every legal extension occurs among certified
+entries, while `StepBooksValid` proves that the books cover the current parent list exactly;
+`classifiedAt_level8_of_frame` composes the four layers, and frame reduction
+maps an arbitrary eight-arc to a listed leaf.  Thus closure and exhaustiveness
+of the lists are certified, not delegated to the generator.  At every leaf,
 kernel-checked ordinary-uncovered points either give a full-rank six-row
 quadratic evaluation matrix (2630 leaves), or force the unique rank-five
 quadratic to hit the arc (three leaves).  The semantic proof transports this
@@ -84,14 +89,26 @@ The expanded q=11 result is kernel checked in `RelativeConicArcs/Q11Coding.lean`
 transparent `[6,3,4]₁₁` MDS parameters and exact minimum distance, covering radius three, equality
 of the projective deep-hole locus with the conic, affine coset distances `(1,60,1150,120)`, and
 distance-two leader histogram `(900,150,100)`. These affine counts are derived from the certified
-projective secant-index spectrum, ten nonzero scalars per direction, and the generic
-`CodingBridge.card_syndromeLeadersOfWeight_eq_supports` theorem, which proves that the support
-count through weight three is exactly the count of actual affine coefficient words. Invertibility of the six-by-six quadratic
-evaluation matrix proves that the projective columns lie on no conic, hence the code is non-GRS.
+projective secant-index spectrum only after proving that 133 canonical directions times ten
+nonzero scalars biject onto all 1330 nonzero affine syndromes. Membership in the counted distance
+sets is equivalent to actual parity-check distance. For distance two,
+`syndromeLeaderSupports_two_eq_raw` identifies the determinant-zero pairs with supports of actual
+weight-two coefficient words, `card_syndromeLeadersOfWeight_eq_supports` identifies supports with
+words, and scalar multiplication transports the word count along each ray. Invertibility of the
+six-by-six quadratic evaluation matrix proves the formal no-conic premise; the conclusion
+"projectively non-GRS" additionally uses the cited classical normal-rational-curve/GRS
+dictionary.
+The named theorem `affine_distanceThree_iff_mem_standardConic` additionally identifies actual
+distance-three affine syndrome rays directly with membership in the incidence-defined standard
+conic, closing the quotient-level code/geometry bridge rather than relying on parallel counts.
 It also proves the extension polynomial `1+12t+36t²+20t³`, zero maximal extensions of sizes zero
 and one, six of size two, twenty of size three, and none of size four. The determinant-defined
 conflict graph is the 30-edge, degree-five icosahedral graph; its six witness-coloured five-edge
 matchings partition the edges and each misses an antipodal pair.
+`maximal_independent_extension_complete` upgrades every counted maximal residual set to an
+ordinary complete arc. `completed_witness_matchings_oneFactorization` proves that the six missing
+antipodal edges are distinct and that the augmented colour classes are six pairwise edge-disjoint
+perfect matchings partitioning the augmented graph.
 
 The auxiliary P-value conclusion remains in `RelativeConicArcs/Q11Residual.lean` and uses the
 generic antipodal conflict-graph mirror theorem, not an exhaustive game-tree evaluator. It is not
@@ -141,7 +158,7 @@ hypothesis and is not used by the finite results.
 
 Three adversarial controls exercise distinct trust layers: changing a leaf member breaks its local
 rejection proof, changing a projective transition scalar breaks the row proof, and omitting the
-last parent book breaks the aggregate `StepBooksValid` coverage equality. Each mutation was
+last parent book breaks the aggregate `StepBooksValid` parent-list equality. Each mutation was
 rejected by Lean and the restored sources rebuilt through the final result registry.
 
 ## Claims intentionally omitted
