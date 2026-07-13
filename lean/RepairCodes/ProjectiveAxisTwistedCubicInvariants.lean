@@ -289,6 +289,33 @@ theorem projectiveShiftInv_linearIndependent_iff [CharP 𝔽 3] {I : Type*}
     rw [← hfamily] at hmap
     exact LinearIndependent.of_comp T.toLinearMap hmap
 
+/-- The index equivalence restricted to a finite support and its relabeled image. -/
+noncomputable def projectiveShiftInvFinsetEquiv (a : 𝔽)
+    (S : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    S ≃ S.map (projectiveShiftInvIndexEquiv a).toEmbedding where
+  toFun x := ⟨projectiveShiftInvIndexEquiv a x, Finset.mem_map.mpr ⟨x, x.property, rfl⟩⟩
+  invFun y := ⟨(projectiveShiftInvIndexEquiv a).symm y, by
+    obtain ⟨x, hx, hxy⟩ := Finset.mem_map.mp y.property
+    have : (projectiveShiftInvIndexEquiv a).symm y = x := by
+      rw [← hxy]
+      exact (projectiveShiftInvIndexEquiv a).symm_apply_apply x
+    simpa [this] using hx⟩
+  left_inv x := by ext; simp
+  right_inv y := by ext; simp
+
+/-- Finite selected supports preserve linear independence under D-PC10 relabeling. -/
+theorem projectiveShiftInv_finset_linearIndependent_iff [CharP 𝔽 3] (a : 𝔽)
+    (S : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    LinearIndependent 𝔽 (fun j : S => projectiveAxisTwistedCubicPoints 𝔽 j) ↔
+      LinearIndependent 𝔽
+        (fun j : S.map (projectiveShiftInvIndexEquiv a).toEmbedding =>
+          projectiveAxisTwistedCubicPoints 𝔽 j) := by
+  rw [projectiveShiftInv_linearIndependent_iff a
+    (fun j : S => (j : ProjectiveAxisTwistedCubicIndex 𝔽))]
+  apply linearIndependent_equiv' (projectiveShiftInvFinsetEquiv a S)
+  funext j
+  rfl
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
@@ -296,5 +323,6 @@ theorem projectiveShiftInv_linearIndependent_iff [CharP 𝔽 3] {I : Type*}
 #print axioms projectiveShiftInvLinearMap_axis_finite_of_ne
 #print axioms projectiveShiftInvLinearMap_column
 #print axioms projectiveShiftInv_linearIndependent_iff
+#print axioms projectiveShiftInv_finset_linearIndependent_iff
 
 end RepairCodes

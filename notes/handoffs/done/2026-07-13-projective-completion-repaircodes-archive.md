@@ -161,3 +161,9 @@ repair edges nonempty, supplies the generic circuit-to-repair bridge, and record
 minimal-clutter matching/transversal reductions. The aggregate `RepairCodes` build passes. Exact
 finite-support relabeling and identification of the axis-infinity cubic component with the full
 zero-sum triple hypergraph remain open.
+
+The next slice added an explicit equivalence between a finite support `S` and its image under the
+D-PC10 coordinate permutation, then proved kernel-side that the selected columns on `S` are
+linearly independent exactly when the selected columns on the relabeled support are. Thus the
+remaining transport work is restricted to compatibility of one-point deletions and the repair
+target/helper convention, rather than any further ambient linear algebra.
