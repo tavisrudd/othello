@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-12
 **Status:** IN PROGRESS
-**Tasks:** C85 [REPORTED 2026-07-12]; C86–C88 [OPEN]
+**Tasks:** C85–C86 [REPORTED 2026-07-12]; C87–C88 [OPEN]
 
 ## Goal
 
@@ -39,6 +39,10 @@ the live execution map. Session history belongs in
 | parabolic split linear route is not fixed-point-free | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C85) |
 | odd-dimensional scalar-square matrix has square scalar | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved |
 | parabolic nonsplit linear route is impossible | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved |
+| quadratic-extension norm surjectivity and square reflection | `ProjectiveCap/FiniteHermitian.lean` | Lean-proved (C86) |
+| finite Hermitian forms in dimension at least two are isotropic | `ProjectiveCap/FiniteHermitian.lean` | Lean-proved (C86) |
+| Hermitian split scalar-square route is not fixed-point-free | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C86) |
+| Hermitian nonsplit similitude scalar is impossible | `ProjectiveCap/FiniteHermitian.lean`, `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C86) |
 
 Current source audit: no `sorry` or `native_decide`; the relevant builds pass with axiom profile
 `[propext, Classical.choice, Quot.sound]`.
@@ -47,16 +51,15 @@ Current source audit: no `sorry` or `native_decide`; the relevant builds pass wi
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C86** | Nondegenerate finite Hermitian spaces of dimension at least two are isotropic; formalize the adjoint/multiplier constraints for the nonsplit linear case. | Landed eigenvector reduction | Closes the linear Hermitian branches. |
 | **C87** | Classify order-two Baer-semilinear collineations sufficiently to expose their fixed subgeometry; prove that subgeometry meets each relevant parabolic and Hermitian board. | Board/form models from C85/C86 may be reused, but the classification is logically separate. | Closes the semilinear branches and completes the parabolic/Hermitian method-negative rows. |
 | **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
 
 ## Dependency and attack order
 
-C85 is closed and its quadratic isotropy infrastructure is available to C88. Proceed with **C86**.
-Do C87 after the concrete Hermitian board model is stable. Attempt C88 only after the reusable
-quadratic and semilinear infrastructure is in place; it is the item expected to require genuinely
-new mathematical work.
+C85–C86 are closed; their quadratic and Hermitian infrastructure is available to later tasks.
+Proceed with **C87**, using the concrete relative-Frobenius Hermitian model now landed. Attempt C88
+only after the reusable semilinear infrastructure is in place; it is the item expected to require
+genuinely new mathematical work.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -76,7 +79,7 @@ For each closed task:
 
 ## Next step
 
-Begin C86 by inventorying Mathlib's sesquilinear/Hermitian-form, conjugation, and finite-field
-extension APIs. Separate the general Hermitian isotropy theorem from the nonsplit
-adjoint/multiplier classification, and do not promote the Hermitian row until both linear branches
-are formal.
+Begin C87 by formalizing an order-two semilinear map relative to a quadratic field automorphism,
+then isolate its fixed subgeometry before proving that the parabolic and Hermitian board predicates
+have a point over that fixed field. Do not promote either full negative row until both board
+intersection theorems are formal.

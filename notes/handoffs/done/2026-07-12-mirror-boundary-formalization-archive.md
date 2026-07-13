@@ -36,3 +36,28 @@ closed-negative proof routes belong here.
   - Axiom audit of the weighted-squares, general isotropy, eigenspace, normalized and scalar-square
     fixed-point, and parabolic theorems: exactly `[propext, Classical.choice, Quot.sound]`.
   - Source search over both affected files: no `sorry`, `native_decide`, or `axiom` declaration.
+
+## 2026-07-12 — C86 reported
+
+- Added `ProjectiveCap/FiniteHermitian.lean` around the canonical relative Frobenius of a quadratic
+  finite-field extension. It proves the exact norm formula, norm surjectivity, and the new
+  square-reflection lemma: if `Norm(c)` is square in the base field, then `c` is square upstairs.
+- Formalized two-vector Hermitian orthogonalization. A Hermitian form whose diagonal values lie in
+  the base field has a nonzero isotropic vector in every dimension at least two; no nondegeneracy
+  hypothesis is needed for this existence theorem.
+- Closed the split route in `MirrorBoundary.lean`: a scalar-square projective involution in vector
+  dimension at least three has a two-dimensional eigenspace and hence an isotropic fixed point.
+- Closed the nonsplit route for the standard general-unitary interface: applying a similitude with
+  base-field multiplier `μ` twice gives `Norm(c)=μ²`; square reflection contradicts nonsquare `c`.
+  This replaces the prose shortcut “`c` lies in the base field,” which is stronger than needed and
+  is not used by the formal proof.
+- The Hermitian structure explicitly records conjugate symmetry and that diagonal values lie in
+  the base field. The nonsplit theorem explicitly requires nondegeneracy and a base-field
+  similitude multiplier, so no stabilizer-classification assumption is hidden.
+- Validation:
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap.FiniteHermitian` — PASS, clean.
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap.MirrorBoundary` — PASS, clean.
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap` — PASS (`8657` jobs).
+  - Axiom audit of the norm, square-reflection, isotropy, multiplier, split, and nonsplit theorems:
+    exactly `[propext, Classical.choice, Quot.sound]`.
+  - Source search over both affected files: no `sorry`, `native_decide`, or `axiom` declaration.

@@ -125,9 +125,11 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   `[propext, Classical.choice, Quot.sound]`. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
-- **C86 [OPEN] — Hermitian linear obstruction.** Formalize finite Hermitian isotropy in dimension
-  at least two and the adjoint/multiplier classification excluding nonsplit fixed-point-free
-  projective involutions. Track in the
+- **C86 [REPORTED 2026-07-12] — Hermitian linear obstruction.** Relative Frobenius, quadratic norm
+  surjectivity/square reflection, and two-vector orthogonalization prove finite Hermitian isotropy;
+  scalar-square eigenspaces exclude the split route, while `Norm(c)=μ²` excludes a nonsquare
+  similitude scalar. `ProjectiveCap` builds; strict axiom profile is
+  `[propext, Classical.choice, Quot.sound]`. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 - **C87 [OPEN] — Baer-semilinear obstruction.** Formalize the order-two semilinear normal form,

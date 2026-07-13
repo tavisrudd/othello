@@ -1,15 +1,16 @@
 import ProjectiveCap.HyperbolicQuadricMirror
 import ProjectiveCap.FiniteQuadraticIsotropy
+import ProjectiveCap.FiniteHermitian
 import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
 import Mathlib.LinearAlgebra.Eigenspace.Basic
 
 /-!
 # Formal boundary reductions for projective mirror arguments
 
-This file proves the linear-algebra reductions and the finite-quadratic-space input needed for the
-linear parabolic boundary. It deliberately does **not** assert the full paper-only parabolic,
-Hermitian, or elliptic-quadric exclusions: the parabolic semilinear branch and the Hermitian and
-elliptic classifications remain explicit obligations in the accompanying trust note.
+This file proves the linear-algebra reductions and the finite quadratic and Hermitian inputs needed
+for the linear parabolic and Hermitian boundaries. It deliberately does **not** assert the full
+paper-only classifications: the Baer-semilinear branches and the elliptic nonsplit classification
+remain explicit obligations in the accompanying trust note.
 -/
 
 open scoped LinearAlgebra.Projectivization
@@ -198,6 +199,128 @@ theorem parabolic_split_scalar_square_route_not_fixedPointFree {m : ℕ} (hm : 2
   omega
 
 end Split
+
+/-!
+## Hermitian boards and the linear obstruction
+-/
+
+section Hermitian
+
+variable {F : Type*} [Field F] [Fintype F]
+variable [Fintype K] [Algebra F K] [FiniteDimensional K V]
+
+/-- The projective Hermitian variety cut out by a finite-field Hermitian form. -/
+def OnHermitianForm (B : FiniteHermitian.Form (F := F) (K := K) (V := V))
+    (p : Point K V) : Prop :=
+  B p.rep p.rep = 0
+
+omit [FiniteDimensional K V] in
+/-- A nonzero isotropic vector determines a point of its projective Hermitian variety. -/
+theorem onHermitianForm_mk (B : FiniteHermitian.Form (F := F) (K := K) (V := V))
+    {v : V} (hv : v ≠ 0) (hBv : B v v = 0) :
+    OnHermitianForm B (Projectivization.mk K v hv) := by
+  have hrep_eq :
+      Projectivization.mk K (Projectivization.mk K v hv).rep
+          (Projectivization.mk K v hv).rep_nonzero =
+        Projectivization.mk K v hv := Projectivization.mk_rep _
+  obtain ⟨c, hc⟩ :=
+    (Projectivization.mk_eq_mk_iff' K (Projectivization.mk K v hv).rep v
+      (Projectivization.mk K v hv).rep_nonzero hv).mp hrep_eq
+  unfold OnHermitianForm
+  rw [← hc]
+  simp [LinearMap.map_smulₛₗ, FiniteHermitian.conjRingHom_apply, LinearMap.smul_apply,
+    hBv]
+
+omit [Fintype F] [Fintype K] [Algebra F K] in
+/-- In dimension at least three, one eigenspace of an odd-characteristic involution has dimension
+at least two. -/
+theorem two_le_finrank_eigenspace_one_or_neg_one (hchar : ringChar K ≠ 2)
+    (g : V ≃ₗ[K] V) (hg : ∀ v, g (g v) = v)
+    (hdim : 3 ≤ Module.finrank K V) :
+    2 ≤ Module.finrank K (Module.End.eigenspace g.toLinearMap 1) ∨
+      2 ≤ Module.finrank K (Module.End.eigenspace g.toLinearMap (-1)) := by
+  have hsum := Submodule.finrank_add_eq_of_isCompl (isCompl_eigenspaces_one_neg_one hchar g hg)
+  omega
+
+/-- Every split projective involution in Hermitian dimension at least three fixes a Hermitian
+point. -/
+theorem hasFixedPointOn_hermitian_of_involution_finrank_three
+    (hfinrank : Module.finrank F K = 2) (hchar : ringChar F ≠ 2)
+    (B : FiniteHermitian.Form (F := F) (K := K) (V := V))
+    (hB : FiniteHermitian.IsHermitian B)
+    (g : V ≃ₗ[K] V) (hg : ∀ v, g (g v) = v)
+    (hdim : 3 ≤ Module.finrank K V) :
+    HasFixedPointOn (OnHermitianForm B) (mapEquiv g) := by
+  have hcharK : ringChar K ≠ 2 := by
+    rwa [← Algebra.ringChar_eq F K]
+  rcases two_le_finrank_eigenspace_one_or_neg_one hcharK g hg hdim with hp | hm
+  · obtain ⟨v, hv, hBv⟩ := FiniteHermitian.exists_ne_zero_self_eq_zero hfinrank
+      (B.domRestrict₁₂ (Module.End.eigenspace g.toLinearMap 1)
+        (Module.End.eigenspace g.toLinearMap 1))
+      (hB.restrict (Module.End.eigenspace g.toLinearMap 1)) hp
+    exact hasFixedPointOn_of_eigenvector g (OnHermitianForm B) (Subtype.coe_ne_coe.mpr hv)
+      (Module.End.mem_eigenspace_iff.mp v.property)
+      (onHermitianForm_mk B (Subtype.coe_ne_coe.mpr hv) hBv)
+  · obtain ⟨v, hv, hBv⟩ := FiniteHermitian.exists_ne_zero_self_eq_zero hfinrank
+      (B.domRestrict₁₂ (Module.End.eigenspace g.toLinearMap (-1))
+        (Module.End.eigenspace g.toLinearMap (-1)))
+      (hB.restrict (Module.End.eigenspace g.toLinearMap (-1))) hm
+    exact hasFixedPointOn_of_eigenvector g (OnHermitianForm B) (Subtype.coe_ne_coe.mpr hv)
+      (Module.End.mem_eigenspace_iff.mp v.property)
+      (onHermitianForm_mk B (Subtype.coe_ne_coe.mpr hv) hBv)
+
+/-- Scalar-square version of the Hermitian split obstruction. -/
+theorem hasFixedPointOn_hermitian_of_sq_square_finrank_three
+    (hfinrank : Module.finrank F K = 2) (hchar : ringChar F ≠ 2)
+    (B : FiniteHermitian.Form (F := F) (K := K) (V := V))
+    (hB : FiniteHermitian.IsHermitian B)
+    (g : V ≃ₗ[K] V) (r : K) (hr : r ≠ 0)
+    (hg : ∀ v, g (g v) = (r * r) • v)
+    (hdim : 3 ≤ Module.finrank K V) :
+    HasFixedPointOn (OnHermitianForm B) (mapEquiv g) := by
+  let scaleInv : V ≃ₗ[K] V :=
+    DistribMulAction.toLinearEquiv K V (Units.mk0 r⁻¹ (inv_ne_zero hr))
+  let gn : V ≃ₗ[K] V := g.trans scaleInv
+  have hgn_apply (v : V) : gn v = r⁻¹ • g v := by simp [gn, scaleInv]
+  have hgn_sq (v : V) : gn (gn v) = v := by
+    rw [hgn_apply, hgn_apply, map_smul, hg, smul_smul, smul_smul]
+    have hscalar : r⁻¹ * r⁻¹ * (r * r) = 1 := by field_simp
+    rw [hscalar, one_smul]
+  have hmap (x : Point K V) : mapEquiv gn x = mapEquiv g x := by
+    induction x using Projectivization.ind with | h v hv =>
+      rw [mapEquiv_mk, mapEquiv_mk]
+      apply (Projectivization.mk_eq_mk_iff' K (gn v) (g v) (by simp [hv]) (by simp [hv])).mpr
+      exact ⟨r⁻¹, (hgn_apply v).symm⟩
+  obtain ⟨x, hxB, hxfix⟩ :=
+    hasFixedPointOn_hermitian_of_involution_finrank_three hfinrank hchar B hB gn hgn_sq hdim
+  exact ⟨x, hxB, by rw [← hmap x]; exact hxfix⟩
+
+/-- Formalized split linear route for every nontrivial Hermitian variety `H(k,q²)`, `k ≥ 2`. -/
+theorem hermitian_split_scalar_square_route_not_fixedPointFree {k : ℕ} (hk : 2 ≤ k)
+    (hfinrank : Module.finrank F K = 2) (hchar : ringChar F ≠ 2)
+    (B : FiniteHermitian.Form (F := F) (K := K) (V := Fin (k + 1) → K))
+    (hB : FiniteHermitian.IsHermitian B)
+    (g : (Fin (k + 1) → K) ≃ₗ[K] (Fin (k + 1) → K))
+    (r : K) (hr : r ≠ 0) (hg : ∀ v, g (g v) = (r * r) • v) :
+    ¬ FixedPointFreeOn (OnHermitianForm B) (mapEquiv g) := by
+  apply not_fixedPointFreeOn_of_hasFixedPointOn
+  apply hasFixedPointOn_hermitian_of_sq_square_finrank_three hfinrank hchar B hB g r hr hg
+  simp only [Module.finrank_fin_fun]
+  omega
+
+omit [FiniteDimensional K V] in
+/-- Formalized nonsplit linear route: a nondegenerate Hermitian similitude with base-field
+multiplier cannot square to a nonsquare scalar. -/
+theorem hermitian_nonsplit_linear_route_impossible [Nontrivial V]
+    (hfinrank : Module.finrank F K = 2) (hchar : ringChar F ≠ 2)
+    (B : FiniteHermitian.Form (F := F) (K := K) (V := V)) (hB : B.Nondegenerate)
+    (g : V ≃ₗ[K] V) (c : K) (μ : F)
+    (hg : ∀ v, g (g v) = c • v)
+    (hsim : ∀ x y, B (g x) (g y) = algebraMap F K μ * B x y)
+    (hnonsquare : ¬ IsSquare c) : False :=
+  FiniteHermitian.no_similitude_sq_nonsquare hfinrank hchar B hB g c μ hg hsim hnonsquare
+
+end Hermitian
 
 /-- Determinant parity obstruction. If an invertible `(2m+1)×(2m+1)` matrix squares to
 `δ I`, then `δ` is a square. Thus a nonsplit square-scalar projective involution cannot act on an

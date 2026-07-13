@@ -146,7 +146,7 @@ intersection patterns and point counts are verified, not trusted).
   vocabulary) and has a second proof by translation mirror `(i,j) ↦ (i+h, j+h)`.
 - **Boundary program (strict trust tiers):** the hyperbolic positive family is Lean-proved.
   Both linear parabolic routes are Lean-proved; its Baer-semilinear route remains prose-only.
-  Hermitian method-negativity is proven in prose with the generic eigenline reduction Lean-proved.
+  Both linear Hermitian routes are also Lean-proved; its Baer-semilinear route remains prose-only.
   The general elliptic `Q⁻(2m−1,q)`, `m≥3`, exclusion is **conjectural** pending the
   Witt/Scharlau-transfer classification. No exact/coextensive boundary theorem is claimed.
   `H(2,9)`/`H(3,4)` compute P regardless, so these are method boundaries, not outcome flips;
@@ -162,9 +162,11 @@ intersection patterns and point counts are verified, not trusted).
   is new).  The harvested family is `initialSubCapP_blockQuadric_of_odd_card` (`Q⁺(2m−1,q) = P`,
   odd q), via `blockForm_ellipticBlock` (the factor-`δ` similarity) + `onBlockQuadric_map`.
   `FiniteQuadraticIsotropy` proves dimension-at-least-three isotropy from Chevalley–Warning;
+  `FiniteHermitian` proves quadratic norm surjectivity/square reflection, Hermitian isotropy, and
+  the nonsplit multiplier obstruction;
   `MirrorBoundary` proves the scalar-square eigenspace-to-board obstruction and the odd-dimensional
-  determinant exclusion, completing both linear parabolic routes. Remaining Hermitian,
-  Baer-semilinear, and elliptic-transfer obligations are tracked as C86–C88 in the dedicated
+  determinant exclusion, completing both linear parabolic and Hermitian routes. Remaining
+  Baer-semilinear and elliptic-transfer obligations are tracked as C87–C88 in the dedicated
   [`2026-07-12 mirror-boundary handoff`](2026-07-12-mirror-boundary-formalization.md); the detailed
   theorem specification remains
   [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).

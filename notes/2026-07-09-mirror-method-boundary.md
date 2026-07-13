@@ -33,8 +33,10 @@ cap games over odd `q`:
    decomposition excludes the split route, and determinant parity excludes the nonsplit route.
    The semilinear Baer branch remains C87.
 3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`) admit NO fpf involution.**
-   *[PROVEN-PROSE]* The eigenline-to-board-fixed-point reduction is Lean-proved; finite Hermitian
-   isotropy, the nonsplit adjoint/multiplier lemma, and the semilinear branch remain.
+   *[FORMAL LINEAR CLASSIFICATION + PROVEN-PROSE SEMILINEAR]* `FiniteHermitian` and
+   `MirrorBoundary` Lean-prove both linear routes: quadratic-extension norm surjectivity and
+   Hermitian isotropy exclude the split route, while the norm-square multiplier identity excludes
+   the nonsplit route. The semilinear Baer branch remains C87.
 4. **Conjecture:** elliptic quadrics `Q⁻(2m−1,q)` (`m ≥ 3`) admit no fpf mirror. The
    split route is excluded rigorously and the natural nonsplit similitude fails — one Witt-transfer
    classification remains; see the open item.
@@ -75,11 +77,12 @@ conic), so it always has fixed points on `X`.  Never fpf.  Excluded for all thes
   - *Parabolic `Q(2m,q)`:* `n = 2m+1` odd ⇒ no nonsplit involution exists at all.  Combined with
     the split exclusion above (`m ≥ 2` ⇒ no split fpf either): **parabolic quadrics have no fpf
     involution.**  ∎ (2)
-  - *Hermitian:* a unitary similitude with `A²=cI` is self-adjoint (`B(Au,v)=B(u,Av)`), and the
-    unitary-similitude condition forces the factor `c ∈ F_q`; but every element of `F_q` is a
-    square in `F_{q²}`, contradicting `c` nonsquare in `F_{q²}`.  So no nonsplit unitary
-    similitude of order 2 exists.  Combined with the split exclusion: **Hermitian varieties
-    (`k ≥ 2`) have no fpf involution.**  ∎ (3)
+  - *Hermitian:* for a unitary similitude with base-field multiplier `μ` and `A²=cI`, applying the
+    similitude identity twice gives `Norm(c)=μ²`. In a quadratic finite-field extension, a scalar
+    whose norm is square is itself square (proved from the finite-field square criterion and the
+    exact norm exponent). Thus `c` cannot be nonsquare. Combined with the split exclusion:
+    **Hermitian varieties (`k ≥ 2`) have no linear fpf involution.** The earlier shortcut claiming
+    `c ∈ F_q` is unnecessary and is not used.
   - *Hyperbolic `Q⁺(2m−1,q)`:* the elliptic block similitude realizes exactly this nonsplit case
     for every `m` (each `K²` block is a hyperbolic plane `Q=ab` on which `A` is a factor-`δ`
     swap-similitude).  ∎ (1)
@@ -106,16 +109,14 @@ the elliptic block map leaves `Q⁻(5,3)`.
 
 ### Remaining real-math obligations
 
-The Lean reductions now certify: finite quadratic forms in dimension at least three are isotropic;
-a scalar-square linear projective involution in dimension at least five fixes a quadric point; and
-an odd-dimensional matrix cannot square to a nonsquare scalar. Thus the parabolic linear
-classification is complete. Completing rows 2–4 still requires:
+The Lean reductions now certify the complete linear parabolic and Hermitian classifications:
+finite quadratic and Hermitian isotropy exclude their split routes, determinant parity excludes
+the parabolic nonsplit route, and norm-square reflection excludes the Hermitian nonsplit route.
+Completing rows 2–4 still requires:
 
-1. finite Hermitian isotropy in dimension at least two;
-2. the unitary nonsplit adjoint/multiplier classification;
-3. the semilinear/Baer involution classification and a theorem that its fixed subgeometry meets
+1. the semilinear/Baer involution classification and a theorem that its fixed subgeometry meets
    each board in scope;
-4. for `Q⁻`, the Witt/Scharlau-transfer classification below.
+2. for `Q⁻`, the Witt/Scharlau-transfer classification below.
 
 Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
 Route: a nonsplit order-2 similitude corresponds (self-adjoint `√c`, Scharlau transfer) to an
@@ -130,7 +131,8 @@ transfer lemma is the way.)  This is a clean, bounded lemma; it does not gate an
 
 This is the candidate "separating mirror obstructions from outcomes" classification of the
 harvest. The proved positive family is hyperbolic; parabolic and Hermitian exclusions remain
-proved prose with partial formal reductions, and the elliptic exclusion is conjectural. Its
+formal for linear collineations but prose-only for their Baer-semilinear branches, and the elliptic
+exclusion is conjectural. Its
 silence on these boards concerns the method, not the game values. Positioning stays conservative: the mechanism is the
 standard pairing/copycat ingredient; the contribution is the exact incidence-geometric boundary.
 
