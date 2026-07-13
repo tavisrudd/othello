@@ -10,7 +10,8 @@ packaging review (2026-07-12) settled the decomposition, sequencing, and positio
   `nofil-finite-geometry-outcomes`. Split by *technique* — Schreier-residual nimbers vs
   pairing/mirror ⇒ P.
 - **Geometry/coding track** ("Package 2": arc extension & reconstruction):
-  `baer-equivariant-extension`, `completion-core-rigidity`, `continuation-graph-rigidity`, plus
+  `equivariant-robust-completion` (canonical merge of `baer-equivariant-extension` and
+  `completion-core-rigidity`), `continuation-graph-rigidity`, plus
   `arcs_complete_outside_conic` (related but separate; classical index equations, not the game
   machinery).
 - **Sequence submissions** (`oeis-submissions/`): the queens A344227 extension and the new sum-free
@@ -27,8 +28,8 @@ A directory ≠ a paper. See the resolved decomposition next.
 2. **Dihedral Schreier catalogue** (`dihedral-schreier-node-kayles`) — **extended with the
    generalized-D₂ₘ family** before shipping; retitle toward "finite subgroups of PGL₂(q)."
 3. **Arcs complete outside a conic** (`arcs_complete_outside_conic`) — standalone.
-4. **Equivariant extension + robust completion** (`baer-equivariant-extension` **merged with**
-   `completion-core-rigidity`).
+4. **Equivariant extension + robust completion** (`equivariant-robust-completion`; canonical merge
+   of `baer-equivariant-extension` and `completion-core-rigidity`).
 5. **Continuation-graph rigidity, N1 only** (`continuation-graph-rigidity`) — N2 demoted to remarks.
 6. **(Conditional) Coding / LRC** — promote only after the specialist prior-art audit passes.
 
@@ -75,7 +76,7 @@ Ordered by formalization-to-full-trust distance:
 | 3 | Dihedral (+ D₂ₘ)                  | Owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions                                |
 | 4 | Arcs                              | Owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement                  |
 | 5 | Coding / LRC (conditional)        | Lean largely done — gated on the prior-art audit, not formalization                                   |
-| 6 | Baer ⊕ completion                 | No manuscript; Lean phases unbuilt; two audits pending                                                 |
+| 6 | Baer ⊕ completion                 | Development draft + exact quadratic Lean theorem; classical-radius citations and novelty audit pending |
 | 7 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
 
 **Highest-leverage first move:** stand up the public-artifact spine — extract the first public repo

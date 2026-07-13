@@ -102,6 +102,21 @@ theorem arc_insert_of_not_covered {A : Finset P} {x : P}
           ((collinear_rotate (L := L)).mp ((collinear_rotate (L := L)).mp hcol)))
       · exact hA ha hb hc hab hac hbc hcol
 
+omit [Fintype P] in
+/-- For a fresh point, one-point arc validity is exactly absence of prior secant coverage. -/
+theorem arc_insert_iff_not_covered {A : Finset P} {x : P}
+    (hA : Arc (L := L) A) (hxA : x ∉ A) :
+    Arc (L := L) (insert x A) ↔ ¬ Covered (L := L) A x := by
+  constructor
+  · intro hins hxcovered
+    obtain ⟨l, ⟨a, ha, b, hb, hab, hal, hbl⟩, hxl⟩ :=
+      covered_iff_exists_secant.mp hxcovered
+    have hxa : x ≠ a := fun h => hxA (h ▸ ha)
+    have hxb : x ≠ b := fun h => hxA (h ▸ hb)
+    exact hins (Finset.mem_insert_self x A) (Finset.mem_insert_of_mem ha)
+      (Finset.mem_insert_of_mem hb) hxa hxb hab ⟨l, hxl, hal, hbl⟩
+  · exact arc_insert_of_not_covered hA
+
 /-- Points at which coverage is required when `H` is the prescribed hole set. -/
 noncomputable def requiredLocus (A H : Finset P) : Finset P := by
   classical

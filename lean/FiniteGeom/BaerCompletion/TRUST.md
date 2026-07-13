@@ -17,6 +17,9 @@ a geometric input. The associated paper draft is
 | involutive incidence | `lineTrace_conj`, `invariant_pair_fixed_or_conjugate`, `conjugate_lineTraces_disjoint` | Conjugation transports traces; fixed two-traces are fixed points or a conjugate pair; conjugate-line traces through an external unique intersection are disjoint. |
 | pair counting | `PairExtensionData.sum_card_sub_le_legalCount`, `PairExtensionData.mul_sub_le_legalCount`, `PairExtensionData.exists_legal_of_nonempty_of_lt` | Heterogeneous and uniform surviving-candidate bounds and the positive-surplus existence criterion. |
 | geometric input reduction | `quadraticCandidate_card_of_two_fibers`, `emptyLine_card_of_complement`, `forbidden_card_le_of_injOn` | The three quadratic wrapper fields reduce respectively to a two-to-one mate map, an occupied/empty partition, and an injective obstruction-orbit charging map. |
+| exact quadratic line counts | `card_occupiedFixedLines`, `card_emptyFixedLines`, `choose_fixedArcPoints_le_star` | For an invariant arc, fixed lines are partitioned exactly into occupied and empty lines, with natural subtraction proved nontruncating. |
+| exact quadratic obstruction count | `card_nonfixedSecantOrbits`, `card_forbiddenCandidates_le_baer`, `mem_forbiddenCandidates_iff_exists_covered` | Nonfixed secants have two-element conjugation orbits; their intersections charge all and only secant-covered candidates. |
+| coordinate pair extension | `coordinateQuadraticExtensionData`, `exists_quadratic_pair_extension` | The exact quadratic wrapper is instantiated, and positive surplus produces a conjugate pair whose union with the old set is an arc. |
 | orbit saturation | `four_mul_splitProduct_le_square`, `orbitSaturation_quadratic_bound_of_split` | Denominator-free quadratic saturation bound. |
 | robustness | `not_insertion_indep_of_card_lt_tau`, `not_insertion_indep_of_obstructions_persist`, `not_insertion_indep_of_card_lt_secantCount` | Below-`τ` deletion cannot unblock a point; persistence of old obstructions suffices under perturbation. |
 | completion core | `completionCore_sdiff_eq`, `completionCore_delete_difference_eq_intersection` | Uniqueness below facet separation and a sharp alternative-facet witness. |
@@ -33,30 +36,35 @@ Concrete abstract-projective-plane consumers are in:
   dual lines, preserves orthogonality incidence, and an involutive automorphism supplies
   `InvolutiveIncidence`;
 - `RelativeConicArcs.QuadraticFrobenius`: relative Frobenius has order two when the finite-field
-  extension has degree two, yielding the concrete `PG(2,E)` incidence involution.
+  extension has degree two; Hilbert 90 identifies its fixed projective locus with the embedded
+  `PG(2,F)`; fixed points and lines number `s²+s+1`, each fixed line contains `s+1` fixed and
+  `s²-s` nonfixed points, and the latter form exactly `(s²-s)/2` conjugate pairs;
+- `RelativeConicArcs.QuadraticPairExtension`: the coordinate construction automatically discharges
+  `candidate_count` in the exact quadratic wrapper;
+- `RelativeConicArcs.QuadraticLineCounting`: exact occupied/empty fixed-line counts, including the
+  inequality needed to interpret natural subtraction as ordinary subtraction;
+- `RelativeConicArcs.QuadraticForbidden`: exact nonfixed-secant orbit count, injective charging of
+  forbidden candidates, semantic identification of forbiddenness with secant coverage, and the
+  end-to-end arc-extension theorem `exists_quadratic_pair_extension`.
 
-## Conditional quadratic wrapper
+## Exact quadratic wrapper
 
-The coordinate Frobenius involution itself is now kernel-checked. `QuadraticBaerPairExtensionData`
-still requires three explicit fields:
+All three fields of `QuadraticBaerPairExtensionData` are discharged in coordinates. The final
+theorem does not stop at an abstract legal-count predicate: `arc_union_candidate_of_not_mem_forbidden`
+proves semantic adequacy, and `exists_quadratic_pair_extension` returns a nonfixed point `p` such
+that adjoining `{p, frobeniusPoint p}` preserves the arc property. Its hypotheses are exactly the
+paper's nonempty-empty-line and positive-candidate-surplus inequalities.
 
-1. `emptyLine_count`;
-2. `candidate_count`;
-3. `forbidden_bound`.
-
-`quadraticBaer_pairExtension_lowerBound` and `quadraticBaer_exists_pair` are kernel-checked
-consequences of those fields. They do **not** prove the three fields for the coordinate Frobenius
-construction. More precisely, the remaining fixed-locus and incidence
-work must construct the two-to-one mate map, complement partition, and injective charging map
-identified in `OrbitCounting.lean`. The manuscript may discharge them by elementary prose
-geometry with citations; it must not call the exact pair-extension data Lean-formalized until a
-concrete `QuadraticBaerPairExtensionData` instance lands.
+The following ingredients are classical infrastructure and are **not** recorded as discoveries:
+Hilbert-90 normalization, identification of the fixed locus with `PG(2,s)`, standard projective
+point/line counts, arc line-incidence double counting, and two-element orbit counting for a
+fixed-point-free involution. Formalization establishes trust in their use; it does not establish
+novelty.
 
 ## Citation-backed, not formalized here
 
 - exact completion radii for conics, hyperovals, maximal arcs, elliptic quadrics, generalized-
   quadrangle ovoids, and spreads;
-- fixed-locus characterization of quadratic Frobenius as the embedded subfield projective plane;
 - the ceiling/square-root presentation of the denominator-free quadratic saturation theorem.
 
 ## Audit result
@@ -68,5 +76,8 @@ foundations: `propext`, `Classical.choice`, and `Quot.sound`.
 Validation command:
 
 ```text
-choom -n 1000 -- nix develop --command lake build FiniteGeom RelativeConicArcs
+choom -n 1000 -- nix develop --command lake build \
+  RelativeConicArcs.QuadraticLineCounting \
+  RelativeConicArcs.QuadraticPairExtension \
+  RelativeConicArcs.QuadraticForbidden
 ```

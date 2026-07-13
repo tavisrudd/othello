@@ -74,9 +74,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    spinoff lane closed: the defect, conic, asymptotic, averaging, nucleus, and certified-example
    packages are Lean-proved under the strict trust gate. Final map:
    [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-6. **Applications second-order revisit — C99.** Deferred until the Baer/completion formalization is
-   complete; then re-ask the corollary/extension/surprise/application/novelty question using the
-   final declaration graph and adversarial review. Appendix/report:
+6. **Applications second-order revisit — C99 [UNBLOCKED 2026-07-12].** The Baer/completion
+   formalization and first adversarial review are complete; the post-formalization question has
+   been re-asked in the appendix. Next: targeted novelty checks on its best two candidates.
+   Appendix/report:
    [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
 7. **Relative-conic game localization review — C100.** The persistent cap-game confinement bridge
    and q=11 icosahedral antipodal P residual are Lean-proved. Review the `q=9` terminal witness,
@@ -97,9 +98,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   verifier provenance, trust manifest, and papers index. Track in the
   [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
 
-- **C99 — post-formalization second-order application revisit.** After the Baer/completion proof
-  lane is complete, re-run the novelty brainstorm from the completed declarations and adversarial
-  review; select two theorem-level candidates and perform targeted novelty checks. Report to the
+- **C99 [OPEN — UNBLOCKED 2026-07-12] — post-formalization second-order application revisit.** The
+  completed declaration graph and adversarial review produced equality-in-charge, linewise
+  collision profiles, and higher-orbit semantic forbiddenness as fresh candidates. Select two and
+  perform targeted novelty checks. Report to the
   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
 
 - **C100 [ACTIVE 2026-07-12 — localization bridge proved; odd-plane consumers under review].**

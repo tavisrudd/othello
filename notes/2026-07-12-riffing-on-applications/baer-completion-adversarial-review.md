@@ -5,16 +5,16 @@ Target: `paper-baer-equivariant-robust-completion.md` and its Lean proof lane
 
 ## Verdict
 
-The abstract proof spine is sound, `sorry`-free, and materially stronger than the initial prose
-package. The concrete projective-plane secant theorem is also kernel-checked. The paper is **not yet
-entitled to claim a fully formalized quadratic-Frobenius pair-extension theorem**: the exact
-field-specific cardinalities are fields of `QuadraticBaerPairExtensionData`. The coordinate
-Frobenius action on `PG(2,s²)` is now constructed and proved incidence-preserving and involutive;
-its fixed-locus normalization and exact pair-count incidence maps are not yet derived.
+The abstract proof spine and the exact coordinate quadratic-Frobenius pair-extension theorem are
+kernel-checked and `sorry`-free. The coordinate lane proves the fixed locus and all cardinalities,
+constructs the injective forbidden-candidate charge, identifies forbiddenness semantically with
+secant coverage, and produces a conjugate pair whose union with the old set is an arc. The paper may
+therefore call Theorem F fully formalized, subject to matching its hypotheses exactly.
 
-This is a clean, localized gap rather than a gap in the counting argument. A paper proof can close
-it with standard finite-field/projective-plane facts and citations, but the Lean trust statement
-must call the result “formalized from exact geometric count inputs” until those inputs are proved.
+This is a proof-validity verdict, not a novelty verdict. Hilbert 90, the Baer fixed subplane,
+projective point/line counts, elementary arc double counting, and two-element involution orbits are
+classical infrastructure. They must not appear as new discoveries merely because they were newly
+formalized here.
 
 ## Checks passed
 
@@ -22,7 +22,8 @@ must call the result “formalized from exact geometric count inputs” until th
   concrete projective-plane instances.
 - `#print axioms` on the headline declarations reports only Lean's standard `propext`,
   `Classical.choice`, and `Quot.sound` dependencies.
-- The combined `FiniteGeom` and `RelativeConicArcs` build passes.
+- Focused builds of `QuadraticLineCounting`, `QuadraticPairExtension`, and `QuadraticForbidden`
+  pass.
 - `git diff --check` passes.
 - The all-dependent-traces hypergraph and the minimal secant-pair clutter are now explicitly
   distinguished. This repairs the most serious ambiguity in the original prose.
@@ -69,18 +70,19 @@ Verdict: **proved for any incidence-preserving projective-plane involution**.
 classification, and disjointness of conjugate nonfixed-line traces. `ProjectiveConjugation.lean`
 constructs coordinatewise field-automorphism action and proves incidence preservation;
 `QuadraticFrobenius.lean` proves the relative Frobenius action involutive in extension degree two.
-The remaining field-specific step identifies its projective fixed locus with `PG(2,s)`.
+`QuadraticFrobenius.lean` now uses formal Hilbert 90 to identify the projective fixed locus with
+`PG(2,s)`, proves its cardinality, and counts fixed and nonfixed points on every fixed line.
 
 ### Theorem F — quantitative conjugate-pair extension
 
-Verdict: **counting implication proved; geometric inputs packaged**.
+Verdict: **fully proved in the coordinate quadratic-Frobenius plane**.
 
 `PairExtension.lean` proves the heterogeneous sum bound, its exact form when forbidden sets lie in
-candidate sets, the uniform `E(N-M)` corollary, and legal-pair existence. The quadratic wrapper uses
-the paper's formulas. However, `emptyLine_count`, `candidate_count`, and `forbidden_bound` are
-structure fields. `OrbitCounting.lean` reduces them to an occupied/empty complement, a two-to-one
-mate-pair map, and an injective obstruction-orbit charging map. A complete coordinate formalization
-must construct those maps and verify their incidence properties.
+candidate sets, the uniform `E(N-M)` corollary, and abstract legal-pair existence.
+`QuadraticLineCounting.lean` proves exact occupied and empty fixed-line counts, including the
+nontruncation side condition. `QuadraticForbidden.lean` counts nonfixed secant orbits, constructs
+the injective charge, proves forbiddenness equivalent to endpoint secant coverage, and proves that
+an uncharged candidate extends the arc. `exists_quadratic_pair_extension` is the end-to-end result.
 
 The heterogeneous theorem is stronger and should be stated first:
 
@@ -122,18 +124,33 @@ remains supported. New obstructions are harmless.
 6. Strengthen perturbation stability from obstruction equality to persistence of old obstructions.
 7. Do not claim a new square-root constant; the novelty candidate is the orbit-valued criterion,
    heterogeneous count, and robustness coupling.
+8. Do not confuse an abstract surviving candidate with a legal geometric extension. This gap is
+   now closed by `arc_union_candidate_of_not_mem_forbidden`.
+9. State the natural-subtraction side condition explicitly or cite `choose_fixedArcPoints_le_star`;
+   otherwise the displayed empty-line identity could hide truncation.
+10. Keep the exact two-element secant-orbit proof visible: the forbidden bound depends on counting
+    conjugate nonfixed lines once, not merely bounding the number of raw secants.
 
-## Remaining completion gates
+## Remaining paper gates
 
-1. Identify the fixed projective locus of quadratic Frobenius with the embedded `PG(2,s)`, including
-   the semilinear-eigenvector normalization step.
-2. Construct the complement, mate-pair, and injective charging maps that discharge the three
-   `QuadraticBaerPairExtensionData` fields.
-3. Add primary citations for every row of the classical-family radius table.
-4. Decide whether the manuscript promises machine checking of the square-root ceiling itself or
+1. Add primary citations for every row of the classical-family radius table.
+2. Decide whether the manuscript promises machine checking of the square-root ceiling itself or
    only its stronger denominator-free quadratic inequality.
+3. Run a targeted prior-art audit for the heterogeneous orbit criterion, equality/stability cases,
+   and the robustness coupling. Formalization alone is not evidence of novelty.
+4. Supply at least one nontrivial exact classical-family completion radius or demote that table from
+   the paper's lead, per the packaging review.
 
-Until gates 1–2 land, the accurate trust claim is: **the general completion, secant, involution,
-counting, robustness, and saturation mechanisms and the coordinate quadratic-Frobenius incidence
-action are kernel-checked; the exact quadratic finite-field cardinality instance is proved in prose
-from standard geometry.**
+Accurate trust claim: **the general completion, secant, involution, counting, robustness, and
+saturation mechanisms and the exact coordinate quadratic-Frobenius pair-extension theorem are
+kernel-checked. The classical-family radius table and the ceiling-form presentation remain outside
+the present formalization.**
+
+## Adversarial round conclusion
+
+The review tried the main statement-adequacy failure modes: vacuous abstract legality, duplicated
+secant-orbit charging, natural-number truncation, incorrect fixed-line classification, and missing
+cross-secants after adjoining the pair. Each is now covered by a named declaration. A temporary
+axiom audit of the fixed-locus, line-count, secant-orbit, forbidden-bound, semantic-extension, and
+end-to-end theorems reported only `propext`, `Classical.choice`, and `Quot.sound`; the temporary
+audit file was removed.

@@ -243,6 +243,177 @@ theorem mem_minimalAxisRepairHypergraph_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
             simp [hst, hsu, htu, hBcard]
           simp [hEq]
 
+private def axisPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
+    Finset (AxisTwistedCubicIndex 𝔽) :=
+  E.filter fun z => z.isRight
+
+/-- A matching in the minimal axis repair clutter satisfies `6|M|≤5q`: pair edges consume two
+axis vertices and cubic edges consume three cubic vertices, on disjoint grounds of sizes `q` and
+`q`. -/
+theorem minimalAxisRepair_matching_weight_bound [CharP 𝔽 3] (y : 𝔽 ⊕ Unit)
+    {M : Finset (Finset (AxisTwistedCubicIndex 𝔽))}
+    (hM : IsMatching (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) M) :
+    6 * M.card ≤ 5 * Fintype.card 𝔽 := by
+  classical
+  have hweight (E) (hE : E ∈ M) :
+      3 * (axisPart E).card + 2 * (cubicPart E).card = 6 := by
+    rcases mem_minimalAxisRepairHypergraph_iff.mp (hM.1 hE) with hpair | hcubic
+    · obtain ⟨z, w, -, -, hzw, rfl⟩ := hpair
+      simp [axisPart, cubicPart, hzw]
+    · obtain ⟨s, t, u, hst, hsu, htu, -, rfl⟩ := hcubic
+      simp [axisPart, cubicPart, hst, hsu, htu]
+  have haxisPairwise :
+      (M : Set (Finset (AxisTwistedCubicIndex 𝔽))).PairwiseDisjoint axisPart := by
+    intro A hA B hB hAB
+    exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+  have hcubicPairwise :
+      (M : Set (Finset (AxisTwistedCubicIndex 𝔽))).PairwiseDisjoint cubicPart := by
+    intro A hA B hB hAB
+    exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+  have haxisSub : M.biUnion axisPart ⊆
+      (univ.erase y).map Function.Embedding.inr := by
+    intro a ha
+    obtain ⟨E, hEM, haE⟩ := Finset.mem_biUnion.mp ha
+    rcases mem_minimalAxisRepairHypergraph_iff.mp (hM.1 hEM) with hpair | hcubic
+    · obtain ⟨z, w, hyz, hyw, -, rfl⟩ := hpair
+      have ha' := (Finset.mem_filter.mp haE).1
+      cases a with
+      | inl s => simp [axisPart] at haE
+      | inr v =>
+        simp only [Finset.mem_insert, Finset.mem_singleton, Sum.inr.injEq] at ha'
+        rcases ha' with rfl | rfl
+        · simp [hyz]
+        · simp [hyw]
+    · obtain ⟨s, t, u, -, -, -, -, rfl⟩ := hcubic
+      simp [axisPart] at haE
+  have hcubicSub : M.biUnion cubicPart ⊆ univ.map Function.Embedding.inl := by
+    intro a ha
+    obtain ⟨E, hEM, haE⟩ := Finset.mem_biUnion.mp ha
+    have haleft := (Finset.mem_filter.mp haE).2
+    cases a with
+    | inl s => simp
+    | inr v => simp at haleft
+  have haxisCard : (∑ E ∈ M, (axisPart E).card) ≤ Fintype.card 𝔽 := by
+    rw [← Finset.card_biUnion haxisPairwise]
+    have := Finset.card_le_card haxisSub
+    simpa using this
+  have hcubicCard : (∑ E ∈ M, (cubicPart E).card) ≤ Fintype.card 𝔽 := by
+    rw [← Finset.card_biUnion hcubicPairwise]
+    have := Finset.card_le_card hcubicSub
+    simpa using this
+  have htotal : 6 * M.card =
+      3 * (∑ E ∈ M, (axisPart E).card) +
+        2 * (∑ E ∈ M, (cubicPart E).card) := by
+    calc
+      6 * M.card = ∑ E ∈ M, 6 := by simp
+      _ = ∑ E ∈ M, (3 * (axisPart E).card + 2 * (cubicPart E).card) := by
+        apply Finset.sum_congr rfl
+        intro E hE
+        exact (hweight E hE).symm
+      _ = 3 * (∑ E ∈ M, (axisPart E).card) +
+          2 * (∑ E ∈ M, (cubicPart E).card) := by
+        simp only [Finset.mul_sum, Finset.sum_add_distrib]
+  rw [htotal]
+  omega
+
+/-- The minimal axis repair clutter has matching number at most `⌊5q/6⌋`. -/
+theorem minimalAxisRepair_matchingNumber_le [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    matchingNumber (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) ≤
+      (5 * Fintype.card 𝔽) / 6 := by
+  apply matchingNumber_le_of_forall
+  intro M hM
+  have h := minimalAxisRepair_matching_weight_bound y hM
+  omega
+
+/-- Every transversal of the minimal axis repair clutter contains at least `q-1` vertices,
+already forced by the complete graph of pair repairs on the `q` other axis coordinates. -/
+theorem minimalAxisRepair_transversal_card_ge [CharP 𝔽 3] (y : 𝔽 ⊕ Unit)
+    {T : Finset (AxisTwistedCubicIndex 𝔽)}
+    (hT : IsTransversal (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) T) :
+    Fintype.card 𝔽 - 1 ≤ T.card := by
+  classical
+  let ground : Finset (𝔽 ⊕ Unit) := univ.erase y
+  let covered : Finset (𝔽 ⊕ Unit) := ground.filter fun z => Sum.inr z ∈ T
+  let uncovered : Finset (𝔽 ⊕ Unit) := ground \ covered
+  have hUcard : uncovered.card ≤ 1 := by
+    by_contra h
+    have hlt : 1 < uncovered.card := by omega
+    obtain ⟨z, hz, w, hw, hzw⟩ := Finset.one_lt_card.mp hlt
+    have hyz : y ≠ z := Ne.symm (Finset.mem_erase.mp (Finset.mem_sdiff.mp hz).1).1
+    have hyw : y ≠ w := Ne.symm (Finset.mem_erase.mp (Finset.mem_sdiff.mp hw).1).1
+    have hzT : Sum.inr z ∉ T := by
+      intro hzT
+      have : z ∈ covered := by
+        simp [covered, (Finset.mem_sdiff.mp hz).1, hzT]
+      exact (Finset.mem_sdiff.mp hz).2 this
+    have hwT : Sum.inr w ∉ T := by
+      intro hwT
+      have : w ∈ covered := by
+        simp [covered, (Finset.mem_sdiff.mp hw).1, hwT]
+      exact (Finset.mem_sdiff.mp hw).2 this
+    have hedge : {(.inr z : AxisTwistedCubicIndex 𝔽), .inr w} ∈
+        minimalAxisTwistedCubicRepairHypergraph (.inr y) 3 := by
+      apply mem_minimalAxisRepairHypergraph_iff.mpr
+      exact Or.inl ⟨z, w, hyz, hyw, hzw, rfl⟩
+    obtain ⟨v, hv⟩ := hT hedge
+    simp only [Finset.mem_inter, Finset.mem_insert, Finset.mem_singleton] at hv
+    rcases hv.2 with hvz | hvw
+    · exact hzT (hvz ▸ hv.1)
+    · exact hwT (hvw ▸ hv.1)
+  have hcoveredSub : covered.map Function.Embedding.inr ⊆ T := by
+    intro a ha
+    obtain ⟨z, hz, rfl⟩ := Finset.mem_map.mp ha
+    exact (Finset.mem_filter.mp hz).2
+  have hcardGround : ground.card = Fintype.card 𝔽 := by simp [ground]
+  have hcardSplit : covered.card + uncovered.card = ground.card := by
+    rw [show uncovered = ground \ covered by rfl, Finset.card_sdiff]
+    have hcsub : covered ⊆ ground := Finset.filter_subset _ _
+    rw [Finset.inter_eq_left.mpr hcsub]
+    have hle := Finset.card_le_card hcsub
+    omega
+  have hcovered : Fintype.card 𝔽 - 1 ≤ covered.card := by omega
+  exact hcovered.trans (by simpa using Finset.card_le_card hcoveredSub)
+
+/-- Hence the minimal axis repair clutter has `τ≥q-1`. -/
+theorem minimalAxisRepair_le_transversalNumber [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    Fintype.card 𝔽 - 1 ≤
+      transversalNumber (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) := by
+  apply le_transversalNumber_of_forall
+  · refine ⟨univ, ?_⟩
+    intro E hE
+    rw [Finset.univ_inter]
+    exact axisTwistedCubicRepair_edge_nonempty (mem_minimalHyperedges.mp hE).1
+  · exact fun _ hT => minimalAxisRepair_transversal_card_ge y hT
+
+/-- Every axis coordinate has strict `τ>ν` for `q≥9`, without using a cap-set estimate. -/
+theorem minimalAxisRepair_tau_gt_nu [CharP 𝔽 3] (hq : 9 ≤ Fintype.card 𝔽)
+    (y : 𝔽 ⊕ Unit) :
+    matchingNumber (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) <
+      transversalNumber (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) := by
+  have hν := minimalAxisRepair_matchingNumber_le y
+  have hτ := minimalAxisRepair_le_transversalNumber y
+  omega
+
+/-- The same strict gap holds for the complete all-support repair hypergraph, by the proved
+minimal-clutter invariance. -/
+theorem axisRepair_tau_gt_nu [CharP 𝔽 3] (hq : 9 ≤ Fintype.card 𝔽)
+    (y : 𝔽 ⊕ Unit) :
+    matchingNumber (axisTwistedCubicRepairHypergraph (.inr y) 3) <
+      transversalNumber (axisTwistedCubicRepairHypergraph (.inr y) 3) := by
+  rw [← matchingNumber_minimalAxisTwistedCubicRepairHypergraph,
+    ← transversalNumber_minimalAxisTwistedCubicRepairHypergraph]
+  exact minimalAxisRepair_tau_gt_nu hq y
+
+/-- **Uniform all-symbol repair gap.** Every coordinate of `S_q`, for `q=3^h≥9`, has strictly
+larger transversal number than matching number in its complete radius-three repair hypergraph. -/
+theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
+    (hq : 9 ≤ Fintype.card 𝔽) (x : AxisTwistedCubicIndex 𝔽) :
+    matchingNumber (axisTwistedCubicRepairHypergraph x 3) <
+      transversalNumber (axisTwistedCubicRepairHypergraph x 3) := by
+  cases x with
+  | inl x => exact cubicRepair_tau_gt_nu hq x
+  | inr y => exact axisRepair_tau_gt_nu hq y
+
 private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=
   E.filter fun z => z.isLeft

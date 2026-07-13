@@ -198,8 +198,11 @@ constructs the coordinatewise semilinear projective action of every field automo
 that it preserves point-line orthogonality incidence.
 [`RelativeConicArcs/QuadraticFrobenius.lean`](../../lean/RelativeConicArcs/QuadraticFrobenius.lean)
 proves relative Frobenius involutive when the finite-field extension has degree two and supplies the
-concrete incidence structure on `PG(2,s²)`. Only its fixed-locus identification and the exact
-extension-count incidence maps remain field-specific.
+concrete incidence structure on `PG(2,s²)`. It also formalizes Hilbert-90 normalization, identifies
+the fixed locus with the embedded `PG(2,s)`, and proves the exact `(s²-s)/2` candidate count on each
+fixed line. `QuadraticLineCounting.lean` proves the exact occupied/empty fixed-line formula, and
+`QuadraticForbidden.lean` constructs the forbidden-orbit charge and closes the semantic arc
+extension theorem.
 
 ### Theorem F — quantitative conjugate-pair extension criterion
 
@@ -243,16 +246,22 @@ on no old secant and its mate line contains no old selected point, so the three-
 it legal. Every nonfixed conjugate pair has a unique subfield mate line, so summing over the `E`
 empty lines introduces no double counting.
 
-Formalization boundary: paper-proved, not yet Lean-formalized. The exact formulas now follow the
-source theorem's point/orbit convention.
+Formalization boundary: the complete coordinate theorem is Lean-proved, including the occupied-line
+formula, exact empty-line count, nonfixed-secant orbit count, injective forbidden charge, and the
+fact that a surviving candidate really preserves the arc property.
 
 #### Lean support
 
 [`FiniteGeom/BaerCompletion/PairExtension.lean`](../../lean/FiniteGeom/BaerCompletion/PairExtension.lean)
 proves the linewise `E*(N-M)` counting theorem, the positive-surplus existence criterion, and the
 exact quadratic wrapper `quadraticBaer_pairExtension_lowerBound` with
-`N=(s²-s)/2`, the displayed `E`, and the noninvariant-secant-orbit `M`. The remaining geometric
-instance must prove the three exact cardinality fields of `QuadraticBaerPairExtensionData`.
+`N=(s²-s)/2`, the displayed `E`, and the noninvariant-secant-orbit `M`.
+[`RelativeConicArcs/QuadraticPairExtension.lean`](../../lean/RelativeConicArcs/QuadraticPairExtension.lean)
+constructs the coordinate candidates and discharges `candidate_count` automatically.
+[`RelativeConicArcs/QuadraticLineCounting.lean`](../../lean/RelativeConicArcs/QuadraticLineCounting.lean)
+and [`RelativeConicArcs/QuadraticForbidden.lean`](../../lean/RelativeConicArcs/QuadraticForbidden.lean)
+discharge the remaining fields; the latter proves the end-to-end theorem
+`exists_quadratic_pair_extension`.
 
 ### Theorem F.1 — heterogeneous pair-extension bound
 
@@ -363,9 +372,10 @@ the chosen invariant arc and its obstruction-persistence hypotheses.
 2. `Secant.lean`: **landed** — pairwise-disjoint transversals and abstract secant resilience.
 3. `BaerPlane.lean`, `ProjectiveConjugation.lean`, `QuadraticFrobenius.lean`: **landed** — abstract
    involution and trace results, coordinate semilinear incidence preservation, and the degree-two
-   Frobenius instance; fixed-locus normalization remains.
-4. `PairExtension.lean`: **counting layer landed** — `E*(N-M)`, existence, and exact quadratic data
-   wrapper; geometric cardinality fields remain.
+   Frobenius instance, including fixed-locus normalization and exact fixed-line candidate counts.
+4. `PairExtension.lean`: **landed end to end** — `E*(N-M)`, existence, and exact quadratic data
+   wrapper; `QuadraticPairExtension.lean`, `QuadraticLineCounting.lean`, and
+   `QuadraticForbidden.lean` discharge all coordinate fields and prove semantic arc extension.
 5. `RobustHole.lean`: **landed** — below-`τ` survival, secant-count robustness, and preservation.
 6. `Core.lean`: **landed** — completion cores and the sharp unique-completion deletion theorem.
 7. `ClassicalFamilies.lean`: add exact radii as incidence APIs become available.
@@ -377,10 +387,11 @@ supplies the column-code dictionary.
 
 ## Release gates
 
-- Recheck the transcription of Theorem F while formalizing its finite-cardinality identities.
+- Keep Theorem F synchronized with the checked declarations and trust manifest.
 - Audit every classical-family radius against primary finite-geometry literature.
 - Produce a sharp or near-sharp invariant family, or present the extension theorem as structural.
-- Formalize Theorems A, C, E, F, and H through the new Lean lane.
+- Run targeted prior-art review on the heterogeneous criterion and robustness coupling; do not
+  treat re-proved classical coordinate geometry as discovery.
 - Keep enumerations as discovery/regression artifacts, never substitutes for proofs.
 
 ## Strengthenings discovered during formalization
@@ -390,7 +401,7 @@ supplies the column-code dictionary.
 - State the heterogeneous pair-extension bound `Σℓ(N_ℓ-M_ℓ)_+`; the uniform `E(N-M)` theorem is a
   corollary.
 - Formulate Baer structure for arbitrary incidence-preserving involutions of projective planes;
-  finite fields enter only for fixed-locus cardinalities.
+  finite fields enter only for the now-formalized fixed-locus and exact coordinate counts.
 - Perturbation stability requires only persistence of old obstructions, not equality of complete
   obstruction hypergraphs.
 - View facet separation as a directed completion distance, aligning the result with asymmetric
@@ -403,13 +414,18 @@ Tracking task: `C99`.
 
 ### Discovery track for final review
 
-Keep this appendix as a running classification throughout the remaining formalization, and return
-to it after the final trust audit. Do not merge the categories: **proved corollaries**, **cheap
+This appendix was revisited after the final trust audit. Do not merge the categories: **proved corollaries**, **cheap
 formal extensions**, **genuine paper strengthenings**, **applications**, and **speculative
 directions** must remain explicitly distinguished. Promotion into the main theorem spine requires
 both a proof-status check and a novelty/prior-art check.
 
 Current classification:
+
+- **Classical infrastructure, formalized but not discovered here:** Hilbert-90 normalization;
+  identification of the quadratic-Frobenius fixed locus with `PG(2,s)`; the counts
+  `s²+s+1`, `s+1`, and `s²-s`; elementary arc line-incidence double counting; and two-element
+  orbit counting for fixed-point-free involutions. These declarations support trust and reuse but
+  must not be entered as novel Discovery Track results.
 
 - **Proved strengthening:** minimal-edge reduction preserves every transversal and `τ`; the paper
   may work canonically with the minimal-obstruction clutter rather than all dependent traces.
@@ -431,12 +447,11 @@ Current classification:
 - **Proved compositional corollary:** weighted deletion and simultaneous insertion commute: their
   combination is exactly weighted transversal cost, with no hypothesis beyond finite hereditary
   independence (`weightedMultiInsertionDistance_eq_weightedTransversalCostWithin`).
-- **Proved proof-spine strengthening:** the three conditional quadratic count fields are no longer
-  opaque numerical assumptions. Candidate count follows from a two-to-one mate-pair map, empty-line
-  count from an occupied/empty complement, and the forbidden bound from an injective charging map
-  into noninvariant secant orbits (`quadraticCandidate_card_of_two_fibers`,
-  `emptyLine_card_of_complement`, `forbidden_card_le_of_injOn`). The remaining coordinate boundary
-  is to construct these maps for Frobenius on `PG(2,s²)`.
+- **Proved proof-spine strengthening:** the three quadratic count fields are discharged in
+  coordinates. Candidate count follows from a two-to-one mate-pair map, empty-line count from an
+  exact occupied/empty partition, and the forbidden bound from an injective charge into nonfixed
+  secant orbits (`card_emptyFixedLines`, `card_nonfixedSecantOrbits`,
+  `card_forbiddenCandidates_le_baer`).
 - **Proved coordinate strengthening:** coordinatewise action of any field automorphism on
   projective points and dual lines preserves incidence. For a quadratic finite-field extension,
   relative Frobenius is proved involutive from its order theorem, so the actual coordinate
@@ -447,6 +462,26 @@ Current classification:
   semilinear eigenvectorhood, `σ(v)=a·v` (`projectiveEquiv_mk_eq_iff`). Thus identifying the fixed
   locus with `PG(2,s)` needs a normalization/Hilbert-90 step; silently replacing projective
   fixedness by coordinatewise fixedness would be a false shortcut.
+- **Proved coordinate theorem:** the Hilbert-90 normalization step is now formalized. Projectively
+  fixed points of quadratic Frobenius are exactly the image of `PG(2,F)`; fixed points and fixed
+  dual lines number `s²+s+1`, and every fixed line has `s+1` fixed points and `s²-s` nonfixed
+  points (`projective_fixed_iff_mem_range_baseChange`, `natCard_fixedProjectivePoint`,
+  `natCard_fixedPointsOnFixedLine`, `natCard_nonfixedPointsOnFixedLine`).
+- **Proved coordinate theorem:** conjugation acts fixed-point-freely on the nonfixed points of a
+  fixed line, every mate-pair fiber has exactly two elements, and hence each fixed line has exactly
+  `(s²-s)/2` conjugate candidates (`matePair_fiber_card`,
+  `card_conjugateCandidatesOnFixedLine`). The coordinate quadratic wrapper now discharges
+  `candidate_count` automatically.
+- **Proved coordinate theorem:** fixed two-traces are identified exactly with invariant arc pairs;
+  this yields exact occupied and empty fixed-line counts. `choose_fixedArcPoints_le_star` proves
+  the side condition ensuring that natural subtraction does not silently truncate.
+- **Proved coordinate theorem:** nonfixed secants have exact two-element conjugation orbits. Their
+  intersection with an empty fixed line gives an injective forbidden-candidate charge, and
+  `mem_forbiddenCandidates_iff_exists_covered` identifies forbiddenness exactly with endpoint
+  secant coverage.
+- **Proved semantic closure:** `arc_union_candidate_of_not_mem_forbidden` closes the gap between an
+  abstract legal-count predicate and arc geometry; `exists_quadratic_pair_extension` constructs an
+  actual conjugate-pair arc extension from the paper's two inequalities.
 - **Proved arithmetic corollary:** for invariant eight-arcs, `M≤12`, while every empty subfield line
   has more than twelve conjugate candidates for `s≥7`.
 - **Proved arithmetic strengthening:** the completed-square identity
@@ -461,8 +496,10 @@ Current classification:
   polynomials, symmetry-reduced hitting-set algorithms, and robust defining sets.
 - **Speculative directions:** higher-degree Galois orbit extension, fractional/integral completion
   gaps, tensorization, and classification of near-equivariantly-complete configurations.
-- **Final question:** identify anything else that is a corollary, cheap extension, surprise,
-  implication, application, or plausible novel direction arising from the completed formalization.
+- **Post-formalization question asked again:** the completed proof exposes three especially useful
+  follow-ups: characterize equality in the injective charge, retain the full linewise collision
+  profile rather than its maximum, and generalize the semantic forbidden-set equivalence to
+  higher Galois orbits. These are candidate research directions, not established novelty claims.
 
 Update this classification whenever proof work exposes a new theorem, removes an assumption,
 reveals a false generalization, or suggests a new consumer. The detailed entries below preserve the
@@ -609,9 +646,7 @@ The strongest current novelty bets are:
 4. fractional/integral gaps for geometric circuit clutters;
 5. collision corrections capable of improving the orbit-extension threshold.
 
-Task `C99` is deliberately deferred until the current formalization is complete. Its first action
-is to ask again: **“What other corollaries, cheap extensions, surprises, implications, applications,
-or potentially novel mathematics follow from the completed proof?”** The completed declaration
-graph, adversarial findings, and any new proof friction must be used as fresh inputs rather than
-merely repeating this appendix. It then selects the best two ideas for a theorem-level development
-and performs targeted novelty checks.
+Task `C99` is now unblocked by the completed formalization. Its next action is a targeted novelty
+check and theorem-level development of the best two post-formalization candidates, using the
+completed declaration graph and adversarial findings rather than treating this queue as evidence
+of novelty.

@@ -22,10 +22,13 @@ Planned modules, in dependency order:
    fixed-line pair classification, and disjoint conjugate-line traces; the abstract projective-plane
    instance is in `RelativeConicArcs.BaerIncidence`, the coordinate semilinear action is in
    `RelativeConicArcs.ProjectiveConjugation`, and the quadratic relative-Frobenius instance is in
-   `RelativeConicArcs.QuadraticFrobenius`;
-7. `PairExtension.lean` — **landed conditionally:** heterogeneous and uniform counting,
-   positive-surplus existence, and the exact quadratic data wrapper; concrete Frobenius counts
-   remain;
+   `RelativeConicArcs.QuadraticFrobenius`, including its Hilbert-90 fixed-locus and linewise
+   candidate-pair counts; `RelativeConicArcs.QuadraticPairExtension` packages the resulting
+   automatic `candidate_count` field;
+7. `PairExtension.lean` — **landed:** heterogeneous and uniform counting, positive-surplus
+   existence, and the exact quadratic data wrapper; `RelativeConicArcs.QuadraticLineCounting` and
+   `RelativeConicArcs.QuadraticForbidden` discharge its coordinate count fields and prove that a
+   surviving candidate really extends the arc;
 8. `OrbitCounting.lean` — **landed:** constant-fiber candidate counting, complement counting for
    empty fixed lines, and injective charging for forbidden candidates reduce the three wrapper
    fields to elementary incidence maps;
@@ -35,7 +38,7 @@ Planned modules, in dependency order:
    obstructions persist;
 11. `Core.lean` — **landed in abstract form:** completion cores and the sharp unique-completion
    deletion theorem;
-12. `ClassicalFamilies.lean` — exact radii once family-specific incidence counts are supplied.
+12. `ClassicalFamilies.lean` — future exact radii once family-specific incidence counts are supplied.
 
 No theorem is formalized merely because it is listed here. The paper's theorem-by-theorem
 formalization boundaries remain authoritative until declarations land.

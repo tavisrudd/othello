@@ -42,6 +42,53 @@ theorem emptyLine_card_of_complement {L : Type*} [DecidableEq L]
     empty.card = all.card - occupied.card := by
   rw [hpart, Finset.card_sdiff_of_subset hsub]
 
+/-- A finite family of traces of size at most two is counted by its incidences minus its
+two-point traces.  This is the abstract double-counting identity behind the occupied Baer-line
+formula: a one-point trace contributes once to both sides, while a two-point trace contributes
+twice to the incidence sum and once to the correction term. -/
+theorem occupied_card_eq_sum_sub_twoTraces {L P : Type*} [DecidableEq L] [DecidableEq P]
+    (lines : Finset L) (trace : L → Finset P)
+    (hle : ∀ l ∈ lines, (trace l).card ≤ 2) :
+    (lines.filter fun l => (trace l).Nonempty).card =
+      (∑ l ∈ lines, (trace l).card) -
+        (lines.filter fun l => (trace l).card = 2).card := by
+  classical
+  let occupied := lines.filter fun l => (trace l).Nonempty
+  let double := lines.filter fun l => (trace l).card = 2
+  have hsum : (∑ l ∈ lines, (trace l).card) = occupied.card + double.card := by
+    rw [Finset.card_eq_sum_ones, Finset.card_eq_sum_ones]
+    simp only [occupied, double, Finset.sum_filter]
+    rw [← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl
+    intro l hl
+    have hcard := hle l hl
+    by_cases h0 : (trace l).card = 0
+    · have hempty : trace l = ∅ := Finset.card_eq_zero.mp h0
+      simp [hempty]
+    by_cases h2 : (trace l).card = 2
+    · have hne : (trace l).Nonempty := Finset.card_pos.mp (by omega)
+      simp [h2, hne]
+    have h1 : (trace l).card = 1 := by omega
+    have hne : (trace l).Nonempty := Finset.card_pos.mp (by omega)
+    simp [h1, hne]
+  change occupied.card = _
+  rw [hsum]
+  simp [double]
+
+/-- Numerical specialization of `occupied_card_eq_sum_sub_twoTraces`.  If the total incidence
+sum is `f*r+2e`, the two-point traces number `choose(f,2)+e`, and the elementary star count is
+large enough to contain all fixed-point joins, then the occupied-line count is
+`f*r-choose(f,2)+e`. -/
+theorem occupied_card_of_baer_trace_profile {L P : Type*} [DecidableEq L] [DecidableEq P]
+    (lines : Finset L) (trace : L → Finset P) (f e r : ℕ)
+    (hle : ∀ l ∈ lines, (trace l).card ≤ 2)
+    (hsum : (∑ l ∈ lines, (trace l).card) = f * r + 2 * e)
+    (htwo : (lines.filter fun l => (trace l).card = 2).card = f.choose 2 + e)
+    (hchoose : f.choose 2 ≤ f * r) :
+    (lines.filter fun l => (trace l).Nonempty).card = f * r - f.choose 2 + e := by
+  rw [occupied_card_eq_sum_sub_twoTraces lines trace hle, hsum, htwo]
+  omega
+
 omit [DecidableEq Q] in
 /-- A finite injective charging map bounds the forbidden candidates by the available obstruction
 orbits. This is the exact combinatorial content needed by `forbidden_bound`. -/

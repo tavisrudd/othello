@@ -6,6 +6,9 @@ import RelativeConicArcs.CompletionDistance
 import RelativeConicArcs.BaerIncidence
 import RelativeConicArcs.ProjectiveConjugation
 import RelativeConicArcs.QuadraticFrobenius
+import RelativeConicArcs.QuadraticLineCounting
+import RelativeConicArcs.QuadraticPairExtension
+import RelativeConicArcs.QuadraticForbidden
 import RelativeConicArcs.BaerArithmetic
 import RelativeConicArcs.Defect
 import RelativeConicArcs.Conic
@@ -14,3 +17,4 @@ import RelativeConicArcs.Averaging
 import RelativeConicArcs.Nucleus
 import RelativeConicArcs.Results
 import RelativeConicArcs.Q11Residual
+import RelativeConicArcs.Q9Terminal

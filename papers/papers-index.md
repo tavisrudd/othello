@@ -20,8 +20,9 @@ dihedral bundles the D₂ₘ family, continuation is N1-only, coding is conditio
 
 | Directory                     | Working title                                                     | Status                                          |
 |-------------------------------|------------------------------------------------------------------|-------------------------------------------------|
-| `baer-equivariant-extension`  | Equivariant extensions and robust completion of finite-geometric arcs | Combined development draft; Lean proof spine built, exact pair-count instance conditional |
-| `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Folded into Baer development draft; completion/core layer Lean-built |
+| `equivariant-robust-completion` | Equivariant extension and robust completion in finite geometry | Canonical merged paper; exact quadratic extension and completion spine Lean-built |
+| `baer-equivariant-extension`  | Equivariant extensions of finite-geometric arcs                  | Source/staging view folded into canonical merged paper |
+| `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Source/staging view folded into canonical merged paper |
 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds) | Self-contained manuscript + verifier + strict-trust Lean formalization; near submission-ready — *related but separate* |
 
@@ -48,8 +49,8 @@ and share the `lean/FiniteGeom/` base.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
-- **Combined Markdown development draft + Lean lane:** Baer equivariant extension and completion
-  core rigidity. Continuation rigidity remains theorem-package only.
+- **Combined Markdown development draft + Lean lane:** `equivariant-robust-completion`, with the
+  exact coordinate quadratic extension theorem. Continuation rigidity remains theorem-package only.
 - **Sequence packages (ready/draft):** the two `oeis-submissions/` entries.
 
 ## Shared blocker
@@ -67,9 +68,8 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   completion δ_x = τ base identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
   (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
   (`lean/RelativeConicArcs/`).
-- **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data
-  instance remains conditional on fixed-locus normalization and three concrete incidence maps; see
-  `lean/FiniteGeom/BaerCompletion/TRUST.md`.
+- **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data and
+  semantic arc extension are Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
 - **One exception to the axiom-clean bar:** a single `native_decide` in
   `DihedralSchreier/KleinFourBridge.lean` (`explicit_pairProducts`, a 4-element Klein-four
   enumeration) — an isolated witness with **no downstream dependents** (the V₄→K₄ reduction itself is
@@ -90,8 +90,8 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
 Key computational results and proven lemmas/theorems, mapped to their paper and proof location.
 
 **Paper aliases:** `nofil` = `nofil-finite-geometry-outcomes`; `dihedral` =
-`dihedral-schreier-node-kayles`; `arcs` = `arcs_complete_outside_conic`; `baer` =
-`baer-equivariant-extension`; `completion` = `completion-core-rigidity`; `continuation` =
+`dihedral-schreier-node-kayles`; `arcs` = `arcs_complete_outside_conic`; `baer` and `completion` =
+`equivariant-robust-completion`; `continuation` =
 `continuation-graph-rigidity`; `queens-n18` = `non-formal-bloggy/queens-n18`; `oeis:*` =
 `oeis-submissions/*`; `coding` = the (unhomed) coding/LRC candidate (Lean `lean/RepairCodes/` +
 `lean/FiniteGeom/` base).
@@ -137,7 +137,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-rho-small      | ρ_𝒞 small values and arithmetic thresholds | `L₂(8)=L₂(9)=L₂(11)=6`, `L₂(16)=8`; ρ_𝒞(8)=ρ_𝒞(9)=ρ_𝒞(11)=6; 8 ≤ ρ_𝒞(16) ≤ 9 | arcs | paper §7 + verifier; lean `RelativeConicArcs/Results.lean:20`–`:90` |
 | comp-q11-exterior  | q=11 exterior-secant design              | all 15 witness secants avoid the conic; required-point index distribution `(N₁,N₂,N₃)=(90,15,10)` | arcs | paper §7 + verifier `I_C=0` + paper moment equations |
 | comp-q11-icosahedral | q=11 icosahedral residual P-position   | all 12 conic points live; determinant conflict graph has 30 edges and degree 5, is icosahedral, and is P by antipodal mirror | arcs, nofil | paper §7 remark; lean `RelativeConicArcs/Q11Residual.lean` `all_seed_legal`, `adj_iff_icosahedron`, `degree_five`, `isP` |
-| thm-baer-criterion  | Orbit-valued extension criterion         | heterogeneous and uniform conjugate-pair bounds; exact coordinate counts remain conditional | baer | lean `FiniteGeom/BaerCompletion/PairExtension.lean` `PairExtensionData.sum_card_sub_le_legalCount`, `quadraticBaer_pairExtension_lowerBound` |
+| thm-baer-criterion  | Orbit-valued extension criterion         | heterogeneous and uniform conjugate-pair bounds; exact coordinate theorem constructs an arc extension | baer | lean `FiniteGeom/BaerCompletion/PairExtension.lean` `PairExtensionData.sum_card_sub_le_legalCount`; `RelativeConicArcs/QuadraticForbidden.lean` `exists_quadratic_pair_extension` |
 | thm-baer-saturation | Quadratic orbit-saturation bound         | denominator-free `2s(s−1) ≤ (k−1)²` core of the softened √2·s bound | baer | lean `FiniteGeom/BaerCompletion/OrbitSaturation.lean` `orbitSaturation_quadratic_bound_of_split` |
 | thm-completion-tau  | δ(C) = τ                                 | semantic insertion distance = obstruction-transversal number in every finite hereditary system | baer, completion | lean `FiniteGeom/BaerCompletion/Obstruction.lean` `insertionDistance_eq_transversalNumber` |
 | lem-completion-clutter | Minimal-obstruction reduction        | removing nonminimal dependent traces preserves every transversal and `τ` | baer, completion | lean `FiniteGeom/BaerCompletion/Clutter.lean` `transversalNumber_minimalEdges` |
@@ -146,8 +146,10 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-completion-weighted-multi | Weighted multi-insertion      | weighted deletion and prescribed-set insertion compose without extra hypotheses | baer, completion | lean `FiniteGeom/BaerCompletion/Weighted.lean` `weightedMultiInsertionDistance_eq_weightedTransversalCostWithin` |
 | thm-secant-resilience | Arc insertion distance               | `δ_x` equals secant index in every finite abstract projective plane | baer, completion | lean `RelativeConicArcs/CompletionDistance.lean` `arcInsertionDistance_eq_pointIndex` |
 | thm-baer-involution | Fixed/conjugate secant decomposition    | trace transport, fixed-pair classification, and disjoint conjugate traces | baer | lean `FiniteGeom/BaerCompletion/BaerPlane.lean`; `RelativeConicArcs/BaerIncidence.lean` |
-| thm-baer-frobenius | Coordinate quadratic Frobenius           | field automorphisms preserve projective incidence; relative Frobenius is involutive in degree two | baer | lean `RelativeConicArcs/ProjectiveConjugation.lean` `involutiveIncidence`; `RelativeConicArcs/QuadraticFrobenius.lean` `incidence` |
+| thm-baer-frobenius | Coordinate quadratic Frobenius           | incidence involution, Hilbert-90 fixed locus `PG(2,s)`, and exact `(s²−s)/2` linewise candidate count | baer | lean `RelativeConicArcs/QuadraticFrobenius.lean`; `RelativeConicArcs/QuadraticPairExtension.lean` |
 | lem-baer-input-reduction | Quadratic count-input reduction   | exact count fields reduce to a 2-fiber map, complement, and injective charge | baer | lean `FiniteGeom/BaerCompletion/OrbitCounting.lean` |
+| thm-baer-line-counts | Exact fixed-line occupation          | exact occupied/empty fixed-line formulas with nontruncating subtraction | baer | lean `RelativeConicArcs/QuadraticLineCounting.lean` `card_occupiedFixedLines`, `card_emptyFixedLines`, `choose_fixedArcPoints_le_star` |
+| thm-baer-forbidden | Exact forbidden-candidate charging       | exact two-element secant orbits, injective charge, semantic coverage equivalence, and legal arc union | baer | lean `RelativeConicArcs/QuadraticForbidden.lean` `card_nonfixedSecantOrbits`, `card_forbiddenCandidates_le_baer`, `arc_union_candidate_of_not_mem_forbidden` |
 | lem-baer-arithmetic | Quadratic Baer arithmetic                | `M=fe+e(e−1)`, eight-arc `M≤12`, candidate surplus, and occupied-line identity | baer | lean `RelativeConicArcs/BaerArithmetic.lean` |
 | thm-completion-robust | Robust obstruction persistence        | below-`τ` deletions cannot unblock; only old obstructions need persist | baer, completion | lean `FiniteGeom/BaerCompletion/RobustHole.lean` `not_insertion_indep_of_obstructions_persist` |
 | thm-completion-core | Sharp completion-core radius            | unique completion below facet separation, with a sharp alternative-facet witness | baer, completion | lean `FiniteGeom/BaerCompletion/Core.lean` `completionCore_sdiff_eq`, `completionCore_delete_difference_eq_intersection` |
@@ -161,6 +163,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-a344227        | A344227 a(14..17)                        | queens Node-Kayles nimbers 0, 1, 0, 2              | oeis:A344227        | solver `rust/src/queens/solver/nimber.rs` |
 | comp-queens-n18     | n=18 Queens = first-player win           | witness opening I9 ⇒ a(18) ≠ 0                     | queens-n18          | `queens-n18-paper.md` + Rust solver |
 
-*Continuation remains plan-stage. The Baer/completion mechanism and coordinate Frobenius incidence
-are Lean-built; only the exact `QuadraticBaerPairExtensionData` coordinate instance remains
-conditional. `PG(4,3)=P` is a computed frontier datum, not a theorem.*
+*Continuation remains plan-stage. The Baer/completion mechanism and exact coordinate quadratic
+pair-extension theorem are Lean-built. The Hilbert-90, Baer-subplane, incidence-counting, and
+two-element-orbit ingredients are classical infrastructure, not Discovery Track claims.
+`PG(4,3)=P` is a computed frontier datum, not a theorem.*

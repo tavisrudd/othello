@@ -50,14 +50,32 @@ def RawCovered (xs : List (RawPoint K)) (x : Vec K) : Prop :=
     ∃ a ∈ xs, ∃ b ∈ xs,
       rayEq a.1 b.1 = false ∧ Matrix.det ![x, a.1, b.1] = 0
 
+/-- Ordinary projective coverage: the raw vector represents a selected point or lies on a secant
+of two projectively distinct selected points. Unlike `RawCovered`, there is no prescribed-conic
+escape clause. -/
+def RawOrdinaryCovered (xs : List (RawPoint K)) (x : Vec K) : Prop :=
+  (∃ a ∈ xs, rayEq x a.1 = true) ∨
+    ∃ a ∈ xs, ∃ b ∈ xs,
+      rayEq a.1 b.1 = false ∧ Matrix.det ![x, a.1, b.1] = 0
+
 /-- Coverage on the canonical projective representatives. -/
 def RawCoverage (xs : List (RawPoint K)) : Prop :=
   (∀ y z : K, RawCovered xs ![1, y, z]) ∧
     (∀ z : K, RawCovered xs ![0, 1, z]) ∧
       RawCovered xs ![0, 0, 1]
 
+/-- Ordinary coverage on all canonical projective representatives. -/
+def RawOrdinaryCoverage (xs : List (RawPoint K)) : Prop :=
+  (∀ y z : K, RawOrdinaryCovered xs ![1, y, z]) ∧
+    (∀ z : K, RawOrdinaryCovered xs ![0, 1, z]) ∧
+      RawOrdinaryCovered xs ![0, 0, 1]
+
 instance (xs : List (RawPoint K)) (x : Vec K) : Decidable (RawCovered xs x) := by
   unfold RawCovered
+  infer_instance
+
+instance (xs : List (RawPoint K)) (x : Vec K) : Decidable (RawOrdinaryCovered xs x) := by
+  unfold RawOrdinaryCovered
   infer_instance
 
 def RawValid (xs : List (RawPoint K)) : Prop :=
@@ -83,6 +101,10 @@ instance (xs : List (RawPoint K)) : Decidable (RawArc xs) := by
 
 instance (xs : List (RawPoint K)) : Decidable (RawCoverage xs) := by
   unfold RawCoverage
+  infer_instance
+
+instance (xs : List (RawPoint K)) : Decidable (RawOrdinaryCoverage xs) := by
+  unfold RawOrdinaryCoverage
   infer_instance
 
 /-- The executable checker.  `decide` is kernel reduction; no native evaluator is involved. -/
@@ -200,6 +222,47 @@ theorem rawValid_arc {xs : List (RawPoint K)} (h : RawValid xs) :
     ((ProjectiveCap.Projective.FrameGridBridge.Coordinate.mk_collinear_iff_det_eq_zero
       a.2 b.2 c.2).mp hcol)
 
+/-- Raw determinant arc validity is exactly projective cap validity for the represented point
+set.  Unlike `rawValid_arc`, this theorem does not require disjointness or coverage data, so it
+can be applied to arbitrary continuations of a certified seed. -/
+theorem rawArc_iff_projectiveCap {xs : List (RawPoint K)} :
+    RawArc xs ↔
+      ProjectiveCap.Projective.Cap K (Fin 3 → K) (pointSet xs) := by
+  constructor
+  · intro hraw
+    rw [← ProjectiveBridge.arc_iff_projectiveCap]
+    intro p q r hp hq hr hpq hpr hqr hcol
+    obtain ⟨a, ha, rfl⟩ := mem_pointSet.mp hp
+    obtain ⟨b, hb, rfl⟩ := mem_pointSet.mp hq
+    obtain ⟨c, hc, rfl⟩ := mem_pointSet.mp hr
+    have hab : rayEq a.1 b.1 = false := (rayEq_eq_false_iff _ _).mpr
+      (fun hab => hpq ((rayEq_iff_mk_eq a b).mp hab))
+    have hac : rayEq a.1 c.1 = false := (rayEq_eq_false_iff _ _).mpr
+      (fun hac => hpr ((rayEq_iff_mk_eq a c).mp hac))
+    have hbc : rayEq b.1 c.1 = false := (rayEq_eq_false_iff _ _).mpr
+      (fun hbc => hqr ((rayEq_iff_mk_eq b c).mp hbc))
+    exact (hraw a ha b hb c hc hab hac hbc)
+      ((ProjectiveCap.Projective.FrameGridBridge.Coordinate.mk_collinear_iff_det_eq_zero
+        a.2 b.2 c.2).mp
+        (ProjectiveBridge.collinear_iff_projective_collinear.mp hcol))
+  · intro hcap a ha b hb c hc hab hac hbc hdet
+    have hpq : toPoint a ≠ toPoint b := fun heq => by
+      have hray := (rayEq_eq_true_iff _ _).mpr ((rayEq_iff_mk_eq a b).mpr heq)
+      rw [hab] at hray
+      contradiction
+    have hpr : toPoint a ≠ toPoint c := fun heq => by
+      have hray := (rayEq_eq_true_iff _ _).mpr ((rayEq_iff_mk_eq a c).mpr heq)
+      rw [hac] at hray
+      contradiction
+    have hqr : toPoint b ≠ toPoint c := fun heq => by
+      have hray := (rayEq_eq_true_iff _ _).mpr ((rayEq_iff_mk_eq b c).mpr heq)
+      rw [hbc] at hray
+      contradiction
+    exact hcap (mem_pointSet.mpr ⟨a, ha, rfl⟩) (mem_pointSet.mpr ⟨b, hb, rfl⟩)
+      (mem_pointSet.mpr ⟨c, hc, rfl⟩) hpq hpr hqr
+      ((ProjectiveCap.Projective.FrameGridBridge.Coordinate.mk_collinear_iff_det_eq_zero
+        a.2 b.2 c.2).mpr hdet)
+
 theorem rawValid_disjoint {xs : List (RawPoint K)} (h : RawValid xs) :
     Disjoint (pointSet xs) (standardConic (K := K)) := by
   classical
@@ -245,10 +308,52 @@ theorem rawValid_complete {xs : List (RawPoint K)} (h : RawValid xs) :
     exact (ProjectiveCap.Projective.FrameGridBridge.Coordinate.mk_collinear_iff_det_eq_zero
       x.2 a.2 b.2).mpr hdet
 
+/-- A relative certificate whose selected points or secants cover every canonical representative
+is an ordinary complete arc (`CompleteOutside A ∅`). This reuses the same normalization and
+determinant-to-incidence bridge as `rawValid_complete`; the stronger coverage predicate removes the
+conic escape branch. -/
+theorem rawValid_complete_empty {xs : List (RawPoint K)} (h : RawValid xs)
+    (hcoverage : RawOrdinaryCoverage xs) :
+    CompleteOutside (L := Conic.Point K) (pointSet xs) ∅ := by
+  classical
+  refine ⟨rawValid_arc h, by simp, ?_⟩
+  intro p hpA _hpEmpty
+  obtain ⟨n, hn, hnp, hncover⟩ : ∃ n : Vec K, ∃ hn : n ≠ 0,
+      Projectivization.mk K n hn = p ∧ RawOrdinaryCovered xs n := by
+    rcases normalized_rep p with ⟨y, z, hn, hp⟩ | ⟨z, hn, hp⟩ | ⟨hn, hp⟩
+    · exact ⟨![1, y, z], hn, hp, hcoverage.1 y z⟩
+    · exact ⟨![0, 1, z], hn, hp, hcoverage.2.1 z⟩
+    · exact ⟨![0, 0, 1], hn, hp, hcoverage.2.2⟩
+  let x : RawPoint K := ⟨n, hn⟩
+  rcases hncover with hmember | hsec
+  · obtain ⟨a, ha, hxa⟩ := hmember
+    exfalso
+    apply hpA
+    apply mem_pointSet.mpr
+    refine ⟨a, ha, ?_⟩
+    exact ((rayEq_iff_mk_eq x a).mp ((rayEq_eq_true_iff _ _).mp hxa)).symm.trans hnp
+  · obtain ⟨a, ha, b, hb, hab, hdet⟩ := hsec
+    have habp : toPoint a ≠ toPoint b := fun heq => by
+      have ht := (rayEq_eq_true_iff _ _).mpr ((rayEq_iff_mk_eq a b).mpr heq)
+      rw [hab] at ht
+      contradiction
+    apply covered_of_collinear_pair (L := Conic.Point K)
+      (mem_pointSet.mpr ⟨a, ha, rfl⟩) (mem_pointSet.mpr ⟨b, hb, rfl⟩) habp
+    rw [ProjectiveBridge.collinear_iff_projective_collinear, ← hnp]
+    exact (ProjectiveCap.Projective.FrameGridBridge.Coordinate.mk_collinear_iff_det_eq_zero
+      x.2 a.2 b.2).mpr hdet
+
 /-- Acceptance is sufficient for the full semantic relative-completeness predicate. -/
 theorem check_sound {xs : List (RawPoint K)} (h : check xs = true) :
     CompleteOutside (L := Conic.Point K) (pointSet xs) (standardConic (K := K)) :=
   rawValid_complete (check_rawValid h)
+
+/-- A successful relative certificate plus ordinary canonical coverage proves ordinary
+completeness. -/
+theorem check_sound_empty {xs : List (RawPoint K)} (h : check xs = true)
+    (hcoverage : RawOrdinaryCoverage xs) :
+    CompleteOutside (L := Conic.Point K) (pointSet xs) ∅ :=
+  rawValid_complete_empty (check_rawValid h) hcoverage
 
 /-- A successful list certificate gives an immediate numerical upper bound, even if the list
 contains repeated projective representatives. -/
