@@ -282,6 +282,110 @@ theorem projectiveAxisTwistedCubicMaxForm_pointEval_ne_zero {𝔽 : Type*} [Fiel
   rw [momentCurve_four_dot] at h1
   simp [projectiveAxisTwistedCubicMaxForm, axisTwistedCubicMaxForm] at h1
 
+/-- The plane `X₂-X₁=0` is the target-avoiding four-section used for the full repair port at
+axis infinity.  It contains finite cubic parameters `0,1`, cubic infinity, and finite axis
+parameter `1`, but not axis infinity. -/
+def projectiveAxisInfinityAvoidingFourSectionForm (𝔽 : Type*) [Field 𝔽] : Fin 4 → 𝔽 :=
+  ![0, -1, 1, 0]
+
+@[simp] theorem projectiveAxisInfinityAvoidingFourSectionForm_axisInfinity_eval
+    {𝔽 : Type*} [Field 𝔽] :
+    axisTwistedCubicPoints 𝔽 (.inr (.inr Unit.unit)) ⬝ᵥ
+      projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 1 := by
+  simp [projectiveAxisInfinityAvoidingFourSectionForm, axisTwistedCubicPoints,
+    dotProduct, Fin.sum_univ_succ]
+
+theorem projectiveAxisInfinityAvoidingFourSectionForm_sectionCount
+    {𝔽 : Type*} [Field 𝔽] [Fintype 𝔽] [DecidableEq 𝔽] :
+    sectionCount (projectiveAxisTwistedCubicPoints 𝔽)
+      (projectiveAxisInfinityAvoidingFourSectionForm 𝔽) = 4 := by
+  rw [sectionCount_projectiveAxisTwistedCubicPoints]
+  have hfiniteCubic :
+      (univ.filter fun t : 𝔽 =>
+        projectiveTwistedCubicPoints 𝔽 (.inl t) ⬝ᵥ
+          projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 0) = {0, 1} := by
+    ext t
+    simp only [mem_filter, mem_univ, true_and, projectiveTwistedCubicPoints_finite,
+      momentCurve_four_dot, projectiveAxisInfinityAvoidingFourSectionForm,
+      Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three,
+      Matrix.head_cons, Matrix.tail_cons, mul_zero, mul_one, add_zero, zero_add,
+      mem_insert, mem_singleton]
+    constructor
+    · intro ht
+      have hfactor : t * (t - 1) = 0 := by
+        linear_combination ht
+      rcases mul_eq_zero.mp hfactor with h0 | h1
+      · exact Or.inl h0
+      · exact Or.inr (sub_eq_zero.mp h1)
+    · rintro (rfl | rfl) <;> simp
+  have hcubic :
+      #(univ.filter fun x : ProjectiveTwistedCubicIndex 𝔽 =>
+        projectiveTwistedCubicPoints 𝔽 x ⬝ᵥ
+          projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 0) = 3 := by
+    rw [card_filter_sum, hfiniteCubic]
+    have hinfinity :
+        #(univ.filter fun u : Unit =>
+          projectiveTwistedCubicPoints 𝔽 (.inr u) ⬝ᵥ
+            projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 0) = 1 := by
+      simp [projectiveAxisInfinityAvoidingFourSectionForm]
+    rw [hinfinity]
+    simp
+  have hfiniteAxis :
+      (univ.filter fun y : 𝔽 =>
+        axisTwistedCubicPoints 𝔽 (.inr (.inl y)) ⬝ᵥ
+          projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 0) = {1} := by
+    ext y
+    simp only [mem_filter, mem_univ, true_and, mem_singleton]
+    have hdot :
+        axisTwistedCubicPoints 𝔽 (.inr (.inl y)) ⬝ᵥ
+          projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = -1 + y := by
+      simp [projectiveAxisInfinityAvoidingFourSectionForm, axisTwistedCubicPoints,
+        dotProduct, Fin.sum_univ_succ]
+    rw [hdot]
+    constructor
+    · intro h
+      exact sub_eq_zero.mp (by simpa [sub_eq_add_neg, add_comm] using h)
+    · rintro rfl
+      simp
+  have haxis :
+      #(univ.filter fun y : 𝔽 ⊕ Unit =>
+        axisTwistedCubicPoints 𝔽 (.inr y) ⬝ᵥ
+          projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 0) = 1 := by
+    rw [card_filter_sum, hfiniteAxis]
+    have hinfinity :
+        #(univ.filter fun u : Unit =>
+          axisTwistedCubicPoints 𝔽 (.inr (.inr u)) ⬝ᵥ
+            projectiveAxisInfinityAvoidingFourSectionForm 𝔽 = 0) = 0 := by
+      simp [projectiveAxisInfinityAvoidingFourSectionForm, axisTwistedCubicPoints,
+        dotProduct, Fin.sum_univ_succ]
+    rw [hinfinity]
+    simp
+  rw [hcubic, haxis]
+
+/-- Four is the largest completed-seed plane section avoiding axis infinity. -/
+theorem projectiveAxisInfinity_avoiding_section_le_four
+    {𝔽 : Type*} [Field 𝔽] [Fintype 𝔽] [DecidableEq 𝔽]
+    (a : Fin 4 → 𝔽)
+    (havoid : axisTwistedCubicPoints 𝔽 (.inr (.inr Unit.unit)) ⬝ᵥ a ≠ 0) :
+    sectionCount (projectiveAxisTwistedCubicPoints 𝔽) a ≤ 4 := by
+  have ha : a ≠ 0 := by
+    intro ha
+    subst a
+    exact havoid (by simp)
+  have ha2 : a 2 ≠ 0 := by
+    simpa [axisTwistedCubicPoints, dotProduct, Fin.sum_univ_succ] using havoid
+  rw [sectionCount_projectiveAxisTwistedCubicPoints]
+  have hcubic := projectiveCubic_section_le_three a ha
+  have haxis := axis_section_le_one a (Or.inr ha2)
+  omega
+
+/-- The maximum `q+2` section `X₃=0` avoids projective cubic infinity. -/
+@[simp] theorem projectiveAxisTwistedCubicMaxForm_cubicInfinity_eval
+    {𝔽 : Type*} [Field 𝔽] :
+    projectiveTwistedCubicPoints 𝔽 (.inr Unit.unit) ⬝ᵥ
+      projectiveAxisTwistedCubicMaxForm 𝔽 = 1 := by
+  simp [projectiveAxisTwistedCubicMaxForm, axisTwistedCubicMaxForm]
+
 /-- The completed point system spans `𝔽⁴`; four displayed columns are the standard basis. -/
 theorem projectiveAxisTwistedCubic_span {𝔽 : Type*} [Field 𝔽] :
     Submodule.span 𝔽 (Set.range (projectiveAxisTwistedCubicPoints 𝔽)) = ⊤ := by
@@ -348,6 +452,8 @@ theorem projectiveAxisTwistedCubic_code_parameters {𝔽 : Type*} [Field 𝔽] [
 #print axioms projectiveCubic_section_le_three
 #print axioms projectiveCubic_section_eq_one_of_axis
 #print axioms projectiveAxisTwistedCubic_section_le
+#print axioms projectiveAxisInfinityAvoidingFourSectionForm_sectionCount
+#print axioms projectiveAxisInfinity_avoiding_section_le_four
 #print axioms projectiveAxisTwistedCubic_code_parameters
 
 end FiniteGeom

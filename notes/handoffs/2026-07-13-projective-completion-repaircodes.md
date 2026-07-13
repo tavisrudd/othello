@@ -1,8 +1,8 @@
 # Projectively completed cubic–axis RepairCodes — C111–C114
 
 **Date**: 2026-07-13
-**Status**: ACTIVE. C111 is kernel-proved and independently replayed; C112 is in progress. No claim is
-paper-promoted until the downstream proof and publication gates pass.
+**Status**: ACTIVE. C111 and C112 are kernel-proved and independently replayed; C113 is next. No
+claim is paper-promoted until the downstream proof and publication gates pass.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
@@ -19,8 +19,8 @@ Pareto-incomparable seed and asymptotic family.
 | completed seed has exactly cubic and axis radius-three repair row types | strict-trust Lean; target transitivity is explicit monomial repair transport, not an orbit assumption | proved through radius three; not paper-promoted before C114 |
 | radius-three cubic row is `((q-1)/2,q-1)` | strict-trust Lean for every projective cubic target; q=3,9 independently checked | proved; not paper-promoted before C114 |
 | radius-three axis row is `((5q-3)/6,2q-1-Z3(q))` | strict-trust Lean for every axis target; q=3,9 independently checked | proved; not paper-promoted before C114 |
-| radius four exhausts the complete inner minimal port | generic rank-four proof obligation open | standard consequence if proved |
-| radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | proposed; q=3,9 checked by exact circuit enumeration | diagnostic conjecture only |
+| radius four exhausts the complete inner minimal port | strict-trust generic Lean theorem: minimal helpers are independent and every `k`-row minimal port stabilizes at radius `k` | proved; inner port only |
+| radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | strict-trust Lean for every completed coordinate; q=3,9 independently enumerated; XH3/XH4 passed | proved; not paper-promoted before C114 |
 | q9 lift has rate `1/10` and eventual relative distance above every `c<351/1600` | arithmetic consequence conditional on prior gates | do not state as theorem yet |
 | theorem package is novel | targeted search found no exact construction | candidate contribution; no priority claim |
 
@@ -32,7 +32,7 @@ group, represented in Lean by `zeroSumCapNumber`.
 | Task | Deliverable | Hard completion gates |
 |---|---|---|
 | C111 | completed projective seed | independent small-field replay and mutations; written proof; strict-trust Lean theorem; axiom scan; focused and aggregate builds |
-| C112 | exact radius-three and radius-four/full-inner ports | complete circuit/clutter classification; matching and transversal lower and upper bounds; `q=3` audit; independent enumeration; strict-trust Lean |
+| C112 | exact radius-three and radius-four/full-inner ports | exact radius-three classification; exhaustive rank cutoff and resource inequalities at radius four; matching and transversal lower and upper bounds; `q=3` audit; independent enumeration; strict-trust Lean |
 | C113 | finite lift and asymptotic family | transfer inequalities checked at radius four; exact multiplicities; analytic arithmetic; only the existing quarantined Stichtenoth import; Lean and PDF builds |
 | C114 | novelty and publication closure | exact-claim primary-source citation chains; adversarial review; claim-strength audit; paper/ledger/TRUST/index synchronization |
 
@@ -49,7 +49,7 @@ group, represented in Lean by `zeroSumCapNumber`.
   printed headline has exactly the standard axiom profile. The independent verifier passes at
   q=3,9,27 with coordinate conjugation, affine deletion, duplicate rejection, and a nonduplicate
   spectrum-changing mutation. The forbidden-token and whitespace scans pass.
-- C112's radius-three cubic classification is complete. The projective-boundary circuit hinge in
+- C112 is complete. Its radius-three cubic classification uses the projective-boundary circuit hinge in
   `FiniteGeom/ProjectiveAxisTwistedCubicCircuits.lean` proves that two distinct finite cubic
   points `s,t`, cubic infinity, and axis point `s+t` form a four-circuit, and proves uniqueness of
   that normalized axis completion. The all-finite completion theorem remains the existing
@@ -94,7 +94,20 @@ group, represented in Lean by `zeroSumCapNumber`.
   endpoint-and-color count, and transports both invariants to every projective cubic target via
   D-PC10/D-PC11. Matching/transversal invariance under clutter reduction yields the exact uniform
   minimal-clutter row. The focused and aggregate `RepairCodes` builds, forbidden-token scan, and
-  standard-axiom audit pass. C112 now remains open only for radius four/full-inner.
+  standard-axiom audit pass.
+- `FiniteGeom/Repair.lean` now proves the generic complete-inner chain: a minimal repair's helper
+  columns are linearly independent; every `k`-row minimal repair has at most `k` helpers; minimal
+  repair clutters stabilize at radius `k`; and full-port transversals are equivalent to separating
+  linear functionals. The latter makes the exact transversal number the complement of the largest
+  target-avoiding hyperplane section, minus the target.
+- For the completed seed, the largest target-avoiding sections have sizes `q+2` at a cubic target
+  and `4` at an axis target. Radius four therefore exhausts the full minimal inner port and has
+  exact uniform rows `((q-1)/2,q-1)` and `((5q-3)/6,2q-3)`. The matching proof covers all
+  radius-four minimal edges through resource inequalities; it does not assume or claim an explicit
+  catalogue of every five-circuit. Generic monomial transport now relabels minimal clutters as well
+  as complete bounded repair hypergraphs. Focused and aggregate builds, forbidden-token and
+  whitespace scans, standard-axiom prints, q=3 arithmetic, target/off-by-one review, and XH3/XH4
+  pass.
 
 ## Mandatory xhigh review checkpoints
 
@@ -107,10 +120,10 @@ the corresponding claim before xhigh review.
 2. **XH2 — completion-fiber equivalence.** Review the claimed equivalence between every projective
    cubic-triple completion fiber and the existing zero-sum hypergraph before using it to derive the
    uniform axis row. This is the main new finite-geometry hinge.
-3. **XH3 — complete-inner-port theorem.** Review the rank-four circuit cutoff together with the
+3. **XH3 — complete-inner-port theorem [PASSED 2026-07-13].** Review the rank-four circuit cutoff together with the
    blocker/local-primal equivalence and all off-by-one conventions. The theorem may identify the
    full *inner* minimal port only; it must not silently become the unbounded port of a lift.
-4. **XH4 — exact radius-four axis row.** Review both the weighted matching upper bound and the
+4. **XH4 — exact radius-four axis row [PASSED 2026-07-13].** Review both the weighted matching upper bound and the
    target-conditioned primal/section calculation giving `tau=2q-3`, including `q=3`.
 5. **XH5 — transfer/asymptotic promotion.** Review `r=4` transfer gates, coordinate
    multiplicities, rate/distance arithmetic, and the exact scope of transferred supports before
@@ -159,7 +172,8 @@ discovery verdict. Negative investigations belong in the companion archive.
 
 ## C112 proof obligations and off-ramps
 
-1. Classify all minimal circuits through each target at helper radii three and four. Never infer
+1. Classify the radius-three clutters exactly. At radius four, prove statements over every minimal
+   repair edge; an explicit five-circuit catalogue is optional and is not a paper claim. Never infer
    completeness from a selected repair family.
 2. Cubic target, radius three: **closed in strict-trust Lean**. Every edge is a pair of other
    projective cubic points with its unique axis completion; `nu=(q-1)/2` and `tau=q-1` uniformly.

@@ -263,3 +263,40 @@ odd-cardinality step in the matching upper bound. Focused builds and the aggrega
 build pass; headline axiom prints contain only `propext`, `Classical.choice`, and `Quot.sound`; the
 changed files contain no `sorry`, `admit`, `native_decide`, or `unsafe`. C112 now remains open only
 for the rank-four radius-four/full-inner classification and invariants.
+
+## 2026-07-13 — C112 complete-inner theorem and XH3/XH4 adversarial pass
+
+Closed the remaining radius-four/full-inner obligations without importing an axiom and without
+assuming an exhaustive five-circuit catalogue. The generic repair layer now proves:
+
+- a relation nonzero at the target extracts an actual repair support;
+- a full-port transversal separates the target column from all surviving columns;
+- a target-nonzero functional gives a transversal consisting of its nonzero helper evaluations;
+- target-avoiding section size therefore determines the full-port transversal number;
+- helpers in every inclusion-minimal repair are linearly independent;
+- every minimal repair of a `k`-row generator has at most `k` helpers, so the minimal clutter
+  stabilizes at radius `k`;
+- bounded minimal repair clutters are monotone in radius and monomial automorphisms relabel them
+  exactly.
+
+For the completed cubic–axis seed, an explicit target-avoiding four-section and its matching upper
+bound prove the axis full-port transversal `2q-3`; the existing maximum `q+2` section avoids cubic
+infinity and gives cubic transversal `q-1`. Every radius-four cubic-target edge consumes at least
+two cubic helpers. Every radius-four axis-target edge satisfies the weighted inequality
+`2|C|+3|A|>=6`; summing over a matching gives `6|M|<=5q+2`, and characteristic-three cardinal
+arithmetic sharpens this to the old optimum `(5q-3)/6`. Thus the exact uniform full minimal rows
+are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)`.
+
+XH3/XH4 reviewed the following failure modes explicitly: inner full port versus a future lift's
+unbounded port; target removal and both `-1` conventions in the section complement; the possibility
+that a transversal contains the target; dependence versus a target-nonzero full-support relation;
+new five-circuit edges increasing a matching; cubic infinity adding one resource vertex; `q=3` and
+natural-number subtraction/division; transport of minimality rather than only dependence; and
+standard-axiom closure. The focused modules and aggregate `RepairCodes` build pass. Headline axiom
+prints contain only `propext`, `Classical.choice`, and `Quot.sound`; forbidden-token and whitespace
+scans pass.
+
+The original plan requested a complete radius-four circuit catalogue. The exact paper-facing
+invariants do not require or claim such a catalogue: the Lean upper bounds quantify over every
+minimal edge, and the generic rank cutoff proves radius-four exhaustiveness. An explicit catalogue
+would be an optional enumerative strengthening, not a remaining correctness blocker for C112.

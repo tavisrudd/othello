@@ -1,5 +1,8 @@
 import FiniteGeom.Code
 import FiniteGeom.Hypergraph
+import FiniteGeom.ColumnCode
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.Matrix.Dual
 
 /-!
 # Repair hypergraphs derived from bounded dual-word supports
@@ -312,6 +315,308 @@ theorem mem_repairHypergraph_of_fullSupport_relation {k : ℕ} {G : Matrix (Fin 
   apply mem_repairHypergraph.mpr
   exact ⟨hsub, hcard.le, y, hy, hyx, hsupp⟩
 
+/-- Any global column relation that is nonzero at the target gives a repair whose helpers are
+exactly the other nonzero coefficients.  This support-extraction form avoids requiring callers to
+pre-enumerate the nonzero coefficients. -/
+theorem wordSupport_erase_mem_repairHypergraph_of_column_relation {k : ℕ}
+    {G : Matrix (Fin k) ι 𝔽} {x : ι} (c : ι → 𝔽)
+    (hrel : ∑ j, c j • G.col j = 0) (hcx : c x ≠ 0) :
+    (wordSupport c).erase x ∈
+      repairHypergraph (rowCode G) x ((wordSupport c).erase x).card := by
+  classical
+  let R := (wordSupport c).erase x
+  have hxSupp : x ∈ wordSupport c := mem_wordSupport.mpr hcx
+  have hsub : R ⊆ univ.erase x := by
+    intro j hj
+    exact mem_erase.mpr ⟨(mem_erase.mp hj).1, mem_univ j⟩
+  have hsupp : wordSupport c = insert x R := by
+    exact (insert_erase hxSupp).symm
+  have hcdual : c ∈ dualCode (rowCode G) :=
+    mem_dualCode_rowCode_of_column_relation hrel
+  exact mem_repairHypergraph.mpr
+    ⟨hsub, le_rfl, c, hcdual, hcx, hsupp⟩
+
+/-- A transversal of the unbounded inner repair port yields a linear functional that vanishes on
+every surviving helper column but not on the target column.  This is the blocker/local-primal
+separation direction: if the target lay in the span of the surviving columns, its span relation
+would give a repair disjoint from the transversal. -/
+theorem exists_column_separator_of_isTransversal_fullRepair {k : ℕ}
+    {G : Matrix (Fin k) ι 𝔽} {x : ι} {T : Finset ι}
+    (hT : IsTransversal
+      (repairHypergraph (rowCode G) x (Fintype.card ι)) T) :
+    ∃ f : (Fin k → 𝔽) →ₗ[𝔽] 𝔽,
+      f (G.col x) ≠ 0 ∧ ∀ j, j ≠ x → j ∉ T → f (G.col j) = 0 := by
+  classical
+  let U : Finset ι := (univ.erase x) \ T
+  let p : Submodule 𝔽 (Fin k → 𝔽) :=
+    Submodule.span 𝔽 (Set.range fun j : ι => if j ∈ U then G.col j else 0)
+  have hxnot : G.col x ∉ p := by
+    intro hxspan
+    obtain ⟨a, ha⟩ := (Submodule.mem_span_range_iff_exists_fun 𝔽).mp hxspan
+    let c : ι → 𝔽 := fun j =>
+      if hjx : j = x then -1
+      else if j ∈ U then a j else 0
+    have hcx : c x ≠ 0 := by simp [c]
+    have hrel : ∑ j, c j • G.col j = 0 := by
+      rw [Fintype.sum_eq_add_sum_subtype_ne _ x]
+      have htail :
+          (∑ j : {j : ι // j ≠ x}, c j • G.col j) =
+            ∑ j, a j • (if j ∈ U then G.col j else 0) := by
+        rw [Fintype.sum_eq_add_sum_subtype_ne _ x]
+        simp only [show x ∉ U by simp [U], if_false, smul_zero, zero_add]
+        apply Finset.sum_congr rfl
+        intro j _
+        simp [c, U, j.property]
+      rw [htail, ha]
+      simp [c]
+    let B := (wordSupport c).erase x
+    have hBrepair : B ∈ repairHypergraph (rowCode G) x B.card := by
+      exact wordSupport_erase_mem_repairHypergraph_of_column_relation c hrel hcx
+    have hBfull : B ∈ repairHypergraph (rowCode G) x (Fintype.card ι) := by
+      exact repairHypergraph_mono_radius (Finset.card_le_univ B) hBrepair
+    obtain ⟨j, hj⟩ := hT hBfull
+    have hjB := Finset.mem_of_mem_inter_right hj
+    have hjT := Finset.mem_of_mem_inter_left hj
+    have hjSupp := (mem_erase.mp hjB).2
+    have hcj := mem_wordSupport.mp hjSupp
+    have hjx : j ≠ x := (mem_erase.mp hjB).1
+    have hjU : j ∉ U := by simp [U, hjT]
+    simp [c, hjx, hjU] at hcj
+  obtain ⟨f, hfx, hpf⟩ := Submodule.exists_le_ker_of_notMem hxnot
+  refine ⟨f, hfx, ?_⟩
+  intro j hjx hjT
+  apply hpf
+  apply Submodule.subset_span
+  refine ⟨j, ?_⟩
+  simp [U, hjx, hjT]
+
+/-- The nonzero helper evaluations of any functional that is nonzero at the target hit every
+repair edge.  This is the converse half of the local-primal description of full-port
+transversals. -/
+theorem functionalSupport_isTransversal_repairHypergraph {k : ℕ}
+    {G : Matrix (Fin k) ι 𝔽} {x : ι} {r : ℕ}
+    (f : (Fin k → 𝔽) →ₗ[𝔽] 𝔽) (hfx : f (G.col x) ≠ 0) :
+    IsTransversal (repairHypergraph (rowCode G) x r)
+      ((wordSupport fun j => f (G.col j)).erase x) := by
+  classical
+  intro R hR
+  obtain ⟨-, -, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
+  have hrel := dual_word_column_relation hy
+  have hfrel : ∑ j, y j * f (G.col j) = 0 := by
+    calc
+      (∑ j, y j * f (G.col j)) = f (∑ j, y j • G.col j) := by simp
+      _ = f 0 := congrArg f hrel
+      _ = 0 := map_zero f
+  by_contra hnone
+  rw [Finset.not_nonempty_iff_eq_empty] at hnone
+  have htail : ∑ j : {j : ι // j ≠ x}, y j * f (G.col j) = 0 := by
+    apply Finset.sum_eq_zero
+    intro j _
+    by_cases hjR : (j : ι) ∈ R
+    · have hjT : (j : ι) ∉ (wordSupport fun i => f (G.col i)).erase x := by
+        intro hjT
+        have : (j : ι) ∈
+            ((wordSupport fun i => f (G.col i)).erase x) ∩ R :=
+          Finset.mem_inter.mpr ⟨hjT, hjR⟩
+        rw [hnone] at this
+        simp at this
+      have hfj : f (G.col j) = 0 := by
+        simpa [j.property] using hjT
+      simp [hfj]
+    · have hyj : y j = 0 := by
+        have : (j : ι) ∉ wordSupport y := by
+          rw [hsupp]
+          simp [j.property, hjR]
+        simpa only [mem_wordSupport, not_not] using this
+      simp [hyj]
+  rw [Fintype.sum_eq_add_sum_subtype_ne _ x, htail, add_zero] at hfrel
+  exact (mul_ne_zero hyx hfx) hfrel
+
+/-- Off a target where the section functional is nonzero, its helper support, its zero section,
+and the target itself partition the whole point system. -/
+theorem card_sectionFunctionalSupport_erase_add_sectionCount {k : ℕ}
+    (P : ι → (Fin k → 𝔽)) (a : Fin k → 𝔽) (x : ι)
+    (hx : P x ⬝ᵥ a ≠ 0) :
+    ((wordSupport fun j => P j ⬝ᵥ a).erase x).card + sectionCount P a + 1 =
+      Fintype.card ι := by
+  change ((wordSupport (pointEval P a)).erase x).card + sectionCount P a + 1 =
+    Fintype.card ι
+  have hxSupp : x ∈ wordSupport (pointEval P a) := by
+    exact mem_wordSupport.mpr hx
+  rw [Finset.card_erase_of_mem hxSupp, card_wordSupport]
+  have hpartition := hammingNorm_pointEval_add_sectionCount P a
+  have hpoint : pointEval P a ≠ 0 := by
+    intro h
+    exact hx (congrFun h x)
+  have hpos := hammingNorm_pos_iff.mpr hpoint
+  change hammingNorm (pointEval P a) - 1 + sectionCount P a + 1 = Fintype.card ι
+  omega
+
+/-- A section functional nonzero at the target gives an explicit full-port transversal whose
+cardinality is the complement of the section, with the target removed. -/
+theorem sectionFunctionalSupport_isTransversal_fullRepair {k : ℕ}
+    (P : ι → (Fin k → 𝔽)) (a : Fin k → 𝔽) (x : ι)
+    (hx : P x ⬝ᵥ a ≠ 0) :
+    IsTransversal (repairHypergraph (rowCode (fun i j => P j i)) x (Fintype.card ι))
+      ((wordSupport fun j => P j ⬝ᵥ a).erase x) := by
+  let f : (Fin k → 𝔽) →ₗ[𝔽] 𝔽 := (dotProductEquiv 𝔽 (Fin k)) a
+  let G : Matrix (Fin k) ι 𝔽 := fun i j => P j i
+  have hcol (j : ι) : G.col j = P j := rfl
+  have hfx : f (G.col x) ≠ 0 := by
+    change f (P x) ≠ 0
+    simpa [f, dotProduct_comm] using hx
+  simpa [f, hcol, dotProduct_comm] using
+    (functionalSupport_isTransversal_repairHypergraph
+      (G := G) (x := x) (r := Fintype.card ι) f hfx)
+
+/-- If every target-avoiding section has size at most `s`, every transversal of the full repair
+port has at least `|P|-s-1` vertices. -/
+theorem fullRepair_transversal_card_ge_of_avoiding_section_le {k s : ℕ}
+    (P : ι → (Fin k → 𝔽)) (x : ι)
+    (hsec : ∀ a : Fin k → 𝔽, P x ⬝ᵥ a ≠ 0 → sectionCount P a ≤ s)
+    {T : Finset ι}
+    (hT : IsTransversal
+      (repairHypergraph (rowCode (fun i j => P j i)) x (Fintype.card ι)) T) :
+    Fintype.card ι - s - 1 ≤ T.card := by
+  obtain ⟨f, hfx, hfzero⟩ := exists_column_separator_of_isTransversal_fullRepair hT
+  let a : Fin k → 𝔽 := (dotProductEquiv 𝔽 (Fin k)).symm f
+  have hfa (v : Fin k → 𝔽) : f v = v ⬝ᵥ a := by
+    have heq := LinearEquiv.apply_symm_apply (dotProductEquiv 𝔽 (Fin k)) f
+    have hv : a ⬝ᵥ v = f v := LinearMap.congr_fun heq v
+    calc
+      f v = a ⬝ᵥ v := hv.symm
+      _ = v ⬝ᵥ a := dotProduct_comm a v
+  have hxa : P x ⬝ᵥ a ≠ 0 := by
+    change f (P x) ≠ 0 at hfx
+    simpa [hfa] using hfx
+  let S := (wordSupport fun j => P j ⬝ᵥ a).erase x
+  have hST : S ⊆ T := by
+    intro j hj
+    by_contra hjT
+    have hjx : j ≠ x := (Finset.mem_erase.mp hj).1
+    have hjzero := hfzero j hjx hjT
+    change f (P j) = 0 at hjzero
+    have hjne := mem_wordSupport.mp (Finset.mem_of_mem_erase hj)
+    exact hjne (by simpa [hfa] using hjzero)
+  have hcard := card_sectionFunctionalSupport_erase_add_sectionCount P a x hxa
+  have hsecA := hsec a hxa
+  have hle := Finset.card_le_card hST
+  change S.card + sectionCount P a + 1 = Fintype.card ι at hcard
+  omega
+
+/-- The helper columns of an inclusion-minimal repair are linearly independent.  Otherwise a
+helper-only relation can be combined with the repair relation to cancel one helper while keeping
+the target coefficient nonzero, contradicting inclusion-minimality. -/
+theorem minimalRepair_helpers_linearIndependent {k r : ℕ}
+    {G : Matrix (Fin k) ι 𝔽} {x : ι} {R : Finset ι}
+    (hR : R ∈ minimalRepairHypergraph (rowCode G) x r) :
+    LinearIndependent 𝔽 (fun j : R => G.col j) := by
+  classical
+  obtain ⟨hRrepair, hminimal⟩ := mem_minimalHyperedges.mp hR
+  obtain ⟨hsub, hRcard, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hRrepair
+  by_contra hdep
+  rw [Fintype.not_linearIndependent_iff] at hdep
+  obtain ⟨d, hdrel, ⟨z, hdz⟩⟩ := hdep
+  have hxR : x ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  let dg : ι → 𝔽 := fun j => if hj : j ∈ R then d ⟨j, hj⟩ else 0
+  have hdgrel : ∑ j, dg j • G.col j = 0 := by
+    calc
+      (∑ j, dg j • G.col j) = ∑ j ∈ R, dg j • G.col j := by
+        symm
+        apply Finset.sum_subset (Finset.subset_univ _)
+        intro j _ hj
+        simp [dg, hj]
+      _ = ∑ j : R, d j • G.col j := by
+        rw [← R.sum_attach]
+        apply Finset.sum_congr rfl
+        intro j _
+        simp [dg]
+      _ = 0 := hdrel
+  have hyrel : ∑ j, y j • G.col j = 0 := dual_word_column_relation hy
+  let c : ι → 𝔽 := fun j => y j - (y z / d z) * dg j
+  have hcrel : ∑ j, c j • G.col j = 0 := by
+    simp_rw [c, sub_smul, mul_smul]
+    rw [Finset.sum_sub_distrib, hyrel, ← Finset.smul_sum, hdgrel, smul_zero, sub_zero]
+  have hcx : c x ≠ 0 := by
+    simpa [c, dg, hxR] using hyx
+  have hcz : c z = 0 := by
+    simp [c, dg, z.property, hdz]
+  let B := (wordSupport c).erase x
+  have hBR : B ⊆ R := by
+    intro j hj
+    have hjx : j ≠ x := (Finset.mem_erase.mp hj).1
+    have hcj := mem_wordSupport.mp (Finset.mem_of_mem_erase hj)
+    by_contra hjR
+    have hyj : y j = 0 := by
+      have : j ∉ wordSupport y := by rw [hsupp]; simp [hjx, hjR]
+      simpa only [mem_wordSupport, not_not] using this
+    exact hcj (by simp [c, dg, hjR, hyj])
+  have hBrepair0 : B ∈ repairHypergraph (rowCode G) x B.card :=
+    wordSupport_erase_mem_repairHypergraph_of_column_relation c hcrel hcx
+  have hBcard : B.card ≤ r := (Finset.card_le_card hBR).trans hRcard
+  have hBrepair : B ∈ repairHypergraph (rowCode G) x r :=
+    repairHypergraph_mono_radius hBcard hBrepair0
+  have hRB := hminimal B hBrepair hBR
+  have hzB : (z : ι) ∉ B := by
+    intro hz
+    exact mem_wordSupport.mp (Finset.mem_of_mem_erase hz) hcz
+  exact hzB (hRB z.property)
+
+/-- Every inclusion-minimal repair of a `k`-row generator uses at most `k` helpers. -/
+theorem minimalRepair_edge_card_le_numRows {k r : ℕ}
+    {G : Matrix (Fin k) ι 𝔽} {x : ι} {R : Finset ι}
+    (hR : R ∈ minimalRepairHypergraph (rowCode G) x r) : R.card ≤ k := by
+  have hli := minimalRepair_helpers_linearIndependent hR
+  have hle := hli.fintype_card_le_finrank
+  simpa using hle
+
+/-- Once the radius reaches the number of generator rows, the inclusion-minimal repair clutter
+stabilizes: larger radii add only nonminimal supersets. -/
+theorem minimalRepairHypergraph_eq_of_numRows_le_radius {k s : ℕ}
+    {G : Matrix (Fin k) ι 𝔽} {x : ι} (hks : k ≤ s) :
+    minimalRepairHypergraph (rowCode G) x s =
+      minimalRepairHypergraph (rowCode G) x k := by
+  classical
+  ext A
+  constructor
+  · intro hA
+    obtain ⟨hAs, hAmin⟩ := mem_minimalHyperedges.mp hA
+    have hAcard := minimalRepair_edge_card_le_numRows hA
+    have hAk := mem_repairHypergraph_of_mem_of_card_le hAs hAcard
+    apply mem_minimalHyperedges.mpr
+    refine ⟨hAk, ?_⟩
+    intro B hBk hBA
+    have hBs := repairHypergraph_mono_radius hks hBk
+    exact hAmin B hBs hBA
+  · intro hA
+    obtain ⟨hAk, hAmin⟩ := mem_minimalHyperedges.mp hA
+    have hAs := repairHypergraph_mono_radius hks hAk
+    apply mem_minimalHyperedges.mpr
+    refine ⟨hAs, ?_⟩
+    intro B hBs hBA
+    have hBcard : B.card ≤ k := by
+      exact (Finset.card_le_card hBA).trans (minimalRepair_edge_card_le_numRows hA)
+    have hBk := mem_repairHypergraph_of_mem_of_card_le hBs hBcard
+    exact hAmin B hBk hBA
+
+/-- Inclusion-minimal repair clutters are monotone in the radius: an old minimal edge cannot
+acquire a smaller new subedge, since every subset of it still fits the old radius. -/
+theorem minimalRepairHypergraph_mono_radius {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    {r s : ℕ} (hrs : r ≤ s) :
+    minimalRepairHypergraph C x r ⊆ minimalRepairHypergraph C x s := by
+  intro A hA
+  obtain ⟨hAr, hAmin⟩ := mem_minimalHyperedges.mp hA
+  have hAs := repairHypergraph_mono_radius hrs hAr
+  apply mem_minimalHyperedges.mpr
+  refine ⟨hAs, ?_⟩
+  intro B hBs hBA
+  have hAcard : A.card ≤ r := (mem_repairHypergraph.mp hAr).2.1
+  have hBcard : B.card ≤ r := (Finset.card_le_card hBA).trans hAcard
+  have hBr := mem_repairHypergraph_of_mem_of_card_le hBs hBcard
+  exact hAmin B hBr hBA
+
 /-- Reindexed full-support converse.  The relation may be supplied in any finite enumeration of
 the selected target-and-helper coordinates. -/
 theorem mem_repairHypergraph_of_reindexed_fullSupport_relation {k : ℕ}
@@ -459,6 +764,18 @@ theorem relabel_repairHypergraph_of_monomial {k : ℕ} {G : Matrix (Fin k) ι �
       apply (repairHypergraph_map_mem_iff_of_monomial e T scale hscale hcol).mp
       simpa [hmap] using hA
     exact Finset.mem_image.mpr ⟨R, hR, hmap⟩
+
+/-- A monomial column automorphism relabels the inclusion-minimal bounded repair clutter exactly. -/
+theorem relabel_minimalRepairHypergraph_of_monomial {k : ℕ}
+    {G : Matrix (Fin k) ι 𝔽}
+    (e : ι ≃ ι) (T : (Fin k → 𝔽) ≃ₗ[𝔽] (Fin k → 𝔽)) (scale : ι → 𝔽)
+    (hscale : ∀ j, scale j ≠ 0) (hcol : ∀ j, T (G.col j) = scale j • G.col (e j))
+    (x : ι) (r : ℕ) :
+    relabelHypergraph e (minimalRepairHypergraph (rowCode G) x r) =
+      minimalRepairHypergraph (rowCode G) (e x) r := by
+  rw [minimalRepairHypergraph, minimalRepairHypergraph,
+    ← minimalHyperedges_relabelHypergraph,
+    relabel_repairHypergraph_of_monomial e T scale hscale hcol]
 
 omit [Fintype ι] [DecidableEq 𝔽] in
 /-- Minimal dependence forces every coefficient of every nonzero relation to be nonzero. -/

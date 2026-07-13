@@ -115,6 +115,35 @@ theorem mem_minimalHyperedges {H : Finset (Finset V)} {A : Finset V} :
     A ∈ minimalHyperedges H ↔ A ∈ H ∧ ∀ B ∈ H, B ⊆ A → A ⊆ B := by
   simp [minimalHyperedges]
 
+/-- Inclusion-minimal edges commute with relabeling along a vertex equivalence. -/
+theorem minimalHyperedges_relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) (H : Finset (Finset V)) :
+    minimalHyperedges (relabelHypergraph e H) =
+      relabelHypergraph e (minimalHyperedges H) := by
+  classical
+  ext A
+  constructor
+  · intro hA
+    obtain ⟨hAraw, hAmin⟩ := mem_minimalHyperedges.mp hA
+    obtain ⟨R, hRH, rfl⟩ := Finset.mem_image.mp hAraw
+    apply Finset.mem_image.mpr
+    refine ⟨R, mem_minimalHyperedges.mpr ⟨hRH, ?_⟩, rfl⟩
+    intro B hBH hBR
+    have hmapB : B.map e.toEmbedding ∈ relabelHypergraph e H :=
+      Finset.mem_image.mpr ⟨B, hBH, rfl⟩
+    have hmapSub : B.map e.toEmbedding ⊆ R.map e.toEmbedding :=
+      Finset.map_subset_map.mpr hBR
+    exact Finset.map_subset_map.mp (hAmin _ hmapB hmapSub)
+  · intro hA
+    obtain ⟨R, hRmin, rfl⟩ := Finset.mem_image.mp hA
+    obtain ⟨hRH, hRminimal⟩ := mem_minimalHyperedges.mp hRmin
+    apply mem_minimalHyperedges.mpr
+    refine ⟨Finset.mem_image.mpr ⟨R, hRH, rfl⟩, ?_⟩
+    intro B hBrel hBsub
+    obtain ⟨C, hCH, rfl⟩ := Finset.mem_image.mp hBrel
+    have hCR : C ⊆ R := Finset.map_subset_map.mp hBsub
+    exact Finset.map_subset_map.mpr (hRminimal C hCH hCR)
+
 /-- Every edge of a finite hypergraph contains an inclusion-minimal edge. -/
 theorem exists_minimalHyperedge_subset {H : Finset (Finset V)} {A : Finset V}
     (hA : A ∈ H) : ∃ B ∈ minimalHyperedges H, B ⊆ A := by

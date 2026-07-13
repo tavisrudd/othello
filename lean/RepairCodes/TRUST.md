@@ -80,9 +80,26 @@ completed system has parameters `[2q+2,4,q]_q` over every finite characteristic-
 plane-section proof treats cubic infinity explicitly and proves that every nonzero plane containing
 the axis meets the full cubic in exactly one point. `RepairCodes.ProjectiveAxisTwistedCubic` proves
 that distinct columns are pairwise linearly independent and that the completed row code has exact
-global dual distance three, witnessed by an explicit three-axis-point word. These headlines have
-only the standard logical axiom profile. Exact repair-port formulas and the candidate five-weight
-distribution are not part of this proved seed theorem.
+global dual distance three, witnessed by an explicit three-axis-point word.
+
+`RepairCodes.ProjectiveAxisTwistedCubicInvariants` proves the exact complete inner repair
+profiles. The generic code-derived chain in `FiniteGeom.Repair` proves that helpers in an
+inclusion-minimal repair are linearly independent, so a `k`-row generator has at most `k` helpers
+and its minimal repair clutter stabilizes at radius `k`. It also proves both directions of the
+full-port local-primal correspondence: a transversal separates the target column from all
+surviving columns, while every target-nonzero linear functional supplies a transversal. Applied to
+the completed rank-four seed, radius four is the full minimal inner port, with exact uniform rows
+
+- cubic coordinates: `(nu,tau)=((q-1)/2,q-1)`;
+- axis coordinates: `(nu,tau)=((5q-3)/6,2q-3)`.
+
+The matching upper bounds account for every minimal radius-four repair without assuming an
+unproved five-circuit catalogue: every cubic-target edge consumes at least two cubic helpers, and
+every axis-target edge has weighted cost at least one when cubic helpers have weight `1/3` and axis
+helpers weight `1/2`. The target-avoiding section maxima are `q+2` and `4`, respectively. Monomial
+transport relabels both complete bounded repair hypergraphs and their minimal clutters. All these
+finite headlines have only the standard logical axiom profile. The candidate five-weight
+distribution is not part of these proved repair-port theorems.
 
 ## Reproduction
 

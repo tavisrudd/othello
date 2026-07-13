@@ -363,6 +363,73 @@ theorem isProjectiveAxisTwistedCubicCircuit_map_iff [CharP 𝔽 3] (a : 𝔽)
 
 variable [Fintype 𝔽]
 
+/-- Cubic-coordinate part of a helper set in the completed seed. -/
+def projectiveCubicPart
+    (E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    Finset (ProjectiveAxisTwistedCubicIndex 𝔽) :=
+  E.filter fun z => ∃ x : ProjectiveTwistedCubicIndex 𝔽, z = .inl x
+
+/-- Axis-coordinate part of a helper set in the completed seed. -/
+def projectiveAxisPart
+    (E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    Finset (ProjectiveAxisTwistedCubicIndex 𝔽) :=
+  E.filter fun z => ∃ y : 𝔽 ⊕ Unit, z = .inr y
+
+theorem card_projectiveCubicPart_add_card_projectiveAxisPart
+    (E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    (projectiveCubicPart E).card + (projectiveAxisPart E).card = E.card := by
+  classical
+  rw [projectiveCubicPart, projectiveAxisPart, ← Finset.card_union_of_disjoint]
+  · congr 1
+    ext z
+    rcases z with ((z | z) | (z | z)) <;> simp
+  · simp [Finset.disjoint_left]
+
+/-- An independent helper family contains at most two completed-axis columns. -/
+theorem projectiveAxisPart_card_le_two_of_linearIndependent
+    {E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hli : LinearIndependent 𝔽
+      (fun j : E => projectiveAxisTwistedCubicPoints 𝔽 j)) :
+    (projectiveAxisPart E).card ≤ 2 := by
+  classical
+  let A := projectiveAxisPart E
+  have hAE : A ⊆ E := Finset.filter_subset _ _
+  have hliA : LinearIndependent 𝔽
+      (fun j : A => projectiveAxisTwistedCubicPoints 𝔽 j) :=
+    hli.comp (fun j : A => (⟨j, hAE j.property⟩ : E))
+      (by
+        intro i j h
+        have hv : (i : ProjectiveAxisTwistedCubicIndex 𝔽) = j :=
+          congrArg (fun z : E => (z : ProjectiveAxisTwistedCubicIndex 𝔽)) h
+        exact Subtype.ext hv)
+  let p : A → (Fin 2 → 𝔽) := fun j =>
+    ![(projectiveAxisTwistedCubicPoints 𝔽 j) 1,
+      (projectiveAxisTwistedCubicPoints 𝔽 j) 2]
+  have hp : LinearIndependent 𝔽 p := by
+    rw [Fintype.linearIndependent_iff]
+    intro c hc
+    apply Fintype.linearIndependent_iff.mp hliA c
+    ext i
+    fin_cases i
+    · simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply]
+      apply Finset.sum_eq_zero
+      intro j _
+      rcases j with ⟨j, hj⟩
+      rcases j with x | y
+      · simp [A, projectiveAxisPart] at hj
+      · simp [projectiveAxisTwistedCubicPoints]
+    · simpa [p] using congrFun hc (0 : Fin 2)
+    · simpa [p] using congrFun hc (1 : Fin 2)
+    · simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply]
+      apply Finset.sum_eq_zero
+      intro j _
+      rcases j with ⟨j, hj⟩
+      rcases j with x | y
+      · simp [A, projectiveAxisPart] at hj
+      · simp [projectiveAxisTwistedCubicPoints]
+  have hcard := hp.fintype_card_le_finrank
+  simpa [A] using hcard
+
 /-- D-PC10 relabels every complete bounded repair hypergraph exactly. -/
 theorem projectiveShiftInv_relabel_repairHypergraph [CharP 𝔽 3]
     (a : 𝔽) (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
@@ -375,6 +442,25 @@ theorem projectiveShiftInv_relabel_repairHypergraph [CharP 𝔽 3]
     repairHypergraph (rowCode projectiveAxisTwistedCubicGenerator)
       (projectiveShiftInvIndexEquiv a x) r
   apply relabel_repairHypergraph_of_monomial
+    (T := projectiveShiftInvLinearEquiv a) (scale := projectiveShiftInvScale a)
+  · exact projectiveShiftInvScale_ne_zero a
+  · intro j
+    simpa [projectiveShiftInvLinearEquiv_apply,
+      projectiveAxisTwistedCubicGenerator_col] using
+        projectiveShiftInvLinearMap_column a j
+
+/-- D-PC10 relabels every inclusion-minimal bounded repair clutter exactly. -/
+theorem projectiveShiftInv_relabel_minimalRepairHypergraph [CharP 𝔽 3]
+    (a : 𝔽) (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    relabelHypergraph (projectiveShiftInvIndexEquiv a)
+        (minimalProjectiveAxisTwistedCubicRepairHypergraph x r) =
+      minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (projectiveShiftInvIndexEquiv a x) r := by
+  change relabelHypergraph (projectiveShiftInvIndexEquiv a)
+      (minimalRepairHypergraph (rowCode projectiveAxisTwistedCubicGenerator) x r) =
+    minimalRepairHypergraph (rowCode projectiveAxisTwistedCubicGenerator)
+      (projectiveShiftInvIndexEquiv a x) r
+  apply relabel_minimalRepairHypergraph_of_monomial
     (T := projectiveShiftInvLinearEquiv a) (scale := projectiveShiftInvScale a)
   · exact projectiveShiftInvScale_ne_zero a
   · intro j
@@ -806,6 +892,476 @@ theorem minimalProjectiveCubicRepair_invariants [CharP 𝔽 3]
               (transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph _ _).symm
           _ = Fintype.card 𝔽 - 1 := hinfinity.2
 
+/-- Exact full-port transversal number at axis infinity.  The local-primal separator theorem
+turns the geometric maximum target-avoiding section size `4` into `τ = 2q-3`. -/
+theorem projectiveAxisInfinityFullRepair_transversalNumber [CharP 𝔽 3] :
+    transversalNumber
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽)
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) =
+      2 * Fintype.card 𝔽 - 3 := by
+  let x : ProjectiveAxisTwistedCubicIndex 𝔽 := .inr (.inr Unit.unit)
+  let a := projectiveAxisInfinityAvoidingFourSectionForm 𝔽
+  let T := (wordSupport fun j => projectiveAxisTwistedCubicPoints 𝔽 j ⬝ᵥ a).erase x
+  have hxa : projectiveAxisTwistedCubicPoints 𝔽 x ⬝ᵥ a ≠ 0 := by
+    change axisTwistedCubicPoints 𝔽 (.inr (.inr Unit.unit)) ⬝ᵥ
+      projectiveAxisInfinityAvoidingFourSectionForm 𝔽 ≠ 0
+    rw [projectiveAxisInfinityAvoidingFourSectionForm_axisInfinity_eval]
+    exact one_ne_zero
+  have hT : IsTransversal
+      (projectiveAxisTwistedCubicRepairHypergraph x
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) T := by
+    change IsTransversal
+      (repairHypergraph (rowCode (fun i j => projectiveAxisTwistedCubicPoints 𝔽 j i)) x
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) T
+    exact sectionFunctionalSupport_isTransversal_fullRepair
+      (projectiveAxisTwistedCubicPoints 𝔽) a x hxa
+  apply le_antisymm
+  · have hle := transversalNumber_le_card hT
+    have hle' : transversalNumber
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽)
+          (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) ≤ T.card := by
+      simpa [x] using hle
+    have hcard := card_sectionFunctionalSupport_erase_add_sectionCount
+      (projectiveAxisTwistedCubicPoints 𝔽) a x hxa
+    rw [projectiveAxisInfinityAvoidingFourSectionForm_sectionCount] at hcard
+    simp only [card_projectiveAxisTwistedCubicIndex] at hcard
+    change T.card + 4 + 1 = 2 * Fintype.card 𝔽 + 2 at hcard
+    omega
+  · apply le_transversalNumber_of_forall
+    · exact ⟨T, hT⟩
+    · intro S hS
+      change IsTransversal
+        (repairHypergraph (rowCode (fun i j => projectiveAxisTwistedCubicPoints 𝔽 j i)) x
+          (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) S at hS
+      have hge := fullRepair_transversal_card_ge_of_avoiding_section_le
+        (projectiveAxisTwistedCubicPoints 𝔽) x
+        (s := 4) (fun b hb => projectiveAxisInfinity_avoiding_section_le_four b hb) hS
+      simp only [card_projectiveAxisTwistedCubicIndex] at hge
+      omega
+
+/-- Exact full-port transversal number at cubic infinity.  The global maximum section `q+2`
+already avoids this target, so the full port has `τ=q-1`. -/
+theorem projectiveCubicInfinityFullRepair_transversalNumber [CharP 𝔽 3] :
+    transversalNumber
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽)
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) =
+      Fintype.card 𝔽 - 1 := by
+  let x : ProjectiveAxisTwistedCubicIndex 𝔽 := .inl (.inr Unit.unit)
+  let a := projectiveAxisTwistedCubicMaxForm 𝔽
+  let T := (wordSupport fun j => projectiveAxisTwistedCubicPoints 𝔽 j ⬝ᵥ a).erase x
+  have hxa : projectiveAxisTwistedCubicPoints 𝔽 x ⬝ᵥ a ≠ 0 := by
+    change projectiveTwistedCubicPoints 𝔽 (.inr Unit.unit) ⬝ᵥ
+      projectiveAxisTwistedCubicMaxForm 𝔽 ≠ 0
+    rw [projectiveAxisTwistedCubicMaxForm_cubicInfinity_eval]
+    exact one_ne_zero
+  have hT : IsTransversal
+      (projectiveAxisTwistedCubicRepairHypergraph x
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) T := by
+    change IsTransversal
+      (repairHypergraph (rowCode (fun i j => projectiveAxisTwistedCubicPoints 𝔽 j i)) x
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) T
+    exact sectionFunctionalSupport_isTransversal_fullRepair
+      (projectiveAxisTwistedCubicPoints 𝔽) a x hxa
+  apply le_antisymm
+  · have hle := transversalNumber_le_card hT
+    have hle' : transversalNumber
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽)
+          (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) ≤ T.card := by
+      simpa [x] using hle
+    have hcard := card_sectionFunctionalSupport_erase_add_sectionCount
+      (projectiveAxisTwistedCubicPoints 𝔽) a x hxa
+    rw [projectiveAxisTwistedCubicMaxForm_sectionCount] at hcard
+    simp only [card_projectiveAxisTwistedCubicIndex] at hcard
+    change T.card + (Fintype.card 𝔽 + 2) + 1 = 2 * Fintype.card 𝔽 + 2 at hcard
+    omega
+  · apply le_transversalNumber_of_forall
+    · exact ⟨T, hT⟩
+    · intro S hS
+      change IsTransversal
+        (repairHypergraph (rowCode (fun i j => projectiveAxisTwistedCubicPoints 𝔽 j i)) x
+          (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) S at hS
+      have hge := fullRepair_transversal_card_ge_of_avoiding_section_le
+        (projectiveAxisTwistedCubicPoints 𝔽) x
+        (s := Fintype.card 𝔽 + 2)
+        (fun b hb => projectiveAxisTwistedCubic_section_le b (fun h => hb (by simp [x, h]))) hS
+      simp only [card_projectiveAxisTwistedCubicIndex] at hge
+      omega
+
+/-- Every inclusion-minimal radius-four repair at cubic infinity consumes at least two other
+cubic coordinates. -/
+theorem minimalProjectiveCubicInfinityRepair_four_cubicPart_card_ge_two [CharP 𝔽 3]
+    {E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hE : E ∈ minimalProjectiveAxisTwistedCubicRepairHypergraph
+      (.inl (.inr Unit.unit)) 4) :
+    2 ≤ (projectiveCubicPart E).card := by
+  have hli : LinearIndependent 𝔽
+      (fun j : E => projectiveAxisTwistedCubicPoints 𝔽 j) := by
+    exact minimalRepair_helpers_linearIndependent hE
+  have haxis := projectiveAxisPart_card_le_two_of_linearIndependent hli
+  have hpartition := card_projectiveCubicPart_add_card_projectiveAxisPart E
+  by_contra hcubic
+  have hcard : E.card ≤ 3 := by omega
+  have hErepair := (mem_minimalHyperedges.mp hE).1
+  have hE3 : E ∈ projectiveAxisTwistedCubicRepairHypergraph
+      (.inl (.inr Unit.unit)) 3 :=
+    mem_repairHypergraph_of_mem_of_card_le hErepair hcard
+  obtain ⟨s, t, hst, rfl⟩ := mem_projectiveCubicInfinityRepairHypergraph_iff.mp hE3
+  have hcpart : projectiveCubicPart
+      {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inr (.inl (s + t))} = {(.inl (.inl s)), .inl (.inl t)} := by
+    ext z
+    rcases z with ((z | z) | (z | z)) <;> simp [projectiveCubicPart]
+  rw [hcpart] at hcubic
+  simp [hst] at hcubic
+
+/-- Every inclusion-minimal radius-four repair at axis infinity has weighted resource cost at
+least one, with cubic helpers weighted `1/3` and axis helpers weighted `1/2`. -/
+theorem minimalProjectiveAxisInfinityRepair_four_weight [CharP 𝔽 3]
+    {E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hE : E ∈ minimalProjectiveAxisTwistedCubicRepairHypergraph
+      (.inr (.inr Unit.unit)) 4) :
+    6 ≤ 2 * (projectiveCubicPart E).card + 3 * (projectiveAxisPart E).card := by
+  have hli : LinearIndependent 𝔽
+      (fun j : E => projectiveAxisTwistedCubicPoints 𝔽 j) := by
+    exact minimalRepair_helpers_linearIndependent hE
+  have haxis := projectiveAxisPart_card_le_two_of_linearIndependent hli
+  have hpartition := card_projectiveCubicPart_add_card_projectiveAxisPart E
+  by_contra hweight
+  have hcard : E.card ≤ 3 := by omega
+  have hErepair := (mem_minimalHyperedges.mp hE).1
+  have hE3 : E ∈ projectiveAxisTwistedCubicRepairHypergraph
+      (.inr (.inr Unit.unit)) 3 :=
+    mem_repairHypergraph_of_mem_of_card_le hErepair hcard
+  have hEmin3 : E ∈ minimalProjectiveAxisTwistedCubicRepairHypergraph
+      (.inr (.inr Unit.unit)) 3 := by
+    apply mem_minimalHyperedges.mpr
+    refine ⟨hE3, ?_⟩
+    intro B hB3 hBE
+    have hB4 := repairHypergraph_mono_radius (by omega : 3 ≤ 4) hB3
+    exact (mem_minimalHyperedges.mp hE).2 B hB4 hBE
+  rcases mem_minimalProjectiveAxisInfinityRepair_iff.mp hEmin3 with hpair | hcubic
+  · obtain ⟨z, w, -, -, hzw, rfl⟩ := hpair
+    have hcpart : projectiveCubicPart
+        {(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} = ∅ := by
+      ext v
+      rcases v with ((v | v) | (v | v)) <;> simp [projectiveCubicPart]
+    have hapart : projectiveAxisPart
+        {(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} = {.inr z, .inr w} := by
+      ext v
+      rcases v with ((v | v) | (v | v)) <;> simp [projectiveAxisPart]
+    rw [hcpart, hapart] at hweight
+    simp [hzw] at hweight
+  · obtain ⟨s, t, u, hst, hsu, htu, -, rfl⟩ := hcubic
+    have hcpart : projectiveCubicPart
+        {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+          .inl (.inl t), .inl (.inl u)} =
+        {(.inl (.inl s)), .inl (.inl t), .inl (.inl u)} := by
+      ext v
+      rcases v with ((v | v) | (v | v)) <;> simp [projectiveCubicPart]
+    have hapart : projectiveAxisPart
+        {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+          .inl (.inl t), .inl (.inl u)} = ∅ := by
+      ext v
+      rcases v with ((v | v) | (v | v)) <;> simp [projectiveAxisPart]
+    rw [hcpart, hapart] at hweight
+    simp [hst, hsu, htu] at hweight
+
+/-- A matching in the cubic-infinity radius-four clutter consumes at least two of the `q`
+remaining cubic coordinates per edge. -/
+theorem minimalProjectiveCubicInfinityRepair_four_matching_card_bound [CharP 𝔽 3]
+    {M : Finset (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))}
+    (hM : IsMatching
+      (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 4) M) :
+    2 * M.card ≤ Fintype.card 𝔽 := by
+  classical
+  have hpairwise :
+      (M : Set (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))).PairwiseDisjoint
+        projectiveCubicPart := by
+    intro A hA B hB hAB
+    exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+  have hsub : M.biUnion projectiveCubicPart ⊆
+      (univ.erase (.inr Unit.unit : ProjectiveTwistedCubicIndex 𝔽)).map
+        Function.Embedding.inl := by
+    intro z hz
+    obtain ⟨E, hEM, hzE⟩ := Finset.mem_biUnion.mp hz
+    obtain ⟨u, rfl⟩ := (Finset.mem_filter.mp hzE).2
+    have hrepair := (mem_minimalHyperedges.mp (hM.1 hEM)).1
+    have hhelpers := (mem_repairHypergraph.mp hrepair).1
+    have hne : u ≠ (.inr Unit.unit : ProjectiveTwistedCubicIndex 𝔽) := by
+      intro h
+      subst u
+      exact (Finset.mem_erase.mp (hhelpers (Finset.mem_filter.mp hzE).1)).1 rfl
+    exact Finset.mem_map.mpr ⟨u, by simp [hne], rfl⟩
+  calc
+    2 * M.card = ∑ E ∈ M, 2 := by simp [Nat.mul_comm]
+    _ ≤ ∑ E ∈ M, (projectiveCubicPart E).card := by
+      apply Finset.sum_le_sum
+      intro E hE
+      exact minimalProjectiveCubicInfinityRepair_four_cubicPart_card_ge_two (hM.1 hE)
+    _ = (M.biUnion projectiveCubicPart).card := (Finset.card_biUnion hpairwise).symm
+    _ ≤ ((univ.erase (.inr Unit.unit : ProjectiveTwistedCubicIndex 𝔽)).map
+        Function.Embedding.inl).card := Finset.card_le_card hsub
+    _ = Fintype.card 𝔽 := by simp
+
+/-- Exact cubic-infinity matching number for radius four (hence for the full minimal port). -/
+theorem minimalProjectiveCubicInfinityRepair_four_matchingNumber [CharP 𝔽 3] :
+    matchingNumber
+      (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) =
+      (Fintype.card 𝔽 - 1) / 2 := by
+  apply le_antisymm
+  · apply matchingNumber_le_of_forall
+    intro M hM
+    have hbound := minimalProjectiveCubicInfinityRepair_four_matching_card_bound hM
+    have hodd := FiniteField.odd_card_of_char_ne_two (F := 𝔽) (by
+      rw [ringChar.eq 𝔽 3]
+      decide)
+    omega
+  · calc
+      (Fintype.card 𝔽 - 1) / 2 =
+          matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+            (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) :=
+        (minimalProjectiveCubicInfinityRepair_invariants ( 𝔽 := 𝔽)).1.symm
+      _ ≤ matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+            (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) :=
+        matchingNumber_mono (minimalRepairHypergraph_mono_radius (by omega))
+
+/-- Weighted resource bound for a radius-four axis-infinity matching.  Cubic infinity adds two
+units of capacity, but characteristic-three cardinal arithmetic leaves the old optimum unchanged. -/
+theorem minimalProjectiveAxisInfinityRepair_four_matching_weight_bound [CharP 𝔽 3]
+    {M : Finset (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))}
+    (hM : IsMatching
+      (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 4) M) :
+    6 * M.card ≤ 5 * Fintype.card 𝔽 + 2 := by
+  classical
+  have hcubicPairwise :
+      (M : Set (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))).PairwiseDisjoint
+        projectiveCubicPart := by
+    intro A hA B hB hAB
+    exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+  have haxisPairwise :
+      (M : Set (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))).PairwiseDisjoint
+        projectiveAxisPart := by
+    intro A hA B hB hAB
+    exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+  have hcubicSub : M.biUnion projectiveCubicPart ⊆
+      (univ : Finset (ProjectiveTwistedCubicIndex 𝔽)).map Function.Embedding.inl := by
+    intro z hz
+    obtain ⟨E, -, hzE⟩ := Finset.mem_biUnion.mp hz
+    obtain ⟨u, rfl⟩ := (Finset.mem_filter.mp hzE).2
+    simp
+  have haxisSub : M.biUnion projectiveAxisPart ⊆
+      (univ.erase (.inr Unit.unit : 𝔽 ⊕ Unit)).map Function.Embedding.inr := by
+    intro z hz
+    obtain ⟨E, hEM, hzE⟩ := Finset.mem_biUnion.mp hz
+    obtain ⟨u, rfl⟩ := (Finset.mem_filter.mp hzE).2
+    have hrepair := (mem_minimalHyperedges.mp (hM.1 hEM)).1
+    have hhelpers := (mem_repairHypergraph.mp hrepair).1
+    have hne : u ≠ (.inr Unit.unit : 𝔽 ⊕ Unit) := by
+      intro h
+      subst u
+      exact (Finset.mem_erase.mp (hhelpers (Finset.mem_filter.mp hzE).1)).1 rfl
+    exact Finset.mem_map.mpr ⟨u, by simp [hne], rfl⟩
+  have hcubicCard : (∑ E ∈ M, (projectiveCubicPart E).card) ≤ Fintype.card 𝔽 + 1 := by
+    rw [← Finset.card_biUnion hcubicPairwise]
+    have := Finset.card_le_card hcubicSub
+    simpa using this
+  have haxisCard : (∑ E ∈ M, (projectiveAxisPart E).card) ≤ Fintype.card 𝔽 := by
+    rw [← Finset.card_biUnion haxisPairwise]
+    have := Finset.card_le_card haxisSub
+    simpa using this
+  have htotal : 6 * M.card ≤
+      2 * (∑ E ∈ M, (projectiveCubicPart E).card) +
+        3 * (∑ E ∈ M, (projectiveAxisPart E).card) := by
+    calc
+      6 * M.card = ∑ E ∈ M, 6 := by simp [Nat.mul_comm]
+      _ ≤ ∑ E ∈ M,
+          (2 * (projectiveCubicPart E).card + 3 * (projectiveAxisPart E).card) := by
+        apply Finset.sum_le_sum
+        intro E hE
+        exact minimalProjectiveAxisInfinityRepair_four_weight (hM.1 hE)
+      _ = 2 * (∑ E ∈ M, (projectiveCubicPart E).card) +
+          3 * (∑ E ∈ M, (projectiveAxisPart E).card) := by
+        simp only [Finset.mul_sum, Finset.sum_add_distrib]
+  omega
+
+/-- Exact axis-infinity matching number for radius four (hence for the full minimal port). -/
+theorem minimalProjectiveAxisInfinityRepair_four_matchingNumber [CharP 𝔽 3] :
+    matchingNumber
+      (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) =
+      (5 * Fintype.card 𝔽 - 3) / 6 := by
+  apply le_antisymm
+  · apply matchingNumber_le_of_forall
+    intro M hM
+    have hbound := minimalProjectiveAxisInfinityRepair_four_matching_weight_bound hM
+    obtain ⟨n, -, hcard⟩ := FiniteField.card 𝔽 3
+    have hdiv : 3 ∣ Fintype.card 𝔽 := by
+      rw [hcard]
+      exact dvd_pow_self 3 n.ne_zero
+    obtain ⟨m, hm⟩ := hdiv
+    have hodd := FiniteField.odd_card_of_char_ne_two (F := 𝔽) (by
+      rw [ringChar.eq 𝔽 3]
+      decide)
+    omega
+  · calc
+      (5 * Fintype.card 𝔽 - 3) / 6 =
+          matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+            (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) :=
+        (minimalProjectiveAxisInfinityRepair_invariants ( 𝔽 := 𝔽)).1.symm
+      _ ≤ matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+            (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) :=
+        matchingNumber_mono (minimalRepairHypergraph_mono_radius (by omega))
+
+/-- Exact radius-four row at cubic infinity.  Rank four makes this the full minimal repair port. -/
+theorem minimalProjectiveCubicInfinityRepair_four_invariants [CharP 𝔽 3] :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) =
+        (Fintype.card 𝔽 - 1) / 2 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) =
+        Fintype.card 𝔽 - 1 := by
+  constructor
+  · exact minimalProjectiveCubicInfinityRepair_four_matchingNumber
+  · let x : ProjectiveAxisTwistedCubicIndex 𝔽 := .inl (.inr Unit.unit)
+    let n := Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽)
+    have hfour : 4 ≤ n := by
+      simp [n]
+      have := Fintype.card_pos_iff.mpr ⟨(0 : 𝔽)⟩
+      omega
+    have hstab := minimalRepairHypergraph_eq_of_numRows_le_radius
+      (G := projectiveAxisTwistedCubicGenerator ( 𝔽 := 𝔽)) (x := x) hfour
+    calc
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x 4) =
+          transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x n) := by
+        simpa [minimalProjectiveAxisTwistedCubicRepairHypergraph,
+          projectiveAxisTwistedCubicCode, n] using congrArg transversalNumber hstab.symm
+      _ = transversalNumber (projectiveAxisTwistedCubicRepairHypergraph x n) :=
+        transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph x n
+      _ = Fintype.card 𝔽 - 1 := by
+        simpa [x, n] using projectiveCubicInfinityFullRepair_transversalNumber ( 𝔽 := 𝔽)
+
+/-- Exact radius-four row at axis infinity.  Rank four makes this the full minimal repair port. -/
+theorem minimalProjectiveAxisInfinityRepair_four_invariants [CharP 𝔽 3] :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) =
+        (5 * Fintype.card 𝔽 - 3) / 6 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 4) =
+        2 * Fintype.card 𝔽 - 3 := by
+  constructor
+  · exact minimalProjectiveAxisInfinityRepair_four_matchingNumber
+  · let x : ProjectiveAxisTwistedCubicIndex 𝔽 := .inr (.inr Unit.unit)
+    let n := Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽)
+    have hfour : 4 ≤ n := by
+      simp [n]
+      have := Fintype.card_pos_iff.mpr ⟨(0 : 𝔽)⟩
+      omega
+    have hstab := minimalRepairHypergraph_eq_of_numRows_le_radius
+      (G := projectiveAxisTwistedCubicGenerator ( 𝔽 := 𝔽)) (x := x) hfour
+    calc
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x 4) =
+          transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x n) := by
+        simpa [minimalProjectiveAxisTwistedCubicRepairHypergraph,
+          projectiveAxisTwistedCubicCode, n] using congrArg transversalNumber hstab.symm
+      _ = transversalNumber (projectiveAxisTwistedCubicRepairHypergraph x n) :=
+        transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph x n
+      _ = 2 * Fintype.card 𝔽 - 3 := by
+        simpa [x, n] using projectiveAxisInfinityFullRepair_transversalNumber ( 𝔽 := 𝔽)
+
+/-- Exact uniform radius-four/full-minimal row for every completed cubic coordinate. -/
+theorem minimalProjectiveCubicRepair_four_invariants [CharP 𝔽 3]
+    (x : ProjectiveTwistedCubicIndex 𝔽) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl x) 4) =
+        (Fintype.card 𝔽 - 1) / 2 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl x) 4) =
+        Fintype.card 𝔽 - 1 := by
+  cases x with
+  | inr u => simpa using minimalProjectiveCubicInfinityRepair_four_invariants ( 𝔽 := 𝔽)
+  | inl a =>
+      have htarget : projectiveShiftInvIndexEquiv (-a)
+          (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) =
+          .inl (.inr Unit.unit) := by
+        simp [projectiveShiftInvIndexEquiv, projectiveAxisShiftInvEquiv]
+      have hrel := projectiveShiftInv_relabel_minimalRepairHypergraph (-a)
+        (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 4
+      rw [htarget] at hrel
+      have hm := matchingNumber_relabelHypergraph (projectiveShiftInvIndexEquiv (-a))
+        (minimalProjectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 4)
+      have ht := transversalNumber_relabelHypergraph (projectiveShiftInvIndexEquiv (-a))
+        (minimalProjectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 4)
+      rw [hrel] at hm ht
+      have hi := minimalProjectiveCubicInfinityRepair_four_invariants ( 𝔽 := 𝔽)
+      exact ⟨hm.symm.trans hi.1, ht.symm.trans hi.2⟩
+
+/-- Exact uniform radius-four/full-minimal row for every completed axis coordinate. -/
+theorem minimalProjectiveAxisRepair_four_invariants [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr y) 4) =
+        (5 * Fintype.card 𝔽 - 3) / 6 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr y) 4) =
+        2 * Fintype.card 𝔽 - 3 := by
+  cases y with
+  | inr u => simpa using minimalProjectiveAxisInfinityRepair_four_invariants ( 𝔽 := 𝔽)
+  | inl a =>
+      have htarget : projectiveShiftInvIndexEquiv a
+          (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) =
+          .inr (.inr Unit.unit) := by
+        simp [projectiveShiftInvIndexEquiv, projectiveAxisShiftInvEquiv]
+      have hrel := projectiveShiftInv_relabel_minimalRepairHypergraph a
+        (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 4
+      rw [htarget] at hrel
+      have hm := matchingNumber_relabelHypergraph (projectiveShiftInvIndexEquiv a)
+        (minimalProjectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 4)
+      have ht := transversalNumber_relabelHypergraph (projectiveShiftInvIndexEquiv a)
+        (minimalProjectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 4)
+      rw [hrel] at hm ht
+      have hi := minimalProjectiveAxisInfinityRepair_four_invariants ( 𝔽 := 𝔽)
+      exact ⟨hm.symm.trans hi.1, ht.symm.trans hi.2⟩
+
+/-- Radius four exhausts the full inclusion-minimal repair port at every completed coordinate. -/
+theorem minimalProjectiveAxisTwistedCubicRepair_full_eq_four
+    (x : ProjectiveAxisTwistedCubicIndex 𝔽) :
+    minimalProjectiveAxisTwistedCubicRepairHypergraph x
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽)) =
+      minimalProjectiveAxisTwistedCubicRepairHypergraph x 4 := by
+  have hfour : 4 ≤ Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽) := by
+    simp
+    have := Fintype.card_pos_iff.mpr ⟨(0 : 𝔽)⟩
+    omega
+  exact minimalRepairHypergraph_eq_of_numRows_le_radius
+    (G := projectiveAxisTwistedCubicGenerator ( 𝔽 := 𝔽)) (x := x) hfour
+
+/-- Exact full minimal repair-port invariants for every completed cubic coordinate. -/
+theorem minimalProjectiveCubicRepair_full_invariants [CharP 𝔽 3]
+    (x : ProjectiveTwistedCubicIndex 𝔽) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl x)
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) =
+        (Fintype.card 𝔽 - 1) / 2 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl x)
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) =
+        Fintype.card 𝔽 - 1 := by
+  rw [minimalProjectiveAxisTwistedCubicRepair_full_eq_four]
+  exact minimalProjectiveCubicRepair_four_invariants x
+
+/-- Exact full minimal repair-port invariants for every completed axis coordinate. -/
+theorem minimalProjectiveAxisRepair_full_invariants [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr y)
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) =
+        (5 * Fintype.card 𝔽 - 3) / 6 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr y)
+        (Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽))) =
+        2 * Fintype.card 𝔽 - 3 := by
+  rw [minimalProjectiveAxisTwistedCubicRepair_full_eq_four]
+  exact minimalProjectiveAxisRepair_four_invariants y
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
@@ -823,5 +1379,9 @@ theorem minimalProjectiveCubicRepair_invariants [CharP 𝔽 3]
 #print axioms projectiveCubicInfinityRepair_matchingNumber
 #print axioms projectiveCubicInfinityRepair_transversalNumber
 #print axioms minimalProjectiveCubicRepair_invariants
+#print axioms projectiveAxisInfinityFullRepair_transversalNumber
+#print axioms projectiveCubicInfinityFullRepair_transversalNumber
+#print axioms minimalProjectiveCubicRepair_full_invariants
+#print axioms minimalProjectiveAxisRepair_full_invariants
 
 end RepairCodes
