@@ -156,6 +156,18 @@ speculative directions must be distinguished explicitly.
   distribution to be exactly 90 points of index 1, 15 of index 2, and 10 of index 3. The manuscript
   records `I_C=0` but does not draw out this external-secant design interpretation; formalizing and
   checking its prior art is a focused follow-on.
+- **Odd-`q` game use (exact computation, not yet Lean-packaged):** after the certified `q=11`
+  six-arc is occupied, every off-conic point is sealed and all 12 conic points remain legal. Their
+  residual conflict graph is the icosahedral graph (12 vertices, 30 edges, degree 5), whose
+  antipodal involution proves Node--Kayles value zero. Thus the witness is an explicit P-position
+  and an `A5`/polyhedral boundary object for the depleted `q=11` odd-plane lane. The `q=9` witness
+  is stronger still as an ordinary complete six-arc (empty residual). These are possible descent
+  targets/base cases, not a proof of the size-3 to size-4 escape lemma.
+- **Uniform odd-`q` limitation/use:** relative completeness supplies a rigorous sealing endpoint and
+  the uncovered/defect inequalities can feed a drain potential, but the lower bound shows that an
+  intruder-only conic seal needs order `sqrt(q)` points. It therefore cannot by itself be the
+  bounded-size forcing mechanism sought by (ON); a containment, descent, or exchange lemma is still
+  required.
 - **Novelty boundary:** the localization corollary and the `q=11` design interpretation are logical
   consequences, not priority claims. Field-isomorphism transport and the arbitrary-hole checker
   are engineering/generalization opportunities. Any assertion that these are new requires a

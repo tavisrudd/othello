@@ -190,3 +190,14 @@ closed-negative proof routes belong here.
   and `papers/papers-index.md` with the completed strict-trust Lean package. The paper now spells out
   the `q=11` exterior-secant consequence and distinguishes it from a novelty claim. Rebuilt
   `arcs_complete_outside_conic.pdf` successfully with Tectonic.
+- Follow-up registry audit found that the results table still compressed the formalization into five
+  rows. Expanded it to record the relative-completeness foundation, both secant moments, defect
+  corollaries/stability, conic normalization, corrected finite bound, reusable transitive-action
+  lemma, certificate soundness, exact `L2` arithmetic, and the `q=11` exterior-secant design.
+- Odd-plane relevance check reconstructed the residual conic game of every frozen witness directly
+  from the certified coordinates. At `q=8,9,16` every conic point is already covered, so those
+  witnesses are ordinary complete arcs with empty residual. At `q=11` all 12 conic points are live;
+  the residual has 30 edges, constant degree 5, exact Grundy value zero, and an explicit graph
+  isomorphism to the icosahedral graph. Its antipodal symmetry supplies a conceptual P proof. This
+  gives a concrete depleted-order/polyhedral base object but does not bridge the active size-3 to
+  size-4 odd-plane escape step.
