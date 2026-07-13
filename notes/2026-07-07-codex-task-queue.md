@@ -119,8 +119,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   axiom; the warning-free target and axiom audit pass. Track in
   the [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C95 [OPEN] — even-characteristic nucleus constraints.** Prove the standard conic nucleus and
-  tangent facts and both nucleus incidence propositions. Track in the
+- **C95 [REPORTED 2026-07-12] — even-characteristic nucleus constraints.** The standard conic plus
+  `[0:1:0]` is a hyperoval in characteristic two, giving the exact tangent classification and both
+  nucleus-in/nucleus-out count, parity, incidence, and corrected-bound packages. The warning-free
+  build and strict axiom audit pass. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C96 [OPEN] — certified small examples and trust audit.** Add a rules-only checker and frozen

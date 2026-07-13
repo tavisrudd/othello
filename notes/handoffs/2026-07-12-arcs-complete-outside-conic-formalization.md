@@ -102,8 +102,10 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | finite transitive-action averaging: `|A||B|<|X|` gives a disjoint translate | `RelativeConicArcs/Averaging.lean` | Lean-proved |
 | projective averaging moves every arc of size at most `q` off any nonsingular conic | `RelativeConicArcs/Averaging.lean` | Lean-proved |
 | `rhoC(q) ≤ t2(2,q)` when `t2(2,q) ≤ q`; named Kim--Vu hypothesis interface and transfer | `RelativeConicArcs/Averaging.lean` | Lean-proved, conditional input explicit |
+| in characteristic two, the standard conic plus `[0:1:0]` is a hyperoval; tangents are exactly the lines through the nucleus | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
+| nucleus-in and nucleus-out tangent counts, conic-incidence lower bounds/parity, and corrected inequalities | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
 
-The standalone `RelativeConicArcs` target builds without warnings. The C89–C94 headline axiom profiles
+The standalone `RelativeConicArcs` target builds without warnings. The C89–C95 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
 `admit`, or custom axioms. Existing Lean targets do not import the spinoff.
 
@@ -117,7 +119,7 @@ are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `
 | **C92 [REPORTED 2026-07-12]** | Define the standard conic and its `q+1` parametrization; prove projective transport and normalization of nonsingular plane conics; specialize C91; formalize `L1`, `L2`, parity capacities, and the exact finite lower-bound theorem. | C89–C91 | Finite universal lower-bound layer and conic independence landed. |
 | **C93 [REPORTED 2026-07-12]** | Derive the parity-free inequality and formalize the additive `3/2` asymptotic, first as an explicit error bound and then as the manuscript's Big-O/liminf statements along prime powers. | C92 | Analytic headline theorem landed with explicit constant `8`. |
 | **C94 [REPORTED 2026-07-12]** | Prove the finite transitive-action averaging lemma, instantiate projective transport, and prove `rhoC(q) ≤ t2(2,q)` under `t2(2,q) ≤ q`; expose Kim–Vu only as a cited named hypothesis. | C89, C92 | Upper-bound transfer landed with the external input represented by `KimVuBound`, not an axiom. |
-| **C95** | In even characteristic, prove the standard conic's nucleus/tangent incidence facts and both nucleus-in/nucleus-out propositions, including parity and corrected inequalities. | C89, C92 | Closes the characteristic-two structural section. |
+| **C95 [REPORTED 2026-07-12]** | In even characteristic, prove the standard conic's nucleus/tangent incidence facts and both nucleus-in/nucleus-out propositions, including parity and corrected inequalities. | C89, C92 | Characteristic-two structural section landed, with `(2 : K) = 0` explicit. |
 | **C96** | Build a no-`native_decide` rules-only certificate checker; import/regenerate the four manuscript witnesses; prove `rhoC(8)=rhoC(9)=rhoC(11)=6` and `8≤rhoC(16)≤9`; complete the theorem manifest and trust audit. | C92; independent witness work can begin after C89 | Closes the finite examples and the end-to-end paper audit. |
 
 ## Dependency and attack order
@@ -169,7 +171,8 @@ For each closed task:
 
 ## Next step
 
-Begin C95 with the standard conic in characteristic two. Identify its nucleus and prove the
-tangent/secant incidence facts needed by the manuscript, then derive the nucleus-in and nucleus-out
-constraints with their parity and corrected inequalities. Keep these coordinate facts in
-`RelativeConicArcs/Nucleus.lean` and reuse the existing conic and incidence bridges.
+Begin C96 by designing the rules-only certificate checker and semantic bridge from accepted
+coordinate data to `CompleteOutside`. Import the manuscript witnesses for `q=8,9,11,16`, freeze and
+record their provenance, build generated leaves before aggregates, and combine them with exact
+`L2` arithmetic to prove the reported values and bounds. Finish with the standalone theorem
+manifest and trust audit; do not use `native_decide`.

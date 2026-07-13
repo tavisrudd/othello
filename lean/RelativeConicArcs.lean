@@ -6,3 +6,4 @@ import RelativeConicArcs.Defect
 import RelativeConicArcs.Conic
 import RelativeConicArcs.Asymptotic
 import RelativeConicArcs.Averaging
+import RelativeConicArcs.Nucleus

@@ -138,3 +138,25 @@ closed-negative proof routes belong here.
   scans passed. The finite averaging, projective disjointness, completeness transport, `t2`
   transfer, and Kim--Vu conditional theorem all audit to
   `[propext, Classical.choice, Quot.sound]`.
+
+## 2026-07-12 — C95 characteristic-two nucleus constraints landed
+
+- Added `RelativeConicArcs/Nucleus.lean`. First proved abstractly that every line meets a
+  `(q+2)`-arc in zero or two points: a hypothetical tangent would give an injection from the other
+  `q+1` arc points onto the `q+1` lines through its unique intersection point, forcing a second
+  point on that line.
+- Defined the standard nucleus `[0:1:0]`. Determinant factorizations for three Veronese vectors and
+  for the nucleus plus two Veronese vectors prove that the standard conic together with the nucleus
+  is a hyperoval when `(2 : K)=0`. It follows that a line meets the conic once exactly when it
+  contains the nucleus, and otherwise meets it zero or two times.
+- Re-expressed hole incidence as a line-first sum over secants. This proves that its parity is the
+  tangent-secant count and that it is at least that count. At an arc point the secant index is
+  `|A|-1`, while at an external nucleus relative completeness and the maximum-index lemma give
+  `1≤r_A(ν)≤floor(|A|/2)`.
+- Proved both manuscript cases: nucleus-in has exactly `|A|-1` tangent secants; nucleus-out has
+  exactly `r_A(ν)`. Both expose incidence lower bounds, parity, and the strengthened corrected
+  inequalities in subtraction-free natural-number form.
+- Validation: `nix develop --command lake build RelativeConicArcs.Nucleus RelativeConicArcs`
+  completed successfully with 3057 jobs and no source warnings. Forbidden-token and import-isolation
+  scans passed. The hyperoval, tangent classification, parity, both constraint packages, and both
+  corrected inequalities audit to `[propext, Classical.choice, Quot.sound]`.
