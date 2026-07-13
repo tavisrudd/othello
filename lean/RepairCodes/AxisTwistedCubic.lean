@@ -557,6 +557,123 @@ theorem cubicCoordinate_no_repairEdge_radius_two [CharP 𝔽 3] (x : 𝔽)
     omega
   · exact ⟨x, Finset.mem_insert_self _ _⟩
 
+/-- Every radius-three repair of a cubic coordinate has exactly three helpers. -/
+theorem cubicRepair_edge_card_eq_three [CharP 𝔽 3] {x : 𝔽}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ axisTwistedCubicRepairHypergraph (.inl x) 3) : R.card = 3 := by
+  obtain ⟨hsub, hcard, c, hc, hcx, hsupp⟩ := mem_repairHypergraph.mp hR
+  by_contra hne
+  have hle : R.card ≤ 2 := by omega
+  apply cubicCoordinate_no_repairEdge_radius_two x R
+  exact mem_repairHypergraph.mpr ⟨hsub, hle, c, hc, hcx, hsupp⟩
+
+/-- Every cubic repair has the unique geometric support asserted by the classification theorem
+below. -/
+theorem cubicRepairHypergraph_shape [CharP 𝔽 3] {x : 𝔽}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ axisTwistedCubicRepairHypergraph (.inl x) 3) :
+    ∃ s t : 𝔽, x ≠ s ∧ x ≠ t ∧ s ≠ t ∧
+      R = {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t,
+        .inr (twistedCubicTripleAxisIndex ![x, s, t])} := by
+    obtain ⟨a, b, c, hab, hac, hbc, hReq⟩ := Finset.card_eq_three.mp
+      (cubicRepair_edge_card_eq_three hR)
+    have hsub := (mem_repairHypergraph.mp hR).1
+    have hxR : (.inl x : AxisTwistedCubicIndex 𝔽) ∉ R := by
+      intro hx
+      exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+    subst R
+    cases a with
+    | inl s =>
+      cases b with
+      | inl t =>
+        cases c with
+        | inl u =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hxt : x ≠ t := by simpa using fun h => hxR (by simp [h])
+          have hxu : x ≠ u := by simpa using fun h => hxR (by simp [h])
+          have hst : s ≠ t := by simpa using hab
+          have hsu : s ≠ u := by simpa using hac
+          have htu : t ≠ u := by simpa using hbc
+          exact (cubicRepair_threeCubic_not_mem hxs hxt hxu hst hsu htu hR).elim
+        | inr y =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hxt : x ≠ t := by simpa using fun h => hxR (by simp [h])
+          have hst : s ≠ t := by simpa using hab
+          have hy := cubicRepair_axis_eq_of_mem hxs hxt hst hR
+          exact ⟨s, t, hxs, hxt, hst, by simp [hy]⟩
+      | inr y =>
+        cases c with
+        | inl t =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hxt : x ≠ t := by simpa using fun h => hxR (by simp [h])
+          have hst : s ≠ t := by simpa using hac
+          have hR' : {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inr y} ∈
+              axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+            convert hR using 1
+            ext q
+            simp only [Finset.mem_insert, Finset.mem_singleton]
+            tauto
+          have hy := cubicRepair_axis_eq_of_mem hxs hxt hst hR'
+          refine ⟨s, t, hxs, hxt, hst, ?_⟩
+          rw [hy]
+          ext q
+          simp only [Finset.mem_insert, Finset.mem_singleton]
+          tauto
+        | inr z =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hyz : y ≠ z := by simpa using hbc
+          exact (cubicRepair_oneCubic_twoAxis_not_mem hxs hyz hR).elim
+    | inr y =>
+      cases b with
+      | inl s =>
+        cases c with
+        | inl t =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hxt : x ≠ t := by simpa using fun h => hxR (by simp [h])
+          have hst : s ≠ t := by simpa using hbc
+          have hR' : {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inr y} ∈
+              axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+            convert hR using 1
+            ext q
+            simp only [Finset.mem_insert, Finset.mem_singleton]
+            tauto
+          have hy := cubicRepair_axis_eq_of_mem hxs hxt hst hR'
+          refine ⟨s, t, hxs, hxt, hst, ?_⟩
+          rw [hy]
+          ext q
+          simp only [Finset.mem_insert, Finset.mem_singleton]
+          tauto
+        | inr z =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hyz : y ≠ z := by
+            intro h
+            exact hac (congrArg Sum.inr h)
+          have hR' : {(.inl s : AxisTwistedCubicIndex 𝔽), .inr y, .inr z} ∈
+              axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+            convert hR using 1
+            ext q
+            simp only [Finset.mem_insert, Finset.mem_singleton]
+            tauto
+          exact (cubicRepair_oneCubic_twoAxis_not_mem hxs hyz
+            hR').elim
+      | inr z =>
+        cases c with
+        | inl s =>
+          have hxs : x ≠ s := by simpa using fun h => hxR (by simp [h])
+          have hyz : y ≠ z := by
+            intro h
+            exact hab (congrArg Sum.inr h)
+          have hR' : {(.inl s : AxisTwistedCubicIndex 𝔽), .inr y, .inr z} ∈
+              axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+            convert hR using 1
+            ext q
+            simp only [Finset.mem_insert, Finset.mem_singleton]
+            tauto
+          exact (cubicRepair_oneCubic_twoAxis_not_mem hxs hyz
+            hR').elim
+        | inr w =>
+          exact (cubicRepair_threeAxis_not_mem x y z w hR).elim
+
 /-- No axis coordinate has a repair edge with at most one helper. -/
 theorem axisCoordinate_no_repairEdge_radius_one (y : 𝔽 ⊕ Unit)
     (R : Finset (AxisTwistedCubicIndex 𝔽)) :
@@ -678,6 +795,24 @@ theorem cubicTripleRepairHelpers_mem [CharP 𝔽 3] {v : Fin 3 → 𝔽}
   · rw [hefamily]
     exact twistedCubicTripleFamily_dependent v
   · exact hdelete
+
+/-- **Exact cubic repair classification.** The complete radius-three repair hypergraph at a
+cubic target consists precisely of two other cubic points together with their unique normalized
+axis completion. -/
+theorem mem_cubicRepairHypergraph_iff [CharP 𝔽 3] {x : 𝔽}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)} :
+    R ∈ axisTwistedCubicRepairHypergraph (.inl x) 3 ↔
+      ∃ s t : 𝔽, x ≠ s ∧ x ≠ t ∧ s ≠ t ∧
+        R = {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t,
+          .inr (twistedCubicTripleAxisIndex ![x, s, t])} := by
+  constructor
+  · exact cubicRepairHypergraph_shape
+  · rintro ⟨s, t, hxs, hxt, hst, rfl⟩
+    let v : Fin 3 → 𝔽 := ![x, s, t]
+    have hv : Function.Injective v := by
+      intro i j hij
+      fin_cases i <;> fin_cases j <;> simp_all [v]
+    simpa [cubicTripleRepairHelpers, v] using cubicTripleRepairHelpers_mem hv
 
 /-- Three distinct axis parameters give an actual locality-two repair edge for the first axis
 coordinate. -/
@@ -815,5 +950,6 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms cubicRepair_threeCubic_not_mem
 #print axioms cubicRepair_oneCubic_twoAxis_not_mem
 #print axioms cubicRepair_threeAxis_not_mem
+#print axioms mem_cubicRepairHypergraph_iff
 
 end RepairCodes

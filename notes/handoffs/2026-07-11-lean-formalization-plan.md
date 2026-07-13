@@ -235,9 +235,9 @@ matroid independence remains in Phase 2.
    classification is closed in `FiniteGeom/AxisTwistedCubicCircuits.lean`, including the stronger
    arbitrary-axis determinant equation and projective uniqueness. The remaining step is the exact
    arbitrary size-four repair classification needed for the per-orbit matching/transversal
-   formulas. The cubic-target classification now proves uniqueness of the axis completion and
-   excludes the four-cubic, two-cubic/two-axis, and cubic-plus-three-axis alternatives; final exact
-   membership packaging remains. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
+   formulas. The cubic-target classification is now exact: every radius-three repair is two other
+   cubic points plus their unique normalized axis completion, and every such support is a repair.
+   The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
    **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing
    clutters. Lean proves that deleting redundant supersets preserves `τ` unconditionally and `ν`

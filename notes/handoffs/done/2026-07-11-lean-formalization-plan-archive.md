@@ -623,3 +623,16 @@ that discharges the transfer interface's finite fields from it:
   coefficient to zero, contradicting repair membership.
 - This closes the last helper-type exclusion for cubic targets; only assembling the cases into the
   exact membership iff remains before the coloured-complete-graph invariant proof.
+
+### Handoff Note — 2026-07-12 (exact cubic repair classification)
+
+- Proved every radius-three cubic repair has exactly three helpers, since any smaller support
+  would contradict the exact-locality lower bound.
+- Exhausted all eight cubic/axis type patterns for those helpers. The only surviving case is two
+  other cubic points and the forced normalized axis completion.
+- Combined this forward classification with the previously constructed four-circuit repairs to
+  prove `mem_cubicRepairHypergraph_iff`, an exact characterization of the complete code-derived
+  repair hypergraph. The next layer may now reason purely with the properly edge-coloured complete
+  graph without an unproved geometric identification.
+- Validation: `RepairCodes.AxisTwistedCubic` builds without warnings; the classification uses only
+  standard foundational axioms.
