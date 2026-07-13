@@ -61,6 +61,43 @@ def IsMatching (H M : Finset (Finset V)) : Prop :=
 def IsTransversal (H : Finset (Finset V)) (T : Finset V) : Prop :=
   ∀ ⦃e⦄, e ∈ H → (T ∩ e).Nonempty
 
+/-- The inclusion-minimal edges of a finite hypergraph.  Passing from a hypergraph to this
+clutter removes redundant supersets without changing either extremal invariant, provided the
+edges are nonempty for the matching statement. -/
+def minimalHyperedges (H : Finset (Finset V)) : Finset (Finset V) :=
+  H.filter fun A => ∀ B ∈ H, B ⊆ A → A ⊆ B
+
+theorem mem_minimalHyperedges {H : Finset (Finset V)} {A : Finset V} :
+    A ∈ minimalHyperedges H ↔ A ∈ H ∧ ∀ B ∈ H, B ⊆ A → A ⊆ B := by
+  simp [minimalHyperedges]
+
+/-- Every edge of a finite hypergraph contains an inclusion-minimal edge. -/
+theorem exists_minimalHyperedge_subset {H : Finset (Finset V)} {A : Finset V}
+    (hA : A ∈ H) : ∃ B ∈ minimalHyperedges H, B ⊆ A := by
+  classical
+  let sizes : Set ℕ := {n | ∃ B ∈ H, B ⊆ A ∧ B.card = n}
+  have hsizes : sizes.Nonempty := ⟨A.card, A, hA, subset_refl _, rfl⟩
+  obtain ⟨B, hBH, hBA, hBcard⟩ := Nat.sInf_mem hsizes
+  refine ⟨B, mem_minimalHyperedges.mpr ⟨hBH, ?_⟩, hBA⟩
+  intro C hCH hCB
+  have hle : B.card ≤ C.card := by
+    rw [hBcard]
+    exact Nat.sInf_le ⟨C, hCH, hCB.trans hBA, rfl⟩
+  have hEq : C = B := Finset.eq_of_subset_of_card_le hCB hle
+  simp [hEq]
+
+/-- A set hits every edge iff it hits every inclusion-minimal edge. -/
+theorem isTransversal_minimalHyperedges_iff {H : Finset (Finset V)} {T : Finset V} :
+    IsTransversal (minimalHyperedges H) T ↔ IsTransversal H T := by
+  constructor
+  · intro hT A hA
+    obtain ⟨B, hB, hBA⟩ := exists_minimalHyperedge_subset hA
+    obtain ⟨v, hv⟩ := hT hB
+    exact ⟨v, Finset.mem_inter.mpr ⟨(Finset.mem_inter.mp hv).1,
+      hBA (Finset.mem_inter.mp hv).2⟩⟩
+  · intro hT A hA
+    exact hT (mem_minimalHyperedges.mp hA).1
+
 omit [Fintype V] [DecidableEq V] in
 theorem IsMatching.relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
     (e : V ≃ W) {H M : Finset (Finset V)} (h : IsMatching H M) :
@@ -183,6 +220,78 @@ theorem transversalNumber_relabelHypergraph {W : Type*} [Fintype W] [DecidableEq
     exact ⟨T0, hT0, by simp [T0]⟩
   · rintro ⟨T, hT, rfl⟩
     exact ⟨T.map e.toEmbedding, hT.relabelHypergraph e, Finset.card_map e.toEmbedding⟩
+
+/-- Every matching can be shrunk edgewise to a matching of inclusion-minimal edges with the
+same cardinality, as long as the original edges are nonempty.  Nonemptiness is essential:
+distinct disjoint edges could otherwise both shrink to the empty edge. -/
+theorem exists_minimalHyperedges_matching {H M : Finset (Finset V)}
+    (hne : ∀ e ∈ H, e.Nonempty) (hM : IsMatching H M) :
+    ∃ N, IsMatching (minimalHyperedges H) N ∧ N.card = M.card := by
+  classical
+  let f : Finset V → Finset V := fun A =>
+    if hA : A ∈ H then (exists_minimalHyperedge_subset hA).choose else ∅
+  have hfmem : ∀ A ∈ M, f A ∈ minimalHyperedges H := by
+    intro A hAM
+    have hAH := hM.1 hAM
+    simp only [f, dif_pos hAH]
+    exact (exists_minimalHyperedge_subset hAH).choose_spec.1
+  have hfsub : ∀ A ∈ M, f A ⊆ A := by
+    intro A hAM
+    have hAH := hM.1 hAM
+    simp only [f, dif_pos hAH]
+    exact (exists_minimalHyperedge_subset hAH).choose_spec.2
+  have hfne : ∀ A ∈ M, (f A).Nonempty := by
+    intro A hAM
+    exact hne (f A) (mem_minimalHyperedges.mp (hfmem A hAM)).1
+  have hfinj : Set.InjOn f M := by
+    intro A hAM B hBM hEq
+    by_contra hAB
+    obtain ⟨v, hv⟩ := hfne A hAM
+    have hvA : v ∈ A := hfsub A hAM hv
+    have hvB : v ∈ B := hfsub B hBM (hEq ▸ hv)
+    exact (Finset.disjoint_left.mp (hM.2 hAM hBM hAB) hvA) hvB
+  let N := M.image f
+  refine ⟨N, ?_, ?_⟩
+  · refine ⟨?_, ?_⟩
+    · intro B hBN
+      obtain ⟨A, hAM, rfl⟩ := Finset.mem_image.mp hBN
+      exact hfmem A hAM
+    · intro A hAN B hBN hAB
+      obtain ⟨A0, hA0M, rfl⟩ := Finset.mem_image.mp hAN
+      obtain ⟨B0, hB0M, rfl⟩ := Finset.mem_image.mp hBN
+      have hA0B0 : A0 ≠ B0 := by
+        intro h
+        exact hAB (congrArg f h)
+      exact (hM.2 hA0M hB0M hA0B0).mono (hfsub A0 hA0M) (hfsub B0 hB0M)
+  · exact Finset.card_image_iff.mpr hfinj
+
+/-- Removing redundant supersets preserves matching number for nonempty hypergraphs. -/
+theorem matchingNumber_minimalHyperedges (H : Finset (Finset V))
+    (hne : ∀ e ∈ H, e.Nonempty) :
+    matchingNumber (minimalHyperedges H) = matchingNumber H := by
+  unfold matchingNumber
+  congr 1
+  ext n
+  constructor
+  · rintro ⟨M, hM, rfl⟩
+    refine ⟨M, ⟨?_, hM.2⟩, rfl⟩
+    intro A hA
+    exact (mem_minimalHyperedges.mp (hM.1 hA)).1
+  · rintro ⟨M, hM, rfl⟩
+    obtain ⟨N, hN, hcard⟩ := exists_minimalHyperedges_matching hne hM
+    exact ⟨N, hN, hcard⟩
+
+/-- Removing redundant supersets preserves transversal number. -/
+theorem transversalNumber_minimalHyperedges (H : Finset (Finset V)) :
+    transversalNumber (minimalHyperedges H) = transversalNumber H := by
+  unfold transversalNumber
+  congr 1
+  ext n
+  constructor
+  · rintro ⟨T, hT, rfl⟩
+    exact ⟨T, isTransversal_minimalHyperedges_iff.mp hT, rfl⟩
+  · rintro ⟨T, hT, rfl⟩
+    exact ⟨T, isTransversal_minimalHyperedges_iff.mpr hT, rfl⟩
 
 omit [Fintype V] [DecidableEq V] in
 /-- `ν(H)` is an upper bound on every matching size: `ν` is the *sup*. Together

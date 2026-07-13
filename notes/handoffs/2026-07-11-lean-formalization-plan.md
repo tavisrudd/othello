@@ -195,7 +195,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | Module | Landed content |
 |---|---|
 | `FiniteGeom/Weight.lean` | q-ary weight counting: `card_filter_le_sum`, `mul_card_filter_le_sum` |
-| `FiniteGeom/Hypergraph.lean` | `Finset`-hypergraph `ν`/`τ`: `nu_le_tau` (weak duality), `transversalNumber_le_mul_matchingNumber` (`τ ≤ p·ν`), `card_le_matchingNumber` / `transversalNumber_le_card` attainment pins, worked `ν=τ=1` + triangle `ν=1,τ=2` (strict) witnesses |
+| `FiniteGeom/Hypergraph.lean` | `Finset`-hypergraph `ν`/`τ`: `nu_le_tau` (weak duality), `transversalNumber_le_mul_matchingNumber` (`τ ≤ p·ν`), `card_le_matchingNumber` / `transversalNumber_le_card` attainment pins, inclusion-minimal clutter reduction preserving `τ` and (for nonempty edges) `ν`, worked `ν=τ=1` + triangle `ν=1,τ=2` (strict) witnesses |
 | `FiniteGeom/Code.lean` | linear codes over arbitrary finite coordinate types: `dualCode` / `minDist` / `dualDist` (+ `_le_hammingNorm` pins), parity-check char. `mem_dualCode_rowCode(_iff_mulVec)`, dual-word ↔ generator-column relation bridges, `le_dualDist_rowCode_of_column_independent` (small independent column sets imply a dual-distance lower bound), `singleton_bound` (`d+k≤n+1`) + `IsMDS`, `le_minDist` (lower-bound lifter), `𝔽₅` non-vacuity witness |
 | `FiniteGeom/EvalCode.lean` | Reed–Solomon: `card_eval_zero_le_natDegree`, `evalPi`, `rsCode`, `rsCode_minDist_ge` (`n-(k-1)≤d`), `finrank_rsCode` (`=k`), `rsCode_isMDS` (RS codes are MDS) |
 | `FiniteGeom/EvalCodeInstance.lean` | concrete MDS discharge of the eval-code layer: RS `[7,3,5]₇` over `ZMod 7` (`rsCode_zmod7_isMDS`/`_minDist`) and RS `[3,2,2]₉` over the target `GaloisField 3 2 = 𝔽₉` on subfield points (`rsCode_gf9_isMDS`/`_minDist`, injectivity via `algebraMap`) — exercises `rsCode_isMDS` on a real non-prime field |
@@ -204,7 +204,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/AxisTwistedCubic.lean` | explicit `S_q=T_q∪L_q` on `𝔽 ⊕ 𝔽 ⊕ Unit`; axis/cubic section split; characteristic-three Frobenius bound; exact maximum section `q+2`; direct four-vector spanning proof (including `q=3`); strict-trust `axisTwistedCubic_code_parameters : [2q+1,4,q−1]_q` |
 | `FiniteGeom/AxisTwistedCubicCircuits.lean` | field-generic determinant for three cubic points plus an arbitrary axis vector; characteristic-three unique projective completion `(0:s+t+u:st+su+tu:0)`; normalized completing point in the actual `S_q`; minimal four-circuit proof; axis three-circuits; and independence of every other mixed triple plus the two-cubic/two-axis four-family |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
-| `FiniteGeom/Repair.lean` | coordinate-type-generic complete bounded-radius repair hypergraph from actual dual-word supports; radius monotonicity; exact edge cardinality/nonemptiness from dual distance; repair edge → dependent columns/zero determinant; global-distance, full-support, circuit-local, and reindexed converses. |
+| `FiniteGeom/Repair.lean` | coordinate-type-generic complete bounded-radius repair hypergraph from actual dual-word supports; paper-facing inclusion-minimal repair clutter; radius monotonicity; exact edge cardinality/nonemptiness from dual distance; clutter invariance; repair edge → dependent columns/zero determinant; global-distance, full-support, circuit-local, and reindexed converses. |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` discharges coefficient faithfulness internally; field trace is only an optional coordinate presentation. |
 | `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
@@ -237,6 +237,11 @@ matroid independence remains in Phase 2.
    arbitrary size-four circuit classification needed for the per-orbit matching/transversal
    formulas. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
+   **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing
+   clutters. Lean proves that deleting redundant supersets preserves `τ` unconditionally and `ν`
+   for nonempty edges. Every `S_q` repair edge is nonempty directly from its nonzero target column,
+   so both invariants of the complete all-support hypergraph equal those of its minimal clutter
+   even at radius three, where the global dual-distance shortcut is unavailable.
 2. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
 
 ### Discovery track for final review

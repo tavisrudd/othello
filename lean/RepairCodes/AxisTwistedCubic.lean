@@ -331,6 +331,12 @@ noncomputable def axisTwistedCubicRepairHypergraph
     Finset (Finset (AxisTwistedCubicIndex 𝔽)) :=
   repairHypergraph (axisTwistedCubicCode (𝔽 := 𝔽)) x r
 
+/-- Paper-facing inclusion-minimal repair clutter for `S_q`. -/
+noncomputable def minimalAxisTwistedCubicRepairHypergraph
+    (x : AxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    Finset (Finset (AxisTwistedCubicIndex 𝔽)) :=
+  minimalRepairHypergraph (axisTwistedCubicCode (𝔽 := 𝔽)) x r
+
 /-- Every actual repair edge gives a dependent target-plus-helper point family. -/
 theorem axisTwistedCubicRepair_edge_dependent {x : AxisTwistedCubicIndex 𝔽} {r : ℕ}
     {R : Finset (AxisTwistedCubicIndex 𝔽)}
@@ -338,6 +344,36 @@ theorem axisTwistedCubicRepair_edge_dependent {x : AxisTwistedCubicIndex 𝔽} {
     ¬ LinearIndependent 𝔽
       (fun j : ↥(insert x R) => axisTwistedCubicPoints 𝔽 j) := by
   exact repair_edge_columns_dependent (G := axisTwistedCubicGenerator) hR
+
+/-- Every repair edge of `S_q` is nonempty.  Unlike the generic dual-distance criterion, this
+remains applicable at radius three even though the axis triples make the global dual distance
+equal to three. -/
+theorem axisTwistedCubicRepair_edge_nonempty {x : AxisTwistedCubicIndex 𝔽} {r : ℕ}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ axisTwistedCubicRepairHypergraph x r) : R.Nonempty := by
+  rw [Finset.nonempty_iff_ne_empty]
+  intro hR0
+  apply axisTwistedCubicRepair_edge_dependent hR
+  subst R
+  simpa using
+    (axisTwistedCubic_selected_linearIndependent_of_card_le_two
+      (S := {x}) (Finset.singleton_nonempty x) (by simp))
+
+/-- Clutter reduction preserves the matching number of the complete `S_q` repair hypergraph. -/
+theorem matchingNumber_minimalAxisTwistedCubicRepairHypergraph
+    (x : AxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    matchingNumber (minimalAxisTwistedCubicRepairHypergraph x r) =
+      matchingNumber (axisTwistedCubicRepairHypergraph x r) := by
+  apply matchingNumber_minimalHyperedges
+  exact fun _ hR => axisTwistedCubicRepair_edge_nonempty hR
+
+/-- Clutter reduction preserves the transversal number of the complete `S_q` repair
+hypergraph. -/
+theorem transversalNumber_minimalAxisTwistedCubicRepairHypergraph
+    (x : AxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    transversalNumber (minimalAxisTwistedCubicRepairHypergraph x r) =
+      transversalNumber (axisTwistedCubicRepairHypergraph x r) :=
+  transversalNumber_minimalHyperedges _
 
 /-- No cubic coordinate has a repair edge with at most two helpers. -/
 theorem cubicCoordinate_no_repairEdge_radius_two [CharP 𝔽 3] (x : 𝔽)
@@ -606,5 +642,7 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms axisTwistedCubic_allSymbol_locality_three
 #print axioms cubicCoordinate_exact_locality_three
 #print axioms axisCoordinate_exact_locality_two
+#print axioms matchingNumber_minimalAxisTwistedCubicRepairHypergraph
+#print axioms transversalNumber_minimalAxisTwistedCubicRepairHypergraph
 
 end RepairCodes

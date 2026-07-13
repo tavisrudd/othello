@@ -42,6 +42,12 @@ noncomputable def repairHypergraph (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) (
   exact (univ.erase x).powerset.filter fun R =>
     R.card ≤ r ∧ ∃ y ∈ dualCode C, y x ≠ 0 ∧ wordSupport y = insert x R
 
+/-- The complete inclusion-minimal radius-`r` repair clutter.  This is the paper-facing
+hypergraph: bounded dual supports that properly contain another repair are discarded. -/
+noncomputable def minimalRepairHypergraph (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) (r : ℕ) :
+    Finset (Finset ι) :=
+  minimalHyperedges (repairHypergraph C x r)
+
 theorem mem_repairHypergraph {C : Submodule 𝔽 (ι → 𝔽)} {x : ι} {r : ℕ}
     {R : Finset ι} :
     R ∈ repairHypergraph C x r ↔
@@ -83,6 +89,23 @@ theorem repair_edge_nonempty_of_dualDist {C : Submodule 𝔽 (ι → 𝔽)} {x :
   have hc := repair_edge_card_eq_of_dualDist hd hR
   rw [h, Finset.card_empty] at hc
   omega
+
+/-- At positive radius below dual distance, passing to inclusion-minimal repairs preserves
+matching number. -/
+theorem matchingNumber_minimalRepairHypergraph_of_dualDist
+    {C : Submodule 𝔽 (ι → 𝔽)} {x : ι} {r : ℕ}
+    (hr : 0 < r) (hd : r + 1 ≤ dualDist C) :
+    matchingNumber (minimalRepairHypergraph C x r) =
+      matchingNumber (repairHypergraph C x r) := by
+  apply matchingNumber_minimalHyperedges
+  exact fun _ hR => repair_edge_nonempty_of_dualDist hr hd hR
+
+/-- Passing to inclusion-minimal repairs always preserves transversal number. -/
+theorem transversalNumber_minimalRepairHypergraph
+    (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) (r : ℕ) :
+    transversalNumber (minimalRepairHypergraph C x r) =
+      transversalNumber (repairHypergraph C x r) :=
+  transversalNumber_minimalHyperedges _
 
 /-- A repair edge of a row code gives a genuinely dependent family consisting of the target
 column and its helpers. The coefficients are the witnessing dual word restricted to its support. -/

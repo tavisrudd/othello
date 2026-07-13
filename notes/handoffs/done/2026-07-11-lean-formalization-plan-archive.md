@@ -567,3 +567,34 @@ that discharges the transfer interface's finite fields from it:
   Phase 1 step 4.
 - Validation: the full `RepairCodes` target builds without warnings. Both exact-locality headline
   theorems have axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (minimal-repair semantic gate)
+
+- Re-read the uniform `ν`/`τ` formulas against the Lean definition. The paper correctly states
+  them for complete **inclusion-minimal** repair hypergraphs; `repairHypergraph` intentionally stores
+  every bounded exact dual support, including nonminimal supports.
+- Therefore the formulas must pass through a minimal-repair clutter. Existing
+  `FiniteGeom/BaerCompletion/Clutter.lean` proves that minimal-edge reduction preserves
+  transversals and `τ`. A matching-preservation theorem is also valid when every edge is nonempty:
+  shrink each edge of a matching to a nonempty minimal subedge, preserving disjointness and
+  cardinality. That generic lemma and the repair-specific clutter wrapper are the next formal step.
+- This is a formal path/statement-adequacy issue, not a defect in the prose mathematics. Applying
+  the paper's formulas directly to the all-support Lean hypergraph would, however, be an invalid
+  unproved identification under the strict gate.
+
+### Handoff Note — 2026-07-12 (minimal-repair semantic gate closed)
+
+- Generalized minimal-edge reduction into `FiniteGeom/Hypergraph.lean`. Every edge contains an
+  inclusion-minimal subedge; transversals are equivalent before and after reduction, and a
+  matching can be shrunk edgewise without changing its cardinality when all edges are nonempty.
+  Consequently both `transversalNumber_minimalHyperedges` and
+  `matchingNumber_minimalHyperedges` are Lean-proved.
+- Added the paper-facing `minimalRepairHypergraph` wrapper and its generic invariant bridges.
+  For the twisted-cubic–axis code, proved every repair edge nonempty directly from dependence of
+  the target-plus-helper columns and the nonzero target column. This is stronger than relying on
+  global dual distance and applies at radius three despite the axis three-circuits.
+- `matchingNumber_minimalAxisTwistedCubicRepairHypergraph` and
+  `transversalNumber_minimalAxisTwistedCubicRepairHypergraph` now close the exact semantic gap
+  between Lean's complete all-support repair object and the paper's inclusion-minimal clutter.
+- Validation: `FiniteGeom.Hypergraph`, `FiniteGeom.Repair`, and
+  `RepairCodes.AxisTwistedCubic` all build successfully.
