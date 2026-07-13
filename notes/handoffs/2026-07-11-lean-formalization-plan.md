@@ -238,7 +238,10 @@ matroid independence remains in Phase 2.
    formulas. The cubic orbit is closed: every radius-three repair is two other cubic points plus
    their unique normalized axis completion; the completion coloring is proved proper;
    `τ_T=q−2`, `ν_T≤(q−1)/2`, and strict `τ_T>ν_T` for `q≥9` are code-derived theorems.
-   The remaining repair-invariant work is the nucleus and generic-axis formulas.
+   The paper-facing axis clutter is also now exact: its minimal edges are precisely pairs of other
+   axis points and three-cubic completion triples. The remaining repair-invariant work is the
+   nucleus and generic-axis extremal formulas (and the cubic matching lower bound if the displayed
+   interval remains claimed as fully formalized).
    The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
    **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing

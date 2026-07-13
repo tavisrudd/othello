@@ -63,6 +63,59 @@ theorem repairHypergraph_mono_radius {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
   obtain ⟨hsub, hcard, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
   exact mem_repairHypergraph.mpr ⟨hsub, hcard.trans hrs, y, hy, hyx, hsupp⟩
 
+/-- An edge already known to have at most `s` helpers belongs at radius `s`, independently of
+the larger radius at which it was found. -/
+theorem mem_repairHypergraph_of_mem_of_card_le {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    {r s : ℕ} {R : Finset ι} (hR : R ∈ repairHypergraph C x r) (hcard : R.card ≤ s) :
+    R ∈ repairHypergraph C x s := by
+  obtain ⟨hsub, -, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
+  exact mem_repairHypergraph.mpr ⟨hsub, hcard, y, hy, hyx, hsupp⟩
+
+/-- A full-support repair relation can be retargeted to any helper in its support.  The old target
+becomes a helper and the new target is removed from the helper set. -/
+theorem repairHypergraph_retarget {C : Submodule 𝔽 (ι → 𝔽)} {x z : ι} {r : ℕ}
+    {R : Finset ι} (hR : R ∈ repairHypergraph C x r) (hz : z ∈ R) :
+    insert x (R.erase z) ∈ repairHypergraph C z r := by
+  classical
+  obtain ⟨hsub, hcard, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
+  have hxR : x ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  have hxz : x ≠ z := by
+    intro hxz
+    exact hxR (hxz ▸ hz)
+  have hnewSub : insert x (R.erase z) ⊆ univ.erase z := by
+    intro a ha
+    rw [Finset.mem_insert] at ha
+    rcases ha with rfl | ha
+    · simp [hxz]
+    · have haR := (Finset.mem_erase.mp ha).2
+      exact Finset.mem_erase.mpr ⟨(Finset.mem_erase.mp ha).1, Finset.mem_univ _⟩
+  have hnewCard : (insert x (R.erase z)).card ≤ r := by
+    have hRpos : 0 < R.card := Finset.card_pos.mpr ⟨z, hz⟩
+    rw [Finset.card_insert_of_notMem (fun hx => hxR (Finset.mem_of_mem_erase hx)),
+      Finset.card_erase_of_mem hz]
+    omega
+  have hyz : y z ≠ 0 := by
+    apply mem_wordSupport.mp
+    rw [hsupp]
+    exact Finset.mem_insert_of_mem hz
+  have hnewSupp : wordSupport y = insert z (insert x (R.erase z)) := by
+    rw [hsupp]
+    ext a
+    simp only [Finset.mem_insert, Finset.mem_erase]
+    constructor
+    · rintro (rfl | ha)
+      · exact Or.inr (Or.inl rfl)
+      · by_cases haz : a = z
+        · exact Or.inl haz
+        · exact Or.inr (Or.inr ⟨haz, ha⟩)
+    · rintro (rfl | rfl | ⟨-, ha⟩)
+      · exact Or.inr hz
+      · exact Or.inl rfl
+      · exact Or.inr ha
+  exact mem_repairHypergraph.mpr ⟨hnewSub, hnewCard, y, hy, hyz, hnewSupp⟩
+
 /-- If the dual distance is at least `r+1`, every radius-`r` repair edge has exactly `r` helpers.
 The witnessing dual word has support `insert x R`, hence weight `R.card+1`; dual distance supplies
 the lower bound while membership supplies `R.card≤r`. -/

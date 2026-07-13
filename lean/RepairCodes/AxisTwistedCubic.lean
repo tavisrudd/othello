@@ -720,6 +720,51 @@ theorem axisCoordinate_no_repairEdge_radius_one (y : 𝔽 ⊕ Unit)
   · rw [Finset.card_insert_of_notMem hyR]
     omega
 
+/-- Every radius-two axis repair has exactly two helpers. -/
+theorem axisRepair_edge_card_eq_two {y : 𝔽 ⊕ Unit}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ axisTwistedCubicRepairHypergraph (.inr y) 2) : R.card = 2 := by
+  obtain ⟨hsub, hcard, c, hc, hcy, hsupp⟩ := mem_repairHypergraph.mp hR
+  by_contra hne
+  have hle : R.card ≤ 1 := by omega
+  apply axisCoordinate_no_repairEdge_radius_one y R
+  exact mem_repairHypergraph.mpr ⟨hsub, hle, c, hc, hcy, hsupp⟩
+
+/-- Every radius-two repair at an axis coordinate uses two other axis coordinates. -/
+theorem axisRepairPair_shape [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ axisTwistedCubicRepairHypergraph (.inr y) 2) :
+    ∃ z w : 𝔽 ⊕ Unit, y ≠ z ∧ y ≠ w ∧ z ≠ w ∧
+      R = {(.inr z : AxisTwistedCubicIndex 𝔽), .inr w} := by
+  obtain ⟨a, b, hab, hReq⟩ := Finset.card_eq_two.mp (axisRepair_edge_card_eq_two hR)
+  have hsub := (mem_repairHypergraph.mp hR).1
+  have hyR : (.inr y : AxisTwistedCubicIndex 𝔽) ∉ R := by
+    intro hy
+    exact (Finset.mem_erase.mp (hsub hy)).1 rfl
+  subst R
+  cases a with
+  | inl s =>
+    exfalso
+    apply axisTwistedCubicRepair_edge_dependent hR
+    apply axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+    · rw [Finset.card_insert_of_notMem hyR]
+      simp [hab]
+    · exact ⟨s, by simp⟩
+  | inr z =>
+    cases b with
+    | inl t =>
+      exfalso
+      apply axisTwistedCubicRepair_edge_dependent hR
+      apply axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+      · rw [Finset.card_insert_of_notMem hyR]
+        simp [hab]
+      · exact ⟨t, by simp⟩
+    | inr w =>
+      have hyz : y ≠ z := by simpa using fun h => hyR (by simp [h])
+      have hyw : y ≠ w := by simpa using fun h => hyR (by simp [h])
+      have hzw : z ≠ w := by simpa using hab
+      exact ⟨z, w, hyz, hyw, hzw, rfl⟩
+
 /-- Every target-plus-helper circuit is an actual repair edge, without a false global
 `d(C⊥)≥r+1` requirement.  This is the bridge needed for cubic four-circuits even though the same
 code also has axis three-circuits. -/
@@ -930,6 +975,22 @@ theorem axisTripleRepairHelpers_mem {w : Fin 3 → 𝔽 ⊕ Unit}
     exact hcirc.1
   · exact hdelete
 
+/-- **Exact radius-two axis repair classification.** These repairs are precisely the pairs of
+other axis coordinates. -/
+theorem mem_axisRepairHypergraph_two_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)} :
+    R ∈ axisTwistedCubicRepairHypergraph (.inr y) 2 ↔
+      ∃ z w : 𝔽 ⊕ Unit, y ≠ z ∧ y ≠ w ∧ z ≠ w ∧
+        R = {(.inr z : AxisTwistedCubicIndex 𝔽), .inr w} := by
+  constructor
+  · exact axisRepairPair_shape
+  · rintro ⟨z, w, hyz, hyw, hzw, rfl⟩
+    let v : Fin 3 → 𝔽 ⊕ Unit := ![y, z, w]
+    have hv : Function.Injective v := by
+      intro i j hij
+      fin_cases i <;> fin_cases j <;> simp_all [v]
+    simpa [axisTripleRepairHelpers, v] using axisTripleRepairHelpers_mem hv
+
 /-- Every cubic coordinate has a concrete repair edge with three helpers. -/
 theorem cubicCoordinate_has_repairEdge [CharP 𝔽 3] (x : 𝔽) :
     ∃ R, R ∈ axisTwistedCubicRepairHypergraph (.inl x) 3 := by
@@ -982,5 +1043,6 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms cubicRepair_oneCubic_twoAxis_not_mem
 #print axioms cubicRepair_threeAxis_not_mem
 #print axioms mem_cubicRepairHypergraph_iff
+#print axioms mem_axisRepairHypergraph_two_iff
 
 end RepairCodes

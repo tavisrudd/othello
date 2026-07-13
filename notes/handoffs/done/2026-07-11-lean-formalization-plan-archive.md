@@ -654,3 +654,20 @@ that discharges the transfer interface's finite fields from it:
   maximal-rainbow-matching prose if the complete displayed interval is retained as `[PROVED]`.
 - Validation: focused builds are warning-free and the headline axiom profiles are exactly
   `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (exact axis minimal-repair clutter)
+
+- Added the generic `repairHypergraph_retarget` theorem: a full-support dual relation can repair
+  any coordinate in its support, with the old target becoming a helper. This is a reusable
+  strengthening of the circuit-to-repair bridge.
+- Proved radius-two repairs at an axis coordinate are exactly pairs of other axis points.
+- Retargeted three-cubic axis repairs to the already-classified cubic orbit, proving such a support
+  repairs exactly its unique normalized completing axis coordinate. Supports with two cubic
+  helpers and one extra axis helper are impossible by the same retargeting argument.
+- Proved every radius-three axis repair either contains an axis-pair repair or is an exact
+  three-cubic completion. Applying inclusion minimality then gives
+  `mem_minimalAxisRepairHypergraph_iff`: the paper-facing clutter contains exactly those two
+  canonical types. Thus nonminimal all-axis dual supports are formally removed rather than
+  silently omitted.
+- Validation: the focused invariant target builds without warnings and the new bridge and
+  classification theorems have only the standard foundational axiom profile.
