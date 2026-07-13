@@ -305,6 +305,48 @@ theorem mapEquiv_sq_scalar_fixedpointfree (g : V ≃ₗ[K] V) (δ : K)
     have hδeq : δ = lam * lam := smul_left_injective K hv hscalar
     exact hnonsquare ⟨lam, hδeq⟩
 
+omit [Fintype (Point K V)] [DecidableEq (Point K V)] in
+/-- An eigenvector of a linear equivalence gives a fixed point of its projectivization. -/
+theorem mapEquiv_fixed_of_eq_smul (g : V ≃ₗ[K] V) {v : V} (hv : v ≠ 0) {a : K}
+    (hgv : g v = a • v) :
+    mapEquiv g (Projectivization.mk K v hv) = Projectivization.mk K v hv := by
+  rw [mapEquiv_mk]
+  exact (Projectivization.mk_eq_mk_iff' K (g v) v (by simp [hv]) hv).mpr ⟨a, hgv.symm⟩
+
+omit [Fintype (Point K V)] [DecidableEq (Point K V)] in
+/-- Converse to the nonsquare fixed-point-free construction. If `g²` is multiplication by a
+square scalar on a nontrivial vector space, then `mapEquiv g` has a projective fixed point.
+
+Indeed, write the scalar as `r²`. For any nonzero `v`, either `g v = r v`, or the nonzero vector
+`g v - r v` is a `(-r)`-eigenvector. -/
+theorem mapEquiv_sq_scalar_has_fixedpoint_of_square [Nontrivial V]
+    (g : V ≃ₗ[K] V) (δ : K) (hg : ∀ v : V, g (g v) = δ • v)
+    (hsquare : IsSquare δ) :
+    ∃ x : Point K V, mapEquiv g x = x := by
+  obtain ⟨r, rfl⟩ := hsquare
+  obtain ⟨v, hv⟩ := exists_ne (0 : V)
+  let w : V := g v - r • v
+  by_cases hw : w = 0
+  · have hgv : g v = r • v := sub_eq_zero.mp hw
+    exact ⟨Projectivization.mk K v hv, mapEquiv_fixed_of_eq_smul g hv hgv⟩
+  · have hgw : g w = (-r) • w := by
+      dsimp only [w]
+      rw [map_sub, hg, map_smul]
+      module
+    exact ⟨Projectivization.mk K w hw, mapEquiv_fixed_of_eq_smul g hw hgw⟩
+
+omit [Fintype (Point K V)] [DecidableEq (Point K V)] in
+/-- Exact scalar-square boundary for a projectivized linear automorphism: under `g² = δ`, it is
+fixed-point-free precisely when `δ` is nonsquare. -/
+theorem mapEquiv_sq_scalar_fixedpointfree_iff [Nontrivial V]
+    (g : V ≃ₗ[K] V) (δ : K) (hg : ∀ v : V, g (g v) = δ • v) :
+    (∀ x : Point K V, mapEquiv g x ≠ x) ↔ ¬ IsSquare δ := by
+  constructor
+  · intro hfpf hsquare
+    obtain ⟨x, hx⟩ := mapEquiv_sq_scalar_has_fixedpoint_of_square g δ hg hsquare
+    exact hfpf x hx
+  · exact mapEquiv_sq_scalar_fixedpointfree g δ hg
+
 /--
 Linear-algebra bridge for elliptic projective mirrors.
 

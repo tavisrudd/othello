@@ -9,7 +9,7 @@ two further positive extensions.
 
 ---
 
-## #5 — Boundary theorem: which classical varieties admit an fpf mirror
+## #5 — Boundary classification program: which classical varieties admit an fpf mirror
 
 **Setup.** `q` odd.  `X` a nondegenerate classical polar-space variety that is a *nontrivial* cap
 board (some ambient line meets `X` in ≥ 3 points — this excludes ovoids/ovals/conics, which are
@@ -18,18 +18,24 @@ free-placement parity games).  The mirror method applies to `X` iff its projecti
 and no point of `X`) — because any such element preserves ambient collinearity (it is a
 collineation) and the board, so it feeds the C48 proposition.
 
-**Theorem (boundary).**  Among the nontrivial classical polar-space cap games over odd `q`:
+**Status (strict trust gate, audited 2026-07-12).** Among the nontrivial classical polar-space
+cap games over odd `q`:
 
 1. **Hyperbolic quadrics `Q⁺(2m−1,q)` admit an fpf mirror** (for every `m ≥ 2`).  → P.  *(C48,
    fully proven: the elliptic block similitude `(aᵢ,bᵢ)↦(δ·bᵢ,aᵢ)`, `δ` nonsquare.)*
-2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`) admit NO fpf involution.** *(Rigorous, below.)*
-3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`) admit NO fpf involution.** *(Rigorous, below.)*
-4. **Elliptic quadrics `Q⁻(2m−1,q)` (`m ≥ 3`) admit no fpf mirror** *(strongly evidenced; the
+2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`) admit NO fpf involution.**
+   *[FORMAL REDUCTION + PROVEN-PROSE]* The nonsplit linear odd-dimension obstruction is Lean-proved
+   in `ProjectiveCap.MirrorBoundary`; the split-isotropy and semilinear Baer branches remain.
+3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`) admit NO fpf involution.**
+   *[PROVEN-PROSE]* The eigenline-to-board-fixed-point reduction is Lean-proved; finite Hermitian
+   isotropy, the nonsplit adjoint/multiplier lemma, and the semilinear branch remain.
+4. **Conjecture:** elliptic quadrics `Q⁻(2m−1,q)` (`m ≥ 3`) admit no fpf mirror. The
    split route is excluded rigorously and the natural nonsplit similitude fails — one Witt-transfer
-   lemma from a complete proof; see the open item).*
+   classification remains; see the open item.
 
-So the method draws a sharp line: **it proves P exactly for the split (hyperbolic) quadratic
-forms; every other nondegenerate type is a boundary.**  Crucially this is a boundary of the
+The established positive theorem proves P for the split (hyperbolic) quadratic forms. The other
+types are candidate boundaries, with the trust status above; an exact/coextensive classification
+is not claimed until the remaining form-theoretic lemmas are proved. Crucially this is a boundary of the
 *method*, not of the *outcome* — `H(2,9)` and `H(3,4)` are computed **P** despite carrying no fpf
 involution (C48).  A mirror obstruction is not an N verdict.
 
@@ -74,7 +80,7 @@ conic), so it always has fixed points on `X`.  Never fpf.  Excluded for all thes
   - *Elliptic `Q⁻(2m−1,q)`:* the split route is excluded for `n = 2m ≥ 6` (above), and the
     elliptic block similitude fails (its anisotropic tail is not a hyperbolic plane, so the map
     leaves the quadric — machine-verified on `Q⁻(5,3)`).  A full exclusion needs the
-    Scharlau-transfer computation (see open item).  *(4, strongly evidenced)*
+    Scharlau-transfer computation (see open item). This is conjectural in the general case.
 
 ### Machine anchors
 
@@ -92,7 +98,18 @@ F4 (q=2): Hermitian plane diag(1,1) isotropic = True                     (anisot
 Plus the C48 witnesses: natural involutions on `H(2,9)`/`H(3,4)`/`Q(4,3)` each fix variety points;
 the elliptic block map leaves `Q⁻(5,3)`.
 
-### Open item (to close row 4 rigorously)
+### Remaining real-math obligations
+
+The Lean reductions now certify: square scalar implies a square-scalar linear projectivization has
+a fixed point; an isotropic eigenvector gives a board fixed point; and an odd-dimensional matrix
+cannot square to a nonsquare scalar. Completing rows 2–4 still requires:
+
+1. finite quadratic isotropy in dimension at least three, with the required eigenspace restriction;
+2. finite Hermitian isotropy in dimension at least two;
+3. the unitary nonsplit adjoint/multiplier classification;
+4. the semilinear/Baer involution classification and a theorem that its fixed subgeometry meets
+   each board in scope;
+5. for `Q⁻`, the Witt/Scharlau-transfer classification below.
 
 Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
 Route: a nonsplit order-2 similitude corresponds (self-adjoint `√c`, Scharlau transfer) to an
@@ -105,10 +122,10 @@ transfer lemma is the way.)  This is a clean, bounded lemma; it does not gate an
 
 ### Publishable framing
 
-This is the "separating mirror obstructions from outcomes" theorem of the harvest: the
-fpf-mirror method is *coextensive with the hyperbolic (split) quadratic forms* among classical
-polar spaces, and its silence on elliptic/parabolic/Hermitian boards is a statement about the
-method, not the game values.  Positioning stays conservative (novelty guard): the mechanism is the
+This is the candidate "separating mirror obstructions from outcomes" classification of the
+harvest. The proved positive family is hyperbolic; parabolic and Hermitian exclusions remain
+proved prose with partial formal reductions, and the elliptic exclusion is conjectural. Its
+silence on these boards concerns the method, not the game values. Positioning stays conservative: the mechanism is the
 standard pairing/copycat ingredient; the contribution is the exact incidence-geometric boundary.
 
 ---

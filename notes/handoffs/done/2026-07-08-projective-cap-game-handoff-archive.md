@@ -2679,3 +2679,23 @@ automorphism-canonical memoization made the 60-vertex graphs tractable; the symm
 class used the extra color-permuting `S₃`. The submission appendix records the table, method, the
 non-generalizing A₅ commuting-pair observation, and the essential caveat that free `S₄` orbits do
 not evaluate the generic escape residual after growth to full `PSL/PGL`.
+
+## 2026-07-12 — adversarial mirror-boundary trust hardening
+
+- Replaced the sole Lean `native_decide` use,
+  `DihedralSchreier.KleinFourBridge.explicit_pairProducts`, with kernel `decide`. The theorem now
+  audits to `[propext, Classical.choice, Quot.sound]`.
+- Added `ProjectiveCap/MirrorBoundary.lean`. It proves that a square-scalar linear
+  projectivization has a fixed point, hence `g²=δ` is fixed-point-free exactly when `δ` is
+  nonsquare; an isotropic eigenvector gives a fixed point on a sub-board; and an odd-dimensional
+  matrix cannot square to a nonsquare scalar. The last theorem closes the nonsplit linear route
+  for parabolic quadrics.
+- Downgraded the boundary documents to strict trust tiers. Hyperbolic positivity is Lean-proved;
+  parabolic/Hermitian method-negativity remains proven prose with partial formal reductions; the
+  general elliptic `Q⁻` exclusion is conjectural.
+- Remaining real-math inputs: finite quadratic and Hermitian isotropy bounds, unitary
+  adjoint/multiplier classification, semilinear/Baer fixed-subgeometry intersection, and the
+  elliptic Witt/Scharlau transfer classification.
+- Validation: full `ProjectiveCap` and `DihedralSchreier` builds green. The new boundary theorems
+  and `explicit_pairProducts` audit to exactly `[propext, Classical.choice, Quot.sound]`; the Lean
+  tree contains no `native_decide` and no `sorry` term.

@@ -29,7 +29,7 @@ def explicitLabel : Fin 3 → V4 :=
 nonidentity elements of `V4`. -/
 theorem explicit_pairProducts : ∀ g : V4,
     g ≠ 1 ↔ ∃ i j : Fin 3, i < j ∧ explicitLabel i * explicitLabel j = g := by
-  native_decide
+  decide
 
 variable {G : Type*} [Group G] {k : ℕ} [MulAction G (Fin k)]
 

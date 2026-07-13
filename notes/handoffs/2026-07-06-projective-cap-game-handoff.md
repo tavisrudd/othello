@@ -144,23 +144,27 @@ intersection patterns and point counts are verified, not trusted).
   Q⁺(3,3/5/7) (full C27 pair-extension over every σ-invariant cap + exhaustive solve), Q⁺(5,3)
   (involution + sampled).  `Q⁺(3,q)` is exactly the `(q+1)×(q+1)` capacity-2 rook grid (E1
   vocabulary) and has a second proof by translation mirror `(i,j) ↦ (i+h, j+h)`.
-- **Boundary dichotomy for the negatives:** *odd ambient dimension is necessary but not
-  sufficient* — the isometry group must also contain an fpf involution.  Mirror-method
-  negatives (outcome may still be P by other means): elliptic quadrics `Q⁻(2m−1,q)`
-  (anisotropic block blocks the similarity; `O⁻` has no fpf involution), parabolic `Q(2m,q)`
-  and Hermitian curves `H(2,q²)` (even ambient dim ⇒ rational fixed point; unital is a blocking
-  set), Hermitian surfaces `H(3,q²)` (unitary involutions all have isotropic eigenspaces since
-  Hermitian forms are isotropic in dim ≥ 2).  `H(2,9)`/`H(3,4)` compute P regardless, so these
-  are *method* boundaries not outcome flips; `Q(4,q)` parabolic is the first open outcome here.
+- **Boundary program (strict trust tiers):** the hyperbolic positive family is Lean-proved.
+  Parabolic method-negativity is proven in prose with its nonsplit linear odd-dimension route now
+  Lean-proved; Hermitian method-negativity is proven in prose with the generic eigenline reduction
+  Lean-proved. The general elliptic `Q⁻(2m−1,q)`, `m≥3`, exclusion is **conjectural** pending the
+  Witt/Scharlau-transfer classification. No exact/coextensive boundary theorem is claimed.
+  `H(2,9)`/`H(3,4)` compute P regardless, so these are method boundaries, not outcome flips;
+  `Q(4,q)` parabolic is the first open outcome here.
 - **Trivial rows flagged:** ovoids `Q⁻(3,q)` are free placement (P by `q²+1`-even parity);
   `H(2,4) = AG(2,3)` (P by the affine theorem, odd point count, not a mirror family).
 - **Lean landed:** [`../../lean/ProjectiveCap/HyperbolicQuadricMirror.lean`](../../lean/ProjectiveCap/HyperbolicQuadricMirror.lean)
+  and [`../../lean/ProjectiveCap/MirrorBoundary.lean`](../../lean/ProjectiveCap/MirrorBoundary.lean)
   (imported from `ProjectiveCap.lean`; builds clean; axiom profile `[propext, Classical.choice,
   Quot.sound]`).  The general proposition is `initialSubCapP_of_fpf_collinearity_preserving`
   (an fpf collinearity-preserving involution preserving a sub-board `Q ⇒ IsP (SubCap Q) ∅` —
   the cap step reuses `mirrorStepGood_of_collinearity_preserving` verbatim, only `Q x → Q (σ x)`
   is new).  The harvested family is `initialSubCapP_blockQuadric_of_odd_card` (`Q⁺(2m−1,q) = P`,
   odd q), via `blockForm_ellipticBlock` (the factor-`δ` similarity) + `onBlockQuadric_map`.
+  `MirrorBoundary` proves the exact scalar-square fixed-point criterion, the eigenline-to-board
+  obstruction, and the odd-dimensional determinant exclusion used by the parabolic nonsplit route.
+  Remaining form-isotropy, unitary, Baer-semilinear, and elliptic-transfer obligations are listed
+  in [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).
   Disjoint from the C41/C50 files.
 
 ## Odd-Plane Kernel

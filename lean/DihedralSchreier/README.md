@@ -3,7 +3,7 @@
 This library is a checked reduction layer for
 `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`.
 
-Formalized without `sorry`:
+Formalized without `sorry` or `native_decide`:
 
 - `FixedDeleted.lean`: involution triples, pair-product deletion, the simple Schreier
   graph, its live vertex set, and the resulting `NodeKayles.win` position;
@@ -34,3 +34,5 @@ Validation:
 ```text
 choom -n 1000 -- nix develop --command lake build DihedralSchreier
 ```
+
+Audited headline declarations depend only on `[propext, Classical.choice, Quot.sound]`.

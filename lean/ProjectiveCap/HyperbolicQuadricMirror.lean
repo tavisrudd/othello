@@ -26,9 +26,9 @@ This file records that reach:
   `Q⁺(2m−1,q)` is P for every odd `q` and every `m ≥ 1` (`m ≥ 2` is the
   nontrivial geometric range).
 
-See `notes/2026-07-09-codex-mirror-harvest.md` for the machine gates and the
-boundary dichotomy (why elliptic/parabolic quadrics and Hermitian varieties are
-*negatives* for this method).
+See `notes/2026-07-09-mirror-method-boundary.md` for the boundary program and its explicit trust
+tiers: the hyperbolic positive theorem is Lean-proved, parabolic/Hermitian exclusions currently
+have partial formal reductions, and the general elliptic exclusion remains conjectural.
 -/
 
 open scoped LinearAlgebra.Projectivization
