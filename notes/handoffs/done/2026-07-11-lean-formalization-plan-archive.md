@@ -503,3 +503,27 @@ that discharges the transfer interface's finite fields from it:
 - Validation: focused Lean compilation and full `nix develop --command lake build RepairCodes`
   pass with no Lean warnings. Both the maximum-section theorem and headline parameter theorem have
   axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (uniform small-circuit algebra)
+
+- Added `FiniteGeom/AxisTwistedCubicCircuits.lean`. The q9 determinant calculation is generalized
+  over an arbitrary field and arbitrary axis vector: three cubic parameters `s,t,u` plus
+  `(0,e₁,e₂,0)` are dependent exactly when
+  `e₁(st+su+tu)=e₂(s+t+u)` (for distinct parameters).
+- In characteristic three, proved that `(s+t+u,st+su+tu)` is nonzero for distinct parameters and
+  that every dependent axis vector is its scalar multiple. The normalized finite/infinite axis
+  point in the actual `S_q` point system therefore gives the unique projective completion.
+- Proved that completion is a genuine four-circuit: the four columns are dependent and every
+  three-column deletion is independent. Separately proved that three distinct axis points form a
+  three-circuit, while one cubic plus two axis points, two cubics plus one axis point, and two
+  cubics plus two axis points are independent. Together with the existing moment-curve bounds,
+  these are all algebraic cases in the size-at-most-four circuit classification.
+- Added a Discovery track to the live handoff using the explicit taxonomy from the relative-conic
+  formalization. The `q=3` parameter extension, field-generic determinant, and projective-uniqueness
+  consequence are recorded as proved results; novelty remains reserved for C98's literature audit.
+- Remaining: package the family-level lemmas as an exact arbitrary-coordinate-set classification,
+  then identify the resulting circuits with complete repair hypergraphs and derive locality and
+  matching/transversal formulas.
+- Validation: focused compilation and full `nix develop --command lake build RepairCodes` pass
+  without warnings. Load-bearing determinant, projective-uniqueness, four-circuit, and mixed-family
+  independence theorems have axiom profile exactly `[propext, Classical.choice, Quot.sound]`.

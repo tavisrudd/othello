@@ -9,7 +9,7 @@
 -- orthogonality in `OuterDual`. The code-derived q9 axis repair hypergraph is
 -- landed with exact `ν=3, τ=5`; the uniform characteristic-three
 -- `[2q+1,4,q-1]` code parameters are landed, and seed-and-lift remains.
-import FiniteGeom.AxisTwistedCubic
+import FiniteGeom.AxisTwistedCubicCircuits
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed
 import RepairCodes.Q9Affine

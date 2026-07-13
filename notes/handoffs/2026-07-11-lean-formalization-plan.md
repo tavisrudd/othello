@@ -9,9 +9,11 @@ is now concrete with full `[10,4,6]₉` parameters, dual distance four, encoder 
 coefficient faithfulness; outer-dual membership is proved directly from concatenation
 orthogonality. The concrete q9 repair hypergraph is now code-derived and 3-uniform; identifying
 it with the affine-line hypergraph and proving `ν=3, τ=5` is complete. The uniform
-characteristic-three code parameters `[2q+1,4,q−1]_q` are now fully proved. The remaining
-uniform-family lead is the size-at-most-four circuit classification and its all-symbol locality /
-`τ>ν` consequences for `q≥9`.
+characteristic-three code parameters `[2q+1,4,q−1]_q` are now fully proved. The small-circuit
+algebra is also landed: axis triples are circuits; the three-cubic/one-axis determinant and unique
+projective completion are exact; all other mixed triples and the two-cubic/two-axis four-family are
+independent. The remaining uniform-family lead is packaging this classification over arbitrary
+coordinate sets and deriving all-symbol locality / `τ>ν` for `q≥9`.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -198,6 +200,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/MomentCurve.lean` | moment-curve / NRC general position via Vandermonde: `momentCurve`, `momentCurve_linearIndependent` (square family), `momentCurve_linearIndependent_of_card_le` (any distinct family of size `≤n`), `twistedCubic_linearIndependent` (`n=4`, no four coplanar), `twistedCubic_span` (four distinct cubic points span `𝔽⁴`); **hyperplane sections**: `formPoly` + `momentCurve_section_le` — the sharp "plane meets twisted cubic in `≤3` points" `T_q` bound |
 | `FiniteGeom/ColumnCode.lean` | projective systems as codes over a general `Fintype` index `ι` (`columnCode` for a point system `P : ι → 𝔽^k`), `sectionCount`, weight↔section identity, `le_columnCode_minDist` (all sections `≤ s` ⇒ `card ι − s ≤ d`), `columnCode_minDist_le`, `columnCode_minDist_eq` (`d = card ι − max section`), `finrank_columnCode` (`dim = k` when points span) — the geometric-distance bridge for the whole geometric-code lane. (`minDist`/`le_minDist`/`minDist_le_hammingNorm` in `Code.lean` generalized `Fin n → ι`, backward-compatible, so the `S_q` point system can be indexed by the natural `𝔽 ⊕ 𝔽 ⊕ Unit`.) |
 | `FiniteGeom/AxisTwistedCubic.lean` | explicit `S_q=T_q∪L_q` on `𝔽 ⊕ 𝔽 ⊕ Unit`; axis/cubic section split; characteristic-three Frobenius bound; exact maximum section `q+2`; direct four-vector spanning proof (including `q=3`); strict-trust `axisTwistedCubic_code_parameters : [2q+1,4,q−1]_q` |
+| `FiniteGeom/AxisTwistedCubicCircuits.lean` | field-generic determinant for three cubic points plus an arbitrary axis vector; characteristic-three unique projective completion `(0:s+t+u:st+su+tu:0)`; normalized completing point in the actual `S_q`; minimal four-circuit proof; axis three-circuits; and independence of every other mixed triple plus the two-cubic/two-axis four-family |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
 | `FiniteGeom/Repair.lean` | complete bounded-radius repair hypergraph from actual dual-word supports: `wordSupport`, `repairHypergraph`; exact edge cardinality/nonemptiness from dual distance; repair edge → dependent columns/zero determinant, and the converse at the minimum size allowed by dual distance. |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
@@ -223,12 +226,35 @@ matroid independence remains in Phase 2.
 
 1. **Phase 1 step 4, repair half:** the code-parameter half is closed by
    `FiniteGeom/AxisTwistedCubic.lean`: explicit `S_q`, exact maximum section `q+2`, dimension `4`,
-   and distance `q−1`, for every finite characteristic-three field (slightly stronger than the
-   paper's `q≥9` range). Next prove the size-`≤4` circuit classification: axis triples and
-   `{C(s),C(t),C(u),(0:e₁:e₂:0)}` with `e₁=s+t+u`, `e₂=st+su+tu`. Then derive exact locality
-   two/three and the per-orbit matching/transversal formulas; the `τ` formulas expose `Z₃(q)` as a
-   named hypothesis/import boundary and yield all-symbol `τ>ν` for `q≥9`.
+   and distance `q−1`, for every finite characteristic-three field. The algebraic small-circuit
+   classification is closed in `FiniteGeom/AxisTwistedCubicCircuits.lean`, including the stronger
+   arbitrary-axis determinant equation and projective uniqueness. Next package those family-level
+   results as an exact classification of arbitrary size-`≤4` coordinate sets, bridge them to the
+   complete repair hypergraph, and derive exact locality two/three and the per-orbit
+   matching/transversal formulas. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
+   boundary and yield all-symbol `τ>ν` for `q≥9`.
 2. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
+
+### Discovery track for final review
+
+Keep a running classification of consequences noticed during the remaining formalization, and
+return to it under **C98** after the trust audit: proved corollaries, cheap formal extensions,
+genuine paper strengthenings, applications, and speculative directions must be distinguished
+explicitly.
+
+- **Proved strengthening:** the exact `[2q+1,4,q−1]_q` code-parameter theorem holds over every
+  finite characteristic-three field, including `q=3`; the paper only needs `q≥9` for its uniform
+  all-symbol repair gap.
+- **Proved reusable extension:** for three distinct cubic parameters and an arbitrary axis vector
+  `(0,e₁,e₂,0)`, dependence is equivalent to
+  `e₁(st+su+tu)=e₂(s+t+u)`, a field-generic statement strictly more general than the displayed
+  characteristic-three completion.
+- **Proved structural consequence:** in characteristic three the symmetric coordinates
+  `(s+t+u,st+su+tu)` cannot both vanish for distinct `s,t,u`; hence the completing axis point is
+  projectively unique, and the normalized point already present in `S_q` forms a genuine
+  four-circuit.
+- **Final question:** identify anything else that is a corollary, cheap extension, surprise,
+  implication, application, or plausible novel direction arising from the completed formalization.
 
 **Landed 2026-07-11:** (a) the eval-code stepping stone — RS instances over `ZMod 7` and the
 target `GaloisField 3 2 = 𝔽₉` (`FiniteGeom/EvalCodeInstance.lean`), discharging the eval-code MDS
