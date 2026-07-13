@@ -688,3 +688,22 @@ that discharges the transfer interface's finite fields from it:
   orbit formulas/asymptotic ratios, not for the headline all-symbol separation.
 - Validation: the invariant target is warning-free; the all-symbol theorem's axiom profile is
   exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (Phase 1 completion and strict-gate review)
+
+- Proved the sharp nucleus and finite-axis repair formulas, the exact q9 row table, and the
+  algebraic four-edge rainbow matching certificate without `native_decide`.
+- Constructed the actual concatenated submodule and proved its dimension, distance lower bound,
+  exact complete-repair-hypergraph transfer, locality, row invariants, and `7ν≤4τ`.
+- Corrected the inner-distance premise: the full `[19,4,8]₉` code has global dual distance three
+  because of axis triples. The transfer theorem needs only `r+1<2*d(I⊥)`, so radius three remains
+  valid. This is a genuine generalization, not a paper defect.
+- Closed the script-only diagnostics with kernel-checked proofs: exact `28`, `36+8`, `36+12`
+  repair counts and the `120`/`84` small-circuit support inventory.
+- Ran the strict adversarial review recorded in
+  `notes/2026-07-12-axis-twisted-cubic-adversarial-review.md`. The finite theorem chain passes with
+  only the standard foundational axiom profile. The PGL orbit provenance is context-only; the
+  outer trace bridge and asymptotically good outer-family existence remain explicit external
+  mathematics before an unconditional asymptotic theorem can be claimed.
+- Updated the research ledger and registry to match the formal boundary and added
+  `lean/RepairCodes/TRUST.md` as the stable trust-chain description.

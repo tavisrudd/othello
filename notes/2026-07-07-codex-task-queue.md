@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C101.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C103.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -87,6 +87,12 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    checked eight-point witness or a checked exhaustive nonexistence certificate, then synchronize
    the exact Lean theorem and paper. Track in the
    [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
+9. **RepairCodes outer trace bridge — C102.** Formalize the trace-pairing implication from a
+   conventional extension-field outer dual-distance hypothesis to the coordinate-free functional
+   dual gate. Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
+10. **RepairCodes asymptotic outer family — C103.** Import with exact citation or formalize an
+    asymptotically good outer family with positive primal and dual relative distance, then derive
+    the unconditional formal family corollary. Same handoff.
 
 ## Open tasks
 
@@ -97,6 +103,18 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   accepted endpoint is an exact strict-trust Lean theorem plus synchronized manuscript/PDF,
   verifier provenance, trust manifest, and papers index. Track in the
   [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
+
+- **C102 [OPEN 2026-07-12] — extension-field trace bridge for RepairCodes.** Prove that the
+  standard nondegenerate trace pairing sends the intended `GF(9^4)`-linear outer dual-distance
+  hypothesis to `HasFunctionalDualDistanceAtLeast`. This is the first genuine math blocker after
+  the finite axis–twisted-cubic seed-and-lift theorem. Track in the
+  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
+
+- **C103 [OPEN 2026-07-12] — asymptotically good RepairCodes outer family.** State an exact cited
+  tower/code theorem (or formalize it) giving positive primal and dual relative distance over the
+  required fixed outer alphabet, quarantine only the irreducible imported statement, and prove the
+  final Lean family corollary. Track in the
+  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C99 [OPEN — UNBLOCKED 2026-07-12] — post-formalization second-order application revisit.** The
   completed declaration graph and adversarial review produced equality-in-charge, linewise
@@ -169,10 +187,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   rebuild the paper PDF. Track the formalization gate in the
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
-- **C98 [BLOCKED — POST-GATE] — theorem-mining and novelty review.** After the formalization closes,
-  systematically extract cheap corollaries, stronger parameter ranges, reusable generalizations,
-  surprises, implications, and applications exposed by the proofs; separate formally established
-  consequences from novelty claims requiring a literature audit. Report through the
+- **C98 [REPORTED 2026-07-12] — theorem-mining and novelty review.** The completed proof graph
+  yielded the sharp `r+1<2d(I⊥)` transfer gate, a coordinate-free symbol-module extension, exact
+  row-distribution transfer, and a square-root-of-minus-one rainbow certificate beyond q9.
+  Literature novelty remains unaudited. See the classified results in the
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C85 [REPORTED 2026-07-12] — quadratic split-route obstruction.** Chevalley–Warning now proves

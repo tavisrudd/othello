@@ -1,23 +1,15 @@
 # Lean formalization plan — the -10 / -11 PROVED corpus
 
 **Date**: 2026-07-11
-**Status**: IN PROGRESS. Plan approved (`yc` under `mi`, 2026-07-11); the three §5 decisions
-are resolved. **Phase 0 `FiniteGeom` MVP is complete** (weight + hypergraph `ν`/`τ` +
-linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1's transfer lemma +
-`δ_x = τ` identity landed** — see §7 for the current status table. The real `q = 9` inner code
-is now concrete with full `[10,4,6]₉` parameters, dual distance four, encoder equivalence, and
-coefficient faithfulness; outer-dual membership is proved directly from concatenation
-orthogonality. The concrete q9 repair hypergraph is now code-derived and 3-uniform; identifying
-it with the affine-line hypergraph and proving `ν=3, τ=5` is complete. The uniform
-characteristic-three code parameters `[2q+1,4,q−1]_q` are now fully proved. The small-circuit
-algebra is also landed: axis triples are circuits; the three-cubic/one-axis determinant and unique
-projective completion are exact; all other mixed triples and the two-cubic/two-axis four-family are
-independent. Those circuits now feed the natural-index code-derived repair hypergraph end to end:
-axis coordinates have explicit two-helper edges, cubic coordinates have explicit three-helper
-edges, and exact locality two/three (hence all-symbol locality three) is Lean-proved. The uniform
-all-symbol strict gap `τ>ν` for `q≥9` is now also Lean-proved directly from the exact repair
-clutters. The remaining uniform-family work is the sharper displayed per-orbit formulas/bounds and
-the conditional seed-and-lift packaging.
+**Status**: PHASE 1 COMPLETE under the strict trust gate. The uniform axis–twisted-cubic code,
+small-circuit classification, exact repair clutters and sharp invariants, q=9 `[19,4,8]₉` row and
+edge-count table, `120`/`84` support inventory, and conditional finite seed-and-lift theorem are
+Lean-proved. The full seed has global dual distance three; transfer uses the correct weaker gate
+`r+1 < 2*d(I⊥)`, so radius three remains valid. The strict-gate review is
+[recorded separately](../2026-07-12-axis-twisted-cubic-adversarial-review.md), and the stable trust
+boundary is in [`lean/RepairCodes/TRUST.md`](../../lean/RepairCodes/TRUST.md). Remaining work for an
+unconditional *asymptotic* family theorem is external mathematics: the trace-duality bridge into
+the functional-dual gate and a rigorously cited/formalized asymptotically good outer family.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -94,7 +86,7 @@ self-contained).
 | `PG(n,q)` | `Projectivization` — partial | thin wrapper |
 | linear code, dual, min distance, MDS | `CodingTheory` has Hamming/`Code`; MDS/dual-distance/generator-matrix — **thin/absent** | **build** a small generator-matrix + dual-distance layer |
 | hypergraph transversal `τ` / matching `ν` | `SimpleGraph` matching partial; hypergraph `τ`/fractional — absent | **build** minimal `Finset`-of-`Finset` `ν`/`τ` |
-| `PGL(2,q)`, symmetric cube | `GeneralLinearGroup`, `MulAction` present; `Sym^3` — absent | **build** the degree-3 rep (the Python `sym3_matrix` is the spec) |
+| `PGL(2,q)`, symmetric cube | `GeneralLinearGroup`, `MulAction` present; `Sym^3` — absent | not needed by the RepairCodes proof chain: define the full axis directly; retain the orbit derivation as optional context |
 | twisted cubic / NRC | absent | **build** on the code layer |
 | zero-sum-free / cap sets | absent (and IMPORT-tier) | axiom only |
 
@@ -117,17 +109,19 @@ FiniteGeom (codes + hypergraph τ/ν)  ── critical path
 `RepairCodes` Theorem 1.1.
 
 **Phase 1 — `RepairCodes` vertical slice (recommended first deliverable).** In order:
-1. `[PROVE]` transfer lemma (§1.4): inner `d(I⊥)=r+1`, outer `d(O⊥)≥r+2` ⇒ every `q`-weight-`≤r+1`
+1. `[PROVE]` transfer lemma (§1.4): `r+1 < 2*d(I⊥)` plus the outer functional-dual gate ⇒ every
+   dual word of weight `≤r+1`
    dual word is confined to one inner block ⇒ the complete radius-`r` repair hypergraph transfers.
    Clean dual-weight/trace argument — the crux novelty, and it proves in Lean without any imported
    analytic input. **This is the single highest-value Lean target in the whole corpus.**
 2. `[PROVE]` `δ_x = τ(𝓑_x)` completion-distance invariant (§3 / completion-core Prop 2.2, 2.4).
-3. `[CERT]` the `q=9` full-orbit seed: `C_orb=[19,4,8]_9`, the three `(ν,τ)=(4,7),(6,12),(7,13)`
-   rows, `minimal_circuits=[(3,120),(4,84)]`, all-symbol locality ≤3 — generated from
-   `q9_pgl_orbit_seed.py`, checked by a rules-only validator (not `native_decide`).
+3. `[PROVE]` the `q=9` axis–twisted-cubic seed: `C_orb=[19,4,8]_9`, the three
+   `(ν,τ)=(4,7),(6,12),(7,13)` rows, exact repair counts, `120`/`84` circuit-support inventory,
+   and all-symbol locality ≤3. This closed more strongly than the planned certificate route.
 4. `[PROVE]` uniform `q=3^h` theorem (§1.5.1): `C(S_q)=[2q+1,4,q-1]_q`, all-symbol `τ>ν`.
-5. `[PROVE, conditional]` seed-and-lift (§1.4/§1.5): seed + transfer + IMPORTed outer family ⇒
-   asymptotically-good fixed-alphabet family with the same invariant distribution.
+5. `[PROVE, conditional]` seed-and-lift (§1.4/§1.5): construct the finite concatenated code and
+   transfer its complete repair hypergraphs under explicit outer-code hypotheses. The finite
+   theorem is complete; the asymptotic outer-family instantiation remains external.
 
 **Phase 2 — `CompletionCore`.** completion core closure (Prop 1.1), sharp deletion radius (Thm 2.1),
 relative multiple saturation (Prop 5.3), the §4 example families (each `[CERT]` or short `[PROVE]`).
@@ -158,8 +152,9 @@ code/hypergraph layer against a real theorem before the other three libraries co
    guard):** the abstract layer is not done until it is *discharged by at least one concrete instance*
    (the `q=9` seed), else the theorem is vacuous — track the instance as part of Phase 1, not "later".
 
-2. **Single-`q` tables — CERT, no `native_decide`.** Hold the `CertData/Q13` bar: generated
-   certificate + independent rules-only checker, `#print axioms` clean. Confirmed.
+2. **Single-`q` tables — no `native_decide`.** The original fallback was a generated certificate.
+   The q=9 table closed more strongly by algebraic proofs plus tiny kernel-`decide` checks, with
+   `#print axioms` clean.
 
 3. **Imported results — most rigorous review-ready boundary.** In priority order:
    - **Prove, don't import, whenever feasible.** The *elementary* inputs — Vandermonde independence,
@@ -209,10 +204,12 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/Repair.lean` | coordinate-type-generic complete bounded-radius repair hypergraph from actual dual-word supports; paper-facing inclusion-minimal repair clutter; radius monotonicity; exact edge cardinality/nonemptiness from dual distance; clutter invariance; repair edge → dependent columns/zero determinant; global-distance, full-support, circuit-local, and reindexed converses. |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` discharges coefficient faithfulness internally; field trace is only an optional coordinate presentation. |
-| `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
+| `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`; `hasFunctionalDualDistanceAtLeast_top` proves the gate is nonvacuous. |
 | `RepairCodes/Q9Seed.lean` | real inner seed: full `[10,4,6]₉`, `d(C₀⊥)=4`, and block-local transfer; concrete 3-uniform `q9AxisRepairHypergraph`; generalized four-column determinant; exact edge characterization as the distinct zero-sum triples in `𝔽₉`. |
-| `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; exact embedded identification of the actual q9 repair hypergraph; final code-derived `matchingNumber=3`, `transversalNumber=5` (no `native_decide`). |
-| `RepairCodes/AxisTwistedCubic.lean`, `AxisTwistedCubicInvariants.lean` | natural-index generator/row-code presentation of `S_q`; circuit-local bridge; exact cubic repair classification; exact locality two/three; proper-color algebra; cubic-orbit `τ=q−2`, `ν≤(q−1)/2`, hence strict `τ>ν` for `q≥9`. |
+| `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; exact embedded identification of the actual q9 repair hypergraph; `ν=3`, `τ=5`; exact twelve-line/eight-avoiding-zero counts. |
+| `RepairCodes/AxisTwistedCubic.lean`, `AxisTwistedCubicInvariants.lean` | natural-index row code; exact global dual distance three; exact locality two/three and complete repair classifications; sharp nucleus/generic-axis formulas; cubic `τ=q−2`, rainbow lower bound and matching upper bound; exact cubic repair count `choose(q−1,2)`; all-symbol `τ>ν` for `q≥9`. |
+| `RepairCodes/Q9Uniform.lean`, `Q9CircuitInventory.lean` | kernel-checked q9 row table `(4,7),(6,12),(7,13)`; exact `28`, `36+8`, `36+12` repair counts; exact `120` axis-three / `84` completed-cubic-four circuit-support inventory; no generated or native certificate. |
+| `RepairCodes/SeedLift.lean`, `Q9SeedLift.lean` | actual concatenated submodule; dimension and distance lower bound; exact equality of complete repair hypergraphs under `r+1<2*d(I⊥)` and the outer functional-dual gate; exact `ν`/`τ` transfer; q9 `[19N,4K,≥8D]₉`, all-symbol locality three, exact lifted row table, and `7ν≤4τ`. |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -220,48 +217,23 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 
 ### Open next steps (in order)
 
-**Closed path:** the real q=9 block-local transfer is `q9Inner_transfer_ofOuterCode`; the earlier
-“Chen–Ling–Xing decomposition” attribution was unverified and unnecessary because `OuterDual.lean`
-proves the functional outer-dual membership directly (archive companion has the correction trail).
+**Phase 1 is closed.** The q9 seed, uniform formulas, finite seed-and-lift theorem, strict trust
+audit, and paper/registry synchronization are complete.
 
-**Closed path:** the concrete q9 code-derived repair hypergraph has
-`matchingNumber=3`, `transversalNumber=5` (`q9AxisRepairHypergraph_invariants`), the first actual
-code-derived strict `τ>ν` instance. The separate CompletionCore bridge from surviving circuits to
-matroid independence remains in Phase 2.
-
-1. **Phase 1 step 4, repair half:** the code-parameter and exact-locality halves are closed by
-   `FiniteGeom/AxisTwistedCubic.lean`: explicit `S_q`, exact maximum section `q+2`, dimension `4`,
-   and distance `q−1`, and by `RepairCodes/AxisTwistedCubic.lean`: explicit locality two on the
-   axis orbit, locality three on the cubic orbit, and all-symbol locality three, for every
-   finite characteristic-three field. The algebraic small-circuit
-   classification is closed in `FiniteGeom/AxisTwistedCubicCircuits.lean`, including the stronger
-   arbitrary-axis determinant equation and projective uniqueness. The remaining step is the exact
-   arbitrary size-four repair classification needed for the per-orbit matching/transversal
-   formulas. The cubic orbit is closed: every radius-three repair is two other cubic points plus
-   their unique normalized axis completion; the completion coloring is proved proper;
-   `τ_T=q−2`, `ν_T≤(q−1)/2`, and strict `τ_T>ν_T` for `q≥9` are code-derived theorems.
-   The paper-facing axis clutter is also exact: its minimal edges are precisely pairs of other
-   axis points and three-cubic completion triples. A weighted matching count gives `6ν≤5q`, while
-   the complete graph of axis-pair repairs alone forces `τ≥q−1`; together with the cubic result this
-   proves the unconditional, code-derived headline
-   `axisTwistedCubic_allSymbol_tau_gt_nu` for `q≥9`, without a cap-set import. The remaining
-   repair-invariant work is the sharper nucleus/generic-axis exact formulas and the cubic matching
-   lower bound if those displayed sharpness statements remain claimed as fully formalized.
-   The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
-   boundary and yield all-symbol `τ>ν` for `q≥9`.
-   **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing
-   clutters. Lean proves that deleting redundant supersets preserves `τ` unconditionally and `ν`
-   for nonempty edges. Every `S_q` repair edge is nonempty directly from its nonzero target column,
-   so both invariants of the complete all-support hypergraph equal those of its minimal clutter
-   even at radius three, where the global dual-distance shortcut is unavailable.
-2. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
+1. **Outer trace bridge:** formalize the standard trace pairing that maps a suitable
+   `GF(9^4)`-linear dual-distance hypothesis to `HasFunctionalDualDistanceAtLeast`. This is the
+   first remaining mathematical input for an unconditional extension-field formulation.
+2. **Outer family:** either formalize the required asymptotically good outer family with positive
+   primal and dual relative distance, or quarantine an exact cited theorem and prove the Lean
+   family corollary from it. Until then, the asymptotic statement remains conditional.
+3. **Optional context only:** formalize the symmetric-cube PGL orbit description of the axis if a
+   later paper needs that provenance in its proof chain. It is not used by the code construction.
+4. Continue Phases 2–4 per §4 as separate tracks; they are not blockers for RepairCodes Phase 1.
 
 ### Discovery track for final review
 
-Keep a running classification of consequences noticed during the remaining formalization, and
-return to it under **C98** after the trust audit: proved corollaries, cheap formal extensions,
-genuine paper strengthenings, applications, and speculative directions must be distinguished
-explicitly.
+Final classification after the strict trust audit; literature novelty remains unverified unless
+explicitly stated otherwise.
 
 - **Proved strengthening:** the exact `[2q+1,4,q−1]_q` code-parameter theorem holds over every
   finite characteristic-three field, including `q=3`; the paper only needs `q≥9` for its uniform
@@ -281,8 +253,21 @@ explicitly.
 - **Proved reusable extension:** a selected circuit gives a repair edge from its own full-support
   relation, even when smaller circuits elsewhere make the global dual-distance converse unusable.
   The reindexed form lets geometric circuit proofs use their natural finite enumeration.
-- **Final question:** identify anything else that is a corollary, cheap extension, surprise,
-  implication, application, or plausible novel direction arising from the completed formalization.
+- **Proved transfer strengthening:** complete repair-hypergraph preservation needs only
+  `r+1<2*d(I⊥)`, not `d(I⊥)=r+1`. This covers mixed-locality seeds such as the full q9 code, whose
+  global dual distance is three even though radius-three repair transfer is exact.
+- **Proved coordinate-free extension:** the outer alphabet may be any finite-dimensional symbol
+  module with an encoder equivalence; extension-field trace coordinates are one optional
+  presentation, not part of the finite theorem.
+- **Proved exact-distribution consequence:** the lift preserves every inner row exactly, so the
+  three q9 orbit rows survive blockwise rather than only their worst-case `7/4` ratio.
+- **Proved broader q9 certificate:** the four-disjoint-repair construction works over any
+  characteristic-three field containing a square root of `−1`; order nine is used only to make
+  the matching bound sharp.
+- **Possible application / novelty candidate:** the exact complete-hypergraph transfer can be
+  reused for any inner seed whose repair statistics are known, including mixed-locality seeds.
+  Whether this formulation is new in concatenated-LRC literature still requires a specialist
+  citation-chain audit.
 
 **Landed 2026-07-11:** (a) the eval-code stepping stone — RS instances over `ZMod 7` and the
 target `GaloisField 3 2 = 𝔽₉` (`FiniteGeom/EvalCodeInstance.lean`), discharging the eval-code MDS

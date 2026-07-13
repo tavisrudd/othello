@@ -70,12 +70,9 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   (`lean/RelativeConicArcs/`).
 - **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data and
   semantic arc extension are Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
-- **One exception to the axiom-clean bar:** a single `native_decide` in
-  `DihedralSchreier/KleinFourBridge.lean` (`explicit_pairProducts`, a 4-element Klein-four
-  enumeration) — an isolated witness with **no downstream dependents** (the V₄→K₄ reduction itself is
-  clean); clear it to `decide`/manual before the dihedral paper ships. Everything else, including the
-  `CertData` Q11/Q13 certs, is `native_decide`-free (the certs use a kernel-`decide` reflection route;
-  `native_decide` was benchmarked and rejected to keep the axiom profile clean).
+- **Axiom-clean bar:** `KleinFourBridge.explicit_pairProducts` now uses kernel `decide`; the former
+  `native_decide` exception is closed. The coding/LRC chain is likewise `native_decide`-free; see
+  `lean/RepairCodes/TRUST.md` and its dated adversarial review.
 - **Release gate:** every lemma/proof must be Lean-formalized to the full `lean/TRUST.md` standard —
   `sorry`-free, `#print axioms` clean (no `sorryAx`/`native_decide`), statements adequate to the
   claim, with a trust-chain note — before its paper is published. The arcs-paper library is now
@@ -156,8 +153,13 @@ encodes result *type*; formalization status is in the proof-location column.
 | lem-nu-tau          | ν ≤ τ                                    | matching ≤ transversal (hypergraph base)           | completion (base)   | lean `FiniteGeom/Hypergraph.lean:53` `matching_card_le_transversal_card` |
 | thm-frame-rigidity  | Frame-graph semilinear rigidity (N1)     | Aut = ambient semilinear group, q ≥ 13             | continuation        | note (Thm 7.4) [plan] |
 | thm-complex-recon   | Continuation-complex reconstruction (N2) | recovers plane + secants + arc                     | continuation        | note (Thm 8.4) [plan; SOFTEN] |
-| lem-transfer        | Concatenation transfer lemma             | bounded-weight dual-distance transfer              | coding (unhomed)    | lean `RepairCodes/Transfer.lean:136` `transfer_lemma` |
-| thm-gf9-dualdist    | GF9 seed [10,4,6]₉ dual distance         | inner seed minimum distance = 6                    | coding (unhomed)    | lean `RepairCodes/Q9Seed.lean:657` `q9InnerCode_minDist` |
+| lem-transfer        | Complete repair-hypergraph transfer      | exact blockwise preservation when `r+1<2d(I⊥)` and the outer functional-dual gate holds | coding (unhomed) | lean `RepairCodes/SeedLift.lean` `repairHypergraph_concatenatedCode_eq_embed` |
+| thm-gf9-seed10      | GF9 seed `[10,4,6]₉`                     | exact minimum distance 6 and dual distance 4       | coding (unhomed)    | lean `RepairCodes/Q9Seed.lean` `q9InnerCode_minDist`, `q9InnerCode_dualDist` |
+| thm-axis-uniform-code | Uniform axis–twisted-cubic code       | `[2q+1,4,q−1]₍q₎` in finite characteristic three  | coding (unhomed)    | lean `FiniteGeom/AxisTwistedCubic.lean` `axisTwistedCubic_code_parameters` |
+| thm-axis-q9-table   | Exact q9 all-symbol repair table         | `[19,4,8]₉`; rows `(ν,τ)=(4,7),(6,12),(7,13)`; repair counts `28`, `36+8`, `36+12` | coding (unhomed) | lean `RepairCodes/Q9Uniform.lean` `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` |
+| thm-axis-q9-circuits | Exact q9 small-circuit inventory       | 120 axis three-circuit supports and 84 completed cubic four-circuit supports | coding (unhomed) | lean `RepairCodes/Q9CircuitInventory.lean` `q9_smallCircuit_support_counts` |
+| thm-axis-uniform-repair | Uniform all-symbol separation       | exact axis formulas, cubic bounds, and `τ>ν` at every coordinate for `q≥9` | coding (unhomed) | lean `RepairCodes/AxisTwistedCubicInvariants.lean` `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `axisTwistedCubic_allSymbol_tau_gt_nu` |
+| thm-axis-q9-lift    | Conditional finite q9 seed-and-lift     | `[19N,4K,≥8D]₉`, locality 3, exact row transfer, `7ν≤4τ` under explicit outer hypotheses | coding (unhomed) | lean `RepairCodes/Q9SeedLift.lean` `q9UniformLiftCode_parameters`, `q9UniformLiftCode_repairHypergraph`, `q9UniformLiftCode_ratio` |
 | lem-twisted-cubic   | Twisted-cubic / NRC independence         | moment-curve columns linearly independent          | coding/completion   | lean `FiniteGeom/MomentCurve.lean:92` `twistedCubic_linearIndependent` |
 | thm-singleton-mds   | Singleton bound / MDS                    | minDist + dim ≤ n + 1; `IsMDS` predicate           | coding (base)       | lean `FiniteGeom/Code.lean:222` `singleton_bound` |
 | comp-a344227        | A344227 a(14..17)                        | queens Node-Kayles nimbers 0, 1, 0, 2              | oeis:A344227        | solver `rust/src/queens/solver/nimber.rs` |

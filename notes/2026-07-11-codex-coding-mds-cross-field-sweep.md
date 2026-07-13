@@ -404,22 +404,23 @@ be the nine finite twisted-cubic points, and let (L) be the projective line
 L=\{(0:y:z:0):(y,z)\ne(0,0)\}.
 \]
 
-**[PROVED]** In characteristic three, (L) is the full ten-point projective
-orbit of (x=e_2) under the symmetric-cube action of (PGL(2,9)).  The affine
-stabilizer of (x) has order (9\cdot8=72), so the orbit has
-(720/72=10) points and fills (L).
+**[COMPUTED-EXACT / CONTEXT ONLY]** The symmetric-cube (PGL(2,9))-orbit of
+(x=e_2) is the ten-point line (L): the affine stabilizer has order
+(9\cdot8=72), so the orbit has (720/72=10) points.  This provenance is
+checked by the replay script below but is not in the Lean dependency chain;
+the formal construction defines the full projective axis (L) directly.
 
 Let (C_{\rm orb}) be the row-space code with the 19 points (T\cup L) as
 generator columns.
 
-**[PROVED]**
+**[LEAN-PROVED]**
 
 \[
 C_{\rm orb}=[19,4,8]_9.
 \]
 
 Its complete inclusion-minimal repair hypergraphs at locality at most three
-have the following exact, hand-proved invariants:
+have the following exact Lean-proved invariants and edge counts:
 
 | coordinate type | count | minimal repairs | ν | τ |
 |---|---:|---:|---:|---:|
@@ -433,7 +434,7 @@ Thus every coordinate satisfies
 \tau>\nu,\qquad \min_i\tau_i/\nu_i=7/4.
 \]
 
-**[PROVED]** The complete small-circuit inventory is
+**[LEAN-PROVED]** The complete small-circuit support inventory is
 
 \[
 120={10\choose3}\text{ three-circuits on }L,
@@ -449,9 +450,10 @@ hypergraph splits over disjoint helper sets as (K_9) plus either the affine
 lines of (AG(2,3)) or the eight-edge linear triple system obtained by deleting
 the four antipodal pairs.  These give the other two rows of the table.
 
-**[PROVED]** Concatenating this seed with
-any asymptotically good 𝔽_{9^4}-linear outer family of dual distance at
-least five gives a fixed-alphabet family
+**[LEAN-PROVED, CONDITIONAL FINITE THEOREM]** Let (O) be an outer
+(𝔽_9)-linear symbol code with symbol length (N), base-field dimension (4K),
+symbol minimum distance at least (D), and coordinate-free functional-dual
+distance at least five.  Concatenating (O) with this seed gives
 
 \[
 [19N,4K,\ge8D]_9
@@ -464,8 +466,15 @@ every coordinate, and
 \tau_i/\nu_i\ge7/4
 \]
 
-for every coordinate.  The bounded-repair transfer theorem makes this a
-statement about the complete repair hypergraph, not chosen repair groups.
+for every coordinate.  The bounded-repair transfer theorem proves equality
+of the complete repair hypergraph with the embedded inner hypergraph, not
+merely preservation of chosen repair groups.  The standard trace-duality
+bridge that turns a suitable 𝔽_{9^4}-linear outer dual-distance hypothesis
+into this coordinate-free functional-dual gate, and the existence of an
+asymptotically good outer family satisfying it, remain cited prose inputs.
+Thus the fixed-alphabet asymptotic corollary is conditional on those external
+outer-family facts; the finite seed-and-lift theorem itself has no added
+axioms.
 
 Replay from `/home/tavis/src/othello`:
 
@@ -480,7 +489,8 @@ Expected hash:
 377a5d207853d12e77479ea3768f3bc784e656bc38ef360c60f062ac230fcc0d
 ```
 
-Key expected output:
+Key expected output (independent computational corroboration, not the Lean
+trust path):
 
 ```text
 PGL=720 orbit_dedup=10 n=19 rank=4 d=8
@@ -497,7 +507,7 @@ The (q=9) seed is the first member of a uniform family.  Let (q=3^h),
 (h\ge2), retain the (q) finite cubic points (T_q), and let (L_q) be the
 full (q+1)-point axis (X_0=X_3=0).
 
-**[PROVED]** The generator system (S_q=T_q\cup L_q) defines
+**[LEAN-PROVED]** The generator system (S_q=T_q\cup L_q) defines
 
 \[
 C(S_q)=[2q+1,4,q-1]_q.
@@ -508,7 +518,7 @@ point.  A plane containing (L_q) has equation (AX_0+DX_3=0) and contains at
 most one finite cubic point because (t\mapsto t^3) is bijective.  The latter
 bound is attained, so the largest plane section has (q+2) points.
 
-The only circuits of size at most four are triples on (L_q) and
+**[LEAN-PROVED]** The only circuits of size at most four are triples on (L_q) and
 
 \[
 \{C(s),C(t),C(u),(0:e_1:e_2:0)\},
@@ -518,7 +528,7 @@ The only circuits of size at most four are triples on (L_q) and
 Consequently axis coordinates have exact locality two and cubic coordinates
 exact locality three.
 
-Let (Z_3(q)) be the maximum cap size in (AG(h,3)).  For the nucleus point
+**[LEAN-PROVED]** Let (Z_3(q)) be the maximum cap size in (AG(h,3)).  For the nucleus point
 (N_\infty=(0:0:1:0)),
 
 \[
@@ -542,7 +552,7 @@ is a cap avoiding zero, giving transversal (q-1-Z_3(q)).  The remaining axis
 helpers form (K_q), and its invariants add because the helper grounds are
 disjoint.
 
-For a cubic coordinate, the repair hypergraph is a properly edge-coloured
+**[LEAN-PROVED]** For a cubic coordinate, the repair hypergraph is a properly edge-coloured
 (K_{q-1}), with each graph edge augmented by its axis colour.  Hence
 
 \[
@@ -563,9 +573,12 @@ It follows uniformly that
        \ q=3^h\ge9.}
 \]
 
-Thus the concatenation theorem produces asymptotically good fixed-alphabet
-all-symbol families from every (S_q); (S_9) gives the best current small
-seed and the exact uniform ratio bound (\tau_i/\nu_i\ge7/4).
+The finite concatenation theorem therefore preserves the complete repair
+hypergraphs of every (S_q) under its explicit outer functional-dual gate.
+Subject to a cited asymptotically good outer family and the standard
+trace-duality bridge into that gate, this gives asymptotically good
+fixed-alphabet all-symbol families.  The (S_9) seed gives the exact uniform
+ratio bound (\tau_i/\nu_i\ge7/4).
 
 ### 1.5.2 Novelty boundary and name
 
