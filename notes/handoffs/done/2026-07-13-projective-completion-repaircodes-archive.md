@@ -103,3 +103,20 @@ Focused validation passes, and both printed headlines use only `propext`, `Class
 choom -n 1000 -- nix develop --command lake env lean \
   FiniteGeom/ProjectiveAxisTwistedCubicCircuits.lean
 ```
+
+## 2026-07-13 — independent C112 circuit/row replay
+
+Extended the independent verifier to enumerate all matroid circuits of total size at most five,
+derive the minimal helper clutters at radii three and four, and solve matching and transversal
+numbers exactly. It also computes `Z3(q)` independently by maximum triple-free subset search.
+
+```text
+q=3: repair_rows={cubic r3:(1,2), axis r3:(2,3), cubic r4:(1,2), axis r4:(2,3)}
+     circuits_le_5=20 Z3=2
+q=9: repair_rows={cubic r3:(4,8), axis r3:(7,13), cubic r4:(4,8), axis r4:(7,15)}
+     circuits_le_5=6072 Z3=4
+```
+
+Thus the proposed formulas survive both the smallest characteristic-three field and q=9 without
+assuming target transitivity or a selected repair family. This remains independent finite evidence;
+the general clutter equivalence and invariant formulas stay open under XH2–XH4.

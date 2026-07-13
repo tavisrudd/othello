@@ -16,10 +16,10 @@ Pareto-incomparable seed and asymptotic family.
 | Claim | Current status | Permitted wording |
 |---|---|---|
 | completed seed has parameters `[2q+2,4,q]_q` and exact global dual distance `3` | strict-trust Lean, independent q=3,9,27 replay/mutations, aggregate build, and XH1 passed | proved; not paper-promoted before C114 |
-| completed seed has exactly cubic and axis repair row types | proposed; q9 exhaustively checked | diagnostic conjecture only; no group-orbit claim |
-| radius-three rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-1-Z3(q))` | proposed; q9 checked | diagnostic conjecture only |
+| completed seed has exactly cubic and axis repair row types | proposed; q=3,9 exhaustively checked from circuits | diagnostic conjecture only; no group-orbit claim |
+| radius-three rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-1-Z3(q))` | proposed; q=3,9 checked by exact set packing/transversal | diagnostic conjecture only |
 | radius four exhausts the complete inner minimal port | generic rank-four proof obligation open | standard consequence if proved |
-| radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | proposed; q9 checked | diagnostic conjecture only |
+| radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | proposed; q=3,9 checked by exact circuit enumeration | diagnostic conjecture only |
 | q9 lift has rate `1/10` and eventual relative distance above every `c<351/1600` | arithmetic consequence conditional on prior gates | do not state as theorem yet |
 | theorem package is novel | targeted search found no exact construction | candidate contribution; no priority claim |
 
@@ -53,6 +53,10 @@ group, represented in Lean by `zeroSumCapNumber`.
   points `s,t`, cubic infinity, and axis point `s+t` form a four-circuit, and proves uniqueness of
   that normalized axis completion. The all-finite completion theorem remains the existing
   determinant result; the complete repair-clutter classification is still open.
+- The independent verifier now enumerates every circuit of size at most five at q=3 and q=9 and
+  solves the resulting matching and transversal problems exactly. It confirms all proposed
+  radius-three and radius-four rows, including the q=3 boundary. This is a refutation gate, not a
+  substitute for the general Lean proofs.
 
 ## Mandatory xhigh review checkpoints
 

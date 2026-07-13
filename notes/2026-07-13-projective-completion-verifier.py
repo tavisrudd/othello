@@ -11,7 +11,8 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass
-from itertools import product
+from functools import lru_cache
+from itertools import combinations, product
 
 
 @dataclass(frozen=True)
@@ -138,6 +139,109 @@ def section_distribution(f: GF3Extension, points: list[tuple[int, ...]]) -> Coun
     return Counter(sum(f.dot(a, p) == 0 for p in points) for a in projective_forms(f))
 
 
+def minimal_circuits_up_to_five(
+    f: GF3Extension, points: list[tuple[int, ...]]
+) -> list[tuple[int, ...]]:
+    """Independently enumerate all matroid circuits of size at most five."""
+    circuits = []
+    for size in range(3, 6):
+        for support in combinations(range(len(points)), size):
+            columns = [points[i] for i in support]
+            if rank(f, columns) == size:
+                continue
+            if all(rank(f, columns[:j] + columns[j + 1 :]) == size - 1 for j in range(size)):
+                circuits.append(support)
+    return circuits
+
+
+def matching_number(edge_masks: tuple[int, ...], vertex_mask: int) -> int:
+    incident = {
+        1 << v: tuple(e for e in edge_masks if e & (1 << v))
+        for v in range(vertex_mask.bit_length())
+    }
+
+    @lru_cache(None)
+    def solve(available: int) -> int:
+        if available == 0:
+            return 0
+        pivot = available & -available
+        best = solve(available ^ pivot)
+        for edge in incident[pivot]:
+            if edge & ~available == 0:
+                best = max(best, 1 + solve(available & ~edge))
+        return best
+
+    return solve(vertex_mask)
+
+
+def transversal_number(edge_masks: tuple[int, ...]) -> int:
+    incident_bits: dict[int, int] = {}
+    for i, edge in enumerate(edge_masks):
+        for v in range(edge.bit_length()):
+            if edge & (1 << v):
+                incident_bits[v] = incident_bits.get(v, 0) | (1 << i)
+
+    @lru_cache(None)
+    def solve(remaining: int) -> int:
+        if remaining == 0:
+            return 0
+        edge_index = (remaining & -remaining).bit_length() - 1
+        edge = edge_masks[edge_index]
+        return 1 + min(
+            solve(remaining & ~incident_bits[v])
+            for v in range(edge.bit_length())
+            if edge & (1 << v)
+        )
+
+    return solve((1 << len(edge_masks)) - 1)
+
+
+def zero_sum_cap_number(f: GF3Extension) -> int:
+    triples = [
+        sum(1 << x for x in triple)
+        for triple in combinations(range(f.q), 3)
+        if f.add(f.add(triple[0], triple[1]), triple[2]) == 0
+    ]
+    return max(
+        subset.bit_count()
+        for subset in range(1 << f.q)
+        if all(subset & edge != edge for edge in triples)
+    )
+
+
+def assert_repair_rows(f: GF3Extension, points: list[tuple[int, ...]]) -> None:
+    """Exhaustively check the radius-three/four clutter rows for q=3,9."""
+    assert f.q <= 9
+    q = f.q
+    circuits = minimal_circuits_up_to_five(f, points)
+    z3 = zero_sum_cap_number(f)
+    expected = {
+        ("cubic", 3): ((q - 1) // 2, q - 1),
+        ("axis", 3): ((5 * q - 3) // 6, 2 * q - 1 - z3),
+        ("cubic", 4): ((q - 1) // 2, q - 1),
+        ("axis", 4): ((5 * q - 3) // 6, 2 * q - 3),
+    }
+    observed: dict[tuple[str, int], set[tuple[int, int]]] = {
+        key: set() for key in expected
+    }
+    for target in range(len(points)):
+        kind = "cubic" if target <= q else "axis"
+        helpers = [i for i in range(len(points)) if i != target]
+        bit_of = {v: i for i, v in enumerate(helpers)}
+        for radius in (3, 4):
+            edges = []
+            for circuit in circuits:
+                if target in circuit and len(circuit) - 1 <= radius:
+                    mask = sum(1 << bit_of[v] for v in circuit if v != target)
+                    edges.append(mask)
+            edge_masks = tuple(sorted(set(edges)))
+            universe = (1 << len(helpers)) - 1
+            row = (matching_number(edge_masks, universe), transversal_number(edge_masks))
+            observed[(kind, radius)].add(row)
+    assert observed == {key: {row} for key, row in expected.items()}
+    print(f"q={q}: repair_rows={expected} circuits_le_5={len(circuits)} Z3={z3}")
+
+
 def assert_seed(f: GF3Extension, points: list[tuple[int, ...]]) -> Counter[int]:
     q = f.q
     assert len(points) == 2 * q + 2
@@ -215,6 +319,9 @@ def run_field(f: GF3Extension) -> None:
     spectrum_mutated[f.q] = (1, 0, 0, 1)
     assert len({f.normalize(p) for p in spectrum_mutated}) == len(points)
     assert section_distribution(f, spectrum_mutated) != distribution
+
+    if f.q <= 9:
+        assert_repair_rows(f, points)
 
     print(
         f"q={f.q}: n={len(points)} rank=4 max_section={max(distribution)} d={f.q} "
