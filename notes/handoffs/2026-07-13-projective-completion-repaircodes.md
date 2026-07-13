@@ -1,7 +1,7 @@
 # Projectively completed cubic–axis RepairCodes — C111–C114
 
 **Date**: 2026-07-13
-**Status**: ACTIVE. C111 is kernel-proved and independently replayed; C112 is next. No claim is
+**Status**: ACTIVE. C111 is kernel-proved and independently replayed; C112 is in progress. No claim is
 paper-promoted until the downstream proof and publication gates pass.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
@@ -68,7 +68,11 @@ group, represented in Lean by `zeroSumCapNumber`.
   column-circuit bridge and exact zero-sum clutter identification are the current XH2 obligations.
 - `RepairCodes/ProjectiveAxisTwistedCubic.lean` now exposes the complete and inclusion-minimal
   repair hypergraphs, proves every repair edge nonempty, reduces their matching/transversal
-  invariants to the minimal clutter, and supplies the circuit-to-actual-repair bridge.
+  invariants to the minimal clutter, and supplies the circuit-to-actual-repair bridge. It also
+  lifts the mixed-triple geometry to arbitrary selected Finsets and proves the exact radius-two
+  axis-repair shape: every such edge consists of two distinct other axis coordinates, with no
+  cubic helper. This direct theorem removes the short-edge part of the generic support-bridge
+  obligation; exact radius-three clutter classification remains open.
 
 ## Mandatory xhigh review checkpoints
 
@@ -108,7 +112,7 @@ and novelty promotion.
 | ID | Discovery | Proof status | Novelty posture | Next gate / destination |
 |---|---|---|---|---|
 | D-PC9 | The completed seed appears to have exactly five nonzero weights: projective section counts `N1=q(q²-1)/3`, `N2=q(q²-1)/2`, `N3=q(q+1)`, `N4=q(q²-1)/6`, `N(q+2)=q+1`; hence exactly `q²-1` minimum-weight words | `CHECKED` independently at q=3,9,27; general moment proof sketched, not Lean | potentially stronger coding-theoretic contribution; `LIT-OPEN` | XH7; prove from plane moments/triple classification, then targeted weight-enumerator search |
-| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action and exact preservation of arbitrary indexed families, finite supports, and column circuits `LEAN`; repair-clutter consequence awaits a generic minimal-support bridge | structural unification, not by itself a novelty claim | XH2; prove minimal target-dual support iff target-containing column circuit, then the axis-infinity zero-sum clutter equality |
+| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action and exact preservation of arbitrary indexed families, finite supports, and column circuits `LEAN`; the direct radius-two shape is also `LEAN`, while radius-three repair transport remains open | structural unification, not by itself a novelty claim | XH2; prove the axis-infinity zero-sum clutter equality, then transport the minimal clutter or prove the remaining repair bridge |
 
 When a discovery becomes planned work, allocate it separately but keep this row as the concise
 discovery verdict. Negative investigations belong in the companion archive.

@@ -188,3 +188,15 @@ The proof treats all positions of cubic infinity explicitly and reuses the affin
 axis-pair lemmas where applicable. Focused Lean validation passes with the standard axiom profile.
 Consequently, among selected triples, only the all-axis case can be dependent; the corresponding
 Finset/repair-edge shape theorem is the next implementation slice.
+
+## 2026-07-13 — exact radius-two completed-axis repairs
+
+Lifted the indexed mixed-triple results to arbitrary selected Finsets of cardinality at most three
+that contain a cubic coordinate. Using this together with pairwise independence, the completed
+seed module now proves that every radius-two repair edge of an axis target has exactly two helpers
+and that both are distinct axis coordinates different from the target. Thus no finite or infinite
+cubic coordinate participates in a radius-two axis repair.
+
+Focused validation passes, and the new selected-family and repair-shape theorems use only
+`propext`, `Classical.choice`, and `Quot.sound`. This closes the direct short-edge alternative in
+XH2; it does not yet classify radius-three cubic triples or transport repair clutters.

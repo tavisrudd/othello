@@ -190,6 +190,119 @@ theorem projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two
     apply (linearIndependent_equiv e).mp
     exact projectiveAxisTwistedCubic_pair_linearIndependent hemb
 
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem linearIndependent_vec3_swap01
+    {a b c : Fin 4 → 𝔽} (h : LinearIndependent 𝔽 ![a, b, c]) :
+    LinearIndependent 𝔽 ![b, a, c] := by
+  have hs₀ : Equiv.swap (0 : Fin 3) 1 0 = 1 := by decide
+  have hs₁ : Equiv.swap (0 : Fin 3) 1 1 = 0 := by decide
+  have hs₂ : Equiv.swap (0 : Fin 3) 1 2 = 2 := by decide
+  convert h.comp (Equiv.swap 0 1) (Equiv.swap 0 1).injective using 1
+  funext i
+  fin_cases i <;> simp [hs₀, hs₁, hs₂]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem linearIndependent_vec3_swap12
+    {a b c : Fin 4 → 𝔽} (h : LinearIndependent 𝔽 ![a, b, c]) :
+    LinearIndependent 𝔽 ![a, c, b] := by
+  have hs₀ : Equiv.swap (1 : Fin 3) 2 0 = 0 := by decide
+  have hs₁ : Equiv.swap (1 : Fin 3) 2 1 = 2 := by decide
+  have hs₂ : Equiv.swap (1 : Fin 3) 2 2 = 1 := by decide
+  convert h.comp (Equiv.swap 1 2) (Equiv.swap 1 2).injective using 1
+  funext i
+  fin_cases i <;> simp [hs₀, hs₁, hs₂]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Every injectively indexed completed triple containing a cubic coordinate is independent. -/
+theorem projectiveAxisTwistedCubic_triple_linearIndependent_of_containsCubic [CharP 𝔽 3]
+    {u : Fin 3 → ProjectiveAxisTwistedCubicIndex 𝔽} (hu : Function.Injective u)
+    (hcubic : ∃ i x, u i = .inl x) :
+    LinearIndependent 𝔽 (fun i => projectiveAxisTwistedCubicPoints 𝔽 (u i)) := by
+  rcases h₀ : u 0 with x | a <;> rcases h₁ : u 1 with y | b <;>
+    rcases h₂ : u 2 with z | c
+  · let v : Fin 3 → ProjectiveTwistedCubicIndex 𝔽 := ![x, y, z]
+    have hv : Function.Injective v := by
+      intro i j hij
+      apply hu
+      fin_cases i <;> fin_cases j <;> simp_all [v]
+    convert projectiveTwistedCubic_triple_linearIndependent hv using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂, v]
+  · have hxy : x ≠ y := by
+      intro h
+      apply hu.ne (show (0 : Fin 3) ≠ 1 by decide)
+      rw [h₀, h₁, h]
+    convert projectiveTwoCubicAxis_linearIndependent hxy c using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂]
+  · have hxz : x ≠ z := by
+      intro h
+      apply hu.ne (show (0 : Fin 3) ≠ 2 by decide)
+      rw [h₀, h₂, h]
+    have hli := projectiveTwoCubicAxis_linearIndependent hxz b
+    convert linearIndependent_vec3_swap12 hli using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂]
+  · have hbc : b ≠ c := by
+      intro h
+      apply hu.ne (show (1 : Fin 3) ≠ 2 by decide)
+      rw [h₁, h₂, h]
+    convert projectiveOneCubicTwoAxis_linearIndependent x hbc using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂]
+  · have hyz : y ≠ z := by
+      intro h
+      apply hu.ne (show (1 : Fin 3) ≠ 2 by decide)
+      rw [h₁, h₂, h]
+    have hli := projectiveTwoCubicAxis_linearIndependent hyz a
+    have hli' := linearIndependent_vec3_swap12 hli
+    convert linearIndependent_vec3_swap01 hli' using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂]
+  · have hac : a ≠ c := by
+      intro h
+      apply hu.ne (show (0 : Fin 3) ≠ 2 by decide)
+      rw [h₀, h₂, h]
+    have hli := projectiveOneCubicTwoAxis_linearIndependent y hac
+    convert linearIndependent_vec3_swap01 hli using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂]
+  · have hab : a ≠ b := by
+      intro h
+      apply hu.ne (show (0 : Fin 3) ≠ 1 by decide)
+      rw [h₀, h₁, h]
+    have hli := projectiveOneCubicTwoAxis_linearIndependent z hab
+    have hli' := linearIndependent_vec3_swap01 hli
+    convert linearIndependent_vec3_swap12 hli' using 1
+    funext i
+    fin_cases i <;> simp [h₀, h₁, h₂]
+  · obtain ⟨i, x, hx⟩ := hcubic
+    fin_cases i <;> simp [h₀, h₁, h₂] at hx
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Every selected family of at most three completed columns that contains a cubic coordinate is
+independent. -/
+theorem projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+    [CharP 𝔽 3] {S : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)} (hcard : S.card ≤ 3)
+    (hcubic : ∃ x, (.inl x : ProjectiveAxisTwistedCubicIndex 𝔽) ∈ S) :
+    LinearIndependent 𝔽 (fun j : S => projectiveAxisTwistedCubicPoints 𝔽 j) := by
+  classical
+  obtain ⟨x, hx⟩ := hcubic
+  by_cases hle : S.card ≤ 2
+  · exact projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two ⟨.inl x, hx⟩ hle
+  · have h₃ : S.card = 3 := by omega
+    let e : Fin 3 ≃ S := (Finset.equivFinOfCardEq h₃).symm
+    have hemb : Function.Injective
+        (fun i : Fin 3 => ((e i : S) : ProjectiveAxisTwistedCubicIndex 𝔽)) := by
+      intro i j hij
+      exact e.injective (Subtype.ext hij)
+    have hecubic : ∃ i y,
+        ((e i : S) : ProjectiveAxisTwistedCubicIndex 𝔽) = .inl y := by
+      let p : S := ⟨.inl x, hx⟩
+      exact ⟨e.symm p, x, congrArg Subtype.val (e.apply_symm_apply p)⟩
+    apply (linearIndependent_equiv e).mp
+    exact projectiveAxisTwistedCubic_triple_linearIndependent_of_containsCubic hemb hecubic
+
 /-- The explicit weight-three dual word supported on the axis points `0`, `1`, and infinity. -/
 def projectiveAxisTripleDualWord : ProjectiveAxisTwistedCubicIndex 𝔽 → 𝔽 :=
   Pi.single (.inr (.inl 0)) 1 +
@@ -304,6 +417,70 @@ theorem projectiveAxisTwistedCubicRepair_edge_nonempty
   simpa using projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two
     (S := {x}) (Finset.singleton_nonempty x) (by simp)
 
+/-- Every radius-two repair of an axis coordinate uses exactly two helpers. -/
+theorem projectiveAxisRepair_edge_card_eq_two [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inr y) 2) : R.card = 2 := by
+  have hle : R.card ≤ 2 := (mem_repairHypergraph.mp hR).2.1
+  have hpos : 0 < R.card := Finset.card_pos.mpr
+    (projectiveAxisTwistedCubicRepair_edge_nonempty hR)
+  by_contra hne
+  have h₁ : R.card = 1 := by omega
+  apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+  apply projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two
+  · exact Finset.insert_nonempty _ _
+  · have hyR : (.inr y : ProjectiveAxisTwistedCubicIndex 𝔽) ∉ R := by
+      intro hy
+      exact (Finset.mem_erase.mp ((mem_repairHypergraph.mp hR).1 hy)).1 rfl
+    rw [Finset.card_insert_of_notMem hyR, h₁]
+
+/-- Complete radius-two axis-repair shape: the helpers are precisely two other axis points. -/
+theorem projectiveAxisRepairPair_shape [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inr y) 2) :
+    ∃ z w : 𝔽 ⊕ Unit, y ≠ z ∧ y ≠ w ∧ z ≠ w ∧
+      R = {(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} := by
+  obtain ⟨p, q, hpq, rfl⟩ := Finset.card_eq_two.mp (projectiveAxisRepair_edge_card_eq_two hR)
+  have hsub := (mem_repairHypergraph.mp hR).1
+  have hyp : (.inr y : ProjectiveAxisTwistedCubicIndex 𝔽) ≠ p := by
+    intro h
+    exact (Finset.mem_erase.mp (hsub (by simp [h]))).1 rfl
+  have hyq : (.inr y : ProjectiveAxisTwistedCubicIndex 𝔽) ≠ q := by
+    intro h
+    exact (Finset.mem_erase.mp (hsub (by simp [h]))).1 rfl
+  rcases p with x | z <;> rcases q with t | w
+  · exfalso
+    apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+    apply projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+    · simp [hpq]
+    · exact ⟨x, by simp⟩
+  · exfalso
+    apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+    apply projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+    · calc
+        ({(.inr y : ProjectiveAxisTwistedCubicIndex 𝔽), .inl x, .inr w} :
+            Finset (ProjectiveAxisTwistedCubicIndex 𝔽)).card ≤
+            ({(.inl x : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+              Finset (ProjectiveAxisTwistedCubicIndex 𝔽)).card + 1 :=
+          Finset.card_insert_le _ _
+        _ ≤ 3 := by simp
+    · exact ⟨x, by simp⟩
+  · exfalso
+    apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+    apply projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+    · calc
+        ({(.inr y : ProjectiveAxisTwistedCubicIndex 𝔽), .inr z, .inl t} :
+            Finset (ProjectiveAxisTwistedCubicIndex 𝔽)).card ≤
+            ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inl t} :
+              Finset (ProjectiveAxisTwistedCubicIndex 𝔽)).card + 1 :=
+          Finset.card_insert_le _ _
+        _ ≤ 3 := by simp
+    · exact ⟨t, by simp⟩
+  · have hyz : y ≠ z := fun h => hyp (by rw [h])
+    have hyw : y ≠ w := fun h => hyq (by rw [h])
+    have hzw : z ≠ w := fun h => hpq (by rw [h])
+    exact ⟨z, w, hyz, hyw, hzw, rfl⟩
+
 theorem matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph
     (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
     matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x r) =
@@ -336,5 +513,7 @@ theorem projectiveAxisTwistedCubic_circuit_mem_repair
 #print axioms projectiveAxisTripleDualWord_mem
 #print axioms projectiveAxisTwistedCubicCode_dualDist
 #print axioms projectiveAxisTwistedCubic_circuit_mem_repair
+#print axioms projectiveAxisRepairPair_shape
+#print axioms projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
 
 end RepairCodes
