@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-12
 **Status:** IN PROGRESS
-**Tasks:** C85–C86 [REPORTED 2026-07-12]; C87–C88 [OPEN]
+**Tasks:** C85–C86 [REPORTED 2026-07-12]; C87 [ACTIVE, PARTIAL]; C88 [OPEN]
 
 ## Goal
 
@@ -43,6 +43,10 @@ the live execution map. Session history belongs in
 | finite Hermitian forms in dimension at least two are isotropic | `ProjectiveCap/FiniteHermitian.lean` | Lean-proved (C86) |
 | Hermitian split scalar-square route is not fixed-point-free | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C86) |
 | Hermitian nonsplit similitude scalar is impossible | `ProjectiveCap/FiniteHermitian.lean`, `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C86) |
+| coordinate relative Frobenius induces a projective involution fixing every base-coordinate point | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
+| descended parabolic quadratic form meets the coordinate-Frobenius fixed subgeometry | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial; descent is an explicit hypothesis) |
+| every Hermitian form in vector dimension at least three meets the coordinate-Frobenius fixed subgeometry | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial; base quadratic restriction constructed internally) |
+| board fixed points transfer through a supplied projective conjugacy | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
 
 Current source audit: no `sorry` or `native_decide`; the relevant builds pass with axiom profile
 `[propext, Classical.choice, Quot.sound]`.
@@ -51,15 +55,17 @@ Current source audit: no `sorry` or `native_decide`; the relevant builds pass wi
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C87** | Classify order-two Baer-semilinear collineations sufficiently to expose their fixed subgeometry; prove that subgeometry meets each relevant parabolic and Hermitian board. | Board/form models from C85/C86 may be reused, but the classification is logically separate. | Closes the semilinear branches and completes the parabolic/Hermitian method-negative rows. |
+| **C87** | Finish the general Baer-semilinear reduction. The coordinate-Frobenius involution, its fixed base-coordinate points, both tractable board intersections, and conjugacy transfer are formal. Remaining: prove nonabelian finite-field descent for `Aτ` with `(Aτ)²` projectively scalar, then descend a preserved parabolic zero locus to the fixed field. | Requires a `GL_n/PGL_n` Hilbert-90 theorem absent from pinned Mathlib; scalar Hilbert 90 alone is insufficient. The parabolic form descent/normalization is a second explicit theorem after conjugacy. | Closes the semilinear branches and completes the parabolic/Hermitian method-negative rows. |
 | **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
 
 ## Dependency and attack order
 
 C85–C86 are closed; their quadratic and Hermitian infrastructure is available to later tasks.
-Proceed with **C87**, using the concrete relative-Frobenius Hermitian model now landed. Attempt C88
-only after the reusable semilinear infrastructure is in place; it is the item expected to require
-genuinely new mathematical work.
+Proceed with **C87** at the two remaining descent lemmas: first prove the nonabelian normal form for
+an order-two projective semilinear map over a quadratic finite-field extension; then show that a
+preserved parabolic quadric becomes a base-field quadratic zero locus in those coordinates. The
+Hermitian coordinate intersection and the final conjugacy-transfer interface are already landed.
+Attempt C88 only after this reusable semilinear infrastructure is complete.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -79,7 +85,8 @@ For each closed task:
 
 ## Next step
 
-Begin C87 by formalizing an order-two semilinear map relative to a quadratic field automorphism,
-then isolate its fixed subgeometry before proving that the parabolic and Hermitian board predicates
-have a point over that fixed field. Do not promote either full negative row until both board
-intersection theorems are formal.
+Develop a matrix-level nonabelian Hilbert-90 lemma: from `A · τ(A) = cI`, first prove `τ(c)=c`,
+normalize `c` using finite-field norm surjectivity, and then construct `B` with the normalized
+cocycle `A' = B⁻¹τ(B)` (up to the chosen convention). Lift this to projective conjugacy and use the
+existing transfer theorem. Keep both full negative rows unpromoted until the parabolic form-descent
+lemma is also formal.

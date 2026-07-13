@@ -134,9 +134,12 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   `[propext, Classical.choice, Quot.sound]`. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
-- **C87 [OPEN] — Baer-semilinear obstruction.** Formalize the order-two semilinear normal form,
-  its fixed subgeometry, and nonempty intersection with the parabolic and Hermitian boards. Track
-  in the [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+- **C87 [ACTIVE 2026-07-12, PARTIAL] — Baer-semilinear obstruction.** Coordinate relative
+  Frobenius, its fixed base-coordinate points, the descended-parabolic intersection, the intrinsic
+  Hermitian base-quadratic restriction/intersection, and projective conjugacy transfer are
+  Lean-proved. Open real-math core: nonabelian `GL_n/PGL_n` Hilbert 90 for a general projective
+  order-two `Aτ`, followed by descent/normalization of a preserved parabolic form. Track in the
+  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 - **C88 [OPEN] — elliptic `Q⁻` boundary classification.** Develop the Witt/Scharlau-transfer
   argument for variety-preserving projective involutions; the general `Q⁻(2m−1,q)`, `m≥3`, claim

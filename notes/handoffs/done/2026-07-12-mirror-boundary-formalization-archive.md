@@ -61,3 +61,33 @@ closed-negative proof routes belong here.
   - Axiom audit of the norm, square-reflection, isotropy, multiplier, split, and nonsplit theorems:
     exactly `[propext, Classical.choice, Quot.sound]`.
   - Source search over both affected files: no `sorry`, `native_decide`, or `axiom` declaration.
+
+## 2026-07-12 — C87 coordinate layer landed; general descent remains open
+
+- Added `ProjectiveCap/BaerSemilinear.lean`. Coordinatewise relative Frobenius over a quadratic
+  finite-field extension is formalized as an injective semilinear map; its square is the identity,
+  its projectivization is an involution, and every projective point represented over the base field
+  is fixed.
+- Proved that a quadratic board whose restriction is a base-field quadratic form meets this fixed
+  subgeometry in vector dimension at least three. The parabolic coordinate theorem exposes that
+  restriction/descent statement as a hypothesis rather than hiding it.
+- For Hermitian boards, constructed the base-field quadratic restriction internally from
+  `IsHermitian.diagonal_mem_base`, proved its quadratic laws by mapping them into the extension,
+  and applied finite quadratic isotropy. Thus every nontrivial Hermitian board has a fixed point
+  under coordinate Frobenius without an external descent hypothesis.
+- Added `hasFixedPointOn_of_conjugate`, the exact final transport interface for a future general
+  semilinear classification.
+- Adversarial Mathlib inventory found projectivization support for injective semilinear maps and
+  scalar Hilbert 90 for `Lˣ`, but no nonabelian Hilbert-90/descent theorem for `GL_n` or `PGL_n`.
+  The remaining C87 core is therefore real mathematics: from `A·τ(A)=cI`, normalize the scalar and
+  prove the matrix cocycle is a coboundary; then descend a preserved parabolic zero locus to the
+  fixed field. The general parabolic and Hermitian semilinear rows remain unpromoted.
+- Validation:
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap.BaerSemilinear` — PASS,
+    warning-free (`3001` jobs).
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap` — PASS (`8658` jobs).
+  - Axiom audit of coordinate involutivity, fixed base points, Hermitian restriction, conjugacy
+    transfer, both intersection theorems, and both route conclusions: exactly
+    `[propext, Classical.choice, Quot.sound]`.
+  - Source search over the mirror-boundary files: no `sorry`, `native_decide`, or `axiom`
+    declaration.
