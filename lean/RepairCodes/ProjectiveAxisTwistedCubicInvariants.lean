@@ -363,6 +363,25 @@ theorem isProjectiveAxisTwistedCubicCircuit_map_iff [CharP 𝔽 3] (a : 𝔽)
 
 variable [Fintype 𝔽]
 
+/-- D-PC10 relabels every complete bounded repair hypergraph exactly. -/
+theorem projectiveShiftInv_relabel_repairHypergraph [CharP 𝔽 3]
+    (a : 𝔽) (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    relabelHypergraph (projectiveShiftInvIndexEquiv a)
+        (projectiveAxisTwistedCubicRepairHypergraph x r) =
+      projectiveAxisTwistedCubicRepairHypergraph
+        (projectiveShiftInvIndexEquiv a x) r := by
+  change relabelHypergraph (projectiveShiftInvIndexEquiv a)
+      (repairHypergraph (rowCode projectiveAxisTwistedCubicGenerator) x r) =
+    repairHypergraph (rowCode projectiveAxisTwistedCubicGenerator)
+      (projectiveShiftInvIndexEquiv a x) r
+  apply relabel_repairHypergraph_of_monomial
+    (T := projectiveShiftInvLinearEquiv a) (scale := projectiveShiftInvScale a)
+  · exact projectiveShiftInvScale_ne_zero a
+  · intro j
+    simpa [projectiveShiftInvLinearEquiv_apply,
+      projectiveAxisTwistedCubicGenerator_col] using
+        projectiveShiftInvLinearMap_column a j
+
 /-- At axis infinity, the completed minimal radius-three clutter is exactly the natural embedding
 of the affine nucleus clutter. In particular, the added cubic-infinity coordinate lies in no
 minimal repair edge. -/
@@ -435,6 +454,54 @@ theorem minimalProjectiveAxisInfinityRepair_invariants [CharP 𝔽 3] :
   rw [transversalNumber_embedHypergraph affineToProjectiveAxisIndexEmbedding _ hne]
   exact minimalAxisRepair_nucleus_invariants
 
+/-- Exact uniform radius-three row for every axis coordinate of the completed seed. -/
+theorem minimalProjectiveAxisRepair_invariants [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr y) 3) =
+        (5 * Fintype.card 𝔽 - 3) / 6 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inr y) 3) =
+        2 * Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := by
+  cases y with
+  | inr u => simpa using minimalProjectiveAxisInfinityRepair_invariants (𝔽 := 𝔽)
+  | inl a =>
+      have htarget : projectiveShiftInvIndexEquiv a
+          (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) =
+          .inr (.inr Unit.unit) := by
+        simp [projectiveShiftInvIndexEquiv, projectiveAxisShiftInvEquiv]
+      have hrel := projectiveShiftInv_relabel_repairHypergraph a
+        (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 3
+      rw [htarget] at hrel
+      have hmatchRel := matchingNumber_relabelHypergraph
+        (projectiveShiftInvIndexEquiv a)
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 3)
+      have htauRel := transversalNumber_relabelHypergraph
+        (projectiveShiftInvIndexEquiv a)
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 3)
+      rw [hrel] at hmatchRel htauRel
+      have hnucleus := minimalProjectiveAxisInfinityRepair_invariants (𝔽 := 𝔽)
+      constructor
+      · rw [matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph]
+        calc
+          matchingNumber (projectiveAxisTwistedCubicRepairHypergraph
+              (.inr (.inl a)) 3) =
+              matchingNumber (projectiveAxisTwistedCubicRepairHypergraph
+                (.inr (.inr Unit.unit)) 3) := hmatchRel.symm
+          _ = matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+                (.inr (.inr Unit.unit)) 3) :=
+              (matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph _ _).symm
+          _ = (5 * Fintype.card 𝔽 - 3) / 6 := hnucleus.1
+      · rw [transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph]
+        calc
+          transversalNumber (projectiveAxisTwistedCubicRepairHypergraph
+              (.inr (.inl a)) 3) =
+              transversalNumber (projectiveAxisTwistedCubicRepairHypergraph
+                (.inr (.inr Unit.unit)) 3) := htauRel.symm
+          _ = transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+                (.inr (.inr Unit.unit)) 3) :=
+              (transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph _ _).symm
+          _ = 2 * Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := hnucleus.2
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
@@ -446,5 +513,7 @@ theorem minimalProjectiveAxisInfinityRepair_invariants [CharP 𝔽 3] :
 #print axioms isProjectiveAxisTwistedCubicCircuit_map_iff
 #print axioms minimalProjectiveAxisInfinityRepair_eq_embedAffine
 #print axioms minimalProjectiveAxisInfinityRepair_invariants
+#print axioms projectiveShiftInv_relabel_repairHypergraph
+#print axioms minimalProjectiveAxisRepair_invariants
 
 end RepairCodes

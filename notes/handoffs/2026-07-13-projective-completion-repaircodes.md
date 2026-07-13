@@ -17,7 +17,8 @@ Pareto-incomparable seed and asymptotic family.
 |---|---|---|
 | completed seed has parameters `[2q+2,4,q]_q` and exact global dual distance `3` | strict-trust Lean, independent q=3,9,27 replay/mutations, aggregate build, and XH1 passed | proved; not paper-promoted before C114 |
 | completed seed has exactly cubic and axis repair row types | proposed; q=3,9 exhaustively checked from circuits | diagnostic conjecture only; no group-orbit claim |
-| radius-three rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-1-Z3(q))` | proposed; q=3,9 checked by exact set packing/transversal | diagnostic conjecture only |
+| radius-three cubic row is `((q-1)/2,q-1)` | proposed; q=3,9 checked by exact set packing/transversal | diagnostic conjecture only |
+| radius-three axis row is `((5q-3)/6,2q-1-Z3(q))` | strict-trust Lean for every axis target; q=3,9 independently checked | proved; not paper-promoted before C114 |
 | radius four exhausts the complete inner minimal port | generic rank-four proof obligation open | standard consequence if proved |
 | radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | proposed; q=3,9 checked by exact circuit enumeration | diagnostic conjecture only |
 | q9 lift has rate `1/10` and eventual relative distance above every `c<351/1600` | arithmetic consequence conditional on prior gates | do not state as theorem yet |
@@ -78,8 +79,10 @@ group, represented in Lean by `zeroSumCapNumber`.
 - `RepairCodes/ProjectiveAxisTwistedCubicInvariants.lean` proves that this distinguished completed
   clutter is exactly the natural embedding of the already formalized affine nucleus clutter.
   Consequently its matching and transversal numbers are kernel-proved as
-  `(5q-3)/6` and `2q-1-Z3(q)`. Transport from axis infinity to every finite axis target remains the
-  next XH2 gate; the uniform row is not yet promoted.
+  `(5q-3)/6` and `2q-1-Z3(q)`. The generic monomial repair-transport theorem in
+  `FiniteGeom/Repair.lean` now proves that D-PC10 relabels the complete bounded repair hypergraph
+  exactly, so the same row is kernel-proved for every finite or infinite axis target. XH2 is
+  closed for the axis row; the cubic row remains open.
 
 ## Mandatory xhigh review checkpoints
 
@@ -119,7 +122,8 @@ and novelty promotion.
 | ID | Discovery | Proof status | Novelty posture | Next gate / destination |
 |---|---|---|---|---|
 | D-PC9 | The completed seed appears to have exactly five nonzero weights: projective section counts `N1=q(q²-1)/3`, `N2=q(q²-1)/2`, `N3=q(q+1)`, `N4=q(q²-1)/6`, `N(q+2)=q+1`; hence exactly `q²-1` minimum-weight words | `CHECKED` independently at q=3,9,27; general moment proof sketched, not Lean | potentially stronger coding-theoretic contribution; `LIT-OPEN` | XH7; prove from plane moments/triple classification, then targeted weight-enumerator search |
-| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action and exact preservation of arbitrary indexed families, finite supports, and column circuits `LEAN`; the distinguished zero-sum minimal clutter and its invariants are `LEAN`, while repair-hypergraph transport remains open | structural unification, not by itself a novelty claim | XH2; transport complete/minimal repair hypergraphs under the monomial action, then state the uniform axis row |
+| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action, exact circuit preservation, exact complete-repair-hypergraph relabeling, and the uniform axis row `LEAN` | structural unification, not by itself a novelty claim | XH2 axis gate closed; reuse the same transport for the cubic row |
+| D-PC11 | Any monomial automorphism of a generator's column configuration—an ambient linear equivalence, coordinate permutation, and nonzero column scales—relabels every complete bounded repair hypergraph exactly | generic forward/backward full-support relation transport `LEAN`; instantiated by D-PC10 to close the uniform completed-axis row | reusable formal infrastructure; expected standard, no novelty claim | reuse for cubic-target transitivity and future repair-code symmetries; mention in proof architecture only |
 
 When a discovery becomes planned work, allocate it separately but keep this row as the concise
 discovery verdict. Negative investigations belong in the companion archive.

@@ -220,3 +220,23 @@ existing affine nucleus clutter. Reusing the prior affine extremal theorem gives
 `nu=(5q-3)/6` and `tau=2q-1-Z3(q)` at axis infinity. Focused builds use only the standard axiom
 profile. Uniformity over finite axis targets still requires repair-hypergraph transport under
 D-PC10 and is not inferred merely from circuit preservation.
+
+## 2026-07-13 — D-PC11 monomial repair transport and uniform axis row
+
+Added a generic theorem to `FiniteGeom.Repair`: if an ambient linear equivalence sends each
+generator column to a nonzero scalar multiple of a permuted generator column, then the coordinate
+permutation relabels the complete bounded repair hypergraph exactly, at every target and radius.
+The proof transports the full-support dual relation in both directions; it does not infer the
+claim from dependence or circuit preservation alone.
+
+Instantiating the theorem with D-PC10 proves exact repair-hypergraph transport from every finite
+axis target to axis infinity. Combining relabel invariance of matching/transversal numbers with
+the distinguished clutter theorem closes the uniform radius-three axis row:
+
+```text
+nu  = (5q-3)/6
+tau = 2q-1-Z3(q).
+```
+
+The focused theorem uses only `propext`, `Classical.choice`, and `Quot.sound`. This closes XH2 for
+the axis row. The cubic row and radius-four/full-inner classification remain C112 obligations.

@@ -333,6 +333,133 @@ theorem mem_repairHypergraph_of_reindexed_fullSupport_relation {k : ℕ}
   · intro j
     simpa [c'] using hfull (e.symm j)
 
+/-- A monomial automorphism of a generator's column configuration transports every bounded
+repair edge. The ambient linear equivalence and nonzero column scales carry the full-support
+relation witness, so the target coefficient remains nonzero. -/
+theorem repairHypergraph_map_mem_of_monomial {k : ℕ} {G : Matrix (Fin k) ι 𝔽}
+    (e : ι ≃ ι) (T : (Fin k → 𝔽) ≃ₗ[𝔽] (Fin k → 𝔽)) (scale : ι → 𝔽)
+    (hscale : ∀ j, scale j ≠ 0) (hcol : ∀ j, T (G.col j) = scale j • G.col (e j))
+    {x : ι} {r : ℕ} {R : Finset ι} (hR : R ∈ repairHypergraph (rowCode G) x r) :
+    R.map e.toEmbedding ∈ repairHypergraph (rowCode G) (e x) r := by
+  classical
+  obtain ⟨hsub, hcard, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
+  let S : Finset ι := insert x R
+  let f0 : S → ↥(insert (e x) (R.map e.toEmbedding)) := fun j =>
+    ⟨e j, by
+      rw [Finset.mem_insert]
+      by_cases hj : (j : ι) = x
+      · exact Or.inl (congrArg e hj)
+      · apply Or.inr
+        apply Finset.mem_map.mpr
+        refine ⟨j, ?_, rfl⟩
+        have := j.property
+        simp only [S, Finset.mem_insert] at this
+        exact this.resolve_left hj⟩
+  have hf0 : Function.Injective f0 := by
+    intro i j hij
+    exact Subtype.ext (e.injective (congrArg Subtype.val hij))
+  have hf0surj : Function.Surjective f0 := by
+    intro j
+    rcases j with ⟨j, hj⟩
+    simp only [Finset.mem_insert] at hj
+    rcases hj with hj | hj
+    · subst j
+      exact ⟨⟨x, by simp [S]⟩, by ext; simp [f0]⟩
+    · obtain ⟨q, hq, hqj⟩ := Finset.mem_map.mp hj
+      subst j
+      exact ⟨⟨q, by simp [S, hq]⟩, by ext; simp [f0]⟩
+  let f : S ≃ ↥(insert (e x) (R.map e.toEmbedding)) :=
+    Equiv.ofBijective f0 ⟨hf0, hf0surj⟩
+  have hsubmap : R.map e.toEmbedding ⊆ Finset.univ.erase (e x) := by
+    intro j hj
+    obtain ⟨q, hq, rfl⟩ := Finset.mem_map.mp hj
+    rw [Finset.mem_erase]
+    refine ⟨?_, Finset.mem_univ _⟩
+    intro heq
+    exact (Finset.mem_erase.mp (hsub hq)).1 (e.injective heq)
+  have hcardmap : (R.map e.toEmbedding).card = R.card := Finset.card_map _
+  let c : S → 𝔽 := fun j => y j * scale j
+  have hrestricted : ∑ j : S, y j • G.col j = 0 := by
+    have hfull := dual_word_column_relation hy
+    calc
+      (∑ j : S, y j • G.col j) =
+          Finset.sum (s := S) (fun j : ι => y j • G.col j) := by
+        rw [← S.sum_attach]
+        rfl
+      _ = ∑ j, y j • G.col j := by
+        apply Finset.sum_subset (Finset.subset_univ _)
+        intro j _ hj
+        have hj0 : y j = 0 := by
+          have : j ∉ wordSupport y := by simpa only [S, hsupp] using hj
+          simpa only [mem_wordSupport, not_not] using this
+        simp [hj0]
+      _ = 0 := hfull
+  have hmapped : ∑ j : S, c j • G.col (e j) = 0 := by
+    have hmap := congrArg (fun z => T z) hrestricted
+    simp only [map_sum, map_smul, map_zero] at hmap
+    simpa only [c, hcol, smul_smul, mul_comm] using hmap
+  have hfull : ∀ j, c j ≠ 0 := by
+    intro j
+    apply mul_ne_zero
+    · apply mem_wordSupport.mp
+      rw [hsupp]
+      exact j.property
+    · exact hscale j
+  have hedge : R.map e.toEmbedding ∈
+      repairHypergraph (rowCode G) (e x) (R.map e.toEmbedding).card :=
+    mem_repairHypergraph_of_reindexed_fullSupport_relation
+      hsubmap rfl f c hmapped hfull
+  exact repairHypergraph_mono_radius (hcardmap.trans_le hcard) hedge
+
+/-- Exact repair-edge transport under a monomial automorphism of the generator columns. -/
+theorem repairHypergraph_map_mem_iff_of_monomial {k : ℕ} {G : Matrix (Fin k) ι 𝔽}
+    (e : ι ≃ ι) (T : (Fin k → 𝔽) ≃ₗ[𝔽] (Fin k → 𝔽)) (scale : ι → 𝔽)
+    (hscale : ∀ j, scale j ≠ 0) (hcol : ∀ j, T (G.col j) = scale j • G.col (e j))
+    {x : ι} {r : ℕ} {R : Finset ι} :
+    R.map e.toEmbedding ∈ repairHypergraph (rowCode G) (e x) r ↔
+      R ∈ repairHypergraph (rowCode G) x r := by
+  let invScale : ι → 𝔽 := fun j => (scale (e.symm j))⁻¹
+  have hinvScale : ∀ j, invScale j ≠ 0 := fun j => inv_ne_zero (hscale (e.symm j))
+  have hinvCol : ∀ j, T.symm (G.col j) = invScale j • G.col (e.symm j) := by
+    intro j
+    apply T.injective
+    simp [invScale, hcol, smul_smul, hscale]
+  constructor
+  · intro hR
+    have hback := repairHypergraph_map_mem_of_monomial
+      e.symm T.symm invScale hinvScale hinvCol hR
+    have hmap : (R.map e.toEmbedding).map e.symm.toEmbedding = R := by
+      apply Finset.ext
+      intro j
+      simp
+    rw [hmap] at hback
+    simpa using hback
+  · exact repairHypergraph_map_mem_of_monomial e T scale hscale hcol
+
+/-- A monomial column automorphism relabels the complete bounded repair hypergraph exactly. -/
+theorem relabel_repairHypergraph_of_monomial {k : ℕ} {G : Matrix (Fin k) ι 𝔽}
+    (e : ι ≃ ι) (T : (Fin k → 𝔽) ≃ₗ[𝔽] (Fin k → 𝔽)) (scale : ι → 𝔽)
+    (hscale : ∀ j, scale j ≠ 0) (hcol : ∀ j, T (G.col j) = scale j • G.col (e j))
+    (x : ι) (r : ℕ) :
+    relabelHypergraph e (repairHypergraph (rowCode G) x r) =
+      repairHypergraph (rowCode G) (e x) r := by
+  classical
+  ext A
+  constructor
+  · intro hA
+    obtain ⟨R, hR, rfl⟩ := Finset.mem_image.mp hA
+    exact repairHypergraph_map_mem_of_monomial e T scale hscale hcol hR
+  · intro hA
+    let R := A.map e.symm.toEmbedding
+    have hmap : R.map e.toEmbedding = A := by
+      apply Finset.ext
+      intro j
+      simp [R]
+    have hR : R ∈ repairHypergraph (rowCode G) x r := by
+      apply (repairHypergraph_map_mem_iff_of_monomial e T scale hscale hcol).mp
+      simpa [hmap] using hA
+    exact Finset.mem_image.mpr ⟨R, hR, hmap⟩
+
 omit [Fintype ι] [DecidableEq 𝔽] in
 /-- Minimal dependence forces every coefficient of every nonzero relation to be nonzero. -/
 theorem relation_fullSupport_of_delete_linearIndependent {k : ℕ} {G : Matrix (Fin k) ι 𝔽}
@@ -397,5 +524,8 @@ theorem mem_repairHypergraph_of_reindexed_circuit {k : ℕ} {G : Matrix (Fin k) 
       rw [e.apply_symm_apply]
     rw [← heq]
     exact hli
+
+#print axioms repairHypergraph_map_mem_iff_of_monomial
+#print axioms relabel_repairHypergraph_of_monomial
 
 end FiniteGeom
