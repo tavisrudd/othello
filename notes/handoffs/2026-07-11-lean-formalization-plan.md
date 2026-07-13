@@ -10,7 +10,8 @@ Lean-proved. The full seed has global dual distance three; transfer uses the cor
 boundary is in [`lean/RepairCodes/TRUST.md`](../../lean/RepairCodes/TRUST.md). The trace-duality
 bridge, degree-four extension lift, concrete finite-field instantiation, and asymptotic reduction
 are Lean-proved.  The resulting unbounded q9 family has exact rate `2/19`, eventual relative
-distance at least `8/57`, and exact repair rows; its sole deep dependency is the quarantined
+distance at least `1/5`, exact locality three on cubic coordinates and two on axis coordinates,
+and exact repair rows; its sole deep dependency is the quarantined
 Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
 review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
 The assembled 12-page manuscript, PDF, proof ledger, and adversarial novelty report are in
@@ -222,9 +223,9 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/Q9Uniform.lean`, `Q9CircuitInventory.lean` | kernel-checked q9 row table `(4,7),(6,12),(7,13)`; exact `28`, `36+8`, `36+12` repair counts; exact `120` axis-three / `84` completed-cubic-four circuit-support inventory; no generated or native certificate. |
 | `RepairCodes/SeedLift.lean`, `Q9SeedLift.lean` | actual concatenated submodule; dimension and distance lower bound; exact equality of complete repair hypergraphs under `r+1<2*d(I⊥)` and the outer functional-dual gate; exact `ν`/`τ` transfer; q9 `[19N,4K,≥8D]₉`, all-symbol locality at most three, exact lifted row table, and `7ν≤4τ`. |
 | `RepairCodes/TraceDual.lean` | nondegenerate trace representation; ordinary extension-field dual word recovery; exact functional/Hamming support equality; ordinary dual distance ⇒ restricted functional-dual gate |
-| `RepairCodes/Q9ExtensionLift.lean` | actual degree-four restricted-scalar lift; dimension multiplier; `[19N,4K,≥8D]₉`; exact repair-row transfer from ordinary extension-field dual distance |
+| `RepairCodes/Q9ExtensionLift.lean` | actual degree-four restricted-scalar lift; dimension multiplier; `[19N,4K,≥8D]₉`; disjoint exhaustive type partition with exact counts `9N,9N,N`; exact locality three/two; exact repair-row transfer and failure thresholds `6,11,12` from ordinary extension-field dual distance |
 | `RepairCodes/Imported.lean` | sole quarantined deep input: Stichtenoth Theorem 1.6(ii), specialized to self-dual codes over `GF(6561)` with limit distance `≥39/80` |
-| `RepairCodes/Asymptotic.lean` | kernel-checked analytic reduction; concrete `GF(9) ⊆ GF(6561)` construction; unbounded q9 family with rate `2/19`, eventual distance `≥8/57`, and exact all-coordinate rows |
+| `RepairCodes/Asymptotic.lean` | kernel-checked analytic reduction; concrete `GF(9) ⊆ GF(6561)` construction; unbounded q9 family with rate `2/19`, eventual distance `≥1/5`, exact mixed locality, and exact all-coordinate rows |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -277,13 +278,17 @@ novelty remains subject to the external specialist gate unless explicitly stated
   presentation, not part of the finite theorem.
 - **Proved exact-distribution consequence:** the lift preserves every inner row exactly, so the
   three q9 orbit rows survive blockwise rather than only their worst-case `7/4` ratio.
+- **Proved exact operational consequence:** in an `N`-block lift the three rows occur with
+  multiplicities `9N,9N,N`, retain exact localities three, two, two, and have guaranteed
+  arbitrary-helper failure thresholds `6,11,12` respectively.
 - **Proved broader q9 certificate:** the four-disjoint-repair construction works over any
   characteristic-three field containing a square root of `−1`; order nine is used only to make
   the matching bound sharp.
 - **Proved applied upgrade:** the paper's fixed-alphabet asymptotic existence claim now has a
   concrete Lean theorem: unbounded length, exact rate `2/19`, eventual relative distance at least
-  `8/57`, and exact preservation of all three repair rows, with only Stichtenoth Theorem 1.6(ii)
-  imported.
+  `1/5`, exact mixed locality, and exact preservation of all three repair rows, with only
+  Stichtenoth Theorem 1.6(ii) imported. The constant improvement is a checked arithmetic
+  tightening of the same construction, not a separate novelty claim.
 - **Proved simplification:** self-dual TVZ outer codes replace a two-sided AG-code distance
   construction: primal and dual distances coincide, so one cited theorem supplies both gates.
 - **Possible application / novelty candidate:** the exact complete-hypergraph transfer can be

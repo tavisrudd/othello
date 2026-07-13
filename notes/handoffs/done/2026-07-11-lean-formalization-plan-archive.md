@@ -765,3 +765,21 @@ that discharges the transfer interface's finite fields from it:
   labels, or duplicate bibliography keys; warning-free 12-page Tectonic PDF.
 - The completed checklist is in `papers/coding-repair-hypergraphs/proof_ledger.md`. The only open
   box is the external specialist citation-chain review, which remains a submission preflight gate.
+
+### Handoff Note — 2026-07-13 (small theorem tightenings and rolling novelty check)
+
+- Strengthened the asymptotic arithmetic from the earlier displayed `8/57` bound to `1/5` by
+  kernel-checking the eventual inequality `19N≤40D`, a direct consequence of
+  `39/80>19/40`.
+- Generalized the extension-lift transfer through radii one, two, and three. This proves exact
+  locality three on cubic coordinates and exact locality two on both axis types, rather than only
+  all-symbol locality at most three.
+- Added kernel theorems for a disjoint exhaustive lifted coordinate partition, exact
+  multiplicities `9N,9N,N`, and guaranteed arbitrary-helper failure thresholds `6,11,12`.
+- The rolling novelty check kept these as derived tightenings: they sharpen the statement and its
+  operational interpretation but do not change the two surviving candidate-novelty loci. Primary
+  sources continue to establish ordinary locality-preserving concatenation, AG asymptotics, and
+  repair tolerance as prior art.
+- Rebuilt the full `RepairCodes` aggregate and 12-page paper. New finite declarations use only the
+  standard logical axioms; the asymptotic headline still adds exactly the single quarantined
+  Stichtenoth import. The PDF has no citation, reference, or box warnings.

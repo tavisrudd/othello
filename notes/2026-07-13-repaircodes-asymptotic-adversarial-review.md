@@ -62,3 +62,16 @@ not claim a zero-axiom proof of the TVZ theorem itself.
 
 Paper assembly and a specialist novelty audit of the complete-repair-hypergraph transfer are
 separate editorial/literature tasks, not formalization blockers.
+
+## Tightening addendum — 2026-07-13
+
+The same construction now has a stronger kernel-checked presentation.  From
+`39/80>19/40`, Lean proves eventual `19N≤40D`; combined with `d_lift≥8D` this gives
+`19N≤5d_lift`, hence relative distance at least `1/5`.  This supersedes the earlier displayed
+`8/57` constant without changing the imported theorem or construction.
+
+The extension lift now also transfers repair hypergraphs separately at radii one, two, and three.
+Consequently the `9N` cubic coordinates have exact locality three, while the `9N` finite-axis and
+`N` infinity-axis coordinates have exact locality two.  Their transferred rows give exact
+guaranteed helper-failure thresholds `6`, `11`, and `12`.  These are formal tightenings and
+derived consequences, not independent novelty claims.

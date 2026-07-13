@@ -22,6 +22,83 @@ variable [Field F] [Fintype F] [DecidableEq F] [CharP F 3]
 variable [Field L] [Fintype L] [DecidableEq L] [Algebra F L]
 variable [FiniteDimensional F L] [Algebra.IsSeparable F L]
 
+/-- Embedding of the cubic-coordinate type into one lifted coordinate block. -/
+def q9LiftCubicEmbedding (iota F : Type*) :
+    (iota × F) ↪ (iota × AxisTwistedCubicIndex F) where
+  toFun p := (p.1, .inl p.2)
+  inj' := by
+    rintro ⟨a, x⟩ ⟨b, y⟩ h
+    simp only [Prod.mk.injEq, Sum.inl.injEq] at h ⊢
+    exact h
+
+/-- Embedding of the finite-axis-coordinate type into one lifted coordinate block. -/
+def q9LiftFiniteAxisEmbedding (iota F : Type*) :
+    (iota × F) ↪ (iota × AxisTwistedCubicIndex F) where
+  toFun p := (p.1, .inr (.inl p.2))
+  inj' := by
+    rintro ⟨a, x⟩ ⟨b, y⟩ h
+    simp only [Prod.mk.injEq, Sum.inr.injEq, Sum.inl.injEq] at h ⊢
+    exact h
+
+/-- Embedding of the unique infinity-axis coordinate in every lifted block. -/
+def q9LiftInfinityAxisEmbedding (iota F : Type*) :
+    iota ↪ (iota × AxisTwistedCubicIndex F) where
+  toFun j := (j, .inr (.inr Unit.unit))
+  inj' := fun _ _ h ↦ congrArg Prod.fst h
+
+/-- The cubic coordinates across all lifted blocks. -/
+def q9LiftCubicCoordinates (iota F : Type*)
+    [Fintype iota] [DecidableEq iota] [Fintype F] [DecidableEq F] :
+    Finset (iota × AxisTwistedCubicIndex F) :=
+  Finset.univ.map (q9LiftCubicEmbedding iota F)
+
+/-- The finite-axis coordinates across all lifted blocks. -/
+def q9LiftFiniteAxisCoordinates (iota F : Type*)
+    [Fintype iota] [DecidableEq iota] [Fintype F] [DecidableEq F] :
+    Finset (iota × AxisTwistedCubicIndex F) :=
+  Finset.univ.map (q9LiftFiniteAxisEmbedding iota F)
+
+/-- The infinity-axis coordinates across all lifted blocks. -/
+def q9LiftInfinityAxisCoordinates (iota F : Type*)
+    [Fintype iota] [DecidableEq iota] [Fintype F] [DecidableEq F] :
+    Finset (iota × AxisTwistedCubicIndex F) :=
+  Finset.univ.map (q9LiftInfinityAxisEmbedding iota F)
+
+omit [Field F] [CharP F 3] in
+/-- The three lifted coordinate types are pairwise disjoint and exhaust every coordinate. -/
+theorem q9Lift_coordinate_type_partition
+    {iota : Type*} [Fintype iota] [DecidableEq iota] :
+    Disjoint (q9LiftCubicCoordinates iota F) (q9LiftFiniteAxisCoordinates iota F) ∧
+      Disjoint (q9LiftCubicCoordinates iota F) (q9LiftInfinityAxisCoordinates iota F) ∧
+      Disjoint (q9LiftFiniteAxisCoordinates iota F) (q9LiftInfinityAxisCoordinates iota F) ∧
+      q9LiftCubicCoordinates iota F ∪ q9LiftFiniteAxisCoordinates iota F ∪
+          q9LiftInfinityAxisCoordinates iota F = Finset.univ := by
+  classical
+  simp only [Finset.disjoint_left, Finset.mem_map, Finset.mem_univ, true_and,
+    q9LiftCubicCoordinates, q9LiftFiniteAxisCoordinates, q9LiftInfinityAxisCoordinates]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · rintro ⟨j, z⟩ ⟨⟨j₁, x⟩, -, rfl⟩ ⟨⟨j₂, y⟩, -, h⟩
+  · rintro ⟨j, z⟩ ⟨⟨j₁, x⟩, -, rfl⟩ ⟨j₂, -, h⟩
+  · rintro ⟨j, z⟩ ⟨⟨j₁, x⟩, -, rfl⟩ ⟨j₂, -, h⟩
+  · ext ⟨j, z⟩
+    cases z with
+    | inl x => simp [q9LiftCubicEmbedding]
+    | inr y =>
+        cases y with
+        | inl a => simp [q9LiftFiniteAxisEmbedding]
+        | inr u => cases u; simp [q9LiftInfinityAxisEmbedding]
+
+omit [Field F] [CharP F 3] in
+/-- Exact coordinate-type multiplicities in an `N`-block q=9 lift: `9N`, `9N`, and `N`. -/
+theorem q9Lift_coordinate_type_counts
+    {iota : Type*} [Fintype iota] [DecidableEq iota]
+    (hcard : Fintype.card F = 9) :
+    (q9LiftCubicCoordinates iota F).card = 9 * Fintype.card iota ∧
+      (q9LiftFiniteAxisCoordinates iota F).card = 9 * Fintype.card iota ∧
+      (q9LiftInfinityAxisCoordinates iota F).card = Fintype.card iota := by
+  simp [q9LiftCubicCoordinates, q9LiftFiniteAxisCoordinates,
+    q9LiftInfinityAxisCoordinates, Fintype.card_prod, hcard, Nat.mul_comm]
+
 /-- Encode one degree-four extension symbol by the axis–twisted-cubic inner code. -/
 noncomputable def q9ExtensionEncoder (hdeg : Module.finrank F L = 4) :
     L ≃ₗ[F] axisTwistedCubicCode (𝔽 := F) := by
@@ -81,19 +158,31 @@ theorem q9ExtensionLiftCode_parameters
       q9ExtensionLiftCode] using hdist
 
 omit [Fintype L] in
+/-- Ordinary extension-field dual distance five transfers every repair hypergraph through
+radius three, including the smaller radii needed to certify exact mixed locality. -/
+theorem q9ExtensionLiftCode_repairHypergraph_of_radius_le_three
+    {iota : Type*} [Fintype iota] [DecidableEq iota]
+    (hdeg : Module.finrank F L = 4) (O : Submodule L (iota → L))
+    (hdO : 5 ≤ dualDist O) (r : ℕ) (hr : r ≤ 3)
+    (j : iota) (z : AxisTwistedCubicIndex F) :
+    repairHypergraph (q9ExtensionLiftCode hdeg O) (j, z) r =
+      embedHypergraph (blockEmbedding j) (axisTwistedCubicRepairHypergraph z r) := by
+  unfold q9ExtensionLiftCode axisTwistedCubicRepairHypergraph
+  apply repairHypergraph_concatenatedCode_eq_embed axisTwistedCubicCode
+    (q9ExtensionEncoder hdeg) (O.restrictScalars F) r
+  · rw [axisTwistedCubicCode_dualDist]
+    omega
+  · exact hasFunctionalDualDistanceAtLeast_restrictScalars O (r + 2) (by omega)
+
+omit [Fintype L] in
 /-- Ordinary extension-field dual distance five is sufficient for exact radius-three transfer. -/
 theorem q9ExtensionLiftCode_repairHypergraph
     {iota : Type*} [Fintype iota] [DecidableEq iota]
     (hdeg : Module.finrank F L = 4) (O : Submodule L (iota → L))
     (hdO : 5 ≤ dualDist O) (j : iota) (z : AxisTwistedCubicIndex F) :
     repairHypergraph (q9ExtensionLiftCode hdeg O) (j, z) 3 =
-      embedHypergraph (blockEmbedding j) (axisTwistedCubicRepairHypergraph z 3) := by
-  unfold q9ExtensionLiftCode axisTwistedCubicRepairHypergraph
-  apply repairHypergraph_concatenatedCode_eq_embed axisTwistedCubicCode
-    (q9ExtensionEncoder hdeg) (O.restrictScalars F) 3
-  · rw [axisTwistedCubicCode_dualDist]
-    omega
-  · exact hasFunctionalDualDistanceAtLeast_restrictScalars O 5 hdO
+      embedHypergraph (blockEmbedding j) (axisTwistedCubicRepairHypergraph z 3) :=
+  q9ExtensionLiftCode_repairHypergraph_of_radius_le_three hdeg O hdO 3 (by omega) j z
 
 omit [Fintype L] in
 /-- Every coordinate of the extension-field lift has a repair set of size at most three. -/
@@ -106,6 +195,42 @@ theorem q9ExtensionLiftCode_allSymbol_locality_three
   refine ⟨R.map (blockEmbedding j), ?_⟩
   rw [q9ExtensionLiftCode_repairHypergraph hdeg O hdO j z]
   exact Finset.mem_image.mpr ⟨R, hR, rfl⟩
+
+omit [Fintype L] in
+/-- Cubic coordinates retain exact locality three after the extension-field lift. -/
+theorem q9ExtensionLiftCode_cubic_exact_locality_three
+    {iota : Type*} [Fintype iota] [DecidableEq iota]
+    (hdeg : Module.finrank F L = 4) (O : Submodule L (iota → L))
+    (hdO : 5 ≤ dualDist O) (j : iota) (x : F) :
+    (∃ R, R ∈ repairHypergraph (q9ExtensionLiftCode hdeg O) (j, .inl x) 3) ∧
+      (∀ R, R ∉ repairHypergraph (q9ExtensionLiftCode hdeg O) (j, .inl x) 2) := by
+  constructor
+  · exact q9ExtensionLiftCode_allSymbol_locality_three hdeg O hdO j (.inl x)
+  · intro R hR
+    rw [q9ExtensionLiftCode_repairHypergraph_of_radius_le_three
+      hdeg O hdO 2 (by omega) j (.inl x)] at hR
+    obtain ⟨S, hS, -⟩ := Finset.mem_image.mp hR
+    exact (cubicCoordinate_exact_locality_three x).2 S hS
+
+omit [Fintype L] in
+/-- Axis coordinates retain exact locality two after the extension-field lift. -/
+theorem q9ExtensionLiftCode_axis_exact_locality_two
+    {iota : Type*} [Fintype iota] [DecidableEq iota]
+    (hdeg : Module.finrank F L = 4) (O : Submodule L (iota → L))
+    (hdO : 5 ≤ dualDist O) (j : iota) (y : F ⊕ Unit) :
+    (∃ R, R ∈ repairHypergraph (q9ExtensionLiftCode hdeg O) (j, .inr y) 2) ∧
+      (∀ R, R ∉ repairHypergraph (q9ExtensionLiftCode hdeg O) (j, .inr y) 1) := by
+  constructor
+  · obtain ⟨R, hR⟩ := (axisCoordinate_exact_locality_two y).1
+    refine ⟨R.map (blockEmbedding j), ?_⟩
+    rw [q9ExtensionLiftCode_repairHypergraph_of_radius_le_three
+      hdeg O hdO 2 (by omega) j (.inr y)]
+    exact Finset.mem_image.mpr ⟨R, hR, rfl⟩
+  · intro R hR
+    rw [q9ExtensionLiftCode_repairHypergraph_of_radius_le_three
+      hdeg O hdO 1 (by omega) j (.inr y)] at hR
+    obtain ⟨S, hS, -⟩ := Finset.mem_image.mp hR
+    exact (axisCoordinate_exact_locality_two y).2 S hS
 
 omit [Fintype L] in
 /-- Every coordinate retains the exact q=9 row of matching/transversal invariants. -/
@@ -135,11 +260,34 @@ theorem q9ExtensionLiftCode_row_invariants
       | inl a => exact axisTwistedCubic_q9_row_invariants hcard (.inr (.inl a))
       | inr u => cases u; exact axisTwistedCubic_q9_row_invariants hcard (.inr (.inr Unit.unit))
 
+omit [Fintype L] in
+/-- Exact guaranteed helper-failure thresholds `tau-1` for all three lifted coordinate types. -/
+theorem q9ExtensionLiftCode_failure_thresholds
+    {iota : Type*} [Fintype iota] [DecidableEq iota]
+    (hcard : Fintype.card F = 9) (hdeg : Module.finrank F L = 4)
+    (O : Submodule L (iota → L)) (hdO : 5 ≤ dualDist O)
+    (j : iota) (z : AxisTwistedCubicIndex F) :
+    match z with
+    | .inl _ =>
+        transversalNumber (repairHypergraph (q9ExtensionLiftCode hdeg O) (j, z) 3) - 1 = 6
+    | .inr (Sum.inr _) =>
+        transversalNumber (repairHypergraph (q9ExtensionLiftCode hdeg O) (j, z) 3) - 1 = 12
+    | .inr (Sum.inl _) =>
+        transversalNumber (repairHypergraph (q9ExtensionLiftCode hdeg O) (j, z) 3) - 1 = 11 := by
+  have h := q9ExtensionLiftCode_row_invariants hcard hdeg O hdO j z
+  split at h <;> omega
+
+#print axioms q9Lift_coordinate_type_partition
+#print axioms q9Lift_coordinate_type_counts
 #print axioms finrank_restrictScalars_eq_mul
 #print axioms q9ExtensionLiftCode_parameters
+#print axioms q9ExtensionLiftCode_repairHypergraph_of_radius_le_three
 #print axioms q9ExtensionLiftCode_repairHypergraph
 #print axioms q9ExtensionLiftCode_allSymbol_locality_three
+#print axioms q9ExtensionLiftCode_cubic_exact_locality_three
+#print axioms q9ExtensionLiftCode_axis_exact_locality_two
 #print axioms q9ExtensionLiftCode_row_invariants
+#print axioms q9ExtensionLiftCode_failure_thresholds
 
 end
 end RepairCodes

@@ -14,6 +14,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | `IMPORTED-1` | Lean-checked consequence of the one named Stichtenoth literature axiom, plus the standard logical axioms. |
 | `LITERATURE` | Context or provenance taken from a cited source; not part of the Lean proof chain. |
 | `PRIOR-ART` | A checked source already contains the concept or result; no novelty is claimed. |
+| `DERIVED` | A kernel-checked strengthening or consequence of listed inputs; not positioned as an independent novelty claim. |
 | `NONE-FOUND` | A bounded adversarial search found no collision; this is not a priority certificate. |
 | `REVIEW-GATE` | Work still required for submission confidence, not a mathematical or formalization blocker. |
 
@@ -30,8 +31,8 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | T4b | Every `q=9` coordinate satisfies `7*nu<=4*tau`, with equality at every cubic coordinate | `KERNEL` | `axisTwistedCubic_q9_ratio`, `axisTwistedCubic_q9_row_invariants` | The equality statement is the cubic row `(4,7)`. |
 | T5 | Exact complete repair-hypergraph transfer under `r+1 < 2d(I^perp)` and outer functional-dual distance at least `r+2` | `KERNEL` | `repairHypergraph_concatenatedCode_eq_embed`; matching/transversal corollaries in `RepairCodes.SeedLift` | Stronger than locality preservation: equality holds for every bounded dual-support repair set. |
 | T6 | Finite-separable trace bridge from ordinary extension-field dual distance to the functional-dual gate, with exact support | `KERNEL` | `traceCoefficient_mem_dualCode`, `functionalWeight_traceCoefficient`, `hasFunctionalDualDistanceAtLeast_restrictScalars` | No coding-theory decomposition is imported. |
-| T7 | Degree-four lift has `[19N,4K,>=8D]_9`, all-symbol locality at most three, and exact row transfer when `d(O^perp)>=5` | `KERNEL` | `q9ExtensionLiftCode_parameters`, `q9ExtensionLiftCode_repairHypergraph`, `q9ExtensionLiftCode_allSymbol_locality_three`, `q9ExtensionLiftCode_row_invariants` | Ordinary `GF(9^4)`-linear outer code; restriction of scalars is explicit. |
-| T8 | Unbounded `GF(9)` family with exact rate `2/19`, eventual relative distance `>=8/57`, and exact rows | `IMPORTED-1` | `HasQ9UniformRepairFamily`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The analytic extraction and concrete field embedding are kernel-checked. |
+| T7 | Degree-four lift has `[19N,4K,>=8D]_9`, a disjoint exhaustive coordinate partition with multiplicities `9N,9N,N`, exact locality three on cubic and two on axis coordinates, exact row transfer, and failure thresholds `6,11,12` when `d(O^perp)>=5` | `KERNEL` | `q9ExtensionLiftCode_parameters`, `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, `q9ExtensionLiftCode_repairHypergraph_of_radius_le_three`, `q9ExtensionLiftCode_cubic_exact_locality_three`, `q9ExtensionLiftCode_axis_exact_locality_two`, `q9ExtensionLiftCode_row_invariants`, `q9ExtensionLiftCode_failure_thresholds` | Ordinary `GF(9^4)`-linear outer code; restriction of scalars is explicit. Exact locality is certified by transferring radii one, two, and three, not inferred from radius-three existence alone. |
+| T8 | Unbounded `GF(9)` family with exact rate `2/19`, eventual relative distance `>=1/5`, exact mixed locality, and exact rows | `IMPORTED-1` | `HasQ9UniformRepairFamily`, `eventually_nineteen_mul_length_le_forty_mul_distance`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The analytic extraction, concrete field embedding, and all finite locality statements are kernel-checked. |
 
 ## Imported theorem ledger
 
@@ -52,6 +53,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | N2 | No checked twisted-cubic incidence/covering source was found to compute these coordinatewise `(nu,tau)` rows or prove all-symbol `tau>nu` | `NONE-FOUND` | Geometry and incidence counts are prior art; only the exact repair-invariant computation is positioned as a candidate contribution. |
 | N3 | Formalization novelty is separate from mathematical novelty | `PRIOR-ART` | Lean certification strengthens trust and exposes boundaries; it is not used as evidence that a theorem is new. |
 | N4 | The asymptotic theorem is a derived candidate result, not a claim that AG concatenation itself is new | `NONE-FOUND` | Candidate value is simultaneous fixed-alphabet positive rate/distance plus exact blockwise repair rows. |
+| N5 | Improving the displayed distance constant from `8/57` to `1/5`, and spelling out multiplicities/localities/failure thresholds, are arithmetic and transfer consequences rather than separate constructions | `DERIVED` | `19/40<39/80` gives eventual `19N<=40D`; the exact type data follow from the already-proved complete-hypergraph transfer and q=9 seed table. Do not market these tightenings as independent novelty. |
 | G1 | Specialist citation-chain review in MathSciNet/zbMATH/IEEE Xplore | `REVIEW-GATE` | Submission preflight only; it does not block the mathematical theorem chain or internal manuscript assembly. |
 
 ## Consistency and release checklist
@@ -73,9 +75,11 @@ an impressionistic reread.
 - [x] The finite lift uses the full `[19,4,8]_9` seed, its actual dual distance three, outer ordinary
   dual distance at least five, and parameters `[19N,4K,>=8D]_9`.
 - [x] The asymptotic arithmetic is synchronized: extension degree four, outer field size `6561`,
-  source bound `39/80`, eventual `N<=3D`, rate `2/19`, and relative distance `>=8/57`.
-- [x] Lifted locality is phrased as “at most three,” matching the formal headline declaration;
-  exact locality two/three is reserved for the finite inner seed where it is explicitly proved.
+  source bound `39/80`, eventual `19N<=40D`, rate `2/19`, and relative distance `>=1/5`.
+- [x] Lifted locality is exact: locality three on the `9N` cubic coordinates and locality two on
+  the `9N+N` axis coordinates; the proof transfers radii one, two, and three.
+- [x] The lifted row multiplicities and their `tau-1` thresholds are synchronized as
+  `9N:(4,7):6`, `9N:(6,12):11`, and `N:(7,13):12`.
 
 ### Formal trust and source boundary
 

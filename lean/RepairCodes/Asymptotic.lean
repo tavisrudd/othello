@@ -7,13 +7,14 @@ import Mathlib.FieldTheory.Finite.GaloisField
 The sole deep input is quarantined in `RepairCodes.Imported`: Stichtenoth's
 self-dual TVZ family over `F_6561`.  Everything here is a checked reduction:
 
-1. specialize its limiting distance `39/80` to the conservative eventual bound `d > n/3`;
+1. specialize its limiting distance `39/80` to the eventual bounds `d > n/3` and
+   `19n ≤ 40d`;
 2. use self-duality for the same ordinary dual-distance bound;
 3. restrict scalars along a degree-four extension `L/F_9` and apply the proved trace bridge;
 4. concatenate with the `[19,4,8]_9` axis–twisted-cubic seed.
 
 The result has unbounded length, exact asymptotic rate `2/19`, eventual relative distance at
-least `8/57`, and exact blockwise repair rows `(4,7)`, `(6,12)`, `(7,13)`.
+least `1/5`, and exact blockwise repair rows `(4,7)`, `(6,12)`, `(7,13)`.
 -/
 
 namespace RepairCodes
@@ -43,13 +44,33 @@ theorem eventually_length_le_three_mul_distance
   have hreal : (n j : ℝ) < 3 * d j := by nlinarith
   exact_mod_cast (Nat.le_of_lt (by exact_mod_cast hreal : n j < 3 * d j))
 
+/-- A limit at least `39/80` yields the near-limit integer bound `19n ≤ 40d` eventually.
+This is the clean `19/40 < 39/80` specialization used for the paper's `1/5` concatenated
+relative-distance constant. -/
+theorem eventually_nineteen_mul_length_le_forty_mul_distance
+    (n d : ℕ → ℕ) (δ : ℝ)
+    (hd : Tendsto (fun j ↦ (d j : ℝ) / (n j : ℝ)) atTop (nhds δ))
+    (hδ : (39 : ℝ) / 80 ≤ δ) :
+    ∀ᶠ j in atTop, 19 * n j ≤ 40 * d j := by
+  have htarget : (19 : ℝ) / 40 < δ := lt_of_lt_of_le (by norm_num) hδ
+  have hratio : ∀ᶠ j in atTop, (19 : ℝ) / 40 < (d j : ℝ) / (n j : ℝ) :=
+    (tendsto_order.mp hd).1 _ htarget
+  filter_upwards [hratio] with j hjratio
+  by_cases hn : n j = 0
+  · simp [hn]
+  · have hnpos : (0 : ℝ) < n j := by exact_mod_cast Nat.pos_of_ne_zero hn
+    have hmul := (lt_div_iff₀ hnpos).mp hjratio
+    have hreal : (19 : ℝ) * n j < 40 * d j := by nlinarith
+    exact_mod_cast (Nat.le_of_lt (by exact_mod_cast hreal : 19 * n j < 40 * d j))
+
 variable {F L : Type*}
 variable [Field F] [Fintype F] [DecidableEq F] [CharP F 3]
 variable [Field L] [Fintype L] [DecidableEq L] [Algebra F L]
 variable [FiniteDimensional F L] [Algebra.IsSeparable F L]
 
 /-- The complete paper-facing asymptotic family property: unbounded block length, exact rate
-`2/19`, eventual relative distance at least `8/57`, and all three exact q=9 repair rows. -/
+`2/19`, eventual relative distance at least `1/5`, exact mixed locality two/three, and all three
+exact q=9 repair rows. -/
 def HasQ9UniformRepairFamily (hdeg : Module.finrank F L = 4) : Prop :=
   ∃ (n : ℕ → ℕ) (O : (j : ℕ) → Submodule L (Fin (n j) → L)),
     Tendsto (fun j ↦ Fintype.card
@@ -57,10 +78,16 @@ def HasQ9UniformRepairFamily (hdeg : Module.finrank F L = 4) : Prop :=
     (∀ᶠ j in atTop,
       19 * Module.finrank F (q9ExtensionLiftCode hdeg (O j)) =
           2 * Fintype.card (Fin (n j) × AxisTwistedCubicIndex F) ∧
-      8 * Fintype.card (Fin (n j) × AxisTwistedCubicIndex F) ≤
-          57 * minDist (q9ExtensionLiftCode hdeg (O j)) ∧
+      Fintype.card (Fin (n j) × AxisTwistedCubicIndex F) ≤
+          5 * minDist (q9ExtensionLiftCode hdeg (O j)) ∧
       ∀ (x : Fin (n j)) (z : AxisTwistedCubicIndex F),
-        (∃ R, R ∈ repairHypergraph (q9ExtensionLiftCode hdeg (O j)) (x, z) 3) ∧
+        (match z with
+          | .inl _ =>
+              (∃ R, R ∈ repairHypergraph (q9ExtensionLiftCode hdeg (O j)) (x, z) 3) ∧
+                (∀ R, R ∉ repairHypergraph (q9ExtensionLiftCode hdeg (O j)) (x, z) 2)
+          | .inr _ =>
+              (∃ R, R ∈ repairHypergraph (q9ExtensionLiftCode hdeg (O j)) (x, z) 2) ∧
+                (∀ R, R ∉ repairHypergraph (q9ExtensionLiftCode hdeg (O j)) (x, z) 1)) ∧
           match z with
           | .inl _ =>
               matchingNumber
@@ -80,7 +107,7 @@ def HasQ9UniformRepairFamily (hdeg : Module.finrank F L = 4) : Prop :=
 
 /-- **End-to-end uniform-family repair theorem.**  From the single cited Stichtenoth import,
 construct extension-field outer codes whose q=9 concatenations have unbounded length, exact
-rate `2/19`, eventual relative distance at least `8/57`, and the exact repair row at every
+rate `2/19`, eventual relative distance at least `1/5`, and the exact repair row at every
 coordinate.
 
 The theorem's axiom report contains exactly the quarantined Stichtenoth theorem in addition
@@ -101,7 +128,9 @@ theorem stichtenoth_q9_uniform_repair_family
       card_axisTwistedCubicIndex, hFcard, Nat.mul_comm] using hmul
   · have hgood := eventually_length_le_three_mul_distance n
       (fun j ↦ minDist (O j)) δ hn hdist hδ
-    filter_upwards [hgood] with j hj
+    have hsharp := eventually_nineteen_mul_length_le_forty_mul_distance n
+      (fun j ↦ minDist (O j)) δ hdist hδ
+    filter_upwards [hgood, hsharp] with j hj hjsharp
     have hdual : dualDist (O j) = minDist (O j) := by
       unfold dualDist
       rw [← hself j]
@@ -123,8 +152,10 @@ theorem stichtenoth_q9_uniform_repair_family
       simp only [Fintype.card_fin]
       omega
     · intro x z
-      exact ⟨q9ExtensionLiftCode_allSymbol_locality_three hdeg (O j) hd5 x z,
-        q9ExtensionLiftCode_row_invariants hFcard hdeg (O j) hd5 x z⟩
+      refine ⟨?_, q9ExtensionLiftCode_row_invariants hFcard hdeg (O j) hd5 x z⟩
+      cases z with
+      | inl a => exact q9ExtensionLiftCode_cubic_exact_locality_three hdeg (O j) hd5 x a
+      | inr y => exact q9ExtensionLiftCode_axis_exact_locality_two hdeg (O j) hd5 x y
 
 /-- A concrete model of `F_9`. -/
 abbrev Q9BaseField := GaloisField 3 2
@@ -169,13 +200,14 @@ theorem finrank_q9OuterField : Module.finrank Q9BaseField Q9OuterField = 4 := by
 
 /-- **Concrete unconditional corollary (modulo the one cited import).**  There is an
 unbounded family over the actual `GaloisField 3 2` model of `F_9` with exact rate `2/19`,
-eventual relative distance at least `8/57`, and exact all-coordinate repair rows. -/
+eventual relative distance at least `1/5`, and exact all-coordinate repair rows. -/
 theorem concrete_q9_uniform_repair_family :
     HasQ9UniformRepairFamily finrank_q9OuterField :=
   stichtenoth_q9_uniform_repair_family card_q9BaseField card_q9OuterField
     finrank_q9OuterField
 
 #print axioms eventually_length_le_three_mul_distance
+#print axioms eventually_nineteen_mul_length_le_forty_mul_distance
 #print axioms stichtenoth_q9_uniform_repair_family
 #print axioms concrete_q9_uniform_repair_family
 

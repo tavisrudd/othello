@@ -236,7 +236,8 @@ Post-review dispositions:
 - **Coding / LRC → Paper 6 assembled and internally audited.** `coding-repair-hypergraphs/` contains
   the manuscript, PDF, proof ledger, and adversarial novelty report. `RepairCodes` proves the trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19`, eventual relative
-  distance `≥8/57`, and exact all-coordinate repair rows. The sole deep boundary is Stichtenoth
+  distance `≥1/5`, exact mixed locality, exact type multiplicities, and exact all-coordinate repair
+  rows. The sole deep boundary is Stichtenoth
   Theorem 1.6(ii), quarantined and visible in the headline axiom report. The remaining submission
   gate is an external specialist citation-chain review, not formalization or manuscript assembly.
 - **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;

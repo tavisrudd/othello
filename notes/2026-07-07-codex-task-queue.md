@@ -93,7 +93,8 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    [asymptotic adversarial review](2026-07-13-repaircodes-asymptotic-adversarial-review.md).
 10. **RepairCodes asymptotic outer family — C103 [REPORTED 2026-07-13].** Stichtenoth's self-dual
     TVZ theorem is the sole quarantined import; Lean derives the concrete unbounded q9 family with
-    rate `2/19`, eventual distance `≥8/57`, and exact repair rows. Same review and handoff.
+    rate `2/19`, eventual distance `≥1/5`, exact mixed locality, exact coordinate multiplicities,
+    and exact repair rows. Same review and handoff.
 
 ## Open tasks
 

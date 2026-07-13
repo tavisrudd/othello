@@ -31,10 +31,12 @@ The finite q=9 and uniform characteristic-three results are machine checked end 
 8. `RepairCodes.TraceDual` proves the finite-separable trace-pairing bridge from ordinary
    extension-field dual distance to the coordinate-free functional-dual gate.
 9. `RepairCodes.Q9ExtensionLift` proves the actual degree-four restricted-scalar lift, its
-   `[19N,4K,>=8D]_9` parameters, and exact repair-row transfer.
+   `[19N,4K,>=8D]_9` parameters, a disjoint exhaustive coordinate-type partition with exact
+   multiplicities `9N,9N,N`, exact mixed locality three/two, exact repair-row transfer, and
+   helper-failure thresholds `6,11,12`.
 10. `RepairCodes.Asymptotic` proves the analytic reduction, constructs concrete `GF(9) ⊆ GF(6561)`
     models, and derives the unbounded family with rate `2/19`, eventual relative distance at least
-    `8/57`, and exact all-coordinate repair rows.
+    `1/5`, exact mixed locality, and exact all-coordinate repair rows.
 
 The transfer theorem uses the hypothesis `r+1 < 2*d(I^perp)`, not the stronger and false
 requirement `d(I^perp)=r+1`.  This matters here: the full axis–twisted-cubic code has global dual

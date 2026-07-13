@@ -69,7 +69,8 @@ chosen repair subfamily, is copied block by block.  A trace-duality argument
 turns ordinary extension-field dual distance into this functional gate.
 Combining the $q=9$ seed with a self-dual TVZ outer family gives unbounded
 $\F_9$-linear codes of exact rate $2/19$, eventual relative distance at least
-$8/57$, all-symbol locality at most three, and the same exact repair rows in
+$1/5$, exact locality three on the nine cubic coordinates per block, exact
+locality two on the ten axis coordinates, and the same exact repair rows in
 every block.
 Every finite and reduction step has been formalized in Lean.  The sole deep
 import is Stichtenoth's self-dual TVZ theorem, cited with its exact consumed
@@ -140,8 +141,8 @@ The paper proves the following package.
       extension-field dual distance to that functional gate.
 \item Using Stichtenoth's self-dual TVZ family~\cite{Stichtenoth2005}, we
       derive a fixed-alphabet family over $\F_9$ with exact rate $2/19$,
-      eventual relative distance at least $8/57$, and exact blockwise repair
-      rows.
+      eventual relative distance at least $1/5$, exact mixed locality, and
+      exact blockwise repair rows.
 \end{enumerate}
 
 \subsection*{Novelty posture}
@@ -553,10 +554,13 @@ with
 \[
  [19N,\ 4K,\ \geq8D]_9.
 \]
-It has all-symbol locality at most three, its complete radius-three repair
-hypergraph is an embedded copy of the corresponding $C_9$ hypergraph in
-each block, and the exact rows in Table~\ref{tab:q9} hold at every
-coordinate.
+Its complete radius-three repair hypergraph is an embedded copy of the
+corresponding $C_9$ hypergraph in each block.  Consequently, among its $19N$
+coordinates, $9N$ cubic coordinates have exact locality three and row
+$(\nu,\tau)=(4,7)$, $9N$ finite-axis coordinates have exact locality two and
+row $(6,12)$, and $N$ infinity-axis coordinates have exact locality two and
+row $(7,13)$.  Their guaranteed arbitrary-helper failure thresholds
+$\tau-1$ are respectively $6$, $11$, and $12$.
 \end{corollary}
 
 \begin{proof}
@@ -588,8 +592,9 @@ There is a sequence of $\F_9$-linear codes $\cC_j$ with lengths tending to
 infinity such that, for all sufficiently large $j$,
 \begin{enumerate}[label=(\alph*),leftmargin=2em]
 \item $\cC_j$ has exact rate $2/19$;
-\item its relative minimum distance is at least $8/57$;
-\item every coordinate has locality at most three;
+\item its relative minimum distance is at least $1/5$;
+\item in every inner block, nine coordinates have exact locality three and
+      ten have exact locality two;
 \item according to its inner coordinate type, its complete radius-three
       repair hypergraph has exact row $(4,7)$, $(6,12)$, or $(7,13)$.
 \end{enumerate}
@@ -605,15 +610,16 @@ with $C_9$ after restriction to $\F_9$.  Since $39/80>1/3$, eventually
 \]
 The second inequality and the first imply $D_j\geq5$, so self-duality gives
 $d(O_j^\perp)=D_j\geq5$ and Corollary~\ref{cor:finite-lift} applies.
+Since also $39/80>19/40$, eventually $19N_j\leq40D_j$.
 The lifted length and dimension are $19N_j$ and
 $4(N_j/2)=2N_j$, giving exact rate $2/19$.  Its distance is at least
 $8D_j$, and
 \[
  \frac{d(\cC_j)}{19N_j}
  \geq\frac{8D_j}{19N_j}
- \geq\frac8{57}.
+ \geq\frac15.
 \]
-The exact repair rows transfer blockwise.
+The exact localities and repair rows transfer blockwise.
 \end{proof}
 
 \begin{remark}[Meaning of ``unconditional'']
@@ -697,8 +703,11 @@ proofs establish:
 \item the complete repair-hypergraph equality under concatenation;
 \item the finite-separable trace bridge with exact support;
 \item the concrete fields $\F_9\subset\F_{6561}$ and extension degree four;
-\item the analytic extraction of $N\leq3D$ from the imported limit bound;
-\item the final constants $2/19$ and $8/57$.
+\item the disjoint exhaustive lifted coordinate-type partition and its exact
+      multiplicities $9N,9N,N$;
+\item the analytic extraction of $N\leq3D$ and $19N\leq40D$ from the imported
+      limit bound;
+\item the final constants $2/19$ and $1/5$.
 \end{itemize}
 
 No \texttt{sorry}, \texttt{admit}, \texttt{native\_decide},
@@ -769,9 +778,9 @@ theorem concrete_q9_uniform_repair_family :
     card_q9BaseField card_q9OuterField finrank_q9OuterField
 \end{verbatim}
 Here \texttt{HasQ9UniformRepairFamily} expands to unbounded length, eventual
-$19k=2n$, eventual $8n\leq57d$, a radius-three repair at every coordinate,
-and the exact three-way matching/transversal row match displayed in
-Table~\ref{tab:q9}.  The complete definition is recorded in
+$19k=2n$, eventual $n\leq5d$, exact locality three/two according to inner
+coordinate type, and the exact three-way matching/transversal row match
+displayed in Table~\ref{tab:q9}.  The complete definition is recorded in
 \texttt{RepairCodes/Asymptotic.lean}; the external proof ledger points to
 the exact source line and axiom report.
 
