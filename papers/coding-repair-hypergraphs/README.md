@@ -25,10 +25,11 @@ three coordinate types have exact rows
 
 An exact concatenation theorem preserves the complete radius-three repair hypergraph blockwise.
 Using a degree-four extension and Stichtenoth's self-dual outer codes gives an unbounded `GF(9)`
-family with exact rate `2/19`, eventual relative distance at least `1/5`, exact locality three on
-the `9N` cubic coordinates and exact locality two on the `10N` axis coordinates, and the same
-three rows at every block. The corresponding guaranteed helper-failure thresholds are `6`, `11`,
-and `12`.
+family with exact rate `2/19` and eventual relative distance greater than every fixed
+`c < 39/190` (hence greater than `1/5`). Its disjoint exhaustive coordinate partition has exact
+multiplicities `9N,9N,N`, exact localities three, two, two, the same three rows at every block,
+and guaranteed helper-failure thresholds `6,11,12`. A generic Lean corollary also shows that the
+radius-`r` transfer gates preserve every exact inner locality `s <= r`.
 
 ## Files
 

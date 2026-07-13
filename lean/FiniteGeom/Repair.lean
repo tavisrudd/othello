@@ -63,6 +63,13 @@ theorem repairHypergraph_mono_radius {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
   obtain ⟨hsub, hcard, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
   exact mem_repairHypergraph.mpr ⟨hsub, hcard.trans hrs, y, hy, hyx, hsupp⟩
 
+/-- A coordinate has exact locality `r` when a radius-`r` repair exists and no repair exists at
+any smaller radius.  This definition is phrased using the complete code-derived repair
+hypergraphs, not a selected recovery family. -/
+def HasExactLocalityAt (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) (r : ℕ) : Prop :=
+  (repairHypergraph C x r).Nonempty ∧
+    ∀ s < r, ¬(repairHypergraph C x s).Nonempty
+
 /-- An edge already known to have at most `s` helpers belongs at radius `s`, independently of
 the larger radius at which it was found. -/
 theorem mem_repairHypergraph_of_mem_of_card_le {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}

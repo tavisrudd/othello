@@ -783,3 +783,15 @@ that discharges the transfer interface's finite fields from it:
 - Rebuilt the full `RepairCodes` aggregate and 12-page paper. New finite declarations use only the
   standard logical axioms; the asymptotic headline still adds exactly the single quarantined
   Stichtenoth import. The PDF has no citation, reference, or box warnings.
+
+### Handoff Note — 2026-07-13 (near-limit and generic exact-locality strengthening)
+
+- Kernel-proved that every fixed real `c<39/190` is eventually a strict lifted relative-distance
+  lower bound. The eventual index may depend on `c`; no endpoint attainment claim is made.
+- Bundled the disjoint coordinate partition, `9N,9N,N` multiplicities, exact mixed locality, all
+  three rows, and thresholds `6,11,12` directly into `HasQ9UniformRepairFamily`.
+- Added the reusable `HasExactLocalityAt` predicate and proved that radius-`r` transfer gates
+  preserve every exact locality `s≤r`.
+- Classified all three changes as derived tightenings. They improve statement precision and API
+  reuse without changing the paper's two cautious candidate-novelty loci or its single imported
+  Stichtenoth boundary.

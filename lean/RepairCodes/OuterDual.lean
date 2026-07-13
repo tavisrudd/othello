@@ -69,6 +69,14 @@ the coordinate alphabet is the linear-dual space rather than the base field itse
 def HasFunctionalDualDistanceAtLeast (O : Submodule 𝔽 (ι → V)) (d : ℕ) : Prop :=
   ∀ beta ∈ functionalDual O, beta ≠ 0 → d ≤ functionalWeight beta
 
+omit [DecidableEq 𝔽] in
+/-- A functional-dual distance lower bound remains valid at every smaller threshold. -/
+theorem HasFunctionalDualDistanceAtLeast.mono {O : Submodule 𝔽 (ι → V)} {d e : ℕ}
+    (h : HasFunctionalDualDistanceAtLeast O d) (hed : e ≤ d) :
+    HasFunctionalDualDistanceAtLeast O e := by
+  intro beta hbeta hbeta0
+  exact hed.trans (h beta hbeta hbeta0)
+
 /-- A block vector annihilates the ordinary concatenation of `O` through `e`: pairing each block
 with the encoded outer symbol and summing over blocks gives zero for every outer codeword. -/
 def IsOrthogonalToConcatenation (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)

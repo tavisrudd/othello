@@ -68,8 +68,9 @@ block.  Consequently the entire hypergraph $\cH_x^{(r)}$, rather than a
 chosen repair subfamily, is copied block by block.  A trace-duality argument
 turns ordinary extension-field dual distance into this functional gate.
 Combining the $q=9$ seed with a self-dual TVZ outer family gives unbounded
-$\F_9$-linear codes of exact rate $2/19$, eventual relative distance at least
-$1/5$, exact locality three on the nine cubic coordinates per block, exact
+$\F_9$-linear codes of exact rate $2/19$ whose relative distance is eventually
+greater than every fixed $c<39/190$ (in particular, greater than $1/5$),
+with exact locality three on the nine cubic coordinates per block, exact
 locality two on the ten axis coordinates, and the same exact repair rows in
 every block.
 Every finite and reduction step has been formalized in Lean.  The sole deep
@@ -136,13 +137,15 @@ The paper proves the following package.
       $(\nu,\tau)$ rows and the counts of inclusion-minimal repairs.
 \item We prove exact preservation of complete radius-$r$ repair hypergraphs
       under the block-confinement hypothesis
-      $r+1<2d(I^\perp)$ and an outer functional-dual distance gate.
+      $r+1<2d(I^\perp)$ and an outer functional-dual distance gate.  As a
+      derived corollary, every exact inner locality $s\leq r$ is preserved.
 \item We prove a finite-separable trace bridge from ordinary
       extension-field dual distance to that functional gate.
 \item Using Stichtenoth's self-dual TVZ family~\cite{Stichtenoth2005}, we
       derive a fixed-alphabet family over $\F_9$ with exact rate $2/19$,
-      eventual relative distance at least $1/5$, exact mixed locality, and
-      exact blockwise repair rows.
+      eventual relative distance greater than every fixed $c<39/190$, exact
+      mixed locality, exact type multiplicities, exact repair rows, and
+      helper-failure thresholds.
 \end{enumerate}
 
 \subsection*{Novelty posture}
@@ -162,6 +165,10 @@ locality~\cite{LiuEtAl2022,JinFu2026}, but did not locate either statement.
 This is a bounded search result, not a priority certificate; the accompanying
 novelty ledger records the exact search boundary and the paper avoids
 unconditional ``first'' language.
+The generic exact-locality corollary, the constants below $39/190$, and
+the bundled type multiplicities and failure thresholds are derived
+consequences of those two candidate contributions and the cited outer
+family; we do not position them as separate novelty claims.
 
 \section{Complete bounded repair hypergraphs}
 \label{sec:repair}
@@ -503,6 +510,20 @@ outside block $j$ gives a dual word of every concatenation, proving the
 other inclusion.
 \end{proof}
 
+\begin{corollary}[Exact mixed-locality transfer]\label{cor:exact-locality-transfer}
+Under the hypotheses of Theorem~\ref{thm:transfer}, let $0\leq s\leq r$.
+For every $(j,x)$, the concatenated coordinate has exact locality $s$ if
+and only if the inner coordinate $x$ has exact locality $s$.
+\end{corollary}
+
+\begin{proof}
+The inner gate at radius $s$ follows from $s+1\leq r+1<2d(I^\perp)$, and
+the outer gate follows from $d(O^{\perp_{\rm fun}})\geq r+2\geq s+2$.
+Apply Theorem~\ref{thm:transfer} at every radius at most $s$.  Existence of
+an $s$-repair and nonexistence at every smaller radius are therefore both
+preserved.
+\end{proof}
+
 The inequality $r+1<2d(I^\perp)$ is important.  It does not require
 $d(I^\perp)=r+1$.  For the full $q=9$ seed, $d(C_9^\perp)=3$ because of
 the axis triples, yet radius-three transfer is exact since $4<2\cdot3$.
@@ -568,7 +589,8 @@ Restriction of scalars multiplies dimension by four and does not change
 symbol support.  The usual concatenated-distance argument gives distance at
 least $8D$.  Theorem~\ref{thm:trace} supplies functional-dual distance at
 least five, while $4<2d(C_9^\perp)=6$.  Apply
-Theorem~\ref{thm:transfer} and Table~\ref{tab:q9}.
+Theorem~\ref{thm:transfer}, Corollary~\ref{cor:exact-locality-transfer},
+and Table~\ref{tab:q9}.
 \end{proof}
 
 \section{A fixed-alphabet asymptotic family}
@@ -593,12 +615,20 @@ infinity such that, for all sufficiently large $j$,
 \begin{enumerate}[label=(\alph*),leftmargin=2em]
 \item $\cC_j$ has exact rate $2/19$;
 \item its relative minimum distance is at least $1/5$;
-\item in every inner block, nine coordinates have exact locality three and
-      ten have exact locality two;
-\item according to its inner coordinate type, its complete radius-three
-      repair hypergraph has exact row $(4,7)$, $(6,12)$, or $(7,13)$.
+\item in every inner block, nine cubic coordinates have exact locality
+      three, nine finite-axis coordinates exact locality two, and one
+      infinity-axis coordinate exact locality two;
+\item on those three respective types, the complete radius-three repair
+      rows are $(4,7)$, $(6,12)$, and $(7,13)$, and the guaranteed
+      helper-failure thresholds are $6$, $11$, and $12$.
 \end{enumerate}
 In particular $7\nu_x\leq4\tau_x$ at every coordinate.
+More sharply, for every fixed real $c<39/190$, one has
+\[
+ \frac{d(\cC_j)}{\operatorname{length}(\cC_j)}>c
+\]
+for all sufficiently large $j$ (with the threshold allowed to depend on
+$c$).
 \end{theorem}
 
 \begin{proof}
@@ -620,6 +650,12 @@ $8D_j$, and
  \geq\frac15.
 \]
 The exact localities and repair rows transfer blockwise.
+For the sharper distance statement, fix $c<39/190$.  Then
+$19c/8<39/80$, so eventually $D_j/N_j>19c/8$.  Hence
+\[
+ \frac{d(\cC_j)}{19N_j}
+ \geq\frac{8D_j}{19N_j}>c.
+\]
 \end{proof}
 
 \begin{remark}[Meaning of ``unconditional'']
@@ -701,13 +737,15 @@ proofs establish:
 \item the code parameters and small-circuit classification;
 \item exact locality and all matching/transversal statements;
 \item the complete repair-hypergraph equality under concatenation;
+\item generic preservation of every exact locality $s\leq r$ under the
+      radius-$r$ transfer gates;
 \item the finite-separable trace bridge with exact support;
 \item the concrete fields $\F_9\subset\F_{6561}$ and extension degree four;
 \item the disjoint exhaustive lifted coordinate-type partition and its exact
       multiplicities $9N,9N,N$;
-\item the analytic extraction of $N\leq3D$ and $19N\leq40D$ from the imported
-      limit bound;
-\item the final constants $2/19$ and $1/5$.
+\item the analytic extraction of $N\leq3D$, $19N\leq40D$, and every strict
+      distance constant below $39/190$ from the imported limit bound;
+\item the final rate $2/19$ and clean displayed distance constant $1/5$.
 \end{itemize}
 
 No \texttt{sorry}, \texttt{admit}, \texttt{native\_decide},
@@ -749,6 +787,11 @@ The ASCII substitutions \texttt{F}, \texttt{kappa}, \texttt{iota}, and
 \texttt{\~=l} above are typographical transliterations of the Unicode
 identifiers in the checked source; the proposition is otherwise verbatim.
 
+The checked corollary
+\texttt{hasExactLocalityAt\_concatenatedCode\_iff\_of\_le} states that the
+same radius-$r$ gates preserve the predicate \texttt{HasExactLocalityAt} at
+every $s\leq r$.
+
 \subsection*{Trace-duality bridge}
 \begin{verbatim}
 theorem hasFunctionalDualDistanceAtLeast_restrictScalars
@@ -778,9 +821,10 @@ theorem concrete_q9_uniform_repair_family :
     card_q9BaseField card_q9OuterField finrank_q9OuterField
 \end{verbatim}
 Here \texttt{HasQ9UniformRepairFamily} expands to unbounded length, eventual
-$19k=2n$, eventual $n\leq5d$, exact locality three/two according to inner
-coordinate type, and the exact three-way matching/transversal row match
-displayed in Table~\ref{tab:q9}.  The complete definition is recorded in
+$19k=2n$, eventual $n\leq5d$, every strict relative-distance constant below
+$39/190$, a disjoint exhaustive coordinate partition with multiplicities
+$9N,9N,N$, exact locality three/two, the exact three-way matching/transversal
+row match, and thresholds $6,11,12$.  The complete definition is recorded in
 \texttt{RepairCodes/Asymptotic.lean}; the external proof ledger points to
 the exact source line and axiom report.
 

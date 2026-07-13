@@ -17,6 +17,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | `DERIVED` | A kernel-checked strengthening or consequence of listed inputs; not positioned as an independent novelty claim. |
 | `NONE-FOUND` | A bounded adversarial search found no collision; this is not a priority certificate. |
 | `REVIEW-GATE` | Work still required for submission confidence, not a mathematical or formalization blocker. |
+| `OPEN-MATH` | Optional strengthening that requires a new mathematical argument; not a current paper claim or formalization gap. |
 
 ## Mathematical ledger
 
@@ -29,10 +30,10 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | T4 | At `q=9`, exact rows `(4,7)`, `(6,12)`, `(7,13)`, with minimal-repair counts `28`, `36+8`, `36+12` | `KERNEL` | `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` | Coordinate multiplicities are `9`, `9`, and `1`. |
 | T4a | At `q=9`, the small-circuit support inventory is `120` axis triples and `84` completed cubic quadruples | `KERNEL` | `q9_smallCircuit_support_counts` | Counts distinct supports, not coefficient-scaled dual words. |
 | T4b | Every `q=9` coordinate satisfies `7*nu<=4*tau`, with equality at every cubic coordinate | `KERNEL` | `axisTwistedCubic_q9_ratio`, `axisTwistedCubic_q9_row_invariants` | The equality statement is the cubic row `(4,7)`. |
-| T5 | Exact complete repair-hypergraph transfer under `r+1 < 2d(I^perp)` and outer functional-dual distance at least `r+2` | `KERNEL` | `repairHypergraph_concatenatedCode_eq_embed`; matching/transversal corollaries in `RepairCodes.SeedLift` | Stronger than locality preservation: equality holds for every bounded dual-support repair set. |
+| T5 | Exact complete repair-hypergraph transfer under `r+1 < 2d(I^perp)` and outer functional-dual distance at least `r+2`; every exact locality `s<=r` is preserved | `KERNEL` | `repairHypergraph_concatenatedCode_eq_embed`, `FiniteGeom.HasExactLocalityAt`, `hasExactLocalityAt_concatenatedCode_iff_of_le`; matching/transversal corollaries in `RepairCodes.SeedLift` | Stronger than locality preservation: equality holds for every bounded dual-support repair set. Exact mixed-locality transfer is a derived corollary of equality at all radii up to `s`. |
 | T6 | Finite-separable trace bridge from ordinary extension-field dual distance to the functional-dual gate, with exact support | `KERNEL` | `traceCoefficient_mem_dualCode`, `functionalWeight_traceCoefficient`, `hasFunctionalDualDistanceAtLeast_restrictScalars` | No coding-theory decomposition is imported. |
 | T7 | Degree-four lift has `[19N,4K,>=8D]_9`, a disjoint exhaustive coordinate partition with multiplicities `9N,9N,N`, exact locality three on cubic and two on axis coordinates, exact row transfer, and failure thresholds `6,11,12` when `d(O^perp)>=5` | `KERNEL` | `q9ExtensionLiftCode_parameters`, `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, `q9ExtensionLiftCode_repairHypergraph_of_radius_le_three`, `q9ExtensionLiftCode_cubic_exact_locality_three`, `q9ExtensionLiftCode_axis_exact_locality_two`, `q9ExtensionLiftCode_row_invariants`, `q9ExtensionLiftCode_failure_thresholds` | Ordinary `GF(9^4)`-linear outer code; restriction of scalars is explicit. Exact locality is certified by transferring radii one, two, and three, not inferred from radius-three existence alone. |
-| T8 | Unbounded `GF(9)` family with exact rate `2/19`, eventual relative distance `>=1/5`, exact mixed locality, and exact rows | `IMPORTED-1` | `HasQ9UniformRepairFamily`, `eventually_nineteen_mul_length_le_forty_mul_distance`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The analytic extraction, concrete field embedding, and all finite locality statements are kernel-checked. |
+| T8 | Unbounded `GF(9)` family with exact rate `2/19`; for every fixed `c<39/190`, eventual relative distance `>c`; bundled disjoint type distribution, exact mixed locality, rows, and thresholds | `IMPORTED-1` | `HasQ9LiftCoordinateDistribution`, `HasQ9LiftCoordinateProfile`, `HasQ9UniformRepairFamily`, `eventually_scaled_lift_distance_gt`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The displayed `1/5` remains a clean explicit corollary. Quantifier order is `forall c<39/190, eventually`, so the eventual index may depend on `c`; equality at `39/190` is not claimed. |
 
 ## Imported theorem ledger
 
@@ -53,8 +54,17 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | N2 | No checked twisted-cubic incidence/covering source was found to compute these coordinatewise `(nu,tau)` rows or prove all-symbol `tau>nu` | `NONE-FOUND` | Geometry and incidence counts are prior art; only the exact repair-invariant computation is positioned as a candidate contribution. |
 | N3 | Formalization novelty is separate from mathematical novelty | `PRIOR-ART` | Lean certification strengthens trust and exposes boundaries; it is not used as evidence that a theorem is new. |
 | N4 | The asymptotic theorem is a derived candidate result, not a claim that AG concatenation itself is new | `NONE-FOUND` | Candidate value is simultaneous fixed-alphabet positive rate/distance plus exact blockwise repair rows. |
-| N5 | Improving the displayed distance constant from `8/57` to `1/5`, and spelling out multiplicities/localities/failure thresholds, are arithmetic and transfer consequences rather than separate constructions | `DERIVED` | `19/40<39/80` gives eventual `19N<=40D`; the exact type data follow from the already-proved complete-hypergraph transfer and q=9 seed table. Do not market these tightenings as independent novelty. |
+| N5 | Improving the displayed distance constant from `8/57` to `1/5`, then to every strict `c<39/190`, and bundling multiplicities/localities/failure thresholds are arithmetic and transfer consequences rather than separate constructions | `DERIVED` | For fixed `c<39/190`, `19c/8<39/80`; the exact type data follow from complete-hypergraph transfer and the q=9 seed table. Neither equality at `39/190` nor a new asymptotic construction is claimed. |
+| N6 | Generic preservation of exact locality `s<=r` is a reusable strengthening of the transfer API, not a separate novelty locus | `DERIVED` | It follows formally from complete-hypergraph equality at each radius up to `s` plus monotonicity of the same inner/outer gates. Candidate novelty remains attached to complete-support equality itself. |
 | G1 | Specialist citation-chain review in MathSciNet/zbMATH/IEEE Xplore | `REVIEW-GATE` | Submission preflight only; it does not block the mathematical theorem chain or internal manuscript assembly. |
+
+## Optional strengthening ledger
+
+| ID | Direction | Status | Exact present boundary |
+|---|---|---|---|
+| F1 | Determine the cubic-coordinate matching number for general `q=3^h` | `OPEN-MATH` | Lean proves uniform lower/upper bounds and equality at `q=9`; no general closed formula is claimed. |
+| F2 | Replace semantic `Z_3(q)` in the axis rows by further exact values or sharper explicit estimates | `OPEN-MATH` | The formulas in terms of `Z_3(q)` are exact and `Z_3(9)=4` is checked; further evaluation needs cap-set mathematics or a precisely quarantined source theorem. |
+| F3 | Prove necessity/optimality, or weaken, the concatenation transfer gates | `OPEN-MATH` | Lean proves sufficiency only. No boundary counterexample, necessity theorem, or global sharpness claim appears in the paper. |
 
 ## Consistency and release checklist
 
@@ -72,14 +82,19 @@ an impressionistic reread.
 - [x] The transfer theorem is stated only as a sufficient result under
   `r+1 < 2*d(I^perp)` and functional-dual distance at least `r+2`; no sharpness or necessity claim
   remains.
+- [x] Exact-locality transfer is stated for every `s<=r`, and both existence at `s` and
+  nonexistence below `s` are represented by the complete repair hypergraphs.
 - [x] The finite lift uses the full `[19,4,8]_9` seed, its actual dual distance three, outer ordinary
   dual distance at least five, and parameters `[19N,4K,>=8D]_9`.
 - [x] The asymptotic arithmetic is synchronized: extension degree four, outer field size `6561`,
-  source bound `39/80`, eventual `19N<=40D`, rate `2/19`, and relative distance `>=1/5`.
+  source bound `39/80`, rate `2/19`, every fixed distance constant `c<39/190`, and the clean
+  explicit corollary `>=1/5`; no endpoint claim at `39/190` appears.
 - [x] Lifted locality is exact: locality three on the `9N` cubic coordinates and locality two on
   the `9N+N` axis coordinates; the proof transfers radii one, two, and three.
 - [x] The lifted row multiplicities and their `tau-1` thresholds are synchronized as
   `9N:(4,7):6`, `9N:(6,12):11`, and `N:(7,13):12`.
+- [x] `HasQ9UniformRepairFamily` itself bundles the partition, multiplicities, exact localities,
+  rows, and thresholds rather than relying only on adjacent declarations.
 
 ### Formal trust and source boundary
 

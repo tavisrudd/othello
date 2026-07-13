@@ -334,6 +334,48 @@ theorem repairHypergraph_concatenatedCode_eq_embed
     exact mem_repairHypergraph.mpr ⟨hsub, hcard, w, hwdual, hwx, hsupp⟩
 
 omit [DecidableEq V] in
+/-- **Generic mixed-locality transfer.** Under the complete-transfer gates at radius `r`, exact
+locality is preserved at every radius `s ≤ r`.  The single radius-`r` outer gate supplies every
+smaller-radius gate by monotonicity. -/
+theorem hasExactLocalityAt_concatenatedCode_iff_of_le
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (r s : ℕ) (hsr : s ≤ r)
+    (hsI : r + 1 < 2 * dualDist I)
+    (hdO : HasFunctionalDualDistanceAtLeast O (r + 2))
+    (j : ι) (x : κ) :
+    HasExactLocalityAt (concatenatedCode I e O) (j, x) s ↔
+      HasExactLocalityAt I x s := by
+  have hnonempty : ∀ t ≤ s,
+      (repairHypergraph (concatenatedCode I e O) (j, x) t).Nonempty ↔
+        (repairHypergraph I x t).Nonempty := by
+    intro t hts
+    have htI : t + 1 < 2 * dualDist I := by omega
+    have htO : HasFunctionalDualDistanceAtLeast O (t + 2) := hdO.mono (by omega)
+    rw [repairHypergraph_concatenatedCode_eq_embed I e O t htI htO j x]
+    simp [embedHypergraph]
+  constructor
+  · rintro ⟨hr, hsmall⟩
+    refine ⟨(hnonempty s le_rfl).mp hr, ?_⟩
+    intro t hts ht
+    exact hsmall t hts ((hnonempty t (Nat.le_of_lt hts)).mpr ht)
+  · rintro ⟨hr, hsmall⟩
+    refine ⟨(hnonempty s le_rfl).mpr hr, ?_⟩
+    intro t hts ht
+    exact hsmall t hts ((hnonempty t (Nat.le_of_lt hts)).mp ht)
+
+omit [DecidableEq V] in
+/-- Exact locality at the transfer radius is the diagonal case of mixed-locality transfer. -/
+theorem hasExactLocalityAt_concatenatedCode_iff
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (r : ℕ)
+    (hsI : r + 1 < 2 * dualDist I)
+    (hdO : HasFunctionalDualDistanceAtLeast O (r + 2))
+    (j : ι) (x : κ) :
+    HasExactLocalityAt (concatenatedCode I e O) (j, x) r ↔
+      HasExactLocalityAt I x r :=
+  hasExactLocalityAt_concatenatedCode_iff_of_le I e O r r le_rfl hsI hdO j x
+
+omit [DecidableEq V] in
 /-- Matching number is preserved coordinate-by-coordinate by the exact repair transfer. -/
 theorem matchingNumber_repairHypergraph_concatenatedCode
     (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
@@ -363,6 +405,8 @@ theorem transversalNumber_repairHypergraph_concatenatedCode
 #print axioms concatenatedCode_finrank
 #print axioms concatenatedCode_minDist_lower
 #print axioms repairHypergraph_concatenatedCode_eq_embed
+#print axioms hasExactLocalityAt_concatenatedCode_iff_of_le
+#print axioms hasExactLocalityAt_concatenatedCode_iff
 #print axioms matchingNumber_repairHypergraph_concatenatedCode
 #print axioms transversalNumber_repairHypergraph_concatenatedCode
 

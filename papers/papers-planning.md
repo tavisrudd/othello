@@ -46,9 +46,12 @@ Plus the two `oeis-submissions/` entries (independent of the papers).
   sum-free paper** — its vehicle is the OEIS entry; if the flagship balloons, cut the capacity-c
   material, never sum-free.
 - **D2 — MERGE Baer + completion now (default).** Each half is weak alone by its own audit; merged
-  they are one paper — orbit-valued extension criterion + δ(C)=τ + sharp completion distances for the
-  classical families. A landed twisted-cubic spectrum / t_h(q) result *upgrades* it (or, if large,
-  justifies un-merging later).
+  they are one paper — the exact quadratic-Frobenius orbit-valued extension criterion supported by
+  a formally verified completion/transversal synthesis. The `δ(C)=τ` mechanism and classical-family
+  distances are established infrastructure/applications, not novelty leads. The exact collision
+  correction is Lean-proved, but its proposed `PG(2,25)` consequences are not: prose geometry and
+  external enumeration are evidence only. A complete kernel-certified order-five theorem, inverse,
+  gap, or spectrum theorem would upgrade it further.
 - **D3 — N1 only.** N2 (full-complex reconstruction) → a remarks subsection, out of the abstract and
   contributions, until the paywalled Metsch / Drake–Sané read clears.
 - **D4 — HOLD.** The conic-localization reduction lands on the open (ON) kernel — a scaffold with no
@@ -77,7 +80,7 @@ Ordered by formalization-to-full-trust distance:
 | 3 | Dihedral (+ D₂ₘ)                  | Owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions                                |
 | 4 | Arcs                              | Owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement                  |
 | 5 | Coding / LRC (conditional)        | Lean and manuscript complete; externally gated on specialist priority review, not formalization       |
-| 6 | Baer ⊕ completion                 | Development draft + exact quadratic Lean theorem; classical-radius citations and novelty audit pending |
+| 6 | Baer ⊕ completion                 | Exact collision accounting Lean-built; all order-five profiles unproved pending Lean geometry/certificates; citations and priority gates remain |
 | 7 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
 
 **Highest-leverage first move:** stand up the public-artifact spine — extract the first public repo
@@ -97,7 +100,7 @@ each *elementary*. Each abstract opens with the nontrivial lead:
 | Flagship     | The complete outcome classification **with the exact method boundary**                      | `main.tex` is organized around the method and still calls projective open — reorganize to open with the classification + dichotomy |
 | Dihedral     | Exact nimbers for an explicit infinite family (the ((q+1−2s)/4)·K₄ law + D₂ₘ/polyhedral)     | elementary without D₂ₘ; the explicit families are the content |
 | Arcs         | The exact prescribed-hole defect identity + additive-3/2 refinement + verified values       | fine |
-| Baer⊕compl.  | Orbit-valued criterion + **exact** completion distances for the classical families          | δ=τ / the hypergraph frame are mechanism; the sharp values are the lead |
+| Baer⊕compl.  | Exact quadratic-Frobenius orbit-valued criterion and semantic legal-extension theorem       | completion/hypergraph machinery and classical radii are supporting synthesis; seek one family-specific strengthening |
 | Continuation | The rigidity theorem: Aut(frame graph) = ambient semilinear group for q ≥ 13                | fine if N2 truly demoted |
 | Coding       | The `[19,4,8]₉` all-symbol repair seed + exact unbounded `GF(9)` row transfer                  | lead with the certified family, not the transfer mechanism alone |
 | A344227      | **G(17)=2 refutes the published eventual-alternation conjecture** (a refutation)             | frame exactly this way |
@@ -205,7 +208,7 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 | Paper                            | Gate / loose end                                                                          |
 |----------------------------------|-------------------------------------------------------------------------------------------|
 | `nofil-finite-geometry-outcomes` | Q⁻ elliptic method-negative needs a Scharlau/Witt-transfer lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are prior art |
-| `baer` ⊕ `completion`            | √2·s = Lunelli–Sce (not new; headline is the orbit criterion + exact completion distances); Storme–Szőnyi / MathSciNet audit; no constant-novelty claims |
+| `baer` ⊕ `completion`            | Broad adversarial audit complete. Exact collision accounting is checked; every order-five consequence remains unproved until Lean checks the geometry and finite certificate. Specialist priority search follows proof. |
 | `continuation-graph-rigidity`    | N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané read (keep N2 out of the abstract) |
 | Coding / LRC                     | Internal audit narrows novelty to exact all-symbol `(ν,τ)` separation and complete-hypergraph transfer; external specialist citation-chain review remains |
 
@@ -235,9 +238,9 @@ Post-review dispositions:
 
 - **Coding / LRC → Paper 6 assembled and internally audited.** `coding-repair-hypergraphs/` contains
   the manuscript, PDF, proof ledger, and adversarial novelty report. `RepairCodes` proves the trace
-  bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19`, eventual relative
-  distance `≥1/5`, exact mixed locality, exact type multiplicities, and exact all-coordinate repair
-  rows. The sole deep boundary is Stichtenoth
+  bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed
+  eventual distance bound `c<39/190`, plus a bundled exact coordinate distribution, mixed
+  locality, rows, and thresholds. The sole deep boundary is Stichtenoth
   Theorem 1.6(ii), quarantined and visible in the headline axiom report. The remaining submission
   gate is an external specialist citation-chain review, not formalization or manuscript assembly.
 - **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;

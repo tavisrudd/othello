@@ -74,37 +74,41 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    spinoff lane closed: the defect, conic, asymptotic, averaging, nucleus, and certified-example
    packages are Lean-proved under the strict trust gate. Final map:
    [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-6. **Applications second-order revisit — C99 [UNBLOCKED 2026-07-12].** The Baer/completion
-   formalization and first adversarial review are complete; the post-formalization question has
-   been re-asked in the appendix. Next: targeted novelty checks on its best two candidates.
-   Appendix/report:
-   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
-7. **Relative-conic game localization review — C100.** The persistent cap-game confinement bridge
-   and q=11 icosahedral antipodal P residual are Lean-proved. Review the `q=9` terminal witness,
-   corpus descent/reachability, and defect-to-C80 potential transfer. Report:
+6. **Applications second-order revisit — C99 [OPEN — ORDER-FIVE LEAN PROOF REQUIRED].** The
+   paper-wide adversarial audit demoted the generic blocker, weighted, symmetry, reliability,
+   defining-set, and algorithmic constructions to established infrastructure. Exact collision
+   accounting is Lean-proved. The `s=5` profile arguments and external census are proof-search
+   evidence only; none is a theorem until Lean checks the missing geometry and finite coverage.
+   Kernel formalization of all order-five profiles is the next theorem lever.
+   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue),
+   [proof ledger](2026-07-13-c99-baer-collision-strengthening.md),
+   [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).
+7. **Relative-conic game localization review — C100 [REPORTED 2026-07-12].** Exact parametrized
+   game localization, the q=9 terminal P witness, and the actual q=11 icosahedral seeded P position
+   are Lean-proved. Corpus descent and defect-to-C80 reviews were negative for the tested levers. Report:
    [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
-8. **Exact relative-conic value at q=16 — C101.** Decide the manuscript's sole finite gap by a
-   checked eight-point witness or a checked exhaustive nonexistence certificate, then synchronize
-   the exact Lean theorem and paper. Track in the
-   [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
+8. **Exact relative-conic value at q=16 — C101 [REPORTED 2026-07-12].** A checked exhaustive
+   projective classification excludes cardinality eight and the existing nine-point witness gives
+   `rhoC(16)=9`. The strict-trust Lean theorem, paper, PDF, proof audit, verifier provenance, trust
+   manifest, and paper index are synchronized. Final map:
+   [rho_C(16) handoff](handoffs/done/2026-07-12-rhoc16-exact-value.md).
 9. **RepairCodes outer trace bridge — C102 [REPORTED 2026-07-13].** The finite-separable trace
    pairing now proves ordinary extension-field dual distance implies the restricted functional-dual
    gate with exact support. Review:
    [asymptotic adversarial review](2026-07-13-repaircodes-asymptotic-adversarial-review.md).
 10. **RepairCodes asymptotic outer family — C103 [REPORTED 2026-07-13].** Stichtenoth's self-dual
     TVZ theorem is the sole quarantined import; Lean derives the concrete unbounded q9 family with
-    rate `2/19`, eventual distance `≥1/5`, exact mixed locality, exact coordinate multiplicities,
-    and exact repair rows. Same review and handoff.
+    rate `2/19`, every fixed eventual distance bound `c<39/190`, and a bundled exact coordinate
+    partition/locality/row/threshold profile. Same review and handoff.
 
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C101 [ACTIVE 2026-07-12] — decide `rho_C(16)`.** Search first for an eight-point relative arc;
-  if none exists, certify exhaustive nonexistence modulo proved conic-stabilizer symmetries. The
-  accepted endpoint is an exact strict-trust Lean theorem plus synchronized manuscript/PDF,
-  verifier provenance, trust manifest, and papers index. Track in the
-  [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
+- **C101 [REPORTED 2026-07-12] — exact `rho_C(16)`.** The complete projective augmentation books
+  give 2633 eight-arc classes. Quadratic evaluation rank rejects 2630; the remaining three have a
+  forced arc hit. Lean proves no relative-complete eight-arc and `rhoC(16)=9`. Final map:
+  [rho_C(16) handoff](handoffs/done/2026-07-12-rhoc16-exact-value.md).
 
 - **C102 [REPORTED 2026-07-13] — extension-field trace bridge for RepairCodes.** Kernel-proved in
   `RepairCodes/TraceDual.lean`, including exact support preservation. Track in the
@@ -114,17 +118,20 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   family theorem is Lean-checked from exactly one cited import, Stichtenoth Theorem 1.6(ii).
   Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
-- **C99 [OPEN — UNBLOCKED 2026-07-12] — post-formalization second-order application revisit.** The
-  completed declaration graph and adversarial review produced equality-in-charge, linewise
-  collision profiles, and higher-orbit semantic forbiddenness as fresh candidates. Select two and
-  perform targeted novelty checks. Report to the
-  [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
+- **C99 [OPEN — ORDER-FIVE LEAN PROOF REQUIRED] — post-formalization second-order application
+  revisit.** The subtraction-free linewise and aggregate collision identities are Lean-proved.
+  The exact accounting is Lean-proved. Cross-center/moment sketches for `f=0,4` and two external
+  enumerations for `f=2` are unproved evidence. The live lever is a complete kernel proof: formalize
+  the geometry and certify normalization/coverage in Lean. No order-five result enters the theorem
+  ledger before that gate. Track in the
+  [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue)
+  [proof ledger](2026-07-13-c99-baer-collision-strengthening.md), and
+  [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).
 
-- **C100 [ACTIVE 2026-07-12 — localization bridge proved; odd-plane consumers under review].**
-  Every projective cap continuation of a `CompleteOutside A H` seed stays in `A∪H`, so every later
-  legal move lies in `H`. The exact q=11 determinant residual is now Lean-identified as the
-  icosahedral graph and proved P by antipodal mirror. Review/formalize the `q=9` terminal seed,
-  exact-corpus descent, and defect/drain-potential link; this is not yet an (ON) theorem. Report:
+- **C100 [REPORTED 2026-07-12] — relative-conic game localization.** The exact recursive
+  parametrized-hole bridge, q=9 terminal P theorem, and actual q=11 seeded P theorem are
+  strict-trust Lean-proved. The tested two-ply descent closures are absent and the exact uncovered
+  translation does not sharpen C80's minimax potential; this is not an (ON) theorem. Report:
   [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
 
 - **C89 [REPORTED 2026-07-12] — relative-conic-arcs foundation.** The isolated
@@ -175,8 +182,8 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 - **C96 [REPORTED 2026-07-12] — certified small examples and trust audit.** A generic rules-only
   checker reduces coverage to `q²+q+1` canonical representatives and proves accepted raw data
   semantically complete outside the conic. Frozen kernel checks prove `rhoC=6` at `q=8,9,11` and
-  `8≤rhoC≤9` at `q=16`; the warning-free build, provenance, isolation, forbidden-token, and axiom
-  audits pass. Track in the
+  the preliminary bound `8≤rhoC≤9` at `q=16`; C101 subsequently closes it to `rhoC=9`. The
+  warning-free build, provenance, isolation, forbidden-token, and axiom audits pass. Track in the
   [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C97 [REPORTED 2026-07-13] — full coding/LRC paper assembled and internally audited.**

@@ -75,3 +75,16 @@ Consequently the `9N` cubic coordinates have exact locality three, while the `9N
 `N` infinity-axis coordinates have exact locality two.  Their transferred rows give exact
 guaranteed helper-failure thresholds `6`, `11`, and `12`.  These are formal tightenings and
 derived consequences, not independent novelty claims.
+
+## Near-limit and bundled-headline addendum — 2026-07-13
+
+The analytic reduction now proves the quantifier-exact near-limit statement: for every fixed real
+`c<39/190`, the lifted relative distance is eventually strictly greater than `c`. The eventual
+index may depend on `c`, and no equality or attainment claim is made at `39/190`. The earlier
+`1/5` statement remains as a clean explicit corollary.
+
+`HasQ9UniformRepairFamily` now directly bundles the disjoint exhaustive coordinate partition,
+multiplicities `9N,9N,N`, exact localities three/two/two, all three repair rows, and thresholds
+`6,11,12`. Separately, `hasExactLocalityAt_concatenatedCode_iff_of_le` proves that radius-`r`
+transfer gates preserve every exact inner locality `s≤r`. Both strengthenings are kernel-checked
+derived consequences and introduce no new novelty claim or trust dependency.

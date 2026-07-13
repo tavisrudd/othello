@@ -10,8 +10,9 @@ Lean-proved. The full seed has global dual distance three; transfer uses the cor
 boundary is in [`lean/RepairCodes/TRUST.md`](../../lean/RepairCodes/TRUST.md). The trace-duality
 bridge, degree-four extension lift, concrete finite-field instantiation, and asymptotic reduction
 are Lean-proved.  The resulting unbounded q9 family has exact rate `2/19`, eventual relative
-distance at least `1/5`, exact locality three on cubic coordinates and two on axis coordinates,
-and exact repair rows; its sole deep dependency is the quarantined
+distance greater than every fixed `c<39/190` (with `1/5` retained as a clean corollary), exact
+locality three on cubic coordinates and two on axis coordinates, and exact repair rows; its sole
+deep dependency is the quarantined
 Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
 review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
 The assembled 12-page manuscript, PDF, proof ledger, and adversarial novelty report are in
@@ -221,11 +222,11 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; exact embedded identification of the actual q9 repair hypergraph; `ν=3`, `τ=5`; exact twelve-line/eight-avoiding-zero counts. |
 | `RepairCodes/AxisTwistedCubic.lean`, `AxisTwistedCubicInvariants.lean` | natural-index row code; exact global dual distance three; exact locality two/three and complete repair classifications; sharp nucleus/generic-axis formulas; cubic `τ=q−2`, rainbow lower bound and matching upper bound; exact cubic repair count `choose(q−1,2)`; all-symbol `τ>ν` for `q≥9`. |
 | `RepairCodes/Q9Uniform.lean`, `Q9CircuitInventory.lean` | kernel-checked q9 row table `(4,7),(6,12),(7,13)`; exact `28`, `36+8`, `36+12` repair counts; exact `120` axis-three / `84` completed-cubic-four circuit-support inventory; no generated or native certificate. |
-| `RepairCodes/SeedLift.lean`, `Q9SeedLift.lean` | actual concatenated submodule; dimension and distance lower bound; exact equality of complete repair hypergraphs under `r+1<2*d(I⊥)` and the outer functional-dual gate; exact `ν`/`τ` transfer; q9 `[19N,4K,≥8D]₉`, all-symbol locality at most three, exact lifted row table, and `7ν≤4τ`. |
+| `RepairCodes/SeedLift.lean`, `Q9SeedLift.lean` | actual concatenated submodule; dimension and distance lower bound; exact equality of complete repair hypergraphs under `r+1<2*d(I⊥)` and the outer functional-dual gate; generic preservation of every exact locality `s≤r`; exact `ν`/`τ` transfer; q9 `[19N,4K,≥8D]₉`, all-symbol locality at most three, exact lifted row table, and `7ν≤4τ`. |
 | `RepairCodes/TraceDual.lean` | nondegenerate trace representation; ordinary extension-field dual word recovery; exact functional/Hamming support equality; ordinary dual distance ⇒ restricted functional-dual gate |
 | `RepairCodes/Q9ExtensionLift.lean` | actual degree-four restricted-scalar lift; dimension multiplier; `[19N,4K,≥8D]₉`; disjoint exhaustive type partition with exact counts `9N,9N,N`; exact locality three/two; exact repair-row transfer and failure thresholds `6,11,12` from ordinary extension-field dual distance |
 | `RepairCodes/Imported.lean` | sole quarantined deep input: Stichtenoth Theorem 1.6(ii), specialized to self-dual codes over `GF(6561)` with limit distance `≥39/80` |
-| `RepairCodes/Asymptotic.lean` | kernel-checked analytic reduction; concrete `GF(9) ⊆ GF(6561)` construction; unbounded q9 family with rate `2/19`, eventual distance `≥1/5`, exact mixed locality, and exact all-coordinate rows |
+| `RepairCodes/Asymptotic.lean` | kernel-checked analytic reduction; concrete `GF(9) ⊆ GF(6561)` construction; unbounded q9 family with rate `2/19`, every fixed eventual distance bound `c<39/190`, and a bundled exact coordinate distribution/locality/row/threshold profile |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -246,6 +247,22 @@ synchronization are complete.
 3. **Optional context only:** formalize the symmetric-cube PGL orbit description of the axis if a
    later paper needs that provenance in its proof chain. It is not used by the code construction.
 4. Continue Phases 2–4 per §4 as separate tracks; they are not blockers for RepairCodes.
+
+### Optional real-math strengthening shortlist (not current-paper blockers)
+
+These are deliberately excluded from the completed-paper claim ledger until a theorem is proved.
+
+1. **Exact cubic matching number for general `q=3^h`.** Lean proves uniform lower and upper
+   bounds and the exact `q=9` value, but no closed general formula. Closing the gap needs new
+   finite-additive/combinatorial mathematics before formalization.
+2. **Explicit cap-number input beyond semantic `Z_3(q)`.** The axis transversal formulas are exact
+   in terms of the defined cap number, and `q=9` is evaluated. New exact values or useful uniform
+   estimates for further fields would require cap-set results (proved or imported with the same
+   source discipline).
+3. **Necessity or optimality of the transfer gates.** The current theorem proves sufficiency of
+   `r+1<2*d(I⊥)` and functional-dual distance at least `r+2`. Any sharpness statement needs either
+   counterexample families at the boundary or a genuinely weaker transfer theorem; none is
+   claimed in the paper.
 
 ### Discovery track for final review
 
@@ -273,6 +290,8 @@ novelty remains subject to the external specialist gate unless explicitly stated
 - **Proved transfer strengthening:** complete repair-hypergraph preservation needs only
   `r+1<2*d(I⊥)`, not `d(I⊥)=r+1`. This covers mixed-locality seeds such as the full q9 code, whose
   global dual distance is three even though radius-three repair transfer is exact.
+- **Proved reusable corollary:** the same radius-`r` gates preserve every exact inner locality
+  `s≤r`, including both existence at radius `s` and nonexistence at all smaller radii.
 - **Proved coordinate-free extension:** the outer alphabet may be any finite-dimensional symbol
   module with an encoder equivalence; extension-field trace coordinates are one optional
   presentation, not part of the finite theorem.
@@ -285,10 +304,11 @@ novelty remains subject to the external specialist gate unless explicitly stated
   characteristic-three field containing a square root of `−1`; order nine is used only to make
   the matching bound sharp.
 - **Proved applied upgrade:** the paper's fixed-alphabet asymptotic existence claim now has a
-  concrete Lean theorem: unbounded length, exact rate `2/19`, eventual relative distance at least
-  `1/5`, exact mixed locality, and exact preservation of all three repair rows, with only
-  Stichtenoth Theorem 1.6(ii) imported. The constant improvement is a checked arithmetic
-  tightening of the same construction, not a separate novelty claim.
+  concrete Lean theorem: unbounded length, exact rate `2/19`, eventual relative distance greater
+  than every fixed `c<39/190`, and a bundled exact partition, locality, row, and threshold profile,
+  with only Stichtenoth Theorem 1.6(ii) imported. The near-limit formulation is a checked
+  arithmetic tightening of the same construction, not a separate novelty claim; the endpoint is
+  not asserted.
 - **Proved simplification:** self-dual TVZ outer codes replace a two-sided AG-code distance
   construction: primal and dual distances coincide, so one cited theorem supplies both gates.
 - **Possible application / novelty candidate:** the exact complete-hypergraph transfer can be

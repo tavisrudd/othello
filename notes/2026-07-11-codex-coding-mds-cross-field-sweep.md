@@ -484,7 +484,8 @@ thresholds `6,11,12`.
 `6561=81²`, supplies self-dual outer codes of rate `1/2`, unbounded length, and limiting
 relative distance at least `39/80`.  This theorem is the sole quarantined axiom.  Lean constructs
 concrete `GF(9) ⊆ GF(6561)` models and derives an unbounded q=9 family with exact rate
-`2/19`, eventual relative distance at least `1/5`, exact mixed locality, and the exact rows
+`2/19`, eventual relative distance greater than every fixed `c<39/190` (hence greater than
+`1/5`), exact mixed locality, and the exact rows
 `(4,7),(6,12),(7,13)` at every coordinate.  All reduction steps, including the trace bridge and
 finite-field degree calculation, are kernel-proved; only the cited TVZ existence theorem is
 imported.
@@ -590,9 +591,9 @@ The finite concatenation theorem therefore preserves the complete repair
 hypergraphs of every (S_q) under its explicit outer functional-dual gate.
 For (S_9), the trace bridge is Lean-proved and Stichtenoth's self-dual TVZ family is quarantined as
 the one deep literature import; the resulting fixed-alphabet family is Lean-checked end to end
-from that import, with exact rate (2/19), eventual relative distance at least (1/5), exact mixed
-locality, and exact uniform ratio bound (\tau_i/\nu_i\ge7/4).  The distance constant follows from
-the kernel-checked eventual inequality (19N\le40D).
+from that import, with exact rate (2/19), every fixed eventual relative-distance bound below
+(39/190), exact mixed locality, and exact uniform ratio bound (\tau_i/\nu_i\ge7/4). The clean
+(1/5) corollary follows from the kernel-checked eventual inequality (19N\le40D).
 
 ### 1.5.2 Novelty boundary and name
 

@@ -27,7 +27,8 @@ The finite q=9 and uniform characteristic-three results are machine checked end 
 6. `RepairCodes.Q9CircuitInventory` proves the exact `120`/`84` support inventory.
 7. `RepairCodes.SeedLift` and `RepairCodes.Q9SeedLift` construct the concatenated code and prove
    its dimension and distance bound, equality of the complete repair hypergraph with the embedded
-   inner hypergraph, all-symbol locality, row invariants, and `7 nu <= 4 tau`.
+   inner hypergraph, generic preservation of every exact locality below the transfer radius,
+   all-symbol locality, row invariants, and `7 nu <= 4 tau`.
 8. `RepairCodes.TraceDual` proves the finite-separable trace-pairing bridge from ordinary
    extension-field dual distance to the coordinate-free functional-dual gate.
 9. `RepairCodes.Q9ExtensionLift` proves the actual degree-four restricted-scalar lift, its
@@ -35,8 +36,10 @@ The finite q=9 and uniform characteristic-three results are machine checked end 
    multiplicities `9N,9N,N`, exact mixed locality three/two, exact repair-row transfer, and
    helper-failure thresholds `6,11,12`.
 10. `RepairCodes.Asymptotic` proves the analytic reduction, constructs concrete `GF(9) ⊆ GF(6561)`
-    models, and derives the unbounded family with rate `2/19`, eventual relative distance at least
-    `1/5`, exact mixed locality, and exact all-coordinate repair rows.
+    models, and derives the unbounded family with rate `2/19`, eventual relative distance greater
+    than every fixed `c < 39/190`, and a bundled disjoint coordinate distribution containing exact
+    multiplicities, mixed locality, repair rows, and helper-failure thresholds. The clean displayed
+    corollary `1/5` remains explicit; equality at `39/190` is not claimed.
 
 The transfer theorem uses the hypothesis `r+1 < 2*d(I^perp)`, not the stronger and false
 requirement `d(I^perp)=r+1`.  This matters here: the full axis–twisted-cubic code has global dual
