@@ -14,8 +14,10 @@ algebra is also landed: axis triples are circuits; the three-cubic/one-axis dete
 projective completion are exact; all other mixed triples and the two-cubic/two-axis four-family are
 independent. Those circuits now feed the natural-index code-derived repair hypergraph end to end:
 axis coordinates have explicit two-helper edges, cubic coordinates have explicit three-helper
-edges, and exact locality two/three (hence all-symbol locality three) is Lean-proved. The remaining
-uniform-family lead is the per-orbit `ν`/`τ` formulas, hence `τ>ν` for `q≥9`.
+edges, and exact locality two/three (hence all-symbol locality three) is Lean-proved. The uniform
+all-symbol strict gap `τ>ν` for `q≥9` is now also Lean-proved directly from the exact repair
+clutters. The remaining uniform-family work is the sharper displayed per-orbit formulas/bounds and
+the conditional seed-and-lift packaging.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -238,10 +240,13 @@ matroid independence remains in Phase 2.
    formulas. The cubic orbit is closed: every radius-three repair is two other cubic points plus
    their unique normalized axis completion; the completion coloring is proved proper;
    `τ_T=q−2`, `ν_T≤(q−1)/2`, and strict `τ_T>ν_T` for `q≥9` are code-derived theorems.
-   The paper-facing axis clutter is also now exact: its minimal edges are precisely pairs of other
-   axis points and three-cubic completion triples. The remaining repair-invariant work is the
-   nucleus and generic-axis extremal formulas (and the cubic matching lower bound if the displayed
-   interval remains claimed as fully formalized).
+   The paper-facing axis clutter is also exact: its minimal edges are precisely pairs of other
+   axis points and three-cubic completion triples. A weighted matching count gives `6ν≤5q`, while
+   the complete graph of axis-pair repairs alone forces `τ≥q−1`; together with the cubic result this
+   proves the unconditional, code-derived headline
+   `axisTwistedCubic_allSymbol_tau_gt_nu` for `q≥9`, without a cap-set import. The remaining
+   repair-invariant work is the sharper nucleus/generic-axis exact formulas and the cubic matching
+   lower bound if those displayed sharpness statements remain claimed as fully formalized.
    The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
    **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing

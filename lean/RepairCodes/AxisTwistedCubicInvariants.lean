@@ -243,6 +243,10 @@ theorem mem_minimalAxisRepairHypergraph_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
             simp [hst, hsu, htu, hBcard]
           simp [hEq]
 
+private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
+    Finset (AxisTwistedCubicIndex 𝔽) :=
+  E.filter fun z => z.isLeft
+
 private def axisPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=
   E.filter fun z => z.isRight
@@ -259,9 +263,23 @@ theorem minimalAxisRepair_matching_weight_bound [CharP 𝔽 3] (y : 𝔽 ⊕ Uni
       3 * (axisPart E).card + 2 * (cubicPart E).card = 6 := by
     rcases mem_minimalAxisRepairHypergraph_iff.mp (hM.1 hE) with hpair | hcubic
     · obtain ⟨z, w, -, -, hzw, rfl⟩ := hpair
-      simp [axisPart, cubicPart, hzw]
+      rw [show axisPart {(.inr z : AxisTwistedCubicIndex 𝔽), .inr w} =
+          {.inr z, .inr w} by
+        ext a
+        cases a <;> simp [axisPart]]
+      rw [show cubicPart {(.inr z : AxisTwistedCubicIndex 𝔽), .inr w} = ∅ by
+        ext a
+        cases a <;> simp [cubicPart]]
+      simp [hzw]
     · obtain ⟨s, t, u, hst, hsu, htu, -, rfl⟩ := hcubic
-      simp [axisPart, cubicPart, hst, hsu, htu]
+      rw [show axisPart {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inl u} = ∅ by
+        ext a
+        cases a <;> simp [axisPart]]
+      rw [show cubicPart {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inl u} =
+          {.inl s, .inl t, .inl u} by
+        ext a
+        cases a <;> simp [cubicPart]]
+      simp [hst, hsu, htu]
   have haxisPairwise :
       (M : Set (Finset (AxisTwistedCubicIndex 𝔽))).PairwiseDisjoint axisPart := by
     intro A hA B hB hAB
@@ -282,10 +300,10 @@ theorem minimalAxisRepair_matching_weight_bound [CharP 𝔽 3] (y : 𝔽 ⊕ Uni
       | inr v =>
         simp only [Finset.mem_insert, Finset.mem_singleton, Sum.inr.injEq] at ha'
         rcases ha' with rfl | rfl
-        · simp [hyz]
-        · simp [hyw]
+        · simp [hyz.symm]
+        · simp [hyw.symm]
     · obtain ⟨s, t, u, -, -, -, -, rfl⟩ := hcubic
-      simp [axisPart] at haE
+      cases a <;> simp [axisPart] at haE
   have hcubicSub : M.biUnion cubicPart ⊆ univ.map Function.Embedding.inl := by
     intro a ha
     obtain ⟨E, hEM, haE⟩ := Finset.mem_biUnion.mp ha
@@ -305,7 +323,7 @@ theorem minimalAxisRepair_matching_weight_bound [CharP 𝔽 3] (y : 𝔽 ⊕ Uni
       3 * (∑ E ∈ M, (axisPart E).card) +
         2 * (∑ E ∈ M, (cubicPart E).card) := by
     calc
-      6 * M.card = ∑ E ∈ M, 6 := by simp
+      6 * M.card = ∑ E ∈ M, 6 := by simp [Nat.mul_comm]
       _ = ∑ E ∈ M, (3 * (axisPart E).card + 2 * (cubicPart E).card) := by
         apply Finset.sum_congr rfl
         intro E hE
@@ -403,20 +421,6 @@ theorem axisRepair_tau_gt_nu [CharP 𝔽 3] (hq : 9 ≤ Fintype.card 𝔽)
   rw [← matchingNumber_minimalAxisTwistedCubicRepairHypergraph,
     ← transversalNumber_minimalAxisTwistedCubicRepairHypergraph]
   exact minimalAxisRepair_tau_gt_nu hq y
-
-/-- **Uniform all-symbol repair gap.** Every coordinate of `S_q`, for `q=3^h≥9`, has strictly
-larger transversal number than matching number in its complete radius-three repair hypergraph. -/
-theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
-    (hq : 9 ≤ Fintype.card 𝔽) (x : AxisTwistedCubicIndex 𝔽) :
-    matchingNumber (axisTwistedCubicRepairHypergraph x 3) <
-      transversalNumber (axisTwistedCubicRepairHypergraph x 3) := by
-  cases x with
-  | inl x => exact cubicRepair_tau_gt_nu hq x
-  | inr y => exact axisRepair_tau_gt_nu hq y
-
-private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
-    Finset (AxisTwistedCubicIndex 𝔽) :=
-  E.filter fun z => z.isLeft
 
 /-- Every matching of cubic-coordinate repairs consumes two distinct cubic helpers per edge. -/
 theorem cubicRepair_matching_card_bound [CharP 𝔽 3] (x : 𝔽)
@@ -587,9 +591,20 @@ theorem cubicRepair_tau_gt_nu [CharP 𝔽 3] (hq : 9 ≤ Fintype.card 𝔽) (x :
   have hν := cubicRepair_matchingNumber_le x
   omega
 
+/-- **Uniform all-symbol repair gap.** Every coordinate of `S_q`, for `q=3^h≥9`, has strictly
+larger transversal number than matching number in its complete radius-three repair hypergraph. -/
+theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
+    (hq : 9 ≤ Fintype.card 𝔽) (x : AxisTwistedCubicIndex 𝔽) :
+    matchingNumber (axisTwistedCubicRepairHypergraph x 3) <
+      transversalNumber (axisTwistedCubicRepairHypergraph x 3) := by
+  cases x with
+  | inl x => exact cubicRepair_tau_gt_nu hq x
+  | inr y => exact axisRepair_tau_gt_nu hq y
+
 #print axioms cubicRepair_matchingNumber_le
 #print axioms cubicRepair_transversalNumber
 #print axioms cubicRepair_tau_gt_nu
+#print axioms axisTwistedCubic_allSymbol_tau_gt_nu
 #print axioms mem_axisRepairHypergraph_threeCubic_iff
 #print axioms mem_minimalAxisRepairHypergraph_iff
 

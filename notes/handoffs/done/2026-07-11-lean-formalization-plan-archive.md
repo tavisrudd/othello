@@ -671,3 +671,20 @@ that discharges the transfer interface's finite fields from it:
   silently omitted.
 - Validation: the focused invariant target builds without warnings and the new bridge and
   classification theorems have only the standard foundational axiom profile.
+
+### Handoff Note — 2026-07-12 (uniform all-symbol strict gap closed)
+
+- The exact minimal axis clutter yields an elementary weighted matching bound. Every pair repair
+  consumes two of the `q` available axis helpers and every completion triple consumes three of the
+  `q` cubic helpers, on disjoint grounds; summing over a matching proves `6ν≤5q`.
+- Every axis transversal must hit the complete graph on the `q` other axis coordinates, so it
+  contains at least `q−1` vertices. Thus `τ>ν` for every axis coordinate when `q≥9`, with no
+  cap-set estimate.
+- Combined this with the exact cubic theorem to prove
+  `axisTwistedCubic_allSymbol_tau_gt_nu` for the complete code-derived radius-three repair
+  hypergraph at every coordinate. Minimal-clutter invariance transfers the axis proof back to the
+  all-support Lean object.
+- This strengthens the proof architecture in the paper: `Z₃(q)` is needed only for the sharp
+  orbit formulas/asymptotic ratios, not for the headline all-symbol separation.
+- Validation: the invariant target is warning-free; the all-symbol theorem's axiom profile is
+  exactly `[propext, Classical.choice, Quot.sound]`.
