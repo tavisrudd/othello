@@ -11,5 +11,6 @@
 -- seed-and-lift remain.
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed
+import RepairCodes.Q9Affine
 import RepairCodes.CodeInstance
 import RepairCodes.OuterDual

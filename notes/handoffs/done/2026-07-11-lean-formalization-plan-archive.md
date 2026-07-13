@@ -426,3 +426,24 @@ that discharges the transfer interface's finite fields from it:
 - Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
   `#print axioms` on both reverse bridges, the shared support reindexing, and both converse/exact
   q9 theorems returned exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (affine-plane zero-sum invariants)
+
+- Extended `FiniteGeom/Hypergraph.lean` with bijective vertex relabeling, preservation of
+  matchings/transversals, and exact invariance of `matchingNumber` and `transversalNumber`.
+- Added `RepairCodes/Q9Affine.lean` and the general three-element zero-sum hypergraph. Additive
+  equivalences relabel this hypergraph exactly. A basis over `ZMod 3` supplies the linear
+  equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`.
+- Proved the affine-plane values `matchingNumber=3`, `transversalNumber=5`. An explicit parallel
+  class supplies the three-edge matching; disjoint-union cardinality proves no matching has four
+  edges. An explicit five-point cover and the sharp lower bound are checked over the 512 vertex
+  subsets with kernel `decide`; no `native_decide` or generated certificate is used.
+- Transport along the additive equivalence gives the same sharp values for the zero-sum triple
+  hypergraph on `𝔽₉`. The remaining bridge to the actual code hypergraph is injective rather than
+  bijective: `q9FiniteIndex` maps the nine field elements into `Fin 10`, with the axis as one
+  isolated vertex. Prove extremal invariance under that isolated-vertex embedding, then rewrite
+  edges using `q9AxisRepair_edge_iff_zeroSum`.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on relabeling invariance, additive transport, the affine-plane computation,
+  basis equivalence, and GF9 invariant theorem returned exactly
+  `[propext, Classical.choice, Quot.sound]`.

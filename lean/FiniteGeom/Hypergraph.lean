@@ -35,6 +35,23 @@ open Finset
 
 variable {V : Type*} [Fintype V] [DecidableEq V]
 
+/-- Relabel every vertex and edge of a finite hypergraph along an equivalence. -/
+def relabelHypergraph {W : Type*} [DecidableEq W] (e : V ≃ W)
+    (H : Finset (Finset V)) : Finset (Finset W) :=
+  H.image fun s => s.map e.toEmbedding
+
+omit [Fintype V] [DecidableEq V] in
+theorem card_relabelHypergraph {W : Type*} [DecidableEq W] (e : V ≃ W)
+    (H : Finset (Finset V)) : (relabelHypergraph e H).card = H.card := by
+  apply Finset.card_image_of_injective
+  exact Finset.map_injective e.toEmbedding
+
+omit [Fintype V] in
+theorem relabelHypergraph_symm {W : Type*} [DecidableEq W] (e : V ≃ W)
+    (H : Finset (Finset V)) : relabelHypergraph e.symm (relabelHypergraph e H) = H := by
+  ext s
+  simp [relabelHypergraph, Finset.map_map]
+
 /-- `M` is a matching of the hypergraph `H`: a subfamily of pairwise-disjoint
 edges. -/
 def IsMatching (H M : Finset (Finset V)) : Prop :=
@@ -43,6 +60,52 @@ def IsMatching (H M : Finset (Finset V)) : Prop :=
 /-- `T` is a transversal (vertex cover) of `H`: it meets every edge. -/
 def IsTransversal (H : Finset (Finset V)) (T : Finset V) : Prop :=
   ∀ ⦃e⦄, e ∈ H → (T ∩ e).Nonempty
+
+omit [Fintype V] [DecidableEq V] in
+theorem IsMatching.relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) {H M : Finset (Finset V)} (h : IsMatching H M) :
+    IsMatching (relabelHypergraph e H) (relabelHypergraph e M) := by
+  refine ⟨?_, ?_⟩
+  · intro edge hedge
+    obtain ⟨edge0, hedge0, rfl⟩ := Finset.mem_image.mp hedge
+    exact Finset.mem_image.mpr ⟨edge0, h.1 hedge0, rfl⟩
+  intro a ha b hb hab
+  obtain ⟨a0, ha0, rfl⟩ := Finset.mem_image.mp ha
+  obtain ⟨b0, hb0, rfl⟩ := Finset.mem_image.mp hb
+  apply (Finset.disjoint_map e.toEmbedding).mpr
+  apply h.2 ha0 hb0
+  intro h0
+  apply hab
+  exact congrArg (fun s => s.map e.toEmbedding) h0
+
+theorem isMatching_relabelHypergraph_iff {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) {H M : Finset (Finset V)} :
+    IsMatching (relabelHypergraph e H) (relabelHypergraph e M) ↔ IsMatching H M := by
+  constructor
+  · intro h
+    have h' := h.relabelHypergraph e.symm
+    simpa only [relabelHypergraph_symm] using h'
+  · exact fun h => h.relabelHypergraph e
+
+omit [Fintype V] in
+theorem IsTransversal.relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) {H : Finset (Finset V)} {T : Finset V} (h : IsTransversal H T) :
+    IsTransversal (relabelHypergraph e H) (T.map e.toEmbedding) := by
+  intro edge hedge
+  obtain ⟨edge0, hedge0, rfl⟩ := Finset.mem_image.mp hedge
+  obtain ⟨v, hv⟩ := h hedge0
+  exact ⟨e v, Finset.mem_inter.mpr ⟨Finset.mem_map.mpr ⟨v,
+    Finset.mem_of_mem_inter_left hv, rfl⟩, Finset.mem_map.mpr ⟨v,
+    Finset.mem_of_mem_inter_right hv, rfl⟩⟩⟩
+
+theorem isTransversal_relabelHypergraph_iff {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) {H : Finset (Finset V)} {T : Finset V} :
+    IsTransversal (relabelHypergraph e H) (T.map e.toEmbedding) ↔ IsTransversal H T := by
+  constructor
+  · intro h
+    have h' := h.relabelHypergraph e.symm
+    simpa [relabelHypergraph_symm, Finset.map_map] using h'
+  · exact fun h => h.relabelHypergraph e
 
 omit [Fintype V] in
 /-- **Weak duality, pointwise.** Any matching is no larger than any transversal
@@ -84,6 +147,42 @@ open scoped Classical in
 /-- Transversal number `τ(H)`: the smallest size of a transversal of `H`. -/
 noncomputable def transversalNumber (H : Finset (Finset V)) : ℕ :=
   sInf {n | ∃ T, IsTransversal H T ∧ T.card = n}
+
+/-- Matching number is invariant under a bijective relabeling of vertices. -/
+theorem matchingNumber_relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) (H : Finset (Finset V)) :
+    matchingNumber (relabelHypergraph e H) = matchingNumber H := by
+  unfold matchingNumber
+  congr 1
+  ext n
+  constructor
+  · rintro ⟨M, hM, rfl⟩
+    let M0 := relabelHypergraph e.symm M
+    have hM0 : IsMatching H M0 := by
+      have h := hM.relabelHypergraph e.symm
+      simpa only [relabelHypergraph_symm] using h
+    refine ⟨M0, hM0, ?_⟩
+    change (relabelHypergraph e.symm M).card = M.card
+    exact card_relabelHypergraph e.symm M
+  · rintro ⟨M, hM, rfl⟩
+    exact ⟨relabelHypergraph e M, hM.relabelHypergraph e, card_relabelHypergraph e M⟩
+
+/-- Transversal number is invariant under a bijective relabeling of vertices. -/
+theorem transversalNumber_relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) (H : Finset (Finset V)) :
+    transversalNumber (relabelHypergraph e H) = transversalNumber H := by
+  unfold transversalNumber
+  congr 1
+  ext n
+  constructor
+  · rintro ⟨T, hT, rfl⟩
+    let T0 := T.map e.symm.toEmbedding
+    have hT0 : IsTransversal H T0 := by
+      have h := hT.relabelHypergraph e.symm
+      simpa [T0, relabelHypergraph_symm, Finset.map_map] using h
+    exact ⟨T0, hT0, by simp [T0]⟩
+  · rintro ⟨T, hT, rfl⟩
+    exact ⟨T.map e.toEmbedding, hT.relabelHypergraph e, Finset.card_map e.toEmbedding⟩
 
 omit [Fintype V] [DecidableEq V] in
 /-- `ν(H)` is an upper bound on every matching size: `ν` is the *sup*. Together
