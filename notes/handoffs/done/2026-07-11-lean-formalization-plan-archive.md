@@ -527,3 +527,26 @@ that discharges the transfer interface's finite fields from it:
 - Validation: focused compilation and full `nix develop --command lake build RepairCodes` pass
   without warnings. Load-bearing determinant, projective-uniqueness, four-circuit, and mixed-family
   independence theorems have axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (uniform all-symbol locality bridge)
+
+- Generalized the dual/row-code and repair-hypergraph APIs from `Fin n` to arbitrary finite
+  coordinate types, preserving the q9 source API. Added radius monotonicity and full-support,
+  circuit-local, and reindexed circuit converses.
+- The circuit-local converse is essential here: the full `S_q` code has axis three-circuits, so its
+  global dual distance cannot justify cubic four-circuit repairs through the old `d⊥≥4` converse.
+  Minimality of the selected circuit supplies the required full-support dual relation directly.
+- Added `RepairCodes/AxisTwistedCubic.lean`, identifying its natural-index row code with the
+  existing column code. Three distinct cubic points produce an actual three-helper repair edge via
+  their unique completing axis point; three distinct axis points produce an actual two-helper edge.
+- Canonical triples through any requested coordinate yield
+  `axisTwistedCubic_allSymbol_locality_three`: every coordinate has a repair edge of radius at most
+  three over every finite characteristic-three field, including `q=3`.
+- Remaining uniform-family mathematics: transport all family-level independence cases to an exact
+  arbitrary-coordinate-set classification, deduce the locality lower bounds, and prove the
+  per-orbit matching/transversal formulas with the `Z₃(q)` boundary explicit.
+- Validation: `nix develop --command lake build RepairCodes` completed successfully without Lean
+  warnings. The row/column identification, both orbit repair-edge theorems, circuit bridge, and
+  all-symbol locality theorem have axiom profile exactly
+  `[propext, Classical.choice, Quot.sound]`; the touched source has no `sorry`, `admit`,
+  `native_decide`, or custom axiom declaration.

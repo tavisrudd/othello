@@ -50,6 +50,13 @@ theorem mem_repairHypergraph {C : Submodule 𝔽 (ι → 𝔽)} {x : ι} {r : �
   classical
   simp only [repairHypergraph, mem_filter, mem_powerset]
 
+/-- Enlarging the allowed repair radius can only add repair edges. -/
+theorem repairHypergraph_mono_radius {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    {r s : ℕ} (hrs : r ≤ s) : repairHypergraph C x r ⊆ repairHypergraph C x s := by
+  intro R hR
+  obtain ⟨hsub, hcard, y, hy, hyx, hsupp⟩ := mem_repairHypergraph.mp hR
+  exact mem_repairHypergraph.mpr ⟨hsub, hcard.trans hrs, y, hy, hyx, hsupp⟩
+
 /-- If the dual distance is at least `r+1`, every radius-`r` repair edge has exactly `r` helpers.
 The witnessing dual word has support `insert x R`, hence weight `R.card+1`; dual distance supplies
 the lower bound while membership supplies `R.card≤r`. -/

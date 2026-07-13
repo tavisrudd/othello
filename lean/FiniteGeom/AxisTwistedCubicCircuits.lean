@@ -506,67 +506,6 @@ theorem twistedCubicTriple_isFourCircuit [CharP 𝔽 3] {v : Fin 3 → 𝔽}
     twistedCubicTriple_omitCubic1_linearIndependent hv,
     twistedCubicTriple_omitCubic2_linearIndependent hv⟩
 
-set_option maxHeartbeats 800000 in
-/-- Every nonzero relation on a cubic-triple circuit uses all four columns.  This coefficient form
-is convenient when transporting the circuit into a code's repair hypergraph. -/
-theorem twistedCubicTriple_relation_fullSupport [CharP 𝔽 3] {v : Fin 3 → 𝔽}
-    (hv : Function.Injective v) {c : Fin 4 → 𝔽}
-    (hrel : ∑ j, c j • twistedCubicTripleFamily v j = 0) (hc : c ≠ 0) :
-    ∀ j, c j ≠ 0 := by
-  intro j hcj
-  fin_cases j
-  · change c 0 = 0 at hcj
-    have hcoeff := Fintype.linearIndependent_iff.mp
-      (twistedCubicTriple_omitCubic0_linearIndependent hv)
-      ![c 1, c 2, c 3] (by
-        simpa [Fin.sum_univ_four, Fin.sum_univ_three, hcj]
-          using hrel)
-    apply hc
-    funext i
-    fin_cases i
-    · exact hcj
-    · exact hcoeff 0
-    · exact hcoeff 1
-    · exact hcoeff 2
-  · change c 1 = 0 at hcj
-    have hcoeff := Fintype.linearIndependent_iff.mp
-      (twistedCubicTriple_omitCubic1_linearIndependent hv)
-      ![c 0, c 2, c 3] (by
-        simpa [Fin.sum_univ_four, Fin.sum_univ_three, hcj]
-          using hrel)
-    apply hc
-    funext i
-    fin_cases i
-    · exact hcoeff 0
-    · exact hcj
-    · exact hcoeff 1
-    · exact hcoeff 2
-  · change c 2 = 0 at hcj
-    have hcoeff := Fintype.linearIndependent_iff.mp
-      (twistedCubicTriple_omitCubic2_linearIndependent hv)
-      ![c 0, c 1, c 3] (by
-        simpa [Fin.sum_univ_four, Fin.sum_univ_three, hcj]
-          using hrel)
-    apply hc
-    funext i
-    fin_cases i
-    · exact hcoeff 0
-    · exact hcoeff 1
-    · exact hcj
-    · exact hcoeff 2
-  · change c 3 = 0 at hcj
-    have hcoeff := Fintype.linearIndependent_iff.mp
-      (twistedCubicTriple_omitAxis_linearIndependent hv) (fun i => c i) (by
-        simpa [Fin.sum_univ_four, Fin.sum_univ_three, hcj]
-          using hrel)
-    apply hc
-    funext i
-    fin_cases i
-    · exact hcoeff 0
-    · exact hcoeff 1
-    · exact hcoeff 2
-    · exact hcj
-
 end Normalized
 
 /-- The displayed cubic-triple completion is always dependent (over any field). -/
