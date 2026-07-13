@@ -91,3 +91,27 @@ closed-negative proof routes belong here.
     `[propext, Classical.choice, Quot.sound]`.
   - Source search over the mirror-boundary files: no `sorry`, `native_decide`, or `axiom`
     declaration.
+
+## 2026-07-12 — C87 general Baer conjugacy and Hermitian branch closed
+
+- Replaced the anticipated nonabelian-Hilbert-90 dependency with a constructive order-two proof.
+  For every vector `v`, two explicit fixed vectors formed from `v`, `S(v)`, and a scalar moved by
+  Frobenius recover `v`; hence fixed vectors span. Mathlib's `Basis.ofSpan` extracts a basis
+  contained in that set, and reindexing it by `Fin (finrank K V)` conjugates `S` to coordinate
+  Frobenius.
+- Extended from literal involutions to projective square-scalar representatives. The square scalar
+  is Frobenius-fixed, the finite Galois fixed-field theorem descends it to the base field, and norm
+  surjectivity supplies a scalar normalization. The resulting projective equivalence theorem
+  handles arbitrary nonzero square scalars.
+- Pulled arbitrary Hermitian forms back through the fixed basis and applied the intrinsic
+  base-quadratic restriction. This proves every modeled Baer-semilinear projective involution fixes
+  a point on every Hermitian board of vector dimension at least three; board preservation is not
+  needed for the intersection.
+- The remaining C87 blocker is solely parabolic: turn preservation of a nondegenerate projective
+  quadratic zero locus into a semisimilitude and descend/normalize its form.
+- Validation:
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap.BaerSemilinear` — PASS,
+    warning-free (`3001` jobs).
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap` — PASS (`8658` jobs).
+  - New spanning, basis, fixed-field, vector/projective conjugacy, and full Hermitian theorems have
+    axiom profile exactly `[propext, Classical.choice, Quot.sound]`.

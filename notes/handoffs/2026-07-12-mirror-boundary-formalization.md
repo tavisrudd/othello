@@ -31,8 +31,9 @@ the live execution map. Session history belongs in
 No Lean theorem or computed game outcome was removed or weakened. The review narrowed two prose
 headlines to the proved scope:
 
-- The parabolic and Hermitian rows exclude all linear involutions and the coordinate-Frobenius
-  Baer case, not yet every semilinear involution.
+- The parabolic row excludes all linear involutions and the coordinate-Frobenius Baer case, not
+  yet every semilinear board stabilizer. The Hermitian row now excludes every modeled
+  square-scalar Baer-semilinear representative as well as every linear representative.
 - The categorical prose claim that every Baer involution fixes a board point was replaced by the
   formal coordinate theorem plus an explicit open conjugacy/descent obligation.
 - The parabolic conclusion now says “no linear fixed-point-free involution” until C87 closes.
@@ -60,6 +61,8 @@ headlines to the proved scope:
 | descended parabolic quadratic form meets the coordinate-Frobenius fixed subgeometry | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial; descent is an explicit hypothesis) |
 | every Hermitian form in vector dimension at least three meets the coordinate-Frobenius fixed subgeometry | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial; base quadratic restriction constructed internally) |
 | board fixed points transfer through a supplied projective conjugacy | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
+| every square-scalar relative-Frobenius semilinear representative is projectively conjugate to coordinate Frobenius | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
+| every Hermitian board in vector dimension at least three meets every modeled Baer-semilinear projective involution | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
 
 Current source audit: no `sorry` or `native_decide`; the relevant builds pass with axiom profile
 `[propext, Classical.choice, Quot.sound]`.
@@ -68,17 +71,15 @@ Current source audit: no `sorry` or `native_decide`; the relevant builds pass wi
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C87** | Finish the general Baer-semilinear reduction. The coordinate-Frobenius involution, its fixed base-coordinate points, both tractable board intersections, and conjugacy transfer are formal. Remaining: prove nonabelian finite-field descent for `Aτ` with `(Aτ)²` projectively scalar, then descend a preserved parabolic zero locus to the fixed field. | Requires a `GL_n/PGL_n` Hilbert-90 theorem absent from pinned Mathlib; scalar Hilbert 90 alone is insufficient. The parabolic form descent/normalization is a second explicit theorem after conjugacy. | Closes the semilinear branches and completes the parabolic/Hermitian method-negative rows. |
+| **C87** | Finish parabolic form/stabilizer descent. General square-scalar Baer conjugacy is now formal by a constructive fixed-basis proof, and the full Hermitian Baer representative branch is closed. Remaining: show that a semilinearly preserved parabolic zero locus descends to the fixed field. | The landed coordinate parabolic theorem consumes an explicit descended quadratic form. Bridging a projective zero-locus stabilizer to a semisimilitude, then normalizing that form, is the remaining real-math package. | Closes the parabolic semilinear branch; the Hermitian representative branches are already complete. |
 | **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
 
 ## Dependency and attack order
 
 C85–C86 are closed; their quadratic and Hermitian infrastructure is available to later tasks.
-Proceed with **C87** at the two remaining descent lemmas: first prove the nonabelian normal form for
-an order-two projective semilinear map over a quadratic finite-field extension; then show that a
-preserved parabolic quadric becomes a base-field quadratic zero locus in those coordinates. The
-Hermitian coordinate intersection and the final conjugacy-transfer interface are already landed.
-Attempt C88 only after this reusable semilinear infrastructure is complete.
+Proceed with **C87** at the remaining parabolic form/stabilizer descent. The general semilinear
+normal form, fixed-subgeometry conjugacy, and Hermitian intersection are landed. Attempt C88 only
+after the parabolic bridge is complete.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -100,16 +101,7 @@ For each closed task:
 
 Close the remaining blockers in this order:
 
-1. **General Baer-semilinear conjugacy (C87).** Normalize a representative `Aτ` with
-   `A·τ(A)=cI` to a genuine semilinear involution using `τ(c)=c`, identification of the Frobenius
-   fixed field, and finite-field norm surjectivity. Prefer a constructive descent proof over a
-   cohomological import: for an involutive `τ`-semilinear map `S` and `β≠τ(β)`, both `v+S(v)` and
-   `βv+S(βv)` are fixed, and the invertible two-by-two coefficient matrix shows that fixed vectors
-   span the whole space over the extension field. Extract a basis of fixed vectors; its basis
-   matrix conjugates `S` to coordinate Frobenius. Then apply the landed projective conjugacy
-   transfer theorem. The main Lean API question is extracting a basis contained in a spanning set
-   that is only a base-field subspace, not an extension-field submodule.
-2. **Parabolic form descent (C87).** First formalize the semisimilitude version: after the preceding
+1. **Parabolic form descent (C87).** First formalize the semisimilitude version: after the landed
    conjugacy, assume
    `Q(τv)=μ·τ(Q(v))`; applying it twice gives `Norm(μ)=1`, scalar Hilbert 90 normalizes `Q`, and
    its values on base-coordinate vectors descend to a base-field quadratic form. Feed that form to
@@ -118,7 +110,7 @@ Close the remaining blockers in this order:
    parabolic zero locus is a semisimilitude. The recommended concrete proof is to put the form in a
    standard Witt basis and recover all coefficients from isotropic test vectors, avoiding a large
    algebraic-geometry dependency.
-3. **Elliptic `Q⁻` transfer (C88).** Do not build the Lean proof around the desired negative verdict
+2. **Elliptic `Q⁻` transfer (C88).** Do not build the Lean proof around the desired negative verdict
    before checking the classification. Put a nonsplit representative in the standard
    `2×2` block form for multiplication by `√c`, solve the symmetric-matrix similitude equation for
    both possible multipliers, and compute the determinant square class of every nondegenerate
@@ -127,5 +119,6 @@ Close the remaining blockers in this order:
    Hermitian/Scharlau-transfer formulation only if it materially shortens the determinant
    calculation. The result may be an exclusion or an exact countercase, and C88 must report either.
 
-Keep both full parabolic/Hermitian negative rows unpromoted until items 1–2 close, and keep `Q⁻`
-conjectural until item 3 determines the complete classification.
+Keep the full parabolic negative row unpromoted until item 1 closes, and keep `Q⁻` conjectural until
+item 2 determines the complete classification. The constructive conjugacy route and the full
+Hermitian Baer representative branch are closed paths; their proof details belong in the archive.

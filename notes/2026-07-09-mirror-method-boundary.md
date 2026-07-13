@@ -33,12 +33,13 @@ cap games over odd `q`:
    in `ProjectiveCap.MirrorBoundary`: finite quadratic isotropy plus the scalar-square eigenspace
    decomposition excludes the split route, and determinant parity excludes the nonsplit route.
    The semilinear Baer branch remains C87.
-3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`): linear and coordinate-Baer fpf involutions are
-   excluded; the full semilinear exclusion remains open.**
-   *[FORMAL LINEAR CLASSIFICATION + FORMAL COORDINATE-BAER CASE]* `FiniteHermitian` and
+3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`): all modeled linear and Baer-semilinear
+   representative branches are excluded.**
+   *[FORMAL LINEAR + BAER-SEMILINEAR REPRESENTATIVE CLASSIFICATION]* `FiniteHermitian` and
    `MirrorBoundary` Lean-prove both linear routes: quadratic-extension norm surjectivity and
    Hermitian isotropy exclude the split route, while the norm-square multiplier identity excludes
-   the nonsplit route. The semilinear Baer branch remains C87.
+   the nonsplit route. `BaerSemilinear` proves the general square-scalar semilinear normal form and
+   the Hermitian board intersection.
 4. **Conjecture:** elliptic quadrics `Q⁻(2m−1,q)` (`m ≥ 3`) admit no fpf mirror. The
    split route is excluded rigorously and the natural nonsplit similitude fails — one Witt-transfer
    classification remains; see the open item.
@@ -55,14 +56,13 @@ Any variety-stabilizing collineation of order 2 is (i) *linear*, `A² = c·I` fo
 (a `PGL` element), or (ii) *semilinear* of Baer type (twisted by an order-2 field automorphism,
 only when `q` is a square).
 
-**Baer case (ii).** Lean now proves this statement for coordinate relative Frobenius: it induces a
-projective involution fixing every base-coordinate point. A descended quadratic form in dimension
-at least three is isotropic on that fixed subgeometry. For a Hermitian form, Lean constructs the
-base-field quadratic restriction directly from the Hermitian diagonal axioms and proves it
-isotropic, so no separate restriction hypothesis is needed. What is not yet formal is the passage
-from an arbitrary order-two semilinear collineation `Aτ` to coordinate Frobenius, nor the descent of
-an arbitrary preserved parabolic zero locus after that conjugacy. Thus the general Baer exclusion
-is still open under the strict gate.
+**Baer case (ii).** Lean proves that fixed vectors of an involutive semilinear map span the whole
+space, extracts a fixed basis, and conjugates the map to coordinate relative Frobenius. For a
+projective representative with `S²=cI`, it proves `c` Frobenius-fixed, descends `c` to the base
+field, and normalizes by finite-field norm surjectivity before applying the fixed-basis theorem.
+Every Hermitian form meets the resulting fixed Baer subgeometry. A descended quadratic form in
+dimension at least three does too. The remaining open Baer step is specific to parabolic boards:
+derive and normalize the descended quadratic form from preservation of the projective zero locus.
 
 **Linear case (i)** splits on whether `c` is a square:
 
@@ -121,14 +121,10 @@ finite quadratic and Hermitian isotropy exclude their split routes, determinant 
 the parabolic nonsplit route, and norm-square reflection excludes the Hermitian nonsplit route.
 Completing rows 2–4 still requires:
 
-1. nonabelian finite-field descent for a general projective semilinear involution: normalize
-   `Aτ(A)=cI`, prove the resulting `GL_n` cocycle is a coboundary, and obtain projective conjugacy
-   to coordinate Frobenius. Pinned Mathlib contains scalar Hilbert 90 for `Lˣ`, not this
-   `GL_n/PGL_n` theorem;
-2. descent/normalization of a parabolic quadratic zero locus preserved by that semilinear map to a
+1. descent/normalization of a parabolic quadratic zero locus preserved by that semilinear map to a
    base-field quadratic form. The coordinate intersection theorem already consumes precisely this
    compatibility statement;
-3. for `Q⁻`, the Witt/Scharlau-transfer classification below.
+2. for `Q⁻`, the Witt/Scharlau-transfer classification below.
 
 Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
 Route: a nonsplit order-2 similitude corresponds (self-adjoint `√c`, Scharlau transfer) to an
@@ -143,8 +139,8 @@ transfer lemma is the way.)  This is a clean, bounded lemma; it does not gate an
 
 This is the candidate "separating mirror obstructions from outcomes" classification of the
 harvest. The proved positive family is hyperbolic; parabolic and Hermitian exclusions are formal
-for linear collineations and coordinate Frobenius, but the general Baer-semilinear conjugacy is
-open, and the elliptic exclusion is conjectural. Its
+for linear collineations; the Hermitian Baer representative branch is formal, while parabolic form
+descent remains open, and the elliptic exclusion is conjectural. Its
 silence on these boards concerns the method, not the game values. Positioning stays conservative: the mechanism is the
 standard pairing/copycat ingredient; the contribution is the exact incidence-geometric boundary.
 
