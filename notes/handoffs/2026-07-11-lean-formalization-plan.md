@@ -8,7 +8,8 @@ linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1
 is now concrete with full `[10,4,6]₉` parameters, dual distance four, encoder equivalence, and
 coefficient faithfulness; outer-dual membership is proved directly from concatenation
 orthogonality. The concrete q9 repair hypergraph is now code-derived and 3-uniform; identifying
-its exact zero-sum triples with the already-evaluated affine-line hypergraph is the next lead.
+it with the affine-line hypergraph and proving `ν=3, τ=5` is complete. The uniform `q=3^h`
+geometry input is the next lead.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -200,7 +201,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/CodeInstance.lean` | `ofInnerCode` / `transfer_ofInnerCode`; plus coordinate-free `blockFunctional`, `blockFunctional_eq_zero_iff`, `ofInnerCodeFunctional`, and `transfer_ofInnerCodeFunctional`. An encoder equivalence `V ≃ₗ I` discharges coefficient faithfulness internally; field trace is only an optional coordinate presentation. |
 | `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
 | `RepairCodes/Q9Seed.lean` | real inner seed: full `[10,4,6]₉`, `d(C₀⊥)=4`, and block-local transfer; concrete 3-uniform `q9AxisRepairHypergraph`; generalized four-column determinant; exact edge characterization as the distinct zero-sum triples in `𝔽₉`. |
-| `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; constructive proof that the `AG(2,3)`/`𝔽₉` line hypergraph has `matchingNumber=3`, `transversalNumber=5`; `q9FiniteEmbedding` maps every such triple to an actual repair edge (no `native_decide`). |
+| `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; exact embedded identification of the actual q9 repair hypergraph; final code-derived `matchingNumber=3`, `transversalNumber=5` (no `native_decide`). |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -212,18 +213,12 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 “Chen–Ling–Xing decomposition” attribution was unverified and unnecessary because `OuterDual.lean`
 proves the functional outer-dual membership directly (archive companion has the correction trail).
 
-1. **Evaluate the concrete q9 repair hypergraph.** `q9AxisRepairHypergraph` is now defined from
-   all radius-three dual supports through `e₂`; it is nonempty, every edge has exactly three
-   helpers, and its edges are exactly the distinct zero-sum triples in `𝔽₉`. The zero-sum triple
-   hypergraph is transported to `AG(2,3)` and independently evaluated as `matchingNumber=3`,
-   `transversalNumber=5`. The injective `q9FiniteIndex : 𝔽₉ ↪ Fin 10` is packaged and maps every
-   zero-sum triple to an actual repair edge, and every repair edge comes uniquely from such a
-   triple (`q9AxisRepairHypergraph_eq_finiteImage`). Remaining: push a maximum matching/cover forward and
-   pull an arbitrary cover back; the embedding's complement is the isolated axis coordinate. This lands the
-   first code-derived `τ>ν` instance (the abstract
-   triangle remains only the generic strictness witness). The separate CompletionCore bridge from
-   surviving circuits to matroid independence remains in Phase 2.
-2. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`. Two of three legs
+**Closed path:** the concrete q9 code-derived repair hypergraph has
+`matchingNumber=3`, `transversalNumber=5` (`q9AxisRepairHypergraph_invariants`), the first actual
+code-derived strict `τ>ν` instance. The separate CompletionCore bridge from surviving circuits to
+matroid independence remains in Phase 2.
+
+1. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`. Two of three legs
    **landed**: `dim=4` (`FiniteGeom/MomentCurve.lean` `twistedCubic_span` + `ColumnCode`
    `finrank_columnCode`) and the geometric-distance bridge `d = n − max section`
    (`FiniteGeom/ColumnCode.lean` `columnCode_minDist_eq`). Remaining leg: the **geometry input**
@@ -234,7 +229,7 @@ proves the functional outer-dual membership directly (archive companion has the 
    kills the whole line, i.e. `a₁=a₂=0`), and in that last case bound the cubic block `≤1` via
    char-3 Frobenius bijectivity of `t↦t³` — total `≤ q+2`, attained by `a=(0,0,0,1)`. Feed into
    `columnCode_minDist_eq`. Later `τ>ν` repair analysis pulls in the cap number `Z_3(q)` (imported).
-3. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
+2. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
 
 **Landed 2026-07-11:** (a) the eval-code stepping stone — RS instances over `ZMod 7` and the
 target `GaloisField 3 2 = 𝔽₉` (`FiniteGeom/EvalCodeInstance.lean`), discharging the eval-code MDS

@@ -471,3 +471,18 @@ that discharges the transfer interface's finite fields from it:
 - Consequently `q9AxisRepairHypergraph_eq_finiteImage` identifies the code-derived hypergraph
   literally with the edgewise image of the GF9 affine-line hypergraph. Only extremal-number
   bookkeeping across the isolated axis remains.
+
+### Handoff Note — 2026-07-12 (code-derived q9 strict gap complete)
+
+- Proved `q9AxisRepairHypergraph_invariants`:
+  `matchingNumber q9AxisRepairHypergraph = 3` and
+  `transversalNumber q9AxisRepairHypergraph = 5`.
+- For `ν≥3`, a maximum GF9 affine-line matching is mapped into the finite seed coordinates;
+  `ν≤3` follows because disjoint three-helper edges must fit in the nine non-axis coordinates.
+- For `τ≤5`, a minimum GF9 line cover is mapped forward. For `τ≥5`, every q9 cover is pulled
+  back along `q9FiniteEmbedding`; the isolated axis disappears and cardinality cannot increase.
+- This closes the concrete q9 repair lane and supplies the first repair hypergraph derived from an
+  actual linear code with a formally verified strict gap `τ>ν`.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on the final embedded equality and invariant theorem returned exactly
+  `[propext, Classical.choice, Quot.sound]`.

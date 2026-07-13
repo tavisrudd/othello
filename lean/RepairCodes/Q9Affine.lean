@@ -258,6 +258,140 @@ theorem gf9_zeroSum_invariants :
   exact ⟨hnu.symm.trans ag23_zeroSum_invariants.1,
     htau.symm.trans ag23_zeroSum_invariants.2⟩
 
+/-- The actual code-derived repair hypergraph at the q=9 axis coordinate has the sharp affine
+plane invariants: three disjoint repairs, but every repair cover needs five helpers. -/
+theorem q9AxisRepairHypergraph_invariants :
+    matchingNumber q9AxisRepairHypergraph = 3 ∧
+      transversalNumber q9AxisRepairHypergraph = 5 := by
+  let H9 := zeroSumTripleHypergraph GF9
+  let Hq := q9AxisRepairHypergraph
+  -- A maximum GF9 matching maps edgewise to a q9 matching of the same size.
+  have hAne : ({n | ∃ M, IsMatching H9 M ∧ M.card = n} : Set ℕ).Nonempty :=
+    ⟨0, ∅, ⟨Finset.empty_subset _, by intro a ha; simp at ha⟩, Finset.card_empty⟩
+  have hAbdd : BddAbove {n | ∃ M, IsMatching H9 M ∧ M.card = n} :=
+    ⟨H9.card, by rintro n ⟨M, hM, rfl⟩; exact Finset.card_le_card hM.1⟩
+  obtain ⟨M9, hM9, hM9card⟩ := Nat.sSup_mem hAne hAbdd
+  have hM9three : M9.card = 3 := by
+    have hval := gf9_zeroSum_invariants.1
+    unfold matchingNumber at hval
+    change sSup {n | ∃ M, IsMatching H9 M ∧ M.card = n} = 3 at hval
+    exact hM9card.trans hval
+  let Mq : Finset (Finset (Fin 10)) :=
+    M9.image fun S => S.map q9FiniteEmbedding
+  have hMq : IsMatching Hq Mq := by
+    refine ⟨?_, ?_⟩
+    · intro R hR
+      obtain ⟨S, hSM, rfl⟩ := Finset.mem_image.mp hR
+      exact q9FiniteImage_mem_repair (hM9.1 hSM)
+    · intro R hR T hT hne
+      obtain ⟨S, hSM, rfl⟩ := Finset.mem_image.mp hR
+      obtain ⟨U, hUM, rfl⟩ := Finset.mem_image.mp hT
+      apply (Finset.disjoint_map q9FiniteEmbedding).mpr
+      apply hM9.2 hSM hUM
+      intro hSU
+      apply hne
+      exact congrArg (fun A => A.map q9FiniteEmbedding) hSU
+  have hMqcard : Mq.card = 3 := by
+    change (M9.image fun S => S.map q9FiniteEmbedding).card = 3
+    rw [Finset.card_image_of_injective _ (Finset.map_injective q9FiniteEmbedding), hM9three]
+  have hnu_ge : 3 ≤ matchingNumber Hq := by
+    rw [← hMqcard]
+    exact card_le_matchingNumber hMq
+  -- Four disjoint three-helper repairs cannot fit in the nine non-axis coordinates.
+  have hnu_le : matchingNumber Hq ≤ 3 := by
+    unfold matchingNumber
+    refine csSup_le ⟨0, ∅, ⟨Finset.empty_subset _, by intro a ha; simp at ha⟩,
+      Finset.card_empty⟩ ?_
+    rintro n ⟨M, hM, rfl⟩
+    have hpw : (M : Set (Finset (Fin 10))).PairwiseDisjoint id := by
+      intro A hA B hB hne
+      exact hM.2 hA hB hne
+    have hunion : (M.biUnion id).card = 3 * M.card := by
+      rw [Finset.card_biUnion hpw]
+      calc
+        (∑ R ∈ M, R.card) = ∑ _R ∈ M, 3 := by
+          apply Finset.sum_congr rfl
+          intro R hR
+          exact q9AxisRepair_edge_card (hM.1 hR)
+        _ = 3 * M.card := by simp [Nat.mul_comm]
+    have hsubset : M.biUnion id ⊆ Finset.univ.erase q9Axis := by
+      intro j hj
+      obtain ⟨R, hRM, hjR⟩ := Finset.mem_biUnion.mp hj
+      exact (mem_repairHypergraph.mp (hM.1 hRM)).1 hjR
+    have hle : (M.biUnion id).card ≤ 9 := by
+      calc
+        (M.biUnion id).card ≤ (Finset.univ.erase q9Axis).card :=
+          Finset.card_le_card hsubset
+        _ = 9 := by decide
+    rw [hunion] at hle
+    omega
+  -- A minimum GF9 cover maps to a five-coordinate q9 cover.
+  have h9nonempty : ∀ S ∈ H9, S.Nonempty := by
+    intro S hS
+    exact Finset.card_pos.mp (by rw [(mem_zeroSumTripleHypergraph.mp hS).1]; decide)
+  have hBne : ({n | ∃ T, IsTransversal H9 T ∧ T.card = n} : Set ℕ).Nonempty :=
+    ⟨Fintype.card GF9, Finset.univ, by
+      intro S hS
+      rw [Finset.univ_inter]
+      exact h9nonempty S hS, Finset.card_univ⟩
+  obtain ⟨T9, hT9, hT9card⟩ := Nat.sInf_mem hBne
+  have hT9five : T9.card = 5 := by
+    have hval := gf9_zeroSum_invariants.2
+    unfold transversalNumber at hval
+    change sInf {n | ∃ T, IsTransversal H9 T ∧ T.card = n} = 5 at hval
+    exact hT9card.trans hval
+  let Tq : Finset (Fin 10) := T9.map q9FiniteEmbedding
+  have hTq : IsTransversal Hq Tq := by
+    intro R hR
+    obtain ⟨S, hS, hSR⟩ := q9RepairEdge_exists_finiteImage hR
+    obtain ⟨t, ht⟩ := hT9 hS
+    refine ⟨q9FiniteIndex t, Finset.mem_inter.mpr ⟨?_, ?_⟩⟩
+    · exact Finset.mem_map.mpr ⟨t, Finset.mem_of_mem_inter_left ht, rfl⟩
+    · rw [← hSR]
+      exact Finset.mem_map.mpr ⟨t, Finset.mem_of_mem_inter_right ht, rfl⟩
+  have htau_le : transversalNumber Hq ≤ 5 := by
+    rw [← hT9five, ← Finset.card_map q9FiniteEmbedding]
+    exact transversalNumber_le_card hTq
+  -- Pull any q9 cover back to GF9; isolated axis membership disappears and cardinality cannot grow.
+  have hcover_bound : ∀ T : Finset (Fin 10), IsTransversal Hq T → 5 ≤ T.card := by
+    intro T hT
+    let P : Finset GF9 := Finset.univ.filter fun t => q9FiniteIndex t ∈ T
+    have hP : IsTransversal H9 P := by
+      intro S hS
+      have hR := q9FiniteImage_mem_repair hS
+      obtain ⟨j, hj⟩ := hT hR
+      have hjmap := Finset.mem_of_mem_inter_right hj
+      obtain ⟨t, htS, htj⟩ := Finset.mem_map.mp hjmap
+      refine ⟨t, Finset.mem_inter.mpr ⟨?_, htS⟩⟩
+      apply Finset.mem_filter.mpr
+      refine ⟨Finset.mem_univ _, ?_⟩
+      change q9FiniteEmbedding t ∈ T
+      rw [htj]
+      exact Finset.mem_of_mem_inter_left hj
+    have hPfive : 5 ≤ P.card := by
+      rw [← gf9_zeroSum_invariants.2]
+      exact transversalNumber_le_card hP
+    have hmap_subset : P.map q9FiniteEmbedding ⊆ T := by
+      intro j hj
+      obtain ⟨t, htP, rfl⟩ := Finset.mem_map.mp hj
+      exact (Finset.mem_filter.mp htP).2
+    exact hPfive.trans (by
+      rw [← Finset.card_map q9FiniteEmbedding]
+      exact Finset.card_le_card hmap_subset)
+  have htau_ge : 5 ≤ transversalNumber Hq := by
+    have hQne : ({n | ∃ T, IsTransversal Hq T ∧ T.card = n} : Set ℕ).Nonempty :=
+      ⟨Fintype.card (Fin 10), Finset.univ, by
+        intro R hR
+        rw [Finset.univ_inter]
+        exact q9AxisRepair_edge_nonempty hR, Finset.card_univ⟩
+    unfold transversalNumber
+    exact le_csInf hQne (by rintro n ⟨T, hT, rfl⟩; exact hcover_bound T hT)
+  constructor
+  · change matchingNumber Hq = 3
+    omega
+  · change transversalNumber Hq = 5
+    omega
+
 end
 
 end RepairCodes

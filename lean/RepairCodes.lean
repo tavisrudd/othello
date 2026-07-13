@@ -7,7 +7,7 @@
 -- `[10,4,6]₉` parameters, coefficient faithfulness, and exact dual distance
 -- four are landed; outer-dual membership is proved directly from concatenation
 -- orthogonality in `OuterDual`. The code-derived q9 axis repair hypergraph is
--- landed; its exact ν/τ evaluation, the uniform `q = 3^h` theorem, and
+-- landed with exact `ν=3, τ=5`; the uniform `q = 3^h` theorem and
 -- seed-and-lift remain.
 import RepairCodes.Transfer
 import RepairCodes.Q9Seed
