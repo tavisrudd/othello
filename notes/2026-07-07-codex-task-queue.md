@@ -113,8 +113,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C94 [OPEN] — projective averaging transfer.** Formalize finite transitive-action averaging,
-  instantiate projective transport, and keep the Kim–Vu input as a named cited hypothesis. Track in
+- **C94 [REPORTED 2026-07-12] — projective averaging transfer.** Finite transitive-action averaging
+  gives a disjoint projective image for every ordinary complete arc of size at most `q`, proving
+  `rhoC(q)≤t2(2,q)` when `t2(2,q)≤q`. The Kim–Vu input is an explicit named hypothesis, not an
+  axiom; the warning-free target and axiom audit pass. Track in
   the [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C95 [OPEN] — even-characteristic nucleus constraints.** Prove the standard conic nucleus and

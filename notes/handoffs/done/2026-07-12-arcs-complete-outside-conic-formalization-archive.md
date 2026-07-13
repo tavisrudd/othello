@@ -119,3 +119,22 @@ closed-negative proof routes belong here.
   completed successfully with 3015 jobs and no source warnings. Source and isolation scans passed.
   All audited cubic, explicit-bound, `rhoC`, Big-O, eventual, and liminf theorems report only
   `[propext, Classical.choice, Quot.sound]`.
+
+## 2026-07-12 — C94 projective averaging transfer landed
+
+- Added `RelativeConicArcs/Averaging.lean`. The reusable finite-action theorem proves that a
+  transitive action on finite `X` has a translate of `A` disjoint from `B` whenever
+  `|A||B|<|X|`. The proof counts action fibers as stabilizer torsors and applies a finite union
+  bound; it does not invoke probability or division.
+- Instantiated the theorem with linear automorphisms of `K³` acting on `PG(2,K)`. The projective
+  point count `q²+q+1` and conic count `q+1` turn `|A|≤q` into the strict averaging inequality.
+  Existing `Projective.mapEquiv` collinearity transport proves that ordinary completeness survives
+  the chosen projectivity.
+- Defined `t2` as the attained minimum `rho ∅` and proved `rhoC(q)≤t2(2,q)` under `t2(2,q)≤q`.
+  The separate `KimVuBound` predicate supplies a named conditional interface for the deep external
+  small-complete-arc result; no global axiom is introduced.
+- Validation: `nix develop --command lake build RelativeConicArcs.Averaging RelativeConicArcs`
+  completed successfully with 3055 jobs and no source warnings. Forbidden-token and import-isolation
+  scans passed. The finite averaging, projective disjointness, completeness transport, `t2`
+  transfer, and Kim--Vu conditional theorem all audit to
+  `[propext, Classical.choice, Quot.sound]`.

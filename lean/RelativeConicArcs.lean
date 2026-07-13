@@ -5,3 +5,4 @@ import RelativeConicArcs.Moments
 import RelativeConicArcs.Defect
 import RelativeConicArcs.Conic
 import RelativeConicArcs.Asymptotic
+import RelativeConicArcs.Averaging
