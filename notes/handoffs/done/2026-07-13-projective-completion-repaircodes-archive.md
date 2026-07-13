@@ -120,3 +120,24 @@ q=9: repair_rows={cubic r3:(4,8), axis r3:(7,13), cubic r4:(4,8), axis r4:(7,15)
 Thus the proposed formulas survive both the smallest characteristic-three field and q=9 without
 assuming target transitivity or a selected repair family. This remains independent finite evidence;
 the general clutter equivalence and invariant formulas stay open under XH2–XH4.
+
+## 2026-07-13 — D-PC10 ambient shifted-inversion symmetry
+
+While implementing XH2, shifted inversion was found to lift to the ambient coordinate map
+
+```text
+T_a(x₀,x₁,x₂,x₃) =
+  (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀).
+```
+
+In characteristic three, `T_a C(s)=(s+a)³ C((s+a)⁻¹)` when `s≠-a`, `T_a C(-a)=C(∞)`,
+and `T_a C(∞)=C(0)`. On the axis, `T_a A(y)=(0,y-a,1,0)`, so `A(a)` maps to
+`A(∞)`. This realizes the desired completion-fiber equivalence through an ambient invertible
+linear transformation rather than a case-by-case coincidence.
+
+`RepairCodes.ProjectiveAxisTwistedCubicInvariants` now kernel-proves the induced projective
+parameter equivalence, its unique preimage of infinity, invertibility of `T_a`, and the direct
+normalized action formulas on finite cubic and axis points together with all pole/infinity cases.
+The aggregate build and standard axiom scan pass. Generic circuit/support transport and the exact
+zero-sum fiber equivalence remain open under XH2; until those compile, D-PC10 is not used to claim
+uniform repair rows.

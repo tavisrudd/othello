@@ -57,6 +57,10 @@ group, represented in Lean by `zeroSumCapNumber`.
   solves the resulting matching and transversal problems exactly. It confirms all proposed
   radius-three and radius-four rows, including the q=3 boundary. This is a refutation gate, not a
   substitute for the general Lean proofs.
+- `RepairCodes/ProjectiveAxisTwistedCubicInvariants.lean` proves the D-PC10 projective parameter
+  permutation and its ambient invertible linear realization, including normalized action formulas
+  on every finite, pole, and infinity case. Transport from these column formulas to exact repair
+  clutters is the current XH2 obligation.
 
 ## Mandatory xhigh review checkpoints
 
@@ -96,6 +100,7 @@ and novelty promotion.
 | ID | Discovery | Proof status | Novelty posture | Next gate / destination |
 |---|---|---|---|---|
 | D-PC9 | The completed seed appears to have exactly five nonzero weights: projective section counts `N1=q(q²-1)/3`, `N2=q(q²-1)/2`, `N3=q(q+1)`, `N4=q(q²-1)/6`, `N(q+2)=q+1`; hence exactly `q²-1` minimum-weight words | `CHECKED` independently at q=3,9,27; general moment proof sketched, not Lean | potentially stronger coding-theoretic contribution; `LIT-OPEN` | XH7; prove from plane moments/triple classification, then targeted weight-enumerator search |
+| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | projective parameter permutation, ambient invertibility, and normalized cubic/axis action formulas `LEAN`; repair-clutter transport open | structural unification, not by itself a novelty claim | XH2; prove generic circuit/support transport and the zero-sum fiber equivalence |
 
 When a discovery becomes planned work, allocate it separately but keep this row as the concise
 discovery verdict. Negative investigations belong in the companion archive.
