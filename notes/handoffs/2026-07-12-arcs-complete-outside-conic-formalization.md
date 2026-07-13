@@ -93,8 +93,12 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | split first/second moments over covered required points and prescribed holes | `RelativeConicArcs/Defect.lean` | Lean-proved |
 | exact integer-normalized defect identity and nonnegativity | `RelativeConicArcs/Defect.lean` | Lean-proved |
 | coverage and uncovered-locus bounds; exact equality criterion; quantitative stability | `RelativeConicArcs/Defect.lean` | Lean-proved |
+| standard Veronese conic equals `XZ=Y²`, is parametrized by `PG(1,K)`, and has `q+1` points | `RelativeConicArcs/Conic.lean` | Lean-proved |
+| nonsingular conics as projective images; completeness and `rhoC` are invariant under normalization | `RelativeConicArcs/Conic.lean` | Lean-proved |
+| conic-loss/corrected-capacity inequalities and `L1 ≤ L2 ≤ rhoC` | `RelativeConicArcs/Conic.lean` | Lean-proved |
+| even/odd closed forms for the rational corrected capacity | `RelativeConicArcs/Conic.lean` | Lean-proved |
 
-The standalone `RelativeConicArcs` target builds without warnings. The C89–C91 headline axiom profiles
+The standalone `RelativeConicArcs` target builds without warnings. The C89–C92 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
 `admit`, or custom axioms. Existing Lean targets do not import the spinoff.
 
@@ -105,7 +109,7 @@ are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `
 | **C89 [REPORTED 2026-07-12]** | Scaffold `RelativeConicArcs`; define the minimal incidence/arc/hole interfaces; instantiate coordinate `PG(2,q)` and prove compatibility with the existing projective-cap predicate. | None | Isolated library boundary and statement vocabulary landed. |
 | **C90 [REPORTED 2026-07-12]** | Prove `r_A(x) ≤ floor (k/2)` and both classical moment equations by explicit finite bijections/double counts. | C89 | Combinatorial engine landed. |
 | **C91 [REPORTED 2026-07-12]** | Prove the prescribed-hole defect identity, nonnegativity, coverage and uncovered-locus bounds, exact equality criterion, and quantitative stability. | C90 | Paper's central new identity landed. |
-| **C92** | Define the standard conic and its `q+1` parametrization; prove projective transport and normalization of nonsingular plane conics; specialize C91; formalize `L1`, `L2`, parity capacities, and the exact finite lower-bound theorem. | C89–C91 | Closes the finite universal lower-bound layer and proves that `rhoC` is independent of the prescribed nonsingular conic. |
+| **C92 [REPORTED 2026-07-12]** | Define the standard conic and its `q+1` parametrization; prove projective transport and normalization of nonsingular plane conics; specialize C91; formalize `L1`, `L2`, parity capacities, and the exact finite lower-bound theorem. | C89–C91 | Finite universal lower-bound layer and conic independence landed. |
 | **C93** | Derive the parity-free inequality and formalize the additive `3/2` asymptotic, first as an explicit error bound and then as the manuscript's Big-O/liminf statements along prime powers. | C92 | Closes the analytic headline theorem without hiding constants in informal algebra. |
 | **C94** | Prove the finite transitive-action averaging lemma, instantiate projective transport, and prove `rhoC(q) ≤ t2(2,q)` under `t2(2,q) ≤ q`; expose Kim–Vu only as a cited named hypothesis. | C89, C92 | Closes the upper-bound transfer with an honest external boundary. |
 | **C95** | In even characteristic, prove the standard conic's nucleus/tangent incidence facts and both nucleus-in/nucleus-out propositions, including parity and corrected inequalities. | C89, C92 | Closes the characteristic-two structural section. |
@@ -160,8 +164,9 @@ For each closed task:
 
 ## Next step
 
-Begin C92 with the standard coordinate conic in `PG(2,K)`. First inventory the reusable conic and
-projective-transport API already present under `ProjectiveCap/`; then choose a parametrization whose
-cardinality and secant-incidence lemmas feed the abstract C91 theorems without making `Defect.lean`
-coordinate-aware. Keep projective normalization of arbitrary nonsingular conics as a distinct bridge
-theorem before specializing the defect bounds to `L1`, `L2`, and the parity-corrected capacities.
+Begin C93 from the subtraction-free `L2Admissible` inequality in `Conic.lean`. First prove one
+parity-free cubic necessary inequality with explicit natural-to-real casts. Then derive a concrete
+finite error estimate implying `rhoC(q) ≥ sqrt(2q) + 3/2 - O(q⁻¹/²)`; package Big-O and liminf
+only after the quantified inequality is kernel-checked. Keep the domain explicit (finite-field
+cardinalities, or an abstract unbounded family of realized prime powers) so the asymptotic statement
+does not silently quantify over nonexistent fields.

@@ -97,6 +97,58 @@ private theorem projective_collinear_of_incidence_collinear
     Projectivization.orthogonal_mk, triple_product_eq_det] at haorth
   exact haorth
 
+/-- Mathlib incidence collinearity agrees with the existing projectivization predicate, including
+the degenerate cases where two of the three points coincide. -/
+theorem collinear_iff_projective_collinear {a b c : Point K} :
+    RelativeConicArcs.Collinear (L := Point K) a b c ↔
+      ProjectiveCap.Projective.Collinear K (Fin 3 → K) a b c := by
+  by_cases hab : a = b
+  · subst b
+    constructor
+    · intro _
+      unfold ProjectiveCap.Projective.Collinear
+      simpa using Projectivization.isCollinear_pair a c
+    · intro _
+      by_cases hac : a = c
+      · subst c
+        obtain ⟨p₁, p₂, _p₃, _l₁, l₂, _l₃, hp₁l₂, _hp₁l₃, _hp₂l₁,
+          hp₂l₂, _hp₂l₃, _hp₃l₁, _hp₃l₂, _hp₃l₃⟩ :=
+          Configuration.ProjectivePlane.exists_config (P := Point K) (L := Point K)
+        have hp₁p₂ : p₁ ≠ p₂ := fun h => hp₁l₂ (h ▸ hp₂l₂)
+        by_cases ha : a = p₁
+        · have hap₂ : a ≠ p₂ := ha ▸ hp₁p₂
+          obtain ⟨l, hl, _huniq⟩ :=
+            Configuration.HasLines.existsUnique_line (P := Point K) (L := Point K) a p₂ hap₂
+          exact ⟨l, hl.1, hl.1, hl.1⟩
+        · obtain ⟨l, hl, _huniq⟩ :=
+            Configuration.HasLines.existsUnique_line (P := Point K) (L := Point K) a p₁ ha
+          exact ⟨l, hl.1, hl.1, hl.1⟩
+      · obtain ⟨l, hl, _huniq⟩ :=
+          Configuration.HasLines.existsUnique_line (P := Point K) (L := Point K) a c hac
+        exact ⟨l, hl.1, hl.1, hl.2⟩
+  by_cases hac : a = c
+  · subst c
+    constructor
+    · intro _
+      unfold ProjectiveCap.Projective.Collinear
+      simpa [Set.pair_comm] using Projectivization.isCollinear_pair a b
+    · intro _
+      obtain ⟨l, hl, _huniq⟩ :=
+        Configuration.HasLines.existsUnique_line (P := Point K) (L := Point K) a b hab
+      exact ⟨l, hl.1, hl.2, hl.1⟩
+  by_cases hbc : b = c
+  · subst c
+    constructor
+    · intro _
+      unfold ProjectiveCap.Projective.Collinear
+      simpa using Projectivization.isCollinear_pair a b
+    · intro _
+      obtain ⟨l, hl, _huniq⟩ :=
+        Configuration.HasLines.existsUnique_line (P := Point K) (L := Point K) a b hab
+      exact ⟨l, hl.1, hl.2, hl.2⟩
+  exact ⟨projective_collinear_of_incidence_collinear hab hac hbc,
+    incidence_collinear_of_projective_collinear hab hac hbc⟩
+
 /-- Incidence arcs in Mathlib's coordinate projective plane are exactly the projective caps used
 by the existing `ProjectiveCap` library. -/
 theorem arc_iff_projectiveCap (A : Finset (Point K)) :

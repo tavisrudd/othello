@@ -75,3 +75,25 @@ closed-negative proof routes belong here.
   completed successfully with 3012 jobs and no source warnings. Source and import-isolation scans
   passed. A separate audit printed `[propext, Classical.choice, Quot.sound]` for both split moments,
   the exact identity, nonnegativity, equality, coverage, uncovered, and stability theorems.
+
+## 2026-07-12 — C92 conic specialization and finite lower bounds landed
+
+- Added `RelativeConicArcs/Conic.lean` and reused `ProjectiveCap.Sym2ConicBridge` for the Veronese
+  map and quadratic equation. Proved that the standard finite conic is exactly the projective zero
+  locus `XZ=Y²`, is parametrized injectively by `PG(1,K)`, and has `|K|+1` points.
+- Represented a nonsingular conic by a linear projective image of the standard conic. This orbit
+  presentation makes the normalization projectivity explicit and avoids importing an unformalized
+  quadratic-form classification. Proved relative completeness and `rho` invariant under every
+  collinearity-preserving point equivalence, then instantiated the result to show `rhoC` is
+  independent of the represented nonsingular conic.
+- Specialized C91 first at the abstract `q+1`-hole level, matching the manuscript audit that the
+  finite conic bound uses only cardinality. Derived the exact bound retaining conic incidence, the
+  corrected capacity after dropping that nonnegative term, and the first-moment capacity bound.
+- Defined subtraction-free `L1Admissible` and `L2Admissible` thresholds, proved every complete arc
+  has at least three points, and proved the headline chain `L1(q) ≤ L2(q) ≤ rhoC(q)`. Also proved
+  the manuscript's rational corrected-capacity formulas separately for `k=2n` and `k=2n+1`.
+- Validation: `nix develop --command lake build RelativeConicArcs.Conic RelativeConicArcs`
+  completed successfully with 3014 jobs and no source warnings. Source and import-isolation scans
+  passed. A separate audit printed `[propext, Classical.choice, Quot.sound]` for the coordinate
+  collinearity bridge, conic equation/cardinality, normalization invariance, exact conic bound,
+  both parity formulas, and the finite lower-bound theorem.

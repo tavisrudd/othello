@@ -70,9 +70,9 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
    boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
-   incidence foundation, C90's classical secant moments, and C91's exact prescribed-hole defect
-   identity with all finite consequences are Lean-proved; **C92 conic specialization is next**.
-   Then formalize the asymptotic, averaging/nucleus results, and certified small examples.
+   incidence foundation through C92's normalized conic model and finite chain
+   `L1 ≤ L2 ≤ rhoC` are Lean-proved; **C93 additive-3/2 asymptotic is next**. Then formalize
+   averaging/nucleus results and certified small examples.
    Live map:
    [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
@@ -99,9 +99,11 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C92 [OPEN] — conic specialization and finite lower bounds.** Formalize the standard conic,
-  projective normalization/invariance of nonsingular plane conics, `L1`/`L2`, parity capacities,
-  and exact conic-complete-arc lower bounds. Track in the
+- **C92 [REPORTED 2026-07-12] — conic specialization and finite lower bounds.** The Veronese conic
+  is exactly `XZ=Y²` with `q+1` points; nonsingular conics are explicit projective images and have
+  invariant `rhoC`. Abstract `q+1`-hole specialization, parity capacities, and
+  `L1(q) ≤ L2(q) ≤ rhoC(q)` are Lean-proved. The warning-free target builds; headline axioms are
+  `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C93 [OPEN] — additive `3/2` asymptotic.** Prove an explicit quantitative lower bound from the
