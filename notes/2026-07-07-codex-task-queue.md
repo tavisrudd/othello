@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C84.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C88.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -66,10 +66,32 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
 3. **Independent lanes** — C30 (q17/q19 Lean cert assembly, long-running, gated) pulls in parallel.
+4. **Mirror-boundary formalization — C85–C88.** Independent strict-trust lane: finish the
+   parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
+   boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C85 [OPEN] — quadratic split-route obstruction.** Formalize finite-field quadratic isotropy
+  in dimension at least three and the eigenspace restriction needed to close the split linear
+  parabolic branch. Track in the
+  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+
+- **C86 [OPEN] — Hermitian linear obstruction.** Formalize finite Hermitian isotropy in dimension
+  at least two and the adjoint/multiplier classification excluding nonsplit fixed-point-free
+  projective involutions. Track in the
+  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+
+- **C87 [OPEN] — Baer-semilinear obstruction.** Formalize the order-two semilinear normal form,
+  its fixed subgeometry, and nonempty intersection with the parabolic and Hermitian boards. Track
+  in the [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+
+- **C88 [OPEN] — elliptic `Q⁻` boundary classification.** Develop the Witt/Scharlau-transfer
+  argument for variety-preserving projective involutions; the general `Q⁻(2m−1,q)`, `m≥3`, claim
+  remains conjectural until this closes. Track in the
+  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 - **C84 [ACTIVE 2026-07-12 — PRIMARY, abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:

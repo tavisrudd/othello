@@ -21,6 +21,8 @@ Rules:
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
   [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
   for the active task IDs.
+- **Mirror-boundary formalization (C85–C88):** start with
+  [mirror-boundary formalization](notes/handoffs/2026-07-12-mirror-boundary-formalization.md).
 - **Named-expert context:** load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for

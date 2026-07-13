@@ -7,6 +7,10 @@ collinearity-preserving involution that fixes a sub-board `X ⊂ PG(V)` ⇒ the 
 is P.  This note (a) packages *where that method stops* into one boundary statement, and (b) scopes
 two further positive extensions.
 
+**Active formalization tracking:** C85–C88 in the dedicated
+[`mirror-boundary handoff`](handoffs/2026-07-12-mirror-boundary-formalization.md). This note is the
+detailed mathematical specification; the handoff is the live current-state map.
+
 ---
 
 ## #5 — Boundary classification program: which classical varieties admit an fpf mirror

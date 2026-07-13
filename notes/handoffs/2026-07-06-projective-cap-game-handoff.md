@@ -163,8 +163,11 @@ intersection patterns and point counts are verified, not trusted).
   odd q), via `blockForm_ellipticBlock` (the factor-`δ` similarity) + `onBlockQuadric_map`.
   `MirrorBoundary` proves the exact scalar-square fixed-point criterion, the eigenline-to-board
   obstruction, and the odd-dimensional determinant exclusion used by the parabolic nonsplit route.
-  Remaining form-isotropy, unitary, Baer-semilinear, and elliptic-transfer obligations are listed
-  in [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).
+  Remaining form-isotropy, unitary, Baer-semilinear, and elliptic-transfer obligations are tracked
+  as C85–C88 in the dedicated
+  [`2026-07-12 mirror-boundary handoff`](2026-07-12-mirror-boundary-formalization.md); the detailed
+  theorem specification remains
+  [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).
   Disjoint from the C41/C50 files.
 
 ## Odd-Plane Kernel
