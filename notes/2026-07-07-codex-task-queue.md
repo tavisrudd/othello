@@ -141,8 +141,9 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 - **C87 [ACTIVE 2026-07-12, PARTIAL] — Baer-semilinear obstruction.** Constructive fixed-vector
   spanning, fixed-basis extraction, Frobenius fixed-field identification, scalar normalization,
   and projective conjugacy now classify every modeled square-scalar Baer representative; this also
-  closes the full Hermitian Baer representative branch. Open real-math core: descent/normalization
-  of a semilinearly preserved parabolic form, including zero-locus stabilizer → semisimilitude. Track in the
+  closes the full Hermitian Baer representative branch. Scalar Hilbert 90, fixed-value quadratic
+  descent, and the coordinate parabolic semisimilitude obstruction are also formal. Open real-math
+  core: zero-locus stabilizer → semisimilitude for a nondegenerate parabolic quadric. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 - **C88 [OPEN] — elliptic `Q⁻` boundary classification.** Develop the Witt/Scharlau-transfer

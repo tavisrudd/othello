@@ -115,3 +115,22 @@ closed-negative proof routes belong here.
   - `choom -n 1000 -- nix develop --command lake build ProjectiveCap` — PASS (`8658` jobs).
   - New spanning, basis, fixed-field, vector/projective conjugacy, and full Hermitian theorems have
     axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
+
+## 2026-07-12 — C87 quadratic semisimilitude descent landed
+
+- Added `ProjectiveCap/BaerQuadraticDescent.lean` with an elementary order-two scalar Hilbert-90
+  proof, including the exceptional multiplier `-1` case.
+- Constructed a base-field quadratic form from Frobenius-fixed values by mapping the quadratic and
+  polar identities through the injective algebra map.
+- Proved that a nonzero coordinate-Frobenius quadratic semisimilitude has norm-one multiplier,
+  normalizes to Frobenius-fixed values, and fixes a point on its projective quadric in dimension at
+  least three. The parabolic-dimensional not-fixed-point-free wrapper is formal.
+- The only remaining C87 theorem package is the geometric rigidity bridge: a semilinear projective
+  transformation preserving a nondegenerate parabolic zero locus must act by a scalar
+  semisimilitude of the defining quadratic form.
+- Validation:
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap.BaerQuadraticDescent` — PASS,
+    warning-free (`3002` jobs).
+  - `choom -n 1000 -- nix develop --command lake build ProjectiveCap` — PASS (`8659` jobs).
+  - Scalar normalization, descended form, multiplier norm, and coordinate parabolic obstruction
+    axioms: exactly `[propext, Classical.choice, Quot.sound]`.

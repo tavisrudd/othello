@@ -8,6 +8,7 @@ import ProjectiveCap.EllipticMirror
 import ProjectiveCap.HyperbolicQuadricMirror
 import ProjectiveCap.MirrorBoundary
 import ProjectiveCap.BaerSemilinear
+import ProjectiveCap.BaerQuadraticDescent
 import ProjectiveCap.CapCMirror
 import ProjectiveCap.NearLinearMirror
 import ProjectiveCap.Binary

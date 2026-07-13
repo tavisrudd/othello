@@ -63,6 +63,8 @@ headlines to the proved scope:
 | board fixed points transfer through a supplied projective conjugacy | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
 | every square-scalar relative-Frobenius semilinear representative is projectively conjugate to coordinate Frobenius | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
 | every Hermitian board in vector dimension at least three meets every modeled Baer-semilinear projective involution | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
+| scalar Hilbert-90 normalization and fixed-value quadratic-form descent | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87 partial) |
+| coordinate-Frobenius quadratic semisimilitude fixes a quadric point in dimension at least three | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87 partial) |
 
 Current source audit: no `sorry` or `native_decide`; the relevant builds pass with axiom profile
 `[propext, Classical.choice, Quot.sound]`.
@@ -71,15 +73,15 @@ Current source audit: no `sorry` or `native_decide`; the relevant builds pass wi
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C87** | Finish parabolic form/stabilizer descent. General square-scalar Baer conjugacy is now formal by a constructive fixed-basis proof, and the full Hermitian Baer representative branch is closed. Remaining: show that a semilinearly preserved parabolic zero locus descends to the fixed field. | The landed coordinate parabolic theorem consumes an explicit descended quadratic form. Bridging a projective zero-locus stabilizer to a semisimilitude, then normalizing that form, is the remaining real-math package. | Closes the parabolic semilinear branch; the Hermitian representative branches are already complete. |
+| **C87** | Finish the parabolic stabilizer bridge. General square-scalar Baer conjugacy, scalar semisimilitude normalization, fixed-value quadratic descent, and the full Hermitian Baer representative branch are formal. Remaining: prove that preserving a nondegenerate parabolic projective zero locus forces the required semisimilitude equation. | The coordinate semisimilitude obstruction is landed. Only zero-locus stabilizer → scalar multiple of the conjugated quadratic form remains real mathematics. | Closes the parabolic semilinear branch; the Hermitian representative branches are already complete. |
 | **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
 
 ## Dependency and attack order
 
 C85–C86 are closed; their quadratic and Hermitian infrastructure is available to later tasks.
-Proceed with **C87** at the remaining parabolic form/stabilizer descent. The general semilinear
-normal form, fixed-subgeometry conjugacy, and Hermitian intersection are landed. Attempt C88 only
-after the parabolic bridge is complete.
+Proceed with **C87** at the remaining parabolic zero-locus-stabilizer bridge. The general
+semilinear normal form, fixed-subgeometry conjugacy, Hermitian intersection, scalar normalization,
+and coordinate quadratic-form descent are landed. Attempt C88 only after this bridge is complete.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -101,15 +103,12 @@ For each closed task:
 
 Close the remaining blockers in this order:
 
-1. **Parabolic form descent (C87).** First formalize the semisimilitude version: after the landed
-   conjugacy, assume
-   `Q(τv)=μ·τ(Q(v))`; applying it twice gives `Norm(μ)=1`, scalar Hilbert 90 normalizes `Q`, and
-   its values on base-coordinate vectors descend to a base-field quadratic form. Feed that form to
-   the landed descended-quadric intersection theorem. To recover the headline for the full
-   projective board stabilizer, separately prove that a collineation preserving a nondegenerate
-   parabolic zero locus is a semisimilitude. The recommended concrete proof is to put the form in a
-   standard Witt basis and recover all coefficients from isotropic test vectors, avoiding a large
-   algebraic-geometry dependency.
+1. **Parabolic stabilizer bridge (C87).** Scalar Hilbert 90, multiplier norm-one, fixed-value form
+   descent, and the coordinate semisimilitude obstruction are now formal. Prove that a semilinear
+   collineation preserving a nondegenerate parabolic zero locus is a semisimilitude. The recommended
+   concrete proof is to put the form in a standard Witt basis and recover all coefficients from
+   isotropic test vectors, avoiding a large algebraic-geometry dependency. Then transport the
+   landed coordinate theorem through the general Baer conjugacy.
 2. **Elliptic `Q⁻` transfer (C88).** Do not build the Lean proof around the desired negative verdict
    before checking the classification. Put a nonsplit representative in the standard
    `2×2` block form for multiplication by `√c`, solve the symmetric-matrix similitude equation for

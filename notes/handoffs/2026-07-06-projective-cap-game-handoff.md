@@ -146,7 +146,8 @@ intersection patterns and point counts are verified, not trusted).
   vocabulary) and has a second proof by translation mirror `(i,j) ↦ (i+h, j+h)`.
 - **Boundary program (strict trust tiers):** the hyperbolic positive family is Lean-proved.
   Both linear parabolic routes and its coordinate-Frobenius Baer intersection are Lean-proved;
-  parabolic form/stabilizer descent remains open. Both linear Hermitian routes and the full
+  its coordinate semisimilitude/form descent is also Lean-proved, while the projective
+  zero-locus-stabilizer → semisimilitude bridge remains open. Both linear Hermitian routes and the full
   square-scalar Baer-semilinear representative branch are Lean-proved.
   The general elliptic `Q⁻(2m−1,q)`, `m≥3`, exclusion is **conjectural** pending the
   Witt/Scharlau-transfer classification. No exact/coextensive boundary theorem is claimed.
@@ -169,7 +170,7 @@ intersection patterns and point counts are verified, not trusted).
   determinant exclusion, completing both linear parabolic and Hermitian routes;
   `BaerSemilinear` proves coordinate Frobenius, constructive general semilinear conjugacy, its fixed
   base subgeometry, and the full Hermitian intersection. Remaining parabolic form/stabilizer
-  descent and elliptic-transfer obligations are tracked as C87–C88 in the dedicated
+  bridge and elliptic-transfer obligations are tracked as C87–C88 in the dedicated
   [`2026-07-12 mirror-boundary handoff`](2026-07-12-mirror-boundary-formalization.md); the detailed
   theorem specification remains
   [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).

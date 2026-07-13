@@ -62,7 +62,8 @@ projective representative with `S²=cI`, it proves `c` Frobenius-fixed, descends
 field, and normalizes by finite-field norm surjectivity before applying the fixed-basis theorem.
 Every Hermitian form meets the resulting fixed Baer subgeometry. A descended quadratic form in
 dimension at least three does too. The remaining open Baer step is specific to parabolic boards:
-derive and normalize the descended quadratic form from preservation of the projective zero locus.
+derive the semisimilitude equation from preservation of the projective zero locus. Once that
+equation is supplied, scalar normalization and quadratic-form descent are Lean-proved.
 
 **Linear case (i)** splits on whether `c` is a square:
 
@@ -121,9 +122,9 @@ finite quadratic and Hermitian isotropy exclude their split routes, determinant 
 the parabolic nonsplit route, and norm-square reflection excludes the Hermitian nonsplit route.
 Completing rows 2–4 still requires:
 
-1. descent/normalization of a parabolic quadratic zero locus preserved by that semilinear map to a
-   base-field quadratic form. The coordinate intersection theorem already consumes precisely this
-   compatibility statement;
+1. prove that a semilinear collineation preserving a nondegenerate parabolic projective zero locus
+   acts as a semisimilitude of its quadratic form. Multiplier norm-one, scalar Hilbert-90
+   normalization, base-field form descent, and the resulting fixed point are already Lean-proved;
 2. for `Q⁻`, the Witt/Scharlau-transfer classification below.
 
 Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
