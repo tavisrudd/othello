@@ -1,5 +1,5 @@
 name = "NodeKayles"
-defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "DihedralSchreier"]
+defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "DihedralSchreier", "RelativeConicArcs"]
 
 # mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
 # Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
@@ -37,3 +37,7 @@ name = "RepairCodes"
 # Fixed-point-deleted Schreier templates from tame dihedral conic triples.
 [[lean_lib]]
 name = "DihedralSchreier"
+
+# Standalone formalization of papers/arcs_complete_outside_conic.
+[[lean_lib]]
+name = "RelativeConicArcs"

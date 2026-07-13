@@ -23,6 +23,8 @@ Rules:
   for the active task IDs.
 - **Mirror-boundary formalization (C85–C88):** start with
   [mirror-boundary formalization](notes/handoffs/2026-07-12-mirror-boundary-formalization.md).
+- **Arcs complete outside a conic formalization (C89–C96):** start with
+  [relative-conic-arcs formalization](notes/handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 - **Named-expert context:** load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for

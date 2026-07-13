@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C88.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C96.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -69,10 +69,54 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 4. **Mirror-boundary formalization — C85–C88.** Independent strict-trust lane: finish the
    parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
    boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
+   isolated incidence foundation, attained `rho`, coordinate plane order, and `ProjectiveCap` arc
+   bridge are Lean-proved; **C90 secant moments are next**. Then formalize the exact prescribed-hole
+   defect identity, conic consequences, averaging/nucleus results, and certified small examples.
+   Live map:
+   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C89 [REPORTED 2026-07-12] — relative-conic-arcs foundation.** The isolated
+  `RelativeConicArcs` target now reuses Mathlib's `Configuration.ProjectivePlane`; arc/secant/hole
+  vocabulary, maximal relative completion, attained `rho`, coordinate order `q`, and the exact
+  `Arc ↔ ProjectiveCap.Projective.Cap` bridge are Lean-proved. Build is warning-free; headline
+  axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C90 [OPEN] — classical secant moments.** Prove the maximum-index lemma and the first and second
+  secant-index equations by kernel-checked finite double counting. Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C91 [OPEN] — prescribed-hole defect identity.** Formalize the exact identity, nonnegativity,
+  coverage/uncovered bounds, equality criterion, and quantitative stability. Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C92 [OPEN] — conic specialization and finite lower bounds.** Formalize the standard conic,
+  projective normalization/invariance of nonsingular plane conics, `L1`/`L2`, parity capacities,
+  and exact conic-complete-arc lower bounds. Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C93 [OPEN] — additive `3/2` asymptotic.** Prove an explicit quantitative lower bound from the
+  parity-free inequality, then package the manuscript's Big-O and liminf statements along prime
+  powers. Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C94 [OPEN] — projective averaging transfer.** Formalize finite transitive-action averaging,
+  instantiate projective transport, and keep the Kim–Vu input as a named cited hypothesis. Track in
+  the [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C95 [OPEN] — even-characteristic nucleus constraints.** Prove the standard conic nucleus and
+  tangent facts and both nucleus incidence propositions. Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C96 [OPEN] — certified small examples and trust audit.** Add a rules-only checker and frozen
+  data for `q=8,9,11,16`; prove the reported values/bounds and audit all headline theorem axioms.
+  Track in the
+  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C85 [REPORTED 2026-07-12] — quadratic split-route obstruction.** Chevalley–Warning now proves
   every finite odd-field quadratic form of dimension at least three isotropic; the `±1`
