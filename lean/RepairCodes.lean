@@ -21,3 +21,7 @@ import RepairCodes.SeedLift
 import RepairCodes.Q9SeedLift
 import RepairCodes.CodeInstance
 import RepairCodes.OuterDual
+import RepairCodes.TraceDual
+import RepairCodes.Q9ExtensionLift
+import RepairCodes.Imported
+import RepairCodes.Asymptotic
