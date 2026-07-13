@@ -5,6 +5,11 @@ Primary source: `RIFF_183`, `RIFF_200`, `RIFF_201`
 Scope boundary: ambiguity and consistency analysis, not automatic fraud detection or investment
 advice
 
+## Mathematical spine
+
+- [`MATH_17`](math.md#math_17--minimal-inconsistencyrepair-duality) — minimum fact repairs are
+  transversals of the minimal-inconsistency hypergraph.
+
 ## Thesis
 
 Structured filings define a partially observed constraint system. Rather than impute one completed

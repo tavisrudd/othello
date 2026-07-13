@@ -4,6 +4,11 @@ Status: exploratory paper agenda
 Primary source: `RIFF_208`–`RIFF_210`, `RIFF_213`, `RIFF_224`  
 Scope boundary: reproducibility and falsification, not a claim of future profitability
 
+## Mathematical spine
+
+- [`MATH_18`](math.md#math_18--specification-family-transversal-and-assumption-reversal-distance) —
+  specification-family transversals and minimum-cost assumption reversal witnesses.
+
 ## Thesis
 
 Backtest robustness has two separable layers: exact reproducibility of the declared computation and

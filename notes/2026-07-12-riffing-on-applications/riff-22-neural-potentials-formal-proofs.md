@@ -5,6 +5,11 @@ Primary source: `RIFF_22`, `RIFF_31`, `RIFF_44`–`RIFF_46`
 Existing substrate: exact S4 transitions, potential probes, LP fitting, conic ledger, Lean reduction
 chain
 
+## Mathematical spine
+
+- [`MATH_15`](math.md#math_15--generic-packet-strategy-theorem) — generic invariant plus bounded
+  well-founded progress turns adaptive packet absorption into a winning strategy.
+
 ## Thesis
 
 A learned model can be useful in proof discovery without entering the trust chain. Train a potential

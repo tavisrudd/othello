@@ -5,6 +5,13 @@ Primary source: `RIFF_4`–`RIFF_6`, `RIFF_29`, `RIFF_30`, `RIFF_106`–`RIFF_11
 Existing substrate: PGL-quotiented keys, orbit search, dense leaf tables, BuRR stores, raw dumps, and
 independent proof-DAG validation
 
+## Mathematical spine
+
+- [`MATH_5`](math.md#math_5--symmetry-quotiented-game-certificate-soundness) — local quotient-DAG
+  obligations certify the root game value.
+- [`MATH_6`](math.md#math_6--lossy-hint-noninterference) — arbitrary lossy hints preserve exactness
+  when they affect ordering only.
+
 ## Thesis
 
 For symmetry-rich finite search, the durable output should be a compact independently checkable

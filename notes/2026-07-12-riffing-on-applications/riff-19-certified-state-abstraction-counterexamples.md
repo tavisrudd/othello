@@ -5,6 +5,13 @@ Primary source: `RIFF_19`–`RIFF_21`, `RIFF_27`, `RIFF_42`
 Existing empirical base: S4 state dumps, feature miners, exact values, failed selector and
 decomposition programs
 
+## Mathematical spine
+
+- [`MATH_1`](math.md#math_1--feature-factorization-impossibility) — a certified feature collision
+  obstructs every policy factoring through that feature map.
+- [`MATH_2`](math.md#math_2--minimum-abstraction-refinement-is-a-transversal) — minimum refinement
+  within a predicate vocabulary is a transversal problem.
+
 ## Thesis
 
 State abstractions should be evaluated by two obligations: they must identify states related by

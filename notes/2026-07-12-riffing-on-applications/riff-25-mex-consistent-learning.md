@@ -5,6 +5,13 @@ Primary source: `RIFF_25`, `RIFF_26`, `RIFF_40`
 Existing substrate: exact Grundy solvers, disjunctive-sum engine, Queens and finite-group instances,
 Lean-checked recurrence
 
+## Mathematical spine
+
+- [`MATH_3`](math.md#math_3--mex-certificate-characterization) — coverage and exclusion characterize
+  a valid Grundy labeling.
+- [`MATH_4`](math.md#math_4--local-mex-consistency-gives-global-uniqueness) — local certified mex
+  consistency determines the global labeling uniquely.
+
 ## Thesis
 
 Sprague–Grundy values are structured labels, not arbitrary classes. A valid nimber obeys the mex

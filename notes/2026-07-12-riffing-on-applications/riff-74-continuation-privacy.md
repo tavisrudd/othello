@@ -4,6 +4,15 @@ Status: exploratory paper agenda
 Primary source: `RIFF_74`–`RIFF_76`, `RIFF_150`, `RIFF_151`  
 Existing mathematical base: continuation-graph rigidity and semilinear reconstruction program
 
+## Mathematical spine
+
+- [`MATH_12`](math.md#math_12--defining-querytransversal-duality) — minimum nonadaptive identifying
+  queries are a transversal problem.
+- [`MATH_13`](math.md#math_13--information-lower-bound-for-reconstruction) — response-tree counting
+  gives the baseline adaptive query lower bound.
+- [`MATH_14`](math.md#math_14--continuation-oracle-reconstruction-with-query-bounds) — efficient
+  reconstruction for the four-frame continuation oracle is the open target.
+
 ## Thesis
 
 An interface can conceal its internal object while leaking which proposed extensions remain valid.

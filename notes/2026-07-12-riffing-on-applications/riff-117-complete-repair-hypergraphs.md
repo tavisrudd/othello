@@ -5,6 +5,15 @@ Primary source: `RIFF_3`, `RIFF_117`–`RIFF_120`
 Existing mathematical base: `FiniteGeom`, `RepairCodes`, the twisted-cubic–axis and
 characteristic-matched Roth–Lempel families
 
+## Mathematical spine
+
+- [`MATH_7`](math.md#math_7--repair-tolerance-equals-transversal-number) — repair failure tolerance
+  is the repair hypergraph's transversal number.
+- [`MATH_8`](math.md#math_8--bounded-repair-confinement-preserves-the-complete-repair-hypergraph) —
+  bounded-repair confinement preserves the complete repair hypergraph.
+- [`MATH_9`](math.md#math_9--exact-τν-formulas-for-geometric-repair-code-families) — exact geometric
+  `τ/ν` formulas are the substantial open target.
+
 ## Thesis
 
 Locality, advertised repair-set count, and disjoint availability do not determine the resilience

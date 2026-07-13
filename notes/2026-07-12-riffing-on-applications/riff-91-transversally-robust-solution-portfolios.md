@@ -5,6 +5,13 @@ Primary source: `RIFF_91`–`RIFF_94`, `RIFF_103`, `RIFF_104`, `RIFF_181`, `RIFF
 `RIFF_195`  
 Existing mathematical base: matching/transversal inequalities and completion hypergraphs
 
+## Mathematical spine
+
+- [`MATH_10`](math.md#math_10--robust-solution-family-iff-τ--f) — a solution family survives every
+  `f`-failure set exactly when its transversal number exceeds `f`.
+- [`MATH_11`](math.md#math_11--finite-double-oracle-termination-and-correctness) — finite exact
+  solution/cut oracles give termination and a global certificate.
+
 ## Thesis
 
 Syntactically diverse feasible solutions can remain vulnerable to one shared resource failure. An

@@ -5,6 +5,15 @@ Primary source: `RIFF_95`, `RIFF_96`, `RIFF_113`, `RIFF_114`, `RIFF_184`, `RIFF_
 Existing mathematical base: completion distance, defining sets/transversals, continuation
 reconstruction
 
+## Mathematical spine
+
+- [`MATH_12`](math.md#math_12--defining-querytransversal-duality) — identifying-query sets are
+  transversals of pairwise disagreement edges.
+- [`MATH_16`](math.md#math_16--completion-family-induces-an-error-correcting-identification-code) —
+  a completion family induces a response code with ordinary error/erasure guarantees.
+- [`MATH_19`](math.md#math_19--completion-lengthrobustnesscertificate-tradeoff) — honest bit-cost,
+  robustness, and certificate tradeoffs are the open theorem target.
+
 ## Thesis
 
 A combinatorial object can be compressed semantically by storing a small defining subset or query
