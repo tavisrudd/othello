@@ -118,7 +118,7 @@ noncomputable def correctedCapacityQ (q k : ℕ) : ℚ :=
   (Nat.choose k 2 : ℚ) * (q - 1 : ℕ) -
     6 / (k / 2 : ℕ) * (Nat.choose k 4 : ℚ)
 
-private theorem twentyFour_mul_choose_four (k : ℕ) :
+theorem twentyFour_mul_choose_four (k : ℕ) :
     24 * Nat.choose k 4 = k * (k - 1) * (k - 2) * (k - 3) := by
   have h := Nat.descFactorial_eq_factorial_mul_choose k 4
   norm_num [Nat.descFactorial, Nat.factorial] at h

@@ -70,9 +70,9 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
    boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
-   incidence foundation through C92's normalized conic model and finite chain
-   `L1 ≤ L2 ≤ rhoC` are Lean-proved; **C93 additive-3/2 asymptotic is next**. Then formalize
-   averaging/nucleus results and certified small examples.
+   incidence foundation through C93's explicit
+   `rhoC(q) ≥ sqrt(2q)+3/2−8/sqrt(2q)` and asymptotic wrappers are Lean-proved;
+   **C94 projective averaging is next**. Then formalize nucleus results and certified examples.
    Live map:
    [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
@@ -106,9 +106,11 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C93 [OPEN] — additive `3/2` asymptotic.** Prove an explicit quantitative lower bound from the
-  parity-free inequality, then package the manuscript's Big-O and liminf statements along prime
-  powers. Track in the
+- **C93 [REPORTED 2026-07-12] — additive `3/2` asymptotic.** The parity-free cubic inequality gives
+  the explicit bound `rhoC(q)≥sqrt(2q)+3/2−8/sqrt(2q)`. The shortfall is
+  `O(1/sqrt(2q))`; operational and literal liminf statements are formalized over indexed families
+  of actual finite fields. The warning-free target builds; headline axioms are
+  `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C94 [OPEN] — projective averaging transfer.** Formalize finite transitive-action averaging,

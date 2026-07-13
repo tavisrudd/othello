@@ -97,3 +97,25 @@ closed-negative proof routes belong here.
   passed. A separate audit printed `[propext, Classical.choice, Quot.sound]` for the coordinate
   collinearity bridge, conic equation/cardinality, normalization invariance, exact conic bound,
   both parity formulas, and the finite lower-bound theorem.
+
+## 2026-07-12 — C93 additive-3/2 asymptotic landed
+
+- Added `RelativeConicArcs/Asymptotic.lean`. Starting from subtraction-free `L2Admissible`, proved
+  the parity-free cubic necessary inequality over both `ℚ` and `ℝ`; the proof explicitly uses
+  `floor(k/2) ≤ k/2` and `24*C(k,4)=k(k−1)(k−2)(k−3)`.
+- Proved the elementary first-moment estimate `sqrt(2q) ≤ k`. In the branch `k<sqrt(2q)+2`, set
+  `a=k−sqrt(2q)`, established `0≤a≤2`, expanded the cubic exactly, and bounded its lower-order
+  remainder by `4s²`. This yields the concrete finite theorem
+  `k ≥ sqrt(2q)+3/2−8/sqrt(2q)`.
+- Applied the finite theorem to the attained standard-conic parameter, proving the same bound for
+  `rhoC` at every finite-field cardinality. Indexed families are actual finite fields, so the
+  asymptotic wrapper does not quantify over unrealized natural-number orders.
+- Defined the positive shortfall and proved it is `O(1/sqrt(2q))`. Proved unconditionally that every
+  real `b<3/2` is eventually below `rhoC(q)−sqrt(2q)` along any unbounded realized family. Because
+  Mathlib's real-valued `Filter.liminf` cannot represent `+∞`, the literal `liminf` wrapper records
+  its required coboundedness side condition; the operational theorem covers both finite and
+  `+∞` lower limits.
+- Validation: `nix develop --command lake build RelativeConicArcs.Asymptotic RelativeConicArcs`
+  completed successfully with 3015 jobs and no source warnings. Source and isolation scans passed.
+  All audited cubic, explicit-bound, `rhoC`, Big-O, eventual, and liminf theorems report only
+  `[propext, Classical.choice, Quot.sound]`.

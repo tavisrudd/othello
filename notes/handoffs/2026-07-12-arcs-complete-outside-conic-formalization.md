@@ -97,8 +97,10 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | nonsingular conics as projective images; completeness and `rhoC` are invariant under normalization | `RelativeConicArcs/Conic.lean` | Lean-proved |
 | conic-loss/corrected-capacity inequalities and `L1 ≤ L2 ≤ rhoC` | `RelativeConicArcs/Conic.lean` | Lean-proved |
 | even/odd closed forms for the rational corrected capacity | `RelativeConicArcs/Conic.lean` | Lean-proved |
+| parity-free cubic necessary inequality and explicit `sqrt(2q)+3/2-8/sqrt(2q)` bound | `RelativeConicArcs/Asymptotic.lean` | Lean-proved |
+| shortfall is `O(1/sqrt(2q))`; operational and literal liminf wrappers for realized field families | `RelativeConicArcs/Asymptotic.lean` | Lean-proved |
 
-The standalone `RelativeConicArcs` target builds without warnings. The C89–C92 headline axiom profiles
+The standalone `RelativeConicArcs` target builds without warnings. The C89–C93 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
 `admit`, or custom axioms. Existing Lean targets do not import the spinoff.
 
@@ -110,7 +112,7 @@ are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `
 | **C90 [REPORTED 2026-07-12]** | Prove `r_A(x) ≤ floor (k/2)` and both classical moment equations by explicit finite bijections/double counts. | C89 | Combinatorial engine landed. |
 | **C91 [REPORTED 2026-07-12]** | Prove the prescribed-hole defect identity, nonnegativity, coverage and uncovered-locus bounds, exact equality criterion, and quantitative stability. | C90 | Paper's central new identity landed. |
 | **C92 [REPORTED 2026-07-12]** | Define the standard conic and its `q+1` parametrization; prove projective transport and normalization of nonsingular plane conics; specialize C91; formalize `L1`, `L2`, parity capacities, and the exact finite lower-bound theorem. | C89–C91 | Finite universal lower-bound layer and conic independence landed. |
-| **C93** | Derive the parity-free inequality and formalize the additive `3/2` asymptotic, first as an explicit error bound and then as the manuscript's Big-O/liminf statements along prime powers. | C92 | Closes the analytic headline theorem without hiding constants in informal algebra. |
+| **C93 [REPORTED 2026-07-12]** | Derive the parity-free inequality and formalize the additive `3/2` asymptotic, first as an explicit error bound and then as the manuscript's Big-O/liminf statements along prime powers. | C92 | Analytic headline theorem landed with explicit constant `8`. |
 | **C94** | Prove the finite transitive-action averaging lemma, instantiate projective transport, and prove `rhoC(q) ≤ t2(2,q)` under `t2(2,q) ≤ q`; expose Kim–Vu only as a cited named hypothesis. | C89, C92 | Closes the upper-bound transfer with an honest external boundary. |
 | **C95** | In even characteristic, prove the standard conic's nucleus/tangent incidence facts and both nucleus-in/nucleus-out propositions, including parity and corrected inequalities. | C89, C92 | Closes the characteristic-two structural section. |
 | **C96** | Build a no-`native_decide` rules-only certificate checker; import/regenerate the four manuscript witnesses; prove `rhoC(8)=rhoC(9)=rhoC(11)=6` and `8≤rhoC(16)≤9`; complete the theorem manifest and trust audit. | C92; independent witness work can begin after C89 | Closes the finite examples and the end-to-end paper audit. |
@@ -164,9 +166,9 @@ For each closed task:
 
 ## Next step
 
-Begin C93 from the subtraction-free `L2Admissible` inequality in `Conic.lean`. First prove one
-parity-free cubic necessary inequality with explicit natural-to-real casts. Then derive a concrete
-finite error estimate implying `rhoC(q) ≥ sqrt(2q) + 3/2 - O(q⁻¹/²)`; package Big-O and liminf
-only after the quantified inequality is kernel-checked. Keep the domain explicit (finite-field
-cardinalities, or an abstract unbounded family of realized prime powers) so the asymptotic statement
-does not silently quantify over nonexistent fields.
+Begin C94 by proving a reusable finite transitive-action averaging lemma for two finite subsets.
+Instantiate it with projective point permutations induced by `GL(3,K)`, using the existing
+`PlaneTransitivity` transport rather than rebuilding collinearity invariance. Show that any complete
+arc of size at most `q` has a projective image disjoint from the prescribed conic, then transport
+ordinary completeness to relative completeness and conclude `rhoC(q) ≤ t2(2,q)`. Keep the Kim–Vu
+input as a named theorem hypothesis with its citation and asymptotic consequence explicit.
