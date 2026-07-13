@@ -61,6 +61,14 @@ rows
 \[
  (\nu,\tau)=(4,7),\qquad(6,12),\qquad(7,13).
 \]
+We also analyze the projective completion obtained by restoring the cubic
+point at infinity.  It is a $[2q+2,4,q]_q$ code.  Its inclusion-minimal
+full repair port stabilizes at radius four and has two uniform rows:
+\[
+ \left(\frac{q-1}{2},q-1\right)\quad\hbox{on the cubic},
+ \qquad
+ \left(\frac{5q-3}{6},2q-3\right)\quad\hbox{on the axis}.
+\]
 
 We then prove an exact concatenation theorem.  If $I$ is an inner code and
 $r+1<2d(I^\perp)$, an outer functional-dual distance of at least $r+2$
@@ -76,6 +84,11 @@ greater than every fixed $c<39/190$ (in particular, greater than $1/5$),
 with exact locality three on the nine cubic coordinates per block, exact
 locality two on the ten axis coordinates, and the same exact repair rows in
 every block.
+The completed $q=9$ seed gives a second family with exact rate $1/10$ and
+eventual relative distance greater than every fixed $c<351/1600$, with ten
+cubic and ten axis coordinates per block and exact radius-four rows
+$(4,8)$ and $(7,15)$.  This is equality of bounded radius-four ports; it is
+not a claim about the concatenated code's unbounded full port.
 Every finite and reduction step has been formalized in Lean.  The sole deep
 import is Stichtenoth's self-dual TVZ theorem, cited with its exact consumed
 statement.
@@ -107,10 +120,12 @@ regenerating-set framework.  Our emphasis is not the definition of $\tau$,
 but the exact coordinatewise computation of both $\nu$ and $\tau$ for a
 complete code-derived repair family and their simultaneous transfer.
 
-Our inner family comes from a classical object in finite projective
+Our inner families come from a classical object in finite projective
 geometry.  In $\mathrm{PG}(3,q)$, take the affine part of a twisted cubic and,
 when $q$ has characteristic three, adjoin the common axis of the osculating
-planes.  The axis and its stabilizer orbits are classical; a modern account
+planes.  We study both this punctured system and the system obtained by
+restoring the projective cubic point at infinity.  The axis and its
+stabilizer orbits are classical; a modern account
 appears in Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.  What matters
 here is not an orbit classification but the complete system of small linear
 dependencies through each selected point.
@@ -138,6 +153,10 @@ The paper proves the following package.
       coordinate when $q\geq9$.
 \item We give the complete $q=9$ table, including the three exact
       $(\nu,\tau)$ rows and the counts of inclusion-minimal repairs.
+\item We restore the projective cubic point at infinity, prove parameters
+      $[2q+2,4,q]_q$, and determine the complete inclusion-minimal repair
+      port.  Rank four makes radius four exhaustive, with uniform cubic row
+      $((q-1)/2,q-1)$ and axis row $((5q-3)/6,2q-3)$.
 \item We prove exact preservation of complete radius-$r$ repair hypergraphs
       under the block-confinement hypothesis
       $r+1<2d(I^\perp)$ and an outer functional-dual distance gate.  As a
@@ -151,6 +170,10 @@ The paper proves the following package.
       eventual relative distance greater than every fixed $c<39/190$, exact
       mixed locality, exact type multiplicities, exact repair rows, and
       helper-failure thresholds.
+      The projectively completed seed gives a second, Pareto-incomparable
+      point with exact rate $1/10$, every eventual distance constant below
+      $351/1600$, equal $10N/10N$ coordinate multiplicities, and exact
+      radius-four rows $(4,8)$ and $(7,15)$.
 \end{enumerate}
 
 \subsection*{Novelty posture}
@@ -170,7 +193,8 @@ locality~\cite{LiuEtAl2022,JinFu2026}, but did not locate either statement.
 This is a bounded search result, not a priority certificate; the accompanying
 novelty ledger records the exact search boundary and the paper avoids
 unconditional ``first'' language.
-The generic exact-locality corollary, the constants below $39/190$, and
+The generic exact-locality corollary, the constants below $39/190$ and
+$351/1600$, and
 the bundled type multiplicities and failure thresholds are derived
 consequences of those two candidate contributions and the cited outer
 family; we do not position them as separate novelty claims.
@@ -476,6 +500,90 @@ Every coordinate of $C_9=[19,4,8]_9$ satisfies
 The constant $7/4$ is attained at every cubic coordinate.
 \end{corollary}
 
+\section{The projectively completed seed}
+\label{sec:projective-completion}
+
+Let
+\[
+ \overline T_q=T_q\cup\{C_\infty=(0:0:0:1)\},
+ \qquad \overline S_q=\overline T_q\sqcup L_q,
+\]
+and let $\overline C_q$ be the row code of the displayed projective system.
+Thus $\overline C_q$ restores the one cubic point punctured from $C_q$; the
+axis is unchanged.
+
+\begin{theorem}[Completed parameters and full minimal repair port]
+\label{thm:completed-port}
+For every $q=3^h$,
+\[
+ \overline C_q=[2q+2,4,q]_q,
+ \qquad d(\overline C_q^\perp)=3.
+\]
+Cubic coordinates have exact locality three and axis coordinates exact
+locality two.  Moreover, every inclusion-minimal repair uses at most four
+helpers, so the full minimal repair port is already visible at radius four.
+Its exact rows are
+\[
+ (\nu_x^{(4)},\tau_x^{(4)})=
+ \begin{cases}
+ ((q-1)/2,q-1),&x\in\overline T_q,\\[2mm]
+ ((5q-3)/6,2q-3),&x\in L_q.
+ \end{cases}
+\]
+These values are uniform within each of the two projective parameter lines.
+\end{theorem}
+
+\begin{proof}
+A plane not containing the axis meets it once and meets the full twisted
+cubic in at most three points.  A nonzero plane containing the axis is an
+osculating plane and meets the full cubic in exactly one point.  Hence every
+section has size at most $q+2$, and the old extremal section still attains
+$q+2$.  This gives distance $(2q+2)-(q+2)=q$; the same spanning columns give
+dimension four.  Pairwise projective independence gives dual distance at
+least three, while any three distinct axis points give equality.
+
+The boundary four-circuit
+\[
+ \{C(s),C(t),C_\infty,A(s+t)\}\qquad(s\ne t)
+\]
+supplies the missing cubic-infinity repairs.  Projective shifted inversion
+acts by an invertible ambient map, a coordinate permutation, and nonzero
+column scalings; it is transitive separately on the full cubic and full
+axis.  Thus the exact locality and row calculations may be made at the two
+infinity targets.
+
+For exhaustiveness, take an inclusion-minimal target-plus-helper relation.
+Its helper columns are linearly independent: otherwise a helper-only
+relation can be subtracted to cancel one helper without cancelling the
+target coefficient.  Since the generator has four rows, there are at most
+four helpers.  This proves that radius four is the full \emph{minimal} inner
+port; it makes no assertion about a later concatenated code's unbounded
+port.
+
+For a cubic target, every minimal edge consumes at least two of the $q$
+other cubic points, so $\nu\le(q-1)/2$; the radius-three rainbow matching
+attains equality.  For an axis target, if an edge uses $c$ cubic and $a$
+axis helpers, its possible shapes give $2c+3a\ge6$.  Summing over a matching
+and using the $q+1$ cubic and $q$ available axis resources gives
+$6\nu\le5q+2$, hence $\nu\le(5q-3)/6$; the radius-three matching attains
+equality.
+
+Finally, a full-port transversal is equivalent to a linear functional
+nonzero at the target, with the transversal formed by its nonzero values on
+the other columns.  Equivalently,
+\[
+ \tau_x=(2q+1)-m_x,
+\]
+where $m_x$ is the largest hyperplane section avoiding $x$.  The maximum is
+$q+2$ for a cubic target and $4$ for an axis target, giving $q-1$ and
+$2q-3$, respectively.
+\end{proof}
+
+At $q=9$, the completed seed is $[20,4,9]_9$.  Its ten cubic coordinates
+all have radius-four row $(4,8)$, while its ten axis coordinates all have
+row $(7,15)$.  The two old affine axis subtypes merge because the restored
+projective symmetry acts transitively on the full axis.
+
 \section{Exact repair transfer under concatenation}
 \label{sec:transfer}
 
@@ -663,6 +771,30 @@ Theorem~\ref{thm:transfer}, Corollary~\ref{cor:exact-locality-transfer},
 and Table~\ref{tab:q9}.
 \end{proof}
 
+\begin{corollary}[Completed finite extension-field lift]
+\label{cor:completed-finite-lift}
+Let $O\leq L^N$ be an $[N,K,D]_L$ code with $O\ne0$ and
+$d(O^\perp)\geq6$.  Concatenation with $\overline C_9$ is an $\F_9$-linear
+code with
+\[
+ [20N,\ 4K,\ \geq9D]_9.
+\]
+Its complete repair hypergraphs through radius four are embedded copies of
+the corresponding inner hypergraphs.  Exactly $10N$ coordinates are cubic,
+with exact locality three and row $(4,8)$ at radius four; exactly $10N$ are
+axis coordinates, with exact locality two and row $(7,15)$.  The guaranteed
+helper-failure thresholds are $7$ and $14$.
+\end{corollary}
+
+\begin{proof}
+The parameter argument is the same, now using the $[20,4,9]_9$ inner seed.
+At radius four the inner gate is $5<2d(\overline C_9^\perp)=6$, and the trace
+bridge requires ordinary outer dual distance $r+2=6$.  Theorem~\ref{thm:transfer}
+therefore gives equality of the complete bounded hypergraphs.  Apply
+Theorem~\ref{thm:completed-port}.  The word ``bounded'' is essential: the
+corollary does not identify the concatenated code's full unbounded port.
+\end{proof}
+
 \section{A fixed-alphabet asymptotic family}
 \label{sec:asymptotic}
 
@@ -715,7 +847,7 @@ The lifted length and dimension are $19N_j$ and
 $4(N_j/2)=2N_j$, giving exact rate $2/19$.  Its distance is at least
 $8D_j$, and
 \[
- \frac{d(\cC_j)}{19N_j}
+\frac{d(\cC_j)}{19N_j}
  \geq\frac{8D_j}{19N_j}
  \geq\frac15.
 \]
@@ -728,8 +860,40 @@ $19c/8<39/80$, so eventually $D_j/N_j>19c/8$.  Hence
 \]
 \end{proof}
 
+\begin{theorem}[Completed uniform asymptotic repair family]
+\label{thm:completed-asymptotic}
+There is a sequence of $\F_9$-linear codes $\overline\cC_j$ of unbounded
+length and exact rate $1/10$ such that, eventually, the relative minimum
+distance is at least $1/5$.  Each inner block has ten cubic coordinates of
+exact locality three and radius-four row $(4,8)$, and ten axis coordinates
+of exact locality two and row $(7,15)$.  More sharply, for every fixed real
+$c<351/1600$,
+\[
+ \frac{d(\overline\cC_j)}{\operatorname{length}(\overline\cC_j)}>c
+\]
+eventually, with the threshold allowed to depend on $c$.
+\end{theorem}
+
+\begin{proof}
+Use the same self-dual outer family and concatenate with $\overline C_9$.
+Eventually $N_j\ge18$ and $N_j\le3D_j$, hence $D_j\ge6$ and
+Corollary~\ref{cor:completed-finite-lift} applies.  Length and dimension are
+$20N_j$ and $4(N_j/2)=2N_j$, giving rate $1/10$.  The distance is at least
+$9D_j$.  Since $39/80>4/9$, eventually $4N_j<9D_j$, which yields the clean
+$1/5$ bound.  For fixed $c<351/1600=9(39/80)/20$, one has
+$20c/9<39/80$, so eventually
+\[
+ \frac{d(\overline\cC_j)}{20N_j}
+ \geq\frac{9D_j}{20N_j}>c.
+\]
+The bounded radius-four hypergraph equality transfers the coordinate
+profiles.  It does not promote the inner full-port statement to the
+unbounded port of $\overline\cC_j$.
+\end{proof}
+
 \begin{remark}[Meaning of ``unconditional'']
-Theorem~\ref{thm:asymptotic} is unconditional as ordinary mathematics once
+Theorems~\ref{thm:asymptotic} and~\ref{thm:completed-asymptotic} are
+unconditional as ordinary mathematics once
 Stichtenoth's published theorem is accepted.  In the Lean trust ledger it is
 not a zero-project-axiom theorem: the exact specialization of
 Theorem~1.6(ii) is the single quarantined literature axiom.  Every reduction
@@ -778,7 +942,11 @@ Bartoli--Davydov--Marcugini--Pambianco~\cite{BartoliEtAl2020} compute
 point--plane incidence data and multiple-covering-code parameters.  Those
 incidence counts are adjacent to, but do not by themselves determine,
 matching and transversal numbers of the repair hypergraphs in
-Section~\ref{sec:invariants}.
+Sections~\ref{sec:invariants} and~\ref{sec:projective-completion}.  The full
+projective cubic and its characteristic-three common axis are therefore not
+claimed as new.  Our none-found posture concerns the exact full-minimal
+repair rows of their union, not the underlying geometry or ordinary code
+parameters.
 
 The multiplicative pairing used in the cubic matching proof belongs to a
 classical design-theoretic neighborhood.  Constant-quotient pairings of a
@@ -822,9 +990,16 @@ proofs establish:
 \item the concrete fields $\F_9\subset\F_{6561}$ and extension degree four;
 \item the disjoint exhaustive lifted coordinate-type partition and its exact
       multiplicities $9N,9N,N$;
+\item the projectively completed $[2q+2,4,q]_q$ seed, the rank-four cutoff
+      making radius four its full minimal inner port, and the two uniform
+      completed rows;
+\item the completed $[20N,4K,\ge9D]_9$ bounded-port lift, its $10N/10N$
+      partition, exact localities, and rows $(4,8)$ and $(7,15)$;
 \item the analytic extraction of $N\leq3D$, $19N\leq40D$, and every strict
       distance constant below $39/190$ from the imported limit bound;
-\item the final rate $2/19$ and clean displayed distance constant $1/5$.
+\item both final rates $2/19$ and $1/10$, every strict completed-family
+      constant below $351/1600$, and the clean displayed distance constant
+      $1/5$ for both families.
 \end{itemize}
 
 No \texttt{sorry}, \texttt{admit}, \texttt{native\_decide},

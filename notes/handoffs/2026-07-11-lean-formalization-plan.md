@@ -15,11 +15,18 @@ locality three on cubic coordinates and two on axis coordinates, and exact repai
 deep dependency is the quarantined
 Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
 review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
-The assembled 14-page manuscript, PDF, proof ledger, and adversarial novelty report are in
+The assembled manuscript, PDF, proof ledger, and adversarial novelty report are in
 [`papers/coding-repair-hypergraphs/`](../../papers/coding-repair-hypergraphs/). The internal
 novelty audit returns the repair-tolerance invariant to explicit prior art and retains only
 cautious candidate claims for the exact all-symbol `(ν,τ)` separation and complete-hypergraph
-transfer. An external specialist citation-chain review remains a submission preflight gate.
+transfer. It now also includes the projectively completed `[2q+2,4,q]_q` seed, its exact full
+minimal radius-four repair rows, the `[20N,4K,>=9D]_9` q9 lift, and the second unbounded family
+with exact rate `1/10` and every fixed eventual distance bound `c<351/1600`. Those additions are
+Lean-checked under the same strict boundary: finite results use only standard logical axioms, and
+the asymptotic family adds exactly the quarantined Stichtenoth import. Their geometry, ordinary
+parameters, and rate/distance arithmetic are classified as classical or derived; only the exact
+completed repair rows and bounded transfer retain cautious none-found candidate wording. An
+external specialist citation-chain review remains a submission preflight gate.
 The synchronized theorem/source/build checklist is maintained in
 [`proof_ledger.md`](../../papers/coding-repair-hypergraphs/proof_ledger.md); every internal box is
 checked, with only that external review left open.

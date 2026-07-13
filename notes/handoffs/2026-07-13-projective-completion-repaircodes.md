@@ -1,8 +1,9 @@
 # Projectively completed cubic–axis RepairCodes — C111–C114
 
 **Date**: 2026-07-13
-**Status**: ACTIVE. C111–C113 are kernel-proved and adversarially reviewed; C114 is next. No
-claim is paper-promoted until the downstream proof and publication gates pass.
+**Status**: COMPLETE. C111–C114 are proved, adversarially reviewed, and synchronized with the
+paper and registries. The sole deep formal dependency is the quarantined Stichtenoth theorem;
+external specialist citation-chain review remains a submission preflight gate, not a theorem gap.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
@@ -15,14 +16,14 @@ Pareto-incomparable seed and asymptotic family.
 
 | Claim | Current status | Permitted wording |
 |---|---|---|
-| completed seed has parameters `[2q+2,4,q]_q` and exact global dual distance `3` | strict-trust Lean, independent q=3,9,27 replay/mutations, aggregate build, and XH1 passed | proved; not paper-promoted before C114 |
-| completed seed has exactly cubic and axis radius-three repair row types | strict-trust Lean; target transitivity is explicit monomial repair transport, not an orbit assumption | proved through radius three; not paper-promoted before C114 |
-| radius-three cubic row is `((q-1)/2,q-1)` | strict-trust Lean for every projective cubic target; q=3,9 independently checked | proved; not paper-promoted before C114 |
-| radius-three axis row is `((5q-3)/6,2q-1-Z3(q))` | strict-trust Lean for every axis target; q=3,9 independently checked | proved; not paper-promoted before C114 |
+| completed seed has parameters `[2q+2,4,q]_q` and exact global dual distance `3` | strict-trust Lean, independent q=3,9,27 replay/mutations, aggregate build, and XH1 passed | proved and paper-promoted |
+| completed seed has exactly cubic and axis radius-three repair row types | strict-trust Lean; target transitivity is explicit monomial repair transport, not an orbit assumption | proved through radius three and paper-promoted |
+| radius-three cubic row is `((q-1)/2,q-1)` | strict-trust Lean for every projective cubic target; q=3,9 independently checked | proved and paper-promoted |
+| radius-three axis row is `((5q-3)/6,2q-1-Z3(q))` | strict-trust Lean for every axis target; q=3,9 independently checked | proved; retained in the formal ledger while the paper emphasizes the full radius-four row |
 | radius four exhausts the complete inner minimal port | strict-trust generic Lean theorem: minimal helpers are independent and every `k`-row minimal port stabilizes at radius `k` | proved; inner port only |
-| radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | strict-trust Lean for every completed coordinate; q=3,9 independently enumerated; XH3/XH4 passed | proved; not paper-promoted before C114 |
-| q9 lift has `[20N,4K,>=9D]_9`, exact rate `1/10`, and eventual relative distance above every `c<351/1600` | strict-trust Lean; exact bounded radius-four transfer; only the quarantined Stichtenoth import in the family theorem; XH5 passed | proved; not paper-promoted before C114 |
-| theorem package is novel | targeted search found no exact construction | candidate contribution; no priority claim |
+| radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | strict-trust Lean for every completed coordinate; q=3,9 independently enumerated; XH3/XH4 passed | proved and paper-promoted |
+| q9 lift has `[20N,4K,>=9D]_9`, exact rate `1/10`, and eventual relative distance above every `c<351/1600` | strict-trust Lean; exact bounded radius-four transfer; only the quarantined Stichtenoth import in the family theorem; XH5 passed | proved and paper-promoted |
+| exact completed repair rows and bounded transfer have no located predecessor | targeted exact-claim search; XH6 passed | candidate contribution only; no priority claim |
 
 Here `Z3(q)` is the already formalized maximum size of a zero-sum-free subset of the additive
 group, represented in Lean by `zeroSumCapNumber`.
@@ -138,7 +139,7 @@ the corresponding claim before xhigh review.
 5. **XH5 — transfer/asymptotic promotion [PASSED 2026-07-13].** Review `r=4` transfer gates, coordinate
    multiplicities, rate/distance arithmetic, and the exact scope of transferred supports before
    C113 is stated in prose.
-6. **XH6 — novelty and headline language.** Review the primary-source citation chain and separate
+6. **XH6 — novelty and headline language [PASSED 2026-07-13].** Review the primary-source citation chain and separate
    classical geometry, standard matroid consequences, family-specific repair formulas, and the
    asymptotic synthesis before any novelty or priority wording is committed.
 7. **XH7 — exact section/weight distribution.** Before expanding scope, review the moment-count
@@ -203,9 +204,11 @@ hypergraph, retain C111 as a seed theorem and demote C112–C113. If exact radiu
 require substantial new finite-geometry input, ship the proved radius-three family first and keep
 the full-port result queued.
 
-## Publication gate
+## Publication boundary
 
-No abstract, introduction, table-of-results, `papers-index.md`, or novelty wording changes until
-C114. Formal correctness is not novelty evidence. The bare twisted cubic, common axis, and generic
-rank-four circuit cutoff are classical/standard; novelty review targets the exact union-code repair
-profiles and their bounded-support asymptotic transfer.
+C114 promoted the proved projective-completion results into the manuscript, PDF, proof ledger, and
+paper registries. Formal correctness is not novelty evidence. The bare twisted cubic, common axis,
+ordinary code parameters, generic rank-four circuit cutoff, concatenation, and asymptotic
+rate/distance arithmetic are classical or derived. Only the exact union-code repair profiles and
+their complete bounded-support transfer retain cautious “candidate contribution” / “we did not
+locate” wording. External specialist citation-chain review remains required before submission.

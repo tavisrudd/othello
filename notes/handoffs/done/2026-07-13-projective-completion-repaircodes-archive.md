@@ -321,3 +321,27 @@ scaling; direction of the distance inequality; strict `c<351/1600` versus an end
 the eventual gate used to obtain dual distance six; and natural/real arithmetic in the `1/5`
 corollary. The formal statement exposes only bounded radius-four equality. Focused and aggregate
 builds, forbidden-token and whitespace scans, and axiom audits pass.
+
+## 2026-07-13 — C114 novelty, publication, and XH6 closure
+
+The targeted literature pass separated the classical full twisted cubic/common-axis geometry,
+standard projective-system parameters, generic rank-four cutoff, ordinary concatenation, and
+rate/distance arithmetic from the family-specific repair computation. No checked source was found
+stating the completed system's exact coordinatewise matching/transversal rows or equality of its
+complete bounded radius-four repair hypergraph under the transfer gates. The manuscript therefore
+uses only “candidate contribution” and “we did not locate”; it makes no priority or “first” claim.
+
+The adversarial paper--Lean comparison found one packaging mismatch: the paper states exact
+locality uniformly over the characteristic-three family, while the lift module exposed the axis
+result only through a q9-named wrapper and the cubic result had only just been generalized. The
+underlying proofs were already uniform. The final API now exports
+`projectiveAxisTwistedCubic_cubic_exact_locality_three` and
+`projectiveAxisTwistedCubic_axis_exact_locality_two`, with q9 wrappers retained for the lift.
+Focused and aggregate builds and the axiom audit confirm the generic declarations use only the
+standard logical axioms.
+
+XH6 checked all manuscript headline constants, generic-versus-q9 quantifiers, inner full port
+versus lifted bounded port, the strict asymptotic endpoints, theorem labels and citations, the
+proof ledger, TRUST boundary, README, paper index, planning registry, queue, and both handoffs.
+The regenerated PDF and synchronized package pass the internal release checklist. External
+specialist citation-chain review remains a submission preflight gate only.

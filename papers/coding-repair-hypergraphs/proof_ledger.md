@@ -31,11 +31,15 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | T4 | At `q=9`, exact rows `(4,7)`, `(6,12)`, `(7,13)`, with minimal-repair counts `28`, `36+8`, `36+12` | `KERNEL` | `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` | Coordinate multiplicities are `9`, `9`, and `1`. |
 | T4a | At `q=9`, the small-circuit support inventory is `120` axis triples and `84` completed cubic quadruples | `KERNEL` | `q9_smallCircuit_support_counts` | Counts distinct supports, not coefficient-scaled dual words. |
 | T4b | Every `q=9` coordinate satisfies `7*nu<=4*tau`, with equality at every cubic coordinate | `KERNEL` | `axisTwistedCubic_q9_ratio`, `axisTwistedCubic_q9_row_invariants` | The equality statement is the cubic row `(4,7)`. |
+| T4c | The projective completion is `[2q+2,4,q]_q` with dual distance three and exact locality three on cubic coordinates and two on axis coordinates | `KERNEL` | `projectiveAxisTwistedCubic_code_parameters`, `projectiveAxisTwistedCubicCode_dualDist`, `projectiveAxisTwistedCubic_cubic_exact_locality_three`, `projectiveAxisTwistedCubic_axis_exact_locality_two` | The point system and characteristic-three common axis are classical; no novelty is inferred from these parameters or locality alone. The cubic-locality theorem assumes only `q>=3`, automatic in the paper's characteristic-three field range. |
+| T4d | Radius four exhausts the completed seed's full minimal inner port, with cubic row `((q-1)/2,q-1)` and axis row `((5q-3)/6,2q-3)` | `KERNEL` | `minimalProjectiveAxisTwistedCubicRepair_full_eq_four`, `minimalProjectiveCubicRepair_full_invariants`, `minimalProjectiveAxisRepair_full_invariants` | “Full” is inner-only. The matching proof covers every minimal edge without assuming a five-circuit catalogue. |
 | T5 | Exact complete repair-hypergraph transfer under `r+1 < 2d(I^perp)` and outer functional-dual distance at least `r+2`; every exact locality `s<=r` is preserved | `KERNEL` | `repairHypergraph_concatenatedCode_eq_embed`, `FiniteGeom.HasExactLocalityAt`, `hasExactLocalityAt_concatenatedCode_iff_of_le`; matching/transversal corollaries in `RepairCodes.SeedLift` | Stronger than locality preservation: equality holds for every bounded dual-support repair set. Exact mixed-locality transfer is a derived corollary of equality at all radii up to `s`. |
 | T5a / C105 | Neither numerical gate can be weakened uniformly while preserving complete repair-hypergraph equality | `KERNEL` | `boundaryInnerCode_ne_bot`, `boundaryOuterCode_ne_bot`, `boundaryFullOuterCode_ne_bot`, `boundaryInnerCode_dualDist`, `boundaryOuterCode_functionalDualDistance_three`, `boundaryOuterCode_not_functionalDualDistance_four`, `innerDualDistanceGate_boundary_counterexample`, `outerFunctionalDualDistanceGate_boundary_counterexample` | Nondegenerate `GF(3)` repetition/SPC examples prove literal hypergraph inequality at `r+1=2d(I^perp)` and at outer functional-dual distance `r+1`. This is not a necessity claim for any fixed concatenation. |
 | T6 | Finite-separable trace bridge from ordinary extension-field dual distance to the functional-dual gate, with exact support | `KERNEL` | `traceCoefficient_mem_dualCode`, `functionalWeight_traceCoefficient`, `hasFunctionalDualDistanceAtLeast_restrictScalars` | No coding-theory decomposition is imported. |
 | T7 | Degree-four lift has `[19N,4K,>=8D]_9`, a disjoint exhaustive coordinate partition with multiplicities `9N,9N,N`, exact locality three on cubic and two on axis coordinates, exact row transfer, and failure thresholds `6,11,12` when `d(O^perp)>=5` | `KERNEL` | `q9ExtensionLiftCode_parameters`, `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, `q9ExtensionLiftCode_repairHypergraph_of_radius_le_three`, `q9ExtensionLiftCode_cubic_exact_locality_three`, `q9ExtensionLiftCode_axis_exact_locality_two`, `q9ExtensionLiftCode_row_invariants`, `q9ExtensionLiftCode_failure_thresholds` | Ordinary `GF(9^4)`-linear outer code; restriction of scalars is explicit. Exact locality is certified by transferring radii one, two, and three, not inferred from radius-three existence alone. |
+| T7p | Completed lift has `[20N,4K,>=9D]_9`, exact `10N/10N` partition, exact locality three/two, and exact radius-four rows `(4,8)` and `(7,15)` when `d(O^perp)>=6` | `KERNEL` | `projectiveQ9ExtensionLiftCode_parameters`, `projectiveQ9Lift_coordinate_partition`, `projectiveQ9Lift_coordinate_counts`, `projectiveQ9ExtensionLiftCode_exact_locality`, `projectiveQ9ExtensionLiftCode_row_invariants` | Equality is through radius four only; no lifted unbounded full-port claim. |
 | T8 | Unbounded `GF(9)` family with exact rate `2/19`; for every fixed `c<39/190`, eventual relative distance `>c`; bundled disjoint type distribution, exact mixed locality, rows, and thresholds | `IMPORTED-1` | `HasQ9LiftCoordinateDistribution`, `HasQ9LiftCoordinateProfile`, `HasQ9UniformRepairFamily`, `eventually_scaled_lift_distance_gt`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The displayed `1/5` remains a clean explicit corollary. Quantifier order is `forall c<39/190, eventually`, so the eventual index may depend on `c`; equality at `39/190` is not claimed. |
+| T8p | Completed unbounded q9 family has exact rate `1/10`, every fixed eventual bound `c<351/1600`, clean `>=1/5`, equal coordinate classes, and exact radius-four profiles | `IMPORTED-1` | `eventually_projective_scaled_lift_distance_gt`, `stichtenoth_projective_q9_uniform_repair_family`, `concrete_projective_q9_uniform_repair_family` | Same sole Stichtenoth import. Neither the endpoint nor the lifted unbounded full port is claimed. |
 
 ## Imported theorem ledger
 
@@ -97,6 +101,13 @@ an impressionistic reread.
   `9N:(4,7):6`, `9N:(6,12):11`, and `N:(7,13):12`.
 - [x] `HasQ9UniformRepairFamily` itself bundles the partition, multiplicities, exact localities,
   rows, and thresholds rather than relying only on adjacent declarations.
+- [x] The projective completion is synchronized as `[2q+2,4,q]_q`, dual distance three, exact
+  locality three/two, and full-minimal radius-four rows `((q-1)/2,q-1)` and
+  `((5q-3)/6,2q-3)`; “full” is never applied to the lift.
+- [x] The completed finite lift uses outer dual distance six and parameters
+  `[20N,4K,>=9D]_9`, with exact `10N/10N` multiplicities and radius-four rows `(4,8)`, `(7,15)`.
+- [x] Completed asymptotic arithmetic is synchronized: exact rate `1/10`, every fixed
+  `c<351/1600`, clean `>=1/5`, and no endpoint assertion.
 
 ### Formal trust and source boundary
 
@@ -118,6 +129,8 @@ an impressionistic reread.
 - [x] Internal adversarial novelty review completed; repair tolerance, bounded dual-support
   machinery, locality-preserving concatenation, trace duality, and ordinary AG/LRC asymptotics are
   identified as prior or adjacent art.
+- [x] The projective completion's classical geometry/code parameters and derived asymptotic
+  constants are separated from the none-found candidate novelty of its exact repair rows.
 - [x] Surviving novelty language is limited to “candidate contribution” / “we did not locate”; no
   unconditional priority or “first” claim remains.
 - [x] The legacy `[10,4,6]_9` seed is marked registry/library-only and is not substituted for the

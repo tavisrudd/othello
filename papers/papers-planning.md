@@ -240,9 +240,13 @@ Post-review dispositions:
   the manuscript, PDF, proof ledger, and adversarial novelty report. `RepairCodes` proves the trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed
   eventual distance bound `c<39/190`, plus a bundled exact coordinate distribution, mixed
-  locality, rows, and thresholds. The sole deep boundary is Stichtenoth
-  Theorem 1.6(ii), quarantined and visible in the headline axiom report. The remaining submission
-  gate is an external specialist citation-chain review, not formalization or manuscript assembly.
+  locality, rows, and thresholds. The projectively completed second seed is also integrated:
+  `[2q+2,4,q]_q`, exact full-minimal
+  radius-four rows, a `[20N,4K,>=9D]_9` bounded-port lift, and an unbounded q9 family of exact rate
+  `1/10` with every fixed eventual bound `c<351/1600`. The sole deep boundary for both families is
+  Stichtenoth Theorem 1.6(ii), quarantined and visible in the headline axiom report. The remaining
+  submission gate is an external specialist citation-chain review, not formalization or manuscript
+  assembly.
 - **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;
   audited first, never delaying arcs.
 - **Generalized D₂ₘ → folded into the dihedral paper** (not a separate paper). Its **Möbius-ladder /

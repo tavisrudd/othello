@@ -21,6 +21,12 @@ ingredients to a published self-dual TVZ family. Its ordinary rate/distance/loca
 mechanism is not positioned as independently novel; its candidate contribution is
 the exact blockwise repair-hypergraph data that survives at unbounded length.
 
+The projectively completed seed and its second asymptotic point have the same narrow posture.
+The full twisted cubic, characteristic-three axis, projective-system code parameters, rank-four
+circuit cutoff, and ordinary rate/distance concatenation are classical or derived. The
+none-found candidate contribution is limited to the exact completed-system repair rows and their
+complete bounded radius-four transfer.
+
 One novelty claim failed review and was corrected: Pamies-Juarez--Hollmann--Oggier
 explicitly define the minimum hitting set of all bounded dual repairs as *local repair
 tolerance*. The manuscript no longer calls the transversal interpretation implicit or
@@ -43,6 +49,9 @@ counterexamples prove exactly that restricted statement.
 | A7a | Exact lifted locality, type multiplicities, and helper-failure thresholds are independent new phenomena | Complete repair-hypergraph transfer already forces all bounded-radius inner repair data to survive; `tau-1` as failure tolerance is prior art | `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, the two exact-locality theorems, and `q9ExtensionLiftCode_failure_thresholds` | **DERIVED CONSEQUENCES.** Worth stating because they sharpen the theorem, but do not market them separately as novel. Their candidate value is inherited from the complete-hypergraph equality and the seed's exact row computation. |
 | A8 | Formal verification proves novelty | No literature source can be excluded by a Lean proof | All theorem boundaries and the sole imported axiom are explicit | **REJECTED INFERENCE.** Lean is evidence of correctness and trust-boundary discipline only. |
 | A9 / C105 | Both numerical transfer gates are best possible for a uniform complete-hypergraph theorem | Kurz--Yaakobi, DOI 10.1007/s10623-020-00828-6, Lemma 10(a), already records the elementary dual-distance obstruction between two distinct recovery sets. Standard concatenation and single-parity-check codes make the examples independently rediscoverable. No checked source was found stating both exact thresholds for equality of the complete bounded repair hypergraph | `innerDualDistanceGate_boundary_counterexample`, `outerFunctionalDualDistanceGate_boundary_counterexample` | **ELEMENTARY BOUNDARY THEOREM; COMPLETE-HYPERGRAPH FORMULATION NONE FOUND.** Say “cannot be weakened uniformly” or “best possible for the uniform theorem.” Never say either hypothesis is necessary for every fixed concatenation, and do not market the two-block mechanism itself as new. |
+| A10 | The projectively completed cubic--axis system or its ordinary code parameters are new | Twisted-cubic orbit/incidence sources explicitly treat the characteristic-three common axis and full projective cubic; projective-system distance from plane sections is standard | `projectiveAxisTwistedCubic_code_parameters`, `projectiveAxisTwistedCubicCode_dualDist` | **CLASSICAL/DERIVED.** Do not claim novelty for the point set, `[2q+2,4,q]_q`, dual distance, or locality by themselves. |
+| A11 | Exact full-minimal completed rows are already known | The targeted twisted-cubic axis/orbit/incidence/coset-code search found no matching/transversal or matroid-port computation for the union | `minimalProjectiveCubicRepair_full_invariants`, `minimalProjectiveAxisRepair_full_invariants` | **CANDIDATE NOVELTY; NONE FOUND.** Permit “we did not locate,” not a priority claim. Generic rank cutoff and local-primal duality are enabling lemmas, not separate novelty loci. |
+| A12 | Rate `1/10` and distance constant `351/1600` are a new AG/LRC bound | Standard concatenation with the same Stichtenoth family gives the arithmetic point | `stichtenoth_projective_q9_uniform_repair_family` | **DERIVED RESULT.** Candidate value lies in the simultaneous exact radius-four profile, not the rate/distance point alone. No endpoint claim. |
 
 ## Search boundary
 
@@ -57,6 +66,8 @@ available along four collision paths:
   preservation, including recovery-set separation by dual distance;
 - **twisted cubic:** characteristic-three axis, affine/full-axis unions, point/line/plane
   incidence, covering codes, coset weight distributions, and LRC terminology;
+- **projective completion:** the full cubic plus common axis, plane sections, projective-system
+  codes, matroid ports, radius-four circuits, and exact matching/transversal terminology;
 - **rainbow pairing / starters:** properly colored complete graphs, finite-field pair partitions,
   strong starters, constant-quotient and one-quotient starters, and complete mappings;
 - **formalization:** theorem statements were compared against the actual Lean declarations

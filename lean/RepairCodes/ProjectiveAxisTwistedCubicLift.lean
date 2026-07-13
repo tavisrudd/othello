@@ -146,9 +146,10 @@ theorem projectiveQ9ExtensionLiftCode_repairHypergraph_four
     hdeg O hdO 4 (by omega) j z
 
 set_option maxHeartbeats 800000 in
-/-- At q=9, every completed cubic coordinate has exact locality three. -/
-theorem projectiveAxisTwistedCubic_q9_cubic_exact_locality_three
-    (hcard : Fintype.card F = 9) (x : ProjectiveTwistedCubicIndex F) :
+/-- Over every finite characteristic-three field, every completed cubic coordinate has exact
+locality three.  The cardinal lower bound is separated so the circuit argument stays reusable. -/
+theorem projectiveAxisTwistedCubic_cubic_exact_locality_three
+    (hcard : 3 ≤ Fintype.card F) (x : ProjectiveTwistedCubicIndex F) :
     HasExactLocalityAt (projectiveAxisTwistedCubicCode (𝔽 := F)) (.inl x) 3 := by
   constructor
   · change (projectiveAxisTwistedCubicRepairHypergraph (.inl x) 3).Nonempty
@@ -158,8 +159,8 @@ theorem projectiveAxisTwistedCubic_q9_cubic_exact_locality_three
           by_contra h
           push Not at h
           have hu : (univ : Finset F) = {a} := by ext z; simp [h z]
-          have hc := congrArg Finset.card hu
-          simp [hcard] at hc
+          have hc : Fintype.card F = 1 := by simpa using congrArg Finset.card hu
+          omega
         obtain ⟨c, hca, hcb⟩ : ∃ c : F, c ≠ a ∧ c ≠ b := by
           by_contra h
           push Not at h
@@ -169,9 +170,10 @@ theorem projectiveAxisTwistedCubic_q9_cubic_exact_locality_three
             by_cases hza : z = a
             · exact Or.inl hza
             · exact Or.inr (h z hza)
-          have hc := congrArg Finset.card hu
           have hab : a ≠ b := Ne.symm hba
-          simp [hcard, hab] at hc
+          have hc : Fintype.card F = 2 := by
+            simpa [hab] using congrArg Finset.card hu
+          omega
         let v : Fin 3 → F := ![a, b, c]
         have hv : Function.Injective v := by
           intro i j hij
@@ -196,9 +198,15 @@ theorem projectiveAxisTwistedCubic_q9_cubic_exact_locality_three
         hcardI ⟨x, Finset.mem_insert_self _ _⟩
     exact projectiveAxisTwistedCubicRepair_edge_dependent hR hli
 
-/-- At q=9, every completed axis coordinate has exact locality two. -/
-theorem projectiveAxisTwistedCubic_q9_axis_exact_locality_two
-    (_hcard : Fintype.card F = 9) (y : F ⊕ Unit) :
+/-- q=9 specialization used by the completed extension-field lift. -/
+theorem projectiveAxisTwistedCubic_q9_cubic_exact_locality_three
+    (hcard : Fintype.card F = 9) (x : ProjectiveTwistedCubicIndex F) :
+    HasExactLocalityAt (projectiveAxisTwistedCubicCode (𝔽 := F)) (.inl x) 3 :=
+  projectiveAxisTwistedCubic_cubic_exact_locality_three (by omega) x
+
+/-- Over every finite characteristic-three field, every completed axis coordinate has exact
+locality two. -/
+theorem projectiveAxisTwistedCubic_axis_exact_locality_two (y : F ⊕ Unit) :
     HasExactLocalityAt (projectiveAxisTwistedCubicCode (𝔽 := F)) (.inr y) 2 := by
   constructor
   · cases y with
@@ -220,6 +228,12 @@ theorem projectiveAxisTwistedCubic_q9_axis_exact_locality_two
     have hli := projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two
       (𝔽 := F) (S := insert (.inr y) R) (Finset.insert_nonempty _ _) hcardI
     exact projectiveAxisTwistedCubicRepair_edge_dependent hR hli
+
+/-- q=9 specialization used by the completed extension-field lift. -/
+theorem projectiveAxisTwistedCubic_q9_axis_exact_locality_two
+    (_hcard : Fintype.card F = 9) (y : F ⊕ Unit) :
+    HasExactLocalityAt (projectiveAxisTwistedCubicCode (𝔽 := F)) (.inr y) 2 :=
+  projectiveAxisTwistedCubic_axis_exact_locality_two y
 
 omit [Fintype L] in
 /-- Exact mixed locality survives the radius-four lift gate. -/
@@ -282,7 +296,9 @@ theorem projectiveQ9ExtensionLiftCode_row_invariants
 #print axioms projectiveQ9Lift_coordinate_counts
 #print axioms projectiveQ9ExtensionLiftCode_parameters
 #print axioms projectiveQ9ExtensionLiftCode_repairHypergraph_of_radius_le_four
+#print axioms projectiveAxisTwistedCubic_cubic_exact_locality_three
 #print axioms projectiveAxisTwistedCubic_q9_cubic_exact_locality_three
+#print axioms projectiveAxisTwistedCubic_axis_exact_locality_two
 #print axioms projectiveAxisTwistedCubic_q9_axis_exact_locality_two
 #print axioms projectiveQ9ExtensionLiftCode_exact_locality
 #print axioms projectiveQ9ExtensionLiftCode_row_invariants

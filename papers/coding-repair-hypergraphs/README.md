@@ -35,6 +35,13 @@ Two explicit nondegenerate `GF(3)` examples prove that the strict inner gate and
 distance-`r+2` gate cannot be weakened uniformly while retaining complete-hypergraph equality;
 no necessity is claimed for a fixed concatenation.
 
+Restoring the projective cubic point at infinity gives a second seed `[2q+2,4,q]_q`. Its full
+inclusion-minimal inner repair port stabilizes at radius four, with uniform cubic row
+`((q-1)/2,q-1)` and axis row `((5q-3)/6,2q-3)`. At q=9 this is `[20,4,9]_9`, with two equal
+coordinate classes and rows `(4,8)` and `(7,15)`. Its degree-four lift has
+`[20N,4K,>=9D]_9`; the resulting unbounded family has exact rate `1/10` and every eventual
+relative-distance bound `c<351/1600`. Only the bounded radius-four port transfers to the lift.
+
 ## Files
 
 - `complete_repair_hypergraphs.tex` / `.pdf` — manuscript and built artifact.
