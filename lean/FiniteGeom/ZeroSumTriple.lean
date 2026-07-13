@@ -101,6 +101,35 @@ def zeroSumTripleHypergraphAvoidingZero (A : Type*) [AddCommGroup A] [Fintype A]
       E.card = 3 ∧ ∑ x ∈ E, x = 0 ∧ 0 ∉ E := by
   simp [zeroSumTripleHypergraphAvoidingZero, and_assoc]
 
+/-- Deleting the zero-containing edges is functorial under additive equivalences. -/
+theorem relabel_zeroSumTripleHypergraphAvoidingZero {A B : Type*}
+    [AddCommGroup A] [AddCommGroup B] [Fintype A] [Fintype B]
+    [DecidableEq A] [DecidableEq B] (e : A ≃+ B) :
+    relabelHypergraph e.toEquiv (zeroSumTripleHypergraphAvoidingZero A) =
+      zeroSumTripleHypergraphAvoidingZero B := by
+  ext T
+  constructor
+  · intro hT
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hT
+    rw [mem_zeroSumTripleHypergraphAvoidingZero] at hS ⊢
+    refine ⟨by simpa using hS.1, ?_, ?_⟩
+    · rw [Finset.sum_map]
+      simpa using congrArg e hS.2.1
+    · simpa using hS.2.2
+  · intro hT
+    rw [mem_zeroSumTripleHypergraphAvoidingZero] at hT
+    let S := T.map e.symm.toEquiv.toEmbedding
+    have hmap : S.map e.toEquiv.toEmbedding = T := by
+      simp [S, Finset.map_map]
+    apply Finset.mem_image.mpr
+    refine ⟨S, ?_, hmap⟩
+    rw [mem_zeroSumTripleHypergraphAvoidingZero]
+    refine ⟨by simpa [S] using hT.1, ?_, ?_⟩
+    · change (∑ x ∈ T.map e.symm.toEquiv.toEmbedding, x) = 0
+      rw [Finset.sum_map]
+      simpa using congrArg e.symm hT.2.1
+    · simpa [S] using hT.2.2
+
 section Field
 
 variable {F : Type*} [Field F] [Fintype F] [DecidableEq F] [CharP F 3]

@@ -360,5 +360,11 @@ theorem transversalNumber_repairHypergraph_concatenatedCode
   rw [repairHypergraph_concatenatedCode_eq_embed I e O r hsI hdO j x]
   exact transversalNumber_embedHypergraph (blockEmbedding j) (repairHypergraph I x r) hne
 
+#print axioms concatenatedCode_finrank
+#print axioms concatenatedCode_minDist_lower
+#print axioms repairHypergraph_concatenatedCode_eq_embed
+#print axioms matchingNumber_repairHypergraph_concatenatedCode
+#print axioms transversalNumber_repairHypergraph_concatenatedCode
+
 end
 end RepairCodes

@@ -16,6 +16,7 @@ import RepairCodes.AxisTwistedCubicInvariants
 import RepairCodes.Q9Seed
 import RepairCodes.Q9Affine
 import RepairCodes.Q9Uniform
+import RepairCodes.Q9CircuitInventory
 import RepairCodes.SeedLift
 import RepairCodes.Q9SeedLift
 import RepairCodes.CodeInstance

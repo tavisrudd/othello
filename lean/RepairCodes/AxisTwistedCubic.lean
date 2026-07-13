@@ -1076,5 +1076,6 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms cubicRepair_threeAxis_not_mem
 #print axioms mem_cubicRepairHypergraph_iff
 #print axioms mem_axisRepairHypergraph_two_iff
+#print axioms axisTwistedCubicCode_dualDist
 
 end RepairCodes

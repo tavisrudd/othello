@@ -90,6 +90,12 @@ theorem ag23_zeroSum_invariants :
     have hle : transversalNumber (zeroSumTripleHypergraph AG23) ≤ 5 := by simpa [H] using htau_le
     omega
 
+/-- `AG(2,3)` has exactly twelve affine lines, eight of which avoid the origin. -/
+theorem ag23_zeroSum_edge_counts :
+    (zeroSumTripleHypergraph AG23).card = 12 ∧
+      (zeroSumTripleHypergraphAvoidingZero AG23).card = 8 := by
+  decide
+
 /-- A basis identifies the additive group of `𝔽₉` with the coordinate plane over `ZMod 3`. -/
 noncomputable def gf9AG23LinearEquiv : GF9 ≃ₗ[ZMod 3] AG23 :=
   (Module.finBasisOfFinrankEq (ZMod 3) GF9
@@ -216,6 +222,17 @@ theorem gf9_zeroSum_invariants :
   rw [hmap] at hnu htau
   exact ⟨hnu.symm.trans ag23_zeroSum_invariants.1,
     htau.symm.trans ag23_zeroSum_invariants.2⟩
+
+/-- The corresponding GF9 line counts, transported without a generated certificate. -/
+theorem gf9_zeroSum_edge_counts :
+    (zeroSumTripleHypergraph GF9).card = 12 ∧
+      (zeroSumTripleHypergraphAvoidingZero GF9).card = 8 := by
+  let e : GF9 ≃+ AG23 := gf9AG23LinearEquiv.toAddEquiv
+  have hall := congrArg Finset.card (relabel_zeroSumTripleHypergraph e)
+  have havoid := congrArg Finset.card (relabel_zeroSumTripleHypergraphAvoidingZero e)
+  rw [card_relabelHypergraph] at hall havoid
+  exact ⟨hall.trans ag23_zeroSum_edge_counts.1,
+    havoid.trans ag23_zeroSum_edge_counts.2⟩
 
 /-- The actual code-derived repair hypergraph at the q=9 axis coordinate has the sharp affine
 plane invariants: three disjoint repairs, but every repair cover needs five helpers. -/

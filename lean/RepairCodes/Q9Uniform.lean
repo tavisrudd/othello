@@ -293,6 +293,52 @@ theorem zeroSumCapNumber_q9 (hcard : Fintype.card F = 9) : zeroSumCapNumber F = 
   rw [htauF, hcard] at hformula
   omega
 
+/-- A field of order nine has twelve affine-line triples, eight avoiding zero. -/
+theorem zeroSum_edge_counts_q9 (hcard : Fintype.card F = 9) :
+    (zeroSumTripleHypergraph F).card = 12 ∧
+      (zeroSumTripleHypergraphAvoidingZero F).card = 8 := by
+  letI : Fintype GF9 := Fintype.ofFinite GF9
+  letI : DecidableEq GF9 := Classical.decEq GF9
+  have hgf9 : Fintype.card GF9 = 9 := by
+    rw [Fintype.card_eq_nat_card, GaloisField.card 3 2 (by decide)]
+    norm_num
+  let e : F ≃+ GF9 :=
+    (FiniteField.algEquivOfCardEq 3 (hcard.trans hgf9.symm)).toAddEquiv
+  have hall := congrArg Finset.card (relabel_zeroSumTripleHypergraph e)
+  have havoid := congrArg Finset.card (relabel_zeroSumTripleHypergraphAvoidingZero e)
+  rw [card_relabelHypergraph] at hall havoid
+  exact ⟨hall.trans gf9_zeroSum_edge_counts.1,
+    havoid.trans gf9_zeroSum_edge_counts.2⟩
+
+/-- Exact edge counts in the two disjoint components of every q=9 axis repair clutter. -/
+theorem axisRepair_component_edge_counts_q9 (hcard : Fintype.card F = 9)
+    (y : F ⊕ Unit) :
+    (axisPairRepairComponent y).card = 36 ∧
+      (axisCubicRepairComponent y).card =
+        match y with
+        | .inl _ => 8
+        | .inr _ => 12 := by
+  have hlines := zeroSum_edge_counts_q9 (F := F) hcard
+  constructor
+  · rw [axisPairRepairComponent_eq_completePair, card_embedHypergraph,
+      completePairHypergraph, card_powersetCard]
+    simp [hcard]
+    decide
+  · cases y with
+    | inl a =>
+        rw [axisCubicRepairComponent_finite_eq_avoidingZero, card_embedHypergraph]
+        exact hlines.2
+    | inr u =>
+        cases u
+        rw [axisCubicRepairComponent_infinity_eq_zeroSum, card_embedHypergraph]
+        exact hlines.1
+
+/-- Every cubic coordinate of the q=9 code has exactly twenty-eight radius-three repairs. -/
+theorem cubicRepair_edge_count_q9 (hcard : Fintype.card F = 9) (x : F) :
+    (axisTwistedCubicRepairHypergraph (.inl x) 3).card = 28 := by
+  rw [cubicRepairHypergraph_card, hcard]
+  decide
+
 /-- Exact q=9 uniform row table for the `[19,4,8]₉` axis–twisted-cubic code. -/
 theorem axisTwistedCubic_q9_row_invariants (hcard : Fintype.card F = 9)
     (z : AxisTwistedCubicIndex F) :
@@ -331,6 +377,9 @@ theorem axisTwistedCubic_q9_row_invariants (hcard : Fintype.card F = 9)
 
 #print axioms cubicRepair_matchingNumber_q9
 #print axioms zeroSumCapNumber_q9
+#print axioms zeroSum_edge_counts_q9
+#print axioms axisRepair_component_edge_counts_q9
+#print axioms cubicRepair_edge_count_q9
 #print axioms axisTwistedCubic_q9_row_invariants
 
 end RepairCodes

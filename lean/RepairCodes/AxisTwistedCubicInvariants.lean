@@ -726,6 +726,103 @@ private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=
   E.filter fun z => z.isLeft
 
+/-- Cubic-target repair edges are in bijection with unordered pairs of cubic helpers distinct
+from the target. -/
+theorem cubicRepairHypergraph_card [CharP 𝔽 3] (x : 𝔽) :
+    (axisTwistedCubicRepairHypergraph (.inl x) 3).card =
+      Nat.choose (Fintype.card 𝔽 - 1) 2 := by
+  classical
+  let basePairs := (Finset.univ.erase x).powersetCard 2
+  let pairs : Finset (Finset (AxisTwistedCubicIndex 𝔽)) :=
+    basePairs.image fun P => P.map Function.Embedding.inl
+  calc
+    (axisTwistedCubicRepairHypergraph (.inl x) 3).card = pairs.card := by
+      apply Finset.card_bij (fun E _ => cubicPart E)
+      · intro E hE
+        obtain ⟨s, t, hxs, hxt, hst, rfl⟩ := mem_cubicRepairHypergraph_iff.mp hE
+        have hpart : cubicPart
+            ({(.inl s : AxisTwistedCubicIndex 𝔽), .inl t,
+              .inr (twistedCubicTripleAxisIndex ![x, s, t])} :
+              Finset (AxisTwistedCubicIndex 𝔽)) = {Sum.inl s, Sum.inl t} := by
+          ext z
+          cases z <;> simp [cubicPart]
+        apply Finset.mem_image.mpr
+        refine ⟨{s, t}, ?_, ?_⟩
+        rw [Finset.mem_powersetCard]
+        constructor
+        · intro z hz
+          simp only [Finset.mem_insert, Finset.mem_singleton] at hz
+          rcases hz with rfl | rfl
+          · exact Finset.mem_erase.mpr ⟨hxs.symm, Finset.mem_univ _⟩
+          · exact Finset.mem_erase.mpr ⟨hxt.symm, Finset.mem_univ _⟩
+        · exact Finset.card_pair hst
+        simpa using hpart.symm
+      · intro E hE E' hE' heq
+        obtain ⟨s, t, hxs, hxt, hst, rfl⟩ := mem_cubicRepairHypergraph_iff.mp hE
+        obtain ⟨u, v, hxu, hxv, huv, rfl⟩ := mem_cubicRepairHypergraph_iff.mp hE'
+        have hpartST : cubicPart
+            ({(.inl s : AxisTwistedCubicIndex 𝔽), .inl t,
+              .inr (twistedCubicTripleAxisIndex ![x, s, t])} :
+              Finset (AxisTwistedCubicIndex 𝔽)) = {Sum.inl s, Sum.inl t} := by
+          ext z
+          cases z <;> simp [cubicPart]
+        have hpartUV : cubicPart
+            ({(.inl u : AxisTwistedCubicIndex 𝔽), .inl v,
+              .inr (twistedCubicTripleAxisIndex ![x, u, v])} :
+              Finset (AxisTwistedCubicIndex 𝔽)) = {Sum.inl u, Sum.inl v} := by
+          ext z
+          cases z <;> simp [cubicPart]
+        have hpair :
+            ({(.inl s : AxisTwistedCubicIndex 𝔽), .inl t} :
+                Finset (AxisTwistedCubicIndex 𝔽)) =
+              {(.inl u : AxisTwistedCubicIndex 𝔽), .inl v} := by
+          rw [hpartST, hpartUV] at heq
+          exact heq
+        have htriple :
+            ({(.inl u : AxisTwistedCubicIndex 𝔽), .inl v,
+                .inr (twistedCubicTripleAxisIndex ![x, u, v])} :
+              Finset (AxisTwistedCubicIndex 𝔽)) =
+            {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t,
+                .inr (twistedCubicTripleAxisIndex ![x, u, v])} := by
+          ext z
+          cases z with
+          | inl z =>
+              have hz := congrArg
+                (fun P : Finset (AxisTwistedCubicIndex 𝔽) => Sum.inl z ∈ P) hpair
+              simpa using hz.symm
+          | inr z => simp
+        have hcompletion : twistedCubicTripleAxisIndex ![x, u, v] =
+            twistedCubicTripleAxisIndex ![x, s, t] := by
+          apply cubicRepair_axis_eq_of_mem hxs hxt hst
+          rw [← htriple]
+          apply mem_cubicRepairHypergraph_iff.mpr
+          exact ⟨u, v, hxu, hxv, huv, rfl⟩
+        rw [htriple, hcompletion]
+      · intro P hP
+        obtain ⟨P₀, hP₀, rfl⟩ := Finset.mem_image.mp hP
+        rw [Finset.mem_powersetCard] at hP₀
+        obtain ⟨s, t, hst, hP₀eq⟩ := Finset.card_eq_two.mp hP₀.2
+        subst P₀
+        have hsx : s ≠ x := by
+          have := hP₀.1 (show s ∈ ({s, t} : Finset 𝔽) by simp)
+          simpa using (Finset.mem_erase.mp this).1
+        have htx : t ≠ x := by
+          have := hP₀.1 (show t ∈ ({s, t} : Finset 𝔽) by simp)
+          simpa using (Finset.mem_erase.mp this).1
+        let E : Finset (AxisTwistedCubicIndex 𝔽) :=
+          {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t,
+            .inr (twistedCubicTripleAxisIndex ![x, s, t])}
+        refine ⟨E, mem_cubicRepairHypergraph_iff.mpr
+          ⟨s, t, hsx.symm, htx.symm, hst, rfl⟩, ?_⟩
+        ext z
+        cases z <;> simp [E, cubicPart]
+    _ = basePairs.card := by
+      rw [show pairs = basePairs.image (fun P => P.map Function.Embedding.inl) by rfl,
+        Finset.card_image_of_injective _ (Finset.map_injective Function.Embedding.inl)]
+    _ = Nat.choose (Fintype.card 𝔽 - 1) 2 := by
+      rw [Finset.card_powersetCard]
+      simp
+
 private def axisPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=
   E.filter fun z => z.isRight
@@ -1142,5 +1239,6 @@ theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
 #print axioms minimalAxisRepair_nucleus_invariants
 #print axioms mem_axisRepairHypergraph_threeCubic_iff
 #print axioms mem_minimalAxisRepairHypergraph_iff
+#print axioms cubicRepairHypergraph_card
 
 end RepairCodes

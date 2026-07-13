@@ -109,5 +109,31 @@ theorem blockFunctional_outerAlternative
     have hw := hdist beta hmem hb
     simpa only [beta] using hw
 
+omit [DecidableEq 𝔽] in
+/-- The functional-dual distance gate is nonvacuous: the full outer space has zero functional
+dual, so it satisfies every declared lower bound. -/
+theorem hasFunctionalDualDistanceAtLeast_top (d : ℕ) :
+    HasFunctionalDualDistanceAtLeast (⊤ : Submodule 𝔽 (ι → V)) d := by
+  classical
+  intro beta hbeta hbeta0
+  exfalso
+  apply hbeta0
+  funext j
+  apply LinearMap.ext
+  intro v
+  have h := hbeta (Pi.single j v) (Submodule.mem_top)
+  calc
+    beta j v = ∑ l, beta l ((Pi.single j v : ι → V) l) := by
+      symm
+      calc
+        (∑ l, beta l ((Pi.single j v : ι → V) l)) =
+            beta j ((Pi.single j v : ι → V) j) := by
+          apply Finset.sum_eq_single j
+          · intro l _ hlj
+            simp [hlj]
+          · simp
+        _ = beta j v := by simp
+    _ = 0 := h
+
 end
 end RepairCodes
