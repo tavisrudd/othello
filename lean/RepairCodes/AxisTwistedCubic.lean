@@ -1006,6 +1006,38 @@ theorem axisCoordinate_has_repairEdge (y : 𝔽 ⊕ Unit) :
   refine ⟨axisTripleRepairHelpers w, ?_⟩
   simpa [w] using axisTripleRepairHelpers_mem (axisCoordinateTriple_injective y)
 
+/-- The global dual distance is exactly three: distinct pairs of projective columns are
+independent, while every axis triple is a circuit. -/
+theorem axisTwistedCubicCode_dualDist [CharP 𝔽 3] :
+    dualDist (axisTwistedCubicCode (𝔽 := 𝔽)) = 3 := by
+  obtain ⟨R, hR⟩ := axisCoordinate_has_repairEdge (𝔽 := 𝔽) (Sum.inr Unit.unit)
+  obtain ⟨-, -, y, hydual, hyx, hysupp⟩ := mem_repairHypergraph.mp hR
+  have hy0 : y ≠ 0 := fun h => hyx (congrFun h (.inr (Sum.inr Unit.unit)))
+  have hdual : dualCode (axisTwistedCubicCode (𝔽 := 𝔽)) ≠ ⊥ :=
+    (Submodule.ne_bot_iff _).mpr ⟨y, hydual, hy0⟩
+  have hlower : 3 ≤ dualDist (axisTwistedCubicCode (𝔽 := 𝔽)) := by
+    apply le_dualDist_rowCode_of_column_independent axisTwistedCubicGenerator 3
+    · simpa only [axisTwistedCubicCode] using hdual
+    · intro S hScard
+      by_cases hS : S.Nonempty
+      · simpa only [axisTwistedCubicGenerator_col] using
+          axisTwistedCubic_selected_linearIndependent_of_card_le_two hS (by omega)
+      · rw [Finset.not_nonempty_iff_eq_empty.mp hS]
+        exact linearIndependent_empty_type
+  have hRcard : R.card = 2 := by
+    obtain ⟨z, w, -, -, hzw, hReq⟩ := mem_axisRepairHypergraph_two_iff.mp hR
+    rw [hReq]
+    simp [hzw]
+  have hxR : (.inr (Sum.inr Unit.unit) : AxisTwistedCubicIndex 𝔽) ∉ R := by
+    obtain ⟨hsub, -, -⟩ := mem_repairHypergraph.mp hR
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  have hweight : hammingNorm y = 3 := by
+    rw [← card_wordSupport, hysupp, Finset.card_insert_of_notMem hxR, hRcard]
+  have hupper := dualDist_le_hammingNorm hydual hy0
+  rw [hweight] at hupper
+  omega
+
 /-- Cubic coordinates have exact locality three. -/
 theorem cubicCoordinate_exact_locality_three [CharP 𝔽 3] (x : 𝔽) :
     (∃ R, R ∈ axisTwistedCubicRepairHypergraph (.inl x) 3) ∧

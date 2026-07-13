@@ -9,8 +9,8 @@ Plan §5 decision 1 (abstract-first) is not finished until a concrete `𝔽_q` c
 `ConcatDualWord` fields that are finite/algebraic. This file supplies the inner-code half with
 the constructor `ofInnerCode`; `RepairCodes.OuterDual` proves the outer-code half directly.
 
-Given a concrete inner code `I : Submodule 𝔽 (Fin m → 𝔽)` and its coordinate blocks
-`w : ι → (Fin m → 𝔽)`, `ofInnerCode` fills the interface's algebraic fields **from
+Given a concrete inner code `I : Submodule 𝔽 (κ → 𝔽)` and its coordinate blocks
+`w : ι → (κ → 𝔽)`, `ofInnerCode` fills the interface's algebraic fields **from
 `FiniteGeom.Code`** — with zero further assumptions:
 
 * `innerDual b := b ∈ dualCode I`, and `innerDual_zero` from `(dualCode I).zero_mem`;
@@ -36,7 +36,8 @@ open Finset FiniteGeom
 noncomputable section
 
 variable {ι O : Type*} [Fintype ι] [Zero O] [DecidableEq O]
-variable {m : ℕ} {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
+variable {κ : Type*} [Fintype κ]
+variable {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
 
 /-! ### Canonical block coefficients in the linear dual -/
 
@@ -47,9 +48,9 @@ local instance : DecidableEq (Module.Dual 𝔽 V) := Classical.decEq _
 /-- The functional induced on an outer symbol by pairing its encoded inner word with a block
 vector `w`.  This is the coordinate-free object whose trace-coordinate representative is usually
 called `β_j` in concatenation proofs. -/
-def blockFunctional (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (w : Fin m → 𝔽) : Module.Dual 𝔽 V where
-  toFun a := (e a : Fin m → 𝔽) ⬝ᵥ w
+def blockFunctional (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : κ → 𝔽) : Module.Dual 𝔽 V where
+  toFun a := (e a : κ → 𝔽) ⬝ᵥ w
   map_add' a b := by simp [add_dotProduct]
   map_smul' c a := by simp [smul_dotProduct]
 
@@ -58,8 +59,8 @@ omit [DecidableEq 𝔽] in
 the block annihilates the inner code.  The reverse implication evaluates dual membership on
 encoded words; the forward implication uses surjectivity of the encoder to reach every inner
 codeword.  No trace-form theorem or imported result enters. -/
-theorem blockFunctional_eq_zero_iff (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (w : Fin m → 𝔽) : blockFunctional I e w = 0 ↔ w ∈ dualCode I := by
+theorem blockFunctional_eq_zero_iff (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : κ → 𝔽) : blockFunctional I e w = 0 ↔ w ∈ dualCode I := by
   constructor
   · intro hzero
     rw [mem_dualCode]
@@ -77,13 +78,13 @@ trace data (`beta`, `hbeta`, `houter`) and the weight budget (`s`, `htot`, `hsO`
 hypotheses. The inner-dual membership, block weight, inner dual distance, and their defining
 properties are supplied by the `FiniteGeom.Code` layer. -/
 noncomputable def ofInnerCode
-    (I : Submodule 𝔽 (Fin m → 𝔽))
-    (w : ι → (Fin m → 𝔽)) (beta : ι → O) (dO s : ℕ)
+    (I : Submodule 𝔽 (κ → 𝔽))
+    (w : ι → (κ → 𝔽)) (beta : ι → O) (dO s : ℕ)
     (hbeta : ∀ j, beta j = 0 ↔ w j ∈ dualCode I)
     (houter : (∀ j, beta j = 0) ∨ dO ≤ (univ.filter (fun j => beta j ≠ 0)).card)
     (htot : (∑ j, hammingNorm (w j)) ≤ s)
     (hsO : s < dO) :
-    ConcatDualWord ι (Fin m → 𝔽) O where
+    ConcatDualWord ι (κ → 𝔽) O where
   w := w
   beta := beta
   blockWt := hammingNorm
@@ -103,13 +104,13 @@ noncomputable def ofInnerCode
 an encoder equivalence `e : V ≃ₗ[𝔽] I`.  The coefficient-faithfulness field `hbeta` is discharged
 by `blockFunctional_eq_zero_iff`; only the outer-dual distance alternative remains a hypothesis. -/
 noncomputable def ofInnerCodeFunctional
-    (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (w : ι → (Fin m → 𝔽)) (dO s : ℕ)
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : ι → (κ → 𝔽)) (dO s : ℕ)
     (houter : (∀ j, blockFunctional I e (w j) = 0) ∨
       dO ≤ (univ.filter (fun j => blockFunctional I e (w j) ≠ 0)).card)
     (htot : (∑ j, hammingNorm (w j)) ≤ s)
     (hsO : s < dO) :
-    ConcatDualWord ι (Fin m → 𝔽) (Module.Dual 𝔽 V) := by
+    ConcatDualWord ι (κ → 𝔽) (Module.Dual 𝔽 V) := by
   classical
   exact ofInnerCode I w (fun j => blockFunctional I e (w j)) dO s
     (fun j => blockFunctional_eq_zero_iff I e (w j)) houter htot hsO
@@ -119,8 +120,8 @@ bounds, every block is inner-dual and at most one is nonzero. Only the outer tra
 to be supplied for a specific code — this is the code-backed replacement for `Q9Seed`'s toy
 witness. -/
 theorem transfer_ofInnerCode
-    (I : Submodule 𝔽 (Fin m → 𝔽))
-    (w : ι → (Fin m → 𝔽)) (beta : ι → O) (dO s : ℕ)
+    (I : Submodule 𝔽 (κ → 𝔽))
+    (w : ι → (κ → 𝔽)) (beta : ι → O) (dO s : ℕ)
     (hbeta : ∀ j, beta j = 0 ↔ w j ∈ dualCode I)
     (houter : (∀ j, beta j = 0) ∨ dO ≤ (univ.filter (fun j => beta j ≠ 0)).card)
     (htot : (∑ j, hammingNorm (w j)) ≤ s)
@@ -132,8 +133,8 @@ theorem transfer_ofInnerCode
 faithfulness is internal finite linear algebra; `RepairCodes.OuterDual` supplies `houter` once an
 outer code and its functional-dual distance are present. -/
 theorem transfer_ofInnerCodeFunctional
-    (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (w : ι → (Fin m → 𝔽)) (dO s : ℕ)
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (w : ι → (κ → 𝔽)) (dO s : ℕ)
     (houter : (∀ j, blockFunctional I e (w j) = 0) ∨
       dO ≤ (univ.filter (fun j => blockFunctional I e (w j) ≠ 0)).card)
     (htot : (∑ j, hammingNorm (w j)) ≤ s)

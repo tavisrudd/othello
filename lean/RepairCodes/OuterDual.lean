@@ -32,7 +32,8 @@ open scoped BigOperators
 noncomputable section
 
 variable {ι V : Type*} [Fintype ι]
-variable {m : ℕ} {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
+variable {κ : Type*} [Fintype κ]
+variable {𝔽 : Type*} [Field 𝔽] [DecidableEq 𝔽]
 variable [AddCommGroup V] [Module 𝔽 V]
 
 /-- The coordinate-free outer dual: vectors of linear functionals annihilating every outer
@@ -70,29 +71,29 @@ def HasFunctionalDualDistanceAtLeast (O : Submodule 𝔽 (ι → V)) (d : ℕ) :
 
 /-- A block vector annihilates the ordinary concatenation of `O` through `e`: pairing each block
 with the encoded outer symbol and summing over blocks gives zero for every outer codeword. -/
-def IsOrthogonalToConcatenation (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (O : Submodule 𝔽 (ι → V)) (w : ι → (Fin m → 𝔽)) : Prop :=
-  ∀ u ∈ O, ∑ j, (e (u j) : Fin m → 𝔽) ⬝ᵥ w j = 0
+def IsOrthogonalToConcatenation (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (w : ι → (κ → 𝔽)) : Prop :=
+  ∀ u ∈ O, ∑ j, (e (u j) : κ → 𝔽) ⬝ᵥ w j = 0
 
 omit [DecidableEq 𝔽] in
 /-- **Outer-dual membership, proved directly.** Orthogonality to the concatenated code says the
 vector of canonical block functionals annihilates the outer code, which is definitionally
 membership in `functionalDual O`. -/
 theorem blockFunctional_mem_functionalDual
-    (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (O : Submodule 𝔽 (ι → V)) (w : ι → (Fin m → 𝔽))
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (w : ι → (κ → 𝔽))
     (horth : IsOrthogonalToConcatenation I e O w) :
     (fun j => blockFunctional I e (w j)) ∈ functionalDual O := by
   intro u hu
-  change ∑ j, (e (u j) : Fin m → 𝔽) ⬝ᵥ w j = 0
+  change ∑ j, (e (u j) : κ → 𝔽) ⬝ᵥ w j = 0
   exact horth u hu
 
 omit [DecidableEq 𝔽] in
 /-- A functional-dual distance lower bound yields exactly the zero-or-large-support alternative
 `ConcatDualWord.houter` expects. -/
 theorem blockFunctional_outerAlternative
-    (I : Submodule 𝔽 (Fin m → 𝔽)) (e : V ≃ₗ[𝔽] I)
-    (O : Submodule 𝔽 (ι → V)) (w : ι → (Fin m → 𝔽)) (d : ℕ)
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (w : ι → (κ → 𝔽)) (d : ℕ)
     (horth : IsOrthogonalToConcatenation I e O w)
     (hdist : HasFunctionalDualDistanceAtLeast O d) :
     (∀ j, blockFunctional I e (w j) = 0) ∨
