@@ -1,10 +1,10 @@
 # RepairCodes paper-strengthening plan — C104/C105
 
 **Date**: 2026-07-13
-**Status**: ACTIVE. C104 is complete and reported. C105 is next and is not yet a theorem or paper
-claim.
-**Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
-**Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
+**Status**: COMPLETE. C104 and C105 are reported; their Lean, paper, trust, novelty, registry, and
+build gates pass.
+**Parent track**: [completed RepairCodes formalization](../2026-07-11-lean-formalization-plan.md)
+**Paper**: [`coding-repair-hypergraphs`](../../../papers/coding-repair-hypergraphs/README.md)
 
 ## Goal and strict ledger
 
@@ -15,11 +15,10 @@ theorem, axiom audit, primary-source check, and adversarial review all pass.
 | Task | Proposed result | Current status | Permitted wording now |
 |---|---|---|---|
 | C104 | Every cubic coordinate has `ν=(q−1)/2`, hence exact row `((q−1)/2,q−2)` | `REPORTED 2026-07-13`; all gates pass | Exact theorem; pairing itself is classical-adjacent, application is candidate novelty |
-| C105 | Neither numerical transfer gate can be weakened uniformly | `PROOF PLAN`; counterexample mechanisms identified, not checked | “planned boundary audit” |
+| C105 | Neither numerical transfer gate can be weakened uniformly | `REPORTED 2026-07-13`; all gates pass | Best possible for the uniform theorem; no fixed-code necessity claim |
 
-C104 closes the former general-`q` matching gap and is now part of the paper. The paper remains
-complete if C105 fails. C105 would establish best-possible uniform hypotheses, not necessity for
-each fixed inner/outer pair.
+C104 closes the former general-`q` matching gap. C105 establishes best-possible uniform transfer
+hypotheses, not necessity for each fixed inner/outer pair. Both are now part of the paper.
 
 ## C104 — exact cubic-coordinate matching
 
@@ -87,9 +86,9 @@ application candidate contribution, none found. Formal correctness is not novelt
 
 ## C105 — transfer-gate boundary theorem
 
-### Target statement
+### Checked statement
 
-Prove two explicit kernel-checked counterexamples establishing:
+Two explicit kernel-checked counterexamples establish:
 
 1. replacing `r+1 < 2*d(I⊥)` by the non-strict boundary cannot preserve complete repair
    hypergraphs uniformly; and
@@ -98,58 +97,55 @@ Prove two explicit kernel-checked counterexamples establishing:
 The conclusion must be stated as **uniform non-weakenability**. It must not say either gate is
 necessary for every fixed concatenation.
 
-### Counterexample mechanisms to formalize
+### Checked counterexamples
 
-**Inner boundary.** Put minimum inner-dual words in two different blocks. At
-`r+1=2*d(I⊥)` their sum is a bounded concatenated dual word spanning two blocks, hence an extra
-repair edge. Use a full outer space so its functional dual is zero and the outer gate is isolated.
+**Inner boundary.** Over `GF(3)`, the length-two repetition inner code has dual distance two. At
+radius three, the sum of `(1,-1)` in each of two blocks has support four and gives a three-helper
+cross-block repair. The full two-symbol outer space has zero functional dual, isolating the equality
+`r+1=2*d(I⊥)`. Lean proves the named edge belongs to the complete concatenated repair hypergraph
+and not to the embedded inner hypergraph.
 
-**Outer boundary.** Use an inner code with the strict inner gate and an outer code having a
-functional-dual word of weight exactly `r+1` whose component functionals admit weight-one block
-representatives. The induced cross-block word is an extra radius-`r` repair. Start with the smallest
-repetition/single-parity-check example; add a radius-three/q9-flavoured instance only if it remains
-cheap and clarifies the manuscript.
+**Outer boundary.** Use the same inner code at radius two, where `3<2*2`. The three-symbol
+single-parity-check outer code has exact functional-dual distance three, proved by elementary linear
+algebra. Selecting coordinate zero in each inner block gives a weight-three concatenated dual word
+and a two-helper repair spanning all three blocks. Lean again proves literal hypergraph inequality.
 
 ### Proof and formalization gates
 
-1. State generic witness lemmas: a two-block inner-dual sum creates an extra edge; a light
-   outer-functional word creates an extra edge.
-2. Instantiate the witness lemmas with tiny explicit finite codes and prove their exact relevant
-   dual distances by kernel reduction or elementary linear algebra.
-3. Prove literal inequality of the concatenated and embedded inner repair hypergraphs, not merely
-   existence of a cross-block dual word.
-4. Audit edge radius, target coefficient, block support, and nondegeneracy/off-by-one conditions.
-5. Run the same axiom, forbidden-token, focused-build, and aggregate-build gates as C104.
+1. `[DONE]` The explicit words, repairs, and code membership are separately named and reusable.
+2. `[DONE]` Exact inner dual distance two and exact outer functional-dual distance three are proved.
+3. `[DONE]` Both headlines prove literal inequality of complete finite repair hypergraphs.
+4. `[DONE]` Radius, target coefficient, cross-block support, nonzero codes, and off-by-one values
+   are explicit in the theorem statements.
+5. `[DONE]` Focused and aggregate builds, axiom reports, and forbidden-token scans pass. Closed
+   finite support facts use kernel `decide`, never `native_decide`.
 
 ### Novelty and literature gate
 
-Search primary sources and citation chains for:
+The primary-source audit covered:
 
 - duals and low-weight dual words of concatenated/generalized-concatenated codes;
 - necessary versus sufficient locality-preservation hypotheses;
 - block-confinement, outer-dual-distance, and support-enumerator results;
 - counterexamples or sharpness statements for recovery-set preservation under concatenation.
 
-Classify separately the elementary counterexample idea, the exact numerical boundary, and the
-complete-hypergraph formulation. A known coding-theory observation may still be useful referee
-hardening, but must be labeled prior if found.
+Kurz--Yaakobi, arXiv:2001.03433 / DOI 10.1007/s10623-020-00828-6, Lemma 10(a), explicitly gives
+the elementary dual-distance obstruction between two distinct recovery sets. Accordingly, the
+two-block mechanism is prior/elementary and is not marketed as new. No checked source was found
+stating both exact thresholds for literal equality of the complete bounded repair hypergraph.
+Permitted posture: useful uniform-boundary theorem and referee hardening; complete-hypergraph
+formulation none found; no categorical priority claim.
 
-### Paper landing if all gates pass
+### Paper landing
 
-- Add a short proposition and examples immediately after the transfer theorem.
-- Use “cannot be weakened uniformly” or “best possible for a uniform theorem,” never unqualified
-  “necessary” or “sharp for every code.”
-- Update the same proof, novelty, trust, registry, handoff, and PDF surfaces as C104.
+- The proposition and its two examples appear immediately after the transfer theorem.
+- The manuscript uses “cannot be weakened uniformly” and “best possible for the uniform theorem,”
+  never unqualified necessity for a fixed code.
+- The proof ledger, novelty review, trust manifest, paper registry, README, handoffs, queue, and PDF
+  are synchronized.
 
 ## Order, dependencies, and completion criteria
 
-Recommended order: **C104 first**, then C105. They are mathematically independent.
-
-C104 is complete only when the exact general theorem is Lean-checked, the starter/rainbow and
-coding-geometry searches are recorded, the paper is synchronized, and the full validation gate
-passes. C105 is complete only when both numerical boundaries have explicit Lean counterexamples,
-the wording is restricted to uniform non-weakenability, the concatenation literature audit is
-recorded, and the same package-wide consistency gate passes.
-
-If either construction fails, preserve the falsification and exact surviving boundary in the
-companion/archive record; do not weaken the live ledger into ambiguous “in progress” prose.
+C104 and C105 are mathematically independent and both complete. Remaining work belongs to the
+paper's external specialist citation-chain preflight or to separate optional strengthening tracks,
+not to this handoff.

@@ -32,6 +32,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | T4a | At `q=9`, the small-circuit support inventory is `120` axis triples and `84` completed cubic quadruples | `KERNEL` | `q9_smallCircuit_support_counts` | Counts distinct supports, not coefficient-scaled dual words. |
 | T4b | Every `q=9` coordinate satisfies `7*nu<=4*tau`, with equality at every cubic coordinate | `KERNEL` | `axisTwistedCubic_q9_ratio`, `axisTwistedCubic_q9_row_invariants` | The equality statement is the cubic row `(4,7)`. |
 | T5 | Exact complete repair-hypergraph transfer under `r+1 < 2d(I^perp)` and outer functional-dual distance at least `r+2`; every exact locality `s<=r` is preserved | `KERNEL` | `repairHypergraph_concatenatedCode_eq_embed`, `FiniteGeom.HasExactLocalityAt`, `hasExactLocalityAt_concatenatedCode_iff_of_le`; matching/transversal corollaries in `RepairCodes.SeedLift` | Stronger than locality preservation: equality holds for every bounded dual-support repair set. Exact mixed-locality transfer is a derived corollary of equality at all radii up to `s`. |
+| T5a / C105 | Neither numerical gate can be weakened uniformly while preserving complete repair-hypergraph equality | `KERNEL` | `boundaryInnerCode_ne_bot`, `boundaryOuterCode_ne_bot`, `boundaryFullOuterCode_ne_bot`, `boundaryInnerCode_dualDist`, `boundaryOuterCode_functionalDualDistance_three`, `boundaryOuterCode_not_functionalDualDistance_four`, `innerDualDistanceGate_boundary_counterexample`, `outerFunctionalDualDistanceGate_boundary_counterexample` | Nondegenerate `GF(3)` repetition/SPC examples prove literal hypergraph inequality at `r+1=2d(I^perp)` and at outer functional-dual distance `r+1`. This is not a necessity claim for any fixed concatenation. |
 | T6 | Finite-separable trace bridge from ordinary extension-field dual distance to the functional-dual gate, with exact support | `KERNEL` | `traceCoefficient_mem_dualCode`, `functionalWeight_traceCoefficient`, `hasFunctionalDualDistanceAtLeast_restrictScalars` | No coding-theory decomposition is imported. |
 | T7 | Degree-four lift has `[19N,4K,>=8D]_9`, a disjoint exhaustive coordinate partition with multiplicities `9N,9N,N`, exact locality three on cubic and two on axis coordinates, exact row transfer, and failure thresholds `6,11,12` when `d(O^perp)>=5` | `KERNEL` | `q9ExtensionLiftCode_parameters`, `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, `q9ExtensionLiftCode_repairHypergraph_of_radius_le_three`, `q9ExtensionLiftCode_cubic_exact_locality_three`, `q9ExtensionLiftCode_axis_exact_locality_two`, `q9ExtensionLiftCode_row_invariants`, `q9ExtensionLiftCode_failure_thresholds` | Ordinary `GF(9^4)`-linear outer code; restriction of scalars is explicit. Exact locality is certified by transferring radii one, two, and three, not inferred from radius-three existence alone. |
 | T8 | Unbounded `GF(9)` family with exact rate `2/19`; for every fixed `c<39/190`, eventual relative distance `>c`; bundled disjoint type distribution, exact mixed locality, rows, and thresholds | `IMPORTED-1` | `HasQ9LiftCoordinateDistribution`, `HasQ9LiftCoordinateProfile`, `HasQ9UniformRepairFamily`, `eventually_scaled_lift_distance_gt`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The displayed `1/5` remains a clean explicit corollary. Quantifier order is `forall c<39/190, eventually`, so the eventual index may depend on `c`; equality at `39/190` is not claimed. |
@@ -51,6 +52,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | C3 | The minimum transversal is already the local repair-tolerance invariant | `PRIOR-ART` | Pamies-Juarez--Hollmann--Oggier, arXiv:1302.5518, Definition 3; Wang--Zhang, arXiv:1401.2607, gives the general regenerating-set framework. |
 | C4 | Treating all bounded dual supports is adjacent established machinery | `PRIOR-ART` | Gruica--Jany--Ravagnani, DOI 10.1007/s10623-026-01829-7, refine weight distributions by prescribed dual supports. |
 | C5 | Twisted-cubic axes, stabilizer orbits, incidence counts, and associated code/coset data are established prior art | `PRIOR-ART` | arXiv:1909.00207, 2007.08798, 2103.12655, 2103.16904, and 2104.12254. |
+| C6 | Distinct recovery sets are separated by the dual distance through their symmetric difference | `PRIOR-ART` | Kurz--Yaakobi, arXiv:2001.03433 / DOI 10.1007/s10623-020-00828-6, Lemma 10(a). C105's inner-boundary mechanism is an instance; the exact complete-transfer boundary formulation was not found. |
 | N1 | No checked source was found that proves complete bounded repair-hypergraph equality under an outer dual-distance gate | `NONE-FOUND` | Surviving bounded-search conclusion only; manuscript says “we did not locate,” never an unconditional “first.” |
 | N2 | No checked twisted-cubic incidence/covering source was found to compute these coordinatewise `(nu,tau)` rows or prove all-symbol `tau>nu` | `NONE-FOUND` | Geometry and incidence counts are prior art; only the exact repair-invariant computation is positioned as a candidate contribution. |
 | N3 | Formalization novelty is separate from mathematical novelty | `PRIOR-ART` | Lean certification strengthens trust and exposes boundaries; it is not used as evidence that a theorem is new. |
@@ -64,7 +66,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | ID | Direction | Status | Exact present boundary |
 |---|---|---|---|
 | F2 | Replace semantic `Z_3(q)` in the axis rows by further exact values or sharper explicit estimates | `OPEN-MATH` | The formulas in terms of `Z_3(q)` are exact and `Z_3(9)=4` is checked; further evaluation needs cap-set mathematics or a precisely quarantined source theorem. |
-| F3 / C105 | Prove uniform non-weakenability, or weaken, the concatenation transfer gates | `OPEN-MATH` | Lean proves sufficiency only. Two counterexample mechanisms are planned, but no checked boundary theorem, fixed-code necessity theorem, or global sharpness claim appears in the paper; see the [strengthening handoff](../../notes/handoffs/2026-07-13-repaircodes-strengthening-plan.md). |
+| F3 / C105 | Uniform non-weakenability of the concatenation transfer gates | `CLOSED` | Both numerical boundaries now have explicit kernel-checked complete-hypergraph counterexamples. Fixed-code necessity remains deliberately unclaimed. |
 
 ## Consistency and release checklist
 
@@ -79,9 +81,9 @@ an impressionistic reread.
   and all three `q=9` rows agree with the corresponding Lean declarations.
 - [x] Uniform axis formulas, the exact cubic row `((q-1)/2,q-2)`, the `q>=9` range, and the
   semantic `Z_3(q)` boundary agree with `AxisTwistedCubicInvariants.lean`.
-- [x] The transfer theorem is stated only as a sufficient result under
-  `r+1 < 2*d(I^perp)` and functional-dual distance at least `r+2`; no sharpness or necessity claim
-  remains.
+- [x] The transfer theorem is sufficient under `r+1 < 2*d(I^perp)` and functional-dual distance
+  at least `r+2`; separate nondegenerate `GF(3)` examples prove both gates best possible only for
+  a uniform theorem, with no fixed-code necessity claim.
 - [x] Exact-locality transfer is stated for every `s<=r`, and both existence at `s` and
   nonexistence below `s` are represented by the complete repair hypergraphs.
 - [x] The finite lift uses the full `[19,4,8]_9` seed, its actual dual distance three, outer ordinary
@@ -102,6 +104,8 @@ an impressionistic reread.
 - [x] `lake build RepairCodes` succeeds under the OOM-safe wrapper.
 - [x] The forbidden-token scan is empty outside `Imported.lean`'s single `axiom`.
 - [x] Finite/algebraic theorem axiom reports contain only the allowed standard logical axioms.
+- [x] Both transfer-boundary headlines prove literal complete-hypergraph inequality and their
+  axiom reports contain only the allowed standard logical axioms.
 - [x] The asymptotic headline adds exactly
   `Imported.stichtenoth_selfDual_TVZ_6561`.
 - [x] Stichtenoth Theorem 1.6(ii) was checked against the primary paper: it gives an unbounded

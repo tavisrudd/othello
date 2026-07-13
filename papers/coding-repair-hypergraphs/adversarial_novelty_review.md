@@ -24,8 +24,9 @@ the exact blockwise repair-hypergraph data that survives at unbounded length.
 One novelty claim failed review and was corrected: Pamies-Juarez--Hollmann--Oggier
 explicitly define the minimum hitting set of all bounded dual repairs as *local repair
 tolerance*. The manuscript no longer calls the transversal interpretation implicit or
-suggests that the invariant itself is new. The unsupported adjective “sharp” was also
-removed from the block-confinement hypothesis.
+suggests that the invariant itself is new. The transfer thresholds are now called best
+possible only for a theorem uniform over all inner and outer codes, because explicit
+counterexamples prove exactly that restricted statement.
 
 ## Claim ledger
 
@@ -41,7 +42,7 @@ removed from the block-confinement hypothesis.
 | A7 | The `GF(9)` asymptotic rate/distance constants are an independently new LRC bound | Liu et al. already use AG outer codes and concatenated inner LRCs to obtain asymptotically good families. Stichtenoth supplies the self-dual TVZ family | `eventually_scaled_lift_distance_gt` and `stichtenoth_q9_uniform_repair_family` check every fixed `c<39/190` from one imported literature theorem | **DERIVED RESULT.** The near-limit formulation is arithmetic, not a new construction or independent bound; the endpoint `39/190` is not claimed. Candidate value lies in simultaneous exact repair rows plus fixed alphabet and positive rate/distance. |
 | A7a | Exact lifted locality, type multiplicities, and helper-failure thresholds are independent new phenomena | Complete repair-hypergraph transfer already forces all bounded-radius inner repair data to survive; `tau-1` as failure tolerance is prior art | `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, the two exact-locality theorems, and `q9ExtensionLiftCode_failure_thresholds` | **DERIVED CONSEQUENCES.** Worth stating because they sharpen the theorem, but do not market them separately as novel. Their candidate value is inherited from the complete-hypergraph equality and the seed's exact row computation. |
 | A8 | Formal verification proves novelty | No literature source can be excluded by a Lean proof | All theorem boundaries and the sole imported axiom are explicit | **REJECTED INFERENCE.** Lean is evidence of correctness and trust-boundary discipline only. |
-| A9 | The condition `r+1 < 2 d(I^perp)` is globally sharp | No necessity theorem or counterexample family is proved in the manuscript or Lean | Lean proves sufficiency | **NOT ESTABLISHED.** The word “sharp” is removed. |
+| A9 / C105 | Both numerical transfer gates are best possible for a uniform complete-hypergraph theorem | Kurz--Yaakobi, DOI 10.1007/s10623-020-00828-6, Lemma 10(a), already records the elementary dual-distance obstruction between two distinct recovery sets. Standard concatenation and single-parity-check codes make the examples independently rediscoverable. No checked source was found stating both exact thresholds for equality of the complete bounded repair hypergraph | `innerDualDistanceGate_boundary_counterexample`, `outerFunctionalDualDistanceGate_boundary_counterexample` | **ELEMENTARY BOUNDARY THEOREM; COMPLETE-HYPERGRAPH FORMULATION NONE FOUND.** Say “cannot be weakened uniformly” or “best possible for the uniform theorem.” Never say either hypothesis is necessary for every fixed concatenation, and do not market the two-block mechanism itself as new. |
 
 ## Search boundary
 
@@ -53,7 +54,7 @@ available along four collision paths:
   formulations;
 - **concatenation:** locality-preserving concatenation, outer-code selection, dual
   distance, low-weight dual words, parity-check descriptions, and recovery-set
-  preservation;
+  preservation, including recovery-set separation by dual distance;
 - **twisted cubic:** characteristic-three axis, affine/full-axis unions, point/line/plane
   incidence, covering codes, coset weight distributions, and LRC terminology;
 - **rainbow pairing / starters:** properly colored complete graphs, finite-field pair partitions,
@@ -74,6 +75,8 @@ Primary sources read closely:
 - Dinitz, DOI 10.1017/S1446788700024678, especially the one-quotient starter construction.
 - Alfaro, Rubio-Montiel, Vázquez-Ávila, arXiv:1609.05496.
 - Karasev, Petrov, arXiv:1005.1177.
+- Kurz, Yaakobi, arXiv:2001.03433 / DOI 10.1007/s10623-020-00828-6,
+  especially Lemma 10(a).
 - Stichtenoth, arXiv:math/0506264, Theorem 1.6(ii).
 
 ## Paper--Lean adequacy attacks
@@ -92,6 +95,8 @@ Primary sources read closely:
 | Writing `39/190` silently claims the limiting endpoint or a uniform eventual index for all `c` | Rejected by the final statement: it quantifies `forall c<39/190, eventually d/n>c`; the index may depend on `c`, and equality at the endpoint is not asserted. |
 | Exact mixed-locality preservation is being inflated into a new contribution independent of complete transfer | Rejected by the novelty ledger: the generic theorem is explicitly classified as a derived API corollary of complete-hypergraph equality at smaller radii. |
 | The C104 multiplicative pairing is being presented as a new combinatorial design | Rejected: the manuscript cites the classical one-quotient-starter neighborhood and claims only the shifted-inverse repair application as candidate novelty. |
+| “Best possible” silently means necessary for each fixed concatenation | Rejected: the proposition exhibits two codes at the two numerical boundaries and concludes only uniform non-weakenability. It makes no converse claim for a fixed inner/outer pair. |
+| A cross-block dual word is asserted without disproving literal hypergraph equality | Survived: each Lean theorem supplies a named repair edge, proves its complete-hypergraph membership, and proves it is absent from the embedded inner hypergraph. |
 | “Unconditional” hides a project axiom | Survived after explicit qualification: the ordinary mathematical theorem cites Stichtenoth; the Lean headline has exactly one quarantined literature axiom. |
 
 ## Residual gate
@@ -100,7 +105,8 @@ This is a defensible internal adversarial review, not an exhaustive priority sea
 Before submission, a coding-theory specialist should follow citation chains from
 Pamies-Juarez--Hollmann--Oggier, Wang--Zhang, Liu--Ma--Wu--Xing,
 Gruica--Jany--Ravagnani, and Jin--Fu in MathSciNet/zbMATH/IEEE Xplore, with special
-attention to duals of concatenated codes and robust/overall repair tolerance.
+attention to duals of concatenated codes, robust/overall repair tolerance, and whether the
+exact complete-hypergraph boundary proposition has appeared under different terminology.
 
 That residual gate affects priority confidence, not the mathematical validity or the
 Lean trust boundary. Until it is complete, the manuscript's strongest allowed novelty

@@ -101,8 +101,8 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
     TVZ theorem is the sole quarantined import; Lean derives the concrete unbounded q9 family with
     rate `2/19`, every fixed eventual distance bound `c<39/190`, and a bundled exact coordinate
     partition/locality/row/threshold profile. Same review and handoff.
-11. **RepairCodes exact cubic matching — C104 [REPORTED 2026-07-13].** Lean proves `ν_x=(q−1)/2` for every cubic coordinate over `q=3^h` via a shifted-inverse consecutive-power rainbow matching. The manuscript, proof/novelty ledgers, TRUST manifest, paper registry, and PDF are synchronized; the pairing pattern is prior/adjacent and only the code-derived application remains candidate novelty. Track in the [strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
-12. **RepairCodes transfer-boundary theorem — C105 [PLANNED].** Prove kernel-checked counterexamples showing neither transfer gate can be weakened uniformly, with a separate concatenated-dual literature/novelty audit and strictly no fixed-code necessity claim; track in the [strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
+11. **RepairCodes exact cubic matching — C104 [REPORTED 2026-07-13].** Lean proves `ν_x=(q−1)/2` for every cubic coordinate over `q=3^h` via a shifted-inverse consecutive-power rainbow matching. The manuscript, proof/novelty ledgers, TRUST manifest, paper registry, and PDF are synchronized; the pairing pattern is prior/adjacent and only the code-derived application remains candidate novelty. Track in the [strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
+12. **RepairCodes transfer-boundary theorem — C105 [REPORTED 2026-07-13].** Nondegenerate `GF(3)` repetition/SPC examples kernel-prove literal complete-hypergraph failure at both numerical boundaries. The paper states only uniform non-weakenability; Kurz--Yaakobi supplies prior art for the elementary two-recovery-set dual-distance mechanism. Track in the [strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
 
 ## Open tasks
 
@@ -121,9 +121,9 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   family theorem is Lean-checked from exactly one cited import, Stichtenoth Theorem 1.6(ii).
   Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
-- **C104 [REPORTED 2026-07-13] — exact general cubic matching.** The exact row `((q−1)/2,q−2)` is kernel-checked for every finite characteristic-three field. The q3/infinity branches, package build, paper, novelty posture, and registries are synchronized; track in the [RepairCodes strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
+- **C104 [REPORTED 2026-07-13] — exact general cubic matching.** The exact row `((q−1)/2,q−2)` is kernel-checked for every finite characteristic-three field. The q3/infinity branches, package build, paper, novelty posture, and registries are synchronized; track in the [RepairCodes strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
 
-- **C105 [PLANNED] — transfer-gate boundary examples.** Formalize uniform non-weakenability counterexamples for the inner and outer numerical gates, then audit prior concatenation/dual-distance sharpness results; track in the [RepairCodes strengthening handoff](handoffs/2026-07-13-repaircodes-strengthening-plan.md).
+- **C105 [REPORTED 2026-07-13] — transfer-gate boundary examples.** Both exact numerical boundaries have nondegenerate kernel-checked counterexamples at the level of literal complete repair hypergraphs. Manuscript, novelty posture, trust manifest, and registries are synchronized; track in the [RepairCodes strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
 
 - **C99 [OPEN — `f=0,4` LEAN PROOFS REQUIRED] — post-formalization second-order application
   revisit.** The subtraction-free linewise and aggregate collision identities are Lean-proved.

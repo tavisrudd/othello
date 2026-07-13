@@ -15,7 +15,7 @@ locality three on cubic coordinates and two on axis coordinates, and exact repai
 deep dependency is the quarantined
 Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
 review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
-The assembled 12-page manuscript, PDF, proof ledger, and adversarial novelty report are in
+The assembled 14-page manuscript, PDF, proof ledger, and adversarial novelty report are in
 [`papers/coding-repair-hypergraphs/`](../../papers/coding-repair-hypergraphs/). The internal
 novelty audit returns the repair-tolerance invariant to explicit prior art and retains only
 cautious candidate claims for the exact all-symbol `(ν,τ)` separation and complete-hypergraph
@@ -250,21 +250,17 @@ synchronization are complete.
 
 ### Optional real-math strengthening shortlist (not current-paper blockers)
 
-These are deliberately excluded from the completed-paper claim ledger until a theorem is proved.
+The remaining item is deliberately excluded from the completed-paper claim ledger until a theorem
+is proved.
 
 1. **Explicit cap-number input beyond semantic `Z_3(q)`.** The axis transversal formulas are exact
    in terms of the defined cap number, and `q=9` is evaluated. New exact values or useful uniform
    estimates for further fields would require cap-set results (proved or imported with the same
    source discipline).
-2. **Necessity or optimality of the transfer gates.** The current theorem proves sufficiency of
-   `r+1<2*d(I⊥)` and functional-dual distance at least `r+2`. Any sharpness statement needs either
-   counterexample families at the boundary or a genuinely weaker transfer theorem; none is
-   claimed in the paper. Active as **C105** in the
-   [RepairCodes strengthening handoff](2026-07-13-repaircodes-strengthening-plan.md).
-
-Closed strengthening: **C104** proves the exact cubic row
-`((q−1)/2,q−2)` by a shifted-inverse rainbow perfect matching; see the
-[RepairCodes strengthening handoff](2026-07-13-repaircodes-strengthening-plan.md).
+Closed strengthenings: **C104** proves the exact cubic row `((q−1)/2,q−2)` by a shifted-inverse
+rainbow perfect matching. **C105** proves that neither transfer gate can be weakened uniformly,
+using nondegenerate `GF(3)` examples and literal complete-hypergraph inequality. See the
+[RepairCodes strengthening handoff](done/2026-07-13-repaircodes-strengthening-plan.md).
 
 ### Discovery track for final review
 
@@ -292,6 +288,10 @@ novelty remains subject to the external specialist gate unless explicitly stated
 - **Proved transfer strengthening:** complete repair-hypergraph preservation needs only
   `r+1<2*d(I⊥)`, not `d(I⊥)=r+1`. This covers mixed-locality seeds such as the full q9 code, whose
   global dual distance is three even though radius-three repair transfer is exact.
+- **Proved boundary theorem:** the strict inner inequality and outer functional-dual threshold
+  `r+2` are both best possible for a theorem uniform over all inner and outer codes. The explicit
+  nondegenerate `GF(3)` examples prove literal complete-hypergraph failure; they do not assert
+  necessity for a fixed concatenation.
 - **Proved reusable corollary:** the same radius-`r` gates preserve every exact inner locality
   `s≤r`, including both existence at radius `s` and nonexistence at all smaller radii.
 - **Proved coordinate-free extension:** the outer alphabet may be any finite-dimensional symbol

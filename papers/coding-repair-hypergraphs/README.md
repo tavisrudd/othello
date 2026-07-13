@@ -31,6 +31,9 @@ family with exact rate `2/19` and eventual relative distance greater than every 
 multiplicities `9N,9N,N`, exact localities three, two, two, the same three rows at every block,
 and guaranteed helper-failure thresholds `6,11,12`. A generic Lean corollary also shows that the
 radius-`r` transfer gates preserve every exact inner locality `s <= r`.
+Two explicit nondegenerate `GF(3)` examples prove that the strict inner gate and the outer
+distance-`r+2` gate cannot be weakened uniformly while retaining complete-hypergraph equality;
+no necessity is claimed for a fixed concatenation.
 
 ## Files
 

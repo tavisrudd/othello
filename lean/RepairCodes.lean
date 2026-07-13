@@ -18,6 +18,7 @@ import RepairCodes.Q9Affine
 import RepairCodes.Q9Uniform
 import RepairCodes.Q9CircuitInventory
 import RepairCodes.SeedLift
+import RepairCodes.TransferBoundary
 import RepairCodes.Q9SeedLift
 import RepairCodes.CodeInstance
 import RepairCodes.OuterDual
