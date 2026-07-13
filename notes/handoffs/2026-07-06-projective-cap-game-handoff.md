@@ -145,9 +145,9 @@ intersection patterns and point counts are verified, not trusted).
   (involution + sampled).  `Q⁺(3,q)` is exactly the `(q+1)×(q+1)` capacity-2 rook grid (E1
   vocabulary) and has a second proof by translation mirror `(i,j) ↦ (i+h, j+h)`.
 - **Boundary program (strict trust tiers):** the hyperbolic positive family is Lean-proved.
-  Parabolic method-negativity is proven in prose with its nonsplit linear odd-dimension route now
-  Lean-proved; Hermitian method-negativity is proven in prose with the generic eigenline reduction
-  Lean-proved. The general elliptic `Q⁻(2m−1,q)`, `m≥3`, exclusion is **conjectural** pending the
+  Both linear parabolic routes are Lean-proved; its Baer-semilinear route remains prose-only.
+  Hermitian method-negativity is proven in prose with the generic eigenline reduction Lean-proved.
+  The general elliptic `Q⁻(2m−1,q)`, `m≥3`, exclusion is **conjectural** pending the
   Witt/Scharlau-transfer classification. No exact/coextensive boundary theorem is claimed.
   `H(2,9)`/`H(3,4)` compute P regardless, so these are method boundaries, not outcome flips;
   `Q(4,q)` parabolic is the first open outcome here.
@@ -161,10 +161,10 @@ intersection patterns and point counts are verified, not trusted).
   the cap step reuses `mirrorStepGood_of_collinearity_preserving` verbatim, only `Q x → Q (σ x)`
   is new).  The harvested family is `initialSubCapP_blockQuadric_of_odd_card` (`Q⁺(2m−1,q) = P`,
   odd q), via `blockForm_ellipticBlock` (the factor-`δ` similarity) + `onBlockQuadric_map`.
-  `MirrorBoundary` proves the exact scalar-square fixed-point criterion, the eigenline-to-board
-  obstruction, and the odd-dimensional determinant exclusion used by the parabolic nonsplit route.
-  Remaining form-isotropy, unitary, Baer-semilinear, and elliptic-transfer obligations are tracked
-  as C85–C88 in the dedicated
+  `FiniteQuadraticIsotropy` proves dimension-at-least-three isotropy from Chevalley–Warning;
+  `MirrorBoundary` proves the scalar-square eigenspace-to-board obstruction and the odd-dimensional
+  determinant exclusion, completing both linear parabolic routes. Remaining Hermitian,
+  Baer-semilinear, and elliptic-transfer obligations are tracked as C86–C88 in the dedicated
   [`2026-07-12 mirror-boundary handoff`](2026-07-12-mirror-boundary-formalization.md); the detailed
   theorem specification remains
   [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).

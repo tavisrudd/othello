@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-12
 **Status:** IN PROGRESS
-**Tasks:** C85–C88
+**Tasks:** C85 [REPORTED 2026-07-12]; C86–C88 [OPEN]
 
 ## Goal
 
@@ -34,6 +34,9 @@ the live execution map. Session history belongs in
 | hyperbolic `Q⁺(2m−1,q)` mirror and P theorem | `ProjectiveCap/HyperbolicQuadricMirror.lean` | Lean-proved |
 | scalar-square projective fixed-point criterion | `ProjectiveCap/Mirror.lean` | Lean-proved |
 | eigenvector gives a projective/board fixed point | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved |
+| finite quadratic forms in dimension at least three are isotropic | `ProjectiveCap/FiniteQuadraticIsotropy.lean` | Lean-proved (C85) |
+| scalar-square involution in dimension at least five fixes a quadric point | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C85) |
+| parabolic split linear route is not fixed-point-free | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C85) |
 | odd-dimensional scalar-square matrix has square scalar | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved |
 | parabolic nonsplit linear route is impossible | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved |
 
@@ -44,17 +47,16 @@ Current source audit: no `sorry` or `native_decide`; the relevant builds pass wi
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C85** | Finite odd-field quadratic spaces of dimension at least three are isotropic; connect the split involution's eigenspaces to board fixed points and exclude the parabolic split route. | Landed eigenvector reduction | Closes the remaining linear parabolic branch. |
 | **C86** | Nondegenerate finite Hermitian spaces of dimension at least two are isotropic; formalize the adjoint/multiplier constraints for the nonsplit linear case. | Landed eigenvector reduction | Closes the linear Hermitian branches. |
 | **C87** | Classify order-two Baer-semilinear collineations sufficiently to expose their fixed subgeometry; prove that subgeometry meets each relevant parabolic and Hermitian board. | Board/form models from C85/C86 may be reused, but the classification is logically separate. | Closes the semilinear branches and completes the parabolic/Hermitian method-negative rows. |
 | **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
 
 ## Dependency and attack order
 
-Start with **C85**, because its quadratic isotropy infrastructure feeds C88 and should close one
-parabolic branch directly. C86 can proceed independently. Do C87 after the concrete quadratic and
-Hermitian board models are stable. Attempt C88 only after the reusable quadratic and semilinear
-infrastructure is in place; it is the item expected to require genuinely new mathematical work.
+C85 is closed and its quadratic isotropy infrastructure is available to C88. Proceed with **C86**.
+Do C87 after the concrete Hermitian board model is stable. Attempt C88 only after the reusable
+quadratic and semilinear infrastructure is in place; it is the item expected to require genuinely
+new mathematical work.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -74,6 +76,7 @@ For each closed task:
 
 ## Next step
 
-Begin C85 by inventorying Mathlib's finite quadratic-form isotropy/Witt-index API. State the
-smallest reusable theorem bridging an isotropic eigenspace vector to `HasFixedPointOn`, then close
-the parabolic split branch without strengthening the elliptic claim.
+Begin C86 by inventorying Mathlib's sesquilinear/Hermitian-form, conjugation, and finite-field
+extension APIs. Separate the general Hermitian isotropy theorem from the nonsplit
+adjoint/multiplier classification, and do not promote the Hermitian row until both linear branches
+are formal.

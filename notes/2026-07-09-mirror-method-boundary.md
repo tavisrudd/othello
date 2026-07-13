@@ -28,8 +28,10 @@ cap games over odd `q`:
 1. **Hyperbolic quadrics `Q⁺(2m−1,q)` admit an fpf mirror** (for every `m ≥ 2`).  → P.  *(C48,
    fully proven: the elliptic block similitude `(aᵢ,bᵢ)↦(δ·bᵢ,aᵢ)`, `δ` nonsquare.)*
 2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`) admit NO fpf involution.**
-   *[FORMAL REDUCTION + PROVEN-PROSE]* The nonsplit linear odd-dimension obstruction is Lean-proved
-   in `ProjectiveCap.MirrorBoundary`; the split-isotropy and semilinear Baer branches remain.
+   *[FORMAL LINEAR CLASSIFICATION + PROVEN-PROSE SEMILINEAR]* Both linear branches are Lean-proved
+   in `ProjectiveCap.MirrorBoundary`: finite quadratic isotropy plus the scalar-square eigenspace
+   decomposition excludes the split route, and determinant parity excludes the nonsplit route.
+   The semilinear Baer branch remains C87.
 3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`) admit NO fpf involution.**
    *[PROVEN-PROSE]* The eigenline-to-board-fixed-point reduction is Lean-proved; finite Hermitian
    isotropy, the nonsplit adjoint/multiplier lemma, and the semilinear branch remain.
@@ -104,16 +106,16 @@ the elliptic block map leaves `Q⁻(5,3)`.
 
 ### Remaining real-math obligations
 
-The Lean reductions now certify: square scalar implies a square-scalar linear projectivization has
-a fixed point; an isotropic eigenvector gives a board fixed point; and an odd-dimensional matrix
-cannot square to a nonsquare scalar. Completing rows 2–4 still requires:
+The Lean reductions now certify: finite quadratic forms in dimension at least three are isotropic;
+a scalar-square linear projective involution in dimension at least five fixes a quadric point; and
+an odd-dimensional matrix cannot square to a nonsquare scalar. Thus the parabolic linear
+classification is complete. Completing rows 2–4 still requires:
 
-1. finite quadratic isotropy in dimension at least three, with the required eigenspace restriction;
-2. finite Hermitian isotropy in dimension at least two;
-3. the unitary nonsplit adjoint/multiplier classification;
-4. the semilinear/Baer involution classification and a theorem that its fixed subgeometry meets
+1. finite Hermitian isotropy in dimension at least two;
+2. the unitary nonsplit adjoint/multiplier classification;
+3. the semilinear/Baer involution classification and a theorem that its fixed subgeometry meets
    each board in scope;
-5. for `Q⁻`, the Witt/Scharlau-transfer classification below.
+4. for `Q⁻`, the Witt/Scharlau-transfer classification below.
 
 Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
 Route: a nonsplit order-2 similitude corresponds (self-adjoint `√c`, Scharlau transfer) to an

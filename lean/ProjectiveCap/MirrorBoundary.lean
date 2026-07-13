@@ -1,19 +1,23 @@
 import ProjectiveCap.HyperbolicQuadricMirror
+import ProjectiveCap.FiniteQuadraticIsotropy
 import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
+import Mathlib.LinearAlgebra.Eigenspace.Basic
 
 /-!
 # Formal boundary reductions for projective mirror arguments
 
-This file proves the linear-algebra reductions that do not depend on the classification of finite
-quadratic or Hermitian forms. It deliberately does **not** assert the paper-only parabolic,
-Hermitian, or elliptic-quadric exclusions. Those require explicit isotropy and semilinear
-classification inputs, recorded in the accompanying trust note.
+This file proves the linear-algebra reductions and the finite-quadratic-space input needed for the
+linear parabolic boundary. It deliberately does **not** assert the full paper-only parabolic,
+Hermitian, or elliptic-quadric exclusions: the parabolic semilinear branch and the Hermitian and
+elliptic classifications remain explicit obligations in the accompanying trust note.
 -/
 
 open scoped LinearAlgebra.Projectivization
 
 namespace ProjectiveCap
 namespace Projective
+
+open FiniteQuadraticIsotropy
 
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 
@@ -48,6 +52,153 @@ theorem no_board_eigenvector_of_fixedPointFreeOn (g : V ≃ₗ[K] V)
   intro hQ
   exact hfpf _ hQ (mapEquiv_fixed_of_eq_smul g hv hgv)
 
+/-!
+## Quadratic boards and the split linear obstruction
+-/
+
+/-- The projective quadric cut out by a quadratic form. Using the canonical representative makes
+this definition directly compatible with the existing projective-board API. -/
+def OnQuadraticForm (Q : QuadraticForm K V) (p : Point K V) : Prop :=
+  Q p.rep = 0
+
+/-- A nonzero isotropic vector determines a point of its projective quadric. -/
+theorem onQuadraticForm_mk (Q : QuadraticForm K V) {v : V} (hv : v ≠ 0) (hQ : Q v = 0) :
+    OnQuadraticForm Q (Projectivization.mk K v hv) := by
+  have hrep_eq :
+      Projectivization.mk K (Projectivization.mk K v hv).rep
+          (Projectivization.mk K v hv).rep_nonzero =
+        Projectivization.mk K v hv := Projectivization.mk_rep _
+  obtain ⟨c, hc⟩ :=
+    (Projectivization.mk_eq_mk_iff' K (Projectivization.mk K v hv).rep v
+      (Projectivization.mk K v hv).rep_nonzero hv).mp hrep_eq
+  unfold OnQuadraticForm
+  rw [← hc, QuadraticMap.map_smul, hQ, smul_zero]
+
+section Split
+
+variable [Fintype K] [FiniteDimensional K V]
+
+omit [Fintype K] [FiniteDimensional K V] in
+/-- In odd characteristic an involution splits the vector space into its `+1` and `-1`
+eigenspaces. -/
+theorem isCompl_eigenspaces_one_neg_one (hchar : ringChar K ≠ 2)
+    (g : V ≃ₗ[K] V) (hg : ∀ v, g (g v) = v) :
+    IsCompl (Module.End.eigenspace g.toLinearMap 1)
+      (Module.End.eigenspace g.toLinearMap (-1)) := by
+  have hone : (1 : K) ≠ -1 := (Ring.neg_one_ne_one_of_char_ne_two hchar).symm
+  have hdisjoint :
+      Disjoint (Module.End.eigenspace g.toLinearMap 1)
+        (Module.End.eigenspace g.toLinearMap (-1)) :=
+    (Module.End.eigenspaces_iSupIndep g.toLinearMap).pairwiseDisjoint hone
+  refine ⟨hdisjoint, codisjoint_iff.mpr (eq_top_iff.mpr fun v _ => ?_)⟩
+  let vp : V := (2 : K)⁻¹ • (v + g v)
+  let vm : V := (2 : K)⁻¹ • (v - g v)
+  have hvp : vp ∈ Module.End.eigenspace g.toLinearMap 1 := by
+    rw [Module.End.mem_eigenspace_iff]
+    simp only [LinearEquiv.coe_coe, one_smul, vp, map_smul, map_add, hg]
+    rw [add_comm]
+  have hvm : vm ∈ Module.End.eigenspace g.toLinearMap (-1) := by
+    rw [Module.End.mem_eigenspace_iff]
+    simp only [LinearEquiv.coe_coe, vm, map_smul, map_sub, hg, neg_smul]
+    module
+  have hsum : vp + vm = v := by
+    calc
+      vp + vm = (2 : K)⁻¹ • ((v + g v) + (v - g v)) := by
+        simp only [vp, vm, smul_add]
+      _ = (2 : K)⁻¹ • ((2 : K) • v) := by
+        congr 1
+        module
+      _ = ((2 : K)⁻¹ * 2) • v := by rw [smul_smul]
+      _ = v := by rw [inv_mul_cancel₀ (Ring.two_ne_zero hchar), one_smul]
+  rw [← hsum]
+  exact Submodule.add_mem_sup hvp hvm
+
+omit [Fintype K] in
+/-- If an odd-characteristic involution acts on a space of dimension at least five, one of its two
+eigenspaces has dimension at least three. -/
+theorem three_le_finrank_eigenspace_one_or_neg_one (hchar : ringChar K ≠ 2)
+    (g : V ≃ₗ[K] V) (hg : ∀ v, g (g v) = v)
+    (hdim : 5 ≤ Module.finrank K V) :
+    3 ≤ Module.finrank K (Module.End.eigenspace g.toLinearMap 1) ∨
+      3 ≤ Module.finrank K (Module.End.eigenspace g.toLinearMap (-1)) := by
+  have hsum := Submodule.finrank_add_eq_of_isCompl (isCompl_eigenspaces_one_neg_one hchar g hg)
+  omega
+
+/-- Every split projective involution in dimension at least five fixes a point on every projective
+quadric. The fixed point comes from a nonzero isotropic vector in a large eigenspace. -/
+theorem hasFixedPointOn_quadric_of_involution_finrank_five
+    (hchar : ringChar K ≠ 2) (Q : QuadraticForm K V)
+    (g : V ≃ₗ[K] V) (hg : ∀ v, g (g v) = v)
+    (hdim : 5 ≤ Module.finrank K V) :
+    HasFixedPointOn (OnQuadraticForm Q) (mapEquiv g) := by
+  rcases three_le_finrank_eigenspace_one_or_neg_one hchar g hg hdim with hp | hm
+  · obtain ⟨v, hv, hQv⟩ :=
+      exists_ne_zero_quadraticForm_eq_zero hchar
+        (Q.restrict (Module.End.eigenspace g.toLinearMap 1)) hp
+    exact hasFixedPointOn_of_eigenvector g (OnQuadraticForm Q) (Subtype.coe_ne_coe.mpr hv)
+      (Module.End.mem_eigenspace_iff.mp v.property) (onQuadraticForm_mk Q
+        (Subtype.coe_ne_coe.mpr hv) hQv)
+  · obtain ⟨v, hv, hQv⟩ :=
+      exists_ne_zero_quadraticForm_eq_zero hchar
+        (Q.restrict (Module.End.eigenspace g.toLinearMap (-1))) hm
+    exact hasFixedPointOn_of_eigenvector g (OnQuadraticForm Q) (Subtype.coe_ne_coe.mpr hv)
+      (Module.End.mem_eigenspace_iff.mp v.property) (onQuadraticForm_mk Q
+        (Subtype.coe_ne_coe.mpr hv) hQv)
+
+/-- Unnormalized split-scalar form of the preceding theorem. If `g² = r² I` with `r ≠ 0`, scale
+`g` by `r⁻¹` to obtain an involution. Scalar rescaling does not change the induced projective map,
+so the isotropic fixed point is a fixed point of the original representative. -/
+theorem hasFixedPointOn_quadric_of_sq_square_finrank_five
+    (hchar : ringChar K ≠ 2) (Q : QuadraticForm K V)
+    (g : V ≃ₗ[K] V) (r : K) (hr : r ≠ 0)
+    (hg : ∀ v, g (g v) = (r * r) • v)
+    (hdim : 5 ≤ Module.finrank K V) :
+    HasFixedPointOn (OnQuadraticForm Q) (mapEquiv g) := by
+  let scaleInv : V ≃ₗ[K] V :=
+    DistribMulAction.toLinearEquiv K V (Units.mk0 r⁻¹ (inv_ne_zero hr))
+  let gn : V ≃ₗ[K] V := g.trans scaleInv
+  have hgn_apply (v : V) : gn v = r⁻¹ • g v := by
+    simp [gn, scaleInv]
+  have hgn_sq (v : V) : gn (gn v) = v := by
+    rw [hgn_apply, hgn_apply, map_smul, hg, smul_smul, smul_smul]
+    have hscalar : r⁻¹ * r⁻¹ * (r * r) = 1 := by field_simp
+    rw [hscalar, one_smul]
+  have hmap (x : Point K V) : mapEquiv gn x = mapEquiv g x := by
+    induction x using Projectivization.ind with | h v hv =>
+      rw [mapEquiv_mk, mapEquiv_mk]
+      apply (Projectivization.mk_eq_mk_iff' K (gn v) (g v) (by simp [hv]) (by simp [hv])).mpr
+      exact ⟨r⁻¹, (hgn_apply v).symm⟩
+  obtain ⟨x, hxQ, hxfix⟩ :=
+    hasFixedPointOn_quadric_of_involution_finrank_five hchar Q gn hgn_sq hdim
+  exact ⟨x, hxQ, by rw [← hmap x]; exact hxfix⟩
+
+/-- Formalized split half of the parabolic obstruction. The vector space underlying
+`Q(2m,q)` has dimension `2m+1 ≥ 5` for `m ≥ 2`, so a linear involution always fixes an isotropic
+projective point and cannot be fixed-point-free on the parabolic quadric. -/
+theorem parabolic_split_linear_route_not_fixedPointFree {m : ℕ} (hm : 2 ≤ m)
+    (hchar : ringChar K ≠ 2) (Q : QuadraticForm K (Fin (2 * m + 1) → K))
+    (g : (Fin (2 * m + 1) → K) ≃ₗ[K] (Fin (2 * m + 1) → K))
+    (hg : ∀ v, g (g v) = v) :
+    ¬ FixedPointFreeOn (OnQuadraticForm Q) (mapEquiv g) := by
+  apply not_fixedPointFreeOn_of_hasFixedPointOn
+  apply hasFixedPointOn_quadric_of_involution_finrank_five hchar Q g hg
+  simp only [Module.finrank_fin_fun]
+  omega
+
+/-- Strict split-route statement in the scalar-square normal form supplied by a projective
+involution: `g² = r² I`. -/
+theorem parabolic_split_scalar_square_route_not_fixedPointFree {m : ℕ} (hm : 2 ≤ m)
+    (hchar : ringChar K ≠ 2) (Q : QuadraticForm K (Fin (2 * m + 1) → K))
+    (g : (Fin (2 * m + 1) → K) ≃ₗ[K] (Fin (2 * m + 1) → K))
+    (r : K) (hr : r ≠ 0) (hg : ∀ v, g (g v) = (r * r) • v) :
+    ¬ FixedPointFreeOn (OnQuadraticForm Q) (mapEquiv g) := by
+  apply not_fixedPointFreeOn_of_hasFixedPointOn
+  apply hasFixedPointOn_quadric_of_sq_square_finrank_five hchar Q g r hr hg
+  simp only [Module.finrank_fin_fun]
+  omega
+
+end Split
+
 /-- Determinant parity obstruction. If an invertible `(2m+1)×(2m+1)` matrix squares to
 `δ I`, then `δ` is a square. Thus a nonsplit square-scalar projective involution cannot act on an
 odd-dimensional vector space. -/
@@ -75,8 +226,9 @@ theorem no_matrix_sq_nonsquare_in_odd_dimension {m : ℕ}
 
 /-- Formalized nonsplit half of the parabolic obstruction: the vector space underlying
 `Q(2m,q)` has odd dimension `2m+1`, so it cannot carry a linear projective involution represented
-by `A² = δ I` with `δ` nonsquare. The remaining split and semilinear exclusions require isotropy
-and Baer-fixed-subgeometry theorems not currently present in mathlib. -/
+by `A² = δ I` with `δ` nonsquare. Together with
+`parabolic_split_scalar_square_route_not_fixedPointFree`, this completes the linear branches; the
+Baer-semilinear branch remains C87. -/
 theorem parabolic_nonsplit_linear_route_impossible {m : ℕ}
     (A : Matrix (Fin (2 * m + 1)) (Fin (2 * m + 1)) K) (δ : K)
     (hδ : δ ≠ 0) (hnonsquare : ¬ IsSquare δ) :

@@ -74,9 +74,11 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C85 [OPEN] — quadratic split-route obstruction.** Formalize finite-field quadratic isotropy
-  in dimension at least three and the eigenspace restriction needed to close the split linear
-  parabolic branch. Track in the
+- **C85 [REPORTED 2026-07-12] — quadratic split-route obstruction.** Chevalley–Warning now proves
+  every finite odd-field quadratic form of dimension at least three isotropic; the `±1`
+  eigenspace decomposition and scalar-square normalization close the split linear parabolic
+  branch. `ProjectiveCap` builds; strict axiom profile is
+  `[propext, Classical.choice, Quot.sound]`. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 - **C86 [OPEN] — Hermitian linear obstruction.** Formalize finite Hermitian isotropy in dimension
