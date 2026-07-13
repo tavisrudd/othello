@@ -73,6 +73,29 @@ def IsMatching (H M : Finset (Finset V)) : Prop :=
 def IsTransversal (H : Finset (Finset V)) (T : Finset V) : Prop :=
   ∀ ⦃e⦄, e ∈ H → (T ∩ e).Nonempty
 
+/-- A vertex set is hypergraph-independent when it contains no edge. -/
+def IsIndependent (H : Finset (Finset V)) (S : Finset V) : Prop :=
+  ∀ ⦃e⦄, e ∈ H → ¬ e ⊆ S
+
+/-- Complements exchange transversals and independent sets. -/
+theorem isTransversal_compl_iff {H : Finset (Finset V)} {S : Finset V} :
+    IsTransversal H (univ \ S) ↔ IsIndependent H S := by
+  constructor
+  · intro hT E hE hES
+    obtain ⟨v, hv⟩ := hT hE
+    have hv' := Finset.mem_inter.mp hv
+    exact (Finset.mem_sdiff.mp hv'.1).2 (hES hv'.2)
+  · intro hS E hE
+    by_contra hnone
+    rw [Finset.not_nonempty_iff_eq_empty] at hnone
+    apply hS hE
+    intro v hvE
+    by_contra hvS
+    have hvC : v ∈ univ \ S := by simp [hvS]
+    have : v ∈ (univ \ S) ∩ E := Finset.mem_inter.mpr ⟨hvC, hvE⟩
+    rw [hnone] at this
+    simp at this
+
 /-- The inclusion-minimal edges of a finite hypergraph.  Passing from a hypergraph to this
 clutter removes redundant supersets without changing either extremal invariant, provided the
 edges are nonempty for the matching statement. -/
@@ -232,6 +255,10 @@ open scoped Classical in
 /-- Transversal number `τ(H)`: the smallest size of a transversal of `H`. -/
 noncomputable def transversalNumber (H : Finset (Finset V)) : ℕ :=
   sInf {n | ∃ T, IsTransversal H T ∧ T.card = n}
+
+/-- Independence number, expressed through complement duality with transversals. -/
+noncomputable def independenceNumber (H : Finset (Finset V)) : ℕ :=
+  Fintype.card V - transversalNumber H
 
 omit [Fintype V] [DecidableEq V] in
 /-- The matching number of a finite hypergraph is attained by an actual matching. -/
@@ -460,6 +487,40 @@ with attainment (`Nat.sInf_mem`) this pins `transversalNumber` to the intended
 theorem transversalNumber_le_card {H : Finset (Finset V)} {T : Finset V}
     (hT : IsTransversal H T) : transversalNumber H ≤ T.card :=
   Nat.sInf_le ⟨T, hT, rfl⟩
+
+/-- Every independent set is bounded by `independenceNumber`. -/
+theorem card_le_independenceNumber {H : Finset (Finset V)}
+    (hne : ∀ E ∈ H, E.Nonempty) {S : Finset V} (hS : IsIndependent H S) :
+    S.card ≤ independenceNumber H := by
+  have hT : IsTransversal H (univ \ S) := isTransversal_compl_iff.mpr hS
+  have htau := transversalNumber_le_card hT
+  have hScard : (univ \ S).card = Fintype.card V - S.card := by
+    rw [Finset.card_sdiff, Finset.inter_eq_left.mpr (Finset.subset_univ S), Finset.card_univ]
+  rw [hScard] at htau
+  have htauq : transversalNumber H ≤ Fintype.card V :=
+    transversalNumber_le_card (show IsTransversal H univ by
+      intro E hE
+      rw [Finset.univ_inter]
+      exact hne E hE)
+  have hSq : S.card ≤ Fintype.card V := by
+    simpa using Finset.card_le_card (Finset.subset_univ S)
+  unfold independenceNumber
+  omega
+
+/-- A maximum independent set exists and has cardinality `independenceNumber`. -/
+theorem exists_independent_card_eq_independenceNumber (H : Finset (Finset V))
+    (hne : ∀ E ∈ H, E.Nonempty) :
+    ∃ S, IsIndependent H S ∧ S.card = independenceNumber H := by
+  obtain ⟨T, hT, hTcard⟩ := exists_transversal_card_eq_transversalNumber H hne
+  let S := univ \ T
+  have hS : IsIndependent H S := by
+    apply isTransversal_compl_iff.mp
+    simpa [S] using hT
+  refine ⟨S, hS, ?_⟩
+  have hTsub : T ⊆ univ := Finset.subset_univ T
+  change (univ \ T).card = independenceNumber H
+  rw [Finset.card_sdiff, Finset.inter_eq_left.mpr hTsub, Finset.card_univ, hTcard]
+  rfl
 
 /-- Embedding a nonempty-edge hypergraph into a larger ground type preserves transversal number. -/
 theorem transversalNumber_embedHypergraph {W : Type*} [Fintype W] [DecidableEq W]

@@ -1,4 +1,5 @@
 import RepairCodes.AxisTwistedCubic
+import FiniteGeom.ZeroSumTriple
 
 /-!
 # Extremal invariants of twisted-cubic–axis repair hypergraphs
@@ -387,6 +388,80 @@ theorem minimalAxisRepair_invariant_decomposition [CharP 𝔽 3] (y : 𝔽 ⊕ U
   constructor
   · rw [matchingNumber_union_of_disjoint_vertices HP HC hneP hneC hground, hpair.1]
   · rw [transversalNumber_union_of_disjoint_vertices HP HC hneP hneC hground, hpair.2]
+
+/-- At the nucleus (the point at infinity of the axis), the three-cubic component is exactly the
+affine-line/zero-sum triple hypergraph on the field. -/
+theorem axisCubicRepairComponent_infinity_eq_zeroSum [CharP 𝔽 3] :
+    axisCubicRepairComponent (Sum.inr Unit.unit) =
+      embedHypergraph Function.Embedding.inl (zeroSumTripleHypergraph 𝔽) := by
+  classical
+  ext R
+  constructor
+  · intro hR
+    obtain ⟨s, t, u, hst, hsu, htu, hy, rfl⟩ :=
+      mem_axisCubicRepairComponent_iff.mp hR
+    have hsum : s + t + u = 0 := by
+      rw [twistedCubicTripleAxisIndex] at hy
+      by_cases h : s + t + u = 0
+      · exact h
+      · simp [h] at hy
+    apply Finset.mem_image.mpr
+    refine ⟨{s, t, u}, mem_zeroSumTripleHypergraph.mpr ⟨?_, ?_⟩, ?_⟩
+    · simp [hst, hsu, htu]
+    · simpa [hst, hsu, htu, add_assoc] using hsum
+    · ext z
+      cases z <;> simp
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hR
+    obtain ⟨s, t, u, hst, hsu, htu, rfl⟩ :=
+      Finset.card_eq_three.mp (mem_zeroSumTripleHypergraph.mp hS).1
+    have hsum : s + t + u = 0 := by
+      simpa [hst, hsu, htu, add_assoc] using (mem_zeroSumTripleHypergraph.mp hS).2
+    apply mem_axisCubicRepairComponent_iff.mpr
+    refine ⟨s, t, u, hst, hsu, htu, ?_, ?_⟩
+    · simp [twistedCubicTripleAxisIndex, hsum]
+    · ext z
+      cases z <;> simp
+
+/-- Exact nucleus matching contribution: a parallel class supplies `q/3` disjoint cubic
+repairs. -/
+theorem axisCubicRepairComponent_infinity_matchingNumber [CharP 𝔽 3] :
+    matchingNumber (axisCubicRepairComponent (Sum.inr Unit.unit : 𝔽 ⊕ Unit)) =
+      Fintype.card 𝔽 / 3 := by
+  rw [axisCubicRepairComponent_infinity_eq_zeroSum,
+    matchingNumber_embedHypergraph, matchingNumber_zeroSumTripleHypergraph]
+
+/-- The nucleus cubic-component transversal number is the affine-line transversal number. -/
+theorem axisCubicRepairComponent_infinity_transversalNumber [CharP 𝔽 3] :
+    transversalNumber (axisCubicRepairComponent (Sum.inr Unit.unit : 𝔽 ⊕ Unit)) =
+      transversalNumber (zeroSumTripleHypergraph 𝔽) := by
+  rw [axisCubicRepairComponent_infinity_eq_zeroSum]
+  apply transversalNumber_embedHypergraph
+  intro E hE
+  exact Finset.card_pos.mp (by rw [(mem_zeroSumTripleHypergraph.mp hE).1]; decide)
+
+/-- Exact paper-facing nucleus invariants, before the harmless normalization of the matching
+sum to `(5q-3)/6`.  Here `zeroSumCapNumber 𝔽` is semantically proved to be the maximum
+affine cap size. -/
+theorem minimalAxisRepair_nucleus_invariants [CharP 𝔽 3] :
+    matchingNumber (minimalAxisTwistedCubicRepairHypergraph
+        (.inr (Sum.inr Unit.unit : 𝔽 ⊕ Unit)) 3) =
+        Fintype.card 𝔽 / 2 + Fintype.card 𝔽 / 3 ∧
+      transversalNumber (minimalAxisTwistedCubicRepairHypergraph
+        (.inr (Sum.inr Unit.unit : 𝔽 ⊕ Unit)) 3) =
+        2 * Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := by
+  have hdec := minimalAxisRepair_invariant_decomposition
+    (Sum.inr Unit.unit : 𝔽 ⊕ Unit)
+  constructor
+  · rw [hdec.1, axisCubicRepairComponent_infinity_matchingNumber]
+  · rw [hdec.2, axisCubicRepairComponent_infinity_transversalNumber,
+      transversalNumber_zeroSumTripleHypergraph]
+    obtain ⟨S, -, hScard⟩ := exists_zeroSumCap_card_eq (A := 𝔽)
+    have hSle : zeroSumCapNumber 𝔽 ≤ Fintype.card 𝔽 := by
+      rw [← hScard]
+      simpa using Finset.card_le_card (Finset.subset_univ S)
+    have hqpos : 0 < Fintype.card 𝔽 := Fintype.card_pos
+    omega
 
 private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=
@@ -805,6 +880,7 @@ theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
 #print axioms cubicRepair_transversalNumber
 #print axioms cubicRepair_tau_gt_nu
 #print axioms axisTwistedCubic_allSymbol_tau_gt_nu
+#print axioms minimalAxisRepair_nucleus_invariants
 #print axioms mem_axisRepairHypergraph_threeCubic_iff
 #print axioms mem_minimalAxisRepairHypergraph_iff
 

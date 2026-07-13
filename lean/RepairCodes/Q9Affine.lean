@@ -1,4 +1,5 @@
 import RepairCodes.Q9Seed
+import FiniteGeom.ZeroSumTriple
 import Mathlib.LinearAlgebra.Dimension.Free
 
 /-!
@@ -17,48 +18,6 @@ noncomputable section
 
 local instance : Fintype GF9 := Fintype.ofFinite GF9
 local instance : DecidableEq GF9 := Classical.decEq _
-
-/-- Three-element zero-sum subsets of a finite additive group. In an elementary abelian
-three-group these are exactly the affine lines. -/
-def zeroSumTripleHypergraph (A : Type*) [AddCommGroup A] [Fintype A] [DecidableEq A] :
-    Finset (Finset A) :=
-  (Finset.univ.powersetCard 3).filter fun s => ∑ x ∈ s, x = 0
-
-@[simp]
-theorem mem_zeroSumTripleHypergraph {A : Type*} [AddCommGroup A] [Fintype A] [DecidableEq A]
-    {s : Finset A} :
-    s ∈ zeroSumTripleHypergraph A ↔ s.card = 3 ∧ ∑ x ∈ s, x = 0 := by
-  simp [zeroSumTripleHypergraph]
-
-/-- Zero-sum triple hypergraphs are functorial under additive equivalences. -/
-theorem relabel_zeroSumTripleHypergraph {A B : Type*} [AddCommGroup A] [AddCommGroup B]
-    [Fintype A] [Fintype B] [DecidableEq A] [DecidableEq B] (e : A ≃+ B) :
-    relabelHypergraph e.toEquiv (zeroSumTripleHypergraph A) = zeroSumTripleHypergraph B := by
-  ext t
-  constructor
-  · intro ht
-    obtain ⟨s, hs, rfl⟩ := Finset.mem_image.mp ht
-    rw [mem_zeroSumTripleHypergraph] at hs ⊢
-    refine ⟨by simpa using hs.1, ?_⟩
-    have hsum : ∑ x ∈ s.map e.toEquiv.toEmbedding, x = e (∑ x ∈ s, x) := by
-      rw [Finset.sum_map]
-      simp
-    rw [hsum, hs.2, map_zero]
-  · intro ht
-    rw [mem_zeroSumTripleHypergraph] at ht
-    let s := t.map e.symm.toEquiv.toEmbedding
-    have hsmap : s.map e.toEquiv.toEmbedding = t := by
-      simp [s, Finset.map_map]
-    apply Finset.mem_image.mpr
-    refine ⟨s, ?_, hsmap⟩
-    rw [mem_zeroSumTripleHypergraph]
-    refine ⟨?_, ?_⟩
-    · simpa [s] using ht.1
-    · have hsum : ∑ x ∈ s, x = e.symm (∑ x ∈ t, x) := by
-        change (∑ x ∈ t.map e.symm.toEquiv.toEmbedding, x) = e.symm (∑ x ∈ t, x)
-        rw [Finset.sum_map]
-        simp
-      rw [hsum, ht.2, map_zero]
 
 /-- Coordinate model of `AG(2,3)`. -/
 abbrev AG23 := Fin 2 → ZMod 3
