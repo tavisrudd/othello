@@ -16,8 +16,8 @@ Pareto-incomparable seed and asymptotic family.
 | Claim | Current status | Permitted wording |
 |---|---|---|
 | completed seed has parameters `[2q+2,4,q]_q` and exact global dual distance `3` | strict-trust Lean, independent q=3,9,27 replay/mutations, aggregate build, and XH1 passed | proved; not paper-promoted before C114 |
-| completed seed has exactly cubic and axis repair row types | proposed; q=3,9 exhaustively checked from circuits | diagnostic conjecture only; no group-orbit claim |
-| radius-three cubic row is `((q-1)/2,q-1)` | proposed; q=3,9 checked by exact set packing/transversal | diagnostic conjecture only |
+| completed seed has exactly cubic and axis radius-three repair row types | strict-trust Lean; target transitivity is explicit monomial repair transport, not an orbit assumption | proved through radius three; not paper-promoted before C114 |
+| radius-three cubic row is `((q-1)/2,q-1)` | strict-trust Lean for every projective cubic target; q=3,9 independently checked | proved; not paper-promoted before C114 |
 | radius-three axis row is `((5q-3)/6,2q-1-Z3(q))` | strict-trust Lean for every axis target; q=3,9 independently checked | proved; not paper-promoted before C114 |
 | radius four exhausts the complete inner minimal port | generic rank-four proof obligation open | standard consequence if proved |
 | radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | proposed; q=3,9 checked by exact circuit enumeration | diagnostic conjecture only |
@@ -49,13 +49,13 @@ group, represented in Lean by `zeroSumCapNumber`.
   printed headline has exactly the standard axiom profile. The independent verifier passes at
   q=3,9,27 with coordinate conjugation, affine deletion, duplicate rejection, and a nonduplicate
   spectrum-changing mutation. The forbidden-token and whitespace scans pass.
-- C112 has started with the projective-boundary circuit hinge:
+- C112's radius-three cubic classification is complete. The projective-boundary circuit hinge in
   `FiniteGeom/ProjectiveAxisTwistedCubicCircuits.lean` proves that two distinct finite cubic
   points `s,t`, cubic infinity, and axis point `s+t` form a four-circuit, and proves uniqueness of
   that normalized axis completion. The all-finite completion theorem remains the existing
   determinant result. The module now also proves independence of every distinct three-cubic,
   two-cubic/one-axis, and one-cubic/two-axis family in the completed system, with all infinity
-  placements explicit. The complete repair-clutter classification is still open.
+  placements explicit, including cubic infinity with three finite cubic points.
 - The independent verifier now enumerates every circuit of size at most five at q=3 and q=9 and
   solves the resulting matching and transversal problems exactly. It confirms all proposed
   radius-three and radius-four rows, including the q=3 boundary. This is a refutation gate, not a
@@ -82,7 +82,19 @@ group, represented in Lean by `zeroSumCapNumber`.
   `(5q-3)/6` and `2q-1-Z3(q)`. The generic monomial repair-transport theorem in
   `FiniteGeom/Repair.lean` now proves that D-PC10 relabels the complete bounded repair hypergraph
   exactly, so the same row is kernel-proved for every finite or infinite axis target. XH2 is
-  closed for the axis row; the cubic row remains open.
+  closed for the axis row, and the same transport is now reused for the completed cubic row.
+- `RepairCodes/ProjectiveAxisTwistedCubic.lean` now classifies the complete radius-three repair
+  hypergraph at cubic infinity: its edges are exactly
+  `{C(s),C(t),A(s+t)}` for `s≠t`. The proof separately excludes three finite cubic helpers, one
+  finite cubic plus two axes, and three axes; the last case uses the final coordinate of an actual
+  full-support dual relation and is not inferred from dependence alone. It also proves there are
+  no shorter cubic-infinity repairs.
+- `RepairCodes/ProjectiveAxisTwistedCubicInvariants.lean` embeds the existing consecutive-power
+  rainbow matching to prove `nu=(q-1)/2`, proves `tau=q-1` by an explicit covered/uncovered
+  endpoint-and-color count, and transports both invariants to every projective cubic target via
+  D-PC10/D-PC11. Matching/transversal invariance under clutter reduction yields the exact uniform
+  minimal-clutter row. The focused and aggregate `RepairCodes` builds, forbidden-token scan, and
+  standard-axiom audit pass. C112 now remains open only for radius four/full-inner.
 
 ## Mandatory xhigh review checkpoints
 
@@ -149,8 +161,8 @@ discovery verdict. Negative investigations belong in the companion archive.
 
 1. Classify all minimal circuits through each target at helper radii three and four. Never infer
    completeness from a selected repair family.
-2. Cubic target, radius three: identify every edge with a pair of other projective cubic points
-   and its unique axis completion; prove `nu=(q-1)/2` and `tau=q-1`.
+2. Cubic target, radius three: **closed in strict-trust Lean**. Every edge is a pair of other
+   projective cubic points with its unique axis completion; `nu=(q-1)/2` and `tau=q-1` uniformly.
 3. Axis target, radius three: split the clutter into the complete pair graph on the other `q` axis
    points and a projective cubic-triple completion fiber; prove the fiber is equivalent to the
    existing zero-sum system and derive `nu=(5q-3)/6`, `tau=2q-1-Z3(q)`.

@@ -240,3 +240,26 @@ tau = 2q-1-Z3(q).
 
 The focused theorem uses only `propext`, `Classical.choice`, and `Quot.sound`. This closes XH2 for
 the axis row. The cubic row and radius-four/full-inner classification remain C112 obligations.
+
+## 2026-07-13 — exact completed cubic row and adversarial pass
+
+Closed the radius-three cubic half of C112. The boundary four-circuit is now lifted to an actual
+repair edge, and the complete cubic-infinity repair hypergraph is classified as
+`{C(s),C(t),A(s+t)}` for distinct finite parameters `s,t`. The converse audit treats every support
+shape separately. In particular, an all-axis helper triple is excluded from the full-support dual
+relation by its final coordinate; axis dependence is not misused as a repair relation for the
+cubic target. No cubic-infinity repair with at most two helpers exists.
+
+The numerical invariants are also kernel-proved. The existing consecutive-power matching on the
+nonzero field elements embeds as a rainbow matching, giving `nu=(q-1)/2`; an explicit
+covered/uncovered endpoint argument forces every transversal to have at least `q-1` vertices, and
+all but one finite cubic coordinate attain the bound. D-PC10/D-PC11 transports the result from
+cubic infinity to every projective cubic target, and generic clutter reduction gives the same
+minimal-clutter row.
+
+Adversarial checks included the q=3 boundary (`nu=1`, `tau=2`), separation of dependence from
+full-support repair, exact helper-cardinality before shape enumeration, target exclusion, and the
+odd-cardinality step in the matching upper bound. Focused builds and the aggregate `RepairCodes`
+build pass; headline axiom prints contain only `propext`, `Classical.choice`, and `Quot.sound`; the
+changed files contain no `sorry`, `admit`, `native_decide`, or `unsafe`. C112 now remains open only
+for the rank-four radius-four/full-inner classification and invariants.

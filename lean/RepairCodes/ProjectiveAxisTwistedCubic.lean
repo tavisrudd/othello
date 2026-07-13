@@ -600,6 +600,106 @@ theorem projectiveFiniteCubicTripleRepairHelpers_mem [CharP 𝔽 3]
     exact twistedCubicTripleFamily_dependent v
   · exact hdelete
 
+/-- The projective-boundary four-circuit gives an actual repair of cubic infinity from two
+distinct finite cubic points and the finite axis point `s+t`. -/
+theorem projectiveCubicInfinityRepairHelpers_mem [CharP 𝔽 3]
+    {s t : 𝔽} (hst : s ≠ t) :
+    ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inr (.inl (s + t))} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∈
+      projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3 := by
+  classical
+  let R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽) :=
+    { .inl (.inl s), .inl (.inl t), .inr (.inl (s + t)) }
+  let f : Fin 4 → ↥(insert (.inl (.inr Unit.unit)) R) := fun i =>
+    ⟨![.inl (.inl s), .inl (.inl t), .inl (.inr Unit.unit),
+      .inr (.inl (s + t))] i, by fin_cases i <;> simp [R]⟩
+  have hf : Function.Injective f := by
+    intro i j hij
+    apply Fin.ext
+    fin_cases i <;> fin_cases j <;> simp_all [f]
+  have hfsurj : Function.Surjective f := by
+    intro x
+    rcases x with ⟨x, hx⟩
+    simp only [R, Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl | rfl | rfl
+    · exact ⟨2, by ext; simp [f]⟩
+    · exact ⟨0, by ext; simp [f]⟩
+    · exact ⟨1, by ext; simp [f]⟩
+    · exact ⟨3, by ext; simp [f]⟩
+  let e : Fin 4 ≃ ↥(insert (.inl (.inr Unit.unit)) R) :=
+    Equiv.ofBijective f ⟨hf, hfsurj⟩
+  have hsub : R ⊆ univ.erase (.inl (.inr Unit.unit)) := by
+    intro x hx
+    rw [Finset.mem_erase]
+    refine ⟨?_, Finset.mem_univ x⟩
+    intro h
+    subst x
+    simp [R] at hx
+  have hcard : R.card = 3 := by simp [R, hst]
+  have hefamily :
+      (fun i : Fin 4 => (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) =
+        twoFiniteCubicInfinityAxisFamily s t (.inl (s + t)) := by
+    funext i
+    fin_cases i <;>
+      simp [e, f, projectiveAxisTwistedCubicPoints,
+        twoFiniteCubicInfinityAxisFamily]
+  have htransport (j : Fin 4)
+      (hli : LinearIndependent 𝔽 (fun a : Fin 3 =>
+        twoFiniteCubicInfinityAxisFamily s t (.inl (s + t)) (j.succAbove a))) :
+      LinearIndependent 𝔽 (fun i : {i : Fin 4 // i ≠ j} =>
+        twoFiniteCubicInfinityAxisFamily s t (.inl (s + t)) i) := by
+    let ej := projectiveFinEraseEquiv j
+    have hli' := hli.comp ej.symm ej.symm.injective
+    have heq :
+        ((fun a : Fin 3 => twoFiniteCubicInfinityAxisFamily s t (.inl (s + t))
+          (j.succAbove a)) ∘ ej.symm) =
+          (fun i : {i : Fin 4 // i ≠ j} =>
+            twoFiniteCubicInfinityAxisFamily s t (.inl (s + t)) i) := by
+      funext i
+      apply congrArg (twoFiniteCubicInfinityAxisFamily s t (.inl (s + t)))
+      exact congrArg Subtype.val (ej.apply_symm_apply i)
+    rw [← heq]
+    exact hli'
+  have hcirc := twoFiniteCubicInfinityAxis_isFourCircuit (𝔽 := 𝔽) hst
+  have hdelete : ∀ j : Fin 4,
+      LinearIndependent 𝔽 (fun i : {i : Fin 4 // i ≠ j} =>
+        (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) := by
+    intro j
+    rw [show (fun i : {i : Fin 4 // i ≠ j} =>
+        (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) =
+        (fun i : {i : Fin 4 // i ≠ j} =>
+          twoFiniteCubicInfinityAxisFamily s t (.inl (s + t)) i) by
+          funext i
+          exact congrFun hefamily i]
+    apply htransport
+    have hs12 : (1 : Fin 4).succAbove (2 : Fin 3) = 3 := by decide
+    have hs21 : (2 : Fin 4).succAbove (1 : Fin 3) = 1 := by decide
+    have hs22 : (2 : Fin 4).succAbove (2 : Fin 3) = 3 := by decide
+    have hs31 : (3 : Fin 4).succAbove (1 : Fin 3) = 1 := by decide
+    have hs32 : (3 : Fin 4).succAbove (2 : Fin 3) = 2 := by decide
+    fin_cases j
+    · convert hcirc.2.1 using 1
+      funext a
+      fin_cases a <;>
+        simp [twoFiniteCubicInfinityAxisFamily, projectiveTwistedCubicPoints]
+    · convert hcirc.2.2.1 using 1
+      funext a
+      fin_cases a <;>
+        simp [twoFiniteCubicInfinityAxisFamily, projectiveTwistedCubicPoints, hs12]
+    · convert hcirc.2.2.2.1 using 1
+      funext a
+      fin_cases a <;>
+        simp [twoFiniteCubicInfinityAxisFamily, projectiveTwistedCubicPoints, hs21, hs22]
+    · convert hcirc.2.2.2.2 using 1
+      funext a
+      fin_cases a <;>
+        simp [twoFiniteCubicInfinityAxisFamily, projectiveTwistedCubicPoints, hs31, hs32]
+  apply mem_repairHypergraph_of_reindexed_circuit
+    (G := projectiveAxisTwistedCubicGenerator) hsub hcard e
+  · rw [hefamily]
+    exact hcirc.1
+  · exact hdelete
+
 /-- A convenient exclusion principle for a proposed three-helper completed-seed repair whose
 four displayed columns are independent. -/
 theorem projectiveRepairTriple_not_mem_of_linearIndependent
@@ -620,6 +720,263 @@ theorem projectiveRepairTriple_not_mem_of_linearIndependent
   convert hli using 1
   funext i
   fin_cases i <;> simp [e, e0, projectiveFin4Equiv]
+
+/-- Three distinct finite cubic helpers cannot repair cubic infinity. -/
+theorem projectiveCubicInfinityRepair_threeFinite_not_mem
+    {s t u : 𝔽} (hst : s ≠ t) (hsu : s ≠ u) (htu : t ≠ u) :
+    ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inl u)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∉
+      projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3 := by
+  apply projectiveRepairTriple_not_mem_of_linearIndependent
+    (by simp) (by simp) (by simp)
+    (by simpa using hst) (by simpa using hsu) (by simpa using htu)
+  convert cubicInfinityThreeFinite_linearIndependent hst hsu htu using 1
+  funext i
+  fin_cases i <;> simp [projectiveAxisTwistedCubicPoints]
+
+/-- One finite cubic helper and two distinct axis helpers cannot repair cubic infinity. -/
+theorem projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem
+    (s : 𝔽) {y z : 𝔽 ⊕ Unit} (hyz : y ≠ z) :
+    ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inr y, .inr z} :
+      Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∉
+        projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3 := by
+  apply projectiveRepairTriple_not_mem_of_linearIndependent
+    (by simp) (by simp) (by simp) (by simp) (by simp) (by simpa using hyz)
+  have hli := finiteCubicInfinityTwoAxis_linearIndependent (𝔽 := 𝔽) s hyz
+  convert linearIndependent_vec4_swap01 hli using 1
+  funext i
+  fin_cases i <;> simp [projectiveAxisTwistedCubicPoints]
+
+/-- Three axis helpers cannot repair cubic infinity: the last coordinate forces the target
+coefficient of every relation on that support to vanish. -/
+theorem projectiveCubicInfinityRepair_threeAxis_not_mem
+    (y z w : 𝔽 ⊕ Unit) :
+    ({(.inr y : ProjectiveAxisTwistedCubicIndex 𝔽), .inr z, .inr w} :
+      Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∉
+        projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3 := by
+  intro hR
+  obtain ⟨-, -, c, hc, hcx, hsupp⟩ := mem_repairHypergraph.mp hR
+  have hrel := dual_word_column_relation
+    (G := projectiveAxisTwistedCubicGenerator) hc
+  have h3 := congrFun hrel (3 : Fin 4)
+  simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at h3
+  change (∑ j, c j * projectiveAxisTwistedCubicGenerator 3 j) = 0 at h3
+  have hsum :
+      (∑ j, c j * projectiveAxisTwistedCubicGenerator 3 j) =
+        c (.inl (.inr Unit.unit)) := by
+    rw [Finset.sum_eq_single (.inl (.inr Unit.unit))]
+    · simp [projectiveAxisTwistedCubicGenerator, projectiveAxisTwistedCubicPoints,
+        projectiveTwistedCubicPoints]
+    · intro j _ hjx
+      by_cases hcj : c j = 0
+      · simp [hcj]
+      · have hj : j ∈ wordSupport c := mem_wordSupport.mpr hcj
+        rw [hsupp] at hj
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hj
+        rcases hj with hj | hj | hj | hj
+        · exact (hjx hj).elim
+        · subst j
+          cases y <;> simp [projectiveAxisTwistedCubicGenerator,
+            projectiveAxisTwistedCubicPoints]
+        · subst j
+          cases z <;> simp [projectiveAxisTwistedCubicGenerator,
+            projectiveAxisTwistedCubicPoints]
+        · subst j
+          cases w <;> simp [projectiveAxisTwistedCubicGenerator,
+            projectiveAxisTwistedCubicPoints]
+    · simp
+  rw [hsum] at h3
+  exact hcx h3
+
+/-- In a cubic-infinity repair with two finite cubic helpers, the axis helper is forced to be
+the finite point with parameter `s+t`. -/
+theorem projectiveCubicInfinityRepair_axis_eq_of_mem [CharP 𝔽 3]
+    {s t : 𝔽} {y : 𝔽 ⊕ Unit} (hst : s ≠ t)
+    (hR : ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inr y} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∈
+      projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3) :
+    y = .inl (s + t) := by
+  by_contra hne
+  have hli : LinearIndependent 𝔽 (twoFiniteCubicInfinityAxisFamily s t y) := by
+    by_contra hdep
+    exact hne ((twoFiniteCubicInfinityAxis_dependent_iff hst y).mp hdep)
+  have hli' := linearIndependent_vec4_swap01 (linearIndependent_vec4_swap12 hli)
+  have hnot := projectiveRepairTriple_not_mem_of_linearIndependent
+    (x := (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽))
+    (a := .inl (.inl s)) (b := .inl (.inl t)) (c := .inr y)
+    (by simp) (by simp) (by simp) (by simpa using hst) (by simp) (by simp) (by
+      convert hli' using 1
+      funext i
+      fin_cases i <;> simp [projectiveAxisTwistedCubicPoints])
+  exact hnot hR
+
+/-- Cubic infinity has no repair edge with at most two helpers. -/
+theorem projectiveCubicInfinity_no_repairEdge_radius_two [CharP 𝔽 3]
+    (R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    R ∉ projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 2 := by
+  intro hR
+  apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+  obtain ⟨hsub, hcard, -⟩ := mem_repairHypergraph.mp hR
+  have hxR : (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  apply projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+  · rw [Finset.card_insert_of_notMem hxR]
+    omega
+  · exact ⟨.inr Unit.unit, Finset.mem_insert_self _ _⟩
+
+/-- Every radius-three repair of cubic infinity has exactly three helpers. -/
+theorem projectiveCubicInfinityRepair_edge_card_eq_three [CharP 𝔽 3]
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3) :
+    R.card = 3 := by
+  obtain ⟨hsub, hcard, c, hc, hcx, hsupp⟩ := mem_repairHypergraph.mp hR
+  by_contra hne
+  have hle : R.card ≤ 2 := by omega
+  apply projectiveCubicInfinity_no_repairEdge_radius_two R
+  exact mem_repairHypergraph.mpr ⟨hsub, hle, c, hc, hcx, hsupp⟩
+
+/-- Every radius-three repair of cubic infinity consists of two distinct finite cubic points
+and their uniquely forced finite axis point. -/
+theorem projectiveCubicInfinityRepairHypergraph_shape [CharP 𝔽 3]
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3) :
+    ∃ s t : 𝔽, s ≠ t ∧
+      R = {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inr (.inl (s + t))} := by
+  obtain ⟨a, b, c, hab, hac, hbc, hReq⟩ := Finset.card_eq_three.mp
+    (projectiveCubicInfinityRepair_edge_card_eq_three hR)
+  have hsub := (mem_repairHypergraph.mp hR).1
+  have hxR : (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  subst R
+  cases a with
+  | inl x =>
+      cases x with
+      | inr u => exact (hxR (by simp)).elim
+      | inl s =>
+          cases b with
+          | inl y =>
+              cases y with
+              | inr u => exact (hxR (by simp)).elim
+              | inl t =>
+                  cases c with
+                  | inl z =>
+                      cases z with
+                      | inr u => exact (hxR (by simp)).elim
+                      | inl u =>
+                          have hst : s ≠ t := by simpa using hab
+                          have hsu : s ≠ u := by simpa using hac
+                          have htu : t ≠ u := by simpa using hbc
+                          exact (projectiveCubicInfinityRepair_threeFinite_not_mem
+                            hst hsu htu hR).elim
+                  | inr y =>
+                      have hst : s ≠ t := by simpa using hab
+                      have hy := projectiveCubicInfinityRepair_axis_eq_of_mem hst hR
+                      exact ⟨s, t, hst, by simp [hy]⟩
+          | inr y =>
+              cases c with
+              | inl z =>
+                  cases z with
+                  | inr u => exact (hxR (by simp)).elim
+                  | inl t =>
+                      have hst : s ≠ t := by simpa using hac
+                      have hR' :
+                          {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                            .inl (.inl t), .inr y} ∈
+                            projectiveAxisTwistedCubicRepairHypergraph
+                              (.inl (.inr Unit.unit)) 3 := by
+                        convert hR using 1
+                        ext q
+                        simp only [Finset.mem_insert, Finset.mem_singleton]
+                        tauto
+                      have hy := projectiveCubicInfinityRepair_axis_eq_of_mem hst hR'
+                      refine ⟨s, t, hst, ?_⟩
+                      rw [hy]
+                      ext q
+                      simp only [Finset.mem_insert, Finset.mem_singleton]
+                      tauto
+              | inr z =>
+                  have hyz : y ≠ z := by simpa using hbc
+                  exact (projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem
+                    s hyz hR).elim
+  | inr y =>
+      cases b with
+      | inl x =>
+          cases x with
+          | inr u => exact (hxR (by simp)).elim
+          | inl s =>
+              cases c with
+              | inl z =>
+                  cases z with
+                  | inr u => exact (hxR (by simp)).elim
+                  | inl t =>
+                      have hst : s ≠ t := by simpa using hbc
+                      have hR' :
+                          {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                            .inl (.inl t), .inr y} ∈
+                            projectiveAxisTwistedCubicRepairHypergraph
+                              (.inl (.inr Unit.unit)) 3 := by
+                        convert hR using 1
+                        ext q
+                        simp only [Finset.mem_insert, Finset.mem_singleton]
+                        tauto
+                      have hy := projectiveCubicInfinityRepair_axis_eq_of_mem hst hR'
+                      refine ⟨s, t, hst, ?_⟩
+                      rw [hy]
+                      ext q
+                      simp only [Finset.mem_insert, Finset.mem_singleton]
+                      tauto
+              | inr z =>
+                  have hyz : y ≠ z := by
+                    intro h
+                    exact hac (congrArg Sum.inr h)
+                  have hR' :
+                      {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                        .inr y, .inr z} ∈
+                        projectiveAxisTwistedCubicRepairHypergraph
+                          (.inl (.inr Unit.unit)) 3 := by
+                    convert hR using 1
+                    ext q
+                    simp only [Finset.mem_insert, Finset.mem_singleton]
+                    tauto
+                  exact (projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem
+                    s hyz hR').elim
+      | inr z =>
+          cases c with
+          | inl x =>
+              cases x with
+              | inr u => exact (hxR (by simp)).elim
+              | inl s =>
+                  have hyz : y ≠ z := by
+                    intro h
+                    exact hab (congrArg Sum.inr h)
+                  have hR' :
+                      {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                        .inr y, .inr z} ∈
+                        projectiveAxisTwistedCubicRepairHypergraph
+                          (.inl (.inr Unit.unit)) 3 := by
+                    convert hR using 1
+                    ext q
+                    simp only [Finset.mem_insert, Finset.mem_singleton]
+                    tauto
+                  exact (projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem
+                    s hyz hR').elim
+          | inr w =>
+              exact (projectiveCubicInfinityRepair_threeAxis_not_mem y z w hR).elim
+
+/-- Exact radius-three repair hypergraph at cubic infinity. -/
+theorem mem_projectiveCubicInfinityRepairHypergraph_iff [CharP 𝔽 3]
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)} :
+    R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3 ↔
+      ∃ s t : 𝔽, s ≠ t ∧
+        R = {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+          .inr (.inl (s + t))} := by
+  constructor
+  · exact projectiveCubicInfinityRepairHypergraph_shape
+  · rintro ⟨s, t, hst, rfl⟩
+    exact projectiveCubicInfinityRepairHelpers_mem hst
 
 /-- Two cubic helpers and one additional axis helper cannot repair an axis target in the
 completed seed. -/

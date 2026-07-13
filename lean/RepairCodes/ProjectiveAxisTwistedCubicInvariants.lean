@@ -13,7 +13,7 @@ at axis infinity.
 
 namespace RepairCodes
 
-open FiniteGeom
+open Finset FiniteGeom
 
 variable {𝔽 : Type*} [Field 𝔽]
 
@@ -502,6 +502,310 @@ theorem minimalProjectiveAxisRepair_invariants [CharP 𝔽 3] (y : 𝔽 ⊕ Unit
               (transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph _ _).symm
           _ = 2 * Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := hnucleus.2
 
+/-- A matching of cubic-infinity repairs consumes two distinct finite cubic coordinates per
+edge. -/
+theorem projectiveCubicInfinityRepair_matching_card_bound [CharP 𝔽 3]
+    {M : Finset (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))}
+    (hM : IsMatching
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) M) :
+    2 * M.card ≤ Fintype.card 𝔽 := by
+  classical
+  let cubicPart (E : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+      Finset (ProjectiveAxisTwistedCubicIndex 𝔽) :=
+    E.filter fun z => ∃ s : 𝔽, z = .inl (.inl s)
+  have hpart (E) (hE : E ∈ M) : (cubicPart E).card = 2 := by
+    obtain ⟨s, t, hst, rfl⟩ :=
+      mem_projectiveCubicInfinityRepairHypergraph_iff.mp (hM.1 hE)
+    rw [show cubicPart
+        {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+          .inr (.inl (s + t))} =
+        {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t)} by
+      ext z
+      rcases z with ((z | z) | z) <;> simp [cubicPart]]
+    simp [hst]
+  have hpairwise :
+      (M : Set (Finset (ProjectiveAxisTwistedCubicIndex 𝔽))).PairwiseDisjoint cubicPart := by
+    intro A hA B hB hAB
+    exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+  have hsub : M.biUnion cubicPart ⊆
+      (univ : Finset 𝔽).map
+        (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding) := by
+    intro z hz
+    obtain ⟨E, hEM, hzE⟩ := Finset.mem_biUnion.mp hz
+    have hzfinite := (Finset.mem_filter.mp hzE).2
+    obtain ⟨s, rfl⟩ := hzfinite
+    simp [affineToProjectiveAxisIndexEmbedding]
+  calc
+    2 * M.card = ∑ E ∈ M, 2 := by simp [Nat.mul_comm]
+    _ = ∑ E ∈ M, (cubicPart E).card := by
+      apply Finset.sum_congr rfl
+      intro E hE
+      exact (hpart E hE).symm
+    _ = (M.biUnion cubicPart).card := (Finset.card_biUnion hpairwise).symm
+    _ ≤ ((univ : Finset 𝔽).map
+        (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding)).card :=
+      Finset.card_le_card hsub
+    _ = Fintype.card 𝔽 := by simp
+
+/-- Cubic-infinity disjoint availability is at most `(q-1)/2`. -/
+theorem projectiveCubicInfinityRepair_matchingNumber_le [CharP 𝔽 3] :
+    matchingNumber
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) ≤
+        (Fintype.card 𝔽 - 1) / 2 := by
+  apply matchingNumber_le_of_forall
+  intro M hM
+  have hbound := projectiveCubicInfinityRepair_matching_card_bound hM
+  have hodd := FiniteField.odd_card_of_char_ne_two (F := 𝔽) (by
+    rw [ringChar.eq 𝔽 3]
+    decide)
+  omega
+
+/-- The consecutive-power rainbow matching on the nonzero finite cubic parameters embeds into
+the completed cubic-infinity repair hypergraph. -/
+theorem projectiveCubicInfinityRepair_matchingNumber_ge_half [CharP 𝔽 3] :
+    (Fintype.card 𝔽 - 1) / 2 ≤
+      matchingNumber
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) := by
+  classical
+  let e : (𝔽ˣ ⊕ 𝔽) ↪ ProjectiveAxisTwistedCubicIndex 𝔽 :=
+    ⟨fun z => match z with
+      | .inl u => .inl (.inl (u : 𝔽))
+      | .inr w => .inr (.inl w),
+    by
+      intro a b hab
+      cases a with
+      | inl u =>
+          cases b with
+          | inl v => exact congrArg Sum.inl (Units.ext (Sum.inl.inj (Sum.inl.inj hab)))
+          | inr w => simp at hab
+      | inr w =>
+          cases b with
+          | inl u => simp at hab
+          | inr z => exact congrArg Sum.inr (Sum.inl.inj (Sum.inr.inj hab))⟩
+  let color : 𝔽ˣ → 𝔽ˣ → 𝔽 := fun u v => (u : 𝔽) + (v : 𝔽)
+  let H := augmentedColorHypergraph color
+  have hsub : embedHypergraph e H ⊆
+      projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3 := by
+    intro E hE
+    obtain ⟨E₀, hE₀, rfl⟩ := Finset.mem_image.mp hE
+    obtain ⟨u, v, huv, rfl⟩ := mem_augmentedColorHypergraph.mp hE₀
+    have huv' : (u : 𝔽) ≠ (v : 𝔽) := fun h => huv (Units.ext h)
+    have hmap : ({Sum.inl u, Sum.inl v, Sum.inr (color u v)} :
+        Finset (𝔽ˣ ⊕ 𝔽)).map e =
+        {(.inl (.inl (u : 𝔽)) : ProjectiveAxisTwistedCubicIndex 𝔽),
+          .inl (.inl (v : 𝔽)), .inr (.inl ((u : 𝔽) + (v : 𝔽)))} := by
+      ext z
+      rcases z with (z | z) <;> simp [e, color]
+    rw [hmap]
+    exact mem_projectiveCubicInfinityRepairHypergraph_iff.mpr
+      ⟨(u : 𝔽), (v : 𝔽), huv', rfl⟩
+  calc
+    (Fintype.card 𝔽 - 1) / 2 = Fintype.card 𝔽ˣ / 2 := by
+      simp [← Nat.card_eq_fintype_card, Nat.card_units]
+    _ ≤ matchingNumber H := units_addColor_matchingNumber_lower
+    _ = matchingNumber (embedHypergraph e H) :=
+      (matchingNumber_embedHypergraph e H).symm
+    _ ≤ matchingNumber
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) :=
+      matchingNumber_mono hsub
+
+/-- Exact disjoint availability at cubic infinity. -/
+theorem projectiveCubicInfinityRepair_matchingNumber [CharP 𝔽 3] :
+    matchingNumber
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) =
+        (Fintype.card 𝔽 - 1) / 2 :=
+  le_antisymm projectiveCubicInfinityRepair_matchingNumber_le
+    projectiveCubicInfinityRepair_matchingNumber_ge_half
+
+/-- All finite cubic coordinates except one form a transversal at cubic infinity. -/
+theorem projectiveCubicInfinityRepair_transversal_of_erase [CharP 𝔽 3] (a₀ : 𝔽) :
+    IsTransversal
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3)
+      ((univ.erase a₀).map
+        (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding)) := by
+  intro E hE
+  obtain ⟨s, t, hst, rfl⟩ :=
+    mem_projectiveCubicInfinityRepairHypergraph_iff.mp hE
+  by_cases hs : s = a₀
+  · subst s
+    exact ⟨.inl (.inl t), by
+      simp [affineToProjectiveAxisIndexEmbedding, hst.symm]⟩
+  · exact ⟨.inl (.inl s), by simp [affineToProjectiveAxisIndexEmbedding, hs]⟩
+
+/-- Every cubic-infinity repair transversal has at least `q-1` vertices. -/
+theorem projectiveCubicInfinityRepair_transversal_card_ge [CharP 𝔽 3]
+    {T : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hT : IsTransversal
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) T) :
+    Fintype.card 𝔽 - 1 ≤ T.card := by
+  classical
+  let covered : Finset 𝔽 := univ.filter fun s =>
+    (.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽) ∈ T
+  let uncovered : Finset 𝔽 := univ \ covered
+  by_cases hU : uncovered = ∅
+  · have hsub : (univ : Finset 𝔽).map
+        (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding) ⊆ T := by
+      intro z hz
+      obtain ⟨s, -, rfl⟩ := Finset.mem_map.mp hz
+      have hsC : s ∈ covered := by
+        by_contra hsC
+        have : s ∈ uncovered := by simp [uncovered, hsC]
+        simp [hU] at this
+      exact (Finset.mem_filter.mp hsC).2
+    have hcard := Finset.card_le_card hsub
+    have hmapcard : ((univ : Finset 𝔽).map
+        (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding)).card =
+        Fintype.card 𝔽 := by simp
+    rw [hmapcard] at hcard
+    omega
+  · obtain ⟨a₀, ha₀⟩ := Finset.nonempty_iff_ne_empty.mpr hU
+    let colors : Finset 𝔽 := (uncovered.erase a₀).image fun b => a₀ + b
+    let axisEmbedding : 𝔽 ↪ ProjectiveAxisTwistedCubicIndex 𝔽 :=
+      ⟨fun w => .inr (.inl w), by intro u v h; exact Sum.inl.inj (Sum.inr.inj h)⟩
+    have hcolorSub : colors.map
+        axisEmbedding ⊆ T := by
+      intro z hz
+      obtain ⟨c, hc, rfl⟩ := Finset.mem_map.mp hz
+      obtain ⟨b, hb, rfl⟩ := Finset.mem_image.mp hc
+      have hba : b ≠ a₀ := (Finset.mem_erase.mp hb).1
+      have hbU : b ∈ uncovered := (Finset.mem_erase.mp hb).2
+      have haT : (.inl (.inl a₀) : ProjectiveAxisTwistedCubicIndex 𝔽) ∉ T := by
+        intro haT
+        have : a₀ ∈ covered := by simp [covered, haT]
+        exact (Finset.mem_sdiff.mp ha₀).2 this
+      have hbT : (.inl (.inl b) : ProjectiveAxisTwistedCubicIndex 𝔽) ∉ T := by
+        intro hbT
+        have : b ∈ covered := by simp [covered, hbT]
+        exact (Finset.mem_sdiff.mp hbU).2 this
+      have hedge :
+          {(.inl (.inl a₀) : ProjectiveAxisTwistedCubicIndex 𝔽),
+            .inl (.inl b), .inr (.inl (a₀ + b))} ∈
+            projectiveAxisTwistedCubicRepairHypergraph (.inl (.inr Unit.unit)) 3 :=
+        mem_projectiveCubicInfinityRepairHypergraph_iff.mpr
+          ⟨a₀, b, hba.symm, rfl⟩
+      obtain ⟨v, hv⟩ := hT hedge
+      simp only [Finset.mem_inter, Finset.mem_insert, Finset.mem_singleton] at hv
+      rcases hv.2 with hv0 | hvb | hvc
+      · exact (haT (hv0 ▸ hv.1)).elim
+      · exact (hbT (hvb ▸ hv.1)).elim
+      · simpa [axisEmbedding, hvc] using hv.1
+    have hcoveredSub : covered.map
+        (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding) ⊆ T := by
+      intro z hz
+      obtain ⟨s, hs, rfl⟩ := Finset.mem_map.mp hz
+      exact (Finset.mem_filter.mp hs).2
+    have hcolorsCard : colors.card = uncovered.card - 1 := by
+      rw [Finset.card_image_iff.mpr]
+      · rw [Finset.card_erase_of_mem ha₀]
+      · intro b hb c hc hEq
+        exact add_left_cancel hEq
+    have hdisj : Disjoint
+        (covered.map (Function.Embedding.inl.trans affineToProjectiveAxisIndexEmbedding))
+        (colors.map axisEmbedding) := by
+      simp [Finset.disjoint_left, affineToProjectiveAxisIndexEmbedding, axisEmbedding]
+    have hunionSub := Finset.union_subset hcoveredSub hcolorSub
+    have hcardCU : covered.card + uncovered.card = Fintype.card 𝔽 := by
+      have hsplit : uncovered.card + covered.card = Fintype.card 𝔽 := by
+        change ((univ : Finset 𝔽) \ covered).card + covered.card = Fintype.card 𝔽
+        have hsplit0 :=
+          Finset.card_sdiff_add_card_eq_card (Finset.filter_subset
+            (fun s : 𝔽 =>
+              (.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽) ∈ T) univ)
+        rw [Finset.card_univ] at hsplit0
+        simpa [covered] using hsplit0
+      omega
+    have hle := Finset.card_le_card hunionSub
+    rw [Finset.card_union_of_disjoint hdisj, Finset.card_map, Finset.card_map,
+      hcolorsCard] at hle
+    omega
+
+/-- Exact transversal number at cubic infinity. -/
+theorem projectiveCubicInfinityRepair_transversalNumber [CharP 𝔽 3] :
+    transversalNumber
+      (projectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) =
+        Fintype.card 𝔽 - 1 := by
+  apply le_antisymm
+  · have hT := projectiveCubicInfinityRepair_transversal_of_erase (𝔽 := 𝔽) 0
+    have hle := transversalNumber_le_card hT
+    simpa using hle
+  · apply le_transversalNumber_of_forall
+    · exact ⟨_, projectiveCubicInfinityRepair_transversal_of_erase (𝔽 := 𝔽) 0⟩
+    · exact fun _ hT => projectiveCubicInfinityRepair_transversal_card_ge hT
+
+/-- Exact inclusion-minimal radius-three repair row at cubic infinity. -/
+theorem minimalProjectiveCubicInfinityRepair_invariants [CharP 𝔽 3] :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) =
+        (Fintype.card 𝔽 - 1) / 2 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inl (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) =
+        Fintype.card 𝔽 - 1 := by
+  constructor
+  · rw [matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph]
+    exact projectiveCubicInfinityRepair_matchingNumber
+  · rw [transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph]
+    exact projectiveCubicInfinityRepair_transversalNumber
+
+/-- Exact uniform radius-three row for every cubic coordinate of the completed seed.  Projective
+completion leaves disjoint availability unchanged from the affine row and raises the minimum
+transversal size by one. -/
+theorem minimalProjectiveCubicRepair_invariants [CharP 𝔽 3]
+    (x : ProjectiveTwistedCubicIndex 𝔽) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl x) 3) =
+        (Fintype.card 𝔽 - 1) / 2 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph (.inl x) 3) =
+        Fintype.card 𝔽 - 1 := by
+  cases x with
+  | inr u => simpa using minimalProjectiveCubicInfinityRepair_invariants (𝔽 := 𝔽)
+  | inl a =>
+      have htarget : projectiveShiftInvIndexEquiv (-a)
+          (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) =
+          .inl (.inr Unit.unit) := by
+        simp [projectiveShiftInvIndexEquiv, projectiveAxisShiftInvEquiv]
+      have hrel := projectiveShiftInv_relabel_repairHypergraph (-a)
+        (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 3
+      rw [htarget] at hrel
+      have hmatchRel := matchingNumber_relabelHypergraph
+        (projectiveShiftInvIndexEquiv (-a))
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 3)
+      have htauRel := transversalNumber_relabelHypergraph
+        (projectiveShiftInvIndexEquiv (-a))
+        (projectiveAxisTwistedCubicRepairHypergraph
+          (.inl (.inl a) : ProjectiveAxisTwistedCubicIndex 𝔽) 3)
+      rw [hrel] at hmatchRel htauRel
+      have hinfinity := minimalProjectiveCubicInfinityRepair_invariants (𝔽 := 𝔽)
+      constructor
+      · rw [matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph]
+        calc
+          matchingNumber (projectiveAxisTwistedCubicRepairHypergraph
+              (.inl (.inl a)) 3) =
+              matchingNumber (projectiveAxisTwistedCubicRepairHypergraph
+                (.inl (.inr Unit.unit)) 3) := hmatchRel.symm
+          _ = matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+                (.inl (.inr Unit.unit)) 3) :=
+              (matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph _ _).symm
+          _ = (Fintype.card 𝔽 - 1) / 2 := hinfinity.1
+      · rw [transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph]
+        calc
+          transversalNumber (projectiveAxisTwistedCubicRepairHypergraph
+              (.inl (.inl a)) 3) =
+              transversalNumber (projectiveAxisTwistedCubicRepairHypergraph
+                (.inl (.inr Unit.unit)) 3) := htauRel.symm
+          _ = transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+                (.inl (.inr Unit.unit)) 3) :=
+              (transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph _ _).symm
+          _ = Fintype.card 𝔽 - 1 := hinfinity.2
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
@@ -515,5 +819,9 @@ theorem minimalProjectiveAxisRepair_invariants [CharP 𝔽 3] (y : 𝔽 ⊕ Unit
 #print axioms minimalProjectiveAxisInfinityRepair_invariants
 #print axioms projectiveShiftInv_relabel_repairHypergraph
 #print axioms minimalProjectiveAxisRepair_invariants
+#print axioms mem_projectiveCubicInfinityRepairHypergraph_iff
+#print axioms projectiveCubicInfinityRepair_matchingNumber
+#print axioms projectiveCubicInfinityRepair_transversalNumber
+#print axioms minimalProjectiveCubicRepair_invariants
 
 end RepairCodes

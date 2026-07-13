@@ -289,6 +289,42 @@ theorem projectiveTwoCubicTwoAxis_linearIndependent [CharP 𝔽 3]
       fin_cases i <;> simp [hs₀, hs₁, hs₂, hs₃])).2 hli
   · exact (hxy (by congr)).elim
 
+set_option maxHeartbeats 800000 in
+/-- Cubic infinity together with three distinct finite cubic points is linearly independent. -/
+theorem cubicInfinityThreeFinite_linearIndependent {s t u : 𝔽}
+    (hst : s ≠ t) (hsu : s ≠ u) (htu : t ≠ u) :
+    LinearIndependent 𝔽 ![
+      projectiveTwistedCubicPoints 𝔽 (.inr Unit.unit),
+      projectiveTwistedCubicPoints 𝔽 (.inl s),
+      projectiveTwistedCubicPoints 𝔽 (.inl t),
+      projectiveTwistedCubicPoints 𝔽 (.inl u)] := by
+  rw [Fintype.linearIndependent_iff]
+  intro g hrel
+  let v : Fin 3 → 𝔽 := ![s, t, u]
+  have hv : Function.Injective v := by
+    intro i j hij
+    fin_cases i <;> fin_cases j <;> simp_all [v]
+  let c : Fin 3 → 𝔽 := ![g 1, g 2, g 3]
+  have hrel3 : ∑ i : Fin 3, c i • momentCurve 3 (v i) = 0 := by
+    funext j
+    have hj := congrFun hrel j.castSucc
+    simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at hj ⊢
+    fin_cases j <;>
+      simpa [Fin.sum_univ_four, Fin.sum_univ_three, c, v,
+        projectiveTwistedCubicPoints, momentCurve] using hj
+  have hc := (Fintype.linearIndependent_iff.mp
+    (momentCurve_linearIndependent_of_card_le hv (by decide))) c hrel3
+  have hg₁ : g 1 = 0 := hc 0
+  have hg₂ : g 2 = 0 := hc 1
+  have hg₃ : g 3 = 0 := hc 2
+  have h₃ := congrFun hrel (3 : Fin 4)
+  simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at h₃
+  simp [Fin.sum_univ_four, projectiveTwistedCubicPoints, momentCurve, hg₁, hg₂, hg₃]
+    at h₃
+  have hg₀ : g 0 = 0 := h₃
+  intro i
+  fin_cases i <;> assumption
+
 /-- The axis point `s+t` gives a dependent four-family with `s,t`, and cubic infinity. -/
 theorem twoFiniteCubicInfinityAxis_dependent (s t : 𝔽) :
     ¬ LinearIndependent 𝔽
@@ -394,5 +430,6 @@ theorem twoFiniteCubicInfinityAxis_isFourCircuit [CharP 𝔽 3] {s t : 𝔽} (hs
 #print axioms projectiveTwoCubicAxis_linearIndependent
 #print axioms projectiveOneCubicTwoAxis_linearIndependent
 #print axioms projectiveTwoCubicTwoAxis_linearIndependent
+#print axioms cubicInfinityThreeFinite_linearIndependent
 
 end FiniteGeom
