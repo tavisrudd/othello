@@ -26,6 +26,19 @@ the live execution map. Session history belongs in
 - Method-negativity means only that no fixed-point-free mirror of the classified type exists; it
   does not determine the game's P/N outcome.
 
+## Claim impact of the adversarial review
+
+No Lean theorem or computed game outcome was removed or weakened. The review narrowed two prose
+headlines to the proved scope:
+
+- The parabolic and Hermitian rows exclude all linear involutions and the coordinate-Frobenius
+  Baer case, not yet every semilinear involution.
+- The categorical prose claim that every Baer involution fixes a board point was replaced by the
+  formal coordinate theorem plus an explicit open conjugacy/descent obligation.
+- The parabolic conclusion now says “no linear fixed-point-free involution” until C87 closes.
+- The hyperbolic `Q⁺` P theorem is unchanged. The elliptic `Q⁻` claim was already conjectural and
+  remains so. No P/N headline changes: these are mirror-method boundary statements only.
+
 ## Landed formal core
 
 | Result | Lean location | Status |
@@ -85,8 +98,34 @@ For each closed task:
 
 ## Next step
 
-Develop a matrix-level nonabelian Hilbert-90 lemma: from `A · τ(A) = cI`, first prove `τ(c)=c`,
-normalize `c` using finite-field norm surjectivity, and then construct `B` with the normalized
-cocycle `A' = B⁻¹τ(B)` (up to the chosen convention). Lift this to projective conjugacy and use the
-existing transfer theorem. Keep both full negative rows unpromoted until the parabolic form-descent
-lemma is also formal.
+Close the remaining blockers in this order:
+
+1. **General Baer-semilinear conjugacy (C87).** Normalize a representative `Aτ` with
+   `A·τ(A)=cI` to a genuine semilinear involution using `τ(c)=c`, identification of the Frobenius
+   fixed field, and finite-field norm surjectivity. Prefer a constructive descent proof over a
+   cohomological import: for an involutive `τ`-semilinear map `S` and `β≠τ(β)`, both `v+S(v)` and
+   `βv+S(βv)` are fixed, and the invertible two-by-two coefficient matrix shows that fixed vectors
+   span the whole space over the extension field. Extract a basis of fixed vectors; its basis
+   matrix conjugates `S` to coordinate Frobenius. Then apply the landed projective conjugacy
+   transfer theorem. The main Lean API question is extracting a basis contained in a spanning set
+   that is only a base-field subspace, not an extension-field submodule.
+2. **Parabolic form descent (C87).** First formalize the semisimilitude version: after the preceding
+   conjugacy, assume
+   `Q(τv)=μ·τ(Q(v))`; applying it twice gives `Norm(μ)=1`, scalar Hilbert 90 normalizes `Q`, and
+   its values on base-coordinate vectors descend to a base-field quadratic form. Feed that form to
+   the landed descended-quadric intersection theorem. To recover the headline for the full
+   projective board stabilizer, separately prove that a collineation preserving a nondegenerate
+   parabolic zero locus is a semisimilitude. The recommended concrete proof is to put the form in a
+   standard Witt basis and recover all coefficients from isotropic test vectors, avoiding a large
+   algebraic-geometry dependency.
+3. **Elliptic `Q⁻` transfer (C88).** Do not build the Lean proof around the desired negative verdict
+   before checking the classification. Put a nonsplit representative in the standard
+   `2×2` block form for multiplication by `√c`, solve the symmetric-matrix similitude equation for
+   both possible multipliers, and compute the determinant square class of every nondegenerate
+   solution. Verify the resulting parity/type formula for small odd fields and several `m`, then
+   formalize it. A direct block-matrix/discriminant proof is preferred; use the equivalent
+   Hermitian/Scharlau-transfer formulation only if it materially shortens the determinant
+   calculation. The result may be an exclusion or an exact countercase, and C88 must report either.
+
+Keep both full parabolic/Hermitian negative rows unpromoted until items 1–2 close, and keep `Q⁻`
+conjectural until item 3 determines the complete classification.
