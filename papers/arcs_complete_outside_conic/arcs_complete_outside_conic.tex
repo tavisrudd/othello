@@ -67,7 +67,9 @@ lower bound, yield
  \qquad 8\le\rhoC(16)\le9.
 \]
 A supplementary verifier enumerates the relevant projective planes and
-checks every incidence claim used for these finite examples.
+checks every incidence claim used for these finite examples.  A companion
+Lean formalization proves the elementary theorem chain and checks the same
+witnesses through a rules-only certificate bridge.
 \end{abstract}
 
 \section{Introduction}
@@ -627,6 +629,18 @@ q&|A|&\binom{|A|}{2}&q^2-|A|&\IC(A)&\max_{x\notin A}r(x)\\ \hline
 \end{array}
 \]
 
+The row at $q=11$ has a stronger geometric interpretation.  Since
+$\IC(A)=0$, none of the 15 secants meets $\cC$: every secant of the witness
+is exterior to the conic.  If $N_i$ denotes the number of required points
+of index $i$, relative completeness and the maximum-index bound give only
+$i=1,2,3$, while the two moment equations give
+\[
+ N_1+N_2+N_3=115,\qquad
+ N_1+2N_2+3N_3=150,\qquad
+ N_2+3N_3=45.
+\]
+Consequently $(N_1,N_2,N_3)=(90,15,10)$.
+
 The supplementary Python program
 \texttt{verify\_relative\_conic\_arcs.py} performs exact finite-field
 arithmetic and, for each witness:
@@ -648,6 +662,18 @@ Its SHA-256 digest is
 \end{center}
 The verifier is deliberately simpler than a search program: it certifies the
 listed upper-bound witnesses but makes no claim about search completeness.
+
+The companion Lean library \texttt{lean/RelativeConicArcs/} formalizes the
+incidence, defect, conic, asymptotic, averaging, and nucleus arguments.  Its
+generic Boolean checker inspects conic disjointness, the arc condition, and
+coverage of the canonical projective representatives
+$[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a proved normalization and soundness
+theorem transports acceptance to relative completeness.  The concrete
+checks use kernel reduction rather than \texttt{native\_decide}.  The trust
+manifest \texttt{lean/RelativeConicArcs/TRUST.md} records the verifier hash,
+the theorem map, and axiom profiles.  In particular, the finite results do
+not depend on the external Kim--Vu input used for the conditional asymptotic
+upper bound.
 
 \section{Further questions}
 

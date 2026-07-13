@@ -70,12 +70,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    parabolic and Hermitian modeled branches are method-negative; the proposed elliptic `Q⁻`
    exclusion was false and its standard coordinate family is P by an fpf mirror. Final map:
    [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
-5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
-   incidence foundation through C93's explicit
-   `rhoC(q) ≥ sqrt(2q)+3/2−8/sqrt(2q)` and asymptotic wrappers are Lean-proved;
-   **C94 projective averaging is next**. Then formalize nucleus results and certified examples.
-   Live map:
-   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+5. **Arcs complete outside a conic formalization — C89–C96 [REPORTED 2026-07-12].** Independent
+   spinoff lane closed: the defect, conic, asymptotic, averaging, nucleus, and certified-example
+   packages are Lean-proved under the strict trust gate. Final map:
+   [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 ## Open tasks
 
@@ -86,50 +84,52 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   vocabulary, maximal relative completion, attained `rho`, coordinate order `q`, and the exact
   `Arc ↔ ProjectiveCap.Projective.Cap` bridge are Lean-proved. Build is warning-free; headline
   axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C90 [REPORTED 2026-07-12] — classical secant moments.** Literal unordered endpoint pairs,
   canonical pair lines, and pairwise-disjoint endpoint fibers prove `r_A(x)≤⌊|A|/2⌋`; finite
   double counts prove `Σr=C(k,2)(q−1)` and `ΣC(r,2)=3C(k,4)`. The warning-free target builds and
   headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C91 [REPORTED 2026-07-12] — prescribed-hole defect identity.** The split moments give the exact
   integer-normalized defect identity. Maximum-index bounds prove nonnegativity, coverage/uncovered
   inequalities, the equality criterion, and quantitative stability. The warning-free target builds;
   headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C92 [REPORTED 2026-07-12] — conic specialization and finite lower bounds.** The Veronese conic
   is exactly `XZ=Y²` with `q+1` points; nonsingular conics are explicit projective images and have
   invariant `rhoC`. Abstract `q+1`-hole specialization, parity capacities, and
   `L1(q) ≤ L2(q) ≤ rhoC(q)` are Lean-proved. The warning-free target builds; headline axioms are
   `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C93 [REPORTED 2026-07-12] — additive `3/2` asymptotic.** The parity-free cubic inequality gives
   the explicit bound `rhoC(q)≥sqrt(2q)+3/2−8/sqrt(2q)`. The shortfall is
   `O(1/sqrt(2q))`; operational and literal liminf statements are formalized over indexed families
   of actual finite fields. The warning-free target builds; headline axioms are
   `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C94 [REPORTED 2026-07-12] — projective averaging transfer.** Finite transitive-action averaging
   gives a disjoint projective image for every ordinary complete arc of size at most `q`, proving
   `rhoC(q)≤t2(2,q)` when `t2(2,q)≤q`. The Kim–Vu input is an explicit named hypothesis, not an
   axiom; the warning-free target and axiom audit pass. Track in
-  the [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  the [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C95 [REPORTED 2026-07-12] — even-characteristic nucleus constraints.** The standard conic plus
   `[0:1:0]` is a hyperoval in characteristic two, giving the exact tangent classification and both
   nucleus-in/nucleus-out count, parity, incidence, and corrected-bound packages. The warning-free
   build and strict axiom audit pass. Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C96 [OPEN] — certified small examples and trust audit.** Add a rules-only checker and frozen
-  data for `q=8,9,11,16`; prove the reported values/bounds and audit all headline theorem axioms.
-  Track in the
-  [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+- **C96 [REPORTED 2026-07-12] — certified small examples and trust audit.** A generic rules-only
+  checker reduces coverage to `q²+q+1` canonical representatives and proves accepted raw data
+  semantically complete outside the conic. Frozen kernel checks prove `rhoC=6` at `q=8,9,11` and
+  `8≤rhoC≤9` at `q=16`; the warning-free build, provenance, isolation, forbidden-token, and axiom
+  audits pass. Track in the
+  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C97 [BLOCKED — POST-GATE] — synchronize the full Nofil paper and paper registry.** After the
   flagship formalization and adequacy gates close, update the complete manuscript, theorem/trust

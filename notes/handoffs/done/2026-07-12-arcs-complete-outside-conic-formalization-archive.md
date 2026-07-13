@@ -160,3 +160,33 @@ closed-negative proof routes belong here.
   completed successfully with 3057 jobs and no source warnings. Forbidden-token and import-isolation
   scans passed. The hyperoval, tangent classification, parity, both constraint packages, and both
   corrected inequalities audit to `[propext, Classical.choice, Quot.sound]`.
+
+## 2026-07-12 — C96 certified examples and end-to-end trust audit landed
+
+- Added explicit computational models of `GF(8)`, `GF(9)`, and `GF(16)` with the manuscript's
+  polynomial-basis encodings. All field laws are discharged by kernel `decide`.
+- Added a field-generic raw-coordinate checker for conic disjointness, the arc condition, and
+  relative coverage. A normalization theorem proves it is enough to inspect the canonical charts
+  `[1:y:z]`, `[0:1:z]`, and `[0:0:1]`; `check_sound` transports acceptance to semantic
+  `CompleteOutside`, and `rhoC_le_length_of_check` does not assume normalized or distinct data.
+- Copied the four witness lists verbatim from the manuscript verifier. The `q=16` certificate was
+  split into disjointness, arc, four affine coverage chunks, tail coverage, and aggregates to keep
+  kernel reduction within memory limits. The `q=8,9,11` checks and every split `q=16` leaf pass.
+- Proved exact arithmetic thresholds `L2(8)=L2(9)=L2(11)=6` and `L2(16)=8`, then combined them
+  with the checked witnesses to prove `rhoC=6` over the explicit fields of orders 8, 9, and 11 and
+  `8≤rhoC≤9` over `GF(16)`.
+- Re-ran the source verifier at SHA-256
+  `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`; its four output rows
+  match the frozen trust manifest. The standalone `RelativeConicArcs` aggregate builds without
+  warnings. Forbidden-token and reverse-import scans pass. The certificate bridge, arithmetic
+  thresholds, and final numerical results all audit to `[propext, Classical.choice, Quot.sound]`.
+- Final consequence review separated formal facts from novelty claims. Besides the generic
+  certificate strengthenings, the declarations immediately yield a cap-game localization reading
+  of `CompleteOutside`, field-isomorphism and arbitrary-hole checker extensions are cheap next
+  targets, and the `q=11` witness's `I_C=0` gives an exterior-secant design with forced required
+  index distribution `(N₁,N₂,N₃)=(90,15,10)`. The latter interpretation warrants a focused
+  literature check before any novelty claim.
+- Synchronized the manuscript abstract and finite-example discussion, proof audit, package README,
+  and `papers/papers-index.md` with the completed strict-trust Lean package. The paper now spells out
+  the `q=11` exterior-secant consequence and distinguishes it from a novelty claim. Rebuilt
+  `arcs_complete_outside_conic.pdf` successfully with Tectonic.

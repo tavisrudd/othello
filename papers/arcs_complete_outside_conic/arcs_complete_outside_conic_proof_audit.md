@@ -28,9 +28,28 @@ arc condition, relative coverage, and both classical moment equations.
 The lower bounds for these orders are analytic. No exhaustive nonexistence
 search is used in the paper.
 
+For the (q=11) witness, the verified value (I_C=0) implies that all 15
+secants are exterior to the conic. Completeness, the maximum index three, and
+the two moment equations then force the required-point index counts
+((N_1,N_2,N_3)=(90,15,10)).
+
 Verifier SHA-256:
 
 `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`
+
+## Lean formalization
+
+The standalone `lean/RelativeConicArcs/` package formalizes the elementary theorem chain and the
+four finite certificates. Its generic Boolean checker verifies conic disjointness, the arc
+condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`
+proves that acceptance implies semantic relative completeness. The accepted coordinate list need
+not be normalized or duplicate-free.
+
+The aggregate builds without warnings. The source contains no `sorry`, `admit`, custom axiom, or
+`native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
+exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
+theorem map, provenance, and trust boundary. The Kim--Vu input remains an explicit named theorem
+hypothesis and is not used by the finite results.
 
 ## Claims intentionally omitted
 

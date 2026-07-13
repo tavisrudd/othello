@@ -23,7 +23,7 @@ dihedral bundles the D₂ₘ family, continuation is N1-only, coding is conditio
 | `baer-equivariant-extension`  | Equivariant extensions of Galois-invariant arcs over finite fields | Theorem-package plan; audit SOFTEN             |
 | `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Theorem-package plan; swing (may fold into Baer) |
 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
-| `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds) | Self-contained manuscript (LaTeX + PDF + verifier); near submission-ready — *related but separate* |
+| `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds) | Self-contained manuscript + verifier + strict-trust Lean formalization; near submission-ready — *related but separate* |
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base.
@@ -43,8 +43,8 @@ and share the `lean/FiniteGeom/` base.
 
 ## Manuscript state at a glance
 
-- **Complete LaTeX manuscript (+ PDF + verifier):** `arcs_complete_outside_conic` — near
-  submission-ready.
+- **Complete LaTeX manuscript (+ PDF + verifier + Lean package):**
+  `arcs_complete_outside_conic` — near submission-ready.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
@@ -62,7 +62,8 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
 - **Formalized, `sorry`-clean:** the pairing/mirror geometry outcomes (`lean/ProjectiveCap/`,
   `lean/CapGame/`); the dihedral reduction + V₄→K₄ core (`lean/DihedralSchreier/`); the
   completion δ_x = τ identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
-  (`lean/RepairCodes/`).
+  (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
+  (`lean/RelativeConicArcs/`).
 - **Planned, not built:** `BaerExtension`, `CompletionCore`, `ContinuationRigidity` libraries
   (see `../notes/handoffs/2026-07-11-lean-formalization-plan.md`).
 - **One exception to the axiom-clean bar:** a single `native_decide` in
@@ -73,8 +74,9 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   `native_decide` was benchmarked and rejected to keep the axiom profile clean).
 - **Release gate:** every lemma/proof must be Lean-formalized to the full `lean/TRUST.md` standard —
   `sorry`-free, `#print axioms` clean (no `sorryAx`/`native_decide`), statements adequate to the
-  claim, with a trust-chain note — before its paper is published. So these planned libraries, plus a
-  new one for the arcs paper and the dihedral paper-level theorems, are release-blocking.
+  claim, with a trust-chain note — before its paper is published. The arcs-paper library is now
+  complete; the remaining planned libraries and the dihedral paper-level theorems are
+  release-blocking for their respective papers.
   Computational enumerations (queens, S₄/A₅ nimbers, ρ_𝒞 values) follow the `getK` pattern: a
   Lean-proved recurrence + a differential-tested reproducible solver, not `native_decide`. See
   `papers-planning.md` → *Authorship, provenance & reception*.
@@ -116,11 +118,11 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-burnside-phi    | Burnside invariant Φ_T                   | Φ_T : A(G) ⊗ F₂ → (ℕ₀, ⊕) homomorphism             | dihedral            | paper §11 Prop 11.1 |
 | comp-s4-nimbers     | S₄ regular-template nimbers              | all four generating-triple classes 𝒢 = 0           | dihedral (App. A)   | solver `rust/scripts/nodekayles_cayley.rs` |
 | comp-a5-nimbers     | A₅ regular-template nimbers              | 𝒢=1 for (2,3,5),(2,5,5); 𝒢=0 otherwise             | dihedral (App. A)   | solver `rust/scripts/nodekayles_cayley.rs` |
-| thm-defect-identity | Prescribed-hole defect identity          | exact secant-index defect remainder identity       | arcs                | paper §3 (Thm, `thm:defect`) |
-| thm-rho-lower       | ρ_𝒞(q) asymptotic lower bound            | ρ_𝒞(q) ≥ √(2q) + 3/2 − O(q^(−1/2))                 | arcs                | paper §4 (Thm, `thm:asymptotic`) |
-| thm-rho-transfer    | Averaging upper-bound transfer           | ρ_𝒞(q) ≤ t₂(2,q) when t₂(2,q) ≤ q                  | arcs                | paper §5 (Thm, `thm:transfer`) |
-| lem-nucleus         | Even-char nucleus constraints            | nucleus in/out arc: tangent & parity laws          | arcs                | paper §6 |
-| comp-rho-small      | ρ_𝒞 small values                         | ρ_𝒞(8)=ρ_𝒞(9)=ρ_𝒞(11)=6; 8 ≤ ρ_𝒞(16) ≤ 9           | arcs                | paper §7 + verifier `verify_relative_conic_arcs.py` |
+| thm-defect-identity | Prescribed-hole defect identity          | exact secant-index defect remainder identity       | arcs                | paper §3; lean `RelativeConicArcs/Defect.lean:214` `scaledDefect_eq_remainders` |
+| thm-rho-lower       | ρ_𝒞(q) asymptotic lower bound            | ρ_𝒞(q) ≥ √(2q) + 3/2 − O(q^(−1/2))                 | arcs                | paper §4; lean `RelativeConicArcs/Asymptotic.lean:275` `rhoC_explicit_additive_lower_bound` |
+| thm-rho-transfer    | Averaging upper-bound transfer           | ρ_𝒞(q) ≤ t₂(2,q) when t₂(2,q) ≤ q                  | arcs                | paper §5; lean `RelativeConicArcs/Averaging.lean:267` `rhoC_le_t2` |
+| lem-nucleus         | Even-char nucleus constraints            | nucleus in/out arc: tangent & parity laws          | arcs                | paper §6; lean `RelativeConicArcs/Nucleus.lean:475` `nucleus_mem_arc_constraints`, `:505` `nucleus_not_mem_arc_constraints` |
+| comp-rho-small      | ρ_𝒞 small values                         | ρ_𝒞(8)=ρ_𝒞(9)=ρ_𝒞(11)=6; 8 ≤ ρ_𝒞(16) ≤ 9           | arcs                | paper §7 + verifier; lean `RelativeConicArcs/Results.lean:72`–`:90` |
 | thm-baer-criterion  | Orbit-valued extension criterion         | Galois conjugate-pair arc-extension test           | baer                | note (Thm 3.1) [plan; Lean Phase 4] |
 | thm-baer-saturation | √2·s orbit-saturation bound              | = classical Lunelli–Sce √(2q) (softened)           | baer                | note (Cor 3.4) |
 | thm-completion-tau  | δ(C) = τ                                 | completion distance = circuit-transversal number   | completion          | lean `FiniteGeom/Completion.lean:78` `completionDistance_eq_transversalNumber` |

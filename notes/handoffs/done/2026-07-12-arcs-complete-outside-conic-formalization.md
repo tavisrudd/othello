@@ -1,13 +1,13 @@
 # Handoff: arcs complete outside a conic — Lean formalization
 
 **Date:** 2026-07-12
-**Status:** IN PROGRESS
+**Status:** COMPLETE
 **Tasks:** C89–C96
 
 ## Goal
 
 Formalize the mathematical results of
-[`papers/arcs_complete_outside_conic/`](../../papers/arcs_complete_outside_conic/) in a standalone
+[`papers/arcs_complete_outside_conic/`](../../../papers/arcs_complete_outside_conic/) in a standalone
 Lean library under `lean/RelativeConicArcs/`. The delivered formalization should expose the exact
 prescribed-hole defect identity, its finite and asymptotic consequences, projective averaging,
 the characteristic-two nucleus constraints, and certificate-checked small examples with an
@@ -15,16 +15,16 @@ explicit trust boundary.
 
 This is a spinoff of the projective-cap program, not a new dependency of it. Session history belongs
 in
-[`done/2026-07-12-arcs-complete-outside-conic-formalization-archive.md`](done/2026-07-12-arcs-complete-outside-conic-formalization-archive.md).
+[`2026-07-12-arcs-complete-outside-conic-formalization-archive.md`](2026-07-12-arcs-complete-outside-conic-formalization-archive.md).
 
 ## Sources and theorem inventory
 
 The manuscript and its proof audit are the statement-level sources of truth:
 
-- [`README.md`](../../papers/arcs_complete_outside_conic/README.md)
-- [`arcs_complete_outside_conic.tex`](../../papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex)
-- [`arcs_complete_outside_conic_proof_audit.md`](../../papers/arcs_complete_outside_conic/arcs_complete_outside_conic_proof_audit.md)
-- [`lean/TRUST.md`](../../lean/TRUST.md) for the repository's kernel/audit posture
+- [`README.md`](../../../papers/arcs_complete_outside_conic/README.md)
+- [`arcs_complete_outside_conic.tex`](../../../papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex)
+- [`arcs_complete_outside_conic_proof_audit.md`](../../../papers/arcs_complete_outside_conic/arcs_complete_outside_conic_proof_audit.md)
+- [`lean/TRUST.md`](../../../lean/TRUST.md) for the repository's kernel/audit posture
 
 The formalization covers:
 
@@ -71,7 +71,7 @@ global axiom.
 | `Asymptotic.lean` | Parity-free necessary inequality, an explicit quantitative lower bound, then Big-O and liminf corollaries. |
 | `Averaging.lean` | Finite transitive-action averaging lemma, `GL(3,q)`/projective instantiation, and complete-arc transfer. |
 | `Nucleus.lean` | Standard even-field nucleus/tangent facts and the two nucleus incidence propositions. |
-| `Certificate.lean`, `CertData/`, `Examples.lean` | Rules-only witness checker, generated witness data for `q=8,9,11,16`, exact `L2` arithmetic, and final small-order theorem. |
+| `FiniteFields.lean`, `Certificate.lean`, `Examples.lean`, `ExampleChecks/`, `Results.lean` | Explicit small fields, rules-only generic witness checker, frozen witness data and split checks for `q=8,9,11,16`, exact `L2` arithmetic, and final small-order theorems. |
 | `TRUST.md` | Theorem manifest, printed axiom profiles, conditional external inputs, and certificate provenance. |
 
 The exact file split may be compressed when adjacent modules remain small, but the abstraction,
@@ -104,8 +104,12 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | `rhoC(q) ≤ t2(2,q)` when `t2(2,q) ≤ q`; named Kim--Vu hypothesis interface and transfer | `RelativeConicArcs/Averaging.lean` | Lean-proved, conditional input explicit |
 | in characteristic two, the standard conic plus `[0:1:0]` is a hyperoval; tangents are exactly the lines through the nucleus | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
 | nucleus-in and nucleus-out tangent counts, conic-incidence lower bounds/parity, and corrected inequalities | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
+| generic raw-coordinate checker, canonical projective normalization, and semantic certificate bridge | `RelativeConicArcs/Certificate.lean` | Lean-proved for every finite field |
+| explicit `GF(8)`, `GF(9)`, and `GF(16)` models with kernel-checked field laws | `RelativeConicArcs/FiniteFields.lean` | Lean-proved |
+| frozen witnesses and split kernel checks at `q=8,9,11,16` | `RelativeConicArcs/Examples.lean`, `RelativeConicArcs/ExampleChecks/` | Lean-proved |
+| `L2(8)=L2(9)=L2(11)=6`, `L2(16)=8`; exact `rhoC` at 8, 9, 11 and bounds `8≤rhoC(16)≤9` | `RelativeConicArcs/Results.lean` | Lean-proved |
 
-The standalone `RelativeConicArcs` target builds without warnings. The C89–C95 headline axiom profiles
+The standalone `RelativeConicArcs` target builds without warnings. The C89–C96 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
 `admit`, or custom axioms. Existing Lean targets do not import the spinoff.
 
@@ -120,7 +124,42 @@ are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `
 | **C93 [REPORTED 2026-07-12]** | Derive the parity-free inequality and formalize the additive `3/2` asymptotic, first as an explicit error bound and then as the manuscript's Big-O/liminf statements along prime powers. | C92 | Analytic headline theorem landed with explicit constant `8`. |
 | **C94 [REPORTED 2026-07-12]** | Prove the finite transitive-action averaging lemma, instantiate projective transport, and prove `rhoC(q) ≤ t2(2,q)` under `t2(2,q) ≤ q`; expose Kim–Vu only as a cited named hypothesis. | C89, C92 | Upper-bound transfer landed with the external input represented by `KimVuBound`, not an axiom. |
 | **C95 [REPORTED 2026-07-12]** | In even characteristic, prove the standard conic's nucleus/tangent incidence facts and both nucleus-in/nucleus-out propositions, including parity and corrected inequalities. | C89, C92 | Characteristic-two structural section landed, with `(2 : K) = 0` explicit. |
-| **C96** | Build a no-`native_decide` rules-only certificate checker; import/regenerate the four manuscript witnesses; prove `rhoC(8)=rhoC(9)=rhoC(11)=6` and `8≤rhoC(16)≤9`; complete the theorem manifest and trust audit. | C92; independent witness work can begin after C89 | Closes the finite examples and the end-to-end paper audit. |
+| **C96 [REPORTED 2026-07-12]** | Build a no-`native_decide` rules-only certificate checker; import/regenerate the four manuscript witnesses; prove `rhoC(8)=rhoC(9)=rhoC(11)=6` and `8≤rhoC(16)≤9`; complete the theorem manifest and trust audit. | C92; independent witness work can begin after C89 | Finite examples and the end-to-end paper audit landed. |
+
+## Discovery track for final review
+
+Keep a running classification of consequences noticed during C96, and return to it after the trust
+audit: proved corollaries, cheap formal extensions, genuine paper strengthenings, applications, and
+speculative directions must be distinguished explicitly.
+
+- **Proved strengthening:** certificate coverage needs only the canonical representatives
+  `[1:y:z]`, `[0:1:z]`, and `[0:0:1]` (`q²+q+1` cases); a generic normalization theorem transports
+  this check to every nonzero coordinate representative.
+- **Proved reusable corollary:** any accepted raw-vector certificate over any finite field gives
+  `rhoC ≤ witness.length`, without requiring normalized, duplicate-free, or projectively distinct
+  input data.
+- **Proved but not separately named:** conic normalization transports the four numerical results
+  from the standard conic to every represented nonsingular conic over the same field. The general
+  finite transitive-action lemma and the abstract fact that every line meets a `(q+2)`-arc in zero
+  or two points are also reusable independently of this conic problem.
+- **Cheap application corollary:** `CompleteOutside A H`, together with the existing
+  `Arc ↔ ProjectiveCap.Projective.Cap` bridge, says that after occupying `A` in the projective cap
+  game every legal extension is confined to `H`. Thus the conic case is directly a conic-residual
+  localization gadget; this should be exposed as a named bridge theorem if the game program uses
+  it.
+- **Cheap formal extensions:** prove invariance under finite-field isomorphism so the small results
+  quantify over every field of the stated order; factor the checker through an arbitrary
+  projectively invariant decidable hole predicate; and add exact point-set cardinality when the
+  input list is pairwise projectively distinct.
+- **Concrete surprise / literature-audit candidate:** the `q=11` witness has `I_C=0`, hence all 15
+  secants are exterior to the conic. The two moment equations then force the required-point index
+  distribution to be exactly 90 points of index 1, 15 of index 2, and 10 of index 3. The manuscript
+  records `I_C=0` but does not draw out this external-secant design interpretation; formalizing and
+  checking its prior art is a focused follow-on.
+- **Novelty boundary:** the localization corollary and the `q=11` design interpretation are logical
+  consequences, not priority claims. Field-isomorphism transport and the arbitrary-hole checker
+  are engineering/generalization opportunities. Any assertion that these are new requires a
+  targeted literature audit.
 
 ## Dependency and attack order
 
@@ -171,8 +210,8 @@ For each closed task:
 
 ## Next step
 
-Begin C96 by designing the rules-only certificate checker and semantic bridge from accepted
-coordinate data to `CompleteOutside`. Import the manuscript witnesses for `q=8,9,11,16`, freeze and
-record their provenance, build generated leaves before aggregates, and combine them with exact
-`L2` arithmetic to prove the reported values and bounds. Finish with the standalone theorem
-manifest and trust audit; do not use `native_decide`.
+The formalization lane is closed. Optional follow-ons, in descending cost-effectiveness, are the
+named cap-game localization bridge, field-isomorphism transport of the small results, a Lean theorem
+capturing the `q=11` exterior-secant/index distribution, and the broader theorem-mining/literature
+review tracked separately as C98. The unresolved mathematical headline remains the exact value of
+`rhoC(16)`.

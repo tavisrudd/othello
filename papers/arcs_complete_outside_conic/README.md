@@ -4,7 +4,8 @@
 and verified examples.* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled
-PDF, a proof/claim audit, and an independent verifier (SHA-256 stamped). Related to the
+PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a completed strict-trust
+Lean formalization under [`lean/RelativeConicArcs/`](../../lean/RelativeConicArcs/). Related to the
 projective-cap program but **separate**: it draws only on classical index equations, not on the
 game machinery.
 
@@ -19,6 +20,15 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
 - even-characteristic nucleus constraints;
 - verified small values: ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6, 8 ≤ ρ_𝒞(16) ≤ 9.
 
+The Lean package proves the elementary theorem chain, the conic/projective transport statements,
+and a semantic bridge from a generic rules-only coordinate checker to relative completeness. Its
+finite checks use kernel `decide`, never `native_decide`; the theorem and axiom manifest is
+[`lean/RelativeConicArcs/TRUST.md`](../../lean/RelativeConicArcs/TRUST.md).
+
+**Small-order structural note.** The `q=11` witness has `I_C=0`, so all 15 of its secants are
+exterior to the conic. The moment equations force its 115 required points to have index distribution
+`(N₁,N₂,N₃)=(90,15,10)`. This is a consequence of the certified data, not a novelty claim.
+
 **Novelty posture (self-stated):** a targeted search did not locate the relative-completeness
 definition or the exact defect identity in this form; the note explicitly disclaims a priority
 certificate (proofs are elementary consequences of classical index equations).
@@ -28,6 +38,7 @@ certificate (proofs are elementary consequences of classical index equations).
 - `arcs_complete_outside_conic.tex` / `.pdf` — the manuscript
 - `arcs_complete_outside_conic_proof_audit.md` — proof/claim audit
 - `verify_relative_conic_arcs.py` / `verify_relative_conic_arcs_output.txt` — the verifier + run
+- `../../lean/RelativeConicArcs/` — standalone Lean formalization and kernel-checked certificates
 
 ## Related but separate
 
