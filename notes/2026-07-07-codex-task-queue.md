@@ -144,15 +144,12 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   `[propext, Classical.choice, Quot.sound]`. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
-- **C87 [ACTIVE 2026-07-12, AXIOM-BACKED] — Baer-semilinear obstruction.** Constructive fixed-vector
-  spanning, fixed-basis extraction, Frobenius fixed-field identification, scalar normalization,
-  and projective conjugacy now classify every modeled square-scalar Baer representative; this also
-  closes the full Hermitian Baer representative branch. Scalar Hilbert 90, fixed-value quadratic
-  descent, and the coordinate parabolic semisimilitude obstruction are also formal. The final
-  zero-locus route is packaged conditionally behind a quarantined literature axiom. Strict open
-  core: discharge zero-locus stabilizer → semisimilitude for a nondegenerate parabolic quadric;
-  standard-Witt-form coefficient rigidity looks cheap, but arbitrary-form normalization is not yet
-  present in Mathlib. Track in the
+- **C87 [REPORTED 2026-07-12] — Baer-semilinear obstruction.** Constructive projective conjugacy,
+  scalar Hilbert 90, fixed-value quadratic descent, semilinear pullback untwisting, and a
+  coordinate-free null-cone rigidity theorem close the modeled square-scalar Baer branches for
+  both Hermitian and parabolic boards. The parabolic theorem accepts projective board preservation
+  directly. The imported stabilizer axiom was deleted; focused and aggregate builds pass, and every
+  load-bearing theorem has axiom profile `[propext, Classical.choice, Quot.sound]`. Track in the
   [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 
 - **C88 [OPEN] — elliptic `Q⁻` boundary classification.** Develop the Witt/Scharlau-transfer

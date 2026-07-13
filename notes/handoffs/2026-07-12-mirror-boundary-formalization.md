@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-12
 **Status:** IN PROGRESS
-**Tasks:** C85–C86 [REPORTED 2026-07-12]; C87 [ACTIVE, AXIOM-BACKED]; C88 [OPEN]
+**Tasks:** C85–C87 [REPORTED 2026-07-12]; C88 [OPEN]
 
 ## Goal
 
@@ -28,15 +28,15 @@ the live execution map. Session history belongs in
 
 ## Claim impact of the adversarial review
 
-No Lean theorem or computed game outcome was removed or weakened. The review narrowed two prose
-headlines to the proved scope:
+No Lean theorem or computed game outcome was removed or weakened. The review initially narrowed
+two prose headlines to their then-proved scope; C87 has since restored the parabolic headline for
+the modeled square-scalar Baer-semilinear branch:
 
-- The parabolic row excludes all linear involutions and the coordinate-Frobenius Baer case, not
-  yet every semilinear board stabilizer. The Hermitian row now excludes every modeled
-  square-scalar Baer-semilinear representative as well as every linear representative.
-- The categorical prose claim that every Baer involution fixes a board point was replaced by the
-  formal coordinate theorem plus an explicit open conjugacy/descent obligation.
-- The parabolic conclusion now says “no linear fixed-point-free involution” until C87 closes.
+- The parabolic and Hermitian rows exclude every modeled linear or square-scalar Baer-semilinear
+  representative. The parabolic proof now accepts projective board preservation directly and has
+  no imported classification axiom.
+- The categorical prose claim about every Baer involution remains scoped to the formal model:
+  relative-Frobenius semilinear representatives whose square is a nonzero scalar.
 - The hyperbolic `Q⁺` P theorem is unchanged. The elliptic `Q⁻` claim was already conjectural and
   remains so. No P/N headline changes: these are mirror-method boundary statements only.
 
@@ -57,34 +57,28 @@ headlines to the proved scope:
 | finite Hermitian forms in dimension at least two are isotropic | `ProjectiveCap/FiniteHermitian.lean` | Lean-proved (C86) |
 | Hermitian split scalar-square route is not fixed-point-free | `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C86) |
 | Hermitian nonsplit similitude scalar is impossible | `ProjectiveCap/FiniteHermitian.lean`, `ProjectiveCap/MirrorBoundary.lean` | Lean-proved (C86) |
-| coordinate relative Frobenius induces a projective involution fixing every base-coordinate point | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
-| descended parabolic quadratic form meets the coordinate-Frobenius fixed subgeometry | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial; descent is an explicit hypothesis) |
-| every Hermitian form in vector dimension at least three meets the coordinate-Frobenius fixed subgeometry | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial; base quadratic restriction constructed internally) |
-| board fixed points transfer through a supplied projective conjugacy | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
-| every square-scalar relative-Frobenius semilinear representative is projectively conjugate to coordinate Frobenius | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
-| every Hermitian board in vector dimension at least three meets every modeled Baer-semilinear projective involution | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87 partial) |
-| scalar Hilbert-90 normalization and fixed-value quadratic-form descent | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87 partial) |
-| coordinate-Frobenius quadratic semisimilitude fixes a quadric point in dimension at least three | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87 partial) |
-| odd-characteristic nondegenerate quadric zero-locus stabilizer gives a semisimilitude | `ProjectiveCap/BaerQuadraticStabilizerAssumption.lean` | Imported literature axiom; not strict Lean-proved |
-| coordinate-Frobenius zero-locus preservation rules out fixed-point-freeness | `ProjectiveCap/BaerQuadraticStabilizer.lean` | Conditional on the quarantined axiom |
+| coordinate relative Frobenius, general square-scalar conjugacy, and Hermitian Baer intersection | `ProjectiveCap/BaerSemilinear.lean` | Lean-proved (C87) |
+| scalar Hilbert-90 normalization and fixed-value quadratic-form descent | `ProjectiveCap/BaerQuadraticDescent.lean` | Lean-proved (C87) |
+| semilinear conjugate pullback is an ordinary quadratic form | `ProjectiveCap/BaerQuadraticUntwist.lean` | Lean-proved (C87) |
+| nondegenerate quadratic forms with the same null cone are proportional in vector dimension at least five | `ProjectiveCap/QuadraticNullCone.lean` | Lean-proved (C87) |
+| every modeled Baer-semilinear parabolic board stabilizer is not fixed-point-free in vector dimension at least five | `ProjectiveCap/BaerQuadraticStabilizer.lean` | Lean-proved (C87) |
 
-Current source audit: no `sorry` or `native_decide`. The strict local lemmas retain axiom profile
-`[propext, Classical.choice, Quot.sound]`; the two new conditional parabolic theorems additionally
-depend on `exists_semisimilitudeMultiplier_of_preserves_zeroLocus`.
+Current source audit: no `sorry`, `native_decide`, or project axiom in the C87 modules. Every new
+load-bearing theorem has axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
 
 ## Open work packages
 
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
-| **C87** | Discharge the quarantined parabolic stabilizer axiom. General square-scalar Baer conjugacy, scalar semisimilitude normalization, fixed-value quadratic descent, and the full Hermitian Baer representative branch are formal; the final zero-locus route is now packaged conditionally. | The coordinate obstruction and axiom-backed consequence are landed. A strict proof still needs zero-locus rigidity, most cheaply in a standard Witt model, plus transport from an arbitrary parabolic form. | Removes the imported axiom and promotes the parabolic semilinear branch to strict Lean-proved; the Hermitian representative branches are already complete. |
-| **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure; C87 if semilinear elements are included in the final theorem. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
+| **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure and, for semilinear elements, the closed C87 conjugacy/rigidity package. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
+
+C87 is closed by a coordinate-free null-cone rigidity proof; its internal C87a–d work-package
+history is recorded in the companion archive.
 
 ## Dependency and attack order
 
-C85–C86 are closed; their quadratic and Hermitian infrastructure is available to later tasks.
-Proceed with **C87** by discharging the quarantined parabolic zero-locus-stabilizer axiom. The general
-semilinear normal form, fixed-subgeometry conjugacy, Hermitian intersection, scalar normalization,
-and coordinate quadratic-form descent are landed. Attempt C88 only after this bridge is complete.
+C85–C87 are closed; their quadratic, Hermitian, semilinear-conjugacy, descent, and null-cone
+rigidity infrastructure is available to C88.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -104,25 +98,14 @@ For each closed task:
 
 ## Next step
 
-Close the remaining blockers in this order:
+Close **C88, elliptic `Q⁻` transfer**. Do not build the Lean proof around the desired negative verdict
+before checking the classification. Put a nonsplit representative in the standard `2×2` block
+form for multiplication by `√c`, solve the symmetric-matrix similitude equation for both possible
+multipliers, and compute the determinant square class of every nondegenerate solution. Verify the
+resulting parity/type formula for small odd fields and several `m`, then formalize it. A direct
+block-matrix/discriminant proof is preferred; use the equivalent Hermitian/Scharlau-transfer
+formulation only if it materially shortens the determinant calculation. The result may be an
+exclusion or an exact countercase, and C88 must report either.
 
-1. **Parabolic stabilizer bridge (C87).** The literature theorem is quarantined as an axiom and its
-   conditional consequence is formal. The cheap local route is coefficient rigidity for the
-   standard Witt form `d z² + Σ xᵢyᵢ`: totally singular coordinate subspaces kill pure terms,
-   mixed isotropic test vectors kill off-diagonal and `z`-linear terms, and two-pair cancellations
-   equate the remaining diagonal coefficients. The expensive residue is transport: Mathlib has
-   weighted-squares diagonalization but no located parabolic Witt-normal-form theorem. Either prove
-   that normalization, or replace the coefficient route with a general polarity/tangent-hyperplane
-   argument. Do not promote the row while the imported axiom remains in its printed profile.
-2. **Elliptic `Q⁻` transfer (C88).** Do not build the Lean proof around the desired negative verdict
-   before checking the classification. Put a nonsplit representative in the standard
-   `2×2` block form for multiplication by `√c`, solve the symmetric-matrix similitude equation for
-   both possible multipliers, and compute the determinant square class of every nondegenerate
-   solution. Verify the resulting parity/type formula for small odd fields and several `m`, then
-   formalize it. A direct block-matrix/discriminant proof is preferred; use the equivalent
-   Hermitian/Scharlau-transfer formulation only if it materially shortens the determinant
-   calculation. The result may be an exclusion or an exact countercase, and C88 must report either.
-
-Keep the full parabolic negative row unpromoted until item 1 closes, and keep `Q⁻` conjectural until
-item 2 determines the complete classification. The constructive conjugacy route and the full
-Hermitian Baer representative branch are closed paths; their proof details belong in the archive.
+Keep `Q⁻` conjectural until C88 determines the complete classification. The parabolic and
+Hermitian Baer representative branches are closed paths; their proof details belong in the archive.

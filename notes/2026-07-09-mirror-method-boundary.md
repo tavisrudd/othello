@@ -27,14 +27,14 @@ cap games over odd `q`:
 
 1. **Hyperbolic quadrics `Q⁺(2m−1,q)` admit an fpf mirror** (for every `m ≥ 2`).  → P.  *(C48,
    fully proven: the elliptic block similitude `(aᵢ,bᵢ)↦(δ·bᵢ,aᵢ)`, `δ` nonsquare.)*
-2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`): linear fpf involutions are excluded; the
-   coordinate-Baer zero-locus conclusion is axiom-backed and the strict full semilinear exclusion
-   remains open.**
-   *[FORMAL LINEAR CLASSIFICATION + CONDITIONAL COORDINATE-BAER CASE]* Both linear branches are Lean-proved
+2. **Parabolic quadrics `Q(2m,q)` (`m ≥ 2`): all modeled linear and Baer-semilinear
+   representative branches are excluded.**
+   *[FORMAL LINEAR + BAER-SEMILINEAR REPRESENTATIVE CLASSIFICATION]* Both linear branches are Lean-proved
    in `ProjectiveCap.MirrorBoundary`: finite quadratic isotropy plus the scalar-square eigenspace
    decomposition excludes the split route, and determinant parity excludes the nonsplit route.
-   The coordinate conclusion is derived from a quarantined import of the standard theorem that a
-   nondegenerate quadric zero-locus stabilizer is a semisimilitude. Discharging that axiom remains C87.
+   `BaerQuadraticUntwist`, `QuadraticNullCone`, and `BaerQuadraticStabilizer` prove that every
+   modeled square-scalar relative-Frobenius projective board stabilizer has a quadric fixed point,
+   with no imported classification axiom.
 3. **Hermitian varieties `H(k,q²)` (`k ≥ 2`): all modeled linear and Baer-semilinear
    representative branches are excluded.**
    *[FORMAL LINEAR + BAER-SEMILINEAR REPRESENTATIVE CLASSIFICATION]* `FiniteHermitian` and
@@ -62,10 +62,11 @@ only when `q` is a square).
 space, extracts a fixed basis, and conjugates the map to coordinate relative Frobenius. For a
 projective representative with `S²=cI`, it proves `c` Frobenius-fixed, descends `c` to the base
 field, and normalizes by finite-field norm surjectivity before applying the fixed-basis theorem.
-Every Hermitian form meets the resulting fixed Baer subgeometry. A descended quadratic form in
-dimension at least three does too. For parabolic boards, the semisimilitude equation from
-preservation of the projective zero locus is currently quarantined as an imported literature axiom;
-all scalar normalization and quadratic-form descent after that equation are Lean-proved.
+Every Hermitian form meets the resulting fixed Baer subgeometry. For quadratic boards, Lean
+untwists the semilinear pullback into an ordinary quadratic form and proves coordinate-free that
+two quadratic forms with the same null cone are proportional when one is nondegenerate and the
+vector dimension is at least five. The resulting semisimilitude, scalar normalization, descent,
+and conjugacy transport yield a fixed board point directly from projective board preservation.
 
 **Linear case (i)** splits on whether `c` is a square:
 
@@ -122,12 +123,8 @@ the elliptic block map leaves `Q⁻(5,3)`.
 The Lean reductions now certify the complete linear parabolic and Hermitian classifications:
 finite quadratic and Hermitian isotropy exclude their split routes, determinant parity excludes
 the parabolic nonsplit route, and norm-square reflection excludes the Hermitian nonsplit route.
-Completing rows 2–4 still requires:
-
-1. discharge the quarantined axiom that a semilinear collineation preserving a nondegenerate
-   parabolic projective zero locus acts as a semisimilitude of its quadratic form. Multiplier norm-one, scalar Hilbert-90
-   normalization, base-field form descent, and the resulting fixed point are already Lean-proved;
-2. for `Q⁻`, the Witt/Scharlau-transfer classification below.
+Rows 2–3 are complete for the formal linear and square-scalar relative-Frobenius models. Completing
+row 4 still requires the `Q⁻` Witt/Scharlau-transfer classification below.
 
 Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
 Route: a nonsplit order-2 similitude corresponds (self-adjoint `√c`, Scharlau transfer) to an
@@ -142,9 +139,8 @@ transfer lemma is the way.)  This is a clean, bounded lemma; it does not gate an
 
 This is the candidate "separating mirror obstructions from outcomes" classification of the
 harvest. The proved positive family is hyperbolic; parabolic and Hermitian exclusions are formal
-for linear collineations; the Hermitian Baer representative branch is formal, while the parabolic
-Baer conclusion is conditional on one quarantined stabilizer axiom, and the elliptic exclusion is
-conjectural. Its
+for linear collineations and the modeled square-scalar Baer-semilinear representatives, while the
+elliptic exclusion is conjectural. Its
 silence on these boards concerns the method, not the game values. Positioning stays conservative: the mechanism is the
 standard pairing/copycat ingredient; the contribution is the exact incidence-geometric boundary.
 

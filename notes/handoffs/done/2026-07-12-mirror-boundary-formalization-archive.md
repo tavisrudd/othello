@@ -166,3 +166,34 @@ closed-negative proof routes belong here.
     tightening.
   - Source contains the one intentional quarantined `axiom`; no `sorry` or `native_decide` was
     introduced.
+
+## 2026-07-12 — C87 strict parabolic closure reported
+
+- Replaced and deleted `ProjectiveCap/BaerQuadraticStabilizerAssumption.lean`; the temporary
+  literature axiom no longer occurs in the import graph.
+- Added `ProjectiveCap/BaerQuadraticUntwist.lean`. For a relative-Frobenius semilinear map `S`, it
+  packages `v ↦ conj (Q (S v))` as an ordinary quadratic form and converts proportionality of that
+  form to the required semisimilitude multiplier.
+- Added `ProjectiveCap/QuadraticNullCone.lean`. The proof constructs a normalized hyperbolic pair,
+  proves that isotropic vectors span, splits off the pair, and shows its orthogonal complement is
+  nondegenerate of dimension at least three. Applying isotropic spanning in the complement kills
+  all cross terms and proves coordinate-free that any quadratic form with the same null cone as a
+  nondegenerate form is a nonzero scalar multiple in vector dimension at least five. This avoids a
+  Witt-normal-form dependency and is uniform over odd finite fields, including `𝔽₃`.
+- Reworked `ProjectiveCap/BaerQuadraticStabilizer.lean` to derive the semisimilitude locally, feed it
+  through the already-proved descent obstruction, and transport the fixed point through the
+  general projective conjugacy. The final
+  `parabolic_baer_boardStabilizer_not_fixedPointFree` theorem takes projective board preservation
+  directly, so no vector/projective zero-locus equivalence is left implicit.
+- C87a–d all close: semilinear untwisting, null-cone rigidity, arbitrary-form transport, axiom
+  deletion, and strict audit. The modeled parabolic and Hermitian square-scalar Baer-semilinear
+  branches are now Lean-proved. C88 is the only remaining mirror-boundary math package.
+- Validation:
+  - `nix develop --command lake build ProjectiveCap.QuadraticNullCone` — PASS (`1908` jobs).
+  - `nix develop --command lake build ProjectiveCap.BaerQuadraticStabilizer` — PASS (`3008` jobs).
+  - `nix develop --command lake build ProjectiveCap` — PASS (`8662` jobs), including the final
+    projective-interface wrapper.
+  - Axiom audit of the normalized pair, isotropic spanning, complement, null-cone rigidity,
+    untwisting, semisimilitude, coordinate obstruction, full conjugacy transport, and projective
+    board-stabilizer theorem: exactly `[propext, Classical.choice, Quot.sound]`.
+  - Source search over the three C87 files: no `sorry`, `native_decide`, or `axiom` declaration.
