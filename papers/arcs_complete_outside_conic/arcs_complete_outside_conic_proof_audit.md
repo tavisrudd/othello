@@ -25,8 +25,32 @@ The supplementary verifier checks explicit upper-bound witnesses for
 \(q=8,9,11,16\). It enumerates the whole projective plane, checks the conic,
 arc condition, relative coverage, and both classical moment equations.
 
-The lower bounds for these orders are analytic. No exhaustive nonexistence
-search is used in the paper.
+The lower bounds for \(q=8,9,11\), and the preliminary lower bound eight at
+\(q=16\), are analytic. The exact value \(\rho_C(16)=9\) additionally uses an
+exhaustive projective classification of eight-arcs.  The source
+`search_rhoc16.cpp` reports 2633 frame-normalized classes.  Its Lean output
+does not trust canonical labels: each augmentation is checked by an explicit
+invertible projective matrix and pointwise scalar equalities.  At every leaf,
+kernel-checked ordinary-uncovered points either give a full-rank six-row
+quadratic evaluation matrix (2630 leaves), or force the unique rank-five
+quadratic to hit the arc (three leaves).  The semantic proof transports this
+rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
+
+The total of 2633 projective eight-arc classes is not a new classification
+claim: it independently reproduces Theorem 3.8.1 of Al-Seraji--Al-Ogali
+(2018). The additional computation partitions those known ordinary classes
+by a different invariant: 2630 full-rank ordinary-uncovered quadratic
+evaluation systems and three rank-five systems forced to meet the arc.
+
+The manuscript now isolates the underlying linear-algebra argument as the
+general uncovered-evaluation obstruction: injective evaluation on the
+uncovered locus, or a selected evaluation functional in the span of the
+uncovered evaluations, excludes a zero locus that contains the former and
+avoids the latter. The quadratic certificate is its degree-two instance.
+The displayed factorizations of the two singular exceptional forms and the
+seven-point incidence of the nonsingular exception are direct `GF(16)`
+arithmetic descriptions; classification completeness does not depend on
+them.
 
 For the (q=11) witness, the verified value (I_C=0) implies that all 15
 secants are exterior to the conic. Completeness, the maximum index three, and
@@ -43,6 +67,9 @@ Verifier SHA-256:
 
 `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`
 
+The exact-search report is frozen separately as `search_rhoc16_output.txt`;
+the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
+
 ## Lean formalization
 
 The standalone `lean/RelativeConicArcs/` package formalizes the elementary theorem chain and the
@@ -51,20 +78,31 @@ condition, and coverage on the (q^2+q+1) canonical projective representatives; `
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.
 
-The aggregate builds without warnings. The source contains no `sorry`, `admit`, custom axiom, or
+The aggregate builds successfully. The source contains no `sorry`, `admit`, custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
 exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
 theorem map, provenance, and trust boundary. The Kim--Vu input remains an explicit named theorem
 hypothesis and is not used by the finite results.
 
+Three adversarial controls exercise distinct trust layers: changing a leaf member breaks its local
+rejection proof, changing a projective transition scalar breaks the row proof, and omitting the
+last parent book breaks the aggregate `StepBooksValid` coverage equality. Each mutation was
+rejected by Lean and the restored sources rebuilt through the final result registry.
+
 ## Claims intentionally omitted
 
 - No claim that the classical first two index equations are new.
 - No claimed association-scheme or spectral theorem.
-- No claim that a lower bound on the conic-incidence term can settle
-  \(\rho_C(16)=8\) versus \(9\); the paper proves that this route is too weak.
+- No claim that a lower bound on the conic-incidence term alone settles the
+exact \(q=16\) value; the paper proves that this route is too weak and uses
+  the independent uncovered-quadratic-rank obstruction instead.
 - No exact values for orders whose witnesses were not independently included
   and checked in the supplementary verifier.
-- The remaining `rho_C(16) in {8,9}` dichotomy is assigned to C101; closing it requires either a
-  checked eight-point construction or a checked exhaustive eight-point nonexistence certificate.
 - No unconditional novelty certification for the parameter itself.
+- No claim that the 2633-class ordinary eight-arc enumeration is new.
+- No claim that the general evaluation lemma, or the use of quadrics and
+  evaluation conditions in arc theory, is new.
+- No unconditional priority claim for the uncovered-locus quadratic
+  obstruction, its `2630+3` profile, or the exact relative value. A targeted
+  comparison found no predecessor, but it is not an exhaustive priority
+  certificate; see `notes/2026-07-13-rhoc16-novelty-check.md`.

@@ -64,7 +64,7 @@ characteristic.  Directly checkable witnesses, combined with the analytic
 lower bound, yield
 \[
  \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
- \qquad 8\le\rhoC(16)\le9.
+ \qquad \rhoC(16)=9.
 \]
 A supplementary verifier enumerates the relevant projective planes and
 checks every incidence claim used for these finite examples.  A companion
@@ -113,7 +113,10 @@ need not be an arc and has no prescribed exceptional locus.  An
 almost-complete subset of a conic, in the sense of
 Bartoli--Davydov--Marcugini--Pambianco~\cite{BartoliEtAl2018}, consists of
 selected points \emph{on} the conic whose chords cover the complementary
-points.  Here the selected arc is required to avoid the conic.
+points.  Ng--Wild's arcs covering a line~\cite{NgWild2001} prescribe a
+one-dimensional set that must be covered, rather than an exceptional set
+that may remain uncovered.  Here the selected arc is required to avoid the
+conic.
 
 The point index with respect to an arc, and the first two double-counting
 equations for its distribution, are classical; compare
@@ -133,11 +136,13 @@ used to control overlap have an exact remainder.  This produces:
       verifiable from explicit coordinates.
 \end{enumerate}
 
-A targeted literature search did not locate Definition~\ref{def:relative}
-or the exact defect identity below in this form.  This observation is not a
-priority certificate: the proofs are elementary consequences of classical
-index equations, and terminology involving relative saturation or holes may
-occur elsewhere.
+A targeted literature search across complete and saturating arcs,
+almost-complete conic subsets, prescribed-line coverage, arcs and quadrics,
+and the published classification of arcs in $\PG(2,16)$ did not locate
+Definition~\ref{def:relative} or the exact defect identity below in this
+form.  This observation is not a priority certificate: the proofs are
+elementary consequences of classical index equations, and terminology
+involving relative saturation or holes may occur elsewhere.
 
 \section{The classical secant equations}
 \label{sec:classical}
@@ -580,16 +585,51 @@ These two cases are useful structural reductions, but
 Remark~\ref{rem:scale} limits what the incidence term alone can accomplish.
 For example, at $(q,k)=(16,8)$ inequality~\eqref{eq:conic-complete} would
 be contradicted only by $\IC(A)>268$, whereas the universal upper bound is
-$\IC(A)\le56$.  Thus deciding whether $\rhoC(16)$ is eight or nine requires
+$\IC(A)\le56$.  Thus the exact determination of $\rhoC(16)$ below requires
 information beyond a lower bound on $\IC(A)$ inserted into the present
 inequality.
 
 \section{Verified finite-field examples}
 \label{sec:examples}
 
-The following proposition uses no exhaustive nonexistence search.  Every
-lower bound follows from $L_2(q)$; every upper bound is supplied by explicit
-coordinates checked by a short independent verifier.
+The values at $q=8,9,11$ use the lower bound $L_2(q)$ and explicit
+coordinates.  At $q=16$, the same ingredients give $8\le\rhoC(16)\le9$;
+a checked projective classification excludes eight.
+
+The algebraic rejection used in that classification is an instance of the
+following elementary linear-algebra observation.  Linear systems of
+quadrics containing arcs are an established tool; see Glynn~\cite{Glynn1994}
+and Ball~\cite{Ball2017Quadrics}.  Fix nonzero vector representatives of the
+projective points under consideration.  If $V$ is a finite-dimensional
+linear system of homogeneous forms, write
+$\operatorname{ev}_x\in V^*$ for evaluation at the representative of $x$.
+The zero or nonzero status of this evaluation is independent of the chosen
+representative.
+
+\begin{lemma}[Uncovered evaluation obstruction]
+\label{lem:evaluation-obstruction}
+Let $A$ and $U$ be finite sets of projective points.  There is no nonzero
+$f\in V$ such that $U\subseteq Z(f)$ and $A\cap Z(f)=\varnothing$ if either
+of the following holds:
+\begin{enumerate}
+ \item the evaluation map
+ $f\mapsto(\operatorname{ev}_u(f))_{u\in U}$ is injective;
+ \item for some $a\in A$, the functional $\operatorname{ev}_a$ belongs to
+ the span of $\{\operatorname{ev}_u:u\in U\}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+If $f$ vanishes on $U$, injectivity in the first case gives $f=0$.  In the
+second case, applying a spanning relation for $\operatorname{ev}_a$ to $f$
+gives $f(a)=0$, contrary to $A\cap Z(f)=\varnothing$.
+\end{proof}
+
+For the full system of degree-$d$ forms, the evaluation functionals are the
+degree-$d$ Veronese images of the points, up to nonzero scalar.  Thus the
+first alternative says that the uncovered Veronese images span the dual
+coefficient space; the second supplies a selected Veronese image already in
+their span.  This formulation is not specific to conics.
 
 \begin{proposition}\label{prop:small-values}
 For the standard conic
@@ -604,7 +644,7 @@ in the indicated projective planes,
  \qquad
  \rhoC(11)=6,
  \qquad
- 8\le\rhoC(16)\le9.
+ \rhoC(16)=9.
 \]
 \end{proposition}
 
@@ -616,7 +656,59 @@ Equation~\eqref{eq:L2} gives
 \]
 Appendix~\ref{app:witnesses} lists $\cC$-complete arcs of sizes six, six,
 six, and nine, respectively.  Their verification is described below.
+It remains to exclude a $\cC$-complete eight-arc over $\F_{16}$.
+
+Any four points of an eight-arc form a projective frame.  Normalizing this
+frame and applying canonical augmentation gives respectively
+$4$, $61$, $454$, and $2633$ projective classes at sizes five through eight
+(from $182$, $532$, $5155$, and $21495$ legal extensions).  Every retained
+transition is certified by an invertible $3\times3$ matrix together with
+pointwise projective scalar equalities, so the classification does not trust
+the canonical-labeling program.  The final count of $2633$ projective
+eight-arc classes independently reproduces Theorem~3.8.1 of
+Al-Seraji--Al-Ogali~\cite{AlSerajiAlOgali2018}; the classification count
+itself is therefore not new.
+
+For an eight-arc $A$, let $U(A)$ be the points outside $A$ that lie on no
+secant of $A$.  If $A$ is complete outside a nonsingular conic $\cC$, then
+$U(A)\subseteq\cC$.  A conic has a nonzero homogeneous quadratic equation,
+and evaluation at a point is a linear condition on its six coefficients.
+For $2630$ of the classified leaves, six points of $U(A)$ give an invertible
+$6\times6$ evaluation matrix, giving the first alternative of
+Lemma~\ref{lem:evaluation-obstruction}.  In each of
+the remaining three leaves the evaluation rows have rank five, but an
+explicit linear combination places the evaluation functional of a point of
+$A$ in their span, giving the second alternative.  The companion Lean
+formalization checks these local certificates and proves their semantic
+transport to arbitrary eight-arcs and arbitrary nonsingular conics.  Hence
+no such eight-arc is $\cC$-complete, while the displayed nine-point witness
+proves the upper bound.  The published ordinary classification records arc
+counts, stabilizers, secant-index distributions, and conic-contained classes;
+we did not find this uncovered-locus rank split or the resulting relative-
+conic nonexistence theorem tabulated there.
 \end{proof}
+
+\begin{remark}[Anatomy of the three exceptional leaves]
+Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
+coefficient order $(X^2,Y^2,Z^2,XY,XZ,YZ)$, the one-dimensional kernels of
+the three exceptional evaluation matrices are generated by
+\[
+ (1,1,1,1,1,0),\qquad (0,0,0,5,4,1),\qquad (2,1,1,5,5,1).
+\]
+The first and third forms split over $\F_{16}$ as
+\[
+ (X+6Y+6Z)(X+7Y+7Z)
+ \quad\hbox{and}\quad
+ 2(X+4Y+15Z)(X+15Y+4Z),
+\]
+respectively, and each union of lines contains two selected points.  The
+middle form is nonsingular and contains seven of the eight selected points.
+Thus the exceptional leaves are not merely unexplained rank defects: two are
+reducible quadratic configurations, while the third is an arc differing by
+one point from a seven-point subset of a conic.  These descriptions follow
+by direct field arithmetic and are not used to establish classification
+completeness.
+\end{remark}
 
 For reference, the verified incidence statistics are
 \[
@@ -649,9 +741,12 @@ a witness point.  The resulting $12$-vertex, $30$-edge, $5$-regular conflict
 graph is the icosahedral graph.  Its antipodal involution is fixed-point-free,
 preserves adjacency, and pairs only nonadjacent vertices, so the usual
 copycat strategy makes the corresponding independent-set building position
-a P-position.  The companion Lean development checks the determinant-defined
-graph and applies a general proved mirror theorem.  This observation is a
-consequence of the displayed witness, not a novelty claim.
+a P-position.  The companion Lean development checks every seeded continuation,
+proves an exact recursive localization from the projective cap game to this
+independent-set game, and hence proves that the displayed six-point projective
+position itself is P.  It also checks that the displayed $q=9$ six-arc covers
+every projective point, including the conic, so that position is terminal P.
+These observations are consequences of the displayed witnesses, not novelty claims.
 \end{remark}
 
 The supplementary Python program
@@ -676,6 +771,18 @@ Its SHA-256 digest is
 The verifier is deliberately simpler than a search program: it certifies the
 listed upper-bound witnesses but makes no claim about search completeness.
 
+The separate exact-classification generator
+\texttt{search\_rhoc16.cpp} has SHA-256 digest
+\begin{center}
+\texttt{589af8430e94b4c9c23ce895e6d32d2b3b5b9b387b1fb23ed6d3875cdee39031}.
+\end{center}
+Its frozen report \texttt{search\_rhoc16\_output.txt} has digest
+\begin{center}
+\texttt{6989079b5cb64b0e57d5c42b872093fff99f861300b8fbb909daef450c15cc63}.
+\end{center}
+The generator emits local Lean certificates; its own assertions and
+canonical labels are not part of the trusted proof boundary.
+
 The companion Lean library \texttt{lean/RelativeConicArcs/} formalizes the
 incidence, defect, conic, asymptotic, averaging, and nucleus arguments.  Its
 generic Boolean checker inspects conic disjointness, the arc condition, and
@@ -693,11 +800,9 @@ upper bound.
 The elementary theory leaves several concrete problems.
 
 \begin{problem}
-Determine $\rhoC(16)$.  Proposition~\ref{prop:small-values} leaves only the
-possibilities eight and nine.  The exact-value proof obligation is either an
-eight-point checked construction or a checked exhaustive nonexistence
-certificate for eight points; it is tracked separately from the completed
-theorem chain.
+Determine whether the uncovered-quadratic-rank obstruction used at $q=16$
+extends to other even orders or gives useful lower bounds on the size of a
+$\cC$-complete arc beyond the scalar defect inequality.
 \end{problem}
 
 \begin{problem}
@@ -775,11 +880,25 @@ encoding.  A witness of size nine is
 
 \begin{thebibliography}{99}
 
+\bibitem{AlSerajiAlOgali2018}
+N.~A.~M. Al-Seraji and R.~A.~B. Al-Ogali,
+\newblock Classification of arcs in finite projective plane of order sixteen,
+\newblock \emph{Al-Mustansiriyah Journal of Science} \textbf{29}(1) (2018),
+138--149.
+\newblock doi:10.23851/mjs.v29i1.184.
+
 \bibitem{Ball1997}
 S.~Ball,
 \newblock On small complete arcs in a finite plane,
 \newblock \emph{Discrete Mathematics} \textbf{174} (1997), 29--34.
 \newblock doi:10.1016/S0012-365X(96)00315-9.
+
+\bibitem{Ball2017Quadrics}
+S.~Ball,
+\newblock On arcs and quadrics,
+\newblock in \emph{Arithmetic of Finite Fields---WAIFI 2016}, Lecture Notes
+in Computer Science \textbf{10064}, Springer, 2017, 95--102.
+\newblock doi:10.1007/978-3-319-55227-9\_7.
 
 \bibitem{BartoliEtAl2018}
 D.~Bartoli, A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
@@ -788,6 +907,12 @@ $\PG(2,q)$ and extendability of Reed--Solomon codes,
 \newblock \emph{Problems of Information Transmission} \textbf{54} (2018),
 101--115.
 \newblock doi:10.1134/S0032946018020011.
+
+\bibitem{Glynn1994}
+D.~G. Glynn,
+\newblock On the construction of arcs using quadrics,
+\newblock \emph{Australasian Journal of Combinatorics} \textbf{9} (1994),
+3--19.
 
 \bibitem{Hirschfeld1998}
 J.~W.~P.~Hirschfeld,
@@ -805,6 +930,11 @@ Z.~L.~Nagy,
 \newblock Saturating sets in projective planes and hypergraph covers,
 \newblock \emph{Discrete Mathematics} \textbf{341} (2018), 1078--1083.
 \newblock doi:10.1016/j.disc.2018.01.011.
+
+\bibitem{NgWild2001}
+S.-L. Ng and P.~R. Wild,
+\newblock On $k$-arcs covering a line in finite projective planes,
+\newblock \emph{Ars Combinatoria} \textbf{58} (2001), 289--300.
 
 \end{thebibliography}
 

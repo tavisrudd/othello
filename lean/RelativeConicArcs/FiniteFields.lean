@@ -132,7 +132,21 @@ namespace GF16
 
 def ofNat (n : Nat) : GF16 := ⟨⟨n % 16, Nat.mod_lt _ (by decide)⟩⟩
 def add (a b : GF16) : GF16 := ofNat (a.val ^^^ b.val)
-def mul (a b : GF16) : GF16 := ofNat (reduceBinary (carryless a.val b.val 4) 4 19)
+/-- Four-bit carryless multiplication, unrolled so large kernel-checked certificates do not
+repeatedly interpret list folds. -/
+def carryless4 (a b : Nat) : Nat :=
+  (if b.testBit 0 then a else 0) ^^^
+  (if b.testBit 1 then a <<< 1 else 0) ^^^
+  (if b.testBit 2 then a <<< 2 else 0) ^^^
+  (if b.testBit 3 then a <<< 3 else 0)
+
+/-- Reduction modulo `x⁴+x+1`, from the highest possible bit down. -/
+def reduce4 (r : Nat) : Nat :=
+  let r := if r.testBit 6 then r ^^^ (19 <<< 2) else r
+  let r := if r.testBit 5 then r ^^^ (19 <<< 1) else r
+  if r.testBit 4 then r ^^^ 19 else r
+
+def mul (a b : GF16) : GF16 := ofNat (reduce4 (carryless4 a.val b.val))
 def inv (a : GF16) : GF16 :=
   ⟨![0, 1, 9, 14, 13, 11, 7, 6, 15, 2, 12, 5, 10, 4, 3, 8] a.val⟩
 

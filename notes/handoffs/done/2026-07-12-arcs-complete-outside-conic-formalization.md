@@ -107,7 +107,7 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | generic raw-coordinate checker, canonical projective normalization, and semantic certificate bridge | `RelativeConicArcs/Certificate.lean` | Lean-proved for every finite field |
 | explicit `GF(8)`, `GF(9)`, and `GF(16)` models with kernel-checked field laws | `RelativeConicArcs/FiniteFields.lean` | Lean-proved |
 | frozen witnesses and split kernel checks at `q=8,9,11,16` | `RelativeConicArcs/Examples.lean`, `RelativeConicArcs/ExampleChecks/` | Lean-proved |
-| `L2(8)=L2(9)=L2(11)=6`, `L2(16)=8`; exact `rhoC` at 8, 9, 11 and bounds `8≤rhoC(16)≤9` | `RelativeConicArcs/Results.lean` | Lean-proved |
+| `L2(8)=L2(9)=L2(11)=6`, `L2(16)=8`; exact `rhoC` at 8, 9, 11, 16 | `RelativeConicArcs/Results.lean`, `RelativeConicArcs/Q16Result.lean` | Lean-proved (q=16 closed by C101) |
 
 The standalone `RelativeConicArcs` target builds without warnings. The C89–C96 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
@@ -225,5 +225,6 @@ For each closed task:
 The formalization lane is closed. The named cap-game localization bridge and q=11 icosahedral
 residual P theorem have landed under C100. Optional follow-ons include field-isomorphism transport
 of the small results, a Lean theorem capturing the `q=11` exterior-secant/index distribution, and
-the broader theorem-mining/literature review tracked separately as C98. The unresolved exact value
-of `rhoC(16)` now has its own active construction-or-nonexistence lane, C101.
+the broader theorem-mining/literature review tracked separately as C98. C101 closed the remaining
+finite gap with the exact value `rhoC(16)=9`; see the
+[finished C101 handoff](2026-07-12-rhoc16-exact-value.md).

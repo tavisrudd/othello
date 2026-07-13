@@ -1,0 +1,550 @@
+import RelativeConicArcs.Q16StepKernel
+import RelativeConicArcs.Q16CertificateData.L4_000
+import RelativeConicArcs.Q16CertificateData.L5_000
+import RelativeConicArcs.Q16CertificateData.L5_001
+import RelativeConicArcs.Q16CertificateData.L6_000
+import RelativeConicArcs.Q16CertificateData.L6_001
+import RelativeConicArcs.Q16CertificateData.L6_002
+import RelativeConicArcs.Q16CertificateData.L6_003
+import RelativeConicArcs.Q16CertificateData.L6_004
+import RelativeConicArcs.Q16CertificateData.L6_005
+import RelativeConicArcs.Q16CertificateData.L6_006
+import RelativeConicArcs.Q16CertificateData.L6_007
+import RelativeConicArcs.Q16CertificateData.L6_008
+import RelativeConicArcs.Q16CertificateData.L6_009
+import RelativeConicArcs.Q16CertificateData.L6_010
+import RelativeConicArcs.Q16CertificateData.L6_011
+import RelativeConicArcs.Q16CertificateData.L6_012
+import RelativeConicArcs.Q16CertificateData.L6_013
+import RelativeConicArcs.Q16CertificateData.L6_014
+import RelativeConicArcs.Q16CertificateData.L6_015
+import RelativeConicArcs.Q16CertificateData.L6_016
+import RelativeConicArcs.Q16CertificateData.L6_017
+import RelativeConicArcs.Q16CertificateData.L6_018
+import RelativeConicArcs.Q16CertificateData.L6_019
+import RelativeConicArcs.Q16CertificateData.L6_020
+import RelativeConicArcs.Q16CertificateData.L6_021
+import RelativeConicArcs.Q16CertificateData.L6_022
+import RelativeConicArcs.Q16CertificateData.L6_023
+import RelativeConicArcs.Q16CertificateData.L6_024
+import RelativeConicArcs.Q16CertificateData.L6_025
+import RelativeConicArcs.Q16CertificateData.L6_026
+import RelativeConicArcs.Q16CertificateData.L6_027
+import RelativeConicArcs.Q16CertificateData.L6_028
+import RelativeConicArcs.Q16CertificateData.L6_029
+import RelativeConicArcs.Q16CertificateData.L6_030
+import RelativeConicArcs.Q16CertificateData.L7_000
+import RelativeConicArcs.Q16CertificateData.L7_001
+import RelativeConicArcs.Q16CertificateData.L7_002
+import RelativeConicArcs.Q16CertificateData.L7_003
+import RelativeConicArcs.Q16CertificateData.L7_004
+import RelativeConicArcs.Q16CertificateData.L7_005
+import RelativeConicArcs.Q16CertificateData.L7_006
+import RelativeConicArcs.Q16CertificateData.L7_007
+import RelativeConicArcs.Q16CertificateData.L7_008
+import RelativeConicArcs.Q16CertificateData.L7_009
+import RelativeConicArcs.Q16CertificateData.L7_010
+import RelativeConicArcs.Q16CertificateData.L7_011
+import RelativeConicArcs.Q16CertificateData.L7_012
+import RelativeConicArcs.Q16CertificateData.L7_013
+import RelativeConicArcs.Q16CertificateData.L7_014
+import RelativeConicArcs.Q16CertificateData.L7_015
+import RelativeConicArcs.Q16CertificateData.L7_016
+import RelativeConicArcs.Q16CertificateData.L7_017
+import RelativeConicArcs.Q16CertificateData.L7_018
+import RelativeConicArcs.Q16CertificateData.L7_019
+import RelativeConicArcs.Q16CertificateData.L7_020
+import RelativeConicArcs.Q16CertificateData.L7_021
+import RelativeConicArcs.Q16CertificateData.L7_022
+import RelativeConicArcs.Q16CertificateData.L7_023
+import RelativeConicArcs.Q16CertificateData.L7_024
+import RelativeConicArcs.Q16CertificateData.L7_025
+import RelativeConicArcs.Q16CertificateData.L7_026
+import RelativeConicArcs.Q16CertificateData.L7_027
+import RelativeConicArcs.Q16CertificateData.L7_028
+import RelativeConicArcs.Q16CertificateData.L7_029
+import RelativeConicArcs.Q16CertificateData.L7_030
+import RelativeConicArcs.Q16CertificateData.L7_031
+import RelativeConicArcs.Q16CertificateData.L7_032
+import RelativeConicArcs.Q16CertificateData.L7_033
+import RelativeConicArcs.Q16CertificateData.L7_034
+import RelativeConicArcs.Q16CertificateData.L7_035
+import RelativeConicArcs.Q16CertificateData.L7_036
+import RelativeConicArcs.Q16CertificateData.L7_037
+import RelativeConicArcs.Q16CertificateData.L7_038
+import RelativeConicArcs.Q16CertificateData.L7_039
+import RelativeConicArcs.Q16CertificateData.L7_040
+import RelativeConicArcs.Q16CertificateData.L7_041
+import RelativeConicArcs.Q16CertificateData.L7_042
+import RelativeConicArcs.Q16CertificateData.L7_043
+import RelativeConicArcs.Q16CertificateData.L7_044
+import RelativeConicArcs.Q16CertificateData.L7_045
+import RelativeConicArcs.Q16CertificateData.L7_046
+import RelativeConicArcs.Q16CertificateData.L7_047
+import RelativeConicArcs.Q16CertificateData.L7_048
+import RelativeConicArcs.Q16CertificateData.L7_049
+import RelativeConicArcs.Q16CertificateData.L7_050
+import RelativeConicArcs.Q16CertificateData.L7_051
+import RelativeConicArcs.Q16CertificateData.L7_052
+import RelativeConicArcs.Q16CertificateData.L7_053
+import RelativeConicArcs.Q16CertificateData.L7_054
+import RelativeConicArcs.Q16CertificateData.L7_055
+import RelativeConicArcs.Q16CertificateData.L7_056
+import RelativeConicArcs.Q16CertificateData.L7_057
+import RelativeConicArcs.Q16CertificateData.L7_058
+import RelativeConicArcs.Q16CertificateData.L7_059
+import RelativeConicArcs.Q16CertificateData.L7_060
+import RelativeConicArcs.Q16CertificateData.L7_061
+import RelativeConicArcs.Q16CertificateData.L7_062
+import RelativeConicArcs.Q16CertificateData.L7_063
+import RelativeConicArcs.Q16CertificateData.L7_064
+import RelativeConicArcs.Q16CertificateData.L7_065
+import RelativeConicArcs.Q16CertificateData.L7_066
+import RelativeConicArcs.Q16CertificateData.L7_067
+import RelativeConicArcs.Q16CertificateData.L7_068
+import RelativeConicArcs.Q16CertificateData.L7_069
+import RelativeConicArcs.Q16CertificateData.L7_070
+import RelativeConicArcs.Q16CertificateData.L7_071
+import RelativeConicArcs.Q16CertificateData.L7_072
+import RelativeConicArcs.Q16CertificateData.L7_073
+import RelativeConicArcs.Q16CertificateData.L7_074
+import RelativeConicArcs.Q16CertificateData.L7_075
+import RelativeConicArcs.Q16CertificateData.L7_076
+import RelativeConicArcs.Q16CertificateData.L7_077
+import RelativeConicArcs.Q16CertificateData.L7_078
+import RelativeConicArcs.Q16CertificateData.L7_079
+import RelativeConicArcs.Q16CertificateData.L7_080
+import RelativeConicArcs.Q16CertificateData.L7_081
+import RelativeConicArcs.Q16CertificateData.L7_082
+import RelativeConicArcs.Q16CertificateData.L7_083
+import RelativeConicArcs.Q16CertificateData.L7_084
+import RelativeConicArcs.Q16CertificateData.L7_085
+import RelativeConicArcs.Q16CertificateData.L7_086
+import RelativeConicArcs.Q16CertificateData.L7_087
+import RelativeConicArcs.Q16CertificateData.L7_088
+import RelativeConicArcs.Q16CertificateData.L7_089
+import RelativeConicArcs.Q16CertificateData.L7_090
+import RelativeConicArcs.Q16CertificateData.L7_091
+import RelativeConicArcs.Q16CertificateData.L7_092
+import RelativeConicArcs.Q16CertificateData.L7_093
+import RelativeConicArcs.Q16CertificateData.L7_094
+import RelativeConicArcs.Q16CertificateData.L7_095
+import RelativeConicArcs.Q16CertificateData.L7_096
+import RelativeConicArcs.Q16CertificateData.L7_097
+import RelativeConicArcs.Q16CertificateData.L7_098
+import RelativeConicArcs.Q16CertificateData.L7_099
+import RelativeConicArcs.Q16CertificateData.L7_100
+import RelativeConicArcs.Q16CertificateData.L7_101
+import RelativeConicArcs.Q16CertificateData.L7_102
+import RelativeConicArcs.Q16CertificateData.L7_103
+import RelativeConicArcs.Q16CertificateData.L7_104
+import RelativeConicArcs.Q16CertificateData.L7_105
+import RelativeConicArcs.Q16CertificateData.L7_106
+import RelativeConicArcs.Q16CertificateData.L7_107
+import RelativeConicArcs.Q16CertificateData.L7_108
+import RelativeConicArcs.Q16CertificateData.L7_109
+import RelativeConicArcs.Q16CertificateData.L7_110
+import RelativeConicArcs.Q16CertificateData.L7_111
+import RelativeConicArcs.Q16CertificateData.L7_112
+import RelativeConicArcs.Q16CertificateData.L7_113
+import RelativeConicArcs.Q16CertificateData.L7_114
+import RelativeConicArcs.Q16CertificateData.L7_115
+import RelativeConicArcs.Q16CertificateData.L7_116
+import RelativeConicArcs.Q16CertificateData.L7_117
+import RelativeConicArcs.Q16CertificateData.L7_118
+import RelativeConicArcs.Q16CertificateData.L7_119
+import RelativeConicArcs.Q16CertificateData.L7_120
+import RelativeConicArcs.Q16CertificateData.L7_121
+import RelativeConicArcs.Q16CertificateData.L7_122
+import RelativeConicArcs.Q16CertificateData.L7_123
+import RelativeConicArcs.Q16CertificateData.L7_124
+import RelativeConicArcs.Q16CertificateData.L7_125
+import RelativeConicArcs.Q16CertificateData.L7_126
+import RelativeConicArcs.Q16CertificateData.L7_127
+import RelativeConicArcs.Q16CertificateData.L7_128
+import RelativeConicArcs.Q16CertificateData.L7_129
+import RelativeConicArcs.Q16CertificateData.L7_130
+import RelativeConicArcs.Q16CertificateData.L7_131
+import RelativeConicArcs.Q16CertificateData.L7_132
+import RelativeConicArcs.Q16CertificateData.L7_133
+import RelativeConicArcs.Q16CertificateData.L7_134
+import RelativeConicArcs.Q16CertificateData.L7_135
+import RelativeConicArcs.Q16CertificateData.L7_136
+import RelativeConicArcs.Q16CertificateData.L7_137
+import RelativeConicArcs.Q16CertificateData.L7_138
+import RelativeConicArcs.Q16CertificateData.L7_139
+import RelativeConicArcs.Q16CertificateData.L7_140
+import RelativeConicArcs.Q16CertificateData.L7_141
+import RelativeConicArcs.Q16CertificateData.L7_142
+import RelativeConicArcs.Q16CertificateData.L7_143
+import RelativeConicArcs.Q16CertificateData.L7_144
+import RelativeConicArcs.Q16CertificateData.L7_145
+import RelativeConicArcs.Q16CertificateData.L7_146
+import RelativeConicArcs.Q16CertificateData.L7_147
+import RelativeConicArcs.Q16CertificateData.L7_148
+import RelativeConicArcs.Q16CertificateData.L7_149
+import RelativeConicArcs.Q16CertificateData.L7_150
+import RelativeConicArcs.Q16CertificateData.L7_151
+import RelativeConicArcs.Q16CertificateData.L7_152
+import RelativeConicArcs.Q16CertificateData.L7_153
+import RelativeConicArcs.Q16CertificateData.L7_154
+import RelativeConicArcs.Q16CertificateData.L7_155
+import RelativeConicArcs.Q16CertificateData.L7_156
+import RelativeConicArcs.Q16CertificateData.L7_157
+import RelativeConicArcs.Q16CertificateData.L7_158
+import RelativeConicArcs.Q16CertificateData.L7_159
+import RelativeConicArcs.Q16CertificateData.L7_160
+import RelativeConicArcs.Q16CertificateData.L7_161
+import RelativeConicArcs.Q16CertificateData.L7_162
+import RelativeConicArcs.Q16CertificateData.L7_163
+import RelativeConicArcs.Q16CertificateData.L7_164
+import RelativeConicArcs.Q16CertificateData.L7_165
+import RelativeConicArcs.Q16CertificateData.L7_166
+import RelativeConicArcs.Q16CertificateData.L7_167
+import RelativeConicArcs.Q16CertificateData.L7_168
+import RelativeConicArcs.Q16CertificateData.L7_169
+import RelativeConicArcs.Q16CertificateData.L7_170
+import RelativeConicArcs.Q16CertificateData.L7_171
+import RelativeConicArcs.Q16CertificateData.L7_172
+import RelativeConicArcs.Q16CertificateData.L7_173
+import RelativeConicArcs.Q16CertificateData.L7_174
+import RelativeConicArcs.Q16CertificateData.L7_175
+import RelativeConicArcs.Q16CertificateData.L7_176
+import RelativeConicArcs.Q16CertificateData.L7_177
+import RelativeConicArcs.Q16CertificateData.L7_178
+import RelativeConicArcs.Q16CertificateData.L7_179
+import RelativeConicArcs.Q16CertificateData.L7_180
+import RelativeConicArcs.Q16CertificateData.L7_181
+import RelativeConicArcs.Q16CertificateData.L7_182
+import RelativeConicArcs.Q16CertificateData.L7_183
+import RelativeConicArcs.Q16CertificateData.L7_184
+import RelativeConicArcs.Q16CertificateData.L7_185
+import RelativeConicArcs.Q16CertificateData.L7_186
+import RelativeConicArcs.Q16CertificateData.L7_187
+import RelativeConicArcs.Q16CertificateData.L7_188
+import RelativeConicArcs.Q16CertificateData.L7_189
+import RelativeConicArcs.Q16CertificateData.L7_190
+import RelativeConicArcs.Q16CertificateData.L7_191
+import RelativeConicArcs.Q16CertificateData.L7_192
+import RelativeConicArcs.Q16CertificateData.L7_193
+import RelativeConicArcs.Q16CertificateData.L7_194
+import RelativeConicArcs.Q16CertificateData.L7_195
+import RelativeConicArcs.Q16CertificateData.L7_196
+import RelativeConicArcs.Q16CertificateData.L7_197
+import RelativeConicArcs.Q16CertificateData.L7_198
+import RelativeConicArcs.Q16CertificateData.L7_199
+import RelativeConicArcs.Q16CertificateData.L7_200
+import RelativeConicArcs.Q16CertificateData.L7_201
+import RelativeConicArcs.Q16CertificateData.L7_202
+import RelativeConicArcs.Q16CertificateData.L7_203
+import RelativeConicArcs.Q16CertificateData.L7_204
+import RelativeConicArcs.Q16CertificateData.L7_205
+import RelativeConicArcs.Q16CertificateData.L7_206
+import RelativeConicArcs.Q16CertificateData.L7_207
+import RelativeConicArcs.Q16CertificateData.L7_208
+import RelativeConicArcs.Q16CertificateData.L7_209
+import RelativeConicArcs.Q16CertificateData.L7_210
+import RelativeConicArcs.Q16CertificateData.L7_211
+import RelativeConicArcs.Q16CertificateData.L7_212
+import RelativeConicArcs.Q16CertificateData.L7_213
+import RelativeConicArcs.Q16CertificateData.L7_214
+import RelativeConicArcs.Q16CertificateData.L7_215
+import RelativeConicArcs.Q16CertificateData.L7_216
+import RelativeConicArcs.Q16CertificateData.L7_217
+import RelativeConicArcs.Q16CertificateData.L7_218
+import RelativeConicArcs.Q16CertificateData.L7_219
+import RelativeConicArcs.Q16CertificateData.L7_220
+import RelativeConicArcs.Q16CertificateData.L7_221
+import RelativeConicArcs.Q16CertificateData.L7_222
+import RelativeConicArcs.Q16CertificateData.L7_223
+import RelativeConicArcs.Q16CertificateData.L7_224
+import RelativeConicArcs.Q16CertificateData.L7_225
+import RelativeConicArcs.Q16CertificateData.L7_226
+
+namespace RelativeConicArcs.Q16Classification.Q16CertificateData
+
+set_option maxHeartbeats 20000000
+set_option maxRecDepth 100000
+
+noncomputable def books4 : List (StepBook level5) :=
+  booksL4_000
+
+theorem books4_valid : StepBooksValid level4 level5 books4 := by
+  rfl
+
+noncomputable def books5 : List (StepBook level6) :=
+  booksL5_000 ++
+  booksL5_001
+
+theorem books5_valid : StepBooksValid level5 level6 books5 := by
+  rfl
+
+noncomputable def books6 : List (StepBook level7) :=
+  booksL6_000 ++
+  booksL6_001 ++
+  booksL6_002 ++
+  booksL6_003 ++
+  booksL6_004 ++
+  booksL6_005 ++
+  booksL6_006 ++
+  booksL6_007 ++
+  booksL6_008 ++
+  booksL6_009 ++
+  booksL6_010 ++
+  booksL6_011 ++
+  booksL6_012 ++
+  booksL6_013 ++
+  booksL6_014 ++
+  booksL6_015 ++
+  booksL6_016 ++
+  booksL6_017 ++
+  booksL6_018 ++
+  booksL6_019 ++
+  booksL6_020 ++
+  booksL6_021 ++
+  booksL6_022 ++
+  booksL6_023 ++
+  booksL6_024 ++
+  booksL6_025 ++
+  booksL6_026 ++
+  booksL6_027 ++
+  booksL6_028 ++
+  booksL6_029 ++
+  booksL6_030
+
+theorem books6_valid : StepBooksValid level6 level7 books6 := by
+  rfl
+
+noncomputable def books7 : List (StepBook level8) :=
+  booksL7_000 ++
+  booksL7_001 ++
+  booksL7_002 ++
+  booksL7_003 ++
+  booksL7_004 ++
+  booksL7_005 ++
+  booksL7_006 ++
+  booksL7_007 ++
+  booksL7_008 ++
+  booksL7_009 ++
+  booksL7_010 ++
+  booksL7_011 ++
+  booksL7_012 ++
+  booksL7_013 ++
+  booksL7_014 ++
+  booksL7_015 ++
+  booksL7_016 ++
+  booksL7_017 ++
+  booksL7_018 ++
+  booksL7_019 ++
+  booksL7_020 ++
+  booksL7_021 ++
+  booksL7_022 ++
+  booksL7_023 ++
+  booksL7_024 ++
+  booksL7_025 ++
+  booksL7_026 ++
+  booksL7_027 ++
+  booksL7_028 ++
+  booksL7_029 ++
+  booksL7_030 ++
+  booksL7_031 ++
+  booksL7_032 ++
+  booksL7_033 ++
+  booksL7_034 ++
+  booksL7_035 ++
+  booksL7_036 ++
+  booksL7_037 ++
+  booksL7_038 ++
+  booksL7_039 ++
+  booksL7_040 ++
+  booksL7_041 ++
+  booksL7_042 ++
+  booksL7_043 ++
+  booksL7_044 ++
+  booksL7_045 ++
+  booksL7_046 ++
+  booksL7_047 ++
+  booksL7_048 ++
+  booksL7_049 ++
+  booksL7_050 ++
+  booksL7_051 ++
+  booksL7_052 ++
+  booksL7_053 ++
+  booksL7_054 ++
+  booksL7_055 ++
+  booksL7_056 ++
+  booksL7_057 ++
+  booksL7_058 ++
+  booksL7_059 ++
+  booksL7_060 ++
+  booksL7_061 ++
+  booksL7_062 ++
+  booksL7_063 ++
+  booksL7_064 ++
+  booksL7_065 ++
+  booksL7_066 ++
+  booksL7_067 ++
+  booksL7_068 ++
+  booksL7_069 ++
+  booksL7_070 ++
+  booksL7_071 ++
+  booksL7_072 ++
+  booksL7_073 ++
+  booksL7_074 ++
+  booksL7_075 ++
+  booksL7_076 ++
+  booksL7_077 ++
+  booksL7_078 ++
+  booksL7_079 ++
+  booksL7_080 ++
+  booksL7_081 ++
+  booksL7_082 ++
+  booksL7_083 ++
+  booksL7_084 ++
+  booksL7_085 ++
+  booksL7_086 ++
+  booksL7_087 ++
+  booksL7_088 ++
+  booksL7_089 ++
+  booksL7_090 ++
+  booksL7_091 ++
+  booksL7_092 ++
+  booksL7_093 ++
+  booksL7_094 ++
+  booksL7_095 ++
+  booksL7_096 ++
+  booksL7_097 ++
+  booksL7_098 ++
+  booksL7_099 ++
+  booksL7_100 ++
+  booksL7_101 ++
+  booksL7_102 ++
+  booksL7_103 ++
+  booksL7_104 ++
+  booksL7_105 ++
+  booksL7_106 ++
+  booksL7_107 ++
+  booksL7_108 ++
+  booksL7_109 ++
+  booksL7_110 ++
+  booksL7_111 ++
+  booksL7_112 ++
+  booksL7_113 ++
+  booksL7_114 ++
+  booksL7_115 ++
+  booksL7_116 ++
+  booksL7_117 ++
+  booksL7_118 ++
+  booksL7_119 ++
+  booksL7_120 ++
+  booksL7_121 ++
+  booksL7_122 ++
+  booksL7_123 ++
+  booksL7_124 ++
+  booksL7_125 ++
+  booksL7_126 ++
+  booksL7_127 ++
+  booksL7_128 ++
+  booksL7_129 ++
+  booksL7_130 ++
+  booksL7_131 ++
+  booksL7_132 ++
+  booksL7_133 ++
+  booksL7_134 ++
+  booksL7_135 ++
+  booksL7_136 ++
+  booksL7_137 ++
+  booksL7_138 ++
+  booksL7_139 ++
+  booksL7_140 ++
+  booksL7_141 ++
+  booksL7_142 ++
+  booksL7_143 ++
+  booksL7_144 ++
+  booksL7_145 ++
+  booksL7_146 ++
+  booksL7_147 ++
+  booksL7_148 ++
+  booksL7_149 ++
+  booksL7_150 ++
+  booksL7_151 ++
+  booksL7_152 ++
+  booksL7_153 ++
+  booksL7_154 ++
+  booksL7_155 ++
+  booksL7_156 ++
+  booksL7_157 ++
+  booksL7_158 ++
+  booksL7_159 ++
+  booksL7_160 ++
+  booksL7_161 ++
+  booksL7_162 ++
+  booksL7_163 ++
+  booksL7_164 ++
+  booksL7_165 ++
+  booksL7_166 ++
+  booksL7_167 ++
+  booksL7_168 ++
+  booksL7_169 ++
+  booksL7_170 ++
+  booksL7_171 ++
+  booksL7_172 ++
+  booksL7_173 ++
+  booksL7_174 ++
+  booksL7_175 ++
+  booksL7_176 ++
+  booksL7_177 ++
+  booksL7_178 ++
+  booksL7_179 ++
+  booksL7_180 ++
+  booksL7_181 ++
+  booksL7_182 ++
+  booksL7_183 ++
+  booksL7_184 ++
+  booksL7_185 ++
+  booksL7_186 ++
+  booksL7_187 ++
+  booksL7_188 ++
+  booksL7_189 ++
+  booksL7_190 ++
+  booksL7_191 ++
+  booksL7_192 ++
+  booksL7_193 ++
+  booksL7_194 ++
+  booksL7_195 ++
+  booksL7_196 ++
+  booksL7_197 ++
+  booksL7_198 ++
+  booksL7_199 ++
+  booksL7_200 ++
+  booksL7_201 ++
+  booksL7_202 ++
+  booksL7_203 ++
+  booksL7_204 ++
+  booksL7_205 ++
+  booksL7_206 ++
+  booksL7_207 ++
+  booksL7_208 ++
+  booksL7_209 ++
+  booksL7_210 ++
+  booksL7_211 ++
+  booksL7_212 ++
+  booksL7_213 ++
+  booksL7_214 ++
+  booksL7_215 ++
+  booksL7_216 ++
+  booksL7_217 ++
+  booksL7_218 ++
+  booksL7_219 ++
+  booksL7_220 ++
+  booksL7_221 ++
+  booksL7_222 ++
+  booksL7_223 ++
+  booksL7_224 ++
+  booksL7_225 ++
+  booksL7_226
+
+theorem books7_valid : StepBooksValid level7 level8 books7 := by
+  rfl
+
+end RelativeConicArcs.Q16Classification.Q16CertificateData
