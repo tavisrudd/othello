@@ -300,3 +300,24 @@ The original plan requested a complete radius-four circuit catalogue. The exact 
 invariants do not require or claim such a catalogue: the Lean upper bounds quantify over every
 minimal edge, and the generic rank cutoff proves radius-four exhaustiveness. An explicit catalogue
 would be an optional enumerative strengthening, not a remaining correctness blocker for C112.
+
+## 2026-07-13 — C113 completed lift, asymptotic family, and XH5 adversarial pass
+
+For a degree-four extension-field outer `[N,K,D]` code, Lean proves the q9 concatenation has
+parameters `[20N,4K,>=9D]_9`, exactly `10N` completed cubic and `10N` axis coordinates, exact
+locality three/two, and exact radius-four rows `(nu,tau)=(4,8)` and `(7,15)`. Ordinary outer dual
+distance six is sufficient: the trace-functional gate needs `r+2=6`, while the inner gate is
+`r+1<2*3` at `r=4`.
+
+The Stichtenoth specialization proves unbounded length, exact rate `1/10`, and eventual relative
+distance above every fixed `c<351/1600 = 9(39/80)/20`; it separately packages the clean eventual
+`1/5` bound. The theorem contains exactly the quarantined
+`Imported.stichtenoth_selfDual_TVZ_6561` beyond Lean's standard logical axioms.
+
+XH5 checked confusion between the inner full minimal port and the lift's unbounded port; outer
+dual distance five versus six; complete bounded-hypergraph transfer versus selected repairs;
+both projective infinity coordinates in the `10N/10N` count; scalar-restriction dimension
+scaling; direction of the distance inequality; strict `c<351/1600` versus an endpoint claim;
+the eventual gate used to obtain dual distance six; and natural/real arithmetic in the `1/5`
+corollary. The formal statement exposes only bounded radius-four equality. Focused and aggregate
+builds, forbidden-token and whitespace scans, and axiom audits pass.

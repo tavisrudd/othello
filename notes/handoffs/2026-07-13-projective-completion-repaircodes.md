@@ -1,7 +1,7 @@
 # Projectively completed cubic–axis RepairCodes — C111–C114
 
 **Date**: 2026-07-13
-**Status**: ACTIVE. C111 and C112 are kernel-proved and independently replayed; C113 is next. No
+**Status**: ACTIVE. C111–C113 are kernel-proved and adversarially reviewed; C114 is next. No
 claim is paper-promoted until the downstream proof and publication gates pass.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
@@ -21,7 +21,7 @@ Pareto-incomparable seed and asymptotic family.
 | radius-three axis row is `((5q-3)/6,2q-1-Z3(q))` | strict-trust Lean for every axis target; q=3,9 independently checked | proved; not paper-promoted before C114 |
 | radius four exhausts the complete inner minimal port | strict-trust generic Lean theorem: minimal helpers are independent and every `k`-row minimal port stabilizes at radius `k` | proved; inner port only |
 | radius-four/full-inner rows are cubic `((q-1)/2,q-1)` and axis `((5q-3)/6,2q-3)` | strict-trust Lean for every completed coordinate; q=3,9 independently enumerated; XH3/XH4 passed | proved; not paper-promoted before C114 |
-| q9 lift has rate `1/10` and eventual relative distance above every `c<351/1600` | arithmetic consequence conditional on prior gates | do not state as theorem yet |
+| q9 lift has `[20N,4K,>=9D]_9`, exact rate `1/10`, and eventual relative distance above every `c<351/1600` | strict-trust Lean; exact bounded radius-four transfer; only the quarantined Stichtenoth import in the family theorem; XH5 passed | proved; not paper-promoted before C114 |
 | theorem package is novel | targeted search found no exact construction | candidate contribution; no priority claim |
 
 Here `Z3(q)` is the already formalized maximum size of a zero-sum-free subset of the additive
@@ -108,6 +108,16 @@ group, represented in Lean by `zeroSumCapNumber`.
   as complete bounded repair hypergraphs. Focused and aggregate builds, forbidden-token and
   whitespace scans, standard-axiom prints, q=3 arithmetic, target/off-by-one review, and XH3/XH4
   pass.
+- `RepairCodes/ProjectiveAxisTwistedCubicLift.lean` proves `[20N,4K,>=9D]_9`, the exact
+  `10N/10N` cubic/axis partition, exact locality three/two, and exact radius-four rows
+  `(nu,tau)=(4,8)` and `(7,15)`. Ordinary outer dual distance six is the checked gate. The
+  conclusion is bounded hypergraph equality through radius four, never an unbounded full-port
+  statement for the concatenated code.
+- `RepairCodes/ProjectiveAxisTwistedCubicAsymptotic.lean` specializes the quarantined Stichtenoth
+  family to unbounded length, exact rate `1/10`, every eventual relative-distance bound
+  `c<351/1600`, the clean eventual `1/5` bound, exact coordinate multiplicities, locality, and
+  radius-four rows. XH5, focused and aggregate builds, scans, and the axiom audit pass. C113 is
+  complete; C114 owns literature and publication promotion.
 
 ## Mandatory xhigh review checkpoints
 
@@ -125,7 +135,7 @@ the corresponding claim before xhigh review.
    full *inner* minimal port only; it must not silently become the unbounded port of a lift.
 4. **XH4 — exact radius-four axis row [PASSED 2026-07-13].** Review both the weighted matching upper bound and the
    target-conditioned primal/section calculation giving `tau=2q-3`, including `q=3`.
-5. **XH5 — transfer/asymptotic promotion.** Review `r=4` transfer gates, coordinate
+5. **XH5 — transfer/asymptotic promotion [PASSED 2026-07-13].** Review `r=4` transfer gates, coordinate
    multiplicities, rate/distance arithmetic, and the exact scope of transferred supports before
    C113 is stated in prose.
 6. **XH6 — novelty and headline language.** Review the primary-source citation chain and separate

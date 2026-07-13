@@ -15,6 +15,8 @@ import RepairCodes.AxisTwistedCubic
 import RepairCodes.AxisTwistedCubicInvariants
 import RepairCodes.ProjectiveAxisTwistedCubic
 import RepairCodes.ProjectiveAxisTwistedCubicInvariants
+import RepairCodes.ProjectiveAxisTwistedCubicLift
+import RepairCodes.ProjectiveAxisTwistedCubicAsymptotic
 import RepairCodes.Q9Seed
 import RepairCodes.Q9Affine
 import RepairCodes.Q9Uniform

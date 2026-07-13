@@ -101,6 +101,18 @@ transport relabels both complete bounded repair hypergraphs and their minimal cl
 finite headlines have only the standard logical axiom profile. The candidate five-weight
 distribution is not part of these proved repair-port theorems.
 
+`RepairCodes.ProjectiveAxisTwistedCubicLift` proves completed q9 lift parameters
+`[20N,4K,>=9D]_9`, exact coordinate multiplicities `10N` cubic and `10N` axis, exact locality
+three/two, and exact radius-four rows `(nu,tau)=(4,8)` and `(7,15)`. The transfer assumes ordinary
+outer dual distance at least six and identifies only the bounded radius-four hypergraphs with one
+embedded inner block; it does not identify the lift's unbounded full repair port.
+
+`RepairCodes.ProjectiveAxisTwistedCubicAsymptotic` applies the quarantined Stichtenoth import to
+prove an unbounded q9 family with exact rate `1/10`, eventual relative distance greater than every
+fixed `c<351/1600` (hence the clean eventual `1/5` bound), equal coordinate classes, exact mixed
+locality, and the bounded radius-four rows. Its concrete family theorem adds only
+`Imported.stichtenoth_selfDual_TVZ_6561` to the standard logical axioms.
+
 ## Reproduction
 
 From `lean/`:
