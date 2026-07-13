@@ -598,3 +598,20 @@ that discharges the transfer interface's finite fields from it:
   between Lean's complete all-support repair object and the paper's inclusion-minimal clutter.
 - Validation: `FiniteGeom.Hypergraph`, `FiniteGeom.Repair`, and
   `RepairCodes.AxisTwistedCubic` all build successfully.
+
+### Handoff Note — 2026-07-12 (cubic repair classification, first cases)
+
+- Added an explicit equivalence enumerating any four-element target/helper support, allowing the
+  geometric finite-family independence and determinant theorems to be applied directly to an
+  arbitrary repair edge.
+- Proved `cubicRepair_axis_eq_of_mem`: if a cubic target has two cubic helpers and one axis helper,
+  the axis helper is forced to equal the normalized symmetric-polynomial completion. This uses the
+  code-derived repair determinant and the field-generic determinant equation; there is no chosen
+  repair-family assumption.
+- Proved the competing four-cubic and two-cubic/two-axis support patterns cannot be repairs, by
+  transporting the corresponding independent-family theorems to the exact support subtype.
+- Remaining cubic classification case: exclude three axis helpers using the full-support dual
+  relation (its cubic-target coefficient is killed by the `X₀` coordinate), then package the exact
+  repair-hypergraph membership iff.
+- Validation: `RepairCodes.AxisTwistedCubic` builds successfully; the new classification theorems
+  have only the standard foundational axiom profile.

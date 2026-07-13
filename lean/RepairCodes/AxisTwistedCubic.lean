@@ -106,6 +106,27 @@ private noncomputable def finEraseEquiv {n : ℕ} (j : Fin (n + 1)) :
   · rw [Fintype.card_subtype_compl (fun i : Fin (n + 1) => i = j)]
     simp
 
+/-- Explicit enumeration of a four-element support. -/
+private noncomputable def fin4InsertTripleEquiv {α : Type*} [DecidableEq α]
+    (a b c d : α) (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    Fin 4 ≃ ↥({a, b, c, d} : Finset α) := by
+  let f : Fin 4 → ↥({a, b, c, d} : Finset α) := fun i =>
+    ⟨![a, b, c, d] i, by fin_cases i <;> simp⟩
+  apply Equiv.ofBijective f
+  constructor
+  · intro i j hij
+    apply Fin.ext
+    fin_cases i <;> fin_cases j <;> simp_all [f]
+  · intro x
+    rcases x with ⟨x, hx⟩
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl | rfl | rfl
+    · exact ⟨0, by ext; simp [f]⟩
+    · exact ⟨1, by ext; simp [f]⟩
+    · exact ⟨2, by ext; simp [f]⟩
+    · exact ⟨3, by ext; simp [f]⟩
+
 private def fin3Cycle : Equiv.Perm (Fin 3) where
   toFun := ![1, 2, 0]
   invFun := ![2, 0, 1]
@@ -374,6 +395,118 @@ theorem transversalNumber_minimalAxisTwistedCubicRepairHypergraph
     transversalNumber (minimalAxisTwistedCubicRepairHypergraph x r) =
       transversalNumber (axisTwistedCubicRepairHypergraph x r) :=
   transversalNumber_minimalHyperedges _
+
+/-- A radius-three cubic repair with two cubic helpers has the uniquely determined axis helper. -/
+theorem cubicRepair_axis_eq_of_mem [CharP 𝔽 3] {x s t : 𝔽} {y : 𝔽 ⊕ Unit}
+    (hxs : x ≠ s) (hxt : x ≠ t) (hst : s ≠ t)
+    (hR : ({(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inr y} :
+      Finset (AxisTwistedCubicIndex 𝔽)) ∈
+        axisTwistedCubicRepairHypergraph (.inl x) 3) :
+    y = twistedCubicTripleAxisIndex ![x, s, t] := by
+  classical
+  let v : Fin 3 → 𝔽 := ![x, s, t]
+  have hv : Function.Injective v := by
+    intro i j hij
+    fin_cases i <;> fin_cases j <;> simp_all [v]
+  let e0 := fin4InsertTripleEquiv
+    (.inl x : AxisTwistedCubicIndex 𝔽) (.inl s) (.inl t) (.inr y)
+    (by simpa using hxs) (by simpa using hxt) (by simp)
+    (by simpa using hst) (by simp) (by simp)
+  let e : Fin 4 ≃ ↥(insert (.inl x)
+      ({(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inr y} :
+        Finset (AxisTwistedCubicIndex 𝔽))) := by
+    simpa only [Finset.insert_eq] using e0
+  have hdet := repair_edge_reindexed_det_eq_zero
+    (G := axisTwistedCubicGenerator) hR e
+  cases y with
+  | inl z =>
+      have hmatrix :
+          (fun i j => axisTwistedCubicGenerator i (e j)) =
+            twistedCubicAxisCircuitMatrix v 1 z := by
+        ext i j
+        fin_cases j <;> fin_cases i <;>
+          simp [e, e0, fin4InsertTripleEquiv, axisTwistedCubicGenerator,
+            axisTwistedCubicPoints, twistedCubicAxisCircuitMatrix, v,
+            momentCurve]
+      rw [hmatrix] at hdet
+      have hcross := (twistedCubicAxisCircuitMatrix_det_eq_zero_iff hv 1 z).mp hdet
+      simp [v] at hcross
+      have hsum : x + s + t ≠ 0 := by
+        intro hsum0
+        have hpair : x * s + x * t + s * t = 0 := by
+          rw [hsum0, mul_zero] at hcross
+          exact hcross
+        exact (twistedCubicTripleAxis_coordinates_ne_zero hv).elim
+          (fun h => h (by simpa [v] using hsum0))
+          (fun h => h (by simpa [v] using hpair))
+      rw [twistedCubicTripleAxisIndex, if_neg (by simpa [v] using hsum)]
+      simp only [Sum.inl.injEq]
+      exact (eq_div_iff hsum).2 hcross.symm
+  | inr u =>
+      have hmatrix :
+          (fun i j => axisTwistedCubicGenerator i (e j)) =
+            twistedCubicAxisCircuitMatrix v 0 1 := by
+        ext i j
+        fin_cases j <;> fin_cases i <;>
+          simp [e, e0, fin4InsertTripleEquiv, axisTwistedCubicGenerator,
+            axisTwistedCubicPoints, twistedCubicAxisCircuitMatrix, v,
+            momentCurve]
+      rw [hmatrix] at hdet
+      have hcross := (twistedCubicAxisCircuitMatrix_det_eq_zero_iff hv 0 1).mp hdet
+      simp [v] at hcross
+      have hsum : x + s + t = 0 := hcross.symm
+      rw [twistedCubicTripleAxisIndex, if_pos (by simpa [v] using hsum)]
+
+/-- A convenient exclusion principle for a proposed three-helper repair whose four displayed
+columns are independent. -/
+theorem repairTriple_not_mem_of_linearIndependent
+    {x a b c : AxisTwistedCubicIndex 𝔽}
+    (hxa : x ≠ a) (hxb : x ≠ b) (hxc : x ≠ c)
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hli : LinearIndependent 𝔽 (fun i : Fin 4 =>
+      axisTwistedCubicPoints 𝔽 (![x, a, b, c] i))) :
+    ({a, b, c} : Finset (AxisTwistedCubicIndex 𝔽)) ∉
+      axisTwistedCubicRepairHypergraph x 3 := by
+  intro hR
+  apply axisTwistedCubicRepair_edge_dependent hR
+  let e0 := fin4InsertTripleEquiv x a b c hxa hxb hxc hab hac hbc
+  let e : Fin 4 ≃ ↥(insert x ({a, b, c} :
+      Finset (AxisTwistedCubicIndex 𝔽))) := by
+    simpa only [Finset.insert_eq] using e0
+  apply (linearIndependent_equiv e).mp
+  convert hli using 1
+  funext i
+  fin_cases i <;> simp [e, e0, fin4InsertTripleEquiv]
+
+/-- Four distinct cubic columns cannot supply a radius-three repair. -/
+theorem cubicRepair_threeCubic_not_mem [CharP 𝔽 3] {x s t u : 𝔽}
+    (hxs : x ≠ s) (hxt : x ≠ t) (hxu : x ≠ u)
+    (hst : s ≠ t) (hsu : s ≠ u) (htu : t ≠ u) :
+    ({(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inl u} :
+      Finset (AxisTwistedCubicIndex 𝔽)) ∉
+        axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+  apply repairTriple_not_mem_of_linearIndependent
+    (by simpa using hxs) (by simpa using hxt) (by simpa using hxu)
+    (by simpa using hst) (by simpa using hsu) (by simpa using htu)
+  let v : Fin 4 → 𝔽 := ![x, s, t, u]
+  have hv : Function.Injective v := by
+    intro i j hij
+    fin_cases i <;> fin_cases j <;> simp_all [v]
+  convert momentCurve_linearIndependent_of_card_le (n := 4) hv (by decide) using 1
+  funext i
+  fin_cases i <;> simp [v]
+
+/-- Two cubic and two distinct axis columns cannot supply a cubic repair. -/
+theorem cubicRepair_oneCubic_twoAxis_not_mem [CharP 𝔽 3]
+    {x s : 𝔽} {y z : 𝔽 ⊕ Unit} (hxs : x ≠ s) (hyz : y ≠ z) :
+    ({(.inl s : AxisTwistedCubicIndex 𝔽), .inr y, .inr z} :
+      Finset (AxisTwistedCubicIndex 𝔽)) ∉
+        axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+  apply repairTriple_not_mem_of_linearIndependent
+    (by simpa using hxs) (by simp) (by simp) (by simp) (by simp) (by simpa using hyz)
+  convert twoCubicTwoAxis_linearIndependent (𝔽 := 𝔽) hxs hyz using 1
+  funext i
+  fin_cases i <;> simp [twoCubicTwoAxisFamily]
 
 /-- No cubic coordinate has a repair edge with at most two helpers. -/
 theorem cubicCoordinate_no_repairEdge_radius_two [CharP 𝔽 3] (x : 𝔽)
@@ -644,5 +777,8 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms axisCoordinate_exact_locality_two
 #print axioms matchingNumber_minimalAxisTwistedCubicRepairHypergraph
 #print axioms transversalNumber_minimalAxisTwistedCubicRepairHypergraph
+#print axioms cubicRepair_axis_eq_of_mem
+#print axioms cubicRepair_threeCubic_not_mem
+#print axioms cubicRepair_oneCubic_twoAxis_not_mem
 
 end RepairCodes
