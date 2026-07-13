@@ -37,3 +37,22 @@ closed-negative proof routes belong here.
   `[propext, Classical.choice, Quot.sound]` for `card_points`, the uncovered characterization,
   maximal completion, attained `rho`, coordinate order, and cap compatibility. A source scan found
   no `sorry`, `native_decide`, `admit`, or custom `axiom`.
+
+## 2026-07-12 — C90 classical secant moments landed
+
+- Added `RelativeConicArcs/Moments.lean`. An `ArcPair A` is a literal unordered two-subset of the
+  arc; Mathlib's unique-line axiom supplies its canonical secant line. Arc-ness proves this map is
+  injective, so the line-based `pointIndex` agrees with the pair count.
+- Proved the maximum-index lemma by showing endpoint pairs of secants through an external point are
+  pairwise disjoint. Their union has cardinality `2r_A(x)` and lies in `A`, yielding
+  `r_A(x) ≤ floor (|A|/2)`.
+- Proved the first moment by swapping the finite point/pair sums. Each endpoint pair's line contains
+  exactly `q−1` points outside the arc.
+- Proved the second moment through ordered distinct secant pairs. Fibers over external intersection
+  points are pairwise disjoint and their union is exactly the ordered disjoint endpoint-pair set;
+  its cardinality is `C(k,2)C(k−2,2)=6C(k,4)`. Cancelling the ordering factor gives
+  `Σ C(r_A(x),2)=3C(k,4)`.
+- Validation: `nix develop --command lake build RelativeConicArcs` completed successfully with 3011
+  jobs and no source warnings. A separate axiom audit printed
+  `[propext, Classical.choice, Quot.sound]` for pair-line injectivity, pair/line index agreement,
+  the maximum-index theorem, and both moment equations. Source and import-isolation scans passed.

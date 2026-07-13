@@ -86,8 +86,12 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | uncovered-locus characterization; maximal relative arc exists; `rho` is attained and minimal | `RelativeConicArcs/Arc.lean` | Lean-proved |
 | coordinate `PG(2,K)` has order `|K|` | `RelativeConicArcs/ProjectiveBridge.lean` | Lean-proved |
 | incidence `Arc` agrees with `ProjectiveCap.Projective.Cap` on coordinate `PG(2,K)` | `RelativeConicArcs/ProjectiveBridge.lean` | Lean-proved |
+| unordered endpoint pairs correspond injectively to secant lines; line-based and pair-based point indices agree | `RelativeConicArcs/Moments.lean` | Lean-proved |
+| external maximum-index bound `r_A(x) ≤ floor (|A|/2)` | `RelativeConicArcs/Moments.lean` | Lean-proved |
+| first moment `Σ_{x∉A} r_A(x) = C(|A|,2)(q−1)` | `RelativeConicArcs/Moments.lean` | Lean-proved |
+| second moment `Σ_{x∉A} C(r_A(x),2) = 3C(|A|,4)` | `RelativeConicArcs/Moments.lean` | Lean-proved |
 
-The standalone `RelativeConicArcs` target builds without warnings. The C89 headline axiom profiles
+The standalone `RelativeConicArcs` target builds without warnings. The C89–C90 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
 `admit`, or custom axioms. Existing Lean targets do not import the spinoff.
 
@@ -96,7 +100,7 @@ are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `
 | Task | Required theorem package | Depends on | Completion effect |
 |---|---|---|---|
 | **C89 [REPORTED 2026-07-12]** | Scaffold `RelativeConicArcs`; define the minimal incidence/arc/hole interfaces; instantiate coordinate `PG(2,q)` and prove compatibility with the existing projective-cap predicate. | None | Isolated library boundary and statement vocabulary landed. |
-| **C90** | Prove `r_A(x) ≤ floor (k/2)` and both classical moment equations by explicit finite bijections/double counts. | C89 | Supplies the combinatorial engine used by every lower bound. |
+| **C90 [REPORTED 2026-07-12]** | Prove `r_A(x) ≤ floor (k/2)` and both classical moment equations by explicit finite bijections/double counts. | C89 | Combinatorial engine landed. |
 | **C91** | Prove the prescribed-hole defect identity, nonnegativity, coverage and uncovered-locus bounds, exact equality criterion, and quantitative stability. | C90 | Formalizes the paper's central new identity. |
 | **C92** | Define the standard conic and its `q+1` parametrization; prove projective transport and normalization of nonsingular plane conics; specialize C91; formalize `L1`, `L2`, parity capacities, and the exact finite lower-bound theorem. | C89–C91 | Closes the finite universal lower-bound layer and proves that `rhoC` is independent of the prescribed nonsingular conic. |
 | **C93** | Derive the parity-free inequality and formalize the additive `3/2` asymptotic, first as an explicit error bound and then as the manuscript's Big-O/liminf statements along prime powers. | C92 | Closes the analytic headline theorem without hiding constants in informal algebra. |
@@ -153,8 +157,8 @@ For each closed task:
 
 ## Next step
 
-Begin C90 with the maximum-index lemma. Represent the endpoints used by secants through a fixed
-external point as pairwise-disjoint two-subsets of the arc, prove their union has cardinality twice
-the point index, and derive `r_A(x) ≤ floor (|A|/2)`. Then choose explicit finite incidence types for
-the first-moment secant/point flags and the second-moment unordered pairs of concurrent secants so
-both equations are proved by cardinality-preserving equivalences rather than arithmetic rewrites.
+Begin C91 by defining the prescribed-hole incidence sum `I_H(A)`, covered required locus, and defect
+in an integer-valued normalization that avoids truncated natural subtraction. Split the two C90
+moments over `H` and its complement, prove the two termwise binomial identities, and derive the
+exact defect formula. Only then project nonnegativity, equality, and stability back to natural-card
+inequalities using `pointIndex_le_half_card`.

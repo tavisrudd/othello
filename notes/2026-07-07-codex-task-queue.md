@@ -70,9 +70,9 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
    boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
-   isolated incidence foundation, attained `rho`, coordinate plane order, and `ProjectiveCap` arc
-   bridge are Lean-proved; **C90 secant moments are next**. Then formalize the exact prescribed-hole
-   defect identity, conic consequences, averaging/nucleus results, and certified small examples.
+   incidence foundation and C90's maximum-index plus both classical secant moments are Lean-proved;
+   **C91 prescribed-hole defect identity is next**. Then formalize the conic consequences,
+   averaging/nucleus results, and certified small examples.
    Live map:
    [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
@@ -87,8 +87,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C90 [OPEN] — classical secant moments.** Prove the maximum-index lemma and the first and second
-  secant-index equations by kernel-checked finite double counting. Track in the
+- **C90 [REPORTED 2026-07-12] — classical secant moments.** Literal unordered endpoint pairs,
+  canonical pair lines, and pairwise-disjoint endpoint fibers prove `r_A(x)≤⌊|A|/2⌋`; finite
+  double counts prove `Σr=C(k,2)(q−1)` and `ΣC(r,2)=3C(k,4)`. The warning-free target builds and
+  headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C91 [OPEN] — prescribed-hole defect identity.** Formalize the exact identity, nonnegativity,
