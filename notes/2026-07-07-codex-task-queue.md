@@ -70,9 +70,9 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
    boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
 5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
-   incidence foundation and C90's maximum-index plus both classical secant moments are Lean-proved;
-   **C91 prescribed-hole defect identity is next**. Then formalize the conic consequences,
-   averaging/nucleus results, and certified small examples.
+   incidence foundation, C90's classical secant moments, and C91's exact prescribed-hole defect
+   identity with all finite consequences are Lean-proved; **C92 conic specialization is next**.
+   Then formalize the asymptotic, averaging/nucleus results, and certified small examples.
    Live map:
    [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
@@ -93,8 +93,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C91 [OPEN] — prescribed-hole defect identity.** Formalize the exact identity, nonnegativity,
-  coverage/uncovered bounds, equality criterion, and quantitative stability. Track in the
+- **C91 [REPORTED 2026-07-12] — prescribed-hole defect identity.** The split moments give the exact
+  integer-normalized defect identity. Maximum-index bounds prove nonnegativity, coverage/uncovered
+  inequalities, the equality criterion, and quantitative stability. The warning-free target builds;
+  headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
 - **C92 [OPEN] — conic specialization and finite lower bounds.** Formalize the standard conic,

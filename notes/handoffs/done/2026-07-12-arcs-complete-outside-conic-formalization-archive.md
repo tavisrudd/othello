@@ -56,3 +56,22 @@ closed-negative proof routes belong here.
   jobs and no source warnings. A separate axiom audit printed
   `[propext, Classical.choice, Quot.sound]` for pair-line injectivity, pair/line index agreement,
   the maximum-index theorem, and both moment equations. Source and import-isolation scans passed.
+
+## 2026-07-12 — C91 prescribed-hole defect identity landed
+
+- Added `RelativeConicArcs/Defect.lean`. Disjointness of `A` and `H` splits the external locus into
+  the holes and required locus; indices vanish on its uncovered part, yielding split forms of both
+  C90 moment equations.
+- Defined the hole incidence and scaled defect over `ℤ`, while retaining
+  `m = floor (|A|/2)` as a natural number before casting. Two termwise binomial identities reduce
+  the defect exactly to the sum of required-point terms `(r−1)(m−r)` and hole terms `r(m−r)`.
+- Applied the C90 maximum-index theorem termwise to prove nonnegativity. Vanishing of the two
+  nonnegative sums gives the exact equality criterion: required covered indices lie in `{1,m}` and
+  hole indices in `{0,m}`.
+- Derived subtraction-free natural-number coverage and uncovered-locus bounds. Filtered sets of
+  intermediate required and hole indices give the stability estimate
+  `(m−2)|M| + (m−1)|J| ≤ mΔ`.
+- Validation: `nix develop --command lake build RelativeConicArcs.Defect RelativeConicArcs`
+  completed successfully with 3012 jobs and no source warnings. Source and import-isolation scans
+  passed. A separate audit printed `[propext, Classical.choice, Quot.sound]` for both split moments,
+  the exact identity, nonnegativity, equality, coverage, uncovered, and stability theorems.
