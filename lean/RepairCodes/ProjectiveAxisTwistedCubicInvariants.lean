@@ -316,6 +316,41 @@ theorem projectiveShiftInv_finset_linearIndependent_iff [CharP 𝔽 3] (a : 𝔽
   funext j
   rfl
 
+/-- A finite support is a circuit of the completed column matroid. -/
+def IsProjectiveAxisTwistedCubicCircuit
+    (S : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) : Prop :=
+  ¬ LinearIndependent 𝔽 (fun j : S => projectiveAxisTwistedCubicPoints 𝔽 j) ∧
+    ∀ x ∈ S, LinearIndependent 𝔽
+      (fun j : S.erase x => projectiveAxisTwistedCubicPoints 𝔽 j)
+
+/-- D-PC10 relabeling preserves completed-system circuits exactly. -/
+theorem isProjectiveAxisTwistedCubicCircuit_map_iff [CharP 𝔽 3] (a : 𝔽)
+    (S : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :
+    IsProjectiveAxisTwistedCubicCircuit
+        (S.map (projectiveShiftInvIndexEquiv a).toEmbedding) ↔
+      IsProjectiveAxisTwistedCubicCircuit S := by
+  let e := (projectiveShiftInvIndexEquiv a).toEmbedding
+  constructor
+  · rintro ⟨hdep, hdelete⟩
+    refine ⟨?_, ?_⟩
+    · exact fun hli => hdep ((projectiveShiftInv_finset_linearIndependent_iff a S).mp hli)
+    · intro x hx
+      have hex : projectiveShiftInvIndexEquiv a x ∈ S.map e :=
+        Finset.mem_map.mpr ⟨x, hx, rfl⟩
+      have hli := hdelete (projectiveShiftInvIndexEquiv a x) hex
+      change LinearIndependent 𝔽
+        (fun j : (S.map e).erase (e x) => projectiveAxisTwistedCubicPoints 𝔽 j) at hli
+      rw [← Finset.map_erase] at hli
+      exact (projectiveShiftInv_finset_linearIndependent_iff a (S.erase x)).mpr hli
+  · rintro ⟨hdep, hdelete⟩
+    refine ⟨?_, ?_⟩
+    · exact fun hli => hdep ((projectiveShiftInv_finset_linearIndependent_iff a S).mpr hli)
+    · intro y hy
+      obtain ⟨x, hx, hxy⟩ := Finset.mem_map.mp hy
+      subst y
+      rw [← Finset.map_erase]
+      exact (projectiveShiftInv_finset_linearIndependent_iff a (S.erase x)).mp (hdelete x hx)
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
@@ -324,5 +359,6 @@ theorem projectiveShiftInv_finset_linearIndependent_iff [CharP 𝔽 3] (a : 𝔽
 #print axioms projectiveShiftInvLinearMap_column
 #print axioms projectiveShiftInv_linearIndependent_iff
 #print axioms projectiveShiftInv_finset_linearIndependent_iff
+#print axioms isProjectiveAxisTwistedCubicCircuit_map_iff
 
 end RepairCodes

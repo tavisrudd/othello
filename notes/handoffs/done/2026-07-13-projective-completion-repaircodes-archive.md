@@ -167,3 +167,10 @@ D-PC10 coordinate permutation, then proved kernel-side that the selected columns
 linearly independent exactly when the selected columns on the relabeled support are. Thus the
 remaining transport work is restricted to compatibility of one-point deletions and the repair
 target/helper convention, rather than any further ambient linear algebra.
+
+That deletion step is now closed. The module defines the completed column-circuit predicate as
+dependence plus independence after deleting every selected point and proves that D-PC10 relabeling
+preserves it in both directions. The remaining repair transport is a generic code/matroid API
+lemma: an inclusion-minimal dual support whose target coefficient is nonzero is exactly a column
+circuit containing that target. This is logically separate from the projective symmetry and should
+be proved once in `FiniteGeom.Repair`, not reconstructed for this family.
