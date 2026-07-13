@@ -117,4 +117,58 @@ theorem repair_edge_reindexed_det_eq_zero {k : ℕ} {G : Matrix (Fin k) (Fin n) 
   rw [← heq]
   exact hli.comp e.symm e.symm.injective
 
+/-- Conversely, a dependent target-and-helper column family of the minimum size allowed by dual
+distance is an actual repair edge. The extended relation is a dual word; the distance lower bound
+forces its support to use every selected column, including the target. -/
+theorem mem_repairHypergraph_of_columns_dependent {k : ℕ} {G : Matrix (Fin k) (Fin n) 𝔽}
+    {x : Fin n} {r : ℕ} {R : Finset (Fin n)} (hsub : R ⊆ univ.erase x)
+    (hcard : R.card = r) (hd : r + 1 ≤ dualDist (rowCode G))
+    (hdep : ¬ LinearIndependent 𝔽 (fun j : ↥(insert x R) => G.col j)) :
+    R ∈ repairHypergraph (rowCode G) x r := by
+  classical
+  have hxR : x ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  rw [Fintype.not_linearIndependent_iff] at hdep
+  obtain ⟨c, hrel, ⟨j, hcj⟩⟩ := hdep
+  let y : Fin n → 𝔽 := fun i => if hi : i ∈ insert x R then c ⟨i, hi⟩ else 0
+  have hyrel : ∑ i, y i • G.col i = 0 := by
+    calc
+      (∑ i, y i • G.col i) = ∑ i ∈ insert x R, y i • G.col i := by
+        symm
+        apply Finset.sum_subset (Finset.subset_univ _)
+        intro i _ hi
+        simp only [y, dif_neg hi, zero_smul]
+      _ = ∑ i : ↥(insert x R), c i • G.col i := by
+        rw [← (insert x R).sum_attach]
+        apply Finset.sum_congr rfl
+        intro i _
+        simp only [y, dif_pos i.property]
+      _ = 0 := hrel
+  have hy : y ∈ dualCode (rowCode G) := mem_dualCode_rowCode_of_column_relation hyrel
+  have hy0 : y ≠ 0 := by
+    intro hzero
+    have hj0 := congrFun hzero j
+    simp only [y, dif_pos j.property, Pi.zero_apply] at hj0
+    exact hcj hj0
+  have hsupp : wordSupport y ⊆ insert x R := by
+    intro i hi
+    by_contra hnot
+    have hyi : y i = 0 := by simp only [y, dif_neg hnot]
+    exact (mem_wordSupport.mp hi) hyi
+  have hselected : (insert x R).card = r + 1 := by
+    rw [Finset.card_insert_of_notMem hxR, hcard]
+  have hdist : r + 1 ≤ (wordSupport y).card := by
+    simpa only [card_wordSupport] using (hd.trans (dualDist_le_hammingNorm hy hy0))
+  have hsupp_eq : wordSupport y = insert x R := by
+    apply Finset.eq_of_subset_of_card_le hsupp
+    rw [hselected]
+    exact hdist
+  have hyx : y x ≠ 0 := by
+    apply mem_wordSupport.mp
+    rw [hsupp_eq]
+    exact Finset.mem_insert_self x R
+  apply mem_repairHypergraph.mpr
+  exact ⟨hsub, hcard.le, y, hy, hyx, hsupp_eq⟩
+
 end FiniteGeom

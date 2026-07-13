@@ -161,6 +161,23 @@ theorem dual_word_column_relation {G : Matrix (Fin k) (Fin n) 𝔽} {y : Fin n �
       exact mul_comm _ _
     _ = 0 := hi
 
+omit [DecidableEq 𝔽] in
+/-- A linear relation among all generator columns is a word of the row-code dual. -/
+theorem mem_dualCode_rowCode_of_column_relation {G : Matrix (Fin k) (Fin n) 𝔽}
+    {y : Fin n → 𝔽} (hy : ∑ j, y j • G.col j = 0) :
+    y ∈ dualCode (rowCode G) := by
+  rw [mem_dualCode_rowCode_iff_mulVec]
+  funext i
+  have hi := congrFun hy i
+  simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at hi
+  simp only [Matrix.mulVec, dotProduct, Pi.zero_apply]
+  calc
+    (∑ j, G i j * y j) = ∑ j, y j * G i j := by
+      apply Finset.sum_congr rfl
+      intro j _
+      exact mul_comm _ _
+    _ = 0 := hi
+
 /-- **Dual-distance lower bound from small-column independence.** If every set of fewer than `d`
 generator columns is linearly independent, then every nonzero dual word has weight at least `d`.
 The explicit `hdual` hypothesis is necessary under this file's convention `minDist ⊥ = 0`:

@@ -495,20 +495,14 @@ theorem q9AxisRepair_edge_nonempty {R : Finset (Fin 10)} (hR : R ∈ q9AxisRepai
 theorem q9AxisRepairHypergraph_nonempty : q9AxisRepairHypergraph.Nonempty :=
   ⟨q9AxisHelpers, q9AxisHelpers_mem_repairHypergraph⟩
 
-/-- Every axis repair edge, in any enumeration of its three helpers, has distinct parameters
-whose sum is zero. This is the algebraic-line characterization in the direction needed for the
-upper bounds on the repair hypergraph invariants. -/
-theorem q9AxisRepair_edge_zeroSum {R : Finset (Fin 10)}
-    (hR : R ∈ q9AxisRepairHypergraph) :
-    ∃ e : Fin 3 ≃ R, Function.Injective (fun i => q9IndexParam (e i)) ∧
-      q9IndexParam (e 0) + q9IndexParam (e 1) + q9IndexParam (e 2) = 0 := by
+/-- Reindex three non-axis helpers followed by the axis so that the resulting generator submatrix
+is the canonical four-column circuit matrix. -/
+theorem q9AxisSupport_reindex {R : Finset (Fin 10)} (hxR : q9Axis ∉ R)
+    (hc : R.card = 3) (er : Fin 3 ≃ R) :
+    ∃ es : Fin 4 ≃ ↥(insert q9Axis R),
+      (fun i j => q9SeedGenerator i (es j)) =
+        q9CircuitMatrix (fun j => q9IndexParam (er j)) := by
   classical
-  have hc : R.card = 3 := q9AxisRepair_edge_card hR
-  have hmem := (mem_repairHypergraph.mp hR).1
-  have hxR : q9Axis ∉ R := by
-    intro hx
-    exact (Finset.mem_erase.mp (hmem hx)).1 rfl
-  let er : Fin 3 ≃ R := (R.equivFinOfCardEq hc).symm
   have hfinite (i : Fin 3) : (((er i : R) : Fin 10) : ℕ) < 9 := by
     have hne : ((er i : R) : Fin 10) ≠ q9Axis := fun h => hxR (h ▸ (er i).property)
     have hne9 : ((((er i : R) : Fin 10) : ℕ)) ≠ 9 := by
@@ -516,17 +510,6 @@ theorem q9AxisRepair_edge_zeroSum {R : Finset (Fin 10)}
       apply hne
       exact Fin.ext h
     omega
-  let v : Fin 3 → GF9 := fun i => q9IndexParam (er i)
-  have hv : Function.Injective v := by
-    intro i j hij
-    have hp : gf9ParamEquiv
-          ⟨((er i : R) : Fin 10), hfinite i⟩ =
-        gf9ParamEquiv ⟨((er j : R) : Fin 10), hfinite j⟩ := by
-      simpa [v, q9IndexParam_eq (hfinite i), q9IndexParam_eq (hfinite j)] using hij
-    have heq := gf9ParamEquiv.injective hp
-    apply er.injective
-    apply Subtype.ext
-    exact Fin.ext (congrArg (fun z : Fin 9 => (z : ℕ)) heq)
   let f : Fin 4 → Fin 10 := Fin.lastCases q9Axis (fun i => er i)
   have flast : f (Fin.last 3) = q9Axis := by rfl
   have fcast (i : Fin 3) : f i.castSucc = er i := by simp [f]
@@ -567,23 +550,107 @@ theorem q9AxisRepair_edge_zeroSum {R : Finset (Fin 10)}
       rw [Fintype.card_fin, Fintype.card_coe]
       rw [Finset.card_insert_of_notMem hxR, hc]⟩)
   have hes (j : Fin 4) : (es j : Fin 10) = f j := rfl
+  refine ⟨es, ?_⟩
+  ext i j
+  cases j using Fin.lastCases with
+  | last =>
+      rw [hes, flast]
+      fin_cases i <;> simp [q9SeedGenerator, q9SeedColumn, q9Axis, q9CircuitMatrix]
+  | cast j =>
+      rw [hes, fcast]
+      fin_cases j <;> fin_cases i <;>
+        simp [q9SeedGenerator, q9SeedColumn, q9CircuitMatrix, q9IndexParam_eq, hfinite]
+
+/-- Every axis repair edge, in any enumeration of its three helpers, has distinct parameters
+whose sum is zero. This is the algebraic-line characterization in the direction needed for the
+upper bounds on the repair hypergraph invariants. -/
+theorem q9AxisRepair_edge_zeroSum {R : Finset (Fin 10)}
+    (hR : R ∈ q9AxisRepairHypergraph) :
+    ∃ e : Fin 3 ≃ R, Function.Injective (fun i => q9IndexParam (e i)) ∧
+      q9IndexParam (e 0) + q9IndexParam (e 1) + q9IndexParam (e 2) = 0 := by
+  classical
+  have hc : R.card = 3 := q9AxisRepair_edge_card hR
+  have hmem := (mem_repairHypergraph.mp hR).1
+  have hxR : q9Axis ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hmem hx)).1 rfl
+  let er : Fin 3 ≃ R := (R.equivFinOfCardEq hc).symm
+  have hfinite (i : Fin 3) : (((er i : R) : Fin 10) : ℕ) < 9 := by
+    have hne : ((er i : R) : Fin 10) ≠ q9Axis := fun h => hxR (h ▸ (er i).property)
+    have hne9 : ((((er i : R) : Fin 10) : ℕ)) ≠ 9 := by
+      intro h
+      apply hne
+      exact Fin.ext h
+    omega
+  let v : Fin 3 → GF9 := fun i => q9IndexParam (er i)
+  have hv : Function.Injective v := by
+    intro i j hij
+    have hp : gf9ParamEquiv
+          ⟨((er i : R) : Fin 10), hfinite i⟩ =
+        gf9ParamEquiv ⟨((er j : R) : Fin 10), hfinite j⟩ := by
+      simpa [v, q9IndexParam_eq (hfinite i), q9IndexParam_eq (hfinite j)] using hij
+    have heq := gf9ParamEquiv.injective hp
+    apply er.injective
+    apply Subtype.ext
+    exact Fin.ext (congrArg (fun z : Fin 9 => (z : ℕ)) heq)
+  obtain ⟨es, hmatrix⟩ := q9AxisSupport_reindex hxR hc er
   have hdet : Matrix.det (fun i j => q9SeedGenerator i (es j)) = 0 := by
     apply repair_edge_reindexed_det_eq_zero (G := q9SeedGenerator) hR es
-  have hmatrix : (fun i j => q9SeedGenerator i (es j)) = q9CircuitMatrix v := by
-    ext i j
-    cases j using Fin.lastCases with
-    | last =>
-        rw [hes, flast]
-        fin_cases i <;> simp [q9SeedGenerator, q9SeedColumn, q9Axis,
-          q9CircuitMatrix]
-    | cast j =>
-        rw [hes, fcast]
-        fin_cases j <;> fin_cases i <;>
-          simp [q9SeedGenerator, q9SeedColumn, q9CircuitMatrix,
-            v, q9IndexParam_eq, hfinite]
+  change (fun i j => q9SeedGenerator i (es j)) = q9CircuitMatrix v at hmatrix
   rw [hmatrix] at hdet
   have hsum := (q9CircuitMatrix_det_eq_zero_iff hv).mp hdet
   exact ⟨er, hv, hsum⟩
+
+/-- A three-helper set away from the axis whose parameters sum to zero is an actual repair edge.
+The determinant supplies dependence, and exact dual distance four forces the corresponding dual
+relation to have full support. -/
+theorem q9AxisRepair_edge_of_zeroSum {R : Finset (Fin 10)}
+    (hsub : R ⊆ univ.erase q9Axis) (hc : R.card = 3) (er : Fin 3 ≃ R)
+    (hsum : q9IndexParam (er 0) + q9IndexParam (er 1) + q9IndexParam (er 2) = 0) :
+    R ∈ q9AxisRepairHypergraph := by
+  classical
+  have hxR : q9Axis ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  obtain ⟨es, hmatrix⟩ := q9AxisSupport_reindex hxR hc er
+  let A : Matrix (Fin 4) (Fin 4) GF9 := fun i j => q9SeedGenerator i (es j)
+  have hdetCircuit : (q9CircuitMatrix (fun j => q9IndexParam (er j))).det = 0 := by
+    rw [q9CircuitMatrix_det, hsum]
+    ring
+  have hdetA : A.det = 0 := by
+    change Matrix.det (fun i j => q9SeedGenerator i (es j)) = 0
+    rw [hmatrix]
+    exact hdetCircuit
+  rw [q9AxisRepairHypergraph]
+  apply mem_repairHypergraph_of_columns_dependent hsub hc (by
+    have hd : 4 ≤ dualDist q9InnerCode := by rw [q9InnerCode_dualDist]
+    simpa only [q9InnerCode] using hd)
+  intro hli
+  have hliA : LinearIndependent GF9 A.col := by
+    have hcomp := hli.comp es es.injective
+    have heq : ((fun j : ↥(insert q9Axis R) => q9SeedGenerator.col j) ∘ es) = A.col := by
+      funext j
+      ext i
+      simp [A, Matrix.col]
+    simpa only [heq] using hcomp
+  have hunitA : IsUnit A := Matrix.linearIndependent_cols_iff_isUnit.mp hliA
+  have hunit : IsUnit A.det := A.isUnit_iff_isUnit_det.mp hunitA
+  exact hunit.ne_zero hdetA
+
+/-- Exact characterization of the q=9 axis repair hypergraph: its edges are precisely the
+three-element non-axis sets whose (necessarily distinct) field parameters sum to zero. -/
+theorem q9AxisRepair_edge_iff_zeroSum {R : Finset (Fin 10)} :
+    R ∈ q9AxisRepairHypergraph ↔
+      R ⊆ univ.erase q9Axis ∧
+        ∃ e : Fin 3 ≃ R, Function.Injective (fun i => q9IndexParam (e i)) ∧
+          q9IndexParam (e 0) + q9IndexParam (e 1) + q9IndexParam (e 2) = 0 := by
+  constructor
+  · intro hR
+    exact ⟨(mem_repairHypergraph.mp hR).1, q9AxisRepair_edge_zeroSum hR⟩
+  · rintro ⟨hsub, e, -, hsum⟩
+    have hc : R.card = 3 := by
+      simpa only [Fintype.card_fin, Fintype.card_coe] using (Fintype.card_congr e).symm
+    exact q9AxisRepair_edge_of_zeroSum hsub hc e hsum
 
 /-- The seed encoder (right multiplication by the generator matrix) is injective. -/
 theorem q9SeedEncoder_injective : Function.Injective q9SeedGenerator.vecMulLinear := by

@@ -406,3 +406,23 @@ that discharges the transfer interface's finite fields from it:
 - Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
   `#print axioms` on the column-relation and determinant bridges, determinant criterion, and q9
   zero-sum theorem returned exactly `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (exact q9 zero-sum edge characterization)
+
+- Added the reverse generator-column bridge
+  `mem_dualCode_rowCode_of_column_relation`. In `FiniteGeom/Repair.lean`, the reusable theorem
+  `mem_repairHypergraph_of_columns_dependent` extends a dependent selected-column relation to a
+  dual word; when the selected family has the minimum size allowed by dual distance, cardinality
+  forces its support to contain every helper and the target.
+- Factored the q9 helper-plus-axis ordering into `q9AxisSupport_reindex`, shared by both directions
+  of the characterization. This keeps the determinant calculation tied to one canonical
+  three-finite-columns-plus-axis matrix.
+- Proved `q9AxisRepair_edge_of_zeroSum` and the exact theorem
+  `q9AxisRepair_edge_iff_zeroSum`: the code-derived axis repair edges are precisely the
+  three-element non-axis sets whose distinct `𝔽₉` parameters sum to zero.
+- The next step is now purely combinatorial/linear: transport the zero-sum triple hypergraph along
+  an additive equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`, identify it with the twelve affine lines of
+  `AG(2,3)`, and prove `matchingNumber=3`, `transversalNumber=5`.
+- Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
+  `#print axioms` on both reverse bridges, the shared support reindexing, and both converse/exact
+  q9 theorems returned exactly `[propext, Classical.choice, Quot.sound]`.
