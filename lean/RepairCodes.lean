@@ -15,5 +15,6 @@ import RepairCodes.AxisTwistedCubic
 import RepairCodes.AxisTwistedCubicInvariants
 import RepairCodes.Q9Seed
 import RepairCodes.Q9Affine
+import RepairCodes.Q9Uniform
 import RepairCodes.CodeInstance
 import RepairCodes.OuterDual

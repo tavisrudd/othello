@@ -440,20 +440,39 @@ theorem axisCubicRepairComponent_infinity_transversalNumber [CharP 𝔽 3] :
   intro E hE
   exact Finset.card_pos.mp (by rw [(mem_zeroSumTripleHypergraph.mp hE).1]; decide)
 
-/-- Exact paper-facing nucleus invariants, before the harmless normalization of the matching
-sum to `(5q-3)/6`.  Here `zeroSumCapNumber 𝔽` is semantically proved to be the maximum
-affine cap size. -/
+/-- Division normalizations used by the paper's characteristic-three axis formulas. -/
+theorem axisCardDivision_normalizations {K : Type*} [Field K] [Fintype K] [CharP K 3] :
+    Fintype.card K / 2 + Fintype.card K / 3 =
+        (5 * Fintype.card K - 3) / 6 ∧
+      Fintype.card K / 2 + (Fintype.card K / 3 - 1) =
+        (5 * Fintype.card K - 9) / 6 := by
+  obtain ⟨n, -, hq⟩ := FiniteField.card K 3
+  obtain ⟨m, hm⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt n.2)
+  have hqmul : Fintype.card K = 3 * 3 ^ m := by
+    calc
+      Fintype.card K = 3 ^ (n : ℕ) := hq
+      _ = 3 ^ (m + 1) := congrArg (fun k : ℕ => 3 ^ k) hm
+      _ = 3 * 3 ^ m := by rw [pow_succ]; omega
+  have hqodd : Odd (Fintype.card K) := by
+    rw [hq]
+    exact (show Odd (3 : ℕ) by norm_num).pow
+  obtain ⟨k, hk⟩ := hqodd
+  constructor <;> omega
+
+/-- Exact paper-facing nucleus invariants.  Here `zeroSumCapNumber 𝔽` is semantically
+proved to be the maximum affine cap size. -/
 theorem minimalAxisRepair_nucleus_invariants [CharP 𝔽 3] :
     matchingNumber (minimalAxisTwistedCubicRepairHypergraph
         (.inr (Sum.inr Unit.unit : 𝔽 ⊕ Unit)) 3) =
-        Fintype.card 𝔽 / 2 + Fintype.card 𝔽 / 3 ∧
+        (5 * Fintype.card 𝔽 - 3) / 6 ∧
       transversalNumber (minimalAxisTwistedCubicRepairHypergraph
         (.inr (Sum.inr Unit.unit : 𝔽 ⊕ Unit)) 3) =
         2 * Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := by
   have hdec := minimalAxisRepair_invariant_decomposition
     (Sum.inr Unit.unit : 𝔽 ⊕ Unit)
   constructor
-  · rw [hdec.1, axisCubicRepairComponent_infinity_matchingNumber]
+  · rw [hdec.1, axisCubicRepairComponent_infinity_matchingNumber,
+      axisCardDivision_normalizations.1]
   · rw [hdec.2, axisCubicRepairComponent_infinity_transversalNumber,
       transversalNumber_zeroSumTripleHypergraph]
     obtain ⟨S, -, hScard⟩ := exists_zeroSumCap_card_eq (A := 𝔽)
@@ -462,6 +481,246 @@ theorem minimalAxisRepair_nucleus_invariants [CharP 𝔽 3] :
       simpa using Finset.card_le_card (Finset.subset_univ S)
     have hqpos : 0 < Fintype.card 𝔽 := Fintype.card_pos
     omega
+
+/-- Translation followed by inversion, extended by `0⁻¹=0`, is a permutation of the field.
+It sends the exceptional cubic parameter `-a` to zero. -/
+def axisShiftInvEquiv (a : 𝔽) : 𝔽 ≃ 𝔽 where
+  toFun s := (s + a)⁻¹
+  invFun r := r⁻¹ - a
+  left_inv s := by simp
+  right_inv r := by simp
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+@[simp] theorem axisShiftInvEquiv_apply (a s : 𝔽) :
+    axisShiftInvEquiv a s = (s + a)⁻¹ := rfl
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem shifted_pair_sum [CharP 𝔽 3] (a s t u : 𝔽) :
+    (s + a) * (t + a) + (s + a) * (u + a) + (t + a) * (u + a) =
+      (s * t + s * u + t * u) - a * (s + t + u) := by
+  linear_combination a * (s + t + u + a) * CharP.cast_eq_zero 𝔽 3
+
+/-- Translating all three cubic parameters translates every finite completion color by the
+opposite amount and leaves the nucleus color fixed. -/
+theorem twistedCubicTripleAxisIndex_translate {K : Type*} [Field K] [DecidableEq K] [CharP K 3]
+    (x r s : K) :
+    twistedCubicTripleAxisIndex ![x, x + r, x + s] =
+      if r + s = 0 then Sum.inr Unit.unit else Sum.inl (r * s / (r + s) - x) := by
+  have hsum : x + (x + r) + (x + s) = r + s := by
+    linear_combination x * CharP.cast_eq_zero K 3
+  have hpairs : x * (x + r) + x * (x + s) + (x + r) * (x + s) =
+      r * s - x * (r + s) := by
+    linear_combination x * (x + r + s) * CharP.cast_eq_zero K 3
+  rw [twistedCubicTripleAxisIndex]
+  have hv0 : ![x, x + r, x + s] 0 = x := by rfl
+  have hv1 : ![x, x + r, x + s] 1 = x + r := by rfl
+  have hv2 : ![x, x + r, x + s] 2 = x + s := by rfl
+  rw [hv0, hv1, hv2]
+  rw [hsum, hpairs]
+  by_cases hrs : r + s = 0
+  · simp [hrs]
+  · simp only [hrs, if_false]
+    congr 1
+    apply (div_eq_iff hrs).mpr
+    field_simp
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem inv_sum_eq_pair_sum_div {r s t : 𝔽}
+    (hr : r ≠ 0) (hs : s ≠ 0) (ht : t ≠ 0) :
+    r⁻¹ + s⁻¹ + t⁻¹ = (r * s + r * t + s * t) / (r * s * t) := by
+  field_simp
+  ring
+
+omit [Fintype 𝔽] in
+/-- Algebraic inversion bridge for a finite axis target: three distinct cubic parameters
+complete the axis point `a` iff their shifted inverses form a zero-sum triple avoiding zero. -/
+theorem tripleAxisIndex_eq_finite_iff_shiftInv [CharP 𝔽 3]
+    {a s t u : 𝔽} (hst : s ≠ t) (hsu : s ≠ u) (htu : t ≠ u) :
+    twistedCubicTripleAxisIndex ![s, t, u] = Sum.inl a ↔
+      axisShiftInvEquiv a s ≠ 0 ∧ axisShiftInvEquiv a t ≠ 0 ∧
+        axisShiftInvEquiv a u ≠ 0 ∧
+        axisShiftInvEquiv a s + axisShiftInvEquiv a t + axisShiftInvEquiv a u = 0 := by
+  classical
+  let e₁ := s + t + u
+  let e₂ := s * t + s * u + t * u
+  have hv : Function.Injective (![s, t, u] : Fin 3 → 𝔽) := by
+    intro i j hij
+    fin_cases i <;> fin_cases j <;> simp_all
+  constructor
+  · intro hidx
+    have he₁ : e₁ ≠ 0 := by
+      intro he
+      simp [twistedCubicTripleAxisIndex, e₁, he] at hidx
+    have he₂ : e₂ / e₁ = a := by
+      simpa [twistedCubicTripleAxisIndex, e₁, e₂, he₁] using hidx
+    have hrel : e₂ - a * e₁ = 0 := by
+      have := (div_eq_iff he₁).mp he₂
+      linear_combination this
+    have hs0 : s + a ≠ 0 := by
+      intro hs
+      have hpairs : (s + a) * (t + a) + (s + a) * (u + a) + (t + a) * (u + a) = 0 := by
+        rw [shifted_pair_sum]
+        exact hrel
+      rw [hs, zero_mul, zero_mul, zero_add] at hpairs
+      have hp : (t + a) * (u + a) = 0 := by linear_combination hpairs
+      rcases mul_eq_zero.mp hp with ht | hu
+      · exact hst (by linear_combination hs - ht)
+      · exact hsu (by linear_combination hs - hu)
+    have ht0 : t + a ≠ 0 := by
+      intro ht
+      have hpairs : (s + a) * (t + a) + (s + a) * (u + a) + (t + a) * (u + a) = 0 := by
+        rw [shifted_pair_sum]
+        exact hrel
+      rw [ht, mul_zero, zero_mul, add_zero, zero_add] at hpairs
+      rcases mul_eq_zero.mp hpairs with hs | hu
+      · exact hst (by linear_combination hs - ht)
+      · exact htu (by linear_combination ht - hu)
+    have hu0 : u + a ≠ 0 := by
+      intro hu
+      have hpairs : (s + a) * (t + a) + (s + a) * (u + a) + (t + a) * (u + a) = 0 := by
+        rw [shifted_pair_sum]
+        exact hrel
+      rw [hu, mul_zero, mul_zero, add_zero] at hpairs
+      have hp : (s + a) * (t + a) = 0 := by linear_combination hpairs
+      rcases mul_eq_zero.mp hp with hs | ht
+      · exact hsu (by linear_combination hs - hu)
+      · exact htu (by linear_combination ht - hu)
+    refine ⟨inv_ne_zero hs0, inv_ne_zero ht0, inv_ne_zero hu0, ?_⟩
+    rw [axisShiftInvEquiv_apply, axisShiftInvEquiv_apply, axisShiftInvEquiv_apply,
+      inv_sum_eq_pair_sum_div hs0 ht0 hu0, shifted_pair_sum]
+    change (e₂ - a * e₁) / ((s + a) * (t + a) * (u + a)) = 0
+    rw [hrel, zero_div]
+  · rintro ⟨hsI, htI, huI, hsum⟩
+    have hs0 : s + a ≠ 0 := by intro h; simp [h] at hsI
+    have ht0 : t + a ≠ 0 := by intro h; simp [h] at htI
+    have hu0 : u + a ≠ 0 := by intro h; simp [h] at huI
+    have hpairs : (s + a) * (t + a) + (s + a) * (u + a) + (t + a) * (u + a) = 0 := by
+      rw [axisShiftInvEquiv_apply, axisShiftInvEquiv_apply, axisShiftInvEquiv_apply,
+        inv_sum_eq_pair_sum_div hs0 ht0 hu0] at hsum
+      have hprod : (s + a) * (t + a) * (u + a) ≠ 0 := mul_ne_zero (mul_ne_zero hs0 ht0) hu0
+      exact (div_eq_zero_iff.mp hsum).resolve_right hprod
+    have hrel : e₂ - a * e₁ = 0 := by
+      rw [← shifted_pair_sum]
+      exact hpairs
+    have he₁ : e₁ ≠ 0 := by
+      rcases twistedCubicTripleAxis_coordinates_ne_zero hv with h | h
+      · simpa [e₁] using h
+      · intro he
+        have he₂ : e₂ ≠ 0 := by simpa [e₂] using h
+        apply he₂
+        linear_combination hrel + a * he
+    change (if e₁ = 0 then Sum.inr Unit.unit else Sum.inl (e₂ / e₁)) = Sum.inl a
+    rw [if_neg he₁]
+    congr 1
+    apply (div_eq_iff he₁).mpr
+    linear_combination hrel
+
+/-- For every finite axis point, shifted inversion identifies the three-cubic repair component
+with the affine lines avoiding zero. -/
+theorem axisCubicRepairComponent_finite_eq_avoidingZero [CharP 𝔽 3] (a : 𝔽) :
+    axisCubicRepairComponent (Sum.inl a) =
+      embedHypergraph
+        (⟨fun r : 𝔽 =>
+            (.inl ((axisShiftInvEquiv a).symm r) : AxisTwistedCubicIndex 𝔽), by
+          intro r s h
+          exact (axisShiftInvEquiv a).symm.injective (Sum.inl.inj h)⟩)
+        (zeroSumTripleHypergraphAvoidingZero 𝔽) := by
+  classical
+  let ψ := axisShiftInvEquiv a
+  let e : 𝔽 ↪ AxisTwistedCubicIndex 𝔽 :=
+    ⟨fun r => .inl (ψ.symm r), fun _ _ h => ψ.symm.injective (Sum.inl.inj h)⟩
+  change axisCubicRepairComponent (Sum.inl a) =
+    embedHypergraph e (zeroSumTripleHypergraphAvoidingZero 𝔽)
+  ext R
+  constructor
+  · intro hR
+    obtain ⟨s, t, u, hst, hsu, htu, hy, rfl⟩ :=
+      mem_axisCubicRepairComponent_iff.mp hR
+    have hbridge := (tripleAxisIndex_eq_finite_iff_shiftInv hst hsu htu).mp hy.symm
+    apply Finset.mem_image.mpr
+    refine ⟨{ψ s, ψ t, ψ u}, mem_zeroSumTripleHypergraphAvoidingZero.mpr ⟨?_, ?_, ?_⟩, ?_⟩
+    · simp [hst, hsu, htu, ψ]
+    · simpa [hst, hsu, htu, add_assoc, ψ] using hbridge.2.2.2
+    · intro hzero
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hzero
+      rcases hzero with h | h | h
+      · exact hbridge.1 h.symm
+      · exact hbridge.2.1 h.symm
+      · exact hbridge.2.2.1 h.symm
+    · ext z
+      cases z <;> simp [e]
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hR
+    obtain ⟨r, q, p, hrq, hrp, hqp, rfl⟩ :=
+      Finset.card_eq_three.mp (mem_zeroSumTripleHypergraphAvoidingZero.mp hS).1
+    let s := ψ.symm r
+    let t := ψ.symm q
+    let u := ψ.symm p
+    have hst : s ≠ t := fun h => hrq (ψ.symm.injective h)
+    have hsu : s ≠ u := fun h => hrp (ψ.symm.injective h)
+    have htu : t ≠ u := fun h => hqp (ψ.symm.injective h)
+    have hmem := mem_zeroSumTripleHypergraphAvoidingZero.mp hS
+    have hbridge : twistedCubicTripleAxisIndex ![s, t, u] = Sum.inl a := by
+      apply (tripleAxisIndex_eq_finite_iff_shiftInv hst hsu htu).mpr
+      simp only [s, t, u, ψ, Equiv.apply_symm_apply]
+      have hzero : 0 ∉ ({r, q, p} : Finset 𝔽) := hmem.2.2
+      have hr0 : r ≠ 0 := by simpa using fun h => hzero (by simp [h])
+      have hq0 : q ≠ 0 := by simpa using fun h => hzero (by simp [h])
+      have hp0 : p ≠ 0 := by simpa using fun h => hzero (by simp [h])
+      refine ⟨hr0, hq0, hp0, ?_⟩
+      simpa [hrq, hrp, hqp, add_assoc] using hmem.2.1
+    apply mem_axisCubicRepairComponent_iff.mpr
+    refine ⟨s, t, u, hst, hsu, htu, hbridge.symm, ?_⟩
+    ext z
+    cases z <;> simp [e, s, t, u, ψ]
+
+/-- Exact matching contribution for a non-nucleus axis point. -/
+theorem axisCubicRepairComponent_finite_matchingNumber [CharP 𝔽 3] (a : 𝔽) :
+    matchingNumber (axisCubicRepairComponent (Sum.inl a)) = Fintype.card 𝔽 / 3 - 1 := by
+  rw [axisCubicRepairComponent_finite_eq_avoidingZero,
+    matchingNumber_embedHypergraph, matchingNumber_zeroSumTripleHypergraphAvoidingZero]
+
+/-- Exact transversal contribution for a non-nucleus axis point. -/
+theorem axisCubicRepairComponent_finite_transversalNumber [CharP 𝔽 3] (a : 𝔽) :
+    transversalNumber (axisCubicRepairComponent (Sum.inl a)) =
+      Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := by
+  rw [axisCubicRepairComponent_finite_eq_avoidingZero]
+  let e : 𝔽 ↪ AxisTwistedCubicIndex 𝔽 :=
+    ⟨fun r => .inl ((axisShiftInvEquiv a).symm r), by
+      intro r s h
+      exact (axisShiftInvEquiv a).symm.injective (Sum.inl.inj h)⟩
+  change transversalNumber (embedHypergraph e
+    (zeroSumTripleHypergraphAvoidingZero 𝔽)) = _
+  rw [transversalNumber_embedHypergraph e]
+  · exact transversalNumber_zeroSumTripleHypergraphAvoidingZero
+  · intro E hE
+    exact Finset.card_pos.mp (by
+      rw [(mem_zeroSumTripleHypergraphAvoidingZero.mp hE).1]
+      decide)
+
+/-- Exact paper-facing invariants for every finite (non-nucleus) axis point. -/
+theorem minimalAxisRepair_finite_invariants [CharP 𝔽 3] (a : 𝔽) :
+    matchingNumber (minimalAxisTwistedCubicRepairHypergraph
+        (.inr (Sum.inl a : 𝔽 ⊕ Unit)) 3) =
+        (5 * Fintype.card 𝔽 - 9) / 6 ∧
+      transversalNumber (minimalAxisTwistedCubicRepairHypergraph
+        (.inr (Sum.inl a : 𝔽 ⊕ Unit)) 3) =
+        2 * Fintype.card 𝔽 - 2 - zeroSumCapNumber 𝔽 := by
+  have hdec := minimalAxisRepair_invariant_decomposition (Sum.inl a : 𝔽 ⊕ Unit)
+  constructor
+  · rw [hdec.1, axisCubicRepairComponent_finite_matchingNumber,
+      axisCardDivision_normalizations.2]
+  · calc
+      transversalNumber (minimalAxisTwistedCubicRepairHypergraph
+          (.inr (Sum.inl a : 𝔽 ⊕ Unit)) 3) =
+          (Fintype.card 𝔽 - 1) +
+            transversalNumber (axisCubicRepairComponent (Sum.inl a)) := hdec.2
+      _ = 2 * Fintype.card 𝔽 - 2 - zeroSumCapNumber 𝔽 := by
+        rw [axisCubicRepairComponent_finite_transversalNumber]
+        have hSlt : zeroSumCapNumber 𝔽 < Fintype.card 𝔽 :=
+          zeroSumCapNumber_lt_card
+        have hqpos : 0 < Fintype.card 𝔽 := Fintype.card_pos
+        omega
 
 private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=

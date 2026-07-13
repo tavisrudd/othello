@@ -215,6 +215,18 @@ theorem isTransversal_relabelHypergraph_iff {W : Type*} [Fintype W] [DecidableEq
     simpa [relabelHypergraph_symm, Finset.map_map] using h'
   · exact fun h => h.relabelHypergraph e
 
+omit [Fintype V] [DecidableEq V] in
+theorem IsIndependent.relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ≃ W) {H : Finset (Finset V)} {S : Finset V} (h : IsIndependent H S) :
+    IsIndependent (relabelHypergraph e H) (S.map e.toEmbedding) := by
+  intro E hE hES
+  obtain ⟨E₀, hE₀, rfl⟩ := Finset.mem_image.mp hE
+  apply h hE₀
+  intro v hv
+  have hev : e v ∈ S.map e.toEmbedding := hES (Finset.mem_map.mpr ⟨v, hv, rfl⟩)
+  obtain ⟨w, hwS, hw⟩ := Finset.mem_map.mp hev
+  exact (e.injective hw).symm ▸ hwS
+
 omit [Fintype V] in
 /-- **Weak duality, pointwise.** Any matching is no larger than any transversal
 (the elementary `ν ≤ τ` direction — *not* König's equality, which needs
