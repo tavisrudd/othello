@@ -40,11 +40,23 @@ def relabelHypergraph {W : Type*} [DecidableEq W] (e : V ≃ W)
     (H : Finset (Finset V)) : Finset (Finset W) :=
   H.image fun s => s.map e.toEmbedding
 
+/-- Embed a hypergraph into a possibly larger vertex type.  Vertices outside the image are
+isolated and therefore do not affect matching data. -/
+def embedHypergraph {W : Type*} [DecidableEq W] (e : V ↪ W)
+    (H : Finset (Finset V)) : Finset (Finset W) :=
+  H.image fun s => s.map e
+
 omit [Fintype V] [DecidableEq V] in
 theorem card_relabelHypergraph {W : Type*} [DecidableEq W] (e : V ≃ W)
     (H : Finset (Finset V)) : (relabelHypergraph e H).card = H.card := by
   apply Finset.card_image_of_injective
   exact Finset.map_injective e.toEmbedding
+
+omit [Fintype V] [DecidableEq V] in
+theorem card_embedHypergraph {W : Type*} [DecidableEq W] (e : V ↪ W)
+    (H : Finset (Finset V)) : (embedHypergraph e H).card = H.card := by
+  apply Finset.card_image_of_injective
+  exact Finset.map_injective e
 
 omit [Fintype V] in
 theorem relabelHypergraph_symm {W : Type*} [DecidableEq W] (e : V ≃ W)
@@ -124,6 +136,22 @@ theorem isMatching_relabelHypergraph_iff {W : Type*} [Fintype W] [DecidableEq W]
     simpa only [relabelHypergraph_symm] using h'
   · exact fun h => h.relabelHypergraph e
 
+omit [Fintype V] [DecidableEq V] in
+theorem IsMatching.embedHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ↪ W) {H M : Finset (Finset V)} (h : IsMatching H M) :
+    IsMatching (embedHypergraph e H) (embedHypergraph e M) := by
+  refine ⟨?_, ?_⟩
+  · intro edge hedge
+    obtain ⟨edge0, hedge0, rfl⟩ := Finset.mem_image.mp hedge
+    exact Finset.mem_image.mpr ⟨edge0, h.1 hedge0, rfl⟩
+  · intro a ha b hb hab
+    obtain ⟨a0, ha0, rfl⟩ := Finset.mem_image.mp ha
+    obtain ⟨b0, hb0, rfl⟩ := Finset.mem_image.mp hb
+    apply (Finset.disjoint_map e).mpr
+    apply h.2 ha0 hb0
+    intro h0
+    exact hab (congrArg (fun s => s.map e) h0)
+
 omit [Fintype V] in
 theorem IsTransversal.relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
     (e : V ≃ W) {H : Finset (Finset V)} {T : Finset V} (h : IsTransversal H T) :
@@ -184,6 +212,22 @@ open scoped Classical in
 /-- Transversal number `τ(H)`: the smallest size of a transversal of `H`. -/
 noncomputable def transversalNumber (H : Finset (Finset V)) : ℕ :=
   sInf {n | ∃ T, IsTransversal H T ∧ T.card = n}
+
+omit [Fintype V] [DecidableEq V] in
+/-- The matching number of a finite hypergraph is attained by an actual matching. -/
+theorem exists_matching_card_eq_matchingNumber (H : Finset (Finset V)) :
+    ∃ M, IsMatching H M ∧ M.card = matchingNumber H := by
+  have hne : ({m | ∃ M, IsMatching H M ∧ M.card = m} : Set ℕ).Nonempty :=
+    ⟨0, ∅, ⟨Finset.empty_subset H, fun _ hm => by simp at hm⟩, Finset.card_empty⟩
+  have hbdd : BddAbove {m | ∃ M, IsMatching H M ∧ M.card = m} :=
+    ⟨H.card, by
+      intro m hm
+      obtain ⟨M, hM, rfl⟩ := hm
+      exact Finset.card_le_card hM.1⟩
+  obtain ⟨M, hM, hMcard⟩ := Nat.sSup_mem hne hbdd
+  refine ⟨M, hM, ?_⟩
+  unfold matchingNumber
+  exact hMcard
 
 /-- Matching number is invariant under a bijective relabeling of vertices. -/
 theorem matchingNumber_relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
@@ -330,6 +374,53 @@ with attainment (`Nat.sSup_mem`) this pins `matchingNumber` to the intended
 theorem card_le_matchingNumber {H M : Finset (Finset V)} (hM : IsMatching H M) :
     M.card ≤ matchingNumber H :=
   le_csSup ⟨H.card, by rintro n ⟨M', hM', rfl⟩; exact card_le_card hM'.1⟩ ⟨M, hM, rfl⟩
+
+omit [Fintype V] [DecidableEq V] in
+/-- Matching number is monotone when edges are added. -/
+theorem matchingNumber_mono {H K : Finset (Finset V)} (hHK : H ⊆ K) :
+    matchingNumber H ≤ matchingNumber K := by
+  obtain ⟨M, hM, hMcard⟩ := exists_matching_card_eq_matchingNumber H
+  rw [← hMcard]
+  exact card_le_matchingNumber ⟨hM.1.trans hHK, hM.2⟩
+
+omit [Fintype V] in
+/-- Embedding into a larger ground type preserves matching number. -/
+theorem matchingNumber_embedHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ↪ W) (H : Finset (Finset V)) :
+    matchingNumber (embedHypergraph e H) = matchingNumber H := by
+  apply le_antisymm
+  · apply matchingNumber_le_of_forall
+    intro M hM
+    have hex (E : {E // E ∈ M}) : ∃ A ∈ H, A.map e = E.1 := by
+      exact Finset.mem_image.mp (hM.1 E.2)
+    let f : {E // E ∈ M} → Finset V := fun E => (hex E).choose
+    have hfmem (E : {E // E ∈ M}) : f E ∈ H := (hex E).choose_spec.1
+    have hfmap (E : {E // E ∈ M}) : (f E).map e = E.1 := (hex E).choose_spec.2
+    let N := M.attach.image f
+    have hNcard : N.card = M.card := by
+      rw [show M.card = M.attach.card by simp]
+      apply Finset.card_image_iff.mpr
+      intro A hA B hB hEq
+      apply Subtype.ext
+      rw [← hfmap A, ← hfmap B, hEq]
+    have hN : IsMatching H N := by
+      refine ⟨?_, ?_⟩
+      · intro A hAN
+        obtain ⟨E, -, rfl⟩ := Finset.mem_image.mp hAN
+        exact hfmem E
+      · intro A hAN B hBN hAB
+        obtain ⟨E, hE, rfl⟩ := Finset.mem_image.mp hAN
+        obtain ⟨F, hF, rfl⟩ := Finset.mem_image.mp hBN
+        apply (Finset.disjoint_map e).mp
+        rw [hfmap E, hfmap F]
+        apply hM.2 E.2 F.2
+        intro hEF
+        exact hAB (congrArg f (Subtype.ext hEF))
+    rw [← hNcard]
+    exact card_le_matchingNumber hN
+  · obtain ⟨M, hM, hMcard⟩ := exists_matching_card_eq_matchingNumber H
+    rw [← hMcard, ← card_embedHypergraph e M]
+    exact card_le_matchingNumber (hM.embedHypergraph e)
 
 omit [Fintype V] in
 /-- `τ(H)` is a lower bound on every transversal size: `τ` is the *inf*. Together

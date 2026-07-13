@@ -16,6 +16,10 @@ open Finset
 
 variable {α β : Type*} [Fintype α] [DecidableEq α] [Fintype β] [DecidableEq β]
 
+/-- Row-properness: at a fixed graph vertex, distinct other endpoints have distinct colors. -/
+def IsProperAwayDiagonal (color : α → α → β) : Prop :=
+  ∀ a b c, b ≠ a → c ≠ a → color a b = color a c → b = c
+
 /-- The complete graph on `α`, with each edge augmented by a color vertex in the disjoint
 type `β`.  Symmetry of `color` is not needed for the extremal bounds. -/
 def augmentedColorHypergraph (color : α → α → β) : Finset (Finset (α ⊕ β)) :=
@@ -89,9 +93,168 @@ theorem matchingNumber_augmentedColorHypergraph_le (color : α → α → β) :
   have h := augmentedColorHypergraph_matching_card_le color hM
   omega
 
-/-- Row-properness: at a fixed graph vertex, distinct other endpoints have distinct colors. -/
-def IsProperAwayDiagonal (color : α → α → β) : Prop :=
-  ∀ a b c, b ≠ a → c ≠ a → color a b = color a c → b = c
+/-- A maximal-rainbow-matching count.  In a row-proper coloring, a maximum augmented matching
+has size at least `⌈(|α|-1)/3⌉`: after deleting its two graph endpoints per edge, fix one
+uncovered vertex.  Every other uncovered vertex must give a color already used by the matching,
+and row-properness makes those colors distinct. -/
+theorem matchingNumber_augmentedColorHypergraph_lower (color : α → α → β)
+    (hproper : IsProperAwayDiagonal color) :
+    (Fintype.card α + 1) / 3 ≤ matchingNumber (augmentedColorHypergraph color) := by
+  classical
+  let H := augmentedColorHypergraph color
+  obtain ⟨M, hM, hMcard⟩ := exists_matching_card_eq_matchingNumber H
+  let used : Finset (α ⊕ β) := M.biUnion id
+  let graphUsed : Finset α := univ.filter fun a => Sum.inl a ∈ used
+  let colorUsed : Finset β := univ.filter fun c => Sum.inr c ∈ used
+  let uncovered : Finset α := univ \ graphUsed
+  have hgraphCard : graphUsed.card = 2 * M.card := by
+    have hpairwise : (M : Set (Finset (α ⊕ β))).PairwiseDisjoint id := by
+      intro A hA B hB hAB
+      change Disjoint A B
+      exact hM.2 hA hB hAB
+    have husedCard : used.card = 3 * M.card := by
+      rw [show used = M.biUnion id by rfl, Finset.card_biUnion hpairwise]
+      calc
+        (∑ E ∈ M, E.card) = ∑ _E ∈ M, 3 := by
+          apply Finset.sum_congr rfl
+          intro E hEM
+          obtain ⟨a, b, hab, rfl⟩ := mem_augmentedColorHypergraph.mp (hM.1 hEM)
+          simp [hab]
+        _ = 3 * M.card := by simp [Nat.mul_comm]
+    have hsplit : graphUsed.card + colorUsed.card = used.card := by
+      have hpartition : used =
+          (graphUsed.map Function.Embedding.inl) ∪
+            (colorUsed.map Function.Embedding.inr) := by
+        ext z
+        cases z <;> simp [graphUsed, colorUsed]
+      rw [hpartition, Finset.card_union_of_disjoint (by simp [Finset.disjoint_left])]
+      simp
+    have hcolorCard : colorUsed.card = M.card := by
+      have hcolorPairwise :
+          (M : Set (Finset (α ⊕ β))).PairwiseDisjoint
+            (fun E => E.filter fun z => z.isRight) := by
+        intro A hA B hB hAB
+        exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+      have hcolorUnion : colorUsed.map Function.Embedding.inr =
+          M.biUnion (fun E => E.filter fun z => z.isRight) := by
+        ext z
+        cases z with
+        | inl a => simp
+        | inr c => simp [colorUsed, used]
+      calc
+        colorUsed.card = (colorUsed.map Function.Embedding.inr).card :=
+          (Finset.card_map Function.Embedding.inr).symm
+        _ = (M.biUnion (fun E => E.filter fun z => z.isRight)).card :=
+          congrArg Finset.card hcolorUnion
+        _ = ∑ E ∈ M, (E.filter fun z => z.isRight).card :=
+          Finset.card_biUnion hcolorPairwise
+        _ = ∑ _E ∈ M, 1 := by
+          apply Finset.sum_congr rfl
+          intro E hEM
+          obtain ⟨a, b, hab, rfl⟩ := mem_augmentedColorHypergraph.mp (hM.1 hEM)
+          rw [show (({Sum.inl a, Sum.inl b, Sum.inr (color a b)} : Finset (α ⊕ β)).filter
+              fun z => z.isRight) = {Sum.inr (color a b)} by
+            ext z
+            cases z <;> simp]
+          simp
+        _ = M.card := by simp
+    omega
+  have hsplit : graphUsed.card + uncovered.card = Fintype.card α := by
+    rw [show uncovered = univ \ graphUsed by rfl, Finset.card_sdiff]
+    rw [Finset.inter_eq_left.mpr (Finset.filter_subset _ _), Finset.card_univ]
+    have hle : graphUsed.card ≤ Fintype.card α := by
+      simpa [graphUsed] using
+        Finset.card_le_card (Finset.filter_subset (fun a => Sum.inl a ∈ used) univ)
+    exact Nat.add_sub_of_le hle
+  by_cases hU : uncovered = ∅
+  · have hq : Fintype.card α = 2 * M.card := by
+      rw [hU] at hsplit
+      simpa [hgraphCard] using hsplit.symm
+    rw [← hMcard]
+    omega
+  · obtain ⟨a₀, ha₀⟩ := Finset.nonempty_iff_ne_empty.mpr hU
+    let colors : Finset β := (uncovered.erase a₀).image (color a₀)
+    have hcolorsCard : colors.card = uncovered.card - 1 := by
+      rw [Finset.card_image_iff.mpr]
+      · rw [Finset.card_erase_of_mem ha₀]
+      · intro b hb c hc hEq
+        exact hproper a₀ b c (Finset.mem_erase.mp hb).1 (Finset.mem_erase.mp hc).1 hEq
+    have hcolorsSub : colors ⊆ colorUsed := by
+      intro c hc
+      obtain ⟨b, hb, rfl⟩ := Finset.mem_image.mp hc
+      have hba : b ≠ a₀ := (Finset.mem_erase.mp hb).1
+      have hbU : b ∈ uncovered := (Finset.mem_erase.mp hb).2
+      by_contra hnot
+      have haNot : Sum.inl a₀ ∉ used := by
+        intro ha
+        have : a₀ ∈ graphUsed := by simp [graphUsed, ha]
+        exact (Finset.mem_sdiff.mp ha₀).2 this
+      have hbNot : Sum.inl b ∉ used := by
+        intro hbin
+        have : b ∈ graphUsed := by simp [graphUsed, hbin]
+        exact (Finset.mem_sdiff.mp hbU).2 this
+      have hcNot : Sum.inr (color a₀ b) ∉ used := by
+        intro hcin
+        exact hnot (by simp [colorUsed, hcin])
+      let E : Finset (α ⊕ β) :=
+        {Sum.inl a₀, Sum.inl b, Sum.inr (color a₀ b)}
+      have hEH : E ∈ H := by
+        exact mem_augmentedColorHypergraph.mpr ⟨a₀, b, hba.symm, rfl⟩
+      have hEM : E ∉ M := by
+        intro h
+        exact haNot (Finset.subset_biUnion_of_mem id h (by simp [E]))
+      have hdisj : Disjoint E used := by
+        simp only [Finset.disjoint_left, E, Finset.mem_insert, Finset.mem_singleton]
+        intro z hzE hzU
+        rcases hzE with rfl | rfl | rfl
+        · exact haNot hzU
+        · exact hbNot hzU
+        · exact hcNot hzU
+      have hM' : IsMatching H (insert E M) := by
+        refine ⟨Finset.insert_subset hEH hM.1, ?_⟩
+        intro A hA B hB hAB
+        rw [Finset.mem_insert] at hA hB
+        rcases hA with rfl | hA <;> rcases hB with rfl | hB
+        · exact absurd rfl hAB
+        · exact hdisj.mono_right (Finset.subset_biUnion_of_mem id hB)
+        · exact (hdisj.mono_right (Finset.subset_biUnion_of_mem id hA)).symm
+        · exact hM.2 hA hB hAB
+      have hle := card_le_matchingNumber hM'
+      rw [Finset.card_insert_of_notMem hEM, ← hMcard] at hle
+      omega
+    have hcolorBound : colors.card ≤ M.card := by
+      exact (Finset.card_le_card hcolorsSub).trans_eq (by
+        have hcolorPairwise :
+            (M : Set (Finset (α ⊕ β))).PairwiseDisjoint
+              (fun E => E.filter fun z => z.isRight) := by
+          intro A hA B hB hAB
+          exact (hM.2 hA hB hAB).mono (Finset.filter_subset _ _) (Finset.filter_subset _ _)
+        have hcolorUnion : colorUsed.map Function.Embedding.inr =
+            M.biUnion (fun E => E.filter fun z => z.isRight) := by
+          ext z
+          cases z with
+          | inl a => simp
+          | inr c => simp [colorUsed, used]
+        calc
+          colorUsed.card = (colorUsed.map Function.Embedding.inr).card :=
+            (Finset.card_map Function.Embedding.inr).symm
+          _ = (M.biUnion (fun E => E.filter fun z => z.isRight)).card :=
+            congrArg Finset.card hcolorUnion
+          _ = ∑ E ∈ M, (E.filter fun z => z.isRight).card :=
+            Finset.card_biUnion hcolorPairwise
+          _ = ∑ _E ∈ M, 1 := by
+            apply Finset.sum_congr rfl
+            intro E hEM
+            obtain ⟨a, b, hab, rfl⟩ := mem_augmentedColorHypergraph.mp (hM.1 hEM)
+            rw [show (({Sum.inl a, Sum.inl b, Sum.inr (color a b)} : Finset (α ⊕ β)).filter
+                fun z => z.isRight) = {Sum.inr (color a b)} by
+              ext z
+              cases z <;> simp]
+            simp
+          _ = M.card := by simp)
+    rw [hcolorsCard] at hcolorBound
+    rw [← hMcard]
+    omega
 
 omit [Fintype β] in
 /-- Under row-properness, every transversal has at least `|α|-1` vertices. -/

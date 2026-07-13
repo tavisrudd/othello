@@ -473,6 +473,60 @@ theorem cubicRepair_matchingNumber_le [CharP 𝔽 3] (x : 𝔽) :
   have h := cubicRepair_matching_card_bound x hM
   omega
 
+/-- The paper's maximal-rainbow-matching lower bound for cubic coordinates.  The graph vertices
+are the `q-1` cubic parameters other than the target; the unique axis completion is a row-proper
+edge color, so the abstract colored-complete-graph theorem gives `⌈(q-2)/3⌉ = q/3`. -/
+theorem cubicRepair_matchingNumber_lower [CharP 𝔽 3] (x : 𝔽) :
+    Fintype.card 𝔽 / 3 ≤
+      matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3) := by
+  classical
+  let A := {s : 𝔽 // s ≠ x}
+  let color : A → A → (𝔽 ⊕ Unit) := fun s t =>
+    twistedCubicTripleAxisIndex ![x, s.1, t.1]
+  have hproper : IsProperAwayDiagonal color := by
+    intro s t u hts hus hEq
+    apply Subtype.ext
+    exact twistedCubicTripleAxisIndex_injective_third s.2.symm hEq
+  let e : (A ⊕ (𝔽 ⊕ Unit)) ↪ AxisTwistedCubicIndex 𝔽 :=
+    ⟨fun z => match z with
+      | .inl s => .inl s.1
+      | .inr y => .inr y,
+    by
+      intro a b hab
+      cases a with
+      | inl a =>
+        cases b with
+        | inl b => exact congrArg Sum.inl (Subtype.ext (Sum.inl.inj hab))
+        | inr b => simp at hab
+      | inr a =>
+        cases b with
+        | inl b => simp at hab
+        | inr b => exact congrArg Sum.inr (Sum.inr.inj hab)⟩
+  let H := augmentedColorHypergraph color
+  have hsub : embedHypergraph e H ⊆ axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+    intro E hE
+    obtain ⟨E₀, hE₀, rfl⟩ := Finset.mem_image.mp hE
+    obtain ⟨s, t, hst, rfl⟩ := mem_augmentedColorHypergraph.mp hE₀
+    have hmap : ({Sum.inl s, Sum.inl t, Sum.inr (color s t)} :
+        Finset (A ⊕ (𝔽 ⊕ Unit))).map e =
+        {(.inl s.1 : AxisTwistedCubicIndex 𝔽), .inl t.1,
+          .inr (twistedCubicTripleAxisIndex ![x, s.1, t.1])} := by
+      ext z
+      cases z <;> simp [e, color]
+    rw [hmap]
+    apply mem_cubicRepairHypergraph_iff.mpr
+    exact ⟨s.1, t.1, s.2.symm, t.2.symm, fun h => hst (Subtype.ext h), rfl⟩
+  calc
+    Fintype.card 𝔽 / 3 = (Fintype.card A + 1) / 3 := by
+      simp [A]
+      have hpos : 0 < Fintype.card 𝔽 := Fintype.card_pos
+      omega
+    _ ≤ matchingNumber H := matchingNumber_augmentedColorHypergraph_lower color hproper
+    _ = matchingNumber (embedHypergraph e H) :=
+      (matchingNumber_embedHypergraph e H).symm
+    _ ≤ matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3) :=
+      matchingNumber_mono hsub
+
 /-- All cubic helpers except one form a transversal. -/
 theorem cubicRepair_transversal_of_erase [CharP 𝔽 3] (x a₀ : 𝔽) :
     IsTransversal (axisTwistedCubicRepairHypergraph (.inl x) 3)
@@ -602,6 +656,7 @@ theorem axisTwistedCubic_allSymbol_tau_gt_nu [CharP 𝔽 3]
   | inr y => exact axisRepair_tau_gt_nu hq y
 
 #print axioms cubicRepair_matchingNumber_le
+#print axioms cubicRepair_matchingNumber_lower
 #print axioms cubicRepair_transversalNumber
 #print axioms cubicRepair_tau_gt_nu
 #print axioms axisTwistedCubic_allSymbol_tau_gt_nu
