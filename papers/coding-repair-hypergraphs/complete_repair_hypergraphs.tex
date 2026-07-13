@@ -69,7 +69,8 @@ chosen repair subfamily, is copied block by block.  A trace-duality argument
 turns ordinary extension-field dual distance into this functional gate.
 Combining the $q=9$ seed with a self-dual TVZ outer family gives unbounded
 $\F_9$-linear codes of exact rate $2/19$, eventual relative distance at least
-$8/57$, locality three, and the same exact repair rows in every block.
+$8/57$, all-symbol locality at most three, and the same exact repair rows in
+every block.
 Every finite and reduction step has been formalized in Lean.  The sole deep
 import is Stichtenoth's self-dual TVZ theorem, cited with its exact consumed
 statement.
@@ -550,9 +551,9 @@ Let $O\leq L^N$ be an $[N,K,D]_L$ code with $O\ne0$ and
 $d(O^\perp)\geq5$.  Its concatenation with $C_9$ is an $\F_9$-linear code
 with
 \[
- [,19N,\ 4K,\ \geq8D,]_9.
+ [19N,\ 4K,\ \geq8D]_9.
 \]
-It has all-symbol locality three, its complete radius-three repair
+It has all-symbol locality at most three, its complete radius-three repair
 hypergraph is an embedded copy of the corresponding $C_9$ hypergraph in
 each block, and the exact rows in Table~\ref{tab:q9} hold at every
 coordinate.

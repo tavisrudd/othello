@@ -110,8 +110,8 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | `L2(8)=L2(9)=L2(11)=6`, `L2(16)=8`; exact `rhoC` at 8, 9, 11, 16 | `RelativeConicArcs/Results.lean`, `RelativeConicArcs/Q16Result.lean` | Lean-proved (q=16 closed by C101) |
 
 The standalone `RelativeConicArcs` target builds without warnings. The C89–C96 headline axiom profiles
-are `[propext, Classical.choice, Quot.sound]`; its source contains no `sorry`, `native_decide`,
-`admit`, or custom axioms. Existing Lean targets do not import the spinoff.
+are `[propext, Classical.choice, Quot.sound]`; no proof uses `sorry`, `native_decide`, `admit`, or a
+custom axiom. Existing Lean targets do not import the spinoff.
 
 ## Work packages
 

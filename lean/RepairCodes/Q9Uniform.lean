@@ -375,11 +375,21 @@ theorem axisTwistedCubic_q9_row_invariants (hcard : Fintype.card F = 9)
           norm_num at h ⊢
           exact h
 
+/-- Every coordinate of the q=9 code satisfies the paper's uniform `7ν ≤ 4τ` ratio;
+cubic coordinates attain equality. -/
+theorem axisTwistedCubic_q9_ratio (hcard : Fintype.card F = 9)
+    (z : AxisTwistedCubicIndex F) :
+    7 * matchingNumber (axisTwistedCubicRepairHypergraph z 3) ≤
+      4 * transversalNumber (axisTwistedCubicRepairHypergraph z 3) := by
+  have h := axisTwistedCubic_q9_row_invariants hcard z
+  split at h <;> omega
+
 #print axioms cubicRepair_matchingNumber_q9
 #print axioms zeroSumCapNumber_q9
 #print axioms zeroSum_edge_counts_q9
 #print axioms axisRepair_component_edge_counts_q9
 #print axioms cubicRepair_edge_count_q9
 #print axioms axisTwistedCubic_q9_row_invariants
+#print axioms axisTwistedCubic_q9_ratio
 
 end RepairCodes

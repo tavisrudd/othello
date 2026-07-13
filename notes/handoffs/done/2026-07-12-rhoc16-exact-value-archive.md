@@ -119,3 +119,42 @@ Append-only session history for
   `books7_valid` because the parent list no longer equaled `level7`. Restoring the book restored
   the aggregate and final theorem builds. This supplements the prior leaf-member and transition-
   scalar negative controls with an end-to-end composition coverage check.
+
+## 2026-07-13 — cross-artifact consistency checklist
+
+- [x] **Headline theorem:** the manuscript source, README, trust manifest, completed handoff,
+  result registry, `Q16Result.lean`, and papers index all state the exact value
+  `rho_C(16)=9`. The preliminary bounds theorem remains intentionally available in
+  `Results.lean` and is followed by the exact theorem.
+- [x] **Classification arithmetic:** the frozen report states 2633 leaves with nullity split
+  `2630+3`; the generated tree contains 727 transition modules, 330 leaf modules, and 261
+  parent-book modules. The class counts `4,61,454,2633` agree across the report and prose.
+- [x] **Provenance:** current SHA-256 values of the verifier, generator, and frozen report are
+  respectively `e9508958...d36a`, `589af843...9031`, and `6989079b...cc63`, matching
+  `TRUST.md` and the manuscript.
+- [x] **Trust boundary:** no Lean proof in `RelativeConicArcs/` uses `sorry`, `admit`, a custom
+  axiom, or `native_decide`. A fresh pinned-environment replay of `Q16Result` and `Results`
+  succeeded; both headline q=16 declarations report exactly
+  `[propext, Classical.choice, Quot.sound]`.
+- [x] **Isolation:** after excluding the spinoff directory and its umbrella module, no Lean
+  source imports `RelativeConicArcs`. The package remains one-way coupled to shared projective
+  infrastructure.
+- [x] **Paper/index coverage:** all six relevant lane additions are registered in the papers-index result
+  table: projective reduction, general evaluation obstruction, uncovered-quadratic obstruction,
+  class refinement, exact q=16 value, and consolidated small values.
+- [x] **Novelty wording:** every public summary marks the ordinary 2633 count as prior art and
+  the computation as an independent reproduction; the bounded novelty claims point to the
+  source-by-source literature note. `TRUST.md` and the README were given the same provenance
+  pointer during this pass.
+- [x] **Links and citations:** all local Markdown links in the paper/lane/trust documents resolve;
+  every TeX citation key is defined and every bibliography item is cited.
+- [x] **Lane state:** both formalization handoffs are under `notes/handoffs/done/`, with no stale
+  active copy. The live documents contain status maps; this dated checklist remains in the
+  append-only companion.
+- [x] **Adversarial evidence:** leaf-member, transition-scalar, and omitted-parent-book mutations
+  each failed at the intended trust layer, and restored sources rebuilt through the final theorem.
+
+Two wording corrections were made: audit prose now says that no *proof uses* `native_decide`
+rather than literally claiming the token is absent (it occurs in an explanatory comment), and
+the trust/README novelty summaries now link the durable comparison note. No mathematical or Lean
+source change was required by this pass.

@@ -25,8 +25,8 @@ three coordinate types have exact rows
 
 An exact concatenation theorem preserves the complete radius-three repair hypergraph blockwise.
 Using a degree-four extension and Stichtenoth's self-dual outer codes gives an unbounded `GF(9)`
-family with exact rate `2/19`, eventual relative distance at least `8/57`, locality three, and the
-same three rows at every block.
+family with exact rate `2/19`, eventual relative distance at least `8/57`, all-symbol locality at
+most three, and the same three rows at every block.
 
 ## Files
 

@@ -745,3 +745,23 @@ that discharges the transfer interface's finite fields from it:
   forbidden-token scan, and axiom audit pass. C97 is reported. An external coding-theory
   citation-chain review remains a submission preflight gate, not a mathematics or formalization
   blocker.
+
+### Handoff Note — 2026-07-13 (paper/Lean consistency pass)
+
+- Ran a theorem-by-theorem checklist across the manuscript, Lean declarations, trust boundary,
+  novelty report, bibliography, paper registry, task queue, and handoff.
+- Corrected the finite-lift parameter display from malformed punctuation to
+  `[19N,4K,≥8D]₉`; standardized lifted/asymptotic locality as “at most three”; and marked the
+  legacy `[10,4,6]₉` seed as formal-library-only rather than part of this manuscript.
+- Removed two stale registry statements: the transfer gate is sufficient, not proved sharp, and
+  the internal novelty audit is complete rather than pending.
+- Closed two proof-ledger omissions. `axisTwistedCubic_q9_ratio` now directly kernel-checks the
+  paper's `7ν≤4τ` corollary, and the existing `q9_smallCircuit_support_counts` theorem is mapped to
+  the manuscript's `120/84` inventory claim.
+- Rechecked Stichtenoth Theorem 1.6(ii) against the primary paper. Its self-dual sequence and
+  limiting-distance statement match the single imported axiom; `ℓ=81` gives `39/80`.
+- Validation is green: `lake build RepairCodes`; exactly one project axiom in `RepairCodes`;
+  forbidden-token scan otherwise empty; zero missing/unused citation keys, missing/duplicate
+  labels, or duplicate bibliography keys; warning-free 12-page Tectonic PDF.
+- The completed checklist is in `papers/coding-repair-hypergraphs/proof_ledger.md`. The only open
+  box is the external specialist citation-chain review, which remains a submission preflight gate.

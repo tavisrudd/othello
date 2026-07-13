@@ -58,6 +58,8 @@ are classical. A targeted search did not locate the relative-completeness parame
 defect identity in this form, the use of the ordinary-uncovered locus as a quadratic obstruction,
 the exceptional `2630+3` rank profile, or the exact value `rho_C(16)=9`. These are bounded search
 findings, not priority certificates; the paper makes no unconditional novelty claim.
+The source-by-source comparison is recorded in
+[`notes/2026-07-13-rhoc16-novelty-check.md`](../../notes/2026-07-13-rhoc16-novelty-check.md).
 
 ## Files here
 

@@ -188,9 +188,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C98 [REPORTED 2026-07-12] — theorem-mining and novelty review.** The completed proof graph
-  yielded the sharp `r+1<2d(I⊥)` transfer gate, a coordinate-free symbol-module extension, exact
+  yielded the sufficient `r+1<2d(I⊥)` transfer gate, a coordinate-free symbol-module extension, exact
   row-distribution transfer, and a square-root-of-minus-one rainbow certificate beyond q9.
-  Literature novelty remains unaudited. See the classified results in the
+  The internal literature audit is complete; an external specialist citation-chain review remains
+  a submission preflight gate. See the classified results in the
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C85 [REPORTED 2026-07-12] — quadratic split-route obstruction.** Chevalley–Warning now proves

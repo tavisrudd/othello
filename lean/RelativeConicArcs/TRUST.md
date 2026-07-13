@@ -92,7 +92,10 @@ source/target/scalar equality for every selected point; lightweight `StepBook` m
 those semantic row theorems and separately check that their moves cover every legal extension.
 The Lean soundness theorem therefore does not trust the generator's canonical labels or its
 coverage assertions.  The checked class counts at sizes five through eight are
-`4, 61, 454, 2633`.
+`4, 61, 454, 2633`.  The final ordinary eight-arc count was already reported by
+Al-Seraji--Al-Ogali (2018); this computation independently reproduces it.  The bounded
+source-by-source novelty comparison is recorded in
+`notes/2026-07-13-rhoc16-novelty-check.md`.
 
 For every eight-leaf, the generated rejection records ordinary-uncovered points.  In 2630 leaves,
 six quadratic evaluation rows have an explicitly checked inverse.  In the remaining three leaves,

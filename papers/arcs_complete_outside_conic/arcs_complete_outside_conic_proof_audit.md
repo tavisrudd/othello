@@ -78,7 +78,7 @@ condition, and coverage on the (q^2+q+1) canonical projective representatives; `
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.
 
-The aggregate builds successfully. The source contains no `sorry`, `admit`, custom axiom, or
+The aggregate builds successfully. No proof uses `sorry`, `admit`, a custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
 exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
 theorem map, provenance, and trust boundary. The Kim--Vu input remains an explicit named theorem
