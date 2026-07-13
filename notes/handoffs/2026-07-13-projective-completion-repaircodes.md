@@ -52,7 +52,9 @@ group, represented in Lean by `zeroSumCapNumber`.
   `FiniteGeom/ProjectiveAxisTwistedCubicCircuits.lean` proves that two distinct finite cubic
   points `s,t`, cubic infinity, and axis point `s+t` form a four-circuit, and proves uniqueness of
   that normalized axis completion. The all-finite completion theorem remains the existing
-  determinant result; the complete repair-clutter classification is still open.
+  determinant result. The module now also proves independence of every distinct three-cubic,
+  two-cubic/one-axis, and one-cubic/two-axis family in the completed system, with all infinity
+  placements explicit. The complete repair-clutter classification is still open.
 - The independent verifier now enumerates every circuit of size at most five at q=3 and q=9 and
   solves the resulting matching and transversal problems exactly. It confirms all proposed
   radius-three and radius-four rows, including the q=3 boundary. This is a refutation gate, not a

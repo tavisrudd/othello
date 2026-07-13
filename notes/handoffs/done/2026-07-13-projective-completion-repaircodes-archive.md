@@ -174,3 +174,17 @@ preserves it in both directions. The remaining repair transport is a generic cod
 lemma: an inclusion-minimal dual support whose target coefficient is nonzero is exactly a column
 circuit containing that target. This is logically separate from the projective symmetry and should
 be proved once in `FiniteGeom.Repair`, not reconstructed for this family.
+
+## 2026-07-13 — completed mixed-triple independence
+
+Extended `FiniteGeom.ProjectiveAxisTwistedCubicCircuits` with the shape lemmas needed to classify
+short repairs at axis infinity. It now proves:
+
+- every three distinctly indexed points of the full projective cubic are independent;
+- any two distinct full-projective cubic points together with any axis point are independent;
+- any full-projective cubic point together with two distinct axis points is independent.
+
+The proof treats all positions of cubic infinity explicitly and reuses the affine Vandermonde and
+axis-pair lemmas where applicable. Focused Lean validation passes with the standard axiom profile.
+Consequently, among selected triples, only the all-axis case can be dependent; the corresponding
+Finset/repair-edge shape theorem is the next implementation slice.
