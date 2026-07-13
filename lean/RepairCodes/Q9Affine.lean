@@ -176,6 +176,72 @@ theorem q9FiniteImage_mem_repair {S : Finset GF9} (hS : S ∈ zeroSumTripleHyper
       _ = 0 := hSsum
   exact q9AxisRepair_edge_of_zeroSum hsub hRcard er hsum
 
+/-- Conversely, every q9 axis repair edge is the finite-coordinate image of a GF9 zero-sum
+triple. -/
+theorem q9RepairEdge_exists_finiteImage {R : Finset (Fin 10)}
+    (hR : R ∈ q9AxisRepairHypergraph) :
+    ∃ S ∈ zeroSumTripleHypergraph GF9, S.map q9FiniteEmbedding = R := by
+  obtain ⟨e, hv, hsum⟩ := q9AxisRepair_edge_zeroSum hR
+  let v : Fin 3 → GF9 := fun i => q9IndexParam (e i)
+  let S : Finset GF9 := Finset.univ.image v
+  have hScard : S.card = 3 := by
+    change (Finset.univ.image v).card = 3
+    rw [Finset.card_image_of_injective _ hv, Finset.card_univ, Fintype.card_fin]
+  have hSsum : ∑ x ∈ S, x = 0 := by
+    change ∑ x ∈ Finset.univ.image v, x = 0
+    rw [Finset.sum_image (fun _ _ _ _ h => hv h)]
+    rw [Fin.sum_univ_three]
+    exact hsum
+  have hsub := (mem_repairHypergraph.mp hR).1
+  have himage : S.map q9FiniteEmbedding = R := by
+    ext j
+    constructor
+    · intro hj
+      obtain ⟨t, htS, rfl⟩ := Finset.mem_map.mp hj
+      obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp htS
+      have hfinite : (((e i : R) : Fin 10) : ℕ) < 9 := by
+        have hne : ((e i : R) : Fin 10) ≠ q9Axis := by
+          intro h
+          exact (Finset.mem_erase.mp (hsub ((e i).property))).1 h
+        have hne9 : ((((e i : R) : Fin 10) : ℕ)) ≠ 9 := by
+          intro h
+          apply hne
+          exact Fin.ext h
+        omega
+      change q9FiniteIndex (q9IndexParam (e i)) ∈ R
+      rw [q9FiniteIndex_indexParam hfinite]
+      exact (e i).property
+    · intro hj
+      obtain ⟨i, hi⟩ := e.surjective ⟨j, hj⟩
+      have hfinite : (j : ℕ) < 9 := by
+        have hne : j ≠ q9Axis := by
+          intro h
+          exact (Finset.mem_erase.mp (hsub hj)).1 h
+        have hne9 : (j : ℕ) ≠ 9 := by
+          intro h
+          apply hne
+          exact Fin.ext h
+        omega
+      apply Finset.mem_map.mpr
+      refine ⟨q9IndexParam j, ?_, ?_⟩
+      · apply Finset.mem_image.mpr
+        exact ⟨i, Finset.mem_univ _, congrArg (fun z : R => q9IndexParam z) hi⟩
+      · exact q9FiniteIndex_indexParam hfinite
+  exact ⟨S, mem_zeroSumTripleHypergraph.mpr ⟨hScard, hSsum⟩, himage⟩
+
+/-- The actual code-derived q9 repair hypergraph is exactly the embedded GF9 line hypergraph. -/
+theorem q9AxisRepairHypergraph_eq_finiteImage :
+    q9AxisRepairHypergraph =
+      (zeroSumTripleHypergraph GF9).image (fun S => S.map q9FiniteEmbedding) := by
+  ext R
+  constructor
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := q9RepairEdge_exists_finiteImage hR
+    exact Finset.mem_image.mpr ⟨S, hS, rfl⟩
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hR
+    exact q9FiniteImage_mem_repair hS
+
 /-- The zero-sum triple hypergraph of the additive group of `𝔽₉` already has the desired sharp
 invariants. The remaining code-facing step is to transport along `q9FiniteIndex` into the ten
 seed coordinates, where the axis is an isolated vertex. -/

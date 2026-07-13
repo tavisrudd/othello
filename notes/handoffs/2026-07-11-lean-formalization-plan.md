@@ -217,7 +217,8 @@ proves the functional outer-dual membership directly (archive companion has the 
    helpers, and its edges are exactly the distinct zero-sum triples in `𝔽₉`. The zero-sum triple
    hypergraph is transported to `AG(2,3)` and independently evaluated as `matchingNumber=3`,
    `transversalNumber=5`. The injective `q9FiniteIndex : 𝔽₉ ↪ Fin 10` is packaged and maps every
-   zero-sum triple to an actual repair edge. Remaining: push a maximum matching/cover forward and
+   zero-sum triple to an actual repair edge, and every repair edge comes uniquely from such a
+   triple (`q9AxisRepairHypergraph_eq_finiteImage`). Remaining: push a maximum matching/cover forward and
    pull an arbitrary cover back; the embedding's complement is the isolated axis coordinate. This lands the
    first code-derived `τ>ν` instance (the abstract
    triangle remains only the generic strictness witness). The separate CompletionCore bridge from

@@ -462,3 +462,12 @@ that discharges the transfer interface's finite fields from it:
 - Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
   `#print axioms` on the coordinate inverse, embedding, and edge-image theorem returned exactly
   `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (exact embedded q9 hypergraph)
+
+- Proved `q9RepairEdge_exists_finiteImage`: every actual q9 repair edge is the image of a GF9
+  zero-sum triple. The proof enumerates the edge, forms its parameter image, and uses the inverse
+  finite-coordinate identity to recover the original helper set exactly.
+- Consequently `q9AxisRepairHypergraph_eq_finiteImage` identifies the code-derived hypergraph
+  literally with the edgewise image of the GF9 affine-line hypergraph. Only extremal-number
+  bookkeeping across the isolated axis remains.
