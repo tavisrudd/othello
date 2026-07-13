@@ -1,4 +1,5 @@
 import FiniteGeom.AxisTwistedCubicCircuits
+import FiniteGeom.ColoredCompleteGraph
 import FiniteGeom.Repair
 
 /-!
@@ -456,6 +457,36 @@ theorem cubicRepair_axis_eq_of_mem [CharP 𝔽 3] {x s t : 𝔽} {y : 𝔽 ⊕ U
       simp [v] at hcross
       have hsum : x + s + t = 0 := hcross.symm
       rw [twistedCubicTripleAxisIndex, if_pos (by simpa [v] using hsum)]
+
+omit [Fintype 𝔽] in
+/-- For a fixed target and first cubic helper, the completing axis point determines the second
+helper.  This is the proper-edge-coloring property used by the cubic repair hypergraph. -/
+theorem twistedCubicTripleAxisIndex_injective_third [CharP 𝔽 3]
+    {x s t u : 𝔽} (hxs : x ≠ s)
+    (hcolor : twistedCubicTripleAxisIndex ![x, s, t] =
+      twistedCubicTripleAxisIndex ![x, s, u]) : t = u := by
+  classical
+  have hthree : (3 : 𝔽) = 0 := CharP.cast_eq_zero 𝔽 3
+  change (if x + s + t = 0 then Sum.inr Unit.unit
+      else Sum.inl ((x * s + x * t + s * t) / (x + s + t))) =
+    (if x + s + u = 0 then Sum.inr Unit.unit
+      else Sum.inl ((x * s + x * u + s * u) / (x + s + u))) at hcolor
+  by_cases ht : x + s + t = 0
+  · by_cases hu : x + s + u = 0
+    · linear_combination ht - hu
+    · simp [ht, hu] at hcolor
+  · by_cases hu : x + s + u = 0
+    · simp [ht, hu] at hcolor
+    · simp only [ht, hu, ↓reduceIte, Sum.inl.injEq] at hcolor
+      have hcross := (div_eq_div_iff ht hu).mp hcolor
+      have hdet : (x + s) * (x + s) - x * s ≠ 0 := by
+        have heq : (x + s) * (x + s) - x * s = (x - s) ^ 2 := by
+          linear_combination x * s * hthree
+        rw [heq, pow_ne_zero_iff two_ne_zero]
+        exact sub_ne_zero.mpr hxs
+      have hfactor : (t - u) * ((x + s) * (x + s) - x * s) = 0 := by
+        linear_combination hcross
+      exact sub_eq_zero.mp ((mul_eq_zero.mp hfactor).resolve_right hdet)
 
 /-- A convenient exclusion principle for a proposed three-helper repair whose four displayed
 columns are independent. -/

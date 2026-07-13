@@ -13,6 +13,7 @@ import FiniteGeom.EvalCode
 import FiniteGeom.EvalCodeInstance
 import FiniteGeom.MomentCurve
 import FiniteGeom.ColumnCode
+import FiniteGeom.ColoredCompleteGraph
 import FiniteGeom.Completion
 import FiniteGeom.Repair
 import FiniteGeom.BaerCompletion.Obstruction

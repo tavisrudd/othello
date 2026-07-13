@@ -294,6 +294,36 @@ theorem transversalNumber_minimalHyperedges (H : Finset (Finset V)) :
     exact ⟨T, isTransversal_minimalHyperedges_iff.mpr hT, rfl⟩
 
 omit [Fintype V] [DecidableEq V] in
+/-- To upper-bound `ν`, it suffices to upper-bound the cardinality of every matching. -/
+theorem matchingNumber_le_of_forall {H : Finset (Finset V)} {n : ℕ}
+    (h : ∀ M, IsMatching H M → M.card ≤ n) : matchingNumber H ≤ n := by
+  have hne : ({m | ∃ M, IsMatching H M ∧ M.card = m} : Set ℕ).Nonempty :=
+    ⟨0, ∅, ⟨Finset.empty_subset H, fun _ hm => by simp at hm⟩, Finset.card_empty⟩
+  have hbdd : BddAbove {m | ∃ M, IsMatching H M ∧ M.card = m} :=
+    ⟨H.card, by
+      intro m hm
+      obtain ⟨M, hM, hm⟩ := hm
+      rw [← hm]
+      exact Finset.card_le_card hM.1⟩
+  obtain ⟨M, hM, hMcard⟩ := Nat.sSup_mem hne hbdd
+  unfold matchingNumber
+  rw [hMcard.symm]
+  exact h M hM
+
+omit [Fintype V] in
+/-- To lower-bound `τ`, it suffices to lower-bound the cardinality of every transversal. -/
+theorem le_transversalNumber_of_forall {H : Finset (Finset V)} {n : ℕ}
+    (hex : ∃ T, IsTransversal H T)
+    (h : ∀ T, IsTransversal H T → n ≤ T.card) : n ≤ transversalNumber H := by
+  have hne : ({m | ∃ T, IsTransversal H T ∧ T.card = m} : Set ℕ).Nonempty := by
+    obtain ⟨T, hT⟩ := hex
+    exact ⟨T.card, T, hT, rfl⟩
+  obtain ⟨T, hT, hTcard⟩ := Nat.sInf_mem hne
+  unfold transversalNumber
+  rw [← hTcard]
+  exact h T hT
+
+omit [Fintype V] [DecidableEq V] in
 /-- `ν(H)` is an upper bound on every matching size: `ν` is the *sup*. Together
 with attainment (`Nat.sSup_mem`) this pins `matchingNumber` to the intended
 "largest matching size". -/

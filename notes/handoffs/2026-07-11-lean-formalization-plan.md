@@ -195,7 +195,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | Module | Landed content |
 |---|---|
 | `FiniteGeom/Weight.lean` | q-ary weight counting: `card_filter_le_sum`, `mul_card_filter_le_sum` |
-| `FiniteGeom/Hypergraph.lean` | `Finset`-hypergraph `ν`/`τ`: `nu_le_tau` (weak duality), `transversalNumber_le_mul_matchingNumber` (`τ ≤ p·ν`), `card_le_matchingNumber` / `transversalNumber_le_card` attainment pins, inclusion-minimal clutter reduction preserving `τ` and (for nonempty edges) `ν`, worked `ν=τ=1` + triangle `ν=1,τ=2` (strict) witnesses |
+| `FiniteGeom/Hypergraph.lean`, `ColoredCompleteGraph.lean` | `Finset`-hypergraph `ν`/`τ`: weak duality, `τ ≤ p·ν`, extremal-value pins, minimal-clutter invariance, and the generic properly colored complete-graph package (`τ=n−1`, `ν≤⌊n/2⌋`) |
 | `FiniteGeom/Code.lean` | linear codes over arbitrary finite coordinate types: `dualCode` / `minDist` / `dualDist` (+ `_le_hammingNorm` pins), parity-check char. `mem_dualCode_rowCode(_iff_mulVec)`, dual-word ↔ generator-column relation bridges, `le_dualDist_rowCode_of_column_independent` (small independent column sets imply a dual-distance lower bound), `singleton_bound` (`d+k≤n+1`) + `IsMDS`, `le_minDist` (lower-bound lifter), `𝔽₅` non-vacuity witness |
 | `FiniteGeom/EvalCode.lean` | Reed–Solomon: `card_eval_zero_le_natDegree`, `evalPi`, `rsCode`, `rsCode_minDist_ge` (`n-(k-1)≤d`), `finrank_rsCode` (`=k`), `rsCode_isMDS` (RS codes are MDS) |
 | `FiniteGeom/EvalCodeInstance.lean` | concrete MDS discharge of the eval-code layer: RS `[7,3,5]₇` over `ZMod 7` (`rsCode_zmod7_isMDS`/`_minDist`) and RS `[3,2,2]₉` over the target `GaloisField 3 2 = 𝔽₉` on subfield points (`rsCode_gf9_isMDS`/`_minDist`, injectivity via `algebraMap`) — exercises `rsCode_isMDS` on a real non-prime field |
@@ -210,7 +210,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
 | `RepairCodes/Q9Seed.lean` | real inner seed: full `[10,4,6]₉`, `d(C₀⊥)=4`, and block-local transfer; concrete 3-uniform `q9AxisRepairHypergraph`; generalized four-column determinant; exact edge characterization as the distinct zero-sum triples in `𝔽₉`. |
 | `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; exact embedded identification of the actual q9 repair hypergraph; final code-derived `matchingNumber=3`, `transversalNumber=5` (no `native_decide`). |
-| `RepairCodes/AxisTwistedCubic.lean` | natural-index generator/row-code presentation of `S_q`; circuit-local bridge into the complete repair hypergraph; arbitrary-set classification through size three; exact locality two on the axis orbit and three on the cubic orbit; all-symbol locality three over every finite characteristic-three field. |
+| `RepairCodes/AxisTwistedCubic.lean`, `AxisTwistedCubicInvariants.lean` | natural-index generator/row-code presentation of `S_q`; circuit-local bridge; exact cubic repair classification; exact locality two/three; proper-color algebra; cubic-orbit `τ=q−2`, `ν≤(q−1)/2`, hence strict `τ>ν` for `q≥9`. |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -235,8 +235,10 @@ matroid independence remains in Phase 2.
    classification is closed in `FiniteGeom/AxisTwistedCubicCircuits.lean`, including the stronger
    arbitrary-axis determinant equation and projective uniqueness. The remaining step is the exact
    arbitrary size-four repair classification needed for the per-orbit matching/transversal
-   formulas. The cubic-target classification is now exact: every radius-three repair is two other
-   cubic points plus their unique normalized axis completion, and every such support is a repair.
+   formulas. The cubic orbit is closed: every radius-three repair is two other cubic points plus
+   their unique normalized axis completion; the completion coloring is proved proper;
+   `τ_T=q−2`, `ν_T≤(q−1)/2`, and strict `τ_T>ν_T` for `q≥9` are code-derived theorems.
+   The remaining repair-invariant work is the nucleus and generic-axis formulas.
    The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
    **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing

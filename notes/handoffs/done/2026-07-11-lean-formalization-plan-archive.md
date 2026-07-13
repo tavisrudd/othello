@@ -636,3 +636,21 @@ that discharges the transfer interface's finite fields from it:
   graph without an unproved geometric identification.
 - Validation: `RepairCodes.AxisTwistedCubic` builds without warnings; the classification uses only
   standard foundational axioms.
+
+### Handoff Note — 2026-07-12 (cubic orbit extremal invariants)
+
+- Added a reusable augmented properly edge-coloured complete-graph module. It proves every
+  matching uses two graph vertices per edge, so `ν≤⌊n/2⌋`, and proves `τ=n−1` by counting the
+  distinct colors forced by the uncovered vertices of any transversal.
+- Proved the actual symmetric-polynomial completion coloring is proper. For fixed target `x` and
+  helper `s`, its finite branch is a Möbius map with determinant
+  `(x+s)²−xs=(x−s)²` in characteristic three; the infinite branch is handled explicitly.
+- Applied the exact code-derived support iff directly—without a selected-family substitution—to
+  prove `cubicRepair_transversalNumber : τ_T=q−2` and
+  `cubicRepair_matchingNumber_le : ν_T≤(q−1)/2`. Therefore every cubic coordinate has strict
+  `τ>ν` for `q≥9`.
+- This formalizes the headline-relevant part of the paper's displayed cubic bounds. The stronger
+  lower bound `ceil((q−2)/3)≤ν_T` is not needed for strictness and remains to be audited against the
+  maximal-rainbow-matching prose if the complete displayed interval is retained as `[PROVED]`.
+- Validation: focused builds are warning-free and the headline axiom profiles are exactly
+  `[propext, Classical.choice, Quot.sound]`.
