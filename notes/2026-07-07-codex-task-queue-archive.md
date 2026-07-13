@@ -3307,3 +3307,14 @@ P residual, exact-corpus descent/reachability, and defect-to-C80 potential trans
 - Allocated C101 for the manuscript's remaining exact finite gap `rho_C(16) in {8,9}`. Its accepted
   endpoint is either a checked eight-point construction or a checked exhaustive nonexistence
   certificate, followed by synchronized Lean and paper updates.
+
+## 2026-07-13 C106–C110 — relative-conic structural strengthening allocated
+
+Allocated a new downstream lane after the completed arcs formalization exposed three connected
+theorem packages: an exact finite-field evaluation-avoidance dichotomy, the projective
+arc–MDS/deep-hole bridge, and a preliminary `q=11` icosahedral `A5`/MDS-extension structure. C106
+is the cheap independent refutation and certificate-freeze gate; C107 and C108 are the reusable
+universal formalizations; C109 is the gated q11 finite structure; C110 owns rigorous novelty
+collision searches, adversarial review, discovery classification, and synchronized publication and
+consumer updates. Live plan:
+`notes/handoffs/2026-07-13-relative-conic-arcs-strengthening.md`.

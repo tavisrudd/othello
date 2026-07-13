@@ -21,8 +21,8 @@ Rules:
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
   [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
   for the active task IDs.
-- **Exact relative-conic value at q=16 (C101):** start with
-  [rho_C(16) exact-value handoff](notes/handoffs/2026-07-12-rhoc16-exact-value.md).
+- **Relative-conic evaluation/coding/icosahedral strengthening (C106–C110):** start with
+  [relative-conic arcs strengthening](notes/handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
 - **Named-expert context:** load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for

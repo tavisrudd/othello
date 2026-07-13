@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C105.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C110.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -43,6 +43,15 @@ subfield gate), **C82** (orbital counting, gated) remain. **C83** raw-quotient m
 (coarsest bisimulation 29 at q=11 → 65 at q=13, growing; q=17 deferred, canon-bound): no finite
 raw-state automaton, but this is deprioritized (not superseded) behind the structural Schreier lane
 — tractability is a question of `G∪` structural width, not raw-quotient size.
+
+**INDEPENDENT PAPER-STRENGTHENING LANE (2026-07-13): relative-conic evaluation/coding/q11
+structure — C106–C110.** Run cheap independent refutation and exact-object novelty gates first
+(C106); then prove the reusable evaluation dichotomy (C107) and projective arc–MDS/deep-hole bridge
+(C108); formalize the certified `q=11` witness's proposed `A5` orbit, code, and icosahedral extension
+complex only after those gates pass (C109); finish with adversarial review and synchronized paper,
+TRUST, index, and projective-cap consumer updates (C110). This lane does not displace the C84
+primary odd-plane lane. Start with the
+[strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
 
 1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
@@ -107,6 +116,16 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C106 [QUEUED 2026-07-13] — relative-conic strengthening refutation/certificate gate.** Independently regenerate the q11 group, orbit, secant, syndrome, leader, and extension data; run coordinate-change and mutation controls; exhaust small models of the evaluation theorem including the `|A|=q` boundary. Track in the [strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
+
+- **C107 [QUEUED 2026-07-13] — exact finite-field evaluation-avoidance dichotomy.** Prove the fewer-than-`q` hyperplane-union equivalence, its finite-dimensional annihilator/span form, and the degree-`d` Veronese/evaluation-closure corollary under strict trust. Same handoff.
+
+- **C108 [QUEUED 2026-07-13] — projective arc–MDS/deep-hole bridge.** Formalize the arc/MDS equivalence, syndrome-distance trichotomy, relative-completeness/deep-hole confinement, and exact one-/multi-column extension correspondence in isolated downstream modules. Same handoff.
+
+- **C109 [QUEUED 2026-07-13] — q11 icosahedral `A5` and MDS-extension complex.** After C106's gates, kernel-check the explicit 60-element action and `A5` isomorphism, orbit/secant structure, non-GRS code and coset distributions, and icosahedral simultaneous-extension complex. Same handoff.
+
+- **C110 [QUEUED 2026-07-13] — relative-conic novelty, adversarial, and publication closure.** Complete exact-claim citation chasing, mutation and axiom review, discovery classification, packaging decision, and synchronization of the paper/PDF, proof audit, TRUST manifests, `papers-index.md`, queue, and projective-cap consumer handoff. Same handoff.
 
 - **C101 [REPORTED 2026-07-12] — exact `rho_C(16)`.** The complete projective augmentation books
   give 2633 eight-arc classes. Quadratic evaluation rank rejects 2630; the remaining three have a
