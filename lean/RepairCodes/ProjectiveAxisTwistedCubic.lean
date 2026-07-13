@@ -273,9 +273,68 @@ theorem projectiveAxisTwistedCubicCode_dualDist [CharP 𝔽 3] :
   rw [projectiveAxisTripleDualWord_hammingNorm] at hupper
   omega
 
+/-- Complete bounded-radius repair hypergraph of the projectively completed seed. -/
+noncomputable def projectiveAxisTwistedCubicRepairHypergraph
+    (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    Finset (Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :=
+  repairHypergraph (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) x r
+
+/-- Inclusion-minimal bounded repair clutter of the projectively completed seed. -/
+noncomputable def minimalProjectiveAxisTwistedCubicRepairHypergraph
+    (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    Finset (Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :=
+  minimalRepairHypergraph (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) x r
+
+theorem projectiveAxisTwistedCubicRepair_edge_dependent
+    {x : ProjectiveAxisTwistedCubicIndex 𝔽} {r : ℕ}
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph x r) :
+    ¬ LinearIndependent 𝔽
+      (fun j : ↥(insert x R) => projectiveAxisTwistedCubicPoints 𝔽 j) := by
+  exact repair_edge_columns_dependent (G := projectiveAxisTwistedCubicGenerator) hR
+
+theorem projectiveAxisTwistedCubicRepair_edge_nonempty
+    {x : ProjectiveAxisTwistedCubicIndex 𝔽} {r : ℕ}
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph x r) : R.Nonempty := by
+  rw [Finset.nonempty_iff_ne_empty]
+  intro hR0
+  apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+  subst R
+  simpa using projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two
+    (S := {x}) (Finset.singleton_nonempty x) (by simp)
+
+theorem matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph
+    (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x r) =
+      matchingNumber (projectiveAxisTwistedCubicRepairHypergraph x r) := by
+  apply matchingNumber_minimalHyperedges
+  exact fun _ hR => projectiveAxisTwistedCubicRepair_edge_nonempty hR
+
+theorem transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph
+    (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
+    transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x r) =
+      transversalNumber (projectiveAxisTwistedCubicRepairHypergraph x r) :=
+  transversalNumber_minimalHyperedges _
+
+/-- Every target-plus-helper circuit is an actual completed-seed repair edge. -/
+theorem projectiveAxisTwistedCubic_circuit_mem_repair
+    {x : ProjectiveAxisTwistedCubicIndex 𝔽} {r : ℕ}
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hsub : R ⊆ univ.erase x) (hcard : R.card = r)
+    (hdep : ¬ LinearIndependent 𝔽
+      (fun j : ↥(insert x R) => projectiveAxisTwistedCubicPoints 𝔽 j))
+    (hdelete : ∀ j : ↥(insert x R),
+      LinearIndependent 𝔽
+        (fun i : {i : ↥(insert x R) // i ≠ j} => projectiveAxisTwistedCubicPoints 𝔽 i)) :
+    R ∈ projectiveAxisTwistedCubicRepairHypergraph x r := by
+  exact mem_repairHypergraph_of_circuit (G := projectiveAxisTwistedCubicGenerator)
+    hsub hcard hdep hdelete
+
 #print axioms projectiveAxisTwistedCubicCode_eq_columnCode
 #print axioms projectiveAxisTwistedCubic_pair_linearIndependent
 #print axioms projectiveAxisTripleDualWord_mem
 #print axioms projectiveAxisTwistedCubicCode_dualDist
+#print axioms projectiveAxisTwistedCubic_circuit_mem_repair
 
 end RepairCodes

@@ -188,10 +188,113 @@ theorem projectiveAxisShiftInvEquiv_eq_infinity_iff (a : 𝔽)
         simp [projectiveAxisShiftInvEquiv, hs, hsa]
   | inr u => simp [projectiveAxisShiftInvEquiv]
 
+/-- Coordinate permutation of the completed system induced by the ambient shifted-inversion map.
+The cubic parameter uses shift `a`; the axis parameter uses shift `-a`. -/
+def projectiveShiftInvIndexEquiv (a : 𝔽) :
+    ProjectiveAxisTwistedCubicIndex 𝔽 ≃ ProjectiveAxisTwistedCubicIndex 𝔽 :=
+  Equiv.sumCongr (projectiveAxisShiftInvEquiv a) (projectiveAxisShiftInvEquiv (-a))
+
+/-- Nonzero column scale accompanying `projectiveShiftInvIndexEquiv`. -/
+def projectiveShiftInvScale (a : 𝔽) : ProjectiveAxisTwistedCubicIndex 𝔽 → 𝔽
+  | .inl (.inl s) => if s + a = 0 then 1 else (s + a) ^ 3
+  | .inl (.inr _) => 1
+  | .inr (.inl y) => if y - a = 0 then 1 else y - a
+  | .inr (.inr _) => 1
+
+theorem projectiveShiftInvScale_ne_zero (a : 𝔽)
+    (j : ProjectiveAxisTwistedCubicIndex 𝔽) : projectiveShiftInvScale a j ≠ 0 := by
+  rcases j with (x | y)
+  · rcases x with (s | u)
+    · by_cases hs : s + a = 0
+      · simp [projectiveShiftInvScale, hs]
+      · simp [projectiveShiftInvScale, hs]
+    · simp [projectiveShiftInvScale]
+  · rcases y with (y | u)
+    · by_cases hy : y - a = 0
+      · simp [projectiveShiftInvScale, hy]
+      · simp [projectiveShiftInvScale, hy]
+    · simp [projectiveShiftInvScale]
+
+/-- Exact monomial action of the ambient linear equivalence on every completed-system column. -/
+theorem projectiveShiftInvLinearMap_column [CharP 𝔽 3] (a : 𝔽)
+    (j : ProjectiveAxisTwistedCubicIndex 𝔽) :
+    projectiveShiftInvLinearMap a (projectiveAxisTwistedCubicPoints 𝔽 j) =
+      projectiveShiftInvScale a j •
+        projectiveAxisTwistedCubicPoints 𝔽 (projectiveShiftInvIndexEquiv a j) := by
+  rcases j with (x | y)
+  · rcases x with (s | u)
+    · by_cases hs : s + a = 0
+      · have hsa : s = -a := by linear_combination hs
+        subst s
+        rw [projectiveAxisTwistedCubicPoints_cubic,
+          projectiveShiftInvLinearMap_cubic_pole]
+        simp [projectiveShiftInvScale, projectiveShiftInvIndexEquiv,
+          projectiveAxisShiftInvEquiv, projectiveAxisTwistedCubicPoints]
+      · rw [projectiveAxisTwistedCubicPoints_cubic,
+          projectiveShiftInvLinearMap_cubic_finite_of_ne a s hs]
+        simp [projectiveShiftInvScale, projectiveShiftInvIndexEquiv,
+          projectiveAxisShiftInvEquiv, hs]
+    · rw [projectiveAxisTwistedCubicPoints_cubic,
+        projectiveShiftInvLinearMap_cubic_infinity]
+      simp [projectiveShiftInvScale, projectiveShiftInvIndexEquiv,
+        projectiveAxisShiftInvEquiv, projectiveAxisTwistedCubicPoints]
+  · rcases y with (y | u)
+    · by_cases hy : y - a = 0
+      · have hya : y = a := sub_eq_zero.mp hy
+        subst y
+        rw [projectiveAxisTwistedCubicPoints_axis,
+          projectiveShiftInvLinearMap_axis_target]
+        simp [projectiveShiftInvScale, projectiveShiftInvIndexEquiv,
+          projectiveAxisShiftInvEquiv, projectiveAxisTwistedCubicPoints]
+      · rw [projectiveAxisTwistedCubicPoints_axis,
+          projectiveShiftInvLinearMap_axis_finite_of_ne a y hy]
+        have hy' : y + -a ≠ 0 := by simpa [sub_eq_add_neg] using hy
+        simp [projectiveShiftInvScale, projectiveShiftInvIndexEquiv,
+          projectiveAxisShiftInvEquiv, hy', sub_eq_add_neg]
+    · rw [projectiveAxisTwistedCubicPoints_axis,
+        projectiveShiftInvLinearMap_axis_infinity]
+      simp [projectiveShiftInvScale, projectiveShiftInvIndexEquiv,
+        projectiveAxisShiftInvEquiv, projectiveAxisTwistedCubicPoints]
+
+/-- Unit-valued form of the nonzero projective column scale. -/
+noncomputable def projectiveShiftInvScaleUnit (a : 𝔽)
+    (j : ProjectiveAxisTwistedCubicIndex 𝔽) : 𝔽ˣ :=
+  Units.mk0 (projectiveShiftInvScale a j) (projectiveShiftInvScale_ne_zero a j)
+
+@[simp] theorem projectiveShiftInvScaleUnit_val (a : 𝔽)
+    (j : ProjectiveAxisTwistedCubicIndex 𝔽) :
+    (projectiveShiftInvScaleUnit a j : 𝔽) = projectiveShiftInvScale a j := rfl
+
+/-- D-PC10 preserves linear independence of every indexed column family. -/
+theorem projectiveShiftInv_linearIndependent_iff [CharP 𝔽 3] {I : Type*}
+    (a : 𝔽) (f : I → ProjectiveAxisTwistedCubicIndex 𝔽) :
+    LinearIndependent 𝔽 (fun i => projectiveAxisTwistedCubicPoints 𝔽 (f i)) ↔
+      LinearIndependent 𝔽 (fun i => projectiveAxisTwistedCubicPoints 𝔽
+        (projectiveShiftInvIndexEquiv a (f i))) := by
+  let T := projectiveShiftInvLinearEquiv a
+  let v := fun i => projectiveAxisTwistedCubicPoints 𝔽
+    (projectiveShiftInvIndexEquiv a (f i))
+  let w := fun i => projectiveShiftInvScaleUnit a (f i)
+  have hfamily :
+      (T.toLinearMap ∘ fun i => projectiveAxisTwistedCubicPoints 𝔽 (f i)) = w • v := by
+    funext i
+    exact projectiveShiftInvLinearMap_column a (f i)
+  constructor
+  · intro hli
+    have hmap := hli.map' T.toLinearMap (LinearMap.ker_eq_bot.mpr T.injective)
+    rw [hfamily] at hmap
+    exact (LinearIndependent.units_smul_iff v w).mp hmap
+  · intro hli
+    have hmap : LinearIndependent 𝔽 (w • v) := hli.units_smul w
+    rw [← hfamily] at hmap
+    exact LinearIndependent.of_comp T.toLinearMap hmap
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
 #print axioms projectiveShiftInvLinearMap_cubic_finite_of_ne
 #print axioms projectiveShiftInvLinearMap_axis_finite_of_ne
+#print axioms projectiveShiftInvLinearMap_column
+#print axioms projectiveShiftInv_linearIndependent_iff
 
 end RepairCodes

@@ -141,3 +141,23 @@ normalized action formulas on finite cubic and axis points together with all pol
 The aggregate build and standard axiom scan pass. Generic circuit/support transport and the exact
 zero-sum fiber equivalence remain open under XH2; until those compile, D-PC10 is not used to claim
 uniform repair rows.
+
+## 2026-07-13 — D-PC10 family-level transport
+
+Extended the ambient symmetry to an equivalence of the full completed coordinate type and defined
+the accompanying scalar at every coordinate. Lean proves every scale is nonzero and the exact
+column identity
+
+```text
+T_a(P_j) = λ_j P_{σ_a(j)}.
+```
+
+Using the ambient linear equivalence and unit-valued scales, the module proves that an arbitrary
+indexed family of completed columns is linearly independent iff its `σ_a`-image is. This is the
+family-level circuit-preservation statement needed by XH2 and has the standard axiom profile.
+
+The completed seed module now also defines its complete and minimal repair hypergraphs, proves
+repair edges nonempty, supplies the generic circuit-to-repair bridge, and records the standard
+minimal-clutter matching/transversal reductions. The aggregate `RepairCodes` build passes. Exact
+finite-support relabeling and identification of the axis-infinity cubic component with the full
+zero-sum triple hypergraph remain open.

@@ -59,8 +59,13 @@ group, represented in Lean by `zeroSumCapNumber`.
   substitute for the general Lean proofs.
 - `RepairCodes/ProjectiveAxisTwistedCubicInvariants.lean` proves the D-PC10 projective parameter
   permutation and its ambient invertible linear realization, including normalized action formulas
-  on every finite, pole, and infinity case. Transport from these column formulas to exact repair
-  clutters is the current XH2 obligation.
+  on every finite, pole, and infinity case. It now packages the full index permutation and
+  everywhere-nonzero column scales and proves preservation of linear independence for every
+  indexed column family. Finite-support relabeling and the exact zero-sum clutter identification
+  are the current XH2 obligations.
+- `RepairCodes/ProjectiveAxisTwistedCubic.lean` now exposes the complete and inclusion-minimal
+  repair hypergraphs, proves every repair edge nonempty, reduces their matching/transversal
+  invariants to the minimal clutter, and supplies the circuit-to-actual-repair bridge.
 
 ## Mandatory xhigh review checkpoints
 
@@ -100,7 +105,7 @@ and novelty promotion.
 | ID | Discovery | Proof status | Novelty posture | Next gate / destination |
 |---|---|---|---|---|
 | D-PC9 | The completed seed appears to have exactly five nonzero weights: projective section counts `N1=q(q²-1)/3`, `N2=q(q²-1)/2`, `N3=q(q+1)`, `N4=q(q²-1)/6`, `N(q+2)=q+1`; hence exactly `q²-1` minimum-weight words | `CHECKED` independently at q=3,9,27; general moment proof sketched, not Lean | potentially stronger coding-theoretic contribution; `LIT-OPEN` | XH7; prove from plane moments/triple classification, then targeted weight-enumerator search |
-| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | projective parameter permutation, ambient invertibility, and normalized cubic/axis action formulas `LEAN`; repair-clutter transport open | structural unification, not by itself a novelty claim | XH2; prove generic circuit/support transport and the zero-sum fiber equivalence |
+| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | projective parameter/index permutation, ambient invertibility, nonzero column scales, and preservation of every indexed family’s linear independence `LEAN`; repair-clutter relabeling open | structural unification, not by itself a novelty claim | XH2; relabel finite supports and prove the axis-infinity zero-sum clutter equality |
 
 When a discovery becomes planned work, allocate it separately but keep this row as the concise
 discovery verdict. Negative investigations belong in the companion archive.
