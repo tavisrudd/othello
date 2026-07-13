@@ -232,9 +232,12 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 
 Post-review dispositions:
 
-- **Coding / LRC → conditional Paper 6.** `RepairCodes` (`thm-gf9-dualdist`, `lem-transfer`) is the
-  "sleeper" — Lean is *ahead* of the prose. Promote after the LRC audit passes; best value-per-effort
-  in the "new" list. *Decide: promote to a `coding/` dir once the audit clears.*
+- **Coding / LRC → Paper 6 ready for manuscript assembly.** `RepairCodes` now includes the
+  kernel-proved trace bridge and concrete degree-four lift, plus an unbounded q9 family of exact
+  rate `2/19`, eventual relative distance `≥8/57`, and exact all-coordinate repair rows.  The sole
+  deep boundary is Stichtenoth Theorem 1.6(ii), quarantined and visible in the headline axiom
+  report.  The strict formalization audit passes; assemble the `coding/` manuscript and perform the
+  specialist novelty/citation audit before submission.
 - **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;
   audited first, never delaying arcs.
 - **Generalized D₂ₘ → folded into the dihedral paper** (not a separate paper). Its **Möbius-ladder /

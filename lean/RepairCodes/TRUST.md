@@ -2,10 +2,12 @@
 
 This library uses the strict kernel-checking profile established in `lean/TRUST.md`:
 
-- no `sorry`, `admit`, project axioms, `native_decide`, `unsafe`, or code-generation trust;
+- no `sorry`, `admit`, `native_decide`, `unsafe`, or code-generation trust;
 - closed finite checks use kernel `decide` only;
-- headline declarations are audited with `#print axioms` and depend only on
-  `propext`, `Classical.choice`, and `Quot.sound`.
+- finite and algebraic headline declarations are audited with `#print axioms` and depend only on
+  `propext`, `Classical.choice`, and `Quot.sound`;
+- the asymptotic family headline depends additionally on exactly one quarantined literature axiom,
+  `Imported.stichtenoth_selfDual_TVZ_6561`.
 
 ## Axis–twisted-cubic theorem chain
 
@@ -26,13 +28,20 @@ The finite q=9 and uniform characteristic-three results are machine checked end 
 7. `RepairCodes.SeedLift` and `RepairCodes.Q9SeedLift` construct the concatenated code and prove
    its dimension and distance bound, equality of the complete repair hypergraph with the embedded
    inner hypergraph, all-symbol locality, row invariants, and `7 nu <= 4 tau`.
+8. `RepairCodes.TraceDual` proves the finite-separable trace-pairing bridge from ordinary
+   extension-field dual distance to the coordinate-free functional-dual gate.
+9. `RepairCodes.Q9ExtensionLift` proves the actual degree-four restricted-scalar lift, its
+   `[19N,4K,>=8D]_9` parameters, and exact repair-row transfer.
+10. `RepairCodes.Asymptotic` proves the analytic reduction, constructs concrete `GF(9) ⊆ GF(6561)`
+    models, and derives the unbounded family with rate `2/19`, eventual relative distance at least
+    `8/57`, and exact all-coordinate repair rows.
 
 The transfer theorem uses the sharp hypothesis `r+1 < 2*d(I^perp)`, not the stronger and false
 requirement `d(I^perp)=r+1`.  This matters here: the full axis–twisted-cubic code has global dual
 distance three because of its axis locality-two circuits, while radius-three transfer still follows
 from `4 < 2*3`.
 
-## Explicit hypotheses and nonformalized inputs
+## Imported asymptotic boundary
 
 The finite seed-and-lift theorem is conditional on properties of the supplied outer code:
 
@@ -41,10 +50,11 @@ The finite seed-and-lift theorem is conditional on properties of the supplied ou
 - `HasFunctionalDualDistanceAtLeast` for the coordinate-free functional dual.
 
 These are theorem arguments, not global axioms.  `hasFunctionalDualDistanceAtLeast_top` proves
-that the gate is nonvacuous.  The standard trace-duality bridge from a conventional
-extension-field-linear outer dual to this functional-dual formulation, and the existence of an
-asymptotically good outer family satisfying the resulting gate, are prose/literature inputs and
-are not claimed as Lean theorems.
+that the gate is nonvacuous.  The trace-duality bridge is now kernel-proved.
+
+The only nonformalized mathematics is Stichtenoth's deep self-dual TVZ-family theorem
+(arXiv:math/0506264, Theorem 1.6(ii)), stated once in `RepairCodes/Imported.lean`.  The concrete
+asymptotic corollary's axiom report contains exactly this import plus the standard logical axioms.
 
 The PGL(2,9) orbit description of the ten-point axis is computational/literature provenance only.
 It is not used by the formal construction, which defines the full projective axis directly.
@@ -57,5 +67,6 @@ From `lean/`:
 choom -n 1000 -- nix develop --command lake build RepairCodes
 ```
 
-The dated adversarial review is
-`notes/2026-07-12-axis-twisted-cubic-adversarial-review.md`.
+The finite and asymptotic dated adversarial reviews are
+`notes/2026-07-12-axis-twisted-cubic-adversarial-review.md` and
+`notes/2026-07-13-repaircodes-asymptotic-adversarial-review.md`.

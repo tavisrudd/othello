@@ -13,7 +13,7 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
 
-## CURRENT TOP OF QUEUE (updated 2026-07-12)
+## CURRENT TOP OF QUEUE (updated 2026-07-13)
 
 **PRIMARY LANE (2026-07-12): conic-involution Schreier graphs → abundance-first — C84.** The conic
 bulk is the induced Schreier graph of `H_S = ⟨σ_x : x∈S⟩ ≤ PGL(2,q)`, so its Node-Kayles value is
@@ -87,12 +87,13 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    checked eight-point witness or a checked exhaustive nonexistence certificate, then synchronize
    the exact Lean theorem and paper. Track in the
    [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
-9. **RepairCodes outer trace bridge — C102.** Formalize the trace-pairing implication from a
-   conventional extension-field outer dual-distance hypothesis to the coordinate-free functional
-   dual gate. Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
-10. **RepairCodes asymptotic outer family — C103.** Import with exact citation or formalize an
-    asymptotically good outer family with positive primal and dual relative distance, then derive
-    the unconditional formal family corollary. Same handoff.
+9. **RepairCodes outer trace bridge — C102 [REPORTED 2026-07-13].** The finite-separable trace
+   pairing now proves ordinary extension-field dual distance implies the restricted functional-dual
+   gate with exact support. Review:
+   [asymptotic adversarial review](2026-07-13-repaircodes-asymptotic-adversarial-review.md).
+10. **RepairCodes asymptotic outer family — C103 [REPORTED 2026-07-13].** Stichtenoth's self-dual
+    TVZ theorem is the sole quarantined import; Lean derives the concrete unbounded q9 family with
+    rate `2/19`, eventual distance `≥8/57`, and exact repair rows. Same review and handoff.
 
 ## Open tasks
 
@@ -104,17 +105,13 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   verifier provenance, trust manifest, and papers index. Track in the
   [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
 
-- **C102 [OPEN 2026-07-12] — extension-field trace bridge for RepairCodes.** Prove that the
-  standard nondegenerate trace pairing sends the intended `GF(9^4)`-linear outer dual-distance
-  hypothesis to `HasFunctionalDualDistanceAtLeast`. This is the first genuine math blocker after
-  the finite axis–twisted-cubic seed-and-lift theorem. Track in the
+- **C102 [REPORTED 2026-07-13] — extension-field trace bridge for RepairCodes.** Kernel-proved in
+  `RepairCodes/TraceDual.lean`, including exact support preservation. Track in the
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
-- **C103 [OPEN 2026-07-12] — asymptotically good RepairCodes outer family.** State an exact cited
-  tower/code theorem (or formalize it) giving positive primal and dual relative distance over the
-  required fixed outer alphabet, quarantine only the irreducible imported statement, and prove the
-  final Lean family corollary. Track in the
-  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
+- **C103 [REPORTED 2026-07-13] — asymptotically good RepairCodes outer family.** The concrete
+  family theorem is Lean-checked from exactly one cited import, Stichtenoth Theorem 1.6(ii).
+  Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C99 [OPEN — UNBLOCKED 2026-07-12] — post-formalization second-order application revisit.** The
   completed declaration graph and adversarial review produced equality-in-charge, linewise
@@ -181,10 +178,11 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   audits pass. Track in the
   [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
 
-- **C97 [BLOCKED — POST-GATE] — synchronize the full Nofil paper and paper registry.** After the
-  flagship formalization and adequacy gates close, update the complete manuscript, theorem/trust
-  ledger, package README, paper index, and planning registry; remove obsolete boundary claims and
-  rebuild the paper PDF. Track the formalization gate in the
+- **C97 [OPEN — UNBLOCKED 2026-07-13] — assemble/synchronize the full Nofil coding paper.** The
+  RepairCodes formalization and adequacy gates are closed; the source ledger, trust boundary,
+  paper index, and planning registry are synchronized. Create/update the full manuscript and
+  package README, include the exact Stichtenoth import boundary, complete the specialist
+  novelty/citation audit, and build the paper PDF. Track the closed formalization gate in the
   [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C98 [REPORTED 2026-07-12] — theorem-mining and novelty review.** The completed proof graph

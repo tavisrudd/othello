@@ -4,6 +4,10 @@
 **Verdict:** PASS for the finite uniform seed-and-lift theorem, with the outer-family asymptotic
 corollary explicitly conditional on two prose/literature inputs.
 
+**Subsequent closure:** the two inputs named here were closed on 2026-07-13: the trace bridge is
+kernel-proved and the outer family is isolated as one exact Stichtenoth import.  See
+[`2026-07-13-repaircodes-asymptotic-adversarial-review.md`](2026-07-13-repaircodes-asymptotic-adversarial-review.md).
+
 ## Statement adequacy
 
 - The code is the actual row space of the displayed axis–twisted-cubic generator, not an abstract

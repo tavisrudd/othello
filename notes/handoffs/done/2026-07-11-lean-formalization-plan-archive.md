@@ -707,3 +707,19 @@ that discharges the transfer interface's finite fields from it:
   mathematics before an unconditional asymptotic theorem can be claimed.
 - Updated the research ledger and registry to match the formal boundary and added
   `lean/RepairCodes/TRUST.md` as the stable trust-chain description.
+
+### Handoff Note — 2026-07-13 (RepairCodes asymptotic closure)
+
+- C102 closed with a kernel proof of the finite-separable trace-duality bridge, including ordinary
+  extension-dual membership and exact support equality after restriction of scalars.
+- The degree-four extension lift now constructs the actual concatenated submodule and proves
+  `[19N,4K,≥8D]₉` plus exact complete repair-row transfer from ordinary dual distance.
+- C103 uses exactly one quarantined result: Stichtenoth, arXiv:math/0506264, Theorem 1.6(ii),
+  specialized to self-dual codes over `GF(6561)` with limiting distance at least `39/80`.
+- Lean constructs concrete `GF(9) ⊆ GF(6561)`, proves degree four, and derives unbounded length,
+  exact rate `2/19`, eventual relative distance at least `8/57`, and exact rows
+  `(4,7),(6,12),(7,13)` at every coordinate.
+- The strict adversarial pass found no further math blocker.  The concrete headline axiom report is
+  exactly the Stichtenoth import plus `propext`, `Classical.choice`, and `Quot.sound`; all finite and
+  reduction theorems remain import-free.  C97 is unblocked for full manuscript assembly and the
+  specialist novelty/citation audit.

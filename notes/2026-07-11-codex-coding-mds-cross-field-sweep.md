@@ -468,13 +468,24 @@ every coordinate, and
 
 for every coordinate.  The bounded-repair transfer theorem proves equality
 of the complete repair hypergraph with the embedded inner hypergraph, not
-merely preservation of chosen repair groups.  The standard trace-duality
-bridge that turns a suitable 𝔽_{9^4}-linear outer dual-distance hypothesis
-into this coordinate-free functional-dual gate, and the existence of an
-asymptotically good outer family satisfying it, remain cited prose inputs.
-Thus the fixed-alphabet asymptotic corollary is conditional on those external
-outer-family facts; the finite seed-and-lift theorem itself has no added
-axioms.
+merely preservation of chosen repair groups.
+
+**[LEAN-PROVED TRACE/EXTENSION BRIDGE]** For a finite separable degree-four extension
+(𝔽_{9^4}/𝔽_9), the nondegenerate trace pairing represents every base-field
+functional uniquely.  Lean proves that ordinary extension-field dual distance at least five
+implies the coordinate-free functional-dual gate after restriction of scalars, with exact support
+preservation.  The resulting extension-field lift has parameters
+`[19N,4K,≥8D]₉` and the same exact repair rows.
+
+**[LEAN-CHECKED MODULO ONE LITERATURE IMPORT]** Stichtenoth's self-dual TVZ theorem
+(arXiv:math/0506264, Theorem 1.6(ii)), specialized to
+`6561=81²`, supplies self-dual outer codes of rate `1/2`, unbounded length, and limiting
+relative distance at least `39/80`.  This theorem is the sole quarantined axiom.  Lean constructs
+concrete `GF(9) ⊆ GF(6561)` models and derives an unbounded q=9 family with exact rate
+`2/19`, eventual relative distance at least `8/57`, locality at most three, and the exact rows
+`(4,7),(6,12),(7,13)` at every coordinate.  All reduction steps, including the trace bridge and
+finite-field degree calculation, are kernel-proved; only the cited TVZ existence theorem is
+imported.
 
 Replay from `/home/tavis/src/othello`:
 
@@ -575,10 +586,10 @@ It follows uniformly that
 
 The finite concatenation theorem therefore preserves the complete repair
 hypergraphs of every (S_q) under its explicit outer functional-dual gate.
-Subject to a cited asymptotically good outer family and the standard
-trace-duality bridge into that gate, this gives asymptotically good
-fixed-alphabet all-symbol families.  The (S_9) seed gives the exact uniform
-ratio bound (\tau_i/\nu_i\ge7/4).
+For (S_9), the trace bridge is Lean-proved and Stichtenoth's self-dual TVZ family is quarantined as
+the one deep literature import; the resulting fixed-alphabet family is Lean-checked end to end
+from that import, with exact rate (2/19), eventual relative distance at least (8/57), and exact
+uniform ratio bound (\tau_i/\nu_i\ge7/4).
 
 ### 1.5.2 Novelty boundary and name
 

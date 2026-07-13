@@ -1,15 +1,18 @@
 # Lean formalization plan — the -10 / -11 PROVED corpus
 
 **Date**: 2026-07-11
-**Status**: PHASE 1 COMPLETE under the strict trust gate. The uniform axis–twisted-cubic code,
+**Status**: REPAIRCODES ASYMPTOTIC TRACK COMPLETE under the strict trust gate. The uniform axis–twisted-cubic code,
 small-circuit classification, exact repair clutters and sharp invariants, q=9 `[19,4,8]₉` row and
 edge-count table, `120`/`84` support inventory, and conditional finite seed-and-lift theorem are
 Lean-proved. The full seed has global dual distance three; transfer uses the correct weaker gate
 `r+1 < 2*d(I⊥)`, so radius three remains valid. The strict-gate review is
 [recorded separately](../2026-07-12-axis-twisted-cubic-adversarial-review.md), and the stable trust
-boundary is in [`lean/RepairCodes/TRUST.md`](../../lean/RepairCodes/TRUST.md). Remaining work for an
-unconditional *asymptotic* family theorem is external mathematics: the trace-duality bridge into
-the functional-dual gate and a rigorously cited/formalized asymptotically good outer family.
+boundary is in [`lean/RepairCodes/TRUST.md`](../../lean/RepairCodes/TRUST.md). The trace-duality
+bridge, degree-four extension lift, concrete finite-field instantiation, and asymptotic reduction
+are Lean-proved.  The resulting unbounded q9 family has exact rate `2/19`, eventual relative
+distance at least `8/57`, and exact repair rows; its sole deep dependency is the quarantined
+Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
+review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -210,6 +213,10 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/AxisTwistedCubic.lean`, `AxisTwistedCubicInvariants.lean` | natural-index row code; exact global dual distance three; exact locality two/three and complete repair classifications; sharp nucleus/generic-axis formulas; cubic `τ=q−2`, rainbow lower bound and matching upper bound; exact cubic repair count `choose(q−1,2)`; all-symbol `τ>ν` for `q≥9`. |
 | `RepairCodes/Q9Uniform.lean`, `Q9CircuitInventory.lean` | kernel-checked q9 row table `(4,7),(6,12),(7,13)`; exact `28`, `36+8`, `36+12` repair counts; exact `120` axis-three / `84` completed-cubic-four circuit-support inventory; no generated or native certificate. |
 | `RepairCodes/SeedLift.lean`, `Q9SeedLift.lean` | actual concatenated submodule; dimension and distance lower bound; exact equality of complete repair hypergraphs under `r+1<2*d(I⊥)` and the outer functional-dual gate; exact `ν`/`τ` transfer; q9 `[19N,4K,≥8D]₉`, all-symbol locality three, exact lifted row table, and `7ν≤4τ`. |
+| `RepairCodes/TraceDual.lean` | nondegenerate trace representation; ordinary extension-field dual word recovery; exact functional/Hamming support equality; ordinary dual distance ⇒ restricted functional-dual gate |
+| `RepairCodes/Q9ExtensionLift.lean` | actual degree-four restricted-scalar lift; dimension multiplier; `[19N,4K,≥8D]₉`; exact repair-row transfer from ordinary extension-field dual distance |
+| `RepairCodes/Imported.lean` | sole quarantined deep input: Stichtenoth Theorem 1.6(ii), specialized to self-dual codes over `GF(6561)` with limit distance `≥39/80` |
+| `RepairCodes/Asymptotic.lean` | kernel-checked analytic reduction; concrete `GF(9) ⊆ GF(6561)` construction; unbounded q9 family with rate `2/19`, eventual distance `≥8/57`, and exact all-coordinate rows |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -217,18 +224,16 @@ near-MDS seeds (e.g. `[10,4,6]_9`, `d+k = n`) sit one below.
 
 ### Open next steps (in order)
 
-**Phase 1 is closed.** The q9 seed, uniform formulas, finite seed-and-lift theorem, strict trust
-audit, and paper/registry synchronization are complete.
+**The RepairCodes formalization track is closed.** The q9 seed, uniform formulas, trace bridge,
+extension lift, concrete asymptotic family, strict trust audits, and source-ledger/registry
+synchronization are complete.
 
-1. **Outer trace bridge:** formalize the standard trace pairing that maps a suitable
-   `GF(9^4)`-linear dual-distance hypothesis to `HasFunctionalDualDistanceAtLeast`. This is the
-   first remaining mathematical input for an unconditional extension-field formulation.
-2. **Outer family:** either formalize the required asymptotically good outer family with positive
-   primal and dual relative distance, or quarantine an exact cited theorem and prove the Lean
-   family corollary from it. Until then, the asymptotic statement remains conditional.
-3. **Optional context only:** formalize the symmetric-cube PGL orbit description of the axis if a
+1. **Paper assembly (C97):** create/update the full coding/LRC manuscript from the synchronized
+   source ledger, add the imported-theorem boundary verbatim, rebuild its PDF, and complete the
+   specialist novelty/citation audit.  This is editorial/literature work, not a math blocker.
+2. **Optional context only:** formalize the symmetric-cube PGL orbit description of the axis if a
    later paper needs that provenance in its proof chain. It is not used by the code construction.
-4. Continue Phases 2–4 per §4 as separate tracks; they are not blockers for RepairCodes Phase 1.
+3. Continue Phases 2–4 per §4 as separate tracks; they are not blockers for RepairCodes.
 
 ### Discovery track for final review
 
@@ -264,6 +269,12 @@ explicitly stated otherwise.
 - **Proved broader q9 certificate:** the four-disjoint-repair construction works over any
   characteristic-three field containing a square root of `−1`; order nine is used only to make
   the matching bound sharp.
+- **Proved applied upgrade:** the paper's fixed-alphabet asymptotic existence claim now has a
+  concrete Lean theorem: unbounded length, exact rate `2/19`, eventual relative distance at least
+  `8/57`, and exact preservation of all three repair rows, with only Stichtenoth Theorem 1.6(ii)
+  imported.
+- **Proved simplification:** self-dual TVZ outer codes replace a two-sided AG-code distance
+  construction: primal and dual distances coincide, so one cited theorem supplies both gates.
 - **Possible application / novelty candidate:** the exact complete-hypergraph transfer can be
   reused for any inner seed whose repair statistics are known, including mixed-locality seeds.
   Whether this formulation is new in concatenated-LRC literature still requires a specialist
