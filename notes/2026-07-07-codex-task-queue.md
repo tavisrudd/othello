@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C96.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C97.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -130,6 +130,12 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   data for `q=8,9,11,16`; prove the reported values/bounds and audit all headline theorem axioms.
   Track in the
   [relative-conic-arcs handoff](handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+
+- **C97 [BLOCKED — POST-GATE] — synchronize the full Nofil paper and paper registry.** After the
+  flagship formalization and adequacy gates close, update the complete manuscript, theorem/trust
+  ledger, package README, paper index, and planning registry; remove obsolete boundary claims and
+  rebuild the paper PDF. Track the formalization gate in the
+  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
 
 - **C85 [REPORTED 2026-07-12] — quadratic split-route obstruction.** Chevalley–Warning now proves
   every finite odd-field quadratic form of dimension at least three isotropic; the `±1`

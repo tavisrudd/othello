@@ -8,8 +8,10 @@ linear-code/dual-distance + Singleton/MDS + Reed–Solomon layers) **and Phase 1
 is now concrete with full `[10,4,6]₉` parameters, dual distance four, encoder equivalence, and
 coefficient faithfulness; outer-dual membership is proved directly from concatenation
 orthogonality. The concrete q9 repair hypergraph is now code-derived and 3-uniform; identifying
-it with the affine-line hypergraph and proving `ν=3, τ=5` is complete. The uniform `q=3^h`
-geometry input is the next lead.
+it with the affine-line hypergraph and proving `ν=3, τ=5` is complete. The uniform
+characteristic-three code parameters `[2q+1,4,q−1]_q` are now fully proved. The remaining
+uniform-family lead is the size-at-most-four circuit classification and its all-symbol locality /
+`τ>ν` consequences for `q≥9`.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -195,6 +197,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `FiniteGeom/EvalCodeInstance.lean` | concrete MDS discharge of the eval-code layer: RS `[7,3,5]₇` over `ZMod 7` (`rsCode_zmod7_isMDS`/`_minDist`) and RS `[3,2,2]₉` over the target `GaloisField 3 2 = 𝔽₉` on subfield points (`rsCode_gf9_isMDS`/`_minDist`, injectivity via `algebraMap`) — exercises `rsCode_isMDS` on a real non-prime field |
 | `FiniteGeom/MomentCurve.lean` | moment-curve / NRC general position via Vandermonde: `momentCurve`, `momentCurve_linearIndependent` (square family), `momentCurve_linearIndependent_of_card_le` (any distinct family of size `≤n`), `twistedCubic_linearIndependent` (`n=4`, no four coplanar), `twistedCubic_span` (four distinct cubic points span `𝔽⁴`); **hyperplane sections**: `formPoly` + `momentCurve_section_le` — the sharp "plane meets twisted cubic in `≤3` points" `T_q` bound |
 | `FiniteGeom/ColumnCode.lean` | projective systems as codes over a general `Fintype` index `ι` (`columnCode` for a point system `P : ι → 𝔽^k`), `sectionCount`, weight↔section identity, `le_columnCode_minDist` (all sections `≤ s` ⇒ `card ι − s ≤ d`), `columnCode_minDist_le`, `columnCode_minDist_eq` (`d = card ι − max section`), `finrank_columnCode` (`dim = k` when points span) — the geometric-distance bridge for the whole geometric-code lane. (`minDist`/`le_minDist`/`minDist_le_hammingNorm` in `Code.lean` generalized `Fin n → ι`, backward-compatible, so the `S_q` point system can be indexed by the natural `𝔽 ⊕ 𝔽 ⊕ Unit`.) |
+| `FiniteGeom/AxisTwistedCubic.lean` | explicit `S_q=T_q∪L_q` on `𝔽 ⊕ 𝔽 ⊕ Unit`; axis/cubic section split; characteristic-three Frobenius bound; exact maximum section `q+2`; direct four-vector spanning proof (including `q=3`); strict-trust `axisTwistedCubic_code_parameters : [2q+1,4,q−1]_q` |
 | `FiniteGeom/Completion.lean` | `completionDistance_eq_transversalNumber` (`δ_x = τ`, abstract identity — the matroid step folded into the deletion predicate) |
 | `FiniteGeom/Repair.lean` | complete bounded-radius repair hypergraph from actual dual-word supports: `wordSupport`, `repairHypergraph`; exact edge cardinality/nonemptiness from dual distance; repair edge → dependent columns/zero determinant, and the converse at the minimum size allowed by dual distance. |
 | `RepairCodes/Transfer.lean` | concatenation transfer lemma (`transfer_blockwise` / `transfer_single_block` / `transfer_lemma`) over the abstract `ConcatDualWord` interface |
@@ -218,17 +221,13 @@ proves the functional outer-dual membership directly (archive companion has the 
 code-derived strict `τ>ν` instance. The separate CompletionCore bridge from surviving circuits to
 matroid independence remains in Phase 2.
 
-1. **Phase 1 step 4:** uniform `q = 3^h` theorem `C(S_q) = [2q+1,4,q-1]_q`. Two of three legs
-   **landed**: `dim=4` (`FiniteGeom/MomentCurve.lean` `twistedCubic_span` + `ColumnCode`
-   `finrank_columnCode`) and the geometric-distance bridge `d = n − max section`
-   (`FiniteGeom/ColumnCode.lean` `columnCode_minDist_eq`). Remaining leg: the **geometry input**
-   `max plane section of S_q = q+2`. The `T_q` (cubic) section bound `≤3` is **landed**
-   (`momentCurve_section_le`: a nonzero form kills `≤ n-1 = 3` cubic points). Remaining: build the
-   point system `S_q = T_q ∪ L_q` (twisted cubic + axis line `X₀=X₃=0`) as `P : Fin (2q+1) → 𝔽^4`,
-   split `sectionCount` over the `T_q`/`L_q` blocks, bound the axis block (`≤1` unless the form
-   kills the whole line, i.e. `a₁=a₂=0`), and in that last case bound the cubic block `≤1` via
-   char-3 Frobenius bijectivity of `t↦t³` — total `≤ q+2`, attained by `a=(0,0,0,1)`. Feed into
-   `columnCode_minDist_eq`. Later `τ>ν` repair analysis pulls in the cap number `Z_3(q)` (imported).
+1. **Phase 1 step 4, repair half:** the code-parameter half is closed by
+   `FiniteGeom/AxisTwistedCubic.lean`: explicit `S_q`, exact maximum section `q+2`, dimension `4`,
+   and distance `q−1`, for every finite characteristic-three field (slightly stronger than the
+   paper's `q≥9` range). Next prove the size-`≤4` circuit classification: axis triples and
+   `{C(s),C(t),C(u),(0:e₁:e₂:0)}` with `e₁=s+t+u`, `e₂=st+su+tu`. Then derive exact locality
+   two/three and the per-orbit matching/transversal formulas; the `τ` formulas expose `Z₃(q)` as a
+   named hypothesis/import boundary and yield all-symbol `τ>ν` for `q≥9`.
 2. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
 
 **Landed 2026-07-11:** (a) the eval-code stepping stone — RS instances over `ZMod 7` and the

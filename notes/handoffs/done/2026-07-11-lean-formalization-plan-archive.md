@@ -486,3 +486,20 @@ that discharges the transfer interface's finite fields from it:
 - Validation: full `nix develop --command lake build RepairCodes` green with no Lean warnings.
   `#print axioms` on the final embedded equality and invariant theorem returned exactly
   `[propext, Classical.choice, Quot.sound]`.
+
+### Handoff Note — 2026-07-12 (uniform characteristic-three code parameters complete)
+
+- Added `FiniteGeom/AxisTwistedCubic.lean` with the natural `𝔽 ⊕ 𝔽 ⊕ Unit` indexing of the affine
+  twisted cubic plus its full axis. The section count splits into cubic and axis blocks.
+- Proved the exact maximum plane section `q+2`: a plane not containing the axis contributes at
+  most `3+1`; a plane containing it has cubic equation `a₀+a₃t³=0`, so Frobenius injectivity in
+  characteristic three gives at most one cubic point. The form `X₃=0` attains the bound.
+- Proved the system spans in dimension four directly from cubic parameters `0,1` and two axis
+  points. This covers `q=3` as well as the paper's `q≥9` range, where the earlier four-cubic-point
+  spanning route was unavailable at the smallest field.
+- The headline theorem `axisTwistedCubic_code_parameters` gives exact `[2q+1,4,q−1]_q` parameters
+  over every finite characteristic-three field. The next uniform-family frontier is the
+  size-at-most-four circuit classification and the locality / `τ>ν` analysis.
+- Validation: focused Lean compilation and full `nix develop --command lake build RepairCodes`
+  pass with no Lean warnings. Both the maximum-section theorem and headline parameter theorem have
+  axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
