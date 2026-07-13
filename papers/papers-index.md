@@ -2,8 +2,10 @@
 
 Publication-track staging. Each subdirectory is a **candidate paper**: a curated view (symlinks
 into `../notes/`) of the source notes for one result, plus a `README.md` status map. A directory
-is a staging area, **not** a commitment to a separate publication — several candidates may merge
-or split. See `papers-planning.md` for the open packaging decisions.
+is a staging area, **not** a commitment to a separate publication. The Fable review (2026-07-12)
+resolved the decomposition to **five papers (+1 conditional) + two OEIS**: baer + completion merge,
+dihedral bundles the D₂ₘ family, continuation is N1-only, coding is conditional on its audit. See
+`papers-planning.md` for the rulings, submission sequence, and per-paper guardrails.
 
 ## Games track — impartial cap / Nofil / Node-Kayles
 

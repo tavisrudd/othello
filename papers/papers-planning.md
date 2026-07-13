@@ -1,290 +1,255 @@
 # Papers planning — cross-paper strategy
 
-The map for how the candidate directories in `papers/` become actual submissions. This is the
-input document for the Fable packaging review. `papers-index.md` is the registry; this doc holds
-the open decisions and the guardrails.
+The resolved plan for turning the `papers/` candidate directories into submissions. The Fable
+packaging review (2026-07-12) settled the decomposition, sequencing, and positioning recorded below.
+`papers-index.md` is the registry; this doc is the strategy map and guardrails.
 
 ## Tracks
 
-- **Games track** (impartial cap/Nofil/Node-Kayles manuscripts): `dihedral-schreier-node-kayles`,
+- **Games track** (impartial cap/Nofil/Node-Kayles): `dihedral-schreier-node-kayles`,
   `nofil-finite-geometry-outcomes`. Split by *technique* — Schreier-residual nimbers vs
   pairing/mirror ⇒ P.
 - **Geometry/coding track** ("Package 2": arc extension & reconstruction):
-  `baer-equivariant-extension`, `completion-core-rigidity`, `continuation-graph-rigidity` —
-  distinct headline theorems on distinct objects, shared `FiniteGeom` Lean base, common parent
-  audit. `arcs_complete_outside_conic` sits alongside as a **related but separate**, self-contained
-  finished manuscript (classical index equations, not the game machinery).
-- **Sequence submissions** (`oeis-submissions/`): the queens A344227 extension and the new
-  sum-free ℤₙ entry — a different deliverable kind (sequences, not papers).
+  `baer-equivariant-extension`, `completion-core-rigidity`, `continuation-graph-rigidity`, plus
+  `arcs_complete_outside_conic` (related but separate; classical index equations, not the game
+  machinery).
+- **Sequence submissions** (`oeis-submissions/`): the queens A344227 extension and the new sum-free
+  ℤₙ entry — a different deliverable kind.
 
-A directory ≠ a paper. The number of submissions is a decision, not the directory count — see
-the anti-salami guardrail (D6).
+A directory ≠ a paper. See the resolved decomposition next.
 
-## Open packaging decisions (the questions for the Fable review)
+## Decomposition (resolved — Fable review 2026-07-12)
 
-- **D1 — projective outcomes: fold or split?** `nofil-finite-geometry-outcomes` currently means
-  the pairing/mirror flagship (sum-free ℤₙ + affine AG(n,q), already drafted in `main.tex`).
-  The projective mirror-outcome theorems (all Lean-proven, `sorry`-clean, unwritten) can either
-  finish that flagship as its projective section — which is what the two existing plans
-  (`stepping-stone-deliverables-proposal` D1/D2, `publishable-spinout-audit` Package 1) already
-  intend — or split out as a standalone companion "Paper 2." The existing plans lean fold; the
-  recent Fable conversation leans split. **This is the central call.**
-- **D2 — completion-core: standalone or companion?** `completion-core-rigidity` is a swing piece;
-  its own Stage C folds it into `baer-equivariant-extension` as a section if its headline
-  computation (twisted-cubic transversal spectrum / t_h(q)) does not land. Decide after that
-  computation + the Storme–Szőnyi audit.
-- **D3 — continuation-graph: carry N2 or not?** N1 (frame-graph semilinear rigidity, q ≥ 13) is
-  the standalone headline and survives audit. N2 (full-complex reconstruction) is SOFTEN and
-  gated on a paywalled Metsch / Drake–Sané read — publish N1, defer/soften N2.
-- **D4 — conic-localization reduction: spin out or hold?** Unresolved conflict between plans.
-  `stepping-stone-deliverables-proposal` D3 recommends spinning the conic-localization reduction
-  out as a standalone scaffold paper (~65%). Against that: `escape-count-lemma` and
-  `conic-localization-onconic-escape` show the reduction lands on the **open** odd-plane kernel
-  (the (ON) conjecture, empirical only through q=19), and `publishable-spinout-audit` §5 calls
-  the perspectivity/conic formulas "coordinate lemmas, not standalone results." Default: hold as
-  kernel infrastructure inside `nofil-finite-geometry-outcomes`' open-frontier section until
-  there is a kernel result; Fable to adjudicate.
-- **D5 — `arcs_complete_outside_conic` (RESOLVED: distinct, finished).** A self-contained,
-  near-submission-ready manuscript (secant-defect identity, √(2q)+3/2 lower bound, PGL(3,q)
-  averaging transfer, even-char nucleus constraints, verified small values) — *related but
-  separate* from the game work; it does not merge into Baer. **Cross-paper coordination:** its
-  √(2q)+3/2 bound is the same classical Lunelli–Sce √(2q) scale as `baer-equivariant-extension`'s
-  Cor 3.4 — frame the two so they don't appear to double-claim the constant (arcs owns the
-  additive-3/2 relative-conic refinement; Baer owns the orbit-valued criterion). Distinct again
-  from the game-side conic-localization / "intruder calculus" line (open, proved only q=5,7), which
-  is a dormant research candidate, not this paper.
-- **D6 — anti-salami (meta).** `publishable-spinout-audit` is explicit: *"the best decision is
-  not to create many small papers."* Six candidate directories are a staging convenience, not a
-  target of six submissions. Reconcile to a defensible count — plausibly: one games-track
-  flagship (+ the committed catalogue), one arc-extension paper (Baer, possibly absorbing
-  completion-core), and continuation-graph's N1, with the coding/LRC material as its own or a
-  companion.
+**Target: five papers (+ one conditional) + two OEIS entries** — not one per directory.
 
-## Framing for the Fable review
+1. **Games flagship** (`nofil-finite-geometry-outcomes`) — folds sum-free ℤₙ + affine AG(n,q) +
+   projective mirror outcomes + the boundary/sharpness negatives into one classification.
+2. **Dihedral Schreier catalogue** (`dihedral-schreier-node-kayles`) — **extended with the
+   generalized-D₂ₘ family** before shipping; retitle toward "finite subgroups of PGL₂(q)."
+3. **Arcs complete outside a conic** (`arcs_complete_outside_conic`) — standalone.
+4. **Equivariant extension + robust completion** (`baer-equivariant-extension` **merged with**
+   `completion-core-rigidity`).
+5. **Continuation-graph rigidity, N1 only** (`continuation-graph-rigidity`) — N2 demoted to remarks.
+6. **(Conditional) Coding / LRC** — promote only after the specialist prior-art audit passes.
 
-Lenses from the 2026-07-12 external triage to fold into the Fable brief — sharpen the questions,
-don't just ask "how to package":
+Plus the two `oeis-submissions/` entries (independent of the papers).
 
-- **Lead with the nontrivial, not the mechanism.** The general moves — mirror/pairing strategy,
-  orbit-wise xor, alternative-completions-as-hypergraph, Node-Kayles = closed-neighbourhood
-  deletion, saturating-set = covering-code — are each individually *elementary*. For every paper,
-  ask: what is the nontrivial lead (a classification, a sharp bound, an exact family, or an
-  unexpected application), and does the abstract open with it rather than the general packaging?
-- **Decomposition is the bottleneck, not discovery.** The open work is splitting into papers +
-  prior-art audits + clean theorem–proof narratives. Ask Fable to rule on the paper *count* —
-  guarding against both salami-slicing and over-bundling (target: a few strong papers, not many
-  thin ones).
-- **Submission order.** External priority: ship the finished/cheap wins first, then the
-  already-complete units, then the seams, then the Schreier family; keep the odd-plane flagship
-  last and do not delay the small papers for it. Ask Fable to confirm/adjust the order.
-- **The A344227 hook is a refutation.** G(17)=2 refutes the entry's published "eventually
-  alternates 0/1" conjecture — a stronger lead than "new terms." Frame the queens/OEIS deliverable
-  that way.
-- **Sum-free: standalone or folded?** The triage makes sum-free ℤₙ its *own* paper and
-  affine+projective a separate "building-avoidance games on finite geometries" paper — diverging
-  from our current single-flagship fold (see D1). Put this split explicitly to Fable.
-- **Specialist prior-art audits are the gate.** Coding (vs LRC / availability / concatenation),
-  completion & continuation (vs defining sets / matroid reconstruction / line-graph
-  reconstruction), relative arcs (vs complete arcs / saturating sets). Ask which claim survives
-  each audit as the sharpest defensible novelty.
-- **Convert rejected conjectures into impossibility theorems.** The long list of
-  computationally-rejected conjectures adds little weight unless recast as negative/impossibility
-  theorems (e.g. the escape lower bound, the no-pairing-mechanism results). Ask which are worth
-  converting.
-- **Statement-level vs instantiated.** Some higher geometric applications are stated but not fully
-  instantiated. Ask Fable which must be instantiated before they count as results.
-- **Formalization gate (firm policy).** Every lemma/proof is Lean-formalized, `sorry`-free, before
-  publication — so the submission queue is driven by *formalization readiness*, not mathematical
-  completeness. Ask Fable to sequence by formalization cost: which papers are cheapest to fully
-  formalize, and which supporting lemmas (e.g. the boundary negatives, Φ_T, ½-density, the arcs
-  proofs) are still un-formalized and therefore release-blocking. (See "Authorship, provenance &
-  reception".)
-- **Venue split.** Which deliverables are specialist (arXiv/journal, credibility spine = Lean +
-  public repo + DOI) vs public (the meta-story of human-directed, machine-checked AI mathematics +
-  the queens explorable)? Ask Fable to assign each.
-- **Extraction boundaries.** Each paper ships as a self-contained public repo (manuscript + minimal
-  Lean subset + solver/certs) with a DOI. Ask Fable to confirm the per-paper repo boundaries and the
-  shared-dependency handling. (See "Extraction & DOI plan".)
+### The decision rulings
+
+- **D1 — FOLD (not split).** Projective mirror outcomes become the flagship's projective section; no
+  standalone projective "Paper 2." The nontrivial object is the *classification with its exact method
+  boundary* (mirror ⇒ P across ℤₙ / AG(n,q) / PG(n,2) / elliptic / even-q planes / hyperbolic quadrics,
+  **and** where it dies — parabolic/Hermitian, capacity ≥ 3); that object only exists in one paper, and
+  a standalone projective paper is "the same elementary mirror trick on more boards." **No standalone
+  sum-free paper** — its vehicle is the OEIS entry; if the flagship balloons, cut the capacity-c
+  material, never sum-free.
+- **D2 — MERGE Baer + completion now (default).** Each half is weak alone by its own audit; merged
+  they are one paper — orbit-valued extension criterion + δ(C)=τ + sharp completion distances for the
+  classical families. A landed twisted-cubic spectrum / t_h(q) result *upgrades* it (or, if large,
+  justifies un-merging later).
+- **D3 — N1 only.** N2 (full-complex reconstruction) → a remarks subsection, out of the abstract and
+  contributions, until the paywalled Metsch / Drake–Sané read clears.
+- **D4 — HOLD.** The conic-localization reduction lands on the open (ON) kernel — a scaffold with no
+  result on it. Keep as the flagship's open-frontier section; revisit only when a kernel result exists.
+- **D5 — arcs standalone, through the gate.** Fable's catch: arcs is the one finished manuscript with
+  **zero Lean** — "extract-first" and "formalize-everything" conflicted. Resolution: **hold the gate**
+  (the first paper out sets whether the gate is policy or aspiration). The arcs Lean library is **being
+  formalized 2026-07-12 (tonight)**. When formalizing, **restate the asymptotic lower bound as an
+  explicit inequality with concrete constants for all q ≥ q₀, not O-notation** — easier to formalize and
+  a stronger published claim. Keep the Lunelli–Sce coordination with Baer (arcs owns the additive-3/2
+  relative refinement; Baer owns the orbit criterion).
+- **D6 — count.** Five papers (+1 conditional) + two OEIS, as above. Dihedral bundles D₂ₘ rather than
+  spawning a sequel (anti-salami; the mandatory Φ_T/½-density formalization window is free calendar time
+  for the classification). Escape hatch: if D₂ₘ stalls beyond that window, ship the committed catalogue
+  with §14 as the stated program.
+
+## Submission sequence (under the formalization gate)
+
+Ordered by formalization-to-full-trust distance:
+
+| # | Deliverable                       | Gate distance                                                                                         |
+|---|-----------------------------------|-------------------------------------------------------------------------------------------------------|
+| 0 | Public mirror + first extraction  | No Lean needed; unblocks everything below                                                             |
+| 1 | OEIS A344227 (priority stamp now) | Computational (`getK` pattern) — no Lean gate                                                          |
+| 2 | Games flagship                    | Core P-theorems done; owes sum-free law, boundary negatives, capacity-2 sharpness, Scharlau/Witt lemma |
+| 3 | Dihedral (+ D₂ₘ)                  | Owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions                                |
+| 4 | Arcs                              | Owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement                  |
+| 5 | Coding / LRC (conditional)        | Lean largely done — gated on the prior-art audit, not formalization                                   |
+| 6 | Baer ⊕ completion                 | No manuscript; Lean phases unbuilt; two audits pending                                                 |
+| 7 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
+
+**Highest-leverage first move:** stand up the public-artifact spine — extract the first public repo
+(tagged `FiniteGeom` base + the Lean-complete mirror outcomes), mint the Zenodo DOI, submit the
+A344227 priority-stamp subset. Cheap; unblocks four deliverables at once (both OEIS links, arXiv
+postings, the n=18 comment); starts the priority clock on the refutation; and forces the extraction
+machinery to exist before any paper depends on it.
+
+## Writing guardrails (from the Fable review)
+
+**Lead with the nontrivial, not the mechanism.** The general moves (mirror/pairing, orbit-xor,
+completions-as-hypergraph, Node-Kayles = neighbourhood deletion, saturating-set = covering-code) are
+each *elementary*. Each abstract opens with the nontrivial lead:
+
+| Paper        | The lead                                                                                  | Watch |
+|--------------|--------------------------------------------------------------------------------------------|-------|
+| Flagship     | The complete outcome classification **with the exact method boundary**                      | `main.tex` is organized around the method and still calls projective open — reorganize to open with the classification + dichotomy |
+| Dihedral     | Exact nimbers for an explicit infinite family (the ((q+1−2s)/4)·K₄ law + D₂ₘ/polyhedral)     | elementary without D₂ₘ; the explicit families are the content |
+| Arcs         | The exact prescribed-hole defect identity + additive-3/2 refinement + verified values       | fine |
+| Baer⊕compl.  | Orbit-valued criterion + **exact** completion distances for the classical families          | δ=τ / the hypergraph frame are mechanism; the sharp values are the lead |
+| Continuation | The rigidity theorem: Aut(frame graph) = ambient semilinear group for q ≥ 13                | fine if N2 truly demoted |
+| Coding       | The explicit certified-parameter construction ([10,4,6]₉ seed + concrete-constant transfer)  | lead with the construction, not the transfer lemma |
+| A344227      | **G(17)=2 refutes the published eventual-alternation conjecture** (a refutation)             | frame exactly this way |
+
+- **Negatives that bound a published method are theorems; the rest are logbook.** The boundary
+  negatives and capacity sharpness belong in the flagship as theorems (they delimit the method). Do not
+  convert the wider rejected-conjecture list.
+- **Bright line:** an application without ≥1 worked nontrivial instantiation is a remark, never an
+  abstract-level contribution. Bites the higher-dim cap/MDS extensions in Baer and the higher-rank
+  resilience claims in completion — instantiate one each or demote.
 
 ## Authorship, provenance & reception
 
 The research is human-directed (program lead), but the mathematics, code, and proofs are
-agent-generated; the lead directs the program and cannot defend the proofs at referee depth. This
-is a first-class design constraint, not a footnote.
+agent-generated; the lead directs the program and cannot defend the proofs at referee depth. This is a
+first-class design constraint, not a footnote.
 
 **Lean is the trust anchor.** For a machine-checked result, proof *validity* is referee-verifiable
-without the author understanding the mathematics. The lead can confirm the mechanical half —
-build succeeds, `sorry`-free, `#print axioms` clean — unaided. The residual is **statement
-adequacy**: does the Lean theorem actually say what the paper claims (not a vacuous or mis-stated
-version)? That still needs mathematical judgment, so the project handles it by anchoring definitions
-to standard/mathlib objects where possible and shipping a per-result trust-chain note (`lean/TRUST.md`
-is the model). This is what lets human-directed, agent-generated mathematics be published
-responsibly, and it reorders the priority to **publish in order of formalization readiness.**
+without the author understanding the mathematics. The lead can confirm the mechanical half — build
+succeeds, `sorry`-free, `#print axioms` clean — unaided. The residual is **statement adequacy**: does
+the Lean theorem actually say what the paper claims (not a vacuous or mis-stated version)? That still
+needs mathematical judgment, handled below.
 
-**Formalization gate (release policy).** Decision: **every lemma and proof is Lean-formalized to the
-project's full trust standard (`lean/TRUST.md`) before that paper is published** — not merely
-`sorry`-free, but:
+**Formalization gate (release policy).** **Every lemma and proof is Lean-formalized to the project's
+full trust standard (`lean/TRUST.md`) before that paper is published** — not merely `sorry`-free, but:
 - `#print axioms` clean — only `propext, Classical.choice, Quot.sound`; **no `sorryAx`, no
   `native_decide`**;
-- the formal *statement is adequate* to the published claim — definitions anchored to standard /
-  mathlib objects where possible, adequacy argued, not self-asserted;
-- a **trust-chain note** per result stating what Lean certifies, what is deferred to differential
-  tests, and what stays in the trusted base;
+- the formal *statement adequate* to the published claim — definitions anchored to standard / mathlib
+  objects where possible, adequacy argued, not self-asserted;
+- a **trust-chain note** per result (what Lean certifies, what is deferred to differential tests, what
+  stays trusted);
 - nontrivial proofs developed with the named-expert rigor (CLAUDE.md §Lean).
 
-No hand-proved-only submissions — formalization is the release gate, and it is what lets the lead
-take authorship responsibility for agent-generated mathematics. Consequence: the formalization
-backlog is the **critical path**, and the per-paper Lean libraries in
-`../notes/handoffs/2026-07-11-lean-formalization-plan.md` are release-blocking prerequisites. The
-submission queue is ordered by *formalization readiness*, not mathematical completeness. One standing
-adequacy caveat: mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome semantics
-(`win`/`grundy`) are self-contained and **not yet anchored to a cited `Impartial`/`grundyValue`** —
-adequacy for the game papers (`nofil`, dihedral) currently rests on the standard-recurrence argument
-+ literature values + differential tests until the `CombinatorialGames` package bumps to ≥ `v4.32`
-(see `lean/TRUST.md` Phase 4). Status against the gate:
-- *Closest to the gate (core theorems formalized, some support outstanding):* the `nofil` mirror⇒P
-  outcomes (the P-theorems are Lean; the boundary/sharpness negatives and capacity-2 sharpness are
-  still paper-only) and the completion δ(C)=τ / coding base.
-- *Formalization outstanding (blocks release):* the arcs paper (entirely hand-proved, not yet in the
-  formalization plan — needs a new library), Baer, continuation, completion beyond δ=τ, the `nofil`
-  boundary negatives (parabolic/Hermitian no-fpf-involution) and capacity-2 sharpness, the dihedral
-  paper-level theorems (Φ_T homomorphism, ½-density) plus its one isolated `native_decide`
-  (`KleinFourBridge.explicit_pairProducts`, no dependents — clear to `decide`/manual or delete).
-- *Computational (enumerations, not lemmas):* queens/OEIS, S₄/A₅ nimbers, ρ_𝒞 small values follow
-  the `getK` pattern — the underlying recurrence/semantics is Lean-proved (adequately, axiom-clean),
-  and the large search rides a reproducible, differential-tested solver, with a trust-chain note
-  drawing the boundary. **Not** `native_decide` (below the trust bar); a small witness enters the Lean
-  trust base only via kernel-reducible `decide`, otherwise it stays solver-certified data.
+The formalization backlog is the **critical path**; the per-paper Lean libraries in
+`../notes/handoffs/2026-07-11-lean-formalization-plan.md` are release-blocking. One standing adequacy
+caveat: mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome semantics (`win`/`grundy`) are
+self-contained and **not yet anchored to a cited `Impartial`/`grundyValue`** — adequacy for the game
+papers rests on the standard-recurrence argument + literature values + differential tests until
+`CombinatorialGames` bumps to ≥ `v4.32` (`lean/TRUST.md` Phase 4). Status against the gate:
+- *Closest:* the `nofil` mirror⇒P outcomes (P-theorems Lean; boundary/sharpness negatives + capacity-2
+  sharpness still paper-only) and the completion δ(C)=τ / coding base.
+- *Outstanding (blocks release):* arcs (**being formalized tonight**), Baer, continuation, completion
+  beyond δ=τ, the `nofil` boundary negatives + capacity-2 sharpness, the dihedral paper-level theorems
+  (Φ_T, ½-density) plus its one isolated `native_decide` (`KleinFourBridge.explicit_pairProducts`, no
+  dependents — clear to `decide`/manual or delete).
+- *Computational (enumerations, not lemmas):* queens/OEIS, S₄/A₅ nimbers, ρ_𝒞 small values follow the
+  `getK` pattern — Lean-proved recurrence + a reproducible differential-tested solver + a trust-chain
+  note. **Not** `native_decide`; a small witness enters the trust base only via kernel-reducible
+  `decide`.
 
-A mathematician collaborator/reviewer stays valuable for exposition, prior-art audits, and novelty
-framing — but under this policy is no longer needed to vouch for *validity*.
+**Adequacy appendix (policy).** Every paper prints (1–2 pp.) the Lean statements of its headline
+theorems and the handful of definitions they bottom out in, verbatim — turning statement-adequacy (the
+residual the lead cannot self-check) into a *refereeable object* an expert clears in two pages without
+touching the development. Keep the game-semantics `win`/`grundy` kernel deliberately tiny so the
+appendix stays inspectable (a better answer to the mathlib `CombinatorialGames` gap than waiting).
 
-**Disclosure & attribution.** Attribute transparently as human-directed, agent-generated, with Lean
-as the verification method; AI is not a listed author (arXiv/journal norms) and the human takes
-responsibility. The exposure is the *not-formalized* set — taking responsibility for proofs no human
-has checked. Mitigate by formalizing those results or bringing in a mathematician
-collaborator / pre-submission reviewer.
+**Provenance & verification section (policy).** A titled section in every paper — not an
+acknowledgments footnote; burying it reads as concealment, the one reception outcome the model cannot
+survive: human-directed, agent-generated, Lean-certified, trust-chain note, repo + DOI. AI is not an
+author; the lead signs alone and takes responsibility.
 
-**Reception split.** Specialist venues (arXiv + journal) ride the credibility spine = Lean + public
-repo + DOI. Public venue (blog / talk) carries the meta-story — human-directed AI producing
-machine-checked mathematics, alongside the queens explorable — which plays to the lead's
-communication strengths. Lead with verifiability (open repos, machine-checked proofs) to preempt
-AI-slop skepticism; do not overclaim novelty ahead of the prior-art audits.
+**Scoped pre-submission adequacy reviewer.** One mathematician (acknowledged, not authored) checks
+*statements only* (not proofs) for the two highest-adequacy-risk papers — the games flagship and
+continuation N1 — at submission time. A named, scheduled step, not aspirational.
+
+**Reception split.** Specialist track (arXiv + journal) rides the credibility spine = Lean + adequacy
+appendix + provenance section + repo + DOI. The public meta-story (human-directed, machine-checked AI
+mathematics + the queens explorable) is the `non-formal-bloggy/` track. Lead with verifiability to
+preempt AI-slop skepticism; do not overclaim novelty ahead of the prior-art audits. Suggested venues:
+
+| Deliverable  | Venue class                                                         |
+|--------------|--------------------------------------------------------------------|
+| Flagship     | arXiv math.CO + INTEGERS (CGT) or Discrete Applied Mathematics      |
+| Dihedral     | arXiv math.CO + INTEGERS or Electronic J. Combinatorics             |
+| Arcs         | arXiv math.CO + Designs, Codes and Cryptography / Finite Fields & Apps |
+| Baer⊕compl.  | FFA / DCC                                                           |
+| Continuation | Electronic J. Combinatorics or DCC                                  |
+| Coding       | DCC, or IEEE Trans. Inf. Theory if the LRC angle survives audit     |
+| OEIS entries | OEIS directly, independent of the papers                           |
 
 ## Extraction & DOI plan
 
 This research repo stays private (many leads still open); publish by **extracting** clean,
-self-contained repos per paper — not by opening this one.
+self-contained repos per paper.
 
-- **Per-paper public repo** = manuscript + its self-contained Lean subset (the per-paper libraries
-  from `../notes/handoffs/2026-07-11-lean-formalization-plan.md`, over a shared `FiniteGeom`
-  dependency) + the minimal solver/verifier + certificates / b-files / data + a reproducibility
-  README.
-- **DOI:** Zenodo ↔ GitHub-release integration mints a versioned DOI (+ a concept DOI); arXiv for the
-  manuscripts; cross-link the two. This also clears the **shared public-artifact blocker** — the OEIS
-  `%H` links and arXiv code links point at these repos.
-- **Extraction order:** most-finished and self-contained first — `arcs_complete_outside_conic`, the
-  queens/OEIS package, and the Lean-complete mirror outcomes.
-- **Watch-outs:** the extracted Lean must build independently (shared `FiniteGeom` base + a pinned
-  mathlib) — the per-paper-library plan supports this but it is real work; extract the *minimal*
-  reproducible solver slice, not the whole Rust workspace.
+- **Shared `FiniteGeom` = its own tagged public repo, pinned by commit** — not copied per-paper
+  subsets. Copied subsets drift, and drift in shared definitions silently invalidates the cross-paper
+  adequacy story (one trust-chain note pointing at diverging definitions is worse than none).
+- **Per-paper public repo** = manuscript + its Lean library (pinning the `FiniteGeom` tag) + the
+  minimal solver/verifier + certificates / b-files / data + a reproducibility README + the adequacy
+  appendix source.
+- **DOI:** Zenodo ↔ GitHub-release integration mints a versioned DOI (+ concept DOI); arXiv for the
+  manuscripts; cross-link. Versioned DOIs are what let "disclose the adequacy caveat now, anchor to
+  mathlib later" be a respectable posture. This also clears the **public-artifact blocker** (OEIS `%H`,
+  arXiv code links).
+- **Order:** driven by formalization readiness (see Submission sequence), not "most finished
+  manuscript" — the first extraction is the `FiniteGeom` base + the Lean-complete mirror outcomes.
 
 ## Novelty gates & loose ends
 
-| Paper                          | Gate / loose end                                                                          |
-|--------------------------------|-------------------------------------------------------------------------------------------|
-| `nofil-finite-geometry-outcomes` | Q⁻ elliptic method-negative needs a Scharlau/Witt-transfer lemma (sharpness); verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are prior art |
-| `baer-equivariant-extension`   | √2·s = Lunelli–Sce √(2q) (not new) — headline is the orbit criterion; open gate = √2 sharpness (unbuilt construction) |
-| `completion-core-rigidity`     | Abstract infra overlaps defining-set/trade/saturation theory; needs one new headline computation + Storme–Szőnyi audit |
-| `continuation-graph-rigidity`  | N2 collides with complement-embedding genre (Batten/Drake–Sané/Beutelspacher–Metsch); paywalled full-text read pending |
+**Batch the audits.** Storme–Szőnyi, the embedding genre (Batten/Drake–Sané/Beutelspacher–Metsch), and
+LRC/availability/concatenation live in overlapping communities — one specialist engagement (or one
+deep-research pass reviewed by one specialist) clears three gates. Don't run them serially per paper.
+
+| Paper                            | Gate / loose end                                                                          |
+|----------------------------------|-------------------------------------------------------------------------------------------|
+| `nofil-finite-geometry-outcomes` | Q⁻ elliptic method-negative needs a Scharlau/Witt-transfer lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are prior art |
+| `baer` ⊕ `completion`            | √2·s = Lunelli–Sce (not new; headline is the orbit criterion + exact completion distances); Storme–Szőnyi / MathSciNet audit; no constant-novelty claims |
+| `continuation-graph-rigidity`    | N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané read (keep N2 out of the abstract) |
+| Coding / LRC                     | The hard audit — LRC/availability/concatenation is vast; the certified-explicit construction survives even where technique is standard |
 
 ## Planning-source docs (in ../notes/, not symlinked into a paper dir)
 
-- `2026-07-09-stepping-stone-deliverables-proposal.md` — master plan for the games track (D1–D6,
-  dependency graph, commit order).
-- `2026-07-10-codex-publishable-spinout-audit.md` — the later, more conservative consolidation and
-  the Package-2 parent; strongest anti-salami voice.
-- `2026-07-11-projective-cap-portfolio-key-cards.md` — packaging-neutral "what is proved/computed"
-  input deck.
+- `2026-07-09-stepping-stone-deliverables-proposal.md` — earlier games-track master plan.
+- `2026-07-10-codex-publishable-spinout-audit.md` — the Package-2 parent + anti-salami voice.
+- `2026-07-11-projective-cap-portfolio-key-cards.md` — packaging-neutral "what is proved/computed" deck.
 - `handoffs/2026-07-11-lean-formalization-plan.md` — the per-paper Lean library plan.
-- `2026-07-11-codex-coding-mds-cross-field-sweep.md` — research ledger feeding Baer/completion-core
-  and the latent coding/LRC lane (source for the built `RepairCodes` Lean library).
+- `2026-07-11-codex-coding-mds-cross-field-sweep.md` — research ledger feeding Baer/completion and the
+  coding/LRC lane (source for `RepairCodes`).
 
 ## Submission logistics
 
-- **OEIS is independent of the papers** (`oeis-submissions/`). The A344227 extension can go now as
-  a priority stamp (DATA + b-file + `%E` credit + heap-sum method comment + Jenrich `%H`); the
-  sum-free ℤₙ entry is a ready draft. Neither needs a manuscript first. The sum-free outcome law is
-  shared source with `nofil-finite-geometry-outcomes`.
-- **Non-formal outputs** (`non-formal-bloggy/`) target a project page / blog / technical-report
-  venue, not paper review — kept apart so they aren't judged against manuscript standards. Current
-  member: the queens n=18 solve write-up + demo.
-- **Shared public-artifact blocker.** The A344227 `%H` link and its n=18 comment, the sequences'
-  program links, the queens-n18 citation, and any arXiv posting of the manuscripts all want a
-  public code/preprint URL the repo does not yet have (no public remote). One public mirror or
-  preprint unblocks them together — a cheap, high-leverage prerequisite.
-- **Plan-stage candidate (not staged):** a short CGT-tooling methods note / blog post ("a game
-  tablebase meets CGT — the S4 query tool in context") is specced in
-  `../notes/handoffs/2026-07-09-cgt-tooling-novelty-writeup.md` but has no prose yet — revisit when
-  there is appetite; tool novelty is methods-level, not theorem-level.
+- **OEIS is independent of the papers.** A344227 can go now as a priority stamp (DATA + b-file + `%E` +
+  method comment + Jenrich `%H`); the sum-free ℤₙ entry is a ready draft. The sum-free outcome law is
+  shared source with the flagship.
+- **Public-artifact blocker.** The A344227 `%H` / n=18 comment, the sequences' program links, and any
+  arXiv posting all want a public URL the repo lacks — the first extraction (above) unblocks them together.
+- **Plan-stage candidate (not staged):** a short CGT-tooling methods note / blog post is specced in
+  `../notes/handoffs/2026-07-09-cgt-tooling-novelty-writeup.md`; tool novelty is methods-level, not
+  theorem-level — revisit when there is appetite.
 
-## New paper ideas / adjacent seams (not yet staged)
+## New paper ideas / adjacent seams
 
-Candidates surfaced (external triage, 2026-07-12) without a `papers/` directory yet — extensions,
-coding translations, cross-domain transfers. Ideas, not commitments; most need a prior-art audit
-before they are real.
+Post-review dispositions:
 
-**Coding / LRC**
-
-- **LRC constructions + bounded-repair transfer.** The `RepairCodes` results (`thm-gf9-dualdist`,
-  `lem-transfer`) are Lean-proven but unhomed — plausibly one or two coding papers. Needs a
-  specialist audit against LRC / availability / concatenation literature. *Decide: promote to a
-  `coding/` dir?*
-- **Prescribed-hole covering code.** The coding translation of `arcs_complete_outside_conic`:
-  "shortest linear code whose radius-two syndrome cover misses only a prescribed quadratic
-  variety" (a covering code with prescribed holes). May be more publishable than the arc/game
-  motivation; "codes with holes" likely has prior art, the prescribed-conic version may not.
-  Companion to the arcs paper.
-
-**Schreier extensions (make the catalogue clearly paper-sized)**
-
-- **Generalized dihedral D₂ₘ infinite family.** Treat D₂ₘ uniformly: free orbits →
-  generalized Möbius-ladder / dihedral Cayley components; nonfree → finitely many truncated
-  templates; structural classification for all m + congruence formulas over F_q. No prior
-  Node-Kayles treatment of Möbius ladders / dihedral Cayley graphs / fixed-point-deleted Schreier
-  graphs found — an infinite family is what lifts the current V₄/D₈/S₄ material to paper size.
-- **Möbius-ladder / dihedral-Cayley Node-Kayles nimber sequence** — a candidate new OEIS sequence
-  falling out of the above.
-- **Full polyhedral classification + retitle** toward "Node Kayles on fixed-point-deleted Schreier
-  graphs of finite subgroups of PGL₂(q)" (complete the D₂ₘ, S₄, A₅ tables). The abstract
-  orbit-template theorem is too elementary alone; the explicit classifications are the content.
-  Dovetails with the dihedral paper's deferred §14.
-
-**Cross-domain transfers (second papers from existing proofs)**
-
-- **Completion cores → learning / reconstruction.** The alternative-completion hypergraph encodes
-  deletion robustness (min edge), defining-set size (transversal τ), completion overlap
-  (intersection spectrum) — transfer to teaching dimension, sample compression, database keys,
-  reconstruction of maximal feasible objects. Substantiated by the exact conic/hyperoval/quadric/
-  spread values.
-- **Continuation complexes → matroid & code reconstruction.** Adjacent to representable-matroid
-  recovery from circuits, nonlinear-code recovery from punctured coordinate traces, Whitney-type
-  reconstruction; a general theorem for partial linear spaces would widen the audience.
-- **Equivariant arc extension → rank-metric coding.** The Galois-rank section formula identifies
-  the obstruction with rank weight — translate into subfield subcodes / rank-metric covering /
-  extension of MDS evaluation sets. A second paper from the same proofs.
-
-**Flagship (if it lands):** the uniform odd-plane / abundance / (ON) theorem — keep as the
-difficult flagship, do not delay the smaller papers for it (see below).
-
-**Parked — do not mine now:** RSA-on-conic-involution-graphs (vocabulary change only); the MDS
-"exact drain" analogy (insufficiently formal); isolated small-q outcomes unless they settle a
-stated conjecture; Baer blocking sets as a sealing explanation (geometry mismatched unless a
-specific subfield arc is proved to cover the required points); the bare orbit-template xor theorem
-without an infinite family of explicit values.
+- **Coding / LRC → conditional Paper 6.** `RepairCodes` (`thm-gf9-dualdist`, `lem-transfer`) is the
+  "sleeper" — Lean is *ahead* of the prose. Promote after the LRC audit passes; best value-per-effort
+  in the "new" list. *Decide: promote to a `coding/` dir once the audit clears.*
+- **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;
+  audited first, never delaying arcs.
+- **Generalized D₂ₘ → folded into the dihedral paper** (not a separate paper). Its **Möbius-ladder /
+  dihedral-Cayley nimber sequence** is a byproduct OEIS entry.
+- **Cross-domain transfers → parked, as "connections" remarks.** Completion→learning,
+  continuation→matroid reconstruction, Baer→rank-metric: reception risk is maximal in distant fields the
+  lead cannot direct agents to audit. Downgrade each to a connections remark in its parent paper — stakes
+  the idea publicly at zero audit cost.
+- **Flagship (if it lands):** the uniform odd-plane / (ON) theorem — research track, delays nothing.
+- **Parked — do not mine now:** RSA-on-conic-involution-graphs (vocabulary); the MDS "exact drain"
+  analogy (informal); isolated small-q outcomes unless they settle a stated conjecture; Baer blocking
+  sets as a sealing explanation (geometry mismatched); the bare orbit-template xor without an infinite
+  family.
 
 ## Not publishable yet (research track, kept out of `papers/`)
 
-The abundance / odd-complete-arc / odd-plane frontier is the open primary lane, not a result.
-Entry point: C84 in `../notes/handoffs/2026-07-06-projective-cap-game-handoff.md`. The
-conic-localization / escape-count material sits at this boundary (see D4).
+The abundance / odd-complete-arc / odd-plane frontier is the open primary lane, not a result. Entry
+point: C84 in `../notes/handoffs/2026-07-06-projective-cap-game-handoff.md`. The conic-localization /
+escape-count material sits at this boundary (D4).
