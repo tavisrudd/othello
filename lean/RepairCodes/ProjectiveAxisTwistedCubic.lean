@@ -17,6 +17,17 @@ open Finset Matrix FiniteGeom
 
 variable {𝔽 : Type*} [Field 𝔽] [Fintype 𝔽] [DecidableEq 𝔽]
 
+/-- The three helpers supplied by a finite cubic triple in the completed seed. -/
+noncomputable def projectiveFiniteCubicTripleRepairHelpers (v : Fin 3 → 𝔽) :
+    Finset (ProjectiveAxisTwistedCubicIndex 𝔽) :=
+  { .inl (.inl (v 1)), .inl (.inl (v 2)), .inr (twistedCubicTripleAxisIndex v) }
+
+/-- Ordered target-plus-helper family for a finite cubic triple in the completed seed. -/
+noncomputable def projectiveFiniteCubicTripleIndexFamily (v : Fin 3 → 𝔽) :
+    Fin 4 → ProjectiveAxisTwistedCubicIndex 𝔽 :=
+  ![.inl (.inl (v 0)), .inl (.inl (v 1)), .inl (.inl (v 2)),
+    .inr (twistedCubicTripleAxisIndex v)]
+
 /-- Generator matrix whose columns are the completed cubic–axis points. -/
 def projectiveAxisTwistedCubicGenerator :
     Matrix (Fin 4) (ProjectiveAxisTwistedCubicIndex 𝔽) 𝔽 :=
@@ -211,6 +222,77 @@ private theorem linearIndependent_vec3_swap12
   convert h.comp (Equiv.swap 1 2) (Equiv.swap 1 2).injective using 1
   funext i
   fin_cases i <;> simp [hs₀, hs₁, hs₂]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem linearIndependent_vec4_swap01
+    {a b c d : Fin 4 → 𝔽} (h : LinearIndependent 𝔽 ![a, b, c, d]) :
+    LinearIndependent 𝔽 ![b, a, c, d] := by
+  have hs₀ : Equiv.swap (0 : Fin 4) 1 0 = 1 := by decide
+  have hs₁ : Equiv.swap (0 : Fin 4) 1 1 = 0 := by decide
+  have hs₂ : Equiv.swap (0 : Fin 4) 1 2 = 2 := by decide
+  have hs₃ : Equiv.swap (0 : Fin 4) 1 3 = 3 := by decide
+  convert h.comp (Equiv.swap (0 : Fin 4) 1) (Equiv.swap 0 1).injective using 1
+  funext i
+  fin_cases i <;> simp [hs₀, hs₁, hs₂, hs₃]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem linearIndependent_vec4_swap12
+    {a b c d : Fin 4 → 𝔽} (h : LinearIndependent 𝔽 ![a, b, c, d]) :
+    LinearIndependent 𝔽 ![a, c, b, d] := by
+  have hs₀ : Equiv.swap (1 : Fin 4) 2 0 = 0 := by decide
+  have hs₁ : Equiv.swap (1 : Fin 4) 2 1 = 2 := by decide
+  have hs₂ : Equiv.swap (1 : Fin 4) 2 2 = 1 := by decide
+  have hs₃ : Equiv.swap (1 : Fin 4) 2 3 = 3 := by decide
+  convert h.comp (Equiv.swap (1 : Fin 4) 2) (Equiv.swap 1 2).injective using 1
+  funext i
+  fin_cases i <;> simp [hs₀, hs₁, hs₂, hs₃]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+private theorem linearIndependent_vec4_swap23
+    {a b c d : Fin 4 → 𝔽} (h : LinearIndependent 𝔽 ![a, b, c, d]) :
+    LinearIndependent 𝔽 ![a, b, d, c] := by
+  have hs₀ : Equiv.swap (2 : Fin 4) 3 0 = 0 := by decide
+  have hs₁ : Equiv.swap (2 : Fin 4) 3 1 = 1 := by decide
+  have hs₂ : Equiv.swap (2 : Fin 4) 3 2 = 3 := by decide
+  have hs₃ : Equiv.swap (2 : Fin 4) 3 3 = 2 := by decide
+  convert h.comp (Equiv.swap (2 : Fin 4) 3) (Equiv.swap 2 3).injective using 1
+  funext i
+  fin_cases i <;> simp [hs₀, hs₁, hs₂, hs₃]
+
+/-- Explicit enumeration of a four-element support. -/
+private noncomputable def projectiveFin4Equiv {a b c d :
+    ProjectiveAxisTwistedCubicIndex 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    Fin 4 ≃ ↥({a, b, c, d} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) := by
+  let f : Fin 4 → ↥({a, b, c, d} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) :=
+    fun i => ⟨![a, b, c, d] i, by fin_cases i <;> simp⟩
+  apply Equiv.ofBijective f
+  constructor
+  · intro i j hij
+    apply Fin.ext
+    fin_cases i <;> fin_cases j <;> simp_all [f]
+  · intro x
+    rcases x with ⟨x, hx⟩
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl | rfl | rfl
+    · exact ⟨0, by ext; simp [f]⟩
+    · exact ⟨1, by ext; simp [f]⟩
+    · exact ⟨2, by ext; simp [f]⟩
+    · exact ⟨3, by ext; simp [f]⟩
+
+/-- The order-preserving enumeration of a finite type with one `Fin` index deleted. -/
+private noncomputable def projectiveFinEraseEquiv {n : ℕ} (j : Fin (n + 1)) :
+    Fin n ≃ {i : Fin (n + 1) // i ≠ j} := by
+  let f : Fin n → {i : Fin (n + 1) // i ≠ j} :=
+    fun i => ⟨j.succAbove i, j.succAbove_ne i⟩
+  apply Equiv.ofBijective f
+  rw [Fintype.bijective_iff_injective_and_card]
+  refine ⟨?_, ?_⟩
+  · intro a b hab
+    exact Fin.succAbove_right_injective (congrArg Subtype.val hab)
+  · rw [Fintype.card_subtype_compl (fun i : Fin (n + 1) => i = j)]
+    simp
 
 omit [Fintype 𝔽] [DecidableEq 𝔽] in
 /-- Every injectively indexed completed triple containing a cubic coordinate is independent. -/
@@ -417,6 +499,250 @@ theorem projectiveAxisTwistedCubicRepair_edge_nonempty
   simpa using projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_two
     (S := {x}) (Finset.singleton_nonempty x) (by simp)
 
+/-- Three distinct finite cubic parameters give an actual locality-three repair edge in the
+completed seed: the other two cubic points and their normalized axis completion. -/
+theorem projectiveFiniteCubicTripleRepairHelpers_mem [CharP 𝔽 3]
+    {v : Fin 3 → 𝔽} (hv : Function.Injective v) :
+    projectiveFiniteCubicTripleRepairHelpers v ∈
+      projectiveAxisTwistedCubicRepairHypergraph (.inl (.inl (v 0))) 3 := by
+  classical
+  let f : Fin 4 → ↥(insert (.inl (.inl (v 0)))
+      (projectiveFiniteCubicTripleRepairHelpers v)) := fun i =>
+    ⟨projectiveFiniteCubicTripleIndexFamily v i, by
+      fin_cases i <;>
+        simp [projectiveFiniteCubicTripleIndexFamily,
+          projectiveFiniteCubicTripleRepairHelpers]⟩
+  have h01 : v 0 ≠ v 1 := hv.ne (by decide)
+  have h02 : v 0 ≠ v 2 := hv.ne (by decide)
+  have h12 : v 1 ≠ v 2 := hv.ne (by decide)
+  have hf : Function.Injective f := by
+    intro i j hij
+    apply Fin.ext
+    fin_cases i <;> fin_cases j <;>
+      simp_all [f, projectiveFiniteCubicTripleIndexFamily]
+  have hfsurj : Function.Surjective f := by
+    intro y
+    rcases y with ⟨y, hy⟩
+    have hy' : y = .inl (.inl (v 0)) ∨ y = .inl (.inl (v 1)) ∨
+        y = .inl (.inl (v 2)) ∨ y = .inr (twistedCubicTripleAxisIndex v) := by
+      simpa [projectiveFiniteCubicTripleRepairHelpers] using hy
+    rcases hy' with hy' | hy' | hy' | hy' <;> subst y
+    · exact ⟨0, by ext; simp [f, projectiveFiniteCubicTripleIndexFamily]⟩
+    · exact ⟨1, by ext; simp [f, projectiveFiniteCubicTripleIndexFamily]⟩
+    · exact ⟨2, by ext; simp [f, projectiveFiniteCubicTripleIndexFamily]⟩
+    · exact ⟨3, by ext; simp [f, projectiveFiniteCubicTripleIndexFamily]⟩
+  let e : Fin 4 ≃ ↥(insert (.inl (.inl (v 0)))
+      (projectiveFiniteCubicTripleRepairHelpers v)) :=
+    Equiv.ofBijective f ⟨hf, hfsurj⟩
+  have hsub : projectiveFiniteCubicTripleRepairHelpers v ⊆
+      univ.erase (.inl (.inl (v 0))) := by
+    intro y hy
+    rw [Finset.mem_erase]
+    refine ⟨?_, Finset.mem_univ y⟩
+    intro hy0
+    subst y
+    simp [projectiveFiniteCubicTripleRepairHelpers, h01, h02] at hy
+  have hcard : (projectiveFiniteCubicTripleRepairHelpers v).card = 3 := by
+    simp [projectiveFiniteCubicTripleRepairHelpers, h12]
+  have hefamily :
+      (fun i : Fin 4 => (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) =
+        twistedCubicTripleFamily v := by
+    funext i
+    fin_cases i <;>
+      simp [e, f, projectiveFiniteCubicTripleIndexFamily,
+        projectiveAxisTwistedCubicPoints, projectiveTwistedCubicPoints]
+  have htransport (j : Fin 4)
+      (hli : LinearIndependent 𝔽 (fun a : Fin 3 =>
+        twistedCubicTripleFamily v (j.succAbove a))) :
+      LinearIndependent 𝔽
+        (fun i : {i : Fin 4 // i ≠ j} => twistedCubicTripleFamily v i) := by
+    let ej := projectiveFinEraseEquiv j
+    have hli' := hli.comp ej.symm ej.symm.injective
+    have heq :
+        ((fun a : Fin 3 => twistedCubicTripleFamily v (j.succAbove a)) ∘ ej.symm) =
+          (fun i : {i : Fin 4 // i ≠ j} => twistedCubicTripleFamily v i) := by
+      funext i
+      apply congrArg (twistedCubicTripleFamily v)
+      exact congrArg Subtype.val (ej.apply_symm_apply i)
+    rw [← heq]
+    exact hli'
+  have hdelete : ∀ j : Fin 4,
+      LinearIndependent 𝔽 (fun i : {i : Fin 4 // i ≠ j} =>
+        (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) := by
+    intro j
+    rw [show (fun i : {i : Fin 4 // i ≠ j} =>
+        (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) =
+        (fun i : {i : Fin 4 // i ≠ j} => twistedCubicTripleFamily v i) by
+          funext i
+          exact congrFun hefamily i]
+    apply htransport
+    have hs12 : (1 : Fin 4).succAbove (2 : Fin 3) = 3 := by decide
+    have hs21 : (2 : Fin 4).succAbove (1 : Fin 3) = 1 := by decide
+    have hs22 : (2 : Fin 4).succAbove (2 : Fin 3) = 3 := by decide
+    have hs31 : (3 : Fin 4).succAbove (1 : Fin 3) = 1 := by decide
+    have hs32 : (3 : Fin 4).succAbove (2 : Fin 3) = 2 := by decide
+    fin_cases j
+    · convert twistedCubicTriple_omitCubic0_linearIndependent hv using 1
+      funext a
+      fin_cases a <;> simp
+    · convert twistedCubicTriple_omitCubic1_linearIndependent hv using 1
+      funext a
+      fin_cases a <;> simp [hs12]
+    · convert twistedCubicTriple_omitCubic2_linearIndependent hv using 1
+      funext a
+      fin_cases a <;> simp [hs21, hs22]
+    · convert twistedCubicTriple_omitAxis_linearIndependent hv using 1
+      funext a
+      fin_cases a <;> simp [hs31, hs32]
+  apply mem_repairHypergraph_of_reindexed_circuit
+    (G := projectiveAxisTwistedCubicGenerator) hsub hcard e
+  · rw [hefamily]
+    exact twistedCubicTripleFamily_dependent v
+  · exact hdelete
+
+/-- A convenient exclusion principle for a proposed three-helper completed-seed repair whose
+four displayed columns are independent. -/
+theorem projectiveRepairTriple_not_mem_of_linearIndependent
+    {x a b c : ProjectiveAxisTwistedCubicIndex 𝔽}
+    (hxa : x ≠ a) (hxb : x ≠ b) (hxc : x ≠ c)
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hli : LinearIndependent 𝔽 (fun i : Fin 4 =>
+      projectiveAxisTwistedCubicPoints 𝔽 (![x, a, b, c] i))) :
+    ({a, b, c} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∉
+      projectiveAxisTwistedCubicRepairHypergraph x 3 := by
+  intro hR
+  apply projectiveAxisTwistedCubicRepair_edge_dependent hR
+  let e0 := projectiveFin4Equiv hxa hxb hxc hab hac hbc
+  let e : Fin 4 ≃ ↥(insert x ({a, b, c} :
+      Finset (ProjectiveAxisTwistedCubicIndex 𝔽))) := by
+    simpa only [Finset.insert_eq] using e0
+  apply (linearIndependent_equiv e).mp
+  convert hli using 1
+  funext i
+  fin_cases i <;> simp [e, e0, projectiveFin4Equiv]
+
+/-- Two cubic helpers and one additional axis helper cannot repair an axis target in the
+completed seed. -/
+theorem projectiveAxisRepair_twoCubic_oneAxis_not_mem [CharP 𝔽 3]
+    {y z : 𝔽 ⊕ Unit} {x w : ProjectiveTwistedCubicIndex 𝔽}
+    (hxw : x ≠ w) (hyz : y ≠ z) :
+    ({(.inl x : ProjectiveAxisTwistedCubicIndex 𝔽), .inl w, .inr z} :
+      Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∉
+        projectiveAxisTwistedCubicRepairHypergraph (.inr y) 3 := by
+  apply projectiveRepairTriple_not_mem_of_linearIndependent
+    (by simp) (by simp) (by simpa using hyz)
+    (by simpa using hxw) (by simp) (by simp)
+  have hli := projectiveTwoCubicTwoAxis_linearIndependent (𝔽 := 𝔽) hxw hyz
+  convert linearIndependent_vec4_swap01 (linearIndependent_vec4_swap12 hli) using 1
+  funext i
+  fin_cases i <;> simp [projectiveAxisTwistedCubicPoints]
+
+/-- A cubic-helper triple containing projective cubic infinity cannot repair the axis point at
+infinity. Its unique axis completion is the finite point `s+t`. -/
+theorem projectiveAxisInfinityRepair_twoFiniteCubicInfinity_not_mem
+    {s t : 𝔽} (hst : s ≠ t) :
+    ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inr Unit.unit)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∉
+      projectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 3 := by
+  apply projectiveRepairTriple_not_mem_of_linearIndependent
+    (by simp) (by simp) (by simp)
+    (by simpa using hst) (by simp) (by simp)
+  have hli : LinearIndependent 𝔽
+      (twoFiniteCubicInfinityAxisFamily s t (.inr Unit.unit)) := by
+    by_contra hdep
+    have hcompletion :=
+      (twoFiniteCubicInfinityAxis_dependent_iff hst (.inr Unit.unit)).mp hdep
+    simp at hcompletion
+  have hli' := linearIndependent_vec4_swap01
+    (linearIndependent_vec4_swap12 (linearIndependent_vec4_swap23 hli))
+  convert hli' using 1
+  funext i
+  fin_cases i <;>
+    simp [projectiveAxisTwistedCubicPoints]
+
+/-- Three distinct finite cubic helpers can repair the projective axis point at infinity only
+when their parameters sum to zero. -/
+theorem projectiveAxisInfinityRepair_threeFinite_sum_eq_zero [CharP 𝔽 3]
+    {s t u : 𝔽} (hst : s ≠ t) (hsu : s ≠ u) (htu : t ≠ u)
+    (hR : ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inl u)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∈
+      projectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 3) :
+    s + t + u = 0 := by
+  let v : Fin 3 → 𝔽 := ![s, t, u]
+  have hv : Function.Injective v := by
+    intro i j hij
+    fin_cases i <;> fin_cases j <;> simp_all [v]
+  let f : Fin 4 → ↥(insert (.inr (.inr Unit.unit))
+      ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inl u)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽))) := fun i =>
+    ⟨![.inl (.inl s), .inl (.inl t), .inl (.inl u), .inr (.inr Unit.unit)] i,
+      by fin_cases i <;> simp⟩
+  have hf : Function.Injective f := by
+    intro i j hij
+    apply Fin.ext
+    fin_cases i <;> fin_cases j <;> simp_all [f]
+  have hfsurj : Function.Surjective f := by
+    intro x
+    rcases x with ⟨x, hx⟩
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl | rfl | rfl
+    · exact ⟨3, by ext; simp [f]⟩
+    · exact ⟨0, by ext; simp [f]⟩
+    · exact ⟨1, by ext; simp [f]⟩
+    · exact ⟨2, by ext; simp [f]⟩
+  let e : Fin 4 ≃ ↥(insert (.inr (.inr Unit.unit))
+      ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inl u)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽))) :=
+    Equiv.ofBijective f ⟨hf, hfsurj⟩
+  have hdet := repair_edge_reindexed_det_eq_zero
+    (G := projectiveAxisTwistedCubicGenerator) hR e
+  have hmatrix :
+      (fun i j => projectiveAxisTwistedCubicGenerator i (e j)) =
+        twistedCubicAxisCircuitMatrix v 0 1 := by
+    ext i j
+    fin_cases j <;> fin_cases i <;>
+      simp [e, f, projectiveAxisTwistedCubicGenerator,
+        projectiveAxisTwistedCubicPoints, projectiveTwistedCubicPoints,
+        twistedCubicAxisCircuitMatrix, v]
+  rw [hmatrix] at hdet
+  have hcross := (twistedCubicAxisCircuitMatrix_det_eq_zero_iff hv 0 1).mp hdet
+  simpa [v] using hcross.symm
+
+/-- Exact cubic component at the projective axis point at infinity: three distinct finite cubic
+helpers repair it exactly when their parameters sum to zero. -/
+theorem mem_projectiveAxisInfinityRepair_threeFinite_iff [CharP 𝔽 3]
+    {s t u : 𝔽} (hst : s ≠ t) (hsu : s ≠ u) (htu : t ≠ u) :
+    ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inl u)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∈
+      projectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 3 ↔
+        s + t + u = 0 := by
+  constructor
+  · exact projectiveAxisInfinityRepair_threeFinite_sum_eq_zero hst hsu htu
+  · intro hsum
+    let v : Fin 3 → 𝔽 := ![s, t, u]
+    have hv : Function.Injective v := by
+      intro i j hij
+      fin_cases i <;> fin_cases j <;> simp_all [v]
+    have haxis : twistedCubicTripleAxisIndex v = .inr Unit.unit := by
+      simp [twistedCubicTripleAxisIndex, v, hsum]
+    have hbase := projectiveFiniteCubicTripleRepairHelpers_mem hv
+    have haxisMem : (.inr (twistedCubicTripleAxisIndex v) :
+        ProjectiveAxisTwistedCubicIndex 𝔽) ∈
+          projectiveFiniteCubicTripleRepairHelpers v := by
+      simp [projectiveFiniteCubicTripleRepairHelpers]
+    have hretarget := repairHypergraph_retarget hbase haxisMem
+    change ({(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽), .inl (.inl t),
+        .inl (.inl u)} : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ∈
+      repairHypergraph (projectiveAxisTwistedCubicCode (𝔽 := 𝔽))
+        (.inr (.inr Unit.unit)) 3
+    rw [← haxis]
+    convert hretarget using 1
+    ext x
+    simp only [projectiveFiniteCubicTripleRepairHelpers, v, Fin.isValue,
+      Matrix.cons_val_zero, Matrix.cons_val_one, Finset.mem_insert, Finset.mem_erase,
+      Finset.mem_singleton]
+    aesop
+
 /-- Every radius-two repair of an axis coordinate uses exactly two helpers. -/
 theorem projectiveAxisRepair_edge_card_eq_two [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
     {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
@@ -481,6 +807,330 @@ theorem projectiveAxisRepairPair_shape [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
     have hzw : z ≠ w := fun h => hpq (by rw [h])
     exact ⟨z, w, hyz, hyw, hzw, rfl⟩
 
+/-- Exact radius-two completed-axis repair classification. -/
+theorem mem_projectiveAxisRepairHypergraph_two_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)} :
+    R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inr y) 2 ↔
+      ∃ z w : 𝔽 ⊕ Unit, y ≠ z ∧ y ≠ w ∧ z ≠ w ∧
+        R = {(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} := by
+  constructor
+  · exact projectiveAxisRepairPair_shape
+  · rintro ⟨z, w, hyz, hyw, hzw, rfl⟩
+    let v : Fin 3 → 𝔽 ⊕ Unit := ![y, z, w]
+    have hv : Function.Injective v := by
+      intro i j hij
+      fin_cases i <;> fin_cases j <;> simp_all [v]
+    let f : Fin 3 → ↥(insert (.inr y)
+        ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+          Finset (ProjectiveAxisTwistedCubicIndex 𝔽))) := fun i =>
+      ⟨.inr (v i), by fin_cases i <;> simp [v]⟩
+    have hf : Function.Injective f := by
+      intro i j hij
+      apply hv
+      exact Sum.inr.inj (congrArg Subtype.val hij)
+    have hfsurj : Function.Surjective f := by
+      intro q
+      rcases q with ⟨q, hq⟩
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hq
+      rcases hq with rfl | rfl | rfl
+      · exact ⟨0, by ext; simp [f, v]⟩
+      · exact ⟨1, by ext; simp [f, v]⟩
+      · exact ⟨2, by ext; simp [f, v]⟩
+    let e : Fin 3 ≃ ↥(insert (.inr y)
+        ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+          Finset (ProjectiveAxisTwistedCubicIndex 𝔽))) :=
+      Equiv.ofBijective f ⟨hf, hfsurj⟩
+    have hsub : ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+        Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ⊆ univ.erase (.inr y) := by
+      intro q hq
+      rw [Finset.mem_erase]
+      refine ⟨?_, Finset.mem_univ q⟩
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hq
+      rcases hq with rfl | rfl
+      · exact fun h => hyz (Sum.inr.inj h.symm)
+      · exact fun h => hyw (Sum.inr.inj h.symm)
+    have hcard : ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+        Finset (ProjectiveAxisTwistedCubicIndex 𝔽)).card = 2 := by simp [hzw]
+    have hefamily :
+        (fun i : Fin 3 => (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) =
+          (fun i => axisTwistedCubicPoints 𝔽 (.inr (v i))) := by
+      funext i
+      fin_cases i <;>
+        simp [e, f, v, projectiveAxisTwistedCubicPoints]
+    have htransport (j : Fin 3)
+        (hli : LinearIndependent 𝔽 (fun a : Fin 2 =>
+          axisTwistedCubicPoints 𝔽 (.inr (v (j.succAbove a))))) :
+        LinearIndependent 𝔽 (fun i : {i : Fin 3 // i ≠ j} =>
+          axisTwistedCubicPoints 𝔽 (.inr (v i))) := by
+      let ej := projectiveFinEraseEquiv j
+      have hli' := hli.comp ej.symm ej.symm.injective
+      have heq :
+          ((fun a : Fin 2 => axisTwistedCubicPoints 𝔽 (.inr (v (j.succAbove a)))) ∘
+            ej.symm) =
+            (fun i : {i : Fin 3 // i ≠ j} => axisTwistedCubicPoints 𝔽 (.inr (v i))) := by
+        funext i
+        apply congrArg (fun a => axisTwistedCubicPoints 𝔽 (.inr (v a)))
+        exact congrArg Subtype.val (ej.apply_symm_apply i)
+      rw [← heq]
+      exact hli'
+    have hcirc := twistedCubicAxis_triple_isCircuit (w := v) hv
+    have hdelete : ∀ j : Fin 3,
+        LinearIndependent 𝔽 (fun i : {i : Fin 3 // i ≠ j} =>
+          (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) := by
+      intro j
+      rw [show (fun i : {i : Fin 3 // i ≠ j} =>
+          (projectiveAxisTwistedCubicGenerator (𝔽 := 𝔽)).col (e i)) =
+          (fun i : {i : Fin 3 // i ≠ j} => axisTwistedCubicPoints 𝔽 (.inr (v i))) by
+            funext i
+            exact congrFun hefamily i]
+      apply htransport
+      have hs11 : (1 : Fin 3).succAbove (1 : Fin 2) = 2 := by decide
+      have hs21 : (2 : Fin 3).succAbove (1 : Fin 2) = 1 := by decide
+      fin_cases j
+      · convert hcirc.2.1 using 1
+        funext a
+        fin_cases a <;> simp
+      · convert hcirc.2.2.1 using 1
+        funext a
+        fin_cases a <;> simp [hs11]
+      · convert hcirc.2.2.2 using 1
+        funext a
+        fin_cases a <;> simp [hs21]
+    apply mem_repairHypergraph_of_reindexed_circuit
+      (G := projectiveAxisTwistedCubicGenerator) hsub hcard e
+    · rw [hefamily]
+      exact hcirc.1
+    · exact hdelete
+
+/-- Every radius-three repair of the projective axis point at infinity either contains a
+canonical pair of other axis points or is exactly a finite zero-sum cubic triple. -/
+theorem projectiveAxisInfinityRepair_contains_canonical [CharP 𝔽 3]
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)}
+    (hR : R ∈ projectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 3) :
+    (∃ z w : 𝔽 ⊕ Unit, (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z ∧
+      (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ w ∧ z ≠ w ∧
+      ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+        Finset (ProjectiveAxisTwistedCubicIndex 𝔽)) ⊆ R) ∨
+    (∃ s t u : 𝔽, s ≠ t ∧ s ≠ u ∧ t ≠ u ∧ s + t + u = 0 ∧
+      R = {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+        .inl (.inl t), .inl (.inl u)}) := by
+  have hcardle : R.card ≤ 3 := (mem_repairHypergraph.mp hR).2.1
+  have hcardge : 2 ≤ R.card := by
+    by_contra h
+    have hle : R.card ≤ 1 := by omega
+    have hR2 : R ∈ projectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit)) 2 :=
+      mem_repairHypergraph_of_mem_of_card_le hR (hle.trans (by omega))
+    have htwo := projectiveAxisRepair_edge_card_eq_two hR2
+    omega
+  have hcard : R.card = 2 ∨ R.card = 3 := by omega
+  rcases hcard with h2 | h3
+  · have hR2 : R ∈ projectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit)) 2 :=
+      mem_repairHypergraph_of_mem_of_card_le hR h2.le
+    obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := projectiveAxisRepairPair_shape hR2
+    exact Or.inl ⟨z, w, hyz, hyw, hzw, Finset.Subset.rfl⟩
+  · obtain ⟨a, b, c, hab, hac, hbc, hReq⟩ := Finset.card_eq_three.mp h3
+    have hsub := (mem_repairHypergraph.mp hR).1
+    have hyR : (.inr (.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽) ∉ R := by
+      intro hy
+      exact (Finset.mem_erase.mp (hsub hy)).1 rfl
+    subst R
+    cases a with
+    | inl x =>
+      cases b with
+      | inl y =>
+        cases c with
+        | inl z =>
+          rcases x with s | sx <;> rcases y with t | ty <;> rcases z with u | uz
+          · have hst : s ≠ t := by simpa using hab
+            have hsu : s ≠ u := by simpa using hac
+            have htu : t ≠ u := by simpa using hbc
+            have hsum := projectiveAxisInfinityRepair_threeFinite_sum_eq_zero
+              hst hsu htu hR
+            exact Or.inr ⟨s, t, u, hst, hsu, htu, hsum, rfl⟩
+          · have hst : s ≠ t := by simpa using hab
+            exact (projectiveAxisInfinityRepair_twoFiniteCubicInfinity_not_mem hst hR).elim
+          · have hsu : s ≠ u := by simpa using hac
+            have hR' : {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                (Sum.inl (Sum.inl u) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                (Sum.inl (Sum.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽)} ∈
+                projectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 3 := by
+              convert hR using 1
+              ext q
+              simp only [Finset.mem_insert, Finset.mem_singleton]
+              tauto
+            exact (projectiveAxisInfinityRepair_twoFiniteCubicInfinity_not_mem hsu hR').elim
+          · exact (hbc (by congr)).elim
+          · have htu : t ≠ u := by simpa using hbc
+            have hR' : {(.inl (.inl t) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                (Sum.inl (Sum.inl u) : ProjectiveAxisTwistedCubicIndex 𝔽),
+                (Sum.inl (Sum.inr Unit.unit) : ProjectiveAxisTwistedCubicIndex 𝔽)} ∈
+                projectiveAxisTwistedCubicRepairHypergraph (.inr (.inr Unit.unit)) 3 := by
+              convert hR using 1
+              ext q
+              simp only [Finset.mem_insert, Finset.mem_singleton]
+              tauto
+            exact (projectiveAxisInfinityRepair_twoFiniteCubicInfinity_not_mem htu hR').elim
+          · exact (hac (by congr)).elim
+          · exact (hab (by congr)).elim
+          · exact (hab (by congr)).elim
+        | inr z =>
+          have hxy : x ≠ y := by simpa using hab
+          have hyz : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z := by
+            intro h
+            apply hyR
+            simp [h]
+          exact (projectiveAxisRepair_twoCubic_oneAxis_not_mem hxy hyz hR).elim
+      | inr z =>
+        cases c with
+        | inl y =>
+          have hxy : x ≠ y := by simpa using hac
+          have hyz : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z := by
+            intro h
+            apply hyR
+            simp [h]
+          have hR' : {(.inl x : ProjectiveAxisTwistedCubicIndex 𝔽), .inl y,
+              .inr z} ∈ projectiveAxisTwistedCubicRepairHypergraph
+                (.inr (.inr Unit.unit)) 3 := by
+            convert hR using 1
+            ext q
+            simp only [Finset.mem_insert, Finset.mem_singleton]
+            tauto
+          exact (projectiveAxisRepair_twoCubic_oneAxis_not_mem hxy hyz hR').elim
+        | inr w =>
+          have hyz : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z := by
+            intro h
+            apply hyR
+            simp [h]
+          have hyw : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ w := by
+            intro h
+            apply hyR
+            simp [h]
+          have hzw : z ≠ w := by simpa using hbc
+          exact Or.inl ⟨z, w, hyz, hyw, hzw, by simp⟩
+    | inr z =>
+      cases b with
+      | inl x =>
+        cases c with
+        | inl y =>
+          have hxy : x ≠ y := by simpa using hbc
+          have hyz : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z := by
+            intro h
+            apply hyR
+            simp [h]
+          have hR' : {(.inl x : ProjectiveAxisTwistedCubicIndex 𝔽), .inl y,
+              .inr z} ∈ projectiveAxisTwistedCubicRepairHypergraph
+                (.inr (.inr Unit.unit)) 3 := by
+            convert hR using 1
+            ext q
+            simp only [Finset.mem_insert, Finset.mem_singleton]
+            tauto
+          exact (projectiveAxisRepair_twoCubic_oneAxis_not_mem hxy hyz hR').elim
+        | inr w =>
+          have hyz : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z := by
+            intro h
+            apply hyR
+            simp [h]
+          have hyw : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ w := by
+            intro h
+            apply hyR
+            simp [h]
+          have hzw : z ≠ w := by simpa using hac
+          exact Or.inl ⟨z, w, hyz, hyw, hzw, by simp⟩
+      | inr w =>
+        have hyz : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z := by
+          intro h
+          apply hyR
+          simp [h]
+        have hyw : (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ w := by
+          intro h
+          apply hyR
+          simp [h]
+        have hzw : z ≠ w := by simpa using hab
+        exact Or.inl ⟨z, w, hyz, hyw, hzw, by simp⟩
+
+/-- Exact minimal radius-three repair clutter at the projective axis point at infinity. -/
+theorem mem_minimalProjectiveAxisInfinityRepair_iff [CharP 𝔽 3]
+    {R : Finset (ProjectiveAxisTwistedCubicIndex 𝔽)} :
+    R ∈ minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit)) 3 ↔
+      (∃ z w : 𝔽 ⊕ Unit, (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ z ∧
+        (.inr Unit.unit : 𝔽 ⊕ Unit) ≠ w ∧ z ≠ w ∧
+        R = {(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w}) ∨
+      (∃ s t u : 𝔽, s ≠ t ∧ s ≠ u ∧ t ≠ u ∧ s + t + u = 0 ∧
+        R = {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+          .inl (.inl t), .inl (.inl u)}) := by
+  rw [minimalProjectiveAxisTwistedCubicRepairHypergraph, minimalRepairHypergraph,
+    mem_minimalHyperedges]
+  constructor
+  · rintro ⟨hR, hminimal⟩
+    rcases projectiveAxisInfinityRepair_contains_canonical hR with hpair | hcubic
+    · obtain ⟨z, w, hyz, hyw, hzw, hsub⟩ := hpair
+      let B : Finset (ProjectiveAxisTwistedCubicIndex 𝔽) := {.inr z, .inr w}
+      have hB2 : B ∈ projectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inr Unit.unit)) 2 :=
+        mem_projectiveAxisRepairHypergraph_two_iff.mpr
+          ⟨z, w, hyz, hyw, hzw, rfl⟩
+      have hB3 : B ∈ projectiveAxisTwistedCubicRepairHypergraph
+          (.inr (.inr Unit.unit)) 3 := repairHypergraph_mono_radius (by omega) hB2
+      have hRB := hminimal B hB3 hsub
+      exact Or.inl ⟨z, w, hyz, hyw, hzw, Finset.Subset.antisymm hRB hsub⟩
+    · exact Or.inr hcubic
+  · intro hshape
+    refine ⟨?_, ?_⟩
+    · rcases hshape with hpair | hcubic
+      · obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := hpair
+        exact repairHypergraph_mono_radius (by omega)
+          (mem_projectiveAxisRepairHypergraph_two_iff.mpr
+            ⟨z, w, hyz, hyw, hzw, rfl⟩)
+      · obtain ⟨s, t, u, hst, hsu, htu, hsum, rfl⟩ := hcubic
+        exact (mem_projectiveAxisInfinityRepair_threeFinite_iff hst hsu htu).mpr hsum
+    · intro B hB hBR
+      rcases hshape with hpair | hcubic
+      · obtain ⟨z, w, -, -, hzw, rfl⟩ := hpair
+        have hBge : 2 ≤ B.card := by
+          by_contra h
+          have hle : B.card ≤ 1 := by omega
+          have hB2 : B ∈ projectiveAxisTwistedCubicRepairHypergraph
+              (.inr (.inr Unit.unit)) 2 :=
+            mem_repairHypergraph_of_mem_of_card_le hB (hle.trans (by omega))
+          have := projectiveAxisRepair_edge_card_eq_two hB2
+          omega
+        have hRcard : ({(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} :
+            Finset (ProjectiveAxisTwistedCubicIndex 𝔽)).card = 2 := by simp [hzw]
+        have hBle := Finset.card_le_card hBR
+        have hEq : B = {(.inr z : ProjectiveAxisTwistedCubicIndex 𝔽), .inr w} := by
+          apply Finset.eq_of_subset_of_card_le hBR
+          omega
+        simp [hEq]
+      · obtain ⟨s, t, u, hst, hsu, htu, -, rfl⟩ := hcubic
+        have hBge : 2 ≤ B.card := by
+          by_contra h
+          have hle : B.card ≤ 1 := by omega
+          have hB2 : B ∈ projectiveAxisTwistedCubicRepairHypergraph
+              (.inr (.inr Unit.unit)) 2 :=
+            mem_repairHypergraph_of_mem_of_card_le hB (hle.trans (by omega))
+          have := projectiveAxisRepair_edge_card_eq_two hB2
+          omega
+        by_cases hB2card : B.card ≤ 2
+        · have hBtwo : B ∈ projectiveAxisTwistedCubicRepairHypergraph
+              (.inr (.inr Unit.unit)) 2 :=
+            mem_repairHypergraph_of_mem_of_card_le hB hB2card
+          obtain ⟨z, w, -, -, -, hBeq⟩ := projectiveAxisRepairPair_shape hBtwo
+          have hzB : (.inr z : ProjectiveAxisTwistedCubicIndex 𝔽) ∈ B := by
+            simp [hBeq]
+          have hzR := hBR hzB
+          simp at hzR
+        · have hBcardle : B.card ≤ 3 :=
+            (Finset.card_le_card hBR).trans_eq (by simp [hst, hsu, htu])
+          have hBcard : B.card = 3 := by omega
+          have hEq : B = {(.inl (.inl s) : ProjectiveAxisTwistedCubicIndex 𝔽),
+              .inl (.inl t), .inl (.inl u)} := by
+            apply Finset.eq_of_subset_of_card_le hBR
+            simp [hst, hsu, htu, hBcard]
+          simp [hEq]
+
 theorem matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph
     (x : ProjectiveAxisTwistedCubicIndex 𝔽) (r : ℕ) :
     matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph x r) =
@@ -515,5 +1165,10 @@ theorem projectiveAxisTwistedCubic_circuit_mem_repair
 #print axioms projectiveAxisTwistedCubic_circuit_mem_repair
 #print axioms projectiveAxisRepairPair_shape
 #print axioms projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+#print axioms projectiveFiniteCubicTripleRepairHelpers_mem
+#print axioms mem_projectiveAxisInfinityRepair_threeFinite_iff
+#print axioms mem_projectiveAxisRepairHypergraph_two_iff
+#print axioms projectiveAxisInfinityRepair_contains_canonical
+#print axioms mem_minimalProjectiveAxisInfinityRepair_iff
 
 end RepairCodes

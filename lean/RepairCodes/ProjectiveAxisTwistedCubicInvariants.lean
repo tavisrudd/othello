@@ -17,6 +17,16 @@ open FiniteGeom
 
 variable {𝔽 : Type*} [Field 𝔽]
 
+/-- Natural inclusion of the affine cubic--axis coordinate set into its projective completion. -/
+def affineToProjectiveAxisIndexEmbedding :
+    AxisTwistedCubicIndex 𝔽 ↪ ProjectiveAxisTwistedCubicIndex 𝔽 where
+  toFun
+    | .inl s => .inl (.inl s)
+    | .inr y => .inr y
+  inj' := by
+    intro x y hxy
+    rcases x with s | z <;> rcases y with t | w <;> simp_all
+
 /-- Ambient coordinate change inducing projective shifted inversion. -/
 def projectiveShiftInvLinearMap (a : 𝔽) : (Fin 4 → 𝔽) →ₗ[𝔽] (Fin 4 → 𝔽) where
   toFun x := ![a ^ 3 * x 0 + x 3, a ^ 2 * x 0 - a * x 1 + x 2, a * x 0 + x 1, x 0]
@@ -351,6 +361,80 @@ theorem isProjectiveAxisTwistedCubicCircuit_map_iff [CharP 𝔽 3] (a : 𝔽)
       rw [← Finset.map_erase]
       exact (projectiveShiftInv_finset_linearIndependent_iff a (S.erase x)).mp (hdelete x hx)
 
+variable [Fintype 𝔽]
+
+/-- At axis infinity, the completed minimal radius-three clutter is exactly the natural embedding
+of the affine nucleus clutter. In particular, the added cubic-infinity coordinate lies in no
+minimal repair edge. -/
+theorem minimalProjectiveAxisInfinityRepair_eq_embedAffine [CharP 𝔽 3] :
+    minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit : 𝔽 ⊕ Unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3 =
+      embedHypergraph affineToProjectiveAxisIndexEmbedding
+        (minimalAxisTwistedCubicRepairHypergraph
+          (.inr (.inr Unit.unit : 𝔽 ⊕ Unit) : AxisTwistedCubicIndex 𝔽) 3) := by
+  classical
+  ext R
+  constructor
+  · intro hR
+    rcases mem_minimalProjectiveAxisInfinityRepair_iff.mp hR with hpair | hcubic
+    · obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := hpair
+      apply Finset.mem_image.mpr
+      refine ⟨{(.inr z : AxisTwistedCubicIndex 𝔽), .inr w}, ?_, ?_⟩
+      · apply mem_minimalAxisRepairHypergraph_iff.mpr
+        exact Or.inl ⟨z, w, hyz, hyw, hzw, rfl⟩
+      · ext x
+        rcases x with x | x <;> simp [affineToProjectiveAxisIndexEmbedding]
+    · obtain ⟨s, t, u, hst, hsu, htu, hsum, rfl⟩ := hcubic
+      apply Finset.mem_image.mpr
+      refine ⟨{(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inl u}, ?_, ?_⟩
+      · apply mem_minimalAxisRepairHypergraph_iff.mpr
+        apply Or.inr
+        refine ⟨s, t, u, hst, hsu, htu, ?_, rfl⟩
+        simp [twistedCubicTripleAxisIndex, hsum]
+      · ext x
+        rcases x with x | x <;> simp [affineToProjectiveAxisIndexEmbedding]
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hR
+    rcases mem_minimalAxisRepairHypergraph_iff.mp hS with hpair | hcubic
+    · obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := hpair
+      apply mem_minimalProjectiveAxisInfinityRepair_iff.mpr
+      apply Or.inl
+      refine ⟨z, w, hyz, hyw, hzw, ?_⟩
+      ext x
+      rcases x with x | x <;> simp [affineToProjectiveAxisIndexEmbedding]
+    · obtain ⟨s, t, u, hst, hsu, htu, hy, rfl⟩ := hcubic
+      have hsum : s + t + u = 0 := by
+        rw [twistedCubicTripleAxisIndex] at hy
+        by_cases h : s + t + u = 0
+        · exact h
+        · simp [h] at hy
+      apply mem_minimalProjectiveAxisInfinityRepair_iff.mpr
+      apply Or.inr
+      refine ⟨s, t, u, hst, hsu, htu, hsum, ?_⟩
+      ext x
+      rcases x with x | x <;> simp [affineToProjectiveAxisIndexEmbedding]
+
+/-- Exact radius-three repair invariants at the projective axis point at infinity. -/
+theorem minimalProjectiveAxisInfinityRepair_invariants [CharP 𝔽 3] :
+    matchingNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit : 𝔽 ⊕ Unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) =
+        (5 * Fintype.card 𝔽 - 3) / 6 ∧
+      transversalNumber (minimalProjectiveAxisTwistedCubicRepairHypergraph
+        (.inr (.inr Unit.unit : 𝔽 ⊕ Unit) : ProjectiveAxisTwistedCubicIndex 𝔽) 3) =
+          2 * Fintype.card 𝔽 - 1 - zeroSumCapNumber 𝔽 := by
+  rw [minimalProjectiveAxisInfinityRepair_eq_embedAffine,
+    matchingNumber_embedHypergraph]
+  have hne : ∀ E ∈ minimalAxisTwistedCubicRepairHypergraph
+      (.inr (.inr Unit.unit : 𝔽 ⊕ Unit)) 3, E.Nonempty := by
+    intro E hE
+    rcases mem_minimalAxisRepairHypergraph_iff.mp hE with hpair | hcubic
+    · obtain ⟨z, w, -, -, -, rfl⟩ := hpair
+      exact ⟨.inr z, by simp⟩
+    · obtain ⟨s, t, u, -, -, -, -, rfl⟩ := hcubic
+      exact ⟨.inl s, by simp⟩
+  rw [transversalNumber_embedHypergraph affineToProjectiveAxisIndexEmbedding _ hne]
+  exact minimalAxisRepair_nucleus_invariants
+
 #print axioms projectiveAxisShiftInvEquiv
 #print axioms projectiveAxisShiftInvEquiv_eq_infinity_iff
 #print axioms projectiveShiftInvLinearEquiv
@@ -360,5 +444,7 @@ theorem isProjectiveAxisTwistedCubicCircuit_map_iff [CharP 𝔽 3] (a : 𝔽)
 #print axioms projectiveShiftInv_linearIndependent_iff
 #print axioms projectiveShiftInv_finset_linearIndependent_iff
 #print axioms isProjectiveAxisTwistedCubicCircuit_map_iff
+#print axioms minimalProjectiveAxisInfinityRepair_eq_embedAffine
+#print axioms minimalProjectiveAxisInfinityRepair_invariants
 
 end RepairCodes

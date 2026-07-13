@@ -1,7 +1,7 @@
 # Handoff: relative-conic arcs — evaluation, coding, and icosahedral strengthening
 
 **Date:** 2026-07-13
-**Status:** QUEUED
+**Status:** ACTIVE — C107–C109 theorem packages and paper promotion complete; C110 shared aggregate gate only
 **Tasks:** C106–C110
 
 ## Goal
@@ -11,7 +11,8 @@ downstream theorem packages:
 
 1. an exact finite-field evaluation-avoidance dichotomy;
 2. a projective arc–MDS/deep-hole/extension bridge; and
-3. the exceptional `q=11` icosahedral symmetry, orbit, syndrome, and MDS-extension structure.
+3. the exceptional `q=11` syndrome and exact MDS-extension structure, with its classical
+   Clebsch-hexagon/icosahedral interpretation.
 
 The work is a continuation of the finished
 [C89–C96 formalization](done/2026-07-12-arcs-complete-outside-conic-formalization.md), not a reopening
@@ -38,7 +39,7 @@ belong in the
 
 For a finite field `F` of cardinality `q`, a finite-dimensional `F`-space `V`, evaluations
 `ev x : V →ₗ[F] F`, and finite sets `U` and `A`, let
-`K = ker (evaluationMap ev U)`. Under `|A| < q`, prove
+`K = ker (evaluationMap ev U)`. Under `|A| ≤ q`, prove
 
 ```text
 ∃ f ∈ K, f ≠ 0 ∧ ∀ a ∈ A, ev a f ≠ 0
@@ -48,9 +49,12 @@ K ≠ ⊥ ∧ ∀ a ∈ A, K ⊄ ker (ev a).
 
 Then prove the finite-dimensional dual reformulation
 `K ≤ ker (ev a) ↔ ev a ∈ span (ev '' U)` and the degree-`d` Veronese/evaluation-closure corollary.
-The core existence proof is the sharp union-of-fewer-than-`q` proper hyperplanes count. The strict
-`|A| < q` hypothesis must be retained unless a stronger, independently proved covering theorem
-supports a replacement.
+The core existence proof is the sharp common-zero count showing that at most `q` proper
+hyperplanes cannot cover `K`. Strengthen existence quantitatively: if `dim K=r≥2` and there are
+`m≤q` distinct bad hyperplanes, at least
+`(q-1)q^(r-2)(q+1-m)` vectors avoid them; equality is attained by hyperplanes through a common
+codimension-two subspace. This uniform threshold is sharp because the `q+1` one-dimensional
+subspaces cover `F_q²`.
 
 ### T2 — projective arc and coding bridge
 
@@ -61,45 +65,57 @@ For a projective `k`-arc represented by the columns of a rank-three matrix `H_A`
   `[k,k-3,4]_q` and is MDS;
 - projective syndrome distance is one on `A`, two on its secant-covered locus, and three on its
   ordinary uncovered locus;
+- a fixed affine syndrome over a direction of secant index `r` has exactly `r` weight-two minimum
+  leaders, while every distance-three syndrome has exactly `binom(k,3)` weight-three leaders;
 - an uncovered point is exactly a one-column MDS extension of `C_A`;
-- completeness outside a conic is exactly confinement of all projective deep-hole syndromes to the
-  conic; and
-- compatible simultaneous one-column extensions are the independent sets of the secant-conflict
-  graph.
+- completeness outside a conic is exactly confinement of all projective distance-three syndromes
+  to the conic; when covering radius three is separately established, these and only these are the
+  projective deep-hole directions; and
+- simultaneous extensions are independent sets of the full pair/triple conflict hypergraph. If the
+  single-extension locus is confined to an arc—in particular, to the prescribed conic here—the
+  triple obstruction vanishes, so the extension poset is exactly the independence complex of the
+  pair-conflict graph and ordinary complete superarcs are its maximal independent sets.
+
+Also restate the prescribed-hole defect identity in these semantics: `r_A(x)` is the number of
+weight-two leader supports for projective syndrome direction `x`, so the first and second index
+moments and the exact defect are leader-count and leader-collision identities. Consequently the
+paper's lower bound becomes a length obstruction for projective codimension-three MDS codes whose
+distance-three syndrome directions are confined to a prescribed conic. Use “deep-hole” only when
+covering radius three has separately been proved.
 
 If Mathlib lacks a suitable coding API, state and prove support-size/syndrome semantics first, then
 add conventional parameter corollaries. The geometric theorem must not be blocked by library
 terminology.
 
-### T3 — the `q=11` icosahedral package
+### T3 — the `q=11` certified code and extension package
 
-For the certified six-arc already used by `Q11Residual.lean`, prove:
+For the certified six-arc already used by `Q11Residual.lean`, prove in one thin downstream module:
 
-- the conic-projectivity stabilizer is an explicit group of order 60, with a checked isomorphism to
-  `AlternatingGroup (Fin 5)`;
-- its point-orbit sizes on `PG(2,11)` are `6,12,10,15,30,30,30`;
-- secant index is constant on the relevant orbits and gives `(N₁,N₂,N₃)=(90,15,10)`;
-- the six admissible conic witnesses give perfect matchings partitioning the 30 edges of the
-  icosahedron;
+- its secant-index distribution is `(N₁,N₂,N₃)=(90,15,10)`;
+- the six exterior arc points give five-edge near-perfect chord matchings, each missing the two
+  tangent-contact vertices, and these six matchings partition the 30 edges of the icosahedron;
 - `C_A` is a non-GRS `[6,3,4]₁₁` MDS code of covering radius three whose projective deep-hole
   syndrome set is exactly the 12-point conic;
 - the affine coset-distance distribution is `(1,60,1150,120)`, and the distance-two cosets split as
   `(900,150,100)` according to whether they have one, two, or three minimum-weight leaders; and
-- the simultaneous MDS-extension complex is the independence complex of the icosahedron.
+- the simultaneous MDS-extension complex is the independence complex of the icosahedron, with
+  independence polynomial `1+12t+36t²+20t³`, exactly six maximal two-extensions and twenty
+  maximal three-extensions, and no four-extension.
 
 The non-GRS proof target is coordinate-free: quadratic evaluation on the six projective columns has
-rank six, so no conic contains the arc. The `A5` label requires an explicit checked group
-isomorphism; order and element-order statistics alone are supporting checks, not the proof.
+rank six, so no conic contains the arc. Identify the seed in the manuscript with the classical
+Clebsch hexagon and its ten triple-secant Brianchon points with the known `A5`-fixed ten-arc, but do
+not make a new abstract `A5` isomorphism or full orbit formalization a completion dependency.
 
 ## Work packages
 
 | Task | Work | Completion gate |
 |---|---|---|
-| **C106 [QUEUED]** | Run the cheap refutation suite and freeze independent small certificates for T1–T3. | Every count agrees across coordinate changes and two independent implementations; negative controls fail as predicted; the exact theorem statements are frozen. |
-| **C107 [QUEUED]** | Formalize T1 in `EvaluationDichotomy.lean`, kernel form first and dual/Veronese closure second. | Focused and aggregate builds pass; small-field boundary tests justify `|A|<q`; public theorems have the accepted Mathlib-only axiom profile. |
-| **C108 [QUEUED]** | Formalize T2 in `SyndromeGeometry.lean` and `CodingBridge.lean`. | Arc, syndrome-distance, deep-hole confinement, and one-/multi-column extension equivalences are kernel-checked without importing this spinoff into existing consumers. |
-| **C109 [QUEUED]** | Formalize T3 in downstream `Q11IcosahedralAction.lean` and `Q11MDSCode.lean`. | Explicit 60-element action and `A5` isomorphism, orbit/secant certificates, code distributions, and extension complex all build under strict trust. |
-| **C110 [QUEUED]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger has safe wording and primary citations; paper, proof audit, Lean TRUST manifests, `papers-index.md`, and relevant projective-cap handoff are synchronized; at least one mutation/adversarial round passes. |
+| **C106 [REPORTED 2026-07-13]** | Run the cheap refutation suite and freeze independent small certificates for T1–T3. | Python and independent C++ replays agree; coordinate/relabel invariance and mutations pass; R6 sharpens T1 to `|A|≤q`; “perfect matching” was corrected to five-edge near-perfect matching. |
+| **C107 [REPORTED 2026-07-13; shared aggregate pending]** | Formalize T1 in `EvaluationDichotomy.lean`, including the dimension-sensitive avoidance count, then dual/Veronese closure. | Warning-free focused build, all mathematical targets, and axiom audit pass. The shared aggregate rerun remains deferred while the unrelated generated Q25 leaf sequence builds. |
+| **C108 [REPORTED 2026-07-13]** | Formalize the thin T2 semantic bridge and coding restatement of the prescribed-hole defect theorem in `SyndromeGeometry.lean` and `CodingBridge.lean`. | Arc, syndrome-distance and exact affine leader counts, confined distance-three locus, leader moments/defect, general conflict-hypergraph extensions, and the arc-confined graph/maximal-completion specialization are kernel-checked without importing this spinoff into existing consumers. |
+| **C109 [REPORTED 2026-07-13]** | Formalize T3 in downstream `Q11Coding.lean`. | Non-GRS `[6,3,4]₁₁` code, exact covering radius/deep-hole locus, syndrome/leader distributions, tangent-antipode matchings, and complete extension spectrum build under strict trust; no abstract `A5` library is required. |
+| **C110 [IN PROGRESS; SHARED AGGREGATE ONLY]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; the post-audit actual-leader bridge, final source checklist, focused rebuild, and axiom audit pass. Only the shared aggregate rerun remains. |
 
 ## Cheap refutation gates
 
@@ -113,7 +129,7 @@ Run these in C106 before substantial T3 proof engineering.
 | **R3 — negative controls** | Perturb a witness coordinate and generator/table entry; the exceptional symmetry, orbit, and extension assertions should break. | If they persist, strengthen the characterization or identify the genuinely generic theorem. |
 | **R4 — syndrome enumeration** | Enumerate all 133 projective syndrome directions and all 1331 affine syndromes independently; reproduce the claimed projective and affine distributions. | Reframe or reject the coding statement. |
 | **R5 — extension exhaustiveness** | Check every projective column: exactly the 12 conic directions extend singly, and pair compatibility is exactly the icosahedral nonedge relation. | Reject the claimed exact extension complex. |
-| **R6 — T1 boundary search** | Exhaustively test small finite spaces, including searches at `|A|=q` for covering counterexamples. | Correct the hypotheses before Lean formalization. |
+| **R6 — T1 boundary search** | Exhaustively test small finite spaces through `|A|=q`, and verify the sharp `q+1`-hyperplane cover of `F_q²`. | Correct the hypotheses before Lean formalization. |
 
 All certificate-generation scripts must record command, source hash, output hash, and an independent
 semantic cross-check in the companion archive. Small finite proof data may be generated, but the
@@ -127,8 +143,9 @@ Lean checker must remain visibly simpler than the generator.
    only after the core statement builds, then specialize to evaluation and Veronese closure.
 3. **C108 geometric semantics.** Define support-bounded syndrome representation and prove the
    arc/secant/uncovered trichotomy. Derive MDS parameters and extension language afterward.
-4. **C109 finite structure.** Check the explicit 60-element action and orbit certificates first;
-   add the abstract `A5` isomorphism and code corollaries downstream.
+4. **C109 finite structure.** Reuse `Q11Residual` to check the code distributions, tangent-antipode
+   matching relation, and exact independence/extension spectrum. Keep the computed 60-element
+   stabilizer as provenance and classical interpretation, not a formalization dependency.
 5. **C110 review and publication.** Perform novelty collision searches and citation chasing in
    parallel with C107–C109, but decide claim wording only after the Lean statements stabilize.
 
@@ -161,6 +178,69 @@ located**. Never convert the third verdict into a priority claim without an exte
 bibliographic check. If the exact q11 object is already classified, retain only the checked
 reconstruction and genuinely additional syndrome/extension invariants.
 
+### Current novelty posture after C106
+
+| Claim family | Verdict | Nearest located source / safe use |
+|---|---|---|
+| At most `q` proper hyperplanes do not cover an `F_q`-space; `q+1` is sharp | **Known** | Classical finite-vector-space covering result; cite the covering literature (including Jamison) and present only the evaluation/Veronese specialization. |
+| Arc ↔ codimension-three MDS code; secant index ↔ coset weight/leader count | **Known** | Davydov–Marcugini–Pambianco treats `[n,n-3,4]_q` cosets from plane arcs and explicitly gives the `binom(n,3)` farthest-coset leader count in Theorem 4.6; Kaipa supplies the deep-hole/MDS-extension formulation for Reed–Solomon codes. |
+| Six-point `A5` orbit and the `6,10,12,15,30/60` orbit structure | **Known** | This is the classical **Clebsch hexagon**; its ten points on three bisecants are the Brianchon-point `A5` ten-arc. Brouwer's notes and the classical `A5` literature supply the wider orbit structure. |
+| Prescribed-hole defect as an exact leader-collision identity for conic-confined distance-three syndromes | **Known dictionary / synthesis candidate** | Davydov–Marcugini–Pambianco supply the general secant/coset dictionary; no exact coding restatement of this paper's prescribed-hole identity or lower bound was located in the bounded search. |
+| This witness has conic distance-three syndrome/extension locus, exact refined coset counts, and extension polynomial `1+12t+36t²+20t³` | **Known components / synthesis candidate** | No exact conjunction located in the bounded search. State only the checked synthesis unless C110's citation chasing finds an exact predecessor. |
+| Six witness-coloured five-edge chord matchings | **Classical-looking consequence** | Treat as an incidence description of the icosahedral action, not a novelty claim. |
+
+## Discovery Track register
+
+Append and reclassify only incidental mathematical consequences here as they are noticed while
+executing C107–C110, following the earlier arcs-formalization handoff pattern. Planned theorem
+deliverables and their completion state belong in the work-package table, not here. Each discovery
+records its current proof tier, novelty posture, and intended disposition. “Candidate-new” means
+only that no exact collision has yet been located; promotion requires C110's proof audit and
+specialist-quality citation chase.
+
+- **Incidental Lean-proved strengthening:** for `m` distinct hyperplanes in rank `r≥2`, anchoring one
+  member and using its codimension-two intersection with every other member gives the
+  dimension-sensitive subtraction-form lower bound and the factored formula
+  `(q-1)q^(r-2)(q+1-m)` for `m≤q`. Selected subfamilies of the explicit `q+1` plane cover attain
+  the anchored count exactly, providing the rank-two equality model. This is a reusable finite-
+  geometry strengthening; novelty posture remains classical/known.
+- **Incidental Lean-proved semantic correction:** general simultaneous column extensions require a
+  pair/triple conflict hypergraph. When the confined extension locus is itself an arc, triple
+  conflicts vanish and complete superarcs are exactly maximal independent sets of the residual
+  pair-conflict graph.
+- **Incidental candidate-new paper-level synthesis:** reinterpret the prescribed-hole defect identity as an
+  exact weight-two-leader collision identity for projective codimension-three MDS codes, carrying
+  the paper's additive lower bound to codes with conic-confined distance-three syndrome locus.
+- **Incidental Lean-proved finite strengthening:** the q11 extension complex has polynomial
+  `1+12t+36t²+20t³`; the fixed seed has exactly six complete eight-arc and twenty complete nine-arc
+  superarcs, and no ten-arc superarc. `Q11Coding.extension_independence_spectrum` and
+  `maximal_extension_spectrum` kernel-check the complete classification.
+- **Incidental prior-art identification, not novelty:** the q11 seed is the Clebsch hexagon; its ten
+  triple-secant points are the classical Brianchon-point `A5` ten-arc, known complete over q11.
+- **Incidental Lean-proved structural corollary:** each of the six witness-coloured chord classes is
+  a five-edge near-perfect matching, the six classes are disjoint and partition the 30 residual
+  edges, and each misses an antipodal pair. Adding the six antipodal edges therefore gives a
+  one-factorization of the icosahedron plus its antipodal matching. The finite incidence statement
+  is checked; treat its interpretation as classical-looking until searched directly.
+- **Incidental reusable radius certificate:** in a rank-three parity-check system, three-column
+  independence gives a weight-at-most-three representative of every syndrome, while avoidance of
+  every two-column affine span gives a distance-at-least-three witness. Together these two small
+  certificates prove covering radius exactly three without enumerating all words. The generic
+  implications are Lean-proved in `CodingBridge.every_syndrome_has_weight_le_three` and
+  `syndromeDistanceAtLeast_three_of_pair_avoidance`; novelty posture is elementary/known.
+- **Incidental prior-art collision found during proof audit:** the exact `binom(k,3)` count for
+  every distance-three affine syndrome is stated explicitly for farthest MDS cosets by
+  Davydov–Marcugini–Pambianco, Theorem 4.6. Keep the Lean theorem as an independent formal proof,
+  but make no novelty claim for the count.
+- **Incidental structural observation:** nonzero scalar multiplication preserves affine syndrome
+  distance and every minimum-leader multiplicity, and acts freely on each projective syndrome
+  direction. Thus every refined nonzero affine-coset count is divisible by `q-1` and is determined
+  entirely by the projective index spectrum. For q11 this explains the factor ten in both refined
+  distributions; the observation is elementary/known and is used only as a structural bridge.
+- **Incidental parked research direction:** degree-`d` Veronese features suggest MDS codes whose distance-three
+  syndrome locus is confined to a prescribed algebraic variety. Do not enlarge C107–C110 without a
+  separate theorem and novelty gate.
+
 ## Trust, adversarial, and publication gate
 
 - No `sorry`, `native_decide`, `admit`, paper-specific axiom, or unproved semantic bridge.
@@ -184,13 +264,13 @@ reconstruction and genuinely additional syndrome/extension invariants.
 ## Packaging gate
 
 - T1 and a concise T2 dictionary belong in the main paper if proved.
-- Add the q11 code parameters and exact distributions to the main paper when they remain compact.
-- Include the full T3 section only if the explicit `A5` proof is conceptually readable and the
-  novelty audit supports the synthesis. Otherwise publish it as a companion note on the
-  icosahedral MDS-extension complex and cite it from the arcs paper.
+- Add the coding restatement of the central defect theorem and its length consequence to the main
+  paper if C108 remains concise.
+- Add the q11 code parameters, exact distributions, extension polynomial, and classical Clebsch
+  identification as a compact example; do not create a companion paper unless later results grow
+  beyond that scope.
 
 ## Next step
 
-Start C106 with R0, R4, and R5 from the frozen q11 witness, using two independent implementations
-and disk-backed scratch space. In parallel, run the exact-object collision search before committing
-to the generated `A5` proof table.
+Rerun the top-level `RelativeConicArcs` aggregate once the concurrent Q25 leaf builder has
+completed. Then archive this live handoff and close C107/C110.

@@ -72,7 +72,14 @@ group, represented in Lean by `zeroSumCapNumber`.
   lifts the mixed-triple geometry to arbitrary selected Finsets and proves the exact radius-two
   axis-repair shape: every such edge consists of two distinct other axis coordinates, with no
   cubic helper. This direct theorem removes the short-edge part of the generic support-bridge
-  obligation; exact radius-three clutter classification remains open.
+  obligation. It now also proves the exact radius-three clutter at axis infinity: the minimal
+  edges are precisely pairs of other axis coordinates and finite cubic triples with parameter sum
+  zero. All mixed shapes and every cubic-helper triple containing cubic infinity are excluded.
+- `RepairCodes/ProjectiveAxisTwistedCubicInvariants.lean` proves that this distinguished completed
+  clutter is exactly the natural embedding of the already formalized affine nucleus clutter.
+  Consequently its matching and transversal numbers are kernel-proved as
+  `(5q-3)/6` and `2q-1-Z3(q)`. Transport from axis infinity to every finite axis target remains the
+  next XH2 gate; the uniform row is not yet promoted.
 
 ## Mandatory xhigh review checkpoints
 
@@ -112,7 +119,7 @@ and novelty promotion.
 | ID | Discovery | Proof status | Novelty posture | Next gate / destination |
 |---|---|---|---|---|
 | D-PC9 | The completed seed appears to have exactly five nonzero weights: projective section counts `N1=q(q²-1)/3`, `N2=q(q²-1)/2`, `N3=q(q+1)`, `N4=q(q²-1)/6`, `N(q+2)=q+1`; hence exactly `q²-1` minimum-weight words | `CHECKED` independently at q=3,9,27; general moment proof sketched, not Lean | potentially stronger coding-theoretic contribution; `LIT-OPEN` | XH7; prove from plane moments/triple classification, then targeted weight-enumerator search |
-| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action and exact preservation of arbitrary indexed families, finite supports, and column circuits `LEAN`; the direct radius-two shape is also `LEAN`, while radius-three repair transport remains open | structural unification, not by itself a novelty claim | XH2; prove the axis-infinity zero-sum clutter equality, then transport the minimal clutter or prove the remaining repair bridge |
+| D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action and exact preservation of arbitrary indexed families, finite supports, and column circuits `LEAN`; the distinguished zero-sum minimal clutter and its invariants are `LEAN`, while repair-hypergraph transport remains open | structural unification, not by itself a novelty claim | XH2; transport complete/minimal repair hypergraphs under the monomial action, then state the uniform axis row |
 
 When a discovery becomes planned work, allocate it separately but keep this row as the concise
 discovery verdict. Negative investigations belong in the companion archive.

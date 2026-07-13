@@ -23,6 +23,17 @@
    complete \(b\)-arc can be moved off any prescribed \(H\) when \(b|H|<q^2+q+1\).
 7. The even-characteristic statements use only the standard nucleus/tangent facts for a
    nonsingular conic; combining the nucleus-in/out cases gives \(I_C(A)\ge1\) universally.
+8. The finite-field evaluation dichotomy is exact for at most \(q\) selected points. Its reverse
+   implication uses the anchored union bound for at most \(q\) proper hyperplanes; the \(q+1\)
+   lines of a two-dimensional quotient prove sharpness. The arbitrary-feature statement includes
+   every Veronese degree.
+9. For a projective \(k\)-arc, the transparent parity-check kernel has parameters
+   \([k,k-3,4]_q\). Projective syndrome distance is one/two/three on selected/secant/uncovered
+   directions; the secant index is the exact weight-two leader count, while a distance-three
+   affine syndrome has one leader on every three-column support, hence \(\binom{k}{3}\).
+10. The prescribed-hole defect identity therefore has a literal coding interpretation as a
+    weight-two-leader collision identity. The resulting MDS-code length obstruction is a
+    reformulation of the proved geometric theorem, not a new independent inequality.
 
 ## Computer-assisted claims
 
@@ -69,15 +80,43 @@ secants are exterior to the conic. Completeness, the maximum index three, and
 the two moment equations then force the required-point index counts
 ((N_1,N_2,N_3)=(90,15,10)).
 
-The auxiliary q=11 residual-game remark is separately machine checked in
-`RelativeConicArcs/Q11Residual.lean`: kernel reduction verifies that all twelve conic parameters
-are initially live and that their determinant-defined conflict graph is the 30-edge, degree-five
-icosahedral graph. The P-value conclusion uses the generic proved antipodal conflict-graph mirror
-theorem, not an exhaustive game-tree evaluator. This result is not used by the paper's bounds.
+The expanded q=11 result is kernel checked in `RelativeConicArcs/Q11Coding.lean`. It proves the
+transparent `[6,3,4]₁₁` MDS parameters and exact minimum distance, covering radius three, equality
+of the projective deep-hole locus with the conic, affine coset distances `(1,60,1150,120)`, and
+distance-two leader histogram `(900,150,100)`. These affine counts are derived from the certified
+projective secant-index spectrum, ten nonzero scalars per direction, and the generic
+`CodingBridge.card_syndromeLeadersOfWeight_eq_supports` theorem, which proves that the support
+count through weight three is exactly the count of actual affine coefficient words. Invertibility of the six-by-six quadratic
+evaluation matrix proves that the projective columns lie on no conic, hence the code is non-GRS.
+It also proves the extension polynomial `1+12t+36t²+20t³`, zero maximal extensions of sizes zero
+and one, six of size two, twenty of size three, and none of size four. The determinant-defined
+conflict graph is the 30-edge, degree-five icosahedral graph; its six witness-coloured five-edge
+matchings partition the edges and each misses an antipodal pair.
+
+The auxiliary P-value conclusion remains in `RelativeConicArcs/Q11Residual.lean` and uses the
+generic antipodal conflict-graph mirror theorem, not an exhaustive game-tree evaluator. It is not
+used by the paper's bounds.
 
 Verifier SHA-256:
 
 `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`
+
+Independent strengthening checkers and their source hashes:
+
+- `check_evaluation_dichotomy.py`:
+  `6ed309bd2461ce9998cbd3bcaa5396379e6973b7503ce2dcdfb32c9806386566`;
+- `check_q11_structure.py`:
+  `0abe909c9aadce0db4c75f296c8de25e929dd1065c906996da8dec017e534d69`;
+- separately written `check_q11_structure.cpp`:
+  `1753674172d48f1d056d350e30baa9eb67de0810c84a96da0440947768ae041c`.
+
+The 2026-07-13 adversarial replay reproduced output hashes
+`88be03eb8a81bb906083457a4b4201cfd1ef6bcaa9de01928175840f61ac55ff`,
+`b096305a809b062c274129c157d51a57d65e9aec0e44662370ec53c8c773110f`, and
+`380cab47923cbfb3a9bfcc54ee89cf0eb79aa551d936d2e91cbb4949ae56477d`, respectively. Coordinate
+transport and relabelling preserve the results; replacing one witness point changes the extension
+count from 12 to 20 and collapses the stabilizer from 60 to 2, while a mutated generator is
+rejected.
 
 The exact-search report is frozen separately as `search_rhoc16_output.txt`;
 the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
@@ -92,7 +131,9 @@ condition, and coverage on the (q^2+q+1) canonical projective representatives; `
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.
 
-The aggregate builds successfully. No proof uses `sorry`, `admit`, a custom axiom, or
+The focused evaluation, syndrome/coding, and q11 modules build successfully; the top-level
+aggregate recheck is deferred only while an unrelated generated Q25 leaf sequence is compiling.
+No proof uses `sorry`, `admit`, a custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
 exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
 theorem map, provenance, and trust boundary. The Kim--Vu input remains an explicit named theorem
@@ -116,6 +157,12 @@ exact \(q=16\) value; the paper proves that this route is too weak and uses
 - No claim that the 2633-class ordinary eight-arc enumeration is new.
 - No claim that the general evaluation lemma, or the use of quadrics and
   evaluation conditions in arc theory, is new.
+- No claim that the sharp \(q+1\) vector-space covering threshold, the arc--MDS dictionary,
+  the \(\binom{k}{3}\) farthest-coset leader count, the deep-hole/MDS-extension dictionary, or the
+  Clebsch-hexagon/icosahedral interpretation is new.
+- No unconditional novelty claim for the q=11 conjunction of conic deep-hole locus, refined coset
+  distribution, coloured chord partition, and extension polynomial. The bounded search did not
+  locate that exact conjunction, so it is presented only as a checked synthesis.
 - No unconditional priority claim for the uncovered-locus quadratic
   obstruction, its `2630+3` profile, or the exact relative value. A targeted
   comparison found no predecessor, but it is not an exhaustive priority

@@ -20,8 +20,15 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
   ρ_𝒞(q) ≤ t₂(2,q) when t₂(2,q) ≤ q (and the Kim–Vu corollary);
 - even-characteristic nucleus constraints;
 - a general uncovered-evaluation obstruction for exceptional loci drawn from a finite-dimensional
-  linear system of homogeneous forms;
+  linear system of homogeneous forms, strengthened to an exact at-most-`q` finite-field
+  evaluation-avoidance dichotomy for arbitrary feature maps (hence every Veronese degree);
+- a coding restatement in which plane arcs are codimension-three MDS parity-check systems,
+  secant index is the exact weight-two leader count, and the prescribed-hole defect is an exact
+  leader-collision identity;
 - verified small values: ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6 and ρ_𝒞(16) = 9;
+- for the `q=11` witness, a non-GRS `[6,3,4]₁₁` MDS code of covering radius three with
+  exact conic deep-hole locus, coset distribution, chord decomposition, and icosahedral extension
+  polynomial `1+12t+36t²+20t³`;
 - the stronger q=16 classification theorem: no nonzero quadratic zero set, singular or
   nonsingular, contains an eight-arc's ordinary-uncovered locus while avoiding the arc.
 
@@ -40,16 +47,23 @@ classes, the forced quadratic equation also vanishes at a selected arc point, co
 disjointness. Lean checks all local arithmetic and proves the normalization, classification, and
 conic-transport semantics; the C++ enumerator is reproducible provenance, not a trusted oracle.
 From this directory, reproduce the report and emitted Lean data with
-`g++ -O3 -std=c++20 search_rhoc16.cpp -o /tmp/search_rhoc16` followed by
-`/tmp/search_rhoc16 --emit-lean`; the checked-in report is the combined standard output/error
+`g++ -O3 -std=c++20 search_rhoc16.cpp -o /var/tmp/search_rhoc16` followed by
+`/var/tmp/search_rhoc16 --emit-lean`; `/tmp` is tmpfs on the development host. The checked-in
+report is the combined standard output/error
 stream from that run.
 
 **Small-order structural note.** The `q=11` witness has `I_C=0`, so all 15 of its secants are
-exterior to the conic. The moment equations force its 115 required points to have index distribution
-`(N₁,N₂,N₃)=(90,15,10)`. In the auxiliary cap-game reading, all twelve conic points are
-initially live and their conflict graph is the icosahedral graph; its antipodal involution proves
-the residual position P. Lean checks every seeded continuation, applies the exact parametrized-hole
-game bridge, and proves the actual six-point projective position P. At `q=9`, a strengthened
+exterior to the conic. Its associated code is a projectively non-GRS `[6,3,4]₁₁` MDS code
+of covering radius three; the twelve conic directions are exactly its projective deep holes. The
+affine coset-distance distribution is `(1,60,1150,120)`, and the distance-two cosets have one,
+two, or three leaders in counts `(900,150,100)`. Simultaneous conic-column extensions form the
+icosahedron independence complex, with polynomial `1+12t+36t²+20t³`, six maximal
+two-extensions, and twenty maximal three-extensions. This six-set is a classical Clebsch hexagon;
+the exact code/extension conjunction is presented as a checked synthesis, not a novelty claim.
+
+In the auxiliary cap-game reading, all twelve conic points are initially live and their antipodal
+involution proves the residual position P. Lean checks every seeded continuation, applies the exact
+parametrized-hole game bridge, and proves the actual six-point projective position P. At `q=9`, a strengthened
 ordinary-coverage check proves that the displayed six-arc has no legal projective extension and is
 therefore terminal P. These are consequences of the certified coordinates, not novelty claims,
 and the game statements are not used in the paper's bounds.
@@ -68,6 +82,8 @@ The source-by-source comparison is recorded in
 - `arcs_complete_outside_conic.tex` / `.pdf` — the manuscript
 - `arcs_complete_outside_conic_proof_audit.md` — proof/claim audit
 - `verify_relative_conic_arcs.py` / `verify_relative_conic_arcs_output.txt` — the verifier + run
+- `check_evaluation_dichotomy.py` — small-field sharp-threshold adversarial checker
+- `check_q11_structure.py` / `.cpp` — independent q11 structure, invariance, and mutation checks
 - `search_rhoc16.cpp` / `search_rhoc16_output.txt` — exact eight-arc classification generator + run
 - `../../lean/RelativeConicArcs/` — standalone Lean formalization and kernel-checked certificates
 

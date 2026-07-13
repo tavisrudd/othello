@@ -233,6 +233,62 @@ theorem projectiveOneCubicTwoAxis_linearIndependent
         simp [projectiveTwistedCubicPoints, oneCubicTwoAxisFamily]
   | inr u => simpa using cubicInfinityTwoAxis_linearIndependent (𝔽 := 𝔽) hyz
 
+/-- A finite cubic point, cubic infinity, and two distinct axis points are independent. -/
+theorem finiteCubicInfinityTwoAxis_linearIndependent (s : 𝔽)
+    {z w : 𝔽 ⊕ Unit} (hzw : z ≠ w) :
+    LinearIndependent 𝔽 ![
+      projectiveTwistedCubicPoints 𝔽 (.inl s),
+      projectiveTwistedCubicPoints 𝔽 (.inr Unit.unit),
+      axisTwistedCubicPoints 𝔽 (.inr z),
+      axisTwistedCubicPoints 𝔽 (.inr w)] := by
+  rw [Fintype.linearIndependent_iff]
+  intro g hrel
+  have h₀ := congrFun hrel (0 : Fin 4)
+  have h₃ := congrFun hrel (3 : Fin 4)
+  simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at h₀ h₃
+  simp [Fin.sum_univ_four, projectiveTwistedCubicPoints, momentCurve] at h₀ h₃
+  have hg₀ : g 0 = 0 := h₀
+  have hg₁ : g 1 = 0 := by linear_combination h₃ - s ^ 3 * hg₀
+  have haxisrel :
+      ∑ i : Fin 2, (![g 2, g 3] : Fin 2 → 𝔽) i •
+        (![axisTwistedCubicPoints 𝔽 (.inr z), axisTwistedCubicPoints 𝔽 (.inr w)] :
+          Fin 2 → (Fin 4 → 𝔽)) i = 0 := by
+    simpa [Fin.sum_univ_four, Fin.sum_univ_two, projectiveTwistedCubicPoints,
+      momentCurve, hg₀, hg₁] using hrel
+  have hcoeff := (Fintype.linearIndependent_iff.mp
+    (twistedCubicAxis_pair_linearIndependent (𝔽 := 𝔽) hzw)) ![g 2, g 3] haxisrel
+  have hg₂ : g 2 = 0 := hcoeff 0
+  have hg₃ : g 3 = 0 := hcoeff 1
+  intro i
+  fin_cases i <;> assumption
+
+/-- Two distinct full-projective cubic points and two distinct axis points are independent in
+characteristic three. -/
+theorem projectiveTwoCubicTwoAxis_linearIndependent [CharP 𝔽 3]
+    {x y : ProjectiveTwistedCubicIndex 𝔽} (hxy : x ≠ y)
+    {z w : 𝔽 ⊕ Unit} (hzw : z ≠ w) :
+    LinearIndependent 𝔽 ![
+      projectiveTwistedCubicPoints 𝔽 x,
+      projectiveTwistedCubicPoints 𝔽 y,
+      axisTwistedCubicPoints 𝔽 (.inr z),
+      axisTwistedCubicPoints 𝔽 (.inr w)] := by
+  rcases x with s | u <;> rcases y with t | v
+  · have hst : s ≠ t := fun h => hxy (congrArg Sum.inl h)
+    convert twoCubicTwoAxis_linearIndependent (𝔽 := 𝔽) hst hzw using 1
+    funext i
+    fin_cases i <;>
+      simp [projectiveTwistedCubicPoints, twoCubicTwoAxisFamily]
+  · simpa using finiteCubicInfinityTwoAxis_linearIndependent (𝔽 := 𝔽) s hzw
+  · have hli := finiteCubicInfinityTwoAxis_linearIndependent (𝔽 := 𝔽) t hzw
+    have hs₀ : Equiv.swap (0 : Fin 4) 1 0 = 1 := by decide
+    have hs₁ : Equiv.swap (0 : Fin 4) 1 1 = 0 := by decide
+    have hs₂ : Equiv.swap (0 : Fin 4) 1 2 = 2 := by decide
+    have hs₃ : Equiv.swap (0 : Fin 4) 1 3 = 3 := by decide
+    exact (linearIndependent_equiv' (Equiv.swap 0 1) (by
+      funext i
+      fin_cases i <;> simp [hs₀, hs₁, hs₂, hs₃])).2 hli
+  · exact (hxy (by congr)).elim
+
 /-- The axis point `s+t` gives a dependent four-family with `s,t`, and cubic infinity. -/
 theorem twoFiniteCubicInfinityAxis_dependent (s t : 𝔽) :
     ¬ LinearIndependent 𝔽
@@ -337,5 +393,6 @@ theorem twoFiniteCubicInfinityAxis_isFourCircuit [CharP 𝔽 3] {s t : 𝔽} (hs
 #print axioms projectiveTwistedCubic_triple_linearIndependent
 #print axioms projectiveTwoCubicAxis_linearIndependent
 #print axioms projectiveOneCubicTwoAxis_linearIndependent
+#print axioms projectiveTwoCubicTwoAxis_linearIndependent
 
 end FiniteGeom

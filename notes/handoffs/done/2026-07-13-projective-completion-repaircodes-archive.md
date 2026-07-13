@@ -200,3 +200,23 @@ cubic coordinate participates in a radius-two axis repair.
 Focused validation passes, and the new selected-family and repair-shape theorems use only
 `propext`, `Classical.choice`, and `Quot.sound`. This closes the direct short-edge alternative in
 XH2; it does not yet classify radius-three cubic triples or transport repair clutters.
+
+## 2026-07-13 — exact radius-three clutter at axis infinity
+
+Completed the distinguished completion-fiber classification. New strict-trust theorems prove:
+
+- two distinct full-projective cubic columns and two distinct axis columns are independent;
+- a three-helper support containing two cubics and an extra axis point cannot repair an axis
+  target;
+- the cubic triple containing projective cubic infinity completes at a finite axis point and
+  cannot repair axis infinity;
+- three distinct finite cubic helpers repair axis infinity exactly when their parameters sum to
+  zero, with the converse constructed as an actual full-support four-circuit repair;
+- the complete minimal radius-three clutter at axis infinity consists exactly of the complete
+  pair graph on the other axis points and the finite zero-sum cubic triples.
+
+The resulting minimal completed clutter is kernel-proved equal to the natural embedding of the
+existing affine nucleus clutter. Reusing the prior affine extremal theorem gives exact invariants
+`nu=(5q-3)/6` and `tau=2q-1-Z3(q)` at axis infinity. Focused builds use only the standard axiom
+profile. Uniformity over finite axis targets still requires repair-hypergraph transport under
+D-PC10 and is not inferred merely from circuit preservation.

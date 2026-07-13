@@ -61,7 +61,10 @@ and a quantitative stability estimate.  In particular, for every prime power $q$
 Conversely, if $H$ is any prescribed set and an ordinary complete $b$-arc
 satisfies $b|H|<q^2+q+1$, projective averaging moves it off $H$; the conic
 case gives $\rhoC(q)\le \tmin$ whenever $\tmin\le q$.  We also give tangent
-and parity constraints in even characteristic.  Directly checkable witnesses
+and parity constraints in even characteristic.  A sharp finite-field
+evaluation dichotomy packages the quadratic obstruction for arbitrary
+feature maps, and the arc--MDS dictionary turns the defect identity into an
+exact syndrome-leader collision identity.  Directly checkable witnesses
 give
 \[
  \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
@@ -72,7 +75,10 @@ the stronger statement that no nonzero quadratic can contain an eight-arc's
 ordinary-uncovered locus while avoiding the arc.  A supplementary verifier
 checks the witnesses, while a companion Lean formalization proves the theorem
 chain and kernel-checks the local classification, quadratic obstruction,
-projective reduction, and exact $q=16$ conclusion.
+projective reduction, and exact $q=16$ conclusion.  For the six-point
+$q=11$ witness it also proves a non-GRS $[6,3,4]_{11}$ MDS code of covering
+radius three, its exact coset and extension spectra, and its icosahedral
+simultaneous-extension complex.
 \end{abstract}
 
 \section{Introduction}
@@ -142,7 +148,9 @@ used to control overlap have an exact remainder.  This produces:
 \item a strengthened lower bound with additive asymptotic term $3/2$;
 \item a projective-averaging upper-bound transfer from ordinary complete
       arcs;
-\item characteristic-two nucleus constraints; and
+\item characteristic-two nucleus constraints;
+\item an exact evaluation-avoidance dichotomy and a coding-theoretic form of
+      the prescribed-hole defect; and
 \item small finite-field results whose upper bounds are independently
       verifiable from explicit coordinates.
 \end{enumerate}
@@ -356,6 +364,68 @@ Thus small defect forces almost every multiply covered required point to
 have the maximum possible multiplicity $m$, while almost every hole point
 met by a secant also has multiplicity $m$.  This is the precise stability
 content behind the equality heuristic.
+
+\section{Coding interpretation}
+\label{sec:coding}
+
+We record the standard arc--code dictionary because it makes the defect
+identity more informative.  Choose nonzero column representatives of a
+$k$-arc $A\subset\PG(2,q)$ and form a $3\times k$ matrix $H_A$.  For
+$k\ge4$, the code
+\[
+ C_A=\{c\in\F_q^k:H_Ac^{\mathsf T}=0\}
+\]
+is a $[k,k-3,4]_q$ MDS code: every three columns are independent, the
+columns span $\F_q^3$, and any four columns support a dependence.  Conversely,
+a projective parity-check system for a code with these parameters is a
+$k$-arc.  This correspondence and its coset-weight consequences are
+classical; see Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.
+
+\begin{proposition}[Syndrome form of relative completeness]
+\label{prop:syndrome-dictionary}
+Let $s\ne0$ have projective direction $x=[s]\in\PG(2,q)$.  Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+ \item the minimum weight of a word $c$ with $H_Ac^{\mathsf T}=s$ is one,
+       two, or three according as $x\in A$, $x\notin A$ lies on a secant of
+       $A$, or $x$ is ordinarily uncovered;
+ \item if the minimum weight is two, the number of weight-two leaders is
+       exactly $r_A(x)$;
+ \item if the minimum weight is three, the number of weight-three leaders is
+       exactly $\binom{k}{3}$; and
+ \item adjoining $x$ as one more projective parity-check column preserves
+       the MDS property exactly when $x$ is ordinarily uncovered.
+\end{enumerate}
+Consequently, $A$ is complete outside a prescribed set $\cH$ exactly when
+all its projective distance-three syndrome directions lie in $\cH$ (and
+$A\cap\cH=\varnothing$).  These directions are deep-hole directions only
+when covering radius three has separately been established.
+\end{proposition}
+
+\begin{proof}
+A weight-one representation is a scalar multiple of a selected column.  A
+weight-two representation uses a unique unordered column pair whose
+projective span is a secant through $x$; independence of the pair makes its
+two coefficients unique.  If neither case occurs, any three columns form a
+basis and represent $s$, so the distance is three.  For each three-subset
+the representation is unique, and none of its coefficients can vanish;
+hence there are exactly $\binom{k}{3}$ leaders.  The extension statement is
+the same three-column independence test.  The leader count also follows as
+the $d=4$ case of the general farthest-coset formula in
+Davydov--Marcugini--Pambianco~\cite[Theorem~4.6]{DavydovEtAl2021}; the
+deep-hole/MDS-extension formulation is standard in the Reed--Solomon setting
+as well~\cite{Kaipa2017}.
+\end{proof}
+
+Thus $r_A(x)$ is not merely an incidence index: it is the exact number of
+minimum weight-two leaders of every affine syndrome on direction $x$.
+The first moment counts leaders, the second counts collisions between
+distinct leader supports, and Theorem~\ref{thm:defect} is an exact
+leader-collision remainder identity after prescribed directions are removed.
+In particular, Corollary~\ref{cor:arbitrary-holes} is also a length
+obstruction for projective codimension-three MDS codes whose distance-three
+syndrome directions are confined to the prescribed projective set.  This is
+a reformulation of the geometric theorem, not a claim that the arc--MDS or
+deep-hole dictionaries are new.
 
 \section{Specialization to a conic}
 \label{sec:conic}
@@ -699,6 +769,47 @@ their span.  In particular, for the full degree-$d$ system it is enough to
 exhibit $\binom{d+2}{2}$ uncovered points whose Veronese evaluation matrix is
 invertible.  This formulation is not specific to conics.
 
+The following sharp form is useful when a zero locus must avoid several
+selected points simultaneously.  The vector-space covering threshold is
+classical; see, for example, Khare~\cite{Khare2009}.
+
+\begin{proposition}[Finite-field evaluation dichotomy]
+\label{prop:evaluation-dichotomy}
+Let $W$ be a finite-dimensional vector space over $\F_q$, let
+$\nu:X\to W$ be any feature map, and let $U,A\subseteq X$ be finite with
+$|A|\le q$.  There is a linear form $f\in W^*$ such that
+\[
+ f(\nu(u))=0\quad(u\in U),\qquad
+ f\ne0,\qquad f(\nu(a))\ne0\quad(a\in A)
+\]
+if and only if
+\[
+ \langle\nu(U)\rangle\ne W
+ \quad\hbox{and}\quad
+ \nu(a)\notin\langle\nu(U)\rangle\quad(a\in A).
+\]
+The uniform threshold is sharp: $q+1$ distinct hyperplanes through a common
+codimension-two subspace can cover $W$.
+\end{proposition}
+
+\begin{proof}
+Put $S=\langle\nu(U)\rangle$.  Necessity follows by applying $f$ to the
+stated span relations.  Conversely, $S\ne W$ makes the annihilator
+$S^\perp\subseteq W^*$ nonzero.  For each $a\in A$, the condition
+$\nu(a)\notin S$ says that evaluation at $\nu(a)$ cuts out a proper
+hyperplane of $S^\perp$.  At most $q$ proper hyperplanes cannot cover a
+nonzero vector space over $\F_q$: their union has size at most
+$1+q(|S^\perp|/q-1)<|S^\perp|$.  Any form outside their union has the
+required properties.  For sharpness, quotient by a common codimension-two
+subspace and use all $q+1$ lines in $\F_q^2$.
+\end{proof}
+
+Taking $\nu$ to be the degree-$d$ Veronese map gives the same exact
+dichotomy for homogeneous degree-$d$ forms.  Thus
+Lemma~\ref{lem:evaluation-obstruction} is the one-selected-point exclusion
+mechanism, while Proposition~\ref{prop:evaluation-dichotomy} determines
+exactly when a single form can avoid as many as $q$ selected points.
+
 \begin{proposition}\label{prop:small-values}
 For the standard conic
 \[
@@ -829,6 +940,68 @@ $i=1,2,3$, while the two moment equations give
 \]
 Consequently $(N_1,N_2,N_3)=(90,15,10)$.
 
+\begin{proposition}[The $q=11$ code and extension spectrum]
+\label{prop:q11-code}
+Let $A$ be the six-point witness in Appendix~\ref{app:witnesses}, and let
+$C_A$ be its parity-check code.  Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+ \item $C_A$ is a projectively non-GRS $[6,3,4]_{11}$ MDS code of covering
+       radius three, and its projective deep-hole syndrome locus is exactly
+       the twelve-point conic $\cC$;
+ \item the affine cosets of distances $0,1,2,3$ number
+       $(1,60,1150,120)$, and the distance-two cosets split as
+       $(900,150,100)$ according as they have one, two, or three
+       minimum-weight leaders;
+ \item the simultaneous one-column MDS extensions form the independence
+       complex of the icosahedral graph, with independence polynomial
+       \[
+        1+12t+36t^2+20t^3;
+       \]
+       exactly six two-column and twenty three-column extensions are
+       maximal, giving six complete eight-arcs and twenty complete nine-arcs
+       containing the fixed seed, and there is no ten-arc extension; and
+ \item each witness column colours five pairwise disjoint edges of the
+       icosahedron, missing an antipodal pair, and the six colour classes
+       partition its thirty edges.  Adding the six antipodal edges turns
+       them into six perfect matchings of the augmented graph.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Every witness triple has nonzero determinant and the six columns span
+$\F_{11}^3$, giving the MDS parameters.  The $6\times6$ evaluation matrix
+of the quadratic monomials
+\[
+ X^2,\ XY,\ XZ,\ Y^2,\ YZ,\ Z^2
+\]
+is nonsingular, so no conic contains all six
+projective columns; hence the code is not projectively GRS.  Direct finite
+arithmetic gives the secant-index spectrum
+\[
+ 0:12,\qquad 1:90,\qquad 2:15,\qquad 3:10,
+\]
+where index zero is precisely the conic.  Multiplying each nonzero
+projective direction by its ten affine scalars and applying
+Proposition~\ref{prop:syndrome-dictionary} gives the claimed coset counts
+and covering radius.
+
+For simultaneous extensions, two conic columns conflict exactly when their
+chord contains a witness column.  No three conic columns are collinear, so
+there is no additional triple obstruction and valid extension sets are
+exactly graph-independent sets.  Exhausting the $2^{12}$ subsets gives the
+displayed polynomial and maximal-set counts.  The same determinant table
+partitions the thirty conflict edges into the six stated matchings.  All
+these finite assertions are independently reproduced by the supplementary
+Python and C++ checkers and kernel-checked in the companion Lean module.
+\end{proof}
+
+The six-set is a classical Clebsch hexagon with icosahedral $A_5$ symmetry;
+this identification and the associated orbit geometry belong to prior art,
+not to the proposition's novelty posture~\cite{Dye1991,StormeVanMaldeghem1995}.
+The exact conjunction of the relative-conic deep-hole locus, refined coset
+counts, and extension polynomial was not located in the bounded search, so
+we report it only as a checked synthesis rather than a priority claim.
+
 \begin{remark}[Auxiliary residual-game structure]
 There is also a game-theoretic consequence of this exceptional row, not used
 in any bound above.  After the six witness points are occupied, all twelve
@@ -867,6 +1040,29 @@ Its SHA-256 digest is
 The verifier is deliberately simpler than a search program: it certifies the
 listed upper-bound witnesses but makes no claim about search completeness.
 
+Two further implementations independently regenerate
+Proposition~\ref{prop:q11-code}.  Their separately written source files are
+\begin{center}
+\texttt{check\_q11\_structure.py},\qquad
+\texttt{check\_q11\_structure.cpp}.
+\end{center}
+Their SHA-256 digests are
+\begin{center}\scriptsize
+\texttt{0abe909c9aadce0db4c75f296c8de25e929dd1065c906996da8dec017e534d69},\\
+\texttt{1753674172d48f1d056d350e30baa9eb67de0810c84a96da0440947768ae041c}.
+\end{center}
+They agree on the projective, syndrome, chord, and group-action data.  Both
+include transformed-coordinate invariance checks; the adversarial controls
+replace one witness point and mutate a group generator, respectively, and
+reject the exceptional conclusions.  The small-field hyperplane checker
+\texttt{check\_evaluation\_dichotomy.py}, with digest
+\begin{center}
+\texttt{6ed309bd2461ce9998cbd3bcaa5396379e6973b7503ce2dcdfb32c9806386566},
+\end{center}
+exhausts every family of at most $q$ projective hyperplanes for
+$q=2,3,5$ and dimensions one through three, and checks the sharp $q+1$
+plane cover.
+
 The separate exact-classification generator
 \texttt{search\_rhoc16.cpp} has SHA-256 digest
 \begin{center}
@@ -880,7 +1076,11 @@ The generator emits local Lean certificates; its own assertions and
 canonical labels are not part of the trusted proof boundary.
 
 The companion Lean library \texttt{lean/RelativeConicArcs/} formalizes the
-incidence, defect, conic, asymptotic, averaging, and nucleus arguments.  Its
+incidence, defect, conic, asymptotic, averaging, nucleus, evaluation-dichotomy,
+syndrome, and coding arguments.  The downstream \texttt{Q11Coding} module
+kernel-checks the exact code parameters, covering radius, deep-hole locus,
+leader distributions, quadratic obstruction, chord partition, and extension
+complex.  Its
 generic Boolean checker inspects conic disjointness, the arc condition, and
 coverage of the canonical projective representatives
 $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a proved normalization and soundness
@@ -1011,6 +1211,20 @@ $\PG(2,q)$ and extendability of Reed--Solomon codes,
 101--115.
 \newblock doi:10.1134/S0032946018020011.
 
+\bibitem{DavydovEtAl2021}
+A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
+\newblock On the weight distribution of the cosets of MDS codes,
+\newblock \emph{Advances in Mathematics of Communications}, advance
+publication (2021).
+\newblock doi:10.3934/amc.2021042.
+
+\bibitem{Dye1991}
+R.~H. Dye,
+\newblock Hexagons, conics, $A_5$ and $\operatorname{PSL}_2(K)$,
+\newblock \emph{Journal of the London Mathematical Society} (2)
+\textbf{44} (1991), 270--286.
+\newblock doi:10.1112/jlms/s2-44.2.270.
+
 \bibitem{Glynn1994}
 D.~G. Glynn,
 \newblock On the construction of arcs using quadrics,
@@ -1028,6 +1242,19 @@ J.~H.~Kim and V.~H.~Vu,
 \newblock \emph{Combinatorica} \textbf{23} (2003), 311--363.
 \newblock doi:10.1007/s00493-003-0024-1.
 
+\bibitem{Kaipa2017}
+K.~Kaipa,
+\newblock Deep holes and MDS extensions of Reed--Solomon codes,
+\newblock \emph{IEEE Transactions on Information Theory} \textbf{63}
+(2017), 4940--4948.
+
+\bibitem{Khare2009}
+A.~Khare,
+\newblock Vector spaces as unions of proper subspaces,
+\newblock \emph{Linear Algebra and its Applications} \textbf{431} (2009),
+1681--1686.
+\newblock doi:10.1016/j.laa.2009.06.001.
+
 \bibitem{Nagy2018}
 Z.~L.~Nagy,
 \newblock Saturating sets in projective planes and hypergraph covers,
@@ -1038,6 +1265,13 @@ Z.~L.~Nagy,
 S.-L. Ng and P.~R. Wild,
 \newblock On $k$-arcs covering a line in finite projective planes,
 \newblock \emph{Ars Combinatoria} \textbf{58} (2001), 289--300.
+
+\bibitem{StormeVanMaldeghem1995}
+L.~Storme and H.~Van Maldeghem,
+\newblock Primitive arcs in $\PG(2,q)$,
+\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{69}
+(1995), 200--216.
+\newblock doi:10.1016/0097-3165(95)90051-9.
 
 \end{thebibliography}
 
