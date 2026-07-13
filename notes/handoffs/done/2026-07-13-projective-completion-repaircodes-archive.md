@@ -87,3 +87,19 @@ The verifier also passed coordinate conjugation, deletion back to the affine see
 mutation rejection, and a nonduplicate spectrum-changing mutation. The relevant forbidden-token
 scan (`sorry`, `admit`, `native_decide`, `unsafe`) and `git diff --check` were empty. Printed axiom
 reports contain only `propext`, `Classical.choice`, and `Quot.sound`.
+
+## 2026-07-13 — C112 projective-boundary circuit slice
+
+Added `FiniteGeom.ProjectiveAxisTwistedCubicCircuits`. For distinct finite parameters `s,t`, it
+proves directly that the family consisting of cubic `s`, cubic `t`, cubic infinity, and the finite
+axis point `s+t` is dependent, that deleting any member leaves an independent triple, and that no
+other normalized axis point makes the four-family dependent. This closes the circuit case absent
+from the affine module; it does not yet assert completeness of either radius-three repair clutter.
+
+Focused validation passes, and both printed headlines use only `propext`, `Classical.choice`, and
+`Quot.sound`:
+
+```text
+choom -n 1000 -- nix develop --command lake env lean \
+  FiniteGeom/ProjectiveAxisTwistedCubicCircuits.lean
+```

@@ -1,5 +1,6 @@
 import RepairCodes.AxisTwistedCubic
 import FiniteGeom.ProjectiveAxisTwistedCubic
+import FiniteGeom.ProjectiveAxisTwistedCubicCircuits
 
 /-!
 # Code and dual-distance layer for the projectively completed cubic–axis seed

@@ -48,6 +48,11 @@ group, represented in Lean by `zeroSumCapNumber`.
   printed headline has exactly the standard axiom profile. The independent verifier passes at
   q=3,9,27 with coordinate conjugation, affine deletion, duplicate rejection, and a nonduplicate
   spectrum-changing mutation. The forbidden-token and whitespace scans pass.
+- C112 has started with the projective-boundary circuit hinge:
+  `FiniteGeom/ProjectiveAxisTwistedCubicCircuits.lean` proves that two distinct finite cubic
+  points `s,t`, cubic infinity, and axis point `s+t` form a four-circuit, and proves uniqueness of
+  that normalized axis completion. The all-finite completion theorem remains the existing
+  determinant result; the complete repair-clutter classification is still open.
 
 ## Mandatory xhigh review checkpoints
 
