@@ -14,9 +14,8 @@ algebra is also landed: axis triples are circuits; the three-cubic/one-axis dete
 projective completion are exact; all other mixed triples and the two-cubic/two-axis four-family are
 independent. Those circuits now feed the natural-index code-derived repair hypergraph end to end:
 axis coordinates have explicit two-helper edges, cubic coordinates have explicit three-helper
-edges, and all-symbol locality at most three is Lean-proved. The remaining uniform-family lead is
-the arbitrary-coordinate classification needed for exact locality and the per-orbit `ν`/`τ`
-formulas, hence `τ>ν` for `q≥9`.
+edges, and exact locality two/three (hence all-symbol locality three) is Lean-proved. The remaining
+uniform-family lead is the per-orbit `ν`/`τ` formulas, hence `τ>ν` for `q≥9`.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).
 **Scope**: formalize the items tagged `[PROVED]` / "Lean-proved" across
@@ -211,7 +210,7 @@ deep/imported inputs enter as named hypotheses, never global axioms (decision 3)
 | `RepairCodes/OuterDual.lean` | coordinate-free outer dual `functionalDual O ≤ (ι → V*)`, `HasFunctionalDualDistanceAtLeast`, concatenation orthogonality, direct `blockFunctional_mem_functionalDual`, and `blockFunctional_outerAlternative`. This proves the former `houter` obligation from definitions; no imported trace/decomposition axiom. |
 | `RepairCodes/Q9Seed.lean` | real inner seed: full `[10,4,6]₉`, `d(C₀⊥)=4`, and block-local transfer; concrete 3-uniform `q9AxisRepairHypergraph`; generalized four-column determinant; exact edge characterization as the distinct zero-sum triples in `𝔽₉`. |
 | `RepairCodes/Q9Affine.lean` | additive-equivalence transport for zero-sum triple hypergraphs; basis equivalence `𝔽₉ ≃ (Fin 2 → ZMod 3)`; exact embedded identification of the actual q9 repair hypergraph; final code-derived `matchingNumber=3`, `transversalNumber=5` (no `native_decide`). |
-| `RepairCodes/AxisTwistedCubic.lean` | natural-index generator/row-code presentation of `S_q`; circuit-local bridge into the complete repair hypergraph; explicit two-helper axis repairs and three-helper cubic repairs; `axisTwistedCubic_allSymbol_locality_three` over every finite characteristic-three field. |
+| `RepairCodes/AxisTwistedCubic.lean` | natural-index generator/row-code presentation of `S_q`; circuit-local bridge into the complete repair hypergraph; arbitrary-set classification through size three; exact locality two on the axis orbit and three on the cubic orbit; all-symbol locality three over every finite characteristic-three field. |
 
 Both Singleton directions are now unified in a worked family: `singleton_bound` (general upper),
 `rsCode_minDist_ge` (RS lower), `rsCode_isMDS` (equality). This is the MDS baseline the sweep's
@@ -228,16 +227,15 @@ proves the functional outer-dual membership directly (archive companion has the 
 code-derived strict `τ>ν` instance. The separate CompletionCore bridge from surviving circuits to
 matroid independence remains in Phase 2.
 
-1. **Phase 1 step 4, repair half:** the code-parameter and locality-upper-bound halves are closed by
+1. **Phase 1 step 4, repair half:** the code-parameter and exact-locality halves are closed by
    `FiniteGeom/AxisTwistedCubic.lean`: explicit `S_q`, exact maximum section `q+2`, dimension `4`,
    and distance `q−1`, and by `RepairCodes/AxisTwistedCubic.lean`: explicit locality two on the
-   axis orbit, locality three on the cubic orbit, and all-symbol locality at most three, for every
+   axis orbit, locality three on the cubic orbit, and all-symbol locality three, for every
    finite characteristic-three field. The algebraic small-circuit
    classification is closed in `FiniteGeom/AxisTwistedCubicCircuits.lean`, including the stronger
-   arbitrary-axis determinant equation and projective uniqueness. Next package the family-level
-   independence results as an exact classification of arbitrary size-`≤4` coordinate sets and
-   derive the locality lower bounds (hence exact locality two/three) and the per-orbit
-   matching/transversal formulas. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
+   arbitrary-axis determinant equation and projective uniqueness. The remaining step is the exact
+   arbitrary size-four circuit classification needed for the per-orbit matching/transversal
+   formulas. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
 2. **Phase 1 step 5** `[PROVE, conditional]` seed-and-lift; then Phases 2–4 per §4.
 
@@ -259,9 +257,9 @@ explicitly.
   `(s+t+u,st+su+tu)` cannot both vanish for distinct `s,t,u`; hence the completing axis point is
   projectively unique, and the normalized point already present in `S_q` forms a genuine
   four-circuit.
-- **Proved paper-level strengthening:** the complete code-derived repair hypergraph has explicit
-  two-helper edges at every axis coordinate and three-helper edges at every cubic coordinate, so
-  all-symbol locality at most three holds over every finite characteristic-three field, including
+- **Proved paper-level strengthening:** the complete code-derived repair hypergraph has exact
+  locality two at every axis coordinate and exact locality three at every cubic coordinate, so
+  all-symbol locality three holds over every finite characteristic-three field, including
   `q=3`; the paper only needs the `q≥9` range for the strict transversal/matching gap.
 - **Proved reusable extension:** a selected circuit gives a repair edge from its own full-support
   relation, even when smaller circuits elsewhere make the global dual-distance converse unusable.

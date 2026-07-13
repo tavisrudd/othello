@@ -550,3 +550,20 @@ that discharges the transfer interface's finite fields from it:
   all-symbol locality theorem have axiom profile exactly
   `[propext, Classical.choice, Quot.sound]`; the touched source has no `sorry`, `admit`,
   `native_decide`, or custom axiom declaration.
+
+### Handoff Note — 2026-07-12 (uniform exact locality)
+
+- Classified arbitrary distinct triples of `S_q`: every triple containing a cubic coordinate is
+  independent in characteristic three, while the already-proved all-axis triples are circuits.
+  Also packaged nonzero columns, pairwise independence, and independence of every selected family
+  of size at most two.
+- Applied the arbitrary-set statements to code-derived repair edges. A cubic repair with at most
+  two helpers would force a dependent selected family of at most three columns containing a cubic;
+  an axis repair with at most one helper would force a dependent family of at most two columns.
+  Both contradict the classification.
+- Combined with the explicit repair edges to prove `cubicCoordinate_exact_locality_three` and
+  `axisCoordinate_exact_locality_two`. Thus exact all-symbol locality is now closed for every
+  finite characteristic-three field; only the size-four/per-orbit extremal analysis remains in
+  Phase 1 step 4.
+- Validation: the full `RepairCodes` target builds without warnings. Both exact-locality headline
+  theorems have axiom profile exactly `[propext, Classical.choice, Quot.sound]`.

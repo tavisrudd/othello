@@ -106,6 +106,225 @@ private noncomputable def finEraseEquiv {n : ℕ} (j : Fin (n + 1)) :
   · rw [Fintype.card_subtype_compl (fun i : Fin (n + 1) => i = j)]
     simp
 
+private def fin3Cycle : Equiv.Perm (Fin 3) where
+  toFun := ![1, 2, 0]
+  invFun := ![2, 0, 1]
+  left_inv i := by fin_cases i <;> rfl
+  right_inv i := by fin_cases i <;> rfl
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+theorem twoCubicNormalizedAxis_linearIndependent [CharP 𝔽 3]
+    {s t : 𝔽} (y : 𝔽 ⊕ Unit) (hst : s ≠ t) :
+    LinearIndependent 𝔽 ![
+      axisTwistedCubicPoints 𝔽 (.inl s), axisTwistedCubicPoints 𝔽 (.inl t),
+      axisTwistedCubicPoints 𝔽 (.inr y)] := by
+  cases y with
+  | inl y =>
+      convert twoCubicAxis_linearIndependent (𝔽 := 𝔽) (s := s) (t := t)
+        (e₁ := 1) (e₂ := y) hst (Or.inl one_ne_zero) using 1
+      funext i
+      fin_cases i <;> simp [twoCubicAxisFamily, twistedCubicAxisVector]
+  | inr y =>
+      convert twoCubicAxis_linearIndependent (𝔽 := 𝔽) (s := s) (t := t)
+        (e₁ := 0) (e₂ := 1) hst (Or.inr one_ne_zero) using 1
+      funext i
+      fin_cases i <;> simp [twoCubicAxisFamily, twistedCubicAxisVector]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+theorem axisTwistedCubicPoints_ne_zero (x : AxisTwistedCubicIndex 𝔽) :
+    axisTwistedCubicPoints 𝔽 x ≠ 0 := by
+  cases x with
+  | inl t =>
+      intro h
+      have h0 := congrFun h 0
+      simp at h0
+  | inr y =>
+      cases y with
+      | inl y =>
+          intro h
+          have h1 := congrFun h 1
+          simp at h1
+      | inr y =>
+          intro h
+          have h2 := congrFun h 2
+          simp at h2
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+theorem cubicAxis_pair_linearIndependent (s : 𝔽) (y : 𝔽 ⊕ Unit) :
+    LinearIndependent 𝔽 ![
+      axisTwistedCubicPoints 𝔽 (.inl s), axisTwistedCubicPoints 𝔽 (.inr y)] := by
+  rw [Fintype.linearIndependent_iff]
+  intro g hrel
+  have h0 := congrFun hrel 0
+  simp [Fin.sum_univ_two] at h0
+  have hg0 : g 0 = 0 := h0
+  cases y with
+  | inl y =>
+      have h1 := congrFun hrel 1
+      simp [Fin.sum_univ_two, hg0] at h1
+      intro i
+      fin_cases i <;> assumption
+  | inr y =>
+      have h2 := congrFun hrel 2
+      simp [Fin.sum_univ_two, hg0] at h2
+      intro i
+      fin_cases i <;> assumption
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Every two distinct columns of `S_q` are independent. -/
+theorem axisTwistedCubic_pair_linearIndependent
+    {u : Fin 2 → AxisTwistedCubicIndex 𝔽} (hu : Function.Injective u) :
+    LinearIndependent 𝔽 (fun i => axisTwistedCubicPoints 𝔽 (u i)) := by
+  have h01 : u 0 ≠ u 1 := hu.ne (by decide)
+  rcases h0 : u 0 with s | y <;> rcases h1 : u 1 with t | z
+  · have hst : s ≠ t := by
+      intro h
+      apply h01
+      rw [h0, h1, h]
+    convert (momentCurve_linearIndependent_of_card_le (n := 4) (v := ![s, t])
+        (by intro i j hij; fin_cases i <;> fin_cases j <;> simp_all)
+        (by decide)) using 1
+    funext i
+    fin_cases i <;> simp [h0, h1]
+  · convert cubicAxis_pair_linearIndependent s z using 1
+    funext i
+    fin_cases i <;> simp [h0, h1]
+  · have hli := cubicAxis_pair_linearIndependent t y
+    have hs0 : Equiv.swap (0 : Fin 2) 1 0 = 1 := by decide
+    have hs1 : Equiv.swap (0 : Fin 2) 1 1 = 0 := by decide
+    exact (linearIndependent_equiv' (Equiv.swap 0 1) (by
+      funext i
+      fin_cases i <;> simp [hs0, hs1, h0, h1])).2 hli
+  · have hyz : y ≠ z := by
+      intro h
+      apply h01
+      rw [h0, h1, h]
+    convert twistedCubicAxis_pair_linearIndependent hyz using 1
+    funext i
+    fin_cases i <;> simp [h0, h1]
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Any three distinct columns containing a cubic column are independent.  Thus the only
+three-circuits of `S_q` are the all-axis triples. -/
+theorem axisTwistedCubic_triple_linearIndependent_of_containsCubic [CharP 𝔽 3]
+    {u : Fin 3 → AxisTwistedCubicIndex 𝔽} (hu : Function.Injective u)
+    (hcubic : ∃ i t, u i = .inl t) :
+    LinearIndependent 𝔽 (fun i => axisTwistedCubicPoints 𝔽 (u i)) := by
+  have h01 : u 0 ≠ u 1 := hu.ne (by decide)
+  have h02 : u 0 ≠ u 2 := hu.ne (by decide)
+  have h12 : u 1 ≠ u 2 := hu.ne (by decide)
+  rcases h0 : u 0 with s | y <;> rcases h1 : u 1 with t | z <;>
+    rcases h2 : u 2 with r | w
+  · let v : Fin 3 → 𝔽 := ![s, t, r]
+    have hv : Function.Injective v := by
+      intro i j hij
+      apply hu
+      fin_cases i <;> fin_cases j <;> simp_all [v]
+    convert twistedCubicTriple_omitAxis_linearIndependent hv using 1
+    funext i
+    fin_cases i <;> simp [v, h0, h1, h2]
+  · have hst : s ≠ t := by
+      intro h
+      apply h01
+      rw [h0, h1, h]
+    have hli := twoCubicNormalizedAxis_linearIndependent w hst
+    convert hli using 1
+    funext i
+    fin_cases i <;> simp [h0, h1, h2]
+  · have hsr : s ≠ r := by
+      intro h
+      apply h02
+      rw [h0, h2, h]
+    have hli := twoCubicNormalizedAxis_linearIndependent z hsr
+    have hs0 : Equiv.swap (1 : Fin 3) 2 0 = 0 := by decide
+    have hs1 : Equiv.swap (1 : Fin 3) 2 1 = 2 := by decide
+    have hs2 : Equiv.swap (1 : Fin 3) 2 2 = 1 := by decide
+    exact (linearIndependent_equiv' (Equiv.swap 1 2) (by
+      funext i
+      fin_cases i <;> simp [hs0, hs1, hs2, h0, h1, h2])).2 hli
+  · have hzw : z ≠ w := by
+      intro h
+      apply h12
+      rw [h1, h2, h]
+    have hli := oneCubicTwoAxis_linearIndependent (𝔽 := 𝔽)
+      (s := s) (y := z) (z := w) hzw
+    convert hli using 1
+    funext i
+    fin_cases i <;> simp [oneCubicTwoAxisFamily, h0, h1, h2]
+  · have htr : t ≠ r := by
+      intro h
+      apply h12
+      rw [h1, h2, h]
+    have hli := twoCubicNormalizedAxis_linearIndependent y htr
+    exact (linearIndependent_equiv' fin3Cycle.symm (by
+      funext i
+      fin_cases i <;> simp [fin3Cycle, h0, h1, h2])).2 hli
+  · have hyw : y ≠ w := by
+      intro h
+      apply h02
+      rw [h0, h2, h]
+    have hli := oneCubicTwoAxis_linearIndependent (𝔽 := 𝔽)
+      (s := t) (y := y) (z := w) hyw
+    have hs0 : Equiv.swap (0 : Fin 3) 1 0 = 1 := by decide
+    have hs1 : Equiv.swap (0 : Fin 3) 1 1 = 0 := by decide
+    have hs2 : Equiv.swap (0 : Fin 3) 1 2 = 2 := by decide
+    exact (linearIndependent_equiv' (Equiv.swap 0 1) (by
+      funext i
+      fin_cases i <;> simp [hs0, hs1, hs2, oneCubicTwoAxisFamily, h0, h1, h2])).2 hli
+  · have hyz : y ≠ z := by
+      intro h
+      apply h01
+      rw [h0, h1, h]
+    have hli := oneCubicTwoAxis_linearIndependent (𝔽 := 𝔽)
+      (s := r) (y := y) (z := z) hyz
+    exact (linearIndependent_equiv' fin3Cycle (by
+      funext i
+      fin_cases i <;> simp [fin3Cycle, oneCubicTwoAxisFamily, h0, h1, h2])).2 hli
+  · obtain ⟨i, t, hi⟩ := hcubic
+    fin_cases i <;> simp_all
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Every nonempty selected family of at most two columns is independent. -/
+theorem axisTwistedCubic_selected_linearIndependent_of_card_le_two
+    {S : Finset (AxisTwistedCubicIndex 𝔽)} (hne : S.Nonempty) (hcard : S.card ≤ 2) :
+    LinearIndependent 𝔽 (fun j : S => axisTwistedCubicPoints 𝔽 j) := by
+  classical
+  have hcases : S.card = 1 ∨ S.card = 2 := by
+    have := Finset.card_pos.mpr hne
+    omega
+  rcases hcases with h1 | h2
+  · let e : Fin 1 ≃ S := (Finset.equivFinOfCardEq h1).symm
+    apply (linearIndependent_equiv e).mp
+    rw [linearIndependent_unique_iff]
+    exact axisTwistedCubicPoints_ne_zero ((e 0 : S) : AxisTwistedCubicIndex 𝔽)
+  · let e : Fin 2 ≃ S := (Finset.equivFinOfCardEq h2).symm
+    have hemb : Function.Injective (fun i : Fin 2 => ((e i : S) : AxisTwistedCubicIndex 𝔽)) := by
+      intro i j hij
+      exact e.injective (Subtype.ext hij)
+    apply (linearIndependent_equiv e).mp
+    exact axisTwistedCubic_pair_linearIndependent hemb
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Every selected family of at most three columns containing a cubic coordinate is independent. -/
+theorem axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+    [CharP 𝔽 3] {S : Finset (AxisTwistedCubicIndex 𝔽)} (hcard : S.card ≤ 3)
+    (hcubic : ∃ t, (.inl t : AxisTwistedCubicIndex 𝔽) ∈ S) :
+    LinearIndependent 𝔽 (fun j : S => axisTwistedCubicPoints 𝔽 j) := by
+  classical
+  obtain ⟨t, ht⟩ := hcubic
+  by_cases hle : S.card ≤ 2
+  · exact axisTwistedCubic_selected_linearIndependent_of_card_le_two ⟨.inl t, ht⟩ hle
+  · have h3 : S.card = 3 := by omega
+    let e : Fin 3 ≃ S := (Finset.equivFinOfCardEq h3).symm
+    have hemb : Function.Injective (fun i : Fin 3 => ((e i : S) : AxisTwistedCubicIndex 𝔽)) := by
+      intro i j hij
+      exact e.injective (Subtype.ext hij)
+    have hecubic : ∃ i t, ((e i : S) : AxisTwistedCubicIndex 𝔽) = .inl t := by
+      let p : S := ⟨.inl t, ht⟩
+      exact ⟨e.symm p, t, congrArg Subtype.val (e.apply_symm_apply p)⟩
+    apply (linearIndependent_equiv e).mp
+    exact axisTwistedCubic_triple_linearIndependent_of_containsCubic hemb hecubic
+
 /-- Complete bounded-radius repair hypergraph at a coordinate of `S_q`. -/
 noncomputable def axisTwistedCubicRepairHypergraph
     (x : AxisTwistedCubicIndex 𝔽) (r : ℕ) :
@@ -119,6 +338,36 @@ theorem axisTwistedCubicRepair_edge_dependent {x : AxisTwistedCubicIndex 𝔽} {
     ¬ LinearIndependent 𝔽
       (fun j : ↥(insert x R) => axisTwistedCubicPoints 𝔽 j) := by
   exact repair_edge_columns_dependent (G := axisTwistedCubicGenerator) hR
+
+/-- No cubic coordinate has a repair edge with at most two helpers. -/
+theorem cubicCoordinate_no_repairEdge_radius_two [CharP 𝔽 3] (x : 𝔽)
+    (R : Finset (AxisTwistedCubicIndex 𝔽)) :
+    R ∉ axisTwistedCubicRepairHypergraph (.inl x) 2 := by
+  intro hR
+  apply axisTwistedCubicRepair_edge_dependent hR
+  obtain ⟨hsub, hcard, -⟩ := mem_repairHypergraph.mp hR
+  have hxR : (.inl x : AxisTwistedCubicIndex 𝔽) ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  apply axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic
+  · rw [Finset.card_insert_of_notMem hxR]
+    omega
+  · exact ⟨x, Finset.mem_insert_self _ _⟩
+
+/-- No axis coordinate has a repair edge with at most one helper. -/
+theorem axisCoordinate_no_repairEdge_radius_one (y : 𝔽 ⊕ Unit)
+    (R : Finset (AxisTwistedCubicIndex 𝔽)) :
+    R ∉ axisTwistedCubicRepairHypergraph (.inr y) 1 := by
+  intro hR
+  apply axisTwistedCubicRepair_edge_dependent hR
+  obtain ⟨hsub, hcard, -⟩ := mem_repairHypergraph.mp hR
+  have hyR : (.inr y : AxisTwistedCubicIndex 𝔽) ∉ R := by
+    intro hy
+    exact (Finset.mem_erase.mp (hsub hy)).1 rfl
+  apply axisTwistedCubic_selected_linearIndependent_of_card_le_two
+  · exact ⟨.inr y, Finset.mem_insert_self _ _⟩
+  · rw [Finset.card_insert_of_notMem hyR]
+    omega
 
 /-- Every target-plus-helper circuit is an actual repair edge, without a false global
 `d(C⊥)≥r+1` requirement.  This is the bridge needed for cubic four-circuits even though the same
@@ -327,6 +576,18 @@ theorem axisCoordinate_has_repairEdge (y : 𝔽 ⊕ Unit) :
   refine ⟨axisTripleRepairHelpers w, ?_⟩
   simpa [w] using axisTripleRepairHelpers_mem (axisCoordinateTriple_injective y)
 
+/-- Cubic coordinates have exact locality three. -/
+theorem cubicCoordinate_exact_locality_three [CharP 𝔽 3] (x : 𝔽) :
+    (∃ R, R ∈ axisTwistedCubicRepairHypergraph (.inl x) 3) ∧
+      (∀ R, R ∉ axisTwistedCubicRepairHypergraph (.inl x) 2) :=
+  ⟨cubicCoordinate_has_repairEdge x, cubicCoordinate_no_repairEdge_radius_two x⟩
+
+/-- Axis coordinates have exact locality two. -/
+theorem axisCoordinate_exact_locality_two (y : 𝔽 ⊕ Unit) :
+    (∃ R, R ∈ axisTwistedCubicRepairHypergraph (.inr y) 2) ∧
+      (∀ R, R ∉ axisTwistedCubicRepairHypergraph (.inr y) 1) :=
+  ⟨axisCoordinate_has_repairEdge y, axisCoordinate_no_repairEdge_radius_one y⟩
+
 /-- The uniform twisted-cubic–axis code has all-symbol locality at most three.  Cubic coordinates
 use the preceding four-circuits; axis coordinates already have locality two. -/
 theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
@@ -343,5 +604,7 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms cubicTripleRepairHelpers_mem
 #print axioms axisTripleRepairHelpers_mem
 #print axioms axisTwistedCubic_allSymbol_locality_three
+#print axioms cubicCoordinate_exact_locality_three
+#print axioms axisCoordinate_exact_locality_two
 
 end RepairCodes
