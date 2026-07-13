@@ -73,6 +73,17 @@ asymptotic corollary's axiom report contains exactly this import plus the standa
 The PGL(2,9) orbit description of the ten-point axis is computational/literature provenance only.
 It is not used by the formal construction, which defines the full projective axis directly.
 
+## Projectively completed seed
+
+`FiniteGeom.ProjectiveAxisTwistedCubic` adds the projective cubic point at infinity and proves the
+completed system has parameters `[2q+2,4,q]_q` over every finite characteristic-three field. Its
+plane-section proof treats cubic infinity explicitly and proves that every nonzero plane containing
+the axis meets the full cubic in exactly one point. `RepairCodes.ProjectiveAxisTwistedCubic` proves
+that distinct columns are pairwise linearly independent and that the completed row code has exact
+global dual distance three, witnessed by an explicit three-axis-point word. These headlines have
+only the standard logical axiom profile. Exact repair-port formulas and the candidate five-weight
+distribution are not part of this proved seed theorem.
+
 ## Reproduction
 
 From `lean/`:

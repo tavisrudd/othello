@@ -13,6 +13,7 @@ import FiniteGeom.AxisTwistedCubicCircuits
 import RepairCodes.Transfer
 import RepairCodes.AxisTwistedCubic
 import RepairCodes.AxisTwistedCubicInvariants
+import RepairCodes.ProjectiveAxisTwistedCubic
 import RepairCodes.Q9Seed
 import RepairCodes.Q9Affine
 import RepairCodes.Q9Uniform
