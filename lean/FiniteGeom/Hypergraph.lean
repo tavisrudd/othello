@@ -79,6 +79,15 @@ edges are nonempty for the matching statement. -/
 def minimalHyperedges (H : Finset (Finset V)) : Finset (Finset V) :=
   H.filter fun A => ∀ B ∈ H, B ⊆ A → A ⊆ B
 
+/-- The two-element subsets of a finite type, viewed as the edge set of its complete graph. -/
+def completePairHypergraph (V : Type*) [Fintype V] [DecidableEq V] :
+    Finset (Finset V) :=
+  univ.powersetCard 2
+
+@[simp] theorem mem_completePairHypergraph {E : Finset V} :
+    E ∈ completePairHypergraph V ↔ E.card = 2 := by
+  simp [completePairHypergraph]
+
 theorem mem_minimalHyperedges {H : Finset (Finset V)} {A : Finset V} :
     A ∈ minimalHyperedges H ↔ A ∈ H ∧ ∀ B ∈ H, B ⊆ A → A ⊆ B := by
   simp [minimalHyperedges]
@@ -151,6 +160,17 @@ theorem IsMatching.embedHypergraph {W : Type*} [Fintype W] [DecidableEq W]
     apply h.2 ha0 hb0
     intro h0
     exact hab (congrArg (fun s => s.map e) h0)
+
+omit [Fintype V] in
+theorem IsTransversal.embedHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ↪ W) {H : Finset (Finset V)} {T : Finset V} (h : IsTransversal H T) :
+    IsTransversal (embedHypergraph e H) (T.map e) := by
+  intro E hE
+  obtain ⟨E₀, hE₀, rfl⟩ := Finset.mem_image.mp hE
+  obtain ⟨v, hv⟩ := h hE₀
+  have hv' := Finset.mem_inter.mp hv
+  exact ⟨e v, Finset.mem_inter.mpr ⟨Finset.mem_map.mpr ⟨v, hv'.1, rfl⟩,
+    Finset.mem_map.mpr ⟨v, hv'.2, rfl⟩⟩⟩
 
 omit [Fintype V] in
 theorem IsTransversal.relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
@@ -228,6 +248,17 @@ theorem exists_matching_card_eq_matchingNumber (H : Finset (Finset V)) :
   refine ⟨M, hM, ?_⟩
   unfold matchingNumber
   exact hMcard
+
+/-- The transversal number is attained when every edge is nonempty. -/
+theorem exists_transversal_card_eq_transversalNumber (H : Finset (Finset V))
+    (hne : ∀ E ∈ H, E.Nonempty) :
+    ∃ T, IsTransversal H T ∧ T.card = transversalNumber H := by
+  have hset : ({n | ∃ T, IsTransversal H T ∧ T.card = n} : Set ℕ).Nonempty :=
+    ⟨Fintype.card V, univ, fun E hE => by rw [univ_inter]; exact hne E hE, card_univ⟩
+  obtain ⟨T, hT, hTcard⟩ := Nat.sInf_mem hset
+  refine ⟨T, hT, ?_⟩
+  unfold transversalNumber
+  exact hTcard
 
 /-- Matching number is invariant under a bijective relabeling of vertices. -/
 theorem matchingNumber_relabelHypergraph {W : Type*} [Fintype W] [DecidableEq W]
@@ -429,6 +460,288 @@ with attainment (`Nat.sInf_mem`) this pins `transversalNumber` to the intended
 theorem transversalNumber_le_card {H : Finset (Finset V)} {T : Finset V}
     (hT : IsTransversal H T) : transversalNumber H ≤ T.card :=
   Nat.sInf_le ⟨T, hT, rfl⟩
+
+/-- Embedding a nonempty-edge hypergraph into a larger ground type preserves transversal number. -/
+theorem transversalNumber_embedHypergraph {W : Type*} [Fintype W] [DecidableEq W]
+    (e : V ↪ W) (H : Finset (Finset V)) (hne : ∀ E ∈ H, E.Nonempty) :
+    transversalNumber (embedHypergraph e H) = transversalNumber H := by
+  classical
+  apply le_antisymm
+  · obtain ⟨T, hT, hTcard⟩ := exists_transversal_card_eq_transversalNumber H hne
+    rw [← hTcard, ← Finset.card_map e]
+    exact transversalNumber_le_card (hT.embedHypergraph e)
+  · apply le_transversalNumber_of_forall
+    · exact ⟨univ.map e, (show IsTransversal H univ from fun E hE => by
+        rw [Finset.univ_inter]
+        exact hne E hE).embedHypergraph e⟩
+    · intro T hT
+      let T₀ : Finset V := univ.filter fun v => e v ∈ T
+      have hT₀ : IsTransversal H T₀ := by
+        intro E hE
+        have hmapE : E.map e ∈ embedHypergraph e H :=
+          Finset.mem_image.mpr ⟨E, hE, rfl⟩
+        obtain ⟨w, hw⟩ := hT hmapE
+        have hw' := Finset.mem_inter.mp hw
+        obtain ⟨v, hvE, hvw⟩ := Finset.mem_map.mp hw'.2
+        subst w
+        exact ⟨v, Finset.mem_inter.mpr ⟨by simp [T₀, hw'.1], hvE⟩⟩
+      have hmapSub : T₀.map e ⊆ T := by
+        intro w hw
+        obtain ⟨v, hv, rfl⟩ := Finset.mem_map.mp hw
+        exact (Finset.mem_filter.mp hv).2
+      exact (transversalNumber_le_card hT₀).trans <| by
+        rw [← Finset.card_map e]
+        exact Finset.card_le_card hmapSub
+
+/-- The complete graph on a finite type has matching number `⌊|V|/2⌋`. -/
+theorem matchingNumber_completePairHypergraph :
+    matchingNumber (completePairHypergraph V) = Fintype.card V / 2 := by
+  classical
+  apply le_antisymm
+  · apply matchingNumber_le_of_forall
+    intro M hM
+    have hpairwise : (M : Set (Finset V)).PairwiseDisjoint id := by
+      intro A hA B hB hAB
+      change Disjoint A B
+      exact hM.2 hA hB hAB
+    have hcard : (M.biUnion id).card = 2 * M.card := by
+      rw [Finset.card_biUnion hpairwise]
+      calc
+        (∑ E ∈ M, E.card) = ∑ _E ∈ M, 2 := by
+          apply Finset.sum_congr rfl
+          intro E hEM
+          exact mem_completePairHypergraph.mp (hM.1 hEM)
+        _ = 2 * M.card := by simp [Nat.mul_comm]
+    have hle : (M.biUnion id).card ≤ Fintype.card V := by
+      simpa using Finset.card_le_card (Finset.subset_univ (M.biUnion id))
+    rw [hcard] at hle
+    omega
+  · let n := Fintype.card V
+    let equiv : Fin n ≃ V := (Fintype.equivFin V).symm
+    let pair : Fin (n / 2) → Finset V := fun i =>
+      {equiv ⟨2 * i.1, by simp only [n]; omega⟩,
+        equiv ⟨2 * i.1 + 1, by simp only [n]; omega⟩}
+    let M : Finset (Finset V) := univ.image pair
+    have hpairCard (i : Fin (n / 2)) : (pair i).card = 2 := by
+      simp only [pair]
+      rw [Finset.card_pair]
+      intro h
+      have h' := equiv.injective h
+      have hval := congrArg Fin.val h'
+      change 2 * i.1 = 2 * i.1 + 1 at hval
+      omega
+    have hpairInj : Function.Injective pair := by
+      intro i j hij
+      have hmem : equiv ⟨2 * i.1, by simp only [n]; omega⟩ ∈ pair j := by
+        rw [← hij]
+        simp [pair]
+      simp only [pair, Finset.mem_insert, Finset.mem_singleton] at hmem
+      rcases hmem with hEven | hOdd
+      · have hval := congrArg Fin.val (equiv.injective hEven)
+        change 2 * i.1 = 2 * j.1 at hval
+        apply Fin.ext
+        omega
+      · have hval := congrArg Fin.val (equiv.injective hOdd)
+        change 2 * i.1 = 2 * j.1 + 1 at hval
+        omega
+    have hMcard : M.card = n / 2 := by
+      rw [show M = univ.image pair by rfl, Finset.card_image_of_injective _ hpairInj]
+      simp
+    have hM : IsMatching (completePairHypergraph V) M := by
+      refine ⟨?_, ?_⟩
+      · intro E hEM
+        obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp hEM
+        exact mem_completePairHypergraph.mpr (hpairCard i)
+      · intro A hAM B hBM hAB
+        obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp hAM
+        obtain ⟨j, -, rfl⟩ := Finset.mem_image.mp hBM
+        have hij : i ≠ j := fun h => hAB (congrArg pair h)
+        rw [Finset.disjoint_left]
+        intro v hvi hvj
+        simp only [pair, Finset.mem_insert, Finset.mem_singleton] at hvi hvj
+        rcases hvi with hi0 | hi1 <;> rcases hvj with hj0 | hj1
+        · have hval := congrArg Fin.val (equiv.injective (hi0.symm.trans hj0))
+          change 2 * i.1 = 2 * j.1 at hval
+          exact hij (Fin.ext (by omega))
+        · have hval := congrArg Fin.val (equiv.injective (hi0.symm.trans hj1))
+          change 2 * i.1 = 2 * j.1 + 1 at hval
+          omega
+        · have hval := congrArg Fin.val (equiv.injective (hi1.symm.trans hj0))
+          change 2 * i.1 + 1 = 2 * j.1 at hval
+          omega
+        · have hval := congrArg Fin.val (equiv.injective (hi1.symm.trans hj1))
+          change 2 * i.1 + 1 = 2 * j.1 + 1 at hval
+          exact hij (Fin.ext (by omega))
+    rw [← hMcard]
+    exact card_le_matchingNumber hM
+
+/-- The complete graph on a nonempty finite type has transversal number `|V|-1`. -/
+theorem transversalNumber_completePairHypergraph [Nonempty V] :
+    transversalNumber (completePairHypergraph V) = Fintype.card V - 1 := by
+  classical
+  let v₀ : V := Classical.choice inferInstance
+  have hupper : IsTransversal (completePairHypergraph V) (univ.erase v₀) := by
+    intro E hE
+    have hcard := mem_completePairHypergraph.mp hE
+    by_contra hnone
+    rw [Finset.not_nonempty_iff_eq_empty] at hnone
+    have hdisj : Disjoint (univ.erase v₀) E :=
+      Finset.disjoint_iff_inter_eq_empty.mpr hnone
+    have hsub : E ⊆ {v₀} := by
+      intro v hv
+      have hvnot : v ∉ univ.erase v₀ := by
+        intro hv'
+        exact (Finset.disjoint_left.mp hdisj hv') hv
+      simpa using hvnot
+    have := Finset.card_le_card hsub
+    simp at this
+    omega
+  apply le_antisymm
+  · have hle := transversalNumber_le_card hupper
+    simpa using hle
+  · apply le_transversalNumber_of_forall
+    · exact ⟨_, hupper⟩
+    · intro T hT
+      let U := univ \ T
+      have hU : U.card ≤ 1 := by
+        by_contra h
+        have hlt : 1 < U.card := by omega
+        obtain ⟨a, ha, b, hb, hab⟩ := Finset.one_lt_card.mp hlt
+        have hedge : {a, b} ∈ completePairHypergraph V := by
+          apply mem_completePairHypergraph.mpr
+          simp [hab]
+        obtain ⟨v, hv⟩ := hT hedge
+        have hv' := Finset.mem_inter.mp hv
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hv'
+        rcases hv'.2 with rfl | rfl
+        · exact (Finset.mem_sdiff.mp ha).2 hv'.1
+        · exact (Finset.mem_sdiff.mp hb).2 hv'.1
+      have hsplit : T.card + U.card ≥ Fintype.card V := by
+        have hsub : univ ⊆ T ∪ U := by simp [U]
+        have := Finset.card_le_card hsub
+        exact this.trans (Finset.card_union_le T U)
+      omega
+
+omit [Fintype V] in
+/-- Matching numbers add for hypergraphs carried on disjoint vertex grounds. -/
+theorem matchingNumber_union_of_disjoint_vertices (H K : Finset (Finset V))
+    (hneH : ∀ E ∈ H, E.Nonempty) (_hneK : ∀ E ∈ K, E.Nonempty)
+    (hground : Disjoint (H.biUnion id) (K.biUnion id)) :
+    matchingNumber (H ∪ K) = matchingNumber H + matchingNumber K := by
+  classical
+  have hedgeDisjoint : Disjoint H K := by
+    rw [Finset.disjoint_left]
+    intro E hEH hEK
+    obtain ⟨v, hvE⟩ := hneH E hEH
+    exact (Finset.disjoint_left.mp hground
+      (Finset.subset_biUnion_of_mem id hEH hvE))
+      (Finset.subset_biUnion_of_mem id hEK hvE)
+  apply le_antisymm
+  · obtain ⟨M, hM, hMcard⟩ := exists_matching_card_eq_matchingNumber (H ∪ K)
+    let MH := M.filter fun E => E ∈ H
+    let MK := M.filter fun E => E ∈ K
+    have hMsplit : M = MH ∪ MK := by
+      ext E
+      simp only [MH, MK, Finset.mem_union, Finset.mem_filter]
+      constructor
+      · intro hEM
+        rcases Finset.mem_union.mp (hM.1 hEM) with hEH | hEK
+        · exact Or.inl ⟨hEM, hEH⟩
+        · exact Or.inr ⟨hEM, hEK⟩
+      · rintro (⟨hEM, -⟩ | ⟨hEM, -⟩) <;> exact hEM
+    have hMHK : Disjoint MH MK := by
+      rw [Finset.disjoint_left]
+      intro E hEH hEK
+      exact Finset.disjoint_left.mp hedgeDisjoint (Finset.mem_filter.mp hEH).2
+        (Finset.mem_filter.mp hEK).2
+    have hMH : IsMatching H MH := by
+      refine ⟨?_, ?_⟩
+      · intro E hE
+        exact (Finset.mem_filter.mp hE).2
+      · intro A hA B hB hAB
+        exact hM.2 (Finset.mem_filter.mp hA).1 (Finset.mem_filter.mp hB).1 hAB
+    have hMK : IsMatching K MK := by
+      refine ⟨?_, ?_⟩
+      · intro E hE
+        exact (Finset.mem_filter.mp hE).2
+      · intro A hA B hB hAB
+        exact hM.2 (Finset.mem_filter.mp hA).1 (Finset.mem_filter.mp hB).1 hAB
+    have hcard : M.card = MH.card + MK.card := by
+      rw [hMsplit, Finset.card_union_of_disjoint hMHK]
+    rw [← hMcard, hcard]
+    exact Nat.add_le_add (card_le_matchingNumber hMH) (card_le_matchingNumber hMK)
+  · obtain ⟨MH, hMH, hMHcard⟩ := exists_matching_card_eq_matchingNumber H
+    obtain ⟨MK, hMK, hMKcard⟩ := exists_matching_card_eq_matchingNumber K
+    have hMHK : Disjoint MH MK := hedgeDisjoint.mono hMH.1 hMK.1
+    have hcross (A : Finset V) (hAH : A ∈ H) (B : Finset V) (hBK : B ∈ K) :
+        Disjoint A B := by
+      exact hground.mono (Finset.subset_biUnion_of_mem id hAH)
+        (Finset.subset_biUnion_of_mem id hBK)
+    have hM : IsMatching (H ∪ K) (MH ∪ MK) := by
+      refine ⟨Finset.union_subset_union hMH.1 hMK.1, ?_⟩
+      intro A hA B hB hAB
+      rcases Finset.mem_union.mp hA with hAH | hAK <;>
+        rcases Finset.mem_union.mp hB with hBH | hBK
+      · exact hMH.2 hAH hBH hAB
+      · exact hcross A (hMH.1 hAH) B (hMK.1 hBK)
+      · exact (hcross B (hMH.1 hBH) A (hMK.1 hAK)).symm
+      · exact hMK.2 hAK hBK hAB
+    rw [← hMHcard, ← hMKcard, ← Finset.card_union_of_disjoint hMHK]
+    exact card_le_matchingNumber hM
+
+/-- Transversal numbers add for hypergraphs carried on disjoint vertex grounds. -/
+theorem transversalNumber_union_of_disjoint_vertices (H K : Finset (Finset V))
+    (hneH : ∀ E ∈ H, E.Nonempty) (hneK : ∀ E ∈ K, E.Nonempty)
+    (hground : Disjoint (H.biUnion id) (K.biUnion id)) :
+    transversalNumber (H ∪ K) = transversalNumber H + transversalNumber K := by
+  classical
+  apply le_antisymm
+  · obtain ⟨TH, hTH, hTHcard⟩ := exists_transversal_card_eq_transversalNumber H hneH
+    obtain ⟨TK, hTK, hTKcard⟩ := exists_transversal_card_eq_transversalNumber K hneK
+    have hT : IsTransversal (H ∪ K) (TH ∪ TK) := by
+      intro E hE
+      rcases Finset.mem_union.mp hE with hEH | hEK
+      · obtain ⟨v, hv⟩ := hTH hEH
+        have hv' := Finset.mem_inter.mp hv
+        exact ⟨v, Finset.mem_inter.mpr ⟨Finset.mem_union_left TK hv'.1, hv'.2⟩⟩
+      · obtain ⟨v, hv⟩ := hTK hEK
+        have hv' := Finset.mem_inter.mp hv
+        exact ⟨v, Finset.mem_inter.mpr ⟨Finset.mem_union_right TH hv'.1, hv'.2⟩⟩
+    have hle := transversalNumber_le_card hT
+    rw [← hTHcard, ← hTKcard]
+    exact hle.trans (Finset.card_union_le TH TK)
+  · apply le_transversalNumber_of_forall
+    · exact ⟨univ, fun E hE => by
+        rw [Finset.univ_inter]
+        rcases Finset.mem_union.mp hE with hEH | hEK
+        · exact hneH E hEH
+        · exact hneK E hEK⟩
+    · intro T hT
+      let TH := T ∩ H.biUnion id
+      let TK := T ∩ K.biUnion id
+      have hTH : IsTransversal H TH := by
+        intro E hEH
+        obtain ⟨v, hv⟩ := hT (Finset.mem_union_left K hEH)
+        have hv' := Finset.mem_inter.mp hv
+        exact ⟨v, by
+          simp only [TH, Finset.mem_inter]
+          exact ⟨⟨hv'.1, Finset.subset_biUnion_of_mem id hEH hv'.2⟩, hv'.2⟩⟩
+      have hTK : IsTransversal K TK := by
+        intro E hEK
+        obtain ⟨v, hv⟩ := hT (Finset.mem_union_right H hEK)
+        have hv' := Finset.mem_inter.mp hv
+        exact ⟨v, by
+          simp only [TK, Finset.mem_inter]
+          exact ⟨⟨hv'.1, Finset.subset_biUnion_of_mem id hEK hv'.2⟩, hv'.2⟩⟩
+      have hdisj : Disjoint TH TK := hground.mono (Finset.inter_subset_right)
+        (Finset.inter_subset_right)
+      have hunionSub : TH ∪ TK ⊆ T :=
+        Finset.union_subset Finset.inter_subset_left Finset.inter_subset_left
+      have hcards : TH.card + TK.card ≤ T.card := by
+        rw [← Finset.card_union_of_disjoint hdisj]
+        exact Finset.card_le_card hunionSub
+      exact (Nat.add_le_add (transversalNumber_le_card hTH)
+        (transversalNumber_le_card hTK)).trans hcards
 
 /-- **`ν(H) ≤ τ(H)`.** The matching number never exceeds the transversal number
 (assuming every edge is nonempty, so that a transversal exists). -/

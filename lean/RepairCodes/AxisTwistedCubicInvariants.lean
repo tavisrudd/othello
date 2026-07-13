@@ -243,6 +243,151 @@ theorem mem_minimalAxisRepairHypergraph_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
             simp [hst, hsu, htu, hBcard]
           simp [hEq]
 
+/-- The complete-graph component of the minimal axis repair clutter. -/
+noncomputable def axisPairRepairComponent (y : 𝔽 ⊕ Unit) :
+    Finset (Finset (AxisTwistedCubicIndex 𝔽)) :=
+  (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3).filter fun E =>
+    ∀ z ∈ E, z.isRight
+
+/-- The three-cubic component of the minimal axis repair clutter. -/
+noncomputable def axisCubicRepairComponent (y : 𝔽 ⊕ Unit) :
+    Finset (Finset (AxisTwistedCubicIndex 𝔽)) :=
+  (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3).filter fun E =>
+    ∀ z ∈ E, z.isLeft
+
+@[simp] theorem mem_axisPairRepairComponent_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)} :
+    R ∈ axisPairRepairComponent y ↔
+      ∃ z w : 𝔽 ⊕ Unit, y ≠ z ∧ y ≠ w ∧ z ≠ w ∧
+        R = {(.inr z : AxisTwistedCubicIndex 𝔽), .inr w} := by
+  rw [axisPairRepairComponent, Finset.mem_filter]
+  constructor
+  · rintro ⟨hR, hright⟩
+    rcases mem_minimalAxisRepairHypergraph_iff.mp hR with hpair | hcubic
+    · exact hpair
+    · obtain ⟨s, t, u, hst, hsu, htu, hy, rfl⟩ := hcubic
+      have := hright (Sum.inl s) (by simp)
+      simp at this
+  · rintro ⟨z, w, hyz, hyw, hzw, rfl⟩
+    refine ⟨mem_minimalAxisRepairHypergraph_iff.mpr
+      (Or.inl ⟨z, w, hyz, hyw, hzw, rfl⟩), ?_⟩
+    intro a ha
+    cases a <;> simp at ha ⊢
+
+@[simp] theorem mem_axisCubicRepairComponent_iff [CharP 𝔽 3] {y : 𝔽 ⊕ Unit}
+    {R : Finset (AxisTwistedCubicIndex 𝔽)} :
+    R ∈ axisCubicRepairComponent y ↔
+      ∃ s t u : 𝔽, s ≠ t ∧ s ≠ u ∧ t ≠ u ∧
+        y = twistedCubicTripleAxisIndex ![s, t, u] ∧
+        R = {(.inl s : AxisTwistedCubicIndex 𝔽), .inl t, .inl u} := by
+  rw [axisCubicRepairComponent, Finset.mem_filter]
+  constructor
+  · rintro ⟨hR, hleft⟩
+    rcases mem_minimalAxisRepairHypergraph_iff.mp hR with hpair | hcubic
+    · obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := hpair
+      have := hleft (Sum.inr z) (by simp)
+      simp at this
+    · exact hcubic
+  · rintro ⟨s, t, u, hst, hsu, htu, hy, rfl⟩
+    refine ⟨mem_minimalAxisRepairHypergraph_iff.mpr
+      (Or.inr ⟨s, t, u, hst, hsu, htu, hy, rfl⟩), ?_⟩
+    intro a ha
+    cases a <;> simp at ha ⊢
+
+/-- The exact minimal axis clutter is the disjoint-ground union of its pair and cubic parts. -/
+theorem minimalAxisRepairHypergraph_eq_components [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    minimalAxisTwistedCubicRepairHypergraph (.inr y) 3 =
+      axisPairRepairComponent y ∪ axisCubicRepairComponent y := by
+  ext R
+  rw [mem_minimalAxisRepairHypergraph_iff, Finset.mem_union,
+    mem_axisPairRepairComponent_iff, mem_axisCubicRepairComponent_iff]
+
+/-- The pair component is literally the complete graph on the `q` axis helpers other than the
+target, embedded in the full coordinate type. -/
+theorem axisPairRepairComponent_eq_completePair [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    axisPairRepairComponent y =
+      embedHypergraph
+        (⟨fun z : {z : 𝔽 ⊕ Unit // z ≠ y} =>
+            (.inr z.1 : AxisTwistedCubicIndex 𝔽), by
+          intro a b h
+          exact Subtype.ext (Sum.inr.inj h)⟩)
+        (completePairHypergraph {z : 𝔽 ⊕ Unit // z ≠ y}) := by
+  classical
+  ext R
+  constructor
+  · intro hR
+    obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := mem_axisPairRepairComponent_iff.mp hR
+    apply Finset.mem_image.mpr
+    let z' : {z : 𝔽 ⊕ Unit // z ≠ y} := ⟨z, hyz.symm⟩
+    let w' : {z : 𝔽 ⊕ Unit // z ≠ y} := ⟨w, hyw.symm⟩
+    refine ⟨{z', w'}, mem_completePairHypergraph.mpr ?_, ?_⟩
+    · simp [z', w', hzw]
+    · ext a
+      cases a <;> simp [z', w']
+  · intro hR
+    obtain ⟨E, hE, rfl⟩ := Finset.mem_image.mp hR
+    obtain ⟨z, w, hzw, rfl⟩ := Finset.card_eq_two.mp
+      (mem_completePairHypergraph.mp hE)
+    apply mem_axisPairRepairComponent_iff.mpr
+    refine ⟨z.1, w.1, z.2.symm, w.2.symm, ?_, ?_⟩
+    · exact fun h => hzw (Subtype.ext h)
+    · ext a
+      cases a <;> simp
+
+/-- Exact invariants of the complete-graph axis-helper component. -/
+theorem axisPairRepairComponent_invariants [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    matchingNumber (axisPairRepairComponent y) = Fintype.card 𝔽 / 2 ∧
+      transversalNumber (axisPairRepairComponent y) = Fintype.card 𝔽 - 1 := by
+  classical
+  let A := {z : 𝔽 ⊕ Unit // z ≠ y}
+  let a₀ : 𝔽 ⊕ Unit := match y with
+    | .inl _ => .inr Unit.unit
+    | .inr _ => .inl 0
+  have ha₀ : a₀ ≠ y := by cases y <;> simp [a₀]
+  letI : Nonempty A := ⟨⟨a₀, ha₀⟩⟩
+  let e : A ↪ AxisTwistedCubicIndex 𝔽 :=
+    ⟨fun z => .inr z.1, fun _ _ h => Subtype.ext (Sum.inr.inj h)⟩
+  have heq : axisPairRepairComponent y = embedHypergraph e (completePairHypergraph A) :=
+    axisPairRepairComponent_eq_completePair y
+  have hne : ∀ E ∈ completePairHypergraph A, E.Nonempty := by
+    intro E hE
+    exact Finset.card_pos.mp (by rw [mem_completePairHypergraph.mp hE]; decide)
+  rw [heq, matchingNumber_embedHypergraph, transversalNumber_embedHypergraph e _ hne,
+    matchingNumber_completePairHypergraph, transversalNumber_completePairHypergraph]
+  simp [A]
+
+/-- The axis formulas split exactly into the complete-graph contribution and the three-cubic
+contribution; there is no interaction term because their vertex grounds are disjoint. -/
+theorem minimalAxisRepair_invariant_decomposition [CharP 𝔽 3] (y : 𝔽 ⊕ Unit) :
+    matchingNumber (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) =
+        Fintype.card 𝔽 / 2 + matchingNumber (axisCubicRepairComponent y) ∧
+      transversalNumber (minimalAxisTwistedCubicRepairHypergraph (.inr y) 3) =
+        (Fintype.card 𝔽 - 1) + transversalNumber (axisCubicRepairComponent y) := by
+  classical
+  let HP := axisPairRepairComponent y
+  let HC := axisCubicRepairComponent y
+  have hneP : ∀ E ∈ HP, E.Nonempty := by
+    intro E hE
+    obtain ⟨z, w, hyz, hyw, hzw, rfl⟩ := mem_axisPairRepairComponent_iff.mp hE
+    exact ⟨Sum.inr z, by simp⟩
+  have hneC : ∀ E ∈ HC, E.Nonempty := by
+    intro E hE
+    obtain ⟨s, t, u, hst, hsu, htu, hy, rfl⟩ := mem_axisCubicRepairComponent_iff.mp hE
+    exact ⟨Sum.inl s, by simp⟩
+  have hground : Disjoint (HP.biUnion id) (HC.biUnion id) := by
+    rw [Finset.disjoint_left]
+    intro z hzP hzC
+    obtain ⟨EP, hEP, hzEP⟩ := Finset.mem_biUnion.mp hzP
+    obtain ⟨EC, hEC, hzEC⟩ := Finset.mem_biUnion.mp hzC
+    have hright := (Finset.mem_filter.mp hEP).2 z hzEP
+    have hleft := (Finset.mem_filter.mp hEC).2 z hzEC
+    cases z <;> simp at hright hleft
+  have hpair := axisPairRepairComponent_invariants y
+  rw [minimalAxisRepairHypergraph_eq_components]
+  constructor
+  · rw [matchingNumber_union_of_disjoint_vertices HP HC hneP hneC hground, hpair.1]
+  · rw [transversalNumber_union_of_disjoint_vertices HP HC hneP hneC hground, hpair.2]
+
 private def cubicPart (E : Finset (AxisTwistedCubicIndex 𝔽)) :
     Finset (AxisTwistedCubicIndex 𝔽) :=
   E.filter fun z => z.isLeft
