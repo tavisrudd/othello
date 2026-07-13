@@ -1,0 +1,1 @@
+../../notes/2026-07-10-completion-core-rigidity-upgrades.md

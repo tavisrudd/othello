@@ -1,0 +1,1 @@
+../../notes/2026-07-11-continuation-rigidity-audit-scope.md

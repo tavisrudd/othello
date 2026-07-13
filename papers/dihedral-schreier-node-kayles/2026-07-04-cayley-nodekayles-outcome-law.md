@@ -1,0 +1,1 @@
+../../notes/2026-07-04-cayley-nodekayles-outcome-law.md

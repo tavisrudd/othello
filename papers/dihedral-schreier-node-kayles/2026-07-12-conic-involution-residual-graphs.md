@@ -1,0 +1,1 @@
+../../notes/2026-07-12-conic-involution-residual-graphs.md

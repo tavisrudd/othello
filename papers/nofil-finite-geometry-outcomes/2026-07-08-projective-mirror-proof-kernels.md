@@ -1,0 +1,1 @@
+../../notes/2026-07-08-projective-mirror-proof-kernels.md

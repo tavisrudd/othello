@@ -1,0 +1,1 @@
+../../notes/2026-07-09-d1-outcome-classes-manuscript.md

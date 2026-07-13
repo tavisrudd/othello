@@ -1,0 +1,1 @@
+../../notes/2026-07-09-codex-q25-baer-census.md

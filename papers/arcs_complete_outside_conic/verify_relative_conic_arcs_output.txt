@@ -1,0 +1,4 @@
+q=8 k=6 points=73 conic_points=9 secants=15 required_points=58 I_C=16 max_external_multiplicity=3 L2=6
+q=9 k=6 points=91 conic_points=10 secants=15 required_points=75 I_C=13 max_external_multiplicity=3 L2=6
+q=11 k=6 points=133 conic_points=12 secants=15 required_points=115 I_C=0 max_external_multiplicity=3 L2=6
+q=16 k=9 points=273 conic_points=17 secants=36 required_points=247 I_C=32 max_external_multiplicity=4 L2=8

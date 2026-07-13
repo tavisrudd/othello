@@ -1,0 +1,769 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\IC}{I_{\cC}}
+\newcommand{\IH}{I_{\cH}}
+\newcommand{\rhoC}{\rho_{\cC}}
+\newcommand{\tmin}{t_2(2,q)}
+
+\title{Arcs complete outside a prescribed conic\\
+\large A secant-defect identity, lower bounds, and verified examples}
+\author{Tavis Rudd}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $\cC$ be a nonsingular conic in $\PG(2,q)$.  We study arcs
+$A\subseteq\PG(2,q)\setminus\cC$ whose secants cover every point outside
+$A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Starting from the
+classical first two equations for the secant-index distribution of an arc,
+we prove an exact defect identity for an arbitrary prescribed set of points
+that may remain uncovered.  Its conic specialization gives
+\[
+ q^2-k\le
+ \binom{k}{2}(q-1)-\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}
+ -\frac{\IC(A)}{\lfloor k/2\rfloor}
+\]
+for every $\cC$-complete $k$-arc, together with an exact equality criterion
+and a quantitative stability estimate.  In particular,
+\[
+ \rhoC(q)\ge \sqrt{2q}+\frac32-O(q^{-1/2}).
+\]
+Conversely, projective averaging transfers sufficiently small ordinary
+complete arcs off the prescribed conic, so $\rhoC(q)\le \tmin$ whenever
+$\tmin\le q$.  We also give tangent and parity constraints in even
+characteristic.  Directly checkable witnesses, combined with the analytic
+lower bound, yield
+\[
+ \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
+ \qquad 8\le\rhoC(16)\le9.
+\]
+A supplementary verifier enumerates the relevant projective planes and
+checks every incidence claim used for these finite examples.
+\end{abstract}
+
+\section{Introduction}
+
+An arc in a projective plane is a set of points no three of which are
+collinear.  An arc is complete when it cannot be enlarged while remaining
+an arc; equivalently, every point outside it lies on a secant determined by
+two of its points.  Complete arcs and the closely related problem of finding
+small saturating sets have a substantial literature; see, for example,
+Ball~\cite{Ball1997}, Kim--Vu~\cite{KimVu2003}, and Nagy~\cite{Nagy2018}.
+
+Fix a nonsingular conic $\cC\subset\PG(2,q)$.  We impose the arc condition
+but allow the points of $\cC$ to remain uncovered.
+
+\begin{definition}\label{def:relative}
+An arc $A\subseteq\PG(2,q)\setminus\cC$ is \emph{$\cC$-complete} if every
+point of
+\[
+ \PG(2,q)\setminus(A\cup\cC)
+\]
+lies on a secant of $A$.  Define
+\[
+ \rhoC(q)=\min\{|A|:A\text{ is a $\cC$-complete arc}\}.
+\]
+For an arbitrary arc disjoint from $\cC$, its uncovered locus is
+\[
+ \cU_{\cC}(A)=
+ \PG(2,q)\setminus
+ \left(A\cup\cC\cup\bigcup_{\{a,b\}\in\binom A2}ab\right).
+\]
+Thus $A$ is $\cC$-complete exactly when $\cU_{\cC}(A)=\varnothing$.
+\end{definition}
+
+Equivalently, $A$ is maximal among arcs in the point set
+$\PG(2,q)\setminus\cC$.  All nonsingular conics in $\PG(2,q)$ are
+projectively equivalent, so the numerical value of $\rhoC(q)$ does not
+depend on the chosen conic.
+
+The problem differs from two nearby standard notions.  A saturating set
+need not be an arc and has no prescribed exceptional locus.  An
+almost-complete subset of a conic, in the sense of
+Bartoli--Davydov--Marcugini--Pambianco~\cite{BartoliEtAl2018}, consists of
+selected points \emph{on} the conic whose chords cover the complementary
+points.  Here the selected arc is required to avoid the conic.
+
+The point index with respect to an arc, and the first two double-counting
+equations for its distribution, are classical; compare
+Hirschfeld~\cite[Chapter~9]{Hirschfeld1998} and Ball~\cite{Ball1997}.  The
+main observation of this note is that, after splitting those equations over
+a prescribed exceptional set and its complement, the inequalities normally
+used to control overlap have an exact remainder.  This produces:
+
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+\item an exact prescribed-hole defect identity and equality criterion;
+\item a quantitative stability bound for near equality;
+\item a strengthened lower bound with additive asymptotic term $3/2$;
+\item a projective-averaging upper-bound transfer from ordinary complete
+      arcs;
+\item characteristic-two nucleus constraints; and
+\item small finite-field results whose upper bounds are independently
+      verifiable from explicit coordinates.
+\end{enumerate}
+
+A targeted literature search did not locate Definition~\ref{def:relative}
+or the exact defect identity below in this form.  This observation is not a
+priority certificate: the proofs are elementary consequences of classical
+index equations, and terminology involving relative saturation or holes may
+occur elsewhere.
+
+\section{The classical secant equations}
+\label{sec:classical}
+
+Throughout the remainder of the paper, $q\ge3$ and $k\ge3$.  Let $\Pi$ be a projective plane of order $q$, let $A$ be a $k$-arc in
+$\Pi$, and let $r_A(x)$ be the number of secants of $A$ through
+$x\in\Pi\setminus A$.  We usually write $r(x)$.  Put
+\[
+ N=\binom{k}{2},
+ \qquad
+ m=\left\lfloor\frac{k}{2}\right\rfloor.
+\]
+
+\begin{lemma}\label{lem:max-index}
+For every $x\notin A$, one has $r(x)\le m$.
+\end{lemma}
+
+\begin{proof}
+Distinct secants through $x$ cannot share an endpoint in $A$.  Indeed, two
+lines through the same pair $x,a$ coincide.  Hence the secants through $x$
+use pairwise disjoint pairs of points of $A$, of which there are at most
+$\lfloor k/2\rfloor$.
+\end{proof}
+
+\begin{proposition}[Classical first and second index equations]
+\label{prop:moments}
+For every $k$-arc $A$ in a projective plane of order $q$,
+\begin{align}
+ \sum_{x\notin A}r(x)
+   &=\binom{k}{2}(q-1), \label{eq:first-moment}\\
+ \sum_{x\notin A}\binom{r(x)}2
+   &=3\binom{k}{4}. \label{eq:second-moment}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+There are $\binom{k}{2}$ secants.  Each contains $q+1$ points, exactly two
+of them in $A$, and therefore contributes $q-1$ incidences with points
+outside $A$.  This proves~\eqref{eq:first-moment}.
+
+For~\eqref{eq:second-moment}, count unordered pairs of distinct secants
+through a common external point.  By Lemma~\ref{lem:max-index}, their four
+endpoints in $A$ are distinct.  Conversely, a four-subset of $A$ has three
+partitions into two unordered pairs.  Each partition gives two secants,
+which meet in a unique point because the plane is projective.  Their
+intersection is outside $A$: otherwise one of the two secants would contain
+three points of the arc.  Thus every four-subset contributes exactly three.
+\end{proof}
+
+Only the projective-plane axioms and the common line size $q+1$ enter these
+proofs.  In particular, the second equation need not hold in a general
+finite linear space where two lines may be disjoint.
+
+\section{An exact defect identity for prescribed holes}
+\label{sec:defect}
+
+The next theorem is stated for an arbitrary exceptional point set.  The
+conic enters only in later specializations.
+
+Let $\cH\subseteq\Pi\setminus A$ be any set of points allowed to remain
+uncovered, and define
+\begin{align*}
+ V_{\cH}(A)&=\Pi\setminus(A\cup\cH),\\
+ \cX_{\cH}(A)&=\{x\in V_{\cH}(A):r(x)>0\},\\
+ \cU_{\cH}(A)&=V_{\cH}(A)\setminus\cX_{\cH}(A),\\
+ \IH(A)&=\sum_{y\in\cH}r(y).
+\end{align*}
+Thus $\cX_{\cH}(A)$ is the covered required locus, and $\cU_{\cH}(A)$ is
+the uncovered required locus.
+
+Splitting Proposition~\ref{prop:moments} over $V_{\cH}(A)$ and $\cH$ gives
+\begin{align}
+ \sum_{x\in V_{\cH}(A)}r(x)
+   &=N(q-1)-\IH(A), \label{eq:split-first}\\
+ \sum_{x\in V_{\cH}(A)}\binom{r(x)}2
+ +\sum_{y\in\cH}\binom{r(y)}2
+   &=3\binom{k}{4}. \label{eq:split-second}
+\end{align}
+
+\begin{theorem}[Prescribed-hole defect identity]
+\label{thm:defect}
+Let $A$ be a $k$-arc in a projective plane of order $q$, let
+$\cH\subseteq\Pi\setminus A$, and put $m=\lfloor k/2\rfloor$.  Define
+\[
+ \Delta_{\cH}(A)=
+ N(q-1)-\frac{6}{m}\binom{k}{4}
+ -\frac{\IH(A)}{m}-|\cX_{\cH}(A)|.
+\]
+Then
+\begin{equation}
+\boxed{
+ m\Delta_{\cH}(A)=
+ \sum_{x\in\cX_{\cH}(A)}(r(x)-1)(m-r(x))
+ +\sum_{y\in\cH}r(y)(m-r(y)).
+}
+\label{eq:defect}
+\end{equation}
+In particular, $\Delta_{\cH}(A)\ge0$.
+\end{theorem}
+
+\begin{proof}
+Only points of $\cX_{\cH}(A)$ contribute to the sum in
+\eqref{eq:split-first}.  Multiplying the definition of $\Delta_{\cH}(A)$
+by $m$ and using~\eqref{eq:split-first} gives
+\begin{align*}
+ m\Delta_{\cH}(A)
+ &=m\sum_{x\in\cX_{\cH}(A)}r(x)
+   +(m-1)\IH(A)-m|\cX_{\cH}(A)|
+   -6\binom{k}{4}.
+\end{align*}
+By~\eqref{eq:split-second},
+\[
+ 6\binom{k}{4}=
+ 2\sum_{x\in\cX_{\cH}(A)}\binom{r(x)}2
+ +2\sum_{y\in\cH}\binom{r(y)}2.
+\]
+Substitution and termwise simplification yield
+\begin{align*}
+ m(r-1)-2\binom r2&=(r-1)(m-r),\\
+ (m-1)r-2\binom r2&=r(m-r),
+\end{align*}
+which proves~\eqref{eq:defect}.  Every term is nonnegative by
+Lemma~\ref{lem:max-index}.
+\end{proof}
+
+\begin{corollary}[Coverage and uncovered-locus bounds]
+\label{cor:coverage}
+Under the hypotheses of Theorem~\ref{thm:defect},
+\begin{equation}
+ |\cX_{\cH}(A)|\le
+ N(q-1)-\frac{6}{m}\binom{k}{4}-\frac{\IH(A)}m,
+\label{eq:coverage}
+\end{equation}
+and
+\begin{equation}
+ |\cU_{\cH}(A)|\ge
+ |V_{\cH}(A)|-N(q-1)
+ +\frac{6}{m}\binom{k}{4}+\frac{\IH(A)}m.
+\label{eq:uncovered}
+\end{equation}
+Equality holds in either inequality if and only if
+\[
+ r(x)\in\{1,m\}\quad(x\in\cX_{\cH}(A)),
+ \qquad
+ r(y)\in\{0,m\}\quad(y\in\cH).
+\]
+\end{corollary}
+
+\begin{proof}
+The two inequalities are respectively $\Delta_{\cH}(A)\ge0$ and its
+rearrangement using
+$|\cU_{\cH}(A)|=|V_{\cH}(A)|-|\cX_{\cH}(A)|$.
+The equality statement follows from the vanishing of every nonnegative term
+in~\eqref{eq:defect}.
+\end{proof}
+
+The exact remainder also quantifies near equality.
+
+\begin{corollary}[Quantitative stability]
+\label{cor:stability}
+Assume $m\ge3$ and put
+\begin{align*}
+ M&=\{x\in\cX_{\cH}(A):2\le r(x)\le m-1\},\\
+ J&=\{y\in\cH:1\le r(y)\le m-1\}.
+\end{align*}
+Then
+\begin{equation}
+ (m-2)|M|+(m-1)|J|\le m\Delta_{\cH}(A).
+\label{eq:stability}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For $2\le r\le m-1$,
+$(r-1)(m-r)\ge m-2$.  For $1\le r\le m-1$,
+$r(m-r)\ge m-1$.  Apply these estimates to~\eqref{eq:defect}.
+\end{proof}
+
+Thus small defect forces almost every multiply covered required point to
+have the maximum possible multiplicity $m$, while almost every hole point
+met by a secant also has multiplicity $m$.  This is the precise stability
+content behind the equality heuristic.
+
+\section{Specialization to a conic}
+\label{sec:conic}
+
+Let $\cC$ be a nonsingular conic in $\PG(2,q)$, and let
+$A\subseteq\PG(2,q)\setminus\cC$ be a $k$-arc.  Since $|\cC|=q+1$, there
+are $q^2-k$ points outside $A\cup\cC$.  Write
+\[
+ \IC(A)=\sum_{y\in\cC}r(y)
+       =\sum_{\ell\text{ an $A$-secant}}|\ell\cap\cC|.
+\]
+
+\begin{corollary}[Conic-loss and uncovered-locus inequalities]
+\label{cor:conic-bound}
+For every such arc,
+\begin{equation}
+ |\cU_{\cC}(A)|\ge
+ q^2-k-\binom{k}{2}(q-1)
+ +\frac{6}{m}\binom{k}{4}+\frac{\IC(A)}m.
+\label{eq:conic-uncovered}
+\end{equation}
+If $A$ is $\cC$-complete, then
+\begin{equation}
+\boxed{
+ q^2-k\le
+ \binom{k}{2}(q-1)-\frac{6}{m}\binom{k}{4}
+ -\frac{\IC(A)}m.
+}
+\label{eq:conic-complete}
+\end{equation}
+\end{corollary}
+
+The first correction in~\eqref{eq:conic-complete} accounts for unavoidable
+concurrence among secants; the last accounts for secant incidence spent on
+the exempt conic.
+
+Define
+\begin{align*}
+ L_1(q)&=\min\left\{k\ge3:q^2-k\le\binom{k}{2}(q-1)\right\},\\
+ L_2(q)&=\min\left\{k\ge3:
+ q^2-k\le\binom{k}{2}(q-1)
+ -\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}\right\}.
+\end{align*}
+Then
+\begin{equation}
+ \rhoC(q)\ge L_2(q)\ge L_1(q).
+\label{eq:L2}
+\end{equation}
+The definition of $L_2(q)$ involves only integer arithmetic after
+multiplication by $\lfloor k/2\rfloor$.
+
+For calculation, the corrected capacity has the parity-dependent forms
+\begin{equation}
+ \binom{k}{2}(q-1)-\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}
+ =
+ \begin{cases}
+ \displaystyle
+ \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),&k\text{ even},\\[6pt]
+ \displaystyle
+ \frac{k}{2}\bigl((k-1)(q-1)-(k-2)(k-3)\bigr),&k\text{ odd}.
+ \end{cases}
+\label{eq:parity-capacity}
+\end{equation}
+For comparison, some values are
+\[
+\begin{array}{c|rrrrrrr}
+q&8&9&11&13&16&17&19\\ \hline
+L_1(q)&5&5&6&6&7&7&7\\
+L_2(q)&6&6&6&7&8&8&8
+\end{array}
+\]
+Thus the second-moment correction alone proves, for example, that a
+$\cC$-complete arc in $\PG(2,16)$ has at least eight points.
+
+\begin{theorem}[Asymptotic lower bound]
+\label{thm:asymptotic}
+As $q$ ranges over prime powers,
+\begin{equation}
+ \rhoC(q)\ge\sqrt{2q}+\frac32-O(q^{-1/2}).
+\label{eq:asymptotic-lower}
+\end{equation}
+Consequently,
+\begin{equation}
+ \liminf_{q\to\infty}
+ \bigl(\rhoC(q)-\sqrt{2q}\bigr)\ge\frac32.
+\label{eq:liminf}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $k$ be the size of a $\cC$-complete arc and put $s=\sqrt{2q}$.
+The elementary incidence inequality
+$q^2-k\le\binom{k}{2}(q-1)$ is quadratic in $k$; solving it and expanding
+its positive root gives
+\[
+ k\ge s+\frac12+O(s^{-1}).
+\]
+If $k\ge s+2$, then~\eqref{eq:asymptotic-lower} is immediate.  Otherwise
+write $k=s+a$, where the preceding elementary bound and $k<s+2$ make $a$
+bounded.
+
+Since $m=\lfloor k/2\rfloor\le k/2$,
+\[
+ \frac6m\binom{k}{4}
+ \ge\frac{12}{k}\binom{k}{4}
+ =\frac{(k-1)(k-2)(k-3)}2.
+\]
+Dropping the nonnegative conic term in~\eqref{eq:conic-complete} therefore
+gives the necessary inequality
+\[
+ q^2-k\le
+ \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr).
+\]
+After substituting $q=s^2/2$ and $k=s+a$, the right side minus the left
+side is
+\[
+ \left(\frac a2-\frac34\right)s^3+O(s^2),
+\]
+uniformly for bounded $a$.  Nonnegativity forces
+$a\ge3/2-O(s^{-1})$, proving~\eqref{eq:asymptotic-lower} and hence
+\eqref{eq:liminf}.
+\end{proof}
+
+\begin{remark}[The scale of the conic term]
+\label{rem:scale}
+Every secant meets $\cC$ in at most two points, so
+\[
+ 0\le\IC(A)\le2\binom{k}{2}.
+\]
+At the relevant scale $k\asymp\sqrt q$, the term $\IC(A)/m$ is therefore
+$O(\sqrt q)$, while the universal overlap correction
+$6\binom{k}{4}/m$ is $\Theta(q^{3/2})$.  Consequently, improving the lower
+bound on $\IC(A)$ within~\eqref{eq:conic-complete} can be useful for finely
+balanced finite cases, but cannot improve the additive constant $3/2$ in
+Theorem~\ref{thm:asymptotic}.  Any stronger asymptotic result needs an
+additional mechanism, not merely a spectral estimate for $\IC(A)$.
+\end{remark}
+
+\section{An upper-bound transfer from complete arcs}
+\label{sec:transfer}
+
+Let $t_2(2,q)$ denote the smallest size of an ordinary complete arc in
+$\PG(2,q)$.
+
+\begin{theorem}[Projective averaging]
+\label{thm:transfer}
+If $t_2(2,q)\le q$, then
+\begin{equation}
+ \rhoC(q)\le t_2(2,q).
+\label{eq:transfer}
+\end{equation}
+More generally, every complete $b$-arc with $b\le q$ has a projective image
+disjoint from the prescribed conic.
+\end{theorem}
+
+\begin{proof}
+Let $B$ be a complete $b$-arc and choose a uniformly random projectivity
+$g\in\operatorname{PGL}(3,q)$.  Point transitivity gives, for every
+$b\in B$,
+\[
+ \Pr(gb\in\cC)=\frac{q+1}{q^2+q+1}.
+\]
+Hence
+\[
+ \mathbb E|gB\cap\cC|
+ =\frac{b(q+1)}{q^2+q+1}<1
+\]
+when $b\le q$.  Since the intersection size is a nonnegative integer, some
+$g$ satisfies $gB\cap\cC=\varnothing$.  The image $gB$ remains complete in
+the whole plane, and is therefore $\cC$-complete.
+\end{proof}
+
+Kim and Vu proved that, for all sufficiently large $q$, every projective
+plane of order $q$ has a complete arc of size at most
+$\sqrt q(\log q)^c$ for an absolute constant $c$~\cite{KimVu2003}.  This is
+less than $q$ for large $q$, so Theorem~\ref{thm:transfer} gives the
+following immediate consequence.
+
+\begin{corollary}\label{cor:kim-vu}
+For some absolute constant $c$ and all sufficiently large prime powers $q$,
+\[
+ \rhoC(q)\le\sqrt q(\log q)^c.
+\]
+\end{corollary}
+
+The transfer does not exploit the conic and is unlikely to be sharp.  It
+nevertheless supplies a uniform upper bound without having to preserve the
+arc condition during a separate random covering construction.
+
+\section{Even characteristic and the nucleus}
+\label{sec:nucleus}
+
+Assume $q$ is even and let $\nu$ be the nucleus of $\cC$.  The nucleus is
+outside $\cC$, all tangents to $\cC$ pass through $\nu$, and every line
+through $\nu$ is one of these $q+1$ tangents.
+
+\begin{proposition}[The nucleus belongs to the arc]
+\label{prop:nucleus-in}
+Let $A$ be a $k$-arc disjoint from $\cC$ with $\nu\in A$.  Exactly $k-1$
+$A$-secants are tangent to $\cC$.  In particular,
+\[
+ \IC(A)\ge k-1,
+ \qquad
+ \IC(A)\equiv k-1\pmod2.
+\]
+If $A$ is $\cC$-complete, then
+\begin{equation}
+ q^2-k\le
+ \binom{k}{2}(q-1)-\frac6m\binom{k}{4}-\frac{k-1}{m}.
+\label{eq:nucleus-in}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For every $a\in A\setminus\{\nu\}$, the line $\nu a$ is tangent to
+$\cC$, giving $k-1$ tangent secants.  No line joining two points of
+$A\setminus\{\nu\}$ can be tangent: every tangent contains $\nu$, which
+would place three points of $A$ on one line.  Hence these are exactly the
+tangent $A$-secants.
+
+Every tangent contributes one to $\IC(A)$, while every other line
+contributes zero or two.  This proves the lower bound and parity statement.
+Inequality~\eqref{eq:nucleus-in} follows from
+Corollary~\ref{cor:conic-bound}.
+\end{proof}
+
+\begin{proposition}[The nucleus lies outside the arc]
+\label{prop:nucleus-out}
+Let $A$ be a $\cC$-complete arc with $\nu\notin A$.  Then
+\[
+ 1\le r(\nu)\le m,
+\]
+the tangent $A$-secants are exactly the secants through $\nu$, and
+\[
+ \IC(A)\equiv r(\nu)\pmod2,
+ \qquad
+ \IC(A)\ge r(\nu)\ge1.
+\]
+Consequently,
+\begin{equation}
+ q^2-k\le
+ \binom{k}{2}(q-1)-\frac6m\binom{k}{4}-\frac1m.
+\label{eq:nucleus-out}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The nucleus is a required point outside $A\cup\cC$, so relative
+completeness gives $r(\nu)\ge1$; Lemma~\ref{lem:max-index} gives the upper
+bound.  A line is tangent to $\cC$ exactly when it passes through $\nu$.
+Thus the number of tangent $A$-secants is $r(\nu)$.  Reducing the sum of the
+intersection sizes $|\ell\cap\cC|$ modulo two gives
+$\IC(A)\equiv r(\nu)\pmod2$.  The remaining claims follow from
+Corollary~\ref{cor:conic-bound}.
+\end{proof}
+
+These two cases are useful structural reductions, but
+Remark~\ref{rem:scale} limits what the incidence term alone can accomplish.
+For example, at $(q,k)=(16,8)$ inequality~\eqref{eq:conic-complete} would
+be contradicted only by $\IC(A)>268$, whereas the universal upper bound is
+$\IC(A)\le56$.  Thus deciding whether $\rhoC(16)$ is eight or nine requires
+information beyond a lower bound on $\IC(A)$ inserted into the present
+inequality.
+
+\section{Verified finite-field examples}
+\label{sec:examples}
+
+The following proposition uses no exhaustive nonexistence search.  Every
+lower bound follows from $L_2(q)$; every upper bound is supplied by explicit
+coordinates checked by a short independent verifier.
+
+\begin{proposition}\label{prop:small-values}
+For the standard conic
+\[
+ \cC:\ XZ=Y^2
+\]
+in the indicated projective planes,
+\[
+ \rhoC(8)=6,
+ \qquad
+ \rhoC(9)=6,
+ \qquad
+ \rhoC(11)=6,
+ \qquad
+ 8\le\rhoC(16)\le9.
+\]
+\end{proposition}
+
+\begin{proof}
+Equation~\eqref{eq:L2} gives
+\[
+ L_2(8)=L_2(9)=L_2(11)=6,
+ \qquad L_2(16)=8.
+\]
+Appendix~\ref{app:witnesses} lists $\cC$-complete arcs of sizes six, six,
+six, and nine, respectively.  Their verification is described below.
+\end{proof}
+
+For reference, the verified incidence statistics are
+\[
+\begin{array}{c|rrrrr}
+q&|A|&\binom{|A|}{2}&q^2-|A|&\IC(A)&\max_{x\notin A}r(x)\\ \hline
+8 &6&15&58 &16&3\\
+9 &6&15&75 &13&3\\
+11&6&15&115&0 &3\\
+16&9&36&247&32&4
+\end{array}
+\]
+
+The supplementary Python program
+\texttt{verify\_relative\_conic\_arcs.py} performs exact finite-field
+arithmetic and, for each witness:
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item enumerates and normalizes all $q^2+q+1$ projective points;
+\item checks that $XZ=Y^2$ contains exactly $q+1$ points;
+\item verifies disjointness from the conic and that every pair-line contains
+      exactly two selected points;
+\item verifies that every point outside $A\cup\cC$ lies on a selected
+      pair-line; and
+\item independently checks both equations in
+      Proposition~\ref{prop:moments}.
+\end{enumerate}
+
+Its SHA-256 digest is
+\begin{center}
+\texttt{e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a}.
+\end{center}
+The verifier is deliberately simpler than a search program: it certifies the
+listed upper-bound witnesses but makes no claim about search completeness.
+
+\section{Further questions}
+
+The elementary theory leaves several concrete problems.
+
+\begin{problem}
+Determine $\rhoC(16)$.  Proposition~\ref{prop:small-values} leaves only the
+possibilities eight and nine.
+\end{problem}
+
+\begin{problem}
+Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
+impossible for an infinite family.  Theorem~\ref{thm:transfer} currently
+supplies only the general complete-arc bound
+$O(\sqrt q(\log q)^c)$.
+\end{problem}
+
+\begin{problem}
+Classify equality and bounded-defect configurations in
+Theorem~\ref{thm:defect}.  The equality pattern requires all nontrivial
+secant concurrence to occur at points of maximum possible index, a severe
+combinatorial restriction.
+\end{problem}
+
+\begin{problem}
+Determine whether the conic stabilizer or its coherent configuration yields
+useful finite-order restrictions not reducible to a bound on $\IC(A)$.
+Remark~\ref{rem:scale} shows that an estimate for $\IC(A)$ alone cannot
+improve the asymptotic constant obtained here.
+\end{problem}
+
+The central distinction is between universal overlap, already measured by
+the classical second index equation, and genuinely conic-specific geometry.
+The former gives the lower bound in this paper.  Progress beyond it will
+probably require an explicit construction, an algebraic obstruction, or a
+classification of near-extremal secant arrangements rather than another
+application of the same incidence budget.
+
+\appendix
+\section{Witness coordinates and field encodings}
+\label{app:witnesses}
+
+All coordinates are homogeneous and use the standard conic $XZ=Y^2$.
+
+For $q=8$, write
+$\F_8=\F_2[\alpha]/(\alpha^3+\alpha+1)$ and encode
+$a_0+a_1\alpha+a_2\alpha^2$ by the binary integer
+$a_0+2a_1+4a_2$.  A witness is
+\[
+\begin{split}
+ &(0,1,1),(0,1,2),(1,0,1),\\
+ &(1,0,2),(1,1,2),(1,1,6).
+\end{split}
+\]
+
+For $q=9$, write
+$\F_9=\F_3[\alpha]/(\alpha^2+1)$ and encode
+$a_0+a_1\alpha$ by $a_0+3a_1$.  A witness is
+\[
+\begin{split}
+ &(1,0,4),(1,0,5),(1,1,0),\\
+ &(1,1,2),(1,2,3),(1,2,4).
+\end{split}
+\]
+
+For $q=11$, coordinates lie in the prime field.  A witness is
+\[
+\begin{split}
+ &(1,10,0),(1,9,1),(1,4,7),\\
+ &(1,8,5),(0,1,4),(1,1,7).
+\end{split}
+\]
+
+For $q=16$, write
+$\F_{16}=\F_2[\alpha]/(\alpha^4+\alpha+1)$ and use binary coefficient
+encoding.  A witness of size nine is
+\[
+\begin{split}
+ &(1,5,14),(1,5,3),(1,9,2),(1,0,9),(1,13,13),\\
+ &(1,6,10),(1,3,9),(0,1,11),(1,10,2).
+\end{split}
+\]
+
+\begin{thebibliography}{99}
+
+\bibitem{Ball1997}
+S.~Ball,
+\newblock On small complete arcs in a finite plane,
+\newblock \emph{Discrete Mathematics} \textbf{174} (1997), 29--34.
+\newblock doi:10.1016/S0012-365X(96)00315-9.
+
+\bibitem{BartoliEtAl2018}
+D.~Bartoli, A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
+\newblock On the smallest size of an almost complete subset of a conic in
+$\PG(2,q)$ and extendability of Reed--Solomon codes,
+\newblock \emph{Problems of Information Transmission} \textbf{54} (2018),
+101--115.
+\newblock doi:10.1134/S0032946018020011.
+
+\bibitem{Hirschfeld1998}
+J.~W.~P.~Hirschfeld,
+\newblock \emph{Projective Geometries over Finite Fields}, second edition,
+\newblock Oxford University Press, 1998.
+
+\bibitem{KimVu2003}
+J.~H.~Kim and V.~H.~Vu,
+\newblock Small complete arcs in projective planes,
+\newblock \emph{Combinatorica} \textbf{23} (2003), 311--363.
+\newblock doi:10.1007/s00493-003-0024-1.
+
+\bibitem{Nagy2018}
+Z.~L.~Nagy,
+\newblock Saturating sets in projective planes and hypergraph covers,
+\newblock \emph{Discrete Mathematics} \textbf{341} (2018), 1078--1083.
+\newblock doi:10.1016/j.disc.2018.01.011.
+
+\end{thebibliography}
+
+\end{document}

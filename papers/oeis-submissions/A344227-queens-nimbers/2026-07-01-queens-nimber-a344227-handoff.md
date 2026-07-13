@@ -1,0 +1,1 @@
+../../../notes/handoffs/2026-07-01-queens-nimber-a344227.md

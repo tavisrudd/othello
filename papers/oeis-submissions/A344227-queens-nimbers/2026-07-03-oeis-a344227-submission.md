@@ -1,0 +1,1 @@
+../../../notes/2026-07-03-oeis-a344227-submission.md
