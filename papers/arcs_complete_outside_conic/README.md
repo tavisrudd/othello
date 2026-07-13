@@ -1,7 +1,7 @@
 # Paper: Arcs complete outside a prescribed conic
 
-**Title:** *Arcs complete outside a prescribed conic — a secant-defect identity, lower bounds,
-and verified examples.* Author: Tavis Rudd.
+**Title:** *Arcs complete outside a prescribed conic — a prescribed-hole defect identity and a
+certified classification over GF(16).* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled
 PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a completed strict-trust
@@ -15,13 +15,15 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
 - an exact **prescribed-hole defect identity** (splits the classical first/second secant-index
   equations over an exceptional set, with an exact — not estimated — remainder);
 - coverage / uncovered-locus bounds, an equality criterion, and a quantitative stability bound;
-- the asymptotic lower bound **ρ_𝒞(q) ≥ √(2q) + 3/2 − O(q^{−1/2})**;
-- a projective-averaging upper-bound transfer (ρ_𝒞(q) ≤ t₂(2,q) when t₂(2,q) ≤ q; Kim–Vu
-  corollary);
+- the explicit lower bound **ρ_𝒞(q) ≥ √(2q) + 3/2 − 8/√(2q)**;
+- arbitrary-hole capacity and projective-averaging transfer theorems, specializing to
+  ρ_𝒞(q) ≤ t₂(2,q) when t₂(2,q) ≤ q (and the Kim–Vu corollary);
 - even-characteristic nucleus constraints;
 - a general uncovered-evaluation obstruction for exceptional loci drawn from a finite-dimensional
   linear system of homogeneous forms;
-- verified small values: ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6 and ρ_𝒞(16) = 9.
+- verified small values: ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6 and ρ_𝒞(16) = 9;
+- the stronger q=16 classification theorem: no nonzero quadratic zero set, singular or
+  nonsingular, contains an eight-arc's ordinary-uncovered locus while avoiding the arc.
 
 The Lean package proves the elementary theorem chain, the conic/projective transport statements,
 and a semantic bridge from a generic rules-only coordinate checker to relative completeness. Its

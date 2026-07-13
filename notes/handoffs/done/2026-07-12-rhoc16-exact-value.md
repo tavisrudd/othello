@@ -25,6 +25,7 @@ negative controls, and the post-formalization extension queue are in
 | semantic finite-field, projective-map, augmentation, and rejection kernel | `lean/RelativeConicArcs/Q16Classification.lean`, `Q16StepKernel.lean` | Lean-proved |
 | checked transition books and leaf certificates | `lean/RelativeConicArcs/Q16Certificate{Levels,Data}*`, `Q16LeafData*` | Lean-proved |
 | arbitrary eight-cap reduction through retained linear projectivities | `lean/RelativeConicArcs/Q16Reduction.lean` | Lean-proved |
+| normalized eight-class quadratic avoidance, including singular quadrics | `lean/RelativeConicArcs/Q16QuadraticAvoidance.lean` | Lean-proved |
 | no relative-complete eight-arc over `GF(16)` | `RelativeConicArcs.no_completeOutside_GF16_card_eight` | Lean-proved |
 | exact value | `RelativeConicArcs.rhoC_GF16`, `RelativeConicArcs.Examples.rhoC_GF16` | Lean-proved |
 

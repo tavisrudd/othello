@@ -33,12 +33,15 @@ The formalization covers:
 2. the maximum-index lemma and both classical secant-index equations;
 3. the exact prescribed-hole defect identity, coverage/uncovered bounds, equality criterion, and
    quantitative stability;
-4. conic specialization, `L1`/`L2`, parity-dependent corrected capacities, and exact finite lower
-   bounds;
-5. the `sqrt (2q) + 3/2` asymptotic lower bound and liminf statement;
-6. projective averaging and the transfer from ordinary complete arcs;
-7. both even-characteristic nucleus propositions; and
-8. the certified values at `q = 8, 9, 11` and bounds at `q = 16`.
+4. arbitrary-hole capacity bounds, their conic specialization, `L1`/`L2`, parity-dependent
+   corrected capacities, and exact finite lower bounds;
+5. the explicit `sqrt (2q) + 3/2 - 8/sqrt(2q)` lower bound and its asymptotic corollaries;
+6. projective averaging against an arbitrary forbidden set and the transfer from ordinary
+   complete arcs;
+7. both even-characteristic nucleus propositions and the universal positive conic-loss
+   corollary; and
+8. the certified exact values at `q = 8, 9, 11, 16`, including the stronger normalized
+   quadratic-avoidance classification at `q=16`.
 
 The open problems and novelty/prior-art statements are prose, not Lean targets. The Kim–Vu bound is
 an external deep theorem: its Lean corollary must take a named, cited hypothesis rather than add a
@@ -95,19 +98,20 @@ coordinate, analytic, and certificate layers must remain visibly separate.
 | coverage and uncovered-locus bounds; exact equality criterion; quantitative stability | `RelativeConicArcs/Defect.lean` | Lean-proved |
 | standard Veronese conic equals `XZ=Y²`, is parametrized by `PG(1,K)`, and has `q+1` points | `RelativeConicArcs/Conic.lean` | Lean-proved |
 | nonsingular conics as projective images; completeness and `rhoC` are invariant under normalization | `RelativeConicArcs/Conic.lean` | Lean-proved |
-| conic-loss/corrected-capacity inequalities and `L1 ≤ L2 ≤ rhoC` | `RelativeConicArcs/Conic.lean` | Lean-proved |
+| arbitrary prescribed-hole capacity bound, conic specialization, and `L1 ≤ L2 ≤ rhoC` | `RelativeConicArcs/Conic.lean` | Lean-proved |
 | even/odd closed forms for the rational corrected capacity | `RelativeConicArcs/Conic.lean` | Lean-proved |
 | parity-free cubic necessary inequality and explicit `sqrt(2q)+3/2-8/sqrt(2q)` bound | `RelativeConicArcs/Asymptotic.lean` | Lean-proved |
 | shortfall is `O(1/sqrt(2q))`; operational and literal liminf wrappers for realized field families | `RelativeConicArcs/Asymptotic.lean` | Lean-proved |
 | finite transitive-action averaging: `|A||B|<|X|` gives a disjoint translate | `RelativeConicArcs/Averaging.lean` | Lean-proved |
-| projective averaging moves every arc of size at most `q` off any nonsingular conic | `RelativeConicArcs/Averaging.lean` | Lean-proved |
+| projective averaging moves a complete arc off any forbidden set `H` when `|A||H|<|PG(2,q)|`; conic specialization | `RelativeConicArcs/Averaging.lean` | Lean-proved |
 | `rhoC(q) ≤ t2(2,q)` when `t2(2,q) ≤ q`; named Kim--Vu hypothesis interface and transfer | `RelativeConicArcs/Averaging.lean` | Lean-proved, conditional input explicit |
 | in characteristic two, the standard conic plus `[0:1:0]` is a hyperoval; tangents are exactly the lines through the nucleus | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
-| nucleus-in and nucleus-out tangent counts, conic-incidence lower bounds/parity, and corrected inequalities | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
+| nucleus-in and nucleus-out tangent counts, conic-incidence lower bounds/parity, universal `I_C≥1`, and corrected inequalities | `RelativeConicArcs/Nucleus.lean` | Lean-proved |
 | generic raw-coordinate checker, canonical projective normalization, and semantic certificate bridge | `RelativeConicArcs/Certificate.lean` | Lean-proved for every finite field |
 | explicit `GF(8)`, `GF(9)`, and `GF(16)` models with kernel-checked field laws | `RelativeConicArcs/FiniteFields.lean` | Lean-proved |
 | frozen witnesses and split kernel checks at `q=8,9,11,16` | `RelativeConicArcs/Examples.lean`, `RelativeConicArcs/ExampleChecks/` | Lean-proved |
 | `L2(8)=L2(9)=L2(11)=6`, `L2(16)=8`; exact `rhoC` at 8, 9, 11, 16 | `RelativeConicArcs/Results.lean`, `RelativeConicArcs/Q16Result.lean` | Lean-proved (q=16 closed by C101) |
+| every normalized `q=16` eight-arc class rejects every quadratic zero set that avoids the arc and contains its ordinary uncovered locus | `RelativeConicArcs/Q16QuadraticAvoidance.lean` | Lean-proved classification core; manuscript's arbitrary-arc transport is proved separately in prose |
 
 The standalone `RelativeConicArcs` target builds without warnings. The C89–C96 headline axiom profiles
 are `[propext, Classical.choice, Quot.sound]`; no proof uses `sorry`, `native_decide`, `admit`, or a

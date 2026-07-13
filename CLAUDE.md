@@ -58,6 +58,11 @@ in `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash` for `lake`/`lean`/`
 last with `nix_lake_build_each ...`; this Lake has no `-j`/`--jobs`, and a lone aggregate
 target can still fan out its missing import closure.
 
+**`/tmp` is tmpfs on this box.** Do not place Lean worktrees, `.lake` caches, generated
+certificate trees, or other multi-gigabyte build artifacts there: their storage counts against
+RAM and can cause global OOM. Use a disk-backed path under `/home` for heavyweight temporary
+work; reserve `/tmp` for small transient files.
+
 ## Intent-based mode (opt-in)
 
 Default is collaborative: discuss approach, surface options, await approval. Activate

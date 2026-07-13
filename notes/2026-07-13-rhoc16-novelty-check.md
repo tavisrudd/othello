@@ -21,11 +21,26 @@ The following remain plausible original contributions after this bounded search:
    rank-five forced-hit leaves, including the exceptional-form anatomy; and
 5. the exact relative value `rho_C(16)=9`, with a strict-trust Lean proof.
 
+The strengthened manuscript now states the q=16 result in its invariant algebraic form: no
+nonzero quadratic zero set, including a singular one, contains the full ordinary-uncovered locus
+of an eight-arc while avoiding the arc. This is exactly what the `2630+3` certificates establish;
+the nonsingular-conic theorem is a corollary. No checked source states this stronger formulation.
+
 These are search findings, not a priority certificate. Exact terminology may differ, sources may
 be unindexed, and the 2018 classification data could have been reused privately to test other
 properties.
 
 ## Direct prior art and closest neighbors
+
+- S. Alabdullah and J. W. P. Hirschfeld, [*A new lower bound for the smallest complete
+  `(k,n)`-arc in `PG(2,q)`*](https://link.springer.com/article/10.1007/s10623-018-00592-8),
+  Designs, Codes and Cryptography 87 (2019), 679--683,
+  doi:10.1007/s10623-018-00592-8. This is direct prior art for deriving lower bounds on complete
+  arcs from secant counts. Its proof bounds the number of `n`-secants and compares that capacity
+  with the number required for completeness. It has neither a prescribed exceptional set nor the
+  paper's split point-index identity and exact nonnegative remainder. The manuscript now cites it
+  so novelty is attached only to the prescribed-hole split/defect formulation, not to the general
+  idea of a secant-count lower bound.
 
 - N. A. M. Al-Seraji and R. A. B. Al-Ogali, [*Classification of Arcs in Finite Projective Plane of
   Order Sixteen*](https://mjs.uomustansiriyah.edu.iq/index.php/MJS/article/download/184/pdf/2715),
@@ -80,3 +95,27 @@ classification and Ball's arcs-and-quadrics paper. No exact match for the relati
 - Keep the exact value's strongest defensible novelty statement narrow: no prior statement was
   found for the relative parameter or `rho_C(16)=9`, and the supplied proof is independently
   reproducible and kernel checked.
+
+## Strengthening-pass audit (2026-07-13)
+
+Fresh searches combined `complete outside conic`, `prescribed holes`, `relative saturating set`,
+`exceptional set`, `uncovered points`, `quadratic rank`, and `complete (k,n)-arc`, with domain-
+restricted searches over arXiv and journal sites. They rechecked the primary pages or papers for
+Alabdullah--Hirschfeld, Al-Seraji--Al-Ogali, Korchmáros--Nagy--Szőnyi, Bartoli--Davydov--
+Marcugini--Pambianco, Nagy, Glynn, Ball, and Ng--Wild.
+
+The audit supports the following claim levels:
+
+- **Classical/standard:** secant-moment and secant-capacity arguments; transitive-action averaging;
+  evaluation of a linear system at points; Veronese language; quadrics containing arcs.
+- **Elementary consequences promoted without novelty claims:** the explicit
+  `sqrt(2q)+3/2-8/sqrt(2q)` error term, arbitrary-hole averaging threshold, attainment of the
+  finite minimum, and the universal even-characteristic incidence loss.
+- **Plausibly new after bounded search:** the prescribed-hole exact defect/remainder and its
+  stability package; the relative-conic parameter; the ordinary-uncovered quadratic obstruction
+  as a classification invariant; the `2630+3` split; the global q=16 quadratic-avoidance theorem;
+  and `rho_C(16)=9`.
+- **Known:** the raw count of 2633 projective eight-arc classes.
+
+No priority claim is made. The search cannot exclude different terminology, unindexed sources,
+or unpublished computations.

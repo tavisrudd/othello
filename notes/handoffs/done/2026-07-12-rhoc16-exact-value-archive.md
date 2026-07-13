@@ -158,3 +158,30 @@ Two wording corrections were made: audit prose now says that no *proof uses* `na
 rather than literally claiming the token is absent (it occurs in an explanatory comment), and
 the trust/README novelty summaries now link the durable comparison note. No mathematical or Lean
 source change was required by this pass.
+
+## 2026-07-13 — stronger quadratic-avoidance wrapper
+
+- Added `Q16QuadraticAvoidance.lean`, a downstream wrapper over the already checked full-rank and
+  forced-hit rejection lemmas. It states uniformly that every retained normalized eight-class
+  rejects every quadratic zero set—singular or nonsingular—that avoids the arc while containing
+  its ordinary uncovered locus.
+- Kept the wrapper downstream of the generated classification modules, so no certificate data or
+  existing classification declaration changed. The manuscript derives the arbitrary-eight-arc
+  version by explicit projective transport and uses nonsingularity only for the conic application.
+- The stronger statement is recorded as a plausibly new consequence after a bounded search, not
+  as a priority claim. The raw 2633-class count remains explicitly credited to
+  Al-Seraji--Al-Ogali (2018), and linear evaluation on quadrics remains classified as standard.
+- Validation used an isolated cache because concurrent q=25 work was changing the main cache.
+  An initial worktree under `/tmp` was discovered to occupy 7.9 GiB on the machine's tmpfs and
+  materially contributed to an aggregate OOM; it was stopped and moved to the ZFS-backed home
+  volume before further replay. All 330 leaf objects were present after compiling the 18 missing
+  leaves, and the new downstream theorem compiled with axiom profile
+  `[propext, Classical.choice, Quot.sound]`. The generated aggregate
+  source itself was not changed and its preserved checked object is the downstream import boundary.
+- After the tmpfs correction, the 23 missing transition-row objects and `Q16Result.lean` replayed
+  sequentially from disk. Both `no_completeOutside_GF16_card_eight` and `rhoC_GF16` retained the
+  same three-axiom profile.
+- As a focused negative control, the wrapper's conclusion was temporarily strengthened by deleting
+  the forced-hit disjunct. Lean rejected both rejection branches at their intended proof sites and
+  exposed `sorryAx` in the failed audit; restoring the exact disjunction restored a clean build and
+  the standard axiom profile.

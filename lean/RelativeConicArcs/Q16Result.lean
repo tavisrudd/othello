@@ -1,6 +1,7 @@
 import RelativeConicArcs.Q16Reduction
 import RelativeConicArcs.Q16CertificateData
 import RelativeConicArcs.Q16LeafData
+import RelativeConicArcs.Q16QuadraticAvoidance
 import RelativeConicArcs.ExampleChecks.Q16
 
 /-!

@@ -33,7 +33,7 @@
 \newcommand{\tmin}{t_2(2,q)}
 
 \title{Arcs complete outside a prescribed conic\\
-\large A secant-defect identity, lower bounds, and verified examples}
+\large A prescribed-hole defect identity and a certified classification over $\F_{16}$}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -46,30 +46,33 @@ $A\subseteq\PG(2,q)\setminus\cC$ whose secants cover every point outside
 $A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Starting from the
 classical first two equations for the secant-index distribution of an arc,
 we prove an exact defect identity for an arbitrary prescribed set of points
-that may remain uncovered.  Its conic specialization gives
+that may remain uncovered, together with equality and stability criteria.
+Its conic specialization gives
 \[
  q^2-k\le
  \binom{k}{2}(q-1)-\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}
  -\frac{\IC(A)}{\lfloor k/2\rfloor}
 \]
 for every $\cC$-complete $k$-arc, together with an exact equality criterion
-and a quantitative stability estimate.  In particular,
+and a quantitative stability estimate.  In particular, for every prime power $q$,
 \[
- \rhoC(q)\ge \sqrt{2q}+\frac32-O(q^{-1/2}).
+ \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-Conversely, projective averaging transfers sufficiently small ordinary
-complete arcs off the prescribed conic, so $\rhoC(q)\le \tmin$ whenever
-$\tmin\le q$.  We also give tangent and parity constraints in even
-characteristic.  Directly checkable witnesses, combined with the analytic
-lower bound, yield
+Conversely, if $H$ is any prescribed set and an ordinary complete $b$-arc
+satisfies $b|H|<q^2+q+1$, projective averaging moves it off $H$; the conic
+case gives $\rhoC(q)\le \tmin$ whenever $\tmin\le q$.  We also give tangent
+and parity constraints in even characteristic.  Directly checkable witnesses
+give
 \[
  \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
  \qquad \rhoC(16)=9.
 \]
-A supplementary verifier enumerates the relevant projective planes and
-checks every incidence claim used for these finite examples.  A companion
-Lean formalization proves the elementary theorem chain and checks the same
-witnesses through a rules-only certificate bridge.
+A classification of all $2633$ projective eight-arcs over $\F_{16}$ proves
+the stronger statement that no nonzero quadratic can contain an eight-arc's
+ordinary-uncovered locus while avoiding the arc.  A supplementary verifier
+checks the witnesses, while a companion Lean formalization proves the theorem
+chain and kernel-checks the local classification, quadratic obstruction,
+projective reduction, and exact $q=16$ conclusion.
 \end{abstract}
 
 \section{Introduction}
@@ -103,6 +106,11 @@ For an arbitrary arc disjoint from $\cC$, its uncovered locus is
 Thus $A$ is $\cC$-complete exactly when $\cU_{\cC}(A)=\varnothing$.
 \end{definition}
 
+The minimum in Definition~\ref{def:relative} is attained.  Indeed, in the
+finite family of arcs disjoint from $\cC$, any member of maximum cardinality
+is maximal under insertion and hence is $\cC$-complete.  The same argument
+works for every prescribed hole set.
+
 Equivalently, $A$ is maximal among arcs in the point set
 $\PG(2,q)\setminus\cC$.  All nonsingular conics in $\PG(2,q)$ are
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
@@ -121,6 +129,9 @@ conic.
 The point index with respect to an arc, and the first two double-counting
 equations for its distribution, are classical; compare
 Hirschfeld~\cite[Chapter~9]{Hirschfeld1998} and Ball~\cite{Ball1997}.  The
+use of secant counts to bound the smallest complete $(k,n)$-arcs is also
+classical; for a recent explicit lower bound see
+Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The
 main observation of this note is that, after splitting those equations over
 a prescribed exceptional set and its complement, the inequalities normally
 used to control overlap have an exact remainder.  This produces:
@@ -299,6 +310,26 @@ The equality statement follows from the vanishing of every nonnegative term
 in~\eqref{eq:defect}.
 \end{proof}
 
+For later use, we record the complete-outside consequence before imposing
+any geometry on the holes.
+
+\begin{corollary}[Arbitrary prescribed holes]
+\label{cor:arbitrary-holes}
+Let $|\cH|=h$.  If $A$ is a $k$-arc disjoint from $\cH$ and complete outside
+$\cH$, then
+\begin{equation}
+ q^2+q+1-k-h\le
+ \binom{k}{2}(q-1)-\frac6m\binom{k}{4}-\frac{\IH(A)}m.
+\label{eq:arbitrary-holes}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Completeness gives
+$|\cX_{\cH}(A)|=|V_{\cH}(A)|=q^2+q+1-k-h$.
+Substitute this equality into~\eqref{eq:coverage}.
+\end{proof}
+
 The exact remainder also quantifies near equality.
 
 \begin{corollary}[Quantitative stability]
@@ -399,11 +430,12 @@ L_2(q)&6&6&6&7&8&8&8
 Thus the second-moment correction alone proves, for example, that a
 $\cC$-complete arc in $\PG(2,16)$ has at least eight points.
 
-\begin{theorem}[Asymptotic lower bound]
+\begin{theorem}[Explicit additive lower bound]
 \label{thm:asymptotic}
-As $q$ ranges over prime powers,
+For every prime power $q$,
 \begin{equation}
- \rhoC(q)\ge\sqrt{2q}+\frac32-O(q^{-1/2}).
+ \boxed{\displaystyle
+ \rhoC(q)\ge\sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.}
 \label{eq:asymptotic-lower}
 \end{equation}
 Consequently,
@@ -416,15 +448,13 @@ Consequently,
 
 \begin{proof}
 Let $k$ be the size of a $\cC$-complete arc and put $s=\sqrt{2q}$.
-The elementary incidence inequality
-$q^2-k\le\binom{k}{2}(q-1)$ is quadratic in $k$; solving it and expanding
-its positive root gives
-\[
- k\ge s+\frac12+O(s^{-1}).
-\]
+The elementary first-moment inequality
+$q^2-k\le\binom{k}{2}(q-1)$ implies $k\ge s$ for $q\ge2$:
+otherwise $k<s\le q$, while $k^2<2q$ gives
+$\binom{k}{2}<q$, so its right side is smaller than $q(q-1)$ whereas
+$q^2-k\ge q(q-1)$.
 If $k\ge s+2$, then~\eqref{eq:asymptotic-lower} is immediate.  Otherwise
-write $k=s+a$, where the preceding elementary bound and $k<s+2$ make $a$
-bounded.
+write $k=s+a$, so $0\le a<2$ and $s\ge2$.
 
 Since $m=\lfloor k/2\rfloor\le k/2$,
 \[
@@ -439,12 +469,22 @@ gives the necessary inequality
  \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr).
 \]
 After substituting $q=s^2/2$ and $k=s+a$, the right side minus the left
-side is
+side is exactly
 \[
- \left(\frac a2-\frac34\right)s^3+O(s^2),
+ \frac{2a-3}{4}s^3
+ +\frac{a^2-7a+10}{4}s^2
+ +\frac{-3a^2+10a-8}{2}s
+ +\frac{-a^3+5a^2-8a+6}{2}.
 \]
-uniformly for bounded $a$.  Nonnegativity forces
-$a\ge3/2-O(s^{-1})$, proving~\eqref{eq:asymptotic-lower} and hence
+For $0\le a\le2$, the last three coefficients are at most
+$5/2$, $1$, and $3$, respectively.  Since $s\ge2$, their total
+contribution is at most $4s^2$.  The displayed difference is nonnegative,
+and hence
+\[
+ 0\le \frac{2a-3}{4}s^3+4s^2.
+\]
+Dividing by $s^2$ gives $a\ge3/2-8/s$, which is
+\eqref{eq:asymptotic-lower}.  Letting $q$ tend to infinity gives
 \eqref{eq:liminf}.
 \end{proof}
 
@@ -471,6 +511,28 @@ $\PG(2,q)$.
 
 \begin{theorem}[Projective averaging]
 \label{thm:transfer}
+Let $H\subseteq\PG(2,q)$ and let $B$ be an ordinary complete $b$-arc.  If
+\begin{equation}
+ b|H|<q^2+q+1,
+\label{eq:transfer-general}
+\end{equation}
+then some projective image of $B$ is disjoint from $H$ and complete outside
+$H$.
+\end{theorem}
+
+\begin{proof}
+Choose a uniformly random projectivity $g\in\operatorname{PGL}(3,q)$.
+Point transitivity gives
+\[
+ \mathbb E|gB\cap H|=\frac{b|H|}{q^2+q+1}<1.
+\]
+Since the intersection size is a nonnegative integer, it is zero for some
+$g$.  Projectivities preserve ordinary completeness, so $gB$ is complete
+outside $H$.
+\end{proof}
+
+\begin{corollary}[Conic transfer]
+\label{cor:conic-transfer}
 If $t_2(2,q)\le q$, then
 \begin{equation}
  \rhoC(q)\le t_2(2,q).
@@ -478,29 +540,17 @@ If $t_2(2,q)\le q$, then
 \end{equation}
 More generally, every complete $b$-arc with $b\le q$ has a projective image
 disjoint from the prescribed conic.
-\end{theorem}
+\end{corollary}
 
 \begin{proof}
-Let $B$ be a complete $b$-arc and choose a uniformly random projectivity
-$g\in\operatorname{PGL}(3,q)$.  Point transitivity gives, for every
-$b\in B$,
-\[
- \Pr(gb\in\cC)=\frac{q+1}{q^2+q+1}.
-\]
-Hence
-\[
- \mathbb E|gB\cap\cC|
- =\frac{b(q+1)}{q^2+q+1}<1
-\]
-when $b\le q$.  Since the intersection size is a nonnegative integer, some
-$g$ satisfies $gB\cap\cC=\varnothing$.  The image $gB$ remains complete in
-the whole plane, and is therefore $\cC$-complete.
+Take $H=\cC$, so $|H|=q+1$.  For integral $b\le q$ one has
+$b(q+1)<q^2+q+1$, and Theorem~\ref{thm:transfer} applies.
 \end{proof}
 
 Kim and Vu proved that, for all sufficiently large $q$, every projective
 plane of order $q$ has a complete arc of size at most
 $\sqrt q(\log q)^c$ for an absolute constant $c$~\cite{KimVu2003}.  This is
-less than $q$ for large $q$, so Theorem~\ref{thm:transfer} gives the
+less than $q$ for large $q$, so Corollary~\ref{cor:conic-transfer} gives the
 following immediate consequence.
 
 \begin{corollary}\label{cor:kim-vu}
@@ -581,6 +631,22 @@ $\IC(A)\equiv r(\nu)\pmod2$.  The remaining claims follow from
 Corollary~\ref{cor:conic-bound}.
 \end{proof}
 
+\begin{corollary}[Universal even-characteristic loss]
+\label{cor:even-loss}
+Every $\cC$-complete arc in even characteristic satisfies
+\[
+ \IC(A)\ge1.
+\]
+Consequently, inequality~\eqref{eq:conic-complete} can always be strengthened
+by replacing its final term by at least $-1/m$.
+\end{corollary}
+
+\begin{proof}
+If the nucleus belongs to $A$, Proposition~\ref{prop:nucleus-in} gives
+$\IC(A)\ge k-1\ge1$.  Otherwise Proposition~\ref{prop:nucleus-out} gives
+$\IC(A)\ge r(\nu)\ge1$.
+\end{proof}
+
 These two cases are useful structural reductions, but
 Remark~\ref{rem:scale} limits what the incidence term alone can accomplish.
 For example, at $(q,k)=(16,8)$ inequality~\eqref{eq:conic-complete} would
@@ -629,7 +695,9 @@ For the full system of degree-$d$ forms, the evaluation functionals are the
 degree-$d$ Veronese images of the points, up to nonzero scalar.  Thus the
 first alternative says that the uncovered Veronese images span the dual
 coefficient space; the second supplies a selected Veronese image already in
-their span.  This formulation is not specific to conics.
+their span.  In particular, for the full degree-$d$ system it is enough to
+exhibit $\binom{d+2}{2}$ uncovered points whose Veronese evaluation matrix is
+invertible.  This formulation is not specific to conics.
 
 \begin{proposition}\label{prop:small-values}
 For the standard conic
@@ -642,51 +710,79 @@ in the indicated projective planes,
  \qquad
  \rhoC(9)=6,
  \qquad
- \rhoC(11)=6,
- \qquad
- \rhoC(16)=9.
+ \rhoC(11)=6.
 \]
 \end{proposition}
 
 \begin{proof}
 Equation~\eqref{eq:L2} gives
 \[
- L_2(8)=L_2(9)=L_2(11)=6,
- \qquad L_2(16)=8.
+ L_2(8)=L_2(9)=L_2(11)=6.
 \]
-Appendix~\ref{app:witnesses} lists $\cC$-complete arcs of sizes six, six,
-six, and nine, respectively.  Their verification is described below.
-It remains to exclude a $\cC$-complete eight-arc over $\F_{16}$.
+Appendix~\ref{app:witnesses} lists $\cC$-complete arcs of size six in each
+plane.  Their verification is described below.
+\end{proof}
 
-Any four points of an eight-arc form a projective frame.  Normalizing this
-frame and applying canonical augmentation gives respectively
-$4$, $61$, $454$, and $2633$ projective classes at sizes five through eight
-(from $182$, $532$, $5155$, and $21495$ legal extensions).  Every retained
-transition is certified by an invertible $3\times3$ matrix together with
-pointwise projective scalar equalities, so the classification does not trust
-the canonical-labeling program.  The final count of $2633$ projective
-eight-arc classes independently reproduces Theorem~3.8.1 of
-Al-Seraji--Al-Ogali~\cite{AlSerajiAlOgali2018}; the classification count
-itself is therefore not new.
+\begin{theorem}[Quadratic avoidance over $\F_{16}$]
+\label{thm:q16-quadratic}
+Let $A$ be any eight-arc in $\PG(2,16)$, and let $U(A)$ be the points outside
+$A$ that lie on no secant of $A$.  There is no nonzero homogeneous quadratic
+form $Q$ such that
+\[
+ U(A)\subseteq Z(Q)
+ \qquad\hbox{and}\qquad
+ A\cap Z(Q)=\varnothing.
+\]
+The assertion includes singular quadratic forms.
+\end{theorem}
 
-For an eight-arc $A$, let $U(A)$ be the points outside $A$ that lie on no
-secant of $A$.  If $A$ is complete outside a nonsingular conic $\cC$, then
-$U(A)\subseteq\cC$.  A conic has a nonzero homogeneous quadratic equation,
-and evaluation at a point is a linear condition on its six coefficients.
+\begin{proof}
+Any four points of $A$ form a projective frame.  Normalize that frame and
+apply canonical augmentation.  This gives respectively $4$, $61$, $454$,
+and $2633$ projective classes at sizes five through eight (from $182$, $532$,
+$5155$, and $21495$ legal extensions).  Every retained transition is
+certified by an invertible $3\times3$ matrix together with pointwise
+projective scalar equalities, so the classification does not trust the
+canonical-labeling program.  The final count of $2633$ projective eight-arc
+classes independently reproduces Theorem~3.8.1 of
+Al-Seraji--Al-Ogali~\cite{AlSerajiAlOgali2018}; the count itself is not new.
+
 For $2630$ of the classified leaves, six points of $U(A)$ give an invertible
 $6\times6$ evaluation matrix, giving the first alternative of
 Lemma~\ref{lem:evaluation-obstruction}.  In each of
 the remaining three leaves the evaluation rows have rank five, but an
 explicit linear combination places the evaluation functional of a point of
-$A$ in their span, giving the second alternative.  The companion Lean
-formalization checks these local certificates and proves their semantic
-transport to arbitrary eight-arcs and arbitrary nonsingular conics.  Hence
-no such eight-arc is $\cC$-complete, while the displayed nine-point witness
-proves the upper bound.  The published ordinary classification records arc
-counts, stabilizers, secant-index distributions, and conic-contained classes;
-we did not find this uncovered-locus rank split or the resulting relative-
-conic nonexistence theorem tabulated there.
+$A$ in their span, giving the second alternative.
+
+Finally, the obstruction is projectively invariant.  If $gA$ is a normalized
+representative, replace $Q$ by $Q\circ g^{-1}$.  This is nonzero because $g$
+is invertible, its zero set is $gZ(Q)$, and projectivities carry secants to
+secants, so $U(gA)=gU(A)$.  Thus a quadratic as in the statement would
+contradict the checked obstruction for the normalized leaf.  The companion
+Lean development kernel-checks every local alternative; its global conic
+corollary additionally checks frame reduction and projective transport.
 \end{proof}
+
+\begin{corollary}[Exact relative value over $\F_{16}$]
+\label{cor:q16-exact}
+For every nonsingular conic $\cC\subseteq\PG(2,16)$,
+\[
+ \rhoC(16)=9.
+\]
+\end{corollary}
+
+\begin{proof}
+Equation~\eqref{eq:L2} gives $L_2(16)=8$.  If a $\cC$-complete eight-arc
+existed, its ordinary-uncovered locus would lie in the zero set of the
+nonzero quadratic defining $\cC$, while the arc is disjoint from that zero
+set.  This contradicts Theorem~\ref{thm:q16-quadratic}.  The nine-point
+witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
+\end{proof}
+
+The published ordinary classification records arc counts, stabilizers,
+secant-index distributions, and conic-contained classes.  We did not find
+the uncovered-locus rank split, Theorem~\ref{thm:q16-quadratic}, or its exact
+relative-conic corollary tabulated there.
 
 \begin{remark}[Anatomy of the three exceptional leaves]
 Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
@@ -879,6 +975,13 @@ encoding.  A witness of size nine is
 \]
 
 \begin{thebibliography}{99}
+
+\bibitem{AlabdullahHirschfeld2019}
+S.~Alabdullah and J.~W.~P.~Hirschfeld,
+\newblock A new lower bound for the smallest complete $(k,n)$-arc in
+$\PG(2,q)$,
+\newblock \emph{Designs, Codes and Cryptography} \textbf{87} (2019), 679--683.
+\newblock doi:10.1007/s10623-018-00592-8.
 
 \bibitem{AlSerajiAlOgali2018}
 N.~A.~M. Al-Seraji and R.~A.~B. Al-Ogali,

@@ -207,6 +207,27 @@ closed-negative proof routes belong here.
   legal-extension theorems audit to `[propext, Classical.choice, Quot.sound]`. The follow-on review
   is routed to `notes/2026-07-12-c100-relative-conic-game-bridge.md`.
 
+## 2026-07-13 — applied strengthening and novelty discipline pass
+
+- Generalized the conic-loss capacity argument to an arbitrary prescribed hole set `H`, retaining
+  the exact `I_H/m` remainder, and generalized projective averaging to any `H` satisfying
+  `|A||H|<|PG(2,q)|`. The former is the paper's prescribed-hole contribution; the latter is a
+  standard transitive-action consequence and is not presented as novel.
+- Named the universally positive conic loss `I_C≥1` in even characteristic and exposed attainment
+  of the finite minimum. These are inexpensive corollaries, not independent novelty claims.
+- Replaced the qualitative asymptotic display by the fully explicit finite estimate
+  `rho_C(q) ≥ sqrt(2q)+3/2-8/sqrt(2q)`, with its polynomial expansion written out in the manuscript
+  and the corresponding Lean theorem retained as the proof source.
+- A fresh bounded primary-source search added Alabdullah--Hirschfeld's 2019 secant-capacity lower
+  bound to the comparison set. It reinforces that the capacity method is classical; no checked
+  source supplied the prescribed-hole exact remainder. The public wording makes no priority claim.
+- Synchronized the manuscript, README, proof audit, trust manifest, result index, and completed
+  handoff. The global arbitrary-quadric transport argument is separated from the Lean-checked
+  normalized classification core so that the trust boundary is not overstated.
+- Replayed `Conic.lean`, `Averaging.lean`, and `Nucleus.lean` in the isolated disk-backed cache.
+  The new general-hole bound, arbitrary-hole averaging transfer, and universal even-characteristic
+  loss each report exactly `[propext, Classical.choice, Quot.sound]`.
+
 ## 2026-07-12 — q=11 residual theorem and q=16 exact-value lane
 
 - Added `RelativeConicArcs.Q11Residual`. Kernel checks prove all twelve conic parameters are live,

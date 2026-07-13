@@ -226,6 +226,21 @@ theorem completeArc_map_projective (g : PlaneSpace K ≃ₗ[K] PlaneSpace K)
   simpa using completeOutside_map (L := Point K)
     (ProjectiveCap.Projective.mapEquiv g) hcol hA
 
+/-- A complete arc `A` can be moved off any prescribed hole set `H` whenever
+`|A| |H| < |PG(2,K)|`; the moved arc is then complete outside `H`. -/
+theorem exists_completeOutside_of_completeArc
+    (H : Finset (Point K)) {A : Finset (Point K)}
+    (hA : CompleteArc (L := Point K) A)
+    (hsmall : A.card * H.card < Fintype.card (Point K)) :
+    ∃ B : Finset (Point K), CompleteOutside (L := Point K) B H ∧ B.card = A.card := by
+  obtain ⟨g, hdisj⟩ := exists_projective_map_disjoint A H hsmall
+  let B := A.map (ProjectiveCap.Projective.mapEquiv g).toEmbedding
+  refine ⟨B, completeOutside_of_completeArc_of_disjoint
+    (completeArc_map_projective g hA) hdisj, ?_⟩
+  simp [B]
+
+#print axioms exists_completeOutside_of_completeArc
+
 /-- Any arc of size at most `q` has a projective image disjoint from a nonsingular conic. -/
 theorem exists_projective_map_disjoint_conic (C : NonsingularConic (K := K))
     (A : Finset (Point K)) (hcard : A.card ≤ Fintype.card K) :

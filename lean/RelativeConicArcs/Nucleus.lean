@@ -522,6 +522,24 @@ theorem nucleus_not_mem_arc_constraints (h2 : (2 : K) = 0) {A : Finset (Point K)
     exact card_tangentSecants_le_holeIncidence h2 A
   · simpa [ht] using holeIncidence_modEq_tangentSecants h2 A
 
+/-- Every relative-complete arc in even characteristic spends at least one secant incidence on
+the prescribed conic, independently of whether it contains the nucleus. -/
+theorem complete_holeIncidence_pos (h2 : (2 : K) = 0) {A : Finset (Point K)}
+    (hA : CompleteOutside (L := Point K) A (standardConic (K := K))) :
+    1 ≤ holeIncidence (L := Point K) A (standardConic (K := K)) := by
+  by_cases hnu : standardNucleus (K := K) ∈ A
+  · have hcard : 3 ≤ A.card := by
+      have hC : (standardConic (K := K)).card = PlaneOrder (Point K) (Point K) + 1 := by
+        rw [ProjectiveBridge.planeOrder_eq_card]
+        exact standardConic_card
+      exact completeOutside_card_ge_three_of_card_holes hA hC
+    have hinc := (nucleus_mem_arc_constraints h2 hA.1 hnu).2.1
+    omega
+  · exact (nucleus_not_mem_arc_constraints h2 hA hnu).2.2.2.1.trans'
+      (nucleus_not_mem_arc_constraints h2 hA hnu).1
+
+#print axioms complete_holeIncidence_pos
+
 /-- Corrected nucleus-out inequality, in subtraction-free integer form. -/
 theorem nucleus_not_mem_complete_bound (h2 : (2 : K) = 0) {A : Finset (Point K)}
     (hA : CompleteOutside (L := Point K) A (standardConic (K := K)))

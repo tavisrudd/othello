@@ -10,14 +10,19 @@
    \sum_{y\in H}r(y)(m-r(y)).
    \]
 3. Coverage, uncovered-locus, equality, and quantitative stability statements are immediate corollaries of the exact identity.
-4. For a nonsingular conic, the lower bound uses only \(|C|=q+1\) and the preceding identity.
-5. The asymptotic lower bound is obtained from the parity-free necessary inequality
+4. For an arbitrary prescribed hole set of size \(h\), completeness gives the corrected capacity
+   inequality with required-locus size \(q^2+q+1-k-h\). The conic specialization uses only
+   \(|C|=q+1\).
+5. The additive lower bound is obtained from the parity-free necessary inequality
    \[
    q^2-k\le \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),
    \]
-   giving \(k\ge\sqrt{2q}+3/2-O(q^{-1/2})\).
-6. The upper-bound transfer is an averaging argument over \(\operatorname{PGL}(3,q)\).
-7. The even-characteristic statements use only the standard nucleus/tangent facts for a nonsingular conic.
+   giving the explicit finite statement
+   \(k\ge\sqrt{2q}+3/2-8/\sqrt{2q}\) and hence the asymptotic result.
+6. The upper-bound transfer is an averaging argument over \(\operatorname{PGL}(3,q)\): an ordinary
+   complete \(b\)-arc can be moved off any prescribed \(H\) when \(b|H|<q^2+q+1\).
+7. The even-characteristic statements use only the standard nucleus/tangent facts for a
+   nonsingular conic; combining the nucleus-in/out cases gives \(I_C(A)\ge1\) universally.
 
 ## Computer-assisted claims
 
@@ -41,6 +46,13 @@ claim: it independently reproduces Theorem 3.8.1 of Al-Seraji--Al-Ogali
 (2018). The additional computation partitions those known ordinary classes
 by a different invariant: 2630 full-rank ordinary-uncovered quadratic
 evaluation systems and three rank-five systems forced to meet the arc.
+
+The classification proves a statement strictly stronger than the conic application: for every
+eight-arc in `PG(2,16)`, no nonzero homogeneous quadratic, singular or nonsingular, contains its
+entire ordinary-uncovered locus while avoiding the arc. Projective invariance is explicit:
+normalizing by `g` replaces a form `Q` by `Q ∘ g⁻¹`, preserves nonzeroness, transports zero sets,
+and carries the ordinary-uncovered locus bijectively. Lean checks the stronger alternative for
+every canonical leaf; the already formalized global reduction checks the full conic corollary.
 
 The manuscript now isolates the underlying linear-algebra argument as the
 general uncovered-evaluation obstruction: injective evaluation on the
@@ -72,8 +84,10 @@ the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
 
 ## Lean formalization
 
-The standalone `lean/RelativeConicArcs/` package formalizes the elementary theorem chain and the
-four finite certificates. Its generic Boolean checker verifies conic disjointness, the arc
+The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the four finite
+certificates. In particular, it proves the arbitrary-hole capacity theorem, the generic
+projective-averaging transfer, the explicit additive lower bound, and the universal
+even-characteristic incidence loss. Its generic Boolean checker verifies conic disjointness, the arc
 condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.

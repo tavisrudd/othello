@@ -12,14 +12,14 @@ spinoff.
 | incidence and relative completeness | `Arc`, `CompleteOutside`, `rho`, `ProjectiveBridge.arc_iff_projectiveCap` | defined/proved in Lean |
 | cap-game localization | persistent containment/move theorems; `legalExtensions_sdiff_holes_eq_uncovered`; `win_parametrizedHoles_iff`, `isP_parametrizedHoles_iff` | proved in Lean; domain legality is separated from the exact parametrized game-value bridge |
 | moments and defect | `pointIndex_le_half_card`, `first_secant_moment`, `second_secant_moment`, defect/coverage/stability theorems in `Defect.lean` | proved in Lean |
-| conic and finite bounds | `mem_standardConic_iff_onConic`, `NonsingularConic.finite_lower_bound`, `L1_le_L2`, `L2_le_rho` | proved in Lean |
-| asymptotics | `parityFreeNecessary`, explicit additive lower bound, Big-O and liminf wrappers in `Asymptotic.lean` | proved in Lean |
-| averaging | projective disjoint-translate theorem, `rhoC_le_t2`, `rhoC_le_of_kimVuBound` | proved in Lean; Kim--Vu remains an explicit theorem parameter |
-| characteristic two | hyperoval/nucleus/tangent classification and nucleus-in/out inequalities in `Nucleus.lean` | proved in Lean under `(2 : K) = 0` |
+| arbitrary holes and conic bounds | `completeOutside_bound_general`, `NonsingularConic.finite_lower_bound`, `L1_le_L2`, `L2_le_rho` | proved in Lean; the general bound depends only on hole cardinality and incidence |
+| asymptotics | `parityFreeNecessary`, `rhoC_explicit_additive_lower_bound`, Big-O and liminf wrappers in `Asymptotic.lean` | proved in Lean; explicit error is `8 / sqrt(2q)` |
+| averaging | `exists_completeOutside_of_completeArc`, `rhoC_le_t2`, `rhoC_le_of_kimVuBound` | proved in Lean for arbitrary holes under `|A||H| < |PG(2,K)|`; Kim--Vu remains an explicit theorem parameter |
+| characteristic two | hyperoval/nucleus/tangent classification, `complete_holeIncidence_pos`, and nucleus-in/out inequalities in `Nucleus.lean` | proved in Lean under `(2 : K) = 0` |
 | certificate bridge | relative and ordinary canonical-coverage soundness; `rawArc_iff_projectiveCap`; `check_sound`, `check_sound_empty` | proved in Lean for every finite field |
 | evaluation obstruction | `evaluationMap`; injective-evaluation and selected-functional span obstructions in `EvaluationObstruction.lean` | proved over every commutative semiring; no finite-dimensionality assumption |
 | finite examples | `Examples.rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all four values exact |
-| q=16 projective classification | frame normalization; `ClassifiedAt.extendStep`; checked matrix transitions; full-rank/forced-hit leaf rejection; `no_completeOutside_GF16_card_eight` | 2633 eight-arc classes rejected; proves `rhoC_GF16 = 9` |
+| q=16 projective classification | frame normalization; checked matrix transitions; `Q16QuadraticAvoidance.level8_quadraticAvoidance`; full-rank/forced-hit leaf rejection; `no_completeOutside_GF16_card_eight` | all 2633 normalized classes satisfy the stronger singular-or-nonsingular quadratic obstruction; global conic transport proves `rhoC_GF16 = 9` |
 | q=9 terminal game | `Q9Terminal.complete`, `legalExtensions_eq_empty`, `isP` | certified witness is an ordinary complete arc and actual terminal projective P-position |
 | q=11 residual game | residual graph theorems, `continuation_rawArc_iff`, `seed_isP` | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
 

@@ -25,6 +25,35 @@ variable {P L : Type*} [Membership P L]
   [Configuration.ProjectivePlane P L]
 
 omit [DecidableEq L] in
+/-- Cardinality of the required locus for an arbitrary prescribed hole set.  This is the
+subtraction-safe source of the manuscript's general `q²+q+1-k-h` term. -/
+theorem card_requiredLocus_general {A H : Finset P} (hdisj : Disjoint A H) :
+    (requiredLocus A H).card =
+      PlaneOrder P L ^ 2 + PlaneOrder P L + 1 - (A.card + H.card) := by
+  rw [requiredLocus, Finset.card_sdiff]
+  simp only [Finset.inter_univ, Finset.card_univ]
+  rw [Finset.card_union_of_disjoint hdisj,
+    RelativeConicArcs.card_points (P := P) (L := L)]
+
+/-- Exact corrected capacity inequality for an arc complete outside an arbitrary prescribed hole
+set.  No geometric property of the holes is used. -/
+theorem completeOutside_bound_general {A H : Finset P}
+    (hcomplete : CompleteOutside (L := L) A H) :
+    (A.card / 2) *
+          (PlaneOrder P L ^ 2 + PlaneOrder P L + 1 - (A.card + H.card))
+        + holeIncidence (L := L) A H + 6 * Nat.choose A.card 4 ≤
+      (A.card / 2) * (Nat.choose A.card 2 * (PlaneOrder P L - 1)) := by
+  have hempty : uncovered (L := L) A H = ∅ :=
+    (completeOutside_iff_uncovered_eq_empty (L := L)).mp hcomplete |>.2.2
+  have hbound := uncovered_bound (L := L) hcomplete.1 hcomplete.2.1
+  rw [card_requiredLocus_general (P := P) (L := L) hcomplete.2.1,
+    hempty, Finset.card_empty,
+    Nat.mul_zero, Nat.add_zero] at hbound
+  exact hbound
+
+#print axioms completeOutside_bound_general
+
+omit [DecidableEq L] in
 theorem card_requiredLocus_of_card_holes {A H : Finset P} (hdisj : Disjoint A H)
     (hH : H.card = PlaneOrder P L + 1) :
     (requiredLocus A H).card = PlaneOrder P L ^ 2 - A.card := by
