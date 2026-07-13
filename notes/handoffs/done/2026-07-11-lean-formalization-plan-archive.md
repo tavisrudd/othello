@@ -615,3 +615,11 @@ that discharges the transfer interface's finite fields from it:
   repair-hypergraph membership iff.
 - Validation: `RepairCodes.AxisTwistedCubic` builds successfully; the new classification theorems
   have only the standard foundational axiom profile.
+
+### Handoff Note — 2026-07-12 (cubic all-axis support excluded)
+
+- Proved `cubicRepair_threeAxis_not_mem` directly from the full-support dual witness: evaluating
+  its generator-column relation at `X₀` kills every axis term and forces the cubic target
+  coefficient to zero, contradicting repair membership.
+- This closes the last helper-type exclusion for cubic targets; only assembling the cases into the
+  exact membership iff remains before the coloured-complete-graph invariant proof.

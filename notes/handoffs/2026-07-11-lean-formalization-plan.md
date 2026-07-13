@@ -236,8 +236,8 @@ matroid independence remains in Phase 2.
    arbitrary-axis determinant equation and projective uniqueness. The remaining step is the exact
    arbitrary size-four repair classification needed for the per-orbit matching/transversal
    formulas. The cubic-target classification now proves uniqueness of the axis completion and
-   excludes the four-cubic and two-cubic/two-axis alternatives; the all-axis-helper exclusion and
-   final exact membership packaging remain. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
+   excludes the four-cubic, two-cubic/two-axis, and cubic-plus-three-axis alternatives; final exact
+   membership packaging remains. The `τ` formulas expose `Z₃(q)` as a named hypothesis/import
    boundary and yield all-symbol `τ>ν` for `q≥9`.
    **Semantic gate closed:** `minimalHyperedges` / `minimalRepairHypergraph` are the paper-facing
    clutters. Lean proves that deleting redundant supersets preserves `τ` unconditionally and `ν`

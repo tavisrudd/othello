@@ -508,6 +508,40 @@ theorem cubicRepair_oneCubic_twoAxis_not_mem [CharP 𝔽 3]
   funext i
   fin_cases i <;> simp [twoCubicTwoAxisFamily]
 
+/-- Three axis helpers cannot repair a cubic target: the `X₀` coordinate forces the target
+coefficient of every relation on that support to vanish. -/
+theorem cubicRepair_threeAxis_not_mem (x : 𝔽) (y z w : 𝔽 ⊕ Unit) :
+    ({(.inr y : AxisTwistedCubicIndex 𝔽), .inr z, .inr w} :
+      Finset (AxisTwistedCubicIndex 𝔽)) ∉
+        axisTwistedCubicRepairHypergraph (.inl x) 3 := by
+  intro hR
+  obtain ⟨-, -, c, hc, hcx, hsupp⟩ := mem_repairHypergraph.mp hR
+  have hrel := dual_word_column_relation (G := axisTwistedCubicGenerator) hc
+  have h0 := congrFun hrel (0 : Fin 4)
+  simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at h0
+  change (∑ j, c j * axisTwistedCubicGenerator 0 j) = 0 at h0
+  have hsum :
+      (∑ j, c j * axisTwistedCubicGenerator 0 j) = c (.inl x) := by
+    rw [Finset.sum_eq_single (.inl x)]
+    · simp [axisTwistedCubicGenerator, axisTwistedCubicPoints, momentCurve]
+    · intro j _ hjx
+      by_cases hcj : c j = 0
+      · simp [hcj]
+      · have hj : j ∈ wordSupport c := mem_wordSupport.mpr hcj
+        rw [hsupp] at hj
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hj
+        rcases hj with hj | hj | hj | hj
+        · exact (hjx hj).elim
+        · subst j
+          cases y <;> simp [axisTwistedCubicGenerator, axisTwistedCubicPoints]
+        · subst j
+          cases z <;> simp [axisTwistedCubicGenerator, axisTwistedCubicPoints]
+        · subst j
+          cases w <;> simp [axisTwistedCubicGenerator, axisTwistedCubicPoints]
+    · simp
+  rw [hsum] at h0
+  exact hcx h0
+
 /-- No cubic coordinate has a repair edge with at most two helpers. -/
 theorem cubicCoordinate_no_repairEdge_radius_two [CharP 𝔽 3] (x : 𝔽)
     (R : Finset (AxisTwistedCubicIndex 𝔽)) :
@@ -780,5 +814,6 @@ theorem axisTwistedCubic_allSymbol_locality_three [CharP 𝔽 3]
 #print axioms cubicRepair_axis_eq_of_mem
 #print axioms cubicRepair_threeCubic_not_mem
 #print axioms cubicRepair_oneCubic_twoAxis_not_mem
+#print axioms cubicRepair_threeAxis_not_mem
 
 end RepairCodes
