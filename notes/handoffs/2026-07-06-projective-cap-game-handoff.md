@@ -149,8 +149,10 @@ intersection patterns and point counts are verified, not trusted).
   route are Lean-proved; the latter uses a local coordinate-free null-cone rigidity theorem, with
   no imported classification axiom. Both linear Hermitian routes and the full square-scalar
   Baer-semilinear representative branch are Lean-proved.
-  The general elliptic `Q⁻(2m−1,q)`, `m≥3`, exclusion is **conjectural** pending the
-  Witt/Scharlau-transfer classification. No exact/coextensive boundary theorem is claimed.
+  The former elliptic `Q⁻(2m−1,q)` exclusion conjecture is false: a Chevalley–Warning coefficient
+  lemma makes the nonsplit block map preserve a standard elliptic form in every even vector
+  dimension, proving its cap game P. The strict theorem is coordinate-exact and transports through
+  any supplied projective linear equivalence.
   `H(2,9)`/`H(3,4)` compute P regardless, so these are method boundaries, not outcome flips;
   `Q(4,q)` parabolic is the first open outcome here.
 - **Trivial rows flagged:** ovoids `Q⁻(3,q)` are free placement (P by `q²+1`-even parity);
@@ -172,9 +174,9 @@ intersection patterns and point counts are verified, not trusted).
   base subgeometry, and the full Hermitian intersection. `BaerQuadraticUntwist` and
   `QuadraticNullCone` prove the local zero-locus-stabilizer bridge, and
   `BaerQuadraticStabilizer` derives the full modeled parabolic conclusion from projective board
-  preservation. C87 is closed; the remaining elliptic-transfer obligation is tracked as C88 in
-  the dedicated
-  [`2026-07-12 mirror-boundary handoff`](2026-07-12-mirror-boundary-formalization.md); the detailed
+  preservation. `EllipticQuadricMirror` overturns the proposed elliptic exclusion and proves the
+  standard `Q⁻` P family using an anisotropic-tail construction. C87–C88 are closed in the dedicated
+  [`2026-07-12 mirror-boundary handoff`](done/2026-07-12-mirror-boundary-formalization.md); the detailed
   theorem specification remains
   [`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md).
   Disjoint from the C41/C50 files.

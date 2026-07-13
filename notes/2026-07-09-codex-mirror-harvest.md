@@ -17,25 +17,25 @@ trusted; the cap game is then exhaustively solved and the candidate involution i
 the **C27 pair-extension obligation** over every σ-invariant reachable cap (which is itself a
 stuck-free / total-winning-strategy proof).
 
-The working classification is driven by the isometry group, not by ambient parity alone. Its
-trust tiers are explicit below; only the hyperbolic positive row is a completed Lean theorem.
+The final classification is driven by the isometry group, with vector-dimension parity controlling
+the quadratic rows. Its trust tiers are explicit below; the hyperbolic and standard elliptic
+positive rows are completed Lean theorems.
 
 | Variety | Board is | Mirror result | Mechanism |
 |---|---|---|---|
 | **Hyperbolic quadric `Q⁺(2m−1,q)`, odd q** | nontrivial (generators) | **P — NEW family** | C25 elliptic block mirror `(a,b)↦(d·b,a)` is a factor-`d` similarity of `Σaᵢbᵢ`, fpf, collinearity-preserving |
 | Elliptic quadric / ovoid `Q⁻(3,q)` | free placement (≤2/line) | P trivially | bare parity `q²+1` even; **flagged trivial, no novelty** |
 | Hermitian curve `H(2,4)` | `= AG(2,3)` | P (known) | affine cap theorem; odd point count, **not** a mirror family |
-| **Elliptic quadric `Q⁻(2m−1,q)`** | nontrivial (generators) | **conjectural method-negative** | natural block map fails; full Witt-transfer exclusion open |
-| **Parabolic quadric `Q(2m,q)`** | nontrivial (generators) | **method-negative [PROVEN-PROSE + partial Lean]** | nonsplit odd-dimension route Lean-excluded; split isotropy/Baer branches remain to formalize |
-| **Hermitian curve `H(2,q²)`, q≥3** | nontrivial (secants) | **method-negative [PROVEN-PROSE]** | requires blocking/isotropy and semilinear formalization |
-| **Hermitian surface `H(3,q²)`** | nontrivial (generators) | **method-negative [PROVEN-PROSE]** | requires Hermitian isotropy and unitary involution classification |
+| **Elliptic quadric `Q⁻(2m−1,q)`** | nontrivial (generators) | **P — NEW family** | Chevalley–Warning supplies an anisotropic tail compatible with the nonsplit block mirror |
+| **Parabolic quadric `Q(2m,q)`** | nontrivial (generators) | **method-negative [LEAN-PROVED MODELED BRANCHES]** | split isotropy, odd-dimension nonsplit exclusion, and Baer zero-locus rigidity |
+| **Hermitian curve `H(2,q²)`, q≥3** | nontrivial (secants) | **method-negative [LEAN-PROVED MODELED BRANCHES]** | Hermitian isotropy, norm-square reflection, and Baer fixed-subgeometry intersection |
+| **Hermitian surface `H(3,q²)`** | nontrivial (generators) | **method-negative [LEAN-PROVED MODELED BRANCHES]** | same Hermitian classification |
 
-The headline deliverable is the **new infinite family `Q⁺(2m−1,q) = P` for every odd `q` and
-every `m ≥ 2`**, provable at genuine lemma-application cost because the involution is exactly
-the C25 elliptic block map (already Lean-proven fpf + collinearity-preserving), only the
-sub-board and its preservation are new. The other rows are boundary data for D1, at the stated
-prose/conjectural tiers. They do not become a sharp classification until the remaining isotropy,
-semilinear, unitary, and Witt-transfer obligations are proved.
+The quadratic headline is the pair of infinite P families `Q⁺(2m−1,q)` and
+`Q⁻(2m−1,q)` for odd `q`. **Correction (2026-07-12):** the earlier elliptic-negative conjecture
+tested the block map against incompatible tail coefficients. `EllipticQuadricMirror.lean` uses
+Chevalley–Warning to construct the compatible nonsquare-discriminant tail and proves the standard
+elliptic coordinate family P. No negative elliptic theorem had been claimed.
 
 ## General proposition (the theorem behind the harvest)
 
@@ -199,17 +199,15 @@ Axiom profile of both `initialSubCapP_blockQuadric_of_odd_card` and
 `initialSubCapP_of_fpf_collinearity_preserving`: `[propext, Classical.choice, Quot.sound]`
 (no `sorry`, no `native_decide`) — verified via `#print axioms`.
 
-Follow-up Lean options: a bespoke `Fin m → K × K` `Fintype` instance to drop the
-`[Fintype (Point ...)]` hypothesis. Formalizing the negative obstructions is required before any
-sharp/coextensive boundary claim; `MirrorBoundary.lean` now supplies the generic and parabolic
-nonsplit reductions, while the form-theoretic blockers remain explicit.
+`EllipticQuadricMirror.lean` additionally formalizes sub-board P/N transport through a supplied
+projective linear equivalence. The completed strict boundary is recorded in the follow-up note.
 
 ## Follow-ups
 
 - **Boundary theorem + extension scopes:** [`2026-07-09-mirror-method-boundary.md`](2026-07-09-mirror-method-boundary.md)
-  — the boundary-classification program (#5: hyperbolic Lean-proved, parabolic/Hermitian
-  prose-proved with partial formal reductions, elliptic conjectural), plus scopes for polar-space Nofil (#3) and
-  Segre/product varieties (#4).
+  — the completed boundary-classification program (#5: hyperbolic and standard elliptic positive;
+  modeled parabolic/Hermitian branches method-negative), plus scopes for polar-space Nofil (#3)
+  and Segre/product varieties (#4).
 - **Mirror unification (landed):** [`2026-07-09-mirror-unification.md`](2026-07-09-mirror-unification.md)
   — one engine, several instances (sum-free negation / projective elliptic / hyperbolic-quadric /
   conflict-graph Cayley). Lean: `CapGame/GraphMirror.lean`, `ProjectiveCap/CapCMirror.lean`.

@@ -66,9 +66,10 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    `maxonN(q) ≤ q−5` for all depleted q. Min-witness bound holds through q=25; depleted set still
    `{11,17}`. Gated compute: the next-depleted-order census (q=29, ~16 GB / ~15–25 h — user gate).
 3. **Independent lanes** — C30 (q17/q19 Lean cert assembly, long-running, gated) pulls in parallel.
-4. **Mirror-boundary formalization — C85–C88.** Independent strict-trust lane: finish the
-   parabolic and Hermitian method-negative theorems, then attack the conjectural elliptic `Q⁻`
-   boundary. Live map: [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+4. **Mirror-boundary formalization — C85–C88 [REPORTED 2026-07-12].** Strict-trust lane closed:
+   parabolic and Hermitian modeled branches are method-negative; the proposed elliptic `Q⁻`
+   exclusion was false and its standard coordinate family is P by an fpf mirror. Final map:
+   [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
 5. **Arcs complete outside a conic formalization — C89–C96.** Independent spinoff lane. C89's
    incidence foundation through C93's explicit
    `rhoC(q) ≥ sqrt(2q)+3/2−8/sqrt(2q)` and asymptotic wrappers are Lean-proved;
@@ -135,14 +136,14 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   eigenspace decomposition and scalar-square normalization close the split linear parabolic
   branch. `ProjectiveCap` builds; strict axiom profile is
   `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
 
 - **C86 [REPORTED 2026-07-12] — Hermitian linear obstruction.** Relative Frobenius, quadratic norm
   surjectivity/square reflection, and two-vector orthogonalization prove finite Hermitian isotropy;
   scalar-square eigenspaces exclude the split route, while `Norm(c)=μ²` excludes a nonsquare
   similitude scalar. `ProjectiveCap` builds; strict axiom profile is
   `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
 
 - **C87 [REPORTED 2026-07-12] — Baer-semilinear obstruction.** Constructive projective conjugacy,
   scalar Hilbert 90, fixed-value quadratic descent, semilinear pullback untwisting, and a
@@ -150,12 +151,15 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
   both Hermitian and parabolic boards. The parabolic theorem accepts projective board preservation
   directly. The imported stabilizer axiom was deleted; focused and aggregate builds pass, and every
   load-bearing theorem has axiom profile `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
 
-- **C88 [OPEN] — elliptic `Q⁻` boundary classification.** Develop the Witt/Scharlau-transfer
-  argument for variety-preserving projective involutions; the general `Q⁻(2m−1,q)`, `m≥3`, claim
-  remains conjectural until this closes. Track in the
-  [mirror-boundary handoff](handoffs/2026-07-12-mirror-boundary-formalization.md).
+- **C88 [REPORTED 2026-07-12] — elliptic `Q⁻` boundary classification.** The proposed exclusion is
+  false. Chevalley–Warning supplies a nonsquare-discriminant anisotropic tail compatible with the
+  nonsplit block map, giving a fixed-point-free mirror and P theorem for the standard elliptic
+  coordinate form in every even vector dimension. P/N transport through a supplied projective
+  linear equivalence is formal. Focused and aggregate builds pass; strict axiom profile is
+  `[propext, Classical.choice, Quot.sound]`. Track in the
+  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
 
 - **C84 [ACTIVE 2026-07-12 — PRIMARY, abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:

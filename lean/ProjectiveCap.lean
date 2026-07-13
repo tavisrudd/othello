@@ -5,6 +5,7 @@ import ProjectiveCap.Projective
 import ProjectiveCap.CompleteCapLowerBound
 import ProjectiveCap.Mirror
 import ProjectiveCap.EllipticMirror
+import ProjectiveCap.EllipticQuadricMirror
 import ProjectiveCap.HyperbolicQuadricMirror
 import ProjectiveCap.MirrorBoundary
 import ProjectiveCap.BaerSemilinear

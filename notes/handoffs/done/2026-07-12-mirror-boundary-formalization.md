@@ -1,20 +1,19 @@
 # Handoff: mirror-boundary formalization
 
 **Date:** 2026-07-12
-**Status:** IN PROGRESS
-**Tasks:** C85–C87 [REPORTED 2026-07-12]; C88 [OPEN]
+**Status:** COMPLETE
+**Tasks:** C85–C88 [REPORTED 2026-07-12]
 
 ## Goal
 
 Close the strict-trust boundary classification for fixed-point-free projective involutions on
-classical polar-space cap boards. Formalize the tractable parabolic and Hermitian negative cases;
-keep the general elliptic `Q⁻(2m−1,q)`, `m≥3`, statement explicitly conjectural until its
-Witt/Scharlau-transfer classification is proved.
+classical polar-space cap boards. The final classification is positive for both even-dimensional
+quadratic types and negative for the modeled parabolic and Hermitian branches.
 
 The detailed mathematical statement and prose reductions live in
-[`../2026-07-09-mirror-method-boundary.md`](../2026-07-09-mirror-method-boundary.md). This handoff is
-the live execution map. Session history belongs in
-[`done/2026-07-12-mirror-boundary-formalization-archive.md`](done/2026-07-12-mirror-boundary-formalization-archive.md).
+[`../../2026-07-09-mirror-method-boundary.md`](../../2026-07-09-mirror-method-boundary.md). This
+handoff is the final execution map. Session history belongs in
+[`2026-07-12-mirror-boundary-formalization-archive.md`](2026-07-12-mirror-boundary-formalization-archive.md).
 
 ## Strict trust gate
 
@@ -37,8 +36,10 @@ the modeled square-scalar Baer-semilinear branch:
   no imported classification axiom.
 - The categorical prose claim about every Baer involution remains scoped to the formal model:
   relative-Frobenius semilinear representatives whose square is a nonzero scalar.
-- The hyperbolic `Q⁺` P theorem is unchanged. The elliptic `Q⁻` claim was already conjectural and
-  remains so. No P/N headline changes: these are mirror-method boundary statements only.
+- The hyperbolic `Q⁺` P theorem is unchanged. The conjectured elliptic `Q⁻` exclusion was false:
+  a uniform nonsplit block mirror preserves a standard elliptic form in every even vector
+  dimension. This adds a genuine elliptic P family; it does not affect the odd-`q` projective-plane
+  conjecture.
 
 ## Landed formal core
 
@@ -62,23 +63,23 @@ the modeled square-scalar Baer-semilinear branch:
 | semilinear conjugate pullback is an ordinary quadratic form | `ProjectiveCap/BaerQuadraticUntwist.lean` | Lean-proved (C87) |
 | nondegenerate quadratic forms with the same null cone are proportional in vector dimension at least five | `ProjectiveCap/QuadraticNullCone.lean` | Lean-proved (C87) |
 | every modeled Baer-semilinear parabolic board stabilizer is not fixed-point-free in vector dimension at least five | `ProjectiveCap/BaerQuadraticStabilizer.lean` | Lean-proved (C87) |
+| Chevalley–Warning produces a nonsquare-discriminant anisotropic tail compatible with the nonsplit block map | `ProjectiveCap/EllipticQuadricMirror.lean` | Lean-proved (C88) |
+| the standard elliptic quadric in every even vector dimension has an fpf mirror and P cap game | `ProjectiveCap/EllipticQuadricMirror.lean` | Lean-proved (C88; coordinate-exact) |
+| P/N transport for projectively equivalent sub-boards | `ProjectiveCap/EllipticQuadricMirror.lean` | Lean-proved (C88; supplied equivalence) |
 
-Current source audit: no `sorry`, `native_decide`, or project axiom in the C87 modules. Every new
-load-bearing theorem has axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
+Current source audit: no `sorry`, `native_decide`, or project axiom in the C87–C88 modules. Every
+new load-bearing theorem has axiom profile exactly `[propext, Classical.choice, Quot.sound]`.
 
-## Open work packages
+## Closed work packages
 
-| Task | Required theorem package | Depends on | Completion effect |
-|---|---|---|---|
-| **C88** | Classify elliptic-quadric-preserving involutions through the required Witt/Scharlau transfer, including split and nonsplit possibilities in all `m≥3`. | C85 quadratic infrastructure and, for semilinear elements, the closed C87 conjugacy/rigidity package. | Either proves the advertised `Q⁻` exclusion or records the exact countercase. Until then the claim is conjectural. |
-
-C87 is closed by a coordinate-free null-cone rigidity proof; its internal C87a–d work-package
-history is recorded in the companion archive.
+- C87 is closed by a coordinate-free null-cone rigidity proof.
+- C88 is closed by an explicit counterfamily: hyperbolic pairs plus one anisotropic binary tail,
+  all scaled by the same nonsplit block map. The coordinate theorem is strict; transport to any
+  other presentation is strict once its projective linear equivalence is supplied.
 
 ## Dependency and attack order
 
-C85–C87 are closed; their quadratic, Hermitian, semilinear-conjugacy, descent, and null-cone
-rigidity infrastructure is available to C88.
+C85–C88 are closed. Proof details and the overturned conjectural route are in the companion archive.
 
 Before editing a nontrivial Lean proof, load the named-expert umbrella and the relevant algebra,
 finite-geometry, and Lean dossiers as required by `AGENTS.md`.
@@ -96,16 +97,9 @@ For each closed task:
 5. Append commands, outputs, proof choices, and any closed-negative route to the companion archive;
    keep this live handoff limited to current state.
 
-## Next step
+## Final boundary
 
-Close **C88, elliptic `Q⁻` transfer**. Do not build the Lean proof around the desired negative verdict
-before checking the classification. Put a nonsplit representative in the standard `2×2` block
-form for multiplication by `√c`, solve the symmetric-matrix similitude equation for both possible
-multipliers, and compute the determinant square class of every nondegenerate solution. Verify the
-resulting parity/type formula for small odd fields and several `m`, then formalize it. A direct
-block-matrix/discriminant proof is preferred; use the equivalent Hermitian/Scharlau-transfer
-formulation only if it materially shortens the determinant calculation. The result may be an
-exclusion or an exact countercase, and C88 must report either.
-
-Keep `Q⁻` conjectural until C88 determines the complete classification. The parabolic and
-Hermitian Baer representative branches are closed paths; their proof details belong in the archive.
+For odd fields, the mirror method is positive on both standard even-dimensional orthogonal types:
+hyperbolic `Q⁺` and elliptic `Q⁻`. The modeled parabolic and Hermitian branches are method-negative.
+These method statements determine P only in the positive rows; the negative rows do not determine
+the underlying game outcome.

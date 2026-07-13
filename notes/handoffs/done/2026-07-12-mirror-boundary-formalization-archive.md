@@ -197,3 +197,31 @@ closed-negative proof routes belong here.
     untwisting, semisimilitude, coordinate obstruction, full conjugacy transport, and projective
     board-stabilizer theorem: exactly `[propext, Classical.choice, Quot.sound]`.
   - Source search over the three C87 files: no `sorry`, `native_decide`, or `axiom` declaration.
+
+## 2026-07-12 — C88 elliptic conjecture overturned and reported
+
+- The proposed `Q⁻(2m−1,q)` exclusion is false. For a nonsquare `δ`, the uniform block map
+  `(x,y)↦(δy,x)` squares to `δI`, has no projective fixed point, and can scale an anisotropic
+  binary tail by the same factor `δ` as every hyperbolic pair.
+- Added `ProjectiveCap/EllipticQuadricMirror.lean`. A three-variable Chevalley–Warning zero proves
+  existence of `u,w` with `u≠0` and `discrim u w (uδ)=δ`. The binary form
+  `u x² + wxy + uδy²` is therefore anisotropic, and the standard form consisting of any number
+  of hyperbolic pairs plus this tail is a factor-`δ` similarity for the block map.
+- The resulting projective involution preserves the standard elliptic quadric and the generic
+  sub-board mirror theorem proves its cap game P in every even vector dimension. A separate theorem
+  transports P/N values through any supplied projective linear equivalence, keeping the strict
+  coordinate theorem distinct from the conventional classification of presentations of `Q⁻`.
+- The earlier `Q⁻(5,3)` negative machine anchor had applied the block map to an incompatible tail;
+  it did not test the full similitude family and is superseded. The false result was never promoted
+  beyond conjectural status, so no proved theorem was retracted.
+- Mathematical strengthening: the quadratic mirror boundary is parity-based, not type-based.
+  Hyperbolic and elliptic even-dimensional forms are positive mirror families; the modeled
+  odd-dimensional parabolic branch is method-negative. This does not affect the odd-`q`
+  projective-plane conjecture, whose vector dimension is three.
+- Validation:
+  - `nix develop --command lake build ProjectiveCap.EllipticQuadricMirror` — PASS, warning-free
+    (`2998` jobs).
+  - `nix develop --command lake build ProjectiveCap` — PASS (`8663` jobs).
+  - Axiom audit of anisotropy, coefficient existence, similarity, projective preservation, the P
+    theorem, and equivalence transport: exactly `[propext, Classical.choice, Quot.sound]`.
+  - Source search: no `sorry`, `native_decide`, or `axiom` declaration.

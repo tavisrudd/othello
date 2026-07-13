@@ -8,7 +8,7 @@ is P.  This note (a) packages *where that method stops* into one boundary statem
 two further positive extensions.
 
 **Active formalization tracking:** C85–C88 in the dedicated
-[`mirror-boundary handoff`](handoffs/2026-07-12-mirror-boundary-formalization.md). This note is the
+[`mirror-boundary handoff`](handoffs/done/2026-07-12-mirror-boundary-formalization.md). This note is the
 detailed mathematical specification; the handoff is the live current-state map.
 
 ---
@@ -42,15 +42,16 @@ cap games over odd `q`:
    Hermitian isotropy exclude the split route, while the norm-square multiplier identity excludes
    the nonsplit route. `BaerSemilinear` proves the general square-scalar semilinear normal form and
    the Hermitian board intersection.
-4. **Conjecture:** elliptic quadrics `Q⁻(2m−1,q)` (`m ≥ 3`) admit no fpf mirror. The
-   split route is excluded rigorously and the natural nonsplit similitude fails — one Witt-transfer
-   classification remains; see the open item.
+4. **Elliptic quadrics `Q⁻(2m−1,q)` admit an fpf mirror.** → P.
+   *[FORMAL STANDARD-COORDINATE FAMILY]* `EllipticQuadricMirror` constructs a nonsquare `δ` and
+   coefficients for a nonsquare-discriminant anisotropic binary tail by Chevalley–Warning. The
+   uniform block map `(x,y)↦(δy,x)` scales both the hyperbolic pairs and that tail by `δ`, squares
+   to `δI`, and is projectively fixed-point-free. The P theorem is coordinate-exact; a separate
+   Lean theorem transports it through any supplied projective linear equivalence.
 
-The established positive theorem proves P for the split (hyperbolic) quadratic forms. The other
-types are candidate boundaries, with the trust status above; an exact/coextensive classification
-is not claimed until the remaining form-theoretic lemmas are proved. Crucially this is a boundary of the
-*method*, not of the *outcome* — `H(2,9)` and `H(3,4)` are computed **P** despite carrying no fpf
-involution (C48).  A mirror obstruction is not an N verdict.
+The established positive theorems prove P for both even-dimensional quadratic types. The remaining
+negative rows are boundaries of the *method*, not of the *outcome* — `H(2,9)` and `H(3,4)` are
+computed **P** despite carrying no fpf involution (C48). A mirror obstruction is not an N verdict.
 
 ### Proof structure
 
@@ -97,10 +98,11 @@ and conjugacy transport yield a fixed board point directly from projective board
   - *Hyperbolic `Q⁺(2m−1,q)`:* the elliptic block similitude realizes exactly this nonsplit case
     for every `m` (each `K²` block is a hyperbolic plane `Q=ab` on which `A` is a factor-`δ`
     swap-similitude).  ∎ (1)
-  - *Elliptic `Q⁻(2m−1,q)`:* the split route is excluded for `n = 2m ≥ 6` (above), and the
-    elliptic block similitude fails (its anisotropic tail is not a hyperbolic plane, so the map
-    leaves the quadric — machine-verified on `Q⁻(5,3)`).  A full exclusion needs the
-    Scharlau-transfer computation (see open item). This is conjectural in the general case.
+  - *Elliptic `Q⁻(2m−1,q)`:* the split route is excluded for `n = 2m ≥ 6`, but the nonsplit
+    route succeeds. The earlier test applied the hyperbolic-pair block map to an incompatible
+    anisotropic tail. Chevalley–Warning instead supplies a tail
+    `u x² + wxy + uδy²` with discriminant `δ`; the same block map scales it by `δ`. Thus the
+    standard elliptic form has an fpf mirror in every even vector dimension. ∎ (4)
 
 ### Machine anchors
 
@@ -115,32 +117,26 @@ F9 (q=3): Hermitian plane diag(1,1) isotropic (has curve point) = True   (anisot
 F4 (q=2): Hermitian plane diag(1,1) isotropic = True                     (anisotropic Hermitian dim<=1)
 ```
 
-Plus the C48 witnesses: natural involutions on `H(2,9)`/`H(3,4)`/`Q(4,3)` each fix variety points;
-the elliptic block map leaves `Q⁻(5,3)`.
+Plus the C48 witnesses: natural involutions on `H(2,9)`/`H(3,4)`/`Q(4,3)` each fix variety points.
+The former `Q⁻(5,3)` negative anchor tested the wrong tail coefficients and is superseded by the
+formal standard-elliptic construction.
 
-### Remaining real-math obligations
+### Closed real-math obligations
 
 The Lean reductions now certify the complete linear parabolic and Hermitian classifications:
 finite quadratic and Hermitian isotropy exclude their split routes, determinant parity excludes
 the parabolic nonsplit route, and norm-square reflection excludes the Hermitian nonsplit route.
-Rows 2–3 are complete for the formal linear and square-scalar relative-Frobenius models. Completing
-row 4 still requires the `Q⁻` Witt/Scharlau-transfer classification below.
-
-Prove: **an elliptic quadric `Q⁻(2m−1,q)` (`m ≥ 3`) admits no nonsplit fpf similitude of order 2.**
-Route: a nonsplit order-2 similitude corresponds (self-adjoint `√c`, Scharlau transfer) to an
-`F_{q²}/F_q`-Hermitian form `h` on the `m`-dim `F_{q²}`-space with `Q = Tr_{F_{q²}/F_q}(h)`; the
-transfer of an `m`-dim Hermitian form is hyperbolic for `m` even and elliptic for `m` odd — but the
-*order-2* constraint pins which `m` is available, and needs to be worked out.  (An exhaustive cap
-solve of `Q⁻(5,3)` would settle the smallest case decisively — an N verdict proves no mirror — but
-its 112-point game is out of reach for the pure-Python solver; a private-memo Rust solve or the
-transfer lemma is the way.)  This is a clean, bounded lemma; it does not gate anything downstream.
+Rows 2–3 are complete for the formal linear and square-scalar relative-Frobenius models. Row 4 is
+settled positively without Witt/Scharlau transfer: a three-variable Chevalley–Warning zero gives
+coefficients `u,w` with `u ≠ 0` and discriminant `w²-4u²δ=δ`, so the binary tail is anisotropic
+and compatible with the nonsplit block similarity.
 
 ### Publishable framing
 
 This is the candidate "separating mirror obstructions from outcomes" classification of the
-harvest. The proved positive family is hyperbolic; parabolic and Hermitian exclusions are formal
-for linear collineations and the modeled square-scalar Baer-semilinear representatives, while the
-elliptic exclusion is conjectural. Its
+harvest. The proved positive quadratic families are hyperbolic and elliptic; parabolic and
+Hermitian exclusions are formal for linear collineations and the modeled square-scalar
+Baer-semilinear representatives. Its
 silence on these boards concerns the method, not the game values. Positioning stays conservative: the mechanism is the
 standard pairing/copycat ingredient; the contribution is the exact incidence-geometric boundary.
 

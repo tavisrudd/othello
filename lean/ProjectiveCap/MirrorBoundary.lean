@@ -8,9 +8,8 @@ import Mathlib.LinearAlgebra.Eigenspace.Basic
 # Formal boundary reductions for projective mirror arguments
 
 This file proves the linear-algebra reductions and the finite quadratic and Hermitian inputs needed
-for the linear parabolic and Hermitian boundaries. It deliberately does **not** assert the full
-paper-only classifications: the Baer-semilinear branches and the elliptic nonsplit classification
-remain explicit obligations in the accompanying trust note.
+for the linear parabolic and Hermitian boundaries. Later modules close the Baer-semilinear branches
+and show that the proposed elliptic nonsplit exclusion was false by constructing a positive mirror.
 -/
 
 open scoped LinearAlgebra.Projectivization

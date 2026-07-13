@@ -26,9 +26,9 @@ This file records that reach:
   `Q⁺(2m−1,q)` is P for every odd `q` and every `m ≥ 1` (`m ≥ 2` is the
   nontrivial geometric range).
 
-See `notes/2026-07-09-mirror-method-boundary.md` for the boundary program and its explicit trust
-tiers: the hyperbolic positive theorem is Lean-proved, parabolic/Hermitian exclusions currently
-have partial formal reductions, and the general elliptic exclusion remains conjectural.
+See `notes/2026-07-09-mirror-method-boundary.md` for the completed boundary program and its explicit
+trust tiers. The later `EllipticQuadricMirror` module proves the standard elliptic family positive
+as well; the modeled parabolic and Hermitian branches are method-negative.
 -/
 
 open scoped LinearAlgebra.Projectivization
