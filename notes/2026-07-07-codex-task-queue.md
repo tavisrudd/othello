@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C98.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C100.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -74,10 +74,29 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    spinoff lane closed: the defect, conic, asymptotic, averaging, nucleus, and certified-example
    packages are Lean-proved under the strict trust gate. Final map:
    [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
+6. **Applications second-order revisit — C99.** Deferred until the Baer/completion formalization is
+   complete; then re-ask the corollary/extension/surprise/application/novelty question using the
+   final declaration graph and adversarial review. Appendix/report:
+   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
+7. **Relative-conic game localization review — C100.** The persistent cap-game confinement bridge
+   is Lean-proved. Review the `q=9` terminal witness, `q=11` icosahedral P residual, corpus
+   descent/reachability, and defect-to-C80 potential transfer. Report:
+   [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
 
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C99 — post-formalization second-order application revisit.** After the Baer/completion proof
+  lane is complete, re-run the novelty brainstorm from the completed declarations and adversarial
+  review; select two theorem-level candidates and perform targeted novelty checks. Report to the
+  [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
+
+- **C100 [ACTIVE 2026-07-12 — localization bridge proved; odd-plane consumers under review].**
+  Every projective cap continuation of a `CompleteOutside A H` seed stays in `A∪H`, so every later
+  legal move lies in `H`. Review/formalize the `q=9` terminal seed, `q=11` icosahedral P residual,
+  exact-corpus descent, and defect/drain-potential link; this is not yet an (ON) theorem. Report:
+  [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
 
 - **C89 [REPORTED 2026-07-12] — relative-conic-arcs foundation.** The isolated
   `RelativeConicArcs` target now reuses Mathlib's `Configuration.ProjectivePlane`; arc/secant/hole

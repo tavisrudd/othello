@@ -7,17 +7,23 @@ MDS codes) over finite fields — the unit of extension is a Galois orbit (a fix
 conjugate pair). Headline = the orbit-valued conjugate-pair extension criterion (Thm 3.1) +
 the √2·s orbit-saturation lower bound (Cor 3.4).
 
-**Status:** theorem-package plan, no manuscript yet. Core theorems are marked `[PROVED]`
-(elementary incidence counting). Prior-art audit verdict = **SOFTEN**: the √2·s bound is the
+**Status:** combined Markdown development draft with the completion-core project. The abstract
+proof spine and coordinate Frobenius incidence layer are Lean-built; the exact quadratic count-data
+instance remains conditional. Prior-art audit verdict = **SOFTEN**: the √2·s bound is the
 classical Lunelli–Sce √(2q) complete-arc bound at q=s², *not* a new constant — the surviving
 headline is the orbit-valued criterion (a packaging contribution), and the decisive open gate
 is sharpness of the √2 constant (an unbuilt construction).
 
-**Lean:** planned `BaerExtension` library (Phase 4 of the formalization plan), **not yet
-built**; only the shared `lean/FiniteGeom/` base exists.
+**Lean:** the proof spine is built under `lean/FiniteGeom/BaerCompletion/`, with projective-plane,
+coordinate-conjugation, and quadratic-Frobenius consumers under `lean/RelativeConicArcs/`. The
+exact quadratic pair-count data instance remains conditional on the fixed-locus and incidence-map
+obligations in the lane's `TRUST.md`.
 
-**Absorption flag:** `completion-core-rigidity` is the likely companion — its own Stage C says
-it may fold in here as a section if its headline computation fails. Keep an eye on that call.
+**Merge decision:** `completion-core-rigidity` is folded into this development draft as the
+robustness and reconstruction layer.
+
+**Combined development draft:**
+[`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
 
 ## Files here (symlinks into ../../notes/)
 

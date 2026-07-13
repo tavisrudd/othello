@@ -2,6 +2,11 @@ import RelativeConicArcs.Plane
 import RelativeConicArcs.Arc
 import RelativeConicArcs.ProjectiveBridge
 import RelativeConicArcs.Moments
+import RelativeConicArcs.CompletionDistance
+import RelativeConicArcs.BaerIncidence
+import RelativeConicArcs.ProjectiveConjugation
+import RelativeConicArcs.QuadraticFrobenius
+import RelativeConicArcs.BaerArithmetic
 import RelativeConicArcs.Defect
 import RelativeConicArcs.Conic
 import RelativeConicArcs.Asymptotic

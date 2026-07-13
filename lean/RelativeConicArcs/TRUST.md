@@ -10,6 +10,7 @@ spinoff.
 | Layer | Main declarations | Status |
 |---|---|---|
 | incidence and relative completeness | `Arc`, `CompleteOutside`, `rho`, `ProjectiveBridge.arc_iff_projectiveCap` | defined/proved in Lean |
+| cap-game localization | `ProjectiveBridge.projectiveCap_subset_union_of_completeOutside`, `move_mem_holes_of_completeOutside`, `legalExtensions_subset_holes_of_completeOutside` | proved in Lean; domain legality only, no P/N claim |
 | moments and defect | `pointIndex_le_half_card`, `first_secant_moment`, `second_secant_moment`, defect/coverage/stability theorems in `Defect.lean` | proved in Lean |
 | conic and finite bounds | `mem_standardConic_iff_onConic`, `NonsingularConic.finite_lower_bound`, `L1_le_L2`, `L2_le_rho` | proved in Lean |
 | asymptotics | `parityFreeNecessary`, explicit additive lower bound, Big-O and liminf wrappers in `Asymptotic.lean` | proved in Lean |
@@ -69,8 +70,9 @@ The Python verifier is provenance and an independent cross-check, not part of th
 
 ## Axiom audit
 
-`#print axioms` for `Certificate.check_sound`, `rhoC_le_length_of_check`, all four `L2` theorems,
-and all four final finite-example theorems reports exactly:
+`#print axioms` for the cap-game localization bridge, `Certificate.check_sound`,
+`rhoC_le_length_of_check`, all four `L2` theorems, and all four final finite-example theorems
+reports exactly:
 
 ```text
 [propext, Classical.choice, Quot.sound]

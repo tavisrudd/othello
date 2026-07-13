@@ -3290,3 +3290,11 @@ counts through size 5 and closes size 6, giving `[1,1,1,1,2,4,10]`; no complete-
 the expanded layers. A wall-safe size-7 run stops at 120.023 s, locating the immediate bottleneck in
 exact frame canonicalization rather than board representation or early orbit count. Full report:
 `notes/2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`.
+
+## 2026-07-12 C100 — relative-conic sealing bridge and review lane
+
+Allocated C100 after observing concurrently reserved C99. The Lean bridge is landed on the isolated
+`RelativeConicArcs` side: every cap continuation of a `CompleteOutside A H` seed stays in `A∪H`, so
+all later legal moves lie in `H`. The active review covers the q9 terminal witness, q11 icosahedral
+P residual, exact-corpus descent/reachability, and defect-to-C80 potential transfer. Report:
+`notes/2026-07-12-c100-relative-conic-game-bridge.md`.

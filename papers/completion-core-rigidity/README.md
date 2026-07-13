@@ -14,13 +14,16 @@ but overlaps known defining-set / trade / saturation theory (not headline). The 
 pieces are `[OPEN]` — twisted-cubic transversal spectrum (§6.5), t_h(q), asymptotics of γ(q).
 Gated on a MathSciNet / Storme–Szőnyi hypothesis audit plus one new headline computation.
 
-**Swing piece:** this is the candidate most likely to collapse — its own Stage C says: if the
-headline computation lands, publish standalone; if not, retain the sharp deletion theorem +
-classical applications as a **companion section of `baer-equivariant-extension`**.
+**Merge decision:** retain the sharp deletion theorem and classical applications as the robustness
+and reconstruction layer of the combined `baer-equivariant-extension` development draft.
 
-**Lean:** the δ_x = τ identity is landed and `sorry`-clean —
-`lean/FiniteGeom/Completion.lean` (`completionDistance_eq_transversalNumber`). The full
-`CompletionCore` library (Phase 2) is planned, not built.
+**Lean:** the semantic δ_x = τ identity, completion-core radius, weighted and multi-insertion
+extensions, and robust-obstruction results are landed and `sorry`-clean under
+`lean/FiniteGeom/BaerCompletion/`. They are being developed as part of the combined
+Baer/completion paper.
+
+**Combined development draft:**
+[`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
 
 ## Files here (symlinks into ../../notes/)
 

@@ -20,8 +20,8 @@ dihedral bundles the D₂ₘ family, continuation is N1-only, coding is conditio
 
 | Directory                     | Working title                                                     | Status                                          |
 |-------------------------------|------------------------------------------------------------------|-------------------------------------------------|
-| `baer-equivariant-extension`  | Equivariant extensions of Galois-invariant arcs over finite fields | Theorem-package plan; audit SOFTEN             |
-| `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Theorem-package plan; swing (may fold into Baer) |
+| `baer-equivariant-extension`  | Equivariant extensions and robust completion of finite-geometric arcs | Combined development draft; Lean proof spine built, exact pair-count instance conditional |
+| `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Folded into Baer development draft; completion/core layer Lean-built |
 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds) | Self-contained manuscript + verifier + strict-trust Lean formalization; near submission-ready — *related but separate* |
 
@@ -48,7 +48,8 @@ and share the `lean/FiniteGeom/` base.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
-- **Plan / theorem-package only (no manuscript):** the three Package-2 papers.
+- **Combined Markdown development draft + Lean lane:** Baer equivariant extension and completion
+  core rigidity. Continuation rigidity remains theorem-package only.
 - **Sequence packages (ready/draft):** the two `oeis-submissions/` entries.
 
 ## Shared blocker
@@ -61,11 +62,14 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
 
 - **Formalized, `sorry`-clean:** the pairing/mirror geometry outcomes (`lean/ProjectiveCap/`,
   `lean/CapGame/`); the dihedral reduction + V₄→K₄ core (`lean/DihedralSchreier/`); the
-  completion δ_x = τ identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
+  Baer/completion proof spine (`lean/FiniteGeom/BaerCompletion/`) and its projective-plane,
+  coordinate-conjugation, and quadratic-Frobenius consumers (`lean/RelativeConicArcs/`); the
+  completion δ_x = τ base identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
   (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
   (`lean/RelativeConicArcs/`).
-- **Planned, not built:** `BaerExtension`, `CompletionCore`, `ContinuationRigidity` libraries
-  (see `../notes/handoffs/2026-07-11-lean-formalization-plan.md`).
+- **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data
+  instance remains conditional on fixed-locus normalization and three concrete incidence maps; see
+  `lean/FiniteGeom/BaerCompletion/TRUST.md`.
 - **One exception to the axiom-clean bar:** a single `native_decide` in
   `DihedralSchreier/KleinFourBridge.lean` (`explicit_pairProducts`, a 4-element Klein-four
   enumeration) — an isolated witness with **no downstream dependents** (the V₄→K₄ reduction itself is
@@ -119,6 +123,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-s4-nimbers     | S₄ regular-template nimbers              | all four generating-triple classes 𝒢 = 0           | dihedral (App. A)   | solver `rust/scripts/nodekayles_cayley.rs` |
 | comp-a5-nimbers     | A₅ regular-template nimbers              | 𝒢=1 for (2,3,5),(2,5,5); 𝒢=0 otherwise             | dihedral (App. A)   | solver `rust/scripts/nodekayles_cayley.rs` |
 | thm-relative-complete | Relative completeness foundation      | maximal prescribed-hole arcs exist; `rho` is attained; incidence arcs agree with projective caps | arcs | lean `RelativeConicArcs/Arc.lean:141` `exists_completeOutside`, `:186` `exists_completeOutside_card_eq_rho`; `ProjectiveBridge.lean:154` `arc_iff_projectiveCap` |
+| thm-relative-game-localization | Persistent cap-game localization | every cap continuation of `CompleteOutside A H` stays in `A∪H`; every later legal move lies in `H` | arcs, nofil | lean `RelativeConicArcs/ProjectiveBridge.lean:174` `projectiveCap_subset_union_of_completeOutside`, `:192` `move_mem_holes_of_completeOutside`, `:205` `legalExtensions_subset_holes_of_completeOutside` |
 | thm-secant-moments  | Maximum index and secant moments         | `r_A(x)≤⌊k/2⌋`; `Σr=C(k,2)(q−1)`; `ΣC(r,2)=3C(k,4)` | arcs                | paper §2; lean `RelativeConicArcs/Moments.lean:202` `pointIndex_le_half_card`, `:290` `first_secant_moment`, `:510` `second_secant_moment` |
 | thm-defect-identity | Prescribed-hole defect identity          | exact secant-index defect remainder identity       | arcs                | paper §3; lean `RelativeConicArcs/Defect.lean:214` `scaledDefect_eq_remainders` |
 | thm-defect-corollaries | Defect equality, coverage, and stability | exact equality pattern, uncovered-locus bound, and quantitative bounded-defect control | arcs | paper §3; lean `RelativeConicArcs/Defect.lean:309` `scaledDefect_eq_zero_iff`, `:379` `uncovered_bound`, `:465` `stability_bound` |
@@ -131,9 +136,20 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-relative-cert   | Generic relative-arc certificate soundness | canonical `q²+q+1` coordinate checks imply semantic completeness and `rhoC≤witness.length` | arcs | lean `RelativeConicArcs/Certificate.lean:249` `check_sound`, `:255` `rhoC_le_length_of_check` |
 | comp-rho-small      | ρ_𝒞 small values and arithmetic thresholds | `L₂(8)=L₂(9)=L₂(11)=6`, `L₂(16)=8`; ρ_𝒞(8)=ρ_𝒞(9)=ρ_𝒞(11)=6; 8 ≤ ρ_𝒞(16) ≤ 9 | arcs | paper §7 + verifier; lean `RelativeConicArcs/Results.lean:20`–`:90` |
 | comp-q11-exterior  | q=11 exterior-secant design              | all 15 witness secants avoid the conic; required-point index distribution `(N₁,N₂,N₃)=(90,15,10)` | arcs | paper §7 + verifier `I_C=0` + paper moment equations |
-| thm-baer-criterion  | Orbit-valued extension criterion         | Galois conjugate-pair arc-extension test           | baer                | note (Thm 3.1) [plan; Lean Phase 4] |
-| thm-baer-saturation | √2·s orbit-saturation bound              | = classical Lunelli–Sce √(2q) (softened)           | baer                | note (Cor 3.4) |
-| thm-completion-tau  | δ(C) = τ                                 | completion distance = circuit-transversal number   | completion          | lean `FiniteGeom/Completion.lean:78` `completionDistance_eq_transversalNumber` |
+| thm-baer-criterion  | Orbit-valued extension criterion         | heterogeneous and uniform conjugate-pair bounds; exact coordinate counts remain conditional | baer | lean `FiniteGeom/BaerCompletion/PairExtension.lean` `PairExtensionData.sum_card_sub_le_legalCount`, `quadraticBaer_pairExtension_lowerBound` |
+| thm-baer-saturation | Quadratic orbit-saturation bound         | denominator-free `2s(s−1) ≤ (k−1)²` core of the softened √2·s bound | baer | lean `FiniteGeom/BaerCompletion/OrbitSaturation.lean` `orbitSaturation_quadratic_bound_of_split` |
+| thm-completion-tau  | δ(C) = τ                                 | semantic insertion distance = obstruction-transversal number in every finite hereditary system | baer, completion | lean `FiniteGeom/BaerCompletion/Obstruction.lean` `insertionDistance_eq_transversalNumber` |
+| lem-completion-clutter | Minimal-obstruction reduction        | removing nonminimal dependent traces preserves every transversal and `τ` | baer, completion | lean `FiniteGeom/BaerCompletion/Clutter.lean` `transversalNumber_minimalEdges` |
+| thm-completion-weighted | Weighted completion identity        | arbitrary nonnegative deletion cost = weighted transversal cost | baer, completion | lean `FiniteGeom/BaerCompletion/Weighted.lean` `weightedInsertionDistance_eq_weightedTransversalCostWithin` |
+| thm-completion-multi | Multi-insertion identity               | simultaneous insertion of any independent finite set has exact transversal distance | baer, completion | lean `FiniteGeom/BaerCompletion/MultiInsertion.lean` `multiInsertionDistance_eq_transversalNumber` |
+| thm-completion-weighted-multi | Weighted multi-insertion      | weighted deletion and prescribed-set insertion compose without extra hypotheses | baer, completion | lean `FiniteGeom/BaerCompletion/Weighted.lean` `weightedMultiInsertionDistance_eq_weightedTransversalCostWithin` |
+| thm-secant-resilience | Arc insertion distance               | `δ_x` equals secant index in every finite abstract projective plane | baer, completion | lean `RelativeConicArcs/CompletionDistance.lean` `arcInsertionDistance_eq_pointIndex` |
+| thm-baer-involution | Fixed/conjugate secant decomposition    | trace transport, fixed-pair classification, and disjoint conjugate traces | baer | lean `FiniteGeom/BaerCompletion/BaerPlane.lean`; `RelativeConicArcs/BaerIncidence.lean` |
+| thm-baer-frobenius | Coordinate quadratic Frobenius           | field automorphisms preserve projective incidence; relative Frobenius is involutive in degree two | baer | lean `RelativeConicArcs/ProjectiveConjugation.lean` `involutiveIncidence`; `RelativeConicArcs/QuadraticFrobenius.lean` `incidence` |
+| lem-baer-input-reduction | Quadratic count-input reduction   | exact count fields reduce to a 2-fiber map, complement, and injective charge | baer | lean `FiniteGeom/BaerCompletion/OrbitCounting.lean` |
+| lem-baer-arithmetic | Quadratic Baer arithmetic                | `M=fe+e(e−1)`, eight-arc `M≤12`, candidate surplus, and occupied-line identity | baer | lean `RelativeConicArcs/BaerArithmetic.lean` |
+| thm-completion-robust | Robust obstruction persistence        | below-`τ` deletions cannot unblock; only old obstructions need persist | baer, completion | lean `FiniteGeom/BaerCompletion/RobustHole.lean` `not_insertion_indep_of_obstructions_persist` |
+| thm-completion-core | Sharp completion-core radius            | unique completion below facet separation, with a sharp alternative-facet witness | baer, completion | lean `FiniteGeom/BaerCompletion/Core.lean` `completionCore_sdiff_eq`, `completionCore_delete_difference_eq_intersection` |
 | lem-nu-tau          | ν ≤ τ                                    | matching ≤ transversal (hypergraph base)           | completion (base)   | lean `FiniteGeom/Hypergraph.lean:53` `matching_card_le_transversal_card` |
 | thm-frame-rigidity  | Frame-graph semilinear rigidity (N1)     | Aut = ambient semilinear group, q ≥ 13             | continuation        | note (Thm 7.4) [plan] |
 | thm-complex-recon   | Continuation-complex reconstruction (N2) | recovers plane + secants + arc                     | continuation        | note (Thm 8.4) [plan; SOFTEN] |
@@ -144,5 +160,6 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-a344227        | A344227 a(14..17)                        | queens Node-Kayles nimbers 0, 1, 0, 2              | oeis:A344227        | solver `rust/src/queens/solver/nimber.rs` |
 | comp-queens-n18     | n=18 Queens = first-player win           | witness opening I9 ⇒ a(18) ≠ 0                     | queens-n18          | `queens-n18-paper.md` + Rust solver |
 
-*Plan-stage rows (baer, continuation) are proven in the notes but their Lean libraries are not yet
-built. `PG(4,3)=P` is a computed frontier datum, not a theorem.*
+*Continuation remains plan-stage. The Baer/completion mechanism and coordinate Frobenius incidence
+are Lean-built; only the exact `QuadraticBaerPairExtensionData` coordinate instance remains
+conditional. `PG(4,3)=P` is a computed frontier datum, not a theorem.*

@@ -201,3 +201,8 @@ closed-negative proof routes belong here.
   isomorphism to the icosahedral graph. Its antipodal symmetry supplies a conceptual P proof. This
   gives a concrete depleted-order/polyhedral base object but does not bridge the active size-3 to
   size-4 odd-plane escape step.
+- C100 formalized the game-semantic bridge in `RelativeConicArcs.ProjectiveBridge`: every cap
+  containing a `CompleteOutside A H` seed is contained in `A∪H`, hence every legal move throughout
+  every continuation lies in `H`. The focused module builds and the containment, move, and
+  legal-extension theorems audit to `[propext, Classical.choice, Quot.sound]`. The follow-on review
+  is routed to `notes/2026-07-12-c100-relative-conic-game-bridge.md`.

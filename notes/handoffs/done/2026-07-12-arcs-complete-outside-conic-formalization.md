@@ -142,11 +142,11 @@ speculative directions must be distinguished explicitly.
   from the standard conic to every represented nonsingular conic over the same field. The general
   finite transitive-action lemma and the abstract fact that every line meets a `(q+2)`-arc in zero
   or two points are also reusable independently of this conic problem.
-- **Cheap application corollary:** `CompleteOutside A H`, together with the existing
-  `Arc ↔ ProjectiveCap.Projective.Cap` bridge, says that after occupying `A` in the projective cap
-  game every legal extension is confined to `H`. Thus the conic case is directly a conic-residual
-  localization gadget; this should be exposed as a named bridge theorem if the game program uses
-  it.
+- **Proved application bridge:** `projectiveCap_subset_union_of_completeOutside` shows every cap
+  continuation containing `A` lies in `A ∪ H`; `move_mem_holes_of_completeOutside` and
+  `legalExtensions_subset_holes_of_completeOutside` show that every later legal move remains
+  confined to `H`. Thus the conic case is formally a persistent conic-residual localization gadget,
+  without making a game-value or reachability claim.
 - **Cheap formal extensions:** prove invariance under finite-field isomorphism so the small results
   quantify over every field of the stated order; factor the checker through an arbitrary
   projectively invariant decidable hole predicate; and add exact point-set cardinality when the

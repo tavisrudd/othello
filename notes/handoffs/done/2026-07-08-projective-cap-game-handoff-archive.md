@@ -2699,3 +2699,14 @@ not evaluate the generic escape residual after growth to full `PSL/PGL`.
 - Validation: full `ProjectiveCap` and `DihedralSchreier` builds green. The new boundary theorems
   and `explicit_pairProducts` audit to exactly `[propext, Classical.choice, Quot.sound]`; the Lean
   tree contains no `native_decide` and no `sorry` term.
+
+## 2026-07-12 — C100 relative-conic game bridge allocated
+
+- Proved on the isolated spinoff side that every projective cap containing a relative-complete seed
+  `A` is contained in `A∪H`; every subsequent legal cap-game move is therefore in `H`. This keeps
+  the dependency one-way and states domain legality without a P/N overclaim.
+- Routed review of the exact `q=9` terminal witness, `q=11` icosahedral P residual, possible corpus
+  descent/reachability, and defect-to-drain transfer to
+  `notes/2026-07-12-c100-relative-conic-game-bridge.md`.
+- Focused build, forbidden-token scan, and axiom audit passed; the four bridge declarations report
+  `[propext, Classical.choice, Quot.sound]`.

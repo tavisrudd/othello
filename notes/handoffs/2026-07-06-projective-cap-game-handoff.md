@@ -277,6 +277,22 @@ Current sharper target:
 This is the active mathematical kernel.  It turns the problem into a one-dimensional conic
 parameter-line game with intrusions.
 
+#### Relative-complete sealing bridge — C100 review
+
+The `RelativeConicArcs` spinoff now has a proved game-domain bridge: if `A` is complete outside a
+hole set `H`, every projective cap continuation `S ⊇ A` is contained in `A∪H`, and every legal move
+from every such continuation lies in `H`. For `H=𝒞`, sealing into the conic residual therefore
+persists throughout later play; this is stronger than a one-step localization observation but does
+not assert that the seed is reachable or P.
+
+C100 reviews four possible consumers: formalize the certified `q=11` six-arc's icosahedral
+conic residual and antipodal P proof; add the `q=9` ordinary-complete/terminal-P corollary; test
+containment or descent into those objects in the exact odd-plane corpus; and determine whether the
+generic defect/uncovered inequalities sharpen C80's drain potential. Guardrail: the `rhoC` lower
+bound shows that an intruder-only complete conic seal needs order `sqrt(q)` points, so this cannot
+replace the bounded-size forcing or exchange lemma needed for (ON). Current map:
+[`C100 relative-conic game bridge`](../2026-07-12-c100-relative-conic-game-bridge.md).
+
 ## What Is Dead
 
 Do not restart these as proof routes unless new evidence changes the premise.
@@ -465,6 +481,11 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
+
+- **C100 — relative-conic sealing review.** The persistent legal-move confinement bridge is
+  Lean-proved. Review the `q=9` terminal witness, the `q=11` icosahedral P residual, exact-corpus
+  descent/reachability, and defect-to-C80 potential transfer; do not promote static existence into
+  an (ON) or root-value claim. [Current map](../2026-07-12-c100-relative-conic-game-bridge.md).
 
 - **C84 — conic-involution Schreier catalogue → abundance-first (PRIMARY, 2026-07-12).** The conic
   bulk is the induced Schreier graph of `H_S = ⟨σ_x⟩ ≤ PGL(2,q)`; its Node-Kayles value is set by

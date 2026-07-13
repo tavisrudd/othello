@@ -15,3 +15,14 @@ import FiniteGeom.MomentCurve
 import FiniteGeom.ColumnCode
 import FiniteGeom.Completion
 import FiniteGeom.Repair
+import FiniteGeom.BaerCompletion.Obstruction
+import FiniteGeom.BaerCompletion.Clutter
+import FiniteGeom.BaerCompletion.Weighted
+import FiniteGeom.BaerCompletion.MultiInsertion
+import FiniteGeom.BaerCompletion.Secant
+import FiniteGeom.BaerCompletion.BaerPlane
+import FiniteGeom.BaerCompletion.PairExtension
+import FiniteGeom.BaerCompletion.OrbitCounting
+import FiniteGeom.BaerCompletion.OrbitSaturation
+import FiniteGeom.BaerCompletion.RobustHole
+import FiniteGeom.BaerCompletion.Core

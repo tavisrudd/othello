@@ -162,5 +162,60 @@ theorem arc_iff_projectiveCap (A : Finset (Point K)) :
     exact hCap ha hb hc hab hac hbc
       (projective_collinear_of_incidence_collinear hab hac hbc hcol)
 
+noncomputable section GameLocalization
+
+variable [Fintype K]
+
+local instance : Fintype (Point K) := Fintype.ofFinite (Point K)
+local instance : DecidableEq (Point K) := Classical.decEq (Point K)
+
+/-- A cap containing a relatively complete seed can add points only from the prescribed hole set.
+This is the static form of the cap-game localization bridge. -/
+theorem projectiveCap_subset_union_of_completeOutside {A H S : Finset (Point K)}
+    (hcomplete : CompleteOutside (L := Point K) A H) (hAS : A ⊆ S)
+    (hS : ProjectiveCap.Projective.Cap K (Fin 3 → K) S) :
+    S ⊆ A ∪ H := by
+  intro x hxS
+  by_contra hxUnion
+  have hxA : x ∉ A := by simpa using fun hx => hxUnion (Finset.mem_union_left H hx)
+  have hxH : x ∉ H := by simpa using fun hx => hxUnion (Finset.mem_union_right A hx)
+  obtain ⟨l, ⟨a, ha, b, hb, hab, hal, hbl⟩, hxl⟩ :=
+    covered_iff_exists_secant.mp (hcomplete.2.2 x hxA hxH)
+  have hxa : x ≠ a := fun h => hxA (h ▸ ha)
+  have hxb : x ≠ b := fun h => hxA (h ▸ hb)
+  apply hS hxS (hAS ha) (hAS hb) hxa hxb hab
+  apply collinear_iff_projective_collinear.mp
+  exact ⟨l, hxl, hal, hbl⟩
+
+/-- Every legal move from any cap extending a relatively complete seed lies in the prescribed
+hole set. In particular, confinement persists after arbitrary subsequent legal hole moves. -/
+theorem move_mem_holes_of_completeOutside {A H S : Finset (Point K)}
+    (hcomplete : CompleteOutside (L := Point K) A H) (hAS : A ⊆ S) {x : Point K}
+    (hx : FiniteBuildGame.Move (ProjectiveCap.Projective.Cap K (Fin 3 → K)) S x) :
+    x ∈ H := by
+  have hsubset := projectiveCap_subset_union_of_completeOutside hcomplete
+    (Finset.Subset.trans hAS (Finset.subset_insert x S)) hx.2
+  have hxUnion : x ∈ A ∪ H := hsubset (Finset.mem_insert_self x S)
+  rcases Finset.mem_union.mp hxUnion with hxA | hxH
+  · exact False.elim (hx.1 (hAS hxA))
+  · exact hxH
+
+/-- The legal-extension set of every cap-game continuation containing a relatively complete seed
+is contained in the prescribed hole set. -/
+theorem legalExtensions_subset_holes_of_completeOutside {A H S : Finset (Point K)}
+    (hcomplete : CompleteOutside (L := Point K) A H) (hAS : A ⊆ S) :
+    ProjectiveCap.Projective.LegalExtensions (K := K) (V := Fin 3 → K) S ⊆ H := by
+  intro x hx
+  exact move_mem_holes_of_completeOutside hcomplete hAS
+    (ProjectiveCap.Projective.mem_legalExtensions.mp hx)
+
+/-- At the relatively complete seed itself, every legal projective cap-game extension is a hole. -/
+theorem legalExtensions_subset_holes {A H : Finset (Point K)}
+    (hcomplete : CompleteOutside (L := Point K) A H) :
+    ProjectiveCap.Projective.LegalExtensions (K := K) (V := Fin 3 → K) A ⊆ H :=
+  legalExtensions_subset_holes_of_completeOutside hcomplete Finset.Subset.rfl
+
+end GameLocalization
+
 end ProjectiveBridge
 end RelativeConicArcs

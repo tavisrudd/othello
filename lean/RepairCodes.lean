@@ -11,6 +11,7 @@
 -- `[2q+1,4,q-1]` code parameters are landed, and seed-and-lift remains.
 import FiniteGeom.AxisTwistedCubicCircuits
 import RepairCodes.Transfer
+import RepairCodes.AxisTwistedCubic
 import RepairCodes.Q9Seed
 import RepairCodes.Q9Affine
 import RepairCodes.CodeInstance
