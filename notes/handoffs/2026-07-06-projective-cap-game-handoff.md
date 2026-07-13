@@ -285,8 +285,10 @@ from every such continuation lies in `H`. For `H=𝒞`, sealing into the conic r
 persists throughout later play; this is stronger than a one-step localization observation but does
 not assert that the seed is reachable or P.
 
-C100 reviews four possible consumers: formalize the certified `q=11` six-arc's icosahedral
-conic residual and antipodal P proof; add the `q=9` ordinary-complete/terminal-P corollary; test
+C100's first consumer is now Lean-proved: the certified `q=11` six-arc leaves all twelve conic
+parameters live, its exact determinant conflict graph is the degree-five icosahedral graph, and
+the antipodal mirror proves the residual independent-set game P. Remaining consumers: add the
+`q=9` ordinary-complete/terminal-P corollary; test
 containment or descent into those objects in the exact odd-plane corpus; and determine whether the
 generic defect/uncovered inequalities sharpen C80's drain potential. Guardrail: the `rhoC` lower
 bound shows that an intruder-only complete conic seal needs order `sqrt(q)` points, so this cannot
@@ -483,8 +485,8 @@ Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as 
 task list.  Current high-value items:
 
 - **C100 — relative-conic sealing review.** The persistent legal-move confinement bridge is
-  Lean-proved. Review the `q=9` terminal witness, the `q=11` icosahedral P residual, exact-corpus
-  descent/reachability, and defect-to-C80 potential transfer; do not promote static existence into
+  Lean-proved, as is the `q=11` icosahedral antipodal P residual. Review the `q=9` terminal witness,
+  exact-corpus descent/reachability, and defect-to-C80 potential transfer; do not promote static existence into
   an (ON) or root-value claim. [Current map](../2026-07-12-c100-relative-conic-game-bridge.md).
 
 - **C84 — conic-involution Schreier catalogue → abundance-first (PRIMARY, 2026-07-12).** The conic

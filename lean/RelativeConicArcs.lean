@@ -13,3 +13,4 @@ import RelativeConicArcs.Asymptotic
 import RelativeConicArcs.Averaging
 import RelativeConicArcs.Nucleus
 import RelativeConicArcs.Results
+import RelativeConicArcs.Q11Residual

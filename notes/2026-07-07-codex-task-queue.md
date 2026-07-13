@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C100.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C101.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -79,13 +79,23 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
    final declaration graph and adversarial review. Appendix/report:
    [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue).
 7. **Relative-conic game localization review — C100.** The persistent cap-game confinement bridge
-   is Lean-proved. Review the `q=9` terminal witness, `q=11` icosahedral P residual, corpus
-   descent/reachability, and defect-to-C80 potential transfer. Report:
+   and q=11 icosahedral antipodal P residual are Lean-proved. Review the `q=9` terminal witness,
+   corpus descent/reachability, and defect-to-C80 potential transfer. Report:
    [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
+8. **Exact relative-conic value at q=16 — C101.** Decide the manuscript's sole finite gap by a
+   checked eight-point witness or a checked exhaustive nonexistence certificate, then synchronize
+   the exact Lean theorem and paper. Track in the
+   [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
 
 ## Open tasks
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
+
+- **C101 [ACTIVE 2026-07-12] — decide `rho_C(16)`.** Search first for an eight-point relative arc;
+  if none exists, certify exhaustive nonexistence modulo proved conic-stabilizer symmetries. The
+  accepted endpoint is an exact strict-trust Lean theorem plus synchronized manuscript/PDF,
+  verifier provenance, trust manifest, and papers index. Track in the
+  [rho_C(16) handoff](handoffs/2026-07-12-rhoc16-exact-value.md).
 
 - **C99 — post-formalization second-order application revisit.** After the Baer/completion proof
   lane is complete, re-run the novelty brainstorm from the completed declarations and adversarial
@@ -94,7 +104,8 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 
 - **C100 [ACTIVE 2026-07-12 — localization bridge proved; odd-plane consumers under review].**
   Every projective cap continuation of a `CompleteOutside A H` seed stays in `A∪H`, so every later
-  legal move lies in `H`. Review/formalize the `q=9` terminal seed, `q=11` icosahedral P residual,
+  legal move lies in `H`. The exact q=11 determinant residual is now Lean-identified as the
+  icosahedral graph and proved P by antipodal mirror. Review/formalize the `q=9` terminal seed,
   exact-corpus descent, and defect/drain-potential link; this is not yet an (ON) theorem. Report:
   [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
 

@@ -641,6 +641,19 @@ $i=1,2,3$, while the two moment equations give
 \]
 Consequently $(N_1,N_2,N_3)=(90,15,10)$.
 
+\begin{remark}[Auxiliary residual-game structure]
+There is also a game-theoretic consequence of this exceptional row, not used
+in any bound above.  After the six witness points are occupied, all twelve
+points of $\cC$ remain legal.  Join two conic points when their chord contains
+a witness point.  The resulting $12$-vertex, $30$-edge, $5$-regular conflict
+graph is the icosahedral graph.  Its antipodal involution is fixed-point-free,
+preserves adjacency, and pairs only nonadjacent vertices, so the usual
+copycat strategy makes the corresponding independent-set building position
+a P-position.  The companion Lean development checks the determinant-defined
+graph and applies a general proved mirror theorem.  This observation is a
+consequence of the displayed witness, not a novelty claim.
+\end{remark}
+
 The supplementary Python program
 \texttt{verify\_relative\_conic\_arcs.py} performs exact finite-field
 arithmetic and, for each witness:
@@ -681,7 +694,10 @@ The elementary theory leaves several concrete problems.
 
 \begin{problem}
 Determine $\rhoC(16)$.  Proposition~\ref{prop:small-values} leaves only the
-possibilities eight and nine.
+possibilities eight and nine.  The exact-value proof obligation is either an
+eight-point checked construction or a checked exhaustive nonexistence
+certificate for eight points; it is tracked separately from the completed
+theorem chain.
 \end{problem}
 
 \begin{problem}

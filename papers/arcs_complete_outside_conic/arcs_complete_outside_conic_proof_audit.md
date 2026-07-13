@@ -33,6 +33,12 @@ secants are exterior to the conic. Completeness, the maximum index three, and
 the two moment equations then force the required-point index counts
 ((N_1,N_2,N_3)=(90,15,10)).
 
+The auxiliary q=11 residual-game remark is separately machine checked in
+`RelativeConicArcs/Q11Residual.lean`: kernel reduction verifies that all twelve conic parameters
+are initially live and that their determinant-defined conflict graph is the 30-edge, degree-five
+icosahedral graph. The P-value conclusion uses the generic proved antipodal conflict-graph mirror
+theorem, not an exhaustive game-tree evaluator. This result is not used by the paper's bounds.
+
 Verifier SHA-256:
 
 `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`
@@ -59,4 +65,6 @@ hypothesis and is not used by the finite results.
   \(\rho_C(16)=8\) versus \(9\); the paper proves that this route is too weak.
 - No exact values for orders whose witnesses were not independently included
   and checked in the supplementary verifier.
+- The remaining `rho_C(16) in {8,9}` dichotomy is assigned to C101; closing it requires either a
+  checked eight-point construction or a checked exhaustive eight-point nonexistence certificate.
 - No unconditional novelty certification for the parameter itself.

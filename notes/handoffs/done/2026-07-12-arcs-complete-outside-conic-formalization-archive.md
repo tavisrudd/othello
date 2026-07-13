@@ -206,3 +206,15 @@ closed-negative proof routes belong here.
   every continuation lies in `H`. The focused module builds and the containment, move, and
   legal-extension theorems audit to `[propext, Classical.choice, Quot.sound]`. The follow-on review
   is routed to `notes/2026-07-12-c100-relative-conic-game-bridge.md`.
+
+## 2026-07-12 — q=11 residual theorem and q=16 exact-value lane
+
+- Added `RelativeConicArcs.Q11Residual`. Kernel checks prove all twelve conic parameters are live,
+  the exact determinant conflict graph is the 30-edge degree-five icosahedral graph, and its
+  antipodal involution satisfies the generic conflict-mirror hypotheses. The resulting residual
+  independent-set game is P without exhaustive game-tree evaluation.
+- Focused build passed. `all_seed_legal`, `adj_iff_icosahedron`, and `isP` audit to
+  `[propext, Classical.choice, Quot.sound]`.
+- Allocated C101 to close the manuscript's remaining `rhoC(16) in {8,9}` gap by either an
+  eight-point checked construction or a checked exhaustive nonexistence certificate. The live map
+  is `notes/handoffs/2026-07-12-rhoc16-exact-value.md`.

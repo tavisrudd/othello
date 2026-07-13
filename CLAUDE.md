@@ -21,8 +21,8 @@ Rules:
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
   [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
   for the active task IDs.
-- **Arcs complete outside a conic formalization (C89–C96):** start with
-  [relative-conic-arcs formalization](notes/handoffs/2026-07-12-arcs-complete-outside-conic-formalization.md).
+- **Exact relative-conic value at q=16 (C101):** start with
+  [rho_C(16) exact-value handoff](notes/handoffs/2026-07-12-rhoc16-exact-value.md).
 - **Named-expert context:** load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for

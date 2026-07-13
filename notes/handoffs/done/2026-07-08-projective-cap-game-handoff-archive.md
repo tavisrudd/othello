@@ -2710,3 +2710,11 @@ not evaluate the generic escape residual after growth to full `PSL/PGL`.
   `notes/2026-07-12-c100-relative-conic-game-bridge.md`.
 - Focused build, forbidden-token scan, and axiom audit passed; the four bridge declarations report
   `[propext, Classical.choice, Quot.sound]`.
+
+## 2026-07-12 — C100 q=11 icosahedral residual proved
+
+- Added the exact twelve-parameter residual in `RelativeConicArcs.Q11Residual`. Lean checks that
+  every conic parameter is initially live, identifies the determinant conflict graph with the
+  30-edge degree-five icosahedral graph, and proves P by its explicit antipodal involution.
+- This is a sealed P base object only. No reachability, descent, (ON), or root-value claim follows
+  from its existence; those remain separate C100 review obligations.

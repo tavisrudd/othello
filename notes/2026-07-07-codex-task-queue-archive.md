@@ -3298,3 +3298,12 @@ Allocated C100 after observing concurrently reserved C99. The Lean bridge is lan
 all later legal moves lie in `H`. The active review covers the q9 terminal witness, q11 icosahedral
 P residual, exact-corpus descent/reachability, and defect-to-C80 potential transfer. Report:
 `notes/2026-07-12-c100-relative-conic-game-bridge.md`.
+
+## 2026-07-12 C100/C101 — q=11 residual landed; q=16 exact gap allocated
+
+- C100 now contains a strict-trust q=11 theorem package: all twelve conic parameters are live, the
+  determinant conflict graph is the icosahedral graph, and the antipodal mirror proves the residual
+  independent-set game P.
+- Allocated C101 for the manuscript's remaining exact finite gap `rho_C(16) in {8,9}`. Its accepted
+  endpoint is either a checked eight-point construction or a checked exhaustive nonexistence
+  certificate, followed by synchronized Lean and paper updates.

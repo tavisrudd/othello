@@ -18,6 +18,7 @@ spinoff.
 | characteristic two | hyperoval/nucleus/tangent classification and nucleus-in/out inequalities in `Nucleus.lean` | proved in Lean under `(2 : K) = 0` |
 | certificate bridge | `Certificate.check_sound`, `Certificate.rhoC_le_length_of_check` | proved in Lean for every finite field |
 | finite examples | `Examples.rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16_bounds` | kernel-checked |
+| q=11 residual game | `Q11Residual.all_seed_legal`, `adj_iff_icosahedron`, `degree_five`, `isP` | exact determinant graph is icosahedral and P by the proved antipodal mirror theorem |
 
 The four exact arithmetic thresholds are also explicit theorems:
 `L2_eight = 6`, `L2_nine = 6`, `L2_eleven = 6`, and `L2_sixteen = 8`.
@@ -71,7 +72,8 @@ The Python verifier is provenance and an independent cross-check, not part of th
 ## Axiom audit
 
 `#print axioms` for the cap-game localization bridge, `Certificate.check_sound`,
-`rhoC_le_length_of_check`, all four `L2` theorems, and all four final finite-example theorems
+`rhoC_le_length_of_check`, all four `L2` theorems, all four final finite-example theorems, and the
+q=11 residual liveness, icosahedral-identification, and P theorems
 reports exactly:
 
 ```text

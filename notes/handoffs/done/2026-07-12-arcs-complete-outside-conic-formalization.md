@@ -222,8 +222,8 @@ For each closed task:
 
 ## Next step
 
-The formalization lane is closed. Optional follow-ons, in descending cost-effectiveness, are the
-named cap-game localization bridge, field-isomorphism transport of the small results, a Lean theorem
-capturing the `q=11` exterior-secant/index distribution, and the broader theorem-mining/literature
-review tracked separately as C98. The unresolved mathematical headline remains the exact value of
-`rhoC(16)`.
+The formalization lane is closed. The named cap-game localization bridge and q=11 icosahedral
+residual P theorem have landed under C100. Optional follow-ons include field-isomorphism transport
+of the small results, a Lean theorem capturing the `q=11` exterior-secant/index distribution, and
+the broader theorem-mining/literature review tracked separately as C98. The unresolved exact value
+of `rhoC(16)` now has its own active construction-or-nonexistence lane, C101.
