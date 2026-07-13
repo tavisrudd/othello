@@ -4,9 +4,15 @@ Proof lane for
 [`paper-baer-equivariant-robust-completion.md`](../../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
 
 The abstract proof spine and abstract-projective-plane consumers are kernel-checked. See
-[`TRUST.md`](TRUST.md) for the theorem manifest and the remaining conditional quadratic-coordinate
-inputs. Shared support lives in `FiniteGeom.Completion`, `FiniteGeom.Hypergraph`,
+[`TRUST.md`](TRUST.md) for the theorem manifest and formalization boundaries, and the
+[`paper-specific novelty audit`](../../../notes/2026-07-13-baer-completion-adversarial-novelty-review.md)
+for the independent claim boundary. Shared support lives in `FiniteGeom.Completion`, `FiniteGeom.Hypergraph`,
 `FiniteGeom.MomentCurve`, and `FiniteGeom.Code`.
+
+The completion/transversal, clutter, weighted, prescribed-set, secant-index, involution-orbit,
+Hilbert-90, and elementary incidence-counting declarations are classical infrastructure that this
+lane formalizes for trust and reuse. The principal plausibly unrecorded mathematical assembly is
+the exact quadratic-Frobenius orbit-extension criterion. Formalization is not evidence of priority.
 
 Planned modules, in dependency order:
 
@@ -25,20 +31,26 @@ Planned modules, in dependency order:
    `RelativeConicArcs.QuadraticFrobenius`, including its Hilbert-90 fixed-locus and linewise
    candidate-pair counts; `RelativeConicArcs.QuadraticPairExtension` packages the resulting
    automatic `candidate_count` field;
-7. `PairExtension.lean` — **landed:** heterogeneous and uniform counting, positive-surplus
+7. `PairExtension.lean` — **landed:** exact distinct-forbidden-support counting, heterogeneous and
+   uniform upper-bound forms, positive-surplus
    existence, and the exact quadratic data wrapper; `RelativeConicArcs.QuadraticLineCounting` and
    `RelativeConicArcs.QuadraticForbidden` discharge its coordinate count fields and prove that a
    surviving candidate really extends the arc;
-8. `OrbitCounting.lean` — **landed:** constant-fiber candidate counting, complement counting for
+8. `CollisionProfile.lean` — **landed:** exact visible-support, invisible-mass, and collision-
+   redundancy decompositions, linewise and in aggregate, together with the capped-multiplicity
+   inequalities used by the order-five moment argument; `RelativeConicArcs.QuadraticCollision`
+   identifies the support with the coordinate forbidden set and proves a semantic aggregate
+   extension criterion;
+9. `OrbitCounting.lean` — **landed:** constant-fiber candidate counting, complement counting for
    empty fixed lines, and injective charging for forbidden candidates reduce the three wrapper
    fields to elementary incidence maps;
-9. `OrbitSaturation.lean` — **landed:** denominator-free split-product and quadratic
+10. `OrbitSaturation.lean` — **landed:** denominator-free split-product and quadratic
    orbit-saturation bounds;
-10. `RobustHole.lean` — **landed:** below-`τ` surviving obstructions and stability whenever old
+11. `RobustHole.lean` — **landed:** below-`τ` surviving obstructions and stability whenever old
    obstructions persist;
-11. `Core.lean` — **landed in abstract form:** completion cores and the sharp unique-completion
+12. `Core.lean` — **landed in abstract form:** completion cores and the sharp unique-completion
    deletion theorem;
-12. `ClassicalFamilies.lean` — future exact radii once family-specific incidence counts are supplied.
+13. `ClassicalFamilies.lean` — future exact radii once family-specific incidence counts are supplied.
 
 No theorem is formalized merely because it is listed here. The paper's theorem-by-theorem
 formalization boundaries remain authoritative until declarations land.

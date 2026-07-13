@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C110.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C114.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -45,13 +45,24 @@ raw-state automaton, but this is deprioritized (not superseded) behind the struc
 — tractability is a question of `G∪` structural width, not raw-quotient size.
 
 **INDEPENDENT PAPER-STRENGTHENING LANE (2026-07-13): relative-conic evaluation/coding/q11
-structure — C106–C110.** Run cheap independent refutation and exact-object novelty gates first
-(C106); then prove the reusable evaluation dichotomy (C107) and projective arc–MDS/deep-hole bridge
-(C108); formalize the certified `q=11` witness's proposed `A5` orbit, code, and icosahedral extension
-complex only after those gates pass (C109); finish with adversarial review and synchronized paper,
-TRUST, index, and projective-cap consumer updates (C110). This lane does not displace the C84
+structure — C106–C110.** C106–C109 are reported: the sharp evaluation dichotomy, transparent
+arc–MDS/syndrome-defect bridge, and certified q11 non-GRS code/deep-hole/extension spectrum are
+Lean-built and promoted into the manuscript. C110's independent Python/C++ replay, mutations,
+axiom audit, primary citation chase, PDF, proof-audit, TRUST, results-index, and projective-cap
+consumer updates pass; the post-audit actual-leader/support bridge and final source consistency
+also pass focused rebuild and axiom audit. Only a shared aggregate rerun after the concurrent Q25
+leaf builder remains. This lane does not displace the C84
 primary odd-plane lane. Start with the
 [strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
+
+**INDEPENDENT REPAIRCODES PROJECTIVE-COMPLETION LANE (2026-07-13): C111–C114.** Test and
+formalize the full projective twisted cubic together with its characteristic-three common axis.
+C111 owns independent refutation gates and the proposed `[2q+2,4,q]_q` seed theorem; C112 owns
+the exact radius-three and radius-four/complete-inner repair profiles; C113 owns bounded-support
+transfer and the second asymptotic rate–distance point; C114 owns exact-claim literature review,
+adversarial review, and synchronized publication. No proposed formula or novelty claim enters the
+paper before its Lean, axiom, computation, and citation gates pass. Start with the
+[projective-completion handoff](handoffs/2026-07-13-projective-completion-repaircodes.md).
 
 1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
@@ -117,15 +128,23 @@ primary odd-plane lane. Start with the
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C106 [QUEUED 2026-07-13] — relative-conic strengthening refutation/certificate gate.** Independently regenerate the q11 group, orbit, secant, syndrome, leader, and extension data; run coordinate-change and mutation controls; exhaust small models of the evaluation theorem including the `|A|=q` boundary. Track in the [strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
+- **C106 [REPORTED 2026-07-13] — relative-conic strengthening refutation/certificate gate.** Independent Python/C++ replays agree on the q11 group, orbit, secant, syndrome, leader, chord, and extension data; coordinate and mutation controls pass. The evaluation range strengthens sharply to `|A|≤q`; the chord colors are five-edge near-perfect, not perfect, matchings. Track in the [strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
 
-- **C107 [QUEUED 2026-07-13] — exact finite-field evaluation-avoidance dichotomy.** Prove the fewer-than-`q` hyperplane-union equivalence, its finite-dimensional annihilator/span form, and the degree-`d` Veronese/evaluation-closure corollary under strict trust. Same handoff.
+- **C107 [REPORTED 2026-07-13; SHARED AGGREGATE PENDING] — exact finite-field evaluation-avoidance dichotomy.** The warning-free focused build proves the sharp at-most-`q` equivalence, dimension-sensitive/factored counts, equality model, `q+1` sharp cover, kernel/span form, and arbitrary-feature/Veronese closure with the standard axiom profile. The shared aggregate rerun awaits completion of the unrelated Q25 generated-leaf builder. Same handoff.
 
-- **C108 [QUEUED 2026-07-13] — projective arc–MDS/deep-hole bridge.** Formalize the arc/MDS equivalence, syndrome-distance trichotomy, relative-completeness/deep-hole confinement, and exact one-/multi-column extension correspondence in isolated downstream modules. Same handoff.
+- **C108 [REPORTED 2026-07-13] — projective arc–MDS/syndrome-defect bridge.** `SyndromeGeometry.lean` and `CodingBridge.lean` kernel-prove transparent MDS parameters, syndrome distance, the actual-affine-leader/support cardinality bijection through weight three, exact affine leader counts, relative-completeness confinement, the leader-collision defect form, the general pair/triple extension hypergraph, and its arc-confined graph/maximal-completion specialization. Focused builds and axiom audit pass. Same handoff.
 
-- **C109 [QUEUED 2026-07-13] — q11 icosahedral `A5` and MDS-extension complex.** After C106's gates, kernel-check the explicit 60-element action and `A5` isomorphism, orbit/secant structure, non-GRS code and coset distributions, and icosahedral simultaneous-extension complex. Same handoff.
+- **C109 [REPORTED 2026-07-13] — q11 certified code and MDS-extension spectrum.** `Q11Coding.lean` proves the non-GRS `[6,3,4]₁₁` code, covering radius three, exact conic projective deep-hole locus, syndrome/leader distributions, tangent-antipode chord partition, and extension polynomial `1+12t+36t²+20t³`, including zero maximal 0/1-extensions, six maximal 2-extensions, and twenty maximal 3-extensions. The classical Clebsch-hexagon/`A5` interpretation is cited, not rebuilt. Same handoff.
 
-- **C110 [QUEUED 2026-07-13] — relative-conic novelty, adversarial, and publication closure.** Complete exact-claim citation chasing, mutation and axiom review, discovery classification, packaging decision, and synchronization of the paper/PDF, proof audit, TRUST manifests, `papers-index.md`, queue, and projective-cap consumer handoff. Same handoff.
+- **C110 [IN PROGRESS 2026-07-13; SHARED AGGREGATE ONLY] — relative-conic novelty, adversarial, and publication closure.** Primary citation chasing marks the `binom(k,3)` farthest-coset leader count, hyperplane threshold, arc/MDS/deep-hole dictionary, and Clebsch interpretation as known. Independent Python/C++ replay, coordinate invariance, perturbed-witness and mutated-generator controls pass. Paper/PDF, proof audit, TRUST, results table, queue, and projective-cap consumer note are synchronized; the final source/claim checklist and post-audit actual-leader bridge pass focused rebuild and standard-axiom audit. Only the shared aggregate rerun remains. Same handoff.
+
+- **C111 [REPORTED 2026-07-13] — projectively completed cubic–axis seed.** Strict-trust Lean proves `[2q+2,4,q]_q`, nonzero/projectively-distinct columns, and exact global dual distance three. Independent `q=3,9,27` replay, conjugation/deletion/mutation controls, aggregate build, scans, and XH1 passed. Track in the [projective-completion handoff](handoffs/2026-07-13-projective-completion-repaircodes.md).
+
+- **C112 [IN PROGRESS 2026-07-13] — exact completed-seed repair ports.** The boundary and mixed-circuit geometry, exact radius-two axis shape, axis-infinity zero-sum minimal clutter, its affine-embedding identity, and its exact `(nu,tau)=((5q-3)/6,2q-1-Z3(q))` invariants are kernel-proved; D-PC10 preserves columns and circuits, and exhaustive q=3,9 replay confirms every proposed row. Still required: repair-hypergraph transport for the uniform axis row, the cubic row, and the rank-four radius-four/full-inner theorem. Same handoff.
+
+- **C113 [QUEUED 2026-07-13] — completed-seed lift and asymptotic family.** After C111–C112 pass, transfer the exact bounded repair rows through concatenation and derive the proposed q9 `[20N,4K,>=9D]_9`, rate `1/10`, and every `c<351/1600` distance statement from the existing quarantined outer theorem. Same handoff.
+
+- **C114 [QUEUED 2026-07-13] — projective-completion novelty and publication closure.** Audit twisted-cubic-axis projective systems, characteristic-three codes, LRC/availability, matroid-port, design, and concatenation literature; run an adversarial Lean/paper consistency pass; promote only surviving claims into the manuscript, proof ledger, TRUST manifests, PDF, paper index, queue, and handoffs. Same handoff.
 
 - **C101 [REPORTED 2026-07-12] — exact `rho_C(16)`.** The complete projective augmentation books
   give 2633 eight-arc classes. Quadratic evaluation rank rejects 2630; the remaining three have a

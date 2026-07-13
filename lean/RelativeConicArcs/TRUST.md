@@ -18,10 +18,15 @@ spinoff.
 | characteristic two | hyperoval/nucleus/tangent classification, `complete_holeIncidence_pos`, and nucleus-in/out inequalities in `Nucleus.lean` | proved in Lean under `(2 : K) = 0` |
 | certificate bridge | relative and ordinary canonical-coverage soundness; `rawArc_iff_projectiveCap`; `check_sound`, `check_sound_empty` | proved in Lean for every finite field |
 | evaluation obstruction | `evaluationMap`; injective-evaluation and selected-functional span obstructions in `EvaluationObstruction.lean` | proved over every commutative semiring; no finite-dimensionality assumption |
+| finite-field evaluation dichotomy | common-zero and distinct-hyperplane counts; `exists_ne_zero_forall_apply_ne_zero`; sharp `q+1` plane cover and equality model; `evaluation_avoidance_iff`; `evaluation_ker_le_ker_iff_mem_span`; `feature_evaluation_avoidance_iff` | proved in `EvaluationDichotomy.lean`; the uniform threshold is `|A|≤q`, the rank-sensitive count is `(q-1)q^(r-2)(q+1-m)`, and the feature theorem specializes to every Veronese degree |
+| projective syndrome geometry | distance-one/two/three trichotomy; exact weight-two support count; `completeOutside_iff_distanceThreeDirections_subset`; one-column and simultaneous extension theorems; maximal extension/graph-independence bridge; leader moment and defect restatements | proved in `SyndromeGeometry.lean`; the general simultaneous object includes pair and triple conflicts, while an arc-confined extension locus reduces exactly to the pair graph |
+| transparent coding bridge | `parityCheckCode`; `[n,n-3,4]` MDS parameter package; affine syndrome distance; actual-leader/support cardinality bijection through weight three; exact `choose(n,3)` weight-three leader count; covering-radius-three predicate; indexed projective arc/triple-independence equivalence | proved in `CodingBridge.lean` without an external coding API; codewords, supports, distance, and leaders are explicit finite functions; `card_syndromeLeadersOfWeight_eq_supports` makes the incidence count literally an affine coefficient-word count |
 | finite examples | `Examples.rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all four values exact |
 | q=16 projective classification | frame normalization; checked matrix transitions; `Q16QuadraticAvoidance.level8_quadraticAvoidance`; full-rank/forced-hit leaf rejection; `no_completeOutside_GF16_card_eight` | all 2633 normalized classes satisfy the stronger singular-or-nonsingular quadratic obstruction; global conic transport proves `rhoC_GF16 = 9` |
 | q=9 terminal game | `Q9Terminal.complete`, `legalExtensions_eq_empty`, `isP` | certified witness is an ordinary complete arc and actual terminal projective P-position |
 | q=11 residual game | residual graph theorems, `continuation_rawArc_iff`, `seed_isP` | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
+| q=11 code and extension spectrum | `witness_mds_columns`, `witness_code_minimum_distance_four`, `projective_distanceThreeDirections_eq_standardConic`, `witness_code_coveringRadius_three`, exact syndrome/leader spectra, `no_nonzero_quadratic_vanishing`, `extension_independence_spectrum`, `maximal_extension_spectrum`, chord matching/partition theorems | `Q11Coding.lean` proves a non-GRS `[6,3,4]₁₁` code of radius three, exact conic projective deep-hole locus, affine distribution `(1,60,1150,120)` and leader split `(900,150,100)` from the certified projective spectrum, the generic actual-leader/support bridge, and ten nonzero scalars per direction; it also proves the extension polynomial `1+12t+36t²+20t³`, all maximal-set counts, and the six-colour chord decomposition |
+| q=25 quadratic pair extension | `Q25PairResult.f2_pair_extension` | every Frobenius-invariant eight-arc with exactly two fixed points has a fresh conjugate-pair extension; normalization, finite coverage, determinant checking, and projective semantics are Lean-checked |
 
 The four exact arithmetic thresholds are also explicit theorems:
 `L2_eight = 6`, `L2_nine = 6`, `L2_eleven = 6`, and `L2_sixteen = 8`.
@@ -72,6 +77,31 @@ q=16 k=9 points=273 conic_points=17 secants=36 required_points=247 I_C=32 L2=8
 
 The Python verifier is provenance and an independent cross-check, not part of the Lean proof.
 
+## Strengthening-check provenance
+
+The finite-field evaluation threshold and q11 structure were independently replayed by:
+
+```text
+6ed309bd2461ce9998cbd3bcaa5396379e6973b7503ce2dcdfb32c9806386566  check_evaluation_dichotomy.py
+0abe909c9aadce0db4c75f296c8de25e929dd1065c906996da8dec017e534d69  check_q11_structure.py
+1753674172d48f1d056d350e30baa9eb67de0810c84a96da0440947768ae041c  check_q11_structure.cpp
+```
+
+The Python and separately written C++ q11 programs agree on projective directions, syndrome
+distances, leader multiplicities, chord classes, and group-action data. Coordinate transformation
+and relabelling preserve every invariant. A one-point witness perturbation changes the extension
+count from 12 to 20 and the stabilizer size from 60 to 2; a mutated generator is rejected. Frozen
+2026-07-13 output hashes are:
+
+```text
+88be03eb8a81bb906083457a4b4201cfd1ef6bcaa9de01928175840f61ac55ff  evaluation output
+b096305a809b062c274129c157d51a57d65e9aec0e44662370ec53c8c773110f  q11 Python output
+380cab47923cbfb3a9bfcc54ee89cf0eb79aa551d936d2e91cbb4949ae56477d  q11 C++ output
+```
+
+These programs are adversarial provenance only. Every manuscript claim they exercise is also a
+Lean theorem reduced by the kernel.
+
 ## Exact q=16 classification provenance
 
 Source generator:
@@ -110,8 +140,10 @@ provenance only; the theorem depends on the emitted data through kernel-checked 
 `#print axioms` for the cap-game localization and parametrized-value bridges, the ordinary
 coverage checker, `Certificate.check_sound`,
 `rhoC_le_length_of_check`, all four `L2` theorems, all four final finite-example theorems, the
-q=16 eight-arc nonexistence theorem, the q=9 terminal P theorem, and q=11 residual and actual
-seeded P theorems
+q=16 eight-arc nonexistence theorem, the q=9 terminal P theorem, q=11 residual and actual
+seeded P theorems, the q11 MDS/radius/deep-hole/leader/extension/chord theorems, and the public
+syndrome/coding bridges, together with the public finite-field evaluation-dichotomy, quantitative-count,
+sharp-cover, equality-model, kernel/span, and feature-closure theorems
 reports exactly:
 
 ```text

@@ -15,10 +15,12 @@ a geometric input. The associated paper draft is
 | weighted multi-insertion | `weightedMultiInsertionDistance_eq_weightedTransversalCostWithin` | The weighted and simultaneous-insertion generalizations compose without additional hypotheses. |
 | secant mechanism | `transversalNumber_eq_card_of_pairwise_disjoint`, `insertionDistance_eq_secantCount` | A generating family of disjoint minimal traces computes insertion distance by edge count. |
 | involutive incidence | `lineTrace_conj`, `invariant_pair_fixed_or_conjugate`, `conjugate_lineTraces_disjoint` | Conjugation transports traces; fixed two-traces are fixed points or a conjugate pair; conjugate-line traces through an external unique intersection are disjoint. |
-| pair counting | `PairExtensionData.sum_card_sub_le_legalCount`, `PairExtensionData.mul_sub_le_legalCount`, `PairExtensionData.exists_legal_of_nonempty_of_lt` | Heterogeneous and uniform surviving-candidate bounds and the positive-surplus existence criterion. |
+| pair counting | `PairExtensionData.sum_card_sub_le_legalCount`, `PairExtensionData.mul_sub_le_legalCount`, `PairExtensionData.exists_legal_of_nonempty_of_lt` | Exact distinct-forbidden-support subtraction, heterogeneous/common-upper-bound forms, and the positive-surplus existence criterion. |
+| exact collision accounting | `card_visible_eq_support_add_collisionRedundancy`, `card_legal_add_orbits_eq_candidates_add_invisible_add_redundancy`, `sum_card_legal_add_carriers_mul_orbits_eq_sum_candidates_add_invisible_add_redundancy` | Subtraction-free decomposition of an orbit charge into invisible mass, distinct support, and collision redundancy, linewise and in aggregate. |
+| capped collision moments | `choose_two_le_two_mul_pred_of_le_four`, `two_mul_choose_two_le_three_mul_of_le_four`, `choose_two_succ_le_two_mul_of_le_three`, `sum_choose_chargeMultiplicity_le_two_mul_collisionRedundancy` | Elementary finite inequalities used to pass between first/second moments and redundancy when fibers have size at most four. |
 | geometric input reduction | `quadraticCandidate_card_of_two_fibers`, `emptyLine_card_of_complement`, `forbidden_card_le_of_injOn` | The three quadratic wrapper fields reduce respectively to a two-to-one mate map, an occupied/empty partition, and an injective obstruction-orbit charging map. |
 | exact quadratic line counts | `card_occupiedFixedLines`, `card_emptyFixedLines`, `choose_fixedArcPoints_le_star` | For an invariant arc, fixed lines are partitioned exactly into occupied and empty lines, with natural subtraction proved nontruncating. |
-| exact quadratic obstruction count | `card_nonfixedSecantOrbits`, `card_forbiddenCandidates_le_baer`, `mem_forbiddenCandidates_iff_exists_covered` | Nonfixed secants have two-element conjugation orbits; their intersections charge all and only secant-covered candidates. |
+| exact quadratic obstruction count | `card_nonfixedSecantOrbits`, `card_forbiddenCandidates_le_baer`, `mem_forbiddenCandidates_iff_exists_covered` | Nonfixed secants have two-element conjugation orbits; every forbidden candidate injects into an orbit, and forbidden support is exactly endpoint secant coverage. No reverse surjectivity from all orbits on every carrier is asserted. |
 | coordinate pair extension | `coordinateQuadraticExtensionData`, `exists_quadratic_pair_extension` | The exact quadratic wrapper is instantiated, and positive surplus produces a conjugate pair whose union with the old set is an arc. |
 | orbit saturation | `four_mul_splitProduct_le_square`, `orbitSaturation_quadratic_bound_of_split` | Denominator-free quadratic saturation bound. |
 | robustness | `not_insertion_indep_of_card_lt_tau`, `not_insertion_indep_of_obstructions_persist`, `not_insertion_indep_of_card_lt_secantCount` | Below-`τ` deletion cannot unblock a point; persistence of old obstructions suffices under perturbation. |
@@ -45,7 +47,15 @@ Concrete abstract-projective-plane consumers are in:
   inequality needed to interpret natural subtraction as ordinary subtraction;
 - `RelativeConicArcs.QuadraticForbidden`: exact nonfixed-secant orbit count, injective charging of
   forbidden candidates, semantic identification of forbiddenness with secant coverage, and the
-  end-to-end arc-extension theorem `exists_quadratic_pair_extension`.
+  end-to-end arc-extension theorem `exists_quadratic_pair_extension`;
+- `RelativeConicArcs.QuadraticCollision`: visible charge support equals `forbiddenCandidates`, the
+  exact carrier balance holds linewise and in aggregate, and the aggregate invisible-capacity
+  hypothesis yields a genuine arc extension.
+- `RelativeConicArcs.Q25PairResult`: `f2_pair_extension` proves that every Frobenius-invariant
+  eight-arc in `PG(2,25)` with exactly two fixed selected points admits a fresh conjugate-pair
+  extension.  Its reduction includes a concrete `GF(25)/GF(5)` model, proved fixed-pair and
+  stabilizer normalizations, exact three-orbit decomposition, a kernel-reduced determinant slice,
+  and semantic transport back to the abstract projective plane.
 
 ## Exact quadratic wrapper
 
@@ -56,16 +66,31 @@ that adjoining `{p, frobeniusPoint p}` preserves the arc property. Its hypothese
 paper's nonempty-empty-line and positive-candidate-surplus inequalities.
 
 The following ingredients are classical infrastructure and are **not** recorded as discoveries:
-Hilbert-90 normalization, identification of the fixed locus with `PG(2,s)`, standard projective
-point/line counts, arc line-incidence double counting, and two-element orbit counting for a
-fixed-point-free involution. Formalization establishes trust in their use; it does not establish
-novelty.
+completion/correction distance as a transversal number; minimal-edge clutter reduction; weighted
+and prescribed-set hitting-set forms; disjoint-secants/point-index evaluation; blocker and
+obstruction-persistence principles; Hilbert-90 normalization; identification of the fixed locus
+with `PG(2,s)`; standard projective point/line counts; arc line-incidence double counting; and
+two-element orbit counting for a fixed-point-free involution. Formalization establishes trust and
+reuse; it does not establish novelty. The exact assembled quadratic-Frobenius orbit-extension
+criterion is the principal plausibly unrecorded result, subject to the residual specialist priority
+search documented in the
+[`novelty audit`](../../../notes/2026-07-13-baer-completion-adversarial-novelty-review.md).
 
 ## Citation-backed, not formalized here
 
 - exact completion radii for conics, hyperovals, maximal arcs, elliptic quadrics, generalized-
-  quadrangle ovoids, and spreads;
+  quadrangle ovoids, and line spreads of `PG(3,q)`; no `q+1` claim is made here for arbitrary
+  `(n-1)`-spreads of `PG(2n-1,q)`;
 - the ceiling/square-root presentation of the denominator-free quadratic saturation theorem.
+
+The exact charge-profile decomposition into invisible orbit counts and collision multiplicities is
+kernel-checked. The exceptional order-five profile `(f,e)=(2,3)` is also kernel-checked by
+`Q25PairResult.f2_pair_extension`; the external census and its observed minimum of 32 remain
+provenance only and are not used by that theorem. What remains prose mathematics is the geometric rephrasing of invisibility as the
+secant-orbit center lying on the carrier, the lower bound on empty carriers through cross-pair
+centers, the identification of charge multiplicity with endpoint point index, and the second-moment
+partition needed for the proposed `s=5,f=0` numerical improvement. Accordingly, no order-five
+uniform theorem is in the trust manifest: the proposed `f=0` and `f=4` profile bounds remain open.
 
 ## Audit result
 
@@ -77,7 +102,8 @@ Validation command:
 
 ```text
 choom -n 1000 -- nix develop --command lake build \
-  RelativeConicArcs.QuadraticLineCounting \
-  RelativeConicArcs.QuadraticPairExtension \
-  RelativeConicArcs.QuadraticForbidden
+  FiniteGeom.BaerCompletion.CollisionProfile \
+  RelativeConicArcs.BaerArithmetic \
+  RelativeConicArcs.QuadraticCollision \
+  RelativeConicArcs.Q25PairResult
 ```

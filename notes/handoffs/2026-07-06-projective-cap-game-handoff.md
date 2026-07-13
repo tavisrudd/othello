@@ -285,15 +285,42 @@ from every such continuation lies in `H`. For `H=𝒞`, sealing into the conic r
 persists throughout later play; this is stronger than a one-step localization observation but does
 not assert that the seed is reachable or P.
 
-C100's first consumer is now Lean-proved: the certified `q=11` six-arc leaves all twelve conic
-parameters live, its exact determinant conflict graph is the degree-five icosahedral graph, and
-the antipodal mirror proves the residual independent-set game P. Remaining consumers: add the
-`q=9` ordinary-complete/terminal-P corollary; test
-containment or descent into those objects in the exact odd-plane corpus; and determine whether the
-generic defect/uncovered inequalities sharpen C80's drain potential. Guardrail: the `rhoC` lower
+C100 is reported. The q=9 witness is Lean-proved ordinary-complete and terminal P; the q=11
+witness is Lean-proved P as an actual seeded projective-cap position, not merely as an abstract
+residual graph. The exact recursive parametrized-hole bridge supplies the value transport. Tested
+two-ply descent closure into either six-point orbit was absent, and the proved identification of
+off-hole legal moves with the uncovered locus did not sharpen C80's minimax drain. Guardrail: the `rhoC` lower
 bound shows that an intruder-only complete conic seal needs order `sqrt(q)` points, so this cannot
 replace the bounded-size forcing or exchange lemma needed for (ON). Current map:
 [`C100 relative-conic game bridge`](../2026-07-12-c100-relative-conic-game-bridge.md).
+
+C101 adds a potentially reusable static rejection primitive: ordinarily uncovered points impose
+linear conditions on quadratic forms, and full rank certifies that no conic seal exists (the
+rank-five case can force the conic to hit the position). This can prune proposed conic-sealed
+terminal regions in an odd-q certificate search, but it supplies no move, descent measure, or
+minimax response by itself; review it only where C80/C84 already produces a candidate sealed
+state.
+
+C110's consumer review adds three proved tools worth testing only at matching pressure points:
+
+- `EvaluationDichotomy.feature_evaluation_avoidance_iff` decides when one degree-`d` form can
+  contain an uncovered set while simultaneously avoiding at most `q` selected points. This
+  strengthens C101's static pruning from one forced selected hit to exact multi-point avoidance,
+  but remains a rejection test rather than a response strategy.
+- `SyndromeGeometry.arc_union_iff_extension_hypergraph` gives the exact simultaneous-extension
+  object: pair conflicts with the old position plus triple conflicts among new points. When the
+  legal locus is confined to a conic, the triple part vanishes and ordinary complete continuations
+  are exactly maximal independent sets of the pair-conflict graph. This is directly reusable for
+  certifying sealed residual classifications and guards against incorrectly treating an arbitrary
+  legal locus as a graph.
+- The q11 Clebsch seed is now classified beyond its P-value: its conic extension complex is the
+  icosahedron independence complex `1+12t+36t²+20t³`, with six complete eight-arc and twenty
+  complete nine-arc continuations; its six witness-coloured five-edge matchings partition the
+  conflict graph and miss antipodal pairs. Review this as a finite base-case/template source for
+  A5-anchor or small-residual certificates, not as evidence for a uniform odd-q descent law.
+
+The coding restatement of the defect theorem is conceptually useful but introduces no stronger
+dynamic inequality: leader counts are the same secant indices already tracked by C80/C84.
 
 ## What Is Dead
 
@@ -484,10 +511,10 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
 
-- **C100 — relative-conic sealing review.** The persistent legal-move confinement bridge is
-  Lean-proved, as is the `q=11` icosahedral antipodal P residual. Review the `q=9` terminal witness,
-  exact-corpus descent/reachability, and defect-to-C80 potential transfer; do not promote static existence into
-  an (ON) or root-value claim. [Current map](../2026-07-12-c100-relative-conic-game-bridge.md).
+- **C100 [REPORTED] — relative-conic sealing review.** Exact game localization, q=9 terminal P,
+  and the actual q=11 icosahedral seeded P position are Lean-proved. The tested descent and
+  defect-to-C80 levers were negative; static existence was not promoted into an (ON) or root-value
+  claim. [Final map](../2026-07-12-c100-relative-conic-game-bridge.md).
 
 - **C84 — conic-involution Schreier catalogue → abundance-first (PRIMARY, 2026-07-12).** The conic
   bulk is the induced Schreier graph of `H_S = ⟨σ_x⟩ ≤ PGL(2,q)`; its Node-Kayles value is set by

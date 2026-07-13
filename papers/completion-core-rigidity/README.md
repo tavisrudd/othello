@@ -5,14 +5,17 @@
 
 **Object:** a robustness theory for maximal feasible configurations in finite hereditary
 independence systems — completion distance δ(C), its circuit-transversal characterization
-(δ_x = τ), sharp values for conics/hyperovals/maximal arcs/elliptic quadrics/ovoids/spreads,
+(δ_x = τ), classical values for conics/hyperovals/maximal arcs/elliptic quadrics/ovoids and line
+spreads of `PG(3,q)`,
 and higher-rank MDS/NRC extension resilience. Strongest new candidates = the twisted-cubic
 external-orbit δ_x spectrum and the relative multiple-saturation parameter t_h(q).
 
-**Status:** theorem-package plan, no manuscript. The abstract infrastructure is `[PROVED]`
-but overlaps known defining-set / trade / saturation theory (not headline). The strongest new
+**Status:** source/staging view folded into the combined manuscript. The abstract infrastructure is
+`[PROVED]` but is standard hitting-set, defining-set, and saturation theory under a checked common
+interface (not headline). The strongest new
 pieces are `[OPEN]` — twisted-cubic transversal spectrum (§6.5), t_h(q), asymptotics of γ(q).
-Gated on a MathSciNet / Storme–Szőnyi hypothesis audit plus one new headline computation.
+The combined paper's broad novelty audit is complete; exact-formula specialist priority review and
+one new family-specific strengthening remain.
 
 **Merge decision:** retain the sharp deletion theorem and classical applications as the robustness
 and reconstruction layer of the combined `baer-equivariant-extension` development draft.
@@ -24,6 +27,9 @@ Baer/completion paper.
 
 **Combined development draft:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
+
+**Combined novelty audit:**
+[`2026-07-13-baer-completion-adversarial-novelty-review.md`](../../notes/2026-07-13-baer-completion-adversarial-novelty-review.md).
 
 ## Files here (symlinks into ../../notes/)
 

@@ -84,13 +84,17 @@ nontruncation side condition. `QuadraticForbidden.lean` counts nonfixed secant o
 the injective charge, proves forbiddenness equivalent to endpoint secant coverage, and proves that
 an uncharged candidate extends the arc. `exists_quadratic_pair_extension` is the end-to-end result.
 
-The heterogeneous theorem is stronger and should be stated first:
+The heterogeneous theorem is sharper and should distinguish the cardinality `f_ℓ` of the actual
+distinct forbidden support from any secant-orbit charge count or upper bound:
 
 ```text
-N_pair ≥ Σ over empty fixed lines ℓ of (N_ℓ-M_ℓ)_+.
+N_pair = Σ over empty fixed lines ℓ of (N_ℓ-f_ℓ),
+N_pair ≥ Σ over empty fixed lines ℓ of (N_ℓ-U_ℓ)_+  when f_ℓ≤U_ℓ.
 ```
 
-The uniform theorem is its constant-profile corollary.
+The uniform theorem is the common upper-bound specialization `U_ℓ=M`. The subsequent novelty audit
+also isolates invisible-center and collision-redundancy corrections to this uniform bound; those
+refinements are not yet Lean declarations.
 
 ### Corollary G — square-root orbit saturation
 
@@ -136,8 +140,10 @@ remains supported. New obstructions are harmless.
 1. Add primary citations for every row of the classical-family radius table.
 2. Decide whether the manuscript promises machine checking of the square-root ceiling itself or
    only its stronger denominator-free quadratic inequality.
-3. Run a targeted prior-art audit for the heterogeneous orbit criterion, equality/stability cases,
-   and the robustness coupling. Formalization alone is not evidence of novelty.
+3. The targeted paper-wide novelty audit is complete; use
+   [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../2026-07-13-baer-completion-adversarial-novelty-review.md)
+   as the claim boundary. A specialist database-level priority search for the exact quadratic-
+   Frobenius formula remains before submission.
 4. Supply at least one nontrivial exact classical-family completion radius or demote that table from
    the paper's lead, per the packaging review.
 

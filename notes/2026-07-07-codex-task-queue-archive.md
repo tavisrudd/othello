@@ -3318,3 +3318,34 @@ universal formalizations; C109 is the gated q11 finite structure; C110 owns rigo
 collision searches, adversarial review, discovery classification, and synchronized publication and
 consumer updates. Live plan:
 `notes/handoffs/2026-07-13-relative-conic-arcs-strengthening.md`.
+
+## 2026-07-13 C106 — independent q11 and evaluation gates reported
+
+Two standalone implementations (Python and C++) independently rebuild `PG(2,11)`, `PGL(2,11)`,
+the symmetric-square conic action, the six-point witness, all affine syndromes, and every extension
+column. They agree on stabilizer order 60, element orders, seven point orbits, secant-index and coset
+leader distributions, 12 conic extensions, and the icosahedral conflict graph. Projective coordinate
+conjugation/relabeling passes. Replacing one witness point changes the extension count 12→20 and
+stabilizer 60→2; a mutated generator is rejected. The chord color classes are five-edge
+near-perfect matchings, correcting the allocated wording. A separate exhaustive small-field gate
+shows at most `q` proper hyperplanes cannot cover, while the `q+1` lines cover `F_q²`; C107 is
+strengthened accordingly. The exact-object literature gate identifies the six-set/orbit structure
+and general arc/coset dictionary as prior art, leaving only the relative-conic coding/extension
+synthesis as a bounded-search novelty candidate. Full commands and hashes are in the strengthening
+companion archive.
+
+## 2026-07-13 C107–C109 — latent-potential review narrows and strengthens the plan
+
+The approved formalization plan now targets the paper's central prescribed-hole defect identity as
+an exact weight-two-leader collision theorem for codimension-three projective MDS codes, rather than
+stopping at the standard arc/code dictionary. C107 adds the sharp dimension-sensitive count of
+avoiding vectors. C109 is narrowed to a single checked q11 code/extension module with exact
+independence polynomial `1+12t+36t²+20t³`; a new abstract `A5` isomorphism is no longer a gate.
+The seed is the classical Clebsch hexagon and its `N3=10` orbit is the known Brianchon-point ten-arc,
+so those names and sources are prior-art interpretation, not novelty claims. Full rationale and
+discovery ledger: `notes/handoffs/done/2026-07-13-relative-conic-arcs-strengthening-archive.md`.
+
+Adversarial refinement: the general multi-column extension object has both pair and triple conflict
+hyperedges; graph independence is valid here because the relative-completeness theorem confines all
+extensions to the prescribed conic, itself an arc. C108 now states both levels and the resulting
+maximal-independent-set classification of ordinary complete superarcs.
