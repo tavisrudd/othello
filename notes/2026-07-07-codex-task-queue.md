@@ -4,9 +4,8 @@
 the current-state map — the priority view plus the genuinely-open tasks as one-line entries. Full
 write-ups of completed tasks, the original ranking, and the Fable Nth-pass amendment trail live in
 the companion log
-[`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md), moved there on
-2026-07-11 (C1–C74 + the priority/amendment history) and 2026-07-14 (every remaining REPORTED /
-CLOSED body). **A REPORTED or CLOSED task does not stay here**: its body goes to the archive, and the
+[`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md).
+**A REPORTED or CLOSED task does not stay here**: its body goes to the archive, and the
 live doc keeps a pointer only where it still anchors an open frontier — in the CURRENT TOP OF QUEUE
 prose or under *Settled lanes*. What remains below is open work only: active, queued, gated, or
 carrying an explicit open tail.
