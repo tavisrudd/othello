@@ -9,6 +9,12 @@ Archived blocks keep their **original relative link depth** — this archive sit
 directory as the live doc, so every relative link (`<file>.md`, `handoffs/…`, `data/…`, `../…`)
 resolves identically to how it did in the live doc. No links were rewritten.
 
+**Lane pegs.** Every *task entry* carries its lane alias after the ID — `## C12. `[cap]` …` for the
+C1–C74 write-ups, `- **C99 `[baer]` …` for the row-form entries — using the aliases in CLAUDE.md
+§ Lane routing. The dated `## <date> C77 continuation — …` **session-log** sections are deliberately
+*not* pegged: they are progress logs for a task whose row is pegged already, so a peg here would be a
+second copy of that fact, free to drift from the first. The task entry is where a lane is recorded.
+
 ## Archived 2026-07-11 from the live queue
 
 Block groups moved (all verbatim, in original file order, contiguous below):
@@ -523,7 +529,7 @@ Placement:
   coupling-defect spectroscopy, **C68** `D(q)` extremal sequence — do not start before the
   post-C61–C65 triage.
 
-## C1. Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
+## C1. `[kayles]` Machine-check the Lemma-4 correction (sum-free Z_n mirror lemma) — PRIORITY [REPORTED 2026-07-07]
 
 Context: `2026-07-04-sumfree-game-theorem.md` Lemma 4 (negation mirror with fixed extras) is
 **false as stated**. Counterexample found by hand 2026-07-07: `n=12`, `t=n/3=4`, `E={t}`,
@@ -545,7 +551,7 @@ Task:
 
 Report file: `notes/2026-07-07-codex-lemma4-check.md`.
 
-## C2. Lean statement scaffold — conic localization lemma (optional, after WP-1/WP-2) [REPORTED 2026-07-07]
+## C2. `[cap]` Lean statement scaffold — conic localization lemma (optional, after WP-1/WP-2) [REPORTED 2026-07-07]
 
 Per the day plan's Codex section: statement-level scaffold only (no proof obligation) for the
 conic localization lemma of `2026-07-07-conic-localization-onconic-escape.md` §1 — the unique
@@ -558,7 +564,7 @@ if it exists when you start.
 Report file: `notes/2026-07-07-codex-conic-scaffold-report.md` (list of Lean names + file, what
 is stated vs sorry-free vs deferred).
 
-## C3. Discharge the esc-mode validation gate (q=17 + q=19) [REPORTED 2026-07-07]
+## C3. `[cap]` Discharge the esc-mode validation gate (q=17 + q=19) [REPORTED 2026-07-07]
 
 O2 implemented the `esc` mode in `notes/2026-07-06-grid-cap-solver.rs` (uncommitted working
 tree) and validated q=11/q=13 byte-identical to `escape` mode, but the mandated q=17/q=19
@@ -570,7 +576,7 @@ PASS = empty diffs on both q. Do NOT start any q=23 campaign.
 
 Report file: `notes/2026-07-07-codex-esc-gate-report.md`.
 
-## C4. Fill the arc-census paywalled gaps (q=23, q=25; q=31 full classification) [REPORTED 2026-07-07]
+## C4. `[cap]` Fill the arc-census paywalled gaps (q=23, q=25; q=31 full classification) [REPORTED 2026-07-07]
 
 O1's census ([2026-07-07-arc-census-o1.md](2026-07-07-arc-census-o1.md)) fully sourced q=27/29
 and all six minimum sizes, but the complete size spectra/counts for q=23 and q=25 live in
@@ -583,7 +589,7 @@ interpretation). If access also fails, record that and stop.
 
 Report file: `notes/2026-07-07-codex-arc-census-fill.md`.
 
-## C5. Test the PGL(2)-orbit value-invariance prediction (q=17 feat data) [REPORTED 2026-07-07]
+## C5. `[cap]` Test the PGL(2)-orbit value-invariance prediction (q=17 feat data) [REPORTED 2026-07-07]
 
 Lemma I of [onconic intrusion calculus](2026-07-07-onconic-intrusion-calculus.md) predicts: two
 on-conic size-4 positions whose 6-point parameter sets `{∞, 0, t₁, t₂, t₃, t₄} ⊂ P¹(F_17)` are
@@ -599,7 +605,7 @@ argument); constancy + the bucket count is the payoff either way (how much the m
 
 Report file: `notes/2026-07-07-codex-pgl2-orbit-check.md`.
 
-## C6. Fix the latent GF(49) reducible-polynomial bug + field self-check (AFTER C3 completes) [REPORTED 2026-07-07]
+## C6. `[cap]` Fix the latent GF(49) reducible-polynomial bug + field self-check (AFTER C3 completes) [REPORTED 2026-07-07]
 
 F3 audit finding B1 (`2026-07-07-f3-soundness-audit.md`): `irred(49)` in
 `2026-07-06-grid-cap-solver.rs` returns `x²+3` over F₇, which is REDUCIBLE (−3 ≡ 4 = 2² mod 7;
@@ -618,7 +624,7 @@ before editing the file** (don't rebuild under your own running gate). Then:
 
 Report file: `notes/2026-07-07-codex-gf49-fix.md`.
 
-## C7. Machine-check + write up the automorphism-exhaustiveness lemma [REPORTED 2026-07-07]
+## C7. `[cap]` Machine-check + write up the automorphism-exhaustiveness lemma [REPORTED 2026-07-07]
 
 F3 audit finding D1: the resym NO verdicts (q=11,13,17) rest on "the semilinear monomial
 affine maps (both coordinate orders) are ALL automorphisms of the grid game hypergraph" —
@@ -636,7 +642,7 @@ true, but the proof is nowhere in the notes. Two deliverables:
 
 Report file: `notes/2026-07-07-codex-autgroup-check.md`.
 
-## C8. Exact-canon cross-validation of the fingerprint canon (q=11, q=13 + q=17 witnesses) [REPORTED 2026-07-07]
+## C8. `[cap]` Exact-canon cross-validation of the fingerprint canon (q=11, q=13 + q=17 witnesses) [REPORTED 2026-07-07]
 
 F3 audit finding D2: `canon()` is a 128-bit additive fingerprint (min over anchor images of a
 sum-of-cell-hashes), not an exact canonical form — a collision would silently merge classes.
@@ -657,7 +663,7 @@ re-canonicalization only.
 
 Report file: `notes/2026-07-07-codex-exact-canon-check.md`.
 
-## C9. Lean statement scaffold — tau-mirror + exception-table certificate format (n=20 lucky plan) [REPORTED 2026-07-07]
+## C9. `[queens]` Lean statement scaffold — tau-mirror + exception-table certificate format (n=20 lucky plan) [REPORTED 2026-07-07]
 
 Statement-level only (no proof obligation), after WP-1/WP-2 and C1–C8 work. Target: the Phase-3
 artifact format of [`2026-07-04-n20-lucky-first-win-plan.md`](2026-07-04-n20-lucky-first-win-plan.md)
@@ -670,7 +676,7 @@ you start; otherwise state the pieces against the n20 plan's §Soundness-boundar
 
 Report file: `notes/2026-07-07-codex-cert-format-scaffold.md`.
 
-## C10. P0a border-signature census/valtest probe (n=20 lucky plan, Phase 0a) [REPORTED 2026-07-07]
+## C10. `[queens]` P0a border-signature census/valtest probe (n=20 lucky plan, Phase 0a) [REPORTED 2026-07-07]
 
 Implement + run the probe EXACTLY per **Appendix P0a of `2026-07-07-fable-day-plan.md`**
 (spec is self-contained there: modes `census`/`valtest`, signature v0/v1 definitions, gates,
@@ -680,7 +686,7 @@ valtest violations verbatim. This gates C11.
 
 Report file: `notes/2026-07-07-p0a-border-signature-report.md`.
 
-## C11. Central-child certificate extractor build (GATED on C10) [NO-GO 2026-07-07]
+## C11. `[queens]` Central-child certificate extractor build (GATED on C10) [NO-GO 2026-07-07]
 
 Build per **`2026-07-07-central-child-certificate-spec.md`** (the soundness contract — do not
 weaken any obligation; signatures organize, never certify; separate checker pass + mutation
@@ -696,7 +702,7 @@ Do not start C11 from the current P0a data.
 
 Report file: `notes/2026-07-07-codex-cert-extractor-report.md`.
 
-## C12. Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1) [REPORTED 2026-07-07 (opus delegate)]
+## C12. `[cap]` Per-q escape certificate emitter — Rust `cert` mode (route C, phase 1) [REPORTED 2026-07-07 (opus delegate)]
 
 Context: the odd-side Lean compositions are done and conditional only on
 `OddEscapeGameStatement`/`OnConicEscapeStatement` (see `lean/ProjectiveCap/PlaneOutcome.lean`;
@@ -728,7 +734,7 @@ emitter + self-check + format spec for the checker to target.
 
 Report file: `notes/2026-07-07-codex-cert-emitter-report.md`.
 
-## C13. q=9 intrusion-structure probe (the next odd-plane Lean target)
+## C13. `[cap]` q=9 intrusion-structure probe (the next odd-plane Lean target)
 
 Context: PG(2,5) and PG(2,7) are now Lean theorems via the intrusion calculus
 (`lean/ProjectiveCap/IntrusionCalculus.lean`, commits `96746ab`/`ae1a346`): at q ≤ 7 no
@@ -757,7 +763,7 @@ small compute):
 
 Report file: `notes/2026-07-07-codex-q9-intrusion-probe.md`.
 
-## C14. WP-3 Lean certificate checker scaffold (GATED on C12's report existing)
+## C14. `[cap]` WP-3 Lean certificate checker scaffold (GATED on C12's report existing)
 
 Do NOT start until `notes/2026-07-07-codex-cert-emitter-report.md` exists (an Opus delegate is
 building the emitter). Then: statement-level Lean scaffold for the route-C checker consuming
@@ -772,7 +778,7 @@ stated vs deferred, build transcript.
 
 Report file: `notes/2026-07-07-codex-wp3-checker-scaffold.md`.
 
-## C15. PGL(2,q) orbit-collapse census at q = 11, 13, 19 (extends C5)
+## C15. `[cap]` PGL(2,q) orbit-collapse census at q = 11, 13, 19 (extends C5)
 
 Rerun your C5 methodology at q = 11, 13, 19: regenerate feat data, reconstruct each on-conic
 S₄'s 6-point parameter set, bucket by PGL(2,q)-canonical form, check value-constancy per
@@ -783,7 +789,7 @@ emitted per-orbit instead of per-class (C5 saw 273 → 10 at q=17). Same guardra
 
 Report file: `notes/2026-07-07-codex-pgl2-orbit-census-q11-19.md`.
 
-## C16. Sum-free Tactic 2 — induction on `r` (activated by the z5 kill)
+## C16. `[kayles]` Sum-free Tactic 2 — induction on `r` (activated by the z5 kill)
 
 The `Z3³×Z5` brute run was killed 2026-07-07 with no verdict (flat 1.07× redundancy at 106M
 nodes — same compute-infeasible bucket as p=11; datapoint + rationale in
@@ -797,7 +803,7 @@ that survives the known q=5-exception structure is progress — report what brea
 
 Report file: `notes/2026-07-07-codex-sumfree-induction-r.md`.
 
-## C17. Anchored certificate family — the constructive `represents` bridge (route C, phase 2) [REPORTED 2026-07-08]
+## C17. `[cap]` Anchored certificate family — the constructive `represents` bridge (route C, phase 2) [REPORTED 2026-07-08]
 
 C14's scaffold is sound and its one open gap is the `GridOddEscapeBookCertificate.represents`
 selector (canonical-class → every position). Fable's design decision: **replace full-canon
@@ -827,7 +833,7 @@ positions via `gridSymmetry_isP_image` transport. Task:
 
 Report file: `notes/2026-07-07-codex-anchored-cert-report.md`.
 
-## C18. ML feature attribution on the on-conic value moduli (GATED on C15's report) [REPORTED 2026-07-08]
+## C18. `[cap]` ML feature attribution on the on-conic value moduli (GATED on C15's report) [REPORTED 2026-07-08]
 
 Do NOT start until `notes/2026-07-07-codex-pgl2-orbit-census-q11-19.md` exists — its per-q
 orbit-bucket tables ARE the training data. Purpose: a disciplined, interpretable-models pass
@@ -861,7 +867,7 @@ was (this is itself the sizing datum).
 
 Report file: `notes/2026-07-07-codex-ml-moduli-attribution.md`.
 
-## C19. Verified boolean book-checker + reflection (route C, phase 3 — the C17 fix) [REPORTED 2026-07-08]
+## C19. `[cap]` Verified boolean book-checker + reflection (route C, phase 3 — the C17 fix) [REPORTED 2026-07-08]
 
 C17's STOP diagnosis is confirmed and the fix direction it proposed is approved: do NOT raise
 `maxRecDepth`, do NOT use `native_decide`. Build the reflection route — a computable `Bool`
@@ -891,7 +897,7 @@ the kernel evaluates the checker — no typeclass search, no new axioms).
 
 Report file: `notes/2026-07-07-codex-certcheck-reflection.md`.
 
-## C20. Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i)) [REPORTED 2026-07-08; REVIEWED 2026-07-08 — SOUND]
+## C20. `[cap]` Winning-intrusion census on the on-conic buckets (intrusion calculus, attack option (i)) [REPORTED 2026-07-08; REVIEWED 2026-07-08 — SOUND]
 
 C18's null (reviewed, sound) killed shallow laws over STATIC features of the 6-subset. The
 surviving hypothesis (session-9 §6 of `2026-07-07-onconic-intrusion-calculus.md`) is that the
@@ -950,7 +956,7 @@ but the per-state `order` field IS in the states jsonl — durable copy
 `notes/data/c20-q13-q17-states.jsonl.gz` (feat-log inputs also in `notes/data/`;
 regenerable in ~67s via the report's Main-run command).
 
-## C21. q=23 esc single-class sizing probe (route D; C18 phase-2 leftover) [REPORTED 2026-07-08]
+## C21. `[cap]` q=23 esc single-class sizing probe (route D; C18 phase-2 leftover) [REPORTED 2026-07-08]
 
 The esc-mode q=17/q=19 validation gate is DISCHARGED (C3) and the box is free (queens G(17)
 done; sum-free z5 terminated). Size the q=23 campaign — do NOT run it.
@@ -969,7 +975,7 @@ done; sum-free z5 terminated). Size the q=23 campaign — do NOT run it.
 
 Report file: `notes/2026-07-08-codex-esc23-sizing.md`.
 
-## C22. Transport lemmas + represents assembly (route C, phase 4 — the C19 open half)
+## C22. `[cap]` Transport lemmas + represents assembly (route C, phase 4 — the C19 open half)
 
 C19 is reviewed and sound (commit `cac2875`; axiom profile verified clean in review). What
 remains for unconditional PG(2,11) is exactly C19's deferred item 4:
@@ -992,7 +998,7 @@ remains for unconditional PG(2,11) is exactly C19's deferred item 4:
 
 Report file: `notes/2026-07-08-codex-transport-assembly.md`.
 
-## C23. TEXT visualizations of winning cap-game lines, odd q (study artifact for the strategy hunt)
+## C23. `[cap]` TEXT visualizations of winning cap-game lines, odd q (study artifact for the strategy hunt)
 
 No cap-game line visualizations exist anywhere in the repo (queens has them; projcap has
 none). Post-C20 the odd-q proof hunt is STRATEGY-level (response schemes, not snapshot
@@ -1039,7 +1045,7 @@ proof-side context loads per [named-expert personas](2026-07-07-named-expert-per
 projective status lives in `handoffs/2026-07-06-projective-cap-game-handoff.md` (session-10
 block: order-5 and order-7 planes proven, dead-hypothesis routes guarded).
 
-## C24. Binary projective nofil theorem in Lean: `PG(n,2)=P` for every `n ≥ 1` [REPORTED 2026-07-08]
+## C24. `[cap]` Binary projective nofil theorem in Lean: `PG(n,2)=P` for every `n ≥ 1` [REPORTED 2026-07-08]
 
 Goal: close the whole q=2 projective column by proof, not computation.
 
@@ -1082,7 +1088,7 @@ Lean status: **DONE** in `ProjectiveCap/Binary.lean`. Main theorem names:
 `binaryPointEquivNonzero`, `binary_nonzeroValid_iff_cap`, and
 `Sumfree.Game.nonzero_initial_isP_zmod2_of_finrank_ge_two`.
 
-## C25. Elliptic-involution theorem in Lean: `PG(2m−1,q)=P` for odd `q` [REPORTED 2026-07-08]
+## C25. `[cap]` Elliptic-involution theorem in Lean: `PG(2m−1,q)=P` for odd `q` [REPORTED 2026-07-08]
 
 Goal: formalize the new closed projective family.
 
@@ -1123,7 +1129,7 @@ Lean status: `lean/CapGame/Mirror.lean`, `lean/ProjectiveCap/Mirror.lean`, and
 
 This supersedes the old false handoff claim that projective spaces never have fpf involutions.
 
-## C26. Bibliography-grade novelty audit for projective Nofil/cap theorem [REPORTED 2026-07-08]
+## C26. `[cap]` Bibliography-grade novelty audit for projective Nofil/cap theorem [REPORTED 2026-07-08]
 
 Goal: validate public wording for the claim that the odd-dimensional projective cap theorem is new
 in the Nofil / impartial hypergraph-avoidance context.
@@ -1156,7 +1162,7 @@ and STS prior art; colored finite-geometry tic-tac-toe is adjacent but different
 new content is the projective-family outcome theorem in this impartial shared cap/Nofil game,
 using standard projective involutions/pairing ingredients.
 
-## C27. Correct residual mirror lemma for cap games [REPORTED 2026-07-08]
+## C27. `[cap]` Correct residual mirror lemma for cap games [REPORTED 2026-07-08]
 
 Goal: formalize the reusable mirror principle in the form that is actually sound for cap/Nofil
 positions.
@@ -1188,7 +1194,7 @@ Use cases:
 
 Report file: `notes/2026-07-08-codex-residual-mirror-lemma.md`.
 
-## C28. MirrorStep/MirrorClosed census and certificate-compression probe [REPORTED 2026-07-08]
+## C28. `[cap]` MirrorStep/MirrorClosed census and certificate-compression probe [REPORTED 2026-07-08]
 
 Goal: measure whether the corrected residual mirror lemma is useful in the computed odd-plane
 ladder, and prepare a terminal certificate rule for future Lean books.
@@ -1230,7 +1236,7 @@ probe was negative: q=11 all P escape children, q=13 all P escape children, and 
 sample all had zero `MirrorStepGood` hits.  Keep `MirrorClosed` as a formal/deep-leaf tool, not as
 an immediate size-4 certificate compressor.
 
-## C29. Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31 [REPORTED 2026-07-08]
+## C29. `[cap]` Mixed-column mod-3 law + inverted bucket census at q = 23, 25, 29, 31 [REPORTED 2026-07-08]
 
 Context: C18's null killed bucket-level laws over static features, but it never isolated the
 COLUMN-level existence question "does q admit any N-valued on-conic bucket at all". On that
@@ -1274,7 +1280,7 @@ bucket was P.  q=23 is therefore not a mixed-column case despite `23 == 2 mod 3`
 there rather than spending time on q=25/29/31; the next proof-direction task is C31 zone steering,
 not further residue-class speculation.
 
-## C30. Route C phase 5 — certificate books for q = 17 and q = 19 [REPORTED 2026-07-10 — certcheck PASS; q17/Class0 split Lean PASS]
+## C30. `[cap]` Route C phase 5 — certificate books for q = 17 and q = 19 [REPORTED 2026-07-10 — certcheck PASS; q17/Class0 split Lean PASS]
 
 Context: the status-table gap "cert book unbuilt" for q=17/19 is pure engineering now — every
 feasibility gate is measured: the emitter's private-memo peak fits (C3: q=19 ≈ 32.3M entries),
@@ -1320,7 +1326,7 @@ q17 build above 21.5 h, so the explicit ~10 h stop gate is now tripped. Next wor
 launch decision for that roughly day-long build (or another checker/build-shape reduction); q19
 sizing remains after q17 is clean.
 
-## C31. Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
+## C31. `[cap]` Zone-steering ceiling census (the C20 review's surviving proof shape, made precise) [REPORTED 2026-07-08]
 
 Context: the C20 review's structural reading is that the session-11 snapshot laws hold exactly
 while the intruder zone is an O(1) endgame (max zone 2 at q=11 vs 10 at q=13 / 38 at q=17), and
@@ -1392,7 +1398,7 @@ q=25 probe `[1,2,3,4]` is P at about 26.3M private memo entries, while the first
 canonical bucket representative `[1,2,3,5]` exceeds the 100M memo cap.  GF(25) broad mining needs
 a dedicated prime-power path.
 
-## C32. Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2) [REPORTED 2026-07-09]
+## C32. `[cap]` Composite-mirror stuck-free probe — plane variant first, then PG(4,3) (v2) [REPORTED 2026-07-09]
 
 **READ FIRST: [`2026-07-08-evendim-composite-mirror-design.md`](2026-07-08-evendim-composite-mirror-design.md)**
 — the v2 design analysis. It corrects the v1 spec (translations are NOT involutions for odd
@@ -1456,7 +1462,7 @@ all 80 affine seeds: P1 plays `rho^{-1}` of the seed direction, forcing P2's dea
 as the rho reply.  Reflection towers / non-fixed-H variants remain untested new designs, not
 continuations of the primary candidate.
 
-## C33. Act on Fable's line-capacity review — correct the framing, redirect the zone hunt [REPORTED 2026-07-09]
+## C33. `[cap]` Act on Fable's line-capacity review — correct the framing, redirect the zone hunt [REPORTED 2026-07-09]
 
 **READ FIRST: [`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md)**
 — Fable's critique of the line-capacity framing (`3863eca`), the six-cell reservoir lemma
@@ -1514,7 +1520,7 @@ refutation of one of Fable's six items is a full-value deliverable.
 
 Report file: `notes/2026-07-09-codex-line-capacity-followup.md`.
 
-## C34. Assemble the D1 outcome-classes manuscript skeleton (the flag-planting paper) [REPORTED 2026-07-09]
+## C34. `[cap]` Assemble the D1 outcome-classes manuscript skeleton (the flag-planting paper) [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-09-stepping-stone-deliverables-proposal.md`](2026-07-09-stepping-stone-deliverables-proposal.md)
 (D1 + the umbrella framing and novelty guards), the C26 novelty audit
@@ -1588,7 +1594,7 @@ Deliverable: the skeleton draft at `notes/2026-07-09-d1-outcome-classes-manuscri
 Report file: `notes/2026-07-09-codex-d1-manuscript-skeleton.md` (the readiness audit + gaps list +
 what was quoted vs stubbed vs flagged `[VERIFY]`).
 
-## C35. Nimber (Grundy) oracle — make the S4 dump measure the conic⊕zone coupling [REPORTED 2026-07-09]
+## C35. `[cap]` Nimber (Grundy) oracle — make the S4 dump measure the conic⊕zone coupling [REPORTED 2026-07-09]
 
 **READ FIRST:** the S4 manual [`2026-07-08-s4-memo-dump-query-manual.md`](2026-07-08-s4-memo-dump-query-manual.md)
 and Fable's review §2 [`2026-07-09-fable-line-capacity-review.md`](2026-07-09-fable-line-capacity-review.md).
@@ -1623,7 +1629,7 @@ Guardrails: shallow layer only (S5/S6); validate `nimber==0` against P/N dumps b
 nimber dumps are bigger — do not launch a large-`q` Grundy dump without the sizing gate.
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-nimber-oracle.md`.
 
-## C36. Cross-q combinatorial-type value alignment — localize the uniform-theorem obstruction [REPORTED 2026-07-09]
+## C36. `[cap]` Cross-q combinatorial-type value alignment — localize the uniform-theorem obstruction [REPORTED 2026-07-09]
 
 Context: S4 roots are conic-normalized (`r·c = 1`) and canonically keyed, so a reachable state has
 a **q-independent combinatorial type**. Running the same query across the q=17/19/23 exact dumps and
@@ -1656,7 +1662,7 @@ mixed-value collision.  A strict normalized-coordinate type passed self-consiste
 shared S5/S6 types across at least two of q=17/19/23, with 281 nonconstant value rows.  Full table:
 `rust/s4-dumps/2026-07-09/c36-analysis/nonconstant-strict-types.tsv`.
 
-## C37. Cross-root shared-key agreement — scaled soundness check + state-complexity number [REPORTED 2026-07-09]
+## C37. `[cap]` Cross-root shared-key agreement — scaled soundness check + state-complexity number [REPORTED 2026-07-09]
 
 Context: distinct S4 roots' exact dumps **overlap** — positions reachable from both canonicalize to
 the same key. Agreement on shared keys is a test of `canon()` soundness (the C8 concern that the
@@ -1681,7 +1687,7 @@ Guardrails: RAW only; document the exact key/value byte layout read; treat any d
 stop-and-report, never as something to patch. Budget: 4h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-shared-key-agreement.md`.
 
-## C38. Tablebase strategy distillation — the forced-move skeleton corpus-wide [REPORTED 2026-07-09]
+## C38. `[cap]` Tablebase strategy distillation — the forced-move skeleton corpus-wide [REPORTED 2026-07-09]
 
 Context: the `replies`/query DAG exposes the full winning-strategy graph. Corpus-wide, the mover
 nodes with a **unique** winning move are *forced* — the skeleton any strategy-level proof, and the
@@ -1706,7 +1712,7 @@ fully-known subtrees, or treat any `unknown` child as disqualifying the node fro
 and report how many nodes that excludes). Budget: hard 8h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-tablebase-distillation.md`.
 
-## C39. Remoteness/suspense — a dynamic monovariant (C18's null was static-only) [REPORTED 2026-07-09]
+## C39. `[cap]` Remoteness/suspense — a dynamic monovariant (C18's null was static-only) [REPORTED 2026-07-09]
 
 Context: C18 killed shallow laws over **static** features of the position. Remoteness (Conway) is a
 **dynamic** quantity — how fast the winner can force / the loser delay — and has never been computed
@@ -1731,7 +1737,7 @@ two q=17 score-9 representatives, and optional q=19 root all traversed exactly
 odd).  `defxor` and zone size stratify average suspense but do not decide value or remoteness.
 Verdict: useful diagnostic, not a standalone dynamic monovariant.
 
-## C40. Oracle-driven winline generation (feeds C23)
+## C40. `[cap]` Oracle-driven winline generation (feeds C23)
 
 Context: C23 (winline viz) needs optimal lines to terminal and planned a separate solve. The
 `s4query` `play`/`pop` stack + value oracle already walks optimal lines by lookup — use it to drive
@@ -1759,7 +1765,7 @@ blocking-set obstruction.  Existing
 q=23 all-bucket `s4xormine` logs were re-parsed only as a cheap first-ply closure-availability check
 (5734/5734 hits, selected `zone_rows = zone_cols = 17`, no new solves).
 
-## C41. Lean-certify the trapped ⇒ N converse (close the falsification equivalence) [REPORTED 2026-07-09]
+## C41. `[cap]` Lean-certify the trapped ⇒ N converse (close the falsification equivalence) [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md)
 §1 — it names this gap precisely. Only the elimination direction was Lean-proven before C41
@@ -1803,7 +1809,7 @@ Status: **PROVED in Lean** (2026-07-09). Added `ProjectiveCap.TrapConverse` and 
 converse. Axiom gate is exactly `[propext, Classical.choice, Quot.sound]`. D1/falsification
 phrasing may now use the bidirectional equivalence, modulo the existing Lean spec-match caveat.
 
-## C42. Fixed-q census propagation — the rescoped surviving half of the concentration factorization [REPORTED 2026-07-09]
+## C42. `[cap]` Fixed-q census propagation — the rescoped surviving half of the concentration factorization [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-09-onconic-child-type-alignment.md`](2026-07-09-onconic-child-type-alignment.md)
 — it adjudicated this task's original premise, half each way, before the task ran — then
@@ -1865,7 +1871,7 @@ the uniform (ON) route now rests entirely on A5 depletion arithmetic. The class-
 constant remains an empirical fact with no census mechanism behind it. C47's dichotomy row takes
 its negative branch.
 
-## C43. PG(4,3) exact-solve sizing — the former even-dimensional evidence vacuum [REPORTED 2026-07-09 — Claude/Opus — **PG(4,3) = P**]
+## C43. `[cap]` PG(4,3) exact-solve sizing — the former even-dimensional evidence vacuum [REPORTED 2026-07-09 — Claude/Opus — **PG(4,3) = P**]
 
 **Result: PG(4,3) = P (second-player win).** The sizing showed the raw state space is
 ~10¹³ (infeasible) but the PGL(5,3)-orbit space is only low-tens-of-thousands, so an exact
@@ -1908,7 +1914,7 @@ question is whether canonicalization makes the reachable class space tractable.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-pg43-sizing.md`.
 
-## C44. GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
+## C44. `[cap]` GF(25) prime-power path + q=25 on-conic bucket census (the Baer falsification watch)
 
 **[REPORTED 2026-07-10 (Claude) — COMPLETE: all 28 buckets P, q=25 is NOT depleted.]**
 Report: [`2026-07-09-codex-q25-baer-census.md`](2026-07-09-codex-q25-baer-census.md).
@@ -1985,7 +1991,7 @@ informative new number for the (ON) route, independent of the Baer watch.
 
 Budget: hard 8h wall, single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-q25-baer-census.md`.
 
-## C45. Game-valued defect-skeleton refinement — beyond classical conic-arc spectra [REPORTED 2026-07-09]
+## C45. `[cap]` Game-valued defect-skeleton refinement — beyond classical conic-arc spectra [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-08-nk-involution-residual.md`](2026-07-08-nk-involution-residual.md)
 (the Lemma-VI spectrum machinery, NK1–NK3), the C29 order dichotomy
@@ -2040,7 +2046,7 @@ constraints between successive involution graphs produced by an actual play hist
 Budget: proof/writing task; machine part is validation against existing data only, 2h.
 Report file: `notes/2026-07-09-codex-defect-spectrum-theorem.md`.
 
-## C46. t-ply conic-depletion inequality ladder — where a trap can live [REPORTED 2026-07-09]
+## C46. `[cap]` t-ply conic-depletion inequality ladder — where a trap can live [REPORTED 2026-07-09]
 
 **READ FIRST:** [`2026-07-08-s4-two-ply-conic-depletion.md`](2026-07-08-s4-two-ply-conic-depletion.md)
 (the two-ply bounds `off/off ≥ max(0,q−19)`, `off/on ≥ max(0,q−13)`, `on/on = q−7` and their
@@ -2084,7 +2090,7 @@ for example, excess is bounded by 4 and the excess-4 case has a sharp congruence
 Budget: proof task + 2h mining validation, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-depletion-ladder.md`.
 
-## C47. Minimal-counterexample constraint package (gate DISCHARGED 2026-07-09 — C42 reported) [REPORTED 2026-07-09]
+## C47. `[cap]` Minimal-counterexample constraint package (gate DISCHARGED 2026-07-09 — C42 reported) [REPORTED 2026-07-09]
 
 The C42 gate is satisfied: `notes/2026-07-09-codex-type-census-uniformity.md` exists and is
 **negative**, so row 3 below takes its negative branch — state "no propagation constraint
@@ -2124,7 +2130,7 @@ section (or stands alone) and is valuable *whichever way* the conjecture resolve
 Budget: writing/proof assembly, 6h; no new solves.
 Report file: `notes/2026-07-09-codex-counterexample-package.md`.
 
-## C48. Mirror-theorem harvest on classical varieties — new P families at lemma-application cost [REPORTED 2026-07-09 (Claude/Opus) — Lean landed]
+## C48. `[cap]` Mirror-theorem harvest on classical varieties — new P families at lemma-application cost [REPORTED 2026-07-09 (Claude/Opus) — Lean landed]
 
 **Reported by Claude/Opus 2026-07-09.** Report: `notes/2026-07-09-codex-mirror-harvest.md`;
 generator `rust/scripts/projcap_mirror_harvest.py`; **Lean `lean/ProjectiveCap/HyperbolicQuadricMirror.lean`
@@ -2187,7 +2193,7 @@ failure maps the mirror method's boundary. Feeds D1 directly.
 Budget: math + small compute; 8h wall, single-core, ≤ 8 GB (solves are tiny).
 Report file: `notes/2026-07-09-codex-mirror-harvest.md`.
 
-## C50. Kernel-checked Grundy certificates — machine-verified game-value sequences (post-C35) [REPORTED 2026-07-10 — tiny PASS / literal-scale NO-GO]
+## C50. `[cap]` Kernel-checked Grundy certificates — machine-verified game-value sequences (post-C35) [REPORTED 2026-07-10 — tiny PASS / literal-scale NO-GO]
 
 Context: C35's oracle now produces exact nimbers (`s4gdump`/`s4gcheck`/`s4gmeasure`), and the C19
 reflection route kernel-checks P/N reply books. Bridging them — a **nimber certificate** format
@@ -2215,7 +2221,7 @@ formally verified, and we have both the oracle and the checker infrastructure.
 Budget: hard 8h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-grundy-cert-format.md`.
 
-## C49. Node-Kayles nimber tables for other chess pieces (D6 siblings, queens box idle time)
+## C49. `[queens]` Node-Kayles nimber tables for other chess pieces (D6 siblings, queens box idle time)
 
 Context: D6 extends the queens nimber sequence (OEIS A344227, known to n=13). The same solver
 discipline applied to other pieces yields cheap OEIS-able siblings and more capacity-1 anchors for
@@ -2241,7 +2247,7 @@ variable-length maximal placements and are the real targets.
 Budget: hard 8h wall, single-core, ≤ 8 GB per piece; opportunistic scheduling.
 Report file: `notes/2026-07-09-codex-piece-nimber-tables.md`.
 
-## C51. Polar-space Nofil — symplectic W(2n−1,q) and beyond (mirror harvest #3) [handed off by Claude/Opus 2026-07-09] [REPORTED 2026-07-09 (Claude/Opus) — Lean engine landed]
+## C51. `[cap]` Polar-space Nofil — symplectic W(2n−1,q) and beyond (mirror harvest #3) [handed off by Claude/Opus 2026-07-09] [REPORTED 2026-07-09 (Claude/Opus) — Lean engine landed]
 
 **Reported by Claude/Opus 2026-07-09.** Report: `notes/2026-07-09-codex-polar-space-nofil.md`;
 generator `rust/scripts/polar_space_nofil.py`; **Lean `lean/ProjectiveCap/PolarSegreMirror.lean`
@@ -2276,7 +2282,7 @@ Watch: the #5 boundary (`notes/2026-07-09-mirror-method-boundary.md`) likely rec
 level for unitary/orthogonal polar spaces (anisotropic-core obstructions). Machine gates tiny;
 single-core, ≤ 8 GB. Report file: `notes/2026-07-09-codex-polar-space-nofil.md`.
 
-## C52. Segre / product-variety Nofil (mirror harvest #4) [handed off by Claude/Opus 2026-07-09] [REPORTED 2026-07-09 (Claude/Opus) — Lean base family landed]
+## C52. `[cap]` Segre / product-variety Nofil (mirror harvest #4) [handed off by Claude/Opus 2026-07-09] [REPORTED 2026-07-09 (Claude/Opus) — Lean base family landed]
 
 **Reported by Claude/Opus 2026-07-09.** Report: `notes/2026-07-09-codex-segre-product-nofil.md`;
 generator `rust/scripts/segre_product_nofil.py`; **Lean `lean/ProjectiveCap/PolarSegreMirror.lean`
@@ -2307,7 +2313,7 @@ product involution's collinearity + ruling preservation is shown. Watch: need on
 products of two even-dim factors likely fail per the #5 boundary. Single-core, ≤ 8 GB. Report file:
 `notes/2026-07-09-codex-segre-product-nofil.md`.
 
-## C53. Full-PGL on-conic orbit bridge + q=23 computed-status cleanup [DONE 2026-07-09 — Claude; parts 1–4]
+## C53. `[cap]` Full-PGL on-conic orbit bridge + q=23 computed-status cleanup [DONE 2026-07-09 — Claude; parts 1–4]
 
 **Claim note (Claude, 2026-07-09):** **all four parts done.** Parts 1–2 (the Lean bridge)
 verified and landed in `lean/ProjectiveCap/Sym2ConicBridge.lean` — Sym²/Veronese construction,
@@ -2359,7 +2365,7 @@ unless C44 is separately launched.
 
 Report file: `notes/2026-07-09-codex-full-pgl-bridge.md`.
 
-## C54. Certify the q=23 full-PGL bucket labels [REPORTED 2026-07-09]
+## C54. `[cap]` Certify the q=23 full-PGL bucket labels [REPORTED 2026-07-09]
 
 Context: after C53, the 22 full-`PGL(2,23)` on-conic bucket representatives cover every q=23
 on-conic S4 child.  C29 solved all 22 representatives as P, and C37 generated exact raw q=23 bucket
@@ -2406,7 +2412,7 @@ reachability of every raw record.  Full suite: `241,627,613 / 241,627,613` recor
 RSS.  With C53, q=23 is now "computed and rules-certified at the S4 bucket layer"; it remains short
 of a Lean `Projective.InitialPStatement` until a Lean checker/assembly consumes the certificates.
 
-## C55. d-lattice side-switch diagnostic — a mechanism candidate for the arc-depleted-order dichotomy [REPORTED 2026-07-10 — NEGATIVE]
+## C55. `[cap]` d-lattice side-switch diagnostic — a mechanism candidate for the arc-depleted-order dichotomy [REPORTED 2026-07-10 — NEGATIVE]
 
 **Report: [`2026-07-09-codex-d-lattice-side-switch.md`](2026-07-09-codex-d-lattice-side-switch.md).**
 NEGATIVE on both instruments the task names.  Abstract C18 involution-product dictionary: no net
@@ -2461,7 +2467,7 @@ pooled across q; this is a *paired contrast* on matched configurations, which C1
 Budget: existing data + small compute, single-core, ≤ 4h.
 Report file: `notes/2026-07-09-codex-d-lattice-side-switch.md`.
 
-## C56. Group-indexed cross-q type alignment (the C36 retry) [GATED on a C55 positive]
+## C56. `[cap]` Group-indexed cross-q type alignment (the C36 retry) [GATED on a C55 positive]
 
 Do NOT start until C55 reports positive. Context: C36's strict normalized-coordinate types pass
 within-q self-consistency but have 281 nonconstant cross-q value rows — unsurprising, since
@@ -2491,7 +2497,7 @@ orbits.
 Budget: existing dumps only, single-core, ≤ 4h.
 Report file: `notes/2026-07-09-codex-group-indexed-alignment.md`.
 
-## C57. Zone conflict-graph quasi-randomness probe — one structural statement for the zone negatives
+## C57. `[cap]` Zone conflict-graph quasi-randomness probe — one structural statement for the zone negatives
 
 Context: the off-conic zone resists everything — one dense component at q=23
 (`zone_v = 100..120`, `zone_nk_known = 0`), no clean sub-census (C42 negative), no decomposition
@@ -2518,7 +2524,7 @@ NOT quasi-random means the deviations from pseudo-randomness are exactly the min
 Budget: existing data only, single-core, ≤ 4h.
 Report file: `notes/2026-07-09-codex-zone-quasirandomness.md`.
 
-## C58. Cap game on the four projective planes of order 9 — order vs Desarguesian structure
+## C58. `[cap]` Cap game on the four projective planes of order 9 — order vs Desarguesian structure
 
 **[REPORTED 2026-07-10 — all-P (Claude)].** All four order-9 planes (PG(2,9), Hall, dual Hall,
 Hughes) are P; pairwise non-isomorphic (distinct complete-arc spectra).  All-P branch: no N
@@ -2551,7 +2557,7 @@ eventual uniform proof to use less algebraic structure than conic localization c
 Budget: hard 8h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-order9-planes.md`.
 
-## C59. Arc-stability constraint import — second-largest complete arc bounds into the trap/endgame package [REPORTED 2026-07-10]
+## C59. `[cap]` Arc-stability constraint import — second-largest complete arc bounds into the trap/endgame package [REPORTED 2026-07-10]
 
 Context: sweep item (seventh-pass amendment).  Segre-type stability for odd q says every complete
 arc not contained in a conic has size at most `q − c√q` (Voloch for odd q; Ball for prime q —
@@ -2578,7 +2584,7 @@ packages.
 Budget: literature + ≤ 2h mining validation, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-arc-stability-import.md`.
 
-## C60. Singer-model circulant probe — the plane as a cyclic difference-set board
+## C60. `[cap]` Singer-model circulant probe — the plane as a cyclic difference-set board
 
 Context: sweep item (seventh-pass amendment).  Under the Singer cycle, PG(2,q) points are
 `Z_{q²+q+1}` and lines are the translates of a perfect planar difference set `D`; the cap game
@@ -2603,7 +2609,7 @@ methods do NOT transfer; the interest is the cyclic/arithmetic structure itself.
 Budget: ≤ 4h wall, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-09-codex-singer-model-probe.md`.
 
-## C61. Finite-state reply automaton over defect/interface/zone states (sweep Co3)
+## C61. `[cap]` Finite-state reply automaton over defect/interface/zone states (sweep Co3)
 
 **READ FIRST:** the Co3 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §3, the NK
@@ -2633,7 +2639,7 @@ Report file: `notes/2026-07-09-codex-reply-automaton.md`.
 successor framing (eleventh pass): existential/q-varying selector lemma (S11), no further
 deterministic argmin variants.]**
 
-## C62. Inverted selector search scored by exact character sums (sweep T1) [REPORTED 2026-07-10]
+## C62. `[cap]` Inverted selector search scored by exact character sums (sweep T1) [REPORTED 2026-07-10]
 
 **READ FIRST:** the T1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §1, and the
@@ -2677,7 +2683,7 @@ obligation nevertheless has some P reply with `Delta Psi < 0`, extending C63 thr
 root. Existing q=23 zero-xor/live witnesses decrease Psi on 5,487/5,734 rows. Route the rho
 failure corpus and Psi charge to C61; no exact-character-sum handoff is justified.
 
-## C63. LP-fit the amortized potential; read the infeasibility dual (sweep L1) [REPORTED 2026-07-10]
+## C63. `[cap]` LP-fit the amortized potential; read the infeasibility dual (sweep L1) [REPORTED 2026-07-10]
 
 **READ FIRST:** the L1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §6, and the
@@ -2711,7 +2717,7 @@ It strictly decreases on all 3,144 q=13 and 1,052,204 q=17 verified P-to-P reply
 Held-out replay passes, but the replies are still exact-value/Z-selected: promote Psi as C62's
 selector scoring target and C61's charge, not yet as a uniform proved invariant.
 
-## C64. Completion-poset correlate of the arc-depleted dichotomy (sweep E3) — run beside C55 [REPORTED 2026-07-10 — NEGATIVE]
+## C64. `[cap]` Completion-poset correlate of the arc-depleted dichotomy (sweep E3) — run beside C55 [REPORTED 2026-07-10 — NEGATIVE]
 
 **Report: [`2026-07-09-codex-completion-poset.md`](2026-07-09-codex-completion-poset.md).**
 NEGATIVE.  Full/exact completion enumeration (q=11/13 all configs, q=17/19 seeded 40+30 sample, no
@@ -2745,7 +2751,7 @@ reserve as the third.
 
 Report file: `notes/2026-07-09-codex-completion-poset.md`.
 
-## C65. Pin down Z(23): steering-ceiling growth + extremal configurations (sweep E1) [REPORTED 2026-07-09]
+## C65. `[cap]` Pin down Z(23): steering-ceiling growth + extremal configurations (sweep E1) [REPORTED 2026-07-09]
 
 **READ FIRST:** the E1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §2, and the
@@ -2778,7 +2784,7 @@ zone 119, `live_on=6`, defect spectrum `4,1,1`, and its worst line descends `40/
 Independent Python C31 recursion reproduces Z=40.  The small-uniform-Z route is deprioritized in
 favor of C63's amortized-potential form, with small-Z as the terminal layer.
 
-## C66. Grid-terminal spectrum — complete caps under row/column capacities (sweep S2) [GATE DISCHARGED 2026-07-10 — opportunistic diagnostic, no priority]
+## C66. `[cap]` Grid-terminal spectrum — complete caps under row/column capacities (sweep S2) [GATE DISCHARGED 2026-07-10 — opportunistic diagnostic, no priority]
 
 **READ FIRST:** the S2 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §5.
@@ -2797,7 +2803,7 @@ termination invariant for the maintenance lane has to land in.
 
 Report file: `notes/2026-07-09-codex-grid-terminal-spectrum.md`.
 
-## C67. Coupling-defect spectroscopy: δ = g ⊕ g_conic ⊕ g_zone (sweep Co1) [GATE DISCHARGED 2026-07-10 — opportunistic diagnostic, no priority]
+## C67. `[cap]` Coupling-defect spectroscopy: δ = g ⊕ g_conic ⊕ g_zone (sweep Co1) [GATE DISCHARGED 2026-07-10 — opportunistic diagnostic, no priority]
 
 **READ FIRST:** the Co1 spec in
 [`2026-07-09-mathematician-lens-sweep.md`](2026-07-09-mathematician-lens-sweep.md) §3.
@@ -2812,7 +2818,7 @@ deliverable.  Budget: hours (existing `c35/` dumps + Lemma-V σ data); single-co
 
 Report file: `notes/2026-07-09-codex-coupling-defect.md`.
 
-## C68. The depletion-fraction extremal sequence D(q) (sweep E2) [REPORTED 2026-07-10 (Claude)]
+## C68. `[cap]` The depletion-fraction extremal sequence D(q) (sweep E2) [REPORTED 2026-07-10 (Claude)]
 
 **Report: [`2026-07-09-codex-depletion-fraction.md`](2026-07-09-codex-depletion-fraction.md).**
 Exact `D(q)` (q=5..19 feat dumps, q=23 bucket labels): `D(q) = 0` at every non-arc-depleted order
@@ -2850,7 +2856,7 @@ hours; single-core, ≤ 8 GB.
 
 Report file: `notes/2026-07-09-codex-depletion-fraction.md`.
 
-## C69. Envelope invariants for the flipping configurations (sweep S1 — PROMOTED 2026-07-10) [REPORTED 2026-07-10 — NEGATIVE]
+## C69. `[cap]` Envelope invariants for the flipping configurations (sweep S1 — PROMOTED 2026-07-10) [REPORTED 2026-07-10 — NEGATIVE]
 
 **Report: [`2026-07-10-codex-envelope-invariants.md`](2026-07-10-codex-envelope-invariants.md).**
 NEGATIVE.  Part A confirms the tangent envelope is non-discriminating (`0/1716` concurrent tangent
@@ -2899,7 +2905,7 @@ integral data* — exactly the degree of freedom the cross-q flips demand.
 Budget: hours–day, existing data + small compute, single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-envelope-invariants.md`.
 
-## C70. Exact reservoir-slack collision charge — untruncate Psi's incidence term (eleventh pass) [REPORTED 2026-07-10]
+## C70. `[cap]` Exact reservoir-slack collision charge — untruncate Psi's incidence term (eleventh pass) [REPORTED 2026-07-10]
 
 **READ FIRST:** [`2026-07-09-codex-potential-lp-dual.md`](2026-07-09-codex-potential-lp-dual.md)
 (the `Psi` definition, the q=19 Correction-2 replay, the Correction-3 route audit) and
@@ -2935,7 +2941,7 @@ Budget: hours–day, existing dumps + scripts (`s4potential`/`s4potentialprobe`,
 `c63-potential-lp.py`), single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c70-collision-charge.md`.
 
-## C71. Three-involution transition theorem — the first unclassified intruder layer (eleventh pass) [REPORTED 2026-07-10]
+## C71. `[cap]` Three-involution transition theorem — the first unclassified intruder layer (eleventh pass) [REPORTED 2026-07-10]
 
 **Reported:** [`2026-07-10-codex-c71-third-intruder.md`](2026-07-10-codex-c71-third-intruder.md).
 Verdict (3b, exact residual dependence): the after-skeleton is **NOT a function** of the
@@ -2980,7 +2986,7 @@ of refitting them.
 Budget: day-scale; mining from existing dumps, proof by finite case analysis; single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c71-third-intruder.md`.
 
-## C72. PGL permutation-module / Johnson-scheme decomposition of f_q (A5 lane, eleventh pass) [REPORTED 2026-07-10 — NEGATIVE (read b)]
+## C72. `[cap]` PGL permutation-module / Johnson-scheme decomposition of f_q (A5 lane, eleventh pass) [REPORTED 2026-07-10 — NEGATIVE (read b)]
 
 **READ FIRST:** the §6 witness-count heuristic in
 [`2026-07-09-odd-plane-falsification-map.md`](2026-07-09-odd-plane-falsification-map.md) (the
@@ -3016,7 +3022,7 @@ Budget: hours–day; existing labels + linear algebra (the 6-subset space at q=1
 38,760 — tiny); single-core, ≤ 8 GB.
 Report file: `notes/2026-07-10-codex-c72-fq-decomposition.md`.
 
-## C73. Value-blind secant-packet theorem — the off-conic escape structure at the knife edge (twelfth pass) [REPORTED 2026-07-10 — POSITIVE (value-blind L(A) survives; recursion-existence 68/68; failure-gate-2 refuted)]
+## C73. `[cap]` Value-blind secant-packet theorem — the off-conic escape structure at the knife edge (twelfth pass) [REPORTED 2026-07-10 — POSITIVE (value-blind L(A) survives; recursion-existence 68/68; failure-gate-2 refuted)]
 
 **Verdict:** the value-blind selector `L(A)` = the maximum-legal-incidence frame-point/on-conic
 candidate secant SURVIVES: it uniquely reproduces the packet at all 3 q=17 extremal classes and
@@ -3068,7 +3074,7 @@ Budget: hours; existing data + small algebra, single-core, ≤ 2 GB.  This task 
 whichever way q=25 lands: it is the structure question for the C44 item-7 branch-(ii) pivot.
 Report file: `notes/2026-07-10-codex-c73-secant-packet.md`.
 
-## C74. Growing fan-incidence capacity family — the Ω(q) upgrade of the 15-involution lemma (twelfth pass) [REPORTED 2026-07-10 — round 2: line-pencil/tie theorems PROVED, stabilizer gate CLOSED (≤838 bound), residue = one-intruder pencil N-absorption; see top-of-queue bullet + report]
+## C74. `[cap]` Growing fan-incidence capacity family — the Ω(q) upgrade of the 15-involution lemma (twelfth pass) [REPORTED 2026-07-10 — round 2: line-pencil/tie theorems PROVED, stabilizer gate CLOSED (≤838 bound), residue = one-intruder pencil N-absorption; see top-of-queue bullet + report]
 
 **READ FIRST:**
 [`2026-07-10-codex-odd-plane-round1-report.md`](2026-07-10-codex-odd-plane-round1-report.md) §1
