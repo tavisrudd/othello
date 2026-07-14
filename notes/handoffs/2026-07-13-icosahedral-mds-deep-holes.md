@@ -10,16 +10,19 @@ variety conjecture / C123 DEAD** (2 independent passes, q=19 counterexample + k=
 11-cell/j-function decorative. Loop-back: this is the extremal instance of the **parent conic-
 involution Schreier program**.
 **Next session:** Dye gate CLEARED (C129, draftable now w/ footnote; citations locked). Remaining:
-(1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade); (2) reconcile
-the two docs' P¹ labeling; (3) write the single-spine draft (headline = rigidity theorem; ZWK/DMP/
-Hirschfeld–Sadeh citations in hand); optional: ILL Dye 1991 to close the footnote.
+(1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade); (2) write the
+single-spine draft (headline = rigidity theorem; ZWK/DMP/Hirschfeld–Sadeh citations in hand);
+optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
+parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this; family route = C
+(reduce-at-best-prime functor, 27-lines/F₄ seed).
 **Companion log**: append dated riffs to
 [`done/2026-07-13-icosahedral-mds-deep-holes-archive.md`](done/2026-07-13-icosahedral-mds-deep-holes-archive.md)
 (create on first archive).
 **Related lanes**: arcs manuscript (`arcs_complete_outside_conic`, Prop `prop:q11-code`);
 [twisted-cubic transversal-spectrum](2026-07-13-twisted-cubic-transversal-spectrum.md) (k=4 lift
-lives there); paper #1 icosahedral-extension-complex (`comp-q11-icosahedral`) — this lane **fuses
-with it** via the A₅ orbit.
+lives there); paper #1 icosahedral-extension-complex (`comp-q11-icosahedral`) — shares the A₅ orbit
+(the "fusion/two-spine" framing was later DEMOTED by the red-team; treat as a shared-object link,
+not a merged thesis).
 
 ## The object
 
@@ -35,7 +38,9 @@ conic `XZ=Y²`). Equivalently a **6-arc off every conic** in PG(2,11).
   (icosahedral) action** on the 12 conic points (A₅ ⊂ PGL₂(11), classical at q=11).
 - **Arc stabilizer in the conic stabilizer PGL₂(11) is exactly order 60 = A₅**; point-stabilizer
   order 10 = D₁₀. Single A₅-orbit.
-- This answers *why* deep holes are a conic and **unifies this lane with paper #1**.
+- This answers *why* deep holes are a conic (the arc's A₅ symmetry) and shares the A₅ orbit with
+  paper #1. (NB: the causal "deep holes = conic *because* Klein-reduction" was struck by the
+  red-team — see the deflation section; the A₅-symmetry cause here is the rigidity theorem, C126.)
 
 ## Verified facts (cheap, Lean-able)
 
@@ -153,9 +158,11 @@ Schreier machinery** (`notes/2026-07-12-conic-involution-schreier-graphs.md`):
 - **Markoff/BGS-expansion: MIRAGE, kill hardened.** Expansion is *robust* (almost all p); ours is
   *anti-robust* (exactly one prime) — bounded 12-orbit vs growing ~p²-orbit. Opposite signatures.
   Residue: both reduce to "trace split/nonsplit" (Fricke *language*, not structure) — claim nothing.
-- **⚠ Bookkeeping:** handoff says witness (1,10,0) tangents {0,9}; parent note's ([t²:t:1],∞)
-  labeling gives {5,∞}. Same invariant content, different P¹ labels — reconcile before Lean-ifying
-  across both docs.
+- **Bookkeeping RESOLVED (by convention):** the two P¹ labelings — Lean/`Examples.lean` (conic
+  XZ=Y², `witnessMissingEdge` indices; witness (1,10,0) tangents {0,9}) vs the parent-note ([t²:t:1],∞)
+  chart ({5,∞}) — are the same 12 points under different charts, not a discrepancy. **Canonical =
+  the Lean labeling** for all Lean/paper work; translate any parent-note statement through the chart
+  when crossing over. No re-derivation needed.
 
 ## ✅ RIGIDITY THEOREM (Thread A/B, exhaustive) — the real content; rebuts "corollary-grade"
 
