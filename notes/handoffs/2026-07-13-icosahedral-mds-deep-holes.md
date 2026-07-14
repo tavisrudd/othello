@@ -18,8 +18,12 @@ Sadeh citations in hand. **Priority on the |U| extension-count spectrum is GRANT
 classification literature outright** (it's the standard byproduct of arc classification) — so the
 Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
 blocking**; nothing gates drafting. Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
-parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this; family route = C
-(reduce-at-best-prime functor, 27-lines/F₄ seed).
+parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this. **Family route via the
+reduce-at-best-prime functor is now CLOSED NEGATIVE too (C132):** no second instance — the F₁₁ case
+is singular for a *structural* reason (the exceptional variety must sit on the deep-hole side with an
+arc config; dimension-up loses the invariant genus-0 curve, and genus-0-preserving groups are the
+already-exhausted P¹ lane). The paper stays single-instance; use the C132 diagnosis to strengthen the
+"why 11" section (structural singularity, not exhaustion).
 **Companion log**: append dated riffs to
 [`done/2026-07-13-icosahedral-mds-deep-holes-archive.md`](done/2026-07-13-icosahedral-mds-deep-holes-archive.md)
 (create on first archive).
@@ -460,12 +464,16 @@ a density test point. Only use: a one-line boundary-evaluator sanity corner (6 c
 - [real] **Schreier=icosahedron graph** as a standalone algebraic-graph-theory note.
 - [minor] publish the exhaustive **|U| histogram {12,16,18,19,20,21,22}** for PG(2,11) 6-arcs as a table.
 
-**C. "Reduce-at-best-prime" functor as a program** [speculative, multi-paper]: census of exceptional
-config × best prime → certified code. Seeds: **27-lines/GQ(2,4)/F₄** (best, loops to hexacode/W(E₆)),
-Hesse/F_p⊇ζ₃, Valentiner A₆⊂PGL₃. Only route to a *family* (primes + dual-variety dead). The
-27-lines/E₆ seed's **motivation is R-A** (10 Brianchon points = 10 Eckardt points of the Clebsch
-diagonal cubic ⇒ the W(E₆)/S₅ config on the deep-hole side) — re-homed here as a live lever, not
-demoted exploration history.
+**C. "Reduce-at-best-prime" functor as a program — CLOSED NEGATIVE (C132).** The census idea keyed on
+the *fill signature* `|config|=|space|` (27-lines/GQ(2,4)/F₄, Hesse, Valentiner A₆, 57-cell): all die
+by one mechanism — that signature selects space-*filling* rich-incidence configs (never arcs), but the
+template needs the exceptional variety on the **deep-hole side** with the config a plain arc. 27-lines
+= GQ(2,4) has no external locus (cap-rescue fails); Valentiner A₆/F₁₉ has no arc orbit + no invariant
+conic; 57-cell's group can't act on PG(2,7); Hesse's deep-holes are empty. **Diagnosis:** dimension-up
+to a bigger exceptional group loses the invariant genus-0 curve, and genus-0-preserving groups are the
+already-exhausted P¹ lane (C126 primes / C123 k-tower). Corrected detector signature (deep-hole side,
+`|U|=|conic|=q+1`) banked in `notes/2026-07-14-c132-second-instance-spike.md`. The 27-lines/R-A link
+survives only as a **shared-object** note (Brianchon=Eckardt→W(E₆)), not a second covering-instance.
 
 **D. Expository / aesthetic** [real, low-risk high-appeal]: a "one object seen ten ways" gem
 (Monthly/Intelligencer/Notices — largely written in this handoff); an interactive visual artifact
@@ -482,8 +490,9 @@ gate→loop-back) as a reusable AI-assisted math-triage case study.
 [speculative]; LRC/storage [mirage — length 6 too small]; icosahedral-chirality physics
 (quasicrystals/capsids) [speculative→mirage, no load-bearing bridge].
 
-**Worth pursuing:** A (parent feed, strategic) · C (functor census, the family route) · D (gem+artifact,
-low-risk). Rest = free footnotes or thin.
+**Worth pursuing:** A (parent feed, strategic) · D (gem+artifact, low-risk) · E (formalization).
+~~C (functor census, the family route)~~ **CLOSED NEGATIVE (C132)** — no second instance; F₁₁ singular
+by structural reason. Rest = free footnotes or thin.
 
 ### Ranked open checks (surprising × real × deliverable)
 

@@ -3,6 +3,15 @@
 Coincidences where an exceptional configuration's size = a space's point-count over F_q
 (the rigidity 'fills the space' signature). Ranked by interest score.
 
+> **⚠ WRONG SIGNATURE (C132, 2026-07-14).** This table keys on `|config| = |space|` — the *config*
+> side. That selects space-*filling* rich-incidence configs (27-lines=GQ(2,4), Hesse, 57-cell), which
+> carry many collinear triples and are **never arcs** → no deep-hole reading. The Clebsch template
+> needs the exceptional variety on the **deep-hole side**: a group orbit that IS an arc whose
+> secant-complement = the full F_q-points of a genus-0 named curve (`|U|=|conic|=q+1`). Only rows 1–2
+> (the icosahedral 6-arc) satisfy the *correct* signature; rows 9/16/19 are categorically different
+> and confirmed dead. Re-key any future search to the deep-hole side. See
+> `notes/2026-07-14-c132-second-instance-spike.md`.
+
 | # | score | configuration | group | size | fills | q | lane | note |
 |---|-------|---------------|-------|------|-------|---|------|------|
 | 1 | 14 | icosahedron vertices | A5 | 12 | PG(1,11) | 11 | arcs | THE Clebsch hexagon (solved) [KNOT: co-located with S(5,6,12) 12-set] |
