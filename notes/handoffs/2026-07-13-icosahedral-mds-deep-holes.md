@@ -15,12 +15,26 @@ involution Schreier program**.
 closed (degenerate-conic exclusion + secant-covering counting lemma + q=9), all companion runs done &
 verified (|U| recompute; dual code = again Clebsch up to orbit; hexads transverse to S(5,6,12);
 10-arc empty-deep-hole foil). C132's four-target negative is adversarially corrected; it is not a
-global structural-uniqueness theorem. **Remaining (non-blocking):**
-(1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade — mind the two-bar
-caveat: the 1548-arc TFAE cert likely needs `native_decide`, dents the strict-trust story);
-(2) verify Cheng–Murray + add Storme–Thas 1991 to the citation lock; (3) C131 Sadeh on-receipt
-confirmation. Headline = rigidity theorem, SAFE as "first" (item-5 round-3); "first" scoped to the
-conic-rigidity/covering reading, Sadeh cited for the census. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
+global structural-uniqueness theorem (§6 .tex paragraph already softened to "Why the tested
+generalizations fail" — heuristic, does not exclude an isolated example). Citations fixed (Guruswami–Vardy 2005
+initiated the deep-hole complexity study, not Cheng–Murray; Storme–Thas verified; lock updated);
+Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH@sussex.ac.uk).
+**Lean gallery (plan A = small `decide` pieces first):**
+- ✅ **Schreier = icosahedron DONE** — `residual_graph_icosahedral` in `Q11Coding.lean` (commit
+  3b75a04): 5-regular, 30 edges, every vertex link a 5-cycle (Whitney ⇒ icosahedron). Pure `decide`,
+  standard axioms, **no `native_decide`** — strict-trust clean. (Deep-holes=conic / covering-radius-3 /
+  20-leader facts were already Lean-certified in `Q11Coding`/`Q11Semantic*`.)
+- ⏳ **Chirality ℤ/2 — NEXT, needs new infra:** no A₅-on-columns action exists in Lean; must derive the
+  60 column permutations (Fin 6) from Stab(arc)⊂PGL(3,11) — the 60 matrices are in
+  `papers/clebsch-hexagon-code/check_ten_arc_foil.py` — then act on the 20 triples and `decide` the two
+  size-10 complementation-reversing orbits. A real piece, not a tail-end `decide`.
+- ⏳ **Gap theorem** (252 perturbations, |UΔconic|≥18) — **DECISION FIRST:** may need `native_decide` at
+  Fin-133 scale → the two-bar strict-trust caveat; decide reflected-computation vs. trust-chain note
+  before building.
+- ⏳ **Rigidity TFAE** (1548 arcs) — the heavy one; almost certainly `native_decide`, same caveat.
+**Other remaining (non-blocking):** C131 Sadeh on-receipt confirmation (send the drafted email); the
+citation lock verify is DONE. Headline = rigidity theorem, SAFE as "first" (item-5 round-3); "first"
+scoped to the conic-rigidity/covering reading, Sadeh cited for the census. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
 classification literature outright** (it's the standard byproduct of arc classification) — so the
 Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
 blocking**; nothing gates drafting. Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
