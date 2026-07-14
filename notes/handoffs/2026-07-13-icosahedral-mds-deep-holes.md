@@ -43,9 +43,59 @@ conic `XZ=Y²`). Equivalently a **6-arc off every conic** in PG(2,11).
 - Code is **not completely regular** (distance-2 leader counts non-constant) → no naive
   association scheme.
 
-## FUSED FRAMING (post-C121/C122/C124/C125) — Klein-led, coding-shadow
+## ⚠ RED-TEAM DEFLATION (adversarial pass — OVERTURNS the fused framing below)
 
-**Lead thesis (final form):** *The `[6,3,4]₁₁` icosahedral code is the unique prime at which Klein's
+A hostile-referee pass (read SVM 1995 full text, DMP series, ZWK; Dye 1991 still paywalled) cut the
+lane down. **What actually survives — treat this as the current framing; the "FUSED FRAMING" section
+below is DEMOTED to companion history:**
+
+- **Headline "deep holes = the conic": TRUE but corollary-grade.** It is *exactly equivalent* (via
+  DMP 2021 arXiv:2101.12722 Thm 6.3, the known arc↔coset dictionary — our own C122 concedes this) to
+  one finite-geometry sentence: *the extension points of the Clebsch hexagon in PG(2,11) are the 12
+  points of its A₅-invariant conic.* SVM 1995 Prop. 13 already proved incompleteness-by-computer at
+  q=11 but **did not print the extension points** — that one unprinted finite fact + a known
+  dictionary is the real contribution. True, apparently unstated, thin.
+- **FATAL-RISK, must resolve first: read Dye 1991** (JLMS 44, 270–286; ILL it). He studied this exact
+  hexagon's bisecant geometry (Brianchon = points on exactly 3 bisecants); if he states the 0-bisecant
+  points are the conic, our headline collapses to "we translated Dye through DMP." No other single
+  event does comparable damage.
+- **Klein spine: DECORATION, and the causal "because" is FALSE by our own data.** f mod 11 is the
+  PGL₂(11)-invariant Dickson form (forgot the icosahedron); and C126 shows covering-exactness *fails*
+  for every sibling — so the Klein reduction produces the *objects* but does NOT cause the *theorem*.
+  **Strike "because"; drop the two-spine architecture.** Keep Klein as a discussion-section remark
+  (cf. Elkies §3.3); p+1=12 is a triviality, a remark not an organizing principle.
+- **Dual-variety conjecture: DEAD as stated.** Ill-posed (non-GRS columns don't lie on an RNC —
+  which RNC?); falsified by TRS/ETGRS deep-hole literature if quantified over non-GRS MDS codes;
+  n=1 data point that C126 already surrounds with failures; and where the shape is true it's known
+  (ZWK arXiv:1901.05445 = PRS deep holes via **tangent lines to the RNC**). Demote to a narrow *open
+  question* about orbit-pole constructions, explicitly engaging ZWK + the DMP twisted-cubic tables.
+- **Chirality Z/2: survives as a PROPOSITION** (canonical automorphism-invariant Z/2 on deep-hole
+  leaders, Lean-certified) — but the group theory is exercise-grade (PSL(2,5) not 3-homogeneous;
+  Hom(A₅,ℤ/2)=0). Not a headline.
+- **11-cell (F1) and j-function (F2): STRIKE / demote to one remark.** F1 uses the degree-11 PSL₂(11)
+  action — the very numerology the mirage list bans conflating with our degree-12 object (internal
+  contradiction). F2 is a re-labeling of the N2 syzygy. No independent content.
+
+**Surviving paper (modest, single-spine, finite-geometry/designs venue — NOT IEEE TIT):** *"The
+Clebsch hexagon code: the deep holes of a `[6,3,4]₁₁` MDS code are the points of the A₅-invariant
+conic."* Known hexagon (SVM 1995, Dye 1991) × known dictionary (DMP 2021) → first MDS code whose
+complete deep-hole set is the full F_q-point set of a positive-dimensional named variety, with
+group-theoretic cause. + chirality-Z/2 proposition + the p=11 uniqueness theorem (C126, as the
+result not a defect). Klein/dual-variety demoted to discussion + one open question.
+
+**MUST-DO before any "first"/submission:** (1) read Dye 1991; (2) cite ZWK as the true precursor of
+any dual-variety statement (not "adjacent"); (3) start C123 from the DMP twisted-cubic tables
+(arXiv:1909.00207, 2104.12254, 2103.11248, 2112.14803) — the k=4 orbit/coset data may already exist
+there; (4) re-sweep the PG(2,11) complete-arc classification (Italian school) before the word "first".
+
+**Pending corroboration:** the dual-variety-examination and minimal-hypothesis (Thread A) agents were
+still running when this landed — their independent reads may soften or harden the above.
+
+---
+
+## FUSED FRAMING [DEMOTED by red-team above — kept as exploration history]
+
+**Lead thesis (superseded — see red-team):** *The `[6,3,4]₁₁` icosahedral code is the unique prime at which Klein's
 solution of the quintic closes over a finite field — the six columns are the mod-11 reduction of his
 resolvent sextic (the six diagonals), the deep holes are his degree-12 vertex form (which at p=11
 alone fills the whole projective line), and the reflection-free chirality of its deep-hole leaders is
