@@ -3,7 +3,7 @@
 `[REPORTED 2026-07-13]`
 
 Literature audit for the spin-off lane
-[icosahedral MDS deep-holes handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
+[icosahedral MDS deep-holes handoff](handoffs/2026-07-13-clebsch-paper.md).
 Five novelty questions, each with closest prior work and a verdict
 (**NOVEL / PARTIALLY KNOWN / KNOWN**). Web-verified 2026-07-13; abstracts and (where
 noted) full texts checked.

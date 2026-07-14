@@ -33,9 +33,9 @@ and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: 
 `arcs` q=11 witness (`comp-q11-mds-deep-holes`) rather than from Package 2, and shares that witness's
 `lean/RelativeConicArcs/` library rather than owning one.
 Venue target is Designs, Codes and Cryptography / Finite Fields and Their Applications / J. Geometry —
-explicitly **not** IEEE-TIT. Lane map (the doc to read first, incl. Lean-gallery state):
-`../notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md`; the paper's own work-list is
-`../notes/2026-07-13-clebsch-hexagon-paper-outline.md`. Lane alias `clebsch` (CLAUDE.md routing).
+explicitly **not** IEEE-TIT. Lane map — the single live doc to read first (status, Lean gallery, open
+lit, remaining work): `../notes/handoffs/2026-07-13-clebsch-paper.md`. Lane alias `clebsch`
+(CLAUDE.md routing), same word as this directory's alias.
 
 ## Sequence submissions (OEIS) — see `oeis-submissions/`
 
@@ -57,12 +57,14 @@ explicitly **not** IEEE-TIT. Lane map (the doc to read first, incl. Lean-gallery
 - **Complete LaTeX manuscript (+ PDF + proof/novelty ledgers + Lean package):**
   `coding-repair-hypergraphs` — internally audited; specialist citation-chain review remains a
   submission preflight gate.
-- **Complete LaTeX manuscript (+ PDF + independent Python checkers, no Lean):**
+- **Complete LaTeX manuscript (+ PDF + independent Python checkers + partial Lean):**
   `clebsch-hexagon-code` — every finite claim in the draft has a standalone re-checking script in the
   paper directory (`check_rigidity_degenerate_conic.py`, `check_q9_exclusion.py`,
   `check_q19_nonexample.py`, `check_dual_code.py`, `check_mathieu_hexads.py`,
-  `check_ten_arc_foil.py`). The Lean formalization is planned and would be `decide`-grade throughout;
-  it is release-blocking under the gate below but not needed for the draft's stated results.
+  `check_ten_arc_foil.py`), independent of the manuscript's own computation. Lean covers the
+  deep-holes/radius/leader facts and the §7 Schreier=icosahedron witness; chirality, the gap theorem,
+  and the rigidity TFAE remain open and are release-blocking under the gate below (see *Lean state*).
+  Builds with texliveFull — texliveSmall/Medium lack `enumitem`.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
@@ -94,7 +96,7 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   the gate below: **chirality ℤ/2** (needs new infra — no `A₅`-on-columns action exists in Lean; the 60
   matrices are in `check_ten_arc_foil.py`); **gap theorem** (252 perturbations) and **rigidity TFAE**
   (1548 arcs), both gated on an open `native_decide`-vs-strict-trust decision. Lane map:
-  `notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md`.
+  `notes/handoffs/2026-07-13-clebsch-paper.md`.
 - **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data and
   semantic arc extension are Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
 - **Axiom-clean bar:** `KleinFourBridge.explicit_pairProducts` now uses kernel `decide`; the former

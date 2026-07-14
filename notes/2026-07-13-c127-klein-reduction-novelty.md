@@ -3,7 +3,7 @@
 # C127 — Novelty audit: the Klein mod-11 reduction, the arc, and the mod-p Platonic family
 
 Literature calibration for
-[`handoffs/2026-07-13-icosahedral-mds-deep-holes.md`](handoffs/2026-07-13-icosahedral-mds-deep-holes.md)
+[`handoffs/2026-07-13-clebsch-paper.md`](handoffs/2026-07-13-clebsch-paper.md)
 (FUSED FRAMING) and [`2026-07-13-c125-klein-resolvent.md`](2026-07-13-c125-klein-resolvent.md).
 Builds on C122 ([`2026-07-13-c122-deep-hole-novelty-audit.md`](2026-07-13-c122-deep-hole-novelty-audit.md));
 web-verified 2026-07-13. Full texts read: Storme–Van Maldeghem JCTA 1995

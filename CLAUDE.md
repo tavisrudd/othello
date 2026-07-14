@@ -78,12 +78,11 @@ routing table? (c) which lane next? Wait for the answers.
   deep-holes* lane — all one lane, one peg) — the Clebsch hexagon paper: the `[6,3,4]₁₁` MDS code
   whose deep holes are a conic (C121–C132). Same alias as the paper directory in
   `papers-index.md`, deliberately: lane, paper, and peg are one word. Start with
-  [icosahedral-mds-deep-holes handoff](notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md) —
-  the live map, including the **Lean gallery** state. Then
-  [paper outline](notes/2026-07-13-clebsch-hexagon-paper-outline.md), whose *Remaining work before
-  submission* is the paper's work-list. Manuscript + checkers:
-  [`papers/clebsch-hexagon-code/`](papers/clebsch-hexagon-code/); indexed in
-  [papers-index.md](papers/papers-index.md) under the `clebsch` alias.
+  [clebsch-paper handoff](notes/handoffs/2026-07-13-clebsch-paper.md) — the lane's **single live
+  doc**: status, Lean gallery, open lit, remaining work. Manuscript + checkers:
+  [`papers/clebsch-hexagon-code/`](papers/clebsch-hexagon-code/) (the `.tex` is authoritative for all
+  prose and citations); indexed in [papers-index.md](papers/papers-index.md) under the same
+  `clebsch` alias.
 - **`cap`** (shared with Codex) — use the same
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md)
   handoff unless the user names a different lane.

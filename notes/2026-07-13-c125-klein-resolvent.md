@@ -3,7 +3,7 @@
 # C125 — Klein's icosahedral quintic resolvent vs the q=11 object: exact correspondence
 
 **Task**: substantiate/qualify L1 of
-[`handoffs/2026-07-13-icosahedral-mds-deep-holes.md`](handoffs/2026-07-13-icosahedral-mds-deep-holes.md):
+[`handoffs/2026-07-13-clebsch-paper.md`](handoffs/2026-07-13-clebsch-paper.md):
 *our six poles are an exact F₁₁ avatar of Klein's sextic resolvent; the 12 conic points are the
 F₁₁ avatar of Klein's degree-12 vertex form.*
 

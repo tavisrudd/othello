@@ -30,7 +30,7 @@ ID is computed, so an invented ID in prose silently burns that number.)
   claim.
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
-[handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
+[handoff](handoffs/2026-07-13-clebsch-paper.md).
 - **C121 `[clebsch]`** — Aut(code)=A₅ + 2-transitive CONFIRMED; deep-hole leaders = **two** size-10 orbits (not
   one). `[REPORTED 2026-07-13]` → `notes/2026-07-13-c121-icosahedral-mds-checks.md`
 - **C122 `[clebsch]`** — novelty audit: headline = "deep holes = F_q-points of a named variety + dual-variety

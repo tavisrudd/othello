@@ -80,7 +80,7 @@ the 20 subsets are 4 orbits of size 5, not fewer/larger.
   a non-3-homogeneous action).
 
 **Action for the live docs**: the `R2` row in
-`notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md` should be corrected from "single orbit"
+`notes/handoffs/2026-07-13-clebsch-paper.md` should be corrected from "single orbit"
 to "two complementary orbits of size 10 under the 60-element group" — the symmetry-reduction is
 still real (store 2 reps instead of 20, not 1), just weaker than originally conjectured.
 

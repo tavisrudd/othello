@@ -1,4 +1,14 @@
-# Icosahedral MDS / deep-holes = conic — spin-off lane
+# The Clebsch hexagon code — paper lane (`clebsch`)
+
+**Lane alias**: `clebsch` (spoken synonym: `hexagon`). Formerly called the *icosahedral MDS /
+deep-holes* lane — same lane, renamed 2026-07-14 when it and the paper were unified under one alias.
+**This is the lane's single live doc.** The paper-outline note was folded in here and removed
+(2026-07-14): its abstract/skeleton/deepened-core/draft-prose were superseded by the manuscript
+itself, which is authoritative for all prose and citations. **Manuscript + checkers**:
+[`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/) (`clebsch_hexagon_code.tex` +
+PDF; builds with texliveFull — Small/Medium lack `enumitem`). Indexed in
+[papers-index.md](../../papers/papers-index.md) as `clebsch`. **Venue:** Designs, Codes and
+Cryptography / Finite Fields and Their Applications / J. Geometry — **not** IEEE-TIT.
 
 **Date**: 2026-07-13
 **Status**: CONVERGED after C121–C127 + four adversarial/Tao passes (red-team, dual-variety exam,
@@ -32,8 +42,46 @@ Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH
   Fin-133 scale → the two-bar strict-trust caveat; decide reflected-computation vs. trust-chain note
   before building.
 - ⏳ **Rigidity TFAE** (1548 arcs) — the heavy one; almost certainly `native_decide`, same caveat.
-**Other remaining (non-blocking):** C131 Sadeh on-receipt confirmation (send the drafted email); the
-citation lock verify is DONE. Headline = rigidity theorem, SAFE as "first" (item-5 round-3); "first"
+**Open lit (all non-blocking; folded from the removed outline 2026-07-14):**
+- **C131 Sadeh on-receipt confirmation** — send the drafted email
+  (`notes/2026-07-14-sadeh-thesis-request.md` → JWPH@sussex.ac.uk). On arrival: (a) confirm no
+  over-concession beyond the extension-count spectrum — in particular that it does NOT state the
+  deep-hole/covering reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for
+  the spectrum; (c) mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. Hirschfeld–Sadeh,
+  Giessen 164 (1984) 245–257 is the faster, citable public version (ILL/GDZ).
+- **O'Keefe–Storme 1996 residual** — verify SVM+Dye fully supersede it for the plane (skim Zbl
+  0848.51007; no full ILL needed). The one genuinely open lit item.
+- **Dye 1991** — footnote-only; ILL queued. Close only to drop the footnote hedge (C129 verdict NO
+  already stands).
+- **DMP AMC-numbering residual** — we cite Thm 6.3 / (6.4) / Thm 7.7 by **arXiv v2** numbering and the
+  bibliography says so. The published AMC 17(5) numbering is unverified (paywalled); v2 postdates
+  acceptance and the abstract matches verbatim, so it is very likely identical. Confirm if a copy
+  becomes reachable. Safe either way as written.
+
+**Closed 2026-07-14 (were the outline's blocking research items):**
+- **DMP Thm 6.3 pin — SOUND, no hole.** Its hypotheses are exactly two: an *arbitrary* n-arc in
+  PG(2,q), and its `[n,n−3,4]_q` MDS code per their Def 6.1. **No GRS/NRC/conic hypothesis, no
+  restriction on n, k, q, or characteristic** — covers our non-GRS q=11 case directly, so the Lean
+  fallback is not needed. DMP explicitly anticipate non-GRS arcs ("the corresponding codes are not
+  GDRS or GTRS") and tabulate `c_i` for our shape; the GRS/conic hypotheses live downstream in their
+  Thms 6.4/6.5/6.8/6.10, which we don't cite. Leader count `binom(n,3)` is their (6.4) and
+  independently the `d=4` case of `binom(n,d−1)` (their Thm 7.7) — two supports, so 20 is an
+  instantiation, not a fitted constant. **Two §3 fixes applied:** "adjoining x preserves MDS iff
+  missed by every secant" was mis-attributed to Thm 6.3 (it is Def 6.1 + arc-completeness — now split
+  out); and `binom(n,3)` is now written before specializing to 20.
+- **q=19 non-example — exact `|U| = 140`**, replacing the "≥105" counting bound (and 111 — both were
+  bounds on the wrong quantity). `140 = 20 + 120`: all 20 conic points stay deep holes but 120 more
+  escape all 15 secants, so `U ⊋ 𝒞` and lies on no conic (rank 6/6). q=19 fails by the conic ceasing
+  to be *all* the deep holes, not by ceasing to be deep holes — the capacity deficit
+  `15(q−1)=270 < q²−6=355` that Lemma 6.1 predicts. Also verified rather than assumed: the recipe
+  still yields a genuine 6-arc at q=19 even though `5 | q+1` there (order-5 elements non-split, fix
+  no rational conic point; their conjugate fixed-pairs give Galois-stable rational chords ⇒ rational
+  poles). Checker: `papers/clebsch-hexagon-code/check_q19_nonexample.py`.
+- **|U| histogram independently recomputed** by a second code path
+  (`check_rigidity_degenerate_conic.py`), reproducing `{12:6,16:30,18:150,19:300,20:630,21:360,22:72}`
+  and returning exactly the six concyclic arcs, all nonsingular — this also closes the
+  degenerate-conic exclusion, the one place the TFAE could have had a hole. Cited in a §4 footnote.
+- **Citation lock verify** is DONE. Headline = rigidity theorem, SAFE as "first" (item-5 round-3); "first"
 scoped to the conic-rigidity/covering reading, Sadeh cited for the census. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
 classification literature outright** (it's the standard byproduct of arc classification) — so the
 Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
@@ -43,7 +91,7 @@ reduce-at-best-prime spike is CLOSED NEGATIVE (C132):** none realizes the arc/de
 The corrected 27-line model is `Q⁻(5,2) ⊂ PG(5,2)` and is non-cap; the spike does not prove global
 uniqueness or exhaust every `P¹` construction. The paper stays single-instance.
 **Companion log**: append dated riffs to
-[`done/2026-07-13-icosahedral-mds-deep-holes-archive.md`](done/2026-07-13-icosahedral-mds-deep-holes-archive.md)
+[`done/2026-07-13-clebsch-paper-archive.md`](done/2026-07-13-clebsch-paper-archive.md)
 (create on first archive).
 **Related lanes**: arcs manuscript (`arcs_complete_outside_conic`, Prop `prop:q11-code`);
 [twisted-cubic transversal-spectrum](2026-07-13-twisted-cubic-transversal-spectrum.md) (k=4 lift
@@ -709,8 +757,9 @@ classification. So the |U| numbers are exposed to prior art; the conic-containme
 - **Safe headline wording:** lead with the deep-hole/covering reading and the conic-rigidity theorem
   as the "first"; cite Hirschfeld–Sadeh + Sadeh thesis for the underlying arc enumeration; scope any
   "not appeared before" to the reading, not the numbers. With this wording nothing blocks drafting.
-  **Drafted census sentence** is in the paper outline
-  [`2026-07-13-clebsch-hexagon-paper-outline.md`](../2026-07-13-clebsch-hexagon-paper-outline.md) §4.
+  The **census sentence** is now written into the manuscript itself —
+  [`clebsch_hexagon_code.tex`](../../papers/clebsch-hexagon-code/clebsch_hexagon_code.tex) §4,
+  the *Census framing* paragraph.
 
 ## Paper framing
 

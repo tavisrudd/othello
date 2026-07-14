@@ -3,7 +3,7 @@
 # C129 — Must-read prior-art sources: acquisition + verdicts
 
 Gate check for the icosahedral MDS deep-holes paper
-([handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md), RED-TEAM MUST-DO list;
+([handoff](handoffs/2026-07-13-clebsch-paper.md), RED-TEAM MUST-DO list;
 builds on [C127](2026-07-13-c127-klein-reduction-novelty.md)).
 
 ## PRIORITY 1 — Dye 1991 (the GATE)
