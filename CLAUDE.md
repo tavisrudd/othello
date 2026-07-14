@@ -15,8 +15,24 @@ Rules:
 - Put completed, stale, or dormant work in the relevant handoff or under `notes/handoffs/done/`.
 - If an entry needs more context, add that context to the linked handoff, not here.
 
+### Active-lane lock
+
+- Resuming a named handoff makes that lane sticky until the user explicitly switches lanes or the
+  handoff declares the lane finished.
+- Within a sticky lane, `go` and `next?` mean the next step in that handoff, not the newest global
+  commit or the highest-ranked task elsewhere in the repository.
+- Treat commits and working-tree changes owned by other lanes as foreign: note them when relevant,
+  but do not review, edit, stage, or route into them without an explicit lane switch.
+- Before editing, check the active handoff's allowed paths. If a needed target is outside them,
+  stop and request a lane switch or scope expansion.
+- Consult the global queue for task-ID allocation and explicit lane completion, not to override a
+  sticky handoff's local next step.
+
 ### Codex WIP
 
+- **Baer-equivariant robust completion (C133):** start with
+  [Baer-equivariant robust-completion](notes/handoffs/2026-07-14-baer-equivariant-robust-completion.md).
+  This is the active sticky lane; its first task is the C99.6 hostile review and disposition.
 - **ProjectiveCap / Lean proof program:** start with
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
   [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
