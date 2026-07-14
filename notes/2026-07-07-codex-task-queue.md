@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C125.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C128.**
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
@@ -25,6 +25,11 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
 - **C125** — L1: REAL — genuine reduction mod 11 of Klein's forms/group (f→12 conic pts, six
   diagonals→chords, poles→arc); 11 uniquely optimal (p+1=12). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c125-klein-resolvent.md`
+- **C126** — Family A at p=5,7,19: octa/cube/dodeca axis-pole arcs, complete-outside +
+  chirality present/absent (isolate chirality to A₄/A₅). `[IN PROGRESS 2026-07-13]`
+- **C127** — literature novelty of the Klein-reduction / icosahedron-on-P¹(F₁₁) claim + settle
+  O'Keefe–Storme on the arc. `[IN PROGRESS 2026-07-13]`
+- **C128** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

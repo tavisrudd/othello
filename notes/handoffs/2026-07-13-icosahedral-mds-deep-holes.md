@@ -75,6 +75,49 @@ most self-contained headline *result*, subordinate to the Klein *framing*.
 - **Syzygy H³+T²=f⁵ mod 11** (1728≡1): a cheap kernel-checkable identity anchoring "real reduction,
   not analogy."
 
+### Number-theory spine (outward dig)
+
+- **N1 [REAL — unifying statement]. One ℤ[1/30]-scheme, reductions = the family.** Klein's
+  icosahedral configuration (group + forms f,H,T + arc + conic) is a scheme **𝒳 over ℤ[1/30]** (bad
+  primes exactly 2,3,5). Our F₁₁ object = 𝒳 mod 11. **Family B = the split primes of ℚ(√5)**
+  (p≡±1 mod 5): Frobenius at p splits ⇔ A₅ is F_p-rational ⇔ 12-orbit F_p-rational. The whole
+  √5-family is "reduce one ℤ[1/30]-scheme, watch Frobenius in ℚ(√5)." Family A (p=5,7,11,19,29) =
+  the sub-locus where the orbit *fills* the line.
+- **N2 [REAL, needs-literature — the striking bridge]. The icosahedral syzygy IS the modular
+  discriminant relation.** H³+T²=1728f⁵ is the invariant-theoretic avatar of
+  **E₄³−E₆²=1728Δ** (same 1728; f↔Δ, H↔E₄, T↔E₆; j=H³/1728f⁵). Mod 11 both collapse (1728≡1): our
+  certified **H³+T²=f⁵** is the mod-11 reduction of the modular discriminant syzygy → the deep-hole
+  conic (=f) is a **mod-11 avatar of Δ**. Calibrate novelty (the certified mod-11 coding incarnation
+  likely is new).
+- **N3 [REAL, computed — corrects earlier speculation]. Chirality is UNIVERSAL, not arithmetic.**
+  N_{PGL₂(p)}(A₅)=60 at every √5-prime tested (11,19,29,31): the icosahedral reflection is *never*
+  F_p-realized (needs F_{p²} / a correlation). Chirality is a group-fact of A₅, uniform across the
+  family — NOT a per-prime splitting phenomenon (kills the "arithmetic handedness" reach). The
+  uniformity is itself clean; the S₄ octa/cube members should *merge* (the C126 separator).
+- **Mirage:** class-number / Ramanujan-τ-mod-11 (11 not a τ-congruence prime); McKay 2·A₅↔E₈ (we use
+  A₅⊂PGL₂, not binary 2·A₅); inverse Galois / X(11) rational pts (Klein already realizes A₅ over ℚ;
+  degree-11 PSL₂(11) action is a different object). Note kinship, claim nothing.
+
+### Second-order functor: "reduce a famous invariant-theoretic object at its best prime → certified finite code"
+
+Canonical exactly when a distinguished orbit has size = |Pⁿ(F_p)| (P¹: p+1) — one best prime per
+object, the way 11 is singled out here. Candidate lanes (surprising × real × own-lane):
+icosahedron/p=11 (template); **octa/cube S₄ p=5,7 + tetra A₄ p=3** (C126 control — S₄ non-chiral
+isolates chirality to A₄/A₅); Hesse config (9 inflections, order 216) over F_p⊇ζ₃ → certified
+[n,k]₃ code (good small 2nd instance); Klein quartic / PSL₂(7) / Hurwitz curves (own lane); 27 lines
+W(E₆) / 28 bitangents W(E₇) — the theta-characteristic parity would be the higher analog of our
+chirality Z/2 (speculative). Leech/Golay: mirage for this functor (already codes).
+
+### Phone-call-worthy for a number theorist
+
+1. "One ℤ[1/30]-scheme; Frobenius in ℚ(√5) tells you the code (deep holes and all) at each prime" (N1).
+2. "The deep-hole conic is a mod-11 avatar of the modular discriminant Δ; the code's syzygy is
+   E₄³−E₆²=1728Δ reduced" (N2, pending novelty).
+3. "p=11 is the unique prime where an exceptional simple group's natural form fills the projective
+   line — completely certifiable."
+4. Question our exact data settles that they can't cheaply verify: for which exceptional-orbit/prime
+   pairs does the orbit fill Pⁿ AND the arc stay complete-outside (deep holes = whole variety)?
+
 ### Ranked open checks (surprising × real × deliverable)
 
 1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
