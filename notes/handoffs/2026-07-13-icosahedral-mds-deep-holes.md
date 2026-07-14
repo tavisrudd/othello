@@ -58,22 +58,33 @@ forward-looking half, predicts k=4). Neither alone survives: coding-only loses t
 (C122); Klein-only is a coincidence without a theorem. The chirality even/odd result (C124) is the
 most self-contained headline *result*, subordinate to the Klein *framing*.
 
-### New frontier — the mod-p Platonic family (from the p+1=vertex-count coincidence)
+### The mod-p Platonic family — C126 RESULT: q=11 is SINGULAR, the "family" is a foil
 
-- **Family A ("solid fills the line," vertex count = p+1):** octahedron/p=5, cube/p=7,
-  **icosahedron/p=11**, dodecahedron/p=19, icosa-edge-form/p=29 — each a certified finite completion
-  where the vertex/edge orbit *exhausts* P¹(F_p) and axis-poles give an arc with **deep holes = the
-  whole conic**. A real small checkable construction family.
-- **Family B ("solid as sub-orbit," √5-primes 11,19,29,31,41,59…):** icosahedron as a 12-point
-  orbit inside a larger P¹(F_p); deep holes = 12-orbit ⊊ conic. **p=11 is the only prime where A and
-  B coincide** (icosahedral deep-hole set = whole conic) — sharpest uniqueness restatement.
-- **Chirality is NOT shared across the family** (prediction): octa/cube have S₄ (odd elements) →
-  leader split likely *mergeable = not chiral*; only A₄/A₅ rotation groups are reflection-free. The
-  unmergeable Z/2 should be special to the A₄/A₅ members — a clean invariant separating the family.
-- **Arithmetic/Galois:** Family B = primes where A₅ ⊂ PSL₂(p) (the icosahedral Galois / "√5"
-  splitting) → an explicit arithmetic-geometry-to-coding functor (each such prime ↦ an MDS code).
-- **Syzygy H³+T²=f⁵ mod 11** (1728≡1): a cheap kernel-checkable identity anchoring "real reduction,
-  not analogy."
+C126 built the axis-pole arc for every Family-A case (vertex-count=p+1) and tested it. **Two
+properties we hoped were family-wide are UNIQUE to the icosahedron/p=11:**
+
+| Solid | Grp | p | arc | complete-outside-conic? | chirality |
+|---|---|---|---|---|---|
+| Tetrahedron | A₄ | 3 | — | construction **doesn't instantiate** (order-3 stab parabolic at p=3) | N/A |
+| Octahedron | S₄ | 5 | 3 | **no** (arc too small) | vacuous |
+| Cube | S₄ | 7 | 4 | **no** (conic uncovered but 12 extra pts too) | **not chiral** (single orbit, G odd-inclusive) |
+| **Icosahedron** | **A₅** | **11** | **6** | **YES, exact** | **chiral — clean S vs Sᶜ Z/2** |
+| Dodecahedron | A₅ | 19 | 10 | **no** (over-covers, 0 uncovered) | all-even but 5 orbits, not clean 2-way |
+
+- **"Deep holes = whole conic" is special to p=11** — every other Family-A reduction degenerates
+  (arc too small, or over-covers). So the earlier "family with deep holes = whole conic" narrative
+  is **refuted**; q=11 is the singular clean case. This *strengthens* the uniqueness thesis.
+- **Chirality-iff-reflection-free holds as a THEOREM:** `Hom(A₄,ℤ/2)=Hom(A₅,ℤ/2)=0` forces every
+  perm rep of A₄/A₅ all-even (unmergeable); S₄'s sign character makes odd images generic (cube's G
+  *is* odd-inclusive → not chiral). Confirmed computationally.
+- **BUT the clean single-Z/2 (S vs Sᶜ) packaging is specific to arc size 6** (a 3-subset of a
+  6-set has a natural same-size complement). Dodecahedron (arc 10, A₅) is still unmergeable — in
+  fact *no* permutation merges its two size-24 orbits — but splits 5 ways, a messier phenomenon.
+  So "clean icosahedral chirality Z/2" = icosahedron/p=11 only.
+- **Syzygy H³+T²=f⁵ mod 11** (1728≡1): cheap kernel-checkable identity anchoring "real reduction."
+- Family B (√5-primes A₅⊂PSL₂(p)) and the N1 one-scheme/Frobenius framing survive as the
+  *arithmetic* backdrop; but the *clean coding phenomenon* (complete-outside + Z/2) does not spread
+  across it — it is the exceptional fiber at 11.
 
 ### Number-theory spine (outward dig)
 

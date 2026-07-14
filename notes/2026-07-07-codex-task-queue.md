@@ -25,8 +25,9 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
 - **C125** — L1: REAL — genuine reduction mod 11 of Klein's forms/group (f→12 conic pts, six
   diagonals→chords, poles→arc); 11 uniquely optimal (p+1=12). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c125-klein-resolvent.md`
-- **C126** — Family A at p=5,7,19: octa/cube/dodeca axis-pole arcs, complete-outside +
-  chirality present/absent (isolate chirality to A₄/A₅). `[IN PROGRESS 2026-07-13]`
+- **C126** — Family A: chirality-iff-reflection-free CONFIRMED as theorem (Hom(A₄/A₅,ℤ/2)=0);
+  but complete-outside-conic + clean Z/2 are **UNIQUE to icosa/p=11** (octa/cube/dodeca degenerate)
+  → q=11 singular, family is a foil. `[REPORTED 2026-07-13]` → `notes/2026-07-13-c126-platonic-family.md`
 - **C127** — literature novelty of the Klein-reduction / icosahedron-on-P¹(F₁₁) claim + settle
   O'Keefe–Storme on the arc. `[IN PROGRESS 2026-07-13]`
 - **C128** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
