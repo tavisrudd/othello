@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C131.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C132.**
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
@@ -50,6 +50,14 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
   audit + paper-outline §Remaining-work.
+- **C132** — **reduce-at-best-prime SECOND-INSTANCE spike** (the "second paper" line — lifts the
+  Clebsch paper's Significance ceiling per the grade). Test whether an exceptional config's
+  covering/deep-hole locus = F_q-points of a NAMED variety at a second object, replicating the F₁₁
+  template. Primary target: 27-lines / W(E₆) / GQ(2,4) over F₄ (gem row 9) — **first settle the right
+  projective/covering framing** (27 lines fill a GQ, not a P^n; our arc→deep-hole template needs the
+  correct embedding). Fallbacks if no clean covering structure: 57-cell/PSL₂(19)/PG(2,7) (gem row 16,
+  a direct plane-fill), Valentiner A₆⊂PGL₃/P² (find the fill-prime p²+p+1), Hesse/order-216/AG(2,3)
+  (cheap, weak). Detector = `notes/2026-07-13-gem-candidates.md`. `[STARTED 2026-07-14]`
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
