@@ -84,6 +84,46 @@ S₆-outer-automorphism made functional (S↦Sᶜ swaps the two D₁₀ classes)
 (10× reduction) whose representative choice *carries the chirality bit*; and a likely k=4 bridge
 ("leaders ≅ symmetry orbits on the dual variety") to conjecture alongside D2.
 
+## Cross-field lenses (beyond coding theory) — ranked surprising × real
+
+- **L1 [REAL, in-repo]. Klein's icosahedral quintic resolvent.** The object's native home. Solving
+  the quintic runs through the icosahedral equation + its **degree-6 resolvent** (the six 5-fold
+  axes A₅ permutes 2-transitively) — our six poles are an **exact F₁₁ avatar of Klein's sextic
+  resolvent**; 12 conic points = degree-12 vertex form. Reframes the whole object as a finite-field
+  incarnation of the icosahedral solution of the quintic. *Klein's is analytic/over ℂ; ours is
+  finite + kernel-certified.*
+- **L2 [REAL chirality+Petersen; SPECULATIVE exact tetrahedra bijection; in-repo].** The 10+10
+  leader split = the icosahedron's **chirality** = the two enantiomorphous **compounds of five
+  tetrahedra**; the 10 complementary triple-pairs carry the **Petersen graph** (A₅ on 10, stab S₃ —
+  grounded). Deep-hole leaders secretly encode Petersen + five-tetrahedra chirality.
+- **L3 [REAL group, SPECULATIVE vehicle]. Buckyball / PSL₂(11) / Arnold trinity.** Our A₅ ⊂
+  PGL₂(11) is the same subgroup at the center of Martin–Singerman "Biplanes → Klein Quartic →
+  Buckyball" and Arnold's trinity. One paragraph, not a new-bridge claim.
+- **L4 [REAL, in-repo]. S₆ outer automorphism = conic polarity over F₁₁.** The two D₁₀ classes /
+  arc↔axes hexad duality / pole-chord polarity ARE the S₆ outer automorphism made geometric; the 6
+  arc points + 6 axes are the two synthematic hexads, complementation = the outer automorphism
+  acting.
+- **L5–L7 [SPECULATIVE].** Chirality Z/2 as a spinor sign via binary icosahedral 2·A₅ → **McKay
+  E₈** (L5); theta-characteristic parity / 28 bitangents / 27 lines shared-S₆ Z/2 (L6);
+  Valentiner/Wiman A₅⊂PGL₃ ternary-icosahedral sibling (L7). Appealing, no concrete map — do not
+  claim.
+- **Mirage (re-judged at this aperture):** (11,5,2) biplane / M₁₁ use PSL₂(11) in its **degree-11**
+  action; ours is **degree-12** icosahedral A₅ — same group, different action, cousins in the trinity
+  ambient only. Never equate. Markov-A₅ / lattices: omit.
+
+**Who cares & what:** invariant theorists / classical alg-geom (exact certified F₁₁ avatar of
+Klein's sextic resolvent + five-tetrahedra chirality); finite geometers (S₆ outer auto as PG(2,11)
+polarity; A₅-primitive complete-outside arc — the O'Keefe–Storme lineage/risk); moonshine-trinity
+crowd (fresh certified inhabitant of the buckyball ambient, candidate E₈-spinor chirality);
+combinatorialists / design theorists (Petersen + synthemes from deep-hole leaders); physicists of
+icosahedral symmetry (an intrinsic, unmergeable chirality — clean finite model of icosahedral
+handedness).
+
+**Sit-up sentence for a non-coding-theorist:** *the deep-hole combinatorics of this little F₁₁ code
+is an exact, machine-certified copy of Klein's icosahedral quintic-resolvent, and its two-way
+ambiguity split is literally the chirality of the compound of five tetrahedra* (L1/L2/L4 checkable
+in-repo now).
+
 ## Closed / mirage (do NOT claim)
 
 - **M₁₁ / PSL(2,11)-on-11-points / (11,5,2) biplane** — MIRAGE. Those live on 11 points, PSL(2,11)
