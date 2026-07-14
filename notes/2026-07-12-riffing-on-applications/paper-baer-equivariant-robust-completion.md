@@ -1,6 +1,6 @@
 # Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`
 
-Status: focused paper-development manuscript; theorem spine kernel-checked, release audit in progress
+Status: focused development source; synchronized LaTeX/PDF submission artifact and release audit complete
 Sources: the Baer-extension theorem notes and C99/C133–C136 proof ledgers
 Lean lane: [`FiniteGeom/BaerCompletion/`](../../lean/FiniteGeom/BaerCompletion/) and the quadratic
 consumers under [`RelativeConicArcs/`](../../lean/RelativeConicArcs/)
@@ -374,9 +374,10 @@ witness. The C++ enumerator uses explicit point/line incidence and point marking
 written Python verifier uses candidate bitsets. A subfield projectivity commutes with Frobenius and
 preserves the legal-pair count, so normalizing the ordered fixed-point pair is exhaustive.
 
-The data suggest that the `s≥7` theorem may extend to every finite-field order `s≥5`, but no such
-theorem is claimed. Sources, hashes, the minimizing witness, and the formalization gap are in the
-linked C99 proof ledger.
+Together with the general `s≥7` argument, the order-five theorem covers every prime-power base order
+`s≥5`. No extension to `s≤4`, multiplicity lower bound, or deletion-robustness theorem is claimed.
+Sources, hashes, the minimizing witness, and the formalization boundary are in the linked C99 proof
+ledger.
 
 ### Corollary D — equivariant saturation has square-root scale
 
@@ -438,7 +439,7 @@ The scoped builds and `#print axioms` audits report exactly
 `[propext, Classical.choice, Quot.sound]`. The generated two-fixed-point leaves use kernel
 `decide`; no public theorem depends on `sorryAx`, a custom axiom, or `native_decide`.
 
-## Claim boundaries and remaining release gates
+## Claim boundaries
 
 - The global count, uniform Q25 existence theorem, collision equality/excess classification, and
   profile-specific lower bounds stated above are Lean-checked.
@@ -451,8 +452,8 @@ The scoped builds and `#print axioms` audits report exactly
   precursor located in a bounded search.”
 - Sharpness is not claimed. Unless a near-sharp or pair-saturated family is proved, the general
   result is presented as a structural criterion.
-- Final release still requires stable bibliography and numbering, submission formatting, and a
-  last manuscript-to-Lean referee audit.
+- The synchronized LaTeX/PDF artifact has stable numbering and bibliography and has passed the
+  manuscript-to-Lean, citation, trust, TeX, BibTeX, reference, and box-warning audits.
 
 ## Focused manuscript spine
 

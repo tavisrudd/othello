@@ -14,10 +14,10 @@ arc. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh leg
 and kernel-checks its equality with the disjoint carrier union and `PairExtensionData.legalCount`.
 The five parity-allowed Q25 profiles are exhausted in Lean.
 
-**Publication status:** focused LaTeX submission source and bibliography complete; bounded
+**Publication status:** focused LaTeX submission source, bibliography, and PDF complete; bounded
 general-criterion priority search complete. The checked Q25 result has no proof-validity defect in
-the scoped audit. Static citation, label, trust-boundary, and manuscript-to-Lean checks pass; PDF
-compilation remains before final closeout.
+the scoped audit. Citation, label, trust-boundary, manuscript-to-Lean, TeX, BibTeX, reference, and
+box-warning checks pass.
 
 **Novelty boundary:** Hilbert 90, the Baer fixed subplane, projective point/line counts, the
 occupied-line double count, and two-element involution-orbit counts are classical infrastructure,
@@ -45,7 +45,8 @@ theorem, not a structural classification of near-saturated arcs.
 
 **Submission manuscript:**
 [`frobenius_pair_extension.tex`](frobenius_pair_extension.tex), with
-[`refs.bib`](refs.bib).
+[`refs.bib`](refs.bib), and compiled
+[`frobenius_pair_extension.pdf`](frobenius_pair_extension.pdf).
 
 **Development source:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).

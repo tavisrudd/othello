@@ -3,8 +3,8 @@
 **Lane**: `baer` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-14
-**Status:** ACTIVE — referee closeout queue C136–C141
-**Tasks:** C99, C133–C140 (closed); C141 (started)
+**Status:** FINISHED — C136–C141 referee closeout complete; archive/routing decisions pending
+**Tasks:** C99, C133–C141 (closed)
 
 ## Active-lane lock
 
@@ -47,7 +47,7 @@ Source of truth:
 - [`paper-baer-equivariant-robust-completion.md`](../2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md)
 - [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../2026-07-13-baer-completion-adversarial-novelty-review.md)
 
-## Publication status — major revision
+## Publication status — submission artifact complete
 
 The scoped Lean build for the Baer collision profile, quadratic collision/invisibility modules, and
 the full Q25 profile aggregate passes. The headline uniform theorem is kernel-checked, uses no
@@ -65,12 +65,10 @@ kernel-checked equal to the disjoint carrierwise union and to `PairExtensionData
 
 The focused scope is executed. Generic completion material and the classical-radius table are out;
 the paper makes a structural-criterion claim rather than a sharpness claim. C139 found no exact
-precursor for the general criterion in a bounded specialist-vocabulary/database search. Do not
-archive this handoff or route the lane as finished until the remaining release gate is disposed:
-
-1. **Finish the submission artifact.** The LaTeX source, bibliography, stable numbering,
-   cross-references, and static manuscript/Lean/citation/trust audit are complete. Compile the PDF
-   and clear TeX/BibTeX/reference/box warnings after the concurrent heavyweight Lean build window.
+precursor for the general criterion in a bounded specialist-vocabulary/database search. The LaTeX
+source, bibliography, stable numbering, cross-references, manuscript/Lean/citation/trust audit, and
+PDF are complete. Tectonic/BibTeX finishes without reference, label, box, or PDF-string warnings.
+All release gates in C136–C141 are disposed.
 
 ## Open queue
 
@@ -81,11 +79,10 @@ archive this handoff or route the lane as finished until the remaining release g
 | C138 | reported; table removed | Classical-radius release disposition |
 | C139 | reported | General quadratic-Frobenius specialist priority search |
 | C140 | reported; structural criterion | Sharpness/positioning disposition |
-| C141 | started; source complete | PDF build and final referee/trust closeout |
+| C141 | reported | Submission PDF and final referee/trust closeout |
 
-The routing table is also stale: it still sends `baer` to the closed C99.6 review and omits C135.
-Leave that row open until the publication disposition is chosen, then update it together with the
-handoff/archive decision.
+The routing table is stale: it still sends `baer` to the closed C99.6 review. Per the finished-lane
+protocol, archive this handoff and update routing only after the user's separate decisions.
 
 ## Closed path — C133
 

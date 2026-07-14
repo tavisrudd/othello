@@ -2,11 +2,11 @@
 
 \usepackage[a4paper,margin=28mm]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \setlength{\emergencystretch}{2em}
@@ -165,7 +165,7 @@ Let $\cE$ be this set of empty fixed lines.
 \begin{lemma}[Empty fixed lines]\label{lem:empty-lines}
 The number of empty fixed lines is
 \begin{equation}\label{eq:E}
- E=|\cE|=s^2+s+1-left(f(s+1)-\binom f2+e\right).
+ E=|\cE|=s^2+s+1-\left(f(s+1)-\binom f2+e\right).
 \end{equation}
 \end{lemma}
 
@@ -305,7 +305,7 @@ This is an algebraic equality and excess classification.  It does not
 classify the invariant arcs for which $L$ is small, and no such structural
 inverse theorem is claimed.
 
-\section{Eight-arcs over $\F_{25}$}
+\section{Eight-arcs over \texorpdfstring{$\F_{25}$}{F25}}
 
 We now take $s=5$, so each empty fixed line carries $N=10$ candidate
 pairs.  The profile of an invariant eight-arc is
@@ -423,13 +423,13 @@ The fixed-point count is even and at most eight.  Proposition
 treats $f=2$.
 \end{proof}
 
-The ordinary complete-arc classifications of
-Marcugini--Milani--Pambianco~\cite{MarcuginiMilaniPambianco2007} and
-Coolsaet--Sticker~\cite{CoolsaetSticker2009} show that the smallest complete
-arcs in $\PG(2,25)$ have size $12$.  Thus every eight-arc has an ordinary
-one-point extension.  That fact does not imply Theorem~\ref{thm:q25}:
-ordinary extendability neither makes the legal-point set Frobenius-stable
-nor ensures that a legal point and its conjugate are jointly legal.
+The complete-arc classifications in
+\cite{MarcuginiMilaniPambianco2007,CoolsaetSticker2009} show that the
+smallest complete arcs in $\PG(2,25)$ have size $12$.  Thus every eight-arc
+has an ordinary one-point extension.  That fact does not imply
+Theorem~\ref{thm:q25}: ordinary extendability neither makes the legal-point
+set Frobenius-stable nor ensures that a legal point and its conjugate are
+jointly legal.
 
 \begin{remark}[External census]\label{rem:census}
 An external enumeration after fixed-point normalization reports $469{,}600$
@@ -475,6 +475,9 @@ Consequently $2s(s-1)\le(k-1)^2$, which gives
 For $k=8$, one has $M\le12<N$ when $s\ge7$.  Full occupation is impossible
 because $8<s^2+1$, so Theorem~\ref{thm:pair-criterion} applies.
 \end{proof}
+
+Together with Theorem~\ref{thm:q25}, the last assertion covers every
+prime-power base-field order $s\ge5$.
 
 The scale in \eqref{eq:saturation} is the classical Lunelli--Sce scale for
 ordinary complete arcs, with the same secant-covering mechanism in the
@@ -527,7 +530,8 @@ For reproducibility, the paper-facing declarations are located as follows.
 
 \begin{center}
 \small
-\begin{tabular}{p{0.43\linewidth}p{0.49\linewidth}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.43\linewidth}
+                >{\raggedright\arraybackslash}p{0.49\linewidth}}
 \toprule
 Source module & Paper-facing declaration or role \\
 \midrule

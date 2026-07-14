@@ -58,8 +58,8 @@ twisted-cubic–axis family
 
 **6 · `equivariant-robust-completion`** — Frobenius-equivariant pair extension of eight-arcs in
 `PG(2,25)`
-- *Status:* focused LaTeX submission source + bibliography; exact quadratic criterion, semantic
-  global count, collision inverse, and uniform Q25 theorem Lean-built; PDF compile pending.
+- *Status:* focused LaTeX submission source + bibliography + cleanly compiled PDF; exact quadratic
+  criterion, semantic global count, collision inverse, and uniform Q25 theorem Lean-built.
 - *Staging/library views, not themselves papers:* `baer-equivariant-extension` feeds this paper;
   `completion-core-rigidity` is reusable generic infrastructure outside the submission.
 
@@ -111,9 +111,9 @@ lit, remaining work): `../notes/handoffs/2026-07-13-clebsch-paper.md`. Lane alia
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
-- **Focused LaTeX submission source + Lean lane:** `equivariant-robust-completion`, with the exact
-  coordinate quadratic extension theorem; PDF compile pending. Continuation rigidity remains
-  theorem-package only.
+- **Focused LaTeX manuscript + PDF + Lean lane:** `equivariant-robust-completion`, with the exact
+  coordinate quadratic extension theorem and completed internal referee closeout. Continuation
+  rigidity remains theorem-package only.
 - **Sequence packages (ready/draft):** the two `oeis-submissions/` entries.
 
 ## Shared blocker
