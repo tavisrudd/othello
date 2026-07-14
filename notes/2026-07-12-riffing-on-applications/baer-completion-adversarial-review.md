@@ -205,6 +205,8 @@ audit still assigns “priority not definitive.”
   aggregate replay fanned into unrelated legacy generated certificates and was stopped after OOM
   failures there; no Q25 dependency failed. `/tmp` remained at 10% utilization during the audit.
 
-No remaining proof-validity defect was found in this round. The uniform order-five theorem is
-still open because the separate `f=0` and `f=4` profiles have not been formalized, and the stronger
-Q25 census/minimum claims remain computational evidence only.
+No remaining proof-validity defect was found in this round. Subsequent certificate-free work
+kernel-checked the `f=4` profile in `Q25ProfileFour.profile_four_pair_extension`, with focused build
+and axiom audit. The uniform order-five theorem remains open only because the separate `f=0`
+profile has not been formalized, and the stronger Q25 census/minimum claims remain computational
+evidence only.

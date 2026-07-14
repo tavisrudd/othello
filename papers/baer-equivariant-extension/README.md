@@ -16,8 +16,10 @@ the generic application upgrades to established infrastructure. The exact invisi
 collision correction is now Lean-proved. The exceptional `s=5,f=2` existence theorem is also
 kernel-checked in `Q25PairResult.f2_pair_extension`; a second adversarial proof audit found no
 proof-validity defect, and the conclusion explicitly makes both added conjugate points fresh. The
-census size and minimum 32 remain external evidence. The `f=0,4` geometry is not formalized, so
-completing those profiles is the strongest open lever.
+census size and minimum 32 remain external evidence. The certificate-free
+`Q25ProfileFour.profile_four_pair_extension` also kernel-checks the `f=4` profile from center
+incidence and exact balance. The `f=0` moment geometry is the remaining open profile and strongest
+open lever.
 
 **Lean:** the proof spine is built under `lean/FiniteGeom/BaerCompletion/`, with projective-plane,
 coordinate-conjugation, quadratic-Frobenius, exact line-counting, and forbidden-charge consumers

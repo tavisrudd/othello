@@ -155,15 +155,16 @@ fixed-locus / quadric-Witt dichotomy leap).
    spinoff lane closed: the defect, conic, asymptotic, averaging, nucleus, and certified-example
    packages are Lean-proved under the strict trust gate. Final map:
    [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-6. **Applications second-order revisit — C99 [OPEN — `f=0,4` LEAN PROOFS REQUIRED].** The
+6. **Applications second-order revisit — C99 [OPEN — `f=0` LEAN PROOF REQUIRED].** The
    paper-wide adversarial audit demoted the generic blocker, weighted, symmetry, reliability,
    defining-set, and algorithmic constructions to established infrastructure. Exact collision
    accounting is Lean-proved. `Q25PairResult.f2_pair_extension` now proves the full exceptional
    `(f,e)=(2,3)` existence statement, explicitly including freshness of both conjugate points; its
    scoped build, finite-row coverage, semantic transport, and axiom profile have passed a second
-   adversarial review. The external census size and minimum remain data only. The `f=0,4`
-   center/moment arguments are still proof-search evidence. Kernel formalization of those remaining
-   profiles is the next theorem lever.
+   adversarial review. The certificate-free `Q25ProfileFour.profile_four_pair_extension` now
+   proves the `(f,e)=(4,2)` profile from center incidence and exact balance. The external census
+   size and minimum remain data only. The `f=0` moment argument is still proof-search evidence;
+   its kernel formalization is the next theorem lever.
    [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue),
    [proof ledger](2026-07-13-c99-baer-collision-strengthening.md),
    [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).
@@ -226,13 +227,15 @@ fixed-locus / quadric-Witt dichotomy leap).
 
 - **C105 [REPORTED 2026-07-13] — transfer-gate boundary examples.** Both exact numerical boundaries have nondegenerate kernel-checked counterexamples at the level of literal complete repair hypergraphs. Manuscript, novelty posture, trust manifest, and registries are synchronized; track in the [RepairCodes strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
 
-- **C99 [OPEN — `f=0,4` LEAN PROOFS REQUIRED] — post-formalization second-order application
+- **C99 [OPEN — `f=0` LEAN PROOF REQUIRED] — post-formalization second-order application
   revisit.** The subtraction-free linewise and aggregate collision identities are Lean-proved.
   The exact accounting and the full `f=2` pair-extension theorem are Lean-proved. The exact
   invisible-orbit↔center-on-carrier characterization, aggregate center double count, and local
   `GF(5)` center-capacity lemma are also Lean-proved. The profile-specific cross-pair occupied-line
-  bound and the `f=0` moment partition remain open; the two external `f=2` enumerations support only
-  the unproved census/minimum claims. The live lever is the `(4,2)` cross-pair construction. Track in the
+  bound are now specialized to the `(4,2)` profile in `Q25ProfileFour`, yielding a kernel-checked
+  lower bound of four legal pairs and a semantic pair-extension theorem. The `f=0` moment partition
+  remains open; the two external `f=2` enumerations support only the unproved census/minimum claims.
+  The live lever is the `(0,4)` moment proof. Track in the
   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue)
   [proof ledger](2026-07-13-c99-baer-collision-strengthening.md), and
   [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).

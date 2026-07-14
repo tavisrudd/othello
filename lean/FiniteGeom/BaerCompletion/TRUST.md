@@ -90,10 +90,12 @@ kernel-checked. The exceptional order-five profile `(f,e)=(2,3)` is also kernel-
 provenance only and are not used by that theorem. `QuadraticInvisible.lean` now kernel-checks the
 geometric rephrasing of invisibility as the secant-orbit center lying on the carrier, its aggregate
 center-incidence double count, and the local `GF(5)` two-empty-carrier consequence of an
-at-most-four occupied-line bound. What remains prose mathematics is the profile-specific lower
-bound on occupied lines through cross-pair centers, the identification of charge multiplicity with endpoint point index, and the second-moment
-partition needed for the proposed `s=5,f=0` numerical improvement. Accordingly, no order-five
-uniform theorem is in the trust manifest: the proposed `f=0` and `f=4` profile bounds remain open.
+at-most-four occupied-line bound. `QuadraticInvisible.lean` now proves that bound for cross-pair
+centers in the `(f,e)=(4,2)` profile, and `Q25ProfileFour.profile_four_pair_extension` gives the
+certificate-free semantic extension theorem. What remains prose mathematics is the identification
+of charge multiplicity with endpoint point index and the second-moment partition needed for the
+proposed `s=5,f=0` numerical improvement. Accordingly, no uniform order-five theorem is in the
+trust manifest: only the proposed `f=0` profile bound remains open.
 
 ## Audit result
 

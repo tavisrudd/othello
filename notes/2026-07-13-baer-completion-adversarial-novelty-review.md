@@ -32,8 +32,9 @@ suggests.
    sharper consequence to become a strong headline.
 4. The exact support/invisible/collision correction has since been Lean-proved. The exceptional
    `f=2` existence theorem is now also Lean-proved by `Q25PairResult.f2_pair_extension`; its census
-   size and observed minimum 32 remain external computation. The `f=0,4` geometry is only sketched,
-   so the uniform order-five conclusion remains unproved.
+   size and observed minimum 32 remain external computation. The certificate-free
+   `Q25ProfileFour.profile_four_pair_extension` now proves the `f=4` consequence. The `f=0`
+   geometry is only sketched, so the uniform order-five conclusion remains unproved.
 5. Two proposed notions have direct terminology-level collisions: `premium_G=δ_G/δ` is the known
    **cost of symmetry** `τ_G/τ`, and deletion-resistant defining sets have a close 2026 antecedent as
    **k-strong defining sets**. They must be cited and reframed.
@@ -72,7 +73,7 @@ classical; an unformalized new consequence stays conjectural.
 | Theorem E: fixed/conjugate secant decomposition | **Packaging/generalization, low novelty** | Fixed blocks and two-element orbits under an incidence-preserving involution are elementary group-action facts. The abstraction usefully isolates the actual hypotheses, but should not be claimed as a discovery. |
 | Theorem F: exact quadratic conjugate-pair criterion | **Best surviving plausible paper-specific result** | No exact prior orbit-valued criterion with the displayed `E`, `M`, and legal-pair lower bound was located. The three geometric failure cases in fact form an **iff**, but essentially the same conjugate-pair addition maneuver appears in Baker–Wantz's Hughes-plane work. Adjacent group-invariant-arc and Baer-conic papers do not give this general quantitative Galois-orbit count. Frame it as an exact restricted Frobenius incidence criterion; acknowledge the classical maneuver and covering/union-bound mechanism. |
 | Theorem F.1: heterogeneous linewise sum | **Elementary refinement / paper-specific bookkeeping** | `Σ_l(N_l-M_l)_+` is linewise set subtraction, but `M_l` is currently ambiguous. If it counts distinct forbidden candidates, equality is exact; if it counts secant-orbit charges with multiplicity, the expression is only a lower bound. Use separate support and charge-mass symbols. It earns paper weight only if it produces a sharper threshold, equality classification, or inverse theorem. |
-| Candidate F.2: `PG(2,25)` profiles `f≠2` | **Unproved; novelty review deferred** | Intended bounds are five extensions for `f=0` and four for `f=4`, but center/moment geometry is not Lean-checked. Do not list this as a result. |
+| Candidate F.2: `PG(2,25)` profiles `f≠2` | **Partially proved; novelty review deferred for the uniform claim** | The bound of four extensions for `f=4` and its semantic extension theorem are kernel-checked in `Q25ProfileFour`; the intended bound of five for `f=0` remains unproved. Do not list the uniform result until `f=0` is checked. |
 | Theorem F.3: `s=5,f=2` pair extension | **Lean-proved; priority not definitive** | `Q25PairResult.f2_pair_extension` proves universal existence through checked field, normalization, orbit-coverage, determinant, and semantic layers; its conclusion explicitly makes both conjugate points fresh. A second adversarial proof audit found no proof-validity defect. The targeted search found no exact statement, but older tables/code-lengthening terminology remain a priority risk. |
 | Computed datum F.4: `s=5,f=2` census/minimum | **Evidence only; not a claim** | Two external implementations report 469600 normalized arcs and observed minimum 32. These stronger numerical claims are not implied by the Lean existence theorem. |
 | Corollary G: invariant eight-arc extension | **Plausibly unrecorded modest corollary** | No exact `s≥7` formulation was located. It is direct arithmetic from F, not a separate method. Check small complete-arc classifications, especially `PG(2,25)`, for indirect overlap before a priority claim. |
@@ -342,8 +343,8 @@ only until Lean checks normalization, coverage, and the predicate. The exact sta
 
 The current A.16 ranking should be replaced by the following order.
 
-1. **Lean-prove every order-five profile.** The `f=2` existence certificate is complete; formalize
-   the center/moment geometry for `f=0,4`. Keep the external census/minimum separate.
+1. **Lean-prove every order-five profile.** The `f=2` and certificate-free `f=4` existence proofs
+   are complete; formalize the moment geometry for `f=0`. Keep the external census/minimum separate.
 2. **Structural inverse theorem for near-equivariant saturation.** Go beyond averaging and classify,
    or approximate, configurations whose empty-line capacities are nearly exhausted.
 3. **Explicit finite-geometric cost-of-symmetry family.** Evaluate the established `τ_G/τ` ratio
@@ -431,8 +432,9 @@ Before submission, the paper still needs:
    including non-English and older finite-geometry literature;
 3. an explicit example separating conjugate-pair saturation from ordinary completeness, if
    Corollary G is to carry conceptual weight;
-4. kernel-check the center-incidence and `f=0,4` moment partitions before claiming a formal uniform
-   threshold; certify the normalized `f=2` census only if the stronger count/minimum is claimed;
+4. kernel-check the `f=0` charge-fiber/point-index bridge and moment partition before claiming a
+   formal uniform threshold; certify the normalized `f=2` census only if the stronger count/minimum
+   is claimed;
 5. a clean discovery ledger that labels classical formalized infrastructure separately from
    genuinely new mathematical consequences.
 

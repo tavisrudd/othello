@@ -360,18 +360,18 @@ aggregate form and capped-multiplicity moment inequalities.
 [`RelativeConicArcs/QuadraticCollision.lean`](../../lean/RelativeConicArcs/QuadraticCollision.lean)
 identifies the visible charge support with `forbiddenCandidates`, instantiates both exact balances,
 and proves that sufficient aggregate invisible capacity produces a genuine arc extension. The
-remaining formalization boundary is the geometric identification of invisible classes with fixed
-centers on a carrier, the equality between charge-fiber multiplicity and endpoint point index, and
-the order-five moment partition.
+geometric identification of invisible classes with fixed centers on a carrier is also checked in
+`QuadraticInvisible.lean`. The remaining formalization boundary is the equality between
+charge-fiber multiplicity and endpoint point index and the order-five `f=0` moment partition.
 
-### Lean-open Candidate F.2 — profile-sensitive order-five extension
+### Partially proved Candidate F.2 — profile-sensitive order-five extension
 
 Target statement: if `C` is a Frobenius-invariant eight-arc in `PG(2,25)` and its fixed-point count
 `f` is not two, then `C` admits a conjugate-pair extension. The intended lower bounds are five for
-`f=0` and four for `f=4`; the profiles `f=6,8` already follow from Theorem F. This target is not a
-theorem until the center and moment arguments below are Lean-checked.
+`f=0` and four for `f=4`; the profiles `f=6,8` already follow from Theorem F. The `f=4` bound and
+semantic extension are kernel-checked; this uniform target remains open only at `f=0`.
 
-#### Proof sketch (Lean-open)
+#### Proof and remaining sketch
 
 Write `f+2e=8`. For every secant orbit joining two distinct conjugate selected pairs, its fixed
 center lies on neither participating mate line. At most `f` fixed-point star lines and `e-2` other
@@ -379,7 +379,10 @@ mate lines through that center are occupied. Thus each of the `e(e-1)` cross-pai
 invisible on at least `s+3-f-e` empty carriers.
 
 For `(f,e)=(4,2)`, one has `N=M=10` and `E=11`; the two cross-pair orbits are invisible on at least
-two carriers each. Hence `B≥4`, and the aggregate exact balance gives `L=B+R≥4`.
+two carriers each. Hence `B≥4`, and the aggregate exact balance gives `L=B+R≥4`. This argument,
+including construction of the two distinct cross-pair orbits, the occupied-line bound at their
+centers, and the resulting fresh arc extension, is kernel-checked by
+`Q25ProfileFour.profile_four_pair_extension` without generated certificates.
 
 For `(f,e)=(0,4)`, one has `N=10`, `M=12`, `E=27`, and `B≥48`. The global second secant moment is
 `3 choose(8,4)=210`. At fixed external points, the first secant-index sum is `48`; since the index
@@ -601,10 +604,11 @@ Current classification:
   asymptotic phenomenon.
 - **Paper-specific checked refinement:** on each empty carrier, the subtraction-free identity
   `legal+M=N+B_ℓ+Σ_q(μ_ℓ(q)-1)_+` separates invisible orbit mass from collision redundancy; its
-  aggregate form is also Lean-proved. The geometric fixed-center interpretation of `B_ℓ` remains
-  outside the kernel.
-- **Lean-open order-five targets:** the intended `f=0,4` bounds have prose derivations but are not
-  proved; the needed center-incidence and moment-partition lemmas remain outside Lean.
+  aggregate form and the geometric fixed-center interpretation of `B_ℓ` are Lean-proved.
+- **Lean-proved four-fixed-point profile:** the intended `f=4` lower bound of four legal pairs and
+  the resulting semantic pair extension are checked by `Q25ProfileFour`.
+- **Lean-open order-five target:** the intended `f=0` bound has a prose derivation but is not
+  proved; the needed charge-fiber/point-index bridge and moment-partition lemmas remain outside Lean.
 - **Lean-proved exceptional profile:** every `s=5,f=2` invariant eight-arc pair-extends, by
   `Q25PairResult.f2_pair_extension` and its fully checked normalization/coverage chain.
 - **External computational evidence only:** two implementations report `469600` normalized arcs
@@ -720,7 +724,8 @@ is the paper-specific target. The support/invisible/redundancy identity and its 
 instantiation are now Lean-proved. Combining the maximum fiber `μ≤4`, the classical second secant
 moment, and the cross-center incidence bound suggest the `s=5` profile bounds, while external
 enumeration suggests the `f=2` minimum is 32. The `f=2` existence statement is now Lean-proved;
-the minimum-32 claim and the `f=0,4` bounds remain outside the kernel.
+the `f=4` bound and extension are also Lean-proved. The minimum-32 claim and the `f=0` bound remain
+outside the kernel.
 
 ### A.10 Higher-degree Galois orbit extension
 
@@ -781,8 +786,8 @@ nonnegative vertex weights.
 
 The strongest current novelty bets are:
 
-1. Lean-prove every `s=5` profile: the normalized `f=2` existence theorem is complete, so formalize
-   the center/moment geometry for `f=0,4`;
+1. Lean-prove every `s=5` profile: the `f=2` and `f=4` existence theorems are complete, so formalize
+   the moment geometry for `f=0`;
 2. a structural inverse theorem for near-equivariant saturation;
 3. an exact finite-geometric cost-of-symmetry family;
 4. a sharp geometric fractional/integral gap;
@@ -790,6 +795,6 @@ The strongest current novelty bets are:
 
 Blocker duality and orbit quotienting are enabling infrastructure, not novelty bets. Task `C99`
 has completed the broad adversarial novelty check and landed the exact correction plus the
-order-five proof targets. The `f=2` profile is now proved in Lean; `f=0,4` and the uniform
-order-five conclusion remain open. The next action is their kernel formalization; inverse theory is the second lane. See the
+order-five proof targets. The `f=2,4` profiles are now proved in Lean; `f=0` and the uniform
+order-five conclusion remain open. The next action is its kernel formalization; inverse theory is the second lane. See the
 [paper-specific novelty review](../2026-07-13-baer-completion-adversarial-novelty-review.md).
