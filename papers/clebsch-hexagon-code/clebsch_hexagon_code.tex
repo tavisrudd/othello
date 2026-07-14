@@ -577,16 +577,20 @@ the prime powers at most $14$ meeting one of these are $q=4,5,9,11$. At
 $q=4$ a six-arc of $\PG(2,4)$ is a hyperoval, hence complete, so its
 deep-hole locus is empty and the phenomenon is vacuous; the same holds at
 $q=5$, where six points exhaust $q+1$ and the arc is again complete. At
-$q=9=3^2$, $9\equiv-1\pmod{10}$ passes the rationality filter,
-so it must be excluded on its own terms rather than by the filter: the
-analogous $A_5$-invariant six-arc at $q=9$ is in fact \emph{complete}
-(covering radius two, not three), so its deep-hole locus is empty rather
-than a conic and the phenomenon is vacuous there. This is the classical
-computation of Storme and Van~Maldeghem~\cite[Prop.~13]{SVM1995}; we
-independently re-verified it (\texttt{check\_q9\_exclusion.py}), applying
-the same secant-coverage test used throughout this paper to the $q=9$
-witness arc already frozen in the companion Lean development, and confirm
-$|\cU(A)|=0$ at $q=9$. This leaves $q=11$.
+$q=9=3^2$ the rationality filter passes ($9\equiv-1\pmod{10}$), so $q=9$
+must be excluded on its own terms. An icosahedral
+$A_5\subset\mathrm{PGL}_2(9)$ is unique up to conjugacy, and its orbits on
+the $91$ points of $\PG(2,9)$ have sizes $6,10,15,30,30$ --- none of size
+one or five. An $A_5$-invariant point set is a union of orbits, so the
+six-orbit is the \emph{only} $A_5$-invariant six-set: every $A_5$-invariant
+six-arc of $\PG(2,9)$ is projectively the same one. It is a genuine six-arc,
+and it is complete --- covering radius two, not three --- so its deep-hole
+locus is empty rather than a conic and the phenomenon is vacuous at $q=9$.
+Completeness is the classical computation of Storme and
+Van~Maldeghem~\cite[Prop.~13]{SVM1995}; we independently re-verified it
+(\texttt{check\_q9\_exclusion.py}), applying the same secant-coverage test
+used throughout this paper to the $q=9$ witness arc frozen in the companion
+Lean development, and confirm $|\cU(A)|=0$. This leaves $q=11$.
 \end{proof}
 
 Three coincidences meet at $11$ and nowhere else: it is the only prime with
@@ -700,8 +704,9 @@ matchings to a one-factorization. The six antipodal chords are among the
 thirty-six \emph{non}-edges: an antipodal chord carries no arc point at all.
 That is polarity rather than coincidence --- by
 Definition~\ref{def:hexagon} each arc point is the \emph{pole} of an
-antipodal chord, and a pole lies on its own polar only when it lies on
-$\cC$, which no arc point does. All of this is \texttt{decide}-grade and
+antipodal chord; a pole lies on its own polar only when it lies on $\cC$,
+which no arc point does, and no two arc points are conjugate under that
+polarity, so no \emph{other} arc point lies on it either. All of this is \texttt{decide}-grade and
 kernel-checked in the
 companion Lean development (the adjacency, the explicit isomorphism, the
 antipodal non-edges, and the one-factorization), and both the chord

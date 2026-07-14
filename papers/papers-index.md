@@ -7,33 +7,64 @@ resolved the decomposition to five papers (+1 conditional) + two OEIS: baer + co
 dihedral bundles the D₂ₘ family, continuation is N1-only, and coding proceeded after its internal
 audit. **Clebsch was added 2026-07-13, after that review, bringing it to six (+1)** — it spun out of
 the `arcs` q=11 material, and the 2026-07-14 seam ruling makes it ship after `arcs`. See
-`papers-planning.md` for the rulings, submission sequence, and per-paper guardrails.
+`papers-planning.md` for the rulings, the ship order, and per-paper guardrails.
+
+**Numbering.** The `#` on each directory row is that paper's **ship-order number, 1–7**, and is the
+one numbering scheme in use — `papers-planning.md` → *Papers — decomposition and ship order* is the
+authoritative list (it carries the gate distances and the dependency rulings); this registry carries
+the same numbers and does not restate them. Directory rows appear in ascending `#` across both tracks
+below. `—` marks a staging view that is not itself a paper. The public mirror and the two OEIS
+entries are **not** papers and are deliberately outside this numbering; see the planning doc's
+*Non-paper deliverables*.
 
 ## Games track — impartial cap / Nofil / Node-Kayles
 
-| Directory                        | Working title                                                              | Status                                        |
-|----------------------------------|----------------------------------------------------------------------------|-----------------------------------------------|
-| `dihedral-schreier-node-kayles`  | Node Kayles on fixed-point-deleted Schreier graphs from conic involutions  | Draft near-complete, committed                |
-| `nofil-finite-geometry-outcomes` | Outcome classes of cap/Nofil games on finite geometries (pairing/mirror)   | Partial draft; projective proven but unwritten |
+**1 · `nofil-finite-geometry-outcomes`** — Outcome classes of cap/Nofil games on finite
+geometries (pairing/mirror)
+- *Status:* partial draft; projective proven but unwritten.
+- **Owns the game reading** of the shared q=11/q=9 material (`thm-relative-game-localization`,
+  `comp-q9-terminal`, `comp-q11-icosahedral`); see *Arcs vs Nofil* in the planning doc.
+
+**2 · `dihedral-schreier-node-kayles`** — Node Kayles on fixed-point-deleted Schreier graphs
+from conic involutions
+- *Status:* draft near-complete, committed.
 
 *Split by technique:* Schreier-residual nimbers vs the pairing/mirror ⇒ P method.
 
 ## Geometry / coding track — Package 2 (arc extension & reconstruction)
 
-**Rows are ordered by intended submission sequence** (`papers-planning.md` → *Submission sequence*),
-not alphabetically. The `#` column is that doc's number; order here and there must agree. `arcs` →
-`clebsch` is a **hard dependency**, not a preference: `arcs` owns the deep-holes=conic identification
-that `clebsch` takes as its starting point (see *Clebsch after Arcs* in the planning doc).
+**3 · `arcs_complete_outside_conic`** — Arcs complete outside a prescribed conic (secant-defect
+identity, bounds, MDS syndrome form)
+- *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean
+  formalization; strengthened q11 code/extension spectrum included; near submission-ready.
+- **Owns the q=11 deep-holes=conic identification** (`comp-q11-mds-deep-holes`), which
+  `clebsch` builds on, and the arc/extension reading of the material shared with `nofil`.
 
-| # | Directory                     | Working title                                                     | Status                                          |
-|---|-------------------------------|------------------------------------------------------------------|-------------------------------------------------|
-| 4 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds, MDS syndrome form) | Self-contained manuscript + PDF + independent checkers + strict-trust Lean formalization; strengthened q11 code/extension spectrum included; near submission-ready. **Owns the q=11 deep-holes=conic identification** (`comp-q11-mds-deep-holes`), which `clebsch` builds on |
-| 5 | `clebsch-hexagon-code` | The Clebsch hexagon code: a rigidity theorem for deep holes (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic) | Full LaTeX working draft + PDF + six independent Python checkers (coverage incomplete — see *Manuscript state*); Lean partially built (deep-holes/radius/leaders + Schreier=icosahedron certified strict-trust; chirality/gap/TFAE open). **Ships after `arcs`**; claims only the reading (rigidity TFAE, gap, chirality, why-11) — *added 2026-07-13, after the Fable decomposition ruling, so not among its five+1* |
-| 6 | `coding-repair-hypergraphs` | Complete repair hypergraphs under concatenation: a twisted-cubic--axis family | Self-contained manuscript + proof/novelty ledgers + strict-trust Lean package; internal adversarial audit complete, external specialist priority check remains |
-| 7 | `equivariant-robust-completion` | Equivariant extension and robust completion in finite geometry | Canonical merged paper; exact quadratic extension and completion spine Lean-built |
-| — | `baer-equivariant-extension`  | Equivariant extensions of finite-geometric arcs                  | Source/staging view folded into canonical merged paper (7) |
-| — | `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Source/staging view folded into canonical merged paper (7) |
-| 8 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
+**4 · `clebsch-hexagon-code`** — The Clebsch hexagon code: a rigidity theorem for deep holes
+(an MDS code over 𝔽₁₁ whose deep holes are exactly a conic)
+- *Status:* full LaTeX working draft + PDF + six independent Python checkers (coverage
+  incomplete — see *Manuscript state*); Lean partially built (deep-holes/radius/leaders +
+  Schreier=icosahedron certified strict-trust; chirality/gap/TFAE open).
+- **Ships after `arcs` — hard dependency**, not a preference: `arcs` owns the deep-holes=conic
+  identification that `clebsch` takes as its starting point (*Clebsch after Arcs*). Claims only
+  the reading (rigidity TFAE, gap, chirality, why-11). *Added 2026-07-13, after the Fable
+  decomposition ruling, so not among its five+1.*
+
+**5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs under concatenation: a
+twisted-cubic–axis family
+- *Status:* self-contained manuscript + proof/novelty ledgers + strict-trust Lean package;
+  internal adversarial audit complete, external specialist priority check remains.
+
+**6 · `equivariant-robust-completion`** — Equivariant extension and robust completion in finite
+geometry
+- *Status:* canonical merged paper; exact quadratic extension and completion spine Lean-built.
+- *Staging views, not themselves papers:* `baer-equivariant-extension` (Equivariant extensions
+  of finite-geometric arcs) and `completion-core-rigidity` (Robust completion of
+  finite-geometric packings and codes) — both folded into this paper.
+
+**7 · `continuation-graph-rigidity`** — Semilinear rigidity/reconstruction from cap
+continuation graphs
+- *Status:* theorem-package plan; N1 headline survives.
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: it descends from the
@@ -162,7 +193,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-s4-nimbers     | S₄ regular-template nimbers              | all four generating-triple classes 𝒢 = 0           | dihedral (App. A)   | solver `rust/scripts/nodekayles_cayley.rs` |
 | comp-a5-nimbers     | A₅ regular-template nimbers              | 𝒢=1 for (2,3,5),(2,5,5); 𝒢=0 otherwise             | dihedral (App. A)   | solver `rust/scripts/nodekayles_cayley.rs` |
 | thm-relative-complete | Relative completeness foundation      | maximal prescribed-hole arcs exist; `rho` is attained; incidence arcs agree with projective caps | arcs | lean `RelativeConicArcs/Arc.lean:141` `exists_completeOutside`, `:186` `exists_completeOutside_card_eq_rho`; `ProjectiveBridge.lean:154` `arc_iff_projectiveCap` |
-| thm-relative-game-localization | Exact cap-game localization | every continuation stays in `A∪H`; off-hole moves equal the uncovered locus; any injective hole parametrization preserves the full normal-play value | arcs, nofil | lean `RelativeConicArcs/ProjectiveBridge.lean` `move_mem_holes_of_completeOutside`, `legalExtensions_sdiff_holes_eq_uncovered`, `win_parametrizedHoles_iff`, `isP_parametrizedHoles_iff` |
+| thm-relative-game-localization | Exact cap-game localization | every continuation stays in `A∪H`; off-hole moves equal the uncovered locus; any injective hole parametrization preserves the full normal-play value | nofil (arcs glosses) | lean `RelativeConicArcs/ProjectiveBridge.lean` `move_mem_holes_of_completeOutside`, `legalExtensions_sdiff_holes_eq_uncovered`, `win_parametrizedHoles_iff`, `isP_parametrizedHoles_iff` — the game predicates live in the `arcs` library for historical reasons (that is where the witness was formalized), which is a file-location fact, not a claim by the `arcs` paper |
 | thm-secant-moments  | Maximum index and secant moments         | `r_A(x)≤⌊k/2⌋`; `Σr=C(k,2)(q−1)`; `ΣC(r,2)=3C(k,4)` | arcs                | paper §2; lean `RelativeConicArcs/Moments.lean:202` `pointIndex_le_half_card`, `:290` `first_secant_moment`, `:510` `second_secant_moment` |
 | thm-defect-identity | Prescribed-hole defect identity          | exact secant-index defect remainder identity       | arcs                | paper §3; lean `RelativeConicArcs/Defect.lean:214` `scaledDefect_eq_remainders` |
 | thm-defect-corollaries | Defect equality, coverage, and stability | exact equality pattern, uncovered-locus bound, and quantitative bounded-defect control | arcs | paper §3; lean `RelativeConicArcs/Defect.lean:309` `scaledDefect_eq_zero_iff`, `:379` `uncovered_bound`, `:465` `stability_bound` |
@@ -178,7 +209,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-evaluation-dichotomy | Sharp finite-field evaluation avoidance | for any feature map (hence every Veronese degree), a form vanishing on `U` and avoiding `A`, `|A|≤q`, exists exactly when `span ν(U)` is proper and contains no `ν(a)`; quantitative rank-sensitive lower bound, equality model, and sharp `q+1` plane cover | arcs, algebraic geometry | paper Proposition `prop:evaluation-dichotomy`; lean `RelativeConicArcs/EvaluationDichotomy.lean` `card_outside_hyperplanes_factored_lower_bound`, `evaluation_avoidance_iff`, `feature_evaluation_avoidance_iff`, `card_outside_planeCoverHyperplanes` |
 | thm-arc-mds-syndrome | Plane arc / codimension-three MDS syndrome dictionary | transparent parity-check kernel has dimension `n-3` and minimum distance four; projective syndrome distance is 1/2/3 on selected/secant/uncovered directions; actual affine leaders are in bijection with their supports through weight three; index is the exact weight-two leader count; every distance-three affine syndrome has exactly `choose(n,3)` leaders | arcs | paper Proposition `prop:syndrome-dictionary`; lean `RelativeConicArcs/CodingBridge.lean` `CodimThreeMDSColumns.code_finrank`, `minimumDistance_ge_four`, `card_syndromeLeadersOfWeight_eq_supports`, `card_syndromeLeadersOfWeight_three`; `SyndromeGeometry.lean` distance/support theorems |
 | thm-relative-syndrome-confinement | Relative completeness as syndrome confinement | `CompleteOutside A H` iff the projective distance-three syndrome directions are confined to `H`; a fresh direction is a one-column MDS extension iff it has distance three | arcs | paper Proposition `prop:syndrome-dictionary`; lean `RelativeConicArcs/SyndromeGeometry.lean` `completeOutside_iff_distanceThreeDirections_subset`, `oneColumnExtension_iff_distance_three` |
-| thm-extension-conflict-hypergraph | Exact simultaneous arc/MDS extension semantics | general simultaneous extensions are independent sets of the pair/triple conflict hypergraph; when the allowed locus is an arc, this reduces to pair-graph independence and maximality inside that locus; maximality upgrades to ordinary completeness when the locus is the full one-point extension set | arcs, nofil | lean `RelativeConicArcs/SyndromeGeometry.lean` `arc_union_iff_extension_hypergraph`, `arc_union_iff_pairExtensionIndependent_of_arc_locus`, `maximalExtensionIn_iff_maximalPairExtensionIndependent`, `completeOutside_empty_of_maximalExtensionIn_full` |
+| thm-extension-conflict-hypergraph | Exact simultaneous arc/MDS extension semantics | general simultaneous extensions are independent sets of the pair/triple conflict hypergraph; when the allowed locus is an arc, this reduces to pair-graph independence and maximality inside that locus; maximality upgrades to ordinary completeness when the locus is the full one-point extension set | arcs (nofil cites as the game's move-legality substrate) | lean `RelativeConicArcs/SyndromeGeometry.lean` `arc_union_iff_extension_hypergraph`, `arc_union_iff_pairExtensionIndependent_of_arc_locus`, `maximalExtensionIn_iff_maximalPairExtensionIndependent`, `completeOutside_empty_of_maximalExtensionIn_full` |
 | thm-defect-leader-collision | Coding form of prescribed-hole defect | secant first/second moments and the exact defect are weight-two leader-count and leader-collision identities, yielding the same length obstruction for projective codimension-three MDS systems with prescribed distance-three locus | arcs | paper §`sec:coding`; lean `RelativeConicArcs/SyndromeGeometry.lean` `first_weightTwoLeader_moment`, `second_weightTwoLeader_collision_moment`, `scaledDefect_eq_weightTwoLeader_remainders` |
 | thm-uncovered-quadratic-obstruction | GF(16) quadratic-avoidance theorem | for every eight-arc, no nonzero quadratic zero set—singular or nonsingular—contains its ordinary-uncovered locus while avoiding the arc; full-rank and forced-hit alternatives cover all 2633 normalized classes | arcs | paper Theorem `thm:q16-quadratic`; lean `RelativeConicArcs/Q16QuadraticAvoidance.lean` `QuadraticAvoidance`, `RejectsLevel.quadraticAvoidance`, `level8_quadraticAvoidance`; global conic corollary `Q16Result.lean` `no_completeOutside_GF16_card_eight` |
 | comp-rho16-classes | PG(2,16) eight-arc quadratic-obstruction refinement | independently reproduces the known 2633 ordinary projective eight-arc classes (Al-Seraji--Al-Ogali 2018), then refines them into 2630 full-rank and 3 forced-hit uncovered-quadratic rejections | arcs | generator/report `arcs_complete_outside_conic/search_rhoc16.cpp`, `search_rhoc16_output.txt`; kernel data `RelativeConicArcs/Q16CertificateData*`, `Q16LeafData*`; novelty audit `notes/2026-07-13-rhoc16-novelty-check.md` |
@@ -186,10 +217,10 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-rho-small      | ρ_𝒞 small values and arithmetic thresholds | `L₂(8)=L₂(9)=L₂(11)=6`, `L₂(16)=8`; ρ_𝒞(8)=ρ_𝒞(9)=ρ_𝒞(11)=6; ρ_𝒞(16)=9 | arcs | paper §7 + verifier/classification; lean `RelativeConicArcs/Results.lean`, `RelativeConicArcs/Q16Result.lean` `rhoC_GF16` |
 | comp-q11-exterior  | q=11 exterior-secant design              | all 15 witness secants avoid the conic; required-point index distribution `(N₁,N₂,N₃)=(90,15,10)` | arcs | paper §7 + verifier `I_C=0` + paper moment equations |
 | comp-q11-mds-deep-holes | q=11 non-GRS MDS/deep-hole spectrum | projectively non-GRS `[6,3,4]₁₁` code of covering radius three; actual distance-three nonzero affine syndrome rays are exactly the standard conic; actual affine syndrome distribution `(1,60,1150,120)` and actual minimum-weight word split `(900,150,100)` | arcs | paper Proposition `prop:q11-code`; lean `RelativeConicArcs/Q11SemanticRayData.lean` `affineRayVec_bijective`; `Q11SemanticSynthesis.lean` `affine_distanceThree_iff_mem_standardConic`, `mem_affineSyndromesOfDistance_iff`; `Q11SemanticDistribution.lean` `affine_coset_distance_distribution`; `Q11SemanticLeaders.lean` `syndromeLeaderSupports_two_eq_raw`, `distance_two_leader_distribution`; `Q11Coding.lean` MDS/radius/deep-hole theorems and formal no-conic premise `no_nonzero_quadratic_vanishing`; projectively non-GRS conclusion uses the cited classical NRC/GRS dictionary |
-| comp-q11-extension-complex | q=11 exact simultaneous-extension complex | independence polynomial `1+12t+36t²+20t³`; no maximal 0/1-extension, exactly six maximal 2-extensions and twenty maximal 3-extensions, no 4-extension; all 26 maximal sets are certified ordinary complete arcs, giving six complete eight-arcs and twenty complete nine-arcs over the fixed seed | arcs, nofil | paper Proposition `prop:q11-code`; lean `RelativeConicArcs/Q11Coding.lean` `extension_independence_spectrum`, `maximal_extension_spectrum`, `maximal_independent_extension_complete` |
-| comp-q11-chord-decomposition | q=11 coloured icosahedral chord decomposition | each witness gives a five-edge matching missing an antipodal pair; six disjoint colour classes partition all 30 conflict edges; the six missing antipodal edges are distinct and augment the classes to a one-factorization | arcs, nofil | paper Proposition `prop:q11-code`; lean `RelativeConicArcs/Q11Coding.lean` `witness_chords_nearPerfect`, `witness_chords_miss_antipodes`, `witness_chords_partition`, `completed_witness_matchings_oneFactorization` |
-| comp-q9-terminal   | q=9 terminal six-point P-position        | the witness is an ordinary complete arc; its legal-extension set is empty, hence the actual projective position is P | arcs, nofil | lean `RelativeConicArcs/Q9Terminal.lean` `complete`, `legalExtensions_eq_empty`, `isP` |
-| comp-q11-icosahedral | q=11 icosahedral seeded P-position     | all 12 conic points live; every seeded continuation is exactly an independent set of the icosahedral graph; the actual projective seed is P by antipodal mirror and exact localization | arcs, nofil | paper §7 remark; lean `RelativeConicArcs/Q11Residual.lean` `adj_iff_icosahedron`, `continuation_rawArc_iff`, `isP`, `seed_isP` |
+| comp-q11-extension-complex | q=11 exact simultaneous-extension complex | independence polynomial `1+12t+36t²+20t³`; no maximal 0/1-extension, exactly six maximal 2-extensions and twenty maximal 3-extensions, no 4-extension; all 26 maximal sets are certified ordinary complete arcs, giving six complete eight-arcs and twenty complete nine-arcs over the fixed seed | arcs | paper Proposition `prop:q11-code`; lean `RelativeConicArcs/Q11Coding.lean` `extension_independence_spectrum`, `maximal_extension_spectrum`, `maximal_independent_extension_complete` |
+| comp-q11-chord-decomposition | q=11 coloured icosahedral chord decomposition | each witness gives a five-edge matching missing an antipodal pair; six disjoint colour classes partition all 30 conflict edges; the six missing antipodal edges are distinct and augment the classes to a one-factorization | arcs (clebsch cites) | paper Proposition `prop:q11-code`; lean `RelativeConicArcs/Q11Coding.lean` `witness_chords_nearPerfect`, `witness_chords_miss_antipodes`, `witness_chords_partition`, `completed_witness_matchings_oneFactorization`; cited at `clebsch` paper §8 (the edge-level Schreier witness) |
+| comp-q9-terminal   | q=9 terminal six-point P-position        | the witness is an ordinary complete arc; its legal-extension set is empty, hence the actual projective position is P | nofil | lean `RelativeConicArcs/Q9Terminal.lean` `complete`, `legalExtensions_eq_empty`, `isP`. The input fact — the `q=9` witness is a complete arc — is classical (Storme–Van Maldeghem 1995, Prop. 13), so `nofil` cites SVM, not `arcs`; `clebsch` reads the same completeness as deep-hole vacuity (`comp-q9-exclusion`) |
+| comp-q11-icosahedral | q=11 icosahedral seeded P-position     | all 12 conic points live; every seeded continuation is exactly an independent set of the icosahedral graph; the actual projective seed is P by antipodal mirror and exact localization | nofil (the icosahedral identification itself is `arcs`') | lean `RelativeConicArcs/Q11Residual.lean` `continuation_rawArc_iff`, `isP`, `seed_isP`. The underlying graph identification `adj_iff_icosahedron` is `arcs`' (its paper §7 remark), also cited by `clebsch` §8; `nofil` owns only the P-position read off it |
 | thm-clebsch-deep-holes | Deep holes of the Clebsch hexagon code are exactly a conic | projectively non-GRS `[6,3,4]₁₁` code of covering radius three; the fifteen secants cover all of `PG(2,11)` except the twelve points of the `A₅`-invariant conic `XZ=Y²`, so the complete deep-hole set *is* `𝒞(𝔽₁₁)`; affine count `120=12×10`, each deep-hole coset has `C(6,3)=20` leaders. **Owned by `arcs`** (`comp-q11-mds-deep-holes`), which holds the Lean certificate and ships first; `clebsch` reproves it self-contained as the setup for its rigidity theorem and claims no priority for it. Per the 2026-07-14 seam ruling this row carries **no novelty claim** — the earlier "first MDS code whose deep holes are the `𝔽_q`-points of a named variety" wording is retired | arcs (clebsch restates) | `arcs` paper Prop 4.6(i) + lean `RelativeConicArcs/Q11Coding.lean` (see `comp-q11-mds-deep-holes`); restated at `clebsch` paper §3 Prop 3.1 + Cor 3.2 via the DMP Thm 6.3 dictionary, with an independent check in `check_rigidity_degenerate_conic.py` |
 | thm-clebsch-rigidity | Rigidity theorem (five-way TFAE)         | for a six-arc `A⊂PG(2,11)`: `U(A)` lies on some conic ⟺ `U(A)` is all `𝔽₁₁`-points of a nonsingular conic ⟺ `#U(A)≤15` (in fact `12`) ⟺ `A` is `PGL(3,11)`-equivalent to the Clebsch hexagon ⟺ `Stab(A)⊇A₅`. `A₅` is *recovered* from a purely coding-theoretic hypothesis, not assumed | clebsch | paper §4 Thm 4.1; exhaustive over the 1548 frame-normalized six-arcs; checker `clebsch-hexagon-code/check_rigidity_degenerate_conic.py`, which also closes (i)⇒(ii) by excluding degenerate conics; Lean planned (`native_decide`-grade) |
 | thm-clebsch-gap     | Gap theorem (rigid, not merely stable)   | every non-Clebsch six-arc has `#U≥16` with `U` on no conic; each of the 252 single-point perturbations of the hexagon has symmetric difference `#(U Δ 𝒞) ≥ 18` (exact spectrum `{18,19,20,22,24}`), so at most seven of the twelve conic points survive; distance-to-phenomenon jumps `0 → ≥18` with nothing between | clebsch | paper §4 Thm 4.2. **No checker ships for the perturbation census** — `check_rigidity_degenerate_conic.py` covers only the first clause (`#U≥16`, on no conic) via the histogram; the 252-perturbation spectrum was independently re-derived in the 2026-07-14 review and holds, but has no committed artifact. Lean planned (`decide`-grade, small) |

@@ -19,27 +19,71 @@ packaging review (2026-07-12) settled the decomposition, sequencing, and positio
 
 A directory ≠ a paper. See the resolved decomposition next.
 
-## Decomposition (resolved — Fable review 2026-07-12)
+## Papers — decomposition and ship order (resolved)
 
 **Target: six papers (+ one conditional) + two OEIS entries** — not one per directory. The 2026-07-12
-review resolved five (+1); **Clebsch (7) was added 2026-07-13**, after that review, as a spin-out of
-the Arcs q=11 material. Its dependency on Arcs is ruled in *Clebsch after Arcs* below.
+Fable review resolved six (+1); **Clebsch was added 2026-07-13**, after that review, as a spin-out of
+the Arcs q=11 material.
 
-1. **Games flagship** (`nofil-finite-geometry-outcomes`) — folds sum-free ℤₙ + affine AG(n,q) +
-   projective mirror outcomes + the boundary/sharpness negatives into one classification.
-2. **Dihedral Schreier catalogue** (`dihedral-schreier-node-kayles`) — **extended with the
-   generalized-D₂ₘ family** before shipping; retitle toward "finite subgroups of PGL₂(q)."
-3. **Arcs complete outside a conic** (`arcs_complete_outside_conic`) — standalone.
-4. **Equivariant extension + robust completion** (`equivariant-robust-completion`; canonical merge
-   of `baer-equivariant-extension` and `completion-core-rigidity`).
-5. **Continuation-graph rigidity, N1 only** (`continuation-graph-rigidity`) — N2 demoted to remarks.
-6. **(Conditional) Coding / LRC** — manuscript and internal adversarial audit complete; promote
-   after the external specialist citation-chain review.
-7. **Clebsch hexagon code** (`clebsch-hexagon-code`) — added 2026-07-13, post-review. The rigidity
-   TFAE + gap theorem + chirality ℤ/2 + why-11 for the `[6,3,4]₁₁` icosahedral code. **Ships after
-   Arcs (3)**, which owns the underlying deep-holes=conic identification; see *Clebsch after Arcs*.
+**One numbering scheme, repo-wide: papers are numbered 1–7 in ship order, ascending.** The list below
+is the authoritative one — `papers-index.md` carries the same numbers on its directory rows and
+points here; no other doc keeps a second ordered copy. Ship order is set by
+formalization-to-full-trust distance, adjusted for the dependencies below.
 
-Plus the two `oeis-submissions/` entries (independent of the papers).
+**1 · Games flagship** — `nofil-finite-geometry-outcomes`
+- *What:* folds sum-free ℤₙ + affine AG(n,q) + projective mirror outcomes + the
+  boundary/sharpness negatives into one classification.
+- *Gate:* core P-theorems done; owes the sum-free law, boundary negatives, capacity-2
+  sharpness, the Scharlau/Witt lemma.
+
+**2 · Dihedral Schreier catalogue** — `dihedral-schreier-node-kayles`
+- *What:* **extended with the generalized-D₂ₘ family** before shipping; retitle toward
+  "finite subgroups of PGL₂(q)".
+- *Gate:* owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions.
+
+**3 · Arcs complete outside a conic** — `arcs_complete_outside_conic`
+- *What:* standalone; **owns the q=11 deep-holes=conic identification**.
+- *Gate:* owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement.
+
+**4 · Clebsch hexagon code** — `clebsch-hexagon-code`
+- *What:* rigidity TFAE + gap theorem + chirality ℤ/2 + why-11 for the `[6,3,4]₁₁`
+  icosahedral code. Added 2026-07-13, post-review.
+- *Gate:* **must follow 3 — hard dependency, not a preference.** Owes chirality/gap/TFAE
+  Lean (TFAE likely needs `native_decide` — open decision), two checkers, C128.
+
+**5 · Coding / LRC** *(conditional)* — `coding-repair-hypergraphs`
+- *What:* promote after the external specialist citation-chain review.
+- *Gate:* Lean and manuscript complete; externally gated on specialist priority review,
+  not formalization.
+
+**6 · Equivariant extension + robust completion** — `equivariant-robust-completion`
+- *What:* canonical merge of `baer-equivariant-extension` and `completion-core-rigidity`.
+- *Gate:* exact collision accounting Lean-built; all order-five profiles unproved pending
+  Lean geometry/certificates; citations and priority gates remain.
+
+**7 · Continuation-graph rigidity, N1 only** — `continuation-graph-rigidity`
+- *What:* N2 demoted to remarks.
+- *Gate:* no manuscript; hardest formalization; collaborator route if it stalls.
+
+**Dependencies between papers** (the only two; everything else is independent):
+
+- **3 → 4 is hard.** `arcs` owns the deep-holes=conic identification that `clebsch` takes as its
+  starting point. See *Clebsch after Arcs*.
+- **1 ↔ 3 is a seam, not an ordering constraint.** Both cite backwards; neither waits on the other.
+  See *Arcs vs Nofil*.
+
+### Non-paper deliverables (deliberately outside the paper numbering)
+
+These are a different deliverable kind — an artifact and two database entries. They have no venue, no
+formalization gate in the paper sense, and no novelty seam. Numbering them in the same sequence as
+papers is what previously made a bare "#4" mean *Arcs* in one doc and *Equivariant/Baer* in another,
+so they are named, not numbered.
+
+- **Public mirror + first extraction** — no Lean gate; **do this first**. It unblocks everything
+  below and above: both OEIS links, any arXiv posting, the A344227 n=18 comment, and the
+  public-artifact citation the *Arcs vs Nofil* ruling depends on.
+- **OEIS A344227** (priority stamp now) — computational (`getK` pattern), no Lean gate.
+- **OEIS sum-free ℤₙ** — the vehicle for the sum-free law per D1; never a standalone paper.
 
 ### The decision rulings
 
@@ -68,30 +112,15 @@ Plus the two `oeis-submissions/` entries (independent of the papers).
   explicit inequality with concrete constants for all q ≥ q₀, not O-notation** — easier to formalize and
   a stronger published claim. Keep the Lunelli–Sce coordination with Baer (arcs owns the additive-3/2
   relative refinement; Baer owns the orbit criterion).
-- **D6 — count.** Five papers (+1 conditional) + two OEIS, as above. Dihedral bundles D₂ₘ rather than
+- **D6 — count.** Six papers (+1 conditional) + two OEIS, as above (five (+1) at the 2026-07-12
+  review; Clebsch added 2026-07-13). Dihedral bundles D₂ₘ rather than
   spawning a sequel (anti-salami; the mandatory Φ_T/½-density formalization window is free calendar time
   for the classification). Escape hatch: if D₂ₘ stalls beyond that window, ship the committed catalogue
   with §14 as the stated program.
 
-## Submission sequence (under the formalization gate)
-
-Ordered by formalization-to-full-trust distance:
-
-| # | Deliverable                       | Gate distance                                                                                         |
-|---|-----------------------------------|-------------------------------------------------------------------------------------------------------|
-| 0 | Public mirror + first extraction  | No Lean needed; unblocks everything below                                                             |
-| 1 | OEIS A344227 (priority stamp now) | Computational (`getK` pattern) — no Lean gate                                                          |
-| 2 | Games flagship                    | Core P-theorems done; owes sum-free law, boundary negatives, capacity-2 sharpness, Scharlau/Witt lemma |
-| 3 | Dihedral (+ D₂ₘ)                  | Owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions                                |
-| 4 | Arcs                              | Owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement                  |
-| 5 | **Clebsch hexagon**               | **Must follow Arcs (#4) — hard dependency, not a preference; see *Clebsch after Arcs* below.** Owes chirality/gap/TFAE Lean (TFAE likely needs `native_decide` — open decision), two checkers, C128 |
-| 6 | Coding / LRC (conditional)        | Lean and manuscript complete; externally gated on specialist priority review, not formalization       |
-| 7 | Baer ⊕ completion                 | Exact collision accounting Lean-built; all order-five profiles unproved pending Lean geometry/certificates; citations and priority gates remain |
-| 8 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
-
 ### Clebsch after Arcs — the novelty seam (ruled 2026-07-14)
 
-`clebsch-hexagon-code` postdates the 2026-07-12 decomposition and is **not** among its five (+1). It
+`clebsch-hexagon-code` (4) postdates the 2026-07-12 decomposition and is **not** among its five (+1). It
 spun out of the `arcs` q=11 material, and that parentage created a genuine salami-slicing exposure
 that the original ruling did not address: **clebsch's Prop 3.1 *is* arcs' Prop 4.6(i)** — same
 statement, same computation, with the Lean certificate living in `arcs` (`comp-q11-mds-deep-holes`).
@@ -117,6 +146,44 @@ inside a paper about something else and make `arcs` incoherent.
 cites a published companion instead of a working paper, and move 3 becomes optional rather than
 load-bearing. Lane map: `../notes/handoffs/2026-07-13-clebsch-paper.md`.
 
+### Arcs vs Nofil — the same seam, second instance (ruled 2026-07-14)
+
+Six results were pegged to **both** `arcs` and `nofil`, with every proof location inside
+`RelativeConicArcs/` — the `arcs` library — while `nofil` ships two slots earlier. That is the
+*Clebsch after Arcs* pattern again: one computation, two readings, two papers, no ruling on who owns
+it. It was latent only because `nofil`'s projective section is unwritten; it lands the moment that
+section is written, which is exactly what `nofil` owes to ship.
+
+**Ruling — split by reading, per result:**
+
+- **`nofil` owns the game reading** — `thm-relative-game-localization`, `comp-q9-terminal`,
+  `comp-q11-icosahedral`. P-positions, normal-play value, cap-game localization: its thesis and its
+  technique.
+- **`arcs` owns the arc/extension reading** — `thm-extension-conflict-hypergraph`,
+  `comp-q11-extension-complex`, `comp-q11-chord-decomposition`. Extension complexes, conflict
+  hypergraphs, chord decompositions: no game content in any of them.
+- **Each cites the other for the gloss**, neither co-claims. `arcs` already presents the game half as
+  a §7 *remark*, so the demotion costs it nothing.
+
+**The apparent sequence inversion dissolves; the order does not change.** It was an artifact of the
+mis-peg, not a real dependency:
+
+1. **A Lean directory name is not paper ownership.** The game predicates (`isP`, `seed_isP`,
+   `win_parametrizedHoles_iff`) sit under `RelativeConicArcs/` because that is where the witness was
+   formalized — a file-location fact, not a claim by the `arcs` paper.
+2. **Neither game result needs an `arcs` novelty.** `comp-q9-terminal`'s input — the `q=9` witness is
+   a complete arc — is **classical** (Storme–Van Maldeghem 1995, Prop. 13), so `nofil` cites SVM.
+   `comp-q11-icosahedral`'s input, the graph identification `adj_iff_icosahedron`, is a `decide`-grade
+   finite check that `nofil` cites from the **public Lean artifact**, which ships as the first
+   deliverable — before every paper.
+3. **So dependencies point backwards in ship order in both directions**: `nofil` (1) cites SVM and the
+   public artifact; `arcs` (3) cites `nofil` (1), by then published. No paper cites an unpublished
+   companion — the fragility that forced move 3 in *Clebsch after Arcs*.
+
+**Residual, not a sequencing problem:** the game theorems are now misfiled — `nofil` owns results
+living in a directory named for `arcs`. Worth a Lean-side rename or move; it changes no proof and
+gates nothing.
+
 **Highest-leverage first move:** stand up the public-artifact spine — extract the first public repo
 (tagged `FiniteGeom` base + the Lean-complete mirror outcomes), mint the Zenodo DOI, submit the
 A344227 priority-stamp subset. Cheap; unblocks four deliverables at once (both OEIS links, arXiv
@@ -129,15 +196,37 @@ machinery to exist before any paper depends on it.
 completions-as-hypergraph, Node-Kayles = neighbourhood deletion, saturating-set = covering-code) are
 each *elementary*. Each abstract opens with the nontrivial lead:
 
-| Paper        | The lead                                                                                  | Watch |
-|--------------|--------------------------------------------------------------------------------------------|-------|
-| Flagship     | The complete outcome classification **with the exact method boundary**                      | `main.tex` is organized around the method and still calls projective open — reorganize to open with the classification + dichotomy |
-| Dihedral     | Exact nimbers for an explicit infinite family (the ((q+1−2s)/4)·K₄ law + D₂ₘ/polyhedral)     | elementary without D₂ₘ; the explicit families are the content |
-| Arcs         | The exact prescribed-hole defect identity + additive-3/2 refinement + verified values       | fine |
-| Baer⊕compl.  | Exact quadratic-Frobenius orbit-valued criterion and semantic legal-extension theorem       | completion/hypergraph machinery and classical radii are supporting synthesis; seek one family-specific strengthening |
-| Continuation | The rigidity theorem: Aut(frame graph) = ambient semilinear group for q ≥ 13                | fine if N2 truly demoted |
-| Coding       | The `[19,4,8]₉` all-symbol repair seed + exact unbounded `GF(9)` row transfer                  | lead with the certified family, not the transfer mechanism alone |
-| A344227      | **G(17)=2 refutes the published eventual-alternation conjecture** (a refutation)             | frame exactly this way |
+**1 · Flagship** — *lead:* the complete outcome classification **with the exact method boundary**.
+- *Watch:* `main.tex` is organized around the method and still calls projective open —
+  reorganize to open with the classification + dichotomy.
+
+**2 · Dihedral** — *lead:* exact nimbers for an explicit infinite family (the
+((q+1−2s)/4)·K₄ law + D₂ₘ/polyhedral).
+- *Watch:* elementary without D₂ₘ; the explicit families are the content.
+
+**3 · Arcs** — *lead:* the exact prescribed-hole defect identity + additive-3/2 refinement +
+verified values.
+- *Watch:* fine.
+
+**4 · Clebsch** — this table predates the paper; its lead and its claim boundary are ruled in
+*Clebsch after Arcs* above (lead with the rigidity TFAE; claim only the reading).
+
+**5 · Coding** — *lead:* the `[19,4,8]₉` all-symbol repair seed + exact unbounded `GF(9)` row
+transfer.
+- *Watch:* lead with the certified family, not the transfer mechanism alone.
+
+**6 · Baer ⊕ completion** — *lead:* exact quadratic-Frobenius orbit-valued criterion and
+semantic legal-extension theorem.
+- *Watch:* completion/hypergraph machinery and classical radii are supporting synthesis; seek
+  one family-specific strengthening.
+
+**7 · Continuation** — *lead:* the rigidity theorem: Aut(frame graph) = ambient semilinear
+group for q ≥ 13.
+- *Watch:* fine if N2 truly demoted.
+
+**A344227** (OEIS, not a paper) — *lead:* **G(17)=2 refutes the published eventual-alternation
+conjecture** (a refutation).
+- *Watch:* frame exactly this way.
 
 - **Negatives that bound a published method are theorems; the rest are logbook.** The boundary
   negatives and capacity sharpness belong in the flagship as theorems (they delimit the method). Do not
@@ -230,7 +319,7 @@ self-contained repos per paper.
   manuscripts; cross-link. Versioned DOIs are what let "disclose the adequacy caveat now, anchor to
   mathlib later" be a respectable posture. This also clears the **public-artifact blocker** (OEIS `%H`,
   arXiv code links).
-- **Order:** driven by formalization readiness (see Submission sequence), not "most finished
+- **Order:** driven by formalization readiness (see *Papers — decomposition and ship order*), not "most finished
   manuscript" — the first extraction is the `FiniteGeom` base + the Lean-complete mirror outcomes.
 
 ## Novelty gates & loose ends
@@ -239,12 +328,19 @@ self-contained repos per paper.
 LRC/availability/concatenation live in overlapping communities — one specialist engagement (or one
 deep-research pass reviewed by one specialist) clears three gates. Don't run them serially per paper.
 
-| Paper                            | Gate / loose end                                                                          |
-|----------------------------------|-------------------------------------------------------------------------------------------|
-| `nofil-finite-geometry-outcomes` | Q⁻ elliptic method-negative needs a Scharlau/Witt-transfer lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are prior art |
-| `baer` ⊕ `completion`            | Broad adversarial audit complete. Exact collision accounting is checked; every order-five consequence remains unproved until Lean checks the geometry and finite certificate. Specialist priority search follows proof. |
-| `continuation-graph-rigidity`    | N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané read (keep N2 out of the abstract) |
-| Coding / LRC                     | Internal audit narrows novelty to exact all-symbol `(ν,τ)` separation and complete-hypergraph transfer; external specialist citation-chain review remains |
+**1 · `nofil-finite-geometry-outcomes`** — Q⁻ elliptic method-negative needs a Scharlau/Witt-transfer
+lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are
+prior art.
+
+**5 · Coding / LRC** — internal audit narrows novelty to exact all-symbol `(ν,τ)` separation and
+complete-hypergraph transfer; external specialist citation-chain review remains.
+
+**6 · `baer` ⊕ `completion`** — broad adversarial audit complete. Exact collision accounting is
+checked; every order-five consequence remains unproved until Lean checks the geometry and finite
+certificate. Specialist priority search follows proof.
+
+**7 · `continuation-graph-rigidity`** — N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané
+read (keep N2 out of the abstract).
 
 ## Planning-source docs (in ../notes/, not symlinked into a paper dir)
 
