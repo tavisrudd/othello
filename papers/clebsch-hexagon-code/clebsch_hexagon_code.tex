@@ -517,15 +517,39 @@ faithfully; and it is small enough that the fifteen secants of a six-arc
 have just enough room to cover every point off the conic --- the counting
 inequality above forces $q\le14$, and rationality of $A_5$ closes the door
 to everything but $11$.
-% DONE (2026-07-14): the |U(A)| extension-count histogram of Theorem 4.2 was
-% independently recomputed by a second enumeration
-% (check_rigidity_degenerate_conic.py), reproducing {12:6,16:30,18:150,
-% 19:300,20:630,21:360,22:72} exactly; see the footnote in the proof of
-% Theorem 4.2. (Orbit-multiplicity cross-check via a third path optional.)
-At $q=19$, the analogous $A_5$-invariant six-arc has at least $105$ deep
-holes (well beyond the twelve points of any conic), confirming that the
-phenomenon degenerates immediately past $q=11$ rather than persisting into
-a family.
+The failure past $q=11$ is worth recording concretely, since the next
+admissible prime is the first place the construction could have continued.
+At $q=19$ ($19\equiv-1\pmod{10}$, so the rationality filter passes and only
+Lemma~\ref{lem:secant-covering} excludes it) the same recipe --- the poles
+of the six five-fold axes of an icosahedral $A_5<\mathrm{PSL}_2(19)$ --- does
+still produce a genuine six-arc disjoint from the conic, so the object
+exists; what fails is the covering. We built that arc and enumerated its
+deep-hole locus directly (\texttt{check\_q19\_nonexample.py}), obtaining
+\[
+ |\cU(A)| = 140 = 20 + 120
+\]
+against a conic of only $q+1=20$ points. The arithmetic differs from $q=11$
+in a way worth noting: there $5\mid q-1$, so an order-five element splits and
+fixes two rational points of $\cC$, whereas at $q=19$ we have $5\mid q+1$, so
+the order-five elements lie in a non-split torus and fix no rational conic
+point at all --- their fixed pairs are conjugate over $\F_{361}$. The chord
+through such a pair is Galois-stable and hence still a rational line, so its
+pole is still a rational point and the arc is still defined; we verify this
+in the script rather than assume it.
+
+The shape of the failure is instructive. The twenty conic points remain deep
+holes --- $\cC\subset\cU(A)$ still --- but they no longer exhaust $\cU(A)$:
+$120$ further points of $\PG(2,19)$ escape all fifteen secants, and
+$\cU(A)$ lies on no conic (the quadratic-monomial evaluation matrix of
+$\cU(A)$ has full rank six). This is exactly the failure mode
+Lemma~\ref{lem:secant-covering} predicts. The fifteen secants have total
+capacity $15(q-1)=270$, while $q^2-6=355$ points lie off the arc and off the
+conic; the deficit is unavoidable, and the $120$ survivors are what it
+looks like. At $q=11$ the same capacity, $150$, comfortably exceeds the
+$115$ points needing cover, and the excess is spent on overlap. The
+phenomenon therefore degenerates immediately past $q=11$ rather than
+persisting into a family --- and it degenerates by the conic ceasing to be
+\emph{all} of the deep holes, not by its ceasing to be deep holes at all.
 
 \section{The Klein reduction}
 \label{sec:klein}

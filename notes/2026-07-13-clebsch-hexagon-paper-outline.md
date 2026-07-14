@@ -130,8 +130,16 @@ non-identifiable latent). NB drop the refuted five-tetrahedra reading (A₅-on-1
 4. **DMP arXiv:2101.12722 Thm 6.3 pin** — confirm it states exactly "deep-hole coset ⟺ point off
    every bisecant" for the projective [n,3] case, and that its hypotheses hold for non-GRS at q=11.
    ~30 min re-read; it is the load-bearing dictionary for all of §3.
-5. **q=19 non-example count** — reconcile 111 (= 381 − 15×18) vs the "≥105" in the handoff; print the
-   exact deep-hole count. Direct enumeration at q=19, trivial.
+5. ~~**q=19 non-example count**~~ **CLOSED (2026-07-14)** — exact |U| = **140**, not the "≥105"
+   counting bound nor 111 (both were bounds on the wrong quantity: 381 − 6 − 15×18 assumes the
+   secants are disjoint and cover only off-arc points). Enumerated directly in
+   `papers/clebsch-hexagon-code/check_q19_nonexample.py`. **The shape of the failure is the
+   interesting part and is now in §6:** U ⊋ C — all 20 conic points remain deep holes, but 120
+   further points escape all 15 secants, so U lies on no conic (rank 6/6). q=19 fails by the conic
+   ceasing to be *all* the deep holes, not by ceasing to be deep holes. Matches the capacity deficit
+   15(q−1)=270 < q²−6=355. Also verified: the recipe still yields a genuine 6-arc at q=19 even though
+   5 | q+1 there (order-5 elements non-split, fix no rational conic point; conjugate fixed-pairs give
+   Galois-stable rational chords ⇒ rational poles).
 6. **O'Keefe–Storme 1996 residual** — verify SVM+Dye fully supersede it for the plane (skim Zbl
    0848.51007; no full ILL needed).
 7. **Dye 1991** [footnote-only, non-blocking] — ILL already queued; close only to drop the footnote

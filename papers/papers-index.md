@@ -26,9 +26,13 @@ audit. See `papers-planning.md` for the rulings, submission sequence, and per-pa
 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds, MDS syndrome form) | Self-contained manuscript + PDF + independent checkers + strict-trust Lean formalization; strengthened q11 code/extension spectrum included; near submission-ready — *related but separate* |
 | `coding-repair-hypergraphs` | Complete repair hypergraphs under concatenation: a twisted-cubic--axis family | Self-contained manuscript + proof/novelty ledgers + strict-trust Lean package; internal adversarial audit complete, external specialist priority check remains |
+| `clebsch-hexagon-code` | The Clebsch hexagon code: a rigidity theorem for deep holes (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic) | Full LaTeX working draft + PDF + independent Python checkers for every finite claim; Lean formalization planned, not built; open lit items (Sadeh/Hirschfeld–Sadeh 1984 census cite, DMP Thm 6.3 hypothesis pin) — *spun out of the `arcs` q=11 material after the Fable decomposition ruling, so not among its five+1* |
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
-and share the `lean/FiniteGeom/` base.
+and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: it descends from the
+`arcs` q=11 witness (`comp-q11-mds-deep-holes`) rather than from Package 2, and carries no Lean yet.
+Venue target is Designs, Codes and Cryptography / Finite Fields and Their Applications / J. Geometry —
+explicitly **not** IEEE-TIT. Outline and open work: `../notes/2026-07-13-clebsch-hexagon-paper-outline.md`.
 
 ## Sequence submissions (OEIS) — see `oeis-submissions/`
 
@@ -50,6 +54,12 @@ and share the `lean/FiniteGeom/` base.
 - **Complete LaTeX manuscript (+ PDF + proof/novelty ledgers + Lean package):**
   `coding-repair-hypergraphs` — internally audited; specialist citation-chain review remains a
   submission preflight gate.
+- **Complete LaTeX manuscript (+ PDF + independent Python checkers, no Lean):**
+  `clebsch-hexagon-code` — every finite claim in the draft has a standalone re-checking script in the
+  paper directory (`check_rigidity_degenerate_conic.py`, `check_q9_exclusion.py`,
+  `check_q19_nonexample.py`, `check_dual_code.py`, `check_mathieu_hexads.py`,
+  `check_ten_arc_foil.py`). The Lean formalization is planned and would be `decide`-grade throughout;
+  it is release-blocking under the gate below but not needed for the draft's stated results.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
@@ -72,8 +82,12 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   completion δ_x = τ base identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
   (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
   (`lean/RelativeConicArcs/`).
-- **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data and
-  semantic arc extension are Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
+- **Planned, not built:** `ContinuationRigidity`; and the whole `clebsch-hexagon-code` package — its
+  rigidity/gap/chirality/`q=11` claims are currently checker-grade Python only, so the paper is
+  release-blocked under the gate below. All of it is expected to be `decide`-grade except the 1548-arc
+  TFAE sweep, which likely needs `native_decide` (an open decision, since that would breach the
+  axiom-clean bar). The exact quadratic Baer pair-extension data and semantic arc extension are
+  Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
 - **Axiom-clean bar:** `KleinFourBridge.explicit_pairProducts` now uses kernel `decide`; the former
   `native_decide` exception is closed. The coding/LRC chain is likewise `native_decide`-free; see
   `lean/RepairCodes/TRUST.md` and its dated adversarial review.
@@ -94,11 +108,14 @@ Key computational results and proven lemmas/theorems, mapped to their paper and 
 `dihedral-schreier-node-kayles`; `arcs` = `arcs_complete_outside_conic`; `baer` and `completion` =
 `equivariant-robust-completion`; `continuation` =
 `continuation-graph-rigidity`; `queens-n18` = `non-formal-bloggy/queens-n18`; `oeis:*` =
-`oeis-submissions/*`; `coding` = `coding-repair-hypergraphs`.
+`oeis-submissions/*`; `coding` = `coding-repair-hypergraphs`; `clebsch` = `clebsch-hexagon-code`.
 
 **Proof-location key:** `lean <file>:<line> <ident>` = formalized, `sorry`-clean (paths under
 `lean/`); `paper §N` = proven in that manuscript; `note <file>` = proven in a research note
-(plan-stage, Lean deferred); `solver <path>` = computed by a cross-checked solver.
+(plan-stage, Lean deferred); `solver <path>` = computed by a cross-checked solver; `checker <path>`
+= re-verified by a standalone script in the paper directory (independent of Lean and of the
+manuscript's own computation — the `clebsch` rows rely on this grade, which does **not** meet the
+release gate below).
 
 **Result-ID prefixes:** `thm-` = proven theorem/proposition (hand- or Lean-proven) · `lem-` =
 supporting lemma · `comp-` = solver-computed value or machine-verified finite example. The ID
@@ -151,6 +168,18 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-q11-chord-decomposition | q=11 coloured icosahedral chord decomposition | each witness gives a five-edge matching missing an antipodal pair; six disjoint colour classes partition all 30 conflict edges; the six missing antipodal edges are distinct and augment the classes to a one-factorization | arcs, nofil | paper Proposition `prop:q11-code`; lean `RelativeConicArcs/Q11Coding.lean` `witness_chords_nearPerfect`, `witness_chords_miss_antipodes`, `witness_chords_partition`, `completed_witness_matchings_oneFactorization` |
 | comp-q9-terminal   | q=9 terminal six-point P-position        | the witness is an ordinary complete arc; its legal-extension set is empty, hence the actual projective position is P | arcs, nofil | lean `RelativeConicArcs/Q9Terminal.lean` `complete`, `legalExtensions_eq_empty`, `isP` |
 | comp-q11-icosahedral | q=11 icosahedral seeded P-position     | all 12 conic points live; every seeded continuation is exactly an independent set of the icosahedral graph; the actual projective seed is P by antipodal mirror and exact localization | arcs, nofil | paper §7 remark; lean `RelativeConicArcs/Q11Residual.lean` `adj_iff_icosahedron`, `continuation_rawArc_iff`, `isP`, `seed_isP` |
+| thm-clebsch-deep-holes | Deep holes of the Clebsch hexagon code are exactly a conic | projectively non-GRS `[6,3,4]₁₁` code of covering radius three; the fifteen secants cover all of `PG(2,11)` except the twelve points of the `A₅`-invariant conic `XZ=Y²`, so the complete deep-hole set *is* `𝒞(𝔽₁₁)`; affine count `120=12×10`, each deep-hole coset has `C(6,3)=20` leaders. Headline novelty: first MDS code whose full deep-hole set is the `𝔽_q`-points of a positive-dimensional *named* variety | clebsch | paper §3 Prop 3.1 + Cor 3.2, via the DMP Thm 6.3 dictionary; the underlying finite computation is the Lean-certified `comp-q11-mds-deep-holes` from `arcs` |
+| thm-clebsch-rigidity | Rigidity theorem (five-way TFAE)         | for a six-arc `A⊂PG(2,11)`: `U(A)` lies on some conic ⟺ `U(A)` is all `𝔽₁₁`-points of a nonsingular conic ⟺ `#U(A)≤15` (in fact `12`) ⟺ `A` is `PGL(3,11)`-equivalent to the Clebsch hexagon ⟺ `Stab(A)⊇A₅`. `A₅` is *recovered* from a purely coding-theoretic hypothesis, not assumed | clebsch | paper §4 Thm 4.1; exhaustive over the 1548 frame-normalized six-arcs; checker `clebsch-hexagon-code/check_rigidity_degenerate_conic.py`, which also closes (i)⇒(ii) by excluding degenerate conics; Lean planned (`native_decide`-grade) |
+| thm-clebsch-gap     | Gap theorem (rigid, not merely stable)   | every non-Clebsch six-arc has `#U≥16` with `U` on no conic; each of the 252 single-point perturbations of the hexagon has symmetric difference `#(U Δ 𝒞) ≥ 18` (exact spectrum `{18,19,20,22,24}`), so at most seven of the twelve conic points survive; distance-to-phenomenon jumps `0 → ≥18` with nothing between | clebsch | paper §4 Thm 4.2; same checker; Lean planned (`decide`-grade, small) |
+| comp-clebsch-u-spectrum | Six-arc extension-count spectrum in `PG(2,11)` | `#U(A) ∈ {12,16,18,19,20,21,22}` with frame-normalized multiplicities `{6,30,150,300,630,360,72}` (Σ=1548); `#U=12` is attained by exactly one `PGL(3,11)` orbit (multiplicity `6=360/60`, consistent with `#Aut=60`) | clebsch | **priority granted outright to Hirschfeld–Sadeh 1984 / Sadeh thesis — recomputed here, claimed by us for neither the numbers nor the classification**; ours is only the deep-hole/covering *reading* of `U`. paper §4; verified by two independent code paths |
+| thm-clebsch-chirality | Canonical chirality `ℤ/2` on the deep-hole leaders | the twenty weight-three coset leaders split into two complementary `A₅`-orbits of ten that no automorphism exchanges, since `Hom(A₅,ℤ/2)=0`; the sixty orbit-swapping permutations are exactly the odd elements of the exotic `S₅⊂S₆`. Gives a certified non-identifiable latent: fixed under all sixty symmetries yet not constant | clebsch | paper §5 Prop 5.1; Lean planned (`decide`-grade orbit computation + standard `Hom(A₅,ℤ/2)=0`) |
+| lem-secant-covering | Secant-covering bound                    | a six-arc complete outside a disjoint conic forces `15(q−1) ≥ q²−6`, i.e. `q²−15q+9≤0`, hence `q≤14`. Overlap-free: fifteen sets of size `≤q−1` covering `q²−6` points bound the sum from below regardless of overlap | clebsch | paper §6 Lemma 6.1 — the paper's only genuine inequality argument; hand-proven, no computation |
+| thm-clebsch-why11   | Uniqueness of `q=11`                     | `q≤14` by `lem-secant-covering`; icosahedral `A₅⊂PSL₂(q)` needs `q≡±1 (mod 10)` or `q=5` (Dickson), leaving candidates `5,9,11`; `q=5` is too small to carry the arc and `q=9` is excluded on its own terms, so `q=11` | clebsch | paper §6 Thm 6.2 |
+| comp-q9-exclusion   | `q=9` icosahedral six-arc is complete    | `#U=0` at `q=9`: the analogous `A₅`-invariant six-arc has covering radius two, so its deep-hole locus is empty and the phenomenon is vacuous — closing the one candidate that passes the rationality filter but not the counting bound | clebsch | paper §6; independently re-verifies SVM 1995 Prop 13; checker `clebsch-hexagon-code/check_q9_exclusion.py`, over the Lean-certified GF9 tables and the `RelativeConicArcs/Examples.lean` `q9Witness` |
+| comp-q19-nonexample | `q=19` icosahedral six-arc has exactly 140 deep holes | the recipe still yields a genuine six-arc disjoint from the conic — at `q=19`, `5∣q+1` so order-five elements are non-split and fix *no* rational conic point, but their `𝔽₃₆₁`-conjugate fixed pairs span Galois-stable rational chords, hence rational poles (verified, not assumed). `#U=140=20+120` against a 20-point conic, and `U` lies on no conic (quadratic-monomial rank 6/6). The conic stays *contained* in `U` but no longer exhausts it — the failure mode `lem-secant-covering` predicts, capacity `15(q−1)=270` against `q²−6=355` | clebsch | paper §6; checker `clebsch-hexagon-code/check_q19_nonexample.py` — **exact count; supersedes the earlier `≥105` counting bound** (2026-07-14) |
+| comp-clebsch-dual   | The dual code is again a Clebsch hexagon code | dual arc `B={(1,5,5),(1,4,9),(1,9,3),(1,0,0),(0,1,0),(0,0,1)}`: a genuine six-arc meeting `𝒞` in two points, with `#U(B)=12` lying on a *second* nonsingular conic `4X²+7XY+10XZ+5Y²+2YZ+Z²=0`. By `thm-clebsch-rigidity`, `B` is `PGL(3,11)`-equivalent to `A`, so the phenomenon is self-dual — though not coordinate-for-coordinate | clebsch | paper §8; checker `clebsch-hexagon-code/check_dual_code.py` (exact nullspace reduction of `H` over `𝔽₁₁`) |
+| comp-clebsch-mathieu | The two icosahedral hexads are transverse to `S(5,6,12)` | the six antipodal chords partition `𝒞`'s twelve points into complementary hexads `{0,1,2,3,5,6}` and `{4,7,8,9,10,∞}`; neither is among the 132 Mathieu hexads — both meet every block in 1–5 points with the identical histogram `{1:6,2:30,3:60,4:30,5:6}`, never 0 or 6. Shares substrate and the subgroup `PSL₂(11)<M₁₂` with the design, yet is combinatorially unrelated to its blocks: turns the "is this a Golay/Mathieu thing?" referee question into a stated negative | clebsch | paper §8; checker `clebsch-hexagon-code/check_mathieu_hexads.py`, which recomputes the `PSL₂(11)` orbit and confirms both size 132 and the `S(5,6,12)` design property |
+| comp-clebsch-ten-arc-foil | Ten-arc foil: same `A₅`, empty deep holes | the explicit sixty-matrix `Stab(A)<PGL(3,11)` has orbits of sizes `{6,10,12,15,30,30,30}` on `PG(2,11)` (the 6 is `A`, the 12 is `𝒞`); the unique size-ten orbit is a genuine ten-arc, disjoint from `𝒞`, with *empty* deep-hole locus. Emptiness, not containment in a variety, is the generic covering behavior under icosahedral symmetry — so the hexagon's conic-filling locus is the exception, not an artifact of the symmetry | clebsch | paper §8; checker `clebsch-hexagon-code/check_ten_arc_foil.py` (verified `#Stab(A)=60`) |
 | thm-baer-criterion  | Orbit-valued extension criterion         | plausibly unrecorded assembled quadratic-Frobenius criterion; exact coordinate theorem constructs an arc extension; heterogeneous support count specializes to uniform `E(N−M)` | baer | lean `FiniteGeom/BaerCompletion/PairExtension.lean` `PairExtensionData.sum_card_sub_le_legalCount`; `RelativeConicArcs/QuadraticForbidden.lean` `exists_quadratic_pair_extension`; novelty audit `notes/2026-07-13-baer-completion-adversarial-novelty-review.md` |
 | lem-baer-linewise-correction | Exact carrier correction          | subtraction-free `legal(ℓ)+M=N+B_ℓ+Σ_q(μ_ℓ(q)−1)` separates invisible orbit mass from collision redundancy, linewise and in aggregate | baer | lean `FiniteGeom/BaerCompletion/CollisionProfile.lean`, `RelativeConicArcs/QuadraticCollision.lean`, `RelativeConicArcs/QuadraticInvisible.lean`; paper Theorem F.1; fixed-center interpretation kernel-checked |
 | thm-baer-q25-f2 | Exceptional `PG(2,25)` pair extension | every Frobenius-invariant eight-arc with exactly two fixed selected points admits a fresh conjugate-pair extension, with both new points explicitly outside the old arc | baer | lean `RelativeConicArcs/Q25PairResult.lean` `f2_pair_extension`; concrete field, both normalizations, all 46,056 reflected rows, semantic transport, and axiom profile are kernel-checked and adversarially reviewed; census/minimum 32 not claimed |
