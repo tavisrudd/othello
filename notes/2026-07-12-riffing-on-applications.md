@@ -7010,3 +7010,57 @@ My first bets would be:
 6. **Proof-carrying causal benchmark** as the infrastructure paper.
 
 The information-geometry direction is intellectually attractive, but I would not lead with it. The clean route is first to define and validate discrete completion geometry on a specific statistical or causal model family, then study how it interacts with Fisher or divergence geometry.
+
+## Fable shortlist — top 10 deliverable spin-off papers (2026-07-13)
+
+Ranking criteria: (interesting × deliverable), with deliverable weighted heavily — every entry is grounded in a result already proved (Lean-formalized or solver-certified) in `papers/papers-index.md`; the theorem in hand is most of the paper, and what remains is mostly writing. Cross-check each against the `papers-planning.md` decomposition rulings before spinning out, to keep the salami-slicing guardrail intact (several are cross-listed with a parent paper and should be extracted, not duplicated).
+
+**Rank 1 — The icosahedron inside PG(2,11): a conic-relative arc game with a one-factorization**
+Short paper: the q=11 conic-relative extension complex is exactly the icosahedral graph — independence polynomial `1+12t+36t²+20t³`, colored chord decomposition completing to a one-factorization, and an exact P-position by antipodal mirror; q=9 terminal witness as companion.
+Reuses: comp-q11-icosahedral, comp-q11-chord-decomposition, comp-q11-extension-complex, comp-q9-terminal, thm-relative-game-localization — all Lean kernel-checked.
+Easy: every claim is already `sorry`-free in `lean/RelativeConicArcs/Q11*`; zero new proving, only exposition. Exceptional-object appeal carries the venue case.
+
+**Rank 2 — A Lean 4 library for finite projective planes, arcs, and linear codes (ITP/CPP paper)**
+Systems paper on the `lean/FiniteGeom` + `RelativeConicArcs` + `RepairCodes` library: incidence planes, conics/Baer/Frobenius, MDS/Singleton, moment curve, completion δ=τ suite, and the TRUST.md axiom-clean discipline (no `native_decide`, kernel `decide`, `getK` pattern).
+Reuses: the entire formalized base (thm-singleton-mds, lem-twisted-cubic, thm-completion-tau family, thm-baer-frobenius, and the arcs certificate stack).
+Easy: the library is complete and audited; the paper is a description of what exists plus design lessons. ITP venues explicitly want this genre.
+
+**Rank 3 — A projectively non-GRS [6,3,4]₁₁ MDS code whose deep holes are a conic**
+Coding note: explicit non-GRS MDS code of covering radius three whose distance-three syndrome rays are exactly the standard conic, with the full exact syndrome distribution `(1,60,1150,120)` and minimum-weight split — deep holes of MDS codes is an active literature.
+Reuses: comp-q11-mds-deep-holes (`Q11Coding.lean`, `Q11Semantic*`), thm-arc-mds-syndrome.
+Easy: all theorems Lean-checked and already written up inside the arcs manuscript's Prop `prop:q11-code`; extraction + literature framing is the whole job.
+
+**Rank 4 — Prescribed distance-three loci: covering codes with holes (the sanctioned post-arcs companion)**
+The coding translation of the arcs problem: relative completeness = syndrome confinement, defect = leader-collision identity, extension = conflict-hypergraph independence, giving length obstructions for codimension-three MDS systems with prescribed deep-hole locus.
+Reuses: thm-relative-syndrome-confinement, thm-defect-leader-collision, thm-extension-conflict-hypergraph, thm-arc-mds-syndrome.
+Easy: already ruled a companion paper in `papers-planning.md` ("audited first, never delaying arcs"); the dictionary theorems are all Lean-proved — the work is assembling a coding-native narrative.
+
+**Rank 5 — Sharp evaluation avoidance over finite fields**
+Self-contained note: for any feature map (all Veronese degrees), a form vanishing on U and avoiding A (|A|≤q) exists iff span ν(U) is proper and misses every ν(a); with the quantitative rank-sensitive lower bound and the sharp q+1 plane cover.
+Reuses: thm-evaluation-dichotomy, lem-uncovered-evaluation-obstruction (`EvaluationDichotomy.lean`, `EvaluationObstruction.lean`).
+Easy: theorem + sharpness examples fully formalized; a 6–10 page note with a short survey of polynomial-method neighbors. Main open task is a novelty sweep against Alon-Füredi-type results.
+
+**Rank 6 — Kernel-checked exhaustive classification without native_decide: the PG(2,16) certificate stack (CICM/ITP methodology)**
+Methodology paper: the four-layer StepBook reduction that reproduces the 2633 eight-arc classes and refines them (2630 full-rank / 3 forced-hit), all under kernel `decide` with split generated certificates and a differential-tested C++ generator.
+Reuses: lem-rho16-projective-reduction, comp-rho16-classes, thm-uncovered-quadratic-obstruction; the `Q16StepKernel`/`Q16CertificateData` machinery.
+Easy: infrastructure and audit notes exist (`2026-07-13-rhoc16-novelty-check.md`); paper = architecture description + trust argument. Complements Rank 2 without overlapping it.
+
+**Rank 7 — Node-Kayles nimbers on Cayley graphs of small nonabelian groups**
+Games note: complete Grundy classification for S₄ (all triples 𝒢=0) and A₅ (𝒢=1 exactly for (2,3,5),(2,5,5)) regular templates, framed by the dihedral residual method; Möbius-ladder nimber sequence as an OEIS byproduct.
+Reuses: comp-s4-nimbers, comp-a5-nimbers (`rust/scripts/nodekayles_cayley.rs`), thm-v4-k4 framing.
+Easy: solver data done and cross-checked; currently a dihedral appendix — spin out only if the dihedral referee wants it cut, per the planning bundling ruling. Needs the `getK`-pattern certification pass to meet the release gate.
+
+**Rank 8 — Mirror strategies from projective involutions (expository, Monthly/Intelligencer)**
+Expository article: one theorem (fpf line-preserving involution ⇒ second player wins) explains P-outcomes across AG(n,q), PG(n,2), elliptic/hyperbolic quadrics, and even-order planes, with the parabolic/Hermitian boundary as the punchline.
+Reuses: thm-mirror-general, thm-cap-affine/binary/elliptic/plane-even/hyperbolic, thm-mirror-boundary.
+Easy: all instances Lean-proved for nofil; this is a re-telling for a general audience, not new math. Sequence after (or with) the nofil submission so it cites, not scoops, the research paper.
+
+**Rank 9 — Machine-checked sharpness: a gallery of boundary counterexamples in finite geometry and coding**
+Compact note assembling the formalized "why the hypotheses are needed" examples: GF(3) failure of both repair-transfer gates exactly at the boundary, capacity-2-only discharge sharpness, and the mirror-method boundary.
+Reuses: thm-transfer-boundary (`TransferBoundary.lean`), thm-capacity2-sharp, thm-mirror-boundary.
+Easy: counterexamples exist and two of three are kernel-checked; the note argues formalized sharpness certificates as a genre. Lower rank because it must be careful not to strip-mine the parent papers' own sharpness sections.
+
+**Rank 10 — Certified exact-game benchmarks: P-positions and nimbers with Lean-checkable ground truth (ML datasets/benchmarks track)**
+Dataset paper: package the cap-game/Node-Kayles/queens exact values and Lean certificates as a representation-learning benchmark with provably correct labels and known symmetry structure (RIFF_19, RIFF_9, RIFF_42 flavor).
+Reuses: the nofil outcome theorems, comp-a344227, comp-s4/a5-nimbers, the solvers, and the certificate infrastructure.
+Easy-ish: all ground truth exists; unlike ranks 1–9 this needs packaging, loaders, and baseline runs — the only entry with real new infrastructure, hence last despite broad-audience upside. Also the only one touching the "cross-domain transfers parked" ruling; treat as opt-in.

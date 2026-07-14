@@ -345,3 +345,19 @@ versus lifted bounded port, the strict asymptotic endpoints, theorem labels and 
 proof ledger, TRUST boundary, README, paper index, planning registry, queue, and both handoffs.
 The regenerated PDF and synchronized package pass the internal release checklist. External
 specialist citation-chain review remains a submission preflight gate only.
+
+## 2026-07-13 — cross-lane review and C115–C120 spin-off
+
+The D-PC10/11 equivariance was externally verified:
+`⟨T_a,inv,scaling⟩ = PGL(2,q)` has order `q³−q`, preserves the completed cubic–axis system, and
+makes its repair invariants orbit-constant. Consequently D-PC9's weight distribution reduces to
+orbit counting. The review also corrected the D-PC9 register: the minimum weight `q` has `q+1`
+words, not `q²−1`.
+
+The BDMP corpus and Günay–Lavrauw comparison did not locate the `(C∪axis)` five-weight code, but
+showed it to be a modest, readily absorbed consequence of the classical twisted-cubic orbit
+tables. It is therefore banked as a certified five-weight family without a discovery claim. The
+high-value surviving direction is the external-point transversal spectrum from completion §6.5,
+now tracked separately in the
+[twisted-cubic transversal-spectrum handoff](../2026-07-13-twisted-cubic-transversal-spectrum.md)
+as C115–C120.

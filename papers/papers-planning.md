@@ -236,6 +236,17 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 
 Post-review dispositions:
 
+- **Determinant-hypergraph program identity (2026-07-13, cross-lane).** The twisted cubic in
+  `PG(3,q)` is a *third* shared object (alongside the arc/conic conflict graph and the `δ=τ`
+  transversal): coding's D-PC9 `(C∪axis)` weight distribution, completion §6.5's external-point
+  transversal spectrum `ρ(x)=τ`, and arcs' `d=2` conic defect are the on-curve / off-curve / `d=2`
+  instances of one "circuit/determinant hypergraph of small linear dependencies." State this once per
+  intro to convert the salami-slicing risk into a program identity (same discipline as the √(2q)
+  coordination). The equivariance backbone `⟨T_a,inv,scaling⟩=PGL(2,q)` is verified; the
+  external-point τ-spectrum (a stated §6.5 open problem, likely reducible to max-arc-in-a-cubic via
+  projection) is the live prize. Follow-up: `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`
+  (C115–C120); writeup task C119.
+
 - **Coding / LRC → Paper 6 assembled and internally audited.** `coding-repair-hypergraphs/` contains
   the manuscript, PDF, proof ledger, and adversarial novelty report. `RepairCodes` proves the trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed

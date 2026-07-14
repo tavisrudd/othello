@@ -8,6 +8,10 @@ external specialist citation-chain review remains a submission preflight gate, n
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
 
+**Follow-up:** the twisted-cubic transversal spectrum spun off to
+[C115–C120](2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in
+the [companion archive](done/2026-07-13-projective-completion-repaircodes-archive.md).
+
 ## Goal and claim ledger
 
 Study the full projective twisted cubic over a finite characteristic-three field together with its
