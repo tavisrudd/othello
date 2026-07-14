@@ -210,6 +210,10 @@ exhaustive at q=11 only, consistent with the q=19 failure — the rigidity is it
 theorem are SAFE to claim "first"; but the underlying 6-arc *census* and the raw |U| histogram are
 extension-count data likely in Sadeh's F₁₁ thesis — cite Sadeh/Hirschfeld-Sadeh, do NOT claim first
 on the numbers until that thesis is obtained.
+**Open proof obligations (two, currently asserted — see paper outline §Remaining-work):** (1) the
+TFAE (i)⇒(ii) *degenerate-conic exclusion* — prove no 6-arc with |U|∈{12..15} has U on a line-pair;
+(2) the §6 counting-premise lemma "complete-outside ⟹ 15(q−1) ≥ #off-conic" (the only real-math, non-
+enumeration step) + explicit exclusion of q=9. Everything else is certified compute or standard-cited.
 
 ---
 
