@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C114.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C120.**
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -63,6 +63,25 @@ transfer and the second asymptotic rate–distance point; C114 owns exact-claim 
 adversarial review, and synchronized publication. No proposed formula or novelty claim enters the
 paper before its Lean, axiom, computation, and citation gates pass. Start with the
 [projective-completion handoff](handoffs/2026-07-13-projective-completion-repaircodes.md).
+
+**TWISTED-CUBIC CROSS-LANE / DISCOVERY-TRACK FOLLOW-UP (2026-07-13): C115–C120.** Grew out of the
+Discovery-Track triage. One object — the twisted cubic in `PG(3,q)` under `PGL(2,q)` — ties coding
+(D-PC9 weight distribution), completion §6.5 (external-point transversal spectrum `ρ(x)=τ`), and
+arcs (`d=2`). Verified this session: the equivariance backbone `⟨T_a,inv,scaling⟩=PGL(2,q)` (order
+`q³−q`, preserves cubic+axis) → τ is orbit-constant; D-PC9 reproduced exactly (bank as a certified
+five-weight family, modest/absorbable novelty — fix its `q²−1` min-weight mislabel to `q+1`); the
+external τ-spectrum opening confirmed at q=9,27 (τ orbit-constant and strictly finer than the
+published incidence counts). **C115 REPORTED 2026-07-13:** projection→plane-cubic reduction proved
+(`τ(x)=(q+1)−max-no-3-collinear` of `π_x(C)`); orbit→type dictionary (axis=cuspidal, IC=nodal,
+TO/RC=smooth elliptic); **axis closed form `τ_axis = q − r₃(h)`** (cap-set law, verified q=9/27/81 =
+5/18/61), reducing §6.5's axis orbit to the cap-set problem and reusing `zeroSumCapNumber`.
+Lean-certified strict-trust (`RepairCodes.ProjectiveTwistedCubicTransversalSpectrum`, standard
+axioms). **Open piece:** TO/RC/IC exact τ (caps in `E(𝔽_q)`/`𝔽_q^×`) → **C116 next**. Start with the
+[twisted-cubic transversal-spectrum handoff](handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
+Tasks: C115 opt-b [REPORTED] · C116 opt-a (q=81/243 τ via ILP, next) · C117 (prove
+D-PC9 weights by orbit counting + Lean + mislabel fix) · C118 (definitive D-PC9 prior-art sweep) ·
+C119 (determinant-hypergraph program identity into papers-planning) · C120 (separate nofil thread:
+fixed-locus / quadric-Witt dichotomy leap).
 
 1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
    PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
