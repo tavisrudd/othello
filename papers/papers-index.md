@@ -26,13 +26,16 @@ audit. See `papers-planning.md` for the rulings, submission sequence, and per-pa
 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds, MDS syndrome form) | Self-contained manuscript + PDF + independent checkers + strict-trust Lean formalization; strengthened q11 code/extension spectrum included; near submission-ready — *related but separate* |
 | `coding-repair-hypergraphs` | Complete repair hypergraphs under concatenation: a twisted-cubic--axis family | Self-contained manuscript + proof/novelty ledgers + strict-trust Lean package; internal adversarial audit complete, external specialist priority check remains |
-| `clebsch-hexagon-code` | The Clebsch hexagon code: a rigidity theorem for deep holes (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic) | Full LaTeX working draft + PDF + independent Python checkers for every finite claim; Lean formalization planned, not built; open lit items (Sadeh/Hirschfeld–Sadeh 1984 census cite, DMP Thm 6.3 hypothesis pin) — *spun out of the `arcs` q=11 material after the Fable decomposition ruling, so not among its five+1* |
+| `clebsch-hexagon-code` | The Clebsch hexagon code: a rigidity theorem for deep holes (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic) | Full LaTeX working draft + PDF + independent Python checkers for every finite claim; Lean partially built (deep-holes/radius/leaders + Schreier=icosahedron certified strict-trust; chirality/gap/TFAE open); DMP Thm 6.3 pin CLOSED, Sadeh census cite confirmatory/non-blocking — *spun out of the `arcs` q=11 material after the Fable decomposition ruling, so not among its five+1* |
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: it descends from the
-`arcs` q=11 witness (`comp-q11-mds-deep-holes`) rather than from Package 2, and carries no Lean yet.
+`arcs` q=11 witness (`comp-q11-mds-deep-holes`) rather than from Package 2, and shares that witness's
+`lean/RelativeConicArcs/` library rather than owning one.
 Venue target is Designs, Codes and Cryptography / Finite Fields and Their Applications / J. Geometry —
-explicitly **not** IEEE-TIT. Outline and open work: `../notes/2026-07-13-clebsch-hexagon-paper-outline.md`.
+explicitly **not** IEEE-TIT. Lane map (the doc to read first, incl. Lean-gallery state):
+`../notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md`; the paper's own work-list is
+`../notes/2026-07-13-clebsch-hexagon-paper-outline.md`. Lane alias `clebsch` (CLAUDE.md routing).
 
 ## Sequence submissions (OEIS) — see `oeis-submissions/`
 
@@ -82,12 +85,18 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   completion δ_x = τ base identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
   (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
   (`lean/RelativeConicArcs/`).
-- **Planned, not built:** `ContinuationRigidity`; and the whole `clebsch-hexagon-code` package — its
-  rigidity/gap/chirality/`q=11` claims are currently checker-grade Python only, so the paper is
-  release-blocked under the gate below. All of it is expected to be `decide`-grade except the 1548-arc
-  TFAE sweep, which likely needs `native_decide` (an open decision, since that would breach the
-  axiom-clean bar). The exact quadratic Baer pair-extension data and semantic arc extension are
-  Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
+- **Partially formalized — `clebsch-hexagon-code` (Lean gallery, plan A = small `decide` pieces
+  first):** the deep-holes=conic, covering-radius-three, and 20-leader facts are already certified in
+  `RelativeConicArcs/Q11Coding.lean` + `Q11Semantic*.lean` (shared with `arcs`, see
+  `comp-q11-mds-deep-holes`); `Q11Coding.lean` `residual_graph_icosahedral` certifies the §7
+  Schreier=icosahedron witness — 5-regular, 30 edges, every vertex link a 5-cycle, pure `decide`,
+  standard axioms, **no `native_decide`**, strict-trust clean. Still open, hence release-blocked under
+  the gate below: **chirality ℤ/2** (needs new infra — no `A₅`-on-columns action exists in Lean; the 60
+  matrices are in `check_ten_arc_foil.py`); **gap theorem** (252 perturbations) and **rigidity TFAE**
+  (1548 arcs), both gated on an open `native_decide`-vs-strict-trust decision. Lane map:
+  `notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md`.
+- **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data and
+  semantic arc extension are Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
 - **Axiom-clean bar:** `KleinFourBridge.explicit_pairProducts` now uses kernel `decide`; the former
   `native_decide` exception is closed. The coding/LRC chain is likewise `native_decide`-free; see
   `lean/RepairCodes/TRUST.md` and its dated adversarial review.

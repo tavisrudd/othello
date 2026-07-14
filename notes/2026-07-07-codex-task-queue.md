@@ -11,11 +11,13 @@ file; Codex does the work, writes findings there (verbatim commands/outputs for 
 marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C134.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
-`- **C135 `[hexagon]` [QUEUED …]** — …` — from the routing table in CLAUDE.md (`baer`, `cap`,
-`cubic`, `hexagon`, `icosa`, `kayles`, `queens`, `relconic`, `repaircodes`). Exactly one lane per
+`- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md (`baer`, `cap`, `clebsch`,
+`cubic`, `hexagon`, `kayles`, `queens`, `relconic`, `repaircodes`). Exactly one lane per
 item; peg in the same edit that allocates the ID; an unpegged row is a bug. The section groupings
 below are presentation only — **the tag is the fact, and wins when they disagree**. Re-pegging is a
 lane switch and needs explicit approval. All rows were pegged 2026-07-14.
+(Never write a concrete unallocated ID in an example — always `C<id>`. `max(CNN)+1` is how the next
+ID is computed, so an invented ID in prose silently burns that number.)
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md).
@@ -29,45 +31,45 @@ lane switch and needs explicit approval. All rows were pegged 2026-07-14.
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
-- **C121 `[icosa]`** — Aut(code)=A₅ + 2-transitive CONFIRMED; deep-hole leaders = **two** size-10 orbits (not
+- **C121 `[clebsch]`** — Aut(code)=A₅ + 2-transitive CONFIRMED; deep-hole leaders = **two** size-10 orbits (not
   one). `[REPORTED 2026-07-13]` → `notes/2026-07-13-c121-icosahedral-mds-checks.md`
-- **C122 `[icosa]`** — novelty audit: headline = "deep holes = F_q-points of a named variety + dual-variety
+- **C122 `[clebsch]`** — novelty audit: headline = "deep holes = F_q-points of a named variety + dual-variety
   conjecture"; drop "first non-GRS"; blocking O'Keefe–Storme arc check. `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c122-deep-hole-novelty-audit.md`
-- **C123 `[icosa]`** — k=4 dual-variety test: **CLOSED NO-GO** (2 independent adversarial passes). Conjecture
+- **C123 `[clebsch]`** — k=4 dual-variety test: **CLOSED NO-GO** (2 independent adversarial passes). Conjecture
   ill-posed + tautological at k=3 + FALSE at k=3 (q=19 hexagon: ≥105 deep holes vs 20) + impossible
   at k=4 (plane∩ruled-surface; bisecant capacity Ω(q³)) + ZWK 2020 subsumes/refutes GRS shadow. Do
   not compute; record impossibility lemmas + q=19 counterexample instead.
-- **C124 `[icosa]`** — L2: Petersen (adjacency "share 2 of 3") + chirality Z/2 (orbit-swap = odd perms)
+- **C124 `[clebsch]`** — L2: Petersen (adjacency "share 2 of 3") + chirality Z/2 (orbit-swap = odd perms)
   CONFIRMED; five-tetrahedra pairing REFUTED (A₅-on-10 primitive). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c124-petersen-chirality.md`
-- **C125 `[icosa]`** — L1: REAL — genuine reduction mod 11 of Klein's forms/group (f→12 conic pts, six
+- **C125 `[clebsch]`** — L1: REAL — genuine reduction mod 11 of Klein's forms/group (f→12 conic pts, six
   diagonals→chords, poles→arc); 11 uniquely optimal (p+1=12). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c125-klein-resolvent.md`
-- **C126 `[icosa]`** — Family A: chirality-iff-reflection-free CONFIRMED as theorem (Hom(A₄/A₅,ℤ/2)=0);
+- **C126 `[clebsch]`** — Family A: chirality-iff-reflection-free CONFIRMED as theorem (Hom(A₄/A₅,ℤ/2)=0);
   but complete-outside-conic + clean Z/2 are **UNIQUE to icosa/p=11** (octa/cube/dodeca degenerate)
   → q=11 singular, family is a foil. `[REPORTED 2026-07-13]` → `notes/2026-07-13-c126-platonic-family.md`
-- **C127 `[icosa]`** — novelty: arc = **Clebsch hexagon** (KNOWN; SVM 1995 + Dye 1991); Klein reduction
+- **C127 `[clebsch]`** — novelty: arc = **Clebsch hexagon** (KNOWN; SVM 1995 + Dye 1991); Klein reduction
   PARTIAL (hedge Elkies §3.3, Dickson invariant); coding bridge NOVEL; "Adler icosahedron/PSL₂(11)"
   paper does NOT exist. Must-read: Dye 1991. `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c127-klein-reduction-novelty.md`
-- **C128 `[icosa]`** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
-- **C130 `[icosa]`** — parent-program feed: **CLOSED NEGATIVE** — both levers shared-machinery-but-no-new-
+- **C128 `[clebsch]`** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
+- **C130 `[clebsch]`** — parent-program feed: **CLOSED NEGATIVE** — both levers shared-machinery-but-no-new-
   content (Lever 1 wrong quantifier dir + dim-1, only reproduces classical √(2q) sealing bound; Lever
   2 = corollary of parent Thm 2.1/Cor 2.2). Spin-off does not feed C84; don't route C84 through it.
   `[REPORTED 2026-07-13]` → `notes/2026-07-13-c130-parent-feed.md`
-- **C129 `[icosa]`** — must-read sources: **Dye-1991 gate CLEARED** (verdict NO via Dye's own zbMATH review +
+- **C129 `[clebsch]`** — must-read sources: **Dye-1991 gate CLEARED** (verdict NO via Dye's own zbMATH review +
   SVM Remark 2 + Dye 1997 recap — safe to draft w/ footnote, ILL open); citations locked (ZWK I.4–I.7,
   DMP 1909.00207, O'Keefe–Storme, Hirschfeld–Sadeh 1984). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c129-mustread-sources.md`
-- **C131 `[hexagon]`** — Sadeh-thesis on-receipt verification (**confirmatory, non-blocking** — priority on the
+- **C131 `[clebsch]`** — Sadeh-thesis on-receipt verification (**confirmatory, non-blocking** — priority on the
   |U| extension-count spectrum is granted to the arc-classification literature outright). When the
   Sussex thesis (~1984) / Hirschfeld–Sadeh Giessen 164 (1984) arrives: (a) confirm no over-concession
   beyond the extension-count spectrum — in particular that it does NOT state the deep-hole/covering
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
   audit + paper-outline §Remaining-work.
-- **C132 `[icosa]` [CLOSED NEGATIVE 2026-07-14; ADVERSARIALLY CORRECTED]** — none of the four tested
+- **C132 `[clebsch]` [CLOSED NEGATIVE 2026-07-14; ADVERSARIALLY CORRECTED]** — none of the four tested
   second-instance targets realizes the arc/deep-hole template. The 27-line model is correctly
   `Q⁻(5,2) ⊂ PG(5,2)` (not `PG(5,4)`), hence has 36 external points but is non-cap because it
   contains 45 lines. Valentiner and Hesse finite checks now have a durable independent verifier;

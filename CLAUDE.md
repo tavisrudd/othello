@@ -21,9 +21,10 @@ Rules:
 live is a property of the conversation, not of this file. Never infer it from the newest commit, the
 highest-ranked queue task, or the lane worked last session.
 
-**Selecting a lane.** Each lane below has a **bold alias**. Saying the alias — bare (`hexagon`) or
-as `go <alias>` (`go hexagon`) — selects that lane and resumes it from its entry doc.
-`@notes/handoffs/<name>.md go` likewise selects that handoff's lane.
+**Selecting a lane.** Each lane below has a **bold alias**. Saying the alias — bare (`clebsch`) or
+as `go <alias>` (`go clebsch`) — selects that lane and resumes it from its entry doc.
+`@notes/handoffs/<name>.md go` likewise selects that handoff's lane. Listed synonyms work too
+(`hexagon` = `clebsch`), but docs and pegs use the canonical alias only.
 
 **Bare `go` / `next?` at the start of a session, with no lane named: ASK which lane.** Do not guess
 and do not default to the most recent anything. Listing the open lanes with a one-line status each
@@ -65,11 +66,6 @@ routing table? (c) which lane next? Wait for the answers.
 - **`cubic`** — Twisted-cubic cross-lane / transversal spectrum (C115–C120): start with
   [twisted-cubic transversal-spectrum](notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
   Next session do **C115 (opt-b) first** — the projection→plane-cubic reduction.
-- **`icosa`** — Icosahedral MDS / deep-holes = conic (C121–C130, C132): start with
-  [icosahedral-mds-deep-holes](notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
-  **Boundary with `hexagon`:** `icosa` is the research lane that produced the q=11 math; `hexagon`
-  is the manuscript that writes it up. Open Lean certs for the paper's theorems (chirality, gap,
-  TFAE) currently sit in `icosa`. If in doubt which owns a new item, ask.
 - **Named-expert context** (not a lane): load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for
@@ -78,12 +74,16 @@ routing table? (c) which lane next? Wait for the answers.
 
 ### Claude WIP
 
-- **`hexagon`** — Clebsch hexagon paper: the `[6,3,4]₁₁` MDS code whose deep holes are a
-  conic. Start with [clebsch hexagon paper outline](notes/2026-07-13-clebsch-hexagon-paper-outline.md)
-  — its *Remaining work before submission* is the live queue. Paper + checkers live in
+- **`clebsch`** (synonym: `hexagon`; shared with Codex; formerly also called the *icosahedral MDS /
+  deep-holes* lane — all one lane, one peg) — the Clebsch hexagon paper: the `[6,3,4]₁₁` MDS code
+  whose deep holes are a conic (C121–C132). Same alias as the paper directory in
+  `papers-index.md`, deliberately: lane, paper, and peg are one word. Start with
+  [icosahedral-mds-deep-holes handoff](notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md) —
+  the live map, including the **Lean gallery** state. Then
+  [paper outline](notes/2026-07-13-clebsch-hexagon-paper-outline.md), whose *Remaining work before
+  submission* is the paper's work-list. Manuscript + checkers:
   [`papers/clebsch-hexagon-code/`](papers/clebsch-hexagon-code/); indexed in
-  [papers-index.md](papers/papers-index.md) under the `clebsch` alias. **No handoff doc yet** — the
-  outline is the live map, and it is the doc to update at end of session.
+  [papers-index.md](papers/papers-index.md) under the `clebsch` alias.
 - **`cap`** (shared with Codex) — use the same
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md)
   handoff unless the user names a different lane.
@@ -210,8 +210,12 @@ reported ID; on a collision, renumber the newer/less-referenced one (e.g. C74→
 alias from the routing table above:
 
 ```
-- **C135 `[hexagon]` [QUEUED 2026-07-14]** — one-line description → report path
+- **C<id> `[clebsch]` [QUEUED 2026-07-14]** — one-line description → report path
 ```
+
+Never write a concrete unallocated ID in an example or template — always `C<id>`. New IDs are
+`max(CNN) + 1` over the queue + handoffs + `notes/`, so an invented ID in prose silently burns that
+number.
 
 The peg is what makes a C item routable; an unpegged row is a bug, not a neutral default. Rules:
 - **Exactly one lane per item.** Work touching two lanes is either two items or one item pegged to
