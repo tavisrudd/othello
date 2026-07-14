@@ -64,11 +64,26 @@ below is DEMOTED to companion history:**
   for every sibling — so the Klein reduction produces the *objects* but does NOT cause the *theorem*.
   **Strike "because"; drop the two-spine architecture.** Keep Klein as a discussion-section remark
   (cf. Elkies §3.3); p+1=12 is a triviality, a remark not an organizing principle.
-- **Dual-variety conjecture: DEAD as stated.** Ill-posed (non-GRS columns don't lie on an RNC —
-  which RNC?); falsified by TRS/ETGRS deep-hole literature if quantified over non-GRS MDS codes;
-  n=1 data point that C126 already surrounds with failures; and where the shape is true it's known
-  (ZWK arXiv:1901.05445 = PRS deep holes via **tangent lines to the RNC**). Demote to a narrow *open
-  question* about orbit-pole constructions, explicitly engaging ZWK + the DMP twisted-cubic tables.
+- **Dual-variety conjecture: DEAD — CONFIRMED by a second independent pass with proofs. C123 = NO-GO.**
+  The dual-variety examination (read ZWK full text) kills it five ways: (i) ill-posed (non-GRS columns
+  aren't on any RNC — only an *existential-curve* repair parses); (ii) **tautology at k=3** — in
+  P(Sym²) the RNC, its dual, and the discriminant conic all coincide (self-dual), so q=11 gives zero
+  evidence distinguishing "dual variety" from "RNC" from "quadric"; (iii) **FALSE as a k=3 law by our
+  own arc family** — the Clebsch hexagon at **q=19** has ≥105 deep holes (counting: 381 pts − 15
+  bisecants×18) vs 20 for a conic; same arc, next prime, dead; (iv) **impossible at k=4** in both
+  radius regimes (every plane meets the ruled developable in ~q rational pts → not deep holes; and
+  bisecant capacity gives Ω(q³) deep holes vs ~q² on the developable); (v) **ZWK 2020 already
+  subsumes+refutes the GRS shadow** — for PRS redundancy-4, deep holes = tangent-developable ∪
+  quadratic-extension family, the dual-variety part a ~2/q *sliver*, not an equality. **Do NOT run
+  C123** (would test an impossible equality against an empty uncovered locus in the degenerate char-3
+  fields). Replace the "forward half" with the **ZWK stratification/excision framing** (below).
+- **Replacement forward framing (survives):** *the Clebsch hexagon's bisecants excise the non-split
+  (quadratic-extension) strata exactly, leaving the disc=0 stratum — a covering coincidence provably
+  unique within its own arc family* (fails at q=19 by counting). Two citable impossibility lemmas
+  (plane-meets-ruled-surface; bisecant capacity q³/2) + the q=19 counterexample close R3/D2 cleanly,
+  no compute. Only surviving forward *question* (pose, don't conjecture): does any radius-4 non-GRS
+  MDS code have deep-hole locus = F_q-points of a *twisted cubic* (the curve, not its developable)?
+  — no candidate arc/mechanism.
 - **Chirality Z/2: survives as a PROPOSITION** (canonical automorphism-invariant Z/2 on deep-hole
   leaders, Lean-certified) — but the group theory is exercise-grade (PSL(2,5) not 3-homogeneous;
   Hom(A₅,ℤ/2)=0). Not a headline.

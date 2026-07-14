@@ -17,8 +17,10 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
 - **C122** — novelty audit: headline = "deep holes = F_q-points of a named variety + dual-variety
   conjecture"; drop "first non-GRS"; blocking O'Keefe–Storme arc check. `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c122-deep-hole-novelty-audit.md`
-- **C123** — (open) k=4 twisted-cubic dual-variety test: uncovered locus = tangent-developable
-  quartic (R3/D2), vs `RepairCodes/ProjectiveTwistedCubicTransversalSpectrum.lean`.
+- **C123** — k=4 dual-variety test: **CLOSED NO-GO** (2 independent adversarial passes). Conjecture
+  ill-posed + tautological at k=3 + FALSE at k=3 (q=19 hexagon: ≥105 deep holes vs 20) + impossible
+  at k=4 (plane∩ruled-surface; bisecant capacity Ω(q³)) + ZWK 2020 subsumes/refutes GRS shadow. Do
+  not compute; record impossibility lemmas + q=19 counterexample instead.
 - **C124** — L2: Petersen (adjacency "share 2 of 3") + chirality Z/2 (orbit-swap = odd perms)
   CONFIRMED; five-tetrahedra pairing REFUTED (A₅-on-10 primitive). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c124-petersen-chirality.md`
