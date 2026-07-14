@@ -92,10 +92,10 @@ geometric rephrasing of invisibility as the secant-orbit center lying on the car
 center-incidence double count, and the local `GF(5)` two-empty-carrier consequence of an
 at-most-four occupied-line bound. `QuadraticInvisible.lean` now proves that bound for cross-pair
 centers in the `(f,e)=(4,2)` profile, and `Q25ProfileFour.profile_four_pair_extension` gives the
-certificate-free semantic extension theorem. What remains prose mathematics is the identification
-of charge multiplicity with endpoint point index and the second-moment partition needed for the
-proposed `s=5,f=0` numerical improvement. Accordingly, no uniform order-five theorem is in the
-trust manifest: only the proposed `f=0` profile bound remains open.
+certificate-free semantic extension theorem. `Q25ProfileZero` kernel-checks the endpoint-index
+bridge and second-moment partition for `(f,e)=(0,4)`, obtaining at least five legal pairs and a
+fresh semantic extension. `Q25AllProfiles.pair_extension` combines this with the checked
+`f=2,4,6,8` cases into the uniform order-five theorem.
 
 ## Audit result
 

@@ -16,6 +16,8 @@ import RelativeConicArcs.QuadraticInvisible
 import RelativeConicArcs.BaerArithmetic
 import RelativeConicArcs.Q25PairResult
 import RelativeConicArcs.Q25ProfileFour
+import RelativeConicArcs.Q25ProfileZero
+import RelativeConicArcs.Q25AllProfiles
 import RelativeConicArcs.Defect
 import RelativeConicArcs.Conic
 import RelativeConicArcs.Asymptotic

@@ -361,17 +361,18 @@ aggregate form and capped-multiplicity moment inequalities.
 identifies the visible charge support with `forbiddenCandidates`, instantiates both exact balances,
 and proves that sufficient aggregate invisible capacity produces a genuine arc extension. The
 geometric identification of invisible classes with fixed centers on a carrier is also checked in
-`QuadraticInvisible.lean`. The remaining formalization boundary is the equality between
-charge-fiber multiplicity and endpoint point index and the order-five `f=0` moment partition.
+`QuadraticInvisible.lean`. `Q25ProfileZero.lean` checks the endpoint-index bridge and the
+order-five `f=0` moment partition, and `Q25AllProfiles.lean` packages the exhaustive uniform result.
 
-### Partially proved Candidate F.2 — profile-sensitive order-five extension
+### Theorem F.2 — profile-sensitive order-five extension
 
 Target statement: if `C` is a Frobenius-invariant eight-arc in `PG(2,25)` and its fixed-point count
 `f` is not two, then `C` admits a conjugate-pair extension. The intended lower bounds are five for
-`f=0` and four for `f=4`; the profiles `f=6,8` already follow from Theorem F. The `f=4` bound and
-semantic extension are kernel-checked; this uniform target remains open only at `f=0`.
+`f=0` and four for `f=4`; the profiles `f=6,8` already follow from Theorem F. Both exceptional
+bounds and semantic extensions are kernel-checked, and `Q25AllProfiles.pair_extension` proves the
+uniform statement (together with Theorem F.3 for `f=2`).
 
-#### Proof and remaining sketch
+#### Proof
 
 Write `f+2e=8`. For every secant orbit joining two distinct conjugate selected pairs, its fixed
 center lies on neither participating mate line. At most `f` fixed-point star lines and `e-2` other
@@ -403,9 +404,8 @@ the balance still needs `R≥17`. Ten of its occupied fixed lines have one-point
 four-mate-line moment estimate from the `f=0` case does not apply. Its external computational
 evidence is recorded next without promoting it to a theorem.
 
-Formalization and novelty boundary: the exact accounting and capped arithmetic are Lean-proved;
-the center-incidence and moment-partition geometry above are unproved proof sketches under the
-project's kernel-only standard. A targeted search found adjacent Baer-involution, arc-completeness, and
+Formalization and novelty boundary: the exact accounting, capped arithmetic, center-incidence,
+and moment-partition geometry above are Lean-proved. A targeted search found adjacent Baer-involution, arc-completeness, and
 conjugate-addition literature, but no exact profile-sensitive statement; this is a priority-search
 result, not a claim of definitive historical novelty. The detailed proof and claim ledger are in
 [`2026-07-13-c99-baer-collision-strengthening.md`](../2026-07-13-c99-baer-collision-strengthening.md).
@@ -605,10 +605,11 @@ Current classification:
 - **Paper-specific checked refinement:** on each empty carrier, the subtraction-free identity
   `legal+M=N+B_ℓ+Σ_q(μ_ℓ(q)-1)_+` separates invisible orbit mass from collision redundancy; its
   aggregate form and the geometric fixed-center interpretation of `B_ℓ` are Lean-proved.
-- **Lean-proved four-fixed-point profile:** the intended `f=4` lower bound of four legal pairs and
-  the resulting semantic pair extension are checked by `Q25ProfileFour`.
-- **Lean-open order-five target:** the intended `f=0` bound has a prose derivation but is not
-  proved; the needed charge-fiber/point-index bridge and moment-partition lemmas remain outside Lean.
+- **Lean-proved zero- and four-fixed-point profiles:** the intended lower bounds of five and four
+  legal pairs and the resulting semantic pair extensions are checked by `Q25ProfileZero` and
+  `Q25ProfileFour`.
+- **Lean-proved uniform order-five theorem:** `Q25AllProfiles.pair_extension` exhausts the
+  parity-allowed profiles `f=0,2,4,6,8`.
 - **Lean-proved exceptional profile:** every `s=5,f=2` invariant eight-arc pair-extends, by
   `Q25PairResult.f2_pair_extension` and its fully checked normalization/coverage chain.
 - **External computational evidence only:** two implementations report `469600` normalized arcs
@@ -724,8 +725,8 @@ is the paper-specific target. The support/invisible/redundancy identity and its 
 instantiation are now Lean-proved. Combining the maximum fiber `μ≤4`, the classical second secant
 moment, and the cross-center incidence bound suggest the `s=5` profile bounds, while external
 enumeration suggests the `f=2` minimum is 32. The `f=2` existence statement is now Lean-proved;
-the `f=4` bound and extension are also Lean-proved. The minimum-32 claim and the `f=0` bound remain
-outside the kernel.
+the `f=4` bound and extension are also Lean-proved, as are the `f=0` bound and uniform existence
+theorem. The minimum-32 claim remains outside the kernel.
 
 ### A.10 Higher-degree Galois orbit extension
 
@@ -786,15 +787,13 @@ nonnegative vertex weights.
 
 The strongest current novelty bets are:
 
-1. Lean-prove every `s=5` profile: the `f=2` and `f=4` existence theorems are complete, so formalize
-   the moment geometry for `f=0`;
-2. a structural inverse theorem for near-equivariant saturation;
-3. an exact finite-geometric cost-of-symmetry family;
-4. a sharp geometric fractional/integral gap;
-5. a new orbit-refined completion/secant spectrum for a nonclassical invariant family.
+1. a structural inverse theorem for near-equivariant saturation;
+2. an exact finite-geometric cost-of-symmetry family;
+3. a sharp geometric fractional/integral gap;
+4. a new orbit-refined completion/secant spectrum for a nonclassical invariant family.
 
 Blocker duality and orbit quotienting are enabling infrastructure, not novelty bets. Task `C99`
 has completed the broad adversarial novelty check and landed the exact correction plus the
-order-five proof targets. The `f=2,4` profiles are now proved in Lean; `f=0` and the uniform
-order-five conclusion remain open. The next action is its kernel formalization; inverse theory is the second lane. See the
+order-five proof targets. All profiles and the uniform order-five conclusion are now proved in
+Lean; inverse theory is the next mathematical lane. See the
 [paper-specific novelty review](../2026-07-13-baer-completion-adversarial-novelty-review.md).

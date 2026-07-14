@@ -2,6 +2,8 @@
 
 **Date:** 2026-07-13
 
+Session history: [`2026-07-13-c99-baer-collision-strengthening-archive.md`](2026-07-13-c99-baer-collision-strengthening-archive.md).
+
 ## Result
 
 The carrier correction is now an exact, subtraction-free theorem in Lean.  In the quadratic
@@ -21,9 +23,9 @@ the Lean declaration `Q25PairResult.f2_pair_extension`.  The theorem does not tr
 enumerator: Lean proves the `GF(25)/GF(5)` model, both projective normalizations, orbit coverage,
 the determinant certificate, and transport back to the paper-facing projective point model. Its conclusion
 explicitly makes both members of the added conjugate pair fresh. The proposed
-`f=4` consequence is now kernel-checked by `Q25ProfileFour.profile_four_pair_extension`, using a
-certificate-free center-incidence proof. The `f=0` consequence remains prose only, so the uniform
-order-five conclusion remains unproved.
+`f=4` consequence is kernel-checked by `Q25ProfileFour.profile_four_pair_extension`. The
+certificate-free `Q25ProfileZero.profile_zero_pair_extension` proves the `f=0` case with at least
+five legal pairs, and `Q25AllProfiles.pair_extension` now closes the uniform order-five conclusion.
 
 No novelty claim is attached to the order-five profile result until a targeted literature check is
 complete.  The exact Frobenius-restricted assembly remains the candidate contribution; fiber
@@ -39,9 +41,9 @@ counting, second secant moments, and capped-multiplicity inequalities are classi
 | C99.4 | visible quadratic charge support equals the coordinate forbidden-candidate set | proved | proved in `QuadraticCollision.lean` | assembled from checked coordinate infrastructure |
 | C99.5 | aggregate invisible capacity forces a genuine arc extension | proved | proved in `QuadraticCollision.lean` | paper-specific consequence; priority open |
 | C99.6 | a cross-pair secant orbit is invisible on at least `s+3-f-e` empty carriers | partially proved: invisibility is exactly center-on-carrier and the center-capacity reduction is proved; the profile-specific occupied-line bound remains | `QuadraticInvisible.lean` | elementary incidence candidate |
-| C99.7 | for `s=5`, profile `(f,e)=(0,4)` has at least five legal conjugate-pair extensions | unproved; prose derivation only | accounting/arithmetic kernel proved; geometric moment partition open | priority irrelevant until Lean-proved |
+| C99.7 | for `s=5`, profile `(f,e)=(0,4)` has at least five legal conjugate-pair extensions | proved | `Q25ProfileZero.five_le_sum_card_legal_profile_zero`; semantic extension in `profile_zero_pair_extension` | targeted search found no exact statement; priority not definitive |
 | C99.8 | for `s=5`, profile `(f,e)=(4,2)` has at least four legal conjugate-pair extensions | proved | `Q25ProfileFour.four_le_sum_card_legal_profile_four`; semantic extension in `profile_four_pair_extension` | targeted search found no exact statement; priority not definitive |
-| C99.9 | every invariant eight-arc in `PG(2,25)` pair-extends | unproved; the `f=2,4` profiles are proved, but `f=0` remains open | partial: `Q25PairResult.f2_pair_extension`, `Q25ProfileFour.profile_four_pair_extension` | priority open only after the remaining profile is proved |
+| C99.9 | every invariant eight-arc in `PG(2,25)` pair-extends | proved | `Q25AllProfiles.pair_extension`, combining the checked `f=0,2,4,6,8` cases | targeted search found no exact statement; priority not definitive |
 | C99.10 | the normalized `(2,3)` profile has minimum legal-pair count `32` | computed datum, not a theorem | not formalized | computational evidence only |
 | C99.11 | every `(f,e)=(2,3)` invariant eight-arc in `PG(2,25)` has a fresh conjugate-pair extension | proved | `Q25PairResult.f2_pair_extension`; both new points are explicitly outside the old arc | targeted search found no exact statement; priority not definitive |
 
@@ -188,9 +190,9 @@ For `(f,e)=(6,1)` and `(8,0)`, the old uniform count already has `M<10`; the exi
 non-full-occupation theorem supplies an empty carrier.  Combining those cases with the two proofs
 above yields:
 
-The checked `f=4` argument and the existing `f=6,8` theorem show that every
-Frobenius-invariant eight-arc in `PG(2,25)` with positive fixed-point count other than two admits a
-conjugate-pair extension. The proposed lower bound five for `f=0` remains unproved.
+The `f=0,2,4` profile theorems and the existing strict count for `f=6,8` exhaust the parity-allowed
+fixed-point counts. `Q25AllProfiles.pair_extension` packages them into a uniform fresh-pair
+extension theorem for every Frobenius-invariant eight-arc in `PG(2,25)`.
 
 For `(f,e)=(2,3)`, `M=12`, `E=17`, and the center bound gives `B≥18`.  The exact balance requires
 `R≥17` to force `L>0`.  The global moment route remains promising, but its occupied-line term must
@@ -284,7 +286,8 @@ two fresh runs produced identical stdout and stderr with SHA-256
 This remains reproducible external evidence for the census size and observed minimum `32`, neither
 of which is a theorem.  The weaker existence statement for every `f=2` arc is now independently
 Lean-proved by a kernel-checked checker with proved normalization, coverage, and semantics.  The
-uniform `s≥5` statement is still not a theorem because `f=0` remains Lean-open.
+uniform order-five existence statement is now independently Lean-proved; it does not use the
+census size or observed minimum.
 
 ## Lean inventory and validation
 
@@ -311,6 +314,9 @@ New checked declarations:
 - `Q25ProfileFour.four_le_sum_card_invisible_profile_four`,
   `four_le_sum_card_legal_profile_four`, and the certificate-free semantic theorem
   `profile_four_pair_extension`;
+- `Q25ProfileZero.five_le_sum_card_legal_profile_zero` and the certificate-free semantic theorem
+  `profile_zero_pair_extension`;
+- `Q25AllProfiles.pair_extension`, exhausting the parity-allowed profiles `f=0,2,4,6,8`;
 - the three numerical balance tails in `RelativeConicArcs.BaerArithmetic`.
 - the concrete quadratic field and degree-two extension in `RelativeConicArcs.FiniteFields`;
 - canonical `PG(2,25)` coordinates and explicit Frobenius in `Q25Coordinates`;
@@ -327,7 +333,8 @@ choom -n 1000 -- nix develop --command lake build \
   RelativeConicArcs.BaerArithmetic \
   RelativeConicArcs.QuadraticCollision \
   RelativeConicArcs.Q25ProfileFour \
-  RelativeConicArcs.Q25PairResult
+  RelativeConicArcs.Q25PairResult \
+  RelativeConicArcs.Q25AllProfiles
 ```
 
 The focused builds pass.  Existing linter warnings replayed from
@@ -359,14 +366,12 @@ foundations `propext`, `Classical.choice`, and `Quot.sound` (the arithmetic tail
 
 The complete proof-validity review is recorded in
 [`baer-completion-adversarial-review.md`](2026-07-12-riffing-on-applications/baer-completion-adversarial-review.md).
-No proof defect remains in the `f=2` or `f=4` subtracks. This does not close C99 as a whole: the
-`f=0` formalization is still the next proof gate.
+No proof defect remains in the `f=0`, `f=2`, or `f=4` subtracks. The uniform theorem has the same
+axiom profile, so C99's order-five existence track is closed.
 
 ## Next proof gates
 
-1. Formalize the charge-multiplicity/point-index equality on empty carriers.
-2. Formalize the `(0,4)` three-way moment partition and derive the semantic extension theorem.
-3. Keep the census size and minimum-32 claim computational unless separately Lean-certified; the
+1. Keep the census size and minimum-32 claim computational unless separately Lean-certified; the
    existence theorem is complete and does not require them.
-4. Run a targeted novelty search for the profile-sensitive order-five theorem before promotion as
+2. Run a broader novelty search for the profile-sensitive order-five theorem before promotion as
    a discovery.

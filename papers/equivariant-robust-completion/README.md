@@ -22,13 +22,14 @@ theorems.
 
 **Post-audit correction:** the classical spread example is restricted to line spreads of
 `PG(3,q)`. The exact linewise refinement separates invisible centered secant orbits from genuine
-charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved. All proposed
-order-five conclusion is only partial: `Q25PairResult.f2_pair_extension` kernel-checks the full
-exceptional `f=2` existence statement, and the certificate-free
-`Q25ProfileFour.profile_four_pair_extension` kernel-checks `f=4`. The `f=2` statement explicitly
+charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved.
+`Q25PairResult.f2_pair_extension` kernel-checks the full exceptional `f=2` existence statement,
+and the certificate-free `Q25ProfileFour.profile_four_pair_extension` kernel-checks `f=4`. The
+`f=2` statement explicitly
 makes both added conjugate points fresh and has passed a second adversarial proof audit. The
-external census size and observed minimum 32 remain computational evidence. No uniform `s≥5`
-theorem is claimed before the remaining `f=0` profile is kernel-verified.
+external census size and observed minimum 32 remain computational evidence. The uniform `s≥5`
+claim does not depend on them: `Q25ProfileZero.profile_zero_pair_extension` kernel-checks `f=0`, and
+`Q25AllProfiles.pair_extension` proves the uniform order-five extension theorem.
 
 **Development draft:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).

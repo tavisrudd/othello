@@ -18,8 +18,10 @@ kernel-checked in `Q25PairResult.f2_pair_extension`; a second adversarial proof 
 proof-validity defect, and the conclusion explicitly makes both added conjugate points fresh. The
 census size and minimum 32 remain external evidence. The certificate-free
 `Q25ProfileFour.profile_four_pair_extension` also kernel-checks the `f=4` profile from center
-incidence and exact balance. The `f=0` moment geometry is the remaining open profile and strongest
-open lever.
+incidence and exact balance. The certificate-free `Q25ProfileZero.profile_zero_pair_extension`
+kernel-checks the `f=0` moment geometry and at least five legal pairs, while
+`Q25AllProfiles.pair_extension` proves the uniform result. The census size and minimum 32 remain
+external evidence only.
 
 **Lean:** the proof spine is built under `lean/FiniteGeom/BaerCompletion/`, with projective-plane,
 coordinate-conjugation, quadratic-Frobenius, exact line-counting, and forbidden-charge consumers

@@ -207,6 +207,8 @@ audit still assigns “priority not definitive.”
 
 No remaining proof-validity defect was found in this round. Subsequent certificate-free work
 kernel-checked the `f=4` profile in `Q25ProfileFour.profile_four_pair_extension`, with focused build
-and axiom audit. The uniform order-five theorem remains open only because the separate `f=0`
-profile has not been formalized, and the stronger Q25 census/minimum claims remain computational
-evidence only.
+and axiom audit. It then kernel-checked the `f=0` profile in
+`Q25ProfileZero.profile_zero_pair_extension` and the exhaustive uniform theorem in
+`Q25AllProfiles.pair_extension`. Their scoped build passes, their sources contain no forbidden
+proof escapes, and their axiom profiles are exactly `[propext, Classical.choice, Quot.sound]`.
+The stronger Q25 census/minimum claims remain computational evidence only.

@@ -171,13 +171,11 @@ move to a less classical invariant family rather than claiming discovery.
 
 The preliminary novelty and general-literature gate is complete. The exact support/invisible/
 collision identities are now Lean-proved, including their quadratic coordinate instantiation and
-semantic aggregate extension consequence. The geometric correction closes `f=0,4` on paper, and
-the certificate-free `Q25ProfileFour.profile_four_pair_extension` now kernel-checks `f=4`; the
-proof ledger and remaining `f=0` formalization boundary are in
+semantic aggregate extension consequence. The certificate-free `Q25ProfileFour` and
+`Q25ProfileZero` modules kernel-check `f=4` and `f=0`, and `Q25AllProfiles.pair_extension` closes
+the uniform theorem. The proof ledger is in
 [`2026-07-13-c99-baer-collision-strengthening.md`](2026-07-13-c99-baer-collision-strengthening.md).
 
 Gate G3 is partially cleared. The exact accounting and the entire exceptional `(f,e)=(2,3)`
 existence theorem are Lean-proved; the external census/minimum remain data only. The uniform
-order-five application is still open because `f=0` relies on unformalized moment geometry. The next
-action is that profile's charge-multiplicity bridge and moment formalization. The spectrum fallback
-remains deferred.
+order-five application is also Lean-proved. The spectrum fallback remains deferred.
