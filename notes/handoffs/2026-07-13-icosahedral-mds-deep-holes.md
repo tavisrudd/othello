@@ -53,6 +53,37 @@ conic `XZ=Y²`). Equivalently a **6-arc off every conic** in PG(2,11).
 | R4 | **Construction principle:** poles of a group orbit → code with prescribed deep-hole variety; family exists where `ρ_𝒞(q) < t₂(2,q)` meets an A₅/A₄ orbit (q=8,9 six-arcs are ordinarily complete → radius 2, empty deep holes) | conjecture |
 | R5 | Non-RS 3-of-6 secret sharing: positionally fair (A₅-transitive, uniform 20-tie) but **not pseudorandom** (deep holes enumerable as 12 conic points; roles leak via 2-transitivity) | reasoning |
 
+## Directions to pursue — re-ranked after C121/C122 (novel × plausible × deliverable)
+
+- **D1 (NEW, top deliverable). Chirality invariant from the two-orbit split.** The 20 wt-3 leaders
+  split into two A₅-orbits of 10, complementation-reversing (S, Sᶜ never share an orbit), and A₅ has
+  **no odd permutation** — so the split is the icosahedron's **chirality**; the absent reflection is
+  what would merge them. Deliverable: define the Z/2 sign on leaders, prove it A₅-invariant and
+  complementation-reversing — all `decide`-grade, in-repo, safely novel. This is R2 inverted into
+  its correct form.
+- **D2 (survivor R3, top thesis). Dual-variety conjecture.** deep holes = F_q-points of the dual
+  variety of the RNC (k=3 conic ✓; k=4 = tangent-developable quartic). C122-certified novel; test
+  uncovered-locus = tangent-developable vs `RepairCodes/ProjectiveTwistedCubicTransversalSpectrum.lean`
+  (= open task **C123**).
+- **D3 (NEW, blocking/defensive). Settle O'Keefe–Storme catalogue** before writing — determines
+  whether we claim "new arc" or "new coding-theoretic reading of a known arc." Our contribution
+  survives either way (nobody connects the arc to a deep-hole/covering-radius statement).
+- **D4 (survivor R1, downgraded to framing).** Position as the **F₁₁ off-conic analogue of the
+  hexacode `[6,3,4]₄`**; precedent + sanity anchor, not a headline. The delta over the hexacode is
+  exactly D1+D2.
+
+**Lead thesis (one sentence):** *the deep holes of a projective non-GRS MDS code are the F_q-points
+of the dual variety of its underlying rational normal curve, exhibited for the `[6,3,4]₁₁` code
+whose columns are the poles of the six icosahedral axes — an A₅-symmetric, chiral off-conic analogue
+of the hexacode.* (If O'Keefe–Storme already has the arc: drop "new arc," keep the dual-variety
+identification + chirality invariant.)
+
+**What the two-orbit fact unlocks (that a single orbit would not):** a canonical Z/2 chirality
+function on every deep-hole coset; a combinatorial witness that the stabilizer is A₅ not S₅; the
+S₆-outer-automorphism made functional (S↦Sᶜ swaps the two D₁₀ classes); a decoder that stores 2 reps
+(10× reduction) whose representative choice *carries the chirality bit*; and a likely k=4 bridge
+("leaders ≅ symmetry orbits on the dual variety") to conjecture alongside D2.
+
 ## Closed / mirage (do NOT claim)
 
 - **M₁₁ / PSL(2,11)-on-11-points / (11,5,2) biplane** — MIRAGE. Those live on 11 points, PSL(2,11)
