@@ -7,12 +7,15 @@ Headline = the **RIGIDITY THEOREM** (Clebsch hexagon is the unique 6-arc in PG(2
 holes lie on a conic, recovering A₅) + p=11 uniqueness (now with a 2-line counting proof) + the
 certified chirality-Z/2 proposition. **Klein two-spine "because" struck** (false by C126); **dual-
 variety conjecture / C123 DEAD** (2 independent passes, q=19 counterexample + k=4 impossibility);
-11-cell/j-function decorative. Loop-back: this is the extremal instance of the **parent conic-
+j-function + 11-cell-*gluing* decorative, but the **hemi-icosahedron face-lattice + edge-level
+Schreier=icosahedron witness is KEPT as a `decide`-grade proposition** (§loop-back) — not demoted. Loop-back: this is the extremal instance of the **parent conic-
 involution Schreier program**.
 **Next session:** Dye gate CLEARED (C129, draftable now w/ footnote; citations locked). Remaining:
 (1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade); (2) write the
-single-spine draft (headline = rigidity theorem; ZWK/DMP/Hirschfeld–Sadeh citations in hand);
-optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
+single-spine draft (headline = rigidity theorem — SAFE as "first" per item-5 round-3 audit; scope
+"first" to the conic-rigidity/covering reading, cite Sadeh for the arc census); ZWK/DMP/Hirschfeld–
+Sadeh citations in hand. **Blocking ILL before claiming "first" on the |U| numbers: Sadeh Sussex
+thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984).** Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
 parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this; family route = C
 (reduce-at-best-prime functor, 27-lines/F₄ seed).
 **Companion log**: append dated riffs to
@@ -80,8 +83,12 @@ below is DEMOTED to companion history:**
 - **Klein spine: DECORATION, and the causal "because" is FALSE by our own data.** f mod 11 is the
   PGL₂(11)-invariant Dickson form (forgot the icosahedron); and C126 shows covering-exactness *fails*
   for every sibling — so the Klein reduction produces the *objects* but does NOT cause the *theorem*.
-  **Strike "because"; drop the two-spine architecture.** Keep Klein as a discussion-section remark
-  (cf. Elkies §3.3); p+1=12 is a triviality, a remark not an organizing principle.
+  **Strike "because"; drop the two-spine architecture.** BUT the sizing was overcorrected: the C125
+  *form-level* reduction (vertex form → 12 conic points, six diagonals → `witnessMissingEdge` chords,
+  syzygy H³+T²=f⁵ via 1728≡1 — all certified, and found **nowhere** in the literature per C127) earns
+  a short **discussion section**, not one line — written explicitly as non-causal and hedged via
+  Elkies §3.3 + the Dickson-invariant note. p+1=12 is a triviality, a remark not an organizing
+  principle.
 - **Dual-variety conjecture: DEAD — CONFIRMED by a second independent pass with proofs. C123 = NO-GO.**
   The dual-variety examination (read ZWK full text) kills it five ways: (i) ill-posed (non-GRS columns
   aren't on any RNC — only an *existential-curve* repair parses); (ii) **tautology at k=3** — in
@@ -104,7 +111,11 @@ below is DEMOTED to companion history:**
   — no candidate arc/mechanism.
 - **Chirality Z/2: survives as a PROPOSITION** (canonical automorphism-invariant Z/2 on deep-hole
   leaders, Lean-certified) — but the group theory is exercise-grade (PSL(2,5) not 3-homogeneous;
-  Hom(A₅,ℤ/2)=0). Not a headline.
+  Hom(A₅,ℤ/2)=0). Not a headline. **Meaning (R-B, re-homed from the demoted framing):** this Z/2 is
+  exactly the obstruction to descending the Clebsch diagonal cubic's full **S₅** down to the conic's
+  **A₅** — the odd elements act on the surface but do NOT descend to PGL₂(11) (the N_{PGL₂(p)}(A₅)=60
+  fact), and only A₄/A₅ lack a sign character, so the phenomenon is icosahedron-only. A clean,
+  previously-unstated *meaning* for the proposition — one paragraph, costs nothing.
 - **11-cell (F1) and j-function (F2): STRIKE / demote to one remark.** F1 uses the degree-11 PSL₂(11)
   action — the very numerology the mirage list bans conflating with our degree-12 object (internal
   contradiction). F2 is a re-labeling of the N2 syzygy. No independent content.
@@ -195,10 +206,19 @@ routine, but *"uniquely the Clebsch hexagon among all 6-arcs has its no-bisecant
 and that condition recovers A₅"* is a genuine **extremal/rigidity theorem** with a proof — not a
 one-arc computation. This is the headline content the surviving paper should lead with. (Caveat:
 exhaustive at q=11 only, consistent with the q=19 failure — the rigidity is itself a p=11 fact.)
+**Priority (item 5, round-3 audit below):** the conic-containment ⇒ A₅ rigidity + the gap/deficiency
+theorem are SAFE to claim "first"; but the underlying 6-arc *census* and the raw |U| histogram are
+extension-count data likely in Sadeh's F₁₁ thesis — cite Sadeh/Hirschfeld-Sadeh, do NOT claim first
+on the numbers until that thesis is obtained.
 
 ---
 
 ## FUSED FRAMING [DEMOTED by red-team above — kept as exploration history]
+
+> **Re-homed as live levers (NOT demoted):** R-A (Brianchon=Eckardt→W(E₆) → family route C),
+> R-B (S₅-non-descent → the chirality proposition in §RED-TEAM), and the hemi-icosahedron
+> face-lattice + Schreier=icosahedron witness (→ §loop-back, kept as a `decide`-grade proposition).
+> The *thesis* is demoted; these sub-items were collateral and survive above.
 
 **Lead thesis (superseded — see red-team):** *The `[6,3,4]₁₁` icosahedral code is the unique prime at which Klein's
 solution of the quintic closes over a finite field — the six columns are the mod-11 reduction of his
@@ -436,7 +456,10 @@ a density test point. Only use: a one-line boundary-evaluator sanity corner (6 c
 
 **C. "Reduce-at-best-prime" functor as a program** [speculative, multi-paper]: census of exceptional
 config × best prime → certified code. Seeds: **27-lines/GQ(2,4)/F₄** (best, loops to hexacode/W(E₆)),
-Hesse/F_p⊇ζ₃, Valentiner A₆⊂PGL₃. Only route to a *family* (primes + dual-variety dead).
+Hesse/F_p⊇ζ₃, Valentiner A₆⊂PGL₃. Only route to a *family* (primes + dual-variety dead). The
+27-lines/E₆ seed's **motivation is R-A** (10 Brianchon points = 10 Eckardt points of the Clebsch
+diagonal cubic ⇒ the W(E₆)/S₅ config on the deep-hole side) — re-homed here as a live lever, not
+demoted exploration history.
 
 **D. Expository / aesthetic** [real, low-risk high-appeal]: a "one object seen ten ways" gem
 (Monthly/Intelligencer/Notices — largely written in this handoff); an interactive visual artifact
@@ -621,6 +644,41 @@ in-repo now).
 hexagon** is the full point set of the A₅-invariant conic — first identification of an MDS code's
 deep holes with the rational points of a named variety — arising as the mod-11 shadow of Klein's
 icosahedron at the unique prime with p+1=12* (+ dual-variety conjecture as the forward half).
+
+## Novelty audit round 3 (item 5 — rigidity-theorem priority check)
+
+Splits the rigidity theorem into two priority layers; verdict below is what the paper may claim.
+**Sharpening that drives it:** U (deep-hole locus) = points off the arc and off all 15 secants =
+the points *extending* the arc to a 7-arc = the exact intermediate data of an extension-based arc
+classification. So the |U| numbers are exposed to prior art; the conic-containment *reading* is not.
+
+- **Arc census (all 6-arcs in PG(2,11) up to PGL) — NOT first; CITE Sadeh.** Sadeh's Sussex thesis is
+  titled *"The classification of k-arcs and cubic surfaces with twenty-seven lines over the field of
+  eleven elements"* — 6-arcs are k-arcs, so the title alone forbids "first classification." Attribute
+  the enumeration to Hirschfeld–Sadeh 1984 + Sadeh thesis + PGOFF §14; do not claim it.
+- **|U| histogram {12,16,18,19,20,21,22} — HEDGE/BLOCKED on "first."** The |U| values are the
+  extension-count data, plausibly implicit in (or printed by) Sadeh 1984. Publish as "we tabulate,"
+  not "first tabulated." Upgrading to "first" requires OBTAINING the Sadeh thesis (+ Hirschfeld–Sadeh
+  1984) and confirming it omits the distribution.
+- **min |U|=12 ⇔ Clebsch — HEDGE.** Clebsch identity is SVM 1995 + Dye 1991 (cite); min extension
+  count could be in Sadeh. State as a reading, not a first.
+- **U ⊆ a conic ⇒ Clebsch/A₅ (the TFAE rigidity, 12→16 gap, and the perturbation/deficiency theorem)
+  — SAFE, claim first.** The conic-containment/covering-radius overlay is alien to extension-based arc
+  classification (which only asks how many extensions / whether complete) and absent from the
+  accessible deep-hole/MDS-covering literature (DMP 2021, ZWK 2019, Al-Ogaidi 2020). Outside Sadeh
+  1984's scope by construction. **This carries the paper's only "first."**
+- **Worst-case survivors (Sadeh classified everything AND listed all |U|):** the rigidity/TFAE
+  theorem, the gap/deficiency theorem, and the deep-holes = named-variety coding identification all
+  remain first. Only the raw enumeration and raw |U| numbers are conceded.
+- **Blocking docs before "first" on the numbers:** (1) **Sadeh thesis**, Sussex ~1984 (EThOS/ILL) —
+  the real gate; (2) **Hirschfeld–Sadeh**, Mitt. Math. Sem. Giessen 164 (1984) 245–257 (ILL); (3)
+  **PGOFF** 2nd ed. §14 (library/Google Books). Dye 1991 is footnote-only (C129 NO), bears on the
+  conic side, non-blocking.
+- **Safe headline wording:** lead with the deep-hole/covering reading and the conic-rigidity theorem
+  as the "first"; cite Hirschfeld–Sadeh + Sadeh thesis for the underlying arc enumeration; scope any
+  "not appeared before" to the reading, not the numbers. With this wording nothing blocks drafting.
+  **Drafted census sentence** is in the paper outline
+  [`2026-07-13-clebsch-hexagon-paper-outline.md`](../2026-07-13-clebsch-hexagon-paper-outline.md) §4.
 
 ## Paper framing
 
