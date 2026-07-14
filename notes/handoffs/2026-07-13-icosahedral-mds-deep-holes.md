@@ -409,11 +409,16 @@ needs the multi-q program.
 
 ### Further mining (broad brainstorm, across sub-fields) — real/spec/mirage
 
-**A. Feeds the PARENT program (highest value):**
-- [real] the counting bound **15(q−1)≥q²−6 ⟹ q≤14** is the same secant-capacity arithmetic as the
-  C84 abundance-first lane — check if it generalizes to a parent-program bound. *Chase first.*
-- [real] **"empty saturation ⟺ all-15 σ_xσ_y elliptic"** trace-criterion — test if it sharpens the
-  C84 escape-kernel / S₄-rooted analysis.
+**A. Feeds the PARENT program — CLOSED NEGATIVE (C130).** *Both levers = shared-machinery-but-no-new-
+content; the spin-off does NOT pay rent to the odd-plane program.* Lever 1 (counting bound) is an
+*upper* bound on q forcing a sporadic extremal — wrong quantifier direction for C84's `≥c·q²` lower
+bound, and it's dim-1 (Θ(q)) coverage, on the known-insufficient side of the parent's own dim-2 wall;
+its only landing (sealing lane) reproduces the classical √(2q) saturating-set bound (arXiv:1505.01426),
+nothing new. Lever 2 (D(S)=∅ ⟺ all-elliptic) is a two-line corollary of the parent's Thm 2.1 + §6.3
+classifier already covered by Cor 2.2; escape children are generic (nonempty varied D(S)), so it adds
+no escape-kernel lemma. Clebsch hexagon = one PGL-orbit at one prime (dim 0 uniform-in-q) → cannot be
+a density test point. Only use: a one-line boundary-evaluator sanity corner (6 centres, D(S)=∅,
+|live|=12, H_S=full PGL₂(11)). **Do not route C84 through the icosahedral results.**
 
 **B. Standalone small spin-offs (cheap, un-run):**
 - [real] **the 10-arc companion** (SVM's other A₅-arc at q=11; radius 2, empty deep holes) — free sibling result.
