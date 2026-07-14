@@ -10,6 +10,13 @@ live doc keeps a pointer only where it still anchors an open frontier — in the
 prose or under *Settled lanes*. What remains below is open work only: active, queued, gated, or
 carrying an explicit open tail.
 
+**No lane is PRIMARY.** This doc describes what each lane's state and next step are; it does not rank
+lanes against each other. The user picks the lane explicitly (see CLAUDE.md → Lane routing), so a
+"primary/pursue-first" label here only competes with that choice — and, having been written at
+different times by different passes, competes with itself: the doc previously called both C84 and C74
+PRIMARY, in different sections, with nothing reconciling them. Record priority *within* a lane freely
+(a ranked next-step list is useful); do not declare one across lanes.
+
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
 marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C134.**
@@ -46,7 +53,7 @@ still require an explicit user gate.
 
 ## CURRENT TOP OF QUEUE (updated 2026-07-13)
 
-**PRIMARY LANE (2026-07-12): conic-involution Schreier graphs → abundance-first — C84.** The conic
+**Conic-involution Schreier graphs → abundance-first — C84.** The conic
 bulk is the induced Schreier graph of `H_S = ⟨σ_x : x∈S⟩ ≤ PGL(2,q)`, so its Node-Kayles value is
 set by the subgroup type of `H_S`. Exact values: two centres fully soluble (paths + uniform
 `2r`-cycles); self-polar `V₄` → `K₄`-unions; `D₈` → `M₈ ⊔ K₂`; `S₄` classes — all
@@ -56,7 +63,7 @@ the small-subgroup regime immediately (children generic, full PSL/PGL) — the c
 **boundary evaluator, not a forcing engine**. **Reprioritized to abundance-first:** S₄-rooted
 escaping 4th centres are conic-only-P at density `≈0.13` (min over classes, q=11–23; verified two
 ways); target `#{y : 𝒢=0} ≥ c·q²`. Pairing/mirror mechanism ruled out (minority coverage) ⇒ the
-bound must be Grundy-arithmetic. **Pursue first.** Notes:
+bound must be Grundy-arithmetic. Notes:
 [Schreier graphs](2026-07-12-conic-involution-schreier-graphs.md),
 [program integration](2026-07-12-conic-involution-residual-graphs.md). Ranking: (1) prove
 positive-density P (S₄ then all triple types); (2) transfer to (ON) — needs a separate exchange
@@ -82,8 +89,7 @@ Lean-built and promoted into the manuscript. C110's independent Python/C++ repla
 axiom audit, primary citation chase, PDF, proof-audit, TRUST, results-index, and projective-cap
 consumer updates pass; the post-audit actual-leader/support bridge and final source consistency
 also pass focused rebuild and axiom audit. Only a shared aggregate rerun after the concurrent Q25
-leaf builder remains. This lane does not displace the C84
-primary odd-plane lane. Start with the
+leaf builder remains. This lane is independent of the C84 odd-plane lane. Start with the
 [strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
 
 **INDEPENDENT REPAIRCODES PROJECTIVE-COMPLETION LANE (2026-07-13): C111–C114.** Test and
@@ -116,7 +122,7 @@ C119 (determinant-hypergraph program identity into papers-planning) · C120 (sep
 fixed-locus / quadric-Witt dichotomy leap).
 
 1. **Cluster 2 / C74 — the open core** (one-intruder pencil N-absorption + recursive reply closure).
-   PRIMARY per C65's route verdict. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
+   C65's route verdict selected this route. Every constituent probe is REPORTED (archived C61–C63, C70, C71);
    the lane itself is open. C75 explains the selector wall; C76 answered the invariant prong
    (frame-relative characters cut collisions 48→1 but leave a residual hard twin, no monotone scalar,
    and no uniform linear selector ⇒ separation not selection). C77 now proves the reservoir-free
@@ -187,7 +193,7 @@ fixed-locus / quadric-Witt dichotomy leap).
 
 - **C110 `[relconic]` [IN PROGRESS 2026-07-13; SHARED AGGREGATE ONLY] — relative-conic novelty, adversarial, and publication closure.** Primary citation chasing marks the `binom(k,3)` farthest-coset leader count, hyperplane threshold, arc/MDS/deep-hole dictionary, and Clebsch interpretation as known. Independent Python/C++ replay, coordinate invariance, perturbed-witness and mutated-generator controls pass. Paper/PDF, proof audit, TRUST, results table, queue, and projective-cap consumer note are synchronized; the final source/claim checklist and post-audit actual-leader bridge pass focused rebuild and standard-axiom audit. Only the shared aggregate rerun remains. Same handoff.
 
-- **C84 `[cap]` [ACTIVE 2026-07-12 — PRIMARY, abundance-first] — conic-involution Schreier catalogue.**
+- **C84 `[cap]` [ACTIVE 2026-07-12 — abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:
   two-centre full decomposition; `V₄`→`K₄`s (Cor 3.2 mod-8); `D₈`→`M₈⊔K₂` (Thm 4.2 mod-8); `S₄`
   classes; orbit-template theorem; `A₄` excluded. Independent field-geometry verification at
