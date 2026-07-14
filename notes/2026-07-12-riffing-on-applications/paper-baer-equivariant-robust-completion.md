@@ -375,6 +375,16 @@ Target statement: if `C` is a Frobenius-invariant eight-arc in `PG(2,25)` and it
 bounds and semantic extensions are kernel-checked, and `Q25AllProfiles.pair_extension` proves the
 uniform statement (together with Theorem F.3 for `f=2`).
 
+A bounded priority search found no exact precursor for the uniform statement. The exhaustive
+complete-arc classifications of Marcugini–Milani–Pambianco and Coolsaet–Sticker prove only that an
+eight-arc in `PG(2,25)` has an ordinary one-point extension, because the smallest complete arcs
+have size 12; they do not force a legal Frobenius-conjugate pair. Baker–Wantz provides genuine
+precedence for Frobenius-invariant arc language and for considering a point with its conjugate in
+a Hughes-plane maximality argument, but not this universal pair-extension conclusion. MDS
+lengthening sources likewise omit the Galois-pair constraint. The defensible priority wording is
+therefore “no exact precursor located in a bounded search,” not a historical first claim. See the
+[C134 comparison](../2026-07-13-baer-completion-adversarial-novelty-review.md#c134-bounded-priority-search--uniform-pg225-theorem).
+
 #### Proof
 
 Write `f+2e=8`. For every secant orbit joining two distinct conjugate selected pairs, its fixed
@@ -599,8 +609,8 @@ Current classification:
 - **Paper-specific proved assembly:** the exact empty-fixed-line formula, exact nonfixed-secant
   orbit count, injective forbidden-candidate charge, semantic identification of forbiddenness with
   endpoint secant coverage, and `exists_quadratic_pair_extension` together give the quantitative
-  quadratic-Frobenius orbit-extension criterion. This assembled criterion is plausibly unrecorded;
-  its ingredients and union-bound mechanism are elementary or classical.
+  quadratic-Frobenius orbit-extension criterion. No exact precursor was located in the current
+  bounded searches; its ingredients and union-bound mechanism are elementary or classical.
 - **Paper-specific proved corollaries:** the invariant-eight-arc `s≥7` extension statement and the
   denominator-free orbit-saturation inequality. The former is plausibly unrecorded but elementary;
   the latter has the classical Lunelli–Sce/line-covering square-root scale and is not a new
@@ -612,7 +622,9 @@ Current classification:
   legal pairs and the resulting semantic pair extensions are checked by `Q25ProfileZero` and
   `Q25ProfileFour`.
 - **Lean-proved uniform order-five theorem:** `Q25AllProfiles.pair_extension` exhausts the
-  parity-allowed profiles `f=0,2,4,6,8`.
+  parity-allowed profiles `f=0,2,4,6,8`. A bounded zbMATH Open, Crossref, OpenAlex, and
+  source-level search located no exact prior theorem; this is a bounded negative result, not a
+  certified historical novelty claim.
 - **Lean-proved exceptional profile:** every `s=5,f=2` invariant eight-arc pair-extends, by
   `Q25PairResult.f2_pair_extension` and its fully checked normalization/coverage chain.
 - **External computational evidence only:** two implementations report `469600` normalized arcs

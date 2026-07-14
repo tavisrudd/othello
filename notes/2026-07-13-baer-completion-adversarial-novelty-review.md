@@ -8,8 +8,9 @@ including its Appendix A discovery list. No other proposed paper was audited her
 [`baer-completion-adversarial-review.md`](2026-07-12-riffing-on-applications/baer-completion-adversarial-review.md).
 **Method:** three adversarial passes, divided into finite geometry, abstract completion/hypergraphs,
 and applications/algorithms, followed by a claim-by-claim reconciliation with the earlier
-Baer-extension citation audit. This is a broad literature screen, not a claim of exhaustive
-MathSciNet/Zentralblatt priority clearance.
+Baer-extension citation audit. C134 then added a bounded database-level search for the exact
+uniform `PG(2,25)` theorem across finite-geometry and coding vocabularies. This remains a bounded
+negative result, not exhaustive historical priority clearance.
 
 ## Executive verdict
 
@@ -74,7 +75,7 @@ classical; an unformalized new consequence stays conjectural.
 | Theorem E: fixed/conjugate secant decomposition | **Packaging/generalization, low novelty** | Fixed blocks and two-element orbits under an incidence-preserving involution are elementary group-action facts. The abstraction usefully isolates the actual hypotheses, but should not be claimed as a discovery. |
 | Theorem F: exact quadratic conjugate-pair criterion | **Best surviving plausible paper-specific result** | No exact prior orbit-valued criterion with the displayed `E`, `M`, and legal-pair lower bound was located. The three geometric failure cases in fact form an **iff**, but essentially the same conjugate-pair addition maneuver appears in Baker–Wantz's Hughes-plane work. Adjacent group-invariant-arc and Baer-conic papers do not give this general quantitative Galois-orbit count. Frame it as an exact restricted Frobenius incidence criterion; acknowledge the classical maneuver and covering/union-bound mechanism. |
 | Theorem F.1: heterogeneous linewise sum | **Elementary refinement / paper-specific bookkeeping** | `Σ_l(N_l-M_l)_+` is linewise set subtraction, but `M_l` is currently ambiguous. If it counts distinct forbidden candidates, equality is exact; if it counts secant-orbit charges with multiplicity, the expression is only a lower bound. Use separate support and charge-mass symbols. It earns paper weight only if it produces a sharper threshold, equality classification, or inverse theorem. |
-| Theorem F.2: uniform `PG(2,25)` pair extension | **Lean-proved; priority not definitive** | `Q25ProfileZero` and `Q25ProfileFour` kernel-check lower bounds of five and four legal pairs; `Q25PairResult` handles `f=2`; and `Q25AllProfiles.pair_extension` exhausts `f=0,2,4,6,8`. The targeted search found no exact statement, but older tables/code-lengthening terminology remain a priority risk. |
+| Theorem F.2: uniform `PG(2,25)` pair extension | **Lean-proved; no exact precursor located in bounded search** | `Q25ProfileZero` and `Q25ProfileFour` kernel-check lower bounds of five and four legal pairs; `Q25PairResult` handles `f=2`; and `Q25AllProfiles.pair_extension` exhausts `f=0,2,4,6,8`. C134 compared the theorem with the complete-arc classifications, Frobenius-invariant Hughes-plane arcs, small-arc counts, invariant-arc work, and MDS lengthening. The strongest sources prove ordinary one-point extendability or treat different symmetry/parameter regimes; none states or implies a fresh conjugate-pair extension for every invariant eight-arc. This supports only the bounded negative wording, not a first-ever claim. |
 | Theorem F.3: `s=5,f=2` pair extension | **Lean-proved; priority not definitive** | `Q25PairResult.f2_pair_extension` proves universal existence through checked field, normalization, orbit-coverage, determinant, and semantic layers; its conclusion explicitly makes both conjugate points fresh. A second adversarial proof audit found no proof-validity defect. The targeted search found no exact statement, but older tables/code-lengthening terminology remain a priority risk. |
 | Computed datum F.4: `s=5,f=2` census/minimum | **Evidence only; not a claim** | Two external implementations report 469600 normalized arcs and observed minimum 32. These stronger numerical claims are not implied by the Lean existence theorem. |
 | Corollary G: invariant eight-arc extension | **Plausibly unrecorded modest corollary** | No exact `s≥7` formulation was located. It is direct arithmetic from F, not a separate method. Check small complete-arc classifications, especially `PG(2,25)`, for indirect overlap before a priority claim. |
@@ -422,13 +423,64 @@ remain applications unless they yield a new family-specific theorem.
 - Historical involution-quotient/semibiplane context is summarized in Spiro, §6.4.2:
   <https://onlinelibrary.wiley.com/doi/full/10.1002/jcd.21925>.
 
+## C134 bounded priority search — uniform `PG(2,25)` theorem
+
+### Disposition
+
+No source located in the bounded search states or implies the exact uniform theorem:
+
+> Every Frobenius-invariant eight-arc in `PG(2,25)` admits an extension by a fresh nonfixed
+> point together with its Frobenius conjugate.
+
+The result may therefore be described as **having no exact precursor located in this bounded
+search**. Do not call it the first such theorem, certified novel, or historically new. The search
+does not settle priority in unindexed proceedings, non-digitized literature, or subscription-only
+full-text databases.
+
+### Databases and queries
+
+The search used the zbMATH Open, Crossref, and OpenAlex APIs plus source-level web searches. Query
+families were run both with and without punctuation and field notation:
+
+- exact order/size: `PG(2,25) 8-arc`, `PG(2,25) eight-arc`, `order 25 complete 8-arc`,
+  `classification 8-arcs PG(2,25)`;
+- symmetry: `Frobenius invariant arc projective plane`, `Galois invariant arc conjugate pair`,
+  `Baer involution invariant arc`, `Baer subplane invariant arcs PG(2,q^2)`;
+- extension: `conjugate pair addition arc projective plane`, `invariant arc extendable`,
+  `complete arc Frobenius collineation`;
+- coding: `MDS code GF(25) [8,3] lengthening`, `Galois invariant MDS code extension`,
+  `self-conjugate MDS code extension GF(q^2)`;
+- older/non-English vocabulary: `archi invarianti piano proiettivo finito`, `archi completi
+  PG(2,25)`, and citation-chain searches from the located classification papers.
+
+Semantic Scholar's public API returned HTTP 429 during the check and is not counted as searched
+evidence. No direct MathSciNet subscription search was available.
+
+### Strongest source-level comparisons
+
+| Source | Strongest relevant result | Why it does not contain the uniform theorem |
+|---|---|---|
+| Marcugini–Milani–Pambianco, *Complete arcs in `PG(2,25)`* (2007), [DOI](https://doi.org/10.1016/j.disc.2005.11.094) | Exhaustive computation proves the smallest ordinarily complete arc has size 12. Hence every eight-arc has at least one legal added point. | Ordinary one-point extendability neither makes the extension set Frobenius-stable nor guarantees that a legal point and its conjugate are jointly legal. |
+| Coolsaet–Sticker, *A full classification of the complete `k`-arcs of `PG(2,23)` and `PG(2,25)`* (2009), [DOI](https://doi.org/10.1002/jcd.20211) | Classifies complete arcs and records both `PGL` and semilinear stabilizers; again there are no complete arcs below size 12. | It classifies complete arcs, not invariant eight-arcs or symmetry-preserving extensions. Semilinear automorphism data for complete arcs do not supply the required pair. |
+| Baker–Wantz, *An arc partition of the Hughes plane using a field-theoretic model* (2005), [paper](https://msp.org/iig/2005/2-1/iig-v2-n1-p04-p.pdf) | Defines Frobenius-invariant point sets, transfers line-intersection counts between a Desarguesian plane and a Hughes plane, and in a maximality argument considers a point together with its Frobenius image. | The setting and purpose are different; the argument can produce a three-secant on the mate line and gives no universal legal conjugate-pair addition for a small invariant arc in the Desarguesian plane. It is genuine precedence for the maneuver and vocabulary only. |
+| Kaplan–Kimport–Lawrence–Peilen–Weinreich, *Counting Arcs in Projective Planes via Glynn's Algorithm* (2017), [arXiv](https://arxiv.org/abs/1612.05246) | Surveys and extends formulas counting arcs, noting that counts through size eight are known. | Unrefined arc counts contain neither the Frobenius orbit restriction nor an extension theorem. |
+| López–Maisner–Nart–Xarles, *Orbits of Galois Invariant `n`-Sets of `P¹` under `PGL₂`* (2002), [DOI](https://doi.org/10.1006/ffta.2001.0335) | Counts Galois-invariant point sets on `P¹`, equivalently invariant subsets of a rational normal curve in the coding interpretation. | This covers conic-contained arcs and orbit classification on `P¹`, not arbitrary plane eight-arcs or their pair extensions. |
+| Alderson, *Extending MDS Codes*, [paper](https://www.unb.ca/faculty-staff/directory/_resources/pdf/sase/alderson/mds-codes.pdf) | Gives general MDS extendability criteria near maximum length and reviews the arc/MDS dictionary. | The geometric statement here is a symmetry-preserving two-column lengthening `[8,3,6]₂₅ → [10,3,8]₂₅`; Alderson's principal theorem concerns the near-maximum regime `(q+k-2,k)`, not length eight, and imposes no Galois-pair constraint. |
+| Bartoli–Davydov–Marcugini–Pambianco, *On Almost Complete Subsets of a Conic...* (2017), [arXiv](https://arxiv.org/abs/1609.05657) | Relates conic extension to Reed–Solomon extendability. | Its hypotheses restrict the columns to a normal rational curve and its conclusions concern ordinary code extension, not arbitrary Frobenius-invariant eight-arcs or conjugate-column lengthening. |
+
+Group-invariant arc papers located through the citation chains concern prescribed linear groups
+such as `A₅`, `A₆`, or `PSL(2,7)`. Their orbit constructions are adjacent symmetry precedent, but
+the acting groups, orbit sizes, and completeness questions differ from the quadratic field
+automorphism and its two-point orbits.
+
 ## Residual novelty gates
 
 Before submission, the paper still needs:
 
 1. primary citations and exact hypotheses for every surviving Theorem D row;
-2. a database-level priority search for the exact quadratic-Frobenius orbit-extension formula,
-   including non-English and older finite-geometry literature;
+2. if a historical first claim is ever desired, extend C134 to subscription-only and non-digitized
+   sources for the general quadratic-Frobenius orbit-extension formula; the uniform `PG(2,25)`
+   theorem presently has only a bounded negative priority result;
 3. an explicit example separating conjugate-pair saturation from ordinary completeness, if
    Corollary G is to carry conceptual weight;
 4. certify the normalized `f=2` census only if the stronger count/minimum is claimed; the uniform
@@ -436,10 +488,11 @@ Before submission, the paper still needs:
 5. a clean discovery ledger that labels classical formalized infrastructure separately from
    genuinely new mathematical consequences.
 
-Residual uncertainty is concentrated in Theorem F and its exact eight-arc corollary. Older
-monographs, conference proceedings, non-digitized literature, and the full invariant-arc
-classification landscape were not exhausted. The review therefore assigns “plausibly unrecorded,”
-not “certified novel.”
+Residual uncertainty is concentrated in Theorem F and its exact eight-arc corollary. C134 found no
+exact precursor for the uniform `PG(2,25)` theorem, but older monographs, conference proceedings,
+non-digitized literature, subscription-only full text, and the full invariant-arc classification
+landscape were not exhausted. The review therefore assigns “no exact precursor located in a
+bounded search,” not “certified novel.”
 
 ## Final adversarial assessment
 

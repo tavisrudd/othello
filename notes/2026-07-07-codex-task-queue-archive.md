@@ -3593,3 +3593,13 @@ Everything from the `---` below is the verbatim moved content.
   C76 invariant hunt and re-weights (ON) toward the amortized/ledger potential. Report:
   [`2026-07-11-c75-value-blind-selector-impossibility.md`](2026-07-11-c75-value-blind-selector-impossibility.md);
   script `rust/scripts/c75_linear_selector_lp.py`; solver `gridcap-c75`.
+
+## Reported 2026-07-14
+
+- **C134 `[baer]` [REPORTED 2026-07-14]** — a bounded zbMATH Open, Crossref, OpenAlex, and
+  source-level search found no exact precursor for the uniform `PG(2,25)` Frobenius-invariant
+  eight-arc conjugate-pair extension theorem. Ordinary complete-arc classifications imply only a
+  one-point extension; Hughes-plane, invariant-arc, small-arc-counting, and MDS-lengthening sources
+  do not supply the required fresh conjugate pair. The permitted wording is “no exact precursor
+  located in a bounded search,” not a historical-first claim. Report:
+  [`2026-07-13-baer-completion-adversarial-novelty-review.md`](2026-07-13-baer-completion-adversarial-novelty-review.md#c134-bounded-priority-search--uniform-pg225-theorem).

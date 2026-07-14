@@ -25,10 +25,9 @@ lane switch and needs explicit approval. All rows were pegged 2026-07-14.
 ID is computed, so an invented ID in prose silently burns that number.)
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
-[handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md).
-- **C134 `[baer]` [QUEUED 2026-07-14]** — broaden the priority search for the exact uniform `PG(2,25)`
-  Frobenius-invariant eight-arc conjugate-pair extension theorem before any historical novelty
-  claim.
+[handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134 is reported: the bounded
+priority search found no exact precursor for the uniform `PG(2,25)` theorem, while preserving the
+non-historical claim boundary; the next gate is allocation of a separate inverse/equality task.
 
 **Clebsch hexagon paper lane (`clebsch`, 2026-07-13):** see
 [handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the

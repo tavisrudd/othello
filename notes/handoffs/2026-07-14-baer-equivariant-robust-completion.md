@@ -1,8 +1,8 @@
 # Handoff: Baer-equivariant robust completion
 
 **Date:** 2026-07-14
-**Status:** ACTIVE — C133 closed; C134 priority gate is next
-**Tasks:** C134
+**Status:** ACTIVE — C133 and C134 closed; inverse/equality task allocation is next
+**Tasks:** C134 (closed); inverse/equality follow-up unallocated
 
 ## Active-lane lock
 
@@ -57,23 +57,21 @@ endpoint orbits, giving `f+(e-2)`. The final theorem
 witness and subtracts from the `s+1` fixed lines through the center. Scoped build, forbidden-token,
 and axiom audits pass; the axiom profile is exactly `[propext, Classical.choice, Quot.sound]`.
 
-## Current next task — C134
+## Closed path — C134
 
-Broaden the priority search for the exact uniform `PG(2,25)` theorem before making a historical
-novelty claim. Search adjacent terminology in finite geometry and coding theory: invariant arcs,
-Baer involutions/subplanes, conjugate additions, complete arcs, MDS-code lengthening, and classified
-eight-arcs in order 25. Record positive precedence or a bounded negative result with databases,
-queries, and source-level comparisons explicit.
+The bounded zbMATH Open, Crossref, OpenAlex, and source-level search located no exact precursor for
+the uniform `PG(2,25)` theorem. The strongest adjacent sources prove ordinary one-point
+extendability, classify complete arcs, transfer Frobenius-invariant incidence data in the Hughes
+plane, count small arcs, or treat ordinary MDS lengthening; none forces a fresh legal conjugate
+pair. The result may be described only as “no exact precursor located in a bounded search,” never
+as a certified first. Full queries, limitations, and source comparisons are recorded in the
+[C134 priority section](../2026-07-13-baer-completion-adversarial-novelty-review.md#c134-bounded-priority-search--uniform-pg225-theorem).
 
-### Completion gate
+## Current next gate
 
-- The exact uniform theorem has been compared against the strongest located primary sources under
-  all adjacent vocabularies.
-- Any priority statement remains no stronger than the evidence supports.
-- The census/minimum remain computational evidence.
+Allocate a separate Baer-pegged task for a structural inverse/equality theorem near saturation of
+`L + E M = E N + B + R`. Do not fold census certification into that task.
 
 ## Following gates
 
 1. Keep the census/minimum computational by default; certify them only if publication needs them.
-2. After the priority gate, allocate a separate task for a structural inverse/equality
-   theorem near saturation of `L + E M = E N + B + R`.
