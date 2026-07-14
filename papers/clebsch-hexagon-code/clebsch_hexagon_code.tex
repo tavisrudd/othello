@@ -371,8 +371,8 @@ frame; normalizing that frame to $e_1,e_2,e_3,(1,1,1)$ and sweeping the
 remaining two points over all legal completions meets every
 projective class of six-arc at least once, giving $1548$ frame-normalized
 representatives. The enumeration is by representatives, not by classes: a
-class with stabilizer $S$ appears $360/|S|$ times, and summing $360/|S|$
-over the $1548$ representatives gives fifteen classes in all. Exhaustiveness
+class with stabilizer $S$ appears $360/|S|$ times among them, so the class
+count is $\sum_{\text{reps}}|S|/360=15$. Exhaustiveness
 is what the argument needs, and representatives supply it; the multiplicities
 are an artifact of the normalization and carry no projective meaning. For each representative, $\cU(A)$ and its conic
 membership are computed by exact linear algebra (secant coverage by direct
@@ -684,21 +684,29 @@ by Elkies~\cite[\S3.3]{Elkies1999}.
 \label{sec:further}
 
 \paragraph{An edge-level Schreier witness.} Join two of the twelve points of
-$\cC$ whenever the chord through them contains a point of the arc --- that
-is, whenever that chord is a secant of $A$. The resulting graph on twelve
-vertices is the icosahedron: five-regular with thirty edges, and in fact
-isomorphic to the standard icosahedral presentation by an explicit
+$\cC$ whenever the chord through them contains a point of the arc. Each such
+chord is a \emph{uni}secant of $A$, meeting it in exactly one point --- it
+could not be a secant, since by
+Proposition~\ref{prop:deep-holes-conic} no point of $\cC$ lies on a secant
+of $A$ at all; of the $\binom{12}{2}=66$ chords of $\cC$, thirty carry
+exactly one arc point and thirty-six carry none. The resulting graph on
+twelve vertices is the icosahedron: five-regular with thirty edges, and in
+fact isomorphic to the standard icosahedral presentation by an explicit
 vertex bijection. The thirty edges partition into six five-edge matchings,
 one for each point of the arc, consisting of the chords through that point;
 each such matching misses exactly one antipodal pair, the six missed
 antipodal chords are distinct, and adjoining them completes the six
-matchings to a one-factorization. The six antipodal chords are precisely
-\emph{non}-edges of this graph: an antipodal pair spans no secant, which is
-the incidence form of the statement that the arc lies on no conic through
-them. All of this is \texttt{decide}-grade and kernel-checked in the
+matchings to a one-factorization. The six antipodal chords are among the
+thirty-six \emph{non}-edges: an antipodal chord carries no arc point at all.
+That is polarity rather than coincidence --- by
+Definition~\ref{def:hexagon} each arc point is the \emph{pole} of an
+antipodal chord, and a pole lies on its own polar only when it lies on
+$\cC$, which no arc point does. All of this is \texttt{decide}-grade and
+kernel-checked in the
 companion Lean development (the adjacency, the explicit isomorphism, the
-antipodal non-edges, and the one-factorization), and the chord partition is
-recorded in the companion arcs paper~\cite[Prop.~4.6(iv)]{ArcsCompleteOutsideConic};
+antipodal non-edges, and the one-factorization), and both the chord
+partition and the icosahedral identification are recorded in the companion
+arcs paper~\cite[Prop.~4.6(iv)]{ArcsCompleteOutsideConic};
 we do not build any further claim on it here.
 
 \paragraph{An open question: higher $k$.} The present phenomenon is for
