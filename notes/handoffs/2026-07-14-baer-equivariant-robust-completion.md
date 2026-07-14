@@ -3,8 +3,9 @@
 **Lane**: `baer` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-14
-**Status:** COMPLETE — awaiting archive/routing-table disposition
-**Tasks:** C134 (closed), C135 (closed)
+**Status:** ALLOCATED TASKS CLOSED; PAPER NOT CLOSED — referee defects and release gates await
+disposition
+**Tasks:** C99 (closed), C133 (closed), C134 (closed), C135 (closed); no follow-up IDs allocated
 
 ## Active-lane lock
 
@@ -46,6 +47,42 @@ Source of truth:
 - [`2026-07-13-c99-baer-collision-strengthening.md`](../2026-07-13-c99-baer-collision-strengthening.md)
 - [`paper-baer-equivariant-robust-completion.md`](../2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md)
 - [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../2026-07-13-baer-completion-adversarial-novelty-review.md)
+
+## Publication status — major revision
+
+The scoped Lean build for the Baer collision profile, quadratic collision/invisibility modules, and
+the full Q25 profile aggregate passes. The headline uniform theorem is kernel-checked, uses no
+`sorry`/`admit` or custom axiom, and has axiom profile exactly
+`[propext, Classical.choice, Quot.sound]`. No proof-validity defect was found in the Q25 result.
+
+The adversarial manuscript pass has landed the immediate correctness repairs: Theorem A now carries
+the singleton-independence hypothesis; facet radius has distinct notation; Table D is provisional;
+F.1 distinguishes first-order equality from equality in the truncated bound and includes C135;
+Corollary G contains the full-occupation case; the Q25 namespace citation is corrected; and every
+Lean/prose boundary identified by the review is explicit. C135 is correctly described as an
+algebraic equality/excess classification, not the stronger structural inverse theorem.
+
+The artifact remains a paper-development draft. Do not archive this handoff or route the lane as
+finished until the following unallocated release gates are disposed:
+
+1. **Resolve scope.** Either present a focused Baer/Q25 paper or prove a genuine family-specific
+   robust-completion bridge. The current deletion theorem is generic and does not yet couple
+   deletion robustness or multi-insertion to the Q25 conjugate-pair theorem.
+2. **Close the release evidence.** Supply primary citations and precise hereditary
+   systems/hypotheses for every row of Provisional Table D, or remove the table. C134 is a bounded
+   priority search for the uniform Q25 theorem; it does not replace the outstanding specialist/
+   database search for the general quadratic-Frobenius criterion.
+3. **Set the strength claim.** Produce a sharp or near-sharp invariant family, or pitch the theorem
+   as a structural criterion. A structural inverse theorem or pair-saturated non-complete family is
+   a strengthening, not something supplied by C135.
+4. **Produce the submission artifact.** Supply an abstract, bibliography, stable theorem numbering,
+   cross-references, and publication formatting. The global legal-pair cardinality bridge may
+   remain an explicitly identified prose lemma, or be formalized before the full count is called
+   machine checked.
+
+The routing table is also stale: it still sends `baer` to the closed C99.6 review and omits C135.
+Leave that row open until the publication disposition is chosen, then update it together with the
+handoff/archive decision.
 
 ## Closed path — C133
 

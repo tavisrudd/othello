@@ -7,8 +7,10 @@ MDS codes) over finite fields — the unit of extension is a Galois orbit (a fix
 conjugate pair). Headline = the exact quadratic-Frobenius orbit-valued conjugate-pair extension
 criterion (Thm 3.1); the √2·s orbit-saturation lower bound (Cor 3.4) is a classical-scale corollary.
 
-**Status:** source/staging directory folded into the canonical combined paper
-`../equivariant-robust-completion/`. The abstract proof spine and exact coordinate quadratic
+**Status:** source/staging directory feeding the canonical development draft
+`../equivariant-robust-completion/`. The final paper scope is not settled: a focused Baer/Q25 paper
+is currently supported, while a merged robust-completion paper still needs a family-specific bridge.
+The abstract proof spine and exact coordinate quadratic
 pair-extension theorem are Lean-built. Prior-art audit verdict = **SOFTEN**: the √2·s bound is the
 classical Lunelli–Sce √(2q) complete-arc bound at q=s², *not* a new constant — the surviving
 headline is the assembled orbit-valued criterion. The broad 2026-07-13 adversarial audit demotes
@@ -21,15 +23,17 @@ census size and minimum 32 remain external evidence. The certificate-free
 `Q25ProfileFour.profile_four_pair_extension` also kernel-checks the `f=4` profile from center
 incidence and exact balance. The certificate-free `Q25ProfileZero.profile_zero_pair_extension`
 kernel-checks the `f=0` moment geometry and at least five legal pairs, while
-`Q25AllProfiles.pair_extension` proves the uniform result. The census size and minimum 32 remain
-external evidence only.
+`Q25AllProfiles.pair_extension` proves the uniform result. C135 kernel-checks the exact aggregate
+equality/excess classification; this is algebraic bookkeeping, not the still-open structural inverse
+problem.
 
 **Lean:** the proof spine is built under `lean/FiniteGeom/BaerCompletion/`, with projective-plane,
 coordinate-conjugation, quadratic-Frobenius, exact line-counting, and forbidden-charge consumers
 under `lean/RelativeConicArcs/`. See the lane's `TRUST.md`.
 
-**Merge decision:** `completion-core-rigidity` is folded into this development draft as the
-robustness and reconstruction layer.
+**Scope boundary:** `completion-core-rigidity` remains present in the development draft as generic
+robustness infrastructure. It belongs in the submitted paper only if a family-specific theorem
+connects it to the Baer/Q25 extension result; otherwise the focused paper should omit that layer.
 
 **Combined development draft:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).

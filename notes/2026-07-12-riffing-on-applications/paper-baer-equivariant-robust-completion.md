@@ -1,6 +1,6 @@
 # Equivariant extension and robust completion of finite-geometric arcs
 
-Status: expanded paper-development draft
+Status: major-revision paper-development draft; the Q25 theorem is checked, but release gates remain
 Sources: `RIFF_14`, `RIFF_17`, `RIFF_74`, `RIFF_76`, `RIFF_176`, and the Baer-extension and
 completion-core theorem notes
 Lean lane: [`FiniteGeom/BaerCompletion/`](../../lean/FiniteGeom/BaerCompletion/)
@@ -10,26 +10,31 @@ Adversarial reviews:
 validity; [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../2026-07-13-baer-completion-adversarial-novelty-review.md)
 audits every theorem and Appendix A novelty claim.
 
-## Paper decision
+## Scope decision still required
 
-This is the merged version of the Baer-equivariant-extension and completion-core-rigidity projects.
-The Baer orbit-extension criterion is the geometric headline. Completion distance supplies the
-robustness language, the exact transversal identity, and a family of applications. The elementary
-completion formalism is useful mechanism but is unlikely to carry a paper alone; the orbit-valued
-Baer theorem becomes more informative when it says not only whether an arc extends, but how many
-deletions are required before a prescribed extension survives.
+The Baer orbit-extension criterion and its uniform `PG(2,25)` theorem are the geometric headline.
+This development draft also contains the completion-core material, but the present robustness
+theorem is a generic obstruction-persistence companion rather than a family-specific bridge to the
+Q25 conjugate-pair theorem. Before submission, either focus the paper on the Baer/Q25 theorem or add
+a genuine theorem evaluating deletion robustness or multi-insertion for the same invariant-arc
+family. The current draft does not claim that bridge has already been proved.
 
 Working title: *Equivariant extension and robust completion of finite-geometric arcs*.
 
 ## Objects and notation
 
-Let `C` be feasible in a finite hereditary independence system. For `x ∉ C`, let `H_x(C)` be the
-family of minimal subsets `A ⊆ C` for which `A ∪ {x}` is dependent. Define
+Let `C` be feasible in a finite hereditary independence system. For `x ∉ C` such that the singleton
+`{x}` is feasible, let `H_x(C)` be the family of minimal subsets `A ⊆ C` for which `A ∪ {x}` is
+dependent. Define
 
 ```text
 δ_x(C) = min{|D| : D ⊆ C and (C \ D) ∪ {x} is feasible},
-δ(C)   = min_{x ∉ C} δ_x(C).
+δ(C)   = min_{x ∉ C, {x} feasible} δ_x(C),
 ```
+
+whenever the indexing set in the second minimum is nonempty. The singleton hypothesis excludes
+loops: without it, no deletion need make insertion possible and the natural-valued minimum used
+here is not the appropriate convention.
 
 For a planar arc, the edges of `H_x(C)` are the occupied secant pairs through `x`. Write
 `σ(x,C)` for their number. Over `PG(2,s²)`, let `φ:z↦z^s` be the Baer involution. A
@@ -39,7 +44,7 @@ For a planar arc, the edges of `H_x(C)` are the occupied secant pairs through `x
 
 ### Theorem A — completion distance is a circuit-transversal number
 
-For every `x ∉ C`, `δ_x(C)=τ(H_x(C))`.
+For every `x ∉ C` with feasible singleton `{x}`, `δ_x(C)=τ(H_x(C))`.
 
 #### Prose proof
 
@@ -61,8 +66,10 @@ proves the missing semantic bridge as `insertion_indep_iff_no_surviving_trace`. 
 `insertionDistance_eq_transversalNumber` is the genuine independence-predicate version of Theorem A.
 
 Formalization boundary: Theorem A is kernel-checked for arbitrary finite hereditary independence
-systems. Specializing the generic hypergraph to projective caps and identifying its minimal edges
-with geometric circuit traces remains for the cap/arc instance layer.
+systems under the displayed singleton-feasibility hypothesis. `Obstruction.lean` uses all dependent
+traces, and Proposition A.1 justifies passage to their minimal members. The projective-plane arc
+instance is checked in `RelativeConicArcs/CompletionDistance.lean`; exact evaluation for particular
+classical families is separate.
 
 ### Proposition A.1 — minimal obstructions are the canonical presentation
 
@@ -96,14 +103,17 @@ hypergraphs.
 ### Theorem B — sharp deletion radius of a maximal completion
 
 Let the supplied finite facet family be Sperner, let `C` be one of its facets, and assume it has at
-least one alternative facet. Define `δ(C)=min_{F≠C}|C\F|`. If `D⊆C` and `|D|<δ(C)`, then `C` is
-the unique facet containing `C\D`, and `core(C\D)=C`. If `F≠C` realizes `δ(C)` and `D=C\F`, then
-`core(C\D)=C\D`. Thus `δ(C)-1` is the exact adversarial-deletion radius for forced completion.
+least one alternative facet. Define the facet-separation radius
+`ρ(C)=min_{F≠C}|C\F|`. If `D⊆C` and `|D|<ρ(C)`, then `C` is the unique facet containing `C\D`, and
+`core(C\D)=C`. If `F≠C` realizes `ρ(C)` and `D=C\F`, then `core(C\D)=C\D`. Thus `ρ(C)-1` is the
+exact adversarial-deletion radius for forced completion. The notation distinguishes this supplied-
+facet quantity from the insertion minimum `δ(C)` above; identifying them requires the family to
+contain all facets of the underlying independence system.
 
 #### Prose proof
 
 If another facet `F` contains `C\D`, then `C\F⊆D`, and therefore
-`δ(C)≤|C\F|≤|D|`, contradicting `|D|<δ(C)`. Hence `C` is the unique facet through `C\D`, so its
+`ρ(C)≤|C\F|≤|D|`, contradicting `|D|<ρ(C)`. Hence `C` is the unique facet through `C\D`, so its
 intersection-of-facets core is `C`. For sharpness, let `F` realize the minimum and put
 `D=C\F`. Then `C\D=C∩F`. Both `C` and `F` contain this set, so its core lies inside their
 intersection; extensivity gives the reverse inclusion. Hence `core(C\D)=C\D`.
@@ -149,9 +159,11 @@ constructs the endpoint-pair secant hypergraph from Mathlib's abstract projectiv
 `arcInsertionDistance_eq_pointIndex` and its global minimum form
 `arcGlobalInsertionDistance_eq_min_pointIndex`. Exact evaluation for each classical family remains.
 
-### Theorem D — exact radii for classical configurations
+### Provisional Table D — classical completion-radius translations
 
-The obstruction formula yields these standard values:
+The obstruction formula is expected to yield the following standard values. This table is not part
+of the verified theorem package: each row needs a primary finite-geometry citation, an explicit
+hereditary system, and its incidence-count proof before publication.
 
 | configuration | completion distance |
 |---|---:|
@@ -177,8 +189,9 @@ spreads of `PG(3,q)`. An `(n-1)`-spread in `PG(2n-1,q)` induces a subspace parti
 requires the induced-partition parameter and additional hypotheses. See
 [Heden et al., *Extremal sizes of subspace partitions*](https://arxiv.org/abs/1104.2706).
 
-Formalization boundary: paper-proved from standard incidence parameters, not Lean-formalized. Each
-row requires a primary citation and an incidence instance before being called machine checked.
+Formalization boundary: neither the family-specific incidence hypotheses nor these six evaluations
+are Lean-formalized. Until the required primary citations and proofs are supplied, the table is a
+release checklist rather than a theorem.
 
 ### Theorem E — Baer secants form fixed blocks or conjugate pairs
 
@@ -195,7 +208,9 @@ line orbits have size one or two. If a fixed line contains nonfixed `Q ∈ C`, i
 `ℓ∩C={Q,R}`, then `φ(ℓ)∩C={φ(Q),φ(R)}`. The pairs are disjoint: a shared point would lie on both
 distinct lines, hence equal their unique intersection `P`, contrary to `P∉C`.
 
-Formalization boundary: paper-proved; target `BaerPlane.lean`.
+Formalization boundary: the abstract involution statements and their projective-plane incidence
+instances are Lean-checked; the coordinate quadratic-Frobenius specialization is supplied by the
+modules listed below.
 
 #### Lean support
 
@@ -270,9 +285,13 @@ on no old secant and its mate line contains no old selected point, so the three-
 it legal. Every nonfixed conjugate pair has a unique subfield mate line, so summing over the `E`
 empty lines introduces no double counting.
 
-Formalization boundary: the complete coordinate theorem is Lean-proved, including the occupied-line
-formula, exact empty-line count, nonfixed-secant orbit count, injective forbidden charge, and the
-fact that a surviving candidate really preserves the arc property.
+Formalization boundary: the coordinate existence theorem is Lean-proved, including the occupied-
+line formula, exact empty-line count, nonfixed-secant orbit count, injective forbidden charge, and
+the fact that a surviving candidate preserves the arc property. Lean's quantitative count is the
+linewise sum `PairExtensionData.legalCount`. The displayed identification of that sum with the
+cardinality of a separately defined global legal-pair set uses uniqueness of the mate line in the
+prose proof; it is not presently a named Lean cardinality theorem. The three-case classification is
+likewise used as prose motivation, while the checked candidate semantics suffices for existence.
 
 #### Lean support
 
@@ -329,24 +348,49 @@ f_ℓ = A_ℓ-Σ_q(μ_ℓ(q)-1)_+,
 N_ℓ-f_ℓ = N_ℓ-M+B_ℓ+Σ_q(μ_ℓ(q)-1)_+.
 ```
 
-Thus improvement over the uniform `N_ℓ-M` bound has two sources: invisible centered-on-`ℓ`
-secant orbits (`B_ℓ`) and genuine charge collisions (`Σ_q(μ_ℓ(q)-1)_+`). Equality in the uniform
-bound requires both terms to vanish. The checked statement uses the subtraction-free form
+Thus correction to the integer first-order expression `N_ℓ-M` has two sources: invisible
+centered-on-`ℓ` secant orbits (`B_ℓ`) and genuine charge collisions
+(`Σ_q(μ_ℓ(q)-1)_+`). The checked statement uses the subtraction-free form
 
 ```text
 legal(ℓ)+M=N_ℓ+B_ℓ+Σ_q(μ_ℓ(q)-1)_+,
 ```
 
-and an aggregate identity over all empty carriers. A raw second moment does not by itself control
-the forbidden support in the needed direction; the order-five application below also uses the
-maximum fiber size `μ≤4` and a geometric partition of the global second moment.
+and an aggregate identity over all empty carriers. Equality in the first-order identity
+`legal(ℓ)+M=N_ℓ` holds exactly when both correction terms vanish. This is not an equality criterion
+for the truncated lower bound `(N_ℓ-M)_+`: when `M>N_ℓ`, that bound is zero and can be attained with
+nonzero correction. A raw second moment does not by itself control the forbidden support in the
+needed direction; the order-five application below also uses the maximum fiber size `μ≤4` and a
+geometric partition of the global second moment.
+
+#### Aggregate equality and excess classification
+
+Suppose every empty carrier has the same candidate count `N`. Let `E` be the number of empty
+carriers, `L` the aggregate legal count, `B=Σ_ℓB_ℓ`, and
+`R=Σ_ℓΣ_q(μ_ℓ(q)-1)_+`. Then the exact balance is
+
+```text
+L+EM=EN+B+R.
+```
+
+Consequently `L+EM=EN` holds exactly when every obstruction orbit is visible on every carrier and
+each visible orbit-to-candidate charge is injective. In the quadratic geometry, this says that every
+secant-orbit center avoids every empty fixed carrier and the visible charge is collision-free. More
+generally,
+
+```text
+L+EM=EN+k  if and only if  B+R=k.
+```
+
+This is an exact algebraic equality/excess classification. It is not a structural inverse theorem
+classifying invariant arcs with small legal count.
 
 #### Implications
 
 - The theorem survives nonuniform fixed loci, deleted subplanes, weighted candidate restrictions,
   and higher-degree orbit types where different invariant carriers have different capacities.
-- Equality and near-equality can be studied locally through `(f_ℓ,A_ℓ,B_ℓ)` and the multiplicity
-  profile `μ_ℓ`, rather than a single global union bound.
+- First-order equality and excess are classified locally through `(f_ℓ,A_ℓ,B_ℓ)` and the
+  multiplicity profile `μ_ℓ`, rather than a single global union bound.
 - Computations should output these profiles, not only the global maximum `M`. This may expose
   sharper extension criteria even when the uniform theorem is inconclusive.
 - In coding language, the same sum measures heterogeneous coordinate-orbit lengthening capacity.
@@ -356,12 +400,15 @@ forbidden finset, and `PairExtensionData.legalCount_eq_sum_card_sub` proves exac
 when that finset is contained in the candidate set.
 [`FiniteGeom/BaerCompletion/CollisionProfile.lean`](../../lean/FiniteGeom/BaerCompletion/CollisionProfile.lean)
 proves the abstract support, invisible-mass, and collision-redundancy identities, including their
-aggregate form and capped-multiplicity moment inequalities.
+aggregate form, the equality/excess classification, and capped-multiplicity moment inequalities.
 [`RelativeConicArcs/QuadraticCollision.lean`](../../lean/RelativeConicArcs/QuadraticCollision.lean)
 identifies the visible charge support with `forbiddenCandidates`, instantiates both exact balances,
 and proves that sufficient aggregate invisible capacity produces a genuine arc extension. The
 geometric identification of invisible classes with fixed centers on a carrier is also checked in
-`QuadraticInvisible.lean`. That file also proves the generic cross-pair bound: its two endpoint
+`QuadraticInvisible.lean`. The final quadratic declarations are
+`aggregate_firstOrder_equality_iff_centers_avoid_carriers_and_collisionFree` and
+`aggregate_firstOrder_excess_eq_iff_centerIncidence_add_redundancy_eq`. That file also proves the
+generic cross-pair bound: its two endpoint
 orbits have distinct mate lines missing the fixed center, and occupied center-lines inject into
 the `f` fixed selected points plus the remaining `e-2` conjugate selected-point orbits.
 `Q25ProfileZero.lean` checks the endpoint-index bridge and the
@@ -369,9 +416,9 @@ order-five `f=0` moment partition, and `Q25AllProfiles.lean` packages the exhaus
 
 ### Theorem F.2 — profile-sensitive order-five extension
 
-Target statement: if `C` is a Frobenius-invariant eight-arc in `PG(2,25)` and its fixed-point count
-`f` is not two, then `C` admits a conjugate-pair extension. The intended lower bounds are five for
-`f=0` and four for `f=4`; the profiles `f=6,8` already follow from Theorem F. Both exceptional
+If `C` is a Frobenius-invariant eight-arc in `PG(2,25)` and its fixed-point count `f` is not two,
+then `C` admits a conjugate-pair extension. The checked lower bounds are five for `f=0` and four for
+`f=4`; the profiles `f=6,8` already follow from Theorem F. Both exceptional
 bounds and semantic extensions are kernel-checked, and `Q25AllProfiles.pair_extension` proves the
 uniform statement (together with Theorem F.3 for `f=2`).
 
@@ -399,26 +446,28 @@ centers, and the resulting fresh arc extension, is kernel-checked by
 `Q25ProfileFour.profile_four_pair_extension` without generated certificates.
 
 For `(f,e)=(0,4)`, one has `N=10`, `M=12`, `E=27`, and `B≥48`. The global second secant moment is
-`3 choose(8,4)=210`. At fixed external points, the first secant-index sum is `48`; since the index
-is at most four and `2 choose(n,2)≤3n`, their second-moment contribution is at most `72`. The four
+`3·binom(8,4)=210`. At fixed external points, the first secant-index sum is `48`; since the index
+is at most four and `2·binom(n,2)≤3n`, their second-moment contribution is at most `72`. The four
 occupied carriers are exactly the mate secants. If `r_x` is the number of nonfixed secants through
 an external nonfixed point on one of them, then the full index is `1+r_x≤4`. Every one of the 24
 nonfixed secants has external nonfixed intersection with at most the two mate lines not containing
-its endpoints, so `Σr_x≤48`. The inequality `choose(1+r,2)≤2r` for `r≤3` bounds this occupied
+its endpoints, so `Σr_x≤48`. The inequality `binom(1+r,2)≤2r` for `r≤3` bounds this occupied
 contribution by `96`.
 
 The empty-carrier endpoint moment is therefore at least `42`. Conjugate endpoints contribute
-equally, so `T=Σ_q choose(μ(q),2)≥21`. Since `μ≤4`,
-`choose(μ,2)≤2(μ-1)` on nonzero fibers, whence `R≥11`. The aggregate balance yields
+equally, so `T=Σ_q binom(μ(q),2)≥21`. Since `μ≤4`,
+`binom(μ,2)≤2(μ-1)` on nonzero fibers, whence `R≥11`. The aggregate balance yields
 `L≥27(10-12)+48+11=5`.
 
 The remaining profile `(f,e)=(2,3)` has `E=17`, `M=12`, and the center argument gives `B≥18`, but
 the balance still needs `R≥17`. Ten of its occupied fixed lines have one-point trace, so the
-four-mate-line moment estimate from the `f=0` case does not apply. Its external computational
-evidence is recorded next without promoting it to a theorem.
+four-mate-line moment estimate from the `f=0` case does not apply. This analytic route therefore
+does not close that profile; Theorem F.3 supplies a separate finite, kernel-checked proof, while the
+stronger census and minimum remain external data in F.4.
 
 Formalization and novelty boundary: the exact accounting, capped arithmetic, center-incidence,
-the generic `s+3-f-e` cross-pair bound, and moment-partition geometry above are Lean-proved. A targeted search found adjacent Baer-involution, arc-completeness, and
+the generic `s+3-f-e` cross-pair bound, and moment-partition geometry above are Lean-proved. A
+targeted search found adjacent Baer-involution, arc-completeness, and
 conjugate-addition literature, but no exact profile-sensitive statement; this is a priority-search
 result, not a claim of definitive historical novelty. The detailed proof and claim ledger are in
 [`2026-07-13-c99-baer-collision-strengthening.md`](../2026-07-13-c99-baer-collision-strengthening.md).
@@ -437,8 +486,10 @@ first admissible conjugate pair `[1:a+bω:c+dω]`, with `b,d≠0`, to
 `[1:ω:ω],[1:-ω:-ω]`. Both transformations are proved to commute with Frobenius and to preserve
 the cap and pair-extension predicates.
 
-After those reductions, `Q25PairData.L_005.first_slice_005` checks the remaining finite slice by
-kernel reduction of freshness and determinant conditions. `Q25OrbitDecomposition` proves that an
+After those reductions,
+`RelativeConicArcs.Q25PairCertificate.first_slice_005`, in module `Q25PairData.L_005`, checks the
+remaining finite slice by kernel reduction of freshness and determinant conditions.
+`Q25OrbitDecomposition` proves that an
 arbitrary invariant eight-set with two fixed points consists of exactly three nonfixed orbits;
 `Q25PairResult.f2_pair_extension` composes coverage, transports the checked survivor back, and
 returns a nonfixed projective point, states explicitly that both it and its conjugate are outside
@@ -475,10 +526,15 @@ k ≥ 1 + ceil(sqrt(2s(s-1))).
 
 #### Prose proof
 
-Insert `k=8` into the exact inequality underlying Theorem F; for `s≥7`, the available nonfixed locus
-strictly exceeds the bad union. In general, if no pair extension exists, the bad sets cover every
-nonfixed orbit. Rearranging that quadratic covering inequality gives
-`(k-1)² ≥ 2s(s-1)`, and integrality gives the display.
+For `k=8`, Lean gives `M≤12<(s²-s)/2` when `s≥7`. There must be an empty fixed carrier: otherwise
+the completed-square occupation identity would force `k≥s²+1>8`. Theorem F therefore supplies a
+legal pair.
+
+For the general bound, split into two cases. If every fixed carrier is occupied, the same identity
+gives `k=s²+1+(f-s-1)²`, which already implies the displayed lower bound. Otherwise choose an empty
+carrier. If no pair extension exists, all `N=s(s-1)/2` candidates on it are forbidden, so `N≤M`.
+Writing `k=f+2e` gives `M=e((k-1)-e)`, and
+`4M≤(k-1)²`. Hence `2s(s-1)≤(k-1)²`; integrality gives the display.
 
 Novelty boundary: the asymptotic constant matches the classical Lunelli–Sce square-root scale. The
 same line-covering scale is adjacent to Ng–Wild,
@@ -497,9 +553,11 @@ the profile identity `M=fe+e(e-1)`, the uniform eight-arc bound `M≤12`, and
 full occupation forces `k=s²+1+(f-s-1)²`, hence is impossible when `k<s²+1`.
 [`FiniteGeom/BaerCompletion/OrbitSaturation.lean`](../../lean/FiniteGeom/BaerCompletion/OrbitSaturation.lean)
 proves the denominator-free quadratic conclusion `2s(s-1)≤(k-1)²` from the pair obstruction and
-split-product bounds. The ceiling/square-root presentation remains prose arithmetic.
+split-product bounds. There is not yet one Lean declaration deriving the pair-obstruction premise
+from geometric equivariant completeness; the case split above and the ceiling/square-root
+presentation remain prose.
 
-### Theorem H — robust holes survive nonfixed perturbations
+### Theorem H — generic robust holes survive nonfixed perturbations
 
 Let `P` be a Baer-fixed external point of invariant `C`, and suppose its incident obstruction pairs
 have transversal number `r`. If fewer than `r` points are deleted from `C`, then `P` remains blocked.
@@ -512,10 +570,12 @@ enabling insertion of `P` requires a transversal of those traces. A deletion set
 misses some obstruction, whose secant survives and continues to block `P`. Changes away from every
 trace destroy none of them and cannot create a deletion transversal, so the certificate persists.
 
-This is the bridge theorem: Baer orbit structure identifies symmetry-compatible obstruction blocks,
-while the standard transversal certificate measures their robustness. Persistence of old
-obstructions preserves this noninsertability lower bound; it need not preserve exact completion
-distance or characterize all successful deletion sets.
+This is a generic robustness companion: Baer orbit structure identifies symmetry-compatible
+obstruction blocks, while the standard transversal certificate measures their persistence.
+Persistence of old obstructions preserves this noninsertability lower bound; it need not preserve
+exact completion distance or characterize all successful deletion sets. In particular, this theorem
+does not yet evaluate robustness for the Q25 arcs or connect deletion distance to the conjugate-pair
+extension count.
 
 #### Lean support
 
@@ -525,18 +585,19 @@ and the stronger stability result that only the old obstructions need persist. T
 Frobenius incidence instance has now landed; a family-specific robustness statement still needs
 the chosen invariant arc and its obstruction-persistence hypotheses.
 
-## Proposed paper spine
+## Scope alternatives
 
-1. Equivariant arcs, orbit-valued extension, and completion distance.
-2. Minimal-obstruction clutters and the Lean-backed identity `δ_x=τ`.
-3. Secant resilience and exact classical examples.
-4. Baer-fixed versus conjugate secant blocks.
-5. Heterogeneous conjugate-pair extension, its uniform corollary, and saturation bounds.
-6. Robust fixed holes under nonfixed perturbations.
-7. Computed spectra for small invariant arcs and a sharpness search.
-8. Coding interpretation through projective columns and MDS extension.
+The focused route requires no new bridge theorem: retain the minimum obstruction language needed for
+the proof, then center the manuscript on the quadratic-Frobenius criterion, the exact collision
+balance and equality/excess classification, the uniform `PG(2,25)` theorem, and the bounded priority
+boundary. Keep the census explicitly computational.
 
-## Lean development order
+The merged route may retain the broader completion-core and robustness package only after a
+family-specific theorem couples deletion or prescribed-orbit insertion to the same Baer/Q25 arcs.
+Theorem H alone does not meet that gate. The provisional classical-radius table and broad application
+queue should not drive the scope until their citations and hypotheses are complete.
+
+## Lean formalization inventory
 
 1. `Obstruction.lean`: **landed** — hereditary systems, dependent traces, the semantic insertion
    equivalence, and `insertionDistance_eq_transversalNumber`.
@@ -544,9 +605,10 @@ the chosen invariant arc and its obstruction-persistence hypotheses.
 3. `BaerPlane.lean`, `ProjectiveConjugation.lean`, `QuadraticFrobenius.lean`: **landed** — abstract
    involution and trace results, coordinate semilinear incidence preservation, and the degree-two
    Frobenius instance, including fixed-locus normalization and exact fixed-line candidate counts.
-4. `PairExtension.lean`: **landed end to end** — `E*(N-M)`, existence, and exact quadratic data
-   wrapper; `QuadraticPairExtension.lean`, `QuadraticLineCounting.lean`, and
-   `QuadraticForbidden.lean` discharge all coordinate fields and prove semantic arc extension.
+4. `PairExtension.lean`: **landed for the linewise count and end-to-end existence** — `E*(N-M)` and
+   the exact quadratic data wrapper; `QuadraticPairExtension.lean`, `QuadraticLineCounting.lean`,
+   and `QuadraticForbidden.lean` discharge all coordinate fields and prove semantic arc extension.
+   Identification with a separately defined global legal-pair cardinality remains prose.
 5. `RobustHole.lean`: **landed** — below-`τ` survival, secant-count robustness, and preservation.
 6. `Core.lean`: **landed** — completion cores and the sharp unique-completion deletion theorem.
 7. `ClassicalFamilies.lean`: add exact radii as incidence APIs become available.
@@ -558,14 +620,21 @@ supplies the column-code dictionary.
 
 ## Release gates
 
-- Keep Theorem F synchronized with the checked declarations and trust manifest.
-- Audit every classical-family radius against primary finite-geometry literature.
-- Produce a sharp or near-sharp invariant family, or present the extension theorem as structural.
+- Choose the focused Baer/Q25 paper or land the family-specific theorem required by the merged route.
+- Keep Theorem F and F.1 synchronized with the checked declarations and trust manifest. Either keep
+  the global-cardinality bridge explicitly in prose or formalize that bridge before calling the
+  entire quantitative count machine checked.
+- Audit every classical-family radius against primary finite-geometry literature and state its exact
+  hereditary system; otherwise remove Provisional Table D from the submission.
+- Produce a sharp or near-sharp invariant family, or pitch the extension theorem as a structural
+  criterion without a sharpness claim.
 - Use the completed
   [adversarial novelty review](../2026-07-13-baer-completion-adversarial-novelty-review.md) as the
   claim boundary. A database-level specialist search for the exact quadratic-Frobenius formula
   remains before any priority claim.
 - Keep enumerations as discovery/regression artifacts, never substitutes for proofs.
+- Replace development scaffolding with an abstract, bibliography, stable theorem numbering, and a
+  submission-format manuscript.
 
 ## Proof consequences and formalization outcomes
 
@@ -584,7 +653,7 @@ supplies the column-code dictionary.
 
 Status: broad adversarial novelty audit complete; concrete follow-up theorems still require
 targeted priority checks.
-Tracking task: `C99`.
+Completed tracking task: `C99`; no follow-up task is allocated here.
 
 ### Discovery track for final review
 
@@ -618,6 +687,11 @@ Current classification:
 - **Paper-specific checked refinement:** on each empty carrier, the subtraction-free identity
   `legal+M=N+B_ℓ+Σ_q(μ_ℓ(q)-1)_+` separates invisible orbit mass from collision redundancy; its
   aggregate form and the geometric fixed-center interpretation of `B_ℓ` are Lean-proved.
+- **Paper-specific checked first-order inverse:** aggregate equality holds exactly under universal
+  visibility and collision-free charge; excess `k` is exactly invisible mass plus collision
+  redundancy. In the quadratic geometry, invisible mass is center/empty-carrier incidence. This is
+  an algebraic equality/excess classification, not a structural classification of near-saturated
+  arcs.
 - **Lean-proved zero- and four-fixed-point profiles:** the intended lower bounds of five and four
   legal pairs and the resulting semantic pair extensions are checked by `Q25ProfileZero` and
   `Q25ProfileFour`.
@@ -727,9 +801,11 @@ publishable.
 ### A.8 Stability from the heterogeneous bound
 
 The exact deficits `N_ℓ-f_ℓ` give an elementary averaging statement: few legal extensions force
-most empty carriers to have large forbidden support. That concentration statement alone is not a
-structural stability theorem. The strong open target is an inverse theorem classifying, or
-approximating by structured families, configurations with nearly saturated forbidden support.
+most empty carriers to have large forbidden support. The exact first-order equality/excess theorem
+now identifies the correction as invisible mass plus collision redundancy, but that algebraic
+classification alone is not a structural stability theorem. The strong open target is an inverse
+theorem classifying, or approximating by structured families, configurations with nearly saturated
+forbidden support.
 
 ### A.9 Invisible-center and collision corrections
 
@@ -737,7 +813,8 @@ The exact correction has two parts, as derived after Theorem F.1: invisible-cent
 and collision redundancy `Σ_q(μ_ℓ(q)-1)_+`. Inclusion–exclusion and secant multiplicity are
 classical, including focused and hyperfocused-arc literature; the restricted Frobenius charge map
 is the paper-specific target. The support/invisible/redundancy identity and its quadratic
-instantiation are now Lean-proved. Combining the maximum fiber `μ≤4`, the classical second secant
+instantiation are now Lean-proved, including exact aggregate equality and every excess level.
+Combining the maximum fiber `μ≤4`, the classical second secant
 moment, and the cross-center incidence bound suggest the `s=5` profile bounds, while external
 enumeration suggests the `f=2` minimum is 32. The `f=2` existence statement is now Lean-proved;
 the `f=4` bound and extension are also Lean-proved, as are the `f=0` bound and uniform existence
@@ -755,7 +832,7 @@ remains an open program rather than a novelty claim.
 ### A.11 Completion distance as asymmetric code distance
 
 For facets define `d→(C,F)=|C\F|`. Then, when an alternative facet exists,
-`δ(C)=min_{F≠C}d→(C,F)`. This is the standard directional component of Hamming discrepancy for a
+`ρ(C)=min_{F≠C}d→(C,F)`. This is the standard directional component of Hamming discrepancy for a
 one-sided/Z-channel error model. Completion cores become forced-symbol closures and defining sets
 become asymmetric information sets. The paper contributes a translation, not a new metric.
 
@@ -810,5 +887,6 @@ The strongest current novelty bets are:
 Blocker duality and orbit quotienting are enabling infrastructure, not novelty bets. Task `C99`
 has completed the broad adversarial novelty check and landed the exact correction plus the
 order-five proof targets. All profiles and the uniform order-five conclusion are now proved in
-Lean; inverse theory is the next mathematical lane. See the
+Lean. C135 adds the exact algebraic equality/excess classification; the structural inverse problem
+in item 1 remains open. See the
 [paper-specific novelty review](../2026-07-13-baer-completion-adversarial-novelty-review.md).
