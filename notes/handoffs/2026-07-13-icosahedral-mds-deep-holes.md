@@ -165,6 +165,47 @@ chirality Z/2 (speculative). Leech/Golay: mirage for this functor (already codes
 3. **Hesse config / order-216 group over P² [real, small].** 9 inflections, F_p⊇ζ₃; doesn't fill a
    standard space cleanly (weaker "next 11"), but cheap 2nd data point for the reduction functor.
 
+### Unfound faces (face-hunt) — ranked surprising × real
+
+- **F1 [REAL, in-repo — top find]. The object is the CELL OF THE 11-CELL.** The **hemi-icosahedron**
+  (icosahedron/antipodal) has exactly 6 vertices, 15 edges, 10 triangular faces, symmetry A₅ in the
+  exotic 6-point action — *literally* our structure: 6 arc points = its vertices, 15 duads = edges,
+  10 triple-pairs (Petersen/Brianchon) = faces. We have the antipodal map in-repo. **Eleven
+  hemi-icosahedra glue into the 11-cell** (Grünbaum–Coxeter abstract 4-polytope), symmetry group
+  **PSL₂(11)** = our ambient — so the "11" of the 11-cell is the "11" of F₁₁; the 57-cell (PSL₂(19))
+  is the p=19 sibling. A genuine structural identity that reorganizes all the small numbers.
+  Check: match (hexad, duads, Petersen) to the hemi-icosahedron face lattice.
+- **F2 [REAL, needs-lit]. Our forms compute the j-function.** Klein's **j = H³/(1728 f⁵)** means the
+  code's three invariants (f = arc/vertex form, H, T) are a mod-11 incarnation of the j-line
+  uniformization — the deep-hole conic (=f) is not just a weight-12 form, it's **the denominator of
+  j**. Sharpens N2; the k-tower becomes "shadows of the j-line covariant tower."
+- **F3 [REAL substrate, code-link MIRAGE, one open check]. Shared 12-point Mathieu geometry.**
+  **S(5,6,12) is standardly built on P¹(F₁₁) = our conic**; PSL₂(11)⊂M₁₂ acts 3-transitively on the
+  12 points. Same point set + common subgroup — but NOT a Golay/Mathieu *code* link (ternary Golay
+  is [11,6,5]₃, ours [6,3,4]₁₁). Open cheap check: are the two icosahedral hexads (arc-poles / axes)
+  among the 132 Mathieu hexads or transverse to them? (Expect transverse.)
+- **F4 [REAL, done — sharp negative]. No quantum/self-dual face.** Computed: not Euclidean
+  self-dual, and no weighted/monomial diagonal makes it self-dual (nullspace dim 0) — consistent
+  with non-GRS/no-quadratic-vanishing. Unlike the hexacode, the F₁₁ analogue is exactly where the
+  self-duality/stabilizer-code structure **fails** (odd char, non-GRS). Publish the contrast; kill
+  the quantum hope.
+- **F5 [speculative]. Bring curve** (genus 4, S₅) — same quintic/S₅ ecosystem as the Clebsch cubic;
+  no distinct code handle shown. Note, don't build.
+- **F6 [speculative]. Icosian/600-cell/E₈** — via *binary* 2·A₅ on ℂ², not our A₅⊂PGL₂(11); no map
+  to the icosian lattice. Only live thread: chirality Z/2 = center of 2·A₅→A₅ (spin cover), but
+  unrealized in the code. Stays speculative.
+
+**"11" is one thing seen three ways (the true home):** p+1=12 (icosahedron fills P¹) · the 11-cell
+built from 11 hemi-icosahedra · PSL₂(11)⊂M₁₂ as the 12-point stabilizer complement. NOT the biplane
+/ M₁₁-on-11.
+
+**Mirages killed with reason (do NOT claim):** Hoffman–Singleton (√5 not in its spectrum 7,2,−3;
+Petersen-containment generic); Paley/Peisert/biplane on 11 (wrong 11-point action); **Δ mod 11 as
+Galois rep** (ρ_{Δ,11} has big image SL₂(F₁₁) — 11 non-exceptional Serre prime — a *different*
+"mod 11 of Δ" than our invariant-theory reduction; do not conflate); Markoff-mod-11 / LPS Ramanujan
+(generic PSL₂(11), no icosahedral tie); Clebsch graph SRG(16,5,0,2) (name-share only; our code is
+three-weight).
+
 ### Ranked open checks (surprising × real × deliverable)
 
 1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
