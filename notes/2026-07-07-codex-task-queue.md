@@ -19,17 +19,30 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C141.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C143.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
-are `baer`, `cap`, `clebsch`, `cubic`, `kayles`, `queens`, `relconic`, `repaircodes` (`hexagon` is a
-spoken synonym for `clebsch` and is never written as a peg). Exactly one lane per
+are `alt-orbit-repair`, `baer`, `cap`, `clebsch`, `cubic`, `kayles`, `queens`, `relconic`,
+`repaircodes` (`hexagon` is a spoken synonym for `clebsch` and is never written as a peg). Exactly one lane per
 item; peg in the same edit that allocates the ID; an unpegged row is a bug. The section groupings
 below are presentation only — **the tag is the fact, and wins when they disagree**. Re-pegging is a
 lane switch and needs explicit approval. All rows were pegged 2026-07-14.
 (Never write a concrete unallocated ID in an example — always `C<id>`. `max(CNN)+1` is how the next
 ID is computed, so an invented ID in prose silently burns that number.)
+
+**Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
+[handoff](handoffs/2026-07-14-alternate-orbit-repair.md). The certificate-free `s ≥ 7` theorem is
+first; the uniform Q25 theorem is gated on a representative two-witness certificate leaf and a
+clear Lean build window.
+- **C142 `[alt-orbit-repair]` [QUEUED 2026-07-14]** — kernel-check alternate-orbit repair for
+  invariant ten-arcs over every prime-power base order `s ≥ 7`, with at least eight alternatives,
+  and package the existing Q25 nonexceptional-profile repair bounds →
+  `notes/2026-07-14-c142-alternate-orbit-repair.md`.
+- **C143 `[alt-orbit-repair]` [QUEUED 2026-07-14 — GATED AFTER C142]** — test a representative
+  exceptional-profile leaf for two distinct legal pairs; if feasible, regenerate and build the
+  full two-witness `f=2` certificate, transport distinctness, and prove uniform Q25 alternate-orbit
+  repair → `notes/2026-07-14-c143-q25-alternate-orbit-repair.md`.
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134–C141 are reported. The

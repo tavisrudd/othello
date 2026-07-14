@@ -61,6 +61,9 @@ routing table? (c) which lane next? Wait for the answers.
 
 ### Codex WIP
 
+- **`alt-orbit-repair`** — Alternate-orbit repair for invariant ten-arcs (C142–C143): start with
+  [alternate-orbit repair](notes/handoffs/2026-07-14-alternate-orbit-repair.md). First do C142, the
+  certificate-free `s ≥ 7` repair theorem; C143 owns the gated Q25 two-witness certificate.
 - **`baer`** — Baer-equivariant robust completion (C99, C133, C134): start with
   [Baer-equivariant robust-completion](notes/handoffs/2026-07-14-baer-equivariant-robust-completion.md).
   First task is the C99.6 hostile review and disposition.
