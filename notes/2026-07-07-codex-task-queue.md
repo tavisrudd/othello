@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C130.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C131.**
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
@@ -43,6 +43,13 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
   SVM Remark 2 + Dye 1997 recap — safe to draft w/ footnote, ILL open); citations locked (ZWK I.4–I.7,
   DMP 1909.00207, O'Keefe–Storme, Hirschfeld–Sadeh 1984). `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c129-mustread-sources.md`
+- **C131** — Sadeh-thesis on-receipt verification (**confirmatory, non-blocking** — priority on the
+  |U| extension-count spectrum is granted to the arc-classification literature outright). When the
+  Sussex thesis (~1984) / Hirschfeld–Sadeh Giessen 164 (1984) arrives: (a) confirm no over-concession
+  beyond the extension-count spectrum — in particular that it does NOT state the deep-hole/covering
+  reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
+  mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
+  audit + paper-outline §Remaining-work.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
