@@ -129,6 +129,42 @@ chirality Z/2 (speculative). Leech/Golay: mirage for this functor (already codes
 4. Question our exact data settles that they can't cheaply verify: for which exceptional-orbit/prime
    pairs does the orbit fill Pⁿ AND the arc stay complete-outside (deep holes = whole variety)?
 
+### Third-order reaches (Clebsch/E₆/modular tower) — from the classical names
+
+- **R-A [REAL structure; SPECULATIVE it moves coding; needs-lit]. Clebsch cubic → 27 lines / 10
+  Eckardt points / E₆.** The char-0 avatar is the **Clebsch diagonal cubic surface** (the S₅-symmetric
+  cubic carrying the 27 lines W(E₆)⊃S₅, the Sylvester pentahedron, and **10 Eckardt points**). Dye's
+  **10 Brianchon points** are the plane-conic shadow of those 10 Eckardt points. Chain:
+  *deep-hole leaders (Petersen) = 10 Brianchon = 10 Eckardt of the Clebsch cubic = a W(E₆)/S₅
+  config* — drags **E₆ / 27 lines into the deep-hole side** for the first time. Explore: does the
+  code's weight/coset structure see the 27 lines? (Rank #1 to chase.)
+- **R-B [REAL, in-repo]. Chirality Z/2 = the S₅-non-descent obstruction.** The Clebsch surface
+  carries full S₅ (reflections included); the conic/line only sees A₅ — the odd elements act on the
+  surface but do **not** descend to PGL₂(11) (the N=60 fact). So the chirality bit is precisely *the
+  obstruction to lifting the surface's S₅ down to the conic* — a clean previously-unstated meaning,
+  and why the phenomenon is icosahedron-only (only A₄/A₅ lack a sign character).
+- **R-C [REAL, in-repo]. 5 self-polar triangles = A₅-on-5 / Sylvester pentahedron.** The code has
+  both a **hexad** (6 columns) and a **pentad** (5 self-polar triangles) structure. Check: do the 5
+  triangles index a code decomposition (cosets / weight classes)?
+- **R-D [REAL, side-note]. Dickson invariant → modular invariant theory** (Dickson algebra,
+  Steenrod). Flag, don't build.
+- **Modular-tower conjecture [SPECULATIVE, highest-reach — extends D2].** If deep-hole conic = mod-11
+  Δ (weight/degree 12 = vertex form), the dual-variety conjecture becomes: *the deep-hole variety of
+  the degree-(k−1) RNC is a mod-p avatar of the **discriminant of the associated binary form***.
+  k=3 → Δ; **k=4 (binary cubic) → the binary-cubic discriminant = the tangent-developable quartic**.
+  The tower k=2,3,4… shadows the graded ring of forms, with E₄³−E₆²=1728Δ its k=3 shadow. Reframes
+  covering radius as a modular-discriminant phenomenon. Testable seed via the twisted-cubic module.
+
+### Higher-dim "next 11" candidates (C126 killed dim-1 siblings → go up a dimension)
+
+1. **27 lines / GQ(2,4) over F₄ / E₆ [best].** 27 lines ↔ 27 points of GQ(2,4), W(E₆)-symmetric,
+   natively over **F₄** — where the **hexacode** already lives (our precedent). "27 fills a GQ at F₄"
+   = the plane/space analog of "12 fills P¹ at F₁₁"; loops back to R-A. Own lane.
+2. **Valentiner A₆ ⊂ PGL₃ over P² [real group, harder].** Ternary icosahedral sibling; needs the
+   prime where a Valentiner orbit fills P²(F_p)=p²+p+1. Hom(A₆,ℤ/2)=0 → chiral analog.
+3. **Hesse config / order-216 group over P² [real, small].** 9 inflections, F_p⊇ζ₃; doesn't fill a
+   standard space cleanly (weaker "next 11"), but cheap 2nd data point for the reduction functor.
+
 ### Ranked open checks (surprising × real × deliverable)
 
 1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
