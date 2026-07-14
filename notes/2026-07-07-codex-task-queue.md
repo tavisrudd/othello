@@ -526,7 +526,8 @@ fixed-locus / quadric-Witt dichotomy leap).
   **no uniform linear selector exists** (C77-selector-test LP infeasible over d=37). So it buys
   separation, not selection — routing the escape proof to a **game-semantic reply closure**. Report:
   [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
-  scripts `rust/scripts/c76_invariant_hunt.py`, `c76_directional_search.py`, `c77_augmented_selector.py`.
+  scripts `rust/scripts/c76_invariant_hunt.py`, `rust/scripts/c76_directional_search.py`,
+  `rust/scripts/c77_augmented_selector.py`.
 - **C77 `[cap]` [REPORTED 2026-07-11 — DROP peak theorem proved; game-semantic certificate residue OPEN]** —
   C63's growing Ψ debt is entirely the loose `reservoir_slack` term. After deleting it, the pure
   conic ledger `DROP = 6·defect − 4·intruders − 2·[xor=0]` satisfies the **all-depth theorem**
@@ -639,11 +640,6 @@ fixed-locus / quadric-Witt dichotomy leap).
   curve `[1,1,1,1,2,4,10]` through size 6, while a wall-safe size-7 run cuts off at 120.023 s.
   Representation is solved for the probe; exact canonicalization is the measured next lever.
   Report: [`2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`](2026-07-11-c78-pg45-complete-cap-quick-deliverable.md).
-- **C76 `[cap]` [REPORTED 2026-07-11]** — frame-relative characters cut the C75 collisions 48→1 but leave a
-  residual hard twin and no uniform selector (linear LP infeasible); invariant prong answered, ledger
-  is the surviving lever. Report:
-  [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
-  scripts `rust/scripts/c76_invariant_hunt.py`, `rust/scripts/c76_directional_search.py`.
 - **C75 `[cap]` [REPORTED 2026-07-11]** — value-blind reply-selector impossibility. 19 of 108 hard obligations
   hold a P and an N reply that are byte-identical on all 17 program features → the wall is
   feature-completeness, not coordinate choice, and the deficit grows with q (6% → 7% → 39%). Names the
