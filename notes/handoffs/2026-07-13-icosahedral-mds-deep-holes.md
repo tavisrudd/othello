@@ -1,12 +1,18 @@
 # Icosahedral MDS / deep-holes = conic — spin-off lane
 
 **Date**: 2026-07-13
-**Status**: New lane, spun out of the papers-index #3 spin-off pick (`comp-q11-mds-deep-holes`).
-Core structural theorem **confirmed computationally** by Fable against the Lean coordinates: the
-q=11 non-GRS `[6,3,4]₁₁` code's 6-arc is the polar image of the six icosahedral (A₅) axes, deep
-holes = the conic. Now proving the group/decoder consequences (C121) and checking novelty (C122).
-**Next session**: land **C121** (A₅ / 2-transitivity / single-orbit-leaders Lean checks), then
-decide on the **C123** twisted-cubic k=4 dual-variety test (see Doors).
+**Status**: CONVERGED after C121–C127 + four adversarial/Tao passes (red-team, dual-variety exam,
+Thread A rigidity, Thread B loop-back). Scoped to a **modest single-spine finite-geometry paper**.
+Headline = the **RIGIDITY THEOREM** (Clebsch hexagon is the unique 6-arc in PG(2,11) whose deep
+holes lie on a conic, recovering A₅) + p=11 uniqueness (now with a 2-line counting proof) + the
+certified chirality-Z/2 proposition. **Klein two-spine "because" struck** (false by C126); **dual-
+variety conjecture / C123 DEAD** (2 independent passes, q=19 counterexample + k=4 impossibility);
+11-cell/j-function decorative. Loop-back: this is the extremal instance of the **parent conic-
+involution Schreier program**.
+**Next session (all non-Fable):** (1) **read Dye 1991** — gates the "first" claim, only source that
+could pre-empt the headline; (2) Lean-ify the rigidity theorem + the Schreier=icosahedron graph
+(both `decide`-grade); (3) reconcile the two docs' P¹ labeling; (4) engage ZWK 2020 + DMP
+twisted-cubic tables in the writeup; re-sweep PG(2,11) complete-arc (Italian-school) lit before "first".
 **Companion log**: append dated riffs to
 [`done/2026-07-13-icosahedral-mds-deep-holes-archive.md`](done/2026-07-13-icosahedral-mds-deep-holes-archive.md)
 (create on first archive).
@@ -105,6 +111,38 @@ there; (4) re-sweep the PG(2,11) complete-arc classification (Italian school) be
 
 **Pending corroboration:** the dual-variety-examination and minimal-hypothesis (Thread A) agents were
 still running when this landed — their independent reads may soften or harden the above.
+
+## ✅ LOOP-BACK to parent program (Thread B, computed vs Lean coords) — EXACT, not analogical
+
+The icosahedral deep-hole lane is the **extremal instance of the parent program's conic-involution
+Schreier machinery** (`notes/2026-07-12-conic-involution-schreier-graphs.md`):
+
+- **"Deep holes = whole conic" ⟺ D(S) = ∅** — the parent's saturation set (conic points on arc
+  secants) is empty. Verified: all 15 products σ_xσ_y are **elliptic/nonsplit** (tr²−4det a nonsquare).
+  So healthiness = **15 quadratic-residue conditions on the §6.3 trace-classifier invariant**, and via
+  tr(A_xA_y)=−B(x,y) it's a statement about the polarity form restricted to the arc.
+- **The Schreier graph of the six σ_x on the 12 conic points IS the icosahedron graph** (30 edges =
+  6 matchings of 5, 5-regular, neighborhoods C₅, Whitney triangulation of S² ⇒ icosahedron uniquely).
+  The 6 missing "diameters" = the axis chords. A clean `decide`-grade **edge-level** witness for F1
+  (previously only a face-lattice match) — new and headline-adjacent. (√5 *is* in this graph's
+  spectrum — vindicates the Hoffman–Singleton kill.)
+- **The six σ_x generate full PGL₂(11)** (order 1320); all have nonsquare det ⇒ outside PSL₂(11) —
+  the "missing reflections" made external. Clebsch hexagon = extremal §6-A₅ instance: empty saturation
+  + full-PGL₂ generation + icosahedral residual.
+- **Correction:** governed by the fixed-point/saturation *calculus*, **NOT the spectrum** (bounded
+  data at fixed q; "spectral gap" is a category error here). σ_x do NOT act on the 6 arc pts / 10
+  Petersen pairs (σ_x ∉ A₅) — arc-side Schreier graphs need A₅-internal generators.
+- **NEW counting bound (upgrades p=11 uniqueness to a ~2-line proof of the forward direction):**
+  complete-outside needs 15(q−1) ≥ q²−6 ⟹ **q ≤ 14**; with A₅-rationality (q≡±1 mod 10) the only
+  candidate is **q=11** (150 secant-slots vs 115 off-conic pts, realized with zero slack by the
+  spectrum 90·1+15·2+10·3). Predicts the p≥19 degeneration *before* any group theory. Belongs in the
+  "why 11" section alongside p+1=12 and 11∤60.
+- **Markoff/BGS-expansion: MIRAGE, kill hardened.** Expansion is *robust* (almost all p); ours is
+  *anti-robust* (exactly one prime) — bounded 12-orbit vs growing ~p²-orbit. Opposite signatures.
+  Residue: both reduce to "trace split/nonsplit" (Fricke *language*, not structure) — claim nothing.
+- **⚠ Bookkeeping:** handoff says witness (1,10,0) tangents {0,9}; parent note's ([t²:t:1],∞)
+  labeling gives {5,∞}. Same invariant content, different P¹ labels — reconcile before Lean-ifying
+  across both docs.
 
 ## ✅ RIGIDITY THEOREM (Thread A/B, exhaustive) — the real content; rebuts "corollary-grade"
 
