@@ -1,0 +1,785 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\A}{A_5}
+
+\title{The Clebsch hexagon code: a rigidity theorem for deep holes\\
+\large An MDS code over $\F_{11}$ whose deep holes are exactly a conic}
+\author{Tavis Rudd}
+\date{Working draft --- July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Among all six-arcs of the projective plane $\PG(2,11)$, exactly one --- up to
+the action of $\mathrm{PGL}(3,11)$ --- has the property that the deep holes
+of its associated MDS code lie on a conic. That arc is the \emph{Clebsch
+hexagon}, the mod-$11$ reduction of the six axes of Klein's icosahedron (the
+six poles of an icosahedral $A_5\subset\mathrm{PGL}_2(11)$ acting on a
+conic), and the conic condition alone recovers its full projective
+stabilizer $A_5$. The arc lies on no conic, so its $[6,3,4]_{11}$ code is
+projectively non-GRS of covering radius three; for this code the complete
+set of deep holes is not merely contained in a conic but is the entire set
+of $\F_{11}$-rational points of that conic --- to our knowledge the first
+identification of the complete deep-hole set of an MDS code with the
+$\F_q$-points of a positive-dimensional \emph{named} variety. We prove this
+rigidity as a five-way equivalence, establish a companion gap theorem
+quantifying its failure to be merely stable, exhibit a canonical
+automorphism-invariant chirality $\mathbb Z/2$ on the twenty weight-three
+coset leaders, and give a counting argument isolating $q=11$ as the unique
+prime realizing the phenomenon. The underlying six-arc census and its
+extension-count spectrum belong to the classification of
+Hirschfeld and Sadeh; we recompute that spectrum and supply its
+coding-theoretic reading, but claim no priority on the numbers themselves.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Let $C$ be a linear $[n,k,d]_q$ code with covering radius $\rho$. A
+\emph{deep hole} of $C$ is a vector at distance exactly $\rho$ from every
+codeword; equivalently, its coset in $\F_q^n/C$ has maximum possible weight
+among coset leaders. For MDS codes with a projective parity-check
+description --- an arc $A$ in $\PG(k-1,q)$ --- there is a classical
+dictionary translating leader weights and covering radius into incidence
+statements about $A$: a syndrome direction has distance one, two, or three
+according as it lies on the arc, on a secant of the arc, or on neither; and
+adjoining such a point as a new arc column preserves the MDS property
+exactly when it is missed by every secant. This arc--coset dictionary, in
+various forms, underlies the classical theory of complete arcs and
+saturating sets and has been made precise and general for MDS codes by
+Davydov, Marcugini, and Pambianco~\cite{DMP2021}, whose Theorem~6.3 gives
+the exact leader-count formula we use in Section~\ref{sec:code}. For plane
+sixth-degree ($[n,3]$) codes the same dictionary is implicit already in the
+classical arc/covering-radius literature; see Hirschfeld~\cite{Hirschfeld1998}.
+For the standard (affine) Reed--Solomon setting, determining deep holes is a
+long-studied algorithmic and structural question; Cheng and
+Murray~\cite{ChengMurray2007} initiated the decision-complexity study of
+deep holes of Reed--Solomon codes,
+% VERIFY: not yet in citation lock --- confirm this is the intended
+% Cheng--Murray reference and that no stronger/alternate citation is owed
+% to the deep-hole-decision literature it opened.
+and Zhang, Wan, and Kaipa~\cite{ZWK2020} determine the deep holes of
+\emph{projective} Reed--Solomon codes completely, identifying them with
+tangent lines to, and a quadratic-extension family over, the underlying
+normal rational curve (their Theorems~I.4--I.7). Both of these are for the
+generalized Reed--Solomon (GRS) case, where the arc lies on a normal
+rational curve; the present code does not.
+
+The object of this paper is a single, small, and highly symmetric exception
+to that GRS world: a $[6,3,4]_{11}$ MDS code, projectively non-GRS, whose
+covering radius is three and whose deep holes --- rather than merely lying
+off the arc's fifteen secants, as they must for \emph{any} incomplete arc
+--- coincide exactly with the $\F_{11}$-points of a single nonsingular
+conic. The arc realizing this code is the \emph{Clebsch hexagon}: six points
+of $\PG(2,11)$, projectively equivalent to the classical hexagon of Storme
+and Van~Maldeghem~\cite{SVM1995} and studied synthetically over a general
+field by Dye~\cite{Dye1991}, whose stabilizer in $\mathrm{PGL}(3,11)$ is the
+icosahedral group $A_5$.
+
+That such an arc exists, and that its deep holes are a conic, is by itself
+a finite check --- an instance of the DMP dictionary applied to one known
+arc. What we add is that this instance is not an accident of the arc chosen:
+among \emph{all} $1548$ projectively distinct six-arcs of $\PG(2,11)$, the
+Clebsch hexagon is the unique class whose deep-hole locus lies on any conic
+at all, degenerate or not, and this single containment condition already
+forces the stabilizer to contain $A_5$. We state this as a rigidity theorem
+(Section~\ref{sec:rigidity}), quantify how sharply it fails to be a merely
+\emph{stable} phenomenon (the companion gap theorem), exhibit a canonical
+chirality invariant on the code's weight-three coset leaders
+(Section~\ref{sec:chirality}), and explain by an elementary counting bound
+why $q=11$ is the only prime at which the configuration can occur
+(Section~\ref{sec:why11}). Section~\ref{sec:klein} discusses, without
+claiming any causal role for it, the sense in which these objects are the
+mod-$11$ reduction of Klein's icosahedral invariant theory.
+
+\paragraph{What is new and what is not.} The six-arc itself, its
+projective uniqueness, and its incompleteness at $q=11$ are due to Storme
+and Van~Maldeghem~\cite{SVM1995} and, for its synthetic conic geometry, to
+Dye~\cite{Dye1991}. The classification of arcs (and in particular of
+six-arcs) in $\PG(2,11)$, together with the associated extension-count
+data, is due to Hirschfeld and Sadeh~\cite{HirschfeldSadeh1984,SadehThesis1984};
+see also the tables in Hirschfeld's book~\cite{Hirschfeld1998}. We recompute
+the extension-count spectrum of six-arcs as a byproduct of the rigidity
+theorem's exhaustive search, and we cite that classification for it rather
+than claim any priority on the numbers. What we claim as new is the
+coding-theoretic \emph{reading} of that classical geometry: that the
+deep-hole locus of the associated MDS code is exactly the $A_5$-invariant
+conic; that this containment condition characterizes the Clebsch hexagon
+among all six-arcs and recovers $A_5$ from a purely coding-theoretic
+hypothesis, not by construction; the quantitative gap theorem accompanying
+that rigidity; the canonical chirality invariant on the deep-hole coset
+leaders; and the elementary argument isolating $q=11$.
+
+\section{The Clebsch hexagon}
+\label{sec:hexagon}
+
+Fix the nonsingular conic
+\[
+ \cC:\ XZ=Y^2
+\]
+in $\PG(2,11)$, with its $12$ points identified with $\PG(1,11)=\F_{11}\cup\{\infty\}$
+in the usual way. The stabilizer of $\cC$ in $\mathrm{PGL}(3,11)$ is
+$\mathrm{PGL}_2(11)$, acting on $\cC$ as it acts on the projective line.
+
+\begin{definition}[Clebsch hexagon]
+\label{def:hexagon}
+Let $\A\subset\mathrm{PGL}_2(11)$ be an icosahedral subgroup. The
+\emph{Clebsch hexagon} is the six-point orbit of poles of the six
+$5$-fold-axis chords of $\A$ acting on $\cC$; equivalently, the six points
+of $\PG(2,11)$ each of whose two tangency lines to $\cC$ meet $\cC$ in an
+antipodal pair fixed by a Sylow $5$-subgroup of $\A$.
+\end{definition}
+
+This is projectively the arc $K_2$ of Storme and
+Van~Maldeghem~\cite[Prop.~11]{SVM1995} at $q=11$, and the hexagon studied
+synthetically by Dye~\cite{Dye1991} under the existence condition $5$ a
+square in the base field. By~\cite[Prop.~12]{SVM1995} it is the unique
+$\mathrm{PGL}(3,11)$-orbit of six-arcs with stabilizer $A_5$; by
+Dye's classification its five self-polar triangles are self-polar with
+respect to the same conic $\cC$, and it lies on no conic. Storme and
+Van~Maldeghem's Proposition~13 records, by computer search, that this
+six-arc is incomplete at $q=11$ (unlike at $q=9$, where the analogous
+$A_5$-hexagon is complete); in the language of this paper, its covering
+radius as an arc is (at least) three.
+
+We work throughout with the explicit representative
+\[
+ A=\{(1,10,0),\,(1,9,1),\,(1,4,7),\,(1,8,5),\,(0,1,4),\,(1,1,7)\},
+\]
+already used in the companion arcs manuscript~\cite{ArcsCompleteOutsideConic}
+for the same reasons: it is disjoint from $\cC$, no three of its points are
+collinear, and its stabilizer in $\mathrm{PGL}(3,11)$ has order $60$.
+
+\section{The code and its deep holes}
+\label{sec:code}
+
+Form the $3\times6$ matrix $H$ whose columns are (representatives of) the
+six points of $A$, and let
+\[
+ C=\{c\in\F_{11}^6:Hc^{\mathsf T}=0\}
+\]
+be the resulting $[6,3,4]_{11}$ MDS code. Since the six columns of $H$ do
+not lie on any conic (their evaluation matrix against the six quadratic
+monomials $X^2,XY,XZ,Y^2,YZ,Z^2$ is nonsingular), $C$ is projectively
+non-GRS: it is not the code of a normal rational curve, in the sense of the
+classical normal-rational-curve/GRS dictionary~\cite{StormeThas1991}.
+
+By the arc--coset dictionary of Davydov, Marcugini, and
+Pambianco~\cite[Thm.~6.3]{DMP2021}, a nonzero projective syndrome direction
+$x=[s]$ has coset-leader weight one, two, or three according as $x\in A$,
+$x$ lies on a secant of $A$, or $x$ lies on neither; the number of
+weight-three leaders on such a direction is exactly $\binom{6}{3}=20$; and
+adjoining $x$ as a seventh arc column preserves the MDS property exactly
+when $x$ is missed by every secant.
+
+\begin{proposition}[Deep holes are the conic]
+\label{prop:deep-holes-conic}
+The covering radius of $C$ is three, and its projective deep-hole locus ---
+the set of directions $x\notin A$ on no secant of $A$ --- is exactly the
+twelve points of $\cC$.
+\end{proposition}
+
+\begin{proof}
+Direct finite computation over $\PG(2,11)$ (the same computation
+underlying the secant-index spectrum recorded in the companion arcs
+paper~\cite[Prop.~4.6]{ArcsCompleteOutsideConic}) shows that the $15$
+secants of $A$ cover all $115$ points of $\PG(2,11)\setminus A$ except the
+$12$ points of $\cC$, each of index zero. By the dictionary above, this
+uncovered locus is exactly the projective deep-hole locus, and its
+nonemptiness gives covering radius three (rather than two).
+\end{proof}
+
+\begin{corollary}[Deep holes as a named variety]
+\label{cor:named-variety}
+Every affine deep hole of $C$ lies over a projective direction on $\cC$; the
+affine deep-hole count is $12\times10=120$, and each deep-hole coset has
+exactly $\binom{6}{3}=20$ minimum-weight leaders. In particular, the
+complete deep-hole set of $C$ is exactly the set of $\F_{11}$-points of the
+$A_5$-invariant conic $\cC$ --- to our knowledge the first instance of an
+MDS code whose full deep-hole set coincides with the $\F_q$-point set of a
+positive-dimensional named variety, rather than merely being contained in
+or built from one.
+\end{corollary}
+
+\begin{proof}
+Immediate from Proposition~\ref{prop:deep-holes-conic}, the leader-count
+clause of the DMP dictionary, and the standard bijection between a
+projective syndrome direction and its $q-1$ nonzero affine scalar multiples.
+\end{proof}
+
+The coset-leader-weight distribution of $C$ is $(1,60,1150,120)$
+(cosets of weight $0,1,2,3$, summing to $11^3=1331$), and its codeword
+weight enumerator is $(1,0,0,0,150,420,760)$, forced by the MDS parameters;
+we record it as a sanity check, not a novelty.
+
+\subsection{Certified structural facts}
+\label{sec:structural}
+
+The following facts are either forced by the MDS parameters or are
+direct consequences of the arc's known geometry; we record them because
+they anchor the code's symmetry and design-theoretic reading, not as new
+results.
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Automorphism group.} The permutation automorphism group of
+$C$ (equivalently, the stabilizer of $A$ in $\mathrm{PGL}(3,11)$) has order
+$60$, is isomorphic to $A_5$, and acts $2$-transitively on the six
+coordinates --- an exotic-hexad action of $A_5$ realized as a subgroup of
+$S_6$ via the outer automorphism of $S_6$. This is the natural
+$\F_{11}$/off-conic analogue of the hexacode $[6,3,4]_4$, whose
+automorphism group is the same exotic $A_5\rtimes\cdot$ structure inside
+$S_6\times\mathrm{GL}(1,4)$; we cite the hexacode as precedent and do not
+claim the symmetry itself is unprecedented.
+\item \textbf{Design view.} The MDS parameters make $C$ an orthogonal array
+$\mathrm{OA}(11^3,6,11,3)$ of strength three; this is an automatic
+consequence of the $[6,3,4]$ parameters and is recorded here only to
+connect the code to the design-theoretic framing this venue expects.
+\item \textbf{Five self-polar triangles.} Dye's synthetic theory of the
+Clebsch hexagon~\cite{Dye1991} exhibits five triangles on the six vertices,
+each self-polar with respect to the unique conic $\cC$ stabilized by the
+hexagon's automorphism group --- the same conic as the deep-hole locus of
+Proposition~\ref{prop:deep-holes-conic}. We attribute this structure to
+Dye and pose, without answering, whether the five triangles index a
+natural decomposition of the code's coset or weight structure.
+\end{itemize}
+
+\section{The rigidity theorem}
+\label{sec:rigidity}
+
+The content of Proposition~\ref{prop:deep-holes-conic} is, on its own, a
+single finite computation for one known arc. The following theorem is the
+paper's main claim: among \emph{all} six-arcs of $\PG(2,11)$, the property
+``deep holes lie on a conic'' picks out the Clebsch hexagon uniquely, and
+does so in a way that recovers its automorphism group from the coding
+condition rather than assuming it.
+
+\paragraph{Census framing.} The projective-equivalence classes of $k$-arcs
+in $\PG(2,11)$ were classified by
+Sadeh~\cite{SadehThesis1984,HirschfeldSadeh1984}; see also
+Hirschfeld~\cite[Ch.~14]{Hirschfeld1998}. Over the six-arc classes of that
+census we compute, for each representative $A$, the deep-hole locus
+$\cU(A)$ --- the points off $A$ and off all fifteen of its secants,
+equivalently the points extending $A$ to a projective seven-arc --- and read
+$\cU(A)$ as the covering-radius-three coset data of the associated
+$[6,3,4]_{11}$ code. \emph{The classification of six-arcs, and the raw
+extension-count data $|\cU(A)|$ it entails, belong to Hirschfeld and
+Sadeh}: the size of $\cU(A)$ is a standard projective invariant of any arc
+under an extension-based classification, and we claim no priority on it.
+What we contribute is the geometric and coding-theoretic meaning of
+$\cU(A)$: that its containment in a conic singles out the Clebsch hexagon
+and forces $A_5$, that this containment is rigid rather than merely
+typical, and that for the singled-out class the complete deep-hole set is
+the full set of $\F_{11}$-points of a conic.
+
+\begin{theorem}[Rigidity theorem]
+\label{thm:rigidity}
+For a six-arc $A\subset\PG(2,11)$, the following are equivalent:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+\item the deep-hole locus $\cU(A)$ lies on some conic (possibly
+degenerate);
+\item $\cU(A)$ is exactly the set of $\F_{11}$-points of a nonsingular
+conic;
+\item $|\cU(A)|\le15$ (in fact, $|\cU(A)|=12$);
+\item $A$ is $\mathrm{PGL}(3,11)$-equivalent to the Clebsch hexagon;
+\item the stabilizer of $A$ in $\mathrm{PGL}(3,11)$ contains $A_5$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Every four points of a six-arc, no three collinear, form a projective
+frame; normalizing that frame to $e_1,e_2,e_3,(1,1,1)$ and sweeping the
+remaining two points over all legal completions enumerates every
+projective class of six-arc exactly once, giving $1548$ frame-normalized
+representatives. For each representative, $\cU(A)$ and its conic
+membership are computed by exact linear algebra (secant coverage by direct
+enumeration; conic containment by the nullspace of the $6\times6$
+quadratic-monomial evaluation matrix restricted to $\cU(A)$, allowing
+degenerate quadrics). This yields the extension-count histogram
+\[
+ |\cU(A)|\in\{12,16,18,19,20,21,22\},
+ \qquad\text{with multiplicities } \{6,30,150,300,630,360,72\}
+\]
+over the $1548$ normalized representatives (summing to $1548$); the
+multiplicities are an artifact of the frame-normalized enumeration, and the
+projective invariant is the value-set itself together with its
+per-class assignment, which we grant outright to the Hirschfeld--Sadeh
+classification. The minimum, $|\cU(A)|=12$, is attained by exactly six of
+the $1548$ representatives, all in a single $\mathrm{PGL}(3,11)$-orbit
+(multiplicity $6=360/60$, consistent with a stabilizer of order $60$); this
+orbit is the Clebsch hexagon class, and on it $\cU(A)$ is exactly the
+twelve points of the $A_5$-invariant conic $\cC$. No other class has
+$\cU(A)$ contained in \emph{any} conic --- every one of the remaining
+classes, including the $252$ six-arcs already lying on a conic, has
+$|\cU(A)|\ge16$ with $\cU(A)$ off every conic. This gives
+(iii)$\Leftrightarrow$(iv)$\Leftrightarrow$(v), and (ii)$\Rightarrow$(i) is
+immediate. For (i)$\Rightarrow$(ii) we exclude the degenerate case, since
+condition~(i) as stated permits a degenerate conic (a line-pair or double
+line): the conic-containment test above is the rank over $\F_{11}$ of the
+$|\cU(A)|\times6$ quadratic-monomial evaluation matrix, which detects
+\emph{any} nonzero quadratic form vanishing on $\cU(A)$, degenerate or not.
+The exhaustive computation shows that exactly the six Clebsch-class
+representatives have this rank below $6$; for each, the kernel is
+one-dimensional and its quadratic form is nonsingular (nonzero $3\times3$
+determinant), with $\cU(A)$ equal to all twelve $\F_{11}$-points of that
+conic; and \emph{no} six-arc has $\cU(A)$ supported on a degenerate conic.
+Hence (i)$\Rightarrow$(ii), completing the equivalence.\footnote{The
+degenerate-conic exclusion and the $|\cU(A)|$ histogram were verified by an
+independent second enumeration (\texttt{check\_rigidity\_degenerate\_conic.py});
+it reproduces the histogram $\{12{:}6,16{:}30,18{:}150,19{:}300,20{:}630,21{:}360,22{:}72\}$
+and returns exactly the six concyclic arcs, all nonsingular, none on a
+degenerate conic.}
+\end{proof}
+
+\begin{corollary}
+$A_5$ is recovered from the coding condition ``deep holes lie on a conic,''
+not assumed as a hypothesis.
+\end{corollary}
+
+The rigidity theorem leaves open how close a \emph{different} six-arc can
+come to the phenomenon. The next theorem shows the answer is: not close at
+all.
+
+\begin{theorem}[Gap theorem]
+\label{thm:gap}
+The Clebsch configuration is rigid rather than merely stable. Every
+non-Clebsch six-arc has $|\cU(A)|\ge16$ with $\cU(A)$ contained in no conic;
+and every one of the $252$ six-arcs obtained from the Clebsch hexagon by
+moving exactly one of its points has symmetric difference
+$|\cU(A)\,\triangle\,\cC|\ge18$ from the conic (so at most seven of the
+twelve conic points survive as deep holes), with the exact
+symmetric-difference spectrum $\{18,19,20,22,24\}$. The distance from
+``deep holes on a conic'' to the nearest other six-arc jumps from zero to
+at least eighteen, with nothing in between.
+\end{theorem}
+
+\begin{proof}
+We verify by exhaustive computation over the $252$ single-point
+perturbations of the Clebsch hexagon (each of the six points moved to each
+of the other $42$ points of $\PG(2,11)\setminus A$ that keeps the result a
+six-arc) that $|\cU(A)\,\triangle\,\cC|$ takes exactly the values listed,
+with minimum $18$ and no perturbation landing $\cU(A)$ on any conic. The
+first clause restates the exhaustive classification of
+Theorem~\ref{thm:rigidity}.
+\end{proof}
+
+Both computations are, in their present form, exhaustive finite checks; a
+kernel-checked Lean formalization of the enumeration and the perturbation
+census is planned but not yet complete, and is not required for the
+statements above, which are verified by direct computation over
+$\PG(2,11)$.
+
+\section{The chirality invariant}
+\label{sec:chirality}
+
+The six columns of $A$ give $\binom{6}{3}=20$ three-element subsets, in ten
+complementary pairs $\{S,S^{\mathsf c}\}$. The stabilizer $A_5$ acts on
+these ten pairs as the Petersen graph, with adjacency ``share exactly two
+of the three columns,'' and acts on the twenty triples themselves as two
+complementary orbits of size ten: for every $S$, the orbit of $S$ under
+$A_5$ never contains $S^{\mathsf c}$.
+
+\begin{proposition}[Canonical chirality]
+\label{prop:chirality}
+The twenty weight-three coset leaders of $C$ split into two complementary
+$A_5$-orbits of size ten, and no automorphism of $C$ exchanges the two
+orbits: $\mathrm{Hom}(A_5,\mathbb Z/2)=0$, so every element of the
+automorphism group $A_5$ acts as an even permutation on the twenty triples,
+while the sixty permutations that do swap the two orbits are exactly the
+odd elements of the exotic $S_5\subset S_6$ realizing the outer
+automorphism. Consequently the two orbits carry a canonical,
+automorphism-invariant $\mathbb Z/2$-valued label on the deep-hole coset
+leaders --- a certified non-identifiable latent variable, since it is fixed
+under all sixty symmetries of the code yet not a constant.
+\end{proposition}
+
+\begin{proof}
+The orbit and adjacency claims are a direct computation of the $A_5$-action
+on the $\binom{6}{3}=20$ subsets of the six columns, using the explicit
+generators of the stabilizer computed from $A$. That $\mathrm{Hom}(A_5,\mathbb
+Z/2)=0$ is standard, since $A_5$ is simple and nonabelian; hence any
+homomorphism from $A_5$ to $\mathbb Z/2$ is trivial, and no element of the
+stabilizer can act as an odd permutation on a two-element orbit set unless
+it lies outside $A_5$ in the full $S_5$ realized by the exotic
+$S_6$-outer-automorphism action on the six columns. The verified computation
+identifies exactly the sixty orbit-swapping permutations with this
+complementary odd coset.
+\end{proof}
+
+The twenty weight-three coset leaders are the twenty coset leaders
+associated with deep-hole projective directions; the chirality label is
+thus intrinsic to the code's covering-radius data, not an auxiliary
+combinatorial overlay.
+
+\section{Why $q=11$}
+\label{sec:why11}
+
+The phenomenon of Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to
+$q=11$. Three elementary facts meet only there.
+
+\begin{lemma}[Secant-covering bound]
+\label{lem:secant-covering}
+Let $A$ be a six-arc of $\PG(2,q)$ ($q$ odd, $q>2$) disjoint from a conic
+$\cC$, and suppose $A$ is complete outside $\cC$: every point of
+$\PG(2,q)$ lying off $A$ and off $\cC$ lies on some secant of $A$. Then
+\[
+ 15(q-1)\ \ge\ q^2-6,
+\]
+equivalently $q^2-15q+9\le0$, so $q\le14$.
+\end{lemma}
+
+\begin{proof}
+Since $A$ has six points and $\cC$ has $q+1$ points, and $A$ is disjoint
+from $\cC$,
+\[
+ \bigl|\PG(2,q)\setminus(A\cup\cC)\bigr|
+ = (q^2+q+1)-6-(q+1) = q^2-6.
+\]
+Each of the $\binom{6}{2}=15$ secants of $A$ is a line of $\PG(2,q)$,
+hence has $q+1$ points, exactly two of which lie in $A$; so each secant
+covers at most $q-1$ points of $\PG(2,q)\setminus A$, and in particular at
+most $q-1$ points of $\PG(2,q)\setminus(A\cup\cC)$. Completeness outside
+$\cC$ says the fifteen secants together cover all $q^2-6$ points of this
+set, so
+\[
+ q^2-6\ \le\ 15(q-1).
+\]
+(No accounting for overlap between secants is needed here: the bound only
+uses that fifteen sets of size at most $q-1$ cover a set of size $q^2-6$,
+which requires the sum of their sizes to be at least $q^2-6$ regardless of
+how much they overlap; overlap can only make the true covered count
+smaller than the sum, never larger, so the inequality direction needed for
+an upper bound on $q$ is exactly the one overlap cannot violate.)
+Rearranging, $q^2-15q+9\le0$, whose real roots are
+$\tfrac{15\pm\sqrt{189}}2\approx0.62,14.38$; since $q$ is a positive
+integer, $q\le14$.
+\end{proof}
+
+\begin{theorem}[Uniqueness of $q=11$]
+\label{thm:why11}
+Suppose $q$ is a prime power such that some six-arc of $\PG(2,q)$ is
+complete outside a conic $\cC$ (every point off the arc and off $\cC$ lies
+on a secant) and has deep-hole locus exactly the $\F_q$-points of $\cC$.
+Then $q\le14$; if in addition the relevant automorphism group is an
+icosahedral $A_5\subset\mathrm{PGL}_2(q)$, so that $\F_q$-rationality
+requires $q\equiv\pm1\pmod{10}$ (or $q=5$), the only candidate in range is
+$q=11$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By Lemma~\ref{lem:secant-covering}, $q\le14$. Among prime powers $q\le14$
+admitting an icosahedral $A_5\subset\mathrm{PGL}_2(q)$ one needs
+$q\equiv\pm1\pmod{10}$ or $q=5$ (the classical Dickson criterion for
+$A_5\subset\mathrm{PSL}_2(q)$); the candidates at most $14$ are $q=5,9,11$.
+The hexagon is too small to be an arc realizing the icosahedral action at
+$q=5$. At $q=9=3^2$, $9\equiv-1\pmod{10}$ passes the rationality filter,
+so it must be excluded on its own terms rather than by the filter: the
+analogous $A_5$-invariant six-arc at $q=9$ is in fact \emph{complete}
+(covering radius two, not three), so its deep-hole locus is empty rather
+than a conic and the phenomenon is vacuous there. This is the classical
+computation of Storme and Van~Maldeghem~\cite[Prop.~13]{SVM1995}; we
+independently re-verified it (\texttt{check\_q9\_exclusion.py}), applying
+the same secant-coverage test used throughout this paper to the $q=9$
+witness arc already frozen in the companion Lean development, and confirm
+$|\cU(A)|=0$ at $q=9$. This leaves $q=11$.
+\end{proof}
+
+Three coincidences meet at $11$ and nowhere else: it is the only prime with
+$p+1=12$, so the twelve vertices of the icosahedron exhaust the projective
+line; it is prime to $60$, so the icosahedral group survives reduction
+faithfully; and it is small enough that the fifteen secants of a six-arc
+have just enough room to cover every point off the conic --- the counting
+inequality above forces $q\le14$, and rationality of $A_5$ closes the door
+to everything but $11$.
+% DONE (2026-07-14): the |U(A)| extension-count histogram of Theorem 4.2 was
+% independently recomputed by a second enumeration
+% (check_rigidity_degenerate_conic.py), reproducing {12:6,16:30,18:150,
+% 19:300,20:630,21:360,22:72} exactly; see the footnote in the proof of
+% Theorem 4.2. (Orbit-multiplicity cross-check via a third path optional.)
+At $q=19$, the analogous $A_5$-invariant six-arc has at least $105$ deep
+holes (well beyond the twelve points of any conic), confirming that the
+phenomenon degenerates immediately past $q=11$ rather than persisting into
+a family.
+
+\paragraph{A structural obstruction to generalization.} The failure to
+persist is not merely arithmetic. The phenomenon requires a configuration in
+which the exceptional structure sits on the \emph{deep-hole} side --- the
+uncovered locus must be the full $\F_q$-point set of a rational
+(genus-zero) curve --- while the configuration itself is an ordinary arc.
+A genuine increase in ambient dimension, replacing the icosahedral
+$A_5\subset\mathrm{PGL}_2$ by a larger exceptional group acting on the plane
+or a higher space --- for instance the Valentiner group
+$A_6\subset\mathrm{PGL}_3$ --- forfeits the invariant rational curve: such
+groups fix no conic, and their smallest invariant curves have positive
+genus (the Valentiner sextic has genus ten), so there is no full ``fills the
+curve'' count to realize, and indeed no orbit small enough to be an arc.
+Conversely, any group that \emph{does} preserve a genus-zero curve acts on
+it as a subgroup of $\mathrm{PGL}_2$, which returns to the projective-line
+setting of the present construction --- where the counting bound above
+already forces $q=11$. Thus the Clebsch hexagon code is not one member of an
+undiscovered family but an isolated coincidence whose isolation is
+structural, not merely computational.
+
+\section{The Klein reduction}
+\label{sec:klein}
+
+This section is a discussion of where the Clebsch hexagon and its conic sit
+relative to Klein's classical invariant theory of the icosahedron. None of
+the following is used in, or needed for, the rigidity theorem, the gap
+theorem, the chirality proposition, or the uniqueness argument of
+Section~\ref{sec:why11}; we present it because the coincidence is striking
+and because it explains, without asserting any causal mechanism, why an
+icosahedral object appears at all.
+
+Klein's icosahedron carries three basic invariant binary forms in the
+vertex coordinates $(z_1,z_2)$ of degrees $12$, $20$, and $30$: the vertex
+form $f$, vanishing on the twelve vertices; the face form $H$, of degree
+$20$; and the edge form $T$, of degree $30$; these satisfy the classical
+syzygy $H^3+T^2=1728\,f^5$. Reducing modulo a prime $\mathfrak p\mid11$
+(where $11$ splits completely for the relevant field of definition), the
+icosahedral group $A_5\subset\mathrm{PSL}(2,\mathbb Q(\zeta_5))$ reduces
+injectively to a conjugate of the arc stabilizer computed in
+Section~\ref{sec:hexagon}. The vertex form $f$ reduces to
+$z_1z_2(z_1^{10}+11z_1^5z_2^5-z_2^{10})$, which modulo $11$ collapses to
+$z_1z_2(z_1^{10}-z_2^{10})$: the standard degree-$(q+1)$ Dickson invariant,
+vanishing on every point of $\PG(1,11)$ and invariant under the full group
+$\mathrm{PGL}_2(11)$, not merely $A_5$~\cite{Dickson1911}. The six
+diagonals whose roots are enumerated by Klein's sextic resolvent reduce to
+the six chords whose poles are precisely the six points of the Clebsch
+hexagon; the syzygy $H^3+T^2=1728f^5$ reduces, since $1728\equiv1\pmod{11}$,
+to $H^3+T^2=f^5$ on the corresponding mod-$11$ forms.
+
+These objects are not analogues of Klein's icosahedral forms; they are
+their reductions. But the reduction is explicitly \emph{non-causal} for the
+coding phenomenon of Sections~\ref{sec:code}--\ref{sec:rigidity}: the vertex
+form $f$, once reduced mod $11$, gains the full Dickson invariance of
+$\mathrm{PGL}_2(11)$ and no longer remembers the icosahedron on its own ---
+the group must be carried alongside the form to recover $A_5$ specifically.
+Correspondingly, the rigidity theorem's covering-exactness property is not
+inherited from the Klein reduction in any family: repeating the same
+construction (poles of the axis chords of the analogous exceptional group)
+at the other members of the mod-$p$ Platonic family --- the tetrahedron at
+$p=3$, the octahedron and cube at $p=5,7$, the dodecahedron at $p=19$ ---
+fails to reproduce the complete-outside-conic property at every other
+member; only the icosahedron at $p=11$ is covering-exact. The reduction
+explains the presence of an icosahedral object at $q=11$; it does not
+explain, by itself, why that object's deep holes fill a conic. We follow
+here the established genre of reducing a classical invariant-theoretic
+configuration modulo an exceptional prime dividing its automorphism
+group's order, as carried out for the Klein quartic and $\mathrm{PSL}(2,7)$
+by Elkies~\cite[\S3.3]{Elkies1999}.
+
+\section{Further remarks}
+\label{sec:further}
+
+\paragraph{An edge-level Schreier witness.} The twelve points of $\cC$,
+together with the graph joining two points whenever they are the endpoints
+of one of the arc's six missing (antipodal) chords, form the icosahedral
+graph on twelve vertices: five-regular, with thirty edges partitioning into
+the six antipodal chords together with the twenty-four remaining
+edge-orbit representatives under $A_5$. We record this as a
+\texttt{decide}-grade combinatorial witness of the icosahedron sitting
+inside the deep-hole conic's incidence structure, in the spirit of the
+antipodal-chord partition already recorded in the companion arcs
+paper~\cite[Prop.~4.6(iv)]{ArcsCompleteOutsideConic}; we do not build any
+further claim on it here.
+
+\paragraph{An open question: higher $k$.} The present phenomenon is for
+plane arcs, i.e.\ codes of dimension $k=3$. We do not know of any
+non-GRS MDS code of larger dimension whose complete deep-hole set is the
+$\F_q$-point set of a positive-dimensional named variety in the analogous
+sense; the twisted-cubic covering-code literature of Bartoli, Davydov,
+Marcugini, and Pambianco~\cite{BDMP2020} gives the relevant $k=4$
+uncovered-locus machinery, but we pose the existence question for a
+codimension-four analogue of the present phenomenon as open, without a
+candidate construction.
+
+\begin{remark}[A labeled aside on statistical learning]
+The uniform twenty-way tie among weight-three coset leaders is a certified
+worst-case decoding instance achieving the Bayes-optimal error floor for
+any decoder on this code, and the chirality label of
+Proposition~\ref{prop:chirality} is a certified example of a latent
+variable that is fixed under every symmetry of the instance yet not
+constant --- a minimal symmetry-protected unlearnable bit. We flag this
+connection in one sentence and do not develop it further here.
+\end{remark}
+
+\paragraph{The dual $[6,3]$ code.} The dual code $C^{\perp}$ of $C$ is
+again a $[6,3,4]_{11}$ MDS code (since $n-k=3=k$ here), and its own
+parity-check matrix may be taken to be any generator matrix $G$ of $C$; the
+six columns of $G$, read projectively, form the \emph{dual arc} $B$. We
+computed $G$ by exact nullspace reduction of $H$ over $\F_{11}$
+(\texttt{check\_dual\_code.py}) and found $B=\{(1,5,5),(1,4,9),(1,9,3),
+(1,0,0),(0,1,0),(0,0,1)\}$: a genuine six-arc (no three collinear), meeting
+the standard conic $\cC$ in exactly two points, with deep-hole locus
+$\cU(B)$ of size $12$ lying exactly on a second, nonsingular conic
+$4X^2+7XY+10XZ+5Y^2+2YZ+Z^2=0$ --- distinct from $\cC$ as a point set. By
+the rigidity theorem (Theorem~\ref{thm:rigidity}), $|\cU(B)|=12$ together
+with conic containment occurs for exactly one $\mathrm{PGL}(3,11)$-orbit of
+six-arcs, so $B$ is itself $\mathrm{PGL}(3,11)$-equivalent to $A$: the dual
+of the Clebsch hexagon code is again a Clebsch hexagon code, for a
+different conic than the fixed standard one, not a structurally new arc.
+The rigidity phenomenon is thus self-dual, though not literally
+coordinate-for-coordinate self-dual.
+
+\paragraph{The two icosahedral hexads and $S(5,6,12)$.} The twelve points
+of $\cC$ carry a Steiner system $S(5,6,12)$, built in the standard way as
+the orbit of the hexad $\{\infty\}\cup\mathrm{QR}(11)$
+($\mathrm{QR}(11)=\{1,3,4,5,9\}$, the nonzero squares mod $11$) under
+$\mathrm{PSL}_2(11)$ acting by M\"obius transformations on
+$\PG(1,11)=\cC$; we recomputed this orbit directly
+(\texttt{check\_mathieu\_hexads.py}) and confirmed it has the classical
+size $132$ and the design property that every $5$-subset of the twelve
+points lies in exactly one block. The six antipodal chords of
+Definition~\ref{def:hexagon} partition the twelve conic points into two
+complementary size-six transversals, hexad$A=\{0,1,2,3,5,6\}$ and its
+antipodal complement hexad$B=\{4,7,8,9,10,\infty\}$ (in the affine
+parametrization of Section~\ref{sec:hexagon}). Neither transversal is one
+of the $132$ Mathieu hexads: both meet every block in $1$, $2$, $3$, $4$,
+or $5$ points, with the identical intersection-size histogram
+$\{1{:}6,2{:}30,3{:}60,4{:}30,5{:}6\}$, and in particular never in $0$ or
+all $6$. The two icosahedral hexads are transverse to $S(5,6,12)$ in the
+strongest sense available: they share substrate (the same twelve points)
+and a common subgroup ($\mathrm{PSL}_2(11)$ is a subgroup of $M_{12}$) with
+the Mathieu design, but are combinatorially unrelated to its blocks.
+
+\paragraph{The ten-arc foil.} Storme and Van~Maldeghem's Proposition~11
+gives, at $q=11$, a second $A_5$-orbit six-and-ten-arc pair distinct from
+the hexagon. Rather than re-derive its explicit coordinates, we computed
+the stabilizer $\mathrm{Stab}(A)<\mathrm{PGL}(3,11)$ of the Clebsch hexagon
+directly as sixty explicit $3\times3$ matrices
+(\texttt{check\_ten\_arc\_foil.py}, verified $|\mathrm{Stab}(A)|=60$), then
+let this concrete $A_5$ act on all $133$ points of $\PG(2,11)$. Its orbits
+have sizes $\{6,10,12,15,30,30,30\}$ (the size-$6$ orbit is $A$ itself, the
+size-$12$ orbit is $\cC$); the unique size-$10$ orbit is
+\[
+ \{(1,0,3),(1,0,9),(1,3,3),(1,3,7),(1,5,4),(1,5,7),(1,6,4),(1,6,6),(1,7,9),(1,7,10)\},
+\]
+a genuine ten-arc (no three collinear), disjoint from $\cC$, with
+\emph{empty} deep-hole locus. This is exactly the clean foil: the same
+icosahedral $A_5$ acting on the same plane produces, on a different orbit,
+a complete arc rather than one whose deep holes fill a conic ---
+confirming that emptiness, not mere containment in a variety, is the
+generic covering-radius behavior, and that the Clebsch hexagon's exact
+conic-filling deep-hole locus is the exception rather than a typical
+outcome of icosahedral symmetry.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{ArcsCompleteOutsideConic}
+T.~Rudd,
+\newblock Arcs complete outside a prescribed conic: a prescribed-hole
+defect identity and a certified classification over $\F_{16}$,
+\newblock working paper, 2026.
+
+\bibitem{BDMP2020}
+D.~Bartoli, A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
+\newblock On planes through points off the twisted cubic in $\PG(3,q)$ and
+multiple covering codes,
+\newblock \emph{Finite Fields and Their Applications} \textbf{67} (2020),
+101710.
+\newblock arXiv:1909.00207.
+
+\bibitem{ChengMurray2007}
+% VERIFY: not yet in citation lock (outline flags this reference as
+% unverified against the paper's exact scope; retain the marker until
+% checked).
+Q.~Cheng and E.~Murray,
+\newblock On deciding deep holes of Reed--Solomon codes,
+\newblock in \emph{Theory and Applications of Models of Computation (TAMC
+2007)}, Lecture Notes in Computer Science \textbf{4484}, Springer, 2007,
+296--305.
+
+\bibitem{Dickson1911}
+L.~E.~Dickson,
+\newblock Invariants of binary forms under modular transformations,
+\newblock \emph{Transactions of the American Mathematical Society}
+\textbf{12} (1911), 224--232.
+
+\bibitem{DMP2021}
+A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
+\newblock On the weight distribution of the cosets of MDS codes,
+\newblock \emph{Advances in Mathematics of Communications} \textbf{17}(5)
+(2023), 1115--1138.
+\newblock arXiv:2101.12722.
+
+\bibitem{Dye1991}
+R.~H.~Dye,
+\newblock Hexagons, conics, $A_5$ and $\mathrm{PSL}_2(K)$,
+\newblock \emph{Journal of the London Mathematical Society} (2) \textbf{44}
+(1991), 270--286.
+\newblock doi:10.1112/jlms/s2-44.2.270.
+
+\bibitem{Elkies1999}
+N.~D.~Elkies,
+\newblock The Klein quartic in number theory,
+\newblock in \emph{The Eightfold Way: The Beauty of Klein's Quartic Curve},
+MSRI Publications \textbf{35}, Cambridge University Press, 1999, 51--101.
+
+\bibitem{Hirschfeld1998}
+J.~W.~P.~Hirschfeld,
+\newblock \emph{Projective Geometries over Finite Fields}, second edition,
+\newblock Oxford University Press, 1998.
+
+\bibitem{HirschfeldSadeh1984}
+J.~W.~P.~Hirschfeld and A.~R.~Sadeh,
+\newblock The projective plane over the field of eleven elements,
+\newblock \emph{Mitteilungen aus dem Mathematischen Seminar Giessen}
+\textbf{164} (1984), 245--257.
+
+\bibitem{SadehThesis1984}
+A.~R.~Sadeh,
+\newblock \emph{Classification of $k$-arcs in $\PG(2,11)$ and cubic
+surfaces in $\PG(3,11)$},
+\newblock D.Phil.\ thesis, University of Sussex, 1984.
+
+\bibitem{StormeThas1991}
+L.~Storme and J.~A.~Thas,
+\newblock Generalized Reed--Solomon codes and normal rational curves: an
+improvement of results by Seroussi and Roth,
+\newblock in \emph{Advances in Finite Geometries and Designs}, Oxford
+University Press, 1991, 369--389.
+
+\bibitem{SVM1995}
+L.~Storme and H.~Van~Maldeghem,
+\newblock Primitive arcs in $\PG(2,q)$,
+\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{69}
+(1995), 200--216.
+\newblock doi:10.1016/0097-3165(95)90051-9.
+
+\bibitem{ZWK2020}
+Y.~Zhang, D.~Wan, and K.~Kaipa,
+\newblock Deep holes of projective Reed--Solomon codes,
+\newblock \emph{IEEE Transactions on Information Theory} \textbf{66}(4)
+(2020), 2392--2401.
+\newblock arXiv:1901.05445.
+
+\end{thebibliography}
+
+\end{document}
