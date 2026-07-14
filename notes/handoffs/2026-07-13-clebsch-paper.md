@@ -49,16 +49,30 @@ Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH
   deep-hole/covering reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for
   the spectrum; (c) mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. Hirschfeld–Sadeh,
   Giessen 164 (1984) 245–257 is the faster, citable public version (ILL/GDZ).
-- **O'Keefe–Storme 1996 residual** — verify SVM+Dye fully supersede it for the plane (skim Zbl
-  0848.51007; no full ILL needed). The one genuinely open lit item.
-- **Dye 1991** — footnote-only; ILL queued. Close only to drop the footnote hedge (C129 verdict NO
-  already stands).
+- **Dye 1991 ILL** — optional. C129's verdict (Dye does NOT state the q=11 0-bisecant/conic
+  identification) stands on three independent proxies: risk **LOW but not zero** without the full
+  text. The residual risk is a finite-field aside in the body. Nothing depends on it; the ILL would
+  only upgrade LOW to zero.
 - **DMP AMC-numbering residual** — we cite Thm 6.3 / (6.4) / Thm 7.7 by **arXiv v2** numbering and the
   bibliography says so. The published AMC 17(5) numbering is unverified (paywalled); v2 postdates
   acceptance and the abstract matches verbatim, so it is very likely identical. Confirm if a copy
   becomes reachable. Safe either way as written.
 
 **Closed 2026-07-14 (were the outline's blocking research items):**
+- **O'Keefe–Storme 1996 — was never open; the outline was stale.** C129 already settled it: the arc
+  catalogue has no extension-point data, SVM 1995 supersedes it for planar uniqueness, "cite it for
+  completeness; not a gate." What *had* been missed is that C129's actual instruction was never
+  carried out — the paper cited it **nowhere**. Now cited in §2 (planar $A_5$ case of their
+  catalogue) with a bibliography entry. A paper on $A_5$-fixed six-arcs omitting "Arcs fixed by
+  $A_5$ and $A_6$" is a referee flag; that hole is closed, and the ILL stays unnecessary.
+- **Dye 1991 priority footnote — C129 asked for it; it was never written. Now in §2.** C129's
+  recommendation was "draft now with a cite of Dye for the hexagon/conic apparatus *and a footnote
+  that the q=11 0-bisecant identification does not appear in Dye's stated results*." The cites were
+  in; the footnote was not, so the paper's priority claim against its nearest prior art rested on
+  proxy evidence that appeared nowhere in the manuscript. The footnote now records the zbMATH/1997
+  self-recap evidence, that SVM prove q=11 incompleteness without invoking any such fact from Dye,
+  and the structural reason (a per-q rationality statement has no home in general-field synthetic
+  geometry; at q=9 the Brianchon points lie on 𝒞).
 - **DMP Thm 6.3 pin — SOUND, no hole.** Its hypotheses are exactly two: an *arbitrary* n-arc in
   PG(2,q), and its `[n,n−3,4]_q` MDS code per their Def 6.1. **No GRS/NRC/conic hypothesis, no
   restriction on n, k, q, or characteristic** — covers our non-GRS q=11 case directly, so the Lean
