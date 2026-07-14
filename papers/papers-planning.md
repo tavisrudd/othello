@@ -10,8 +10,8 @@ packaging review (2026-07-12) settled the decomposition, sequencing, and positio
   `nofil-finite-geometry-outcomes`. Split by *technique* — Schreier-residual nimbers vs
   pairing/mirror ⇒ P.
 - **Geometry/coding track** ("Package 2": arc extension & reconstruction):
-  `equivariant-robust-completion` (canonical merge of `baer-equivariant-extension` and
-  `completion-core-rigidity`), `continuation-graph-rigidity`, plus
+  `equivariant-robust-completion` (focused Baer/Q25 paper; generic `completion-core-rigidity` is
+  library-only), `continuation-graph-rigidity`, plus
   `arcs_complete_outside_conic` (related but separate; classical index equations, not the game
   machinery).
 - **Sequence submissions** (`oeis-submissions/`): the queens A344227 extension and the new sum-free
@@ -56,10 +56,11 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *Gate:* Lean and manuscript complete; externally gated on specialist priority review,
   not formalization.
 
-**6 · Equivariant extension + robust completion** — `equivariant-robust-completion`
-- *What:* canonical merge of `baer-equivariant-extension` and `completion-core-rigidity`.
-- *Gate:* exact collision accounting Lean-built; all order-five profiles unproved pending
-  Lean geometry/certificates; citations and priority gates remain.
+**6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
+- *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
+  theorem; generic completion-core material is outside the submission.
+- *Gate:* theorem spine and all order-five profiles Lean-built; general-criterion priority search
+  and submission closeout remain.
 
 **7 · Continuation-graph rigidity, N1 only** — `continuation-graph-rigidity`
 - *What:* N2 demoted to remarks.
@@ -94,13 +95,11 @@ so they are named, not numbered.
   a standalone projective paper is "the same elementary mirror trick on more boards." **No standalone
   sum-free paper** — its vehicle is the OEIS entry; if the flagship balloons, cut the capacity-c
   material, never sum-free.
-- **D2 — MERGE Baer + completion now (default).** Each half is weak alone by its own audit; merged
-  they are one paper — the exact quadratic-Frobenius orbit-valued extension criterion supported by
-  a formally verified completion/transversal synthesis. The `δ(C)=τ` mechanism and classical-family
-  distances are established infrastructure/applications, not novelty leads. The exact collision
-  correction is Lean-proved, but its proposed `PG(2,25)` consequences are not: prose geometry and
-  external enumeration are evidence only. A complete kernel-certified order-five theorem, inverse,
-  gap, or spectrum theorem would upgrade it further.
+- **D2 — FOCUS Baer/Q25 (supersedes the provisional merge).** The uniform order-five theorem,
+  semantic global count, and exact collision inverse are now kernel-certified. The generic
+  completion/transversal synthesis has no family-specific bridge to that result and is library-only.
+  A future alternate-orbit repair or fixed-locus resilience theorem may enter as a focused section;
+  generic completion cores, weighted variants, and classical-radius tables do not.
 - **D3 — N1 only.** N2 (full-complex reconstruction) → a remarks subsection, out of the abstract and
   contributions, until the paywalled Metsch / Drake–Sané read clears.
 - **D4 — HOLD.** The conic-localization reduction lands on the open (ON) kernel — a scaffold with no
@@ -215,10 +214,9 @@ verified values.
 transfer.
 - *Watch:* lead with the certified family, not the transfer mechanism alone.
 
-**6 · Baer ⊕ completion** — *lead:* exact quadratic-Frobenius orbit-valued criterion and
-semantic legal-extension theorem.
-- *Watch:* completion/hypergraph machinery and classical radii are supporting synthesis; seek
-  one family-specific strengthening.
+**6 · Baer/Q25** — *lead:* every Frobenius-invariant eight-arc in `PG(2,25)` has a fresh
+conjugate-pair extension, supported by the exact quadratic-Frobenius criterion.
+- *Watch:* claim no new square-root constant; keep the external census outside the theorem.
 
 **7 · Continuation** — *lead:* the rigidity theorem: Aut(frame graph) = ambient semilinear
 group for q ≥ 13.
@@ -265,7 +263,7 @@ papers rests on the standard-recurrence argument + literature values + different
 `CombinatorialGames` bumps to ≥ `v4.32` (`lean/TRUST.md` Phase 4). Status against the gate:
 - *Closest:* the `nofil` mirror⇒P outcomes (P-theorems Lean; boundary/sharpness negatives + capacity-2
   sharpness still paper-only) and the completion δ(C)=τ / coding base.
-- *Outstanding (blocks release):* arcs (**being formalized tonight**), Baer, continuation, completion
+- *Outstanding (blocks release):* arcs (**being formalized tonight**), continuation, completion
   beyond δ=τ, the `nofil` boundary negatives + capacity-2 sharpness, the dihedral paper-level theorems
   (Φ_T, ½-density) plus its one isolated `native_decide` (`KleinFourBridge.explicit_pairProducts`, no
   dependents — clear to `decide`/manual or delete).
@@ -299,7 +297,7 @@ preempt AI-slop skepticism; do not overclaim novelty ahead of the prior-art audi
 | Flagship     | arXiv math.CO + INTEGERS (CGT) or Discrete Applied Mathematics      |
 | Dihedral     | arXiv math.CO + INTEGERS or Electronic J. Combinatorics             |
 | Arcs         | arXiv math.CO + Designs, Codes and Cryptography / Finite Fields & Apps |
-| Baer⊕compl.  | FFA / DCC                                                           |
+| Baer/Q25     | FFA / DCC                                                           |
 | Continuation | Electronic J. Combinatorics or DCC                                  |
 | Coding       | DCC, or IEEE Trans. Inf. Theory if the LRC angle survives audit     |
 | OEIS entries | OEIS directly, independent of the papers                           |

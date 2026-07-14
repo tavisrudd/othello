@@ -1,36 +1,29 @@
-# Paper: Equivariant extension and robust completion
+# Paper: Frobenius-equivariant pair extension of eight-arcs
 
-**Working title:** *Equivariant extension and robust completion in finite geometry.*
+**Working title:** *Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`.*
 
-**Object:** a development draft centered on orbit-valued extension of Frobenius-invariant arcs in
-`PG(2,s²)`, currently accompanied by obstruction-hypergraph completion distance, secant resilience,
-and robust completion cores. This is the canonical paper directory;
-`baer-equivariant-extension` and `completion-core-rigidity` remain source/staging views. Final scope
-is unresolved: either focus the submission on the Baer/Q25 theorem or add a genuine family-specific
-robust-completion bridge before retaining the merged package.
+**Object:** the focused paper on the quantitative quadratic-Frobenius pair-extension criterion, its
+exact collision correction, and the uniform `PG(2,25)` eight-arc theorem. This is the canonical
+paper directory; `baer-equivariant-extension` remains a source/staging view. The generic
+`completion-core-rigidity` package is reusable library material but is not part of this submission.
 
-**Formal status:** the abstract completion spine, quadratic pair-extension existence theorem,
-uniform `PG(2,25)` theorem, and collision equality/excess classification are kernel-checked. The
+**Formal status:** the quadratic pair-extension existence theorem, uniform `PG(2,25)` theorem,
+collision equality/excess classification, and semantic global pair count are kernel-checked. The
 end-to-end Lean theorem constructs a conjugate pair whose union with the invariant arc is again an
 arc. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh legal Frobenius pairs
 and kernel-checks its equality with the disjoint carrier union and `PairExtensionData.legalCount`.
-The classical-family completion-radius table remains provisional pending primary citations and
-exact hypotheses.
+The five parity-allowed Q25 profiles are exhausted in Lean.
 
-**Publication status:** major revision. The checked Q25 result has no proof-validity defect in the
-scoped audit, but scope, classical-family citations, specialist priority search for the general
-criterion, sharpness/positioning, and submission packaging remain open release gates.
+**Publication status:** focused restructure complete. The checked Q25 result has no proof-validity
+defect in the scoped audit; the general-criterion priority search and submission closeout remain.
 
 **Novelty boundary:** Hilbert 90, the Baer fixed subplane, projective point/line counts, the
 occupied-line double count, and two-element involution-orbit counts are classical infrastructure,
 not Discovery Track claims. The square-root constant is the classical Lunelli–Sce scale. Candidate
 contributions are the exact quadratic orbit-valued criterion and its semantic coordinate coupling.
-The abstract completion package is a formally verified synthesis of standard obstruction-
-transversal theory; new follow-ups require family-specific collision, inverse, gap, or spectrum
-theorems.
+The generic completion/transversal library is not a contribution of this focused paper.
 
-**Post-audit correction:** the classical spread example is restricted to line spreads of
-`PG(3,q)`. The exact linewise refinement separates invisible centered secant orbits from genuine
+**Checked strengthening:** the exact linewise refinement separates invisible centered secant orbits from genuine
 charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved.
 The profile-independent cross-pair estimate `s+3-f-e` is also kernel-checked in
 `QuadraticInvisible.lean`; the theorem derives the necessary `e≥2` from the cross-pair witness.

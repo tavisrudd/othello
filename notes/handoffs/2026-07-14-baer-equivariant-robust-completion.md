@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-14
 **Status:** ACTIVE — referee closeout queue C136–C141
-**Tasks:** C99, C133–C136 (closed); C137 (started); C138–C141 (queued; focused scope selected)
+**Tasks:** C99, C133–C138, C140 (closed); C139 (started); C141 (queued)
 
 ## Active-lane lock
 
@@ -63,32 +63,24 @@ algebraic equality/excess classification, not the stronger structural inverse th
 the remaining count boundary: the semantic global finset of fresh legal conjugate pairs is
 kernel-checked equal to the disjoint carrierwise union and to `PairExtensionData.legalCount`.
 
-The artifact remains a paper-development draft. Do not archive this handoff or route the lane as
-finished until the following release gates are disposed:
+The focused scope is executed. Generic completion material and the classical-radius table are out;
+the paper makes a structural-criterion claim rather than a sharpness claim. Do not archive this
+handoff or route the lane as finished until the two remaining release gates are disposed:
 
-1. **Execute the focused scope.** The user selected a focused Baer/Q25 paper. Retain only the
-   obstruction/completion language needed by the headline theorem; the current generic deletion
-   theorem is not a family-specific robustness result and will not anchor the submission.
-2. **Close the release evidence.** Supply primary citations and precise hereditary
-   systems/hypotheses for every row of Provisional Table D, or remove the table. C134 is a bounded
-   priority search for the uniform Q25 theorem; it does not replace the outstanding specialist/
-   database search for the general quadratic-Frobenius criterion.
-3. **Set the strength claim.** Produce a sharp or near-sharp invariant family, or pitch the theorem
-   as a structural criterion. A structural inverse theorem or pair-saturated non-complete family is
-   a strengthening, not something supplied by C135.
-4. **Produce the submission artifact.** Supply an abstract, bibliography, stable theorem numbering,
-   cross-references, and publication formatting. The global legal-pair cardinality bridge is now
-   formalized by C136.
+1. **Close the general priority evidence.** C134 is a bounded search for the uniform Q25 theorem;
+   C139 separately checks the general quadratic-Frobenius orbit-valued criterion.
+2. **Produce the submission artifact.** Supply a bibliography, stable theorem numbering,
+   cross-references, publication formatting, and a final manuscript/Lean/citation/trust audit.
 
 ## Open queue
 
 | Task | State | Deliverable |
 |---|---|---|
 | C136 | reported | Global legal-pair cardinality bridge in Lean |
-| C137 | started; focused selected | Focused Baer/Q25 manuscript restructure |
-| C138 | queued | Primary-source and hypothesis audit for classical radii |
-| C139 | queued | General quadratic-Frobenius specialist priority search |
-| C140 | queued | Sharpness result or structural-criterion positioning |
+| C137 | reported | Focused Baer/Q25 manuscript restructure |
+| C138 | reported; table removed | Classical-radius release disposition |
+| C139 | started | General quadratic-Frobenius specialist priority search |
+| C140 | reported; structural criterion | Sharpness/positioning disposition |
 | C141 | queued | Submission artifact and final referee/trust closeout |
 
 The routing table is also stale: it still sends `baer` to the closed C99.6 review and omits C135.

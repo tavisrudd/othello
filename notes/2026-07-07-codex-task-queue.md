@@ -32,10 +32,10 @@ lane switch and needs explicit approval. All rows were pegged 2026-07-14.
 ID is computed, so an invented ID in prose silently burns that number.)
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
-[handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134–C135 are reported. The
-referee closeout queue is C136–C141: formalize the global count, settle scope, close classical-family
-and general-priority evidence, fix sharpness positioning, then produce and re-audit the submission
-artifact.
+[handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134–C138 and C140 are
+reported. The focused manuscript, global semantic count, removal of the classical-radius table, and
+structural-criterion positioning are settled. C139 is the active general-priority search; C141 then
+produces and re-audits the submission artifact.
 - **C135 `[baer]` [REPORTED 2026-07-14]** — classify equality and near-equality in
   `L + E M = E N + B + R`: prove that zero correction is exactly universal orbit visibility plus
   collision-free local charging, then translate the criterion to quadratic Baer geometry →
@@ -43,16 +43,16 @@ artifact.
 - **C136 `[baer]` [REPORTED 2026-07-14]** — define the global legal conjugate-pair finset and
   kernel-check its cardinality equality with the carrierwise `PairExtensionData.legalCount` →
   `notes/2026-07-14-c136-baer-global-pair-count.md`.
-- **C137 `[baer]` [STARTED 2026-07-14 — FOCUSED SCOPE SELECTED]** — restructure the manuscript as
+- **C137 `[baer]` [REPORTED 2026-07-14 — FOCUSED SCOPE]** — restructure the manuscript as
   a focused Baer/Q25 paper, retaining only completion language needed by the headline theorem →
   `notes/2026-07-14-c137-baer-paper-scope.md`.
-- **C138 `[baer]` [QUEUED 2026-07-14]** — audit every classical-radius row against primary sources
+- **C138 `[baer]` [REPORTED 2026-07-14 — TABLE REMOVED]** — audit every classical-radius row against primary sources
   and exact hereditary hypotheses, retaining only publication-ready statements →
   `notes/2026-07-14-c138-baer-classical-radii.md`.
-- **C139 `[baer]` [QUEUED 2026-07-14]** — run the specialist/database priority search for the
+- **C139 `[baer]` [STARTED 2026-07-14]** — run the specialist/database priority search for the
   general quadratic-Frobenius criterion, distinct from C134's uniform-Q25 search →
   `notes/2026-07-14-c139-baer-general-priority.md`.
-- **C140 `[baer]` [QUEUED 2026-07-14]** — resolve the sharpness gate by a near-sharp or
+- **C140 `[baer]` [REPORTED 2026-07-14 — STRUCTURAL POSITIONING]** — resolve the sharpness gate by a near-sharp or
   pair-saturated family, or adopt and justify the structural-criterion claim boundary →
   `notes/2026-07-14-c140-baer-sharpness-positioning.md`.
 - **C141 `[baer]` [QUEUED 2026-07-14]** — produce the submission artifact and run the final

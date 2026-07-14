@@ -1,16 +1,15 @@
 # Paper: Equivariant extension of Galois-invariant arcs
 
-**Working title:** *Equivariant extensions of Galois-invariant arcs over finite fields.*
+**Working title:** *Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`.*
 
 **Object:** extension of Frobenius/Baer-invariant arcs in PG(2,s²) (and higher-dim caps /
 MDS codes) over finite fields — the unit of extension is a Galois orbit (a fixed point or a
 conjugate pair). Headline = the exact quadratic-Frobenius orbit-valued conjugate-pair extension
 criterion (Thm 3.1); the √2·s orbit-saturation lower bound (Cor 3.4) is a classical-scale corollary.
 
-**Status:** source/staging directory feeding the canonical development draft
-`../equivariant-robust-completion/`. The final paper scope is not settled: a focused Baer/Q25 paper
-is currently supported, while a merged robust-completion paper still needs a family-specific bridge.
-The abstract proof spine and exact coordinate quadratic
+**Status:** source/staging directory feeding the focused canonical manuscript
+`../equivariant-robust-completion/`. The broad merge is superseded: the generic completion package
+does not supply a family-specific bridge to the Q25 theorem. The exact coordinate quadratic
 pair-extension theorem are Lean-built. Prior-art audit verdict = **SOFTEN**: the √2·s bound is the
 classical Lunelli–Sce √(2q) complete-arc bound at q=s², *not* a new constant — the surviving
 headline is the assembled orbit-valued criterion. The broad 2026-07-13 adversarial audit demotes
@@ -31,14 +30,14 @@ problem.
 coordinate-conjugation, quadratic-Frobenius, exact line-counting, and forbidden-charge consumers
 under `lean/RelativeConicArcs/`. See the lane's `TRUST.md`.
 
-**Scope boundary:** `completion-core-rigidity` remains present in the development draft as generic
-robustness infrastructure. It belongs in the submitted paper only if a family-specific theorem
-connects it to the Baer/Q25 extension result; otherwise the focused paper should omit that layer.
+**Scope boundary:** `completion-core-rigidity` is reusable generic infrastructure, not part of the
+focused submission. A future alternate-orbit repair or fixed-locus resilience theorem may add a
+tightly scoped robustness section without restoring the broad generic package.
 
-**Combined development draft:**
+**Focused development manuscript:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
 
-**Combined novelty audit:**
+**Novelty audit:**
 [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../../notes/2026-07-13-baer-completion-adversarial-novelty-review.md).
 
 **Collision proof ledger:**
