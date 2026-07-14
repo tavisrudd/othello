@@ -54,3 +54,6 @@ Fill-miner: size(config)=size(space) → singular object, dim 0, one q. Transver
 intersection of forced-value loci → parametrized family, dim 2, all q by residue. The abundance
 target is dim-2-uniform-in-q, so only the second shape can reach it. Same *coincidence-detector*
 idea, retargeted from size-equalities to locus-transversality.
+
+## POC result (2026-07-13)
+Mechanism validated: a QR-gated pencil of dim-1 loci over PG(2,q) sweeps density ~0.42→0.47 (→1/2), bounded below uniform in q (q=11..31), vs 1/q→0 for a single locus. Gate = QR proxy for the elliptic/split trace condition; real next step = swap in the repo Grundy oracle for `t in S`. Script: scratchpad/miner_poc.py.
