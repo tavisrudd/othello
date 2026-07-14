@@ -174,6 +174,117 @@ theorem secantOrbitCenter_not_mem_arc_of_crossPair (hdeg : Module.finrank F E = 
       (secantOrbitCenter_mem_mateLine F E hdeg C hArc hC a)
   exact (Finset.disjoint_left.mp ha) hza hzb
 
+/-- Regard an endpoint of a cross-pair secant as a selected nonfixed point. -/
+noncomputable def crossPairEndpointAsNonfixed (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a)
+    (p : {p // p ∈ a.1.1}) : NonfixedArcPoint F E C := by
+  refine ⟨p.1, a.1.subset p.2, ?_⟩
+  have hp := crossPair_endpoints_subset_nonfixed F E hdeg C hC a ha
+    (Finset.mem_union_left _ p.2)
+  exact (Finset.mem_filter.mp hp).2
+
+/-- The two conjugate selected-point orbits represented by the endpoints of a cross-pair
+secant.  These are the two mate lines which cannot pass through the secant-orbit center. -/
+noncomputable def crossPairEndpointOrbits (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a) :
+    Finset (ConjugateInvariantArcPair F E C hC) := by
+  classical
+  exact a.1.1.attach.image fun p =>
+    selectedOrbitPair F E C hC (crossPairEndpointAsNonfixed F E hdeg C hC a ha p)
+
+theorem crossPairEndpointOrbits_card (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a) :
+    (crossPairEndpointOrbits F E hdeg C hC a ha).card = 2 := by
+  classical
+  rw [crossPairEndpointOrbits, Finset.card_image_iff.mpr]
+  · rw [Finset.card_attach, a.1.card]
+  · intro p hp q hq hpq
+    rw [selectedOrbitPair_eq_iff] at hpq
+    rcases hpq with hpq | hpq
+    · apply Subtype.ext
+      exact congrArg (fun r : NonfixedArcPoint F E C => r.1) hpq
+    · exfalso
+      have hpval := congrArg Subtype.val hpq
+      have hqmate : p.1 ∈ (nonfixedSecantMate F E hdeg C hC a).1.1 := by
+        change p.1 ∈ (conjugateArcPair F E C hC a.1).1
+        apply Finset.mem_map.mpr
+        exact ⟨q.1, q.2, hpval.symm⟩
+      exact (Finset.disjoint_left.mp ha) p.2 hqmate
+
+/-- Neither selected-point mate line represented by a cross-pair endpoint passes through the
+cross-pair secant-orbit center. -/
+theorem secantOrbitCenter_not_mem_crossPairEndpointOrbitLine
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a)
+    (p : {p // p ∈ a.1.1}) :
+    secantOrbitCenter F E hdeg C hArc hC a ∉
+      (selectedOrbitPair F E C hC
+        (crossPairEndpointAsNonfixed F E hdeg C hC a ha p)).1.1.line
+        (L := Point E) := by
+  let z := secantOrbitCenter F E hdeg C hArc hC a
+  let q := selectedOrbitPair F E C hC
+    (crossPairEndpointAsNonfixed F E hdeg C hC a ha p)
+  intro hzq
+  have hzpair : z ∈ a.1.line (L := Point E) :=
+    secantOrbitCenter_mem_pairLine F E hdeg C hArc hC a
+  have hppair : p.1 ∈ a.1.line (L := Point E) := a.1.mem_line p.2
+  have hpq : p.1 ∈ q.1.1.line (L := Point E) := by
+    apply q.1.1.mem_line
+    simp [q, selectedOrbitPair, crossPairEndpointAsNonfixed]
+  have hzp : z ≠ p.1 := by
+    intro h
+    apply secantOrbitCenter_not_mem_arc_of_crossPair F E hdeg C hArc hC a ha
+    change z ∈ C
+    rw [h]
+    exact a.1.subset p.2
+  have hlines : a.1.line (L := Point E) = q.1.1.line (L := Point E) :=
+    (Configuration.Nondegenerate.eq_or_eq hzpair hppair hzq hpq).resolve_left hzp
+  apply a.2
+  exact (conjugateArcPair_eq_iff_line_fixed F E hdeg C hArc hC a.1).2 (by
+    rw [hlines]
+    exact line_fixed_of_conjugateArcPair_eq F E C hArc hC q.1.1 q.1.2)
+
+theorem secantOrbitCenter_not_mem_crossPairEndpointOrbitLine_of_mem
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a)
+    (q : ConjugateInvariantArcPair F E C hC)
+    (hq : q ∈ crossPairEndpointOrbits F E hdeg C hC a ha) :
+    secantOrbitCenter F E hdeg C hArc hC a ∉ q.1.1.line (L := Point E) := by
+  rw [crossPairEndpointOrbits, Finset.mem_image] at hq
+  obtain ⟨p, hp, rfl⟩ := hq
+  exact secantOrbitCenter_not_mem_crossPairEndpointOrbitLine F E hdeg C hArc hC a ha p
+
+/-- The unique fixed line through a selected nonfixed point is the joining line of its conjugate
+selected-point orbit. -/
+theorem fixedLine_eq_selectedOrbitPair_line (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hC : IsInvariant (incidence F E hdeg) C)
+    (m : QuadraticLineCounting.FixedLine F E)
+    (p : NonfixedArcPoint F E C) (hpm : p.1 ∈ m.1) :
+    m.1 = (selectedOrbitPair F E C hC p).1.1.line (L := Point E) := by
+  let σ := (incidence F E hdeg).pointConj
+  have hσpm : σ p.1 ∈ m.1 := by
+    have hc := (ProjectiveConjugation.orthogonal_projectiveEquiv_iff
+      (frobeniusRingEquiv F E) p.1 m.1).2 hpm
+    change σ p.1 ∈ (incidence F E hdeg).lineConj m.1 at hc
+    have hm : (incidence F E hdeg).lineConj m.1 = m.1 := m.2
+    rw [hm] at hc
+    exact hc
+  have hpq : p.1 ∈ (selectedOrbitPair F E C hC p).1.1.line (L := Point E) := by
+    apply (selectedOrbitPair F E C hC p).1.1.mem_line
+    simp [selectedOrbitPair]
+  have hσpq : σ p.1 ∈ (selectedOrbitPair F E C hC p).1.1.line (L := Point E) := by
+    apply (selectedOrbitPair F E C hC p).1.1.mem_line
+    simp [selectedOrbitPair, σ]
+  exact (Configuration.Nondegenerate.eq_or_eq hpm hσpm hpq hσpq).resolve_left
+    (Ne.symm p.2.2)
+
 /-- In the `(f,e)=(4,2)` profile, the four endpoints of any cross-pair secant orbit are exactly
 all selected nonfixed points. -/
 theorem crossPair_endpoints_eq_nonfixed_of_profile_four
@@ -212,6 +323,159 @@ theorem occupiedLinePoint_mem_line
     (C : Finset (Point E)) (m : {m // m ∈ occupiedFixedLines F E C}) :
     occupiedLinePoint F E C m ∈ m.1.1 :=
   (Finset.mem_filter.mp (Classical.choose_spec (Finset.mem_filter.mp m.2).2)).2
+
+/-- Charge an occupied fixed line through a cross-pair center either to a selected fixed point on
+it or to the conjugate selected-point orbit carried by it.  The latter orbit cannot be either of
+the two cross-pair endpoint orbits. -/
+noncomputable def occupiedCenterCharge (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a)
+    (m : {m // m ∈ (occupiedFixedLines F E C) ∩ fixedLinesThroughFinset F E
+      (secantOrbitCenter F E hdeg C hArc hC a)}) :
+    {p // p ∈ fixedArcPoints F E C} ⊕
+      {q : ConjugateInvariantArcPair F E C hC //
+        q ∉ crossPairEndpointOrbits F E hdeg C hC a ha} := by
+  let mo : {m // m ∈ occupiedFixedLines F E C} :=
+    ⟨m.1, (Finset.mem_inter.mp m.2).1⟩
+  let p := occupiedLinePoint F E C mo
+  by_cases hp : (incidence F E hdeg).pointConj p = p
+  · exact Sum.inl ⟨p, Finset.mem_filter.mpr ⟨occupiedLinePoint_mem_arc F E C mo, hp⟩⟩
+  · let pp : NonfixedArcPoint F E C :=
+      ⟨p, occupiedLinePoint_mem_arc F E C mo, hp⟩
+    refine Sum.inr ⟨selectedOrbitPair F E C hC pp, ?_⟩
+    intro hpart
+    apply secantOrbitCenter_not_mem_crossPairEndpointOrbitLine_of_mem
+      F E hdeg C hArc hC a ha (selectedOrbitPair F E C hC pp) hpart
+    rw [← fixedLine_eq_selectedOrbitPair_line F E hdeg C hC m.1 pp]
+    · exact (Finset.mem_filter.mp (Finset.mem_inter.mp m.2).2).2
+    · exact occupiedLinePoint_mem_line F E C mo
+
+theorem occupiedCenterCharge_injective (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a) :
+    Function.Injective (occupiedCenterCharge F E hdeg C hArc hC a ha) := by
+  intro m n hmn
+  apply Subtype.ext
+  apply Subtype.ext
+  let z := secantOrbitCenter F E hdeg C hArc hC a
+  let mo : {m // m ∈ occupiedFixedLines F E C} :=
+    ⟨m.1, (Finset.mem_inter.mp m.2).1⟩
+  let no : {m // m ∈ occupiedFixedLines F E C} :=
+    ⟨n.1, (Finset.mem_inter.mp n.2).1⟩
+  let p := occupiedLinePoint F E C mo
+  let q := occupiedLinePoint F E C no
+  have hpm : p ∈ m.1.1 := occupiedLinePoint_mem_line F E C mo
+  have hqn : q ∈ n.1.1 := occupiedLinePoint_mem_line F E C no
+  have hzm : z ∈ m.1.1 := (Finset.mem_filter.mp (Finset.mem_inter.mp m.2).2).2
+  have hzn : z ∈ n.1.1 := (Finset.mem_filter.mp (Finset.mem_inter.mp n.2).2).2
+  by_cases hp : (incidence F E hdeg).pointConj p = p <;>
+    by_cases hq : (incidence F E hdeg).pointConj q = q
+  · have hpq : p = q := by
+      simpa only [occupiedCenterCharge, mo, no, p, q, hp, hq, dite_true,
+        Sum.inl.injEq, Subtype.mk.injEq] using hmn
+    have hpn : p ∈ n.1.1 := hpq ▸ hqn
+    have hzC := secantOrbitCenter_not_mem_arc_of_crossPair F E hdeg C hArc hC a ha
+    have hzp : z ≠ p := by
+      intro h
+      apply hzC
+      change z ∈ C
+      rw [h]
+      exact occupiedLinePoint_mem_arc F E C mo
+    exact (Configuration.Nondegenerate.eq_or_eq hzm hpm hzn hpn).resolve_left hzp
+  · simp only [occupiedCenterCharge, mo, no, p, q, hp, hq, dite_true, dite_false] at hmn
+    cases hmn
+  · simp only [occupiedCenterCharge, mo, no, p, q, hp, hq, dite_true, dite_false] at hmn
+    cases hmn
+  · have horbit : selectedOrbitPair F E C hC
+          (⟨p, occupiedLinePoint_mem_arc F E C mo, hp⟩ : NonfixedArcPoint F E C) =
+        selectedOrbitPair F E C hC
+          (⟨q, occupiedLinePoint_mem_arc F E C no, hq⟩ : NonfixedArcPoint F E C) := by
+      simpa only [occupiedCenterCharge, mo, no, p, q, hp, hq, dite_false,
+        Sum.inr.injEq, Subtype.mk.injEq] using hmn
+    rw [fixedLine_eq_selectedOrbitPair_line F E hdeg C hC m.1
+        (⟨p, occupiedLinePoint_mem_arc F E C mo, hp⟩ : NonfixedArcPoint F E C) hpm,
+      fixedLine_eq_selectedOrbitPair_line F E hdeg C hC n.1
+        (⟨q, occupiedLinePoint_mem_arc F E C no, hq⟩ : NonfixedArcPoint F E C) hqn,
+      horbit]
+
+/-- A cross-pair center is incident with at most the `f` fixed-point star lines and the mate
+lines of the other `e - 2` conjugate selected-point orbits. -/
+theorem card_occupied_through_crossPair_center_le (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C) (f e : ℕ)
+    (hf : (fixedArcPoints F E C).card = f) (hk : C.card = f + 2 * e)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a) :
+    ((occupiedFixedLines F E C) ∩ fixedLinesThroughFinset F E
+      (secantOrbitCenter F E hdeg C hArc hC a)).card ≤ f + (e - 2) := by
+  have hnon : Nat.card (NonfixedArcPoint F E C) = 2 * e := by
+    rw [natCard_nonfixedArcPoint F E C, hf, hk]
+    omega
+  have horbits : Nat.card (ConjugateInvariantArcPair F E C hC) = e :=
+    natCard_conjugateInvariantArcPair F E C hC e hnon
+  have hremaining :
+      Fintype.card {q : ConjugateInvariantArcPair F E C hC //
+        q ∉ crossPairEndpointOrbits F E hdeg C hC a ha} = e - 2 := by
+    rw [Fintype.card_subtype_compl]
+    rw [← Nat.card_eq_fintype_card, horbits]
+    have hselected :
+        Fintype.card {q : ConjugateInvariantArcPair F E C hC //
+          q ∈ crossPairEndpointOrbits F E hdeg C hC a ha} = 2 := by
+      rw [Fintype.card_coe]
+      exact crossPairEndpointOrbits_card F E hdeg C hC a ha
+    rw [hselected]
+  have hinj := Fintype.card_le_of_injective
+    (occupiedCenterCharge F E hdeg C hArc hC a ha)
+    (occupiedCenterCharge_injective F E hdeg C hArc hC a ha)
+  simpa only [Fintype.card_coe, Fintype.card_sum, hf, hremaining] using hinj
+
+/-- **Generic cross-pair invisibility bound.**  If an invariant arc has `f` fixed selected points
+and `e` conjugate selected-point orbits over a fixed field of order `s`, every cross-pair secant
+orbit is invisible on at least `s + 3 - f - e` empty fixed carriers. -/
+theorem s_add_three_sub_f_sub_e_le_card_empty_through_crossPair_center
+    (hdeg : Module.finrank F E = 2) (s : ℕ) (hF : Nat.card F = s)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C) (f e : ℕ)
+    (hf : (fixedArcPoints F E C).card = f) (hk : C.card = f + 2 * e)
+    (a : NonfixedArcPair F E C hC) (ha : IsCrossPairOrbit F E hdeg C hC a) :
+    s + 3 - f - e ≤
+      ((emptyFixedLines F E C) ∩ fixedLinesThroughFinset F E
+        (secantOrbitCenter F E hdeg C hArc hC a)).card := by
+  let z := secantOrbitCenter F E hdeg C hArc hC a
+  have hnon : Nat.card (NonfixedArcPoint F E C) = 2 * e := by
+    rw [natCard_nonfixedArcPoint F E C, hf, hk]
+    omega
+  have horbits : Nat.card (ConjugateInvariantArcPair F E C hC) = e :=
+    natCard_conjugateInvariantArcPair F E C hC e hnon
+  have htwo : 2 ≤ e := by
+    calc
+      2 = (crossPairEndpointOrbits F E hdeg C hC a ha).card :=
+        (crossPairEndpointOrbits_card F E hdeg C hC a ha).symm
+      _ ≤ (Finset.univ : Finset (ConjugateInvariantArcPair F E C hC)).card :=
+        Finset.card_le_card (Finset.subset_univ _)
+      _ = Fintype.card (ConjugateInvariantArcPair F E C hC) := Finset.card_univ
+      _ = Nat.card (ConjugateInvariantArcPair F E C hC) :=
+        Nat.card_eq_fintype_card.symm
+      _ = e := horbits
+  have hzfixed : (incidence F E hdeg).pointConj z = z :=
+    secantOrbitCenter_fixed F E hdeg C hArc hC a
+  have hthrough : (fixedLinesThroughFinset F E z).card = s + 1 := by
+    rw [card_fixedLinesThroughFinset F E z,
+      natCard_fixedLinesThrough_fixed F E hdeg z hzfixed, hF]
+  have hset :
+      (emptyFixedLines F E C) ∩ fixedLinesThroughFinset F E z =
+        fixedLinesThroughFinset F E z \ occupiedFixedLines F E C := by
+    ext m
+    simp [emptyFixedLines, allFixedLines, and_comm]
+  have hoccupied :
+      ((occupiedFixedLines F E C) ∩ fixedLinesThroughFinset F E z).card ≤
+        f + (e - 2) := by
+    exact card_occupied_through_crossPair_center_le F E hdeg C hArc hC f e hf hk a ha
+  change s + 3 - f - e ≤
+    ((emptyFixedLines F E C) ∩ fixedLinesThroughFinset F E z).card
+  rw [hset, Finset.card_sdiff, hthrough]
+  omega
 
 /-- In the profile-four case, every occupied fixed line through a cross-pair center contains a
 selected fixed point. -/

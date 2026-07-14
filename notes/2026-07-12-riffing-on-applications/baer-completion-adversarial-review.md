@@ -212,3 +212,25 @@ and axiom audit. It then kernel-checked the `f=0` profile in
 `Q25AllProfiles.pair_extension`. Their scoped build passes, their sources contain no forbidden
 proof escapes, and their axiom profiles are exactly `[propext, Classical.choice, Quot.sound]`.
 The stronger Q25 census/minimum claims remain computational evidence only.
+
+## 2026-07-14 adversarial round — generic cross-pair capacity
+
+Verdict: **the residual C99.6 claim is valid generically and kernel-checked with its natural-number
+semantics explicit.** For a cross-pair secant orbit in an `(f,e)` invariant profile over a fixed
+field of order `s`, Lean proves at least `s+3-f-e` empty fixed carriers through its center.
+
+- The two endpoints of one cross-secant represent two distinct conjugate selected-point orbits;
+  cross-pair disjointness rules out their collapsing to one orbit.
+- Neither corresponding mate line contains the fixed center. If one did, line uniqueness would
+  make the nonfixed cross-secant a fixed line, contradicting its definition.
+- Every occupied fixed line through the center charges injectively either to a selected fixed
+  point or to a conjugate selected-point orbit. The latter cannot be either participating orbit,
+  so there are at most `f+(e-2)` occupied lines.
+- Existence of the two distinct participating orbits proves `e≥2`; no unrecorded subtraction side
+  condition is assumed. Subtracting from the `s+1` fixed lines through the center gives the stated
+  natural-number lower bound.
+
+The scoped target `RelativeConicArcs.QuadraticInvisible` builds successfully. Focused source scans
+found no `sorry`, `admit`, `native_decide`, custom axiom, or unsafe declaration. `#print axioms` for
+both the occupied-line theorem and the final empty-carrier theorem reports exactly
+`[propext, Classical.choice, Quot.sound]`.

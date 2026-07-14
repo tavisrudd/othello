@@ -361,7 +361,10 @@ aggregate form and capped-multiplicity moment inequalities.
 identifies the visible charge support with `forbiddenCandidates`, instantiates both exact balances,
 and proves that sufficient aggregate invisible capacity produces a genuine arc extension. The
 geometric identification of invisible classes with fixed centers on a carrier is also checked in
-`QuadraticInvisible.lean`. `Q25ProfileZero.lean` checks the endpoint-index bridge and the
+`QuadraticInvisible.lean`. That file also proves the generic cross-pair bound: its two endpoint
+orbits have distinct mate lines missing the fixed center, and occupied center-lines inject into
+the `f` fixed selected points plus the remaining `e-2` conjugate selected-point orbits.
+`Q25ProfileZero.lean` checks the endpoint-index bridge and the
 order-five `f=0` moment partition, and `Q25AllProfiles.lean` packages the exhaustive uniform result.
 
 ### Theorem F.2 — profile-sensitive order-five extension
@@ -405,7 +408,7 @@ four-mate-line moment estimate from the `f=0` case does not apply. Its external 
 evidence is recorded next without promoting it to a theorem.
 
 Formalization and novelty boundary: the exact accounting, capped arithmetic, center-incidence,
-and moment-partition geometry above are Lean-proved. A targeted search found adjacent Baer-involution, arc-completeness, and
+the generic `s+3-f-e` cross-pair bound, and moment-partition geometry above are Lean-proved. A targeted search found adjacent Baer-involution, arc-completeness, and
 conjugate-addition literature, but no exact profile-sensitive statement; this is a priority-search
 result, not a claim of definitive historical novelty. The detailed proof and claim ledger are in
 [`2026-07-13-c99-baer-collision-strengthening.md`](../2026-07-13-c99-baer-collision-strengthening.md).

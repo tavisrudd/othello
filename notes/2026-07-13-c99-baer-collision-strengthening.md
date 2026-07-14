@@ -40,7 +40,7 @@ counting, second secant moments, and capped-multiplicity inequalities are classi
 | C99.3 | `legal + orbits = candidates + invisible + redundancy` | proved | proved linewise and in aggregate | paper-specific specialization; priority open |
 | C99.4 | visible quadratic charge support equals the coordinate forbidden-candidate set | proved | proved in `QuadraticCollision.lean` | assembled from checked coordinate infrastructure |
 | C99.5 | aggregate invisible capacity forces a genuine arc extension | proved | proved in `QuadraticCollision.lean` | paper-specific consequence; priority open |
-| C99.6 | a cross-pair secant orbit is invisible on at least `s+3-f-e` empty carriers | partially proved: invisibility is exactly center-on-carrier and the center-capacity reduction is proved; the profile-specific occupied-line bound remains | `QuadraticInvisible.lean` | elementary incidence candidate |
+| C99.6 | a cross-pair secant orbit is invisible on at least `s+3-f-e` empty carriers | proved | `QuadraticInvisible.s_add_three_sub_f_sub_e_le_card_empty_through_crossPair_center`; the occupied-line bound is `card_occupied_through_crossPair_center_le` | elementary incidence candidate |
 | C99.7 | for `s=5`, profile `(f,e)=(0,4)` has at least five legal conjugate-pair extensions | proved | `Q25ProfileZero.five_le_sum_card_legal_profile_zero`; semantic extension in `profile_zero_pair_extension` | targeted search found no exact statement; priority not definitive |
 | C99.8 | for `s=5`, profile `(f,e)=(4,2)` has at least four legal conjugate-pair extensions | proved | `Q25ProfileFour.four_le_sum_card_legal_profile_four`; semantic extension in `profile_four_pair_extension` | targeted search found no exact statement; priority not definitive |
 | C99.9 | every invariant eight-arc in `PG(2,25)` pair-extends | proved | `Q25AllProfiles.pair_extension`, combining the checked `f=0,2,4,6,8` cases | targeted search found no exact statement; priority not definitive |
@@ -113,14 +113,18 @@ Consequently each cross-pair orbit is invisible on at least
 s+1-f-(e-2)=s+3-f-e
 ```
 
-empty carriers (or the positive part of this expression outside the present profiles).  Hence
+empty carriers, with the displayed natural subtraction giving its positive part when the integer
+expression is negative.  The existence of the cross-pair itself proves the implicit side condition
+`e≥2`.  Hence
 
 ```text
 B ≥ e(e-1)(s+3-f-e).
 ```
 
 Coincidences among the listed occupied lines only increase the number of empty lines, so the upper
-bound on occupied lines is safe.
+bound on occupied lines is safe. `QuadraticInvisible.lean` kernel-checks the generic argument by
+injecting occupied center-lines into the disjoint union of the `f` selected fixed points and the
+conjugate selected-point orbits other than the two cross-pair endpoint orbits.
 
 ## Candidate derivation for `(f,e)=(0,4)` at `s=5`
 

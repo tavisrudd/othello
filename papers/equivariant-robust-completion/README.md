@@ -23,6 +23,8 @@ theorems.
 **Post-audit correction:** the classical spread example is restricted to line spreads of
 `PG(3,q)`. The exact linewise refinement separates invisible centered secant orbits from genuine
 charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved.
+The profile-independent cross-pair estimate `s+3-f-e` is also kernel-checked in
+`QuadraticInvisible.lean`; the theorem derives the necessary `e≥2` from the cross-pair witness.
 `Q25PairResult.f2_pair_extension` kernel-checks the full exceptional `f=2` existence statement,
 and the certificate-free `Q25ProfileFour.profile_four_pair_extension` kernel-checks `f=4`. The
 `f=2` statement explicitly

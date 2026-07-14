@@ -13,8 +13,9 @@ pair-extension theorem are Lean-built. Prior-art audit verdict = **SOFTEN**: the
 classical Lunelli–Sce √(2q) complete-arc bound at q=s², *not* a new constant — the surviving
 headline is the assembled orbit-valued criterion. The broad 2026-07-13 adversarial audit demotes
 the generic application upgrades to established infrastructure. The exact invisible/support/
-collision correction is now Lean-proved. The exceptional `s=5,f=2` existence theorem is also
-kernel-checked in `Q25PairResult.f2_pair_extension`; a second adversarial proof audit found no
+collision correction is now Lean-proved, including the generic `s+3-f-e` invisible-carrier bound
+for cross-pair orbits. The exceptional `s=5,f=2` existence theorem is kernel-checked in
+`Q25PairResult.f2_pair_extension`; a second adversarial proof audit found no
 proof-validity defect, and the conclusion explicitly makes both added conjugate points fresh. The
 census size and minimum 32 remain external evidence. The certificate-free
 `Q25ProfileFour.profile_four_pair_extension` also kernel-checks the `f=4` profile from center

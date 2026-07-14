@@ -89,9 +89,11 @@ kernel-checked. The exceptional order-five profile `(f,e)=(2,3)` is also kernel-
 `Q25PairResult.f2_pair_extension`; the external census and its observed minimum of 32 remain
 provenance only and are not used by that theorem. `QuadraticInvisible.lean` now kernel-checks the
 geometric rephrasing of invisibility as the secant-orbit center lying on the carrier, its aggregate
-center-incidence double count, and the local `GF(5)` two-empty-carrier consequence of an
-at-most-four occupied-line bound. `QuadraticInvisible.lean` now proves that bound for cross-pair
-centers in the `(f,e)=(4,2)` profile, and `Q25ProfileFour.profile_four_pair_extension` gives the
+center-incidence double count, and the generic `s+3-f-e` empty-carrier bound for every cross-pair
+orbit of an `(f,e)` profile. The proof derives `e≥2`, excludes the two participating mate lines,
+and injects all remaining occupied center-lines into `f+(e-2)` charges. Its local `GF(5)`
+specialization supplies the two-empty-carrier consequence used by the `(4,2)` proof, and
+`Q25ProfileFour.profile_four_pair_extension` gives the
 certificate-free semantic extension theorem. `Q25ProfileZero` kernel-checks the endpoint-index
 bridge and second-moment partition for `(f,e)=(0,4)`, obtaining at least five legal pairs and a
 fresh semantic extension. `Q25AllProfiles.pair_extension` combines this with the checked

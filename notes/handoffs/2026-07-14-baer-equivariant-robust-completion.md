@@ -1,8 +1,8 @@
 # Handoff: Baer-equivariant robust completion
 
 **Date:** 2026-07-14
-**Status:** ACTIVE — C99 uniform order-five theorem closed; C133 is next
-**Tasks:** C133
+**Status:** ACTIVE — C133 closed; C134 priority gate is next
+**Tasks:** C134
 
 ## Active-lane lock
 
@@ -21,7 +21,7 @@ priorities from other papers do not change that routing.
 - `notes/2026-07-13-baer-completion-adversarial-novelty-review.md`
 - `papers/baer-equivariant-extension/`, `papers/equivariant-robust-completion/`, and the associated
   rows in `papers/papers-index.md`
-- this handoff, its future companion archive, and the C133 registry row in the global queue
+- this handoff, its future companion archive, and the C133/C134 registry rows in the global queue
 
 ### Foreign lanes
 
@@ -44,40 +44,36 @@ Source of truth:
 - [`paper-baer-equivariant-robust-completion.md`](../2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md)
 - [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../2026-07-13-baer-completion-adversarial-novelty-review.md)
 
-## Current next task — C133
+## Closed path — C133
 
-Hostilely review residual ledger claim C99.6:
+C99.6 is valid generically and kernel-checked:
 
 > A cross-pair secant orbit is invisible on at least `s+3-f-e` empty fixed carriers.
 
-The generic center-on-carrier equivalence and center-capacity reduction are checked, while the
-profile-independent occupied-line bound is not. Do not assume the proposed inequality is true.
+`QuadraticInvisible.card_occupied_through_crossPair_center_le` injects occupied center-lines into
+the `f` selected fixed points plus all conjugate selected-point orbits except the two participating
+endpoint orbits, giving `f+(e-2)`. The final theorem
+`s_add_three_sub_f_sub_e_le_card_empty_through_crossPair_center` derives `e≥2` from the cross-pair
+witness and subtracts from the `s+1` fixed lines through the center. Scoped build, forbidden-token,
+and axiom audits pass; the axiom profile is exactly `[propext, Classical.choice, Quot.sound]`.
 
-### Attack order
+## Current next task — C134
 
-1. Reconstruct the exact hypotheses and natural-number side conditions from
-   `QuadraticInvisible.lean` and the C99 proof ledger.
-2. Test boundary profiles and incidence configurations for a counterexample or a missing
-   hypothesis; distinguish the proved `(f,e)=(4,2)` specialization from the generic claim.
-3. If valid and useful, load the named-expert context, formalize it certificate-free, and run a
-   scoped build plus forbidden-token and axiom audits.
-4. If false or overstated, state the sharp valid replacement or remove it from the claim ledger.
-5. Synchronize only the allowed Baer paper, trust, ledger, queue, and index files.
+Broaden the priority search for the exact uniform `PG(2,25)` theorem before making a historical
+novelty claim. Search adjacent terminology in finite geometry and coding theory: invariant arcs,
+Baer involutions/subplanes, conjugate additions, complete arcs, MDS-code lengthening, and classified
+eight-arcs in order 25. Record positive precedence or a bounded negative result with databases,
+queries, and source-level comparisons explicit.
 
 ### Completion gate
 
-- C99.6 has exactly one final disposition: proved generically, proved under explicit narrower
-  hypotheses, or rejected with a concrete obstruction.
-- No partially proved generic wording remains in the closed C99 ledger.
-- Any Lean theorem has a passing scoped build, accepted axiom profile, and no prohibited proof
-  escapes.
-- The external census/minimum remain separate unless the user explicitly chooses to promote and
-  certify those stronger data claims.
+- The exact uniform theorem has been compared against the strongest located primary sources under
+  all adjacent vocabularies.
+- Any priority statement remains no stronger than the evidence supports.
+- The census/minimum remain computational evidence.
 
 ## Following gates
 
-1. Broaden the priority search for the exact uniform `PG(2,25)` theorem before making a historical
-   novelty claim.
-2. Keep the census/minimum computational by default; certify them only if publication needs them.
-3. After C133 and the priority gate, allocate a separate task for a structural inverse/equality
+1. Keep the census/minimum computational by default; certify them only if publication needs them.
+2. After the priority gate, allocate a separate task for a structural inverse/equality
    theorem near saturation of `L + E M = E N + B + R`.

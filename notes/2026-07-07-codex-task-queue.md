@@ -8,12 +8,17 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C133.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C134.**
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md).
-- **C133 [QUEUED 2026-07-14]** — hostile review and disposition of residual claim C99.6: prove its
-  profile-independent invisible-carrier bound, narrow it to valid hypotheses, or remove it.
+- **C133 [REPORTED 2026-07-14]** — residual C99.6 is valid generically and kernel-checked:
+  cross-pair endpoint orbits exclude two mate lines, giving occupied-center capacity
+  `f+(e-2)` and at least `s+3-f-e` empty carriers →
+  `notes/2026-07-13-c99-baer-collision-strengthening.md`
+- **C134 [QUEUED 2026-07-14]** — broaden the priority search for the exact uniform `PG(2,25)`
+  Frobenius-invariant eight-arc conjugate-pair extension theorem before any historical novelty
+  claim.
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
