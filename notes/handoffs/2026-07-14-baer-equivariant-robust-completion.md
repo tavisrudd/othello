@@ -3,9 +3,8 @@
 **Lane**: `baer` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-14
-**Status:** ALLOCATED TASKS CLOSED; PAPER NOT CLOSED — referee defects and release gates await
-disposition
-**Tasks:** C99 (closed), C133 (closed), C134 (closed), C135 (closed); no follow-up IDs allocated
+**Status:** ACTIVE — referee closeout queue C136–C141
+**Tasks:** C99, C133–C136 (closed); C137 (started); C138–C141 (queued; focused scope selected)
 
 ## Active-lane lock
 
@@ -60,14 +59,16 @@ the singleton-independence hypothesis; facet radius has distinct notation; Table
 F.1 distinguishes first-order equality from equality in the truncated bound and includes C135;
 Corollary G contains the full-occupation case; the Q25 namespace citation is corrected; and every
 Lean/prose boundary identified by the review is explicit. C135 is correctly described as an
-algebraic equality/excess classification, not the stronger structural inverse theorem.
+algebraic equality/excess classification, not the stronger structural inverse theorem. C136 closes
+the remaining count boundary: the semantic global finset of fresh legal conjugate pairs is
+kernel-checked equal to the disjoint carrierwise union and to `PairExtensionData.legalCount`.
 
 The artifact remains a paper-development draft. Do not archive this handoff or route the lane as
-finished until the following unallocated release gates are disposed:
+finished until the following release gates are disposed:
 
-1. **Resolve scope.** Either present a focused Baer/Q25 paper or prove a genuine family-specific
-   robust-completion bridge. The current deletion theorem is generic and does not yet couple
-   deletion robustness or multi-insertion to the Q25 conjugate-pair theorem.
+1. **Execute the focused scope.** The user selected a focused Baer/Q25 paper. Retain only the
+   obstruction/completion language needed by the headline theorem; the current generic deletion
+   theorem is not a family-specific robustness result and will not anchor the submission.
 2. **Close the release evidence.** Supply primary citations and precise hereditary
    systems/hypotheses for every row of Provisional Table D, or remove the table. C134 is a bounded
    priority search for the uniform Q25 theorem; it does not replace the outstanding specialist/
@@ -76,9 +77,19 @@ finished until the following unallocated release gates are disposed:
    as a structural criterion. A structural inverse theorem or pair-saturated non-complete family is
    a strengthening, not something supplied by C135.
 4. **Produce the submission artifact.** Supply an abstract, bibliography, stable theorem numbering,
-   cross-references, and publication formatting. The global legal-pair cardinality bridge may
-   remain an explicitly identified prose lemma, or be formalized before the full count is called
-   machine checked.
+   cross-references, and publication formatting. The global legal-pair cardinality bridge is now
+   formalized by C136.
+
+## Open queue
+
+| Task | State | Deliverable |
+|---|---|---|
+| C136 | reported | Global legal-pair cardinality bridge in Lean |
+| C137 | started; focused selected | Focused Baer/Q25 manuscript restructure |
+| C138 | queued | Primary-source and hypothesis audit for classical radii |
+| C139 | queued | General quadratic-Frobenius specialist priority search |
+| C140 | queued | Sharpness result or structural-criterion positioning |
+| C141 | queued | Submission artifact and final referee/trust closeout |
 
 The routing table is also stale: it still sends `baer` to the closed C99.6 review and omits C135.
 Leave that row open until the publication disposition is chosen, then update it together with the

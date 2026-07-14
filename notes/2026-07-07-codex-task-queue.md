@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C135.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C141.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -32,14 +32,32 @@ lane switch and needs explicit approval. All rows were pegged 2026-07-14.
 ID is computed, so an invented ID in prose silently burns that number.)
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
-[handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134 is reported: the bounded
-priority search found no exact precursor for the uniform `PG(2,25)` theorem, while preserving the
-non-historical claim boundary. C135 is reported: equality is universal center/carrier avoidance
-plus collision-free charging, and excess `k` is center-incidence mass plus collision redundancy.
+[handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134–C135 are reported. The
+referee closeout queue is C136–C141: formalize the global count, settle scope, close classical-family
+and general-priority evidence, fix sharpness positioning, then produce and re-audit the submission
+artifact.
 - **C135 `[baer]` [REPORTED 2026-07-14]** — classify equality and near-equality in
   `L + E M = E N + B + R`: prove that zero correction is exactly universal orbit visibility plus
   collision-free local charging, then translate the criterion to quadratic Baer geometry →
   `notes/2026-07-14-c135-baer-inverse-equality.md`.
+- **C136 `[baer]` [REPORTED 2026-07-14]** — define the global legal conjugate-pair finset and
+  kernel-check its cardinality equality with the carrierwise `PairExtensionData.legalCount` →
+  `notes/2026-07-14-c136-baer-global-pair-count.md`.
+- **C137 `[baer]` [STARTED 2026-07-14 — FOCUSED SCOPE SELECTED]** — restructure the manuscript as
+  a focused Baer/Q25 paper, retaining only completion language needed by the headline theorem →
+  `notes/2026-07-14-c137-baer-paper-scope.md`.
+- **C138 `[baer]` [QUEUED 2026-07-14]** — audit every classical-radius row against primary sources
+  and exact hereditary hypotheses, retaining only publication-ready statements →
+  `notes/2026-07-14-c138-baer-classical-radii.md`.
+- **C139 `[baer]` [QUEUED 2026-07-14]** — run the specialist/database priority search for the
+  general quadratic-Frobenius criterion, distinct from C134's uniform-Q25 search →
+  `notes/2026-07-14-c139-baer-general-priority.md`.
+- **C140 `[baer]` [QUEUED 2026-07-14]** — resolve the sharpness gate by a near-sharp or
+  pair-saturated family, or adopt and justify the structural-criterion claim boundary →
+  `notes/2026-07-14-c140-baer-sharpness-positioning.md`.
+- **C141 `[baer]` [QUEUED 2026-07-14]** — produce the submission artifact and run the final
+  manuscript/Lean/citation/trust/referee closeout, including routing and archive disposition →
+  `notes/2026-07-14-c141-baer-submission-closeout.md`.
 
 **Clebsch hexagon paper lane (`clebsch`, 2026-07-13):** see
 [handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the

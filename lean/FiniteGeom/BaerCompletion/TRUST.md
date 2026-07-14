@@ -48,6 +48,9 @@ Concrete abstract-projective-plane consumers are in:
 - `RelativeConicArcs.QuadraticForbidden`: exact nonfixed-secant orbit count, injective charging of
   forbidden candidates, semantic identification of forbiddenness with secant coverage, and the
   end-to-end arc-extension theorem `exists_quadratic_pair_extension`;
+- `RelativeConicArcs.QuadraticGlobalCount`: semantic global finset of fresh legal Frobenius pairs,
+  unique empty mate-line decomposition, pairwise-disjoint carrier union, and exact cardinality
+  equality `card_globalLegalPairs_eq_legalCount`;
 - `RelativeConicArcs.QuadraticCollision`: visible charge support equals `forbiddenCandidates`, the
   exact carrier balance holds linewise and in aggregate, and the aggregate invisible-capacity
   hypothesis yields a genuine arc extension.
@@ -104,6 +107,10 @@ fresh semantic extension. `Q25AllProfiles.pair_extension` combines this with the
 The new lane and its `RelativeConicArcs` consumers contain no `sorry`, `admit`, `native_decide`,
 custom `axiom`, or `unsafe` declaration. Printed headline axiom profiles use only accepted Mathlib
 foundations: `propext`, `Classical.choice`, and `Quot.sound`.
+
+The C136 global-count declarations have the same accepted axiom profile. Their semantic finset is
+not defined to be the local sum: the proof derives the unique empty mate line from freshness and the
+arc property, then proves equality with the carrierwise union.
 
 For the Q25 slice specifically, a source-level completeness audit found exactly 46,056 rows
 `6≤b<c≤309`, with no gaps or duplicates: 39,012 checked non-arc witnesses and 7,044 checked legal

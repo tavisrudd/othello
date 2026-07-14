@@ -12,9 +12,10 @@ robust-completion bridge before retaining the merged package.
 **Formal status:** the abstract completion spine, quadratic pair-extension existence theorem,
 uniform `PG(2,25)` theorem, and collision equality/excess classification are kernel-checked. The
 end-to-end Lean theorem constructs a conjugate pair whose union with the invariant arc is again an
-arc. The quantitative Lean count is a linewise carrier sum; its identification with the cardinality
-of a separately defined global legal-pair set remains a prose mate-line argument. The classical-
-family completion-radius table remains provisional pending primary citations and exact hypotheses.
+arc. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh legal Frobenius pairs
+and kernel-checks its equality with the disjoint carrier union and `PairExtensionData.legalCount`.
+The classical-family completion-radius table remains provisional pending primary citations and
+exact hypotheses.
 
 **Publication status:** major revision. The checked Q25 result has no proof-validity defect in the
 scoped audit, but scope, classical-family citations, specialist priority search for the general

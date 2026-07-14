@@ -287,11 +287,11 @@ empty lines introduces no double counting.
 
 Formalization boundary: the coordinate existence theorem is Lean-proved, including the occupied-
 line formula, exact empty-line count, nonfixed-secant orbit count, injective forbidden charge, and
-the fact that a surviving candidate preserves the arc property. Lean's quantitative count is the
-linewise sum `PairExtensionData.legalCount`. The displayed identification of that sum with the
-cardinality of a separately defined global legal-pair set uses uniqueness of the mate line in the
-prose proof; it is not presently a named Lean cardinality theorem. The three-case classification is
-likewise used as prose motivation, while the checked candidate semantics suffices for existence.
+the fact that a surviving candidate preserves the arc property. `QuadraticGlobalCount.lean` defines
+the semantic global finset of fresh Frobenius pairs whose union remains an arc, proves that every
+such pair has a unique empty mate line, and proves its cardinality equal to
+`PairExtensionData.legalCount`. The three-case classification remains prose motivation, while the
+checked candidate semantics and global-count equivalence supply the theorem's quantitative content.
 
 #### Lean support
 
@@ -305,6 +305,9 @@ constructs the coordinate candidates and discharges `candidate_count` automatica
 and [`RelativeConicArcs/QuadraticForbidden.lean`](../../lean/RelativeConicArcs/QuadraticForbidden.lean)
 discharge the remaining fields; the latter proves the end-to-end theorem
 `exists_quadratic_pair_extension`.
+[`RelativeConicArcs/QuadraticGlobalCount.lean`](../../lean/RelativeConicArcs/QuadraticGlobalCount.lean)
+proves `globalLegalPairs_eq_carrierwiseLegalPairs` and
+`card_globalLegalPairs_eq_legalCount`.
 
 ### Theorem F.1 — heterogeneous pair-extension bound
 
@@ -605,10 +608,10 @@ queue should not drive the scope until their citations and hypotheses are comple
 3. `BaerPlane.lean`, `ProjectiveConjugation.lean`, `QuadraticFrobenius.lean`: **landed** — abstract
    involution and trace results, coordinate semilinear incidence preservation, and the degree-two
    Frobenius instance, including fixed-locus normalization and exact fixed-line candidate counts.
-4. `PairExtension.lean`: **landed for the linewise count and end-to-end existence** — `E*(N-M)` and
-   the exact quadratic data wrapper; `QuadraticPairExtension.lean`, `QuadraticLineCounting.lean`,
-   and `QuadraticForbidden.lean` discharge all coordinate fields and prove semantic arc extension.
-   Identification with a separately defined global legal-pair cardinality remains prose.
+4. `PairExtension.lean`: **landed end to end** — `E*(N-M)` and the exact quadratic data wrapper;
+   `QuadraticPairExtension.lean`, `QuadraticLineCounting.lean`, and `QuadraticForbidden.lean`
+   discharge all coordinate fields and prove semantic arc extension; `QuadraticGlobalCount.lean`
+   identifies the semantic global finset and its cardinality with `legalCount`.
 5. `RobustHole.lean`: **landed** — below-`τ` survival, secant-count robustness, and preservation.
 6. `Core.lean`: **landed** — completion cores and the sharp unique-completion deletion theorem.
 7. `ClassicalFamilies.lean`: add exact radii as incidence APIs become available.
@@ -621,9 +624,8 @@ supplies the column-code dictionary.
 ## Release gates
 
 - Choose the focused Baer/Q25 paper or land the family-specific theorem required by the merged route.
-- Keep Theorem F and F.1 synchronized with the checked declarations and trust manifest. Either keep
-  the global-cardinality bridge explicitly in prose or formalize that bridge before calling the
-  entire quantitative count machine checked.
+- Keep Theorem F and F.1 synchronized with the checked declarations and trust manifest, including
+  the C136 semantic global-cardinality theorem.
 - Audit every classical-family radius against primary finite-geometry literature and state its exact
   hereditary system; otherwise remove Provisional Table D from the submission.
 - Produce a sharp or near-sharp invariant family, or pitch the extension theorem as a structural
