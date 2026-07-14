@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C128.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C129.**
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
@@ -35,6 +35,10 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
   paper does NOT exist. Must-read: Dye 1991. `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c127-klein-reduction-novelty.md`
 - **C128** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
+- **C129** — must-read sources: **Dye-1991 gate CLEARED** (verdict NO via Dye's own zbMATH review +
+  SVM Remark 2 + Dye 1997 recap — safe to draft w/ footnote, ILL open); citations locked (ZWK I.4–I.7,
+  DMP 1909.00207, O'Keefe–Storme, Hirschfeld–Sadeh 1984). `[REPORTED 2026-07-13]` →
+  `notes/2026-07-13-c129-mustread-sources.md`
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

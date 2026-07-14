@@ -9,10 +9,10 @@ certified chirality-Z/2 proposition. **Klein two-spine "because" struck** (false
 variety conjecture / C123 DEAD** (2 independent passes, q=19 counterexample + k=4 impossibility);
 11-cell/j-function decorative. Loop-back: this is the extremal instance of the **parent conic-
 involution Schreier program**.
-**Next session (all non-Fable):** (1) **read Dye 1991** — gates the "first" claim, only source that
-could pre-empt the headline; (2) Lean-ify the rigidity theorem + the Schreier=icosahedron graph
-(both `decide`-grade); (3) reconcile the two docs' P¹ labeling; (4) engage ZWK 2020 + DMP
-twisted-cubic tables in the writeup; re-sweep PG(2,11) complete-arc (Italian-school) lit before "first".
+**Next session:** Dye gate CLEARED (C129, draftable now w/ footnote; citations locked). Remaining:
+(1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade); (2) reconcile
+the two docs' P¹ labeling; (3) write the single-spine draft (headline = rigidity theorem; ZWK/DMP/
+Hirschfeld–Sadeh citations in hand); optional: ILL Dye 1991 to close the footnote.
 **Companion log**: append dated riffs to
 [`done/2026-07-13-icosahedral-mds-deep-holes-archive.md`](done/2026-07-13-icosahedral-mds-deep-holes-archive.md)
 (create on first archive).
@@ -61,10 +61,17 @@ below is DEMOTED to companion history:**
   points of its A₅-invariant conic.* SVM 1995 Prop. 13 already proved incompleteness-by-computer at
   q=11 but **did not print the extension points** — that one unprinted finite fact + a known
   dictionary is the real contribution. True, apparently unstated, thin.
-- **FATAL-RISK, must resolve first: read Dye 1991** (JLMS 44, 270–286; ILL it). He studied this exact
-  hexagon's bisecant geometry (Brianchon = points on exactly 3 bisecants); if he states the 0-bisecant
-  points are the conic, our headline collapses to "we translated Dye through DMP." No other single
-  event does comparable damage.
+- **Dye-1991 gate: CLEARED (C129, strong proxies) — safe to draft with a footnote.** Verdict **NO**:
+  Dye does not state the 0-bisecant points = the conic. Evidence: the **zbMATH review Zbl 0698.20032
+  is written by Dye himself** (detailed contents: Brianchon points, 5 triangles, the self-polar conic
+  C, stabilizers, double-contact conics — *no* 0-bisecant/no-secant statement); Dye's own open 1997
+  Edinburgh paper recaps 1991 page-by-page, strongest conic-incidence being only "C contains no
+  vertex" (p.281); **SVM 1995 Remark 2** extracts the *only* bisecant-stratum↔C fact Dye has
+  (Brianchon∈C iff q=3^(2h)) and proves q=11 incompleteness **by computer without using Dye** — which
+  they'd have cited if it existed. Structural: "C misses every bisecant" is a per-q rationality fact
+  (false over general K, false at q=9), with no home in Dye's synthetic general-K paper. Residual risk
+  LOW (a finite-field aside in the 17-pp body); keep the ILL request open
+  (`londmathsoc.onlinelibrary.wiley.com/doi/pdf/10.1112/jlms/s2-44.2.270`) but draft now.
 - **Klein spine: DECORATION, and the causal "because" is FALSE by our own data.** f mod 11 is the
   PGL₂(11)-invariant Dickson form (forgot the icosahedron); and C126 shows covering-exactness *fails*
   for every sibling — so the Klein reduction produces the *objects* but does NOT cause the *theorem*.
@@ -104,10 +111,16 @@ complete deep-hole set is the full F_q-point set of a positive-dimensional named
 group-theoretic cause. + chirality-Z/2 proposition + the p=11 uniqueness theorem (C126, as the
 result not a defect). Klein/dual-variety demoted to discussion + one open question.
 
-**MUST-DO before any "first"/submission:** (1) read Dye 1991; (2) cite ZWK as the true precursor of
-any dual-variety statement (not "adjacent"); (3) start C123 from the DMP twisted-cubic tables
-(arXiv:1909.00207, 2104.12254, 2103.11248, 2112.14803) — the k=4 orbit/coset data may already exist
-there; (4) re-sweep the PG(2,11) complete-arc classification (Italian school) before the word "first".
+**Citations locked (C129) — draftable now:**
+- **Dye gate cleared** (above) — footnote the residual, keep ILL open.
+- **ZWK** arXiv:1901.05445 **Thms I.4–I.7** (I.5 = tangent lines to the NRC; I.6 = quadratic-extension
+  family; I.7 = completeness, count q(q+1)²/2) — cite as the true precursor of any dual-variety talk.
+- **DMP k=4** = arXiv:**1909.00207** Thm 3.1 + Tables 1–2, Def 7.1(M2), Thms 7.2/7.3 (codim-4 GDRS
+  quasi-perfect R=3; distance-3 cosets = points off every real chord) — the k=4 "uncovered locus"
+  citation; companions 2104.12254/2103.11248/2112.14803.
+- **O'Keefe–Storme 1996** (Zbl 0848.51007) — cite-for-completeness; SVM 1995 supersedes for the plane.
+- **PG(2,11) arc classification** — **Hirschfeld–Sadeh, Mitt. Math. Sem. Giessen 164 (1984) 245–257**
+  + Sadeh (Sussex) thesis + Hirschfeld PGOFF 2nd ed. Ch.14 — cite before writing "first".
 
 **Pending corroboration:** the dual-variety-examination and minimal-hypothesis (Thread A) agents were
 still running when this landed — their independent reads may soften or harden the above.
