@@ -1,5 +1,7 @@
 # Spinoff Bridges: Proved Cap-Game Assets Through Duals and Isomorphisms
 
+**Lane**: `cap` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-07-09
 **Created by**: 2026-07-09--11 (`8b6d1419-df84-4895-8bec-907fb3a79c36`)
 **Purpose**: Develop the satellite projects that fall out of the program's *proved* theorems

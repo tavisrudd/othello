@@ -1,5 +1,9 @@
 # Lean formalization plan — the -10 / -11 PROVED corpus
 
+**Lane**: `repaircodes` — see CLAUDE.md § Lane routing. Pegged to the lane that owns the
+delivered work; the `CompletionCore` / `ContinuationRigidity` / `BaerExtension` phases named in
+the original scope were never started.
+
 **Date**: 2026-07-11
 **Status**: REPAIRCODES FORMALIZATION AND MANUSCRIPT TRACK COMPLETE under the strict trust gate. The uniform axis–twisted-cubic code,
 small-circuit classification, exact repair clutters and sharp invariants, q=9 `[19,4,8]₉` row and

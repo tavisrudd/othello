@@ -56,16 +56,24 @@ Class count = coarsest-bisimulation classes of the full residual game (translati
 |---|-----------------|--------------|---------------|-------------------|----------------|---------------|
 | 11 | 15,697,452 | 129,732 | {0,1,2,3} | **29** | {0:11, 1:8, 2:5, 3:5} | [4,10,17,26,28,29,29] |
 | 13 | 435,071,066 | 2,574,386 | {0,1,2,3} | **65** | {0:29, 1:13, 2:9, 3:14} | [4,11,20,34,47,64,65,65] |
-| 17 | _(running)_ | | | | | |
+| 17 | _(deferred — canon-bound)_ | | | | | |
 
 Root Grundy 0 at q=11 and q=13 (⇒ PG(2,11), PG(2,13) = P), consistent with the known solves.
 
 ### Interpretation — the quotient GROWS
 
 The load-bearing quantity is the slope, and it is clearly positive: **29 → 65** from q=11 to
-q=13 (2.24×; Grundy range unchanged at {0,1,2,3}). So the coarsest *raw-state* quotient is
-**not bounded** — there is no small finite automaton on residual states, and the naive
-"octal-periodicity" shape is unlikely. This matches the static-selector-impossibility results
+q=13 (2.24×; Grundy range unchanged at {0,1,2,3}). So the coarsest *raw-state* quotient
+**grows across both measured points**, with no sign of stabilizing, and the naive
+"octal-periodicity" shape looks unlikely on this evidence. Two points establish growth, not
+unboundedness: a bounded raw-state automaton is **unsupported** by this measurement, not
+excluded by it. The q=17 row would fix the growth rate and is deferred (canon-bound), so that
+question stays open rather than settled.
+
+> **Wording corrected 2026-07-14.** This paragraph previously read "the coarsest *raw-state*
+> quotient is **not bounded** — there is no small finite automaton on residual states." Two
+> measured points cannot carry that; q=17 is deferred on a canonicalization limit, not a
+> mathematical one. The routing to C84 is unchanged — it never depended on the stronger claim. This matches the static-selector-impossibility results
 (C75/C76/C79) and the irregular depletion set `{11,17}`: no bounded *static* quotient.
 
 **But "raw quotient grows" ≠ "intractable."** The coarsest bisimulation of the whole state

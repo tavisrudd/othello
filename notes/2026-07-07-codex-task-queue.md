@@ -101,9 +101,10 @@ theorem**. C75/C76 close the pointwise selector/invariant spaces; C77 closes the
 bank. C79's arithmetic pass specified the bulk gap; the game-side follow-ups **C80** (drain
 resource proven — `|live conic|` drops by `1+deg`; abundance/descent open), **C81** (char-5/7
 subfield gate), **C82** (orbital counting, gated) remain. **C83** raw-quotient measurement is done
-(coarsest bisimulation 29 at q=11 → 65 at q=13, growing; q=17 deferred, canon-bound): no finite
-raw-state automaton, but this is deprioritized (not superseded) behind the structural Schreier lane
-— tractability is a question of `G∪` structural width, not raw-quotient size.
+(coarsest bisimulation 29 at q=11 → 65 at q=13, growing; q=17 deferred, canon-bound): a bounded
+raw-state automaton is unsupported on two points, not excluded. This is deprioritized (not
+superseded) behind the structural Schreier lane — tractability is a question of `G∪` structural
+width, not raw-quotient size.
 
 **INDEPENDENT PAPER-STRENGTHENING LANE (2026-07-13): relative-conic evaluation/coding/q11
 structure — C106–C110.** C106–C109 are reported: the sharp evaluation dichotomy, transparent
@@ -303,8 +304,9 @@ fixed-locus / quadric-Witt dichotomy leap).
   `notes/2026-07-12-c82-orbital-counting.md`.
 
 - **C83 `[cap]` [MEASURED 2026-07-12 — deprioritized behind C84, not superseded]** — coarsest
-  bisimulation of the residual game grows (29 at q=11 → 65 at q=13; q=17 deferred, canon-bound):
-  no finite raw-state automaton. Tractability is a `G∪` structural-width question (→ C84), not
+  bisimulation of the residual game grows across both measured points (29 at q=11 → 65 at q=13;
+  q=17 deferred, canon-bound), leaving a bounded raw-state automaton unsupported but not excluded.
+  Tractability is a `G∪` structural-width question (→ C84), not
   raw-quotient size. Report:
   [`2026-07-12-c83-bisimulation-quotient.md`](2026-07-12-c83-bisimulation-quotient.md). Original
   bulk-quotient spec: union-graph compression + coarsest value-respecting congruence. Two corollaries of the C79 edge-disjointness

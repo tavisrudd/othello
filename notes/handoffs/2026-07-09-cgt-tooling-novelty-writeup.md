@@ -1,5 +1,7 @@
 # Write-up: "A game tablebase meets CGT — the S4 query tool in context"
 
+**Lane**: `cap` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-07-09
 **Created by**: Fable (2026-07-09 discussion; no prior session context needed)
 **Purpose**: Bank a calibrated assessment of how novel the S4 memo-dump/query tooling is within

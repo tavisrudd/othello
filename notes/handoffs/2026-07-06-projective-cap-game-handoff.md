@@ -569,7 +569,8 @@ task list.  Current high-value items:
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang
   counting, gated on C80's packet. **C83** — the coarsest-bisimulation measurement is done (29 at
-  q=11 → 65 at q=13, growing; q=17 deferred): no finite raw-state automaton, deprioritized (not
+  q=11 → 65 at q=13, growing; q=17 deferred, canon-bound): a bounded raw-state automaton is
+  unsupported on two points, not excluded. Deprioritized (not
   superseded) behind C84's structural route,
   [report](../2026-07-12-c83-bisimulation-quotient.md). Full specs in the
   [codex task queue](../2026-07-07-codex-task-queue.md).
