@@ -387,6 +387,26 @@ Sibling search across √5-primes × all small A₅ plane-orbits (arc? complete-
   Highest-value relative, partially testable in-repo now (C123). The paper's path from singular→family
   runs through k, not p.
 
+### ML/stats micro-implications (certified unit-tests, not a lane)
+
+Value = exact *certified* micro-examples for someone else's methods paper; none stands alone, none
+needs the multi-q program.
+- **real** — deep holes = certified closed-form *hard distribution* (worst-case decoding inputs on a
+  named variety); the uniform 20-way tie = certified **Bayes-optimal error floor** (no decoder beats
+  it).
+- **real** — chirality Z/2 = a **certified non-identifiable latent**: invariant under all 60
+  symmetries ⇒ no equivariant learner recovers the handedness bit from the task — minimal
+  symmetry-protected-unlearnable example (sharpens "invariant but not blind"). Also a proven
+  *insufficient-statistic* pair.
+- **real** — non-GRS/no-quadratic-vanishing = certified **kernel-inadequacy witness** (no degree-≤2
+  Veronese kernel separates arc from conic).
+- **real** — anti-robustness at p=11 = certified example of task structure as a **sharp isolated
+  point**, not a robust basin (proof-backed extrapolation-trap for ML-for-math).
+- **speculative** — A₅ learnable but chirality not (symmetry-discovery test case); Petersen leader
+  graph as a fixed adversarial confusion graph; A₅-augmentation ceiling.
+- **mirage** — self-dual/contrastive pairing (refuted); "recover group from orbit samples" (needs
+  multi-q).
+
 ### Ranked open checks (surprising × real × deliverable)
 
 1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
