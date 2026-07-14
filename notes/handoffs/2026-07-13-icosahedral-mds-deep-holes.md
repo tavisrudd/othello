@@ -14,7 +14,8 @@ involution Schreier program**.
 [`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/) (commit 4b6aa8e). All proof gaps
 closed (degenerate-conic exclusion + secant-covering counting lemma + q=9), all companion runs done &
 verified (|U| recompute; dual code = again Clebsch up to orbit; hexads transverse to S(5,6,12);
-10-arc empty-deep-hole foil). C132 structural-singularity in §6. **Remaining (non-blocking):**
+10-arc empty-deep-hole foil). C132's four-target negative is adversarially corrected; it is not a
+global structural-uniqueness theorem. **Remaining (non-blocking):**
 (1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade — mind the two-bar
 caveat: the 1548-arc TFAE cert likely needs `native_decide`, dents the strict-trust story);
 (2) verify Cheng–Murray + add Storme–Thas 1991 to the citation lock; (3) C131 Sadeh on-receipt
@@ -23,12 +24,10 @@ conic-rigidity/covering reading, Sadeh cited for the census. **Priority on the |
 classification literature outright** (it's the standard byproduct of arc classification) — so the
 Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
 blocking**; nothing gates drafting. Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
-parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this. **Family route via the
-reduce-at-best-prime functor is now CLOSED NEGATIVE too (C132):** no second instance — the F₁₁ case
-is singular for a *structural* reason (the exceptional variety must sit on the deep-hole side with an
-arc config; dimension-up loses the invariant genus-0 curve, and genus-0-preserving groups are the
-already-exhausted P¹ lane). The paper stays single-instance; use the C132 diagnosis to strengthen the
-"why 11" section (structural singularity, not exhaustion).
+parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this. **The four-target
+reduce-at-best-prime spike is CLOSED NEGATIVE (C132):** none realizes the arc/deep-hole template.
+The corrected 27-line model is `Q⁻(5,2) ⊂ PG(5,2)` and is non-cap; the spike does not prove global
+uniqueness or exhaust every `P¹` construction. The paper stays single-instance.
 **Companion log**: append dated riffs to
 [`done/2026-07-13-icosahedral-mds-deep-holes-archive.md`](done/2026-07-13-icosahedral-mds-deep-holes-archive.md)
 (create on first archive).
@@ -345,15 +344,14 @@ chirality Z/2 (speculative). Leech/Golay: mirage for this functor (already codes
   The tower k=2,3,4… shadows the graded ring of forms, with E₄³−E₆²=1728Δ its k=3 shadow. Reframes
   covering radius as a modular-discriminant phenomenon. Testable seed via the twisted-cubic module.
 
-### Higher-dim "next 11" candidates (C126 killed dim-1 siblings → go up a dimension)
+### Higher-dim "next 11" candidates (C132 tested; no hit)
 
-1. **27 lines / GQ(2,4) over F₄ / E₆ [best].** 27 lines ↔ 27 points of GQ(2,4), W(E₆)-symmetric,
-   natively over **F₄** — where the **hexacode** already lives (our precedent). "27 fills a GQ at F₄"
-   = the plane/space analog of "12 fills P¹ at F₁₁"; loops back to R-A. Own lane.
-2. **Valentiner A₆ ⊂ PGL₃ over P² [real group, harder].** Ternary icosahedral sibling; needs the
-   prime where a Valentiner orbit fills P²(F_p)=p²+p+1. Hom(A₆,ℤ/2)=0 → chiral analog.
-3. **Hesse config / order-216 group over P² [real, small].** 9 inflections, F_p⊇ζ₃; doesn't fill a
-   standard space cleanly (weaker "next 11"), but cheap 2nd data point for the reduction functor.
+1. **27 lines / GQ(2,4) / E₆ — no arc-template hit.** The correct finite projective model is
+   `Q⁻(5,2) ⊂ PG(5,2)`; its 45 lines make the 27-point set non-cap.
+2. **Valentiner A₆ ⊂ PGL₃ over P² — no arc orbit at F₁₉.** The projective orbits have sizes
+   `36,45,60,60,180`, all exceeding the odd-plane arc maximum 20.
+3. **Hesse configuration over F₇ — empty uncovered locus.** Its 12 secants cover all 57 plane
+   points. See the corrected C132 report and durable verifier.
 
 ### Unfound faces (face-hunt) — ranked surprising × real
 
@@ -417,9 +415,8 @@ Sibling search across √5-primes × all small A₅ plane-orbits (arc? complete-
 - **Polytope siblings real, code-siblings degenerate.** 57-cell (PSL₂(19), hemi-dodecahedron) is the
   true {3,5,3} abstract-polytope sibling of the 11-cell — but the code/deep-hole structure dies where
   the p=19 arc fails complete-outside. F1 (11-cell) stands as *structure*, not a code family.
-- **Cousins by group (faithfulness to arc + deep-var + chirality + modular), ranked:** W(E₆)/27-lines
-  /GQ(2,4) over F₄ [best, own lane] > A₆/Valentiner⊂PGL₃ (Hom(A₆,ℤ/2)=0→chiral) > PSL₂(7)/Klein
-  quartic (curve not plane-arc) > M₁₂-S(5,6,12)/Hessian (share substrate only).
+- **Cousins by group:** the W(E₆)/27-line and A₆/Valentiner arc-template proposals failed C132;
+  PSL₂(7)/Klein quartic and M₁₂-S(5,6,12) remain only shared-substrate analogies.
 - **Cousins by modular object [open]:** if f = j-denominator, ours is the **level-1/icosahedral** case;
   natural cousins = other **genus-0 Hauptmodul / McKay–Thompson (Γ₀(N)+) moonshine levels**. Richest
   conjectural family framing; entirely open, no in-repo handle — a question for a modular-forms person.
@@ -469,16 +466,14 @@ a density test point. Only use: a one-line boundary-evaluator sanity corner (6 c
 - [real] **Schreier=icosahedron graph** as a standalone algebraic-graph-theory note.
 - [minor] publish the exhaustive **|U| histogram {12,16,18,19,20,21,22}** for PG(2,11) 6-arcs as a table.
 
-**C. "Reduce-at-best-prime" functor as a program — CLOSED NEGATIVE (C132).** The census idea keyed on
-the *fill signature* `|config|=|space|` (27-lines/GQ(2,4)/F₄, Hesse, Valentiner A₆, 57-cell): all die
-by one mechanism — that signature selects space-*filling* rich-incidence configs (never arcs), but the
-template needs the exceptional variety on the **deep-hole side** with the config a plain arc. 27-lines
-= GQ(2,4) has no external locus (cap-rescue fails); Valentiner A₆/F₁₉ has no arc orbit + no invariant
-conic; 57-cell's group can't act on PG(2,7); Hesse's deep-holes are empty. **Diagnosis:** dimension-up
-to a bigger exceptional group loses the invariant genus-0 curve, and genus-0-preserving groups are the
-already-exhausted P¹ lane (C126 primes / C123 k-tower). Corrected detector signature (deep-hole side,
-`|U|=|conic|=q+1`) banked in `notes/2026-07-14-c132-second-instance-spike.md`. The 27-lines/R-A link
-survives only as a **shared-object** note (Brianchon=Eckardt→W(E₆)), not a second covering-instance.
+**C. "Reduce-at-best-prime" four-target spike — CLOSED NEGATIVE (C132).** The tested 27-line,
+Valentiner, 57-cell, and Hesse proposals do not realize the template. Adversarial correction: the
+27-point geometry is `Q⁻(5,2) ⊂ PG(5,2)`, with 36 external points, but its 45 contained lines make it
+non-cap; no `PG(5,4)` model is asserted. Valentiner has no arc orbit or invariant conic, the 57-cell
+group cannot act on `PG(2,7)`, and the Hesse secants cover `PG(2,7)`. The durable verifier and
+corrected detector prescription are in `notes/2026-07-14-c132-second-instance-spike.md`. This closes
+the spike, not all possible genus-zero examples. The 27-lines/R-A link survives only as a
+shared-object note.
 
 **D. Expository / aesthetic** [real, low-risk high-appeal]: a "one object seen ten ways" gem
 (Monthly/Intelligencer/Notices — largely written in this handoff); an interactive visual artifact
@@ -496,8 +491,8 @@ gate→loop-back) as a reusable AI-assisted math-triage case study.
 (quasicrystals/capsids) [speculative→mirage, no load-bearing bridge].
 
 **Worth pursuing:** A (parent feed, strategic) · D (gem+artifact, low-risk) · E (formalization).
-~~C (functor census, the family route)~~ **CLOSED NEGATIVE (C132)** — no second instance; F₁₁ singular
-by structural reason. Rest = free footnotes or thin.
+~~C (four-target functor spike)~~ **CLOSED NEGATIVE (C132)** — no hit among those targets; global
+uniqueness is not claimed. Rest = free footnotes or thin.
 
 ### Ranked open checks (surprising × real × deliverable)
 

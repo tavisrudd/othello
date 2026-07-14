@@ -4,12 +4,12 @@ Coincidences where an exceptional configuration's size = a space's point-count o
 (the rigidity 'fills the space' signature). Ranked by interest score.
 
 > **⚠ WRONG SIGNATURE (C132, 2026-07-14).** This table keys on `|config| = |space|` — the *config*
-> side. That selects space-*filling* rich-incidence configs (27-lines=GQ(2,4), Hesse, 57-cell), which
-> carry many collinear triples and are **never arcs** → no deep-hole reading. The Clebsch template
+> side. In the tested 27-line and Hesse cases this selects rich-incidence configurations rather than
+> arcs; the 57-cell and Valentiner candidates fail separate group/orbit gates. The Clebsch template
 > needs the exceptional variety on the **deep-hole side**: a group orbit that IS an arc whose
 > secant-complement = the full F_q-points of a genus-0 named curve (`|U|=|conic|=q+1`). Only rows 1–2
-> (the icosahedral 6-arc) satisfy the *correct* signature; rows 9/16/19 are categorically different
-> and confirmed dead. Re-key any future search to the deep-hole side. See
+> (the icosahedral 6-arc) are the known hits under the *correct* signature; rows 9/16/19 do not
+> reproduce it. Re-key any future search to the deep-hole side. See
 > `notes/2026-07-14-c132-second-instance-spike.md`.
 
 | # | score | configuration | group | size | fills | q | lane | note |
@@ -22,7 +22,7 @@ Coincidences where an exceptional configuration's size = a space's point-count o
 | 6 | 11 | S(5,6,12) 12-set | M12 | 12 | PG(1,11) | 11 | arcs/design | = our conic point set [KNOT: co-located with icosahedron vertices] |
 | 7 | 11 | icosahedron faces=dodeca verts | A5 | 20 | oval/conic PG(2,19) | 19 | arcs | degenerate sibling [KNOT: co-located with second-largest PG(4,3) cap] |
 | 8 | 10 | Baer subplane PG(2,q^2) | PSL(3,q) | 7 | PG(2,2) | 2 | Baer | 7=Fano at q=2 |
-| 9 | 10 | 27 lines of a cubic surface | W(E6) | 27 | AG(3,3) | 3 | twisted-cubic | = GQ(2,4) pts over F4 |
+| 9 | 10 | 27 lines of a cubic surface | W(E6) | 27 | AG(3,3) | 3 | twisted-cubic | numerical fill only; GQ(2,4) projective model is Q⁻(5,2) ⊂ PG(5,2) |
 | 10 | 10 | hyperoval | A6/S6 linked | 6 | PG(1,5) | 5 | arcs | PG(2,4) hexacode plane |
 | 11 | 10 | S(5,6,12) 12-set | M12 | 12 | oval/conic PG(2,11) | 11 | arcs/design | = our conic point set [KNOT: co-located with icosahedron vertices] |
 | 12 | 9 | hyperoval | A6/S6 linked | 6 | oval/conic PG(2,4) | 4 | arcs | PG(2,4) hexacode plane |

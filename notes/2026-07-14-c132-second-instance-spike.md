@@ -1,27 +1,32 @@
 # C132 — Second-instance spike: is there another "deep-hole locus = F_q-points of a named variety"?
 
 **Date**: 2026-07-14
-**Verdict**: **NO clean second instance found in this pass.** All fill-signature candidates
-(27-lines/W(E₆), Valentiner A₆, 57-cell/PSL₂(19), Hesse) die, and they die by **one shared
-structural mechanism**. The negative is well-argued and certificate-grade; the mechanism also
-diagnoses a blind spot in the gem detector and prescribes the correct signature for a real
-second instance.
+**Verdict**: **NO clean second instance among the four tested targets.** The 27-lines/W(E₆),
+Valentiner A₆, 57-cell/PSL₂(19), and Hesse candidates each fail the arc/deep-hole template. The
+Valentiner and Hesse computations are independently reproducible; the negative closes this spike,
+not the global search for a second named-variety deep-hole example.
+
+## Adversarial correction (2026-07-14)
+
+The first committed report conflated two models of `GQ(2,4)`, placing its 27 points in `PG(5,4)`
+and claiming that they had no ambient complement. The classical projective model is instead the
+elliptic quadric `Q⁻(5,2) ⊂ PG(5,2)`, whose complement has 36 points. The local rejection still
+holds because the quadric contains 45 projective lines and hence is not a cap. The audit also
+removed the stronger claim that these four failures exhaust every genus-zero or `P¹` route.
 
 Template being replicated (icosahedral F₁₁ case, SOLVED): a small **arc** config `A` (6 axis-poles,
 a genuine 6-arc) in `PG(2,11)`, whose **deep-hole locus** `U` = points off `A` and off all 15
 secants = the **full 12 F₁₁-points of the A₅-invariant conic** (= P¹), with group cause A₅.
 
-## The one mechanism that kills every candidate
+## Common diagnostic and candidate-specific failures
 
 The template needs the config to be an **arc / cap** (NO 3 collinear) and the *exceptional named
 variety to sit on the DEEP-HOLE side* (the uncovered locus), while the config is a plain arc.
 
-Every "gem-detector" fill-signature candidate is the opposite: it is an exceptional
-**configuration** — a point/line incidence geometry defined *by* rich collinearity — so its point
-set (or every group orbit) carries many collinear triples and is **never an arc**. And
-"size = |space|" (the signature the detector keys on) marks a **space-filling** object with **no
-complement**, i.e. no external deep-hole locus at all. Both properties are exactly wrong for the
-template.
+The gem detector was keyed to coincidences of the form `|config|=|space|`, which often selects
+rich-incidence configurations rather than caps. That mismatch kills the 27-line and Hesse targets;
+the Valentiner and 57-cell targets fail for the separate orbit-size and group-embedding reasons
+below. Thus there is a useful common diagnostic, but not one theorem disposing of every candidate.
 
 The icosahedral case is rare precisely because it **decouples**: the exceptional structure
 (icosahedron = 12 conic points) is the deep-hole locus, and the config (6 poles) is a separate,
@@ -29,19 +34,18 @@ genuine 6-arc. None of the candidates reproduce that decoupling.
 
 ## Framing verdict for 27-lines / W(E₆) (the ½-value task)
 
-**A covering/deep-hole reading does NOT exist. Decisive.**
+**The proposed arc/MDS covering reading fails. Decisive for this template.**
 
-- The 27 lines' intrinsic linear-dependency (secant) structure is the **generalized quadrangle
-  GQ(2,4)**: the 45 tritangent-plane triples are exactly the "collinear triples," and the 27
-  objects are *precisely* the 27 points of GQ(2,4) (Schläfli graph = complement). A config that
-  *fills its own incidence geometry* has **no external/uncovered locus** — the template needs
-  `config ⊊ ambient PG(n,q)` with named uncovered points; here there is nothing external.
-- The only rescue — realize the 27 lines as 27 points via the minuscule 27-rep of E₆, a subset of
-  `PG(5,q)` — **fails the arc requirement**: those 27 points carry the 45 tritangent triples as
-  genuine linear dependencies (three mutually-incident lines are coplanar / sum to a fixed weight),
-  so they are **not a cap**. With 45 collinear triples there is no MDS/covering-radius reading, and
-  the leftover of `PG(5,4)` off the 351 secants is a generic large remainder, not an orbit-closed
-  named variety.
+- The 27 objects with their 45 distinguished triples form the generalized quadrangle `GQ(2,4)`.
+  Its classical projective realization is the elliptic quadric `Q⁻(5,2)` in `PG(5,2)`: 27 points
+  on the quadric and 36 ambient points off it. Each of the 45 quadrangle lines is an actual
+  three-point projective line, so the 27-point set is not a cap and cannot be the column set of the
+  proposed MDS/deep-hole template. See the explicit `Q⁻(5,2)` models in
+  [Saniga et al.](https://arxiv.org/abs/0903.0715) and
+  [Blunck et al.](https://arxiv.org/abs/1009.1768).
+- The `E₆` weight/minuscule description explains the line-configuration combinatorics, but the
+  spike did not construct or validate a separate reduction in `PG(5,4)`. No assertion about the
+  secant complement of such a reduction is retained.
 - Consequence: 27-lines/W(E₆) stays a **shared object** with the icosahedral case (via
   Brianchon=Eckardt → W(E₆), the R-A link) but is **not a second covering-instance**.
 
@@ -50,7 +54,8 @@ genuine 6-arc. None of the candidates reproduce that decoupling.
 Realized the genuine (irreducible, no-invariant-conic) Valentiner group over **F₁₉**
 (19 ≡ 1 mod 3 and −15 = 4 = 2² is a square mod 19, so 3·A₆ ⊂ GL₃(19) is F₁₉-rational).
 
-**Group**: `3.A₆` (order 1080), faithful 3-dim module over GF(19). Explicit generators
+**Group**: `3.A₆` (order 1080), with projective image of order 360, on a faithful 3-dim module over
+GF(19). Explicit generators
 (integer 3×3 matrices, GAP `PerfectGroup(1080,1)` → `IrreducibleModules(-,GF(19),3)`; primitive
 root Z(19)=2):
 
@@ -94,9 +99,10 @@ Certificate: the 36-orbit point set (canonical reps, first nonzero coord = 1) �
 
 ## Ranked disposition of remaining candidates
 
-1. **27-lines / W(E₆) over F₄ — DEAD (no covering reading).** Config = GQ(2,4), fills its own
-   incidence geometry; the PG(5,4) cap rescue fails (45 tritangent triples ⇒ not a cap). Structural,
-   decisive. Keep only as a shared-object link (R-A).
+1. **27-lines / W(E₆) — DEAD for the arc/MDS template.** The relevant projective model is
+   `Q⁻(5,2) ⊂ PG(5,2)`, not `PG(5,4)`. Its 45 contained projective lines make the 27 points non-cap.
+   Keep only as a shared-object link (R-A); other generalized-quadrangle coding readings are not
+   excluded by this check.
 2. **Valentiner A₆ ⊂ PGL₃(19) — DEAD (ran in full).** No orbit is an arc (all ≥ 36 > 20; measured
    collinear-triple counts above). No invariant conic. Certificate above.
 3. **57-cell / PSL₂(19) / PG(2,7) — DEAD (group absent).** `57 = |PG(2,7)|` is a bare numerical
@@ -117,24 +123,23 @@ signature is:
 > (uncovered locus) equals the full F_q-points of a **rational (genus-0) named curve** (conic / RNC).
 
 i.e. re-key the detector to the *deep-hole side* (`|U| = |conic| = q+1`), not the config side.
-Under this correct signature the icosahedral 6-arc is exactly the hit (detector rows 1–2), while all
-the "config fills space" rows (9 = 27-lines, 16 = 57-cell, 19 = Hesse) are categorically different
-and confirmed dead here.
+Under this corrected signature the icosahedral 6-arc is the known hit in the present table, while
+the tested 27-line, 57-cell, Valentiner, and Hesse proposals fail for the reasons above.
 
-Structural tension worth banking: a genuine *dimension-up* to a bigger exceptional group
-(Valentiner, no invariant conic) **loses the invariant rational curve**, hence loses the clean
-"fills the variety" count — its only named invariant is a high-genus curve (Wiman sextic). Groups
-that *do* fix a conic/RNC (genus 0) are subgroups of PGL₂ acting on that curve, i.e. the **same P¹
-lane** as the base case, not a new phenomenon. The parent program already exhausted that lane: the
-A₅-prime family (C126, dead except p=11) and the k-tower / twisted-cubic dual-variety (C123, dead).
+Search heuristic worth banking: this Valentiner dimension-up loses an invariant rational curve;
+its named invariant is instead the high-genus Wiman sextic. A group preserving a conic acts through
+a subgroup of `PGL₂` on that curve, so the previously tested A₅-prime family and twisted-cubic
+routes remain the nearest comparison class. Those tests do not exhaust all isolated `P¹` examples.
 
-**Net**: no clean second instance in this pass; the icosahedral F₁₁ case remains singular, and the
-reasons are now diagnosed structurally rather than by exhaustion.
+**Net**: no clean second instance among these four targets. The icosahedral F₁₁ case remains the
+only verified instance in this program, without a global uniqueness claim.
 
 ## Reproduction
 
 - Generators + orbits: GAP `PerfectGroup(IsPermGroup,1080,1)`, `IrreducibleModules(G,GF(19),3)`,
   `OrbitsDomain` with `NormedRowVector(v*mat)`.
-- Geometry (arcs, secants, deep holes, form-fitting): `uv run --with numpy --with galois`; scripts
-  `geom.py`, `valchar.py`, `hesse.py` (scratchpad, ephemeral — regenerate from the generators above).
+- Independent durable check of the projective group order, point orbits, every orbit's collinear
+  triples, and the Hesse cover:
+  `python3 notes/2026-07-14-c132-verifier.py`.
+  Source SHA-256: `c2cfdc6862b580977c1308ac92adfb9fd790bf33ac9d32e3e415a89fafc757b2`.
 - 57-cell: pure arithmetic (`5 ∤ |PGL₃(7)|`).

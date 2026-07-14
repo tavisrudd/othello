@@ -50,23 +50,12 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
   audit + paper-outline §Remaining-work.
-- **C132** — **reduce-at-best-prime SECOND-INSTANCE spike** (the "second paper" line — lifts the
-  Clebsch paper's Significance ceiling per the grade). Test whether an exceptional config's
-  covering/deep-hole locus = F_q-points of a NAMED variety at a second object, replicating the F₁₁
-  template. Primary target: 27-lines / W(E₆) / GQ(2,4) over F₄ (gem row 9) — **first settle the right
-  projective/covering framing** (27 lines fill a GQ, not a P^n; our arc→deep-hole template needs the
-  correct embedding). Fallbacks if no clean covering structure: 57-cell/PSL₂(19)/PG(2,7) (gem row 16,
-  a direct plane-fill), Valentiner A₆⊂PGL₃/P² (find the fill-prime p²+p+1), Hesse/order-216/AG(2,3)
-  (cheap, weak). Detector = `notes/2026-07-13-gem-candidates.md`.
-  **`[CLOSED NEGATIVE 2026-07-14]`** — no clean second instance; all fill-signature candidates die by
-  ONE mechanism: the detector keys on `|config|=|space|` (space-*filling*, rich collinearity ⇒ never
-  an arc), but the template needs the exceptional variety on the DEEP-HOLE side with the config a
-  plain arc. 27-lines = GQ(2,4) (fills its own geometry; PG(5,4) cap-rescue fails — 45 tritangent
-  triples ⇒ not a cap); Valentiner A₆/F₁₉ ran (orbits [36,45,60,60,180], none an arc, no invariant
-  conic); 57-cell dead (5∤|PGL₃(7)|, PSL₂(19) can't act on PG(2,7)); Hesse/F₇ deep-hole locus empty.
-  Structural diagnosis: dimension-up to a bigger exceptional group loses the invariant genus-0 curve;
-  groups keeping one are PGL₂-subgroups = the same P¹ lane (C126 primes / C123 k-tower, both dead). So
-  F₁₁ icosahedral case is singular for a REASON. → `notes/2026-07-14-c132-second-instance-spike.md`
+- **C132 [CLOSED NEGATIVE 2026-07-14; ADVERSARIALLY CORRECTED]** — none of the four tested
+  second-instance targets realizes the arc/deep-hole template. The 27-line model is correctly
+  `Q⁻(5,2) ⊂ PG(5,2)` (not `PG(5,4)`), hence has 36 external points but is non-cap because it
+  contains 45 lines. Valentiner and Hesse finite checks now have a durable independent verifier;
+  57-cell fails the group-order gate. This closes the spike, not the global `P¹` search. Report:
+  `notes/2026-07-14-c132-second-instance-spike.md`.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
