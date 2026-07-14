@@ -53,9 +53,10 @@ Concrete abstract-projective-plane consumers are in:
   hypothesis yields a genuine arc extension.
 - `RelativeConicArcs.Q25PairResult`: `f2_pair_extension` proves that every Frobenius-invariant
   eight-arc in `PG(2,25)` with exactly two fixed selected points admits a fresh conjugate-pair
-  extension.  Its reduction includes a concrete `GF(25)/GF(5)` model, proved fixed-pair and
+  extension, with each of the two new points explicitly outside the old arc. Its reduction
+  includes a concrete `GF(25)/GF(5)` model, proved fixed-pair and
   stabilizer normalizations, exact three-orbit decomposition, a kernel-reduced determinant slice,
-  and semantic transport back to the abstract projective plane.
+  and semantic transport back to the paper-facing projective point model.
 
 ## Exact quadratic wrapper
 
@@ -97,6 +98,13 @@ uniform theorem is in the trust manifest: the proposed `f=0` and `f=4` profile b
 The new lane and its `RelativeConicArcs` consumers contain no `sorry`, `admit`, `native_decide`,
 custom `axiom`, or `unsafe` declaration. Printed headline axiom profiles use only accepted Mathlib
 foundations: `propext`, `Classical.choice`, and `Quot.sound`.
+
+For the Q25 slice specifically, a source-level completeness audit found exactly 46,056 rows
+`6≤b<c≤309`, with no gaps or duplicates: 39,012 checked non-arc witnesses and 7,044 checked legal
+extensions. All 1,639 leaves and 303 row aggregates are imported exactly once. The formal
+exhaustiveness claim is the built Lean declaration `Q25PairCertificate.allRows`; the source counts are an
+audit aid, not a substitute for that theorem. Both `indexed_f2_pair_extension` and
+`f2_pair_extension` print exactly the accepted axiom profile above.
 
 Validation command:
 

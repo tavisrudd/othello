@@ -25,7 +25,9 @@ theorems.
 charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved. All proposed
 order-five conclusion is only partial: `Q25PairResult.f2_pair_extension` kernel-checks the full
 exceptional `f=2` existence statement, while the center/moment arguments for `f=0,4` remain
-Lean-open. The external census size and observed minimum 32 remain computational evidence. No
+Lean-open. The `f=2` statement explicitly makes both added conjugate points fresh and has passed a
+second adversarial proof audit. The external census size and observed minimum 32 remain
+computational evidence. No
 uniform `s≥5` theorem is claimed before the remaining profiles are kernel-verified.
 
 **Development draft:**

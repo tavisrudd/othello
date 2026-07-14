@@ -5,7 +5,10 @@ import RelativeConicArcs.QuadraticPairExtension
 
 This module formalizes the second coordinate gate in the quadratic pair-extension theorem.  The
 first layer counts nonfixed old secants modulo Frobenius.  The second layer charges every locally
-forbidden conjugate candidate on an empty fixed line to one such secant orbit.
+forbidden conjugate candidate on an empty fixed line injectively to one such secant orbit. The
+reverse map is not asserted: a secant orbit whose fixed center lies on the carrier line destroys no
+nonfixed candidate there, and multiple orbit charges can cover the same candidate. The checked
+theorem therefore uses an upper bound on distinct forbidden support.
 -/
 
 namespace RelativeConicArcs

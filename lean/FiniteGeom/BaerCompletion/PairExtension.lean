@@ -3,9 +3,11 @@ import FiniteGeom.BaerCompletion.BaerPlane
 /-!
 # Counting conjugate-pair extensions
 
-The geometric theorem partitions candidate conjugate pairs by their unique fixed mate line.  On
-each empty fixed line there are `N` candidates and at most `M` are destroyed by noninvariant old
-secant orbits.  This file proves the finite counting engine `E * (N-M) ≤ N_pair`.
+The geometric theorem partitions candidate conjugate pairs by their unique fixed mate line. On
+each empty fixed line there are `N` candidates and a finset of distinct forbidden candidates whose
+cardinality is at most `M`. This file proves the finite counting engine
+`E * (N-M) ≤ N_pair`. The finset cardinality is forbidden support, not a secant-orbit charge count
+with multiplicity.
 -/
 
 namespace FiniteGeom.BaerCompletion
@@ -14,7 +16,8 @@ open Finset
 
 variable {L Q : Type*} [DecidableEq L] [DecidableEq Q]
 
-/-- Candidate pairs and locally forbidden pairs, indexed by the empty fixed lines. -/
+/-- Candidate pairs and the actual distinct forbidden-candidate support, indexed by empty fixed
+lines. -/
 structure PairExtensionData (L Q : Type*) [DecidableEq L] [DecidableEq Q] where
   emptyLines : Finset L
   candidates : L → Finset Q
@@ -47,8 +50,9 @@ theorem PairExtensionData.mul_sub_le_legalCount (D : PairExtensionData L Q) (N M
       intro l hl
       exact card_sdiff_ge_of_card_forbidden_le (hcand l hl) (hbad l hl)
 
-/-- Heterogeneous strengthening: each empty line contributes its own candidate-minus-forbidden
-surplus. The uniform `E*(N-M)` theorem is the constant-profile corollary above. -/
+/-- Heterogeneous refinement: each empty line contributes its candidate count minus the cardinality
+of its distinct forbidden support. The uniform `E*(N-M)` theorem follows from a common upper bound
+on those support cardinalities. -/
 theorem PairExtensionData.sum_card_sub_le_legalCount (D : PairExtensionData L Q) :
     (∑ l ∈ D.emptyLines,
         ((D.candidates l).card - (D.forbidden l).card)) ≤ D.legalCount := by

@@ -14,9 +14,10 @@ classical Lunelli–Sce √(2q) complete-arc bound at q=s², *not* a new constan
 headline is the assembled orbit-valued criterion. The broad 2026-07-13 adversarial audit demotes
 the generic application upgrades to established infrastructure. The exact invisible/support/
 collision correction is now Lean-proved. The exceptional `s=5,f=2` existence theorem is also
-kernel-checked in `Q25PairResult.f2_pair_extension`; the census size and minimum 32 remain external
-evidence. The `f=0,4` geometry is not formalized, so completing those profiles is the strongest
-open lever.
+kernel-checked in `Q25PairResult.f2_pair_extension`; a second adversarial proof audit found no
+proof-validity defect, and the conclusion explicitly makes both added conjugate points fresh. The
+census size and minimum 32 remain external evidence. The `f=0,4` geometry is not formalized, so
+completing those profiles is the strongest open lever.
 
 **Lean:** the proof spine is built under `lean/FiniteGeom/BaerCompletion/`, with projective-plane,
 coordinate-conjugation, quadratic-Frobenius, exact line-counting, and forbidden-charge consumers

@@ -1,0 +1,316 @@
+import RelativeConicArcs.Q25PairRows.R_285_C_286_309
+
+namespace RelativeConicArcs.Q25PairCertificate
+theorem row_285 (cn : Fin 310) (h : 285 < cn.val) : RowResult ⟨285, by decide⟩ cn := by
+  fin_cases cn
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · norm_num at h
+  · exact row_285_286
+  · exact row_285_287
+  · exact row_285_288
+  · exact row_285_289
+  · exact row_285_290
+  · exact row_285_291
+  · exact row_285_292
+  · exact row_285_293
+  · exact row_285_294
+  · exact row_285_295
+  · exact row_285_296
+  · exact row_285_297
+  · exact row_285_298
+  · exact row_285_299
+  · exact row_285_300
+  · exact row_285_301
+  · exact row_285_302
+  · exact row_285_303
+  · exact row_285_304
+  · exact row_285_305
+  · exact row_285_306
+  · exact row_285_307
+  · exact row_285_308
+  · exact row_285_309
+end RelativeConicArcs.Q25PairCertificate

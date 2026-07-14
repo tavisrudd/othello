@@ -19,7 +19,8 @@ orbit/carrier incidence, and `R=Σ(μ-1)` the collision redundancy over visible 
 For invariant eight-arcs over `PG(2,25)`, the exceptional profile `(f,e)=(2,3)` is now proved by
 the Lean declaration `Q25PairResult.f2_pair_extension`.  The theorem does not trust either external
 enumerator: Lean proves the `GF(25)/GF(5)` model, both projective normalizations, orbit coverage,
-the determinant certificate, and transport back to the abstract projective plane.  The proposed
+the determinant certificate, and transport back to the paper-facing projective point model. Its conclusion
+explicitly makes both members of the added conjugate pair fresh. The proposed
 `f=0,4` consequences remain prose only, so the uniform order-five conclusion remains unproved.
 
 No novelty claim is attached to the order-five profile result until a targeted literature check is
@@ -40,7 +41,7 @@ counting, second secant moments, and capped-multiplicity inequalities are classi
 | C99.8 | for `s=5`, profile `(f,e)=(4,2)` has at least four legal conjugate-pair extensions | unproved; prose derivation only | accounting/arithmetic kernel proved; center-incidence bound open | priority irrelevant until Lean-proved |
 | C99.9 | every invariant eight-arc in `PG(2,25)` pair-extends | unproved; the `f=2` profile is proved, but `f=0,4` remain open | partial: `Q25PairResult.f2_pair_extension` | priority open only after the remaining profiles are proved |
 | C99.10 | the normalized `(2,3)` profile has minimum legal-pair count `32` | computed datum, not a theorem | not formalized | computational evidence only |
-| C99.11 | every `(f,e)=(2,3)` invariant eight-arc in `PG(2,25)` has a conjugate-pair extension | proved | `Q25PairResult.f2_pair_extension` | targeted search found no exact statement; priority not definitive |
+| C99.11 | every `(f,e)=(2,3)` invariant eight-arc in `PG(2,25)` has a fresh conjugate-pair extension | proved | `Q25PairResult.f2_pair_extension`; both new points are explicitly outside the old arc | targeted search found no exact statement; priority not definitive |
 
 In this ledger, **proved means Lean kernel-checked**.  Prose derivations and independently agreeing
 programs are recorded only as proof-search evidence.
@@ -245,7 +246,10 @@ line.  They agree on the census size, minimum, orbit indices, and coordinate wit
 Sources:
 
 - [`2026-07-13-c99-f2-enumerator.cpp`](2026-07-13-c99-f2-enumerator.cpp), SHA-256
-  `dba28904de3a24cc8b5e6d4f4b9748d951d1adc891d1bd5d5368f04e179ffc39`;
+  `c6f134ff1f6544ca8612ad1e7959c936f82da56f6ab2f64cd39bb722eb3def90`;
+- the audited 52 KiB GCC 14.3.0 executable
+  [`2026-07-13-c99-f2-enumerator`](2026-07-13-c99-f2-enumerator), SHA-256
+  `9012c938df2e0557e985745f8869d0559435e283a343dd2b7b401159fb175b04`;
 - [`2026-07-13-c99-f2-verifier.py`](2026-07-13-c99-f2-verifier.py), SHA-256
   `2377757ebc923ddf2887b3d768c1233e79e593d21f3ffd5fb02523fab99be978`;
 - the verifier's existing field primitive
@@ -260,6 +264,16 @@ g++ -O3 -std=c++20 -Wall -Wextra -pedantic \
 /tmp/c99_f2_enum
 python notes/2026-07-13-c99-f2-verifier.py
 ```
+
+The earlier recorded source hash
+`dba28904de3a24cc8b5e6d4f4b9748d951d1adc891d1bd5d5368f04e179ffc39` was the census-only
+source at 2026-07-13 09:32 PDT. Session history shows two later additive changes: the normalized
+greedy-cover generator at 11:24--11:25 and the `--lean-row` certificate emitter at 11:52. The
+pre-existing census report is byte-for-byte unchanged across those edits; only generator output
+was appended. Two fresh builds of the current source produced the identical binary hash above, and
+two fresh runs produced identical stdout and stderr with SHA-256
+`42120c18ddc40412cf9e644dcd4dfd67eb301e0a93fe98c1faee5e0daa55550a` and
+`9aaeebe9b31175fdb2c38aded6e56626e2cc6454182d9a99467f2cfbb23cc320`, respectively.
 
 This remains reproducible external evidence for the census size and observed minimum `32`, neither
 of which is a theorem.  The weaker existence statement for every `f=2` arc is now independently
@@ -305,6 +319,31 @@ The focused builds pass.  Existing linter warnings replayed from
 extension theorem, and the order-five arithmetic tails reports only the accepted Mathlib
 foundations `propext`, `Classical.choice`, and `Quot.sound` (the arithmetic tails do not use
 `Classical.choice`).
+
+## Adversarial proof audit of the exceptional profile
+
+- [x] The public theorem quantifies over an arbitrary invariant projective eight-arc with exactly
+  two fixed selected points.
+- [x] Its conclusion explicitly gives a nonfixed `p`, proves both `p∉C` and `φ(p)∉C`, and proves
+  `C∪{p,φ(p)}` is an arc.
+- [x] The concrete field, Frobenius action, 651-point coordinate equivalence, and 310 nonfixed
+  conjugate-orbit equivalence are Lean-proved.
+- [x] The fixed-pair normalization, stabilizer normalization, exact three-orbit decomposition,
+  and inverse projective transports are semantic Lean theorems rather than enumerator assumptions.
+- [x] The normalized slice has 46,056 expected rows with no duplicates or gaps: 39,012 explicit
+  non-arc witnesses and 7,044 explicit legal-pair witnesses. All 1,639 leaves and 303 row
+  aggregates are imported exactly once; `allRows` is the kernel-checked exhaustive composition.
+- [x] Every finite leaf uses kernel `decide`; the Q25 source contains no `native_decide`, `sorry`,
+  `admit`, custom `axiom`, or `unsafe` declaration.
+- [x] The scoped `RelativeConicArcs.Q25PairResult` build passes, and both public theorem axiom
+  profiles are exactly `[propext, Classical.choice, Quot.sound]`.
+- [x] The 469600 census and observed minimum 32 are absent from the theorem and remain external
+  computational evidence.
+
+The complete proof-validity review is recorded in
+[`baer-completion-adversarial-review.md`](2026-07-12-riffing-on-applications/baer-completion-adversarial-review.md).
+No proof defect remains in the `f=2` subtrack. This does not close C99 as a whole: the `f=0,4`
+formalizations are still the next proof gates.
 
 ## Next proof gates
 

@@ -160,3 +160,51 @@ cross-secants after adjoining the pair. Each is now covered by a named declarati
 axiom audit of the fixed-locus, line-count, secant-orbit, forbidden-bound, semantic-extension, and
 end-to-end theorems reported only `propext`, `Classical.choice`, and `Quot.sound`; the temporary
 audit file was removed.
+
+## 2026-07-13 second adversarial round — exceptional `PG(2,25)` profile
+
+Verdict: **the `f=2` profile theorem is fully kernel-checked and its paper-facing statement is
+adequate.** This review is limited to proof validity and statement scope; the separate novelty
+audit still assigns “priority not definitive.”
+
+- [x] **Headline quantifiers.** `Q25PairResult.f2_pair_extension` starts with an arbitrary finite
+  projective arc `C` in the concrete order-25 plane, assumes Frobenius invariance, `|C|=8`, and
+  exactly two selected Frobenius-fixed points.
+- [x] **Literal pair freshness.** The conclusion now states separately that `p` is nonfixed,
+  `p∉C`, and `φ(p)∉C`, then proves that adjoining `{p,φ(p)}` preserves the arc property. The last
+  freshness conjunct was previously derivable from invariance but not exposed in the theorem
+  type; the adversarial pass strengthened the type.
+- [x] **Concrete field semantics.** Lean constructs `GF(25)=GF(5)[ω]/(ω²-2)`, proves the field and
+  degree-two extension facts, identifies the 651 canonical projective points, and proves that the
+  explicit coefficient conjugation is the relative Frobenius action.
+- [x] **Normalization coverage.** A base-field projectivity normalizes the two distinct fixed
+  points. A proved Frobenius-commuting stabilizer then normalizes one of the three nonfixed
+  conjugate orbits. `Q25OrbitDecomposition` proves that every invariant eight-set with two fixed
+  points has exactly those three nonfixed two-orbits; no external orbit-classification assertion
+  is assumed.
+- [x] **Finite-slice completeness.** The reflected slice contains exactly the 46,056 pairs
+  `6≤b<c≤309`, each once. Of these source-level certificates, 39,012 give a kernel-checked
+  `BadWitnessValid` obstruction and 7,044 give a kernel-checked `LegalPair`. The 1,639 leaf modules
+  and 303 row aggregates are each imported exactly once. The Lean theorem `allRows`, rather than
+  this source audit, is the formal exhaustive case split.
+- [x] **Semantic adequacy.** `BadWitnessValid` names three distinct collinear old points;
+  `LegalPair` checks freshness and every new determinant condition. `rawCap_insert`,
+  `LegalPair.rawCap_union`, the projective cap/arc bridge, and the two inverse transports turn the
+  reflected certificate into the stated projective arc extension.
+- [x] **Computation boundary.** The external C++ and Python programs proposed witnesses and report
+  a 469600-arc census with observed minimum 32. Neither executable, the census count, nor the
+  minimum occurs in the Lean proof. All finite propositions used by the theorem are reduced by
+  Lean's kernel `decide`; `native_decide` is absent.
+- [x] **Trust profile.** A focused source scan found no `sorry`, `admit`, custom `axiom`, `unsafe`,
+  or `native_decide` in the Q25 lane. `#print axioms` for both
+  `indexed_f2_pair_extension` and `f2_pair_extension` reports exactly
+  `[propext, Classical.choice, Quot.sound]`.
+- [x] **Build and resource gate.** The scoped target
+  `choom -n 1000 -- nix develop --command lake build RelativeConicArcs.Q25PairResult` passes. A
+  root `RelativeConicArcs` aggregate is not used as this lane's validation gate: an attempted
+  aggregate replay fanned into unrelated legacy generated certificates and was stopped after OOM
+  failures there; no Q25 dependency failed. `/tmp` remained at 10% utilization during the audit.
+
+No remaining proof-validity defect was found in this round. The uniform order-five theorem is
+still open because the separate `f=0` and `f=4` profiles have not been formalized, and the stronger
+Q25 census/minimum claims remain computational evidence only.

@@ -425,8 +425,13 @@ After those reductions, `Q25PairData.L_005.first_slice_005` checks the remaining
 kernel reduction of freshness and determinant conditions. `Q25OrbitDecomposition` proves that an
 arbitrary invariant eight-set with two fixed points consists of exactly three nonfixed orbits;
 `Q25PairResult.f2_pair_extension` composes coverage, transports the checked survivor back, and
-returns a fresh projective point whose conjugate pair preserves the arc property. The theorem does
-not assume the external census or its minimum.
+returns a nonfixed projective point, states explicitly that both it and its conjugate are outside
+the old arc, and proves that adjoining the pair preserves the arc property. The reflected slice has
+46,056 exhaustive rows: 39,012 carry checked non-arc witnesses and 7,044 carry checked legal-pair
+witnesses. These are composed through 1,639 leaf modules and 303 row aggregates. Every finite leaf
+uses kernel `decide`; the theorem does not assume the external census or its minimum. A second
+adversarial proof audit found no proof-validity defect, and both public theorem axiom profiles are
+exactly `[propext, Classical.choice, Quot.sound]`.
 
 ### Computed datum F.4 — census and minimum for the exceptional profile
 

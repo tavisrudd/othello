@@ -103,4 +103,26 @@ theorem occupiedLineCountZ_ne_all_of_lt {s k f e : ℕ} (hk : k = f + 2 * e)
     simpa [pow_two] using hltz'
   nlinarith
 
+/-- Arithmetic tail of the `s=5`, `f=0`, `e=4` collision profile. The geometric proof supplies
+at least 48 invisible incidences and collision redundancy at least 11. -/
+theorem five_le_legal_of_s5_profile_zero_balance {legal invisible redundancy : ℕ}
+    (hbalance : legal + 27 * 12 = 27 * 10 + invisible + redundancy)
+    (hinvisible : 48 ≤ invisible) (hredundancy : 11 ≤ redundancy) :
+    5 ≤ legal := by
+  omega
+
+/-- Arithmetic tail of the `s=5`, `f=2`, `e=3` collision profile. -/
+theorem one_le_legal_of_s5_profile_two_balance {legal invisible redundancy : ℕ}
+    (hbalance : legal + 17 * 12 = 17 * 10 + invisible + redundancy)
+    (hinvisible : 18 ≤ invisible) (hredundancy : 17 ≤ redundancy) :
+    1 ≤ legal := by
+  omega
+
+/-- Arithmetic tail of the `s=5`, `f=4`, `e=2` invisible-center profile. -/
+theorem four_le_legal_of_s5_profile_four_balance {legal invisible redundancy : ℕ}
+    (hbalance : legal + 11 * 10 = 11 * 10 + invisible + redundancy)
+    (hinvisible : 4 ≤ invisible) :
+    4 ≤ legal := by
+  omega
+
 end RelativeConicArcs

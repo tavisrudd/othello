@@ -25,6 +25,7 @@ import FiniteGeom.BaerCompletion.Secant
 import FiniteGeom.BaerCompletion.BaerPlane
 import FiniteGeom.BaerCompletion.PairExtension
 import FiniteGeom.BaerCompletion.OrbitCounting
+import FiniteGeom.BaerCompletion.CollisionProfile
 import FiniteGeom.BaerCompletion.OrbitSaturation
 import FiniteGeom.BaerCompletion.RobustHole
 import FiniteGeom.BaerCompletion.Core

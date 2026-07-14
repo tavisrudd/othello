@@ -3,7 +3,9 @@ import FiniteGeom.BaerCompletion.PairExtension
 /-!
 # Arithmetic of equivariant orbit saturation
 
-This file isolates the characteristic-free arithmetic behind the square-root lower bound.
+This file isolates the characteristic-free arithmetic behind the square-root lower bound. The
+square-root scale is classical (Lunelli–Sce and adjacent line-covering bounds); the declaration is
+the denominator-free arithmetic form consumed by the paper, not a priority claim for that scale.
 -/
 
 namespace FiniteGeom.BaerCompletion

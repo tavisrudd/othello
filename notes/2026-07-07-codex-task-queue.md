@@ -152,9 +152,11 @@ fixed-locus / quadric-Witt dichotomy leap).
    paper-wide adversarial audit demoted the generic blocker, weighted, symmetry, reliability,
    defining-set, and algorithmic constructions to established infrastructure. Exact collision
    accounting is Lean-proved. `Q25PairResult.f2_pair_extension` now proves the full exceptional
-   `(f,e)=(2,3)` existence statement; the external census size and minimum remain data only. The
-   `f=0,4` center/moment arguments are still proof-search evidence. Kernel formalization of those
-   remaining profiles is the next theorem lever.
+   `(f,e)=(2,3)` existence statement, explicitly including freshness of both conjugate points; its
+   scoped build, finite-row coverage, semantic transport, and axiom profile have passed a second
+   adversarial review. The external census size and minimum remain data only. The `f=0,4`
+   center/moment arguments are still proof-search evidence. Kernel formalization of those remaining
+   profiles is the next theorem lever.
    [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue),
    [proof ledger](2026-07-13-c99-baer-collision-strengthening.md),
    [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).

@@ -1,0 +1,265 @@
+import RelativeConicArcs.Q25PairCertificate
+
+namespace RelativeConicArcs.Q25PairCertificate
+open Q25Coordinates FiniteFields
+set_option maxHeartbeats 1000000000
+set_option maxRecDepth 100000
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
+
+theorem row_89_246 : RowResult ⟨89, by decide⟩ ⟨246, by decide⟩ := by
+  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+
+theorem row_89_247 : RowResult ⟨89, by decide⟩ ⟨247, by decide⟩ := by
+  have _previous := row_89_246
+  exact Or.inr ⟨orbitCodeOfNumber ⟨116, by decide⟩, by decide⟩
+
+theorem row_89_248 : RowResult ⟨89, by decide⟩ ⟨248, by decide⟩ := by
+  have _previous := row_89_247
+  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+
+theorem row_89_249 : RowResult ⟨89, by decide⟩ ⟨249, by decide⟩ := by
+  have _previous := row_89_248
+  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+
+theorem row_89_250 : RowResult ⟨89, by decide⟩ ⟨250, by decide⟩ := by
+  have _previous := row_89_249
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨250, by decide⟩) 0 6 7)
+
+theorem row_89_251 : RowResult ⟨89, by decide⟩ ⟨251, by decide⟩ := by
+  have _previous := row_89_250
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨251, by decide⟩) 0 6 7)
+
+theorem row_89_252 : RowResult ⟨89, by decide⟩ ⟨252, by decide⟩ := by
+  have _previous := row_89_251
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨252, by decide⟩) 0 6 7)
+
+theorem row_89_253 : RowResult ⟨89, by decide⟩ ⟨253, by decide⟩ := by
+  have _previous := row_89_252
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨253, by decide⟩) 0 6 7)
+
+theorem row_89_254 : RowResult ⟨89, by decide⟩ ⟨254, by decide⟩ := by
+  have _previous := row_89_253
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨254, by decide⟩) 0 6 7)
+
+theorem row_89_255 : RowResult ⟨89, by decide⟩ ⟨255, by decide⟩ := by
+  have _previous := row_89_254
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨255, by decide⟩) 0 6 7)
+
+theorem row_89_256 : RowResult ⟨89, by decide⟩ ⟨256, by decide⟩ := by
+  have _previous := row_89_255
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨256, by decide⟩) 0 6 7)
+
+theorem row_89_257 : RowResult ⟨89, by decide⟩ ⟨257, by decide⟩ := by
+  have _previous := row_89_256
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨257, by decide⟩) 0 6 7)
+
+theorem row_89_258 : RowResult ⟨89, by decide⟩ ⟨258, by decide⟩ := by
+  have _previous := row_89_257
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨258, by decide⟩) 0 6 7)
+
+theorem row_89_259 : RowResult ⟨89, by decide⟩ ⟨259, by decide⟩ := by
+  have _previous := row_89_258
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨259, by decide⟩) 0 6 7)
+
+theorem row_89_260 : RowResult ⟨89, by decide⟩ ⟨260, by decide⟩ := by
+  have _previous := row_89_259
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨260, by decide⟩) 0 6 7)
+
+theorem row_89_261 : RowResult ⟨89, by decide⟩ ⟨261, by decide⟩ := by
+  have _previous := row_89_260
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨261, by decide⟩) 0 6 7)
+
+theorem row_89_262 : RowResult ⟨89, by decide⟩ ⟨262, by decide⟩ := by
+  have _previous := row_89_261
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨262, by decide⟩) 0 6 7)
+
+theorem row_89_263 : RowResult ⟨89, by decide⟩ ⟨263, by decide⟩ := by
+  have _previous := row_89_262
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨263, by decide⟩) 0 6 7)
+
+theorem row_89_264 : RowResult ⟨89, by decide⟩ ⟨264, by decide⟩ := by
+  have _previous := row_89_263
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨264, by decide⟩) 0 6 7)
+
+theorem row_89_265 : RowResult ⟨89, by decide⟩ ⟨265, by decide⟩ := by
+  have _previous := row_89_264
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨265, by decide⟩) 0 6 7)
+
+theorem row_89_266 : RowResult ⟨89, by decide⟩ ⟨266, by decide⟩ := by
+  have _previous := row_89_265
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨266, by decide⟩) 0 6 7)
+
+theorem row_89_267 : RowResult ⟨89, by decide⟩ ⟨267, by decide⟩ := by
+  have _previous := row_89_266
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨267, by decide⟩) 0 6 7)
+
+theorem row_89_268 : RowResult ⟨89, by decide⟩ ⟨268, by decide⟩ := by
+  have _previous := row_89_267
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨268, by decide⟩) 0 6 7)
+
+theorem row_89_269 : RowResult ⟨89, by decide⟩ ⟨269, by decide⟩ := by
+  have _previous := row_89_268
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨269, by decide⟩) 0 6 7)
+
+theorem row_89_270 : RowResult ⟨89, by decide⟩ ⟨270, by decide⟩ := by
+  have _previous := row_89_269
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨270, by decide⟩) 0 6 7)
+
+theorem row_89_271 : RowResult ⟨89, by decide⟩ ⟨271, by decide⟩ := by
+  have _previous := row_89_270
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨271, by decide⟩) 0 6 7)
+
+theorem row_89_272 : RowResult ⟨89, by decide⟩ ⟨272, by decide⟩ := by
+  have _previous := row_89_271
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨272, by decide⟩) 0 6 7)
+
+theorem row_89_273 : RowResult ⟨89, by decide⟩ ⟨273, by decide⟩ := by
+  have _previous := row_89_272
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨273, by decide⟩) 0 6 7)
+
+theorem row_89_274 : RowResult ⟨89, by decide⟩ ⟨274, by decide⟩ := by
+  have _previous := row_89_273
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨274, by decide⟩) 0 6 7)
+
+theorem row_89_275 : RowResult ⟨89, by decide⟩ ⟨275, by decide⟩ := by
+  have _previous := row_89_274
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨275, by decide⟩) 0 6 7)
+
+theorem row_89_276 : RowResult ⟨89, by decide⟩ ⟨276, by decide⟩ := by
+  have _previous := row_89_275
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨276, by decide⟩) 0 6 7)
+
+theorem row_89_277 : RowResult ⟨89, by decide⟩ ⟨277, by decide⟩ := by
+  have _previous := row_89_276
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨277, by decide⟩) 0 6 7)
+
+theorem row_89_278 : RowResult ⟨89, by decide⟩ ⟨278, by decide⟩ := by
+  have _previous := row_89_277
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨278, by decide⟩) 0 6 7)
+
+theorem row_89_279 : RowResult ⟨89, by decide⟩ ⟨279, by decide⟩ := by
+  have _previous := row_89_278
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨279, by decide⟩) 0 6 7)
+
+theorem row_89_280 : RowResult ⟨89, by decide⟩ ⟨280, by decide⟩ := by
+  have _previous := row_89_279
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨280, by decide⟩) 0 6 7)
+
+theorem row_89_281 : RowResult ⟨89, by decide⟩ ⟨281, by decide⟩ := by
+  have _previous := row_89_280
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨281, by decide⟩) 0 6 7)
+
+theorem row_89_282 : RowResult ⟨89, by decide⟩ ⟨282, by decide⟩ := by
+  have _previous := row_89_281
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨282, by decide⟩) 0 6 7)
+
+theorem row_89_283 : RowResult ⟨89, by decide⟩ ⟨283, by decide⟩ := by
+  have _previous := row_89_282
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨283, by decide⟩) 0 6 7)
+
+theorem row_89_284 : RowResult ⟨89, by decide⟩ ⟨284, by decide⟩ := by
+  have _previous := row_89_283
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨284, by decide⟩) 0 6 7)
+
+theorem row_89_285 : RowResult ⟨89, by decide⟩ ⟨285, by decide⟩ := by
+  have _previous := row_89_284
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨285, by decide⟩) 0 6 7)
+
+theorem row_89_286 : RowResult ⟨89, by decide⟩ ⟨286, by decide⟩ := by
+  have _previous := row_89_285
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨286, by decide⟩) 0 6 7)
+
+theorem row_89_287 : RowResult ⟨89, by decide⟩ ⟨287, by decide⟩ := by
+  have _previous := row_89_286
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨287, by decide⟩) 0 6 7)
+
+theorem row_89_288 : RowResult ⟨89, by decide⟩ ⟨288, by decide⟩ := by
+  have _previous := row_89_287
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨288, by decide⟩) 0 6 7)
+
+theorem row_89_289 : RowResult ⟨89, by decide⟩ ⟨289, by decide⟩ := by
+  have _previous := row_89_288
+  apply Or.inl
+  exact not_rawCap_of_badWitness
+    (by decide : BadWitnessValid (orbitCodeOfNumber ⟨5, by decide⟩) (orbitCodeOfNumber ⟨89, by decide⟩) (orbitCodeOfNumber ⟨289, by decide⟩) 0 6 7)
+
+end RelativeConicArcs.Q25PairCertificate

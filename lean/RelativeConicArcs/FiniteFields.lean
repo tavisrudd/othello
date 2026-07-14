@@ -1,4 +1,6 @@
 import Mathlib
+import Mathlib.Data.ZMod.Basic
+import Mathlib.LinearAlgebra.Dimension.Constructions
 
 /-!
 # Concrete finite fields for the frozen examples
@@ -123,6 +125,100 @@ instance : Field GF9 where
 @[simp] theorem card : Fintype.card GF9 = 9 := by decide
 
 end GF9
+
+/-! ## The quadratic field `GF(25)`
+
+The encoding is `a + 5b = a + bω`, with `ω² = 2` over `ZMod 5`.  Since `2` is a
+quadratic nonresidue modulo five, this is a field.  As for the smaller concrete fields above,
+the complete finite field-law and scalar-extension checks are proofs by kernel reduction.
+-/
+
+structure GF25 where
+  val : Fin 25
+deriving DecidableEq, Fintype
+
+namespace GF25
+
+instance factPrimeFive : Fact (Nat.Prime 5) := ⟨by decide⟩
+
+def ofNat (n : Nat) : GF25 := ⟨⟨n % 25, Nat.mod_lt _ (by decide)⟩⟩
+def encode (x y : Nat) : GF25 := ofNat (x % 5 + 5 * (y % 5))
+def add (a b : GF25) : GF25 :=
+  encode (a.val % 5 + b.val % 5) (a.val / 5 + b.val / 5)
+def mul (a b : GF25) : GF25 :=
+  encode (a.val % 5 * (b.val % 5) + 2 * (a.val / 5 * (b.val / 5)))
+    (a.val % 5 * (b.val / 5) + a.val / 5 * (b.val % 5))
+def neg (a : GF25) : GF25 := encode (5 - a.val % 5) (5 - a.val / 5)
+def inv (a : GF25) : GF25 :=
+  ⟨![0, 1, 3, 2, 4, 15, 9, 11, 14, 6, 20, 7, 17, 18, 8, 5, 22, 12, 13, 23,
+      10, 24, 16, 19, 21] a.val⟩
+
+instance : Add GF25 := ⟨add⟩
+instance : Mul GF25 := ⟨mul⟩
+instance : Zero GF25 := ⟨ofNat 0⟩
+instance : One GF25 := ⟨ofNat 1⟩
+instance : Neg GF25 := ⟨neg⟩
+
+instance : CommRing GF25 where
+  add_assoc := by decide
+  zero_add := by decide
+  add_zero := by decide
+  nsmul := nsmulRec
+  zsmul := zsmulRec
+  add_comm := by decide
+  mul_assoc := by decide
+  one_mul := by decide
+  mul_one := by decide
+  zero_mul := by decide
+  mul_zero := by decide
+  left_distrib := by decide
+  right_distrib := by decide
+  neg_add_cancel := by decide
+  mul_comm := by decide
+
+instance : Inv GF25 := ⟨inv⟩
+instance : Nontrivial GF25 := ⟨⟨ofNat 0, ofNat 1, by decide⟩⟩
+
+instance : Field GF25 where
+  mul_inv_cancel := by decide
+  inv_zero := by decide
+  nnqsmul := _
+  nnqsmul_def := fun _ _ => rfl
+  qsmul := _
+  qsmul_def := fun _ _ => rfl
+
+@[simp] theorem card : Fintype.card GF25 = 25 := by decide
+
+/-- The concrete inclusion of the prime subfield. -/
+def baseRingHom : ZMod 5 →+* GF25 where
+  toFun a := encode a.val 0
+  map_one' := by decide
+  map_mul' := by decide
+  map_zero' := by decide
+  map_add' := by decide
+
+instance : Algebra (ZMod 5) GF25 := baseRingHom.toAlgebra
+
+@[simp] theorem algebraMap_apply (a : ZMod 5) :
+    algebraMap (ZMod 5) GF25 a = encode a.val 0 := rfl
+
+/-- Coefficients in the polynomial basis `1,ω`. -/
+def coeffEquiv : GF25 ≃ₗ[ZMod 5] (Fin 2 → ZMod 5) where
+  toFun a := ![(a.val.val % 5 : Nat), (a.val.val / 5 : Nat)]
+  invFun v := encode (v 0).val (v 1).val
+  left_inv := by decide
+  right_inv := by decide
+  map_add' := by decide
+  map_smul' := by decide
+
+/-- The concrete extension has degree two over its prime subfield. -/
+@[simp] theorem finrank : Module.finrank (ZMod 5) GF25 = 2 := by
+  calc
+    Module.finrank (ZMod 5) GF25 =
+        Module.finrank (ZMod 5) (Fin 2 → ZMod 5) := coeffEquiv.finrank_eq
+    _ = 2 := Module.finrank_fin_fun (ZMod 5)
+
+end GF25
 
 structure GF16 where
   val : Fin 16
