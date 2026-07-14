@@ -127,9 +127,23 @@ non-identifiable latent). NB drop the refuted five-tetrahedra reading (A₅-on-1
 3. **Independent recompute of the |U| histogram** — re-derive {12:6,16:30,18:150,19:300,20:630,
    21:360,22:72} from a second code path (Σ = 1548 ✓ checks) — it is the paper's quantitative core.
    Independent Rust/GAP enumeration, `decide`-exportable, in-repo.
-4. **DMP arXiv:2101.12722 Thm 6.3 pin** — confirm it states exactly "deep-hole coset ⟺ point off
-   every bisecant" for the projective [n,3] case, and that its hypotheses hold for non-GRS at q=11.
-   ~30 min re-read; it is the load-bearing dictionary for all of §3.
+4. ~~**DMP arXiv:2101.12722 Thm 6.3 pin**~~ **CLOSED (2026-07-14) — citation is SOUND, no hole.**
+   Thm 6.3 (arXiv v2) hypotheses are exactly two: A is an *arbitrary* n-arc in PG(2,q), and C is its
+   `[n,n−3,4]_q` MDS code per their Def 6.1. **No GRS / NRC / conic hypothesis, no restriction on
+   n, k, q, or characteristic** — so it covers our non-GRS q=11 case directly; the Lean fallback is
+   not needed. DMP explicitly anticipate non-GRS arcs under this machinery ("the corresponding codes
+   are not GDRS or GTRS") and tabulate c_i for exactly our shape. The GRS/conic hypotheses live
+   *downstream* in their Thms 6.4/6.5/6.8/6.10, which we don't cite. Leader count `binom(n,3)` is
+   their (6.4), independently the d=4 case of the general `binom(n,d−1)` in their **Thm 7.7** — two
+   supports, so 20 is an instantiation, not a fitted constant. Covering radius 3 ⟸ Def 6.1's remark
+   + 6.3(iii). **Two fixes applied to §3:** (a) "adjoining x preserves MDS iff missed by every
+   secant" was mis-attributed to Thm 6.3 — it is Def 6.1 + the definition of arc completeness, now
+   split out; (b) `binom(n,3)` now written before specializing to 20.
+   **⚠ Residual (minor, submission-preflight):** the published AMC 17(5) numbering could not be
+   verified (paywalled, no OA copy); v2 postdates acceptance and the abstract matches verbatim, so
+   the numbering is very likely identical but this is inference. Bibliography now pins
+   arXiv:2101.12722**v2** and states results are cited by v2 numbering — safe either way. Confirm
+   against the published version if a copy becomes reachable.
 5. ~~**q=19 non-example count**~~ **CLOSED (2026-07-14)** — exact |U| = **140**, not the "≥105"
    counting bound nor 111 (both were bounds on the wrong quantity: 381 − 6 − 15×18 assumes the
    secants are disjoint and cover only off-arc points). Enumerated directly in

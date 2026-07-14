@@ -192,10 +192,20 @@ non-GRS: it is not the code of a normal rational curve, in the sense of the
 classical normal-rational-curve/GRS dictionary~\cite{StormeThas1991}.
 
 By the arc--coset dictionary of Davydov, Marcugini, and
-Pambianco~\cite[Thm.~6.3]{DMP2021}, a nonzero projective syndrome direction
-$x=[s]$ has coset-leader weight one, two, or three according as $x\in A$,
-$x$ lies on a secant of $A$, or $x$ lies on neither; the number of
-weight-three leaders on such a direction is exactly $\binom{6}{3}=20$; and
+Pambianco~\cite[Def.~6.1, Thm.~6.3]{DMP2021}, a nonzero projective syndrome
+direction $x=[s]$ has coset-leader weight one, two, or three according as
+$x\in A$, $x$ lies on a secant of $A$, or $x$ lies on neither; in the last
+case the coset has exactly $\binom{n}{3}$ weight-three leaders, here
+$\binom{6}{3}=20$. Their Theorem~6.3 is stated for an arbitrary $n$-arc of
+$\PG(2,q)$ and its associated $[n,n-3,4]_q$ MDS code, with no
+Reed--Solomon, normal-rational-curve, or conic hypothesis and no restriction
+on $q$ or the characteristic; it therefore applies to the projectively
+non-GRS code $C$ at hand. (The GRS and conic specializations appear
+separately in their Theorems~6.4, 6.5, 6.8, and 6.10, which we do not use.
+The leader count is also the $d=4$, $n=6$ case of the general
+$\binom{n}{d-1}$ of~\cite[Thm.~7.7]{DMP2021}, so it is an instantiation of a
+uniform formula rather than a coincidence at these parameters.) Finally, by
+their Definition~6.1 together with the definition of arc completeness,
 adjoining $x$ as a seventh arc column preserves the MDS property exactly
 when $x$ is missed by every secant.
 
@@ -734,7 +744,8 @@ A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
 \newblock On the weight distribution of the cosets of MDS codes,
 \newblock \emph{Advances in Mathematics of Communications} \textbf{17}(5)
 (2023), 1115--1138.
-\newblock arXiv:2101.12722.
+\newblock arXiv:2101.12722v2.
+\newblock (Numbered results are cited by their arXiv~v2 numbering.)
 
 \bibitem{Dye1991}
 R.~H.~Dye,
