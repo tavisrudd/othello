@@ -670,6 +670,62 @@ theorem mem_invisibleSecantOrbitClasses_iff_center_mem (hdeg : Module.finrank F 
     visibleSecantOrbitClasses, Finset.mem_filter]
   exact orbitIntersectionCandidate_not_mem_iff_center_mem F E hdeg C hArc hC m o
 
+/-- Every secant orbit is visible on a carrier exactly when no secant-orbit center lies on that
+carrier. -/
+theorem allSecantOrbitClasses_subset_visible_iff_centers_avoid_carrier
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C)
+    (m : {m // m ∈ emptyFixedLines F E C}) :
+    allSecantOrbitClasses F E hdeg C hC ⊆
+        visibleSecantOrbitClasses F E hdeg C hC m ↔
+      ∀ o : SecantOrbitClass F E hdeg C hC,
+        secantOrbitCenter F E hdeg C hArc hC
+          (secantOrbitRepresentative F E hdeg C hC o) ∉ m.1.1 := by
+  constructor
+  · intro hvisible o hcenter
+    have hinvisible : o ∈ invisibleSecantOrbitClasses F E hdeg C hC m :=
+      (mem_invisibleSecantOrbitClasses_iff_center_mem F E hdeg C hArc hC m o).mpr hcenter
+    exact (Finset.mem_sdiff.mp hinvisible).2 (hvisible (Finset.mem_univ o))
+  · intro hcenters o _ho
+    by_contra hnotvisible
+    have hinvisible : o ∈ invisibleSecantOrbitClasses F E hdeg C hC m := by
+      exact Finset.mem_sdiff.mpr ⟨Finset.mem_univ o, hnotvisible⟩
+    exact hcenters o
+      ((mem_invisibleSecantOrbitClasses_iff_center_mem F E hdeg C hArc hC m o).mp
+        hinvisible)
+
+/-- Geometric inverse theorem for the aggregate first-order bound: equality is equivalent to all
+secant-orbit centers avoiding all empty fixed carriers and collision-free local charging. -/
+theorem aggregate_firstOrder_equality_iff_centers_avoid_carriers_and_collisionFree
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C) :
+    (∑ m ∈ allEmptyCarrierClasses F E C,
+        (conjugateCandidatesOnFixedLine F E hdeg m.1 \
+          forbiddenCandidates F E hdeg C hC m).card) +
+          (allEmptyCarrierClasses F E C).card *
+            (allSecantOrbitClasses F E hdeg C hC).card =
+        ∑ m ∈ allEmptyCarrierClasses F E C,
+          (conjugateCandidatesOnFixedLine F E hdeg m.1).card ↔
+      (∀ (m : {m // m ∈ emptyFixedLines F E C})
+          (o : SecantOrbitClass F E hdeg C hC),
+        secantOrbitCenter F E hdeg C hArc hC
+          (secantOrbitRepresentative F E hdeg C hC o) ∉ m.1.1) ∧
+        ∀ m, Set.InjOn (orbitIntersectionCandidate F E hdeg C hC m)
+          (visibleSecantOrbitClasses F E hdeg C hC m) := by
+  rw [QuadraticCollision.aggregate_firstOrder_equality_iff_all_visible_and_collisionFree
+    F E hdeg C hArc hC]
+  constructor
+  · rintro ⟨hvisible, hinjective⟩
+    exact ⟨fun m =>
+      (allSecantOrbitClasses_subset_visible_iff_centers_avoid_carrier
+        F E hdeg C hArc hC m).mp (hvisible m), hinjective⟩
+  · rintro ⟨hcenters, hinjective⟩
+    exact ⟨fun m =>
+      (allSecantOrbitClasses_subset_visible_iff_centers_avoid_carrier
+        F E hdeg C hArc hC m).mpr (hcenters m), hinjective⟩
+
 /-- Empty fixed carriers through the center of a bundled secant orbit. -/
 noncomputable def emptyCarriersThroughOrbitCenter (hdeg : Module.finrank F E = 2)
     (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
@@ -761,6 +817,28 @@ theorem sum_card_invisible_eq_sum_card_emptyCarriersThroughOrbitCenter
   simp_rw [Finset.card_eq_sum_ones]
   simp_rw [Finset.sum_filter]
   rw [Finset.sum_comm]
+
+/-- Geometric near-equality classification: excess `k` in the aggregate first-order count is
+exactly the total center/carrier incidence mass plus local collision redundancy. -/
+theorem aggregate_firstOrder_excess_eq_iff_centerIncidence_add_redundancy_eq
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C) (k : ℕ) :
+    (∑ m ∈ allEmptyCarrierClasses F E C,
+        (conjugateCandidatesOnFixedLine F E hdeg m.1 \
+          forbiddenCandidates F E hdeg C hC m).card) +
+          (allEmptyCarrierClasses F E C).card *
+            (allSecantOrbitClasses F E hdeg C hC).card =
+        (∑ m ∈ allEmptyCarrierClasses F E C,
+          (conjugateCandidatesOnFixedLine F E hdeg m.1).card) + k ↔
+      (∑ o ∈ allSecantOrbitClasses F E hdeg C hC,
+          (emptyCarriersThroughOrbitCenter F E hdeg C hArc hC o).card) +
+        ∑ m ∈ allEmptyCarrierClasses F E C,
+          secantCollisionRedundancy F E hdeg C hC m = k := by
+  rw [← sum_card_invisible_eq_sum_card_emptyCarriersThroughOrbitCenter
+    F E hdeg C hArc hC]
+  exact QuadraticCollision.aggregate_firstOrder_excess_eq_iff_invisible_add_redundancy_eq
+    F E hdeg C hArc hC k
 
 /-- Any family of secant orbits whose centers each lie on at least `n` empty carriers contributes
 at least `|S| n` to aggregate invisibility. -/

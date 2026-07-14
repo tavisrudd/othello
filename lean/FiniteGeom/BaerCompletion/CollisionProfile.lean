@@ -39,6 +39,11 @@ def collisionRedundancy (visible : Finset R) (charge : R → Q) : ℕ :=
 def invisibleOrbits (orbits visible : Finset R) : Finset R :=
   orbits \ visible
 
+/-- Invisible mass vanishes exactly when every obstruction orbit is visible. -/
+theorem invisibleOrbits_eq_empty_iff (orbits visible : Finset R) :
+    invisibleOrbits orbits visible = ∅ ↔ orbits ⊆ visible := by
+  simp [invisibleOrbits]
+
 omit [DecidableEq R] in
 theorem chargeMultiplicity_pos (visible : Finset R) (charge : R → Q)
     {q : Q} (hq : q ∈ chargeSupport visible charge) :
@@ -75,6 +80,19 @@ theorem card_visible_eq_support_add_collisionRedundancy
       rw [Finset.sum_add_distrib]
     _ = (chargeSupport visible charge).card + collisionRedundancy visible charge := by
       simp [support, collisionRedundancy]
+
+omit [DecidableEq R] in
+/-- Collision redundancy vanishes exactly when the charge map is injective on the visible
+obstruction orbits. -/
+theorem collisionRedundancy_eq_zero_iff
+    (visible : Finset R) (charge : R → Q) :
+    collisionRedundancy visible charge = 0 ↔ Set.InjOn charge visible := by
+  have hcount := card_visible_eq_support_add_collisionRedundancy visible charge
+  rw [← Finset.card_image_iff]
+  have hcount' : visible.card = (visible.image charge).card +
+      collisionRedundancy visible charge := by
+    simpa [chargeSupport] using hcount
+  omega
 
 /-- With multiplicity at most four, each local second-moment contribution is at most twice its
 collision redundancy. -/
@@ -159,6 +177,73 @@ theorem sum_card_legal_add_carriers_mul_orbits_eq_sum_candidates_add_invisible_a
     exact card_legal_add_orbits_eq_candidates_add_invisible_add_redundancy
       orbits (visible l) (candidates l) (charge l) (hvisible l hl) (hsupport l hl)
   simpa [Finset.sum_add_distrib, Finset.sum_const_nat] using hsum
+
+omit [DecidableEq L] in
+/-- Quantitative inverse form of the aggregate balance: excess `k` over the first-order candidate
+count is exactly total invisible mass plus total collision redundancy. -/
+theorem aggregate_firstOrder_excess_eq_iff_correction_eq
+    (carriers : Finset L) (orbits : Finset R)
+    (visible : L → Finset R) (candidates : L → Finset Q) (charge : L → R → Q)
+    (hvisible : ∀ l ∈ carriers, visible l ⊆ orbits)
+    (hsupport : ∀ l ∈ carriers, chargeSupport (visible l) (charge l) ⊆ candidates l)
+    (k : ℕ) :
+    (∑ l ∈ carriers, (candidates l \ chargeSupport (visible l) (charge l)).card) +
+          carriers.card * orbits.card =
+        (∑ l ∈ carriers, (candidates l).card) + k ↔
+      (∑ l ∈ carriers, (invisibleOrbits orbits (visible l)).card) +
+          ∑ l ∈ carriers, collisionRedundancy (visible l) (charge l) = k := by
+  have hbalance :=
+    sum_card_legal_add_carriers_mul_orbits_eq_sum_candidates_add_invisible_add_redundancy
+      carriers orbits visible candidates charge hvisible hsupport
+  omega
+
+omit [DecidableEq L] in
+/-- Equality in the aggregate first-order bound holds exactly when every obstruction orbit is
+visible on every carrier and every local charge is collision-free. -/
+theorem aggregate_firstOrder_equality_iff_universal_visibility_and_collisionFree
+    (carriers : Finset L) (orbits : Finset R)
+    (visible : L → Finset R) (candidates : L → Finset Q) (charge : L → R → Q)
+    (hvisible : ∀ l ∈ carriers, visible l ⊆ orbits)
+    (hsupport : ∀ l ∈ carriers, chargeSupport (visible l) (charge l) ⊆ candidates l) :
+    (∑ l ∈ carriers, (candidates l \ chargeSupport (visible l) (charge l)).card) +
+          carriers.card * orbits.card =
+        ∑ l ∈ carriers, (candidates l).card ↔
+      (∀ l ∈ carriers, orbits ⊆ visible l) ∧
+        ∀ l ∈ carriers, Set.InjOn (charge l) (visible l) := by
+  have hbalance :=
+    sum_card_legal_add_carriers_mul_orbits_eq_sum_candidates_add_invisible_add_redundancy
+      carriers orbits visible candidates charge hvisible hsupport
+  constructor
+  · intro heq
+    have hinvisibleSum :
+        (∑ l ∈ carriers, (invisibleOrbits orbits (visible l)).card) = 0 := by
+      omega
+    have hcollisionSum :
+        (∑ l ∈ carriers, collisionRedundancy (visible l) (charge l)) = 0 := by
+      omega
+    constructor
+    · intro l hl
+      have hzero : (invisibleOrbits orbits (visible l)).card = 0 := by
+        exact (Finset.sum_eq_zero_iff.mp hinvisibleSum) l hl
+      rw [Finset.card_eq_zero, invisibleOrbits_eq_empty_iff] at hzero
+      exact hzero
+    · intro l hl
+      apply (collisionRedundancy_eq_zero_iff (visible l) (charge l)).mp
+      exact (Finset.sum_eq_zero_iff.mp hcollisionSum) l hl
+  · rintro ⟨huniversal, hinjective⟩
+    have hinvisibleSum :
+        (∑ l ∈ carriers, (invisibleOrbits orbits (visible l)).card) = 0 := by
+      apply Finset.sum_eq_zero
+      intro l hl
+      rw [Finset.card_eq_zero, invisibleOrbits_eq_empty_iff]
+      exact huniversal l hl
+    have hcollisionSum :
+        (∑ l ∈ carriers, collisionRedundancy (visible l) (charge l)) = 0 := by
+      apply Finset.sum_eq_zero
+      intro l hl
+      exact (collisionRedundancy_eq_zero_iff (visible l) (charge l)).mpr
+        (hinjective l hl)
+    omega
 
 omit [DecidableEq L] in
 /-- If candidates plus invisible mass already exceed the first-order orbit budget in aggregate,

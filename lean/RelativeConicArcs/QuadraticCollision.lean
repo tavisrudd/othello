@@ -221,6 +221,68 @@ theorem sum_card_legal_add_carriers_mul_orbits_eq_sum_candidates_add_invisible_a
   simp_rw [chargeSupport_visible_eq_forbiddenCandidates F E hdeg C hArc hC] at hbalance
   simpa [invisibleSecantOrbitClasses, invisibleOrbits, secantCollisionRedundancy] using hbalance
 
+/-- The excess over the quadratic first-order candidate count is exactly aggregate invisibility
+plus aggregate collision redundancy. -/
+theorem aggregate_firstOrder_excess_eq_iff_invisible_add_redundancy_eq
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C) (k : ℕ) :
+    (∑ m ∈ allEmptyCarrierClasses F E C,
+        (conjugateCandidatesOnFixedLine F E hdeg m.1 \
+          forbiddenCandidates F E hdeg C hC m).card) +
+          (allEmptyCarrierClasses F E C).card *
+            (allSecantOrbitClasses F E hdeg C hC).card =
+        (∑ m ∈ allEmptyCarrierClasses F E C,
+          (conjugateCandidatesOnFixedLine F E hdeg m.1).card) + k ↔
+      (∑ m ∈ allEmptyCarrierClasses F E C,
+          (invisibleSecantOrbitClasses F E hdeg C hC m).card) +
+        ∑ m ∈ allEmptyCarrierClasses F E C,
+          secantCollisionRedundancy F E hdeg C hC m = k := by
+  have hbalance :=
+    sum_card_legal_add_carriers_mul_orbits_eq_sum_candidates_add_invisible_add_redundancy
+      F E hdeg C hArc hC
+  omega
+
+/-- The quadratic first-order count is sharp exactly when every secant orbit is visible on every
+empty fixed carrier and the orbit-to-candidate charge is injective on each carrier. -/
+theorem aggregate_firstOrder_equality_iff_all_visible_and_collisionFree
+    (hdeg : Module.finrank F E = 2)
+    (C : Finset (Point E)) (hArc : Arc (L := Point E) C)
+    (hC : IsInvariant (incidence F E hdeg) C) :
+    (∑ m ∈ allEmptyCarrierClasses F E C,
+        (conjugateCandidatesOnFixedLine F E hdeg m.1 \
+          forbiddenCandidates F E hdeg C hC m).card) +
+          (allEmptyCarrierClasses F E C).card *
+            (allSecantOrbitClasses F E hdeg C hC).card =
+        ∑ m ∈ allEmptyCarrierClasses F E C,
+          (conjugateCandidatesOnFixedLine F E hdeg m.1).card ↔
+      (∀ m, allSecantOrbitClasses F E hdeg C hC ⊆
+          visibleSecantOrbitClasses F E hdeg C hC m) ∧
+        ∀ m, Set.InjOn (orbitIntersectionCandidate F E hdeg C hC m)
+          (visibleSecantOrbitClasses F E hdeg C hC m) := by
+  let carriers := allEmptyCarrierClasses F E C
+  let orbits := allSecantOrbitClasses F E hdeg C hC
+  let visible := fun m : {m // m ∈ emptyFixedLines F E C} =>
+    visibleSecantOrbitClasses F E hdeg C hC m
+  let candidates := fun m : {m // m ∈ emptyFixedLines F E C} =>
+    conjugateCandidatesOnFixedLine F E hdeg m.1
+  let charge := fun m : {m // m ∈ emptyFixedLines F E C} =>
+    orbitIntersectionCandidate F E hdeg C hC m
+  have hvisible : ∀ m ∈ carriers, visible m ⊆ orbits := by
+    intro m _hm
+    exact Finset.filter_subset _ _
+  have hsupport : ∀ m ∈ carriers, chargeSupport (visible m) (charge m) ⊆ candidates m := by
+    intro m _hm
+    rw [show chargeSupport (visible m) (charge m) = forbiddenCandidates F E hdeg C hC m by
+      exact chargeSupport_visible_eq_forbiddenCandidates F E hdeg C hArc hC m]
+    exact Finset.filter_subset _ _
+  have hiff :=
+    FiniteGeom.BaerCompletion.aggregate_firstOrder_equality_iff_universal_visibility_and_collisionFree
+      carriers orbits visible candidates charge hvisible hsupport
+  dsimp [carriers, orbits, visible, candidates, charge] at hiff
+  simp_rw [chargeSupport_visible_eq_forbiddenCandidates F E hdeg C hArc hC] at hiff
+  simpa [allEmptyCarrierClasses] using hiff
+
 /-- Aggregate invisibility can force an extension even when the uniform per-carrier inequality
 `M < N` fails. -/
 theorem exists_arc_extension_of_aggregate_invisible_capacity

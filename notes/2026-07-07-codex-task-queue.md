@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C134.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C135.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -34,7 +34,12 @@ ID is computed, so an invented ID in prose silently burns that number.)
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134 is reported: the bounded
 priority search found no exact precursor for the uniform `PG(2,25)` theorem, while preserving the
-non-historical claim boundary; the next gate is allocation of a separate inverse/equality task.
+non-historical claim boundary. C135 is reported: equality is universal center/carrier avoidance
+plus collision-free charging, and excess `k` is center-incidence mass plus collision redundancy.
+- **C135 `[baer]` [REPORTED 2026-07-14]** — classify equality and near-equality in
+  `L + E M = E N + B + R`: prove that zero correction is exactly universal orbit visibility plus
+  collision-free local charging, then translate the criterion to quadratic Baer geometry →
+  `notes/2026-07-14-c135-baer-inverse-equality.md`.
 
 **Clebsch hexagon paper lane (`clebsch`, 2026-07-13):** see
 [handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the

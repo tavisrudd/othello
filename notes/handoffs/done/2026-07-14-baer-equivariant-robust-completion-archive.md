@@ -20,3 +20,12 @@ classification, and MDS-lengthening sources address different hypotheses or para
 Disposition: use “no exact precursor located in a bounded search.” Do not make a historical-first
 or certified-novelty claim. The 469,600 normalized census and observed minimum 32 remain external
 computational evidence.
+
+## 2026-07-14 — C135 inverse and near-equality classification
+
+Allocated C135 after C134 closed. The abstract collision profile was strengthened with exact zero
+invisibility and zero collision criteria, an aggregate equality iff, and an arbitrary-excess `k`
+iff. The quadratic specialization identifies invisibility with secant-orbit-center incidence on an
+empty fixed carrier, yielding both the equality classification and the quantitative near-equality
+formula. Scoped builds passed, and the public declarations have the expected axiom profile
+`[propext, Classical.choice, Quot.sound]`. No census claim was promoted into Lean.
