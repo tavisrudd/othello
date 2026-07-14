@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-14
 **Status:** ACTIVE — referee closeout queue C136–C141
-**Tasks:** C99, C133–C138, C140 (closed); C139 (started); C141 (queued)
+**Tasks:** C99, C133–C140 (closed); C141 (started)
 
 ## Active-lane lock
 
@@ -64,12 +64,11 @@ the remaining count boundary: the semantic global finset of fresh legal conjugat
 kernel-checked equal to the disjoint carrierwise union and to `PairExtensionData.legalCount`.
 
 The focused scope is executed. Generic completion material and the classical-radius table are out;
-the paper makes a structural-criterion claim rather than a sharpness claim. Do not archive this
-handoff or route the lane as finished until the two remaining release gates are disposed:
+the paper makes a structural-criterion claim rather than a sharpness claim. C139 found no exact
+precursor for the general criterion in a bounded specialist-vocabulary/database search. Do not
+archive this handoff or route the lane as finished until the remaining release gate is disposed:
 
-1. **Close the general priority evidence.** C134 is a bounded search for the uniform Q25 theorem;
-   C139 separately checks the general quadratic-Frobenius orbit-valued criterion.
-2. **Produce the submission artifact.** Supply a bibliography, stable theorem numbering,
+1. **Produce the submission artifact.** Supply a bibliography, stable theorem numbering,
    cross-references, publication formatting, and a final manuscript/Lean/citation/trust audit.
 
 ## Open queue
@@ -79,9 +78,9 @@ handoff or route the lane as finished until the two remaining release gates are 
 | C136 | reported | Global legal-pair cardinality bridge in Lean |
 | C137 | reported | Focused Baer/Q25 manuscript restructure |
 | C138 | reported; table removed | Classical-radius release disposition |
-| C139 | started | General quadratic-Frobenius specialist priority search |
+| C139 | reported | General quadratic-Frobenius specialist priority search |
 | C140 | reported; structural criterion | Sharpness/positioning disposition |
-| C141 | queued | Submission artifact and final referee/trust closeout |
+| C141 | started | Submission artifact and final referee/trust closeout |
 
 The routing table is also stale: it still sends `baer` to the closed C99.6 review and omits C135.
 Leave that row open until the publication disposition is chosen, then update it together with the

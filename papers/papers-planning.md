@@ -59,8 +59,8 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 **6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
   theorem; generic completion-core material is outside the submission.
-- *Gate:* theorem spine and all order-five profiles Lean-built; general-criterion priority search
-  and submission closeout remain.
+- *Gate:* theorem spine and all order-five profiles Lean-built; bounded general-criterion priority
+  search complete; submission artifact and final closeout remain.
 
 **7 · Continuation-graph rigidity, N1 only** — `continuation-graph-rigidity`
 - *What:* N2 demoted to remarks.

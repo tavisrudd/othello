@@ -14,14 +14,17 @@ arc. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh leg
 and kernel-checks its equality with the disjoint carrier union and `PairExtensionData.legalCount`.
 The five parity-allowed Q25 profiles are exhausted in Lean.
 
-**Publication status:** focused restructure complete. The checked Q25 result has no proof-validity
-defect in the scoped audit; the general-criterion priority search and submission closeout remain.
+**Publication status:** focused restructure and bounded general-criterion priority search complete.
+The checked Q25 result has no proof-validity defect in the scoped audit; the submission artifact and
+final closeout remain.
 
 **Novelty boundary:** Hilbert 90, the Baer fixed subplane, projective point/line counts, the
 occupied-line double count, and two-element involution-orbit counts are classical infrastructure,
 not Discovery Track claims. The square-root constant is the classical Lunelli–Sce scale. Candidate
 contributions are the exact quadratic orbit-valued criterion and its semantic coordinate coupling.
 The generic completion/transversal library is not a contribution of this focused paper.
+No exact precursor for the general quantitative criterion was located in the bounded C139
+specialist-vocabulary/database search; this supports no historical-first claim.
 
 **Checked strengthening:** the exact linewise refinement separates invisible centered secant orbits from genuine
 charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved.

@@ -33,9 +33,9 @@ ID is computed, so an invented ID in prose silently burns that number.)
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134–C138 and C140 are
-reported. The focused manuscript, global semantic count, removal of the classical-radius table, and
-structural-criterion positioning are settled. C139 is the active general-priority search; C141 then
-produces and re-audits the submission artifact.
+reported. The focused manuscript, global semantic count, removal of the classical-radius table,
+structural-criterion positioning, and bounded general-priority search are settled. C141 is the
+active submission-artifact and final-audit task.
 - **C135 `[baer]` [REPORTED 2026-07-14]** — classify equality and near-equality in
   `L + E M = E N + B + R`: prove that zero correction is exactly universal orbit visibility plus
   collision-free local charging, then translate the criterion to quadratic Baer geometry →
@@ -49,13 +49,13 @@ produces and re-audits the submission artifact.
 - **C138 `[baer]` [REPORTED 2026-07-14 — TABLE REMOVED]** — audit every classical-radius row against primary sources
   and exact hereditary hypotheses, retaining only publication-ready statements →
   `notes/2026-07-14-c138-baer-classical-radii.md`.
-- **C139 `[baer]` [STARTED 2026-07-14]** — run the specialist/database priority search for the
+- **C139 `[baer]` [REPORTED 2026-07-14]** — run the specialist/database priority search for the
   general quadratic-Frobenius criterion, distinct from C134's uniform-Q25 search →
   `notes/2026-07-14-c139-baer-general-priority.md`.
 - **C140 `[baer]` [REPORTED 2026-07-14 — STRUCTURAL POSITIONING]** — resolve the sharpness gate by a near-sharp or
   pair-saturated family, or adopt and justify the structural-criterion claim boundary →
   `notes/2026-07-14-c140-baer-sharpness-positioning.md`.
-- **C141 `[baer]` [QUEUED 2026-07-14]** — produce the submission artifact and run the final
+- **C141 `[baer]` [STARTED 2026-07-14]** — produce the submission artifact and run the final
   manuscript/Lean/citation/trust/referee closeout, including routing and archive disposition →
   `notes/2026-07-14-c141-baer-submission-closeout.md`.
 

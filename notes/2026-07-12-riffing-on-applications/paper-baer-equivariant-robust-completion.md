@@ -33,8 +33,8 @@ result is presently proved.
 The defensible novelty claim is limited: the individual projective, Frobenius, Hilbert-90,
 line-counting, and union-bound ingredients are classical. The candidate contribution is their exact
 assembly into a quantitative orbit-valued extension theorem and the uniform `PG(2,25)` consequence.
-A bounded search found no exact precursor for the uniform Q25 theorem; no historical-first claim is
-made.
+Bounded database and source searches found no exact precursor for either the general criterion or
+the uniform Q25 theorem; no historical-first claim is made.
 
 ## Objects and notation
 
@@ -125,6 +125,9 @@ adjacent addition maneuver appears in Baker–Wantz,
 [*An arc partition of the Hughes plane*](https://msp.org/iig/2005/2-1/iig-v2-n1-p04-p.pdf).
 The paper-specific contribution claimed here is the assembled exact empty-carrier count and
 quantitative quadratic-Frobenius orbit-extension bound, not invention of conjugate-pair addition.
+A bounded specialist-vocabulary and database search found no exact precursor for this quantitative
+criterion. The search result is negative evidence only, not a historical-priority certificate; see
+the [C139 report](../2026-07-14-c139-baer-general-priority.md).
 
 #### Prose proof
 
@@ -443,13 +446,13 @@ The scoped builds and `#print axioms` audits report exactly
   computational evidence, not theorem inputs.
 - The square-root constant in Corollary D is the classical Lunelli–Sce scale; only the weaker
   no-conjugate-pair-extension hypothesis is potentially paper-specific.
-- C134 is a bounded search for the uniform Q25 statement. A specialist/database search for the
-  general quadratic-Frobenius formula remains before any priority wording stronger than “no exact
-  precursor located.”
+- C134 and C139 are bounded searches for the uniform Q25 statement and the general
+  quadratic-Frobenius formula, respectively. Neither supports wording stronger than “no exact
+  precursor located in a bounded search.”
 - Sharpness is not claimed. Unless a near-sharp or pair-saturated family is proved, the general
   result is presented as a structural criterion.
-- Final release still requires the literature closeout, stable bibliography and numbering,
-  submission formatting, and a last manuscript-to-Lean referee audit.
+- Final release still requires stable bibliography and numbering, submission formatting, and a
+  last manuscript-to-Lean referee audit.
 
 ## Focused manuscript spine
 
