@@ -407,6 +407,43 @@ needs the multi-q program.
 - **mirage** — self-dual/contrastive pairing (refuted); "recover group from orbit samples" (needs
   multi-q).
 
+### Further mining (broad brainstorm, across sub-fields) — real/spec/mirage
+
+**A. Feeds the PARENT program (highest value):**
+- [real] the counting bound **15(q−1)≥q²−6 ⟹ q≤14** is the same secant-capacity arithmetic as the
+  C84 abundance-first lane — check if it generalizes to a parent-program bound. *Chase first.*
+- [real] **"empty saturation ⟺ all-15 σ_xσ_y elliptic"** trace-criterion — test if it sharpens the
+  C84 escape-kernel / S₄-rooted analysis.
+
+**B. Standalone small spin-offs (cheap, un-run):**
+- [real] **the 10-arc companion** (SVM's other A₅-arc at q=11; radius 2, empty deep holes) — free sibling result.
+- [real] **dual [6,3] code** deep-hole geometry vs primal — un-examined, cheap.
+- [real] **Mathieu-hexad check (F3)** — are our 2 hexads among the 132 hexads of S(5,6,12) or transverse? genuine design-theory yes/no.
+- [real] **Schreier=icosahedron graph** as a standalone algebraic-graph-theory note.
+- [minor] publish the exhaustive **|U| histogram {12,16,18,19,20,21,22}** for PG(2,11) 6-arcs as a table.
+
+**C. "Reduce-at-best-prime" functor as a program** [speculative, multi-paper]: census of exceptional
+config × best prime → certified code. Seeds: **27-lines/GQ(2,4)/F₄** (best, loops to hexacode/W(E₆)),
+Hesse/F_p⊇ζ₃, Valentiner A₆⊂PGL₃. Only route to a *family* (primes + dual-variety dead).
+
+**D. Expository / aesthetic** [real, low-risk high-appeal]: a "one object seen ten ways" gem
+(Monthly/Intelligencer/Notices — largely written in this handoff); an interactive visual artifact
+(icosahedron drawn on the conic by σ_x, arc-as-poles, Petersen leaders, chirality flip); a teaching example.
+
+**E. Formalization** [real]: machine-certified gallery piece (rigidity + Schreier=icosa + syzygy, all
+`decide`-grade) — ITP short / strict-trust showcase.
+
+**F. Methodological meta** [real]: this investigation (generative→adversarial red-team→exhaustive→
+gate→loop-back) as a reusable AI-assisted math-triage case study.
+
+**G. Applied [mostly thin]:** specific A₅-symmetric non-GRS (3,6) secret-sharing w/ certified fairness
+[speculative]; rigidity-enables-recovery instance for OBS_1 resilience-vs-reconstructability
+[speculative]; LRC/storage [mirage — length 6 too small]; icosahedral-chirality physics
+(quasicrystals/capsids) [speculative→mirage, no load-bearing bridge].
+
+**Worth pursuing:** A (parent feed, strategic) · C (functor census, the family route) · D (gem+artifact,
+low-risk). Rest = free footnotes or thin.
+
 ### Ranked open checks (surprising × real × deliverable)
 
 1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
