@@ -28,8 +28,10 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
 - **C126** — Family A: chirality-iff-reflection-free CONFIRMED as theorem (Hom(A₄/A₅,ℤ/2)=0);
   but complete-outside-conic + clean Z/2 are **UNIQUE to icosa/p=11** (octa/cube/dodeca degenerate)
   → q=11 singular, family is a foil. `[REPORTED 2026-07-13]` → `notes/2026-07-13-c126-platonic-family.md`
-- **C127** — literature novelty of the Klein-reduction / icosahedron-on-P¹(F₁₁) claim + settle
-  O'Keefe–Storme on the arc. `[IN PROGRESS 2026-07-13]`
+- **C127** — novelty: arc = **Clebsch hexagon** (KNOWN; SVM 1995 + Dye 1991); Klein reduction
+  PARTIAL (hedge Elkies §3.3, Dickson invariant); coding bridge NOVEL; "Adler icosahedron/PSL₂(11)"
+  paper does NOT exist. Must-read: Dye 1991. `[REPORTED 2026-07-13]` →
+  `notes/2026-07-13-c127-klein-reduction-novelty.md`
 - **C128** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs

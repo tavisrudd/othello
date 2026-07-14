@@ -135,7 +135,10 @@ chirality Z/2 (speculative). Leech/Golay: mirage for this functor (already codes
    complete-outside + chirality present/absent. Isolates chirality to A₄/A₅. Highest surprise/effort.
 2. **C123 [in-repo partial, HIGH]** — D2 dual-variety k=4 twisted cubic = tangent-developable
    quartic vs `ProjectiveTwistedCubicTransversalSpectrum.lean`. The theory-bearing thread.
-3. **C127 [literature, MUST-DO]** — novelty of the Klein-reduction claim itself (Adler "The
+3. **C127 [literature] — DONE** (see "Novelty audit round 2" below): arc = Clebsch hexagon (SVM
+   1995 + Dye 1991); Klein reduction partially known (hedge with Elkies §3.3, Dickson invariant);
+   coding bridge novel; "Adler icosahedron/PSL₂(11)" paper does not exist. Remaining: read Dye 1991.
+   ~~novelty of the Klein-reduction claim itself (Adler "The~~
    icosahedron and PSL₂(11)," Kondō, X(11), Martin–Singerman, Elkies) + settle O'Keefe–Storme on the
    arc. Calibrates whether the reduction is new or only its coding/deep-hole reading.
 4. **C128 [in-repo, cheap]** — kernel-check H³+T²=f⁵ mod 11.
@@ -258,9 +261,39 @@ in-repo now).
   named variety (a conic)*, with a **group-theoretic cause** (poles of the six icosahedral axes) —
   first such identification; plus the **dual-variety conjecture** (R3) as its generalization (no
   prior art states deep holes = F_q-points of the dual variety / tangent developable).
-- **BLOCKING CHECK before any submission:** O'Keefe–Storme, *"Arcs fixed by A₅ and A₆"* (J. Geom.
-  1996) and *"Primitive arcs in PG(2,q)"* (JCTA 1995) are paywalled and are exactly where this arc
-  would already be catalogued. Obtain and check before claiming the arc is new.
+## Novelty audit round 2 (C127 — `notes/2026-07-13-c127-klein-reduction-novelty.md`)
+
+- **The arc is KNOWN — it is the CLEBSCH HEXAGON. Settled decisively.** Storme–Van Maldeghem,
+  *"Primitive arcs in PG(2,q)"* (JCTA 1995, open PDF at Ghent): Prop. 11 gives our 6-arc with
+  explicit coords for all q≡±1 mod 10, Prop. 12 proves projective uniqueness, computer check shows
+  incomplete at q=11. Studied as the Clebsch hexagon in **Dye, "Hexagons, conics, A₅ and PSL₂(K)"
+  (JLMS 1991)** — already has the A₅-invariant conic (5 self-polar triangles) + the 10 Brianchon
+  points (= the geometry under our 100-coset / triple-pair split). Char-0 six-axes-off-every-conic
+  = the classical Clebsch diagonal cubic (Hitchin 2007). **Do NOT claim a new arc — name it the
+  Clebsch hexagon and cite SVM 1995 + Dye 1991.** (O'Keefe–Storme no longer blocking; SVM+Dye
+  answer it. Still paywalled; get for citation only.)
+- **Klein form-level reduction — PARTIALLY KNOWN, two mandatory hedges.** A₅⊂PSL(2,11) is classical
+  (Galois 1832, Klein, Dickson, Kostant, Martin–Singerman). The *form-level* facts (vertex form
+  collapsing mod 11 to the all-points Dickson form; diagonals→chords; H³+T²=f⁵ via 1728≡1; the
+  p+1=12 uniqueness) were **not found anywhere** — BUT cite **Elkies, *Klein Quartic in Number
+  Theory* §3.3** as the model (same genre for PSL(2,7) at p=2,3,7), and note **f mod 11 = the
+  classical Dickson–Euler invariant** (Dickson 1911).
+- **FIX BAD REFERENCE:** the paper *"Adler, The icosahedron and PSL₂(11)"* **does not exist** —
+  Adler's PSL(2,11) work is X(11)/cubic-threefold/M₁₁. Remove it wherever cited (see L1).
+- **Coding/deep-hole bridge — NOVEL** (C122 stands after fresh 2025–26 sweep): nothing links any A₅
+  object to covering radius / deep holes.
+- **mod-p Platonic family — skeleton PARTIALLY KNOWN, assembly NOVEL:** Platonic-solids-over-F_p =
+  Grothendieck *Esquisse* §4 (+ Caleb Ji arXiv:2304.03345); Dickson gives the √5-prime criterion;
+  Klein did the p=5 member. The "vertex count=p+1 fills line ⇒ axis-pole arc, deep holes=conic"
+  assembly appears nowhere (and per C126 it degenerates except at p=11 anyway).
+- **Remaining must-read before final wording:** **Dye 1991** (paywalled) — could already state "the
+  0-bisecant points are the conic" geometrically; the covering-radius/deep-hole *reading* stays
+  ours, but read it before locking the wording.
+
+**Safest new headline (C127):** *the complete deep-hole set of the `[6,3,4]₁₁` code on the **Clebsch
+hexagon** is the full point set of the A₅-invariant conic — first identification of an MDS code's
+deep holes with the rational points of a named variety — arising as the mod-11 shadow of Klein's
+icosahedron at the unique prime with p+1=12* (+ dual-variety conjecture as the forward half).
 
 ## Paper framing
 
