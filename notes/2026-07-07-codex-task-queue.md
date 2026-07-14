@@ -2,17 +2,23 @@
 
 **What this is:** the live task registry for the projective-cap / odd-plane program. It holds only
 the current-state map — the priority view plus the genuinely-open tasks as one-line entries. Full
-write-ups of completed tasks, the original ranking, and the Fable Nth-pass amendment trail were moved
-to the companion log
-[`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) on 2026-07-11.
+write-ups of completed tasks, the original ranking, and the Fable Nth-pass amendment trail live in
+the companion log
+[`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md), moved there on
+2026-07-11 (C1–C74 + the priority/amendment history) and 2026-07-14 (every remaining REPORTED /
+CLOSED body). **A REPORTED or CLOSED task does not stay here**: its body goes to the archive, and the
+live doc keeps a pointer only where it still anchors an open frontier — in the CURRENT TOP OF QUEUE
+prose or under *Settled lanes*. What remains below is open work only: active, queued, gated, or
+carrying an explicit open tail.
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
 marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C134.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
-`- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md (`baer`, `cap`, `clebsch`,
-`cubic`, `hexagon`, `kayles`, `queens`, `relconic`, `repaircodes`). Exactly one lane per
+`- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
+are `baer`, `cap`, `clebsch`, `cubic`, `kayles`, `queens`, `relconic`, `repaircodes` (`hexagon` is a
+spoken synonym for `clebsch` and is never written as a peg). Exactly one lane per
 item; peg in the same edit that allocates the ID; an unpegged row is a bug. The section groupings
 below are presentation only — **the tag is the fact, and wins when they disagree**. Re-pegging is a
 lane switch and needs explicit approval. All rows were pegged 2026-07-14.
@@ -21,60 +27,21 @@ ID is computed, so an invented ID in prose silently burns that number.)
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md).
-- **C133 `[baer]` [REPORTED 2026-07-14]** — residual C99.6 is valid generically and kernel-checked:
-  cross-pair endpoint orbits exclude two mate lines, giving occupied-center capacity
-  `f+(e-2)` and at least `s+3-f-e` empty carriers →
-  `notes/2026-07-13-c99-baer-collision-strengthening.md`
 - **C134 `[baer]` [QUEUED 2026-07-14]** — broaden the priority search for the exact uniform `PG(2,25)`
   Frobenius-invariant eight-arc conjugate-pair extension theorem before any historical novelty
   claim.
 
-**Icosahedral MDS / deep-holes lane (2026-07-13):** see
-[handoff](handoffs/2026-07-13-clebsch-paper.md).
-- **C121 `[clebsch]`** — Aut(code)=A₅ + 2-transitive CONFIRMED; deep-hole leaders = **two** size-10 orbits (not
-  one). `[REPORTED 2026-07-13]` → `notes/2026-07-13-c121-icosahedral-mds-checks.md`
-- **C122 `[clebsch]`** — novelty audit: headline = "deep holes = F_q-points of a named variety + dual-variety
-  conjecture"; drop "first non-GRS"; blocking O'Keefe–Storme arc check. `[REPORTED 2026-07-13]` →
-  `notes/2026-07-13-c122-deep-hole-novelty-audit.md`
-- **C123 `[clebsch]`** — k=4 dual-variety test: **CLOSED NO-GO** (2 independent adversarial passes). Conjecture
-  ill-posed + tautological at k=3 + FALSE at k=3 (q=19 hexagon: ≥105 deep holes vs 20) + impossible
-  at k=4 (plane∩ruled-surface; bisecant capacity Ω(q³)) + ZWK 2020 subsumes/refutes GRS shadow. Do
-  not compute; record impossibility lemmas + q=19 counterexample instead.
-- **C124 `[clebsch]`** — L2: Petersen (adjacency "share 2 of 3") + chirality Z/2 (orbit-swap = odd perms)
-  CONFIRMED; five-tetrahedra pairing REFUTED (A₅-on-10 primitive). `[REPORTED 2026-07-13]` →
-  `notes/2026-07-13-c124-petersen-chirality.md`
-- **C125 `[clebsch]`** — L1: REAL — genuine reduction mod 11 of Klein's forms/group (f→12 conic pts, six
-  diagonals→chords, poles→arc); 11 uniquely optimal (p+1=12). `[REPORTED 2026-07-13]` →
-  `notes/2026-07-13-c125-klein-resolvent.md`
-- **C126 `[clebsch]`** — Family A: chirality-iff-reflection-free CONFIRMED as theorem (Hom(A₄/A₅,ℤ/2)=0);
-  but complete-outside-conic + clean Z/2 are **UNIQUE to icosa/p=11** (octa/cube/dodeca degenerate)
-  → q=11 singular, family is a foil. `[REPORTED 2026-07-13]` → `notes/2026-07-13-c126-platonic-family.md`
-- **C127 `[clebsch]`** — novelty: arc = **Clebsch hexagon** (KNOWN; SVM 1995 + Dye 1991); Klein reduction
-  PARTIAL (hedge Elkies §3.3, Dickson invariant); coding bridge NOVEL; "Adler icosahedron/PSL₂(11)"
-  paper does NOT exist. Must-read: Dye 1991. `[REPORTED 2026-07-13]` →
-  `notes/2026-07-13-c127-klein-reduction-novelty.md`
+**Clebsch hexagon paper lane (`clebsch`, 2026-07-13):** see
+[handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the
+*icosahedral MDS / deep-holes* lane; same lane, renamed 2026-07-14.)
 - **C128 `[clebsch]`** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
-- **C130 `[clebsch]`** — parent-program feed: **CLOSED NEGATIVE** — both levers shared-machinery-but-no-new-
-  content (Lever 1 wrong quantifier dir + dim-1, only reproduces classical √(2q) sealing bound; Lever
-  2 = corollary of parent Thm 2.1/Cor 2.2). Spin-off does not feed C84; don't route C84 through it.
-  `[REPORTED 2026-07-13]` → `notes/2026-07-13-c130-parent-feed.md`
-- **C129 `[clebsch]`** — must-read sources: **Dye-1991 gate CLEARED** (verdict NO via Dye's own zbMATH review +
-  SVM Remark 2 + Dye 1997 recap — safe to draft w/ footnote, ILL open); citations locked (ZWK I.4–I.7,
-  DMP 1909.00207, O'Keefe–Storme, Hirschfeld–Sadeh 1984). `[REPORTED 2026-07-13]` →
-  `notes/2026-07-13-c129-mustread-sources.md`
 - **C131 `[clebsch]`** — Sadeh-thesis on-receipt verification (**confirmatory, non-blocking** — priority on the
   |U| extension-count spectrum is granted to the arc-classification literature outright). When the
   Sussex thesis (~1984) / Hirschfeld–Sadeh Giessen 164 (1984) arrives: (a) confirm no over-concession
   beyond the extension-count spectrum — in particular that it does NOT state the deep-hole/covering
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
-  audit + paper-outline §Remaining-work.
-- **C132 `[clebsch]` [CLOSED NEGATIVE 2026-07-14; ADVERSARIALLY CORRECTED]** — none of the four tested
-  second-instance targets realizes the arc/deep-hole template. The 27-line model is correctly
-  `Q⁻(5,2) ⊂ PG(5,2)` (not `PG(5,4)`), hence has 36 external points but is non-cap because it
-  contains 45 lines. Valentiner and Hesse finite checks now have a durable independent verifier;
-  57-cell fails the group-order gate. This closes the spike, not the global `P¹` search. Report:
-  `notes/2026-07-14-c132-second-instance-spike.md`.
+  audit + handoff §Open-lit.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -218,158 +185,9 @@ fixed-locus / quadric-Witt dichotomy leap).
 
 **Proof lanes (open; constituent probes archived as REPORTED):**
 
-- **C106 `[relconic]` [REPORTED 2026-07-13] — relative-conic strengthening refutation/certificate gate.** Independent Python/C++ replays agree on the q11 group, orbit, secant, syndrome, leader, chord, and extension data; coordinate and mutation controls pass. The evaluation range strengthens sharply to `|A|≤q`; the chord colors are five-edge near-perfect, not perfect, matchings. Track in the [strengthening handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
-
 - **C107 `[relconic]` [REPORTED 2026-07-13; SHARED AGGREGATE PENDING] — exact finite-field evaluation-avoidance dichotomy.** The warning-free focused build proves the sharp at-most-`q` equivalence, dimension-sensitive/factored counts, equality model, `q+1` sharp cover, kernel/span form, and arbitrary-feature/Veronese closure with the standard axiom profile. The shared aggregate rerun awaits completion of the unrelated Q25 generated-leaf builder. Same handoff.
 
-- **C108 `[relconic]` [REPORTED 2026-07-13] — projective arc–MDS/syndrome-defect bridge.** `SyndromeGeometry.lean` and `CodingBridge.lean` kernel-prove transparent MDS parameters, syndrome distance, the actual-affine-leader/support cardinality bijection through weight three, exact affine leader counts, relative-completeness confinement, the leader-collision defect form, the general pair/triple extension hypergraph, and its arc-confined graph/maximal-completion specialization. Focused builds and axiom audit pass. Same handoff.
-
-- **C109 `[relconic]` [REPORTED 2026-07-13] — q11 certified code and MDS-extension spectrum.** `Q11Coding.lean` proves the non-GRS `[6,3,4]₁₁` code, covering radius three, exact conic projective deep-hole locus, syndrome/leader distributions, tangent-antipode chord partition, and extension polynomial `1+12t+36t²+20t³`, including zero maximal 0/1-extensions, six maximal 2-extensions, and twenty maximal 3-extensions. The classical Clebsch-hexagon/`A5` interpretation is cited, not rebuilt. Same handoff.
-
 - **C110 `[relconic]` [IN PROGRESS 2026-07-13; SHARED AGGREGATE ONLY] — relative-conic novelty, adversarial, and publication closure.** Primary citation chasing marks the `binom(k,3)` farthest-coset leader count, hyperplane threshold, arc/MDS/deep-hole dictionary, and Clebsch interpretation as known. Independent Python/C++ replay, coordinate invariance, perturbed-witness and mutated-generator controls pass. Paper/PDF, proof audit, TRUST, results table, queue, and projective-cap consumer note are synchronized; the final source/claim checklist and post-audit actual-leader bridge pass focused rebuild and standard-axiom audit. Only the shared aggregate rerun remains. Same handoff.
-
-- **C111 `[repaircodes]` [REPORTED 2026-07-13] — projectively completed cubic–axis seed.** Strict-trust Lean proves `[2q+2,4,q]_q`, nonzero/projectively-distinct columns, and exact global dual distance three. Independent `q=3,9,27` replay, conjugation/deletion/mutation controls, aggregate build, scans, and XH1 passed. Track in the [projective-completion handoff](handoffs/2026-07-13-projective-completion-repaircodes.md).
-
-- **C112 `[repaircodes]` [REPORTED 2026-07-13] — exact completed-seed repair ports.** Strict-trust Lean proves the exact radius-three clutters and rows, the generic rank-`k` minimal-repair cutoff and full-port separator theorem, radius-four equality with the full minimal inner port, and exact uniform full rows: cubic `((q-1)/2,q-1)`, axis `((5q-3)/6,2q-3)`. The radius-four matching proof quantifies over every minimal edge and does not assume an explicit five-circuit catalogue. Exhaustive q=3,9 replay, focused/aggregate builds, scans, standard-axiom audit, and XH3/XH4 pass. Same handoff.
-
-- **C113 `[repaircodes]` [REPORTED 2026-07-13] — completed-seed lift and asymptotic family.** Strict-trust Lean proves q9 `[20N,4K,>=9D]_9`, exact `10N/10N` coordinate multiplicities, exact mixed locality, equality of every lifted repair hypergraph through radius four with one embedded inner block under outer dual distance six, and exact radius-four rows `(4,8)` and `(7,15)`. The Stichtenoth specialization gives unbounded length, exact rate `1/10`, and every eventual `c<351/1600` distance bound. The theorem explicitly does not claim the lift's unbounded full port. Focused/aggregate builds, scans, axiom audit, and XH5 pass. Same handoff.
-
-- **C114 `[repaircodes]` [REPORTED 2026-07-13] — projective-completion novelty and publication closure.** Primary-source and targeted exact-claim searches classify the projective geometry, ordinary code parameters, rank cutoff, concatenation, and rate/distance arithmetic as classical or derived; only the exact completed repair rows and bounded radius-four transfer retain cautious none-found candidate wording. The manuscript/PDF, proof ledger, novelty audit, TRUST manifest, paper registries, queue, and handoffs are synchronized. A final adversarial paper--Lean pass exposed and closed one packaging-only gap by exporting the already-uniform cubic/axis exact-locality proofs under generic theorem names. XH6, focused/aggregate builds, forbidden scan, axiom audit, TeX build, and release checklist pass. External specialist citation-chain review remains submission preflight, not a mathematical or formalization blocker. Same handoff.
-
-- **C101 `[relconic]` [REPORTED 2026-07-12] — exact `rho_C(16)`.** The complete projective augmentation books
-  give 2633 eight-arc classes. Quadratic evaluation rank rejects 2630; the remaining three have a
-  forced arc hit. Lean proves no relative-complete eight-arc and `rhoC(16)=9`. Final map:
-  [rho_C(16) handoff](handoffs/done/2026-07-12-rhoc16-exact-value.md).
-
-- **C102 `[repaircodes]` [REPORTED 2026-07-13] — extension-field trace bridge for RepairCodes.** Kernel-proved in
-  `RepairCodes/TraceDual.lean`, including exact support preservation. Track in the
-  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
-
-- **C103 `[repaircodes]` [REPORTED 2026-07-13] — asymptotically good RepairCodes outer family.** The concrete
-  family theorem is Lean-checked from exactly one cited import, Stichtenoth Theorem 1.6(ii).
-  Track in the [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
-
-- **C104 `[repaircodes]` [REPORTED 2026-07-13] — exact general cubic matching.** The exact row `((q−1)/2,q−2)` is kernel-checked for every finite characteristic-three field. The q3/infinity branches, package build, paper, novelty posture, and registries are synchronized; track in the [RepairCodes strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
-
-- **C105 `[repaircodes]` [REPORTED 2026-07-13] — transfer-gate boundary examples.** Both exact numerical boundaries have nondegenerate kernel-checked counterexamples at the level of literal complete repair hypergraphs. Manuscript, novelty posture, trust manifest, and registries are synchronized; track in the [RepairCodes strengthening handoff](handoffs/done/2026-07-13-repaircodes-strengthening-plan.md).
-
-- **C99 `[baer]` [REPORTED/CLOSED 2026-07-14] — post-formalization second-order application
-  revisit.** The subtraction-free linewise and aggregate collision identities are Lean-proved.
-  The exact accounting and the full `f=2` pair-extension theorem are Lean-proved. The exact
-  invisible-orbit↔center-on-carrier characterization, aggregate center double count, and local
-  `GF(5)` center-capacity lemma are also Lean-proved. The profile-specific cross-pair occupied-line
-  bound are now specialized to the `(4,2)` profile in `Q25ProfileFour`, yielding a kernel-checked
-  lower bound of four legal pairs and a semantic pair-extension theorem. `Q25ProfileZero` proves
-  the `(0,4)` moment argument and a lower bound of five legal pairs without certificates;
-  `Q25AllProfiles.pair_extension` proves the uniform eight-arc extension theorem. The two external
-  `f=2` enumerations support only the unproved census/minimum claims. Track in the
-  [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue)
-  [proof ledger](2026-07-13-c99-baer-collision-strengthening.md), and
-  [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).
-
-- **C100 `[relconic]` [REPORTED 2026-07-12] — relative-conic game localization.** The exact recursive
-  parametrized-hole bridge, q=9 terminal P theorem, and actual q=11 seeded P theorem are
-  strict-trust Lean-proved. The tested two-ply descent closures are absent and the exact uncovered
-  translation does not sharpen C80's minimax potential; this is not an (ON) theorem. Report:
-  [C100 relative-conic game bridge](2026-07-12-c100-relative-conic-game-bridge.md).
-
-- **C89 `[relconic]` [REPORTED 2026-07-12] — relative-conic-arcs foundation.** The isolated
-  `RelativeConicArcs` target now reuses Mathlib's `Configuration.ProjectivePlane`; arc/secant/hole
-  vocabulary, maximal relative completion, attained `rho`, coordinate order `q`, and the exact
-  `Arc ↔ ProjectiveCap.Projective.Cap` bridge are Lean-proved. Build is warning-free; headline
-  axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C90 `[relconic]` [REPORTED 2026-07-12] — classical secant moments.** Literal unordered endpoint pairs,
-  canonical pair lines, and pairwise-disjoint endpoint fibers prove `r_A(x)≤⌊|A|/2⌋`; finite
-  double counts prove `Σr=C(k,2)(q−1)` and `ΣC(r,2)=3C(k,4)`. The warning-free target builds and
-  headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C91 `[relconic]` [REPORTED 2026-07-12] — prescribed-hole defect identity.** The split moments give the exact
-  integer-normalized defect identity. Maximum-index bounds prove nonnegativity, coverage/uncovered
-  inequalities, the equality criterion, and quantitative stability. The warning-free target builds;
-  headline axioms are `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C92 `[relconic]` [REPORTED 2026-07-12] — conic specialization and finite lower bounds.** The Veronese conic
-  is exactly `XZ=Y²` with `q+1` points; nonsingular conics are explicit projective images and have
-  invariant `rhoC`. Abstract `q+1`-hole specialization, parity capacities, and
-  `L1(q) ≤ L2(q) ≤ rhoC(q)` are Lean-proved. The warning-free target builds; headline axioms are
-  `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C93 `[relconic]` [REPORTED 2026-07-12] — additive `3/2` asymptotic.** The parity-free cubic inequality gives
-  the explicit bound `rhoC(q)≥sqrt(2q)+3/2−8/sqrt(2q)`. The shortfall is
-  `O(1/sqrt(2q))`; operational and literal liminf statements are formalized over indexed families
-  of actual finite fields. The warning-free target builds; headline axioms are
-  `[propext, Classical.choice, Quot.sound]`. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C94 `[relconic]` [REPORTED 2026-07-12] — projective averaging transfer.** Finite transitive-action averaging
-  gives a disjoint projective image for every ordinary complete arc of size at most `q`, proving
-  `rhoC(q)≤t2(2,q)` when `t2(2,q)≤q`. The Kim–Vu input is an explicit named hypothesis, not an
-  axiom; the warning-free target and axiom audit pass. Track in
-  the [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C95 `[relconic]` [REPORTED 2026-07-12] — even-characteristic nucleus constraints.** The standard conic plus
-  `[0:1:0]` is a hyperoval in characteristic two, giving the exact tangent classification and both
-  nucleus-in/nucleus-out count, parity, incidence, and corrected-bound packages. The warning-free
-  build and strict axiom audit pass. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C96 `[relconic]` [REPORTED 2026-07-12] — certified small examples and trust audit.** A generic rules-only
-  checker reduces coverage to `q²+q+1` canonical representatives and proves accepted raw data
-  semantically complete outside the conic. Frozen kernel checks prove `rhoC=6` at `q=8,9,11` and
-  the preliminary bound `8≤rhoC≤9` at `q=16`; C101 subsequently closes it to `rhoC=9`. The
-  warning-free build, provenance, isolation, forbidden-token, and axiom audits pass. Track in the
-  [relative-conic-arcs handoff](handoffs/done/2026-07-12-arcs-complete-outside-conic-formalization.md).
-
-- **C97 `[repaircodes]` [REPORTED 2026-07-13] — full coding/LRC paper assembled and internally audited.**
-  `papers/coding-repair-hypergraphs/` contains the 12-page manuscript/PDF, proof ledger, and
-  adversarial novelty report. The Lean aggregate, strict token/axiom scan, bibliography, and PDF
-  build pass. The audit explicitly returns repair tolerance to prior art and narrows the surviving
-  candidate novelty to exact all-symbol `(ν,τ)` separation and complete-hypergraph transfer.
-  External specialist citation-chain review remains a submission preflight gate, not a
-  formalization or manuscript blocker. Track in the
-  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
-
-- **C98 `[repaircodes]` [REPORTED 2026-07-12] — theorem-mining and novelty review.** The completed proof graph
-  yielded the sufficient `r+1<2d(I⊥)` transfer gate, a coordinate-free symbol-module extension, exact
-  row-distribution transfer, and a square-root-of-minus-one rainbow certificate beyond q9.
-  The internal literature audit is complete; an external specialist citation-chain review remains
-  a submission preflight gate. See the classified results in the
-  [Lean formalization handoff](handoffs/2026-07-11-lean-formalization-plan.md).
-
-- **C85 `[cap]` [REPORTED 2026-07-12] — quadratic split-route obstruction.** Chevalley–Warning now proves
-  every finite odd-field quadratic form of dimension at least three isotropic; the `±1`
-  eigenspace decomposition and scalar-square normalization close the split linear parabolic
-  branch. `ProjectiveCap` builds; strict axiom profile is
-  `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
-
-- **C86 `[cap]` [REPORTED 2026-07-12] — Hermitian linear obstruction.** Relative Frobenius, quadratic norm
-  surjectivity/square reflection, and two-vector orthogonalization prove finite Hermitian isotropy;
-  scalar-square eigenspaces exclude the split route, while `Norm(c)=μ²` excludes a nonsquare
-  similitude scalar. `ProjectiveCap` builds; strict axiom profile is
-  `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
-
-- **C87 `[cap]` [REPORTED 2026-07-12] — Baer-semilinear obstruction.** Constructive projective conjugacy,
-  scalar Hilbert 90, fixed-value quadratic descent, semilinear pullback untwisting, and a
-  coordinate-free null-cone rigidity theorem close the modeled square-scalar Baer branches for
-  both Hermitian and parabolic boards. The parabolic theorem accepts projective board preservation
-  directly. The imported stabilizer axiom was deleted; focused and aggregate builds pass, and every
-  load-bearing theorem has axiom profile `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
-
-- **C88 `[cap]` [REPORTED 2026-07-12] — elliptic `Q⁻` boundary classification.** The proposed exclusion is
-  false. Chevalley–Warning supplies a nonsquare-discriminant anisotropic tail compatible with the
-  nonsplit block map, giving a fixed-point-free mirror and P theorem for the standard elliptic
-  coordinate form in every even vector dimension. P/N transport through a supplied projective
-  linear equivalence is formal. Focused and aggregate builds pass; strict axiom profile is
-  `[propext, Classical.choice, Quot.sound]`. Track in the
-  [mirror-boundary handoff](handoffs/done/2026-07-12-mirror-boundary-formalization.md).
 
 - **C84 `[cap]` [ACTIVE 2026-07-12 — PRIMARY, abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:
@@ -403,36 +221,6 @@ fixed-locus / quadric-Witt dichotomy leap).
   `c80_schreier_verify.py` (field), `s4_escape_probe.py`, `s4_abundance_check.py`,
   `pairing_witness.py`, `exact_fricke.py`, `refined_signature.py`, `three_centre_probe.py`,
   `schreier_templates.py`.
-
-- **C79 `[cap]` [REPORTED 2026-07-12 — arithmetic coordinates + bulk-gap spec delivered; continuation →
-  C80/C81/C82]** — number-theoretic forcing architecture for the full odd-q
-  ProjectiveCap proof: test common-torus/dihedral reduction of conic involutions, character-sum or
-  polynomial-count existence of repair packets, and Frobenius/subfield descent for the
-  characteristic-5/7 exceptions. **First gates:** common-torus recursion is closed (all applicable
-  q11/q17 hard triples noncommuting); a five-ray quadratic-character core is locally exact but has
-  no extremal selector; maximum-pencil moment/character quotients either collide or become a fully
-  marked fingerprint. The positive structural model is the q17 score-9 packet: four primitive
-  split/nonsplit candidates, with the unique maximum-zone-edge candidate clean/P in all 28
-  transitions. Its zone is one 9-vertex graph; `ProjectiveCap.PrimitiveZoneBase` now Lean-checks its
-  Grundy-zero value. Full conic-stabilizer orbital vectors expose a generic score-9 fiber: 24/28
-  clean repairs are the unique `(q+1,q+1,q+1)` primitive triple intersections, with four explicit
-  exceptional fibers. Hollmann--Xiang intersection numbers are therefore the next reply-counting
-  algebra (with odd-q formulas still to derive). Fused quadratic-character relations give an
-  abundant two-variable packet only against boundedly many guards. Literal retirement of old
-  intruders is impossible while more than half the conic is live: distinct involutions share at
-  most one full-conic edge, any such shared edge is dead once both centers are selected, and each
-  retains at least `(q-1)/2-d` live edges after `d` deleted vertices. The decisive
-  prerequisite is a bulk quotient absorbing many genuinely active matchings. The exact relation polynomial
-  `D_x(y)=(2-rv-cu)^2-4(rc-1)(uv-1)` simultaneously gives line-conic and split/nonsplit type and is
-  exhaustively convention-checked through q19. For the bulk operator `B=sum P_sigma`, the full
-  orbital pair distribution is exactly `tr(B^2)` — a permanent redundancy audit for any proposed
-  classifier. On the 24 generic score-9 rows minimum `tr(B^2)` only ties the clean repair with one
-  decoy (74 vs 74, others 78); `tr(B^3)` breaks that tie (60 vs 84), and no coordinatewise moment
-  rule through `tr(B^4)` covers the four exceptional rows. **Moment lane capped:** moments are
-  bulk-audit/bounding language; further moment-selector search re-enters the closed
-  static-signature lane. The rule fails below score 9, so continue with packet existence plus a new
-  generic descent, not arithmetic P/N classification. Report:
-  [`2026-07-11-c79-number-theoretic-forcing.md`](2026-07-11-c79-number-theoretic-forcing.md).
 
 - **C80 `[cap]` [ACTIVE 2026-07-12 — (c) drain proven+verified; (a) abundance / (b) descent open]** —
   game-side bulk-mechanism probe: exhaustion, abundance, descent measure. Report:
@@ -517,17 +305,6 @@ fixed-locus / quadric-Witt dichotomy leap).
   odds-moving dichotomy either way. Report target:
   `notes/2026-07-12-c83-bisimulation-quotient.md`.
 
-- **C76 `[cap]` [REPORTED 2026-07-11 — invariant prong answered]** —
-  frame-relative characters (polar-at-frame, frame-chord, frame×tangent cross-ratio profiles) — the
-  frame-awareness the (x,z)-local selector space omitted — cut the C75 collisions **48→1**: they split
-  47/48 enumerated twins (polar+chord) and separate the winner/loser classes almost everywhere. **But
-  the augmented space is NOT orbit-injective** (1 residual hard twin, q=17 axis points P `11,0`/N
-  `16,0`), **no scalar reduction is monotone** (39/48 and 38/48 separators are direction-MIXED), and
-  **no uniform linear selector exists** (C77-selector-test LP infeasible over d=37). So it buys
-  separation, not selection — routing the escape proof to a **game-semantic reply closure**. Report:
-  [`2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md`](2026-07-11-c76-frame-aware-invariant-orbit-injectivity.md);
-  scripts `rust/scripts/c76_invariant_hunt.py`, `rust/scripts/c76_directional_search.py`,
-  `rust/scripts/c77_augmented_selector.py`.
 - **C77 `[cap]` [REPORTED 2026-07-11 — DROP peak theorem proved; game-semantic certificate residue OPEN]** —
   C63's growing Ψ debt is entirely the loose `reservoir_slack` term. After deleting it, the pure
   conic ledger `DROP = 6·defect − 4·intruders − 2·[xor=0]` satisfies the **all-depth theorem**
@@ -632,20 +409,6 @@ fixed-locus / quadric-Witt dichotomy leap).
   `notes/2026-07-07-codex-sumfree-induction-r.md`.
 - **C56 `[cap]` [CLOSED-GATED — do not start]** — group-indexed cross-q type alignment; gated on a C55
   positive, and C55 is NEGATIVE, so it stays closed.
-
-**Reported this pass:**
-
-- **C78 `[cap]` [REPORTED 2026-07-11]** — Lean-checked the universal pair/secant-cover bound and the
-  `PG(4,5)` numerical consequence `t₂(4,5) ≥ 21`; the exact wide-bitset `PGL(5,5)` census has orbit
-  curve `[1,1,1,1,2,4,10]` through size 6, while a wall-safe size-7 run cuts off at 120.023 s.
-  Representation is solved for the probe; exact canonicalization is the measured next lever.
-  Report: [`2026-07-11-c78-pg45-complete-cap-quick-deliverable.md`](2026-07-11-c78-pg45-complete-cap-quick-deliverable.md).
-- **C75 `[cap]` [REPORTED 2026-07-11]** — value-blind reply-selector impossibility. 19 of 108 hard obligations
-  hold a P and an N reply that are byte-identical on all 17 program features → the wall is
-  feature-completeness, not coordinate choice, and the deficit grows with q (6% → 7% → 39%). Names the
-  C76 invariant hunt and re-weights (ON) toward the amortized/ledger potential. Report:
-  [`2026-07-11-c75-value-blind-selector-impossibility.md`](2026-07-11-c75-value-blind-selector-impossibility.md);
-  script `rust/scripts/c75_linear_selector_lp.py`; solver `gridcap-c75`.
 
 **Opportunistic / diagnostics (no priority; pull as diagnostics — full specs in the archive):**
 C23 / C40 (winline viz lanes), C49 (piece nimber tables), C57 (zone quasi-randomness), C60
