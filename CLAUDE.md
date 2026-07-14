@@ -15,36 +15,62 @@ Rules:
 - Put completed, stale, or dormant work in the relevant handoff or under `notes/handoffs/done/`.
 - If an entry needs more context, add that context to the linked handoff, not here.
 
-### Active-lane lock
+### Lane routing
 
-- Resuming a named handoff makes that lane sticky until the user explicitly switches lanes or the
-  handoff declares the lane finished.
-- Within a sticky lane, `go` and `next?` mean the next step in that handoff, not the newest global
-  commit or the highest-ranked task elsewhere in the repository.
+**Several lanes are open concurrently.** There is no single global "active lane" — which lane is
+live is a property of the conversation, not of this file. Never infer it from the newest commit, the
+highest-ranked queue task, or the lane worked last session.
+
+**Selecting a lane.** Each lane below has a **bold alias**. Saying the alias — bare (`hexagon`) or
+as `go <alias>` (`go hexagon`) — selects that lane and resumes it from its entry doc.
+`@notes/handoffs/<name>.md go` likewise selects that handoff's lane.
+
+**Bare `go` / `next?` at the start of a session, with no lane named: ASK which lane.** Do not guess
+and do not default to the most recent anything. Listing the open lanes with a one-line status each
+is a good way to ask.
+
+**Within a session, `go` / `next?` mean the next step in the lane already selected** — not the newest
+global commit, not a higher-ranked task elsewhere. The lane stays selected until the user switches it
+or it finishes. An explicit lane name always switches, no questions asked.
+
+**When the selected lane finishes** (its entry doc declares it done, or its work is complete): stop
+and say so. Do not roll onto another lane, and do not invent new scope inside the finished one. Then
+ask, as three separate questions: (a) archive the handoff to `notes/handoffs/done/`? (b) update this
+routing table? (c) which lane next? Wait for the answers.
+
+**Cross-lane hygiene** (applies while any lane is selected):
 - Treat commits and working-tree changes owned by other lanes as foreign: note them when relevant,
   but do not review, edit, stage, or route into them without an explicit lane switch.
-- Before editing, check the active handoff's allowed paths. If a needed target is outside them,
+- Before editing, check the selected lane's allowed paths. If a needed target is outside them,
   stop and request a lane switch or scope expansion.
-- Consult the global queue for task-ID allocation and explicit lane completion, not to override a
-  sticky handoff's local next step.
+- Consult the global queue for task-ID allocation and explicit lane completion, not to override the
+  selected lane's local next step.
 
 ### Codex WIP
 
-- **Baer-equivariant robust completion (C133):** start with
+- **`baer`** — Baer-equivariant robust completion (C99, C133, C134): start with
   [Baer-equivariant robust-completion](notes/handoffs/2026-07-14-baer-equivariant-robust-completion.md).
-  This is the active sticky lane; its first task is the C99.6 hostile review and disposition.
-- **ProjectiveCap / Lean proof program:** start with
+  First task is the C99.6 hostile review and disposition.
+- **`cap`** — ProjectiveCap / odd-plane / Lean proof program (C13, C30, C50, C56, C74–C88; the
+  largest lane): start with
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md), then
   [codex task queue](notes/2026-07-07-codex-task-queue.md) — see its CURRENT TOP OF QUEUE
   for the active task IDs.
-- **Relative-conic evaluation/coding/icosahedral strengthening (C106–C110):** start with
+- **`relconic`** — Relative-conic arcs paper + evaluation/coding strengthening (C89–C96, C100, C101,
+  C106–C110): start with
   [relative-conic arcs strengthening](notes/handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
-- **Twisted-cubic cross-lane / transversal spectrum (C115–C120):** start with
+- **`repaircodes`** — RepairCodes / coding-repair-hypergraphs paper (C97, C98, C102–C105,
+  C111–C114): start with
+  [projective-completion repaircodes](notes/handoffs/2026-07-13-projective-completion-repaircodes.md).
+- **`cubic`** — Twisted-cubic cross-lane / transversal spectrum (C115–C120): start with
   [twisted-cubic transversal-spectrum](notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
   Next session do **C115 (opt-b) first** — the projection→plane-cubic reduction.
-- **Icosahedral MDS / deep-holes = conic (C121–C123):** start with
+- **`icosa`** — Icosahedral MDS / deep-holes = conic (C121–C130, C132): start with
   [icosahedral-mds-deep-holes](notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
-- **Named-expert context:** load
+  **Boundary with `hexagon`:** `icosa` is the research lane that produced the q=11 math; `hexagon`
+  is the manuscript that writes it up. Open Lean certs for the paper's theorems (chirality, gap,
+  TFAE) currently sit in `icosa`. If in doubt which owns a new item, ask.
+- **Named-expert context** (not a lane): load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for
   status, routing, document review, relevance checks, literature comparison, or other
@@ -52,15 +78,19 @@ Rules:
 
 ### Claude WIP
 
-- **ProjectiveCap shared current lane:** use the same
+- **`hexagon`** — Clebsch hexagon paper: the `[6,3,4]₁₁` MDS code whose deep holes are a
+  conic. Start with [clebsch hexagon paper outline](notes/2026-07-13-clebsch-hexagon-paper-outline.md)
+  — its *Remaining work before submission* is the live queue. Paper + checkers live in
+  [`papers/clebsch-hexagon-code/`](papers/clebsch-hexagon-code/); indexed in
+  [papers-index.md](papers/papers-index.md) under the `clebsch` alias. **No handoff doc yet** — the
+  outline is the live map, and it is the doc to update at end of session.
+- **`cap`** (shared with Codex) — use the same
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md)
-  handoff unless the user names a different handoff.
-- **Node-Kayles / sum-free thread:** dormant unless resumed; entry point is
+  handoff unless the user names a different lane.
+- **`kayles`** — Node-Kayles / sum-free thread: dormant unless resumed; entry point is
   [node-kayles-games handoff](notes/handoffs/2026-07-04-node-kayles-games.md).
-- **Queens/Othello performance queues:** archived/dormant; see
+- **`queens`** — Queens/Othello performance queues: archived/dormant; see
   [2026-07-08 CLAUDE Queens/Othello WIP](notes/handoffs/done/2026-07-08-claude-archive-queens-othello.md).
-
-**`go`** (or `@notes/handoffs/<name>.md go`) at session start = read that handoff and resume from its Progress / next steps.
 
 ## Lean
 
@@ -175,6 +205,24 @@ back). Not-yet-committed work is always rewritten clean.
 registry, its `CURRENT TOP OF QUEUE` the live view. New ID = `max(CNN in queue + handoff +
 notes/) + 1`, entered as a one-line queue row at allocation. Never reuse or renumber a
 reported ID; on a collision, renumber the newer/less-referenced one (e.g. C74→C75, 2026-07-11).
+
+**Every C item is lane-pegged.** Each row carries its lane alias immediately after the ID, using an
+alias from the routing table above:
+
+```
+- **C135 `[hexagon]` [QUEUED 2026-07-14]** — one-line description → report path
+```
+
+The peg is what makes a C item routable; an unpegged row is a bug, not a neutral default. Rules:
+- **Exactly one lane per item.** Work touching two lanes is either two items or one item pegged to
+  the lane that owns the deliverable — never a row pegged to both.
+- **Peg at allocation**, in the same edit that allocates the ID. Do not allocate an ID and peg later.
+- **Section membership is not a peg.** Lane sections in the queue are presentation; the tag is the
+  fact. Keep them consistent, and when they disagree, the tag wins.
+- **Re-pegging is a lane switch** and needs the same explicit approval: say the item is moving,
+  which lane to, and why. Do not re-peg silently while working an unrelated lane.
+- Selecting a lane selects its C items. When asked for the next step in a lane, read that lane's
+  pegged items — do not pull a higher-ranked item pegged elsewhere.
 
 **End of session.** (1) Update the live map (tables, frontiers, queue); prune any log that
 crept in. (2) Append the dated session note to the companion, not the live doc. (3) Move
