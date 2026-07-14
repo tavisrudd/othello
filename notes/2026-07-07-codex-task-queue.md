@@ -221,9 +221,11 @@ fixed-locus / quadric-Witt dichotomy leap).
 
 - **C99 [OPEN — `f=0,4` LEAN PROOFS REQUIRED] — post-formalization second-order application
   revisit.** The subtraction-free linewise and aggregate collision identities are Lean-proved.
-  The exact accounting and the full `f=2` pair-extension theorem are Lean-proved. Cross-center/
-  moment sketches for `f=0,4` remain unproved; the two external `f=2` enumerations support only the
-  unproved census/minimum claims. The live lever is complete kernel geometry for `f=0,4`. Track in the
+  The exact accounting and the full `f=2` pair-extension theorem are Lean-proved. The exact
+  invisible-orbit↔center-on-carrier characterization, aggregate center double count, and local
+  `GF(5)` center-capacity lemma are also Lean-proved. The profile-specific cross-pair occupied-line
+  bound and the `f=0` moment partition remain open; the two external `f=2` enumerations support only
+  the unproved census/minimum claims. The live lever is the `(4,2)` cross-pair construction. Track in the
   [paper appendix](2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md#appendix-a--second-order-corollaries-extensions-and-application-queue)
   [proof ledger](2026-07-13-c99-baer-collision-strengthening.md), and
   [novelty audit](2026-07-13-baer-completion-adversarial-novelty-review.md).

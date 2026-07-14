@@ -12,6 +12,7 @@ import RelativeConicArcs.QuadraticLineCounting
 import RelativeConicArcs.QuadraticPairExtension
 import RelativeConicArcs.QuadraticForbidden
 import RelativeConicArcs.QuadraticCollision
+import RelativeConicArcs.QuadraticInvisible
 import RelativeConicArcs.BaerArithmetic
 import RelativeConicArcs.Q25PairResult
 import RelativeConicArcs.Defect

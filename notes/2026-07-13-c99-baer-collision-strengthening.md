@@ -36,7 +36,7 @@ counting, second secant moments, and capped-multiplicity inequalities are classi
 | C99.3 | `legal + orbits = candidates + invisible + redundancy` | proved | proved linewise and in aggregate | paper-specific specialization; priority open |
 | C99.4 | visible quadratic charge support equals the coordinate forbidden-candidate set | proved | proved in `QuadraticCollision.lean` | assembled from checked coordinate infrastructure |
 | C99.5 | aggregate invisible capacity forces a genuine arc extension | proved | proved in `QuadraticCollision.lean` | paper-specific consequence; priority open |
-| C99.6 | a cross-pair secant orbit is invisible on at least `s+3-f-e` empty carriers | unproved candidate lemma | not formalized | elementary incidence candidate |
+| C99.6 | a cross-pair secant orbit is invisible on at least `s+3-f-e` empty carriers | partially proved: invisibility is exactly center-on-carrier and the center-capacity reduction is proved; the profile-specific occupied-line bound remains | `QuadraticInvisible.lean` | elementary incidence candidate |
 | C99.7 | for `s=5`, profile `(f,e)=(0,4)` has at least five legal conjugate-pair extensions | unproved; prose derivation only | accounting/arithmetic kernel proved; geometric moment partition open | priority irrelevant until Lean-proved |
 | C99.8 | for `s=5`, profile `(f,e)=(4,2)` has at least four legal conjugate-pair extensions | unproved; prose derivation only | accounting/arithmetic kernel proved; center-incidence bound open | priority irrelevant until Lean-proved |
 | C99.9 | every invariant eight-arc in `PG(2,25)` pair-extends | unproved; the `f=2` profile is proved, but `f=0,4` remain open | partial: `Q25PairResult.f2_pair_extension` | priority open only after the remaining profiles are proved |
@@ -295,6 +295,11 @@ New checked declarations:
 - `RelativeConicArcs.QuadraticCollision.chargeSupport_visible_eq_forbiddenCandidates`;
 - the linewise and aggregate quadratic exact balances;
 - `exists_arc_extension_of_aggregate_invisible_capacity`;
+- the fixed `secantOrbitCenter`, the exact
+  `mem_invisibleSecantOrbitClasses_iff_center_mem` characterization, and the aggregate
+  center-incidence double count in `QuadraticInvisible.lean`;
+- `card_mul_le_sum_card_invisible_of_center_capacity` and the local `GF(5)` consequence that a
+  center on at most four occupied fixed lines lies on at least two empty carriers;
 - the three numerical balance tails in `RelativeConicArcs.BaerArithmetic`.
 - the concrete quadratic field and degree-two extension in `RelativeConicArcs.FiniteFields`;
 - canonical `PG(2,25)` coordinates and explicit Frobenius in `Q25Coordinates`;
@@ -347,7 +352,9 @@ formalizations are still the next proof gates.
 
 ## Next proof gates
 
-1. Formalize the fixed-center characterization of invisible orbits and the cross-pair center bound.
+1. Construct the two cross-pair orbit classes in the `(4,2)` profile and prove that each center is
+   incident with at most four occupied fixed lines; the reusable fixed-center characterization and
+   capacity reduction are complete.
 2. Formalize the charge-multiplicity/point-index equality on empty carriers.
 3. Formalize the `(0,4)` three-way moment partition and derive the semantic extension theorem.
 4. Keep the census size and minimum-32 claim computational unless separately Lean-certified; the

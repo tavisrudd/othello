@@ -87,9 +87,11 @@ search documented in the
 The exact charge-profile decomposition into invisible orbit counts and collision multiplicities is
 kernel-checked. The exceptional order-five profile `(f,e)=(2,3)` is also kernel-checked by
 `Q25PairResult.f2_pair_extension`; the external census and its observed minimum of 32 remain
-provenance only and are not used by that theorem. What remains prose mathematics is the geometric rephrasing of invisibility as the
-secant-orbit center lying on the carrier, the lower bound on empty carriers through cross-pair
-centers, the identification of charge multiplicity with endpoint point index, and the second-moment
+provenance only and are not used by that theorem. `QuadraticInvisible.lean` now kernel-checks the
+geometric rephrasing of invisibility as the secant-orbit center lying on the carrier, its aggregate
+center-incidence double count, and the local `GF(5)` two-empty-carrier consequence of an
+at-most-four occupied-line bound. What remains prose mathematics is the profile-specific lower
+bound on occupied lines through cross-pair centers, the identification of charge multiplicity with endpoint point index, and the second-moment
 partition needed for the proposed `s=5,f=0` numerical improvement. Accordingly, no order-five
 uniform theorem is in the trust manifest: the proposed `f=0` and `f=4` profile bounds remain open.
 
