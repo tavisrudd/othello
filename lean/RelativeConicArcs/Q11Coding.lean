@@ -293,4 +293,22 @@ theorem completed_witness_matchings_oneFactorization :
     change Disjoint (completedWitnessChordEdges a) (completedWitnessChordEdges b)
     fin_cases a <;> fin_cases b <;> simp_all <;> decide
 
+/-- Neighbourhood of a conic point in the residual (secant-conflict) graph. -/
+def residualNeighbors (x : Fin 12) : Finset (Fin 12) :=
+  Finset.univ.filter fun y => Adj x y
+
+/-- The twelve deep-hole conic points, joined by the arc's secant chords, carry the **icosahedral
+graph**: it is 5-regular with 30 edges, and every vertex link is a 5-cycle (each neighbour of a
+vertex `x` has exactly two of its neighbours again adjacent to `x`, so the induced subgraph on the
+five neighbours is 2-regular, hence a 5-cycle on five vertices). By Whitney's theorem a 5-regular
+graph all of whose vertex links are 5-cycles is the icosahedron, so this is an edge-level witness of
+the icosahedron sitting inside the deep-hole conic's incidence structure. All three clauses are
+`decide`-grade (no `native_decide`). -/
+theorem residual_graph_icosahedral :
+    residualEdges.card = 30 ∧
+      (∀ x : Fin 12, (residualNeighbors x).card = 5) ∧
+      (∀ x : Fin 12, ∀ y ∈ residualNeighbors x,
+        ((residualNeighbors x).filter fun z => Adj y z).card = 2) := by
+  decide
+
 end RelativeConicArcs.Examples.Q11Coding
