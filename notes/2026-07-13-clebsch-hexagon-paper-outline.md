@@ -219,4 +219,11 @@ SVM 1995 (arc, incompleteness) · Dye 1991 (Clebsch hexagon geometry; footnote t
 non-preemption) · DMP arXiv:2101.12722 (dictionary) · ZWK arXiv:1901.05445 Thms I.4–I.7 · DMP
 arXiv:1909.00207 (k=4, for the open-question remark) · **Hirschfeld–Sadeh 1984 + Sadeh Sussex thesis
 1984 + Hirschfeld PGOFF Ch.14** (PG(2,11) arc census — cite before any "first"; thesis is the blocking
-ILL for the |U| numbers) · Elkies (Klein-reduction genre) · Dickson 1911 (invariant).
+ILL for the |U| numbers) · Elkies (Klein-reduction genre) · Dickson 1911 (invariant) ·
+Guruswami–Vardy 2005 (IEEE-TIT 51(7), 2249–2256 — verified via Cheng–Murray's own citation [6]
+and abstract cross-checks; genuinely the paper that initiates deep-hole decision-complexity, not
+Cheng–Murray) · Cheng–Murray 2007 (TAMC 2007, LNCS 4484, 296–305 — verified exact venue/pages
+against dblp and the arXiv preprint text; credited only for the simpler co-NP-completeness proof
++ the standard-RS extension, not for initiating the study) · Storme–Thas 1991 (Adv. Finite
+Geometries and Designs, Oxford UP, 369–389 — verified via independent citing sources; no OA copy
+found but bibliographic details corroborated).

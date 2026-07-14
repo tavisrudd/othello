@@ -78,13 +78,14 @@ the exact leader-count formula we use in Section~\ref{sec:code}. For plane
 sixth-degree ($[n,3]$) codes the same dictionary is implicit already in the
 classical arc/covering-radius literature; see Hirschfeld~\cite{Hirschfeld1998}.
 For the standard (affine) Reed--Solomon setting, determining deep holes is a
-long-studied algorithmic and structural question; Cheng and
-Murray~\cite{ChengMurray2007} initiated the decision-complexity study of
-deep holes of Reed--Solomon codes,
-% VERIFY: not yet in citation lock --- confirm this is the intended
-% Cheng--Murray reference and that no stronger/alternate citation is owed
-% to the deep-hole-decision literature it opened.
-and Zhang, Wan, and Kaipa~\cite{ZWK2020} determine the deep holes of
+long-studied algorithmic and structural question; Guruswami and
+Vardy~\cite{GuruswamiVardy2005} initiated its decision-complexity study,
+showing maximum-likelihood decoding of Reed--Solomon codes to be NP-hard by
+essentially proving that deciding whether a received word is a deep hole is
+co-NP-complete, and Cheng and Murray~\cite{ChengMurray2007} gave a
+substantially simpler proof of that same co-NP-completeness result and
+extended the study to standard (full-evaluation-set) Reed--Solomon codes.
+Zhang, Wan, and Kaipa~\cite{ZWK2020} determine the deep holes of
 \emph{projective} Reed--Solomon codes completely, identifying them with
 tangent lines to, and a quadratic-extension family over, the underlying
 normal rational curve (their Theorems~I.4--I.7). Both of these are for the
@@ -707,9 +708,6 @@ multiple covering codes,
 \newblock arXiv:1909.00207.
 
 \bibitem{ChengMurray2007}
-% VERIFY: not yet in citation lock (outline flags this reference as
-% unverified against the paper's exact scope; retain the marker until
-% checked).
 Q.~Cheng and E.~Murray,
 \newblock On deciding deep holes of Reed--Solomon codes,
 \newblock in \emph{Theory and Applications of Models of Computation (TAMC
@@ -741,6 +739,12 @@ N.~D.~Elkies,
 \newblock The Klein quartic in number theory,
 \newblock in \emph{The Eightfold Way: The Beauty of Klein's Quartic Curve},
 MSRI Publications \textbf{35}, Cambridge University Press, 1999, 51--101.
+
+\bibitem{GuruswamiVardy2005}
+V.~Guruswami and A.~Vardy,
+\newblock Maximum-likelihood decoding of Reed--Solomon codes is NP-hard,
+\newblock \emph{IEEE Transactions on Information Theory} \textbf{51}(7)
+(2005), 2249--2256.
 
 \bibitem{Hirschfeld1998}
 J.~W.~P.~Hirschfeld,
