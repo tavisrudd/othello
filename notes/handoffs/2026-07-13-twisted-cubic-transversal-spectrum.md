@@ -1,8 +1,9 @@
 # Twisted-cubic cross-lane: external-point transversal spectrum + D-PC9 disposition
 
 **Date**: 2026-07-13
-**Status**: C115 DONE (reduction + axis cap-set law); TO/RC/IC exact forms are the remaining open
-piece → C116. Live map for the cross-lane program that grew out of the Discovery-Track triage.
+**Status**: C115 DONE (reduction + axis cap-set law, Lean-certified strict-trust); TO/RC/IC exact
+forms are the remaining open piece → C116. Live map for the cross-lane program that grew out of the
+Discovery-Track triage.
 **Next session**: **C116 (opt-a)** — ILP q=81/243 for TO/RC/IC (and guard the axis prediction
 τ(81)=61, τ(243)=198). Optional: axis Lean cert + §6.5 promotion.
 **C115 report**: [twisted-cubic τ reduction](../2026-07-13-c115-twisted-cubic-tau-reduction.md).
@@ -92,8 +93,10 @@ symmetric instances. Pins/guards the C115 forms against exponent-parity effects.
 - **C115 [opt-b] — REPORTED 2026-07-13.** Projection→plane-cubic reduction proved; orbit→type
   dictionary measured; **axis closed form `τ_axis = q − r₃(h)`** (cap-set law, verified q=9/27/81).
   §6.5 axis orbit reduced to the cap-set problem; reuses `zeroSumCapNumber`. TO/RC/IC forms → C116.
-  Axis Lean cert + §6.5 promotion optional/pending.
-  [report](../2026-07-13-c115-twisted-cubic-tau-reduction.md).
+  **Lean cert DONE** (strict-trust `RepairCodes.ProjectiveTwistedCubicTransversalSpectrum`,
+  `projectiveTwistedCubicSecantTransversal_infinity`, standard axioms); §6.5 paper promotion pending
+  review. [report](../2026-07-13-c115-twisted-cubic-tau-reduction.md),
+  [discovery log](../2026-07-13-c115-discovery-track.md).
 - **C116 [opt-a]** compute q=81 + q=243 τ-spectrum via ILP (4 reps each); confirm/refute C115.
 - **C117** prove the D-PC9 five-weight distribution via PGL(2,q) orbit counting (uses the verified
   equivariance + classical plane orbits + char-3 osculating=axis); Lean-certify; fix the `q²−1`

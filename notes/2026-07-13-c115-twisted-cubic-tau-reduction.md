@@ -70,7 +70,26 @@ The IC/TO/RC extremal numbers ("caps in `𝔽_q^×` / `E(𝔽_q)`") are **not** 
 orders — this is the genuinely open piece, deferred to **C116** (ILP at q=81, 243; guard the axis
 prediction τ=61, 198 there too).
 
-## Lean path (reuses existing infra)
+## Lean cert (done — strict-trust)
+
+`RepairCodes/ProjectiveTwistedCubicTransversalSpectrum.lean` kernel-proves the axis-orbit result at
+the nucleus:
+
+```
+projectiveTwistedCubicSecantTransversal_infinity :
+  transversalNumber (projectiveTwistedCubicSecantHypergraph (Sum.inr Unit.unit))
+    = Fintype.card 𝔽 - zeroSumCapNumber 𝔽
+```
+
+Both this and the structural bridge `projectiveTwistedCubicSecantHypergraph_infinity_eq_embed`
+build with the standard axiom profile `[propext, Classical.choice, Quot.sound]`. The proof
+recognizes that the §6.5 secant hypergraph at the nucleus is the cubic-only part of the axis repair
+clutter (`axisCubicRepairComponent`), lifts it to the projective cubic via the existing
+`minimalProjectiveAxisInfinityRepair_eq_embedAffine` (cubic-∞ isolated), and closes with the
+existing `transversalNumber_zeroSumTripleHypergraph = q − zeroSumCapNumber`. Orbit constancy extends
+it to every axis point via `projectiveShiftInvIndexEquiv` (available, not yet packaged).
+
+## Lean path detail (reuses existing infra)
 
 `FiniteGeom/ZeroSumTriple.lean` already provides:
 - `zeroSumTripleHypergraph A` — 3-element zero-sum subsets of a finite additive group (the char-3
@@ -90,5 +109,6 @@ in `FiniteGeom/ProjectiveAxisTwistedCubic{,Circuits}.lean`.
 ## Status
 
 - Reduction + axis closed form: **done and confirmed**; ties §6.5 axis orbit to the cap-set problem.
+- Axis Lean cert: **done, strict-trust** (`projectiveTwistedCubicSecantTransversal_infinity`,
+  standard axioms). §6.5 paper promotion pending user review.
 - TO/RC/IC exact forms: reduced to caps in `𝔽_q^× / E(𝔽_q)`; **open → C116**.
-- Axis Lean cert: scoped (bridge lemma + reuse `zeroSumCapNumber`); optional §6.5 promotion after.
