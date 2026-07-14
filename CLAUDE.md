@@ -23,6 +23,11 @@ Rules:
   for the active task IDs.
 - **Relative-conic evaluation/coding/icosahedral strengthening (C106–C110):** start with
   [relative-conic arcs strengthening](notes/handoffs/2026-07-13-relative-conic-arcs-strengthening.md).
+- **Twisted-cubic cross-lane / transversal spectrum (C115–C120):** start with
+  [twisted-cubic transversal-spectrum](notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
+  Next session do **C115 (opt-b) first** — the projection→plane-cubic reduction.
+- **Icosahedral MDS / deep-holes = conic (C121–C123):** start with
+  [icosahedral-mds-deep-holes](notes/handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
 - **Named-expert context:** load
   [named-expert personas](notes/2026-07-07-named-expert-personas-context.md) when
   developing or formalizing a nontrivial proof, or when requested. Do not load them for

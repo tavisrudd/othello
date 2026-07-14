@@ -8,7 +8,17 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C120.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C122.**
+
+**Icosahedral MDS / deep-holes lane (2026-07-13):** see
+[handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
+- **C121** — Aut(code)=A₅ + 2-transitive CONFIRMED; deep-hole leaders = **two** size-10 orbits (not
+  one). `[REPORTED 2026-07-13]` → `notes/2026-07-13-c121-icosahedral-mds-checks.md`
+- **C122** — novelty audit: headline = "deep holes = F_q-points of a named variety + dual-variety
+  conjecture"; drop "first non-GRS"; blocking O'Keefe–Storme arc check. `[REPORTED 2026-07-13]` →
+  `notes/2026-07-13-c122-deep-hole-novelty-audit.md`
+- **C123** — (open) k=4 twisted-cubic dual-variety test: uncovered locus = tangent-developable
+  quartic (R3), vs `RepairCodes/ProjectiveTwistedCubicTransversalSpectrum.lean`.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
