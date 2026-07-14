@@ -68,8 +68,9 @@ the paper makes a structural-criterion claim rather than a sharpness claim. C139
 precursor for the general criterion in a bounded specialist-vocabulary/database search. Do not
 archive this handoff or route the lane as finished until the remaining release gate is disposed:
 
-1. **Produce the submission artifact.** Supply a bibliography, stable theorem numbering,
-   cross-references, publication formatting, and a final manuscript/Lean/citation/trust audit.
+1. **Finish the submission artifact.** The LaTeX source, bibliography, stable numbering,
+   cross-references, and static manuscript/Lean/citation/trust audit are complete. Compile the PDF
+   and clear TeX/BibTeX/reference/box warnings after the concurrent heavyweight Lean build window.
 
 ## Open queue
 
@@ -80,7 +81,7 @@ archive this handoff or route the lane as finished until the remaining release g
 | C138 | reported; table removed | Classical-radius release disposition |
 | C139 | reported | General quadratic-Frobenius specialist priority search |
 | C140 | reported; structural criterion | Sharpness/positioning disposition |
-| C141 | started | Submission artifact and final referee/trust closeout |
+| C141 | started; source complete | PDF build and final referee/trust closeout |
 
 The routing table is also stale: it still sends `baer` to the closed C99.6 review and omits C135.
 Leave that row open until the publication disposition is chosen, then update it together with the

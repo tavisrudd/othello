@@ -1,0 +1,575 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=28mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PG}{\operatorname{PG}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Npair}{N_{\mathrm{pair}}}
+\newcommand{\pospart}[1]{\left(#1\right)_{+}}
+
+\title{Frobenius-equivariant pair extension of eight-arcs in
+$\PG(2,25)$}
+\author{Tavis Rudd}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $\phi$ be the quadratic Frobenius involution of $\PG(2,s^2)$.  We give
+an exact carrierwise count for fresh conjugate pairs
+$\{P,\phi(P)\}$ that extend a $\phi$-invariant arc.  The count combines the
+exact number of empty Baer lines with a charge from noninvariant secant
+orbits.  An exact correction separates secant orbits whose fixed centers
+make them invisible on a carrier from genuine collisions between visible
+charges, and it classifies equality and every first-order excess level.
+
+We then prove that every $\phi$-invariant eight-arc in $\PG(2,25)$ admits a
+fresh conjugate-pair extension.  The zero- and four-fixed-point profiles
+follow from incidence and moment arguments.  The exceptional
+two-fixed-point profile is reduced, by projective normalization, to a
+finite certificate checked by the Lean kernel.  The full theorem, the
+semantic global pair count, and the profile split are formalized in Lean
+without unproved declarations, custom axioms, or native-code evaluation.
+\end{abstract}
+
+\section{Introduction}
+
+An arc in a projective plane is a set of points no three of which are
+collinear.  Ordinary completeness asks whether one further point can be
+adjoined.  If the arc is preserved by a field automorphism, the natural
+equivariant continuation unit is instead a complete Galois orbit.  Over a
+quadratic extension this means either a fixed point or a nonfixed conjugate
+pair.
+
+Let $F=\F_s$, let $K=\F_{s^2}$, and let
+\[
+  \phi\colon [x:y:z]\longmapsto[x^s:y^s:z^s]
+\]
+act on $\PG(2,K)$.  The fixed points and fixed lines form the embedded Baer
+subplane $\PG(2,F)$.  This paper studies the following question: when must a
+$\phi$-invariant arc admit an extension by a fresh pair
+$\{P,\phi(P)\}$?
+
+The classical ingredients are elementary: point and line counts in a
+projective plane, the fixed Baer subplane, Hilbert--90 normalization, and
+secant counting; see Hirschfeld~\cite{Hirschfeld1998} and
+Martin~\cite{Martin1967}.  The contribution here is their exact assembly
+into an orbit-valued extension count.  The main results are:
+
+\begin{enumerate}[label=(\roman*),leftmargin=2.1em]
+\item an explicit lower bound for the number of legal conjugate-pair
+      extensions of an arbitrary invariant arc;
+\item an exact linewise correction that separates invisible secant centers
+      from charge collisions, together with equality and excess criteria;
+\item a uniform theorem that every invariant eight-arc in $\PG(2,25)$
+      extends by a fresh conjugate pair; and
+\item a square-root lower bound for arcs that are saturated with respect to
+      conjugate-pair insertion.
+\end{enumerate}
+
+The last constant is not new: it is the classical Lunelli--Sce
+$\sqrt{2q}$ scale~\cite{LunelliSce1964,BallLavrauw2019}, now obtained under
+the weaker hypothesis of no equivariant pair extension.  We make no
+sharpness claim.
+
+\subsection*{Prior art and claim boundary}
+
+Baker and Wantz~\cite{BakerWantz2005} use Frobenius-invariant arcs in the
+Hughes plane and, in a maximality argument, consider a point together with
+its Frobenius image.  This is genuine precedence for the conjugate-point
+maneuver.  Their result does not count legal conjugate pairs on empty Baer
+lines.  Jungnickel's arcs in Baer-semiplane complements
+\cite{Jungnickel1987} and Ueberberg's geometries of Frobenius collineations
+\cite{Ueberberg1997} are also adjacent but concern different incidence or
+collineation problems.
+
+Ordinary arc and MDS lengthening results
+\cite{Alderson2005,AldersonBruenSilverman2007,Alderson2026} impose no
+quadratic Galois-pair constraint.  Likewise, the classification of
+Galois-invariant subsets of $\mathbf P^1$~\cite{LopezMaisnerNartXarles2002}
+does not treat arbitrary plane arcs or their pair extensions.  Bounded
+zbMATH Open, OpenAlex, Crossref, and source-level searches found no exact
+precursor for the quantitative criterion below or for the uniform
+$\PG(2,25)$ theorem.  This is negative search evidence, not a claim of
+historical priority.
+
+\section{Quadratic Frobenius and mate lines}
+
+Let $\cC\subseteq\PG(2,K)$ be a $\phi$-invariant $k$-arc.  Write
+\[
+  f=|\cC\cap\PG(2,F)|,
+  \qquad k=f+2e,
+\]
+so that $\cC$ is the disjoint union of $f$ fixed points and $e$ nonfixed
+conjugate pairs.
+
+For every nonfixed point $P$, the line $P\phi(P)$ is fixed by $\phi$; we
+call it the \emph{mate line} of the pair $\{P,\phi(P)\}$.  Conversely, every
+nonfixed conjugate pair has a unique mate line.  A fixed line contains
+$s^2+1$ points, of which $s+1$ are fixed, and therefore contains exactly
+\[
+  N=\frac{s^2-s}{2}
+\]
+nonfixed conjugate pairs.
+
+\begin{definition}\label{def:legal-pair}
+A \emph{legal conjugate-pair extension} of $\cC$ is an unordered pair
+$Q=\{P,\phi(P)\}$ such that $P\ne\phi(P)$, $Q\cap\cC=\varnothing$, and
+$\cC\cup Q$ is an arc.  Let $\Npair(\cC)$ be the number of such pairs.
+\end{definition}
+
+\begin{lemma}[Pair-extension test]\label{lem:pair-test}
+Let $P\ne\phi(P)$ and suppose neither point belongs to $\cC$.  Then
+$\cC\cup\{P,\phi(P)\}$ fails to be an arc if and only if at least one of the
+following holds:
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item $P$ lies on a secant of $\cC$;
+\item $\phi(P)$ lies on a secant of $\cC$;
+\item the mate line $P\phi(P)$ contains a point of $\cC$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Every collinear triple in the enlarged set either contains one new point
+and two old points, giving (a) or (b), or contains both new points and one
+old point, giving (c).  The converse is immediate.
+\end{proof}
+
+The useful carriers are therefore the fixed lines disjoint from $\cC$.
+Let $\cE$ be this set of empty fixed lines.
+
+\begin{lemma}[Empty fixed lines]\label{lem:empty-lines}
+The number of empty fixed lines is
+\begin{equation}\label{eq:E}
+ E=|\cE|=s^2+s+1-left(f(s+1)-\binom f2+e\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The $f$ fixed selected points occupy
+$f(s+1)-\binom f2$ fixed lines.  Inclusion--exclusion is exact because no
+three selected fixed points are collinear.  Each selected conjugate pair
+occupies its mate line.  These $e$ lines are distinct and contain no fixed
+selected point, since $\cC$ is an arc.  Subtract from the $s^2+s+1$ fixed
+lines.
+\end{proof}
+
+Among the $\binom k2$ old secants, exactly
+\[
+ I=\binom f2+e
+\]
+are fixed: those joining two fixed selected points and the $e$ mate lines.
+The remaining secants occur in two-element Frobenius orbits.  Their number
+is
+\begin{equation}\label{eq:M}
+ M=\frac{\binom k2-I}{2}=fe+e(e-1).
+\end{equation}
+
+\section{The quantitative pair-extension criterion}
+
+\begin{theorem}[Quadratic pair-extension criterion]
+\label{thm:pair-criterion}
+Let $\cC$ be a $\phi$-invariant $k$-arc in $\PG(2,s^2)$ with profile
+$k=f+2e$.  With $E$, $N$, and $M$ as in
+\eqref{eq:E} and \eqref{eq:M},
+\begin{equation}\label{eq:uniform-lower}
+  \Npair(\cC)\ge E\,\pospart{N-M}
+  =E\,\pospart{\frac{s^2-s}{2}-fe-e(e-1)}.
+\end{equation}
+In particular, if $E>0$ and $M<N$, then $\cC$ admits a legal conjugate-pair
+extension.
+\end{theorem}
+
+\begin{proof}
+Fix $\ell\in\cE$.  It carries exactly $N$ candidate conjugate pairs.  A
+fixed old secant meets $\ell$ in a fixed point and destroys no nonfixed
+candidate.  Consider a nonfixed old secant orbit $\{m,\phi(m)\}$.  Unless
+$m\cap\ell$ is fixed, the two intersections $m\cap\ell$ and
+$\phi(m)\cap\ell$ form one conjugate candidate pair; thus the orbit destroys
+at most one candidate.  There are $M$ such secant orbits, so at least
+$\pospart{N-M}$ candidates survive on $\ell$.
+
+A survivor lies on no old secant, and its empty mate line contains no point
+of $\cC$.  Lemma~\ref{lem:pair-test} makes it legal.  Candidate sets on
+distinct fixed lines are disjoint because a nonfixed pair has a unique mate
+line.  Summing over the $E$ carriers proves \eqref{eq:uniform-lower}.
+\end{proof}
+
+The preceding proof deliberately uses only the uniform upper bound $M$ on
+the number of forbidden candidates per carrier.  Retaining the actual
+forbidden support gives both a sharper bound and an exact identity.
+
+For $\ell\in\cE$, let $\cQ_\ell$ be its $N$ candidate pairs and let
+$\cF_\ell\subseteq\cQ_\ell$ be the pairs hit by at least one nonfixed old
+secant orbit.  Then
+\begin{equation}\label{eq:heterogeneous}
+  \Npair(\cC)=\sum_{\ell\in\cE}
+  \left(|\cQ_\ell|-|\cF_\ell|\right).
+\end{equation}
+The same formula applies when carrier capacities vary.  In particular, if
+$|\cF_\ell|\le U_\ell$, then
+\[
+  \Npair(\cC)\ge
+  \sum_{\ell\in\cE}\pospart{|\cQ_\ell|-U_\ell}.
+\]
+
+\section{Invisible centers and collision correction}
+
+Fix $\ell\in\cE$.  Every nonfixed secant orbit has a fixed center
+$m\cap\phi(m)$.  Let $B_\ell$ be the number of such orbits whose center
+lies on $\ell$.  Those orbits meet $\ell$ only in a fixed point and are
+invisible to its nonfixed candidates.
+
+For $Q\in\cQ_\ell$, let $\mu_\ell(Q)$ be the number of visible secant
+orbits that charge $Q$, and put
+\[
+ A_\ell=\sum_{Q\in\cQ_\ell}\mu_\ell(Q),
+ \qquad
+ R_\ell=\sum_{Q\in\cQ_\ell}
+     \pospart{\mu_\ell(Q)-1}.
+\]
+Here $R_\ell$ is the redundancy caused by several visible obstruction
+orbits hitting the same candidate.
+
+\begin{proposition}[Exact linewise correction]\label{prop:linewise}
+For every empty fixed line $\ell$,
+\begin{align}
+ A_\ell&=M-B_\ell,\label{eq:visible-mass}\\
+ |\cF_\ell|&=A_\ell-R_\ell,\label{eq:support}\\
+ |\cQ_\ell\setminus\cF_\ell|+M
+   &=N+B_\ell+R_\ell.\label{eq:linewise-balance}
+\end{align}
+Consequently the first-order identity
+$|\cQ_\ell\setminus\cF_\ell|+M=N$ holds exactly when every secant orbit is
+visible on $\ell$ and the visible charge map is injective.
+\end{proposition}
+
+\begin{proof}
+Exactly $B_\ell$ of the $M$ secant orbits are invisible, proving
+\eqref{eq:visible-mass}.  The support of the multiplicity function
+$\mu_\ell$ is $\cF_\ell$, and for every positive integer $a$ one has
+$1=a-(a-1)$.  Summing this equality over the support gives
+\eqref{eq:support}.  Substitution into
+$|\cQ_\ell\setminus\cF_\ell|=N-|\cF_\ell|$ gives
+\eqref{eq:linewise-balance}.  Equality in the first-order identity is
+equivalent to $B_\ell=R_\ell=0$.
+\end{proof}
+
+Let
+\[
+ L=\Npair(\cC),\qquad
+ B=\sum_{\ell\in\cE}B_\ell,
+ \qquad
+ R=\sum_{\ell\in\cE}R_\ell.
+\]
+
+\begin{corollary}[Aggregate equality and excess]
+\label{cor:aggregate}
+The exact aggregate balance is
+\begin{equation}\label{eq:aggregate}
+  L+EM=EN+B+R.
+\end{equation}
+Thus $L+EM=EN$ if and only if every secant-orbit center avoids every empty
+fixed carrier and every local visible charge is injective.  More generally,
+for each integer $t\ge0$,
+\[
+  L+EM=EN+t\quad\Longleftrightarrow\quad B+R=t.
+\]
+\end{corollary}
+
+This is an algebraic equality and excess classification.  It does not
+classify the invariant arcs for which $L$ is small, and no such structural
+inverse theorem is claimed.
+
+\section{Eight-arcs over $\F_{25}$}
+
+We now take $s=5$, so each empty fixed line carries $N=10$ candidate
+pairs.  The profile of an invariant eight-arc is
+\[
+ (f,e)\in\{(0,4),(2,3),(4,2),(6,1),(8,0)\}.
+\]
+
+The following simple center estimate is useful.  A secant orbit joining
+two distinct selected conjugate pairs has a fixed center that lies on
+neither participating mate line.  At most $f$ fixed-point star lines and
+$e-2$ other mate lines through this center are occupied.  Since a fixed
+point lies on $s+1$ fixed lines, each such cross-pair secant orbit is
+invisible on at least
+\begin{equation}\label{eq:cross-invisible}
+  s+3-f-e
+\end{equation}
+empty carriers.
+
+\begin{proposition}[The four nonexceptional profiles]
+\label{prop:four-profiles}
+Let $\cC$ be an invariant eight-arc in $\PG(2,25)$.
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item If $f=8$ or $f=6$, then $L\ge110$ or $L\ge36$, respectively.
+\item If $f=4$, then $L\ge4$.
+\item If $f=0$, then $L\ge5$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For $(f,e)=(8,0)$ one has $(E,M)=(11,0)$, and for $(6,1)$ one has
+$(E,M)=(9,6)$.  Theorem~\ref{thm:pair-criterion} gives $110$ and $36$.
+
+For $(f,e)=(4,2)$ one has $(E,M,N)=(11,10,10)$.  There are two cross-pair
+secant orbits, each invisible on at least two empty carriers by
+\eqref{eq:cross-invisible}.  Hence $B\ge4$, and
+\eqref{eq:aggregate} gives $L=B+R\ge4$.
+
+It remains to treat $(f,e)=(0,4)$.  Here
+\[
+  (E,M,N)=(27,12,10).
+\]
+All twelve nonfixed secant orbits are cross-pair orbits, and
+\eqref{eq:cross-invisible} gives $B\ge48$.
+
+We recall the second secant-index moment for an eight-arc:
+\begin{equation}\label{eq:second-moment}
+  \sum_{x\notin\cC}\binom{r_x}{2}=3\binom84=210,
+\end{equation}
+where $r_x$ is the number of secants of $\cC$ through $x$.  At fixed
+external points, the first secant-index sum is $48$: the four fixed mate
+secants contain six fixed points each, contributing $24$ incidences, and
+the other $24$ secants each contain their unique fixed orbit center.  Since $r_x\le4$ and
+$2\binom n2\le3n$ for $0\le n\le4$, their contribution to
+\eqref{eq:second-moment} is at most $72$.
+
+The four occupied fixed carriers are precisely the selected mate lines.
+For an external nonfixed point $x$ on one of them, write $r_x=1+u_x$, where
+the first secant is the mate line.  Every nonfixed secant meets at most the
+two selected mate lines not containing its endpoints, so
+$\sum u_x\le48$.  Since $u_x\le3$ and
+$\binom{1+u}{2}\le2u$, the occupied-carrier contribution is at most $96$.
+Thus the two endpoints of candidates on empty carriers contribute at least
+$210-72-96=42$ to \eqref{eq:second-moment}.  Conjugate endpoints contribute
+equally, and therefore
+\[
+  T:=\sum_{\ell\in\cE}\sum_{Q\in\cQ_\ell}
+       \binom{\mu_\ell(Q)}2\ge21.
+\]
+Because $\mu_\ell(Q)\le4$ and
+$\binom n2\le2(n-1)$ for $1\le n\le4$, we have $T\le2R$, whence $R\ge11$.
+Finally, \eqref{eq:aggregate} gives
+\[
+  L=27(10-12)+B+R\ge-54+48+11=5.
+\]
+\end{proof}
+
+The remaining profile $(f,e)=(2,3)$ has $(E,M,N)=(17,12,10)$.  The center
+estimate gives $B\ge18$, but the aggregate identity would still require a
+further collision estimate.  We close this profile by a finite reduction.
+
+\begin{proposition}[Exceptional profile]\label{prop:f2}
+Every invariant eight-arc in $\PG(2,25)$ with exactly two fixed selected
+points has a fresh legal conjugate-pair extension.
+\end{proposition}
+
+\begin{proof}[Computer-assisted proof, kernel checked]
+Represent $\F_{25}$ as $\F_5[\omega]/(\omega^2-2)$.  A base-field
+projectivity sends the two fixed selected points to a prescribed ordered
+pair.  Their stabilizer then sends the first admissible selected conjugate
+pair to
+\[
+ [1:\omega:\omega],\qquad[1:-\omega:-\omega].
+\]
+Both transformations commute with Frobenius and preserve the arc and
+pair-extension predicates.
+
+After these reductions, the remaining finite slice has $46{,}056$ rows.
+Of these, $39{,}012$ carry a checked witness that the proposed old set is
+not an arc, while $7{,}044$ carry a checked fresh legal-pair witness.  The
+rows are split into $1{,}639$ leaf modules and $303$ aggregate modules.
+Each leaf is evaluated by Lean's kernel reduction.  The projective
+transport theorem maps the checked survivor back to the original arc and
+states explicitly that both new points are fresh and that the enlarged set
+is an arc.  Section~\ref{sec:formalization} records the trust boundary.
+\end{proof}
+
+\begin{theorem}[Uniform order-five extension]\label{thm:q25}
+Every Frobenius-invariant eight-arc in $\PG(2,25)$ admits an extension by a
+fresh nonfixed point together with its Frobenius conjugate.
+\end{theorem}
+
+\begin{proof}
+The fixed-point count is even and at most eight.  Proposition
+\ref{prop:four-profiles} treats $f=0,4,6,8$, and Proposition~\ref{prop:f2}
+treats $f=2$.
+\end{proof}
+
+The ordinary complete-arc classifications of
+Marcugini--Milani--Pambianco~\cite{MarcuginiMilaniPambianco2007} and
+Coolsaet--Sticker~\cite{CoolsaetSticker2009} show that the smallest complete
+arcs in $\PG(2,25)$ have size $12$.  Thus every eight-arc has an ordinary
+one-point extension.  That fact does not imply Theorem~\ref{thm:q25}:
+ordinary extendability neither makes the legal-point set Frobenius-stable
+nor ensures that a legal point and its conjugate are jointly legal.
+
+\begin{remark}[External census]\label{rem:census}
+An external enumeration after fixed-point normalization reports $469{,}600$
+invariant eight-arcs with profile $(f,e)=(2,3)$ and observed minimum legal
+pair count $32$.  Independent C++ and Python implementations agree on the
+census, minimum, minimizing orbit indices, and coordinate witness.  These
+numbers are computational data, not inputs to Proposition~\ref{prop:f2} or
+Theorem~\ref{thm:q25}.
+\end{remark}
+
+\section{Equivariant saturation}
+
+Call an invariant arc \emph{pair-saturated} if it has no legal conjugate-pair
+extension.  This is weaker than ordinary completeness.
+
+\begin{corollary}[Orbit-saturation bound]\label{cor:saturation}
+If a $\phi$-invariant $k$-arc in $\PG(2,s^2)$ is pair-saturated, then
+\begin{equation}\label{eq:saturation}
+  k\ge 1+\left\lceil\sqrt{2s(s-1)}\right\rceil.
+\end{equation}
+In particular, for every prime power $s\ge7$, every invariant eight-arc in
+$\PG(2,s^2)$ admits a conjugate-pair extension.
+\end{corollary}
+
+\begin{proof}
+If every fixed line is occupied, Lemma~\ref{lem:empty-lines} gives
+$s^2+s+1=f(s+1)-\binom f2+e$.  Substituting $2e=k-f$ and completing the
+square gives the occupation identity
+\[
+  k=s^2+1+(f-s-1)^2,
+\]
+which is stronger than \eqref{eq:saturation}.  Otherwise choose an empty
+fixed line.  Pair saturation forces all $N=s(s-1)/2$ of its candidates to
+be forbidden, so $N\le M$.  From $k=f+2e$ and \eqref{eq:M},
+\[
+  M=e((k-1)-e),
+  \qquad
+  4M\le(k-1)^2.
+\]
+Consequently $2s(s-1)\le(k-1)^2$, which gives
+\eqref{eq:saturation}.
+
+For $k=8$, one has $M\le12<N$ when $s\ge7$.  Full occupation is impossible
+because $8<s^2+1$, so Theorem~\ref{thm:pair-criterion} applies.
+\end{proof}
+
+The scale in \eqref{eq:saturation} is the classical Lunelli--Sce scale for
+ordinary complete arcs, with the same secant-covering mechanism in the
+Frobenius quotient.  Ng and Wild's line-covering problem
+\cite{NgWild2001} is another adjacent square-root-scale result.  The point
+of Corollary~\ref{cor:saturation} is the weaker pair-saturation hypothesis,
+not a new constant or a sharp family.
+
+\section{Formal verification}\label{sec:formalization}
+
+The results were formalized in Lean~\cite{Lean2015} on top of
+mathlib~\cite{Mathlib2020}.  The supplementary source is divided as follows.
+
+\begin{enumerate}[leftmargin=2.2em]
+\item The projective-conjugation and quadratic-Frobenius modules construct
+      the semilinear projective involution, prove the degree-two fixed-locus
+      normalization, and count the $N=(s^2-s)/2$ candidates on a fixed line.
+\item The line-counting and forbidden-candidate modules prove
+      Lemma~\ref{lem:empty-lines}, the exact secant-orbit count, the
+      injective charge, and the semantic arc-extension conclusion in
+      Theorem~\ref{thm:pair-criterion}.
+\item The global-count module defines the finite set of fresh nonfixed
+      Frobenius pairs whose union with the old arc remains an arc.  It proves
+      that this semantic set is the disjoint union of the carrierwise legal
+      sets and that its cardinality is the abstract legal count.
+\item The collision and invisibility modules prove
+      Proposition~\ref{prop:linewise}, Corollary~\ref{cor:aggregate}, the
+      fixed-center interpretation, and the cross-pair estimate
+      \eqref{eq:cross-invisible}.
+\item Separate profile modules prove the lower bounds $5$ and $4$ for
+      $f=0$ and $f=4$.  The exceptional certificate proves
+      Proposition~\ref{prop:f2}; the aggregate module proves
+      Theorem~\ref{thm:q25} by the exhaustive parity split.
+\item The orbit-saturation module proves the denominator-free inequality
+      $2s(s-1)\le(k-1)^2$ used in Corollary~\ref{cor:saturation}.  The final
+      ceiling notation and the geometric case split are paper proofs.
+\end{enumerate}
+
+The scoped builds and declaration-level axiom audits report exactly
+\[
+  [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}],
+\]
+the standard classical quotient profile inherited from mathlib.  No public
+theorem depends on an admitted proof, a custom axiom, or
+\texttt{native\_decide}.  The finite leaves in Proposition~\ref{prop:f2}
+use kernel \texttt{decide}; the external census in Remark~\ref{rem:census}
+is outside the theorem dependency graph.
+
+For reproducibility, the paper-facing declarations are located as follows.
+
+\begin{center}
+\small
+\begin{tabular}{p{0.43\linewidth}p{0.49\linewidth}}
+\toprule
+Source module & Paper-facing declaration or role \\
+\midrule
+\path{FiniteGeom/BaerCompletion/PairExtension.lean} &
+  \path{quadraticBaer_pairExtension_lowerBound} \\
+\path{RelativeConicArcs/QuadraticForbidden.lean} &
+  \path{exists_quadratic_pair_extension} \\
+\path{RelativeConicArcs/QuadraticGlobalCount.lean} &
+  \path{card_globalLegalPairs_eq_legalCount} \\
+\path{RelativeConicArcs/QuadraticInvisible.lean} &
+  aggregate equality/excess and fixed-center criteria \\
+\path{RelativeConicArcs/Q25ProfileZero.lean} &
+  \path{five_le_sum_card_legal_profile_zero} \\
+\path{RelativeConicArcs/Q25ProfileFour.lean} &
+  \path{four_le_sum_card_legal_profile_four} \\
+\path{RelativeConicArcs/Q25PairResult.lean} &
+  \path{f2_pair_extension} \\
+\path{RelativeConicArcs/Q25AllProfiles.lean} &
+  \path{pair_extension} \\
+\path{FiniteGeom/BaerCompletion/OrbitSaturation.lean} &
+  \path{orbitSaturation_quadratic_bound_of_split} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Conclusion}
+
+The fixed mate line of a quadratic Frobenius orbit turns symmetry-preserving
+arc extension into a carrierwise counting problem.  The uniform count is a
+first-order obstruction bound; its exact correction records which secant
+orbits disappear at fixed centers and which visible obstructions collide.
+This suffices, together with one finite exceptional-profile certificate, to
+prove a uniform conjugate-pair extension theorem for invariant eight-arcs in
+$\PG(2,25)$.
+
+The natural strengthening is now family-specific rather than generic: prove
+that every invariant eight-arc has at least two legal pairs, which would
+give an alternate-orbit repair theorem for invariant ten-arcs after deletion
+of one selected nonfixed orbit.  That multiplicity statement is not used or
+claimed here.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

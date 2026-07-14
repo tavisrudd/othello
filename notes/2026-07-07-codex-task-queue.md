@@ -55,7 +55,7 @@ active submission-artifact and final-audit task.
 - **C140 `[baer]` [REPORTED 2026-07-14 — STRUCTURAL POSITIONING]** — resolve the sharpness gate by a near-sharp or
   pair-saturated family, or adopt and justify the structural-criterion claim boundary →
   `notes/2026-07-14-c140-baer-sharpness-positioning.md`.
-- **C141 `[baer]` [STARTED 2026-07-14]** — produce the submission artifact and run the final
+- **C141 `[baer]` [STARTED 2026-07-14 — LATEX SOURCE COMPLETE]** — produce the submission artifact and run the final
   manuscript/Lean/citation/trust/referee closeout, including routing and archive disposition →
   `notes/2026-07-14-c141-baer-submission-closeout.md`.
 

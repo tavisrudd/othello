@@ -60,7 +60,8 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
   theorem; generic completion-core material is outside the submission.
 - *Gate:* theorem spine and all order-five profiles Lean-built; bounded general-criterion priority
-  search complete; submission artifact and final closeout remain.
+  search complete; LaTeX submission source and bibliography complete; PDF compile and final
+  closeout remain.
 
 **7 · Continuation-graph rigidity, N1 only** — `continuation-graph-rigidity`
 - *What:* N2 demoted to remarks.
