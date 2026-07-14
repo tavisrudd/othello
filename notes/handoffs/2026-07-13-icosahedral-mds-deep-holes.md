@@ -43,6 +43,49 @@ conic `XZ=Y²`). Equivalently a **6-arc off every conic** in PG(2,11).
 - Code is **not completely regular** (distance-2 leader counts non-constant) → no naive
   association scheme.
 
+## FUSED FRAMING (post-C121/C122/C124/C125) — Klein-led, coding-shadow
+
+**Lead thesis (final form):** *The `[6,3,4]₁₁` icosahedral code is the unique prime at which Klein's
+solution of the quintic closes over a finite field — the six columns are the mod-11 reduction of his
+resolvent sextic (the six diagonals), the deep holes are his degree-12 vertex form (which at p=11
+alone fills the whole projective line), and the reflection-free chirality of its deep-hole leaders is
+the icosahedron's own handedness — with the deep-holes = dual-variety conjecture carrying the
+phenomenon to every rational normal curve.*
+
+Two-spined paper: **Klein spine explains q=11** (deep holes are a conic *because* they're the
+reduction of Klein's vertex form; C125 REAL); **dual-variety spine (D2/C123) generalizes it** (the
+forward-looking half, predicts k=4). Neither alone survives: coding-only loses to ETGRS literature
+(C122); Klein-only is a coincidence without a theorem. The chirality even/odd result (C124) is the
+most self-contained headline *result*, subordinate to the Klein *framing*.
+
+### New frontier — the mod-p Platonic family (from the p+1=vertex-count coincidence)
+
+- **Family A ("solid fills the line," vertex count = p+1):** octahedron/p=5, cube/p=7,
+  **icosahedron/p=11**, dodecahedron/p=19, icosa-edge-form/p=29 — each a certified finite completion
+  where the vertex/edge orbit *exhausts* P¹(F_p) and axis-poles give an arc with **deep holes = the
+  whole conic**. A real small checkable construction family.
+- **Family B ("solid as sub-orbit," √5-primes 11,19,29,31,41,59…):** icosahedron as a 12-point
+  orbit inside a larger P¹(F_p); deep holes = 12-orbit ⊊ conic. **p=11 is the only prime where A and
+  B coincide** (icosahedral deep-hole set = whole conic) — sharpest uniqueness restatement.
+- **Chirality is NOT shared across the family** (prediction): octa/cube have S₄ (odd elements) →
+  leader split likely *mergeable = not chiral*; only A₄/A₅ rotation groups are reflection-free. The
+  unmergeable Z/2 should be special to the A₄/A₅ members — a clean invariant separating the family.
+- **Arithmetic/Galois:** Family B = primes where A₅ ⊂ PSL₂(p) (the icosahedral Galois / "√5"
+  splitting) → an explicit arithmetic-geometry-to-coding functor (each such prime ↦ an MDS code).
+- **Syzygy H³+T²=f⁵ mod 11** (1728≡1): a cheap kernel-checkable identity anchoring "real reduction,
+  not analogy."
+
+### Ranked open checks (surprising × real × deliverable)
+
+1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
+   complete-outside + chirality present/absent. Isolates chirality to A₄/A₅. Highest surprise/effort.
+2. **C123 [in-repo partial, HIGH]** — D2 dual-variety k=4 twisted cubic = tangent-developable
+   quartic vs `ProjectiveTwistedCubicTransversalSpectrum.lean`. The theory-bearing thread.
+3. **C127 [literature, MUST-DO]** — novelty of the Klein-reduction claim itself (Adler "The
+   icosahedron and PSL₂(11)," Kondō, X(11), Martin–Singerman, Elkies) + settle O'Keefe–Storme on the
+   arc. Calibrates whether the reduction is new or only its coding/deep-hole reading.
+4. **C128 [in-repo, cheap]** — kernel-check H³+T²=f⁵ mod 11.
+
 ## Open frontiers (ranked surprising × plausible)
 
 | ID | Claim | Status |
