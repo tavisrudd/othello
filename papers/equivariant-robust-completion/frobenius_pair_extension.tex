@@ -54,6 +54,8 @@ two-fixed-point profile is reduced, by projective normalization, to a
 finite certificate checked by the Lean kernel.  The full theorem, the
 semantic global pair count, and the profile split are formalized in Lean
 without unproved declarations, custom axioms, or native-code evaluation.
+Together with the general count, the order-five result covers every
+prime-power base-field order $s\ge5$.
 \end{abstract}
 
 \section{Introduction}
@@ -86,7 +88,8 @@ into an orbit-valued extension count.  The main results are:
 \item an exact linewise correction that separates invisible secant centers
       from charge collisions, together with equality and excess criteria;
 \item a uniform theorem that every invariant eight-arc in $\PG(2,25)$
-      extends by a fresh conjugate pair; and
+      extends by a fresh conjugate pair and, together with the general
+      estimate, covers every prime-power base order $s\ge5$; and
 \item a square-root lower bound for arcs that are saturated with respect to
       conjugate-pair insertion.
 \end{enumerate}
@@ -313,6 +316,30 @@ pairs.  The profile of an invariant eight-arc is
  (f,e)\in\{(0,4),(2,3),(4,2),(6,1),(8,0)\}.
 \]
 
+Table~\ref{tab:q25-profiles} records the numerical data and the proved
+lower bound for each profile.  In the exceptional row the bound $L\ge1$
+records the kernel-checked existence theorem; the stronger observed census
+minimum in Remark~\ref{rem:census} is not used.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{ccccc l}
+\toprule
+$f$ & $e$ & $E$ & $M$ & proved $L\ge$ & method \\
+\midrule
+$0$ & $4$ & $27$ & $12$ & $5$   & secant-index moments \\
+$2$ & $3$ & $17$ & $12$ & $1$   & kernel-checked certificate \\
+$4$ & $2$ & $11$ & $10$ & $4$   & fixed-center incidence \\
+$6$ & $1$ & $9$  & $6$  & $36$  & uniform criterion \\
+$8$ & $0$ & $11$ & $0$  & $110$ & uniform criterion \\
+\bottomrule
+\end{tabular}
+\caption{The five profiles of invariant eight-arcs in $\PG(2,25)$.
+Here $L=\Npair(\cC)$.}
+\label{tab:q25-profiles}
+\end{table}
+
 The following simple center estimate is useful.  A secant orbit joining
 two distinct selected conjugate pairs has a fixed center that lies on
 neither participating mate line.  At most $f$ fixed-point star lines and
@@ -476,8 +503,17 @@ For $k=8$, one has $M\le12<N$ when $s\ge7$.  Full occupation is impossible
 because $8<s^2+1$, so Theorem~\ref{thm:pair-criterion} applies.
 \end{proof}
 
-Together with Theorem~\ref{thm:q25}, the last assertion covers every
-prime-power base-field order $s\ge5$.
+\begin{corollary}[All base orders from five]\label{cor:all-orders}
+Let $s\ge5$ be a prime power.  Every Frobenius-invariant eight-arc in
+$\PG(2,s^2)$ admits an extension by a fresh nonfixed point together with
+its Frobenius conjugate.
+\end{corollary}
+
+\begin{proof}
+The case $s=5$ is Theorem~\ref{thm:q25}.  There is no prime power strictly
+between $5$ and $7$, and the final assertion of
+Corollary~\ref{cor:saturation} treats every $s\ge7$.
+\end{proof}
 
 The scale in \eqref{eq:saturation} is the classical Lunelli--Sce scale for
 ordinary complete arcs, with the same secant-covering mechanism in the
@@ -556,6 +592,25 @@ Source module & Paper-facing declaration or role \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\subsection*{Artifact and reproduction}
+
+The accompanying source archive pins Lean to
+\path{leanprover/lean4:v4.32.0-rc1} and mathlib to revision
+\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  The audited formal-source
+checkpoint is Git revision
+\path{8f308c3d94652c3d3a66335701f1a18b53740675}.  From the \path{lean/}
+directory the two paper-facing aggregate targets are rebuilt by
+\begin{verbatim}
+LEAN_NUM_THREADS=6 nix develop --command lake build \
+  RelativeConicArcs.QuadraticGlobalCount \
+  RelativeConicArcs.Q25AllProfiles
+\end{verbatim}
+The manuscript PDF is reproduced from its source directory with
+\begin{verbatim}
+nix shell nixpkgs#tectonic -c tectonic \
+  frobenius_pair_extension.tex --keep-logs
+\end{verbatim}
 
 \section{Conclusion}
 

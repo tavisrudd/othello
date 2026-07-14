@@ -40,7 +40,12 @@ completed successfully. BibTeX and all cross-references resolved; the final log 
 undefined-reference, multiply-defined-label, underfull-box, overfull-box, or PDF-string warning.
 The generated PDF is
 [`frobenius_pair_extension.pdf`](../papers/equivariant-robust-completion/frobenius_pair_extension.pdf),
-SHA-256 `281230f93e6acc3c673efdb6893fe8d9d1dc7795da3af8f869caee86a5b034c6`.
+SHA-256 `c895d417b75f42aa52c571f1eca51156d18cf45778177f6b9647d8b8ffc343c1`.
+
+The post-referee presentation pass promoted the consequence for every prime-power base order
+`s≥5` to a numbered corollary and to the abstract, added a single five-profile audit table, and
+recorded the exact Lean/mathlib pins, formal-source checkpoint, and reproduction commands. These
+are presentation and reproducibility upgrades; they introduce no new mathematical dependency.
 
 ## Referee verdict
 

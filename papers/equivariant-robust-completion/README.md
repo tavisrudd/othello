@@ -17,7 +17,9 @@ The five parity-allowed Q25 profiles are exhausted in Lean.
 **Publication status:** focused LaTeX submission source, bibliography, and PDF complete; bounded
 general-criterion priority search complete. The checked Q25 result has no proof-validity defect in
 the scoped audit. Citation, label, trust-boundary, manuscript-to-Lean, TeX, BibTeX, reference, and
-box-warning checks pass.
+box-warning checks pass. The manuscript promotes the consequence for every prime-power base order
+`s≥5` to a numbered corollary, displays the five Q25 profiles and their proved lower bounds in one
+audit table, and records the exact Lean/mathlib pins, formal-source checkpoint, and build commands.
 
 **Novelty boundary:** Hilbert 90, the Baer fixed subplane, projective point/line counts, the
 occupied-line double count, and two-element involution-orbit counts are classical infrastructure,
@@ -37,7 +39,8 @@ and the certificate-free `Q25ProfileFour.profile_four_pair_extension` kernel-che
 makes both added conjugate points fresh and has passed a second adversarial proof audit. The
 external census size and observed minimum 32 remain computational evidence. The uniform `s≥5`
 claim does not depend on them: `Q25ProfileZero.profile_zero_pair_extension` kernel-checks `f=0`, and
-`Q25AllProfiles.pair_extension` proves the uniform order-five extension theorem.
+`Q25AllProfiles.pair_extension` proves the uniform order-five extension theorem; the generic
+criterion covers every `s≥7`, and there is no intervening prime-power base order.
 The C135 declarations classify equality by universal visibility and collision-free charge, and
 classify every first-order excess level by invisible mass plus collision redundancy. In the
 quadratic instance, invisible mass is center/empty-carrier incidence. This is an algebraic inverse

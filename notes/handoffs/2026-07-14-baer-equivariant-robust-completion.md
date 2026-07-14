@@ -68,7 +68,9 @@ the paper makes a structural-criterion claim rather than a sharpness claim. C139
 precursor for the general criterion in a bounded specialist-vocabulary/database search. The LaTeX
 source, bibliography, stable numbering, cross-references, manuscript/Lean/citation/trust audit, and
 PDF are complete. Tectonic/BibTeX finishes without reference, label, box, or PDF-string warnings.
-All release gates in C136–C141 are disposed.
+The final presentation pass also gives the all-prime-power `s≥5` consequence its own numbered
+corollary, collects all five Q25 profiles in one audit table, and records exact artifact pins and
+build commands. All release gates in C136–C141 are disposed.
 
 ## Open queue
 

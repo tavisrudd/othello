@@ -58,7 +58,8 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 
 **6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
-  theorem; generic completion-core material is outside the submission.
+  theorem, yielding pair extension for every prime-power base order `s≥5`; generic completion-core
+  material is outside the submission.
 - *Gate:* theorem spine and all order-five profiles Lean-built; bounded general-criterion priority
   search complete; LaTeX source, bibliography, clean PDF, and internal referee closeout complete.
 
