@@ -78,7 +78,8 @@ TO/RC=smooth elliptic); **axis closed form `τ_axis = q − r₃(h)`** (cap-set 
 Lean-certified strict-trust (`RepairCodes.ProjectiveTwistedCubicTransversalSpectrum`, standard
 axioms). **Open piece:** TO/RC/IC exact τ (caps in `E(𝔽_q)`/`𝔽_q^×`) → **C116 next**. Start with the
 [twisted-cubic transversal-spectrum handoff](handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
-Tasks: C115 opt-b [REPORTED] · C116 opt-a (q=81/243 τ via ILP, next) · C117 (prove
+Tasks: C115 opt-b [REPORTED] · C116 opt-a [STARTED/DEFERRED — axis τ(81)=61,τ(243)=198 confirmed via
+known cap numbers; TO/RC/IC ILP is CBC-hard, next session use HiGHS] · C117 (prove
 D-PC9 weights by orbit counting + Lean + mislabel fix) · C118 (definitive D-PC9 prior-art sweep) ·
 C119 (determinant-hypergraph program identity into papers-planning) · C120 (separate nofil thread:
 fixed-locus / quadric-Witt dichotomy leap).

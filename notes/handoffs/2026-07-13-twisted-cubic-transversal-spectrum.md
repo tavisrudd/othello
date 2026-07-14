@@ -97,7 +97,19 @@ symmetric instances. Pins/guards the C115 forms against exponent-parity effects.
   `projectiveTwistedCubicSecantTransversal_infinity`, standard axioms); §6.5 paper promotion pending
   review. [report](../2026-07-13-c115-twisted-cubic-tau-reduction.md),
   [discovery log](../2026-07-13-c115-discovery-track.md).
-- **C116 [opt-a]** compute q=81 + q=243 τ-spectrum via ILP (4 reps each); confirm/refute C115.
+- **C116 [opt-a, STARTED 2026-07-13, DEFERRED — next session]** compute q=81 + q=243 τ-spectrum via
+  ILP (TO/RC/IC only; axis is closed). Script: [`2026-07-13-c116-tau-spectrum-ilp.py`](../2026-07-13-c116-tau-spectrum-ilp.py).
+  - **Axis already confirmed at q=81** (no ILP): `c115_axis81.py` gives edge set =
+    `zeroSumTripleHypergraph(𝔽₈₁)` + isolated cusp (1080 edges), so `τ_axis(81)=81−cap₃(4)=61` from
+    the known `cap₃(4)=20`. Likewise `τ_axis(243)=198` from `cap₃(5)=45`. Only TO/RC/IC remain.
+  - **Perf lesson:** CBC times out (>500 s) on the smooth/nodal cap ILPs — these ARE hard cap
+    problems (caps in `E(𝔽_q)`/`𝔽_q^×`). Next session: **use HiGHS** (`--with highspy`, or
+    `pulp.HiGHS_CMD`), and/or a dedicated cap search; precompute the 4 reps once (don't recompute
+    edges per candidate). q=81 first, then q=243 (chunk the det; ~2.4M triples).
+  - **Structural lead (discovery I5):** TO/RC are smooth elliptic `#E=q+1` split by the collinear
+    sum-constant `c₀` (rational-flex presence); IC nodal `𝔽_q^×`. Fit `M` as max-no-3-sum-`c₀` subset
+    per group. Data so far (M=(q+1)−τ): TO q9/27 = 7/13; RC 6/14; IC 6/14 (RC=IC in τ at both — check
+    whether they split at q=81). See [discovery log](../2026-07-13-c115-discovery-track.md).
 - **C117** prove the D-PC9 five-weight distribution via PGL(2,q) orbit counting (uses the verified
   equivariance + classical plane orbits + char-3 osculating=axis); Lean-certify; fix the `q²−1`
   minimum-weight mislabel (→ `q+1`).
