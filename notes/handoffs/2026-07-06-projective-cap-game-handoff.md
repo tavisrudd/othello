@@ -1,5 +1,7 @@
 # Handoff: Projective Cap Achievement Game
 
+**Lane**: `cap` — see CLAUDE.md § Lane routing.
+
 Date created: 2026-07-06.  Refactored current-state handoff: 2026-07-08.
 
 The previous long handoff, including the full chronological session log and superseded planning

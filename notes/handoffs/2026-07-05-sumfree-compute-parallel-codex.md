@@ -1,5 +1,7 @@
 # Sum-free game: compute-side work (run in parallel with Codex)
 
+**Lane**: `kayles` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-07-05
 **Created by**: 2026-07-05--4 (`2bf7abb3-c0ff-48a2-9c80-e08a4acfe74f`)
 **Purpose**: The heavy-compute + solver-engineering half of the sum-free-game push, to run

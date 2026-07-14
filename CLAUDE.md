@@ -26,6 +26,18 @@ as `go <alias>` (`go clebsch`) — selects that lane and resumes it from its ent
 `@notes/handoffs/<name>.md go` likewise selects that handoff's lane. Listed synonyms work too
 (`hexagon` = `clebsch`), but docs and pegs use the canonical alias only.
 
+**Every handoff declares its lane** in a `**Lane**:` line directly under its H1 — so a handoff opened
+cold, without this table, still says which lane it belongs to:
+
+```
+# Handoff title
+
+**Lane**: `cap` — see CLAUDE.md § Lane routing.
+```
+
+One lane per handoff, from the alias list below; add it when the handoff is created. A handoff whose
+work spans lanes is pegged to the lane that owns its deliverable, same rule as C items.
+
 **Bare `go` / `next?` at the start of a session, with no lane named: ASK which lane.** Do not guess
 and do not default to the most recent anything. Listing the open lanes with a one-line status each
 is a good way to ask.

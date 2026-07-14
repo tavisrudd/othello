@@ -1,5 +1,7 @@
 # Twisted-cubic cross-lane: external-point transversal spectrum + D-PC9 disposition
 
+**Lane**: `cubic` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-07-13
 **Status**: C115 DONE (reduction + axis cap-set law, Lean-certified strict-trust); TO/RC/IC exact
 forms are the remaining open piece → C116. Live map for the cross-lane program that grew out of the

@@ -1,5 +1,7 @@
 # Queens n=18 — umbrella
 
+**Lane**: `queens` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-06-23  ·  **Branch**: `queens-n18` (worktree `/home/tavis/src/othello-n18`, off main @ `18579e9`)
 
 The single entry point for all n=18 work. n=16 is **SOLVED** (second player, ~23.4s, the iso-dense

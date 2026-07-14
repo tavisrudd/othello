@@ -1,5 +1,7 @@
 # Handoff — Node-Kayles / impartial games on arithmetic structures
 
+**Lane**: `kayles` — see CLAUDE.md § Lane routing.
+
 **Date:** 2026-07-04
 **Mode:** collaborative (session --2 ran under `mi` / intent-based)
 

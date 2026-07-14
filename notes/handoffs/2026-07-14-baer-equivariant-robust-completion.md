@@ -1,5 +1,7 @@
 # Handoff: Baer-equivariant robust completion
 
+**Lane**: `baer` — see CLAUDE.md § Lane routing.
+
 **Date:** 2026-07-14
 **Status:** ACTIVE — C133 and C134 closed; inverse/equality task allocation is next
 **Tasks:** C134 (closed); inverse/equality follow-up unallocated

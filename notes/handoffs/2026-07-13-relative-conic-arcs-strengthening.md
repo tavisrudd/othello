@@ -1,5 +1,7 @@
 # Handoff: relative-conic arcs — evaluation, coding, and icosahedral strengthening
 
+**Lane**: `relconic` — see CLAUDE.md § Lane routing.
+
 **Date:** 2026-07-13
 **Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun remains
 **Tasks:** C106–C110

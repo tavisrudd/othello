@@ -1,5 +1,7 @@
 # Projectively completed cubic–axis RepairCodes — C111–C114
 
+**Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-07-13
 **Status**: COMPLETE. C111–C114 are proved, adversarially reviewed, and synchronized with the
 paper and registries. The sole deep formal dependency is the quarantined Stichtenoth theorem;

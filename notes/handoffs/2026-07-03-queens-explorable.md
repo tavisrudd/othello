@@ -1,5 +1,7 @@
 # Queens explorable — interactive viz companion (Approach C) — Implementation
 
+**Lane**: `queens` — see CLAUDE.md § Lane routing.
+
 **Date**: 2026-07-03
 **Session**: 2026-07-03--1 (`3687af49-6338-44b5-91da-933ad4ba1086`)
 **References**: [proposal](../proposal-2026-07-02-interactive-viz.md) (Approach C accepted);

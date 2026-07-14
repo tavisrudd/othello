@@ -1,7 +1,8 @@
 # The Clebsch hexagon code — paper lane (`clebsch`)
 
-**Lane alias**: `clebsch` (spoken synonym: `hexagon`). Formerly called the *icosahedral MDS /
-deep-holes* lane — same lane, renamed 2026-07-14 when it and the paper were unified under one alias.
+**Lane**: `clebsch` — see CLAUDE.md § Lane routing. (Spoken synonym: `hexagon`. Formerly called the
+*icosahedral MDS / deep-holes* lane — same lane, renamed 2026-07-14 when it and the paper were
+unified under one alias.)
 **This is the lane's single live doc.** The paper-outline note was folded in here and removed
 (2026-07-14): its abstract/skeleton/deepened-core/draft-prose were superseded by the manuscript
 itself, which is authoritative for all prose and citations. **Manuscript + checkers**:
