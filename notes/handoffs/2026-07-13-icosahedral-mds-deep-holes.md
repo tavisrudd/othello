@@ -10,11 +10,16 @@ variety conjecture / C123 DEAD** (2 independent passes, q=19 counterexample + k=
 j-function + 11-cell-*gluing* decorative, but the **hemi-icosahedron face-lattice + edge-level
 Schreier=icosahedron witness is KEPT as a `decide`-grade proposition** (§loop-back) — not demoted. Loop-back: this is the extremal instance of the **parent conic-
 involution Schreier program**.
-**Next session:** Dye gate CLEARED (C129, draftable now w/ footnote; citations locked). Remaining:
-(1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade); (2) write the
-single-spine draft (headline = rigidity theorem — SAFE as "first" per item-5 round-3 audit; scope
-"first" to the conic-rigidity/covering reading, cite Sadeh for the arc census); ZWK/DMP/Hirschfeld–
-Sadeh citations in hand. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
+**DRAFT WRITTEN (2026-07-14):** full working-draft manuscript + 5 executable verification scripts at
+[`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/) (commit 4b6aa8e). All proof gaps
+closed (degenerate-conic exclusion + secant-covering counting lemma + q=9), all companion runs done &
+verified (|U| recompute; dual code = again Clebsch up to orbit; hexads transverse to S(5,6,12);
+10-arc empty-deep-hole foil). C132 structural-singularity in §6. **Remaining (non-blocking):**
+(1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade — mind the two-bar
+caveat: the 1548-arc TFAE cert likely needs `native_decide`, dents the strict-trust story);
+(2) verify Cheng–Murray + add Storme–Thas 1991 to the citation lock; (3) C131 Sadeh on-receipt
+confirmation. Headline = rigidity theorem, SAFE as "first" (item-5 round-3); "first" scoped to the
+conic-rigidity/covering reading, Sadeh cited for the census. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
 classification literature outright** (it's the standard byproduct of arc classification) — so the
 Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
 blocking**; nothing gates drafting. Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
