@@ -106,6 +106,38 @@ there; (4) re-sweep the PG(2,11) complete-arc classification (Italian school) be
 **Pending corroboration:** the dual-variety-examination and minimal-hypothesis (Thread A) agents were
 still running when this landed — their independent reads may soften or harden the above.
 
+## ✅ RIGIDITY THEOREM (Thread A/B, exhaustive) — the real content; rebuts "corollary-grade"
+
+Exhaustive classification of **all 1548 frame-normalized 6-arcs in PG(2,11)** up to PGL(3,11)
+(deep-hole locus U = points off arc and off all 15 secants; conic-containment by exact nullspace):
+
+- **Every 6-arc has U≠∅** (covering radius 3 universal; smallest complete arc is 7) → "non-GRS radius
+  3" distinguishes nothing; all content is *where* the deep holes sit.
+- **|U| histogram {12:6, 16:30, 18:150, 19:300, 20:630, 21:360, 22:72}.** Minimum |U|=12 hit by
+  exactly 6 arcs, all PGL-equivalent to the Clebsch witness (mult 6 = 360/60 ⇒ |Aut|=60=A₅). **Gap
+  12→16.**
+- **U ⊆ a conic (degenerate allowed) for the Clebsch class ONLY**, and there U = the *full* 12-point
+  conic. Zero other arcs (incl. all 252 on-conic arcs — which give |U|=18–22 junk) qualify.
+
+**RIGIDITY THEOREM (exhaustive at q=11, `decide`-grade Lean-able):** for a 6-arc A in PG(2,11), TFAE
+— (i) deep-hole locus ⊆ some conic; (ii) = all F₁₁-points of a nondegenerate conic; (iii) |U(A)|≤15
+(=12); (iv) A is the Clebsch hexagon, i.e. Stab(A)⊇A₅. **So condition (b) alone — deep holes ⊆ a
+conic — FORCES A₅**; the three-part "healthy" characterization collapses to one, and **A₅ is
+RECOVERED from the coding condition, not assumed.**
+
+**Thread B — RIGID not stable, as a GAP theorem:** all 252 one-point perturbations keep radius 3
+(deep holes never vanish) but shatter the conic instantly — |U Δ conic| ∈ {18,19,20,22,24}, min 18;
+≤7 of 12 conic points survive; zero perturbations land U on any conic. So the correct quantitative
+statement is a **deficiency/gap theorem** (distance-to-phenomenon jumps 0→≥18, nothing between),
+replacing the impossible stability theorem. The 5-arc's U has 43 pts ⊇ conic; the Clebsch 6th point
+uniquely prunes it to exactly the conic.
+
+**Why this matters (rebuts red-team #1):** the DMP dictionary makes "deep holes = no-bisecant points"
+routine, but *"uniquely the Clebsch hexagon among all 6-arcs has its no-bisecant points on a conic,
+and that condition recovers A₅"* is a genuine **extremal/rigidity theorem** with a proof — not a
+one-arc computation. This is the headline content the surviving paper should lead with. (Caveat:
+exhaustive at q=11 only, consistent with the q=19 failure — the rigidity is itself a p=11 fact.)
+
 ---
 
 ## FUSED FRAMING [DEMOTED by red-team above — kept as exploration history]
