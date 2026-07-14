@@ -14,8 +14,10 @@ involution Schreier program**.
 (1) Lean-ify the rigidity theorem + Schreier=icosahedron graph (both `decide`-grade); (2) write the
 single-spine draft (headline = rigidity theorem — SAFE as "first" per item-5 round-3 audit; scope
 "first" to the conic-rigidity/covering reading, cite Sadeh for the arc census); ZWK/DMP/Hirschfeld–
-Sadeh citations in hand. **Blocking ILL before claiming "first" on the |U| numbers: Sadeh Sussex
-thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984).** Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
+Sadeh citations in hand. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
+classification literature outright** (it's the standard byproduct of arc classification) — so the
+Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
+blocking**; nothing gates drafting. Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
 parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this; family route = C
 (reduce-at-best-prime functor, 27-lines/F₄ seed).
 **Companion log**: append dated riffs to
@@ -660,10 +662,13 @@ classification. So the |U| numbers are exposed to prior art; the conic-containme
   titled *"The classification of k-arcs and cubic surfaces with twenty-seven lines over the field of
   eleven elements"* — 6-arcs are k-arcs, so the title alone forbids "first classification." Attribute
   the enumeration to Hirschfeld–Sadeh 1984 + Sadeh thesis + PGOFF §14; do not claim it.
-- **|U| histogram {12,16,18,19,20,21,22} — HEDGE/BLOCKED on "first."** The |U| values are the
-  extension-count data, plausibly implicit in (or printed by) Sadeh 1984. Publish as "we tabulate,"
-  not "first tabulated." Upgrading to "first" requires OBTAINING the Sadeh thesis (+ Hirschfeld–Sadeh
-  1984) and confirming it omits the distribution.
+- **|U| histogram {12,16,18,19,20,21,22} — GRANT priority outright (no "first" on the numbers).** |U|
+  = the number of points extending the arc to a 7-arc = a projective invariant and the standard
+  byproduct of extension-based arc classification, so the extension-count spectrum belongs to
+  Hirschfeld–Sadeh 1984 whether or not printed. Do NOT hedge conditionally — concede it cleanly, cite
+  the classification, present the spectrum as "which we recompute." (The frame-normalized
+  multiplicities {12:6,16:30,…} are our enumeration artifact; the invariant is the value-set + per-
+  class assignment.) This **de-blocks the Sadeh ILL** → confirmatory, not gating.
 - **min |U|=12 ⇔ Clebsch — HEDGE.** Clebsch identity is SVM 1995 + Dye 1991 (cite); min extension
   count could be in Sadeh. State as a reading, not a first.
 - **U ⊆ a conic ⇒ Clebsch/A₅ (the TFAE rigidity, 12→16 gap, and the perturbation/deficiency theorem)

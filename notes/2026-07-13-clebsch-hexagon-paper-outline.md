@@ -82,7 +82,10 @@ locus U(A) lies on some conic (degenerate allowed); (ii) U(A) = all F₁₁-poin
 conic; (iii) |U(A)| ≤ 15 (in fact 12); (iv) A is PGL-equivalent to the Clebsch hexagon; (v)
 Stab_PGL(A) ⊇ A₅. *Proof:* exhaustive over the 1548 PGL-normalized 6-arcs (any 4 arc points = a
 frame ⇒ normalize e₁,e₂,e₃,(1,1,1), sweep the last pair); conic-containment by exact nullspace over
-the quadratic-form space. |U| histogram {12:6, 16:30, 18:150, 19:300, 20:630, 21:360, 22:72}; the six
+the quadratic-form space. |U| histogram {12:6, 16:30, 18:150, 19:300, 20:630, 21:360, 22:72} (the
+multiplicities are over our 1548 frame-normalized reps — an enumeration artifact; the projective
+invariant we cite is the value-set {12,…,22} and its per-class assignment, granted to the
+classification); the six
 |U|=12 arcs are one PGL-orbit (mult 6 = 360/60 ⇒ |Aut|=60=A₅). Corollary: **A₅ is recovered
 from the coding condition, not assumed.**
 
@@ -93,9 +96,16 @@ conic, and every one of the 252 one-point perturbations of the Clebsch hexagon h
 0 → ≥18 with nothing between — this quantified moat pre-empts the "so what, one arc" objection.
 Formalizable `decide`-grade in Lean.
 *Priority (item-5 round-3):* claim "first" only for the conic-rigidity/covering reading (TFAE +
-gap theorem) — those are outside arc-classification scope. The 6-arc census and the |U| histogram
-are extension-count data plausibly in Sadeh's thesis, so present the histogram as "we tabulate," not
-"first tabulated," until the thesis is pulled (Sussex EThOS/ILL).
+gap theorem) — those are outside arc-classification scope. **Priority we GRANT (outright, not
+conditionally):** |U|(A) = the number of points extending A to a 7-arc — a projective invariant and
+the standard byproduct of any extension-based arc classification — so the whole **extension-count
+spectrum {12,16,18,19,20,21,22}** belongs to Hirschfeld–Sadeh 1984 (whether or not they printed it as
+a histogram); and "min |U| = 12 ⇔ the arc is complete-adjacent" is classification territory, "= the
+Clebsch hexagon" is SVM 1995 / Dye 1991. We claim **none** of the numbers. We present the spectrum as
+"which we recompute" and cite the classification for it. **What stays ours = the *reading*:**
+identifying that extension-point set with the code's deep-hole / covering-radius-3 coset data, and the
+conic-containment/rigidity for the Clebsch class. Consequence: **the Sadeh thesis is confirmatory, not
+blocking** — granting the spectrum de-gates it; nothing here blocks drafting.
 
 **§5 — chirality (proposition).** The 6 columns give C(6,3)=20 triples = 10 complementary pairs
 {S,Sᶜ}; A₅ acts on the 10 pairs as the Petersen graph (adjacency = "share 2 of 3"), on the 20 triples
@@ -107,10 +117,11 @@ non-identifiable latent). NB drop the refuted five-tetrahedra reading (A₅-on-1
 ## Remaining work before submission (outline vet — research + proof)
 
 **Research / lit (ranked, blocking → optional):**
-1. **Sadeh Sussex thesis (~1984)** [BLOCKING the |U| "first"] — gates whether the |U| histogram +
-   "min |U|=12 ⇔ Clebsch" may say "first" vs "we tabulate." Close via Sussex EThOS / British Library
-   ILL (or email Hirschfeld directly). Title also covers 27-lines/cubic-surfaces over F₁₁ → may touch
-   R-A/E₆.
+1. **Sadeh Sussex thesis (~1984)** [CONFIRMATORY, non-blocking — priority on the |U| spectrum is now
+   granted to the classification outright, so nothing gates drafting]. Pull it to (a) get the exact
+   citation form for the extension-count spectrum, (b) confirm no over-concession, (c) mine the
+   27-lines/cubic-surfaces-over-F₁₁ half (may touch R-A/E₆). Close via Sussex EThOS / British Library
+   ILL, or email Hirschfeld directly.
 2. **Hirschfeld–Sadeh, Mitt. Math. Sem. Giessen 164 (1984) 245–257** — the public census; same gate,
    faster than the thesis via ILL/GDZ; the citable version.
 3. **Independent recompute of the |U| histogram** — re-derive {12:6,16:30,18:150,19:300,20:630,
@@ -178,7 +189,9 @@ non-identifiable latent). NB drop the refuted five-tetrahedra reading (A₅-on-1
 
 **Folded in already** (zero new proof, zero priority risk): gap/deficiency **theorem** naming (§4);
 the §3b structural facts (weight enumerator, |Aut|=60 exotic-S₆, OA(1331,6,11,3) design view, Dye
-pentad); the |U| histogram as a standalone tabulated deliverable (§4, keep the "we tabulate" hedge).
+pentad); the |U| histogram presented as the classification's extension-count spectrum (recomputed
+here, priority granted — see §4 priority note), read as deep-hole data — the *reading* is the
+deliverable, not the numbers.
 
 **Do the small run FIRST, then include as a free companion** (result direction publishable either
 way, but don't commit to include before running):
