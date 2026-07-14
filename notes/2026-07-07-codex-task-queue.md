@@ -8,7 +8,7 @@ to the companion log
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C122.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C125.**
 
 **Icosahedral MDS / deep-holes lane (2026-07-13):** see
 [handoff](handoffs/2026-07-13-icosahedral-mds-deep-holes.md).
@@ -18,7 +18,13 @@ marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **
   conjecture"; drop "first non-GRS"; blocking O'Keefe–Storme arc check. `[REPORTED 2026-07-13]` →
   `notes/2026-07-13-c122-deep-hole-novelty-audit.md`
 - **C123** — (open) k=4 twisted-cubic dual-variety test: uncovered locus = tangent-developable
-  quartic (R3), vs `RepairCodes/ProjectiveTwistedCubicTransversalSpectrum.lean`.
+  quartic (R3/D2), vs `RepairCodes/ProjectiveTwistedCubicTransversalSpectrum.lean`.
+- **C124** — L2: Petersen (adjacency "share 2 of 3") + chirality Z/2 (orbit-swap = odd perms)
+  CONFIRMED; five-tetrahedra pairing REFUTED (A₅-on-10 primitive). `[REPORTED 2026-07-13]` →
+  `notes/2026-07-13-c124-petersen-chirality.md`
+- **C125** — L1: REAL — genuine reduction mod 11 of Klein's forms/group (f→12 conic pts, six
+  diagonals→chords, poles→arc); 11 uniquely optimal (p+1=12). `[REPORTED 2026-07-13]` →
+  `notes/2026-07-13-c125-klein-resolvent.md`
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

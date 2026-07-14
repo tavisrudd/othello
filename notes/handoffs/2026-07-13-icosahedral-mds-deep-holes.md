@@ -86,16 +86,31 @@ S₆-outer-automorphism made functional (S↦Sᶜ swaps the two D₁₀ classes)
 
 ## Cross-field lenses (beyond coding theory) — ranked surprising × real
 
-- **L1 [REAL, in-repo]. Klein's icosahedral quintic resolvent.** The object's native home. Solving
-  the quintic runs through the icosahedral equation + its **degree-6 resolvent** (the six 5-fold
-  axes A₅ permutes 2-transitively) — our six poles are an **exact F₁₁ avatar of Klein's sextic
-  resolvent**; 12 conic points = degree-12 vertex form. Reframes the whole object as a finite-field
-  incarnation of the icosahedral solution of the quintic. *Klein's is analytic/over ℂ; ours is
-  finite + kernel-certified.*
-- **L2 [REAL chirality+Petersen; SPECULATIVE exact tetrahedra bijection; in-repo].** The 10+10
-  leader split = the icosahedron's **chirality** = the two enantiomorphous **compounds of five
-  tetrahedra**; the 10 complementary triple-pairs carry the **Petersen graph** (A₅ on 10, stab S₃ —
-  grounded). Deep-hole leaders secretly encode Petersen + five-tetrahedra chirality.
+- **L1 [C125: REAL — genuine reduction mod 11 of Klein's actual polynomials/group, NOT an
+  analogy].** Klein's icosahedral group Γ ⊂ PSL(2,ℚ(ζ₅)) reduces mod a prime 𝔭|11 (11 splits
+  completely) injectively to a PGL(2,11)-conjugate of our arc-stabilizer A₅ (explicit conjugator
+  z↦1/(z+5)). The vertex form **f = z₁z₂(z₁¹⁰+11z₁⁵z₂⁵−z₂¹⁰)** reduces to the 12 F₁₁ conic points;
+  the six diagonals (roots of **Klein's sextic resolvent**, *Lectures* I.4 §15) reduce to the six
+  `witnessMissingEdge` chords; the six arc points are their poles. Syzygy H³+T²=1728f⁵ reduces to
+  H³+T²=f⁵ (1728≡1 mod 11).
+  - **11 is uniquely optimal:** 11∤60 (faithful, forms squarefree — bad primes are 2,3,5); 11≡1
+    mod 5 (group + all 12 vertices F₁₁-rational); and **p=11 is the only prime with p+1=12**, so
+    Klein's coefficient 11 dies mod 11 and the icosahedron's 12 vertices exhaust P¹(F₁₁).
+  - **Caveats to bake into wording:** (A) claim "reduction of Klein's six *diagonals*" (the objects
+    the resolvent's roots enumerate), not "F₁₁-roots of the resolvent polynomial" (its coeffs depend
+    on the icosahedral parameter); (B) f mod 11 gains full PGL(2,11)-invariance, so always pair the
+    vertex-form clause with the group/diagonal clause — f alone no longer remembers A₅. All finite
+    clauses `decide`-grade Lean-able. Sources: Klein (archive.org); Nash arXiv:1308.0955; Kostant
+    Notices 1995.
+- **L2 [C124: Petersen CONFIRMED, chirality Z/2 CONFIRMED, five-tetrahedra REFUTED].** The 10
+  complementary triple-pairs carry the **Petersen graph** — A₅-on-10, stab S₃, adjacency = "share
+  exactly 2 of 3 columns" (10v/15e/3-reg/girth-5). The 10+10 leader split is a genuine chirality
+  Z/2: all 60 arc-stabilizer perms are even (orbitA-preserving), all 60 orbit-swappers are **odd**
+  (form S₅ via the exotic S₆ outer-auto embedding) — no code automorphism merges them ("the
+  rotation group has no reflection"). **But** the A₅-on-10 action is **primitive** (no invariant
+  5+5 block system) → the "each orbit = 5 chiral tetrahedra pairs" reading is **computationally
+  refuted**; only the 10=2×5 / Petersen / chirality level holds, not an exact five-tetrahedra
+  bijection. Claim Petersen + chirality, drop the tetrahedra pairing.
 - **L3 [REAL group, SPECULATIVE vehicle]. Buckyball / PSL₂(11) / Arnold trinity.** Our A₅ ⊂
   PGL₂(11) is the same subgroup at the center of Martin–Singerman "Biplanes → Klein Quartic →
   Buckyball" and Arnold's trinity. One paragraph, not a new-bridge claim.
