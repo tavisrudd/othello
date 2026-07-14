@@ -18,15 +18,20 @@ audit. See `papers-planning.md` for the rulings, submission sequence, and per-pa
 
 ## Geometry / coding track — Package 2 (arc extension & reconstruction)
 
-| Directory                     | Working title                                                     | Status                                          |
-|-------------------------------|------------------------------------------------------------------|-------------------------------------------------|
-| `equivariant-robust-completion` | Equivariant extension and robust completion in finite geometry | Canonical merged paper; exact quadratic extension and completion spine Lean-built |
-| `baer-equivariant-extension`  | Equivariant extensions of finite-geometric arcs                  | Source/staging view folded into canonical merged paper |
-| `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Source/staging view folded into canonical merged paper |
-| `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
-| `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds, MDS syndrome form) | Self-contained manuscript + PDF + independent checkers + strict-trust Lean formalization; strengthened q11 code/extension spectrum included; near submission-ready — *related but separate* |
-| `coding-repair-hypergraphs` | Complete repair hypergraphs under concatenation: a twisted-cubic--axis family | Self-contained manuscript + proof/novelty ledgers + strict-trust Lean package; internal adversarial audit complete, external specialist priority check remains |
-| `clebsch-hexagon-code` | The Clebsch hexagon code: a rigidity theorem for deep holes (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic) | Full LaTeX working draft + PDF + independent Python checkers for every finite claim; Lean partially built (deep-holes/radius/leaders + Schreier=icosahedron certified strict-trust; chirality/gap/TFAE open); DMP Thm 6.3 pin CLOSED, Sadeh census cite confirmatory/non-blocking — *spun out of the `arcs` q=11 material after the Fable decomposition ruling, so not among its five+1* |
+**Rows are ordered by intended submission sequence** (`papers-planning.md` → *Submission sequence*),
+not alphabetically. The `#` column is that doc's number; order here and there must agree. `arcs` →
+`clebsch` is a **hard dependency**, not a preference: `arcs` owns the deep-holes=conic identification
+that `clebsch` takes as its starting point (see *Clebsch after Arcs* in the planning doc).
+
+| # | Directory                     | Working title                                                     | Status                                          |
+|---|-------------------------------|------------------------------------------------------------------|-------------------------------------------------|
+| 4 | `arcs_complete_outside_conic` | Arcs complete outside a prescribed conic (secant-defect identity, bounds, MDS syndrome form) | Self-contained manuscript + PDF + independent checkers + strict-trust Lean formalization; strengthened q11 code/extension spectrum included; near submission-ready. **Owns the q=11 deep-holes=conic identification** (`comp-q11-mds-deep-holes`), which `clebsch` builds on |
+| 5 | `clebsch-hexagon-code` | The Clebsch hexagon code: a rigidity theorem for deep holes (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic) | Full LaTeX working draft + PDF + six independent Python checkers (coverage incomplete — see *Manuscript state*); Lean partially built (deep-holes/radius/leaders + Schreier=icosahedron certified strict-trust; chirality/gap/TFAE open). **Ships after `arcs`**; claims only the reading (rigidity TFAE, gap, chirality, why-11) — *added 2026-07-13, after the Fable decomposition ruling, so not among its five+1* |
+| 6 | `coding-repair-hypergraphs` | Complete repair hypergraphs under concatenation: a twisted-cubic--axis family | Self-contained manuscript + proof/novelty ledgers + strict-trust Lean package; internal adversarial audit complete, external specialist priority check remains |
+| 7 | `equivariant-robust-completion` | Equivariant extension and robust completion in finite geometry | Canonical merged paper; exact quadratic extension and completion spine Lean-built |
+| — | `baer-equivariant-extension`  | Equivariant extensions of finite-geometric arcs                  | Source/staging view folded into canonical merged paper (7) |
+| — | `completion-core-rigidity`    | Robust completion of finite-geometric packings and codes         | Source/staging view folded into canonical merged paper (7) |
+| 8 | `continuation-graph-rigidity` | Semilinear rigidity/reconstruction from cap continuation graphs   | Theorem-package plan; N1 headline survives      |
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: it descends from the
@@ -58,12 +63,16 @@ lit, remaining work): `../notes/handoffs/2026-07-13-clebsch-paper.md`. Lane alia
   `coding-repair-hypergraphs` — internally audited; specialist citation-chain review remains a
   submission preflight gate.
 - **Complete LaTeX manuscript (+ PDF + independent Python checkers + partial Lean):**
-  `clebsch-hexagon-code` — every finite claim in the draft has a standalone re-checking script in the
-  paper directory (`check_rigidity_degenerate_conic.py`, `check_q9_exclusion.py`,
-  `check_q19_nonexample.py`, `check_dual_code.py`, `check_mathieu_hexads.py`,
-  `check_ten_arc_foil.py`), independent of the manuscript's own computation. Lean covers the
-  deep-holes/radius/leader facts and the §7 Schreier=icosahedron witness; chirality, the gap theorem,
-  and the rigidity TFAE remain open and are release-blocking under the gate below (see *Lean state*).
+  `clebsch-hexagon-code` — six standalone re-checking scripts in the paper directory
+  (`check_rigidity_degenerate_conic.py`, `check_q9_exclusion.py`, `check_q19_nonexample.py`,
+  `check_dual_code.py`, `check_mathieu_hexads.py`, `check_ten_arc_foil.py`), each independent of the
+  manuscript's own computation. **Coverage is not complete:** three finite claims ship with no
+  checker — the gap theorem's 252-perturbation spectrum (§4 Thm 4.2), the chirality orbit
+  computation (§5 Prop 5.1), and the mod-11 syzygy (§7, task C128). All three were independently
+  re-derived during the 2026-07-14 adversarial review and hold exactly as stated, but no reproducible
+  artifact ships with the paper. Lean covers the deep-holes/radius/leader facts and the §7
+  Schreier=icosahedron witness; chirality, the gap theorem, and the rigidity TFAE remain open and are
+  release-blocking under the gate below (see *Lean state*).
   Builds with texliveFull — texliveSmall/Medium lack `enumitem`.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
@@ -181,7 +190,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-q11-icosahedral | q=11 icosahedral seeded P-position     | all 12 conic points live; every seeded continuation is exactly an independent set of the icosahedral graph; the actual projective seed is P by antipodal mirror and exact localization | arcs, nofil | paper §7 remark; lean `RelativeConicArcs/Q11Residual.lean` `adj_iff_icosahedron`, `continuation_rawArc_iff`, `isP`, `seed_isP` |
 | thm-clebsch-deep-holes | Deep holes of the Clebsch hexagon code are exactly a conic | projectively non-GRS `[6,3,4]₁₁` code of covering radius three; the fifteen secants cover all of `PG(2,11)` except the twelve points of the `A₅`-invariant conic `XZ=Y²`, so the complete deep-hole set *is* `𝒞(𝔽₁₁)`; affine count `120=12×10`, each deep-hole coset has `C(6,3)=20` leaders. Headline novelty: first MDS code whose full deep-hole set is the `𝔽_q`-points of a positive-dimensional *named* variety | clebsch | paper §3 Prop 3.1 + Cor 3.2, via the DMP Thm 6.3 dictionary; the underlying finite computation is the Lean-certified `comp-q11-mds-deep-holes` from `arcs` |
 | thm-clebsch-rigidity | Rigidity theorem (five-way TFAE)         | for a six-arc `A⊂PG(2,11)`: `U(A)` lies on some conic ⟺ `U(A)` is all `𝔽₁₁`-points of a nonsingular conic ⟺ `#U(A)≤15` (in fact `12`) ⟺ `A` is `PGL(3,11)`-equivalent to the Clebsch hexagon ⟺ `Stab(A)⊇A₅`. `A₅` is *recovered* from a purely coding-theoretic hypothesis, not assumed | clebsch | paper §4 Thm 4.1; exhaustive over the 1548 frame-normalized six-arcs; checker `clebsch-hexagon-code/check_rigidity_degenerate_conic.py`, which also closes (i)⇒(ii) by excluding degenerate conics; Lean planned (`native_decide`-grade) |
-| thm-clebsch-gap     | Gap theorem (rigid, not merely stable)   | every non-Clebsch six-arc has `#U≥16` with `U` on no conic; each of the 252 single-point perturbations of the hexagon has symmetric difference `#(U Δ 𝒞) ≥ 18` (exact spectrum `{18,19,20,22,24}`), so at most seven of the twelve conic points survive; distance-to-phenomenon jumps `0 → ≥18` with nothing between | clebsch | paper §4 Thm 4.2; same checker; Lean planned (`decide`-grade, small) |
+| thm-clebsch-gap     | Gap theorem (rigid, not merely stable)   | every non-Clebsch six-arc has `#U≥16` with `U` on no conic; each of the 252 single-point perturbations of the hexagon has symmetric difference `#(U Δ 𝒞) ≥ 18` (exact spectrum `{18,19,20,22,24}`), so at most seven of the twelve conic points survive; distance-to-phenomenon jumps `0 → ≥18` with nothing between | clebsch | paper §4 Thm 4.2. **No checker ships for the perturbation census** — `check_rigidity_degenerate_conic.py` covers only the first clause (`#U≥16`, on no conic) via the histogram; the 252-perturbation spectrum was independently re-derived in the 2026-07-14 review and holds, but has no committed artifact. Lean planned (`decide`-grade, small) |
 | comp-clebsch-u-spectrum | Six-arc extension-count spectrum in `PG(2,11)` | `#U(A) ∈ {12,16,18,19,20,21,22}` with frame-normalized multiplicities `{6,30,150,300,630,360,72}` (Σ=1548); `#U=12` is attained by exactly one `PGL(3,11)` orbit (multiplicity `6=360/60`, consistent with `#Aut=60`) | clebsch | **priority granted outright to Hirschfeld–Sadeh 1984 / Sadeh thesis — recomputed here, claimed by us for neither the numbers nor the classification**; ours is only the deep-hole/covering *reading* of `U`. paper §4; verified by two independent code paths |
 | thm-clebsch-chirality | Canonical chirality `ℤ/2` on the deep-hole leaders | the twenty weight-three coset leaders split into two complementary `A₅`-orbits of ten that no automorphism exchanges, since `Hom(A₅,ℤ/2)=0`; the sixty orbit-swapping permutations are exactly the odd elements of the exotic `S₅⊂S₆`. Gives a certified non-identifiable latent: fixed under all sixty symmetries yet not constant | clebsch | paper §5 Prop 5.1; Lean planned (`decide`-grade orbit computation + standard `Hom(A₅,ℤ/2)=0`) |
 | lem-secant-covering | Secant-covering bound                    | a six-arc complete outside a disjoint conic forces `15(q−1) ≥ q²−6`, i.e. `q²−15q+9≤0`, hence `q≤14`. Overlap-free: fifteen sets of size `≤q−1` covering `q²−6` points bound the sum from below regardless of overlap | clebsch | paper §6 Lemma 6.1 — the paper's only genuine inequality argument; hand-proven, no computation |

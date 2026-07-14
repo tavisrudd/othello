@@ -45,14 +45,16 @@ conic), and the conic condition alone recovers its full projective
 stabilizer $A_5$. The arc lies on no conic, so its $[6,3,4]_{11}$ code is
 projectively non-GRS of covering radius three; for this code the complete
 set of deep holes is not merely contained in a conic but is the entire set
-of $\F_{11}$-rational points of that conic --- to our knowledge the first
-identification of the complete deep-hole set of an MDS code with the
-$\F_q$-points of a positive-dimensional \emph{named} variety. We prove this
+of $\F_{11}$-rational points of that conic, an identification recorded with
+its certificate in a companion paper and taken here as the starting point.
+We prove this
 rigidity as a five-way equivalence, establish a companion gap theorem
 quantifying its failure to be merely stable, exhibit a canonical
 automorphism-invariant chirality $\mathbb Z/2$ on the twenty weight-three
-coset leaders, and give a counting argument isolating $q=11$ as the unique
-prime realizing the phenomenon. The underlying six-arc census and its
+coset leaders, and show that $q=11$ is the only prime at which the
+configuration can occur \emph{with icosahedral symmetry}: an elementary
+secant-counting bound forces $q\le14$, and $\F_q$-rationality of $A_5$ then
+leaves $q=11$ alone. The underlying six-arc census and its
 extension-count spectrum belong to the classification of
 Hirschfeld and Sadeh; we recompute that spectrum and supply its
 coding-theoretic reading, but claim no priority on the numbers themselves.
@@ -106,16 +108,25 @@ icosahedral group $A_5$.
 That such an arc exists, and that its deep holes are a conic, is by itself
 a finite check --- an instance of the DMP dictionary applied to one known
 arc. What we add is that this instance is not an accident of the arc chosen:
-among \emph{all} $1548$ projectively distinct six-arcs of $\PG(2,11)$, the
+among \emph{all} six-arcs of $\PG(2,11)$ --- fifteen classes under
+$\mathrm{PGL}(3,11)$, which our search meets as $1548$ frame-normalized
+representatives --- the
 Clebsch hexagon is the unique class whose deep-hole locus lies on any conic
 at all, degenerate or not, and this single containment condition already
 forces the stabilizer to contain $A_5$. We state this as a rigidity theorem
 (Section~\ref{sec:rigidity}), quantify how sharply it fails to be a merely
 \emph{stable} phenomenon (the companion gap theorem), exhibit a canonical
 chirality invariant on the code's weight-three coset leaders
-(Section~\ref{sec:chirality}), and explain by an elementary counting bound
-why $q=11$ is the only prime at which the configuration can occur
-(Section~\ref{sec:why11}). Section~\ref{sec:klein} discusses, without
+(Section~\ref{sec:chirality}), and explain why $q=11$ is the only prime at
+which the configuration can occur with icosahedral symmetry
+(Section~\ref{sec:why11}): an elementary secant-counting bound caps $q$ at
+$14$, and rationality of $A_5$ closes the remaining range. We stress that
+the counting bound alone does not isolate $q=11$ --- every prime power in
+range satisfies it --- and that the rationality of $A_5$ enters there as a
+hypothesis on the arc, not as a consequence of the coding condition; the
+recovery of $A_5$ from the coding condition in Section~\ref{sec:rigidity} is
+a statement about $q=11$, not an input to the argument of
+Section~\ref{sec:why11}. Section~\ref{sec:klein} discusses, without
 claiming any causal role for it, the sense in which these objects are the
 mod-$11$ reduction of Klein's icosahedral invariant theory.
 
@@ -128,14 +139,18 @@ data, is due to Hirschfeld and Sadeh~\cite{HirschfeldSadeh1984,SadehThesis1984};
 see also the tables in Hirschfeld's book~\cite{Hirschfeld1998}. We recompute
 the extension-count spectrum of six-arcs as a byproduct of the rigidity
 theorem's exhaustive search, and we cite that classification for it rather
-than claim any priority on the numbers. What we claim as new is the
-coding-theoretic \emph{reading} of that classical geometry: that the
-deep-hole locus of the associated MDS code is exactly the $A_5$-invariant
-conic; that this containment condition characterizes the Clebsch hexagon
-among all six-arcs and recovers $A_5$ from a purely coding-theoretic
-hypothesis, not by construction; the quantitative gap theorem accompanying
-that rigidity; the canonical chirality invariant on the deep-hole coset
-leaders; and the elementary argument isolating $q=11$.
+than claim any priority on the numbers. The identification of this code's
+deep-hole locus with the $A_5$-invariant conic
+(Proposition~\ref{prop:deep-holes-conic}) is recorded, with a kernel-checked
+certificate, in the companion arcs paper~\cite[Prop.~4.6]{ArcsCompleteOutsideConic};
+we reprove it here to keep the present paper self-contained and claim no
+priority for it either. What we claim as new is the \emph{reading} of that
+geometry: that the conic-containment condition characterizes the Clebsch
+hexagon among all six-arcs and recovers $A_5$ from a purely
+coding-theoretic hypothesis, not by construction; the quantitative gap
+theorem accompanying that rigidity; the canonical chirality invariant on the
+deep-hole coset leaders; and the argument isolating $q=11$ among arcs with
+icosahedral symmetry.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -170,15 +185,17 @@ below --- does not appear among its stated results, per his own zbMATH
 summary (Zbl 0698.20032) and his 1997 self-recap; nor is it used by Storme
 and Van~Maldeghem, who prove incompleteness at $q=11$ by computer search
 without invoking any such fact from Dye. This is consistent with its
-structure: ``$\cC$ meets no bisecant'' is a per-$q$ rationality statement
-rather than a general-field one --- over any infinite field every bisecant
-meets $\cC$, and already at $q=9$ the Brianchon points lie on $\cC$ --- so it
-has no natural home in Dye's setting.} The $A_5$- and $A_6$-fixed arcs of
-$\PG(n,q)$ were catalogued more generally by O'Keefe and
-Storme~\cite{OKeefeStorme1996}, of which the present arc is the planar
-$A_5$ case; we cite that catalogue for completeness, noting that the
-planar uniqueness statement we use is the later one
-of~\cite[Prop.~12]{SVM1995}. Storme and
+structure: ``$\cC$ meets no bisecant'' is a statement about
+$\F_q$-rational points, with no general-field content --- over an
+algebraically closed field every bisecant meets $\cC$, while over
+$\mathbb{R}$, where Dye's invariant conic $x^2+y^2+z^2=0$ has no points at
+all, the condition is vacuous; and already at $q=9$ the Brianchon points lie
+on $\cC$ --- so it has no natural home in Dye's setting.} The arcs of
+$\PG(n,q)$ fixed by a \emph{primitive} $A_5$ or $A_6$ were catalogued more
+generally by O'Keefe and Storme~\cite{OKeefeStorme1996}, of which the present
+arc is the planar $A_5$ case (its stabilizer is $2$-transitive on the six
+points, hence primitive); we cite that catalogue for completeness, and take
+the planar uniqueness statement we use from~\cite[Prop.~12]{SVM1995}. Storme and
 Van~Maldeghem's Proposition~13 records, by computer search, that this
 six-arc is incomplete at $q=11$ (unlike at $q=9$, where the analogous
 $A_5$-hexagon is complete); in the language of this paper, its covering
@@ -232,14 +249,27 @@ twelve points of $\cC$.
 \end{proposition}
 
 \begin{proof}
-Direct finite computation over $\PG(2,11)$ (the same computation
-underlying the secant-index spectrum recorded in the companion arcs
-paper~\cite[Prop.~4.6]{ArcsCompleteOutsideConic}) shows that the $15$
-secants of $A$ cover all $115$ points of $\PG(2,11)\setminus A$ except the
-$12$ points of $\cC$, each of index zero. By the dictionary above, this
-uncovered locus is exactly the projective deep-hole locus, and its
-nonemptiness gives covering radius three (rather than two).
+A direct finite computation over the $133$ points of $\PG(2,11)$: for each
+of the $\binom{6}{2}=15$ secants of $A$, mark the $q-1=10$ points it carries
+other than its two arc points. The marked set is
+$\PG(2,11)\setminus(A\cup\cC)$ --- all $115$ points off the arc except the
+twelve points of $\cC$, each of which has secant index zero. By the
+dictionary above, this uncovered locus is exactly the projective deep-hole
+locus, and its nonemptiness gives covering radius three rather than two. The
+computation is reproduced independently by
+\texttt{check\_rigidity\_degenerate\_conic.py} (accompanying this paper) as
+the $|\cU(A)|=12$ entry of the census of Section~\ref{sec:rigidity}.
 \end{proof}
+
+This identification, together with its coset data and a kernel-checked Lean
+certificate, is also recorded in the companion arcs
+paper~\cite[Prop.~4.6]{ArcsCompleteOutsideConic}, where it arises as one
+instance of that paper's secant-index spectrum; we restate it here, with a
+self-contained proof, because it is the starting point of the rigidity
+theorem that is the present paper's subject. The results of
+Sections~\ref{sec:rigidity}--\ref{sec:why11} --- the rigidity equivalence,
+the gap theorem, the chirality invariant, and the isolation of $q=11$ ---
+appear in neither that paper nor elsewhere.
 
 \begin{corollary}[Deep holes as a named variety]
 \label{cor:named-variety}
@@ -247,10 +277,8 @@ Every affine deep hole of $C$ lies over a projective direction on $\cC$; the
 affine deep-hole count is $12\times10=120$, and each deep-hole coset has
 exactly $\binom{6}{3}=20$ minimum-weight leaders. In particular, the
 complete deep-hole set of $C$ is exactly the set of $\F_{11}$-points of the
-$A_5$-invariant conic $\cC$ --- to our knowledge the first instance of an
-MDS code whose full deep-hole set coincides with the $\F_q$-point set of a
-positive-dimensional named variety, rather than merely being contained in
-or built from one.
+$A_5$-invariant conic $\cC$: not merely contained in a positive-dimensional
+variety, nor built from one, but equal to its full $\F_q$-point set.
 \end{corollary}
 
 \begin{proof}
@@ -340,9 +368,13 @@ conic;
 \begin{proof}[Proof sketch]
 Every four points of a six-arc, no three collinear, form a projective
 frame; normalizing that frame to $e_1,e_2,e_3,(1,1,1)$ and sweeping the
-remaining two points over all legal completions enumerates every
-projective class of six-arc exactly once, giving $1548$ frame-normalized
-representatives. For each representative, $\cU(A)$ and its conic
+remaining two points over all legal completions meets every
+projective class of six-arc at least once, giving $1548$ frame-normalized
+representatives. The enumeration is by representatives, not by classes: a
+class with stabilizer $S$ appears $360/|S|$ times, and summing $360/|S|$
+over the $1548$ representatives gives fifteen classes in all. Exhaustiveness
+is what the argument needs, and representatives supply it; the multiplicities
+are an artifact of the normalization and carry no projective meaning. For each representative, $\cU(A)$ and its conic
 membership are computed by exact linear algebra (secant coverage by direct
 enumeration; conic containment by the nullspace of the $6\times6$
 quadratic-monomial evaluation matrix restricted to $\cU(A)$, allowing
@@ -361,7 +393,8 @@ the $1548$ representatives, all in a single $\mathrm{PGL}(3,11)$-orbit
 orbit is the Clebsch hexagon class, and on it $\cU(A)$ is exactly the
 twelve points of the $A_5$-invariant conic $\cC$. No other class has
 $\cU(A)$ contained in \emph{any} conic --- every one of the remaining
-classes, including the $252$ six-arcs already lying on a conic, has
+classes, including the concyclic six-arcs (those whose own six points lie on
+a conic, $252$ of the $1548$ representatives), has
 $|\cU(A)|\ge16$ with $\cU(A)$ off every conic. This gives
 (iii)$\Leftrightarrow$(iv)$\Leftrightarrow$(v), and (ii)$\Rightarrow$(i) is
 immediate. For (i)$\Rightarrow$(ii) we exclude the degenerate case, since
@@ -466,11 +499,15 @@ combinatorial overlay.
 \label{sec:why11}
 
 The phenomenon of Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to
-$q=11$. Three elementary facts meet only there.
+$q=11$. Two independent constraints meet only there: an elementary counting
+bound that caps $q$, and the rationality of the icosahedral group that
+selects within the capped range. We are explicit about the division of
+labour, because the counting bound is often the more memorable half and is
+the weaker one: it excludes no prime power in range on its own.
 
 \begin{lemma}[Secant-covering bound]
 \label{lem:secant-covering}
-Let $A$ be a six-arc of $\PG(2,q)$ ($q$ odd, $q>2$) disjoint from a conic
+Let $A$ be a six-arc of $\PG(2,q)$ disjoint from a conic
 $\cC$, and suppose $A$ is complete outside $\cC$: every point of
 $\PG(2,q)$ lying off $A$ and off $\cC$ lies on some secant of $A$. Then
 \[
@@ -511,19 +548,36 @@ integer, $q\le14$.
 Suppose $q$ is a prime power such that some six-arc of $\PG(2,q)$ is
 complete outside a conic $\cC$ (every point off the arc and off $\cC$ lies
 on a secant) and has deep-hole locus exactly the $\F_q$-points of $\cC$.
-Then $q\le14$; if in addition the relevant automorphism group is an
-icosahedral $A_5\subset\mathrm{PGL}_2(q)$, so that $\F_q$-rationality
-requires $q\equiv\pm1\pmod{10}$ (or $q=5$), the only candidate in range is
-$q=11$.
+Then $q\le14$. If in addition the arc's stabilizer contains an icosahedral
+$A_5\subset\mathrm{PGL}_2(q)$, then $q=11$.
 \end{theorem}
 
+\noindent
+Two remarks on what this does and does not say. First, the counting bound of
+Lemma~\ref{lem:secant-covering} is not what isolates $q=11$: \emph{every}
+prime power $q\le14$ satisfies $15(q-1)\ge q^2-6$ --- at $q=13$, for
+instance, $180\ge163$ --- so the bound caps the range and nothing more. All
+of the discrimination inside that range is done by the rationality of $A_5$.
+Second, that rationality enters as a \emph{hypothesis on the arc}, not as a
+consequence of the coding condition. This is worth stating plainly, because
+Theorem~\ref{thm:rigidity} recovers $A_5$ from the coding condition and it
+would be circular to read that as licence to assume $A_5$ here: the recovery
+is a theorem about $q=11$, established by an exhaustive search of
+$\PG(2,11)$, and carries no information about other $q$. Whether some
+six-arc with no icosahedral symmetry has deep-hole locus exactly a conic at
+another $q\le14$ is not settled by the argument below; we leave it open
+(Section~\ref{sec:further}).
+
 \begin{proof}[Proof sketch]
-By Lemma~\ref{lem:secant-covering}, $q\le14$. Among prime powers $q\le14$
-admitting an icosahedral $A_5\subset\mathrm{PGL}_2(q)$ one needs
-$q\equiv\pm1\pmod{10}$ or $q=5$ (the classical Dickson criterion for
-$A_5\subset\mathrm{PSL}_2(q)$); the candidates at most $14$ are $q=5,9,11$.
-The hexagon is too small to be an arc realizing the icosahedral action at
-$q=5$. At $q=9=3^2$, $9\equiv-1\pmod{10}$ passes the rationality filter,
+By Lemma~\ref{lem:secant-covering}, $q\le14$. Suppose the stabilizer
+contains an icosahedral $A_5\subset\mathrm{PGL}_2(q)$. By the classical
+Dickson criterion, $A_5\subset\mathrm{PSL}_2(q)$ forces $q\equiv\pm1
+\pmod{10}$, or $q=5^h$, or $q=2^{2h}$ (where $A_5\cong\mathrm{PSL}_2(4)$);
+the prime powers at most $14$ meeting one of these are $q=4,5,9,11$. At
+$q=4$ a six-arc of $\PG(2,4)$ is a hyperoval, hence complete, so its
+deep-hole locus is empty and the phenomenon is vacuous; the same holds at
+$q=5$, where six points exhaust $q+1$ and the arc is again complete. At
+$q=9=3^2$, $9\equiv-1\pmod{10}$ passes the rationality filter,
 so it must be excluded on its own terms rather than by the filter: the
 analogous $A_5$-invariant six-arc at $q=9$ is in fact \emph{complete}
 (covering radius two, not three), so its deep-hole locus is empty rather
@@ -539,9 +593,9 @@ Three coincidences meet at $11$ and nowhere else: it is the only prime with
 $p+1=12$, so the twelve vertices of the icosahedron exhaust the projective
 line; it is prime to $60$, so the icosahedral group survives reduction
 faithfully; and it is small enough that the fifteen secants of a six-arc
-have just enough room to cover every point off the conic --- the counting
-inequality above forces $q\le14$, and rationality of $A_5$ closes the door
-to everything but $11$.
+have just enough room to cover every point off the conic. Only the last of
+these is the counting inequality, and it forces just $q\le14$; rationality
+of $A_5$ closes the door on the rest of that range.
 The failure past $q=11$ is worth recording concretely, since the next
 admissible prime is the first place the construction could have continued.
 At $q=19$ ($19\equiv-1\pmod{10}$, so the rationality filter passes and only
@@ -566,11 +620,12 @@ The shape of the failure is instructive. The twenty conic points remain deep
 holes --- $\cC\subset\cU(A)$ still --- but they no longer exhaust $\cU(A)$:
 $120$ further points of $\PG(2,19)$ escape all fifteen secants, and
 $\cU(A)$ lies on no conic (the quadratic-monomial evaluation matrix of
-$\cU(A)$ has full rank six). This is exactly the failure mode
-Lemma~\ref{lem:secant-covering} predicts. The fifteen secants have total
-capacity $15(q-1)=270$, while $q^2-6=355$ points lie off the arc and off the
-conic; the deficit is unavoidable, and the $120$ survivors are what it
-looks like. At $q=11$ the same capacity, $150$, comfortably exceeds the
+$\cU(A)$ has full rank six). The deficit itself is forced by
+Lemma~\ref{lem:secant-covering}: the fifteen secants have total capacity
+$15(q-1)=270$, while $q^2-6=355$ points lie off the arc and off the conic,
+so at least $85$ points must escape, and $120$ in fact do. (That the twelve
+--- here twenty --- conic points also remain uncovered is a separate fact,
+not something the lemma predicts.) At $q=11$ the same capacity, $150$, comfortably exceeds the
 $115$ points needing cover, and the excess is spent on overlap. The
 phenomenon therefore degenerates immediately past $q=11$ rather than
 persisting into a family --- and it degenerates by the conic ceasing to be
@@ -628,17 +683,23 @@ by Elkies~\cite[\S3.3]{Elkies1999}.
 \section{Further remarks}
 \label{sec:further}
 
-\paragraph{An edge-level Schreier witness.} The twelve points of $\cC$,
-together with the graph joining two points whenever they are the endpoints
-of one of the arc's six missing (antipodal) chords, form the icosahedral
-graph on twelve vertices: five-regular, with thirty edges partitioning into
-the six antipodal chords together with the twenty-four remaining
-edge-orbit representatives under $A_5$. We record this as a
-\texttt{decide}-grade combinatorial witness of the icosahedron sitting
-inside the deep-hole conic's incidence structure, in the spirit of the
-antipodal-chord partition already recorded in the companion arcs
-paper~\cite[Prop.~4.6(iv)]{ArcsCompleteOutsideConic}; we do not build any
-further claim on it here.
+\paragraph{An edge-level Schreier witness.} Join two of the twelve points of
+$\cC$ whenever the chord through them contains a point of the arc --- that
+is, whenever that chord is a secant of $A$. The resulting graph on twelve
+vertices is the icosahedron: five-regular with thirty edges, and in fact
+isomorphic to the standard icosahedral presentation by an explicit
+vertex bijection. The thirty edges partition into six five-edge matchings,
+one for each point of the arc, consisting of the chords through that point;
+each such matching misses exactly one antipodal pair, the six missed
+antipodal chords are distinct, and adjoining them completes the six
+matchings to a one-factorization. The six antipodal chords are precisely
+\emph{non}-edges of this graph: an antipodal pair spans no secant, which is
+the incidence form of the statement that the arc lies on no conic through
+them. All of this is \texttt{decide}-grade and kernel-checked in the
+companion Lean development (the adjacency, the explicit isomorphism, the
+antipodal non-edges, and the one-factorization), and the chord partition is
+recorded in the companion arcs paper~\cite[Prop.~4.6(iv)]{ArcsCompleteOutsideConic};
+we do not build any further claim on it here.
 
 \paragraph{An open question: higher $k$.} The present phenomenon is for
 plane arcs, i.e.\ codes of dimension $k=3$. We do not know of any

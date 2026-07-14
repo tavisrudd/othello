@@ -21,7 +21,9 @@ A directory ≠ a paper. See the resolved decomposition next.
 
 ## Decomposition (resolved — Fable review 2026-07-12)
 
-**Target: five papers (+ one conditional) + two OEIS entries** — not one per directory.
+**Target: six papers (+ one conditional) + two OEIS entries** — not one per directory. The 2026-07-12
+review resolved five (+1); **Clebsch (7) was added 2026-07-13**, after that review, as a spin-out of
+the Arcs q=11 material. Its dependency on Arcs is ruled in *Clebsch after Arcs* below.
 
 1. **Games flagship** (`nofil-finite-geometry-outcomes`) — folds sum-free ℤₙ + affine AG(n,q) +
    projective mirror outcomes + the boundary/sharpness negatives into one classification.
@@ -33,6 +35,9 @@ A directory ≠ a paper. See the resolved decomposition next.
 5. **Continuation-graph rigidity, N1 only** (`continuation-graph-rigidity`) — N2 demoted to remarks.
 6. **(Conditional) Coding / LRC** — manuscript and internal adversarial audit complete; promote
    after the external specialist citation-chain review.
+7. **Clebsch hexagon code** (`clebsch-hexagon-code`) — added 2026-07-13, post-review. The rigidity
+   TFAE + gap theorem + chirality ℤ/2 + why-11 for the `[6,3,4]₁₁` icosahedral code. **Ships after
+   Arcs (3)**, which owns the underlying deep-holes=conic identification; see *Clebsch after Arcs*.
 
 Plus the two `oeis-submissions/` entries (independent of the papers).
 
@@ -79,9 +84,38 @@ Ordered by formalization-to-full-trust distance:
 | 2 | Games flagship                    | Core P-theorems done; owes sum-free law, boundary negatives, capacity-2 sharpness, Scharlau/Witt lemma |
 | 3 | Dihedral (+ D₂ₘ)                  | Owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions                                |
 | 4 | Arcs                              | Owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement                  |
-| 5 | Coding / LRC (conditional)        | Lean and manuscript complete; externally gated on specialist priority review, not formalization       |
-| 6 | Baer ⊕ completion                 | Exact collision accounting Lean-built; all order-five profiles unproved pending Lean geometry/certificates; citations and priority gates remain |
-| 7 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
+| 5 | **Clebsch hexagon**               | **Must follow Arcs (#4) — hard dependency, not a preference; see *Clebsch after Arcs* below.** Owes chirality/gap/TFAE Lean (TFAE likely needs `native_decide` — open decision), two checkers, C128 |
+| 6 | Coding / LRC (conditional)        | Lean and manuscript complete; externally gated on specialist priority review, not formalization       |
+| 7 | Baer ⊕ completion                 | Exact collision accounting Lean-built; all order-five profiles unproved pending Lean geometry/certificates; citations and priority gates remain |
+| 8 | Continuation N1                   | No manuscript; hardest formalization; collaborator route if it stalls                                 |
+
+### Clebsch after Arcs — the novelty seam (ruled 2026-07-14)
+
+`clebsch-hexagon-code` postdates the 2026-07-12 decomposition and is **not** among its five (+1). It
+spun out of the `arcs` q=11 material, and that parentage created a genuine salami-slicing exposure
+that the original ruling did not address: **clebsch's Prop 3.1 *is* arcs' Prop 4.6(i)** — same
+statement, same computation, with the Lean certificate living in `arcs` (`comp-q11-mds-deep-holes`).
+Clebsch's "first identification of a deep-hole set with a named variety" therefore rested on a fact
+`arcs` also publishes. Two papers, one computation, one novelty claim spread across both.
+
+**Ruling — the split stands, the seam moves:**
+
+1. **`arcs` submits first and owns the identification.** It is near submission-ready, holds the
+   certificate, and already states the fact.
+2. **`clebsch` claims only the reading** — the rigidity TFAE, the gap theorem, the chirality `ℤ/2`,
+   why-11. None of that appears in `arcs`; all of it is the actual paper. Cor 3.2's "first" is
+   demoted from novelty-carrier to setup, and the abstract/intro now name the companion.
+3. **§3 is self-contained** — the computation is 133 points; it is proved in place and cites `arcs`
+   as "see also". This also removes the paper's dependency on an unpublished working paper for its
+   own foundation, which a referee cannot check.
+
+**Not folded**, deliberately: the spines differ (`arcs` = defect identity + F₁₆ classification;
+`clebsch` = rigidity + gap + chirality + why-11). Folding would bury a five-way rigidity theorem
+inside a paper about something else and make `arcs` incoherent.
+
+**The order is a decision, not an artifact of which finishes first.** Once `arcs` is out, `clebsch`
+cites a published companion instead of a working paper, and move 3 becomes optional rather than
+load-bearing. Lane map: `../notes/handoffs/2026-07-13-clebsch-paper.md`.
 
 **Highest-leverage first move:** stand up the public-artifact spine — extract the first public repo
 (tagged `FiniteGeom` base + the Lean-complete mirror outcomes), mint the Zenodo DOI, submit the

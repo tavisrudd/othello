@@ -11,6 +11,34 @@ PDF; builds with texliveFull — Small/Medium lack `enumitem`). Indexed in
 [papers-index.md](../../papers/papers-index.md) as `clebsch`. **Venue:** Designs, Codes and
 Cryptography / Finite Fields and Their Applications / J. Geometry — **not** IEEE-TIT.
 
+## Paper sequencing and the novelty seam vs `arcs` (ruled 2026-07-14)
+
+**The overlap:** this paper's Prop 3.1 (deep holes of the `[6,3,4]₁₁` code = the twelve-point conic)
+*is* the `arcs` paper's Prop 4.6(i) — same statement, same computation, and `arcs` carries the Lean
+certificate (`comp-q11-mds-deep-holes`). Cor 3.2's "first identification of a complete deep-hole set
+with the `F_q`-points of a named variety" therefore rested on a fact `arcs` also states. Two papers,
+one computation, a novelty claim spread across both: the classic salami-slicing pattern a referee
+flags.
+
+**Ruling — split stays, seam moves:**
+1. **`arcs` submits first and owns the identification.** It is near submission-ready, carries the
+   Lean certificate, and the fact is already Prop 4.6(i) there. `clebsch` cites it as setup.
+2. **`clebsch` claims only the reading**: the rigidity TFAE, the gap theorem, the chirality `ℤ/2`,
+   and why-11. That is the whole point of the paper and is unambiguously its own — none of it appears
+   in `arcs`. Cor 3.2's "first" is demoted from novelty-carrier to setup.
+3. **§3 is made self-contained** and says the relationship out loud: the Prop 3.1 computation is 133
+   points and `check_rigidity_degenerate_conic.py` already does it, so prove it in place and cite
+   `arcs` as "see also" rather than as the proof. This also removes the current dependency of the
+   paper's foundation on a working paper a referee cannot obtain.
+
+**Why not fold:** the two have genuinely different spines (`arcs` = defect identity + the F₁₆
+classification; `clebsch` = rigidity + gap + chirality + why-11). Folding would bury a five-way
+rigidity theorem inside a paper about something else and make `arcs` incoherent.
+
+**Order:** `arcs` → `clebsch`. Once `arcs` is out, `clebsch` cites a published companion for its
+setup instead of a working paper, and move 3 becomes optional rather than necessary. This ordering is
+a decision, not an artifact of which paper finishes first.
+
 **Date**: 2026-07-13
 **Status**: CONVERGED after C121–C127 + four adversarial/Tao passes (red-team, dual-variety exam,
 Thread A rigidity, Thread B loop-back). Scoped to a **modest single-spine finite-geometry paper**.
@@ -55,9 +83,27 @@ Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH
   text. The residual risk is a finite-field aside in the body. Nothing depends on it; the ILL would
   only upgrade LOW to zero.
 - **DMP AMC-numbering residual** — we cite Thm 6.3 / (6.4) / Thm 7.7 by **arXiv v2** numbering and the
-  bibliography says so. The published AMC 17(5) numbering is unverified (paywalled); v2 postdates
-  acceptance and the abstract matches verbatim, so it is very likely identical. Confirm if a copy
-  becomes reachable. Safe either way as written.
+  bibliography says so. The published AMC 17(5) numbering is unverified (paywalled). **Chronology is
+  unfavorable, not favorable:** v2 is stamped 30 Jun 2021 and AMC 17(5) is 2023, so v2 *predates*
+  publication by ~2 years, and the arXiv page carries **no journal-ref** — the authors never synced
+  arXiv to the published version. Renumbering between v2 and print is therefore more plausible than
+  less. The bibliography's v2 disclosure makes the paper safe either way; what is not safe is
+  asserting the numbers match. Confirm against the published version if a copy becomes reachable.
+  (Corrected 2026-07-14: an earlier version of this entry claimed "v2 postdates acceptance … very
+  likely identical", which has the chronology backwards.)
+
+**Open obligations (surfaced by the 2026-07-14 adversarial review; previously recorded nowhere):**
+- **C128 — kernel-check the syzygy `H³+T²=f⁵ mod 11`.** The manuscript states the syzygy as fact
+  (§7). C125 verified it in Python (`notes/2026-07-13-c125-klein-resolvent.md`), but the Lean
+  kernel-check is open and the task sits only in the queue. NB the handoff previously said the C125
+  reduction facts were "all certified" — that oversells while C128 is open.
+- **Checker-coverage gap.** Three finite claims ship with no checker: the gap theorem's
+  252-perturbation spectrum (§4 Thm 4.2), the chirality orbit computation (§5 Prop 5.1), and the
+  syzygy (§7). All three were independently re-derived in the review and hold exactly as stated
+  (spectrum `{18:30,19:60,20:90,22:42,24:30}`, min 18, ≤7 conic points surviving; `#Stab`=60, orbits
+  `[10,10]` complementary) — so this is a reproducibility gap, not a math gap. Cheapest fix: two
+  small scripts, mirroring the existing six.
+- **Sequencing/novelty seam vs the `arcs` paper — see §Paper sequencing below.**
 
 **Closed 2026-07-14 (were the outline's blocking research items):**
 - **O'Keefe–Storme 1996 — was never open; the outline was stale.** C129 already settled it: the arc
@@ -78,7 +124,11 @@ Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH
   PG(2,q), and its `[n,n−3,4]_q` MDS code per their Def 6.1. **No GRS/NRC/conic hypothesis, no
   restriction on n, k, q, or characteristic** — covers our non-GRS q=11 case directly, so the Lean
   fallback is not needed. DMP explicitly anticipate non-GRS arcs ("the corresponding codes are not
-  GDRS or GTRS") and tabulate `c_i` for our shape; the GRS/conic hypotheses live downstream in their
+  GDRS or GTRS"); note their `c_i` table (6.1) is for *complete* arcs (n=6 at q=7/8/9; n=7 at q=11)
+  and so contains nothing of our shape — the coverage comes from Thm 6.3's own "both the cases c₀=0
+  and c₀≠0 are possible" clause, not from the table. (Their n=6, q=9 row `(60,15,10)` is the complete
+  q=9 sibling of our `(90,15,10)` and independently corroborates `check_q9_exclusion.py`.) The
+  GRS/conic hypotheses live downstream in their
   Thms 6.4/6.5/6.8/6.10, which we don't cite. Leader count `binom(n,3)` is their (6.4) and
   independently the `d=4` case of `binom(n,d−1)` (their Thm 7.7) — two supports, so 20 is an
   instantiation, not a fitted constant. **Two §3 fixes applied:** "adjoining x preserves MDS iff
