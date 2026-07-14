@@ -206,6 +206,39 @@ Galois rep** (ρ_{Δ,11} has big image SL₂(F₁₁) — 11 non-exceptional Ser
 (generic PSL₂(11), no icosahedral tie); Clebsch graph SRG(16,5,0,2) (name-share only; our code is
 three-weight).
 
+### Family tree (siblings/cousins) — computed; p=11 PROVEN-unique, family runs through k not p
+
+Sibling search across √5-primes × all small A₅ plane-orbits (arc? complete-outside? deep-hole set?):
+
+| p | 6-orbit (axis-poles) | 10-orbit | 15-orbit |
+|---|---|---|---|
+| **11** | **arc, complete-outside, deep = FULL conic ✓ HEALTHY** | complete-outside, deep = ∅ | not an arc |
+| 19 | arc, **not** complete-outside (over-covers) | complete-outside, deep = ∅ | not an arc |
+| 29 | arc, not complete-outside | not complete-outside | not an arc |
+
+- **Only (p=11, 6-orbit) is healthy** — every other (p,orbit) either isn't a complete-outside arc or
+  has empty deep holes (radius 2). Kills the "√5-family of codes" hope but converts it into a clean
+  **uniqueness theorem**. Varying the orbit does NOT rescue higher primes.
+- **Characterization of "healthy" (publishable, explains the singularity):** all three of
+  **(a)** orbit is an arc; **(b)** pole-arc is complete-outside (deep holes ⊆ conic, needs arc size =
+  ρ_𝒞(p)); **(c)** deep holes = the WHOLE conic (vertex orbit fills the line, p+1=12). All three
+  coincide only at icosahedron/p=11. Failures diagnostic: octa/cube fail (a)/(b) + non-chiral (S₄
+  sign); dodeca/p=19 fails (b); tetra parabolic.
+- **Polytope siblings real, code-siblings degenerate.** 57-cell (PSL₂(19), hemi-dodecahedron) is the
+  true {3,5,3} abstract-polytope sibling of the 11-cell — but the code/deep-hole structure dies where
+  the p=19 arc fails complete-outside. F1 (11-cell) stands as *structure*, not a code family.
+- **Cousins by group (faithfulness to arc + deep-var + chirality + modular), ranked:** W(E₆)/27-lines
+  /GQ(2,4) over F₄ [best, own lane] > A₆/Valentiner⊂PGL₃ (Hom(A₆,ℤ/2)=0→chiral) > PSL₂(7)/Klein
+  quartic (curve not plane-arc) > M₁₂-S(5,6,12)/Hessian (share substrate only).
+- **Cousins by modular object [open]:** if f = j-denominator, ours is the **level-1/icosahedral** case;
+  natural cousins = other **genus-0 Hauptmodul / McKay–Thompson (Γ₀(N)+) moonshine levels**. Richest
+  conjectural family framing; entirely open, no in-repo handle — a question for a modular-forms person.
+- **THE relative that turns "singular" into "family" is not a sibling — it is the k-TOWER (dual
+  variety).** Prime-siblings are proven dead, so the family must come from varying **k**: if deep
+  holes of a non-GRS [n,4] MDS code = tangent-developable quartic, q=11/k=3 is rung 1 of a real tower.
+  Highest-value relative, partially testable in-repo now (C123). The paper's path from singular→family
+  runs through k, not p.
+
 ### Ranked open checks (surprising × real × deliverable)
 
 1. **C126 [in-repo, HIGH]** — Family A at p=5,7,19: build octa/cube/dodeca axis-pole arcs, test
