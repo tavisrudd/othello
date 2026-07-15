@@ -205,13 +205,13 @@ Three findings, in decreasing order of certainty:
    are their only examples** (q=7: the quadrangle; q=11: the Clebsch hexagon, as an exterior set).
    Their computer search shows no such set for 11 < q ≤ 31 and they **conjecture none exists for
    q > 31** — open since 1991. Follow-ups: Blokhuis–Seress–Wilbrink, "Characterization of complete
-   exterior sets of conics," *Combinatorica* 12 (1992) 143–147; M. De Boeck, "On sets without
-   tangents and exterior sets of a conic," arXiv:1201.0484; a 2025 arXiv line on "untouchable
+   exterior sets of conics," *Combinatorica* 12 (1992) 143–147; **Geertrui Van de Voorde**, "On sets
+   without tangents and exterior sets of a conic," arXiv:1201.0484 (the attribution to "M. De Boeck"
+   in an earlier version of this note was wrong); a 2025 arXiv line on "untouchable
    sets" (2505.08551) shows the area is active. Consequences: (a) the *object* "6-arc with all
    joins external at q=11" is prior art and must be cited; (b) the BSW question is exactly
-   "does ω_arc-restricted-to-external-points reach (q+1)/2" — our census is the finer invariant
-   and **already verifies the BSW bound at q=37 in the stronger mixed-type form**, one prime past
-   their 31; (c) the covering/deep-hole overlay — the entire coding reading, rigidity TFAE, gap,
+   "does ω_arc-restricted-to-external-points reach (q+1)/2" — our census is the finer invariant;
+   (c) the covering/deep-hole overlay — the entire coding reading, rigidity TFAE, gap,
    chirality — appears nowhere in this literature. Sources:
    [arXiv:1201.0484](https://arxiv.org/abs/1201.0484),
    [Combinatorica](https://link.springer.com/article/10.1007/BF01204717),

@@ -104,11 +104,16 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
   audit + handoff §Open-lit.
 - **C146 `[clebsch]` [QUEUED 2026-07-14 — BLOCKS SUBMISSION]** — re-base the manuscript's prior art
-  onto Edge 1956 and Blokhuis–Seress–Wilbrink 1991/1992, neither of which it cites: obtain the texts,
-  read Edge §§18–32 in full and settle whether he states the covering fact, rewrite the §2 priority
-  footnote (currently argued against Dye 1991, the wrong paper), and frame the healthy census against
-  the open BSW conjecture → `notes/2026-07-14-c146-edge-bsw-prior-art.md`. TODO planted at the §2
-  site in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.
+  onto the Clebsch 1871 → Edge 1956 → Blokhuis–Seress–Wilbrink 1991/1992 lineage, none of which it
+  cites. Edge §§29–32 (read: `notes/2026-07-14-gem-lit-exterior-sets.md`) constructs the q=11 object
+  outright — 6 external points, 15 joins skew to the conic, named "Clebsch hexagons" — and BSW's
+  complete exterior set of size (q+1)/2 *is* that object renamed. Settled by the lit sweep: the
+  covering fact appears in neither Edge nor Van de Voorde, so the deep-hole reading stays ours; also
+  cite Van de Voorde's sets-without-tangents → LDPC stopping-set link as the one existing coding
+  connection. Open: the two BSW originals are ILL-only and unread; rewrite the §2 priority footnote,
+  which currently argues against Dye 1991, the wrong paper →
+  `notes/2026-07-14-c146-edge-bsw-prior-art.md`. TODO planted at the §2 site in
+  `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.
 
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem
