@@ -399,6 +399,15 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   complete q=11 rank/locus table as seed data, while C160's finite calculation is superseded by
   C187 and retains only its q=5 literature/priority tail; C155 and the BSW conjecture are unchanged →
   `notes/2026-07-15-c190-gem-clebsch-routing.md`.
+- **C191 `[gem-mining]` [REPORTED 2026-07-15 — METHOD GATE PASSED, IN-SAMPLE ONLY]** — backfilled the
+  gap-mining method's cell ledger (`notes/2026-07-15-gems-theory-gaps-method.md`) with the lane's
+  decided cells scored as-if-prospective. The method survives its own history: the first draft gave
+  the Clebsch cell tier 1 by cause and tier 4 by seam simultaneously, and ranked the worthless
+  mixed-type invariant first. The fit is in-sample — these cells shaped the method — so its power was
+  falsification only, and the declared null (cause classes uncorrelated with yield) stays untested.
+  Open tail: the non-circular instrument calibration (Edge 1956 citers via MathSciNet/zbMATH vs the
+  OpenAlex closure), without which object-level emptiness is a lead, not a reading. First prospective
+  datum is C177 → `notes/2026-07-15-c191-gap-mining-backfill.md`.
 
 **Relative-conic arcs lane (`relconic`) — sweep fallout (2026-07-14):** see
 [handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md). The `arcs` manuscript was edited

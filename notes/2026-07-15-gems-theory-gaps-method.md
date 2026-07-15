@@ -2,7 +2,8 @@
 
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-15
-**Status**: method only — no cells mined against it yet. First pass is the backfill in § First steps.
+**Status**: backfilled and surviving its own history ([C191](2026-07-15-c191-gap-mining-backfill.md));
+the declared null is untested and awaits C177 as the first prospective cell.
 
 **Terminology.** A *theory gap* here is an un-asked question — a region of question-space nobody has
 entered. It has nothing to do with the **gap theorem** of C165/C171, which is a statement about conic
@@ -397,19 +398,31 @@ answer is boring prevents re-mining it. Every cell entered here, whatever the ve
 let a batch of cells refute that. A ledger that records only verdicts cannot distinguish "the ordering
 works" from "we believed the ordering", and the ordering generalizes from a single hit until it does.
 
-| Cell `(O, D, q)` | Cause class at entry | Cause as named | Value predicates | Kill stage reached | Gate cost paid | Verdict | Evidence level |
-|------------------|----------------------|----------------|------------------|--------------------|----------------|---------|----------------|
-| *(none yet)*     |                      |                |                  |                    |                |         |                |
+Backfilled 2026-07-15 by [C191](2026-07-15-c191-gap-mining-backfill.md), which holds the full scoring
+and the reasoning per cell. Rows below are the summary.
+
+| Cell `(O, D, q)`                        | Cause class | Cause as named          | Value        | Kill stage    | Gate cost      | Verdict          | Evidence     |
+|-----------------------------------------|-------------|-------------------------|--------------|---------------|----------------|------------------|--------------|
+| Clebsch hexagon / arcs↔MDS / deep holes | structural  | fame asymmetry (s4)     | pass         | survived      | six sweeps     | HIT              | L3/L4, gated |
+| conic 6-subsets / design / hexads?      | structural  | well-posedness (s1)+ s4 | partial      | survived      | six sweeps     | HIT, bridge-grade| L3/L4        |
+| mixed arc-cliques / internal / ω_arc    | structural  | definitional keying (s2)| **fail**     | n/a           | none           | novel, worthless | L2/L3        |
+| Wu conics / internal / passant six-set  | n/a         | n/a — object probe      | pass         | step 6        | none           | closed negative  | n/a          |
+| conic 8-subsets q=23 / design / octads? | n/a         | statement, not mechanism| fail         | step 6+rule 4 | none           | dead             | n/a          |
+
+**The backfill is an in-sample fit, not a validation.** These cells shaped the method, so passing was
+close to guaranteed and carries little evidential weight. Its power was falsification — a mis-rank
+here would have killed the method — and the ordering survived it. Survived, not validated. **The
+declared null remains untested**; no retrospective batch can move it. The first genuine datum is C177,
+scored before it is run. Do not add retrospective cells: they inflate confidence without testing
+anything.
 
 ## First steps
 
-1. **Backfill before mining.** Populate the ledger with already-decided cells, scored *as-if
-   prospective*: the Clebsch hit, C147, the mixed-type invariant, C177, C178, the octad negative.
-   Cheap, zero new reading, and it calibrates the machine on known ground — the mixed-type row exposes
-   the value problem, the octad row exercises the neighbouring-parameter guard, and the Clebsch row
-   tests whether the static eval would have promoted the one cell that mattered. **If the method
-   mis-ranks its own history, no new cell should trust it.** This is the method's validation gate and
-   it is a hard gate, not a warm-up.
+1. **Backfill — DONE**, [C191](2026-07-15-c191-gap-mining-backfill.md). The method survives its own
+   history: the revision promotes the founding hit and ranks the known-worthless cell last, while the
+   first draft assigned the Clebsch cell tier 1 by cause and tier 4 by seam *simultaneously*. Read
+   C191's verdict section before relying on that: it is an in-sample fit and its power was
+   falsification only.
 2. **Calibrate the instrument, non-circularly.** Diff Edge 1956's citers from MathSciNet or zbMATH
    against the OpenAlex closure — a mid-century seed, by a route that does not pass through the
    instrument under test. Do **not** use the vet's BSW 1992 list: it is an OpenAlex query itself, and
