@@ -3,9 +3,9 @@
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
 **Status**: **IN PROGRESS** — the C174 spine, C176 finite core, q=4/q=5/q=9 leaves, C185 decoding
-synthesis, C187 arithmetic moments, and the actual q=11 defect-to-Dye seam all pass narrow
-elaboration and axiom audit. Remaining work is the A₅ action certificate, C180's odd-field line
-lemma, the geometric bridge for the general small-`k` moments, and the manuscript synthesis.
+synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
+narrow elaboration and axiom audit. Remaining work is the A₅ action certificate, C180's odd-field
+line lemma, and the manuscript synthesis.
 
 ## Live subagent roster
 
@@ -18,6 +18,7 @@ compaction and are the recovery handles for `collaboration.list_agents`/`followu
 | `/root/dye_interface_design` | exact imported Dye boundary | design only; root implements and validates | complete; two q=11 axioms only, with downstream dependency split audited |
 | `/root/six_arc_defect_bridge` | actual geometric `u+c=22` bridge | no Lean or Lake invocation; root validates | complete; bridge passes with standard axioms and no Dye dependency |
 | `/root/a5_lean_static` | C186 finite `A5` point-action bridge | no Lean or Lake invocation; root validates | active repair after the row-sharded pass exposed reducibility failures without an OOM |
+| `/root/small_k_geometric_adapter` | C187 actual projective moment seam | no Lean or Lake invocation; root validates | complete; all six manuscript-facing results pass warning-clean with standard axioms |
 
 Root owns integration, the Dye axiom interface and consequences, validation sequencing, and
 manuscript/handoff synchronization. No two agents may run a Lean build concurrently. All current
@@ -43,6 +44,8 @@ modules.
 The same strict-kernel verdict now holds for:
 
 - `SmallKChordMoments.lean`: the `k=4,5,7` arithmetic specializations and prime-power reduction;
+- `SmallKGeometricBridge.lean`: actual projective 4-/5-/7-arc uncovered formulas, the q=5
+  four-arc conclusion, five-arc impossibility, and q=11/q=13 seven-arc spectra;
 - `Q11DecodingSynthesis.lean`: the total distance oracle, uniform twenty deep-hole supports,
   ambiguity strata, and Brianchon/weight-two bridge; and
 - `SixArcDefectBridge.lean`: the actual projective-plane identity
@@ -70,8 +73,7 @@ alternative, not a formalization of Dye's conceptual proof.
 
 1. finish the memory-bounded A₅ action certificate and certify C186 point-orbit facts plus the
    remaining chirality action layer;
-2. connect C187's proved arithmetic specializations to the geometric `Moments.lean` definitions;
-3. formalize C180's affine-direction/edge-colouring line lemma; the conditional conic-rigidity
+2. formalize C180's affine-direction/edge-colouring line lemma; the conditional conic-rigidity
    implication below Dye is already kernel-checked;
 4. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
    is stable.
