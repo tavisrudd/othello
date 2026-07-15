@@ -222,15 +222,17 @@ Three findings, in decreasing order of certainty:
    ([PDF](https://webhomes.maths.ed.ac.uk/~icheltso/edge2016/pdf/1956a.pdf)): at p=11 he describes
    "the distribution of the points external to χ in sets of 6, the 15 joins of points of such a set
    being all skew to χ and concurrent in threes at 10 different points all internal to χ," develops
-   the syntheme/synthematic-total (S₆) structure, and writes "we may say, **with Clebsch**, that
-   the points of χ form a hexagon endowed 10 times over with the Brianchon property."
+   the syntheme/synthematic-total (S₆) structure. (**Correction, vet §1.11:** the "we may say, with
+   Clebsch, that the points of χ form a hexagon endowed 10 times over with the Brianchon property"
+   quote spliced in here belongs to Edge's **§19, the q=5 on-conic case**, not to the p=11
+   description — two different configurations, and the splice must not reach the manuscript.)
    **The manuscript cites neither Edge nor BSW** (grepped). The priority footnote currently argued
-   against Dye 1991 must be re-based on Edge 1956; his §§18–32 (detailed p = 5, 7, 11 geometry)
-   must be read in full before locking wording — the risk that Edge states the covering fact
-   ("every other external point lies on a join") somewhere in there is real, though nothing in the
-   passages read says it. Note also his phrase "sets of 6" (plural): he appears to partition the
-   66 external points into hexagons — the 22 copies of the hexagon over a fixed conic organize as
-   2 × 11.
+   against Dye 1991 must be re-based on Edge 1956; his §§29–32 were subsequently read in full and
+   **do not state the covering fact** ("every other external point lies on a join"), so that risk is
+   now retired — conditioned only on the two unread BSW originals. The "sets of 6" reading was
+   **correct**: Edge gives 22 hexagons over a fixed conic, each external point on exactly 2, forming
+   two systems of 11 that each partition the 66 external points. (`22 = 1320/60` independently
+   corroborates the stabilizer-60 claim.)
 3. **The involution lens** (flagged speculative, from memory): off-conic points = involutions in
    PGL₂(q); external join = elliptic product = the two involutions differ by a derangement of
    P¹(F_q). So arc-cliques are cliques in the derangement graph of PGL₂(q) restricted to the

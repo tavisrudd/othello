@@ -14,7 +14,7 @@ Cryptography / Finite Fields and Their Applications / J. Geometry — **not** IE
 ## Paper sequencing and the novelty seam vs `arcs` (ruled 2026-07-14)
 
 **The overlap:** this paper's Prop 3.1 (deep holes of the `[6,3,4]₁₁` code = the twelve-point conic)
-*is* the `arcs` paper's Prop 4.6(i) — same statement, same computation, and `arcs` carries the Lean
+*is* the `arcs` paper's Prop 8.7(i) (renumbered from 4.6; re-verified 2026-07-14) — same statement, same computation, and `arcs` carries the Lean
 certificate (`comp-q11-mds-deep-holes`). Cor 3.2's "first identification of a complete deep-hole set
 with the `F_q`-points of a named variety" therefore rested on a fact `arcs` also states. Two papers,
 one computation, a novelty claim spread across both: the classic salami-slicing pattern a referee
@@ -22,7 +22,7 @@ flags.
 
 **Ruling — split stays, seam moves:**
 1. **`arcs` submits first and owns the identification.** It is near submission-ready, carries the
-   Lean certificate, and the fact is already Prop 4.6(i) there. `clebsch` cites it as setup.
+   Lean certificate, and the fact is already Prop 8.7(i) there. `clebsch` cites it as setup.
 2. **`clebsch` claims only the reading**: the rigidity TFAE, the gap theorem, the chirality `ℤ/2`,
    and why-11. That is the whole point of the paper and is unambiguously its own — none of it appears
    in `arcs`. Cor 3.2's "first" is demoted from novelty-carrier to setup.
@@ -92,13 +92,49 @@ Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH
   (Corrected 2026-07-14: an earlier version of this entry claimed "v2 postdates acceptance … very
   likely identical", which has the chronology backwards.)
 
+## ⚠ PRIOR ART — the paper cites 70 years of it nowhere (2026-07-14 literature sweep)
+
+**This is the lane's blocking item (C146).** Full detail:
+[novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md),
+[gem-program vet](../2026-07-14-gem-program-vet.md) §2.1 (a row-by-row map of the `.tex`),
+[exterior sets](../2026-07-14-gem-lit-exterior-sets.md). A TODO is planted at the §2 site in the tex.
+
+- **Dye 1991 is NOT the nearest prior art. Edge 1956 is, by 35 years.** W. L. Edge, "Conics and
+  orthogonal projectivities in a finite plane", *Canad. J. Math.* **8** (1956) 362–382, §§29–32 (read
+  from the primary text) constructs the q=11 object outright: six external points, all fifteen joins
+  skew to the conic, named **"Clebsch hexagons"**, crediting **Clebsch 1871** (Math. Ann. 4, 284–345).
+  He gives 22 of them over a fixed conic, each external point on exactly 2, forming two systems of 11
+  that each partition the 66 external points, plus the order-60 stabilizer (22 = 1320/60). The §2
+  priority footnote currently argues at length against the wrong paper.
+- **The "all joins external" condition is classical too** — it is Blokhuis–Seress–Wilbrink's
+  *complete exterior set* of size (q+1)/2 (Mitt. Math. Sem. Giessen 201 (1991) 39–44; *Combinatorica*
+  **12** (1992) 143–147). BSW's object **is** Edge's hexagon renamed. **The paper contains no
+  occurrence of "external point", "external line", or "exterior set" anywhere** — so C146 is a
+  vocabulary job, not a citation patch: without that sentence the new citations have nothing to
+  attach to.
+- **What survives as ours:** the covering fact (`U(A)` = exactly the conic) appears in **neither**
+  Edge nor Van de Voorde, both read in full — conditioned only on the two BSW originals, which are
+  ILL-only and unread. The deep-hole "first" is audited and survives
+  ([deep holes](../2026-07-14-gem-lit-deep-holes.md)), with Reed–Muller deep holes marked NOT
+  SEARCHED rather than cleared.
+- **Chirality Prop 5.1 — the proposition survives, its surroundings do not.** The
+  two-systems-swapped-by-the-non-PSL-operations motif is classical (Edge §§29/32); cite it rather
+  than let a referee find it.
+- **§3.1 five self-polar triangles:** Edge §§30.2–31 exhibits the five triangles, the synthematic
+  total, and the order-60 stabilizer at q=11. Add Edge alongside Dye, who is the general-field theory.
+- **Do not cite the genus-2 literature** for anything about PGL(2,11)-orbits: it classifies
+  *geometric* automorphisms, ours are F₁₁-rational, and they agree only by luck. **CO-TR §8 requires
+  p > 23** and cannot support the 132+132 PSL/PGL split. **arXiv's journal-ref for 1201.0484 is
+  wrong** — Van de Voorde is *Discrete Math.* **311**(20) (2011) 2253–2258.
+
 **Open obligations (surfaced by the 2026-07-14 adversarial review; previously recorded nowhere):**
+- **C146 — the Edge/BSW prior-art re-base. BLOCKS SUBMISSION.** See above.
 - **C128 — kernel-check the syzygy `H³+T²=f⁵ mod 11`.** The manuscript states the syzygy as fact
   (§7). C125 verified it in Python (`notes/2026-07-13-c125-klein-resolvent.md`), but the Lean
   kernel-check is open and the task sits only in the queue. NB the handoff previously said the C125
   reduction facts were "all certified" — that oversells while C128 is open.
 - **Checker-coverage gap.** Three finite claims ship with no checker: the gap theorem's
-  252-perturbation spectrum (§4 Thm 4.2), the chirality orbit computation (§5 Prop 5.1), and the
+  252-perturbation spectrum (§4 Thm 4.3 — 4.1 is rigidity, 4.2 the corollary), the chirality orbit computation (§5 Prop 5.1), and the
   syzygy (§7). All three were independently re-derived in the review and hold exactly as stated
   (spectrum `{18:30,19:60,20:90,22:42,24:30}`, min 18, ≤7 conic points surviving; `#Stab`=60, orbits
   `[10,10]` complementary) — so this is a reproducibility gap, not a math gap. Cheapest fix: two

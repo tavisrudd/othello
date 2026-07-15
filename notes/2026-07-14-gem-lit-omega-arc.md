@@ -1,5 +1,21 @@
 # Literature search: ω_arc(q) and the elliptic-involution clique — verdicts
 
+> **⚠ THIS FILE CONTAINS KNOWN ERRORS — do not cite from it without cross-checking.** Found by the
+> [gem-program vet](2026-07-14-gem-program-vet.md) §1.11 and left in place (this is an append-only
+> search log, not a live doc):
+> - **"M. De Boeck" as author of arXiv:1201.0484 (twice) is wrong** — it is **Geertrui Van de
+>   Voorde**, and the journal version is *Discrete Math.* **311**(20) (2011) 2253–2258. arXiv's own
+>   journal-ref field for that paper is also wrong and points at a different paper of hers.
+> - **The conjecture is misattributed to Giessen 1991** — it is **Combinatorica 12 (1992) 143–147**.
+> - The "weaker condition" definition of BSW exterior sets given below is **unsourced**.
+> - **The BSW conjecture's computational range is q < 131, not q ≤ 31** (vet §1.4), so the census to
+>   q=37 recomputes inside a checked range and this note's framing of it as new is wrong.
+>
+> The verdicts themselves survive: all-external ω_arc is BSW's quantity, the mixed-type version is
+> absent from the literature, and the EKR/involution-graph machinery exists but is aimed elsewhere.
+> Corrected statements live in the [gem-mining handoff](handoffs/2026-07-14-gem-mining.md) and the
+> [novelty status tables](2026-07-14-novelty-status-review-summary-tables.md).
+
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing. Companion to
 [gem-mining next steps](2026-07-14-gem-mining-next-steps-fable.md) §7, which already found the
 core hit (Edge 1956, BSW 1991) in the prior session; this note is the full four-vocabulary sweep

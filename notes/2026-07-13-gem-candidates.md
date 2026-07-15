@@ -1,5 +1,22 @@
 # Gem candidates — fill-signature detector (auto)
 
+> **⛔ RETIRED (2026-07-14). This detector is closed, not re-keyed. Do not mine this table.**
+> It fails all four rules of the census-gap method
+> ([gem-mining handoff](handoffs/2026-07-14-gem-mining.md) §The method): it generates from a
+> **curated list**, not a census, so a miss buys nothing and every negative carries an asterisk —
+> which is exactly the shape of C132's verdict ("no clean second instance *among the four tested
+> targets*"). Its invariant is a **same-category size-equality**, numerology by construction. It has
+> no declared null (the interest score is hand-tuned) and no upgrade path.
+>
+> **The replacement is a census, not a better list.** Fixing the signature's *side* (C132's re-key
+> prescription, below) does not fix the generator. The `U(A) = conic` condition unfolds into
+> "arc + clique in E_q + covering" over a single fixed conic — group-free, complete, and cheap; it
+> answers the question exhaustively for every q with no caveat. See the
+> [gem-mining handoff](handoffs/2026-07-14-gem-mining.md) and
+> [strategy note](2026-07-14-gem-mining-next-steps-fable.md).
+>
+> Kept as the record of a closed spike. The rows below are retained for history only.
+
 Coincidences where an exceptional configuration's size = a space's point-count over F_q
 (the rigidity 'fills the space' signature). Ranked by interest score.
 

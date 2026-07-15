@@ -115,6 +115,25 @@ Certificate: the 36-orbit point set (canonical reps, first nonzero coord = 1) �
 
 ## What a real second instance would require (corrected search prescription)
 
+> **⚠ SUPERSEDED 2026-07-14 — do not follow the prescription in this section.** It fixes the
+> signature's *side* but keeps the generator: it still assumes a curated list of named objects to
+> re-key against, which is why this spike's own negative had to be hedged to "among the four tested
+> targets." Two further corrections from the sweep that followed: the **genus-0 restriction below is
+> a fiat**, not a finding — dropping it admits elliptic targets and is the cheapest route to a new
+> kind of gem; and the **group-orbit requirement is unnecessary**, since the group falls out of the
+> census as a consequence rather than going in as a hypothesis.
+>
+> **The replacement.** `U(A) = conic` unfolds into two conditions — every secant of `A` is external
+> to the conic, and the secants cover every off-conic point outside `A`. All conics are
+> PGL₃(q)-equivalent, so fix one; the condition becomes **"`A` is an arc, a clique in E_q, and its
+> secants cover"**, where E_q is the graph on off-conic points joined when their line misses the
+> conic. Group-free, complete, exhaustive per q, and cheap — minutes for all primes q ≤ 37, which
+> found healthy arcs at exactly q ∈ {3, 5, 11} with no asterisk. See the
+> [gem-mining handoff](handoffs/2026-07-14-gem-mining.md) and
+> [strategy note](2026-07-14-gem-mining-next-steps-fable.md).
+>
+> The four target-specific negatives in this note stand; only the forward prescription is superseded.
+
 The gem detector keys on `|config| = |space over F_q|` (a *space-filling* signature). That is the
 wrong signature — it selects rich-incidence configurations, the opposite of arcs. The correct
 signature is:

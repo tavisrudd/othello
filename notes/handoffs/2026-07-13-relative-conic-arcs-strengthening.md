@@ -6,6 +6,36 @@
 **Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun remains
 **Tasks:** C106–C110
 
+## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
+
+A `gem-mining` literature sweep hit this paper. The user authorized the edits; they are recorded here
+so the change is not invisible to this lane. Two fixes to `arcs_complete_outside_conic.tex`, both
+from the [gem-program vet](../2026-07-14-gem-program-vet.md) §2.2:
+
+- **§1 exterior-set paragraph + §8 prior-art sentence: `Edge1956` added.** W. L. Edge, *Canad. J.
+  Math.* **8** (1956) 362–382, §§29–32 describes the q=11 six-external-point configuration and names
+  it the Clebsch hexagon, 35 years before BSW — whom this paper already cited correctly. New
+  bibliography entry.
+- **§4 line ~441: the leader-formula cite was wrong.** It read "DMP Theorem 4.6"; in arXiv v2 that is
+  the *symmetry* theorem, and the general farthest-coset formula — which is what the sentence
+  describes — is **Theorem 7.7**. Re-pinned, and the `DavydovEtAl2021` bibliography entry now
+  discloses arXiv v2 numbering, matching what the `clebsch` paper already does for the same
+  reference. Rebuilt: compiles clean, no undefined citations.
+
+**This lane came out of the sweep well.** Its §1 exterior-set paragraph already cited BSW and drew
+the right distinction ("a different condition from prescribed-hole completeness") before any of this
+— the only lane with no false novelty claims in the
+[review tables](../2026-07-14-novelty-status-review-summary-tables.md). Two things for this lane to
+carry:
+
+- **The deep-hole "first" is audited and survives** ([sweep](../2026-07-14-gem-lit-deep-holes.md)):
+  no prior instance of a complete deep-hole set identified with the full rational-point set of a
+  named variety. ZWK's redundancy-4 result is a disjoint union of three combinatorial families, not
+  a variety-equality. **Residual: Reed–Muller deep holes marked NOT SEARCHED, not cleared** — this
+  paper owns that claim and ships first, so the residual is this lane's.
+- **Prop 8.7** is what `clebsch` cites as its companion reference (it had gone stale as "Prop 4.6");
+  re-sync if this paper renumbers again.
+
 ## Goal
 
 Strengthen the completed `arcs_complete_outside_conic` paper and Lean development with three
