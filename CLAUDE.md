@@ -113,15 +113,89 @@ proof, load the [named-expert umbrella](notes/2026-07-07-named-expert-personas-c
 dossier under [`notes/expert-personas/`](notes/expert-personas/). Discussion or review alone does not
 trigger this.
 
-**Lean build/OOM hygiene:** generated certificate builds can fan out many heavyweight `lean`
-workers. Do not run a raw full aggregate like `nix develop --command lake build
-ProjectiveCap.CertData.Q13Assembly` on the 26 GB box — it can trigger global OOM that kills
-unrelated session processes. Interactive bash has OOM-sacrifice wrappers
-in `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash` for `lake`/`lean`/`leanc` and
-`nix develop --command lake|lean|leanc`; if bypassing the shell, prefix with
-`choom -n 1000 --`. For generated split certs, build leaves/classes first and the aggregate
-last with `nix_lake_build_each ...`; this Lake has no `-j`/`--jobs`, and a lone aggregate
-target can still fan out its missing import closure.
+**Lean build/OOM hygiene.** Generated certificate builds fan out heavyweight `lean` workers; that
+fan-out, not the aggregate target itself, is what OOMs the 26 GiB box. A lone aggregate fans out its
+missing import closure, and so does any consumer above generated leaves. Three dimensions are
+independent — **job count, CPU placement, memory risk** — and conflating them is how builds die:
+
+- **Job count — `LEAN_NUM_THREADS=N`, exported into the build shell.** Lake is itself a Lean
+  program, so its job pool *is* Lean's task pool. There is no `-j`/`--jobs` flag at either level.
+  Unset, Lake launches one job per host core.
+- **CPU placement — `taskset -c ...`, only to keep a build on this lane's cores.** Affinity is
+  inherited by workers but does **not** size the pool: without `LEAN_NUM_THREADS`, Lake still
+  launches one job per *host* core and they contend on the pinned set (verified 2026-07-14 —
+  pinning to six cores still produced one worker per host core).
+- **Memory risk — `choom -n 1000 --`.** This selects the build as the OOM victim so the kernel
+  sacrifices a worker instead of unrelated processes. It is a **containment guard, not permission
+  to oversubscribe memory.**
+
+**Choose N by measurement, never from `nproc` and never from another family's N.** Measure the
+heaviest representative leaf's peak RSS with GNU `time -v` (`/usr/bin/time -v`; a bare `time` is a
+bash keyword, not GNU time). Reserve 6–8 GiB for the OS, Lake itself, page cache, and other lanes,
+then require `N × representative_peak_RSS + reserve < physical RAM`. Measured so far:
+`RelativeConicArcs` Q16 generated leaves ≈1.3 GiB/worker → N=6 verified safe (2026-07-14); the C143
+two-witness leaf peaks ≈6.3 GiB/worker → **N=2** (`2 × 6.34 + 8 ≈ 21 GiB`), and N=3 only on an
+otherwise-quiet box after observing real headroom — `3 × 6.34 + 8 ≈ 27 GiB` fails this rule
+outright, and a 6 GiB reserve leaves ≈1 GiB for everything else (C143 figure reported by the
+alt-orbit-repair lane, not independently re-measured). Use 1–2 while another memory-heavy lane is
+active. A "maximum" that barely fits the most optimistic reserve is not a maximum. A cap that is
+right for one target family is unsafe for another; lighter modules may run a higher cap.
+
+```
+LEAN_NUM_THREADS=3 choom -n 1000 -- taskset -c 20-22 \
+  nix develop --command bash \
+  -lc 'export LEAN_NUM_THREADS=3; exec lake build <explicit-targets>'
+```
+
+With a measured cap set, leaves-first `nix_lake_build_each ...` is unnecessary and much slower — it
+pays a fresh Lake startup per target; keep it only when a strictly serial run is wanted.
+Interactive bash already wraps `lake`/`lean`/`leanc` and `nix develop --command lake|lean|leanc`
+via `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash`; if bypassing the shell, prefix with
+`choom -n 1000 --`.
+
+**Pressure and thrash look alike — distinguish them.** Low `MemAvailable` with **no** kills is the
+guard working: do not intervene, and a build that looks stuck is usually just slow. If **your own**
+aggregate records repeated `code 137` module failures, the cap is wrong for this workload:
+terminate that aggregate by its verified parent PID or task handle, lower N, and restart. Never
+kill an individual worker, and never another lane's process. Do not ride it out — OOM-killed
+modules lose their oleans, so a thrashing build runs *backwards* and can
+leave the tree worse than it started (observed 2026-07-14: leaf oleans regressed under an uncapped
+aggregate before a capped rerun recovered them). Before a large or uncertain rebuild, back up
+`.lake/build/lib/lean` (small — project libs only; deps live under `.lake/packages/`) to a
+disk-backed path under `/home`.
+
+**Process inspection — check command and ancestry, not a name.** Under the OOM shim the real binary
+runs as **`lake.orig`**, so `pgrep -x lake` reports a live, healthy build as dead. Use `pgrep -x
+lake.orig` or `pgrep -f 'lake build'`, and confirm ownership by PPID/ancestry before acting on any
+worker. Never `pkill -f` a string that also matches your own command line — it kills the shell that
+issued it. Stopping **your own** build by task ID or verified PID, on evidence, is correct; killing
+on memory pressure alone is not; killing another lane's workers never is.
+
+**Staleness comes from content traces, not mtimes.** An mtime-derived "what's stale" list will miss
+modules Lake intends to rebuild. Probe exact targets with `lake build --no-build <targets>` — it
+exits immediately if a target is not up to date and triggers no fan-out. If it reports a foreign
+dirty or stale dependency, do not build the consumer: stop at direct elaboration or wait for that
+lane. For a new leaf whose dependencies are **known current**, `lake env lean path/to/Leaf.lean` is
+a safe elaboration check — it reads existing imports and does not rebuild their closure. That is
+also its trap: against a stale olean it silently elaborates your leaf on an *older* artifact than
+the dirty source and reports a false green, so confirm the imports are current (`--no-build`)
+before trusting it. **Never** use `--old` to satisfy a validation gate: it ignores transitive deps,
+which is exactly what the gate exists to check.
+
+**Cross-lane build hygiene.** Prefer the narrowest leaf targets. Do not run an umbrella aggregate
+when its closure contains a foreign **dirty, stale, or concurrently owned** module — stable checked
+dependencies from another lane are ordinary deps and are fine. (`RelativeConicArcs` spans
+`relconic`, `baer`, and `alt-orbit-repair`, so probe with `--no-build` before building a consumer;
+observed 2026-07-14 going stale within ~20 min of a green build while another lane regenerated its
+certificates.) Different cores do not isolate memory or Lake artifacts — two builds on disjoint CPU
+sets still share RAM, I/O, and `.lake/build` — so spare cores are not a reason to start a
+generated-certificate build. Treat another lane's sources and build processes as owned state: do
+not edit, rebuild opportunistically, kill, or clean them — and never `lake clean` while another
+lane is using the shared build tree.
+
+**Source and staging hygiene.** Run generators against explicit roots, never repository-wide. After
+any generator or formatter, require `git diff --name-only` to be a subset of the selected lane's
+allowlist. Stage explicit pathspecs only — never `git add -A`.
 
 **`/tmp` is tmpfs on this box.** Do not place Lean worktrees, `.lake` caches, generated
 certificate trees, or other multi-gigabyte build artifacts there: their storage counts against
