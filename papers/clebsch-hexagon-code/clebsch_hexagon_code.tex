@@ -511,20 +511,44 @@ consequence.
 
 The rigidity theorem leaves open how close a \emph{different} six-arc can
 come to the phenomenon. The next theorem shows the answer is: not close at
-all.
+all. Its first clause is a statement of the standard extremal shape --- there
+is no object strictly between the extremal value and the next, and the
+objects attaining the extremal value are classified --- familiar from the
+minimum-side gap results for arcs and blocking sets, such as
+Blokhuis--Bruen's~\cite{BlokhuisBruen1990} theorem on the sizes realized just
+above the minimum. Here the invariant is not a size but the deep-hole count
+$|\cU(A)|$.
 
 \begin{theorem}[Gap theorem]
 \label{thm:gap}
-The Clebsch configuration is rigid rather than merely stable. Every
-non-Clebsch six-arc has $|\cU(A)|\ge16$ with $\cU(A)$ contained in no conic;
-and every one of the $252$ six-arcs obtained from the Clebsch hexagon by
-moving exactly one of its points has symmetric difference
-$|\cU(A)\,\triangle\,\cC|\ge18$ from the conic (so at most seven of the
-twelve conic points survive as deep holes), with the exact
-symmetric-difference spectrum $\{18,19,20,22,24\}$. The distance from
-``deep holes on a conic'' to the nearest other six-arc jumps from zero to
-at least eighteen, with nothing in between.
+The Clebsch configuration is rigid rather than merely stable.
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item \emph{(Census gap.)} There is no six-arc $A\subset\PG(2,11)$ with
+$12<|\cU(A)|<16$. Furthermore, every six-arc attaining $|\cU(A)|=12$ is
+$\mathrm{PGL}(3,11)$-equivalent to the Clebsch hexagon, and every six-arc
+with $|\cU(A)|\ge16$ has $\cU(A)$ contained in no conic.
+\item \emph{(Perturbation gap.)} Every one of the $252$ six-arcs obtained
+from the Clebsch hexagon by moving exactly one of its points has symmetric
+difference $|\cU(A)\,\triangle\,\cC|\ge18$ from the conic --- so at most
+seven of the twelve conic points survive as deep holes --- with exact
+spectrum $\{18,19,20,22,24\}$.
+\end{enumerate}
+So the distance from ``deep holes on a conic'' to the nearest other six-arc
+jumps from zero to at least eighteen, with nothing in between.
 \end{theorem}
+
+\begin{remark}[Two spectra, one word apart]
+\label{rem:not-the-size-spectrum}
+Clause~(a) is a gap in the spectrum of the \emph{deep-hole count}
+$|\cU(A)|$ at fixed arc size $k=6$. It is not a statement about the
+much-studied spectrum of the \emph{sizes} $k$ for which a complete $k$-arc
+exists, which at $q=11$ was determined by Faina, Marcugini, Milani and
+Pambianco~\cite{FMMP1997}: there the invariant is $k$ itself and the
+relevant constants are $t(2,11)=7$ and $m''(2,11)=10$. The two meet only at
+the boundary $\cU(A)=\emptyset$, where an arc is complete; that
+$t(2,11)=7$ exceeds six is exactly why no six-arc of $\PG(2,11)$ is
+complete, and hence why the histogram above has no zero bin.
+\end{remark}
 
 \begin{proof}
 We verify by exhaustive computation over the $252$ single-point
@@ -541,6 +565,28 @@ kernel-checked Lean formalization of the enumeration and the perturbation
 census is planned but not yet complete, and is not required for the
 statements above, which are verified by direct computation over
 $\PG(2,11)$.
+
+\begin{remark}[Why these facts are not already recorded]
+\label{rem:why-not-recorded}
+The locus $\cU(A)$ is not a new object: by Segre's theory of the tangent
+envelope of an arc, a point extends $A$ exactly when its pencil is a
+component of that envelope, so $\cU(A)$ is the classical extension locus ---
+see Ball and Lavrauw~\cite[Thms.~39--41]{BallLavrauw2019} for the statement
+in both parities. Two separate reasons account for the absence of the facts
+above from that literature, and neither is that the objects were unknown.
+First, the arc-classification line has long had the census we use --- the
+six-arc classes of $\PG(2,11)$ are Sadeh's --- but no motive to compute
+$\cU(A)$ on it: its purpose there is the construction of cubic surfaces,
+which consumes only the condition that $A$ itself lie on no conic. Second,
+the arc-extension line has exactly this motive, but its theorems are
+large-$k$ theorems whose hypotheses exclude our case: over $\F_q$ with $q$
+odd the envelope results apply from $|A|\ge 2q/3+2$, which is ten points at
+$q=11$, and Segre's extension bound needs $k>q-\sqrt q/4+25/16\approx11.73$,
+against our $k=6$. At $k=6$ the envelope has class $14>12$, so membership in
+it constrains nothing. The interest of the statements above therefore rests
+not on their inaccessibility but on the coding reading of $\cU(A)$ and on the
+rigidity theorem that the gap protects.
+\end{remark}
 
 \section{The chirality invariant}
 \label{sec:chirality}
@@ -924,6 +970,26 @@ A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
 (2023), 1115--1138.
 \newblock arXiv:2101.12722v2.
 \newblock (Numbered results are cited by their arXiv~v2 numbering.)
+
+\bibitem{BallLavrauw2019}
+S.~Ball and M.~Lavrauw,
+\newblock Arcs in finite projective spaces,
+\newblock \emph{EMS Surveys in Mathematical Sciences} \textbf{6} (2019),
+33--45.
+\newblock arXiv:1908.10772.
+
+\bibitem{BlokhuisBruen1990}
+A.~Blokhuis and A.~A.~Bruen,
+\newblock The minimal number of lines intersected by a set of $q+2$ points,
+blocking sets, and intersecting circles,
+\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{50}
+(1989), 308--315.
+
+\bibitem{FMMP1997}
+G.~Faina, S.~Marcugini, A.~Milani, and F.~Pambianco,
+\newblock The spectrum of the values $k$ for which there exists a complete
+$k$-arc in $\PG(2,q)$ for $q\le23$,
+\newblock \emph{Ars Combinatoria} \textbf{47} (1997), 3--11.
 
 \bibitem{Dye1991}
 R.~H.~Dye,
