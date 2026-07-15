@@ -102,8 +102,10 @@ bound and its equality structure, the covered/uncovered partition, and a master 
 conditional only on excluding that equality case. It also proves the final scalar contradiction
 once the two affine parallelism equations are supplied.
 
-`lean/RelativeConicArcs/SixVertexOneFactorization.lean` closes the first bridge: every
-one-factorization relabels to the standard total and contains the required triangular prism. A
+`lean/RelativeConicArcs/SixVertexOneFactorization.lean` closes the finite bridge. It proves
+semantically that every proper five-edge-colouring of `K6` is a one-factorization, relabels every
+one-factorization to the standard total, and returns three distinct named colours on the nine
+required triangular-prism edges. A
 tracked `uv` generator independently enumerates 15 perfect matchings and exactly six labelled
 one-factorizations with explicit relabelling witnesses. Lean checks the six-witness table and the
 semantic completeness claim with ordinary kernel reduction.
@@ -112,18 +114,17 @@ semantic completeness claim with ordinary kernel reduction.
 point at infinity have parallel direction vectors and, using the certified ordered-triple
 normalizer, rules out any projective realization of the prism off its direction line. The final
 proof is division-free: its two direction determinants differ by `2*x*y`, while injectivity gives
-`x*y != 0`. The sole remaining internal bridge extracts the prism points/directions from the five
-equality fibers and feeds them to this theorem. All focused targets
+`x*y != 0`.
+
+`lean/RelativeConicArcs/OddSixArcPrismExtraction.lean` closes the remaining internal bridge. It
+canonically labels the six arc vertices, maps every chord to its intersection with the disjoint
+line, proves that the resulting five-colouring is proper, extracts the three prism colour classes,
+and transports their nine edges to three distinct covered points. The resulting theorem
+`incidencePrismWitness_of_five` feeds the projective prism obstruction, and
+`card_coveredOnLine_ne_five` rules out the equality case directly in every finite odd
+Desarguesian plane. All focused targets
 build fresh with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports
 contain only `propext`, `Classical.choice`, and `Quot.sound`.
-
-`OddSixArcPrismExtraction.lean` now pins this last boundary exactly. It defines the incidence and
-projective prism witnesses, proves all incidence-to-projective transport (including that every arc
-vertex is off the direction line), and derives the desired `card != 5` conclusion from a single
-fiber-extraction hypothesis. No coordinate or projective transport remains hidden in that
-hypothesis: it must only label the six vertices, translate each `pairsThrough` fiber to a canonical
-`K6` matching, prove the five fibers partition all edges, and transport the certified standard
-three-factor prism back to three covered points.
 
 The nonsingular case is even shorter: conic containment already gives `|U(A)|<=12`, so the same
 equality argument applies. Once Dye's exact field/descent statement is pinned, these two arguments

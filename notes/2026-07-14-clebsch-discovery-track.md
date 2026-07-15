@@ -895,3 +895,23 @@ published open problems and questions newly posed by this project.
   conditions beyond distinctness: the two third-direction determinants differ by `2*x*y`, with
   `x,y != 0` forced by injectivity. This is the cleanest manuscript proof form and makes the exact
   characteristic-two failure visible.
+
+## 2026-07-15 — the five-direction seam closes internally
+
+- The five covered points do more than merely index five `pairsThrough` fibers: chord intersection
+  defines a canonical proper five-edge-colouring of the labelled `K6`. Properness has a short
+  projective proof—two adjacent chords with the same colour share both an arc vertex and their
+  direction point, hence are the same line and therefore the same arc pair.
+- A semantic endpoint count shows that any proper five-colouring of `K6` is automatically a
+  one-factorization. This removes the need to assume the equality fibers partition the chords as a
+  separate geometric lemma; it is forced by properness and the five colours.
+- The finite certificate can expose three *named* colour classes and all nine prism-edge equations,
+  rather than only membership in an image of a relabelled total. That stronger interface makes the
+  geometry transport direct and is likely the most readable proof architecture for the paper.
+- The complete odd-characteristic equality exclusion is now Lean-certified without a Dye axiom.
+  Dye remains relevant only for the separate `c≤10`/equality-classification step in the conceptual
+  rigidity theorem and for historical attribution.
+- **Follow-on:** the proof boundary suggests studying proper chord-direction colourings for larger
+  even arcs. For six vertices, five colours force the unique one-factorization orbit; for `2m`
+  vertices, equality cases should be controlled by one-factorizations of `K_{2m}` together with
+  which factor subfamilies admit projective direction realizations.

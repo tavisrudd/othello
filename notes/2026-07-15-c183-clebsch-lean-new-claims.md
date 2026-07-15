@@ -5,10 +5,10 @@
 **Status**: **IN PROGRESS** — the C174 spine, C176 finite core, q=4/q=5/q=9 leaves, C185 decoding
 synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
 narrow elaboration and axiom audit. C186's finite A₅ point-action bridge also passes its full
-serial build, freshness, generator, and standard-axiom gates. C180's entire incidence reduction
-and every incidence/projective prism transport also pass; only the equality-fiber partition into a
-labelled `K6` one-factorization remains. Remaining work is that lemma, C186's conceptual/source
-argument, and manuscript synthesis.
+serial build, freshness, generator, and standard-axiom gates. C180's equality fibers now induce a
+proper five-edge-colouring, the named prism factors are extracted, and the complete odd-field
+projective contradiction passes its focused build and freshness gate. Remaining work is C186's
+conceptual/source argument and manuscript synthesis.
 
 ## Live subagent roster
 
@@ -59,16 +59,18 @@ The same strict-kernel verdict now holds for:
 - `OddSixArcLineBound.lean`: the complete generic incidence case split for the `q-5` line bound,
   conditional only on excluding the five-covered-point disjoint-line equality case, plus the final
   odd-characteristic scalar contradiction once the two affine equations are supplied.
-- `SixVertexOneFactorization.lean`: a six-witness strict-kernel certificate that every labelled
-  `K6` one-factorization has the triangular-prism normal form required by C180; its tracked `uv`
-  replay independently confirms the `15` matchings and `6` labelled totals.
+- `SixVertexOneFactorization.lean`: a semantic proof that every proper five-edge-colouring of `K6`
+  is a one-factorization, plus a six-witness strict-kernel certificate for its triangular-prism
+  normal form and a geometry-facing extraction of three named colours on the nine prism edges;
+  its tracked `uv` replay independently confirms the `15` matchings and `6` labelled totals.
 - `OddSixArcAffinePrism.lean`: the common-point-at-infinity direction determinant lemma, normalized
   obstruction, and projectively invariant triangular-prism impossibility over every field with
   `(2 : K) != 0`.
 - `ProjectiveTripleNormalization.lean`: ordered noncollinear-triple projective normalization and
   the diagonal affine rescaling needed to put the first two prism directions in standard form.
-- `OddSixArcPrismExtraction.lean`: exact incidence/projective witness interfaces and the complete
-  transport from an extracted prism to the `card covered != 5` conclusion.
+- `OddSixArcPrismExtraction.lean`: canonical chord-direction colouring, properness, named prism
+  extraction, exact incidence/projective witness transport, and the unconditional odd-field
+  `card covered != 5` theorem.
 
 ## Dye source and formalization boundary
 
@@ -92,10 +94,9 @@ alternative, not a formalization of Dye's conceptual proof.
 
 1. use the certified C186 point-action bridge for the remaining chirality action layer and write
    the conceptual/source argument;
-2. close C180's sole remaining fiber-partition lemma (`pairsThrough` fibers form the labelled `K6`
-   one-factorization); all later incidence/projective transport and the conditional rigidity
-   implication below Dye are already kernel-checked;
-3. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
+2. integrate C180's completed conceptual line-pair proof while keeping the Dye classification
+   boundary explicit;
+3. run any manuscript-level aggregate only after the foreign Q25 tree
    is stable.
 
 ## Exit gate
