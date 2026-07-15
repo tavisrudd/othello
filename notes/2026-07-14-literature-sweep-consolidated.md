@@ -18,7 +18,9 @@ audit see the [gem-program vet](2026-07-14-gem-program-vet.md).
 | 3 | [ω_arc](2026-07-14-gem-lit-omega-arc.md) — is the arc-clique invariant studied? | Sonnet | All-external = **the open BSW conjecture**; mixed-type **absent** | ⚠ **Contains known errors** — banner in file. Verdicts survive; citations must be cross-checked |
 | 4 | [deep holes](2026-07-14-gem-lit-deep-holes.md) — is "deep holes = a variety's rational points" claimed? | Sonnet | The **"first" survives** | Good — but this is a clean re-run; the first attempt failed (§4). One sub-question NOT SEARCHED |
 | 5 | [orbit classification](2026-07-14-gem-lit-orbit-classification.md) — are the PGL(2,11)-orbits on 6-subsets published? | Opus | **YES — Cameron–Omidi–Tayfeh-Rezaie 2006** | Good. Table re-derived by hand from their theorems and matches |
-| 6 | [rigidity/gap](2026-07-14-gem-lit-rigidity-gap.md) — is the paper's headline taken? | Opus | **No collision found** | Qualified: the two most dangerous sources were unreadable. Q2/Q3 thin |
+| 6 | [rigidity/gap](2026-07-14-gem-lit-rigidity-gap.md) — is the paper's headline taken? | Opus | **No collision found** | Qualified: the two most dangerous sources were unreadable. Q2/Q3 thin. **Its structural argument is falsified by #7** |
+| 7 | [gap theorem](2026-07-14-gem-lit-gap-theorem.md) — the gap theorem's own pass | Opus | **Survives, both halves**; the genre is **Problem (III) of the packing problem** | Good; the survey read end to end. Corrects #6 |
+| 8 | [extension count](2026-07-14-gem-lit-extension-count.md) — is the hexad result taken in `\|U\|` language? | Opus | *running* | — |
 
 ## 2. What the sweeps established
 
@@ -44,9 +46,12 @@ finding, and it repeated across three independent sweeps.
 - **The hexad characterization is absent**, and Halbeisen–Hungerbühler (J. Geometry 2024) supply the
   reason it *could not* be classical: over ℝ, no-accidental-concurrency is **generic**, so the
   question is not well-posed until the conic is finite.
-- **The rigidity headline is unclaimed** in everything readable, with a structural reason: the 6-arc
-  classification exists to build cubic surfaces, and the Clebsch map only consumes "**the arc** is not
-  on a conic" — nobody had a reason to compute `U(A)`.
+- **The rigidity and gap headlines are unclaimed** in everything readable. **But the structural reason
+  first offered for this is false**: `U(A)` is *not* an object the tradition had no reason to compute —
+  it is classical Segre tangent-envelope theory (PGOFF §10.1, Cor. 10.3). The correct and stronger
+  statement is that the classical tools are **large-k tools whose hypotheses exclude us**: the tangent
+  envelope needs `k > q/2+1` (= 6.5 at q=11), Segre's extension bound needs `k > q − √q/4 + 25/16`
+  (≈ 11.73), and we have `k = 6`. An absence became a checkable statement about hypotheses.
 
 ## 3. The unread ledger — every claim still conditioned on a source nobody has opened
 
@@ -57,8 +62,8 @@ finding, and it repeated across three independent sweeps.
 | **BSW**, *Mitt. Math. Sem. Giessen* **201** (1991) 39–44 | ILL only | **The covering fact** — hence `arcs` Prop 8.7(i) and `clebsch` Prop 3.1 | C153 |
 | **BSW**, *Combinatorica* **12** (1992) 143–147 | Paywalled. Titled *Characterization of complete exterior sets of conics* | Same — **the single most likely place our result already exists** | C153 |
 | **Sadeh**, Sussex thesis (~1984) | Not online | The rigidity verdict; the \|U\| histogram concession; whether (iv)⟺(v) is his | C131 |
-| **Hirschfeld**, *PGOFF* 2nd ed., **Ch. 14** | 403 on archive.org (in-copyright lending) | Same as Sadeh — the 6-arc census for q=11 | C131 |
-| **Hirschfeld–Sadeh**, *Giessen* **164** (1984) 245–257 | ILL only | The \|U\|-spectrum concession — which per its zbMATH review may be **mis-aimed in our favour** (it looks like a Singer-cycle/7-arc paper, not a 6-arc paper) | C131 |
+| **Hirschfeld**, *PGOFF* 2nd ed., **§10.1 + Cor. 10.3**, **§14.8**, **Table 9.4** | 403 on archive.org (in-copyright lending) | **§10.1/Cor. 10.3 is now the highest-value unread target**: Segre's tangent envelope is the classical form of `U(A)`, and if it reaches small `k` it undercuts the gap sweep's G5 defence. §14.8 is the q=11 arc census. **Name the sections, not the chapters, on the ILL** | C131 |
+| ~~**Hirschfeld–Sadeh**, *Giessen* **164** (1984)~~ | ILL | **GATE LIFTED 2026-07-14.** Hirschfeld's own survey cites Sadeh's thesis [189] and PGOFF §14.8 for the q=11 data and **omits HS84 from its bibliography entirely** — a co-author omitting his own paper where it would be needed settles it far better than the zbMATH inference. The concession was mis-aimed and is already withdrawn from the tex | — |
 | **Hirschfeld** Ch. 8 / **Semple–Kneebone** | Neither accessible | The point↔involution and pencil↔involution theorem numbers — **currently inferred, never verified** | C157 |
 | **Lord**, *Geometry of the Mathieu groups and Golay codes* | 403 at full text | The hexad-absence verdict, weakly (its abstract places it in PG(5,3)/PG(11,2), so PG(2,11) content is unlikely — but that is inference from an abstract) | — |
 | **Reed–Muller deep holes** | **NOT SEARCHED** | The "first variety-equality" claim — the one place a counterexample could still sit | C154 |

@@ -81,6 +81,7 @@ table. The pieces all existed; nobody wrote the sentence. A legitimate note, thi
 | 12 | `clebsch` | The **dual-variety conjecture** (C123) generalizes it | Dead five ways; ZWK subsumes and refutes it | Earlier red team |
 | 13 | `clebsch` | Klein reduction **causes** deep-holes-=-conic | False by our own C126 data. "Because" struck; demoted to discussion | Earlier red team |
 | 14 | `clebsch` | The 6-arc census and the \|U\| histogram are ours | Conceded outright to the arc-classification (Sadeh) school | Earlier audit |
+| 16 | `clebsch` | `U(A)` is an object nobody had a reason to compute | **False.** `U(A)` is classical **Segre tangent-envelope theory** (PGOFF §10.1, Cor. 10.3): a point extends a k-arc iff its pencil is a component of the tangent envelope. The tradition has the machinery — its **hypotheses** exclude us (`k > q/2+1 = 6.5`; Segre needs `k ≈ 11.73`; we have `k = 6`). Better defence, not worse | Gap-theorem sweep (G5), correcting the rigidity sweep |
 | 15 | `clebsch` | The whole rigidity TFAE is ours | **(iv)⟺(v)** — "PGL-equivalent to the Clebsch hexagon ⟺ stabilizer contains A₅" — is very likely classical: the q=11 "Diagonal" surface with \|G\|=120 is in Karaoglu's Table 5.1, credited to Sadeh. Claim priority on the **deep-hole side only**: (i)/(ii)/(iii) ⟺ (iv)/(v) | Rigidity/gap sweep |
 
 **Rows that span lanes**, pegged to whoever owns the deliverable:

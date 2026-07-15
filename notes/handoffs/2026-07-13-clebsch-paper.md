@@ -170,10 +170,59 @@ Four independent supports, all verified from full text:
    **not on a conic**"; ours is "**U(A)** on a conic". One word apart, logically unrelated. A referee
    from this school will reach for the familiar meaning unless told.
 
-**Gap theorem:** untouched by this sweep beyond one note — arc stability/gap results are an
-established genre (Blokhuis–Bruen, second-largest-complete-arc bounds), so Thm 4.3 should be
-positioned *inside* that genre rather than as a free-standing curiosity. Q2/Q3 of that sweep are thin
-(one search each, marked PARTIAL); the gap theorem deserves its own pass.
+## The gap theorem — its own pass, 2026-07-14: SURVIVES, but the framing must change
+
+Full report: [gap theorem sweep](../2026-07-14-gem-lit-gap-theorem.md). **Both halves survive, no
+collision** — and with *higher* confidence than the rigidity verdict, because the negative now has a
+mechanism instead of being a bare absence.
+
+**The framing is the finding. Thm 4.3 must be written as the genre's standard sentence.**
+The genre is **Problem (III) of the packing problem** — *the size of the second largest complete set*
+— one of four numbered problems organizing the whole field. Its defining paper is **Hirschfeld &
+Storme, "The packing problem in statistics, coding theory and finite projective spaces", JSPI 72
+(1998) 355–380** (update 2001), read end to end. The genre's standard sentence, verified three times
+in it (Blokhuis–Bruen; Segre/Thm 2.5; Ball–Blokhuis):
+
+> *"There is no ⟨object⟩ with X < ⟨invariant⟩ < Y. Furthermore, all ⟨objects⟩ with ⟨invariant⟩ = X are
+> ⟨classified⟩."*
+
+**Claim (a) is already exactly that shape** and should be written as that sentence rather than as "the
+histogram has a hole". Same content; one reads as a theorem, the other as a curiosity. Highest-value
+change the sweep found.
+
+**⚠ G5 — this corrects the rigidity sweep, and then hands us something better.** `U(A)` is **not** a
+newly-noticed object: it is classical **Segre tangent-envelope theory** (PGOFF §10.1, Cor. 10.3) — a
+point extends a k-arc iff its pencil is a component of the tangent envelope, and that *is* `U(A)`. The
+rigidity sweep's "the tradition had no reason to compute `U(A)`" is **falsified**; do not repeat it.
+But the replacement is stronger, because it is checkable rather than an absence: **the classical tools
+are large-k tools whose hypotheses provably exclude us.** The tangent envelope needs `k > q/2 + 1`
+(= 6.5 at q=11) and Segre's extension bound needs `k > q − √q/4 + 25/16` (≈ 11.73); our `k = 6` fails
+both. That is why the tradition has the machinery and never pointed it here.
+
+**G3 — the Hirschfeld–Sadeh concession is settled, in our favour, and the ILL gate lifts for it.**
+Hirschfeld's *own* survey cites **Sadeh's thesis [189]** and **PGOFF §14.8** for the q=11 arc data, and
+**omits HS84 from its bibliography entirely**. A co-author leaving out his own paper exactly where it
+would be needed is far stronger evidence than the ~90-word zbMATH inference. The concession was
+mis-aimed; the withdrawal already applied to the tex stands, and C131 no longer gates it. (C131 still
+asks whether *Sadeh's thesis* has the six-arc extension data.)
+
+**⚠ G8 — a concrete conflation hazard, distinct from the (i)/(iv) one.** Faina–Marcugini–Milani–
+Pambianco, *"The spectrum of the values k for which there exists a complete k-arc in PG(2,q) for
+q ≤ 23"*, Ars Combin. **47** (1997) — **covers q=11**. A referee will point at it, because "spectrum"
++ "q=11" + "gap" is our sentence too, about a different invariant (complete-arc *sizes*, not `|U|`).
+Cite it and distinguish. Also published: `t(2,11) = 7` and `m″(2,11) = 10` (survey Tables 2.4/2.5) —
+cite `t(2,11) = 7` as the reason the `|U|` histogram has no zero bin.
+
+**On claim (b):** one-point perturbation is **not** a named genre (NOT FOUND). Its home is
+**stability** — *near-extremal ⟹ close to extremal* — and claim (b) **denies** that, so the
+manuscript's "rigid, not merely stable" is technically correct and well chosen. Keep it, but cite the
+genre nearby or it reads as informal. Note Thas lists "second largest complete arc for **q odd**" as an
+**open problem**: good (the genre is live) and dangerous (a referee may think we claim progress on it
+— we do not).
+
+**Next unread target changed.** The highest-value one is now **PGOFF §10.1 + Cor. 10.3** — the likeliest
+hiding place for a `U(A)` statement, and if it reaches small `k` it undercuts the G5 defence. The ILL
+should name **§10.1 + Cor. 10.3, §14.8, Table 9.4** — three sections, not three chapters.
 
 **Open obligations (surfaced by the 2026-07-14 adversarial review; previously recorded nowhere):**
 - **C146 — the Edge/BSW prior-art re-base. BLOCKS SUBMISSION.** See above.
