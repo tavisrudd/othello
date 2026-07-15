@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C143.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C144.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -229,6 +229,15 @@ fixed-locus / quadric-Witt dichotomy leap).
 - **C107 `[relconic]` [REPORTED 2026-07-13; SHARED AGGREGATE PENDING] — exact finite-field evaluation-avoidance dichotomy.** The warning-free focused build proves the sharp at-most-`q` equivalence, dimension-sensitive/factored counts, equality model, `q+1` sharp cover, kernel/span form, and arbitrary-feature/Veronese closure with the standard axiom profile. The shared aggregate rerun awaits completion of the unrelated Q25 generated-leaf builder. Same handoff.
 
 - **C110 `[relconic]` [IN PROGRESS 2026-07-13; SHARED AGGREGATE ONLY] — relative-conic novelty, adversarial, and publication closure.** Primary citation chasing marks the `binom(k,3)` farthest-coset leader count, hyperplane threshold, arc/MDS/deep-hole dictionary, and Clebsch interpretation as known. Independent Python/C++ replay, coordinate invariance, perturbed-witness and mutated-generator controls pass. Paper/PDF, proof audit, TRUST, results table, queue, and projective-cap consumer note are synchronized; the final source/claim checklist and post-audit actual-leader bridge pass focused rebuild and standard-axiom audit. Only the shared aggregate rerun remains. Same handoff.
+
+- **C144 `[relconic]` [QUEUED 2026-07-14 — NEEDS A QUIESCENT BOX]** — replace the unachievable
+  shared-`RelativeConicArcs` aggregate gate with per-lane gate targets, demote the umbrella build to
+  a quiescence repo-health check, and add a build-window protocol plus atomic regeneration-commit
+  rule. The aggregate passed green 2026-07-14 17:15 and was stale by 17:35 under another lane's
+  regeneration, so it cannot be any lane's exit gate; Q16 and Q25 are import-disjoint, so the
+  relconic closure excludes the churn entirely. Unblocks C107/C110 without weakening validation.
+  Do not start while another lane is building or regenerating. Design, options, and migration path:
+  [`2026-07-14-c144-shared-library-gate-architecture.md`](2026-07-14-c144-shared-library-gate-architecture.md).
 
 - **C84 `[cap]` [ACTIVE 2026-07-12 — abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:

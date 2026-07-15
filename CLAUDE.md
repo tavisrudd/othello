@@ -199,8 +199,9 @@ not known to restore consistently.
 renames nothing. `pgrep -x lake` therefore reports a live, healthy build as dead, always. Use
 `pgrep -x lake.orig` or `pgrep -f 'lake build'` (argv[0] is preserved by `exec -a`), and confirm
 ownership by PPID/ancestry before acting on any worker. Never `pkill -f` a string that also matches
-your own command line — it kills the shell that issued it. Stopping **your own** build by task ID or verified PID, on evidence, is correct; killing
-on memory pressure alone is not; killing another lane's workers never is.
+your own command line — it kills the shell that issued it. Stopping **your own** build by task ID
+or verified PID, on evidence, is correct; killing on memory pressure alone is not; killing another
+lane's workers never is.
 
 **Staleness comes from content traces, not mtimes.** An mtime-derived "what's stale" list will miss
 modules Lake intends to rebuild. Probe exact targets with `lake build --no-build <targets>` — it
